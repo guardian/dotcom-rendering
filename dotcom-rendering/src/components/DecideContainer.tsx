@@ -22,6 +22,7 @@ import { FixedSmallSlowIV } from './FixedSmallSlowIV';
 import { FixedSmallSlowVHalf } from './FixedSmallSlowVHalf';
 import { FixedSmallSlowVMPU } from './FixedSmallSlowVMPU';
 import { FixedSmallSlowVThird } from './FixedSmallSlowVThird';
+// import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { HighlightsContainer } from './HighlightsContainer.importable';
 import { Island } from './Island';
@@ -238,6 +239,18 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 				/>
 			);
+		case 'flexible/general':
+			// Not implemented yet
+			return null;
+		// return (
+		// 	<FlexibleGeneral
+		// 		groupedTrails={groupedTrails}
+		// 		containerPalette={containerPalette}
+		// 		showAge={showAge}
+		// 		absoluteServerTimes={absoluteServerTimes}
+		// 		imageLoading={imageLoading}
+		// 	/>
+		// );
 		default:
 			return <p>{containerType} is not yet supported</p>;
 	}

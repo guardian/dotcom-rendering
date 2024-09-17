@@ -91,7 +91,8 @@ type FEContainerType =
 	| 'nav/media-list'
 	| 'news/most-popular'
 	| 'scrollable/highlights'
-	| 'flexible/special';
+	| 'flexible/special'
+	| 'flexible/general';
 
 export type FEContainerPalette =
 	| 'EventPalette'
@@ -422,6 +423,7 @@ export type DCRGroupedTrails = {
 	veryBig: DCRFrontCard[];
 	big: DCRFrontCard[];
 	standard: DCRFrontCard[];
+	splash: DCRFrontCard[];
 };
 
 export type FEFrontConfigType = {

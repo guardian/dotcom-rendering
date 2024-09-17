@@ -11,6 +11,7 @@ import {
 	headlineMedium34,
 	headlineMedium42,
 	headlineMedium50,
+	headlineMedium64,
 	space,
 	textSans12,
 	textSans15,
@@ -35,6 +36,9 @@ type Props = {
 	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
 	size?: SmallHeadlineSize;
 	sizeOnMobile?: SmallHeadlineSize;
+	sizeOnTablet?: SmallHeadlineSize;
+	/* Controls which font size group to use, regular or boosted. Each group maps internally to the smallHeadlineSize type*/
+	boostedFontSizes?: boolean;
 	byline?: string;
 	showByline?: boolean;
 	linkTo?: string; // If provided, the headline is wrapped in a link
@@ -43,7 +47,37 @@ type Props = {
 	isHighlights?: boolean;
 };
 
-const fontStyles = ({ size }: { size: SmallHeadlineSize }) => {
+/** These represent a new set of fonts. They are extra large font sizes that, as a group, are only used on headlines */
+const boostedFontStyles = ({ size }: { size: SmallHeadlineSize }) => {
+	switch (size) {
+		// we don't have a ginormous size in designs. For now this defaults to huge.
+		case 'ginormous':
+		case 'huge':
+			return `${headlineMedium64}`;
+
+		case 'large':
+			return `${headlineMedium50}`;
+
+		case 'medium':
+			return `${headlineMedium42}`;
+
+		case 'small':
+			return `${headlineMedium34}`;
+
+		case 'tiny':
+			return `${headlineMedium28}`;
+	}
+};
+
+const fontStyles = ({
+	size,
+	boostedFontSizes,
+}: {
+	size: SmallHeadlineSize;
+	boostedFontSizes: boolean;
+}) => {
+	if (boostedFontSizes) return boostedFontStyles({ size });
+
 	switch (size) {
 		case 'ginormous':
 			return css`
@@ -73,8 +107,39 @@ const fontStyles = ({ size }: { size: SmallHeadlineSize }) => {
 			`;
 	}
 };
+const fontStylesOnTablet = ({
+	size,
+	boostedFontSizes,
+}: {
+	size?: SmallHeadlineSize;
+	boostedFontSizes: boolean;
+}) => {
+	/* Currently, tablet-specific headline sizing only applies to boosted fonts where a tablet font size has been supplied */
+	if (size && boostedFontSizes) {
+		return css`
+			${between.tablet.and.desktop} {
+				${boostedFontStyles({ size })}
+			}
+		`;
+	}
+	return null;
+};
 
-const fontStylesOnMobile = ({ size }: { size: SmallHeadlineSize }) => {
+const fontStylesOnMobile = ({
+	size,
+	boostedFontSizes,
+}: {
+	size: SmallHeadlineSize;
+	boostedFontSizes: boolean;
+}) => {
+	if (boostedFontSizes) {
+		return css`
+			${until.tablet} {
+				${boostedFontStyles({ size })}
+			}
+		`;
+	}
+
 	switch (size) {
 		case 'ginormous':
 			return css`
@@ -213,6 +278,8 @@ export const CardHeadline = ({
 	hideLineBreak,
 	size = 'medium',
 	sizeOnMobile,
+	sizeOnTablet,
+	boostedFontSizes = false,
 	byline,
 	showByline,
 	linkTo,
@@ -230,13 +297,20 @@ export const CardHeadline = ({
 					linkTo ? 'card-sublink-headline' : 'card-headline'
 				}`}
 				css={[
-					format.theme === ArticleSpecial.Labs
-						? labTextStyles(size)
-						: fontStyles({ size }),
 					format.theme !== ArticleSpecial.Labs &&
 						fontStylesOnMobile({
 							size: sizeOnMobile ?? size,
+							boostedFontSizes,
 						}),
+
+					format.theme !== ArticleSpecial.Labs &&
+						fontStylesOnTablet({
+							size: sizeOnTablet,
+							boostedFontSizes,
+						}),
+					format.theme === ArticleSpecial.Labs
+						? labTextStyles(size)
+						: fontStyles({ size, boostedFontSizes }),
 				]}
 			>
 				{!!kickerText && (

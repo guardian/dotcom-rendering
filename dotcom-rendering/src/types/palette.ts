@@ -2,11 +2,9 @@ export type Colour = string;
 
 export type Palette = {
 	text: {
-		headlineWhenMatch: Colour;
 		standfirst: Colour;
 		standfirstLink: Colour;
 		disclaimerLink: Colour;
-		cricketScoreboardLink: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
@@ -36,8 +34,6 @@ export type Palette = {
 		headline: Colour;
 		navPillar: Colour;
 		lines: Colour;
-		cricketScoreboardTop: Colour;
-		cricketScoreboardDivider: Colour;
 		cardSupporting: Colour;
 		filterButton: Colour;
 	};

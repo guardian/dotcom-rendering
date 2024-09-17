@@ -45,7 +45,7 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
-import type { Article } from '../types/article';
+import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import {
 	interactiveGlobalStyles,
@@ -201,7 +201,7 @@ const starWrapper = css`
 `;
 
 interface CommonProps {
-	article: Article;
+	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }
@@ -218,7 +218,7 @@ interface AppsProps extends CommonProps {
 export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
-		config: { isPaidContent, host },
+		config: { isPaidContent, host, hasSurveyAd },
 		editionId,
 	} = article;
 
@@ -279,7 +279,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							idApiUrl={article.config.idApiUrl}
 							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={format.theme !== ArticleSpecial.Labs}
-							isImmersive={false}
+							showSlimNav={false}
 							hasPageSkin={false}
 							hasPageSkinContentSelfConstrain={false}
 							pageId={article.pageId}
@@ -300,9 +300,14 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						</Stuck>
 					)}
 
-					{renderAds && article.config.switches.surveys && (
-						<AdSlot position="survey" display={format.display} />
-					)}
+					{renderAds &&
+						article.config.switches.surveys &&
+						hasSurveyAd && (
+							<AdSlot
+								position="survey"
+								display={format.display}
+							/>
+						)}
 				</>
 			)}
 			<main data-layout="InteractiveLayout">

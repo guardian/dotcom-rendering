@@ -13,7 +13,7 @@ export const handleArticle: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'web');
 	const article = enhanceArticleType(body, 'Web');
 	const { html, prefetchScripts } = renderHtml({
-		article,
+		article: article.frontendData,
 	});
 
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
@@ -42,7 +42,7 @@ export const handleInteractive: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('interactive', 'web');
 	const article = enhanceArticleType(body, 'Web');
 	const { html, prefetchScripts } = renderHtml({
-		article,
+		article: article.frontendData,
 	});
 
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);

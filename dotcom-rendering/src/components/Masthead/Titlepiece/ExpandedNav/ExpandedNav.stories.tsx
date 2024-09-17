@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
-import { nav } from '../../../Nav/Nav.mock';
+import { nav } from '../Nav.mock';
 import { expandedMenuStyles, ExpandedNav } from './ExpandedNav';
 
 export default {

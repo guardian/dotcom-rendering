@@ -19,7 +19,6 @@ import {
 } from '@guardian/source/foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getAgeWarning } from '../lib/age-warning';
-import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
@@ -81,7 +80,19 @@ const decideHeadlineFont = (format: ArticleFormat) => {
 const decideMobileHeadlineFont = (format: ArticleFormat) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
-			return headlineMedium34;
+			switch (format.design) {
+				case ArticleDesign.Obituary:
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+					return headlineLight34;
+				case ArticleDesign.Feature:
+				case ArticleDesign.Review:
+				case ArticleDesign.Recipe:
+				case ArticleDesign.Interview:
+					return headlineBold34;
+				default:
+					return headlineMedium34;
+			}
 		}
 		default:
 			switch (format.design) {
@@ -359,7 +370,6 @@ export const ArticleHeadline = ({
 	hasAvatar,
 	isMatch,
 }: Props) => {
-	const palette = decidePalette(format);
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
@@ -752,7 +762,9 @@ export const ArticleHeadline = ({
 											: headlineFont(format),
 										css`
 											color: ${isMatch
-												? palette.text.headlineWhenMatch
+												? themePalette(
+														'--headline-match-colour',
+												  )
 												: themePalette(
 														'--headline-colour',
 												  )};

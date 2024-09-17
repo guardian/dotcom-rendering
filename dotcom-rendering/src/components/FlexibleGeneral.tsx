@@ -110,7 +110,7 @@ export const OneCardLayout = ({
 				<FrontCard
 					trail={card}
 					containerPalette={containerPalette}
-					containerType="flexible/special"
+					containerType="flexible/general"
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
 					headlineSize={headlineSize}
@@ -186,27 +186,18 @@ const TwoCardOrFourCardLayout = ({
 	);
 };
 
-export const FlexibleSpecial = ({
+export const FlexibleGeneral = ({
 	groupedTrails,
 	containerPalette,
 	showAge,
 	absoluteServerTimes,
 	imageLoading,
 }: Props) => {
-	const snaps = [...groupedTrails.snap].slice(0, 1);
-	const splash = [...groupedTrails.standard].slice(0, 1);
-	const cards = [...groupedTrails.standard].slice(1, 5);
+	const splash = [...groupedTrails.splash].slice(0, 1);
+	const cards = [...groupedTrails.standard].slice(0, 8); // TODO check maximum number of cards
 
 	return (
 		<>
-			<OneCardLayout
-				cards={snaps}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				absoluteServerTimes={absoluteServerTimes}
-				imageLoading={imageLoading}
-			/>
-
 			<OneCardLayout
 				cards={splash}
 				containerPalette={containerPalette}

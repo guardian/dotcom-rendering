@@ -40,11 +40,11 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
 import { isValidUrl } from '../lib/isValidUrl';
 import type { NavType } from '../model/extract-nav';
-import type { Article } from '../types/article';
+import type { ArticleDeprecated } from '../types/article';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 type Props = {
-	article: Article;
+	article: ArticleDeprecated;
 	NAV: NavType;
 	format: ArticleFormat;
 };
@@ -175,7 +175,9 @@ const regionalFocusDivStyle = css`
 	margin-bottom: ${space[2]}px;
 `;
 
-const getMainMediaCaptions = (article: Article): (string | undefined)[] =>
+const getMainMediaCaptions = (
+	article: ArticleDeprecated,
+): (string | undefined)[] =>
 	article.mainMediaElements.map((el) =>
 		el._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
 			? el.data.caption
@@ -185,7 +187,7 @@ const getMainMediaCaptions = (article: Article): (string | undefined)[] =>
 export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 	const {
 		promotedNewsletter,
-		config: { host },
+		config: { host, hasSurveyAd },
 	} = article;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
@@ -240,14 +242,14 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 					idApiUrl={article.config.idApiUrl}
 					contributionsServiceUrl={contributionsServiceUrl}
 					showSubNav={true}
-					isImmersive={format.display === ArticleDisplay.Immersive}
+					showSlimNav={format.display === ArticleDisplay.Immersive}
 					hasPageSkin={false}
 					hasPageSkinContentSelfConstrain={false}
 					pageId={article.pageId}
 				/>
 			</div>
 
-			{renderAds && !!article.config.switches.surveys && (
+			{renderAds && !!article.config.switches.surveys && hasSurveyAd && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 

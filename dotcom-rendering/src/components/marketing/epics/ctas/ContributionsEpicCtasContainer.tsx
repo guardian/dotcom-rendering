@@ -1,12 +1,8 @@
-/**
- * @file
- * This file was migrated from:
- * https://github.com/guardian/support-dotcom-components/blob/9c3eae7cb0b159db4a1c40679d6b37710b0bb937/packages/modules/src/modules/epics/ContributionsEpicCtas.tsx
- */
 import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/src/types/props/epic';
 import { useState } from 'react';
-import type { ChoiceCardSelection } from '../lib/choiceCards';
-import type { ReactComponent } from '../lib/ReactComponent';
+import type { ReactComponent } from '../../lib/ReactComponent';
+import { ThreeTierChoiceCards } from '../ThreeTierChoiceCards';
+import { getDefaultThreeTierAmount } from '../utils/threeTierChoiceCardAmounts';
 import { ContributionsEpicButtons } from './ContributionsEpicButtons';
 import { ContributionsEpicReminder } from './ContributionsEpicReminder';
 
@@ -14,19 +10,12 @@ interface OnReminderOpen {
 	buttonCopyAsString: string;
 }
 
-type ContributionsEpicCtasProps = EpicProps & {
-	showChoiceCards?: boolean;
-	choiceCardSelection?: ChoiceCardSelection;
-	showThreeTierChoiceCards?: boolean;
-	threeTierChoiceCardSelectedAmount?: number;
+type Props = EpicProps & {
 	amountsTestName?: string;
 	amountsVariantName?: string;
-	variantOfChoiceCard?: string;
 };
 
-export const ContributionsEpicCtas: ReactComponent<
-	ContributionsEpicCtasProps
-> = ({
+export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 	variant,
 	countryCode,
 	articleCounts,
@@ -34,14 +23,10 @@ export const ContributionsEpicCtas: ReactComponent<
 	submitComponentEvent,
 	onReminderOpen,
 	fetchEmail,
-	showChoiceCards,
-	choiceCardSelection,
-	showThreeTierChoiceCards,
-	threeTierChoiceCardSelectedAmount,
 	amountsTestName,
 	amountsVariantName,
-	variantOfChoiceCard,
-}: ContributionsEpicCtasProps): JSX.Element => {
+}: Props): JSX.Element => {
+	// reminders
 	const [fetchedEmail, setFetchedEmail] = useState<string | undefined>(
 		undefined,
 	);
@@ -51,8 +36,34 @@ export const ContributionsEpicCtas: ReactComponent<
 		setIsReminderActive(false);
 	};
 
+	// choice cards
+	const isNonVatCompliantCountry =
+		variant.choiceCardAmounts?.testName === 'VAT_COMPLIANCE';
+
+	const showChoiceCards =
+		variant.showChoiceCards && !isNonVatCompliantCountry;
+
+	const defaultThreeTierAmount = getDefaultThreeTierAmount(countryCode);
+	const [
+		threeTierChoiceCardSelectedAmount,
+		setThreeTierChoiceCardSelectedAmount,
+	] = useState<number>(defaultThreeTierAmount);
+
+	const variantOfChoiceCard =
+		countryCode === 'US'
+			? 'US_THREE_TIER_CHOICE_CARDS'
+			: 'THREE_TIER_CHOICE_CARDS';
+
 	return (
 		<>
+			{showChoiceCards && (
+				<ThreeTierChoiceCards
+					countryCode={countryCode}
+					selectedAmount={threeTierChoiceCardSelectedAmount}
+					setSelectedAmount={setThreeTierChoiceCardSelectedAmount}
+					variantOfChoiceCard={variantOfChoiceCard}
+				/>
+			)}
 			<ContributionsEpicButtons
 				variant={variant}
 				tracking={tracking}
@@ -85,8 +96,6 @@ export const ContributionsEpicCtas: ReactComponent<
 				isReminderActive={isReminderActive}
 				isSignedIn={Boolean(fetchedEmail)}
 				showChoiceCards={showChoiceCards}
-				choiceCardSelection={choiceCardSelection}
-				showThreeTierChoiceCards={showThreeTierChoiceCards}
 				threeTierChoiceCardSelectedAmount={
 					threeTierChoiceCardSelectedAmount
 				}

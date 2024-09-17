@@ -8,9 +8,17 @@ type Props = {
 	imagePositionOnDesktop?: ImagePositionType;
 	imageSize?: ImageSizeType;
 	imageType?: CardImageType | undefined;
+	/** By default, trail text is hidden at specific breakpoints. This prop allows consumers to show trails across all breakpoints if set to false */
+	shouldHide?: boolean;
 };
 
-const showTrailText = (
+/**
+ * Determines the visibility state for the trail text based on the image size,
+ * position, and type. If the image is large, positioned on the right, and is not an avatar,
+ * the trail text will be hidden until the desktop breakpoint.
+ * Otherwise, it will be hidden until the tablet breakpoint.
+ */
+const decideVisibilityStyles = (
 	imagePosition?: ImagePositionType,
 	imageSize?: ImageSizeType,
 	imageType?: CardImageType | undefined,
@@ -33,26 +41,34 @@ const showTrailText = (
 	`;
 };
 
+const trailTextStyles = css`
+	display: flex;
+	flex-direction: column;
+	color: ${palette('--card-headline-trail-text')};
+	${textSans14};
+	padding: ${space[2]}px 0;
+	strong {
+		font-weight: bold;
+	}
+`;
+
 export const TrailTextWrapper = ({
 	children,
 	imagePositionOnDesktop,
 	imageSize,
 	imageType,
+	shouldHide = true,
 }: Props) => {
 	return (
 		<div
 			css={[
-				css`
-					display: flex;
-					flex-direction: column;
-					color: ${palette('--card-headline-trail-text')};
-					${textSans14};
-					padding: ${space[2]}px 0;
-					strong {
-						font-weight: bold;
-					}
-				`,
-				showTrailText(imagePositionOnDesktop, imageSize, imageType),
+				trailTextStyles,
+				shouldHide &&
+					decideVisibilityStyles(
+						imagePositionOnDesktop,
+						imageSize,
+						imageType,
+					),
 			]}
 		>
 			{children}

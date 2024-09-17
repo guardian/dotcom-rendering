@@ -16,6 +16,11 @@ import { enhanceCards } from './enhanceCards';
  *  - Big
  *  - Standard
  *
+ * * For newer 'flexible' container types in fronts tool, cards can be grouped by sizes:
+ *  - Snap (flexible/special only)
+ *  - Splash (flexible/general only)
+ *  - Standard
+ *
  * This can be consumed by the rendering layer to tell us how we should size each card, which
  * can vary by container type.
  *
@@ -36,6 +41,8 @@ export const groupCards = (
 			return {
 				// Only big and standard cards are supported on dynamic/slow-mpu
 				snap: [],
+				// Splash is not supported on these container types
+				splash: [],
 				huge: [],
 				veryBig: [],
 				big: enhanceCards(big, {
@@ -65,6 +72,8 @@ export const groupCards = (
 			return {
 				// Snap is not supported on these container types
 				snap: [],
+				// Splash is not supported on these container types
+				splash: [],
 				huge: enhanceCards(huge, {
 					cardInTagPage: false,
 					editionId,
@@ -96,10 +105,39 @@ export const groupCards = (
 				),
 			};
 		}
+		case 'flexible/general': {
+			const splash = curated.filter(({ card }) => card.group === '1');
+
+			return {
+				snap: [],
+				huge: [],
+				veryBig: [],
+				big: [],
+				splash: enhanceCards(splash, {
+					cardInTagPage: false,
+					editionId,
+					discussionApiUrl,
+				}),
+				standard: enhanceCards(
+					// Backfilled cards will always be treated as 'standard' cards
+					curated
+						.filter(({ card }) => card.group === '0')
+						.concat(backfill),
+					{
+						cardInTagPage: false,
+						offset: splash.length,
+						editionId,
+						discussionApiUrl,
+					},
+				),
+			};
+		}
 		case 'flexible/special':
 		case 'dynamic/package': {
 			const snap = curated.filter(({ card }) => card.group === '1');
 			return {
+				// Splash is not supported on these container types
+				splash: [],
 				huge: [],
 				veryBig: [],
 				big: [],
@@ -126,6 +164,7 @@ export const groupCards = (
 		default:
 			// All other container types do not support grouping
 			return {
+				splash: [],
 				snap: [],
 				huge: [],
 				veryBig: [],

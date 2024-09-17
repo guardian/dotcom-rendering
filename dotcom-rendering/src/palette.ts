@@ -164,6 +164,13 @@ const headlineTextDark: PaletteFunction = ({ design, display, theme }) => {
 		}
 	}
 };
+
+const headlineMatchTextLight: PaletteFunction = (format) =>
+	seriesTitleMatchTextLight(format);
+
+const headlineMatchTextDark: PaletteFunction = (format) =>
+	seriesTitleMatchTextDark(format);
+
 const headlineBackgroundLight: PaletteFunction = ({
 	display,
 	design,
@@ -3036,6 +3043,9 @@ const articleBackgroundLight: PaletteFunction = ({
 					return sourcePalette.neutral[0];
 			}
 		}
+		case ArticleDesign.Interactive:
+		case ArticleDesign.FullPageInteractive:
+			return 'transparent';
 		default:
 			switch (theme) {
 				case ArticleSpecial.SpecialReport:
@@ -3045,12 +3055,12 @@ const articleBackgroundLight: PaletteFunction = ({
 				case ArticleSpecial.Labs:
 					switch (display) {
 						case ArticleDisplay.Immersive:
-							return 'transparent';
+							return sourcePalette.neutral[100];
 						default:
 							return sourcePalette.neutral[97];
 					}
 				default:
-					return 'transparent';
+					return sourcePalette.neutral[100];
 			}
 	}
 };
@@ -4265,7 +4275,7 @@ const linkKickerTextDark: PaletteFunction = ({ theme }) => {
 const ageWarningWrapperBackground: PaletteFunction = (format) => {
 	switch (format.design) {
 		case ArticleDesign.Interview:
-			return articleBackgroundLight(format);
+			return 'transparent';
 		default:
 			return headlineBackgroundLight(format);
 	}
@@ -5584,6 +5594,18 @@ const designTagBackground: PaletteFunction = ({ theme }) => {
 	}
 };
 
+const cricketScoreboardBorderTop: PaletteFunction = () => {
+	return sourcePalette.sport[300];
+};
+
+const cricketScoreboardDivider: PaletteFunction = () => {
+	return sourcePalette.neutral[86];
+};
+
+const cricketScoreboardLinkText: PaletteFunction = () => {
+	return sourcePalette.sport[300];
+};
+
 // ----- Palette ----- //
 
 /**
@@ -5993,6 +6015,18 @@ const paletteColours = {
 		light: commentFormInputBackgroundLight,
 		dark: commentFormInputBackgroundDark,
 	},
+	'--cricket-scoreboard-border-top': {
+		light: cricketScoreboardBorderTop,
+		dark: cricketScoreboardBorderTop,
+	},
+	'--cricket-scoreboard-divider': {
+		light: cricketScoreboardDivider,
+		dark: cricketScoreboardDivider,
+	},
+	'--cricket-scoreboard-link-text': {
+		light: cricketScoreboardLinkText,
+		dark: cricketScoreboardLinkText,
+	},
 	'--dateline': {
 		light: datelineLight,
 		dark: datelineDark,
@@ -6216,6 +6250,10 @@ const paletteColours = {
 	'--headline-colour': {
 		light: headlineTextLight,
 		dark: headlineTextDark,
+	},
+	'--headline-match-colour': {
+		light: headlineMatchTextLight,
+		dark: headlineMatchTextDark,
 	},
 	'--highlights-card-headline': {
 		light: highlightsCardHeadline,

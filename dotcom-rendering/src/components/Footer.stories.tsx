@@ -45,10 +45,12 @@ export const Footers = () => (
 				</h1>
 				<Wrapper>
 					<Footer
-						pageFooter={Standard.pageFooter}
+						pageFooter={Standard.frontendData.pageFooter}
 						selectedPillar={Pillar.News}
-						pillars={extractNAV(Standard.nav).pillars}
-						urls={Standard.nav.readerRevenueLinks.header}
+						pillars={extractNAV(Standard.frontendData.nav).pillars}
+						urls={
+							Standard.frontendData.nav.readerRevenueLinks.header
+						}
 						editionId={editionId}
 					/>
 				</Wrapper>
