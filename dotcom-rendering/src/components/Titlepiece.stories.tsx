@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { nav } from './Nav/Nav.mock';
+import { nav } from './Masthead/Titlepiece/Nav.mock';
 import { Titlepiece } from './Titlepiece.importable';
 
 const meta = {

@@ -62,6 +62,7 @@ export type Props = {
 	headlineText: string;
 	headlineSize?: SmallHeadlineSize;
 	headlineSizeOnMobile?: SmallHeadlineSize;
+	headlineSizeOnTablet?: SmallHeadlineSize;
 	showQuotedHeadline?: boolean;
 	byline?: string;
 	showByline?: boolean;
@@ -108,8 +109,10 @@ export type Props = {
 	pauseOffscreenVideo?: boolean;
 	showMainVideo?: boolean;
 	isTagPage?: boolean;
-	//** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
+	/** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
 	aspectRatio?: AspectRatio;
+	/** Alows the consumer to use a larger font size group for boost styling*/
+	boostedFontSizes?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -210,6 +213,7 @@ export const Card = ({
 	headlineText,
 	headlineSize,
 	headlineSizeOnMobile,
+	headlineSizeOnTablet,
 	showQuotedHeadline,
 	byline,
 	showByline,
@@ -250,6 +254,7 @@ export const Card = ({
 	absoluteServerTimes,
 	isTagPage = false,
 	aspectRatio,
+	boostedFontSizes,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -433,6 +438,7 @@ export const Card = ({
 						format={format}
 						size={headlineSize}
 						sizeOnMobile={headlineSizeOnMobile}
+						sizeOnTablet={headlineSizeOnTablet}
 						showQuotes={showQuotes}
 						kickerText={
 							format.design === ArticleDesign.LiveBlog &&
@@ -447,6 +453,7 @@ export const Card = ({
 						byline={byline}
 						showByline={showByline}
 						isExternalLink={isExternalLink}
+						boostedFontSizes={boostedFontSizes}
 					/>
 					{!isUndefined(starRating) ? (
 						<StarRatingComponent
@@ -653,6 +660,7 @@ export const Card = ({
 										byline={byline}
 										showByline={showByline}
 										isExternalLink={isExternalLink}
+										boostedFontSizes={boostedFontSizes}
 									/>
 									{!isUndefined(starRating) ? (
 										<StarRatingComponent

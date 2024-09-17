@@ -1,11 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	isUndefined,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial, isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -38,7 +33,6 @@ import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
-import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -329,38 +323,24 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									</Stuck>
 								)}
 								<Stuck zIndex="stickyAdWrapperNav">
-									<Section
-										fullWidth={true}
-										borderColour={sourcePalette.brand[600]}
-										showTopBorder={false}
-										padSides={false}
-										backgroundColour={
-											sourcePalette.brand[400]
+									<Masthead
+										nav={props.NAV}
+										editionId={article.editionId}
+										idUrl={article.config.idUrl}
+										mmaUrl={article.config.mmaUrl}
+										discussionApiUrl={
+											article.config.discussionApiUrl
 										}
-										element="nav"
-									>
-										<Nav
-											nav={props.NAV}
-											isImmersive={
-												format.display ===
-												ArticleDisplay.Immersive
-											}
-											displayRoundel={
-												format.display ===
-													ArticleDisplay.Immersive ||
-												format.theme ===
-													ArticleSpecial.Labs
-											}
-											selectedPillar={
-												props.NAV.selectedPillar
-											}
-											subscribeUrl={
-												article.nav.readerRevenueLinks
-													.header.subscribe
-											}
-											editionId={article.editionId}
-										/>
-									</Section>
+										idApiUrl={article.config.idApiUrl}
+										contributionsServiceUrl={
+											contributionsServiceUrl
+										}
+										showSubNav={true}
+										showSlimNav={true}
+										hasPageSkin={false}
+										hasPageSkinContentSelfConstrain={false}
+										pageId={article.pageId}
+									/>
 								</Stuck>
 							</div>
 							<Stuck zIndex="stickyAdWrapperLabsHeader">

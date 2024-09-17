@@ -21,10 +21,9 @@ import type {
 	EpicProps,
 	Stage,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import { useArticleCountOptOut } from '../hooks/useArticleCountOptOut';
-import type { ChoiceCardSelection } from '../lib/choiceCards';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { replaceArticleCount } from '../lib/replaceArticleCount';
 import { isProd } from '../lib/stage';
@@ -38,12 +37,10 @@ import type { OphanTracking } from '../shared/ArticleCountOptOutPopup';
 import { withParsedProps } from '../shared/ModuleWrapper';
 import { BylineWithHeadshot } from './BylineWithHeadshot';
 import { ContributionsEpicArticleCountAboveWithOptOut } from './ContributionsEpicArticleCountAboveWithOptOut';
-import { ContributionsEpicCtas } from './ContributionsEpicCtas';
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
 import { ContributionsEpicSignInCta } from './ContributionsEpicSignInCta';
 import { ContributionsEpicTicker } from './ContributionsEpicTicker';
-import { ThreeTierChoiceCards } from './ThreeTierChoiceCards';
-import { getDefaultThreeTierAmount } from './utils/threeTierChoiceCardAmounts';
+import { ContributionsEpicCtasContainer } from './ctas/ContributionsEpicCtasContainer';
 
 // CSS Styling
 // -------------------------------------------
@@ -68,7 +65,7 @@ const wrapperStyles = css`
 `;
 
 const headingStyles = css`
-	${headlineBold20}
+	${headlineBold20};
 	margin-top: 0;
 	margin-bottom: ${space[3]}px;
 `;
@@ -291,43 +288,8 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	hasConsentForArticleCount,
 	stage,
 }: EpicProps) => {
-	const {
-		image,
-		tickerSettings,
-		showChoiceCards,
-		choiceCardAmounts,
-		newsletterSignup,
-	} = variant;
-
-	const [choiceCardSelection, setChoiceCardSelection] = useState<
-		ChoiceCardSelection | undefined
-	>();
-
-	const defaultThreeTierAmount = getDefaultThreeTierAmount(countryCode);
-	const [
-		threeTierChoiceCardSelectedAmount,
-		setThreeTierChoiceCardSelectedAmount,
-	] = useState<number>(defaultThreeTierAmount);
-
-	const variantOfChoiceCard =
-		countryCode === 'US'
-			? 'US_THREE_TIER_CHOICE_CARDS'
-			: 'THREE_TIER_CHOICE_CARDS';
-
-	useEffect(() => {
-		if (showChoiceCards && choiceCardAmounts?.amountsCardData) {
-			const localAmounts =
-				choiceCardAmounts.amountsCardData[
-					choiceCardAmounts.defaultContributionType
-				];
-			const defaultAmount = localAmounts.defaultAmount;
-
-			setChoiceCardSelection({
-				frequency: choiceCardAmounts.defaultContributionType,
-				amount: defaultAmount,
-			});
-		}
-	}, [showChoiceCards, choiceCardAmounts]);
+	const { image, tickerSettings, choiceCardAmounts, newsletterSignup } =
+		variant;
 
 	const { hasOptedOut, onArticleCountOptIn, onArticleCountOptOut } =
 		useArticleCountOptOut();
@@ -469,15 +431,6 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				<BylineWithHeadshot bylineWithImage={variant.bylineWithImage} />
 			)}
 
-			{showChoiceCards && (
-				<ThreeTierChoiceCards
-					countryCode={countryCode}
-					selectedAmount={threeTierChoiceCardSelectedAmount}
-					setSelectedAmount={setThreeTierChoiceCardSelectedAmount}
-					variantOfChoiceCard={variantOfChoiceCard}
-				/>
-			)}
-
 			{newsletterSignup ? (
 				<ContributionsEpicNewsletterSignup
 					newsletterId={newsletterSignup.newsletterId}
@@ -485,7 +438,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					tracking={tracking}
 				/>
 			) : (
-				<ContributionsEpicCtas
+				<ContributionsEpicCtasContainer
 					variant={variant}
 					tracking={tracking}
 					countryCode={countryCode}
@@ -493,15 +446,8 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					onReminderOpen={onReminderOpen}
 					fetchEmail={fetchEmail}
 					submitComponentEvent={submitComponentEvent}
-					showChoiceCards={showChoiceCards}
 					amountsTestName={choiceCardAmounts?.testName}
 					amountsVariantName={choiceCardAmounts?.variantName}
-					choiceCardSelection={choiceCardSelection}
-					showThreeTierChoiceCards={showChoiceCards}
-					threeTierChoiceCardSelectedAmount={
-						threeTierChoiceCardSelectedAmount
-					}
-					variantOfChoiceCard={variantOfChoiceCard}
 				/>
 			)}
 
