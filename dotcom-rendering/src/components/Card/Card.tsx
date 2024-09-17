@@ -444,6 +444,7 @@ export const Card = ({
 						'vertical'
 					} /* inner links are always vertically stacked */
 					containerPalette={containerPalette}
+					isDynamo={isDynamo}
 				/>
 			</Hide>
 		);
