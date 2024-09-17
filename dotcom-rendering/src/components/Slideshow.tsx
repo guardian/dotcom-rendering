@@ -1,7 +1,6 @@
 import type { Keyframes } from '@emotion/react';
 import { css, keyframes } from '@emotion/react';
 import {
-	from,
 	palette,
 	space,
 	textSansBold12,
