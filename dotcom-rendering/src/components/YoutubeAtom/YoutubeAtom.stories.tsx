@@ -132,6 +132,7 @@ const imagePositionOnMobile: ImagePositionType = 'none';
 const imageSize: ImageSizeType = 'large';
 
 const baseConfiguration = {
+	atomId: 'a2502abd-1373-45a2-b508-3e5a2ec050be',
 	videoId: '-ZCvZmYlQD8',
 	uniqueId: '-ZCvZmYlQD8-1',
 	alt: '',

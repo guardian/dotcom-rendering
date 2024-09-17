@@ -91,6 +91,11 @@ export const YoutubeBlockComponent = ({
 	const abTests = useAB();
 	const abTestParticipations = abTests?.participations ?? {};
 
+	/**
+	 * It's possible to have duplicate video atoms on the same page
+	 * For example liveblogs can have the same video for the main media and in a subsequent block
+	 * We need to ensure a unique id for each YouTube player on the page.
+	 */
 	const uniqueId = `${assetId}-${index}`;
 
 	useEffect(() => {
@@ -133,8 +138,9 @@ export const YoutubeBlockComponent = ({
 	}
 
 	return (
-		<div data-chromatic="ignore" data-component="youtube-atom">
+		<div data-chromatic="ignore">
 			<YoutubeAtom
+				atomId={id}
 				videoId={assetId}
 				uniqueId={uniqueId}
 				overrideImage={overrideImage}
