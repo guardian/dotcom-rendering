@@ -43,7 +43,7 @@ const determineCardProperties = (
 				headlineSizeOnMobile: 'tiny',
 				headlineSizeOnTablet: 'small',
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'top',
+				imagePositionOnMobile: 'bottom',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 			};
@@ -53,7 +53,7 @@ const determineCardProperties = (
 				headlineSizeOnMobile: 'small',
 				headlineSizeOnTablet: 'medium',
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'top',
+				imagePositionOnMobile: 'bottom',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 			};
@@ -63,7 +63,7 @@ const determineCardProperties = (
 				headlineSizeOnMobile: 'medium',
 				headlineSizeOnTablet: 'medium',
 				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'top',
+				imagePositionOnMobile: 'bottom',
 				supportingContentAlignment: 'horizontal',
 			};
 		case 'gigaboost':
@@ -72,7 +72,7 @@ const determineCardProperties = (
 				headlineSizeOnMobile: 'large',
 				headlineSizeOnTablet: 'large',
 				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'top',
+				imagePositionOnMobile: 'bottom',
 				supportingContentAlignment: 'horizontal',
 			};
 	}
