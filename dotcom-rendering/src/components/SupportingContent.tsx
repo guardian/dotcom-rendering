@@ -14,7 +14,6 @@ type Props = {
 	supportingContent: DCRSupportingContent[];
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
-	isDynamo?: boolean;
 };
 
 const wrapperStyles = css`
@@ -77,7 +76,6 @@ export const SupportingContent = ({
 	supportingContent,
 	alignment,
 	containerPalette,
-	isDynamo,
 }: Props) => {
 	return (
 		<ul
@@ -85,7 +83,7 @@ export const SupportingContent = ({
 			css={[
 				wrapperStyles,
 				flexColumn,
-				(isDynamo ?? alignment === 'horizontal') && flexRowFromTablet,
+				alignment === 'horizontal' && flexRowFromTablet,
 			]}
 		>
 			{supportingContent.map((subLink, index) => {
