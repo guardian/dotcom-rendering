@@ -229,6 +229,7 @@ window.twttr = (function(d, s, id) {
 		weAreHiring: !!article.config.switches.weAreHiring,
 		config,
 		hasLiveBlogTopAd: !!article.config.hasLiveBlogTopAd,
+		hasSurveyAd: !!article.config.hasSurveyAd,
 		onlyLightColourScheme:
 			format.design === ArticleDesign.FullPageInteractive ||
 			format.design === ArticleDesign.Interactive,
