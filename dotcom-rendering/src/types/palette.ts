@@ -2,7 +2,6 @@ export type Colour = string;
 
 export type Palette = {
 	text: {
-		headlineWhenMatch: Colour;
 		standfirst: Colour;
 		standfirstLink: Colour;
 		disclaimerLink: Colour;
