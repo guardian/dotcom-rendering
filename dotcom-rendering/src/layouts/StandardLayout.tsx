@@ -31,6 +31,7 @@ import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 import { GridItem } from '../components/GridItem';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { ImageBlockComponent } from '../components/ImageBlockComponent';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
@@ -54,6 +55,7 @@ import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { Article } from '../types/article';
+import type { ImageBlockElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -384,6 +386,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
 
+	const audioImage = article.thumbnailImage?.elements[0] as
+		| ImageBlockElement
+		| undefined;
 	const footballMatchUrl =
 		article.matchType === 'FootballMatchType'
 			? article.matchUrl
@@ -733,6 +738,20 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									}
 									editionId={article.editionId}
 								/>
+								{audioImage &&
+									format.design === ArticleDesign.Audio && (
+										<ImageBlockComponent
+											format={format}
+											key={2}
+											element={audioImage}
+											hideCaption={false}
+											isMainMedia={false}
+											starRating={audioImage.starRating}
+											title={audioImage.title}
+											isAvatar={audioImage.isAvatar}
+											isTimeline={false}
+										/>
+									)}
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (
 										<Island

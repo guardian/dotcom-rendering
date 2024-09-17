@@ -85,6 +85,7 @@ export interface FEArticleType {
 	isCommentable: boolean;
 	commercialProperties: CommercialProperties;
 	starRating?: StarRating;
+	thumbnailImage?: Block;
 	trailText: string;
 	badge?: FEArticleBadgeType;
 
