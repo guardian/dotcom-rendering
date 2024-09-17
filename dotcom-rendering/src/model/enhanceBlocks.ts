@@ -22,6 +22,7 @@ type Options = {
 	promotedNewsletter: Newsletter | undefined;
 	imagesForLightbox: ImageForLightbox[];
 	hasAffiliateLinksDisclaimer: boolean;
+	audioArticleImage?: Block;
 };
 
 const enhanceNewsletterSignup =
@@ -91,8 +92,17 @@ export const enhanceBlocks = (
 	blocks: Block[],
 	format: ArticleFormat,
 	options: Options,
-): Block[] =>
-	blocks.map((block) => ({
+): Block[] => {
+	let additionalElements: FEElement[] = [];
+	if (options.audioArticleImage?.elements) {
+		additionalElements = options.audioArticleImage.elements;
+	}
+	return blocks.map((block) => ({
 		...block,
-		elements: enhanceElements(format, block.id, options)(block.elements),
+		elements: enhanceElements(
+			format,
+			block.id,
+			options,
+		)([...additionalElements, ...block.elements]),
 	}));
+};
