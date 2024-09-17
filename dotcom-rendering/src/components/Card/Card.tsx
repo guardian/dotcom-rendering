@@ -747,7 +747,6 @@ export const Card = ({
 										supportingContent={supportingContent}
 										alignment="vertical"
 										containerPalette={containerPalette}
-										isDynamo={isDynamo}
 									/>
 								</Hide>
 							)}
