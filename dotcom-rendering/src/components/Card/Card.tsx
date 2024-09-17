@@ -139,6 +139,26 @@ const StarRatingComponent = ({
 	</div>
 );
 
+const HorizontalDivider = () => (
+	<div
+		css={css`
+			${from.tablet} {
+				border-top: 1px solid
+					${themePalette('--card-border-supporting')};
+				height: 1px;
+				width: 50%;
+				${from.tablet} {
+					width: 100px;
+				}
+				${from.desktop} {
+					width: 140px;
+				}
+				margin-top: 12px;
+			}
+		`}
+	></div>
+);
+
 const getMedia = ({
 	imageUrl,
 	imageAltText,
@@ -737,6 +757,12 @@ export const Card = ({
 									showLivePlayable={showLivePlayable}
 								/>
 							)}
+							{sublinkPosition === 'outer' &&
+								supportingContentAlignment === 'horizontal' &&
+								(imagePositionOnDesktop === 'right' ||
+									imagePositionOnDesktop === 'left') && (
+									<HorizontalDivider />
+								)}
 						</div>
 
 						{/* This div is needed to push this content to the bottom of the card */}
