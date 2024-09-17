@@ -25,11 +25,6 @@ const background = css`
 	background-color: ${palette('--stuck-background')};
 `;
 
-const headerWrapper = css`
-	position: relative;
-	${getZIndex('headerWrapper')}
-`;
-
 // The css overrides here are necessary because ad-takeovers can inject css that breaks the banner
 const bannerWrapper = css`
 	/* stylelint-disable-next-line declaration-no-important */
@@ -48,10 +43,6 @@ const bannerWrapper = css`
 
 export const Stuck = ({ children, zIndex }: StuckProps) => (
 	<div css={[stickyStyles, addZindex(zIndex), background]}>{children}</div>
-);
-
-export const SendToBack = ({ children }: Props) => (
-	<div css={headerWrapper}>{children}</div>
 );
 
 export const BannerWrapper = ({ children }: Props) => (

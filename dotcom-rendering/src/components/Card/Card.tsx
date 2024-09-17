@@ -6,7 +6,7 @@ import {
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
-import { Link } from '@guardian/source/react-components';
+import { Hide, Link } from '@guardian/source/react-components';
 import { isMediaCard } from '../../lib/cardHelpers';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
@@ -62,6 +62,7 @@ export type Props = {
 	headlineText: string;
 	headlineSize?: SmallHeadlineSize;
 	headlineSizeOnMobile?: SmallHeadlineSize;
+	headlineSizeOnTablet?: SmallHeadlineSize;
 	showQuotedHeadline?: boolean;
 	byline?: string;
 	showByline?: boolean;
@@ -108,8 +109,10 @@ export type Props = {
 	pauseOffscreenVideo?: boolean;
 	showMainVideo?: boolean;
 	isTagPage?: boolean;
-	//** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
+	/** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
 	aspectRatio?: AspectRatio;
+	/** Alows the consumer to use a larger font size group for boost styling*/
+	boostedFontSizes?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -210,6 +213,7 @@ export const Card = ({
 	headlineText,
 	headlineSize,
 	headlineSizeOnMobile,
+	headlineSizeOnTablet,
 	showQuotedHeadline,
 	byline,
 	showByline,
@@ -250,6 +254,7 @@ export const Card = ({
 	absoluteServerTimes,
 	isTagPage = false,
 	aspectRatio,
+	boostedFontSizes,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -376,6 +381,38 @@ export const Card = ({
 		return 'medium';
 	};
 
+	/**
+	 * Determines how and when to render the `SupportingContent` component in the "outer" position:
+	 * - Returns `null` if `supportingContent` is unavailable or `sublinkPosition` is `none`.
+	 * - Renders `SupportingContent` for all breakpoints if `sublinkPosition` is `outer`.
+	 * - If `sublinkPosition` is `inner`, hides `SupportingContent` from tablet but displays it on smaller breakpoints.
+	 *
+	 */
+	const decideOuterSublinks = () => {
+		if (!supportingContent) return null;
+		if (sublinkPosition === 'none') return null;
+		if (sublinkPosition === 'outer') {
+			return (
+				<SupportingContent
+					supportingContent={supportingContent}
+					containerPalette={containerPalette}
+					alignment={supportingContentAlignment}
+					isDynamo={isDynamo}
+				/>
+			);
+		}
+		return (
+			<Hide from="tablet">
+				<SupportingContent
+					supportingContent={supportingContent}
+					containerPalette={containerPalette}
+					alignment={supportingContentAlignment}
+					isDynamo={isDynamo}
+				/>
+			</Hide>
+		);
+	};
+
 	return (
 		<CardWrapper
 			format={format}
@@ -401,6 +438,7 @@ export const Card = ({
 						format={format}
 						size={headlineSize}
 						sizeOnMobile={headlineSizeOnMobile}
+						sizeOnTablet={headlineSizeOnTablet}
 						showQuotes={showQuotes}
 						kickerText={
 							format.design === ArticleDesign.LiveBlog &&
@@ -415,6 +453,7 @@ export const Card = ({
 						byline={byline}
 						showByline={showByline}
 						isExternalLink={isExternalLink}
+						boostedFontSizes={boostedFontSizes}
 					/>
 					{!isUndefined(starRating) ? (
 						<StarRatingComponent
@@ -430,6 +469,7 @@ export const Card = ({
 					)}
 				</div>
 			)}
+
 			<CardLayout
 				cardBackgroundColour={cardBackgroundColour}
 				imagePositionOnDesktop={imagePositionOnDesktop}
@@ -620,6 +660,7 @@ export const Card = ({
 										byline={byline}
 										showByline={showByline}
 										isExternalLink={isExternalLink}
+										boostedFontSizes={boostedFontSizes}
 									/>
 									{!isUndefined(starRating) ? (
 										<StarRatingComponent
@@ -644,6 +685,9 @@ export const Card = ({
 									}
 									imageSize={imageSize}
 									imageType={media?.type}
+									shouldHide={
+										isFlexibleContainer ? false : true
+									}
 								>
 									<div
 										dangerouslySetInnerHTML={{
@@ -700,12 +744,14 @@ export const Card = ({
 							)}
 
 							{hasSublinks && sublinkPosition === 'inner' && (
-								<SupportingContent
-									supportingContent={supportingContent}
-									alignment="vertical"
-									containerPalette={containerPalette}
-									isDynamo={isDynamo}
-								/>
+								<Hide until="tablet">
+									<SupportingContent
+										supportingContent={supportingContent}
+										alignment="vertical"
+										containerPalette={containerPalette}
+										isDynamo={isDynamo}
+									/>
+								</Hide>
 							)}
 						</div>
 					</ContentWrapper>
@@ -720,14 +766,7 @@ export const Card = ({
 							: 0,
 				}}
 			>
-				{hasSublinks && sublinkPosition === 'outer' && (
-					<SupportingContent
-						supportingContent={supportingContent}
-						containerPalette={containerPalette}
-						alignment={supportingContentAlignment}
-						isDynamo={isDynamo}
-					/>
-				)}
+				{decideOuterSublinks()}
 
 				{showCommentFooter && (
 					<CardFooter

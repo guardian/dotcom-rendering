@@ -32,7 +32,7 @@ interface Props {
 	nav: NavType;
 	editionId: EditionId;
 	showSubNav?: boolean;
-	isImmersive?: boolean;
+	showSlimNav?: boolean;
 	hasPageSkin?: boolean;
 	pageId?: string;
 }
@@ -54,6 +54,12 @@ const editionSwitcherMenuStyles = css`
 		justify-self: end;
 	}
 	width: fit-content;
+`;
+
+const slimNavEditionSwitcherOverrides = css`
+	${until.tablet} {
+		justify-self: start;
+	}
 `;
 
 const accreditationStyles = css`
@@ -83,19 +89,20 @@ const accreditationStylesFromLeftCol = css`
 `;
 
 const logoStyles = css`
-	display: flex;
 	${gridMainColumn}
 	grid-row: 1;
+	position: relative;
+	display: flex;
 	justify-self: end;
 	align-self: end;
 	margin-top: ${space[2]}px;
 	margin-bottom: 6px;
-	margin-right: ${veggieBurgerDiameter + space[3]}px;
+	right: ${veggieBurgerDiameter + space[3]}px;
 	${from.mobileMedium} {
-		margin-right: 0;
+		right: 0;
 	}
 	${from.mobileLandscape} {
-		margin-bottom: 8px;
+		margin-bottom: ${space[2]}px;
 	}
 
 	svg {
@@ -120,6 +127,48 @@ const logoStylesFromLeftCol = css`
 	}
 `;
 
+const slimNavLogoOverrides = css`
+	position: relative;
+	margin-top: ${space[2]}px;
+	margin-bottom: ${space[2]}px;
+	right: ${veggieBurgerDiameter + 6}px;
+
+	${from.mobile} {
+		right: ${veggieBurgerDiameter + 6}px;
+	}
+	${from.mobileMedium} {
+		right: ${veggieBurgerDiameter + 6}px;
+	}
+	${from.mobileLandscape} {
+		margin-top: ${space[1]}px;
+		margin-bottom: ${space[2]}px;
+	}
+	${from.tablet} {
+		right: ${space[8]}px;
+	}
+	${from.desktop} {
+		right: ${space[10]}px;
+	}
+	svg {
+		width: 130px;
+		${from.mobile} {
+			width: 130px;
+		}
+		${from.tablet} {
+			width: 86px;
+		}
+		${from.desktop} {
+			width: 130px;
+		}
+		${from.leftCol} {
+			width: 140px;
+		}
+		${from.wide} {
+			width: 145px;
+		}
+	}
+`;
+
 const pillarsNavStyles = css`
 	${gridContent}
 	grid-row: 2;
@@ -135,6 +184,13 @@ const pillarsNavStyles = css`
 		}
 	}
 	pointer-events: none;
+`;
+
+const slimNavPillarsOverrides = css`
+	grid-row: 1;
+	${until.tablet} {
+		display: none;
+	}
 `;
 
 const burgerStyles = css`
@@ -169,6 +225,31 @@ const burgerStylesFromLeftCol = css`
 	}
 `;
 
+const slimNavBurgerOverrides = css`
+	position: relative;
+	grid-row: 1;
+	align-self: end;
+	bottom: ${space[1]}px;
+
+	${from.mobileMedium} {
+		grid-row: 1;
+		align-self: end;
+	}
+
+	${from.tablet} {
+		right: 136px;
+	}
+	${from.desktop} {
+		right: 356px;
+	}
+	${from.leftCol} {
+		right: 430px;
+	}
+	${from.wide} {
+		right: 534px;
+	}
+`;
+
 const expandedNavStyles = css`
 	${gridContent}
 	grid-row: 2;
@@ -188,6 +269,15 @@ const horizontalDivider = css`
 		${from.mobileLandscape} {
 			left: -${pageMargin};
 			right: -${pageMargin};
+		}
+	}
+`;
+
+const slimNavHorizontalDividerOverrides = css`
+	&::after {
+		${from.tablet} {
+			right: 0;
+			left: 0;
 		}
 	}
 `;
@@ -256,7 +346,7 @@ export const Titlepiece = ({
 	nav,
 	editionId,
 	showSubNav,
-	isImmersive,
+	showSlimNav,
 	hasPageSkin,
 	pageId = '',
 }: Props) => {
@@ -373,7 +463,7 @@ export const Titlepiece = ({
 					 * - Toggles the menu open/close state when the menu button (veggieBurger) is clicked.
 					 */
 						const handleMenuClick = (e) => {
-							const menuButtonClicked = veggieBurger.contains(e.target);
+							const menuButtonClicked = navInputCheckbox === e.target;
 							const clickInsideMenu = expandedMenu.contains(e.target);
 							const menuIsOpen = navInputCheckbox.checked
 							if (menuButtonClicked && !menuIsOpen) {
@@ -421,7 +511,12 @@ export const Titlepiece = ({
 			/>
 
 			{/* Edition switcher menu */}
-			<div css={editionSwitcherMenuStyles}>
+			<div
+				css={[
+					editionSwitcherMenuStyles,
+					showSlimNav && slimNavEditionSwitcherOverrides,
+				]}
+			>
 				<EditionDropdown
 					editionId={editionId}
 					dataLinkName={nestedOphanComponents(
@@ -430,15 +525,23 @@ export const Titlepiece = ({
 						'edition-picker: toggle',
 					)}
 					showCurrentEdition={!showBanner}
+					showSlimNav={showSlimNav}
 				/>
 			</div>
 
 			{/* Guardian logo */}
-			<div css={[logoStyles, !hasPageSkin && logoStylesFromLeftCol]}>
+			<div
+				css={[
+					logoStyles,
+					!hasPageSkin && logoStylesFromLeftCol,
+					showSlimNav && slimNavLogoOverrides,
+				]}
+			>
 				<Logo />
 			</div>
 
-			{editionId === 'UK' && (
+			{/* Accreditation text */}
+			{!showSlimNav && editionId === 'UK' && (
 				<span
 					css={[
 						accreditationStyles,
@@ -466,29 +569,40 @@ export const Titlepiece = ({
 			/>
 
 			{/* Pillars nav */}
-			<div css={[pillarsNavStyles, horizontalDivider]}>
+			<div
+				css={[
+					pillarsNavStyles,
+					horizontalDivider,
+					showSlimNav && slimNavPillarsOverrides,
+					showSlimNav && slimNavHorizontalDividerOverrides,
+				]}
+			>
 				<Pillars
-					nav={nav}
+					pillars={nav.pillars}
 					dataLinkName={nestedOphanComponents(
 						'header',
 						'titlepiece',
 						'nav',
 					)}
 					selectedPillar={nav.selectedPillar}
-					isImmersive={isImmersive}
 					hasPageSkin={hasPageSkin}
 				/>
 			</div>
 
 			{/** Veggie burger menu button */}
-			<div css={[burgerStyles, !hasPageSkin && burgerStylesFromLeftCol]}>
+			<div
+				css={[
+					burgerStyles,
+					!hasPageSkin && burgerStylesFromLeftCol,
+					showSlimNav && slimNavBurgerOverrides,
+				]}
+			>
 				<VeggieBurger />
 			</div>
 
 			{/** Expanded menu */}
 			<div id={expandedMenuRootId} css={expandedNavStyles}>
 				<ExpandedNav
-					isImmersive={isImmersive}
 					nav={nav}
 					editionId={editionId}
 					hasPageSkin={hasPageSkin}

@@ -97,7 +97,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						idApiUrl={tagPage.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
 						showSubNav={true}
-						isImmersive={false}
+						showSlimNav={false}
 						hasPageSkin={hasPageSkin}
 						pageId={pageId}
 					/>

@@ -4350,6 +4350,9 @@
                 },
                 "hasLiveBlogTopAd": {
                     "type": "boolean"
+                },
+                "hasSurveyAd": {
+                    "type": "boolean"
                 }
             },
             "required": [

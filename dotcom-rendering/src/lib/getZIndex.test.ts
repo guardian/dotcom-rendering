@@ -12,21 +12,23 @@ describe('getZIndex', () => {
 		);
 		expect(getZIndex('expanded-veggie-menu-wrapper')).toBe('z-index: 24;');
 		expect(getZIndex('expanded-veggie-menu')).toBe('z-index: 23;');
-		expect(getZIndex('mobileSticky')).toBe('z-index: 22;');
-		expect(getZIndex('stickyAdWrapperLabsHeader')).toBe('z-index: 21;');
-		expect(getZIndex('stickyAdWrapper')).toBe('z-index: 20;');
-		expect(getZIndex('stickyAdWrapperNav')).toBe('z-index: 19;');
-		expect(getZIndex('mastheadMyAccountDropdown')).toBe('z-index: 18;');
-		expect(getZIndex('mastheadEditionDropdown')).toBe('z-index: 17;');
-		expect(getZIndex('editionDropdown')).toBe('z-index: 16;');
-		expect(getZIndex('summaryDetails')).toBe('z-index: 15;');
-		expect(getZIndex('toast')).toBe('z-index: 14;');
-		expect(getZIndex('onwardsCarousel')).toBe('z-index: 13;');
-		expect(getZIndex('myAccountDropdown')).toBe('z-index: 12;');
-		expect(getZIndex('searchHeaderLink')).toBe('z-index: 11;');
-		expect(getZIndex('TheGuardian')).toBe('z-index: 10;');
-		expect(getZIndex('editionSwitcherBanner')).toBe('z-index: 9;');
-		expect(getZIndex('headerWrapper')).toBe('z-index: 8;');
+		expect(getZIndex('fullPageInteractiveHeaderWrapper')).toBe(
+			'z-index: 22;',
+		);
+		expect(getZIndex('mobileSticky')).toBe('z-index: 21;');
+		expect(getZIndex('stickyAdWrapperLabsHeader')).toBe('z-index: 20;');
+		expect(getZIndex('stickyAdWrapper')).toBe('z-index: 19;');
+		expect(getZIndex('stickyAdWrapperNav')).toBe('z-index: 18;');
+		expect(getZIndex('mastheadMyAccountDropdown')).toBe('z-index: 17;');
+		expect(getZIndex('mastheadEditionDropdown')).toBe('z-index: 16;');
+		expect(getZIndex('editionDropdown')).toBe('z-index: 15;');
+		expect(getZIndex('summaryDetails')).toBe('z-index: 14;');
+		expect(getZIndex('toast')).toBe('z-index: 13;');
+		expect(getZIndex('onwardsCarousel')).toBe('z-index: 12;');
+		expect(getZIndex('myAccountDropdown')).toBe('z-index: 11;');
+		expect(getZIndex('searchHeaderLink')).toBe('z-index: 10;');
+		expect(getZIndex('TheGuardian')).toBe('z-index: 9;');
+		expect(getZIndex('editionSwitcherBanner')).toBe('z-index: 8;');
 		expect(getZIndex('articleHeadline')).toBe('z-index: 7;');
 		expect(getZIndex('immersiveBlackBox')).toBe('z-index: 6;');
 		expect(getZIndex('bodyArea')).toBe('z-index: 5;');

@@ -38,7 +38,6 @@ export const GetCricketScoreboard = ({ matchUrl, format }: Props) => {
 			<CricketScoreboard
 				match={data.match}
 				scorecardUrl={data.scorecardUrl}
-				format={format}
 			/>
 		);
 	}

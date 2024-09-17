@@ -180,7 +180,7 @@ const requests = articles.map((article) => {
 
 			// manual hack for Video articles
 			if (article.name === 'Video') {
-				dcrArticle.config.source = 'TMN';
+				dcrArticle.frontendData.config.source = 'TMN';
 			}
 
 			// Write the new DCR fixture data
