@@ -278,7 +278,9 @@ const metaNumbersExtrasLiveBlog = css`
 	}
 `;
 
-const getDownloadUrl = (mainMediaElements: FEElement[] | undefined): string => {
+const getAudioDownloadUrl = (
+	mainMediaElements: FEElement[] | undefined,
+): string => {
 	const audioBlockElement = mainMediaElements?.find(
 		(element) =>
 			element._type ===
@@ -333,7 +335,7 @@ export const ArticleMeta = ({
 
 	const { renderingTarget } = useConfig();
 
-	const audioDownloadUrl = getDownloadUrl(mainMediaElements);
+	const audioDownloadUrl = getAudioDownloadUrl(mainMediaElements);
 	const podcastTag = getPodcastTag(tags);
 	const rssFeedUrl = getRssFeedUrl(tags);
 
