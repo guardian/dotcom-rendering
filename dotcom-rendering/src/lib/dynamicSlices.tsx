@@ -466,6 +466,7 @@ export const filterGroupedTrails = ({
 		filter.findIndex((filterCard) => filterCard.url === card.url) === -1;
 	return {
 		snap: groupedTrails.snap.filter(shouldFilterCard),
+		splash: groupedTrails.splash.filter(shouldFilterCard),
 		huge: groupedTrails.huge.filter(shouldFilterCard),
 		veryBig: groupedTrails.veryBig.filter(shouldFilterCard),
 		big: groupedTrails.big.filter(shouldFilterCard),

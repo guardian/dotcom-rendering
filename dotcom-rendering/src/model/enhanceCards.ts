@@ -206,6 +206,7 @@ export const enhanceCards = (
 		discussionApiUrl,
 	}: {
 		cardInTagPage: boolean;
+		/** Used for the data link name to indicate card position in container */
 		offset?: number;
 		editionId: EditionId;
 		pageId?: string;

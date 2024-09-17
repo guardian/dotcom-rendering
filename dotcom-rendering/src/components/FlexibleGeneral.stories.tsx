@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import type { DCRGroupedTrails } from '../types/front';
-import { FlexibleSpecial } from './FlexibleSpecial';
+import { FlexibleGeneral } from './FlexibleGeneral';
 import { FrontSection } from './FrontSection';
 
 const defaultGroupedTrails: DCRGroupedTrails = {
@@ -16,8 +16,8 @@ const defaultGroupedTrails: DCRGroupedTrails = {
 };
 
 const meta = {
-	component: FlexibleSpecial,
-	title: 'Components/FlexibleSpecial',
+	component: FlexibleGeneral,
+	title: 'Components/FlexibleGeneral',
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -39,10 +39,10 @@ const meta = {
 			editionId={'UK'}
 			showTopBorder={true}
 		>
-			<FlexibleSpecial {...args} />
+			<FlexibleGeneral {...args} />
 		</FrontSection>
 	),
-} satisfies Meta<typeof FlexibleSpecial>;
+} satisfies Meta<typeof FlexibleGeneral>;
 
 export default meta;
 
@@ -53,8 +53,8 @@ export const One: Story = {
 	args: {
 		groupedTrails: {
 			...defaultGroupedTrails,
-			snap: [],
-			standard: trails.slice(0, 1),
+			splash: trails.slice(0, 1),
+			standard: [],
 		},
 	},
 };
@@ -63,8 +63,8 @@ export const Two: Story = {
 	args: {
 		groupedTrails: {
 			...defaultGroupedTrails,
-			snap: [],
-			standard: trails.slice(0, 2),
+			splash: trails.slice(0, 1),
+			standard: trails.slice(1, 2),
 		},
 	},
 };
@@ -73,8 +73,18 @@ export const Three: Story = {
 	args: {
 		groupedTrails: {
 			...defaultGroupedTrails,
+			splash: trails.slice(0, 1),
+			standard: trails.slice(1, 3),
+		},
+	},
+};
+export const Zero: Story = {
+	name: 'With zero splash cards and two standard cards',
+	args: {
+		groupedTrails: {
+			...defaultGroupedTrails,
 			snap: [],
-			standard: trails.slice(0, 3),
+			standard: trails.slice(1, 3),
 		},
 	},
 };
@@ -83,8 +93,8 @@ export const Four: Story = {
 	args: {
 		groupedTrails: {
 			...defaultGroupedTrails,
-			snap: [],
-			standard: trails.slice(0, 4),
+			splash: trails.slice(0, 1),
+			standard: trails.slice(1, 4),
 		},
 	},
 };
@@ -93,8 +103,8 @@ export const Five: Story = {
 	args: {
 		groupedTrails: {
 			...defaultGroupedTrails,
-			snap: [],
-			standard: trails.slice(0, 5),
+			splash: trails.slice(0, 1),
+			standard: trails.slice(1, 5),
 		},
 	},
 };

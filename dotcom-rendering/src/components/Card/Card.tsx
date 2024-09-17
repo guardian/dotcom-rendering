@@ -397,7 +397,6 @@ export const Card = ({
 					supportingContent={supportingContent}
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
-					isDynamo={isDynamo}
 				/>
 			);
 		}
@@ -407,7 +406,6 @@ export const Card = ({
 					supportingContent={supportingContent}
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
-					isDynamo={isDynamo}
 				/>
 			</Hide>
 		);
@@ -699,10 +697,6 @@ export const Card = ({
 							{!showCommentFooter && (
 								<CardFooter
 									format={format}
-									topAlign={
-										isFlexibleContainer &&
-										imageSize === 'jumbo'
-									}
 									age={decideAge()}
 									commentCount={<CommentCount />}
 									cardBranding={
@@ -749,7 +743,6 @@ export const Card = ({
 										supportingContent={supportingContent}
 										alignment="vertical"
 										containerPalette={containerPalette}
-										isDynamo={isDynamo}
 									/>
 								</Hide>
 							)}

@@ -164,6 +164,13 @@ const headlineTextDark: PaletteFunction = ({ design, display, theme }) => {
 		}
 	}
 };
+
+const headlineMatchTextLight: PaletteFunction = (format) =>
+	seriesTitleMatchTextLight(format);
+
+const headlineMatchTextDark: PaletteFunction = (format) =>
+	seriesTitleMatchTextDark(format);
+
 const headlineBackgroundLight: PaletteFunction = ({
 	display,
 	design,
@@ -5572,6 +5579,18 @@ const designTagBackground: PaletteFunction = ({ theme }) => {
 	}
 };
 
+const cricketScoreboardBorderTop: PaletteFunction = () => {
+	return sourcePalette.sport[300];
+};
+
+const cricketScoreboardDivider: PaletteFunction = () => {
+	return sourcePalette.neutral[86];
+};
+
+const cricketScoreboardLinkText: PaletteFunction = () => {
+	return sourcePalette.sport[300];
+};
+
 // ----- Palette ----- //
 
 /**
@@ -5981,6 +6000,18 @@ const paletteColours = {
 		light: commentFormInputBackgroundLight,
 		dark: commentFormInputBackgroundDark,
 	},
+	'--cricket-scoreboard-border-top': {
+		light: cricketScoreboardBorderTop,
+		dark: cricketScoreboardBorderTop,
+	},
+	'--cricket-scoreboard-divider': {
+		light: cricketScoreboardDivider,
+		dark: cricketScoreboardDivider,
+	},
+	'--cricket-scoreboard-link-text': {
+		light: cricketScoreboardLinkText,
+		dark: cricketScoreboardLinkText,
+	},
 	'--dateline': {
 		light: datelineLight,
 		dark: datelineDark,
@@ -6204,6 +6235,10 @@ const paletteColours = {
 	'--headline-colour': {
 		light: headlineTextLight,
 		dark: headlineTextDark,
+	},
+	'--headline-match-colour': {
+		light: headlineMatchTextLight,
+		dark: headlineMatchTextDark,
 	},
 	'--highlights-card-headline': {
 		light: highlightsCardHeadline,
