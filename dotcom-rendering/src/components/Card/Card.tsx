@@ -385,7 +385,7 @@ export const Card = ({
 	 *
 	 */
 	const decideOuterSublinks = () => {
-		if (!supportingContent) return null;
+		if (!hasSublinks) return null;
 		if (sublinkPosition === 'none') return null;
 		if (sublinkPosition === 'outer') {
 			return (
@@ -403,6 +403,23 @@ export const Card = ({
 					supportingContent={supportingContent}
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
+					isDynamo={isDynamo}
+				/>
+			</Hide>
+		);
+	};
+
+	const decideInnerSublinks = () => {
+		if (!hasSublinks) return null;
+		if (sublinkPosition !== 'inner') return null;
+		return (
+			<Hide until={isFlexSplash ? 'desktop' : 'tablet'}>
+				<SupportingContent
+					supportingContent={supportingContent}
+					alignment={
+						'vertical'
+					} /* inner links are always vertically stacked */
+					containerPalette={containerPalette}
 					isDynamo={isDynamo}
 				/>
 			</Hide>
@@ -735,18 +752,7 @@ export const Card = ({
 								</Island>
 							)}
 
-							{hasSublinks && sublinkPosition === 'inner' && (
-								<Hide
-									until={isFlexSplash ? 'desktop' : 'tablet'}
-								>
-									<SupportingContent
-										supportingContent={supportingContent}
-										alignment="vertical"
-										containerPalette={containerPalette}
-										isDynamo={isDynamo}
-									/>
-								</Hide>
-							)}
+							{decideInnerSublinks()}
 						</div>
 					</ContentWrapper>
 				)}
