@@ -1,8 +1,8 @@
 import { isAdBlockInUse } from '@guardian/commercial';
 import { log, startPerformanceMeasure } from '@guardian/libs';
 import '../webpackPublicPath';
+import type { ReportError } from '../../types/sentry';
 
-type ReportError = typeof window.guardian.modules.sentry.reportError;
 type ReportErrorError = Parameters<ReportError>[0];
 type ReportErrorFeature = Parameters<ReportError>[1];
 type ReportErrorTags = Parameters<ReportError>[2];

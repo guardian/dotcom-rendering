@@ -2,6 +2,7 @@ import * as Sentry from '@sentry/browser';
 import type { BrowserOptions } from '@sentry/browser';
 import { CaptureConsole } from '@sentry/integrations';
 import { BUILD_VARIANT, dcrJavascriptBundle } from '../../../webpack/bundles';
+import type { ReportError } from '../../types/sentry';
 
 const allowUrls: BrowserOptions['allowUrls'] = [
 	/webpack-internal/,
@@ -55,11 +56,7 @@ if (
 	Sentry.setTag('dcr.bundle', dcrJavascriptBundle('Variant'));
 }
 
-export const reportError: typeof window.guardian.modules.sentry.reportError = (
-	error,
-	feature,
-	tags,
-) => {
+export const reportError: ReportError = (error, feature, tags) => {
 	Sentry.withScope(() => {
 		Sentry.setTag('feature', feature);
 		if (tags) {
