@@ -209,9 +209,9 @@ const fluidFullWidthAdStyles = css`
 
 /**
  * Both Showcase and NumberedList displays have a showcase main media. Underneath this
- * in the right column, the `right` ad slot is rendered above the MostViewed component.
- * As MostViewed can (and often does) render first, we need to reserve space for the ad
- * to avoid CLS.
+ * in the right column, the `right` ad slot and the MostViewed component are loaded on
+ * the client, with the `right` ad slot on top. As MostViewed can (and often does)
+ * render first, we need to reserve space for the ad to avoid CLS.
  */
 const showcaseRightColumnContainerStyles = css`
 	min-height: ${doubleMpuHeight + labelHeight}px;
