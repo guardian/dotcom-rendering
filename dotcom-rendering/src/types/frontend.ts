@@ -3,7 +3,12 @@ import type { EditionId } from '../lib/edition';
 import type { FEArticleBadgeType } from './badge';
 import type { CommercialProperties } from './commercial';
 import type { ConfigType, ServerSideTests } from './config';
-import type { FEElement, Newsletter, StarRating } from './content';
+import type {
+	FEElement,
+	ImageBlockElement,
+	Newsletter,
+	StarRating,
+} from './content';
 import type { FooterType } from './footer';
 import type { FEOnwards } from './onwards';
 import type { MatchType } from './sport';
@@ -85,7 +90,7 @@ export interface FEArticleType {
 	isCommentable: boolean;
 	commercialProperties: CommercialProperties;
 	starRating?: StarRating;
-	audioArticleImage?: Block;
+	audioArticleImage?: ImageBlockElement;
 	trailText: string;
 	badge?: FEArticleBadgeType;
 

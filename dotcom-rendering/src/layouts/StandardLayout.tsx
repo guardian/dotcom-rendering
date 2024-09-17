@@ -383,6 +383,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
+
 	const footballMatchUrl =
 		article.matchType === 'FootballMatchType'
 			? article.matchUrl

@@ -1,5 +1,10 @@
 import { type ArticleFormat, isUndefined } from '@guardian/libs';
-import type { FEElement, ImageForLightbox, Newsletter } from '../types/content';
+import type {
+	FEElement,
+	ImageBlockElement,
+	ImageForLightbox,
+	Newsletter,
+} from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 import { enhanceBlockquotes } from './enhance-blockquotes';
@@ -22,7 +27,7 @@ type Options = {
 	promotedNewsletter: Newsletter | undefined;
 	imagesForLightbox: ImageForLightbox[];
 	hasAffiliateLinksDisclaimer: boolean;
-	audioArticleImage?: Block;
+	audioArticleImage?: ImageBlockElement;
 };
 
 const enhanceNewsletterSignup =
@@ -93,9 +98,11 @@ export const enhanceBlocks = (
 	format: ArticleFormat,
 	options: Options,
 ): Block[] => {
-	let additionalElements: FEElement[] = [];
-	if (options.audioArticleImage?.elements) {
-		additionalElements = options.audioArticleImage.elements;
+	let additionalElement: FEElement;
+	if (options.audioArticleImage) {
+		options.audioArticleImage._type =
+			'model.dotcomrendering.pageElements.ImageBlockElement';
+		additionalElement = options.audioArticleImage;
 	}
 	return blocks.map((block) => ({
 		...block,
@@ -103,6 +110,6 @@ export const enhanceBlocks = (
 			format,
 			block.id,
 			options,
-		)([...additionalElements, ...block.elements]),
+		)([...block.elements, additionalElement]),
 	}));
 };
