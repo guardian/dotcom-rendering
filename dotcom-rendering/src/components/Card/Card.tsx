@@ -697,10 +697,6 @@ export const Card = ({
 							{!showCommentFooter && (
 								<CardFooter
 									format={format}
-									topAlign={
-										isFlexibleContainer &&
-										imageSize === 'jumbo'
-									}
 									age={decideAge()}
 									commentCount={<CommentCount />}
 									cardBranding={
