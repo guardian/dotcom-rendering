@@ -6583,7 +6583,7 @@ const paletteColours = {
 	},
 	'--section-background': {
 		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[10],
+		dark: () => sourcePalette.neutral[7],
 	},
 	'--section-background-left': {
 		light: () => 'transparent',
