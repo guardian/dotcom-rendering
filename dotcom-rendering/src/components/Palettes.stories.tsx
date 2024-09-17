@@ -23,6 +23,7 @@ export default meta;
 
 const groupedTrails = {
 	snap: [],
+	splash: [],
 	huge: [],
 	veryBig: [{ isBoosted: true, ...trails[0] }, trails[1]],
 	big: [trails[2], trails[3]],

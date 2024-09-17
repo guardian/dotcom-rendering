@@ -1,6 +1,7 @@
 import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
+import type { DCRGroupedTrails } from '../types/front';
 import { DynamicSlowMPU } from './DynamicSlowMPU';
 import { FrontSection } from './FrontSection';
 
@@ -18,6 +19,15 @@ export default {
 	},
 };
 
+const defaultGroupedTrails: DCRGroupedTrails = {
+	splash: [],
+	snap: [],
+	huge: [],
+	veryBig: [],
+	big: [],
+	standard: [],
+};
+
 const bigs = trails.slice(0, 3);
 const standards = trails.slice(3);
 
@@ -29,10 +39,7 @@ export const NoBigs = () => (
 	>
 		<DynamicSlowMPU
 			groupedTrails={{
-				snap: [],
-				huge: [],
-				veryBig: [],
-				big: [],
+				...defaultGroupedTrails,
 				standard: standards,
 			}}
 			showAge={true}
@@ -51,9 +58,7 @@ export const OneBig = () => (
 	>
 		<DynamicSlowMPU
 			groupedTrails={{
-				snap: [],
-				huge: [],
-				veryBig: [],
+				...defaultGroupedTrails,
 				big: bigs.slice(0, 1),
 				standard: standards,
 			}}
@@ -73,9 +78,7 @@ export const TwoBigs = () => (
 	>
 		<DynamicSlowMPU
 			groupedTrails={{
-				snap: [],
-				huge: [],
-				veryBig: [],
+				...defaultGroupedTrails,
 				big: bigs.slice(0, 2),
 				standard: standards,
 			}}
@@ -95,9 +98,7 @@ export const FirstBigBoosted = () => (
 	>
 		<DynamicSlowMPU
 			groupedTrails={{
-				snap: [],
-				huge: [],
-				veryBig: [],
+				...defaultGroupedTrails,
 				big: bigs
 					.slice(0, 2)
 					.map((card, index) =>
@@ -121,9 +122,7 @@ export const SecondBigBoosted = () => (
 	>
 		<DynamicSlowMPU
 			groupedTrails={{
-				snap: [],
-				huge: [],
-				veryBig: [],
+				...defaultGroupedTrails,
 				big: bigs
 					.slice(0, 2)
 					.map((card, index) =>
@@ -147,9 +146,7 @@ export const ThreeBigs = () => (
 	>
 		<DynamicSlowMPU
 			groupedTrails={{
-				snap: [],
-				huge: [],
-				veryBig: [],
+				...defaultGroupedTrails,
 				big: bigs.slice(0, 3),
 				standard: standards,
 			}}
@@ -169,11 +166,8 @@ export const AllBigs = () => (
 	>
 		<DynamicSlowMPU
 			groupedTrails={{
-				snap: [],
-				huge: [],
-				veryBig: [],
+				...defaultGroupedTrails,
 				big: standards,
-				standard: [],
 			}}
 			showAge={true}
 			absoluteServerTimes={true}
@@ -191,9 +185,7 @@ export const TwoBigsThreeStandardsNoMPU = () => (
 	>
 		<DynamicSlowMPU
 			groupedTrails={{
-				snap: [],
-				huge: [],
-				veryBig: [],
+				...defaultGroupedTrails,
 				big: bigs.slice(0, 2),
 				standard: standards.slice(0, 3),
 			}}
@@ -213,10 +205,7 @@ export const NoBigsTwoStandardsNoMPU = () => (
 	>
 		<DynamicSlowMPU
 			groupedTrails={{
-				snap: [],
-				huge: [],
-				veryBig: [],
-				big: [],
+				...defaultGroupedTrails,
 				standard: standards.slice(0, 2),
 			}}
 			showAge={true}
@@ -235,10 +224,7 @@ export const NoBigsFiveStandardsNoMPU = () => (
 	>
 		<DynamicSlowMPU
 			groupedTrails={{
-				snap: [],
-				huge: [],
-				veryBig: [],
-				big: [],
+				...defaultGroupedTrails,
 				standard: standards.slice(0, 5),
 			}}
 			showAge={true}
