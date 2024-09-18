@@ -417,6 +417,7 @@ export const Card = ({
 					supportingContent={supportingContent}
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
+					fillBackground={isFlexibleContainer}
 				/>
 			);
 		}
@@ -426,6 +427,7 @@ export const Card = ({
 					supportingContent={supportingContent}
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
+					fillBackground={isFlexibleContainer}
 				/>
 			</Hide>
 		);
@@ -442,6 +444,7 @@ export const Card = ({
 						'vertical'
 					} /* inner links are always vertically stacked */
 					containerPalette={containerPalette}
+					fillBackground={isFlexibleContainer}
 				/>
 			</Hide>
 		);

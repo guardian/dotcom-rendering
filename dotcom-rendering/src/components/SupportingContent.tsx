@@ -15,6 +15,7 @@ type Props = {
 	/** Determines if the content is arranged vertically or horizontally */
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
+	fillBackground?: boolean;
 };
 
 /**
@@ -119,10 +120,17 @@ const wrapperStyles = css`
 	}
 `;
 
+const mobileBackground = css`
+	${until.tablet} {
+		padding: 8px;
+		background-color: ${palette('--sublinks-background')};
+	}
+`;
 export const SupportingContent = ({
 	supportingContent,
 	alignment,
 	containerPalette,
+	fillBackground = false,
 }: Props) => {
 	const columnSpan = getColumnSpan(supportingContent.length);
 	return (
@@ -132,6 +140,7 @@ export const SupportingContent = ({
 				wrapperStyles,
 				baseGrid,
 				alignment === 'horizontal' && horizontalGrid,
+				fillBackground && mobileBackground,
 			]}
 		>
 			{supportingContent.map((subLink, index) => {
