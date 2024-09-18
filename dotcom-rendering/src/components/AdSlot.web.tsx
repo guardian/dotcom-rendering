@@ -69,7 +69,7 @@ type RemainingProps = {
 type Props = DefaultProps & (RightProps | InlineProps | RemainingProps);
 
 const labelHeight = constants.AD_LABEL_HEIGHT;
-const doubleMpuHeight = 600;
+const halfPageAdHeight = 600;
 
 const individualLabelCSS = css`
 	${textSans12};
@@ -214,7 +214,7 @@ const fluidFullWidthAdStyles = css`
  * render first, we need to reserve space for the ad to avoid CLS.
  */
 const showcaseRightColumnContainerStyles = css`
-	min-height: ${doubleMpuHeight + labelHeight}px;
+	min-height: ${halfPageAdHeight + labelHeight}px;
 `;
 
 const showcaseRightColumnStyles = css`
