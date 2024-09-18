@@ -394,7 +394,8 @@ export const Card = ({
 		if (
 			isFlexibleContainer &&
 			(imagePositionOnDesktop === 'left' ||
-				imagePositionOnDesktop === 'right')
+				imagePositionOnDesktop === 'right') &&
+			imageSize !== 'jumbo'
 		) {
 			return 'large';
 		}
@@ -453,7 +454,7 @@ export const Card = ({
 	return (
 		<CardWrapper
 			format={format}
-			showTopBar={!isOnwardContent}
+			showTopBar={!isOnwardContent && !isFlexibleContainer}
 			containerPalette={containerPalette}
 			isOnwardContent={isOnwardContent}
 		>
@@ -466,7 +467,7 @@ export const Card = ({
 			{headlinePosition === 'outer' && (
 				<div
 					css={css`
-						padding-bottom: 8px;
+						padding-bottom: ${space[5]}px;
 					`}
 					style={{ backgroundColor: cardBackgroundColour }}
 				>
@@ -725,6 +726,7 @@ export const Card = ({
 									shouldHide={
 										isFlexibleContainer ? false : true
 									}
+									padTop={isFlexibleContainer ? false : true}
 								>
 									<div
 										dangerouslySetInnerHTML={{
