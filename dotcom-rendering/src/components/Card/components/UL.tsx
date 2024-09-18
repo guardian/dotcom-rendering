@@ -43,16 +43,18 @@ const flexContainerMarginBottomStyles = css`
 `;
 
 const topBarStyles = css`
-	padding-top: 8px;
-	::before {
-		content: '';
-		display: block;
-		position: absolute;
-		top: 0px;
-		left: 10px;
-		width: calc(100% - 20px);
-		height: 1px;
-		background-color: ${palette('--card-border-top')};
+	${from.tablet} {
+		padding-top: 8px;
+		::before {
+			content: '';
+			display: block;
+			position: absolute;
+			top: 0px;
+			left: 10px;
+			width: calc(100% - 20px);
+			height: 1px;
+			background-color: ${palette('--card-border-top')};
+		}
 	}
 `;
 
