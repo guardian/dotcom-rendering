@@ -4,6 +4,12 @@ import { takeFirst } from '../lib/tuple';
 import type { DCRSlideshowImage } from '../types/front';
 import type { ImageSizeType } from './Card/components/ImageWrapper';
 import { CardPicture } from './CardPicture';
+import {
+	Button,
+	SvgChevronLeftSingle,
+	SvgChevronRightSingle,
+} from '@guardian/source/react-components';
+import { useRef, useState } from 'react';
 
 const carouselContainer = css`
 	display: flex;
@@ -36,37 +42,132 @@ const caption = css`
 	padding: 60px ${space[2]}px ${space[2]}px;
 `;
 
+const navigation = css`
+	display: flex;
+	margin-top: ${space[2]}px;
+`;
+
+const pagination = css`
+	display: flex;
+	flex-grow: 1;
+	align-items: center;
+	justify-content: center;
+	> * + * {
+		margin-left: ${space[1]}px;
+	}
+`;
+
+const pageDot = css`
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	border-radius: 100%;
+	background-color: ${palette.neutral[86]};
+`;
+
+const currentPageDot = css`
+	width: 8px;
+	height: 8px;
+	background-color: ${palette.neutral[0]};
+`;
+
+const buttonGroup = css`
+	> * + * {
+		margin-left: ${space[2]}px;
+	}
+`;
+
 export const ImageCarousel = ({
 	images,
 	imageSize,
 }: {
 	images: readonly DCRSlideshowImage[];
 	imageSize: ImageSizeType;
-}) => (
-	<div>
-		<ul css={carouselContainer}>
-			{takeFirst(images, 10).map((slideshowImage, index) => {
-				const loading = index > 0 ? 'lazy' : 'eager';
+}) => {
+	const carouselItems = useRef<HTMLUListElement>(null);
+	const [index, setIndex] = useState(0);
 
-				return (
-					<li css={carouselItem} key={slideshowImage.imageSrc}>
-						<figure>
-							<CardPicture
-								mainImage={slideshowImage.imageSrc}
-								imageSize={imageSize}
-								alt={slideshowImage.imageCaption}
-								loading={loading}
-							/>
-							{!!slideshowImage.imageCaption && (
-								<figcaption css={caption}>
-									{slideshowImage.imageCaption}
-								</figcaption>
-							)}
-						</figure>
-					</li>
-				);
-			})}
-		</ul>
-		<span>[1][2][3][4][5] [LEFT] [RIGHT]</span>
-	</div>
-);
+	const getItems = (): HTMLElement[] => {
+		const { current } = carouselItems;
+		if (current === null) return [];
+		return Array.from(current.children) as HTMLElement[];
+	};
+
+	const next = () => {
+		const items = getItems().length;
+		if (index < items - 1) {
+			getItems()[index + 1]?.scrollIntoView({ behavior: 'smooth' });
+			setIndex(index + 1);
+		}
+	};
+
+	const prev = () => {
+		if (index > 0) {
+			getItems()[index - 1]?.scrollIntoView({ behavior: 'smooth' });
+			setIndex(index - 1);
+		}
+	};
+
+	return (
+		<div>
+			<ul css={carouselContainer} ref={carouselItems}>
+				{takeFirst(images, 10).map((slideshowImage, index) => {
+					const loading = index > 0 ? 'lazy' : 'eager';
+
+					return (
+						<li css={carouselItem} key={slideshowImage.imageSrc}>
+							<figure>
+								<CardPicture
+									mainImage={slideshowImage.imageSrc}
+									imageSize={imageSize}
+									alt={slideshowImage.imageCaption}
+									loading={loading}
+								/>
+								{!!slideshowImage.imageCaption && (
+									<figcaption css={caption}>
+										{slideshowImage.imageCaption}
+									</figcaption>
+								)}
+							</figure>
+						</li>
+					);
+				})}
+			</ul>
+			<div css={navigation}>
+				<div css={pagination}>
+					{takeFirst(images, 10).map((_, i) => (
+						<span css={[pageDot, i === index && currentPageDot]} />
+					))}
+				</div>
+				<div css={buttonGroup}>
+					<Button
+						size="small"
+						icon={<SvgChevronLeftSingle />}
+						hideLabel={true}
+						priority="tertiary"
+						theme={{
+							textTertiary: palette.neutral[0],
+							borderTertiary: palette.neutral[86],
+						}}
+						onClick={prev}
+					>
+						Previous image
+					</Button>
+					<Button
+						size="small"
+						icon={<SvgChevronRightSingle />}
+						hideLabel={true}
+						priority="tertiary"
+						theme={{
+							textTertiary: palette.neutral[0],
+							borderTertiary: palette.neutral[86],
+						}}
+						onClick={next}
+					>
+						Next image
+					</Button>
+				</div>
+			</div>
+		</div>
+	);
+};
