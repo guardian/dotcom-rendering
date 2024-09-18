@@ -444,9 +444,8 @@ export const Card = ({
 			<Hide until={isFlexibleContainer ? 'tablet' : 'desktop'}>
 				<SupportingContent
 					supportingContent={supportingContent}
-					alignment={
-						'vertical'
-					} /* inner links are always vertically stacked */
+					/* inner links are always vertically stacked */
+					alignment="vertical"
 					containerPalette={containerPalette}
 					isDynamo={isDynamo}
 					fillBackground={isFlexibleContainer}
