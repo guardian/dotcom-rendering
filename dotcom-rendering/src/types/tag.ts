@@ -36,11 +36,6 @@ export type FEPagination = {
 	lastPage: number;
 	totalContent: number;
 };
-export type Podcast = {
-	subscriptionUrl?: string;
-	spotifyUrl?: string;
-	image?: string;
-};
 
 export type TagType = {
 	id: string;
@@ -50,5 +45,4 @@ export type TagType = {
 	paidContentType?: string;
 	bylineImageUrl?: string;
 	bylineLargeImageUrl?: string;
-	podcast?: Podcast;
 };

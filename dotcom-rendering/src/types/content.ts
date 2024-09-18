@@ -29,7 +29,6 @@ export interface AudioAtomBlockElement {
 interface AudioBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AudioBlockElement';
 	elementId: string;
-	assets: AudioAsset[];
 }
 
 export interface BlockquoteBlockElement {
@@ -834,17 +833,6 @@ interface VideoAssets {
 		height?: string;
 		width?: string;
 		caption?: string;
-	};
-}
-
-interface AudioAsset {
-	url: string;
-	mimeType?: string;
-	fields?: {
-		durationMinutes?: number;
-		durationSeconds?: number;
-		explicit?: boolean;
-		source?: string;
 	};
 }
 
