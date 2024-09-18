@@ -123,7 +123,7 @@ const wrapperStyles = css`
 const mobileBackground = css`
 	${until.tablet} {
 		padding: 8px;
-		background-color: ${palette('--sublinks-background')};
+		background-color: ${palette('--card-sublinks-background')};
 	}
 `;
 export const SupportingContent = ({

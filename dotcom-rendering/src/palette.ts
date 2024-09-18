@@ -5584,9 +5584,10 @@ const cricketScoreboardLinkText: PaletteFunction = () => {
 	return sourcePalette.sport[300];
 };
 
-const sublinksBackgroundLight: PaletteFunction = () =>
+const cardSublinksBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
-const sublinksBackgroundDark: PaletteFunction = () => sourcePalette.neutral[10];
+const cardSublinksBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
 // ----- Palette ----- //
 
 /**
@@ -5907,6 +5908,10 @@ const paletteColours = {
 	'--card-kicker-text': {
 		light: cardKickerTextLight,
 		dark: cardKickerTextDark,
+	},
+	'--card-sublinks-background': {
+		light: cardSublinksBackgroundLight,
+		dark: cardSublinksBackgroundDark,
 	},
 	'--carousel-active-dot': {
 		light: carouselActiveDotLight,
@@ -6755,10 +6760,6 @@ const paletteColours = {
 	'--subheading-text': {
 		light: subheadingTextLight,
 		dark: subheadingTextDark,
-	},
-	'--sublinks-background': {
-		light: sublinksBackgroundLight,
-		dark: sublinksBackgroundDark,
 	},
 	'--summary-event-bullet': {
 		light: summaryEventBulletLight,
