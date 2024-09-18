@@ -420,6 +420,7 @@ export const Card = ({
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
 					isDynamo={isDynamo}
+					fillBackground={isFlexibleContainer}
 				/>
 			);
 		}
@@ -430,6 +431,7 @@ export const Card = ({
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
 					isDynamo={isDynamo}
+					fillBackground={isFlexibleContainer}
 				/>
 			</Hide>
 		);
@@ -447,6 +449,7 @@ export const Card = ({
 					} /* inner links are always vertically stacked */
 					containerPalette={containerPalette}
 					isDynamo={isDynamo}
+					fillBackground={isFlexibleContainer}
 				/>
 			</Hide>
 		);
