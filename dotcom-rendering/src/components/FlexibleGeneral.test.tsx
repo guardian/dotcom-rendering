@@ -1,6 +1,6 @@
-import { trails } from 'fixtures/manual/trails';
+import { trails } from '../../fixtures/manual/trails';
+import type { DCRFrontCard } from '../types/front';
 import { determineCardPositions } from './FlexibleGeneral';
-import { DCRFrontCard } from 'src/types/front';
 
 const standardCard = {
 	...trails[0],
@@ -13,15 +13,66 @@ const boostedCard = {
 } satisfies DCRFrontCard;
 
 describe('FlexibleGeneral', () => {
-	it.skip('Should return a one card half width row if one standard card is provided', () => {
-		expect(determineCardPositions([standardCard])).toEqual([]);
+	it('Should return a one card row layout if one standard card is provided', () => {
+		expect(determineCardPositions([standardCard])).toEqual([
+			{
+				rowLayout: 'oneCard',
+				cards: [standardCard],
+			},
+		]);
 	});
-	it.skip('Should return a one full half width row if one standard boosted card is provided', () => {
-		expect(determineCardPositions([boostedCard])).toEqual([]);
+	it('Should return a one card boosted row layout if one boosted card is provided', () => {
+		expect(determineCardPositions([boostedCard])).toEqual([
+			{ rowLayout: 'oneCardBoosted', cards: [boostedCard] },
+		]);
 	});
-	it.skip('Should return a two card row if two standard cards are provided', () => {
-		expect(determineCardPositions([standardCard, standardCard])).toEqual(
-			[],
-		);
+	it('Should return a two card row layout if two standard cards are provided', () => {
+		expect(determineCardPositions([standardCard, standardCard])).toEqual([
+			{ rowLayout: 'twoCard', cards: [standardCard, standardCard] },
+		]);
+	});
+
+	it('Should return two rows of two card row layouts if four standard cards are provided', () => {
+		expect(
+			determineCardPositions([
+				standardCard,
+				standardCard,
+				standardCard,
+				standardCard,
+			]),
+		).toEqual([
+			{ rowLayout: 'twoCard', cards: [standardCard, standardCard] },
+			{ rowLayout: 'twoCard', cards: [standardCard, standardCard] },
+		]);
+	});
+
+	it('Should return three rows of expected row layouts if a boosted card and three standard cards are provided', () => {
+		expect(
+			determineCardPositions([
+				boostedCard,
+				standardCard,
+				standardCard,
+				standardCard,
+			]),
+		).toEqual([
+			{ rowLayout: 'oneCardBoosted', cards: [boostedCard] },
+			{ rowLayout: 'twoCard', cards: [standardCard, standardCard] },
+			{ rowLayout: 'oneCard', cards: [standardCard] },
+		]);
+	});
+
+	it('Should return three rows of expected row layouts if a standard, then boosted card and two standard cards are provided', () => {
+		expect(
+			determineCardPositions([
+				standardCard,
+				boostedCard,
+				standardCard,
+				standardCard,
+			]),
+		).toEqual([
+			{ rowLayout: 'oneCard', cards: [standardCard] },
+			{ rowLayout: 'oneCardBoosted', cards: [boostedCard] },
+			{ rowLayout: 'twoCard', cards: [standardCard, standardCard] },
+		]);
 	});
 });

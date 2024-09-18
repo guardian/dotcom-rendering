@@ -37,54 +37,32 @@ type GroupedRow = {
 type GroupedCards = GroupedRow[];
 
 export const determineCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
-	return cards.reduce(
-		(acc: GroupedCards, card: DCRFrontCard): GroupedCards => {
-			/// if, the accumulator is empty, add the card to a new row.
-			if (acc.length === 0) {
-				const firstRow: GroupedRow = {
-					rowLayout: 'oneCard',
-					cards: [card],
-				};
-				return [firstRow];
-			}
+	const createNewRow = (
+		rowLayout: RowLayout,
+		card: DCRFrontCard,
+	): GroupedRow => ({
+		rowLayout,
+		cards: [card],
+	});
 
-			// If the new card is boosted, we always create a new row
-			if (card.boostLevel !== 'default') {
-				const newRow: GroupedRow = {
-					rowLayout: 'oneCardBoosted',
-					cards: [card],
-				};
-				return [...acc, newRow];
-			}
+	const addCardToRow = (row: GroupedRow, card: DCRFrontCard): GroupedRow => ({
+		cards: [...row.cards, card],
+		rowLayout: 'twoCard',
+	});
 
-			// If the new card is a standard, we need to check if there is
-			//  space in the current row before creating a new one
+	return cards.reduce<GroupedCards>((acc, card) => {
+		if (card.boostLevel !== 'default') {
+			return [...acc, createNewRow('oneCardBoosted', card)];
+		}
 
-			// Which row are we currently on?
-			const currentRow = acc[acc.length - 1];
+		const row = acc[acc.length - 1];
 
-			if (!currentRow) {
-				return acc;
-			}
-
-			if (currentRow.cards.length < 2) {
-				const accWithoutCurrentRow = acc.slice(0, acc.length);
-				const updatedCurrentRow: GroupedRow = {
-					rowLayout: 'twoCard',
-					cards: [...currentRow.cards, card],
-				};
-				return [...accWithoutCurrentRow, updatedCurrentRow];
-			} else {
-				// we need to start a new row
-				const newRow: GroupedRow = {
-					rowLayout: 'oneCard',
-					cards: [card],
-				};
-				return [newRow];
-			}
-		},
-		[],
-	);
+		if (row && row.rowLayout === 'oneCard') {
+			return [...acc.slice(0, acc.length - 1), addCardToRow(row, card)];
+		} else {
+			return [...acc, createNewRow('oneCard', card)];
+		}
+	}, []);
 };
 
 /**
