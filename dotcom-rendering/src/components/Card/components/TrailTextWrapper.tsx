@@ -10,6 +10,7 @@ type Props = {
 	imageType?: CardImageType | undefined;
 	/** By default, trail text is hidden at specific breakpoints. This prop allows consumers to show trails across all breakpoints if set to false */
 	shouldHide?: boolean;
+	padTop?: boolean;
 };
 
 /**
@@ -46,10 +47,14 @@ const trailTextStyles = css`
 	flex-direction: column;
 	color: ${palette('--card-headline-trail-text')};
 	${textSans14};
-	padding: ${space[2]}px 0;
+	padding-bottom: ${space[2]}px;
 	strong {
 		font-weight: bold;
 	}
+`;
+
+const topPaddingStyles = css`
+	padding-top: ${space[2]}px;
 `;
 
 export const TrailTextWrapper = ({
@@ -58,6 +63,7 @@ export const TrailTextWrapper = ({
 	imageSize,
 	imageType,
 	shouldHide = true,
+	padTop = true,
 }: Props) => {
 	return (
 		<div
@@ -69,6 +75,7 @@ export const TrailTextWrapper = ({
 						imageSize,
 						imageType,
 					),
+				padTop && topPaddingStyles,
 			]}
 		>
 			{children}
