@@ -120,7 +120,8 @@ const wrapperStyles = css`
 	}
 `;
 
-const mobileBackground = css`
+const backgroundFill = css`
+	/** background fill should only apply to sublinks on mobile breakpoints */
 	${until.tablet} {
 		padding: 8px;
 		background-color: ${palette('--card-sublinks-background')};
@@ -140,7 +141,7 @@ export const SupportingContent = ({
 				wrapperStyles,
 				baseGrid,
 				alignment === 'horizontal' && horizontalGrid,
-				fillBackground && mobileBackground,
+				fillBackground && backgroundFill,
 			]}
 		>
 			{supportingContent.map((subLink, index) => {
