@@ -111,21 +111,21 @@ export const ImageCarousel = ({
 	return (
 		<div>
 			<ul css={carouselContainer} ref={carouselItems}>
-				{takeFirst(images, 10).map((slideshowImage, index) => {
+				{takeFirst(images, 10).map((image) => {
 					const loading = index > 0 ? 'lazy' : 'eager';
 
 					return (
-						<li css={carouselItem} key={slideshowImage.imageSrc}>
+						<li css={carouselItem} key={image.imageSrc}>
 							<figure>
 								<CardPicture
-									mainImage={slideshowImage.imageSrc}
+									mainImage={image.imageSrc}
 									imageSize={imageSize}
-									alt={slideshowImage.imageCaption}
+									alt={image.imageCaption}
 									loading={loading}
 								/>
-								{!!slideshowImage.imageCaption && (
+								{!!image.imageCaption && (
 									<figcaption css={caption}>
-										{slideshowImage.imageCaption}
+										{image.imageCaption}
 									</figcaption>
 								)}
 							</figure>
@@ -136,7 +136,10 @@ export const ImageCarousel = ({
 			<div css={navigation}>
 				<div css={pagination}>
 					{takeFirst(images, 10).map((_, i) => (
-						<span css={[pageDot, i === index && currentPageDot]} />
+						<span
+							css={[pageDot, i === index && currentPageDot]}
+							key={`page-${i}`}
+						/>
 					))}
 				</div>
 				<div css={buttonGroup}>
