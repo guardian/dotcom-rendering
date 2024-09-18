@@ -119,7 +119,8 @@ const determineCardProperties = (
 			};
 	}
 };
-export const OneCardLayout = ({
+
+export const SplashCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
@@ -240,21 +241,15 @@ export const FlexibleGeneral = ({
 
 	return (
 		<>
-			<OneCardLayout
-				cards={splash}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				absoluteServerTimes={absoluteServerTimes}
-				imageLoading={imageLoading}
-			/>
-
-			<TwoCardOrFourCardLayout
-				cards={cards}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				absoluteServerTimes={absoluteServerTimes}
-				imageLoading={imageLoading}
-			/>
+			{splash.length > 0 && (
+				<SplashCardLayout
+					cards={splash}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
+					imageLoading={imageLoading}
+				/>
+			)}
 		</>
 	);
 };
