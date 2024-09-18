@@ -156,7 +156,7 @@ const HorizontalDivider = () => (
 				margin-top: 12px;
 			}
 		`}
-	></div>
+	/>
 );
 
 const getMedia = ({
