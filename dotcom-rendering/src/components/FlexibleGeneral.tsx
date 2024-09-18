@@ -277,8 +277,6 @@ export const StandardCardLayout = ({
 	showImage?: boolean;
 	padBottom?: boolean;
 }) => {
-	const card = cards[0];
-	if (!card) return null;
 	return (
 		<UL direction="row" padBottom={padBottom}>
 			{cards.map((card, cardIndex) => {
