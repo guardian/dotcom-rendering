@@ -69,7 +69,7 @@ type RemainingProps = {
 type Props = DefaultProps & (RightProps | InlineProps | RemainingProps);
 
 const labelHeight = constants.AD_LABEL_HEIGHT;
-const halfPageAdHeight = 600;
+const halfPageAdHeight = adSizes.halfPage.height;
 
 const individualLabelCSS = css`
 	${textSans12};
