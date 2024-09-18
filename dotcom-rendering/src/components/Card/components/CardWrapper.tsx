@@ -1,6 +1,10 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { palette as sourcePalette, space } from '@guardian/source/foundations';
+import {
+	palette as sourcePalette,
+	space,
+	until,
+} from '@guardian/source/foundations';
 import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
 import { ContainerOverrides } from '../../ContainerOverrides';
@@ -76,6 +80,12 @@ const topBarStyles = css`
 	}
 `;
 
+const mobileOnlyTopBarStyles = css`
+	${until.tablet} {
+		${topBarStyles}
+	}
+`;
+
 const onwardContentStyles = css`
 	border-radius: ${space[2]}px;
 	overflow: hidden;
@@ -100,7 +110,7 @@ export const CardWrapper = ({
 						baseCardStyles,
 						hoverStyles,
 						sublinkHoverStyles,
-						showTopBar && topBarStyles,
+						showTopBar ? topBarStyles : mobileOnlyTopBarStyles,
 						isOnwardContent && onwardContentStyles,
 					]}
 				>
