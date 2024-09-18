@@ -16,19 +16,19 @@ describe('FlexibleGeneral', () => {
 	it('Should return a one card row layout if one standard card is provided', () => {
 		expect(determineCardPositions([standardCard])).toEqual([
 			{
-				rowLayout: 'oneCard',
+				layout: 'oneCard',
 				cards: [standardCard],
 			},
 		]);
 	});
 	it('Should return a one card boosted row layout if one boosted card is provided', () => {
 		expect(determineCardPositions([boostedCard])).toEqual([
-			{ rowLayout: 'oneCardBoosted', cards: [boostedCard] },
+			{ layout: 'oneCardBoosted', cards: [boostedCard] },
 		]);
 	});
 	it('Should return a two card row layout if two standard cards are provided', () => {
 		expect(determineCardPositions([standardCard, standardCard])).toEqual([
-			{ rowLayout: 'twoCard', cards: [standardCard, standardCard] },
+			{ layout: 'twoCard', cards: [standardCard, standardCard] },
 		]);
 	});
 
@@ -41,8 +41,8 @@ describe('FlexibleGeneral', () => {
 				standardCard,
 			]),
 		).toEqual([
-			{ rowLayout: 'twoCard', cards: [standardCard, standardCard] },
-			{ rowLayout: 'twoCard', cards: [standardCard, standardCard] },
+			{ layout: 'twoCard', cards: [standardCard, standardCard] },
+			{ layout: 'twoCard', cards: [standardCard, standardCard] },
 		]);
 	});
 
@@ -55,9 +55,9 @@ describe('FlexibleGeneral', () => {
 				standardCard,
 			]),
 		).toEqual([
-			{ rowLayout: 'oneCardBoosted', cards: [boostedCard] },
-			{ rowLayout: 'twoCard', cards: [standardCard, standardCard] },
-			{ rowLayout: 'oneCard', cards: [standardCard] },
+			{ layout: 'oneCardBoosted', cards: [boostedCard] },
+			{ layout: 'twoCard', cards: [standardCard, standardCard] },
+			{ layout: 'oneCard', cards: [standardCard] },
 		]);
 	});
 
@@ -70,9 +70,9 @@ describe('FlexibleGeneral', () => {
 				standardCard,
 			]),
 		).toEqual([
-			{ rowLayout: 'oneCard', cards: [standardCard] },
-			{ rowLayout: 'oneCardBoosted', cards: [boostedCard] },
-			{ rowLayout: 'twoCard', cards: [standardCard, standardCard] },
+			{ layout: 'oneCard', cards: [standardCard] },
+			{ layout: 'oneCardBoosted', cards: [boostedCard] },
+			{ layout: 'twoCard', cards: [standardCard, standardCard] },
 		]);
 	});
 });

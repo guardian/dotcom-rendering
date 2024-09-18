@@ -31,23 +31,23 @@ type boostProperties = {
 type RowLayout = 'oneCard' | 'oneCardBoosted' | 'twoCard';
 
 type GroupedRow = {
-	rowLayout: RowLayout;
+	layout: RowLayout;
 	cards: DCRFrontCard[];
 };
 type GroupedCards = GroupedRow[];
 
 export const determineCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 	const createNewRow = (
-		rowLayout: RowLayout,
+		layout: RowLayout,
 		card: DCRFrontCard,
 	): GroupedRow => ({
-		rowLayout,
+		layout,
 		cards: [card],
 	});
 
 	const addCardToRow = (row: GroupedRow, card: DCRFrontCard): GroupedRow => ({
 		cards: [...row.cards, card],
-		rowLayout: 'twoCard',
+		layout: 'twoCard',
 	});
 
 	return cards.reduce<GroupedCards>((acc, card) => {
@@ -61,7 +61,7 @@ export const determineCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 
 		// If the current row has one card, we can add one more standard card to it
 		// We change the row layout to 'twoCard' to indicate that it is now full
-		if (row && row.rowLayout === 'oneCard') {
+		if (row && row.layout === 'oneCard') {
 			return [...acc.slice(0, acc.length - 1), addCardToRow(row, card)];
 		} // Otherwise we consider the row to be 'full' and start a new row
 		else {
