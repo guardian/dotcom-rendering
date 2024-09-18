@@ -111,8 +111,8 @@ export type Props = {
 	isTagPage?: boolean;
 	/** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
 	aspectRatio?: AspectRatio;
-	/** Alows the consumer to use a larger font size group for boost styling*/
-	boostedFontSizes?: boolean;
+	/** The splash card of a flexible container gets a different visual treatment to other cards */
+	isFlexSplash?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -216,17 +216,6 @@ const isWithinTwelveHours = (webPublicationDate: string): boolean => {
 	return timeDiffHours <= 12;
 };
 
-const decideHeadlinePosition = (
-	imageSize?: ImageSizeType,
-	containerType?: DCRContainerType,
-) => {
-	if (imageSize === 'jumbo' && containerType === 'flexible/special') {
-		return 'outer';
-	}
-
-	return 'inner';
-};
-
 export const Card = ({
 	linkTo,
 	format,
@@ -274,7 +263,7 @@ export const Card = ({
 	absoluteServerTimes,
 	isTagPage = false,
 	aspectRatio,
-	boostedFontSizes,
+	isFlexSplash,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -282,7 +271,7 @@ export const Card = ({
 		imagePositionOnDesktop,
 		supportingContentAlignment,
 	);
-	const headlinePosition = decideHeadlinePosition(imageSize, containerType);
+	const headlinePosition = isFlexSplash ? 'outer' : 'inner';
 
 	const showQuotes = !!showQuotedHeadline;
 
@@ -391,11 +380,11 @@ export const Card = ({
 	const getGapSize = (): GapSize => {
 		if (isOnwardContent) return 'none';
 		if (hasBackgroundColour) return 'small';
+		if (isFlexSplash) return 'medium';
 		if (
 			isFlexibleContainer &&
 			(imagePositionOnDesktop === 'left' ||
-				imagePositionOnDesktop === 'right') &&
-			imageSize !== 'jumbo'
+				imagePositionOnDesktop === 'right')
 		) {
 			return 'large';
 		}
@@ -423,7 +412,7 @@ export const Card = ({
 			);
 		}
 		return (
-			<Hide from={isFlexibleContainer ? 'tablet' : 'desktop'}>
+			<Hide from={isFlexSplash ? 'tablet' : 'desktop'}>
 				<SupportingContent
 					supportingContent={supportingContent}
 					containerPalette={containerPalette}
@@ -438,7 +427,7 @@ export const Card = ({
 		if (!hasSublinks) return null;
 		if (sublinkPosition !== 'inner') return null;
 		return (
-			<Hide until={isFlexibleContainer ? 'tablet' : 'desktop'}>
+			<Hide until={isFlexSplash ? 'tablet' : 'desktop'}>
 				<SupportingContent
 					supportingContent={supportingContent}
 					alignment={
@@ -491,7 +480,7 @@ export const Card = ({
 						byline={byline}
 						showByline={showByline}
 						isExternalLink={isExternalLink}
-						boostedFontSizes={boostedFontSizes}
+						boostedFontSizes={isFlexSplash}
 					/>
 					{!isUndefined(starRating) ? (
 						<StarRatingComponent
@@ -698,7 +687,7 @@ export const Card = ({
 										byline={byline}
 										showByline={showByline}
 										isExternalLink={isExternalLink}
-										boostedFontSizes={boostedFontSizes}
+										boostedFontSizes={isFlexSplash}
 									/>
 									{!isUndefined(starRating) ? (
 										<StarRatingComponent
@@ -723,10 +712,8 @@ export const Card = ({
 									}
 									imageSize={imageSize}
 									imageType={media?.type}
-									shouldHide={
-										isFlexibleContainer ? false : true
-									}
-									padTop={isFlexibleContainer ? false : true}
+									shouldHide={isFlexSplash ? false : true}
+									padTop={isFlexSplash ? false : true}
 								>
 									<div
 										dangerouslySetInnerHTML={{
