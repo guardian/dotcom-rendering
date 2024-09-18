@@ -118,6 +118,10 @@ const wrapperStyles = css`
 	@media (pointer: coarse) {
 		padding-bottom: 0;
 	}
+	${until.tablet} {
+		padding: 8px;
+		background-color: ${palette('--accordion-background')};
+	}
 `;
 
 export const SupportingContent = ({
