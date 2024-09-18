@@ -28,6 +28,65 @@ type boostProperties = {
 	supportingContentAlignment: Alignment;
 };
 
+type RowLayout = 'oneCard' | 'oneCardBoosted' | 'twoCard';
+
+type GroupedRow = {
+	rowLayout: RowLayout;
+	cards: DCRFrontCard[];
+};
+type GroupedCards = GroupedRow[];
+
+export const determineCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
+	return cards.reduce(
+		(acc: GroupedCards, card: DCRFrontCard): GroupedCards => {
+			/// if, the accumulator is empty, add the card to a new row.
+			if (acc.length === 0) {
+				const firstRow: GroupedRow = {
+					rowLayout: 'oneCard',
+					cards: [card],
+				};
+				return [firstRow];
+			}
+
+			// If the new card is boosted, we always create a new row
+			if (card.boostLevel !== 'default') {
+				const newRow: GroupedRow = {
+					rowLayout: 'oneCardBoosted',
+					cards: [card],
+				};
+				return [...acc, newRow];
+			}
+
+			// If the new card is a standard, we need to check if there is
+			//  space in the current row before creating a new one
+
+			// Which row are we currently on?
+			const currentRow = acc[acc.length - 1];
+
+			if (!currentRow) {
+				return acc;
+			}
+
+			if (currentRow.cards.length < 2) {
+				const accWithoutCurrentRow = acc.slice(0, acc.length);
+				const updatedCurrentRow: GroupedRow = {
+					rowLayout: 'twoCard',
+					cards: [...currentRow.cards, card],
+				};
+				return [...accWithoutCurrentRow, updatedCurrentRow];
+			} else {
+				// we need to start a new row
+				const newRow: GroupedRow = {
+					rowLayout: 'oneCard',
+					cards: [card],
+				};
+				return [newRow];
+			}
+		},
+		[],
+	);
+};
+
 /**
  * Boosting a card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
  */
