@@ -415,11 +415,49 @@
                 },
                 "elementId": {
                     "type": "string"
+                },
+                "assets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AudioAsset"
+                    }
                 }
             },
             "required": [
                 "_type",
+                "assets",
                 "elementId"
+            ]
+        },
+        "AudioAsset": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "mimeType": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "object",
+                    "properties": {
+                        "durationMinutes": {
+                            "type": "number"
+                        },
+                        "durationSeconds": {
+                            "type": "number"
+                        },
+                        "explicit": {
+                            "type": "boolean"
+                        },
+                        "source": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "required": [
+                "url"
             ]
         },
         "BlockquoteBlockElement": {

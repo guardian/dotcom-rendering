@@ -7,7 +7,8 @@ import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStylin
 import { getSoleContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
-import type { TagType } from '../types/tag';
+import type { FEElement } from '../types/content';
+import type { Podcast, TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.importable';
 import { CommentCount } from './CommentCount.importable';
@@ -15,6 +16,7 @@ import { useConfig } from './ConfigContext';
 import { Contributor } from './Contributor';
 import { Dateline } from './Dateline';
 import { Island } from './Island';
+import { PodcastMeta } from './PodcastMeta';
 import { ShareButton } from './ShareButton.importable';
 
 type Props = {
@@ -30,6 +32,7 @@ type Props = {
 	discussionApiUrl: string;
 	shortUrlId: string;
 	isCommentable: boolean;
+	mainMediaElements?: FEElement[];
 };
 
 const meta = (format: ArticleFormat) => {
@@ -275,6 +278,34 @@ const metaNumbersExtrasLiveBlog = css`
 	}
 `;
 
+const getAudioDownloadUrl = (
+	mainMediaElements: FEElement[] | undefined,
+): string => {
+	const audioBlockElement = mainMediaElements?.find(
+		(element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.AudioBlockElement',
+	);
+
+	return audioBlockElement?.assets[0]?.url ?? '';
+};
+
+const getSeriesTag = (tags: TagType[]): TagType | undefined => {
+	return tags.find((tag) => tag.type === 'Series' && tag.podcast);
+};
+
+const getPodcastTag = (tags: TagType[]): Podcast | undefined => {
+	const seriesTag = getSeriesTag(tags);
+
+	return seriesTag?.podcast;
+};
+
+const getRssFeedUrl = (tags: TagType[]): string => {
+	const seriesTag = getSeriesTag(tags);
+
+	return `/${seriesTag?.id}/podcast.xml`;
+};
+
 export const ArticleMeta = ({
 	branding,
 	format,
@@ -288,6 +319,7 @@ export const ArticleMeta = ({
 	discussionApiUrl,
 	shortUrlId,
 	isCommentable,
+	mainMediaElements,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
@@ -299,7 +331,13 @@ export const ArticleMeta = ({
 
 	const isPictureContent = format.design === ArticleDesign.Picture;
 
+	const isAudio = format.design === ArticleDesign.Audio;
+
 	const { renderingTarget } = useConfig();
+
+	const audioDownloadUrl = getAudioDownloadUrl(mainMediaElements);
+	const podcastTag = getPodcastTag(tags);
+	const rssFeedUrl = getRssFeedUrl(tags);
 
 	return (
 		<div
@@ -337,8 +375,17 @@ export const ArticleMeta = ({
 								<Avatar src={avatarUrl} alt={authorName} />
 							</MetaAvatarContainer>
 						)}
-
 						<div>
+							{!!isAudio && podcastTag && (
+								<PodcastMeta
+									image={podcastTag.image}
+									spotifyUrl={podcastTag.spotifyUrl}
+									subscriptionUrl={podcastTag.subscriptionUrl}
+									audioDownloadUrl={audioDownloadUrl}
+									rssFeedUrl={rssFeedUrl}
+								/>
+							)}
+
 							{shouldShowContributor(format) && (
 								<Contributor
 									byline={byline}
