@@ -51,15 +51,20 @@ export const determineCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 	});
 
 	return cards.reduce<GroupedCards>((acc, card) => {
+		// Early return if the card is boosted since it takes up a whole row
 		if (card.boostLevel !== 'default') {
 			return [...acc, createNewRow('oneCardBoosted', card)];
 		}
 
+		// Otherwise we need to check the status of the current row
 		const row = acc[acc.length - 1];
 
+		// If the current row has one card, we can add one more standard card to it
+		// We change the row layout to 'twoCard' to indicate that it is now full
 		if (row && row.rowLayout === 'oneCard') {
 			return [...acc.slice(0, acc.length - 1), addCardToRow(row, card)];
-		} else {
+		} // Otherwise we consider the row to be 'full' and start a new row
+		else {
 			return [...acc, createNewRow('oneCard', card)];
 		}
 	}, []);
