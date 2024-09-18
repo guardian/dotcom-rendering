@@ -98,8 +98,6 @@ const designToFEDesign = (design: ArticleDesign): FEDesign => {
 			return 'InteractiveDesign';
 		case ArticleDesign.PhotoEssay:
 			return 'PhotoEssayDesign';
-		case ArticleDesign.PrintShop:
-			return 'PrintShopDesign';
 		case ArticleDesign.Obituary:
 			return 'ObituaryDesign';
 		case ArticleDesign.FullPageInteractive:

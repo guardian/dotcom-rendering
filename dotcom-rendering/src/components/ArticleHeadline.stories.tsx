@@ -230,18 +230,6 @@ export const ImmersiveDisplay = {
 	},
 } satisfies Story;
 
-export const PrintShopDesignImmersiveDisplay = {
-	args: {
-		...StandardDesign.args,
-		format: {
-			...StandardDesign.args.format,
-			design: ArticleDesign.PrintShop,
-			display: ArticleDisplay.Immersive,
-		},
-	},
-	name: 'PrintShop Design, Immersive Display',
-} satisfies Story;
-
 export const CommentDesignImmersiveDisplay = {
 	args: {
 		...StandardDesign.args,

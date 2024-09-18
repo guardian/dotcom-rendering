@@ -161,8 +161,6 @@ const designToString = (design: ArticleDesign): string => {
 			return 'Interactive';
 		case ArticleDesign.PhotoEssay:
 			return 'Photo Essay';
-		case ArticleDesign.PrintShop:
-			return 'Print Shop';
 		case ArticleDesign.Obituary:
 			return 'Obituary';
 		case ArticleDesign.Correction:

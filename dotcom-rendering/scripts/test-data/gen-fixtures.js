@@ -91,10 +91,6 @@ const articles = [
 		url: 'https://www.theguardian.com/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
 	},
 	{
-		name: 'PrintShop',
-		url: 'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
-	},
-	{
 		name: 'Recipe',
 		url: 'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 	},

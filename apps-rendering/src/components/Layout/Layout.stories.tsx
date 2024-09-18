@@ -20,7 +20,6 @@ import {
 	newsletterSignUp,
 	obituary,
 	photoEssay,
-	printShop,
 	quiz,
 	recipe,
 	review,
@@ -143,10 +142,6 @@ export const ReviewStandardSpecialReportAlt =
 export const MatchReportStandardNews = standardLayoutStory(matchReport);
 export const MatchReportStandardSpecialReportAlt =
 	standardLayoutStoryWithSpecialReportAlt(matchReport);
-
-export const PrintShopStandardNews = standardLayoutStory(printShop);
-export const PrintShopStandardSpecialReportAlt =
-	standardLayoutStoryWithSpecialReportAlt(printShop);
 
 export const PhotoEssayStandardNews = standardLayoutStory(photoEssay);
 export const PhotoEssayStandardSpecialReportAlt =

@@ -35,7 +35,6 @@ import type {
 	MatchReport,
 	Obituary,
 	PhotoEssay,
-	PrintShop,
 	Profile,
 	Quiz,
 	Recipe,
@@ -95,7 +94,6 @@ interface Props {
 		| Correction
 		| Interview
 		| Recipe
-		| PrintShop
 		| PhotoEssay
 		| Timeline
 		| Profile;
