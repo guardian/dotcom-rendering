@@ -1,6 +1,6 @@
 import { trails } from '../../fixtures/manual/trails';
 import type { DCRFrontCard } from '../types/front';
-import { determineCardPositions } from './FlexibleGeneral';
+import { decideCardPositions } from './FlexibleGeneral';
 
 const standardCard = {
 	...trails[0],
@@ -14,7 +14,7 @@ const boostedCard = {
 
 describe('FlexibleGeneral', () => {
 	it('Should return a one card row layout if one standard card is provided', () => {
-		expect(determineCardPositions([standardCard])).toEqual([
+		expect(decideCardPositions([standardCard])).toEqual([
 			{
 				layout: 'oneCard',
 				cards: [standardCard],
@@ -22,19 +22,19 @@ describe('FlexibleGeneral', () => {
 		]);
 	});
 	it('Should return a one card boosted row layout if one boosted card is provided', () => {
-		expect(determineCardPositions([boostedCard])).toEqual([
+		expect(decideCardPositions([boostedCard])).toEqual([
 			{ layout: 'oneCardBoosted', cards: [boostedCard] },
 		]);
 	});
 	it('Should return a two card row layout if two standard cards are provided', () => {
-		expect(determineCardPositions([standardCard, standardCard])).toEqual([
+		expect(decideCardPositions([standardCard, standardCard])).toEqual([
 			{ layout: 'twoCard', cards: [standardCard, standardCard] },
 		]);
 	});
 
 	it('Should return two rows of two card row layouts if four standard cards are provided', () => {
 		expect(
-			determineCardPositions([
+			decideCardPositions([
 				standardCard,
 				standardCard,
 				standardCard,
@@ -48,7 +48,7 @@ describe('FlexibleGeneral', () => {
 
 	it('Should return three rows of expected row layouts if a boosted card and three standard cards are provided', () => {
 		expect(
-			determineCardPositions([
+			decideCardPositions([
 				boostedCard,
 				standardCard,
 				standardCard,
@@ -63,7 +63,7 @@ describe('FlexibleGeneral', () => {
 
 	it('Should return three rows of expected row layouts if a standard, then boosted card and two standard cards are provided', () => {
 		expect(
-			determineCardPositions([
+			decideCardPositions([
 				standardCard,
 				boostedCard,
 				standardCard,
