@@ -461,7 +461,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				</Stuck>
 			)}
 
-			{renderAds && article.config.switches.surveys && hasSurveyAd && (
+			{renderAds && hasSurveyAd && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 
