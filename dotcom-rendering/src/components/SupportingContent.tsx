@@ -58,7 +58,7 @@ const horizontalLineStyle = css`
 		top: -${space[2]}px;
 		left: 0;
 		content: '';
-		border-top: 1px solid ${palette('--card-border-supporting')};
+		border-top: 1px solid ${palette('--card-border-top')};
 		height: 1px;
 		width: 50%;
 		${from.tablet} {
