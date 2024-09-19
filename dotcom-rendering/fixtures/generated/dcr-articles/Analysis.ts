@@ -14,6 +14,11 @@
 import type { Article } from '../../../src/types/article';
 
 export const Analysis: Article = {
+	format: {
+		display: 0,
+		theme: 0,
+		design: 6,
+	},
 	frontendData: {
 		version: 3,
 		headline: 'Irish general election: who won and what happens now?',

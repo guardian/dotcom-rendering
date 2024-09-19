@@ -27,14 +27,8 @@ jobs:
         run: docker cp ${{ steps.create-container.outputs.CONTAINER_ID }}:/opt/app/dotcom-rendering/dotcom-rendering/. ${{ github.workspace }}
 
       # We want to avoid uploading the uncompressed files to our riffraff bucket
-      # so we create our tarball outside the rendering/ folder, then delete the contents of rendering/
-      # and finally move the tarball into rendering
-      - name: Compress rendering app server files
-        run: |
-          tar -zcf rendering.tar.gz rendering
-          rm -r rendering/*
-          mv rendering.tar.gz rendering/
-
+      # so we create our tarball outside the folder, then delete the contents of
+      # the folder, and finally move the tarball into the folder.
       - name: Compress article-rendering app server files
         run: |
           tar -zcf article-rendering.tar.gz article-rendering
@@ -68,10 +62,6 @@ jobs:
           projectName: dotcom:rendering-all
           configPath: riff-raff.yaml
           contentDirectories: |
-            rendering-cfn:
-              - rendering-cfn
-            rendering:
-              - rendering
             article-rendering-cfn:
               - article-rendering-cfn
             article-rendering:
