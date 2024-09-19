@@ -145,8 +145,7 @@ const HorizontalDivider = () => (
 	<div
 		css={css`
 			${from.tablet} {
-				border-top: 1px solid
-					${themePalette('--card-border-supporting')};
+				border-top: 1px solid ${themePalette('--card-border-top')};
 				height: 1px;
 				width: 50%;
 				${from.tablet} {
