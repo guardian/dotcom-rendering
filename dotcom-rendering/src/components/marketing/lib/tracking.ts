@@ -266,8 +266,11 @@ export const addChoiceCardsProductParams = (
 	url: string,
 	product: string,
 	ratePlan: string,
+	contribution?: number,
 ): string => {
-	const newParams = `product=${product}&ratePlan=${ratePlan}`;
+	const newParams = `product=${product}&ratePlan=${ratePlan}${
+		contribution !== undefined ? `&contribution=${contribution}` : ''
+	}`;
 
 	const alreadyHasQueryString = url.includes('?');
 	return `${url}${alreadyHasQueryString ? '&' : '?'}${newParams}`;

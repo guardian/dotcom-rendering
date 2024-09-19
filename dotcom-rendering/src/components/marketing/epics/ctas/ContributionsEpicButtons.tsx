@@ -7,7 +7,10 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
 import { space } from '@guardian/source/foundations';
-import { SecondaryCtaType } from '@guardian/support-dotcom-components';
+import {
+	countryCodeToCountryGroupId,
+	SecondaryCtaType,
+} from '@guardian/support-dotcom-components';
 import type { EpicVariant } from '@guardian/support-dotcom-components/dist/shared/src/types/abTests/epic';
 import type {
 	Cta,
@@ -27,7 +30,10 @@ import {
 	OPHAN_COMPONENT_EVENT_CTAS_VIEW,
 	OPHAN_COMPONENT_EVENT_REMINDER_OPEN,
 } from '../utils/ophan';
-import type { SupportTier } from '../utils/threeTierChoiceCardAmounts';
+import {
+	type SupportTier,
+	threeTierChoiceCardAmounts,
+} from '../utils/threeTierChoiceCardAmounts';
 import { EpicButton } from './EpicButton';
 
 const paymentImageStyles = css`
@@ -198,12 +204,20 @@ export const ContributionsEpicButtons = ({
 				};
 			}
 
+			/** Contribution amount is variable, unlike the SupporterPlus amount which is fixed */
+			const countryGroupId = countryCodeToCountryGroupId(countryCode);
+			const contributionAmount =
+				threeTierChoiceCardSelectedProduct === 'Contribution'
+					? threeTierChoiceCardAmounts[countryGroupId].Contribution
+					: undefined;
+
 			return {
 				text: cta.text,
 				baseUrl: addChoiceCardsProductParams(
 					'https://support.theguardian.com/checkout',
 					threeTierChoiceCardSelectedProduct,
 					'Monthly',
+					contributionAmount,
 				),
 			};
 		}
