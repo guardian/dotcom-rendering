@@ -14,6 +14,11 @@
 import type { Article } from '../../../src/types/article';
 
 export const NumberedList: Article = {
+	format: {
+		display: 3,
+		theme: 0,
+		design: 5,
+	},
 	frontendData: {
 		version: 3,
 		headline:

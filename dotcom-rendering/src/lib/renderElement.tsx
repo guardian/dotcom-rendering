@@ -820,12 +820,13 @@ export const renderElement = ({
 			return (
 				<Island priority="critical" defer={{ until: 'visible' }}>
 					<YoutubeBlockComponent
-						format={format}
-						key={index}
-						hideCaption={hideCaption}
-						isMainMedia={isMainMedia}
 						id={element.id}
 						assetId={element.assetId}
+						key={index}
+						index={index}
+						format={format}
+						hideCaption={hideCaption}
+						isMainMedia={isMainMedia}
 						expired={element.expired}
 						overrideImage={element.overrideImage}
 						posterImage={element.posterImage}

@@ -63,3 +63,10 @@ export const WithSignInPrompt = () => {
 		/>
 	);
 };
+
+/** We show a "Newsletters" link instead of "Search jobs" for AU edition */
+export const OnAUEdition = {
+	args: {
+		editionId: 'AU',
+	},
+};

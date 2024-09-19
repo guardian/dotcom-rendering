@@ -110,7 +110,7 @@ export const OneCardLayout = ({
 				<FrontCard
 					trail={card}
 					containerPalette={containerPalette}
-					containerType="flexible/special"
+					containerType="flexible/general"
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
 					headlineSize={headlineSize}
@@ -152,7 +152,7 @@ const TwoCardOrFourCardLayout = ({
 }) => {
 	const hasTwoOrFewerCards = cards.length <= 2;
 	return (
-		<UL direction="row" padBottom={padBottom} showTopBar={true}>
+		<UL direction="row" padBottom={padBottom}>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI
@@ -173,8 +173,7 @@ const TwoCardOrFourCardLayout = ({
 							imagePositionOnDesktop={
 								hasTwoOrFewerCards ? 'left' : 'bottom'
 							}
-							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
-							supportingContent={undefined}
+							supportingContent={undefined} // we don't want to support sublinks on standard cards here so we hard code to undefined.
 							imageSize={'medium'}
 							aspectRatio="5:4"
 							kickerText={card.kickerText}
@@ -187,27 +186,18 @@ const TwoCardOrFourCardLayout = ({
 	);
 };
 
-export const FlexibleSpecial = ({
+export const FlexibleGeneral = ({
 	groupedTrails,
 	containerPalette,
 	showAge,
 	absoluteServerTimes,
 	imageLoading,
 }: Props) => {
-	const snaps = [...groupedTrails.snap].slice(0, 1);
-	const splash = [...groupedTrails.standard].slice(0, 1);
-	const cards = [...groupedTrails.standard].slice(1, 5);
+	const splash = [...groupedTrails.splash].slice(0, 1);
+	const cards = [...groupedTrails.standard].slice(0, 8); // TODO check maximum number of cards
 
 	return (
 		<>
-			<OneCardLayout
-				cards={snaps}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				absoluteServerTimes={absoluteServerTimes}
-				imageLoading={imageLoading}
-			/>
-
 			<OneCardLayout
 				cards={splash}
 				containerPalette={containerPalette}

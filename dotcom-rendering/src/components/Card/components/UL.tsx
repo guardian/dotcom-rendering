@@ -38,6 +38,22 @@ const marginBottomStyles = css`
 	margin-bottom: ${space[3]}px;
 `;
 
+const topBarStyles = css`
+	${from.tablet} {
+		padding-top: 8px;
+		::before {
+			content: '';
+			display: block;
+			position: absolute;
+			top: 0px;
+			left: 10px;
+			width: calc(100% - 20px);
+			height: 1px;
+			background-color: ${palette('--card-border-top')};
+		}
+	}
+`;
+
 type Props = {
 	children: React.ReactNode;
 	/** Passed to flex-direction */
@@ -48,6 +64,8 @@ type Props = {
 	padBottom?: boolean;
 	/** Used to keep cards aligned in adjacent columns */
 	wrapCards?: boolean;
+	/** Used to display a full width bar along the top of the container */
+	showTopBar?: boolean;
 };
 
 export const UL = ({
@@ -56,6 +74,7 @@ export const UL = ({
 	showDivider = false,
 	padBottom = false,
 	wrapCards = false,
+	showTopBar = false,
 }: Props) => {
 	return (
 		<ul
@@ -64,6 +83,7 @@ export const UL = ({
 				showDivider && verticalDivider(palette('--section-border')),
 				padBottom && marginBottomStyles,
 				wrapCards && wrapStyles,
+				showTopBar && topBarStyles,
 			]}
 		>
 			{children}

@@ -14,6 +14,11 @@
 import type { Article } from '../../../src/types/article';
 
 export const PhotoEssay: Article = {
+	format: {
+		display: 1,
+		theme: 4,
+		design: 19,
+	},
 	frontendData: {
 		version: 3,
 		headline: 'My year of roaming free in Cornwall',

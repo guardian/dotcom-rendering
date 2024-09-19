@@ -25,6 +25,7 @@ const defaultGroupedTrails: DCRGroupedTrails = {
 	big: [],
 	standard: [],
 	snap: [],
+	splash: [],
 };
 
 /* First Slice Variants */

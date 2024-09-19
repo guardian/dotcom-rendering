@@ -12,11 +12,10 @@ const target = path.resolve(dirname, '../..', 'target');
  * ├── build.json
  * ├── riff-raff.yaml
  * ├── ${copyFrontendStatic()}
- * ├── ${copyApp('rendering')} // existing rendering app
- * ├── ${copyApp('article-rendering')} // new article-rendering app
- * ├── ${copyApp('facia-rendering')} // new facia-rendering app
+ * ├── ${copyApp('article-rendering')}
+ * ├── ${copyApp('facia-rendering')}
  * ├── ${copyApp('tag-page-rendering')}
- * └── ${copyApp('interactive-rendering')} // new interactive-rendering app
+ * └── ${copyApp('interactive-rendering')}
  */
 
 /**
@@ -32,9 +31,7 @@ const target = path.resolve(dirname, '../..', 'target');
  *     └── dist
  *         └── ${guAppName}.zip
  *
- *  Except for the instance where appName === 'rendering' due to backwards compatibility
- *
- * @param guAppName {`${'article' | 'facia' | 'interactive' | 'tag-page'}-rendering` | 'rendering'}
+ * @param guAppName {`${'article' | 'facia' | 'interactive' | 'tag-page'}-rendering`}
  **/
 const copyApp = (guAppName) => {
 	/**
@@ -51,13 +48,8 @@ const copyApp = (guAppName) => {
 	 * @param {"CODE" | "PROD"} stage
 	 * @returns {string}
 	 */
-	const cfnTemplateName = (stage) => {
-		if (guAppName === 'rendering') {
-			return `DotcomRendering-${stage}.template.json`;
-		} else {
-			return `${kebabToPascalCase(guAppName)}-${stage}.template.json`;
-		}
-	};
+	const cfnTemplateName = (stage) =>
+		`${kebabToPascalCase(guAppName)}-${stage}.template.json`;
 
 	const cfnFolder = `${guAppName}-cfn`;
 
@@ -152,7 +144,6 @@ const copyRiffRaff = () => {
 };
 
 Promise.all([
-	...copyApp('rendering'), // existing rendering app
 	...copyApp('article-rendering'),
 	...copyApp('facia-rendering'),
 	...copyApp('tag-page-rendering'),

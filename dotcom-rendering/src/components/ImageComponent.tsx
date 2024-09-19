@@ -14,7 +14,6 @@ import {
 	palette as srcPalette,
 	until,
 } from '@guardian/source/foundations';
-import { decidePalette } from '../lib/decidePalette';
 import { getLargest, getMaster } from '../lib/image';
 import { palette as themePalette } from '../palette';
 import type {
@@ -22,7 +21,6 @@ import type {
 	StarRating as Rating,
 	RoleType,
 } from '../types/content';
-import type { Palette } from '../types/palette';
 import { AppsLightboxImage } from './AppsLightboxImage.importable';
 import { Caption } from './Caption';
 import { useConfig } from './ConfigContext';
@@ -144,7 +142,7 @@ const immersiveTitleWrapper = css`
 		${headlineLight34};
 	}
 `;
-const titleWrapper = (palette: Palette) => css`
+const titleWrapper = css`
 	position: absolute;
 	bottom: 0;
 	width: 100%;
@@ -163,7 +161,7 @@ const titleWrapper = (palette: Palette) => css`
 	background: linear-gradient(transparent, ${srcPalette.neutral[0]});
 
 	:before {
-		background-color: ${palette.background.imageTitle};
+		background-color: ${themePalette('--image-title-background')};
 		display: block;
 		content: '';
 		width: 8.75rem;
@@ -178,31 +176,19 @@ const titleWrapper = (palette: Palette) => css`
 	}
 `;
 
-const ImageTitle = ({
-	title,
-	role,
-	palette,
-}: {
-	title: string;
-	role: RoleType;
-	palette: Palette;
-}) => {
+const ImageTitle = ({ title, role }: { title: string; role: RoleType }) => {
 	switch (role) {
 		case 'inline':
 		case 'thumbnail':
 		case 'halfWidth':
 		case 'supporting':
-			return (
-				<h2 css={[titleWrapper(palette), basicTitlePadding]}>
-					{title}
-				</h2>
-			);
+			return <h2 css={[titleWrapper, basicTitlePadding]}>{title}</h2>;
 		case 'showcase':
 		case 'immersive':
 			return (
 				<h2
 					css={[
-						titleWrapper(palette),
+						titleWrapper,
 						immersiveTitleWrapper,
 						moreTitlePadding,
 					]}
@@ -318,8 +304,6 @@ export const ImageComponent = ({
 	const imageWidth = parseInt(image.fields.width, 10);
 	const imageHeight = parseInt(image.fields.height, 10);
 
-	const palette = decidePalette(format);
-
 	const loading = isMainMedia ? 'eager' : 'lazy';
 
 	if (
@@ -382,9 +366,7 @@ export const ImageComponent = ({
 					/>
 				)}
 
-				{!!title && (
-					<ImageTitle title={title} role={role} palette={palette} />
-				)}
+				{!!title && <ImageTitle title={title} role={role} />}
 				{isWeb && !isUndefined(element.position) && (
 					<LightboxLink
 						role={role}
@@ -450,9 +432,7 @@ export const ImageComponent = ({
 				{!isUndefined(starRating) ? (
 					<PositionStarRating rating={starRating} />
 				) : null}
-				{!!title && (
-					<ImageTitle title={title} role={role} palette={palette} />
-				)}
+				{!!title && <ImageTitle title={title} role={role} />}
 				{isWeb && !isUndefined(element.position) && (
 					<LightboxLink
 						role={role}
@@ -556,9 +536,7 @@ export const ImageComponent = ({
 				{!isUndefined(starRating) ? (
 					<PositionStarRating rating={starRating} />
 				) : null}
-				{!!title && (
-					<ImageTitle title={title} role={role} palette={palette} />
-				)}
+				{!!title && <ImageTitle title={title} role={role} />}
 
 				{isWeb && !isUndefined(element.position) && (
 					<LightboxLink
