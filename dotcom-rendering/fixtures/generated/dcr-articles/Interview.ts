@@ -14,6 +14,11 @@
 import type { Article } from '../../../src/types/article';
 
 export const Interview: Article = {
+	format: {
+		display: 2,
+		theme: 0,
+		design: 15,
+	},
 	frontendData: {
 		version: 3,
 		headline:

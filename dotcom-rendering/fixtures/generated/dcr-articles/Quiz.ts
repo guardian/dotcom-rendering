@@ -14,6 +14,11 @@
 import type { Article } from '../../../src/types/article';
 
 export const Quiz: Article = {
+	format: {
+		display: 2,
+		theme: 2,
+		design: 17,
+	},
 	frontendData: {
 		version: 3,
 		headline: 'Sports quiz: football in the 1980s',

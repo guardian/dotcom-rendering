@@ -14,6 +14,11 @@
 import type { Article } from '../../../src/types/article';
 
 export const PrintShop: Article = {
+	format: {
+		display: 1,
+		theme: 3,
+		design: 20,
+	},
 	frontendData: {
 		version: 3,
 		headline: 'Buy a classic sport photograph: the immortal Bobby Moore',
