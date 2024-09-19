@@ -165,7 +165,7 @@ export const SupportingContent = ({
 						key={subLink.url}
 						css={[
 							sublinkBaseStyles,
-							alignment === 'horizontal'
+							isDynamo ?? alignment === 'horizontal'
 								? horizontalSublinkStyles(columnSpan)
 								: verticalSublinkStyles,
 						]}
