@@ -426,7 +426,7 @@ export const Card = ({
 			{headlinePosition === 'outer' && (
 				<div
 					css={css`
-						padding-bottom: 8px;
+						padding-bottom: ${space[5]}px;
 					`}
 					style={{ backgroundColor: cardBackgroundColour }}
 				>
