@@ -124,7 +124,8 @@ const wrapperStyles = css`
 const backgroundFill = css`
 	/** background fill should only apply to sublinks on mobile breakpoints */
 	${until.tablet} {
-		padding: 8px;
+		padding: ${space[2]}px;
+		padding-bottom: ${space[3]}px;
 		background-color: ${palette('--card-sublinks-background')};
 	}
 `;
