@@ -25,7 +25,7 @@ export const radioButtonWrapperStyles = (theme: ArticleTheme) => css`
 		background-color: ${schemedPalette('--quiz-atom-answers-background')};
 
 		:hover {
-			background-color: ${palette.neutral[86]};
+			background-color: ${schemedPalette('--quiz-atom-answers-hover')};
 		}
 		/* TODO: apply same styles on focus (requires source update) */
 

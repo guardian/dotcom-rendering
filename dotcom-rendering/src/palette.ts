@@ -6568,6 +6568,10 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[97],
 		dark: () => sourcePalette.neutral[20],
 	},
+	'--quiz-atom-answers-hover': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[38],
+	},
 	'--quiz-atom-check-mark': {
 		light: () => sourcePalette.neutral[0],
 		dark: () => sourcePalette.neutral[97],
