@@ -9,7 +9,7 @@ const submitConsentToOphan = async (renderingTarget: RenderingTarget) => {
 	const consentState: ConsentState = await onConsent();
 
 	const consentDetails = (): {
-		consentJurisdiction: 'TCF' | 'CCPA' | 'AUS' | 'OTHER';
+		consentJurisdiction: 'TCF' | 'USNAT' | 'AUS' | 'OTHER';
 		consentUUID: string;
 		consent: string;
 	} => {
@@ -20,11 +20,15 @@ const submitConsentToOphan = async (renderingTarget: RenderingTarget) => {
 				consent: consentState.tcfv2.tcString,
 			};
 		}
-		if (consentState.ccpa) {
+		if (consentState.usnat) {
+			// Users who interacted with the CCPA banner before the migration to usnat will still have a ccpaUUID cookie. The usnatUUID cookie is set when the USNAT banner is interacted with. We need to check both cookies to ensure we have the correct consentUUID.
+			const consentUUID =
+				getCookie({ name: 'usnatUUID' }) ??
+				getCookie({ name: 'ccpaUUID' });
 			return {
-				consentJurisdiction: 'CCPA',
-				consentUUID: getCookie({ name: 'ccpaUUID' }) ?? '',
-				consent: consentState.ccpa.doNotSell ? 'false' : 'true',
+				consentJurisdiction: 'USNAT',
+				consentUUID: consentUUID ?? '',
+				consent: consentState.usnat.doNotSell ? 'false' : 'true',
 			};
 		}
 		if (consentState.aus) {
