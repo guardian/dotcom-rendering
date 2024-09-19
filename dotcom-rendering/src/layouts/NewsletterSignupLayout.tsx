@@ -249,7 +249,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 				/>
 			</div>
 
-			{renderAds && !!article.config.switches.surveys && hasSurveyAd && (
+			{renderAds && hasSurveyAd && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 
