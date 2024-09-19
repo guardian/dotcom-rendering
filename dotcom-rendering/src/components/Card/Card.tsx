@@ -114,6 +114,8 @@ export type Props = {
 	/** Alows the consumer to use a larger font size group for boost styling*/
 	boostedFontSizes?: boolean;
 	index?: number;
+	/** The Splash card in a flexible container gets a different visual treatment to other cards*/
+	isFlexSplash?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -197,17 +199,6 @@ const isWithinTwelveHours = (webPublicationDate: string): boolean => {
 	return timeDiffHours <= 12;
 };
 
-const decideHeadlinePosition = (
-	imageSize?: ImageSizeType,
-	containerType?: DCRContainerType,
-) => {
-	if (imageSize === 'jumbo' && containerType === 'flexible/special') {
-		return 'outer';
-	}
-
-	return 'inner';
-};
-
 export const Card = ({
 	linkTo,
 	format,
@@ -257,6 +248,7 @@ export const Card = ({
 	aspectRatio,
 	boostedFontSizes,
 	index = 0,
+	isFlexSplash,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -264,8 +256,6 @@ export const Card = ({
 		imagePositionOnDesktop,
 		supportingContentAlignment,
 	);
-	const headlinePosition = decideHeadlinePosition(imageSize, containerType);
-
 	const showQuotes = !!showQuotedHeadline;
 
 	const isOpinion =
@@ -369,10 +359,14 @@ export const Card = ({
 	/* Whilst we migrate to the new container types, we need to check which container we are in. */
 	const isFlexibleContainer = containerType === 'flexible/special';
 
+	const headlinePosition =
+		isFlexSplash && isFlexibleContainer ? 'outer' : 'inner';
+
 	/** Determines the gap of between card components based on card properties */
 	const getGapSize = (): GapSize => {
 		if (isOnwardContent) return 'none';
 		if (hasBackgroundColour) return 'small';
+		if (isFlexSplash) return 'medium';
 		if (
 			isFlexibleContainer &&
 			(imagePositionOnDesktop === 'left' ||
@@ -404,7 +398,7 @@ export const Card = ({
 			);
 		}
 		return (
-			<Hide from="tablet">
+			<Hide from={isFlexSplash ? 'tablet' : 'desktop'}>
 				<SupportingContent
 					supportingContent={supportingContent}
 					containerPalette={containerPalette}
@@ -689,9 +683,7 @@ export const Card = ({
 									}
 									imageSize={imageSize}
 									imageType={media?.type}
-									shouldHide={
-										isFlexibleContainer ? false : true
-									}
+									shouldHide={isFlexSplash ? false : true}
 								>
 									<div
 										dangerouslySetInnerHTML={{
@@ -744,7 +736,9 @@ export const Card = ({
 							)}
 
 							{hasSublinks && sublinkPosition === 'inner' && (
-								<Hide until="tablet">
+								<Hide
+									until={isFlexSplash ? 'tablet' : 'desktop'}
+								>
 									<SupportingContent
 										supportingContent={supportingContent}
 										alignment="vertical"
