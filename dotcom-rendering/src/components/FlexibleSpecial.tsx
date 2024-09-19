@@ -152,7 +152,7 @@ const TwoCardOrFourCardLayout = ({
 }) => {
 	const hasTwoOrFewerCards = cards.length <= 2;
 	return (
-		<UL direction="row" padBottom={padBottom}>
+		<UL direction="row" padBottom={padBottom} showTopBar={true}>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI
@@ -173,7 +173,8 @@ const TwoCardOrFourCardLayout = ({
 							imagePositionOnDesktop={
 								hasTwoOrFewerCards ? 'left' : 'bottom'
 							}
-							supportingContent={undefined} // we don't want to support sublinks on standard cards here so we hard code to undefined.
+							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
+							supportingContent={undefined}
 							imageSize={'medium'}
 							aspectRatio="5:4"
 							kickerText={card.kickerText}
