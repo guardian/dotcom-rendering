@@ -1,17 +1,5 @@
-import { css } from '@emotion/react';
-import { MediaEvent } from '@guardian/bridget/MediaEvent';
-import {
-	type ArticleFormat,
-	type ConsentState,
-	isUndefined,
-	log,
-} from '@guardian/libs';
-import type { EventPayload, VideoEvent } from '@guardian/ophan-tracker-js';
-import { body, palette, space } from '@guardian/source/foundations';
-import { SvgAlertRound } from '@guardian/source/react-components';
-import { useCallback, useEffect, useState } from 'react';
-import { getOphan } from '../client/ophan/ophan';
-import { getVideoClient } from '../lib/bridgetApi';
+import { type ArticleFormat, type ConsentState } from '@guardian/libs';
+import { useEffect, useState } from 'react';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import { Caption } from './Caption';
@@ -20,13 +8,16 @@ import type {
 	ImageSizeType,
 } from './Card/components/ImageWrapper';
 import { useConfig } from './ConfigContext';
-import { type VideoEventKey, YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
+import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
+import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
+import { YoutubeAtomExpiredOverlay } from './YoutubeAtom/YoutubeAtomExpiredOverlay';
 
 type Props = {
 	id: string;
+	assetId: string;
+	index: number;
 	mediaTitle?: string;
 	altText?: string;
-	assetId: string;
 	expired: boolean;
 	format: ArticleFormat;
 	hideCaption?: boolean;
@@ -50,43 +41,6 @@ type Props = {
 	enableAds: boolean;
 };
 
-const expiredOverlayStyles = (overrideImage?: string) =>
-	overrideImage
-		? css`
-				height: 0px;
-				position: relative;
-				background-image: url(${overrideImage});
-				background-size: cover;
-				background-position: 49% 49%;
-				background-repeat: no-repeat;
-				padding-bottom: 56%;
-				color: ${palette.neutral[100]};
-				background-color: ${palette.neutral[20]};
-		  `
-		: undefined;
-
-const expiredTextWrapperStyles = css`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-
-	padding-top: ${space[4]}px;
-	padding-bottom: ${space[4]}px;
-	padding-left: ${space[1]}px;
-	padding-right: ${space[12]}px;
-	color: ${palette.neutral[100]};
-	background-color: ${palette.neutral[20]};
-`;
-
-const expiredSVGWrapperStyles = css`
-	padding-right: ${space[1]}px;
-	svg {
-		width: ${space[12]}px;
-		height: ${space[12]}px;
-		fill: ${palette.neutral[100]};
-	}
-`;
-
 /**
  * We do our own image optimization in DCR and only need 1 image. Pick the largest image available to
  * us to avoid up-scaling later.
@@ -101,35 +55,12 @@ const getLargestImageSize = (
 	}[],
 ) => [...images].sort((a, b) => a.width - b.width).pop();
 
-/** always undefined on the server */
-let counter: number | undefined;
-
 const adTargetingDisabled: AdTargeting = { disableAds: true };
-
-const getAppsMediaEvent = (
-	trackingEvent: VideoEventKey,
-): MediaEvent | undefined => {
-	switch (trackingEvent) {
-		case 'cued':
-			return MediaEvent.ready;
-		case 'play':
-			return MediaEvent.play;
-		case '25':
-			return MediaEvent.percent25;
-		case '50':
-			return MediaEvent.percent50;
-		case '75':
-			return MediaEvent.percent75;
-		case 'end':
-			return MediaEvent.end;
-		default:
-			return undefined;
-	}
-};
 
 export const YoutubeBlockComponent = ({
 	id,
 	assetId,
+	index,
 	mediaTitle,
 	altText,
 	format,
@@ -160,12 +91,12 @@ export const YoutubeBlockComponent = ({
 	const abTests = useAB();
 	const abTestParticipations = abTests?.participations ?? {};
 
-	const [index, setIndex] = useState<number>();
-
-	useEffect(() => {
-		counter ??= 0;
-		setIndex(++counter);
-	}, []);
+	/**
+	 * It's possible to have duplicate video atoms on the same page
+	 * For example liveblogs can have the same video for the main media and in a subsequent block
+	 * We need to ensure a unique id for each YouTube player on the page.
+	 */
+	const uniqueId = `${assetId}-${index}`;
 
 	useEffect(() => {
 		if (renderingTarget === 'Web') {
@@ -194,89 +125,24 @@ export const YoutubeBlockComponent = ({
 		}
 	}, [renderingTarget]);
 
-	const ophanTrackerWeb = useCallback(
-		(trackingEvent: VideoEventKey) => {
-			void getOphan('Web').then((ophan) => {
-				const event = {
-					video: {
-						id: `gu-video-youtube-${id}`,
-						eventType: `video:content:${trackingEvent}`,
-					} satisfies VideoEvent,
-				} satisfies EventPayload;
-				log('dotcom', {
-					from: 'YoutubeAtom event emitter web',
-					id,
-					event,
-				});
-				ophan.record(event);
-			});
-		},
-		[id],
-	);
-
-	const ophanTrackerApps = useCallback(
-		(trackingEvent: VideoEventKey) => {
-			const appsMediaEvent = getAppsMediaEvent(trackingEvent);
-			if (!isUndefined(appsMediaEvent)) {
-				const event = {
-					videoId: id,
-					event: appsMediaEvent,
-				};
-				log('dotcom', {
-					from: 'YoutubeAtom event emitter apps',
-					id,
-					event,
-				});
-				void getVideoClient().sendVideoEvent(event);
-			}
-		},
-		[id],
-	);
-
 	if (expired) {
 		return (
-			<figure
-				css={css`
-					margin-top: 16px;
-					margin-bottom: 16px;
-				`}
-			>
-				<div css={expiredOverlayStyles(overrideImage)}>
-					<div css={expiredTextWrapperStyles}>
-						<div css={expiredSVGWrapperStyles}>
-							<SvgAlertRound />
-						</div>
-						<p
-							css={css`
-								${body.medium({
-									lineHeight: 'tight',
-								})}
-							`}
-						>
-							This video has been removed. This could be because
-							it launched early, our rights have expired, there
-							was a legal issue, or for another reason.
-						</p>
-					</div>
-				</div>
-				{!hideCaption && (
-					<Caption
-						captionText={mediaTitle ?? ''}
-						format={format}
-						displayCredit={false}
-						mediaType="Video"
-						isMainMedia={isMainMedia}
-					/>
-				)}
-			</figure>
+			<YoutubeAtomExpiredOverlay
+				format={format}
+				hideCaption={hideCaption}
+				isMainMedia={isMainMedia}
+				mediaTitle={mediaTitle}
+				overrideImage={overrideImage}
+			/>
 		);
 	}
 
 	return (
-		<div data-chromatic="ignore" data-component="youtube-atom">
+		<div data-chromatic="ignore">
 			<YoutubeAtom
-				index={index}
+				atomId={id}
 				videoId={assetId}
+				uniqueId={uniqueId}
 				overrideImage={overrideImage}
 				posterImage={getLargestImageSize(posterImage)?.url}
 				alt={altText ?? mediaTitle ?? ''}
@@ -292,8 +158,8 @@ export const YoutubeBlockComponent = ({
 				duration={duration}
 				eventEmitters={
 					renderingTarget === 'Web'
-						? [ophanTrackerWeb]
-						: [ophanTrackerApps]
+						? [ophanTrackerWeb(id)]
+						: [ophanTrackerApps(id)]
 				}
 				format={format}
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
