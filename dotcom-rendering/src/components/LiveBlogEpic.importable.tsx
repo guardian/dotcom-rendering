@@ -30,7 +30,7 @@ type Props = {
 	keywordIds: string;
 };
 
-const useEpic = ({ url, name }: { url: string; name: string }) => {
+const useEpic = ({ name }: { name: string }) => {
 	// Using state here to store the Epic component that gets imported allows
 	// us to render it with React (instead of inserting it into the dom manually)
 	const [Epic, setEpic] =
@@ -51,7 +51,7 @@ const useEpic = ({ url, name }: { url: string; name: string }) => {
 					'liveblog-epic',
 				);
 			});
-	}, [url, name]);
+	}, [name]);
 
 	return { Epic };
 };
@@ -145,21 +145,18 @@ const usePayload = ({
  * Dynamically imports and renders a given module
  *
  * @param props
- * @param props.url string - The url of the component
  * @param props.name tring - The name of the component
  * @param props.props object - The props of the component
  * @returns The resulting react component
  */
 const Render = ({
-	url,
 	name,
 	props,
 }: {
-	url: string;
 	name: string;
 	props: { [key: string]: unknown };
 }) => {
-	const { Epic } = useEpic({ url, name });
+	const { Epic } = useEpic({ name });
 
 	if (isUndefined(Epic)) return null;
 	log('dotcom', 'LiveBlogEpic has the Epic');
@@ -207,13 +204,7 @@ const Fetch = ({
 	};
 
 	// Take any returned module and render it
-	return (
-		<Render
-			url={response.data.module.url}
-			name={response.data.module.name}
-			props={props}
-		/>
-	);
+	return <Render name={response.data.module.name} props={props} />;
 };
 
 function insertAfter(referenceNode: HTMLElement, newNode: Element) {
@@ -227,7 +218,7 @@ function insertAfter(referenceNode: HTMLElement, newNode: Element) {
  *
  * 1. usePayload - Build the payload. The config object we send to contributions
  * 2. Fetch - POST the payload to the contributions endpoint
- * 3. Render - Take the url, props and name data we got in response to our fetch and dynamically import
+ * 3. Render - Take the props and name data we got in response to our fetch and dynamically import
  *    and render the Epic component using it
  *
  * ## Why does this need to be an Island?
