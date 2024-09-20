@@ -19,7 +19,7 @@ type Props = {
 	absoluteServerTimes: boolean;
 };
 
-type boostProperties = {
+type BoostProperties = {
 	headlineSize: SmallHeadlineSize;
 	headlineSizeOnMobile: SmallHeadlineSize;
 	headlineSizeOnTablet: SmallHeadlineSize;
@@ -32,9 +32,9 @@ type boostProperties = {
  * Boosting a card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
  */
 const determineCardProperties = (
-	boostLevel: BoostLevel = 'default',
+	boostLevel: BoostLevel,
 	supportingContentLength: number,
-): boostProperties => {
+): BoostProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
@@ -101,8 +101,8 @@ export const OneCardLayout = ({
 		imagePositionOnMobile,
 		supportingContentAlignment,
 	} = determineCardProperties(
-		card.boostLevel,
-		card?.supportingContent?.length ?? 0,
+		card.boostLevel ?? 'default',
+		card.supportingContent?.length ?? 0,
 	);
 	return (
 		<UL padBottom={true}>
