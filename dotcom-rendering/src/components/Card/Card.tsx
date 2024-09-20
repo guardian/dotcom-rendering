@@ -139,6 +139,25 @@ const StarRatingComponent = ({
 	</div>
 );
 
+const HorizontalDivider = () => (
+	<div
+		css={css`
+			${from.tablet} {
+				border-top: 1px solid ${themePalette('--card-border-top')};
+				height: 1px;
+				width: 50%;
+				${from.tablet} {
+					width: 100px;
+				}
+				${from.desktop} {
+					width: 140px;
+				}
+				margin-top: ${space[3]}px;
+			}
+		`}
+	/>
+);
+
 const getMedia = ({
 	imageUrl,
 	imageAltText,
@@ -391,7 +410,7 @@ export const Card = ({
 	 *
 	 */
 	const decideOuterSublinks = () => {
-		if (!supportingContent) return null;
+		if (!hasSublinks) return null;
 		if (sublinkPosition === 'none') return null;
 		if (sublinkPosition === 'outer') {
 			return (
@@ -400,16 +419,35 @@ export const Card = ({
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
 					isDynamo={isDynamo}
+					fillBackground={isFlexibleContainer}
 				/>
 			);
 		}
 		return (
-			<Hide from="tablet">
+			<Hide from={isFlexibleContainer ? 'tablet' : 'desktop'}>
 				<SupportingContent
 					supportingContent={supportingContent}
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
 					isDynamo={isDynamo}
+					fillBackground={isFlexibleContainer}
+				/>
+			</Hide>
+		);
+	};
+
+	const decideInnerSublinks = () => {
+		if (!hasSublinks) return null;
+		if (sublinkPosition !== 'inner') return null;
+		return (
+			<Hide until={isFlexibleContainer ? 'tablet' : 'desktop'}>
+				<SupportingContent
+					supportingContent={supportingContent}
+					/* inner links are always vertically stacked */
+					alignment="vertical"
+					containerPalette={containerPalette}
+					isDynamo={isDynamo}
+					fillBackground={isFlexibleContainer}
 				/>
 			</Hide>
 		);
@@ -720,6 +758,12 @@ export const Card = ({
 									showLivePlayable={showLivePlayable}
 								/>
 							)}
+							{sublinkPosition === 'outer' &&
+								supportingContentAlignment === 'horizontal' &&
+								(imagePositionOnDesktop === 'right' ||
+									imagePositionOnDesktop === 'left') && (
+									<HorizontalDivider />
+								)}
 						</div>
 
 						{/* This div is needed to push this content to the bottom of the card */}
@@ -743,16 +787,7 @@ export const Card = ({
 								</Island>
 							)}
 
-							{hasSublinks && sublinkPosition === 'inner' && (
-								<Hide until="tablet">
-									<SupportingContent
-										supportingContent={supportingContent}
-										alignment="vertical"
-										containerPalette={containerPalette}
-										isDynamo={isDynamo}
-									/>
-								</Hide>
-							)}
+							{decideInnerSublinks()}
 						</div>
 					</ContentWrapper>
 				)}

@@ -46,7 +46,7 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 
 	return cards.reduce<GroupedCards>((acc, card) => {
 		// Early return if the card is boosted since it takes up a whole row
-		if (card.boostLevel !== 'default') {
+		if (card.boostLevel && card.boostLevel !== 'default') {
 			return [...acc, createNewRow('oneCardBoosted', card)];
 		}
 
@@ -64,11 +64,7 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 	}, []);
 };
 
-/**
- * Boosting a splash card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
- */
-
-type boostedSplashProperties = {
+type BoostedSplashProperties = {
 	headlineSize: SmallHeadlineSize;
 	headlineSizeOnMobile: SmallHeadlineSize;
 	headlineSizeOnTablet: SmallHeadlineSize;
@@ -76,10 +72,14 @@ type boostedSplashProperties = {
 	imagePositionOnMobile: ImagePositionType;
 	supportingContentAlignment: Alignment;
 };
+
+/**
+ * Boosting a splash card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
+ */
 const decideSplashCardProperties = (
-	boostLevel: BoostLevel = 'default',
+	boostLevel: BoostLevel,
 	supportingContentLength: number,
-): boostedSplashProperties => {
+): BoostedSplashProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
@@ -147,9 +147,10 @@ export const SplashCardLayout = ({
 		imagePositionOnMobile,
 		supportingContentAlignment,
 	} = decideSplashCardProperties(
-		card.boostLevel,
-		card?.supportingContent?.length ?? 0,
+		card.boostLevel ?? 'default',
+		card.supportingContent?.length ?? 0,
 	);
+
 	return (
 		<UL padBottom={true}>
 			<LI padSides={true}>
@@ -179,19 +180,19 @@ export const SplashCardLayout = ({
 	);
 };
 
-/**
- * Boosting a splash card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
- */
-
-type boostedCardProperties = {
+type BoostedCardProperties = {
 	headlineSize: SmallHeadlineSize;
 	headlineSizeOnMobile: SmallHeadlineSize;
 	headlineSizeOnTablet: SmallHeadlineSize;
 	imageSize: ImageSizeType;
 };
+
+/**
+ * Boosting a standard card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
+ */
 const decideCardProperties = (
 	boostLevel: BoostLevel = 'boost',
-): boostedCardProperties => {
+): BoostedCardProperties => {
 	switch (boostLevel) {
 		case 'megaboost':
 			return {
@@ -318,7 +319,7 @@ export const FlexibleGeneral = ({
 	imageLoading,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1);
-	const cards = [...groupedTrails.standard].slice(0, 8); // TODO check maximum number of cards
+	const cards = [...groupedTrails.standard].slice(0, 8);
 	const groupedCards = decideCardPositions(cards);
 
 	return (
