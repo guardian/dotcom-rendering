@@ -19,7 +19,7 @@ type Props = {
 	absoluteServerTimes: boolean;
 };
 
-type BoostProperties = {
+type boostProperties = {
 	headlineSize: SmallHeadlineSize;
 	headlineSizeOnMobile: SmallHeadlineSize;
 	headlineSizeOnTablet: SmallHeadlineSize;
@@ -32,9 +32,9 @@ type BoostProperties = {
  * Boosting a card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
  */
 const determineCardProperties = (
-	boostLevel: BoostLevel,
+	boostLevel: BoostLevel = 'default',
 	supportingContentLength: number,
-): BoostProperties => {
+): boostProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
@@ -43,7 +43,7 @@ const determineCardProperties = (
 				headlineSizeOnMobile: 'tiny',
 				headlineSizeOnTablet: 'small',
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnMobile: 'top',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 			};
@@ -53,7 +53,7 @@ const determineCardProperties = (
 				headlineSizeOnMobile: 'small',
 				headlineSizeOnTablet: 'medium',
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnMobile: 'top',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 			};
@@ -63,7 +63,7 @@ const determineCardProperties = (
 				headlineSizeOnMobile: 'medium',
 				headlineSizeOnTablet: 'medium',
 				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnMobile: 'top',
 				supportingContentAlignment: 'horizontal',
 			};
 		case 'gigaboost':
@@ -72,7 +72,7 @@ const determineCardProperties = (
 				headlineSizeOnMobile: 'large',
 				headlineSizeOnTablet: 'large',
 				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnMobile: 'top',
 				supportingContentAlignment: 'horizontal',
 			};
 	}
@@ -101,8 +101,8 @@ export const OneCardLayout = ({
 		imagePositionOnMobile,
 		supportingContentAlignment,
 	} = determineCardProperties(
-		card.boostLevel ?? 'default',
-		card.supportingContent?.length ?? 0,
+		card.boostLevel,
+		card?.supportingContent?.length ?? 0,
 	);
 	return (
 		<UL padBottom={true}>
