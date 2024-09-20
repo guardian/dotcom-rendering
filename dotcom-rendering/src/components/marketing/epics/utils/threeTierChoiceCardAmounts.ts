@@ -1,50 +1,42 @@
-import {
-	countryCodeToCountryGroupId,
-	type CountryGroupId,
-} from '@guardian/support-dotcom-components';
+import { type CountryGroupId } from '@guardian/support-dotcom-components';
 
-export type SupportTier = 'support' | 'allAccess' | 'other';
+export type SupportTier = 'Contribution' | 'SupporterPlus' | 'OneOff';
 
 // ToDo: fetch this in a way that isn't hardcoded
 export const threeTierChoiceCardAmounts = {
 	GBPCountries: {
-		support: 4,
-		allAccess: 12,
-		other: 0,
+		Contribution: 4,
+		SupporterPlus: 12,
+		OneOff: 0,
 	},
 	UnitedStates: {
-		support: 5,
-		allAccess: 15,
-		other: 0,
+		Contribution: 5,
+		SupporterPlus: 15,
+		OneOff: 0,
 	},
 	AUDCountries: {
-		support: 10,
-		allAccess: 20,
-		other: 0,
+		Contribution: 10,
+		SupporterPlus: 20,
+		OneOff: 0,
 	},
 	EURCountries: {
-		support: 4,
-		allAccess: 12,
-		other: 0,
+		Contribution: 4,
+		SupporterPlus: 12,
+		OneOff: 0,
 	},
 	NZDCountries: {
-		support: 10,
-		allAccess: 20,
-		other: 0,
+		Contribution: 10,
+		SupporterPlus: 20,
+		OneOff: 0,
 	},
 	Canada: {
-		support: 5,
-		allAccess: 15,
-		other: 0,
+		Contribution: 5,
+		SupporterPlus: 15,
+		OneOff: 0,
 	},
 	International: {
-		support: 3,
-		allAccess: 15,
-		other: 0,
+		Contribution: 3,
+		SupporterPlus: 15,
+		OneOff: 0,
 	},
 } as const satisfies Record<CountryGroupId, Record<SupportTier, number>>;
-
-export function getDefaultThreeTierAmount(countryCode?: string): number {
-	const countryGroupId = countryCodeToCountryGroupId(countryCode);
-	return threeTierChoiceCardAmounts[countryGroupId].allAccess;
-}

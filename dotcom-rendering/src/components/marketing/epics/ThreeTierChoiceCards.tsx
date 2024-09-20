@@ -140,8 +140,8 @@ const RecommendedPill = () => {
 };
 
 type ThreeTierChoiceCardsProps = {
-	selectedAmount: number;
-	setSelectedAmount: Dispatch<SetStateAction<number>>;
+	selectedProduct: SupportTier;
+	setSelectedProduct: Dispatch<SetStateAction<SupportTier>>;
 	countryCode?: string;
 	variantOfChoiceCard: string;
 };
@@ -157,8 +157,8 @@ const getChoiceCardData = (choiceCardVariant: string): ChoiceInfo[] => {
 
 export const ThreeTierChoiceCards = ({
 	countryCode,
-	selectedAmount,
-	setSelectedAmount,
+	selectedProduct,
+	setSelectedProduct,
 	variantOfChoiceCard,
 }: ThreeTierChoiceCardsProps) => {
 	const currencySymbol = getLocalCurrencySymbol(countryCode);
@@ -185,7 +185,7 @@ export const ThreeTierChoiceCards = ({
 							supportTier,
 							countryGroupId,
 						);
-						const selected = selectedAmount === choiceAmount;
+						const selected = selectedProduct === supportTier;
 
 						return (
 							<div
@@ -219,9 +219,9 @@ export const ThreeTierChoiceCards = ({
 											) : undefined
 										}
 										checked={selected}
-										onChange={() =>
-											setSelectedAmount(choiceAmount)
-										}
+										onChange={() => {
+											setSelectedProduct(supportTier);
+										}}
 									/>
 								</div>
 							</div>
