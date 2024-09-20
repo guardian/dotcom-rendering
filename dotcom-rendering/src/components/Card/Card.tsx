@@ -154,7 +154,7 @@ const HorizontalDivider = () => (
 				${from.desktop} {
 					width: 140px;
 				}
-				margin-top: 12px;
+				margin-top: ${space[3]}px;
 			}
 		`}
 	/>
