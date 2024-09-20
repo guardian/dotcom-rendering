@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, type ArticleFormat, Pillar } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import { ArticleDesign, type ArticleFormat, Pillar } from '../lib/format';
 
 type Props = {
 	format: ArticleFormat;

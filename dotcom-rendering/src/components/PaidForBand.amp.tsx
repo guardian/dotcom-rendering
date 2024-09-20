@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleSpecial } from '@guardian/libs';
 import { from, palette, textSans15 } from '@guardian/source/foundations';
+import { ArticleSpecial } from '../lib/format';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 import LabsLogo from '../static/logos/the-guardian-labs.svg';

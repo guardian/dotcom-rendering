@@ -6,7 +6,7 @@ import {
 	ArticleFormat,
 	ArticleSpecial,
 	Pillar,
-} from '@guardian/libs';
+} from '../../src/lib/format';
 import {
 	palette as sourcePalette,
 	space,

@@ -1,7 +1,7 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta } from '@storybook/react';
 import type { CSSProperties } from 'react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import { ContainerOverrides } from './ContainerOverrides';

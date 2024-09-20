@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { textSans12, until } from '@guardian/source/foundations';
+import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import { palette } from '../palette';
 import { useConfig } from './ConfigContext';
 

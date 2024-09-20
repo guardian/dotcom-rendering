@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { GoalAttempts } from './GoalAttempts';
 
 export default {

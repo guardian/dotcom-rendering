@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
+import { space } from '@guardian/source/foundations';
+import { SvgCheckmark } from '@guardian/source/react-components';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '@guardian/libs';
-import { space } from '@guardian/source/foundations';
-import { SvgCheckmark } from '@guardian/source/react-components';
-import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+} from '../../lib/format';
 import { PillarButton } from './PillarButton';
 import { Row } from './Row';
 

@@ -1,6 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
-import { ArticleSpecial } from '@guardian/libs';
 import {
 	article17,
 	palette,
@@ -9,6 +7,7 @@ import {
 	textSans17,
 } from '@guardian/source/foundations';
 import { SvgCheckmark, SvgCross } from '@guardian/source/react-components';
+import { ArticleSpecial, type ArticleTheme } from '../lib/format';
 import { palette as schemedPalette } from '../palette';
 
 // We export Radio wrapper styles to override Source Radio buttons to align

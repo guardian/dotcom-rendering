@@ -1,4 +1,4 @@
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../lib/format';
 import type { Branding } from './branding';
 import type { BoostLevel, StarRating } from './content';
 import type { DCRFrontImage, DCRSnapType, DCRSupportingContent } from './front';

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import { useEffect, useState } from 'react';
+import type { ArticleFormat } from '../lib/format';
 import { paletteDeclarations } from '../palette';
 import { useConfig } from './ConfigContext';
 

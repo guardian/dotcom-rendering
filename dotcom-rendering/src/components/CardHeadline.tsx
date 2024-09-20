@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { type ArticleFormat, ArticleSpecial } from '@guardian/libs';
 import {
 	between,
 	from,
@@ -22,6 +21,7 @@ import {
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
 import React from 'react';
+import { type ArticleFormat, ArticleSpecial } from '../lib/format';
 import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
 import { Byline } from './Byline';

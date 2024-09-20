@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
+import { Hide } from '@guardian/source/react-components';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
-	isUndefined,
 	Pillar,
-} from '@guardian/libs';
-import { Hide } from '@guardian/source/react-components';
+} from '../lib/format';
 import type { CartoonBlockElement, Image } from '../types/content';
 import { AppsLightboxImage } from './AppsLightboxImage.importable';
 import { Caption } from './Caption';
