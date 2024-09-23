@@ -1,5 +1,11 @@
-import { ArticleSpecial, Pillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	exampleKnowledgeQuestions,
 	natureQuestions,
@@ -26,6 +32,15 @@ export const Default = {
 		sharingUrls,
 		theme: Pillar.News,
 	},
+	decorators: [
+		splitTheme([
+			{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Comment,
+				theme: Pillar.News,
+			},
+		]),
+	],
 } satisfies Story;
 
 export const BatchedResults = {
@@ -34,6 +49,15 @@ export const BatchedResults = {
 		questions: natureQuestions,
 		resultGroups: natureResultGroups,
 	},
+	decorators: [
+		splitTheme([
+			{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Comment,
+				theme: Pillar.News,
+			},
+		]),
+	],
 } satisfies Story;
 
 export const LabsTheme = {
@@ -41,4 +65,13 @@ export const LabsTheme = {
 		...Default.args,
 		theme: ArticleSpecial.Labs,
 	},
+	decorators: [
+		splitTheme([
+			{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Comment,
+				theme: ArticleSpecial.Labs,
+			},
+		]),
+	],
 } satisfies Story;
