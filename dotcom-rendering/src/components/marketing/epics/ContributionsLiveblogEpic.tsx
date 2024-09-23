@@ -38,9 +38,31 @@ const getBackgroundColour = (tracking: Tracking) => {
 		tracking.abTestName.includes('_LB_EPIC_BG_COLOUR') &&
 		tracking.abTestVariant === 'VARIANT'
 	) {
-		return palette.neutral[100]; // COLOUR CHANGE TO GO HERE
+		return palette.brand[800];
 	} else {
 		return palette.neutral[100];
+	}
+};
+
+const getHeadingBackgroundColour = (tracking: Tracking) => {
+	if (
+		tracking.abTestName.includes('_LB_EPIC_BG_COLOUR') &&
+		tracking.abTestVariant === 'VARIANT'
+	) {
+		return palette.brand[400];
+	} else {
+		return palette.brandAlt[400];
+	}
+};
+
+const getHeadingColour = (tracking: Tracking) => {
+	if (
+		tracking.abTestName.includes('_LB_EPIC_BG_COLOUR') &&
+		tracking.abTestVariant === 'VARIANT'
+	) {
+		return palette.neutral[100];
+	} else {
+		return palette.neutral[7];
 	}
 };
 
@@ -93,17 +115,18 @@ const textContainer = css`
 	}
 `;
 
-const yellowHeading = (clientName: string) => css`
+const yellowHeading = (tracking: Tracking) => css`
 	${headlineBold34};
 	font-size: 28px;
-	background-color: ${palette.brandAlt[400]};
+	color: ${getHeadingColour(tracking)};
+	background-color: ${getHeadingBackgroundColour(tracking)};
 	border-top: 1px solid ${palette.neutral[0]};
 	border-left: 1px solid ${palette.neutral[0]};
 	border-right: 1px solid ${palette.neutral[0]};
 
 	padding: 8px 10px 12px 10px;
 	${from.tablet} {
-		padding-left: ${clientName === 'dcr' ? '60px' : '80px'};
+		padding-left: ${tracking.clientName === 'dcr' ? '60px' : '80px'};
 		padding-right: 20px;
 	}
 `;
@@ -200,9 +223,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 	return (
 		<div data-testid="contributions-liveblog-epic" ref={setNode}>
 			{!!cleanHeading && (
-				<div css={yellowHeading(tracking.clientName)}>
-					{cleanHeading}
-				</div>
+				<div css={yellowHeading(tracking)}>{cleanHeading}</div>
 			)}
 			<section css={container(tracking)}>
 				<LiveblogEpicBody
