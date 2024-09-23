@@ -14,6 +14,11 @@
 import type { Article } from '../../../src/types/article';
 
 export const Audio: Article = {
+	format: {
+		display: 0,
+		theme: 0,
+		design: 0,
+	},
 	frontendData: {
 		version: 3,
 		headline:

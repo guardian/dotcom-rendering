@@ -3,6 +3,7 @@ import { trails } from './trails';
 
 const defaultGrouped = {
 	snap: [],
+	splash: [],
 	huge: [],
 	veryBig: [],
 	big: [],

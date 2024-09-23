@@ -18,6 +18,7 @@ const defaultGroupedTrails: DCRGroupedTrails = {
 	big: [],
 	standard: [],
 	snap: [],
+	splash: [],
 };
 
 export default {

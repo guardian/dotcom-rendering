@@ -14,6 +14,11 @@
 import type { Article } from '../../../src/types/article';
 
 export const Feature: Article = {
+	format: {
+		display: 0,
+		theme: 3,
+		design: 10,
+	},
 	frontendData: {
 		version: 3,
 		headline:

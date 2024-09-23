@@ -99,7 +99,7 @@ const ReaderRevenueLinksRemote = ({
 				setSupportHeaderResponse(module);
 
 				return (
-					module.url.includes('SignInPromptHeader')
+					module.name === 'SignInPromptHeader'
 						? /* webpackChunkName: "sign-in-prompt-header" */
 						  import(`./marketing/header/SignInPromptHeader`)
 						: /* webpackChunkName: "header" */

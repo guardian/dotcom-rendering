@@ -15,8 +15,11 @@ import {
 	containsNonArticleCountPlaceholder,
 	replaceNonArticleCountPlaceholders,
 } from '@guardian/support-dotcom-components';
-import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/src/types';
-import { useEffect, useState } from 'react';
+import type {
+	EpicProps,
+	Tracking,
+} from '@guardian/support-dotcom-components/dist/shared/src/types';
+import { useEffect } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { replaceArticleCount } from '../lib/replaceArticleCount';
@@ -25,16 +28,28 @@ import {
 	createViewEventFromTracking,
 } from '../lib/tracking';
 import { logEpicView } from '../lib/viewLog';
-import { ContributionsEpicCtas } from './ContributionsEpicCtas';
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
-import { ThreeTierChoiceCards } from './ThreeTierChoiceCards';
-import { getDefaultThreeTierAmount } from './utils/threeTierChoiceCardAmounts';
+import { ContributionsEpicCtasContainer } from './ctas/ContributionsEpicCtasContainer';
 
-const container = (clientName: string) => css`
+// Hard-coded AB TEST - picking up ab test name and variant name from the tracking object
+// then applying a different colour if it matches, or the default colour if it doesn't.
+const getBackgroundColour = (tracking: Tracking) => {
+	if (
+		tracking.abTestName.includes('_LB_EPIC_BG_COLOUR') &&
+		tracking.abTestVariant === 'VARIANT'
+	) {
+		return palette.neutral[100]; // COLOUR CHANGE TO GO HERE
+	} else {
+		return palette.neutral[100];
+	}
+};
+
+const container = (tracking: Tracking) => css`
 	padding: 6px 10px 28px 10px;
 	border-top: 1px solid ${palette.brandAlt[400]};
 	border-bottom: 1px solid ${palette.neutral[86]};
-	background: ${palette.neutral[100]};
+
+	background: ${getBackgroundColour(tracking)};
 
 	border: 1px solid ${palette.neutral[0]};
 
@@ -49,7 +64,7 @@ const container = (clientName: string) => css`
 	}
 
 	${from.tablet} {
-		padding-left: ${clientName === 'dcr' ? '60px' : '80px'};
+		padding-left: ${tracking.clientName === 'dcr' ? '60px' : '80px'};
 		padding-right: 20px;
 
 		& > * + * {
@@ -139,12 +154,6 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 }: EpicProps): JSX.Element => {
 	const { newsletterSignup } = variant;
 
-	const isNonVatCompliantCountry =
-		variant.choiceCardAmounts?.testName === 'VAT_COMPLIANCE';
-
-	const showChoiceCards =
-		variant.showChoiceCards && !isNonVatCompliantCountry;
-
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
 	});
@@ -181,23 +190,12 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 		replaceNonArticleCountPlaceholders(variant.heading) ||
 		'Support the Guardian';
 
-	const defaultThreeTierAmount = getDefaultThreeTierAmount(countryCode);
-	const [
-		threeTierChoiceCardSelectedAmount,
-		setThreeTierChoiceCardSelectedAmount,
-	] = useState<number>(defaultThreeTierAmount);
-
 	if (
 		cleanParagraphs.some(containsNonArticleCountPlaceholder) ||
 		containsNonArticleCountPlaceholder(cleanHeading)
 	) {
 		return <></>;
 	}
-
-	const variantOfChoiceCard =
-		countryCode === 'US'
-			? 'US_THREE_TIER_CHOICE_CARDS'
-			: 'THREE_TIER_CHOICE_CARDS';
 
 	return (
 		<div data-testid="contributions-liveblog-epic" ref={setNode}>
@@ -206,7 +204,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 					{cleanHeading}
 				</div>
 			)}
-			<section css={container(tracking.clientName)}>
+			<section css={container(tracking)}>
 				<LiveblogEpicBody
 					paragraphs={cleanParagraphs}
 					numArticles={articleCounts.forTargetedWeeks}
@@ -218,34 +216,15 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 						tracking={tracking}
 					/>
 				) : (
-					<>
-						{showChoiceCards && (
-							<ThreeTierChoiceCards
-								countryCode={countryCode}
-								selectedAmount={
-									threeTierChoiceCardSelectedAmount
-								}
-								setSelectedAmount={
-									setThreeTierChoiceCardSelectedAmount
-								}
-								variantOfChoiceCard={variantOfChoiceCard}
-							/>
-						)}
-						<ContributionsEpicCtas
-							variant={variant}
-							tracking={tracking}
-							countryCode={countryCode}
-							articleCounts={articleCounts}
-							onReminderOpen={onReminderOpen}
-							fetchEmail={fetchEmail}
-							submitComponentEvent={submitComponentEvent}
-							showChoiceCards={showChoiceCards}
-							threeTierChoiceCardSelectedAmount={
-								threeTierChoiceCardSelectedAmount
-							}
-							variantOfChoiceCard="THREE_TIER_CHOICE_CARDS"
-						/>
-					</>
+					<ContributionsEpicCtasContainer
+						variant={variant}
+						tracking={tracking}
+						countryCode={countryCode}
+						articleCounts={articleCounts}
+						onReminderOpen={onReminderOpen}
+						fetchEmail={fetchEmail}
+						submitComponentEvent={submitComponentEvent}
+					/>
 				)}
 			</section>
 		</div>
