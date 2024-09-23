@@ -14,6 +14,8 @@ type Props = {
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	showPlayIcon: boolean;
+	/** Flexible containers require different styling */
+	isFlexibleContainer?: boolean;
 };
 
 /**
@@ -52,6 +54,16 @@ const flexBasisStyles = ({
 			`;
 	}
 };
+/** Below tablet, we fix the size of the image and add a margin
+around it. The corresponding content flex grows to fill the space */
+const fixedImageWidth = (isFlexibleContainer: boolean) => css`
+	${until.tablet} {
+		width: ${isFlexibleContainer ? '97.5px' : '125px'};
+		flex-shrink: 0;
+		flex-basis: unset;
+		align-self: flex-start;
+	}
+`;
 
 export const ImageWrapper = ({
 	children,
@@ -60,6 +72,7 @@ export const ImageWrapper = ({
 	imagePositionOnDesktop,
 	imagePositionOnMobile,
 	showPlayIcon,
+	isFlexibleContainer = false,
 }: Props) => {
 	const isHorizontalOnDesktop =
 		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
@@ -90,17 +103,8 @@ export const ImageWrapper = ({
 							display: none;
 						}
 					`,
-				/* Below tablet, we fix the size of the image and add a margin
-				   around it. The corresponding content flex grows to fill the space */
-				isHorizontalOnMobile &&
-					css`
-						${until.tablet} {
-							width: 125px;
-							flex-shrink: 0;
-							flex-basis: unset;
-							align-self: flex-start;
-						}
-					`,
+				isHorizontalOnMobile && fixedImageWidth(isFlexibleContainer),
+
 				isHorizontalOnDesktop &&
 					css`
 						${from.tablet} {

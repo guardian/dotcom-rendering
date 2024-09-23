@@ -521,6 +521,7 @@ export const Card = ({
 						imagePositionOnDesktop={imagePositionOnDesktop}
 						imagePositionOnMobile={imagePositionOnMobile}
 						showPlayIcon={showPlayIcon}
+						isFlexibleContainer={isFlexibleContainer}
 					>
 						{media.type === 'slideshow' && (
 							<Slideshow
