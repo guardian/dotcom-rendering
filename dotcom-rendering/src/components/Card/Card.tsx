@@ -398,7 +398,7 @@ export const Card = ({
 			);
 		}
 		return (
-			<Hide from={isFlexSplash ? 'tablet' : 'desktop'}>
+			<Hide from={isFlexSplash ? 'desktop' : 'tablet'}>
 				<SupportingContent
 					supportingContent={supportingContent}
 					containerPalette={containerPalette}
@@ -737,7 +737,7 @@ export const Card = ({
 
 							{hasSublinks && sublinkPosition === 'inner' && (
 								<Hide
-									until={isFlexSplash ? 'tablet' : 'desktop'}
+									until={isFlexSplash ? 'desktop' : 'tablet'}
 								>
 									<SupportingContent
 										supportingContent={supportingContent}
