@@ -1,15 +1,15 @@
 import { css } from '@emotion/react';
 import { palette, space, textSansBold12 } from '@guardian/source/foundations';
-import { takeFirst } from '../lib/tuple';
-import type { DCRSlideshowImage } from '../types/front';
-import type { ImageSizeType } from './Card/components/ImageWrapper';
-import { CardPicture } from './CardPicture';
 import {
 	Button,
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
 import { useRef, useState } from 'react';
+import { takeFirst } from '../lib/tuple';
+import type { DCRSlideshowImage } from '../types/front';
+import type { ImageSizeType } from './Card/components/ImageWrapper';
+import { CardPicture } from './CardPicture';
 
 const carouselContainer = css`
 	display: flex;
