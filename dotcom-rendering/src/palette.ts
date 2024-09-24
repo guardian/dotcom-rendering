@@ -5619,6 +5619,10 @@ const imageTitleBackground: PaletteFunction = ({ design, theme }) => {
 const lightboxDivider: PaletteFunction = (format) =>
 	imageTitleBackground(format);
 
+const cardSublinksBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const cardSublinksBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
 // ----- Palette ----- //
 
 /**
@@ -5939,6 +5943,10 @@ const paletteColours = {
 	'--card-kicker-text': {
 		light: cardKickerTextLight,
 		dark: cardKickerTextDark,
+	},
+	'--card-sublinks-background': {
+		light: cardSublinksBackgroundLight,
+		dark: cardSublinksBackgroundDark,
 	},
 	'--carousel-active-dot': {
 		light: carouselActiveDotLight,
