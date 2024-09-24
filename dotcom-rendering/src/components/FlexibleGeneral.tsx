@@ -266,7 +266,6 @@ export const StandardCardLayout = ({
 	showAge,
 	absoluteServerTimes,
 	showImage = true,
-	padBottom,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
@@ -275,10 +274,9 @@ export const StandardCardLayout = ({
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	showImage?: boolean;
-	padBottom?: boolean;
 }) => {
 	return (
-		<UL direction="row" padBottom={padBottom} isFlexibleContainer={true}>
+		<UL direction="row" padBottom={true} isFlexibleContainer={true}>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI

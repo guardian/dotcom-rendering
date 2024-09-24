@@ -140,7 +140,6 @@ const TwoCardOrFourCardLayout = ({
 	showAge,
 	absoluteServerTimes,
 	showImage = true,
-	padBottom,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
@@ -149,13 +148,12 @@ const TwoCardOrFourCardLayout = ({
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	showImage?: boolean;
-	padBottom?: boolean;
 }) => {
 	const hasTwoOrFewerCards = cards.length <= 2;
 	return (
 		<UL
 			direction="row"
-			padBottom={padBottom}
+			padBottom={true}
 			showTopBar={true}
 			isFlexibleContainer={true}
 		>
