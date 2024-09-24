@@ -87,6 +87,20 @@ export const WithThreeTierChoiceCards: Story = {
 	},
 };
 
+export const WithThreeTierChoiceCardsForUS: Story = {
+	name: 'Contributions Liveblog Epic with Three Tier Choice Cards for US',
+	args: {
+		...meta.args,
+		countryCode: 'US',
+		variant: {
+			...props.variant,
+			name: 'US_CHECKOUT_PAGE',
+			secondaryCta: undefined,
+			showChoiceCards: true,
+		},
+	},
+};
+
 export const WithNewsletterSignup: Story = {
 	name: 'ContributionsEpic with newsletter signup',
 	args: {
