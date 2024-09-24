@@ -22,7 +22,10 @@ import {
 	ChoiceCardTestData_REGULAR,
 	ChoiceCardTestData_US,
 } from './ThreeTierChoiceCardData';
-import type { SupportTier } from './utils/threeTierChoiceCardAmounts';
+import type {
+	SupportRatePlan,
+	SupportTier,
+} from './utils/threeTierChoiceCardAmounts';
 import { threeTierChoiceCardAmounts } from './utils/threeTierChoiceCardAmounts';
 
 const supportTierChoiceCardStyles = (selected: boolean) => css`
@@ -103,9 +106,10 @@ export type ChoiceInfo = {
 
 function getChoiceAmount(
 	supportTier: SupportTier,
+	ratePlan: SupportRatePlan,
 	countryGroupId: CountryGroupId,
 ): number {
-	return threeTierChoiceCardAmounts[countryGroupId][supportTier];
+	return threeTierChoiceCardAmounts[ratePlan][countryGroupId][supportTier];
 }
 
 const SupportingBenefits = ({
@@ -183,6 +187,7 @@ export const ThreeTierChoiceCards = ({
 					}) => {
 						const choiceAmount = getChoiceAmount(
 							supportTier,
+							'Monthly',
 							countryGroupId,
 						);
 						const selected = selectedProduct === supportTier;

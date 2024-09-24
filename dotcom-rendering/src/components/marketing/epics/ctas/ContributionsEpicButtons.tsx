@@ -208,7 +208,8 @@ export const ContributionsEpicButtons = ({
 			const countryGroupId = countryCodeToCountryGroupId(countryCode);
 			const contributionAmount =
 				threeTierChoiceCardSelectedProduct === 'Contribution'
-					? threeTierChoiceCardAmounts[countryGroupId].Contribution
+					? threeTierChoiceCardAmounts['Monthly'][countryGroupId]
+							.Contribution
 					: undefined;
 
 			return {
