@@ -151,7 +151,7 @@ export const SplashCardLayout = ({
 		card?.supportingContent?.length ?? 0,
 	);
 	return (
-		<UL padBottom={true}>
+		<UL padBottom={true} isFlexibleContainer={true}>
 			<LI padSides={true}>
 				<FrontCard
 					trail={card}
@@ -234,7 +234,7 @@ export const BoostedCardLayout = ({
 		imageSize,
 	} = decideCardProperties(card.boostLevel);
 	return (
-		<UL padBottom={true}>
+		<UL padBottom={true} isFlexibleContainer={true}>
 			<LI padSides={true}>
 				<FrontCard
 					trail={card}
@@ -278,7 +278,7 @@ export const StandardCardLayout = ({
 	padBottom?: boolean;
 }) => {
 	return (
-		<UL direction="row" padBottom={padBottom}>
+		<UL direction="row" padBottom={padBottom} isFlexibleContainer={true}>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI

@@ -105,7 +105,7 @@ export const OneCardLayout = ({
 		card?.supportingContent?.length ?? 0,
 	);
 	return (
-		<UL padBottom={true}>
+		<UL padBottom={true} isFlexibleContainer={true}>
 			<LI padSides={true}>
 				<FrontCard
 					trail={card}
@@ -153,7 +153,12 @@ const TwoCardOrFourCardLayout = ({
 }) => {
 	const hasTwoOrFewerCards = cards.length <= 2;
 	return (
-		<UL direction="row" padBottom={padBottom} showTopBar={true}>
+		<UL
+			direction="row"
+			padBottom={padBottom}
+			showTopBar={true}
+			isFlexibleContainer={true}
+		>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI

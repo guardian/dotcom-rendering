@@ -34,6 +34,9 @@ const wrapStyles = css`
 	}
 `;
 
+const flexibleMarginBottomStyles = css`
+	margin-bottom: ${space[6]}px;
+`;
 const marginBottomStyles = css`
 	margin-bottom: ${space[3]}px;
 `;
@@ -66,6 +69,8 @@ type Props = {
 	wrapCards?: boolean;
 	/** Used to display a full width bar along the top of the container */
 	showTopBar?: boolean;
+	/** Used to give flexible container stories additional space */
+	isFlexibleContainer?: boolean;
 };
 
 export const UL = ({
@@ -75,13 +80,17 @@ export const UL = ({
 	padBottom = false,
 	wrapCards = false,
 	showTopBar = false,
+	isFlexibleContainer = false,
 }: Props) => {
 	return (
 		<ul
 			css={[
 				ulStyles(direction),
 				showDivider && verticalDivider(palette('--section-border')),
-				padBottom && marginBottomStyles,
+				padBottom &&
+					(isFlexibleContainer
+						? flexibleMarginBottomStyles
+						: marginBottomStyles),
 				wrapCards && wrapStyles,
 				showTopBar && topBarStyles,
 			]}
