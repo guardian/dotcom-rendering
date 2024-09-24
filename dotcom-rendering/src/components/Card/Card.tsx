@@ -723,6 +723,7 @@ export const Card = ({
 									imageSize={imageSize}
 									imageType={media?.type}
 									shouldHide={isFlexSplash ? false : true}
+									isFlexSplash={isFlexSplash}
 								>
 									<div
 										dangerouslySetInnerHTML={{
