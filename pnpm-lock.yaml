@@ -329,8 +329,8 @@ importers:
         specifier: 8.0.0
         version: 8.0.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/braze-components':
-        specifier: 20.1.0
-        version: 20.1.0(@emotion/react@11.11.3)(@guardian/libs@18.0.0)(@guardian/source@8.0.0)(react@18.3.1)
+        specifier: 21.0.0
+        version: 21.0.0(@emotion/react@11.11.3)(@guardian/libs@18.0.0)(@guardian/source@8.0.0)(react@18.3.1)
       '@guardian/bridget':
         specifier: 7.0.0
         version: 7.0.0
@@ -4081,13 +4081,13 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/braze-components@20.1.0(@emotion/react@11.11.3)(@guardian/libs@18.0.0)(@guardian/source@8.0.0)(react@18.3.1):
-    resolution: {integrity: sha512-fL9rXdTwK/Ix3pCpgxCc3fR+xOB5sBQy44YQpLCMQGRXYsroxS0G3//UYIDJbNCD0Ju4PaAdqSCP4JfM54L1sw==}
+  /@guardian/braze-components@21.0.0(@emotion/react@11.11.3)(@guardian/libs@18.0.0)(@guardian/source@8.0.0)(react@18.3.1):
+    resolution: {integrity: sha512-1OH5UNqYaz3r2mAFgRyiR3mrHlTPivN9dyRvvGhE30XQQW5qdEfLm1WR0aD1W14ZVq9i2Vq5SGsrjcCgC9zIuQ==}
     engines: {node: ^18.15 || ^20.8}
     peerDependencies:
       '@emotion/react': ^11.1.2
       '@guardian/libs': ^16.0.0
-      '@guardian/source': '>= 1.0.1 < 7'
+      '@guardian/source': ^8.0.0
       react: 17.0.2 || 18.2.0
     dependencies:
       '@emotion/react': 11.11.3(@types/react@18.3.1)(react@18.3.1)
