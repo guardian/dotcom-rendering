@@ -22,6 +22,7 @@ const THRESHOLD = 6;
 
 const hideBannerStyles = css`
 	top: -200px;
+	transition: all 3s;
 `;
 
 const container = css`
@@ -29,7 +30,6 @@ const container = css`
 	top: 0;
 	background-color: ${palette.brand[800]};
 	${getZIndex('editionSwitcherBanner')};
-	transition: all 3s;
 `;
 
 const content = css`
@@ -79,19 +79,23 @@ const closeButton = css`
 
 const onPointerDown = (
 	event: React.PointerEvent,
+	setIsDown: Dispatch<SetStateAction<boolean>>,
 	setLastDownYCoord: Dispatch<SetStateAction<number | null>>,
 ) => {
 	event.preventDefault();
 
+	setIsDown(true);
 	setLastDownYCoord(event.clientY);
 };
 
 const onPointerUp = (
 	event: React.PointerEvent,
 	lastDownYCoord: number | null,
+	setIsDown: Dispatch<SetStateAction<boolean>>,
 	setIsSwipeUp: Dispatch<SetStateAction<boolean>>,
 ) => {
 	event.preventDefault();
+	setIsDown(false);
 
 	if (lastDownYCoord !== null && event.clientY + THRESHOLD < lastDownYCoord) {
 		setIsSwipeUp(true);
@@ -101,6 +105,10 @@ const onPointerUp = (
 type Props = {
 	pageId: Edition['pageId'];
 	edition: EditionId;
+};
+
+const getEditionNameFromEdition = (edition: Edition) => {
+	return edition.title.replace(' edition', '');
 };
 
 /**
@@ -116,29 +124,51 @@ export const EditionSwitcherBanner = ({ pageId, edition }: Props) => {
 	);
 
 	const [lastDownYCoord, setLastDownYCoord] = useState<number | null>(null);
+	const [isDown, setIsDown] = useState(false);
 	const [isSwipeUp, setIsSwipeUp] = useState(false);
 
-	const suggestedPageId = getEditionFromId(edition).pageId;
-	const suggestedEdition = getEditionFromId(edition).title.replace(
-		' edition',
-		'',
-	);
-	const defaultEdition = getEditionFromPageId(pageId);
-	const defaultEditionName = defaultEdition?.title.replace(' edition', '');
+	// The y-axis distance from the pointer down and current pointer, whilst the pointer is still down.
+	const [pointerUpDistance, setPointerUpDistance] = useState(0);
 
-	if (isBannerClosed || !showBanner || !defaultEditionName) {
+	const suggestedEdition = getEditionFromId(edition);
+	const suggestedPageId = suggestedEdition.pageId;
+	const suggestedEditionName = getEditionNameFromEdition(suggestedEdition);
+
+	const defaultEdition = getEditionFromPageId(pageId);
+
+	if (isBannerClosed || !showBanner || !defaultEdition) {
 		return null;
 	}
+
+	const defaultEditionName = getEditionNameFromEdition(defaultEdition);
 
 	return (
 		<aside
 			id="edition-switcher-banner"
 			data-component="edition-switcher-banner"
-			css={[container, isSwipeUp && hideBannerStyles]}
-			onPointerDown={(e) => onPointerDown(e, setLastDownYCoord)}
-			onPointerUp={(e) => onPointerUp(e, lastDownYCoord, setIsSwipeUp)}
+			css={[
+				container,
+				isSwipeUp && hideBannerStyles,
+				isDown &&
+					css`
+						top: ${pointerUpDistance}px;
+					`,
+			]}
+			onPointerDown={(e) =>
+				onPointerDown(e, setIsDown, setLastDownYCoord)
+			}
+			onPointerUp={(e) =>
+				onPointerUp(e, lastDownYCoord, setIsDown, setIsSwipeUp)
+			}
 			onTouchStart={(e) => {
 				e.preventDefault();
+			}}
+			onPointerMove={(e) => {
+				if (isDown) {
+					setPointerUpDistance(
+						Math.min(0, e.clientY - (lastDownYCoord ?? 0)),
+					);
+				}
 			}}
 		>
 			<div css={content}>
@@ -151,7 +181,7 @@ export const EditionSwitcherBanner = ({ pageId, edition }: Props) => {
 						cssOverrides={linkButton}
 						data-link-name="edition-switcher-banner switch-edition"
 					>
-						View the {suggestedEdition} homepage
+						View the {suggestedEditionName} homepage
 					</LinkButton>
 				</div>
 				<button
