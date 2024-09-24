@@ -16,7 +16,7 @@ type Props = {
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
 	isDynamo?: boolean;
-	fillBackground?: boolean;
+	isFlexibleContainer?: boolean;
 };
 
 /**
@@ -124,7 +124,8 @@ const wrapperStyles = css`
 const backgroundFill = css`
 	/** background fill should only apply to sublinks on mobile breakpoints */
 	${until.tablet} {
-		padding: 8px;
+		padding: ${space[2]}px;
+		padding-bottom: ${space[3]}px;
 		background-color: ${palette('--card-sublinks-background')};
 	}
 `;
@@ -133,7 +134,7 @@ export const SupportingContent = ({
 	alignment,
 	containerPalette,
 	isDynamo,
-	fillBackground = false,
+	isFlexibleContainer = false,
 }: Props) => {
 	const columnSpan = getColumnSpan(supportingContent.length);
 	return (
@@ -143,7 +144,7 @@ export const SupportingContent = ({
 				wrapperStyles,
 				baseGrid,
 				(isDynamo ?? alignment === 'horizontal') && horizontalGrid,
-				fillBackground && backgroundFill,
+				isFlexibleContainer && backgroundFill,
 			]}
 		>
 			{supportingContent.map((subLink, index) => {
@@ -186,6 +187,7 @@ export const SupportingContent = ({
 									}
 									headlineText={subLink.headline}
 									kickerText={subLink.kickerText}
+									isFlexibleContainer={isFlexibleContainer}
 								/>
 							</ContainerOverrides>
 						</FormatBoundary>

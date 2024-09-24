@@ -5623,6 +5623,11 @@ const cardSublinksBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 const cardSublinksBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
+
+const flexibleSplashCardStandfirstLight: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+const flexibleSplashCardStandfirstDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
 // ----- Palette ----- //
 
 /**
@@ -6235,6 +6240,11 @@ const paletteColours = {
 	'--filter-key-events-toggle-border-top': {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
+	},
+
+	'--flexible-splash-card-standfirst': {
+		light: flexibleSplashCardStandfirstLight,
+		dark: flexibleSplashCardStandfirstDark,
 	},
 	'--follow-icon-background': {
 		light: followIconBackgroundLight,

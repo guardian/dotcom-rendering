@@ -413,7 +413,7 @@ export const Card = ({
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
 					isDynamo={isDynamo}
-					fillBackground={isFlexibleContainer}
+					isFlexibleContainer={isFlexibleContainer}
 				/>
 			);
 		}
@@ -424,7 +424,7 @@ export const Card = ({
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
 					isDynamo={isDynamo}
-					fillBackground={isFlexibleContainer}
+					isFlexibleContainer={isFlexibleContainer}
 				/>
 			</Hide>
 		);
@@ -441,7 +441,7 @@ export const Card = ({
 					alignment="vertical"
 					containerPalette={containerPalette}
 					isDynamo={isDynamo}
-					fillBackground={isFlexibleContainer}
+					isFlexibleContainer={isFlexibleContainer}
 				/>
 			</Hide>
 		);
@@ -521,6 +521,7 @@ export const Card = ({
 						imagePositionOnDesktop={imagePositionOnDesktop}
 						imagePositionOnMobile={imagePositionOnMobile}
 						showPlayIcon={showPlayIcon}
+						isFlexibleContainer={isFlexibleContainer}
 					>
 						{media.type === 'slideshow' && (
 							<Slideshow
@@ -722,6 +723,7 @@ export const Card = ({
 									imageSize={imageSize}
 									imageType={media?.type}
 									shouldHide={isFlexSplash ? false : true}
+									isFlexSplash={isFlexSplash}
 								>
 									<div
 										dangerouslySetInnerHTML={{
