@@ -4,7 +4,10 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import type { ImagePositionType } from './Card/components/ImageWrapper';
+import type {
+	ImagePositionType,
+	ImageSizeType,
+} from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
@@ -19,7 +22,53 @@ type Props = {
 	absoluteServerTimes: boolean;
 };
 
-type boostProperties = {
+type RowLayout = 'oneCard' | 'oneCardBoosted' | 'twoCard';
+
+type GroupedRow = {
+	layout: RowLayout;
+	cards: DCRFrontCard[];
+};
+type GroupedCards = GroupedRow[];
+
+export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
+	const createNewRow = (
+		layout: RowLayout,
+		card: DCRFrontCard,
+	): GroupedRow => ({
+		layout,
+		cards: [card],
+	});
+
+	const addCardToRow = (row: GroupedRow, card: DCRFrontCard): GroupedRow => ({
+		cards: [...row.cards, card],
+		layout: 'twoCard',
+	});
+
+	return cards.reduce<GroupedCards>((acc, card) => {
+		// Early return if the card is boosted since it takes up a whole row
+		if (card.boostLevel !== 'default') {
+			return [...acc, createNewRow('oneCardBoosted', card)];
+		}
+
+		// Otherwise we need to check the status of the current row
+		const row = acc[acc.length - 1];
+
+		// If the current row has one card, we can add one more standard card to it
+		// We change the row layout to 'twoCard' to indicate that it is now full
+		if (row && row.layout === 'oneCard') {
+			return [...acc.slice(0, acc.length - 1), addCardToRow(row, card)];
+		} // Otherwise we consider the row to be 'full' and start a new row
+		else {
+			return [...acc, createNewRow('oneCard', card)];
+		}
+	}, []);
+};
+
+/**
+ * Boosting a splash card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
+ */
+
+type boostedSplashProperties = {
 	headlineSize: SmallHeadlineSize;
 	headlineSizeOnMobile: SmallHeadlineSize;
 	headlineSizeOnTablet: SmallHeadlineSize;
@@ -27,48 +76,44 @@ type boostProperties = {
 	imagePositionOnMobile: ImagePositionType;
 	supportingContentAlignment: Alignment;
 };
-
-/**
- * Boosting a card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
- */
-const determineCardProperties = (
+const decideSplashCardProperties = (
 	boostLevel: BoostLevel = 'default',
 	supportingContentLength: number,
-): boostProperties => {
+): boostedSplashProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
 			return {
-				headlineSize: 'medium',
+				headlineSize: 'tiny',
 				headlineSizeOnMobile: 'tiny',
-				headlineSizeOnTablet: 'small',
+				headlineSizeOnTablet: 'tiny',
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'top',
+				imagePositionOnMobile: 'bottom',
 				supportingContentAlignment:
-					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
+					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
 			};
 		case 'boost':
 			return {
-				headlineSize: 'large',
+				headlineSize: 'small',
 				headlineSizeOnMobile: 'small',
-				headlineSizeOnTablet: 'medium',
+				headlineSizeOnTablet: 'small',
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'top',
+				imagePositionOnMobile: 'bottom',
 				supportingContentAlignment:
-					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
+					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
 			};
 		case 'megaboost':
 			return {
-				headlineSize: 'large',
+				headlineSize: 'medium',
 				headlineSizeOnMobile: 'medium',
 				headlineSizeOnTablet: 'medium',
 				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'top',
+				imagePositionOnMobile: 'bottom',
 				supportingContentAlignment: 'horizontal',
 			};
 		case 'gigaboost':
 			return {
-				headlineSize: 'huge',
+				headlineSize: 'large',
 				headlineSizeOnMobile: 'large',
 				headlineSizeOnTablet: 'large',
 				imagePositionOnDesktop: 'bottom',
@@ -77,7 +122,8 @@ const determineCardProperties = (
 			};
 	}
 };
-export const OneCardLayout = ({
+
+export const SplashCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
@@ -100,7 +146,7 @@ export const OneCardLayout = ({
 		imagePositionOnDesktop,
 		imagePositionOnMobile,
 		supportingContentAlignment,
-	} = determineCardProperties(
+	} = decideSplashCardProperties(
 		card.boostLevel,
 		card?.supportingContent?.length ?? 0,
 	);
@@ -132,7 +178,88 @@ export const OneCardLayout = ({
 	);
 };
 
-const TwoCardOrFourCardLayout = ({
+/**
+ * Boosting a splash card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
+ */
+
+type boostedCardProperties = {
+	headlineSize: SmallHeadlineSize;
+	headlineSizeOnMobile: SmallHeadlineSize;
+	headlineSizeOnTablet: SmallHeadlineSize;
+	imageSize: ImageSizeType;
+};
+const decideCardProperties = (
+	boostLevel: BoostLevel = 'boost',
+): boostedCardProperties => {
+	switch (boostLevel) {
+		case 'megaboost':
+			return {
+				headlineSize: 'huge',
+				headlineSizeOnMobile: 'huge',
+				headlineSizeOnTablet: 'huge',
+				imageSize: 'jumbo',
+			};
+		case 'boost':
+		default:
+			return {
+				headlineSize: 'large',
+				headlineSizeOnMobile: 'large',
+				headlineSizeOnTablet: 'large',
+				imageSize: 'medium',
+			};
+	}
+};
+
+export const BoostedCardLayout = ({
+	cards,
+	containerPalette,
+	showAge,
+	absoluteServerTimes,
+	imageLoading,
+}: {
+	cards: DCRFrontCard[];
+	imageLoading: Loading;
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+	absoluteServerTimes: boolean;
+}) => {
+	const card = cards[0];
+	if (!card) return null;
+
+	const {
+		headlineSize,
+		headlineSizeOnMobile,
+		headlineSizeOnTablet,
+		imageSize,
+	} = decideCardProperties(card.boostLevel);
+	return (
+		<UL padBottom={true}>
+			<LI padSides={true}>
+				<FrontCard
+					trail={card}
+					containerPalette={containerPalette}
+					containerType="flexible/general"
+					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
+					headlineSize={headlineSize}
+					headlineSizeOnMobile={headlineSizeOnMobile}
+					headlineSizeOnTablet={headlineSizeOnTablet}
+					imagePositionOnDesktop={'right'}
+					imagePositionOnMobile={'bottom'}
+					imageSize={imageSize}
+					trailText={card.trailText}
+					supportingContent={undefined}
+					imageLoading={imageLoading}
+					aspectRatio="5:4"
+					kickerText={card.kickerText}
+					showLivePlayable={card.showLivePlayable}
+				/>
+			</LI>
+		</UL>
+	);
+};
+
+export const StandardCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
@@ -149,14 +276,13 @@ const TwoCardOrFourCardLayout = ({
 	showImage?: boolean;
 	padBottom?: boolean;
 }) => {
-	const hasTwoOrFewerCards = cards.length <= 2;
 	return (
 		<UL direction="row" padBottom={padBottom}>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI
 						stretch={false}
-						percentage={hasTwoOrFewerCards ? '50%' : '25%'}
+						percentage={'50%'}
 						key={card.url}
 						padSides={true}
 						showDivider={cardIndex > 0}
@@ -164,14 +290,12 @@ const TwoCardOrFourCardLayout = ({
 						<FrontCard
 							trail={card}
 							containerPalette={containerPalette}
-							containerType="flexible/special"
+							containerType="flexible/general"
 							showAge={showAge}
 							absoluteServerTimes={absoluteServerTimes}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
-							imagePositionOnDesktop={
-								hasTwoOrFewerCards ? 'left' : 'bottom'
-							}
+							imagePositionOnDesktop={'left'}
 							supportingContent={undefined} // we don't want to support sublinks on standard cards here so we hard code to undefined.
 							imageSize={'medium'}
 							aspectRatio="5:4"
@@ -194,24 +318,47 @@ export const FlexibleGeneral = ({
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1);
 	const cards = [...groupedTrails.standard].slice(0, 8); // TODO check maximum number of cards
+	const groupedCards = decideCardPositions(cards);
 
 	return (
 		<>
-			<OneCardLayout
-				cards={splash}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				absoluteServerTimes={absoluteServerTimes}
-				imageLoading={imageLoading}
-			/>
+			{splash.length > 0 && (
+				<SplashCardLayout
+					cards={splash}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
+					imageLoading={imageLoading}
+				/>
+			)}
 
-			<TwoCardOrFourCardLayout
-				cards={cards}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				absoluteServerTimes={absoluteServerTimes}
-				imageLoading={imageLoading}
-			/>
+			{groupedCards.map((row) => {
+				switch (row.layout) {
+					case 'oneCardBoosted':
+						return (
+							<BoostedCardLayout
+								cards={row.cards}
+								containerPalette={containerPalette}
+								showAge={showAge}
+								absoluteServerTimes={absoluteServerTimes}
+								imageLoading={imageLoading}
+							/>
+						);
+
+					case 'oneCard':
+					case 'twoCard':
+					default:
+						return (
+							<StandardCardLayout
+								cards={row.cards}
+								containerPalette={containerPalette}
+								showAge={showAge}
+								absoluteServerTimes={absoluteServerTimes}
+								imageLoading={imageLoading}
+							/>
+						);
+				}
+			})}
 		</>
 	);
 };

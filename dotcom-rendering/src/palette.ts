@@ -5619,6 +5619,10 @@ const imageTitleBackground: PaletteFunction = ({ design, theme }) => {
 const lightboxDivider: PaletteFunction = (format) =>
 	imageTitleBackground(format);
 
+const cardSublinksBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const cardSublinksBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
 // ----- Palette ----- //
 
 /**
@@ -5939,6 +5943,10 @@ const paletteColours = {
 	'--card-kicker-text': {
 		light: cardKickerTextLight,
 		dark: cardKickerTextDark,
+	},
+	'--card-sublinks-background': {
+		light: cardSublinksBackgroundLight,
+		dark: cardSublinksBackgroundDark,
 	},
 	'--carousel-active-dot': {
 		light: carouselActiveDotLight,
@@ -6563,6 +6571,22 @@ const paletteColours = {
 	'--pullquote-text': {
 		light: pullQuoteTextLight,
 		dark: pullQuoteTextDark,
+	},
+	'--quiz-atom-answers-background': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--quiz-atom-answers-hover': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[38],
+	},
+	'--quiz-atom-check-mark': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[97],
+	},
+	'--quiz-atom-incorrect-answer-background': {
+		light: () => sourcePalette.news[400],
+		dark: () => sourcePalette.news[300],
 	},
 	'--quote-icon-fill': {
 		light: richLinkQuoteFillLight,

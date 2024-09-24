@@ -33,23 +33,24 @@ import { ContributionsEpicCtasContainer } from './ctas/ContributionsEpicCtasCont
 
 // Hard-coded AB TEST - picking up ab test name and variant name from the tracking object
 // then applying a different colour if it matches, or the default colour if it doesn't.
-const getBackgroundColour = (tracking: Tracking) => {
-	if (
-		tracking.abTestName.includes('_LB_EPIC_BG_COLOUR') &&
-		tracking.abTestVariant === 'VARIANT'
-	) {
-		return palette.neutral[100]; // COLOUR CHANGE TO GO HERE
-	} else {
-		return palette.neutral[100];
-	}
+const getBackgroundColour = (isInTestVariant: boolean) => {
+	return isInTestVariant ? palette.brand[800] : palette.neutral[100];
 };
 
-const container = (tracking: Tracking) => css`
+const getHeadingBackgroundColour = (isInTestVariant: boolean) => {
+	return isInTestVariant ? palette.brand[400] : palette.brandAlt[400];
+};
+
+const getHeadingColour = (isInTestVariant: boolean) => {
+	return isInTestVariant ? palette.neutral[100] : palette.neutral[7];
+};
+
+const container = (tracking: Tracking, isInTestVariant: boolean) => css`
 	padding: 6px 10px 28px 10px;
 	border-top: 1px solid ${palette.brandAlt[400]};
 	border-bottom: 1px solid ${palette.neutral[86]};
 
-	background: ${getBackgroundColour(tracking)};
+	background: ${getBackgroundColour(isInTestVariant)};
 
 	border: 1px solid ${palette.neutral[0]};
 
@@ -93,17 +94,18 @@ const textContainer = css`
 	}
 `;
 
-const yellowHeading = (clientName: string) => css`
+const yellowHeading = (tracking: Tracking, isInTestVariant: boolean) => css`
 	${headlineBold34};
 	font-size: 28px;
-	background-color: ${palette.brandAlt[400]};
+	color: ${getHeadingColour(isInTestVariant)};
+	background-color: ${getHeadingBackgroundColour(isInTestVariant)};
 	border-top: 1px solid ${palette.neutral[0]};
 	border-left: 1px solid ${palette.neutral[0]};
 	border-right: 1px solid ${palette.neutral[0]};
 
 	padding: 8px 10px 12px 10px;
 	${from.tablet} {
-		padding-left: ${clientName === 'dcr' ? '60px' : '80px'};
+		padding-left: ${tracking.clientName === 'dcr' ? '60px' : '80px'};
 		padding-right: 20px;
 	}
 `;
@@ -154,6 +156,10 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 }: EpicProps): JSX.Element => {
 	const { newsletterSignup } = variant;
 
+	const isColourInTestVariant: boolean =
+		tracking.abTestName.includes('_LB_EPIC_BG_COLOUR') &&
+		tracking.abTestVariant === 'VARIANT';
+
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
 	});
@@ -200,11 +206,11 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 	return (
 		<div data-testid="contributions-liveblog-epic" ref={setNode}>
 			{!!cleanHeading && (
-				<div css={yellowHeading(tracking.clientName)}>
+				<div css={yellowHeading(tracking, isColourInTestVariant)}>
 					{cleanHeading}
 				</div>
 			)}
-			<section css={container(tracking)}>
+			<section css={container(tracking, isColourInTestVariant)}>
 				<LiveblogEpicBody
 					paragraphs={cleanParagraphs}
 					numArticles={articleCounts.forTargetedWeeks}

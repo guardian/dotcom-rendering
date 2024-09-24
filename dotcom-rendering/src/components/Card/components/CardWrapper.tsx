@@ -15,6 +15,7 @@ type Props = {
 	format: ArticleFormat;
 	containerPalette?: DCRContainerPalette;
 	showTopBar?: boolean;
+	showMobileTopBar?: boolean;
 	isOnwardContent?: boolean;
 };
 
@@ -80,7 +81,8 @@ const topBarStyles = css`
 	}
 `;
 
-const mobileOnlyTopBarStyles = css`
+
+const mobileTopBarStyles = css`
 	${until.tablet} {
 		${topBarStyles}
 	}
@@ -100,6 +102,7 @@ export const CardWrapper = ({
 	format,
 	containerPalette,
 	showTopBar = true,
+	showMobileTopBar = false,
 	isOnwardContent = false,
 }: Props) => {
 	return (
@@ -110,7 +113,8 @@ export const CardWrapper = ({
 						baseCardStyles,
 						hoverStyles,
 						sublinkHoverStyles,
-						showTopBar ? topBarStyles : mobileOnlyTopBarStyles,
+						showTopBar && topBarStyles,
+						showMobileTopBar && mobileTopBarStyles,
 						isOnwardContent && onwardContentStyles,
 					]}
 				>

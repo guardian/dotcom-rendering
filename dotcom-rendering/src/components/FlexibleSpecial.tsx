@@ -126,6 +126,7 @@ export const OneCardLayout = ({
 					aspectRatio="5:4"
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
+					boostedFontSizes={true}
 					isFlexSplash={true}
 				/>
 			</LI>
@@ -173,7 +174,8 @@ const TwoCardOrFourCardLayout = ({
 							imagePositionOnDesktop={
 								hasTwoOrFewerCards ? 'left' : 'bottom'
 							}
-							supportingContent={undefined} // we don't want to support sublinks on standard cards here so we hard code to undefined.
+							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
+							supportingContent={undefined}
 							imageSize={'medium'}
 							aspectRatio="5:4"
 							kickerText={card.kickerText}

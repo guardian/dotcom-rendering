@@ -111,7 +111,10 @@ export type Props = {
 	isTagPage?: boolean;
 	/** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
 	aspectRatio?: AspectRatio;
-	/** The splash card of a flexible container gets a different visual treatment to other cards */
+	/** Alows the consumer to use a larger font size group for boost styling*/
+	boostedFontSizes?: boolean;
+	index?: number;
+  /** The splash card of a flexible container gets a different visual treatment to other cards */
 	isFlexSplash?: boolean;
 };
 
@@ -142,8 +145,7 @@ const HorizontalDivider = () => (
 	<div
 		css={css`
 			${from.tablet} {
-				border-top: 1px solid
-					${themePalette('--card-border-supporting')};
+				border-top: 1px solid ${themePalette('--card-border-top')};
 				height: 1px;
 				width: 50%;
 				${from.tablet} {
@@ -155,7 +157,7 @@ const HorizontalDivider = () => (
 				margin-top: 12px;
 			}
 		`}
-	></div>
+	/>
 );
 
 const getMedia = ({
@@ -263,6 +265,8 @@ export const Card = ({
 	absoluteServerTimes,
 	isTagPage = false,
 	aspectRatio,
+	boostedFontSizes,
+	index = 0,
 	isFlexSplash,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
@@ -271,7 +275,6 @@ export const Card = ({
 		imagePositionOnDesktop,
 		supportingContentAlignment,
 	);
-	const headlinePosition = isFlexSplash ? 'outer' : 'inner';
 
 	const showQuotes = !!showQuotedHeadline;
 
@@ -376,6 +379,9 @@ export const Card = ({
 	/* Whilst we migrate to the new container types, we need to check which container we are in. */
 	const isFlexibleContainer = containerType === 'flexible/special';
 
+	const headlinePosition =
+		isFlexSplash && isFlexibleContainer ? 'outer' : 'inner';
+
 	/** Determines the gap of between card components based on card properties */
 	const getGapSize = (): GapSize => {
 		if (isOnwardContent) return 'none';
@@ -408,16 +414,35 @@ export const Card = ({
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
 					isDynamo={isDynamo}
+					fillBackground={isFlexibleContainer}
 				/>
 			);
 		}
 		return (
-			<Hide from={isFlexSplash ? 'tablet' : 'desktop'}>
+			<Hide from={isFlexSplash ? 'desktop' : 'tablet'}>
 				<SupportingContent
 					supportingContent={supportingContent}
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
 					isDynamo={isDynamo}
+					fillBackground={isFlexibleContainer}
+				/>
+			</Hide>
+		);
+	};
+
+	const decideInnerSublinks = () => {
+		if (!hasSublinks) return null;
+		if (sublinkPosition !== 'inner') return null;
+		return (
+			<Hide until={isFlexSplash ? 'desktop' : 'tablet'}>
+				<SupportingContent
+					supportingContent={supportingContent}
+					/* inner links are always vertically stacked */
+					alignment="vertical"
+					containerPalette={containerPalette}
+					isDynamo={isDynamo}
+					fillBackground={isFlexibleContainer}
 				/>
 			</Hide>
 		);
@@ -444,6 +469,7 @@ export const Card = ({
 		<CardWrapper
 			format={format}
 			showTopBar={!isOnwardContent && !isFlexibleContainer}
+			showMobileTopBar={isFlexibleContainer}
 			containerPalette={containerPalette}
 			isOnwardContent={isOnwardContent}
 		>
@@ -553,6 +579,7 @@ export const Card = ({
 												assetId={
 													media.mainMedia.videoId
 												}
+												index={index}
 												duration={
 													media.mainMedia.duration
 												}
@@ -713,7 +740,6 @@ export const Card = ({
 									imageSize={imageSize}
 									imageType={media?.type}
 									shouldHide={isFlexSplash ? false : true}
-									padTop={isFlexSplash ? false : true}
 								>
 									<div
 										dangerouslySetInnerHTML={{

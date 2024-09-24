@@ -24,6 +24,7 @@ export type ArticleDeprecated = FEArticleType & {
 };
 
 export type Article = {
+	format: ArticleFormat;
 	frontendData: ArticleDeprecated;
 };
 
@@ -77,6 +78,7 @@ export const enhanceArticleType = (
 	)(data.mainMediaElements);
 
 	return {
+		format,
 		frontendData: {
 			...data,
 			mainMediaElements,

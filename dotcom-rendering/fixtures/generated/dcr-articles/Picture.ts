@@ -14,6 +14,11 @@
 import type { Article } from '../../../src/types/article';
 
 export const Picture: Article = {
+	format: {
+		display: 2,
+		theme: 1,
+		design: 1,
+	},
 	frontendData: {
 		version: 3,
 		headline: 'Nicola Jennings on the No 10 sleaze scandal – cartoon',

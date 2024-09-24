@@ -14,6 +14,11 @@
 import type { Article } from '../../../src/types/article';
 
 export const Review: Article = {
+	format: {
+		display: 2,
+		theme: 3,
+		design: 5,
+	},
 	frontendData: {
 		version: 3,
 		headline:

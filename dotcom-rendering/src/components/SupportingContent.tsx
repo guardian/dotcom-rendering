@@ -16,6 +16,7 @@ type Props = {
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
 	isDynamo?: boolean;
+	fillBackground?: boolean;
 };
 
 /**
@@ -57,7 +58,7 @@ const horizontalLineStyle = css`
 		top: -${space[2]}px;
 		left: 0;
 		content: '';
-		border-top: 1px solid ${palette('--card-border-supporting')};
+		border-top: 1px solid ${palette('--card-border-top')};
 		height: 1px;
 		width: 50%;
 		${from.tablet} {
@@ -118,17 +119,21 @@ const wrapperStyles = css`
 	@media (pointer: coarse) {
 		padding-bottom: 0;
 	}
-	${until.tablet} {
-		padding: 8px;
-		background-color: ${palette('--accordion-background')};
-	}
 `;
 
+const backgroundFill = css`
+	/** background fill should only apply to sublinks on mobile breakpoints */
+	${until.tablet} {
+		padding: 8px;
+		background-color: ${palette('--card-sublinks-background')};
+	}
+`;
 export const SupportingContent = ({
 	supportingContent,
 	alignment,
 	containerPalette,
 	isDynamo,
+	fillBackground = false,
 }: Props) => {
 	const columnSpan = getColumnSpan(supportingContent.length);
 	return (
@@ -138,6 +143,7 @@ export const SupportingContent = ({
 				wrapperStyles,
 				baseGrid,
 				(isDynamo ?? alignment === 'horizontal') && horizontalGrid,
+				fillBackground && backgroundFill,
 			]}
 		>
 			{supportingContent.map((subLink, index) => {
@@ -159,7 +165,7 @@ export const SupportingContent = ({
 						key={subLink.url}
 						css={[
 							sublinkBaseStyles,
-							alignment === 'horizontal'
+							isDynamo ?? alignment === 'horizontal'
 								? horizontalSublinkStyles(columnSpan)
 								: verticalSublinkStyles,
 						]}

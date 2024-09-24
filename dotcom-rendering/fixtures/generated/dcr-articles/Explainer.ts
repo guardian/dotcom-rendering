@@ -14,6 +14,11 @@
 import type { Article } from '../../../src/types/article';
 
 export const Explainer: Article = {
+	format: {
+		display: 0,
+		theme: 0,
+		design: 7,
+	},
 	frontendData: {
 		version: 3,
 		headline:
