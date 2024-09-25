@@ -115,9 +115,9 @@ const decideSplashCardProperties = (
 			return {
 				headlineSize: 'large',
 				headlineSizeOnMobile: 'large',
-				headlineSizeOnTablet: 'large',
+				headlineSizeOnTablet: 'medium',
 				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'top',
+				imagePositionOnMobile: 'bottom',
 				supportingContentAlignment: 'horizontal',
 			};
 	}
