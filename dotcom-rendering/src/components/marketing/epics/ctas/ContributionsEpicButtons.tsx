@@ -193,6 +193,7 @@ export const ContributionsEpicButtons = ({
 
 		if (
 			showChoiceCards &&
+			countryCode === 'US' &&
 			(variantOfChoiceCard === 'US_CHECKOUT_THREE_TIER_CHOICE_CARDS' ||
 				'US_THREE_TIER_CHOICE_CARDS')
 		) {
@@ -200,7 +201,10 @@ export const ContributionsEpicButtons = ({
 				variantOfChoiceCard === 'US_CHECKOUT_THREE_TIER_CHOICE_CARDS'
 					? 'https://support.theguardian.com/contribute/checkout'
 					: cta.baseUrl;
-			if (threeTierChoiceCardSelectedProduct === 'OneOff') {
+			if (
+				threeTierChoiceCardSelectedProduct === 'OneOff' &&
+				variantOfChoiceCard === 'US_CHECKOUT_THREE_TIER_CHOICE_CARDS'
+			) {
 				/** OneOff payments are not supported by the generic checkout yet */
 				return {
 					text: cta.text,
