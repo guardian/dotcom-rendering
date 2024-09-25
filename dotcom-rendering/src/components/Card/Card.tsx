@@ -376,7 +376,9 @@ export const Card = ({
 	const hasBackgroundColour = !containerPalette && isMediaCard(format);
 
 	/* Whilst we migrate to the new container types, we need to check which container we are in. */
-	const isFlexibleContainer = containerType?.includes('flexible');
+	const isFlexibleContainer =
+		containerType === 'flexible/special' ||
+		containerType === 'flexible/general';
 
 	const headlinePosition =
 		isFlexSplash && isFlexibleContainer ? 'outer' : 'inner';
