@@ -52,7 +52,6 @@ export const MultiByline = ({
 	return (
 		<ol data-ignore="global-ol-styling">
 			{multiBylineItems.map((multiBylineItem, index) => (
-				// eslint-disable-next-line react/no-array-index-key -- Title should usually be identical, but in case it isn't, also use array index
 				<MultiBylineItemComponent
 					multiBylineItem={multiBylineItem}
 					format={format}
