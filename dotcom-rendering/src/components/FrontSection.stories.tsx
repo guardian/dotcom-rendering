@@ -90,7 +90,7 @@ export default {
 		editionId: 'UK',
 		children: <Placeholder />,
 	},
-	render: (args) => <FrontSection {...args}>{args.children}</FrontSection>,
+	render: (args) => <FrontSection {...args} />,
 } satisfies Meta<typeof FrontSection>;
 
 export const ContainerStory = {
@@ -372,7 +372,7 @@ export const PageSkinStory = {
 	},
 	render: (args) => (
 		<PageSkinWrapper>
-			<FrontSection {...args}>{args.children}</FrontSection>
+			<FrontSection {...args} />
 		</PageSkinWrapper>
 	),
 	parameters: {
