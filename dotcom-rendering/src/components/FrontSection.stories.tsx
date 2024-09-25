@@ -84,8 +84,6 @@ export default {
 		},
 	},
 	args: {
-		title: 'Default Container',
-		showTopBorder: false,
 		discussionApiUrl,
 		editionId: 'UK',
 		children: <Placeholder />,
@@ -95,11 +93,12 @@ export default {
 
 export const ContainerStory = {
 	name: 'default container',
+	args: { title: 'Default Container', showTopBorder: false },
 };
 
 export const NoTitleStory = {
 	name: 'with no title',
-	args: { title: undefined },
+	args: { showTopBorder: false },
 };
 
 export const TopBorderStory = {
@@ -128,6 +127,7 @@ export const ToggleableStory = {
 	args: {
 		title: 'Toggleable Container',
 		toggleable: true,
+		showTopBorder: false,
 		sectionId: 'section-id',
 	},
 };
@@ -320,7 +320,7 @@ export const WithSponsoredBrandingAdvertisingPartnerTagPages = {
 export const WithPaidBranding = {
 	name: 'with paid content branding',
 	args: {
-		title: '',
+		title: 'Section',
 		collectionBranding: {
 			kind: 'paid-content',
 			isFrontBranding: false,
