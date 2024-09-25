@@ -1,15 +1,45 @@
 import { css } from '@emotion/react';
-import { type ArticleFormat } from '@guardian/libs';
-import { neutral, space, textSans14 } from '@guardian/source/foundations';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '@guardian/libs';
+import {
+	from,
+	headlineLightItalic24,
+	headlineLightItalic28,
+	headlineLightItalic34,
+	headlineMediumItalic24,
+	headlineMediumItalic28,
+	neutral,
+	space,
+	textSans14,
+	textSans24,
+	textSans28,
+	textSans34,
+	textSansItalic17,
+} from '@guardian/source/foundations';
 import sanitise from 'sanitize-html';
 import { slugify } from '../model/enhance-H2s';
 import { palette } from '../palette';
 import type { MultiBylineItem as MultiBylineItemModel } from '../types/content';
-import { headingLineStyles } from './KeyTakeaway';
 import { subheadingStyles } from './Subheading';
 
 const multiBylineItemStyles = css`
 	padding-top: 8px;
+`;
+
+const labsBylineStyles = css`
+	${textSansItalic17};
+	line-height: 1.4;
+`;
+
+const headingLineStyles = css`
+	width: 140px;
+	margin: 8px 0 2px 0;
+	border: none;
+	border-top: 4px solid ${palette('--heading-line')};
 `;
 
 /** Nesting is necessary in the bio styles because we receive a string of html from the
@@ -69,6 +99,144 @@ const headingMarginStyle = css`
 	margin-bottom: ${space[2]}px;
 `;
 
+export const nonAnchorHeadlineStyles = ({
+	format,
+	fontWeight,
+}: {
+	format: ArticleFormat;
+	fontWeight: 'light' | 'medium' | 'bold';
+}) => css`
+	${format.display === ArticleDisplay.Immersive
+		? headlineLightItalic28
+		: `
+			/**
+			 * Typography preset styles should not be overridden.
+			 * This has been done because the styles do not directly map to the new presets.
+			 * Please speak to your team's designer and update this to use a more appropriate preset.
+			 */
+			${fontWeight === 'light' && headlineLightItalic24};
+			${fontWeight === 'medium' && headlineMediumItalic24};
+			${fontWeight === 'bold' && headlineLightItalic24};
+		`};
+
+	${from.tablet} {
+		${format.display === ArticleDisplay.Immersive
+			? headlineLightItalic34
+			: `
+				/**
+				 * Typography preset styles should not be overridden.
+				 * This has been done because the styles do not directly map to the new presets.
+				 * Please speak to your team's designer and update this to use a more appropriate preset.
+				 */
+				${fontWeight === 'light' && headlineLightItalic28};
+				${fontWeight === 'medium' && headlineMediumItalic28};
+				${fontWeight === 'bold' && headlineLightItalic28};
+			`};
+	}
+
+	/** Labs uses sans text */
+	${format.theme === ArticleSpecial.Labs &&
+	css`
+		${format.display === ArticleDisplay.Immersive
+			? `
+				/**
+				 * Typography preset styles should not be overridden.
+				 * This has been done because the styles do not directly map to the new presets.
+				 * Please speak to your team's designer and update this to use a more appropriate preset.
+				 */
+				${textSans28};
+				font-weight: 300;
+				line-height: 1.15;
+			`
+			: `
+				/**
+				 * Typography preset styles should not be overridden.
+				 * This has been done because the styles do not directly map to the new presets.
+				 * Please speak to your team's designer and update this to use a more appropriate preset.
+				 */
+				${textSans24};
+				${fontWeight === 'light' && 'font-weight: 300;'};
+				${fontWeight === 'medium' && 'font-weight: 500;'};
+				${fontWeight === 'bold' && 'font-weight: 700;'};
+				line-height: 1.15;
+			`};
+
+		${from.tablet} {
+			${format.display === ArticleDisplay.Immersive
+				? `
+					/**
+					 * Typography preset styles should not be overridden.
+					 * This has been done because the styles do not directly map to the new presets.
+					 * Please speak to your team's designer and update this to use a more appropriate preset.
+					 */
+					${textSans34};
+					font-weight: 300;
+					line-height: 1.15;
+				`
+				: `
+					/**
+					 * Typography preset styles should not be overridden.
+					 * This has been done because the styles do not directly map to the new presets.
+					 * Please speak to your team's designer and update this to use a more appropriate preset.
+					 */
+					${textSans28};
+					${fontWeight === 'light' && 'font-weight: 300;'};
+					${fontWeight === 'medium' && 'font-weight: 500;'};
+					${fontWeight === 'bold' && 'font-weight: 700;'};
+					line-height: 1.15;
+				`};
+		}
+	`}
+
+	color: ${palette('--subheading-text')};
+
+	/* We don't allow additional font weight inside h2 tags except for immersive articles */
+	strong {
+		font-weight: ${format.display === ArticleDisplay.Immersive
+			? 'bold'
+			: 'inherit'};
+	}
+`;
+
+export const multiBylineBylineStyles = (format: ArticleFormat) => css`
+	${nonAnchorHeadlineStyles({ format, fontWeight: 'light' })}
+	padding-bottom: 8px;
+	font-style: italic !important;
+	margin-top: -4px;
+	font-weight: 300 !important;
+	color: ${neutral[46]};
+	a {
+		${subheadingStyles(format)}
+		color: ${palette('--byline-anchor')};
+		text-decoration: none;
+		font-style: normal;
+		:hover {
+			text-decoration: underline;
+		}
+	}
+`;
+
+const bylineWrapperStyles = css`
+	display: flex;
+	width: 100%;
+	overflow: hidden;
+	border-bottom: 1px solid ${palette('--article-border')};
+	margin-bottom: ${space[2]}px;
+`;
+
+const bylineTextStyles = css`
+	flex-grow: 1;
+`;
+
+const bylineImageStyles = css`
+	width: 140px;
+	border-radius: 50%;
+	margin-bottom: -16px;
+	height: 140px;
+	overflow: hidden;
+	align-self: flex-end;
+`;
+
 interface MultiBylineItemProps {
 	multiBylineItem: MultiBylineItemModel;
 	format: ArticleFormat;
@@ -118,8 +286,8 @@ const Byline = ({
 	const sanitizedHtml = sanitise(bylineHtml, {});
 
 	return (
-		<div>
-			<div>
+		<div css={bylineWrapperStyles}>
+			<div css={bylineTextStyles}>
 				<h3
 					id={slugify(title)}
 					css={[subheadingStyles(format), headingMarginStyle]}
@@ -128,7 +296,12 @@ const Byline = ({
 				</h3>
 				{bylineHtml ? (
 					<h3
-						css={[subheadingStyles(format), headingMarginStyle]}
+						css={[
+							multiBylineBylineStyles(format),
+							format.theme === ArticleSpecial.Labs &&
+								labsBylineStyles,
+							format.design === ArticleDesign.LiveBlog,
+						]}
 						dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
 					/>
 				) : null}
@@ -137,6 +310,7 @@ const Byline = ({
 				<img
 					src={imageOverrideUrl ?? contributors[0]?.imageUrl}
 					alt={byline}
+					css={bylineImageStyles}
 				></img>
 			) : null}
 		</div>
