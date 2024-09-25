@@ -84,16 +84,62 @@ export const MultiBylineItem = ({
 		<>
 			<li css={multiBylineItemStyles} data-spacefinder-role="nested">
 				<hr css={headingLineStyles} />
-				<h3
-					id={slugify(multiBylineItem.title)}
-					css={[subheadingStyles(format), headingMarginStyle]}
-				>
-					{multiBylineItem.title}
-				</h3>
+				<Byline
+					title={multiBylineItem.title}
+					byline={multiBylineItem.byline ?? ''}
+					bylineHtml={multiBylineItem.bylineHtml ?? ''}
+					contributors={multiBylineItem.contributors ?? []}
+					format={format}
+				/>
 				<Bio html={multiBylineItem.bio} />
 				{children}
 			</li>
 		</>
+	);
+};
+
+type BylineProps = {
+	title: string;
+	bylineHtml: string;
+	byline: string;
+	imageOverrideUrl?: string;
+	contributors: BlockContributor[];
+	format: ArticleFormat;
+};
+
+const Byline = ({
+	title,
+	bylineHtml,
+	byline,
+	imageOverrideUrl,
+	contributors,
+	format,
+}: BylineProps) => {
+	const sanitizedHtml = sanitise(bylineHtml, {});
+
+	return (
+		<div>
+			<div>
+				<h3
+					id={slugify(title)}
+					css={[subheadingStyles(format), headingMarginStyle]}
+				>
+					{title}
+				</h3>
+				{bylineHtml ? (
+					<h3
+						css={[subheadingStyles(format), headingMarginStyle]}
+						dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
+					/>
+				) : null}
+			</div>
+			{imageOverrideUrl ?? contributors[0]?.imageUrl ? (
+				<img
+					src={imageOverrideUrl ?? contributors[0]?.imageUrl}
+					alt={byline}
+				></img>
+			) : null}
+		</div>
 	);
 };
 
