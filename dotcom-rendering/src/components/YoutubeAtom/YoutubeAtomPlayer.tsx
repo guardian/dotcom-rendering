@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, Global } from '@emotion/react';
 import type { Participations } from '@guardian/ab-core';
 import { buildImaAdTagUrl } from '@guardian/commercial';
 import type { ConsentState } from '@guardian/libs';
@@ -72,6 +72,19 @@ const imaPlayerStyles = css`
 	left: 0;
 	width: 100%;
 	height: 100%;
+`;
+
+const fullscreenStyles = (id: string) => css`
+	html {
+		overflow: hidden;
+	}
+	iframe#${id} {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+	}
 `;
 
 /**
@@ -398,6 +411,7 @@ export const YoutubeAtomPlayer = ({
 	});
 
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
+	const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
 	const playerReadyCallback = useCallback(() => setPlayerReady(true), []);
 	const playerListeners = useRef<PlayerListeners>([]);
 	/**
@@ -472,8 +486,7 @@ export const YoutubeAtomPlayer = ({
 										from: 'YoutubeAtomPlayer fullscreen',
 										videoId,
 									});
-									// For Android only, iOS will stub the method
-									void getVideoClient().fullscreen();
+									setIsFullscreen((prev) => !prev);
 								}
 							},
 						},
@@ -644,17 +657,27 @@ export const YoutubeAtomPlayer = ({
 		};
 	}, []);
 
+	useEffect(() => {
+		if (renderingTarget === 'Apps') {
+			console.log('fullscreen', isFullscreen);
+			// For Android only, iOS will stub the method
+			// void getVideoClient().fullscreen(isFullscreen);
+		}
+	}, [isFullscreen, renderingTarget]);
+
 	/**
 	 * An element for the YouTube player to hook into the dom
 	 */
 	return (
-		<div
-			id={id}
-			data-atom-id={id}
-			data-testid={id}
-			data-atom-type="youtube"
-			title={title}
-			css={enableAds && imaPlayerStyles}
-		></div>
+		<>
+			{isFullscreen && <Global styles={fullscreenStyles(id)} />}
+			<div
+				id={id}
+				data-testid={id}
+				data-atom-type="youtube"
+				title={title}
+				css={enableAds && imaPlayerStyles}
+			></div>
+		</>
 	);
 };
