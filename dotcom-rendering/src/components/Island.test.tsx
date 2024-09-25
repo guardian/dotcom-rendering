@@ -370,7 +370,11 @@ describe('Island: server-side rendering', () => {
 	});
 
 	test('ShowHideContainers', () => {
-		expect(() => renderToString(<ShowHideContainers />)).not.toThrow();
+		expect(() =>
+			renderToString(
+				<ShowHideContainers disableShowHideContainers={false} />,
+			),
+		).not.toThrow();
 	});
 
 	test('SignInGateSelector', () => {

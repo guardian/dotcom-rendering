@@ -18,7 +18,11 @@ const getContainerStates = (): ContainerStates => {
 	return item;
 };
 
-export const ShowHideContainers = () => {
+type Props = {
+	disableShowHideContainers: boolean;
+};
+
+export const ShowHideContainers = ({ disableShowHideContainers }: Props) => {
 	useEffect(() => {
 		const containerStates = getContainerStates();
 
@@ -60,7 +64,7 @@ export const ShowHideContainers = () => {
 			// The first part of doing this is removing the feature for those who do not currently use it.
 			// This logic sets the button as disabled and hides it from view and from screenreaders.
 			// It does not remove it entirely from the DOM.
-			if (allContainersExpanded) {
+			if (disableShowHideContainers && allContainersExpanded) {
 				e.setAttribute('disabled', 'true');
 				e.setAttribute('aria-disabled', 'true');
 				e.setAttribute('style', 'display: none;');
@@ -76,7 +80,7 @@ export const ShowHideContainers = () => {
 				toggleContainer(sectionId, e);
 			}
 		}
-	}, []);
+	}, [disableShowHideContainers]);
 
 	return <></>;
 };
