@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
@@ -45,6 +50,9 @@ const topPadding = css`
 const decideHeadlineFont = (format: ArticleFormat) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
+			if (format.theme === Pillar.News) {
+				return headlineMedium50;
+			}
 			switch (format.design) {
 				case ArticleDesign.Obituary:
 				case ArticleDesign.Comment:
@@ -61,6 +69,9 @@ const decideHeadlineFont = (format: ArticleFormat) => {
 			}
 		}
 		default:
+			if (format.theme === Pillar.News) {
+				return headlineMedium34;
+			}
 			switch (format.design) {
 				case ArticleDesign.Obituary:
 				case ArticleDesign.Comment:
@@ -80,6 +91,9 @@ const decideHeadlineFont = (format: ArticleFormat) => {
 const decideMobileHeadlineFont = (format: ArticleFormat) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
+			if (format.theme === Pillar.News) {
+				return headlineMedium34;
+			}
 			switch (format.design) {
 				case ArticleDesign.Obituary:
 				case ArticleDesign.Comment:
@@ -95,6 +109,9 @@ const decideMobileHeadlineFont = (format: ArticleFormat) => {
 			}
 		}
 		default:
+			if (format.theme === Pillar.News) {
+				return headlineMedium28;
+			}
 			switch (format.design) {
 				case ArticleDesign.Obituary:
 				case ArticleDesign.Comment:
