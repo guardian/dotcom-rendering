@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
+import type { ReactNode } from 'react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { LI } from './Card/components/LI';
 import { FrontSection } from './FrontSection';
@@ -69,6 +70,17 @@ const LeftColPlaceholder = ({
 		`}
 	>
 		{text}
+	</div>
+);
+
+const PageSkinWrapper = ({ children }: { children: ReactNode }) => (
+	<div
+		css={css`
+			background-image: url('https://adimage.theguardian.com/pageskins/puppies-pageskin.jpg');
+			background-size: contain;
+		`}
+	>
+		{children}
 	</div>
 );
 
@@ -432,14 +444,16 @@ WithPaidContentForWholeFront.storyName = 'with paid content for whole front';
 
 export const PageSkinStory = () => {
 	return (
-		<FrontSection
-			title="Page Skin"
-			hasPageSkin={true}
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
-			<Placeholder text="Page skins constrain my layout to desktop" />
-		</FrontSection>
+		<PageSkinWrapper>
+			<FrontSection
+				title="Page Skin"
+				hasPageSkin={true}
+				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
+			>
+				<Placeholder text="Page skins constrain my layout to desktop" />
+			</FrontSection>
+		</PageSkinWrapper>
 	);
 };
 

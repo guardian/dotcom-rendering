@@ -6258,6 +6258,10 @@ const paletteColours = {
 		light: followTextLight,
 		dark: followTextDark,
 	},
+	'--front-container-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[10],
+	},
 	'--heading-line': {
 		light: headingLineLight,
 		dark: headingLineDark,
