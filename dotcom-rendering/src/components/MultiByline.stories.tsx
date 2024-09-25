@@ -42,9 +42,9 @@ export const ThemeVariations = {
 				title: 'The first byline',
 				bio: testBioText,
 				body: [testTextElement],
-				byline: 'Richard Hillgrove Guardian Contributor',
+				byline: 'Richard Hillgrove Political Editor',
 				bylineHtml:
-					"<a href='/profile/richard-hillgrove'>Richard Hillgrove</a>",
+					"<a href='/profile/richard-hillgrove'>Richard Hillgrove</a> Political Editor",
 				contributors: [
 					{
 						name: 'Richard Hillgrove',
