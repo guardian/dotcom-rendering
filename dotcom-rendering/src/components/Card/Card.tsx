@@ -113,6 +113,9 @@ export type Props = {
 	aspectRatio?: AspectRatio;
 	/** Alows the consumer to use a larger font size group for boost styling*/
 	boostedFontSizes?: boolean;
+	index?: number;
+	/** The Splash card in a flexible container gets a different visual treatment to other cards*/
+	isFlexSplash?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -136,6 +139,25 @@ const StarRatingComponent = ({
 	<div css={starWrapper(cardHasImage)}>
 		<StarRating rating={rating} size="small" />
 	</div>
+);
+
+const HorizontalDivider = () => (
+	<div
+		css={css`
+			${from.tablet} {
+				border-top: 1px solid ${themePalette('--card-border-top')};
+				height: 1px;
+				width: 50%;
+				${from.tablet} {
+					width: 100px;
+				}
+				${from.desktop} {
+					width: 140px;
+				}
+				margin-top: 12px;
+			}
+		`}
+	/>
 );
 
 const getMedia = ({
@@ -196,17 +218,6 @@ const isWithinTwelveHours = (webPublicationDate: string): boolean => {
 	return timeDiffHours <= 12;
 };
 
-const decideHeadlinePosition = (
-	imageSize?: ImageSizeType,
-	containerType?: DCRContainerType,
-) => {
-	if (imageSize === 'jumbo' && containerType === 'flexible/special') {
-		return 'outer';
-	}
-
-	return 'inner';
-};
-
 export const Card = ({
 	linkTo,
 	format,
@@ -255,6 +266,8 @@ export const Card = ({
 	isTagPage = false,
 	aspectRatio,
 	boostedFontSizes,
+	index = 0,
+	isFlexSplash,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -262,8 +275,6 @@ export const Card = ({
 		imagePositionOnDesktop,
 		supportingContentAlignment,
 	);
-	const headlinePosition = decideHeadlinePosition(imageSize, containerType);
-
 	const showQuotes = !!showQuotedHeadline;
 
 	const isOpinion =
@@ -367,10 +378,14 @@ export const Card = ({
 	/* Whilst we migrate to the new container types, we need to check which container we are in. */
 	const isFlexibleContainer = containerType === 'flexible/special';
 
+	const headlinePosition =
+		isFlexSplash && isFlexibleContainer ? 'outer' : 'inner';
+
 	/** Determines the gap of between card components based on card properties */
 	const getGapSize = (): GapSize => {
 		if (isOnwardContent) return 'none';
 		if (hasBackgroundColour) return 'small';
+		if (isFlexSplash) return 'medium';
 		if (
 			isFlexibleContainer &&
 			(imagePositionOnDesktop === 'left' ||
@@ -389,7 +404,7 @@ export const Card = ({
 	 *
 	 */
 	const decideOuterSublinks = () => {
-		if (!supportingContent) return null;
+		if (!hasSublinks) return null;
 		if (sublinkPosition === 'none') return null;
 		if (sublinkPosition === 'outer') {
 			return (
@@ -398,16 +413,35 @@ export const Card = ({
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
 					isDynamo={isDynamo}
+					isFlexibleContainer={isFlexibleContainer}
 				/>
 			);
 		}
 		return (
-			<Hide from="tablet">
+			<Hide from={isFlexSplash ? 'desktop' : 'tablet'}>
 				<SupportingContent
 					supportingContent={supportingContent}
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
 					isDynamo={isDynamo}
+					isFlexibleContainer={isFlexibleContainer}
+				/>
+			</Hide>
+		);
+	};
+
+	const decideInnerSublinks = () => {
+		if (!hasSublinks) return null;
+		if (sublinkPosition !== 'inner') return null;
+		return (
+			<Hide until={isFlexSplash ? 'desktop' : 'tablet'}>
+				<SupportingContent
+					supportingContent={supportingContent}
+					/* inner links are always vertically stacked */
+					alignment="vertical"
+					containerPalette={containerPalette}
+					isDynamo={isDynamo}
+					isFlexibleContainer={isFlexibleContainer}
 				/>
 			</Hide>
 		);
@@ -416,7 +450,8 @@ export const Card = ({
 	return (
 		<CardWrapper
 			format={format}
-			showTopBar={!isOnwardContent}
+			showTopBar={!isOnwardContent && !isFlexibleContainer}
+			showMobileTopBar={isFlexibleContainer}
 			containerPalette={containerPalette}
 			isOnwardContent={isOnwardContent}
 		>
@@ -429,7 +464,7 @@ export const Card = ({
 			{headlinePosition === 'outer' && (
 				<div
 					css={css`
-						padding-bottom: 8px;
+						padding-bottom: ${space[5]}px;
 					`}
 					style={{ backgroundColor: cardBackgroundColour }}
 				>
@@ -486,6 +521,7 @@ export const Card = ({
 						imagePositionOnDesktop={imagePositionOnDesktop}
 						imagePositionOnMobile={imagePositionOnMobile}
 						showPlayIcon={showPlayIcon}
+						isFlexibleContainer={isFlexibleContainer}
 					>
 						{media.type === 'slideshow' && (
 							<Slideshow
@@ -526,6 +562,7 @@ export const Card = ({
 												assetId={
 													media.mainMedia.videoId
 												}
+												index={index}
 												duration={
 													media.mainMedia.duration
 												}
@@ -685,9 +722,8 @@ export const Card = ({
 									}
 									imageSize={imageSize}
 									imageType={media?.type}
-									shouldHide={
-										isFlexibleContainer ? false : true
-									}
+									shouldHide={isFlexSplash ? false : true}
+									isFlexSplash={isFlexSplash}
 								>
 									<div
 										dangerouslySetInnerHTML={{
@@ -699,10 +735,6 @@ export const Card = ({
 							{!showCommentFooter && (
 								<CardFooter
 									format={format}
-									topAlign={
-										isFlexibleContainer &&
-										imageSize === 'jumbo'
-									}
 									age={decideAge()}
 									commentCount={<CommentCount />}
 									cardBranding={
@@ -720,6 +752,12 @@ export const Card = ({
 									showLivePlayable={showLivePlayable}
 								/>
 							)}
+							{sublinkPosition === 'outer' &&
+								supportingContentAlignment === 'horizontal' &&
+								(imagePositionOnDesktop === 'right' ||
+									imagePositionOnDesktop === 'left') && (
+									<HorizontalDivider />
+								)}
 						</div>
 
 						{/* This div is needed to push this content to the bottom of the card */}
@@ -743,16 +781,7 @@ export const Card = ({
 								</Island>
 							)}
 
-							{hasSublinks && sublinkPosition === 'inner' && (
-								<Hide until="tablet">
-									<SupportingContent
-										supportingContent={supportingContent}
-										alignment="vertical"
-										containerPalette={containerPalette}
-										isDynamo={isDynamo}
-									/>
-								</Hide>
-							)}
+							{decideInnerSublinks()}
 						</div>
 					</ContentWrapper>
 				)}

@@ -6,7 +6,7 @@ import { expectToBeVisible } from '../lib/locators';
 import { ADDITIONAL_REQUEST_PATH, interceptOphanRequest } from '../lib/ophan';
 
 const paidContentPage =
-	'https://www.theguardian.com/power-up-your-payments-with-paypal/article/2024/jul/19/how-i-spotted-a-gap-in-the-market-for-healthy-tasty-easy-cuisine';
+	'https://www.theguardian.com/cook-up-a-feast-with-tesco-finest/2024/sep/13/peach-and-burrata-bruschetta-recipe';
 
 /**
  * This test relies on labs campaigns, where the content is often taken down one the campaign is complete.
@@ -29,8 +29,9 @@ test.describe('Paid content tests', () => {
 				const clickComponent = searchParams.get('clickComponent');
 				const clickLinkNames = searchParams.get('clickLinkNames');
 				return (
-					clickComponent === 'labs-logo | article-meta-paypal' &&
-					clickLinkNames === '["labs-logo-article-meta-paypal"]'
+					clickComponent ===
+						'labs-logo | article-meta-tesco-finest' &&
+					clickLinkNames === '["labs-logo-article-meta-tesco-finest"]'
 				);
 			},
 		});
@@ -57,9 +58,9 @@ test.describe('Paid content tests', () => {
 				const clickLinkNames = searchParams.get('clickLinkNames');
 				return (
 					clickComponent ===
-						'labs-logo | article-related-content-paypal' &&
+						'labs-logo | article-related-content-tesco-finest' &&
 					clickLinkNames ===
-						'["labs-logo-article-related-content-paypal","related-content"]'
+						'["labs-logo-article-related-content-tesco-finest","related-content"]'
 				);
 			},
 		});

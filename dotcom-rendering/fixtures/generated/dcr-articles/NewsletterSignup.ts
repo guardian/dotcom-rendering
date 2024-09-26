@@ -14,6 +14,11 @@
 import type { Article } from '../../../src/types/article';
 
 export const NewsletterSignup: Article = {
+	format: {
+		display: 0,
+		theme: 2,
+		design: 24,
+	},
 	frontendData: {
 		version: 3,
 		headline:

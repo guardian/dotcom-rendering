@@ -18,6 +18,6 @@ describe('byline-tokens', () => {
 
 		const tokens = bylineTokens(byline, contributorTags);
 
-		expect(tokens).toEqual(['', 'John Smith', ' and ', 'Mary Piper', '']);
+		expect(tokens).toEqual(['John Smith', ' and ', 'Mary Piper']);
 	});
 });

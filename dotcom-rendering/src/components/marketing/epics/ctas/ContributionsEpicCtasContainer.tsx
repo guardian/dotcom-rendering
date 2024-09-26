@@ -2,7 +2,7 @@ import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/
 import { useState } from 'react';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import { ThreeTierChoiceCards } from '../ThreeTierChoiceCards';
-import { getDefaultThreeTierAmount } from '../utils/threeTierChoiceCardAmounts';
+import type { SupportTier } from '../utils/threeTierChoiceCardAmounts';
 import { ContributionsEpicButtons } from './ContributionsEpicButtons';
 import { ContributionsEpicReminder } from './ContributionsEpicReminder';
 
@@ -43,11 +43,14 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 	const showChoiceCards =
 		variant.showChoiceCards && !isNonVatCompliantCountry;
 
-	const defaultThreeTierAmount = getDefaultThreeTierAmount(countryCode);
+	/**
+	 * This corresponds to the products in the Product API
+	 * @see https://product-catalog.guardianapis.com/product-catalog.json
+	 */
 	const [
-		threeTierChoiceCardSelectedAmount,
-		setThreeTierChoiceCardSelectedAmount,
-	] = useState<number>(defaultThreeTierAmount);
+		threeTierChoiceCardSelectedProduct,
+		setThreeTierChoiceCardSelectedProduct,
+	] = useState<SupportTier>('SupporterPlus');
 
 	const variantOfChoiceCard =
 		countryCode === 'US'
@@ -59,8 +62,8 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 			{showChoiceCards && (
 				<ThreeTierChoiceCards
 					countryCode={countryCode}
-					selectedAmount={threeTierChoiceCardSelectedAmount}
-					setSelectedAmount={setThreeTierChoiceCardSelectedAmount}
+					selectedProduct={threeTierChoiceCardSelectedProduct}
+					setSelectedProduct={setThreeTierChoiceCardSelectedProduct}
 					variantOfChoiceCard={variantOfChoiceCard}
 				/>
 			)}
@@ -96,8 +99,8 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 				isReminderActive={isReminderActive}
 				isSignedIn={Boolean(fetchedEmail)}
 				showChoiceCards={showChoiceCards}
-				threeTierChoiceCardSelectedAmount={
-					threeTierChoiceCardSelectedAmount
+				threeTierChoiceCardSelectedProduct={
+					threeTierChoiceCardSelectedProduct
 				}
 				amountsTestName={amountsTestName}
 				amountsVariantName={amountsVariantName}

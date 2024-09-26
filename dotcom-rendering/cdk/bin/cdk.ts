@@ -1,15 +1,8 @@
 import { App } from 'aws-cdk-lib';
 import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
-import { DotcomRendering } from '../lib/dotcom-rendering';
 import { RenderingCDKStack } from '../lib/renderingStack';
 
 const cdkApp = new App();
-
-/** OLD article stack */
-const sharedProps = {
-	stack: 'frontend',
-	region: 'eu-west-1',
-};
 
 const cpuScalingSteps = {
 	scalingStepsOut: [
@@ -21,24 +14,6 @@ const cpuScalingSteps = {
 		{ lower: 80, change: 80 },
 	],
 };
-
-/** Legacy, only serves the all newsletters page */
-new DotcomRendering(cdkApp, 'DotcomRendering-PROD', {
-	...sharedProps,
-	app: 'rendering',
-	stage: 'PROD',
-	minCapacity: 3,
-	maxCapacity: 30,
-	instanceType: 't4g.small',
-});
-new DotcomRendering(cdkApp, 'DotcomRendering-CODE', {
-	...sharedProps,
-	app: 'rendering',
-	stage: 'CODE',
-	minCapacity: 1,
-	maxCapacity: 4,
-	instanceType: 't4g.micro',
-});
 
 /** Article */
 new RenderingCDKStack(cdkApp, 'ArticleRendering-CODE', {

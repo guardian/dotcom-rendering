@@ -14,6 +14,11 @@
 import type { Article } from '../../../src/types/article';
 
 export const Labs: Article = {
+	format: {
+		display: 1,
+		theme: 6,
+		design: 19,
+	},
 	frontendData: {
 		version: 3,
 		headline: 'Are you descended from royalty? Six things to consider',

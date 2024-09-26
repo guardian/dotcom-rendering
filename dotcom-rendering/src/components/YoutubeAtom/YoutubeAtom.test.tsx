@@ -33,9 +33,10 @@ describe('YoutubeAtom', () => {
 				}}
 			>
 				<YoutubeAtom
-					index={123}
+					atomId="2e9e138b-0a23-4b96-a7f6-0258c0bacc8f"
+					videoId="c_xtiZNDgGc"
+					uniqueId="c_xtiZNDgGc-1"
 					title="My Youtube video!"
-					videoId="ZCvZmYlQD8"
 					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
@@ -55,7 +56,7 @@ describe('YoutubeAtom', () => {
 			</ConfigProvider>
 		);
 		const { getAllByTestId } = render(atom);
-		const [playerDiv] = getAllByTestId(/^youtube-player-ZCvZmYlQD8-\d+$/);
+		const [playerDiv] = getAllByTestId(/^youtube-player-c_xtiZNDgGc-\d+$/);
 		expect(playerDiv).toBeInTheDocument();
 	});
 
@@ -70,9 +71,10 @@ describe('YoutubeAtom', () => {
 				}}
 			>
 				<YoutubeAtom
-					index={123}
+					atomId="2e9e138b-0a23-4b96-a7f6-0258c0bacc8f"
+					videoId="c_xtiZNDgGc"
+					uniqueId="c_xtiZNDgGc-1"
 					title="My Youtube video!"
-					videoId="ZCvZmYlQD8"
 					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
@@ -93,13 +95,13 @@ describe('YoutubeAtom', () => {
 			</ConfigProvider>
 		);
 		const { getAllByTestId } = render(atom);
-		const [overlay] = getAllByTestId(/^youtube-overlay-ZCvZmYlQD8-\d+$/);
+		const [overlay] = getAllByTestId(/^youtube-overlay-c_xtiZNDgGc-\d+$/);
 		expect(overlay).toBeInTheDocument();
 
 		overlay && fireEvent.click(overlay);
 		expect(overlay).not.toBeInTheDocument();
 
-		const [playerDiv] = getAllByTestId(/^youtube-player-ZCvZmYlQD8-\d+$/);
+		const [playerDiv] = getAllByTestId(/^youtube-player-c_xtiZNDgGc-\d+$/);
 		expect(playerDiv).toBeInTheDocument();
 	});
 
@@ -116,9 +118,10 @@ describe('YoutubeAtom', () => {
 				}}
 			>
 				<YoutubeAtom
-					index={123}
+					atomId="2e9e138b-0a23-4b96-a7f6-0258c0bacc8f"
+					videoId="c_xtiZNDgGc"
+					uniqueId="c_xtiZNDgGc-1"
 					title="My Youtube video!"
-					videoId="ZCvZmYlQD8"
 					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
@@ -138,7 +141,7 @@ describe('YoutubeAtom', () => {
 			</ConfigProvider>
 		);
 		const { getAllByTestId } = render(atom);
-		const [playerDiv] = getAllByTestId(/^youtube-player-ZCvZmYlQD8-\d+$/);
+		const [playerDiv] = getAllByTestId(/^youtube-player-c_xtiZNDgGc-\d+$/);
 		expect(playerDiv?.title).toBe(title);
 	});
 
@@ -154,9 +157,10 @@ describe('YoutubeAtom', () => {
 				}}
 			>
 				<YoutubeAtom
-					index={123}
+					atomId="2e9e138b-0a23-4b96-a7f6-0258c0bacc8f"
+					videoId="c_xtiZNDgGc"
+					uniqueId="c_xtiZNDgGc-1"
 					title="My Youtube video!"
-					videoId="ZCvZmYlQD8"
 					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
@@ -177,7 +181,7 @@ describe('YoutubeAtom', () => {
 			</ConfigProvider>
 		);
 		const { getAllByTestId } = render(atom);
-		const [overlay] = getAllByTestId(/^youtube-overlay-ZCvZmYlQD8-\d+$/);
+		const [overlay] = getAllByTestId(/^youtube-overlay-c_xtiZNDgGc-\d+$/);
 		const ariaLabel = overlay?.getAttribute('aria-label');
 
 		expect(ariaLabel).toBe(`Play video: ${title}`);
@@ -194,9 +198,10 @@ describe('YoutubeAtom', () => {
 				}}
 			>
 				<YoutubeAtom
-					index={123}
+					atomId="2e9e138b-0a23-4b96-a7f6-0258c0bacc8f"
+					videoId="c_xtiZNDgGc"
+					uniqueId="c_xtiZNDgGc-1"
 					title="My Youtube video!"
-					videoId="ZCvZmYlQD8"
 					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
@@ -216,7 +221,7 @@ describe('YoutubeAtom', () => {
 		);
 		const { getAllByTestId } = render(atom);
 		const [placeholder] = getAllByTestId(
-			/^youtube-placeholder-ZCvZmYlQD8-\d+$/,
+			/^youtube-placeholder-c_xtiZNDgGc-\d+$/,
 		);
 		expect(placeholder).toBeInTheDocument();
 	});
@@ -232,9 +237,10 @@ describe('YoutubeAtom', () => {
 				}}
 			>
 				<YoutubeAtom
-					index={123}
+					atomId="2e9e138b-0a23-4b96-a7f6-0258c0bacc8f"
+					videoId="c_xtiZNDgGc"
+					uniqueId="c_xtiZNDgGc-1"
 					title="My Youtube video!"
-					videoId="ZCvZmYlQD8"
 					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
@@ -254,7 +260,7 @@ describe('YoutubeAtom', () => {
 			</ConfigProvider>
 		);
 		const { getAllByTestId } = render(atom);
-		const [overlay] = getAllByTestId(/^youtube-overlay-ZCvZmYlQD8-\d+$/);
+		const [overlay] = getAllByTestId(/^youtube-overlay-c_xtiZNDgGc-\d+$/);
 		expect(overlay).toBeInTheDocument();
 	});
 
@@ -269,9 +275,10 @@ describe('YoutubeAtom', () => {
 				}}
 			>
 				<YoutubeAtom
-					index={123}
+					atomId="2e9e138b-0a23-4b96-a7f6-0258c0bacc8f"
+					videoId="c_xtiZNDgGc"
+					uniqueId="c_xtiZNDgGc-1"
 					title="My Youtube video!"
-					videoId="ZCvZmYlQD8"
 					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
@@ -291,7 +298,7 @@ describe('YoutubeAtom', () => {
 			</ConfigProvider>
 		);
 		const { getAllByTestId } = render(atom);
-		const [overlay] = getAllByTestId(/^youtube-overlay-ZCvZmYlQD8-\d+$/);
+		const [overlay] = getAllByTestId(/^youtube-overlay-c_xtiZNDgGc-\d+$/);
 		expect(overlay).toBeInTheDocument();
 
 		overlay && fireEvent.click(overlay);
@@ -310,9 +317,10 @@ describe('YoutubeAtom', () => {
 					}}
 				>
 					<YoutubeAtom
-						index={123}
+						atomId="atom1"
+						videoId="c_xtiZNDgGc"
+						uniqueId="c_xtiZNDgGc-1"
 						title="My Youtube video!"
-						videoId="ZCvZmYlQD8"
 						alt=""
 						adTargeting={{ disableAds: true }}
 						eventEmitters={[]}
@@ -330,9 +338,10 @@ describe('YoutubeAtom', () => {
 						renderingTarget="Web"
 					/>
 					<YoutubeAtom
-						index={123}
+						atomId="atom1"
+						videoId="c_xtiZNDgGc"
+						uniqueId="c_xtiZNDgGc-2"
 						title="My Youtube video 2!"
-						videoId="ZCvZmYlQD8"
 						alt=""
 						adTargeting={{ disableAds: true }}
 						eventEmitters={[]}
@@ -354,7 +363,7 @@ describe('YoutubeAtom', () => {
 		);
 		const { getAllByTestId } = render(atom);
 		const [overlay1, overlay2] = getAllByTestId(
-			/^youtube-overlay-ZCvZmYlQD8-\d+$/,
+			/^youtube-overlay-c_xtiZNDgGc-\d+$/,
 		);
 		expect(overlay1).toBeInTheDocument();
 

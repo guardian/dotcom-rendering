@@ -43,7 +43,7 @@ const determineCardProperties = (
 				headlineSizeOnMobile: 'tiny',
 				headlineSizeOnTablet: 'small',
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'top',
+				imagePositionOnMobile: 'bottom',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 			};
@@ -53,7 +53,7 @@ const determineCardProperties = (
 				headlineSizeOnMobile: 'small',
 				headlineSizeOnTablet: 'medium',
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'top',
+				imagePositionOnMobile: 'bottom',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 			};
@@ -63,7 +63,7 @@ const determineCardProperties = (
 				headlineSizeOnMobile: 'medium',
 				headlineSizeOnTablet: 'medium',
 				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'top',
+				imagePositionOnMobile: 'bottom',
 				supportingContentAlignment: 'horizontal',
 			};
 		case 'gigaboost':
@@ -72,7 +72,7 @@ const determineCardProperties = (
 				headlineSizeOnMobile: 'large',
 				headlineSizeOnTablet: 'large',
 				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'top',
+				imagePositionOnMobile: 'bottom',
 				supportingContentAlignment: 'horizontal',
 			};
 	}
@@ -105,7 +105,7 @@ export const OneCardLayout = ({
 		card?.supportingContent?.length ?? 0,
 	);
 	return (
-		<UL padBottom={true}>
+		<UL padBottom={true} isFlexibleContainer={true}>
 			<LI padSides={true}>
 				<FrontCard
 					trail={card}
@@ -127,6 +127,7 @@ export const OneCardLayout = ({
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
 					boostedFontSizes={true}
+					isFlexSplash={true}
 				/>
 			</LI>
 		</UL>
@@ -139,7 +140,6 @@ const TwoCardOrFourCardLayout = ({
 	showAge,
 	absoluteServerTimes,
 	showImage = true,
-	padBottom,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
@@ -148,11 +148,15 @@ const TwoCardOrFourCardLayout = ({
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	showImage?: boolean;
-	padBottom?: boolean;
 }) => {
 	const hasTwoOrFewerCards = cards.length <= 2;
 	return (
-		<UL direction="row" padBottom={padBottom}>
+		<UL
+			direction="row"
+			padBottom={true}
+			showTopBar={true}
+			isFlexibleContainer={true}
+		>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI
@@ -173,7 +177,8 @@ const TwoCardOrFourCardLayout = ({
 							imagePositionOnDesktop={
 								hasTwoOrFewerCards ? 'left' : 'bottom'
 							}
-							supportingContent={undefined} // we don't want to support sublinks on standard cards here so we hard code to undefined.
+							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
+							supportingContent={undefined}
 							imageSize={'medium'}
 							aspectRatio="5:4"
 							kickerText={card.kickerText}

@@ -1,5 +1,6 @@
 import type { EditionId } from '../lib/edition';
 import type { ConfigType, ServerSideTests, Switches } from '../types/config';
+import type { ReportError } from '../types/sentry';
 
 export interface Guardian {
 	polyfilled: boolean;
@@ -47,7 +48,7 @@ export interface Guardian {
 	};
 	modules: {
 		sentry: {
-			reportError: (error: Error, feature: string) => void;
+			reportError: ReportError;
 		};
 	};
 	adBlockers: unknown;
