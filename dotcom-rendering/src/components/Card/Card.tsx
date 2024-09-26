@@ -380,6 +380,8 @@ export const Card = ({
 		containerType === 'flexible/special' ||
 		containerType === 'flexible/general';
 
+	const isFlexibleSpecialContainer = containerType === 'flexible/special';
+
 	const headlinePosition =
 		isFlexSplash && isFlexibleContainer ? 'outer' : 'inner';
 
@@ -452,8 +454,8 @@ export const Card = ({
 	return (
 		<CardWrapper
 			format={format}
-			showTopBar={!isOnwardContent && !isFlexibleContainer}
-			showMobileTopBar={isFlexibleContainer}
+			showTopBar={!isOnwardContent && !isFlexibleSpecialContainer}
+			showMobileTopBar={isFlexibleSpecialContainer}
 			containerPalette={containerPalette}
 			isOnwardContent={isOnwardContent}
 		>
