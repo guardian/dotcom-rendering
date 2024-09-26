@@ -98,11 +98,11 @@ export const enhanceBlocks = (
 	format: ArticleFormat,
 	options: Options,
 ): Block[] => {
-	let additionalElement: FEElement;
+	const additionalElement: FEElement[] = [];
 	if (options.audioArticleImage) {
 		options.audioArticleImage._type =
 			'model.dotcomrendering.pageElements.ImageBlockElement';
-		additionalElement = options.audioArticleImage;
+		additionalElement.push(options.audioArticleImage);
 	}
 	return blocks.map((block) => ({
 		...block,
@@ -110,6 +110,6 @@ export const enhanceBlocks = (
 			format,
 			block.id,
 			options,
-		)([...block.elements, additionalElement]),
+		)([...block.elements, ...additionalElement]),
 	}));
 };
