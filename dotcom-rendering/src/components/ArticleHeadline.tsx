@@ -47,85 +47,52 @@ const topPadding = css`
 	}
 `;
 
-const decideHeadlineFont = (format: ArticleFormat) => {
-	switch (format.display) {
-		case ArticleDisplay.Immersive: {
-			if (format.theme === Pillar.News) {
-				return headlineMedium50;
-			}
-			switch (format.design) {
-				case ArticleDesign.Obituary:
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
-					return headlineLight50;
-				case ArticleDesign.Feature:
-				case ArticleDesign.Review:
-				case ArticleDesign.Recipe:
-				case ArticleDesign.Interview:
-					return headlineBold50;
-				default:
-					return headlineMedium50;
-			}
-		}
+const isNewsNotComment = (format: ArticleFormat) =>
+	format.theme === Pillar.News && format.design !== ArticleDesign.Comment;
+
+const getHeadlineFontByDesign = (design: ArticleDesign, size: number) => {
+	switch (design) {
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+			return size === 50
+				? headlineLight50
+				: size === 34
+				? headlineLight34
+				: headlineLight28;
+		case ArticleDesign.Feature:
+		case ArticleDesign.Review:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Interview:
+			return size === 50
+				? headlineBold50
+				: size === 34
+				? headlineBold34
+				: headlineBold28;
 		default:
-			if (format.theme === Pillar.News) {
-				return headlineMedium34;
-			}
-			switch (format.design) {
-				case ArticleDesign.Obituary:
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
-					return headlineLight34;
-				case ArticleDesign.Feature:
-				case ArticleDesign.Review:
-				case ArticleDesign.Recipe:
-				case ArticleDesign.Interview:
-					return headlineBold34;
-				default:
-					return headlineMedium34;
-			}
+			return size === 50
+				? headlineMedium50
+				: size === 34
+				? headlineMedium34
+				: headlineMedium28;
 	}
 };
-const decideMobileHeadlineFont = (format: ArticleFormat) => {
-	switch (format.display) {
-		case ArticleDisplay.Immersive: {
-			if (format.theme === Pillar.News) {
-				return headlineMedium34;
-			}
-			switch (format.design) {
-				case ArticleDesign.Obituary:
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-					return headlineLight34;
-				case ArticleDesign.Feature:
-				case ArticleDesign.Review:
-				case ArticleDesign.Recipe:
-				case ArticleDesign.Interview:
-					return headlineBold34;
-				default:
-					return headlineMedium34;
-			}
-		}
-		default:
-			if (format.theme === Pillar.News) {
-				return headlineMedium28;
-			}
-			switch (format.design) {
-				case ArticleDesign.Obituary:
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-					return headlineLight28;
-				case ArticleDesign.Feature:
-				case ArticleDesign.Review:
-				case ArticleDesign.Recipe:
-				case ArticleDesign.Interview:
-					return headlineBold28;
-				default:
-					return headlineMedium28;
-			}
+
+const decideHeadlineFont = (format: ArticleFormat) => {
+	const size = format.display === ArticleDisplay.Immersive ? 50 : 34;
+	if (isNewsNotComment(format)) {
+		return size === 50 ? headlineMedium50 : headlineMedium34;
 	}
+	return getHeadlineFontByDesign(format.design, size);
+};
+
+const decideMobileHeadlineFont = (format: ArticleFormat) => {
+	const size = format.display === ArticleDisplay.Immersive ? 34 : 28;
+	if (isNewsNotComment(format)) {
+		return size === 34 ? headlineMedium34 : headlineMedium28;
+	}
+	return getHeadlineFontByDesign(format.design, size);
 };
 const headlineFont = (format: ArticleFormat) => css`
 	${decideMobileHeadlineFont(format)}
