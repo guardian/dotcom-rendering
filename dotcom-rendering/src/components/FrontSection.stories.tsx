@@ -1,29 +1,10 @@
 import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
+import type { Meta, StoryObj } from '@storybook/react';
 import type { ReactNode } from 'react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { LI } from './Card/components/LI';
 import { FrontSection } from './FrontSection';
-
-export default {
-	component: FrontSection,
-	title: 'Components/FrontSection',
-	parameters: {
-		viewport: {
-			// This has the effect of turning off the viewports addon by default
-			defaultViewport: 'doesNotExist',
-		},
-		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.tablet,
-				breakpoints.desktop,
-				breakpoints.leftCol,
-				breakpoints.wide,
-			],
-		},
-	},
-};
 
 const Placeholder = ({
 	heightInPixels = 400,
@@ -84,97 +65,85 @@ const PageSkinWrapper = ({ children }: { children: ReactNode }) => (
 	</div>
 );
 
-export const ContainerStory = () => {
-	return (
-		<FrontSection
-			title="Default Container"
-			showTopBorder={false}
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
-			<Placeholder />
-		</FrontSection>
-	);
-};
-ContainerStory.storyName = 'default container';
+export default {
+	component: FrontSection,
+	title: 'Components/FrontSection',
+	parameters: {
+		viewport: {
+			// This has the effect of turning off the viewports addon by default
+			defaultViewport: 'doesNotExist',
+		},
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.tablet,
+				breakpoints.desktop,
+				breakpoints.leftCol,
+				breakpoints.wide,
+			],
+		},
+	},
+	args: {
+		discussionApiUrl,
+		editionId: 'UK',
+		children: <Placeholder />,
+	},
+	render: (args) => <FrontSection {...args} />,
+} satisfies Meta<typeof FrontSection>;
 
-export const NoTitleStory = () => {
-	return (
-		<FrontSection
-			showTopBorder={false}
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
-			<Placeholder />
-		</FrontSection>
-	);
+export const ContainerStory = {
+	name: 'default container',
+	args: { title: 'Default Container', showTopBorder: false },
 };
-NoTitleStory.storyName = 'with no title';
 
-export const TopBorderStory = () => {
-	return (
-		<FrontSection
-			title="Borders"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
-			<Placeholder />
-		</FrontSection>
-	);
+export const NoTitleStory = {
+	name: 'with no title',
+	args: { showTopBorder: false },
 };
-TopBorderStory.storyName = 'with all borders';
 
-export const LeftContentStory = () => {
-	return (
-		<FrontSection
-			title="LeftContent"
-			leftContent={
-				<LeftColPlaceholder text="LeftCol" heightInPixels={100} />
-			}
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
-			<Placeholder />
-		</FrontSection>
-	);
+export const TopBorderStory = {
+	name: 'with all borders',
+	args: { title: 'Borders' },
 };
-LeftContentStory.storyName = 'with an element passed into the left column';
 
-export const LeftContentOpinionStory = () => {
-	return (
-		<FrontSection
-			title="Opinion"
-			leftContent={
-				<LeftColPlaceholder text="LeftCol" heightInPixels={100} />
-			}
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
-			<Placeholder />
-		</FrontSection>
-	);
+export const LeftContentStory = {
+	name: 'with an element passed into the left column',
+	args: {
+		title: 'LeftContent',
+		leftContent: <LeftColPlaceholder text="LeftCol" heightInPixels={100} />,
+	},
 };
-LeftContentOpinionStory.storyName =
-	'with an element passed into the left column of opinion section';
 
-export const ToggleableStory = () => {
-	return (
-		<FrontSection
-			title="Toggleable Container"
-			toggleable={true}
-			sectionId="section-id"
-			showTopBorder={false}
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
-			<Placeholder />
-		</FrontSection>
-	);
+export const LeftContentOpinionStory = {
+	name: 'with an element passed into the left column of opinion section',
+	args: {
+		title: 'Opinion',
+		leftContent: <LeftColPlaceholder text="LeftCol" heightInPixels={100} />,
+	},
 };
-ToggleableStory.storyName = 'toggleable container';
 
-export const MultipleStory = () => {
-	return (
+export const ToggleableStory = {
+	name: 'toggleable container',
+	args: {
+		title: 'Toggleable Container',
+		toggleable: true,
+		showTopBorder: false,
+		sectionId: 'section-id',
+	},
+};
+
+export const MultipleStory = {
+	name: 'with multiple FrontGrids',
+	parameters: {
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.leftCol,
+				breakpoints.wide,
+			],
+		},
+	},
+	render: () => (
 		<>
 			<FrontSection
 				title="Page Title"
@@ -226,55 +195,37 @@ export const MultipleStory = () => {
 				<Placeholder />
 			</FrontSection>
 		</>
-	);
-};
-MultipleStory.storyName = 'with multiple FrontGrids';
-MultipleStory.story = {
-	parameters: {
-		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.leftCol,
-				breakpoints.wide,
-			],
-		},
-	},
+	),
 };
 
-export const TreatsStory = () => {
-	return (
-		<FrontSection
-			title="Treats and Date Header"
-			treats={[
-				{
-					links: [
-						{
-							text: 'The treat text',
-							linkTo: '',
-						},
-					],
-					editionId: 'UK',
-				},
-				{
-					links: [
-						{
-							text: 'Another piece of text',
-							linkTo: '',
-						},
-					],
-					editionId: 'UK',
-				},
-			]}
-			showTopBorder={false}
-			showDateHeader={true}
-			editionId={'UK'}
-			discussionApiUrl={discussionApiUrl}
-		>
-			<Placeholder />
-		</FrontSection>
-	);
+export const TreatsStory = {
+	name: 'with treats and date header',
+	args: {
+		title: 'Treats and Date Header',
+		showTopBorder: false,
+		showDateHeader: true,
+		treats: [
+			{
+				links: [
+					{
+						text: 'The treat text',
+						linkTo: '',
+					},
+				],
+				editionId: 'UK',
+			},
+			{
+				links: [
+					{
+						text: 'Another piece of text',
+						linkTo: '',
+					},
+				],
+				editionId: 'UK',
+			},
+		],
+	},
 };
-TreatsStory.storyName = 'with treats and date header';
 
 /**
  * Use the same logo for each of the stories with branding except stories for Advertising partner and Exclusive advertising partner labels
@@ -299,166 +250,131 @@ const logoForAdvertisingPartner = {
 	label: 'Advertising partner',
 };
 
-export const WithSponsoredBranding = () => {
-	return (
-		<FrontSection
-			title="Section"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-			collectionBranding={{
-				kind: 'sponsored',
-				isFrontBranding: false,
-				branding: {
-					brandingType: {
-						name: 'sponsored',
-					},
-					sponsorName: 'guardian.org',
-					logo,
-					aboutThisLink:
-						'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+export const WithSponsoredBranding = {
+	name: 'with sponsored branding',
+	args: {
+		title: 'Section',
+		collectionBranding: {
+			kind: 'sponsored',
+			isFrontBranding: false,
+			branding: {
+				brandingType: {
+					name: 'sponsored',
 				},
-				isContainerBranding: true,
-				hasMultipleBranding: false,
-			}}
-		>
-			<Placeholder />
-		</FrontSection>
-	);
+				sponsorName: 'guardian.org',
+				logo,
+				aboutThisLink:
+					'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+			},
+			isContainerBranding: true,
+			hasMultipleBranding: false,
+		},
+	},
 };
-WithSponsoredBranding.storyName = 'with sponsored branding';
 
-export const WithSponsoredBrandingAdvertisingPartner = () => {
-	return (
-		<FrontSection
-			title="Section"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-			collectionBranding={{
-				kind: 'sponsored',
-				isFrontBranding: true,
-				branding: {
-					brandingType: {
-						name: 'sponsored',
-					},
-					sponsorName: 'guardian.org',
-					logo: logoForAdvertisingPartner,
-					aboutThisLink:
-						'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+export const WithSponsoredBrandingAdvertisingPartner = {
+	name: 'with sponsored branding for Advertising partner',
+	args: {
+		title: 'Section',
+		collectionBranding: {
+			kind: 'sponsored',
+			isFrontBranding: true,
+			branding: {
+				brandingType: {
+					name: 'sponsored',
 				},
-				isContainerBranding: false,
-				hasMultipleBranding: false,
-			}}
-		>
-			<Placeholder />
-		</FrontSection>
-	);
+				sponsorName: 'guardian.org',
+				logo: logoForAdvertisingPartner,
+				aboutThisLink:
+					'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+			},
+			isContainerBranding: false,
+			hasMultipleBranding: false,
+		},
+	},
 };
-WithSponsoredBrandingAdvertisingPartner.storyName =
-	'with sponsored branding for Advertising partner';
 
-export const WithSponsoredBrandingAdvertisingPartnerTagPages = () => {
-	return (
-		<FrontSection
-			title="Section"
-			isTagPage={true}
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-			collectionBranding={{
-				kind: 'sponsored',
-				isFrontBranding: true,
-				branding: {
-					brandingType: {
-						name: 'sponsored',
-					},
-					sponsorName: 'guardian.org',
-					logo: logoForAdvertisingPartner,
-					aboutThisLink:
-						'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+export const WithSponsoredBrandingAdvertisingPartnerTagPages = {
+	name: 'with sponsored branding for Advertising partner TagPages',
+	args: {
+		title: 'Section',
+		isTagPage: true,
+		collectionBranding: {
+			kind: 'sponsored',
+			isFrontBranding: true,
+			branding: {
+				brandingType: {
+					name: 'sponsored',
 				},
-				isContainerBranding: false,
-				hasMultipleBranding: false,
-			}}
-		>
-			<Placeholder />
-		</FrontSection>
-	);
+				sponsorName: 'guardian.org',
+				logo: logoForAdvertisingPartner,
+				aboutThisLink:
+					'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+			},
+			isContainerBranding: false,
+			hasMultipleBranding: false,
+		},
+	},
 };
-WithSponsoredBrandingAdvertisingPartnerTagPages.storyName =
-	'with sponsored branding for Advertising partner TagPages';
 
-export const WithPaidBranding = () => {
-	return (
-		<FrontSection
-			title="Section"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-			collectionBranding={{
-				kind: 'paid-content',
-				isFrontBranding: false,
-				branding: {
-					brandingType: {
-						name: 'paid-content',
-					},
-					sponsorName: 'guardian.org',
-					logo,
-					aboutThisLink:
-						'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+export const WithPaidBranding = {
+	name: 'with paid content branding',
+	args: {
+		title: 'Section',
+		collectionBranding: {
+			kind: 'paid-content',
+			isFrontBranding: false,
+			branding: {
+				brandingType: {
+					name: 'paid-content',
 				},
-				isContainerBranding: true,
-				hasMultipleBranding: false,
-			}}
-		>
-			<Placeholder />
-		</FrontSection>
-	);
+				sponsorName: 'guardian.org',
+				logo,
+				aboutThisLink:
+					'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+			},
+			isContainerBranding: true,
+			hasMultipleBranding: false,
+		},
+	},
 };
-WithPaidBranding.storyName = 'with paid content branding';
 
-export const WithPaidContentForWholeFront = () => {
-	return (
-		<FrontSection
-			title="First Section"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-			collectionBranding={{
-				kind: 'paid-content',
-				isFrontBranding: true,
-				branding: {
-					brandingType: {
-						name: 'paid-content',
-					},
-					sponsorName: 'guardian.org',
-					logo,
-					aboutThisLink:
-						'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+export const WithPaidContentForWholeFront = {
+	name: 'with paid content for whole front',
+	args: {
+		title: 'First Section',
+		collectionBranding: {
+			kind: 'paid-content',
+			isFrontBranding: true,
+			branding: {
+				brandingType: {
+					name: 'paid-content',
 				},
-				isContainerBranding: false,
-				hasMultipleBranding: false,
-			}}
-		>
-			<Placeholder />
-		</FrontSection>
-	);
+				sponsorName: 'guardian.org',
+				logo,
+				aboutThisLink:
+					'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+			},
+			isContainerBranding: false,
+			hasMultipleBranding: false,
+		},
+	},
 };
-WithPaidContentForWholeFront.storyName = 'with paid content for whole front';
 
-export const PageSkinStory = () => {
-	return (
+export const PageSkinStory = {
+	name: 'with page skin',
+	args: {
+		title: 'Page Skin',
+		hasPageSkin: true,
+		children: (
+			<Placeholder text="Page skins constrain my layout to desktop" />
+		),
+	},
+	render: (args) => (
 		<PageSkinWrapper>
-			<FrontSection
-				title="Page Skin"
-				hasPageSkin={true}
-				discussionApiUrl={discussionApiUrl}
-				editionId={'UK'}
-			>
-				<Placeholder text="Page skins constrain my layout to desktop" />
-			</FrontSection>
+			<FrontSection {...args} />
 		</PageSkinWrapper>
-	);
-};
-
-PageSkinStory.storyName = 'with page skin';
-PageSkinStory.story = {
+	),
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -468,4 +384,4 @@ PageSkinStory.story = {
 			],
 		},
 	},
-};
+} satisfies StoryObj<typeof FrontSection>;
