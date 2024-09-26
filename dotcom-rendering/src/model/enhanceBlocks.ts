@@ -1,4 +1,4 @@
-import { type ArticleFormat, isUndefined } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat, isUndefined } from '@guardian/libs';
 import type {
 	AudioImage,
 	AudioImageElement,
@@ -102,7 +102,7 @@ export const enhanceBlocks = (
 	options: Options,
 ): Block[] => {
 	const additionalElement: FEElement[] = [];
-	if (options.audioArticleImage) {
+	if (options.audioArticleImage && format.design === ArticleDesign.Audio) {
 		const images: Image[] = options.audioArticleImage.media.allImages.map(
 			(image: AudioImage) => ({
 				...image,
