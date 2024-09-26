@@ -1,6 +1,9 @@
 import { type ArticleFormat, isUndefined } from '@guardian/libs';
 import type {
+	AudioImage,
+	AudioImageElement,
 	FEElement,
+	Image,
 	ImageBlockElement,
 	ImageForLightbox,
 	Newsletter,
@@ -27,7 +30,7 @@ type Options = {
 	promotedNewsletter: Newsletter | undefined;
 	imagesForLightbox: ImageForLightbox[];
 	hasAffiliateLinksDisclaimer: boolean;
-	audioArticleImage?: ImageBlockElement;
+	audioArticleImage?: AudioImageElement;
 };
 
 const enhanceNewsletterSignup =
@@ -100,9 +103,25 @@ export const enhanceBlocks = (
 ): Block[] => {
 	const additionalElement: FEElement[] = [];
 	if (options.audioArticleImage) {
-		options.audioArticleImage._type =
-			'model.dotcomrendering.pageElements.ImageBlockElement';
-		additionalElement.push(options.audioArticleImage);
+		const images: Image[] = options.audioArticleImage.media.allImages.map(
+			(image: AudioImage) => ({
+				...image,
+				mimeType: 'image/jpeg',
+			}),
+		);
+		const frontendImageElement: ImageBlockElement = {
+			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+			imageSources: options.audioArticleImage.imageSources,
+			media: {
+				allImages: images,
+			},
+			role: options.audioArticleImage.role,
+			data: options.audioArticleImage.data,
+			elementId:
+				options.audioArticleImage.media.allImages[0]?.fields.mediaId ??
+				'audio-article-image',
+		};
+		additionalElement.push(frontendImageElement);
 	}
 	return blocks.map((block) => ({
 		...block,

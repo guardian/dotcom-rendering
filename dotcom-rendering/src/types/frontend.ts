@@ -4,8 +4,8 @@ import type { FEArticleBadgeType } from './badge';
 import type { CommercialProperties } from './commercial';
 import type { ConfigType, ServerSideTests } from './config';
 import type {
+	AudioImageElement,
 	FEElement,
-	ImageBlockElement,
 	Newsletter,
 	StarRating,
 } from './content';
@@ -90,7 +90,7 @@ export interface FEArticleType {
 	isCommentable: boolean;
 	commercialProperties: CommercialProperties;
 	starRating?: StarRating;
-	audioArticleImage?: ImageBlockElement;
+	audioArticleImage?: AudioImageElement;
 	trailText: string;
 	badge?: FEArticleBadgeType;
 

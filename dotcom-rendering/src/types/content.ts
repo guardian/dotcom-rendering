@@ -275,6 +275,32 @@ export interface ImageBlockElement {
 	position?: number;
 }
 
+export interface AudioImage {
+	index: number;
+	fields: {
+		height: string;
+		width: string;
+		isMaster?: string;
+		source?: string;
+		caption?: string;
+		mediaId?: string;
+	};
+	mediaType: string;
+	url: string;
+}
+export interface AudioImageElement {
+	media: { allImages: AudioImage[] };
+	data: {
+		alt?: string;
+		credit?: string;
+		caption?: string;
+		copyright?: string;
+	};
+	imageSources: ImageSource[];
+	displayCredit?: boolean;
+	role: RoleType;
+}
+
 export interface InstagramBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.InstagramBlockElement';
 	elementId: string;
