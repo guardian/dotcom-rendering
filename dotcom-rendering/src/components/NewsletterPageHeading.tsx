@@ -7,11 +7,13 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { Link, SvgChevronRightSingle } from '@guardian/source/react-components';
+import type { EditionId } from '../lib/edition';
 import { Section } from './Section';
 
 export interface NewslettersListProps {
 	mmaUrl?: string;
 	newsletterCount: number;
+	editionId: EditionId;
 }
 
 // To align the heading content with the carousel below
@@ -53,6 +55,7 @@ const manageLinkContainer = css`
 export const NewslettersPageHeading = ({
 	mmaUrl,
 	newsletterCount,
+	editionId,
 }: NewslettersListProps) => {
 	return (
 		<Section
@@ -68,8 +71,12 @@ export const NewslettersPageHeading = ({
 					<span>Newsletters</span>
 				</h1>
 				<p css={subtitleStyle}>
-					Choose from {newsletterCount} available newsletters. The
-					best Guardian journalism, free to your inbox
+					{editionId !== 'AU' && (
+						<>
+							Choose from {newsletterCount} available newsletters.{' '}
+						</>
+					)}
+					The best Guardian journalism, free to your inbox
 				</p>
 
 				{!!mmaUrl && (
