@@ -173,7 +173,9 @@ export const SplashCardLayout = ({
 					aspectRatio="5:4"
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
+					liveUpdatesOrientation="horizontal"
 					boostedFontSizes={true}
+					isFlexSplash={true}
 				/>
 			</LI>
 		</UL>

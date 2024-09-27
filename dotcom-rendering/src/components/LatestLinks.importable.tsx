@@ -17,8 +17,9 @@ type Props = {
 	id: string;
 	direction: 'horizontal' | 'vertical';
 	absoluteServerTimes: boolean;
-	isDynamo?: true;
+	isDynamoOrFlexSplash?: boolean;
 	containerPalette?: DCRContainerPalette;
+	isFlexibleContainer?: boolean;
 };
 
 const horizontal = css`
@@ -59,6 +60,10 @@ const transparent = css`
 	color: transparent;
 `;
 
+const flexibleStandardStyles = css`
+	border-top: 1px dashed ${themePalette('--card-border-top')};
+`;
+
 const THREE_LINES_AS_CHARACTERS = 75;
 
 /**
@@ -90,9 +95,10 @@ const extractAboutThreeLines = (text: string) =>
 export const LatestLinks = ({
 	id,
 	direction,
-	isDynamo,
+	isDynamoOrFlexSplash,
 	containerPalette,
 	absoluteServerTimes,
+	isFlexibleContainer,
 }: Props) => {
 	const { data } = useApi<{
 		blocks: Array<{
@@ -107,7 +113,7 @@ export const LatestLinks = ({
 	});
 
 	/** Reserve space for the latest links to avoid CLS while loading */
-	const minHeight = isDynamo
+	const minHeight = isDynamoOrFlexSplash
 		? `calc(${space[1]}px + 4 * ${lineHeights.regular}em);`
 		: `calc(4 * ${lineHeights.regular}em);`;
 
@@ -123,12 +129,15 @@ export const LatestLinks = ({
 			css={[
 				ulStyle,
 				revealStyles,
-				!!isDynamo || direction === 'horizontal'
+				!!isDynamoOrFlexSplash || direction === 'horizontal'
 					? horizontal
 					: vertical,
 				css`
 					color: ${themePalette('--card-headline-trail-text')};
 				`,
+				isFlexibleContainer &&
+					!isDynamoOrFlexSplash &&
+					flexibleStandardStyles,
 			]}
 		>
 			{data && data.blocks.length >= 3 ? (
