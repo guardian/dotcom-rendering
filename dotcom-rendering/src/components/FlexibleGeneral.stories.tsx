@@ -25,6 +25,69 @@ const splashCard = {
 	kickerText: 'Kicker for splash card',
 };
 
+const liveUpdatesCard = {
+	url: '/football/live/2023/aug/20/spain-v-england-womens-world-cup-final-live',
+	headline:
+		'Spain 1-0 England: Women’s World Cup 2023 final – as it happened',
+	showByline: false,
+	byline: 'Sarah Rendell (the match) and James Wallace (reaction)',
+	trailText:
+		'<p>La Roja won their first Women’s World Cup after Olga Carmona’s first-half strike, with Mary Earps’ penalty save proving to be in vain</p>',
+	image: {
+		src: 'https://i.guim.co.uk/img/media/d7b100ce3d052d66bfc6c0de8f777901c774fede/0_214_5118_3072/master/5118.jpg',
+		altText: 'Spain celebrate with the trophy.',
+	},
+	webPublicationDate: '2023-08-20T16:09:23.000Z',
+	format: {
+		theme: Pillar.Sport,
+		design: ArticleDesign.LiveBlog,
+		display: ArticleDisplay.Standard,
+	},
+	showQuotedHeadline: false,
+	dataLinkName: 'news | group-0 | card-@1',
+	mainMedia: {
+		type: 'Video',
+		id: 'fd00c892-407f-4d99-adfb-a8d12eada25f',
+		videoId: '04lLgC1NioA',
+		height: 300,
+		width: 500,
+		origin: '',
+		title: 'Spain fans celebrate at final whistle as England fans left heartbroken – video',
+		duration: 0,
+		expired: false,
+		images: [
+			{
+				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/2000.jpg',
+				width: 2000,
+			},
+			{
+				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/1000.jpg',
+				width: 1000,
+			},
+			{
+				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/500.jpg',
+				width: 500,
+			},
+			{
+				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/140.jpg',
+				width: 140,
+			},
+			{
+				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/4791.jpg',
+				width: 4791,
+			},
+		],
+	},
+	isExternalLink: false,
+	discussionApiUrl,
+	showLivePlayable: true,
+	supportingContent: getSublinks(4, {
+		theme: Pillar.Sport,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+	}),
+} satisfies DCRFrontCard;
+
 /** This creates a list of 8 standard cards which contain:
  * - a card with sublinks
  * - a media card
@@ -54,10 +117,10 @@ const standardCards = standards.map((card, index) => {
 		// The fifth card is megaboosted and has two sublinks
 		case 5:
 			return enhanceCardFields({
+				...liveUpdatesCard,
 				boostLevel: 'megaboost',
 				supportingContent: getSublinks(2),
 			});
-
 		default:
 			return enhanceCardFields({});
 	}
@@ -144,16 +207,20 @@ const meta = {
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
 	},
-	render: ({ frontSectionTitle, ...args }) => (
-		<FrontSection
-			title={frontSectionTitle}
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-			showTopBorder={true}
-		>
-			<FlexibleGeneral {...args} />
-		</FrontSection>
-	),
+	render: ({ frontSectionTitle, ...args }) => {
+		mockLatestLinksReq();
+
+		return (
+			<FrontSection
+				title={frontSectionTitle}
+				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
+				showTopBorder={true}
+			>
+				<FlexibleGeneral {...args} />
+			</FrontSection>
+		);
+	},
 } satisfies Meta<FlexibleGeneralArgsAndCustomArgs>;
 
 export default meta;
@@ -200,69 +267,6 @@ export const FourSublinkSplash: Story = {
 	},
 };
 
-const liveUpdatesCard = {
-	url: '/football/live/2023/aug/20/spain-v-england-womens-world-cup-final-live',
-	headline:
-		'Spain 1-0 England: Women’s World Cup 2023 final – as it happened',
-	showByline: false,
-	byline: 'Sarah Rendell (the match) and James Wallace (reaction)',
-	trailText:
-		'<p>La Roja won their first Women’s World Cup after Olga Carmona’s first-half strike, with Mary Earps’ penalty save proving to be in vain</p>',
-	image: {
-		src: 'https://i.guim.co.uk/img/media/d7b100ce3d052d66bfc6c0de8f777901c774fede/0_214_5118_3072/master/5118.jpg',
-		altText: 'Spain celebrate with the trophy.',
-	},
-	webPublicationDate: '2023-08-20T16:09:23.000Z',
-	format: {
-		theme: Pillar.Sport,
-		design: ArticleDesign.LiveBlog,
-		display: ArticleDisplay.Standard,
-	},
-	showQuotedHeadline: false,
-	dataLinkName: 'news | group-0 | card-@1',
-	mainMedia: {
-		type: 'Video',
-		id: 'fd00c892-407f-4d99-adfb-a8d12eada25f',
-		videoId: '04lLgC1NioA',
-		height: 300,
-		width: 500,
-		origin: '',
-		title: 'Spain fans celebrate at final whistle as England fans left heartbroken – video',
-		duration: 0,
-		expired: false,
-		images: [
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/2000.jpg',
-				width: 2000,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/1000.jpg',
-				width: 1000,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/500.jpg',
-				width: 500,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/140.jpg',
-				width: 140,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/4791.jpg',
-				width: 4791,
-			},
-		],
-	},
-	isExternalLink: false,
-	discussionApiUrl,
-	showLivePlayable: true,
-	supportingContent: getSublinks(4, {
-		theme: Pillar.Sport,
-		design: ArticleDesign.Standard,
-		display: ArticleDisplay.Standard,
-	}),
-} satisfies DCRFrontCard;
-
 export const FourSublinkSplashWithLiveUpdates: Story = {
 	name: 'Standard splash with sublinks and live updates',
 	args: {
@@ -272,19 +276,6 @@ export const FourSublinkSplashWithLiveUpdates: Story = {
 			splash: [liveUpdatesCard],
 			standard: standardCards,
 		},
-	},
-	render: ({ frontSectionTitle, ...args }) => {
-		mockLatestLinksReq();
-		return (
-			<FrontSection
-				title={frontSectionTitle}
-				discussionApiUrl={discussionApiUrl}
-				editionId={'UK'}
-				showTopBorder={true}
-			>
-				<FlexibleGeneral {...args} />
-			</FrontSection>
-		);
 	},
 };
 

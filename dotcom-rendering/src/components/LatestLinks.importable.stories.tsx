@@ -161,7 +161,7 @@ export const WorldCupFinal2023 = () => {
 						id="/football/live/2023/aug/20/spain-v-england-womens-world-cup-final-live"
 						direction="horizontal"
 						containerPalette={containerPalette}
-						isDynamo={true}
+						isDynamoOrFlexSplash={true}
 						absoluteServerTimes={true}
 					/>
 				</Island>

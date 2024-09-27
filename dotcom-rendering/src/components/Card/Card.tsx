@@ -105,6 +105,7 @@ export type Props = {
 	isExternalLink: boolean;
 	slideshowImages?: DCRSlideshowImage[];
 	showLivePlayable?: boolean;
+	liveUpdatesOrientation?: 'horizontal' | 'vertical';
 	onwardsSource?: OnwardsSource;
 	pauseOffscreenVideo?: boolean;
 	showMainVideo?: boolean;
@@ -259,6 +260,7 @@ export const Card = ({
 	isExternalLink,
 	slideshowImages,
 	showLivePlayable = false,
+	liveUpdatesOrientation = 'horizontal',
 	onwardsSource,
 	pauseOffscreenVideo = false,
 	showMainVideo = true,
@@ -376,10 +378,12 @@ export const Card = ({
 	const hasBackgroundColour = !containerPalette && isMediaCard(format);
 
 	/* Whilst we migrate to the new container types, we need to check which container we are in. */
-	const isFlexibleContainer = containerType === 'flexible/special';
+	const isFlexibleContainer =
+		containerType === 'flexible/special' ||
+		containerType === 'flexible/general';
 
 	const headlinePosition =
-		isFlexSplash && isFlexibleContainer ? 'outer' : 'inner';
+		isFlexibleContainer && isFlexSplash ? 'outer' : 'inner';
 
 	/** Determines the gap of between card components based on card properties */
 	const getGapSize = (): GapSize => {
@@ -771,13 +775,18 @@ export const Card = ({
 								>
 									<LatestLinks
 										id={linkTo}
-										isDynamo={isDynamo}
-										direction={supportingContentAlignment}
+										isDynamoOrFlexSplash={
+											!!(isDynamo ?? isFlexSplash)
+										}
+										direction={liveUpdatesOrientation}
 										containerPalette={containerPalette}
 										absoluteServerTimes={
 											absoluteServerTimes
 										}
-									></LatestLinks>
+										isFlexibleContainer={
+											isFlexibleContainer
+										}
+									/>
 								</Island>
 							)}
 
