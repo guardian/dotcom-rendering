@@ -29,7 +29,7 @@ const splashCard = {
  * - a boosted card
  * - a mega boosted card
  */
-const standardTrails = standards.map((card, index) => {
+const standardCards = standards.map((card, index) => {
 	/** Helper function to override props for a card */
 	const enhanceCardFields = (fields: Partial<DCRFrontCard>): DCRFrontCard =>
 		({
@@ -107,7 +107,7 @@ export const NoSublinkSplash: Story = {
 		groupedTrails: {
 			...defaultGroupedTrails,
 			splash: [{ ...splashCard, supportingContent: [] }],
-			standard: standardTrails,
+			standard: standardCards,
 		},
 	},
 };
@@ -119,7 +119,7 @@ export const TwoSublinkSplash: Story = {
 		groupedTrails: {
 			...defaultGroupedTrails,
 			splash: [{ ...splashCard, supportingContent: getSublinks(2) }],
-			standard: standardTrails,
+			standard: standardCards,
 		},
 	},
 };
@@ -135,7 +135,7 @@ export const FourSublinkSplash: Story = {
 		groupedTrails: {
 			...defaultGroupedTrails,
 			splash: [splashWithFourSublinks],
-			standard: standardTrails,
+			standard: standardCards,
 		},
 	},
 };
@@ -152,7 +152,7 @@ export const BoostedSplash: Story = {
 					boostLevel: 'boost',
 				},
 			],
-			standard: trails.slice(1, 9),
+			standard: standardCards,
 		},
 	},
 };
@@ -169,7 +169,7 @@ export const MegaBoostedSplash: Story = {
 					boostLevel: 'megaboost',
 				},
 			],
-			standard: standardTrails,
+			standard: standardCards,
 		},
 	},
 };
@@ -186,7 +186,7 @@ export const GigaBoostedSplash: Story = {
 					boostLevel: 'gigaboost',
 				},
 			],
-			standard: standardTrails,
+			standard: standardCards,
 		},
 	},
 };
