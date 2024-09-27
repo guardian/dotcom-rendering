@@ -2,7 +2,7 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { getSublinks, trails } from '../../fixtures/manual/trails';
-import type { DCRGroupedTrails } from '../types/front';
+import type { DCRFrontCard, DCRGroupedTrails } from '../types/front';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FrontSection } from './FrontSection';
 
@@ -15,9 +15,60 @@ const defaultGroupedTrails: DCRGroupedTrails = {
 	splash: [],
 };
 
-const splashWithNoSublinks = { ...trails[0], supportingContent: [] };
-const splashWith2Sublinks = { ...trails[0], supportingContent: getSublinks(2) };
-const splashWith4Sublinks = { ...trails[0], supportingContent: getSublinks(4) };
+const trailText = 'Trail text for splash card';
+const kickerText = 'Kicker for splash card';
+const splashWithNoSublinks = {
+	...trails[0],
+	trailText,
+	kickerText,
+	supportingContent: [],
+};
+const splashWith2Sublinks = {
+	...splashWithNoSublinks,
+	supportingContent: getSublinks(2),
+};
+const splashWith4Sublinks = {
+	...splashWithNoSublinks,
+	supportingContent: getSublinks(4),
+};
+
+/** This creates a list of 8 standard cards which contain:
+ * - a card with sublinks
+ * - a media card
+ * - a boosted card
+ * - a mega boosted card
+ */
+const standardTrails = trails.slice(1, 9).map((card, index) => {
+	/** Helper function to override props for a card */
+	const enhanceCardFields = (fields: Partial<DCRFrontCard>): DCRFrontCard =>
+		({
+			...card,
+			trailText: `Trail text for card ${index + 1}`,
+			kickerText: `Kicker for card ${index + 1}`,
+			...fields,
+		}) satisfies DCRFrontCard;
+
+	switch (index + 1) {
+		// The second card has two sublinks
+		case 2:
+			return enhanceCardFields({ supportingContent: getSublinks(2) });
+		// The third card is boosted and has one sublink
+		case 3:
+			return enhanceCardFields({
+				boostLevel: 'boost',
+				supportingContent: getSublinks(1),
+			});
+		// The fifth card is megaboosted and has two sublinks
+		case 5:
+			return enhanceCardFields({
+				boostLevel: 'megaboost',
+				supportingContent: getSublinks(2),
+			});
+
+		default:
+			return enhanceCardFields({});
+	}
+}) satisfies DCRFrontCard[];
 
 type FlexibleGeneralArgsAndCustomArgs = React.ComponentProps<
 	typeof FlexibleGeneral
@@ -59,59 +110,43 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const NoSublinkSplash: Story = {
-	name: 'Standard splash, no sublinks, 8 standard stories',
+	name: 'Standard splash with no sublinks',
 	args: {
-		frontSectionTitle: 'Standard splash, no sublinks, 8 standard stories',
+		frontSectionTitle: 'Standard splash with no sublinks',
 		groupedTrails: {
 			...defaultGroupedTrails,
 			splash: [splashWithNoSublinks],
-			standard: trails.slice(1, 9),
+			standard: standardTrails,
 		},
 	},
 };
 
-export const TwoSublinkSplashThirdStoryBoosted: Story = {
-	name: 'Standard splash, 2 sublinks, third standard boosted',
+export const TwoSublinkSplash: Story = {
+	name: 'Standard splash with two sublinks',
 	args: {
-		frontSectionTitle:
-			'Standard splash, 2 sublinks, third standard boosted',
+		frontSectionTitle: 'Standard splash with two sublinks',
 		groupedTrails: {
 			...defaultGroupedTrails,
 			splash: [splashWith2Sublinks],
-			standard: [
-				...trails.slice(1, 3),
-				{
-					...trails[3],
-					boostLevel: 'boost',
-				},
-				...trails.slice(4, 9),
-			],
+			standard: standardTrails,
 		},
 	},
 };
 
 export const FourSublinkSplash: Story = {
-	name: 'Standard splash, 4 sublinks, 3rd standard megaboosted',
+	name: 'Standard splash with four sublinks',
 	args: {
-		frontSectionTitle:
-			'Standard splash, 4 sublinks, 3rd standard megaboosted',
+		frontSectionTitle: 'Standard splash with four sublinks',
 		groupedTrails: {
 			...defaultGroupedTrails,
 			splash: [splashWith4Sublinks],
-			standard: [
-				...trails.slice(1, 3),
-				{
-					...trails[3],
-					boostLevel: 'megaboost',
-				},
-				...trails.slice(4, 9),
-			],
+			standard: standardTrails,
 		},
 	},
 };
 
 export const BoostedSplash: Story = {
-	name: 'Boosted splash, 4 sublinks, ',
+	name: 'Boosted splash',
 	args: {
 		frontSectionTitle: 'Boosted splash',
 		groupedTrails: {
@@ -123,25 +158,25 @@ export const BoostedSplash: Story = {
 };
 
 export const MegaBoostedSplash: Story = {
-	name: 'Mega boosted splash, 4 sublinks, 8 standard stories',
+	name: 'Mega boosted splash',
 	args: {
 		frontSectionTitle: 'Mega boosted splash',
 		groupedTrails: {
 			...defaultGroupedTrails,
 			splash: [{ ...splashWith4Sublinks, boostLevel: 'megaboost' }],
-			standard: trails.slice(1, 9),
+			standard: standardTrails,
 		},
 	},
 };
 
 export const GigaBoostedSplash: Story = {
-	name: 'Giga boosted splash, 4 sublinks, 8 standard stories',
+	name: 'Giga boosted splash',
 	args: {
 		frontSectionTitle: 'Giga boosted splash',
 		groupedTrails: {
 			...defaultGroupedTrails,
 			splash: [{ ...splashWith4Sublinks, boostLevel: 'gigaboost' }],
-			standard: trails.slice(1, 9),
+			standard: standardTrails,
 		},
 	},
 };
