@@ -82,8 +82,8 @@ const CrosswordGrid = ({ children }: { children: React.ReactNode }) => (
 
 					grid-template-areas:
 						'title  headline                right-column'
-						'lines  crossword-links         right-column'
-						'meta   standfirst              right-column'
+						'.      crossword-links         right-column'
+						'lines  standfirst              right-column'
 						'meta   crossword-instructions  right-column'
 						'body   body                    right-column';
 				}
