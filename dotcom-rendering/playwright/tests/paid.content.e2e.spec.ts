@@ -27,13 +27,14 @@ const relatedContentLogoDataLinkName =
  * You can grab the required info in the dev tools network tab on the page itself.
  */
 test.describe('Paid content tests', () => {
-	test('should send Ophan component event on click of sponsor logo in article meta', async ({
+	test('should send Ophan component event on click of sponsor logo in article meta and related content section', async ({
 		page,
 	}) => {
 		await loadPage(page, `/Article/${paidContentPage}`);
 		await cmpAcceptAll(page);
 
-		const clickEventRequest = interceptOphanRequest({
+		// meta logo
+		const metaClickEventRequest = interceptOphanRequest({
 			page,
 			path: ADDITIONAL_REQUEST_PATH,
 			searchParamMatcher: (searchParams) => {
@@ -51,16 +52,13 @@ test.describe('Paid content tests', () => {
 		await expectToBeVisible(page, '[data-testid=branding-logo]');
 		await page.locator('[data-testid=branding-logo]').click();
 
-		await clickEventRequest;
-	});
+		await metaClickEventRequest;
 
-	test('should send Ophan component event on click of sponsor logo in onwards section', async ({
-		page,
-	}) => {
-		await loadPage(page, `/Article/${paidContentPage}`);
-		await cmpAcceptAll(page);
+		// go back to the paid content page
+		await page.goBack();
 
-		const clickEventRequest = interceptOphanRequest({
+		// related content logo
+		const relatedClickEventRequest = interceptOphanRequest({
 			page,
 			path: ADDITIONAL_REQUEST_PATH,
 			searchParamMatcher: (searchParams) => {
@@ -79,7 +77,6 @@ test.describe('Paid content tests', () => {
 		await expectToBeVisible(page, '[data-testid=card-branding-logo]');
 		await page.locator('[data-testid=card-branding-logo]').first().click();
 
-		// Make sure the request to Ophan is made
-		await clickEventRequest;
+		await relatedClickEventRequest;
 	});
 });
