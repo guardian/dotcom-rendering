@@ -15,7 +15,7 @@ import {
 	neutral,
 	remSpace,
 	textEgyptianBold17,
-	textEgyptianBoldItalic17,
+	textEgyptianItalic17,
 } from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
@@ -119,34 +119,22 @@ const styles = (
 	`;
 };
 
-const largeTextStyles = (
-	fontStyle: 'normal' | 'italic',
-	fontWeight: 'light' | 'bold',
-): SerializedStyles => css`
-	${fontStyle === 'italic' && fontWeight === 'light'
-		? headlineLightItalic24
-		: headlineBold24};
+const largeTextStyles = (secondaryByline?: boolean): SerializedStyles => css`
+	${secondaryByline ? headlineLightItalic24 : headlineBold24};
 	line-height: 1.3;
 	${from.tablet} {
-		${fontStyle === 'italic' && fontWeight === 'light'
-			? headlineLightItalic28
-			: headlineBold28};
+		${secondaryByline ? headlineLightItalic28 : headlineBold28};
 		line-height: 1.3;
 	}
 	${from.desktop} {
-		${fontStyle === 'italic' && fontWeight === 'light'
-			? headlineLightItalic34
-			: headlineBold34};
+		${secondaryByline ? headlineLightItalic34 : headlineBold34};
 		line-height: 1.3;
 	}
 `;
 
-const standardTextStyles = (
-	fontStyle: 'normal' | 'italic',
-	fontWeight: 'light' | 'bold',
-): SerializedStyles => css`
-	${fontStyle === 'italic' ? textEgyptianBoldItalic17 : textEgyptianBold17};
-	${fontWeight === 'light' && 'font-weight: 300;'};
+const standardTextStyles = (secondaryByline?: boolean): SerializedStyles => css`
+	${secondaryByline ? textEgyptianItalic17 : textEgyptianBold17};
+	${secondaryByline && 'font-weight: 300;'};
 `;
 
 const bylinePrimaryStyles = (format: ArticleFormat): SerializedStyles => {
@@ -159,13 +147,13 @@ const bylinePrimaryStyles = (format: ArticleFormat): SerializedStyles => {
 	) {
 		return css`
 			color: ${color};
-			${largeTextStyles('normal', 'bold')}
+			${largeTextStyles()}
 		`;
 	}
 
 	return css`
 		color: ${color};
-		${standardTextStyles('normal', 'bold')}
+		${standardTextStyles()}
 	`;
 };
 
@@ -177,12 +165,12 @@ const bylineSecondaryStyles = (format: ArticleFormat): SerializedStyles => {
 		format.design === ArticleDesign.Comment
 	) {
 		return css`
-			${largeTextStyles('italic', 'light')};
+			${largeTextStyles(true)};
 			color: ${color};
 		`;
 	}
 	return css`
-		${standardTextStyles('italic', 'light')};
+		${standardTextStyles(true)};
 		color: ${color};
 	`;
 };
