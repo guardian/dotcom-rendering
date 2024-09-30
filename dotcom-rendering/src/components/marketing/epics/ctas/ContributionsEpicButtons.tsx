@@ -193,24 +193,22 @@ export const ContributionsEpicButtons = ({
 		/** In the US - direct 50 % traffic to the checkout page and 50 % traffic to the landing page for the AB test  */
 
 		if (showChoiceCards && countryCode === 'US') {
-			const oneOffUrl =
-				variantOfChoiceCard === 'US_CHECKOUT_THREE_TIER_CHOICE_CARDS'
-					? 'https://support.theguardian.com/contribute/checkout'
-					: cta.baseUrl;
 			if (threeTierChoiceCardSelectedProduct === 'OneOff') {
-				/** OneOff payments are not supported by the generic checkout yet */
 				if (
 					variantOfChoiceCard ===
 					'US_CHECKOUT_THREE_TIER_CHOICE_CARDS'
 				) {
 					return {
 						text: cta.text,
-						baseUrl: addChoiceCardsParams(oneOffUrl, 'ONE_OFF'),
+						baseUrl: addChoiceCardsParams(
+							'https://support.theguardian.com/contribute/checkout',
+							'ONE_OFF',
+						),
 					};
 				}
 				return {
 					text: cta.text,
-					baseUrl: addChoiceCardsOneTimeParams(oneOffUrl),
+					baseUrl: addChoiceCardsOneTimeParams(cta.baseUrl),
 				};
 			}
 
