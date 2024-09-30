@@ -105,10 +105,13 @@ export const LatestLinks = ({
 		refreshInterval: 9_600,
 	});
 
-	/** Reserve space for the latest links to avoid CLS while loading */
-	const minHeight = isDynamo
-		? `calc(${space[1]}px + 4 * 1.3em);`
-		: `calc(4 * 1.3em);`;
+	/**
+	 * Reserve space for the latest links to avoid CLS while loading.
+	 *
+	 * The value of 5.2em is calculated from:
+	 * 1.3 (regular line height) * 4 (number of lines of text)
+	 */
+	const minHeight = isDynamo ? `calc(${space[1]}px + 5.2em)` : `5.2em`;
 
 	const ulStyle = css`
 		display: flex;
