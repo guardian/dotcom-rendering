@@ -11,6 +11,7 @@ import {
 	useState,
 } from 'react';
 import { getVideoClient } from '../../lib/bridgetApi';
+import { getZIndex } from '../../lib/getZIndex';
 import { getAuthStatus } from '../../lib/identity';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { google } from './ima';
@@ -84,6 +85,7 @@ const fullscreenStyles = (id: string) => css`
 		left: 0;
 		width: 100vw;
 		height: 100vh;
+		z-index: ${getZIndex('youTubeFullscreen')};
 	}
 `;
 
@@ -412,6 +414,8 @@ export const YoutubeAtomPlayer = ({
 
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
 	const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+	const [applyFullscreenStyles, setApplyFullscreenStyles] =
+		useState<boolean>(false);
 	const playerReadyCallback = useCallback(() => setPlayerReady(true), []);
 	const playerListeners = useRef<PlayerListeners>([]);
 	/**
@@ -657,11 +661,21 @@ export const YoutubeAtomPlayer = ({
 		};
 	}, []);
 
+	/**
+	 * For apps rendered articles that return true for `webFullscreen` the web layer
+	 * needs to handle the application of fullscreen styles and inform the native
+	 * layer of the fullscreen state.
+	 *
+	 * This is only for the YouTube player in Android web views which does not support fullscreen
+	 */
 	useEffect(() => {
 		if (renderingTarget === 'Apps') {
-			console.log('fullscreen', isFullscreen);
-			// For Android only, iOS will stub the method
-			// void getVideoClient().fullscreen(isFullscreen);
+			const videoClient = getVideoClient();
+			void videoClient.setFullscreen(isFullscreen).then((success) => {
+				if (success) {
+					setApplyFullscreenStyles(isFullscreen);
+				}
+			});
 		}
 	}, [isFullscreen, renderingTarget]);
 
@@ -670,7 +684,7 @@ export const YoutubeAtomPlayer = ({
 	 */
 	return (
 		<>
-			{isFullscreen && <Global styles={fullscreenStyles(id)} />}
+			{applyFullscreenStyles && <Global styles={fullscreenStyles(id)} />}
 			<div
 				id={id}
 				data-testid={id}
