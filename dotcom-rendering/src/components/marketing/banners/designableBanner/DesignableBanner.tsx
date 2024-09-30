@@ -6,12 +6,13 @@
 import { css } from '@emotion/react';
 import {
 	between,
-	body,
 	from,
 	neutral,
 	space,
 	specialReport,
-	textSans,
+	textEgyptian15,
+	textSans17,
+	textSansBold17,
 	until,
 } from '@guardian/source/foundations';
 import { Button, SvgGuardianLogo } from '@guardian/source/react-components';
@@ -597,7 +598,7 @@ const styles = {
 		padding-top: ${space[3]}px;
 	`,
 	reminderContainer: css`
-		${body.small({ lineHeight: 'regular' })};
+		${textEgyptian15};
 		grid-column: 1;
 		grid-row: 3;
 		order: 4;
@@ -609,7 +610,7 @@ const styles = {
 		}
 	`,
 	reminderText: css`
-		${textSans.medium()}
+		${textSans17}
 		display: none;
 
 		${from.tablet} {
@@ -617,7 +618,7 @@ const styles = {
 		}
 	`,
 	reminderCta: ({ default: defaultSettings }: CtaSettings) => css`
-		${textSans.medium({ lineHeight: 'regular', fontWeight: 'bold' })}
+		${textSansBold17}
 		color: ${defaultSettings.backgroundColour};
 		display: inline;
 		height: auto;

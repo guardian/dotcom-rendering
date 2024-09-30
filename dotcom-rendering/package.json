@@ -50,7 +50,7 @@
 		"@guardian/libs": "18.0.0",
 		"@guardian/ophan-tracker-js": "2.2.2",
 		"@guardian/shimport": "1.0.2",
-		"@guardian/source": "6.0.0",
+		"@guardian/source": "6.1.0",
 		"@guardian/source-development-kitchen": "5.0.0",
 		"@guardian/support-dotcom-components": "2.9.1",
 		"@guardian/tsconfig": "0.2.0",

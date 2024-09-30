@@ -185,7 +185,7 @@ const CalloutForm = ({ id, fields }: CalloutFormProps) => {
 							)}
 						</div>
 						<Button
-							css={calloutPrimaryButton}
+							cssOverrides={calloutPrimaryButton}
 							type="submit"
 							priority="primary"
 						>
