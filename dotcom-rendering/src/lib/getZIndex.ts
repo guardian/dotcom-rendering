@@ -24,6 +24,7 @@
 const indices = [
 	// Modals will go here at the top
 	'lightbox',
+	'youTubeFullscreen',
 
 	// Sticky video and button need to be above everything
 	'sticky-video-button',
