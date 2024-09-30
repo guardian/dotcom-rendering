@@ -263,8 +263,7 @@ export const addChoiceCardsParams = (
 };
 
 export const addChoiceCardsOneTimeParams = (url: string): string => {
-	const newParams = `oneTime' : ''
-	}`;
+	const newParams = `oneTime`;
 	const alreadyHasQueryString = url.includes('?');
 	return `${url}${alreadyHasQueryString ? '&' : '?'}${newParams}`;
 };
