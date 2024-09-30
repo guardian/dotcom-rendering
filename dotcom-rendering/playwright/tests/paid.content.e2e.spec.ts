@@ -6,7 +6,18 @@ import { expectToBeVisible } from '../lib/locators';
 import { ADDITIONAL_REQUEST_PATH, interceptOphanRequest } from '../lib/ophan';
 
 const paidContentPage =
-	'https://www.theguardian.com/cook-up-a-feast-with-tesco-finest/2024/sep/13/peach-and-burrata-bruschetta-recipe';
+	'https://www.theguardian.com/guardian-clearing/2021/jul/12/online-event-how-to-make-clearing-work-for-you-register-now';
+
+const metaLogoDataComponent =
+	'labs-logo | article-meta-the-guardian universities';
+
+const metaLogoDataLinkName = 'labs-logo-article-meta-the-guardian universities';
+
+const relatedContentLogoDataComponent =
+	'labs-logo | article-related-content-the-guardian universities';
+
+const relatedContentLogoDataLinkName =
+	'labs-logo-article-related-content-the-guardian universities';
 
 /**
  * This test relies on labs campaigns, where the content is often taken down one the campaign is complete.
@@ -29,9 +40,8 @@ test.describe('Paid content tests', () => {
 				const clickComponent = searchParams.get('clickComponent');
 				const clickLinkNames = searchParams.get('clickLinkNames');
 				return (
-					clickComponent ===
-						'labs-logo | article-meta-tesco-finest' &&
-					clickLinkNames === '["labs-logo-article-meta-tesco-finest"]'
+					clickComponent === metaLogoDataComponent &&
+					clickLinkNames === `["${metaLogoDataLinkName}"]`
 				);
 			},
 		});
@@ -57,10 +67,9 @@ test.describe('Paid content tests', () => {
 				const clickComponent = searchParams.get('clickComponent');
 				const clickLinkNames = searchParams.get('clickLinkNames');
 				return (
-					clickComponent ===
-						'labs-logo | article-related-content-tesco-finest' &&
+					clickComponent === relatedContentLogoDataComponent &&
 					clickLinkNames ===
-						'["labs-logo-article-related-content-tesco-finest","related-content"]'
+						`["${relatedContentLogoDataLinkName}","related-content"]`
 				);
 			},
 		});
