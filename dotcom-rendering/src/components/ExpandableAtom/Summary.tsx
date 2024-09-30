@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import {
-	body,
 	headlineMedium17,
+	textEgyptianBold17,
 	textSans15,
 } from '@guardian/source/foundations';
 import { SvgMinus, SvgPlus } from '@guardian/source/react-components';
@@ -49,10 +49,8 @@ export const Summary = ({
 }): JSX.Element => {
 	const atomTitleStyling = css`
 		display: block;
-		${body.medium({
-			lineHeight: 'tight',
-			fontWeight: 'bold',
-		})};
+		${textEgyptianBold17};
+		line-height: 1.15;
 		color: ${themePalette('--expandable-atom-text-hover')};
 	`;
 

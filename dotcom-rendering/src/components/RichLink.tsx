@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial, isUndefined } from '@guardian/libs';
-import type { FontScaleArgs } from '@guardian/source/foundations';
 import {
 	from,
-	headline,
+	headlineMedium14,
 	headlineMedium17,
 	headlineMedium20,
+	headlineMediumItalic14,
 	headlineMediumItalic20,
 	textSans17,
 	textSansBold12,
@@ -75,18 +75,8 @@ const headerStyles = css`
 	color: ${themePalette('--rich-link-header')};
 `;
 
-/** Re-sizes the headline.xxxsmall to 14px / 0.875rem as this isn't available in source */
-const miniHeadlineOverrideStyles = (fontArgs: FontScaleArgs) => css`
-	${headline.xxxsmall(
-		fontArgs,
-	)}; /** TODO (1) - Unknown argument please manually update */
-	font-size: 0.875rem;
-`;
-
 const titleStyles = (parentIsBlog: boolean) => css`
-	${parentIsBlog
-		? headlineMedium17
-		: miniHeadlineOverrideStyles({ fontWeight: 'regular' })};
+	${parentIsBlog ? headlineMedium17 : headlineMedium14};
 	padding-top: 1px;
 	padding-bottom: 1px;
 
@@ -112,7 +102,7 @@ const labsTitleStyles = css`
 
 const bylineStyles = css`
 	color: ${themePalette('--rich-link-text')};
-	${miniHeadlineOverrideStyles({ fontStyle: 'italic' })};
+	${headlineMediumItalic14};
 
 	${from.wide} {
 		${headlineMediumItalic20};
@@ -153,7 +143,7 @@ const readMoreStyles = css`
 `;
 
 const readMoreTextStyle = css`
-	${miniHeadlineOverrideStyles({ fontWeight: 'medium' })};
+	${headlineMedium14};
 	color: ${themePalette('--rich-link-text')};
 	padding-left: 4px;
 	text-decoration: none;

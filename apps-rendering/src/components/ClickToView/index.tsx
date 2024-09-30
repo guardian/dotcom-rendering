@@ -196,7 +196,7 @@ const ClickToView = ({
 						icon={<SvgCheckmark />}
 						iconSide="left"
 						onClick={handleClick}
-						css={buttonStyles}
+						cssOverrides={buttonStyles}
 					>
 						{roleButtonText(roleWithDefault)}
 					</Button>

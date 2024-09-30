@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { body, palette, space } from '@guardian/source/foundations';
+import { palette, space, textEgyptian17 } from '@guardian/source/foundations';
 import { SvgAlertRound } from '@guardian/source/react-components';
 import { Caption } from '../Caption';
 
@@ -70,9 +70,8 @@ export const YoutubeAtomExpiredOverlay = ({
 					</div>
 					<p
 						css={css`
-							${body.medium({
-								lineHeight: 'tight',
-							})}
+							${textEgyptian17}
+							line-height: 1.15;
 						`}
 					>
 						This video has been removed. This could be because it

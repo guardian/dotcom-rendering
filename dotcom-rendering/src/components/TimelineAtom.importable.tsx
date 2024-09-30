@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { body, palette, remSpace, space } from '@guardian/source/foundations';
+import {
+	palette,
+	remSpace,
+	space,
+	textEgyptianBold17,
+} from '@guardian/source/foundations';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { palette as schemedPalette } from '../palette';
 import type { TimelineAtomEvent, TimelineAtomType } from '../types/content';
@@ -19,10 +24,8 @@ const Snippet = css`
 `;
 
 const EventTitle = css`
-	${body.medium({
-		lineHeight: 'tight',
-		fontWeight: 'bold',
-	})};
+	${textEgyptianBold17};
+	line-height: 1.15;
 `;
 
 const EventDateBullet = css`
@@ -43,19 +46,15 @@ const EventDate = css`
 	margin-left: -16px;
 	background: ${schemedPalette('--timeline-atom-highlight-text-background')};
 	color: ${schemedPalette('--timeline-atom-highlight-text')};
-	${body.medium({
-		lineHeight: 'tight',
-		fontWeight: 'bold',
-	})};
+	${textEgyptianBold17};
+	line-height: 1.15;
 `;
 
 const EventToDate = css`
 	background: ${schemedPalette('--timeline-atom-highlight-text-background')};
 	color: ${schemedPalette('--timeline-atom-highlight-text')};
-	${body.medium({
-		lineHeight: 'tight',
-		fontWeight: 'bold',
-	})};
+	${textEgyptianBold17};
+	line-height: 1.15;
 `;
 
 const TimelineContents = ({ events }: { events: TimelineAtomEvent[] }) => {

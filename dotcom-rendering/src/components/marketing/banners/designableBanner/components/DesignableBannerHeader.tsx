@@ -4,7 +4,14 @@
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/designableBanner/components/DesignableBannerHeader.tsx
  */
 import { css } from '@emotion/react';
-import { from, headline, neutral, space } from '@guardian/source/foundations';
+import {
+	from,
+	headlineBold24,
+	headlineBold28,
+	headlineBold34,
+	neutral,
+	space,
+} from '@guardian/source/foundations';
 import type { Image } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import {
 	removeMediaRulePrefix,
@@ -63,13 +70,13 @@ const getStyles = (headerSettings: HeaderSettings | undefined) => {
 				margin: ${copyTopMargin}px 0 ${space[3]}px;
 				color: ${color};
 
-				${headline.xsmall({ fontWeight: 'bold', lineHeight: 'tight' })}
+				${headlineBold24}
 				${from.tablet} {
-					${headline.small({ fontWeight: 'bold' })}
+					${headlineBold28}
 					margin-bottom: ${space[6]}px;
 				}
 				${from.leftCol} {
-					${headline.medium({ fontWeight: 'bold' })}
+					${headlineBold34}
 				}
 			}
 		`,
