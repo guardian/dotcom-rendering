@@ -17,8 +17,8 @@ type Props = {
 const roleCss = (isDatawrapperGraphic: boolean) => {
 	return {
 		inline: css`
-			margin-top: ${space[3]}px;
-			margin-bottom: ${space[3]}px;
+			margin-top: ${space[isDatawrapperGraphic ? 8 : 3]}px;
+			margin-bottom: ${space[isDatawrapperGraphic ? 8 : 3]}px;
 		`,
 
 		supporting: css`
@@ -72,8 +72,8 @@ const roleCss = (isDatawrapperGraphic: boolean) => {
 		`,
 
 		showcase: css`
-			margin-top: ${space[3]}px;
-			margin-bottom: ${space[3]}px;
+			margin-top: ${space[isDatawrapperGraphic ? 8 : 3]}px;
+			margin-bottom: ${space[isDatawrapperGraphic ? 8 : 3]}px;
 			position: relative;
 			${from.leftCol} {
 				margin-left: -160px;
