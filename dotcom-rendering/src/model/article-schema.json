@@ -291,7 +291,7 @@
             "$ref": "#/definitions/StarRating"
         },
         "audioArticleImage": {
-            "$ref": "#/definitions/AudioImageElement"
+            "$ref": "#/definitions/ImageBlockElement"
         },
         "trailText": {
             "type": "string"
@@ -1449,9 +1449,6 @@
                             "type": "string"
                         },
                         "caption": {
-                            "type": "string"
-                        },
-                        "mediaId": {
                             "type": "string"
                         }
                     },
@@ -4919,60 +4916,6 @@
             "required": [
                 "name",
                 "value"
-            ]
-        },
-        "AudioImageElement": {
-            "type": "object",
-            "properties": {
-                "media": {
-                    "type": "object",
-                    "properties": {
-                        "allImages": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Image"
-                            }
-                        }
-                    },
-                    "required": [
-                        "allImages"
-                    ]
-                },
-                "data": {
-                    "type": "object",
-                    "properties": {
-                        "alt": {
-                            "type": "string"
-                        },
-                        "credit": {
-                            "type": "string"
-                        },
-                        "caption": {
-                            "type": "string"
-                        },
-                        "copyright": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "imageSources": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ImageSource"
-                    }
-                },
-                "displayCredit": {
-                    "type": "boolean"
-                },
-                "role": {
-                    "$ref": "#/definitions/RoleType"
-                }
-            },
-            "required": [
-                "data",
-                "imageSources",
-                "media",
-                "role"
             ]
         },
         "FEArticleBadgeType": {

@@ -1051,9 +1051,6 @@
                         },
                         "caption": {
                             "type": "string"
-                        },
-                        "mediaId": {
-                            "type": "string"
                         }
                     },
                     "required": [

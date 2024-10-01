@@ -275,19 +275,6 @@ export interface ImageBlockElement {
 	position?: number;
 }
 
-export interface AudioImageElement {
-	media: { allImages: Image[] };
-	data: {
-		alt?: string;
-		credit?: string;
-		caption?: string;
-		copyright?: string;
-	};
-	imageSources: ImageSource[];
-	displayCredit?: boolean;
-	role: RoleType;
-}
-
 export interface InstagramBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.InstagramBlockElement';
 	elementId: string;
@@ -831,7 +818,6 @@ export interface Image {
 		isMaster?: string;
 		source?: string;
 		caption?: string;
-		mediaId?: string;
 	};
 	mediaType: string;
 	mimeType?: string;

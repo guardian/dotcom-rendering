@@ -1,8 +1,6 @@
-import { ArticleDesign, type ArticleFormat, isUndefined } from '@guardian/libs';
+import { type ArticleFormat, isUndefined } from '@guardian/libs';
 import type {
-	AudioImageElement,
 	FEElement,
-	Image,
 	ImageBlockElement,
 	ImageForLightbox,
 	Newsletter,
@@ -29,7 +27,7 @@ type Options = {
 	promotedNewsletter: Newsletter | undefined;
 	imagesForLightbox: ImageForLightbox[];
 	hasAffiliateLinksDisclaimer: boolean;
-	audioArticleImage?: AudioImageElement;
+	audioArticleImage?: ImageBlockElement;
 };
 
 const enhanceNewsletterSignup =
@@ -101,16 +99,8 @@ export const enhanceBlocks = (
 	options: Options,
 ): Block[] => {
 	const additionalElement: FEElement[] = [];
-	if (
-		options.audioArticleImage &&
-		format.design === ArticleDesign.Audio &&
-		options.audioArticleImage.media.allImages[0]?.fields.mediaId
-	) {
-		const frontendImageElement = makeImageBlockElementFromAudioImage(
-			options.audioArticleImage,
-			options.audioArticleImage.media.allImages[0].fields.mediaId,
-		);
-		additionalElement.push(frontendImageElement);
+	if (options.audioArticleImage) {
+		additionalElement.push(options.audioArticleImage);
 	}
 	return blocks.map((block) => ({
 		...block,
@@ -120,24 +110,4 @@ export const enhanceBlocks = (
 			options,
 		)([...block.elements, ...additionalElement]),
 	}));
-};
-
-const makeImageBlockElementFromAudioImage = (
-	audioArticleImage: AudioImageElement,
-	elementId: string,
-): ImageBlockElement => {
-	const images: Image[] = audioArticleImage.media.allImages.map((image) => ({
-		...image,
-		mimeType: 'image/jpeg',
-	}));
-	return {
-		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-		imageSources: audioArticleImage.imageSources,
-		media: {
-			allImages: images,
-		},
-		role: audioArticleImage.role,
-		data: audioArticleImage.data,
-		elementId,
-	};
 };
