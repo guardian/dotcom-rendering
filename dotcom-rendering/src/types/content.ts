@@ -275,21 +275,8 @@ export interface ImageBlockElement {
 	position?: number;
 }
 
-export interface AudioImage {
-	index: number;
-	fields: {
-		height: string;
-		width: string;
-		isMaster?: string;
-		source?: string;
-		caption?: string;
-		mediaId?: string;
-	};
-	mediaType: string;
-	url: string;
-}
 export interface AudioImageElement {
-	media: { allImages: AudioImage[] };
+	media: { allImages: Image[] };
 	data: {
 		alt?: string;
 		credit?: string;
@@ -844,9 +831,10 @@ export interface Image {
 		isMaster?: string;
 		source?: string;
 		caption?: string;
+		mediaId?: string;
 	};
 	mediaType: string;
-	mimeType: string;
+	mimeType?: string;
 	url: string;
 }
 

@@ -1,6 +1,5 @@
 import { ArticleDesign, type ArticleFormat, isUndefined } from '@guardian/libs';
 import type {
-	AudioImage,
 	AudioImageElement,
 	FEElement,
 	Image,
@@ -127,12 +126,10 @@ const makeImageBlockElementFromAudioImage = (
 	audioArticleImage: AudioImageElement,
 	elementId: string,
 ): ImageBlockElement => {
-	const images: Image[] = audioArticleImage.media.allImages.map(
-		(image: AudioImage) => ({
-			...image,
-			mimeType: 'image/jpeg',
-		}),
-	);
+	const images: Image[] = audioArticleImage.media.allImages.map((image) => ({
+		...image,
+		mimeType: 'image/jpeg',
+	}));
 	return {
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 		imageSources: audioArticleImage.imageSources,

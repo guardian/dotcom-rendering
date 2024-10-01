@@ -1450,6 +1450,9 @@
                         },
                         "caption": {
                             "type": "string"
+                        },
+                        "mediaId": {
+                            "type": "string"
                         }
                     },
                     "required": [
@@ -1471,7 +1474,6 @@
                 "fields",
                 "index",
                 "mediaType",
-                "mimeType",
                 "url"
             ]
         },
@@ -4928,7 +4930,7 @@
                         "allImages": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/AudioImage"
+                                "$ref": "#/definitions/Image"
                             }
                         }
                     },
@@ -4971,53 +4973,6 @@
                 "imageSources",
                 "media",
                 "role"
-            ]
-        },
-        "AudioImage": {
-            "type": "object",
-            "properties": {
-                "index": {
-                    "type": "number"
-                },
-                "fields": {
-                    "type": "object",
-                    "properties": {
-                        "height": {
-                            "type": "string"
-                        },
-                        "width": {
-                            "type": "string"
-                        },
-                        "isMaster": {
-                            "type": "string"
-                        },
-                        "source": {
-                            "type": "string"
-                        },
-                        "caption": {
-                            "type": "string"
-                        },
-                        "mediaId": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "height",
-                        "width"
-                    ]
-                },
-                "mediaType": {
-                    "type": "string"
-                },
-                "url": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "fields",
-                "index",
-                "mediaType",
-                "url"
             ]
         },
         "FEArticleBadgeType": {

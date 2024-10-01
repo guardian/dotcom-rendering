@@ -1392,6 +1392,9 @@
                         },
                         "caption": {
                             "type": "string"
+                        },
+                        "mediaId": {
+                            "type": "string"
                         }
                     },
                     "required": [
@@ -1413,7 +1416,6 @@
                 "fields",
                 "index",
                 "mediaType",
-                "mimeType",
                 "url"
             ]
         },
