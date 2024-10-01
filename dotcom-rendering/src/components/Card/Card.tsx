@@ -685,6 +685,7 @@ export const Card = ({
 										format={format}
 										size={headlineSize}
 										sizeOnMobile={headlineSizeOnMobile}
+										sizeOnTablet={headlineSizeOnTablet}
 										showQuotes={showQuotes}
 										kickerText={
 											format.design ===
