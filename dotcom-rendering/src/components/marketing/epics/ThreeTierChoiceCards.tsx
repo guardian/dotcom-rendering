@@ -154,6 +154,8 @@ const getChoiceCardData = (choiceCardVariant: string): ChoiceInfo[] => {
 	switch (choiceCardVariant) {
 		case 'US_THREE_TIER_CHOICE_CARDS':
 			return ChoiceCardTestData_US;
+		case 'US_CHECKOUT_THREE_TIER_CHOICE_CARDS':
+			return ChoiceCardTestData_US;
 		default:
 			return ChoiceCardTestData_REGULAR;
 	}
@@ -210,7 +212,7 @@ export const ThreeTierChoiceCards = ({
 										)}
 										id={`choicecard-${supportTier}`}
 										value={supportTier}
-										css={labelOverrideStyles}
+										cssOverrides={labelOverrideStyles}
 										supporting={
 											selected ? (
 												<SupportingBenefits

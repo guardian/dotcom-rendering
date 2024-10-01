@@ -151,7 +151,7 @@ export const SplashCardLayout = ({
 		card?.supportingContent?.length ?? 0,
 	);
 	return (
-		<UL padBottom={true} isFlexibleContainer={true}>
+		<UL padBottom={true} isFlexibleContainer={true} showTopBar={false}>
 			<LI padSides={true}>
 				<FrontCard
 					trail={card}
@@ -249,7 +249,7 @@ export const BoostedCardLayout = ({
 					imagePositionOnMobile={'bottom'}
 					imageSize={imageSize}
 					trailText={card.trailText}
-					supportingContent={undefined}
+					supportingContent={card.supportingContent}
 					imageLoading={imageLoading}
 					aspectRatio="5:4"
 					kickerText={card.kickerText}
@@ -295,7 +295,7 @@ export const StandardCardLayout = ({
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
 							imagePositionOnDesktop={'left'}
-							supportingContent={undefined} // we don't want to support sublinks on standard cards here so we hard code to undefined.
+							supportingContent={card.supportingContent}
 							imageSize={'medium'}
 							aspectRatio="5:4"
 							kickerText={card.kickerText}

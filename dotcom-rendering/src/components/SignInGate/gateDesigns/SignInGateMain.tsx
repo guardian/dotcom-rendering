@@ -66,7 +66,7 @@ export const SignInGateMain = ({
 				<LinkButton
 					data-testid="sign-in-gate-main_register"
 					data-ignore="global-link-styling"
-					css={registerButton}
+					cssOverrides={registerButton}
 					priority="primary"
 					size="small"
 					href={registerUrl}
@@ -85,7 +85,7 @@ export const SignInGateMain = ({
 					<Button
 						data-testid="sign-in-gate-main_dismiss"
 						data-ignore="global-link-styling"
-						css={laterButton}
+						cssOverrides={laterButton}
 						priority="subdued"
 						size="small"
 						onClick={() => {
@@ -110,7 +110,7 @@ export const SignInGateMain = ({
 			<Link
 				data-testid="sign-in-gate-main_signin"
 				data-ignore="global-link-styling"
-				css={signInLink}
+				cssOverrides={signInLink}
 				href={signInUrl}
 				onClick={() => {
 					trackLink(
