@@ -5,6 +5,19 @@ import { loadPage } from '../lib/load-page';
 import { expectToBeVisible } from '../lib/locators';
 import { ADDITIONAL_REQUEST_PATH, interceptOphanRequest } from '../lib/ophan';
 
+/**
+ * This test checks Ophan click events are sent for paid content labs campaigns.
+ * We have tried to use a long lived campaign however the content can be taken down.
+ *
+ * If the content is taken down you'll need to find a new paid content page.
+ * The article should have a sponsor logo in the article meta and related content section.
+ * You can find all paid content campaigns here:
+ * https://www.theguardian.com/tone/advertisement-features
+ *
+ * You need to edit the expected logo data-component name and data-link-name for both the meta and related content section
+ * You can grab the required attribute values in the dev tools for the page itself
+ */
+
 const paidContentPage =
 	'https://www.theguardian.com/guardian-clearing/2021/jul/12/online-event-how-to-make-clearing-work-for-you-register-now';
 
@@ -19,13 +32,6 @@ const relatedContentLogoDataComponent =
 const relatedContentLogoDataLinkName =
 	'labs-logo-article-related-content-the-guardian universities';
 
-/**
- * This test relies on labs campaigns, where the content is often taken down one the campaign is complete.
- * If this happens you'll need to find a new labs article with a brand badge, you can often find these here:
- * https://www.theguardian.com/tone/advertisement-features
- * You need to edit the link as well as the expected requestURL to include the new brand in the code below, where it states `expect(requestURL).to.include('el=<logo goes here>');`.
- * You can grab the required info in the dev tools network tab on the page itself.
- */
 test.describe('Paid content tests', () => {
 	test('should send Ophan component event on click of sponsor logo in article meta and related content section', async ({
 		page,
