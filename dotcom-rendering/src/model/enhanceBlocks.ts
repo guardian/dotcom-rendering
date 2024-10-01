@@ -103,24 +103,9 @@ export const enhanceBlocks = (
 ): Block[] => {
 	const additionalElement: FEElement[] = [];
 	if (options.audioArticleImage && format.design === ArticleDesign.Audio) {
-		const images: Image[] = options.audioArticleImage.media.allImages.map(
-			(image: AudioImage) => ({
-				...image,
-				mimeType: 'image/jpeg',
-			}),
+		const frontendImageElement = makeImageBlockElementFromAudioImage(
+			options.audioArticleImage,
 		);
-		const frontendImageElement: ImageBlockElement = {
-			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			imageSources: options.audioArticleImage.imageSources,
-			media: {
-				allImages: images,
-			},
-			role: options.audioArticleImage.role,
-			data: options.audioArticleImage.data,
-			elementId:
-				options.audioArticleImage.media.allImages[0]?.fields.mediaId ??
-				'audio-article-image',
-		};
 		additionalElement.push(frontendImageElement);
 	}
 	return blocks.map((block) => ({
@@ -131,4 +116,27 @@ export const enhanceBlocks = (
 			options,
 		)([...block.elements, ...additionalElement]),
 	}));
+};
+
+const makeImageBlockElementFromAudioImage = (
+	audioArticleImage: AudioImageElement,
+): ImageBlockElement => {
+	const images: Image[] = audioArticleImage.media.allImages.map(
+		(image: AudioImage) => ({
+			...image,
+			mimeType: 'image/jpeg',
+		}),
+	);
+	return {
+		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		imageSources: audioArticleImage.imageSources,
+		media: {
+			allImages: images,
+		},
+		role: audioArticleImage.role,
+		data: audioArticleImage.data,
+		elementId:
+			audioArticleImage.media.allImages[0]?.fields.mediaId ??
+			'audio-article-image',
+	};
 };
