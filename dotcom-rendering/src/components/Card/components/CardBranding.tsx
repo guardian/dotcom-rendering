@@ -83,6 +83,8 @@ export const CardBranding = ({
 				rel="nofollow"
 				aria-label={`Visit the ${branding.sponsorName} website`}
 				data-testid="card-branding-logo"
+				data-component={dataAttributes?.ophanComponentName}
+				data-link-name={dataAttributes?.ophanComponentLink}
 			>
 				<picture>
 					{darkModeAvailable && branding.logoForDarkBackground && (
@@ -105,8 +107,6 @@ export const CardBranding = ({
 						alt={branding.sponsorName}
 						width={logo.dimensions.width}
 						height={logo.dimensions.height}
-						data-component={dataAttributes?.ophanComponentName}
-						data-link-name={dataAttributes?.ophanComponentLink}
 					/>
 				</picture>
 			</a>
