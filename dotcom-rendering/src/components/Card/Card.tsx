@@ -376,7 +376,11 @@ export const Card = ({
 	const hasBackgroundColour = !containerPalette && isMediaCard(format);
 
 	/* Whilst we migrate to the new container types, we need to check which container we are in. */
-	const isFlexibleContainer = containerType === 'flexible/special';
+	const isFlexibleContainer =
+		containerType === 'flexible/special' ||
+		containerType === 'flexible/general';
+
+	const isFlexibleSpecialContainer = containerType === 'flexible/special';
 
 	const headlinePosition =
 		isFlexSplash && isFlexibleContainer ? 'outer' : 'inner';
@@ -450,8 +454,8 @@ export const Card = ({
 	return (
 		<CardWrapper
 			format={format}
-			showTopBar={!isOnwardContent && !isFlexibleContainer}
-			showMobileTopBar={isFlexibleContainer}
+			showTopBar={!isOnwardContent && !isFlexibleSpecialContainer}
+			showMobileTopBar={isFlexibleSpecialContainer}
 			containerPalette={containerPalette}
 			isOnwardContent={isOnwardContent}
 		>
