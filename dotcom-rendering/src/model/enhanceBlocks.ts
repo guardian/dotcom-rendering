@@ -102,9 +102,14 @@ export const enhanceBlocks = (
 	options: Options,
 ): Block[] => {
 	const additionalElement: FEElement[] = [];
-	if (options.audioArticleImage && format.design === ArticleDesign.Audio) {
+	if (
+		options.audioArticleImage &&
+		format.design === ArticleDesign.Audio &&
+		options.audioArticleImage.media.allImages[0]?.fields.mediaId
+	) {
 		const frontendImageElement = makeImageBlockElementFromAudioImage(
 			options.audioArticleImage,
+			options.audioArticleImage.media.allImages[0].fields.mediaId,
 		);
 		additionalElement.push(frontendImageElement);
 	}
@@ -120,6 +125,7 @@ export const enhanceBlocks = (
 
 const makeImageBlockElementFromAudioImage = (
 	audioArticleImage: AudioImageElement,
+	elementId: string,
 ): ImageBlockElement => {
 	const images: Image[] = audioArticleImage.media.allImages.map(
 		(image: AudioImage) => ({
@@ -135,8 +141,6 @@ const makeImageBlockElementFromAudioImage = (
 		},
 		role: audioArticleImage.role,
 		data: audioArticleImage.data,
-		elementId:
-			audioArticleImage.media.allImages[0]?.fields.mediaId ??
-			'audio-article-image',
+		elementId,
 	};
 };
