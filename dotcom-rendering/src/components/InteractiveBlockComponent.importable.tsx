@@ -119,6 +119,7 @@ const wrapperStyle = ({
 		? `
 	border-top: 1px solid #dcdcdc;
 	padding-top: 8px;
+    margin-top: 32px;
 	`
 		: ''}
 `;
