@@ -187,7 +187,6 @@ export const SupportingContent = ({
 									}
 									headlineText={subLink.headline}
 									kickerText={subLink.kickerText}
-									isFlexibleContainer={isFlexibleContainer}
 								/>
 							</ContainerOverrides>
 						</FormatBoundary>

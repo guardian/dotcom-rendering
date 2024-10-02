@@ -46,8 +46,6 @@ type Props = {
 	isExternalLink?: boolean;
 	/** Is the headline inside a Highlights card? */
 	isHighlights?: boolean;
-	/** if the headline is within a flexible container it gets a different visual treatment */
-	isFlexibleContainer?: boolean;
 };
 
 /** These represent a new set of fonts. They are extra large font sizes that, as a group, are only used on headlines */
@@ -285,17 +283,19 @@ export const CardHeadline = ({
 	linkTo,
 	isExternalLink,
 	isHighlights = false,
-	isFlexibleContainer = false,
 }: Props) => {
 	const kickerColour = isHighlights
 		? palette('--highlights-card-kicker-text')
 		: palette('--card-kicker-text');
 
+	// The link is only applied directly to the headline if it is a sublink
+	const isSublink = !!linkTo;
+
 	return (
 		<WithLink linkTo={linkTo}>
 			<h3
 				className={`${
-					linkTo ? 'card-sublink-headline' : 'card-headline'
+					isSublink ? 'card-sublink-headline' : 'card-headline'
 				}`}
 				css={[
 					format.theme !== ArticleSpecial.Labs &&
@@ -312,6 +312,11 @@ export const CardHeadline = ({
 					format.theme === ArticleSpecial.Labs
 						? labTextStyles(size)
 						: fontStyles({ size, boostedFontSizes }),
+					isSublink &&
+						size === 'tiny' &&
+						css`
+							${textSans14}
+						`,
 				]}
 			>
 				{!!kickerText && (
@@ -325,10 +330,6 @@ export const CardHeadline = ({
 				{showQuotes && <QuoteIcon colour={kickerColour} />}
 				<span
 					css={[
-						isFlexibleContainer &&
-							css`
-								${textSans14}
-							`,
 						css`
 							color: ${isHighlights
 								? palette('--highlights-card-headline')
