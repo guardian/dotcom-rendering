@@ -6,11 +6,9 @@
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type {
 	BannerProps,
-	Tracking,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
-import type {
 	ConfigurableDesign,
 	HexColour,
+	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
 
 export const tracking: Tracking = {
@@ -142,6 +140,9 @@ export const design: ConfigurableDesign = {
 			headlineColour: stringToHexColour('052962'),
 			totalColour: stringToHexColour('052962'),
 			goalColour: stringToHexColour('052962'),
+			goalColour: stringToHexColour('000000'),
+			headlineColour: stringToHexColour('000000'),
+			totalColour: stringToHexColour('000000'),
 		},
 	},
 };

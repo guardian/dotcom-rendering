@@ -313,6 +313,7 @@ export const LoggedOutHiddenNoPicks = () => (
 		/>
 	</div>
 );
+
 LoggedOutHiddenNoPicks.storyName =
 	'when logged out, with no picks and not expanded';
 LoggedOutHiddenNoPicks.decorators = [

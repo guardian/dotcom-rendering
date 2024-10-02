@@ -14,10 +14,10 @@ import type {
 	SelectedAmountsVariant,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useEffect } from 'react';
-import { useIsInView } from '../../../lib/useIsInView';
-import { contributionType } from '../lib/choiceCards';
-import type { ChoiceCardSelection } from '../lib/choiceCards';
-import type { ReactComponent } from '../lib/ReactComponent';
+import { useIsInView } from '../../../../lib/useIsInView';
+import { contributionType } from '../../lib/choiceCards';
+import type { ChoiceCardSelection } from '../../lib/choiceCards';
+import type { ReactComponent } from '../../lib/ReactComponent';
 
 // CSS Styling
 // -------------------------------------------
@@ -199,7 +199,7 @@ export const ContributionsEpicChoiceCards: ReactComponent<
 			<br />
 			<ChoiceCardGroup
 				name="contribution-frequency"
-				css={[
+				cssOverrides={[
 					frequencyChoiceCardGroupOverrides,
 					hideChoiceCardGroupLegend,
 				]}
@@ -213,7 +213,7 @@ export const ContributionsEpicChoiceCards: ReactComponent<
 			<ChoiceCardGroup
 				name="contribution-amount"
 				label="Contribution amount"
-				css={hideChoiceCardGroupLegend}
+				cssOverrides={hideChoiceCardGroupLegend}
 			>
 				{generateChoiceCardAmountsButtons()}
 			</ChoiceCardGroup>

@@ -23,6 +23,7 @@ type BaseProps = {
 	canonicalUrl?: string;
 	hasPageSkin?: boolean;
 	hasLiveBlogTopAd?: boolean;
+	hasSurveyAd?: boolean;
 	weAreHiring: boolean;
 	onlyLightColourScheme?: boolean;
 };

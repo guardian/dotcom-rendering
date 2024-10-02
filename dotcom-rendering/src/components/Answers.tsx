@@ -9,26 +9,31 @@ import {
 	textSans17,
 } from '@guardian/source/foundations';
 import { SvgCheckmark, SvgCross } from '@guardian/source/react-components';
+import { palette as schemedPalette } from '../palette';
 
 // We export Radio wrapper styles to override Source Radio buttons to align
 // with our custom answers for the quiz
 export const radioButtonWrapperStyles = (theme: ArticleTheme) => css`
+	> fieldset > div > div {
+		padding: 0;
+		align-items: center;
+		margin-bottom: ${space[2]}px;
+	}
+
 	label {
 		padding-top: ${space[3]}px;
 		padding-bottom: ${space[3]}px;
 		padding-left: ${space[2]}px;
 		padding-right: ${space[2]}px;
-
-		margin-bottom: ${space[2]}px;
-
-		background-color: ${palette.neutral[97]};
+		background-color: ${schemedPalette('--quiz-atom-answers-background')};
 
 		:hover {
-			background-color: ${palette.neutral[86]};
+			background-color: ${schemedPalette('--quiz-atom-answers-hover')};
 		}
 		/* TODO: apply same styles on focus (requires source update) */
 
 		div {
+			color: inherit;
 			${fontStyles(theme)};
 		}
 	}
@@ -70,7 +75,7 @@ const BlackCheckmark = () => (
 
 			height: ${space[6]}px;
 			svg {
-				fill: ${palette.neutral[0]};
+				fill: ${schemedPalette('--quiz-atom-check-mark')};
 				height: ${space[6]}px;
 				width: ${space[6]}px;
 			}
@@ -155,7 +160,7 @@ const BlackText = ({
 }) => (
 	<label
 		css={css`
-			color: ${palette.neutral[0]};
+			color: inherit;
 			display: flex;
 			flex-direction: column;
 
@@ -217,7 +222,9 @@ const incorrectSelectedAnswerStyles = css`
 	display: flex;
 	flex-direction: row;
 
-	background-color: ${palette.news[400]};
+	background-color: ${schemedPalette(
+		'--quiz-atom-incorrect-answer-background',
+	)};
 `;
 
 export const IncorrectAnswer = ({
@@ -246,7 +253,7 @@ const correctNonSelectedAnswerStyles = css`
 	border: 2px solid ${palette.success[400]};
 	padding-left: 10px;
 
-	background-color: ${palette.neutral[97]};
+	background-color: ${schemedPalette('--quiz-atom-answers-background')};
 `;
 
 export const NonSelectedCorrectAnswer = ({
@@ -273,7 +280,7 @@ export const NonSelectedCorrectAnswer = ({
 );
 
 const unselectedAnswerStyles = css`
-	background-color: ${palette.neutral[97]};
+	background-color: ${schemedPalette('--quiz-atom-answers-background')};
 	margin-bottom: ${space[2]}px;
 
 	padding-top: ${space[2]}px;

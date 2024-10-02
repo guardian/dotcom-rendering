@@ -218,7 +218,7 @@ interface AppsProps extends CommonProps {
 export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
-		config: { isPaidContent, host },
+		config: { isPaidContent, host, hasSurveyAd },
 		editionId,
 	} = article;
 
@@ -300,7 +300,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						</Stuck>
 					)}
 
-					{renderAds && article.config.switches.surveys && (
+					{renderAds && hasSurveyAd && (
 						<AdSlot position="survey" display={format.display} />
 					)}
 				</>

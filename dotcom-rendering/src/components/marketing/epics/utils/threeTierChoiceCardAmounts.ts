@@ -1,50 +1,85 @@
-import {
-	countryCodeToCountryGroupId,
-	type CountryGroupId,
-} from '@guardian/support-dotcom-components';
+import { type CountryGroupId } from '@guardian/support-dotcom-components';
 
-export type SupportTier = 'support' | 'allAccess' | 'other';
+export type SupportTier = 'Contribution' | 'SupporterPlus' | 'OneOff';
+export type SupportRatePlan = 'Monthly' | 'Annual';
 
 // ToDo: fetch this in a way that isn't hardcoded
 export const threeTierChoiceCardAmounts = {
-	GBPCountries: {
-		support: 4,
-		allAccess: 12,
-		other: 0,
+	Monthly: {
+		GBPCountries: {
+			Contribution: 4,
+			SupporterPlus: 12,
+			OneOff: 0,
+		},
+		UnitedStates: {
+			Contribution: 5,
+			SupporterPlus: 15,
+			OneOff: 0,
+		},
+		AUDCountries: {
+			Contribution: 10,
+			SupporterPlus: 20,
+			OneOff: 0,
+		},
+		EURCountries: {
+			Contribution: 4,
+			SupporterPlus: 12,
+			OneOff: 0,
+		},
+		NZDCountries: {
+			Contribution: 10,
+			SupporterPlus: 20,
+			OneOff: 0,
+		},
+		Canada: {
+			Contribution: 5,
+			SupporterPlus: 15,
+			OneOff: 0,
+		},
+		International: {
+			Contribution: 3,
+			SupporterPlus: 15,
+			OneOff: 0,
+		},
 	},
-	UnitedStates: {
-		support: 5,
-		allAccess: 15,
-		other: 0,
+	Annual: {
+		GBPCountries: {
+			Contribution: 50,
+			SupporterPlus: 120,
+			OneOff: 0,
+		},
+		UnitedStates: {
+			Contribution: 60,
+			SupporterPlus: 150,
+			OneOff: 0,
+		},
+		AUDCountries: {
+			Contribution: 80,
+			SupporterPlus: 200,
+			OneOff: 0,
+		},
+		EURCountries: {
+			Contribution: 50,
+			SupporterPlus: 120,
+			OneOff: 0,
+		},
+		NZDCountries: {
+			Contribution: 80,
+			SupporterPlus: 200,
+			OneOff: 0,
+		},
+		Canada: {
+			Contribution: 60,
+			SupporterPlus: 150,
+			OneOff: 0,
+		},
+		International: {
+			Contribution: 30,
+			SupporterPlus: 150,
+			OneOff: 0,
+		},
 	},
-	AUDCountries: {
-		support: 10,
-		allAccess: 20,
-		other: 0,
-	},
-	EURCountries: {
-		support: 4,
-		allAccess: 12,
-		other: 0,
-	},
-	NZDCountries: {
-		support: 10,
-		allAccess: 20,
-		other: 0,
-	},
-	Canada: {
-		support: 5,
-		allAccess: 15,
-		other: 0,
-	},
-	International: {
-		support: 3,
-		allAccess: 15,
-		other: 0,
-	},
-} as const satisfies Record<CountryGroupId, Record<SupportTier, number>>;
-
-export function getDefaultThreeTierAmount(countryCode?: string): number {
-	const countryGroupId = countryCodeToCountryGroupId(countryCode);
-	return threeTierChoiceCardAmounts[countryGroupId].allAccess;
-}
+} as const satisfies Record<
+	SupportRatePlan,
+	Record<CountryGroupId, Record<SupportTier, number>>
+>;

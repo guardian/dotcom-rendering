@@ -849,6 +849,10 @@ const containerColours = {
 		light: cardKickerTextLight,
 		dark: cardKickerTextDark,
 	},
+	'--front-container-background': {
+		light: sectionBackgroundLight,
+		dark: sectionBackgroundDark,
+	},
 	'--article-border': {
 		light: articleBorderLight,
 		dark: articleBorderDark,

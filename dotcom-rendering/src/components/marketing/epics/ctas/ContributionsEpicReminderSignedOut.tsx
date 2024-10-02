@@ -21,9 +21,9 @@ import {
 	TextInput,
 } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
-import { useContributionsReminderEmailForm } from '../hooks/useContributionsReminderEmailForm';
-import type { ReactComponent } from '../lib/ReactComponent';
-import { ensureHasPreposition, ReminderStatus } from '../lib/reminders';
+import { useContributionsReminderEmailForm } from '../../hooks/useContributionsReminderEmailForm';
+import type { ReactComponent } from '../../lib/ReactComponent';
+import { ensureHasPreposition, ReminderStatus } from '../../lib/reminders';
 
 // --- Styles --- //
 
@@ -189,7 +189,7 @@ export const ContributionsEpicReminderSignedOut: ReactComponent<
 										reminderStatus ===
 										ReminderStatus.Submitting
 									}
-									css={getCustomSubmitStyles(
+									cssOverrides={getCustomSubmitStyles(
 										reminderStatus ===
 											ReminderStatus.Submitting,
 									)}

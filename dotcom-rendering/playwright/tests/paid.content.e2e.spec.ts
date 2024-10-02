@@ -5,32 +5,50 @@ import { loadPage } from '../lib/load-page';
 import { expectToBeVisible } from '../lib/locators';
 import { ADDITIONAL_REQUEST_PATH, interceptOphanRequest } from '../lib/ophan';
 
-const paidContentPage =
-	'https://www.theguardian.com/power-up-your-payments-with-paypal/article/2024/jul/19/how-i-spotted-a-gap-in-the-market-for-healthy-tasty-easy-cuisine';
-
 /**
- * This test relies on labs campaigns, where the content is often taken down one the campaign is complete.
- * If this happens you'll need to find a new labs article with a brand badge, you can often find these here:
+ * This test checks Ophan click events are sent for paid content labs campaigns.
+ * We have tried to use a long lived campaign however the content can be taken down.
+ *
+ * If the content is taken down you'll need to find a new paid content page.
+ * The article should have a sponsor logo in the article meta and related content section.
+ * You can find all paid content campaigns here:
  * https://www.theguardian.com/tone/advertisement-features
- * You need to edit the link as well as the expected requestURL to include the new brand in the code below, where it states `expect(requestURL).to.include('el=<logo goes here>');`.
- * You can grab the required info in the dev tools network tab on the page itself.
+ *
+ * You need to edit the expected logo data-component name and data-link-name for both the meta and related content section
+ * You can grab the required attribute values in the dev tools for the page itself
  */
+
+const paidContentPage =
+	'https://www.theguardian.com/guardian-clearing/2021/jul/12/online-event-how-to-make-clearing-work-for-you-register-now';
+
+const metaLogoDataComponent =
+	'labs-logo | article-meta-the-guardian universities';
+
+const metaLogoDataLinkName = 'labs-logo-article-meta-the-guardian universities';
+
+const relatedContentLogoDataComponent =
+	'labs-logo | article-related-content-the-guardian universities';
+
+const relatedContentLogoDataLinkName =
+	'labs-logo-article-related-content-the-guardian universities';
+
 test.describe('Paid content tests', () => {
-	test('should send Ophan component event on click of sponsor logo in article meta', async ({
+	test('should send Ophan component event on click of sponsor logo in article meta and related content section', async ({
 		page,
 	}) => {
 		await loadPage(page, `/Article/${paidContentPage}`);
 		await cmpAcceptAll(page);
 
-		const clickEventRequest = interceptOphanRequest({
+		// meta logo
+		const metaClickEventRequest = interceptOphanRequest({
 			page,
 			path: ADDITIONAL_REQUEST_PATH,
 			searchParamMatcher: (searchParams) => {
 				const clickComponent = searchParams.get('clickComponent');
 				const clickLinkNames = searchParams.get('clickLinkNames');
 				return (
-					clickComponent === 'labs-logo | article-meta-paypal' &&
-					clickLinkNames === '["labs-logo-article-meta-paypal"]'
+					clickComponent === metaLogoDataComponent &&
+					clickLinkNames === `["${metaLogoDataLinkName}"]`
 				);
 			},
 		});
@@ -40,26 +58,22 @@ test.describe('Paid content tests', () => {
 		await expectToBeVisible(page, '[data-testid=branding-logo]');
 		await page.locator('[data-testid=branding-logo]').click();
 
-		await clickEventRequest;
-	});
+		await metaClickEventRequest;
 
-	test('should send Ophan component event on click of sponsor logo in onwards section', async ({
-		page,
-	}) => {
-		await loadPage(page, `/Article/${paidContentPage}`);
-		await cmpAcceptAll(page);
+		// go back to the paid content page
+		await page.goBack();
 
-		const clickEventRequest = interceptOphanRequest({
+		// related content logo
+		const relatedClickEventRequest = interceptOphanRequest({
 			page,
 			path: ADDITIONAL_REQUEST_PATH,
 			searchParamMatcher: (searchParams) => {
 				const clickComponent = searchParams.get('clickComponent');
 				const clickLinkNames = searchParams.get('clickLinkNames');
 				return (
-					clickComponent ===
-						'labs-logo | article-related-content-paypal' &&
+					clickComponent === relatedContentLogoDataComponent &&
 					clickLinkNames ===
-						'["labs-logo-article-related-content-paypal","related-content"]'
+						`["${relatedContentLogoDataLinkName}","related-content"]`
 				);
 			},
 		});
@@ -69,7 +83,6 @@ test.describe('Paid content tests', () => {
 		await expectToBeVisible(page, '[data-testid=card-branding-logo]');
 		await page.locator('[data-testid=card-branding-logo]').first().click();
 
-		// Make sure the request to Ophan is made
-		await clickEventRequest;
+		await relatedClickEventRequest;
 	});
 });

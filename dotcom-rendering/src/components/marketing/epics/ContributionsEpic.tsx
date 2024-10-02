@@ -23,7 +23,7 @@ import type {
 	EpicProps,
 	Stage,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import { useArticleCountOptOut } from '../hooks/useArticleCountOptOut';
 import type { ReactComponent } from '../lib/ReactComponent';
@@ -39,11 +39,10 @@ import type { OphanTracking } from '../shared/ArticleCountOptOutPopup';
 import { withParsedProps } from '../shared/ModuleWrapper';
 import { BylineWithHeadshot } from './BylineWithHeadshot';
 import { ContributionsEpicArticleCountAboveWithOptOut } from './ContributionsEpicArticleCountAboveWithOptOut';
-import { ContributionsEpicCtas } from './ContributionsEpicCtas';
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
 import { ContributionsEpicSignInCta } from './ContributionsEpicSignInCta';
-import { ThreeTierChoiceCards } from './ThreeTierChoiceCards';
-import { getDefaultThreeTierAmount } from './utils/threeTierChoiceCardAmounts';
+import { ContributionsEpicTicker } from './ContributionsEpicTicker';
+import { ContributionsEpicCtasContainer } from './ctas/ContributionsEpicCtasContainer';
 
 // CSS Styling
 // -------------------------------------------
@@ -302,23 +301,6 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	const { image, tickerSettings, choiceCardAmounts, newsletterSignup } =
 		variant;
 
-	const defaultThreeTierAmount = getDefaultThreeTierAmount(countryCode);
-	const [
-		threeTierChoiceCardSelectedAmount,
-		setThreeTierChoiceCardSelectedAmount,
-	] = useState<number>(defaultThreeTierAmount);
-
-	const variantOfChoiceCard =
-		countryCode === 'US'
-			? 'US_THREE_TIER_CHOICE_CARDS'
-			: 'THREE_TIER_CHOICE_CARDS';
-
-	const isNonVatCompliantCountry =
-		variant.choiceCardAmounts?.testName === 'VAT_COMPLIANCE';
-
-	const showChoiceCards =
-		variant.showChoiceCards && !isNonVatCompliantCountry;
-
 	const { hasOptedOut, onArticleCountOptIn, onArticleCountOptOut } =
 		useArticleCountOptOut();
 
@@ -460,15 +442,6 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				<BylineWithHeadshot bylineWithImage={variant.bylineWithImage} />
 			)}
 
-			{showChoiceCards && (
-				<ThreeTierChoiceCards
-					countryCode={countryCode}
-					selectedAmount={threeTierChoiceCardSelectedAmount}
-					setSelectedAmount={setThreeTierChoiceCardSelectedAmount}
-					variantOfChoiceCard={variantOfChoiceCard}
-				/>
-			)}
-
 			{newsletterSignup ? (
 				<ContributionsEpicNewsletterSignup
 					newsletterId={newsletterSignup.newsletterId}
@@ -476,7 +449,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					tracking={tracking}
 				/>
 			) : (
-				<ContributionsEpicCtas
+				<ContributionsEpicCtasContainer
 					variant={variant}
 					tracking={tracking}
 					countryCode={countryCode}
@@ -484,13 +457,8 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					onReminderOpen={onReminderOpen}
 					fetchEmail={fetchEmail}
 					submitComponentEvent={submitComponentEvent}
-					showChoiceCards={showChoiceCards}
 					amountsTestName={choiceCardAmounts?.testName}
 					amountsVariantName={choiceCardAmounts?.variantName}
-					threeTierChoiceCardSelectedAmount={
-						threeTierChoiceCardSelectedAmount
-					}
-					variantOfChoiceCard={variantOfChoiceCard}
 				/>
 			)}
 

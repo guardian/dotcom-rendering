@@ -22,7 +22,10 @@ import {
 	ChoiceCardTestData_REGULAR,
 	ChoiceCardTestData_US,
 } from './ThreeTierChoiceCardData';
-import type { SupportTier } from './utils/threeTierChoiceCardAmounts';
+import type {
+	SupportRatePlan,
+	SupportTier,
+} from './utils/threeTierChoiceCardAmounts';
 import { threeTierChoiceCardAmounts } from './utils/threeTierChoiceCardAmounts';
 
 const supportTierChoiceCardStyles = (selected: boolean) => css`
@@ -32,7 +35,7 @@ const supportTierChoiceCardStyles = (selected: boolean) => css`
 	background-color: ${selected ? palette.sport[800] : palette.neutral[100]};
 	border-radius: 10px;
 	padding: ${selected
-		? `${space[4]}px ${space[5]}px ${space[2]}px ${space[5]}px`
+		? `6px ${space[5]}px 10px ${space[5]}px`
 		: `6px ${space[5]}px`};
 `;
 
@@ -103,9 +106,10 @@ export type ChoiceInfo = {
 
 function getChoiceAmount(
 	supportTier: SupportTier,
+	ratePlan: SupportRatePlan,
 	countryGroupId: CountryGroupId,
 ): number {
-	return threeTierChoiceCardAmounts[countryGroupId][supportTier];
+	return threeTierChoiceCardAmounts[ratePlan][countryGroupId][supportTier];
 }
 
 const SupportingBenefits = ({
@@ -140,8 +144,8 @@ const RecommendedPill = () => {
 };
 
 type ThreeTierChoiceCardsProps = {
-	selectedAmount: number;
-	setSelectedAmount: Dispatch<SetStateAction<number>>;
+	selectedProduct: SupportTier;
+	setSelectedProduct: Dispatch<SetStateAction<SupportTier>>;
 	countryCode?: string;
 	variantOfChoiceCard: string;
 };
@@ -150,6 +154,8 @@ const getChoiceCardData = (choiceCardVariant: string): ChoiceInfo[] => {
 	switch (choiceCardVariant) {
 		case 'US_THREE_TIER_CHOICE_CARDS':
 			return ChoiceCardTestData_US;
+		case 'US_CHECKOUT_THREE_TIER_CHOICE_CARDS':
+			return ChoiceCardTestData_US;
 		default:
 			return ChoiceCardTestData_REGULAR;
 	}
@@ -157,8 +163,8 @@ const getChoiceCardData = (choiceCardVariant: string): ChoiceInfo[] => {
 
 export const ThreeTierChoiceCards = ({
 	countryCode,
-	selectedAmount,
-	setSelectedAmount,
+	selectedProduct,
+	setSelectedProduct,
 	variantOfChoiceCard,
 }: ThreeTierChoiceCardsProps) => {
 	const currencySymbol = getLocalCurrencySymbol(countryCode);
@@ -183,9 +189,10 @@ export const ThreeTierChoiceCards = ({
 					}) => {
 						const choiceAmount = getChoiceAmount(
 							supportTier,
+							'Monthly',
 							countryGroupId,
 						);
-						const selected = selectedAmount === choiceAmount;
+						const selected = selectedProduct === supportTier;
 
 						return (
 							<div
@@ -205,7 +212,7 @@ export const ThreeTierChoiceCards = ({
 										)}
 										id={`choicecard-${supportTier}`}
 										value={supportTier}
-										css={labelOverrideStyles}
+										cssOverrides={labelOverrideStyles}
 										supporting={
 											selected ? (
 												<SupportingBenefits
@@ -219,9 +226,9 @@ export const ThreeTierChoiceCards = ({
 											) : undefined
 										}
 										checked={selected}
-										onChange={() =>
-											setSelectedAmount(choiceAmount)
-										}
+										onChange={() => {
+											setSelectedProduct(supportTier);
+										}}
 									/>
 								</div>
 							</div>

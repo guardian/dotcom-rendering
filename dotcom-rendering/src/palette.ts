@@ -164,6 +164,13 @@ const headlineTextDark: PaletteFunction = ({ design, display, theme }) => {
 		}
 	}
 };
+
+const headlineMatchTextLight: PaletteFunction = (format) =>
+	seriesTitleMatchTextLight(format);
+
+const headlineMatchTextDark: PaletteFunction = (format) =>
+	seriesTitleMatchTextDark(format);
+
 const headlineBackgroundLight: PaletteFunction = ({
 	display,
 	design,
@@ -5584,6 +5591,43 @@ const cricketScoreboardLinkText: PaletteFunction = () => {
 	return sourcePalette.sport[300];
 };
 
+const imageTitleBackground: PaletteFunction = ({ design, theme }) => {
+	if (design === ArticleDesign.Analysis && theme === Pillar.News) {
+		return sourcePalette.news[300];
+	}
+
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[400];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[300];
+		case Pillar.Sport:
+			return sourcePalette.sport[400];
+		case Pillar.Culture:
+			return sourcePalette.culture[400];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+
+const lightboxDivider: PaletteFunction = (format) =>
+	imageTitleBackground(format);
+
+const cardSublinksBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const cardSublinksBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+
+const flexibleSplashCardStandfirstLight: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+const flexibleSplashCardStandfirstDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
 // ----- Palette ----- //
 
 /**
@@ -5905,6 +5949,10 @@ const paletteColours = {
 		light: cardKickerTextLight,
 		dark: cardKickerTextDark,
 	},
+	'--card-sublinks-background': {
+		light: cardSublinksBackgroundLight,
+		dark: cardSublinksBackgroundDark,
+	},
 	'--carousel-active-dot': {
 		light: carouselActiveDotLight,
 		dark: carouselActiveDotDark,
@@ -6193,6 +6241,11 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
 	},
+
+	'--flexible-splash-card-standfirst': {
+		light: flexibleSplashCardStandfirstLight,
+		dark: flexibleSplashCardStandfirstDark,
+	},
 	'--follow-icon-background': {
 		light: followIconBackgroundLight,
 		dark: followIconBackgroundDark,
@@ -6204,6 +6257,10 @@ const paletteColours = {
 	'--follow-text': {
 		light: followTextLight,
 		dark: followTextDark,
+	},
+	'--front-container-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[10],
 	},
 	'--heading-line': {
 		light: headingLineLight,
@@ -6228,6 +6285,10 @@ const paletteColours = {
 	'--headline-colour': {
 		light: headlineTextLight,
 		dark: headlineTextDark,
+	},
+	'--headline-match-colour': {
+		light: headlineMatchTextLight,
+		dark: headlineMatchTextDark,
 	},
 	'--highlights-card-headline': {
 		light: highlightsCardHeadline,
@@ -6256,6 +6317,10 @@ const paletteColours = {
 	'--highlights-container-start-fade': {
 		light: highlightContainerStartFade,
 		dark: highlightContainerStartFade,
+	},
+	'--image-title-background': {
+		light: imageTitleBackground,
+		dark: imageTitleBackground,
 	},
 	'--interactive-atom-background': {
 		light: interactiveAtomBackgroundLight,
@@ -6324,6 +6389,10 @@ const paletteColours = {
 	'--last-updated-text': {
 		light: lastUpdatedTextLight,
 		dark: lastUpdatedTextDark,
+	},
+	'--lightbox-divider': {
+		light: lightboxDivider,
+		dark: lightboxDivider,
 	},
 	'--link-kicker-text': {
 		light: linkKickerTextLight,
@@ -6516,6 +6585,22 @@ const paletteColours = {
 	'--pullquote-text': {
 		light: pullQuoteTextLight,
 		dark: pullQuoteTextDark,
+	},
+	'--quiz-atom-answers-background': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--quiz-atom-answers-hover': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[38],
+	},
+	'--quiz-atom-check-mark': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[97],
+	},
+	'--quiz-atom-incorrect-answer-background': {
+		light: () => sourcePalette.news[400],
+		dark: () => sourcePalette.news[300],
 	},
 	'--quote-icon-fill': {
 		light: richLinkQuoteFillLight,

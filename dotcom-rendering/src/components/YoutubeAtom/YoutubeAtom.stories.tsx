@@ -132,8 +132,9 @@ const imagePositionOnMobile: ImagePositionType = 'none';
 const imageSize: ImageSizeType = 'large';
 
 const baseConfiguration = {
-	index: 123,
+	atomId: 'a2502abd-1373-45a2-b508-3e5a2ec050be',
 	videoId: '-ZCvZmYlQD8',
+	uniqueId: '-ZCvZmYlQD8-1',
 	alt: '',
 	eventEmitters: [
 		// eslint-disable-next-line no-console -- check event emitters are called
@@ -303,7 +304,7 @@ export const DuplicateVideos = {
 		<>
 			<YoutubeAtom {...args} />
 			<br />
-			<YoutubeAtom {...args} index={345} />
+			<YoutubeAtom {...args} uniqueId="ZCvZmYlQD8-2" />
 		</>
 	),
 	decorators: [SmallContainer],
@@ -333,8 +334,16 @@ export const MultipleStickyVideos = {
 			`}
 		>
 			<YoutubeAtom {...args} />
-			<YoutubeAtom {...args} index={456} videoId="pcMiS6PW8aQ" />
-			<YoutubeAtom {...args} index={789} videoId="3jpXAMwRSu4" />
+			<YoutubeAtom
+				{...args}
+				uniqueId="pcMiS6PW8aQ-1"
+				videoId="pcMiS6PW8aQ"
+			/>
+			<YoutubeAtom
+				{...args}
+				uniqueId="3jpXAMwRSu4-1"
+				videoId="3jpXAMwRSu4"
+			/>
 		</div>
 	),
 	parameters: {

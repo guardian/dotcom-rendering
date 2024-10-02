@@ -87,44 +87,16 @@ export const WithThreeTierChoiceCards: Story = {
 	},
 };
 
-export const WithChoiceCards: Story = {
-	name: 'ContributionsLiveblogEpic with Choice Cards',
+export const WithThreeTierChoiceCardsForUS: Story = {
+	name: 'Contributions Liveblog Epic with Three Tier Choice Cards for US',
 	args: {
 		...meta.args,
+		countryCode: 'US',
 		variant: {
 			...props.variant,
-			secondaryCta: {
-				type: SecondaryCtaType.ContributionsReminder,
-			},
-			showReminderFields: {
-				reminderCta: 'Remind me in December',
-				reminderPeriod: '2022-12-01',
-				reminderLabel: 'December',
-			},
+			name: 'US_CHECKOUT_PAGE',
+			secondaryCta: undefined,
 			showChoiceCards: true,
-			choiceCardAmounts: {
-				testName: 'Storybook_test',
-				variantName: 'Control',
-				defaultContributionType: 'MONTHLY',
-				displayContributionType: ['ONE_OFF', 'MONTHLY', 'ANNUAL'],
-				amountsCardData: {
-					ONE_OFF: {
-						amounts: [5, 10],
-						defaultAmount: 5,
-						hideChooseYourAmount: false,
-					},
-					MONTHLY: {
-						amounts: [4, 10],
-						defaultAmount: 12,
-						hideChooseYourAmount: false,
-					},
-					ANNUAL: {
-						amounts: [50, 100],
-						defaultAmount: 100,
-						hideChooseYourAmount: false,
-					},
-				},
-			},
 		},
 	},
 };

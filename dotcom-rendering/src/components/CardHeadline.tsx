@@ -14,6 +14,7 @@ import {
 	headlineMedium64,
 	space,
 	textSans12,
+	textSans14,
 	textSans15,
 	textSans17,
 	textSans20,
@@ -45,6 +46,8 @@ type Props = {
 	isExternalLink?: boolean;
 	/** Is the headline inside a Highlights card? */
 	isHighlights?: boolean;
+	/** if the headline is within a flexible container it gets a different visual treatment */
+	isFlexibleContainer?: boolean;
 };
 
 /** These represent a new set of fonts. They are extra large font sizes that, as a group, are only used on headlines */
@@ -235,9 +238,6 @@ const sublinkStyles = css`
 	font-family: inherit;
 	font-size: inherit;
 	line-height: inherit;
-	@media (pointer: coarse) {
-		min-height: 44px;
-	}
 
 	/* This css is used to remove any underline from the kicker but still
 	 * have it applied to the headline when the kicker is hovered */
@@ -285,6 +285,7 @@ export const CardHeadline = ({
 	linkTo,
 	isExternalLink,
 	isHighlights = false,
+	isFlexibleContainer = false,
 }: Props) => {
 	const kickerColour = isHighlights
 		? palette('--highlights-card-kicker-text')
@@ -323,11 +324,17 @@ export const CardHeadline = ({
 				)}
 				{showQuotes && <QuoteIcon colour={kickerColour} />}
 				<span
-					css={css`
-						color: ${isHighlights
-							? palette('--highlights-card-headline')
-							: palette('--card-headline-trail-text')};
-					`}
+					css={[
+						isFlexibleContainer &&
+							css`
+								${textSans14}
+							`,
+						css`
+							color: ${isHighlights
+								? palette('--highlights-card-headline')
+								: palette('--card-headline-trail-text')};
+						`,
+					]}
 					className="show-underline"
 				>
 					{headlineText}
