@@ -47,9 +47,6 @@ const topPadding = css`
 	}
 `;
 
-const isNewsNotComment = (format: ArticleFormat) =>
-	format.theme === Pillar.News && format.design !== ArticleDesign.Comment;
-
 const getHeadlineFontByDesign = (design: ArticleDesign, size: number) => {
 	switch (design) {
 		case ArticleDesign.Obituary:
@@ -79,9 +76,14 @@ const getHeadlineFontByDesign = (design: ArticleDesign, size: number) => {
 	}
 };
 
+const isNewsNotCommentOrRecipe = (format: ArticleFormat) =>
+	format.theme === Pillar.News &&
+	format.design !== ArticleDesign.Comment &&
+	format.design !== ArticleDesign.Recipe;
+
 const decideHeadlineFont = (format: ArticleFormat) => {
 	const size = format.display === ArticleDisplay.Immersive ? 50 : 34;
-	if (isNewsNotComment(format)) {
+	if (isNewsNotCommentOrRecipe(format)) {
 		return size === 50 ? headlineMedium50 : headlineMedium34;
 	}
 	return getHeadlineFontByDesign(format.design, size);
@@ -89,7 +91,7 @@ const decideHeadlineFont = (format: ArticleFormat) => {
 
 const decideMobileHeadlineFont = (format: ArticleFormat) => {
 	const size = format.display === ArticleDisplay.Immersive ? 34 : 28;
-	if (isNewsNotComment(format)) {
+	if (isNewsNotCommentOrRecipe(format)) {
 		return size === 34 ? headlineMedium34 : headlineMedium28;
 	}
 	return getHeadlineFontByDesign(format.design, size);
