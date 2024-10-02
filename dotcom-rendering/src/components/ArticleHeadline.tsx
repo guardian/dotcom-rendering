@@ -47,32 +47,22 @@ const topPadding = css`
 	}
 `;
 
-const getHeadlineFontByDesign = (design: ArticleDesign, size: number) => {
+const getFontWeightByDesign = (
+	design: ArticleDesign,
+): 'light' | 'medium' | 'bold' => {
 	switch (design) {
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
-			return size === 50
-				? headlineLight50
-				: size === 34
-				? headlineLight34
-				: headlineLight28;
+			return 'light';
 		case ArticleDesign.Feature:
 		case ArticleDesign.Review:
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Interview:
-			return size === 50
-				? headlineBold50
-				: size === 34
-				? headlineBold34
-				: headlineBold28;
+			return 'bold';
 		default:
-			return size === 50
-				? headlineMedium50
-				: size === 34
-				? headlineMedium34
-				: headlineMedium28;
+			return 'medium';
 	}
 };
 
@@ -86,7 +76,16 @@ const decideHeadlineFont = (format: ArticleFormat) => {
 	if (isNewsNotCommentOrRecipe(format)) {
 		return size === 50 ? headlineMedium50 : headlineMedium34;
 	}
-	return getHeadlineFontByDesign(format.design, size);
+
+	const fontWeight = getFontWeightByDesign(format.design);
+	switch (fontWeight) {
+		case 'light':
+			return size === 50 ? headlineLight50 : headlineLight34;
+		case 'bold':
+			return size === 50 ? headlineBold50 : headlineBold34;
+		default:
+			return size === 50 ? headlineMedium50 : headlineMedium34;
+	}
 };
 
 const decideMobileHeadlineFont = (format: ArticleFormat) => {
@@ -94,8 +93,18 @@ const decideMobileHeadlineFont = (format: ArticleFormat) => {
 	if (isNewsNotCommentOrRecipe(format)) {
 		return size === 34 ? headlineMedium34 : headlineMedium28;
 	}
-	return getHeadlineFontByDesign(format.design, size);
+
+	const fontWeight = getFontWeightByDesign(format.design);
+	switch (fontWeight) {
+		case 'light':
+			return size === 34 ? headlineLight34 : headlineLight28;
+		case 'bold':
+			return size === 34 ? headlineBold34 : headlineBold28;
+		default:
+			return size === 34 ? headlineMedium34 : headlineMedium28;
+	}
 };
+
 const headlineFont = (format: ArticleFormat) => css`
 	${decideMobileHeadlineFont(format)}
 
