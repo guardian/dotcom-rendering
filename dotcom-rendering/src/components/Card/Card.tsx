@@ -154,7 +154,7 @@ const HorizontalDivider = () => (
 				${from.desktop} {
 					width: 140px;
 				}
-				margin-top: 12px;
+				margin-top: ${space[3]}px;
 			}
 		`}
 	/>
@@ -685,6 +685,7 @@ export const Card = ({
 										format={format}
 										size={headlineSize}
 										sizeOnMobile={headlineSizeOnMobile}
+										sizeOnTablet={headlineSizeOnTablet}
 										showQuotes={showQuotes}
 										kickerText={
 											format.design ===

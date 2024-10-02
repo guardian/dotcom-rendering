@@ -41,9 +41,9 @@ const liveSpanStyles = css`
 		display: inline-block;
 		border-radius: 100%;
 		background-color: ${neutral[100]};
-		width: ${pxToRem(9)}rem;
-		height: ${pxToRem(9)}rem;
-		margin-right: ${pxToRem(2)}rem;
+		width: ${pxToRem(9)};
+		height: ${pxToRem(9)};
+		margin-right: ${pxToRem(2)};
 		animation: ${livePulse} 1s infinite;
 
 		@media (prefers-reduced-motion) {
