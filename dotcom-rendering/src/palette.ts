@@ -5619,6 +5619,15 @@ const imageTitleBackground: PaletteFunction = ({ design, theme }) => {
 const lightboxDivider: PaletteFunction = (format) =>
 	imageTitleBackground(format);
 
+const cardSublinksBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const cardSublinksBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+
+const flexibleSplashCardStandfirstLight: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+const flexibleSplashCardStandfirstDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
 // ----- Palette ----- //
 
 /**
@@ -5940,6 +5949,10 @@ const paletteColours = {
 		light: cardKickerTextLight,
 		dark: cardKickerTextDark,
 	},
+	'--card-sublinks-background': {
+		light: cardSublinksBackgroundLight,
+		dark: cardSublinksBackgroundDark,
+	},
 	'--carousel-active-dot': {
 		light: carouselActiveDotLight,
 		dark: carouselActiveDotDark,
@@ -6228,6 +6241,11 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
 	},
+
+	'--flexible-splash-card-standfirst': {
+		light: flexibleSplashCardStandfirstLight,
+		dark: flexibleSplashCardStandfirstDark,
+	},
 	'--follow-icon-background': {
 		light: followIconBackgroundLight,
 		dark: followIconBackgroundDark,
@@ -6239,6 +6257,10 @@ const paletteColours = {
 	'--follow-text': {
 		light: followTextLight,
 		dark: followTextDark,
+	},
+	'--front-container-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[10],
 	},
 	'--heading-line': {
 		light: headingLineLight,
@@ -6563,6 +6585,22 @@ const paletteColours = {
 	'--pullquote-text': {
 		light: pullQuoteTextLight,
 		dark: pullQuoteTextDark,
+	},
+	'--quiz-atom-answers-background': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--quiz-atom-answers-hover': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[38],
+	},
+	'--quiz-atom-check-mark': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[97],
+	},
+	'--quiz-atom-incorrect-answer-background': {
+		light: () => sourcePalette.news[400],
+		dark: () => sourcePalette.news[300],
 	},
 	'--quote-icon-fill': {
 		light: richLinkQuoteFillLight,

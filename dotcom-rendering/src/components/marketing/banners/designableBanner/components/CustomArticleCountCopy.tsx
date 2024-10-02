@@ -4,18 +4,22 @@
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/designableBanner/components/CustomArticleCountCopy.tsx
  */
 import { css } from '@emotion/react';
-import { from, headline, space } from '@guardian/source/foundations';
+import {
+	from,
+	headlineBold15,
+	headlineBold17,
+	space,
+} from '@guardian/source/foundations';
 import type { BannerTemplateSettings } from '../settings';
 import { DesignableBannerArticleCountOptOut } from './DesignableBannerArticleCountOptOut';
 
 const styles = {
 	container: css`
-		${headline.xxxsmall({ fontWeight: 'bold' })}
-		font-size: 15px;
+		${headlineBold15}
 		margin: 0 0 ${space[1]}px;
 
 		${from.tablet} {
-			font-size: 17px;
+			${headlineBold17}
 		}
 	`,
 };

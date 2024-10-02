@@ -54,7 +54,7 @@ export const PrivacySettingsLink = ({ extraClasses }: Props) => {
 	return (
 		<ButtonLink
 			className={extraClasses}
-			css={footerLink}
+			cssOverrides={footerLink}
 			data-link-name="privacy-settings"
 			onClick={(event) => {
 				event.preventDefault();

@@ -2,7 +2,7 @@ import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/
 import { useState } from 'react';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import { ThreeTierChoiceCards } from '../ThreeTierChoiceCards';
-import { getDefaultThreeTierAmount } from '../utils/threeTierChoiceCardAmounts';
+import type { SupportTier } from '../utils/threeTierChoiceCardAmounts';
 import { ContributionsEpicButtons } from './ContributionsEpicButtons';
 import { ContributionsEpicReminder } from './ContributionsEpicReminder';
 
@@ -43,14 +43,22 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 	const showChoiceCards =
 		variant.showChoiceCards && !isNonVatCompliantCountry;
 
-	const defaultThreeTierAmount = getDefaultThreeTierAmount(countryCode);
+	/**
+	 * This corresponds to the products in the Product API
+	 * @see https://product-catalog.guardianapis.com/product-catalog.json
+	 */
 	const [
-		threeTierChoiceCardSelectedAmount,
-		setThreeTierChoiceCardSelectedAmount,
-	] = useState<number>(defaultThreeTierAmount);
+		threeTierChoiceCardSelectedProduct,
+		setThreeTierChoiceCardSelectedProduct,
+	] = useState<SupportTier>('SupporterPlus');
+
+	const showUSSupportCheckout =
+		showChoiceCards && variant.name.includes('US_CHECKOUT_PAGE');
 
 	const variantOfChoiceCard =
-		countryCode === 'US'
+		countryCode === 'US' && showUSSupportCheckout
+			? 'US_CHECKOUT_THREE_TIER_CHOICE_CARDS'
+			: countryCode === 'US'
 			? 'US_THREE_TIER_CHOICE_CARDS'
 			: 'THREE_TIER_CHOICE_CARDS';
 
@@ -59,8 +67,8 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 			{showChoiceCards && (
 				<ThreeTierChoiceCards
 					countryCode={countryCode}
-					selectedAmount={threeTierChoiceCardSelectedAmount}
-					setSelectedAmount={setThreeTierChoiceCardSelectedAmount}
+					selectedProduct={threeTierChoiceCardSelectedProduct}
+					setSelectedProduct={setThreeTierChoiceCardSelectedProduct}
 					variantOfChoiceCard={variantOfChoiceCard}
 				/>
 			)}
@@ -96,8 +104,8 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 				isReminderActive={isReminderActive}
 				isSignedIn={Boolean(fetchedEmail)}
 				showChoiceCards={showChoiceCards}
-				threeTierChoiceCardSelectedAmount={
-					threeTierChoiceCardSelectedAmount
+				threeTierChoiceCardSelectedProduct={
+					threeTierChoiceCardSelectedProduct
 				}
 				amountsTestName={amountsTestName}
 				amountsVariantName={amountsVariantName}

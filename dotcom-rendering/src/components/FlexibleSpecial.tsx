@@ -19,7 +19,7 @@ type Props = {
 	absoluteServerTimes: boolean;
 };
 
-type boostProperties = {
+type BoostProperties = {
 	headlineSize: SmallHeadlineSize;
 	headlineSizeOnMobile: SmallHeadlineSize;
 	headlineSizeOnTablet: SmallHeadlineSize;
@@ -32,9 +32,9 @@ type boostProperties = {
  * Boosting a card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
  */
 const determineCardProperties = (
-	boostLevel: BoostLevel = 'default',
+	boostLevel: BoostLevel,
 	supportingContentLength: number,
-): boostProperties => {
+): BoostProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
@@ -43,7 +43,7 @@ const determineCardProperties = (
 				headlineSizeOnMobile: 'tiny',
 				headlineSizeOnTablet: 'small',
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'top',
+				imagePositionOnMobile: 'bottom',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 			};
@@ -53,7 +53,7 @@ const determineCardProperties = (
 				headlineSizeOnMobile: 'small',
 				headlineSizeOnTablet: 'medium',
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'top',
+				imagePositionOnMobile: 'bottom',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 			};
@@ -63,7 +63,7 @@ const determineCardProperties = (
 				headlineSizeOnMobile: 'medium',
 				headlineSizeOnTablet: 'medium',
 				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'top',
+				imagePositionOnMobile: 'bottom',
 				supportingContentAlignment: 'horizontal',
 			};
 		case 'gigaboost':
@@ -72,7 +72,7 @@ const determineCardProperties = (
 				headlineSizeOnMobile: 'large',
 				headlineSizeOnTablet: 'large',
 				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'top',
+				imagePositionOnMobile: 'bottom',
 				supportingContentAlignment: 'horizontal',
 			};
 	}
@@ -101,11 +101,11 @@ export const OneCardLayout = ({
 		imagePositionOnMobile,
 		supportingContentAlignment,
 	} = determineCardProperties(
-		card.boostLevel,
-		card?.supportingContent?.length ?? 0,
+		card.boostLevel ?? 'default',
+		card.supportingContent?.length ?? 0,
 	);
 	return (
-		<UL padBottom={true}>
+		<UL padBottom={true} isFlexibleContainer={true}>
 			<LI padSides={true}>
 				<FrontCard
 					trail={card}
@@ -127,6 +127,7 @@ export const OneCardLayout = ({
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
 					boostedFontSizes={true}
+					isFlexSplash={true}
 				/>
 			</LI>
 		</UL>
@@ -139,7 +140,6 @@ const TwoCardOrFourCardLayout = ({
 	showAge,
 	absoluteServerTimes,
 	showImage = true,
-	padBottom,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
@@ -148,11 +148,15 @@ const TwoCardOrFourCardLayout = ({
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	showImage?: boolean;
-	padBottom?: boolean;
 }) => {
 	const hasTwoOrFewerCards = cards.length <= 2;
 	return (
-		<UL direction="row" padBottom={padBottom} showTopBar={true}>
+		<UL
+			direction="row"
+			padBottom={true}
+			showTopBar={true}
+			isFlexibleContainer={true}
+		>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI

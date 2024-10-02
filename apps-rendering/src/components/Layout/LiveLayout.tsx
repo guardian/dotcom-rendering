@@ -165,8 +165,8 @@ const LiveLayout = ({ item }: Props) => {
 				<GridItem area="live-blocks">
 					<div
 						css={css`
-							padding-left: ${pxToRem(10)}rem;
-							padding-right: ${pxToRem(10)}rem;
+							padding-left: ${pxToRem(10)};
+							padding-right: ${pxToRem(10)};
 							padding-top: ${remSpace[3]};
 
 							${from.mobileLandscape} {

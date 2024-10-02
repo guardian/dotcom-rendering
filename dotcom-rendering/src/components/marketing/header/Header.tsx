@@ -91,7 +91,7 @@ const Header: ReactComponent<HeaderRenderProps> = (
 							iconSide="right"
 							nudgeIcon={true}
 							size="xsmall"
-							css={buttonStyles}
+							cssOverrides={buttonStyles}
 							style={{ gridArea: 'cta1' }}
 						>
 							{primaryCta.ctaText}
@@ -106,7 +106,7 @@ const Header: ReactComponent<HeaderRenderProps> = (
 								props.mobileContent?.primaryCta?.ctaUrl ??
 								primaryCta.ctaUrl
 							}
-							css={buttonStyles}
+							cssOverrides={buttonStyles}
 							size="xsmall"
 						>
 							{props.mobileContent?.primaryCta?.ctaText ??
@@ -125,7 +125,7 @@ const Header: ReactComponent<HeaderRenderProps> = (
 						icon={<SvgArrowRightStraight />}
 						iconSide="right"
 						nudgeIcon={true}
-						css={buttonStyles}
+						cssOverrides={buttonStyles}
 						size="xsmall"
 						style={{ gridArea: 'cta2' }}
 					>

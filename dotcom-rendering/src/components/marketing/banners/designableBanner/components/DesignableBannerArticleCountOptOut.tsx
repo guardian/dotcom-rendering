@@ -4,7 +4,15 @@
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/designableBanner/components/DesignableBannerArticleCountOptOut.tsx
  */
 import { css } from '@emotion/react';
-import { from, neutral, space, textSans } from '@guardian/source/foundations';
+import {
+	from,
+	neutral,
+	space,
+	textSans14,
+	textSans15,
+	textSans17,
+	textSansBold17,
+} from '@guardian/source/foundations';
 import { Button, SvgCross } from '@guardian/source/react-components';
 import { useState } from 'react';
 import {
@@ -195,7 +203,7 @@ const overlayStyles = {
 		backgroundColour: string,
 		textColour: string = neutral[0],
 	) => css`
-		${textSans.medium()}
+		${textSans17}
 		padding: ${space[2]}px;
 		background-color: ${backgroundColour};
 		border: 1px solid ${textColour};
@@ -208,11 +216,11 @@ const overlayStyles = {
 		justify-content: space-between;
 	`,
 	overlayHeaderText: css`
-		${textSans.medium({ fontWeight: 'bold' })};
+		${textSansBold17};
 	`,
 	overlayBody: css`
 		margin-top: ${space[1]}px;
-		${textSans.small()};
+		${textSans15};
 	`,
 	overlayCtaContainer: css`
 		margin-top: ${space[3]}px;
@@ -231,7 +239,7 @@ const overlayStyles = {
 	`,
 	overlayNote: (textColour: string = neutral[0]) => css`
 		margin-top: ${space[2]}px;
-		${textSans.xsmall()}
+		${textSans14}
 		font-style: italic;
 
 		a {

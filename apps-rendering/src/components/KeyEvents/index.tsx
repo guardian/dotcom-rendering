@@ -193,7 +193,11 @@ const timeStyles = css`
 const ListItem = ({ keyEvent, format }: ListItemProps) => {
 	return (
 		<li css={listItemStyles}>
-			<Link priority="secondary" css={linkStyles} href={keyEvent.url}>
+			<Link
+				priority="secondary"
+				cssOverrides={linkStyles}
+				href={keyEvent.url}
+			>
 				<div css={timeTextWrapperStyles}>
 					<time
 						dateTime={keyEvent.date.toISOString()}

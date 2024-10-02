@@ -138,7 +138,7 @@ const MessageUs = ({
 					<LinkButton
 						data-ignore="global-link-styling"
 						key={i}
-						css={calloutPrimaryButtonStyles}
+						cssOverrides={calloutPrimaryButtonStyles}
 						type="submit"
 						priority="primary"
 						href={`${contact.urlPrefix}${contact.value}`}

@@ -10,6 +10,8 @@ type Props = {
 	imageType?: CardImageType | undefined;
 	/** By default, trail text is hidden at specific breakpoints. This prop allows consumers to show trails across all breakpoints if set to false */
 	shouldHide?: boolean;
+	/** If the card is a flexible splash card, the trail text will be styled differently */
+	isFlexSplash?: boolean;
 };
 
 /**
@@ -52,12 +54,17 @@ const trailTextStyles = css`
 	}
 `;
 
+const flexibleSplashStyles = css`
+	color: ${palette('--flexible-splash-card-standfirst')};
+`;
+
 export const TrailTextWrapper = ({
 	children,
 	imagePositionOnDesktop,
 	imageSize,
 	imageType,
 	shouldHide = true,
+	isFlexSplash,
 }: Props) => {
 	return (
 		<div
@@ -69,6 +76,7 @@ export const TrailTextWrapper = ({
 						imageSize,
 						imageType,
 					),
+				isFlexSplash && flexibleSplashStyles,
 			]}
 		>
 			{children}
