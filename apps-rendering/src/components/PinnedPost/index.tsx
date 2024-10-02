@@ -121,10 +121,10 @@ const fakeButtonStyles = (format: ArticleFormat): SerializedStyles => css`
 	position: absolute;
 	bottom: -1.5rem;
 	${textSansBold17};
-	height: ${remHeight.ctaMedium}rem;
-	min-height: ${remHeight.ctaMedium}rem;
+	height: ${remHeight.ctaMedium};
+	min-height: ${remHeight.ctaMedium};
 	padding: 0 ${remSpace[5]} 0.125rem;
-	border-radius: ${remHeight.ctaMedium}rem;
+	border-radius: ${remHeight.ctaMedium};
 	color: white;
 	${from.tablet} {
 		margin-left: 3.75rem;
