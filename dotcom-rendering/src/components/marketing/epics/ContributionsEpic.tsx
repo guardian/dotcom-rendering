@@ -41,7 +41,6 @@ import { BylineWithHeadshot } from './BylineWithHeadshot';
 import { ContributionsEpicArticleCountAboveWithOptOut } from './ContributionsEpicArticleCountAboveWithOptOut';
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
 import { ContributionsEpicSignInCta } from './ContributionsEpicSignInCta';
-import { ContributionsEpicTicker } from './ContributionsEpicTicker';
 import { ContributionsEpicCtasContainer } from './ctas/ContributionsEpicCtasContainer';
 
 // CSS Styling
