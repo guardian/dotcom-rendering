@@ -665,6 +665,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
+												mainMediaElements={
+													article.mainMediaElements
+												}
 											/>
 										</div>
 									</Hide>
@@ -690,6 +693,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											article.config.discussionApiUrl
 										}
 										shortUrlId={article.config.shortUrlId}
+										mainMediaElements={
+											article.mainMediaElements
+										}
 									/>
 									{!!article.affiliateLinksDisclaimer && (
 										<AffiliateDisclaimer />

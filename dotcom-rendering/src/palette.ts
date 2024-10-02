@@ -1913,6 +1913,21 @@ const tableOfContentsBorderLight: PaletteFunction = () =>
 const tableOfContentsBorderDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
 
+const podcastMetaTitleLight: PaletteFunction = () => sourcePalette.neutral[97];
+const podcastMetaTitleDark: PaletteFunction = () => sourcePalette.neutral[97];
+const podcastMetaButtonTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const podcastMetaButtonTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const podcastMetaButtonBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+const podcastMetaButtonBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+const podcastMetaButtonBackgroundHoverLight: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+const podcastMetaButtonBackgroundHoverDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+
 const adLabelsTextLight: PaletteFunction = () => sourcePalette.neutral[46];
 const adLabelsTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
@@ -6557,6 +6572,22 @@ const paletteColours = {
 	'--pinned-post-border': {
 		light: pinnedPostBorderLight,
 		dark: pinnedPostBorderDark,
+	},
+	'--podcast-meta-button-background': {
+		light: podcastMetaButtonBackgroundLight,
+		dark: podcastMetaButtonBackgroundDark,
+	},
+	'--podcast-meta-button-background-hover': {
+		light: podcastMetaButtonBackgroundHoverLight,
+		dark: podcastMetaButtonBackgroundHoverDark,
+	},
+	'--podcast-meta-button-text': {
+		light: podcastMetaButtonTextLight,
+		dark: podcastMetaButtonTextDark,
+	},
+	'--podcast-meta-title': {
+		light: podcastMetaTitleLight,
+		dark: podcastMetaTitleDark,
 	},
 	'--privacy-text-regular': {
 		light: privacyTextRegularLight,
