@@ -39,7 +39,7 @@ export const ThemeVariations = {
 	args: {
 		multiBylineItems: [
 			{
-				title: 'The first byline',
+				title: 'This subheading is quite long so is likely to run on to multiple lines',
 				bio: testBioText,
 				body: [testTextElement],
 				byline: 'Richard Hillgrove Political Editor',
@@ -54,10 +54,10 @@ export const ThemeVariations = {
 				],
 			},
 			{
-				title: 'The first byline',
+				title: 'My hot take',
 				bio: testBioText,
 				body: [testTextElement],
-				byline: 'Richard Hillgrove Guardian Contributor',
+				byline: 'Guardian Contributor',
 				bylineHtml:
 					"<a href='/profile/richard-hillgrove'>Richard Hillgrove</a>",
 				contributors: [
@@ -71,7 +71,7 @@ export const ThemeVariations = {
 					'https://i.guim.co.uk/img/uploads/2024/09/17/Maurice_Casey.png?width=180&dpr=1&s=none',
 			},
 			{
-				title: 'The second byline',
+				title: 'A further subheading',
 				body: [testTextElement],
 			},
 		],
