@@ -92,7 +92,12 @@ type FEContainerType =
 	| 'news/most-popular'
 	| 'scrollable/highlights'
 	| 'flexible/special'
-	| 'flexible/general';
+	| 'flexible/general'
+	| 'scrollable/small'
+	| 'scrollable/medium'
+	| 'scrollable/feature'
+	| 'static/feature/2'
+	| 'static/medium/4';
 
 export type FEContainerPalette =
 	| 'EventPalette'
