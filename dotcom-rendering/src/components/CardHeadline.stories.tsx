@@ -218,7 +218,7 @@ export const noLineBreak: StoryObj = ({ format }: StoryProps) => (
 			headlineText="This is how a card headline with no kicker linebreak looks"
 			format={format}
 			kickerText="Live"
-			hideLineBreak={true}
+			hasInlineKicker={true}
 		/>
 	</Section>
 );

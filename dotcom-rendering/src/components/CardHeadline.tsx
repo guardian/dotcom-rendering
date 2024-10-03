@@ -33,7 +33,7 @@ type Props = {
 	format: ArticleFormat; // Used to decide when to add type specific styles
 	kickerText?: string;
 	showPulsingDot?: boolean;
-	hideLineBreak?: boolean;
+	hasInlineKicker?: boolean;
 	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
 	size?: SmallHeadlineSize;
 	sizeOnMobile?: SmallHeadlineSize;
@@ -273,7 +273,7 @@ export const CardHeadline = ({
 	showQuotes,
 	kickerText,
 	showPulsingDot,
-	hideLineBreak,
+	hasInlineKicker,
 	size = 'medium',
 	sizeOnMobile,
 	sizeOnTablet,
@@ -324,7 +324,7 @@ export const CardHeadline = ({
 						text={kickerText}
 						color={kickerColour}
 						showPulsingDot={showPulsingDot}
-						hideLineBreak={hideLineBreak}
+						isInline={hasInlineKicker}
 					/>
 				)}
 				{showQuotes && <QuoteIcon colour={kickerColour} />}
