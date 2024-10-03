@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 import { article17, articleBold17 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import { background, border, hover, text } from 'palette';
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../../articleFormat';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //

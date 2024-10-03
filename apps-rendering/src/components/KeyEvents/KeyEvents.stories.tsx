@@ -1,13 +1,14 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
+	type ArticleFormat,
 	ArticleSpecial,
-} from '@guardian/libs';
+	type ArticleTheme,
+	Pillar,
+} from '../../articleFormat';
 import type { ReactElement } from 'react';
 import type { KeyEvent } from '.';
 import KeyEvents from '.';
@@ -85,11 +86,11 @@ const Default = (): ReactElement => (
 			flex-wrap: wrap;
 		`}
 	>
-		{KeyEventComp(getFormat(ArticlePillar.News), 'News')}
-		{KeyEventComp(getFormat(ArticlePillar.Culture), 'Culture')}
-		{KeyEventComp(getFormat(ArticlePillar.Lifestyle), 'Lifestyle')}
-		{KeyEventComp(getFormat(ArticlePillar.Opinion), 'Opinion')}
-		{KeyEventComp(getFormat(ArticlePillar.Sport), 'Sport')}
+		{KeyEventComp(getFormat(Pillar.News), 'News')}
+		{KeyEventComp(getFormat(Pillar.Culture), 'Culture')}
+		{KeyEventComp(getFormat(Pillar.Lifestyle), 'Lifestyle')}
+		{KeyEventComp(getFormat(Pillar.Opinion), 'Opinion')}
+		{KeyEventComp(getFormat(Pillar.Sport), 'Sport')}
 		{KeyEventComp(getFormat(ArticleSpecial.Labs), 'Labs')}
 		{KeyEventComp(getFormat(ArticleSpecial.SpecialReport), 'SpecialReport')}
 	</div>

@@ -1,7 +1,10 @@
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	formatToString,
+} from '../../articleFormat';
 import { breakpoints } from '@guardian/source/foundations';
 import type { StoryFn } from '@storybook/react';
-import { formatToString } from 'articleFormat';
 import { getAllThemes } from 'fixtures/article';
 import { Pagination } from '.';
 

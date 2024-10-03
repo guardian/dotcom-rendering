@@ -1,7 +1,11 @@
 // ----- Imports ----- //
 
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	Pillar,
+} from '../../../articleFormat';
 import type { Option } from '../../../../vendor/@guardian/types/index';
 import type { ReactElement } from 'react';
 import Pullquote from './index';
@@ -20,7 +24,7 @@ const getInputProps = (): Props => ({
 	format: {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Analysis,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	},
 });
 

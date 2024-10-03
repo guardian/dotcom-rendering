@@ -2,8 +2,11 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import { ArticlePillar } from '@guardian/libs';
-import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
+import {
+	type ArticleFormat,
+	type ArticleTheme,
+	Pillar,
+} from '../../articleFormat';
 import {
 	brandAlt,
 	from,
@@ -69,7 +72,7 @@ const titleStyles = (theme: ArticleTheme): SerializedStyles => css`
 	${headlineBold20};
 	flex-grow: 1;
 	span {
-		color: ${theme === ArticlePillar.News ? sport[500] : 'inherit'};
+		color: ${theme === Pillar.News ? sport[500] : 'inherit'};
 	}
 `;
 
