@@ -207,7 +207,7 @@ export const multiBylineBylineStyles = (format: ArticleFormat) => css`
 	color: ${neutral[46]};
 	a {
 		${subheadingStyles(format)}
-		color: ${palette('--byline-anchor')};
+		color: ${palette('--link-kicker-text')};
 		text-decoration: none;
 		font-style: normal;
 		:hover {
@@ -229,12 +229,20 @@ const bylineTextStyles = css`
 `;
 
 const bylineImageStyles = css`
-	width: 140px;
+	width: 80px;
 	border-radius: 50%;
-	margin-bottom: -16px;
-	height: 140px;
+	margin-bottom: -8px;
+	height: 80px;
+	min-width: 80px;
+	// TODO: make this different size based on screen size
 	overflow: hidden;
 	align-self: flex-end;
+	${from.tablet} {
+		height: 120px;
+		min-width: 120px;
+		width: 120px;
+		margin-bottom: -12px;
+	}
 `;
 
 interface MultiBylineItemProps {
@@ -251,7 +259,6 @@ export const MultiBylineItem = ({
 	return (
 		<>
 			<li css={multiBylineItemStyles} data-spacefinder-role="nested">
-				<hr css={headingLineStyles} />
 				<Byline
 					title={multiBylineItem.title}
 					byline={multiBylineItem.byline ?? ''}
@@ -288,6 +295,7 @@ const Byline = ({
 	return (
 		<div css={bylineWrapperStyles}>
 			<div css={bylineTextStyles}>
+				<hr css={headingLineStyles} />
 				<h3
 					id={slugify(title)}
 					css={[subheadingStyles(format), headingMarginStyle]}
