@@ -12,8 +12,6 @@ import {
 	palette,
 	space,
 } from '@guardian/source/foundations';
-import { Ticker } from '@guardian/source-development-kitchen/react-components';
-import type { TickerSettings } from '@guardian/source-development-kitchen/react-components';
 import {
 	containsNonArticleCountPlaceholder,
 	epicPropsSchema,
@@ -41,6 +39,7 @@ import { BylineWithHeadshot } from './BylineWithHeadshot';
 import { ContributionsEpicArticleCountAboveWithOptOut } from './ContributionsEpicArticleCountAboveWithOptOut';
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
 import { ContributionsEpicSignInCta } from './ContributionsEpicSignInCta';
+import { ContributionsEpicTicker } from './ContributionsEpicTicker';
 import { ContributionsEpicCtasContainer } from './ctas/ContributionsEpicCtasContainer';
 
 // CSS Styling
@@ -109,14 +108,6 @@ const imageStyles = css`
 	width: 100%;
 	object-fit: cover;
 `;
-
-const defaultTickerStylingSettings: TickerSettings['tickerStylingSettings'] = {
-	filledProgressColour: '#5056F5',
-	progressBarBackgroundColour: 'rgba(80, 86, 245, 0.35)',
-	headlineColour: '#000000',
-	totalColour: '#5056F5',
-	goalColour: '#000000',
-};
 
 const articleCountAboveContainerStyles = css`
 	margin-bottom: ${space[4]}px;
@@ -402,11 +393,10 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 			)}
 
 			{tickerSettings?.tickerData && (
-				<Ticker
-					currencySymbol={tickerSettings.currencySymbol}
-					copy={tickerSettings.copy}
-					tickerData={tickerSettings.tickerData}
-					tickerStylingSettings={defaultTickerStylingSettings}
+				<ContributionsEpicTicker
+					settings={tickerSettings}
+					total={tickerSettings.tickerData.total}
+					goal={tickerSettings.tickerData.goal}
 				/>
 			)}
 

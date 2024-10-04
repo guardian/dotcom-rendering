@@ -11,8 +11,8 @@ import {
 import type {
 	BannerDesignImage,
 	SelectedAmountsVariant,
-	TickerSettings,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
+import type { TickerSettings } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
 import { DesignableBannerUnvalidated as DesignableBanner } from '../../../banners/designableBanner/DesignableBanner';
@@ -55,19 +55,19 @@ export const Default: Story = {
 };
 
 const tickerSettings: TickerSettings = {
-	endType: TickerEndType.unlimited,
 	countType: TickerCountType.money,
-	currencySymbol: '£',
+	endType: TickerEndType.hardstop,
+	currencySymbol: '',
 	copy: {
-		countLabel: 'Help us reach our end-of-year goal',
-		goalReachedPrimary: '',
+		countLabel: 'contributions in May',
+		goalReachedPrimary: "We've met our goal - thank you!",
 		goalReachedSecondary: '',
 	},
 	tickerData: {
-		total: 500000,
-		goal: 1000000,
+		total: 4_000,
+		goal: 50_000,
 	},
-	name: 'US',
+	name: 'AU',
 };
 
 const regularChoiceCardAmounts: SelectedAmountsVariant = {
