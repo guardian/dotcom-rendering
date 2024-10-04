@@ -96,9 +96,27 @@ const recommendedPillStyles = css`
 	right: ${space[5]}px;
 `;
 
+const discountedPillStyles = css`
+	border-radius: 4px;
+	padding: ${space[1]}px ${space[2]}px;
+	background-color: ${palette.error[400]};
+	${textSansBold15};
+	color: ${palette.neutral[100]};
+	position: absolute;
+	top: -${space[2]}px;
+	${until.phablet} {
+		right: ${space[3]}px;
+	}
+	right: ${space[5]}px;
+`;
+
 export type ChoiceInfo = {
 	supportTier: SupportTier;
-	label: (amount: number, currencySymbol: string) => string;
+	label: (
+		amount: number,
+		currencySymbol: string,
+		discount?: string,
+	) => string;
 	benefitsLabel?: string;
 	benefits: (currencySymbol: string) => string[];
 	recommended: boolean;
@@ -141,6 +159,10 @@ const SupportingBenefits = ({
 
 const RecommendedPill = () => {
 	return <div css={recommendedPillStyles}>Recommended</div>;
+};
+
+const DiscountedPill = () => {
+	return <div css={discountedPillStyles}>50% off</div>; //TODO confirm wording on button
 };
 
 type ThreeTierChoiceCardsProps = {
