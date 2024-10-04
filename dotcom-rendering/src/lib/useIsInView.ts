@@ -1,17 +1,6 @@
 import libDebounce from 'lodash.debounce';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-/**
- * This file was copied into the source development kitchen from the following repository:
- * https://github.com/guardian/csnx/blob/main/libs/%40guardian/source-development-kitchen/src/react-components/ticker/useIsInView.ts
- *
- * Note: This version of the file uses `lodash.debounce`, whereas the original version does not.
- * As a result, we now have two versions of the `useIsInView` hook—one with `lodash.debounce` and one without.
- *
- * A discussion is needed to determine the best approach for consolidating these two versions into a single file.
- * Consider whether the use of `lodash.debounce` is necessary, and if so, integrate it into the consolidated version.
- */
-
 type Options = {
 	/**
 	 * Defaults to `undefined` (falsy),
