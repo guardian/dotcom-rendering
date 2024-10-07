@@ -156,7 +156,7 @@ const fontStylesOnMobile = ({
 		case 'huge':
 			return css`
 				${until.desktop} {
-					${headlineMedium24}
+					${headlineMedium28}
 				}
 			`;
 		case 'large':

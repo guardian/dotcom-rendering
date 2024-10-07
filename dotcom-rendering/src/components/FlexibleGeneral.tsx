@@ -196,9 +196,9 @@ const decideCardProperties = (
 	switch (boostLevel) {
 		case 'megaboost':
 			return {
-				headlineSize: 'large',
+				headlineSize: 'huge',
 				headlineSizeOnMobile: 'huge',
-				headlineSizeOnTablet: 'ginormous',
+				headlineSizeOnTablet: 'small',
 				imageSize: 'jumbo',
 			};
 		case 'boost':
