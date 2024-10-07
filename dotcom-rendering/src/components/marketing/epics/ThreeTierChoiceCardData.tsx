@@ -22,7 +22,6 @@ export const ChoiceCardTestData_REGULAR: ChoiceInfo[] = [
 			if (!isUndefined(discount)) {
 				return (
 					<>
-						{' '}
 						Support{' '}
 						<s>
 							{currencySymbol}
@@ -53,8 +52,6 @@ export const ChoiceCardTestData_REGULAR: ChoiceInfo[] = [
 		recommended: false,
 	},
 ];
-
-//new discount set of choice cards and pass through the choice card variant
 
 export const ChoiceCardTestData_US: ChoiceInfo[] = [
 	{

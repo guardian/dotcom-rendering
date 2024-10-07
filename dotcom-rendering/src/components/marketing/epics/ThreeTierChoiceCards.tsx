@@ -166,8 +166,8 @@ const RecommendedPill = () => {
 	return <div css={recommendedPillStyles}>Recommended</div>;
 };
 
-const DiscountedPill = () => {
-	return <div css={discountedPillStyles}>50% off</div>; //TODO confirm wording on button
+const DiscountedPill = ({ discount }: { discount: number }) => {
+	return <div css={discountedPillStyles}>{discount}% off</div>;
 };
 
 type ThreeTierChoiceCardsProps = {
@@ -234,7 +234,11 @@ export const ThreeTierChoiceCards = ({
 									position: relative;
 								`}
 							>
-								{hasDiscount && <DiscountedPill />}
+								{hasDiscount && (
+									<DiscountedPill
+										discount={supporterPlusDiscount * 100}
+									/>
+								)}
 								{recommended && !hasDiscount && (
 									<RecommendedPill />
 								)}
