@@ -330,6 +330,24 @@ export const WithThreeTierChoiceCardsForUS: Story = {
 	},
 };
 
+export const WithThreeTierDiscountChoiceCards: Story = {
+	name: 'ContributionsEpic with discounted three tier choice cards',
+	args: {
+		...meta.args,
+		countryCode: 'GB',
+		variant: {
+			...props.variant,
+			name: 'THREE_TIER_CHOICE_CARDS',
+			secondaryCta: undefined,
+			showChoiceCards: true,
+			cta: {
+				baseUrl:
+					'https://support.theguardian.com/uk/contribute?promoCode=MY_PROMO',
+			},
+		},
+	},
+};
+
 export const WithChoiceCardsAndSignInLink: Story = {
 	name: 'ContributionsEpic with choice cards and sign-in link',
 	args: {

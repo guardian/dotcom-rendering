@@ -1,8 +1,10 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import {
 	palette,
 	space,
 	textSans15,
+	textSansBold14,
 	textSansBold15,
 	until,
 } from '@guardian/source/foundations';
@@ -75,6 +77,9 @@ const benefitsLabelStyles = css`
 const labelOverrideStyles = css`
 	+ label div {
 		font-weight: bold;
+		s {
+			font-weight: normal;
+		}
 	}
 `;
 
@@ -86,7 +91,7 @@ const recommendedPillStyles = css`
 	border-radius: 4px;
 	padding: ${space[1]}px ${space[2]}px;
 	background-color: ${palette.brand[400]};
-	${textSansBold15};
+	${textSansBold14};
 	color: ${palette.neutral[100]};
 	position: absolute;
 	top: -${space[2]}px;
@@ -100,7 +105,7 @@ const discountedPillStyles = css`
 	border-radius: 4px;
 	padding: ${space[1]}px ${space[2]}px;
 	background-color: ${palette.error[400]};
-	${textSansBold15};
+	${textSansBold14};
 	color: ${palette.neutral[100]};
 	position: absolute;
 	top: -${space[2]}px;
@@ -115,8 +120,8 @@ export type ChoiceInfo = {
 	label: (
 		amount: number,
 		currencySymbol: string,
-		discount?: string,
-	) => string;
+		discount?: number,
+	) => JSX.Element | string;
 	benefitsLabel?: string;
 	benefits: (currencySymbol: string) => string[];
 	recommended: boolean;
@@ -170,6 +175,7 @@ type ThreeTierChoiceCardsProps = {
 	setSelectedProduct: Dispatch<SetStateAction<SupportTier>>;
 	countryCode?: string;
 	variantOfChoiceCard: string;
+	supporterPlusDiscount?: number;
 };
 
 const getChoiceCardData = (choiceCardVariant: string): ChoiceInfo[] => {
@@ -188,6 +194,7 @@ export const ThreeTierChoiceCards = ({
 	selectedProduct,
 	setSelectedProduct,
 	variantOfChoiceCard,
+	supporterPlusDiscount,
 }: ThreeTierChoiceCardsProps) => {
 	const currencySymbol = getLocalCurrencySymbol(countryCode);
 	const countryGroupId = countryCodeToCountryGroupId(countryCode);
@@ -216,6 +223,10 @@ export const ThreeTierChoiceCards = ({
 						);
 						const selected = selectedProduct === supportTier;
 
+						const hasDiscount =
+							!isUndefined(supporterPlusDiscount) &&
+							supportTier === 'SupporterPlus';
+
 						return (
 							<div
 								key={supportTier}
@@ -223,7 +234,10 @@ export const ThreeTierChoiceCards = ({
 									position: relative;
 								`}
 							>
-								{recommended && <RecommendedPill />}
+								{hasDiscount && <DiscountedPill />}
+								{recommended && !hasDiscount && (
+									<RecommendedPill />
+								)}
 								<div
 									css={supportTierChoiceCardStyles(selected)}
 								>
@@ -231,6 +245,7 @@ export const ThreeTierChoiceCards = ({
 										label={label(
 											choiceAmount,
 											currencySymbol,
+											supporterPlusDiscount,
 										)}
 										id={`choicecard-${supportTier}`}
 										value={supportTier}
