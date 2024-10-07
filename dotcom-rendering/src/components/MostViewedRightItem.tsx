@@ -108,7 +108,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 									showUnderline={isHovered}
 									kickerText="Live"
 									showPulsingDot={true}
-									hasInlineKicker={true}
+									hasInlineKicker={false}
 									byline={
 										trail.showByline
 											? trail.byline
