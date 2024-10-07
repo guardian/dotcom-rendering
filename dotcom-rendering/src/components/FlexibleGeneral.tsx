@@ -70,6 +70,7 @@ type BoostedSplashProperties = {
 	headlineSizeOnTablet: SmallHeadlineSize;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
+	imageSize: ImageSizeType;
 	supportingContentAlignment: Alignment;
 };
 
@@ -89,6 +90,7 @@ const decideSplashCardProperties = (
 				headlineSizeOnTablet: 'tiny',
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: 'bottom',
+				imageSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
 			};
@@ -99,6 +101,7 @@ const decideSplashCardProperties = (
 				headlineSizeOnTablet: 'small',
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: 'bottom',
+				imageSize: 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
 			};
@@ -109,6 +112,7 @@ const decideSplashCardProperties = (
 				headlineSizeOnTablet: 'medium',
 				imagePositionOnDesktop: 'bottom',
 				imagePositionOnMobile: 'bottom',
+				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 			};
 		case 'gigaboost':
@@ -118,6 +122,7 @@ const decideSplashCardProperties = (
 				headlineSizeOnTablet: 'medium',
 				imagePositionOnDesktop: 'bottom',
 				imagePositionOnMobile: 'bottom',
+				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 			};
 	}
@@ -145,6 +150,7 @@ export const SplashCardLayout = ({
 		headlineSizeOnTablet,
 		imagePositionOnDesktop,
 		imagePositionOnMobile,
+		imageSize,
 		supportingContentAlignment,
 	} = decideSplashCardProperties(
 		card.boostLevel ?? 'default',
@@ -165,7 +171,7 @@ export const SplashCardLayout = ({
 					headlineSizeOnTablet={headlineSizeOnTablet}
 					imagePositionOnDesktop={imagePositionOnDesktop}
 					imagePositionOnMobile={imagePositionOnMobile}
-					imageSize="jumbo"
+					imageSize={imageSize}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
 					supportingContentAlignment={supportingContentAlignment}
