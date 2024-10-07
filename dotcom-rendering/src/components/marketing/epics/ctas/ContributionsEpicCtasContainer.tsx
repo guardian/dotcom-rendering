@@ -56,7 +56,7 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 		showChoiceCards && variant.name.includes('US_CHECKOUT_PAGE');
 
 	const hasSupporterPlusPromoCode =
-		variant.cta.baseUrl.includes('promoCode=MY_PROMO'); //TODO replace with actual promo code
+		variant.cta?.baseUrl.includes('promoCode=MY_PROMO') ?? false; //TODO replace with actual promo code
 
 	const variantOfChoiceCard =
 		countryCode === 'US' && showUSSupportCheckout

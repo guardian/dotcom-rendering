@@ -341,6 +341,7 @@ export const WithThreeTierDiscountChoiceCards: Story = {
 			secondaryCta: undefined,
 			showChoiceCards: true,
 			cta: {
+				text: 'Support the Guardian',
 				baseUrl:
 					'https://support.theguardian.com/uk/contribute?promoCode=MY_PROMO',
 			},
