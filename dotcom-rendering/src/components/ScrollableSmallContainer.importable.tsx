@@ -8,10 +8,21 @@ import {
 } from '@guardian/source/react-components';
 import { useEffect, useRef /* useState */ } from 'react';
 import { palette } from '../palette';
-import type { DCRFrontCard } from '../types/front';
+import type {
+	DCRContainerPalette,
+	DCRContainerType,
+	DCRFrontCard,
+} from '../types/front';
 import { FrontCard } from './FrontCard';
 
-type Props = { trails: DCRFrontCard[] };
+type Props = {
+	trails: DCRFrontCard[];
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+	absoluteServerTimes?: boolean;
+	imageLoading: 'lazy' | 'eager';
+	containerType: DCRContainerType;
+};
 
 const carouselStyles = css`
 	display: grid;
@@ -73,12 +84,12 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 		${until.tablet} {
 			grid-template-columns: repeat(
 				${totalCards},
-				calc((100% - ${peepingCardWidth}px) / 2)
+				calc((100% - ${peepingCardWidth}px))
 			);
 		}
 
 		${from.tablet} {
-			grid-template-columns: repeat(${totalCards}, 1fr);
+			grid-template-columns: repeat(${totalCards}, 50%);
 		}
 	`;
 };
@@ -87,10 +98,16 @@ const generateCarouselColumnStyles = (totalCards: number) => {
  * This is an island - todo
  *
  */
-export const ScrollableSmallContainer = ({ trails }: Props) => {
+export const ScrollableSmallContainer = ({
+	trails,
+	containerPalette,
+	containerType,
+	absoluteServerTimes,
+	imageLoading,
+	showAge,
+}: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
-	const imageLoading = 'eager'; //todo
 
 	// const [previousButtonState, setShowPreviousButton] = useState(false);
 	// const [nextButtonState, setShowNextButton] = useState(true);
@@ -164,7 +181,21 @@ export const ScrollableSmallContainer = ({ trails }: Props) => {
 							<FrontCard
 								trail={trail}
 								imageLoading={imageLoading}
-								absoluteServerTimes={false}
+								absoluteServerTimes={!!absoluteServerTimes}
+								containerPalette={containerPalette}
+								containerType={containerType}
+								showAge={!!showAge}
+								headlineSize="small"
+								headlineSizeOnMobile="small"
+								headlineSizeOnTablet="small"
+								imagePositionOnDesktop="left"
+								imagePositionOnMobile="left"
+								imageSize="small" // TODO - needs fixed width images
+								trailText={undefined} // unsupported
+								supportingContent={undefined} // unsupported
+								aspectRatio="5:4"
+								kickerText={trail.kickerText}
+								showLivePlayable={trail.showLivePlayable}
 								// TODO - specify card props
 							/>
 						</li>
@@ -182,6 +213,15 @@ export const ScrollableSmallContainer = ({ trails }: Props) => {
 								iconSide="left"
 								icon={<SvgChevronLeftSingle />}
 								onClick={() => scrollTo('left')}
+								priority="tertiary"
+								// TODO use better colour name
+								theme={{
+									borderTertiary:
+										palette('--card-border-top'),
+									textTertiary: palette(
+										'--card-headline-trail-text',
+									),
+								}}
 								// TODO
 								// aria-label="Move stories backwards"
 								// data-link-name="container left chevron"
@@ -195,6 +235,15 @@ export const ScrollableSmallContainer = ({ trails }: Props) => {
 								iconSide="left"
 								icon={<SvgChevronRightSingle />}
 								onClick={() => scrollTo('right')}
+								priority="tertiary"
+								// TODO use better colour name
+								theme={{
+									borderTertiary:
+										palette('--card-border-top'),
+									textTertiary: palette(
+										'--card-headline-trail-text',
+									),
+								}}
 								// TODO
 								// aria-label="Move stories forwards"
 								// data-link-name="container right chevron"
