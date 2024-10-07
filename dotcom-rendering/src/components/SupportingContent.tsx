@@ -179,7 +179,7 @@ export const SupportingContent = ({
 								<CardHeadline
 									format={subLinkFormat}
 									size="tiny"
-									hideLineBreak={true}
+									hasInlineKicker={true}
 									linkTo={subLink.url}
 									showPulsingDot={
 										subLink.format.design ===
@@ -187,7 +187,6 @@ export const SupportingContent = ({
 									}
 									headlineText={subLink.headline}
 									kickerText={subLink.kickerText}
-									isFlexibleContainer={isFlexibleContainer}
 								/>
 							</ContainerOverrides>
 						</FormatBoundary>
