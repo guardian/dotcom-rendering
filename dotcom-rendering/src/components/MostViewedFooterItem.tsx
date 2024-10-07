@@ -89,7 +89,7 @@ export const MostViewedFooterItem = ({
 							isLabs={format.theme === ArticleSpecial.Labs}
 							size="small"
 							kickerText="Live"
-							hideLineBreak={false}
+							hasInlineKicker={false}
 							showPulsingDot={true}
 							showQuotes={false}
 						/>
