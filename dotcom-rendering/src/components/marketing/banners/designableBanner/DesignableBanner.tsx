@@ -16,7 +16,6 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Button, SvgGuardianLogo } from '@guardian/source/react-components';
-import { Ticker } from '@guardian/source-development-kitchen/react-components';
 import {
 	hexColourToString,
 	SecondaryCtaType,
@@ -48,6 +47,7 @@ import { DesignableBannerCloseButton } from './components/DesignableBannerCloseB
 import { DesignableBannerCtas } from './components/DesignableBannerCtas';
 import { DesignableBannerHeader } from './components/DesignableBannerHeader';
 import { DesignableBannerReminder } from './components/DesignableBannerReminder';
+import { DesignableBannerTicker } from './components/DesignableBannerTicker';
 import { DesignableBannerVisual } from './components/DesignableBannerVisual';
 import type { BannerTemplateSettings, CtaSettings } from './settings';
 import { buttonStyles } from './styles/buttonStyles';
@@ -265,13 +265,12 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		imageSettings,
 		bannerId: 'designable-banner',
 		tickerStylingSettings: {
+			textColour: hexColourToString(ticker.text),
 			filledProgressColour: hexColourToString(ticker.filledProgress),
 			progressBarBackgroundColour: hexColourToString(
 				ticker.progressBarBackground,
 			),
-			headlineColour: hexColourToString(ticker.headlineColour),
-			totalColour: hexColourToString(ticker.totalColour),
-			goalColour: hexColourToString(ticker.goalColour),
+			goalMarkerColour: hexColourToString(ticker.goalMarker),
 		},
 	};
 
@@ -343,11 +342,9 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 
 					{tickerSettings?.tickerData &&
 						templateSettings.tickerStylingSettings && (
-							<Ticker
-								currencySymbol={tickerSettings.currencySymbol}
-								copy={tickerSettings.copy}
-								tickerData={tickerSettings.tickerData}
-								tickerStylingSettings={
+							<DesignableBannerTicker
+								tickerSettings={tickerSettings}
+								stylingSettings={
 									templateSettings.tickerStylingSettings
 								}
 							/>
