@@ -44,6 +44,7 @@ const { QueryExecutionId } = await client.send(
   WHERE year = ${date.year}
 	  AND month = ${String(date.month).padStart(2, "0")}
 	  AND day = ${String(date.day).padStart(2, "0")}
+	  AND request_user_agent NOT LIKE 'Guardian%'
   GROUP BY request_user_agent
   ORDER BY request_count desc
   LIMIT ${100_000}`,
