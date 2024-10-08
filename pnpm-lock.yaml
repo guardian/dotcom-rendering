@@ -371,8 +371,8 @@ importers:
         specifier: 8.0.0
         version: 8.0.0(@emotion/react@11.11.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source-development-kitchen':
-        specifier: 9.0.0
-        version: 9.0.0(@emotion/react@11.11.3)(@guardian/libs@18.0.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
+        specifier: 11.0.0
+        version: 11.0.0(@emotion/react@11.11.3)(@guardian/libs@18.0.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/support-dotcom-components':
         specifier: 2.9.1
         version: 2.9.1(@guardian/libs@18.0.0)(zod@3.22.4)
@@ -4574,6 +4574,35 @@ packages:
       tslib: 2.6.2
     dev: false
 
+  /@guardian/source-development-kitchen@11.0.0(@emotion/react@11.11.3)(@guardian/libs@18.0.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3):
+    resolution: {integrity: sha512-aMfC08bAEFnCsobX3D618WSFZ7J8SkgHWgEgyOwiZJD9Yq0HSd0hbOmBK5HnkcDBXuc51l0z2Q0svztOKO2TZg==}
+    peerDependencies:
+      '@emotion/react': ^11.11.3
+      '@guardian/libs': ^19.0.0
+      '@guardian/source': ^8.0.0
+      '@types/react': ^18.2.79
+      react: ^18.2.0
+      tslib: ^2.6.2
+      typescript: ~5.5.2
+    peerDependenciesMeta:
+      '@emotion/react':
+        optional: true
+      '@types/react':
+        optional: true
+      react:
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@emotion/react': 11.11.3(@types/react@18.3.1)(react@18.3.1)
+      '@guardian/libs': 18.0.0(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/source': 8.0.0(@emotion/react@11.11.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
+      '@types/react': 18.3.1
+      react: 18.3.1
+      tslib: 2.6.2
+      typescript: 5.5.3
+    dev: false
+
   /@guardian/source-development-kitchen@8.0.0(@emotion/react@11.11.3)(@guardian/libs@16.1.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3):
     resolution: {integrity: sha512-97Qcm9laquXen7GMOkQ2syvKlvY6VaAN3zalXnxEDHZiSgUhthWrVFJp2G5CsqP9c5lpl4RkUcF2PkYek8J2Jw==}
     peerDependencies:
@@ -4596,35 +4625,6 @@ packages:
     dependencies:
       '@emotion/react': 11.11.3(@types/react@18.3.1)(react@18.3.1)
       '@guardian/libs': 16.1.0(tslib@2.6.2)(typescript@5.5.3)
-      '@guardian/source': 8.0.0(@emotion/react@11.11.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
-      '@types/react': 18.3.1
-      react: 18.3.1
-      tslib: 2.6.2
-      typescript: 5.5.3
-    dev: false
-
-  /@guardian/source-development-kitchen@9.0.0(@emotion/react@11.11.3)(@guardian/libs@18.0.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3):
-    resolution: {integrity: sha512-7384llH2Q8eyWBd48ITY6TTis5YhhaOeEW6y7ziPNwlRmI1wP99hlxidXv9FxReiPcdTkQ2U+c0l5k2qdiRg1g==}
-    peerDependencies:
-      '@emotion/react': ^11.11.3
-      '@guardian/libs': ^18.0.0
-      '@guardian/source': ^8.0.0
-      '@types/react': ^18.2.11
-      react: ^18.2.0
-      tslib: ^2.6.2
-      typescript: ~5.5.2
-    peerDependenciesMeta:
-      '@emotion/react':
-        optional: true
-      '@types/react':
-        optional: true
-      react:
-        optional: true
-      typescript:
-        optional: true
-    dependencies:
-      '@emotion/react': 11.11.3(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/libs': 18.0.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source': 8.0.0(@emotion/react@11.11.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@types/react': 18.3.1
       react: 18.3.1

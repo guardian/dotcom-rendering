@@ -51,7 +51,7 @@
 		"@guardian/ophan-tracker-js": "2.2.5",
 		"@guardian/shimport": "1.0.2",
 		"@guardian/source": "8.0.0",
-		"@guardian/source-development-kitchen": "9.0.0",
+		"@guardian/source-development-kitchen": "11.0.0",
 		"@guardian/support-dotcom-components": "2.9.1",
 		"@guardian/tsconfig": "0.2.0",
 		"@playwright/test": "1.45.3",
