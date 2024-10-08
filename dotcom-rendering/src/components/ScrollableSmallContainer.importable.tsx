@@ -196,7 +196,8 @@ export const ScrollableSmallContainer = ({
 								aspectRatio="5:4"
 								kickerText={trail.kickerText}
 								showLivePlayable={trail.showLivePlayable}
-								// TODO - specify card props
+								showTopBarDesktop={false}
+								showTopBarMobile={false}
 							/>
 						</li>
 					);
