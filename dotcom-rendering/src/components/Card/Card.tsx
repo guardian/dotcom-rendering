@@ -454,8 +454,8 @@ export const Card = ({
 	return (
 		<CardWrapper
 			format={format}
-			showTopBar={!isOnwardContent && !isFlexibleSpecialContainer}
-			showMobileTopBar={isFlexibleSpecialContainer}
+			showTopBar={!isOnwardContent && !isFlexibleContainer}
+			showMobileTopBar={isFlexibleContainer}
 			containerPalette={containerPalette}
 			isOnwardContent={isOnwardContent}
 		>
