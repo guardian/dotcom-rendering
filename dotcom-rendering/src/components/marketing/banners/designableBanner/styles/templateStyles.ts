@@ -26,7 +26,6 @@ const templateSpacing = {
 	`,
 	bannerTicker: css`
 		margin-bottom: ${space[4]}px;
-		}
 	`,
 	bannerCloseButton: css`
 		top: ${space[3]}px;
