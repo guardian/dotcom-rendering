@@ -198,14 +198,13 @@ export const WithTicker: Story = {
 		variant: {
 			...props.variant,
 			tickerSettings: {
-				countType: TickerCountType.money,
 				endType: TickerEndType.unlimited,
+				countType: TickerCountType.money,
 				currencySymbol: '£',
 				copy: {
-					countLabel: 'contributed',
-					goalReachedPrimary: "We've met our goal - thank you",
-					goalReachedSecondary:
-						'Contributions are still being accepted',
+					countLabel: 'Help us reach our end-of-year goal',
+					goalReachedPrimary: '',
+					goalReachedSecondary: '',
 				},
 				tickerData: {
 					total: 10000,
@@ -214,6 +213,39 @@ export const WithTicker: Story = {
 				name: 'US',
 			},
 		},
+	},
+};
+
+export const WithTickerAndWithAboveTopReaderArticleCount: Story = {
+	name: 'ContributionsEpic with ticker and top reader article count',
+	args: {
+		...meta.args,
+		variant: {
+			...props.variant,
+			separateArticleCount: {
+				type: 'above',
+			},
+			tickerSettings: {
+				endType: TickerEndType.unlimited,
+				countType: TickerCountType.money,
+				currencySymbol: '£',
+				copy: {
+					countLabel: 'Help us reach our end-of-year goal',
+					goalReachedPrimary: '',
+					goalReachedSecondary: '',
+				},
+				tickerData: {
+					total: 10000,
+					goal: 100000,
+				},
+				name: 'US',
+			},
+		},
+		articleCounts: {
+			for52Weeks: 99,
+			forTargetedWeeks: 99,
+		},
+		hasConsentForArticleCount: true,
 	},
 };
 
