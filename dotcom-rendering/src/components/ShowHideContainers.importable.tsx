@@ -19,10 +19,14 @@ const getContainerStates = (): ContainerStates => {
 };
 
 type Props = {
-	disableShowHideContainers: boolean;
+	/** When in the ON position, we remove the show/hide functionality for all
+	 * containers on the page if the user does not have any hidden containers */
+	disableFrontContainerToggleSwitch: boolean;
 };
 
-export const ShowHideContainers = ({ disableShowHideContainers }: Props) => {
+export const ShowHideContainers = ({
+	disableFrontContainerToggleSwitch,
+}: Props) => {
 	useEffect(() => {
 		const containerStates = getContainerStates();
 
@@ -62,7 +66,7 @@ export const ShowHideContainers = ({ disableShowHideContainers }: Props) => {
 		for (const e of allShowHideButtons) {
 			// We want to remove the ability to toggle front containers between expanded and collapsed states.
 			// The first part of doing this is removing the feature for those who do not currently use it.
-			if (disableShowHideContainers && allContainersExpanded) {
+			if (disableFrontContainerToggleSwitch && allContainersExpanded) {
 				e.remove();
 			}
 
@@ -75,7 +79,7 @@ export const ShowHideContainers = ({ disableShowHideContainers }: Props) => {
 				toggleContainer(sectionId, e);
 			}
 		}
-	}, [disableShowHideContainers]);
+	}, [disableFrontContainerToggleSwitch]);
 
 	return <></>;
 };

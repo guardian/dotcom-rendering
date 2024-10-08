@@ -372,7 +372,9 @@ describe('Island: server-side rendering', () => {
 	test('ShowHideContainers', () => {
 		expect(() =>
 			renderToString(
-				<ShowHideContainers disableShowHideContainers={false} />,
+				<ShowHideContainers
+					disableFrontContainerToggleSwitch={false}
+				/>,
 			),
 		).not.toThrow();
 	});
