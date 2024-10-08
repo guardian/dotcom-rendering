@@ -333,21 +333,18 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 
 					{tickerSettings?.tickerData &&
 						templateSettings.tickerStylingSettings && (
-							<div css={templateSpacing.bannerTicker}>
-								<Ticker
-									currencySymbol={
-										tickerSettings.currencySymbol
-									}
-									copy={tickerSettings.copy}
-									tickerData={tickerSettings.tickerData}
-									tickerStylingSettings={
-										templateSettings.tickerStylingSettings
-									}
-									size={'medium'}
-								/>
-							</div>
+							<Ticker
+								currencySymbol={tickerSettings.currencySymbol}
+								copy={{
+									headline: tickerSettings.copy.countLabel,
+								}}
+								tickerData={tickerSettings.tickerData}
+								tickerStylingSettings={
+									templateSettings.tickerStylingSettings
+								}
+								size={'medium'}
+							/>
 						)}
-
 					<div css={templateSpacing.bannerBodyCopy}>
 						<DesignableBannerBody
 							mainContent={content.mainContent}
