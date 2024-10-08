@@ -24,6 +24,14 @@ type Props = {
 	containerType: DCRContainerType;
 };
 
+const carouselContainerStyles = css`
+	display: flex;
+	flex-direction: column-reverse;
+	${from.wide} {
+		flex-direction: row;
+	}
+`;
+
 const carouselStyles = css`
 	display: grid;
 	grid-auto-columns: 1fr;
@@ -51,11 +59,11 @@ const itemStyles = css`
 	grid-area: span 1;
 	position: relative;
 	margin: ${space[3]}px 10px;
-	:first-child {
+	/* :first-child {
 		${from.tablet} {
 			margin-left: 0px;
 		}
-	}
+	} */
 `;
 
 const verticalLineStyles = css`
@@ -69,6 +77,15 @@ const verticalLineStyles = css`
 		background-color: ${palette('--card-border-top')};
 		transform: translateX(-50%);
 	}
+`;
+
+const buttonContainerStyles = css`
+	margin-left: auto;
+`;
+
+const buttonLayoutStyles = css`
+	display: flex;
+	gap: ${space[1]}px;
 `;
 
 /**
@@ -161,7 +178,7 @@ export const ScrollableSmallContainer = ({
 	}, []);
 
 	return (
-		<div>
+		<div css={carouselContainerStyles}>
 			<ol
 				// TODO
 				// data-component=""
@@ -203,11 +220,10 @@ export const ScrollableSmallContainer = ({
 				})}
 			</ol>
 
-			{/** TODO - put these buttons on the top right of the container */}
-			<Hide until={'tablet'}>
-				{carouselLength > 2 && (
-					<>
-						<div>
+			<div css={buttonContainerStyles}>
+				<Hide until={'tablet'}>
+					{carouselLength > 2 && (
+						<div css={buttonLayoutStyles}>
 							<Button
 								hideLabel={true}
 								iconSide="left"
@@ -227,9 +243,7 @@ export const ScrollableSmallContainer = ({
 								// data-link-name="container left chevron"
 								size="small"
 							/>
-						</div>
 
-						<div>
 							<Button
 								hideLabel={true}
 								iconSide="left"
@@ -250,9 +264,9 @@ export const ScrollableSmallContainer = ({
 								size="small"
 							/>
 						</div>
-					</>
-				)}
-			</Hide>
+					)}
+				</Hide>
+			</div>
 		</div>
 	);
 };
