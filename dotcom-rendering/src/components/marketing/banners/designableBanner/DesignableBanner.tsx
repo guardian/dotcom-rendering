@@ -322,6 +322,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						headerSettings={templateSettings.headerSettings}
 					/>
 				</div>
+
 				<div css={styles.contentContainer(showReminder)}>
 					{showAboveArticleCount && (
 						<DesignableBannerArticleCount
@@ -330,6 +331,22 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 							copy={separateArticleCountSettings?.copy}
 						/>
 					)}
+
+					{tickerSettings?.tickerData &&
+						templateSettings.tickerStylingSettings && (
+							<div css={templateSpacing.bannerTicker}>
+								<Ticker
+									currencySymbol={
+										tickerSettings.currencySymbol
+									}
+									copy={tickerSettings.copy}
+									tickerData={tickerSettings.tickerData}
+									tickerStylingSettings={
+										templateSettings.tickerStylingSettings
+									}
+								/>
+							</div>
+						)}
 
 					<div css={templateSpacing.bannerBodyCopy}>
 						<DesignableBannerBody
@@ -340,18 +357,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 							}
 						/>
 					</div>
-
-					{tickerSettings?.tickerData &&
-						templateSettings.tickerStylingSettings && (
-							<Ticker
-								currencySymbol={tickerSettings.currencySymbol}
-								copy={tickerSettings.copy}
-								tickerData={tickerSettings.tickerData}
-								tickerStylingSettings={
-									templateSettings.tickerStylingSettings
-								}
-							/>
-						)}
 
 					{!showChoiceCards && (
 						<DesignableBannerCtas
