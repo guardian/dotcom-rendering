@@ -35,6 +35,13 @@ type Props = {
  */
 const titlePreset = headlineMedium24Object;
 
+/**
+ * Grid sizing to calculate negative margin used to pull navigation buttons
+ * out side of `FrontSection` container at `wide` breakpoint.
+ */
+const gridColumnWidth = '60px';
+const gridGap = '20px';
+
 const carouselContainerStyles = css`
 	display: flex;
 	flex-direction: column-reverse;
@@ -95,6 +102,10 @@ const buttonContainerStyles = css`
 	}
 	${from.leftCol} {
 		margin-top: 0;
+	}
+	${from.wide} {
+		margin-left: ${space[2]}px;
+		margin-right: calc(${space[2]}px - ${gridColumnWidth} - ${gridGap});
 	}
 `;
 
