@@ -174,6 +174,7 @@ export const SplashCardLayout = ({
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
 					boostedFontSizes={true}
+					isFlexSplash={true}
 				/>
 			</LI>
 		</UL>

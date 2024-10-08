@@ -383,7 +383,7 @@ export const Card = ({
 	const isFlexibleSpecialContainer = containerType === 'flexible/special';
 
 	const headlinePosition =
-		isFlexSplash && isFlexibleContainer ? 'outer' : 'inner';
+		isFlexSplash && isFlexibleSpecialContainer ? 'outer' : 'inner';
 
 	/** Determines the gap of between card components based on card properties */
 	const getGapSize = (): GapSize => {
