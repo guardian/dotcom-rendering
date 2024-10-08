@@ -242,7 +242,7 @@ export const BoostedCardLayout = ({
 		imageSize,
 	} = decideCardProperties(card.boostLevel);
 	return (
-		<UL padBottom={true} isFlexibleContainer={true}>
+		<UL padBottom={true} isFlexibleContainer={true} showTopBar={true}>
 			<LI padSides={true}>
 				<FrontCard
 					trail={card}
@@ -284,7 +284,12 @@ export const StandardCardLayout = ({
 	showImage?: boolean;
 }) => {
 	return (
-		<UL direction="row" padBottom={true} isFlexibleContainer={true}>
+		<UL
+			direction="row"
+			padBottom={true}
+			isFlexibleContainer={true}
+			showTopBar={true}
+		>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI
