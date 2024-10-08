@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { from, space, until } from '@guardian/source/foundations';
+import {
+	from,
+	headlineMedium24Object,
+	space,
+	until,
+} from '@guardian/source/foundations';
 import {
 	Button,
 	Hide,
@@ -23,6 +28,12 @@ type Props = {
 	imageLoading: 'lazy' | 'eager';
 	containerType: DCRContainerType;
 };
+
+/**
+ * This needs to match the `FrontSection` title font and is used to calculate
+ * the negative margin that aligns the navigation buttons with the title.
+ */
+const titlePreset = headlineMedium24Object;
 
 const carouselContainerStyles = css`
 	display: flex;
@@ -59,11 +70,6 @@ const itemStyles = css`
 	grid-area: span 1;
 	position: relative;
 	margin: ${space[3]}px 10px;
-	/* :first-child {
-		${from.tablet} {
-			margin-left: 0px;
-		}
-	} */
 `;
 
 const verticalLineStyles = css`
@@ -81,6 +87,15 @@ const verticalLineStyles = css`
 
 const buttonContainerStyles = css`
 	margin-left: auto;
+	${from.tablet} {
+		margin-top: calc(
+			(-${titlePreset.fontSize} * ${titlePreset.lineHeight}) -
+				${space[3]}px
+		);
+	}
+	${from.leftCol} {
+		margin-top: 0;
+	}
 `;
 
 const buttonLayoutStyles = css`
