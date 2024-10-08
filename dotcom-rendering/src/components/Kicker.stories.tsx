@@ -38,7 +38,7 @@ const meta = {
 		text: 'Kicker',
 		color: palette('--card-kicker-text'),
 		showPulsingDot: false,
-		hideLineBreak: false,
+		isInline: false,
 	},
 	render: (args) => (
 		<div style={kickerWrapperStyles}>
@@ -95,14 +95,14 @@ export const CardKickerWithContainerOverrides = {
 									text="Standard kicker"
 									color={palette('--card-kicker-text')}
 									showPulsingDot={false}
-									hideLineBreak={false}
+									isInline={false}
 								/>
 
 								<Kicker
 									text="Live kicker"
 									color={palette('--card-kicker-text')}
 									showPulsingDot={true}
-									hideLineBreak={false}
+									isInline={false}
 								/>
 							</div>
 						</ContainerOverrides>

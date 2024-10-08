@@ -249,6 +249,11 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 				/>
 			);
+		case 'scrollable/small':
+		case 'scrollable/medium':
+		case 'scrollable/feature':
+		case 'static/feature/2':
+		case 'static/medium/4':
 		default:
 			return <p>{containerType} is not yet supported</p>;
 	}

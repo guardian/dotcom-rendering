@@ -55,6 +55,7 @@ export const liveStory: StoryObj = ({ format }: StoryProps) => (
 			headlineText="This is how a headline with a live kicker looks"
 			isLabs={format.theme === ArticleSpecial.Labs}
 			kickerText="Live"
+			showPulsingDot={true}
 		/>
 	</Section>
 );
@@ -67,7 +68,8 @@ export const noLinebreak: StoryObj = ({ format }: StoryArgs) => (
 			headlineText="This is how a headline with no kicker line break looks"
 			isLabs={format.theme === ArticleSpecial.Labs}
 			kickerText="Live"
-			hideLineBreak={true}
+			hasInlineKicker={true}
+			showPulsingDot={true}
 		/>
 	</Section>
 );
@@ -255,7 +257,7 @@ export const Updated: StoryObj = ({ format }: StoryProps) => (
 			headlineText=""
 			isLabs={format.theme === ArticleSpecial.Labs}
 			showPulsingDot={true}
-			hideLineBreak={true}
+			hasInlineKicker={true}
 			kickerText="Updated 7m ago"
 			size="tiny"
 		/>
