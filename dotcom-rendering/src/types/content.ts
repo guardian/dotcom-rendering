@@ -332,6 +332,17 @@ export interface MiniProfile {
 	endNote?: string;
 }
 
+export interface MultiBylineItem {
+	title: string;
+	body: FEElement[];
+	bio?: string;
+	endNote?: string;
+	imageOverrideUrl?: string;
+	contributors?: BlockContributor[];
+	byline?: string;
+	bylineHtml?: string;
+}
+
 export interface KeyTakeawaysBlockElement {
 	_type: 'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement';
 	keyTakeaways: KeyTakeaway[];
