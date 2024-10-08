@@ -304,6 +304,7 @@ export const StandardCardLayout = ({
 							imageLoading={imageLoading}
 							imagePositionOnDesktop={'left'}
 							supportingContent={card.supportingContent}
+							supportingContentAlignment="horizontal"
 							imageSize={'medium'}
 							aspectRatio="5:4"
 							kickerText={card.kickerText}

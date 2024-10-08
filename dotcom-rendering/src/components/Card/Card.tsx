@@ -759,8 +759,7 @@ export const Card = ({
 							)}
 							{sublinkPosition === 'outer' &&
 								supportingContentAlignment === 'horizontal' &&
-								(imagePositionOnDesktop === 'right' ||
-									imagePositionOnDesktop === 'left') && (
+								imagePositionOnDesktop === 'right' && (
 									<HorizontalDivider />
 								)}
 						</div>
