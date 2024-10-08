@@ -1568,13 +1568,14 @@ export const WithALargeGap = () => {
 				>
 					<Card
 						{...basicCardProps}
-						containerType={'flexible/special'}
 						imagePositionOnDesktop="left"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Comment,
 							theme: Pillar.Opinion,
 						}}
+						showTopBarDesktop={false}
+						showTopBarMobile={true}
 					/>
 				</div>
 			</CardWrapper>
