@@ -322,7 +322,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						headerSettings={templateSettings.headerSettings}
 					/>
 				</div>
-
 				<div css={styles.contentContainer(showReminder)}>
 					{showAboveArticleCount && (
 						<DesignableBannerArticleCount
@@ -344,6 +343,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									tickerStylingSettings={
 										templateSettings.tickerStylingSettings
 									}
+									size={'medium'}
 								/>
 							</div>
 						)}
