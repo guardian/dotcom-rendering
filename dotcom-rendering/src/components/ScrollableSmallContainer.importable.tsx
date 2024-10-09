@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { from, space, until } from '@guardian/source/foundations';
+import {
+	from,
+	headlineMedium24Object,
+	space,
+	until,
+} from '@guardian/source/foundations';
 import {
 	Button,
 	Hide,
@@ -23,6 +28,27 @@ type Props = {
 	imageLoading: 'lazy' | 'eager';
 	containerType: DCRContainerType;
 };
+
+/**
+ * This needs to match the `FrontSection` title font and is used to calculate
+ * the negative margin that aligns the navigation buttons with the title.
+ */
+const titlePreset = headlineMedium24Object;
+
+/**
+ * Grid sizing to calculate negative margin used to pull navigation buttons
+ * out side of `FrontSection` container at `wide` breakpoint.
+ */
+const gridColumnWidth = '60px';
+const gridGap = '20px';
+
+const carouselContainerStyles = css`
+	display: flex;
+	flex-direction: column-reverse;
+	${from.wide} {
+		flex-direction: row;
+	}
+`;
 
 const carouselStyles = css`
 	display: grid;
@@ -51,11 +77,6 @@ const itemStyles = css`
 	grid-area: span 1;
 	position: relative;
 	margin: ${space[3]}px 10px;
-	:first-child {
-		${from.tablet} {
-			margin-left: 0px;
-		}
-	}
 `;
 
 const verticalLineStyles = css`
@@ -69,6 +90,28 @@ const verticalLineStyles = css`
 		background-color: ${palette('--card-border-top')};
 		transform: translateX(-50%);
 	}
+`;
+
+const buttonContainerStyles = css`
+	margin-left: auto;
+	${from.tablet} {
+		margin-top: calc(
+			(-${titlePreset.fontSize} * ${titlePreset.lineHeight}) -
+				${space[3]}px
+		);
+	}
+	${from.leftCol} {
+		margin-top: 0;
+	}
+	${from.wide} {
+		margin-left: ${space[2]}px;
+		margin-right: calc(${space[2]}px - ${gridColumnWidth} - ${gridGap});
+	}
+`;
+
+const buttonLayoutStyles = css`
+	display: flex;
+	gap: ${space[1]}px;
 `;
 
 /**
@@ -161,7 +204,7 @@ export const ScrollableSmallContainer = ({
 	}, []);
 
 	return (
-		<div>
+		<div css={carouselContainerStyles}>
 			<ol
 				// TODO
 				// data-component=""
@@ -203,11 +246,10 @@ export const ScrollableSmallContainer = ({
 				})}
 			</ol>
 
-			{/** TODO - put these buttons on the top right of the container */}
-			<Hide until={'tablet'}>
-				{carouselLength > 2 && (
-					<>
-						<div>
+			<div css={buttonContainerStyles}>
+				<Hide until={'tablet'}>
+					{carouselLength > 2 && (
+						<div css={buttonLayoutStyles}>
 							<Button
 								hideLabel={true}
 								iconSide="left"
@@ -227,9 +269,7 @@ export const ScrollableSmallContainer = ({
 								// data-link-name="container left chevron"
 								size="small"
 							/>
-						</div>
 
-						<div>
 							<Button
 								hideLabel={true}
 								iconSide="left"
@@ -250,9 +290,9 @@ export const ScrollableSmallContainer = ({
 								size="small"
 							/>
 						</div>
-					</>
-				)}
-			</Hide>
+					)}
+				</Hide>
+			</div>
 		</div>
 	);
 };
