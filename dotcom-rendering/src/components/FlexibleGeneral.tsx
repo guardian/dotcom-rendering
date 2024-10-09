@@ -181,6 +181,8 @@ export const SplashCardLayout = ({
 					showLivePlayable={card.showLivePlayable}
 					boostedFontSizes={true}
 					isFlexSplash={true}
+					showTopBarDesktop={false}
+					showTopBarMobile={true}
 				/>
 			</LI>
 		</UL>
@@ -242,7 +244,7 @@ export const BoostedCardLayout = ({
 		imageSize,
 	} = decideCardProperties(card.boostLevel);
 	return (
-		<UL padBottom={true} isFlexibleContainer={true}>
+		<UL padBottom={true} isFlexibleContainer={true} showTopBar={true}>
 			<LI padSides={true}>
 				<FrontCard
 					trail={card}
@@ -262,6 +264,8 @@ export const BoostedCardLayout = ({
 					aspectRatio="5:4"
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
+					showTopBarDesktop={false}
+					showTopBarMobile={true}
 				/>
 			</LI>
 		</UL>
@@ -284,7 +288,12 @@ export const StandardCardLayout = ({
 	showImage?: boolean;
 }) => {
 	return (
-		<UL direction="row" padBottom={true} isFlexibleContainer={true}>
+		<UL
+			direction="row"
+			padBottom={true}
+			isFlexibleContainer={true}
+			showTopBar={true}
+		>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI
@@ -304,10 +313,13 @@ export const StandardCardLayout = ({
 							imageLoading={imageLoading}
 							imagePositionOnDesktop={'left'}
 							supportingContent={card.supportingContent}
+							supportingContentAlignment="horizontal"
 							imageSize={'medium'}
 							aspectRatio="5:4"
 							kickerText={card.kickerText}
 							showLivePlayable={false}
+							showTopBarDesktop={false}
+							showTopBarMobile={true}
 						/>
 					</LI>
 				);
