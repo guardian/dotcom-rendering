@@ -734,6 +734,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									}
 									editionId={article.editionId}
 								/>
+
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (
 										<Island

@@ -110,6 +110,8 @@ const designToFEDesign = (design: ArticleDesign): FEDesign => {
 			return 'TimelineDesign';
 		case ArticleDesign.Profile:
 			return 'ProfileDesign';
+		case ArticleDesign.Crossword:
+			return 'CrosswordDesign';
 	}
 };
 

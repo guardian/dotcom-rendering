@@ -59,6 +59,8 @@ export const decideDesign = ({ design }: Partial<FEFormat>): ArticleDesign => {
 			return ArticleDesign.Timeline;
 		case 'ProfileDesign':
 			return ArticleDesign.Profile;
+		case 'CrosswordDesign':
+			return ArticleDesign.Crossword;
 		default:
 			return ArticleDesign.Standard;
 	}

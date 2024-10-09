@@ -1,3 +1,5 @@
+type GuardianCrossword = import('mycrossword').GuardianCrossword;
+
 type SharePlatform =
 	| 'facebook'
 	| 'twitter'
@@ -186,6 +188,12 @@ declare module '*.svg' {
 	const content: any;
 	// eslint-disable-next-line import/no-default-export -- This is how we import SVGs
 	export default content;
+}
+
+declare module '!to-string-loader*' {
+	const value: any;
+	// eslint-disable-next-line import/no-default-export -- This is how we import mycrossword's CSS bundle
+	export default value;
 }
 
 // Extend PerformanceEntry from lib.dom.ts with current 'In Draft' properties (to allow access as use in browsers that support)
