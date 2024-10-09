@@ -53,7 +53,10 @@ import type {
 	ImageSizeType,
 } from './components/ImageWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
-import { TrailTextSize, TrailTextWrapper } from './components/TrailTextWrapper';
+import {
+	type TrailTextSize,
+	TrailTextWrapper,
+} from './components/TrailTextWrapper';
 
 export type Props = {
 	linkTo: string;
