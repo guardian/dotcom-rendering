@@ -194,6 +194,7 @@ type BoostedCardProperties = {
 	headlineSizeOnMobile: SmallHeadlineSize;
 	headlineSizeOnTablet: SmallHeadlineSize;
 	imageSize: ImageSizeType;
+	useBoostedFontSizes: boolean;
 };
 
 /**
@@ -205,10 +206,11 @@ const decideCardProperties = (
 	switch (boostLevel) {
 		case 'megaboost':
 			return {
-				headlineSize: 'huge',
-				headlineSizeOnMobile: 'huge',
-				headlineSizeOnTablet: 'huge',
+				headlineSize: 'small',
+				headlineSizeOnMobile: 'small',
+				headlineSizeOnTablet: 'tiny',
 				imageSize: 'jumbo',
+				useBoostedFontSizes: true,
 			};
 		case 'boost':
 		default:
@@ -217,6 +219,7 @@ const decideCardProperties = (
 				headlineSizeOnMobile: 'large',
 				headlineSizeOnTablet: 'large',
 				imageSize: 'medium',
+				useBoostedFontSizes: false,
 			};
 	}
 };
@@ -242,6 +245,7 @@ export const BoostedCardLayout = ({
 		headlineSizeOnMobile,
 		headlineSizeOnTablet,
 		imageSize,
+		useBoostedFontSizes,
 	} = decideCardProperties(card.boostLevel);
 	return (
 		<UL padBottom={true} isFlexibleContainer={true} showTopBar={true}>
@@ -266,6 +270,7 @@ export const BoostedCardLayout = ({
 					showLivePlayable={card.showLivePlayable}
 					showTopBarDesktop={false}
 					showTopBarMobile={true}
+					boostedFontSizes={useBoostedFontSizes}
 				/>
 			</LI>
 		</UL>
