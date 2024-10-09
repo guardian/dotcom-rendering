@@ -181,6 +181,8 @@ export const SplashCardLayout = ({
 					showLivePlayable={card.showLivePlayable}
 					boostedFontSizes={true}
 					isFlexSplash={true}
+					showTopBarDesktop={false}
+					showTopBarMobile={true}
 				/>
 			</LI>
 		</UL>
@@ -262,6 +264,8 @@ export const BoostedCardLayout = ({
 					aspectRatio="5:4"
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
+					showTopBarDesktop={false}
+					showTopBarMobile={true}
 				/>
 			</LI>
 		</UL>
@@ -314,6 +318,8 @@ export const StandardCardLayout = ({
 							aspectRatio="5:4"
 							kickerText={card.kickerText}
 							showLivePlayable={false}
+							showTopBarDesktop={false}
+							showTopBarMobile={true}
 						/>
 					</LI>
 				);

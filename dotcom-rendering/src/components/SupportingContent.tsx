@@ -16,7 +16,7 @@ type Props = {
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
 	isDynamo?: boolean;
-	isFlexibleContainer?: boolean;
+	isFlexSplash?: boolean;
 };
 
 /**
@@ -134,7 +134,7 @@ export const SupportingContent = ({
 	alignment,
 	containerPalette,
 	isDynamo,
-	isFlexibleContainer = false,
+	isFlexSplash = false,
 }: Props) => {
 	const columnSpan = getColumnSpan(supportingContent.length);
 	return (
@@ -144,7 +144,7 @@ export const SupportingContent = ({
 				wrapperStyles,
 				baseGrid,
 				(isDynamo ?? alignment === 'horizontal') && horizontalGrid,
-				isFlexibleContainer && backgroundFill,
+				isFlexSplash && backgroundFill,
 			]}
 		>
 			{supportingContent.map((subLink, index) => {

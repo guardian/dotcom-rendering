@@ -1,12 +1,17 @@
 import { css } from '@emotion/react';
-import { from, space, until } from '@guardian/source/foundations';
+import {
+	from,
+	headlineMedium24Object,
+	space,
+	until,
+} from '@guardian/source/foundations';
 import {
 	Button,
 	Hide,
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
-import { useEffect, useRef /* useState */ } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { palette } from '../palette';
 import type {
 	DCRContainerPalette,
@@ -23,6 +28,37 @@ type Props = {
 	imageLoading: 'lazy' | 'eager';
 	containerType: DCRContainerType;
 };
+
+/**
+ * This needs to match the `FrontSection` title font and is used to calculate
+ * the negative margin that aligns the navigation buttons with the title.
+ */
+const titlePreset = headlineMedium24Object;
+
+/**
+ * Grid sizing to calculate negative margin used to pull navigation buttons
+ * out side of `FrontSection` container at `wide` breakpoint.
+ */
+const gridColumnWidth = '60px';
+const gridGap = '20px';
+
+const themeButton = {
+	borderTertiary: palette('--carousel-chevron-border'),
+	textTertiary: palette('--carousel-chevron'),
+};
+
+const themeButtonDisabled = {
+	borderTertiary: palette('--carousel-chevron-border-disabled'),
+	textTertiary: palette('--carousel-chevron-disabled'),
+};
+
+const carouselContainerStyles = css`
+	display: flex;
+	flex-direction: column-reverse;
+	${from.wide} {
+		flex-direction: row;
+	}
+`;
 
 const carouselStyles = css`
 	display: grid;
@@ -51,11 +87,6 @@ const itemStyles = css`
 	grid-area: span 1;
 	position: relative;
 	margin: ${space[3]}px 10px;
-	:first-child {
-		${from.tablet} {
-			margin-left: 0px;
-		}
-	}
 `;
 
 const verticalLineStyles = css`
@@ -69,6 +100,28 @@ const verticalLineStyles = css`
 		background-color: ${palette('--card-border-top')};
 		transform: translateX(-50%);
 	}
+`;
+
+const buttonContainerStyles = css`
+	margin-left: auto;
+	${from.tablet} {
+		margin-top: calc(
+			(-${titlePreset.fontSize} * ${titlePreset.lineHeight}) -
+				${space[3]}px
+		);
+	}
+	${from.leftCol} {
+		margin-top: 0;
+	}
+	${from.wide} {
+		margin-left: ${space[2]}px;
+		margin-right: calc(${space[2]}px - ${gridColumnWidth} - ${gridGap});
+	}
+`;
+
+const buttonLayoutStyles = css`
+	display: flex;
+	gap: ${space[1]}px;
 `;
 
 /**
@@ -108,9 +161,8 @@ export const ScrollableSmallContainer = ({
 }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
-
-	// const [previousButtonState, setShowPreviousButton] = useState(false);
-	// const [nextButtonState, setShowNextButton] = useState(true);
+	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
+	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
 
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
@@ -125,22 +177,23 @@ export const ScrollableSmallContainer = ({
 	};
 
 	/**
-	 * TODO - should update the style of the navigation buttons based on the carousel's scroll position.
+	 * Updates state of navigation buttons based on carousel's scroll position.
 	 *
-	 * This function checks the current scroll position of the carousel and sets the styles
-	 * of the previous and next buttons accordingly. The previous button is disabled if the carousel
-	 * is at the start, and the next button is disabled if the carousel is at the end.
+	 * This function checks the current scroll position of the carousel and sets
+	 * the styles of the previous and next buttons accordingly. The previous
+	 * button is disabled if the carousel is at the start, and the next button
+	 * is disabled if the carousel is at the end.
 	 */
 	const updateButtonVisibilityOnScroll = () => {
 		const carouselElement = carouselRef.current;
 		if (!carouselElement) return;
 
-		// const scrollLeft = carouselElement.scrollLeft;
-		// const maxScrollLeft =
-		// 	carouselElement.scrollWidth - carouselElement.clientWidth;
+		const scrollLeft = carouselElement.scrollLeft;
+		const maxScrollLeft =
+			carouselElement.scrollWidth - carouselElement.clientWidth;
 
-		// setShowPreviousButton(scrollLeft > 0);
-		// setShowNextButton(scrollLeft < maxScrollLeft);
+		setPreviousButtonEnabled(scrollLeft > 0);
+		setNextButtonEnabled(scrollLeft < maxScrollLeft);
 	};
 
 	useEffect(() => {
@@ -161,7 +214,7 @@ export const ScrollableSmallContainer = ({
 	}, []);
 
 	return (
-		<div>
+		<div css={carouselContainerStyles}>
 			<ol
 				// TODO
 				// data-component=""
@@ -196,63 +249,57 @@ export const ScrollableSmallContainer = ({
 								aspectRatio="5:4"
 								kickerText={trail.kickerText}
 								showLivePlayable={trail.showLivePlayable}
-								// TODO - specify card props
+								showTopBarDesktop={false}
+								showTopBarMobile={false}
 							/>
 						</li>
 					);
 				})}
 			</ol>
 
-			{/** TODO - put these buttons on the top right of the container */}
-			<Hide until={'tablet'}>
-				{carouselLength > 2 && (
-					<>
-						<div>
+			<div css={buttonContainerStyles}>
+				<Hide until={'tablet'}>
+					{carouselLength > 2 && (
+						<div css={buttonLayoutStyles}>
 							<Button
 								hideLabel={true}
 								iconSide="left"
 								icon={<SvgChevronLeftSingle />}
 								onClick={() => scrollTo('left')}
 								priority="tertiary"
-								// TODO use better colour name
-								theme={{
-									borderTertiary:
-										palette('--card-border-top'),
-									textTertiary: palette(
-										'--card-headline-trail-text',
-									),
-								}}
+								theme={
+									previousButtonEnabled
+										? themeButton
+										: themeButtonDisabled
+								}
+								size="small"
+								disabled={!previousButtonEnabled}
 								// TODO
 								// aria-label="Move stories backwards"
 								// data-link-name="container left chevron"
-								size="small"
 							/>
-						</div>
 
-						<div>
 							<Button
 								hideLabel={true}
 								iconSide="left"
 								icon={<SvgChevronRightSingle />}
 								onClick={() => scrollTo('right')}
 								priority="tertiary"
-								// TODO use better colour name
-								theme={{
-									borderTertiary:
-										palette('--card-border-top'),
-									textTertiary: palette(
-										'--card-headline-trail-text',
-									),
-								}}
+								theme={
+									nextButtonEnabled
+										? themeButton
+										: themeButtonDisabled
+								}
+								size="small"
+								disabled={!nextButtonEnabled}
 								// TODO
 								// aria-label="Move stories forwards"
 								// data-link-name="container right chevron"
-								size="small"
 							/>
 						</div>
-					</>
-				)}
-			</Hide>
+					)}
+				</Hide>
+			</div>
 		</div>
 	);
 };

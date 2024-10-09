@@ -1575,6 +1575,8 @@ export const WithALargeGap = () => {
 							design: ArticleDesign.Comment,
 							theme: Pillar.Opinion,
 						}}
+						showTopBarDesktop={false}
+						showTopBarMobile={true}
 					/>
 				</div>
 			</CardWrapper>

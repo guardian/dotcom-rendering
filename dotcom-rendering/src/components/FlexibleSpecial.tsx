@@ -137,6 +137,8 @@ export const OneCardLayout = ({
 					showLivePlayable={card.showLivePlayable}
 					boostedFontSizes={true}
 					isFlexSplash={true}
+					showTopBarDesktop={false}
+					showTopBarMobile={true}
 				/>
 			</LI>
 		</UL>
@@ -192,6 +194,8 @@ const TwoCardOrFourCardLayout = ({
 							aspectRatio="5:4"
 							kickerText={card.kickerText}
 							showLivePlayable={false}
+							showTopBarDesktop={false}
+							showTopBarMobile={true}
 						/>
 					</LI>
 				);
