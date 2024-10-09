@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import { from, palette, space, textSans14 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
+import type { Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
 import { center } from '../lib/center';
 import {
 	type Edition,
@@ -15,8 +17,16 @@ import {
 } from '../lib/useUserPreferredEdition';
 import XIcon from '../static/icons/x.svg';
 
+// The length of the swipe up on the y-axis in pixels necesary to close the banner
+const THRESHOLD = 6;
+
+const hideBannerStyles = css`
+	top: -200px;
+	transition: all 3s;
+`;
+
 const container = css`
-	position: relative;
+	position: sticky;
 	top: 0;
 	background-color: ${palette.brand[800]};
 	${getZIndex('editionSwitcherBanner')};
@@ -67,9 +77,38 @@ const closeButton = css`
 	border: none;
 `;
 
+const onPointerDown = (
+	event: React.PointerEvent,
+	setIsDown: Dispatch<SetStateAction<boolean>>,
+	setLastDownYCoord: Dispatch<SetStateAction<number | null>>,
+) => {
+	event.preventDefault();
+
+	setIsDown(true);
+	setLastDownYCoord(event.clientY);
+};
+
+const onPointerUp = (
+	event: React.PointerEvent,
+	lastDownYCoord: number | null,
+	setIsDown: Dispatch<SetStateAction<boolean>>,
+	setIsSwipeUp: Dispatch<SetStateAction<boolean>>,
+) => {
+	event.preventDefault();
+	setIsDown(false);
+
+	if (lastDownYCoord !== null && event.clientY + THRESHOLD < lastDownYCoord) {
+		setIsSwipeUp(true);
+	}
+};
+
 type Props = {
 	pageId: Edition['pageId'];
 	edition: EditionId;
+};
+
+const getEditionNameFromEdition = (edition: Edition) => {
+	return edition.title.replace(' edition', '');
 };
 
 /**
@@ -84,20 +123,54 @@ export const EditionSwitcherBanner = ({ pageId, edition }: Props) => {
 		edition,
 	);
 
-	const suggestedPageId = getEditionFromId(edition).pageId;
-	const suggestedEdition = getEditionFromId(edition).title.replace(
-		' edition',
-		'',
-	);
-	const defaultEdition = getEditionFromPageId(pageId);
-	const defaultEditionName = defaultEdition?.title.replace(' edition', '');
+	const [lastDownYCoord, setLastDownYCoord] = useState<number | null>(null);
+	const [isDown, setIsDown] = useState(false);
+	const [isSwipeUp, setIsSwipeUp] = useState(false);
 
-	if (isBannerClosed || !showBanner || !defaultEditionName) {
+	// The y-axis distance from the pointer down and current pointer, whilst the pointer is still down.
+	const [pointerUpDistance, setPointerUpDistance] = useState(0);
+
+	const suggestedEdition = getEditionFromId(edition);
+	const suggestedPageId = suggestedEdition.pageId;
+	const suggestedEditionName = getEditionNameFromEdition(suggestedEdition);
+
+	const defaultEdition = getEditionFromPageId(pageId);
+
+	if (isBannerClosed || !showBanner || !defaultEdition) {
 		return null;
 	}
 
+	const defaultEditionName = getEditionNameFromEdition(defaultEdition);
+
 	return (
-		<aside data-component="edition-switcher-banner" css={container}>
+		<aside
+			id="edition-switcher-banner"
+			data-component="edition-switcher-banner"
+			css={[
+				container,
+				isSwipeUp && hideBannerStyles,
+				isDown &&
+					css`
+						top: ${pointerUpDistance}px;
+					`,
+			]}
+			onPointerDown={(e) =>
+				onPointerDown(e, setIsDown, setLastDownYCoord)
+			}
+			onPointerUp={(e) =>
+				onPointerUp(e, lastDownYCoord, setIsDown, setIsSwipeUp)
+			}
+			onTouchStart={(e) => {
+				e.preventDefault();
+			}}
+			onPointerMove={(e) => {
+				if (isDown) {
+					setPointerUpDistance(
+						Math.min(0, e.clientY - (lastDownYCoord ?? 0)),
+					);
+				}
+			}}
+		>
 			<div css={content}>
 				<div css={textAndLink}>
 					<p>You are viewing the {defaultEditionName} homepage</p>
@@ -108,7 +181,7 @@ export const EditionSwitcherBanner = ({ pageId, edition }: Props) => {
 						cssOverrides={linkButton}
 						data-link-name="edition-switcher-banner switch-edition"
 					>
-						View the {suggestedEdition} homepage
+						View the {suggestedEditionName} homepage
 					</LinkButton>
 				</div>
 				<button
