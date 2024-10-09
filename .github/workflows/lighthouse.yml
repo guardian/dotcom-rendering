@@ -32,7 +32,7 @@ jobs:
           lhci autorun
 
       # https://github.com/denoland/setup-deno#latest-stable-for-a-major
-      - uses: denoland/setup-deno@v1
+      - uses: denoland/setup-deno@v2
         with:
           deno-version: v1.x
 
