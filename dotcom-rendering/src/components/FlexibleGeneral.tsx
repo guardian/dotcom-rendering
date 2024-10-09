@@ -70,6 +70,7 @@ type BoostedSplashProperties = {
 	headlineSizeOnTablet: SmallHeadlineSize;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
+	imageSize: ImageSizeType;
 	supportingContentAlignment: Alignment;
 };
 
@@ -89,6 +90,7 @@ const decideSplashCardProperties = (
 				headlineSizeOnTablet: 'tiny',
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: 'bottom',
+				imageSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
 			};
@@ -99,6 +101,7 @@ const decideSplashCardProperties = (
 				headlineSizeOnTablet: 'small',
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: 'bottom',
+				imageSize: 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
 			};
@@ -109,6 +112,7 @@ const decideSplashCardProperties = (
 				headlineSizeOnTablet: 'medium',
 				imagePositionOnDesktop: 'bottom',
 				imagePositionOnMobile: 'bottom',
+				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 			};
 		case 'gigaboost':
@@ -118,6 +122,7 @@ const decideSplashCardProperties = (
 				headlineSizeOnTablet: 'medium',
 				imagePositionOnDesktop: 'bottom',
 				imagePositionOnMobile: 'bottom',
+				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 			};
 	}
@@ -145,6 +150,7 @@ export const SplashCardLayout = ({
 		headlineSizeOnTablet,
 		imagePositionOnDesktop,
 		imagePositionOnMobile,
+		imageSize,
 		supportingContentAlignment,
 	} = decideSplashCardProperties(
 		card.boostLevel ?? 'default',
@@ -165,7 +171,7 @@ export const SplashCardLayout = ({
 					headlineSizeOnTablet={headlineSizeOnTablet}
 					imagePositionOnDesktop={imagePositionOnDesktop}
 					imagePositionOnMobile={imagePositionOnMobile}
-					imageSize="jumbo"
+					imageSize={imageSize}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
 					supportingContentAlignment={supportingContentAlignment}
@@ -175,6 +181,8 @@ export const SplashCardLayout = ({
 					showLivePlayable={card.showLivePlayable}
 					boostedFontSizes={true}
 					isFlexSplash={true}
+					showTopBarDesktop={false}
+					showTopBarMobile={true}
 				/>
 			</LI>
 		</UL>
@@ -236,7 +244,7 @@ export const BoostedCardLayout = ({
 		imageSize,
 	} = decideCardProperties(card.boostLevel);
 	return (
-		<UL padBottom={true} isFlexibleContainer={true}>
+		<UL padBottom={true} isFlexibleContainer={true} showTopBar={true}>
 			<LI padSides={true}>
 				<FrontCard
 					trail={card}
@@ -256,6 +264,8 @@ export const BoostedCardLayout = ({
 					aspectRatio="5:4"
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
+					showTopBarDesktop={false}
+					showTopBarMobile={true}
 				/>
 			</LI>
 		</UL>
@@ -278,7 +288,12 @@ export const StandardCardLayout = ({
 	showImage?: boolean;
 }) => {
 	return (
-		<UL direction="row" padBottom={true} isFlexibleContainer={true}>
+		<UL
+			direction="row"
+			padBottom={true}
+			isFlexibleContainer={true}
+			showTopBar={true}
+		>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI
@@ -298,10 +313,13 @@ export const StandardCardLayout = ({
 							imageLoading={imageLoading}
 							imagePositionOnDesktop={'left'}
 							supportingContent={card.supportingContent}
+							supportingContentAlignment="horizontal"
 							imageSize={'medium'}
 							aspectRatio="5:4"
 							kickerText={card.kickerText}
 							showLivePlayable={false}
+							showTopBarDesktop={false}
+							showTopBarMobile={true}
 						/>
 					</LI>
 				);

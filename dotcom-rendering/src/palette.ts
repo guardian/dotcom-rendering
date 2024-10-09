@@ -4361,6 +4361,21 @@ const carouselTitleHighlightDark: PaletteFunction = ({ theme, design }) => {
 	}
 };
 
+const carouselChevronLight: PaletteFunction = () => sourcePalette.neutral[7];
+const carouselChevronDark: PaletteFunction = () => sourcePalette.neutral[86];
+const carouselChevronBorderLight: PaletteFunction = () =>
+	sourcePalette.neutral[73];
+const carouselChevronBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[73];
+const carouselChevronDisabledLight: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[7], 0.32);
+const carouselChevronDisabledDark: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[86], 0.32);
+const carouselChevronBorderDisabledLight: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[73], 0.32);
+const carouselChevronBorderDisabledDark: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[73], 0.32);
+
 const mostViewedFooterHoverLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 const mostViewedFooterHoverDark: PaletteFunction = () =>
@@ -5981,6 +5996,22 @@ const paletteColours = {
 	'--carousel-border': {
 		light: carouselBorderLight,
 		dark: carouselBorderDark,
+	},
+	'--carousel-chevron': {
+		light: carouselChevronLight,
+		dark: carouselChevronDark,
+	},
+	'--carousel-chevron-border': {
+		light: carouselChevronBorderLight,
+		dark: carouselChevronBorderDark,
+	},
+	'--carousel-chevron-border-disabled': {
+		light: carouselChevronBorderDisabledLight,
+		dark: carouselChevronBorderDisabledDark,
+	},
+	'--carousel-chevron-disabled': {
+		light: carouselChevronDisabledLight,
+		dark: carouselChevronDisabledDark,
 	},
 	'--carousel-dot': {
 		light: carouselDotLight,

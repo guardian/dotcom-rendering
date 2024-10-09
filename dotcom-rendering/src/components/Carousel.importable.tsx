@@ -541,6 +541,8 @@ const CarouselCard = ({
 				absoluteServerTimes={absoluteServerTimes}
 				starRating={starRating}
 				index={index}
+				showTopBarDesktop={!isOnwardContent}
+				showTopBarMobile={false}
 			/>
 		</LI>
 	);
