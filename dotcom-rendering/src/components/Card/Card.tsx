@@ -116,6 +116,8 @@ export type Props = {
 	index?: number;
 	/** The Splash card in a flexible container gets a different visual treatment to other cards*/
 	isFlexSplash?: boolean;
+	showTopBarDesktop?: boolean;
+	showTopBarMobile?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -268,6 +270,8 @@ export const Card = ({
 	boostedFontSizes,
 	index = 0,
 	isFlexSplash,
+	showTopBarDesktop = true,
+	showTopBarMobile = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -454,8 +458,8 @@ export const Card = ({
 	return (
 		<CardWrapper
 			format={format}
-			showTopBar={!isOnwardContent && !isFlexibleSpecialContainer}
-			showMobileTopBar={isFlexibleSpecialContainer}
+			showTopBarDesktop={!isOnwardContent && showTopBarDesktop}
+			showTopBarMobile={showTopBarMobile}
 			containerPalette={containerPalette}
 			isOnwardContent={isOnwardContent}
 		>
@@ -759,8 +763,7 @@ export const Card = ({
 							)}
 							{sublinkPosition === 'outer' &&
 								supportingContentAlignment === 'horizontal' &&
-								(imagePositionOnDesktop === 'right' ||
-									imagePositionOnDesktop === 'left') && (
+								imagePositionOnDesktop === 'right' && (
 									<HorizontalDivider />
 								)}
 						</div>

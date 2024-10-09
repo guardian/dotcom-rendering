@@ -404,9 +404,12 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 			{tickerSettings?.tickerData && (
 				<Ticker
 					currencySymbol={tickerSettings.currencySymbol}
-					copy={tickerSettings.copy}
+					copy={{
+						headline: tickerSettings.copy.countLabel,
+					}}
 					tickerData={tickerSettings.tickerData}
 					tickerStylingSettings={defaultTickerStylingSettings}
+					size={'medium'}
 				/>
 			)}
 
