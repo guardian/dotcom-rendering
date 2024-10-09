@@ -59,14 +59,17 @@ export const ShowHideContainers = ({
 			),
 		);
 
-		const allContainersExpanded = allShowHideButtons.every(
-			(e) => e.getAttribute('data-link-name') === 'Hide',
-		);
+		const allContainersAreExpanded = allShowHideButtons
+			.map((el) => {
+				const sectionId = el.getAttribute('data-show-hide-button');
+				return sectionId && containerStates[sectionId];
+			})
+			.every((state) => state !== 'closed');
 
 		for (const e of allShowHideButtons) {
 			// We want to remove the ability to toggle front containers between expanded and collapsed states.
 			// The first part of doing this is removing the feature for those who do not currently use it.
-			if (disableFrontContainerToggleSwitch && allContainersExpanded) {
+			if (disableFrontContainerToggleSwitch && allContainersAreExpanded) {
 				e.remove();
 			}
 
