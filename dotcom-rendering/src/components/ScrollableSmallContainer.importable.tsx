@@ -273,6 +273,7 @@ export const ScrollableSmallContainer = ({
 										: themeButtonDisabled
 								}
 								size="small"
+								disabled={!previousButtonEnabled}
 								// TODO
 								// aria-label="Move stories backwards"
 								// data-link-name="container left chevron"
@@ -290,6 +291,7 @@ export const ScrollableSmallContainer = ({
 										: themeButtonDisabled
 								}
 								size="small"
+								disabled={!nextButtonEnabled}
 								// TODO
 								// aria-label="Move stories forwards"
 								// data-link-name="container right chevron"
