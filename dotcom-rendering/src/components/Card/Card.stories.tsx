@@ -1568,6 +1568,7 @@ export const WithALargeGap = () => {
 				>
 					<Card
 						{...basicCardProps}
+						containerType={'flexible/special'}
 						imagePositionOnDesktop="left"
 						format={{
 							display: ArticleDisplay.Standard,
