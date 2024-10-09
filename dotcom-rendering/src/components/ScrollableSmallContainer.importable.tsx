@@ -42,6 +42,16 @@ const titlePreset = headlineMedium24Object;
 const gridColumnWidth = '60px';
 const gridGap = '20px';
 
+const themeButton = {
+	borderTertiary: palette('--carousel-chevron-border'),
+	textTertiary: palette('--carousel-chevron'),
+};
+
+const themeButtonDisabled = {
+	borderTertiary: palette('--carousel-chevron-border-disabled'),
+	textTertiary: palette('--carousel-chevron-disabled'),
+};
+
 const carouselContainerStyles = css`
 	display: flex;
 	flex-direction: column-reverse;
@@ -257,18 +267,11 @@ export const ScrollableSmallContainer = ({
 								icon={<SvgChevronLeftSingle />}
 								onClick={() => scrollTo('left')}
 								priority="tertiary"
-								// TODO use better colour name
-								theme={{
-									borderTertiary:
-										palette('--card-border-top'),
-									textTertiary: palette(
-										'--card-headline-trail-text',
-									),
-								}}
+								theme={themeButtonDisabled}
+								size="small"
 								// TODO
 								// aria-label="Move stories backwards"
 								// data-link-name="container left chevron"
-								size="small"
 							/>
 
 							<Button
@@ -277,18 +280,11 @@ export const ScrollableSmallContainer = ({
 								icon={<SvgChevronRightSingle />}
 								onClick={() => scrollTo('right')}
 								priority="tertiary"
-								// TODO use better colour name
-								theme={{
-									borderTertiary:
-										palette('--card-border-top'),
-									textTertiary: palette(
-										'--card-headline-trail-text',
-									),
-								}}
+								theme={themeButton}
+								size="small"
 								// TODO
 								// aria-label="Move stories forwards"
 								// data-link-name="container right chevron"
-								size="small"
 							/>
 						</div>
 					)}
