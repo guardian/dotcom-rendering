@@ -16,7 +16,7 @@ const defaultFormat = {
 };
 
 const meta: Meta<typeof EditorialLinkButton> = {
-	title: 'React Components/EditorialLinkButton',
+	title: 'Components/EditorialLinkButton',
 	component: EditorialLinkButton,
 	argTypes: {
 		format: {
