@@ -199,6 +199,8 @@ type BoostedCardProperties = {
 
 /**
  * Boosting a standard card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
+ * Megaboosted cards will make use of the boosted font sizes specified in card headline.
+ * Boosted cards will use the regular font sizes, to enable the correct headline size on mobile.
  */
 const decideCardProperties = (
 	boostLevel: BoostLevel = 'boost',
