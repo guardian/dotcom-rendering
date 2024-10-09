@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { space } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import { EditorialButton } from '@guardian/source-development-kitchen/react-components';
+import { EditorialButton } from './EditorialButton/EditorialButton';
 
 type Props = {
 	count: number;
