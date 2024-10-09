@@ -1,7 +1,15 @@
 import { css } from '@emotion/react';
-import { space, textSans14, until } from '@guardian/source/foundations';
+import {
+	from,
+	space,
+	textSans14,
+	textSans17,
+	until,
+} from '@guardian/source/foundations';
 import { palette } from '../../../palette';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
+
+export type TrailTextSize = 'regular' | 'large';
 
 type Props = {
 	children: string | React.ReactNode;
@@ -12,6 +20,8 @@ type Props = {
 	shouldHide?: boolean;
 	/** If the card is a flexible splash card, the trail text will be styled differently */
 	isFlexSplash?: boolean;
+	/** If the card is in a flexible container, the font size can be change */
+	trailTextSize?: TrailTextSize;
 };
 
 /**
@@ -54,8 +64,12 @@ const trailTextStyles = css`
 	}
 `;
 
-const flexibleSplashStyles = css`
+const flexibleSplashStyles = (fontSize: 'regular' | 'large') => css`
 	color: ${palette('--flexible-splash-card-standfirst')};
+	${textSans14}
+	${from.desktop} {
+		${fontSize === 'large' && textSans17}
+	}
 `;
 
 export const TrailTextWrapper = ({
@@ -65,6 +79,7 @@ export const TrailTextWrapper = ({
 	imageType,
 	shouldHide = true,
 	isFlexSplash,
+	trailTextSize = 'regular',
 }: Props) => {
 	return (
 		<div
@@ -76,7 +91,7 @@ export const TrailTextWrapper = ({
 						imageSize,
 						imageType,
 					),
-				isFlexSplash && flexibleSplashStyles,
+				isFlexSplash && flexibleSplashStyles(trailTextSize),
 			]}
 		>
 			{children}

@@ -9,6 +9,7 @@ import type {
 	ImageSizeType,
 } from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
+import { TrailTextSize } from './Card/components/TrailTextWrapper';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
@@ -30,6 +31,7 @@ type BoostProperties = {
 	imagePositionOnMobile: ImagePositionType;
 	imageSize: ImageSizeType;
 	supportingContentAlignment: Alignment;
+	trailTextSize?: TrailTextSize;
 };
 
 /**
@@ -51,7 +53,9 @@ const determineCardProperties = (
 				imageSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
+				trailTextSize: 'regular',
 			};
+
 		case 'boost':
 			return {
 				headlineSize: 'large',
@@ -62,6 +66,7 @@ const determineCardProperties = (
 				imageSize: 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
+				trailTextSize: 'regular',
 			};
 		case 'megaboost':
 			return {
@@ -72,6 +77,7 @@ const determineCardProperties = (
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
+				trailTextSize: 'large',
 			};
 		case 'gigaboost':
 			return {
@@ -82,6 +88,7 @@ const determineCardProperties = (
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
+				trailTextSize: 'large',
 			};
 	}
 };
@@ -109,6 +116,7 @@ export const OneCardLayout = ({
 		imagePositionOnMobile,
 		imageSize,
 		supportingContentAlignment,
+		trailTextSize,
 	} = determineCardProperties(
 		card.boostLevel ?? 'default',
 		card.supportingContent?.length ?? 0,
@@ -139,6 +147,7 @@ export const OneCardLayout = ({
 					isFlexSplash={true}
 					showTopBarDesktop={false}
 					showTopBarMobile={true}
+					trailTextSize={trailTextSize}
 				/>
 			</LI>
 		</UL>
