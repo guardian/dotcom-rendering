@@ -9,7 +9,7 @@ import type {
 	ImageSizeType,
 } from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
-import { TrailTextSize } from './Card/components/TrailTextWrapper';
+import type { TrailTextSize } from './Card/components/TrailTextWrapper';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
@@ -31,7 +31,7 @@ type BoostProperties = {
 	imagePositionOnMobile: ImagePositionType;
 	imageSize: ImageSizeType;
 	supportingContentAlignment: Alignment;
-	trailTextSize?: TrailTextSize;
+	trailTextSize: TrailTextSize;
 };
 
 /**
