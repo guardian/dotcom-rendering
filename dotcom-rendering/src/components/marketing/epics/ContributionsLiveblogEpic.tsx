@@ -12,13 +12,13 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { Ticker } from '@guardian/source-development-kitchen/react-components';
+import type { TickerSettings } from '@guardian/source-development-kitchen/react-components';
 import {
 	containsNonArticleCountPlaceholder,
 	replaceNonArticleCountPlaceholders,
 } from '@guardian/support-dotcom-components';
 import type {
 	EpicProps,
-	TickerSettings,
 	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useEffect } from 'react';
