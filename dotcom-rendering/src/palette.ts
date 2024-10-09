@@ -5519,6 +5519,19 @@ const pinnedPostBorderDark: PaletteFunction = ({ theme }) => {
 	}
 };
 
+const expandableMarketingCardBackground: PaletteFunction = () =>
+	sourcePalette.brand[400];
+
+const expandableMarketingCardFillBackgroundLight: PaletteFunction = (
+	format,
+) => {
+	return articleBackgroundLight(format) === 'transparent'
+		? sourcePalette.neutral[100]
+		: articleBackgroundLight(format);
+};
+const expandableMarketingCardFillBackgroundDark: PaletteFunction = (format) =>
+	articleBackgroundDark(format);
+
 const youtubeOverlayKicker: PaletteFunction = ({ theme }: ArticleFormat) => {
 	switch (theme) {
 		case Pillar.News:
@@ -6228,6 +6241,14 @@ const paletteColours = {
 	'--expandable-atom-text-hover': {
 		light: expandableAtomTextHoverLight,
 		dark: expandableAtomTextHoverDark,
+	},
+	'--expandable-marketing-card-background': {
+		light: expandableMarketingCardBackground,
+		dark: expandableMarketingCardBackground,
+	},
+	'--expandable-marketing-card-fill-background': {
+		light: expandableMarketingCardFillBackgroundLight,
+		dark: expandableMarketingCardFillBackgroundDark,
 	},
 	'--explainer-atom-accent': {
 		light: explainerAtomAccentLight,
