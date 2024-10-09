@@ -20,7 +20,6 @@ type Props = {
 	shouldHide?: boolean;
 	/** If the card is a flexible splash card, the trail text will be styled differently */
 	isFlexSplash?: boolean;
-	/** If the card is in a flexible container, the font size can be change */
 	trailTextSize?: TrailTextSize;
 };
 
@@ -57,18 +56,20 @@ const trailTextStyles = css`
 	display: flex;
 	flex-direction: column;
 	color: ${palette('--card-headline-trail-text')};
-	${textSans14};
 	padding: ${space[2]}px 0;
-	strong {
-		font-weight: bold;
-	}
 `;
 
-const flexibleSplashStyles = (fontSize: 'regular' | 'large') => css`
+const flexibleSplashStyles = css`
 	color: ${palette('--flexible-splash-card-standfirst')};
+`;
+
+const fontStyles = (trailTextSize: TrailTextSize) => css`
 	${textSans14}
 	${from.desktop} {
-		${fontSize === 'large' && textSans17}
+		${trailTextSize === 'large' && textSans17}
+	}
+	strong {
+		font-weight: bold;
 	}
 `;
 
@@ -78,20 +79,21 @@ export const TrailTextWrapper = ({
 	imageSize,
 	imageType,
 	shouldHide = true,
-	isFlexSplash,
+	isFlexSplash = false,
 	trailTextSize = 'regular',
 }: Props) => {
 	return (
 		<div
 			css={[
 				trailTextStyles,
+				fontStyles(trailTextSize),
 				shouldHide &&
 					decideVisibilityStyles(
 						imagePositionOnDesktop,
 						imageSize,
 						imageType,
 					),
-				isFlexSplash && flexibleSplashStyles(trailTextSize),
+				isFlexSplash && flexibleSplashStyles,
 			]}
 		>
 			{children}
