@@ -11,7 +11,7 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
-import { useEffect, useRef /* useState */, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { palette } from '../palette';
 import type {
 	DCRContainerPalette,
