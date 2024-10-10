@@ -92,7 +92,9 @@ const bylineStyles = (size: SmallHeadlineSize, isLabs: boolean) => {
 			`;
 		}
 		case 'tiny':
-			return undefined;
+			return css`
+				${headlineMediumItalic17};
+			`;
 	}
 };
 

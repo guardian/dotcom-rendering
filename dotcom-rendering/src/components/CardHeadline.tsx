@@ -51,22 +51,18 @@ type Props = {
 /** These represent a new set of fonts. They are extra large font sizes that, as a group, are only used on headlines */
 const boostedFontStyles = ({ size }: { size: SmallHeadlineSize }) => {
 	switch (size) {
-		// we don't have a ginormous size in designs. For now this defaults to huge.
 		case 'ginormous':
-		case 'huge':
 			return `${headlineMedium64}`;
-
-		case 'large':
+		case 'huge':
 			return `${headlineMedium50}`;
-
-		case 'medium':
+		case 'large':
 			return `${headlineMedium42}`;
-
-		case 'small':
+		case 'medium':
 			return `${headlineMedium34}`;
-
-		case 'tiny':
+		case 'small':
 			return `${headlineMedium28}`;
+		case 'tiny':
+			return `${headlineMedium24}`;
 	}
 };
 
