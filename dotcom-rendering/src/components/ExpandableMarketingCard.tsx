@@ -16,7 +16,6 @@ import {
 	SvgCross,
 } from '@guardian/source/react-components';
 import type { Dispatch, SetStateAction } from 'react';
-import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
 import { useConfig } from './ConfigContext';
 
@@ -41,12 +40,6 @@ const fillBarStyles = css`
 	${from.desktop} {
 		height: 4px;
 	}
-`;
-
-const containerStyles = css`
-	${getZIndex('expandableMarketingCardOverlay')}
-	position: sticky;
-	top: 0;
 `;
 
 const contentStyles = css`
@@ -170,10 +163,7 @@ export const ExpandableMarketingCard = ({
 	setIsClosed,
 }: Props) => {
 	return (
-		<div
-			css={containerStyles}
-			data-component="us-expandable-marketing-card"
-		>
+		<div data-component="us-expandable-marketing-card">
 			<div css={fillBarStyles} />
 			<div css={contentStyles}>
 				{!isExpanded ? (

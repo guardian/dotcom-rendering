@@ -30,6 +30,11 @@ const bodyStyles = css`
 `;
 
 const usCardStyles = css`
+	align-self: start;
+	position: sticky;
+	top: 0;
+	${getZIndex('expandableMarketingCardOverlay')}
+
 	${from.leftCol} {
 		margin-top: ${space[6]}px;
 		margin-bottom: ${space[9]}px;
