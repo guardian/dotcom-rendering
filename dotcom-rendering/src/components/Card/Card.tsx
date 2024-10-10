@@ -53,7 +53,10 @@ import type {
 	ImageSizeType,
 } from './components/ImageWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
-import { TrailTextWrapper } from './components/TrailTextWrapper';
+import {
+	type TrailTextSize,
+	TrailTextWrapper,
+} from './components/TrailTextWrapper';
 
 export type Props = {
 	linkTo: string;
@@ -118,6 +121,7 @@ export type Props = {
 	isFlexSplash?: boolean;
 	showTopBarDesktop?: boolean;
 	showTopBarMobile?: boolean;
+	trailTextSize?: TrailTextSize;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -272,6 +276,7 @@ export const Card = ({
 	isFlexSplash,
 	showTopBarDesktop = true,
 	showTopBarMobile = false,
+	trailTextSize,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -733,6 +738,7 @@ export const Card = ({
 									imageType={media?.type}
 									shouldHide={isFlexSplash ? false : true}
 									isFlexSplash={isFlexSplash}
+									trailTextSize={trailTextSize}
 								>
 									<div
 										dangerouslySetInnerHTML={{
