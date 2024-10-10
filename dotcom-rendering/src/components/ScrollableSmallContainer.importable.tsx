@@ -11,7 +11,7 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
-import { useEffect, useRef /* useState */ } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { palette } from '../palette';
 import type {
 	DCRContainerPalette,
@@ -41,6 +41,16 @@ const titlePreset = headlineMedium24Object;
  */
 const gridColumnWidth = '60px';
 const gridGap = '20px';
+
+const themeButton = {
+	borderTertiary: palette('--carousel-chevron-border'),
+	textTertiary: palette('--carousel-chevron'),
+};
+
+const themeButtonDisabled = {
+	borderTertiary: palette('--carousel-chevron-border-disabled'),
+	textTertiary: palette('--carousel-chevron-disabled'),
+};
 
 const carouselContainerStyles = css`
 	display: flex;
@@ -151,9 +161,8 @@ export const ScrollableSmallContainer = ({
 }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
-
-	// const [previousButtonState, setShowPreviousButton] = useState(false);
-	// const [nextButtonState, setShowNextButton] = useState(true);
+	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
+	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
 
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
@@ -168,22 +177,23 @@ export const ScrollableSmallContainer = ({
 	};
 
 	/**
-	 * TODO - should update the style of the navigation buttons based on the carousel's scroll position.
+	 * Updates state of navigation buttons based on carousel's scroll position.
 	 *
-	 * This function checks the current scroll position of the carousel and sets the styles
-	 * of the previous and next buttons accordingly. The previous button is disabled if the carousel
-	 * is at the start, and the next button is disabled if the carousel is at the end.
+	 * This function checks the current scroll position of the carousel and sets
+	 * the styles of the previous and next buttons accordingly. The previous
+	 * button is disabled if the carousel is at the start, and the next button
+	 * is disabled if the carousel is at the end.
 	 */
 	const updateButtonVisibilityOnScroll = () => {
 		const carouselElement = carouselRef.current;
 		if (!carouselElement) return;
 
-		// const scrollLeft = carouselElement.scrollLeft;
-		// const maxScrollLeft =
-		// 	carouselElement.scrollWidth - carouselElement.clientWidth;
+		const scrollLeft = carouselElement.scrollLeft;
+		const maxScrollLeft =
+			carouselElement.scrollWidth - carouselElement.clientWidth;
 
-		// setShowPreviousButton(scrollLeft > 0);
-		// setShowNextButton(scrollLeft < maxScrollLeft);
+		setPreviousButtonEnabled(scrollLeft > 0);
+		setNextButtonEnabled(scrollLeft < maxScrollLeft);
 	};
 
 	useEffect(() => {
@@ -257,18 +267,16 @@ export const ScrollableSmallContainer = ({
 								icon={<SvgChevronLeftSingle />}
 								onClick={() => scrollTo('left')}
 								priority="tertiary"
-								// TODO use better colour name
-								theme={{
-									borderTertiary:
-										palette('--card-border-top'),
-									textTertiary: palette(
-										'--card-headline-trail-text',
-									),
-								}}
+								theme={
+									previousButtonEnabled
+										? themeButton
+										: themeButtonDisabled
+								}
+								size="small"
+								disabled={!previousButtonEnabled}
 								// TODO
 								// aria-label="Move stories backwards"
 								// data-link-name="container left chevron"
-								size="small"
 							/>
 
 							<Button
@@ -277,18 +285,16 @@ export const ScrollableSmallContainer = ({
 								icon={<SvgChevronRightSingle />}
 								onClick={() => scrollTo('right')}
 								priority="tertiary"
-								// TODO use better colour name
-								theme={{
-									borderTertiary:
-										palette('--card-border-top'),
-									textTertiary: palette(
-										'--card-headline-trail-text',
-									),
-								}}
+								theme={
+									nextButtonEnabled
+										? themeButton
+										: themeButtonDisabled
+								}
+								size="small"
+								disabled={!nextButtonEnabled}
 								// TODO
 								// aria-label="Move stories forwards"
 								// data-link-name="container right chevron"
-								size="small"
 							/>
 						</div>
 					)}
