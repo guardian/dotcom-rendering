@@ -200,7 +200,7 @@ type BoostedCardProperties = {
  * Boosting a standard card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
  */
 const decideCardProperties = (
-	boostLevel: BoostLevel = 'boost',
+	boostLevel: Omit<BoostLevel, 'default' | 'gigaboost'> = 'boost',
 ): BoostedCardProperties => {
 	switch (boostLevel) {
 		case 'megaboost':
