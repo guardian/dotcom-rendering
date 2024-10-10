@@ -290,6 +290,9 @@
         "starRating": {
             "$ref": "#/definitions/StarRating"
         },
+        "audioArticleImage": {
+            "$ref": "#/definitions/ImageBlockElement"
+        },
         "trailText": {
             "type": "string"
         },
@@ -1468,7 +1471,6 @@
                 "fields",
                 "index",
                 "mediaType",
-                "mimeType",
                 "url"
             ]
         },
