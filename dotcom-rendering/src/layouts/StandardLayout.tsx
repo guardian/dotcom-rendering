@@ -719,6 +719,18 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							</GridItem>
 						)}
 						<GridItem area="body">
+							<Hide from="leftCol">
+								<Island
+									priority="enhancement"
+									defer={{ until: 'visible' }}
+								>
+									<ExpandableMarketingCardWrapper
+										guardianBaseURL={
+											article.guardianBaseURL
+										}
+									/>
+								</Island>
+							</Hide>
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}

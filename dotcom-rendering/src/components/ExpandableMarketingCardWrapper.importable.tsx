@@ -1,10 +1,13 @@
+import { css } from '@emotion/react';
 import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import type { DailyArticle } from '../lib/dailyArticleCount';
 import { getDailyArticleCount } from '../lib/dailyArticleCount';
 import { getLocaleCode } from '../lib/getCountryCode';
+import { getZIndex } from '../lib/getZIndex';
 import { useAB } from '../lib/useAB';
 import { ExpandableMarketingCard } from './ExpandableMarketingCard';
+import { Hide } from './Hide';
 
 interface Props {
 	guardianBaseURL: string;
@@ -70,13 +73,54 @@ export const ExpandableMarketingCardWrapper = ({ guardianBaseURL }: Props) => {
 		: 'Why the Guardian has no paywall';
 
 	return (
-		<ExpandableMarketingCard
-			guardianBaseURL={guardianBaseURL}
-			heading={heading}
-			kicker={kicker}
-			isExpanded={isExpanded}
-			setIsExpanded={setIsExpanded}
-			setIsClosed={setIsClosed}
-		/>
+		<>
+			<Hide when="below" breakpoint="leftCol">
+				<ExpandableMarketingCard
+					guardianBaseURL={guardianBaseURL}
+					heading={heading}
+					kicker={kicker}
+					isExpanded={isExpanded}
+					setIsExpanded={setIsExpanded}
+					setIsClosed={setIsClosed}
+				/>
+			</Hide>
+			<Hide when="above" breakpoint="leftCol">
+				<div
+					css={css`
+						position: sticky;
+						top: 0;
+						${getZIndex('expandableMarketingCardOverlay')};
+						animation-duration: 2s;
+						animation-name: slidein;
+
+						@keyframes slidein {
+							from {
+								translate: -800px 0;
+							}
+
+							to {
+								translate: 0 0;
+							}
+						}
+					`}
+				>
+					<div
+						css={css`
+							position: absolute;
+							width: 100%;
+						`}
+					>
+						<ExpandableMarketingCard
+							guardianBaseURL={guardianBaseURL}
+							heading={heading}
+							kicker={kicker}
+							isExpanded={isExpanded}
+							setIsExpanded={setIsExpanded}
+							setIsClosed={setIsClosed}
+						/>
+					</div>
+				</div>
+			</Hide>
+		</>
 	);
 };

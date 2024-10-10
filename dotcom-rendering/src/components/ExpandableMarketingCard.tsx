@@ -27,7 +27,38 @@ interface BannersIllustrationProps {
 const BannersIllustration = ({ type, styles }: BannersIllustrationProps) => {
 	const { assetOrigin } = useConfig();
 	const src = `${assetOrigin}static/frontend/logos/red-blue-banner-${type}.svg`;
-	return <img src={src} alt="" css={styles} />;
+	const largeSrc = `${assetOrigin}static/frontend/logos/red-blue-banner-${type}-mobile.svg`;
+
+	return (
+		<>
+			<img
+				src={src}
+				alt=""
+				css={[
+					styles,
+					css`
+						display: none;
+						${from.leftCol} {
+							display: inline;
+						}
+					`,
+				]}
+			/>
+			<img
+				src={largeSrc}
+				alt=""
+				css={[
+					styles,
+					css`
+						display: inline;
+						${from.leftCol} {
+							display: none;
+						}
+					`,
+				]}
+			/>
+		</>
+	);
 };
 
 const fillBarStyles = css`
