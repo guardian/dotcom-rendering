@@ -55,23 +55,16 @@ const containerStyles = css`
 const contentStyles = css`
 	position: relative;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: space-between;
-	align-items: center;
-	gap: ${space[1]}px;
-	width: 100%;
+	align-items: start;
+	gap: ${space[4]}px;
+	height: auto;
+	width: auto;
 	padding: ${space[2]}px;
 	border-radius: 0 0 ${space[2]}px ${space[2]}px;
 	background-color: ${palette('--expandable-marketing-card-background')};
 	color: ${neutral[100]};
-
-	${from.leftCol} {
-		flex-direction: column;
-		align-items: start;
-		gap: ${space[4]}px;
-		height: auto;
-		width: auto;
-	}
 `;
 
 const summaryStyles = css`
@@ -80,17 +73,17 @@ const summaryStyles = css`
 	gap: ${space[3]}px;
 	z-index: 1;
 	width: 100%;
-
-	${headlineBold17};
-	${from.desktop} {
-		${headlineBold20};
-	}
 `;
 
 const headingStyles = css`
 	display: flex;
 	gap: ${space[2]}px;
 	justify-content: space-between;
+
+	${headlineBold17};
+	${from.leftCol} {
+		${headlineBold20};
+	}
 `;
 
 const kickerStyles = css`
@@ -105,8 +98,8 @@ const arrowStyles = css`
 	vertical-align: middle;
 	justify-content: center;
 	padding: 0;
-	width: 24px;
-	height: 24px;
+	width: ${space[6]}px;
+	height: ${space[6]}px;
 	background-color: ${sourcePalette.neutral[100]};
 	border-radius: 50%;
 	cursor: pointer;
@@ -116,7 +109,7 @@ const arrowStyles = css`
 		display: block;
 		fill: ${sourcePalette.neutral[0]};
 		position: relative;
-		width: 20px;
+		width: ${space[5]}px;
 		height: auto;
 	}
 `;
