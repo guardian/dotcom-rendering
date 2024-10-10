@@ -5522,6 +5522,12 @@ const pinnedPostBorderDark: PaletteFunction = ({ theme }) => {
 const expandableMarketingCardBackground: PaletteFunction = () =>
 	sourcePalette.brand[400];
 
+const expandableMarketingCardSvgFill: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
+const expandableMarketingCardSvgBackground: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+
 const expandableMarketingCardFillBackgroundLight: PaletteFunction = (
 	format,
 ) => {
@@ -6249,6 +6255,14 @@ const paletteColours = {
 	'--expandable-marketing-card-fill-background': {
 		light: expandableMarketingCardFillBackgroundLight,
 		dark: expandableMarketingCardFillBackgroundDark,
+	},
+	'--expandable-marketing-card-svg-background': {
+		light: expandableMarketingCardSvgBackground,
+		dark: expandableMarketingCardSvgBackground,
+	},
+	'--expandable-marketing-card-svg-fill': {
+		light: expandableMarketingCardSvgFill,
+		dark: expandableMarketingCardSvgFill,
 	},
 	'--explainer-atom-accent': {
 		light: explainerAtomAccentLight,

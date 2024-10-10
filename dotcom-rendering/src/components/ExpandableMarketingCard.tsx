@@ -5,7 +5,6 @@ import {
 	headlineBold17,
 	headlineBold20,
 	neutral,
-	palette as sourcePalette,
 	space,
 	textSans15,
 	textSansBold12,
@@ -21,15 +20,15 @@ import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
 import { useConfig } from './ConfigContext';
 
-interface BannersLogoProps {
+interface BannersIllustrationProps {
 	type: 'faded' | 'top' | 'bottom';
 	styles?: SerializedStyles;
 }
 
-const BannersLogo = ({ type, styles }: BannersLogoProps) => {
+const BannersIllustration = ({ type, styles }: BannersIllustrationProps) => {
 	const { assetOrigin } = useConfig();
 	const src = `${assetOrigin}static/frontend/logos/red-blue-banner-${type}.svg`;
-	return <img src={src} alt="Guardian logo held up by hands" css={styles} />;
+	return <img src={src} alt="" css={styles} />;
 };
 
 const fillBarStyles = css`
@@ -48,8 +47,11 @@ const containerStyles = css`
 	${getZIndex('expandableMarketingCardOverlay')}
 	position: sticky;
 	top: 0;
-	padding-bottom: ${space[5]}px;
-	margin-right: -1px; /* To align with rich link - if we move this feature to production, we should remove this and make rich link align with everything instead */
+
+	${from.leftCol} {
+		padding-bottom: ${space[5]}px;
+		margin-right: -1px; /* To align with rich link - if we move this feature to production, we should remove this and make rich link align with everything instead */
+	}
 `;
 
 const contentStyles = css`
@@ -100,14 +102,14 @@ const arrowStyles = css`
 	padding: 0;
 	width: ${space[6]}px;
 	height: ${space[6]}px;
-	background-color: ${sourcePalette.neutral[100]};
+	background-color: ${palette('--expandable-marketing-card-svg-background')};
 	border-radius: 50%;
 	cursor: pointer;
 
 	svg {
 		flex: 0 0 auto;
 		display: block;
-		fill: ${sourcePalette.neutral[0]};
+		fill: ${palette('--expandable-marketing-card-svg-fill')};
 		position: relative;
 		width: ${space[5]}px;
 		height: auto;
@@ -180,11 +182,17 @@ export const ExpandableMarketingCard = ({
 			<div css={fillBarStyles} />
 			<div css={contentStyles}>
 				{!isExpanded ? (
-					<BannersLogo type="faded" styles={imageTopStyles} />
+					<BannersIllustration type="faded" styles={imageTopStyles} />
 				) : (
 					<>
-						<BannersLogo type="top" styles={imageTopStyles} />
-						<BannersLogo type="bottom" styles={imageBottomStyles} />
+						<BannersIllustration
+							type="top"
+							styles={imageTopStyles}
+						/>
+						<BannersIllustration
+							type="bottom"
+							styles={imageBottomStyles}
+						/>
 					</>
 				)}
 				<div css={summaryStyles}>
@@ -216,7 +224,7 @@ export const ExpandableMarketingCard = ({
 							<h2>We're independent</h2>
 							<p>
 								With no billionaire owner or shareholders, our
-								journalisms is funded by readers
+								journalism is funded by readers
 							</p>
 						</div>
 						<div css={sectionStyles}>
