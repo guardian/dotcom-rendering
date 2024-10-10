@@ -1,9 +1,9 @@
 import { css, type SerializedStyles } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import {
 	focusHalo,
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
+import type { ArticleFormat } from '../lib/format';
 import { paletteDeclarations } from '../palette';
 
 /**

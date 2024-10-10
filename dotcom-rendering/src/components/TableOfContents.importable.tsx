@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDisplay, type ArticleFormat } from '@guardian/libs';
 import {
 	headlineBold17,
 	headlineLight17,
@@ -11,6 +10,7 @@ import {
 	SvgChevronUpSingle,
 } from '@guardian/source/react-components';
 import { useState } from 'react';
+import { ArticleDisplay, type ArticleFormat } from '../lib/format';
 import { palette } from '../palette';
 import type { TableOfContentsItem } from '../types/article';
 

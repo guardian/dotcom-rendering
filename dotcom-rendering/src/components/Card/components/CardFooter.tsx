@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { type ArticleFormat, ArticleSpecial } from '@guardian/libs';
 import { palette, space, textSansBold12 } from '@guardian/source/foundations';
+import { type ArticleFormat, ArticleSpecial } from '../../../lib/format';
 
 type Props = {
 	format: ArticleFormat;

@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '@guardian/libs';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+} from '../lib/format';
 import { BlockquoteBlockComponent } from './BlockquoteBlockComponent';
 
 const shortQuoteHtml =

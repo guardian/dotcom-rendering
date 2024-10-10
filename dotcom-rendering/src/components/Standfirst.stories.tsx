@@ -1,13 +1,13 @@
+import { palette as sourcePalette } from '@guardian/source/foundations';
+import type { StoryObj } from '@storybook/react';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
 	Pillar,
-} from '@guardian/libs';
-import { palette as sourcePalette } from '@guardian/source/foundations';
-import type { StoryObj } from '@storybook/react';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+} from '../lib/format';
 import { Section } from './Section';
 import { Standfirst } from './Standfirst';
 

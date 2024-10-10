@@ -1,9 +1,6 @@
-import {
-	ArticleDisplay,
-	type ArticleFormat,
-	isUndefined,
-} from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import { JSDOM } from 'jsdom';
+import { ArticleDisplay, type ArticleFormat } from '../lib/format';
 import type { FEElement, StarRating, TextBlockElement } from '../types/content';
 
 const isFalseH3 = (element: FEElement): boolean => {

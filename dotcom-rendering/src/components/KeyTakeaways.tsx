@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
 import type { EditionId } from '../lib/edition';
+import type { ArticleFormat } from '../lib/format';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { KeyTakeaway, StarRating } from '../types/content';

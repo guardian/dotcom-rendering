@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, type ArticleFormat, timeAgo } from '@guardian/libs';
+import { timeAgo } from '@guardian/libs';
 import { textSans15, textSansBold15 } from '@guardian/source/foundations';
+import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import { palette } from '../palette';
 import { Island } from './Island';
 import { PulsingDot } from './PulsingDot.importable';

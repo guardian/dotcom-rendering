@@ -1,11 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	ArticleDesign,
-	ArticleDisplay,
-	type ArticleFormat,
-	ArticleSpecial,
-} from '@guardian/libs';
-import {
 	from,
 	headlineLight17,
 	headlineLight20,
@@ -20,6 +14,12 @@ import {
 } from '@guardian/source/foundations';
 import sanitise from 'sanitize-html';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../lib/format';
 import { palette } from '../palette';
 
 type Props = {

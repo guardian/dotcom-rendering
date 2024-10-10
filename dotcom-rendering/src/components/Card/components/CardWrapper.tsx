@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import {
 	palette as sourcePalette,
 	space,
 	until,
 } from '@guardian/source/foundations';
+import type { ArticleFormat } from '../../../lib/format';
 import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
 import { ContainerOverrides } from '../../ContainerOverrides';

@@ -3,13 +3,6 @@
   --
   the palette object is large and ordering helps knowing where to insert new elements
 */
-import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
 import { palette as sourcePalette } from '@guardian/source/foundations';
 import {
 	buttonThemeBrand,
@@ -22,6 +15,14 @@ import {
 	tabsThemeDefault,
 } from '@guardian/source-development-kitchen/react-components';
 import { isMediaCard } from './lib/cardHelpers';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	ArticleSpecial,
+	type ArticleTheme,
+	Pillar,
+} from './lib/format';
 import { transparentColour } from './lib/transparentColour';
 
 // ----- Palette Functions ----- //

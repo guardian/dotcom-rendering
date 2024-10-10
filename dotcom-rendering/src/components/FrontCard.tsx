@@ -1,4 +1,4 @@
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign } from '../lib/format';
 import type { DCRFrontCard } from '../types/front';
 import type { Props as CardProps } from './Card/Card';
 import { Card } from './Card/Card';

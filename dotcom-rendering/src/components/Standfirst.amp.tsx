@@ -1,11 +1,10 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
-import { ArticleSpecial } from '@guardian/libs';
 import {
 	headlineMedium17,
 	palette,
 	textSans20,
 } from '@guardian/source/foundations';
+import { ArticleSpecial, type ArticleTheme } from '../lib/format';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
 
 const ListStyle = (iconColour: string) => css`

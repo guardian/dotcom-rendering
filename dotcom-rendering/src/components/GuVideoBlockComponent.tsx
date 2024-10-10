@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import { unescapeData } from '../lib/escapeData';
+import type { ArticleFormat } from '../lib/format';
 import { Caption } from './Caption';
 
 type Props = {

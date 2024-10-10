@@ -1,5 +1,5 @@
-import { Pillar } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
+import { Pillar } from '../lib/format';
 import type { FEFrontCard, TreatType } from '../types/front';
 
 const SOCCER_TREAT: TreatType = {

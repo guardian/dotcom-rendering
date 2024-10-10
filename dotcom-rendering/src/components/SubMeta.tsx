@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import {
 	from,
 	space,
@@ -8,6 +7,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
+import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import type { BaseLinkType } from '../model/extract-nav';
 import { palette } from '../palette';
 import { Island } from './Island';

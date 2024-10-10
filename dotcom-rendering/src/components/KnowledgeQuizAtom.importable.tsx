@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
-import { ArticleSpecial, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import {
 	article17,
 	palette,
@@ -11,6 +10,7 @@ import {
 } from '@guardian/source/foundations';
 import { Button, Radio, RadioGroup } from '@guardian/source/react-components';
 import { Fragment, useEffect, useState } from 'react';
+import { ArticleSpecial, type ArticleTheme } from '../lib/format';
 import type {
 	AnswerType,
 	KnowledgeQuizAtomType,

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { ArticleContainer } from './ArticleContainer';
 import { Figure } from './Figure';
 import { Flex } from './Flex';

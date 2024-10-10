@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleSpecial, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	headlineMedium14,
@@ -14,6 +13,11 @@ import {
 	textSansBold17,
 } from '@guardian/source/foundations';
 import { getSoleContributor, isContributor } from '../lib/byline';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../lib/format';
 import { palette as themePalette } from '../palette';
 import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
 import type { StarRating as Rating } from '../types/content';

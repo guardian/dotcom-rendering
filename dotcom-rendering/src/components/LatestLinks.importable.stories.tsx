@@ -1,10 +1,10 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
 import fetchMock from 'fetch-mock';
 import type { PropsWithChildren } from 'react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import { ContainerOverrides } from './ContainerOverrides';

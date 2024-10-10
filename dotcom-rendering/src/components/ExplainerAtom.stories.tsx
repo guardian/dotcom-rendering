@@ -1,6 +1,6 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { ExplainerAtom as ExplainerAtomComponent } from './ExplainerAtom';
 
 const html =

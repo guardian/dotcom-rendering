@@ -2,7 +2,7 @@ import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
-} from '@guardian/libs';
+} from '../lib/format';
 import type { FEFrontCardStyle } from '../types/front';
 
 /**

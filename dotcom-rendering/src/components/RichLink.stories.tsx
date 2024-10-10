@@ -1,11 +1,11 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { allModes } from '../../.storybook/modes';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '@guardian/libs';
-import type { Meta, StoryObj } from '@storybook/react';
-import { allModes } from '../../.storybook/modes';
+} from '../lib/format';
 import { palette } from '../palette';
 import { Figure } from './Figure';
 import { RichLink } from './RichLink';

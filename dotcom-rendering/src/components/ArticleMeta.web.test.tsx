@@ -1,6 +1,6 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { render } from '@testing-library/react';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { ArticleMeta, shouldShowContributor } from './ArticleMeta.web';
 import { ConfigProvider } from './ConfigContext';
 

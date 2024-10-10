@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../lib/format';
 import { type RoleType } from '../types/content';
 import { openLightboxForImageId } from './AppsLightboxImageStore.importable';
 import type { Loading } from './CardPicture';

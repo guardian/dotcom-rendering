@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { ReactNode } from 'react';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getSoleContributor } from '../lib/byline';
+import { ArticleDesign, ArticleDisplay } from '../lib/format';
+import type { ArticleFormat } from '../lib/format';
 import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
 import type { TagType } from '../types/tag';

@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	ArticleDesign,
-	type ArticleFormat,
-	ArticleSpecial,
-} from '@guardian/libs';
-import {
 	from,
 	headlineMedium20,
 	headlineMedium24,
@@ -13,6 +8,11 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { unescapeData } from '../lib/escapeData';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../lib/format';
 import { palette } from '../palette';
 import { QuoteIcon } from './QuoteIcon';
 

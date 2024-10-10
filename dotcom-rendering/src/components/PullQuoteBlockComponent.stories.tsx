@@ -1,11 +1,11 @@
+import { breakpoints } from '@guardian/source/foundations';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '@guardian/libs';
-import { breakpoints } from '@guardian/source/foundations';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+} from '../lib/format';
 import { palette as themePalette } from '../palette';
 import { PullQuoteBlockComponent } from './PullQuoteBlockComponent';
 import { Section } from './Section';

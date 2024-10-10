@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { CommentType } from '../../lib/discussion';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/format';
 import { CommentReplyPreview, Preview } from './CommentReplyPreview';
 
 const defaultFormat = {

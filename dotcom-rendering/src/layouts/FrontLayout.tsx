@@ -1,4 +1,4 @@
-import { ArticleDisplay, isOneOf } from '@guardian/libs';
+import { isOneOf } from '@guardian/libs';
 import {
 	background,
 	brandBackground,
@@ -35,6 +35,7 @@ import { badgeFromBranding, isPaidContentSameBranding } from '../lib/branding';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { editionList } from '../lib/edition';
+import { ArticleDisplay } from '../lib/format';
 import {
 	getFrontsBannerAdPositions,
 	getMobileAdPositions,

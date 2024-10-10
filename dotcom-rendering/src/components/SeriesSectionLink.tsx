@@ -1,11 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	ArticleDesign,
-	ArticleDisplay,
-	type ArticleFormat,
-	ArticleSpecial,
-} from '@guardian/libs';
-import {
 	from,
 	headlineBold17,
 	headlineBold20,
@@ -17,6 +11,12 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../lib/format';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { Hide } from './Hide';

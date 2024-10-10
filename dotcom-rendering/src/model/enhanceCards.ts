@@ -1,7 +1,8 @@
-import { ArticleDesign, type ArticleFormat, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import { getSoleContributor } from '../lib/byline';
 import { decideFormat } from '../lib/decideFormat';
 import type { EditionId } from '../lib/edition';
+import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import type { Group } from '../lib/getDataLinkName';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
 import type {

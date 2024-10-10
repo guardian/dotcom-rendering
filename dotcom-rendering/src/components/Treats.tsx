@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	headlineMedium17,
@@ -8,6 +8,7 @@ import {
 } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
 import { Fragment } from 'react';
+import { ArticleDesign, ArticleDisplay } from '../lib/format';
 import { palette } from '../palette';
 import type { TreatType } from '../types/front';
 import { FormatBoundary } from './FormatBoundary';

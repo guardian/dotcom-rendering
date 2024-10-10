@@ -1,6 +1,4 @@
 import { css, jsx } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	article17,
 	from,
@@ -15,6 +13,12 @@ import type { IOptions } from 'sanitize-html';
 import sanitise from 'sanitize-html';
 import { decidePalette } from '../lib/decidePalette';
 import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../lib/format';
 import { palette as themePalette } from '../palette';
 import { logger } from '../server/lib/logging';
 import { DropCap } from './DropCap';

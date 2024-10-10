@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Decorator, Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { getAllDesigns, getAllThemes } from '../lib/format';
 import { SubheadingBlockComponent } from './SubheadingBlockComponent';
 

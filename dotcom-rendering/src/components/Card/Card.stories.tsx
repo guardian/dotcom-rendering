@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
+import { from } from '@guardian/source/foundations';
+import React from 'react';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '@guardian/libs';
-import { from } from '@guardian/source/foundations';
-import React from 'react';
-import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+} from '../../lib/format';
 import type { Branding } from '../../types/branding';
 import type { DCRContainerPalette } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';

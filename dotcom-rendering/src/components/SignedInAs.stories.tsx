@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { SignedInAs } from './SignedInAs';
 
 const aUser = {

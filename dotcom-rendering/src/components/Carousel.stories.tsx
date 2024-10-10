@@ -1,15 +1,15 @@
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
 import type { StoryObj } from '@storybook/react';
 import fetchMock from 'fetch-mock';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '../lib/format';
 import { palette } from '../palette';
 import type { TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';

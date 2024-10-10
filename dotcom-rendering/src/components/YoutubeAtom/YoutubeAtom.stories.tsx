@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import type { ConsentState } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Decorator, Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/format';
 import type {
 	ImagePositionType,
 	ImageSizeType,

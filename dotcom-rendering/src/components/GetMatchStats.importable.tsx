@@ -1,5 +1,5 @@
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import type { SWRConfiguration } from 'swr';
+import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import { useApi } from '../lib/useApi';
 import { useHydrated } from '../lib/useHydrated';
 import type { TeamType } from '../types/sport';

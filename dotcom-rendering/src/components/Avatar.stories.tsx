@@ -1,11 +1,11 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '@guardian/libs';
-import type { Meta, StoryObj } from '@storybook/react';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+} from '../lib/format';
 import { Avatar } from './Avatar';
 
 const meta: Meta<typeof Avatar> = {

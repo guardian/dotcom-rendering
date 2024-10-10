@@ -1,7 +1,7 @@
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { ArticleDesign, ArticleDisplay } from '../lib/format';
 import { getAllThemes } from '../lib/format';
 import { Pagination } from './Pagination';
 

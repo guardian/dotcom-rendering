@@ -1,8 +1,9 @@
-import { type ArticleFormat, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { getEmotionCache } from '../client/islands/emotion';
 import { initHydration } from '../client/islands/initHydration';
+import type { ArticleFormat } from '../lib/format';
 import { useApi } from '../lib/useApi';
 import { Toast } from './Toast';
 

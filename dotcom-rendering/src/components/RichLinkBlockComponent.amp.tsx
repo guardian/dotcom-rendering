@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
 import {
 	headlineMedium17,
 	palette,
 	text,
 	textSans12,
 } from '@guardian/source/foundations';
+import type { ArticleTheme } from '../lib/format';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import type { RichLinkBlockElement } from '../types/content';
 

@@ -1,10 +1,10 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '@guardian/libs';
-import type { Meta, StoryObj } from '@storybook/react';
+} from '../lib/format';
 import { DesignTag } from './DesignTag';
 
 const meta = {

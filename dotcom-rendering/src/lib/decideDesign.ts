@@ -1,4 +1,4 @@
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign } from '../lib/format';
 import type { FEFormat } from '../types/frontend';
 
 /**

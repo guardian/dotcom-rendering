@@ -1,10 +1,7 @@
 import { css } from '@emotion/react';
-import {
-	ArticleDesign,
-	type ArticleFormat,
-	isNonNullable,
-} from '@guardian/libs';
+import { isNonNullable } from '@guardian/libs';
 import { decideTrail } from '../lib/decideTrail';
+import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import { useApi } from '../lib/useApi';
 import { addDiscussionIds } from '../lib/useCommentCount';
 import { palette } from '../palette';

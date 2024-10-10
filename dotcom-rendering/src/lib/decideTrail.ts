@@ -1,4 +1,4 @@
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../lib/format';
 import type { DCRFrontImage } from '../types/front';
 import type { FETrailType, TrailType } from '../types/trails';
 import { decideFormat } from './decideFormat';

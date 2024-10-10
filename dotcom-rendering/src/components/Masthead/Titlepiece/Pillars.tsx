@@ -3,7 +3,6 @@
  * This file was largely inspired by src/components/Pillars.tsx
  */
 import { css } from '@emotion/react';
-import { type ArticleTheme, Pillar } from '@guardian/libs';
 import {
 	from,
 	headlineBold14,
@@ -13,6 +12,7 @@ import {
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
+import { type ArticleTheme, Pillar } from '../../../lib/format';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';

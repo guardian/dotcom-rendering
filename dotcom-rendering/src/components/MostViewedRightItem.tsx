@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import {
 	headlineMedium17,
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
+import { ArticleDesign, ArticleSpecial } from '../lib/format';
 import { useHover } from '../lib/useHover';
 import { palette as themePalette } from '../palette';
 import type { TrailType } from '../types/trails';

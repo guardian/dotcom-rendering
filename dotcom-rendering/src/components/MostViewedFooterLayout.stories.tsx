@@ -1,7 +1,7 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { trails } from '../../fixtures/manual/trails';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { palette } from '../palette';
 import { MostViewedFooter } from './MostViewedFooter.importable';
 import { MostViewedFooterLayout } from './MostViewedFooterLayout';

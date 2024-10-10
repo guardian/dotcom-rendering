@@ -1,4 +1,4 @@
-import { isString, Pillar } from '@guardian/libs';
+import { isString } from '@guardian/libs';
 import { ConfigProvider } from '../components/ConfigContext';
 import { FrontPage } from '../components/FrontPage';
 import { TagPage } from '../components/TagPage';
@@ -9,6 +9,7 @@ import {
 	getPathFromManifest,
 } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
+import { Pillar } from '../lib/format';
 import { polyfillIO } from '../lib/polyfill.io';
 import { themeToPillar } from '../lib/themeToPillar';
 import type { NavType } from '../model/extract-nav';

@@ -1,13 +1,13 @@
+import { storage } from '@guardian/libs';
+import { breakpoints } from '@guardian/source/foundations';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useEffect } from 'react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-	storage,
-} from '@guardian/libs';
-import { breakpoints } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react';
-import { useEffect } from 'react';
+} from '../lib/format';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxLayout } from './LightboxLayout.importable';
 

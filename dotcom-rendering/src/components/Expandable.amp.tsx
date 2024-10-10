@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
 import {
 	article17,
 	headlineMedium20,
@@ -7,6 +6,7 @@ import {
 	textSans15,
 } from '@guardian/source/foundations';
 import React from 'react';
+import type { ArticleTheme } from '../lib/format';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import InfoIcon from '../static/icons/info.svg';
 import PlusIcon from '../static/icons/plus.svg';

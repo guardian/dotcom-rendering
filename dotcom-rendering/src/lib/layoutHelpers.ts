@@ -1,4 +1,4 @@
-import type { Pillar } from '@guardian/libs';
+import type { Pillar } from '../lib/format';
 import type { ArticleDeprecated } from '../types/article';
 import type { LegacyPillar } from '../types/frontend';
 import { decideNavPillar } from './decideNavPillar';

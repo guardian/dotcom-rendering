@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, type ArticleFormat, Pillar } from '@guardian/libs';
 import { headlineMedium14Object, space } from '@guardian/source/foundations';
+import { ArticleDesign, type ArticleFormat, Pillar } from '../lib/format';
 import { palette } from '../palette';
 
 type Props = {

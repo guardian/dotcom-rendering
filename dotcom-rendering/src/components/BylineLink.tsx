@@ -1,4 +1,4 @@
-import { ArticleDesign, type ArticleFormat, isString } from '@guardian/libs';
+import { isString } from '@guardian/libs';
 import { Hide } from '@guardian/source/react-components';
 import { DottedLines } from '@guardian/source-development-kitchen/react-components';
 import {
@@ -6,6 +6,7 @@ import {
 	getSoleContributor,
 	isContributor,
 } from '../lib/byline';
+import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';

@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
-import { type ArticleTheme, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import { textSans12 } from '@guardian/source/foundations';
 import React from 'react';
 import { isEditionId } from '../lib/edition';
+import type { ArticleTheme } from '../lib/format';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import { editionRegionClasses } from '../lib/region-classes.amp';
 import type { Branding as BrandingType } from '../types/branding';

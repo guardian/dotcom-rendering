@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Pillar } from '@guardian/libs';
+import { Pillar } from '../lib/format';
 import { Treats } from './Treats';
 
 export default {

@@ -1,8 +1,8 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { leftColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { defaultFormats } from '../../.storybook/decorators/splitThemeDecorator';
 import { allModes } from '../../.storybook/modes';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { getAllThemes } from '../lib/format';
 import { ArticleMetaApps } from './ArticleMeta.apps';
 

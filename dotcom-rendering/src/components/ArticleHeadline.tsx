@@ -1,12 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
-import {
 	from,
 	headlineBold28,
 	headlineBold34,
@@ -24,6 +17,13 @@ import {
 } from '@guardian/source/foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getAgeWarning } from '../lib/age-warning';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	ArticleSpecial,
+	Pillar,
+} from '../lib/format';
 import { getZIndex } from '../lib/getZIndex';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';

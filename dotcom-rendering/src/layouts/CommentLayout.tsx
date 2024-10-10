@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -43,6 +42,11 @@ import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+} from '../lib/format';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';

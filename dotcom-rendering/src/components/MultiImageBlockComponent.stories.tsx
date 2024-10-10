@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { MultiImageBlockComponent } from './MultiImageBlockComponent';
 import { fourImages } from './MultiImageBlockComponent.mocks';
 import { Section } from './Section';

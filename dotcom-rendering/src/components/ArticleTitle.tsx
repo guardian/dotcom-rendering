@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
+import { from } from '@guardian/source/foundations';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
-} from '@guardian/libs';
-import { from } from '@guardian/source/foundations';
+} from '../lib/format';
 import type { TagType } from '../types/tag';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
