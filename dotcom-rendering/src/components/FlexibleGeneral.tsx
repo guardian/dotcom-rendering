@@ -287,9 +287,11 @@ export const StandardCardLayout = ({
 	absoluteServerTimes,
 	showImage = true,
 	imageLoading,
+	isFirstRow,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
+	isFirstRow: boolean;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
@@ -301,6 +303,7 @@ export const StandardCardLayout = ({
 			padBottom={true}
 			isFlexibleContainer={true}
 			showTopBar={true}
+			splitTopBar={!isFirstRow}
 		>
 			{cards.map((card, cardIndex) => {
 				return (
@@ -359,7 +362,7 @@ export const FlexibleGeneral = ({
 				/>
 			)}
 
-			{groupedCards.map((row) => {
+			{groupedCards.map((row, i) => {
 				switch (row.layout) {
 					case 'oneCardBoosted':
 						return (
@@ -382,6 +385,7 @@ export const FlexibleGeneral = ({
 								showAge={showAge}
 								absoluteServerTimes={absoluteServerTimes}
 								imageLoading={imageLoading}
+								isFirstRow={i === 0}
 							/>
 						);
 				}
