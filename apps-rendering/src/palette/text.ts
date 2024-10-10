@@ -1,12 +1,12 @@
 // ----- Imports ----- //
 
-import type { ArticleFormat } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
+	type ArticleFormat,
 	ArticleSpecial,
-} from '@guardian/libs';
+	Pillar,
+} from '../articleFormat';
 import {
 	brandAlt,
 	culture,
@@ -41,15 +41,15 @@ const mediaArticleBody = (_format: ArticleFormat): Colour => {
 
 const mediaArticleBodyLinkDark = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return news[500];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[500];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[500];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[500];
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[500];
 		case ArticleSpecial.Labs:
 			return labs[400];
@@ -80,15 +80,15 @@ const byline = ({ design, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[400];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[400];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[400];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[400];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[300];
 				case ArticleSpecial.Labs:
 					return labs[400];
@@ -108,15 +108,15 @@ const byline = ({ design, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.Letter:
 		case ArticleDesign.Standard:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[400];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[400];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[400];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[400];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[300];
 				case ArticleSpecial.Labs:
 					return labs[400];
@@ -127,15 +127,15 @@ const byline = ({ design, theme }: ArticleFormat): Colour => {
 			}
 		default:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[400];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[400];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[400];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[400];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[300];
 				case ArticleSpecial.Labs:
 					return labs[400];
@@ -151,13 +151,13 @@ const bylineAnchor = ({ design, theme }: ArticleFormat): Colour => {
 	switch (design) {
 		case ArticleDesign.Analysis:
 			switch (theme) {
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[300];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[300];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[300];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[300];
 				case ArticleSpecial.Labs:
 					return labs[300];
@@ -165,22 +165,22 @@ const bylineAnchor = ({ design, theme }: ArticleFormat): Colour => {
 					return brandAlt[300];
 				case ArticleSpecial.SpecialReportAlt:
 					return palette.specialReportAlt[100];
-				case ArticlePillar.News:
+				case Pillar.News:
 				default:
 					return news[300];
 			}
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[400];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[400];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[400];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[400];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[400];
 				case ArticleSpecial.Labs:
 					return labs[300];
@@ -200,15 +200,15 @@ const bylineAnchor = ({ design, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.Review:
 		case ArticleDesign.Standard:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[400];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[400];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[400];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[400];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[400];
 				case ArticleSpecial.Labs:
 					return labs[300];
@@ -219,15 +219,15 @@ const bylineAnchor = ({ design, theme }: ArticleFormat): Colour => {
 			}
 		default:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[400];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[400];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[400];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[400];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[400];
 				case ArticleSpecial.Labs:
 					return labs[300];
@@ -243,17 +243,17 @@ const bylineAnchorDark = ({ design, theme }: ArticleFormat): Colour => {
 	switch (design) {
 		case ArticleDesign.Analysis:
 			switch (theme) {
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[500];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[500];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[500];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[500];
 				case ArticleSpecial.SpecialReportAlt:
 					return palette.specialReportAlt[700];
-				case ArticlePillar.News:
+				case Pillar.News:
 				default:
 					return news[500];
 			}
@@ -268,15 +268,15 @@ const bylineAnchorDark = ({ design, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.NewsletterSignup:
 		case ArticleDesign.Letter:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[500];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[500];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[500];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[500];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[500];
 				case ArticleSpecial.Labs:
 					return labs[400];
@@ -288,15 +288,15 @@ const bylineAnchorDark = ({ design, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[500];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[500];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[500];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[500];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[500];
 				case ArticleSpecial.Labs:
 					return labs[400];
@@ -307,15 +307,15 @@ const bylineAnchorDark = ({ design, theme }: ArticleFormat): Colour => {
 			}
 		default:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[500];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[500];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[500];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[500];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[500];
 				case ArticleSpecial.Labs:
 					return labs[400];
@@ -337,15 +337,15 @@ const commentCount = (format: ArticleFormat): Colour => {
 	}
 
 	switch (format.theme) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return news[400];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[300];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[300];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[300];
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[200];
 		case ArticleSpecial.Labs:
 			return labs[300];
@@ -365,15 +365,15 @@ const commentCountDark = (format: ArticleFormat): Colour => {
 	}
 
 	switch (format.theme) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return news[500];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[500];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[500];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[500];
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[500];
 		case ArticleSpecial.Labs:
 			return labs[400];
@@ -404,15 +404,15 @@ const dropCap = ({ design, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
 			switch (theme) {
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[300];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[300];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[300];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[300];
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[300];
 				case ArticleSpecial.Labs:
 					return labs[300];
@@ -423,15 +423,15 @@ const dropCap = ({ design, theme }: ArticleFormat): Colour => {
 			}
 		default:
 			switch (theme) {
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[300];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[300];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[300];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[300];
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[300];
 				case ArticleSpecial.Labs:
 					return labs[300];
@@ -459,15 +459,15 @@ const dropCapDark = ({ design, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
 			switch (theme) {
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[500];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[500];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[500];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[500];
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[500];
 				case ArticleSpecial.Labs:
 					return labs[300];
@@ -478,15 +478,15 @@ const dropCapDark = ({ design, theme }: ArticleFormat): Colour => {
 			}
 		default:
 			switch (theme) {
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[500];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[500];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[500];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[500];
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[500];
 				case ArticleSpecial.Labs:
 					return labs[300];
@@ -516,13 +516,13 @@ const headline = ({ design, display, theme }: ArticleFormat): Colour => {
 			}
 
 			switch (theme) {
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[300];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[300];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[300];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[300];
 				case ArticleSpecial.SpecialReportAlt:
 					return neutral[7];
@@ -541,7 +541,7 @@ const headline = ({ design, display, theme }: ArticleFormat): Colour => {
 const headlineDark = ({ design, theme }: ArticleFormat): Colour => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
-			return theme === ArticlePillar.Culture ? neutral[86] : neutral[93];
+			return theme === Pillar.Culture ? neutral[86] : neutral[93];
 		case ArticleDesign.DeadBlog:
 			return neutral[93];
 		case ArticleDesign.Standard:
@@ -571,15 +571,15 @@ const bylineLeftColumn = (format: ArticleFormat): Colour => {
 	switch (format.design) {
 		case ArticleDesign.DeadBlog:
 			switch (format.theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[400];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[300];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[300];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[300];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[300];
 				case ArticleSpecial.Labs:
 					return labs[300];
@@ -590,15 +590,15 @@ const bylineLeftColumn = (format: ArticleFormat): Colour => {
 			}
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[300];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[300];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[300];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[300];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[300];
 				case ArticleSpecial.Labs:
 					return labs[300];
@@ -628,19 +628,19 @@ const bylineInline = (format: ArticleFormat): Colour => {
 		case ArticleDesign.DeadBlog:
 		default:
 			switch (format.theme) {
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[300];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[300];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[300];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[200];
 				case ArticleSpecial.Labs:
 					return labs[300];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[300];
-				case ArticlePillar.News:
+				case Pillar.News:
 				default:
 					return news[400];
 			}
@@ -770,15 +770,15 @@ const linkDark = ({ design, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[500];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[500];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[500];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[500];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[500];
 				case ArticleSpecial.Labs:
 					return specialReport[500];
@@ -789,15 +789,15 @@ const linkDark = ({ design, theme }: ArticleFormat): Colour => {
 			}
 		default:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[500];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[500];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[500];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[500];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[500];
 				case ArticleSpecial.Labs:
 					return specialReport[500];
@@ -814,15 +814,15 @@ const articleLink = (format: ArticleFormat): Colour => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			switch (format.theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[400];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[400];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[400];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[350];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[300];
 				case ArticleSpecial.Labs:
 					return specialReport[400];
@@ -848,15 +848,15 @@ const articleLink = (format: ArticleFormat): Colour => {
 		case ArticleDesign.Review:
 		case ArticleDesign.Standard:
 			switch (format.theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[300];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[300];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[300];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[300];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[300];
 				case ArticleSpecial.Labs:
 					return specialReport[300];
@@ -867,15 +867,15 @@ const articleLink = (format: ArticleFormat): Colour => {
 			}
 		default:
 			switch (format.theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[300];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[300];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[300];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[300];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[300];
 				case ArticleSpecial.Labs:
 					return specialReport[300];
@@ -889,15 +889,15 @@ const articleLink = (format: ArticleFormat): Colour => {
 
 const interactiveAtomLink = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return news[400];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[400];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[400];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[400];
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[400];
 		case ArticleSpecial.Labs:
 			return labs[400];
@@ -910,15 +910,15 @@ const interactiveAtomLink = (format: ArticleFormat): Colour => {
 
 const keyEventsInline = ({ theme }: ArticleFormat): Colour => {
 	switch (theme) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return news[400];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[400];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[400];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[350];
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[300];
 		case ArticleSpecial.Labs:
 			return labs[400];
@@ -931,15 +931,15 @@ const keyEventsInline = ({ theme }: ArticleFormat): Colour => {
 
 const keyEventsLeftColumn = ({ theme }: ArticleFormat): Colour => {
 	switch (theme) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return news[400];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[300];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[300];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[300];
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[300];
 		case ArticleSpecial.Labs:
 			return labs[300];
@@ -952,15 +952,15 @@ const keyEventsLeftColumn = ({ theme }: ArticleFormat): Colour => {
 
 const mediaArticleSeries = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return news[500];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[500];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[500];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[500];
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[500];
 		case ArticleSpecial.Labs:
 			return labs[400];
@@ -1027,15 +1027,15 @@ const standfirstLink = ({ design, theme }: ArticleFormat): Colour => {
 			return neutral[100];
 		case ArticleDesign.DeadBlog:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[400];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[300];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[300];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[300];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[200];
 				case ArticleSpecial.Labs:
 					return labs[300];
@@ -1050,15 +1050,15 @@ const standfirstLink = ({ design, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[500];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[500];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[500];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[500];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[500];
 				case ArticleSpecial.Labs:
 					return labs[300];
@@ -1081,15 +1081,15 @@ const standfirstLink = ({ design, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.Review:
 		case ArticleDesign.Standard:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[400];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[400];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[400];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[400];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[400];
 				case ArticleSpecial.Labs:
 					return labs[300];
@@ -1100,15 +1100,15 @@ const standfirstLink = ({ design, theme }: ArticleFormat): Colour => {
 			}
 		default:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[400];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[400];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[400];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[400];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[400];
 				case ArticleSpecial.Labs:
 					return labs[300];
@@ -1130,15 +1130,15 @@ const standfirstLinkDark = ({ design, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.Video:
 		case ArticleDesign.Picture:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[500];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[500];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[500];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[500];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[500];
 				case ArticleSpecial.Labs:
 					return labs[300];
@@ -1187,15 +1187,15 @@ const kicker = (format: ArticleFormat): Colour => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[600];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[600];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return neutral[100];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[600];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[500];
 				case ArticleSpecial.Labs:
 				default:
@@ -1206,15 +1206,15 @@ const kicker = (format: ArticleFormat): Colour => {
 		case ArticleDesign.Video:
 		case ArticleDesign.Picture:
 			switch (format.theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[600];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[600];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[550];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[500];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[500];
 				case ArticleSpecial.Labs:
 					return labs[400];
@@ -1223,15 +1223,15 @@ const kicker = (format: ArticleFormat): Colour => {
 			}
 		default:
 			switch (format.theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[400];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[400];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[300];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[400];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[400];
 				case ArticleSpecial.Labs:
 					return labs[400];
@@ -1243,13 +1243,13 @@ const kicker = (format: ArticleFormat): Colour => {
 
 const editionsKicker = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[400];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[400];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[400];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[400];
 		case ArticleSpecial.SpecialReport:
 		case ArticleSpecial.Labs:
@@ -1266,15 +1266,15 @@ const seriesTitle = ({ design, display, theme }: ArticleFormat): Colour => {
 			return neutral[100];
 		case ArticleDesign.DeadBlog:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[400];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[400];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[400];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[400];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[400];
 				case ArticleSpecial.Labs:
 					return labs[400];
@@ -1285,15 +1285,15 @@ const seriesTitle = ({ design, display, theme }: ArticleFormat): Colour => {
 			}
 		case ArticleDesign.LiveBlog:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[600];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[500];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[600];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[600];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[600];
 				case ArticleSpecial.Labs:
 					return labs[400];
@@ -1325,15 +1325,15 @@ const seriesTitle = ({ design, display, theme }: ArticleFormat): Colour => {
 			}
 
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[400];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[400];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[400];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[400];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[400];
 				case ArticleSpecial.Labs:
 					return labs[300];
@@ -1348,15 +1348,15 @@ const seriesTitle = ({ design, display, theme }: ArticleFormat): Colour => {
 			}
 
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[400];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[400];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[400];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[400];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[400];
 				case ArticleSpecial.Labs:
 					return labs[300];
@@ -1395,15 +1395,15 @@ const relatedCardTimeAgoDark = (_format: ArticleFormat): Colour => neutral[60];
 
 const richLink = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return news[400];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[400];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[400];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[400];
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[400];
 		case ArticleSpecial.Labs:
 			return labs[400];
@@ -1451,15 +1451,15 @@ const seriesTitleDark = ({ design, display, theme }: ArticleFormat): Colour => {
 			}
 
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[500];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[500];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[500];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[500];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[500];
 				case ArticleSpecial.Labs:
 					return labs[400];
@@ -1474,15 +1474,15 @@ const seriesTitleDark = ({ design, display, theme }: ArticleFormat): Colour => {
 			}
 
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[500];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[500];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[500];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[500];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[500];
 				case ArticleSpecial.Labs:
 					return labs[400];
@@ -1496,15 +1496,15 @@ const seriesTitleDark = ({ design, display, theme }: ArticleFormat): Colour => {
 
 const pagination = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return news[400];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[300];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[300];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[300];
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[300];
 		case ArticleSpecial.Labs:
 			return labs[300];
@@ -1531,15 +1531,15 @@ const pullquote = ({ design, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[400];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[400];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[400];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[400];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[400];
 				case ArticleSpecial.Labs:
 					return labs[400];
@@ -1550,15 +1550,15 @@ const pullquote = ({ design, theme }: ArticleFormat): Colour => {
 			}
 		default:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[400];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[400];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[400];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[400];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[400];
 				case ArticleSpecial.Labs:
 					return labs[400];
@@ -1586,15 +1586,15 @@ const pullquoteDark = ({ design, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[500];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[500];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[500];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[500];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[500];
 				case ArticleSpecial.Labs:
 					return labs[400];
@@ -1605,15 +1605,15 @@ const pullquoteDark = ({ design, theme }: ArticleFormat): Colour => {
 			}
 		default:
 			switch (theme) {
-				case ArticlePillar.News:
+				case Pillar.News:
 					return news[500];
-				case ArticlePillar.Lifestyle:
+				case Pillar.Lifestyle:
 					return lifestyle[500];
-				case ArticlePillar.Sport:
+				case Pillar.Sport:
 					return sport[500];
-				case ArticlePillar.Culture:
+				case Pillar.Culture:
 					return culture[500];
-				case ArticlePillar.Opinion:
+				case Pillar.Opinion:
 					return opinion[500];
 				case ArticleSpecial.Labs:
 					return labs[400];

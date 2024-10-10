@@ -3,9 +3,9 @@
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
-} from '@guardian/libs';
+	Pillar,
+} from '../../articleFormat';
 import Paragraph from './';
 
 // ----- Stories ----- //
@@ -13,7 +13,7 @@ import Paragraph from './';
 const standard = {
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 };
 
 const labs = {

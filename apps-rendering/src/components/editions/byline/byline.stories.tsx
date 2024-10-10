@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDisplay, Pillar } from '../../../articleFormat';
 import { none, some } from '../../../../vendor/@guardian/types/index';
 import { parse } from 'client/parser';
 import type { Contributor } from 'contributor';
@@ -64,7 +64,7 @@ const Default = (): ReactElement => (
 			...article,
 			display: ArticleDisplay.Standard,
 			bylineHtml: mockBylineHtml,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -74,7 +74,7 @@ const Analysis = (): ReactElement => (
 		item={{
 			...analysis,
 			bylineHtml: mockBylineHtml,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -84,7 +84,7 @@ const Feature = (): ReactElement => (
 		item={{
 			...feature,
 			bylineHtml: mockBylineHtml,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -94,7 +94,7 @@ const Review = (): ReactElement => (
 		item={{
 			...review,
 			bylineHtml: mockBylineHtml,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -105,7 +105,7 @@ const Showcase = (): ReactElement => (
 			...article,
 			display: ArticleDisplay.Showcase,
 			bylineHtml: mockBylineHtml,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -115,7 +115,7 @@ const Interview = (): ReactElement => (
 		item={{
 			...interview,
 			bylineHtml: mockBylineHtml,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -130,7 +130,7 @@ const Comment = (): ReactElement => (
 			item={{
 				...comment,
 				bylineHtml: mockBylineHtml,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 				contributors: contributors,
 			}}
 		/>

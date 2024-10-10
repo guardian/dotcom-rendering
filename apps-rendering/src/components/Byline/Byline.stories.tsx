@@ -3,9 +3,9 @@
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
-} from '@guardian/libs';
+	Pillar,
+} from '../../articleFormat';
 import { parse } from 'client/parser';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
 import Byline from './';
@@ -27,7 +27,7 @@ const mockBylineHtml = parseByline(
 
 const Default = () => (
 	<Byline
-		theme={ArticlePillar.News}
+		theme={Pillar.News}
 		design={ArticleDesign.Standard}
 		display={ArticleDisplay.Standard}
 		bylineHtml={mockBylineHtml}
@@ -36,7 +36,7 @@ const Default = () => (
 
 const Analysis = () => (
 	<Byline
-		theme={ArticlePillar.News}
+		theme={Pillar.News}
 		design={ArticleDesign.Analysis}
 		display={ArticleDisplay.Standard}
 		bylineHtml={mockBylineHtml}
@@ -45,7 +45,7 @@ const Analysis = () => (
 
 const Comment = () => (
 	<Byline
-		theme={ArticlePillar.Opinion}
+		theme={Pillar.Opinion}
 		design={ArticleDesign.Comment}
 		display={ArticleDisplay.Standard}
 		bylineHtml={mockBylineHtml}

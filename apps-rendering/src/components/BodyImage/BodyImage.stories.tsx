@@ -1,11 +1,7 @@
 // ----- Imports ----- //
 
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleElementRole,
-	ArticlePillar,
-} from '@guardian/libs';
+import { ArticleElementRole } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../articleFormat';
 import { none } from '../../../vendor/@guardian/types/index';
 import { image } from 'fixtures/image';
 import { Optional } from 'optional';
@@ -16,7 +12,7 @@ import BodyImage from '.';
 const format = {
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 };
 const caption = Optional.some(
 	'Age of the train … a tourist train in Switzerland. Photograph: Kisa_Markiza/Getty Images',

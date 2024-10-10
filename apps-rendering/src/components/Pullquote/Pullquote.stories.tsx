@@ -1,11 +1,11 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../articleFormat';
 import { some } from '../../../vendor/@guardian/types/index';
 import Pullquote from './';
 
 const standard = {
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 };
 
 const Default = () => (

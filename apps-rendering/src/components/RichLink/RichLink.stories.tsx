@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../articleFormat';
 import { from, remSpace } from '@guardian/source/foundations';
 import RichLink, { richLinkWidth } from './';
 
@@ -19,7 +19,7 @@ const Default = () => (
 			format={{
 				design: ArticleDesign.Standard,
 				display: ArticleDisplay.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			linkText={linkText}
 			url={url}
@@ -45,7 +45,7 @@ const Analysis = () => (
 				format={{
 					design: ArticleDesign.Analysis,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				linkText={linkText}
 				url={url}

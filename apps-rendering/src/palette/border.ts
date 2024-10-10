@@ -1,7 +1,11 @@
 // ----- Imports ----- //
 
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+	Pillar,
+} from '../articleFormat';
 import {
 	culture,
 	labs,
@@ -19,15 +23,15 @@ import type { Colour } from './colour';
 
 const articleLink = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[400];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[400];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[400];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[400];
-		case ArticlePillar.News:
+		case Pillar.News:
 		default:
 			return news[400];
 	}
@@ -62,15 +66,15 @@ const interactiveAtomLink = (_format: ArticleFormat): Colour => {
 
 const liveBlock = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return news[400];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[300];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[400];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[300];
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[300];
 		case ArticleSpecial.Labs:
 			return labs[300];
@@ -83,15 +87,15 @@ const liveBlock = (format: ArticleFormat): Colour => {
 
 const liveBlockDark = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return news[500];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[500];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[500];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[500];
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[500];
 		case ArticleSpecial.Labs:
 			return labs[400];
@@ -119,15 +123,15 @@ const standfirstLink = (format: ArticleFormat): Colour => {
 	}
 
 	switch (format.theme) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return news[600];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[500];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[600];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[600];
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[600];
 		case ArticleSpecial.Labs:
 			return labs[300];
@@ -150,15 +154,15 @@ const standfirstBlogLink = (format: ArticleFormat): Colour => {
 
 const richLink = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return news[400];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[400];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[400];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[400];
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[400];
 		case ArticleSpecial.Labs:
 			return labs[400];
@@ -173,15 +177,15 @@ const richLinkSvg = richLink;
 
 const richLinkSvgDark = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return news[500];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[500];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[500];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[500];
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[500];
 		case ArticleSpecial.Labs:
 			return labs[300];
@@ -230,15 +234,15 @@ const pagination = (format: ArticleFormat): Colour => {
 
 const pinnedPost = (format: ArticleFormat): string => {
 	switch (format.theme) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return news[300];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[300];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[300];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[300];
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[300];
 		case ArticleSpecial.Labs:
 			return labs[300];

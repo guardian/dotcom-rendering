@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ArticleDisplay, ArticlePillar, Pillar } from '@guardian/libs';
+import { ArticleDisplay, Pillar } from '../../../articleFormat';
 import { article, cartoon, review } from 'fixtures/item';
 import type { ReactElement } from 'react';
 import HeaderMedia from './index';
@@ -29,7 +29,7 @@ const Image = (): ReactElement => (
 	<HeaderMedia
 		item={{
 			...article,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -39,7 +39,7 @@ const FullScreen = (): ReactElement => (
 		item={{
 			...article,
 			display: ArticleDisplay.Immersive,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -48,7 +48,7 @@ const WithStarRating = (): ReactElement => (
 	<HeaderMedia
 		item={{
 			...review,
-			theme: ArticlePillar.Culture,
+			theme: Pillar.Culture,
 		}}
 	/>
 );
@@ -58,7 +58,7 @@ const Video = (): ReactElement => (
 		item={{
 			...article,
 			mainMedia: video,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );

@@ -1,10 +1,9 @@
 // ----- Imports ----- //
 
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
-import { ArticleSpecial } from '@guardian/libs';
+import { ArticleSpecial, formatToString } from '../../articleFormat';
 import { breakpoints } from '@guardian/source/foundations';
 import type { StoryFn } from '@storybook/react';
-import { formatToString } from 'articleFormat';
 import {
 	analysis,
 	article,

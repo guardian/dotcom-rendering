@@ -1,7 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleSpecial } from '@guardian/libs';
+import { type ArticleFormat, ArticleSpecial } from '../../articleFormat';
 import {
 	from,
 	headlineMediumItalic20,

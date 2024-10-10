@@ -6,7 +6,7 @@
 
 // ----- Imports ----- //
 
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../articleFormat';
 import { none } from '../../../vendor/@guardian/types/index';
 import { FollowTagStatus } from 'components/FollowStatus';
 import type { Contributor } from 'contributor';
@@ -19,7 +19,7 @@ import Follow from './';
 // ----- Setup ----- //
 
 const followFormat = {
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
 };

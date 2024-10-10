@@ -1,6 +1,9 @@
 // ----- Imports ----- //
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../../articleFormat';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import AnalysisByline from './AnalysisByline';
 import {

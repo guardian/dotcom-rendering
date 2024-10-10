@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../articleFormat';
 import FirstPublished from '.';
 
 // ----- Stories ----- //
@@ -15,7 +15,7 @@ const Default = () => (
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 		edition={Edition.UK}
 	/>
@@ -30,7 +30,7 @@ const PinnedPost = () => (
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 		edition={Edition.UK}
 	/>
@@ -45,7 +45,7 @@ const OriginalPinnedPost = () => (
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 		edition={Edition.UK}
 	/>

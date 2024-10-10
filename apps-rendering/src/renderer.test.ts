@@ -9,12 +9,11 @@ import {
 	shouldShowDropCap,
 } from 'renderer';
 import { JSDOM } from 'jsdom';
-import { ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from 'articleFormat';
 import { isValidElement, ReactNode } from 'react';
 import { compose } from 'lib';
 import { BodyElement, ElementKind } from 'bodyElement';
 import { none, some } from '../vendor/@guardian/types/index';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { EmbedKind } from 'embed';
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
@@ -542,7 +541,7 @@ describe('Shows drop caps', () => {
 	const positionAllowsDropCap = true;
 	const format = {
 		display: ArticleDisplay.Standard,
-		theme: ArticlePillar.Culture,
+		theme: Pillar.Culture,
 		design: ArticleDesign.Interview,
 	};
 

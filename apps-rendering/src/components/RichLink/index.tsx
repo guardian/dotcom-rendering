@@ -1,7 +1,12 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	type ArticleTheme,
+	Pillar,
+} from '../../articleFormat';
 import {
 	from,
 	headlineBold17,
@@ -72,23 +77,23 @@ const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
 		transition: all 0.2s ease;
 
 		&.js-news {
-			${richLinkPillarStyles(formatFromTheme(ArticlePillar.News))}
+			${richLinkPillarStyles(formatFromTheme(Pillar.News))}
 		}
 
 		&.js-opinion {
-			${richLinkPillarStyles(formatFromTheme(ArticlePillar.Opinion))}
+			${richLinkPillarStyles(formatFromTheme(Pillar.Opinion))}
 		}
 
 		&.js-sport {
-			${richLinkPillarStyles(formatFromTheme(ArticlePillar.Sport))}
+			${richLinkPillarStyles(formatFromTheme(Pillar.Sport))}
 		}
 
 		&.js-culture {
-			${richLinkPillarStyles(formatFromTheme(ArticlePillar.Culture))}
+			${richLinkPillarStyles(formatFromTheme(Pillar.Culture))}
 		}
 
 		&.js-lifestyle {
-			${richLinkPillarStyles(formatFromTheme(ArticlePillar.Lifestyle))}
+			${richLinkPillarStyles(formatFromTheme(Pillar.Lifestyle))}
 		}
 
 		img {

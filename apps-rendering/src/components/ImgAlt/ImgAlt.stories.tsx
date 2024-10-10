@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../articleFormat';
 import { none } from '../../../vendor/@guardian/types/index';
 import { image } from 'fixtures/image';
 import Img from '.';
@@ -19,7 +19,7 @@ const Default = () => (
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 		lightbox={none}
 	/>
@@ -38,7 +38,7 @@ const Placeholder = () => (
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 		lightbox={none}
 	/>

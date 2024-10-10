@@ -2,7 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../../articleFormat';
 import { headlineLight34 } from '@guardian/source/foundations';
 import { text } from 'palette';
 import { darkModeCss } from 'styles';

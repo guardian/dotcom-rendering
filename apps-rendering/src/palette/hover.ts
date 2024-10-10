@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import { type ArticleFormat, ArticleSpecial, Pillar } from '../articleFormat';
 import {
 	culture,
 	labs,
@@ -19,15 +18,15 @@ import type { Colour } from './colour';
 
 const pagination = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return news[400];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[300];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[300];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[300];
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[300];
 		case ArticleSpecial.Labs:
 			return labs[300];

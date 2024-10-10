@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../../articleFormat';
 import { neutral, remSpace, textSans17 } from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';

@@ -3,7 +3,7 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../../articleFormat';
 import { remSpace } from '@guardian/source/foundations';
 import { background, border, text } from 'palette';
 import { darkModeCss } from 'styles';

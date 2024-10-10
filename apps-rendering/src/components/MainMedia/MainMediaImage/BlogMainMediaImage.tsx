@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../../../articleFormat';
 import { between, remSpace } from '@guardian/source/foundations';
 import { none } from '../../../../vendor/@guardian/types/index';
 import type { Image } from 'image';

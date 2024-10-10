@@ -1,8 +1,7 @@
 // ----- Imports ----- //
 
 import { css, keyframes } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat } from '../../articleFormat';
 import { neutral, pxToRem, textSans12 } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { makeRelativeDate } from 'date';

@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../../articleFormat';
 import { from, remSpace } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import CommentCount from 'components/CommentCount';

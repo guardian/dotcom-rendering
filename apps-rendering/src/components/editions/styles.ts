@@ -1,7 +1,11 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	Pillar,
+} from '../../articleFormat';
 import {
 	brandAlt,
 	culture,
@@ -111,15 +115,15 @@ export const headerBackgroundColour = (format: ArticleFormat): Colour => {
 
 	if (format.design === ArticleDesign.Comment) {
 		switch (format.theme) {
-			case ArticlePillar.Culture:
+			case Pillar.Culture:
 				return culture[800];
-			case ArticlePillar.Sport:
+			case Pillar.Sport:
 				return sport[800];
-			case ArticlePillar.News:
+			case Pillar.News:
 				return news[800];
-			case ArticlePillar.Lifestyle:
+			case Pillar.Lifestyle:
 				return lifestyle[800];
-			case ArticlePillar.Opinion:
+			case Pillar.Opinion:
 				return opinion[800];
 			default:
 				return neutral[100];
@@ -128,7 +132,7 @@ export const headerBackgroundColour = (format: ArticleFormat): Colour => {
 
 	if (format.design === ArticleDesign.Review) {
 		switch (format.theme) {
-			case ArticlePillar.Culture:
+			case Pillar.Culture:
 				return culture[800];
 			default:
 				return neutral[100];
@@ -140,11 +144,11 @@ export const headerBackgroundColour = (format: ArticleFormat): Colour => {
 
 export const interviewBackgroundColour = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return brandAlt[400];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[600];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[800];
 		default:
 			return neutral[100];

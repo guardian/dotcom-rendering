@@ -1,10 +1,10 @@
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../../articleFormat';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
-} from '@guardian/libs';
+	Pillar,
+} from '../../articleFormat';
 import { explainer } from 'fixtures/item';
 import type { ReactElement } from 'react';
 import TableOfContents from '.';
@@ -12,13 +12,13 @@ import TableOfContents from '.';
 const format: ArticleFormat = {
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 };
 
 const immersiveDisplayFormat: ArticleFormat = {
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Immersive,
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 };
 
 const labsThemeFormat: ArticleFormat = {
@@ -30,7 +30,7 @@ const labsThemeFormat: ArticleFormat = {
 const numberedListDisplayFormat: ArticleFormat = {
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.NumberedList,
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 };
 
 const numberedListDisplayLabsThemeFormat: ArticleFormat = {

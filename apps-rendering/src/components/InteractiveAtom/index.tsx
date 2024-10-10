@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css, jsx as styledH } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../../articleFormat';
 import { remSpace } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';

@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../articleFormat';
 import { breakpoints } from '@guardian/source/foundations';
 import { some } from '../../../vendor/@guardian/types/index';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
@@ -12,7 +12,7 @@ import CommentCount from './';
 const Default = () => (
 	<CommentCount
 		count={some(1234)}
-		theme={ArticlePillar.News}
+		theme={Pillar.News}
 		design={ArticleDesign.Standard}
 		display={ArticleDisplay.Standard}
 		commentable={true}

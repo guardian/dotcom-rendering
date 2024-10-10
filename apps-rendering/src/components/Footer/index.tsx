@@ -1,7 +1,10 @@
 // ----- Imports ----- //
 
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+} from '../../articleFormat';
 import DefaultFooter, { defaultStyles } from './Footer.defaults';
 import GalleryFooter from './GalleryFooter';
 import ImmersiveFooter from './ImmersiveFooter';

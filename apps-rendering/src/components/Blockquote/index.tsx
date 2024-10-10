@@ -2,7 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../../articleFormat';
 import { remSpace } from '@guardian/source/foundations';
 import { fill } from 'palette';
 import type { ReactNode } from 'react';

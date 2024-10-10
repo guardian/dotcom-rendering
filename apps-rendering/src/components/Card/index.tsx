@@ -2,13 +2,13 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
-import type { ArticleFormat } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
+	type ArticleFormat,
 	ArticleSpecial,
-} from '@guardian/libs';
+	Pillar,
+} from '../../articleFormat';
 import {
 	from,
 	headlineMedium17,
@@ -539,7 +539,7 @@ const formatFromRelatedItem = (
 				design: ArticleDesign.Comment,
 				theme:
 					pillar === 'pillar/news'
-						? ArticlePillar.Opinion
+						? Pillar.Opinion
 						: getPillarOrElseNews(pillar),
 				display: ArticleDisplay.Standard,
 			};

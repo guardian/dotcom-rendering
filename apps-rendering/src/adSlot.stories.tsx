@@ -1,14 +1,18 @@
 // ----- Imports ----- //
 
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	Pillar,
+} from 'articleFormat';
 import AdSlot from 'adSlot';
 import type { ReactElement } from 'react';
 
 // ----- Stories ----- //
 
 const mockFormat: ArticleFormat = {
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
 };
