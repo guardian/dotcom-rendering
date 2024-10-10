@@ -53,11 +53,6 @@ import type { BannerTemplateSettings, CtaSettings } from './settings';
 import { buttonStyles } from './styles/buttonStyles';
 import { templateSpacing } from './styles/templateStyles';
 
-const tickerContainerStyles = css`
-	padding-bottom: ${space[5]}px;
-	padding-top: ${space[1]}px;
-`;
-
 const buildImageSettings = (
 	design: BannerDesignImage | BannerDesignHeaderImage,
 ): Image | undefined => {
@@ -336,19 +331,9 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						/>
 					)}
 
-					<div css={templateSpacing.bannerBodyCopy}>
-						<DesignableBannerBody
-							mainContent={content.mainContent}
-							mobileContent={content.mobileContent}
-							highlightedTextSettings={
-								templateSettings.highlightedTextSettings
-							}
-						/>
-					</div>
-
 					{tickerSettings?.tickerData &&
 						templateSettings.tickerStylingSettings && (
-							<div css={tickerContainerStyles}>
+							<div css={templateSpacing.bannerTicker}>
 								<Ticker
 									currencySymbol={
 										tickerSettings.currencySymbol
@@ -365,6 +350,15 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								/>
 							</div>
 						)}
+					<div css={templateSpacing.bannerBodyCopy}>
+						<DesignableBannerBody
+							mainContent={content.mainContent}
+							mobileContent={content.mobileContent}
+							highlightedTextSettings={
+								templateSettings.highlightedTextSettings
+							}
+						/>
+					</div>
 
 					{!showChoiceCards && (
 						<DesignableBannerCtas
