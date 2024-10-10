@@ -70,23 +70,31 @@ const carouselStyles = css`
 	scroll-behavior: smooth;
 	overscroll-behavior-x: contain;
 	overscroll-behavior-y: auto;
-	scroll-padding-left: 10px;
 	/**
-	* Hide scrollbars
-	* See: https://stackoverflow.com/a/38994837
-	*/
+	 * Hide scrollbars
+	 * See: https://stackoverflow.com/a/38994837
+	 */
 	::-webkit-scrollbar {
 		display: none; /* Safari and Chrome */
 	}
 	scrollbar-width: none; /* Firefox */
 	position: relative;
+
+	/* Extend carousel into grid gutter on mobile */
+	margin-right: -10px;
+	${from.mobileLandscape} {
+		margin-right: -20px;
+	}
+	${from.tablet} {
+		margin-right: 0;
+	}
 `;
 
 const itemStyles = css`
 	scroll-snap-align: start;
 	grid-area: span 1;
 	position: relative;
-	margin: ${space[3]}px 10px;
+	margin: 0 10px;
 `;
 
 const verticalLineStyles = css`
