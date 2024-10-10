@@ -213,9 +213,9 @@ const decideCardProperties = (
 		case 'boost':
 		default:
 			return {
-				headlineSize: 'large',
-				headlineSizeOnMobile: 'large',
-				headlineSizeOnTablet: 'large',
+				headlineSize: 'tiny',
+				headlineSizeOnMobile: 'tiny',
+				headlineSizeOnTablet: 'tiny',
 				imageSize: 'medium',
 			};
 	}
