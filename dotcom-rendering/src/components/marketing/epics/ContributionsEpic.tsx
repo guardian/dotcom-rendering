@@ -122,6 +122,11 @@ const articleCountAboveContainerStyles = css`
 	margin-bottom: ${space[4]}px;
 `;
 
+const tickerContainerStyles = css`
+	padding-bottom: ${space[5]}px;
+	padding-top: ${space[1]}px;
+`;
+
 // EpicHeader - local component
 // -------------------------------------------
 interface EpicHeaderProps {
@@ -402,15 +407,17 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 			)}
 
 			{tickerSettings?.tickerData && (
-				<Ticker
-					currencySymbol={tickerSettings.currencySymbol}
-					copy={{
-						headline: tickerSettings.copy.countLabel,
-					}}
-					tickerData={tickerSettings.tickerData}
-					tickerStylingSettings={defaultTickerStylingSettings}
-					size={'medium'}
-				/>
+				<div css={tickerContainerStyles}>
+					<Ticker
+						currencySymbol={tickerSettings.currencySymbol}
+						copy={{
+							headline: tickerSettings.copy.countLabel,
+						}}
+						tickerData={tickerSettings.tickerData}
+						tickerStylingSettings={defaultTickerStylingSettings}
+						size={'medium'}
+					/>
+				</div>
 			)}
 
 			{image && (

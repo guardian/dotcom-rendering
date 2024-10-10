@@ -11,6 +11,8 @@ import {
 	palette,
 	space,
 } from '@guardian/source/foundations';
+import { Ticker } from '@guardian/source-development-kitchen/react-components';
+import type { TickerSettings } from '@guardian/source-development-kitchen/react-components';
 import {
 	containsNonArticleCountPlaceholder,
 	replaceNonArticleCountPlaceholders,
@@ -60,17 +62,9 @@ const container = (tracking: Tracking, isInTestVariant: boolean) => css`
 		}
 	}
 
-	& > * + * {
-		margin-top: ${space[3]}px;
-	}
-
 	${from.tablet} {
 		padding-left: ${tracking.clientName === 'dcr' ? '60px' : '80px'};
 		padding-right: 20px;
-
-		& > * + * {
-			margin-top: ${space[4]}px;
-		}
 	}
 `;
 
@@ -109,6 +103,18 @@ const yellowHeading = (tracking: Tracking, isInTestVariant: boolean) => css`
 		padding-right: 20px;
 	}
 `;
+
+const tickerContainer = css`
+	margin-top: ${space[5]}px;
+`;
+
+const defaultTickerStylingSettings: TickerSettings['tickerStylingSettings'] = {
+	filledProgressColour: '#5056F5',
+	progressBarBackgroundColour: 'rgba(80, 86, 245, 0.35)',
+	headlineColour: '#000000',
+	totalColour: '#5056F5',
+	goalColour: '#000000',
+};
 
 interface LiveblogEpicBodyParagraphProps {
 	paragraph: string;
@@ -154,7 +160,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 	onReminderOpen,
 	fetchEmail,
 }: EpicProps): JSX.Element => {
-	const { newsletterSignup } = variant;
+	const { newsletterSignup, tickerSettings } = variant;
 
 	const isColourInTestVariant: boolean =
 		tracking.abTestName.includes('_LB_EPIC_BG_COLOUR') &&
@@ -215,6 +221,19 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 					paragraphs={cleanParagraphs}
 					numArticles={articleCounts.forTargetedWeeks}
 				/>
+				{tickerSettings?.tickerData && (
+					<div css={tickerContainer}>
+						<Ticker
+							currencySymbol={tickerSettings.currencySymbol}
+							copy={{
+								headline: tickerSettings.copy.countLabel,
+							}}
+							tickerData={tickerSettings.tickerData}
+							tickerStylingSettings={defaultTickerStylingSettings}
+							size={'medium'}
+						/>
+					</div>
+				)}
 				{newsletterSignup ? (
 					<ContributionsEpicNewsletterSignup
 						newsletterId={newsletterSignup.newsletterId}

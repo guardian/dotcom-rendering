@@ -31,6 +31,7 @@ import type {
 import { threeTierChoiceCardAmounts } from './utils/threeTierChoiceCardAmounts';
 
 const supportTierChoiceCardStyles = (selected: boolean) => css`
+	display: block;
 	border: ${selected
 		? `2px solid ${palette.brand['500']}`
 		: `1px solid ${palette.neutral[46]}`};
@@ -227,6 +228,8 @@ export const ThreeTierChoiceCards = ({
 							!isUndefined(supporterPlusDiscount) &&
 							supportTier === 'SupporterPlus';
 
+						const radioId = `choicecard-${supportTier}`;
+
 						return (
 							<div
 								key={supportTier}
@@ -242,8 +245,9 @@ export const ThreeTierChoiceCards = ({
 								{recommended && !hasDiscount && (
 									<RecommendedPill />
 								)}
-								<div
+								<label
 									css={supportTierChoiceCardStyles(selected)}
+									htmlFor={radioId}
 								>
 									<Radio
 										label={label(
@@ -251,7 +255,7 @@ export const ThreeTierChoiceCards = ({
 											currencySymbol,
 											supporterPlusDiscount,
 										)}
-										id={`choicecard-${supportTier}`}
+										id={radioId}
 										value={supportTier}
 										cssOverrides={labelOverrideStyles}
 										supporting={
@@ -271,7 +275,7 @@ export const ThreeTierChoiceCards = ({
 											setSelectedProduct(supportTier);
 										}}
 									/>
-								</div>
+								</label>
 							</div>
 						);
 					},

@@ -3,7 +3,11 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/9c3eae7cb0b159db4a1c40679d6b37710b0bb937/packages/modules/src/modules/epics/ContributionsLiveblogEpic.stories.tsx
  */
-import { SecondaryCtaType } from '@guardian/support-dotcom-components';
+import {
+	SecondaryCtaType,
+	TickerCountType,
+	TickerEndType,
+} from '@guardian/support-dotcom-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
 import React from 'react';
@@ -97,6 +101,33 @@ export const WithThreeTierChoiceCardsForUS: Story = {
 			name: 'US_CHECKOUT_PAGE',
 			secondaryCta: undefined,
 			showChoiceCards: true,
+		},
+	},
+};
+
+export const WithTicker: Story = {
+	name: 'ContributionsLiveblogEpic with Ticker',
+	args: {
+		...meta.args,
+		variant: {
+			...props.variant,
+			secondaryCta: undefined,
+			showChoiceCards: true,
+			tickerSettings: {
+				endType: TickerEndType.unlimited,
+				countType: TickerCountType.money,
+				currencySymbol: '£',
+				copy: {
+					countLabel: 'Help us reach our end-of-year goal',
+					goalReachedPrimary: '',
+					goalReachedSecondary: '',
+				},
+				tickerData: {
+					total: 10000,
+					goal: 100000,
+				},
+				name: 'US',
+			},
 		},
 	},
 };

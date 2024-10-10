@@ -59,7 +59,7 @@ const tickerSettings: TickerSettings = {
 	countType: TickerCountType.money,
 	currencySymbol: '£',
 	copy: {
-		countLabel: 'Help us reach our end-of-year goal',
+		countLabel: '',
 		goalReachedPrimary: '',
 		goalReachedSecondary: '',
 	},

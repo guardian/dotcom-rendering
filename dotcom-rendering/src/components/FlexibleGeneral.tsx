@@ -9,6 +9,7 @@ import type {
 	ImageSizeType,
 } from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
+import type { TrailTextSize } from './Card/components/TrailTextWrapper';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
@@ -72,6 +73,7 @@ type BoostedSplashProperties = {
 	imagePositionOnMobile: ImagePositionType;
 	imageSize: ImageSizeType;
 	supportingContentAlignment: Alignment;
+	trailTextSize: TrailTextSize;
 };
 
 /**
@@ -93,6 +95,7 @@ const decideSplashCardProperties = (
 				imageSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
+				trailTextSize: 'regular',
 			};
 		case 'boost':
 			return {
@@ -104,6 +107,7 @@ const decideSplashCardProperties = (
 				imageSize: 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
+				trailTextSize: 'regular',
 			};
 		case 'megaboost':
 			return {
@@ -114,6 +118,7 @@ const decideSplashCardProperties = (
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
+				trailTextSize: 'large',
 			};
 		case 'gigaboost':
 			return {
@@ -124,6 +129,7 @@ const decideSplashCardProperties = (
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
+				trailTextSize: 'large',
 			};
 	}
 };
@@ -152,6 +158,7 @@ export const SplashCardLayout = ({
 		imagePositionOnMobile,
 		imageSize,
 		supportingContentAlignment,
+		trailTextSize,
 	} = decideSplashCardProperties(
 		card.boostLevel ?? 'default',
 		card.supportingContent?.length ?? 0,
@@ -183,6 +190,7 @@ export const SplashCardLayout = ({
 					isFlexSplash={true}
 					showTopBarDesktop={false}
 					showTopBarMobile={true}
+					trailTextSize={trailTextSize}
 				/>
 			</LI>
 		</UL>
@@ -279,9 +287,11 @@ export const StandardCardLayout = ({
 	absoluteServerTimes,
 	showImage = true,
 	imageLoading,
+	isFirstRow,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
+	isFirstRow: boolean;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
@@ -293,6 +303,7 @@ export const StandardCardLayout = ({
 			padBottom={true}
 			isFlexibleContainer={true}
 			showTopBar={true}
+			splitTopBar={!isFirstRow}
 		>
 			{cards.map((card, cardIndex) => {
 				return (
@@ -351,7 +362,7 @@ export const FlexibleGeneral = ({
 				/>
 			)}
 
-			{groupedCards.map((row) => {
+			{groupedCards.map((row, i) => {
 				switch (row.layout) {
 					case 'oneCardBoosted':
 						return (
@@ -374,6 +385,7 @@ export const FlexibleGeneral = ({
 								showAge={showAge}
 								absoluteServerTimes={absoluteServerTimes}
 								imageLoading={imageLoading}
+								isFirstRow={i === 0}
 							/>
 						);
 				}
