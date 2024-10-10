@@ -53,6 +53,11 @@ import type { BannerTemplateSettings, CtaSettings } from './settings';
 import { buttonStyles } from './styles/buttonStyles';
 import { templateSpacing } from './styles/templateStyles';
 
+const tickerContainerStyles = css`
+	padding-bottom: ${space[5]}px;
+	padding-top: ${space[1]}px;
+`;
+
 const buildImageSettings = (
 	design: BannerDesignImage | BannerDesignHeaderImage,
 ): Image | undefined => {
@@ -343,17 +348,22 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 
 					{tickerSettings?.tickerData &&
 						templateSettings.tickerStylingSettings && (
-							<Ticker
-								currencySymbol={tickerSettings.currencySymbol}
-								copy={{
-									headline: tickerSettings.copy.countLabel,
-								}}
-								tickerData={tickerSettings.tickerData}
-								tickerStylingSettings={
-									templateSettings.tickerStylingSettings
-								}
-								size={'medium'}
-							/>
+							<div css={tickerContainerStyles}>
+								<Ticker
+									currencySymbol={
+										tickerSettings.currencySymbol
+									}
+									copy={{
+										headline:
+											tickerSettings.copy.countLabel,
+									}}
+									tickerData={tickerSettings.tickerData}
+									tickerStylingSettings={
+										templateSettings.tickerStylingSettings
+									}
+									size={'medium'}
+								/>
+							</div>
 						)}
 
 					{!showChoiceCards && (
