@@ -32,7 +32,11 @@ const bodyStyles = css`
 const usCardStyles = css`
 	${from.leftCol} {
 		margin-top: ${space[6]}px;
-		margin-left: 1px; /* To align with rich links */
+		margin-bottom: ${space[9]}px;
+
+		/* To align with rich links - if we move this feature to production, we should remove this and make rich link align with everything instead */
+		margin-left: 1px;
+		margin-right: -1px;
 	}
 
 	${from.wide} {

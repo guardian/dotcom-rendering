@@ -47,11 +47,6 @@ const containerStyles = css`
 	${getZIndex('expandableMarketingCardOverlay')}
 	position: sticky;
 	top: 0;
-
-	${from.leftCol} {
-		padding-bottom: ${space[5]}px;
-		margin-right: -1px; /* To align with rich link - if we move this feature to production, we should remove this and make rich link align with everything instead */
-	}
 `;
 
 const contentStyles = css`
