@@ -86,7 +86,8 @@ const carouselStyles = css`
 		margin-right: -20px;
 	}
 	${from.tablet} {
-		margin-right: 0;
+		margin-left: 10px;
+		margin-right: 10px;
 	}
 `;
 
@@ -150,7 +151,7 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 		}
 
 		${from.tablet} {
-			grid-template-columns: repeat(${totalCards}, 50%);
+			grid-template-columns: repeat(${totalCards}, calc(50% + 10px));
 		}
 	`;
 };
