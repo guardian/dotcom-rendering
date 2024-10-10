@@ -70,6 +70,7 @@ const carouselStyles = css`
 	scroll-behavior: smooth;
 	overscroll-behavior-x: contain;
 	overscroll-behavior-y: auto;
+	scroll-padding-left: 10px;
 	/**
 	 * Hide scrollbars
 	 * See: https://stackoverflow.com/a/38994837
@@ -81,12 +82,13 @@ const carouselStyles = css`
 	position: relative;
 
 	/* Extend carousel into grid gutter on mobile */
+	margin-left: -10px;
 	margin-right: -10px;
 	${from.mobileLandscape} {
 		margin-right: -20px;
 	}
 	${from.tablet} {
-		margin-left: 10px;
+		margin-left: 0px;
 		margin-right: 10px;
 	}
 `;
