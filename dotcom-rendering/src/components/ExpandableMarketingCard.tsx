@@ -174,7 +174,36 @@ export const ExpandableMarketingCard = ({
 			<div css={fillBarStyles} />
 			<div css={contentStyles}>
 				{!isExpanded ? (
-					<BannersIllustration type="faded" styles={imageTopStyles} />
+					<>
+						<BannersIllustration
+							type="faded"
+							styles={imageTopStyles}
+						/>
+						<section
+							css={summaryStyles}
+							role="button"
+							tabIndex={0}
+							onClick={() => {
+								setIsExpanded(true);
+							}}
+							onKeyDown={(event) => {
+								if (event.key === 'Enter') {
+									setIsExpanded(true);
+								}
+								if (event.key === 'Escape') {
+									setIsClosed(true);
+								}
+							}}
+						>
+							<div css={headingStyles}>
+								<h2>{heading}</h2>
+								<div css={arrowStyles}>
+									<SvgChevronDownSingle />
+								</div>
+							</div>
+							<div css={kickerStyles}>{kicker}</div>
+						</section>
+					</>
 				) : (
 					<>
 						<BannersIllustration
@@ -185,64 +214,54 @@ export const ExpandableMarketingCard = ({
 							type="bottom"
 							styles={imageBottomStyles}
 						/>
+						<section css={summaryStyles}>
+							<div css={headingStyles}>
+								<h2>{heading}</h2>
+								<button
+									onClick={() => {
+										setIsClosed(true);
+									}}
+									type="button"
+									css={arrowStyles}
+								>
+									<SvgCross />
+								</button>
+							</div>
+							<div css={kickerStyles}>{kicker}</div>
+						</section>
+						<div css={detailsStyles}>
+							<section css={sectionStyles}>
+								<h3>We're independent</h3>
+								<p>
+									With no billionaire owner or shareholders,
+									our journalism is funded by readers
+								</p>
+							</section>
+							<section css={sectionStyles}>
+								<h3>We're open</h3>
+								<p>
+									With misinformation threatening democracy,
+									we keep our fact-based news paywall-free
+								</p>
+							</section>
+							<section css={sectionStyles}>
+								<h3>We're global</h3>
+								<p>
+									With 200 years of history and staff across
+									America and the world, we offer an outsider
+									perspective on US news
+								</p>
+							</section>
+							<LinkButton
+								priority="tertiary"
+								size="xsmall"
+								href={`${guardianBaseURL}/email-newsletters`}
+								cssOverrides={buttonStyles}
+							>
+								View newsletters
+							</LinkButton>
+						</div>
 					</>
-				)}
-				<section css={summaryStyles}>
-					<div css={headingStyles}>
-						<h2>{heading}</h2>
-						<button
-							onClick={() => {
-								if (!isExpanded) {
-									setIsExpanded(true);
-								} else {
-									setIsClosed(true);
-								}
-							}}
-							type="button"
-							css={arrowStyles}
-						>
-							{isExpanded ? (
-								<SvgCross />
-							) : (
-								<SvgChevronDownSingle />
-							)}
-						</button>
-					</div>
-					<div css={kickerStyles}>{kicker}</div>
-				</section>
-				{isExpanded && (
-					<div css={detailsStyles}>
-						<section css={sectionStyles}>
-							<h3>We're independent</h3>
-							<p>
-								With no billionaire owner or shareholders, our
-								journalism is funded by readers
-							</p>
-						</section>
-						<section css={sectionStyles}>
-							<h3>We're open</h3>
-							<p>
-								With misinformation threatening democracy, we
-								keep our fact-based news paywall-free
-							</p>
-						</section>
-						<section css={sectionStyles}>
-							<h3>We're global</h3>
-							<p>
-								With 200 years of history and staff across
-								America and the world, we offer an outsider
-								perspective on US news
-							</p>
-						</section>
-						<LinkButton
-							priority="tertiary"
-							size="xsmall"
-							href={`${guardianBaseURL}/email-newsletters`}
-							cssOverrides={buttonStyles}
-						>
-							View newsletters
-						</LinkButton>
-					</div>
 				)}
 			</div>
 		</div>
