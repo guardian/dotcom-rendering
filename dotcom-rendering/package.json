@@ -55,7 +55,7 @@
 		"@guardian/support-dotcom-components": "2.9.1",
 		"@guardian/tsconfig": "0.2.0",
 		"@playwright/test": "1.45.3",
-		"@sentry/browser": "7.75.1",
+		"@sentry/browser": "8.34.0",
 		"@sentry/integrations": "7.75.1",
 		"@storybook/addon-essentials": "8.2.9",
 		"@storybook/addon-interactions": "8.2.9",
