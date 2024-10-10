@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { from, space } from '@guardian/source/foundations';
 import { getZIndex } from '../lib/getZIndex';
 
 type Props = {
@@ -28,6 +29,17 @@ const bodyStyles = css`
 	${getZIndex('bodyArea')}
 `;
 
+const usCardStyles = css`
+	${from.leftCol} {
+		margin-top: ${space[6]}px;
+		margin-left: 1px; /* To align with rich links */
+	}
+
+	${from.wide} {
+		margin-left: 0;
+	}
+`;
+
 const gridArea = css`
 	grid-area: var(--grid-area);
 `;
@@ -41,6 +53,7 @@ export const GridItem = ({
 		css={[
 			area === 'body' && bodyStyles,
 			area === 'right-column' && rightColumnStyles,
+			area === 'uscard' && usCardStyles,
 			gridArea,
 		]}
 		style={{
