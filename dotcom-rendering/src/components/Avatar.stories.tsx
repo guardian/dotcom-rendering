@@ -28,7 +28,7 @@ const meta = {
 	parameters: {
 		chromatic: {
 			modes: {
-				horizontal: allModes.splitVertical,
+				horizontal: allModes['vertical mobileMedium'],
 			},
 		},
 	},
