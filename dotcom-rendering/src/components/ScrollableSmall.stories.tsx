@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/highlights-trails';
 import { FrontSection } from './FrontSection';
-import { ScrollableSmallContainer } from './ScrollableSmallContainer.importable';
+import { ScrollableSmall } from './ScrollableSmall.importable';
 
 export default {
-	title: 'ScrollableSmallContainer',
-	component: ScrollableSmallContainer,
+	title: 'Components/ScrollableSmall',
+	component: ScrollableSmall,
 	args: {
 		trails,
 		containerPalette: undefined,
@@ -17,7 +17,7 @@ export default {
 	},
 } as Meta;
 
-type Story = StoryObj<typeof ScrollableSmallContainer>;
+type Story = StoryObj<typeof ScrollableSmall>;
 
 export const Default = {};
 
@@ -29,7 +29,7 @@ export const WithFrontSection = {
 			editionId={'UK'}
 			showTopBorder={false}
 		>
-			<ScrollableSmallContainer {...args} />
+			<ScrollableSmall {...args} />
 		</FrontSection>
 	),
 } satisfies Story;

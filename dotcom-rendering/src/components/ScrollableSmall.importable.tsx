@@ -151,7 +151,7 @@ const generateCarouselColumnStyles = (totalCards: number) => {
  * This is an island - todo
  *
  */
-export const ScrollableSmallContainer = ({
+export const ScrollableSmall = ({
 	trails,
 	containerPalette,
 	containerType,
