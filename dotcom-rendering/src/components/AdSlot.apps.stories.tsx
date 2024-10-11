@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
 import { rightColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
 import { AdSlot } from './AdSlot.apps';
@@ -18,9 +17,6 @@ const meta = {
 		viewport: {
 			defaultViewport: 'mobileMedium',
 		},
-	},
-	args: {
-		onClickSupportButton: fn(),
 	},
 } satisfies Meta<typeof AdSlot>;
 

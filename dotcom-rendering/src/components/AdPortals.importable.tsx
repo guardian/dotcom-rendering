@@ -1,5 +1,4 @@
 import { AdSlot as BridgetAdSlot } from '@guardian/bridget/AdSlot';
-import { PurchaseScreenReason } from '@guardian/bridget/PurchaseScreenReason';
 import type { IRect as BridgetRect } from '@guardian/bridget/Rect';
 import { isUndefined } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
@@ -7,11 +6,7 @@ import type { Breakpoint } from '@guardian/source/foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import {
-	getAcquisitionsClient,
-	getCommercialClient,
-	getUserClient,
-} from '../lib/bridgetApi';
+import { getCommercialClient, getUserClient } from '../lib/bridgetApi';
 import { useMatchMedia } from '../lib/useMatchMedia';
 import {
 	adPlaceholderClass,
@@ -222,17 +217,10 @@ export const AdPortals = ({
 		return () => resizeObserver?.disconnect();
 	}, [adPlaceholders, rightAdPlaceholder, tryRightAligned]);
 
-	const handleClickSupportButton = () => {
-		void getAcquisitionsClient()
-			.launchPurchaseScreen(PurchaseScreenReason.hideAds)
-			.catch(() => console.error('Error launching purchase screen'));
-	};
-
 	const renderAdSlot = (id: string, index: number) => (
 		<AdSlot
 			key={id}
 			isFirstAdSlot={index === 0}
-			onClickSupportButton={handleClickSupportButton}
 			ref={(node) => {
 				if (node !== null) {
 					adSlots.current = [...adSlots.current, node];
