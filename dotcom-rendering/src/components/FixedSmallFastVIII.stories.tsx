@@ -6,7 +6,7 @@ import { FrontSection } from './FrontSection';
 
 export default {
 	component: FixedSmallFastVIII,
-	title: 'Components/FixedSmallFastVIII',
+	title: 'Components/Containers/FixedSmallFastVIII',
 	parameters: {
 		chromatic: {
 			viewports: [

@@ -23,7 +23,7 @@ const defaultGroupedTrails: DCRGroupedTrails = {
 
 export default {
 	component: DynamicSlow,
-	title: 'Components/DynamicSlow',
+	title: 'Components/Containers/DynamicSlow',
 	parameters: {
 		chromatic: {
 			viewports: [

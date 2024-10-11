@@ -17,7 +17,7 @@ const defaultGroupedTrails: DCRGroupedTrails = {
 
 const meta = {
 	component: FlexibleSpecial,
-	title: 'Components/FlexibleSpecial',
+	title: 'Components/Containers/FlexibleSpecial',
 	parameters: {
 		chromatic: {
 			viewports: [

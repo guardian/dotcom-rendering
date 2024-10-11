@@ -127,7 +127,7 @@ type FlexibleGeneralArgsAndCustomArgs = React.ComponentProps<
 
 const meta = {
 	component: FlexibleGeneral,
-	title: 'Components/FlexibleGeneral',
+	title: 'Components/Containers/FlexibleGeneral',
 	parameters: {
 		chromatic: {
 			viewports: [

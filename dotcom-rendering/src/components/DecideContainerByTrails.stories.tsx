@@ -6,7 +6,7 @@ import { FrontSection } from './FrontSection';
 
 export default {
 	component: DecideContainerByTrails,
-	title: 'Components/DecideContainerByTrails',
+	title: 'Components/Containers/DecideContainerByTrails',
 	parameters: {
 		chromatic: {
 			viewports: [
