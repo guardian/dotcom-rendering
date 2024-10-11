@@ -32,8 +32,6 @@ export const Default = {
 		chromatic: {
 			viewports: [
 				breakpoints.mobile,
-				breakpoints.mobileMedium,
-				breakpoints.phablet,
 				breakpoints.tablet,
 				breakpoints.desktop,
 			],
