@@ -9,6 +9,9 @@ import { useAB } from '../lib/useAB';
 import { ExpandableMarketingCard } from './ExpandableMarketingCard';
 import { Hide } from './Hide';
 
+const isViewportBelowTopOfBody = (topOfBody: Element) =>
+	topOfBody.getBoundingClientRect().top < 0;
+
 const stickyContainerStyles = css`
 	position: sticky;
 	top: 0;
@@ -92,10 +95,11 @@ export const ExpandableMarketingCardWrapper = ({ guardianBaseURL }: Props) => {
 		if (!topOfBody) return;
 
 		/**
-		 * If the viewport is below the top of the body, display the card immediately
+		 * It's possible that the viewport does not start at the top of the page.
 		 */
-		if (topOfBody.getBoundingClientRect().top < 0) {
+		if (isViewportBelowTopOfBody(topOfBody)) {
 			setShouldDisplayCard(true);
+			return;
 		}
 
 		/**
