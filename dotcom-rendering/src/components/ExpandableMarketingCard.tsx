@@ -25,13 +25,19 @@ interface BannersIllustrationProps {
 }
 
 const smallIllustrationStyles = css`
-	display: inline;
+	display: none;
+	${from.phablet} {
+		display: inline;
+	}
 	${from.leftCol} {
 		display: none;
 	}
 `;
 const largeIllustrationStyles = css`
-	display: none;
+	display: inline;
+	${from.phablet} {
+		display: none;
+	}
 	${from.leftCol} {
 		display: inline;
 	}
@@ -39,12 +45,16 @@ const largeIllustrationStyles = css`
 
 const BannersIllustration = ({ type, styles }: BannersIllustrationProps) => {
 	const { assetOrigin } = useConfig();
-	const src = `${assetOrigin}static/frontend/logos/red-blue-banner-${type}-mobile.svg`;
-	const largeSrc = `${assetOrigin}static/frontend/logos/red-blue-banner-${type}.svg`;
+	const smallSrc = `${assetOrigin}static/frontend/logos/red-blue-small-banner-${type}.svg`;
+	const largeSrc = `${assetOrigin}static/frontend/logos/red-blue-large-banner-${type}.svg`;
 
 	return (
 		<>
-			<img src={src} alt="" css={[styles, smallIllustrationStyles]} />
+			<img
+				src={smallSrc}
+				alt=""
+				css={[styles, smallIllustrationStyles]}
+			/>
 			<img
 				src={largeSrc}
 				alt=""
