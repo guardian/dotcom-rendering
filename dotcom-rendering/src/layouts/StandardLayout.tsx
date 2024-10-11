@@ -89,51 +89,46 @@ const StandardGrid = ({
 				display: grid;
 				width: 100%;
 				margin-left: 0;
+				grid-column-gap: 20px;
 
-				grid-column-gap: 10px;
-
-				/*
-					Explanation of each unit of grid-template-columns
-
-					Left Column (220 - 1px border)
-					Vertical grey border
-					Main content
-					Right Column
-				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 620px 80px 300px;
+					grid-template-columns:
+						repeat(3, 60px)
+						repeat(8, 60px)
+						60px
+						repeat(4, 60px);
 
 					${isMatchReport
 						? css`
 								grid-template-areas:
-									'title  border  matchNav   . right-column'
-									'title  border  matchtabs  . right-column'
-									'.      border  headline   . right-column'
-									'.      border  standfirst . right-column'
-									'lines  border  media      . right-column'
-									'meta   border  media      . right-column'
-									'meta   border  body       . right-column'
-									'.      border  .          . right-column';
+									'title title title  matchNav   matchNav   matchNav   matchNav   matchNav   matchNav   matchNav   matchNav   . right-column right-column right-column right-column'
+									'title title title  matchtabs  matchtabs  matchtabs  matchtabs  matchtabs  matchtabs  matchtabs  matchtabs  . right-column right-column right-column right-column'
+									'.     .     .      headline   headline   headline   headline   headline   headline   headline   headline   . right-column right-column right-column right-column'
+									'.     .     .      standfirst standfirst standfirst standfirst standfirst standfirst standfirst standfirst . right-column right-column right-column right-column'
+									'lines lines lines  media      media      media      media      media      media      media      media      . right-column right-column right-column right-column'
+									'meta  meta  meta   media      media      media      media      media      media      media      media      . right-column right-column right-column right-column'
+									'meta  meta  meta   body       body       body       body       body       body       body       body       . right-column right-column right-column right-column'
+									'.     .     .      .          .          .          .          .          .          .          .          . right-column right-column right-column right-column';
 						  `
 						: isMedia
 						? css`
 								grid-template-areas:
-									'title  border  headline   headline   .'
-									'.      border  disclaimer disclaimer right-column'
-									'lines  border  media      media      right-column'
-									'meta   border  media      media      right-column'
-									'meta   border  standfirst standfirst right-column'
-									'.      border  body       body       right-column'
-									'.      border  .          .          right-column';
+									'title title title headline   headline   headline   headline   headline   headline   headline   headline   headline   .            .            .            .           '
+									'.     .     .     disclaimer disclaimer disclaimer disclaimer disclaimer disclaimer disclaimer disclaimer disclaimer right-column right-column right-column right-column'
+									'lines lines lines media      media      media      media      media      media      media      media      media      right-column right-column right-column right-column'
+									'meta  meta  meta  media      media      media      media      media      media      media      media      media      right-column right-column right-column right-column'
+									'meta  meta  meta  standfirst standfirst standfirst standfirst standfirst standfirst standfirst standfirst standfirst right-column right-column right-column right-column'
+									'.     .     .     body       body       body       body       body       body       body       body       body       right-column right-column right-column right-column'
+									'.     .     .     .          .          .          .          .          .          .          .          .          right-column right-column right-column right-column';
 						  `
 						: css`
 								grid-template-areas:
-									'title  border  headline   . right-column'
-									'.      border  standfirst . right-column'
-									'lines  border  media      . right-column'
-									'meta   border  media      . right-column'
-									'meta   border  body       . right-column'
-									'.      border  .          . right-column';
+									'title title title headline   headline   headline   headline   headline   headline   headline   headline   . right-column right-column right-column right-column'
+									'.     .     .     standfirst standfirst standfirst standfirst standfirst standfirst standfirst standfirst . right-column right-column right-column right-column'
+									'lines lines lines media      media      media      media      media      media      media      media      . right-column right-column right-column right-column'
+									'meta  meta  meta  media      media      media      media      media      media      media      media      . right-column right-column right-column right-column'
+									'meta  meta  meta  body       body       body       body       body       body       body       body       . right-column right-column right-column right-column'
+									'.     .     .     .          .          .          .          .          .          .          .          . right-column right-column right-column right-column';
 						  `}
 				}
 			}
@@ -497,7 +492,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						isMatchReport={isMatchReport}
 						isMedia={isMedia}
 					>
-						<GridItem area="matchNav" element="aside">
+						<GridItem
+							area="matchNav"
+							element="aside"
+							leftBorder={true}
+						>
 							<div css={maxWidth}>
 								{isMatchReport && (
 									<Island
@@ -517,7 +516,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								)}
 							</div>
 						</GridItem>
-						<GridItem area="matchtabs" element="aside">
+						<GridItem
+							area="matchtabs"
+							element="aside"
+							leftBorder={true}
+						>
 							<div css={maxWidth}>
 								{isMatchReport && (
 									<Island
@@ -532,7 +535,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								)}
 							</div>
 						</GridItem>
-						<GridItem area="media">
+						<GridItem area="media" leftBorder={true}>
 							<div css={!isMedia && maxWidth}>
 								<MainMedia
 									format={format}
@@ -567,7 +570,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<Border />
 							)}
 						</GridItem>
-						<GridItem area="headline">
+						<GridItem area="headline" leftBorder={true}>
 							<div css={maxWidth}>
 								<ArticleHeadline
 									format={format}
@@ -580,7 +583,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								/>
 							</div>
 						</GridItem>
-						<GridItem area="standfirst">
+						<GridItem area="standfirst" leftBorder={true}>
 							{!isUndefined(article.starRating) ? (
 								<div css={starWrapper}>
 									<StarRating
@@ -701,7 +704,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								</div>
 							)}
 						</GridItem>
-						<GridItem area="body">
+						<GridItem area="body" leftBorder={true}>
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
