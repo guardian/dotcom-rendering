@@ -6,7 +6,7 @@ import { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import { useConfig } from './ConfigContext';
 
-const cardHeadlineTrailTextLight: ContainerFunction = (
+const cardHeadlineLight: ContainerFunction = (
 	containerPalette: DCRContainerPalette,
 ) => {
 	switch (containerPalette) {
@@ -36,7 +36,68 @@ const cardHeadlineTrailTextLight: ContainerFunction = (
 			return sourcePalette.neutral[100];
 	}
 };
-const cardHeadlineTrailTextDark: ContainerFunction = (
+const cardHeadlineDark: ContainerFunction = (
+	containerPalette: DCRContainerPalette,
+) => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return sourcePalette.neutral[93];
+		case 'LongRunningPalette':
+			return sourcePalette.neutral[93];
+		case 'SombrePalette':
+			return sourcePalette.neutral[100];
+		case 'BreakingPalette':
+			return sourcePalette.neutral[100];
+		case 'EventPalette':
+			return sourcePalette.brand[800];
+		case 'EventAltPalette':
+			return sourcePalette.neutral[100];
+		case 'LongRunningAltPalette':
+			return sourcePalette.neutral[86];
+		case 'SombreAltPalette':
+			return sourcePalette.neutral[93];
+		case 'SpecialReportAltPalette':
+			return sourcePalette.specialReportAlt[700];
+		case 'PodcastPalette':
+			return sourcePalette.neutral[100];
+		case 'Branded':
+			return sourcePalette.neutral[86];
+		case 'MediaPalette':
+			return sourcePalette.neutral[100];
+	}
+};
+
+const cardTrailTextLight: ContainerFunction = (
+	containerPalette: DCRContainerPalette,
+) => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return sourcePalette.neutral[93];
+		case 'LongRunningPalette':
+			return sourcePalette.neutral[10];
+		case 'SombrePalette':
+			return sourcePalette.neutral[93];
+		case 'BreakingPalette':
+			return sourcePalette.neutral[93];
+		case 'EventPalette':
+			return sourcePalette.brand[300];
+		case 'EventAltPalette':
+			return sourcePalette.brand[300];
+		case 'LongRunningAltPalette':
+			return sourcePalette.neutral[10];
+		case 'SombreAltPalette':
+			return sourcePalette.neutral[86];
+		case 'SpecialReportAltPalette':
+			return sourcePalette.specialReportAlt[100];
+		case 'PodcastPalette':
+			return sourcePalette.neutral[93];
+		case 'Branded':
+			return sourcePalette.neutral[38];
+		case 'MediaPalette':
+			return sourcePalette.neutral[93];
+	}
+};
+const cardTrailTextDark: ContainerFunction = (
 	containerPalette: DCRContainerPalette,
 ) => {
 	switch (containerPalette) {
@@ -837,17 +898,21 @@ const containerColours = {
 		light: cardBackgroundLight,
 		dark: cardBackgroundDark,
 	},
-	'--card-headline-trail-text': {
-		light: cardHeadlineTrailTextLight,
-		dark: cardHeadlineTrailTextDark,
+	'--card-headline': {
+		light: cardHeadlineLight,
+		dark: cardHeadlineDark,
 	},
 	'--card-footer-text': {
-		light: cardHeadlineTrailTextLight,
-		dark: cardHeadlineTrailTextDark,
+		light: cardTrailTextLight,
+		dark: cardTrailTextLight,
 	},
 	'--card-kicker-text': {
 		light: cardKickerTextLight,
 		dark: cardKickerTextDark,
+	},
+	'--card-trail-text': {
+		light: cardTrailTextLight,
+		dark: cardTrailTextDark,
 	},
 	'--front-container-background': {
 		light: sectionBackgroundLight,

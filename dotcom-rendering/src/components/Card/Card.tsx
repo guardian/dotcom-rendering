@@ -125,6 +125,8 @@ export type Props = {
 	showTopBarDesktop?: boolean;
 	showTopBarMobile?: boolean;
 	trailTextSize?: TrailTextSize;
+	/** If specified, overrides trail text colour from that of the headline */
+	trailTextColour?: string;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -314,6 +316,7 @@ export const Card = ({
 	showTopBarDesktop = true,
 	showTopBarMobile = false,
 	trailTextSize,
+	trailTextColour,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -777,7 +780,7 @@ export const Card = ({
 									imageSize={imageSize}
 									imageType={media?.type}
 									shouldHide={isFlexSplash ? false : true}
-									isFlexSplash={isFlexSplash}
+									trailTextColour={trailTextColour}
 									trailTextSize={trailTextSize}
 								>
 									<div

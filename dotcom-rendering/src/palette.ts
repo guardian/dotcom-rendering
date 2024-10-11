@@ -2571,6 +2571,9 @@ const cardHeadlineTextLight: PaletteFunction = (format) =>
 
 const cardTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
+const cardTrailTextLight: PaletteFunction = () => sourcePalette.neutral[38];
+const cardTrailTextDark: PaletteFunction = () => sourcePalette.neutral[60];
+
 const liveKickerBackgroundLight: PaletteFunction = (format) => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -5667,11 +5670,6 @@ const latestLinksDottedLineLight: PaletteFunction = () =>
 const latestLinksDottedLineDark: PaletteFunction = () =>
 	sourcePalette.neutral[38];
 
-const flexibleSplashCardStandfirstLight: PaletteFunction = () =>
-	sourcePalette.neutral[38];
-const flexibleSplashCardStandfirstDark: PaletteFunction = () =>
-	sourcePalette.neutral[60];
-
 const editorialButtonBackground: PaletteFunction = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -6065,7 +6063,7 @@ const paletteColours = {
 		light: cardMetaTextLight,
 		dark: cardMetaTextDark,
 	},
-	'--card-headline-trail-text': {
+	'--card-headline': {
 		light: cardHeadlineTextLight,
 		dark: cardTextDark,
 	},
@@ -6076,6 +6074,10 @@ const paletteColours = {
 	'--card-sublinks-background': {
 		light: cardSublinksBackgroundLight,
 		dark: cardSublinksBackgroundDark,
+	},
+	'--card-trail-text': {
+		light: cardTrailTextLight,
+		dark: cardTrailTextDark,
 	},
 	'--carousel-active-dot': {
 		light: carouselActiveDotLight,
@@ -6416,11 +6418,6 @@ const paletteColours = {
 	'--filter-key-events-toggle-border-top': {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
-	},
-
-	'--flexible-splash-card-standfirst': {
-		light: flexibleSplashCardStandfirstLight,
-		dark: flexibleSplashCardStandfirstDark,
 	},
 	'--follow-icon-background': {
 		light: followIconBackgroundLight,

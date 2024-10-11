@@ -329,7 +329,7 @@ export const CardHeadline = ({
 						css`
 							color: ${isHighlights
 								? palette('--highlights-card-headline')
-								: palette('--card-headline-trail-text')};
+								: palette('--card-headline')};
 						`,
 					]}
 					className="show-underline"
