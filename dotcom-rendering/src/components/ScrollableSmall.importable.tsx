@@ -148,10 +148,13 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 };
 
 /**
- * This is an island - todo
+ * A container used on fronts to display a carousel of small cards
  *
+ * ## Why does this need to be an Island?
+ *
+ * The carouselling arrow buttons need to run javascript.
  */
-export const ScrollableSmallContainer = ({
+export const ScrollableSmall = ({
 	trails,
 	containerPalette,
 	containerType,
@@ -216,8 +219,6 @@ export const ScrollableSmallContainer = ({
 	return (
 		<div css={carouselContainerStyles}>
 			<ol
-				// TODO
-				// data-component=""
 				ref={carouselRef}
 				css={[
 					carouselStyles,
