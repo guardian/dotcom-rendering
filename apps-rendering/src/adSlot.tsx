@@ -1,14 +1,12 @@
 import type { SerializedStyles } from '@emotion/react';
-import { css, ThemeProvider } from '@emotion/react';
+import { css } from '@emotion/react';
 import type { ArticleFormat } from 'articleFormat';
 import {
 	from,
-	headlineMedium17,
 	remSpace,
 	textSans14,
 	until,
 } from '@guardian/source/foundations';
-import { Button, buttonThemeBrandAlt } from '@guardian/source/react-components';
 import { background, text } from 'palette';
 import type { ReactElement } from 'react';
 import { darkModeCss, wideContentWidth } from 'styles';
@@ -37,24 +35,6 @@ const adLabelsStyles = (format: ArticleFormat): SerializedStyles => css`
 		color: ${text.adLabelDark(format)};
 	`}
 	}
-`;
-
-const supportBannerStyles = (format: ArticleFormat): SerializedStyles => css`
-	padding: ${remSpace[3]};
-	background-color: ${background.supportBanner(format)};
-
-	p {
-		${headlineMedium17};
-		margin-top: 0;
-	}
-
-	button {
-		margin-top: ${remSpace[3]};
-	}
-
-	${darkModeCss`
-		background-color: ${background.supportBannerDark(format)};
-	`}
 `;
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
@@ -117,12 +97,6 @@ const AdSlot = ({ className, paragraph, format }: Props): ReactElement => (
 			<p>Advertisement</p>
 		</div>
 		<div css={adSlotStyles} className="ad-slot"></div>
-		<div css={supportBannerStyles(format)} className="support-banner">
-			<p>Support the Guardian and enjoy the app ad-free.</p>
-			<ThemeProvider theme={buttonThemeBrandAlt}>
-				<Button>Support the Guardian</Button>
-			</ThemeProvider>
-		</div>
 	</aside>
 );
 
