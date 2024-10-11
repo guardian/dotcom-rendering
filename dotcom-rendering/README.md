@@ -10,25 +10,13 @@ This guide will help you get the `dotcom-rendering` application running on your 
 
 The only thing you need to make sure you have installed before you get going is [Node.js](https://nodejs.org).
 
-We recommend using a tool to help manage multiple versions of Node.js on on machine.
-[fnm](https://github.com/Schniz/fnm) is popular in the department at the moment, although
-[nvm](https://github.com/creationix/nvm) and [asdf](https://github.com/asdf-vm/asdf) are
-also used.
-
-If you are not sure which tool you have in use, the command `which node` can give you a clue.
-
-> If you use nvm, you might find
-> [this gist](https://gist.github.com/sndrs/5940e9e8a3f506b287233ed65365befb) helpful.
+We recommend using [fnm](https://github.com/Schniz/fnm) to help manage multiple versions of Node.js on on machine.
 
 Once Node is installed, make sure you're using the correct package manager by [enabling corepack](https://github.com/nodejs/corepack?tab=readme-ov-file#utility-commands):
 
 ```sh
 $ corepack enable
 ```
-
-> [!NOTE]
->
-> If you're using `asdf`, you'll need to run `asdf reshim nodejs` after running `corepack enable`.
 
 ### Running instructions
 
@@ -39,7 +27,6 @@ $ make dev
 ```
 
 `make dev` will start the development server on port 3030: [http://localhost:3030](http://localhost:3030).
-`make build && make start` will start the production server on port 9000: [http://localhost:9000](http://localhost:9000).
 
 Visit the [root path of the dev server](http://localhost:3030) for some example URLs to visit.
 
@@ -49,21 +36,9 @@ You can view the JSON representation of an article, as per the model sent to the
 
 http://localhost:3030/ArticleJson?url=https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey
 
-### Environment Variables
-
-| Name                          | Description                                                                                                                                    |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `HOSTNAME`                    | Defaults to `localhost`. If running behind a reverse proxy (Github Codespaces / Ngrok) this needs to be set to the hostname used to access DCR |
-| `NODE_ENV`                    | `production` or `development`. Toggles features such as hot reloading, compression, localhost access, etc                                      |
-| `GU_STAGE`                    | `PROD` or `DEV`. Typically used to decide if DCR should call Production downstream API's or CODE downstream API's                              |
-| `GU_PUBLIC`                   | Any value, undefined will disable. Toggles serving assets on the `/assets/` endpoint                                                           |
-| `DISABLE_LOGGING_AND_METRICS` | Boolean. Toggle for enabling Log4js                                                                                                            |
-
-Most of these variables are set by our make scripts and you don't need to worry about setting them.
-
 ### Detailed Setup
 
-If you're new to JavaScript projects, if you're trying to integrate with other applications or if you prefer to take things slow, we also have a more [detailed setup guide](docs/contributing/detailed-setup-guide.md).
+If you're new to TypeScript projects, if you're trying to integrate with other applications or if you prefer to take things slow, we also have a more [detailed setup guide](docs/contributing/detailed-setup-guide.md).
 
 ### Technologies
 
@@ -84,9 +59,6 @@ If you're new to JavaScript projects, if you're trying to integrate with other a
 
 [Source](https://theguardian.design) is the Guardian's design system. For detailed and up-to-date information on how to use it, see the [Source guide](https://github.com/guardian/csnx/blob/main/docs/source/README.md).
 
-For a high-level overview of some of the key ideas behind the design of the Dotcom website, see [design.theguardian.com](https://design.theguardian.com/).
-This resource was made in 2018 and is not maintained so it <strong>should not be taken as authoritative</strong> on details, but most of it still applies and it gives a very quick and visual overview. It also provides an explanation of some journalism- or Guardian-specific terms that you might see in the codebase, like 'kicker' and 'standfirst'.
-
 ### Concepts
 
 There are some concepts to learn, that will make working with Dotcom Rendering clearer:
@@ -101,11 +73,6 @@ There are some concepts to learn, that will make working with Dotcom Rendering c
 ### Visual Debugging
 
 DCR provides a visual debugging tool through a bookmarklet which you can find out more about in the [debug tool docs](./src/client/debug/README.md).
-
-### Feedback
-
-After completing this setup guide, we would greatly appreciate it if you could complete our [dotcom-rendering setup
-questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSdwFc05qejwW_Gtl3pyW4N22KqmY5zXoDKAUAjrkOwb2uXNcQ/viewform?vc=0&c=0&w=1). It should only take 3 minutes and will help us improve this documentation and the setup process in the future. Thank you! 🙏
 
 ## Dotcom Rendering now renders most articles and fronts in Production
 
@@ -167,15 +134,6 @@ VSCode should prompt you to install our recommended extensions when you open the
 
 You can also find these extensions by searching for `@recommended` in the extensions pane.
 
-### Commit hooks
-
-Staged changes are automatically prettified on commit. You can disable this by adding `--no-verify` to your commit command.
-
-To run the prettier check manually, run either of the following commands from the workspace root:
-
--   `pnpm prettier:check` &rarr; Checks for prettier issues
--   `pnpm prettier:write` &rarr; Checks and fixes prettier issues
-
 ### Auto fix on save
 
 We recommend you update your workspace settings to automatically fix formatting and linting errors on save, this avoids code style validation failures. These instructions assume you have installed the `esbenp.prettier-vscode` VSCode plugin:
@@ -192,13 +150,3 @@ We recommend you update your workspace settings to automatically fix formatting 
     	"source.fixAll.eslint": true
     }
     ```
-
-If you prefer not to use an editor like VSCode then you can use the following commands to manage formatting and (try to fix) linting errors:
-
--   `make fix` &rarr; Checks and fixes prettier and linting issues
-
-## Thanks
-
-<a href="https://www.chromaticqa.com/"><img src="https://cdn-images-1.medium.com/letterbox/147/36/50/50/1*oHHjTjInDOBxIuYHDY2gFA.png?source=logoAvatar-d7276495b101---37816ec27d7a" width="120"/></a>
-
-Thanks to [Chromatic](https://www.chromaticqa.com/) for providing the visual testing platform that helps us catch unexpected changes on time
