@@ -5663,6 +5663,87 @@ const flexibleSplashCardStandfirstLight: PaletteFunction = () =>
 	sourcePalette.neutral[38];
 const flexibleSplashCardStandfirstDark: PaletteFunction = () =>
 	sourcePalette.neutral[60];
+
+const editorialButtonBackground: PaletteFunction = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+			return sourcePalette.news[300];
+		case Pillar.Culture:
+			return sourcePalette.culture[300];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[300];
+		case Pillar.Sport:
+			return sourcePalette.sport[300];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[300];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReport[300];
+	}
+};
+const editorialButtonBackgroundHover: PaletteFunction = (
+	format: ArticleFormat,
+) => {
+	switch (format.theme) {
+		case Pillar.News:
+			return sourcePalette.news[400];
+		case Pillar.Culture:
+			return sourcePalette.culture[400];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[400];
+		case Pillar.Sport:
+			return sourcePalette.sport[400];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReport[400];
+	}
+};
+const editorialButtonBorderHover: PaletteFunction = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+			return sourcePalette.news[400];
+		case Pillar.Culture:
+			return sourcePalette.culture[400];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[400];
+		case Pillar.Sport:
+			return sourcePalette.sport[400];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReport[400];
+	}
+};
+
+const editorialButtonText: PaletteFunction = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+			return sourcePalette.news[400];
+		case Pillar.Culture:
+			return sourcePalette.culture[400];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[400];
+		case Pillar.Sport:
+			return sourcePalette.sport[400];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReport[200];
+	}
+};
+
 // ----- Palette ----- //
 
 /**
@@ -6243,6 +6324,22 @@ const paletteColours = {
 	'--drop-cap': {
 		light: dropCapLight,
 		dark: dropCapDark,
+	},
+	'--editorial-button-background': {
+		light: editorialButtonBackground,
+		dark: editorialButtonBackground,
+	},
+	'--editorial-button-background-hover': {
+		light: editorialButtonBackgroundHover,
+		dark: editorialButtonBackgroundHover,
+	},
+	'--editorial-button-border-hover': {
+		light: editorialButtonBorderHover,
+		dark: editorialButtonBorderHover,
+	},
+	'--editorial-button-text': {
+		light: editorialButtonText,
+		dark: editorialButtonText,
 	},
 	'--email-signup-button-background': {
 		light: emailSignupButtonBackgroundLight,
