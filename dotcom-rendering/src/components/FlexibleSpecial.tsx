@@ -45,9 +45,9 @@ const determineCardProperties = (
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
 			return {
-				headlineSize: 'medium',
-				headlineSizeOnMobile: 'tiny',
-				headlineSizeOnTablet: 'small',
+				headlineSize: 'large',
+				headlineSizeOnMobile: 'small',
+				headlineSizeOnTablet: 'medium',
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'large',
@@ -58,9 +58,9 @@ const determineCardProperties = (
 
 		case 'boost':
 			return {
-				headlineSize: 'large',
-				headlineSizeOnMobile: 'small',
-				headlineSizeOnTablet: 'medium',
+				headlineSize: 'huge',
+				headlineSizeOnMobile: 'medium',
+				headlineSizeOnTablet: 'large',
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'jumbo',
@@ -70,9 +70,9 @@ const determineCardProperties = (
 			};
 		case 'megaboost':
 			return {
-				headlineSize: 'large',
-				headlineSizeOnMobile: 'medium',
-				headlineSizeOnTablet: 'medium',
+				headlineSize: 'huge',
+				headlineSizeOnMobile: 'large',
+				headlineSizeOnTablet: 'large',
 				imagePositionOnDesktop: 'bottom',
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'jumbo',
@@ -81,9 +81,9 @@ const determineCardProperties = (
 			};
 		case 'gigaboost':
 			return {
-				headlineSize: 'huge',
-				headlineSizeOnMobile: 'large',
-				headlineSizeOnTablet: 'large',
+				headlineSize: 'ginormous',
+				headlineSizeOnMobile: 'huge',
+				headlineSizeOnTablet: 'huge',
 				imagePositionOnDesktop: 'bottom',
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'jumbo',
