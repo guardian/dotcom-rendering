@@ -1,5 +1,5 @@
 import { Cartoon } from '../../../cartoon';
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../../../articleFormat';
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import {

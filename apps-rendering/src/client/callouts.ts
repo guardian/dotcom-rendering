@@ -3,8 +3,12 @@
 import type { Contact } from '@guardian/apps-rendering-api-models/contact';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { FormOption } from '@guardian/apps-rendering-api-models/formOption';
-import { ArticleSpecial, Pillar } from '@guardian/libs';
-import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
+import {
+	type ArticleFormat,
+	ArticleSpecial,
+	type ArticleTheme,
+	Pillar,
+} from 'articleFormat';
 import { withDefault } from '../../vendor/@guardian/types/index';
 import { ElementKind } from 'bodyElementKind';
 import { pipe, resultFromNullable } from 'lib';
