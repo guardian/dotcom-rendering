@@ -1,9 +1,8 @@
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../../lib/format';
 
 export interface SharedEditorialButtonProps {
 	/**
-	 * A format object denoting the style of the button using the enums
-	 * available from [@guardian/libs](https://github.com/guardian/libs/blob/main/src/format.ts).
+	 * A format object denoting the style of the button.
 	 *
 	 * For example:
 	 *

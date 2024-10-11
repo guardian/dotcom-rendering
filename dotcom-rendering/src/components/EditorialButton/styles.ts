@@ -1,12 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
 import {
 	culture,
 	labs,
@@ -19,6 +12,13 @@ import {
 	sport,
 } from '@guardian/source/foundations';
 import type { ButtonPriority } from '@guardian/source/react-components';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '../../lib/format';
+import type { ArticleFormat } from '../../lib/format';
 
 export const defaultFormat = {
 	display: ArticleDisplay.Standard,

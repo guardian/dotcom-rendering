@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
+import { SvgCross } from '@guardian/source/react-components';
+import type { Meta, StoryFn } from '@storybook/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
+	Pillar as ArticlePillar,
 	ArticleSpecial,
-} from '@guardian/libs';
-import { SvgCross } from '@guardian/source/react-components';
-import type { Meta, StoryFn } from '@storybook/react';
+} from '../../lib/format';
 import { EditorialButton } from './EditorialButton';
 import type { EditorialButtonProps } from './EditorialButton';
 
