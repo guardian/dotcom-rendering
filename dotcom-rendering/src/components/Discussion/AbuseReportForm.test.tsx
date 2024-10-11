@@ -2,13 +2,30 @@ import '@testing-library/jest-dom';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { reportAbuse } from '../../lib/discussionApi';
-import { mockRESTCalls } from '../../lib/mockRESTCalls';
 import { ok } from '../../lib/result';
 import { AbuseReportForm } from './AbuseReportForm';
-
-const fetchMock = mockRESTCalls();
+import {
+	getLastFetchCall,
+	mockFetch,
+	resetLastFetchCall,
+} from '../../lib/mockRESTCallsInJest';
 
 describe('Dropdown', () => {
+	let originalFetch: typeof fetch;
+
+	beforeAll(() => {
+		originalFetch = fetch;
+	});
+
+	beforeEach(() => {
+		mockFetch(); // Initialize the mock before each test
+		resetLastFetchCall();
+	});
+
+	afterAll(() => {
+		global.fetch = originalFetch; // Restore the original fetch after tests
+	});
+
 	it('Should show the expected label names', () => {
 		const { getByLabelText } = render(
 			<AbuseReportForm
@@ -51,10 +68,9 @@ describe('Dropdown', () => {
 		await user.selectOptions(getByLabelText('Category'), 'Trolling');
 		await user.click(getByRole('button', { name: 'Report' }));
 
+		const [_, requestInit] = getLastFetchCall() ?? [undefined, undefined];
 		await waitFor(() => {
-			expect(fetchMock.lastOptions(/reportAbuse/)?.body).toBe(
-				'categoryId=4',
-			);
+			expect(requestInit?.body).toBe('categoryId=4');
 		});
 
 		await waitFor(() => {

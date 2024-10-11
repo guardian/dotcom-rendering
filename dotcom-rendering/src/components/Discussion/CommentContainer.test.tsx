@@ -6,11 +6,10 @@ import type {
 	ReplyType,
 	SignedInUser,
 } from '../../lib/discussion';
-import { mockRESTCalls } from '../../lib/mockRESTCalls';
 import { error, ok } from '../../lib/result';
 import { CommentContainer } from './CommentContainer';
+import { mockFetch, resetLastFetchCall } from '../../lib/mockRESTCallsInJest';
 
-mockRESTCalls();
 const mockedCommentID = '123456';
 
 const firstCommentResponse = comment.responses[0];
@@ -53,6 +52,21 @@ const aUser: SignedInUser = {
 };
 
 describe('CommentContainer', () => {
+	let originalFetch: typeof fetch;
+
+	beforeAll(() => {
+		originalFetch = fetch;
+	});
+
+	beforeEach(() => {
+		mockFetch(); // Initialize the mock before each test
+		resetLastFetchCall();
+	});
+
+	afterAll(() => {
+		global.fetch = originalFetch; // Restore the original fetch after tests
+	});
+
 	it('Post a comment to a root comment', async () => {
 		const newCommentText = 'A brand new comment';
 
