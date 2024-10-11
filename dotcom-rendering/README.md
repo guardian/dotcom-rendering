@@ -151,7 +151,11 @@ To monitor vulnerabilities from GitHub, you can use [Dependabot alerts in the se
 
 #### Manual audit
 
-To check for vulnerabilities in development, you can run `pnpm audit`.
+To check for vulnerabilities in development, you can run:
+
+```sh
+$ make audit
+```
 
 ## IDE setup
 

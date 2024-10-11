@@ -197,3 +197,7 @@ gen-fixtures:
 
 perf-test:
 	@node scripts/perf/perf-test.js
+
+audit: clean-dist install
+	$(call log, "auditing dependencies")
+	@pnpm audit
