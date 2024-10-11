@@ -237,11 +237,6 @@ describe('Island: server-side rendering', () => {
 					ajaxUrl=""
 					pageId=""
 					filterKeyEvents={false}
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
 					enhanceTweetsSwitch={false}
 					onFirstPage={true}
 					webURL=""

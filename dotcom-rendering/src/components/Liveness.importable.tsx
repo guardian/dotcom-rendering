@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { getEmotionCache } from '../client/islands/emotion';
 import { initHydration } from '../client/islands/initHydration';
-import type { ArticleFormat } from '../lib/format';
 import { useApi } from '../lib/useApi';
 import { Toast } from './Toast';
 
@@ -12,7 +11,6 @@ type Props = {
 	webTitle: string;
 	ajaxUrl: string;
 	filterKeyEvents: boolean;
-	format: ArticleFormat;
 	enhanceTweetsSwitch: boolean;
 	onFirstPage: boolean;
 	webURL: string;
@@ -150,7 +148,6 @@ export const Liveness = ({
 	webTitle,
 	ajaxUrl,
 	filterKeyEvents,
-	format,
 	enhanceTweetsSwitch,
 	onFirstPage,
 	webURL,
@@ -332,11 +329,7 @@ export const Liveness = ({
 		 * [containing block]: https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
 		 */
 		return createPortal(
-			<Toast
-				onClick={handleToastClick}
-				count={numHiddenBlocks}
-				format={format}
-			/>,
+			<Toast onClick={handleToastClick} count={numHiddenBlocks} />,
 			toastRoot,
 		);
 	}

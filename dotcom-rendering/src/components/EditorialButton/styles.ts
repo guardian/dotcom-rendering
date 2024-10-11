@@ -2,31 +2,22 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { neutral } from '@guardian/source/foundations';
 import type { ButtonPriority } from '@guardian/source/react-components';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/format';
-import type { ArticleFormat } from '../../lib/format';
 import { palette } from '../../palette';
-
-export const defaultFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-	theme: Pillar.News,
-};
 
 const WHITE = neutral[100];
 
 export const decideBackground = (
-	format: ArticleFormat,
 	priority: ButtonPriority,
 ): SerializedStyles => {
 	switch (priority) {
 		case 'primary':
 		case 'secondary':
 			return css`
-				background-color: palette('--editorial-button-background');
+				background-color: ${palette('--editorial-button-background')};
 				:hover {
-					background-color: palette(
-						'--editorial-button-background-hover'
-					);
+					background-color: ${palette(
+						'--editorial-button-background-hover',
+					)};
 					border: 1px solid
 						${palette('--editorial-button-border-hover')};
 				}
@@ -39,10 +30,7 @@ export const decideBackground = (
 	}
 };
 
-export const decideBorder = (
-	format: ArticleFormat,
-	priority: ButtonPriority,
-): SerializedStyles => {
+export const decideBorder = (priority: ButtonPriority): SerializedStyles => {
 	switch (priority) {
 		case 'primary':
 		case 'secondary':
@@ -57,10 +45,7 @@ export const decideBorder = (
 	}
 };
 
-export const decideFont = (
-	format: ArticleFormat,
-	priority: ButtonPriority,
-): SerializedStyles => {
+export const decideFont = (priority: ButtonPriority): SerializedStyles => {
 	switch (priority) {
 		case 'primary':
 		case 'secondary':

@@ -1,48 +1,14 @@
 import { css } from '@emotion/react';
 import { SvgCross } from '@guardian/source/react-components';
 import type { Meta, StoryFn } from '@storybook/react';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	Pillar as ArticlePillar,
-	ArticleSpecial,
-} from '../../lib/format';
+import { Pillar as ArticlePillar, ArticleSpecial } from '../../lib/format';
 import { EditorialButton } from './EditorialButton';
 import type { EditorialButtonProps } from './EditorialButton';
-
-const defaultFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-};
 
 const meta: Meta<typeof EditorialButton> = {
 	title: 'Components/EditorialButton',
 	component: EditorialButton,
 	argTypes: {
-		format: {
-			options: [
-				'news',
-				'sport',
-				'culture',
-				'lifestyle',
-				'opinion',
-				'special_report',
-				'labs',
-			],
-			mapping: {
-				news: { ...defaultFormat, theme: ArticlePillar.News },
-				sport: { ...defaultFormat, theme: ArticlePillar.Sport },
-				culture: { ...defaultFormat, theme: ArticlePillar.Culture },
-				lifestyle: { ...defaultFormat, theme: ArticlePillar.Lifestyle },
-				opinion: { ...defaultFormat, theme: ArticlePillar.Opinion },
-				special_report: {
-					...defaultFormat,
-					theme: ArticleSpecial.SpecialReport,
-				},
-				labs: { ...defaultFormat, theme: ArticleSpecial.Labs },
-			},
-			control: { type: 'radio' },
-		},
 		icon: {
 			options: ['undefined', 'cross'],
 			mapping: {
@@ -101,11 +67,7 @@ const RowTemplate: StoryFn<typeof EditorialButton> = (
 		`}
 	>
 		{pillars.map((pillar) => (
-			<Template
-				key={pillar}
-				{...args}
-				format={{ ...defaultFormat, theme: pillar }}
-			/>
+			<Template key={pillar} {...args} />
 		))}
 	</div>
 );

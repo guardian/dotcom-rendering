@@ -619,7 +619,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									webTitle={article.webTitle}
 									ajaxUrl={article.config.ajaxUrl}
 									filterKeyEvents={article.filterKeyEvents}
-									format={format}
 									enhanceTweetsSwitch={
 										!!article.config.switches.enhanceTweets
 									}

@@ -1,13 +1,11 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import type { ArticleFormat } from '../lib/format';
 import { EditorialButton } from './EditorialButton/EditorialButton';
 
 type Props = {
 	count: number;
 	onClick: () => void;
-	format: ArticleFormat;
 };
 
 /** This icon will be added to Source at a subsequent time */
@@ -33,7 +31,7 @@ const SvgReload = ({ size }: { size: 12 | 16 | 18 | 24 | 26 | 28 | 30 }) => {
  * This element is rendered using a Portal into the `toast-root` div. This
  * root div has position: sticky
  */
-export const Toast = ({ count, onClick, format }: Props) => {
+export const Toast = ({ count, onClick }: Props) => {
 	return (
 		<div
 			css={css`
@@ -46,7 +44,6 @@ export const Toast = ({ count, onClick, format }: Props) => {
 				<EditorialButton
 					size="xsmall" // <-- Mobile version is xsmall
 					onClick={onClick}
-					format={format}
 					icon={<SvgReload size={30} />}
 				>{`${count} new update${
 					count === 1 ? '' : 's'
@@ -56,7 +53,6 @@ export const Toast = ({ count, onClick, format }: Props) => {
 				<EditorialButton
 					size="small" // <-- Desktop version is small
 					onClick={onClick}
-					format={format}
 					icon={<SvgReload size={30} />}
 				>{`${count} new update${
 					count === 1 ? '' : 's'
