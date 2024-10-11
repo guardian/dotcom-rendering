@@ -13,7 +13,7 @@ const stickyContainerStyles = css`
 	position: sticky;
 	top: 0;
 	${getZIndex('expandableMarketingCardOverlay')};
-	animation: slidein 1.5s normal;
+	animation: slidein 2s normal;
 
 	@keyframes slidein {
 		from {
