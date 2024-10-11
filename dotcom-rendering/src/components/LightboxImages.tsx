@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { type ArticleFormat, isUndefined, log, timeAgo } from '@guardian/libs';
+import { isUndefined, log, timeAgo } from '@guardian/libs';
 import {
 	from,
 	headlineLight24,
@@ -12,6 +12,7 @@ import {
 import { Hide, Link } from '@guardian/source/react-components';
 import { StarRating } from '@guardian/source-development-kitchen/react-components';
 import { useEffect, useState } from 'react';
+import type { ArticleFormat } from '../lib/format';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxCaption } from './LightboxCaption';
 import { LightboxLoader } from './LightboxLoader';
@@ -270,7 +271,6 @@ export const LightboxImages = ({ format, images }: Props) => {
 								</Hide>
 								<LightboxCaption
 									captionText={image.caption}
-									format={format}
 									credit={image.credit}
 									displayCredit={image.displayCredit}
 								/>

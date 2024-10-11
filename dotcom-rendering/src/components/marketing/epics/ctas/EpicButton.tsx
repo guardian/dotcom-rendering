@@ -14,11 +14,11 @@ import {
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
 import React from 'react';
-import type { ReactComponent } from '../lib/ReactComponent';
+import type { ReactComponent } from '../../lib/ReactComponent';
 import {
 	OPHAN_COMPONENT_EVENT_PRIMARY_CTA,
 	OPHAN_COMPONENT_EVENT_SECONDARY_CTA,
-} from './utils/ophan';
+} from '../utils/ophan';
 
 // Custom theme for Button/LinkButton
 // See also `tertiaryButtonOverrides` below.
@@ -106,11 +106,11 @@ export const EpicButton: ReactComponent<Props> = (allProps: Props) => {
 					target="_blank"
 					rel="noopener noreferrer"
 					priority={isTertiary ? 'primary' : priority}
-					css={
+					cssOverrides={css(
 						isTertiary
 							? [tertiaryButtonOverrides, cssOverrides]
-							: cssOverrides
-					}
+							: cssOverrides,
+					)}
 					{...props}
 				>
 					{children}
@@ -125,11 +125,11 @@ export const EpicButton: ReactComponent<Props> = (allProps: Props) => {
 				icon={showArrow ? <SvgArrowRightStraight /> : undefined}
 				onClick={(): void => onClickAction()}
 				priority={isTertiary ? 'primary' : priority}
-				css={
+				cssOverrides={css(
 					isTertiary
 						? [tertiaryButtonOverrides, cssOverrides]
-						: cssOverrides
-				}
+						: cssOverrides,
+				)}
 				{...props}
 			>
 				{children}

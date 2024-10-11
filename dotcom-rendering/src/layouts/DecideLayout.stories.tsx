@@ -1,4 +1,4 @@
-import { type ArticleFormat, isObject } from '@guardian/libs';
+import { isObject } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
 import type { Decorator, StoryObj } from '@storybook/react';
 import { useEffect } from 'react';
@@ -16,6 +16,7 @@ import { Standard as StandardStandardNewsFixture } from '../../fixtures/generate
 import { Video as VideoStandardNewsFixture } from '../../fixtures/generated/dcr-articles/Video';
 import { embedIframe } from '../client/embedIframe';
 import { decideFormat } from '../lib/decideFormat';
+import type { ArticleFormat } from '../lib/format';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { extractNAV } from '../model/extract-nav';

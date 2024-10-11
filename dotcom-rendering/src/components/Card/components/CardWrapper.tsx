@@ -1,6 +1,10 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { palette as sourcePalette, space } from '@guardian/source/foundations';
+import {
+	palette as sourcePalette,
+	space,
+	until,
+} from '@guardian/source/foundations';
+import type { ArticleFormat } from '../../../lib/format';
 import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
 import { ContainerOverrides } from '../../ContainerOverrides';
@@ -10,7 +14,8 @@ type Props = {
 	children: React.ReactNode;
 	format: ArticleFormat;
 	containerPalette?: DCRContainerPalette;
-	showTopBar?: boolean;
+	showTopBarDesktop?: boolean;
+	showTopBarMobile?: boolean;
 	isOnwardContent?: boolean;
 };
 
@@ -65,7 +70,7 @@ const sublinkHoverStyles = css`
 	}
 `;
 
-const topBarStyles = css`
+const desktopTopBarStyles = css`
 	:before {
 		border-top: 1px solid ${palette('--card-border-top')};
 		content: '';
@@ -73,6 +78,12 @@ const topBarStyles = css`
 		width: 100%;
 		padding-bottom: ${space[2]}px;
 		background-color: unset;
+	}
+`;
+
+const mobileTopBarStyles = css`
+	${until.tablet} {
+		${desktopTopBarStyles}
 	}
 `;
 
@@ -89,7 +100,8 @@ export const CardWrapper = ({
 	children,
 	format,
 	containerPalette,
-	showTopBar = true,
+	showTopBarDesktop = true,
+	showTopBarMobile = false,
 	isOnwardContent = false,
 }: Props) => {
 	return (
@@ -100,7 +112,8 @@ export const CardWrapper = ({
 						baseCardStyles,
 						hoverStyles,
 						sublinkHoverStyles,
-						showTopBar && topBarStyles,
+						showTopBarDesktop && desktopTopBarStyles,
+						showTopBarMobile && mobileTopBarStyles,
 						isOnwardContent && onwardContentStyles,
 					]}
 				>

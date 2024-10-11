@@ -1,8 +1,10 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import {
 	palette,
 	space,
 	textSans15,
+	textSansBold14,
 	textSansBold15,
 	until,
 } from '@guardian/source/foundations';
@@ -22,17 +24,21 @@ import {
 	ChoiceCardTestData_REGULAR,
 	ChoiceCardTestData_US,
 } from './ThreeTierChoiceCardData';
-import type { SupportTier } from './utils/threeTierChoiceCardAmounts';
+import type {
+	SupportRatePlan,
+	SupportTier,
+} from './utils/threeTierChoiceCardAmounts';
 import { threeTierChoiceCardAmounts } from './utils/threeTierChoiceCardAmounts';
 
 const supportTierChoiceCardStyles = (selected: boolean) => css`
+	display: block;
 	border: ${selected
 		? `2px solid ${palette.brand['500']}`
 		: `1px solid ${palette.neutral[46]}`};
 	background-color: ${selected ? palette.sport[800] : palette.neutral[100]};
 	border-radius: 10px;
 	padding: ${selected
-		? `${space[4]}px ${space[5]}px ${space[2]}px ${space[5]}px`
+		? `6px ${space[5]}px 10px ${space[5]}px`
 		: `6px ${space[5]}px`};
 `;
 
@@ -72,6 +78,9 @@ const benefitsLabelStyles = css`
 const labelOverrideStyles = css`
 	+ label div {
 		font-weight: bold;
+		s {
+			font-weight: normal;
+		}
 	}
 `;
 
@@ -83,7 +92,21 @@ const recommendedPillStyles = css`
 	border-radius: 4px;
 	padding: ${space[1]}px ${space[2]}px;
 	background-color: ${palette.brand[400]};
-	${textSansBold15};
+	${textSansBold14};
+	color: ${palette.neutral[100]};
+	position: absolute;
+	top: -${space[2]}px;
+	${until.phablet} {
+		right: ${space[3]}px;
+	}
+	right: ${space[5]}px;
+`;
+
+const discountedPillStyles = css`
+	border-radius: 4px;
+	padding: ${space[1]}px ${space[2]}px;
+	background-color: ${palette.error[400]};
+	${textSansBold14};
 	color: ${palette.neutral[100]};
 	position: absolute;
 	top: -${space[2]}px;
@@ -95,7 +118,11 @@ const recommendedPillStyles = css`
 
 export type ChoiceInfo = {
 	supportTier: SupportTier;
-	label: (amount: number, currencySymbol: string) => string;
+	label: (
+		amount: number,
+		currencySymbol: string,
+		discount?: number,
+	) => JSX.Element | string;
 	benefitsLabel?: string;
 	benefits: (currencySymbol: string) => string[];
 	recommended: boolean;
@@ -103,9 +130,10 @@ export type ChoiceInfo = {
 
 function getChoiceAmount(
 	supportTier: SupportTier,
+	ratePlan: SupportRatePlan,
 	countryGroupId: CountryGroupId,
 ): number {
-	return threeTierChoiceCardAmounts[countryGroupId][supportTier];
+	return threeTierChoiceCardAmounts[ratePlan][countryGroupId][supportTier];
 }
 
 const SupportingBenefits = ({
@@ -139,16 +167,23 @@ const RecommendedPill = () => {
 	return <div css={recommendedPillStyles}>Recommended</div>;
 };
 
-type ThreeTierChoiceCardsProps = {
-	selectedAmount: number;
-	setSelectedAmount: Dispatch<SetStateAction<number>>;
-	countryCode?: string;
-	variantOfChoiceCard: string;
+const DiscountedPill = ({ discount }: { discount: number }) => {
+	return <div css={discountedPillStyles}>{discount}% off</div>;
 };
 
-export const getChoiceCardData = (variant: string): ChoiceInfo[] => {
-	switch (variant) {
+type ThreeTierChoiceCardsProps = {
+	selectedProduct: SupportTier;
+	setSelectedProduct: Dispatch<SetStateAction<SupportTier>>;
+	countryCode?: string;
+	variantOfChoiceCard: string;
+	supporterPlusDiscount?: number;
+};
+
+const getChoiceCardData = (choiceCardVariant: string): ChoiceInfo[] => {
+	switch (choiceCardVariant) {
 		case 'US_THREE_TIER_CHOICE_CARDS':
+			return ChoiceCardTestData_US;
+		case 'US_CHECKOUT_THREE_TIER_CHOICE_CARDS':
 			return ChoiceCardTestData_US;
 		default:
 			return ChoiceCardTestData_REGULAR;
@@ -157,9 +192,10 @@ export const getChoiceCardData = (variant: string): ChoiceInfo[] => {
 
 export const ThreeTierChoiceCards = ({
 	countryCode,
-	selectedAmount,
-	setSelectedAmount,
+	selectedProduct,
+	setSelectedProduct,
 	variantOfChoiceCard,
+	supporterPlusDiscount,
 }: ThreeTierChoiceCardsProps) => {
 	const currencySymbol = getLocalCurrencySymbol(countryCode);
 	const countryGroupId = countryCodeToCountryGroupId(countryCode);
@@ -183,9 +219,16 @@ export const ThreeTierChoiceCards = ({
 					}) => {
 						const choiceAmount = getChoiceAmount(
 							supportTier,
+							'Monthly',
 							countryGroupId,
 						);
-						const selected = selectedAmount === choiceAmount;
+						const selected = selectedProduct === supportTier;
+
+						const hasDiscount =
+							!isUndefined(supporterPlusDiscount) &&
+							supportTier === 'SupporterPlus';
+
+						const radioId = `choicecard-${supportTier}`;
 
 						return (
 							<div
@@ -194,18 +237,27 @@ export const ThreeTierChoiceCards = ({
 									position: relative;
 								`}
 							>
-								{recommended && <RecommendedPill />}
-								<div
+								{hasDiscount && (
+									<DiscountedPill
+										discount={supporterPlusDiscount * 100}
+									/>
+								)}
+								{recommended && !hasDiscount && (
+									<RecommendedPill />
+								)}
+								<label
 									css={supportTierChoiceCardStyles(selected)}
+									htmlFor={radioId}
 								>
 									<Radio
 										label={label(
 											choiceAmount,
 											currencySymbol,
+											supporterPlusDiscount,
 										)}
-										id={`choicecard-${supportTier}`}
+										id={radioId}
 										value={supportTier}
-										css={labelOverrideStyles}
+										cssOverrides={labelOverrideStyles}
 										supporting={
 											selected ? (
 												<SupportingBenefits
@@ -219,11 +271,11 @@ export const ThreeTierChoiceCards = ({
 											) : undefined
 										}
 										checked={selected}
-										onChange={() =>
-											setSelectedAmount(choiceAmount)
-										}
+										onChange={() => {
+											setSelectedProduct(supportTier);
+										}}
 									/>
-								</div>
+								</label>
 							</div>
 						);
 					},

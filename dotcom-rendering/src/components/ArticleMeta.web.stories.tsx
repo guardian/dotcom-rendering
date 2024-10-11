@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -10,6 +9,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { leftColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { defaultFormats } from '../../.storybook/decorators/splitThemeDecorator';
 import { allModes } from '../../.storybook/modes';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { getAllThemes } from '../lib/format';
 import { palette } from '../palette';
 import { ArticleMeta } from './ArticleMeta.web';

@@ -1,8 +1,9 @@
+import { isUndefined } from '@guardian/libs';
 import type { ChoiceInfo } from './ThreeTierChoiceCards';
 
 export const ChoiceCardTestData_REGULAR: ChoiceInfo[] = [
 	{
-		supportTier: 'support',
+		supportTier: 'Contribution',
 		label: (amount: number, currencySymbol: string): string =>
 			`Support ${currencySymbol}${amount}/month`,
 		benefitsLabel: 'Support',
@@ -12,9 +13,28 @@ export const ChoiceCardTestData_REGULAR: ChoiceInfo[] = [
 		recommended: false,
 	},
 	{
-		supportTier: 'allAccess',
-		label: (amount: number, currencySymbol: string): string =>
-			`Support ${currencySymbol}${amount}/month`,
+		supportTier: 'SupporterPlus',
+		label: (
+			amount: number,
+			currencySymbol: string,
+			discount?: number,
+		): JSX.Element | string => {
+			if (!isUndefined(discount)) {
+				return (
+					<>
+						Support{' '}
+						<s>
+							{currencySymbol}
+							{amount}
+						</s>{' '}
+						{currencySymbol}
+						{amount * discount}/month{' '}
+					</>
+				);
+			} else {
+				return `Support ${currencySymbol}${amount}/month`;
+			}
+		},
 		benefitsLabel: 'All-access digital',
 		benefits: () => [
 			'Unlimited access to the Guardian app',
@@ -25,7 +45,7 @@ export const ChoiceCardTestData_REGULAR: ChoiceInfo[] = [
 		recommended: true,
 	},
 	{
-		supportTier: 'other',
+		supportTier: 'OneOff',
 		label: (): string => 'Support with another amount',
 		benefitsLabel: undefined,
 		benefits: () => ['We welcome support of any size, any time'],
@@ -35,7 +55,7 @@ export const ChoiceCardTestData_REGULAR: ChoiceInfo[] = [
 
 export const ChoiceCardTestData_US: ChoiceInfo[] = [
 	{
-		supportTier: 'support',
+		supportTier: 'Contribution',
 		label: (amount: number, currencySymbol: string): string =>
 			`Support ${currencySymbol}${amount}/month`,
 		benefitsLabel: 'Support',
@@ -45,7 +65,7 @@ export const ChoiceCardTestData_US: ChoiceInfo[] = [
 		recommended: false,
 	},
 	{
-		supportTier: 'allAccess',
+		supportTier: 'SupporterPlus',
 		label: (amount: number, currencySymbol: string): string =>
 			`Support ${currencySymbol}${amount}/month`,
 		benefitsLabel: 'All-access digital',
@@ -58,7 +78,7 @@ export const ChoiceCardTestData_US: ChoiceInfo[] = [
 		recommended: true,
 	},
 	{
-		supportTier: 'other',
+		supportTier: 'OneOff',
 		label: (amount: number, currencySymbol: string): string =>
 			`Support once from just ${currencySymbol}1`,
 		benefitsLabel: undefined,

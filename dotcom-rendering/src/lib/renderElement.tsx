@@ -1,5 +1,3 @@
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign } from '@guardian/libs';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
 import { AffiliateDisclaimerInline } from '../components/AffiliateDisclaimer';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
@@ -66,6 +64,7 @@ import {
 	interactiveLegacyFigureClasses,
 	isInteractive,
 } from '../layouts/lib/interactiveLegacyStyling';
+import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import { getSharingUrls } from '../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType, StarRating } from '../types/content';
@@ -820,12 +819,13 @@ export const renderElement = ({
 			return (
 				<Island priority="critical" defer={{ until: 'visible' }}>
 					<YoutubeBlockComponent
-						format={format}
-						key={index}
-						hideCaption={hideCaption}
-						isMainMedia={isMainMedia}
 						id={element.id}
 						assetId={element.assetId}
+						key={index}
+						index={index}
+						format={format}
+						hideCaption={hideCaption}
+						isMainMedia={isMainMedia}
 						expired={element.expired}
 						overrideImage={element.overrideImage}
 						posterImage={element.posterImage}

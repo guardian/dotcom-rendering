@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '../../articleFormat';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import GalleryRelatedContent from './GalleryRelatedContent';

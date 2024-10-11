@@ -2,8 +2,12 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
-import { ArticlePillar, timeAgo } from '@guardian/libs';
+import {
+	type ArticleFormat,
+	type ArticleTheme,
+	Pillar,
+} from '../../articleFormat';
+import { timeAgo } from '@guardian/libs';
 import {
 	culture,
 	from,
@@ -43,13 +47,13 @@ interface ListItemProps {
 
 const getColour = (theme: ArticleTheme, paletteId: PaletteId): string => {
 	switch (theme) {
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[paletteId];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[paletteId];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[paletteId];
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[paletteId];
 		default:
 			return news[paletteId];
@@ -193,7 +197,11 @@ const timeStyles = css`
 const ListItem = ({ keyEvent, format }: ListItemProps) => {
 	return (
 		<li css={listItemStyles}>
-			<Link priority="secondary" css={linkStyles} href={keyEvent.url}>
+			<Link
+				priority="secondary"
+				cssOverrides={linkStyles}
+				href={keyEvent.url}
+			>
 				<div css={timeTextWrapperStyles}>
 					<time
 						dateTime={keyEvent.date.toISOString()}

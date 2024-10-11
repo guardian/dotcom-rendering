@@ -2,8 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat } from '../../articleFormat';
 import {
 	from,
 	neutral,
@@ -165,8 +164,8 @@ const LiveLayout = ({ item }: Props) => {
 				<GridItem area="live-blocks">
 					<div
 						css={css`
-							padding-left: ${pxToRem(10)}rem;
-							padding-right: ${pxToRem(10)}rem;
+							padding-left: ${pxToRem(10)};
+							padding-right: ${pxToRem(10)};
 							padding-top: ${remSpace[3]};
 
 							${from.mobileLandscape} {

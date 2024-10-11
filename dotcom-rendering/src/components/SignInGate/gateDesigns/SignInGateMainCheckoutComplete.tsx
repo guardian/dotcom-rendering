@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import {
+	article17,
 	articleBold17,
-	body,
 	from,
 	headlineBold28,
 	headlineBold34,
@@ -69,7 +69,8 @@ const bulletStyles = css`
 `;
 
 const personalisedBodyTextList = css`
-	${body.medium({ fontWeight: 'medium' })};
+	${article17};
+	font-weight: 500;
 	color: black;
 `;
 
@@ -216,7 +217,7 @@ export const SignInGateMainCheckoutComplete = ({
 				<LinkButton
 					data-testid="sign-in-gate-main_register"
 					data-ignore="global-link-styling"
-					css={registerButton}
+					cssOverrides={registerButton}
 					priority="primary"
 					size="small"
 					href={personaliseSignInURl(signInUrl)}
@@ -235,7 +236,7 @@ export const SignInGateMainCheckoutComplete = ({
 					<Button
 						data-testid="sign-in-gate-main_dismiss"
 						data-ignore="global-link-styling"
-						css={notNowButton}
+						cssOverrides={notNowButton}
 						priority="subdued"
 						size="small"
 						onClick={() => {

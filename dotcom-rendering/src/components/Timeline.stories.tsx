@@ -1,9 +1,13 @@
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
 import { images } from '../../fixtures/generated/images';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	Pillar,
+} from '../lib/format';
 import { getNestedArticleElement } from '../lib/renderElement';
 import type { TextBlockElement, YoutubeBlockElement } from '../types/content';
 import { Timeline } from './Timeline';

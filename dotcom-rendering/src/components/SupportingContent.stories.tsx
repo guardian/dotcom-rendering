@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
+import { breakpoints } from '@guardian/source/foundations';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '@guardian/libs';
-import { breakpoints } from '@guardian/source/foundations';
+} from '../lib/format';
 import type { Props as CardProps } from './Card/Card';
 import { Card } from './Card/Card';
 import { SupportingContent } from './SupportingContent';

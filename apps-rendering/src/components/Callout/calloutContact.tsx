@@ -103,7 +103,7 @@ const CalloutContact = ({ contacts }: { contacts: Contact[] }) => {
 					return (
 						<LinkButton
 							key={i}
-							css={calloutPrimaryButton}
+							cssOverrides={calloutPrimaryButton}
 							type="submit"
 							priority="primary"
 							href={`${contact.urlPrefix}${contact.value}`}

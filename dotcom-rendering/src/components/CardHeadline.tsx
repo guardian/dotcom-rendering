@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { type ArticleFormat, ArticleSpecial } from '@guardian/libs';
 import {
 	between,
 	from,
@@ -14,6 +13,7 @@ import {
 	headlineMedium64,
 	space,
 	textSans12,
+	textSans14,
 	textSans15,
 	textSans17,
 	textSans20,
@@ -21,6 +21,7 @@ import {
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
 import React from 'react';
+import { type ArticleFormat, ArticleSpecial } from '../lib/format';
 import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
 import { Byline } from './Byline';
@@ -32,7 +33,7 @@ type Props = {
 	format: ArticleFormat; // Used to decide when to add type specific styles
 	kickerText?: string;
 	showPulsingDot?: boolean;
-	hideLineBreak?: boolean;
+	hasInlineKicker?: boolean;
 	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
 	size?: SmallHeadlineSize;
 	sizeOnMobile?: SmallHeadlineSize;
@@ -50,22 +51,18 @@ type Props = {
 /** These represent a new set of fonts. They are extra large font sizes that, as a group, are only used on headlines */
 const boostedFontStyles = ({ size }: { size: SmallHeadlineSize }) => {
 	switch (size) {
-		// we don't have a ginormous size in designs. For now this defaults to huge.
 		case 'ginormous':
-		case 'huge':
 			return `${headlineMedium64}`;
-
-		case 'large':
+		case 'huge':
 			return `${headlineMedium50}`;
-
-		case 'medium':
+		case 'large':
 			return `${headlineMedium42}`;
-
-		case 'small':
+		case 'medium':
 			return `${headlineMedium34}`;
-
-		case 'tiny':
+		case 'small':
 			return `${headlineMedium28}`;
+		case 'tiny':
+			return `${headlineMedium24}`;
 	}
 };
 
@@ -235,9 +232,6 @@ const sublinkStyles = css`
 	font-family: inherit;
 	font-size: inherit;
 	line-height: inherit;
-	@media (pointer: coarse) {
-		min-height: 44px;
-	}
 
 	/* This css is used to remove any underline from the kicker but still
 	 * have it applied to the headline when the kicker is hovered */
@@ -275,7 +269,7 @@ export const CardHeadline = ({
 	showQuotes,
 	kickerText,
 	showPulsingDot,
-	hideLineBreak,
+	hasInlineKicker,
 	size = 'medium',
 	sizeOnMobile,
 	sizeOnTablet,
@@ -290,11 +284,14 @@ export const CardHeadline = ({
 		? palette('--highlights-card-kicker-text')
 		: palette('--card-kicker-text');
 
+	// The link is only applied directly to the headline if it is a sublink
+	const isSublink = !!linkTo;
+
 	return (
 		<WithLink linkTo={linkTo}>
 			<h3
 				className={`${
-					linkTo ? 'card-sublink-headline' : 'card-headline'
+					isSublink ? 'card-sublink-headline' : 'card-headline'
 				}`}
 				css={[
 					format.theme !== ArticleSpecial.Labs &&
@@ -311,6 +308,11 @@ export const CardHeadline = ({
 					format.theme === ArticleSpecial.Labs
 						? labTextStyles(size)
 						: fontStyles({ size, boostedFontSizes }),
+					isSublink &&
+						size === 'tiny' &&
+						css`
+							${textSans14}
+						`,
 				]}
 			>
 				{!!kickerText && (
@@ -318,16 +320,18 @@ export const CardHeadline = ({
 						text={kickerText}
 						color={kickerColour}
 						showPulsingDot={showPulsingDot}
-						hideLineBreak={hideLineBreak}
+						isInline={hasInlineKicker}
 					/>
 				)}
 				{showQuotes && <QuoteIcon colour={kickerColour} />}
 				<span
-					css={css`
-						color: ${isHighlights
-							? palette('--highlights-card-headline')
-							: palette('--card-headline-trail-text')};
-					`}
+					css={[
+						css`
+							color: ${isHighlights
+								? palette('--highlights-card-headline')
+								: palette('--card-headline-trail-text')};
+						`,
+					]}
 					className="show-underline"
 				>
 					{headlineText}

@@ -12,6 +12,7 @@ const defaultGroupedTrails: DCRGroupedTrails = {
 	big: [],
 	standard: [],
 	snap: [],
+	splash: [],
 };
 
 const meta = {

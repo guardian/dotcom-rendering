@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { ReplyType, SignedInUser } from '../../lib/discussion';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/format';
 import { ok } from '../../lib/result';
 import { TopPick } from './TopPick';
 

@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import {
 	headlineMedium17,
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
+import { ArticleDesign, ArticleSpecial } from '../lib/format';
 import { useHover } from '../lib/useHover';
 import { palette as themePalette } from '../palette';
 import type { TrailType } from '../types/trails';
@@ -108,7 +108,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 									showUnderline={isHovered}
 									kickerText="Live"
 									showPulsingDot={true}
-									hideLineBreak={true}
+									hasInlineKicker={false}
 									byline={
 										trail.showByline
 											? trail.byline

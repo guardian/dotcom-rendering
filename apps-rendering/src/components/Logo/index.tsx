@@ -1,7 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat } from '../../articleFormat';
 import { remSpace, textSans15, until } from '@guardian/source/foundations';
 import Anchor from 'components/Anchor';
 import { getFormat } from 'item';

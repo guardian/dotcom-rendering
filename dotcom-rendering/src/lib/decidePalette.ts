@@ -1,9 +1,12 @@
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleSpecial, Pillar } from '@guardian/libs';
 import { brandAltBackground, palette } from '@guardian/source/foundations';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+	Pillar,
+} from '../lib/format';
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../lib/pillars';
-import { palette as themePalette } from '../palette';
 import type { Palette } from '../types/palette';
 import { transparentColour } from './transparentColour';
 
@@ -21,16 +24,6 @@ const {
 
 const WHITE = neutral[100];
 const BLACK = neutral[7];
-
-const textHeadlineWhenMatch = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.MatchReport:
-		case ArticleDesign.LiveBlog:
-			return BLACK;
-		default:
-			return themePalette('--series-title-text');
-	}
-};
 
 const textStandfirst = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
@@ -93,10 +86,6 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 	}
 };
 
-const textCricketScoreboardLink = (): string => {
-	return sport[300];
-};
-
 const backgroundBullet = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport) {
@@ -148,20 +137,6 @@ const backgroundBulletStandfirst = (format: ArticleFormat): string => {
 
 	return neutral[86]; // default previously defined in Standfirst.tsx
 };
-
-const backgroundImageTitle = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
-		}
-	}
-	return pillarPalette[format.theme].main;
-};
-
-const backgroundLightboxDivider = backgroundImageTitle;
 
 const backgroundSpeechBubble = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.Analysis) {
@@ -355,14 +330,6 @@ const borderLines = (format: ArticleFormat): string => {
 	return neutral[86];
 };
 
-const borderCricketScoreboardTop = (): string => {
-	return sport[300];
-};
-
-const borderCricketScoreboardDivider = (): string => {
-	return neutral[86];
-};
-
 const borderFilterButton = (): string => neutral[60];
 
 const backgroundAnalysisContrastColour = (): string => '#F2E8E6';
@@ -456,11 +423,9 @@ const textExpandableAtomHover = (format: ArticleFormat) => {
 export const decidePalette = (format: ArticleFormat): Palette => {
 	return {
 		text: {
-			headlineWhenMatch: textHeadlineWhenMatch(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
 			disclaimerLink: textDisclaimerLink(format),
-			cricketScoreboardLink: textCricketScoreboardLink(),
 			filterButton: textFilterButton(),
 			filterButtonHover: textFilterButtonHover(),
 			filterButtonActive: textFilterButtonActive(),
@@ -474,8 +439,6 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			analysisContrastHover: backgroundAnalysisContrastHoverColour(),
 			bullet: backgroundBullet(format),
 			bulletStandfirst: backgroundBulletStandfirst(format),
-			imageTitle: backgroundImageTitle(format),
-			lightboxDivider: backgroundLightboxDivider(format),
 			speechBubble: backgroundSpeechBubble(format),
 			filterButton: backgroundFilterButton(),
 			filterButtonHover: backgroundFilterButtonHover(format),
@@ -490,8 +453,6 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			headline: borderHeadline(format),
 			navPillar: borderNavPillar(format),
 			lines: borderLines(format),
-			cricketScoreboardTop: borderCricketScoreboardTop(),
-			cricketScoreboardDivider: borderCricketScoreboardDivider(),
 			cardSupporting: borderCardSupporting(format),
 			filterButton: borderFilterButton(),
 		},

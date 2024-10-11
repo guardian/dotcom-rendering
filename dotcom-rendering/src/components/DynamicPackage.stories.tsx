@@ -1,8 +1,8 @@
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { getSublinks, trails } from '../../fixtures/manual/trails';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '../lib/format';
 import type { DCRGroupedTrails } from '../types/front';
 import { DynamicPackage } from './DynamicPackage';
 import { FrontSection } from './FrontSection';
@@ -13,6 +13,7 @@ const defaultGroupedTrails: DCRGroupedTrails = {
 	big: [],
 	standard: [],
 	snap: [],
+	splash: [],
 };
 
 const meta = {

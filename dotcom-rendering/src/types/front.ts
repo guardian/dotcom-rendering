@@ -1,6 +1,6 @@
-import type { ArticleFormat, ArticleSpecial, Pillar } from '@guardian/libs';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
+import type { ArticleFormat, ArticleSpecial, Pillar } from '../lib/format';
 import type { Branding, CollectionBranding, EditionBranding } from './branding';
 import type { ServerSideTests, Switches } from './config';
 import type { BoostLevel, Image, StarRating } from './content';
@@ -91,7 +91,13 @@ type FEContainerType =
 	| 'nav/media-list'
 	| 'news/most-popular'
 	| 'scrollable/highlights'
-	| 'flexible/special';
+	| 'flexible/special'
+	| 'flexible/general'
+	| 'scrollable/small'
+	| 'scrollable/medium'
+	| 'scrollable/feature'
+	| 'static/feature/2'
+	| 'static/medium/4';
 
 export type FEContainerPalette =
 	| 'EventPalette'
@@ -422,6 +428,7 @@ export type DCRGroupedTrails = {
 	veryBig: DCRFrontCard[];
 	big: DCRFrontCard[];
 	standard: DCRFrontCard[];
+	splash: DCRFrontCard[];
 };
 
 export type FEFrontConfigType = {

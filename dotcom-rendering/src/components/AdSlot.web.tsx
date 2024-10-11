@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import type { SlotName } from '@guardian/commercial';
 import { adSizes, constants } from '@guardian/commercial';
-import { ArticleDisplay } from '@guardian/libs';
 import {
 	between,
 	breakpoints,
@@ -12,6 +11,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
+import { ArticleDisplay } from '../lib/format';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { palette as schemedPalette } from '../palette';
@@ -69,6 +69,7 @@ type RemainingProps = {
 type Props = DefaultProps & (RightProps | InlineProps | RemainingProps);
 
 const labelHeight = constants.AD_LABEL_HEIGHT;
+const halfPageAdHeight = adSizes.halfPage.height;
 
 const individualLabelCSS = css`
 	${textSans12};
@@ -204,6 +205,21 @@ const fluidFullWidthAdStyles = css`
 	&.ad-slot--fluid {
 		width: 100%;
 	}
+`;
+
+/**
+ * Both Showcase and NumberedList displays have a showcase main media. Underneath this
+ * in the right column, the `right` ad slot and the MostViewed component are loaded on
+ * the client, with the `right` ad slot on top. As MostViewed can (and often does)
+ * render first, we need to reserve space for the ad to avoid CLS.
+ */
+const showcaseRightColumnContainerStyles = css`
+	min-height: ${halfPageAdHeight + labelHeight}px;
+`;
+
+const showcaseRightColumnStyles = css`
+	position: sticky;
+	top: 0;
 `;
 
 const merchandisingAdContainerStyles = css`
@@ -493,9 +509,7 @@ export const AdSlot = ({
 	switch (position) {
 		case 'right':
 			switch (display) {
-				case ArticleDisplay.Immersive:
-				case ArticleDisplay.Showcase:
-				case ArticleDisplay.NumberedList: {
+				case ArticleDisplay.Immersive: {
 					return (
 						<div
 							className="ad-slot-container"
@@ -504,6 +518,34 @@ export const AdSlot = ({
 							<div
 								id="dfp-ad--right"
 								css={rightAdStyles}
+								className={[
+									'js-ad-slot',
+									'ad-slot',
+									'ad-slot--right',
+									'ad-slot--mpu-banner-ad',
+									'ad-slot--rendered',
+									'js-sticky-mpu',
+								].join(' ')}
+								data-link-name="ad slot right"
+								data-name="right"
+								aria-hidden="true"
+							/>
+						</div>
+					);
+				}
+				case ArticleDisplay.Showcase:
+				case ArticleDisplay.NumberedList: {
+					return (
+						<div
+							className="ad-slot-container"
+							css={[
+								adContainerStyles,
+								showcaseRightColumnContainerStyles,
+							]}
+						>
+							<div
+								id="dfp-ad--right"
+								css={[rightAdStyles, showcaseRightColumnStyles]}
 								className={[
 									'js-ad-slot',
 									'ad-slot',

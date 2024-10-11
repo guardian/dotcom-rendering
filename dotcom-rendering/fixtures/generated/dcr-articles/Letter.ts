@@ -14,6 +14,11 @@
 import type { Article } from '../../../src/types/article';
 
 export const Letter: Article = {
+	format: {
+		display: 0,
+		theme: 1,
+		design: 9,
+	},
 	frontendData: {
 		version: 3,
 		headline: 'Why is a woman’s work never done?',

@@ -1,6 +1,5 @@
 import { css, Global } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleSpecial, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -43,6 +42,7 @@ import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
+import { type ArticleFormat, ArticleSpecial } from '../lib/format';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -218,7 +218,7 @@ interface AppsProps extends CommonProps {
 export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
-		config: { isPaidContent, host },
+		config: { isPaidContent, host, hasSurveyAd },
 		editionId,
 	} = article;
 
@@ -300,7 +300,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						</Stuck>
 					)}
 
-					{renderAds && article.config.switches.surveys && (
+					{renderAds && hasSurveyAd && (
 						<AdSlot position="survey" display={format.display} />
 					)}
 				</>

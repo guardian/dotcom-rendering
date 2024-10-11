@@ -2,8 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleSpecial } from '@guardian/libs';
+import { type ArticleFormat, ArticleSpecial } from '../../articleFormat';
 import { remSpace, space, textSans15 } from '@guardian/source/foundations';
 import { FollowNotificationStatus } from 'components/FollowStatus';
 import type { Contributor } from 'contributor';

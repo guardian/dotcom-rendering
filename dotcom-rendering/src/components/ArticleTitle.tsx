@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDisplay, type ArticleFormat } from '@guardian/libs';
 import { from } from '@guardian/source/foundations';
+import { ArticleDisplay, type ArticleFormat } from '../lib/format';
 import type { TagType } from '../types/tag';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
@@ -47,7 +47,11 @@ export const ArticleTitle = ({
 }: Props) => (
 	<div css={[sectionStyles]}>
 		<div
-			css={format.display === ArticleDisplay.Immersive ? immersiveMargins : undefined}
+			css={
+				format.display === ArticleDisplay.Immersive
+					? immersiveMargins
+					: undefined
+			}
 		>
 			<SeriesSectionLink
 				format={format}

@@ -160,7 +160,7 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 	`;
 };
 
-export const HighlightsContainer = ({ trails }: Props) => {
+export const ScrollableHighlights = ({ trails }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
 	const imageLoading = 'eager';
@@ -272,7 +272,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 				{showPreviousButton && (
 					<div css={[buttonOverlayStyles, previousButtonFadeStyles]}>
 						<Button
-							css={buttonStyles}
+							cssOverrides={buttonStyles}
 							hideLabel={true}
 							iconSide="left"
 							icon={<SvgChevronLeftSingle />}
@@ -286,7 +286,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 				{showNextButton && (
 					<div css={[buttonOverlayStyles, nextButtonFadeStyles]}>
 						<Button
-							css={buttonStyles}
+							cssOverrides={buttonStyles}
 							hideLabel={true}
 							iconSide="left"
 							icon={<SvgChevronRightSingle />}

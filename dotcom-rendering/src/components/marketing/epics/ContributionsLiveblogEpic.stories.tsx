@@ -3,7 +3,11 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/9c3eae7cb0b159db4a1c40679d6b37710b0bb937/packages/modules/src/modules/epics/ContributionsLiveblogEpic.stories.tsx
  */
-import { SecondaryCtaType } from '@guardian/support-dotcom-components';
+import {
+	SecondaryCtaType,
+	TickerCountType,
+	TickerEndType,
+} from '@guardian/support-dotcom-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
 import React from 'react';
@@ -87,43 +91,42 @@ export const WithThreeTierChoiceCards: Story = {
 	},
 };
 
-export const WithChoiceCards: Story = {
-	name: 'ContributionsLiveblogEpic with Choice Cards',
+export const WithThreeTierChoiceCardsForUS: Story = {
+	name: 'Contributions Liveblog Epic with Three Tier Choice Cards for US',
+	args: {
+		...meta.args,
+		countryCode: 'US',
+		variant: {
+			...props.variant,
+			name: 'US_CHECKOUT_PAGE',
+			secondaryCta: undefined,
+			showChoiceCards: true,
+		},
+	},
+};
+
+export const WithTicker: Story = {
+	name: 'ContributionsLiveblogEpic with Ticker',
 	args: {
 		...meta.args,
 		variant: {
 			...props.variant,
-			secondaryCta: {
-				type: SecondaryCtaType.ContributionsReminder,
-			},
-			showReminderFields: {
-				reminderCta: 'Remind me in December',
-				reminderPeriod: '2022-12-01',
-				reminderLabel: 'December',
-			},
+			secondaryCta: undefined,
 			showChoiceCards: true,
-			choiceCardAmounts: {
-				testName: 'Storybook_test',
-				variantName: 'Control',
-				defaultContributionType: 'MONTHLY',
-				displayContributionType: ['ONE_OFF', 'MONTHLY', 'ANNUAL'],
-				amountsCardData: {
-					ONE_OFF: {
-						amounts: [5, 10],
-						defaultAmount: 5,
-						hideChooseYourAmount: false,
-					},
-					MONTHLY: {
-						amounts: [4, 10],
-						defaultAmount: 12,
-						hideChooseYourAmount: false,
-					},
-					ANNUAL: {
-						amounts: [50, 100],
-						defaultAmount: 100,
-						hideChooseYourAmount: false,
-					},
+			tickerSettings: {
+				endType: TickerEndType.unlimited,
+				countType: TickerCountType.money,
+				currencySymbol: '£',
+				copy: {
+					countLabel: 'Help us reach our end-of-year goal',
+					goalReachedPrimary: '',
+					goalReachedSecondary: '',
 				},
+				tickerData: {
+					total: 10000,
+					goal: 100000,
+				},
+				name: 'US',
 			},
 		},
 	},

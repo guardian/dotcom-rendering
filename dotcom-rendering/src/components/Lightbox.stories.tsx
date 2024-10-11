@@ -1,14 +1,48 @@
+import { storage } from '@guardian/libs';
+import { breakpoints } from '@guardian/source/foundations';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useEffect } from 'react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-	storage,
-} from '@guardian/libs';
-import { breakpoints } from '@guardian/source/foundations';
-import { useEffect } from 'react';
+} from '../lib/format';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxLayout } from './LightboxLayout.importable';
+
+const Initialise = ({ children }: { children: React.ReactNode }) => {
+	useEffect(() => {
+		const lightbox =
+			document.querySelector<HTMLDialogElement>('#gu-lightbox');
+		lightbox?.removeAttribute('hidden');
+		storage.local.clear();
+	}, []);
+
+	return <div style={{ height: '100vh' }}>{children}</div>;
+};
+
+const meta = {
+	title: 'Components/LightboxLayout',
+	component: LightboxLayout,
+	parameters: {
+		chromatic: {
+			viewports: [breakpoints.mobile, breakpoints.desktop],
+		},
+		viewport: {
+			disable: true,
+		},
+	},
+	decorators: (Story) => (
+		<Initialise>
+			<Story />
+		</Initialise>
+	),
+} satisfies Meta<typeof LightboxLayout>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 const testImage: ImageForLightbox = {
 	position: 1,
@@ -24,274 +58,210 @@ const testImage: ImageForLightbox = {
 	displayCredit: false,
 };
 
-export default {
-	component: LightboxLayout,
-	title: 'Components/LightboxLayout',
-	parameters: {
-		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.desktop],
+export const Default = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
 		},
-		viewport: {
-			// This has the effect of turning off the viewports addon by default
-			defaultViewport: 'doesNotExist',
-		},
+		images: [{ ...testImage }],
 	},
-};
+} satisfies Story;
 
-const Initialise = ({ children }: { children: React.ReactNode }) => {
-	useEffect(() => {
-		const lightbox =
-			document.querySelector<HTMLDialogElement>('#gu-lightbox');
-		lightbox?.removeAttribute('hidden');
-		storage.local.clear();
-	}, []);
-
-	return <div style={{ height: '100vh' }}>{children}</div>;
-};
-
-export const Default = () => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.News,
-	};
-	const images = [{ ...testImage }];
-	return (
-		<Initialise>
-			<LightboxLayout format={format} images={images} />
-		</Initialise>
-	);
-};
-
-export const WithTitle = () => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.News,
-	};
-	const images = [{ ...testImage, title: 'Title' }];
-	return (
-		<Initialise>
-			<LightboxLayout format={format} images={images} />
-		</Initialise>
-	);
-};
-
-export const WithCredit = () => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.News,
-	};
-	const images = [{ ...testImage, displayCredit: true }];
-	return (
-		<Initialise>
-			<LightboxLayout format={format} images={images} />
-		</Initialise>
-	);
-};
-
-export const WithRating = () => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.News,
-	};
-	const images = [{ ...testImage, starRating: 3 }];
-	return (
-		<Initialise>
-			<LightboxLayout format={format} images={images} />
-		</Initialise>
-	);
-};
-
-export const WhenLiveBlog = () => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.LiveBlog,
-		theme: Pillar.News,
-	};
-	const images = [
-		{
-			...testImage,
-			starRating: 3,
-			title: 'Title',
-			displayCredit: true,
-			firstPublished: 1643816168535,
-			blockId: 'mockId',
+export const WithTitle = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
 		},
-	];
-	return (
-		<Initialise>
-			<LightboxLayout format={format} images={images} />
-		</Initialise>
-	);
-};
+		images: [{ ...testImage, title: 'Title' }],
+	},
+} satisfies Story;
 
-export const WithEverything = () => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.News,
-	};
-	const images = [
-		{
-			...testImage,
-			starRating: 3,
-			title: 'Title',
-			displayCredit: true,
+export const WithCredit = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
 		},
-	];
-	return (
-		<Initialise>
-			<LightboxLayout format={format} images={images} />
-		</Initialise>
-	);
-};
+		images: [{ ...testImage, displayCredit: true }],
+	},
+} satisfies Story;
 
-export const WithSport = () => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.Sport,
-	};
-	const images = [
-		{
-			...testImage,
-			starRating: 3,
-			title: 'Title',
-			displayCredit: true,
+export const WithRating = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
 		},
-	];
-	return (
-		<Initialise>
-			<LightboxLayout format={format} images={images} />
-		</Initialise>
-	);
-};
+		images: [{ ...testImage, starRating: 3 }],
+	},
+} satisfies Story;
 
-export const WithCulture = () => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.Culture,
-	};
-	const images = [
-		{
-			...testImage,
-			starRating: 3,
-			title: 'Title',
-			displayCredit: true,
+export const WhenLiveBlog = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.LiveBlog,
+			theme: Pillar.News,
 		},
-	];
-	return (
-		<Initialise>
-			<LightboxLayout format={format} images={images} />
-		</Initialise>
-	);
-};
+		images: [
+			{
+				...testImage,
+				starRating: 3,
+				title: 'Title',
+				displayCredit: true,
+				firstPublished: 1643816168535,
+				blockId: 'mockId',
+			},
+		],
+	},
+} satisfies Story;
 
-export const WithLifestyle = () => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.Lifestyle,
-	};
-	const images = [
-		{
-			...testImage,
-			starRating: 3,
-			title: 'Title',
-			displayCredit: true,
+export const WithEverything = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
 		},
-	];
-	return (
-		<Initialise>
-			<LightboxLayout format={format} images={images} />
-		</Initialise>
-	);
-};
+		images: [
+			{
+				...testImage,
+				starRating: 3,
+				title: 'Title',
+				displayCredit: true,
+			},
+		],
+	},
+} satisfies Story;
 
-export const WithOpinion = () => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.Opinion,
-	};
-	const images = [
-		{
-			...testImage,
-			starRating: 3,
-			title: 'Title',
-			displayCredit: true,
+export const WithSport = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.Sport,
 		},
-	];
-	return (
-		<Initialise>
-			<LightboxLayout format={format} images={images} />
-		</Initialise>
-	);
-};
+		images: [
+			{
+				...testImage,
+				starRating: 3,
+				title: 'Title',
+				displayCredit: true,
+			},
+		],
+	},
+} satisfies Story;
 
-export const WithSpecialReport = () => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: ArticleSpecial.SpecialReport,
-	};
-	const images = [
-		{
-			...testImage,
-			starRating: 3,
-			title: 'Title',
-			displayCredit: true,
+export const WithCulture = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.Culture,
 		},
-	];
-	return (
-		<Initialise>
-			<LightboxLayout format={format} images={images} />
-		</Initialise>
-	);
-};
+		images: [
+			{
+				...testImage,
+				starRating: 3,
+				title: 'Title',
+				displayCredit: true,
+			},
+		],
+	},
+} satisfies Story;
 
-export const WithSpecialReportAlt = () => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: ArticleSpecial.SpecialReportAlt,
-	};
-	const images = [
-		{
-			...testImage,
-			starRating: 3,
-			title: 'Title',
-			displayCredit: true,
+export const WithLifestyle = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.Lifestyle,
 		},
-	];
-	return (
-		<Initialise>
-			<LightboxLayout format={format} images={images} />
-		</Initialise>
-	);
-};
+		images: [
+			{
+				...testImage,
+				starRating: 3,
+				title: 'Title',
+				displayCredit: true,
+			},
+		],
+	},
+} satisfies Story;
 
-export const WithLabs = () => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: ArticleSpecial.Labs,
-	};
-	const images = [
-		{
-			...testImage,
-			starRating: 3,
-			title: 'Title',
-			displayCredit: true,
+export const WithOpinion = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.Opinion,
 		},
-	];
-	return (
-		<Initialise>
-			<LightboxLayout format={format} images={images} />
-		</Initialise>
-	);
-};
+		images: [
+			{
+				...testImage,
+				starRating: 3,
+				title: 'Title',
+				displayCredit: true,
+			},
+		],
+	},
+} satisfies Story;
+
+export const WithSpecialReport = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: ArticleSpecial.SpecialReport,
+		},
+		images: [
+			{
+				...testImage,
+				starRating: 3,
+				title: 'Title',
+				displayCredit: true,
+			},
+		],
+	},
+} satisfies Story;
+
+export const WithSpecialReportAlt = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: ArticleSpecial.SpecialReportAlt,
+		},
+		images: [
+			{
+				...testImage,
+				starRating: 3,
+				title: 'Title',
+				displayCredit: true,
+			},
+		],
+	},
+} satisfies Story;
+
+export const WithLabs = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: ArticleSpecial.Labs,
+		},
+		images: [
+			{
+				...testImage,
+				starRating: 3,
+				title: 'Title',
+				displayCredit: true,
+			},
+		],
+	},
+} satisfies Story;

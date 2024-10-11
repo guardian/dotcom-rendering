@@ -198,14 +198,13 @@ export const WithTicker: Story = {
 		variant: {
 			...props.variant,
 			tickerSettings: {
-				countType: TickerCountType.money,
 				endType: TickerEndType.unlimited,
+				countType: TickerCountType.money,
 				currencySymbol: '£',
 				copy: {
-					countLabel: 'contributed',
-					goalReachedPrimary: "We've met our goal - thank you",
-					goalReachedSecondary:
-						'Contributions are still being accepted',
+					countLabel: 'Help us reach our end-of-year goal',
+					goalReachedPrimary: '',
+					goalReachedSecondary: '',
 				},
 				tickerData: {
 					total: 10000,
@@ -214,6 +213,39 @@ export const WithTicker: Story = {
 				name: 'US',
 			},
 		},
+	},
+};
+
+export const WithTickerAndWithAboveTopReaderArticleCount: Story = {
+	name: 'ContributionsEpic with ticker and top reader article count',
+	args: {
+		...meta.args,
+		variant: {
+			...props.variant,
+			separateArticleCount: {
+				type: 'above',
+			},
+			tickerSettings: {
+				endType: TickerEndType.unlimited,
+				countType: TickerCountType.money,
+				currencySymbol: '£',
+				copy: {
+					countLabel: 'Help us reach our end-of-year goal',
+					goalReachedPrimary: '',
+					goalReachedSecondary: '',
+				},
+				tickerData: {
+					total: 10000,
+					goal: 100000,
+				},
+				name: 'US',
+			},
+		},
+		articleCounts: {
+			for52Weeks: 99,
+			forTargetedWeeks: 99,
+		},
+		hasConsentForArticleCount: true,
 	},
 };
 
@@ -271,48 +303,6 @@ export const WithAboveArticleCountNoConsent: Story = {
 	},
 };
 
-export const WithChoiceCards: Story = {
-	name: 'ContributionsEpic with choice cards',
-	args: {
-		...meta.args,
-		variant: {
-			...props.variant,
-			secondaryCta: {
-				type: SecondaryCtaType.ContributionsReminder,
-			},
-			showReminderFields: {
-				reminderCta: 'Remind me in October',
-				reminderPeriod: '2021-10-01',
-				reminderLabel: 'October',
-			},
-			showChoiceCards: true,
-			choiceCardAmounts: {
-				testName: 'Storybook_test',
-				variantName: 'Control',
-				defaultContributionType: 'MONTHLY',
-				displayContributionType: ['ONE_OFF', 'MONTHLY', 'ANNUAL'],
-				amountsCardData: {
-					ONE_OFF: {
-						amounts: [5, 10, 15, 20],
-						defaultAmount: 5,
-						hideChooseYourAmount: false,
-					},
-					MONTHLY: {
-						amounts: [6, 12],
-						defaultAmount: 12,
-						hideChooseYourAmount: true,
-					},
-					ANNUAL: {
-						amounts: [50, 100, 150, 200],
-						defaultAmount: 100,
-						hideChooseYourAmount: true,
-					},
-				},
-			},
-		},
-	},
-};
-
 export const WithThreeTierChoiceCards: Story = {
 	name: 'ContributionsEpic with three tier choice cards',
 	args: {
@@ -336,6 +326,25 @@ export const WithThreeTierChoiceCardsForUS: Story = {
 			name: 'THREE_TIER_CHOICE_CARDS',
 			secondaryCta: undefined,
 			showChoiceCards: true,
+		},
+	},
+};
+
+export const WithThreeTierDiscountChoiceCards: Story = {
+	name: 'ContributionsEpic with discounted three tier choice cards',
+	args: {
+		...meta.args,
+		countryCode: 'GB',
+		variant: {
+			...props.variant,
+			name: 'THREE_TIER_CHOICE_CARDS',
+			secondaryCta: undefined,
+			showChoiceCards: true,
+			cta: {
+				text: 'Support the Guardian',
+				baseUrl:
+					'https://support.theguardian.com/uk/contribute?promoCode=OCT_DISCOUNT_50_3_MONTHS',
+			},
 		},
 	},
 };

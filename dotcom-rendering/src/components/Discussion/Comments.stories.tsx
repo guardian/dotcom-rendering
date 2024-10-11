@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { parse } from 'valibot';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
@@ -12,6 +11,7 @@ import type {
 	Reader,
 } from '../../lib/discussion';
 import { discussionApiResponseSchema } from '../../lib/discussion';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/format';
 import { ok } from '../../lib/result';
 import { Comments } from './Comments';
 
@@ -313,6 +313,7 @@ export const LoggedOutHiddenNoPicks = () => (
 		/>
 	</div>
 );
+
 LoggedOutHiddenNoPicks.storyName =
 	'when logged out, with no picks and not expanded';
 LoggedOutHiddenNoPicks.decorators = [

@@ -253,9 +253,31 @@ export const addProfileTrackingParams = (
 export const addChoiceCardsParams = (
 	url: string,
 	frequency: ContributionFrequency,
-	amount: number | 'other',
+	amount?: number | 'other',
 ): string => {
-	const newParams = `selected-contribution-type=${frequency}&selected-amount=${amount}`;
+	const newParams = `selected-contribution-type=${frequency}${
+		amount !== undefined ? `&selected-amount=${amount}` : ''
+	}`;
+	const alreadyHasQueryString = url.includes('?');
+	return `${url}${alreadyHasQueryString ? '&' : '?'}${newParams}`;
+};
+
+export const addChoiceCardsOneTimeParams = (url: string): string => {
+	const newParams = `oneTime`;
+	const alreadyHasQueryString = url.includes('?');
+	return `${url}${alreadyHasQueryString ? '&' : '?'}${newParams}`;
+};
+
+export const addChoiceCardsProductParams = (
+	url: string,
+	product: string,
+	ratePlan: string,
+	contribution?: number,
+): string => {
+	const newParams = `product=${product}&ratePlan=${ratePlan}${
+		contribution !== undefined ? `&contribution=${contribution}` : ''
+	}`;
+
 	const alreadyHasQueryString = url.includes('?');
 	return `${url}${alreadyHasQueryString ? '&' : '?'}${newParams}`;
 };

@@ -3,7 +3,6 @@
  * This file was largely inspired by src/components/Pillars.tsx
  */
 import { css } from '@emotion/react';
-import { type ArticleTheme, Pillar } from '@guardian/libs';
 import {
 	from,
 	headlineBold14,
@@ -13,6 +12,7 @@ import {
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
+import { type ArticleTheme, Pillar } from '../../../lib/format';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
@@ -20,10 +20,11 @@ import { listAccessibility } from './commonStyles';
 import { pillarLeftMarginPx, pillarWidthsPx } from './constants';
 
 type Props = {
-	nav: NavType;
-	dataLinkName: string;
+	pillars: NavType['pillars'];
 	selectedPillar?: Pillar;
+	dataLinkName: string;
 	hasPageSkin?: boolean;
+	isTopNav?: boolean;
 };
 
 const pillarsContainer = css`
@@ -209,16 +210,17 @@ const getPillarColour = (pillar: ArticleTheme): string | undefined => {
 };
 
 export const Pillars = ({
-	nav,
+	pillars,
 	selectedPillar,
 	dataLinkName,
 	hasPageSkin = false,
+	isTopNav = true,
 }: Props) => {
 	return (
-		<ul id="navigation" css={pillarsContainer}>
-			{nav.pillars.map((p, i) => {
+		<ul css={pillarsContainer}>
+			{pillars.map((p, i) => {
 				const isSelected = p.pillar === selectedPillar;
-				const showDivider = isNotLastPillar(i, nav.pillars.length);
+				const showDivider = isNotLastPillar(i, pillars.length);
 				const pillarColour = getPillarColour(p.pillar);
 
 				return (
@@ -241,6 +243,7 @@ export const Pillars = ({
 								isSelected && forceUnderline,
 							]}
 							style={{ '--pillar-underline': pillarColour }}
+							id={isTopNav && i === 0 ? 'navigation' : undefined}
 							data-link-name={nestedOphanComponents(
 								dataLinkName,
 								'primary',

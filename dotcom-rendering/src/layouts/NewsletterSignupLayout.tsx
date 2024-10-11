@@ -1,7 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDisplay } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -38,6 +36,7 @@ import { Standfirst } from '../components/Standfirst';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
+import { ArticleDisplay, type ArticleFormat } from '../lib/format';
 import { isValidUrl } from '../lib/isValidUrl';
 import type { NavType } from '../model/extract-nav';
 import type { ArticleDeprecated } from '../types/article';
@@ -187,7 +186,7 @@ const getMainMediaCaptions = (
 export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 	const {
 		promotedNewsletter,
-		config: { host },
+		config: { host, hasSurveyAd },
 	} = article;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
@@ -249,7 +248,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 				/>
 			</div>
 
-			{renderAds && !!article.config.switches.surveys && (
+			{renderAds && hasSurveyAd && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 

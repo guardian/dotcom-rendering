@@ -1,7 +1,7 @@
 import type { Participations } from '@guardian/ab-core';
-import type { ArticleFormat, ConsentState } from '@guardian/libs';
-import { isUndefined } from '@guardian/libs';
+import type { ConsentState } from '@guardian/libs';
 import { useCallback, useState } from 'react';
+import type { ArticleFormat } from '../../lib/format';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type {
 	ImagePositionType,
@@ -26,8 +26,9 @@ export type VideoEventKey =
 	| 'pause';
 
 export type Props = {
-	index?: number;
+	atomId: string;
 	videoId: string;
+	uniqueId: string;
 	overrideImage?: string | undefined;
 	posterImage?: string | undefined;
 	adTargeting?: AdTargeting;
@@ -53,8 +54,9 @@ export type Props = {
 };
 
 export const YoutubeAtom = ({
-	index,
+	atomId,
 	videoId,
+	uniqueId,
 	overrideImage,
 	posterImage,
 	adTargeting,
@@ -83,8 +85,6 @@ export const YoutubeAtom = ({
 	const [isActive, setIsActive] = useState<boolean>(false);
 	const [isClosed, setIsClosed] = useState<boolean>(false);
 	const [pauseVideo, setPauseVideo] = useState<boolean>(false);
-
-	const uniqueId = `${videoId}-${index ?? 'server'}`;
 
 	/**
 	 * Consent and ad targeting are initially undefined and set by subsequent re-renders
@@ -172,84 +172,87 @@ export const YoutubeAtom = ({
 		loadPlayer = false;
 	}
 
-	if (isUndefined(index)) {
-		loadPlayer = false;
-	}
-
 	/**
 	 * Create a stable callback as it will be a useEffect dependency in YoutubeAtomPlayer
 	 */
 	const playerReadyCallback = useCallback(() => setPlayerReady(true), []);
 
 	return (
-		<YoutubeAtomSticky
-			uniqueId={uniqueId}
-			videoId={videoId}
-			shouldStick={shouldStick}
-			isActive={isActive}
-			eventEmitters={eventEmitters}
-			setPauseVideo={setPauseVideo}
-			isMainMedia={isMainMedia}
-			isClosed={isClosed}
-			setIsClosed={setIsClosed}
-			shouldPauseOutOfView={shouldPauseOutOfView}
+		<div
+			data-component="youtube-atom"
+			data-atom-id={atomId}
+			data-video-id={videoId}
+			data-video-unique-id={uniqueId}
 		>
-			<MaintainAspectRatio height={height} width={width}>
-				{
-					/**
-					 * Consent and ad targeting are initially undefined and set by subsequent re-renders
-					 * Wait until they are defined before rendering the player
-					 */
-					loadPlayer && consentState && adTargeting && (
-						<YoutubeAtomPlayer
-							videoId={videoId}
+			<YoutubeAtomSticky
+				uniqueId={uniqueId}
+				videoId={videoId}
+				shouldStick={shouldStick}
+				isActive={isActive}
+				eventEmitters={eventEmitters}
+				setPauseVideo={setPauseVideo}
+				isMainMedia={isMainMedia}
+				isClosed={isClosed}
+				setIsClosed={setIsClosed}
+				shouldPauseOutOfView={shouldPauseOutOfView}
+			>
+				<MaintainAspectRatio height={height} width={width}>
+					{
+						/**
+						 * Consent and ad targeting are initially undefined and set by subsequent re-renders
+						 * Wait until they are defined before rendering the player
+						 */
+						loadPlayer && consentState && adTargeting && (
+							<YoutubeAtomPlayer
+								videoId={videoId}
+								uniqueId={uniqueId}
+								height={height}
+								width={width}
+								title={title}
+								origin={origin}
+								eventEmitters={compositeEventEmitters}
+								/**
+								 * If there is an overlay we want to autoplay
+								 * If there isn't an overlay the user will use the YouTube player UI to play
+								 */
+								autoPlay={hasOverlay}
+								onReady={playerReadyCallback}
+								pauseVideo={pauseVideo}
+								deactivateVideo={() => {
+									setIsActive(false);
+								}}
+								enableAds={adTargetingEnabled}
+								adTargeting={adTargeting}
+								consentState={consentState}
+								abTestParticipations={abTestParticipations}
+								renderingTarget={renderingTarget}
+							/>
+						)
+					}
+					{showOverlay && (
+						<YoutubeAtomOverlay
 							uniqueId={uniqueId}
+							overrideImage={overrideImage}
+							posterImage={posterImage}
 							height={height}
 							width={width}
+							alt={alt}
+							duration={duration}
 							title={title}
-							origin={origin}
-							eventEmitters={compositeEventEmitters}
-							/**
-							 * If there is an overlay we want to autoplay
-							 * If there isn't an overlay the user will use the YouTube player UI to play
-							 */
-							autoPlay={hasOverlay}
-							onReady={playerReadyCallback}
-							pauseVideo={pauseVideo}
-							deactivateVideo={() => {
-								setIsActive(false);
-							}}
-							enableAds={adTargetingEnabled}
-							adTargeting={adTargeting}
-							consentState={consentState}
-							abTestParticipations={abTestParticipations}
-							renderingTarget={renderingTarget}
+							onClick={() => setOverlayClicked(true)}
+							videoCategory={videoCategory}
+							kicker={kicker}
+							format={format}
+							showTextOverlay={showTextOverlay}
+							imageSize={imageSize}
+							imagePositionOnMobile={imagePositionOnMobile}
 						/>
-					)
-				}
-				{showOverlay && (
-					<YoutubeAtomOverlay
-						uniqueId={uniqueId}
-						overrideImage={overrideImage}
-						posterImage={posterImage}
-						height={height}
-						width={width}
-						alt={alt}
-						duration={duration}
-						title={title}
-						onClick={() => setOverlayClicked(true)}
-						videoCategory={videoCategory}
-						kicker={kicker}
-						format={format}
-						showTextOverlay={showTextOverlay}
-						imageSize={imageSize}
-						imagePositionOnMobile={imagePositionOnMobile}
-					/>
-				)}
-				{showPlaceholder && (
-					<YoutubeAtomPlaceholder uniqueId={uniqueId} />
-				)}
-			</MaintainAspectRatio>
-		</YoutubeAtomSticky>
+					)}
+					{showPlaceholder && (
+						<YoutubeAtomPlaceholder uniqueId={uniqueId} />
+					)}
+				</MaintainAspectRatio>
+			</YoutubeAtomSticky>
+		</div>
 	);
 };

@@ -1,4 +1,4 @@
-import { ArticleDesign, type ArticleFormat, isString } from '@guardian/libs';
+import { isString } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
 import {
@@ -6,35 +6,34 @@ import {
 	generateScriptTags,
 	getPathFromManifest,
 } from '../lib/assets';
-import { decideFormat } from '../lib/decideFormat';
 import { renderToStringWithEmotion } from '../lib/emotion';
+import { ArticleDesign } from '../lib/format';
 import { createGuardian } from '../model/guardian';
-import type { ArticleDeprecated } from '../types/article';
+import type { Article } from '../types/article';
 import type { Config } from '../types/configContext';
 import type { FEElement } from '../types/content';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 export const renderArticle = (
-	article: ArticleDeprecated,
+	article: Article,
 ): {
 	prefetchScripts: string[];
 	html: string;
 } => {
-	const format: ArticleFormat = decideFormat(article.format);
-
+	const { format, frontendData } = article;
 	const renderingTarget = 'Apps';
 	const config: Config = {
 		renderingTarget,
 		darkModeAvailable: true,
 		assetOrigin: ASSET_ORIGIN,
-		editionId: article.editionId,
+		editionId: frontendData.editionId,
 	};
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
 			<ArticlePage
 				format={format}
-				article={article}
+				article={frontendData}
 				renderingTarget={renderingTarget}
 			/>
 		</ConfigProvider>,
@@ -42,7 +41,7 @@ export const renderArticle = (
 
 	// We want to only insert script tags for the elements or main media elements on this page view
 	// so we need to check what elements we have and use the mapping to the the chunk name
-	const elements: FEElement[] = article.blocks
+	const elements: FEElement[] = frontendData.blocks
 		.map((block) => block.elements)
 		.flat();
 	const pageHasTweetElements = elements.some(
@@ -87,34 +86,34 @@ window.twttr = (function(d, s, id) {
 </script>`;
 
 	const guardian = createGuardian({
-		editionId: article.editionId,
-		stage: article.config.stage,
-		frontendAssetsFullURL: article.config.frontendAssetsFullURL,
-		revisionNumber: article.config.revisionNumber,
-		sentryPublicApiKey: article.config.sentryPublicApiKey,
-		sentryHost: article.config.sentryHost,
-		keywordIds: article.config.keywordIds,
-		dfpAccountId: article.config.dfpAccountId,
-		adUnit: article.config.adUnit,
-		ajaxUrl: article.config.ajaxUrl,
-		googletagUrl: article.config.googletagUrl,
-		switches: article.config.switches,
-		abTests: article.config.abTests,
-		isPaidContent: article.pageType.isPaidContent,
-		contentType: article.contentType,
-		googleRecaptchaSiteKey: article.config.googleRecaptchaSiteKey,
-		unknownConfig: article.config,
+		editionId: frontendData.editionId,
+		stage: frontendData.config.stage,
+		frontendAssetsFullURL: frontendData.config.frontendAssetsFullURL,
+		revisionNumber: frontendData.config.revisionNumber,
+		sentryPublicApiKey: frontendData.config.sentryPublicApiKey,
+		sentryHost: frontendData.config.sentryHost,
+		keywordIds: frontendData.config.keywordIds,
+		dfpAccountId: frontendData.config.dfpAccountId,
+		adUnit: frontendData.config.adUnit,
+		ajaxUrl: frontendData.config.ajaxUrl,
+		googletagUrl: frontendData.config.googletagUrl,
+		switches: frontendData.config.switches,
+		abTests: frontendData.config.abTests,
+		isPaidContent: frontendData.pageType.isPaidContent,
+		contentType: frontendData.contentType,
+		googleRecaptchaSiteKey: frontendData.config.googleRecaptchaSiteKey,
+		unknownConfig: frontendData.config,
 	});
 
 	const renderedPage = htmlPageTemplate({
 		css: extractedCss,
 		html,
-		title: article.webTitle,
+		title: frontendData.webTitle,
 		scriptTags,
 		guardian,
 		renderingTarget: 'Apps',
-		weAreHiring: !!article.config.switches.weAreHiring,
-		canonicalUrl: article.canonicalUrl,
+		weAreHiring: !!frontendData.config.switches.weAreHiring,
+		canonicalUrl: frontendData.canonicalUrl,
 		initTwitter:
 			pageHasTweetElements || format.design === ArticleDesign.LiveBlog
 				? initTwitter

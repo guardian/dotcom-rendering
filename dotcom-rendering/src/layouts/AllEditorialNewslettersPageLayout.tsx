@@ -76,6 +76,7 @@ export const AllEditorialNewslettersPageLayout = ({
 				<NewslettersPageHeading
 					mmaUrl={newslettersPage.config.mmaUrl}
 					newsletterCount={displayedNewslettersCount}
+					editionId={editionId}
 				/>
 				<GroupedNewslettersList
 					groupedNewsletters={newslettersPage.groupedNewsletters}

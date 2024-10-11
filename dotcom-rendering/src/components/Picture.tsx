@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
+import { breakpoints } from '@guardian/source/foundations';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
-} from '@guardian/libs';
-import { breakpoints } from '@guardian/source/foundations';
-import { Fragment, useCallback, useEffect, useState } from 'react';
+} from '../lib/format';
 import { generateImageURL } from '../lib/image';
 import type { RoleType } from '../types/content';
 import type { Loading } from './CardPicture';

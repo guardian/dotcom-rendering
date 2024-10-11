@@ -3,13 +3,6 @@
   --
   the palette object is large and ordering helps knowing where to insert new elements
 */
-import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
 import { palette as sourcePalette } from '@guardian/source/foundations';
 import {
 	buttonThemeBrand,
@@ -22,6 +15,14 @@ import {
 	tabsThemeDefault,
 } from '@guardian/source-development-kitchen/react-components';
 import { isMediaCard } from './lib/cardHelpers';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	ArticleSpecial,
+	type ArticleTheme,
+	Pillar,
+} from './lib/format';
 import { transparentColour } from './lib/transparentColour';
 
 // ----- Palette Functions ----- //
@@ -164,6 +165,13 @@ const headlineTextDark: PaletteFunction = ({ design, display, theme }) => {
 		}
 	}
 };
+
+const headlineMatchTextLight: PaletteFunction = (format) =>
+	seriesTitleMatchTextLight(format);
+
+const headlineMatchTextDark: PaletteFunction = (format) =>
+	seriesTitleMatchTextDark(format);
+
 const headlineBackgroundLight: PaletteFunction = ({
 	display,
 	design,
@@ -4353,6 +4361,21 @@ const carouselTitleHighlightDark: PaletteFunction = ({ theme, design }) => {
 	}
 };
 
+const carouselChevronLight: PaletteFunction = () => sourcePalette.neutral[7];
+const carouselChevronDark: PaletteFunction = () => sourcePalette.neutral[86];
+const carouselChevronBorderLight: PaletteFunction = () =>
+	sourcePalette.neutral[73];
+const carouselChevronBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[73];
+const carouselChevronDisabledLight: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[7], 0.32);
+const carouselChevronDisabledDark: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[86], 0.32);
+const carouselChevronBorderDisabledLight: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[73], 0.32);
+const carouselChevronBorderDisabledDark: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[73], 0.32);
+
 const mostViewedFooterHoverLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 const mostViewedFooterHoverDark: PaletteFunction = () =>
@@ -5512,6 +5535,25 @@ const pinnedPostBorderDark: PaletteFunction = ({ theme }) => {
 	}
 };
 
+const expandableMarketingCardBackground: PaletteFunction = () =>
+	sourcePalette.brand[400];
+
+const expandableMarketingCardSvgFill: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
+const expandableMarketingCardSvgBackground: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+
+const expandableMarketingCardFillBackgroundLight: PaletteFunction = (
+	format,
+) => {
+	return articleBackgroundLight(format) === 'transparent'
+		? sourcePalette.neutral[100]
+		: articleBackgroundLight(format);
+};
+const expandableMarketingCardFillBackgroundDark: PaletteFunction = (format) =>
+	articleBackgroundDark(format);
+
 const youtubeOverlayKicker: PaletteFunction = ({ theme }: ArticleFormat) => {
 	switch (theme) {
 		case Pillar.News:
@@ -5572,6 +5614,55 @@ const designTagBackground: PaletteFunction = ({ theme }) => {
 	}
 };
 
+const cricketScoreboardBorderTop: PaletteFunction = () => {
+	return sourcePalette.sport[300];
+};
+
+const cricketScoreboardDivider: PaletteFunction = () => {
+	return sourcePalette.neutral[86];
+};
+
+const cricketScoreboardLinkText: PaletteFunction = () => {
+	return sourcePalette.sport[300];
+};
+
+const imageTitleBackground: PaletteFunction = ({ design, theme }) => {
+	if (design === ArticleDesign.Analysis && theme === Pillar.News) {
+		return sourcePalette.news[300];
+	}
+
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[400];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[300];
+		case Pillar.Sport:
+			return sourcePalette.sport[400];
+		case Pillar.Culture:
+			return sourcePalette.culture[400];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+
+const lightboxDivider: PaletteFunction = (format) =>
+	imageTitleBackground(format);
+
+const cardSublinksBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const cardSublinksBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+
+const flexibleSplashCardStandfirstLight: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+const flexibleSplashCardStandfirstDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
 // ----- Palette ----- //
 
 /**
@@ -5893,6 +5984,10 @@ const paletteColours = {
 		light: cardKickerTextLight,
 		dark: cardKickerTextDark,
 	},
+	'--card-sublinks-background': {
+		light: cardSublinksBackgroundLight,
+		dark: cardSublinksBackgroundDark,
+	},
 	'--carousel-active-dot': {
 		light: carouselActiveDotLight,
 		dark: carouselActiveDotDark,
@@ -5920,6 +6015,22 @@ const paletteColours = {
 	'--carousel-border': {
 		light: carouselBorderLight,
 		dark: carouselBorderDark,
+	},
+	'--carousel-chevron': {
+		light: carouselChevronLight,
+		dark: carouselChevronDark,
+	},
+	'--carousel-chevron-border': {
+		light: carouselChevronBorderLight,
+		dark: carouselChevronBorderDark,
+	},
+	'--carousel-chevron-border-disabled': {
+		light: carouselChevronBorderDisabledLight,
+		dark: carouselChevronBorderDisabledDark,
+	},
+	'--carousel-chevron-disabled': {
+		light: carouselChevronDisabledLight,
+		dark: carouselChevronDisabledDark,
 	},
 	'--carousel-dot': {
 		light: carouselDotLight,
@@ -5980,6 +6091,18 @@ const paletteColours = {
 	'--comment-form-input-background': {
 		light: commentFormInputBackgroundLight,
 		dark: commentFormInputBackgroundDark,
+	},
+	'--cricket-scoreboard-border-top': {
+		light: cricketScoreboardBorderTop,
+		dark: cricketScoreboardBorderTop,
+	},
+	'--cricket-scoreboard-divider': {
+		light: cricketScoreboardDivider,
+		dark: cricketScoreboardDivider,
+	},
+	'--cricket-scoreboard-link-text': {
+		light: cricketScoreboardLinkText,
+		dark: cricketScoreboardLinkText,
 	},
 	'--dateline': {
 		light: datelineLight,
@@ -6157,6 +6280,22 @@ const paletteColours = {
 		light: expandableAtomTextHoverLight,
 		dark: expandableAtomTextHoverDark,
 	},
+	'--expandable-marketing-card-background': {
+		light: expandableMarketingCardBackground,
+		dark: expandableMarketingCardBackground,
+	},
+	'--expandable-marketing-card-fill-background': {
+		light: expandableMarketingCardFillBackgroundLight,
+		dark: expandableMarketingCardFillBackgroundDark,
+	},
+	'--expandable-marketing-card-svg-background': {
+		light: expandableMarketingCardSvgBackground,
+		dark: expandableMarketingCardSvgBackground,
+	},
+	'--expandable-marketing-card-svg-fill': {
+		light: expandableMarketingCardSvgFill,
+		dark: expandableMarketingCardSvgFill,
+	},
 	'--explainer-atom-accent': {
 		light: explainerAtomAccentLight,
 		dark: explainerAtomAccentDark,
@@ -6169,6 +6308,11 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
 	},
+
+	'--flexible-splash-card-standfirst': {
+		light: flexibleSplashCardStandfirstLight,
+		dark: flexibleSplashCardStandfirstDark,
+	},
 	'--follow-icon-background': {
 		light: followIconBackgroundLight,
 		dark: followIconBackgroundDark,
@@ -6180,6 +6324,10 @@ const paletteColours = {
 	'--follow-text': {
 		light: followTextLight,
 		dark: followTextDark,
+	},
+	'--front-container-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[10],
 	},
 	'--heading-line': {
 		light: headingLineLight,
@@ -6204,6 +6352,10 @@ const paletteColours = {
 	'--headline-colour': {
 		light: headlineTextLight,
 		dark: headlineTextDark,
+	},
+	'--headline-match-colour': {
+		light: headlineMatchTextLight,
+		dark: headlineMatchTextDark,
 	},
 	'--highlights-card-headline': {
 		light: highlightsCardHeadline,
@@ -6232,6 +6384,10 @@ const paletteColours = {
 	'--highlights-container-start-fade': {
 		light: highlightContainerStartFade,
 		dark: highlightContainerStartFade,
+	},
+	'--image-title-background': {
+		light: imageTitleBackground,
+		dark: imageTitleBackground,
 	},
 	'--interactive-atom-background': {
 		light: interactiveAtomBackgroundLight,
@@ -6300,6 +6456,10 @@ const paletteColours = {
 	'--last-updated-text': {
 		light: lastUpdatedTextLight,
 		dark: lastUpdatedTextDark,
+	},
+	'--lightbox-divider': {
+		light: lightboxDivider,
+		dark: lightboxDivider,
 	},
 	'--link-kicker-text': {
 		light: linkKickerTextLight,
@@ -6492,6 +6652,22 @@ const paletteColours = {
 	'--pullquote-text': {
 		light: pullQuoteTextLight,
 		dark: pullQuoteTextDark,
+	},
+	'--quiz-atom-answers-background': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--quiz-atom-answers-hover': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[38],
+	},
+	'--quiz-atom-check-mark': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[97],
+	},
+	'--quiz-atom-incorrect-answer-background': {
+		light: () => sourcePalette.news[400],
+		dark: () => sourcePalette.news[300],
 	},
 	'--quote-icon-fill': {
 		light: richLinkQuoteFillLight,

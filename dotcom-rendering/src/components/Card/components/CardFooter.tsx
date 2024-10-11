@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { type ArticleFormat, ArticleSpecial } from '@guardian/libs';
 import { palette, space, textSansBold12 } from '@guardian/source/foundations';
+import { type ArticleFormat, ArticleSpecial } from '../../../lib/format';
 
 type Props = {
 	format: ArticleFormat;
@@ -8,14 +8,10 @@ type Props = {
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
 	showLivePlayable?: boolean;
-	topAlign?: boolean;
 };
 
-const marginStyles = (topAlign: boolean) => css`
-	margin-top: ${topAlign ? `${space[3]}px` : `auto`};
-`;
-
 const contentStyles = css`
+	margin-top: auto;
 	padding-top: ${space[1]}px;
 	display: flex;
 	justify-content: 'flex-start';
@@ -51,7 +47,6 @@ export const CardFooter = ({
 	commentCount,
 	cardBranding,
 	showLivePlayable = false,
-	topAlign = false,
 }: Props) => {
 	if (showLivePlayable) return null;
 
@@ -60,7 +55,7 @@ export const CardFooter = ({
 	}
 
 	return (
-		<footer css={[marginStyles(topAlign), contentStyles]}>
+		<footer css={contentStyles}>
 			{age}
 			{commentCount}
 		</footer>

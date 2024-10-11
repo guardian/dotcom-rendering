@@ -1,6 +1,6 @@
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
 import { decideFormat } from '../lib/decideFormat';
+import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import type { FEElement } from '../types/content';
 import type { FEArticleType } from '../types/frontend';
 import { enhanceBlockquotes } from './enhance-blockquotes';

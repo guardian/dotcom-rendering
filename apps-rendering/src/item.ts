@@ -11,13 +11,13 @@ import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Element } from '@guardian/content-api-models/v1/element';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
-import type { ArticleFormat } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
+	type ArticleFormat,
 	ArticleSpecial,
-} from '@guardian/libs';
+	Pillar,
+} from 'articleFormat';
 import {
 	andThen,
 	fromNullable,
@@ -332,7 +332,7 @@ const parseItemFields = (
 		theme: getReport(campaigns ?? []).withDefault(
 			Optional.fromNullable(content.pillarId)
 				.flatMap(getPillarFromId)
-				.withDefault(ArticlePillar.News),
+				.withDefault(Pillar.News),
 		),
 		display: getDisplay(content),
 		headline: content.fields?.headline ?? '',
@@ -585,8 +585,8 @@ const fromCapi =
 				body,
 				...itemFields,
 				theme:
-					itemFields.theme === ArticlePillar.News
-						? ArticlePillar.Opinion
+					itemFields.theme === Pillar.News
+						? Pillar.Opinion
 						: itemFields.theme,
 			};
 		} else if (isInterview(tags)) {

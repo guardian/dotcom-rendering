@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { body, palette } from '@guardian/source/foundations';
+import { palette, textEgyptian17 } from '@guardian/source/foundations';
 import { unwrapHtml } from '../model/unwrapHtml';
 import { RewrappedComponent } from './RewrappedComponent';
 
@@ -29,7 +29,8 @@ export const HighlightBlockComponent = ({ html }: Props) => {
 			isUnwrapped={isUnwrapped}
 			html={unwrappedHtml}
 			elCss={css`
-				${body.medium({ lineHeight: 'tight' })};
+				${textEgyptian17};
+				line-height: 1.15;
 				background-color: ${palette.neutral[97]};
 				padding-top: 8px;
 				padding-bottom: 16px;

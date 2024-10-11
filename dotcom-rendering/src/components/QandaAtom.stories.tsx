@@ -1,4 +1,3 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
@@ -6,6 +5,7 @@ import {
 	imageStoryWithCreditExpanded,
 	listStoryExpanded,
 } from '../../fixtures/manual/qandaAtom';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { getAllThemes } from '../lib/format';
 import { QandaAtom as QandaAtomComponent } from './QandaAtom.importable';
 

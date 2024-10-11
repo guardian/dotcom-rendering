@@ -6,29 +6,36 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
-import { isUndefined } from '@guardian/libs';
 import { space } from '@guardian/source/foundations';
-import { SecondaryCtaType } from '@guardian/support-dotcom-components';
+import {
+	countryCodeToCountryGroupId,
+	SecondaryCtaType,
+} from '@guardian/support-dotcom-components';
 import type { EpicVariant } from '@guardian/support-dotcom-components/dist/shared/src/types/abTests/epic';
 import type {
 	Cta,
 	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/src/types/props/shared';
 import { useEffect } from 'react';
-import { useIsInView } from '../../../lib/useIsInView';
-import type { ChoiceCardSelection } from '../lib/choiceCards';
-import { hasSetReminder } from '../lib/reminders';
+import { useIsInView } from '../../../../lib/useIsInView';
+import { hasSetReminder } from '../../lib/reminders';
 import {
+	addChoiceCardsOneTimeParams,
 	addChoiceCardsParams,
+	addChoiceCardsProductParams,
 	addRegionIdAndTrackingParamsToSupportUrl,
 	isSupportUrl,
-} from '../lib/tracking';
-import { EpicButton } from './EpicButton';
+} from '../../lib/tracking';
 import {
 	getReminderViewEvent,
 	OPHAN_COMPONENT_EVENT_CTAS_VIEW,
 	OPHAN_COMPONENT_EVENT_REMINDER_OPEN,
-} from './utils/ophan';
+} from '../utils/ophan';
+import {
+	type SupportTier,
+	threeTierChoiceCardAmounts,
+} from '../utils/threeTierChoiceCardAmounts';
+import { EpicButton } from './EpicButton';
 
 const paymentImageStyles = css`
 	display: inline-block;
@@ -139,12 +146,10 @@ interface ContributionsEpicButtonsProps {
 	submitComponentEvent?: (event: OphanComponentEvent) => void;
 	isReminderActive: boolean;
 	isSignedIn: boolean;
+	threeTierChoiceCardSelectedProduct: SupportTier;
 	showChoiceCards?: boolean;
 	amountsTestName?: string;
 	amountsVariantName?: string;
-	choiceCardSelection?: ChoiceCardSelection;
-	showThreeTierChoiceCards?: boolean;
-	threeTierChoiceCardSelectedAmount?: number;
 	numArticles: number;
 	variantOfChoiceCard?: string;
 }
@@ -158,9 +163,7 @@ export const ContributionsEpicButtons = ({
 	isReminderActive,
 	isSignedIn,
 	showChoiceCards,
-	choiceCardSelection,
-	showThreeTierChoiceCards,
-	threeTierChoiceCardSelectedAmount,
+	threeTierChoiceCardSelectedProduct,
 	amountsTestName,
 	amountsVariantName,
 	numArticles,
@@ -187,51 +190,74 @@ export const ContributionsEpicButtons = ({
 	}
 
 	const getChoiceCardCta = (cta: Cta): Cta => {
-		if (
-			showThreeTierChoiceCards &&
-			variantOfChoiceCard === 'US_THREE_TIER_CHOICE_CARDS' &&
-			!isUndefined(threeTierChoiceCardSelectedAmount)
-		) {
-			if (threeTierChoiceCardSelectedAmount === 0) {
+		/** In the US - direct 50 % traffic to the checkout page and 50 % traffic to the landing page for the AB test  */
+
+		if (showChoiceCards && countryCode === 'US') {
+			if (threeTierChoiceCardSelectedProduct === 'OneOff') {
+				if (
+					variantOfChoiceCard ===
+					'US_CHECKOUT_THREE_TIER_CHOICE_CARDS'
+				) {
+					return {
+						text: cta.text,
+						baseUrl: addChoiceCardsParams(
+							'https://support.theguardian.com/contribute/checkout',
+							'ONE_OFF',
+						),
+					};
+				}
 				return {
 					text: cta.text,
-					baseUrl: addChoiceCardsParams(
-						'https://support.theguardian.com/contribute/checkout?selected-contribution-type=one_off',
-						'ONE_OFF',
-						threeTierChoiceCardSelectedAmount,
-					),
+					baseUrl: addChoiceCardsOneTimeParams(cta.baseUrl),
 				};
 			}
+
+			/** Contribution amount is variable, unlike the SupporterPlus amount which is fixed */
+			const countryGroupId = countryCodeToCountryGroupId(countryCode);
+			const contributionAmount =
+				threeTierChoiceCardSelectedProduct === 'Contribution'
+					? threeTierChoiceCardAmounts['Monthly'][countryGroupId]
+							.Contribution
+					: undefined;
+			const url =
+				variantOfChoiceCard === 'US_CHECKOUT_THREE_TIER_CHOICE_CARDS'
+					? 'https://support.theguardian.com/checkout'
+					: cta.baseUrl;
+
 			return {
 				text: cta.text,
-				baseUrl: addChoiceCardsParams(
-					'https://support.theguardian.com/contribute/checkout',
-					'MONTHLY',
-					threeTierChoiceCardSelectedAmount,
+				baseUrl: addChoiceCardsProductParams(
+					url,
+					threeTierChoiceCardSelectedProduct,
+					'Monthly',
+					contributionAmount,
 				),
 			};
 		}
+
+		/** Not in the US - direct taffic to the landing page */
 		if (
 			showChoiceCards &&
-			variantOfChoiceCard === 'THREE_TIER_CHOICE_CARDS' &&
-			!isUndefined(threeTierChoiceCardSelectedAmount)
+			variantOfChoiceCard === 'THREE_TIER_CHOICE_CARDS'
 		) {
+			if (threeTierChoiceCardSelectedProduct === 'OneOff') {
+				/**
+				 * OneOff payments are not supported by the generic checkout yet.
+				 * We also have no way of highlighting to a contributor that "OneOff"
+				 * was selected, so we just send them to the homepage.
+				 */
+				return {
+					text: cta.text,
+					baseUrl: 'https://support.theguardian.com/contribute',
+				};
+			}
+
 			return {
 				text: cta.text,
-				baseUrl: addChoiceCardsParams(
+				baseUrl: addChoiceCardsProductParams(
 					cta.baseUrl,
-					'MONTHLY',
-					threeTierChoiceCardSelectedAmount,
-				),
-			};
-		}
-		if (choiceCardSelection) {
-			return {
-				text: cta.text,
-				baseUrl: addChoiceCardsParams(
-					cta.baseUrl,
-					choiceCardSelection.frequency,
-					choiceCardSelection.amount,
+					threeTierChoiceCardSelectedProduct,
+					'Monthly',
 				),
 			};
 		}

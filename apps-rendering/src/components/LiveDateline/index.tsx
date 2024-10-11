@@ -1,8 +1,7 @@
 // ----- Imports ----- //
 
 import { css, keyframes } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat } from '../../articleFormat';
 import { neutral, pxToRem, textSans12 } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { makeRelativeDate } from 'date';
@@ -41,9 +40,9 @@ const liveSpanStyles = css`
 		display: inline-block;
 		border-radius: 100%;
 		background-color: ${neutral[100]};
-		width: ${pxToRem(9)}rem;
-		height: ${pxToRem(9)}rem;
-		margin-right: ${pxToRem(2)}rem;
+		width: ${pxToRem(9)};
+		height: ${pxToRem(9)};
+		margin-right: ${pxToRem(2)};
 		animation: ${livePulse} 1s infinite;
 
 		@media (prefers-reduced-motion) {

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, type ArticleFormat, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	headlineBold24,
@@ -8,6 +8,7 @@ import {
 } from '@guardian/source/foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
+import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import { formatAttrString } from '../lib/formatAttrString';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';
@@ -453,6 +454,7 @@ const Title = ({
 	);
 type CarouselCardProps = {
 	isFirst: boolean;
+	index: number;
 	format: ArticleFormat;
 	linkTo: string;
 	headlineText: string;
@@ -493,6 +495,7 @@ const CarouselCard = ({
 	isOnwardContent,
 	absoluteServerTimes,
 	starRating,
+	index,
 }: CarouselCardProps) => {
 	const isVideoContainer = containerType === 'fixed/video';
 	const cardImagePosition = isOnwardContent ? 'bottom' : 'top';
@@ -537,6 +540,9 @@ const CarouselCard = ({
 				imagePositionOnMobile={cardImagePosition}
 				absoluteServerTimes={absoluteServerTimes}
 				starRating={starRating}
+				index={index}
+				showTopBarDesktop={!isOnwardContent}
+				showTopBarMobile={false}
 			/>
 		</LI>
 	);
@@ -994,6 +1000,7 @@ export const Carousel = ({
 							return (
 								<CarouselCard
 									key={`${trail.url}${i}`}
+									index={i}
 									isFirst={i === 0}
 									format={trailFormat}
 									linkTo={linkTo}

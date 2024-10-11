@@ -1,4 +1,3 @@
-import { ArticleDesign } from '@guardian/libs';
 import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
 import type { AnalyticsModel } from '../components/Analytics.amp';
@@ -8,6 +7,7 @@ import type { PermutiveModel } from '../components/Permutive.amp';
 import { decideFormat } from '../lib/decideFormat';
 import { enhance } from '../lib/enhance.amp';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
+import { ArticleDesign } from '../lib/format';
 import { generatePermutivePayload } from '../lib/permutive.amp';
 import { extractScripts } from '../lib/scripts.amp';
 import { findBySubsection } from '../model/article-sections';

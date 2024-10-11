@@ -1,7 +1,7 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import type { DCRGroupedTrails } from '../types/front';
 import { DynamicSlow } from './DynamicSlow';
 import { FrontSection } from './FrontSection';
@@ -18,6 +18,7 @@ const defaultGroupedTrails: DCRGroupedTrails = {
 	big: [],
 	standard: [],
 	snap: [],
+	splash: [],
 };
 
 export default {

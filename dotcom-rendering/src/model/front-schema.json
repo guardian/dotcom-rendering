@@ -3217,11 +3217,17 @@
                 "fixed/thrasher",
                 "fixed/video",
                 "fixed/video/vertical",
+                "flexible/general",
                 "flexible/special",
                 "nav/list",
                 "nav/media-list",
                 "news/most-popular",
-                "scrollable/highlights"
+                "scrollable/feature",
+                "scrollable/highlights",
+                "scrollable/medium",
+                "scrollable/small",
+                "static/feature/2",
+                "static/medium/4"
             ],
             "type": "string"
         },

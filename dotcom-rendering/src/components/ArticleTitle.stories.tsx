@@ -1,13 +1,13 @@
+import type { Meta, StoryObj } from '@storybook/react/*';
+import { leftColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import { defaultFormats } from '../../.storybook/decorators/splitThemeDecorator';
+import { allModes } from '../../.storybook/modes';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '@guardian/libs';
-import type { Meta, StoryObj } from '@storybook/react/*';
-import { leftColumnDecorator } from '../../.storybook/decorators/gridDecorators';
-import { defaultFormats } from '../../.storybook/decorators/splitThemeDecorator';
-import { allModes } from '../../.storybook/modes';
+} from '../lib/format';
 import { getAllThemes } from '../lib/format';
 import { ArticleTitle } from './ArticleTitle';
 
