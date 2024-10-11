@@ -24,10 +24,34 @@ interface BannersIllustrationProps {
 	styles?: SerializedStyles;
 }
 
+const smallIllustrationStyles = css`
+	display: inline;
+	${from.leftCol} {
+		display: none;
+	}
+`;
+const largeIllustrationStyles = css`
+	display: none;
+	${from.leftCol} {
+		display: inline;
+	}
+`;
+
 const BannersIllustration = ({ type, styles }: BannersIllustrationProps) => {
 	const { assetOrigin } = useConfig();
-	const src = `${assetOrigin}static/frontend/logos/red-blue-banner-${type}.svg`;
-	return <img src={src} alt="" css={styles} />;
+	const src = `${assetOrigin}static/frontend/logos/red-blue-banner-${type}-mobile.svg`;
+	const largeSrc = `${assetOrigin}static/frontend/logos/red-blue-banner-${type}.svg`;
+
+	return (
+		<>
+			<img src={src} alt="" css={[styles, smallIllustrationStyles]} />
+			<img
+				src={largeSrc}
+				alt=""
+				css={[styles, largeIllustrationStyles]}
+			/>
+		</>
+	);
 };
 
 const fillBarStyles = css`
@@ -63,6 +87,7 @@ const summaryStyles = css`
 	gap: ${space[3]}px;
 	z-index: 1;
 	width: 100%;
+	cursor: pointer;
 `;
 
 const headingStyles = css`

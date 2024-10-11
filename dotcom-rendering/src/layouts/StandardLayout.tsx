@@ -732,6 +732,24 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							)}
 						</GridItem>
 						<GridItem area="body">
+							{isWeb && (
+								<Hide from="leftCol">
+									<Island
+										priority="enhancement"
+										/**
+										 * We display the card immediately if the viewport is below the top of
+										 * the article body, so we must use "idled" instead of "visible".
+										 */
+										defer={{ until: 'idle' }}
+									>
+										<ExpandableMarketingCardWrapper
+											guardianBaseURL={
+												article.guardianBaseURL
+											}
+										/>
+									</Island>
+								</Hide>
+							)}
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}

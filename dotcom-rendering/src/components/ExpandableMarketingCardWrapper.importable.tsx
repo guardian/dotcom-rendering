@@ -1,10 +1,35 @@
+import { css } from '@emotion/react';
 import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import type { DailyArticle } from '../lib/dailyArticleCount';
 import { getDailyArticleCount } from '../lib/dailyArticleCount';
 import { getLocaleCode } from '../lib/getCountryCode';
+import { getZIndex } from '../lib/getZIndex';
 import { useAB } from '../lib/useAB';
 import { ExpandableMarketingCard } from './ExpandableMarketingCard';
+import { Hide } from './Hide';
+
+const stickyContainerStyles = css`
+	position: sticky;
+	top: 0;
+	${getZIndex('expandableMarketingCardOverlay')};
+	animation: slidein 1.5s normal;
+
+	@keyframes slidein {
+		from {
+			translate: -800px 0;
+		}
+
+		to {
+			translate: 0 0;
+		}
+	}
+`;
+
+const absoluteContainerStyles = css`
+	position: absolute;
+	width: 100%;
+`;
 
 interface Props {
 	guardianBaseURL: string;
@@ -37,6 +62,8 @@ export const ExpandableMarketingCardWrapper = ({ guardianBaseURL }: Props) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [isClosed, setIsClosed] = useState(false);
 	const [isApplicableUser, setIsApplicableUser] = useState(false);
+	const [topOfBody, setTopOfBody] = useState<Element | null>(null);
+	const [shouldDisplayCard, setShouldDisplayCard] = useState(false);
 
 	const abTestAPI = useAB()?.api;
 	const isInVariantFree = !!abTestAPI?.isUserInVariant(
@@ -57,6 +84,40 @@ export const ExpandableMarketingCardWrapper = ({ guardianBaseURL }: Props) => {
 		});
 	}, []);
 
+	useEffect(() => {
+		setTopOfBody(document.querySelector('[data-gu-name="body"]'));
+	}, []);
+
+	useEffect(() => {
+		if (!topOfBody) return;
+
+		/**
+		 * If the viewport is below the top of the body, display the card immediately
+		 */
+		if (topOfBody.getBoundingClientRect().top < 0) {
+			setShouldDisplayCard(true);
+		}
+
+		/**
+		 * Show the card when the top of the body moves out of the viewport.
+		 */
+		const observer = new window.IntersectionObserver(
+			([entry]) => {
+				if (!entry) return;
+				if (entry.isIntersecting) {
+					setShouldDisplayCard(true);
+				}
+			},
+			{ rootMargin: '0px 0px -100%' },
+		);
+
+		observer.observe(topOfBody);
+
+		return () => {
+			observer.disconnect();
+		};
+	}, [topOfBody]);
+
 	if (!isInEitherVariant || !isApplicableUser || isClosed) {
 		return null;
 	}
@@ -70,13 +131,33 @@ export const ExpandableMarketingCardWrapper = ({ guardianBaseURL }: Props) => {
 		: 'Why the Guardian has no paywall';
 
 	return (
-		<ExpandableMarketingCard
-			guardianBaseURL={guardianBaseURL}
-			heading={heading}
-			kicker={kicker}
-			isExpanded={isExpanded}
-			setIsExpanded={setIsExpanded}
-			setIsClosed={setIsClosed}
-		/>
+		<>
+			<Hide when="below" breakpoint="leftCol">
+				<ExpandableMarketingCard
+					guardianBaseURL={guardianBaseURL}
+					heading={heading}
+					kicker={kicker}
+					isExpanded={isExpanded}
+					setIsExpanded={setIsExpanded}
+					setIsClosed={setIsClosed}
+				/>
+			</Hide>
+			<Hide when="above" breakpoint="leftCol">
+				{shouldDisplayCard && (
+					<div css={stickyContainerStyles}>
+						<div css={absoluteContainerStyles}>
+							<ExpandableMarketingCard
+								guardianBaseURL={guardianBaseURL}
+								heading={heading}
+								kicker={kicker}
+								isExpanded={isExpanded}
+								setIsExpanded={setIsExpanded}
+								setIsClosed={setIsClosed}
+							/>
+						</div>
+					</div>
+				)}
+			</Hide>
+		</>
 	);
 };
