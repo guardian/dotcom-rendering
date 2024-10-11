@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { defaultCard, trails } from '../../fixtures/manual/highlights-trails';
-import { HighlightsContainer } from './HighlightsContainer.importable';
+import { ScrollableHighlights } from './ScrollableHighlights.importable';
 
 export default {
-	title: 'Masthead/HighlightsContainer',
-	component: HighlightsContainer,
+	title: 'Components/Masthead/ScrollableHighlights',
+	component: ScrollableHighlights,
 	args: {
 		trails,
 	},
 } as Meta;
 
-type Story = StoryObj<typeof HighlightsContainer>;
+type Story = StoryObj<typeof ScrollableHighlights>;
 
 export const Default = {};
 
