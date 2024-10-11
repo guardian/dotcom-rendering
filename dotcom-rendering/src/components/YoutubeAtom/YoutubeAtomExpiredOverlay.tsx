@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import { palette, space, textEgyptian17 } from '@guardian/source/foundations';
 import { SvgAlertRound } from '@guardian/source/react-components';
+import type { ArticleFormat } from '../../lib/format';
 import { Caption } from '../Caption';
 
 type Props = {

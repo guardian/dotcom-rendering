@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
+import type { ArticleTheme } from '../lib/format';
 import type { TimelineAtomEvent } from '../types/content';
 import { Expandable } from './Expandable.amp';
 

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { ArticleSpecial, type ArticleTheme } from '@guardian/libs';
 import { article17, palette, textSans20 } from '@guardian/source/foundations';
 import sanitise from 'sanitize-html';
+import { ArticleSpecial, type ArticleTheme } from '../lib/format';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
 
 // Note, this should only apply basic text styling. It is a case where we want

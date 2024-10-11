@@ -1,8 +1,8 @@
 import { jsx } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
 import { isElement, parseHtml } from '../lib/domUtils';
+import type { ArticleFormat } from '../lib/format';
 import { logger } from '../server/lib/logging';
 import { Subheading } from './Subheading';
 

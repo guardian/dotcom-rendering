@@ -1,13 +1,13 @@
+import type { StoryObj } from '@storybook/react';
+import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
 	Pillar,
-} from '@guardian/libs';
-import type { StoryObj } from '@storybook/react';
-import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+} from '../lib/format';
 import { LinkHeadline } from './LinkHeadline';
 import { Section } from './Section';
 

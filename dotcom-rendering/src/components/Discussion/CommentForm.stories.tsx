@@ -1,7 +1,7 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { useState } from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { CommentType, Reader } from '../../lib/discussion';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/format';
 import { ok } from '../../lib/result';
 import { CommentForm } from './CommentForm';
 

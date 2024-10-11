@@ -1,13 +1,13 @@
+import { breakpoints } from '@guardian/source/foundations';
+import type { StoryObj } from '@storybook/react';
+import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '@guardian/libs';
-import { breakpoints } from '@guardian/source/foundations';
-import type { StoryObj } from '@storybook/react';
-import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+} from '../lib/format';
 import type { DCRContainerPalette } from '../types/front';
 import { CardHeadline } from './CardHeadline';
 import { ContainerOverrides } from './ContainerOverrides';

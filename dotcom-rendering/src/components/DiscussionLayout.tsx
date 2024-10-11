@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDisplay, type ArticleFormat } from '@guardian/libs';
 import { from } from '@guardian/source/foundations';
+import { ArticleDisplay, type ArticleFormat } from '../lib/format';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { AdSlot, labelStyles } from './AdSlot.web';
 import { useConfig } from './ConfigContext';

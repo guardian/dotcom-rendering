@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
+import type { StoryObj } from '@storybook/react';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '@guardian/libs';
-import type { StoryObj } from '@storybook/react';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+} from '../lib/format';
 import type { TableOfContentsItem } from '../types/article';
 import { TableOfContents } from './TableOfContents.importable';
 

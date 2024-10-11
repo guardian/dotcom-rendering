@@ -1,11 +1,4 @@
 import { css } from '@emotion/react';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	type ArticleFormat,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
 import { from } from '@guardian/source/foundations';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
@@ -13,6 +6,13 @@ import {
 	ShortKeyEvents,
 	SingleKeyEvent,
 } from '../../fixtures/manual/live-blog-key-events';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	ArticleSpecial,
+	Pillar,
+} from '../lib/format';
 import { palette } from '../palette';
 import { KeyEventsCarousel } from './KeyEventsCarousel.importable';
 

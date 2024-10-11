@@ -1,9 +1,13 @@
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { StoryObj } from '@storybook/react';
 import fetchMock from 'fetch-mock';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { calloutCampaign as calloutCampaignV2 } from '../../fixtures/manual/calloutCampaignV2';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	Pillar,
+} from '../lib/format';
 import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
 
 const tomorrow = new Date().setDate(new Date().getDate() + 1) / 1000;

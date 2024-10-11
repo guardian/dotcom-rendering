@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { type ArticleFormat, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	headlineMedium17,
@@ -8,6 +8,7 @@ import {
 	space,
 	textSansBold12,
 } from '@guardian/source/foundations';
+import type { ArticleFormat } from '../../lib/format';
 import { palette } from '../../palette';
 import type {
 	ImagePositionType,
