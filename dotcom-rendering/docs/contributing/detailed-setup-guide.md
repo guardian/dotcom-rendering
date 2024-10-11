@@ -14,21 +14,13 @@ The only thing you need to make sure you have installed before you get going is 
 
 #### Node.js
 
-We recommend using a tool to help manage multiple versions of Node.js on on machine.
-[fnm](https://github.com/Schniz/fnm) is popular in the department at the moment, although
-[nvm](https://github.com/creationix/nvm) and [asdf](https://github.com/asdf-vm/asdf) are
-sometimes used instead.
-If you use nvm, you might find
-[this gist](https://gist.github.com/sndrs/5940e9e8a3f506b287233ed65365befb) helpful.
-
-If you prefer to [install Node.js manually](https://nodejs.org),
-check the [.nvmrc](https://github.com/guardian/dotcom-rendering/blob/main/.nvmrc) for the current required version.
+We recommend using [fnm](https://github.com/Schniz/fnm) to help manage multiple versions of Node.js on on machine.
 
 ### Start
 
 Start the development server:
 
-```bash
+```sh
 make dev
 ```
 
@@ -60,7 +52,7 @@ http://localhost:3030/AMPArticle/http://localhost:9000/world/2013/jun/09/edward-
 
 The dotcom-rendering github account is set up to merge PRs into main instead of rebase. Merge commits are useful to quickly revert things when there is a major incident - whereas with rebase you might have to revert a whole load of commits.
 
-However, if you are working on a feature branch and plan to make a PR, it's still recommended to rebase on `main` to avoid extranous merge commits in branches.
+However, if you are working on a feature branch and plan to make a PR, it's still recommended to rebase on `main` to avoid extraneous merge commits in branches.
 
 ### Debugging tools
 
@@ -88,7 +80,7 @@ The production port default is 9000 for deployment, but to run locally alongside
 rendering.endpoint = "http://localhost:${port}/Article"
 ```
 
-with the overide port number and run frontend locally.
+with the override port number to [`frontend.conf`](https://github.com/guardian/frontend/blob/main/docs/03-dev-howtos/14-override-default-configuration.md) and run frontend locally.
 
 ## Environment Variables
 
