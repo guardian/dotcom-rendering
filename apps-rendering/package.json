@@ -48,7 +48,7 @@
 		"@guardian/content-atom-model": "4.0.1",
 		"@guardian/eslint-config": "7.0.1",
 		"@guardian/eslint-config-typescript": "9.0.1",
-		"@guardian/libs": "0.0.0-canary-20240902111616",
+		"@guardian/libs": "16.1.0",
 		"@guardian/renditions": "0.2.0",
 		"@guardian/source": "8.0.0",
 		"@guardian/source-development-kitchen": "8.0.0",

@@ -83,8 +83,8 @@ importers:
         specifier: 9.0.1
         version: 9.0.1(eslint@8.56.0)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/libs':
-        specifier: 0.0.0-canary-20240902111616
-        version: 0.0.0-canary-20240902111616(tslib@2.6.2)(typescript@5.5.3)
+        specifier: 16.1.0
+        version: 16.1.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/renditions':
         specifier: 0.2.0
         version: 0.2.0
@@ -93,7 +93,7 @@ importers:
         version: 8.0.0(@emotion/react@11.11.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source-development-kitchen':
         specifier: 8.0.0
-        version: 8.0.0(@emotion/react@11.11.3)(@guardian/libs@0.0.0-canary-20240902111616)(@guardian/source@8.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
+        version: 8.0.0(@emotion/react@11.11.3)(@guardian/libs@16.1.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@smithy/property-provider':
         specifier: 2.0.16
         version: 2.0.16
@@ -4437,11 +4437,11 @@ packages:
       typescript: 5.5.3
     dev: false
 
-  /@guardian/libs@0.0.0-canary-20240902111616(tslib@2.6.2)(typescript@5.5.3):
-    resolution: {integrity: sha512-SUiVYr840XyhSILokd4JC/oA/WL6xAtApHJTGdE3Px/8UUZA3xESW0NU1bmKZEMEuV11giQ3Rsy6vHV63+Doyw==}
+  /@guardian/libs@16.1.0(tslib@2.6.2)(typescript@5.5.3):
+    resolution: {integrity: sha512-nb7r0C+UO4P6f0wH8sATtGYnGrfqCzOX4M1Pp2G+uj9c3tehMRSum4mgnqxSAVXN50LtkL2bwd4u3Ichk6670Q==}
     peerDependencies:
       tslib: ^2.6.2
-      typescript: ~5.5.2
+      typescript: ~5.3.3
     peerDependenciesMeta:
       typescript:
         optional: true
@@ -4602,7 +4602,7 @@ packages:
       typescript: 5.5.3
     dev: false
 
-  /@guardian/source-development-kitchen@8.0.0(@emotion/react@11.11.3)(@guardian/libs@0.0.0-canary-20240902111616)(@guardian/source@8.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3):
+  /@guardian/source-development-kitchen@8.0.0(@emotion/react@11.11.3)(@guardian/libs@16.1.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3):
     resolution: {integrity: sha512-97Qcm9laquXen7GMOkQ2syvKlvY6VaAN3zalXnxEDHZiSgUhthWrVFJp2G5CsqP9c5lpl4RkUcF2PkYek8J2Jw==}
     peerDependencies:
       '@emotion/react': ^11.11.3
@@ -4623,7 +4623,7 @@ packages:
         optional: true
     dependencies:
       '@emotion/react': 11.11.3(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/libs': 0.0.0-canary-20240902111616(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 16.1.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source': 8.0.0(@emotion/react@11.11.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@types/react': 18.3.1
       react: 18.3.1
