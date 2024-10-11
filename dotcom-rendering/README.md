@@ -95,7 +95,7 @@ There are some concepts to learn, that will make working with Dotcom Rendering c
 -   [DecideLayout](docs/patterns/decide-layout.md)
 -   [Prop Drilling](https://kentcdodds.com/blog/prop-drilling/) (and [why we don't use React Context](docs/architecture/016-react-context-api.md))
 -   Dynamic imports
--   [EnhanceCAPI](docs/patterns/enhance-capi.md)
+-   [Enhance elements](docs/patterns/enhance-elements.md)
 -   Data generated in Frontend
 
 ### Visual Debugging
