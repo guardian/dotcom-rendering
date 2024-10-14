@@ -7,7 +7,8 @@ import {
 import { ok } from '../../lib/result';
 import { ConfigProvider } from '../ConfigContext';
 import { Discussion } from '../Discussion';
-import { mockFetch, resetLastFetchCall } from '../../lib/mockRESTCallsInJest';
+import { mockFetch } from '../../lib/mockRESTCallsInJest';
+import { resetLastFetchCall } from '../../lib/mockRESTCalls';
 
 describe('App', () => {
 	let originalFetch: typeof fetch;

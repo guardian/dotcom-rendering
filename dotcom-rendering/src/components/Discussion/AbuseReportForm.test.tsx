@@ -4,11 +4,8 @@ import userEvent from '@testing-library/user-event';
 import { reportAbuse } from '../../lib/discussionApi';
 import { ok } from '../../lib/result';
 import { AbuseReportForm } from './AbuseReportForm';
-import {
-	getLastFetchCall,
-	mockFetch,
-	resetLastFetchCall,
-} from '../../lib/mockRESTCallsInJest';
+import { mockFetch } from '../../lib/mockRESTCallsInJest';
+import { getLastFetchCall, resetLastFetchCall } from '../../lib/mockRESTCalls';
 
 describe('Dropdown', () => {
 	let originalFetch: typeof fetch;

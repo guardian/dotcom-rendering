@@ -1,12 +1,9 @@
 import {
-	getLastFetchCall,
-	mockFetch,
-	resetLastFetchCall,
-} from './mockRESTCallsInJest';
-import {
 	requestMultipleSignUps,
 	requestSingleSignUp,
 } from './newsletter-sign-up-requests';
+import { getLastFetchCall, resetLastFetchCall } from './mockRESTCalls';
+import { mockFetch } from './mockRESTCallsInJest';
 
 const FAKE_WINDOW = {
 	location: {
