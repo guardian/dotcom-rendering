@@ -1,6 +1,5 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
-import fetchMock from 'fetch-mock';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { getSublinks, trails } from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
@@ -11,6 +10,7 @@ import type {
 } from '../types/front';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FrontSection } from './FrontSection';
+import { customMockedFetch } from '../lib/mockRESTCalls';
 
 const defaultGroupedTrails: DCRGroupedTrails = {
 	huge: [],
@@ -67,63 +67,61 @@ const standardCards = standards.map((card, index) => {
 	}
 }) satisfies DCRFrontCard[];
 
-const mockLatestLinksReq = () =>
-	fetchMock
-		.restore()
-		.get(
+const mockLatestLinksReq = customMockedFetch([
+	{
+		mockedMethod: 'GET',
+		mockedUrl:
 			'https://api.nextgen.guardianapps.co.uk/football/live/2023/aug/20/spain-v-england-womens-world-cup-final-live.json?rendered=false',
-			{
-				status: 200,
-				body: {
-					blocks: [
-						{
-							id: '64e135df8f08af8aaccf033b',
-							title: null,
-							publishedDateTime: 1692525060000,
-							lastUpdatedDateTime: 1692525060000,
-							body: '',
-						},
-						{
-							id: '64e1342b8f08af8aaccf0332',
-							title: null,
-							publishedDateTime: 1692524961000,
-							lastUpdatedDateTime: 1692524961000,
-							body: 'Whatever happens in today’s final it is safe to say that Mary Earps is one of, if not the best goalkeeper in the world. Her story is an interesting and inspirational one, you can read it:',
-						},
-						{
-							id: '64e1e0cf8f08111b4b7862b2',
-							title: null,
-							publishedDateTime: 1692524819000,
-							lastUpdatedDateTime: 1692524819000,
-							body: 'Adam has emailed and said: “For -- sadly -- the final time of this tournament, a very good morning to you. No snacks this early in the USA, but we’re edging towards eggs on toast when the time becomes slightly more socially acceptable. What have you got on today? I feel deeply conflicted about this final. I desperately want England to win as an England fan, and I also desperately do not want Jorge Vilda to win. It’s nothing against the Spanish players; far from it. The current generation of Spanish footballers is incredibly talented, plays beautiful football, and I hope they do win major honours -- I just don’t want them to win whilst Vilda is manager. If they do, I worry the RFEF will double down and maybe offer him a new contract, whereas if Spain loses, the RFEF may be forced to sack him. I feel badly wishing ill on Vilda in that way, it’s just that the tension is palpable, it doesn’t appear that he’s helping the situation, and I feel for the Spanish players for having to put up with it. Do you (or indeed any other readers) feel the same/similar?” I think Vilda will stay in his role regardless of the result, getting to a World Cup final is impressive and so the federation may be reluctant to let him go.',
-						},
-						{
-							id: '64e1e0008f08af8aaccf05cd',
-							title: null,
-							publishedDateTime: 1692524597000,
-							lastUpdatedDateTime: 1692524597000,
-							body: 'Sign up for our free weekly newsletter on women’s football, Moving the Goalposts, by entering your email below. It’s that simple!',
-						},
-						{
-							id: '64e1dfa28f08af8aaccf05c6',
-							title: null,
-							publishedDateTime: 1692524551000,
-							lastUpdatedDateTime: 1692525013000,
-							body: 'The closing ceremony are showing highlights from the tournament, yes it is making me emotional. What a World Cup we have been treated to. So many icons on the stage for the last time with Marta, Rapinoe and Sinclair likely to have bowed out.',
-						},
-						{
-							id: '64e1df398f08111b4b7862a6',
-							title: null,
-							publishedDateTime: 1692524378000,
-							lastUpdatedDateTime: 1692524377000,
-							body: 'The closing ceremony has begun, the stadium is bathed in colour! I shall update you with any highlights.',
-						},
-					],
-					refreshStatus: true,
+		mockedStatus: 200,
+		mockedBody: {
+			blocks: [
+				{
+					id: '64e135df8f08af8aaccf033b',
+					title: null,
+					publishedDateTime: 1692525060000,
+					lastUpdatedDateTime: 1692525060000,
+					body: '',
 				},
-			},
-		)
-		.spy('end:.hot-update.json');
+				{
+					id: '64e1342b8f08af8aaccf0332',
+					title: null,
+					publishedDateTime: 1692524961000,
+					lastUpdatedDateTime: 1692524961000,
+					body: 'Whatever happens in today’s final it is safe to say that Mary Earps is one of, if not the best goalkeeper in the world. Her story is an interesting and inspirational one, you can read it:',
+				},
+				{
+					id: '64e1e0cf8f08111b4b7862b2',
+					title: null,
+					publishedDateTime: 1692524819000,
+					lastUpdatedDateTime: 1692524819000,
+					body: 'Adam has emailed and said: “For -- sadly -- the final time of this tournament, a very good morning to you. No snacks this early in the USA, but we’re edging towards eggs on toast when the time becomes slightly more socially acceptable. What have you got on today? I feel deeply conflicted about this final. I desperately want England to win as an England fan, and I also desperately do not want Jorge Vilda to win. It’s nothing against the Spanish players; far from it. The current generation of Spanish footballers is incredibly talented, plays beautiful football, and I hope they do win major honours -- I just don’t want them to win whilst Vilda is manager. If they do, I worry the RFEF will double down and maybe offer him a new contract, whereas if Spain loses, the RFEF may be forced to sack him. I feel badly wishing ill on Vilda in that way, it’s just that the tension is palpable, it doesn’t appear that he’s helping the situation, and I feel for the Spanish players for having to put up with it. Do you (or indeed any other readers) feel the same/similar?” I think Vilda will stay in his role regardless of the result, getting to a World Cup final is impressive and so the federation may be reluctant to let him go.',
+				},
+				{
+					id: '64e1e0008f08af8aaccf05cd',
+					title: null,
+					publishedDateTime: 1692524597000,
+					lastUpdatedDateTime: 1692524597000,
+					body: 'Sign up for our free weekly newsletter on women’s football, Moving the Goalposts, by entering your email below. It’s that simple!',
+				},
+				{
+					id: '64e1dfa28f08af8aaccf05c6',
+					title: null,
+					publishedDateTime: 1692524551000,
+					lastUpdatedDateTime: 1692525013000,
+					body: 'The closing ceremony are showing highlights from the tournament, yes it is making me emotional. What a World Cup we have been treated to. So many icons on the stage for the last time with Marta, Rapinoe and Sinclair likely to have bowed out.',
+				},
+				{
+					id: '64e1df398f08111b4b7862a6',
+					title: null,
+					publishedDateTime: 1692524378000,
+					lastUpdatedDateTime: 1692524377000,
+					body: 'The closing ceremony has begun, the stadium is bathed in colour! I shall update you with any highlights.',
+				},
+			],
+			refreshStatus: true,
+		},
+	},
+]);
 
 type FlexibleGeneralArgsAndCustomArgs = React.ComponentProps<
 	typeof FlexibleGeneral
@@ -278,7 +276,7 @@ export const FourSublinkSplashWithLiveUpdates: Story = {
 		},
 	},
 	render: ({ frontSectionTitle, ...args }) => {
-		mockLatestLinksReq();
+		global.fetch = mockLatestLinksReq;
 		return (
 			<FrontSection
 				title={frontSectionTitle}

@@ -31,7 +31,7 @@ export const mockedFetch = (
 	const url = input.toString();
 	lastFetchCall = [url, requestInit];
 
-	console.log(`fetched url: ${url}`);
+	// console.log(`fetched url: ${url}`);
 	console.log(`fetched method: ${requestInit?.method}`);
 	switch (true) {
 		case /logs\.(code.dev-)?guardianapis\.com\/log/.test(url) &&
@@ -248,6 +248,47 @@ export const getLastFetchCall = () => lastFetchCall;
 export const resetLastFetchCall = () => {
 	lastFetchCall = null;
 };
+
+export const customMockedFetch =
+	(
+		mockedUrlsParams: Array<{
+			mockedMethod: string;
+			mockedUrl: string | RegExp;
+			mockedStatus: number;
+			mockedBody?: any;
+		}>,
+	) =>
+	(input: RequestInfo | URL, requestInit?: RequestInit) => {
+		const url = input.toString();
+
+		for (const {
+			mockedMethod,
+			mockedUrl,
+			mockedStatus,
+			mockedBody,
+		} of mockedUrlsParams) {
+			const urlMatches =
+				typeof mockedUrl === 'string'
+					? url === mockedUrl
+					: mockedUrl.test(url);
+
+			// Check if the current mockedUrl matches the input URL and method
+			if (
+				urlMatches &&
+				(mockedMethod !== 'GET'
+					? requestInit?.method === mockedMethod
+					: true)
+			) {
+				return createMockResponse(mockedStatus, mockedBody);
+			}
+		}
+
+		return Promise.resolve(
+			new Response(JSON.stringify({ error: 'Not Found' }), {
+				status: 404,
+			}),
+		);
+	};
 
 const richLinkCard = {
 	tags: [

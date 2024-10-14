@@ -1,39 +1,36 @@
 import type { Meta } from '@storybook/react';
-import fetchMock from 'fetch-mock';
 import {
 	contributionsHeaderResponse,
 	contributionsSignInPromptHeaderResponse,
 } from '../../fixtures/manual/contributionsHeader';
 import { TopBar } from './TopBar.importable';
+import { customMockedFetch } from '../lib/mockRESTCalls';
 
 const contributionsMockResponse = (
 	component: 'Header' | 'SignInPromptHeader',
 ) =>
-	fetchMock
-		.restore()
-		.get(
-			/.*ophan.theguardian.com\/img\/.*/,
-			{ status: 200 },
-			{ overwriteRoutes: false },
-		)
-		.post(
-			/.*contributions\.(code.dev-)?guardianapis\.com\/header/,
-			{
-				status: 200,
-				body:
-					component === 'SignInPromptHeader'
-						? contributionsSignInPromptHeaderResponse
-						: contributionsHeaderResponse,
-			},
-			{ overwriteRoutes: false },
-		)
-		.spy('end:.hot-update.json');
+	customMockedFetch([
+		{
+			mockedMethod: 'GET',
+			mockedUrl: /.*ophan.theguardian.com\/img\/.*/,
+			mockedStatus: 200,
+		},
+		{
+			mockedMethod: 'POST',
+			mockedUrl: /.*contributions\.(code.dev-)?guardianapis\.com\/header/,
+			mockedStatus: 200,
+			mockedBody:
+				component === 'SignInPromptHeader'
+					? contributionsSignInPromptHeaderResponse
+					: contributionsHeaderResponse,
+		},
+	]);
 
 const meta = {
 	component: TopBar,
 	title: 'Components/Masthead/TopBar',
 	render: (args) => {
-		contributionsMockResponse('Header');
+		global.fetch = contributionsMockResponse('Header');
 		return <TopBar {...args} />;
 	},
 	args: {
@@ -50,7 +47,7 @@ export default meta;
 export const Default = {};
 
 export const WithSignInPrompt = () => {
-	contributionsMockResponse('SignInPromptHeader');
+	global.fetch = contributionsMockResponse('SignInPromptHeader');
 
 	return (
 		<TopBar
