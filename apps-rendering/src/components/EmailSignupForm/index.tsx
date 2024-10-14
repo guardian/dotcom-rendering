@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../../articleFormat';
 import {
 	neutral,
 	pxToRem,
@@ -74,7 +74,7 @@ const buttonStyle = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${fill.newsletterSignUpFormButton(format)};
 	color: ${text.newsletterSignUpFormButton(format)};
 	margin-bottom: ${remSpace[2]};
-	flex-basis: ${pxToRem(118)}rem;
+	flex-basis: ${pxToRem(118)};
 	justify-content: center;
 
 	:disabled {
@@ -139,7 +139,7 @@ const EmailSignupForm = ({
 							margin-right: ${remSpace[3]};
 							margin-top: 0;
 							margin-bottom: ${remSpace[2]};
-							flex-basis: ${pxToRem(335)}rem;
+							flex-basis: ${pxToRem(335)};
 
 							${darkModeCss`
 								background-color: ${background.newsletterSignUpFormDark(format)};

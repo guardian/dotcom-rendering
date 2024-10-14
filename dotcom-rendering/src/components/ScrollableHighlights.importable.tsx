@@ -160,7 +160,7 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 	`;
 };
 
-export const HighlightsContainer = ({ trails }: Props) => {
+export const ScrollableHighlights = ({ trails }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
 	const imageLoading = 'eager';

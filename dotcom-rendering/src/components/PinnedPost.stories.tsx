@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
 import { breakpoints, from } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { liveBlock } from '../../fixtures/manual/liveBlock';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	ArticleSpecial,
+	Pillar,
+} from '../lib/format';
 import { FormatBoundary } from './FormatBoundary';
 import { LiveBlock } from './LiveBlock';
 import { PinnedPost } from './PinnedPost';

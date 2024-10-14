@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
 import {
 	article17,
 	palette,
@@ -8,6 +7,7 @@ import {
 	textSans24,
 } from '@guardian/source/foundations';
 import { getAgeWarning } from '../lib/age-warning';
+import type { ArticleTheme } from '../lib/format';
 import { getSharingUrls } from '../lib/sharing-urls';
 import type { AMPArticleModel } from '../types/article.amp';
 import type { Branding } from '../types/branding';

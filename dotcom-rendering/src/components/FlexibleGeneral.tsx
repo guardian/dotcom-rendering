@@ -9,6 +9,7 @@ import type {
 	ImageSizeType,
 } from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
+import type { TrailTextSize } from './Card/components/TrailTextWrapper';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
@@ -46,7 +47,7 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 
 	return cards.reduce<GroupedCards>((acc, card) => {
 		// Early return if the card is boosted since it takes up a whole row
-		if (card.boostLevel !== 'default') {
+		if (card.boostLevel && card.boostLevel !== 'default') {
 			return [...acc, createNewRow('oneCardBoosted', card)];
 		}
 
@@ -64,61 +65,71 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 	}, []);
 };
 
-/**
- * Boosting a splash card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
- */
-
-type boostedSplashProperties = {
+type BoostedSplashProperties = {
 	headlineSize: SmallHeadlineSize;
 	headlineSizeOnMobile: SmallHeadlineSize;
 	headlineSizeOnTablet: SmallHeadlineSize;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
+	imageSize: ImageSizeType;
 	supportingContentAlignment: Alignment;
+	trailTextSize: TrailTextSize;
 };
+
+/**
+ * Boosting a splash card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
+ */
 const decideSplashCardProperties = (
-	boostLevel: BoostLevel = 'default',
+	boostLevel: BoostLevel,
 	supportingContentLength: number,
-): boostedSplashProperties => {
+): BoostedSplashProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
-			return {
-				headlineSize: 'tiny',
-				headlineSizeOnMobile: 'tiny',
-				headlineSizeOnTablet: 'tiny',
-				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'bottom',
-				supportingContentAlignment:
-					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
-			};
-		case 'boost':
 			return {
 				headlineSize: 'small',
 				headlineSizeOnMobile: 'small',
 				headlineSizeOnTablet: 'small',
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: 'bottom',
+				imageSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
+				trailTextSize: 'regular',
 			};
-		case 'megaboost':
+		case 'boost':
 			return {
 				headlineSize: 'medium',
 				headlineSizeOnMobile: 'medium',
 				headlineSizeOnTablet: 'medium',
-				imagePositionOnDesktop: 'bottom',
+				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: 'bottom',
-				supportingContentAlignment: 'horizontal',
+				imageSize: 'jumbo',
+				supportingContentAlignment:
+					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
+				trailTextSize: 'regular',
 			};
-		case 'gigaboost':
+		case 'megaboost':
 			return {
 				headlineSize: 'large',
 				headlineSizeOnMobile: 'large',
 				headlineSizeOnTablet: 'large',
 				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'top',
+				imagePositionOnMobile: 'bottom',
+				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
+				trailTextSize: 'large',
+			};
+		case 'gigaboost':
+			return {
+				headlineSize: 'huge',
+				headlineSizeOnMobile: 'huge',
+				headlineSizeOnTablet: 'large',
+				imagePositionOnDesktop: 'bottom',
+				imagePositionOnMobile: 'bottom',
+				imageSize: 'jumbo',
+				supportingContentAlignment: 'horizontal',
+				trailTextSize: 'large',
 			};
 	}
 };
@@ -145,11 +156,14 @@ export const SplashCardLayout = ({
 		headlineSizeOnTablet,
 		imagePositionOnDesktop,
 		imagePositionOnMobile,
+		imageSize,
 		supportingContentAlignment,
+		trailTextSize,
 	} = decideSplashCardProperties(
-		card.boostLevel,
-		card?.supportingContent?.length ?? 0,
+		card.boostLevel ?? 'default',
+		card.supportingContent?.length ?? 0,
 	);
+
 	return (
 		<UL padBottom={true} isFlexibleContainer={true} showTopBar={false}>
 			<LI padSides={true}>
@@ -164,7 +178,7 @@ export const SplashCardLayout = ({
 					headlineSizeOnTablet={headlineSizeOnTablet}
 					imagePositionOnDesktop={imagePositionOnDesktop}
 					imagePositionOnMobile={imagePositionOnMobile}
-					imageSize="jumbo"
+					imageSize={imageSize}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
 					supportingContentAlignment={supportingContentAlignment}
@@ -173,39 +187,43 @@ export const SplashCardLayout = ({
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
 					boostedFontSizes={true}
+					isFlexSplash={true}
+					showTopBarDesktop={false}
+					showTopBarMobile={true}
+					trailTextSize={trailTextSize}
 				/>
 			</LI>
 		</UL>
 	);
 };
 
-/**
- * Boosting a splash card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
- */
-
-type boostedCardProperties = {
+type BoostedCardProperties = {
 	headlineSize: SmallHeadlineSize;
 	headlineSizeOnMobile: SmallHeadlineSize;
 	headlineSizeOnTablet: SmallHeadlineSize;
 	imageSize: ImageSizeType;
 };
+
+/**
+ * Boosting a standard card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
+ */
 const decideCardProperties = (
-	boostLevel: BoostLevel = 'boost',
-): boostedCardProperties => {
+	boostLevel: Omit<BoostLevel, 'default' | 'gigaboost'> = 'boost',
+): BoostedCardProperties => {
 	switch (boostLevel) {
 		case 'megaboost':
 			return {
-				headlineSize: 'huge',
-				headlineSizeOnMobile: 'huge',
-				headlineSizeOnTablet: 'huge',
+				headlineSize: 'small',
+				headlineSizeOnMobile: 'small',
+				headlineSizeOnTablet: 'tiny',
 				imageSize: 'jumbo',
 			};
 		case 'boost':
 		default:
 			return {
-				headlineSize: 'large',
-				headlineSizeOnMobile: 'large',
-				headlineSizeOnTablet: 'large',
+				headlineSize: 'tiny',
+				headlineSizeOnMobile: 'tiny',
+				headlineSizeOnTablet: 'tiny',
 				imageSize: 'medium',
 			};
 	}
@@ -234,7 +252,7 @@ export const BoostedCardLayout = ({
 		imageSize,
 	} = decideCardProperties(card.boostLevel);
 	return (
-		<UL padBottom={true} isFlexibleContainer={true}>
+		<UL padBottom={true} isFlexibleContainer={true} showTopBar={true}>
 			<LI padSides={true}>
 				<FrontCard
 					trail={card}
@@ -254,6 +272,9 @@ export const BoostedCardLayout = ({
 					aspectRatio="5:4"
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
+					showTopBarDesktop={false}
+					showTopBarMobile={true}
+					boostedFontSizes={true}
 				/>
 			</LI>
 		</UL>
@@ -267,16 +288,24 @@ export const StandardCardLayout = ({
 	absoluteServerTimes,
 	showImage = true,
 	imageLoading,
+	isFirstRow,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
+	isFirstRow: boolean;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	showImage?: boolean;
 }) => {
 	return (
-		<UL direction="row" padBottom={true} isFlexibleContainer={true}>
+		<UL
+			direction="row"
+			padBottom={true}
+			isFlexibleContainer={true}
+			showTopBar={true}
+			splitTopBar={!isFirstRow}
+		>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI
@@ -296,10 +325,13 @@ export const StandardCardLayout = ({
 							imageLoading={imageLoading}
 							imagePositionOnDesktop={'left'}
 							supportingContent={card.supportingContent}
+							supportingContentAlignment="horizontal"
 							imageSize={'medium'}
 							aspectRatio="5:4"
 							kickerText={card.kickerText}
 							showLivePlayable={false}
+							showTopBarDesktop={false}
+							showTopBarMobile={true}
 						/>
 					</LI>
 				);
@@ -316,7 +348,7 @@ export const FlexibleGeneral = ({
 	imageLoading,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1);
-	const cards = [...groupedTrails.standard].slice(0, 8); // TODO check maximum number of cards
+	const cards = [...groupedTrails.standard].slice(0, 8);
 	const groupedCards = decideCardPositions(cards);
 
 	return (
@@ -331,7 +363,7 @@ export const FlexibleGeneral = ({
 				/>
 			)}
 
-			{groupedCards.map((row) => {
+			{groupedCards.map((row, i) => {
 				switch (row.layout) {
 					case 'oneCardBoosted':
 						return (
@@ -354,6 +386,7 @@ export const FlexibleGeneral = ({
 								showAge={showAge}
 								absoluteServerTimes={absoluteServerTimes}
 								imageLoading={imageLoading}
+								isFirstRow={i === 0}
 							/>
 						);
 				}

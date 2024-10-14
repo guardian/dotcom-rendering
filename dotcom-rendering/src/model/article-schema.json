@@ -478,6 +478,9 @@
         "FEElement": {
             "anyOf": [
                 {
+                    "$ref": "#/definitions/AdPlaceholderBlockElement"
+                },
+                {
                     "$ref": "#/definitions/AudioAtomBlockElement"
                 },
                 {
@@ -500,9 +503,6 @@
                 },
                 {
                     "$ref": "#/definitions/ChartAtomBlockElement"
-                },
-                {
-                    "$ref": "#/definitions/QuizAtomBlockElement"
                 },
                 {
                     "$ref": "#/definitions/CodeBlockElement"
@@ -550,16 +550,13 @@
                     "$ref": "#/definitions/InteractiveAtomBlockElement"
                 },
                 {
+                    "$ref": "#/definitions/InteractiveContentsBlockElement"
+                },
+                {
                     "$ref": "#/definitions/InteractiveBlockElement"
                 },
                 {
                     "$ref": "#/definitions/ItemLinkBlockElement"
-                },
-                {
-                    "$ref": "#/definitions/AdPlaceholderBlockElement"
-                },
-                {
-                    "$ref": "#/definitions/InteractiveContentsBlockElement"
                 },
                 {
                     "$ref": "#/definitions/KeyTakeawaysBlockElement"
@@ -596,6 +593,9 @@
                 },
                 {
                     "$ref": "#/definitions/QABlockElement"
+                },
+                {
+                    "$ref": "#/definitions/QuizAtomBlockElement"
                 },
                 {
                     "$ref": "#/definitions/RichLinkBlockElement"
@@ -749,6 +749,18 @@
                 {
                     "$ref": "#/definitions/WitnessTypeBlockElement"
                 }
+            ]
+        },
+        "AdPlaceholderBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.AdPlaceholderBlockElement"
+                }
+            },
+            "required": [
+                "_type"
             ]
         },
         "AudioAtomBlockElement": {
@@ -1518,142 +1530,6 @@
                 "url"
             ]
         },
-        "QuizAtomBlockElement": {
-            "type": "object",
-            "properties": {
-                "_type": {
-                    "type": "string",
-                    "const": "model.dotcomrendering.pageElements.QuizAtomBlockElement"
-                },
-                "elementId": {
-                    "type": "string"
-                },
-                "quizType": {
-                    "enum": [
-                        "knowledge",
-                        "personality"
-                    ],
-                    "type": "string"
-                },
-                "id": {
-                    "type": "string"
-                },
-                "questions": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "string"
-                            },
-                            "text": {
-                                "type": "string"
-                            },
-                            "answers": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string"
-                                        },
-                                        "text": {
-                                            "type": "string"
-                                        },
-                                        "revealText": {
-                                            "type": "string"
-                                        },
-                                        "isCorrect": {
-                                            "type": "boolean"
-                                        },
-                                        "answerBuckets": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    },
-                                    "required": [
-                                        "answerBuckets",
-                                        "id",
-                                        "isCorrect",
-                                        "text"
-                                    ]
-                                }
-                            },
-                            "imageUrl": {
-                                "type": "string"
-                            },
-                            "imageAlt": {
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "answers",
-                            "id",
-                            "text"
-                        ]
-                    }
-                },
-                "resultBuckets": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "string"
-                            },
-                            "title": {
-                                "type": "string"
-                            },
-                            "description": {
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "description",
-                            "id",
-                            "title"
-                        ]
-                    }
-                },
-                "resultGroups": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "title": {
-                                "type": "string"
-                            },
-                            "shareText": {
-                                "type": "string"
-                            },
-                            "minScore": {
-                                "type": "number"
-                            },
-                            "id": {
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "id",
-                            "minScore",
-                            "shareText",
-                            "title"
-                        ]
-                    }
-                }
-            },
-            "required": [
-                "_type",
-                "elementId",
-                "id",
-                "questions",
-                "quizType",
-                "resultBuckets",
-                "resultGroups"
-            ]
-        },
         "CodeBlockElement": {
             "type": "object",
             "properties": {
@@ -2322,6 +2198,52 @@
                 "url"
             ]
         },
+        "InteractiveContentsBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.InteractiveContentsBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "subheadingLinks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SubheadingBlockElement"
+                    }
+                },
+                "endDocumentElementId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "subheadingLinks"
+            ]
+        },
+        "SubheadingBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.SubheadingBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "html"
+            ]
+        },
         "InteractiveBlockElement": {
             "type": "object",
             "properties": {
@@ -2362,64 +2284,6 @@
                 "_type": {
                     "type": "string",
                     "const": "model.dotcomrendering.pageElements.ItemLinkBlockElement"
-                },
-                "elementId": {
-                    "type": "string"
-                },
-                "html": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "_type",
-                "elementId",
-                "html"
-            ]
-        },
-        "AdPlaceholderBlockElement": {
-            "type": "object",
-            "properties": {
-                "_type": {
-                    "type": "string",
-                    "const": "model.dotcomrendering.pageElements.AdPlaceholderBlockElement"
-                }
-            },
-            "required": [
-                "_type"
-            ]
-        },
-        "InteractiveContentsBlockElement": {
-            "type": "object",
-            "properties": {
-                "_type": {
-                    "type": "string",
-                    "const": "model.dotcomrendering.pageElements.InteractiveContentsBlockElement"
-                },
-                "elementId": {
-                    "type": "string"
-                },
-                "subheadingLinks": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/SubheadingBlockElement"
-                    }
-                },
-                "endDocumentElementId": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "_type",
-                "elementId",
-                "subheadingLinks"
-            ]
-        },
-        "SubheadingBlockElement": {
-            "type": "object",
-            "properties": {
-                "_type": {
-                    "type": "string",
-                    "const": "model.dotcomrendering.pageElements.SubheadingBlockElement"
                 },
                 "elementId": {
                     "type": "string"
@@ -2930,6 +2794,142 @@
                 "html",
                 "id",
                 "title"
+            ]
+        },
+        "QuizAtomBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.QuizAtomBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "quizType": {
+                    "enum": [
+                        "knowledge",
+                        "personality"
+                    ],
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "questions": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "text": {
+                                "type": "string"
+                            },
+                            "answers": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "text": {
+                                            "type": "string"
+                                        },
+                                        "revealText": {
+                                            "type": "string"
+                                        },
+                                        "isCorrect": {
+                                            "type": "boolean"
+                                        },
+                                        "answerBuckets": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "answerBuckets",
+                                        "id",
+                                        "isCorrect",
+                                        "text"
+                                    ]
+                                }
+                            },
+                            "imageUrl": {
+                                "type": "string"
+                            },
+                            "imageAlt": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "answers",
+                            "id",
+                            "text"
+                        ]
+                    }
+                },
+                "resultBuckets": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "description",
+                            "id",
+                            "title"
+                        ]
+                    }
+                },
+                "resultGroups": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "title": {
+                                "type": "string"
+                            },
+                            "shareText": {
+                                "type": "string"
+                            },
+                            "minScore": {
+                                "type": "number"
+                            },
+                            "id": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "minScore",
+                            "shareText",
+                            "title"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "id",
+                "questions",
+                "quizType",
+                "resultBuckets",
+                "resultGroups"
             ]
         },
         "RichLinkBlockElement": {

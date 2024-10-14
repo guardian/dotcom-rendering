@@ -2,7 +2,7 @@
 
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { ParticipationFields } from '@guardian/apps-rendering-api-models/participationFields';
-import { ArticleSpecial } from '@guardian/libs';
+import { ArticleSpecial } from 'articleFormat';
 import { Optional } from 'optional';
 
 export type CalloutFields = {

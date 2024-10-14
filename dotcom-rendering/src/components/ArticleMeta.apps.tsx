@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { ReactNode } from 'react';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getSoleContributor } from '../lib/byline';
+import { ArticleDesign, ArticleDisplay } from '../lib/format';
+import type { ArticleFormat } from '../lib/format';
 import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
 import type { TagType } from '../types/tag';
@@ -92,7 +93,7 @@ const MetaGridByline = ({
 	children: ReactNode;
 	isComment: boolean;
 }) => (
-	// address > div > span > svg:first-of-type - spacing for the Follow Tag buttons in follow wrapper,
+	// address > div > span > div:first-of-type - spacing for the Follow Tag buttons in follow wrapper,
 	// which is contextual of the meta by layout type
 	<div
 		css={css`
@@ -105,7 +106,7 @@ const MetaGridByline = ({
 				padding-bottom: 0px;
 			}
 
-			address > div > span > svg:first-of-type {
+			address > div > span > div:first-of-type {
 				display: block;
 				margin-top: ${space[2]}px;
 				${!isComment && `margin-bottom: ${space[2]}px;`}

@@ -1,10 +1,6 @@
-import { type ArticleFormat, isUndefined } from '@guardian/libs';
-import type {
-	FEElement,
-	ImageBlockElement,
-	ImageForLightbox,
-	Newsletter,
-} from '../types/content';
+import { isUndefined } from '@guardian/libs';
+import { type ArticleFormat } from '../lib/format';
+import type { FEElement, ImageForLightbox, Newsletter } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 import { enhanceBlockquotes } from './enhance-blockquotes';

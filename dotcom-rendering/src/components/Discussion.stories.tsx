@@ -1,8 +1,9 @@
-import { ArticleDesign, ArticleDisplay, Pillar, storage } from '@guardian/libs';
+import { storage } from '@guardian/libs';
 import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { Section } from '../components/Section';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { palette as themePalette } from '../palette';
 import { DiscussionLayout } from './DiscussionLayout';
 

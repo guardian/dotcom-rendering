@@ -55,6 +55,9 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 	const showUSSupportCheckout =
 		showChoiceCards && variant.name.includes('US_CHECKOUT_PAGE');
 
+	const hasSupporterPlusPromoCode =
+		variant.cta?.baseUrl.includes('OCT_DISCOUNT_50_3_MONTHS') ?? false;
+
 	const variantOfChoiceCard =
 		countryCode === 'US' && showUSSupportCheckout
 			? 'US_CHECKOUT_THREE_TIER_CHOICE_CARDS'
@@ -70,6 +73,9 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 					selectedProduct={threeTierChoiceCardSelectedProduct}
 					setSelectedProduct={setThreeTierChoiceCardSelectedProduct}
 					variantOfChoiceCard={variantOfChoiceCard}
+					supporterPlusDiscount={
+						hasSupporterPlusPromoCode ? 0.5 : undefined
+					}
 				/>
 			)}
 			<ContributionsEpicButtons

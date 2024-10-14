@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../articleFormat';
 import { CaptionIconVariant } from 'components/CaptionIcon';
 import { Optional } from 'optional';
 import type { ReactElement } from 'react';
@@ -13,7 +13,7 @@ const Image = (): ReactElement => (
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 		variant={CaptionIconVariant.Image}
 	>
@@ -28,7 +28,7 @@ const Video = (): ReactElement => (
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 		variant={CaptionIconVariant.Video}
 	>

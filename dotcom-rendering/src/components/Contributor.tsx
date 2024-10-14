@@ -1,15 +1,15 @@
 import { css } from '@emotion/react';
 import {
-	ArticleDesign,
-	type ArticleFormat,
-	ArticleSpecial,
-} from '@guardian/libs';
-import {
 	headlineMedium17,
 	textSansItalic17,
 	until,
 } from '@guardian/source/foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../lib/format';
 import { palette as schemedPalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { BylineLink } from './BylineLink';

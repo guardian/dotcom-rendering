@@ -3,7 +3,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '@guardian/libs';
+} from '../../src/lib/format';
 
 export interface KeyEventCard {
 	id: string;

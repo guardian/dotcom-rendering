@@ -1,4 +1,4 @@
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../lib/format';
 import type { ImageBlockElement, StarRating } from '../types/content';
 import { ImageComponent } from './ImageComponent';
 

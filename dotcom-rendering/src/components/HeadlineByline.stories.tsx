@@ -1,15 +1,15 @@
 import { css } from '@emotion/react';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
 import type { StoryObj } from '@storybook/react';
 import {
 	splitTheme,
 	type StoryProps,
 } from '../../.storybook/decorators/splitThemeDecorator';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '../lib/format';
 import { HeadlineByline } from './HeadlineByline';
 
 export default {

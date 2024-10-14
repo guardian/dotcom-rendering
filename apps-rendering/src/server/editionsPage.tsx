@@ -5,7 +5,7 @@ import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
-import type { ArticleTheme } from '@guardian/libs';
+import type { ArticleTheme } from '../articleFormat';
 import { resets } from '@guardian/source/foundations';
 import type { Option } from '../../vendor/@guardian/types/index';
 import {

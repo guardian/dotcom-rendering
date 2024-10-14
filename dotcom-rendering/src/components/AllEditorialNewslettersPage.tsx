@@ -1,7 +1,7 @@
 import { Global } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { StrictMode } from 'react';
 import { AllEditorialNewslettersPageLayout } from '../layouts/AllEditorialNewslettersPageLayout';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { rootStyles } from '../lib/rootStyles';
 import type { NavType } from '../model/extract-nav';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';

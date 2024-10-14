@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
 import {
 	brandText,
 	from,
@@ -9,6 +8,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import { SvgGuardianBestWebsiteLogo } from '@guardian/source/react-components';
+import type { ArticleTheme } from '../lib/format';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import type { NavType, PillarLinkType } from '../model/extract-nav';
 import { ReaderRevenueButton } from './ReaderRevenueButton.amp';

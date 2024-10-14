@@ -1,4 +1,4 @@
-import { ArticleFormat } from '@guardian/libs';
+import { ArticleFormat } from '../../src/lib/format';
 import { paletteDeclarations } from '../../src/palette';
 
 /**

@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import type { SlotName } from '@guardian/commercial';
 import { adSizes, constants } from '@guardian/commercial';
-import { ArticleDisplay } from '@guardian/libs';
 import {
 	between,
 	breakpoints,
@@ -12,6 +11,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
+import { ArticleDisplay } from '../lib/format';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { palette as schemedPalette } from '../palette';

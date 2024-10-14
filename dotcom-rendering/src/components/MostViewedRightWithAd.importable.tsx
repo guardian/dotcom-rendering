@@ -3,7 +3,7 @@ import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
-} from '@guardian/libs';
+} from '../lib/format';
 import { RightAdsPlaceholder } from './AdPlaceholder.apps';
 import { AdSlot } from './AdSlot.web';
 import { useConfig } from './ConfigContext';

@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import {
 	headlineBold17,
 	headlineBold20,
@@ -7,6 +6,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
+import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import { palette } from '../palette';
 
 const tagStyles = css`
