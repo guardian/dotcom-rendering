@@ -4,12 +4,12 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { PropsWithChildren } from 'react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { customMockedFetch } from '../lib/mockRESTCalls';
 import { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import { ContainerOverrides } from './ContainerOverrides';
 import { Island } from './Island';
 import { LatestLinks } from './LatestLinks.importable';
-import { customMockedFetch } from '../lib/mockRESTCalls';
 
 export default {
 	component: LatestLinks,

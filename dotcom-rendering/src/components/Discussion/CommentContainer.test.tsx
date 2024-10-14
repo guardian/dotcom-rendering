@@ -6,10 +6,10 @@ import type {
 	ReplyType,
 	SignedInUser,
 } from '../../lib/discussion';
+import { resetLastFetchCall } from '../../lib/mockRESTCalls';
+import { mockFetch } from '../../lib/mockRESTCallsInJest';
 import { error, ok } from '../../lib/result';
 import { CommentContainer } from './CommentContainer';
-import { mockFetch } from '../../lib/mockRESTCallsInJest';
-import { resetLastFetchCall } from '../../lib/mockRESTCalls';
 
 const mockedCommentID = '123456';
 

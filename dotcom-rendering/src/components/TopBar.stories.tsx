@@ -3,8 +3,8 @@ import {
 	contributionsHeaderResponse,
 	contributionsSignInPromptHeaderResponse,
 } from '../../fixtures/manual/contributionsHeader';
-import { TopBar } from './TopBar.importable';
 import { customMockedFetch } from '../lib/mockRESTCalls';
+import { TopBar } from './TopBar.importable';
 
 const contributionsMockResponse = (
 	component: 'Header' | 'SignInPromptHeader',

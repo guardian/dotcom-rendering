@@ -4,6 +4,7 @@ import {
 	type StoryProps,
 } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { customMockedFetch } from '../lib/mockRESTCalls';
 import { ArticleContainer } from './ArticleContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
@@ -11,7 +12,6 @@ import { responseWithTwoTabs } from './MostViewed.mocks';
 import { MostViewedRight } from './MostViewedRight';
 import { RightColumn } from './RightColumn';
 import { Section } from './Section';
-import { customMockedFetch } from '../lib/mockRESTCalls';
 
 const standardFormat = {
 	display: ArticleDisplay.Standard,

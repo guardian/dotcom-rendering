@@ -17,10 +17,10 @@ import { Video as VideoStandardNewsFixture } from '../../fixtures/generated/dcr-
 import { embedIframe } from '../client/embedIframe';
 import { type ArticleFormat, decideFormat } from '../lib/articleFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
+import { mockedFetch } from '../lib/mockRESTCalls';
 import { extractNAV } from '../model/extract-nav';
 import type { ArticleDeprecated } from '../types/article';
 import { DecideLayout, type Props as DecideLayoutProps } from './DecideLayout';
-import { mockedFetch } from '../lib/mockRESTCalls';
 
 export type HydratedLayoutDecoratorArgs = {
 	colourScheme?: 'light' | 'dark';

@@ -8,9 +8,9 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
+import { customMockedFetch } from '../lib/mockRESTCalls';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FrontSection } from './FrontSection';
-import { customMockedFetch } from '../lib/mockRESTCalls';
 
 const defaultGroupedTrails: DCRGroupedTrails = {
 	huge: [],

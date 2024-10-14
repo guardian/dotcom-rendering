@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { calloutCampaign } from '../../fixtures/manual/calloutCampaign';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { CalloutEmbedBlockComponent } from './CalloutEmbedBlockComponent.importable';
 import { customMockedFetch } from '../lib/mockRESTCalls';
+import { CalloutEmbedBlockComponent } from './CalloutEmbedBlockComponent.importable';
 
 export default {
 	component: CalloutEmbedBlockComponent,

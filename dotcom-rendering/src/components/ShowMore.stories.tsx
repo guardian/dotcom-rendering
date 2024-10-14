@@ -1,8 +1,8 @@
 import { userEvent, within } from '@storybook/test';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/show-more-trails';
-import { ShowMore } from './ShowMore.importable';
 import { customMockedFetch } from '../lib/mockRESTCalls';
+import { ShowMore } from './ShowMore.importable';
 
 /**
  * Clicks the 'show more' button so that Chromatic can capture it the component
