@@ -59,8 +59,10 @@ const carouselContainerStyles = css`
 	}
 
 	/* Extend carousel into grid gutter on mobile */
+	margin-left: -10px;
 	margin-right: -10px;
 	${from.mobileLandscape} {
+		margin-left: -20px;
 		margin-right: -20px;
 	}
 
@@ -82,9 +84,9 @@ const carouselContainerStyles = css`
 	}
 	${from.leftCol} {
 		margin-top: 0;
+		margin-left: -10px;
 	}
 	${from.wide} {
-		margin-left: ${space[2]}px;
 		margin-right: calc(${space[2]}px - ${gridColumnWidth} - ${gridGap});
 	}
 `;
@@ -109,6 +111,21 @@ const carouselStyles = css`
 	}
 	scrollbar-width: none; /* Firefox */
 	position: relative;
+
+	padding-left: 10px;
+	scroll-padding-left: 10px;
+	${from.mobileLandscape} {
+		padding-left: 20px;
+		scroll-padding-left: 20px;
+	}
+	${from.tablet} {
+		padding-left: 0px;
+		scroll-padding-left: 0px;
+	}
+	${from.leftCol} {
+		padding-left: 20px;
+		scroll-padding-left: 20px;
+	}
 `;
 
 const itemStyles = css`
@@ -127,6 +144,18 @@ const verticalLineStyles = css`
 		width: 1px;
 		background-color: ${palette('--card-border-top')};
 		transform: translateX(-50%);
+	}
+	${from.leftCol} {
+		:first-child::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: -10px;
+			width: 1px;
+			background-color: ${palette('--card-border-top')};
+			transform: translateX(-50%);
+		}
 	}
 `;
 
