@@ -1,6 +1,6 @@
-# Enhance Elements
+# Enhancers
 
-The enhance elements pattern is one where frontend elements are transformed into a different, more useable, format. In particular, it relates to the `blocks` array. Each enhancement function, takes an array of `FEElements` and returns a new array of `FEElements`.
+The enhancer pattern is one where frontend data is transformed into a different, more useable, format. Each enhancement function, takes an array of `FEElements` and returns a new array of `FEElements`.
 
 ## Lexicon
 
