@@ -1,65 +1,18 @@
 import { css } from '@emotion/react';
-import { SvgCross } from '@guardian/source/react-components';
 import type { Meta, StoryFn } from '@storybook/react';
+import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	Pillar as ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '../../lib/format';
 import { EditorialLinkButton } from './EditorialLinkButton';
 import type { EditorialLinkButtonProps } from './EditorialLinkButton';
 
-const defaultFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-};
-
 const meta: Meta<typeof EditorialLinkButton> = {
 	title: 'Components/EditorialLinkButton',
 	component: EditorialLinkButton,
-	argTypes: {
-		format: {
-			options: [
-				'news',
-				'sport',
-				'culture',
-				'lifestyle',
-				'opinion',
-				'special_report',
-				'labs',
-			],
-			mapping: {
-				news: { ...defaultFormat, theme: ArticlePillar.News },
-				sport: { ...defaultFormat, theme: ArticlePillar.Sport },
-				culture: { ...defaultFormat, theme: ArticlePillar.Culture },
-				lifestyle: { ...defaultFormat, theme: ArticlePillar.Lifestyle },
-				opinion: { ...defaultFormat, theme: ArticlePillar.Opinion },
-				special_report: {
-					...defaultFormat,
-					theme: ArticleSpecial.SpecialReport,
-				},
-				labs: { ...defaultFormat, theme: ArticleSpecial.Labs },
-			},
-			control: { type: 'radio' },
-		},
-		icon: {
-			options: ['undefined', 'cross'],
-			mapping: {
-				undefined,
-				cross: <SvgCross />,
-			},
-			control: { type: 'radio' },
-		},
-	},
-	args: {
-		size: 'default',
-		hideLabel: false,
-		icon: undefined,
-		priority: 'primary',
-		iconSide: 'left',
-		nudgeIcon: false,
-	},
 };
 
 export default meta;
@@ -79,72 +32,63 @@ const Template: StoryFn<typeof EditorialLinkButton> = (
 	return <EditorialLinkButton {...props}>Click me</EditorialLinkButton>;
 };
 
-// *****************************************************************************
-
 const pillars = [
-	ArticlePillar.News,
-	ArticlePillar.Sport,
-	ArticlePillar.Culture,
-	ArticlePillar.Lifestyle,
-	ArticlePillar.Opinion,
+	Pillar.News,
+	Pillar.Sport,
+	Pillar.Culture,
+	Pillar.Lifestyle,
+	Pillar.Opinion,
 	ArticleSpecial.SpecialReport,
 	ArticleSpecial.Labs,
 ];
 
-const RowTemplate: StoryFn<typeof EditorialLinkButton> = (
-	args: Partial<EditorialLinkButtonProps>,
-) => (
-	<div
-		css={css`
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-			width: 800px;
-		`}
-	>
-		{pillars.map((pillar) => (
-			<Template
-				key={pillar}
-				{...args}
-				format={{ ...defaultFormat, theme: pillar }}
-			/>
-		))}
-	</div>
-);
+const allThemeStandardVariations = pillars.map((theme) => ({
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme,
+}));
 
-export const WhenPrimary: StoryFn<typeof EditorialLinkButton> =
-	RowTemplate.bind({});
+export const WhenPrimary: StoryFn<typeof EditorialLinkButton> = Template.bind(
+	{},
+);
 WhenPrimary.args = {
 	priority: 'primary',
 	size: 'small',
 };
+WhenPrimary.decorators = [lightDecorator(allThemeStandardVariations)];
 
 // *****************************************************************************
 
-export const WhenSecondary: StoryFn<typeof EditorialLinkButton> =
-	RowTemplate.bind({});
+export const WhenSecondary: StoryFn<typeof EditorialLinkButton> = Template.bind(
+	{},
+);
 WhenSecondary.args = {
 	priority: 'secondary',
 	size: 'small',
 };
+WhenSecondary.decorators = [lightDecorator(allThemeStandardVariations)];
 
 // *****************************************************************************
 
-export const WhenTertiary: StoryFn<typeof EditorialLinkButton> =
-	RowTemplate.bind({});
+export const WhenTertiary: StoryFn<typeof EditorialLinkButton> = Template.bind(
+	{},
+);
 WhenTertiary.args = {
 	priority: 'tertiary',
 	size: 'small',
 };
+WhenTertiary.decorators = [lightDecorator(allThemeStandardVariations)];
 
 // *****************************************************************************
 
-export const WhenSubdued: StoryFn<typeof EditorialLinkButton> =
-	RowTemplate.bind({});
+export const WhenSubdued: StoryFn<typeof EditorialLinkButton> = Template.bind(
+	{},
+);
 WhenSubdued.args = {
 	priority: 'subdued',
 	size: 'small',
 };
+WhenSubdued.decorators = [lightDecorator(allThemeStandardVariations)];
 
 // *****************************************************************************
 
@@ -156,10 +100,4 @@ WithOverrides.args = {
 		background-color: pink;
 	`,
 };
-
-// *****************************************************************************
-
-export const WithDefaults: StoryFn<typeof EditorialLinkButton> = Template.bind(
-	{},
-);
-WithDefaults.args = {};
+WithOverrides.decorators = [lightDecorator(allThemeStandardVariations)];
