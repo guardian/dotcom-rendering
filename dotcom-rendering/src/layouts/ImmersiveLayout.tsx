@@ -108,7 +108,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Explanation of each unit of grid-template-columns
 
 					Left Column (220 - 1px border)
-					Vertical grey borders
+					Vertical grey border
 					Main content
 					Right Column
 

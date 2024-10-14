@@ -5540,6 +5540,9 @@ const expandableMarketingCardBackground: PaletteFunction = () =>
 const expandableMarketingCardSvgFill: PaletteFunction = () =>
 	sourcePalette.neutral[0];
 
+const expandableMarketingCardButtonBackground: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+
 const expandableMarketingCardSvgBackground: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 
@@ -6282,6 +6285,10 @@ const paletteColours = {
 	'--expandable-marketing-card-background': {
 		light: expandableMarketingCardBackground,
 		dark: expandableMarketingCardBackground,
+	},
+	'--expandable-marketing-card-button-background': {
+		light: expandableMarketingCardButtonBackground,
+		dark: expandableMarketingCardButtonBackground,
 	},
 	'--expandable-marketing-card-fill-background': {
 		light: expandableMarketingCardFillBackgroundLight,

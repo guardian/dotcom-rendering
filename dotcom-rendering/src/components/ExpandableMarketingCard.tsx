@@ -142,7 +142,9 @@ const imageBottomStyles = css`
 
 const buttonStyles = css`
 	z-index: 1;
-	background-color: white;
+	background-color: ${palette(
+		'--expandable-marketing-card-button-background',
+	)};
 	width: fit-content;
 
 	${textSansBold12};
