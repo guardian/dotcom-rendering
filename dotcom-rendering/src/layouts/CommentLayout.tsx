@@ -20,6 +20,7 @@ import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DiscussionLayout } from '../components/DiscussionLayout';
+import { ExpandableMarketingCardWrapper } from '../components/ExpandableMarketingCardWrapper.importable';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -100,18 +101,20 @@ const StandardGrid = ({
 									'title      border  headline   headline   headline'
 									'lines      border  headline   headline   headline'
 									'meta       border  standfirst standfirst standfirst'
-									'meta       border  media      media      media'
-									'.          border  body       .          right-column'
-									'.          border  .          .          right-column';
+									'uscard     border  standfirst standfirst standfirst'
+									'uscard     border  media      media      media'
+									'uscard     border  body       .          right-column'
+									'uscard     border  .          .          right-column';
 						  `
 						: css`
 								grid-template-areas:
 									'title      border  headline   . right-column'
 									'lines      border  headline   . right-column'
 									'meta       border  standfirst . right-column'
-									'meta       border  media      . right-column'
-									'.          border  body       . right-column'
-									'.          border  .          . right-column';
+									'uscard     border  standfirst . right-column'
+									'uscard     border  media      . right-column'
+									'uscard     border  body       . right-column'
+									'uscard     border  .          . right-column';
 						  `}
 				}
 
@@ -129,21 +132,23 @@ const StandardGrid = ({
 					${display === ArticleDisplay.Showcase
 						? css`
 								grid-template-areas:
-									'title      border  headline    headline'
-									'lines      border  headline    headline'
-									'meta       border  standfirst  standfirst'
-									'meta       border  media       media'
-									'.          border  body        right-column'
-									'.          border  .           right-column';
+									'title   border  headline    headline'
+									'lines   border  headline    headline'
+									'meta    border  standfirst  standfirst'
+									'uscard  border  standfirst  standfirst'
+									'uscard  border  media       media'
+									'uscard  border  body        right-column'
+									'uscard  border  .           right-column';
 						  `
 						: css`
 								grid-template-areas:
-									'title      border  headline    right-column'
-									'lines      border  headline    right-column'
-									'meta       border  standfirst  right-column'
-									'meta       border  media       right-column'
-									'.          border  body        right-column'
-									'.          border  .           right-column';
+									'title   border  headline    right-column'
+									'lines   border  headline    right-column'
+									'meta    border  standfirst  right-column'
+									'uscard  border  standfirst  right-column'
+									'uscard  border  media       right-column'
+									'uscard  border  body        right-column'
+									'uscard  border  .           right-column';
 						  `}
 				}
 
@@ -551,6 +556,22 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								)}
 							</div>
 						</GridItem>
+						{isWeb && (
+							<GridItem area="uscard" element="aside">
+								<Hide when="below" breakpoint="leftCol">
+									<Island
+										priority="enhancement"
+										defer={{ until: 'visible' }}
+									>
+										<ExpandableMarketingCardWrapper
+											guardianBaseURL={
+												article.guardianBaseURL
+											}
+										/>
+									</Island>
+								</Hide>
+							</GridItem>
+						)}
 						<GridItem area="body">
 							<ArticleContainer format={format}>
 								<div css={maxWidth}>

@@ -397,7 +397,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									standfirst={article.standfirst}
 								/>
 							</GridItem>
-
 							<GridItem area="lines">
 								<div css={maxWidth}>
 									<div css={stretchLines}>
