@@ -193,7 +193,6 @@ export type FEDesign =
 	| 'QuizDesign'
 	| 'InteractiveDesign'
 	| 'PhotoEssayDesign'
-	| 'PrintShopDesign'
 	| 'ObituaryDesign'
 	| 'FullPageInteractiveDesign'
 	| 'NewsletterSignupDesign'
