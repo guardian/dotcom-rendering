@@ -1084,7 +1084,6 @@
                 "fields",
                 "index",
                 "mediaType",
-                "mimeType",
                 "url"
             ]
         },

@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { from, space } from '@guardian/source/foundations';
 import { getZIndex } from '../lib/getZIndex';
 
 type Props = {
@@ -28,6 +29,26 @@ const bodyStyles = css`
 	${getZIndex('bodyArea')}
 `;
 
+const usCardStyles = css`
+	align-self: start;
+	position: sticky;
+	top: 0;
+	${getZIndex('expandableMarketingCardOverlay')}
+
+	${from.leftCol} {
+		margin-top: ${space[6]}px;
+		margin-bottom: ${space[9]}px;
+
+		/* To align with rich links - if we move this feature to production, we should remove this and make rich link align with everything instead */
+		margin-left: 1px;
+		margin-right: -1px;
+	}
+
+	${from.wide} {
+		margin-left: 0;
+	}
+`;
+
 const gridArea = css`
 	grid-area: var(--grid-area);
 `;
@@ -41,6 +62,7 @@ export const GridItem = ({
 		css={[
 			area === 'body' && bodyStyles,
 			area === 'right-column' && rightColumnStyles,
+			area === 'uscard' && usCardStyles,
 			gridArea,
 		]}
 		style={{
