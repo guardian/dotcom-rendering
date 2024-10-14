@@ -1,8 +1,8 @@
 import { userEvent, within } from '@storybook/test';
-import fetchMock from 'fetch-mock';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/show-more-trails';
 import { ShowMore } from './ShowMore.importable';
+import { customMockedFetch } from '../lib/mockRESTCalls';
 
 /**
  * Clicks the 'show more' button so that Chromatic can capture it the component
@@ -36,14 +36,26 @@ export default {
 	title: 'Components/ShowMore',
 };
 
+const showMoreSuccessRequest = customMockedFetch([
+	{
+		mockedMethod: 'GET',
+		mockedUrl: `${ajaxUrl}/${pageId}/show-more/${collectionId}.json?dcr=true`,
+		mockedStatus: 200,
+		mockedBody: trails.slice(0, 6),
+	},
+]);
+
+const showMoreErrorRequest = customMockedFetch([
+	{
+		mockedMethod: 'GET',
+		mockedUrl: `${ajaxUrl}/${pageId}/show-more/${collectionId}.json?dcr=true`,
+		mockedStatus: 400,
+		mockedBody: undefined,
+	},
+]);
+
 export const ShowMoreSuccess = () => {
-	fetchMock
-		.restore()
-		.get(`${ajaxUrl}/${pageId}/show-more/${collectionId}.json?dcr=true`, {
-			status: 200,
-			body: trails.slice(0, 6),
-		})
-		.spy('end:.hot-update.json');
+	global.fetch = showMoreSuccessRequest;
 
 	return ShowMore(defaultProps);
 };
@@ -52,13 +64,7 @@ ShowMoreSuccess.play = play;
 ShowMoreSuccess.storyName = 'ShowMore button, success';
 
 export const ShowMoreError = () => {
-	fetchMock
-		.restore()
-		.get(`${ajaxUrl}/${pageId}/show-more/${collectionId}.json?dcr`, {
-			status: 404,
-			body: null,
-		})
-		.spy('end:.hot-update.json');
+	global.fetch = showMoreErrorRequest;
 
 	return ShowMore(defaultProps);
 };
