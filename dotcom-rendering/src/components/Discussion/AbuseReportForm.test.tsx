@@ -2,10 +2,10 @@ import '@testing-library/jest-dom';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { reportAbuse } from '../../lib/discussionApi';
+import { getLastFetchCall, resetLastFetchCall } from '../../lib/mockRESTCalls';
+import { mockFetch } from '../../lib/mockRESTCallsInJest';
 import { ok } from '../../lib/result';
 import { AbuseReportForm } from './AbuseReportForm';
-import { mockFetch } from '../../lib/mockRESTCallsInJest';
-import { getLastFetchCall, resetLastFetchCall } from '../../lib/mockRESTCalls';
 
 describe('Dropdown', () => {
 	let originalFetch: typeof fetch;
@@ -65,7 +65,7 @@ describe('Dropdown', () => {
 		await user.selectOptions(getByLabelText('Category'), 'Trolling');
 		await user.click(getByRole('button', { name: 'Report' }));
 
-		const [_, requestInit] = getLastFetchCall() ?? [undefined, undefined];
+		const [, requestInit] = getLastFetchCall() ?? [undefined, undefined];
 		await waitFor(() => {
 			expect(requestInit?.body).toBe('categoryId=4');
 		});

@@ -4,11 +4,11 @@ import {
 	screen,
 	waitForElementToBeRemoved,
 } from '@testing-library/react';
+import { resetLastFetchCall } from '../../lib/mockRESTCalls';
+import { mockFetch } from '../../lib/mockRESTCallsInJest';
 import { ok } from '../../lib/result';
 import { ConfigProvider } from '../ConfigContext';
 import { Discussion } from '../Discussion';
-import { mockFetch } from '../../lib/mockRESTCallsInJest';
-import { resetLastFetchCall } from '../../lib/mockRESTCalls';
 
 describe('App', () => {
 	let originalFetch: typeof fetch;

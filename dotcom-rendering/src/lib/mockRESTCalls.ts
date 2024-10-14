@@ -16,9 +16,7 @@ import { shortDiscussion } from '../../fixtures/manual/short-discussion';
 import { topPicks } from '../../fixtures/manual/topPicks';
 
 const createMockResponse = (status: number, body?: any): Promise<Response> => {
-	return Promise.resolve(
-		new Response(JSON.stringify(body), { status: status }),
-	);
+	return Promise.resolve(new Response(JSON.stringify(body), { status }));
 };
 
 let lastFetchCall: [url: string, requestInit?: RequestInit | undefined] | null =
@@ -27,12 +25,10 @@ let lastFetchCall: [url: string, requestInit?: RequestInit | undefined] | null =
 export const mockedFetch = (
 	input: RequestInfo | URL,
 	requestInit?: RequestInit,
-) => {
-	const url = input.toString();
+): Promise<Response> => {
+	const url = new Request(input).url;
 	lastFetchCall = [url, requestInit];
 
-	// console.log(`fetched url: ${url}`);
-	console.log(`fetched method: ${requestInit?.method}`);
 	switch (true) {
 		case /logs\.(code.dev-)?guardianapis\.com\/log/.test(url) &&
 			requestInit?.method === 'POST':
@@ -60,15 +56,15 @@ export const mockedFetch = (
 					},
 				],
 			});
-		case /^https:\/\/discussion\.theguardian\.com\/discussion-api\/getCommentCounts\?/.test(
-			url,
+		case url.startsWith(
+			'https://discussion.theguardian.com/discussion-api/getCommentCounts?',
 		):
 			return createMockResponse(200, {
 				'/p/d8ex5': 496,
 				'/p/zemg8': 11_000,
 			});
-		case /^https:\/\/discussion\.theguardian\.com\/discussion-api\/getCommentCounts\?short-urls=\/p\/d8ex5/.test(
-			url,
+		case url.startsWith(
+			'https://discussion.theguardian.com/discussion-api/getCommentCounts?short-urls=/p/d8ex5',
 		):
 			return createMockResponse(200, {
 				'/p/d8ex5': 496,
@@ -108,8 +104,8 @@ export const mockedFetch = (
 		case /.*api.nextgen.guardianapps.co.uk\/football\/api.*/.test(url):
 			return createMockResponse(200, matchReport);
 		// Get user discussion api (used for myAccount dropdown)
-		case /discussionApiUrl\/profile\/me\?strict_sanctions_check=false/.test(
-			url,
+		case url.includes(
+			'discussionApiUrl/profile/me?strict_sanctions_check=false',
 		):
 			return createMockResponse(200, {
 				status: 'ok',
@@ -243,9 +239,11 @@ export const mockedFetch = (
 	}
 };
 
-export const getLastFetchCall = () => lastFetchCall;
+export const getLastFetchCall = ():
+	| [url: string, requestInit?: RequestInit | undefined]
+	| null => lastFetchCall;
 
-export const resetLastFetchCall = () => {
+export const resetLastFetchCall = (): void => {
 	lastFetchCall = null;
 };
 
@@ -258,8 +256,11 @@ export const customMockedFetch =
 			mockedBody?: any;
 		}>,
 	) =>
-	(input: RequestInfo | URL, requestInit?: RequestInit) => {
-		const url = input.toString();
+	(
+		input: RequestInfo | URL,
+		requestInit?: RequestInit,
+	): Promise<Response> => {
+		const url = new Request(input).url;
 
 		for (const {
 			mockedMethod,

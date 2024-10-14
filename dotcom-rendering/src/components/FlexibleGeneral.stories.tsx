@@ -3,10 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { getSublinks, trails } from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import { customMockedFetch } from '../lib/mockRESTCalls';
 import type { DCRFrontCard, DCRGroupedTrails } from '../types/front';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FrontSection } from './FrontSection';
-import { customMockedFetch } from '../lib/mockRESTCalls';
 
 const defaultGroupedTrails: DCRGroupedTrails = {
 	huge: [],
