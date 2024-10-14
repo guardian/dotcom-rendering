@@ -37,10 +37,12 @@ export const generateImageURL = ({
 	mainImage,
 	imageWidth,
 	resolution,
+	crop,
 }: {
 	mainImage: string;
 	imageWidth: number;
 	resolution: 'low' | 'high';
+	crop?: string;
 }): string => {
 	const url = new URL(mainImage);
 
@@ -55,5 +57,5 @@ export const generateImageURL = ({
 
 	return `https://i.guim.co.uk/img/${getServiceFromUrl(url)}${
 		url.pathname
-	}?${params.toString()}`;
+	}?${params.toString()}&crop=${crop}`;
 };
