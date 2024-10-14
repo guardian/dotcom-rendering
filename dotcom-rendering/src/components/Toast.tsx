@@ -3,7 +3,7 @@ import { space } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { EditorialButton } from './EditorialButton/EditorialButton';
 
-type Props = {
+export type ToastProps = {
 	count: number;
 	onClick: () => void;
 };
@@ -31,7 +31,7 @@ const SvgReload = ({ size }: { size: 12 | 16 | 18 | 24 | 26 | 28 | 30 }) => {
  * This element is rendered using a Portal into the `toast-root` div. This
  * root div has position: sticky
  */
-export const Toast = ({ count, onClick }: Props) => {
+export const Toast = ({ count, onClick }: ToastProps) => {
 	return (
 		<div
 			css={css`
