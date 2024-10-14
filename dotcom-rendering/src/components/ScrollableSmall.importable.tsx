@@ -3,7 +3,6 @@ import {
 	from,
 	headlineMedium24Object,
 	space,
-	until,
 } from '@guardian/source/foundations';
 import {
 	Button,
@@ -153,13 +152,10 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 	const peepingCardWidth = space[8];
 
 	return css`
-		${until.tablet} {
-			grid-template-columns: repeat(
-				${totalCards},
-				calc((100% - ${peepingCardWidth}px - 20px))
-			);
-		}
-
+		grid-template-columns: repeat(
+			${totalCards},
+			calc((100% - ${peepingCardWidth}px - 20px))
+		);
 		${from.tablet} {
 			grid-template-columns: repeat(${totalCards}, calc(50% - 10px));
 		}
