@@ -84,7 +84,6 @@ const decideImageWidths = (
  */
 const block = css`
 	display: block;
-	object-fit: cover;
 `;
 
 /**
