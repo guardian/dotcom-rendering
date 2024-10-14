@@ -167,11 +167,6 @@ interface PhotoEssay extends Fields {
 	body: BodyElement[];
 }
 
-interface PrintShop extends Fields {
-	design: ArticleDesign.PrintShop;
-	body: BodyElement[];
-}
-
 interface Analysis extends Fields {
 	design: ArticleDesign.Analysis;
 	body: BodyElement[];
@@ -209,11 +204,6 @@ interface NewsletterSignup extends Fields {
 
 interface PhotoEssay extends Fields {
 	design: ArticleDesign.PhotoEssay;
-	body: BodyElement[];
-}
-
-interface PrintShop extends Fields {
-	design: ArticleDesign.PrintShop;
 	body: BodyElement[];
 }
 
@@ -260,7 +250,6 @@ type Item =
 	| Quiz
 	| NewsletterSignup
 	| PhotoEssay
-	| PrintShop
 	| FullPageInteractive
 	| Timeline
 	| Profile
@@ -680,7 +669,6 @@ export {
 	Quiz,
 	PhotoEssay,
 	Feature,
-	PrintShop,
 	Explainer,
 	Gallery,
 	Audio,
