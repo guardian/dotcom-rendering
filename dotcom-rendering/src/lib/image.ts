@@ -37,12 +37,12 @@ export const generateImageURL = ({
 	mainImage,
 	imageWidth,
 	resolution,
-	crop,
+	aspectRatio,
 }: {
 	mainImage: string;
 	imageWidth: number;
 	resolution: 'low' | 'high';
-	crop?: string;
+	aspectRatio?: string;
 }): string => {
 	const url = new URL(mainImage);
 
@@ -55,7 +55,10 @@ export const generateImageURL = ({
 		s: 'none',
 	});
 
+	// Only append the crop parameter if it's provided
+	const cropParam = aspectRatio ? `&crop=${aspectRatio}` : '';
+
 	return `https://i.guim.co.uk/img/${getServiceFromUrl(url)}${
 		url.pathname
-	}?${params.toString()}&crop=${crop}`;
+	}?${params.toString()}${cropParam}`;
 };

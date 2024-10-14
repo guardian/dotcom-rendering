@@ -28,7 +28,7 @@ type Props = {
 	isLightbox?: boolean;
 	orientation?: Orientation;
 	onLoad?: () => void;
-	crop?: string;
+	aspectRatio?: string;
 };
 
 export type ImageWidthType = { breakpoint: number; width: number };
@@ -252,12 +252,12 @@ type ImageSource = {
  *
  * @param mainImage source image URL
  * @param imageWidths list of image widths
- * @param crop - Aspect ratio that the image should be cropped to (e.g., 5:4). Optional.
+ * @param aspectRatio - Aspect ratio that the image should be cropped to (e.g., 5:4). Optional.
  */
 export const generateSources = (
 	mainImage: string,
 	imageWidths: readonly [ImageWidthType, ...ImageWidthType[]],
-	crop?: string,
+	aspectRatio?: string,
 ): ImageSource[] =>
 	imageWidths
 		.slice()
@@ -270,13 +270,13 @@ export const generateSources = (
 					mainImage,
 					imageWidth,
 					resolution: 'high',
-					crop,
+					aspectRatio,
 				}),
 				lowResUrl: generateImageURL({
 					mainImage,
 					imageWidth,
 					resolution: 'low',
-					crop,
+					aspectRatio,
 				}),
 			};
 		});
@@ -330,7 +330,7 @@ export const Picture = ({
 	isLightbox = false,
 	orientation = 'landscape',
 	onLoad,
-	crop,
+	aspectRatio,
 }: Props) => {
 	const [loaded, setLoaded] = useState(false);
 	const ref = useCallback((node: HTMLImageElement | null) => {
@@ -355,7 +355,7 @@ export const Picture = ({
 			isLightbox,
 			orientation,
 		}),
-		crop,
+		aspectRatio,
 	);
 
 	/** portrait if higher than 1 or landscape if lower than 1 */
