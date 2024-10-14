@@ -8,7 +8,8 @@ import type {
 } from '../../lib/discussion';
 import { error, ok } from '../../lib/result';
 import { CommentContainer } from './CommentContainer';
-import { mockFetch, resetLastFetchCall } from '../../lib/mockRESTCallsInJest';
+import { mockFetch } from '../../lib/mockRESTCallsInJest';
+import { resetLastFetchCall } from '../../lib/mockRESTCalls';
 
 const mockedCommentID = '123456';
 
