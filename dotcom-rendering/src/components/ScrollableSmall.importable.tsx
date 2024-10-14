@@ -64,9 +64,29 @@ const carouselContainerStyles = css`
 	${from.mobileLandscape} {
 		margin-right: -20px;
 	}
+
+	/**
+	 * From tablet, pull container up so navigation buttons align with title.
+	 * The margin is calculated using the front section title font size and line
+	 * height, and the default spacing applied to the top of the container.
+	 *
+	 * From wide, the navigation buttons are pulled out of the main content area
+	 * into the right-hand column.
+	 */
 	${from.tablet} {
 		margin-left: 10px;
 		margin-right: 10px;
+		margin-top: calc(
+			(-${titlePreset.fontSize} * ${titlePreset.lineHeight}) -
+				${space[3]}px
+		);
+	}
+	${from.leftCol} {
+		margin-top: 0;
+	}
+	${from.wide} {
+		margin-left: ${space[2]}px;
+		margin-right: calc(${space[2]}px - ${gridColumnWidth} - ${gridGap});
 	}
 `;
 
@@ -113,18 +133,8 @@ const verticalLineStyles = css`
 
 const buttonContainerStyles = css`
 	margin-left: auto;
-	${from.tablet} {
-		margin-top: calc(
-			(-${titlePreset.fontSize} * ${titlePreset.lineHeight}) -
-				${space[3]}px
-		);
-	}
-	${from.leftCol} {
-		margin-top: 0;
-	}
 	${from.wide} {
-		margin-left: ${space[2]}px;
-		margin-right: calc(${space[2]}px - ${gridColumnWidth} - ${gridGap});
+		margin-left: ${space[1]}px;
 	}
 `;
 
