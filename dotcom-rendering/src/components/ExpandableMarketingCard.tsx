@@ -233,21 +233,21 @@ export const ExpandableMarketingCard = ({
 						</section>
 						<div css={detailsStyles}>
 							<section css={sectionStyles}>
-								<h3>We're independent</h3>
+								<h3>We’re independent</h3>
 								<p>
 									With no billionaire owner or shareholders,
 									our journalism is funded by readers
 								</p>
 							</section>
 							<section css={sectionStyles}>
-								<h3>We're open</h3>
+								<h3>We’re open</h3>
 								<p>
 									With misinformation threatening democracy,
 									we keep our fact-based news paywall-free
 								</p>
 							</section>
 							<section css={sectionStyles}>
-								<h3>We're global</h3>
+								<h3>We’re global</h3>
 								<p>
 									With 200 years of history and staff across
 									America and the world, we offer an outsider
