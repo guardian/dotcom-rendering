@@ -1,11 +1,8 @@
 import type { LinkButtonProps as CoreLinkButtonProps } from '@guardian/source/react-components';
 import { LinkButton as CoreLinkButton } from '@guardian/source/react-components';
 import { decideBackground, decideBorder, decideFont } from './styles';
-import type { SharedEditorialButtonProps } from './types';
 
-export interface EditorialLinkButtonProps
-	extends CoreLinkButtonProps,
-		SharedEditorialButtonProps {}
+export interface EditorialLinkButtonProps extends CoreLinkButtonProps {}
 
 /**
  *
