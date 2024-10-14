@@ -58,7 +58,7 @@ const carouselContainerStyles = css`
 		flex-direction: row;
 	}
 
-	/* Extend carousel into grid gutter on mobile */
+	/* Extend carousel into outer margins on mobile */
 	margin-left: -10px;
 	margin-right: -10px;
 	${from.mobileLandscape} {
@@ -68,8 +68,8 @@ const carouselContainerStyles = css`
 
 	/**
 	 * From tablet, pull container up so navigation buttons align with title.
-	 * The margin is calculated using the front section title font size and line
-	 * height, and the default spacing applied to the top of the container.
+	 * The margin is calculated from the front section title font size and line
+	 * height, and the default container spacing.
 	 *
 	 * From wide, the navigation buttons are pulled out of the main content area
 	 * into the right-hand column.
