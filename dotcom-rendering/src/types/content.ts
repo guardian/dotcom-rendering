@@ -820,7 +820,7 @@ export interface Image {
 		caption?: string;
 	};
 	mediaType: string;
-	mimeType: string;
+	mimeType?: string;
 	url: string;
 }
 
