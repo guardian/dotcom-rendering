@@ -1,15 +1,15 @@
 import { css } from '@emotion/react';
+import { from } from '@guardian/source/foundations';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import type { KeyEventCard as KeyEventCardType } from '../../fixtures/manual/key-events';
+import { events } from '../../fixtures/manual/key-events';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
 	Pillar,
-} from '@guardian/libs';
-import { from } from '@guardian/source/foundations';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import type { KeyEventCard as KeyEventCardType } from '../../fixtures/manual/key-events';
-import { events } from '../../fixtures/manual/key-events';
+} from '../lib/format';
 import { palette } from '../palette';
 import { KeyEventCard } from './KeyEventCard';
 

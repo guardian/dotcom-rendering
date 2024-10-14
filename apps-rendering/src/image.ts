@@ -4,7 +4,7 @@ import type { Image as CardImage } from '@guardian/apps-rendering-api-models/ima
 import type { Asset } from '@guardian/content-api-models/v1/asset';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ArticleElementRole } from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from 'articleFormat';
 import type { Option } from '../vendor/@guardian/types/index';
 import {
 	andThen,

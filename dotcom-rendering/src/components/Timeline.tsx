@@ -1,5 +1,5 @@
 import { css, type SerializedStyles } from '@emotion/react';
-import { ArticleDesign, type ArticleFormat, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import {
 	between,
 	from,
@@ -12,6 +12,7 @@ import {
 	textSansBold15,
 	textSansBold17,
 } from '@guardian/source/foundations';
+import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import type { NestedArticleElement } from '../lib/renderElement';
 import { palette } from '../palette';
 import type {

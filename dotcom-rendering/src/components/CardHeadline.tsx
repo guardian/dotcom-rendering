@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { type ArticleFormat, ArticleSpecial } from '@guardian/libs';
 import {
 	between,
 	from,
@@ -22,6 +21,7 @@ import {
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
 import React from 'react';
+import { type ArticleFormat, ArticleSpecial } from '../lib/format';
 import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
 import { Byline } from './Byline';
@@ -51,22 +51,18 @@ type Props = {
 /** These represent a new set of fonts. They are extra large font sizes that, as a group, are only used on headlines */
 const boostedFontStyles = ({ size }: { size: SmallHeadlineSize }) => {
 	switch (size) {
-		// we don't have a ginormous size in designs. For now this defaults to huge.
 		case 'ginormous':
-		case 'huge':
 			return `${headlineMedium64}`;
-
-		case 'large':
+		case 'huge':
 			return `${headlineMedium50}`;
-
-		case 'medium':
+		case 'large':
 			return `${headlineMedium42}`;
-
-		case 'small':
+		case 'medium':
 			return `${headlineMedium34}`;
-
-		case 'tiny':
+		case 'small':
 			return `${headlineMedium28}`;
+		case 'tiny':
+			return `${headlineMedium24}`;
 	}
 };
 

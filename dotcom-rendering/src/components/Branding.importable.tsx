@@ -1,15 +1,15 @@
 import { css } from '@emotion/react';
 import {
-	ArticleDesign,
-	type ArticleFormat,
-	ArticleSpecial,
-} from '@guardian/libs';
-import {
 	between,
 	breakpoints,
 	from,
 	textSans12,
 } from '@guardian/source/foundations';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../lib/format';
 import { getOphanComponents } from '../lib/labs';
 import { palette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';

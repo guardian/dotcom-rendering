@@ -1,8 +1,8 @@
 import { Global } from '@emotion/react';
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { StrictMode } from 'react';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
+import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import { rootStyles } from '../lib/rootStyles';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';

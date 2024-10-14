@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -8,6 +7,7 @@ import {
 } from '@guardian/source/foundations';
 import { Hide, Link } from '@guardian/source/react-components';
 import { isMediaCard } from '../../lib/cardHelpers';
+import { ArticleDesign, type ArticleFormat } from '../../lib/format';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { palette as themePalette } from '../../palette';
@@ -53,7 +53,10 @@ import type {
 	ImageSizeType,
 } from './components/ImageWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
-import { TrailTextWrapper } from './components/TrailTextWrapper';
+import {
+	type TrailTextSize,
+	TrailTextWrapper,
+} from './components/TrailTextWrapper';
 
 export type Props = {
 	linkTo: string;
@@ -116,6 +119,9 @@ export type Props = {
 	index?: number;
 	/** The Splash card in a flexible container gets a different visual treatment to other cards*/
 	isFlexSplash?: boolean;
+	showTopBarDesktop?: boolean;
+	showTopBarMobile?: boolean;
+	trailTextSize?: TrailTextSize;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -268,6 +274,9 @@ export const Card = ({
 	boostedFontSizes,
 	index = 0,
 	isFlexSplash,
+	showTopBarDesktop = true,
+	showTopBarMobile = false,
+	trailTextSize,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -383,7 +392,7 @@ export const Card = ({
 	const isFlexibleSpecialContainer = containerType === 'flexible/special';
 
 	const headlinePosition =
-		isFlexSplash && isFlexibleContainer ? 'outer' : 'inner';
+		isFlexSplash && isFlexibleSpecialContainer ? 'outer' : 'inner';
 
 	/** Determines the gap of between card components based on card properties */
 	const getGapSize = (): GapSize => {
@@ -417,7 +426,7 @@ export const Card = ({
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
 					isDynamo={isDynamo}
-					isFlexibleContainer={isFlexibleContainer}
+					isFlexSplash={isFlexSplash}
 				/>
 			);
 		}
@@ -428,7 +437,7 @@ export const Card = ({
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
 					isDynamo={isDynamo}
-					isFlexibleContainer={isFlexibleContainer}
+					isFlexSplash={isFlexSplash}
 				/>
 			</Hide>
 		);
@@ -445,7 +454,7 @@ export const Card = ({
 					alignment="vertical"
 					containerPalette={containerPalette}
 					isDynamo={isDynamo}
-					isFlexibleContainer={isFlexibleContainer}
+					isFlexSplash={isFlexSplash}
 				/>
 			</Hide>
 		);
@@ -454,8 +463,8 @@ export const Card = ({
 	return (
 		<CardWrapper
 			format={format}
-			showTopBar={!isOnwardContent && !isFlexibleSpecialContainer}
-			showMobileTopBar={isFlexibleSpecialContainer}
+			showTopBarDesktop={!isOnwardContent && showTopBarDesktop}
+			showTopBarMobile={showTopBarMobile}
 			containerPalette={containerPalette}
 			isOnwardContent={isOnwardContent}
 		>
@@ -729,6 +738,7 @@ export const Card = ({
 									imageType={media?.type}
 									shouldHide={isFlexSplash ? false : true}
 									isFlexSplash={isFlexSplash}
+									trailTextSize={trailTextSize}
 								>
 									<div
 										dangerouslySetInnerHTML={{
@@ -759,8 +769,7 @@ export const Card = ({
 							)}
 							{sublinkPosition === 'outer' &&
 								supportingContentAlignment === 'horizontal' &&
-								(imagePositionOnDesktop === 'right' ||
-									imagePositionOnDesktop === 'left') && (
+								imagePositionOnDesktop === 'right' && (
 									<HorizontalDivider />
 								)}
 						</div>

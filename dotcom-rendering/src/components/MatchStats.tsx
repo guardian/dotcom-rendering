@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import {
 	between,
 	from,
@@ -9,6 +8,7 @@ import {
 	textSans15,
 	until,
 } from '@guardian/source/foundations';
+import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import { palette as themePalette } from '../palette';
 import type { TeamType } from '../types/sport';
 import { Distribution } from './Distribution';

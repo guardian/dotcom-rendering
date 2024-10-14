@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { space } from '@guardian/source/foundations';
 import type { Meta } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { palette } from '../palette';
 import { BigNumber } from './BigNumber';
 

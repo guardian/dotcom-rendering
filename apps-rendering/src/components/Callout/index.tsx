@@ -1,7 +1,7 @@
 import { css, ThemeProvider } from '@emotion/react';
 import type { Contact } from '@guardian/apps-rendering-api-models/contact';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../../articleFormat';
 import { remSpace } from '@guardian/source/foundations';
 import { ExpandingWrapper } from '@guardian/source-development-kitchen/react-components';
 import { isElement } from 'lib';

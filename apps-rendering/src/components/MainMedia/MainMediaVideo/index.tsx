@@ -2,8 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat } from '../../../articleFormat';
 import { from, neutral, remSpace } from '@guardian/source/foundations';
 import { darkModeCss, wideContentWidth } from 'styles';
 import type { Video } from 'video';

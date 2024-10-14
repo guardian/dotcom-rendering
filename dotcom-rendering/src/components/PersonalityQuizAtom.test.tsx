@@ -1,4 +1,3 @@
-import { Pillar } from '@guardian/libs';
 import { fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { ensure } from '../../fixtures/manual/ensure';
@@ -7,6 +6,7 @@ import {
 	exampleResultBuckets,
 } from '../../fixtures/manual/personalityQuizAtom';
 import { sharingUrls } from '../../fixtures/manual/sharingUrls';
+import { Pillar } from '../lib/format';
 import {
 	findMostReferredToBucketId,
 	PersonalityQuizAtom,

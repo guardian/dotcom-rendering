@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { matchers } from '@emotion/jest';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../articleFormat';
 import { some } from '../../../vendor/@guardian/types/index';
 import { JSDOM } from 'jsdom';
 import renderer from 'react-test-renderer';
@@ -27,7 +27,7 @@ describe('MainMediaCaption component renders as expected', () => {
 				format={{
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				id={captionId}
 			/>,

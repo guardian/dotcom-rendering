@@ -1,5 +1,5 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/format';
 import { Timestamp } from './Timestamp';
 
 type Props = Parameters<typeof Timestamp>[0];

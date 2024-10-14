@@ -1,6 +1,6 @@
-import type { ArticleFormat } from '@guardian/libs';
 import { Hide } from '@guardian/source/react-components';
 import type { EditionId } from '../lib/edition';
+import type { ArticleFormat } from '../lib/format';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';

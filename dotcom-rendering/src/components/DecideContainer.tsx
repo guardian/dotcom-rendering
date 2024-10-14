@@ -24,9 +24,9 @@ import { FixedSmallSlowVMPU } from './FixedSmallSlowVMPU';
 import { FixedSmallSlowVThird } from './FixedSmallSlowVThird';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
-import { HighlightsContainer } from './HighlightsContainer.importable';
 import { Island } from './Island';
 import { NavList } from './NavList';
+import { ScrollableHighlights } from './ScrollableHighlights.importable';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -226,7 +226,7 @@ export const DecideContainer = ({
 		case 'scrollable/highlights':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<HighlightsContainer trails={trails} />
+					<ScrollableHighlights trails={trails} />
 				</Island>
 			);
 		case 'flexible/special':

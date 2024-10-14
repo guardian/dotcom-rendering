@@ -1,4 +1,3 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
@@ -7,6 +6,7 @@ import {
 	noTimelineEventsStoryExpanded,
 	sportTimelineStoryWithDescriptionAndEventsExpanded,
 } from '../../fixtures/manual/timelineAtom';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { TimelineAtom as TimelineAtomComponent } from './TimelineAtom.importable';
 
 const meta: Meta<typeof TimelineAtomComponent> = {

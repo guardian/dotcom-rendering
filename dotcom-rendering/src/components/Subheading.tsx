@@ -1,11 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
 import {
 	from,
 	headlineBold24,
@@ -21,6 +14,13 @@ import {
 	textSans34,
 } from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	ArticleSpecial,
+	Pillar,
+} from '../lib/format';
 import { palette } from '../palette';
 
 const fontStyles = ({

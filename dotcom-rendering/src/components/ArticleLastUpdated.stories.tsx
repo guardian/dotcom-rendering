@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { allModes } from '../../.storybook/modes';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { palette } from '../palette';
 import { ArticleLastUpdated } from './ArticleLastUpdated';
 
