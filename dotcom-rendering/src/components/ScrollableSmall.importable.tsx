@@ -58,19 +58,29 @@ const carouselContainerStyles = css`
 	${from.wide} {
 		flex-direction: row;
 	}
+
+	/* Extend carousel into grid gutter on mobile */
+	margin-right: -10px;
+	${from.mobileLandscape} {
+		margin-right: -20px;
+	}
+	${from.tablet} {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
 `;
 
 const carouselStyles = css`
 	display: grid;
 	grid-auto-columns: 1fr;
 	grid-auto-flow: column;
+	gap: 20px;
 	overflow-x: auto;
 	overflow-y: hidden;
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	overscroll-behavior-x: contain;
 	overscroll-behavior-y: auto;
-	scroll-padding-left: 10px;
 	/**
 	 * Hide scrollbars
 	 * See: https://stackoverflow.com/a/38994837
@@ -80,24 +90,12 @@ const carouselStyles = css`
 	}
 	scrollbar-width: none; /* Firefox */
 	position: relative;
-
-	/* Extend carousel into grid gutter on mobile */
-	margin-left: -10px;
-	margin-right: -10px;
-	${from.mobileLandscape} {
-		margin-right: -20px;
-	}
-	${from.tablet} {
-		margin-left: 0px;
-		margin-right: 10px;
-	}
 `;
 
 const itemStyles = css`
 	scroll-snap-align: start;
 	grid-area: span 1;
 	position: relative;
-	margin: 0 10px;
 `;
 
 const verticalLineStyles = css`
@@ -148,12 +146,12 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 		${until.tablet} {
 			grid-template-columns: repeat(
 				${totalCards},
-				calc((100% - ${peepingCardWidth}px))
+				calc((100% - ${peepingCardWidth}px - 20px))
 			);
 		}
 
 		${from.tablet} {
-			grid-template-columns: repeat(${totalCards}, calc(50% + 10px));
+			grid-template-columns: repeat(${totalCards}, calc(50% - 10px));
 		}
 	`;
 };
