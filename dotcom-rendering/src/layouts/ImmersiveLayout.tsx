@@ -686,7 +686,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										priority="enhancement"
 										/**
 										 * We display the card immediately if the viewport is below the top of
-										 * the article body, so we must use "idled" instead of "visible".
+										 * the article body, so we must use "idle" instead of "visible".
 										 */
 										defer={{ until: 'idle' }}
 									>
