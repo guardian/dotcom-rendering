@@ -13,7 +13,7 @@ import { palette } from '../palette';
 import type { TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
 import { Section } from './Section';
-import { customMockedFetch } from '../lib/mockRESTCalls';
+import { customMockFetch } from '../lib/mockRESTCalls';
 
 export default {
 	component: Carousel,
@@ -47,7 +47,7 @@ const encodedMockDiscussionId = '%2Fp%2Fpf8fm';
 
 const mockDiscussionUrl = `${discussionApiUrl}/getCommentCounts?short-urls=${encodedMockDiscussionId}`;
 
-const mockCommentCount = customMockedFetch([
+const mockCommentCountFetch = customMockFetch([
 	{
 		mockedMethod: 'GET',
 		mockedUrl: mockDiscussionUrl,
@@ -256,7 +256,7 @@ const sportFormat = {
 };
 
 export const Headlines: StoryObj = ({ format }: StoryProps) => {
-	global.fetch = mockCommentCount;
+	global.fetch = mockCommentCountFetch;
 	return (
 		<Section
 			fullWidth={true}
@@ -281,7 +281,7 @@ Headlines.decorators = [
 ];
 
 export const SingleItemCarousel = () => {
-	global.fetch = mockCommentCount;
+	global.fetch = mockCommentCountFetch;
 	return (
 		<Section
 			fullWidth={true}
@@ -305,7 +305,7 @@ SingleItemCarousel.decorators = [
 	splitTheme([defaultFormat], { orientation: 'vertical' }),
 ];
 export const SingleOpinionCarousel = () => {
-	global.fetch = mockCommentCount;
+	global.fetch = mockCommentCountFetch;
 	const comment = {
 		url: 'https://www.theguardian.com/sport/2023/dec/04/golf-pga-tour-liv-rory-mcilroy-tiger-woods-jon-rahm',
 		linkText:
@@ -360,7 +360,7 @@ SingleOpinionCarousel.decorators = [
 ];
 
 export const Immersive = () => {
-	global.fetch = mockCommentCount;
+	global.fetch = mockCommentCountFetch;
 	return (
 		<>
 			<Section
@@ -404,7 +404,7 @@ const specialReportAltFormat = {
 };
 
 export const SpecialReportAlt = () => {
-	global.fetch = mockCommentCount;
+	global.fetch = mockCommentCountFetch;
 	const specialReportTrails = [...trails];
 
 	for (const trail of specialReportTrails) {

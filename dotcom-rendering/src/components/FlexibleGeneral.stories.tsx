@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { getSublinks, trails } from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
-import { customMockedFetch } from '../lib/mockRESTCalls';
+import { customMockFetch } from '../lib/mockRESTCalls';
 import type { DCRFrontCard, DCRGroupedTrails } from '../types/front';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FrontSection } from './FrontSection';
@@ -63,7 +63,7 @@ const standardCards = standards.map((card, index) => {
 	}
 }) satisfies DCRFrontCard[];
 
-const mockLatestLinksReq = customMockedFetch([
+const mockLatestLinksReqFetch = customMockFetch([
 	{
 		mockedMethod: 'GET',
 		mockedUrl:
@@ -272,7 +272,7 @@ export const FourSublinkSplashWithLiveUpdates: Story = {
 		},
 	},
 	render: ({ frontSectionTitle, ...args }) => {
-		global.fetch = mockLatestLinksReq;
+		global.fetch = mockLatestLinksReqFetch;
 		return (
 			<FrontSection
 				title={frontSectionTitle}

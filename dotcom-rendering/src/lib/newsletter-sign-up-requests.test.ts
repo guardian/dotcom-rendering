@@ -1,4 +1,4 @@
-import { mockFetch } from './mockRESTCallsInJest';
+import { jestMockFetch } from './mockRESTCallsInJest';
 import {
 	requestMultipleSignUps,
 	requestSingleSignUp,
@@ -47,7 +47,7 @@ describe('requestMultipleSignUps', () => {
 
 	beforeEach(() => {
 		windowSpy = jest.spyOn(window, 'window', 'get');
-		mockFetch();
+		jestMockFetch();
 	});
 
 	afterEach(() => {
@@ -136,7 +136,7 @@ describe('requestSingleSignUp', () => {
 
 	beforeEach(() => {
 		windowSpy = jest.spyOn(window, 'window', 'get');
-		mockFetch();
+		jestMockFetch();
 	});
 
 	afterEach(() => {

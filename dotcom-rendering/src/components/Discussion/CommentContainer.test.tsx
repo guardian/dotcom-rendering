@@ -6,7 +6,7 @@ import type {
 	ReplyType,
 	SignedInUser,
 } from '../../lib/discussion';
-import { mockFetch } from '../../lib/mockRESTCallsInJest';
+import { jestMockFetch } from '../../lib/mockRESTCallsInJest';
 import { error, ok } from '../../lib/result';
 import { CommentContainer } from './CommentContainer';
 
@@ -53,7 +53,7 @@ const aUser: SignedInUser = {
 
 describe('CommentContainer', () => {
 	beforeEach(() => {
-		mockFetch();
+		jestMockFetch();
 	});
 
 	it('Post a comment to a root comment', async () => {

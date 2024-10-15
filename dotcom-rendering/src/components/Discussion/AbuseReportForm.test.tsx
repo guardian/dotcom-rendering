@@ -2,13 +2,13 @@ import '@testing-library/jest-dom';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { reportAbuse } from '../../lib/discussionApi';
-import { mockFetch } from '../../lib/mockRESTCallsInJest';
+import { jestMockFetch } from '../../lib/mockRESTCallsInJest';
 import { ok } from '../../lib/result';
 import { AbuseReportForm } from './AbuseReportForm';
 
 describe('Dropdown', () => {
 	beforeEach(() => {
-		mockFetch();
+		jestMockFetch();
 	});
 
 	it('Should show the expected label names', () => {
