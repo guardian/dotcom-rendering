@@ -841,9 +841,9 @@ interface AudioAsset {
 	url: string;
 	mimeType?: string;
 	fields?: {
-		durationMinutes?: number;
-		durationSeconds?: number;
-		explicit?: boolean;
+		durationMinutes?: string;
+		durationSeconds?: string;
+		explicit?: string;
 		source?: string;
 	};
 }

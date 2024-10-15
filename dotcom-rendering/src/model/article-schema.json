@@ -852,13 +852,13 @@
                     "type": "object",
                     "properties": {
                         "durationMinutes": {
-                            "type": "number"
+                            "type": "string"
                         },
                         "durationSeconds": {
-                            "type": "number"
+                            "type": "string"
                         },
                         "explicit": {
-                            "type": "boolean"
+                            "type": "string"
                         },
                         "source": {
                             "type": "string"
