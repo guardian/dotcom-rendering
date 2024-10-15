@@ -53,7 +53,9 @@ describe('Dropdown', () => {
 		await user.selectOptions(getByLabelText('Category'), 'Trolling');
 		await user.click(getByRole('button', { name: 'Report' }));
 
-		const [, requestInit] = (global.fetch as jest.Mock).mock.calls[0];
+		const [, requestInit]: [string, RequestInit | undefined] = (
+			global.fetch as jest.Mock
+		).mock.calls[0];
 
 		await waitFor(() => {
 			expect(requestInit?.body).toBe('categoryId=4');
