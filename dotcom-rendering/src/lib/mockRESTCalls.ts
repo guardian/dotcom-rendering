@@ -19,15 +19,11 @@ const createMockResponse = (status: number, body?: any): Promise<Response> => {
 	return Promise.resolve(new Response(JSON.stringify(body), { status }));
 };
 
-let lastFetchCall: [url: string, requestInit?: RequestInit | undefined] | null =
-	null;
-
 export const mockedFetch = (
 	input: RequestInfo | URL,
 	requestInit?: RequestInit,
 ): Promise<Response> => {
 	const url = new Request(input).url;
-	lastFetchCall = [url, requestInit];
 
 	switch (true) {
 		case /logs\.(code.dev-)?guardianapis\.com\/log/.test(url) &&
@@ -237,14 +233,6 @@ export const mockedFetch = (
 				}),
 			);
 	}
-};
-
-export const getLastFetchCall = ():
-	| [url: string, requestInit?: RequestInit | undefined]
-	| null => lastFetchCall;
-
-export const resetLastFetchCall = (): void => {
-	lastFetchCall = null;
 };
 
 export const customMockedFetch =

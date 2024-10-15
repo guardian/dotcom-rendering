@@ -4,26 +4,14 @@ import {
 	screen,
 	waitForElementToBeRemoved,
 } from '@testing-library/react';
-import { resetLastFetchCall } from '../../lib/mockRESTCalls';
 import { mockFetch } from '../../lib/mockRESTCallsInJest';
 import { ok } from '../../lib/result';
 import { ConfigProvider } from '../ConfigContext';
 import { Discussion } from '../Discussion';
 
 describe('App', () => {
-	let originalFetch: typeof fetch;
-
-	beforeAll(() => {
-		originalFetch = fetch;
-	});
-
 	beforeEach(() => {
-		mockFetch(); // Initialize the mock before each test
-		resetLastFetchCall();
-	});
-
-	afterAll(() => {
-		global.fetch = originalFetch; // Restore the original fetch after tests
+		mockFetch();
 	});
 
 	it('should not render the comment form if user is logged out', async () => {
