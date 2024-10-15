@@ -2,12 +2,12 @@ import { css } from '@emotion/react';
 import { palette, text, textSans12, until } from '@guardian/source/foundations';
 import React from 'react';
 import { buildAdTargeting } from '../lib/ad-targeting';
-import { decideDesign } from '../lib/decideDesign';
-import { decideTheme } from '../lib/decideTheme';
 import { findAdSlots } from '../lib/find-adslots.amp';
 import {
 	ArticleDesign,
 	type ArticleTheme,
+	decideDesign,
+	decideTheme,
 	ArticleDesign as Design,
 	ArticleSpecial as Special,
 } from '../lib/format';

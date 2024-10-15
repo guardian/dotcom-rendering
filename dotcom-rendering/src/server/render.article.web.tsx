@@ -9,10 +9,14 @@ import {
 	getModulesBuild,
 	getPathFromManifest,
 } from '../lib/assets';
-import { decideFormat } from '../lib/decideFormat';
 import { isEditionId } from '../lib/edition';
 import { renderToStringWithEmotion } from '../lib/emotion';
-import { ArticleDesign, type ArticleFormat, Pillar } from '../lib/format';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	decideFormat,
+	Pillar,
+} from '../lib/format';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { polyfillIO } from '../lib/polyfill.io';
 import { extractNAV } from '../model/extract-nav';

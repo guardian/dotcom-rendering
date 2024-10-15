@@ -1,8 +1,7 @@
 import { PhotoEssay } from '../../fixtures/generated/fe-articles/PhotoEssay';
 import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
 import { images } from '../../fixtures/generated/images';
-import { decideFormat } from '../lib/decideFormat';
-import { Pillar } from '../lib/format';
+import { decideFormat, Pillar } from '../lib/format';
 import type { FEElement } from '../types/content';
 import { enhanceElementsImages, enhanceImages } from './enhance-images';
 

@@ -1,7 +1,7 @@
 import { NumberedList } from '../../fixtures/generated/fe-articles/NumberedList';
 import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
 import { images } from '../../fixtures/generated/images';
-import { decideFormat } from '../lib/decideFormat';
+import { decideFormat } from '../lib/format';
 import type { FEElement } from '../types/content';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 
