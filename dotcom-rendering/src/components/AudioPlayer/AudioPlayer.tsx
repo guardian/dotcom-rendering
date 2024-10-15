@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
+import { isUndefined, log } from '@guardian/libs';
 import { from, palette, textSans15 } from '@guardian/source/foundations';
 import {
 	SvgAudio,
@@ -371,7 +371,13 @@ export const AudioPlayer = ({
 			ws.on('play', () => setIsPlaying(true));
 			ws.on('pause', () => setIsPlaying(false));
 			ws.on('timeupdate', (newTime) => setCurrentTime(newTime));
-			ws.on('error', (error) => console.error(error));
+			ws.on('error', (error) => {
+				window.guardian.modules.sentry.reportError(
+					error,
+					'audio-player',
+				);
+				log('dotcom', 'Audio player (WaveSurfer) error:', error);
+			});
 
 			setWavesurfer(ws);
 		}
