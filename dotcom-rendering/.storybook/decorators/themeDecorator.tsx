@@ -57,8 +57,9 @@ export const colourSchemeDecorator =
 	<Args = StrictArgs,>(formats: ArticleFormat[]): Decorator<Args> =>
 	(Story, context) => (
 		<>
-			{formats.map((format) => (
+			{formats.map((format, index) => (
 				<div
+					key={index}
 					data-color-scheme={colourScheme}
 					css={css(paletteDeclarations(format, colourScheme))}
 					style={{
