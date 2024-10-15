@@ -176,6 +176,7 @@ export const ShowMore = ({
 											containerPalette={containerPalette}
 											showAge={showAge}
 											headlineSize="small"
+											headlineSizeOnMobile="tiny"
 											imageLoading="eager"
 											absoluteServerTimes={false}
 										/>

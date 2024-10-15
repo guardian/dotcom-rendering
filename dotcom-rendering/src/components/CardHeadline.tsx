@@ -184,8 +184,6 @@ const fontStylesOnMobile = ({
 					${headlineMedium17}
 				}
 			`;
-		default:
-			return undefined;
 	}
 };
 
