@@ -1,6 +1,10 @@
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleSpecial, Pillar } from '@guardian/libs';
 import { brandAltBackground, palette } from '@guardian/source/foundations';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+	Pillar,
+} from '../lib/format';
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../lib/pillars';
 import type { Palette } from '../types/palette';

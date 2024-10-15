@@ -1,5 +1,11 @@
-import { type ArticleFormat, isUndefined } from '@guardian/libs';
-import type { FEElement, ImageForLightbox, Newsletter } from '../types/content';
+import { isUndefined } from '@guardian/libs';
+import { type ArticleFormat } from '../lib/format';
+import type {
+	FEElement,
+	ImageBlockElement,
+	ImageForLightbox,
+	Newsletter,
+} from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 import { enhanceBlockquotes } from './enhance-blockquotes';
@@ -22,6 +28,7 @@ type Options = {
 	promotedNewsletter: Newsletter | undefined;
 	imagesForLightbox: ImageForLightbox[];
 	hasAffiliateLinksDisclaimer: boolean;
+	audioArticleImage?: ImageBlockElement;
 };
 
 const enhanceNewsletterSignup =
@@ -91,8 +98,17 @@ export const enhanceBlocks = (
 	blocks: Block[],
 	format: ArticleFormat,
 	options: Options,
-): Block[] =>
-	blocks.map((block) => ({
+): Block[] => {
+	const additionalElement: FEElement[] = [];
+	if (options.audioArticleImage) {
+		additionalElement.push(options.audioArticleImage);
+	}
+	return blocks.map((block) => ({
 		...block,
-		elements: enhanceElements(format, block.id, options)(block.elements),
+		elements: enhanceElements(
+			format,
+			block.id,
+			options,
+		)([...block.elements, ...additionalElement]),
 	}));
+};

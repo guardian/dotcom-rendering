@@ -1,5 +1,5 @@
-import type { ArticleFormat } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
+import type { ArticleFormat } from '../lib/format';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { QAndAExplainer, StarRating } from '../types/content';

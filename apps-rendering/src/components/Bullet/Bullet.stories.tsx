@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../articleFormat';
 import Bullet from './';
 
 // ----- Stories ----- //
@@ -10,7 +10,7 @@ const Default = () => (
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 		text="• Lorem ipsum"
 	/>

@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleSpecial, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -23,6 +22,7 @@ import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
+import { ExpandableMarketingCardWrapper } from '../components/ExpandableMarketingCardWrapper.importable';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -44,6 +44,11 @@ import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../lib/format';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
@@ -90,9 +95,10 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'title  border  headline   headline headline'
 						'lines  border  media      media    media'
 						'meta   border  media      media    media'
-						'meta   border  standfirst .        right-column'
-						'.      border  body       .        right-column'
-						'.      border  .          .        right-column';
+						'uscard border  media      media    media'
+						'uscard border  standfirst .        right-column'
+						'uscard border  body       .        right-column'
+						'uscard border  .          .        right-column';
 				}
 
 				${until.wide} {
@@ -101,9 +107,10 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'title  border  headline    headline'
 						'lines  border  media       media'
 						'meta   border  media       media'
-						'meta   border  standfirst  right-column'
-						'.      border  body        right-column'
-						'.      border  .           right-column';
+						'uscard border  media       media'
+						'uscard border  standfirst  right-column'
+						'uscard border  body        right-column'
+						'uscard border  .           right-column';
 				}
 
 				/*
@@ -536,6 +543,22 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								)}
 							</div>
 						</GridItem>
+						{isWeb && (
+							<GridItem area="uscard" element="aside">
+								<Hide until="leftCol">
+									<Island
+										priority="enhancement"
+										defer={{ until: 'visible' }}
+									>
+										<ExpandableMarketingCardWrapper
+											guardianBaseURL={
+												article.guardianBaseURL
+											}
+										/>
+									</Island>
+								</Hide>
+							</GridItem>
+						)}
 						<GridItem area="body">
 							<ArticleContainer format={format}>
 								<ArticleBody

@@ -1,5 +1,5 @@
-import type { ArticleFormat } from '@guardian/libs';
 import { decideFormat } from '../lib/decideFormat';
+import type { ArticleFormat } from '../lib/format';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import { appsLightboxImages } from '../model/appsLightboxImages';
 import { buildLightboxImages } from '../model/buildLightboxImages';
@@ -68,6 +68,7 @@ export const enhanceArticleType = (
 		promotedNewsletter: data.promotedNewsletter,
 		imagesForLightbox,
 		hasAffiliateLinksDisclaimer: !!data.affiliateLinksDisclaimer,
+		audioArticleImage: data.audioArticleImage,
 	});
 
 	const mainMediaElements = enhanceMainMedia(

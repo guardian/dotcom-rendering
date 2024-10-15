@@ -1,11 +1,7 @@
 import { css } from '@emotion/react';
-import {
-	type ArticleFormat,
-	type ArticleTheme,
-	joinUrl,
-	Pillar,
-} from '@guardian/libs';
+import { joinUrl } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
+import { type ArticleFormat, type ArticleTheme, Pillar } from '../lib/format';
 import { useIsAndroid } from '../lib/useIsAndroid';
 import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';

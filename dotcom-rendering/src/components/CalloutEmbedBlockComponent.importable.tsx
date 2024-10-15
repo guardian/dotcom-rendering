@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import {
 	palette as srcPalette,
 	textSansBold12,
@@ -8,6 +7,7 @@ import {
 import { Button } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { decidePalette } from '../lib/decidePalette';
+import type { ArticleFormat } from '../lib/format';
 import MinusIcon from '../static/icons/minus.svg';
 import PlusIcon from '../static/icons/plus.svg';
 import type {

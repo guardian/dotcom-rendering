@@ -3,13 +3,6 @@
   --
   the palette object is large and ordering helps knowing where to insert new elements
 */
-import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
 import { palette as sourcePalette } from '@guardian/source/foundations';
 import {
 	buttonThemeBrand,
@@ -22,6 +15,14 @@ import {
 	tabsThemeDefault,
 } from '@guardian/source-development-kitchen/react-components';
 import { isMediaCard } from './lib/cardHelpers';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	ArticleSpecial,
+	type ArticleTheme,
+	Pillar,
+} from './lib/format';
 import { transparentColour } from './lib/transparentColour';
 
 // ----- Palette Functions ----- //
@@ -4375,6 +4376,21 @@ const carouselTitleHighlightDark: PaletteFunction = ({ theme, design }) => {
 	}
 };
 
+const carouselChevronLight: PaletteFunction = () => sourcePalette.neutral[7];
+const carouselChevronDark: PaletteFunction = () => sourcePalette.neutral[86];
+const carouselChevronBorderLight: PaletteFunction = () =>
+	sourcePalette.neutral[73];
+const carouselChevronBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[73];
+const carouselChevronDisabledLight: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[7], 0.32);
+const carouselChevronDisabledDark: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[86], 0.32);
+const carouselChevronBorderDisabledLight: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[73], 0.32);
+const carouselChevronBorderDisabledDark: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[73], 0.32);
+
 const mostViewedFooterHoverLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 const mostViewedFooterHoverDark: PaletteFunction = () =>
@@ -5534,6 +5550,28 @@ const pinnedPostBorderDark: PaletteFunction = ({ theme }) => {
 	}
 };
 
+const expandableMarketingCardBackground: PaletteFunction = () =>
+	sourcePalette.brand[400];
+
+const expandableMarketingCardSvgFill: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
+const expandableMarketingCardButtonBackground: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+
+const expandableMarketingCardSvgBackground: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+
+const expandableMarketingCardFillBackgroundLight: PaletteFunction = (
+	format,
+) => {
+	return articleBackgroundLight(format) === 'transparent'
+		? sourcePalette.neutral[100]
+		: articleBackgroundLight(format);
+};
+const expandableMarketingCardFillBackgroundDark: PaletteFunction = (format) =>
+	articleBackgroundDark(format);
+
 const youtubeOverlayKicker: PaletteFunction = ({ theme }: ArticleFormat) => {
 	switch (theme) {
 		case Pillar.News:
@@ -5996,6 +6034,22 @@ const paletteColours = {
 		light: carouselBorderLight,
 		dark: carouselBorderDark,
 	},
+	'--carousel-chevron': {
+		light: carouselChevronLight,
+		dark: carouselChevronDark,
+	},
+	'--carousel-chevron-border': {
+		light: carouselChevronBorderLight,
+		dark: carouselChevronBorderDark,
+	},
+	'--carousel-chevron-border-disabled': {
+		light: carouselChevronBorderDisabledLight,
+		dark: carouselChevronBorderDisabledDark,
+	},
+	'--carousel-chevron-disabled': {
+		light: carouselChevronDisabledLight,
+		dark: carouselChevronDisabledDark,
+	},
 	'--carousel-dot': {
 		light: carouselDotLight,
 		dark: carouselDotDark,
@@ -6243,6 +6297,26 @@ const paletteColours = {
 	'--expandable-atom-text-hover': {
 		light: expandableAtomTextHoverLight,
 		dark: expandableAtomTextHoverDark,
+	},
+	'--expandable-marketing-card-background': {
+		light: expandableMarketingCardBackground,
+		dark: expandableMarketingCardBackground,
+	},
+	'--expandable-marketing-card-button-background': {
+		light: expandableMarketingCardButtonBackground,
+		dark: expandableMarketingCardButtonBackground,
+	},
+	'--expandable-marketing-card-fill-background': {
+		light: expandableMarketingCardFillBackgroundLight,
+		dark: expandableMarketingCardFillBackgroundDark,
+	},
+	'--expandable-marketing-card-svg-background': {
+		light: expandableMarketingCardSvgBackground,
+		dark: expandableMarketingCardSvgBackground,
+	},
+	'--expandable-marketing-card-svg-fill': {
+		light: expandableMarketingCardSvgFill,
+		dark: expandableMarketingCardSvgFill,
 	},
 	'--explainer-atom-accent': {
 		light: explainerAtomAccentLight,

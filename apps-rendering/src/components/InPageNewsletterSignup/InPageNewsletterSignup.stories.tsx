@@ -1,5 +1,5 @@
 // ----- Imports ----- //
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../articleFormat';
 import InPageNewsletterSignup from '.';
 
 // ---- Constants ---- //
@@ -27,7 +27,7 @@ const Default = () => (
 			format={{
 				design: ArticleDesign.NewsletterSignup,
 				display: ArticleDisplay.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 		/>
 	</>
@@ -45,7 +45,7 @@ const Unsupported = () => (
 			format={{
 				design: ArticleDesign.NewsletterSignup,
 				display: ArticleDisplay.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 		/>
 	</>

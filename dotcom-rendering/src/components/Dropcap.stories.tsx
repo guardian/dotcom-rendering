@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
+import { article17 } from '@guardian/source/foundations';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '@guardian/libs';
-import { article17 } from '@guardian/source/foundations';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+} from '../lib/format';
 import { DropCap } from './DropCap';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (

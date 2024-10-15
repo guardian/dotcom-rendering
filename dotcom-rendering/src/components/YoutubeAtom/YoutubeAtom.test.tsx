@@ -1,7 +1,7 @@
 import type { ConsentState } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/format';
 import { ConfigProvider } from '../ConfigContext';
 import { YoutubeAtom } from './YoutubeAtom';
 

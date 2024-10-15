@@ -16,6 +16,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Button, SvgGuardianLogo } from '@guardian/source/react-components';
+import { Ticker } from '@guardian/source-development-kitchen/react-components';
 import {
 	hexColourToString,
 	SecondaryCtaType,
@@ -47,7 +48,6 @@ import { DesignableBannerCloseButton } from './components/DesignableBannerCloseB
 import { DesignableBannerCtas } from './components/DesignableBannerCtas';
 import { DesignableBannerHeader } from './components/DesignableBannerHeader';
 import { DesignableBannerReminder } from './components/DesignableBannerReminder';
-import { DesignableBannerTicker } from './components/DesignableBannerTicker';
 import { DesignableBannerVisual } from './components/DesignableBannerVisual';
 import type { BannerTemplateSettings, CtaSettings } from './settings';
 import { buttonStyles } from './styles/buttonStyles';
@@ -265,12 +265,13 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		imageSettings,
 		bannerId: 'designable-banner',
 		tickerStylingSettings: {
-			textColour: hexColourToString(ticker.text),
 			filledProgressColour: hexColourToString(ticker.filledProgress),
 			progressBarBackgroundColour: hexColourToString(
 				ticker.progressBarBackground,
 			),
-			goalMarkerColour: hexColourToString(ticker.goalMarker),
+			headlineColour: hexColourToString(ticker.headlineColour),
+			totalColour: hexColourToString(ticker.totalColour),
+			goalColour: hexColourToString(ticker.goalColour),
 		},
 	};
 
@@ -330,6 +331,25 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						/>
 					)}
 
+					{tickerSettings?.tickerData &&
+						templateSettings.tickerStylingSettings && (
+							<div css={templateSpacing.bannerTicker}>
+								<Ticker
+									currencySymbol={
+										tickerSettings.currencySymbol
+									}
+									copy={{
+										headline:
+											tickerSettings.copy.countLabel,
+									}}
+									tickerData={tickerSettings.tickerData}
+									tickerStylingSettings={
+										templateSettings.tickerStylingSettings
+									}
+									size={'medium'}
+								/>
+							</div>
+						)}
 					<div css={templateSpacing.bannerBodyCopy}>
 						<DesignableBannerBody
 							mainContent={content.mainContent}
@@ -339,16 +359,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 							}
 						/>
 					</div>
-
-					{tickerSettings?.tickerData &&
-						templateSettings.tickerStylingSettings && (
-							<DesignableBannerTicker
-								tickerSettings={tickerSettings}
-								stylingSettings={
-									templateSettings.tickerStylingSettings
-								}
-							/>
-						)}
 
 					{!showChoiceCards && (
 						<DesignableBannerCtas

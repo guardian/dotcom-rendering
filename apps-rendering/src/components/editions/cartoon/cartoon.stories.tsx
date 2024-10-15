@@ -2,7 +2,7 @@
 
 import type { ReactElement } from 'react';
 import Cartoon from './index';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../../articleFormat';
 import { cartoonData } from '../../../fixtures/cartoon';
 
 // ----- Setup ------ //

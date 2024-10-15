@@ -1,10 +1,10 @@
+import { isNonNullable } from '@guardian/libs';
+import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import {
 	ArticleDesign,
 	type ArticleFormat,
 	type ArticleTheme,
-	isNonNullable,
-} from '@guardian/libs';
-import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
+} from '../lib/format';
 import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';
@@ -66,6 +66,19 @@ const AMP_SUPPORTED_ELEMENTS = [
 	'model.dotcomrendering.pageElements.YoutubeBlockElement',
 ];
 
+/**
+ * We do not support any list elements on AMP.
+ */
+const listElements = [
+	'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement',
+	'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
+	'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement',
+	'model.dotcomrendering.pageElements.ListBlockElement',
+	'model.dotcomrendering.pageElements.MiniProfilesBlockElement',
+	'model.dotcomrendering.pageElements.TimelineBlockElement',
+	'model.dotcomrendering.pageElements.QAndAExplainerBlockElement',
+];
+
 export const isAmpSupported = ({
 	format,
 	tags,
@@ -109,13 +122,7 @@ export const isAmpSupported = ({
 		}
 	}
 
-	if (
-		elements.some(
-			(element) =>
-				element._type ===
-				'model.dotcomrendering.pageElements.ListBlockElement',
-		)
-	) {
+	if (elements.some((element) => listElements.includes(element._type))) {
 		return false;
 	}
 

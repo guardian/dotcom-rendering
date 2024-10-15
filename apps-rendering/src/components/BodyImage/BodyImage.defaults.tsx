@@ -2,7 +2,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleElementRole } from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../../articleFormat';
 import { from, remSpace } from '@guardian/source/foundations';
 import type { Breakpoint } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';

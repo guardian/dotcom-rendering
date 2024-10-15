@@ -3,7 +3,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '@guardian/libs';
+} from '../../src/lib/format';
 import type { DCRFrontCard } from '../../src/types/front';
 import { discussionApiUrl } from './discussionApiUrl';
 

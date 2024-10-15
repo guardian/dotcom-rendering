@@ -1,10 +1,9 @@
 // ----- Imports ----- //
 
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
-import { ArticleSpecial } from '@guardian/libs';
+import { ArticleSpecial, formatToString } from '../../articleFormat';
 import { breakpoints } from '@guardian/source/foundations';
 import type { StoryFn } from '@storybook/react';
-import { formatToString } from 'articleFormat';
 import {
 	analysis,
 	article,
@@ -20,7 +19,6 @@ import {
 	newsletterSignUp,
 	obituary,
 	photoEssay,
-	printShop,
 	quiz,
 	recipe,
 	review,
@@ -143,10 +141,6 @@ export const ReviewStandardSpecialReportAlt =
 export const MatchReportStandardNews = standardLayoutStory(matchReport);
 export const MatchReportStandardSpecialReportAlt =
 	standardLayoutStoryWithSpecialReportAlt(matchReport);
-
-export const PrintShopStandardNews = standardLayoutStory(printShop);
-export const PrintShopStandardSpecialReportAlt =
-	standardLayoutStoryWithSpecialReportAlt(printShop);
 
 export const PhotoEssayStandardNews = standardLayoutStory(photoEssay);
 export const PhotoEssayStandardSpecialReportAlt =

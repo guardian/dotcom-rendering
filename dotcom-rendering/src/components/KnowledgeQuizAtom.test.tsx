@@ -1,4 +1,3 @@
-import { Pillar } from '@guardian/libs';
 import { fireEvent, render } from '@testing-library/react';
 import { ensure } from '../../fixtures/manual/ensure';
 import {
@@ -6,6 +5,7 @@ import {
 	resultGroups,
 } from '../../fixtures/manual/knowledgeQuizAtom';
 import { sharingUrls } from '../../fixtures/manual/sharingUrls';
+import { Pillar } from '../lib/format';
 import { KnowledgeQuizAtom } from './KnowledgeQuizAtom.importable';
 
 const questionOne = ensure(exampleKnowledgeQuestions.find((x) => x));

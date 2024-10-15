@@ -2,8 +2,11 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../../articleFormat';
 import { labs, neutral } from '@guardian/source/foundations';
 import { text } from 'palette';
 import type { ReactNode } from 'react';

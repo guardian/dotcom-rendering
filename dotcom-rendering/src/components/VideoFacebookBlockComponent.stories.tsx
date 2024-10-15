@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { VideoFacebookBlockComponent } from './VideoFacebookBlockComponent.importable';
 
 export default {

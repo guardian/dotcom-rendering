@@ -3008,7 +3008,6 @@
                 "ObituaryDesign",
                 "PhotoEssayDesign",
                 "PictureDesign",
-                "PrintShopDesign",
                 "ProfileDesign",
                 "QuizDesign",
                 "RecipeDesign",
@@ -3154,7 +3153,6 @@
                 "fields",
                 "index",
                 "mediaType",
-                "mimeType",
                 "url"
             ]
         },
@@ -3223,7 +3221,12 @@
                 "nav/list",
                 "nav/media-list",
                 "news/most-popular",
-                "scrollable/highlights"
+                "scrollable/feature",
+                "scrollable/highlights",
+                "scrollable/medium",
+                "scrollable/small",
+                "static/feature/2",
+                "static/medium/4"
             ],
             "type": "string"
         },

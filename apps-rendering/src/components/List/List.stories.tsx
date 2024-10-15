@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../articleFormat';
 import ListItem from 'components/ListItem';
 import List from './';
 
@@ -9,7 +9,7 @@ import List from './';
 const format = {
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 };
 
 const listItem = <ListItem>A bullet point</ListItem>;

@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../articleFormat';
 import { some } from '../../../vendor/@guardian/types/index';
 import { parseHtml } from 'fixtures/item';
 import MainMediaCaption from '.';
@@ -14,7 +14,7 @@ const Default = () => (
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 		id="caption-id"
 	/>

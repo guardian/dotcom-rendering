@@ -2,8 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat, Pillar } from '../../articleFormat';
 import { breakpoints, from } from '@guardian/source/foundations';
 import {
 	DottedLines,
@@ -35,7 +34,6 @@ import type {
 	MatchReport,
 	Obituary,
 	PhotoEssay,
-	PrintShop,
 	Profile,
 	Quiz,
 	Recipe,
@@ -75,7 +73,7 @@ const decideLines = (
 ): JSX.Element => {
 	const count = item.design === ArticleDesign.Comment ? 8 : 4;
 
-	if (item.theme === ArticlePillar.Sport) {
+	if (item.theme === Pillar.Sport) {
 		return <DottedLines cssOverrides={cssOverrides} count={count} />;
 	}
 
@@ -95,7 +93,6 @@ interface Props {
 		| Correction
 		| Interview
 		| Recipe
-		| PrintShop
 		| PhotoEssay
 		| Timeline
 		| Profile;

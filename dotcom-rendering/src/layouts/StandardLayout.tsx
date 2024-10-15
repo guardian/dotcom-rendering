@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleSpecial, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -24,6 +23,7 @@ import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
+import { ExpandableMarketingCardWrapper } from '../components/ExpandableMarketingCardWrapper.importable';
 import { Footer } from '../components/Footer';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
@@ -50,6 +50,11 @@ import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../lib/format';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -85,7 +90,6 @@ const StandardGrid = ({
 				display: grid;
 				width: 100%;
 				margin-left: 0;
-
 				grid-column-gap: 10px;
 
 				/*
@@ -108,8 +112,9 @@ const StandardGrid = ({
 									'.      border  standfirst . right-column'
 									'lines  border  media      . right-column'
 									'meta   border  media      . right-column'
-									'meta   border  body       . right-column'
-									'.      border  .          . right-column';
+									'uscard border  media      . right-column'
+									'uscard border  body       . right-column'
+									'uscard border  .          . right-column';
 						  `
 						: isMedia
 						? css`
@@ -118,9 +123,10 @@ const StandardGrid = ({
 									'.      border  disclaimer disclaimer right-column'
 									'lines  border  media      media      right-column'
 									'meta   border  media      media      right-column'
-									'meta   border  standfirst standfirst right-column'
-									'.      border  body       body       right-column'
-									'.      border  .          .          right-column';
+									'uscard border  media      media      right-column'
+									'uscard border  standfirst standfirst right-column'
+									'uscard border  body       body       right-column'
+									'uscard border  .          .          right-column';
 						  `
 						: css`
 								grid-template-areas:
@@ -128,8 +134,9 @@ const StandardGrid = ({
 									'.      border  standfirst . right-column'
 									'lines  border  media      . right-column'
 									'meta   border  media      . right-column'
-									'meta   border  body       . right-column'
-									'.      border  .          . right-column';
+									'uscard border  media      . right-column'
+									'uscard border  body       . right-column'
+									'uscard border  .          . right-column';
 						  `}
 				}
 			}
@@ -154,8 +161,9 @@ const StandardGrid = ({
 								'.      border  standfirst   right-column'
 								'lines  border  media        right-column'
 								'meta   border  media        right-column'
-								'meta   border  body         right-column'
-								'.      border  .            right-column';
+								'uscard border  media        right-column'
+								'uscard border  body         right-column'
+								'uscard border  .            right-column';
 					  `
 					: isMedia
 					? css`
@@ -164,9 +172,9 @@ const StandardGrid = ({
 								'.      border  disclaimer   right-column'
 								'lines  border  media        right-column'
 								'meta   border  media        right-column'
-								'meta   border  standfirst   right-column'
-								'.      border  body         right-column'
-								'.      border  .            right-column';
+								'uscard border  standfirst   right-column'
+								'uscard border  body         right-column'
+								'uscard border  .            right-column';
 					  `
 					: css`
 							grid-template-areas:
@@ -175,8 +183,9 @@ const StandardGrid = ({
 								'.      border  disclaimer   right-column'
 								'lines  border  media        right-column'
 								'meta   border  media        right-column'
-								'meta   border  body         right-column'
-								'.      border  .            right-column';
+								'uscard border  media        right-column'
+								'uscard border  body         right-column'
+								'uscard border  .            right-column';
 					  `}
 			}
 
@@ -703,6 +712,22 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								</div>
 							)}
 						</GridItem>
+						{isWeb && (
+							<GridItem area="uscard" element="aside">
+								<Hide until="leftCol">
+									<Island
+										priority="enhancement"
+										defer={{ until: 'visible' }}
+									>
+										<ExpandableMarketingCardWrapper
+											guardianBaseURL={
+												article.guardianBaseURL
+											}
+										/>
+									</Island>
+								</Hide>
+							</GridItem>
+						)}
 						<GridItem area="body">
 							<ArticleContainer format={format}>
 								<ArticleBody

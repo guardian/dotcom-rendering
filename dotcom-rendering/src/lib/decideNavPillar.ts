@@ -1,4 +1,4 @@
-import { Pillar } from '@guardian/libs';
+import { Pillar } from '../lib/format';
 import type { LegacyPillar } from '../types/frontend';
 
 export const decideNavPillar = (pillar: LegacyPillar): Pillar | undefined => {

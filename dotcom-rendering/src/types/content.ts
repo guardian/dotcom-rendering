@@ -1,4 +1,4 @@
-import type { ArticleTheme } from '@guardian/libs';
+import type { ArticleTheme } from '../lib/format';
 
 export type StarRating = 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -821,7 +821,7 @@ export interface Image {
 		caption?: string;
 	};
 	mediaType: string;
-	mimeType: string;
+	mimeType?: string;
 	url: string;
 }
 

@@ -1,4 +1,4 @@
-import { Pillar } from '@guardian/libs';
+import { Pillar } from '../../../lib/format';
 import type { NavType } from '../../../model/extract-nav';
 
 export const nav: NavType = {
