@@ -1,4 +1,3 @@
-import { getLastFetchCall, resetLastFetchCall } from './mockRESTCalls';
 import { mockFetch } from './mockRESTCallsInJest';
 import {
 	requestMultipleSignUps,
@@ -45,24 +44,14 @@ const TEST_RECAPTCHA_TOKEN = 'FAKE_TOKEN_FOR_PASSING';
 
 describe('requestMultipleSignUps', () => {
 	let windowSpy: jest.SpyInstance;
-	let originalFetch: typeof fetch;
-
-	beforeAll(() => {
-		originalFetch = fetch;
-	});
 
 	beforeEach(() => {
 		windowSpy = jest.spyOn(window, 'window', 'get');
-		mockFetch(); // Initialize the mock before each test
-		resetLastFetchCall();
+		mockFetch();
 	});
 
 	afterEach(() => {
 		windowSpy.mockRestore();
-	});
-
-	afterAll(() => {
-		global.fetch = originalFetch; // Restore the original fetch after tests
 	});
 
 	const setWindow = (windowData: { [key: string]: unknown }) =>
@@ -75,7 +64,8 @@ describe('requestMultipleSignUps', () => {
 			TEST_NEWSLETTER_IDS,
 			TEST_RECAPTCHA_TOKEN,
 		);
-		const [url, requestInit] = getLastFetchCall() ?? [undefined, undefined];
+		const [url, requestInit] = (global.fetch as jest.Mock).mock.calls[0];
+
 		const method = requestInit?.method;
 		const headers = (requestInit?.headers ?? {}) as Record<string, unknown>;
 
@@ -97,7 +87,8 @@ describe('requestMultipleSignUps', () => {
 			TEST_NEWSLETTER_IDS,
 			TEST_RECAPTCHA_TOKEN,
 		);
-		const [, requestInit] = getLastFetchCall() ?? [undefined, undefined];
+
+		const [, requestInit] = (global.fetch as jest.Mock).mock.calls[0];
 
 		const decodedEntries = decodeURIComponent(
 			requestInit?.body?.toString() ?? '',
@@ -129,7 +120,7 @@ describe('requestMultipleSignUps', () => {
 			TEST_NEWSLETTER_IDS,
 			TEST_RECAPTCHA_TOKEN,
 		);
-		const [, requestInit] = getLastFetchCall() ?? [undefined, undefined];
+		const [, requestInit] = (global.fetch as jest.Mock).mock.calls[0];
 
 		const decodedBody = decodeURIComponent(
 			requestInit?.body?.toString() ?? '',
@@ -142,24 +133,14 @@ describe('requestMultipleSignUps', () => {
 
 describe('requestSingleSignUp', () => {
 	let windowSpy: jest.SpyInstance;
-	let originalFetch: typeof fetch;
-
-	beforeAll(() => {
-		originalFetch = fetch;
-	});
 
 	beforeEach(() => {
 		windowSpy = jest.spyOn(window, 'window', 'get');
-		mockFetch(); // Initialize the mock before each test
-		resetLastFetchCall();
+		mockFetch();
 	});
 
 	afterEach(() => {
 		windowSpy.mockRestore();
-	});
-
-	afterAll(() => {
-		global.fetch = originalFetch; // Restore the original fetch after tests
 	});
 
 	const setWindow = (windowData: { [key: string]: unknown }) =>
@@ -172,7 +153,7 @@ describe('requestSingleSignUp', () => {
 			TEST_NEWSLETTER_IDS[0],
 			TEST_RECAPTCHA_TOKEN,
 		);
-		const [url, requestInit] = getLastFetchCall() ?? [undefined, undefined];
+		const [url, requestInit] = (global.fetch as jest.Mock).mock.calls[0];
 		const method = requestInit?.method;
 		const headers = (requestInit?.headers ?? {}) as Record<string, unknown>;
 
@@ -192,7 +173,8 @@ describe('requestSingleSignUp', () => {
 			TEST_NEWSLETTER_IDS[0],
 			TEST_RECAPTCHA_TOKEN,
 		);
-		const [, requestInit] = getLastFetchCall() ?? [undefined, undefined];
+
+		const [, requestInit] = (global.fetch as jest.Mock).mock.calls[0];
 
 		const decodedEntries = decodeURIComponent(
 			requestInit?.body?.toString() ?? '',
@@ -221,7 +203,7 @@ describe('requestSingleSignUp', () => {
 			TEST_NEWSLETTER_IDS[0],
 			TEST_RECAPTCHA_TOKEN,
 		);
-		const [, requestInit] = getLastFetchCall() ?? [undefined, undefined];
+		const [, requestInit] = (global.fetch as jest.Mock).mock.calls[0];
 
 		const decodedBody = decodeURIComponent(
 			requestInit?.body?.toString() ?? '',

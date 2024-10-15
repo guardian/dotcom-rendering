@@ -6,7 +6,6 @@ import type {
 	ReplyType,
 	SignedInUser,
 } from '../../lib/discussion';
-import { resetLastFetchCall } from '../../lib/mockRESTCalls';
 import { mockFetch } from '../../lib/mockRESTCallsInJest';
 import { error, ok } from '../../lib/result';
 import { CommentContainer } from './CommentContainer';
@@ -53,19 +52,8 @@ const aUser: SignedInUser = {
 };
 
 describe('CommentContainer', () => {
-	let originalFetch: typeof fetch;
-
-	beforeAll(() => {
-		originalFetch = fetch;
-	});
-
 	beforeEach(() => {
-		mockFetch(); // Initialize the mock before each test
-		resetLastFetchCall();
-	});
-
-	afterAll(() => {
-		global.fetch = originalFetch; // Restore the original fetch after tests
+		mockFetch();
 	});
 
 	it('Post a comment to a root comment', async () => {
