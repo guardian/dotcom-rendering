@@ -153,7 +153,7 @@ export const HighlightsCard = ({
 						headlineText={headlineText}
 						format={format}
 						size="medium"
-						sizeOnMobile="small"
+						sizeOnMobile="tiny"
 						showPulsingDot={
 							format.design === ArticleDesign.LiveBlog
 						}
