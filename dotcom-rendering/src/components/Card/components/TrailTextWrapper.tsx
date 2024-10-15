@@ -52,12 +52,9 @@ const decideVisibilityStyles = (
 	`;
 };
 
-const trailTextStyles = (trailTextColour?: string) => css`
+const trailTextStyles = css`
 	display: flex;
 	flex-direction: column;
-	color: ${trailTextColour
-		? palette('--card-trail-text')
-		: palette('--card-headline')};
 	padding: ${space[2]}px 0;
 `;
 
@@ -78,12 +75,15 @@ export const TrailTextWrapper = ({
 	imageType,
 	shouldHide = true,
 	trailTextSize = 'regular',
-	trailTextColour,
+	trailTextColour = palette('--card-trail-text'),
 }: Props) => {
 	return (
 		<div
 			css={[
-				trailTextStyles(trailTextColour),
+				trailTextStyles,
+				css`
+					color: ${trailTextColour};
+				`,
 				fontStyles(trailTextSize),
 				shouldHide &&
 					decideVisibilityStyles(

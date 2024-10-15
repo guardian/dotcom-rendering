@@ -1,4 +1,3 @@
-import { palette } from '../palette';
 import type { BoostLevel } from '../types/content';
 import type {
 	DCRContainerPalette,
@@ -149,7 +148,6 @@ export const OneCardLayout = ({
 					showTopBarDesktop={false}
 					showTopBarMobile={true}
 					trailTextSize={trailTextSize}
-					trailTextColour={palette('--card-trail-text')}
 				/>
 			</LI>
 		</UL>
@@ -207,7 +205,6 @@ const TwoCardOrFourCardLayout = ({
 							showLivePlayable={false}
 							showTopBarDesktop={false}
 							showTopBarMobile={true}
-							trailTextColour={palette('--card-trail-text')}
 						/>
 					</LI>
 				);

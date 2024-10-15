@@ -2571,8 +2571,10 @@ const cardHeadlineTextLight: PaletteFunction = (format) =>
 
 const cardTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
-const cardTrailTextLight: PaletteFunction = () => sourcePalette.neutral[38];
-const cardTrailTextDark: PaletteFunction = () => sourcePalette.neutral[60];
+const cardTrailTextLight: PaletteFunction = (format) =>
+	isMediaCard(format) ? sourcePalette.neutral[86] : sourcePalette.neutral[38];
+const cardTrailTextDark: PaletteFunction = (format) =>
+	isMediaCard(format) ? sourcePalette.neutral[73] : sourcePalette.neutral[60];
 
 const liveKickerBackgroundLight: PaletteFunction = (format) => {
 	switch (format.theme) {

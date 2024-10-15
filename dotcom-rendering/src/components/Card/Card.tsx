@@ -10,7 +10,7 @@ import { isMediaCard } from '../../lib/cardHelpers';
 import { ArticleDesign, type ArticleFormat } from '../../lib/format';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
-import { palette as themePalette } from '../../palette';
+import { palette } from '../../palette';
 import type { Branding } from '../../types/branding';
 import type { StarRating as Rating } from '../../types/content';
 import type {
@@ -125,7 +125,7 @@ export type Props = {
 	showTopBarDesktop?: boolean;
 	showTopBarMobile?: boolean;
 	trailTextSize?: TrailTextSize;
-	/** If specified, overrides trail text colour from that of the headline */
+	/** If specified, overrides trail text colour */
 	trailTextColour?: string;
 };
 
@@ -156,7 +156,7 @@ const HorizontalDivider = () => (
 	<div
 		css={css`
 			${from.tablet} {
-				border-top: 1px solid ${themePalette('--card-border-top')};
+				border-top: 1px solid ${palette('--card-border-top')};
 				height: 1px;
 				width: 50%;
 				${from.tablet} {
@@ -417,8 +417,8 @@ export const Card = ({
 		isOpinion && !isOnwardContent && media?.type === 'avatar';
 
 	const cardBackgroundColour = isOnwardContent
-		? themePalette('--onward-content-card-background')
-		: themePalette('--card-background');
+		? palette('--onward-content-card-background')
+		: palette('--card-background');
 
 	/**
 	 * Some cards in standard containers have contrasting background colours.

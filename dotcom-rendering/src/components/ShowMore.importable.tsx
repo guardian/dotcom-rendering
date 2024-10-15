@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { isNonNullable } from '@guardian/libs';
 import {
 	from,
-	palette,
+	palette as sourcePalette,
 	space,
 	until,
 	visuallyHidden,
@@ -18,6 +18,7 @@ import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import type { EditionId } from '../lib/edition';
 import { useApi } from '../lib/useApi';
 import { enhanceCards } from '../model/enhanceCards';
+import { palette } from '../palette';
 import type { DCRContainerPalette, FEFrontCard } from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -178,6 +179,9 @@ export const ShowMore = ({
 											headlineSize="small"
 											imageLoading="eager"
 											absoluteServerTimes={false}
+											trailTextColour={palette(
+												'--card-headline',
+											)}
 										/>
 									</LI>
 								);
@@ -202,12 +206,12 @@ export const ShowMore = ({
 					cssOverrides={css`
 						margin-top: ${space[4]}px;
 						margin-right: 10px;
-						color: ${palette.neutral[100]};
-						background-color: ${palette.neutral[7]};
-						border-color: ${palette.neutral[7]};
+						color: ${sourcePalette.neutral[100]};
+						background-color: ${sourcePalette.neutral[7]};
+						border-color: ${sourcePalette.neutral[7]};
 						&:hover {
-							background-color: ${palette.neutral[46]};
-							border-color: ${palette.neutral[46]};
+							background-color: ${sourcePalette.neutral[46]};
+							border-color: ${sourcePalette.neutral[46]};
 						}
 						${from.tablet} {
 							margin-left: 10px;
