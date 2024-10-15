@@ -205,6 +205,11 @@ export const mockFetch: typeof global.fetch = (
 			url,
 		) && requestInit?.method === 'POST':
 			return createMockResponse(200, contributionsHeaderResponse);
+		// Get contributions header
+		case /.*contributions\.(code\.dev-)?guardianapis\.com\/header/.test(
+			url,
+		):
+			return createMockResponse(200, contributionsHeaderResponse);
 		// Get Ophan
 		case /.*ophan\.theguardian\.com\/img\/.*/.test(url):
 			return createMockResponse(200);
