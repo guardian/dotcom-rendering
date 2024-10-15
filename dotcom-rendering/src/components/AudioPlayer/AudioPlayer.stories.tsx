@@ -15,8 +15,8 @@ type Story = StoryObj<typeof meta>;
 
 export const AudioPlayer = {
 	args: {
-		// src: audioFile,
-		src: 'https://audio.guim.co.uk/2020/05/05-61553-gnl.fw.200505.jf.ch7DW.mp3',
+		src: audioFile,
+		// src: 'https://audio.guim.co.uk/2020/05/05-61553-gnl.fw.200505.jf.ch7DW.mp3',
 		mediaId: 'mediaId',
 	},
 	parameters: {

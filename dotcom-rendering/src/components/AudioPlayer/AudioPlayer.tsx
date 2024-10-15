@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isString, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import { from, palette, textSans15 } from '@guardian/source/foundations';
 import {
 	SvgAudio,
@@ -9,9 +9,8 @@ import {
 	SvgMediaControlsPause,
 	SvgMediaControlsPlay,
 } from '@guardian/source/react-components';
-import WavesurferPlayer from '@wavesurfer/react';
-import { useState } from 'react';
-import type WaveSurfer from 'wavesurfer.js';
+import { forwardRef, useEffect, useRef, useState } from 'react';
+import WaveSurfer from 'wavesurfer.js';
 import { formatTime } from '../../lib/formatTime';
 
 // default base styling for all buttons
@@ -78,6 +77,7 @@ const timeCSS = css`
 	${textSans15};
 	color: ${palette.neutral[86]};
 	background-color: ${palette.neutral[20]};
+	z-index: 1;
 
 	${from.leftCol} {
 		padding-top: 0;
@@ -100,7 +100,7 @@ const CurrentTime = ({ time }: { time: number }) => (
 	</time>
 );
 
-const Duration = ({ time }: { time?: number }) => (
+const Duration = ({ time }: { time: number }) => (
 	<time
 		aria-label="duration"
 		css={[
@@ -112,19 +112,23 @@ const Duration = ({ time }: { time?: number }) => (
 			`,
 		]}
 	>
-		{isUndefined(time) ? null : formatTime(time)}
+		{isNaN(time) ? null : formatTime(time)}
 	</time>
 );
 
 // ****************** Progress bar/waveform ******************
 
-const ProgressBar = (props: React.ComponentPropsWithoutRef<'div'>) => (
+const WaveForm = forwardRef<
+	HTMLDivElement,
+	React.ComponentPropsWithoutRef<'div'> & { progress: number }
+>(({ progress, ...props }, ref) => (
 	<div
 		css={css`
 			grid-area: progress-bar;
 			background-color: ${palette.neutral[20]};
 			border-top: 1px solid ${palette.neutral[46]};
 			padding: 0 10px;
+			transform: translateX(${-100 + progress}%);
 
 			${from.leftCol} {
 				border-top: none;
@@ -143,8 +147,9 @@ const ProgressBar = (props: React.ComponentPropsWithoutRef<'div'>) => (
 			}
 		`}
 		{...props}
+		ref={ref}
 	/>
-);
+));
 
 // ****************** Playback Controls ******************
 
@@ -274,7 +279,7 @@ const VolumeControls = (props: React.ComponentPropsWithoutRef<'div'>) => (
 
 type AudioPlayerProps = {
 	/** The audio source you want to play. */
-	src: string | Blob;
+	src: string;
 	/**
 	 * Optional, pre-computed duration of the audio source.
 	 * If it's not provided it will be calculated once the audio is loaded.
@@ -285,6 +290,7 @@ type AudioPlayerProps = {
 	 * handled elsewhere, e.g on a mobile device.
 	 */
 	showVolumeControls?: boolean;
+	mediaId?: string;
 };
 
 /**
@@ -294,47 +300,19 @@ export const AudioPlayer = ({
 	src,
 	duration: preComputedDuration,
 	showVolumeControls = true,
+	mediaId,
 }: AudioPlayerProps) => {
 	const [wavesurfer, setWavesurfer] = useState<WaveSurfer>();
+	const [progress, setProgress] = useState(0);
 	const [isReady, setIsReady] = useState(false);
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [isMuted, setIsMuted] = useState(false);
 	const [currentTime, setCurrentTime] = useState(0);
-	const [duration, setDuration] = useState<number>();
-
-	if (preComputedDuration) {
-		setDuration(parseInt(preComputedDuration, 10));
-	}
-
-	const onInit = (ws: WaveSurfer) => {
-		if (isString(src)) {
-			void ws.load(src);
-		} else {
-			void ws.loadBlob(src);
-		}
-	};
-
-	const onReady = (ws: WaveSurfer) => {
-		setWavesurfer(ws);
-		setIsReady(true);
-		setIsPlaying(false);
-
-		if (isUndefined(duration)) {
-			setDuration(ws.getDuration());
-		}
-
-		ws.on('timeupdate', (newTime) => {
-			setCurrentTime(newTime);
-		});
-	};
-
-	const onPlay = () => {
-		setIsPlaying(true);
-	};
-
-	const onPause = () => {
-		setIsPlaying(false);
-	};
+	const [duration, setDuration] = useState<number>(
+		parseInt(preComputedDuration ?? '', 10),
+	);
+	const audioRef = useRef<HTMLAudioElement>(null);
+	const waveformRef = useRef<HTMLDivElement>(null);
 
 	const playPause = () => {
 		void wavesurfer?.playPause();
@@ -358,32 +336,62 @@ export const AudioPlayer = ({
 		setIsMuted(false);
 	};
 
+	useEffect(() => {
+		if (
+			isUndefined(wavesurfer) &&
+			waveformRef.current &&
+			audioRef.current
+		) {
+			const ws = WaveSurfer.create({
+				container: waveformRef.current,
+				height: 'auto',
+				fillParent: true,
+				waveColor: palette.neutral[46],
+				progressColor: palette.neutral[100],
+				cursorColor: palette.brandAlt[400],
+				cursorWidth: 4,
+				barWidth: 2,
+				barGap: 1,
+				barRadius: 0,
+				normalize: true,
+				barAlign: 'bottom',
+				dragToSeek: true,
+				media: audioRef.current,
+				duration: isNaN(duration) ? undefined : duration,
+			});
+
+			ws.on('loading', (percent) => {
+				setProgress(percent);
+			});
+
+			ws.on('ready', (srcDuration) => {
+				setIsReady(true);
+				if (isNaN(duration)) setDuration(srcDuration);
+			});
+			ws.on('play', () => setIsPlaying(true));
+			ws.on('pause', () => setIsPlaying(false));
+			ws.on('timeupdate', (newTime) => setCurrentTime(newTime));
+			ws.on('error', (error) => console.error(error));
+
+			setWavesurfer(ws);
+		}
+	}, [duration, src, wavesurfer]);
+
 	return (
 		<Wrapper showVolumeControls={showVolumeControls}>
+			<audio
+				src={src}
+				ref={audioRef}
+				autoPlay={false}
+				data-media-id={mediaId}
+			>
+				<track kind="captions" />
+			</audio>
+
 			<CurrentTime time={currentTime} />
 			<Duration time={duration} />
 
-			<ProgressBar>
-				<WavesurferPlayer
-					height="auto"
-					fillParent={true}
-					waveColor={palette.neutral[46]}
-					progressColor={palette.neutral[100]}
-					cursorColor={palette.brandAlt[400]}
-					cursorWidth={4}
-					barWidth={2}
-					barGap={1}
-					barRadius={0}
-					normalize={true}
-					barAlign="bottom"
-					dragToSeek={true}
-					duration={duration}
-					onReady={onReady}
-					onPlay={onPlay}
-					onPause={onPause}
-					onInit={onInit}
-				/>
-			</ProgressBar>
+			<WaveForm ref={waveformRef} progress={progress} />
 
 			<PlaybackControls>
 				<SkipButton
