@@ -21,7 +21,7 @@ pastDate.setDate(pastDate.getDate() - 1);
 
 const mockFetch =
 	(mockedStatus: number) => (input: RequestInfo, init?: RequestInit) => {
-		const url = input.toString();
+		const url = new Request(input).url;
 
 		if (
 			url ===
