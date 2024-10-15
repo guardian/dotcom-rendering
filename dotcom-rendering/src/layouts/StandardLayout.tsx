@@ -120,7 +120,7 @@ const StandardGrid = ({
 						? css`
 								grid-template-areas:
 									'title  border  headline   headline   .'
-									'.      border  disclaimer disclaimer right-column'
+									'image  border  disclaimer disclaimer right-column'
 									'lines  border  media      media      right-column'
 									'meta   border  media      media      right-column'
 									'uscard border  media      media      right-column'
@@ -169,7 +169,7 @@ const StandardGrid = ({
 					? css`
 							grid-template-areas:
 								'title  border  headline     .'
-								'.      border  disclaimer   right-column'
+								'image  border  disclaimer   right-column'
 								'lines  border  media        right-column'
 								'meta   border  media        right-column'
 								'uscard border  standfirst   right-column'
@@ -220,6 +220,7 @@ const StandardGrid = ({
 								'media         right-column'
 								'standfirst    right-column'
 								'lines         right-column'
+								'image         right-column'
 								'meta          right-column'
 								'body          right-column'
 								'.             right-column';
@@ -262,6 +263,7 @@ const StandardGrid = ({
 								'media'
 								'standfirst'
 								'lines'
+								'image'
 								'meta'
 								'body';
 					  `
@@ -304,6 +306,7 @@ const StandardGrid = ({
 								'media'
 								'standfirst'
 								'lines'
+								'image'
 								'meta'
 								'body';
 					  `
@@ -340,6 +343,16 @@ const stretchLines = css`
 		margin-left: -10px;
 		margin-right: -10px;
 	}
+`;
+
+const podcastCoverImg = css`
+	${from.wide} {
+		width: 219px;
+	}
+	${until.wide} {
+		width: 140px;
+	}
+	margin: 0.375rem 0 0.375rem 0;
 `;
 
 const starWrapper = css`
@@ -414,6 +427,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const renderAds = isWeb && canRenderAds(article);
+
+	const podcastSeries = article.tags.find((tag) => tag.type === 'Series');
 
 	return (
 		<>
@@ -712,6 +727,18 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								</div>
 							)}
 						</GridItem>
+						{format.design === ArticleDesign.Audio && (
+							<GridItem area="image" element="aside">
+								<img
+									src={podcastSeries?.podcast?.image ?? ''}
+									alt={
+										podcastSeries?.title ??
+										'Podcast Cover Image'
+									}
+									css={podcastCoverImg}
+								/>
+							</GridItem>
+						)}
 						{isWeb && (
 							<GridItem area="uscard" element="aside">
 								<Hide until="leftCol">
@@ -848,12 +875,14 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								css={css`
 									padding-top: ${isMedia ? 0 : 6}px;
 									height: 100%;
+
 									${from.desktop} {
 										/* above 980 */
 										margin-left: 20px;
 										margin-right: -20px;
 										padding-bottom: ${isMedia ? 41 : 0}px;
 									}
+
 									${from.leftCol} {
 										/* above 1140 */
 										margin-left: 0px;
