@@ -97,6 +97,9 @@ const summaryStyles = css`
 	gap: ${space[3]}px;
 	z-index: 1;
 	width: 100%;
+`;
+const contractedSummaryStyles = css`
+	${summaryStyles}
 	cursor: pointer;
 `;
 
@@ -197,7 +200,6 @@ interface Props {
 	setIsClosed: Dispatch<SetStateAction<boolean>>;
 }
 
-// todo - semantic html accordion-details?
 export const ExpandableMarketingCard = ({
 	guardianBaseURL,
 	heading,
@@ -217,7 +219,7 @@ export const ExpandableMarketingCard = ({
 							styles={imageTopStyles}
 						/>
 						<section
-							css={summaryStyles}
+							css={contractedSummaryStyles}
 							role="button"
 							tabIndex={0}
 							onClick={() => {
