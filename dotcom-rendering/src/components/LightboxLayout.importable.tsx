@@ -1,5 +1,4 @@
 import { css, Global } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
 	palette,
@@ -14,6 +13,7 @@ import {
 	SvgArrowRightStraight,
 	SvgCross,
 } from '@guardian/source/react-components';
+import type { ArticleFormat } from '../lib/format';
 import { getZIndex } from '../lib/getZIndex';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxJavascript } from './LightboxJavascript';

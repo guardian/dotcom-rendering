@@ -2,8 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat } from '../../articleFormat';
 import { neutral } from '@guardian/source/foundations';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { Option } from '../../../vendor/@guardian/types/index';

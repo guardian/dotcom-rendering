@@ -204,7 +204,7 @@ export const ClickToView = ({
 						onClick={() => handleClick()}
 						data-testid="click-to-view-button"
 						data-link-name="allow-button"
-						css={buttonCss}
+						cssOverrides={buttonCss}
 					>
 						{roleButtonText(role)}
 					</Button>

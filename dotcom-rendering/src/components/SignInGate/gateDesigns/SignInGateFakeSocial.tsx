@@ -334,7 +334,7 @@ export const SignInGateFakeSocial = ({
 				<LinkButton
 					data-testid="sign-in-gate-fake-social_register"
 					data-ignore="global-link-styling"
-					css={registerButton}
+					cssOverrides={registerButton}
 					priority="primary"
 					size="small"
 					href={registerUrl}
@@ -353,7 +353,7 @@ export const SignInGateFakeSocial = ({
 				<Button
 					data-testid="sign-in-gate-fake-social_dismiss"
 					data-ignore="global-link-styling"
-					css={laterButton}
+					cssOverrides={laterButton}
 					priority="subdued"
 					size="small"
 					onClick={() => {
@@ -375,7 +375,11 @@ export const SignInGateFakeSocial = ({
 				<Link
 					data-testid="sign-in-gate-fake-social_signin"
 					data-ignore="global-link-styling"
-					css={[signInLink, inlineLink, fakeSocialSignInLink]}
+					cssOverrides={[
+						signInLink,
+						inlineLink,
+						fakeSocialSignInLink,
+					]}
 					href={signInUrl}
 					onClick={() => {
 						trackLink(
@@ -406,7 +410,7 @@ export const SignInGateFakeSocial = ({
 					data-ignore="global-link-styling"
 					priority="tertiary"
 					size="small"
-					css={iconButton(verticalButtonStack)}
+					cssOverrides={iconButton(verticalButtonStack)}
 					href={signInUrl}
 					onClick={() => {
 						trackLink(
@@ -426,7 +430,7 @@ export const SignInGateFakeSocial = ({
 					data-ignore="global-link-styling"
 					priority="tertiary"
 					size="small"
-					css={iconButton(verticalButtonStack)}
+					cssOverrides={iconButton(verticalButtonStack)}
 					href={signInUrl}
 					onClick={() => {
 						trackLink(
@@ -446,7 +450,7 @@ export const SignInGateFakeSocial = ({
 					data-ignore="global-link-styling"
 					priority="tertiary"
 					size="small"
-					css={iconButton(verticalButtonStack)}
+					cssOverrides={iconButton(verticalButtonStack)}
 					href={signInUrl}
 					onClick={() => {
 						trackLink(

@@ -4,7 +4,13 @@
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/designableBanner/components/DesignableBannerBody.tsx
  */
 import { css } from '@emotion/react';
-import { body, from } from '@guardian/source/foundations';
+import {
+	from,
+	textEgyptian15,
+	textEgyptian17,
+	textEgyptianBold15,
+	textEgyptianBold17,
+} from '@guardian/source/foundations';
 import {
 	removeMediaRulePrefix,
 	useMatchMedia,
@@ -50,9 +56,9 @@ const getStyles = (settings: HighlightedTextSettings) => ({
 		p {
 			margin: 0 0 0.5em 0;
 		}
-		${body.small({ lineHeight: 'regular' })};
+		${textEgyptian15};
 		${from.desktop} {
-			${body.medium({ lineHeight: 'regular' })};
+			${textEgyptian17};
 		}
 	`,
 	highlightedText: css`
@@ -67,9 +73,9 @@ const getStyles = (settings: HighlightedTextSettings) => ({
         `
 			: ''}
 
-		${body.small({ fontWeight: 'bold', lineHeight: 'regular' })};
+		${textEgyptianBold15};
 		${from.desktop} {
-			${body.medium({ fontWeight: 'bold', lineHeight: 'regular' })};
+			${textEgyptianBold17};
 		}
 	`,
 });

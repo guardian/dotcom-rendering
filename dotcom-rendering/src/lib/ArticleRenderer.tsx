@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign } from '@guardian/libs';
 import { adContainerStyles } from '../components/AdSlot.web';
 import { useConfig } from '../components/ConfigContext';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';

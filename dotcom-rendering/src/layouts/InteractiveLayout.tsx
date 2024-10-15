@@ -1,6 +1,5 @@
 import { css, Global } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleSpecial, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -43,6 +42,7 @@ import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
+import { type ArticleFormat, ArticleSpecial } from '../lib/format';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -397,7 +397,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									standfirst={article.standfirst}
 								/>
 							</GridItem>
-
 							<GridItem area="lines">
 								<div css={maxWidth}>
 									<div css={stretchLines}>

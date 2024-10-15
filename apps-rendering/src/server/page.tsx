@@ -5,8 +5,11 @@ import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+} from '../articleFormat';
 import { background, resets } from '@guardian/source/foundations';
 import { map, none, some } from '../../vendor/@guardian/types/index';
 import type { Option } from '../../vendor/@guardian/types/index';

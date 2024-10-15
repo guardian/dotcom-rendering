@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
 import { calloutCampaign } from '../../fixtures/manual/calloutCampaign';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { CalloutEmbedBlockComponent } from './CalloutEmbedBlockComponent.importable';
 
 export default {

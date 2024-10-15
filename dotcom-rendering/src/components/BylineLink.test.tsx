@@ -1,6 +1,6 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { render } from '@testing-library/react';
 import { getContributorTagsForToken } from '../lib/byline';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import type { TagType } from '../types/tag';
 import {
 	bylineAsTokens,

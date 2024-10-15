@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../src/lib/format';
 import type { TrailType } from '../../src/types/trails';
 
 export const trails: [

@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -22,6 +21,7 @@ import { Carousel } from '../components/Carousel.importable';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
+import { ExpandableMarketingCardWrapper } from '../components/ExpandableMarketingCardWrapper.importable';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -40,6 +40,7 @@ import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
+import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -67,7 +68,6 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 				display: grid;
 				width: 100%;
 				margin-left: 0;
-
 				grid-column-gap: 10px;
 
 				/*
@@ -78,6 +78,7 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					Main content
 					Right Column
 
+					Duplicate lines are required to ensure the left column does not have extra vertical space.
 				*/
 				${from.wide} {
 					grid-template-columns: 219px 1px 1020px;
@@ -86,7 +87,10 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 						'.      border  standfirst'
 						'lines  border  media'
 						'meta   border  media'
-						'meta   border  submeta';
+						'uscard border  media'
+						'uscard border  submeta'
+						'uscard border  .'
+						'uscard border  .';
 				}
 
 				${until.wide} {
@@ -96,7 +100,10 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 						'.      border  standfirst  standfirst standfirst'
 						'lines  border  media       media      media'
 						'meta   border  media       media      media'
-						'meta   border  submeta     submeta    submeta';
+						'uscard border  media       media      media'
+						'uscard border  submeta     submeta    submeta'
+						'uscard border  .           .          .'
+						'uscard border  .           .          .';
 				}
 
 				/*
@@ -566,6 +573,22 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								/>
 							</ArticleContainer>
 						</GridItem>
+						{isWeb && (
+							<GridItem area="uscard" element="aside">
+								<Hide until="leftCol">
+									<Island
+										priority="enhancement"
+										defer={{ until: 'visible' }}
+									>
+										<ExpandableMarketingCardWrapper
+											guardianBaseURL={
+												article.guardianBaseURL
+											}
+										/>
+									</Island>
+								</Hide>
+							</GridItem>
+						)}
 					</PictureGrid>
 				</Section>
 

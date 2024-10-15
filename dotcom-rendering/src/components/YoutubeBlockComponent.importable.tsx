@@ -1,5 +1,6 @@
-import { type ArticleFormat, type ConsentState } from '@guardian/libs';
+import type { ConsentState } from '@guardian/libs';
 import { useEffect, useState } from 'react';
+import type { ArticleFormat } from '../lib/format';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import { Caption } from './Caption';

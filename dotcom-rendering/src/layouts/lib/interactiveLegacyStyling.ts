@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
 import { from, until } from '@guardian/source/foundations';
 import { center } from '../../lib/center';
+import { ArticleDesign } from '../../lib/format';
 import type { RoleType } from '../../types/content';
 
 export const isInteractive = (design: ArticleDesign): boolean =>

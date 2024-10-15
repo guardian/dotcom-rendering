@@ -1,14 +1,17 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
 import {
 	between,
-	body,
 	headlineBold24,
 	remSpace,
+	textEgyptian17,
 } from '@guardian/source/foundations';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import type { EditionId } from '../lib/edition';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+} from '../lib/format';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { revealStyles } from '../lib/revealStyles';
 import { palette as themePalette } from '../palette';
@@ -55,7 +58,8 @@ const globalOlStyles = () => css`
 		counter-reset: li;
 
 		> li:before {
-			${body.medium({ lineHeight: 'tight' })};
+			${textEgyptian17};
+			line-height: 1.15;
 			content: counter(li);
 			counter-increment: li;
 			margin-right: ${remSpace[1]};

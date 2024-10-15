@@ -1,8 +1,7 @@
 // ----- Imports ----- //
 
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat } from '../../articleFormat';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import {
 	map,

@@ -347,7 +347,7 @@ export const AbuseReportForm = ({
 
 					{!!errors.response && (
 						<InlineError
-							css={css`
+							cssOverrides={css`
 								color: ${errorColour};
 								padding-top: ${space[2]}px;
 							`}
@@ -358,7 +358,7 @@ export const AbuseReportForm = ({
 
 					{!!successMessage && (
 						<InlineSuccess
-							css={css`
+							cssOverrides={css`
 								color: ${schemedPalette(
 									'--discussion-report-success-text',
 								)};

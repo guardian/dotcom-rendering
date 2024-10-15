@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { createHash } from 'crypto';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign } from '../articleFormat';
 import { map, withDefault } from '../../vendor/@guardian/types/index';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';

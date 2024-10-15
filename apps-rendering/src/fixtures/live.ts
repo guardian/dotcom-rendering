@@ -1,12 +1,8 @@
 // ----- Imports ----- //
 
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleElementRole,
-	ArticlePillar,
-} from '@guardian/libs';
+import { ArticleElementRole } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../articleFormat';
 import { none, OptionKind, some } from '../../vendor/@guardian/types/index';
 import type { Option } from '../../vendor/@guardian/types/index';
 import { parse } from 'client/parser';
@@ -223,7 +219,7 @@ const tags = [
 ];
 
 const fields = {
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 	display: ArticleDisplay.Standard,
 	body: [],
 	headline: headline,

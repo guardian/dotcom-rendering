@@ -1,5 +1,5 @@
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '../lib/format';
 import { ConfigProvider } from './ConfigContext';
 import { RichLinkComponent } from './RichLinkComponent.importable';
 

@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../src/lib/format';
 
 export const defaultStoryExpanded = {
 	id: 'a76d998e-d4b0-4d00-8afb-773eddb4064c',

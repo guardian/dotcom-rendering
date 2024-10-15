@@ -2,7 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { ArticlePillar } from '@guardian/libs';
+import { Pillar } from '../../../articleFormat';
 import { article } from 'fixtures/item';
 import { text } from 'palette';
 import type { ReactElement } from 'react';
@@ -34,7 +34,7 @@ const styles = (kickerColor: string): SerializedStyles => {
 const Default = (): ReactElement => {
 	const item = {
 		...article,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	const kicker = text.editionsKicker(item);
 

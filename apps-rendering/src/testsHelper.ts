@@ -1,5 +1,9 @@
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	Pillar,
+} from 'articleFormat';
 import type { BodyElement } from 'bodyElement';
 import { flattenTextElement } from 'bodyElement';
 import { JSDOM } from 'jsdom';
@@ -12,7 +16,7 @@ import {
 } from 'renderer';
 
 const mockFormat: ArticleFormat = {
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
 };

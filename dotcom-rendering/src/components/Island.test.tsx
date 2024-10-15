@@ -2,9 +2,9 @@
  * @jest-environment node
  */
 
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { PropsWithChildren } from 'react';
 import { renderToString } from 'react-dom/server';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { AdPortals } from './AdPortals.importable';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { AppsEpic } from './AppsEpic.importable';
@@ -370,7 +370,13 @@ describe('Island: server-side rendering', () => {
 	});
 
 	test('ShowHideContainers', () => {
-		expect(() => renderToString(<ShowHideContainers />)).not.toThrow();
+		expect(() =>
+			renderToString(
+				<ShowHideContainers
+					disableFrontContainerToggleSwitch={false}
+				/>,
+			),
+		).not.toThrow();
 	});
 
 	test('SignInGateSelector', () => {

@@ -198,7 +198,7 @@ export const TopPick = ({
 						<Link
 							priority="primary"
 							href={comment.webUrl}
-							css={jumpToLinkStyles}
+							cssOverrides={jumpToLinkStyles}
 							onClick={(
 								e: React.MouseEvent<HTMLAnchorElement>,
 							) => {

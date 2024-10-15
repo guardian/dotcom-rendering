@@ -1,45 +1,98 @@
 /**
- * Helpers for working with the `Format` type from `@guardian/libs`
+ * Type definitions and helpers for `ArticleFormat`
  */
 
 // ----- Imports ----- //
 
-import type { ArticleFormat, ArticleTheme, Pillar } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticlePillar,
-	ArticleSpecial,
-} from '@guardian/libs';
 import { Optional } from 'optional';
+
+// ----- Types ----- //
+
+enum ArticleDesign {
+	Standard,
+	Picture,
+	Gallery,
+	Audio,
+	Video,
+	Review,
+	Analysis,
+	Explainer,
+	Comment,
+	Letter,
+	Feature,
+	LiveBlog,
+	DeadBlog,
+	Recipe,
+	MatchReport,
+	Interview,
+	Editorial,
+	Quiz,
+	Interactive,
+	PhotoEssay,
+	Obituary,
+	Correction,
+	FullPageInteractive,
+	NewsletterSignup,
+	Timeline,
+	Profile,
+}
+
+enum ArticleDisplay {
+	Standard,
+	Immersive,
+	Showcase,
+	NumberedList,
+}
+
+enum Pillar {
+	News = 0,
+	Opinion = 1,
+	Sport = 2,
+	Culture = 3,
+	Lifestyle = 4,
+}
+
+enum ArticleSpecial {
+	SpecialReport = 5,
+	Labs = 6,
+	SpecialReportAlt = 7,
+}
+
+type ArticleTheme = Pillar | ArticleSpecial;
+
+interface ArticleFormat {
+	theme: ArticleTheme;
+	design: ArticleDesign;
+	display: ArticleDisplay;
+}
 
 // ----- Functions ----- //
 
 /**
  * Attempts to parse a pillar expressed as a `string` into an
- * {@linkcode ArticlePillar}. Uses the pillar id format provided by CAPI; for
+ * {@linkcode Pillar}. Uses the pillar id format provided by CAPI; for
  * example `"pillar/news"`. Note that CAPI uses `"pillar/arts"` for
  * the culture pillar.
  *
  * @param pillarId A pillar expressed as a `string`, e.g. `"pillar/news"`.
  * @returns An `Optional`, with a `Some` corresponding to an
- * {@linkcode ArticlePillar} if the id is valid, otherwise `None`.
+ * {@linkcode Pillar} if the id is valid, otherwise `None`.
  *
  * @example
- * const maybePillar = getPillarFromId("pillar/arts") // Some<ArticlePillar.Culture>
+ * const maybePillar = getPillarFromId("pillar/arts") // Some<Pillar.Culture>
  */
 const getPillarFromId = (pillarId: string): Optional<Pillar> => {
 	switch (pillarId) {
 		case 'pillar/opinion':
-			return Optional.some(ArticlePillar.Opinion);
+			return Optional.some(Pillar.Opinion);
 		case 'pillar/sport':
-			return Optional.some(ArticlePillar.Sport);
+			return Optional.some(Pillar.Sport);
 		case 'pillar/arts':
-			return Optional.some(ArticlePillar.Culture);
+			return Optional.some(Pillar.Culture);
 		case 'pillar/lifestyle':
-			return Optional.some(ArticlePillar.Lifestyle);
+			return Optional.some(Pillar.Lifestyle);
 		case 'pillar/news':
-			return Optional.some(ArticlePillar.News);
+			return Optional.some(Pillar.News);
 		default:
 			return Optional.none();
 	}
@@ -47,68 +100,68 @@ const getPillarFromId = (pillarId: string): Optional<Pillar> => {
 
 /**
  * Does the same as {@linkcode getPillarFromId}, but falls back to
- * {@linkcode ArticlePillar.News} if parsing fails, instead of returning an
+ * {@linkcode Pillar.News} if parsing fails, instead of returning an
  * `Optional`.
  *
  * @param pillarId A pillar expressed as a `string`, e.g. `"pillar/news"`.
- * @returns An {@linkcode ArticlePillar} if the id is valid, otherwise
- * {@linkcode ArticlePillar.News}.
+ * @returns An {@linkcode Pillar} if the id is valid, otherwise
+ * {@linkcode Pillar.News}.
  *
  * @example
- * const pillar = getPillarOrElseNews("pillar/arts") // ArticlePillar.Culture
- * const pillar = getPillarOrElseNews("invalid id") // ArticlePillar.News
+ * const pillar = getPillarOrElseNews("pillar/arts") // Pillar.Culture
+ * const pillar = getPillarOrElseNews("invalid id") // Pillar.News
  */
 const getPillarOrElseNews = (pillarId: string): Pillar =>
-	getPillarFromId(pillarId).withDefault(ArticlePillar.News);
+	getPillarFromId(pillarId).withDefault(Pillar.News);
 
 /**
- * Converts an {@linkcode ArticlePillar} into a `string`. The `string` will be
+ * Converts an {@linkcode Pillar} into a `string`. The `string` will be
  * in the pillar id format used by CAPI; for example `"pillar/news"`. Note that
  * CAPI uses `"pillar/arts"` for the culture pillar.
  *
- * @param pillar An {@linkcode ArticlePillar}
+ * @param pillar An {@linkcode Pillar}
  * @returns A pillar in `string` form, using the pillar id CAPI format
  *
  * @example
- * const pillarString = pillarToId(ArticlePillar.Culture) // "pillar/arts"
+ * const pillarString = pillarToId(Pillar.Culture) // "pillar/arts"
  */
 const pillarToId = (pillar: Pillar): string => {
 	switch (pillar) {
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return 'pillar/opinion';
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return 'pillar/sport';
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return 'pillar/arts';
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return 'pillar/lifestyle';
-		case ArticlePillar.News:
+		case Pillar.News:
 			return 'pillar/news';
 	}
 };
 
 /**
- * Converts an {@linkcode ArticleTheme} into the {@linkcode ArticlePillar}
- * subset. For any `ArticleTheme` that isn't already an `ArticlePillar`, such
+ * Converts an {@linkcode ArticleTheme} into the {@linkcode Pillar}
+ * subset. For any `ArticleTheme` that isn't already an `Pillar`, such
  * as {@linkcode ArticleSpecial.SpecialReport}, will fall back to
- * {@linkcode ArticlePillar.News}.
+ * {@linkcode Pillar.News}.
  *
  * @param theme An {@linkcode ArticleTheme}
- * @returns An {@linkcode ArticlePillar}
+ * @returns An {@linkcode Pillar}
  *
  * @example
- * const themeOne: ArticleTheme = ArticlePillar.Lifestyle
- * const pillar: ArticlePillar = themeToPillar(themeOne) // ArticlePillar.Lifestyle
+ * const themeOne: ArticleTheme = Pillar.Lifestyle
+ * const pillar: Pillar = themeToPillar(themeOne) // Pillar.Lifestyle
  *
  * const themeTwo: ArticleTheme = ArticleSpecial.SpecialReport
- * const pillar: ArticlePillar = themeToPillar(themeTwo) // ArticlePillar.News
+ * const pillar: Pillar = themeToPillar(themeTwo) // Pillar.News
  */
 const themeToPillar = (theme: ArticleTheme): Pillar => {
 	switch (theme) {
 		case ArticleSpecial.SpecialReport:
 		case ArticleSpecial.SpecialReportAlt:
 		case ArticleSpecial.Labs:
-			return ArticlePillar.News;
+			return Pillar.News;
 		default:
 			return theme;
 	}
@@ -161,8 +214,6 @@ const designToString = (design: ArticleDesign): string => {
 			return 'Interactive';
 		case ArticleDesign.PhotoEssay:
 			return 'Photo Essay';
-		case ArticleDesign.PrintShop:
-			return 'Print Shop';
 		case ArticleDesign.Obituary:
 			return 'Obituary';
 		case ArticleDesign.Correction:
@@ -209,15 +260,15 @@ const displayToString = (display: ArticleDisplay): string => {
  */
 const themeToString = (theme: ArticleTheme): string => {
 	switch (theme) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return 'News';
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return 'Opinion';
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return 'Sport';
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return 'Culture';
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return 'Lifestyle';
 		case ArticleSpecial.Labs:
 			return 'Labs';
@@ -245,6 +296,12 @@ const formatToString = ({ design, display, theme }: ArticleFormat): string =>
 // ----- Exports ----- //
 
 export {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	ArticleTheme,
+	ArticleFormat,
+	Pillar,
 	formatToString,
 	getPillarFromId,
 	getPillarOrElseNews,

@@ -127,7 +127,7 @@ export const KeyEventCard = ({
 		<li css={listItemStyles}>
 			<Link
 				priority="secondary"
-				css={[linkStyles, isSummary && summaryStyles]}
+				cssOverrides={css([linkStyles, isSummary && summaryStyles])}
 				href={url}
 				data-link-name={`key event card | ${cardPosition}`}
 			>

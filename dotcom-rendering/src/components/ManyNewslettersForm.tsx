@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headlineObjectStyles,
+	headlineBold24,
 	palette,
 	space,
 } from '@guardian/source/foundations';
@@ -96,10 +96,7 @@ const signUpButtonStyle = css`
 `;
 
 const successMessageStyle = css`
-	${headlineObjectStyles.xsmall({
-		lineHeight: 'tight',
-		fontWeight: 'bold',
-	})}
+	${headlineBold24};
 
 	padding-bottom: ${space[12]}px;
 	max-width: 340px;

@@ -3,7 +3,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '@guardian/libs';
+} from '../lib/format';
 import type { DCRContainerPalette } from '../types/front';
 import { cardHasDarkBackground } from './cardHelpers';
 

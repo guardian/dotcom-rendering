@@ -1,5 +1,5 @@
-import { type ArticleFormat } from '@guardian/libs';
 import { decideFormat } from '../lib/decideFormat';
+import { type ArticleFormat } from '../lib/format';
 import { useApi } from '../lib/useApi';
 import type { RichLinkBlockElement, StarRating } from '../types/content';
 import type { FEFormat } from '../types/frontend';

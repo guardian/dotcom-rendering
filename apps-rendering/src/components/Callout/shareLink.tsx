@@ -63,7 +63,7 @@ You can share your story by using the form on this article, or by contacting the
 					size="xsmall"
 					priority="subdued"
 					onClick={onShare}
-					css={calloutSharelink}
+					cssOverrides={calloutSharelink}
 				>
 					Please share this callout
 					{isCopied && (

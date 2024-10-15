@@ -2,7 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '../../../articleFormat';
 import {
 	from,
 	headlineBold17,

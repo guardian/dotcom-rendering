@@ -1,5 +1,5 @@
-import { type ArticleTheme, Pillar } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
+import { type ArticleTheme, Pillar } from '../lib/format';
 import type { FELinkType, FENavType } from '../types/frontend';
 import { findPillar } from './find-pillar';
 

@@ -1,4 +1,4 @@
-import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import { ArticleDisplay, ArticleSpecial } from '../../articleFormat';
 import type { DefaultProps } from './HeadingTwo.defaults';
 import DefaultHeadingTwo, { defaultStyles } from './HeadingTwo.defaults';
 import ImmersiveHeadingTwo from './ImmersiveHeadingTwo';

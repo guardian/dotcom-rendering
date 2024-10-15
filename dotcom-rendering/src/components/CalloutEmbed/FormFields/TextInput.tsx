@@ -23,7 +23,7 @@ export const TextInput = ({
 	<SourceTextInput
 		hideLabel={formField.hideLabel}
 		error={validationErrors?.[formField.id]}
-		css={textInputStyles}
+		cssOverrides={textInputStyles}
 		data-testid={`form-field-${formField.id}`}
 		type={formField.type}
 		label={formField.label}

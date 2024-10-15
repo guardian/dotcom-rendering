@@ -189,7 +189,7 @@ export const ContributionsEpicReminderSignedOut: ReactComponent<
 										reminderStatus ===
 										ReminderStatus.Submitting
 									}
-									css={getCustomSubmitStyles(
+									cssOverrides={getCustomSubmitStyles(
 										reminderStatus ===
 											ReminderStatus.Submitting,
 									)}

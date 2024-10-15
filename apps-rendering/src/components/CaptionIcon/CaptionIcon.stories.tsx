@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../articleFormat';
 import CaptionIcon, { CaptionIconVariant } from '.';
 
 // ----- Stories ----- //
@@ -10,7 +10,7 @@ const Image = () => (
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 		variant={CaptionIconVariant.Image}
 	></CaptionIcon>
@@ -21,7 +21,7 @@ const Video = () => (
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 		variant={CaptionIconVariant.Video}
 	></CaptionIcon>

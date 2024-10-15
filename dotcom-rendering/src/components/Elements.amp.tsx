@@ -1,10 +1,10 @@
+import { isNonNullable } from '@guardian/libs';
+import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import {
 	ArticleDesign,
 	type ArticleFormat,
 	type ArticleTheme,
-	isNonNullable,
-} from '@guardian/libs';
-import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
+} from '../lib/format';
 import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';

@@ -2,8 +2,8 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css, jsx as styledH } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleElementRole } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat } from '../../articleFormat';
+import { ArticleElementRole } from '@guardian/libs';
 import { neutral } from '@guardian/source/foundations';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { Image } from 'image';

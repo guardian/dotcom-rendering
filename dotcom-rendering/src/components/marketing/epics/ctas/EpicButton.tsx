@@ -106,11 +106,11 @@ export const EpicButton: ReactComponent<Props> = (allProps: Props) => {
 					target="_blank"
 					rel="noopener noreferrer"
 					priority={isTertiary ? 'primary' : priority}
-					css={
+					cssOverrides={css(
 						isTertiary
 							? [tertiaryButtonOverrides, cssOverrides]
-							: cssOverrides
-					}
+							: cssOverrides,
+					)}
 					{...props}
 				>
 					{children}
@@ -125,11 +125,11 @@ export const EpicButton: ReactComponent<Props> = (allProps: Props) => {
 				icon={showArrow ? <SvgArrowRightStraight /> : undefined}
 				onClick={(): void => onClickAction()}
 				priority={isTertiary ? 'primary' : priority}
-				css={
+				cssOverrides={css(
 					isTertiary
 						? [tertiaryButtonOverrides, cssOverrides]
-						: cssOverrides
-				}
+						: cssOverrides,
+				)}
 				{...props}
 			>
 				{children}

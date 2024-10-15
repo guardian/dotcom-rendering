@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	defaultFormats,
 	splitTheme,
 } from '../../.storybook/decorators/splitThemeDecorator';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { palette as themePalette } from '../palette';
 import {
 	CopyNativeShareButton,

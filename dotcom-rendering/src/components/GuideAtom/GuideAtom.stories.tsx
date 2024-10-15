@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import {
 	analysisStoryExpanded,
@@ -10,6 +9,7 @@ import {
 	listStoryExpanded,
 	orderedListStoryExpanded,
 } from '../../../fixtures/manual/guideAtom';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/format';
 import { palette } from '../../palette';
 import { GuideAtom } from './GuideAtom';
 

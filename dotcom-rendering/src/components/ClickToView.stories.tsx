@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
+import { textSans17 } from '@guardian/source/foundations';
+import type { StoryObj } from '@storybook/react';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '@guardian/libs';
-import { textSans17 } from '@guardian/source/foundations';
-import type { StoryObj } from '@storybook/react';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+} from '../lib/format';
 import type {
 	DocumentBlockElement,
 	EmbedBlockElement,

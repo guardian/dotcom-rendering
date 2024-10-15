@@ -1,6 +1,10 @@
 // ----- Imports ----- //
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+} from '../../articleFormat';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import AnalysisStandfirst from './AnalysisStandfirst';

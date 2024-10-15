@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
+import { breakpoints, palette } from '@guardian/source/foundations';
+import type { StoryObj } from '@storybook/react';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
 	Pillar,
-} from '@guardian/libs';
-import { breakpoints, palette } from '@guardian/source/foundations';
-import type { StoryObj } from '@storybook/react';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+} from '../lib/format';
 import { Caption } from './Caption';
 import { Section } from './Section';
 import { StarRating } from './StarRating/StarRating';

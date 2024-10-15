@@ -1,12 +1,16 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	Pillar,
+} from '../../articleFormat';
 import fetchMock from 'fetch-mock';
 import { campaignDescription, mockCampaign } from 'fixtures/campaign';
 import type { ReactElement } from 'react';
 import Callout from '.';
 
 const mockFormat: ArticleFormat = {
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
 };

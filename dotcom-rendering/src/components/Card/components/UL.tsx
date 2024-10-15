@@ -38,7 +38,7 @@ const marginBottomStyles = (isFlexibleContainer: boolean) => css`
 	margin-bottom: ${isFlexibleContainer ? space[6] : space[3]}px;
 `;
 
-const topBarStyles = css`
+const topBarStyles = (splitTopBar: boolean) => css`
 	${from.tablet} {
 		padding-top: 8px;
 		::before {
@@ -49,7 +49,17 @@ const topBarStyles = css`
 			left: 10px;
 			width: calc(100% - 20px);
 			height: 1px;
-			background-color: ${palette('--card-border-top')};
+			${splitTopBar
+				? `background-image: linear-gradient(
+				to right,
+				${palette('--card-border-top')},
+				${palette('--card-border-top')} calc(50% - 10px),
+				rgba(0, 0, 0, 0) calc(50% - 10px),
+				rgba(0, 0, 0, 0) calc(50% + 10px),
+				${palette('--card-border-top')} calc(50% + 10px),
+				${palette('--card-border-top')}
+			)`
+				: `background-color: ${palette('--card-border-top')};`}
 		}
 	}
 `;
@@ -66,6 +76,8 @@ type Props = {
 	wrapCards?: boolean;
 	/** Used to display a full width bar along the top of the container */
 	showTopBar?: boolean;
+	/** Used to add a gap in the center of the top bar */
+	splitTopBar?: boolean;
 	/** Used to give flexible container stories additional space */
 	isFlexibleContainer?: boolean;
 };
@@ -78,6 +90,7 @@ export const UL = ({
 	wrapCards = false,
 	showTopBar = false,
 	isFlexibleContainer = false,
+	splitTopBar = false,
 }: Props) => {
 	return (
 		<ul
@@ -86,7 +99,7 @@ export const UL = ({
 				showDivider && verticalDivider(palette('--section-border')),
 				padBottom && marginBottomStyles(isFlexibleContainer),
 				wrapCards && wrapStyles,
-				showTopBar && topBarStyles,
+				showTopBar && topBarStyles(splitTopBar),
 			]}
 		>
 			{children}

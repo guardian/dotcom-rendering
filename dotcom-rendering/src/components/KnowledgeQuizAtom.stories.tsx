@@ -1,9 +1,3 @@
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
@@ -13,6 +7,12 @@ import {
 	resultGroups,
 } from '../../fixtures/manual/knowledgeQuizAtom';
 import { sharingUrls } from '../../fixtures/manual/sharingUrls';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '../lib/format';
 import { KnowledgeQuizAtom } from './KnowledgeQuizAtom.importable';
 
 const meta = {

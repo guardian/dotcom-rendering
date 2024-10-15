@@ -3,7 +3,7 @@
 import { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import { CampaignFields } from '@guardian/apps-rendering-api-models/campaignFields';
 import { ParticipationFields } from '@guardian/apps-rendering-api-models/participationFields';
-import { ArticleSpecial } from '@guardian/libs';
+import { ArticleSpecial } from 'articleFormat';
 import { Int64 } from 'thrift';
 import { getCallout, getReport } from 'campaign';
 

@@ -1,6 +1,10 @@
 // ----- Imports ----- //
 
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+} from '../../articleFormat';
 import SpecialReportAltAtom from '.';
 
 // ----- Stories ----- //

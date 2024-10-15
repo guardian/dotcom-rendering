@@ -1,6 +1,4 @@
 import { css, Global } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleSpecial } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -20,6 +18,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import type { EditionId } from '../lib/edition';
+import { type ArticleFormat, ArticleSpecial } from '../lib/format';
 import { getZIndex } from '../lib/getZIndex';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { renderElement } from '../lib/renderElement';

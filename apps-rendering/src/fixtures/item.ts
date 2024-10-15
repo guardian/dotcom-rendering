@@ -1,14 +1,14 @@
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
-import type { ArticleTheme } from '@guardian/libs';
+import { ArticleElementRole } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticleElementRole,
 	ArticleSpecial,
+	type ArticleTheme,
 	Pillar,
-} from '@guardian/libs';
+} from '../articleFormat';
 import { none, OptionKind, some } from '../../vendor/@guardian/types/index';
 import type { Option } from '../../vendor/@guardian/types/index';
 import type { Body } from 'bodyElement';
@@ -32,7 +32,6 @@ import type {
 	NewsletterSignup,
 	Obituary,
 	PhotoEssay,
-	PrintShop,
 	Quiz,
 	Recipe,
 	Review,
@@ -519,11 +518,6 @@ const correction: Item = {
 	...fields,
 };
 
-const printShop: PrintShop = {
-	design: ArticleDesign.PrintShop,
-	...fields,
-};
-
 const photoEssay: PhotoEssay = {
 	design: ArticleDesign.PhotoEssay,
 	...fields,
@@ -595,7 +589,6 @@ export {
 	matchReport,
 	cartoon,
 	correction,
-	printShop,
 	photoEssay,
 	recipe,
 	quiz,

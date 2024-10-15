@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import type { ChoiceInfo } from './ThreeTierChoiceCards';
 
 export const ChoiceCardTestData_REGULAR: ChoiceInfo[] = [
@@ -13,8 +14,27 @@ export const ChoiceCardTestData_REGULAR: ChoiceInfo[] = [
 	},
 	{
 		supportTier: 'SupporterPlus',
-		label: (amount: number, currencySymbol: string): string =>
-			`Support ${currencySymbol}${amount}/month`,
+		label: (
+			amount: number,
+			currencySymbol: string,
+			discount?: number,
+		): JSX.Element | string => {
+			if (!isUndefined(discount)) {
+				return (
+					<>
+						Support{' '}
+						<s>
+							{currencySymbol}
+							{amount}
+						</s>{' '}
+						{currencySymbol}
+						{amount * discount}/month{' '}
+					</>
+				);
+			} else {
+				return `Support ${currencySymbol}${amount}/month`;
+			}
+		},
 		benefitsLabel: 'All-access digital',
 		benefits: () => [
 			'Unlimited access to the Guardian app',

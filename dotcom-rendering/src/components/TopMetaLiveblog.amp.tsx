@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
 import {
 	headlineMedium17,
 	headlineMedium28,
@@ -7,6 +6,7 @@ import {
 } from '@guardian/source/foundations';
 import { string as curly } from 'curlyquotes';
 import { getAgeWarning } from '../lib/age-warning';
+import type { ArticleTheme } from '../lib/format';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import { getSharingUrls } from '../lib/sharing-urls';
 import type { AMPArticleModel } from '../types/article.amp';

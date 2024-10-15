@@ -2,7 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../../articleFormat';
 import { remSpace } from '@guardian/source/foundations';
 import {
 	Column,
@@ -53,7 +53,7 @@ const LiveblogHeader = ({ item }: Props) => {
 
 	return (
 		<header>
-			<Container element="div" css={containerStyles(format)}>
+			<Container element="div" cssOverrides={containerStyles(format)}>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
 						<Hide until="desktop">
@@ -76,7 +76,10 @@ const LiveblogHeader = ({ item }: Props) => {
 					</Column>
 				</Columns>
 			</Container>
-			<Container element="div" css={standfirstContainerStyles(format)}>
+			<Container
+				element="div"
+				cssOverrides={standfirstContainerStyles(format)}
+			>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
 						<Hide below="desktop">

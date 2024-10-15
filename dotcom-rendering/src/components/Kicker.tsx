@@ -13,7 +13,8 @@ type Props = {
 	text: string;
 	color: string;
 	showPulsingDot?: boolean;
-	hideLineBreak?: boolean;
+	/** Inline kickers inherit the font styles (in terms of sizing) of the parent */
+	isInline?: boolean;
 	/** Controls the weight of the standard, non-live kicker. Defaults to regular */
 	fontWeight?: 'regular' | 'bold';
 };
@@ -40,11 +41,14 @@ const liveTextStyles = css`
 	padding: 0 ${space[1]}px;
 `;
 
-const hideLineBreakStyles = css`
+const inlineKickerStyles = css`
 	display: inline-block;
 	margin-right: ${space[1]}px;
 	/** Unset the padding-bottom from standard kicker */
 	padding-bottom: 0;
+	/** Deliberately inherit the font size and line height from the parent when inline */
+	font-size: inherit;
+	line-height: inherit;
 `;
 
 /**
@@ -56,29 +60,27 @@ export const Kicker = ({
 	text,
 	color,
 	showPulsingDot,
-	hideLineBreak,
+	isInline,
 	fontWeight = 'regular',
 }: Props) => {
-	/** @todo
+	/**
+	 * @todo
 	 * Future optimisation is to not have color as a prop, but to infer this through format and CSS vars.
 	 * This would also allow showPulsingDot to be inferred from the format (is LiveBlog)
 	 */
 	const isLiveKicker = !!showPulsingDot;
 
-	const textStyles = () => {
-		if (isLiveKicker) {
-			return liveTextStyles;
-		} else {
-			return [
-				standardTextStyles,
-				fontWeight === 'bold' && boldTextOverrideStyles,
-			];
-		}
-	};
-
 	return (
 		<div
-			css={[textStyles(), hideLineBreak && hideLineBreakStyles]}
+			css={[
+				isLiveKicker
+					? liveTextStyles
+					: [
+							standardTextStyles,
+							fontWeight === 'bold' && boldTextOverrideStyles,
+					  ],
+				isInline && inlineKickerStyles,
+			]}
 			style={{
 				color: isLiveKicker ? palette('--kicker-text-live') : color,
 				backgroundColor: isLiveKicker

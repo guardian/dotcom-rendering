@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../articleFormat';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
 import {
 	analysis,
@@ -22,7 +22,7 @@ const Default = (): ReactElement => (
 		item={{
 			...article,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -32,7 +32,7 @@ const Review = (): ReactElement => (
 		item={{
 			...review,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.Culture,
+			theme: Pillar.Culture,
 		}}
 	/>
 );
@@ -42,7 +42,7 @@ const Feature = (): ReactElement => (
 		item={{
 			...feature,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.Sport,
+			theme: Pillar.Sport,
 		}}
 	/>
 );
@@ -52,7 +52,7 @@ const Comment = (): ReactElement => (
 		item={{
 			...comment,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.Opinion,
+			theme: Pillar.Opinion,
 		}}
 	/>
 );
@@ -62,7 +62,7 @@ const Link = (): ReactElement => (
 		item={{
 			...articleWithStandfirstLink,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -94,7 +94,7 @@ const Analysis = (): ReactElement => (
 		item={{
 			...analysis,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.Culture,
+			theme: Pillar.Culture,
 		}}
 	/>
 );

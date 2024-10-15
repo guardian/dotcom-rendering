@@ -1,5 +1,5 @@
 // ----- Imports ----- //
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../articleFormat';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { parse } from 'client/parser';
 import HeadlineByline from './';
@@ -19,7 +19,7 @@ const mockBylineHtml = (): Option<DocumentFragment> =>
 const Default = () => (
 	<HeadlineByline
 		format={{
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.Interview,
 			display: ArticleDisplay.Standard,
 		}}

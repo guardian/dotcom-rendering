@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
+import { breakpoints } from '@guardian/source/foundations';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '@guardian/libs';
-import { breakpoints } from '@guardian/source/foundations';
+} from '../lib/format';
 import { Toast } from './Toast';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (

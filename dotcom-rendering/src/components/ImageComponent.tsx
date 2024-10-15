@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	type ArticleFormat,
-	isUndefined,
-} from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	headlineLight17,
@@ -14,6 +9,11 @@ import {
 	palette as srcPalette,
 	until,
 } from '@guardian/source/foundations';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+} from '../lib/format';
 import { getLargest, getMaster } from '../lib/image';
 import { palette as themePalette } from '../palette';
 import type {

@@ -1,5 +1,5 @@
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { JSDOM } from 'jsdom';
+import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import type { BlockquoteBlockElement, FEElement } from '../types/content';
 
 const isQuoted = (element: BlockquoteBlockElement): boolean => {

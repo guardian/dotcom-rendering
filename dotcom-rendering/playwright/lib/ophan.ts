@@ -9,7 +9,7 @@ const interceptOphanRequest = ({
 	searchParamMatcher,
 }: {
 	page: Page;
-	path: string;
+	path: typeof IMPRESSION_REQUEST_PATH | typeof ADDITIONAL_REQUEST_PATH;
 	searchParamMatcher: (searchParams: URLSearchParams) => boolean;
 }): Promise<Request> => {
 	return page.waitForRequest((request) => {

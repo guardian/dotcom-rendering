@@ -1,10 +1,10 @@
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '@guardian/libs';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+} from '../lib/format';
 import { StarRatingBlockComponent } from './StarRatingBlockComponent';
 
 const articleFormat: ArticleFormat = {

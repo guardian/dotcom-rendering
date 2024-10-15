@@ -1,4 +1,4 @@
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from 'articleFormat';
 import AdSlot from 'adSlot';
 import Paragraph from 'components/Paragraph';
 import type { ReactNode } from 'react';

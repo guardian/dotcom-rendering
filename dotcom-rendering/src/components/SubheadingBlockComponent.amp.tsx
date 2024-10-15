@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import { type ArticleTheme, ArticleSpecial as Special } from '@guardian/libs';
 import {
 	headlineMedium20,
 	headlineMedium34,
 	palette,
 	textSans20,
 } from '@guardian/source/foundations';
+import { type ArticleTheme, ArticleSpecial as Special } from '../lib/format';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 
 const style = (pillar: ArticleTheme) => css`

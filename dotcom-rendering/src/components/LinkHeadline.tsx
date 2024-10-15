@@ -22,7 +22,7 @@ type Props = {
 	showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
 	kickerText?: string;
 	showPulsingDot?: boolean;
-	hideLineBreak?: boolean;
+	hasInlineKicker?: boolean;
 	showQuotes?: boolean; // When true the QuoteIcon is shown
 	size?: SmallHeadlineSize;
 	link?: HeadlineLink; // An optional link object configures if/how the component renders an anchor tag
@@ -80,7 +80,7 @@ export const LinkHeadline = ({
 	showUnderline = false,
 	kickerText,
 	showPulsingDot,
-	hideLineBreak,
+	hasInlineKicker,
 	isLabs,
 	showQuotes = false,
 	size = 'medium',
@@ -94,7 +94,7 @@ export const LinkHeadline = ({
 					text={kickerText}
 					color={palette('--link-kicker-text')}
 					showPulsingDot={showPulsingDot}
-					hideLineBreak={hideLineBreak}
+					isInline={hasInlineKicker}
 				/>
 			)}
 			{showQuotes && <QuoteIcon colour={palette('--link-kicker-text')} />}

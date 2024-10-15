@@ -1,7 +1,8 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headlineObjectStyles,
+	headlineBold17,
+	headlineMedium24,
 	palette,
 	space,
 } from '@guardian/source/foundations';
@@ -85,13 +86,7 @@ interface CaptionProps {
 	forDesktop?: boolean;
 }
 const Caption = ({ count, forDesktop = false }: CaptionProps) => {
-	const typography = forDesktop
-		? headlineObjectStyles.xsmall({
-				fontWeight: 'regular',
-		  })
-		: headlineObjectStyles.xxxsmall({
-				fontWeight: 'bold',
-		  });
+	const typography = forDesktop ? headlineMedium24 : headlineBold17;
 
 	return (
 		<div

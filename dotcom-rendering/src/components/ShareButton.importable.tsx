@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { palette, until } from '@guardian/source/foundations';
 import type { Size } from '@guardian/source/react-components';
 import {
@@ -9,6 +8,7 @@ import {
 	SvgShareWeb,
 } from '@guardian/source/react-components';
 import { useEffect, useMemo, useState } from 'react';
+import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import { transparentColour } from '../lib/transparentColour';
 import { palette as themePalette } from '../palette';
 
@@ -118,13 +118,13 @@ export const CopyNativeShareButton = ({
 			priority="tertiary"
 			iconSide="left"
 			icon={isCopied ? <SvgCheckmark /> : <SvgShareWeb />}
-			css={[
+			cssOverrides={css([
 				...(isCopied
 					? [copiedButtonStyles(sizeXSmall)]
 					: [buttonStyles(sizeXSmall)]),
 				sharedButtonStyles(sizeXSmall),
 				isLiveBlogMeta && liveBlogMobileMeta(isCopied),
-			]}
+			])}
 		>
 			{isCopied ? 'Link copied' : 'Share'}
 		</Button>
@@ -149,11 +149,11 @@ export const EmailLink = ({
 			priority="tertiary"
 			iconSide="left"
 			icon={<SvgShareWeb />}
-			css={[
+			cssOverrides={css([
 				buttonStyles(sizeXSmall),
 				sharedButtonStyles(sizeXSmall),
 				isLiveBlogMeta && liveBlogMobileMeta(false),
-			]}
+			])}
 		>
 			Share
 		</LinkButton>

@@ -1,12 +1,63 @@
-import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	isString,
-	Pillar,
-} from '@guardian/libs';
+import { isString } from '@guardian/libs';
 import type { FEDesign, FEDisplay, FEFormat, FETheme } from '../types/frontend';
+
+export enum ArticleDesign {
+	Standard,
+	Picture,
+	Gallery,
+	Audio,
+	Video,
+	Review,
+	Analysis,
+	Explainer,
+	Comment,
+	Letter,
+	Feature,
+	LiveBlog,
+	DeadBlog,
+	Recipe,
+	MatchReport,
+	Interview,
+	Editorial,
+	Quiz,
+	Interactive,
+	PhotoEssay,
+	Obituary,
+	Correction,
+	FullPageInteractive,
+	NewsletterSignup,
+	Timeline,
+	Profile,
+}
+
+export enum ArticleDisplay {
+	Standard,
+	Immersive,
+	Showcase,
+	NumberedList,
+}
+
+export enum Pillar {
+	News = 0,
+	Opinion = 1,
+	Sport = 2,
+	Culture = 3,
+	Lifestyle = 4,
+}
+
+export enum ArticleSpecial {
+	SpecialReport = 5,
+	Labs = 6,
+	SpecialReportAlt = 7,
+}
+
+export type ArticleTheme = Pillar | ArticleSpecial;
+
+export interface ArticleFormat {
+	theme: ArticleTheme;
+	design: ArticleDesign;
+	display: ArticleDisplay;
+}
 
 export const getThemeNameAsString = (format: ArticleFormat): string => {
 	const themeName = Pillar[format.theme] ?? ArticleSpecial[format.theme];
@@ -98,8 +149,6 @@ const designToFEDesign = (design: ArticleDesign): FEDesign => {
 			return 'InteractiveDesign';
 		case ArticleDesign.PhotoEssay:
 			return 'PhotoEssayDesign';
-		case ArticleDesign.PrintShop:
-			return 'PrintShopDesign';
 		case ArticleDesign.Obituary:
 			return 'ObituaryDesign';
 		case ArticleDesign.FullPageInteractive:

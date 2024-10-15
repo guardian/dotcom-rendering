@@ -1,6 +1,6 @@
-import type { ArticleFormat } from '@guardian/libs';
 import { Fragment } from 'react';
 import type { EditionId } from '../lib/edition';
+import type { ArticleFormat } from '../lib/format';
 import { getLiveblogAdPositions } from '../lib/getLiveblogAdPositions';
 import type { ServerSideTests, Switches } from '../types/config';
 import { AdPlaceholder } from './AdPlaceholder.apps';

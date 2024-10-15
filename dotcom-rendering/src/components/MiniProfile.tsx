@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { type ArticleFormat } from '@guardian/libs';
 import { neutral, space, textSans14 } from '@guardian/source/foundations';
 import sanitise from 'sanitize-html';
+import type { ArticleFormat } from '../lib/format';
 import { slugify } from '../model/enhance-H2s';
 import { palette } from '../palette';
 import type { MiniProfile as MiniProfileModel } from '../types/content';

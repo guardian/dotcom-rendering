@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat } from '../../articleFormat';
 import { remSpace } from '@guardian/source/foundations';
 import { SvgCamera, SvgVideo } from '@guardian/source/react-components';
 import { fill } from 'palette';

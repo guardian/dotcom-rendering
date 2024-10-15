@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign } from '../../articleFormat';
 import {
 	brandAltBackground,
 	brandAltLine,

@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from 'articleFormat';
 import { formatToString } from 'articleFormat';
 
 // ----- Tests ----- //
@@ -10,7 +10,7 @@ describe('formatToString', () => {
 		const format = formatToString({
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Immersive,
-			theme: ArticlePillar.Culture,
+			theme: Pillar.Culture,
 		});
 
 		expect(format).toBe(

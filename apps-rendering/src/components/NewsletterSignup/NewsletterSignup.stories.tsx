@@ -1,5 +1,5 @@
 // ----- Imports ----- //
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../articleFormat';
 import { ElementKind } from 'bodyElementKind';
 import NewsletterSignup from '.';
 
@@ -14,14 +14,14 @@ const Default = () => (
 				'Reviewing the most important stories on feminism and sexism and those fighting for equality',
 			name: 'The Week in Patriarchy',
 			frequency: 'Weekly',
-			theme: ArticlePillar.Opinion,
+			theme: Pillar.Opinion,
 			successDescription:
 				"We'll send you The Week in Patriarchy every week",
 		}}
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 		showByDefault={true}
 	/>
@@ -36,13 +36,13 @@ const NewsTheme = () => (
 				'Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning',
 			name: 'First Edition',
 			frequency: 'Every weekday',
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			successDescription: "We'll send you First Edition every weekday",
 		}}
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 		showByDefault={true}
 	/>

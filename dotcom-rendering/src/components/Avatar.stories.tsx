@@ -1,144 +1,127 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { allModes } from '../../.storybook/modes';
 import {
 	ArticleDesign,
 	ArticleDisplay,
+	type ArticleFormat,
 	ArticleSpecial,
+	type ArticleTheme,
 	Pillar,
-} from '@guardian/libs';
-import type { Meta, StoryObj } from '@storybook/react';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+} from '../lib/format';
 import { Avatar } from './Avatar';
 
-const meta: Meta<typeof Avatar> = {
+const meta = {
 	component: Avatar,
 	title: 'Components/Avatar',
 	decorators: [
-		(storyFn, context) => {
-			const format = {
-				theme: context.parameters.theme || Pillar.News,
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-			};
-			return splitTheme([format], { orientation: 'vertical' })(
-				storyFn,
-				context,
-			);
-		},
-		(storyFn, context) => (
+		(Story, context) => (
 			<div
 				style={{
 					height: context.parameters.size,
 					width: context.parameters.size,
 				}}
 			>
-				{storyFn()}
+				<Story />
 			</div>
 		),
 	],
-};
+	parameters: {
+		chromatic: {
+			modes: {
+				horizontal: allModes['vertical mobileMedium'],
+			},
+		},
+	},
+} satisfies Meta<typeof Avatar>;
 
 export default meta;
 
-const georgesMonbiot =
-	'https://uploads.guim.co.uk/2017/10/06/George-Monbiot,-L.png';
-const leahHarper = 'https://uploads.guim.co.uk/2017/10/06/Leah-Harper,-L.png';
-const sideLowe = 'https://uploads.guim.co.uk/2018/05/25/Sid_Lowe,_L.png';
+type Story = StoryObj<typeof meta>;
 
-type Story = StoryObj<typeof Avatar>;
+const standardStandardWithTheme = (theme: ArticleTheme): ArticleFormat => ({
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme,
+});
 
-export const Default: Story = {
+export const RoundMediumOpinionTheme = {
 	args: {
-		src: georgesMonbiot,
+		src: 'https://uploads.guim.co.uk/2017/10/06/George-Monbiot,-L.png',
 		alt: 'The alt of the image',
 		shape: 'round',
 	},
 	parameters: {
-		theme: Pillar.Opinion,
+		formats: [standardStandardWithTheme(Pillar.Opinion)],
 		size: '136px',
 	},
-	name: 'Round Medium, Opinion (Rich Links)',
-};
+	name: 'Round Medium, Opinion Theme (Rich Links)',
+} satisfies Story;
 
-export const CutOutShape: Story = {
+export const CutoutMediumOpinionTheme = {
+	...RoundMediumOpinionTheme,
 	args: {
-		src: georgesMonbiot,
-		alt: 'The alt of the image',
+		...RoundMediumOpinionTheme.args,
 		shape: 'cutout',
 	},
-	parameters: {
-		theme: Pillar.Opinion,
-		size: '136px',
-	},
-	name: 'Cutout Medium, Opinion (Rich Links)',
-};
+	name: 'Cutout Medium, Opinion Theme (Rich Links)',
+} satisfies Story;
 
-export const Large: Story = {
+export const RoundLargeLifestyleTheme = {
 	args: {
-		src: leahHarper,
+		src: 'https://uploads.guim.co.uk/2017/10/06/Leah-Harper,-L.png',
 		alt: 'The alt of the image',
 	},
 	parameters: {
-		theme: Pillar.Lifestyle,
+		formats: [standardStandardWithTheme(Pillar.Lifestyle)],
 		size: '140px',
 	},
-	name: 'Large, Lifestyle (Byline image - Desktop)',
-};
+	name: 'Round Large, Lifestyle Theme (Byline image - Desktop)',
+} satisfies Story;
 
-export const LargeNews: Story = {
+export const RoundLargeNewsTheme: Story = {
+	...RoundLargeLifestyleTheme,
+	parameters: {
+		...RoundLargeLifestyleTheme.parameters,
+		formats: [standardStandardWithTheme(Pillar.News)],
+	},
+	name: 'Round Large, News Theme (Byline image - Desktop)',
+} satisfies Story;
+
+export const RoundLargeCultureTheme: Story = {
+	...RoundLargeLifestyleTheme,
+	parameters: {
+		...RoundLargeLifestyleTheme.parameters,
+		formats: [standardStandardWithTheme(Pillar.Culture)],
+	},
+	name: 'Round Large, Culture Theme (Byline image - Desktop)',
+} satisfies Story;
+
+export const RoundLargeSpecialReportTheme: Story = {
+	...RoundLargeLifestyleTheme,
+	parameters: {
+		...RoundLargeLifestyleTheme.parameters,
+		formats: [standardStandardWithTheme(ArticleSpecial.SpecialReport)],
+	},
+	name: 'Round Large, SpecialReport Theme (Byline image - Desktop)',
+} satisfies Story;
+
+export const RoundLargeSpecialReportAltTheme: Story = {
+	...RoundLargeLifestyleTheme,
+	parameters: {
+		...RoundLargeLifestyleTheme.parameters,
+		formats: [standardStandardWithTheme(ArticleSpecial.SpecialReportAlt)],
+	},
+	name: 'Round Large, SpecialReportAlt Theme (Byline image - Desktop)',
+} satisfies Story;
+
+export const RoundSmallSportTheme = {
 	args: {
-		src: leahHarper,
+		src: 'https://uploads.guim.co.uk/2018/05/25/Sid_Lowe,_L.png',
 		alt: 'The alt of the image',
 	},
 	parameters: {
-		theme: Pillar.News,
-		size: '140px',
-	},
-	name: 'Large, News (Byline image - Desktop)',
-};
-
-export const LargeCulture: Story = {
-	args: {
-		src: leahHarper,
-		alt: 'The alt of the image',
-	},
-	parameters: {
-		theme: Pillar.Culture,
-		size: '140px',
-	},
-	name: 'Large, Culture (Byline image - Desktop)',
-};
-
-export const SpecialReport: Story = {
-	args: {
-		src: leahHarper,
-		alt: 'The alt of the image',
-	},
-	parameters: {
-		theme: ArticleSpecial.SpecialReport,
-		size: '140px',
-	},
-	name: 'Large SpecialReport',
-};
-
-export const SpecialReportAlt: Story = {
-	args: {
-		src: leahHarper,
-		alt: 'The alt of the image',
-	},
-	parameters: {
-		theme: ArticleSpecial.SpecialReportAlt,
-		size: '140px',
-	},
-	name: 'Large SpecialReportAlt',
-};
-
-export const Small: Story = {
-	args: {
-		src: sideLowe,
-		alt: 'The alt of the image',
-	},
-	parameters: {
-		theme: Pillar.Sport,
+		formats: [standardStandardWithTheme(Pillar.Sport)],
 		size: '60px',
 	},
-	name: 'Small, Sport (Byline image - Mobile)',
-};
+	name: 'Round Small, Sport Theme (Byline image - Mobile)',
+} satisfies Story;

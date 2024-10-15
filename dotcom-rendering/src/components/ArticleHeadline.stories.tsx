@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import { allModes } from '../../.storybook/modes';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '@guardian/libs';
-import type { Meta, StoryObj } from '@storybook/react';
-import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
-import { allModes } from '../../.storybook/modes';
+} from '../lib/format';
 import { formatToString, getAllThemes } from '../lib/format';
 import { palette } from '../palette';
 import { ArticleHeadline } from './ArticleHeadline';
@@ -228,18 +228,6 @@ export const ImmersiveDisplay = {
 			display: ArticleDisplay.Immersive,
 		},
 	},
-} satisfies Story;
-
-export const PrintShopDesignImmersiveDisplay = {
-	args: {
-		...StandardDesign.args,
-		format: {
-			...StandardDesign.args.format,
-			design: ArticleDesign.PrintShop,
-			display: ArticleDisplay.Immersive,
-		},
-	},
-	name: 'PrintShop Design, Immersive Display',
 } satisfies Story;
 
 export const CommentDesignImmersiveDisplay = {

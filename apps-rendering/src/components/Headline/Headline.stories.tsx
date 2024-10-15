@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDisplay, Pillar } from '../../articleFormat';
 import { some } from '../../../vendor/@guardian/types/index';
 import { analysis, article, feature, labs, review } from 'fixtures/item';
 import type { ReactElement } from 'react';
@@ -22,7 +22,7 @@ const Analysis = (): ReactElement => (
 		item={{
 			...analysis,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -32,7 +32,7 @@ const Feature = (): ReactElement => (
 		item={{
 			...feature,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );

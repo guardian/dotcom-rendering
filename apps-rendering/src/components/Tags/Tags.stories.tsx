@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../../articleFormat';
 import { article } from 'fixtures/item';
 import Tags from './';
 

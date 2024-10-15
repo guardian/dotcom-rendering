@@ -1,11 +1,12 @@
 // ----- Imports ----- //
 
-import type {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleFormat,
-} from '@guardian/libs';
-import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import {
+	type ArticleDesign,
+	type ArticleDisplay,
+	type ArticleFormat,
+	ArticleSpecial,
+	Pillar,
+} from '../articleFormat';
 import { themeToString } from 'articleFormat';
 
 // ----- Functions ----- //
@@ -15,11 +16,11 @@ const getAllThemes = (format: {
 	design: ArticleDesign;
 }): ArticleFormat[] => {
 	return [
-		{ ...format, theme: ArticlePillar.News },
-		{ ...format, theme: ArticlePillar.Sport },
-		{ ...format, theme: ArticlePillar.Culture },
-		{ ...format, theme: ArticlePillar.Lifestyle },
-		{ ...format, theme: ArticlePillar.Opinion },
+		{ ...format, theme: Pillar.News },
+		{ ...format, theme: Pillar.Sport },
+		{ ...format, theme: Pillar.Culture },
+		{ ...format, theme: Pillar.Lifestyle },
+		{ ...format, theme: Pillar.Opinion },
 		{ ...format, theme: ArticleSpecial.SpecialReport },
 		{ ...format, theme: ArticleSpecial.Labs },
 		{ ...format, theme: ArticleSpecial.SpecialReportAlt },

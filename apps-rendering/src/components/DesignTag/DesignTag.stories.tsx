@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '../../articleFormat';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
 import DesignTag from './';
 

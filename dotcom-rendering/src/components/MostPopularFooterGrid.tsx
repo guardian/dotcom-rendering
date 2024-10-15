@@ -154,7 +154,7 @@ export const MostPopularFooterGrid = ({
 					<div css={descriptionStyle}>
 						What readers are spending time with (
 						<Link
-							css={descriptionStyle}
+							cssOverrides={descriptionStyle}
 							href="https://www.theguardian.com/info/2024/feb/28/what-is-the-deeply-read-list"
 						>
 							Learn more

@@ -1,10 +1,7 @@
 // ----- Imports ----- //
 
-import {
-	ArticleDisplay,
-	ArticleElementRole,
-	ArticlePillar,
-} from '@guardian/libs';
+import { ArticleDisplay, Pillar } from '../../../articleFormat';
+import { ArticleElementRole } from '@guardian/libs';
 import { none, some } from '../../../../vendor/@guardian/types/index';
 import type { Contributor } from 'contributor';
 import {
@@ -55,7 +52,7 @@ const Default = (): ReactElement => (
 	<Headline
 		item={{
 			...article,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -64,7 +61,7 @@ const Analysis = (): ReactElement => (
 	<Headline
 		item={{
 			...analysis,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -73,7 +70,7 @@ const Feature = (): ReactElement => (
 	<Headline
 		item={{
 			...feature,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -82,7 +79,7 @@ const Review = (): ReactElement => (
 	<Headline
 		item={{
 			...review,
-			theme: ArticlePillar.Culture,
+			theme: Pillar.Culture,
 		}}
 	/>
 );
@@ -92,7 +89,7 @@ const Showcase = (): ReactElement => (
 		item={{
 			...review,
 			display: ArticleDisplay.Showcase,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -101,7 +98,7 @@ const Interview = (): ReactElement => (
 	<Headline
 		item={{
 			...interview,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -111,7 +108,7 @@ const Comment = (): ReactElement => (
 		item={{
 			...comment,
 			contributors,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -120,7 +117,7 @@ const Media = (): ReactElement => (
 	<Headline
 		item={{
 			...media,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );

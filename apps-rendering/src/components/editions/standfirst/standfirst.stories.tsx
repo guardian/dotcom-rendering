@@ -1,5 +1,5 @@
 // ----- Imports ----- //
-import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDisplay, Pillar } from '../../../articleFormat';
 import { neutral } from '@guardian/source/foundations';
 import { parse } from 'client/parser';
 import { analysis, article, comment, media } from 'fixtures/item';
@@ -24,7 +24,7 @@ const Default = (): ReactElement => (
 		item={{
 			...article,
 			standfirst,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -36,7 +36,7 @@ const Showcase = (): ReactElement => (
 			...article,
 			standfirst,
 			display: ArticleDisplay.Showcase,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -47,7 +47,7 @@ const Comment = (): ReactElement => (
 		item={{
 			...comment,
 			standfirst,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -58,7 +58,7 @@ const Analysis = (): ReactElement => (
 		item={{
 			...analysis,
 			standfirst,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -74,7 +74,7 @@ const Media = (): ReactElement => (
 			item={{
 				...media,
 				standfirst,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 		/>
 	</div>

@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../articleFormat';
 import { none } from '../../../vendor/@guardian/types/index';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
 import Follow from './';
@@ -18,7 +18,7 @@ const Default = () => (
 			},
 		]}
 		format={{
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 		}}
@@ -36,7 +36,7 @@ const Comment = () => (
 			},
 		]}
 		format={{
-			theme: ArticlePillar.Opinion,
+			theme: Pillar.Opinion,
 			design: ArticleDesign.Comment,
 			display: ArticleDisplay.Standard,
 		}}

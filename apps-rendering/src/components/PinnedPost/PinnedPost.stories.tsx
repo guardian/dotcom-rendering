@@ -1,8 +1,12 @@
 // ----- Imports ----- //
 import { css } from '@emotion/react';
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
-import type { ArticleFormat, Pillar } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	Pillar,
+} from '../../articleFormat';
 import { from } from '@guardian/source/foundations';
 import { pinnedBlock } from 'fixtures/item';
 import PinnedPost from './';
@@ -33,7 +37,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 
 // ----- Stories ----- //
 
-const Default = ({ pillar = ArticlePillar.News }: { pillar: Pillar }) => (
+const Default = ({ pillar = Pillar.News }: { pillar: Pillar }) => (
 	<Wrapper>
 		<PinnedPost
 			pinnedPost={pinnedBlock}
@@ -43,10 +47,10 @@ const Default = ({ pillar = ArticlePillar.News }: { pillar: Pillar }) => (
 	</Wrapper>
 );
 
-const Sport = () => <Default pillar={ArticlePillar.Sport}></Default>;
-const Culture = () => <Default pillar={ArticlePillar.Culture}></Default>;
-const Opinion = () => <Default pillar={ArticlePillar.Opinion}></Default>;
-const Lifestyle = () => <Default pillar={ArticlePillar.Lifestyle}></Default>;
+const Sport = () => <Default pillar={Pillar.Sport}></Default>;
+const Culture = () => <Default pillar={Pillar.Culture}></Default>;
+const Opinion = () => <Default pillar={Pillar.Opinion}></Default>;
+const Lifestyle = () => <Default pillar={Pillar.Lifestyle}></Default>;
 
 // ----- Exports ----- //
 

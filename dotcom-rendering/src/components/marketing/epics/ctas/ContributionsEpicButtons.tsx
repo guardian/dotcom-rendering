@@ -20,6 +20,7 @@ import { useEffect } from 'react';
 import { useIsInView } from '../../../../lib/useIsInView';
 import { hasSetReminder } from '../../lib/reminders';
 import {
+	addChoiceCardsOneTimeParams,
 	addChoiceCardsParams,
 	addChoiceCardsProductParams,
 	addRegionIdAndTrackingParamsToSupportUrl,
@@ -189,18 +190,25 @@ export const ContributionsEpicButtons = ({
 	}
 
 	const getChoiceCardCta = (cta: Cta): Cta => {
-		if (
-			showChoiceCards &&
-			variantOfChoiceCard === 'US_THREE_TIER_CHOICE_CARDS'
-		) {
+		/** In the US - direct 50 % traffic to the checkout page and 50 % traffic to the landing page for the AB test  */
+
+		if (showChoiceCards && countryCode === 'US') {
 			if (threeTierChoiceCardSelectedProduct === 'OneOff') {
-				/** OneOff payments are not supported by the generic checkout yet */
+				if (
+					variantOfChoiceCard ===
+					'US_CHECKOUT_THREE_TIER_CHOICE_CARDS'
+				) {
+					return {
+						text: cta.text,
+						baseUrl: addChoiceCardsParams(
+							'https://support.theguardian.com/contribute/checkout',
+							'ONE_OFF',
+						),
+					};
+				}
 				return {
 					text: cta.text,
-					baseUrl: addChoiceCardsParams(
-						'https://support.theguardian.com/contribute/checkout',
-						'ONE_OFF',
-					),
+					baseUrl: addChoiceCardsOneTimeParams(cta.baseUrl),
 				};
 			}
 
@@ -211,11 +219,15 @@ export const ContributionsEpicButtons = ({
 					? threeTierChoiceCardAmounts['Monthly'][countryGroupId]
 							.Contribution
 					: undefined;
+			const url =
+				variantOfChoiceCard === 'US_CHECKOUT_THREE_TIER_CHOICE_CARDS'
+					? 'https://support.theguardian.com/checkout'
+					: cta.baseUrl;
 
 			return {
 				text: cta.text,
 				baseUrl: addChoiceCardsProductParams(
-					'https://support.theguardian.com/checkout',
+					url,
 					threeTierChoiceCardSelectedProduct,
 					'Monthly',
 					contributionAmount,

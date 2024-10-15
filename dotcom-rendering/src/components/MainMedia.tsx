@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
+import { space, until } from '@guardian/source/foundations';
+import type { EditionId } from '../lib/edition';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
-} from '@guardian/libs';
-import { space, until } from '@guardian/source/foundations';
-import type { EditionId } from '../lib/edition';
+} from '../lib/format';
 import { getZIndex } from '../lib/getZIndex';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { ServerSideTests, Switches } from '../types/config';

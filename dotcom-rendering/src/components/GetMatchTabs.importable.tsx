@@ -1,4 +1,4 @@
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '../lib/format';
 import { useApi } from '../lib/useApi';
 import { MatchTabs } from './MatchTabs';
 import { Placeholder } from './Placeholder';

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { isMediaCard } from '../lib/cardHelpers';
+import { ArticleDesign } from '../lib/format';
 import { palette } from '../palette';
 import type { DCRContainerPalette, DCRSupportingContent } from '../types/front';
 import { CardHeadline } from './CardHeadline';
@@ -16,7 +16,7 @@ type Props = {
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
 	isDynamo?: boolean;
-	isFlexibleContainer?: boolean;
+	isFlexSplash?: boolean;
 };
 
 /**
@@ -134,7 +134,7 @@ export const SupportingContent = ({
 	alignment,
 	containerPalette,
 	isDynamo,
-	isFlexibleContainer = false,
+	isFlexSplash = false,
 }: Props) => {
 	const columnSpan = getColumnSpan(supportingContent.length);
 	return (
@@ -144,7 +144,7 @@ export const SupportingContent = ({
 				wrapperStyles,
 				baseGrid,
 				(isDynamo ?? alignment === 'horizontal') && horizontalGrid,
-				isFlexibleContainer && backgroundFill,
+				isFlexSplash && backgroundFill,
 			]}
 		>
 			{supportingContent.map((subLink, index) => {
@@ -179,7 +179,7 @@ export const SupportingContent = ({
 								<CardHeadline
 									format={subLinkFormat}
 									size="tiny"
-									hideLineBreak={true}
+									hasInlineKicker={true}
 									linkTo={subLink.url}
 									showPulsingDot={
 										subLink.format.design ===
@@ -187,7 +187,6 @@ export const SupportingContent = ({
 									}
 									headlineText={subLink.headline}
 									kickerText={subLink.kickerText}
-									isFlexibleContainer={isFlexibleContainer}
 								/>
 							</ContainerOverrides>
 						</FormatBoundary>

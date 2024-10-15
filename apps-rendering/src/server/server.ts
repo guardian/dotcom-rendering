@@ -5,8 +5,7 @@ import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Content } from '@guardian/content-api-models/v1/content';
-import type { ArticleTheme } from '@guardian/libs';
-import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import { ArticleSpecial, type ArticleTheme, Pillar } from '../articleFormat';
 import type { Option } from '../../vendor/@guardian/types/index';
 import {
 	fromNullable,
@@ -62,15 +61,15 @@ type CapiReturn = Promise<Result<number, [Content, RelatedContent]>>;
 function themeFromUnknown(a: unknown): Option<ArticleTheme> {
 	switch (a) {
 		case '0':
-			return some(ArticlePillar.News);
+			return some(Pillar.News);
 		case '1':
-			return some(ArticlePillar.Opinion);
+			return some(Pillar.Opinion);
 		case '2':
-			return some(ArticlePillar.Sport);
+			return some(Pillar.Sport);
 		case '3':
-			return some(ArticlePillar.Culture);
+			return some(Pillar.Culture);
 		case '4':
-			return some(ArticlePillar.Lifestyle);
+			return some(Pillar.Lifestyle);
 		case '5':
 			return some(ArticleSpecial.SpecialReport);
 		case '6':

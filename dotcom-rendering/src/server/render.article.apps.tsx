@@ -1,4 +1,4 @@
-import { ArticleDesign, isString } from '@guardian/libs';
+import { isString } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
 import {
@@ -7,6 +7,7 @@ import {
 	getPathFromManifest,
 } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
+import { ArticleDesign } from '../lib/format';
 import { createGuardian } from '../model/guardian';
 import type { Article } from '../types/article';
 import type { Config } from '../types/configContext';

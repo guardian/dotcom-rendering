@@ -32,6 +32,19 @@ describe('FlexibleGeneral', () => {
 		]);
 	});
 
+	it('Should return a one card row layout if one card without boost level is provided', () => {
+		const cardWithoutBoostLevel = {
+			...standardCard,
+			boostLevel: undefined,
+		};
+		expect(decideCardPositions([cardWithoutBoostLevel])).toEqual([
+			{
+				layout: 'oneCard',
+				cards: [cardWithoutBoostLevel],
+			},
+		]);
+	});
+
 	it('Should return two rows of two card row layouts if four standard cards are provided', () => {
 		expect(
 			decideCardPositions([

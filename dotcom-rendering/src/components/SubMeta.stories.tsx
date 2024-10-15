@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { ArticleDesign, ArticleDisplay } from '../lib/format';
 import { getAllThemes } from '../lib/format';
 import { SubMeta } from './SubMeta';
 

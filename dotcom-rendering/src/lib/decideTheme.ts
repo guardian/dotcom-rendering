@@ -1,4 +1,4 @@
-import { ArticleSpecial, type ArticleTheme, Pillar } from '@guardian/libs';
+import { ArticleSpecial, type ArticleTheme, Pillar } from '../lib/format';
 import type { FEFormat } from '../types/frontend';
 
 export const decideTheme = ({ theme }: Partial<FEFormat>): ArticleTheme => {

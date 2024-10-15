@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { NumberedList } from '../../fixtures/generated/dcr-articles/NumberedList';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { enhanceInteractiveContentsElements } from '../model/enhance-interactive-contents-elements';
 import type { InteractiveContentsBlockElement } from '../types/content';
 import { InteractiveContentsBlockComponent } from './InteractiveContentsBlockComponent.importable';

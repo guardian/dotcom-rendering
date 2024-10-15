@@ -1,16 +1,16 @@
 import { css } from '@emotion/react';
 import {
-	ArticleDesign,
-	ArticleDisplay,
-	type ArticleFormat,
-} from '@guardian/libs';
-import {
 	from,
 	palette,
 	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import { SvgArrowExpand } from '@guardian/source/react-components';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+} from '../lib/format';
 import type { RoleType } from '../types/content';
 
 type Props = {

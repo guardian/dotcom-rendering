@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../articleFormat';
 import { some } from '../../../vendor/@guardian/types/index';
 import Dateline from './';
 
@@ -12,7 +12,7 @@ const Default = () => (
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.Opinion,
+			theme: Pillar.Opinion,
 		}}
 		date={some(new Date('2019-12-17T03:24:00'))}
 		edition={Edition.UK}
@@ -24,7 +24,7 @@ const LiveBlogDateline = () => (
 		format={{
 			design: ArticleDesign.LiveBlog,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 		date={some(new Date('2019-12-17T03:24:00'))}
 		edition={Edition.US}
@@ -36,7 +36,7 @@ const DeadBlogDateline = () => (
 		format={{
 			design: ArticleDesign.DeadBlog,
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.Culture,
+			theme: Pillar.Culture,
 		}}
 		date={some(new Date('2019-12-17T03:24:00'))}
 		edition={Edition.AU}

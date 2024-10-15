@@ -1,4 +1,4 @@
-import { ArticleSpecial, type ArticleTheme, Pillar } from '@guardian/libs';
+import { ArticleSpecial, type ArticleTheme, Pillar } from '../lib/format';
 import type { TagType } from '../types/tag';
 
 export const findPillar: (

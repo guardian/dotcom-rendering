@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { Pillar } from '@guardian/libs';
 import { isNonNullable } from '@guardian/libs';
 import {
 	between,
@@ -17,6 +16,7 @@ import {
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
 import type { EditionId } from '../lib/edition';
+import type { Pillar } from '../lib/format';
 import { clearFix } from '../lib/mixins';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { PillarLinkType } from '../model/extract-nav';

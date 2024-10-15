@@ -89,7 +89,7 @@ const SignInPromptHeader: ReactComponent<HeaderRenderProps> = (props) => {
 							onClick={onClick}
 							nudgeIcon={true}
 							size="xsmall"
-							css={buttonStyles}
+							cssOverrides={buttonStyles}
 							style={{ gridArea: 'cta1' }}
 						>
 							{primaryCta.ctaText}
@@ -104,7 +104,7 @@ const SignInPromptHeader: ReactComponent<HeaderRenderProps> = (props) => {
 								props.mobileContent?.primaryCta?.ctaUrl ??
 								primaryCta.ctaUrl
 							}
-							css={buttonStyles}
+							cssOverrides={buttonStyles}
 							size="xsmall"
 						>
 							{props.mobileContent?.primaryCta?.ctaText ??

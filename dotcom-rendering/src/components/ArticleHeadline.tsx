@@ -1,6 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
 	headlineBold28,
@@ -19,6 +17,13 @@ import {
 } from '@guardian/source/foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getAgeWarning } from '../lib/age-warning';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	ArticleSpecial,
+	Pillar,
+} from '../lib/format';
 import { getZIndex } from '../lib/getZIndex';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
@@ -42,74 +47,64 @@ const topPadding = css`
 	}
 `;
 
+const getFontWeightByDesign = (
+	design: ArticleDesign,
+): 'light' | 'medium' | 'bold' => {
+	switch (design) {
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+			return 'light';
+		case ArticleDesign.Feature:
+		case ArticleDesign.Review:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Interview:
+			return 'bold';
+		default:
+			return 'medium';
+	}
+};
+
+const isNewsNotCommentOrRecipe = (format: ArticleFormat) =>
+	format.theme === Pillar.News &&
+	format.design !== ArticleDesign.Comment &&
+	format.design !== ArticleDesign.Recipe;
+
 const decideHeadlineFont = (format: ArticleFormat) => {
-	switch (format.display) {
-		case ArticleDisplay.Immersive: {
-			switch (format.design) {
-				case ArticleDesign.Obituary:
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
-					return headlineLight50;
-				case ArticleDesign.Feature:
-				case ArticleDesign.Review:
-				case ArticleDesign.Recipe:
-				case ArticleDesign.Interview:
-					return headlineBold50;
-				default:
-					return headlineMedium50;
-			}
-		}
+	const size = format.display === ArticleDisplay.Immersive ? 50 : 34;
+	if (isNewsNotCommentOrRecipe(format)) {
+		return size === 50 ? headlineMedium50 : headlineMedium34;
+	}
+
+	const fontWeight = getFontWeightByDesign(format.design);
+	switch (fontWeight) {
+		case 'light':
+			return size === 50 ? headlineLight50 : headlineLight34;
+		case 'bold':
+			return size === 50 ? headlineBold50 : headlineBold34;
 		default:
-			switch (format.design) {
-				case ArticleDesign.Obituary:
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
-					return headlineLight34;
-				case ArticleDesign.Feature:
-				case ArticleDesign.Review:
-				case ArticleDesign.Recipe:
-				case ArticleDesign.Interview:
-					return headlineBold34;
-				default:
-					return headlineMedium34;
-			}
+			return size === 50 ? headlineMedium50 : headlineMedium34;
 	}
 };
+
 const decideMobileHeadlineFont = (format: ArticleFormat) => {
-	switch (format.display) {
-		case ArticleDisplay.Immersive: {
-			switch (format.design) {
-				case ArticleDesign.Obituary:
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-					return headlineLight34;
-				case ArticleDesign.Feature:
-				case ArticleDesign.Review:
-				case ArticleDesign.Recipe:
-				case ArticleDesign.Interview:
-					return headlineBold34;
-				default:
-					return headlineMedium34;
-			}
-		}
+	const size = format.display === ArticleDisplay.Immersive ? 34 : 28;
+	if (isNewsNotCommentOrRecipe(format)) {
+		return size === 34 ? headlineMedium34 : headlineMedium28;
+	}
+
+	const fontWeight = getFontWeightByDesign(format.design);
+	switch (fontWeight) {
+		case 'light':
+			return size === 34 ? headlineLight34 : headlineLight28;
+		case 'bold':
+			return size === 34 ? headlineBold34 : headlineBold28;
 		default:
-			switch (format.design) {
-				case ArticleDesign.Obituary:
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-					return headlineLight28;
-				case ArticleDesign.Feature:
-				case ArticleDesign.Review:
-				case ArticleDesign.Recipe:
-				case ArticleDesign.Interview:
-					return headlineBold28;
-				default:
-					return headlineMedium28;
-			}
+			return size === 34 ? headlineMedium34 : headlineMedium28;
 	}
 };
+
 const headlineFont = (format: ArticleFormat) => css`
 	${decideMobileHeadlineFont(format)}
 
@@ -373,37 +368,6 @@ export const ArticleHeadline = ({
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
-				case ArticleDesign.PrintShop:
-					// Immersive headlines have two versions, with main media, and (this one) without
-					return (
-						<div
-							css={decideBottomPadding({
-								format,
-								hasAvatar,
-							})}
-						>
-							<WithAgeWarning
-								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
-								format={format}
-							>
-								<h1
-									css={[
-										format.theme === ArticleSpecial.Labs
-											? jumboLabsFont
-											: headlineFont(format),
-										maxWidth,
-										immersiveStyles,
-										displayBlock,
-									]}
-								>
-									{headlineString}
-								</h1>
-							</WithAgeWarning>
-						</div>
-					);
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:

@@ -199,7 +199,7 @@ export const ContributionsEpicChoiceCards: ReactComponent<
 			<br />
 			<ChoiceCardGroup
 				name="contribution-frequency"
-				css={[
+				cssOverrides={[
 					frequencyChoiceCardGroupOverrides,
 					hideChoiceCardGroupLegend,
 				]}
@@ -213,7 +213,7 @@ export const ContributionsEpicChoiceCards: ReactComponent<
 			<ChoiceCardGroup
 				name="contribution-amount"
 				label="Contribution amount"
-				css={hideChoiceCardGroupLegend}
+				cssOverrides={hideChoiceCardGroupLegend}
 			>
 				{generateChoiceCardAmountsButtons()}
 			</ChoiceCardGroup>

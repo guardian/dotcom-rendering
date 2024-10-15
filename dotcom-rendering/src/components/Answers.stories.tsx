@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { Radio, RadioGroup } from '@guardian/source/react-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import {
 	CorrectSelectedAnswer,
 	IncorrectAnswer,

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
+import type { ArticleFormat } from '../lib/format';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import { slugify } from '../model/enhance-H2s';
 import { palette } from '../palette';

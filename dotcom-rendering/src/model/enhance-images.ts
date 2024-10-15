@@ -1,10 +1,10 @@
+import { isUndefined } from '@guardian/libs';
+import { JSDOM } from 'jsdom';
 import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
-	isUndefined,
-} from '@guardian/libs';
-import { JSDOM } from 'jsdom';
+} from '../lib/format';
 import { getLargest, getMaster } from '../lib/image';
 import type {
 	CartoonBlockElement,

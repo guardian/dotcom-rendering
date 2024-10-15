@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
 import { palette, text, textSans12 } from '@guardian/source/foundations';
 import { blockLink } from '../lib/block-link.amp';
 import type { EditionId } from '../lib/edition';
 import { findBlockAdSlots } from '../lib/find-adslots.amp';
+import type { ArticleTheme } from '../lib/format';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import type { CommercialProperties } from '../types/commercial';
 import type { Switches } from '../types/config';

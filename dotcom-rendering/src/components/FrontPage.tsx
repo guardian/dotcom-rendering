@@ -1,8 +1,8 @@
 import { Global } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { StrictMode } from 'react';
 import { FrontLayout } from '../layouts/FrontLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
 import { rootStyles } from '../lib/rootStyles';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
@@ -72,7 +72,11 @@ export const FrontPage = ({ front, NAV }: Props) => {
 				/>
 			</Island>
 			<Island priority="enhancement" defer={{ until: 'idle' }}>
-				<ShowHideContainers />
+				<ShowHideContainers
+					disableFrontContainerToggleSwitch={
+						!!front.config.switches.disableFrontContainerShowHide
+					}
+				/>
 			</Island>
 			<Island priority="critical">
 				<SetABTests

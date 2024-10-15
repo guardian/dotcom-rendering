@@ -1,8 +1,12 @@
 // ----- Imports ----- //
 
 import { css, jsx as styledH } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	ArticleSpecial,
+} from 'articleFormat';
 import type { Breakpoint } from '@guardian/source/foundations';
 import { neutral, remSpace, until } from '@guardian/source/foundations';
 import {

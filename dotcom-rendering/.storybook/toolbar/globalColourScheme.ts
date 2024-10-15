@@ -6,7 +6,7 @@ import {
 	ArticleDesign,
 	Pillar,
 	type ArticleFormat,
-} from '@guardian/libs';
+} from '../../src/lib/format';
 
 const defaultFormat: ArticleFormat = {
 	display: ArticleDisplay.Standard,
