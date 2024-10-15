@@ -713,14 +713,14 @@ importers:
         specifier: 6.0.0
         version: 6.0.0
       rehype-stringify:
-        specifier: 10.0.0
-        version: 10.0.0
+        specifier: 10.0.1
+        version: 10.0.1
       remark-parse:
         specifier: 11.0.0
         version: 11.0.0
       remark-rehype:
-        specifier: 11.1.0
-        version: 11.1.0
+        specifier: 11.1.1
+        version: 11.1.1
       response-time:
         specifier: 2.3.2
         version: 2.3.2
@@ -4342,7 +4342,7 @@ packages:
       '@typescript-eslint/parser': 6.18.0(eslint@8.56.0)(typescript@5.5.3)
       eslint: 8.56.0
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@6.18.0)(eslint-plugin-import@2.29.1)(eslint@8.56.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint@8.56.0)
       tslib: 2.6.2
       typescript: 5.5.3
     transitivePeerDependencies:
@@ -6563,7 +6563,7 @@ packages:
       react-docgen-typescript: 2.2.2(typescript@5.5.3)
       tslib: 2.6.2
       typescript: 5.5.3
-      webpack: 5.94.0(@swc/core@1.7.26)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.94.0(esbuild@0.18.20)(webpack-cli@5.1.4)
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -8177,8 +8177,8 @@ packages:
       webpack: 5.x.x
       webpack-cli: 5.x.x
     dependencies:
-      webpack: 5.94.0(@swc/core@1.7.26)(esbuild@0.18.20)(webpack-cli@5.1.4)
-      webpack-cli: 5.1.4(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.0.4)(webpack@5.94.0)
+      webpack: 5.94.0(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack-cli: 5.1.4(webpack-dev-server@5.0.4)(webpack@5.94.0)
     dev: false
 
   /@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.94.0):
@@ -8188,8 +8188,8 @@ packages:
       webpack: 5.x.x
       webpack-cli: 5.x.x
     dependencies:
-      webpack: 5.94.0(@swc/core@1.7.26)(esbuild@0.18.20)(webpack-cli@5.1.4)
-      webpack-cli: 5.1.4(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.0.4)(webpack@5.94.0)
+      webpack: 5.94.0(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack-cli: 5.1.4(webpack-dev-server@5.0.4)(webpack@5.94.0)
     dev: false
 
   /@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack-dev-server@5.0.4)(webpack@5.94.0):
@@ -8203,8 +8203,8 @@ packages:
       webpack-dev-server:
         optional: true
     dependencies:
-      webpack: 5.94.0(@swc/core@1.7.26)(esbuild@0.18.20)(webpack-cli@5.1.4)
-      webpack-cli: 5.1.4(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.0.4)(webpack@5.94.0)
+      webpack: 5.94.0(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack-cli: 5.1.4(webpack-dev-server@5.0.4)(webpack@5.94.0)
       webpack-dev-server: 5.0.4(webpack-cli@5.1.4)(webpack@5.94.0)
     dev: false
 
@@ -8747,7 +8747,7 @@ packages:
       '@babel/core': 7.25.2
       find-cache-dir: 4.0.0
       schema-utils: 4.2.0
-      webpack: 5.94.0(@swc/core@1.7.26)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.94.0(esbuild@0.18.20)(webpack-cli@5.1.4)
     dev: false
 
   /babel-plugin-istanbul@6.1.1:
@@ -9943,7 +9943,7 @@ packages:
       postcss-modules-values: 4.0.0(postcss@8.4.41)
       postcss-value-parser: 4.2.0
       semver: 7.5.4
-      webpack: 5.94.0(@swc/core@1.7.26)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.94.0(esbuild@0.18.20)(webpack-cli@5.1.4)
     dev: false
 
   /css-loader@7.1.2(webpack@5.94.0):
@@ -10902,7 +10902,7 @@ packages:
       enhanced-resolve: 5.17.0
       eslint: 8.56.0
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint@8.56.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.2
       is-core-module: 2.15.1
@@ -11933,7 +11933,7 @@ packages:
       semver: 7.5.4
       tapable: 2.2.1
       typescript: 5.5.3
-      webpack: 5.94.0(@swc/core@1.7.26)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.94.0(esbuild@0.18.20)(webpack-cli@5.1.4)
     dev: false
 
   /form-data@3.0.1:
@@ -16516,8 +16516,8 @@ packages:
       unist-util-visit: 5.0.0
     dev: false
 
-  /rehype-stringify@10.0.0:
-    resolution: {integrity: sha512-1TX1i048LooI9QoecrXy7nGFFbFSufxVRAfc6Y9YMRAi56l+oB0zP51mLSV312uRuvVLPV1opSlJmslozR1XHQ==}
+  /rehype-stringify@10.0.1:
+    resolution: {integrity: sha512-k9ecfXHmIPuFVI61B9DeLPN0qFHfawM6RsuX48hoqlaKSF61RskNjSm1lI8PhBEM0MRdLxVVm4WmTqJQccH9mA==}
     dependencies:
       '@types/hast': 3.0.4
       hast-util-to-html: 9.0.0
@@ -16540,8 +16540,8 @@ packages:
       - supports-color
     dev: false
 
-  /remark-rehype@11.1.0:
-    resolution: {integrity: sha512-z3tJrAs2kIs1AqIIy6pzHmAHlF1hWQ+OdY4/hv+Wxe35EhyLKcajL33iUEn3ScxtFox9nUvRufR/Zre8Q08H/g==}
+  /remark-rehype@11.1.1:
+    resolution: {integrity: sha512-g/osARvjkBXb6Wo0XvAeXQohVta8i84ACbenPpoSsxTOQH/Ae0/RGP4WZgnMH5pMLpsj4FG7OHmcIcXxpza8eQ==}
     dependencies:
       '@types/hast': 3.0.4
       '@types/mdast': 4.0.3
@@ -17438,7 +17438,7 @@ packages:
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
-      webpack: 5.94.0(@swc/core@1.7.26)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.94.0(esbuild@0.18.20)(webpack-cli@5.1.4)
     dev: false
 
   /stylelint-config-recommended@14.0.0(stylelint@16.5.0):
@@ -17971,7 +17971,7 @@ packages:
       semver: 7.5.4
       source-map: 0.7.4
       typescript: 5.5.3
-      webpack: 5.94.0(@swc/core@1.7.26)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.94.0(esbuild@0.18.20)(webpack-cli@5.1.4)
     dev: false
 
   /ts-node@10.9.2(@swc/core@1.7.26)(@types/node@16.18.68)(typescript@5.1.6):
@@ -18756,7 +18756,7 @@ packages:
       mime-types: 2.1.35
       range-parser: 1.2.1
       schema-utils: 4.2.0
-      webpack: 5.94.0(@swc/core@1.7.26)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.94.0(esbuild@0.18.20)(webpack-cli@5.1.4)
     dev: false
 
   /webpack-dev-middleware@7.2.1(webpack@5.94.0):
@@ -18774,7 +18774,7 @@ packages:
       on-finished: 2.4.1
       range-parser: 1.2.1
       schema-utils: 4.2.0
-      webpack: 5.94.0(@swc/core@1.7.26)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.94.0(esbuild@0.18.20)(webpack-cli@5.1.4)
     dev: false
 
   /webpack-dev-middleware@7.4.2(webpack@5.94.0):
@@ -18836,8 +18836,8 @@ packages:
       serve-index: 1.9.1
       sockjs: 0.3.24
       spdy: 4.0.2
-      webpack: 5.94.0(@swc/core@1.7.26)(esbuild@0.18.20)(webpack-cli@5.1.4)
-      webpack-cli: 5.1.4(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.0.4)(webpack@5.94.0)
+      webpack: 5.94.0(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack-cli: 5.1.4(webpack-dev-server@5.0.4)(webpack@5.94.0)
       webpack-dev-middleware: 7.2.1(webpack@5.94.0)
       ws: 8.17.1
     transitivePeerDependencies:
@@ -18882,7 +18882,7 @@ packages:
       webpack: ^5.47.0
     dependencies:
       tapable: 2.2.1
-      webpack: 5.94.0(@swc/core@1.7.26)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.94.0(esbuild@0.18.20)(webpack-cli@5.1.4)
       webpack-sources: 2.3.1
     dev: false
     patched: true

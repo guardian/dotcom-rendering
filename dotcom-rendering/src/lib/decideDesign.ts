@@ -45,8 +45,6 @@ export const decideDesign = ({ design }: Partial<FEFormat>): ArticleDesign => {
 			return ArticleDesign.Interactive;
 		case 'PhotoEssayDesign':
 			return ArticleDesign.PhotoEssay;
-		case 'PrintShopDesign':
-			return ArticleDesign.PrintShop;
 		case 'ObituaryDesign':
 			return ArticleDesign.Obituary;
 		case 'FullPageInteractiveDesign':

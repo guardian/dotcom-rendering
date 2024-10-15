@@ -68,6 +68,7 @@ export const enhanceArticleType = (
 		promotedNewsletter: data.promotedNewsletter,
 		imagesForLightbox,
 		hasAffiliateLinksDisclaimer: !!data.affiliateLinksDisclaimer,
+		audioArticleImage: data.audioArticleImage,
 	});
 
 	const mainMediaElements = enhanceMainMedia(

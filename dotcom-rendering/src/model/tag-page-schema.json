@@ -1267,7 +1267,6 @@
                 "ObituaryDesign",
                 "PhotoEssayDesign",
                 "PictureDesign",
-                "PrintShopDesign",
                 "ProfileDesign",
                 "QuizDesign",
                 "RecipeDesign",
@@ -1413,7 +1412,6 @@
                 "fields",
                 "index",
                 "mediaType",
-                "mimeType",
                 "url"
             ]
         },

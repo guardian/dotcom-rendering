@@ -23,6 +23,7 @@ import { Caption } from '../components/Caption';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
+import { ExpandableMarketingCardWrapper } from '../components/ExpandableMarketingCardWrapper.importable';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
@@ -88,6 +89,8 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Vertical grey border
 					Main content
 					Right Column
+
+					Duplicate lines are required to ensure the left column does not have extra vertical space.
 				*/
 				${from.wide} {
 					grid-column-gap: 10px;
@@ -99,9 +102,10 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.          border      byline     . right-column'
 						'lines      border      body       . right-column'
 						'meta       border      body       . right-column'
-						'meta       border      body       . right-column'
-						'.          border      body       . right-column'
-						'.          border      .          . right-column';
+						'uscard     border      body       . right-column'
+						'uscard     border      .          . right-column'
+						'uscard     border      .          . right-column'
+						'uscard     border      .          . right-column';
 				}
 
 				/*
@@ -111,6 +115,8 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Vertical grey border
 					Main content
 					Right Column
+
+					Duplicate lines are required to ensure the left column does not have extra vertical space.
 				*/
 				${until.wide} {
 					grid-column-gap: 10px;
@@ -122,9 +128,10 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.          border      byline      right-column'
 						'lines      border      body        right-column'
 						'meta       border      body        right-column'
-						'meta       border      body        right-column'
-						'.          border      body        right-column'
-						'.          border      .           right-column';
+						'uscard     border      body        right-column'
+						'uscard     border      .           right-column'
+						'uscard     border      .           right-column'
+						'uscard     border      .           right-column';
 				}
 
 				/*
@@ -645,6 +652,22 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								)}
 							</div>
 						</GridItem>
+						{isWeb && (
+							<GridItem area="uscard" element="aside">
+								<Hide when="below" breakpoint="leftCol">
+									<Island
+										priority="enhancement"
+										defer={{ until: 'visible' }}
+									>
+										<ExpandableMarketingCardWrapper
+											guardianBaseURL={
+												article.guardianBaseURL
+											}
+										/>
+									</Island>
+								</Hide>
+							</GridItem>
+						)}
 						<GridItem area="body">
 							<ArticleContainer format={format}>
 								<ArticleBody
