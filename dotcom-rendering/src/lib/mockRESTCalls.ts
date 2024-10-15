@@ -19,7 +19,7 @@ const createMockResponse = (status: number, body?: any): Promise<Response> => {
 	return Promise.resolve(new Response(JSON.stringify(body), { status }));
 };
 
-export const mockFetch = (
+export const mockFetch: typeof global.fetch = (
 	input: RequestInfo | URL,
 	requestInit?: RequestInit,
 ): Promise<Response> => {

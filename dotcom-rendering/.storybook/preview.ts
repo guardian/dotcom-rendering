@@ -9,6 +9,7 @@ import { resets } from '@guardian/source/foundations';
 
 import { Lazy } from '../src/components/Lazy';
 import { Picture } from '../src/components/Picture';
+import { mockFetch } from '../src/lib/mockRESTCalls';
 import { setABTests } from '../src/lib/useAB';
 import { ConfigContextDecorator } from './decorators/configContextDecorator';
 import { Preview } from '@storybook/react';
@@ -20,6 +21,8 @@ import {
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
 Picture.disableLazyLoading = isChromatic();
+
+global.fetch = mockFetch;
 
 // Fix the date to prevent false negatives
 MockDate.set('Sat Jan 1 2022 12:00:00 GMT+0000 (Greenwich Mean Time)');

@@ -18,7 +18,6 @@ import { embedIframe } from '../client/embedIframe';
 import { decideFormat } from '../lib/decideFormat';
 import type { ArticleFormat } from '../lib/format';
 import { getCurrentPillar } from '../lib/layoutHelpers';
-import { mockFetch } from '../lib/mockRESTCalls';
 import { extractNAV } from '../model/extract-nav';
 import type { ArticleDeprecated } from '../types/article';
 import { DecideLayout, type Props as DecideLayoutProps } from './DecideLayout';
@@ -38,7 +37,6 @@ export type HydratedLayoutDecoratorArgs = {
 const HydratedLayout: Decorator<
 	DecideLayoutProps & HydratedLayoutDecoratorArgs
 > = (Story, context) => {
-	global.fetch = mockFetch;
 	const { article } = context.args;
 	const format: ArticleFormat = decideFormat(article.format);
 	const colourScheme =
