@@ -166,14 +166,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const { abTests, isPreview } = front.config;
 
-	// If viewing a front through the internal preview tool, we want to automatically opt-in to this test.
-	const isInEuropeBetaTest =
-		abTests.europeBetaFrontVariant === 'variant' || isPreview;
-
 	const { absoluteServerTimes = false } = front.config.switches;
 
 	const Highlights = () => {
-		const showHighlights = front.isNetworkFront && isInEuropeBetaTest;
+		const showHighlights =
+			// Must be opted into the Europe beta test or in preview
+			(abTests.europeBetaFrontVariant === 'variant' || isPreview) &&
+			// Must either be a network front or the Europe beta front (or training version of it) in order to see Highlights
+			(front.isNetworkFront || front.pageId.startsWith('europe-beta'));
 
 		const highlightsCollection =
 			front.pressedPage.collections.find(isHighlights);
