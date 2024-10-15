@@ -9,11 +9,11 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '../lib/articleFormat';
+import { customMockFetch } from '../lib/mockRESTCalls';
 import { palette } from '../palette';
 import type { TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
 import { Section } from './Section';
-import { customMockFetch } from '../lib/mockRESTCalls';
 
 export default {
 	component: Carousel,

@@ -64,7 +64,9 @@ describe('requestMultipleSignUps', () => {
 			TEST_NEWSLETTER_IDS,
 			TEST_RECAPTCHA_TOKEN,
 		);
-		const [url, requestInit] = (global.fetch as jest.Mock).mock.calls[0];
+		const [url, requestInit]: [string, RequestInit | undefined] = (
+			global.fetch as jest.Mock
+		).mock.calls[0];
 
 		const method = requestInit?.method;
 		const headers = (requestInit?.headers ?? {}) as Record<string, unknown>;
@@ -88,7 +90,9 @@ describe('requestMultipleSignUps', () => {
 			TEST_RECAPTCHA_TOKEN,
 		);
 
-		const [, requestInit] = (global.fetch as jest.Mock).mock.calls[0];
+		const [, requestInit]: [string, RequestInit | undefined] = (
+			global.fetch as jest.Mock
+		).mock.calls[0];
 
 		const decodedEntries = decodeURIComponent(
 			requestInit?.body?.toString() ?? '',
@@ -120,7 +124,9 @@ describe('requestMultipleSignUps', () => {
 			TEST_NEWSLETTER_IDS,
 			TEST_RECAPTCHA_TOKEN,
 		);
-		const [, requestInit] = (global.fetch as jest.Mock).mock.calls[0];
+		const [, requestInit]: [string, RequestInit | undefined] = (
+			global.fetch as jest.Mock
+		).mock.calls[0];
 
 		const decodedBody = decodeURIComponent(
 			requestInit?.body?.toString() ?? '',
@@ -153,7 +159,9 @@ describe('requestSingleSignUp', () => {
 			TEST_NEWSLETTER_IDS[0],
 			TEST_RECAPTCHA_TOKEN,
 		);
-		const [url, requestInit] = (global.fetch as jest.Mock).mock.calls[0];
+		const [url, requestInit]: [string, RequestInit | undefined] = (
+			global.fetch as jest.Mock
+		).mock.calls[0];
 		const method = requestInit?.method;
 		const headers = (requestInit?.headers ?? {}) as Record<string, unknown>;
 
@@ -174,7 +182,9 @@ describe('requestSingleSignUp', () => {
 			TEST_RECAPTCHA_TOKEN,
 		);
 
-		const [, requestInit] = (global.fetch as jest.Mock).mock.calls[0];
+		const [, requestInit]: [string, RequestInit | undefined] = (
+			global.fetch as jest.Mock
+		).mock.calls[0];
 
 		const decodedEntries = decodeURIComponent(
 			requestInit?.body?.toString() ?? '',
@@ -203,7 +213,9 @@ describe('requestSingleSignUp', () => {
 			TEST_NEWSLETTER_IDS[0],
 			TEST_RECAPTCHA_TOKEN,
 		);
-		const [, requestInit] = (global.fetch as jest.Mock).mock.calls[0];
+		const [, requestInit]: [string, RequestInit | undefined] = (
+			global.fetch as jest.Mock
+		).mock.calls[0];
 
 		const decodedBody = decodeURIComponent(
 			requestInit?.body?.toString() ?? '',
