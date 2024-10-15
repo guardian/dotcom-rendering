@@ -219,6 +219,7 @@ export const ExpandableMarketingCard = ({
 							styles={imageTopStyles}
 						/>
 						<section
+							data-link-name="us-expandable-marketing-card expand"
 							css={contractedSummaryStyles}
 							role="button"
 							tabIndex={0}
@@ -257,6 +258,7 @@ export const ExpandableMarketingCard = ({
 							<div css={headingStyles}>
 								<h2>{heading}</h2>
 								<button
+									data-link-name="us-expandable-marketing-card close"
 									onClick={() => {
 										setIsClosed(true);
 									}}
@@ -292,6 +294,7 @@ export const ExpandableMarketingCard = ({
 								</p>
 							</section>
 							<LinkButton
+								data-link-name="us-expandable-marketing-card cta-click"
 								priority="tertiary"
 								size="xsmall"
 								href={`${guardianBaseURL}/email-newsletters`}
