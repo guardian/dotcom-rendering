@@ -3,7 +3,6 @@ import {
 	from,
 	headlineMedium24Object,
 	space,
-	until,
 } from '@guardian/source/foundations';
 import {
 	Button,
@@ -58,35 +57,81 @@ const carouselContainerStyles = css`
 	${from.wide} {
 		flex-direction: row;
 	}
+
+	/* Extend carousel into outer margins on mobile */
+	margin-left: -10px;
+	margin-right: -10px;
+	${from.mobileLandscape} {
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+
+	/**
+	 * From tablet, pull container up so navigation buttons align with title.
+	 * The margin is calculated from the front section title font size and line
+	 * height, and the default container spacing.
+	 *
+	 * From wide, the navigation buttons are pulled out of the main content area
+	 * into the right-hand column.
+	 */
+	${from.tablet} {
+		margin-left: 10px;
+		margin-right: 10px;
+		margin-top: calc(
+			(-${titlePreset.fontSize} * ${titlePreset.lineHeight}) -
+				${space[3]}px
+		);
+	}
+	${from.leftCol} {
+		margin-top: 0;
+		margin-left: -10px;
+	}
+	${from.wide} {
+		margin-right: calc(${space[2]}px - ${gridColumnWidth} - ${gridGap});
+	}
 `;
 
 const carouselStyles = css`
 	display: grid;
 	grid-auto-columns: 1fr;
 	grid-auto-flow: column;
+	gap: 20px;
 	overflow-x: auto;
 	overflow-y: hidden;
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	overscroll-behavior-x: contain;
 	overscroll-behavior-y: auto;
-	scroll-padding-left: 10px;
 	/**
-	* Hide scrollbars
-	* See: https://stackoverflow.com/a/38994837
-	*/
+	 * Hide scrollbars
+	 * See: https://stackoverflow.com/a/38994837
+	 */
 	::-webkit-scrollbar {
 		display: none; /* Safari and Chrome */
 	}
 	scrollbar-width: none; /* Firefox */
 	position: relative;
+
+	padding-left: 10px;
+	scroll-padding-left: 10px;
+	${from.mobileLandscape} {
+		padding-left: 20px;
+		scroll-padding-left: 20px;
+	}
+	${from.tablet} {
+		padding-left: 0px;
+		scroll-padding-left: 0px;
+	}
+	${from.leftCol} {
+		padding-left: 20px;
+		scroll-padding-left: 20px;
+	}
 `;
 
 const itemStyles = css`
 	scroll-snap-align: start;
 	grid-area: span 1;
 	position: relative;
-	margin: ${space[3]}px 10px;
 `;
 
 const verticalLineStyles = css`
@@ -100,22 +145,24 @@ const verticalLineStyles = css`
 		background-color: ${palette('--card-border-top')};
 		transform: translateX(-50%);
 	}
+	${from.leftCol} {
+		:first-child::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: -10px;
+			width: 1px;
+			background-color: ${palette('--card-border-top')};
+			transform: translateX(-50%);
+		}
+	}
 `;
 
 const buttonContainerStyles = css`
 	margin-left: auto;
-	${from.tablet} {
-		margin-top: calc(
-			(-${titlePreset.fontSize} * ${titlePreset.lineHeight}) -
-				${space[3]}px
-		);
-	}
-	${from.leftCol} {
-		margin-top: 0;
-	}
 	${from.wide} {
-		margin-left: ${space[2]}px;
-		margin-right: calc(${space[2]}px - ${gridColumnWidth} - ${gridGap});
+		margin-left: ${space[1]}px;
 	}
 `;
 
@@ -134,15 +181,12 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 	const peepingCardWidth = space[8];
 
 	return css`
-		${until.tablet} {
-			grid-template-columns: repeat(
-				${totalCards},
-				calc((100% - ${peepingCardWidth}px))
-			);
-		}
-
+		grid-template-columns: repeat(
+			${totalCards},
+			calc((100% - ${peepingCardWidth}px - 20px))
+		);
 		${from.tablet} {
-			grid-template-columns: repeat(${totalCards}, 50%);
+			grid-template-columns: repeat(${totalCards}, calc(50% - 10px));
 		}
 	`;
 };
