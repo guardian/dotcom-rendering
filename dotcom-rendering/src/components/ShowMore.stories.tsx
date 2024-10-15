@@ -1,7 +1,7 @@
 import { userEvent, within } from '@storybook/test';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/show-more-trails';
-import { customMockedFetch } from '../lib/mockRESTCalls';
+import { customMockFetch } from '../lib/mockRESTCalls';
 import { ShowMore } from './ShowMore.importable';
 
 /**
@@ -36,7 +36,7 @@ export default {
 	title: 'Components/ShowMore',
 };
 
-const showMoreSuccessRequest = customMockedFetch([
+const mockShowMoreSuccessRequestFetch = customMockFetch([
 	{
 		mockedMethod: 'GET',
 		mockedUrl: `${ajaxUrl}/${pageId}/show-more/${collectionId}.json?dcr=true`,
@@ -45,7 +45,7 @@ const showMoreSuccessRequest = customMockedFetch([
 	},
 ]);
 
-const showMoreErrorRequest = customMockedFetch([
+const mockShowMoreErrorRequestFetch = customMockFetch([
 	{
 		mockedMethod: 'GET',
 		mockedUrl: `${ajaxUrl}/${pageId}/show-more/${collectionId}.json?dcr=true`,
@@ -55,7 +55,7 @@ const showMoreErrorRequest = customMockedFetch([
 ]);
 
 export const ShowMoreSuccess = () => {
-	global.fetch = showMoreSuccessRequest;
+	global.fetch = mockShowMoreSuccessRequestFetch;
 
 	return ShowMore(defaultProps);
 };
@@ -64,7 +64,7 @@ ShowMoreSuccess.play = play;
 ShowMoreSuccess.storyName = 'ShowMore button, success';
 
 export const ShowMoreError = () => {
-	global.fetch = showMoreErrorRequest;
+	global.fetch = mockShowMoreErrorRequestFetch;
 
 	return ShowMore(defaultProps);
 };

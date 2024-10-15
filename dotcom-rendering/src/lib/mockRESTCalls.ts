@@ -19,7 +19,7 @@ const createMockResponse = (status: number, body?: any): Promise<Response> => {
 	return Promise.resolve(new Response(JSON.stringify(body), { status }));
 };
 
-export const mockedFetch = (
+export const mockFetch = (
 	input: RequestInfo | URL,
 	requestInit?: RequestInit,
 ): Promise<Response> => {
@@ -235,7 +235,7 @@ export const mockedFetch = (
 	}
 };
 
-export const customMockedFetch =
+export const customMockFetch =
 	(
 		mockedUrlsParams: Array<{
 			mockedMethod: string;

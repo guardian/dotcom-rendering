@@ -1,9 +1,9 @@
-import { mockedFetch } from '../lib/mockRESTCalls';
+import { mockFetch } from '../lib/mockRESTCalls';
 import { GroupedNewslettersList } from './GroupedNewsletterList';
 import { ManyNewsletterSignUp } from './ManyNewsletterSignUp.importable';
 
 export const Default = () => {
-	global.fetch = mockedFetch;
+	global.fetch = mockFetch;
 	return (
 		<>
 			<GroupedNewslettersList

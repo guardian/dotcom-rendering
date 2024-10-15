@@ -4,14 +4,14 @@ import {
 	screen,
 	waitForElementToBeRemoved,
 } from '@testing-library/react';
-import { mockFetch } from '../../lib/mockRESTCallsInJest';
+import { jestMockFetch } from '../../lib/mockRESTCallsInJest';
 import { ok } from '../../lib/result';
 import { ConfigProvider } from '../ConfigContext';
 import { Discussion } from '../Discussion';
 
 describe('App', () => {
 	beforeEach(() => {
-		mockFetch();
+		jestMockFetch();
 	});
 
 	it('should not render the comment form if user is logged out', async () => {

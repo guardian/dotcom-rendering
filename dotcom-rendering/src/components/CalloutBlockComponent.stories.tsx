@@ -8,14 +8,14 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
-import { customMockedFetch } from '../lib/mockRESTCalls';
+import { customMockFetch } from '../lib/mockRESTCalls';
 
 const tomorrow = new Date().setDate(new Date().getDate() + 1) / 1000;
 const yesterday = new Date().setDate(new Date().getDate() - 1) / 1000;
 const pageId =
 	'world/2023/mar/01/tell-us-have-you-been-affected-by-the-train-crash-in-greece';
 
-const goodRequest = customMockedFetch([
+const mockGoodRequestFetch = customMockFetch([
 	{
 		mockedMethod: 'POST',
 		mockedUrl:
@@ -24,7 +24,7 @@ const goodRequest = customMockedFetch([
 	},
 ]);
 
-const badRequest = customMockedFetch([
+const mockBadRequestFetch = customMockFetch([
 	{
 		mockedMethod: 'POST',
 		mockedUrl:
@@ -48,7 +48,7 @@ export default {
 };
 
 export const Collapsible: StoryObj = () => {
-	global.fetch = goodRequest;
+	global.fetch = mockGoodRequestFetch;
 	return (
 		<CalloutBlockComponent
 			callout={{
@@ -65,7 +65,7 @@ export const Collapsible: StoryObj = () => {
 Collapsible.decorators = [splitTheme([defaultFormat])];
 
 export const NonCollapsible: StoryObj = () => {
-	global.fetch = goodRequest;
+	global.fetch = mockGoodRequestFetch;
 	return (
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: tomorrow }}
@@ -77,7 +77,7 @@ NonCollapsible.storyName = 'NonCollapsible';
 NonCollapsible.decorators = [splitTheme([defaultFormat])];
 
 export const SubmissionFailure: StoryObj = () => {
-	global.fetch = badRequest;
+	global.fetch = mockBadRequestFetch;
 	return (
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: tomorrow }}
@@ -109,7 +109,7 @@ export const Expired: StoryObj = () => {
 Expired.decorators = [splitTheme([defaultFormat])];
 
 export const MinimalCallout: StoryObj = () => {
-	global.fetch = goodRequest;
+	global.fetch = mockGoodRequestFetch;
 	return (
 		<>
 			<div css={{ fontWeight: 'bold', paddingBottom: '16px' }}>

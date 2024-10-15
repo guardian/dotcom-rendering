@@ -4,7 +4,7 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { PropsWithChildren } from 'react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { customMockedFetch } from '../lib/mockRESTCalls';
+import { customMockFetch } from '../lib/mockRESTCalls';
 import { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import { ContainerOverrides } from './ContainerOverrides';
@@ -28,7 +28,7 @@ export default {
 	},
 };
 
-const goodRequest = customMockedFetch([
+const mockGoodRequestFetch = customMockFetch([
 	{
 		mockedMethod: 'GET',
 		mockedUrl:
@@ -141,7 +141,7 @@ const Wrapper = ({
 	children,
 	styles,
 }: PropsWithChildren<{ styles: SerializedStyles }>) => {
-	global.fetch = goodRequest;
+	global.fetch = mockGoodRequestFetch;
 
 	return <div css={styles}>{children}</div>;
 };

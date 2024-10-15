@@ -3,13 +3,13 @@ import {
 	contributionsHeaderResponse,
 	contributionsSignInPromptHeaderResponse,
 } from '../../fixtures/manual/contributionsHeader';
-import { customMockedFetch } from '../lib/mockRESTCalls';
+import { customMockFetch } from '../lib/mockRESTCalls';
 import { TopBar } from './TopBar.importable';
 
-const contributionsMockResponse = (
+const mockContributionsRequestFetch = (
 	component: 'Header' | 'SignInPromptHeader',
 ) =>
-	customMockedFetch([
+	customMockFetch([
 		{
 			mockedMethod: 'GET',
 			mockedUrl: /.*ophan.theguardian.com\/img\/.*/,
@@ -30,7 +30,7 @@ const meta = {
 	component: TopBar,
 	title: 'Components/Masthead/TopBar',
 	render: (args) => {
-		global.fetch = contributionsMockResponse('Header');
+		global.fetch = mockContributionsRequestFetch('Header');
 		return <TopBar {...args} />;
 	},
 	args: {
@@ -47,7 +47,7 @@ export default meta;
 export const Default = {};
 
 export const WithSignInPrompt = () => {
-	global.fetch = contributionsMockResponse('SignInPromptHeader');
+	global.fetch = mockContributionsRequestFetch('SignInPromptHeader');
 
 	return (
 		<TopBar

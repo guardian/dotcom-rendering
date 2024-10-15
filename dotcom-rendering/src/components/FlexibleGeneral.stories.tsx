@@ -8,7 +8,7 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import { customMockedFetch } from '../lib/mockRESTCalls';
+import { customMockFetch } from '../lib/mockRESTCalls';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FrontSection } from './FrontSection';
 
@@ -67,7 +67,7 @@ const standardCards = standards.map((card, index) => {
 	}
 }) satisfies DCRFrontCard[];
 
-const mockLatestLinksReq = customMockedFetch([
+const mockLatestLinksReqFetch = customMockFetch([
 	{
 		mockedMethod: 'GET',
 		mockedUrl:
@@ -276,7 +276,7 @@ export const FourSublinkSplashWithLiveUpdates: Story = {
 		},
 	},
 	render: ({ frontSectionTitle, ...args }) => {
-		global.fetch = mockLatestLinksReq;
+		global.fetch = mockLatestLinksReqFetch;
 		return (
 			<FrontSection
 				title={frontSectionTitle}

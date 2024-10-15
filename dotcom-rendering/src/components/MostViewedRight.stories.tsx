@@ -4,7 +4,7 @@ import {
 	type StoryProps,
 } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { customMockedFetch } from '../lib/mockRESTCalls';
+import { customMockFetch } from '../lib/mockRESTCalls';
 import { ArticleContainer } from './ArticleContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
@@ -28,7 +28,7 @@ export default {
 	decorators: [splitTheme([standardFormat], { orientation: 'vertical' })],
 };
 
-const mostViewedRequest = customMockedFetch([
+const mockMostViewedRequestFetch = customMockFetch([
 	{
 		mockedMethod: 'GET',
 		mockedUrl:
@@ -39,7 +39,7 @@ const mostViewedRequest = customMockedFetch([
 ]);
 
 export const defaultStory: StoryObj = ({ format }: StoryProps) => {
-	global.fetch = mostViewedRequest;
+	global.fetch = mockMostViewedRequestFetch;
 
 	return (
 		<Section fullWidth={true}>
@@ -67,7 +67,7 @@ export const defaultStory: StoryObj = ({ format }: StoryProps) => {
 defaultStory.storyName = 'default';
 
 export const limitItemsStory: StoryObj = ({ format }: StoryProps) => {
-	global.fetch = mostViewedRequest;
+	global.fetch = mockMostViewedRequestFetch;
 
 	return (
 		<Section fullWidth={true}>
@@ -95,7 +95,7 @@ export const limitItemsStory: StoryObj = ({ format }: StoryProps) => {
 limitItemsStory.storyName = 'with a limit of 3 items';
 
 export const outsideContextStory: StoryObj = () => {
-	global.fetch = mostViewedRequest;
+	global.fetch = mockMostViewedRequestFetch;
 
 	return (
 		<Section fullWidth={true}>

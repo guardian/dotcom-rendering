@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { calloutCampaign } from '../../fixtures/manual/calloutCampaign';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { customMockedFetch } from '../lib/mockRESTCalls';
+import { customMockFetch } from '../lib/mockRESTCalls';
 import { CalloutEmbedBlockComponent } from './CalloutEmbedBlockComponent.importable';
 
 export default {
@@ -9,7 +9,7 @@ export default {
 	title: 'Components/CalloutEmbedBlockComponent',
 };
 
-const goodRequest = customMockedFetch([
+const mockGoodRequestFetch = customMockFetch([
 	{
 		mockedMethod: 'POST',
 		mockedUrl:
@@ -19,7 +19,7 @@ const goodRequest = customMockedFetch([
 ]);
 
 export const Default = () => {
-	global.fetch = goodRequest;
+	global.fetch = mockGoodRequestFetch;
 
 	return (
 		<div
