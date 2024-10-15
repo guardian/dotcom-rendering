@@ -26,13 +26,13 @@ export const mockFetch = (
 	const url = new Request(input).url;
 
 	switch (true) {
-		case /logs\.(code.dev-)?guardianapis\.com\/log/.test(url) &&
+		case /logs\.(code\.dev-)?guardianapis\.com\/log/.test(url) &&
 			requestInit?.method === 'POST':
 			return createMockResponse(200);
-		case /.*api.nextgen.guardianapps.co.uk\/most-read-geo.*/.test(url):
+		case /.*api\.nextgen\.guardianapps\.co\.uk\/most-read-geo.*/.test(url):
 			return createMockResponse(200, mostReadGeo);
 		// Comment count
-		case /.*api.nextgen.guardianapps.co.uk\/discussion\/comment-counts.*/.test(
+		case /.*api\.nextgen\.guardianapps\.co\.uk\/discussion\/comment-counts.*/.test(
 			url,
 		):
 			return createMockResponse(200, {
@@ -66,38 +66,38 @@ export const mockFetch = (
 				'/p/d8ex5': 496,
 			});
 		// Most read by category
-		case /.*api.nextgen.guardianapps.co.uk\/most-read.*/.test(url):
+		case /.*api\.nextgen\.guardianapps\.co\.uk\/most-read.*/.test(url):
 			return createMockResponse(200, mostRead);
 		// Related
-		case /.*api.nextgen.guardianapps.co.uk\/related.*/.test(url):
+		case /.*api\.nextgen\.guardianapps\.co\.uk\/related.*/.test(url):
 			return createMockResponse(200, related);
 		// Popular in tag
-		case /.*api.nextgen.guardianapps.co.uk\/popular-in-tag.*/.test(url):
+		case /.*api\.nextgen\.guardianapps\.co\.uk\/popular-in-tag.*/.test(url):
 			return createMockResponse(200, related);
 		// Series
-		case /.*api.nextgen.guardianapps.co.uk\/series.*/.test(url):
+		case /.*api\.nextgen\.guardianapps\.co\.uk\/series.*/.test(url):
 			return createMockResponse(200, series);
 		// Story package
-		case /.*api.nextgen.guardianapps.co.uk\/story-package.*/.test(url):
+		case /.*api\.nextgen\.guardianapps\.co\.uk\/story-package.*/.test(url):
 			return createMockResponse(200, storyPackage);
 		// Rich link
-		case /.*api.nextgen.guardianapps.co.uk\/embed\/card.*/.test(url):
+		case /.*api\.nextgen\.guardianapps\.co\.uk\/embed\/card.*/.test(url):
 			return createMockResponse(200, richLinkCard);
 		// Get 'short' discussion - top comments
-		case /.*discussion.theguardian.com\/discussion-api\/discussion\/p\/4v8kk\/topcomments/.test(
+		case /.*discussion\.theguardian\.com\/discussion-api\/discussion\/p\/4v8kk\/topcomments/.test(
 			url,
 		):
 			return createMockResponse(200, discussionNoTopComments);
 		// Get 'short' discussion
-		case /.*discussion.theguardian.com\/discussion-api\/discussion\/p\/4v8kk/.test(
+		case /.*discussion\.theguardian\.com\/discussion-api\/discussion\/p\/4v8kk/.test(
 			url,
 		):
 			return createMockResponse(200, shortDiscussion);
 		// Get country code
-		case /.*api.nextgen.guardianapps.co.uk\/geolocation.*/.test(url):
+		case /.*api\.nextgen\.guardianapps\.co\.uk\/geolocation.*/.test(url):
 			return createMockResponse(200, { country: 'GB' });
 		// Match report data
-		case /.*api.nextgen.guardianapps.co.uk\/football\/api.*/.test(url):
+		case /.*api\.nextgen\.guardianapps\.co\.uk\/football\/api.*/.test(url):
 			return createMockResponse(200, matchReport);
 		// Get user discussion api (used for myAccount dropdown)
 		case url.includes(
@@ -122,42 +122,42 @@ export const mockFetch = (
 				},
 			});
 		// Get discussion 39f5z
-		case /.*\/discussion.theguardian.com\/discussion-api\/discussion\/p\/39f5z\?.*/.test(
+		case /.*\/discussion\.theguardian\.com\/discussion-api\/discussion\/p\/39f5z\?.*/.test(
 			url,
 		):
 			return createMockResponse(200, discussion);
 		case /.*\/discussion\/p\/39f5z\/topcomments.*/.test(url):
 			return createMockResponse(200, topPicks);
 		// Get discussion 39f5x
-		case /.*\/discussion.theguardian.com\/discussion-api\/discussion\/p\/39f5x\?.*/.test(
+		case /.*\/discussion\.theguardian\.com\/discussion-api\/discussion\/p\/39f5x\?.*/.test(
 			url,
 		):
 			return createMockResponse(200, discussionWithNoComments);
 		case /.*\/discussion\/p\/39f5x\/topcomments.*/.test(url):
 			return createMockResponse(200, noTopPicks);
 		// Get discussion 39f5a
-		case /.*\/discussion.theguardian.com\/discussion-api\/discussion\/p\/39f5a\?.*/.test(
+		case /.*\/discussion\.theguardian\.com\/discussion-api\/discussion\/p\/39f5a\?.*/.test(
 			url,
 		):
 			return createMockResponse(200, discussionWithTwoComments);
 		case /.*\/discussion\/p\/39f5a\/topcomments.*/.test(url):
 			return createMockResponse(200, noTopPicks);
 		// Get discussion 32255
-		case /.*\/discussion.theguardian.com\/discussion-api\/discussion\/p\/32255\?.*/.test(
+		case /.*\/discussion\.theguardian\.com\/discussion-api\/discussion\/p\/32255\?.*/.test(
 			url,
 		):
 			return createMockResponse(200, legacyDiscussionWithoutThreading);
 		case /.*\/discussion\/p\/32255\/topcomments.*/.test(url):
 			return createMockResponse(200, noTopPicks);
 		// Get discussion abc123
-		case /.*\/discussion.theguardian.com\/discussion-api\/discussion\/p\/abc123\?.*/.test(
+		case /.*\/discussion\.theguardian\.com\/discussion-api\/discussion\/p\/abc123\?.*/.test(
 			url,
 		):
 			return createMockResponse(200, discussion);
 		case /.*\/discussion\/p\/abc123\/topcomments.*/.test(url):
 			return createMockResponse(200, noTopPicks);
 		// Get more replies
-		case /.*discussion.theguardian.com\/discussion-api\/comment\/.*/.test(
+		case /.*discussion\.theguardian\.com\/discussion-api\/comment\/.*/.test(
 			url,
 		):
 			return createMockResponse(200, {
@@ -165,14 +165,14 @@ export const mockFetch = (
 				comment,
 			});
 		// Recommend
-		case /.*discussion.theguardian.com\/discussion-api\/comment\/.*\/recommend/.test(
+		case /.*discussion\.theguardian\.com\/discussion-api\/comment\/.*\/recommend/.test(
 			url,
 		) && requestInit?.method === 'POST':
 			return createMockResponse(200, {
 				status: 'ok',
 			});
 		// Abuse form
-		case /.*discussion.theguardian.com\/discussion-api\/comment\/.*\/reportAbuse/.test(
+		case /.*discussion\.theguardian\.com\/discussion-api\/comment\/.*\/reportAbuse/.test(
 			url,
 		) && requestInit?.method === 'POST':
 			return createMockResponse(200, {
@@ -187,9 +187,8 @@ export const mockFetch = (
 			url,
 		) && requestInit?.method === 'POST':
 			return createMockResponse(200);
-		//https://discussion.theguardian.com/discussion-api/discussion/p/g8g7v/comment?api-key=dotcom-rendering
-		// This returns a mocked error for a story 97d6eab4a98917f63bc96a7ac64f7ca7
-		case /.*discussion.theguardian.com\/discussion-api\/discussion\/p\/g8g7v\/.*/.test(
+		// This returns a mocked error for a story 97d6eab4a98917f63bc96a7
+		case /.*discussion\.theguardian\.com\/discussion-api\/discussion\/p\/g8g7v\/.*/.test(
 			url,
 		) && requestInit?.method === 'POST':
 			return createMockResponse(400, {
@@ -198,31 +197,30 @@ export const mockFetch = (
 				errorCode: 'USERNAME_MISSING',
 			});
 		// Get discussion
-		case /.*discussion.theguardian.com\/discussion-api\/discussion\/.*/.test(
+		case /.*discussion\.theguardian\.com\/discussion-api\/discussion\/.*/.test(
 			url,
 		):
 			return createMockResponse(200, discussion);
-		case /.*contributions\.(code.dev-)?guardianapis\.com\/header/.test(
+		case /.*contributions\.(code\.dev-)?guardianapis\.com\/header/.test(
 			url,
 		) && requestInit?.method === 'POST':
 			return createMockResponse(200, contributionsHeaderResponse);
 		// Get Ophan
-		case /.*ophan.theguardian.com\/img\/.*/.test(url):
+		case /.*ophan\.theguardian\.com\/img\/.*/.test(url):
 			return createMockResponse(200);
 
 		// Return an error response if the request body includes the
 		// phrase 'example.com', otherwise, return a success response.
 		// For use on stories and tests involving posts to the '/email/many'
-		// or '/email'
-		// api endpoint eg:
-		// dotcom-rendering/src/components/ManyNewsletterSignUp.stories.tsx
-		case /.*api.nextgen.guardianapps.co.uk\/email[/many]{0,1}.*/.test(
+		// or '/email' api endpoint eg:
+		case /.*api\.nextgen\.guardianapps\.co\.uk\/email[/many]{0,1}.*/.test(
 			url,
 		) && requestInit?.method === 'POST':
 			const decodedBody = decodeURIComponent(
 				requestInit?.body?.toString() ?? '',
 			);
-			return decodedBody.includes('example.com')
+			const exampleDomainRegex = /\bexample\.com\b/;
+			return exampleDomainRegex.test(decodedBody)
 				? createMockResponse(500)
 				: createMockResponse(200);
 		default:
