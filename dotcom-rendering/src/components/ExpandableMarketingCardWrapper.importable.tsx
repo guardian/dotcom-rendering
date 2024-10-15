@@ -38,11 +38,11 @@ const stickyContainerStyles = css`
 	position: sticky;
 	top: 0;
 	${getZIndex('expandableMarketingCardOverlay')};
-	animation: slidein 2s normal;
+	animation: slidein 2.5s linear;
 
 	@keyframes slidein {
 		from {
-			translate: -800px 0;
+			translate: -1200px 0;
 		}
 
 		to {
