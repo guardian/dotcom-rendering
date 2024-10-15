@@ -12,12 +12,13 @@ const mockContributionsRequestFetch = (
 	customMockFetch([
 		{
 			mockedMethod: 'GET',
-			mockedUrl: /.*ophan.theguardian.com\/img\/.*/,
+			mockedUrl: /.*ophan\.theguardian\.com\/img\/.*/,
 			mockedStatus: 200,
 		},
 		{
 			mockedMethod: 'POST',
-			mockedUrl: /.*contributions\.(code.dev-)?guardianapis\.com\/header/,
+			mockedUrl:
+				/.*contributions\.(code\.dev-)?guardianapis\.com\/header/,
 			mockedStatus: 200,
 			mockedBody:
 				component === 'SignInPromptHeader'
