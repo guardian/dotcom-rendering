@@ -257,6 +257,9 @@ export const DecideContainer = ({
 						trails={trails}
 						imageLoading={imageLoading}
 						containerType={'scrollable/small'}
+						containerPalette={containerPalette}
+						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 					/>
 				</Island>
 			);
