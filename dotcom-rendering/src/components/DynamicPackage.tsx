@@ -482,6 +482,12 @@ const Card75_ColumnOfCards25 = ({
 											? 'medium'
 											: 'small'
 									}
+									headlineSizeOnMobile={
+										cardIndex === 0 ||
+										remaining.length === 2
+											? undefined
+											: 'tiny'
+									}
 									supportingContent={limitSupportingContent(
 										card,
 									)}
