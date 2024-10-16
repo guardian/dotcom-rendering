@@ -74,6 +74,7 @@ type BoostedSplashProperties = {
 	imagePositionOnMobile: ImagePositionType;
 	imageSize: ImageSizeType;
 	supportingContentAlignment: Alignment;
+	liveUpdatesAlignment: Alignment;
 	trailTextSize: TrailTextSize;
 };
 
@@ -96,6 +97,7 @@ const decideSplashCardProperties = (
 				imageSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
+				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
 			};
 		case 'boost':
@@ -108,6 +110,7 @@ const decideSplashCardProperties = (
 				imageSize: 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
+				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
 			};
 		case 'megaboost':
@@ -119,6 +122,7 @@ const decideSplashCardProperties = (
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
+				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
 			};
 		case 'gigaboost':
@@ -130,6 +134,7 @@ const decideSplashCardProperties = (
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
+				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
 			};
 	}
@@ -159,6 +164,7 @@ export const SplashCardLayout = ({
 		imagePositionOnMobile,
 		imageSize,
 		supportingContentAlignment,
+		liveUpdatesAlignment,
 		trailTextSize,
 	} = decideSplashCardProperties(
 		card.boostLevel ?? 'default',
@@ -193,7 +199,7 @@ export const SplashCardLayout = ({
 					imageLoading={imageLoading}
 					aspectRatio="5:4"
 					kickerText={card.kickerText}
-					showLivePlayable={card.showLivePlayable}
+					liveUpdatesAlignment={liveUpdatesAlignment}
 					boostedFontSizes={true}
 					isFlexSplash={true}
 					showTopBarDesktop={false}
@@ -210,6 +216,7 @@ type BoostedCardProperties = {
 	headlineSizeOnMobile: SmallHeadlineSize;
 	headlineSizeOnTablet: SmallHeadlineSize;
 	imageSize: ImageSizeType;
+	liveUpdatesPosition: 'inner' | 'outer';
 	supportingContentAlignment: Alignment;
 };
 
@@ -226,6 +233,7 @@ const decideCardProperties = (
 				headlineSizeOnMobile: 'small',
 				headlineSizeOnTablet: 'tiny',
 				imageSize: 'jumbo',
+				liveUpdatesPosition: 'outer',
 				supportingContentAlignment: 'horizontal',
 			};
 		case 'boost':
@@ -235,7 +243,8 @@ const decideCardProperties = (
 				headlineSizeOnMobile: 'tiny',
 				headlineSizeOnTablet: 'tiny',
 				imageSize: 'medium',
-				supportingContentAlignment: 'vertical',
+				liveUpdatesPosition: 'inner',
+				supportingContentAlignment: 'horizontal',
 			};
 	}
 };
@@ -262,6 +271,7 @@ export const BoostedCardLayout = ({
 		headlineSizeOnTablet,
 		imageSize,
 		supportingContentAlignment,
+		liveUpdatesPosition,
 	} = decideCardProperties(card.boostLevel);
 	return (
 		<UL padBottom={true} isFlexibleContainer={true} showTopBar={true}>
@@ -292,9 +302,11 @@ export const BoostedCardLayout = ({
 					aspectRatio="5:4"
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
+					liveUpdatesAlignment="horizontal"
 					showTopBarDesktop={false}
 					showTopBarMobile={true}
 					boostedFontSizes={true}
+					liveUpdatesPosition={liveUpdatesPosition}
 				/>
 			</LI>
 		</UL>
