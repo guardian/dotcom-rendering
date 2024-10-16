@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { GoalAttempts } from './GoalAttempts';
 
 export default {

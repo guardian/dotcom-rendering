@@ -4,7 +4,7 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
-import type { ArticleFormat } from '../../../lib/format';
+import type { ArticleFormat } from '../../../lib/articleFormat';
 import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
 import { ContainerOverrides } from '../../ContainerOverrides';

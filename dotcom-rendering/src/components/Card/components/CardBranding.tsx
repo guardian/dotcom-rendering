@@ -6,7 +6,7 @@ import {
 } from '@guardian/source/foundations';
 import { useConfig } from '../../../components/ConfigContext';
 import { decideCardLogo } from '../../../lib/decideLogo';
-import type { ArticleFormat } from '../../../lib/format';
+import type { ArticleFormat } from '../../../lib/articleFormat';
 import { getZIndex } from '../../../lib/getZIndex';
 import { getOphanComponents } from '../../../lib/labs';
 import { palette as themePalette } from '../../../palette';

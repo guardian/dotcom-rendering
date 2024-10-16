@@ -12,7 +12,7 @@ import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { palette } from '../palette';
 import { QuoteIcon } from './QuoteIcon';
 

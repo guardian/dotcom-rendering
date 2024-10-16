@@ -3,7 +3,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '../lib/format';
+} from './articleFormat';
 import type { DCRContainerPalette } from '../types/front';
 import { cardHasDarkBackground } from './cardHelpers';
 

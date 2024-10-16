@@ -1,4 +1,4 @@
-import { type ArticleFormat, decideFormat } from '../lib/format';
+import { type ArticleFormat, decideFormat } from './articleFormat';
 import type { DCRFrontImage } from '../types/front';
 import type { FETrailType, TrailType } from '../types/trails';
 import { getDataLinkNameCard } from './getDataLinkName';

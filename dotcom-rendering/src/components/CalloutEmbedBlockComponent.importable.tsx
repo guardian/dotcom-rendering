@@ -7,7 +7,7 @@ import {
 import { Button } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { decidePalette } from '../lib/decidePalette';
-import type { ArticleFormat } from '../lib/format';
+import type { ArticleFormat } from '../lib/articleFormat';
 import MinusIcon from '../static/icons/minus.svg';
 import PlusIcon from '../static/icons/plus.svg';
 import type {

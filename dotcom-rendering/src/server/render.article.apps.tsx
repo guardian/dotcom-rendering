@@ -7,7 +7,7 @@ import {
 	getPathFromManifest,
 } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
-import { ArticleDesign } from '../lib/format';
+import { ArticleDesign } from '../lib/articleFormat';
 import { createGuardian } from '../model/guardian';
 import type { Article } from '../types/article';
 import type { Config } from '../types/configContext';

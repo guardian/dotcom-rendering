@@ -12,7 +12,7 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { palette } from '../palette';
 import { KeyEventsCarousel } from './KeyEventsCarousel.importable';
 

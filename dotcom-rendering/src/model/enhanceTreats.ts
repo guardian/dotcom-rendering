@@ -1,5 +1,5 @@
 import type { EditionId } from '../lib/edition';
-import { Pillar } from '../lib/format';
+import { Pillar } from '../lib/articleFormat';
 import type { FEFrontCard, TreatType } from '../types/front';
 
 const SOCCER_TREAT: TreatType = {

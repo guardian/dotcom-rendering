@@ -10,7 +10,7 @@ import {
 	decideTheme,
 	ArticleDesign as Design,
 	ArticleSpecial as Special,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import { getSharingUrls } from '../lib/sharing-urls';
 import { insertDisclaimerElement } from '../model/enhance-disclaimer';

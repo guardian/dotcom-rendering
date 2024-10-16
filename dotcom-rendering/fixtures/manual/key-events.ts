@@ -3,7 +3,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '../../src/lib/format';
+} from '../../src/lib/articleFormat';
 
 export interface KeyEventCard {
 	id: string;

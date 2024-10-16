@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Pillar } from '../lib/format';
+import { Pillar } from '../lib/articleFormat';
 import { Treats } from './Treats';
 
 export default {

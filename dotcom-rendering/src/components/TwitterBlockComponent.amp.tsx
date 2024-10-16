@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { article17, palette } from '@guardian/source/foundations';
 import { JSDOM } from 'jsdom';
-import type { ArticleTheme } from '../lib/format';
+import type { ArticleTheme } from '../lib/articleFormat';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import type { TweetBlockElement } from '../types/content';
 

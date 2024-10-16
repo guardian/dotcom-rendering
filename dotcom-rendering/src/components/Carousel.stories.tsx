@@ -9,7 +9,7 @@ import {
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';

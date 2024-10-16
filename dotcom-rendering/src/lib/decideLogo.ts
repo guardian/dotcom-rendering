@@ -1,4 +1,4 @@
-import type { ArticleFormat } from '../lib/format';
+import type { ArticleFormat } from './articleFormat';
 import type { Branding } from '../types/branding';
 import type { DCRContainerPalette } from '../types/front';
 import { cardHasDarkBackground } from './cardHelpers';

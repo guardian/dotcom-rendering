@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { DividerBlockComponent } from './DividerBlockComponent';
 import { TextBlockComponent } from './TextBlockComponent';
 

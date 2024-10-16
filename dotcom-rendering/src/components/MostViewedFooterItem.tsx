@@ -5,7 +5,7 @@ import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { palette } from '../palette';
 import { AgeWarning } from './AgeWarning';
 import { BigNumber } from './BigNumber';

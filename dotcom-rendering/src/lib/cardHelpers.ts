@@ -1,4 +1,4 @@
-import { ArticleDesign, type ArticleFormat } from '../lib/format';
+import { ArticleDesign, type ArticleFormat } from './articleFormat';
 import type { DCRContainerPalette } from '../types/front';
 
 export const isMediaCard = (format: ArticleFormat): boolean => {

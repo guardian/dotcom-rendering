@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { unescapeData } from '../lib/escapeData';
-import type { ArticleFormat } from '../lib/format';
+import type { ArticleFormat } from '../lib/articleFormat';
 import { Caption } from './Caption';
 
 type Props = {

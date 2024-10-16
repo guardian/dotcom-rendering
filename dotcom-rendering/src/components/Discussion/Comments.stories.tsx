@@ -11,7 +11,7 @@ import type {
 	Reader,
 } from '../../lib/discussion';
 import { discussionApiResponseSchema } from '../../lib/discussion';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import { ok } from '../../lib/result';
 import { Comments } from './Comments';
 

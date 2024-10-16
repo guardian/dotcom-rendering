@@ -5,7 +5,7 @@ import {
 	resultGroups,
 } from '../../fixtures/manual/knowledgeQuizAtom';
 import { sharingUrls } from '../../fixtures/manual/sharingUrls';
-import { Pillar } from '../lib/format';
+import { Pillar } from '../lib/articleFormat';
 import { KnowledgeQuizAtom } from './KnowledgeQuizAtom.importable';
 
 const questionOne = ensure(exampleKnowledgeQuestions.find((x) => x));

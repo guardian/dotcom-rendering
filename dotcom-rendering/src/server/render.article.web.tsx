@@ -16,7 +16,7 @@ import {
 	type ArticleFormat,
 	decideFormat,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { polyfillIO } from '../lib/polyfill.io';
 import { extractNAV } from '../model/extract-nav';

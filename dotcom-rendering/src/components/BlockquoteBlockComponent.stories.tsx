@@ -8,7 +8,7 @@ import {
 	getAllDesigns,
 	getAllThemes,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { BlockquoteBlockComponent } from './BlockquoteBlockComponent';
 
 const meta = {

@@ -42,7 +42,7 @@ import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
-import { type ArticleFormat, ArticleSpecial } from '../lib/format';
+import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';

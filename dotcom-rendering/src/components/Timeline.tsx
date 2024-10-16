@@ -12,7 +12,7 @@ import {
 	textSansBold15,
 	textSansBold17,
 } from '@guardian/source/foundations';
-import { ArticleDesign, type ArticleFormat } from '../lib/format';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import type { NestedArticleElement } from '../lib/renderElement';
 import { palette } from '../palette';
 import type {

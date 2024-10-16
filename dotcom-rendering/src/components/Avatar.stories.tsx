@@ -7,7 +7,7 @@ import {
 	ArticleSpecial,
 	type ArticleTheme,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { Avatar } from './Avatar';
 
 const meta = {

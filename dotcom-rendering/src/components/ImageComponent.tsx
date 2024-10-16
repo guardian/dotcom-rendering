@@ -13,7 +13,7 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { getLargest, getMaster } from '../lib/image';
 import { palette as themePalette } from '../palette';
 import type {

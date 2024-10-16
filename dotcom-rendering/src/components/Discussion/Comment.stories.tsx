@@ -5,7 +5,7 @@ import type {
 	ReplyType,
 	Staff,
 } from '../../lib/discussion';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import { ok } from '../../lib/result';
 import { Comment } from './Comment';
 

@@ -1,5 +1,5 @@
 import type { SWRConfiguration } from 'swr';
-import { ArticleDesign, type ArticleFormat } from '../lib/format';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { useApi } from '../lib/useApi';
 import { useHydrated } from '../lib/useHydrated';
 import type { TeamType } from '../types/sport';

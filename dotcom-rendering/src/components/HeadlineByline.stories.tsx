@@ -9,7 +9,7 @@ import {
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { HeadlineByline } from './HeadlineByline';
 
 export default {

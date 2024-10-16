@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 	type ArticleTheme,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { NumberedTitleBlockComponent } from './NumberedTitleBlockComponent';
 
 export default {

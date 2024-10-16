@@ -5,7 +5,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { EmailSignup } from './EmailSignup';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { Section } from './Section';

@@ -7,7 +7,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
 
 const tomorrow = new Date().setDate(new Date().getDate() + 1) / 1000;

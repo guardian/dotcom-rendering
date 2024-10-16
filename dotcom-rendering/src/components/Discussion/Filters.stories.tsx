@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { FilterOptions } from '../../lib/discussion';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import { Filters } from './Filters';
 
 export default { title: 'Discussion/Filters' };

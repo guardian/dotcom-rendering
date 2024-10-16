@@ -20,7 +20,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { palette as schemedPalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { BylineLink } from './BylineLink';

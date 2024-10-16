@@ -5,7 +5,7 @@ import {
 	text,
 	textSans12,
 } from '@guardian/source/foundations';
-import type { ArticleTheme } from '../lib/format';
+import type { ArticleTheme } from '../lib/articleFormat';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import type { RichLinkBlockElement } from '../types/content';
 

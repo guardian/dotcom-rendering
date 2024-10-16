@@ -5,8 +5,11 @@ import { StraightLines } from '@guardian/source-development-kitchen/react-compon
 import type { ReactNode } from 'react';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getSoleContributor } from '../lib/byline';
-import { ArticleDesign, ArticleDisplay } from '../lib/format';
-import type { ArticleFormat } from '../lib/format';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+} from '../lib/articleFormat';
 import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
 import type { TagType } from '../types/tag';

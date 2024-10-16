@@ -7,9 +7,10 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
+	getAllDesigns,
+	getAllThemes,
 	Pillar,
-} from '../lib/format';
-import { getAllDesigns, getAllThemes } from '../lib/format';
+} from '../lib/articleFormat';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { TextBlockElement } from '../types/content';
 import { MiniProfiles } from './MiniProfiles';

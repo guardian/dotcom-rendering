@@ -2,7 +2,7 @@ import { jsx } from '@emotion/react';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
 import { isElement, parseHtml } from '../lib/domUtils';
-import type { ArticleFormat } from '../lib/format';
+import type { ArticleFormat } from '../lib/articleFormat';
 import { logger } from '../server/lib/logging';
 import { Subheading } from './Subheading';
 

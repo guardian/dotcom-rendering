@@ -2,7 +2,7 @@ import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
-} from '../lib/format';
+} from './articleFormat';
 import type { FEFrontCardStyle } from '../types/front';
 
 /**

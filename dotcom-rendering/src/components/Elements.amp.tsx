@@ -4,7 +4,7 @@ import {
 	ArticleDesign,
 	type ArticleFormat,
 	type ArticleTheme,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';

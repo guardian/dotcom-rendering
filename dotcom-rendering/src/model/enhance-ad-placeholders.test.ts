@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type {
 	AdPlaceholderBlockElement,
 	FEElement,

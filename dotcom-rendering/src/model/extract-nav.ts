@@ -1,5 +1,5 @@
 import type { EditionId } from '../lib/edition';
-import { type ArticleTheme, Pillar } from '../lib/format';
+import { type ArticleTheme, Pillar } from '../lib/articleFormat';
 import type { FELinkType, FENavType } from '../types/frontend';
 import { findPillar } from './find-pillar';
 

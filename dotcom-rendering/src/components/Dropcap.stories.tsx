@@ -6,7 +6,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { DropCap } from './DropCap';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (

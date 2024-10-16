@@ -3,7 +3,7 @@ import { breakpoints, from } from '@guardian/source/foundations';
 import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { images } from '../../fixtures/generated/images';
 import { liveBlock } from '../../fixtures/manual/liveBlock';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { LiveBlock } from './LiveBlock';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {

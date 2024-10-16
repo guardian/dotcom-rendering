@@ -6,7 +6,7 @@ import { isAmpSupported } from '../components/Elements.amp';
 import type { PermutiveModel } from '../components/Permutive.amp';
 import { enhance } from '../lib/enhance.amp';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
-import { ArticleDesign, decideFormat } from '../lib/format';
+import { ArticleDesign, decideFormat } from '../lib/articleFormat';
 import { generatePermutivePayload } from '../lib/permutive.amp';
 import { extractScripts } from '../lib/scripts.amp';
 import { findBySubsection } from '../model/article-sections';

@@ -9,7 +9,7 @@ import {
 	getPathFromManifest,
 } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
-import { Pillar } from '../lib/format';
+import { Pillar } from '../lib/articleFormat';
 import { polyfillIO } from '../lib/polyfill.io';
 import { themeToPillar } from '../lib/themeToPillar';
 import type { NavType } from '../model/extract-nav';

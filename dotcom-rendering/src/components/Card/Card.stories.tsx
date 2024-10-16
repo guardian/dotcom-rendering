@@ -7,7 +7,7 @@ import {
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '../../lib/format';
+} from '../../lib/articleFormat';
 import type { Branding } from '../../types/branding';
 import type { DCRContainerPalette } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';

@@ -6,7 +6,7 @@ import {
 	getSoleContributor,
 	isContributor,
 } from '../lib/byline';
-import { ArticleDesign, type ArticleFormat } from '../lib/format';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';

@@ -7,7 +7,7 @@ import {
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import type { DCRContainerPalette } from '../types/front';
 import { CardHeadline } from './CardHeadline';
 import { ContainerOverrides } from './ContainerOverrides';

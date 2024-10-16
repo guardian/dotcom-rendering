@@ -1,4 +1,4 @@
-import { Pillar } from '../lib/format';
+import { Pillar } from './articleFormat';
 import type { LegacyPillar } from '../types/frontend';
 
 export const decideNavPillar = (pillar: LegacyPillar): Pillar | undefined => {

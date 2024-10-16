@@ -10,7 +10,7 @@ import {
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { PersonalityQuizAtom } from './PersonalityQuizAtom.importable';
 
 const meta = {

@@ -6,7 +6,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '../../lib/format';
+} from '../../lib/articleFormat';
 import { Pagination } from './Pagination';
 
 const articleFormat: ArticleFormat = {

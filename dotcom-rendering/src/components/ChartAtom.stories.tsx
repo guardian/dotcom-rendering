@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { barChartHtml, lineChartHtml } from '../../fixtures/manual/chartAtoms';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { ChartAtom } from './ChartAtom.importable';
 
 export default {

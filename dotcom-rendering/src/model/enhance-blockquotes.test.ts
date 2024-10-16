@@ -1,5 +1,9 @@
 import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
-import { ArticleDesign, type ArticleFormat, decideFormat } from '../lib/format';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	decideFormat,
+} from '../lib/articleFormat';
 import type { FEElement } from '../types/content';
 import type { FEArticleType } from '../types/frontend';
 import { enhanceBlockquotes } from './enhance-blockquotes';
