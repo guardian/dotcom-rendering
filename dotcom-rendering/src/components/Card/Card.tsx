@@ -882,9 +882,7 @@ export const Card = ({
 							containerPalette={containerPalette}
 							absoluteServerTimes={absoluteServerTimes}
 							displayHeader={isFlexibleContainer}
-							directionOnMobile={
-								isFlexibleContainer ? 'horizontal' : undefined
-							}
+							directionOnMobile={'horizontal'}
 						></LatestLinks>
 					</Island>
 				)}
