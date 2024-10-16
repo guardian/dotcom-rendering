@@ -37,10 +37,12 @@ export const generateImageURL = ({
 	mainImage,
 	imageWidth,
 	resolution,
+	aspectRatio = 'none',
 }: {
 	mainImage: string;
 	imageWidth: number;
 	resolution: 'low' | 'high';
+	aspectRatio?: string;
 }): string => {
 	const url = new URL(mainImage);
 
@@ -51,6 +53,7 @@ export const generateImageURL = ({
 		width: imageWidth.toString(),
 		dpr: String(resolution === 'high' ? 2 : 1),
 		s: 'none',
+		crop: aspectRatio,
 	});
 
 	return `https://i.guim.co.uk/img/${getServiceFromUrl(url)}${

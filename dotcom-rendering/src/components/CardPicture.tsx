@@ -80,11 +80,9 @@ const decideImageWidths = (
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#styling_with_css
  *
- * We also add object-fit: cover to ensure the image fills the container and maintains its own aspect ratio.
  */
 const block = css`
 	display: block;
-	object-fit: cover;
 `;
 
 /**
@@ -92,7 +90,7 @@ const block = css`
  * This is due to replace the existing card ratio of 5:3
  * For now, we are keeping both ratios.
  */
-const decideAspectRatioStyles = (aspectRatio: AspectRatio) => {
+const decideAspectRatioStyles = (aspectRatio?: AspectRatio) => {
 	return css`
 		padding-top: ${aspectRatio === '5:4'
 			? `${(4 / 5) * 100}%`
@@ -128,9 +126,13 @@ export const CardPicture = ({
 	loading,
 	roundedCorners,
 	isCircular,
-	aspectRatio = '5:3', // Default aspect ratio
+	aspectRatio,
 }: Props) => {
-	const sources = generateSources(mainImage, decideImageWidths(imageSize));
+	const sources = generateSources(
+		mainImage,
+		decideImageWidths(imageSize),
+		aspectRatio,
+	);
 
 	const fallbackSource = getFallbackSource(sources);
 
