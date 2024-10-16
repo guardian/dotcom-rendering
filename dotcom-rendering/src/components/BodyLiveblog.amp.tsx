@@ -5,7 +5,7 @@ import {
 	textSans12,
 } from '@guardian/source/foundations';
 import { buildAdTargeting } from '../lib/ad-targeting';
-import { decideTheme } from '../lib/decideTheme';
+import { decideTheme } from '../lib/format';
 import { getSharingUrls } from '../lib/sharing-urls';
 import RefreshIcon from '../static/icons/refresh.svg';
 import type { AMPArticleModel } from '../types/article.amp';

@@ -1,5 +1,4 @@
-import { decideFormat } from '../lib/decideFormat';
-import type { ArticleFormat } from '../lib/format';
+import { type ArticleFormat, decideFormat } from '../lib/format';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import { appsLightboxImages } from '../model/appsLightboxImages';
 import { buildLightboxImages } from '../model/buildLightboxImages';
