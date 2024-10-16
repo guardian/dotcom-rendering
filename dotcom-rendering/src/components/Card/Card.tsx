@@ -25,7 +25,7 @@ import type { MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
 import { CardCommentCount } from '../CardCommentCount.importable';
-import { CardHeadline } from '../CardHeadline';
+import { CardHeadline, ResponsiveFontSize } from '../CardHeadline';
 import type { AspectRatio, Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
@@ -503,6 +503,24 @@ export const Card = ({
 		);
 	};
 
+	const headlineSizes: ResponsiveFontSize = {
+		desktop:
+			headlineSize && boostedFontSizes
+				? `${headlineSize}Boosted`
+				: headlineSize || 'medium',
+
+		...(headlineSizeOnTablet && {
+			tablet: boostedFontSizes
+				? `${headlineSizeOnTablet}Boosted`
+				: headlineSizeOnTablet,
+		}),
+		...(headlineSizeOnMobile && {
+			mobile: boostedFontSizes
+				? `${headlineSizeOnMobile}Boosted`
+				: headlineSizeOnMobile,
+		}),
+	};
+
 	return (
 		<CardWrapper
 			format={format}
@@ -527,9 +545,7 @@ export const Card = ({
 					<CardHeadline
 						headlineText={headlineText}
 						format={format}
-						size={headlineSize}
-						sizeOnMobile={headlineSizeOnMobile}
-						sizeOnTablet={headlineSizeOnTablet}
+						fontSizes={headlineSizes}
 						showQuotes={showQuotes}
 						kickerText={
 							format.design === ArticleDesign.LiveBlog &&
@@ -544,7 +560,6 @@ export const Card = ({
 						byline={byline}
 						showByline={showByline}
 						isExternalLink={isExternalLink}
-						boostedFontSizes={boostedFontSizes}
 					/>
 					{!isUndefined(starRating) ? (
 						<StarRatingComponent
@@ -735,9 +750,7 @@ export const Card = ({
 									<CardHeadline
 										headlineText={headlineText}
 										format={format}
-										size={headlineSize}
-										sizeOnMobile={headlineSizeOnMobile}
-										sizeOnTablet={headlineSizeOnTablet}
+										fontSizes={headlineSizes}
 										showQuotes={showQuotes}
 										kickerText={
 											format.design ===
@@ -754,7 +767,6 @@ export const Card = ({
 										byline={byline}
 										showByline={showByline}
 										isExternalLink={isExternalLink}
-										boostedFontSizes={boostedFontSizes}
 									/>
 									{!isUndefined(starRating) ? (
 										<StarRatingComponent

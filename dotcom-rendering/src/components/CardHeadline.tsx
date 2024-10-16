@@ -1,8 +1,7 @@
 import { css } from '@emotion/react';
 import {
-	between,
-	from,
 	headlineMedium14,
+	headlineMedium15,
 	headlineMedium17,
 	headlineMedium20,
 	headlineMedium24,
@@ -35,148 +34,99 @@ type Props = {
 	showPulsingDot?: boolean;
 	hasInlineKicker?: boolean;
 	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
-	size?: SmallHeadlineSize;
-	sizeOnMobile?: SmallHeadlineSize;
-	sizeOnTablet?: SmallHeadlineSize;
-	/* Controls which font size group to use, regular or boosted. Each group maps internally to the smallHeadlineSize type*/
-	boostedFontSizes?: boolean;
+	fontSizes?: ResponsiveFontSize;
 	byline?: string;
 	showByline?: boolean;
 	linkTo?: string; // If provided, the headline is wrapped in a link
 	isExternalLink?: boolean;
 	/** Is the headline inside a Highlights card? */
 	isHighlights?: boolean;
+	bylineSize?: SmallHeadlineSize;
 };
 
-/** These represent a new set of fonts. They are extra large font sizes that, as a group, are only used on headlines */
-const boostedFontStyles = ({ size }: { size: SmallHeadlineSize }) => {
-	switch (size) {
-		case 'ginormous':
-			return `${headlineMedium64}`;
-		case 'huge':
-			return `${headlineMedium50}`;
-		case 'large':
-			return `${headlineMedium42}`;
-		case 'medium':
-			return `${headlineMedium34}`;
-		case 'small':
-			return `${headlineMedium28}`;
-		case 'tiny':
-			return `${headlineMedium24}`;
-	}
+export type CardHeadlineSize =
+	| 'ginormousBoosted'
+	| 'hugeBoosted'
+	| 'largeBoosted'
+	| 'mediumBoosted'
+	| 'smallBoosted'
+	| 'tinyBoosted'
+	| 'ginormous'
+	| 'huge'
+	| 'large'
+	| 'medium'
+	| 'small'
+	| 'tiny';
+
+/** boosted font sizes are the same across all breakpoints so they've been abstracted out to help with readability */
+const boostedSizes = {
+	ginormousBoosted: headlineMedium64,
+	hugeBoosted: headlineMedium50,
+	largeBoosted: headlineMedium42,
+	mediumBoosted: headlineMedium34,
+	smallBoosted: headlineMedium28,
+	tinyBoosted: headlineMedium24,
 };
 
-const fontStyles = ({
-	size,
-	boostedFontSizes,
-}: {
-	size: SmallHeadlineSize;
-	boostedFontSizes: boolean;
-}) => {
-	if (boostedFontSizes) return boostedFontStyles({ size });
+const fontSizeMap = (breakpoint: HeadlineBreakpoint) => {
+	const baseSizes = {
+		desktop: {
+			...boostedSizes,
+			ginormous: headlineMedium50,
+			huge: headlineMedium28,
+			large: headlineMedium24,
+			medium: headlineMedium20,
+			small: headlineMedium17,
+			tiny: headlineMedium14,
+		},
+		tablet: {
+			...boostedSizes,
+			ginormous: headlineMedium42,
+			huge: headlineMedium24,
+			large: headlineMedium20,
+			medium: headlineMedium17,
+			small: headlineMedium15,
+			tiny: headlineMedium14,
+		},
+		mobile: {
+			...boostedSizes,
+			ginormous: headlineMedium34,
+			huge: headlineMedium24,
+			large: headlineMedium20,
+			medium: headlineMedium17,
+			small: headlineMedium15,
+			tiny: headlineMedium14,
+		},
+	};
 
-	switch (size) {
-		case 'ginormous':
-			return css`
-				${from.desktop} {
-					${headlineMedium50}
-				}
-			`;
-		case 'huge':
-			return css`
-				${headlineMedium28}
-			`;
-		case 'large':
-			return css`
-				${headlineMedium24}
-			`;
-		case 'medium':
-			return css`
-				${headlineMedium20}
-			`;
-		case 'small':
-			return css`
-				${headlineMedium17}
-			`;
-		case 'tiny':
-			return css`
-				${headlineMedium14}
-			`;
-	}
+	return baseSizes[breakpoint];
 };
-const fontStylesOnTablet = ({
-	size,
-	boostedFontSizes,
-}: {
-	size?: SmallHeadlineSize;
-	boostedFontSizes: boolean;
-}) => {
-	/* Currently, tablet-specific headline sizing only applies to boosted fonts where a tablet font size has been supplied */
-	if (size && boostedFontSizes) {
-		return css`
-			${between.tablet.and.desktop} {
-				${boostedFontStyles({ size })}
+
+export type ResponsiveFontSize = {
+	desktop: CardHeadlineSize;
+	tablet?: CardHeadlineSize;
+	mobile?: CardHeadlineSize;
+};
+
+type HeadlineBreakpoint = 'desktop' | 'tablet' | 'mobile';
+
+const getFontSize = (fontSize: ResponsiveFontSize) => {
+	return css`
+		${fontSizeMap('desktop')[fontSize.desktop]};
+
+		${fontSize.tablet &&
+		css`
+			${until.desktop} {
+				${fontSizeMap('tablet')[fontSize.tablet]};
 			}
-		`;
-	}
-	return null;
-};
-
-const fontStylesOnMobile = ({
-	size,
-	boostedFontSizes,
-}: {
-	size: SmallHeadlineSize;
-	boostedFontSizes: boolean;
-}) => {
-	if (boostedFontSizes) {
-		return css`
+		`}
+		${fontSize.mobile &&
+		css`
 			${until.tablet} {
-				${boostedFontStyles({ size })}
+				${fontSizeMap('mobile')[fontSize.mobile]};
 			}
-		`;
-	}
-
-	switch (size) {
-		case 'ginormous':
-			return css`
-				${until.mobileLandscape} {
-					${headlineMedium34}
-				}
-				${between.mobileLandscape.and.desktop} {
-					${headlineMedium42}
-				}
-			`;
-		case 'huge':
-			return css`
-				${until.desktop} {
-					${headlineMedium24}
-				}
-			`;
-		case 'large':
-			return css`
-				${until.desktop} {
-					${headlineMedium20}
-				}
-			`;
-		case 'medium':
-			return css`
-				${until.desktop} {
-					${headlineMedium17}
-				}
-			`;
-		case 'small':
-			return css`
-				${until.mobileMedium} {
-					${headlineMedium14}
-				}
-				${between.mobileMedium.and.desktop} {
-					${headlineMedium17}
-				}
-			`;
-		default:
-			return undefined;
-	}
+		`}
+	`;
 };
 
 const labTextStyles = (size: SmallHeadlineSize) => {
@@ -270,15 +220,13 @@ export const CardHeadline = ({
 	kickerText,
 	showPulsingDot,
 	hasInlineKicker,
-	size = 'medium',
-	sizeOnMobile,
-	sizeOnTablet,
-	boostedFontSizes = false,
+	fontSizes = { desktop: 'medium' },
 	byline,
 	showByline,
 	linkTo,
 	isExternalLink,
 	isHighlights = false,
+	bylineSize = 'medium',
 }: Props) => {
 	const kickerColour = isHighlights
 		? palette('--highlights-card-kicker-text')
@@ -286,7 +234,8 @@ export const CardHeadline = ({
 
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
-
+	console.log(headlineText, fontSizes);
+	const fonts = getFontSize(fontSizes);
 	return (
 		<WithLink linkTo={linkTo}>
 			<h3
@@ -294,22 +243,13 @@ export const CardHeadline = ({
 					isSublink ? 'card-sublink-headline' : 'card-headline'
 				}`}
 				css={[
-					format.theme !== ArticleSpecial.Labs &&
-						fontStylesOnMobile({
-							size: sizeOnMobile ?? size,
-							boostedFontSizes,
-						}),
+					fonts,
 
-					format.theme !== ArticleSpecial.Labs &&
-						fontStylesOnTablet({
-							size: sizeOnTablet,
-							boostedFontSizes,
-						}),
-					format.theme === ArticleSpecial.Labs
-						? labTextStyles(size)
-						: fontStyles({ size, boostedFontSizes }),
+					/** TODO - reimplement labs styles */
+					// labTextStyles,
+
 					isSublink &&
-						size === 'tiny' &&
+						fontSizes.desktop === 'medium' &&
 						css`
 							${textSans14}
 						`,
@@ -350,7 +290,7 @@ export const CardHeadline = ({
 				<Byline
 					text={byline}
 					isLabs={format.theme === ArticleSpecial.Labs}
-					size={size}
+					size={bylineSize}
 				/>
 			)}
 		</WithLink>
