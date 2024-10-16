@@ -19,6 +19,7 @@ import {
 	OPHAN_COMPONENT_EVENT_PRIMARY_CTA,
 	OPHAN_COMPONENT_EVENT_SECONDARY_CTA,
 } from '../utils/ophan';
+import { Tracking } from '@guardian/support-dotcom-components/dist/shared/src/types';
 
 // Custom theme for Button/LinkButton
 // See also `tertiaryButtonOverrides` below.
@@ -32,9 +33,24 @@ const buttonStyles = {
 	borderSecondary: palette.neutral[86],
 };
 
+const buttonStylesForTest = {
+	textPrimary: '#FFFFFF',
+	backgroundPrimary: '#051D32',
+	backgroundPrimaryHover: '#072744',
+	textSecondary: palette.neutral[7],
+	backgroundSecondary: palette.neutral[93],
+	backgroundSecondaryHover: palette.neutral[86],
+	borderSecondary: palette.neutral[86],
+};
+
 const contributionsTheme = {
 	button: buttonStyles,
 	link: buttonStyles,
+};
+
+const contributionsThemeForTest = {
+	button: buttonStylesForTest,
+	link: buttonStylesForTest,
 };
 
 type Url = string;
@@ -53,6 +69,7 @@ type Props = {
 	isTertiary?: boolean;
 	cssOverrides?: SerializedStyles;
 	icon?: React.ReactElement;
+	tracking?: Tracking;
 };
 
 // Overrides for tertiary button
@@ -79,6 +96,7 @@ export const EpicButton: ReactComponent<Props> = (allProps: Props) => {
 		isTertiary,
 		cssOverrides,
 		icon,
+		tracking,
 		...props
 	} = allProps;
 
@@ -91,13 +109,22 @@ export const EpicButton: ReactComponent<Props> = (allProps: Props) => {
 			);
 		}
 	};
+	const isColourInTestVariant =
+		tracking?.abTestName?.includes('_LB_EPIC_BG_COLOUR') &&
+		tracking?.abTestVariant === 'VARIANT';
 
 	if (typeof onClickAction === 'string') {
 		// LinkButton doesn't support 'tertiary' priority (unlike Button)
 		// So we'll map that to 'primary' and apply a CSS override on both of
 		// them so they get the same styles for 'tertiary' priority
 		return (
-			<ThemeProvider theme={contributionsTheme}>
+			<ThemeProvider
+				theme={
+					isColourInTestVariant
+						? contributionsThemeForTest
+						: contributionsTheme
+				}
+			>
 				<LinkButton
 					href={onClickAction}
 					icon={icon ?? <SvgArrowRightStraight />}
@@ -119,7 +146,13 @@ export const EpicButton: ReactComponent<Props> = (allProps: Props) => {
 		);
 	}
 	return (
-		<ThemeProvider theme={contributionsTheme}>
+		<ThemeProvider
+			theme={
+				isColourInTestVariant
+					? contributionsThemeForTest
+					: contributionsTheme
+			}
+		>
 			<DSButton
 				iconSide="right"
 				icon={showArrow ? <SvgArrowRightStraight /> : undefined}
