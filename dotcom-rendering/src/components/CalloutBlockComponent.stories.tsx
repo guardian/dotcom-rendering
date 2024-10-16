@@ -1,6 +1,7 @@
 import type { Decorator, Meta, StoryObj } from '@storybook/react';
 import fetchMock from 'fetch-mock';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import { allModes } from '../../.storybook/modes';
 import { calloutCampaign as calloutCampaignV2 } from '../../fixtures/manual/calloutCampaignV2';
 import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
 
@@ -11,6 +12,13 @@ const meta = {
 	component: CalloutBlockComponent,
 	title: 'Components/Callout Block Component',
 	decorators: [centreColumnDecorator],
+	parameters: {
+		chromatic: {
+			modes: {
+				horizontal: allModes.splitHorizontal,
+			},
+		},
+	},
 } satisfies Meta<typeof CalloutBlockComponent>;
 
 export default meta;
