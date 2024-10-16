@@ -3,7 +3,9 @@ import {
 	space,
 	textSans14,
 	textSansBold14,
+	textSansBold17,
 } from '@guardian/source/foundations';
+import { DottedLines } from '@guardian/source-development-kitchen/react-components';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
 import { palette as themePalette } from '../palette';
@@ -11,14 +13,21 @@ import type { DCRContainerPalette } from '../types/front';
 import { WithLink } from './CardHeadline';
 import { ContainerOverrides } from './ContainerOverrides';
 import { DateTime } from './DateTime';
+import type { Alignment } from './SupportingContent';
 
 type Props = {
 	id: string;
-	direction: 'horizontal' | 'vertical';
+	direction: Alignment;
 	absoluteServerTimes: boolean;
-	isDynamo?: true;
+	isDynamo?: boolean;
 	containerPalette?: DCRContainerPalette;
+	displayHeader?: boolean;
 };
+
+const header = css`
+	padding: ${space[2]}px 0;
+	${textSansBold17};
+`;
 
 const horizontal = css`
 	flex-direction: row;
@@ -89,9 +98,10 @@ const extractAboutThreeLines = (text: string) =>
 export const LatestLinks = ({
 	id,
 	direction,
-	isDynamo,
+	isDynamo = false,
 	containerPalette,
 	absoluteServerTimes,
+	displayHeader = false,
 }: Props) => {
 	const { data } = useApi<{
 		blocks: Array<{
@@ -121,81 +131,95 @@ export const LatestLinks = ({
 	`;
 
 	return (
-		<ul
-			css={[
-				ulStyle,
-				revealStyles,
-				!!isDynamo || direction === 'horizontal'
-					? horizontal
-					: vertical,
-				css`
-					color: ${themePalette('--card-headline-trail-text')};
-				`,
-			]}
-		>
-			{data && data.blocks.length >= 3 ? (
-				data.blocks
-					.filter((block) => block.body.trim() !== '')
-					.slice(0, 3)
-					.map((block, index) => (
-						<>
-							<ContainerOverrides
-								containerPalette={containerPalette}
-							>
-								{index > 0 && (
-									<li
-										key={block.id + ' : divider'}
-										css={[dividerStyles]}
-									></li>
-								)}
-								<li
-									key={block.id}
-									css={linkStyles}
-									className={'reveal'}
-								>
-									<WithLink
-										linkTo={`${id}?page=with:block-${block.id}#block-${block.id}`}
-									>
-										<div
-											css={bold}
-											style={{
-												color: themePalette(
-													'--card-kicker-text',
-												),
-											}}
-										>
-											<DateTime
-												date={
-													new Date(
-														block.publishedDateTime,
-													)
-												}
-												display="relative"
-												absoluteServerTimes={
-													absoluteServerTimes
-												}
-												showWeekday={false}
-												showDate={true}
-												showTime={false}
-											/>
-										</div>
-										<span className="show-underline">
-											{extractAboutThreeLines(block.body)}
-										</span>
-									</WithLink>
-								</li>
-							</ContainerOverrides>
-						</>
-					))
-			) : (
+		<>
+			{displayHeader && (
 				<>
-					<li css={linkStyles} />
-					<li css={[dividerStyles, transparent]} />
-					<li css={linkStyles} />
-					<li css={[dividerStyles, transparent]} />
-					<li css={linkStyles} />
+					<DottedLines
+						count={1}
+						color={themePalette('--latest-links-dotted-line')}
+					/>
+
+					<div css={header}>Latest</div>
 				</>
 			)}
-		</ul>
+			<ul
+				css={[
+					ulStyle,
+					revealStyles,
+					!!isDynamo || direction === 'horizontal'
+						? horizontal
+						: vertical,
+					css`
+						color: ${themePalette('--card-headline-trail-text')};
+					`,
+				]}
+			>
+				{data && data.blocks.length >= 3 ? (
+					data.blocks
+						.filter((block) => block.body.trim() !== '')
+						.slice(0, 3)
+						.map((block, index) => (
+							<>
+								<ContainerOverrides
+									containerPalette={containerPalette}
+								>
+									{index > 0 && (
+										<li
+											key={block.id + ' : divider'}
+											css={[dividerStyles]}
+										></li>
+									)}
+									<li
+										key={block.id}
+										css={linkStyles}
+										className={'reveal'}
+									>
+										<WithLink
+											linkTo={`${id}?page=with:block-${block.id}#block-${block.id}`}
+										>
+											<div
+												css={bold}
+												style={{
+													color: themePalette(
+														'--card-kicker-text',
+													),
+												}}
+											>
+												<DateTime
+													date={
+														new Date(
+															block.publishedDateTime,
+														)
+													}
+													display="relative"
+													absoluteServerTimes={
+														absoluteServerTimes
+													}
+													showWeekday={false}
+													showDate={true}
+													showTime={false}
+												/>
+											</div>
+											<span className="show-underline">
+												{extractAboutThreeLines(
+													block.body,
+												)}
+											</span>
+										</WithLink>
+									</li>
+								</ContainerOverrides>
+							</>
+						))
+				) : (
+					<>
+						<li css={linkStyles} />
+						<li css={[dividerStyles, transparent]} />
+						<li css={linkStyles} />
+						<li css={[dividerStyles, transparent]} />
+						<li css={linkStyles} />
+					</>
+				)}
+			</ul>
+		</>
 	);
 };
