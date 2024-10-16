@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import {
+	breakpoints,
 	from,
 	palette as sourcePalette,
 	until,
@@ -39,6 +40,8 @@ import { MostViewedFooterData } from '../components/MostViewedFooterData.importa
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import type { ImageWidthType } from '../components/Picture';
+import { Picture } from '../components/Picture';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
@@ -345,12 +348,18 @@ const stretchLines = css`
 	}
 `;
 
-const podcastCoverImg = css`
+const podcastResponsiveCoverImage = css`
 	${from.wide} {
-		width: 219px;
+		> picture > img {
+			width: calc(219px);
+			height: calc(219px);
+		}
 	}
 	${until.wide} {
-		width: 140px;
+		> picture > img {
+			width: calc(140px);
+			height: calc(140px);
+		}
 	}
 	margin: 0.375rem 0 0.375rem 0;
 `;
@@ -429,6 +438,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const renderAds = isWeb && canRenderAds(article);
 
 	const podcastSeries = article.tags.find((tag) => tag.type === 'Series');
+
+	const podcastImageWidths: [ImageWidthType, ...ImageWidthType[]] = [
+		{ breakpoint: breakpoints.mobile, width: 140 },
+		{ breakpoint: breakpoints.wide, width: 219 },
+	];
 
 	return (
 		<>
@@ -727,18 +741,26 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								</div>
 							)}
 						</GridItem>
-						{format.design === ArticleDesign.Audio && (
-							<GridItem area="image" element="aside">
-								<img
-									src={podcastSeries?.podcast?.image ?? ''}
-									alt={
-										podcastSeries?.title ??
-										'Podcast Cover Image'
-									}
-									css={podcastCoverImg}
-								/>
-							</GridItem>
-						)}
+						{format.design === ArticleDesign.Audio &&
+							podcastSeries && (
+								<GridItem area="image" element="aside">
+									<div css={podcastResponsiveCoverImage}>
+										<Picture
+											role={'supporting'}
+											format={format}
+											master={
+												podcastSeries.podcast?.image ??
+												''
+											}
+											alt={podcastSeries.title}
+											height={1}
+											width={1}
+											loading="lazy"
+											imageWidths={podcastImageWidths}
+										/>
+									</div>
+								</GridItem>
+							)}
 						{isWeb && (
 							<GridItem area="uscard" element="aside">
 								<Hide until="leftCol">

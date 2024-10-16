@@ -28,6 +28,7 @@ type Props = {
 	isLightbox?: boolean;
 	orientation?: Orientation;
 	onLoad?: () => void;
+	imageWidths?: [ImageWidthType, ...ImageWidthType[]];
 };
 
 export type ImageWidthType = { breakpoint: number; width: number };
@@ -325,6 +326,7 @@ export const Picture = ({
 	isLightbox = false,
 	orientation = 'landscape',
 	onLoad,
+	imageWidths,
 }: Props) => {
 	const [loaded, setLoaded] = useState(false);
 	const ref = useCallback((node: HTMLImageElement | null) => {
@@ -342,13 +344,14 @@ export const Picture = ({
 
 	const sources = generateSources(
 		master,
-		decideImageWidths({
-			role,
-			format,
-			isMainMedia,
-			isLightbox,
-			orientation,
-		}),
+		imageWidths ??
+			decideImageWidths({
+				role,
+				format,
+				isMainMedia,
+				isLightbox,
+				orientation,
+			}),
 	);
 
 	/** portrait if higher than 1 or landscape if lower than 1 */
