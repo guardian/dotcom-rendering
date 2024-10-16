@@ -303,27 +303,28 @@ export const CardHeadline = ({
 				className={`${
 					isSublink ? 'card-sublink-headline' : 'card-headline'
 				}`}
-				css={[
-					format.theme !== ArticleSpecial.Labs &&
-						fontStylesOnMobile({
-							size: sizeOnMobile ?? size,
-							boostedFontSizes,
-						}),
+				css={
+					isSublink && size === 'tiny'
+						? css`
+								${textSans14}
+						  `
+						: [
+								format.theme !== ArticleSpecial.Labs &&
+									fontStylesOnMobile({
+										size: sizeOnMobile ?? size,
+										boostedFontSizes,
+									}),
 
-					format.theme !== ArticleSpecial.Labs &&
-						fontStylesOnTablet({
-							size: sizeOnTablet,
-							boostedFontSizes,
-						}),
-					format.theme === ArticleSpecial.Labs
-						? labTextStyles(size)
-						: fontStyles({ size, boostedFontSizes }),
-					isSublink &&
-						size === 'tiny' &&
-						css`
-							${textSans14}
-						`,
-				]}
+								format.theme !== ArticleSpecial.Labs &&
+									fontStylesOnTablet({
+										size: sizeOnTablet,
+										boostedFontSizes,
+									}),
+								format.theme === ArticleSpecial.Labs
+									? labTextStyles(size)
+									: fontStyles({ size, boostedFontSizes }),
+						  ]
+				}
 			>
 				{!!kickerText && (
 					<Kicker
