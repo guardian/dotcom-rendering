@@ -181,7 +181,11 @@ export const SplashCardLayout = ({
 					imageSize={imageSize}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
-					supportingContentAlignment={supportingContentAlignment}
+					supportingContentAlignment={
+						card.showLivePlayable
+							? 'horizontal'
+							: supportingContentAlignment
+					}
 					imageLoading={imageLoading}
 					aspectRatio="5:4"
 					kickerText={card.kickerText}
