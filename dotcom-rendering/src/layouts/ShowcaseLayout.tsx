@@ -3,6 +3,7 @@ import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
+	space,
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
@@ -49,6 +50,7 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/format';
+import { getZIndex } from '../lib/getZIndex';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
@@ -95,10 +97,9 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'title  border  headline   headline headline'
 						'lines  border  media      media    media'
 						'meta   border  media      media    media'
-						'uscard border  media      media    media'
-						'uscard border  standfirst .        right-column'
-						'uscard border  body       .        right-column'
-						'uscard border  .          .        right-column';
+						'meta   border  standfirst .        right-column'
+						'meta   border  body       .        right-column'
+						'.      border  .          .        right-column';
 				}
 
 				${until.wide} {
@@ -107,10 +108,9 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'title  border  headline    headline'
 						'lines  border  media       media'
 						'meta   border  media       media'
-						'uscard border  media       media'
-						'uscard border  standfirst  right-column'
-						'uscard border  body        right-column'
-						'uscard border  .           right-column';
+						'meta   border  standfirst  right-column'
+						'meta   border  body        right-column'
+						'.      border  .           right-column';
 				}
 
 				/*
@@ -167,6 +167,30 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 const maxWidth = css`
 	${from.desktop} {
 		max-width: 620px;
+	}
+`;
+
+const fullHeight = css`
+	height: 100%;
+`;
+
+const usCardStyles = css`
+	align-self: start;
+	position: sticky;
+	top: 0;
+	${getZIndex('expandableMarketingCardOverlay')}
+
+	${from.leftCol} {
+		margin-top: ${space[6]}px;
+		margin-bottom: ${space[9]}px;
+
+		/* To align with rich links - if we move this feature to production, we should remove this and make rich link align with everything instead */
+		margin-left: 1px;
+		margin-right: -1px;
+	}
+
+	${from.wide} {
+		margin-left: 0;
 	}
 `;
 
@@ -457,7 +481,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 							</div>
 						</GridItem>
 						<GridItem area="meta" element="aside">
-							<div css={maxWidth}>
+							<div css={[maxWidth, fullHeight]}>
 								{isApps ? (
 									<>
 										<Hide from="leftCol">
@@ -539,26 +563,29 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 										{!!article.affiliateLinksDisclaimer && (
 											<AffiliateDisclaimer />
 										)}
+
+										{isWeb && (
+											<div css={usCardStyles}>
+												<Hide until="leftCol">
+													<Island
+														priority="enhancement"
+														defer={{
+															until: 'visible',
+														}}
+													>
+														<ExpandableMarketingCardWrapper
+															guardianBaseURL={
+																article.guardianBaseURL
+															}
+														/>
+													</Island>
+												</Hide>
+											</div>
+										)}
 									</>
 								)}
 							</div>
 						</GridItem>
-						{isWeb && (
-							<GridItem area="uscard" element="aside">
-								<Hide until="leftCol">
-									<Island
-										priority="enhancement"
-										defer={{ until: 'visible' }}
-									>
-										<ExpandableMarketingCardWrapper
-											guardianBaseURL={
-												article.guardianBaseURL
-											}
-										/>
-									</Island>
-								</Hide>
-							</GridItem>
-						)}
 						<GridItem area="body">
 							<ArticleContainer format={format}>
 								<ArticleBody
