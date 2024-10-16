@@ -427,6 +427,14 @@ export const Card = ({
 		containerType === 'flexible/special' ||
 		containerType === 'flexible/general';
 
+	const isSmallCard = containerType === 'scrollable/small';
+
+	const fixedImageSizeOnMobile = () => {
+		if (isSmallCard) return 'small';
+		if (isFlexibleContainer) return 'medium';
+		return 'large';
+	};
+
 	const headlinePosition = getHeadlinePosition({
 		containerType,
 		isFlexSplash,
@@ -584,7 +592,13 @@ export const Card = ({
 						imagePositionOnDesktop={imagePositionOnDesktop}
 						imagePositionOnMobile={imagePositionOnMobile}
 						showPlayIcon={showPlayIcon}
-						isFlexibleContainer={isFlexibleContainer}
+						fixedImageSizeOnMobile={fixedImageSizeOnMobile()}
+						fixedImageSizeOnTablet={
+							isSmallCard ? 'medium' : undefined
+						}
+						fixedImageSizeOnDesktop={
+							isSmallCard ? 'medium' : undefined
+						}
 					>
 						{media.type === 'slideshow' && (
 							<Slideshow

@@ -7,6 +7,8 @@ export type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
 
 export type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo' | 'carousel';
 
+export type FixedImageSizeType = 'small' | 'medium' | 'large';
+
 type Props = {
 	children: React.ReactNode;
 	imageSize: ImageSizeType;
@@ -14,8 +16,9 @@ type Props = {
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	showPlayIcon: boolean;
-	/** Flexible containers require different styling */
-	isFlexibleContainer?: boolean;
+	fixedImageSizeOnMobile?: FixedImageSizeType;
+	fixedImageSizeOnTablet?: FixedImageSizeType;
+	fixedImageSizeOnDesktop?: FixedImageSizeType;
 };
 
 /**
@@ -54,15 +57,50 @@ const flexBasisStyles = ({
 			`;
 	}
 };
-/** Below tablet, we fix the size of the image and add a margin
-around it. The corresponding content flex grows to fill the space */
-const fixedImageWidth = (isFlexibleContainer: boolean) => css`
+/**
+ * Below tablet, we fix the size of the image and add a margin around it.
+ * The corresponding content flex grows to fill the space.
+ *
+ * Fixed images sizes can optionally be applied at tablet and desktop.
+ */
+const getFixedImageWidth = (imageSize: FixedImageSizeType) => {
+	switch (imageSize) {
+		case 'small':
+			return '86px';
+		case 'medium':
+			return '97.5px';
+		case 'large':
+			return '125px';
+	}
+};
+
+const fixedImageWidth = (
+	mobile: FixedImageSizeType,
+	tablet?: FixedImageSizeType,
+	desktop?: FixedImageSizeType,
+) => css`
 	${until.tablet} {
-		width: ${isFlexibleContainer ? '97.5px' : '125px'};
+		width: ${getFixedImageWidth(mobile)};
 		flex-shrink: 0;
 		flex-basis: unset;
 		align-self: flex-start;
 	}
+	${tablet &&
+	`
+	${between.tablet.and.desktop} {
+		width: ${getFixedImageWidth(tablet)};
+		flex-shrink: 0;
+		flex-basis: unset;
+		align-self: flex-start;
+	}`}
+	${desktop &&
+	`
+	${from.desktop} {
+		width: ${getFixedImageWidth(desktop)};
+		flex-shrink: 0;
+		flex-basis: unset;
+		align-self: flex-start;
+	}`}
 `;
 
 export const ImageWrapper = ({
@@ -72,7 +110,9 @@ export const ImageWrapper = ({
 	imagePositionOnDesktop,
 	imagePositionOnMobile,
 	showPlayIcon,
-	isFlexibleContainer = false,
+	fixedImageSizeOnMobile = 'large',
+	fixedImageSizeOnTablet,
+	fixedImageSizeOnDesktop,
 }: Props) => {
 	const isHorizontalOnDesktop =
 		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
@@ -103,7 +143,12 @@ export const ImageWrapper = ({
 							display: none;
 						}
 					`,
-				isHorizontalOnMobile && fixedImageWidth(isFlexibleContainer),
+				isHorizontalOnMobile &&
+					fixedImageWidth(
+						fixedImageSizeOnMobile,
+						fixedImageSizeOnTablet,
+						fixedImageSizeOnDesktop,
+					),
 
 				isHorizontalOnDesktop &&
 					css`
