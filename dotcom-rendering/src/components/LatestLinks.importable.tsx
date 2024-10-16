@@ -13,7 +13,7 @@ import type { DCRContainerPalette } from '../types/front';
 import { WithLink } from './CardHeadline';
 import { ContainerOverrides } from './ContainerOverrides';
 import { DateTime } from './DateTime';
-import { Alignment } from './SupportingContent';
+import type { Alignment } from './SupportingContent';
 
 type Props = {
 	id: string;
