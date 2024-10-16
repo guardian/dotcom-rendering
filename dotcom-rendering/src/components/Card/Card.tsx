@@ -58,6 +58,8 @@ import {
 	TrailTextWrapper,
 } from './components/TrailTextWrapper';
 
+type Position = 'inner' | 'outer' | 'none';
+
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
@@ -97,6 +99,7 @@ export type Props = {
 	branding?: Branding;
 	supportingContent?: DCRSupportingContent[];
 	supportingContentAlignment?: Alignment;
+	supportingContentPosition?: Position;
 	snapData?: DCRSnapType;
 	containerPalette?: DCRContainerPalette;
 	containerType?: DCRContainerType;
@@ -203,16 +206,25 @@ const decideSublinkPosition = (
 	supportingContent?: DCRSupportingContent[],
 	imagePositionOnDesktop?: ImagePositionType,
 	alignment?: Alignment,
+	supportingContentPosition?: Position,
+	showLivePlayable?: boolean,
 ): 'inner' | 'outer' | 'none' => {
 	if (!supportingContent || supportingContent.length === 0) {
 		return 'none';
 	}
+
+	if (supportingContentPosition) {
+		return supportingContentPosition;
+	}
+
 	if (
 		imagePositionOnDesktop === 'top' ||
-		imagePositionOnDesktop === 'bottom'
+		imagePositionOnDesktop === 'bottom' ||
+		showLivePlayable
 	) {
 		return 'outer';
 	}
+
 	return alignment === 'vertical' ? 'inner' : 'outer';
 };
 
@@ -277,6 +289,7 @@ export const Card = ({
 	branding,
 	supportingContent,
 	supportingContentAlignment = 'vertical',
+	supportingContentPosition,
 	snapData,
 	containerPalette,
 	containerType,
@@ -307,6 +320,8 @@ export const Card = ({
 		supportingContent,
 		imagePositionOnDesktop,
 		supportingContentAlignment,
+		supportingContentPosition,
+		showLivePlayable,
 	);
 	const showQuotes = !!showQuotedHeadline;
 
@@ -792,11 +807,6 @@ export const Card = ({
 									showLivePlayable={showLivePlayable}
 								/>
 							)}
-							{sublinkPosition === 'outer' &&
-								supportingContentAlignment === 'horizontal' &&
-								imagePositionOnDesktop === 'right' && (
-									<HorizontalDivider />
-								)}
 						</div>
 
 						{/* This div is needed to push this content to the bottom of the card */}
@@ -819,9 +829,14 @@ export const Card = ({
 									></LatestLinks>
 								</Island>
 							)}
-
 							{decideInnerSublinks()}
 						</div>
+
+						{sublinkPosition === 'outer' &&
+							supportingContentAlignment === 'horizontal' &&
+							imagePositionOnDesktop === 'right' && (
+								<HorizontalDivider />
+							)}
 					</ContentWrapper>
 				)}
 			</CardLayout>
