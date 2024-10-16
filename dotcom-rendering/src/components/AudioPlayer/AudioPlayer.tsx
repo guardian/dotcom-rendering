@@ -290,6 +290,7 @@ type AudioPlayerProps = {
 	 * handled elsewhere, e.g on a mobile device.
 	 */
 	showVolumeControls?: boolean;
+	/** media element ID for Ophan */
 	mediaId?: string;
 };
 
@@ -302,8 +303,10 @@ export const AudioPlayer = ({
 	showVolumeControls = true,
 	mediaId,
 }: AudioPlayerProps) => {
+	// creates a ref for the wavesurfer instance (https://wavesurfer.xyz/)
 	const [wavesurfer, setWavesurfer] = useState<WaveSurfer>();
-	const [progress, setProgress] = useState(0);
+
+	const [audioLoadingProgress, setAudioLoadingProgress] = useState(0);
 	const [isReady, setIsReady] = useState(false);
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [isMuted, setIsMuted] = useState(false);
@@ -311,9 +314,14 @@ export const AudioPlayer = ({
 	const [duration, setDuration] = useState<number>(
 		parseInt(preComputedDuration ?? '', 10),
 	);
+
+	// ref to the audio element
 	const audioRef = useRef<HTMLAudioElement>(null);
+
+	// ref to the waveform container
 	const waveformRef = useRef<HTMLDivElement>(null);
 
+	// functions that handle interactions with the audio player
 	const playPause = () => {
 		void wavesurfer?.playPause();
 	};
@@ -336,6 +344,7 @@ export const AudioPlayer = ({
 		setIsMuted(false);
 	};
 
+	// instantiate the wavesurfer instance once the component has mounted
 	useEffect(() => {
 		if (
 			isUndefined(wavesurfer) &&
@@ -361,7 +370,7 @@ export const AudioPlayer = ({
 			});
 
 			ws.on('loading', (percent) => {
-				setProgress(percent);
+				setAudioLoadingProgress(percent);
 			});
 
 			ws.on('ready', (srcDuration) => {
@@ -397,7 +406,7 @@ export const AudioPlayer = ({
 			<CurrentTime time={currentTime} />
 			<Duration time={duration} />
 
-			<WaveForm ref={waveformRef} progress={progress} />
+			<WaveForm ref={waveformRef} progress={audioLoadingProgress} />
 
 			<PlaybackControls>
 				<SkipButton
