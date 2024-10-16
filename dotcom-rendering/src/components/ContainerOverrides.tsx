@@ -447,7 +447,7 @@ const cardBorderTopDark: ContainerFunction = (containerPalette) => {
 		case 'BreakingPalette':
 			return cardBorderTopLight(containerPalette);
 		case 'InvestigationPalette':
-			return sourcePalette.neutral[100];
+			return sourcePalette.neutral[73];
 		case 'EventPalette':
 			return sourcePalette.brand[800];
 		case 'EventAltPalette':
@@ -726,10 +726,108 @@ const sectionBackgroundLeftDark: ContainerFunction = (containerPalette) => {
 	}
 };
 
-const cardBorderSupportingLight: ContainerFunction = (containerPalette) =>
-	cardBorderTopLight(containerPalette);
-const cardBorderSupportingDark: ContainerFunction = (containerPalette) =>
-	cardBorderTopDark(containerPalette);
+const cardBorderSupportingLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return sourcePalette.neutral[73];
+		case 'LongRunningAltPalette':
+			return sourcePalette.neutral[73];
+		case 'SombrePalette':
+		case 'SombreAltPalette':
+			return sourcePalette.neutral[60];
+		case 'InvestigationPalette':
+			return sourcePalette.neutral[73];
+		case 'BreakingPalette':
+			return sourcePalette.news[600];
+		case 'EventPalette':
+			return sourcePalette.neutral[73];
+		case 'EventAltPalette':
+			return sourcePalette.neutral[73];
+		case 'SpecialReportAltPalette':
+			return transparentColour(sourcePalette.neutral[46], 0.3);
+		case 'Branded':
+			return sourcePalette.neutral[73];
+		case 'MediaPalette':
+			return sourcePalette.neutral[46];
+		case 'PodcastPalette':
+			return sourcePalette.neutral[86];
+	}
+};
+const cardBorderSupportingDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return sourcePalette.neutral[73];
+		case 'LongRunningAltPalette':
+			return sourcePalette.neutral[60];
+		case 'SombrePalette':
+		case 'SombreAltPalette':
+		case 'BreakingPalette':
+			return cardBorderTopLight(containerPalette);
+		case 'InvestigationPalette':
+			return sourcePalette.neutral[73];
+		case 'EventPalette':
+			return sourcePalette.brand[800];
+		case 'EventAltPalette':
+			return sourcePalette.neutral[60];
+		case 'SpecialReportAltPalette':
+			return transparentColour(sourcePalette.neutral[46], 0.3);
+		case 'Branded':
+			return sourcePalette.neutral[46];
+		case 'MediaPalette':
+			return sourcePalette.neutral[46];
+		case 'PodcastPalette':
+			return sourcePalette.neutral[86];
+	}
+};
+
+const sectionBorderLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+		case 'LongRunningAltPalette':
+		case 'EventPalette':
+		case 'EventAltPalette':
+		case 'Branded':
+		case 'PodcastPalette':
+			return sourcePalette.neutral[86];
+		case 'SombrePalette':
+		case 'SombreAltPalette':
+			return sourcePalette.neutral[60];
+		case 'InvestigationPalette':
+			return sourcePalette.neutral[73];
+		case 'BreakingPalette':
+			return sourcePalette.news[600];
+		case 'SpecialReportAltPalette':
+			return transparentColour(sourcePalette.neutral[46], 0.3);
+		case 'MediaPalette':
+			return sourcePalette.neutral[46];
+	}
+};
+const sectionBorderDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'EventPalette':
+			return sourcePalette.neutral[46];
+		case 'LongRunningPalette':
+			return sourcePalette.neutral[46];
+		case 'LongRunningAltPalette':
+			return sourcePalette.neutral[60];
+		case 'SombrePalette':
+		case 'SombreAltPalette':
+		case 'BreakingPalette':
+			return cardBorderTopLight(containerPalette);
+		case 'InvestigationPalette':
+			return sourcePalette.neutral[73];
+		case 'EventAltPalette':
+			return sourcePalette.neutral[46];
+		case 'SpecialReportAltPalette':
+			return transparentColour(sourcePalette.neutral[46], 0.3);
+		case 'Branded':
+			return sourcePalette.neutral[46];
+		case 'MediaPalette':
+			return sourcePalette.neutral[46];
+		case 'PodcastPalette':
+			return sourcePalette.neutral[86];
+	}
+};
 
 const sectionDateLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
@@ -967,7 +1065,7 @@ const containerColours = {
 	},
 	'--card-footer-text': {
 		light: cardTrailTextLight,
-		dark: cardTrailTextLight,
+		dark: cardTrailTextDark,
 	},
 	'--card-kicker-text': {
 		light: cardKickerTextLight,
@@ -1064,6 +1162,10 @@ const containerColours = {
 	'--carousel-arrow-background-hover': {
 		light: carouselArrowBackgroundHover,
 		dark: carouselArrowBackgroundHover,
+	},
+	'--section-border': {
+		light: sectionBorderLight,
+		dark: sectionBorderDark,
 	},
 } as const satisfies Partial<
 	Record<
