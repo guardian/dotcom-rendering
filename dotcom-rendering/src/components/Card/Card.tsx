@@ -807,11 +807,6 @@ export const Card = ({
 									showLivePlayable={showLivePlayable}
 								/>
 							)}
-							{sublinkPosition === 'outer' &&
-								supportingContentAlignment === 'horizontal' &&
-								imagePositionOnDesktop === 'right' && (
-									<HorizontalDivider />
-								)}
 						</div>
 
 						{/* This div is needed to push this content to the bottom of the card */}
@@ -834,9 +829,14 @@ export const Card = ({
 									></LatestLinks>
 								</Island>
 							)}
-
 							{decideInnerSublinks()}
 						</div>
+
+						{sublinkPosition === 'outer' &&
+							supportingContentAlignment === 'horizontal' &&
+							imagePositionOnDesktop === 'right' && (
+								<HorizontalDivider />
+							)}
 					</ContentWrapper>
 				)}
 			</CardLayout>
