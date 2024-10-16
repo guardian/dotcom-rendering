@@ -516,11 +516,6 @@ export const mockRESTCalls = (): typeof fetchMock => {
 			.spy('end:.hot-update.json')
 
 			// allow this mp3 for audio player stories
-			.spy(
-				'https://audio.guim.co.uk/2020/05/05-61553-gnl.fw.200505.jf.ch7DW.mp3',
-			)
-
-			// allow all localhost fetches
-			.spy(/^http:\/\/localhost:/)
+			.spy('end:default_audio_test.mp3')
 	);
 };
