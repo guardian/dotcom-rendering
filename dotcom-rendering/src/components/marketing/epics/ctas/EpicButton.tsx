@@ -13,13 +13,13 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
+import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import React from 'react';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import {
 	OPHAN_COMPONENT_EVENT_PRIMARY_CTA,
 	OPHAN_COMPONENT_EVENT_SECONDARY_CTA,
 } from '../utils/ophan';
-import { Tracking } from '@guardian/support-dotcom-components/dist/shared/src/types';
 
 // Custom theme for Button/LinkButton
 // See also `tertiaryButtonOverrides` below.
