@@ -32,7 +32,6 @@ import type {
 	NewsletterSignup,
 	Obituary,
 	PhotoEssay,
-	PrintShop,
 	Quiz,
 	Recipe,
 	Review,
@@ -519,11 +518,6 @@ const correction: Item = {
 	...fields,
 };
 
-const printShop: PrintShop = {
-	design: ArticleDesign.PrintShop,
-	...fields,
-};
-
 const photoEssay: PhotoEssay = {
 	design: ArticleDesign.PhotoEssay,
 	...fields,
@@ -595,7 +589,6 @@ export {
 	matchReport,
 	cartoon,
 	correction,
-	printShop,
 	photoEssay,
 	recipe,
 	quiz,

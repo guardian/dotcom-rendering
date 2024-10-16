@@ -214,3 +214,36 @@ LondonPride2022.decorators = [
 		{ orientation: 'vertical' },
 	),
 ];
+
+export const WithHeader = () => {
+	return (
+		<Wrapper
+			styles={css`
+				max-width: 600px;
+				background-color: 'inherit';
+			`}
+		>
+			<Island priority="critical">
+				<LatestLinks
+					id="/world/live/2022/jul/02/pride-in-london-2022-huge-turnout-expected-at-first-march-since-pandemic-live-updates"
+					direction="horizontal"
+					absoluteServerTimes={true}
+					displayHeader={true}
+				/>
+			</Island>
+		</Wrapper>
+	);
+};
+WithHeader.storyName = 'With decorarative header';
+WithHeader.decorators = [
+	splitTheme(
+		[
+			{
+				theme: Pillar.News,
+				design: ArticleDesign.LiveBlog,
+				display: ArticleDisplay.Standard,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];

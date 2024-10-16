@@ -5541,6 +5541,9 @@ const expandableMarketingCardBackground: PaletteFunction = () =>
 const expandableMarketingCardSvgFill: PaletteFunction = () =>
 	sourcePalette.neutral[0];
 
+const expandableMarketingCardButtonBackground: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+
 const expandableMarketingCardSvgBackground: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 
@@ -5658,6 +5661,11 @@ const cardSublinksBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 const cardSublinksBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
+
+const latestLinksDottedLineLight: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+const latestLinksDottedLineDark: PaletteFunction = () =>
+	sourcePalette.neutral[38];
 
 const flexibleSplashCardStandfirstLight: PaletteFunction = () =>
 	sourcePalette.neutral[38];
@@ -6284,6 +6292,10 @@ const paletteColours = {
 		light: expandableMarketingCardBackground,
 		dark: expandableMarketingCardBackground,
 	},
+	'--expandable-marketing-card-button-background': {
+		light: expandableMarketingCardButtonBackground,
+		dark: expandableMarketingCardButtonBackground,
+	},
 	'--expandable-marketing-card-fill-background': {
 		light: expandableMarketingCardFillBackgroundLight,
 		dark: expandableMarketingCardFillBackgroundDark,
@@ -6456,6 +6468,10 @@ const paletteColours = {
 	'--last-updated-text': {
 		light: lastUpdatedTextLight,
 		dark: lastUpdatedTextDark,
+	},
+	'--latest-links-dotted-line': {
+		light: latestLinksDottedLineLight,
+		dark: latestLinksDottedLineDark,
 	},
 	'--lightbox-divider': {
 		light: lightboxDivider,

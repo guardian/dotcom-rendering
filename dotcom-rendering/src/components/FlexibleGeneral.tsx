@@ -181,7 +181,11 @@ export const SplashCardLayout = ({
 					imageSize={imageSize}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
-					supportingContentAlignment={supportingContentAlignment}
+					supportingContentAlignment={
+						card.showLivePlayable
+							? 'horizontal'
+							: supportingContentAlignment
+					}
 					imageLoading={imageLoading}
 					aspectRatio="5:4"
 					kickerText={card.kickerText}
@@ -202,6 +206,7 @@ type BoostedCardProperties = {
 	headlineSizeOnMobile: SmallHeadlineSize;
 	headlineSizeOnTablet: SmallHeadlineSize;
 	imageSize: ImageSizeType;
+	supportingContentAlignment: Alignment;
 };
 
 /**
@@ -217,6 +222,7 @@ const decideCardProperties = (
 				headlineSizeOnMobile: 'small',
 				headlineSizeOnTablet: 'tiny',
 				imageSize: 'jumbo',
+				supportingContentAlignment: 'horizontal',
 			};
 		case 'boost':
 		default:
@@ -225,6 +231,7 @@ const decideCardProperties = (
 				headlineSizeOnMobile: 'tiny',
 				headlineSizeOnTablet: 'tiny',
 				imageSize: 'medium',
+				supportingContentAlignment: 'vertical',
 			};
 	}
 };
@@ -250,6 +257,7 @@ export const BoostedCardLayout = ({
 		headlineSizeOnMobile,
 		headlineSizeOnTablet,
 		imageSize,
+		supportingContentAlignment,
 	} = decideCardProperties(card.boostLevel);
 	return (
 		<UL padBottom={true} isFlexibleContainer={true} showTopBar={true}>
@@ -268,6 +276,11 @@ export const BoostedCardLayout = ({
 					imageSize={imageSize}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
+					supportingContentAlignment={
+						card.showLivePlayable
+							? 'horizontal'
+							: supportingContentAlignment
+					}
 					imageLoading={imageLoading}
 					aspectRatio="5:4"
 					kickerText={card.kickerText}
@@ -326,6 +339,7 @@ export const StandardCardLayout = ({
 							imagePositionOnDesktop={'left'}
 							supportingContent={card.supportingContent}
 							supportingContentAlignment="horizontal"
+							supportingContentPosition="outer"
 							imageSize={'medium'}
 							aspectRatio="5:4"
 							kickerText={card.kickerText}

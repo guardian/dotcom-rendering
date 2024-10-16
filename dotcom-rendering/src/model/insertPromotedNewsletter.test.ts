@@ -1,7 +1,7 @@
 import { Live as exampleLiveBlog } from '../../fixtures/generated/fe-articles/Live';
 import { Quiz as exampleQuiz } from '../../fixtures/generated/fe-articles/Quiz';
 import { Standard as exampleStandard } from '../../fixtures/generated/fe-articles/Standard';
-import { decideFormat } from '../lib/decideFormat';
+import { decideFormat } from '../lib/format';
 import type {
 	KeyTakeawaysBlockElement,
 	Newsletter,
