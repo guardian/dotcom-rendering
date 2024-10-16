@@ -202,6 +202,7 @@ type BoostedCardProperties = {
 	headlineSizeOnMobile: SmallHeadlineSize;
 	headlineSizeOnTablet: SmallHeadlineSize;
 	imageSize: ImageSizeType;
+	supportingContentAlignment: Alignment;
 };
 
 /**
@@ -217,6 +218,7 @@ const decideCardProperties = (
 				headlineSizeOnMobile: 'small',
 				headlineSizeOnTablet: 'tiny',
 				imageSize: 'jumbo',
+				supportingContentAlignment: 'horizontal',
 			};
 		case 'boost':
 		default:
@@ -225,6 +227,7 @@ const decideCardProperties = (
 				headlineSizeOnMobile: 'tiny',
 				headlineSizeOnTablet: 'tiny',
 				imageSize: 'medium',
+				supportingContentAlignment: 'horizontal',
 			};
 	}
 };
@@ -250,6 +253,7 @@ export const BoostedCardLayout = ({
 		headlineSizeOnMobile,
 		headlineSizeOnTablet,
 		imageSize,
+		supportingContentAlignment,
 	} = decideCardProperties(card.boostLevel);
 	return (
 		<UL padBottom={true} isFlexibleContainer={true} showTopBar={true}>
@@ -268,6 +272,7 @@ export const BoostedCardLayout = ({
 					imageSize={imageSize}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
+					supportingContentAlignment={supportingContentAlignment}
 					imageLoading={imageLoading}
 					aspectRatio="5:4"
 					kickerText={card.kickerText}
