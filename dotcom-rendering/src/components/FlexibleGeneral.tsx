@@ -231,7 +231,7 @@ const decideCardProperties = (
 				headlineSizeOnMobile: 'tiny',
 				headlineSizeOnTablet: 'tiny',
 				imageSize: 'medium',
-				supportingContentAlignment: 'horizontal',
+				supportingContentAlignment: 'vertical',
 			};
 	}
 };
@@ -276,7 +276,11 @@ export const BoostedCardLayout = ({
 					imageSize={imageSize}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
-					supportingContentAlignment={supportingContentAlignment}
+					supportingContentAlignment={
+						card.showLivePlayable
+							? 'horizontal'
+							: supportingContentAlignment
+					}
 					imageLoading={imageLoading}
 					aspectRatio="5:4"
 					kickerText={card.kickerText}
