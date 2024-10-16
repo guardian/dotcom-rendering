@@ -365,7 +365,7 @@ export const WithSpecialPaletteVariations = {
 		groupedTrails: {
 			...defaultGroupedTrails,
 			splash: [splashWithFourSublinks],
-			standard: standardCards,
+			standard: standardCards.slice(0, 2),
 		},
 	},
 	render: (args) => (

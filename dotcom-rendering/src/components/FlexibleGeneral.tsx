@@ -1,3 +1,4 @@
+import { palette } from '../palette';
 import type { BoostLevel } from '../types/content';
 import type {
 	DCRContainerPalette,
@@ -166,7 +167,10 @@ export const SplashCardLayout = ({
 
 	return (
 		<UL padBottom={true} isFlexibleContainer={true} showTopBar={false}>
-			<LI padSides={true}>
+			<LI
+				padSides={true}
+				verticalDividerColour={palette('--card-border-supporting')}
+			>
 				<FrontCard
 					trail={card}
 					containerPalette={containerPalette}
@@ -261,7 +265,10 @@ export const BoostedCardLayout = ({
 	} = decideCardProperties(card.boostLevel);
 	return (
 		<UL padBottom={true} isFlexibleContainer={true} showTopBar={true}>
-			<LI padSides={true}>
+			<LI
+				padSides={true}
+				verticalDividerColour={palette('--card-border-supporting')}
+			>
 				<FrontCard
 					trail={card}
 					containerPalette={containerPalette}
@@ -327,6 +334,9 @@ export const StandardCardLayout = ({
 						key={card.url}
 						padSides={true}
 						showDivider={cardIndex > 0}
+						verticalDividerColour={palette(
+							'--card-border-supporting',
+						)}
 					>
 						<FrontCard
 							trail={card}

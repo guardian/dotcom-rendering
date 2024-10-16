@@ -463,6 +463,64 @@ const cardBorderTopDark: ContainerFunction = (containerPalette) => {
 	}
 };
 
+const cardSublinksBackgroundLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return sourcePalette.neutral[93];
+		case 'LongRunningAltPalette':
+			return sourcePalette.neutral[86];
+		case 'SombrePalette':
+			return sourcePalette.neutral[38];
+		case 'SombreAltPalette':
+			return sourcePalette.neutral[20];
+		case 'InvestigationPalette':
+			return sourcePalette.neutral[46];
+		case 'BreakingPalette':
+			return sourcePalette.news[100];
+		case 'EventPalette':
+			return sourcePalette.neutral[86];
+		case 'EventAltPalette':
+			return sourcePalette.neutral[93];
+		case 'SpecialReportAltPalette':
+			return sourcePalette.neutral[86];
+		case 'Branded':
+			return sourcePalette.neutral[86];
+		case 'MediaPalette':
+			return sourcePalette.neutral[46];
+		case 'PodcastPalette':
+			return sourcePalette.neutral[86];
+	}
+};
+
+const cardSublinksBackgroundDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return sourcePalette.brand[100];
+		case 'LongRunningAltPalette':
+			return sourcePalette.neutral[10];
+		case 'SombrePalette':
+			return sourcePalette.neutral[20];
+		case 'SombreAltPalette':
+			return sourcePalette.neutral[10];
+		case 'BreakingPalette':
+			return sourcePalette.news[100];
+		case 'InvestigationPalette':
+			return sourcePalette.neutral[38];
+		case 'EventPalette':
+			return sourcePalette.neutral[10];
+		case 'EventAltPalette':
+			return sourcePalette.neutral[10];
+		case 'SpecialReportAltPalette':
+			return sourcePalette.neutral[20];
+		case 'Branded':
+			return sourcePalette.neutral[10];
+		case 'MediaPalette':
+			return sourcePalette.neutral[46];
+		case 'PodcastPalette':
+			return sourcePalette.neutral[86];
+	}
+};
+
 const articleBorderLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
@@ -667,6 +725,11 @@ const sectionBackgroundLeftDark: ContainerFunction = (containerPalette) => {
 			return palette('--section-background');
 	}
 };
+
+const cardBorderSupportingLight: ContainerFunction = (containerPalette) =>
+	cardBorderTopLight(containerPalette);
+const cardBorderSupportingDark: ContainerFunction = (containerPalette) =>
+	cardBorderTopDark(containerPalette);
 
 const sectionDateLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
@@ -910,6 +973,10 @@ const containerColours = {
 		light: cardKickerTextLight,
 		dark: cardKickerTextDark,
 	},
+	'--card-sublinks-background': {
+		light: cardSublinksBackgroundLight,
+		dark: cardSublinksBackgroundDark,
+	},
 	'--card-trail-text': {
 		light: cardTrailTextLight,
 		dark: cardTrailTextDark,
@@ -937,6 +1004,10 @@ const containerColours = {
 	'--section-background-left': {
 		light: sectionBackgroundLeftLight,
 		dark: sectionBackgroundLeftDark,
+	},
+	'--card-border-supporting': {
+		light: cardBorderSupportingLight,
+		dark: cardBorderSupportingDark,
 	},
 	'--section-toggle-button': {
 		light: sectionToggleButtonLight,
