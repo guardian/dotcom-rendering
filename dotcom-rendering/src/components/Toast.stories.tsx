@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import type { Meta, StoryFn } from '@storybook/react';
+import { space } from '@guardian/source/foundations';
+import type { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import {
 	ArticleDesign,
@@ -13,16 +14,18 @@ import type { ToastProps } from './Toast';
 const meta: Meta<typeof Toast> = {
 	title: 'Components/Toast',
 	component: Toast,
-};
+} satisfies Meta<typeof Toast>;
 
 export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 const Template: StoryFn<typeof Toast> = (args: ToastProps) => {
 	return (
 		<div
 			css={css`
 				position: relative;
-				height: 36px;
+				height: ${space[9]}px;
 			`}
 		>
 			<Toast {...args} />
@@ -46,18 +49,22 @@ const allThemeStandardVariations = pillars.map((theme) => ({
 	theme,
 }));
 
-export const Default: StoryFn<typeof Toast> = Template.bind({});
-Default.args = {
-	count: 3,
-};
-Default.decorators = [lightDecorator(allThemeStandardVariations)];
+export const Default = {
+	args: {
+		count: 3,
+	},
+	decorators: [lightDecorator(allThemeStandardVariations)],
+	render: Template,
+} satisfies Story;
 
 // *****************************************************************************
 
-export const Lots: StoryFn<typeof Toast> = Template.bind({});
-Lots.args = {
-	count: 239,
-};
-Lots.decorators = [lightDecorator(allThemeStandardVariations)];
+export const Lots = {
+	args: {
+		count: 239,
+	},
+	decorators: [lightDecorator(allThemeStandardVariations)],
+	render: Template,
+} satisfies Story;
 
 // *****************************************************************************

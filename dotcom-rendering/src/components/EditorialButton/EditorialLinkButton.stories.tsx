@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Meta, StoryFn } from '@storybook/react';
+import type { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import {
 	ArticleDesign,
@@ -13,9 +13,11 @@ import type { EditorialLinkButtonProps } from './EditorialLinkButton';
 const meta: Meta<typeof EditorialLinkButton> = {
 	title: 'Components/EditorialLinkButton',
 	component: EditorialLinkButton,
-};
+} satisfies Meta<typeof EditorialLinkButton>;
 
 export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 const Template: StoryFn<typeof EditorialLinkButton> = (
 	args: EditorialLinkButtonProps,
@@ -48,56 +50,52 @@ const allThemeStandardVariations = pillars.map((theme) => ({
 	theme,
 }));
 
-export const WhenPrimary: StoryFn<typeof EditorialLinkButton> = Template.bind(
-	{},
-);
-WhenPrimary.args = {
-	priority: 'primary',
-	size: 'small',
-};
-WhenPrimary.decorators = [lightDecorator(allThemeStandardVariations)];
-
+export const WhenPrimary = {
+	args: {
+		priority: 'primary',
+		size: 'small',
+	},
+	decorators: [lightDecorator(allThemeStandardVariations)],
+	render: Template,
+} satisfies Story;
 // *****************************************************************************
 
-export const WhenSecondary: StoryFn<typeof EditorialLinkButton> = Template.bind(
-	{},
-);
-WhenSecondary.args = {
-	priority: 'secondary',
-	size: 'small',
-};
-WhenSecondary.decorators = [lightDecorator(allThemeStandardVariations)];
-
+export const WhenSecondary = {
+	args: {
+		priority: 'secondary',
+		size: 'small',
+	},
+	decorators: [lightDecorator(allThemeStandardVariations)],
+	render: Template,
+} satisfies Story;
 // *****************************************************************************
 
-export const WhenTertiary: StoryFn<typeof EditorialLinkButton> = Template.bind(
-	{},
-);
-WhenTertiary.args = {
-	priority: 'tertiary',
-	size: 'small',
-};
-WhenTertiary.decorators = [lightDecorator(allThemeStandardVariations)];
-
+export const WhenTertiary = {
+	args: {
+		priority: 'tertiary',
+		size: 'small',
+	},
+	decorators: [lightDecorator(allThemeStandardVariations)],
+	render: Template,
+} satisfies Story;
 // *****************************************************************************
 
-export const WhenSubdued: StoryFn<typeof EditorialLinkButton> = Template.bind(
-	{},
-);
-WhenSubdued.args = {
-	priority: 'subdued',
-	size: 'small',
-};
-WhenSubdued.decorators = [lightDecorator(allThemeStandardVariations)];
-
+export const WhenSubdued = {
+	args: {
+		priority: 'subdued',
+		size: 'small',
+	},
+	decorators: [lightDecorator(allThemeStandardVariations)],
+	render: Template,
+} satisfies Story;
 // *****************************************************************************
 
-export const WithOverrides: StoryFn<typeof EditorialLinkButton> = Template.bind(
-	{},
-);
-WithOverrides.args = {
-	cssOverrides: css`
-		background-color: pink;
-	`,
-};
-WithOverrides.decorators = [lightDecorator(allThemeStandardVariations)];
+export const WithOverrides = {
+	args: {
+		cssOverrides: css`
+			background-color: pink;
+		`,
+	},
+	decorators: [lightDecorator(allThemeStandardVariations)],
+	render: Template,
+} satisfies Story;
