@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import { DottedLines } from '@guardian/source-development-kitchen/react-components';
 import {
 	space,
 	textSans14,
 	textSansBold14,
 	textSansBold17,
 } from '@guardian/source/foundations';
+import { DottedLines } from '@guardian/source-development-kitchen/react-components';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
 import { palette as themePalette } from '../palette';
