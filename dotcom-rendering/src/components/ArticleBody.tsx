@@ -5,13 +5,13 @@ import {
 	remSpace,
 	textEgyptian17,
 } from '@guardian/source/foundations';
-import { ArticleRenderer } from '../lib/ArticleRenderer';
-import type { EditionId } from '../lib/edition';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 } from '../lib/articleFormat';
+import { ArticleRenderer } from '../lib/ArticleRenderer';
+import type { EditionId } from '../lib/edition';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { revealStyles } from '../lib/revealStyles';
 import { palette as themePalette } from '../palette';

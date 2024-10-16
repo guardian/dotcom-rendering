@@ -1,11 +1,11 @@
 import { isUndefined } from '@guardian/libs';
-import { getSoleContributor } from '../lib/byline';
-import type { EditionId } from '../lib/edition';
 import {
 	ArticleDesign,
 	type ArticleFormat,
 	decideFormat,
 } from '../lib/articleFormat';
+import { getSoleContributor } from '../lib/byline';
+import type { EditionId } from '../lib/edition';
 import type { Group } from '../lib/getDataLinkName';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
 import type {

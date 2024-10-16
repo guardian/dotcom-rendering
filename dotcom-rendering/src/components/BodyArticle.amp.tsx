@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { palette, text, textSans12, until } from '@guardian/source/foundations';
 import React from 'react';
 import { buildAdTargeting } from '../lib/ad-targeting';
-import { findAdSlots } from '../lib/find-adslots.amp';
 import {
 	ArticleDesign,
 	type ArticleTheme,
@@ -11,6 +10,7 @@ import {
 	ArticleDesign as Design,
 	ArticleSpecial as Special,
 } from '../lib/articleFormat';
+import { findAdSlots } from '../lib/find-adslots.amp';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import { getSharingUrls } from '../lib/sharing-urls';
 import { insertDisclaimerElement } from '../model/enhance-disclaimer';

@@ -1,9 +1,9 @@
+import type { FEFrontCardStyle } from '../types/front';
 import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
 } from './articleFormat';
-import type { FEFrontCardStyle } from '../types/front';
 
 /**
  * TODO: missing "podcast"

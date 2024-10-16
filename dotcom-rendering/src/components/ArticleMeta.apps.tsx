@@ -4,12 +4,12 @@ import { from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { ReactNode } from 'react';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import { getSoleContributor } from '../lib/byline';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 } from '../lib/articleFormat';
+import { getSoleContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
 import type { TagType } from '../types/tag';

@@ -5,13 +5,13 @@ import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import { discussion } from '../../../fixtures/manual/discussion';
 import { discussionWithTwoComments as discussionWithTwoCommentsMock } from '../../../fixtures/manual/discussionWithTwoComments';
 import { legacyDiscussionWithoutThreading } from '../../../fixtures/manual/legacyDiscussionWithoutThreading';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import type {
 	CommentFormProps,
 	FilterOptions,
 	Reader,
 } from '../../lib/discussion';
 import { discussionApiResponseSchema } from '../../lib/discussion';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import { ok } from '../../lib/result';
 import { Comments } from './Comments';
 

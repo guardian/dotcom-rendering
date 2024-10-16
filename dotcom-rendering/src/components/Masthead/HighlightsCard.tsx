@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { between, from, until } from '@guardian/source/foundations';
-import { isMediaCard } from '../../lib/cardHelpers';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
+import { isMediaCard } from '../../lib/cardHelpers';
 import { palette } from '../../palette';
 import type { DCRFrontImage } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';

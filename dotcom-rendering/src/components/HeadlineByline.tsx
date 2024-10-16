@@ -14,13 +14,13 @@ import {
 	textSansItalic34,
 	until,
 } from '@guardian/source/foundations';
-import { getSoleContributor } from '../lib/byline';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import { getSoleContributor } from '../lib/byline';
 import { palette as schemedPalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { BylineLink } from './BylineLink';

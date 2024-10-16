@@ -2,6 +2,7 @@ import { isString } from '@guardian/libs';
 import { ConfigProvider } from '../components/ConfigContext';
 import { FrontPage } from '../components/FrontPage';
 import { TagPage } from '../components/TagPage';
+import { Pillar } from '../lib/articleFormat';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -9,7 +10,6 @@ import {
 	getPathFromManifest,
 } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
-import { Pillar } from '../lib/articleFormat';
 import { polyfillIO } from '../lib/polyfill.io';
 import { themeToPillar } from '../lib/themeToPillar';
 import type { NavType } from '../model/extract-nav';

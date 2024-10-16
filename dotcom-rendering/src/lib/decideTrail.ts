@@ -1,6 +1,6 @@
-import { type ArticleFormat, decideFormat } from './articleFormat';
 import type { DCRFrontImage } from '../types/front';
 import type { FETrailType, TrailType } from '../types/trails';
+import { type ArticleFormat, decideFormat } from './articleFormat';
 import { getDataLinkNameCard } from './getDataLinkName';
 
 export const decideTrail = (trail: FETrailType, index = 0): TrailType => {

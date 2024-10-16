@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import type { FilterOptions } from '../../lib/discussion';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
 } from '../../lib/articleFormat';
+import type { FilterOptions } from '../../lib/discussion';
 import { Pagination } from './Pagination';
 
 const articleFormat: ArticleFormat = {

@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import type { DropdownOptionType } from '../../lib/discussion';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
+import type { DropdownOptionType } from '../../lib/discussion';
 import { Dropdown } from './Dropdown';
 
 const Container = ({ children }: { children: React.ReactNode }) => (

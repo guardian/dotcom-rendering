@@ -2,13 +2,13 @@ import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import { getSoleContributor } from '../lib/byline';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import { getSoleContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
 import type { TagType } from '../types/tag';

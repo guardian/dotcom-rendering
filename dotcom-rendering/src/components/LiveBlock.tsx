@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import type { EditionId } from '../lib/edition';
 import type { ArticleFormat } from '../lib/articleFormat';
+import type { EditionId } from '../lib/edition';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { ServerSideTests, Switches } from '../types/config';
 import { Island } from './Island';

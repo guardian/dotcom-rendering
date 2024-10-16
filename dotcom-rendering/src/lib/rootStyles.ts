@@ -3,8 +3,8 @@ import {
 	focusHalo,
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
-import type { ArticleFormat } from './articleFormat';
 import { paletteDeclarations } from '../palette';
+import type { ArticleFormat } from './articleFormat';
 
 /**
  * Global styles for pages:

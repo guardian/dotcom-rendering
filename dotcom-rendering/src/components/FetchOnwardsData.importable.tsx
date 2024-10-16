@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { isNonNullable } from '@guardian/libs';
-import { decideTrail } from '../lib/decideTrail';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
+import { decideTrail } from '../lib/decideTrail';
 import { useApi } from '../lib/useApi';
 import { addDiscussionIds } from '../lib/useCommentCount';
 import { palette } from '../palette';
