@@ -225,14 +225,17 @@ const getHeadlinePosition = ({
 	isFlexSplash?: boolean;
 	showLivePlayable: boolean;
 }) => {
-	if (containerType === 'flexible/special' && isFlexSplash) return 'outer';
+	if (containerType === 'flexible/special' && isFlexSplash) {
+		return 'outer';
+	}
 
 	if (
 		containerType === 'flexible/general' &&
 		isFlexSplash &&
 		showLivePlayable
-	)
+	) {
 		return 'outer';
+	}
 
 	return 'inner';
 };
