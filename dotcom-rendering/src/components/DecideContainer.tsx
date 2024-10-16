@@ -27,6 +27,7 @@ import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
 import { NavList } from './NavList';
 import { ScrollableHighlights } from './ScrollableHighlights.importable';
+import { ScrollableSmall } from './ScrollableSmall.importable';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -250,6 +251,15 @@ export const DecideContainer = ({
 				/>
 			);
 		case 'scrollable/small':
+			return (
+				<Island priority="critical">
+					<ScrollableSmall
+						trails={trails}
+						imageLoading={imageLoading}
+						containerType={'scrollable/small'}
+					/>
+				</Island>
+			);
 		case 'scrollable/medium':
 		case 'scrollable/feature':
 		case 'static/feature/2':
