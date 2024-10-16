@@ -216,6 +216,27 @@ const decideSublinkPosition = (
 	return alignment === 'vertical' ? 'inner' : 'outer';
 };
 
+const getHeadlinePosition = ({
+	isFlexSplash,
+	containerType,
+	showLivePlayable,
+}: {
+	containerType?: DCRContainerType;
+	isFlexSplash?: boolean;
+	showLivePlayable: boolean;
+}) => {
+	if (containerType === 'flexible/special' && isFlexSplash) return 'outer';
+
+	if (
+		containerType === 'flexible/general' &&
+		isFlexSplash &&
+		showLivePlayable
+	)
+		return 'outer';
+
+	return 'inner';
+};
+
 const isWithinTwelveHours = (webPublicationDate: string): boolean => {
 	const timeDiffMs = Math.abs(
 		new Date().getTime() - new Date(webPublicationDate).getTime(),
@@ -389,10 +410,11 @@ export const Card = ({
 		containerType === 'flexible/special' ||
 		containerType === 'flexible/general';
 
-	const isFlexibleSpecialContainer = containerType === 'flexible/special';
-
-	const headlinePosition =
-		isFlexSplash && isFlexibleSpecialContainer ? 'outer' : 'inner';
+	const headlinePosition = getHeadlinePosition({
+		containerType,
+		isFlexSplash,
+		showLivePlayable,
+	});
 
 	/** Determines the gap of between card components based on card properties */
 	const getGapSize = (): GapSize => {
