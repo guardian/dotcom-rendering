@@ -25,7 +25,7 @@ type Props = {
 };
 
 const header = css`
-	padding: 8px 0;
+	padding: ${space[2]}px 0;
 	${textSansBold17};
 `;
 
