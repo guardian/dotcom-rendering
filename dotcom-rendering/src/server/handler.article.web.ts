@@ -1,6 +1,6 @@
 import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
-import { decideFormat } from '../lib/decideFormat';
+import { decideFormat } from '../lib/format';
 import { enhanceBlocks } from '../model/enhanceBlocks';
 import { validateAsBlock } from '../model/validate';
 import { enhanceArticleType } from '../types/article';
