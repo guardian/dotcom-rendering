@@ -3,6 +3,7 @@ import {
 	between,
 	from,
 	headlineMedium14,
+	headlineMedium15,
 	headlineMedium17,
 	headlineMedium20,
 	headlineMedium24,
@@ -171,6 +172,15 @@ const fontStylesOnMobile = ({
 					${headlineMedium14}
 				}
 				${between.mobileMedium.and.desktop} {
+					${headlineMedium17}
+				}
+			`;
+		case 'tiny':
+			return css`
+				${until.tablet} {
+					${headlineMedium15}
+				}
+				${between.tablet.and.desktop} {
 					${headlineMedium17}
 				}
 			`;
