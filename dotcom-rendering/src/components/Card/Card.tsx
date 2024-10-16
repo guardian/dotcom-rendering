@@ -791,6 +791,7 @@ export const Card = ({
 										absoluteServerTimes={
 											absoluteServerTimes
 										}
+										displayHeader={isFlexibleContainer}
 									></LatestLinks>
 								</Island>
 							)}

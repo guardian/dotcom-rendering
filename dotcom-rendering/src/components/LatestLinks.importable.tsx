@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { DottedLines } from '@guardian/source-development-kitchen/dist/react-components';
+import { DottedLines } from '@guardian/source-development-kitchen/react-components';
 import {
 	space,
 	textSans14,
