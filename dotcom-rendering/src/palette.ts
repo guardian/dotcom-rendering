@@ -5662,6 +5662,11 @@ const cardSublinksBackgroundLight: PaletteFunction = () =>
 const cardSublinksBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
 
+const latestLinksDottedLineLight: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+const latestLinksDottedLineDark: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+
 const flexibleSplashCardStandfirstLight: PaletteFunction = () =>
 	sourcePalette.neutral[38];
 const flexibleSplashCardStandfirstDark: PaletteFunction = () =>
@@ -6463,6 +6468,10 @@ const paletteColours = {
 	'--last-updated-text': {
 		light: lastUpdatedTextLight,
 		dark: lastUpdatedTextDark,
+	},
+	'--latest-links-dotted-line': {
+		light: latestLinksDottedLineLight,
+		dark: latestLinksDottedLineDark,
 	},
 	'--lightbox-divider': {
 		light: lightboxDivider,
