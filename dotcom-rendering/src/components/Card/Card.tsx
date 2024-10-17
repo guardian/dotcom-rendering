@@ -433,19 +433,19 @@ export const Card = ({
 	const imageFixedSizeOptions = (): ImageFixedSizeOptions => {
 		if (isSmallCard) {
 			return {
-				mobile: 'small',
-				tablet: 'medium',
-				desktop: 'medium',
+				mobile: 'tiny',
+				tablet: 'small',
+				desktop: 'small',
 			};
 		}
 
 		if (isFlexibleContainer) {
 			return {
-				mobile: 'medium',
+				mobile: 'small',
 			};
 		}
 
-		return { mobile: 'large' };
+		return { mobile: 'medium' };
 	};
 
 	const headlinePosition = getHeadlinePosition({
