@@ -822,6 +822,7 @@ export const CardDefault = ({
 			imageLoading={'lazy'}
 			avatarUrl={undefined}
 			headlineSize="small"
+			headlineSizeOnMobile="tiny"
 			isPlayableMediaCard={false}
 			isTagPage={isTagPage}
 			trailTextColour={palette('--card-headline')}
@@ -861,6 +862,7 @@ export const CardDefaultMedia = ({
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
 			headlineSize="small"
+			headlineSizeOnMobile="tiny"
 			isPlayableMediaCard={false}
 			trailTextColour={palette('--card-headline')}
 		/>
@@ -899,6 +901,7 @@ export const CardDefaultMediaMobile = ({
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
 			headlineSize="small"
+			headlineSizeOnMobile="tiny"
 			isPlayableMediaCard={false}
 			trailTextColour={palette('--card-headline')}
 		/>

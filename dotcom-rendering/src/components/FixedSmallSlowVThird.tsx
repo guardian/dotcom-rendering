@@ -55,6 +55,7 @@ export const FixedSmallSlowVThird = ({
 									showAge={showAge}
 									absoluteServerTimes={absoluteServerTimes}
 									headlineSize="small"
+									headlineSizeOnMobile="tiny"
 									imagePositionOnDesktop="left"
 									imagePositionOnMobile="none"
 									imageSize="small"
