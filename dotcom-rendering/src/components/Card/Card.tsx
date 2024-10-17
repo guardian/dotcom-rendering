@@ -25,7 +25,7 @@ import type { MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
 import { CardCommentCount } from '../CardCommentCount.importable';
-import { CardHeadline, ResponsiveFontSize } from '../CardHeadline';
+import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
 import type { AspectRatio, Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
