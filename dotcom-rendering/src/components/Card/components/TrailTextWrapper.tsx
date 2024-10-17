@@ -19,7 +19,7 @@ type Props = {
 	/** By default, trail text is hidden at specific breakpoints. This prop allows consumers to show trails across all breakpoints if set to false */
 	shouldHide?: boolean;
 	trailTextSize?: TrailTextSize;
-	/** Optionally overrides the trail text colour. Defaults to headline colour if not provided */
+	/** Optionally overrides the trail text colour */
 	trailTextColour?: string;
 };
 
