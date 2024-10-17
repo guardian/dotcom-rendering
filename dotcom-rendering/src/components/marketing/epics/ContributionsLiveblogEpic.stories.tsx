@@ -104,6 +104,89 @@ export const WithThreeTierChoiceCardsForUS: Story = {
 		},
 	},
 };
+export const WithThreeTierChoiceCardsForUSWithColourVariant: Story = {
+	name: 'Contributions Liveblog Epic with Three Tier Choice Cards for US and with Colour Variant',
+	args: {
+		...meta.args,
+		tracking: {
+			...tracking,
+			abTestName: 'US_LB_EPIC_BG_COLOUR',
+			abTestVariant: 'VARIANT',
+		},
+		countryCode: 'US',
+		variant: {
+			...props.variant,
+			name: 'VARIANT',
+			heading: 'There’s no paywall here',
+			paragraphs: [
+				'Apologies for the brief interruption. We hope you’re appreciating these factual, verified, up-to-the-minute news updates provided by our expert reporters.',
+				'You will never find a paywall around our live blogs – or any of our news, because the Guardian believes that access to trustworthy information is vital for democracy.',
+				'In a time of increasing misinformation spread by bad actors, extremist media and autocratic politicians, real, reliable journalism has never been more important – and we’re proud to be able to make ours free thanks to the generous support of readers like you.',
+				'By helping fund the Guardian today, you can play a vital role in combating the bad faith and self-interest of a powerful few who spread lies to undermine our democracy, enrich themselves, and stoke division between Americans.',
+				'Before you get back to reading the news, we would be grateful if you could take half a minute to give us your support. Any amount helps. Thank you.',
+			],
+			secondaryCta: undefined,
+			showChoiceCards: true,
+			tickerSettings: {
+				endType: TickerEndType.unlimited,
+				countType: TickerCountType.money,
+				currencySymbol: '£',
+				copy: {
+					countLabel: '',
+					goalReachedPrimary: '',
+					goalReachedSecondary: '',
+				},
+				tickerData: {
+					total: 500000,
+					goal: 2000000,
+				},
+				name: 'US',
+			},
+		},
+	},
+};
+
+export const WithThreeTierChoiceCardsForUSWithColourControl: Story = {
+	name: 'Contributions Liveblog Epic with Three Tier Choice Cards for US and with Colour Control',
+	args: {
+		...meta.args,
+		tracking: {
+			...tracking,
+			abTestName: 'US_LB_EPIC_BG_COLOUR',
+			abTestVariant: 'CONTROL',
+		},
+		countryCode: 'US',
+		variant: {
+			...props.variant,
+			name: 'CONTROL',
+			heading: 'There’s no paywall here',
+			paragraphs: [
+				'Apologies for the brief interruption. We hope you’re appreciating these factual, verified, up-to-the-minute news updates provided by our expert reporters.',
+				'You will never find a paywall around our live blogs – or any of our news, because the Guardian believes that access to trustworthy information is vital for democracy.',
+				'In a time of increasing misinformation spread by bad actors, extremist media and autocratic politicians, real, reliable journalism has never been more important – and we’re proud to be able to make ours free thanks to the generous support of readers like you.',
+				'By helping fund the Guardian today, you can play a vital role in combating the bad faith and self-interest of a powerful few who spread lies to undermine our democracy, enrich themselves, and stoke division between Americans.',
+				'Before you get back to reading the news, we would be grateful if you could take half a minute to give us your support. Any amount helps. Thank you.',
+			],
+			secondaryCta: undefined,
+			showChoiceCards: true,
+			tickerSettings: {
+				endType: TickerEndType.unlimited,
+				countType: TickerCountType.money,
+				currencySymbol: '£',
+				copy: {
+					countLabel: '',
+					goalReachedPrimary: '',
+					goalReachedSecondary: '',
+				},
+				tickerData: {
+					total: 500000,
+					goal: 2000000,
+				},
+				name: 'US',
+			},
+		},
+	},
+};
 
 export const WithTicker: Story = {
 	name: 'ContributionsLiveblogEpic with Ticker',

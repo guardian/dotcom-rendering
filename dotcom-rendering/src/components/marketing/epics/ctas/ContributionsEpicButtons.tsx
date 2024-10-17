@@ -98,6 +98,7 @@ const PrimaryCtaButton = ({
 				submitComponentEvent={submitComponentEvent}
 				showArrow={true}
 				data-ignore="global-link-styling"
+				tracking={tracking}
 			>
 				{buttonText}
 			</EpicButton>
