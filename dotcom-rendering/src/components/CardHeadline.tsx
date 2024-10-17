@@ -45,20 +45,6 @@ type Props = {
 	bylineSize?: SmallHeadlineSize;
 };
 
-export type CardHeadlineSize =
-	| 'ginormousBoosted'
-	| 'hugeBoosted'
-	| 'largeBoosted'
-	| 'mediumBoosted'
-	| 'smallBoosted'
-	| 'tinyBoosted'
-	| 'ginormous'
-	| 'huge'
-	| 'large'
-	| 'medium'
-	| 'small'
-	| 'tiny';
-
 /** boosted font sizes are the same across all breakpoints so they've been abstracted out to help with readability */
 const headlineSize = {
 	xxxlarge: headlineMedium64,
