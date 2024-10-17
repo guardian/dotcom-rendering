@@ -99,10 +99,12 @@ const wrapperStyle = ({
 	format,
 	role,
 	loaded,
+	isDatawrapperGraphic,
 }: {
 	format: ArticleFormat;
 	role: RoleType;
 	loaded: boolean;
+	isDatawrapperGraphic: boolean;
 }) => css`
 	${format.theme === ArticleSpecial.Labs ? textSans17 : article17}
 	background-color: ${themePalette('--interactive-block-background')};
@@ -110,6 +112,12 @@ const wrapperStyle = ({
 	position: relative;
 	display: flex;
 	flex-direction: column;
+	${isDatawrapperGraphic
+		? `
+	border-top: 1px solid #dcdcdc;
+	padding-top: 8px;
+	`
+		: ''}
 `;
 
 const placeholderLinkStyle = css`
@@ -295,6 +303,13 @@ export const InteractiveBlockComponent = ({
 		}
 	}, [loaded]);
 
+	const isDatawrapperGraphic =
+		url == undefined
+			? false
+			: /^https?:\/\/interactive\.guim\.co\.uk\/datawrapper(-test)?\/embed/.test(
+					url,
+			  );
+
 	return (
 		<>
 			<figure
@@ -303,8 +318,13 @@ export const InteractiveBlockComponent = ({
 				css={[
 					isMainMedia
 						? mainMediaFigureStyles
-						: defaultRoleStyles(role, format),
-					wrapperStyle({ format, role, loaded }),
+						: defaultRoleStyles(role, format, isDatawrapperGraphic),
+					wrapperStyle({
+						format,
+						role,
+						loaded,
+						isDatawrapperGraphic,
+					}),
 				]}
 				className={interactiveLegacyFigureClasses(
 					'model.dotcomrendering.pageElements.InteractiveBlockElement',
