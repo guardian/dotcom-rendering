@@ -58,7 +58,7 @@ import {
 	TrailTextWrapper,
 } from './components/TrailTextWrapper';
 
-type Position = 'inner' | 'outer' | 'none';
+export type Position = 'inner' | 'outer' | 'none';
 
 export type Props = {
 	linkTo: string;
@@ -97,6 +97,7 @@ export type Props = {
 	dataLinkName?: string;
 	/** Only used on Labs cards */
 	branding?: Branding;
+	/** Supporting content refers to sublinks */
 	supportingContent?: DCRSupportingContent[];
 	supportingContentAlignment?: Alignment;
 	supportingContentPosition?: Position;
@@ -107,10 +108,13 @@ export type Props = {
 	discussionApiUrl: string;
 	discussionId?: string;
 	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
-	isDynamo?: true;
+	isDynamo?: boolean;
 	isExternalLink: boolean;
 	slideshowImages?: DCRSlideshowImage[];
+	/** Determines if liveblog update links are displayed on a card */
 	showLivePlayable?: boolean;
+	liveUpdatesAlignment?: Alignment;
+	liveUpdatesPosition?: Position;
 	onwardsSource?: OnwardsSource;
 	pauseOffscreenVideo?: boolean;
 	showMainVideo?: boolean;
@@ -304,6 +308,8 @@ export const Card = ({
 	isExternalLink,
 	slideshowImages,
 	showLivePlayable = false,
+	liveUpdatesAlignment = 'vertical',
+	liveUpdatesPosition = 'inner',
 	onwardsSource,
 	pauseOffscreenVideo = false,
 	showMainVideo = true,
@@ -810,29 +816,39 @@ export const Card = ({
 									showLivePlayable={showLivePlayable}
 								/>
 							)}
+							{showLivePlayable &&
+								liveUpdatesPosition === 'inner' && (
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
+										<LatestLinks
+											id={linkTo}
+											isDynamo={isDynamo}
+											direction={
+												isFlexibleContainer
+													? liveUpdatesAlignment
+													: supportingContentAlignment
+											}
+											containerPalette={containerPalette}
+											absoluteServerTimes={
+												absoluteServerTimes
+											}
+											displayHeader={isFlexibleContainer}
+											directionOnMobile={
+												isFlexibleContainer
+													? 'horizontal'
+													: undefined
+											}
+										></LatestLinks>
+									</Island>
+								)}
 						</div>
 
 						{/* This div is needed to push this content to the bottom of the card */}
 						<div
 							style={isOnwardContent ? { marginTop: 'auto' } : {}}
 						>
-							{showLivePlayable && (
-								<Island
-									priority="feature"
-									defer={{ until: 'visible' }}
-								>
-									<LatestLinks
-										id={linkTo}
-										isDynamo={isDynamo}
-										direction={supportingContentAlignment}
-										containerPalette={containerPalette}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
-										displayHeader={isFlexibleContainer}
-									></LatestLinks>
-								</Island>
-							)}
 							{decideInnerSublinks()}
 						</div>
 
@@ -853,6 +869,23 @@ export const Card = ({
 							: 0,
 				}}
 			>
+				{showLivePlayable && liveUpdatesPosition === 'outer' && (
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<LatestLinks
+							id={linkTo}
+							isDynamo={isDynamo}
+							direction={
+								isFlexibleContainer
+									? liveUpdatesAlignment
+									: supportingContentAlignment
+							}
+							containerPalette={containerPalette}
+							absoluteServerTimes={absoluteServerTimes}
+							displayHeader={isFlexibleContainer}
+							directionOnMobile={'horizontal'}
+						></LatestLinks>
+					</Island>
+				)}
 				{decideOuterSublinks()}
 
 				{showCommentFooter && (
