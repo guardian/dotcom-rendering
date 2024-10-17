@@ -3,26 +3,30 @@ import { css } from '@emotion/react';
 import { between, from, until } from '@guardian/source/foundations';
 import { PlayIcon } from './PlayIcon';
 
-const fixedImageSizes = {
+const imageFixedSize = {
 	small: 86,
 	medium: 97.5,
 	large: 125,
 };
 
-export type FixedImageSize = keyof typeof fixedImageSizes;
+export type ImageFixedSize = keyof typeof imageFixedSize;
 export type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
 export type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo' | 'carousel';
+
+type ImageFixedSizeOptions = {
+	mobile: ImageFixedSize;
+	tablet?: ImageFixedSize;
+	desktop?: ImageFixedSize;
+};
 
 type Props = {
 	children: React.ReactNode;
 	imageSize: ImageSizeType;
+	imageFixedSizes?: ImageFixedSizeOptions;
 	imageType?: CardImageType;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	showPlayIcon: boolean;
-	fixedImageSizeOnMobile?: FixedImageSize;
-	fixedImageSizeOnTablet?: FixedImageSize;
-	fixedImageSizeOnDesktop?: FixedImageSize;
 };
 
 /**
@@ -67,13 +71,13 @@ const flexBasisStyles = ({
  *
  * Fixed images sizes can optionally be applied at tablet and desktop.
  */
-const fixedImageWidth = (
-	mobile: FixedImageSize,
-	tablet?: FixedImageSize,
-	desktop?: FixedImageSize,
-) => css`
+const imageFixedWidth = ({
+	mobile,
+	tablet,
+	desktop,
+}: ImageFixedSizeOptions) => css`
 	${until.tablet} {
-		width: ${fixedImageSizes[mobile]}px;
+		width: ${imageFixedSize[mobile]}px;
 		flex-shrink: 0;
 		flex-basis: unset;
 		align-self: flex-start;
@@ -81,7 +85,7 @@ const fixedImageWidth = (
 	${tablet &&
 	`
 	${between.tablet.and.desktop} {
-		width: ${fixedImageSizes[tablet]}px;
+		width: ${imageFixedSize[tablet]}px;
 		flex-shrink: 0;
 		flex-basis: unset;
 		align-self: flex-start;
@@ -89,7 +93,7 @@ const fixedImageWidth = (
 	${desktop &&
 	`
 	${from.desktop} {
-		width: ${fixedImageSizes[desktop]}px;
+		width: ${imageFixedSize[desktop]}px;
 		flex-shrink: 0;
 		flex-basis: unset;
 		align-self: flex-start;
@@ -99,13 +103,11 @@ const fixedImageWidth = (
 export const ImageWrapper = ({
 	children,
 	imageSize,
+	imageFixedSizes = { mobile: 'large' },
 	imageType,
 	imagePositionOnDesktop,
 	imagePositionOnMobile,
 	showPlayIcon,
-	fixedImageSizeOnMobile = 'large',
-	fixedImageSizeOnTablet,
-	fixedImageSizeOnDesktop,
 }: Props) => {
 	const isHorizontalOnDesktop =
 		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
@@ -136,12 +138,7 @@ export const ImageWrapper = ({
 							display: none;
 						}
 					`,
-				isHorizontalOnMobile &&
-					fixedImageWidth(
-						fixedImageSizeOnMobile,
-						fixedImageSizeOnTablet,
-						fixedImageSizeOnDesktop,
-					),
+				isHorizontalOnMobile && imageFixedWidth(imageFixedSizes),
 
 				isHorizontalOnDesktop &&
 					css`
