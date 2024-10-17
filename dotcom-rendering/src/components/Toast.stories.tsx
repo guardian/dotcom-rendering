@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
-import { breakpoints } from '@guardian/source/foundations';
+import { space } from '@guardian/source/foundations';
+import type { Meta, StoryFn, StoryObj } from '@storybook/react';
+import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -7,156 +9,62 @@ import {
 	Pillar,
 } from '../lib/format';
 import { Toast } from './Toast';
+import type { ToastProps } from './Toast';
 
-const Wrapper = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			position: sticky;
-			top: 0;
-			display: flex;
-			justify-content: center;
-		`}
-	>
-		{children}
-	</div>
-);
-
-export default {
-	component: Toast,
+const meta: Meta<typeof Toast> = {
 	title: 'Components/Toast',
-};
+	component: Toast,
+} satisfies Meta<typeof Toast>;
 
-export const Default = () => {
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+const Template: StoryFn<typeof Toast> = (args: ToastProps) => {
 	return (
-		<Wrapper>
-			<Toast
-				format={{
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				count={3}
-				onClick={() => {}}
-			/>
-		</Wrapper>
+		<div
+			css={css`
+				position: relative;
+				height: ${space[9]}px;
+			`}
+		>
+			<Toast {...args} />
+		</div>
 	);
 };
-Default.storyName = 'with 3 updates';
-Default.story = {
-	parameters: {
-		viewport: { defaultViewport: 'desktop' },
-	},
-};
 
-export const Sport = () => {
-	return (
-		<Wrapper>
-			<Toast
-				format={{
-					theme: Pillar.Sport,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				count={3}
-				onClick={() => {}}
-			/>
-		</Wrapper>
-	);
-};
-Sport.storyName = 'with sport theme';
-Sport.story = {
-	parameters: {
-		viewport: { defaultViewport: 'desktop' },
-	},
-};
+const pillars = [
+	Pillar.News,
+	Pillar.Sport,
+	Pillar.Culture,
+	Pillar.Lifestyle,
+	Pillar.Opinion,
+	ArticleSpecial.SpecialReport,
+	ArticleSpecial.Labs,
+];
 
-export const Special = () => {
-	return (
-		<Wrapper>
-			<Toast
-				format={{
-					theme: ArticleSpecial.SpecialReport,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				count={17}
-				onClick={() => {}}
-			/>
-		</Wrapper>
-	);
-};
-Special.storyName = 'with special report theme';
-Special.story = {
-	parameters: {
-		viewport: { defaultViewport: 'desktop' },
-	},
-};
+const allThemeStandardVariations = pillars.map((theme) => ({
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme,
+}));
 
-export const One = () => {
-	return (
-		<Wrapper>
-			<Toast
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				count={1}
-				onClick={() => {}}
-			/>
-		</Wrapper>
-	);
-};
-One.storyName = 'with only one update';
-One.story = {
-	parameters: {
-		viewport: { defaultViewport: 'desktop' },
+export const Default = {
+	args: {
+		count: 3,
 	},
-};
+	decorators: [lightDecorator(allThemeStandardVariations)],
+	render: Template,
+} satisfies Story;
 
-export const Lots = () => {
-	return (
-		<Wrapper>
-			<Toast
-				format={{
-					theme: Pillar.Lifestyle,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				count={239}
-				onClick={() => {}}
-			/>
-		</Wrapper>
-	);
-};
-Lots.storyName = 'with many updates';
-Lots.story = {
-	parameters: {
-		viewport: { defaultViewport: 'desktop' },
-	},
-};
+// *****************************************************************************
 
-export const Mobile = () => {
-	return (
-		<Wrapper>
-			<Toast
-				format={{
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				count={3}
-				onClick={() => {}}
-			/>
-		</Wrapper>
-	);
-};
-Mobile.storyName = 'with mobile viewport';
-Mobile.story = {
-	parameters: {
-		viewport: { defaultViewport: 'mobileMedium' },
-		chromatic: {
-			viewports: [breakpoints.mobile],
-		},
+export const Lots = {
+	args: {
+		count: 239,
 	},
-};
+	decorators: [lightDecorator(allThemeStandardVariations)],
+	render: Template,
+} satisfies Story;
+
+// *****************************************************************************
