@@ -13,6 +13,7 @@ import type {
 import { LI } from './Card/components/LI';
 import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
+import { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
 import type { Alignment } from './SupportingContent';
@@ -68,9 +69,7 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 };
 
 type BoostedSplashProperties = {
-	headlineSize: SmallHeadlineSize;
-	headlineSizeOnMobile: SmallHeadlineSize;
-	headlineSizeOnTablet: SmallHeadlineSize;
+	headlineSizes: ResponsiveFontSize;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	imageSize: ImageSizeType;
@@ -87,12 +86,15 @@ const decideSplashCardProperties = (
 	supportingContentLength: number,
 ): BoostedSplashProperties => {
 	switch (boostLevel) {
+		// boostedfont sizing
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
 			return {
-				headlineSize: 'small',
-				headlineSizeOnMobile: 'small',
-				headlineSizeOnTablet: 'small',
+				headlineSizes: {
+					desktop: 'medium',
+					tablet: 'medium',
+					mobile: 'medium',
+				},
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'large',
@@ -103,9 +105,11 @@ const decideSplashCardProperties = (
 			};
 		case 'boost':
 			return {
-				headlineSize: 'medium',
-				headlineSizeOnMobile: 'medium',
-				headlineSizeOnTablet: 'medium',
+				headlineSizes: {
+					desktop: 'large',
+					tablet: 'large',
+					mobile: 'large',
+				},
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'jumbo',
@@ -116,9 +120,11 @@ const decideSplashCardProperties = (
 			};
 		case 'megaboost':
 			return {
-				headlineSize: 'large',
-				headlineSizeOnMobile: 'large',
-				headlineSizeOnTablet: 'large',
+				headlineSizes: {
+					desktop: 'xlarge',
+					tablet: 'xlarge',
+					mobile: 'xlarge',
+				},
 				imagePositionOnDesktop: 'bottom',
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'jumbo',
@@ -128,9 +134,11 @@ const decideSplashCardProperties = (
 			};
 		case 'gigaboost':
 			return {
-				headlineSize: 'huge',
-				headlineSizeOnMobile: 'huge',
-				headlineSizeOnTablet: 'large',
+				headlineSizes: {
+					desktop: 'xxlarge',
+					tablet: 'xlarge',
+					mobile: 'xxlarge',
+				},
 				imagePositionOnDesktop: 'bottom',
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'jumbo',
@@ -158,9 +166,7 @@ export const SplashCardLayout = ({
 	if (!card) return null;
 
 	const {
-		headlineSize,
-		headlineSizeOnMobile,
-		headlineSizeOnTablet,
+		headlineSizes,
 		imagePositionOnDesktop,
 		imagePositionOnMobile,
 		imageSize,
@@ -184,9 +190,7 @@ export const SplashCardLayout = ({
 					containerType="flexible/general"
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
-					headlineSize={headlineSize}
-					headlineSizeOnMobile={headlineSizeOnMobile}
-					headlineSizeOnTablet={headlineSizeOnTablet}
+					headlineSizes={headlineSizes}
 					imagePositionOnDesktop={imagePositionOnDesktop}
 					imagePositionOnMobile={imagePositionOnMobile}
 					imageSize={imageSize}
@@ -202,7 +206,6 @@ export const SplashCardLayout = ({
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
 					liveUpdatesAlignment={liveUpdatesAlignment}
-					boostedFontSizes={true}
 					isFlexSplash={true}
 					showTopBarDesktop={false}
 					showTopBarMobile={true}
@@ -214,9 +217,7 @@ export const SplashCardLayout = ({
 };
 
 type BoostedCardProperties = {
-	headlineSize: SmallHeadlineSize;
-	headlineSizeOnMobile: SmallHeadlineSize;
-	headlineSizeOnTablet: SmallHeadlineSize;
+	headlineSizes: ResponsiveFontSize;
 	imageSize: ImageSizeType;
 	liveUpdatesPosition: Position;
 	supportingContentAlignment: Alignment;
@@ -231,9 +232,11 @@ const decideCardProperties = (
 	switch (boostLevel) {
 		case 'megaboost':
 			return {
-				headlineSize: 'small',
-				headlineSizeOnMobile: 'small',
-				headlineSizeOnTablet: 'tiny',
+				headlineSizes: {
+					desktop: 'medium',
+					tablet: 'small',
+					mobile: 'medium',
+				},
 				imageSize: 'jumbo',
 				liveUpdatesPosition: 'outer',
 				supportingContentAlignment: 'horizontal',
@@ -241,9 +244,11 @@ const decideCardProperties = (
 		case 'boost':
 		default:
 			return {
-				headlineSize: 'tiny',
-				headlineSizeOnMobile: 'tiny',
-				headlineSizeOnTablet: 'tiny',
+				headlineSizes: {
+					desktop: 'small',
+					tablet: 'small',
+					mobile: 'small',
+				},
 				imageSize: 'medium',
 				liveUpdatesPosition: 'inner',
 				supportingContentAlignment: 'horizontal',
@@ -268,9 +273,7 @@ export const BoostedCardLayout = ({
 	if (!card) return null;
 
 	const {
-		headlineSize,
-		headlineSizeOnMobile,
-		headlineSizeOnTablet,
+		headlineSizes,
 		imageSize,
 		supportingContentAlignment,
 		liveUpdatesPosition,
@@ -287,9 +290,7 @@ export const BoostedCardLayout = ({
 					containerType="flexible/general"
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
-					headlineSize={headlineSize}
-					headlineSizeOnMobile={headlineSizeOnMobile}
-					headlineSizeOnTablet={headlineSizeOnTablet}
+					headlineSizes={headlineSizes}
 					imagePositionOnDesktop={'right'}
 					imagePositionOnMobile={'bottom'}
 					imageSize={imageSize}
@@ -307,7 +308,6 @@ export const BoostedCardLayout = ({
 					liveUpdatesAlignment="horizontal"
 					showTopBarDesktop={false}
 					showTopBarMobile={true}
-					boostedFontSizes={true}
 					liveUpdatesPosition={liveUpdatesPosition}
 				/>
 			</LI>

@@ -11,12 +11,7 @@ import {
 	headlineMedium42,
 	headlineMedium50,
 	headlineMedium64,
-	// space,
-	// textSans12,
 	textSans14,
-	// textSans15,
-	// textSans17,
-	// textSans20,
 	until,
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
@@ -163,8 +158,11 @@ export const CardHeadline = ({
 
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
-	console.log(headlineText, fontSizes);
 	const fonts = getFontSize(fontSizes);
+
+	if (format.theme === ArticleSpecial.Labs) {
+		console.log(fontSizes);
+	}
 	return (
 		<WithLink linkTo={linkTo}>
 			<h3
@@ -173,15 +171,13 @@ export const CardHeadline = ({
 				}`}
 				css={[
 					fonts,
-
-					/** TODO - reimplement labs styles */
-					// labTextStyles,
-
 					isSublink &&
-						fontSizes.desktop === 'xsmall' &&
 						css`
 							${textSans14}
 						`,
+
+					/** TODO - reimplement labs styles */
+					// labTextStyles,
 				]}
 			>
 				{!!kickerText && (
@@ -259,8 +255,13 @@ export const CardHeadline = ({
 // 	`;
 // };
 
-/** TODO - reimplement labs styles */
-// labTextStyles,
+// { desktop: 'xsmall', mobile: 'xxsmall' } ==> medium, small
+// 		(desktop) => (xsmall) => textSans20;
+// 		(tablet) => textSans17;
+// 		(mobile) => textSans15;
+// // { desktop: 'xxsmall'} ==> small
+// 	${textSans15}
+
 // const labTextStyles = (size: SmallHeadlineSize) => {
 // 	switch (size) {
 // 		case 'ginormous':

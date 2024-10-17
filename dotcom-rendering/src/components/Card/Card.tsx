@@ -62,9 +62,7 @@ export type Props = {
 	format: ArticleFormat;
 	absoluteServerTimes: boolean;
 	headlineText: string;
-	headlineSize?: SmallHeadlineSize;
-	headlineSizeOnMobile?: SmallHeadlineSize;
-	headlineSizeOnTablet?: SmallHeadlineSize;
+	headlineSizes?: ResponsiveFontSize;
 	showQuotedHeadline?: boolean;
 	byline?: string;
 	showByline?: boolean;
@@ -267,9 +265,7 @@ export const Card = ({
 	linkTo,
 	format,
 	headlineText,
-	headlineSize,
-	headlineSizeOnMobile,
-	headlineSizeOnTablet,
+	headlineSizes,
 	showQuotedHeadline,
 	byline,
 	showByline,
@@ -520,99 +516,6 @@ export const Card = ({
 		);
 	};
 
-	const mapHeadlineSize = (
-		size: SmallHeadlineSize,
-		breakpoint: 'tablet' | 'desktop' | 'mobile',
-		isBoosted: boolean,
-	) => {
-		if (isBoosted) {
-			switch (size) {
-				case 'ginormous':
-					return 'xxxlarge';
-				case 'huge':
-					return 'xxlarge';
-				case 'large':
-					return 'xlarge';
-				case 'medium':
-					return 'large';
-				case 'small':
-					return 'medium';
-				case 'tiny':
-					return 'small';
-			}
-		}
-
-		switch (breakpoint) {
-			case 'desktop':
-				switch (size) {
-					case 'ginormous':
-						return 'xxlarge';
-					case 'huge':
-						return 'medium';
-					case 'large':
-						return 'small';
-					case 'medium':
-						return 'xsmall';
-					case 'small':
-						return 'xxsmall';
-					case 'tiny':
-						return 'tiny';
-				}
-			case 'tablet':
-				switch (size) {
-					case 'ginormous':
-						return 'xlarge';
-					case 'huge':
-						return 'small';
-					case 'large':
-						return 'xsmall';
-					case 'medium':
-						return 'xxsmall';
-					case 'small':
-						return 'xxsmall';
-					case 'tiny':
-						return 'tiny';
-				}
-			case 'mobile':
-				switch (size) {
-					case 'ginormous':
-						return 'large';
-					case 'huge':
-						return 'small';
-					case 'large':
-						return 'xsmall';
-					case 'medium':
-						return 'xxsmall';
-					case 'small':
-						return 'xxsmall';
-					case 'tiny':
-						return 'tiny';
-				}
-		}
-	};
-
-	const headlineSizes: ResponsiveFontSize = {
-		desktop:
-			(headlineSize &&
-				mapHeadlineSize(headlineSize, 'desktop', !!boostedFontSizes)) ||
-			'xsmall',
-
-		...(headlineSizeOnTablet && {
-			tablet: mapHeadlineSize(
-				headlineSizeOnTablet,
-				'tablet',
-				!!boostedFontSizes,
-			),
-		}),
-		...(headlineSizeOnMobile && {
-			mobile: mapHeadlineSize(
-				headlineSizeOnMobile,
-				'mobile',
-				!!boostedFontSizes,
-			),
-		}),
-	};
-
 	return (
 		<CardWrapper
 			format={format}
@@ -755,11 +658,19 @@ export const Card = ({
 												imagePositionOnMobile={
 													imagePositionOnMobile
 												}
+												//** TODO: IMPROVE THIS MAPPING */
 												// image size defaults to small if not provided. However, if the headline size is large or greater, we want to assume the image is also large so that the play icon is correctly sized.
 												imageSize={
-													headlineSize === 'huge' ||
-													headlineSize === 'large' ||
-													headlineSize === 'ginormous'
+													[
+														'small',
+														'medium',
+														'large',
+														'xlarge',
+														'xxlarge',
+													].includes(
+														headlineSizes?.desktop ??
+															'',
+													)
 														? 'large'
 														: imageSize
 												}
