@@ -5,6 +5,7 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
+import { Position } from './Card/Card';
 import type {
 	ImagePositionType,
 	ImageSizeType,
@@ -199,6 +200,7 @@ export const SplashCardLayout = ({
 					imageLoading={imageLoading}
 					aspectRatio="5:4"
 					kickerText={card.kickerText}
+					showLivePlayable={card.showLivePlayable}
 					liveUpdatesAlignment={liveUpdatesAlignment}
 					boostedFontSizes={true}
 					isFlexSplash={true}
@@ -216,7 +218,7 @@ type BoostedCardProperties = {
 	headlineSizeOnMobile: SmallHeadlineSize;
 	headlineSizeOnTablet: SmallHeadlineSize;
 	imageSize: ImageSizeType;
-	liveUpdatesPosition: 'inner' | 'outer';
+	liveUpdatesPosition: Position;
 	supportingContentAlignment: Alignment;
 };
 
