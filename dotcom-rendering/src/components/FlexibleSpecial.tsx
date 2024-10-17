@@ -153,7 +153,6 @@ export const OneCardLayout = ({
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
 					liveUpdatesAlignment={liveUpdatesAlignment}
-					boostedFontSizes={true}
 					isFlexSplash={true}
 					showTopBarDesktop={false}
 					showTopBarMobile={true}
