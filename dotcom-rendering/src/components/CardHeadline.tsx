@@ -11,12 +11,12 @@ import {
 	headlineMedium42,
 	headlineMedium50,
 	headlineMedium64,
-	space,
-	textSans12,
+	// space,
+	// textSans12,
 	textSans14,
-	textSans15,
-	textSans17,
-	textSans20,
+	// textSans15,
+	// textSans17,
+	// textSans20,
 	until,
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
