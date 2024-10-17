@@ -787,6 +787,9 @@ importers:
       valibot:
         specifier: 0.28.1
         version: 0.28.1
+      wavesurfer.js:
+        specifier: 7.8.6
+        version: 7.8.6
       web-vitals:
         specifier: 4.2.3
         version: 4.2.3
@@ -18493,6 +18496,10 @@ packages:
     dependencies:
       glob-to-regexp: 0.4.1
       graceful-fs: 4.2.11
+    dev: false
+
+  /wavesurfer.js@7.8.6:
+    resolution: {integrity: sha512-EDexkMwkkQBTWruhfWQRkTtvRggtKFTPuJX/oZ5wbIZEfyww9EBeLr2mtkxzA1S8TlWPx6adY5WyjOlNYNyHSg==}
     dev: false
 
   /wbuf@1.7.3:

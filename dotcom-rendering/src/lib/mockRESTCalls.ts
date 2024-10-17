@@ -514,5 +514,8 @@ export const mockRESTCalls = (): typeof fetchMock => {
 
 			/** @see https://github.com/wheresrhys/fetch-mock/issues/618 */
 			.spy('end:.hot-update.json')
+
+			// allow this mp3 for audio player stories
+			.spy('end:default_audio_test.mp3')
 	);
 };
