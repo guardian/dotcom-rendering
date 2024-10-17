@@ -83,9 +83,7 @@ export const CardKickerWithContainerOverrides = {
 							<div style={kickerWrapperStyles}>
 								<span
 									style={{
-										color: palette(
-											'--card-headline-trail-text',
-										),
+										color: palette('--card-headline'),
 									}}
 								>
 									{containerPalette}

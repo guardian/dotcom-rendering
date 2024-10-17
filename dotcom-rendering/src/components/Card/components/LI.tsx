@@ -71,14 +71,11 @@ const decideSize = (percentage?: CardPercentageType, stretch?: boolean) => {
 const decideDivider = (
 	offsetBottomPaddingOnDivider: boolean,
 	paddingSize: string,
-	verticalDividerColour?: string,
-) => {
-	const borderColour = verticalDividerColour ?? palette('--section-border');
-
-	return offsetBottomPaddingOnDivider
-		? verticalDividerWithBottomOffset(paddingSize, borderColour)
-		: verticalDivider(borderColour);
-};
+	verticalDividerColour: string,
+) =>
+	offsetBottomPaddingOnDivider
+		? verticalDividerWithBottomOffset(paddingSize, verticalDividerColour)
+		: verticalDivider(verticalDividerColour);
 
 type Props = {
 	children: React.ReactNode;
@@ -101,6 +98,7 @@ type Props = {
 	/** Prevent the divider from spanning the LI's bottom padding. To be used when you know that the
 	LI will have bottom padding, but won't have another card in the same container directly below it. */
 	offsetBottomPaddingOnDivider?: boolean;
+	/** Overrides the vertical divider colour */
 	verticalDividerColour?: string;
 };
 
@@ -115,7 +113,7 @@ export const LI = ({
 	padSidesMobileOverride,
 	snapAlignStart = false,
 	offsetBottomPaddingOnDivider = false,
-	verticalDividerColour,
+	verticalDividerColour = palette('--section-border'),
 }: Props) => {
 	// Decide sizing
 	const sizeStyles = decideSize(percentage, stretch);

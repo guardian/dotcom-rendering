@@ -15,7 +15,7 @@ const linkStyles = css`
 	display: flex;
 	align-items: flex-start;
 	text-decoration: none;
-	color: ${palette('--card-headline-trail-text')};
+	color: ${palette('--card-headline')};
 `;
 
 type Props = {

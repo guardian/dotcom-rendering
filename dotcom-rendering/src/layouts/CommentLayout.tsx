@@ -3,6 +3,7 @@ import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
+	space,
 	until,
 } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
@@ -48,6 +49,7 @@ import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
+import { getZIndex } from '../lib/getZIndex';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -101,20 +103,18 @@ const StandardGrid = ({
 									'title      border  headline   headline   headline'
 									'lines      border  headline   headline   headline'
 									'meta       border  standfirst standfirst standfirst'
-									'uscard     border  standfirst standfirst standfirst'
-									'uscard     border  media      media      media'
-									'uscard     border  body       .          right-column'
-									'uscard     border  .          .          right-column';
+									'meta       border  media      media      media'
+									'meta       border  body       .          right-column'
+									'.          border  .          .          right-column';
 						  `
 						: css`
 								grid-template-areas:
 									'title      border  headline   . right-column'
 									'lines      border  headline   . right-column'
 									'meta       border  standfirst . right-column'
-									'uscard     border  standfirst . right-column'
-									'uscard     border  media      . right-column'
-									'uscard     border  body       . right-column'
-									'uscard     border  .          . right-column';
+									'meta       border  media      . right-column'
+									'meta       border  body       . right-column'
+									'.          border  .          . right-column';
 						  `}
 				}
 
@@ -132,23 +132,21 @@ const StandardGrid = ({
 					${display === ArticleDisplay.Showcase
 						? css`
 								grid-template-areas:
-									'title   border  headline    headline'
-									'lines   border  headline    headline'
-									'meta    border  standfirst  standfirst'
-									'uscard  border  standfirst  standfirst'
-									'uscard  border  media       media'
-									'uscard  border  body        right-column'
-									'uscard  border  .           right-column';
+									'title      border  headline    headline'
+									'lines      border  headline    headline'
+									'meta       border  standfirst  standfirst'
+									'meta       border  media       media'
+									'meta       border  body        right-column'
+									'.          border  .           right-column';
 						  `
 						: css`
 								grid-template-areas:
-									'title   border  headline    right-column'
-									'lines   border  headline    right-column'
-									'meta    border  standfirst  right-column'
-									'uscard  border  standfirst  right-column'
-									'uscard  border  media       right-column'
-									'uscard  border  body        right-column'
-									'uscard  border  .           right-column';
+									'title      border  headline    right-column'
+									'lines      border  headline    right-column'
+									'meta       border  standfirst  right-column'
+									'meta       border  media       right-column'
+									'meta       border  body        right-column'
+									'.          border  .           right-column';
 						  `}
 				}
 
@@ -184,7 +182,6 @@ const StandardGrid = ({
 
 				${until.tablet} {
 					grid-column-gap: 0px;
-
 					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
@@ -207,6 +204,25 @@ const maxWidth = css`
 	}
 `;
 
+const usCardStyles = css`
+	align-self: start;
+	position: sticky;
+	top: 0;
+	${getZIndex('expandableMarketingCardOverlay')}
+
+	${from.leftCol} {
+		margin-top: ${space[6]}px;
+		margin-bottom: ${space[9]}px;
+
+		/* To align with rich links - if we move this feature to production, we should remove this and make rich link align with everything instead */
+		margin-left: 1px;
+		margin-right: -1px;
+	}
+
+	${from.wide} {
+		margin-left: 0;
+	}
+`;
 const avatarHeadlineWrapper = css`
 	display: flex;
 	flex-direction: column;
@@ -534,44 +550,55 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										</Hide>
 									</>
 								) : (
-									<ArticleMeta
-										branding={branding}
-										format={format}
-										pageId={article.pageId}
-										webTitle={article.webTitle}
-										byline={article.byline}
-										tags={article.tags}
-										primaryDateline={
-											article.webPublicationDateDisplay
-										}
-										secondaryDateline={
-											article.webPublicationSecondaryDateDisplay
-										}
-										isCommentable={article.isCommentable}
-										discussionApiUrl={
-											article.config.discussionApiUrl
-										}
-										shortUrlId={article.config.shortUrlId}
-									/>
+									<>
+										<ArticleMeta
+											branding={branding}
+											format={format}
+											pageId={article.pageId}
+											webTitle={article.webTitle}
+											byline={article.byline}
+											tags={article.tags}
+											primaryDateline={
+												article.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												article.webPublicationSecondaryDateDisplay
+											}
+											isCommentable={
+												article.isCommentable
+											}
+											discussionApiUrl={
+												article.config.discussionApiUrl
+											}
+											shortUrlId={
+												article.config.shortUrlId
+											}
+										/>
+										{isWeb && (
+											<div css={usCardStyles}>
+												<Hide
+													when="below"
+													breakpoint="leftCol"
+												>
+													<Island
+														priority="enhancement"
+														defer={{
+															until: 'visible',
+														}}
+													>
+														<ExpandableMarketingCardWrapper
+															guardianBaseURL={
+																article.guardianBaseURL
+															}
+														/>
+													</Island>
+												</Hide>
+											</div>
+										)}
+									</>
 								)}
 							</div>
 						</GridItem>
-						{isWeb && (
-							<GridItem area="uscard" element="aside">
-								<Hide when="below" breakpoint="leftCol">
-									<Island
-										priority="enhancement"
-										defer={{ until: 'visible' }}
-									>
-										<ExpandableMarketingCardWrapper
-											guardianBaseURL={
-												article.guardianBaseURL
-											}
-										/>
-									</Island>
-								</Hide>
-							</GridItem>
-						)}
 						<GridItem area="body">
 							<ArticleContainer format={format}>
 								<div css={maxWidth}>
