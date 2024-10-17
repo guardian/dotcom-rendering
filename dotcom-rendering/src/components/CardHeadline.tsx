@@ -228,44 +228,44 @@ export const CardHeadline = ({
 
 /** TODO - reimplement labs styles */
 // labTextStyles,
-const labTextStyles = (size: SmallHeadlineSize) => {
-	switch (size) {
-		case 'ginormous':
-		case 'huge':
-		case 'large':
-			return css`
-				${textSans20};
-				${until.desktop} {
-					${textSans17};
-				}
-			`;
-		case 'medium':
-			return css`
-				${textSans20};
-				/**
-				 * Typography preset styles should not be overridden.
-				 * This has been done because the styles do not directly map to the new presets.
-				 * Please speak to your team's designer and update this to use a more appropriate preset.
-				 */
-				line-height: 1.15;
-				${until.desktop} {
-					${textSans17};
-					/**
-					 * Typography preset styles should not be overridden.
-					 * This has been done because the styles do not directly map to the new presets.
-					 * Please speak to your team's designer and update this to use a more appropriate preset.
-					 */
-					line-height: 1.15;
-				}
-				padding-bottom: ${space[1]}px;
-			`;
-		case 'small':
-			return css`
-				${textSans15};
-			`;
-		case 'tiny':
-			return css`
-				${textSans12};
-			`;
-	}
-};
+// const labTextStyles = (size: SmallHeadlineSize) => {
+// 	switch (size) {
+// 		case 'ginormous':
+// 		case 'huge':
+// 		case 'large':
+// 			return css`
+// 				${textSans20};
+// 				${until.desktop} {
+// 					${textSans17};
+// 				}
+// 			`;
+// 		case 'medium':
+// 			return css`
+// 				${textSans20};
+// 				/**
+// 				 * Typography preset styles should not be overridden.
+// 				 * This has been done because the styles do not directly map to the new presets.
+// 				 * Please speak to your team's designer and update this to use a more appropriate preset.
+// 				 */
+// 				line-height: 1.15;
+// 				${until.desktop} {
+// 					${textSans17};
+// 					/**
+// 					 * Typography preset styles should not be overridden.
+// 					 * This has been done because the styles do not directly map to the new presets.
+// 					 * Please speak to your team's designer and update this to use a more appropriate preset.
+// 					 */
+// 					line-height: 1.15;
+// 				}
+// 				padding-bottom: ${space[1]}px;
+// 			`;
+// 		case 'small':
+// 			return css`
+// 				${textSans15};
+// 			`;
+// 		case 'tiny':
+// 			return css`
+// 				${textSans12};
+// 			`;
+// 	}
+// };
