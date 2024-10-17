@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	between,
 	from,
 	headlineMedium24Object,
 	space,
@@ -111,6 +112,10 @@ const carouselStyles = css`
 	}
 	scrollbar-width: none; /* Firefox */
 	position: relative;
+
+	${between.tablet.and.wide} {
+		margin-top: ${space[2]}px;
+	}
 
 	padding-left: 10px;
 	scroll-padding-left: 10px;
