@@ -16,8 +16,7 @@ import type { Loading } from './CardPicture';
 
 export type Orientation = 'portrait' | 'landscape';
 
-type Props = {
-	role: RoleType;
+interface BaseProps {
 	format: ArticleFormat;
 	master: string;
 	alt: string;
@@ -28,8 +27,19 @@ type Props = {
 	isLightbox?: boolean;
 	orientation?: Orientation;
 	onLoad?: () => void;
-	imageWidths?: [ImageWidthType, ...ImageWidthType[]];
-};
+}
+
+interface StandardProps extends BaseProps {
+	role: RoleType;
+	imageWidths?: never;
+}
+
+interface CustomProps extends BaseProps {
+	role: 'custom';
+	imageWidths: [ImageWidthType, ...ImageWidthType[]];
+}
+
+type Props = StandardProps | CustomProps;
 
 export type ImageWidthType = { breakpoint: number; width: number };
 

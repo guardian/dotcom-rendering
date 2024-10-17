@@ -350,16 +350,14 @@ const stretchLines = css`
 
 const podcastResponsiveCoverImage = css`
 	${from.wide} {
-		> picture > img {
-			width: calc(219px);
-			height: calc(219px);
+		img {
+			width: 219px;
+			height: 219px;
 		}
 	}
-	${until.wide} {
-		> picture > img {
-			width: calc(140px);
-			height: calc(140px);
-		}
+	img {
+		width: 140px;
+		height: 140px;
 	}
 	margin: 0.375rem 0 0.375rem 0;
 `;
@@ -746,7 +744,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<GridItem area="image" element="aside">
 									<div css={podcastResponsiveCoverImage}>
 										<Picture
-											role={'supporting'}
+											role={'custom'}
 											format={format}
 											master={
 												podcastSeries.podcast?.image ??
