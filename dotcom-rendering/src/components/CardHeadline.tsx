@@ -59,7 +59,7 @@ const headlineSize = {
 	tiny: headlineMedium14,
 };
 
-type HeadlineSize = keyof typeof headlineSize;
+export type HeadlineSize = keyof typeof headlineSize;
 
 export type ResponsiveFontSize = {
 	desktop: HeadlineSize;
