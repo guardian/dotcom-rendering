@@ -116,8 +116,6 @@ export type Props = {
 	isTagPage?: boolean;
 	/** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
 	aspectRatio?: AspectRatio;
-	/** Alows the consumer to use a larger font size group for boost styling*/
-	boostedFontSizes?: boolean;
 	index?: number;
 	/** The Splash card in a flexible container gets a different visual treatment to other cards*/
 	isFlexSplash?: boolean;
@@ -309,7 +307,6 @@ export const Card = ({
 	absoluteServerTimes,
 	isTagPage = false,
 	aspectRatio,
-	boostedFontSizes,
 	index = 0,
 	isFlexSplash,
 	showTopBarDesktop = true,
