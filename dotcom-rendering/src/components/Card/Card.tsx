@@ -471,8 +471,9 @@ export const Card = ({
 	/** Determines the gap of between card components based on card properties */
 	const getGapSize = (): GapSize => {
 		if (isOnwardContent) return 'none';
-		if (hasBackgroundColour) return 'small';
-		if (isFlexSplash) return 'medium';
+		if (hasBackgroundColour) return 'tiny';
+		if (isFlexSplash) return 'small';
+		if (isSmallCard) return 'medium';
 		if (
 			isFlexibleContainer &&
 			(imagePositionOnDesktop === 'left' ||
@@ -480,7 +481,7 @@ export const Card = ({
 		) {
 			return 'large';
 		}
-		return 'medium';
+		return 'small';
 	};
 
 	/**
