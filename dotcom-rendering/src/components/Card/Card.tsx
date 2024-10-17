@@ -448,13 +448,7 @@ export const Card = ({
 				desktop: 'small',
 			};
 		}
-
-		if (isFlexibleContainer) {
-			return {
-				mobile: 'small',
-			};
-		}
-
+		if (isFlexibleContainer) return { mobile: 'small' };
 		return { mobile: 'medium' };
 	};
 
