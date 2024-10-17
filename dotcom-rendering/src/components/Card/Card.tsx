@@ -58,7 +58,7 @@ import {
 	TrailTextWrapper,
 } from './components/TrailTextWrapper';
 
-type Position = 'inner' | 'outer' | 'none';
+export type Position = 'inner' | 'outer' | 'none';
 
 export type Props = {
 	linkTo: string;
