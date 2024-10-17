@@ -98,7 +98,6 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.          border      headline   . right-column'
 						'.          border      standfirst . right-column'
 						'.          border      byline     . right-column'
-						'lines      border      body       . right-column'
 						'meta       border      body       . right-column'
 						'meta       border      body       . right-column'
 						'.          border      .          . right-column';
@@ -120,7 +119,6 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.          border      headline    right-column'
 						'.          border      standfirst  right-column'
 						'.          border      byline      right-column'
-						'lines      border      body        right-column'
 						'meta       border      body        right-column'
 						'meta       border      body        right-column'
 						'.          border      .           right-column';
@@ -141,7 +139,6 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'standfirst  right-column'
 						'byline      right-column'
 						'caption     right-column'
-						'lines       right-column'
 						'meta        right-column'
 						'body        right-column';
 				}
@@ -155,7 +152,6 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'standfirst'
 						'byline'
 						'caption'
-						'lines'
 						'meta'
 						'body';
 				}
@@ -555,7 +551,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								/>
 							)}
 						</GridItem>
-						<GridItem area="lines">
+						<GridItem area="meta" element="aside">
 							{format.design === ArticleDesign.PhotoEssay &&
 							!isLabs ? (
 								<></>
@@ -576,8 +572,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									</div>
 								</div>
 							)}
-						</GridItem>
-						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
 								{isApps ? (
 									<>

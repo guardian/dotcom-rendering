@@ -112,7 +112,6 @@ const StandardGrid = ({
 									'title  border  matchtabs  . right-column'
 									'.      border  headline   . right-column'
 									'.      border  standfirst . right-column'
-									'lines  border  media      . right-column'
 									'meta   border  media      . right-column'
 									'meta   border  body       . right-column'
 									'.      border  .          . right-column';
@@ -122,7 +121,6 @@ const StandardGrid = ({
 								grid-template-areas:
 									'title  border  headline   headline   .'
 									'.      border  disclaimer disclaimer right-column'
-									'lines  border  media      media      right-column'
 									'meta   border  media      media      right-column'
 									'meta   border  standfirst standfirst right-column'
 									'.      border  body       body       right-column'
@@ -132,7 +130,6 @@ const StandardGrid = ({
 								grid-template-areas:
 									'title  border  headline   . right-column'
 									'.      border  standfirst . right-column'
-									'lines  border  media      . right-column'
 									'meta   border  media      . right-column'
 									'meta   border  body       . right-column'
 									'.      border  .          . right-column';
@@ -158,7 +155,6 @@ const StandardGrid = ({
 								'title  border  matchtabs    right-column'
 								'.      border  headline     right-column'
 								'.      border  standfirst   right-column'
-								'lines  border  media        right-column'
 								'meta   border  media        right-column'
 								'meta   border  body         right-column'
 								'.      border  .            right-column';
@@ -168,7 +164,6 @@ const StandardGrid = ({
 							grid-template-areas:
 								'title  border  headline     .'
 								'.      border  disclaimer   right-column'
-								'lines  border  media        right-column'
 								'meta   border  media        right-column'
 								'meta   border  standfirst   right-column'
 								'meta   border  body         right-column'
@@ -179,7 +174,6 @@ const StandardGrid = ({
 								'title  border  headline     right-column'
 								'.      border  standfirst   right-column'
 								'.      border  disclaimer   right-column'
-								'lines  border  media        right-column'
 								'meta   border  media        right-column'
 								'meta   border  body         right-column'
 								'.      border  .            right-column';
@@ -203,7 +197,6 @@ const StandardGrid = ({
 								'headline      right-column'
 								'standfirst    right-column'
 								'media         right-column'
-								'lines         right-column'
 								'meta          right-column'
 								'body          right-column'
 								'.             right-column';
@@ -216,7 +209,6 @@ const StandardGrid = ({
 								'disclaimer    right-column'
 								'media         right-column'
 								'standfirst    right-column'
-								'lines         right-column'
 								'meta          right-column'
 								'body          right-column'
 								'.             right-column';
@@ -228,7 +220,6 @@ const StandardGrid = ({
 								'standfirst    right-column'
 								'disclaimer    right-column'
 								'media         right-column'
-								'lines         right-column'
 								'meta          right-column'
 								'body          right-column'
 								'.             right-column';
@@ -246,7 +237,6 @@ const StandardGrid = ({
 								'headline'
 								'standfirst'
 								'media'
-								'lines'
 								'meta'
 								'body';
 					  `
@@ -258,7 +248,6 @@ const StandardGrid = ({
 								'disclaimer'
 								'media'
 								'standfirst'
-								'lines'
 								'meta'
 								'body';
 					  `
@@ -269,7 +258,6 @@ const StandardGrid = ({
 								'standfirst'
 								'disclaimer'
 								'media'
-								'lines'
 								'meta'
 								'body';
 					  `}
@@ -288,7 +276,6 @@ const StandardGrid = ({
 								'title'
 								'headline'
 								'standfirst'
-								'lines'
 								'meta'
 								'body';
 					  `
@@ -300,7 +287,6 @@ const StandardGrid = ({
 								'disclaimer'
 								'media'
 								'standfirst'
-								'lines'
 								'meta'
 								'body';
 					  `
@@ -311,7 +297,6 @@ const StandardGrid = ({
 								'headline'
 								'standfirst'
 								'disclaimer'
-								'lines'
 								'meta'
 								'body';
 					  `}
@@ -618,7 +603,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								standfirst={article.standfirst}
 							/>
 						</GridItem>
-						<GridItem area="lines">
+						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
 									{isWeb &&
@@ -635,8 +620,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									)}
 								</div>
 							</div>
-						</GridItem>
-						<GridItem area="meta" element="aside">
 							{isApps ? (
 								<>
 									<Hide from="leftCol">

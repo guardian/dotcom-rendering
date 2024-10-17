@@ -182,7 +182,6 @@ const StandardGrid = ({
 
 				${until.tablet} {
 					grid-column-gap: 0px;
-
 					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'

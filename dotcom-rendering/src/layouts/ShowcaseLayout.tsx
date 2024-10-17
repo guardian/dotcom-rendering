@@ -95,7 +95,6 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-columns: 219px 1px 620px 80px 300px;
 					grid-template-areas:
 						'title  border  headline   headline headline'
-						'lines  border  media      media    media'
 						'meta   border  media      media    media'
 						'meta   border  standfirst .        right-column'
 						'meta   border  body       .        right-column'
@@ -106,7 +105,6 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-columns: 140px 1px 620px 300px;
 					grid-template-areas:
 						'title  border  headline    headline'
-						'lines  border  media       media'
 						'meta   border  media       media'
 						'meta   border  standfirst  right-column'
 						'meta   border  body        right-column'
@@ -126,7 +124,6 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'headline   right-column'
 						'standfirst right-column'
 						'media      right-column'
-						'lines      right-column'
 						'meta       right-column'
 						'body       right-column'
 						'.          right-column';
@@ -140,7 +137,6 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'headline'
 						'standfirst'
 						'media'
-						'lines'
 						'meta'
 						'body';
 				}
@@ -153,7 +149,6 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'title'
 						'headline'
 						'standfirst'
-						'lines'
 						'meta'
 						'body';
 				}
@@ -470,7 +465,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								standfirst={article.standfirst}
 							/>
 						</GridItem>
-						<GridItem area="lines">
+						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
 									<DecideLines
@@ -479,8 +474,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									/>
 								</div>
 							</div>
-						</GridItem>
-						<GridItem area="meta" element="aside">
 							<div css={[maxWidth, fullHeight]}>
 								{isApps ? (
 									<>
