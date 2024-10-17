@@ -520,21 +520,96 @@ export const Card = ({
 		);
 	};
 
+	const mapHeadlineSize = (
+		size: SmallHeadlineSize,
+		breakpoint: 'tablet' | 'desktop' | 'mobile',
+		isBoosted: boolean,
+	) => {
+		if (isBoosted) {
+			switch (size) {
+				case 'ginormous':
+					return 'xxxlarge';
+				case 'huge':
+					return 'xxlarge';
+				case 'large':
+					return 'xlarge';
+				case 'medium':
+					return 'large';
+				case 'small':
+					return 'medium';
+				case 'tiny':
+					return 'small';
+			}
+		}
+
+		switch (breakpoint) {
+			case 'desktop':
+				switch (size) {
+					case 'ginormous':
+						return 'xxlarge';
+					case 'huge':
+						return 'medium';
+					case 'large':
+						return 'small';
+					case 'medium':
+						return 'xsmall';
+					case 'small':
+						return 'xxsmall';
+					case 'tiny':
+						return 'tiny';
+				}
+			case 'tablet':
+				switch (size) {
+					case 'ginormous':
+						return 'xlarge';
+					case 'huge':
+						return 'small';
+					case 'large':
+						return 'xsmall';
+					case 'medium':
+						return 'xxsmall';
+					case 'small':
+						return 'xxsmall';
+					case 'tiny':
+						return 'tiny';
+				}
+			case 'mobile':
+				switch (size) {
+					case 'ginormous':
+						return 'large';
+					case 'huge':
+						return 'small';
+					case 'large':
+						return 'xsmall';
+					case 'medium':
+						return 'xxsmall';
+					case 'small':
+						return 'xxsmall';
+					case 'tiny':
+						return 'tiny';
+				}
+		}
+	};
+
 	const headlineSizes: ResponsiveFontSize = {
 		desktop:
-			headlineSize && boostedFontSizes
-				? `${headlineSize}Boosted`
-				: headlineSize || 'medium',
+			(headlineSize &&
+				mapHeadlineSize(headlineSize, 'desktop', !!boostedFontSizes)) ||
+			'xsmall',
 
 		...(headlineSizeOnTablet && {
-			tablet: boostedFontSizes
-				? `${headlineSizeOnTablet}Boosted`
-				: headlineSizeOnTablet,
+			tablet: mapHeadlineSize(
+				headlineSizeOnTablet,
+				'tablet',
+				!!boostedFontSizes,
+			),
 		}),
 		...(headlineSizeOnMobile && {
-			mobile: boostedFontSizes
-				? `${headlineSizeOnMobile}Boosted`
-				: headlineSizeOnMobile,
+			mobile: mapHeadlineSize(
+				headlineSizeOnMobile,
+				'mobile',
+				!!boostedFontSizes,
+			),
 		}),
 	};
 
