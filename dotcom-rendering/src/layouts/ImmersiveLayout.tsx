@@ -89,8 +89,6 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Vertical grey border
 					Main content
 					Right Column
-
-					Duplicate lines are required to ensure the left column does not have extra vertical space.
 				*/
 				${from.wide} {
 					grid-column-gap: 10px;
@@ -100,12 +98,9 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.          border      headline   . right-column'
 						'.          border      standfirst . right-column'
 						'.          border      byline     . right-column'
-						'lines      border      body       . right-column'
 						'meta       border      body       . right-column'
-						'uscard     border      body       . right-column'
-						'uscard     border      .          . right-column'
-						'uscard     border      .          . right-column'
-						'uscard     border      .          . right-column';
+						'meta       border      body       . right-column'
+						'.          border      .          . right-column';
 				}
 
 				/*
@@ -115,8 +110,6 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Vertical grey border
 					Main content
 					Right Column
-
-					Duplicate lines are required to ensure the left column does not have extra vertical space.
 				*/
 				${until.wide} {
 					grid-column-gap: 10px;
@@ -126,12 +119,9 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.          border      headline    right-column'
 						'.          border      standfirst  right-column'
 						'.          border      byline      right-column'
-						'lines      border      body        right-column'
 						'meta       border      body        right-column'
-						'uscard     border      body        right-column'
-						'uscard     border      .           right-column'
-						'uscard     border      .           right-column'
-						'uscard     border      .           right-column';
+						'meta       border      body        right-column'
+						'.          border      .           right-column';
 				}
 
 				/*
@@ -149,7 +139,6 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'standfirst  right-column'
 						'byline      right-column'
 						'caption     right-column'
-						'lines       right-column'
 						'meta        right-column'
 						'body        right-column';
 				}
@@ -163,7 +152,6 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'standfirst'
 						'byline'
 						'caption'
-						'lines'
 						'meta'
 						'body';
 				}
@@ -177,6 +165,26 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 const maxWidth = css`
 	${from.desktop} {
 		max-width: 620px;
+	}
+`;
+
+const usCardStyles = css`
+	align-self: start;
+	position: sticky;
+	top: 0;
+	${getZIndex('expandableMarketingCardOverlay')}
+
+	${from.leftCol} {
+		margin-top: ${space[6]}px;
+		margin-bottom: ${space[9]}px;
+
+		/* To align with rich links - if we move this feature to production, we should remove this and make rich link align with everything instead */
+		margin-left: 1px;
+		margin-right: -1px;
+	}
+
+	${from.wide} {
+		margin-left: 0;
 	}
 `;
 
@@ -543,7 +551,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								/>
 							)}
 						</GridItem>
-						<GridItem area="lines">
+						<GridItem area="meta" element="aside">
 							{format.design === ArticleDesign.PhotoEssay &&
 							!isLabs ? (
 								<></>
@@ -564,8 +572,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									</div>
 								</div>
 							)}
-						</GridItem>
-						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
 								{isApps ? (
 									<>
@@ -648,26 +654,31 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										{!!article.affiliateLinksDisclaimer && (
 											<AffiliateDisclaimer />
 										)}
+										{isWeb && (
+											<div css={usCardStyles}>
+												<Hide
+													when="below"
+													breakpoint="leftCol"
+												>
+													<Island
+														priority="enhancement"
+														defer={{
+															until: 'visible',
+														}}
+													>
+														<ExpandableMarketingCardWrapper
+															guardianBaseURL={
+																article.guardianBaseURL
+															}
+														/>
+													</Island>
+												</Hide>
+											</div>
+										)}
 									</>
 								)}
 							</div>
 						</GridItem>
-						{isWeb && (
-							<GridItem area="uscard" element="aside">
-								<Hide when="below" breakpoint="leftCol">
-									<Island
-										priority="enhancement"
-										defer={{ until: 'visible' }}
-									>
-										<ExpandableMarketingCardWrapper
-											guardianBaseURL={
-												article.guardianBaseURL
-											}
-										/>
-									</Island>
-								</Hide>
-							</GridItem>
-						)}
 						<GridItem area="body">
 							<ArticleContainer format={format}>
 								<ArticleBody
