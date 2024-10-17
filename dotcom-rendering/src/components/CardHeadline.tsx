@@ -84,17 +84,17 @@ const getFontSize = ({
 			}
 		`}
 
-		${mobileMedium &&
-		css`
-			${between.mobile.and.tablet} {
-				${headlineSize[mobileMedium]};
-			}
-		`}
-
 		${mobile &&
 		css`
 			${until.tablet} {
 				${headlineSize[mobile]};
+			}
+		`}
+
+		${mobileMedium &&
+		css`
+			${between.mobileMedium.and.tablet} {
+				${headlineSize[mobileMedium]};
 			}
 		`}
 	`;
