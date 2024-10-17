@@ -192,7 +192,7 @@ export const CardHeadline = ({
 	kickerText,
 	showPulsingDot,
 	hasInlineKicker,
-	fontSizes = { desktop: 'xsmall' },
+	fontSizes = { desktop: 'xxsmall' },
 	byline,
 	showByline,
 	linkTo,
