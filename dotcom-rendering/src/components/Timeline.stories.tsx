@@ -7,7 +7,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { getNestedArticleElement } from '../lib/renderElement';
 import type { TextBlockElement, YoutubeBlockElement } from '../types/content';
 import { Timeline } from './Timeline';

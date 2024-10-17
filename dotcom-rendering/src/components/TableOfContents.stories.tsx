@@ -6,7 +6,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import type { TableOfContentsItem } from '../types/article';
 import { TableOfContents } from './TableOfContents.importable';
 

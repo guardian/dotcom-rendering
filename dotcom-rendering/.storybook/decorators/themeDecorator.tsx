@@ -12,7 +12,7 @@ import {
 	type StoryContext,
 	type StrictArgs,
 } from '@storybook/react';
-import { ArticleFormat } from '../../src/lib/format';
+import { ArticleFormat } from '../../src/lib/articleFormat';
 import type { CSSProperties } from 'react';
 
 const darkStoryCss = css`

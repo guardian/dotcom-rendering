@@ -3,7 +3,7 @@ import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { RightAdsPlaceholder } from './AdPlaceholder.apps';
 import { AdSlot } from './AdSlot.web';
 import { useConfig } from './ConfigContext';

@@ -5,7 +5,7 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { generateImageURL } from '../lib/image';
 import type { RoleType } from '../types/content';
 import type { Loading } from './CardPicture';
@@ -27,6 +27,7 @@ interface BaseProps {
 	isLightbox?: boolean;
 	orientation?: Orientation;
 	onLoad?: () => void;
+	aspectRatio?: string;
 }
 
 interface StandardProps extends BaseProps {
@@ -262,10 +263,12 @@ type ImageSource = {
  *
  * @param mainImage source image URL
  * @param imageWidths list of image widths
+ * @param aspectRatio - Aspect ratio that the image should be cropped to (e.g., 5:4). Optional.
  */
 export const generateSources = (
 	mainImage: string,
 	imageWidths: readonly [ImageWidthType, ...ImageWidthType[]],
+	aspectRatio?: string,
 ): ImageSource[] =>
 	imageWidths
 		.slice()
@@ -278,11 +281,13 @@ export const generateSources = (
 					mainImage,
 					imageWidth,
 					resolution: 'high',
+					aspectRatio,
 				}),
 				lowResUrl: generateImageURL({
 					mainImage,
 					imageWidth,
 					resolution: 'low',
+					aspectRatio,
 				}),
 			};
 		});
@@ -336,6 +341,7 @@ export const Picture = ({
 	isLightbox = false,
 	orientation = 'landscape',
 	onLoad,
+	aspectRatio,
 	imageWidths,
 }: Props) => {
 	const [loaded, setLoaded] = useState(false);
@@ -362,6 +368,7 @@ export const Picture = ({
 				isLightbox,
 				orientation,
 			}),
+		aspectRatio,
 	);
 
 	/** portrait if higher than 1 or landscape if lower than 1 */

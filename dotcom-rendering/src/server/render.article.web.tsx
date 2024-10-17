@@ -4,15 +4,19 @@ import { ConfigProvider } from '../components/ConfigContext';
 import { isAmpSupported } from '../components/Elements.amp';
 import { LiveBlogRenderer } from '../components/LiveBlogRenderer';
 import {
+	ArticleDesign,
+	type ArticleFormat,
+	decideFormat,
+	Pillar,
+} from '../lib/articleFormat';
+import {
 	ASSET_ORIGIN,
 	generateScriptTags,
 	getModulesBuild,
 	getPathFromManifest,
 } from '../lib/assets';
-import { decideFormat } from '../lib/decideFormat';
 import { isEditionId } from '../lib/edition';
 import { renderToStringWithEmotion } from '../lib/emotion';
-import { ArticleDesign, type ArticleFormat, Pillar } from '../lib/format';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { polyfillIO } from '../lib/polyfill.io';
 import { extractNAV } from '../model/extract-nav';

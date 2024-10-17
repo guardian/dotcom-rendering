@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import type { SWRConfiguration } from 'swr';
-import { ArticleDesign, type ArticleFormat } from '../lib/format';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { useApi } from '../lib/useApi';
 import type { TeamType } from '../types/sport';
 import type { TagType } from '../types/tag';

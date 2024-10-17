@@ -6,8 +6,8 @@ import {
 	textSans34,
 } from '@guardian/source/foundations';
 import { Standard } from '../../fixtures/generated/dcr-articles/Standard';
+import { Pillar } from '../lib/articleFormat';
 import { editionList } from '../lib/edition';
-import { Pillar } from '../lib/format';
 import { extractNAV } from '../model/extract-nav';
 import { Footer } from './Footer';
 import { Section } from './Section';

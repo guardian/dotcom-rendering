@@ -31,11 +31,11 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { WeatherWrapper } from '../components/WeatherWrapper.importable';
+import { ArticleDisplay } from '../lib/articleFormat';
 import { badgeFromBranding, isPaidContentSameBranding } from '../lib/branding';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { editionList } from '../lib/edition';
-import { ArticleDisplay } from '../lib/format';
 import {
 	getFrontsBannerAdPositions,
 	getMobileAdPositions,
@@ -166,15 +166,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const { abTests, isPreview } = front.config;
 
-	// If viewing a front through the internal preview tool, we want to automatically opt-in to this test.
-	const inHighlightsContainerABTest =
-		abTests.mastheadWithHighlightsVariant === 'variant' || isPreview;
-
 	const { absoluteServerTimes = false } = front.config.switches;
 
 	const Highlights = () => {
 		const showHighlights =
-			front.isNetworkFront && inHighlightsContainerABTest;
+			// Must be opted into the Europe beta test or in preview
+			(abTests.europeBetaFrontVariant === 'variant' || isPreview) &&
+			// Must either be a network front or the Europe beta front (or training version of it) in order to see Highlights
+			(front.isNetworkFront || front.pageId.startsWith('europe-beta'));
 
 		const highlightsCollection =
 			front.pressedPage.collections.find(isHighlights);

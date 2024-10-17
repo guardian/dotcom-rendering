@@ -1,5 +1,5 @@
 import { isOneOf } from '@guardian/libs';
-import { ArticleDesign, type ArticleFormat } from '../lib/format';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { logger } from '../server/lib/logging';
 import type { FEElement, Newsletter } from '../types/content';
 

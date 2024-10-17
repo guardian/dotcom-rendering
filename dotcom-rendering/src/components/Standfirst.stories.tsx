@@ -7,7 +7,7 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { Section } from './Section';
 import { Standfirst } from './Standfirst';
 

@@ -5,8 +5,12 @@ import {
 	imageStoryWithCreditExpanded,
 	listStoryExpanded,
 } from '../../fixtures/manual/qandaAtom';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
-import { getAllThemes } from '../lib/format';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	getAllThemes,
+	Pillar,
+} from '../lib/articleFormat';
 import { QandaAtom as QandaAtomComponent } from './QandaAtom.importable';
 
 const meta: Meta<typeof QandaAtomComponent> = {

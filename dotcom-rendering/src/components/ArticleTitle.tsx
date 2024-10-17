@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
-import { ArticleDisplay, type ArticleFormat } from '../lib/format';
+import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
 import type { TagType } from '../types/tag';
 import { SeriesSectionLink } from './SeriesSectionLink';
 

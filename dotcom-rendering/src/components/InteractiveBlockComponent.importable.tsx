@@ -4,7 +4,7 @@ import { article17, space, textSans17 } from '@guardian/source/foundations';
 import libDebounce from 'lodash.debounce';
 import { useRef, useState } from 'react';
 import { interactiveLegacyFigureClasses } from '../layouts/lib/interactiveLegacyStyling';
-import { type ArticleFormat, ArticleSpecial } from '../lib/format';
+import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { useOnce } from '../lib/useOnce';
 import { palette as themePalette } from '../palette';
 import type { RoleType } from '../types/content';

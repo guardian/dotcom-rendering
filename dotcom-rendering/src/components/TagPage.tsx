@@ -2,7 +2,7 @@ import { Global } from '@emotion/react';
 import { StrictMode } from 'react';
 import { TagPageLayout } from '../layouts/TagPageLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';

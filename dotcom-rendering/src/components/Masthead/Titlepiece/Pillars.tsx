@@ -12,7 +12,7 @@ import {
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
-import { type ArticleTheme, Pillar } from '../../../lib/format';
+import { type ArticleTheme, Pillar } from '../../../lib/articleFormat';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';

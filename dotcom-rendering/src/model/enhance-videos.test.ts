@@ -1,4 +1,4 @@
-import { ArticleDesign, type ArticleFormat } from '../lib/format';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import type { FEElement } from '../types/content';
 import { enhanceGuVideos } from './enhance-videos';
 
