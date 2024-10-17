@@ -30,6 +30,7 @@ type BoostProperties = {
 	imagePositionOnMobile: ImagePositionType;
 	imageSize: ImageSizeType;
 	supportingContentAlignment: Alignment;
+	liveUpdatesAlignment: Alignment;
 	trailTextSize: TrailTextSize;
 };
 
@@ -54,6 +55,7 @@ const determineCardProperties = (
 				imageSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
+				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
 			};
 
@@ -69,6 +71,7 @@ const determineCardProperties = (
 				imageSize: 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
+				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'regular',
 			};
 		case 'megaboost':
@@ -82,6 +85,7 @@ const determineCardProperties = (
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
+				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
 			};
 		case 'gigaboost':
@@ -95,6 +99,7 @@ const determineCardProperties = (
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
+				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
 			};
 	}
@@ -121,6 +126,7 @@ export const OneCardLayout = ({
 		imagePositionOnMobile,
 		imageSize,
 		supportingContentAlignment,
+		liveUpdatesAlignment,
 		trailTextSize,
 	} = determineCardProperties(
 		card.boostLevel ?? 'default',
@@ -146,6 +152,7 @@ export const OneCardLayout = ({
 					aspectRatio="5:4"
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
+					liveUpdatesAlignment={liveUpdatesAlignment}
 					isFlexSplash={true}
 					showTopBarDesktop={false}
 					showTopBarMobile={true}
