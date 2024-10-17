@@ -7,7 +7,7 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { LinkHeadline } from './LinkHeadline';
 import { Section } from './Section';
 

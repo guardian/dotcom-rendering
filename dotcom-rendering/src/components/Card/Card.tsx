@@ -6,8 +6,8 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { Hide, Link } from '@guardian/source/react-components';
+import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import { isMediaCard } from '../../lib/cardHelpers';
-import { ArticleDesign, type ArticleFormat } from '../../lib/format';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { palette } from '../../palette';

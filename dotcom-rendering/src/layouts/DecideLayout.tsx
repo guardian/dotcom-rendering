@@ -2,7 +2,7 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import type { NavType } from '../model/extract-nav';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';

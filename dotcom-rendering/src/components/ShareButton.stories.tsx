@@ -4,7 +4,7 @@ import {
 	defaultFormats,
 	splitTheme,
 } from '../../.storybook/decorators/splitThemeDecorator';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { palette as themePalette } from '../palette';
 import {
 	CopyNativeShareButton,

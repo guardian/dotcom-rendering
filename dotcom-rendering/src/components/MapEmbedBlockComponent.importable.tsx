@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '../lib/format';
+import type { ArticleFormat } from '../lib/articleFormat';
 import type { RoleType } from '../types/content';
 import { Caption } from './Caption';
 import { ClickToView } from './ClickToView';

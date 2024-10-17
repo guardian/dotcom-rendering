@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
-import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import { hiddenStyles } from '../lib/hiddenStyles';
 import { palette } from '../palette';
 import type { TreatType } from '../types/front';

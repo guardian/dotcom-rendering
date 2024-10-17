@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { ArticleContainer } from './ArticleContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';

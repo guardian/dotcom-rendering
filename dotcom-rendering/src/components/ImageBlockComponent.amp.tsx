@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { text, textSans12 } from '@guardian/source/foundations';
-import type { ArticleTheme } from '../lib/format';
+import type { ArticleTheme } from '../lib/articleFormat';
 import { bestFitImage, heightEstimate } from '../lib/image-fit.amp';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import TriangleIcon from '../static/icons/triangle.svg';

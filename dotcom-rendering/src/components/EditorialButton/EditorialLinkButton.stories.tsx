@@ -6,7 +6,7 @@ import {
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '../../lib/format';
+} from '../../lib/articleFormat';
 import { EditorialLinkButton } from './EditorialLinkButton';
 import type { EditorialLinkButtonProps } from './EditorialLinkButton';
 

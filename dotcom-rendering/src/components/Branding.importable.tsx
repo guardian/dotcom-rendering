@@ -9,7 +9,7 @@ import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { getOphanComponents } from '../lib/labs';
 import { palette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';

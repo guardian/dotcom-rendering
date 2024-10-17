@@ -4,7 +4,7 @@ import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { getLargest, getMaster } from '../lib/image';
 import type {
 	CartoonBlockElement,

@@ -1,5 +1,9 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
-import { formatToFEFormat } from './format';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	formatToFEFormat,
+	Pillar,
+} from './articleFormat';
 
 describe('formatToFEFormat', () => {
 	it('returns the correct FEFormat given an ArticleFormat', () => {

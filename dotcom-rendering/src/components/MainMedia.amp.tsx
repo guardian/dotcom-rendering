@@ -4,7 +4,7 @@ import {
 	textSans15,
 	visuallyHidden,
 } from '@guardian/source/foundations';
-import type { ArticleTheme } from '../lib/format';
+import type { ArticleTheme } from '../lib/articleFormat';
 import { bestFitImage, heightEstimate } from '../lib/image-fit.amp';
 import { scrsetStringFromImagesSources } from '../lib/srcset-utils.amp';
 import InfoIcon from '../static/icons/info.svg';

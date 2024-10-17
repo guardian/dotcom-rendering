@@ -3,7 +3,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '../../src/lib/format';
+} from '../../src/lib/articleFormat';
 import type { DCRFrontCard } from '../../src/types/front';
 import { discussionApiUrl } from './discussionApiUrl';
 

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { CaptionBlockComponent } from './CaptionBlockComponent';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';

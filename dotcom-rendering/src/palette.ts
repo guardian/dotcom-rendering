@@ -14,7 +14,6 @@ import {
 	tabsDarkTheme,
 	tabsThemeDefault,
 } from '@guardian/source-development-kitchen/react-components';
-import { isMediaCard } from './lib/cardHelpers';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -22,7 +21,8 @@ import {
 	ArticleSpecial,
 	type ArticleTheme,
 	Pillar,
-} from './lib/format';
+} from './lib/articleFormat';
+import { isMediaCard } from './lib/cardHelpers';
 import { transparentColour } from './lib/transparentColour';
 
 // ----- Palette Functions ----- //

@@ -8,7 +8,7 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { FormatBoundary } from './FormatBoundary';
 import { LiveBlock } from './LiveBlock';
 import { PinnedPost } from './PinnedPost';

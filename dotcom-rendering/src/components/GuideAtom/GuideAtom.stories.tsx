@@ -9,7 +9,7 @@ import {
 	listStoryExpanded,
 	orderedListStoryExpanded,
 } from '../../../fixtures/manual/guideAtom';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import { palette } from '../../palette';
 import { GuideAtom } from './GuideAtom';
 

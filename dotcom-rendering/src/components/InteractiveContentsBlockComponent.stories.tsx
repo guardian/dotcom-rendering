@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { NumberedList } from '../../fixtures/generated/dcr-articles/NumberedList';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { enhanceInteractiveContentsElements } from '../model/enhance-interactive-contents-elements';
 import type { InteractiveContentsBlockElement } from '../types/content';
 import { InteractiveContentsBlockComponent } from './InteractiveContentsBlockComponent.importable';

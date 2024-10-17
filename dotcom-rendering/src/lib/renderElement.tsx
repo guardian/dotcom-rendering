@@ -64,10 +64,10 @@ import {
 	interactiveLegacyFigureClasses,
 	isInteractive,
 } from '../layouts/lib/interactiveLegacyStyling';
-import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import { getSharingUrls } from '../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType, StarRating } from '../types/content';
+import { ArticleDesign, type ArticleFormat } from './articleFormat';
 import type { EditionId } from './edition';
 
 type Props = {

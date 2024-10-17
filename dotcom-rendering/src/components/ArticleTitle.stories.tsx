@@ -6,9 +6,9 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
+	getAllThemes,
 	Pillar,
-} from '../lib/format';
-import { getAllThemes } from '../lib/format';
+} from '../lib/articleFormat';
 import { ArticleTitle } from './ArticleTitle';
 
 const meta = {

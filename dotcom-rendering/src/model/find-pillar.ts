@@ -1,4 +1,8 @@
-import { ArticleSpecial, type ArticleTheme, Pillar } from '../lib/format';
+import {
+	ArticleSpecial,
+	type ArticleTheme,
+	Pillar,
+} from '../lib/articleFormat';
 import type { TagType } from '../types/tag';
 
 export const findPillar: (

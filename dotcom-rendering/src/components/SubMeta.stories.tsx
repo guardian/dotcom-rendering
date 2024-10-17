@@ -1,8 +1,11 @@
 import { css } from '@emotion/react';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { ArticleDesign, ArticleDisplay } from '../lib/format';
-import { getAllThemes } from '../lib/format';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	getAllThemes,
+} from '../lib/articleFormat';
 import { SubMeta } from './SubMeta';
 
 export default {

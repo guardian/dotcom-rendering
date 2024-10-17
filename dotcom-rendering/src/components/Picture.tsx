@@ -5,7 +5,7 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { generateImageURL } from '../lib/image';
 import type { RoleType } from '../types/content';
 import type { Loading } from './CardPicture';

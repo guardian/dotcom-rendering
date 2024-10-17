@@ -4,7 +4,7 @@ import { from, space } from '@guardian/source/foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useState } from 'react';
 import screenfull from 'screenfull';
-import type { ArticleFormat } from '../lib/format';
+import type { ArticleFormat } from '../lib/articleFormat';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxImages } from './LightboxImages';
 
