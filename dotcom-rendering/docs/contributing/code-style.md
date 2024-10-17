@@ -10,7 +10,7 @@ guide](https://github.com/excelmicro/typescript) is a good place to look.
 
 ### Always used named exports
 
-> Why? For components, a default export will show as `<Unknown>` in the React dev tools unless explicity declared to a constant first. Also, default exports can lead to confusing situations. (Using the name of the export as a local variable in the file, exporting named and a default)
+> Why? For components, a default export will show as `<Unknown>` in the React dev tools unless explicitly declared to a constant first. Also, default exports can lead to confusing situations. (Using the name of the export as a local variable in the file, exporting named and a default)
 
 ```js
 // bad
@@ -174,35 +174,6 @@ render(
 );
 ```
 
-### Prefer [`cx`](https://emotion.sh/docs/@emotion/css#cx) for style composition
-
-> Why? `cx` composes given CSS in the most performant way in [_most_ cases](https://github.com/guardian/dotcom-rendering/pull/126#discussion_r209999843). It is more likely to reduce duplication of output CSS. It is also more readable, avoiding tricky syntax such as nested ternaries. However, there are cases in which it is more performant to use [`classNames`](https://github.com/JedWatson/classnames), notably if there are a large number of elements of a particular Component that use different combinations of classes.
-
-```js
-// bad
-const link = css`
-	color: blue;
-	font-weight: 700;
-`;
-const activeLink = css`
-	${link};
-	color: red;
-`;
-const MyLink = ({ isActive }) => (
-	<a className={isActive ? activeLink : link}>Click me</a>
-);
-
-// good
-const link = css`
-	color: blue;
-	font-weight: 700;
-`;
-const activeLink = css`
-	color: red;
-`;
-const MyLink = ({ isActive }) => (
-	<a className={cx({ [activeLink]: isActive }, link)}>Click Me</a>
-);
-```
-
 ### Do not use React.FC or equivalent
+
+Defining a component with `React.FC` causes it to implicitly take children (of type `ReactNode`). It means that all components accept children, even if they're not supposed to. See https://github.com/facebook/create-react-app/pull/8177

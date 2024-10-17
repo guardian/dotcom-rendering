@@ -1,5 +1,5 @@
 import { levels } from 'log4js';
-import type { ArticleTheme } from '../lib/format';
+import type { ArticleTheme } from '../lib/articleFormat';
 import { getIdFromUrl } from '../lib/get-video-id.amp';
 import { logger } from '../server/lib/logging';
 import type { VideoVimeoBlockElement } from '../types/content';

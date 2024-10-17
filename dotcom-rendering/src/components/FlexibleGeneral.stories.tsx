@@ -3,8 +3,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 import fetchMock from 'fetch-mock';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { getSublinks, trails } from '../../fixtures/manual/trails';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
-import type { DCRFrontCard, DCRGroupedTrails } from '../types/front';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import type {
+	DCRContainerPalette,
+	DCRFrontCard,
+	DCRGroupedTrails,
+} from '../types/front';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FrontSection } from './FrontSection';
 
@@ -338,3 +342,49 @@ export const GigaBoostedSplash: Story = {
 		},
 	},
 };
+
+const containerPalettes = [
+	'InvestigationPalette',
+	'LongRunningPalette',
+	'SombrePalette',
+	'BreakingPalette',
+	'EventPalette',
+	'EventAltPalette',
+	'LongRunningAltPalette',
+	'SombreAltPalette',
+	'SpecialReportAltPalette',
+	'Branded',
+] as const satisfies readonly Omit<
+	DCRContainerPalette,
+	'MediaPalette' | 'PodcastPalette'
+>[];
+
+export const WithSpecialPaletteVariations = {
+	name: 'With special palette variations',
+	args: {
+		groupedTrails: {
+			...defaultGroupedTrails,
+			splash: [splashWithFourSublinks],
+			standard: standardCards.slice(0, 2),
+		},
+	},
+	render: (args) => (
+		<>
+			{containerPalettes.map((containerPalette) => (
+				<FrontSection
+					discussionApiUrl={discussionApiUrl}
+					editionId={'UK'}
+					showTopBorder={true}
+					containerPalette={containerPalette}
+					key={containerPalette}
+					title={containerPalette}
+				>
+					<FlexibleGeneral
+						containerPalette={containerPalette}
+						{...args}
+					/>
+				</FrontSection>
+			))}
+		</>
+	),
+} satisfies Story;

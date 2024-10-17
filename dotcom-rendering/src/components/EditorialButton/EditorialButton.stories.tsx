@@ -1,68 +1,23 @@
 import { css } from '@emotion/react';
-import { SvgCross } from '@guardian/source/react-components';
-import type { Meta, StoryFn } from '@storybook/react';
+import type { Meta, StoryFn, StoryObj } from '@storybook/react';
+import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	Pillar as ArticlePillar,
 	ArticleSpecial,
-} from '../../lib/format';
+	Pillar,
+} from '../../lib/articleFormat';
 import { EditorialButton } from './EditorialButton';
 import type { EditorialButtonProps } from './EditorialButton';
-
-const defaultFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-};
 
 const meta: Meta<typeof EditorialButton> = {
 	title: 'Components/EditorialButton',
 	component: EditorialButton,
-	argTypes: {
-		format: {
-			options: [
-				'news',
-				'sport',
-				'culture',
-				'lifestyle',
-				'opinion',
-				'special_report',
-				'labs',
-			],
-			mapping: {
-				news: { ...defaultFormat, theme: ArticlePillar.News },
-				sport: { ...defaultFormat, theme: ArticlePillar.Sport },
-				culture: { ...defaultFormat, theme: ArticlePillar.Culture },
-				lifestyle: { ...defaultFormat, theme: ArticlePillar.Lifestyle },
-				opinion: { ...defaultFormat, theme: ArticlePillar.Opinion },
-				special_report: {
-					...defaultFormat,
-					theme: ArticleSpecial.SpecialReport,
-				},
-				labs: { ...defaultFormat, theme: ArticleSpecial.Labs },
-			},
-			control: { type: 'radio' },
-		},
-		icon: {
-			options: ['undefined', 'cross'],
-			mapping: {
-				undefined,
-				cross: <SvgCross />,
-			},
-			control: { type: 'radio' },
-		},
-	},
-	args: {
-		size: 'default',
-		hideLabel: false,
-		icon: undefined,
-		priority: 'primary',
-		iconSide: 'left',
-		nudgeIcon: false,
-	},
-};
+} satisfies Meta<typeof EditorialButton>;
 
 export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 const Template: StoryFn<typeof EditorialButton> = (
 	args: EditorialButtonProps,
@@ -80,84 +35,67 @@ const Template: StoryFn<typeof EditorialButton> = (
 };
 
 const pillars = [
-	ArticlePillar.News,
-	ArticlePillar.Sport,
-	ArticlePillar.Culture,
-	ArticlePillar.Lifestyle,
-	ArticlePillar.Opinion,
+	Pillar.News,
+	Pillar.Sport,
+	Pillar.Culture,
+	Pillar.Lifestyle,
+	Pillar.Opinion,
 	ArticleSpecial.SpecialReport,
 	ArticleSpecial.Labs,
 ];
 
-const RowTemplate: StoryFn<typeof EditorialButton> = (
-	args: Partial<EditorialButtonProps>,
-) => (
-	<div
-		css={css`
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-			width: 800px;
-		`}
-	>
-		{pillars.map((pillar) => (
-			<Template
-				key={pillar}
-				{...args}
-				format={{ ...defaultFormat, theme: pillar }}
-			/>
-		))}
-	</div>
-);
+const allThemeStandardVariations = pillars.map((theme) => ({
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme,
+}));
 
-export const WhenPrimary: StoryFn<typeof EditorialButton> = RowTemplate.bind(
-	{},
-);
-WhenPrimary.args = {
-	priority: 'primary',
-	size: 'small',
-};
-
+export const WhenPrimary = {
+	args: {
+		priority: 'primary',
+		size: 'small',
+	},
+	decorators: [lightDecorator(allThemeStandardVariations)],
+	render: Template,
+} satisfies Story;
 // *****************************************************************************
 
-export const WhenSecondary: StoryFn<typeof EditorialButton> = RowTemplate.bind(
-	{},
-);
-WhenSecondary.args = {
-	priority: 'secondary',
-	size: 'small',
-};
-
+export const WhenSecondary = {
+	args: {
+		priority: 'secondary',
+		size: 'small',
+	},
+	decorators: [lightDecorator(allThemeStandardVariations)],
+	render: Template,
+} satisfies Story;
 // *****************************************************************************
 
-export const WhenTertiary: StoryFn<typeof EditorialButton> = RowTemplate.bind(
-	{},
-);
-WhenTertiary.args = {
-	priority: 'tertiary',
-	size: 'small',
-};
-
+export const WhenTertiary = {
+	args: {
+		priority: 'tertiary',
+		size: 'small',
+	},
+	decorators: [lightDecorator(allThemeStandardVariations)],
+	render: Template,
+} satisfies Story;
 // *****************************************************************************
 
-export const WhenSubdued: StoryFn<typeof EditorialButton> = RowTemplate.bind(
-	{},
-);
-WhenSubdued.args = {
-	priority: 'subdued',
-	size: 'small',
-};
-
+export const WhenSubdued = {
+	args: {
+		priority: 'subdued',
+		size: 'small',
+	},
+	decorators: [lightDecorator(allThemeStandardVariations)],
+	render: Template,
+} satisfies Story;
 // *****************************************************************************
 
-export const WithOverrides: StoryFn<typeof EditorialButton> = Template.bind({});
-WithOverrides.args = {
-	cssOverrides: css`
-		background-color: pink;
-	`,
-};
-
-// *****************************************************************************
-
-export const WithDefaults: StoryFn<typeof EditorialButton> = Template.bind({});
-WithDefaults.args = {};
+export const WithOverrides = {
+	args: {
+		cssOverrides: css`
+			background-color: pink;
+		`,
+	},
+	decorators: [lightDecorator(allThemeStandardVariations)],
+	render: Template,
+} satisfies Story;

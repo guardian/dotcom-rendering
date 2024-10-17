@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { DCRGroupedTrails } from '../types/front';
 import { DynamicSlow } from './DynamicSlow';
 import { FrontSection } from './FrontSection';

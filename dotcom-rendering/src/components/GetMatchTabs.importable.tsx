@@ -1,4 +1,4 @@
-import type { ArticleFormat } from '../lib/format';
+import type { ArticleFormat } from '../lib/articleFormat';
 import { useApi } from '../lib/useApi';
 import { MatchTabs } from './MatchTabs';
 import { Placeholder } from './Placeholder';

@@ -7,7 +7,7 @@ import {
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxLayout } from './LightboxLayout.importable';
 

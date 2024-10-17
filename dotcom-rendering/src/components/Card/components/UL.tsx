@@ -80,6 +80,8 @@ type Props = {
 	splitTopBar?: boolean;
 	/** Used to give flexible container stories additional space */
 	isFlexibleContainer?: boolean;
+	/** Overrides the vertical divider colour */
+	verticalDividerColour?: string;
 };
 
 export const UL = ({
@@ -91,12 +93,13 @@ export const UL = ({
 	showTopBar = false,
 	isFlexibleContainer = false,
 	splitTopBar = false,
+	verticalDividerColour = palette('--section-border'),
 }: Props) => {
 	return (
 		<ul
 			css={[
 				ulStyles(direction, isFlexibleContainer),
-				showDivider && verticalDivider(palette('--section-border')),
+				showDivider && verticalDivider(verticalDividerColour),
 				padBottom && marginBottomStyles(isFlexibleContainer),
 				wrapCards && wrapStyles,
 				showTopBar && topBarStyles(splitTopBar),

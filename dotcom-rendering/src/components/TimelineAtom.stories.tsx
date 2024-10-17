@@ -6,7 +6,7 @@ import {
 	noTimelineEventsStoryExpanded,
 	sportTimelineStoryWithDescriptionAndEventsExpanded,
 } from '../../fixtures/manual/timelineAtom';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { TimelineAtom as TimelineAtomComponent } from './TimelineAtom.importable';
 
 const meta: Meta<typeof TimelineAtomComponent> = {

@@ -1,5 +1,5 @@
 import { JSDOM } from 'jsdom';
-import { ArticleDesign, type ArticleFormat } from '../lib/format';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import type { BlockquoteBlockElement, FEElement } from '../types/content';
 
 const isQuoted = (element: BlockquoteBlockElement): boolean => {

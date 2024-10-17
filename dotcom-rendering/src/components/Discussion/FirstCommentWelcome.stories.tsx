@@ -1,5 +1,5 @@
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import { FirstCommentWelcome } from './FirstCommentWelcome';
 
 export default { title: 'Discussion/FirstCommentWelcome' };

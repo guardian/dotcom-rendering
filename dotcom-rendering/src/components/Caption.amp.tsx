@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { palette, textSans12 } from '@guardian/source/foundations';
 import React from 'react';
-import type { ArticleTheme } from '../lib/format';
+import type { ArticleTheme } from '../lib/articleFormat';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import TriangleIcon from '../static/icons/triangle.svg';
 

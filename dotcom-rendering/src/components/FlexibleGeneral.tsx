@@ -1,9 +1,11 @@
+import { palette } from '../palette';
 import type { BoostLevel } from '../types/content';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
+import type { Position } from './Card/Card';
 import type {
 	ImagePositionType,
 	ImageSizeType,
@@ -73,6 +75,7 @@ type BoostedSplashProperties = {
 	imagePositionOnMobile: ImagePositionType;
 	imageSize: ImageSizeType;
 	supportingContentAlignment: Alignment;
+	liveUpdatesAlignment: Alignment;
 	trailTextSize: TrailTextSize;
 };
 
@@ -95,6 +98,7 @@ const decideSplashCardProperties = (
 				imageSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
+				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
 			};
 		case 'boost':
@@ -107,6 +111,7 @@ const decideSplashCardProperties = (
 				imageSize: 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
+				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
 			};
 		case 'megaboost':
@@ -118,6 +123,7 @@ const decideSplashCardProperties = (
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
+				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
 			};
 		case 'gigaboost':
@@ -129,6 +135,7 @@ const decideSplashCardProperties = (
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
+				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
 			};
 	}
@@ -158,6 +165,7 @@ export const SplashCardLayout = ({
 		imagePositionOnMobile,
 		imageSize,
 		supportingContentAlignment,
+		liveUpdatesAlignment,
 		trailTextSize,
 	} = decideSplashCardProperties(
 		card.boostLevel ?? 'default',
@@ -166,7 +174,10 @@ export const SplashCardLayout = ({
 
 	return (
 		<UL padBottom={true} isFlexibleContainer={true} showTopBar={false}>
-			<LI padSides={true}>
+			<LI
+				padSides={true}
+				verticalDividerColour={palette('--card-border-supporting')}
+			>
 				<FrontCard
 					trail={card}
 					containerPalette={containerPalette}
@@ -181,11 +192,16 @@ export const SplashCardLayout = ({
 					imageSize={imageSize}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
-					supportingContentAlignment={supportingContentAlignment}
+					supportingContentAlignment={
+						card.showLivePlayable
+							? 'horizontal'
+							: supportingContentAlignment
+					}
 					imageLoading={imageLoading}
 					aspectRatio="5:4"
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
+					liveUpdatesAlignment={liveUpdatesAlignment}
 					boostedFontSizes={true}
 					isFlexSplash={true}
 					showTopBarDesktop={false}
@@ -202,6 +218,8 @@ type BoostedCardProperties = {
 	headlineSizeOnMobile: SmallHeadlineSize;
 	headlineSizeOnTablet: SmallHeadlineSize;
 	imageSize: ImageSizeType;
+	liveUpdatesPosition: Position;
+	supportingContentAlignment: Alignment;
 };
 
 /**
@@ -217,6 +235,8 @@ const decideCardProperties = (
 				headlineSizeOnMobile: 'small',
 				headlineSizeOnTablet: 'tiny',
 				imageSize: 'jumbo',
+				liveUpdatesPosition: 'outer',
+				supportingContentAlignment: 'horizontal',
 			};
 		case 'boost':
 		default:
@@ -225,6 +245,8 @@ const decideCardProperties = (
 				headlineSizeOnMobile: 'tiny',
 				headlineSizeOnTablet: 'tiny',
 				imageSize: 'medium',
+				liveUpdatesPosition: 'inner',
+				supportingContentAlignment: 'horizontal',
 			};
 	}
 };
@@ -250,10 +272,15 @@ export const BoostedCardLayout = ({
 		headlineSizeOnMobile,
 		headlineSizeOnTablet,
 		imageSize,
+		supportingContentAlignment,
+		liveUpdatesPosition,
 	} = decideCardProperties(card.boostLevel);
 	return (
 		<UL padBottom={true} isFlexibleContainer={true} showTopBar={true}>
-			<LI padSides={true}>
+			<LI
+				padSides={true}
+				verticalDividerColour={palette('--card-border-supporting')}
+			>
 				<FrontCard
 					trail={card}
 					containerPalette={containerPalette}
@@ -268,13 +295,20 @@ export const BoostedCardLayout = ({
 					imageSize={imageSize}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
+					supportingContentAlignment={
+						card.showLivePlayable
+							? 'horizontal'
+							: supportingContentAlignment
+					}
 					imageLoading={imageLoading}
 					aspectRatio="5:4"
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
+					liveUpdatesAlignment="horizontal"
 					showTopBarDesktop={false}
 					showTopBarMobile={true}
 					boostedFontSizes={true}
+					liveUpdatesPosition={liveUpdatesPosition}
 				/>
 			</LI>
 		</UL>
@@ -314,6 +348,9 @@ export const StandardCardLayout = ({
 						key={card.url}
 						padSides={true}
 						showDivider={cardIndex > 0}
+						verticalDividerColour={palette(
+							'--card-border-supporting',
+						)}
 					>
 						<FrontCard
 							trail={card}
@@ -326,12 +363,15 @@ export const StandardCardLayout = ({
 							imagePositionOnDesktop={'left'}
 							supportingContent={card.supportingContent}
 							supportingContentAlignment="horizontal"
+							supportingContentPosition="outer"
 							imageSize={'medium'}
 							aspectRatio="5:4"
 							kickerText={card.kickerText}
 							showLivePlayable={false}
 							showTopBarDesktop={false}
 							showTopBarMobile={true}
+							// On standard cards, we only show the trail text if the trail image has been hidden
+							trailText={!card.image ? card.trailText : undefined}
 						/>
 					</LI>
 				);

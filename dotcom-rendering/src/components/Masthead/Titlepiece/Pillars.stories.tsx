@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { palette as sourcePalette } from '@guardian/source/foundations';
 import type { Meta } from '@storybook/react';
-import type { Pillar } from '../../../lib/format';
+import type { Pillar } from '../../../lib/articleFormat';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { nav } from './Nav.mock';
 import { Pillars } from './Pillars';

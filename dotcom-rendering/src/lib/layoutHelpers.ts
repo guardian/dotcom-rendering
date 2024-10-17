@@ -1,6 +1,6 @@
-import type { Pillar } from '../lib/format';
 import type { ArticleDeprecated } from '../types/article';
 import type { LegacyPillar } from '../types/frontend';
+import type { Pillar } from './articleFormat';
 import { decideNavPillar } from './decideNavPillar';
 
 export const getCurrentPillar = (

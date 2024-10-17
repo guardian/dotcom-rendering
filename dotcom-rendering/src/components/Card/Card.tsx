@@ -6,11 +6,11 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { Hide, Link } from '@guardian/source/react-components';
+import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import { isMediaCard } from '../../lib/cardHelpers';
-import { ArticleDesign, type ArticleFormat } from '../../lib/format';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
-import { palette as themePalette } from '../../palette';
+import { palette } from '../../palette';
 import type { Branding } from '../../types/branding';
 import type { StarRating as Rating } from '../../types/content';
 import type {
@@ -58,6 +58,8 @@ import {
 	TrailTextWrapper,
 } from './components/TrailTextWrapper';
 
+export type Position = 'inner' | 'outer' | 'none';
+
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
@@ -95,8 +97,10 @@ export type Props = {
 	dataLinkName?: string;
 	/** Only used on Labs cards */
 	branding?: Branding;
+	/** Supporting content refers to sublinks */
 	supportingContent?: DCRSupportingContent[];
 	supportingContentAlignment?: Alignment;
+	supportingContentPosition?: Position;
 	snapData?: DCRSnapType;
 	containerPalette?: DCRContainerPalette;
 	containerType?: DCRContainerType;
@@ -104,10 +108,13 @@ export type Props = {
 	discussionApiUrl: string;
 	discussionId?: string;
 	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
-	isDynamo?: true;
+	isDynamo?: boolean;
 	isExternalLink: boolean;
 	slideshowImages?: DCRSlideshowImage[];
+	/** Determines if liveblog update links are displayed on a card */
 	showLivePlayable?: boolean;
+	liveUpdatesAlignment?: Alignment;
+	liveUpdatesPosition?: Position;
 	onwardsSource?: OnwardsSource;
 	pauseOffscreenVideo?: boolean;
 	showMainVideo?: boolean;
@@ -122,6 +129,8 @@ export type Props = {
 	showTopBarDesktop?: boolean;
 	showTopBarMobile?: boolean;
 	trailTextSize?: TrailTextSize;
+	/** If specified, overrides trail text colour */
+	trailTextColour?: string;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -151,7 +160,7 @@ const HorizontalDivider = () => (
 	<div
 		css={css`
 			${from.tablet} {
-				border-top: 1px solid ${themePalette('--card-border-top')};
+				border-top: 1px solid ${palette('--card-border-top')};
 				height: 1px;
 				width: 50%;
 				${from.tablet} {
@@ -203,17 +212,50 @@ const decideSublinkPosition = (
 	supportingContent?: DCRSupportingContent[],
 	imagePositionOnDesktop?: ImagePositionType,
 	alignment?: Alignment,
+	supportingContentPosition?: Position,
+	showLivePlayable?: boolean,
 ): 'inner' | 'outer' | 'none' => {
 	if (!supportingContent || supportingContent.length === 0) {
 		return 'none';
 	}
+
+	if (supportingContentPosition) {
+		return supportingContentPosition;
+	}
+
 	if (
 		imagePositionOnDesktop === 'top' ||
-		imagePositionOnDesktop === 'bottom'
+		imagePositionOnDesktop === 'bottom' ||
+		showLivePlayable
 	) {
 		return 'outer';
 	}
+
 	return alignment === 'vertical' ? 'inner' : 'outer';
+};
+
+const getHeadlinePosition = ({
+	isFlexSplash,
+	containerType,
+	showLivePlayable,
+}: {
+	containerType?: DCRContainerType;
+	isFlexSplash?: boolean;
+	showLivePlayable: boolean;
+}) => {
+	if (containerType === 'flexible/special' && isFlexSplash) {
+		return 'outer';
+	}
+
+	if (
+		containerType === 'flexible/general' &&
+		isFlexSplash &&
+		showLivePlayable
+	) {
+		return 'outer';
+	}
+
+	return 'inner';
 };
 
 const isWithinTwelveHours = (webPublicationDate: string): boolean => {
@@ -253,6 +295,7 @@ export const Card = ({
 	branding,
 	supportingContent,
 	supportingContentAlignment = 'vertical',
+	supportingContentPosition,
 	snapData,
 	containerPalette,
 	containerType,
@@ -265,6 +308,8 @@ export const Card = ({
 	isExternalLink,
 	slideshowImages,
 	showLivePlayable = false,
+	liveUpdatesAlignment = 'vertical',
+	liveUpdatesPosition = 'inner',
 	onwardsSource,
 	pauseOffscreenVideo = false,
 	showMainVideo = true,
@@ -277,12 +322,15 @@ export const Card = ({
 	showTopBarDesktop = true,
 	showTopBarMobile = false,
 	trailTextSize,
+	trailTextColour,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
 		supportingContent,
 		imagePositionOnDesktop,
 		supportingContentAlignment,
+		supportingContentPosition,
+		showLivePlayable,
 	);
 	const showQuotes = !!showQuotedHeadline;
 
@@ -375,8 +423,8 @@ export const Card = ({
 		isOpinion && !isOnwardContent && media?.type === 'avatar';
 
 	const cardBackgroundColour = isOnwardContent
-		? themePalette('--onward-content-card-background')
-		: themePalette('--card-background');
+		? palette('--onward-content-card-background')
+		: palette('--card-background');
 
 	/**
 	 * Some cards in standard containers have contrasting background colours.
@@ -389,10 +437,11 @@ export const Card = ({
 		containerType === 'flexible/special' ||
 		containerType === 'flexible/general';
 
-	const isFlexibleSpecialContainer = containerType === 'flexible/special';
-
-	const headlinePosition =
-		isFlexSplash && isFlexibleSpecialContainer ? 'outer' : 'inner';
+	const headlinePosition = getHeadlinePosition({
+		containerType,
+		isFlexSplash,
+		showLivePlayable,
+	});
 
 	/** Determines the gap of between card components based on card properties */
 	const getGapSize = (): GapSize => {
@@ -737,7 +786,7 @@ export const Card = ({
 									imageSize={imageSize}
 									imageType={media?.type}
 									shouldHide={isFlexSplash ? false : true}
-									isFlexSplash={isFlexSplash}
+									trailTextColour={trailTextColour}
 									trailTextSize={trailTextSize}
 								>
 									<div
@@ -767,10 +816,32 @@ export const Card = ({
 									showLivePlayable={showLivePlayable}
 								/>
 							)}
-							{sublinkPosition === 'outer' &&
-								supportingContentAlignment === 'horizontal' &&
-								imagePositionOnDesktop === 'right' && (
-									<HorizontalDivider />
+							{showLivePlayable &&
+								liveUpdatesPosition === 'inner' && (
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
+										<LatestLinks
+											id={linkTo}
+											isDynamo={isDynamo}
+											direction={
+												isFlexibleContainer
+													? liveUpdatesAlignment
+													: supportingContentAlignment
+											}
+											containerPalette={containerPalette}
+											absoluteServerTimes={
+												absoluteServerTimes
+											}
+											displayHeader={isFlexibleContainer}
+											directionOnMobile={
+												isFlexibleContainer
+													? 'horizontal'
+													: undefined
+											}
+										></LatestLinks>
+									</Island>
 								)}
 						</div>
 
@@ -778,25 +849,14 @@ export const Card = ({
 						<div
 							style={isOnwardContent ? { marginTop: 'auto' } : {}}
 						>
-							{showLivePlayable && (
-								<Island
-									priority="feature"
-									defer={{ until: 'visible' }}
-								>
-									<LatestLinks
-										id={linkTo}
-										isDynamo={isDynamo}
-										direction={supportingContentAlignment}
-										containerPalette={containerPalette}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
-									></LatestLinks>
-								</Island>
-							)}
-
 							{decideInnerSublinks()}
 						</div>
+
+						{sublinkPosition === 'outer' &&
+							supportingContentAlignment === 'horizontal' &&
+							imagePositionOnDesktop === 'right' && (
+								<HorizontalDivider />
+							)}
 					</ContentWrapper>
 				)}
 			</CardLayout>
@@ -809,6 +869,23 @@ export const Card = ({
 							: 0,
 				}}
 			>
+				{showLivePlayable && liveUpdatesPosition === 'outer' && (
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<LatestLinks
+							id={linkTo}
+							isDynamo={isDynamo}
+							direction={
+								isFlexibleContainer
+									? liveUpdatesAlignment
+									: supportingContentAlignment
+							}
+							containerPalette={containerPalette}
+							absoluteServerTimes={absoluteServerTimes}
+							displayHeader={isFlexibleContainer}
+							directionOnMobile={'horizontal'}
+						></LatestLinks>
+					</Island>
+				)}
 				{decideOuterSublinks()}
 
 				{showCommentFooter && (

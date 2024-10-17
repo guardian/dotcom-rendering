@@ -13,7 +13,7 @@ import {
 	SvgArrowRightStraight,
 	SvgCross,
 } from '@guardian/source/react-components';
-import type { ArticleFormat } from '../lib/format';
+import type { ArticleFormat } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxJavascript } from './LightboxJavascript';

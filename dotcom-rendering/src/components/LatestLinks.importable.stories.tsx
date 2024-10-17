@@ -4,7 +4,7 @@ import { breakpoints } from '@guardian/source/foundations';
 import fetchMock from 'fetch-mock';
 import type { PropsWithChildren } from 'react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import { ContainerOverrides } from './ContainerOverrides';
@@ -203,6 +203,39 @@ export const LondonPride2022 = () => {
 };
 LondonPride2022.storyName = 'London Pride 2022';
 LondonPride2022.decorators = [
+	splitTheme(
+		[
+			{
+				theme: Pillar.News,
+				design: ArticleDesign.LiveBlog,
+				display: ArticleDisplay.Standard,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
+
+export const WithHeader = () => {
+	return (
+		<Wrapper
+			styles={css`
+				max-width: 600px;
+				background-color: 'inherit';
+			`}
+		>
+			<Island priority="critical">
+				<LatestLinks
+					id="/world/live/2022/jul/02/pride-in-london-2022-huge-turnout-expected-at-first-march-since-pandemic-live-updates"
+					direction="horizontal"
+					absoluteServerTimes={true}
+					displayHeader={true}
+				/>
+			</Island>
+		</Wrapper>
+	);
+};
+WithHeader.storyName = 'With decorarative header';
+WithHeader.decorators = [
 	splitTheme(
 		[
 			{

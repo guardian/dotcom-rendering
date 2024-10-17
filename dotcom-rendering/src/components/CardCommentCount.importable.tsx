@@ -24,7 +24,7 @@ const getCommentCountColour = (
 	isOnwardContent?: boolean,
 ) => {
 	if (isDynamo) {
-		return themePalette('--card-headline-trail-text');
+		return themePalette('--card-trail-text');
 	} else if (isOnwardContent) {
 		return themePalette('--card-footer-onwards-content');
 	} else {

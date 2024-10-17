@@ -1,4 +1,4 @@
-import { ArticleSpecial, Pillar } from '../lib/format';
+import { ArticleSpecial, Pillar } from '../lib/articleFormat';
 import { findPillar } from './find-pillar';
 
 jest.mock('../lib/pillars', () => ({

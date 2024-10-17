@@ -7,7 +7,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '../../lib/format';
+} from '../../lib/articleFormat';
 import { PillarButton } from './PillarButton';
 import { Row } from './Row';
 
