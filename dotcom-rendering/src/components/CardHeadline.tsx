@@ -226,6 +226,39 @@ export const CardHeadline = ({
 	);
 };
 
+/** MOBILE FIRST APPROACH */
+// const getFontSize = ({
+// 	desktop,
+// 	tablet,
+// 	mobileMedium,
+// 	mobile,
+// }: ResponsiveFontSize) => {
+// 	return css`
+// 		${headlineSize[mobile]};
+
+// 		${mobileMedium &&
+// 		css`
+// 			${between.mobileMedium.and.tablet} {
+// 				${headlineSize[mobileMedium]};
+// 			}
+// 		`}
+
+// 		${tablet &&
+// 		css`
+// 			${between.tablet.and.desktop} {
+// 				${headlineSize[tablet]};
+// 			}
+// 		`}
+
+// 		${desktop &&
+// 		css`
+// 			${from.desktop} {
+// 				${headlineSize[desktop]};
+// 			}
+// 		`}
+// 	`;
+// };
+
 /** TODO - reimplement labs styles */
 // labTextStyles,
 // const labTextStyles = (size: SmallHeadlineSize) => {
