@@ -11,7 +11,11 @@ import {
 	headlineMedium42,
 	headlineMedium50,
 	headlineMedium64,
+	textSans12,
 	textSans14,
+	textSans15,
+	textSans17,
+	textSans20,
 	until,
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
@@ -40,7 +44,6 @@ type Props = {
 	bylineSize?: SmallHeadlineSize;
 };
 
-/** boosted font sizes are the same across all breakpoints so they've been abstracted out to help with readability */
 const headlineSize = {
 	xxxlarge: headlineMedium64,
 	xxlarge: headlineMedium50,
@@ -90,6 +93,51 @@ const getFontSize = ({
 		css`
 			${between.mobileMedium.and.tablet} {
 				${headlineSize[mobileMedium]};
+			}
+		`}
+	`;
+};
+
+const textSansSize = {
+	xxxlarge: textSans20,
+	xxlarge: textSans20,
+	xlarge: textSans20,
+	large: textSans20,
+	medium: textSans20,
+	small: textSans20,
+	xsmall: textSans20,
+	xxsmall: textSans17,
+	xxxsmall: textSans15,
+	tiny: textSans12,
+};
+
+const getLabSize = ({
+	desktop,
+	tablet,
+	mobileMedium,
+	mobile,
+}: ResponsiveFontSize) => {
+	return css`
+		${textSansSize[desktop]};
+
+		${tablet &&
+		css`
+			${until.desktop} {
+				${textSansSize[tablet]};
+			}
+		`}
+
+		${mobile &&
+		css`
+			${until.tablet} {
+				${textSansSize[mobile]};
+			}
+		`}
+
+		${mobileMedium &&
+		css`
+			${between.mobileMedium.and.tablet} {
+				${textSansSize[mobileMedium]};
 			}
 		`}
 	`;
@@ -158,7 +206,10 @@ export const CardHeadline = ({
 
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
-	const fonts = getFontSize(fontSizes);
+	const fonts =
+		format.theme === ArticleSpecial.Labs
+			? getLabSize(fontSizes)
+			: getFontSize(fontSizes);
 
 	if (format.theme === ArticleSpecial.Labs) {
 		console.log(fontSizes);
@@ -175,9 +226,6 @@ export const CardHeadline = ({
 						css`
 							${textSans14}
 						`,
-
-					/** TODO - reimplement labs styles */
-					// labTextStyles,
 				]}
 			>
 				{!!kickerText && (
