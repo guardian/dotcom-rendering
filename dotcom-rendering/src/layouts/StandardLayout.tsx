@@ -293,7 +293,6 @@ const StandardGrid = ({
 								'media'
 								'standfirst'
 								'image'
-								'lines'
 								'meta'
 								'body';
 					  `
