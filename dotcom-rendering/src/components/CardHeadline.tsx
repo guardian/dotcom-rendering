@@ -60,6 +60,7 @@ const headlineSize = {
 };
 
 type HeadlineSize = keyof typeof headlineSize;
+
 export type ResponsiveFontSize = {
 	desktop: HeadlineSize;
 	tablet?: HeadlineSize;
