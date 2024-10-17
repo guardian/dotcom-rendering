@@ -176,7 +176,9 @@ export const ShowMore = ({
 											slideshowImages={undefined}
 											containerPalette={containerPalette}
 											showAge={showAge}
-											headlineSize="small"
+											headlineSizes={{
+												desktop: 'xxsmall',
+											}}
 											imageLoading="eager"
 											absoluteServerTimes={false}
 											trailTextColour={palette(

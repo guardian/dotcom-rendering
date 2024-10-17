@@ -52,8 +52,10 @@ const Snap100 = ({
 					containerType="dynamic/package"
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
-					headlineSize="large"
-					headlineSizeOnMobile="medium"
+					headlineSizes={{
+						desktop: 'small',
+						mobile: 'xxsmall',
+					}}
 					imagePositionOnDesktop="right"
 					imagePositionOnMobile="left"
 					imageSize="medium"
@@ -91,7 +93,11 @@ const Card100 = ({
 					containerType="dynamic/package"
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
-					headlineSize={cards[0].isBoosted ? 'ginormous' : 'huge'}
+					headlineSizes={
+						cards[0].isBoosted
+							? { desktop: 'xxlarge' }
+							: { desktop: 'medium' }
+					}
 					imagePositionOnDesktop="bottom"
 					imagePositionOnMobile="bottom"
 					imageSize="large"
@@ -133,8 +139,7 @@ const Card75_Card25 = ({
 						containerType="dynamic/package"
 						showAge={showAge}
 						absoluteServerTimes={absoluteServerTimes}
-						headlineSize="large"
-						headlineSizeOnMobile="huge"
+						headlineSizes={{ desktop: 'small', mobile: 'small' }}
 						imagePositionOnDesktop="right"
 						imagePositionOnMobile="bottom"
 						imageSize="medium"
@@ -453,7 +458,7 @@ const Card75_ColumnOfCards25 = ({
 						containerType="dynamic/package"
 						showAge={showAge}
 						absoluteServerTimes={absoluteServerTimes}
-						headlineSize="huge"
+						headlineSizes={{ desktop: 'small' }}
 						imagePositionOnDesktop="bottom"
 						imagePositionOnMobile="bottom"
 						imageSize="large"
@@ -489,11 +494,11 @@ const Card75_ColumnOfCards25 = ({
 									image={
 										shouldShowImage ? card.image : undefined
 									}
-									headlineSize={
+									headlineSizes={
 										cardIndex === 0 ||
 										remaining.length === 2
-											? 'medium'
-											: 'small'
+											? { desktop: 'xsmall' }
+											: { desktop: 'xxsmall' }
 									}
 									supportingContent={limitSupportingContent(
 										card,
