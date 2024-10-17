@@ -1,4 +1,5 @@
 import { Card25Media25 } from '../lib/cardWrappers';
+import { palette } from '../palette';
 import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -58,6 +59,7 @@ export const FixedSmallSlowVThird = ({
 									imagePositionOnMobile="none"
 									imageSize="small"
 									imageLoading={imageLoading}
+									trailTextColour={palette('--card-headline')}
 								/>
 							</LI>
 						);

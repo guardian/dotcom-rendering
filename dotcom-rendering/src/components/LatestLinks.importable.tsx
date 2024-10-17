@@ -150,7 +150,7 @@ export const LatestLinks = ({
 						? horizontal
 						: vertical,
 					css`
-						color: ${themePalette('--card-headline-trail-text')};
+						color: ${themePalette('--card-trail-text')};
 					`,
 				]}
 			>
