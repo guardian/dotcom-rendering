@@ -13,7 +13,7 @@ import type {
 import { LI } from './Card/components/LI';
 import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
-import { ResponsiveFontSize } from './CardHeadline';
+import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
 import type { Alignment } from './SupportingContent';

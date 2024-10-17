@@ -9,7 +9,7 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import type { DCRContainerPalette } from '../types/front';
-import { CardHeadline, HeadlineSize } from './CardHeadline';
+import { CardHeadline, type HeadlineSize } from './CardHeadline';
 import { ContainerOverrides } from './ContainerOverrides';
 import { Section } from './Section';
 
