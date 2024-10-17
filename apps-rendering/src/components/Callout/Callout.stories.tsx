@@ -4,7 +4,6 @@ import {
 	type ArticleFormat,
 	Pillar,
 } from '../../articleFormat';
-import fetchMock from 'fetch-mock';
 import { campaignDescription, mockCampaign } from 'fixtures/campaign';
 import type { ReactElement } from 'react';
 import Callout from '.';
@@ -20,16 +19,30 @@ futureDate.setDate(futureDate.getDate() + 2);
 const pastDate = new Date();
 pastDate.setDate(pastDate.getDate() - 1);
 
+const mockFetch =
+	(mockedStatus: number) => (input: RequestInfo, init?: RequestInit) => {
+		const url = new Request(input).url;
+
+		if (
+			url ===
+				'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit' &&
+			init?.method === 'POST'
+		) {
+			console.log(`url called: ${url}`);
+			return Promise.resolve(
+				new Response(null, { status: mockedStatus }),
+			);
+		} else {
+			return Promise.resolve(
+				new Response(JSON.stringify({ error: 'Not Found' }), {
+					status: 404,
+				}),
+			);
+		}
+	};
+
 const callout = (): ReactElement => {
-	fetchMock
-		.restore()
-		.post(
-			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
-			{
-				status: 201,
-				body: null,
-			},
-		);
+	global.fetch = mockFetch(201) as unknown as typeof fetch;
 	return (
 		<Callout
 			name={mockCampaign.name}
@@ -61,15 +74,7 @@ const closedCallout = (): ReactElement => (
 	/>
 );
 const nonCollapsableCallout = (): ReactElement => {
-	fetchMock
-		.restore()
-		.post(
-			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
-			{
-				status: 201,
-				body: null,
-			},
-		);
+	global.fetch = mockFetch(201) as unknown as typeof fetch;
 	return (
 		<Callout
 			isNonCollapsible={true}
@@ -86,15 +91,7 @@ const nonCollapsableCallout = (): ReactElement => {
 	);
 };
 const minimalCallout = (): ReactElement => {
-	fetchMock
-		.restore()
-		.post(
-			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
-			{
-				status: 201,
-				body: null,
-			},
-		);
+	global.fetch = mockFetch(201) as unknown as typeof fetch;
 	return (
 		<>
 			A callouts prompt, title and description are optional
@@ -114,15 +111,7 @@ const minimalCallout = (): ReactElement => {
 };
 
 const calloutWithFormFailure = (): ReactElement => {
-	fetchMock
-		.restore()
-		.post(
-			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
-			{
-				status: 400,
-				body: null,
-			},
-		);
+	global.fetch = mockFetch(400) as unknown as typeof fetch;
 	return (
 		<Callout
 			isNonCollapsible={true}

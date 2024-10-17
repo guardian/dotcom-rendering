@@ -9,7 +9,7 @@ import { resets } from '@guardian/source/foundations';
 
 import { Lazy } from '../src/components/Lazy';
 import { Picture } from '../src/components/Picture';
-import { mockRESTCalls } from '../src/lib/mockRESTCalls';
+import { mockFetch } from '../src/lib/mockRESTCalls';
 import { setABTests } from '../src/lib/useAB';
 import { ConfigContextDecorator } from './decorators/configContextDecorator';
 import { Preview } from '@storybook/react';
@@ -22,10 +22,10 @@ import {
 Lazy.disabled = isChromatic();
 Picture.disableLazyLoading = isChromatic();
 
+global.fetch = mockFetch;
+
 // Fix the date to prevent false negatives
 MockDate.set('Sat Jan 1 2022 12:00:00 GMT+0000 (Greenwich Mean Time)');
-
-mockRESTCalls();
 
 setABTests({
 	api: new AB({
