@@ -9,15 +9,16 @@ const imageFixedSize = {
 	large: 125,
 };
 
-export type ImageFixedSize = keyof typeof imageFixedSize;
-export type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
-export type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo' | 'carousel';
+type ImageFixedSize = keyof typeof imageFixedSize;
 
-type ImageFixedSizeOptions = {
+export type ImageFixedSizeOptions = {
 	mobile: ImageFixedSize;
 	tablet?: ImageFixedSize;
 	desktop?: ImageFixedSize;
 };
+
+export type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
+export type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo' | 'carousel';
 
 type Props = {
 	children: React.ReactNode;
