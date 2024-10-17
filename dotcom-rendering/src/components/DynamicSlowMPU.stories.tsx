@@ -7,7 +7,7 @@ import { FrontSection } from './FrontSection';
 
 export default {
 	component: DynamicSlowMPU,
-	title: 'Components/DynamicSlowMPU',
+	title: 'Components/Containers/DynamicSlowMPU',
 	parameters: {
 		chromatic: {
 			viewports: [

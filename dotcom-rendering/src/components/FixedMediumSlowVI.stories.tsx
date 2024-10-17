@@ -6,7 +6,7 @@ import { FrontSection } from './FrontSection';
 
 export default {
 	component: FixedMediumSlowVI,
-	title: 'Components/FixedMediumSlowVI',
+	title: 'Components/Containers/FixedMediumSlowVI',
 	parameters: {
 		chromatic: {
 			viewports: [

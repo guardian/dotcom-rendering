@@ -22,7 +22,7 @@ const defaultGroupedTrails: DCRGroupedTrails = {
 
 const meta = {
 	component: DynamicPackage,
-	title: 'Components/DynamicPackage',
+	title: 'Components/Containers/DynamicPackage',
 	parameters: {
 		chromatic: {
 			viewports: [

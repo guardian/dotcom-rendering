@@ -5,7 +5,7 @@ import { FrontSection } from './FrontSection';
 import { ScrollableSmall } from './ScrollableSmall.importable';
 
 export default {
-	title: 'Components/ScrollableSmall',
+	title: 'Components/Containers/ScrollableSmall',
 	component: ScrollableSmall,
 	args: {
 		trails,
