@@ -49,6 +49,7 @@ import { CardWrapper } from './components/CardWrapper';
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import type {
+	ImageFixedSizeOptions,
 	ImagePositionType,
 	ImageSizeType,
 } from './components/ImageWrapper';
@@ -429,10 +430,22 @@ export const Card = ({
 
 	const isSmallCard = containerType === 'scrollable/small';
 
-	const fixedImageSizeOnMobile = () => {
-		if (isSmallCard) return 'small';
-		if (isFlexibleContainer) return 'medium';
-		return 'large';
+	const imageFixedSizeOptions = (): ImageFixedSizeOptions => {
+		if (isSmallCard) {
+			return {
+				mobile: 'small',
+				tablet: 'medium',
+				desktop: 'medium',
+			};
+		}
+
+		if (isFlexibleContainer) {
+			return {
+				mobile: 'medium',
+			};
+		}
+
+		return { mobile: 'large' };
 	};
 
 	const headlinePosition = getHeadlinePosition({
@@ -588,17 +601,11 @@ export const Card = ({
 				{media && (
 					<ImageWrapper
 						imageSize={imageSize}
+						imageFixedSizes={imageFixedSizeOptions()}
 						imageType={media.type}
 						imagePositionOnDesktop={imagePositionOnDesktop}
 						imagePositionOnMobile={imagePositionOnMobile}
 						showPlayIcon={showPlayIcon}
-						fixedImageSizeOnMobile={fixedImageSizeOnMobile()}
-						fixedImageSizeOnTablet={
-							isSmallCard ? 'medium' : undefined
-						}
-						fixedImageSizeOnDesktop={
-							isSmallCard ? 'medium' : undefined
-						}
 					>
 						{media.type === 'slideshow' && (
 							<Slideshow
