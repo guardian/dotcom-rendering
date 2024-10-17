@@ -349,17 +349,17 @@ const stretchLines = css`
 `;
 
 const podcastResponsiveCoverImage = css`
+	img {
+		width: 140px;
+		height: 140px;
+	}
+	margin: 0.375rem 0 0.375rem 0;
 	${from.wide} {
 		img {
 			width: 219px;
 			height: 219px;
 		}
 	}
-	img {
-		width: 140px;
-		height: 140px;
-	}
-	margin: 0.375rem 0 0.375rem 0;
 `;
 
 const starWrapper = css`
