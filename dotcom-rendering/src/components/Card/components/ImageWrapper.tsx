@@ -3,11 +3,15 @@ import { css } from '@emotion/react';
 import { between, from, until } from '@guardian/source/foundations';
 import { PlayIcon } from './PlayIcon';
 
+const fixedImageSizes = {
+	small: 86,
+	medium: 97.5,
+	large: 125,
+};
+
+export type FixedImageSize = keyof typeof fixedImageSizes;
 export type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
-
 export type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo' | 'carousel';
-
-export type FixedImageSizeType = 'small' | 'medium' | 'large';
 
 type Props = {
 	children: React.ReactNode;
@@ -16,9 +20,9 @@ type Props = {
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	showPlayIcon: boolean;
-	fixedImageSizeOnMobile?: FixedImageSizeType;
-	fixedImageSizeOnTablet?: FixedImageSizeType;
-	fixedImageSizeOnDesktop?: FixedImageSizeType;
+	fixedImageSizeOnMobile?: FixedImageSize;
+	fixedImageSizeOnTablet?: FixedImageSize;
+	fixedImageSizeOnDesktop?: FixedImageSize;
 };
 
 /**
@@ -63,24 +67,13 @@ const flexBasisStyles = ({
  *
  * Fixed images sizes can optionally be applied at tablet and desktop.
  */
-const getFixedImageWidth = (imageSize: FixedImageSizeType) => {
-	switch (imageSize) {
-		case 'small':
-			return '86px';
-		case 'medium':
-			return '97.5px';
-		case 'large':
-			return '125px';
-	}
-};
-
 const fixedImageWidth = (
-	mobile: FixedImageSizeType,
-	tablet?: FixedImageSizeType,
-	desktop?: FixedImageSizeType,
+	mobile: FixedImageSize,
+	tablet?: FixedImageSize,
+	desktop?: FixedImageSize,
 ) => css`
 	${until.tablet} {
-		width: ${getFixedImageWidth(mobile)};
+		width: ${fixedImageSizes[mobile]}px;
 		flex-shrink: 0;
 		flex-basis: unset;
 		align-self: flex-start;
@@ -88,7 +81,7 @@ const fixedImageWidth = (
 	${tablet &&
 	`
 	${between.tablet.and.desktop} {
-		width: ${getFixedImageWidth(tablet)};
+		width: ${fixedImageSizes[tablet]}px;
 		flex-shrink: 0;
 		flex-basis: unset;
 		align-self: flex-start;
@@ -96,7 +89,7 @@ const fixedImageWidth = (
 	${desktop &&
 	`
 	${from.desktop} {
-		width: ${getFixedImageWidth(desktop)};
+		width: ${fixedImageSizes[desktop]}px;
 		flex-shrink: 0;
 		flex-basis: unset;
 		align-self: flex-start;
