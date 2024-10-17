@@ -21,6 +21,7 @@ type Props = {
 	trailTextSize?: TrailTextSize;
 	/** Optionally overrides the trail text colour */
 	trailTextColour?: string;
+	padTop: boolean;
 };
 
 /**
@@ -55,7 +56,11 @@ const decideVisibilityStyles = (
 const trailTextStyles = css`
 	display: flex;
 	flex-direction: column;
-	padding: ${space[2]}px 0;
+	padding-bottom: ${space[2]}px;
+`;
+
+const topPadding = css`
+	padding-top: ${space[2]}px;
 `;
 
 const fontStyles = (trailTextSize: TrailTextSize) => css`
@@ -76,6 +81,7 @@ export const TrailTextWrapper = ({
 	shouldHide = true,
 	trailTextSize = 'regular',
 	trailTextColour = palette('--card-trail-text'),
+	padTop,
 }: Props) => {
 	return (
 		<div
@@ -91,6 +97,7 @@ export const TrailTextWrapper = ({
 						imageSize,
 						imageType,
 					),
+				padTop && topPadding,
 			]}
 		>
 			{children}
