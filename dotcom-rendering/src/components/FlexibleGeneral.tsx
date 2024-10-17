@@ -5,7 +5,7 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import { Position } from './Card/Card';
+import type { Position } from './Card/Card';
 import type {
 	ImagePositionType,
 	ImageSizeType,
