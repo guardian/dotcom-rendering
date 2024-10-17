@@ -72,33 +72,33 @@ const flexBasisStyles = ({
  *
  * Fixed images sizes can optionally be applied at tablet and desktop.
  */
-const imageFixedWidth = ({
+const fixImageWidthStyles = (width: number) => css`
+	width: ${width}px;
+	flex-shrink: 0;
+	flex-basis: unset;
+	align-self: flex-start;
+`;
+
+const fixImageWidth = ({
 	mobile,
 	tablet,
 	desktop,
 }: ImageFixedSizeOptions) => css`
 	${until.tablet} {
-		width: ${imageFixedSize[mobile]}px;
-		flex-shrink: 0;
-		flex-basis: unset;
-		align-self: flex-start;
+		${fixImageWidthStyles(imageFixedSize[mobile])}
 	}
 	${tablet &&
-	`
-	${between.tablet.and.desktop} {
-		width: ${imageFixedSize[tablet]}px;
-		flex-shrink: 0;
-		flex-basis: unset;
-		align-self: flex-start;
-	}`}
+	css`
+		${between.tablet.and.desktop} {
+			${fixImageWidthStyles(imageFixedSize[tablet])}
+		}
+	`}
 	${desktop &&
-	`
-	${from.desktop} {
-		width: ${imageFixedSize[desktop]}px;
-		flex-shrink: 0;
-		flex-basis: unset;
-		align-self: flex-start;
-	}`}
+	css`
+		${from.desktop} {
+			${fixImageWidthStyles(imageFixedSize[desktop])}
+		}
+	`}
 `;
 
 export const ImageWrapper = ({
@@ -139,7 +139,7 @@ export const ImageWrapper = ({
 							display: none;
 						}
 					`,
-				isHorizontalOnMobile && imageFixedWidth(imageFixedSizes),
+				isHorizontalOnMobile && fixImageWidth(imageFixedSizes),
 
 				isHorizontalOnDesktop &&
 					css`
