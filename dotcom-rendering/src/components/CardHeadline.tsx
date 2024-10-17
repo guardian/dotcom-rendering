@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	between,
 	headlineMedium14,
 	headlineMedium15,
 	headlineMedium17,
@@ -59,117 +60,100 @@ export type CardHeadlineSize =
 	| 'tiny';
 
 /** boosted font sizes are the same across all breakpoints so they've been abstracted out to help with readability */
-const boostedSizes = {
-	ginormousBoosted: headlineMedium64,
-	hugeBoosted: headlineMedium50,
-	largeBoosted: headlineMedium42,
-	mediumBoosted: headlineMedium34,
-	smallBoosted: headlineMedium28,
-	tinyBoosted: headlineMedium24,
+const headlineSize = {
+	xxxlarge: headlineMedium64,
+	xxlarge: headlineMedium50,
+	xlarge: headlineMedium42,
+	large: headlineMedium34,
+	medium: headlineMedium28,
+	small: headlineMedium24,
+	xsmall: headlineMedium20,
+	xxsmall: headlineMedium17,
+	xxxsmall: headlineMedium15,
+	tiny: headlineMedium14,
 };
 
-const fontSizeMap = (breakpoint: HeadlineBreakpoint) => {
-	const baseSizes = {
-		desktop: {
-			...boostedSizes,
-			ginormous: headlineMedium50,
-			huge: headlineMedium28,
-			large: headlineMedium24,
-			medium: headlineMedium20,
-			small: headlineMedium17,
-			tiny: headlineMedium14,
-		},
-		tablet: {
-			...boostedSizes,
-			ginormous: headlineMedium42,
-			huge: headlineMedium24,
-			large: headlineMedium20,
-			medium: headlineMedium17,
-			small: headlineMedium15,
-			tiny: headlineMedium14,
-		},
-		mobile: {
-			...boostedSizes,
-			ginormous: headlineMedium34,
-			huge: headlineMedium24,
-			large: headlineMedium20,
-			medium: headlineMedium17,
-			small: headlineMedium15,
-			tiny: headlineMedium14,
-		},
-	};
-
-	return baseSizes[breakpoint];
-};
-
+type HeadlineSize = keyof typeof headlineSize;
 export type ResponsiveFontSize = {
-	desktop: CardHeadlineSize;
-	tablet?: CardHeadlineSize;
-	mobile?: CardHeadlineSize;
+	desktop: HeadlineSize;
+	tablet?: HeadlineSize;
+	mobile?: HeadlineSize;
+	mobileMedium?: HeadlineSize;
 };
 
-type HeadlineBreakpoint = 'desktop' | 'tablet' | 'mobile';
-
-const getFontSize = (fontSize: ResponsiveFontSize) => {
+const getFontSize = ({
+	desktop,
+	tablet,
+	mobileMedium,
+	mobile,
+}: ResponsiveFontSize) => {
 	return css`
-		${fontSizeMap('desktop')[fontSize.desktop]};
+		${headlineSize[desktop]};
 
-		${fontSize.tablet &&
+		${tablet &&
 		css`
 			${until.desktop} {
-				${fontSizeMap('tablet')[fontSize.tablet]};
+				${headlineSize[tablet]};
 			}
 		`}
-		${fontSize.mobile &&
+
+		${mobileMedium &&
+		css`
+			${between.mobile.and.tablet} {
+				${headlineSize[mobileMedium]};
+			}
+		`}
+
+		${mobile &&
 		css`
 			${until.tablet} {
-				${fontSizeMap('mobile')[fontSize.mobile]};
+				${headlineSize[mobile]};
 			}
 		`}
 	`;
 };
 
-const labTextStyles = (size: SmallHeadlineSize) => {
-	switch (size) {
-		case 'ginormous':
-		case 'huge':
-		case 'large':
-			return css`
-				${textSans20};
-				${until.desktop} {
-					${textSans17};
-				}
-			`;
-		case 'medium':
-			return css`
-				${textSans20};
-				/**
-				 * Typography preset styles should not be overridden.
-				 * This has been done because the styles do not directly map to the new presets.
-				 * Please speak to your team's designer and update this to use a more appropriate preset.
-				 */
-				line-height: 1.15;
-				${until.desktop} {
-					${textSans17};
-					/**
-					 * Typography preset styles should not be overridden.
-					 * This has been done because the styles do not directly map to the new presets.
-					 * Please speak to your team's designer and update this to use a more appropriate preset.
-					 */
-					line-height: 1.15;
-				}
-				padding-bottom: ${space[1]}px;
-			`;
-		case 'small':
-			return css`
-				${textSans15};
-			`;
-		case 'tiny':
-			return css`
-				${textSans12};
-			`;
-	}
-};
+// const labTextStyles = (size: SmallHeadlineSize) => {
+// 	switch (size) {
+// 		case 'ginormous':
+// 		case 'huge':
+// 		case 'large':
+// 			return css`
+// 				${textSans20};
+// 				${until.desktop} {
+// 					${textSans17};
+// 				}
+// 			`;
+// 		case 'medium':
+// 			return css`
+// 				${textSans20};
+// 				/**
+// 				 * Typography preset styles should not be overridden.
+// 				 * This has been done because the styles do not directly map to the new presets.
+// 				 * Please speak to your team's designer and update this to use a more appropriate preset.
+// 				 */
+// 				line-height: 1.15;
+// 				${until.desktop} {
+// 					${textSans17};
+// 					/**
+// 					 * Typography preset styles should not be overridden.
+// 					 * This has been done because the styles do not directly map to the new presets.
+// 					 * Please speak to your team's designer and update this to use a more appropriate preset.
+// 					 */
+// 					line-height: 1.15;
+// 				}
+// 				padding-bottom: ${space[1]}px;
+// 			`;
+// 		case 'small':
+// 			return css`
+// 				${textSans15};
+// 			`;
+// 		case 'tiny':
+// 			return css`
+// 				${textSans12};
+// 			`;
+// 	}
+// };
 
 const sublinkStyles = css`
 	display: block;
@@ -249,7 +233,7 @@ export const CardHeadline = ({
 					// labTextStyles,
 
 					isSublink &&
-						fontSizes.desktop === 'medium' &&
+						fontSizes.desktop === 'xsmall' &&
 						css`
 							${textSans14}
 						`,
