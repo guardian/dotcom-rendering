@@ -21,7 +21,6 @@ import { Carousel } from '../components/Carousel.importable';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { ExpandableMarketingCardWrapper } from '../components/ExpandableMarketingCardWrapper.importable';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -566,22 +565,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								/>
 							</ArticleContainer>
 						</GridItem>
-						{isWeb && (
-							<GridItem area="uscard" element="aside">
-								<Hide until="leftCol">
-									<Island
-										priority="enhancement"
-										defer={{ until: 'visible' }}
-									>
-										<ExpandableMarketingCardWrapper
-											guardianBaseURL={
-												article.guardianBaseURL
-											}
-										/>
-									</Island>
-								</Hide>
-							</GridItem>
-						)}
 					</PictureGrid>
 				</Section>
 
