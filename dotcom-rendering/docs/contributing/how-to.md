@@ -46,6 +46,6 @@ DCR doesn't make calls to external services from the server. The server's job is
 render the data passed to it by a POST request. But it does make requests on the client side.
 
 We currently use [SWR](https://swr.vercel.app/) to manage AJAX requests on the
-client. Your starting point should be the [`useApi` hook](../../src/web/lib/useApi.tsx),
+client. Your starting point should be the [`useApi` hook](/dotcom-rendering/src/lib/useApi.ts),
 which is DCR's wrapper around SWR's own hook. Because this hook requires
 client-side React code, you will need to place your component in an `<Island>` wrapper.
