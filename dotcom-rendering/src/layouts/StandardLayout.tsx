@@ -674,6 +674,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
+												mainMediaElements={
+													article.mainMediaElements
+												}
 											/>
 										</div>
 									</Hide>
@@ -704,12 +707,14 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											shortUrlId={
 												article.config.shortUrlId
 											}
+											mainMediaElements={
+												article.mainMediaElements
+											}
 										/>
 										{!!article.affiliateLinksDisclaimer && (
 											<AffiliateDisclaimer />
 										)}
 									</div>
-
 									{isWeb && (
 										<div css={usCardStyles}>
 											<Hide until="leftCol">
