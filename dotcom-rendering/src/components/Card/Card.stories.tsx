@@ -30,7 +30,7 @@ const basicCardProps: CardProps = {
 	headlineText: 'Headline text',
 	trailText:
 		'The 29-year-old source behind the biggest intelligence leak in the NSA’s history explains his motives',
-	headlineSize: 'medium',
+	headlineSizes: { desktop: 'xsmall' },
 	kickerText: '',
 	webPublicationDate: new Date(Date.now() - 60 * 60 * 1000).toString(),
 	image: {
