@@ -4,9 +4,9 @@ import { between, from, until } from '@guardian/source/foundations';
 import { PlayIcon } from './PlayIcon';
 
 const imageFixedSize = {
-	small: 86,
-	medium: 97.5,
-	large: 125,
+	tiny: 86,
+	small: 122.5,
+	medium: 125,
 };
 
 type ImageFixedSize = keyof typeof imageFixedSize;
@@ -104,7 +104,7 @@ const imageFixedWidth = ({
 export const ImageWrapper = ({
 	children,
 	imageSize,
-	imageFixedSizes = { mobile: 'large' },
+	imageFixedSizes = { mobile: 'medium' },
 	imageType,
 	imagePositionOnDesktop,
 	imagePositionOnMobile,
