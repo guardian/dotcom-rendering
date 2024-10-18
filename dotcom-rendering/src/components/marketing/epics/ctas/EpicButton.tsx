@@ -4,8 +4,7 @@
  * https://github.com/guardian/support-dotcom-components/blob/9c3eae7cb0b159db4a1c40679d6b37710b0bb937/packages/modules/src/modules/epics/Button.tsx
  */
 import type { SerializedStyles } from '@emotion/react';
-import { css } from '@emotion/react';
-import { ThemeProvider } from '@emotion/react';
+import { css, ThemeProvider } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
 import {
@@ -13,7 +12,6 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
-import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import React from 'react';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import {
@@ -69,7 +67,7 @@ type Props = {
 	isTertiary?: boolean;
 	cssOverrides?: SerializedStyles;
 	icon?: React.ReactElement;
-	tracking?: Tracking;
+	isColourInTestVariant?: boolean;
 };
 
 // Overrides for tertiary button
@@ -96,7 +94,7 @@ export const EpicButton: ReactComponent<Props> = (allProps: Props) => {
 		isTertiary,
 		cssOverrides,
 		icon,
-		tracking,
+		isColourInTestVariant,
 		...props
 	} = allProps;
 
@@ -109,9 +107,6 @@ export const EpicButton: ReactComponent<Props> = (allProps: Props) => {
 			);
 		}
 	};
-	const isColourInTestVariant =
-		tracking?.abTestName?.includes('_LB_EPIC_BG_COLOUR') &&
-		tracking?.abTestVariant === 'VARIANT';
 
 	if (typeof onClickAction === 'string') {
 		// LinkButton doesn't support 'tertiary' priority (unlike Button)

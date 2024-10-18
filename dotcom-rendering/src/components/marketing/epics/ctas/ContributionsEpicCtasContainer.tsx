@@ -13,6 +13,7 @@ interface OnReminderOpen {
 type Props = EpicProps & {
 	amountsTestName?: string;
 	amountsVariantName?: string;
+	isColourInTestVariant?: boolean;
 };
 
 export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
@@ -25,6 +26,7 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 	fetchEmail,
 	amountsTestName,
 	amountsVariantName,
+	isColourInTestVariant,
 }: Props): JSX.Element => {
 	// reminders
 	const [fetchedEmail, setFetchedEmail] = useState<string | undefined>(
@@ -117,6 +119,7 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 				amountsVariantName={amountsVariantName}
 				numArticles={articleCounts.for52Weeks}
 				variantOfChoiceCard={variantOfChoiceCard}
+				isColourInTestVariant={isColourInTestVariant}
 			/>
 			{isReminderActive && showReminderFields && (
 				<ContributionsEpicReminder

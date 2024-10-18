@@ -249,6 +249,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 						onReminderOpen={onReminderOpen}
 						fetchEmail={fetchEmail}
 						submitComponentEvent={submitComponentEvent}
+						isColourInTestVariant={isColourInTestVariant}
 					/>
 				)}
 			</section>
