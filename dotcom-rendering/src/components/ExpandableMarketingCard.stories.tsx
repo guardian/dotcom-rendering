@@ -21,7 +21,6 @@ export const Default = {
 		heading: 'Pop your US news bubble',
 		kicker: 'How the Guardian is different',
 		isExpanded: false,
-		setIsExpanded: fn(),
 		setIsClosed: fn(),
 	},
 	decorators: [centreColumnDecorator],
@@ -41,14 +40,7 @@ export const Default = {
 
 // LeftCol and larger screen sizes
 export const DefaultLargeScreens = {
-	args: {
-		guardianBaseURL: 'https://www.theguardian.com',
-		heading: 'Pop your US news bubble',
-		kicker: 'How the Guardian is different',
-		isExpanded: false,
-		setIsExpanded: fn(),
-		setIsClosed: fn(),
-	},
+	...Default,
 	decorators: [leftColumnDecorator],
 	parameters: {
 		viewport: {
