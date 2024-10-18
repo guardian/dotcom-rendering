@@ -441,14 +441,14 @@ export const Card = ({
 	});
 
 	const hideTrailTextUntil = () => {
-		if (
+		if (isFlexibleContainer) {
+			return undefined;
+		} else if (
 			imageSize === 'large' &&
 			imagePositionOnDesktop === 'right' &&
 			media?.type !== 'avatar'
 		) {
 			return 'desktop';
-		} else if (isFlexSplash ?? containerType === 'flexible/general') {
-			return undefined;
 		} else {
 			return 'tablet';
 		}
