@@ -319,17 +319,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								<Section
 									fullWidth={true}
 									padBottom={true}
-									showSideBorders={
-										collection.collectionType !==
-										'fixed/video'
-									}
+									showSideBorders={false}
 									padSides={false}
 									showTopBorder={false}
 									ophanComponentLink={ophanComponentLink}
 									ophanComponentName={ophanName}
-									containerName={'fixed/medium/slow-VII'}
 									hasPageSkin={hasPageSkin}
-									// shouldCenter={false}
 								>
 									<Island
 										priority="feature"
