@@ -4,6 +4,7 @@ import {
 	headlineMedium24Object,
 	space,
 } from '@guardian/source/foundations';
+import type { ThemeButton } from '@guardian/source/react-components';
 import {
 	Button,
 	Hide,
@@ -31,12 +32,12 @@ const titlePreset = headlineMedium24Object;
 const gridColumnWidth = '60px';
 const gridGap = '20px';
 
-const themeButton = {
+const themeButton: Partial<ThemeButton> = {
 	borderTertiary: palette('--carousel-chevron-border'),
 	textTertiary: palette('--carousel-chevron'),
 };
 
-const themeButtonDisabled = {
+const themeButtonDisabled: Partial<ThemeButton> = {
 	borderTertiary: palette('--carousel-chevron-border-disabled'),
 	textTertiary: palette('--carousel-chevron-disabled'),
 };
