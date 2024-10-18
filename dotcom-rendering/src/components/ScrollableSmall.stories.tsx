@@ -3,7 +3,7 @@ import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/highlights-trails';
 import type { DCRContainerPalette } from '../types/front';
 import { FrontSection } from './FrontSection';
-import { ScrollableSmall } from './ScrollableSmall.importable';
+import { ScrollableSmall } from './ScrollableSmall';
 
 export default {
 	title: 'Components/ScrollableSmall',

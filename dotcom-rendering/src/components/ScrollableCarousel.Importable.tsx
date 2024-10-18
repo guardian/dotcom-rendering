@@ -153,8 +153,10 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 /**
  * A component used in the carousel fronts containers (e.g. small/medium/feature)
  *
+ *  ## Why does this need to be an Island?
+ *
+ * The carouselling arrow buttons need to run javascript.
  */
-
 export const ScrollableCarousel = ({ children, carouselLength }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
@@ -210,56 +212,60 @@ export const ScrollableCarousel = ({ children, carouselLength }: Props) => {
 	}, []);
 
 	return (
-		<>
-			<div css={carouselContainerStyles}>
-				<ol
-					ref={carouselRef}
-					css={[
-						carouselStyles,
-						generateCarouselColumnStyles(carouselLength),
-					]}
-					data-heatphan-type="carousel"
-				>
-					{children}
-				</ol>
-				<div css={buttonContainerStyles}>
-					<Hide until={'tablet'}>
-						{carouselLength > 2 && (
-							<div css={buttonLayoutStyles}>
-								<Button
-									hideLabel={true}
-									iconSide="left"
-									icon={<SvgChevronLeftSingle />}
-									onClick={() => scrollTo('left')}
-									priority="tertiary"
-									theme={
-										previousButtonEnabled
-											? themeButton
-											: themeButtonDisabled
-									}
-									size="small"
-									disabled={!previousButtonEnabled}
-								/>
+		<div css={carouselContainerStyles}>
+			<ol
+				ref={carouselRef}
+				css={[
+					carouselStyles,
+					generateCarouselColumnStyles(carouselLength),
+				]}
+				data-heatphan-type="carousel"
+			>
+				{children}
+			</ol>
+			<div css={buttonContainerStyles}>
+				<Hide until={'tablet'}>
+					{carouselLength > 2 && (
+						<div css={buttonLayoutStyles}>
+							<Button
+								hideLabel={true}
+								iconSide="left"
+								icon={<SvgChevronLeftSingle />}
+								onClick={() => scrollTo('left')}
+								priority="tertiary"
+								theme={
+									previousButtonEnabled
+										? themeButton
+										: themeButtonDisabled
+								}
+								size="small"
+								disabled={!previousButtonEnabled}
+								// TODO
+								// aria-label="Move stories backwards"
+								// data-link-name="container left chevron"
+							/>
 
-								<Button
-									hideLabel={true}
-									iconSide="left"
-									icon={<SvgChevronRightSingle />}
-									onClick={() => scrollTo('right')}
-									priority="tertiary"
-									theme={
-										nextButtonEnabled
-											? themeButton
-											: themeButtonDisabled
-									}
-									size="small"
-									disabled={!nextButtonEnabled}
-								/>
-							</div>
-						)}
-					</Hide>
-				</div>{' '}
+							<Button
+								hideLabel={true}
+								iconSide="left"
+								icon={<SvgChevronRightSingle />}
+								onClick={() => scrollTo('right')}
+								priority="tertiary"
+								theme={
+									nextButtonEnabled
+										? themeButton
+										: themeButtonDisabled
+								}
+								size="small"
+								disabled={!nextButtonEnabled}
+								// TODO
+								// aria-label="Move stories forwards"
+								// data-link-name="container right chevron"
+							/>
+						</div>
+					)}
+				</Hide>
 			</div>
-		</>
+		</div>
 	);
 };
