@@ -16,7 +16,7 @@ export const Wrapper = ({
 				? '30px 40px 120px 40px'
 				: '30px 40px 120px'};
 			grid-template-areas:
-				'current-time total-time'
+				'current-time duration'
 				'progress-bar progress-bar'
 				'playback     playback'
 				'.            volume';
@@ -25,7 +25,7 @@ export const Wrapper = ({
 				grid-template-columns: 90px 1fr 90px;
 				grid-template-rows: 50px 110px;
 				grid-template-areas:
-					'current-time progress-bar total-time'
+					'current-time progress-bar duration'
 					'playback     playback     playback';
 			}
 		`}

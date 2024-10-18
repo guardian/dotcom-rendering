@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { defaultFormats } from '../../../.storybook/decorators/splitThemeDecorator';
 import { allModes } from '../../../.storybook/modes';
 import { AudioPlayer as Player } from './AudioPlayer';
-import localMp3Path from './stories/default_audio_test.mp3';
+// import audioFile from './stories/default_audio_test.mp3';
 
 const meta = {
 	title: 'Components/Audio Player',
@@ -15,9 +15,10 @@ type Story = StoryObj<typeof meta>;
 
 export const AudioPlayer = {
 	args: {
-		src: localMp3Path,
-		// src: 'https://audio.guim.co.uk/2020/05/05-61553-gnl.fw.200505.jf.ch7DW.mp3',
+		// src: audioFile,
+		src: 'https://audio.guim.co.uk/2024/10/16-41962-TIFUNPEACEKEEPERS4.mp3',
 		mediaId: 'mediaId',
+		showVolumeControls: false,
 	},
 	parameters: {
 		// We only want to snapshot the `multipleFormats` version below.

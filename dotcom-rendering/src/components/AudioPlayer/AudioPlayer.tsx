@@ -1,5 +1,6 @@
 import { log } from '@guardian/libs';
 import type { AudioEvent, TAudioEventType } from '@guardian/ophan-tracker-js';
+import debounce from 'lodash.debounce';
 import { useCallback, useEffect, useRef, useState } from 'react';
 // import { submitComponentEvent } from '../../client/ophan/ophan';
 import { Playback } from './components/Playback';
@@ -80,11 +81,14 @@ export const AudioPlayer = ({
 	const [duration, setDuration] = useState(preCalculatedDuration);
 	const [progress, setProgress] = useState(0);
 	const [isWaiting, setIsWaiting] = useState(false);
+	const [isScrubbing, setIsScrubbing] = useState(false);
 
 	// ref to the <audio /> element that handles playback
 	const audioRef = useRef<HTMLAudioElement>(null);
 
 	// ********************* interactions *********************
+
+	const boundingClientRect = useRef<DOMRect>();
 
 	const playPause = useCallback(() => {
 		if (audioRef.current) {
@@ -117,18 +121,48 @@ export const AudioPlayer = ({
 		}
 	}, []);
 
-	const skipToPoint = useCallback(
-		(event: React.MouseEvent<HTMLDivElement>) => {
+	const setPlaybackTime = useCallback(
+		(newTime: number) => {
 			if (audioRef.current) {
-				const { width, left } =
-					event.currentTarget.getBoundingClientRect();
-				const clickX = event.clientX - left;
-				const newTime = (clickX / width) * audioRef.current.duration;
 				audioRef.current.currentTime = newTime;
 			}
 		},
-		[],
+		[audioRef],
 	);
+
+	const jumpToPoint = useCallback(
+		(event: React.MouseEvent<HTMLDivElement>) => {
+			if (audioRef.current && !isNaN(audioRef.current.duration)) {
+				setIsScrubbing(true);
+
+				boundingClientRect.current =
+					event.currentTarget.getBoundingClientRect();
+
+				const { width, left } = boundingClientRect.current;
+				const clickX = event.clientX - left;
+				const newTime = (clickX / width) * audioRef.current.duration;
+
+				setPlaybackTime(newTime);
+			}
+		},
+		[setPlaybackTime],
+	);
+
+	const scrub = useCallback(
+		(event: React.MouseEvent<HTMLDivElement>) => {
+			if (isScrubbing && audioRef.current && boundingClientRect.current) {
+				const { width, left } = boundingClientRect.current;
+				const eventX = event.clientX - left;
+				const newTime = (eventX / width) * audioRef.current.duration;
+				setPlaybackTime(newTime);
+			}
+		},
+		[isScrubbing, setPlaybackTime],
+	);
+
+	const stopScrubbing = useCallback(() => {
+		setIsScrubbing(false);
+	}, []);
 
 	const mute = useCallback(() => {
 		if (audioRef.current) {
@@ -156,11 +190,11 @@ export const AudioPlayer = ({
 
 	const onTimeupdate = useCallback(() => {
 		if (audioRef.current) {
-			setCurrentTime(audioRef.current.currentTime);
-
 			const newProgress =
 				(audioRef.current.currentTime / audioRef.current.duration) *
 				100;
+
+			setCurrentTime(audioRef.current.currentTime);
 			setProgress(newProgress);
 
 			// Send progress events to ophan,
@@ -224,6 +258,8 @@ export const AudioPlayer = ({
 		audio.addEventListener('ended', onEnded);
 		audio.addEventListener('error', onError);
 
+		audio.addEventListener('seeking', onTimeupdate);
+
 		return () => {
 			audio.removeEventListener('waiting', onWaiting);
 			audio.removeEventListener('canplay', onCanPlay);
@@ -234,6 +270,7 @@ export const AudioPlayer = ({
 			audio.removeEventListener('pause', onPause);
 			audio.removeEventListener('ended', onEnded);
 			audio.removeEventListener('error', onError);
+			audio.removeEventListener('seeking', onTimeupdate);
 		};
 	}, [
 		onTimeupdate,
@@ -263,7 +300,13 @@ export const AudioPlayer = ({
 			<CurrentTime currentTime={currentTime} />
 			<Duration duration={duration} />
 
-			<ProgressBar progress={progress} onClick={skipToPoint} />
+			<ProgressBar
+				isScrubbing={isScrubbing}
+				progress={progress}
+				onMouseDown={jumpToPoint}
+				onMouseUp={stopScrubbing}
+				onMouseMove={scrub}
+			/>
 
 			<Playback>
 				<Playback.SkipBack
@@ -282,10 +325,12 @@ export const AudioPlayer = ({
 				/>
 			</Playback>
 
-			<Volume>
-				<Volume.UnMute onClick={unMute} isMuted={isMuted} />
-				<Volume.Mute onClick={mute} isMuted={isMuted} />
-			</Volume>
+			{showVolumeControls && (
+				<Volume>
+					<Volume.UnMute onClick={unMute} isMuted={isMuted} />
+					<Volume.Mute onClick={mute} isMuted={isMuted} />
+				</Volume>
+			)}
 		</Wrapper>
 	);
 };

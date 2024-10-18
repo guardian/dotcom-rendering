@@ -40,7 +40,7 @@ export const Duration = ({ duration }: { duration?: number }) => (
 		css={[
 			timeCSS,
 			css`
-				grid-area: total-time;
+				grid-area: duration;
 				justify-content: flex-end;
 				padding-right: 10px;
 			`,
