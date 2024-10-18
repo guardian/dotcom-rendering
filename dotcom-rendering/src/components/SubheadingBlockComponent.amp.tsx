@@ -5,7 +5,10 @@ import {
 	palette,
 	textSans20,
 } from '@guardian/source/foundations';
-import { type ArticleTheme, ArticleSpecial as Special } from '../lib/format';
+import {
+	type ArticleTheme,
+	ArticleSpecial as Special,
+} from '../lib/articleFormat';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 
 const style = (pillar: ArticleTheme) => css`

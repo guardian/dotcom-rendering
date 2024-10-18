@@ -1,16 +1,8 @@
 import type { LinkButtonProps as CoreLinkButtonProps } from '@guardian/source/react-components';
 import { LinkButton as CoreLinkButton } from '@guardian/source/react-components';
-import {
-	decideBackground,
-	decideBorder,
-	decideFont,
-	defaultFormat,
-} from './styles';
-import type { SharedEditorialButtonProps } from './types';
+import { decideBackground, decideBorder, decideFont } from './styles';
 
-export interface EditorialLinkButtonProps
-	extends CoreLinkButtonProps,
-		SharedEditorialButtonProps {}
+export interface EditorialLinkButtonProps extends CoreLinkButtonProps {}
 
 /**
  *
@@ -19,14 +11,13 @@ export interface EditorialLinkButtonProps
  *
  */
 export const EditorialLinkButton = ({
-	format = defaultFormat,
 	children,
 	priority = 'primary',
 	...props
 }: EditorialLinkButtonProps) => {
-	const backgroundOverrides = decideBackground(format, priority);
-	const borderOverrides = decideBorder(format, priority);
-	const fontOverrides = decideFont(format, priority);
+	const backgroundOverrides = decideBackground(priority);
+	const borderOverrides = decideBorder(priority);
+	const fontOverrides = decideFont(priority);
 
 	return (
 		<CoreLinkButton

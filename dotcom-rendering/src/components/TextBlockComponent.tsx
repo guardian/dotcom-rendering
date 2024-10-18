@@ -11,14 +11,14 @@ import type { ReactNode } from 'react';
 import { Fragment } from 'react';
 import type { IOptions } from 'sanitize-html';
 import sanitise from 'sanitize-html';
-import { decidePalette } from '../lib/decidePalette';
-import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
-} from '../lib/format';
+} from '../lib/articleFormat';
+import { decidePalette } from '../lib/decidePalette';
+import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
 import { palette as themePalette } from '../palette';
 import { logger } from '../server/lib/logging';
 import { DropCap } from './DropCap';

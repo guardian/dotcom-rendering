@@ -1,5 +1,4 @@
 import type { StoryObj } from '@storybook/react';
-import fetchMock from 'fetch-mock';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { calloutCampaign as calloutCampaignV2 } from '../../fixtures/manual/calloutCampaignV2';
 import {
@@ -7,7 +6,8 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
+import { customMockFetch } from '../lib/mockRESTCalls';
 import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
 
 const tomorrow = new Date().setDate(new Date().getDate() + 1) / 1000;
@@ -15,31 +15,23 @@ const yesterday = new Date().setDate(new Date().getDate() - 1) / 1000;
 const pageId =
 	'world/2023/mar/01/tell-us-have-you-been-affected-by-the-train-crash-in-greece';
 
-const goodRequest = () => {
-	fetchMock
-		.restore()
-		.post(
+const mockGoodRequestFetch = customMockFetch([
+	{
+		mockedMethod: 'POST',
+		mockedUrl:
 			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
-			{
-				status: 201,
-				body: null,
-			},
-		)
-		.spy('end:.hot-update.json');
-};
+		mockedStatus: 201,
+	},
+]);
 
-const badRequest = () => {
-	fetchMock
-		.restore()
-		.post(
+const mockBadRequestFetch = customMockFetch([
+	{
+		mockedMethod: 'POST',
+		mockedUrl:
 			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
-			{
-				status: 400,
-				body: null,
-			},
-		)
-		.spy('end:.hot-update.json');
-};
+		mockedStatus: 400,
+	},
+]);
 
 /** ensure that multiple form IDs are not present on the same page */
 let counter = 0;
@@ -56,7 +48,7 @@ export default {
 };
 
 export const Collapsible: StoryObj = () => {
-	goodRequest();
+	global.fetch = mockGoodRequestFetch;
 	return (
 		<CalloutBlockComponent
 			callout={{
@@ -73,7 +65,7 @@ export const Collapsible: StoryObj = () => {
 Collapsible.decorators = [splitTheme([defaultFormat])];
 
 export const NonCollapsible: StoryObj = () => {
-	goodRequest();
+	global.fetch = mockGoodRequestFetch;
 	return (
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: tomorrow }}
@@ -85,7 +77,7 @@ NonCollapsible.storyName = 'NonCollapsible';
 NonCollapsible.decorators = [splitTheme([defaultFormat])];
 
 export const SubmissionFailure: StoryObj = () => {
-	badRequest();
+	global.fetch = mockBadRequestFetch;
 	return (
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: tomorrow }}
@@ -117,6 +109,7 @@ export const Expired: StoryObj = () => {
 Expired.decorators = [splitTheme([defaultFormat])];
 
 export const MinimalCallout: StoryObj = () => {
+	global.fetch = mockGoodRequestFetch;
 	return (
 		<>
 			<div css={{ fontWeight: 'bold', paddingBottom: '16px' }}>

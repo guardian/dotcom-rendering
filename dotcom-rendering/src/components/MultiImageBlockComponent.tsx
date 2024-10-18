@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
-import type { ArticleFormat } from '../lib/format';
+import type { ArticleFormat } from '../lib/articleFormat';
 import type { ImageBlockElement } from '../types/content';
 import { Caption } from './Caption';
 import { GridItem } from './GridItem';

@@ -11,7 +11,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { palette } from '../palette';
 import CameraSvg from '../static/icons/camera.svg';
 import VideoSvg from '../static/icons/video-icon.svg';

@@ -6,11 +6,11 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { Hide, Link } from '@guardian/source/react-components';
+import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import { isMediaCard } from '../../lib/cardHelpers';
-import { ArticleDesign, type ArticleFormat } from '../../lib/format';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
-import { palette as themePalette } from '../../palette';
+import { palette } from '../../palette';
 import type { Branding } from '../../types/branding';
 import type { StarRating as Rating } from '../../types/content';
 import type {
@@ -58,7 +58,7 @@ import {
 	TrailTextWrapper,
 } from './components/TrailTextWrapper';
 
-type Position = 'inner' | 'outer' | 'none';
+export type Position = 'inner' | 'outer' | 'none';
 
 export type Props = {
 	linkTo: string;
@@ -97,6 +97,7 @@ export type Props = {
 	dataLinkName?: string;
 	/** Only used on Labs cards */
 	branding?: Branding;
+	/** Supporting content refers to sublinks */
 	supportingContent?: DCRSupportingContent[];
 	supportingContentAlignment?: Alignment;
 	supportingContentPosition?: Position;
@@ -107,10 +108,13 @@ export type Props = {
 	discussionApiUrl: string;
 	discussionId?: string;
 	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
-	isDynamo?: true;
+	isDynamo?: boolean;
 	isExternalLink: boolean;
 	slideshowImages?: DCRSlideshowImage[];
+	/** Determines if liveblog update links are displayed on a card */
 	showLivePlayable?: boolean;
+	liveUpdatesAlignment?: Alignment;
+	liveUpdatesPosition?: Position;
 	onwardsSource?: OnwardsSource;
 	pauseOffscreenVideo?: boolean;
 	showMainVideo?: boolean;
@@ -125,6 +129,8 @@ export type Props = {
 	showTopBarDesktop?: boolean;
 	showTopBarMobile?: boolean;
 	trailTextSize?: TrailTextSize;
+	/** If specified, overrides trail text colour */
+	trailTextColour?: string;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -154,7 +160,7 @@ const HorizontalDivider = () => (
 	<div
 		css={css`
 			${from.tablet} {
-				border-top: 1px solid ${themePalette('--card-border-top')};
+				border-top: 1px solid ${palette('--card-border-top')};
 				height: 1px;
 				width: 50%;
 				${from.tablet} {
@@ -302,6 +308,8 @@ export const Card = ({
 	isExternalLink,
 	slideshowImages,
 	showLivePlayable = false,
+	liveUpdatesAlignment = 'vertical',
+	liveUpdatesPosition = 'inner',
 	onwardsSource,
 	pauseOffscreenVideo = false,
 	showMainVideo = true,
@@ -314,6 +322,7 @@ export const Card = ({
 	showTopBarDesktop = true,
 	showTopBarMobile = false,
 	trailTextSize,
+	trailTextColour,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -414,8 +423,8 @@ export const Card = ({
 		isOpinion && !isOnwardContent && media?.type === 'avatar';
 
 	const cardBackgroundColour = isOnwardContent
-		? themePalette('--onward-content-card-background')
-		: themePalette('--card-background');
+		? palette('--onward-content-card-background')
+		: palette('--card-background');
 
 	/**
 	 * Some cards in standard containers have contrasting background colours.
@@ -777,7 +786,7 @@ export const Card = ({
 									imageSize={imageSize}
 									imageType={media?.type}
 									shouldHide={isFlexSplash ? false : true}
-									isFlexSplash={isFlexSplash}
+									trailTextColour={trailTextColour}
 									trailTextSize={trailTextSize}
 								>
 									<div
@@ -807,29 +816,39 @@ export const Card = ({
 									showLivePlayable={showLivePlayable}
 								/>
 							)}
+							{showLivePlayable &&
+								liveUpdatesPosition === 'inner' && (
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
+										<LatestLinks
+											id={linkTo}
+											isDynamo={isDynamo}
+											direction={
+												isFlexibleContainer
+													? liveUpdatesAlignment
+													: supportingContentAlignment
+											}
+											containerPalette={containerPalette}
+											absoluteServerTimes={
+												absoluteServerTimes
+											}
+											displayHeader={isFlexibleContainer}
+											directionOnMobile={
+												isFlexibleContainer
+													? 'horizontal'
+													: undefined
+											}
+										></LatestLinks>
+									</Island>
+								)}
 						</div>
 
 						{/* This div is needed to push this content to the bottom of the card */}
 						<div
 							style={isOnwardContent ? { marginTop: 'auto' } : {}}
 						>
-							{showLivePlayable && (
-								<Island
-									priority="feature"
-									defer={{ until: 'visible' }}
-								>
-									<LatestLinks
-										id={linkTo}
-										isDynamo={isDynamo}
-										direction={supportingContentAlignment}
-										containerPalette={containerPalette}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
-										displayHeader={isFlexibleContainer}
-									></LatestLinks>
-								</Island>
-							)}
 							{decideInnerSublinks()}
 						</div>
 
@@ -850,6 +869,23 @@ export const Card = ({
 							: 0,
 				}}
 			>
+				{showLivePlayable && liveUpdatesPosition === 'outer' && (
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<LatestLinks
+							id={linkTo}
+							isDynamo={isDynamo}
+							direction={
+								isFlexibleContainer
+									? liveUpdatesAlignment
+									: supportingContentAlignment
+							}
+							containerPalette={containerPalette}
+							absoluteServerTimes={absoluteServerTimes}
+							displayHeader={isFlexibleContainer}
+							directionOnMobile={'horizontal'}
+						></LatestLinks>
+					</Island>
+				)}
 				{decideOuterSublinks()}
 
 				{showCommentFooter && (

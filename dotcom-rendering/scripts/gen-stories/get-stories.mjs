@@ -36,7 +36,7 @@ const CARD_TEMPLATE_HEADER = `
 
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { CardsWithDifferentThemes } from '../../src/components/Card/Card.stories';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial, Pillar } from '../../src/lib/format';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial, Pillar } from '../../src/lib/articleFormat';
 
 // eslint-disable-next-line import/no-default-export -- we need a default here
 export default {

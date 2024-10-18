@@ -4,6 +4,7 @@ import {
 	textSans14,
 	textSansBold14,
 	textSansBold17,
+	until,
 } from '@guardian/source/foundations';
 import { DottedLines } from '@guardian/source-development-kitchen/react-components';
 import { revealStyles } from '../lib/revealStyles';
@@ -22,6 +23,7 @@ type Props = {
 	isDynamo?: boolean;
 	containerPalette?: DCRContainerPalette;
 	displayHeader?: boolean;
+	directionOnMobile?: Alignment;
 };
 
 const header = css`
@@ -63,6 +65,20 @@ const bold = css`
 	}
 `;
 
+const directionOnMobileStyles = (direction: Alignment) => {
+	return direction === 'horizontal'
+		? css`
+				${until.tablet} {
+					${horizontal}
+				}
+		  `
+		: css`
+				${until.tablet} {
+					${vertical}
+				}
+		  `;
+};
+
 const transparent = css`
 	color: transparent;
 `;
@@ -102,6 +118,7 @@ export const LatestLinks = ({
 	containerPalette,
 	absoluteServerTimes,
 	displayHeader = false,
+	directionOnMobile,
 }: Props) => {
 	const { data } = useApi<{
 		blocks: Array<{
@@ -149,8 +166,10 @@ export const LatestLinks = ({
 					!!isDynamo || direction === 'horizontal'
 						? horizontal
 						: vertical,
+					directionOnMobile &&
+						directionOnMobileStyles(directionOnMobile),
 					css`
-						color: ${themePalette('--card-headline-trail-text')};
+						color: ${themePalette('--card-trail-text')};
 					`,
 				]}
 			>

@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
+import type { ArticleFormat } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
-import type { ArticleFormat } from '../lib/format';
 import { getLiveblogAdPositions } from '../lib/getLiveblogAdPositions';
 import type { ServerSideTests, Switches } from '../types/config';
 import { AdPlaceholder } from './AdPlaceholder.apps';

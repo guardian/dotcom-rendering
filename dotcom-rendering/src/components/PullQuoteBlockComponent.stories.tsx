@@ -5,7 +5,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { palette as themePalette } from '../palette';
 import { PullQuoteBlockComponent } from './PullQuoteBlockComponent';
 import { Section } from './Section';

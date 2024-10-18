@@ -1,6 +1,6 @@
-import type { ArticleFormat } from '../lib/format';
 import type { Branding } from '../types/branding';
 import type { DCRContainerPalette } from '../types/front';
+import type { ArticleFormat } from './articleFormat';
 import { cardHasDarkBackground } from './cardHelpers';
 
 export const decideCardLogo = (

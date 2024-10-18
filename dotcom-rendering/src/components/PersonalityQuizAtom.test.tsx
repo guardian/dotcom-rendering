@@ -6,7 +6,7 @@ import {
 	exampleResultBuckets,
 } from '../../fixtures/manual/personalityQuizAtom';
 import { sharingUrls } from '../../fixtures/manual/sharingUrls';
-import { Pillar } from '../lib/format';
+import { Pillar } from '../lib/articleFormat';
 import {
 	findMostReferredToBucketId,
 	PersonalityQuizAtom,

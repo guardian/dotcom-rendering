@@ -1,4 +1,4 @@
-import { type ArticleFormat, decideFormat } from '../lib/format';
+import { type ArticleFormat, decideFormat } from '../lib/articleFormat';
 import { useApi } from '../lib/useApi';
 import type { RichLinkBlockElement, StarRating } from '../types/content';
 import type { FEFormat } from '../types/frontend';

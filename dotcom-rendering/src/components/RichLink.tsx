@@ -12,12 +12,12 @@ import {
 	textSansBold15,
 	textSansBold17,
 } from '@guardian/source/foundations';
-import { getSoleContributor, isContributor } from '../lib/byline';
 import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
-} from '../lib/format';
+} from '../lib/articleFormat';
+import { getSoleContributor, isContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
 import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
 import type { StarRating as Rating } from '../types/content';

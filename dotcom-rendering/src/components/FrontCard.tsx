@@ -1,4 +1,4 @@
-import { ArticleDesign } from '../lib/format';
+import { ArticleDesign } from '../lib/articleFormat';
 import type { DCRFrontCard } from '../types/front';
 import type { Props as CardProps } from './Card/Card';
 import { Card } from './Card/Card';

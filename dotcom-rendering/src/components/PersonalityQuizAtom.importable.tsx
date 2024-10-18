@@ -10,7 +10,7 @@ import {
 import { Button, Radio, RadioGroup } from '@guardian/source/react-components';
 import type { KeyboardEvent, MouseEvent } from 'react';
 import { memo, useEffect, useState } from 'react';
-import { ArticleSpecial, type ArticleTheme } from '../lib/format';
+import { ArticleSpecial, type ArticleTheme } from '../lib/articleFormat';
 import type {
 	AnswerType,
 	PersonalityQuizAtomType,

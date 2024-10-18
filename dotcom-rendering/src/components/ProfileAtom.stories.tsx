@@ -5,7 +5,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { ProfileAtom } from './ProfileAtom.importable';
 
 const meta = {

@@ -2,7 +2,7 @@ import {
 	ArticleDesign,
 	ArticleSpecial,
 	type ArticleTheme,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import type { AMPArticleModel } from '../types/article.amp';
 import { TopMetaAnalysis } from './TopMetaAnalysis.amp';
 import { TopMetaNews } from './TopMetaNews.amp';

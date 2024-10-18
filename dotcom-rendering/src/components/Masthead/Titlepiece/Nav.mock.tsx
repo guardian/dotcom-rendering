@@ -1,4 +1,4 @@
-import { Pillar } from '../../../lib/format';
+import { Pillar } from '../../../lib/articleFormat';
 import type { NavType } from '../../../model/extract-nav';
 
 export const nav: NavType = {
