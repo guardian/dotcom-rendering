@@ -16,8 +16,7 @@ import type { Loading } from './CardPicture';
 
 export type Orientation = 'portrait' | 'landscape';
 
-type Props = {
-	role: RoleType;
+interface BaseProps {
 	format: ArticleFormat;
 	master: string;
 	alt: string;
@@ -29,7 +28,19 @@ type Props = {
 	orientation?: Orientation;
 	onLoad?: () => void;
 	aspectRatio?: string;
-};
+}
+
+interface StandardProps extends BaseProps {
+	role: RoleType;
+	imageWidths?: never;
+}
+
+interface CustomProps extends BaseProps {
+	role: 'custom';
+	imageWidths: [ImageWidthType, ...ImageWidthType[]];
+}
+
+type Props = StandardProps | CustomProps;
 
 export type ImageWidthType = { breakpoint: number; width: number };
 
@@ -331,6 +342,7 @@ export const Picture = ({
 	orientation = 'landscape',
 	onLoad,
 	aspectRatio,
+	imageWidths,
 }: Props) => {
 	const [loaded, setLoaded] = useState(false);
 	const ref = useCallback((node: HTMLImageElement | null) => {
@@ -348,13 +360,14 @@ export const Picture = ({
 
 	const sources = generateSources(
 		master,
-		decideImageWidths({
-			role,
-			format,
-			isMainMedia,
-			isLightbox,
-			orientation,
-		}),
+		imageWidths ??
+			decideImageWidths({
+				role,
+				format,
+				isMainMedia,
+				isLightbox,
+				orientation,
+			}),
 		aspectRatio,
 	);
 

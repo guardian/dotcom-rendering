@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import {
+	breakpoints,
 	from,
 	palette as sourcePalette,
 	space,
@@ -40,6 +41,8 @@ import { MostViewedFooterData } from '../components/MostViewedFooterData.importa
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import type { ImageWidthType } from '../components/Picture';
+import { Picture } from '../components/Picture';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
@@ -120,7 +123,7 @@ const StandardGrid = ({
 						? css`
 								grid-template-areas:
 									'title  border  headline   headline   .'
-									'.      border  disclaimer disclaimer right-column'
+									'image  border  disclaimer disclaimer right-column'
 									'meta   border  media      media      right-column'
 									'meta   border  standfirst standfirst right-column'
 									'.      border  body       body       right-column'
@@ -163,7 +166,7 @@ const StandardGrid = ({
 					? css`
 							grid-template-areas:
 								'title  border  headline     .'
-								'.      border  disclaimer   right-column'
+								'image  border  disclaimer   right-column'
 								'meta   border  media        right-column'
 								'meta   border  standfirst   right-column'
 								'meta   border  body         right-column'
@@ -209,6 +212,7 @@ const StandardGrid = ({
 								'disclaimer    right-column'
 								'media         right-column'
 								'standfirst    right-column'
+								'image         right-column'
 								'meta          right-column'
 								'body          right-column'
 								'.             right-column';
@@ -248,6 +252,7 @@ const StandardGrid = ({
 								'disclaimer'
 								'media'
 								'standfirst'
+								'image'
 								'meta'
 								'body';
 					  `
@@ -287,6 +292,7 @@ const StandardGrid = ({
 								'disclaimer'
 								'media'
 								'standfirst'
+								'image'
 								'meta'
 								'body';
 					  `
@@ -341,6 +347,20 @@ const stretchLines = css`
 	${until.mobileLandscape} {
 		margin-left: -10px;
 		margin-right: -10px;
+	}
+`;
+
+const podcastResponsiveCoverImage = css`
+	img {
+		width: 140px;
+		height: 140px;
+	}
+	margin: 0.375rem 0 0.375rem 0;
+	${from.wide} {
+		img {
+			width: 219px;
+			height: 219px;
+		}
 	}
 `;
 
@@ -416,6 +436,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const renderAds = isWeb && canRenderAds(article);
+
+	const podcastSeries = article.tags.find((tag) => tag.type === 'Series');
+
+	const podcastImageWidths: [ImageWidthType, ...ImageWidthType[]] = [
+		{ breakpoint: breakpoints.mobile, width: 140 },
+		{ breakpoint: breakpoints.wide, width: 219 },
+	];
 
 	return (
 		<>
@@ -736,6 +763,26 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								</>
 							)}
 						</GridItem>
+						{format.design === ArticleDesign.Audio &&
+							podcastSeries && (
+								<GridItem area="image" element="aside">
+									<div css={podcastResponsiveCoverImage}>
+										<Picture
+											role={'custom'}
+											format={format}
+											master={
+												podcastSeries.podcast?.image ??
+												''
+											}
+											alt={podcastSeries.title}
+											height={1}
+											width={1}
+											loading="lazy"
+											imageWidths={podcastImageWidths}
+										/>
+									</div>
+								</GridItem>
+							)}
 						<GridItem area="body">
 							<ArticleContainer format={format}>
 								<ArticleBody
