@@ -11,7 +11,7 @@ import type {
 	ImageSizeType,
 } from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
-import type { TrailTextSize } from './Card/components/TrailTextWrapper';
+import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
