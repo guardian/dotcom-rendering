@@ -6,7 +6,7 @@ import { FrontSection } from './FrontSection';
 
 export default {
 	component: FixedSmallSlowVMPU,
-	title: 'Components/FixedSmallSlowVMPU',
+	title: 'Components/Containers/FixedSmallSlowVMPU',
 	parameters: {
 		chromatic: {
 			viewports: [
