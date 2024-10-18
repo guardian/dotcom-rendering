@@ -9,6 +9,7 @@ import {
 	Hide,
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
+	type ThemeButton,
 } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
 import { palette } from '../palette';
@@ -41,12 +42,12 @@ const titlePreset = headlineMedium24Object;
 const gridColumnWidth = '60px';
 const gridGap = '20px';
 
-const themeButton = {
+const themeButton: Partial<ThemeButton> = {
 	borderTertiary: palette('--carousel-chevron-border'),
 	textTertiary: palette('--carousel-chevron'),
 };
 
-const themeButtonDisabled = {
+const themeButtonDisabled: Partial<ThemeButton> = {
 	borderTertiary: palette('--carousel-chevron-border-disabled'),
 	textTertiary: palette('--carousel-chevron-disabled'),
 };
