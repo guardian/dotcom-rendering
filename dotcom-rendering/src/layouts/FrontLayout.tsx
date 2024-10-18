@@ -48,6 +48,7 @@ import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 import { StickyLiveblogAskWrapper } from '../components/StickyLiveblogAskWrapper.importable';
 import { UsEoy2024Wrapper } from '../components/UsEoy2024Wrapper.importable';
+import { css } from '@emotion/react';
 
 interface Props {
 	front: DCRFrontType;
@@ -308,6 +309,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						return null;
 					}
 
+					// TODO - proper name
 					if (collection.displayName === 'highlights') {
 						return (
 							<ContainerOverrides
@@ -316,26 +318,24 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							>
 								<Section
 									fullWidth={true}
+									padBottom={true}
+									showSideBorders={
+										collection.collectionType !==
+										'fixed/video'
+									}
 									padSides={false}
 									showTopBorder={false}
-									showSideBorders={false}
 									ophanComponentLink={ophanComponentLink}
 									ophanComponentName={ophanName}
-									containerName={collection.collectionType}
+									containerName={'fixed/medium/slow-VII'}
 									hasPageSkin={hasPageSkin}
-									shouldCenter={false}
+									// shouldCenter={false}
 								>
 									<Island
 										priority="feature"
 										defer={{ until: 'visible' }}
 									>
 										<UsEoy2024Wrapper />
-										{/*<StickyLiveblogAskWrapper*/}
-										{/*	referrerUrl={'url'}*/}
-										{/*	shouldHideReaderRevenueOnArticle={*/}
-										{/*		false*/}
-										{/*	}*/}
-										{/*/>*/}
 									</Island>
 								</Section>
 							</ContainerOverrides>
