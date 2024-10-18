@@ -67,6 +67,7 @@ const PrimaryCtaButton = ({
 	amountsVariantName,
 	numArticles,
 	submitComponentEvent,
+	isColourInTestVariant,
 }: {
 	cta?: Cta;
 	tracking: Tracking;
@@ -75,6 +76,7 @@ const PrimaryCtaButton = ({
 	amountsVariantName?: string;
 	numArticles: number;
 	submitComponentEvent?: (event: OphanComponentEvent) => void;
+	isColourInTestVariant?: boolean;
 }): JSX.Element | null => {
 	if (!cta) {
 		return null;
@@ -98,6 +100,7 @@ const PrimaryCtaButton = ({
 				submitComponentEvent={submitComponentEvent}
 				showArrow={true}
 				data-ignore="global-link-styling"
+				isColourInTestVariant={isColourInTestVariant}
 			>
 				{buttonText}
 			</EpicButton>
@@ -152,6 +155,7 @@ interface ContributionsEpicButtonsProps {
 	amountsVariantName?: string;
 	numArticles: number;
 	variantOfChoiceCard?: string;
+	isColourInTestVariant?: boolean;
 }
 
 export const ContributionsEpicButtons = ({
@@ -168,6 +172,7 @@ export const ContributionsEpicButtons = ({
 	amountsVariantName,
 	numArticles,
 	variantOfChoiceCard,
+	isColourInTestVariant,
 }: ContributionsEpicButtonsProps): JSX.Element | null => {
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
@@ -293,6 +298,7 @@ export const ContributionsEpicButtons = ({
 							amountsVariantName={amountsVariantName}
 							countryCode={countryCode}
 							submitComponentEvent={submitComponentEvent}
+							isColourInTestVariant={isColourInTestVariant}
 						/>
 						{secondaryCta?.type === SecondaryCtaType.Custom &&
 							!!secondaryCta.cta.baseUrl &&
