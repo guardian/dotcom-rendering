@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import fetchMock from 'fetch-mock';
 import { calloutCampaign } from '../../fixtures/manual/calloutCampaign';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { customMockFetch } from '../lib/mockRESTCalls';
 import { CalloutEmbedBlockComponent } from './CalloutEmbedBlockComponent.importable';
 
 export default {
@@ -9,17 +9,17 @@ export default {
 	title: 'Components/CalloutEmbedBlockComponent',
 };
 
-export const Default = () => {
-	fetchMock
-		.restore()
-		.post(
+const mockGoodRequestFetch = customMockFetch([
+	{
+		mockedMethod: 'POST',
+		mockedUrl:
 			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
-			{
-				status: 201,
-				body: null,
-			},
-		)
-		.spy('end:.hot-update.json');
+		mockedStatus: 201,
+	},
+]);
+
+export const Default = () => {
+	global.fetch = mockGoodRequestFetch;
 
 	return (
 		<div
