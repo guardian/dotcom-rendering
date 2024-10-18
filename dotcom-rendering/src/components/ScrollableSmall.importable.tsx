@@ -286,7 +286,6 @@ export const ScrollableSmall = ({
 								showAge={!!showAge}
 								headlineSize="small"
 								headlineSizeOnMobile="small"
-								headlineSizeOnTablet="small"
 								imagePositionOnDesktop="left"
 								imagePositionOnMobile="left"
 								imageSize="small" // TODO - needs fixed width images

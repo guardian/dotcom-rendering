@@ -3,6 +3,7 @@ import {
 	between,
 	from,
 	headlineMedium14,
+	headlineMedium15,
 	headlineMedium17,
 	headlineMedium20,
 	headlineMedium24,
@@ -167,6 +168,15 @@ const fontStylesOnMobile = ({
 			`;
 		case 'small':
 			return css`
+				${until.desktop} {
+					${headlineMedium15}
+				}
+				${between.tablet.and.desktop} {
+					${headlineMedium17}
+				}
+			`;
+		case 'tiny':
+			return css`
 				${until.mobileMedium} {
 					${headlineMedium14}
 				}
@@ -174,8 +184,6 @@ const fontStylesOnMobile = ({
 					${headlineMedium17}
 				}
 			`;
-		default:
-			return undefined;
 	}
 };
 
@@ -293,27 +301,27 @@ export const CardHeadline = ({
 				className={`${
 					isSublink ? 'card-sublink-headline' : 'card-headline'
 				}`}
-				css={[
-					format.theme !== ArticleSpecial.Labs &&
-						fontStylesOnMobile({
-							size: sizeOnMobile ?? size,
-							boostedFontSizes,
-						}),
-
-					format.theme !== ArticleSpecial.Labs &&
-						fontStylesOnTablet({
-							size: sizeOnTablet,
-							boostedFontSizes,
-						}),
-					format.theme === ArticleSpecial.Labs
-						? labTextStyles(size)
-						: fontStyles({ size, boostedFontSizes }),
-					isSublink &&
-						size === 'tiny' &&
-						css`
-							${textSans14}
-						`,
-				]}
+				css={
+					isSublink && size === 'tiny'
+						? css`
+								${textSans14}
+						  `
+						: [
+								format.theme !== ArticleSpecial.Labs &&
+									fontStylesOnMobile({
+										size: sizeOnMobile ?? size,
+										boostedFontSizes,
+									}),
+								format.theme !== ArticleSpecial.Labs &&
+									fontStylesOnTablet({
+										size: sizeOnTablet,
+										boostedFontSizes,
+									}),
+								format.theme === ArticleSpecial.Labs
+									? labTextStyles(size)
+									: fontStyles({ size, boostedFontSizes }),
+						  ]
+				}
 			>
 				{!!kickerText && (
 					<Kicker
