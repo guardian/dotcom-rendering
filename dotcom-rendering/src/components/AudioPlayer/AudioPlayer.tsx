@@ -1,5 +1,5 @@
 import { log } from '@guardian/libs';
-import type { AudioEvent } from '@guardian/ophan-tracker-js';
+import type { AudioEvent, TAudioEventType } from '@guardian/ophan-tracker-js';
 import { useCallback, useEffect, useRef, useState } from 'react';
 // import { submitComponentEvent } from '../../client/ophan/ophan';
 import { Playback } from './components/Playback';
@@ -7,6 +7,19 @@ import { ProgressBar } from './components/ProgressBar';
 import { CurrentTime, Duration } from './components/time';
 import { Volume } from './components/Volume';
 import { Wrapper } from './components/Wrapper';
+
+// possible events for audio in ophan
+type AudioEvents = TAudioEventType extends `audio:content:${infer E}`
+	? E
+	: never;
+
+// possible progress events for audio in ophan
+type AudioProgressEvents = Extract<
+	AudioEvents,
+	`${number}`
+> extends `${infer N extends number}`
+	? N
+	: never;
 
 type AudioPlayerProps = {
 	/** The audio source you want to play. */
@@ -38,11 +51,14 @@ export const AudioPlayer = ({
 
 	// we'll send listening progress reports to ophan at these percentage points
 	// through playback (100% is handled by the 'ended' event)
-	const ophanProgressEvents = useRef(new Set([25, 50, 75]));
+	const ophanProgressEvents = useRef<Set<AudioProgressEvents>>(
+		new Set([25, 50, 75]),
+	);
 
 	// wrapper to send audio events to ophan
+
 	const sendToOphan = useCallback(
-		(eventName: string) => {
+		(eventName: AudioEvents) => {
 			const ophanEvent: AudioEvent = {
 				id: mediaId,
 				eventType: `audio:content:${eventName}`,
@@ -154,7 +170,7 @@ export const AudioPlayer = ({
 				for (const stage of ophanProgressEvents.current) {
 					if (newProgress >= stage) {
 						ophanProgressEvents.current.delete(stage);
-						sendToOphan(String(stage));
+						sendToOphan(String(stage) as AudioEvents);
 					}
 				}
 			}
@@ -194,27 +210,30 @@ export const AudioPlayer = ({
 	}, []);
 
 	useEffect(() => {
+		if (!audioRef.current) return;
+
 		const audio = audioRef.current;
-		audio?.addEventListener('waiting', onWaiting);
-		audio?.addEventListener('canplay', onCanPlay);
-		audio?.addEventListener('timeupdate', onTimeupdate);
-		audio?.addEventListener('durationchange', onDurationChange);
-		audio?.addEventListener('play', onPlay);
-		audio?.addEventListener('play', onPlayOnce, { once: true });
-		audio?.addEventListener('pause', onPause);
-		audio?.addEventListener('ended', onEnded);
-		audio?.addEventListener('error', onError);
+
+		audio.addEventListener('waiting', onWaiting);
+		audio.addEventListener('canplay', onCanPlay);
+		audio.addEventListener('timeupdate', onTimeupdate);
+		audio.addEventListener('durationchange', onDurationChange);
+		audio.addEventListener('play', onPlay);
+		audio.addEventListener('play', onPlayOnce, { once: true });
+		audio.addEventListener('pause', onPause);
+		audio.addEventListener('ended', onEnded);
+		audio.addEventListener('error', onError);
 
 		return () => {
-			audio?.removeEventListener('waiting', onWaiting);
-			audio?.removeEventListener('canplay', onCanPlay);
-			audio?.removeEventListener('timeupdate', onTimeupdate);
-			audio?.removeEventListener('durationchange', onDurationChange);
-			audio?.removeEventListener('play', onPlay);
-			audio?.removeEventListener('play', onPlayOnce);
-			audio?.removeEventListener('pause', onPause);
-			audio?.removeEventListener('ended', onEnded);
-			audio?.removeEventListener('error', onError);
+			audio.removeEventListener('waiting', onWaiting);
+			audio.removeEventListener('canplay', onCanPlay);
+			audio.removeEventListener('timeupdate', onTimeupdate);
+			audio.removeEventListener('durationchange', onDurationChange);
+			audio.removeEventListener('play', onPlay);
+			audio.removeEventListener('play', onPlayOnce);
+			audio.removeEventListener('pause', onPause);
+			audio.removeEventListener('ended', onEnded);
+			audio.removeEventListener('error', onError);
 		};
 	}, [
 		onTimeupdate,
