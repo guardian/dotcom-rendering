@@ -27,13 +27,6 @@ const styles = {
 	container: css`
 		background: #051d32;
 		color: #ffffff;
-
-		display: flex;
-		justify-content: space-between;
-		overflow: hidden;
-		${from.desktop} {
-			padding-right: 40px;
-		}
 	`,
 	grid: css`
 		display: grid;
@@ -43,10 +36,6 @@ const styles = {
 		${from.tablet} {
 			display: grid;
 			grid-template-columns: 350px 350px;
-			grid-template-rows: auto 1fr auto;
-			width: 100%;
-			max-width: 1300px;
-			margin: 0 auto;
 			padding: 0 ${space[5]}px 30px ${space[5]}px;
 		}
 		${from.desktop} {
@@ -71,8 +60,6 @@ const styles = {
 		}
 	`,
 	heading: css`
-		order: 2;
-
 		${from.tablet} {
 			grid-column: 1;
 			grid-row: 1;
@@ -96,11 +83,6 @@ const styles = {
 		}
 	`,
 	body: css`
-		order: 2;
-		${from.tablet} {
-			grid-column: 1;
-			grid-row: 2 / span 2;
-		}
 		${textEgyptian17};
 		strong {
 			${textEgyptianBold17};
@@ -110,7 +92,6 @@ const styles = {
 		margin-bottom: ${space[4]}px;
 	`,
 	choiceCards: css`
-		order: 3;
 		margin-top: ${space[6]}px;
 		${from.tablet} {
 			grid-column: 2;
@@ -183,6 +164,7 @@ const choiceCardSettings: ChoiceCardSettings = {
 	buttonSelectBorderColour: '#0077B6',
 };
 const cta = {
+	// TODO - tracking
 	ctaUrl: 'https://support.theguardian.com/contribute',
 	ctaText: 'Support us',
 };
