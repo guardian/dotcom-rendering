@@ -788,6 +788,7 @@ export const Card = ({
 									shouldHide={isFlexSplash ? false : true}
 									trailTextColour={trailTextColour}
 									trailTextSize={trailTextSize}
+									padTop={headlinePosition === 'inner'}
 								>
 									<div
 										dangerouslySetInnerHTML={{
