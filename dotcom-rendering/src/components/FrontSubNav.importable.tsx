@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { EditionId } from '../lib/edition';
-import { useEditionSwitcherBanner } from '../lib/useUserPreferredEdition';
+import { useEditionSwitcherBanner } from '../lib/useEditionSwitcherBanner';
 import type { SubNavType } from '../model/extract-nav';
 import { palette } from '../palette';
 import { Section } from './Section';

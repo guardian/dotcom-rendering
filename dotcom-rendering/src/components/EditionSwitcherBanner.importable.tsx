@@ -12,7 +12,7 @@ import { getZIndex } from '../lib/getZIndex';
 import {
 	hideEditionSwitcherBanner,
 	useEditionSwitcherBanner,
-} from '../lib/useUserPreferredEdition';
+} from '../lib/useEditionSwitcherBanner';
 import XIcon from '../static/icons/x.svg';
 
 const container = css`
