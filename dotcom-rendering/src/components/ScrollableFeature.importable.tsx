@@ -1,21 +1,13 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import { palette } from '../palette';
-import type {
-	DCRContainerPalette,
-	DCRContainerType,
-	DCRFrontCard,
-} from '../types/front';
-import { FrontCard } from './FrontCard';
+import type { DCRFrontCard } from '../types/front';
+import { FeatureCard } from './Card/FeatureCard';
 import { ScrollableCarousel } from './ScrollableCarousel';
 
 type Props = {
 	trails: DCRFrontCard[];
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-	absoluteServerTimes?: boolean;
 	imageLoading: 'lazy' | 'eager';
-	containerType: DCRContainerType;
 };
 
 const itemStyles = css`
@@ -56,39 +48,24 @@ const verticalLineStyles = css`
  *
  * The carouselling arrow buttons need to run javascript.
  */
-export const ScrollableFeature = ({
-	trails,
-	containerPalette,
-	containerType,
-	absoluteServerTimes,
-	imageLoading,
-	showAge,
-}: Props) => {
+export const ScrollableFeature = ({ trails, imageLoading }: Props) => {
 	return (
 		<ScrollableCarousel carouselLength={trails.length}>
 			{trails.map((trail) => {
 				return (
 					<li key={trail.url} css={[itemStyles, verticalLineStyles]}>
-						<FrontCard
-							trail={trail}
-							imageLoading={imageLoading}
-							absoluteServerTimes={!!absoluteServerTimes}
-							containerPalette={containerPalette}
-							containerType={containerType}
-							showAge={!!showAge}
-							headlineSize="small"
-							headlineSizeOnMobile="small"
-							headlineSizeOnTablet="small"
-							imagePositionOnDesktop="left"
-							imagePositionOnMobile="left"
-							imageSize="small" // TODO - needs fixed width images
-							trailText={undefined} // unsupported
-							supportingContent={undefined} // unsupported
-							aspectRatio="5:4"
+						<FeatureCard
+							format={trail.format}
+							headlineText={trail.headline}
 							kickerText={trail.kickerText}
-							showLivePlayable={trail.showLivePlayable}
-							showTopBarDesktop={false}
-							showTopBarMobile={false}
+							avatarUrl={trail.avatarUrl}
+							byline={trail.byline}
+							image={trail.image}
+							imageLoading={imageLoading}
+							linkTo={trail.url}
+							dataLinkName={trail.dataLinkName}
+							isExternalLink={trail.isExternalLink}
+							showQuotedHeadline={trail.showQuotedHeadline}
 						/>
 					</li>
 				);

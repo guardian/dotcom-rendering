@@ -24,7 +24,7 @@ export const Default = {};
 export const WithFrontSection = {
 	render: (args) => (
 		<FrontSection
-			title="Scrollable small"
+			title="Scrollable feature"
 			discussionApiUrl={discussionApiUrl}
 			editionId={'UK'}
 			showTopBorder={false}
