@@ -47,7 +47,6 @@ const baseGrid = css`
 const horizontalGrid = css`
 	${from.tablet} {
 		grid-template-columns: repeat(12, 1fr);
-		column-gap: ${space[5]}px;
 	}
 `;
 
@@ -76,7 +75,7 @@ const verticalLineStyle = css`
 		content: '';
 		position: absolute;
 		top: 0;
-		right: -10px; /* Half of the column-gap to center the line */
+		right: 0;
 		height: 100%;
 		width: 1px;
 		background-color: ${palette('--card-border-supporting')};
