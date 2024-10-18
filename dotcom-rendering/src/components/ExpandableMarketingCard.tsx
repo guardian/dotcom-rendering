@@ -24,10 +24,44 @@ interface BannersIllustrationProps {
 	styles?: SerializedStyles;
 }
 
+const smallIllustrationStyles = css`
+	display: none;
+	${from.phablet} {
+		display: inline;
+	}
+	${from.leftCol} {
+		display: none;
+	}
+`;
+const largeIllustrationStyles = css`
+	display: inline;
+	${from.phablet} {
+		display: none;
+	}
+	${from.leftCol} {
+		display: inline;
+	}
+`;
+
 const BannersIllustration = ({ type, styles }: BannersIllustrationProps) => {
 	const { assetOrigin } = useConfig();
-	const src = `${assetOrigin}static/frontend/logos/red-blue-banner-${type}.svg`;
-	return <img src={src} alt="" css={styles} />;
+	const smallSrc = `${assetOrigin}static/frontend/logos/red-blue-small-banner-${type}.svg`;
+	const largeSrc = `${assetOrigin}static/frontend/logos/red-blue-large-banner-${type}.svg`;
+
+	return (
+		<>
+			<img
+				src={smallSrc}
+				alt=""
+				css={[styles, smallIllustrationStyles]}
+			/>
+			<img
+				src={largeSrc}
+				alt=""
+				css={[styles, largeIllustrationStyles]}
+			/>
+		</>
+	);
 };
 
 const fillBarStyles = css`
@@ -63,6 +97,10 @@ const summaryStyles = css`
 	gap: ${space[3]}px;
 	z-index: 1;
 	width: 100%;
+`;
+const contractedSummaryStyles = css`
+	${summaryStyles}
+	cursor: pointer;
 `;
 
 const headingStyles = css`
@@ -162,7 +200,6 @@ interface Props {
 	setIsClosed: Dispatch<SetStateAction<boolean>>;
 }
 
-// todo - semantic html accordion-details?
 export const ExpandableMarketingCard = ({
 	guardianBaseURL,
 	heading,
@@ -182,7 +219,8 @@ export const ExpandableMarketingCard = ({
 							styles={imageTopStyles}
 						/>
 						<section
-							css={summaryStyles}
+							data-link-name="us-expandable-marketing-card expand"
+							css={contractedSummaryStyles}
 							role="button"
 							tabIndex={0}
 							onClick={() => {
@@ -220,6 +258,7 @@ export const ExpandableMarketingCard = ({
 							<div css={headingStyles}>
 								<h2>{heading}</h2>
 								<button
+									data-link-name="us-expandable-marketing-card close"
 									onClick={() => {
 										setIsClosed(true);
 									}}
@@ -255,6 +294,7 @@ export const ExpandableMarketingCard = ({
 								</p>
 							</section>
 							<LinkButton
+								data-link-name="us-expandable-marketing-card cta-click"
 								priority="tertiary"
 								size="xsmall"
 								href={`${guardianBaseURL}/email-newsletters`}
