@@ -101,6 +101,144 @@ export const WithBylineAndHeadshot: Story = {
 	},
 };
 
+export const WithBylineAndHeadshot_USEOY2024_VARIANT: Story = {
+	name: 'ContributionsEpic with byline + headshot image for US EOY 2024 VARIANT',
+	args: {
+		...meta.args,
+		tracking: {
+			...tracking,
+			abTestName: '_EPIC_BG_COLOUR',
+			abTestVariant: 'VARIANT',
+		},
+		countryCode: 'US',
+		variant: {
+			...props.variant,
+			tickerSettings: {
+				endType: TickerEndType.unlimited,
+				countType: TickerCountType.money,
+				currencySymbol: '£',
+				copy: {
+					countLabel: '',
+					goalReachedPrimary: '',
+					goalReachedSecondary: '',
+				},
+				tickerData: {
+					total: 10000,
+					goal: 100000,
+				},
+				name: 'US',
+			},
+			name: 'THREE_TIER_CHOICE_CARDS',
+			cta: {
+				baseUrl: 'https://support.theguardian.com',
+				text: 'Continue',
+			},
+			showChoiceCards: true,
+			bylineWithImage: {
+				name: 'Betsy Reed',
+				description: 'Editor, Guardian US',
+				headshot: {
+					mainUrl:
+						'https://i.guim.co.uk/img/media/8eda1b06a686fe5ab4f7246bd6b5f8e63851088e/0_0_300_250/300.png?quality=85&s=f42e9642f335d705cab8b712bbbcb64e',
+					altText: 'Betsy Reed staff byline photograph',
+				},
+			},
+			heading: '',
+			paragraphs: [
+				'I hope you appreciated this article. Before you move on, I wanted to ask if you would consider supporting the Guardian’s journalism during one of the most consequential news cycles of our lifetimes. As a reader-funded organization, we need your help to hit our annual fundraising goal.',
+				'In the heat of a tumultuous presidential race, there is an urgent need for free, trustworthy journalism that foregrounds the stakes of this election for our country and planet.',
+				'Yet from Elon Musk to the Murdochs, a small number of billionaire owners have a powerful hold on so much of the information that reaches the public. The Guardian is different. We have no billionaire owner or shareholders to consider. Our journalism is produced to serve the public interest – not profit motives.',
+				'Largely because of this independence, we are able to avoid the trap that befalls much US media: the tendency, born of a desire to please all sides, to engage in false equivalence in the name of neutrality. The way we see it, our job is to be truly fair, which means listening to different points of view, but also calling out the lies of powerful people and institutions – and making clear how misinformation and demagoguery can damage democracy.',
+				'From threats to election integrity, to the spiraling climate crisis, to complex foreign conflicts, our journalists contextualize, investigate and illuminate the critical stories of our time. As a global news organization with a robust US reporting staff, we’re able to provide a fresh, outsider perspective – one so often missing in the American media bubble.',
+				'Around the world, readers can access the Guardian’s paywall-free journalism because of our unique reader-supported model. That’s because of people like you. Our readers keep us independent, beholden to no outside influence and accessible to everyone – whether they can afford to pay for news, or not.',
+			],
+			highlightedText:
+				'If you can, please consider supporting us just once, or better yet, support us every month with a little more. Thank you.',
+			secondaryCta: {
+				type: SecondaryCtaType.ContributionsReminder,
+			},
+			showReminderFields: {
+				reminderCta: 'Remind me in November',
+				reminderPeriod: '2024-11-01',
+				reminderLabel: 'November',
+			},
+		},
+		fetchEmail: () => {
+			return new Promise((resolve) => {
+				setTimeout(() => {
+					resolve('test@guardian.co.uk');
+				}, 500);
+			});
+		},
+	},
+};
+
+export const WithBylineAndHeadshot_USEOY2024_CONTROL: Story = {
+	name: 'ContributionsEpic with byline + headshot image for US EOY 2024 CONTROL',
+	args: {
+		...meta.args,
+		tracking: {
+			...tracking,
+			abTestName: '_EPIC_BG_COLOUR',
+			abTestVariant: 'CONTROL',
+		},
+		countryCode: 'US',
+		variant: {
+			...props.variant,
+			tickerSettings: {
+				endType: TickerEndType.unlimited,
+				countType: TickerCountType.money,
+				currencySymbol: '£',
+				copy: {
+					countLabel: 'Help us reach our end-of-year goal',
+					goalReachedPrimary: '',
+					goalReachedSecondary: '',
+				},
+				tickerData: {
+					total: 10000,
+					goal: 100000,
+				},
+				name: 'US',
+			},
+			bylineWithImage: {
+				name: 'Betsy Reed',
+				description: 'Editor, Guardian US',
+				headshot: {
+					mainUrl:
+						'https://i.guim.co.uk/img/media/8eda1b06a686fe5ab4f7246bd6b5f8e63851088e/0_0_300_250/300.png?quality=85&s=f42e9642f335d705cab8b712bbbcb64e',
+					altText: 'Betsy Reed staff byline photograph',
+				},
+			},
+			heading: '',
+			paragraphs: [
+				'I hope you appreciated this article. Before you move on, I wanted to ask if you would consider supporting the Guardian’s journalism during one of the most consequential news cycles of our lifetimes. As a reader-funded organization, we need your help to hit our annual fundraising goal.',
+				'In the heat of a tumultuous presidential race, there is an urgent need for free, trustworthy journalism that foregrounds the stakes of this election for our country and planet.',
+				'Yet from Elon Musk to the Murdochs, a small number of billionaire owners have a powerful hold on so much of the information that reaches the public. The Guardian is different. We have no billionaire owner or shareholders to consider. Our journalism is produced to serve the public interest – not profit motives.',
+				'Largely because of this independence, we are able to avoid the trap that befalls much US media: the tendency, born of a desire to please all sides, to engage in false equivalence in the name of neutrality. The way we see it, our job is to be truly fair, which means listening to different points of view, but also calling out the lies of powerful people and institutions – and making clear how misinformation and demagoguery can damage democracy.',
+				'From threats to election integrity, to the spiraling climate crisis, to complex foreign conflicts, our journalists contextualize, investigate and illuminate the critical stories of our time. As a global news organization with a robust US reporting staff, we’re able to provide a fresh, outsider perspective – one so often missing in the American media bubble.',
+				'Around the world, readers can access the Guardian’s paywall-free journalism because of our unique reader-supported model. That’s because of people like you. Our readers keep us independent, beholden to no outside influence and accessible to everyone – whether they can afford to pay for news, or not.',
+			],
+			highlightedText:
+				'If you can, please consider supporting us just once, or better yet, support us every month with a little more. Thank you.',
+			secondaryCta: {
+				type: SecondaryCtaType.ContributionsReminder,
+			},
+			showReminderFields: {
+				reminderCta: 'Remind me in November',
+				reminderPeriod: '2024-11-01',
+				reminderLabel: 'November',
+			},
+		},
+		fetchEmail: () => {
+			return new Promise((resolve) => {
+				setTimeout(() => {
+					resolve('test@guardian.co.uk');
+				}, 500);
+			});
+		},
+	},
+};
+
 export const WithBylineOnly: Story = {
 	name: 'ContributionsEpic with byline only',
 	args: {
