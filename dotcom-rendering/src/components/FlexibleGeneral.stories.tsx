@@ -3,12 +3,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { getSublinks, trails } from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { customMockFetch } from '../lib/mockRESTCalls';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import { customMockFetch } from '../lib/mockRESTCalls';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FrontSection } from './FrontSection';
 
