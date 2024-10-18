@@ -1,281 +1,12 @@
-import { css } from '@emotion/react';
-import { isUndefined, log } from '@guardian/libs';
-import { from, palette, textSans15 } from '@guardian/source/foundations';
-import {
-	SvgAudio,
-	SvgAudioMute,
-	SvgMediaControlsBack,
-	SvgMediaControlsForward,
-	SvgMediaControlsPause,
-	SvgMediaControlsPlay,
-} from '@guardian/source/react-components';
-import { forwardRef, useEffect, useRef, useState } from 'react';
-import WaveSurfer from 'wavesurfer.js';
-import { formatTime } from '../../lib/formatTime';
-
-// default base styling for all buttons
-const buttonBaseCss = css`
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	background: none;
-	border: 0;
-	margin: 0;
-	padding: 0;
-
-	:focus {
-		outline: none;
-	}
-
-	:not(:disabled):hover {
-		opacity: 0.8;
-		cursor: pointer;
-	}
-`;
-
-// ****************** Wrapper/grid etc ******************
-
-const Wrapper = ({
-	showVolumeControls,
-	...props
-}: { showVolumeControls: boolean } & React.ComponentPropsWithoutRef<'div'>) => (
-	<div
-		css={css`
-			position: relative;
-			background-color: ${palette.neutral[7]};
-
-			/* define the grid for the component */
-			display: grid;
-			grid-template-rows: ${showVolumeControls
-				? '30px 40px 120px 40px'
-				: '30px 40px 120px'};
-			grid-template-areas:
-				'current-time duration'
-				'progress-bar progress-bar'
-				'controls     controls'
-				'. volume';
-
-			${from.leftCol} {
-				grid-template-columns: 90px 1fr 90px;
-				grid-template-rows: 50px 110px;
-				grid-template-areas:
-					'current-time progress-bar duration'
-					'controls     controls     controls';
-			}
-		`}
-		{...props}
-	/>
-);
-
-// ****************** Time Display ******************
-
-const timeCSS = css`
-	padding-top: 4px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	${textSans15};
-	color: ${palette.neutral[86]};
-	background-color: ${palette.neutral[20]};
-	z-index: 1;
-
-	${from.leftCol} {
-		padding-top: 0;
-	}
-`;
-
-const CurrentTime = ({ time }: { time: number }) => (
-	<time
-		aria-label="current time"
-		css={[
-			timeCSS,
-			css`
-				grid-area: current-time;
-				justify-content: flex-start;
-				padding-left: 10px;
-			`,
-		]}
-	>
-		{formatTime(time)}
-	</time>
-);
-
-const Duration = ({ time }: { time: number }) => (
-	<time
-		aria-label="duration"
-		css={[
-			timeCSS,
-			css`
-				grid-area: duration;
-				justify-content: flex-end;
-				padding-right: 10px;
-			`,
-		]}
-	>
-		{isNaN(time) ? null : formatTime(time)}
-	</time>
-);
-
-// ****************** Progress bar/waveform ******************
-
-const WaveForm = forwardRef<
-	HTMLDivElement,
-	React.ComponentPropsWithoutRef<'div'> & { progress: number }
->(({ progress, ...props }, ref) => (
-	<div
-		css={css`
-			grid-area: progress-bar;
-			background-color: ${palette.neutral[20]};
-			border-top: 1px solid ${palette.neutral[46]};
-			padding: 0 10px;
-			transform: translateX(${-100 + progress}%);
-
-			${from.leftCol} {
-				border-top: none;
-				padding: 0;
-				background-color: ${palette.neutral[38]};
-			}
-
-			/* give the progress-bar wrapper a defined height */
-			div {
-				height: 100%;
-			}
-
-			/* remove default rounded corners of the scrubbing control */
-			& ::part(cursor) {
-				border-radius: 0;
-			}
-		`}
-		{...props}
-		ref={ref}
-	/>
-));
-
-// ****************** Playback Controls ******************
-
-const PlayButton = ({
-	isReady,
-	...props
-}: { isReady: boolean } & React.ComponentPropsWithoutRef<'button'>) => {
-	return (
-		<button
-			type="button"
-			disabled={!isReady}
-			css={[
-				buttonBaseCss,
-				css`
-					margin: 0 50px;
-					width: 70px;
-					height: 70px;
-					background-color: ${isReady
-						? palette.brandAlt[400]
-						: palette.neutral[46]};
-					border-radius: 50%;
-
-					${from.leftCol} {
-						margin: 0 60px;
-						width: 60px;
-						height: 60px;
-					}
-
-					svg {
-						width: 60px;
-					}
-				`,
-			]}
-			{...props}
-		/>
-	);
-};
-
-const SkipButton = (props: React.ComponentPropsWithoutRef<'button'>) => {
-	return (
-		<button
-			type="button"
-			css={[
-				buttonBaseCss,
-				css`
-					svg {
-						width: 31px;
-						height: 30px;
-					}
-				`,
-			]}
-			{...props}
-		/>
-	);
-};
-
-const PlaybackControls = (props: React.ComponentPropsWithoutRef<'div'>) => (
-	<div
-		css={css`
-			grid-area: controls;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		`}
-		{...props}
-	/>
-);
-
-// ****************** Volume Controls ******************
-
-const VolumeButton = ({
-	isReady,
-	...props
-}: { isReady: boolean } & React.ComponentPropsWithoutRef<'button'>) => {
-	return (
-		<button
-			type="button"
-			disabled={!isReady}
-			css={[
-				buttonBaseCss,
-				css`
-					width: 38px;
-
-					svg {
-						height: 30px;
-					}
-				`,
-			]}
-			{...props}
-		/>
-	);
-};
-
-const VolumeControls = (props: React.ComponentPropsWithoutRef<'div'>) => (
-	<div
-		css={css`
-			grid-area: volume;
-			display: flex;
-			align-items: stretch;
-			justify-content: flex-end;
-
-			span {
-				display: inline-flex;
-				align-items: center;
-				padding-left: 5px;
-				padding-right: 5px;
-			}
-
-			span + span {
-				border-left: 1px solid ${palette.neutral[46]};
-			}
-
-			${from.leftCol} {
-				position: absolute;
-				bottom: 0;
-				right: 0;
-				height: 40px;
-			}
-
-			button + button {
-				border-left: 1px solid ${palette.neutral[46]};
-			}
-		`}
-		{...props}
-	/>
-);
+import { log } from '@guardian/libs';
+import type { AudioEvent } from '@guardian/ophan-tracker-js';
+import { useCallback, useEffect, useRef, useState } from 'react';
+// import { submitComponentEvent } from '../../client/ophan/ophan';
+import { Playback } from './components/Playback';
+import { ProgressBar } from './components/ProgressBar';
+import { CurrentTime, Duration } from './components/time';
+import { Volume } from './components/Volume';
+import { Wrapper } from './components/Wrapper';
 
 type AudioPlayerProps = {
 	/** The audio source you want to play. */
@@ -284,14 +15,14 @@ type AudioPlayerProps = {
 	 * Optional, pre-computed duration of the audio source.
 	 * If it's not provided it will be calculated once the audio is loaded.
 	 */
-	duration?: string;
+	duration?: number;
 	/**
 	 * Optionally hide the volume controls if setting the volume is better
 	 * handled elsewhere, e.g on a mobile device.
 	 */
 	showVolumeControls?: boolean;
 	/** media element ID for Ophan */
-	mediaId?: string;
+	mediaId: string;
 };
 
 /**
@@ -299,98 +30,203 @@ type AudioPlayerProps = {
  */
 export const AudioPlayer = ({
 	src,
-	duration: preComputedDuration,
+	duration: preCalculatedDuration,
 	showVolumeControls = true,
 	mediaId,
 }: AudioPlayerProps) => {
-	// creates a ref for the wavesurfer instance (https://wavesurfer.xyz/)
-	const [wavesurfer, setWavesurfer] = useState<WaveSurfer>();
+	// ********************* ophan stuff *********************
 
-	const [audioLoadingProgress, setAudioLoadingProgress] = useState(0);
-	const [isReady, setIsReady] = useState(false);
+	// we'll send listening progress reports to ophan at these percentage points
+	// through playback (100% is handled by the 'ended' event)
+	const ophanProgressEvents = useRef(new Set([25, 50, 75]));
+
+	// wrapper to send audio events to ophan
+	const sendToOphan = useCallback(
+		(eventName: string) => {
+			const ophanEvent: AudioEvent = {
+				id: mediaId,
+				eventType: `audio:content:${eventName}`,
+			};
+
+			console.log(ophanEvent);
+
+			// return submitComponentEvent(ophanEvent, 'dotcom-rendering');
+		},
+		[mediaId],
+	);
+
+	// ********************* player *********************
+
+	// state for displaying feedback to the user
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [isMuted, setIsMuted] = useState(false);
 	const [currentTime, setCurrentTime] = useState(0);
-	const [duration, setDuration] = useState<number>(
-		parseInt(preComputedDuration ?? '', 10),
-	);
+	const [duration, setDuration] = useState(preCalculatedDuration);
+	const [progress, setProgress] = useState(0);
+	const [isWaiting, setIsWaiting] = useState(false);
 
-	// ref to the audio element
+	// ref to the <audio /> element that handles playback
 	const audioRef = useRef<HTMLAudioElement>(null);
 
-	// ref to the waveform container
-	const waveformRef = useRef<HTMLDivElement>(null);
+	// ********************* interactions *********************
 
-	// functions that handle interactions with the audio player
-	const playPause = () => {
-		void wavesurfer?.playPause();
-	};
-
-	const skipForward = () => {
-		wavesurfer?.skip(15);
-	};
-
-	const skipBackward = () => {
-		wavesurfer?.skip(-15);
-	};
-
-	const mute = () => {
-		wavesurfer?.setVolume(0);
-		setIsMuted(true);
-	};
-
-	const unMute = () => {
-		wavesurfer?.setVolume(1);
-		setIsMuted(false);
-	};
-
-	// instantiate the wavesurfer instance once the component has mounted
-	useEffect(() => {
-		if (
-			isUndefined(wavesurfer) &&
-			waveformRef.current &&
-			audioRef.current
-		) {
-			const ws = WaveSurfer.create({
-				container: waveformRef.current,
-				height: 'auto',
-				fillParent: true,
-				waveColor: palette.neutral[46],
-				progressColor: palette.neutral[100],
-				cursorColor: palette.brandAlt[400],
-				cursorWidth: 4,
-				barWidth: 2,
-				barGap: 1,
-				barRadius: 0,
-				normalize: true,
-				barAlign: 'bottom',
-				dragToSeek: true,
-				media: audioRef.current,
-				duration: isNaN(duration) ? undefined : duration,
-			});
-
-			ws.on('loading', (percent) => {
-				setAudioLoadingProgress(percent);
-			});
-
-			ws.on('ready', (srcDuration) => {
-				setIsReady(true);
-				if (isNaN(duration)) setDuration(srcDuration);
-			});
-			ws.on('play', () => setIsPlaying(true));
-			ws.on('pause', () => setIsPlaying(false));
-			ws.on('timeupdate', (newTime) => setCurrentTime(newTime));
-			ws.on('error', (error) => {
-				window.guardian.modules.sentry.reportError(
-					error,
-					'audio-player',
-				);
-				log('dotcom', 'Audio player (WaveSurfer) error:', error);
-			});
-
-			setWavesurfer(ws);
+	const playPause = useCallback(() => {
+		if (audioRef.current) {
+			if (audioRef.current.paused) {
+				void audioRef.current.play().catch((error) => {
+					console.log(error);
+				});
+			} else {
+				audioRef.current.pause();
+				setIsWaiting(false);
+			}
 		}
-	}, [duration, src, wavesurfer]);
+	}, []);
+
+	const skipForward = useCallback(() => {
+		if (audioRef.current) {
+			audioRef.current.currentTime = Math.min(
+				audioRef.current.currentTime + 15,
+				audioRef.current.duration,
+			);
+		}
+	}, []);
+
+	const skipBackward = useCallback(() => {
+		if (audioRef.current) {
+			audioRef.current.currentTime = Math.max(
+				audioRef.current.currentTime - 15,
+				0,
+			);
+		}
+	}, []);
+
+	const skipToPoint = useCallback(
+		(event: React.MouseEvent<HTMLDivElement>) => {
+			if (audioRef.current) {
+				const { width, left } =
+					event.currentTarget.getBoundingClientRect();
+				const clickX = event.clientX - left;
+				const newTime = (clickX / width) * audioRef.current.duration;
+				audioRef.current.currentTime = newTime;
+			}
+		},
+		[],
+	);
+
+	const mute = useCallback(() => {
+		if (audioRef.current) {
+			audioRef.current.volume = 0;
+			setIsMuted(true);
+		}
+	}, []);
+
+	const unMute = useCallback(() => {
+		if (audioRef.current) {
+			audioRef.current.volume = 1;
+			setIsMuted(false);
+		}
+	}, []);
+
+	// ******************** events *********************
+
+	const onWaiting = useCallback(() => {
+		setIsWaiting(true);
+	}, []);
+
+	const onCanPlay = useCallback(() => {
+		setIsWaiting(false);
+	}, []);
+
+	const onTimeupdate = useCallback(() => {
+		if (audioRef.current) {
+			setCurrentTime(audioRef.current.currentTime);
+
+			const newProgress =
+				(audioRef.current.currentTime / audioRef.current.duration) *
+				100;
+			setProgress(newProgress);
+
+			// Send progress events to ophan,
+			// but only if the audio is playing. We don't want to send these events
+			// just because you skipped around the audio while paused.
+			if (isPlaying) {
+				for (const stage of ophanProgressEvents.current) {
+					if (newProgress >= stage) {
+						ophanProgressEvents.current.delete(stage);
+						sendToOphan(String(stage));
+					}
+				}
+			}
+		}
+	}, [isPlaying, sendToOphan]);
+
+	const onPlay = useCallback(() => {
+		setIsPlaying(true);
+	}, []);
+
+	const onPlayOnce = useCallback(() => {
+		sendToOphan('play');
+	}, [sendToOphan]);
+
+	const onPause = useCallback(() => {
+		setIsPlaying(false);
+	}, []);
+
+	const onEnded = useCallback(() => {
+		sendToOphan('end');
+	}, [sendToOphan]);
+
+	const onError = useCallback((event: Event) => {
+		window.guardian.modules.sentry.reportError(
+			new Error(event.type),
+			'audio-player',
+		);
+		log('dotcom', 'Audio player (WaveSurfer) error:', event);
+	}, []);
+
+	// Set the duration to what we now *know* it is.
+	// If we already had the correct duration, this will be a no-op anyway.
+	const onDurationChange = useCallback(() => {
+		if (audioRef.current) {
+			setDuration(audioRef.current.duration);
+		}
+	}, []);
+
+	useEffect(() => {
+		const audio = audioRef.current;
+		audio?.addEventListener('waiting', onWaiting);
+		audio?.addEventListener('canplay', onCanPlay);
+		audio?.addEventListener('timeupdate', onTimeupdate);
+		audio?.addEventListener('durationchange', onDurationChange);
+		audio?.addEventListener('play', onPlay);
+		audio?.addEventListener('play', onPlayOnce, { once: true });
+		audio?.addEventListener('pause', onPause);
+		audio?.addEventListener('ended', onEnded);
+		audio?.addEventListener('error', onError);
+
+		return () => {
+			audio?.removeEventListener('waiting', onWaiting);
+			audio?.removeEventListener('canplay', onCanPlay);
+			audio?.removeEventListener('timeupdate', onTimeupdate);
+			audio?.removeEventListener('durationchange', onDurationChange);
+			audio?.removeEventListener('play', onPlay);
+			audio?.removeEventListener('play', onPlayOnce);
+			audio?.removeEventListener('pause', onPause);
+			audio?.removeEventListener('ended', onEnded);
+			audio?.removeEventListener('error', onError);
+		};
+	}, [
+		onTimeupdate,
+		onDurationChange,
+		onPlay,
+		onPause,
+		onEnded,
+		onPlayOnce,
+		onError,
+		onWaiting,
+		onCanPlay,
+	]);
 
 	return (
 		<Wrapper showVolumeControls={showVolumeControls}>
@@ -399,89 +235,38 @@ export const AudioPlayer = ({
 				ref={audioRef}
 				autoPlay={false}
 				data-media-id={mediaId}
+				controls={true}
+				preload="none"
 			>
 				<track kind="captions" />
 			</audio>
 
-			<CurrentTime time={currentTime} />
-			<Duration time={duration} />
+			<CurrentTime currentTime={currentTime} />
+			<Duration duration={duration} />
 
-			<WaveForm ref={waveformRef} progress={audioLoadingProgress} />
+			<ProgressBar progress={progress} onClick={skipToPoint} />
 
-			<PlaybackControls>
-				<SkipButton
-					aria-label="skip backwards by 15 seconds"
+			<Playback>
+				<Playback.SkipBack
 					onClick={skipBackward}
-					disabled={!isPlaying}
-				>
-					<SvgMediaControlsBack
-						theme={{
-							fill: isPlaying
-								? palette.neutral[100]
-								: palette.neutral[46],
-						}}
-					/>
-				</SkipButton>
-				<PlayButton
+					disabled={isWaiting || !isPlaying}
+				/>
+				<Playback.Play
+					isWaiting={isWaiting}
+					isPlaying={isPlaying}
 					aria-label={isPlaying ? 'pause' : 'play'}
 					onClick={playPause}
-					isReady={isReady}
-				>
-					{isPlaying ? (
-						<SvgMediaControlsPause
-							theme={{ fill: palette.neutral[7] }}
-						/>
-					) : (
-						<SvgMediaControlsPlay
-							theme={{ fill: palette.neutral[7] }}
-						/>
-					)}
-				</PlayButton>
-				<SkipButton
-					aria-label="skip forwards by 15 seconds"
+				/>
+				<Playback.SkipForward
 					onClick={skipForward}
-					disabled={!isPlaying}
-				>
-					<SvgMediaControlsForward
-						theme={{
-							fill: isPlaying
-								? palette.neutral[100]
-								: palette.neutral[46],
-						}}
-					/>
-				</SkipButton>
-			</PlaybackControls>
+					disabled={isWaiting || !isPlaying}
+				/>
+			</Playback>
 
-			<VolumeControls>
-				<VolumeButton
-					onClick={unMute}
-					isReady={isReady}
-					aria-label="un-mute"
-				>
-					<SvgAudio
-						theme={{
-							fill:
-								isReady && !isMuted
-									? palette.brandAlt[400]
-									: palette.neutral[46],
-						}}
-					/>
-				</VolumeButton>
-				<VolumeButton
-					onClick={mute}
-					isReady={isReady}
-					aria-label="mute"
-				>
-					<SvgAudioMute
-						theme={{
-							fill:
-								isReady && isMuted
-									? palette.brandAlt[400]
-									: palette.neutral[46],
-						}}
-					/>
-				</VolumeButton>
-			</VolumeControls>
+			<Volume>
+				<Volume.UnMute onClick={unMute} isMuted={isMuted} />
+				<Volume.Mute onClick={mute} isMuted={isMuted} />
+			</Volume>
 		</Wrapper>
 	);
 };
