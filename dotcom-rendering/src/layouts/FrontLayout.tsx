@@ -46,6 +46,8 @@ import { palette as schemePalette } from '../palette';
 import { type DCRCollectionType, type DCRFrontType } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { StickyLiveblogAskWrapper } from '../components/StickyLiveblogAskWrapper.importable';
+import { UsEoy2024Wrapper } from '../components/UsEoy2024Wrapper.importable';
 
 interface Props {
 	front: DCRFrontType;
@@ -304,6 +306,40 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					if (collection.collectionType === 'scrollable/highlights') {
 						// Highlights are rendered in the Masthead component
 						return null;
+					}
+
+					if (collection.displayName === 'highlights') {
+						return (
+							<ContainerOverrides
+								key={ophanName}
+								containerPalette={collection.containerPalette}
+							>
+								<Section
+									fullWidth={true}
+									padSides={false}
+									showTopBorder={false}
+									showSideBorders={false}
+									ophanComponentLink={ophanComponentLink}
+									ophanComponentName={ophanName}
+									containerName={collection.collectionType}
+									hasPageSkin={hasPageSkin}
+									shouldCenter={false}
+								>
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
+										<UsEoy2024Wrapper />
+										{/*<StickyLiveblogAskWrapper*/}
+										{/*	referrerUrl={'url'}*/}
+										{/*	shouldHideReaderRevenueOnArticle={*/}
+										{/*		false*/}
+										{/*	}*/}
+										{/*/>*/}
+									</Island>
+								</Section>
+							</ContainerOverrides>
+						);
 					}
 
 					if (collection.collectionType === 'fixed/thrasher') {

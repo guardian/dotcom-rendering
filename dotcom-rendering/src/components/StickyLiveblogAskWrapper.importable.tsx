@@ -167,6 +167,7 @@ const whatAmI = 'sticky-liveblog-ask';
 export const StickyLiveblogAskWrapper: ReactComponent<
 	StickyLiveblogAskWrapperProps
 > = ({ referrerUrl, shouldHideReaderRevenueOnArticle }) => {
+	console.log('StickyLiveblogAskWrapper');
 	const { renderingTarget } = useConfig();
 	const countryCode = useCountryCode(whatAmI);
 	const pageViewId = usePageViewId(renderingTarget);
@@ -177,6 +178,7 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 	const isSignedIn = useIsSignedIn();
 
 	useEffect(() => {
+		console.log('effect');
 		if (isSignedIn !== 'Pending') {
 			setShowSupportMessaging(
 				shouldHideSupportMessaging(isSignedIn) === false,

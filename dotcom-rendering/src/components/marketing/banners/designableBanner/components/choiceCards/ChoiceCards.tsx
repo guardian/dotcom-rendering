@@ -104,6 +104,7 @@ export const ChoiceCards: ReactComponent<ChoiceCardProps> = ({
 	cssCtaOverides,
 	onCtaClick,
 }: ChoiceCardProps) => {
+	console.log('cssCtaOverides', cssCtaOverides);
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
 		threshold: 0,
