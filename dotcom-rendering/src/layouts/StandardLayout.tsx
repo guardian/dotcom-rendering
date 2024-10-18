@@ -709,7 +709,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											<AffiliateDisclaimer />
 										)}
 									</div>
-
 									{isWeb && (
 										<div css={usCardStyles}>
 											<Hide until="leftCol">
