@@ -1509,7 +1509,7 @@ export const WithNoGap = () => {
 	);
 };
 
-export const WithASmallGap = () => {
+export const WithATinyGap = () => {
 	return (
 		<>
 			<CardWrapper>
@@ -1533,6 +1533,30 @@ export const WithASmallGap = () => {
 	);
 };
 
+export const WithASmallGap = () => {
+	return (
+		<>
+			<CardWrapper>
+				<div
+					css={css`
+						width: 280px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						imagePositionOnDesktop="left"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Comment,
+							theme: Pillar.Opinion,
+						}}
+					/>
+				</div>
+			</CardWrapper>
+		</>
+	);
+};
+
 export const WithAMediumGap = () => {
 	return (
 		<>
@@ -1544,6 +1568,7 @@ export const WithAMediumGap = () => {
 				>
 					<Card
 						{...basicCardProps}
+						containerType={'scrollable/small'}
 						imagePositionOnDesktop="left"
 						format={{
 							display: ArticleDisplay.Standard,

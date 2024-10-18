@@ -6,7 +6,7 @@ import type { ImagePositionType } from './ImageWrapper';
 
 const padding = 20;
 
-export type GapSize = 'none' | 'small' | 'medium' | 'large';
+export type GapSize = 'none' | 'tiny' | 'small' | 'medium' | 'large';
 
 type Props = {
 	children: React.ReactNode;
@@ -103,10 +103,12 @@ const decideGap = (gapSize: GapSize) => {
 	switch (gapSize) {
 		case 'none':
 			return `0`;
-		case 'small':
+		case 'tiny':
 			return `${space[1]}px`;
-		case 'medium':
+		case 'small':
 			return `${space[2]}px`;
+		case 'medium':
+			return '10px';
 		case 'large':
 			return `${space[5]}px`;
 	}
@@ -120,7 +122,7 @@ export const CardLayout = ({
 	minWidthInPixels,
 	imageType,
 	containerType,
-	gapSize = 'medium',
+	gapSize = 'small',
 }: Props) => (
 	<div
 		css={[
