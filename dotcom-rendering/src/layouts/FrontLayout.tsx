@@ -307,7 +307,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						return null;
 					}
 
-					if (collection.displayName === 'US end-of-year 2024') {
+					if (
+						collection.displayName === 'US end-of-year 2024' &&
+						pageId.toLowerCase() === 'us'
+					) {
 						return (
 							<ContainerOverrides
 								key={ophanName}
