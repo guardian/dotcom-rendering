@@ -29,7 +29,9 @@ const roleCss = (isDatawrapperGraphic: boolean) => {
 			${isDatawrapperGraphic
 				? `border-bottom: 1px solid ${themePalette(
 						'--branding-border',
-				  )};`
+				  )};
+                  padding-bottom: ${space[4]}px;
+				`
 				: ''}
 
 			${from.tablet} {
@@ -55,7 +57,9 @@ const roleCss = (isDatawrapperGraphic: boolean) => {
 			${isDatawrapperGraphic
 				? `border-bottom: 1px solid ${themePalette(
 						'--branding-border',
-				  )};`
+				  )};
+                  padding-bottom: ${space[4]}px;
+				`
 				: ''}
 
 			${until.tablet} {
@@ -91,7 +95,9 @@ const roleCss = (isDatawrapperGraphic: boolean) => {
 			${isDatawrapperGraphic
 				? `border-bottom: 1px solid ${themePalette(
 						'--branding-border',
-				  )};`
+				  )};
+                  padding-bottom: ${space[4]}px;
+				`
 				: ''}
 
 			${from.leftCol} {
