@@ -114,7 +114,7 @@ const wrapperStyle = ({
 	flex-direction: column;
 	${isDatawrapperGraphic
 		? `
-	border-top: 1px solid #dcdcdc;
+	border-top: 1px solid ${themePalette('--branding-border')};
 	padding-top: 8px;
 	`
 		: ''}
