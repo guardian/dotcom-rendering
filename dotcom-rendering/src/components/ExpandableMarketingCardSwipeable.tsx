@@ -3,11 +3,15 @@ import { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { ExpandableMarketingCard } from './ExpandableMarketingCard';
 
-// The length of the swipe left in px on the x-axis in pixels necesary to close the banner
+// The length of the swipe left on the x-axis in pixels necesary to close the banner
 const THRESHOLD = 20; // px
 
 const isLeftSwipe = (thisXCoord: number, prevXCoord: number | null) => {
-	return prevXCoord !== null && thisXCoord + THRESHOLD < prevXCoord;
+	if (prevXCoord === null) {
+		return false;
+	}
+
+	return thisXCoord + THRESHOLD < prevXCoord;
 };
 
 const isViewportBelowTopOfBody = (topOfBody: Element) =>
@@ -31,6 +35,8 @@ const stickyContainerStyles = css`
 	position: sticky;
 	top: 0;
 	${getZIndex('expandableMarketingCardOverlay')};
+
+	/* The component slides in from the left-hand side */
 	animation: slidein 2.4s linear;
 
 	@keyframes slidein {
@@ -58,6 +64,10 @@ const isClick = (
 
 	if (lastUpXCoord === null || lastUpYCoord === null) return false;
 
+	/**
+	 * Allow a 5px margin of error to identify a click. We want to
+	 * err on the side of expanding the banner if it is touched.
+	 */
 	return (
 		Math.abs(lastUpXCoord - lastDownXCoord) < 5 &&
 		Math.abs(lastUpYCoord - lastDownYCoord) < 5
@@ -66,7 +76,7 @@ const isClick = (
 
 /**
  * Provides a swipeable wrapper around the ExpandableMarketingCard component.
- * This component can be dismissed by swiping left.
+ * This component can be dismissed by swiping it to the left.
  */
 export const ExpandableMarketingCardSwipeable = ({
 	guardianBaseURL,
