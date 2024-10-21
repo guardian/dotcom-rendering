@@ -122,7 +122,7 @@ const tickerSettings = {
 
 const getTickerData = async (): Promise<TickerData | undefined> => {
 	const data = await fetch(
-		'https://support.code.dev-theguardian.com/ticker/US.json',
+		'https://support.theguardian.com/ticker/US.json',
 	).then((response) => response.json());
 
 	if (isObject(data)) {
