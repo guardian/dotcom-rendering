@@ -6,6 +6,7 @@ import {
 	headlineBold20,
 	neutral,
 	space,
+	textSans14,
 	textSans15,
 	textSansBold12,
 	textSansBold14,
@@ -110,13 +111,19 @@ const headingStyles = css`
 	justify-content: space-between;
 
 	${headlineBold17};
-	${from.leftCol} {
+	${from.wide} {
 		${headlineBold20};
 	}
 `;
 
 const kickerStyles = css`
 	${textSans15};
+	${from.leftCol} {
+		${textSans14};
+	}
+	${from.wide} {
+		${textSans15};
+	}
 `;
 
 const arrowStyles = css`
@@ -156,16 +163,21 @@ const sectionStyles = css`
 	gap: ${space[3]}px;
 	border-top: 1px solid ${neutral[100]};
 	padding-top: ${space[2]}px;
+`;
 
-	h3 {
-		${headlineBold17};
-	}
+const subheadingStyles = css`
+	${headlineBold17};
+`;
 
-	p {
-		${textSans15}
-		margin-right: ${space[4]}px;
-		z-index: 1;
-	}
+const paragraphStyles = css`
+	${textSans15}
+	margin-right: ${space[4]}px;
+	z-index: 1;
+`;
+
+const ctaCalloutStyles = css`
+	${textSansBold14};
+	z-index: 1;
 `;
 
 const imageTopStyles = css`
@@ -259,37 +271,45 @@ export const ExpandableMarketingCard = ({
 							</section>
 							<div css={detailsStyles}>
 								<section css={sectionStyles}>
-									<h3>We’re independent</h3>
-									<p>
+									<h3 css={subheadingStyles}>
+										We’re independent
+									</h3>
+									<p css={paragraphStyles}>
 										With no billionaire owner or
 										shareholders, our journalism is funded
 										by readers
 									</p>
 								</section>
 								<section css={sectionStyles}>
-									<h3>We’re open</h3>
-									<p>
+									<h3 css={subheadingStyles}>We’re open</h3>
+									<p css={paragraphStyles}>
 										With misinformation threatening
 										democracy, we keep our fact-based news
 										paywall-free
 									</p>
 								</section>
 								<section css={sectionStyles}>
-									<h3>We’re global</h3>
-									<p>
+									<h3 css={subheadingStyles}>We’re global</h3>
+									<p css={paragraphStyles}>
 										With 200 years of history and staff
 										across America and the world, we offer
 										an outsider perspective on US news
+									</p>
+								</section>
+								<section css={sectionStyles}>
+									<p css={ctaCalloutStyles}>
+										Sign up for Guardian Headlines US
+										edition
 									</p>
 								</section>
 								<LinkButton
 									data-link-name="us-expandable-marketing-card cta-click"
 									priority="tertiary"
 									size="xsmall"
-									href={`${guardianBaseURL}/email-newsletters`}
+									href={`${guardianBaseURL}/info/2015/dec/08/daily-email-us`}
 									cssOverrides={buttonStyles}
 								>
-									View newsletters
+									Newsletter sign up
 								</LinkButton>
 							</div>
 						</>
