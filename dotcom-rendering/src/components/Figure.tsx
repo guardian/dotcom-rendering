@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
+import { palette as themePalette } from '../palette';
 import type { FEElement, RoleType } from '../types/content';
 
 type Props = {
@@ -25,6 +26,12 @@ const roleCss = (isDatawrapperGraphic: boolean) => {
 			clear: left;
 			margin-top: ${space[3]}px;
 			margin-bottom: ${isDatawrapperGraphic ? space[5] : space[3]}px;
+			${isDatawrapperGraphic
+				? `border-bottom: 1px solid ${themePalette(
+						'--branding-border',
+				  )};`
+				: ''}
+
 			${from.tablet} {
 				position: relative;
 				float: left;
@@ -45,6 +52,12 @@ const roleCss = (isDatawrapperGraphic: boolean) => {
 		immersive: css`
 			margin-top: ${space[3]}px;
 			margin-bottom: ${space[3]}px;
+			${isDatawrapperGraphic
+				? `border-bottom: 1px solid ${themePalette(
+						'--branding-border',
+				  )};`
+				: ''}
+
 			${until.tablet} {
 				margin-left: -20px;
 				margin-right: -20px;
@@ -75,6 +88,12 @@ const roleCss = (isDatawrapperGraphic: boolean) => {
 			margin-top: ${space[isDatawrapperGraphic ? 8 : 3]}px;
 			margin-bottom: ${space[isDatawrapperGraphic ? 8 : 3]}px;
 			position: relative;
+			${isDatawrapperGraphic
+				? `border-bottom: 1px solid ${themePalette(
+						'--branding-border',
+				  )};`
+				: ''}
+
 			${from.leftCol} {
 				margin-left: -160px;
 			}
