@@ -307,8 +307,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						return null;
 					}
 
-					// TODO - proper name
-					if (collection.displayName === 'highlights') {
+					if (collection.displayName === 'US end-of-year 2024') {
 						return (
 							<ContainerOverrides
 								key={ophanName}
