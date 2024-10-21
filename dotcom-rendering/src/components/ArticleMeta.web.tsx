@@ -380,7 +380,7 @@ export const ArticleMeta = ({
 							</MetaAvatarContainer>
 						)}
 						<div>
-							{!!isAudio && podcastTag && (
+							{isAudio && podcastTag && (
 								<PodcastMeta
 									image={podcastTag.image}
 									spotifyUrl={podcastTag.spotifyUrl}

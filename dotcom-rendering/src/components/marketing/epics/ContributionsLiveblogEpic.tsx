@@ -36,15 +36,15 @@ import { ContributionsEpicCtasContainer } from './ctas/ContributionsEpicCtasCont
 // Hard-coded AB TEST - picking up ab test name and variant name from the tracking object
 // then applying a different colour if it matches, or the default colour if it doesn't.
 const getBackgroundColour = (isInTestVariant: boolean) => {
-	return isInTestVariant ? palette.brand[800] : palette.neutral[100];
+	return isInTestVariant ? '#E2E3BF' : palette.neutral[100];
 };
 
 const getHeadingBackgroundColour = (isInTestVariant: boolean) => {
-	return isInTestVariant ? palette.brand[400] : palette.brandAlt[400];
+	return isInTestVariant ? '#051D32' : palette.brandAlt[400];
 };
 
 const getHeadingColour = (isInTestVariant: boolean) => {
-	return isInTestVariant ? palette.neutral[100] : palette.neutral[7];
+	return isInTestVariant ? '#FFFFFF' : palette.neutral[7];
 };
 
 const container = (tracking: Tracking, isInTestVariant: boolean) => css`
@@ -109,10 +109,10 @@ const tickerContainer = css`
 `;
 
 const defaultTickerStylingSettings: TickerSettings['tickerStylingSettings'] = {
-	filledProgressColour: '#5056F5',
-	progressBarBackgroundColour: 'rgba(80, 86, 245, 0.35)',
+	filledProgressColour: '#C41C1C',
+	progressBarBackgroundColour: '#D9A78E',
 	headlineColour: '#000000',
-	totalColour: '#5056F5',
+	totalColour: '#C41C1C',
 	goalColour: '#000000',
 };
 
@@ -249,6 +249,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 						onReminderOpen={onReminderOpen}
 						fetchEmail={fetchEmail}
 						submitComponentEvent={submitComponentEvent}
+						isColourInTestVariant={isColourInTestVariant}
 					/>
 				)}
 			</section>

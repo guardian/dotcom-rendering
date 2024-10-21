@@ -1,10 +1,8 @@
-import { mockRESTCalls } from './mockRESTCalls';
+import { jestMockFetch } from './mockRESTCallsInJest';
 import {
 	requestMultipleSignUps,
 	requestSingleSignUp,
 } from './newsletter-sign-up-requests';
-
-const fetchMock = mockRESTCalls();
 
 const FAKE_WINDOW = {
 	location: {
@@ -49,6 +47,7 @@ describe('requestMultipleSignUps', () => {
 
 	beforeEach(() => {
 		windowSpy = jest.spyOn(window, 'window', 'get');
+		jestMockFetch();
 	});
 
 	afterEach(() => {
@@ -65,10 +64,10 @@ describe('requestMultipleSignUps', () => {
 			TEST_NEWSLETTER_IDS,
 			TEST_RECAPTCHA_TOKEN,
 		);
-		const [url, requestInit] = fetchMock.lastCall() ?? [
-			undefined,
-			undefined,
-		];
+		const [url, requestInit]: [string, RequestInit | undefined] = (
+			global.fetch as jest.Mock
+		).mock.calls[0];
+
 		const method = requestInit?.method;
 		const headers = (requestInit?.headers ?? {}) as Record<string, unknown>;
 
@@ -90,7 +89,10 @@ describe('requestMultipleSignUps', () => {
 			TEST_NEWSLETTER_IDS,
 			TEST_RECAPTCHA_TOKEN,
 		);
-		const [, requestInit] = fetchMock.lastCall() ?? [undefined, undefined];
+
+		const [, requestInit]: [string, RequestInit | undefined] = (
+			global.fetch as jest.Mock
+		).mock.calls[0];
 
 		const decodedEntries = decodeURIComponent(
 			requestInit?.body?.toString() ?? '',
@@ -122,7 +124,9 @@ describe('requestMultipleSignUps', () => {
 			TEST_NEWSLETTER_IDS,
 			TEST_RECAPTCHA_TOKEN,
 		);
-		const [, requestInit] = fetchMock.lastCall() ?? [undefined, undefined];
+		const [, requestInit]: [string, RequestInit | undefined] = (
+			global.fetch as jest.Mock
+		).mock.calls[0];
 
 		const decodedBody = decodeURIComponent(
 			requestInit?.body?.toString() ?? '',
@@ -138,6 +142,7 @@ describe('requestSingleSignUp', () => {
 
 	beforeEach(() => {
 		windowSpy = jest.spyOn(window, 'window', 'get');
+		jestMockFetch();
 	});
 
 	afterEach(() => {
@@ -154,10 +159,9 @@ describe('requestSingleSignUp', () => {
 			TEST_NEWSLETTER_IDS[0],
 			TEST_RECAPTCHA_TOKEN,
 		);
-		const [url, requestInit] = fetchMock.lastCall() ?? [
-			undefined,
-			undefined,
-		];
+		const [url, requestInit]: [string, RequestInit | undefined] = (
+			global.fetch as jest.Mock
+		).mock.calls[0];
 		const method = requestInit?.method;
 		const headers = (requestInit?.headers ?? {}) as Record<string, unknown>;
 
@@ -177,7 +181,10 @@ describe('requestSingleSignUp', () => {
 			TEST_NEWSLETTER_IDS[0],
 			TEST_RECAPTCHA_TOKEN,
 		);
-		const [, requestInit] = fetchMock.lastCall() ?? [undefined, undefined];
+
+		const [, requestInit]: [string, RequestInit | undefined] = (
+			global.fetch as jest.Mock
+		).mock.calls[0];
 
 		const decodedEntries = decodeURIComponent(
 			requestInit?.body?.toString() ?? '',
@@ -206,7 +213,9 @@ describe('requestSingleSignUp', () => {
 			TEST_NEWSLETTER_IDS[0],
 			TEST_RECAPTCHA_TOKEN,
 		);
-		const [, requestInit] = fetchMock.lastCall() ?? [undefined, undefined];
+		const [, requestInit]: [string, RequestInit | undefined] = (
+			global.fetch as jest.Mock
+		).mock.calls[0];
 
 		const decodedBody = decodeURIComponent(
 			requestInit?.body?.toString() ?? '',

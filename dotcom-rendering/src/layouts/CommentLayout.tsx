@@ -600,6 +600,24 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 							</div>
 						</GridItem>
 						<GridItem area="body">
+							{isWeb && (
+								<Hide when="above" breakpoint="leftCol">
+									<Island
+										priority="enhancement"
+										/**
+										 * We display the card immediately if the viewport is below the top of
+										 * the article body, so we must use "idle" instead of "visible".
+										 */
+										defer={{ until: 'idle' }}
+									>
+										<ExpandableMarketingCardWrapper
+											guardianBaseURL={
+												article.guardianBaseURL
+											}
+										/>
+									</Island>
+								</Hide>
+							)}
 							<ArticleContainer format={format}>
 								<div css={maxWidth}>
 									<ArticleBody

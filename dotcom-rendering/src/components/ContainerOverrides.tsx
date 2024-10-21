@@ -1050,6 +1050,28 @@ const carouselArrowBackgroundHover: ContainerFunction = (containerPalette) => {
 	}
 };
 
+const carouselChevronLight: ContainerFunction = (containerPalette) =>
+	cardHeadlineLight(containerPalette);
+const carouselChevronDark: ContainerFunction = (containerPalette) =>
+	cardHeadlineDark(containerPalette);
+
+const carouselChevronBorderLight: ContainerFunction = (containerPalette) =>
+	transparentColour(cardHeadlineLight(containerPalette), 0.2);
+const carouselChevronBorderDark: ContainerFunction = (containerPalette) =>
+	transparentColour(cardHeadlineDark(containerPalette), 0.4);
+
+const carouselChevronDisabledLight: ContainerFunction = (containerPalette) =>
+	transparentColour(cardHeadlineLight(containerPalette), 0.2);
+const carouselChevronDisabledDark: ContainerFunction = (containerPalette) =>
+	transparentColour(cardHeadlineDark(containerPalette), 0.4);
+
+const carouselChevronBorderDisabledLight: ContainerFunction = (
+	containerPalette,
+) => transparentColour(cardHeadlineLight(containerPalette), 0.2);
+const carouselChevronBorderDisabledDark: ContainerFunction = (
+	containerPalette,
+) => transparentColour(cardHeadlineDark(containerPalette), 0.4);
+
 type ColourName = Parameters<typeof palette>[0];
 
 type ContainerFunction = (containerPalette: DCRContainerPalette) => string;
@@ -1162,6 +1184,22 @@ const containerColours = {
 	'--carousel-arrow-background-hover': {
 		light: carouselArrowBackgroundHover,
 		dark: carouselArrowBackgroundHover,
+	},
+	'--carousel-chevron': {
+		light: carouselChevronLight,
+		dark: carouselChevronDark,
+	},
+	'--carousel-chevron-border': {
+		light: carouselChevronBorderLight,
+		dark: carouselChevronBorderDark,
+	},
+	'--carousel-chevron-border-disabled': {
+		light: carouselChevronBorderDisabledLight,
+		dark: carouselChevronBorderDisabledDark,
+	},
+	'--carousel-chevron-disabled': {
+		light: carouselChevronDisabledLight,
+		dark: carouselChevronDisabledDark,
 	},
 	'--section-border': {
 		light: sectionBorderLight,
