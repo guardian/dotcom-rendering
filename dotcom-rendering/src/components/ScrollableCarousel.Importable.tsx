@@ -3,8 +3,8 @@ import {
 	from,
 	headlineMedium24Object,
 	space,
-	until,
 } from '@guardian/source/foundations';
+import type { ThemeButton } from '@guardian/source/react-components';
 import {
 	Button,
 	Hide,
@@ -13,20 +13,10 @@ import {
 } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
 import { palette } from '../palette';
-import type {
-	DCRContainerPalette,
-	DCRContainerType,
-	DCRFrontCard,
-} from '../types/front';
-import { FrontCard } from './FrontCard';
 
 type Props = {
-	trails: DCRFrontCard[];
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-	absoluteServerTimes?: boolean;
-	imageLoading: 'lazy' | 'eager';
-	containerType: DCRContainerType;
+	children: React.ReactNode;
+	carouselLength: number;
 };
 
 /**
@@ -42,12 +32,12 @@ const titlePreset = headlineMedium24Object;
 const gridColumnWidth = '60px';
 const gridGap = '20px';
 
-const themeButton = {
+const themeButton: Partial<ThemeButton> = {
 	borderTertiary: palette('--carousel-chevron-border'),
 	textTertiary: palette('--carousel-chevron'),
 };
 
-const themeButtonDisabled = {
+const themeButtonDisabled: Partial<ThemeButton> = {
 	borderTertiary: palette('--carousel-chevron-border-disabled'),
 	textTertiary: palette('--carousel-chevron-disabled'),
 };
@@ -58,53 +48,26 @@ const carouselContainerStyles = css`
 	${from.wide} {
 		flex-direction: row;
 	}
-`;
 
-const carouselStyles = css`
-	display: grid;
-	grid-auto-columns: 1fr;
-	grid-auto-flow: column;
-	overflow-x: auto;
-	overflow-y: hidden;
-	scroll-snap-type: x mandatory;
-	scroll-behavior: smooth;
-	overscroll-behavior-x: contain;
-	overscroll-behavior-y: auto;
-	scroll-padding-left: 10px;
+	/* Extend carousel into outer margins on mobile */
+	margin-left: -10px;
+	margin-right: -10px;
+	${from.mobileLandscape} {
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+
 	/**
-	* Hide scrollbars
-	* See: https://stackoverflow.com/a/38994837
-	*/
-	::-webkit-scrollbar {
-		display: none; /* Safari and Chrome */
-	}
-	scrollbar-width: none; /* Firefox */
-	position: relative;
-`;
-
-const itemStyles = css`
-	scroll-snap-align: start;
-	grid-area: span 1;
-	position: relative;
-	margin: ${space[3]}px 10px;
-`;
-
-const verticalLineStyles = css`
-	:not(:last-child)::after {
-		content: '';
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		right: -10px;
-		width: 1px;
-		background-color: ${palette('--card-border-top')};
-		transform: translateX(-50%);
-	}
-`;
-
-const buttonContainerStyles = css`
-	margin-left: auto;
+	 * From tablet, pull container up so navigation buttons align with title.
+	 * The margin is calculated from the front section title font size and line
+	 * height, and the default container spacing.
+	 *
+	 * From wide, the navigation buttons are pulled out of the main content area
+	 * into the right-hand column.
+	 */
 	${from.tablet} {
+		margin-left: 10px;
+		margin-right: 10px;
 		margin-top: calc(
 			(-${titlePreset.fontSize} * ${titlePreset.lineHeight}) -
 				${space[3]}px
@@ -112,10 +75,54 @@ const buttonContainerStyles = css`
 	}
 	${from.leftCol} {
 		margin-top: 0;
+		margin-left: -10px;
 	}
 	${from.wide} {
-		margin-left: ${space[2]}px;
 		margin-right: calc(${space[2]}px - ${gridColumnWidth} - ${gridGap});
+	}
+`;
+
+const carouselStyles = css`
+	display: grid;
+	grid-auto-columns: 1fr;
+	grid-auto-flow: column;
+	gap: 20px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+	overscroll-behavior-x: contain;
+	overscroll-behavior-y: auto;
+	/**
+	 * Hide scrollbars
+	 * See: https://stackoverflow.com/a/38994837
+	 */
+	::-webkit-scrollbar {
+		display: none; /* Safari and Chrome */
+	}
+	scrollbar-width: none; /* Firefox */
+	position: relative;
+
+	padding-left: 10px;
+	scroll-padding-left: 10px;
+	${from.mobileLandscape} {
+		padding-left: 20px;
+		scroll-padding-left: 20px;
+	}
+	${from.tablet} {
+		padding-left: 0px;
+		scroll-padding-left: 0px;
+	}
+	${from.leftCol} {
+		padding-left: 20px;
+		scroll-padding-left: 20px;
+	}
+`;
+
+const buttonContainerStyles = css`
+	margin-left: auto;
+	${from.wide} {
+		margin-left: ${space[1]}px;
 	}
 `;
 
@@ -134,36 +141,25 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 	const peepingCardWidth = space[8];
 
 	return css`
-		${until.tablet} {
-			grid-template-columns: repeat(
-				${totalCards},
-				calc((100% - ${peepingCardWidth}px))
-			);
-		}
-
+		grid-template-columns: repeat(
+			${totalCards},
+			calc((100% - ${peepingCardWidth}px - 20px))
+		);
 		${from.tablet} {
-			grid-template-columns: repeat(${totalCards}, 50%);
+			grid-template-columns: repeat(${totalCards}, calc(50% - 10px));
 		}
 	`;
 };
 
 /**
- * A container used on fronts to display a carousel of small cards
+ * A component used in the carousel fronts containers (e.g. small/medium/feature)
  *
- * ## Why does this need to be an Island?
+ *  ## Why does this need to be an Island?
  *
  * The carouselling arrow buttons need to run javascript.
  */
-export const ScrollableSmall = ({
-	trails,
-	containerPalette,
-	containerType,
-	absoluteServerTimes,
-	imageLoading,
-	showAge,
-}: Props) => {
+export const ScrollableCarousel = ({ children, carouselLength }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
-	const carouselLength = trails.length;
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
 	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
 
@@ -226,38 +222,8 @@ export const ScrollableSmall = ({
 				]}
 				data-heatphan-type="carousel"
 			>
-				{trails.map((trail) => {
-					return (
-						<li
-							key={trail.url}
-							css={[itemStyles, verticalLineStyles]}
-						>
-							<FrontCard
-								trail={trail}
-								imageLoading={imageLoading}
-								absoluteServerTimes={!!absoluteServerTimes}
-								containerPalette={containerPalette}
-								containerType={containerType}
-								showAge={!!showAge}
-								headlineSize="small"
-								headlineSizeOnMobile="small"
-								headlineSizeOnTablet="small"
-								imagePositionOnDesktop="left"
-								imagePositionOnMobile="left"
-								imageSize="small" // TODO - needs fixed width images
-								trailText={undefined} // unsupported
-								supportingContent={undefined} // unsupported
-								aspectRatio="5:4"
-								kickerText={trail.kickerText}
-								showLivePlayable={trail.showLivePlayable}
-								showTopBarDesktop={false}
-								showTopBarMobile={false}
-							/>
-						</li>
-					);
-				})}
+				{children}
 			</ol>
-
 			<div css={buttonContainerStyles}>
 				<Hide until={'tablet'}>
 					{carouselLength > 2 && (

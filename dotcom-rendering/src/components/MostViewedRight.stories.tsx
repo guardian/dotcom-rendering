@@ -1,10 +1,10 @@
 import type { StoryObj } from '@storybook/react';
-import fetchMock from 'fetch-mock';
 import {
 	splitTheme,
 	type StoryProps,
 } from '../../.storybook/decorators/splitThemeDecorator';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { customMockFetch } from '../lib/mockRESTCalls';
 import { ArticleContainer } from './ArticleContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
@@ -28,14 +28,18 @@ export default {
 	decorators: [splitTheme([standardFormat], { orientation: 'vertical' })],
 };
 
+const mockMostViewedRequestFetch = customMockFetch([
+	{
+		mockedMethod: 'GET',
+		mockedUrl:
+			'https://api.nextgen.guardianapps.co.uk/most-read-with-deeply-read.json',
+		mockedStatus: 200,
+		mockedBody: responseWithTwoTabs,
+	},
+]);
+
 export const defaultStory: StoryObj = ({ format }: StoryProps) => {
-	fetchMock
-		.restore()
-		.getOnce('*', {
-			status: 200,
-			body: responseWithTwoTabs,
-		})
-		.spy('end:.hot-update.json');
+	global.fetch = mockMostViewedRequestFetch;
 
 	return (
 		<Section fullWidth={true}>
@@ -63,13 +67,7 @@ export const defaultStory: StoryObj = ({ format }: StoryProps) => {
 defaultStory.storyName = 'default';
 
 export const limitItemsStory: StoryObj = ({ format }: StoryProps) => {
-	fetchMock
-		.restore()
-		.getOnce('*', {
-			status: 200,
-			body: responseWithTwoTabs,
-		})
-		.spy('end:.hot-update.json');
+	global.fetch = mockMostViewedRequestFetch;
 
 	return (
 		<Section fullWidth={true}>
@@ -97,13 +95,7 @@ export const limitItemsStory: StoryObj = ({ format }: StoryProps) => {
 limitItemsStory.storyName = 'with a limit of 3 items';
 
 export const outsideContextStory: StoryObj = () => {
-	fetchMock
-		.restore()
-		.getOnce('*', {
-			status: 200,
-			body: responseWithTwoTabs,
-		})
-		.spy('end:.hot-update.json');
+	global.fetch = mockMostViewedRequestFetch;
 
 	return (
 		<Section fullWidth={true}>

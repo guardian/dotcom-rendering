@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/highlights-trails';
+import type { DCRContainerPalette } from '../types/front';
 import { FrontSection } from './FrontSection';
-import { ScrollableSmall } from './ScrollableSmall.importable';
+import { ScrollableSmall } from './ScrollableSmall';
 
 export default {
 	title: 'Components/ScrollableSmall',
@@ -31,5 +32,43 @@ export const WithFrontSection = {
 		>
 			<ScrollableSmall {...args} />
 		</FrontSection>
+	),
+} satisfies Story;
+
+const containerPalettes = [
+	'InvestigationPalette',
+	'LongRunningPalette',
+	'SombrePalette',
+	'BreakingPalette',
+	'EventPalette',
+	'EventAltPalette',
+	'LongRunningAltPalette',
+	'SombreAltPalette',
+	'SpecialReportAltPalette',
+	'Branded',
+] as const satisfies readonly Omit<
+	DCRContainerPalette,
+	'MediaPalette' | 'PodcastPalette'
+>[];
+
+export const WithSpecialPaletteVariations = {
+	render: (args) => (
+		<>
+			{containerPalettes.map((containerPalette) => (
+				<FrontSection
+					title="Scrollable small"
+					discussionApiUrl={discussionApiUrl}
+					editionId={'UK'}
+					showTopBorder={false}
+					key={containerPalette}
+					containerPalette={containerPalette}
+				>
+					<ScrollableSmall
+						{...args}
+						containerPalette={containerPalette}
+					/>
+				</FrontSection>
+			))}
+		</>
 	),
 } satisfies Story;

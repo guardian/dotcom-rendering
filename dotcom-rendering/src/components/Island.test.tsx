@@ -4,7 +4,7 @@
 
 import type { PropsWithChildren } from 'react';
 import { renderToString } from 'react-dom/server';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { AdPortals } from './AdPortals.importable';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { AppsEpic } from './AppsEpic.importable';
@@ -237,11 +237,6 @@ describe('Island: server-side rendering', () => {
 					ajaxUrl=""
 					pageId=""
 					filterKeyEvents={false}
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
 					enhanceTweetsSwitch={false}
 					onFirstPage={true}
 					webURL=""

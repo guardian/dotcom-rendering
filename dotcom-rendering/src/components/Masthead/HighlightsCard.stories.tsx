@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import type { MainMedia } from '../../types/mainMedia';
 import { HighlightsCard } from './HighlightsCard';
 

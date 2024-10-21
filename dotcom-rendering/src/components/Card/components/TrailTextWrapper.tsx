@@ -18,9 +18,10 @@ type Props = {
 	imageType?: CardImageType | undefined;
 	/** By default, trail text is hidden at specific breakpoints. This prop allows consumers to show trails across all breakpoints if set to false */
 	shouldHide?: boolean;
-	/** If the card is a flexible splash card, the trail text will be styled differently */
-	isFlexSplash?: boolean;
 	trailTextSize?: TrailTextSize;
+	/** Optionally overrides the trail text colour */
+	trailTextColour?: string;
+	padTop: boolean;
 };
 
 /**
@@ -55,12 +56,11 @@ const decideVisibilityStyles = (
 const trailTextStyles = css`
 	display: flex;
 	flex-direction: column;
-	color: ${palette('--card-headline-trail-text')};
-	padding: ${space[2]}px 0;
+	padding-bottom: ${space[2]}px;
 `;
 
-const flexibleSplashStyles = css`
-	color: ${palette('--flexible-splash-card-standfirst')};
+const topPadding = css`
+	padding-top: ${space[2]}px;
 `;
 
 const fontStyles = (trailTextSize: TrailTextSize) => css`
@@ -79,13 +79,17 @@ export const TrailTextWrapper = ({
 	imageSize,
 	imageType,
 	shouldHide = true,
-	isFlexSplash = false,
 	trailTextSize = 'regular',
+	trailTextColour = palette('--card-trail-text'),
+	padTop,
 }: Props) => {
 	return (
 		<div
 			css={[
 				trailTextStyles,
+				css`
+					color: ${trailTextColour};
+				`,
 				fontStyles(trailTextSize),
 				shouldHide &&
 					decideVisibilityStyles(
@@ -93,7 +97,7 @@ export const TrailTextWrapper = ({
 						imageSize,
 						imageType,
 					),
-				isFlexSplash && flexibleSplashStyles,
+				padTop && topPadding,
 			]}
 		>
 			{children}

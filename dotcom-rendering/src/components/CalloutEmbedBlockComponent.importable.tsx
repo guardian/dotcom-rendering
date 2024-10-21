@@ -6,8 +6,8 @@ import {
 } from '@guardian/source/foundations';
 import { Button } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
+import type { ArticleFormat } from '../lib/articleFormat';
 import { decidePalette } from '../lib/decidePalette';
-import type { ArticleFormat } from '../lib/format';
 import MinusIcon from '../static/icons/minus.svg';
 import PlusIcon from '../static/icons/plus.svg';
 import type {

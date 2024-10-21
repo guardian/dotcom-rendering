@@ -3,6 +3,7 @@ import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
+	space,
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
@@ -23,6 +24,7 @@ import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
+import { ExpandableMarketingCardWrapper } from '../components/ExpandableMarketingCardWrapper.importable';
 import { Footer } from '../components/Footer';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
@@ -46,14 +48,15 @@ import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import { canRenderAds } from '../lib/canRenderAds';
-import { getContributionsServiceUrl } from '../lib/contributions';
-import { decideTrail } from '../lib/decideTrail';
 import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
-} from '../lib/format';
+} from '../lib/articleFormat';
+import { canRenderAds } from '../lib/canRenderAds';
+import { getContributionsServiceUrl } from '../lib/contributions';
+import { decideTrail } from '../lib/decideTrail';
+import { getZIndex } from '../lib/getZIndex';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -89,7 +92,6 @@ const StandardGrid = ({
 				display: grid;
 				width: 100%;
 				margin-left: 0;
-
 				grid-column-gap: 10px;
 
 				/*
@@ -110,7 +112,6 @@ const StandardGrid = ({
 									'title  border  matchtabs  . right-column'
 									'.      border  headline   . right-column'
 									'.      border  standfirst . right-column'
-									'lines  border  media      . right-column'
 									'meta   border  media      . right-column'
 									'meta   border  body       . right-column'
 									'.      border  .          . right-column';
@@ -120,7 +121,6 @@ const StandardGrid = ({
 								grid-template-areas:
 									'title  border  headline   headline   .'
 									'.      border  disclaimer disclaimer right-column'
-									'lines  border  media      media      right-column'
 									'meta   border  media      media      right-column'
 									'meta   border  standfirst standfirst right-column'
 									'.      border  body       body       right-column'
@@ -130,7 +130,6 @@ const StandardGrid = ({
 								grid-template-areas:
 									'title  border  headline   . right-column'
 									'.      border  standfirst . right-column'
-									'lines  border  media      . right-column'
 									'meta   border  media      . right-column'
 									'meta   border  body       . right-column'
 									'.      border  .          . right-column';
@@ -156,7 +155,6 @@ const StandardGrid = ({
 								'title  border  matchtabs    right-column'
 								'.      border  headline     right-column'
 								'.      border  standfirst   right-column'
-								'lines  border  media        right-column'
 								'meta   border  media        right-column'
 								'meta   border  body         right-column'
 								'.      border  .            right-column';
@@ -166,10 +164,9 @@ const StandardGrid = ({
 							grid-template-areas:
 								'title  border  headline     .'
 								'.      border  disclaimer   right-column'
-								'lines  border  media        right-column'
 								'meta   border  media        right-column'
 								'meta   border  standfirst   right-column'
-								'.      border  body         right-column'
+								'meta   border  body         right-column'
 								'.      border  .            right-column';
 					  `
 					: css`
@@ -177,7 +174,6 @@ const StandardGrid = ({
 								'title  border  headline     right-column'
 								'.      border  standfirst   right-column'
 								'.      border  disclaimer   right-column'
-								'lines  border  media        right-column'
 								'meta   border  media        right-column'
 								'meta   border  body         right-column'
 								'.      border  .            right-column';
@@ -201,7 +197,6 @@ const StandardGrid = ({
 								'headline      right-column'
 								'standfirst    right-column'
 								'media         right-column'
-								'lines         right-column'
 								'meta          right-column'
 								'body          right-column'
 								'.             right-column';
@@ -214,7 +209,6 @@ const StandardGrid = ({
 								'disclaimer    right-column'
 								'media         right-column'
 								'standfirst    right-column'
-								'lines         right-column'
 								'meta          right-column'
 								'body          right-column'
 								'.             right-column';
@@ -226,7 +220,6 @@ const StandardGrid = ({
 								'standfirst    right-column'
 								'disclaimer    right-column'
 								'media         right-column'
-								'lines         right-column'
 								'meta          right-column'
 								'body          right-column'
 								'.             right-column';
@@ -244,7 +237,6 @@ const StandardGrid = ({
 								'headline'
 								'standfirst'
 								'media'
-								'lines'
 								'meta'
 								'body';
 					  `
@@ -256,7 +248,6 @@ const StandardGrid = ({
 								'disclaimer'
 								'media'
 								'standfirst'
-								'lines'
 								'meta'
 								'body';
 					  `
@@ -267,7 +258,6 @@ const StandardGrid = ({
 								'standfirst'
 								'disclaimer'
 								'media'
-								'lines'
 								'meta'
 								'body';
 					  `}
@@ -286,7 +276,6 @@ const StandardGrid = ({
 								'title'
 								'headline'
 								'standfirst'
-								'lines'
 								'meta'
 								'body';
 					  `
@@ -298,7 +287,6 @@ const StandardGrid = ({
 								'disclaimer'
 								'media'
 								'standfirst'
-								'lines'
 								'meta'
 								'body';
 					  `
@@ -309,7 +297,6 @@ const StandardGrid = ({
 								'headline'
 								'standfirst'
 								'disclaimer'
-								'lines'
 								'meta'
 								'body';
 					  `}
@@ -323,6 +310,26 @@ const StandardGrid = ({
 const maxWidth = css`
 	${from.desktop} {
 		max-width: 620px;
+	}
+`;
+
+const usCardStyles = css`
+	align-self: start;
+	position: sticky;
+	top: 0;
+	${getZIndex('expandableMarketingCardOverlay')}
+
+	${from.leftCol} {
+		margin-top: ${space[6]}px;
+		margin-bottom: ${space[9]}px;
+
+		/* To align with rich links - if we move this feature to production, we should remove this and make rich link align with everything instead */
+		margin-left: 1px;
+		margin-right: -1px;
+	}
+
+	${from.wide} {
+		margin-left: 0;
 	}
 `;
 
@@ -596,7 +603,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								standfirst={article.standfirst}
 							/>
 						</GridItem>
-						<GridItem area="lines">
+						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
 									{isWeb &&
@@ -613,8 +620,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									)}
 								</div>
 							</div>
-						</GridItem>
-						<GridItem area="meta" element="aside">
 							{isApps ? (
 								<>
 									<Hide from="leftCol">
@@ -669,39 +674,87 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
+												mainMediaElements={
+													article.mainMediaElements
+												}
 											/>
 										</div>
 									</Hide>
 								</>
 							) : (
-								<div css={maxWidth}>
-									<ArticleMeta
-										branding={branding}
-										format={format}
-										pageId={article.pageId}
-										webTitle={article.webTitle}
-										byline={article.byline}
-										source={article.config.source}
-										tags={article.tags}
-										primaryDateline={
-											article.webPublicationDateDisplay
-										}
-										secondaryDateline={
-											article.webPublicationSecondaryDateDisplay
-										}
-										isCommentable={article.isCommentable}
-										discussionApiUrl={
-											article.config.discussionApiUrl
-										}
-										shortUrlId={article.config.shortUrlId}
-									/>
-									{!!article.affiliateLinksDisclaimer && (
-										<AffiliateDisclaimer />
+								<>
+									<div css={maxWidth}>
+										<ArticleMeta
+											branding={branding}
+											format={format}
+											pageId={article.pageId}
+											webTitle={article.webTitle}
+											byline={article.byline}
+											source={article.config.source}
+											tags={article.tags}
+											primaryDateline={
+												article.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												article.webPublicationSecondaryDateDisplay
+											}
+											isCommentable={
+												article.isCommentable
+											}
+											discussionApiUrl={
+												article.config.discussionApiUrl
+											}
+											shortUrlId={
+												article.config.shortUrlId
+											}
+											mainMediaElements={
+												article.mainMediaElements
+											}
+										/>
+										{!!article.affiliateLinksDisclaimer && (
+											<AffiliateDisclaimer />
+										)}
+									</div>
+									{isWeb && (
+										<div css={usCardStyles}>
+											<Hide until="leftCol">
+												<Island
+													priority="enhancement"
+													defer={{
+														until: 'visible',
+													}}
+												>
+													<ExpandableMarketingCardWrapper
+														guardianBaseURL={
+															article.guardianBaseURL
+														}
+													/>
+												</Island>
+											</Hide>
+										</div>
 									)}
-								</div>
+								</>
 							)}
 						</GridItem>
 						<GridItem area="body">
+							{isWeb && (
+								<Hide from="leftCol">
+									<Island
+										priority="enhancement"
+										/**
+										 * We display the card immediately if the viewport is below the top of
+										 * the article body, so we must use "idle" instead of "visible".
+										 */
+										defer={{ until: 'idle' }}
+									>
+										<ExpandableMarketingCardWrapper
+											guardianBaseURL={
+												article.guardianBaseURL
+											}
+										/>
+									</Island>
+								</Hide>
+							)}
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}

@@ -2,7 +2,7 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
-import type { DCRGroupedTrails } from '../types/front';
+import type { DCRContainerPalette, DCRGroupedTrails } from '../types/front';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { FrontSection } from './FrontSection';
 
@@ -98,3 +98,49 @@ export const Five: Story = {
 		},
 	},
 };
+
+const containerPalettes = [
+	'InvestigationPalette',
+	'LongRunningPalette',
+	'SombrePalette',
+	'BreakingPalette',
+	'EventPalette',
+	'EventAltPalette',
+	'LongRunningAltPalette',
+	'SombreAltPalette',
+	'SpecialReportAltPalette',
+	'Branded',
+] as const satisfies readonly Omit<
+	DCRContainerPalette,
+	'MediaPalette' | 'PodcastPalette'
+>[];
+
+export const WithSpecialPaletteVariations = {
+	name: 'With special palette variations',
+	args: {
+		groupedTrails: {
+			...defaultGroupedTrails,
+			snap: [],
+			standard: trails.slice(0, 5),
+		},
+	},
+	render: (args) => (
+		<>
+			{containerPalettes.map((containerPalette) => (
+				<FrontSection
+					discussionApiUrl={discussionApiUrl}
+					editionId={'UK'}
+					showTopBorder={true}
+					containerPalette={containerPalette}
+					key={containerPalette}
+					title={containerPalette}
+				>
+					<FlexibleSpecial
+						containerPalette={containerPalette}
+						{...args}
+					/>
+				</FrontSection>
+			))}
+		</>
+	),
+} satisfies Story;

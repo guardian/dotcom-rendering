@@ -8,7 +8,7 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { Caption } from './Caption';
 import { Section } from './Section';
 import { StarRating } from './StarRating/StarRating';

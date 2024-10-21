@@ -1,10 +1,10 @@
+import type { DCRContainerPalette } from '../types/front';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
-} from '../lib/format';
-import type { DCRContainerPalette } from '../types/front';
+} from './articleFormat';
 import { cardHasDarkBackground } from './cardHelpers';
 
 describe('cardHasDarkBackground', () => {

@@ -4,8 +4,7 @@
  * https://github.com/guardian/support-dotcom-components/blob/9c3eae7cb0b159db4a1c40679d6b37710b0bb937/packages/modules/src/modules/epics/Button.tsx
  */
 import type { SerializedStyles } from '@emotion/react';
-import { css } from '@emotion/react';
-import { ThemeProvider } from '@emotion/react';
+import { css, ThemeProvider } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
 import {
@@ -32,9 +31,24 @@ const buttonStyles = {
 	borderSecondary: palette.neutral[86],
 };
 
+const buttonStylesForTest = {
+	textPrimary: '#FFFFFF',
+	backgroundPrimary: '#051D32',
+	backgroundPrimaryHover: '#072744',
+	textSecondary: palette.neutral[7],
+	backgroundSecondary: palette.neutral[93],
+	backgroundSecondaryHover: palette.neutral[86],
+	borderSecondary: palette.neutral[86],
+};
+
 const contributionsTheme = {
 	button: buttonStyles,
 	link: buttonStyles,
+};
+
+const contributionsThemeForTest = {
+	button: buttonStylesForTest,
+	link: buttonStylesForTest,
 };
 
 type Url = string;
@@ -53,6 +67,7 @@ type Props = {
 	isTertiary?: boolean;
 	cssOverrides?: SerializedStyles;
 	icon?: React.ReactElement;
+	isColourInTestVariant?: boolean;
 };
 
 // Overrides for tertiary button
@@ -79,6 +94,7 @@ export const EpicButton: ReactComponent<Props> = (allProps: Props) => {
 		isTertiary,
 		cssOverrides,
 		icon,
+		isColourInTestVariant,
 		...props
 	} = allProps;
 
@@ -97,7 +113,13 @@ export const EpicButton: ReactComponent<Props> = (allProps: Props) => {
 		// So we'll map that to 'primary' and apply a CSS override on both of
 		// them so they get the same styles for 'tertiary' priority
 		return (
-			<ThemeProvider theme={contributionsTheme}>
+			<ThemeProvider
+				theme={
+					isColourInTestVariant
+						? contributionsThemeForTest
+						: contributionsTheme
+				}
+			>
 				<LinkButton
 					href={onClickAction}
 					icon={icon ?? <SvgArrowRightStraight />}
@@ -119,7 +141,13 @@ export const EpicButton: ReactComponent<Props> = (allProps: Props) => {
 		);
 	}
 	return (
-		<ThemeProvider theme={contributionsTheme}>
+		<ThemeProvider
+			theme={
+				isColourInTestVariant
+					? contributionsThemeForTest
+					: contributionsTheme
+			}
+		>
 			<DSButton
 				iconSide="right"
 				icon={showArrow ? <SvgArrowRightStraight /> : undefined}

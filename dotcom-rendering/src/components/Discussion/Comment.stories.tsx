@@ -1,11 +1,11 @@
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import type {
 	CommentType,
 	Reader,
 	ReplyType,
 	Staff,
 } from '../../lib/discussion';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/format';
 import { ok } from '../../lib/result';
 import { Comment } from './Comment';
 

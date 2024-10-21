@@ -8,7 +8,7 @@ import {
 	SvgShareWeb,
 } from '@guardian/source/react-components';
 import { useEffect, useMemo, useState } from 'react';
-import { ArticleDesign, type ArticleFormat } from '../lib/format';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { transparentColour } from '../lib/transparentColour';
 import { palette as themePalette } from '../palette';
 

@@ -6,7 +6,7 @@ import {
 	ArticleFormat,
 	ArticleSpecial,
 	Pillar,
-} from '../../src/lib/format';
+} from '../../src/lib/articleFormat';
 import {
 	palette as sourcePalette,
 	space,

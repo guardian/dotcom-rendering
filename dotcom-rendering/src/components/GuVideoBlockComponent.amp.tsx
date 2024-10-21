@@ -1,4 +1,4 @@
-import type { ArticleTheme } from '../lib/format';
+import type { ArticleTheme } from '../lib/articleFormat';
 import type { GuVideoBlockElement } from '../types/content';
 import { Caption } from './Caption.amp';
 

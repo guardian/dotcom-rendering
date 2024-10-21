@@ -1,6 +1,6 @@
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import type { SignedInUser } from '../../lib/discussion';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/format';
 import { ok } from '../../lib/result';
 import { palette as themePalette } from '../../palette';
 import { RecommendationCount } from './RecommendationCount';

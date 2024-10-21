@@ -10,7 +10,7 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import type { RoleType } from '../types/content';
 
 type Props = {

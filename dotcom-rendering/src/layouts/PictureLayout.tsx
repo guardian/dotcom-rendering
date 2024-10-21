@@ -35,11 +35,11 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
-import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -67,7 +67,6 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 				display: grid;
 				width: 100%;
 				margin-left: 0;
-
 				grid-column-gap: 10px;
 
 				/*
@@ -78,15 +77,18 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					Main content
 					Right Column
 
+					Duplicate lines are required to ensure the left column does not have extra vertical space.
 				*/
 				${from.wide} {
 					grid-template-columns: 219px 1px 1020px;
 					grid-template-areas:
 						'title  border  headline'
 						'.      border  standfirst'
-						'lines  border  media'
 						'meta   border  media'
-						'meta   border  submeta';
+						'uscard border  media'
+						'uscard border  submeta'
+						'uscard border  .'
+						'uscard border  .';
 				}
 
 				${until.wide} {
@@ -94,9 +96,11 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'title  border  headline    headline   headline'
 						'.      border  standfirst  standfirst standfirst'
-						'lines  border  media       media      media'
 						'meta   border  media       media      media'
-						'meta   border  submeta     submeta    submeta';
+						'uscard border  media       media      media'
+						'uscard border  submeta     submeta    submeta'
+						'uscard border  .           .          .'
+						'uscard border  .           .          .';
 				}
 
 				/*
@@ -111,7 +115,6 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'title     '
 						'headline  '
-						'lines     '
 						'meta      '
 						'standfirst'
 						'media     '
@@ -125,7 +128,6 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'title'
 						'headline'
-						'lines'
 						'meta'
 						'standfirst'
 						'media'
@@ -138,7 +140,6 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'title'
 						'headline'
-						'lines'
 						'meta'
 						'standfirst'
 						'media'
@@ -449,7 +450,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								/>
 							</div>
 						</GridItem>
-						<GridItem area="lines">
+						<GridItem area="meta" element="aside">
 							<div
 								css={[
 									LeftColLines(displayAvatarUrl),
@@ -464,8 +465,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 									color={themePalette('--straight-lines')}
 								/>
 							</div>
-						</GridItem>
-						<GridItem area="meta" element="aside">
 							<div>
 								{isApps ? (
 									<>

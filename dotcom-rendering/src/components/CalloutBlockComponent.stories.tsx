@@ -1,8 +1,8 @@
 import type { Decorator, Meta, StoryObj } from '@storybook/react';
-import fetchMock from 'fetch-mock';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
 import { calloutCampaign as calloutCampaignV2 } from '../../fixtures/manual/calloutCampaignV2';
+import { customMockFetch } from '../lib/mockRESTCalls';
 import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
 
 const tomorrow = new Date().setDate(new Date().getDate() + 1) / 1000;
@@ -26,31 +26,27 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const goodRequest: Decorator<Story['args']> = (Story) => {
-	fetchMock
-		.restore()
-		.post(
-			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
-			{
-				status: 201,
-				body: null,
-			},
-		)
-		.spy('end:.hot-update.json');
+	global.fetch = customMockFetch([
+		{
+			mockedMethod: 'POST',
+			mockedUrl:
+				'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
+			mockedStatus: 201,
+		},
+	]);
 
 	return <Story />;
 };
 
 const badRequest: Decorator<Story['args']> = (Story) => {
-	fetchMock
-		.restore()
-		.post(
-			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
-			{
-				status: 400,
-				body: null,
-			},
-		)
-		.spy('end:.hot-update.json');
+	global.fetch = customMockFetch([
+		{
+			mockedMethod: 'POST',
+			mockedUrl:
+				'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
+			mockedStatus: 400,
+		},
+	]);
 
 	return <Story />;
 };
@@ -132,6 +128,7 @@ export const MinimalCallout = {
 		},
 	},
 	decorators: [
+		goodRequest,
 		uniqueFormId,
 		(Story) => (
 			<>

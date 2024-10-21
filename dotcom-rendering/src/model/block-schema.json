@@ -427,11 +427,49 @@
                 },
                 "elementId": {
                     "type": "string"
+                },
+                "assets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AudioAsset"
+                    }
                 }
             },
             "required": [
                 "_type",
+                "assets",
                 "elementId"
+            ]
+        },
+        "AudioAsset": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "mimeType": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "object",
+                    "properties": {
+                        "durationMinutes": {
+                            "type": "string"
+                        },
+                        "durationSeconds": {
+                            "type": "string"
+                        },
+                        "explicit": {
+                            "type": "string"
+                        },
+                        "source": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "required": [
+                "url"
             ]
         },
         "BlockquoteBlockElement": {
@@ -1084,7 +1122,6 @@
                 "fields",
                 "index",
                 "mediaType",
-                "mimeType",
                 "url"
             ]
         },

@@ -1,4 +1,4 @@
-import { type ArticleTheme, Pillar } from '../lib/format';
+import { type ArticleTheme, Pillar } from './articleFormat';
 
 export const themeToPillar = (theme?: ArticleTheme): Pillar | undefined => {
 	switch (theme) {

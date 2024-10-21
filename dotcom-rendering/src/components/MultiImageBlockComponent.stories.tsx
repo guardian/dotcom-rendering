@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { MultiImageBlockComponent } from './MultiImageBlockComponent';
 import { fourImages } from './MultiImageBlockComponent.mocks';
 import { Section } from './Section';

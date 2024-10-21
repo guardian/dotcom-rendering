@@ -12,7 +12,7 @@ import {
 import { Hide, Link } from '@guardian/source/react-components';
 import { StarRating } from '@guardian/source-development-kitchen/react-components';
 import { useEffect, useState } from 'react';
-import type { ArticleFormat } from '../lib/format';
+import type { ArticleFormat } from '../lib/articleFormat';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxCaption } from './LightboxCaption';
 import { LightboxLoader } from './LightboxLoader';

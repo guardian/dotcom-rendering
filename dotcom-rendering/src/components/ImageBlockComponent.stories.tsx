@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { Figure } from './Figure';
 import { Flex } from './Flex';
 import { ImageBlockComponent } from './ImageBlockComponent';

@@ -49,10 +49,10 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { StickyLiveblogAskWrapper } from '../components/StickyLiveblogAskWrapper.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
-import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import { getZIndex } from '../lib/getZIndex';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -619,7 +619,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									webTitle={article.webTitle}
 									ajaxUrl={article.config.ajaxUrl}
 									filterKeyEvents={article.filterKeyEvents}
-									format={format}
 									enhanceTweetsSwitch={
 										!!article.config.switches.enhanceTweets
 									}

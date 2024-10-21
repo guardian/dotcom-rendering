@@ -1,55 +1,57 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import type { Meta } from '@storybook/react';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import type { Meta, StoryObj } from '@storybook/react';
+import { allModes } from '../../.storybook/modes';
 import { palette } from '../palette';
-import { BigNumber } from './BigNumber';
+import { BigNumber as BigNumberComponent } from './BigNumber';
 
-const meta: Meta<typeof BigNumber> = {
-	title: 'components/BigNumber',
-	component: BigNumber,
-};
+const meta = {
+	title: 'Components/BigNumber',
+	component: BigNumberComponent,
+	parameters: {
+		chromatic: {
+			modes: {
+				horizontal: allModes.splitHorizontal,
+			},
+		},
+	},
+} satisfies Meta<typeof BigNumberComponent>;
 
 export default meta;
 
-export const AllNumbers = () => (
-	<div
-		css={css`
-			padding: ${space[2]}px;
-			font-size: 3rem;
-			fill: ${palette('--article-text')};
-		`}
-	>
-		<BigNumber index={0} />
-		<br />
-		<BigNumber index={1} />
-		<br />
-		<BigNumber index={2} />
-		<br />
-		<BigNumber index={3} />
-		<br />
-		<BigNumber index={4} />
-		<br />
-		<BigNumber index={5} />
-		<br />
-		<BigNumber index={6} />
-		<br />
-		<BigNumber index={7} />
-		<br />
-		<BigNumber index={8} />
-		<br />
-		<BigNumber index={9} />
-		<br />
-		<BigNumber index={10} />
-	</div>
-);
-AllNumbers.decorators = [
-	splitTheme([
-		{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-		},
-	]),
-];
+type Story = StoryObj<typeof meta>;
+
+export const BigNumber = {
+	args: { index: 0 },
+	render: () => (
+		<div
+			css={css`
+				padding: ${space[2]}px;
+				font-size: 3rem;
+				fill: ${palette('--article-text')};
+			`}
+		>
+			<BigNumberComponent index={0} />
+			<br />
+			<BigNumberComponent index={1} />
+			<br />
+			<BigNumberComponent index={2} />
+			<br />
+			<BigNumberComponent index={3} />
+			<br />
+			<BigNumberComponent index={4} />
+			<br />
+			<BigNumberComponent index={5} />
+			<br />
+			<BigNumberComponent index={6} />
+			<br />
+			<BigNumberComponent index={7} />
+			<br />
+			<BigNumberComponent index={8} />
+			<br />
+			<BigNumberComponent index={9} />
+			<br />
+			<BigNumberComponent index={10} />
+		</div>
+	),
+} satisfies Story;

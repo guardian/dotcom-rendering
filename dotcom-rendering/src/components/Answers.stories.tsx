@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { Radio, RadioGroup } from '@guardian/source/react-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import {
 	CorrectSelectedAnswer,
 	IncorrectAnswer,

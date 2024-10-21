@@ -8,7 +8,7 @@ import {
 	textSans15,
 	until,
 } from '@guardian/source/foundations';
-import { ArticleDesign, type ArticleFormat } from '../lib/format';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { palette as themePalette } from '../palette';
 import type { TeamType } from '../types/sport';
 import { Distribution } from './Distribution';

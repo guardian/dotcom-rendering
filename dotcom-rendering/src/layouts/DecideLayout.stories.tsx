@@ -15,15 +15,11 @@ import { Recipe as RecipeStandardLifestyleFixture } from '../../fixtures/generat
 import { Standard as StandardStandardNewsFixture } from '../../fixtures/generated/dcr-articles/Standard';
 import { Video as VideoStandardNewsFixture } from '../../fixtures/generated/dcr-articles/Video';
 import { embedIframe } from '../client/embedIframe';
-import { decideFormat } from '../lib/decideFormat';
-import type { ArticleFormat } from '../lib/format';
+import { type ArticleFormat, decideFormat } from '../lib/articleFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
-import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { extractNAV } from '../model/extract-nav';
 import type { ArticleDeprecated } from '../types/article';
 import { DecideLayout, type Props as DecideLayoutProps } from './DecideLayout';
-
-mockRESTCalls();
 
 export type HydratedLayoutDecoratorArgs = {
 	colourScheme?: 'light' | 'dark';

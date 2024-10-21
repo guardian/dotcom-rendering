@@ -6,9 +6,10 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
+	formatToString,
+	getAllThemes,
 	Pillar,
-} from '../lib/format';
-import { formatToString, getAllThemes } from '../lib/format';
+} from '../lib/articleFormat';
 import { palette } from '../palette';
 import { ArticleHeadline } from './ArticleHeadline';
 import { Standfirst } from './Standfirst';
@@ -228,18 +229,6 @@ export const ImmersiveDisplay = {
 			display: ArticleDisplay.Immersive,
 		},
 	},
-} satisfies Story;
-
-export const PrintShopDesignImmersiveDisplay = {
-	args: {
-		...StandardDesign.args,
-		format: {
-			...StandardDesign.args.format,
-			design: ArticleDesign.PrintShop,
-			display: ArticleDisplay.Immersive,
-		},
-	},
-	name: 'PrintShop Design, Immersive Display',
 } satisfies Story;
 
 export const CommentDesignImmersiveDisplay = {

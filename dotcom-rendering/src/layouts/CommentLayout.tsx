@@ -3,6 +3,7 @@ import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
+	space,
 	until,
 } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
@@ -20,6 +21,7 @@ import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DiscussionLayout } from '../components/DiscussionLayout';
+import { ExpandableMarketingCardWrapper } from '../components/ExpandableMarketingCardWrapper.importable';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -38,15 +40,16 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import { getSoleContributor } from '../lib/byline';
-import { canRenderAds } from '../lib/canRenderAds';
-import { getContributionsServiceUrl } from '../lib/contributions';
-import { decideTrail } from '../lib/decideTrail';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
-} from '../lib/format';
+} from '../lib/articleFormat';
+import { getSoleContributor } from '../lib/byline';
+import { canRenderAds } from '../lib/canRenderAds';
+import { getContributionsServiceUrl } from '../lib/contributions';
+import { decideTrail } from '../lib/decideTrail';
+import { getZIndex } from '../lib/getZIndex';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -101,7 +104,7 @@ const StandardGrid = ({
 									'lines      border  headline   headline   headline'
 									'meta       border  standfirst standfirst standfirst'
 									'meta       border  media      media      media'
-									'.          border  body       .          right-column'
+									'meta       border  body       .          right-column'
 									'.          border  .          .          right-column';
 						  `
 						: css`
@@ -110,7 +113,7 @@ const StandardGrid = ({
 									'lines      border  headline   . right-column'
 									'meta       border  standfirst . right-column'
 									'meta       border  media      . right-column'
-									'.          border  body       . right-column'
+									'meta       border  body       . right-column'
 									'.          border  .          . right-column';
 						  `}
 				}
@@ -133,7 +136,7 @@ const StandardGrid = ({
 									'lines      border  headline    headline'
 									'meta       border  standfirst  standfirst'
 									'meta       border  media       media'
-									'.          border  body        right-column'
+									'meta       border  body        right-column'
 									'.          border  .           right-column';
 						  `
 						: css`
@@ -142,7 +145,7 @@ const StandardGrid = ({
 									'lines      border  headline    right-column'
 									'meta       border  standfirst  right-column'
 									'meta       border  media       right-column'
-									'.          border  body        right-column'
+									'meta       border  body        right-column'
 									'.          border  .           right-column';
 						  `}
 				}
@@ -179,7 +182,6 @@ const StandardGrid = ({
 
 				${until.tablet} {
 					grid-column-gap: 0px;
-
 					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
@@ -202,6 +204,25 @@ const maxWidth = css`
 	}
 `;
 
+const usCardStyles = css`
+	align-self: start;
+	position: sticky;
+	top: 0;
+	${getZIndex('expandableMarketingCardOverlay')}
+
+	${from.leftCol} {
+		margin-top: ${space[6]}px;
+		margin-bottom: ${space[9]}px;
+
+		/* To align with rich links - if we move this feature to production, we should remove this and make rich link align with everything instead */
+		margin-left: 1px;
+		margin-right: -1px;
+	}
+
+	${from.wide} {
+		margin-left: 0;
+	}
+`;
 const avatarHeadlineWrapper = css`
 	display: flex;
 	flex-direction: column;
@@ -529,29 +550,74 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										</Hide>
 									</>
 								) : (
-									<ArticleMeta
-										branding={branding}
-										format={format}
-										pageId={article.pageId}
-										webTitle={article.webTitle}
-										byline={article.byline}
-										tags={article.tags}
-										primaryDateline={
-											article.webPublicationDateDisplay
-										}
-										secondaryDateline={
-											article.webPublicationSecondaryDateDisplay
-										}
-										isCommentable={article.isCommentable}
-										discussionApiUrl={
-											article.config.discussionApiUrl
-										}
-										shortUrlId={article.config.shortUrlId}
-									/>
+									<>
+										<ArticleMeta
+											branding={branding}
+											format={format}
+											pageId={article.pageId}
+											webTitle={article.webTitle}
+											byline={article.byline}
+											tags={article.tags}
+											primaryDateline={
+												article.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												article.webPublicationSecondaryDateDisplay
+											}
+											isCommentable={
+												article.isCommentable
+											}
+											discussionApiUrl={
+												article.config.discussionApiUrl
+											}
+											shortUrlId={
+												article.config.shortUrlId
+											}
+										/>
+										{isWeb && (
+											<div css={usCardStyles}>
+												<Hide
+													when="below"
+													breakpoint="leftCol"
+												>
+													<Island
+														priority="enhancement"
+														defer={{
+															until: 'visible',
+														}}
+													>
+														<ExpandableMarketingCardWrapper
+															guardianBaseURL={
+																article.guardianBaseURL
+															}
+														/>
+													</Island>
+												</Hide>
+											</div>
+										)}
+									</>
 								)}
 							</div>
 						</GridItem>
 						<GridItem area="body">
+							{isWeb && (
+								<Hide when="above" breakpoint="leftCol">
+									<Island
+										priority="enhancement"
+										/**
+										 * We display the card immediately if the viewport is below the top of
+										 * the article body, so we must use "idle" instead of "visible".
+										 */
+										defer={{ until: 'idle' }}
+									>
+										<ExpandableMarketingCardWrapper
+											guardianBaseURL={
+												article.guardianBaseURL
+											}
+										/>
+									</Island>
+								</Hide>
+							)}
 							<ArticleContainer format={format}>
 								<div css={maxWidth}>
 									<ArticleBody

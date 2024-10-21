@@ -16,7 +16,6 @@ import {
 	SvgCross,
 } from '@guardian/source/react-components';
 import type { Dispatch, SetStateAction } from 'react';
-import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
 import { useConfig } from './ConfigContext';
 
@@ -25,10 +24,44 @@ interface BannersIllustrationProps {
 	styles?: SerializedStyles;
 }
 
+const smallIllustrationStyles = css`
+	display: none;
+	${from.phablet} {
+		display: inline;
+	}
+	${from.leftCol} {
+		display: none;
+	}
+`;
+const largeIllustrationStyles = css`
+	display: inline;
+	${from.phablet} {
+		display: none;
+	}
+	${from.leftCol} {
+		display: inline;
+	}
+`;
+
 const BannersIllustration = ({ type, styles }: BannersIllustrationProps) => {
 	const { assetOrigin } = useConfig();
-	const src = `${assetOrigin}static/frontend/logos/red-blue-banner-${type}.svg`;
-	return <img src={src} alt="" css={styles} />;
+	const smallSrc = `${assetOrigin}static/frontend/logos/red-blue-small-banner-${type}.svg`;
+	const largeSrc = `${assetOrigin}static/frontend/logos/red-blue-large-banner-${type}.svg`;
+
+	return (
+		<>
+			<img
+				src={smallSrc}
+				alt=""
+				css={[styles, smallIllustrationStyles]}
+			/>
+			<img
+				src={largeSrc}
+				alt=""
+				css={[styles, largeIllustrationStyles]}
+			/>
+		</>
+	);
 };
 
 const fillBarStyles = css`
@@ -40,17 +73,6 @@ const fillBarStyles = css`
 	height: 6px;
 	${from.desktop} {
 		height: 4px;
-	}
-`;
-
-const containerStyles = css`
-	${getZIndex('expandableMarketingCardOverlay')}
-	position: sticky;
-	top: 0;
-
-	${from.leftCol} {
-		padding-bottom: ${space[5]}px;
-		margin-right: -1px; /* To align with rich link - if we move this feature to production, we should remove this and make rich link align with everything instead */
 	}
 `;
 
@@ -75,6 +97,10 @@ const summaryStyles = css`
 	gap: ${space[3]}px;
 	z-index: 1;
 	width: 100%;
+`;
+const contractedSummaryStyles = css`
+	${summaryStyles}
+	cursor: pointer;
 `;
 
 const headingStyles = css`
@@ -121,16 +147,6 @@ const detailsStyles = css`
 	flex-direction: column;
 	gap: ${space[4]}px;
 	margin-bottom: ${space[2]}px;
-
-	h2 {
-		${headlineBold17};
-	}
-
-	p {
-		${textSans15}
-		margin-right: ${space[4]}px;
-		z-index: 1;
-	}
 `;
 
 const sectionStyles = css`
@@ -139,6 +155,16 @@ const sectionStyles = css`
 	gap: ${space[3]}px;
 	border-top: 1px solid ${neutral[100]};
 	padding-top: ${space[2]}px;
+
+	h3 {
+		${headlineBold17};
+	}
+
+	p {
+		${textSans15}
+		margin-right: ${space[4]}px;
+		z-index: 1;
+	}
 `;
 
 const imageTopStyles = css`
@@ -154,6 +180,15 @@ const imageBottomStyles = css`
 
 const buttonStyles = css`
 	z-index: 1;
+	background-color: ${palette(
+		'--expandable-marketing-card-button-background',
+	)};
+	width: fit-content;
+
+	${textSansBold12};
+	${from.wide} {
+		${textSansBold14};
+	}
 `;
 
 interface Props {
@@ -165,7 +200,6 @@ interface Props {
 	setIsClosed: Dispatch<SetStateAction<boolean>>;
 }
 
-// todo - semantic html accordion-details?
 export const ExpandableMarketingCard = ({
 	guardianBaseURL,
 	heading,
@@ -175,14 +209,41 @@ export const ExpandableMarketingCard = ({
 	setIsClosed,
 }: Props) => {
 	return (
-		<div
-			css={containerStyles}
-			data-component="us-expandable-marketing-card"
-		>
+		<div data-component="us-expandable-marketing-card">
 			<div css={fillBarStyles} />
 			<div css={contentStyles}>
 				{!isExpanded ? (
-					<BannersIllustration type="faded" styles={imageTopStyles} />
+					<>
+						<BannersIllustration
+							type="faded"
+							styles={imageTopStyles}
+						/>
+						<section
+							data-link-name="us-expandable-marketing-card expand"
+							css={contractedSummaryStyles}
+							role="button"
+							tabIndex={0}
+							onClick={() => {
+								setIsExpanded(true);
+							}}
+							onKeyDown={(event) => {
+								if (event.key === 'Enter') {
+									setIsExpanded(true);
+								}
+								if (event.key === 'Escape') {
+									setIsClosed(true);
+								}
+							}}
+						>
+							<div css={headingStyles}>
+								<h2>{heading}</h2>
+								<div css={arrowStyles}>
+									<SvgChevronDownSingle />
+								</div>
+							</div>
+							<div css={kickerStyles}>{kicker}</div>
+						</section>
+					</>
 				) : (
 					<>
 						<BannersIllustration
@@ -193,72 +254,56 @@ export const ExpandableMarketingCard = ({
 							type="bottom"
 							styles={imageBottomStyles}
 						/>
-					</>
-				)}
-				<div css={summaryStyles}>
-					<div css={headingStyles}>
-						{heading}
-						<button
-							onClick={() => {
-								if (!isExpanded) {
-									setIsExpanded(true);
-								} else {
-									setIsClosed(true);
-								}
-							}}
-							type="button"
-							css={arrowStyles}
-						>
-							{isExpanded ? (
-								<SvgCross />
-							) : (
-								<SvgChevronDownSingle />
-							)}
-						</button>
-					</div>
-					<div css={kickerStyles}>{kicker}</div>
-				</div>
-				{isExpanded && (
-					<div css={detailsStyles}>
-						<div css={sectionStyles}>
-							<h2>We're independent</h2>
-							<p>
-								With no billionaire owner or shareholders, our
-								journalism is funded by readers
-							</p>
-						</div>
-						<div css={sectionStyles}>
-							<h2>We're open</h2>
-							<p>
-								With misinformation threatening democracy, we
-								keep our fact-based news paywall-free
-							</p>
-						</div>
-						<div css={sectionStyles}>
-							<h2>We're global</h2>
-							<p>
-								With 200 years of history and staff across
-								America and the world, we offer an outsider
-								perspective on US news
-							</p>
-						</div>
-						<div css={buttonStyles}>
+						<section css={summaryStyles}>
+							<div css={headingStyles}>
+								<h2>{heading}</h2>
+								<button
+									data-link-name="us-expandable-marketing-card close"
+									onClick={() => {
+										setIsClosed(true);
+									}}
+									type="button"
+									css={arrowStyles}
+								>
+									<SvgCross />
+								</button>
+							</div>
+							<div css={kickerStyles}>{kicker}</div>
+						</section>
+						<div css={detailsStyles}>
+							<section css={sectionStyles}>
+								<h3>We’re independent</h3>
+								<p>
+									With no billionaire owner or shareholders,
+									our journalism is funded by readers
+								</p>
+							</section>
+							<section css={sectionStyles}>
+								<h3>We’re open</h3>
+								<p>
+									With misinformation threatening democracy,
+									we keep our fact-based news paywall-free
+								</p>
+							</section>
+							<section css={sectionStyles}>
+								<h3>We’re global</h3>
+								<p>
+									With 200 years of history and staff across
+									America and the world, we offer an outsider
+									perspective on US news
+								</p>
+							</section>
 							<LinkButton
+								data-link-name="us-expandable-marketing-card cta-click"
 								priority="tertiary"
 								size="xsmall"
 								href={`${guardianBaseURL}/email-newsletters`}
-								cssOverrides={css`
-									background-color: white;
-									${textSansBold12};
-									${from.wide} {
-										${textSansBold14};
-									}
-								`}
+								cssOverrides={buttonStyles}
 							>
 								View newsletters
 							</LinkButton>
 						</div>
-					</div>
+					</>
 				)}
 			</div>
 		</div>

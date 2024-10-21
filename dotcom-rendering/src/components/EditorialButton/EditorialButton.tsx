@@ -1,16 +1,8 @@
 import type { ButtonProps as CoreButtonProps } from '@guardian/source/react-components';
 import { Button as CoreButton } from '@guardian/source/react-components';
-import {
-	decideBackground,
-	decideBorder,
-	decideFont,
-	defaultFormat,
-} from './styles';
-import type { SharedEditorialButtonProps } from './types';
+import { decideBackground, decideBorder, decideFont } from './styles';
 
-export interface EditorialButtonProps
-	extends CoreButtonProps,
-		SharedEditorialButtonProps {}
+export interface EditorialButtonProps extends CoreButtonProps {}
 
 /**
  *
@@ -19,14 +11,13 @@ export interface EditorialButtonProps
  *
  */
 export const EditorialButton = ({
-	format = defaultFormat,
 	children,
 	priority = 'primary',
 	...props
 }: EditorialButtonProps) => {
-	const backgroundOverrides = decideBackground(format, priority);
-	const borderOverrides = decideBorder(format, priority);
-	const fontOverrides = decideFont(format, priority);
+	const backgroundOverrides = decideBackground(priority);
+	const borderOverrides = decideBorder(priority);
+	const fontOverrides = decideFont(priority);
 
 	return (
 		<CoreButton

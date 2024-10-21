@@ -7,7 +7,7 @@ import {
 } from '@guardian/source/foundations';
 import { string as curly } from 'curlyquotes';
 import { getAgeWarning } from '../lib/age-warning';
-import type { ArticleTheme } from '../lib/format';
+import type { ArticleTheme } from '../lib/articleFormat';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import { getSharingUrls } from '../lib/sharing-urls';
 import type { AMPArticleModel } from '../types/article.amp';

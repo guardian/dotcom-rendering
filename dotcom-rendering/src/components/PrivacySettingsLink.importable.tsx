@@ -61,7 +61,7 @@ export const PrivacySettingsLink = ({ extraClasses }: Props) => {
 				cmp.showPrivacyManager();
 			}}
 		>
-			{framework === 'ccpa'
+			{framework === 'usnat'
 				? 'California resident – Do Not Sell'
 				: 'Privacy settings'}
 		</ButtonLink>

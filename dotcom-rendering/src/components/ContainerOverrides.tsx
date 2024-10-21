@@ -6,7 +6,7 @@ import { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import { useConfig } from './ConfigContext';
 
-const cardHeadlineTrailTextLight: ContainerFunction = (
+const cardHeadlineLight: ContainerFunction = (
 	containerPalette: DCRContainerPalette,
 ) => {
 	switch (containerPalette) {
@@ -36,7 +36,68 @@ const cardHeadlineTrailTextLight: ContainerFunction = (
 			return sourcePalette.neutral[100];
 	}
 };
-const cardHeadlineTrailTextDark: ContainerFunction = (
+const cardHeadlineDark: ContainerFunction = (
+	containerPalette: DCRContainerPalette,
+) => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return sourcePalette.neutral[93];
+		case 'LongRunningPalette':
+			return sourcePalette.neutral[93];
+		case 'SombrePalette':
+			return sourcePalette.neutral[100];
+		case 'BreakingPalette':
+			return sourcePalette.neutral[100];
+		case 'EventPalette':
+			return sourcePalette.brand[800];
+		case 'EventAltPalette':
+			return sourcePalette.neutral[100];
+		case 'LongRunningAltPalette':
+			return sourcePalette.neutral[86];
+		case 'SombreAltPalette':
+			return sourcePalette.neutral[93];
+		case 'SpecialReportAltPalette':
+			return sourcePalette.specialReportAlt[700];
+		case 'PodcastPalette':
+			return sourcePalette.neutral[100];
+		case 'Branded':
+			return sourcePalette.neutral[86];
+		case 'MediaPalette':
+			return sourcePalette.neutral[100];
+	}
+};
+
+const cardTrailTextLight: ContainerFunction = (
+	containerPalette: DCRContainerPalette,
+) => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return sourcePalette.neutral[93];
+		case 'LongRunningPalette':
+			return sourcePalette.neutral[10];
+		case 'SombrePalette':
+			return sourcePalette.neutral[93];
+		case 'BreakingPalette':
+			return sourcePalette.neutral[93];
+		case 'EventPalette':
+			return sourcePalette.brand[300];
+		case 'EventAltPalette':
+			return sourcePalette.brand[300];
+		case 'LongRunningAltPalette':
+			return sourcePalette.neutral[10];
+		case 'SombreAltPalette':
+			return sourcePalette.neutral[86];
+		case 'SpecialReportAltPalette':
+			return sourcePalette.specialReportAlt[100];
+		case 'PodcastPalette':
+			return sourcePalette.neutral[93];
+		case 'Branded':
+			return sourcePalette.neutral[38];
+		case 'MediaPalette':
+			return sourcePalette.neutral[93];
+	}
+};
+const cardTrailTextDark: ContainerFunction = (
 	containerPalette: DCRContainerPalette,
 ) => {
 	switch (containerPalette) {
@@ -386,7 +447,7 @@ const cardBorderTopDark: ContainerFunction = (containerPalette) => {
 		case 'BreakingPalette':
 			return cardBorderTopLight(containerPalette);
 		case 'InvestigationPalette':
-			return sourcePalette.neutral[100];
+			return sourcePalette.neutral[73];
 		case 'EventPalette':
 			return sourcePalette.brand[800];
 		case 'EventAltPalette':
@@ -395,6 +456,64 @@ const cardBorderTopDark: ContainerFunction = (containerPalette) => {
 			return transparentColour(sourcePalette.neutral[46], 0.3);
 		case 'Branded':
 			return sourcePalette.neutral[60];
+		case 'MediaPalette':
+			return sourcePalette.neutral[46];
+		case 'PodcastPalette':
+			return sourcePalette.neutral[86];
+	}
+};
+
+const cardSublinksBackgroundLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return sourcePalette.neutral[93];
+		case 'LongRunningAltPalette':
+			return sourcePalette.neutral[86];
+		case 'SombrePalette':
+			return sourcePalette.neutral[38];
+		case 'SombreAltPalette':
+			return sourcePalette.neutral[20];
+		case 'InvestigationPalette':
+			return sourcePalette.neutral[46];
+		case 'BreakingPalette':
+			return sourcePalette.news[100];
+		case 'EventPalette':
+			return sourcePalette.neutral[86];
+		case 'EventAltPalette':
+			return sourcePalette.neutral[93];
+		case 'SpecialReportAltPalette':
+			return sourcePalette.neutral[86];
+		case 'Branded':
+			return sourcePalette.neutral[86];
+		case 'MediaPalette':
+			return sourcePalette.neutral[46];
+		case 'PodcastPalette':
+			return sourcePalette.neutral[86];
+	}
+};
+
+const cardSublinksBackgroundDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return sourcePalette.brand[100];
+		case 'LongRunningAltPalette':
+			return sourcePalette.neutral[10];
+		case 'SombrePalette':
+			return sourcePalette.neutral[20];
+		case 'SombreAltPalette':
+			return sourcePalette.neutral[10];
+		case 'BreakingPalette':
+			return sourcePalette.news[100];
+		case 'InvestigationPalette':
+			return sourcePalette.neutral[38];
+		case 'EventPalette':
+			return sourcePalette.neutral[10];
+		case 'EventAltPalette':
+			return sourcePalette.neutral[10];
+		case 'SpecialReportAltPalette':
+			return sourcePalette.neutral[20];
+		case 'Branded':
+			return sourcePalette.neutral[10];
 		case 'MediaPalette':
 			return sourcePalette.neutral[46];
 		case 'PodcastPalette':
@@ -604,6 +723,109 @@ const sectionBackgroundLeftDark: ContainerFunction = (containerPalette) => {
 		case 'MediaPalette':
 		case 'PodcastPalette':
 			return palette('--section-background');
+	}
+};
+
+const cardBorderSupportingLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return sourcePalette.neutral[73];
+		case 'LongRunningAltPalette':
+			return sourcePalette.neutral[73];
+		case 'SombrePalette':
+		case 'SombreAltPalette':
+			return sourcePalette.neutral[60];
+		case 'InvestigationPalette':
+			return sourcePalette.neutral[73];
+		case 'BreakingPalette':
+			return sourcePalette.news[600];
+		case 'EventPalette':
+			return sourcePalette.neutral[73];
+		case 'EventAltPalette':
+			return sourcePalette.neutral[73];
+		case 'SpecialReportAltPalette':
+			return transparentColour(sourcePalette.neutral[46], 0.3);
+		case 'Branded':
+			return sourcePalette.neutral[73];
+		case 'MediaPalette':
+			return sourcePalette.neutral[46];
+		case 'PodcastPalette':
+			return sourcePalette.neutral[86];
+	}
+};
+const cardBorderSupportingDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return sourcePalette.neutral[73];
+		case 'LongRunningAltPalette':
+			return sourcePalette.neutral[60];
+		case 'SombrePalette':
+		case 'SombreAltPalette':
+		case 'BreakingPalette':
+			return cardBorderTopLight(containerPalette);
+		case 'InvestigationPalette':
+			return sourcePalette.neutral[73];
+		case 'EventPalette':
+			return sourcePalette.brand[800];
+		case 'EventAltPalette':
+			return sourcePalette.neutral[60];
+		case 'SpecialReportAltPalette':
+			return transparentColour(sourcePalette.neutral[46], 0.3);
+		case 'Branded':
+			return sourcePalette.neutral[46];
+		case 'MediaPalette':
+			return sourcePalette.neutral[46];
+		case 'PodcastPalette':
+			return sourcePalette.neutral[86];
+	}
+};
+
+const sectionBorderLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+		case 'LongRunningAltPalette':
+		case 'EventPalette':
+		case 'EventAltPalette':
+		case 'Branded':
+		case 'PodcastPalette':
+			return sourcePalette.neutral[86];
+		case 'SombrePalette':
+		case 'SombreAltPalette':
+			return sourcePalette.neutral[60];
+		case 'InvestigationPalette':
+			return sourcePalette.neutral[73];
+		case 'BreakingPalette':
+			return sourcePalette.news[600];
+		case 'SpecialReportAltPalette':
+			return transparentColour(sourcePalette.neutral[46], 0.3);
+		case 'MediaPalette':
+			return sourcePalette.neutral[46];
+	}
+};
+const sectionBorderDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'EventPalette':
+			return sourcePalette.neutral[46];
+		case 'LongRunningPalette':
+			return sourcePalette.neutral[46];
+		case 'LongRunningAltPalette':
+			return sourcePalette.neutral[60];
+		case 'SombrePalette':
+		case 'SombreAltPalette':
+		case 'BreakingPalette':
+			return cardBorderTopLight(containerPalette);
+		case 'InvestigationPalette':
+			return sourcePalette.neutral[73];
+		case 'EventAltPalette':
+			return sourcePalette.neutral[46];
+		case 'SpecialReportAltPalette':
+			return transparentColour(sourcePalette.neutral[46], 0.3);
+		case 'Branded':
+			return sourcePalette.neutral[46];
+		case 'MediaPalette':
+			return sourcePalette.neutral[46];
+		case 'PodcastPalette':
+			return sourcePalette.neutral[86];
 	}
 };
 
@@ -828,6 +1050,28 @@ const carouselArrowBackgroundHover: ContainerFunction = (containerPalette) => {
 	}
 };
 
+const carouselChevronLight: ContainerFunction = (containerPalette) =>
+	cardHeadlineLight(containerPalette);
+const carouselChevronDark: ContainerFunction = (containerPalette) =>
+	cardHeadlineDark(containerPalette);
+
+const carouselChevronBorderLight: ContainerFunction = (containerPalette) =>
+	transparentColour(cardHeadlineLight(containerPalette), 0.2);
+const carouselChevronBorderDark: ContainerFunction = (containerPalette) =>
+	transparentColour(cardHeadlineDark(containerPalette), 0.4);
+
+const carouselChevronDisabledLight: ContainerFunction = (containerPalette) =>
+	transparentColour(cardHeadlineLight(containerPalette), 0.2);
+const carouselChevronDisabledDark: ContainerFunction = (containerPalette) =>
+	transparentColour(cardHeadlineDark(containerPalette), 0.4);
+
+const carouselChevronBorderDisabledLight: ContainerFunction = (
+	containerPalette,
+) => transparentColour(cardHeadlineLight(containerPalette), 0.2);
+const carouselChevronBorderDisabledDark: ContainerFunction = (
+	containerPalette,
+) => transparentColour(cardHeadlineDark(containerPalette), 0.4);
+
 type ColourName = Parameters<typeof palette>[0];
 
 type ContainerFunction = (containerPalette: DCRContainerPalette) => string;
@@ -837,17 +1081,25 @@ const containerColours = {
 		light: cardBackgroundLight,
 		dark: cardBackgroundDark,
 	},
-	'--card-headline-trail-text': {
-		light: cardHeadlineTrailTextLight,
-		dark: cardHeadlineTrailTextDark,
+	'--card-headline': {
+		light: cardHeadlineLight,
+		dark: cardHeadlineDark,
 	},
 	'--card-footer-text': {
-		light: cardHeadlineTrailTextLight,
-		dark: cardHeadlineTrailTextDark,
+		light: cardTrailTextLight,
+		dark: cardTrailTextDark,
 	},
 	'--card-kicker-text': {
 		light: cardKickerTextLight,
 		dark: cardKickerTextDark,
+	},
+	'--card-sublinks-background': {
+		light: cardSublinksBackgroundLight,
+		dark: cardSublinksBackgroundDark,
+	},
+	'--card-trail-text': {
+		light: cardTrailTextLight,
+		dark: cardTrailTextDark,
 	},
 	'--front-container-background': {
 		light: sectionBackgroundLight,
@@ -872,6 +1124,10 @@ const containerColours = {
 	'--section-background-left': {
 		light: sectionBackgroundLeftLight,
 		dark: sectionBackgroundLeftDark,
+	},
+	'--card-border-supporting': {
+		light: cardBorderSupportingLight,
+		dark: cardBorderSupportingDark,
 	},
 	'--section-toggle-button': {
 		light: sectionToggleButtonLight,
@@ -928,6 +1184,26 @@ const containerColours = {
 	'--carousel-arrow-background-hover': {
 		light: carouselArrowBackgroundHover,
 		dark: carouselArrowBackgroundHover,
+	},
+	'--carousel-chevron': {
+		light: carouselChevronLight,
+		dark: carouselChevronDark,
+	},
+	'--carousel-chevron-border': {
+		light: carouselChevronBorderLight,
+		dark: carouselChevronBorderDark,
+	},
+	'--carousel-chevron-border-disabled': {
+		light: carouselChevronBorderDisabledLight,
+		dark: carouselChevronBorderDisabledDark,
+	},
+	'--carousel-chevron-disabled': {
+		light: carouselChevronDisabledLight,
+		dark: carouselChevronDisabledDark,
+	},
+	'--section-border': {
+		light: sectionBorderLight,
+		dark: sectionBorderDark,
 	},
 } as const satisfies Partial<
 	Record<
