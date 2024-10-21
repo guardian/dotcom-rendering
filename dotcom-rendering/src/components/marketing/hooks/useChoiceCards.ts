@@ -12,11 +12,11 @@ import type {
 	SelectedAmountsVariant,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useEffect, useState } from 'react';
+import type { BannerEnrichedCta } from '../banners/common/types';
 import type { SupportTier } from '../epics/utils/threeTierChoiceCardAmounts';
 import { threeTierChoiceCardAmounts } from '../epics/utils/threeTierChoiceCardAmounts';
 import type { ChoiceCardSelection } from '../lib/choiceCards';
 import { addChoiceCardsProductParams } from '../lib/tracking';
-import { BannerEnrichedCta } from '../banners/common/types';
 
 export type ContentType = 'mainContent' | 'mobileContent';
 

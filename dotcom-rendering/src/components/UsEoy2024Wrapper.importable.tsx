@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isObject } from '@guardian/libs';
 import {
 	from,
 	headlineMedium24,
@@ -8,6 +9,7 @@ import {
 	textEgyptian17,
 	textEgyptianBold17,
 } from '@guardian/source/foundations';
+import { SvgGuardianLogo } from '@guardian/source/react-components';
 import { Ticker } from '@guardian/source-development-kitchen/react-components';
 import type {
 	SelectedAmountsVariant,
@@ -18,10 +20,9 @@ import { shouldHideSupportMessaging } from '../lib/contributions';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import type { ChoiceCardSettings } from './marketing/banners/designableBanner/components/choiceCards/ChoiceCards';
 import { ChoiceCards } from './marketing/banners/designableBanner/components/choiceCards/ChoiceCards';
+import { buttonStyles } from './marketing/banners/designableBanner/styles/buttonStyles';
 import { useChoiceCards } from './marketing/hooks/useChoiceCards';
 import type { ReactComponent } from './marketing/lib/ReactComponent';
-import { buttonStyles } from './marketing/banners/designableBanner/styles/buttonStyles';
-import { SvgGuardianLogo } from '@guardian/source/react-components';
 
 const styles = {
 	container: css`
@@ -119,16 +120,18 @@ const tickerSettings = {
 	},
 };
 
-const getTickerData = async () => {
+const getTickerData = async (): Promise<TickerData | undefined> => {
 	const data = await fetch(
 		'https://support.code.dev-theguardian.com/ticker/US.json',
 	).then((response) => response.json());
-	const total = Math.floor(data.total);
-	const goal = Math.floor(data.goal);
-	return {
-		total,
-		goal,
-	};
+	if (isObject(data) && data.total && data.goal) {
+		const total = Math.floor(data.total);
+		const goal = Math.floor(data.goal);
+		return {
+			total,
+			goal,
+		};
+	}
 };
 
 // TODO - correct amounts?
