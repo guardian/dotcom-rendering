@@ -115,7 +115,7 @@ const wrapperStyle = ({
 	${isDatawrapperGraphic
 		? `
 	border-top: 1px solid ${themePalette('--branding-border')};
-	padding-top: 8px;
+	padding-top: ${space[2]}px;
 	`
 		: ''}
 `;
