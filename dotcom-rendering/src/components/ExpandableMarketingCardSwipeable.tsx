@@ -3,15 +3,15 @@ import { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { ExpandableMarketingCard } from './ExpandableMarketingCard';
 
-// The length of the swipe left on the x-axis in pixels necesary to close the banner
-const THRESHOLD = 20; // px
+// The minimum length of the left swipe on the x-axis to close the banner
+const LEFT_SWIPE_THRESHOLD_PX = 20;
 
 const isLeftSwipe = (thisXCoord: number, prevXCoord: number | null) => {
 	if (prevXCoord === null) {
 		return false;
 	}
 
-	return thisXCoord + THRESHOLD < prevXCoord;
+	return thisXCoord + LEFT_SWIPE_THRESHOLD_PX < prevXCoord;
 };
 
 const isViewportBelowTopOfBody = (topOfBody: Element) =>
@@ -230,14 +230,11 @@ export const ExpandableMarketingCardSwipeable = ({
 				}}
 			>
 				<ExpandableMarketingCard
-					{...{
-						guardianBaseURL,
-						heading,
-						kicker,
-						isExpanded,
-						setIsExpanded,
-						setIsClosed,
-					}}
+					guardianBaseURL={guardianBaseURL}
+					heading={heading}
+					kicker={kicker}
+					isExpanded={isExpanded}
+					setIsClosed={setIsClosed}
 				/>
 			</div>
 		</div>
