@@ -35,11 +35,11 @@ const styles = {
 		display: grid;
 		flex-direction: column;
 		position: relative;
-		padding: 0 10px 30px 10px;
+		padding: 0 ${space[3]}px ${space[4]}px ${space[3]}px;
 		${from.tablet} {
 			display: grid;
 			grid-template-columns: 350px 350px;
-			padding: 0 ${space[5]}px 30px ${space[5]}px;
+			padding: 0 ${space[5]}px ${space[4]}px ${space[5]}px;
 		}
 		${from.desktop} {
 			grid-template-columns: 462px 462px;
@@ -68,7 +68,7 @@ const styles = {
 			grid-row: 1;
 		}
 		h2 {
-			margin: ${space[2]}px 0 ${space[3]}px;
+			margin: ${space[2]}px 0 ${space[4]}px;
 			color: ${palette.neutral[100]};
 
 			${headlineMedium24}
