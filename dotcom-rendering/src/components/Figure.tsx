@@ -24,8 +24,8 @@ const roleCss = (isDatawrapperGraphic: boolean) => {
 
 		supporting: css`
 			clear: left;
-			margin-top: ${space[3]}px;
-			margin-bottom: ${isDatawrapperGraphic ? space[5] : space[3]}px;
+			margin-top: ${space[isDatawrapperGraphic ? 8 : 3]}px;
+			margin-bottom: ${space[isDatawrapperGraphic ? 8 : 3]}px;
 			${isDatawrapperGraphic
 				? `border-bottom: 1px solid ${themePalette(
 						'--branding-border',
@@ -41,6 +41,7 @@ const roleCss = (isDatawrapperGraphic: boolean) => {
 				margin-right: 20px;
 				line-height: 0;
 				margin-top: ${space[2]}px;
+				${isDatawrapperGraphic ? `margin-bottom: ${space[5]}px;` : ''}
 			}
 			${from.leftCol} {
 				margin-left: -160px;
