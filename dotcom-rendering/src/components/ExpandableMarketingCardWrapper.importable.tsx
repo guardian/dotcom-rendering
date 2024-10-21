@@ -27,7 +27,7 @@ const isNewUSUser = async () => {
 	// This check must happen AFTER we've ensured that the user is in the US.
 	const isNewUser = isFirstArticle();
 
-	return !hasUserSelectedNonUSEdition && !isNewUser;
+	return !hasUserSelectedNonUSEdition && isNewUser;
 };
 
 interface Props {
