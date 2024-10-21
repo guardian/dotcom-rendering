@@ -116,7 +116,7 @@ export const WithBylineAndHeadshot_USEOY2024_VARIANT: Story = {
 			tickerSettings: {
 				endType: TickerEndType.unlimited,
 				countType: TickerCountType.money,
-				currencySymbol: '£',
+				currencySymbol: '$',
 				copy: {
 					countLabel: '',
 					goalReachedPrimary: '',
@@ -189,7 +189,7 @@ export const WithBylineAndHeadshot_USEOY2024_CONTROL: Story = {
 			tickerSettings: {
 				endType: TickerEndType.unlimited,
 				countType: TickerCountType.money,
-				currencySymbol: '£',
+				currencySymbol: '$',
 				copy: {
 					countLabel: 'Help us reach our end-of-year goal',
 					goalReachedPrimary: '',
@@ -201,6 +201,12 @@ export const WithBylineAndHeadshot_USEOY2024_CONTROL: Story = {
 				},
 				name: 'US',
 			},
+			name: 'THREE_TIER_CHOICE_CARDS',
+			cta: {
+				baseUrl: 'https://support.theguardian.com',
+				text: 'Continue',
+			},
+			showChoiceCards: true,
 			bylineWithImage: {
 				name: 'Betsy Reed',
 				description: 'Editor, Guardian US',
