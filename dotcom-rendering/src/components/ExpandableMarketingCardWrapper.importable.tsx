@@ -8,7 +8,7 @@ import { ExpandableMarketingCard } from './ExpandableMarketingCard';
 import { ExpandableMarketingCardSwipeable } from './ExpandableMarketingCardSwipeable';
 import { Hide } from './Hide';
 
-const isFirstArticle = () => {
+const isFirstOrSecondArticle = () => {
 	const [dailyCount = {} as DailyArticle] = getDailyArticleCount() ?? [];
 	return Object.keys(dailyCount).length === 0 || dailyCount.count <= 1;
 };
@@ -25,7 +25,7 @@ const isNewUSUser = async () => {
 		!!editionCookie && editionCookie !== 'US';
 
 	// This check must happen AFTER we've ensured that the user is in the US.
-	const isNewUser = isFirstArticle();
+	const isNewUser = isFirstOrSecondArticle();
 
 	return !hasUserSelectedNonUSEdition && isNewUser;
 };
