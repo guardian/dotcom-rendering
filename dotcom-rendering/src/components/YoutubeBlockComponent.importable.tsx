@@ -40,6 +40,7 @@ type Props = {
 	imageSize?: ImageSizeType;
 	imagePositionOnMobile?: ImagePositionType;
 	enableAds: boolean;
+	aspectRatio?: string;
 };
 
 /**
@@ -81,6 +82,7 @@ export const YoutubeBlockComponent = ({
 	imageSize = 'large',
 	imagePositionOnMobile = 'none',
 	enableAds,
+	aspectRatio,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -173,6 +175,7 @@ export const YoutubeBlockComponent = ({
 				imageSize={imageSize}
 				imagePositionOnMobile={imagePositionOnMobile}
 				renderingTarget={renderingTarget}
+				aspectRatio={aspectRatio}
 			/>
 			{!hideCaption && (
 				<Caption
