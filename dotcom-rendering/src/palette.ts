@@ -3130,7 +3130,7 @@ const articleSectionTitleLight: PaletteFunction = () =>
 const articleSectionTitleDark: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 
-const articleLinkTextLight: PaletteFunction = ({ display, design, theme }) => {
+const articleLinkTextLight: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.Analysis) return sourcePalette.news[300];
 	if (design === ArticleDesign.Audio) {
 		return sourcePalette.neutral[86];
@@ -3172,11 +3172,7 @@ const articleLinkTextDark: PaletteFunction = ({ display, theme }) => {
 	}
 };
 
-const articleLinkBorderLight: PaletteFunction = ({
-	display,
-	design,
-	theme,
-}) => {
+const articleLinkBorderLight: PaletteFunction = ({ design, theme }) => {
 	if (theme === ArticleSpecial.Labs) return sourcePalette.neutral[60];
 	if (design === ArticleDesign.Audio) {
 		return sourcePalette.neutral[46];
@@ -3213,7 +3209,7 @@ const articleMetaLinesDark: PaletteFunction = ({ design }) => {
 	}
 };
 
-const articleLinkHoverLight: PaletteFunction = ({ display, design, theme }) => {
+const articleLinkHoverLight: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.Audio) {
 		return sourcePalette.neutral[86];
 	}
@@ -3285,11 +3281,7 @@ const articleLinkHoverLight: PaletteFunction = ({ display, design, theme }) => {
 
 const articleLinkHoverDark: PaletteFunction = (f) => articleLinkTextDark(f);
 
-const articleLinkBorderHoverLight: PaletteFunction = ({
-	display,
-	design,
-	theme,
-}) => {
+const articleLinkBorderHoverLight: PaletteFunction = ({ design, theme }) => {
 	if (theme === ArticleSpecial.Labs) {
 		return sourcePalette.neutral[7];
 	}
