@@ -107,7 +107,7 @@ export const WithBylineAndHeadshot_USEOY2024_VARIANT: Story = {
 		...meta.args,
 		tracking: {
 			...tracking,
-			abTestName: '_EPIC_BG_COLOUR',
+			abTestName: '_ARTICLE_EPIC_BG_COLOUR',
 			abTestVariant: 'VARIANT',
 		},
 		countryCode: 'US',
@@ -151,6 +151,7 @@ export const WithBylineAndHeadshot_USEOY2024_VARIANT: Story = {
 				'Largely because of this independence, we are able to avoid the trap that befalls much US media: the tendency, born of a desire to please all sides, to engage in false equivalence in the name of neutrality. The way we see it, our job is to be truly fair, which means listening to different points of view, but also calling out the lies of powerful people and institutions – and making clear how misinformation and demagoguery can damage democracy.',
 				'From threats to election integrity, to the spiraling climate crisis, to complex foreign conflicts, our journalists contextualize, investigate and illuminate the critical stories of our time. As a global news organization with a robust US reporting staff, we’re able to provide a fresh, outsider perspective – one so often missing in the American media bubble.',
 				'Around the world, readers can access the Guardian’s paywall-free journalism because of our unique reader-supported model. That’s because of people like you. Our readers keep us independent, beholden to no outside influence and accessible to everyone – whether they can afford to pay for news, or not.',
+				'',
 			],
 			highlightedText:
 				'If you can, please consider supporting us just once, or better yet, support us every month with a little more. Thank you.',
@@ -179,7 +180,7 @@ export const WithBylineAndHeadshot_USEOY2024_CONTROL: Story = {
 		...meta.args,
 		tracking: {
 			...tracking,
-			abTestName: '_EPIC_BG_COLOUR',
+			abTestName: '_ARTICLE_EPIC_BG_COLOUR',
 			abTestVariant: 'CONTROL',
 		},
 		countryCode: 'US',

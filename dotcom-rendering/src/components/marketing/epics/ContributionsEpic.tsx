@@ -148,9 +148,9 @@ const articleCountAboveContainerStyles = css`
 	margin-bottom: ${space[4]}px;
 `;
 
-const tickerContainerStyles = css`
+const tickerContainerStyles = (isInTestVariant: boolean) => css`
 	padding-bottom: ${space[5]}px;
-	padding-top: ${space[1]}px;
+	padding-top: ${getVariantOrControlStyle(isInTestVariant, '25px', '4px')};
 `;
 
 // EpicHeader - local component
@@ -339,7 +339,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 		variant;
 
 	const isColourInTestVariant: boolean =
-		tracking.abTestName.includes('_EPIC_BG_COLOUR') &&
+		tracking.abTestName.includes('_ARTICLE_EPIC_BG_COLOUR') &&
 		tracking.abTestVariant === 'VARIANT';
 
 	const { hasOptedOut, onArticleCountOptIn, onArticleCountOptOut } =
@@ -444,7 +444,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 			)}
 
 			{tickerSettings?.tickerData && (
-				<div css={tickerContainerStyles}>
+				<div css={tickerContainerStyles(isColourInTestVariant)}>
 					<Ticker
 						currencySymbol={tickerSettings.currencySymbol}
 						copy={{
