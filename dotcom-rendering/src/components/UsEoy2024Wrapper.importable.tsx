@@ -124,14 +124,17 @@ const getTickerData = async (): Promise<TickerData | undefined> => {
 	const data = await fetch(
 		'https://support.code.dev-theguardian.com/ticker/US.json',
 	).then((response) => response.json());
-	if (isObject(data) && data.total && data.goal) {
-		const total = Math.floor(data.total);
-		const goal = Math.floor(data.goal);
-		return {
-			total,
-			goal,
-		};
+
+	if (isObject(data)) {
+		const { total, goal } = data;
+		if (typeof total === 'number' && typeof goal === 'number') {
+			return {
+				total: Math.floor(total),
+				goal: Math.floor(goal),
+			};
+		}
 	}
+	return;
 };
 
 // TODO - correct amounts?
