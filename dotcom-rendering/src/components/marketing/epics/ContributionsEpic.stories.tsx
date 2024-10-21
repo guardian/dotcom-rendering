@@ -138,8 +138,7 @@ export const WithBylineAndHeadshot_USEOY2024_VARIANT: Story = {
 				name: 'Betsy Reed',
 				description: 'Editor, Guardian US',
 				headshot: {
-					mainUrl:
-						'https://i.guim.co.uk/img/media/8eda1b06a686fe5ab4f7246bd6b5f8e63851088e/0_0_300_250/300.png?quality=85&s=f42e9642f335d705cab8b712bbbcb64e',
+					mainUrl: `https://i.guim.co.uk/img/media/6d6aec079caf868fd5948df959a82f67841d475d/0_0_1628_1317/500.png?width=400&quality=75&s=764f4aed4118b6315798444bd2911ca0`,
 					altText: 'Betsy Reed staff byline photograph',
 				},
 			},
@@ -212,7 +211,7 @@ export const WithBylineAndHeadshot_USEOY2024_CONTROL: Story = {
 				description: 'Editor, Guardian US',
 				headshot: {
 					mainUrl:
-						'https://i.guim.co.uk/img/media/8eda1b06a686fe5ab4f7246bd6b5f8e63851088e/0_0_300_250/300.png?quality=85&s=f42e9642f335d705cab8b712bbbcb64e',
+						'https://i.guim.co.uk/img/media/6d6aec079caf868fd5948df959a82f67841d475d/0_0_1628_1317/500.png?width=400&quality=75&s=764f4aed4118b6315798444bd2911ca0',
 					altText: 'Betsy Reed staff byline photograph',
 				},
 			},
