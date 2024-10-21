@@ -662,9 +662,8 @@ export const YoutubeAtomPlayer = ({
 	}, []);
 
 	/**
-	 * For apps rendered articles that return true for `webFullscreen` the web layer
-	 * needs to handle the application of fullscreen styles and inform the native
-	 * layer of the fullscreen state.
+	 * For apps rendered articles that return true for `setFullscreen` the web layer
+	 * needs to handle the application of fullscreen styles
 	 *
 	 * This is only for the YouTube player in Android web views which does not support fullscreen
 	 */
