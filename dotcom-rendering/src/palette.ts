@@ -3130,8 +3130,10 @@ const articleSectionTitleLight: PaletteFunction = () =>
 const articleSectionTitleDark: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 
-const articleLinkTextLight: PaletteFunction = ({ design, theme }) => {
+const articleLinkTextLight: PaletteFunction = ({ display, design, theme }) => {
 	if (design === ArticleDesign.Analysis) return sourcePalette.news[300];
+	if (design === ArticleDesign.Audio)
+		return articleLinkTextDark({ display, design, theme });
 	switch (theme) {
 		case Pillar.Lifestyle:
 			return sourcePalette.lifestyle[300];
@@ -3204,7 +3206,9 @@ const articleMetaLinesDark: PaletteFunction = ({ design }) => {
 	}
 };
 
-const articleLinkHoverLight: PaletteFunction = ({ design, theme }) => {
+const articleLinkHoverLight: PaletteFunction = ({ display, design, theme }) => {
+	if (design === ArticleDesign.Audio)
+		return articleLinkHoverDark({ display, design, theme });
 	switch (design) {
 		case ArticleDesign.DeadBlog:
 			switch (theme) {
@@ -3275,6 +3279,7 @@ const articleLinkHoverDark: PaletteFunction = (f) => articleLinkTextDark(f);
 
 const articleLinkBorderHoverLight: PaletteFunction = ({ design, theme }) => {
 	if (theme === ArticleSpecial.Labs) return sourcePalette.neutral[7];
+	if (design === ArticleDesign.Audio) return sourcePalette.neutral[86];
 	if (theme === ArticleSpecial.SpecialReport) {
 		return sourcePalette.specialReport[100];
 	}
