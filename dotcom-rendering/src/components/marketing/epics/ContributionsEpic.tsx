@@ -57,7 +57,12 @@ const getVariantOrControlStyle = (
 // -------------------------------------------
 const wrapperStyles = (isInTestVariant: boolean) => css`
 	padding: ${space[1]}px ${space[2]}px ${space[3]}px;
-	border-top: 1px solid ${palette.brandAlt[400]};
+	border-top: 1px solid
+		${getVariantOrControlStyle(
+			isInTestVariant,
+			palette.neutral[0],
+			palette.brandAlt[400],
+		)};
 	background-color: ${getVariantOrControlStyle(
 		isInTestVariant,
 		'#E2E3BF',
