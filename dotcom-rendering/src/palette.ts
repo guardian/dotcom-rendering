@@ -3172,9 +3172,15 @@ const articleLinkTextDark: PaletteFunction = ({ display, theme }) => {
 	}
 };
 
-const articleLinkBorderLight: PaletteFunction = ({ design, theme }) => {
+const articleLinkBorderLight: PaletteFunction = ({
+	display,
+	design,
+	theme,
+}) => {
 	if (theme === ArticleSpecial.Labs) return sourcePalette.neutral[60];
-
+	if (design === ArticleDesign.Audio) {
+		return articleLinkBorderDark({ display, design, theme });
+	}
 	if (theme === ArticleSpecial.SpecialReport) {
 		return sourcePalette.specialReport[300];
 	}
