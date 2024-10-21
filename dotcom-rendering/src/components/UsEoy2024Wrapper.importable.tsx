@@ -137,7 +137,6 @@ const getTickerData = async (): Promise<TickerData | undefined> => {
 	return;
 };
 
-// TODO - correct amounts?
 const choiceCardAmounts: SelectedAmountsVariant = {
 	testName: 'us-eoy-front-amounts',
 	variantName: 'CONTROL',
