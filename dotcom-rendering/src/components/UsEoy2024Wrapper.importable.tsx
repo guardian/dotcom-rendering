@@ -169,8 +169,7 @@ const choiceCardSettings: ChoiceCardSettings = {
 	buttonSelectBorderColour: '#0077B6',
 };
 const cta = {
-	// TODO - tracking
-	ctaUrl: 'https://support.theguardian.com/contribute',
+	ctaUrl: 'https://support.theguardian.com/us/contribute?acquisitionData={"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_THRASHER","componentId":"USEOY24_LAUNCH_UPDATED_THRASHER","campaignCode":"USEOY24"}&INTCMP=USEOY24',
 	ctaText: 'Support us',
 };
 
