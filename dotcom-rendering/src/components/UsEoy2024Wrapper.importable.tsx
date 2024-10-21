@@ -5,6 +5,7 @@ import {
 	headlineMedium24,
 	headlineMedium28,
 	headlineMedium34,
+	palette,
 	space,
 	textEgyptian17,
 	textEgyptianBold17,
@@ -26,8 +27,9 @@ import type { ReactComponent } from './marketing/lib/ReactComponent';
 
 const styles = {
 	container: css`
+		/* stylelint-disable-next-line color-no-hex */
 		background: #051d32;
-		color: #ffffff;
+		color: ${palette.neutral[100]};
 	`,
 	grid: css`
 		display: grid;
@@ -67,7 +69,7 @@ const styles = {
 		}
 		h2 {
 			margin: ${space[2]}px 0 ${space[3]}px;
-			color: #ffffff;
+			color: ${palette.neutral[100]};
 
 			${headlineMedium24}
 			${from.tablet} {
