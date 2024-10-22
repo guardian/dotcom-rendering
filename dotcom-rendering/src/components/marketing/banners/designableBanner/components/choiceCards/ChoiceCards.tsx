@@ -118,7 +118,7 @@ export const ChoiceCards: ReactComponent<ChoiceCardProps> = ({
 				submitComponentEvent({
 					component: {
 						componentType: 'ACQUISITIONS_OTHER',
-						id: 'contributions-banner-choice-cards',
+						id: componentId,
 					},
 					action: 'VIEW',
 					abTest: {
@@ -128,7 +128,7 @@ export const ChoiceCards: ReactComponent<ChoiceCardProps> = ({
 				});
 			}
 		}
-	}, [hasBeenSeen, submitComponentEvent, testName, variantName]);
+	}, [componentId, hasBeenSeen, submitComponentEvent, testName, variantName]);
 
 	if (!selection) {
 		return <></>;

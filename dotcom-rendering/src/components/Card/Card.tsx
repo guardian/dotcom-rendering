@@ -53,10 +53,7 @@ import type {
 	ImageSizeType,
 } from './components/ImageWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
-import {
-	type TrailTextSize,
-	TrailTextWrapper,
-} from './components/TrailTextWrapper';
+import { TrailText, type TrailTextSize } from './components/TrailText';
 
 export type Position = 'inner' | 'outer' | 'none';
 
@@ -443,6 +440,20 @@ export const Card = ({
 		showLivePlayable,
 	});
 
+	const hideTrailTextUntil = () => {
+		if (isFlexibleContainer) {
+			return undefined;
+		} else if (
+			imageSize === 'large' &&
+			imagePositionOnDesktop === 'right' &&
+			media?.type !== 'avatar'
+		) {
+			return 'desktop';
+		} else {
+			return 'tablet';
+		}
+	};
+
 	/** Determines the gap of between card components based on card properties */
 	const getGapSize = (): GapSize => {
 		if (isOnwardContent) return 'none';
@@ -779,24 +790,15 @@ export const Card = ({
 							)}
 
 							{!!trailText && (
-								<TrailTextWrapper
-									imagePositionOnDesktop={
-										imagePositionOnDesktop
-									}
-									imageSize={imageSize}
-									imageType={media?.type}
-									shouldHide={isFlexSplash ? false : true}
+								<TrailText
+									trailText={trailText}
 									trailTextColour={trailTextColour}
 									trailTextSize={trailTextSize}
 									padTop={headlinePosition === 'inner'}
-								>
-									<div
-										dangerouslySetInnerHTML={{
-											__html: trailText,
-										}}
-									/>
-								</TrailTextWrapper>
+									hideUntil={hideTrailTextUntil()}
+								/>
 							)}
+
 							{!showCommentFooter && (
 								<CardFooter
 									format={format}
