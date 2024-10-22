@@ -1,3 +1,5 @@
+import { getConsentFor, onConsentChange } from '@guardian/libs';
+import { useEffect, useState } from 'react';
 import { AudioPlayer as Player } from './AudioPlayer/AudioPlayer';
 
 type Props = {
@@ -17,5 +19,19 @@ type Props = {
  * (No visual story exists)
  */
 export const AudioPlayerWrapper = ({ duration, src, mediaId }: Props) => {
-	return <Player src={src} mediaId={mediaId} duration={duration} />;
+	const [finalSrc, setFinalSrc] = useState<string>(src);
+
+	useEffect(() => {
+		onConsentChange((consentState) => {
+			const consentForAcast = getConsentFor('acast', consentState);
+			const isAcastEnabled = window.guardian.config.switches.acast;
+			const isPodcast = window.guardian.config.page.isPodcast;
+
+			if (isAcastEnabled && isPodcast && consentForAcast) {
+				setFinalSrc(src.replace('https://', 'https://flex.acast.com/'));
+			}
+		});
+	}, [src]);
+
+	return <Player src={finalSrc} mediaId={mediaId} duration={duration} />;
 };
