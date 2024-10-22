@@ -51,6 +51,6 @@ export const rootStyles = (
 
 	.ad-slot-container {
 		/* prevent third-party code from breaking our layout */
-		max-width: 100%;
+		max-width: 100vw;
 	}
 `;
