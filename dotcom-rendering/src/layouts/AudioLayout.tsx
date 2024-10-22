@@ -83,12 +83,12 @@ const AudioGrid = ({ children }: { children: React.ReactNode }) => (
 				${from.wide} {
 					grid-template-columns: 219px 1px 620px 80px 300px;
 					grid-template-areas:
-						'title  border  headline   headline   .'
-						'.  	border  disclaimer disclaimer right-column'
-						'.   	border  standfirst standfirst right-column'
-						'image  border  media 	   media      right-column'
-						'meta	border  body       body       right-column'
-						'.      border  .          .          right-column';
+									'title  border  headline   headline   .'
+									'.  	border  disclaimer disclaimer right-column'
+									'image  border  media      media	  right-column'
+									'meta   border  standfirst standfirst right-column'
+									'.   	border  body       body       right-column'
+									'.      border  .          .          right-column';
 				}
 
 				/*
@@ -102,12 +102,12 @@ const AudioGrid = ({ children }: { children: React.ReactNode }) => (
 				${until.wide} {
 					grid-template-columns: 140px 1px 620px 300px;
 					grid-template-areas:
-						'title  border  headline     .'
-						'.  	border  disclaimer   right-column'
-						'.  	border  standfirst   right-column'
-						'image  border  media   	 right-column'
-						'meta   border  body         right-column'
-						'.      border  .            right-column';
+								'title  border  headline     .'
+								'.  	border  disclaimer   right-column'
+								'image  border  media   	 right-column'
+								'.      border  standfirst   right-column'
+								'meta   border  body         right-column'
+								'.      border  .            right-column';
 				}
 
 				/*
@@ -119,42 +119,44 @@ const AudioGrid = ({ children }: { children: React.ReactNode }) => (
 				${until.leftCol} {
 					grid-template-columns: 620px 300px;
 					grid-template-areas:
-						'title         .'
-						'headline      .'
-						'disclaimer    right-column'
-						'standfirst    right-column'
-						'media    	   right-column'
-						'image         right-column'
-						'meta          right-column'
-						'body          right-column'
-						'.             right-column';
+								'title         .'
+								'headline      .'
+								'disclaimer    right-column'
+								'media    		right-column'
+								'standfirst    right-column'
+								'image         right-column'
+								'meta          right-column'
+								'body          right-column'
+								'.             right-column';
 				}
 
 				${until.desktop} {
 					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
-						'title'
-						'headline'
-						'disclaimer'
-						'standfirst'
-						'media'
-						'image'
-						'meta'
-						'body';
+								'title'
+								'headline'
+								'disclaimer'
+								'media'
+								'standfirst'
+								'image'
+								'meta'
+								'body'
+								;
 				}
 
 				${until.tablet} {
 					grid-column-gap: 0;
 					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
-						'title'
-						'headline'
-						'disclaimer'
-						'standfirst'
-						'media'
-						'image'
-						'meta'
-						'body';
+								'title'
+								'headline'
+								'disclaimer'
+								'media'
+								'standfirst'
+								'thumbnail'
+								'image'
+								'meta'
+								'body';
 				}
 			}
 		`}
@@ -361,12 +363,6 @@ export const AudioLayout = (props: WebProps) => {
 								/>
 							</div>
 						</GridItem>
-						<GridItem area="standfirst">
-							<Standfirst
-								format={format}
-								standfirst={article.standfirst}
-							/>
-						</GridItem>
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
@@ -439,7 +435,11 @@ export const AudioLayout = (props: WebProps) => {
 								/>
 							</div>
 						</GridItem>
-						<GridItem area="body">
+						<GridItem area="standfirst">
+							<Standfirst
+								format={format}
+								standfirst={article.standfirst}
+							/>
 							<Hide from="leftCol">
 								<Island
 									priority="enhancement"
