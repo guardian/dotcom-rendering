@@ -41,16 +41,17 @@ const hoverStyles = css`
 
 const headline = css`
 	position: absolute;
-	bottom: 0; /* Align to the bottom of the image area */
+	bottom: 10%;
 	left: 0;
 	width: 100%;
-	z-index: 10000; /* Make sure headline is above the overlay */
+	z-index: 10000;
+	margin-left: 5px;
 `;
 
 const imageArea = css`
 	height: 396px;
 	width: 300px;
-	position: relative; /* Changed to relative so child elements can be absolutely positioned */
+	position: relative;
 	display: flex;
 	justify-content: center;
 `;
@@ -59,7 +60,7 @@ const imageWrapper = css`
 	position: relative;
 	height: 396px;
 	width: 300px;
-	overflow: hidden; /* Hide any overflow */
+	overflow: hidden;
 `;
 
 const blurredOverlay = css`
@@ -68,7 +69,7 @@ const blurredOverlay = css`
 	width: 100%;
 	height: 33%;
 	backdrop-filter: blur(1rem); /* Apply blur effect */
-	z-index: 9999; /* Ensure the overlay is above the image but below the headline */
+	z-index: 9999;
 `;
 
 const imageStyle = css`

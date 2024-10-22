@@ -14,16 +14,16 @@ const meta = {
 	),
 	args: {
 		linkTo: '',
-		headlineText: 'Underground cave found on moon could be ideal base',
+		headlineText: 'Running a takeaway kitchen in an Iraqi border town',
 		format: {
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Standard,
-			theme: Pillar.Sport,
+			theme: Pillar.News,
 		},
 		kickerText: 'News',
-		byline: 'Georges Monbiot',
+		byline: '',
 		image: {
-			src: 'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
+			src: 'https://media.guim.co.uk/569f45834d7be5211a6c0e4ccb9acc9ed562ffa5/0_256_3840_2304/master/3840.jpg',
 			altText: 'alt text',
 		},
 		imageLoading: 'eager',
