@@ -27,6 +27,7 @@ import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
 import { NavList } from './NavList';
 import { ScrollableHighlights } from './ScrollableHighlights.importable';
+import { ScrollableMedium } from './ScrollableMedium';
 import { ScrollableSmall } from './ScrollableSmall';
 
 type Props = {
@@ -262,6 +263,16 @@ export const DecideContainer = ({
 				/>
 			);
 		case 'scrollable/medium':
+			return (
+				<ScrollableMedium
+					trails={trails}
+					imageLoading={imageLoading}
+					containerType={'scrollable/small'}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
+				/>
+			);
 		case 'scrollable/feature':
 		case 'static/feature/2':
 		case 'static/medium/4':
