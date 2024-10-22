@@ -170,7 +170,7 @@ export const ChoiceCardInteractive: ReactComponent<
 					label={`${currencySymbol}${amount} ${
 						contributionType[selection.frequency].suffix
 					}`}
-					id={`contributions-banner-${amount}`}
+					id={`${componentId}-${amount}`}
 					checked={selection.amount === amount}
 					onChange={() => updateAmount(amount)}
 					cssOverrides={style.buttonOverride}
@@ -190,7 +190,7 @@ export const ChoiceCardInteractive: ReactComponent<
 				<ChoiceCard
 					value="third"
 					label="Other"
-					id="contributions-banner-third"
+					id={`${componentId}-third`}
 					checked={true}
 					cssOverrides={style.buttonOverride}
 				/>
@@ -208,7 +208,7 @@ export const ChoiceCardInteractive: ReactComponent<
 					key={2}
 					value="other"
 					label="Other"
-					id="contributions-banner-other"
+					id={`${componentId}-other`}
 					checked={selection.amount === 'other'}
 					onChange={() => updateAmount('other')}
 					cssOverrides={style.buttonOverride}
@@ -226,7 +226,7 @@ export const ChoiceCardInteractive: ReactComponent<
 				key={label}
 				label={label}
 				value={frequency}
-				id={`contributions-banner-${frequency}`}
+				id={`${componentId}-${frequency}`}
 				checked={selection.frequency === frequency}
 				onChange={() => updateFrequency(frequency)}
 				cssOverrides={style.buttonOverride}
@@ -237,7 +237,7 @@ export const ChoiceCardInteractive: ReactComponent<
 	return (
 		<>
 			<ChoiceCardGroup
-				name="contribution-frequency"
+				name={`${componentId}-contribution-frequency`}
 				label="Contribution frequency"
 				columns={noOfContributionTabs}
 				hideLabel={true}
@@ -255,7 +255,7 @@ export const ChoiceCardInteractive: ReactComponent<
 				)}
 			</ChoiceCardGroup>
 			<ChoiceCardGroup
-				name="contribution-amount"
+				name={`${componentId}-contribution-amount`}
 				label="Contribution amount"
 				columns={2}
 				hideLabel={true}
