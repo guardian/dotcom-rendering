@@ -12,11 +12,14 @@ import type {
 	SelectedAmountsVariant,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useEffect, useState } from 'react';
-import type { BannerTextContent } from '../banners/common/types';
+import type { BannerEnrichedCta } from '../banners/common/types';
 import type { SupportTier } from '../epics/utils/threeTierChoiceCardAmounts';
 import { threeTierChoiceCardAmounts } from '../epics/utils/threeTierChoiceCardAmounts';
 import type { ChoiceCardSelection } from '../lib/choiceCards';
-import { addChoiceCardsProductParams } from '../lib/tracking';
+import {
+	addChoiceCardsOneTimeParams,
+	addChoiceCardsProductParams,
+} from '../lib/tracking';
 
 export type ContentType = 'mainContent' | 'mobileContent';
 
@@ -45,7 +48,8 @@ function transformChoiceCardsAmountsToProduct(
 const useChoiceCards = (
 	choiceCardAmounts: SelectedAmountsVariant | undefined,
 	countryCode: string | undefined,
-	content: BannerTextContent,
+	primaryCtaMain: BannerEnrichedCta | null,
+	primaryCtaMobile: BannerEnrichedCta | null,
 ): {
 	choiceCardSelection: ChoiceCardSelection | undefined;
 	setChoiceCardSelection: (choiceCardSelection: ChoiceCardSelection) => void;
@@ -74,16 +78,15 @@ const useChoiceCards = (
 	}, [choiceCardAmounts]);
 
 	const getCtaText = (contentType: ContentType): string => {
-		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- the types and data fetched from the API are out of sync
-		const primaryCtaText = content?.[contentType]?.primaryCta?.ctaText;
-
-		return primaryCtaText ? primaryCtaText : 'Contribute';
+		const cta =
+			contentType === 'mobileContent' ? primaryCtaMobile : primaryCtaMain;
+		return cta?.ctaText ?? 'Contribute';
 	};
 	const getCtaUrl = (contentType: ContentType): string => {
+		const cta =
+			contentType === 'mobileContent' ? primaryCtaMobile : primaryCtaMain;
 		const primaryCtaUrl =
-			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- the types and data fetched from the API are out of sync
-			content?.[contentType]?.primaryCta?.ctaUrl ??
-			'https://support.theguardian.com/contribute';
+			cta?.ctaUrl ?? 'https://support.theguardian.com/contribute';
 
 		if (choiceCardSelection && choiceCardSelection.amount !== 'other') {
 			const { product, ratePlan } = transformChoiceCardsAmountsToProduct(
@@ -91,6 +94,9 @@ const useChoiceCards = (
 				choiceCardSelection.frequency,
 				choiceCardSelection.amount,
 			);
+			if (choiceCardSelection.frequency === 'ONE_OFF') {
+				return addChoiceCardsOneTimeParams(primaryCtaUrl);
+			}
 			return addChoiceCardsProductParams(
 				primaryCtaUrl,
 				product,
