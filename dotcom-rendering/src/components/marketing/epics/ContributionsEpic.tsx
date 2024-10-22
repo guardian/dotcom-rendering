@@ -117,7 +117,11 @@ const highlightStyles = (isInTestVariant: boolean) => css`
 		'#C41C1C',
 		palette.brandAlt[400],
 	)};
-	color: ${getVariantOrControlStyle(isInTestVariant, '#FFF', '#000')};
+	color: ${getVariantOrControlStyle(
+		isInTestVariant,
+		palette.neutral[100],
+		palette.neutral[7],
+	)};
 `;
 
 const imageWrapperStyles = css`
@@ -153,9 +157,9 @@ const articleCountAboveContainerStyles = css`
 	margin-bottom: ${space[4]}px;
 `;
 
-const tickerContainerStyles = (heading: string | undefined) => css`
+const tickerContainerStyles = css`
 	padding-bottom: ${space[5]}px;
-	padding-top: ${getVariantOrControlStyle(!heading, '24px', '4px')};
+	padding-top: ${space[1]}px;
 `;
 
 // EpicHeader - local component
@@ -449,9 +453,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 			)}
 
 			{tickerSettings?.tickerData && (
-				<div
-					css={tickerContainerStyles(tickerSettings.copy.countLabel)}
-				>
+				<div css={tickerContainerStyles}>
 					<Ticker
 						currencySymbol={tickerSettings.currencySymbol}
 						copy={{
