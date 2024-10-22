@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
-import { getAudioData } from '../layouts/AudioLayout';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -9,6 +8,7 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import { getAudioData } from '../lib/audio-data';
 import { getSoleContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';

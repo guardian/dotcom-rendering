@@ -39,6 +39,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
+import { getAudioData } from '../lib/audio-data';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
@@ -47,7 +48,6 @@ import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
-import type { FEElement } from '../types/content';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const AudioGrid = ({ children }: { children: React.ReactNode }) => (
@@ -84,10 +84,10 @@ const AudioGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-columns: 219px 1px 620px 80px 300px;
 					grid-template-areas:
 									'title  border  headline   headline   .'
-									'image  border  disclaimer disclaimer right-column'
-									'meta   border  media      media      right-column'
-									'meta   border  standfirst standfirst right-column'
-									'.      border  body       body       right-column'
+									'.  	border  disclaimer disclaimer right-column'
+									'.   	border  standfirst standfirst right-column'
+									'image  border  media 	   media      right-column'
+									'meta	border  body       body       right-column'
 									'.      border  .          .          right-column';
 				}
 
@@ -103,9 +103,9 @@ const AudioGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-columns: 140px 1px 620px 300px;
 					grid-template-areas:
 								'title  border  headline     .'
-								'image  border  disclaimer   right-column'
-								'meta   border  media        right-column'
-								'meta   border  standfirst   right-column'
+								'.  	border  disclaimer   right-column'
+								'.  	border  standfirst   right-column'
+								'image  border  media   	 right-column'
 								'meta   border  body         right-column'
 								'.      border  .            right-column';
 				}
@@ -122,8 +122,8 @@ const AudioGrid = ({ children }: { children: React.ReactNode }) => (
 								'title         .'
 								'headline      .'
 								'disclaimer    right-column'
-								'media         right-column'
 								'standfirst    right-column'
+								'media    	   right-column'
 								'image         right-column'
 								'meta          right-column'
 								'body          right-column'
@@ -136,11 +136,12 @@ const AudioGrid = ({ children }: { children: React.ReactNode }) => (
 								'title'
 								'headline'
 								'disclaimer'
-								'media'
 								'standfirst'
+								'media'
 								'image'
 								'meta'
-								'body';
+								'body'
+								;
 				}
 
 				${until.tablet} {
@@ -152,8 +153,8 @@ const AudioGrid = ({ children }: { children: React.ReactNode }) => (
 								'title'
 								'headline'
 								'disclaimer'
-								'media'
 								'standfirst'
+								'media'
 								'image'
 								'meta'
 								'body';
@@ -223,23 +224,6 @@ interface Props {
 interface WebProps extends Props {
 	NAV: NavType;
 }
-
-export const getAudioData = (
-	mainMediaElements: FEElement[] | undefined,
-): { audioDownloadUrl: string; mediaId: string } | undefined => {
-	const audioBlockElement = mainMediaElements?.find(
-		(element) =>
-			element._type ===
-			'model.dotcomrendering.pageElements.AudioBlockElement',
-	);
-	if (audioBlockElement?.assets[0] && audioBlockElement.elementId) {
-		return {
-			audioDownloadUrl: audioBlockElement.assets[0].url,
-			mediaId: audioBlockElement.elementId,
-		};
-	}
-	return undefined;
-};
 
 export const AudioLayout = (props: WebProps) => {
 	const { article, format } = props;
@@ -565,7 +549,7 @@ export const AudioLayout = (props: WebProps) => {
 						<GridItem area="right-column">
 							<div
 								css={css`
-									padding-top: 0px;
+									padding-top: 0;
 									height: 100%;
 									${from.desktop} {
 										/* above 980 */
@@ -575,8 +559,8 @@ export const AudioLayout = (props: WebProps) => {
 									}
 									${from.leftCol} {
 										/* above 1140 */
-										margin-left: 0px;
-										margin-right: 0px;
+										margin-left: 0;
+										margin-right: 0;
 									}
 								`}
 							>
