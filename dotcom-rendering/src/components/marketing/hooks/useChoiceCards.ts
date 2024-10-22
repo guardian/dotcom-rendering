@@ -16,7 +16,10 @@ import type { BannerTextContent } from '../banners/common/types';
 import type { SupportTier } from '../epics/utils/threeTierChoiceCardAmounts';
 import { threeTierChoiceCardAmounts } from '../epics/utils/threeTierChoiceCardAmounts';
 import type { ChoiceCardSelection } from '../lib/choiceCards';
-import { addChoiceCardsProductParams } from '../lib/tracking';
+import {
+	addChoiceCardsOneTimeParams,
+	addChoiceCardsProductParams,
+} from '../lib/tracking';
 
 export type ContentType = 'mainContent' | 'mobileContent';
 
@@ -91,6 +94,9 @@ const useChoiceCards = (
 				choiceCardSelection.frequency,
 				choiceCardSelection.amount,
 			);
+			if (choiceCardSelection.frequency === 'ONE_OFF') {
+				return addChoiceCardsOneTimeParams(primaryCtaUrl);
+			}
 			return addChoiceCardsProductParams(
 				primaryCtaUrl,
 				product,
