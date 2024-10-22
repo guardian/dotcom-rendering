@@ -8,7 +8,7 @@ import type {
 	ImagePositionType,
 	ImageSizeType,
 } from './Card/components/ImageWrapper';
-import { AspectRatio } from './CardPicture';
+import type { AspectRatio } from './CardPicture';
 import { useConfig } from './ConfigContext';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { AspectRatio } from './CardPicture';
+import type { AspectRatio } from './CardPicture';
 
 type Props = {
 	height: number;
