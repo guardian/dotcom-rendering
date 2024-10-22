@@ -147,7 +147,7 @@ const defaultTickerStylingSettings: TickerSettings['tickerStylingSettings'] = {
 };
 const usEOYTickerStylingSettings: TickerSettings['tickerStylingSettings'] = {
 	filledProgressColour: '#C41C1C',
-	progressBarBackgroundColour: '#D9A78E',
+	progressBarBackgroundColour: 'rgba(196, 28, 28, 0.30)',
 	headlineColour: '#000000',
 	totalColour: '#C41C1C',
 	goalColour: '#000000',
