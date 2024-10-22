@@ -15,11 +15,11 @@ import type {
 	ImageSizeType,
 } from '../Card/components/ImageWrapper';
 import { PlayIcon } from '../Card/components/PlayIcon';
+import type { AspectRatio } from '../CardPicture';
 import { FormatBoundary } from '../FormatBoundary';
 import { Kicker } from '../Kicker';
 import { secondsToDuration } from '../MediaDuration';
 import { YoutubeAtomPicture } from './YoutubeAtomPicture';
-import { AspectRatio } from '../CardPicture';
 
 export type VideoCategory = 'live' | 'documentary' | 'explainer';
 
@@ -39,7 +39,7 @@ type Props = {
 	showTextOverlay?: boolean;
 	imageSize: ImageSizeType;
 	imagePositionOnMobile: ImagePositionType;
-	aspectRatio: AspectRatio;
+	aspectRatio?: AspectRatio;
 };
 
 const overlayStyles = css`

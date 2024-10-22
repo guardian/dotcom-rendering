@@ -253,6 +253,7 @@ export const YoutubeAtom = ({
 							showTextOverlay={showTextOverlay}
 							imageSize={imageSize}
 							imagePositionOnMobile={imagePositionOnMobile}
+							aspectRatio={aspectRatio}
 						/>
 					)}
 					{showPlaceholder && (
