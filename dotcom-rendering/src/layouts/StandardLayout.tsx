@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import {
-	breakpoints,
 	from,
 	palette as sourcePalette,
 	space,
@@ -41,7 +40,6 @@ import { MostViewedFooterData } from '../components/MostViewedFooterData.importa
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import type { ImageWidthType } from '../components/Picture';
 import { Picture } from '../components/Picture';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -439,11 +437,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const podcastSeries = article.tags.find((tag) => tag.type === 'Series');
 
-	const podcastImageWidths: [ImageWidthType, ...ImageWidthType[]] = [
-		{ breakpoint: breakpoints.mobile, width: 140 },
-		{ breakpoint: breakpoints.wide, width: 219 },
-	];
-
 	return (
 		<>
 			{isWeb && (
@@ -768,7 +761,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<GridItem area="image" element="aside">
 									<div css={podcastResponsiveCoverImage}>
 										<Picture
-											role={'custom'}
+											role={'podcastCover'}
 											format={format}
 											master={
 												podcastSeries.podcast?.image ??
@@ -778,7 +771,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											height={1}
 											width={1}
 											loading="lazy"
-											imageWidths={podcastImageWidths}
 										/>
 									</div>
 								</GridItem>

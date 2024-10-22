@@ -16,7 +16,10 @@ import type { Loading } from './CardPicture';
 
 export type Orientation = 'portrait' | 'landscape';
 
-interface BaseProps {
+export type PictureRoleType = RoleType | 'podcastCover';
+
+interface Props {
+	role: PictureRoleType;
 	format: ArticleFormat;
 	master: string;
 	alt: string;
@@ -29,18 +32,6 @@ interface BaseProps {
 	onLoad?: () => void;
 	aspectRatio?: string;
 }
-
-interface StandardProps extends BaseProps {
-	role: RoleType;
-	imageWidths?: never;
-}
-
-interface CustomProps extends BaseProps {
-	role: 'custom';
-	imageWidths: [ImageWidthType, ...ImageWidthType[]];
-}
-
-type Props = StandardProps | CustomProps;
 
 export type ImageWidthType = { breakpoint: number; width: number };
 
@@ -65,7 +56,7 @@ const decideImageWidths = ({
 	isLightbox,
 	orientation,
 }: {
-	role: RoleType;
+	role: PictureRoleType;
 	isMainMedia?: boolean;
 	format: ArticleFormat;
 	isLightbox: boolean;
@@ -174,6 +165,11 @@ const decideImageWidths = ({
 			case 'supporting':
 			case 'halfWidth':
 				return [{ breakpoint: breakpoints.mobile, width: 445 }];
+			case 'podcastCover':
+				return [
+					{ breakpoint: breakpoints.mobile, width: 140 },
+					{ breakpoint: breakpoints.wide, width: 219 },
+				];
 			case 'inline':
 			default:
 				return [
@@ -342,7 +338,6 @@ export const Picture = ({
 	orientation = 'landscape',
 	onLoad,
 	aspectRatio,
-	imageWidths,
 }: Props) => {
 	const [loaded, setLoaded] = useState(false);
 	const ref = useCallback((node: HTMLImageElement | null) => {
@@ -360,14 +355,13 @@ export const Picture = ({
 
 	const sources = generateSources(
 		master,
-		imageWidths ??
-			decideImageWidths({
-				role,
-				format,
-				isMainMedia,
-				isLightbox,
-				orientation,
-			}),
+		decideImageWidths({
+			role,
+			format,
+			isMainMedia,
+			isLightbox,
+			orientation,
+		}),
 		aspectRatio,
 	);
 
