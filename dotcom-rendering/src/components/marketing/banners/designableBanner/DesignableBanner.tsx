@@ -166,7 +166,12 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		getCtaText,
 		getCtaUrl,
 		currencySymbol,
-	} = useChoiceCards(choiceCardAmounts, countryCode, content);
+	} = useChoiceCards(
+		choiceCardAmounts,
+		countryCode,
+		content.mainContent.primaryCta,
+		content.mobileContent.primaryCta,
+	);
 
 	// We can't render anything without a design
 	if (!design) {
