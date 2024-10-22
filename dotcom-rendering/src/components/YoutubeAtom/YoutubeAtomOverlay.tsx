@@ -19,6 +19,7 @@ import { FormatBoundary } from '../FormatBoundary';
 import { Kicker } from '../Kicker';
 import { secondsToDuration } from '../MediaDuration';
 import { YoutubeAtomPicture } from './YoutubeAtomPicture';
+import { AspectRatio } from '../CardPicture';
 
 export type VideoCategory = 'live' | 'documentary' | 'explainer';
 
@@ -38,6 +39,7 @@ type Props = {
 	showTextOverlay?: boolean;
 	imageSize: ImageSizeType;
 	imagePositionOnMobile: ImagePositionType;
+	aspectRatio: AspectRatio;
 };
 
 const overlayStyles = css`
@@ -149,6 +151,7 @@ export const YoutubeAtomOverlay = ({
 	showTextOverlay,
 	imageSize,
 	imagePositionOnMobile,
+	aspectRatio,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
@@ -173,6 +176,7 @@ export const YoutubeAtomOverlay = ({
 						alt={alt}
 						height={height}
 						width={width}
+						aspectRatio={aspectRatio}
 					/>
 				)}
 				{showPill && (

@@ -16,7 +16,7 @@ export const YoutubeAtomPicture = ({
 	alt,
 	height,
 	width,
-	aspectRatio = '5:4',
+	aspectRatio,
 }: Props) => {
 	const sources = generateSources(
 		getSourceImageUrl(image),
