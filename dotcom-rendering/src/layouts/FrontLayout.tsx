@@ -318,7 +318,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							>
 								<Section
 									fullWidth={true}
-									padBottom={true}
+									padBottom={false}
 									showSideBorders={false}
 									padSides={false}
 									showTopBorder={false}
