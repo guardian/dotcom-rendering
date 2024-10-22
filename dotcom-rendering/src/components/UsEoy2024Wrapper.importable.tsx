@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { isObject } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import {
 	from,
 	headlineMedium24,
@@ -17,8 +18,10 @@ import type {
 	TickerData,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useEffect, useState } from 'react';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import { shouldHideSupportMessaging } from '../lib/contributions';
 import { useIsSignedIn } from '../lib/useAuthStatus';
+import { useConfig } from './ConfigContext';
 import type { ChoiceCardSettings } from './marketing/banners/designableBanner/components/choiceCards/ChoiceCards';
 import { ChoiceCards } from './marketing/banners/designableBanner/components/choiceCards/ChoiceCards';
 import { buttonStyles } from './marketing/banners/designableBanner/styles/buttonStyles';
@@ -170,17 +173,20 @@ const choiceCardSettings: ChoiceCardSettings = {
 	buttonSelectTextColour: '#000000',
 	buttonSelectBorderColour: '#0077B6',
 };
+const componentId = 'USEOY24_LAUNCH_UPDATED_THRASHER';
 const cta = {
-	ctaUrl: 'https://support.theguardian.com/us/contribute?acquisitionData={"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_THRASHER","componentId":"USEOY24_LAUNCH_UPDATED_THRASHER","campaignCode":"USEOY24"}&INTCMP=USEOY24',
+	ctaUrl: `https://support.theguardian.com/us/contribute?acquisitionData={"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_THRASHER","componentId":"${componentId}","campaignCode":"USEOY24"}&INTCMP=USEOY24`,
 	ctaText: 'Support us',
 };
 
 interface Props {
 	tickerData: TickerData;
+	submitTrackingEvent: (event: ComponentEvent) => void;
 }
 
 export const UsEoy2024: ReactComponent<Props> = ({
 	tickerData,
+	submitTrackingEvent,
 }: Props): JSX.Element => {
 	const {
 		choiceCardSelection,
@@ -223,9 +229,9 @@ export const UsEoy2024: ReactComponent<Props> = ({
 					<ChoiceCards
 						setSelectionsCallback={setChoiceCardSelection}
 						selection={choiceCardSelection}
-						submitComponentEvent={() => {}}
+						submitComponentEvent={submitTrackingEvent}
 						currencySymbol={currencySymbol}
-						componentId={'contributions-banner-choice-cards'}
+						componentId={'thrasher-choice-cards'}
 						amountsTest={choiceCardAmounts}
 						design={choiceCardSettings}
 						getCtaText={getCtaText}
@@ -240,7 +246,18 @@ export const UsEoy2024: ReactComponent<Props> = ({
 								textColour: '#FFFFFF',
 							},
 						})}
-						onCtaClick={() => {}}
+						onCtaClick={() => {
+							void submitComponentEvent(
+								{
+									component: {
+										componentType: 'ACQUISITIONS_THRASHER',
+										id: componentId,
+									},
+									action: 'CLICK',
+								},
+								'Web',
+							);
+						}}
 					/>
 				</div>
 			</div>
@@ -267,10 +284,18 @@ export const UsEoy2024Wrapper = (): JSX.Element => {
 		void getTickerData().then(setTickerData);
 	}, []);
 
+	const { renderingTarget } = useConfig();
+	const submitTrackingEvent = (event: ComponentEvent) => {
+		void submitComponentEvent(event, renderingTarget);
+	};
+
 	return (
 		<>
 			{showSupportMessagingForUser && tickerData && (
-				<UsEoy2024 tickerData={tickerData} />
+				<UsEoy2024
+					tickerData={tickerData}
+					submitTrackingEvent={submitTrackingEvent}
+				/>
 			)}
 		</>
 	);

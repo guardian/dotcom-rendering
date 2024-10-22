@@ -16,5 +16,7 @@ export const Default = {
 			total: 1000000,
 			goal: 2000000,
 		},
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
+		submitTrackingEvent: () => {},
 	},
 } satisfies Story;
