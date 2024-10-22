@@ -15,6 +15,7 @@ import { NewsletterSignupLayout } from './NewsletterSignupLayout';
 import { PictureLayout } from './PictureLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { StandardLayout } from './StandardLayout';
+import { AudioLayout } from './AudioLayout';
 
 interface BaseProps {
 	article: ArticleDeprecated;
@@ -262,6 +263,14 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+						/>
+					);
+				case ArticleDesign.Audio:
+					return (
+						<AudioLayout
+							article={article}
+							format={format}
+							NAV={NAV}
 						/>
 					);
 				default:
