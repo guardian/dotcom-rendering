@@ -6,11 +6,10 @@ import type {
 	ReplyType,
 	SignedInUser,
 } from '../../lib/discussion';
-import { mockRESTCalls } from '../../lib/mockRESTCalls';
+import { jestMockFetch } from '../../lib/mockRESTCallsInJest';
 import { error, ok } from '../../lib/result';
 import { CommentContainer } from './CommentContainer';
 
-mockRESTCalls();
 const mockedCommentID = '123456';
 
 const firstCommentResponse = comment.responses[0];
@@ -53,6 +52,10 @@ const aUser: SignedInUser = {
 };
 
 describe('CommentContainer', () => {
+	beforeEach(() => {
+		jestMockFetch();
+	});
+
 	it('Post a comment to a root comment', async () => {
 		const newCommentText = 'A brand new comment';
 

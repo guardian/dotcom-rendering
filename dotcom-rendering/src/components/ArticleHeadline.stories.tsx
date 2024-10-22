@@ -6,9 +6,10 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
+	formatToString,
+	getAllThemes,
 	Pillar,
-} from '../lib/format';
-import { formatToString, getAllThemes } from '../lib/format';
+} from '../lib/articleFormat';
 import { palette } from '../palette';
 import { ArticleHeadline } from './ArticleHeadline';
 import { Standfirst } from './Standfirst';

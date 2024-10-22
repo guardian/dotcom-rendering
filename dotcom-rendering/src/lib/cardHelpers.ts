@@ -1,5 +1,5 @@
-import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import type { DCRContainerPalette } from '../types/front';
+import { ArticleDesign, type ArticleFormat } from './articleFormat';
 
 export const isMediaCard = (format: ArticleFormat): boolean => {
 	switch (format.design) {

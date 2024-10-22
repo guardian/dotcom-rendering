@@ -1,4 +1,4 @@
-import { ArticleFormat } from '../../src/lib/format';
+import { ArticleFormat } from '../../src/lib/articleFormat';
 import { paletteDeclarations } from '../../src/palette';
 
 /**

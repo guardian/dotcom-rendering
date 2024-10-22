@@ -6,7 +6,7 @@ import {
 	ArticleDesign,
 	Pillar,
 	type ArticleFormat,
-} from '../../src/lib/format';
+} from '../../src/lib/articleFormat';
 
 const defaultFormat: ArticleFormat = {
 	display: ArticleDisplay.Standard,

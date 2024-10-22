@@ -1,8 +1,13 @@
 import { css } from '@emotion/react';
 import type { Decorator, Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/format';
-import { getAllDesigns, getAllThemes } from '../lib/format';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	getAllDesigns,
+	getAllThemes,
+	Pillar,
+} from '../lib/articleFormat';
 import { SubheadingBlockComponent } from './SubheadingBlockComponent';
 
 const globalStrongStyles = css`

@@ -1,4 +1,4 @@
-import { ArticleDesign, type ArticleFormat } from '../lib/format';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import type { AdPlaceholderBlockElement, FEElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 

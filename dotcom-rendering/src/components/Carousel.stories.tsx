@@ -1,6 +1,5 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { StoryObj } from '@storybook/react';
-import fetchMock from 'fetch-mock';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
@@ -9,7 +8,8 @@ import {
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
+import { customMockFetch } from '../lib/mockRESTCalls';
 import { palette } from '../palette';
 import type { TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
@@ -46,17 +46,17 @@ const mockDiscussionId = '/p/pf8fm';
 const encodedMockDiscussionId = '%2Fp%2Fpf8fm';
 
 const mockDiscussionUrl = `${discussionApiUrl}/getCommentCounts?short-urls=${encodedMockDiscussionId}`;
-const mockCommentCount = () => {
-	fetchMock
-		.restore()
-		.get(mockDiscussionUrl, {
-			status: 200,
-			body: {
-				[mockDiscussionId]: 1506,
-			} as Record<string, number>,
-		})
-		.spy('end:.hot-update.json');
-};
+
+const mockCommentCountFetch = customMockFetch([
+	{
+		mockedMethod: 'GET',
+		mockedUrl: mockDiscussionUrl,
+		mockedStatus: 200,
+		mockedBody: {
+			[mockDiscussionId]: 1506,
+		} as Record<string, number>,
+	},
+]);
 
 const trails: TrailType[] = [
 	{
@@ -256,7 +256,7 @@ const sportFormat = {
 };
 
 export const Headlines: StoryObj = ({ format }: StoryProps) => {
-	mockCommentCount();
+	global.fetch = mockCommentCountFetch;
 	return (
 		<Section
 			fullWidth={true}
@@ -281,7 +281,7 @@ Headlines.decorators = [
 ];
 
 export const SingleItemCarousel = () => {
-	mockCommentCount();
+	global.fetch = mockCommentCountFetch;
 	return (
 		<Section
 			fullWidth={true}
@@ -305,7 +305,7 @@ SingleItemCarousel.decorators = [
 	splitTheme([defaultFormat], { orientation: 'vertical' }),
 ];
 export const SingleOpinionCarousel = () => {
-	mockCommentCount();
+	global.fetch = mockCommentCountFetch;
 	const comment = {
 		url: 'https://www.theguardian.com/sport/2023/dec/04/golf-pga-tour-liv-rory-mcilroy-tiger-woods-jon-rahm',
 		linkText:
@@ -360,7 +360,7 @@ SingleOpinionCarousel.decorators = [
 ];
 
 export const Immersive = () => {
-	mockCommentCount();
+	global.fetch = mockCommentCountFetch;
 	return (
 		<>
 			<Section
@@ -404,7 +404,7 @@ const specialReportAltFormat = {
 };
 
 export const SpecialReportAlt = () => {
-	mockCommentCount();
+	global.fetch = mockCommentCountFetch;
 	const specialReportTrails = [...trails];
 
 	for (const trail of specialReportTrails) {

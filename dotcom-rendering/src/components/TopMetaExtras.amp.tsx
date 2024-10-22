@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { text, textSans12 } from '@guardian/source/foundations';
-import type { ArticleTheme } from '../lib/format';
+import type { ArticleTheme } from '../lib/articleFormat';
 import {
 	neutralBorder,
 	pillarMap,

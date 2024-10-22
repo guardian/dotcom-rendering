@@ -8,7 +8,7 @@ import {
 } from '@guardian/source/foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
-import { ArticleDesign, type ArticleFormat } from '../lib/format';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { formatAttrString } from '../lib/formatAttrString';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';

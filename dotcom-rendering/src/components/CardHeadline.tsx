@@ -21,7 +21,7 @@ import {
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
 import React from 'react';
-import { type ArticleFormat, ArticleSpecial } from '../lib/format';
+import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
 import { Byline } from './Byline';
@@ -329,7 +329,7 @@ export const CardHeadline = ({
 						css`
 							color: ${isHighlights
 								? palette('--highlights-card-headline')
-								: palette('--card-headline-trail-text')};
+								: palette('--card-headline')};
 						`,
 					]}
 					className="show-underline"

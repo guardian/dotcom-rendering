@@ -1,8 +1,5 @@
-import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { GroupedNewslettersList } from './GroupedNewsletterList';
 import { ManyNewsletterSignUp } from './ManyNewsletterSignUp.importable';
-
-mockRESTCalls();
 
 export const Default = () => {
 	return (

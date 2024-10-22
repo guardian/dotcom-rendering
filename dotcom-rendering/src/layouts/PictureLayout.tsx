@@ -21,7 +21,6 @@ import { Carousel } from '../components/Carousel.importable';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { ExpandableMarketingCardWrapper } from '../components/ExpandableMarketingCardWrapper.importable';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -36,11 +35,11 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
-import { ArticleDesign, type ArticleFormat } from '../lib/format';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -85,7 +84,6 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'title  border  headline'
 						'.      border  standfirst'
-						'lines  border  media'
 						'meta   border  media'
 						'uscard border  media'
 						'uscard border  submeta'
@@ -98,7 +96,6 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'title  border  headline    headline   headline'
 						'.      border  standfirst  standfirst standfirst'
-						'lines  border  media       media      media'
 						'meta   border  media       media      media'
 						'uscard border  media       media      media'
 						'uscard border  submeta     submeta    submeta'
@@ -118,7 +115,6 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'title     '
 						'headline  '
-						'lines     '
 						'meta      '
 						'standfirst'
 						'media     '
@@ -132,7 +128,6 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'title'
 						'headline'
-						'lines'
 						'meta'
 						'standfirst'
 						'media'
@@ -145,7 +140,6 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'title'
 						'headline'
-						'lines'
 						'meta'
 						'standfirst'
 						'media'
@@ -456,7 +450,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								/>
 							</div>
 						</GridItem>
-						<GridItem area="lines">
+						<GridItem area="meta" element="aside">
 							<div
 								css={[
 									LeftColLines(displayAvatarUrl),
@@ -471,8 +465,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 									color={themePalette('--straight-lines')}
 								/>
 							</div>
-						</GridItem>
-						<GridItem area="meta" element="aside">
 							<div>
 								{isApps ? (
 									<>
@@ -573,22 +565,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								/>
 							</ArticleContainer>
 						</GridItem>
-						{isWeb && (
-							<GridItem area="uscard" element="aside">
-								<Hide until="leftCol">
-									<Island
-										priority="enhancement"
-										defer={{ until: 'visible' }}
-									>
-										<ExpandableMarketingCardWrapper
-											guardianBaseURL={
-												article.guardianBaseURL
-											}
-										/>
-									</Island>
-								</Hide>
-							</GridItem>
-						)}
 					</PictureGrid>
 				</Section>
 

@@ -1,5 +1,5 @@
 import { palette } from '@guardian/source/foundations';
-import { ArticleSpecial, type ArticleTheme, Pillar } from '../lib/format';
+import { ArticleSpecial, type ArticleTheme, Pillar } from './articleFormat';
 
 const {
 	culture,

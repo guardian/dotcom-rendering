@@ -5,7 +5,7 @@ import {
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { palette } from '../palette';
 import { Figure } from './Figure';
 import { RichLink } from './RichLink';

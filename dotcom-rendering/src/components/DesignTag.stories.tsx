@@ -4,7 +4,7 @@ import {
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-} from '../lib/format';
+} from '../lib/articleFormat';
 import { DesignTag } from './DesignTag';
 
 const meta = {

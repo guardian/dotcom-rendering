@@ -1,4 +1,4 @@
-import type { ArticleTheme } from '../lib/format';
+import type { ArticleTheme } from '../lib/articleFormat';
 
 export type StarRating = 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -29,6 +29,7 @@ export interface AudioAtomBlockElement {
 interface AudioBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AudioBlockElement';
 	elementId: string;
+	assets: AudioAsset[];
 }
 
 export interface BlockquoteBlockElement {
@@ -833,6 +834,17 @@ interface VideoAssets {
 		height?: string;
 		width?: string;
 		caption?: string;
+	};
+}
+
+interface AudioAsset {
+	url: string;
+	mimeType?: string;
+	fields?: {
+		durationMinutes?: string;
+		durationSeconds?: string;
+		explicit?: string;
+		source?: string;
 	};
 }
 

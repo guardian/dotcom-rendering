@@ -5,12 +5,10 @@ import { getDailyArticleCount } from '../lib/dailyArticleCount';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { useAB } from '../lib/useAB';
 import { ExpandableMarketingCard } from './ExpandableMarketingCard';
+import { ExpandableMarketingCardSwipeable } from './ExpandableMarketingCardSwipeable';
+import { Hide } from './Hide';
 
-interface Props {
-	guardianBaseURL: string;
-}
-
-const isFirstArticle = () => {
+const isFirstOrSecondArticle = () => {
 	const [dailyCount = {} as DailyArticle] = getDailyArticleCount() ?? [];
 	return Object.keys(dailyCount).length === 0 || dailyCount.count <= 1;
 };
@@ -27,12 +25,15 @@ const isNewUSUser = async () => {
 		!!editionCookie && editionCookie !== 'US';
 
 	// This check must happen AFTER we've ensured that the user is in the US.
-	const isNewUser = isFirstArticle();
+	const isNewUser = isFirstOrSecondArticle();
 
-	return !hasUserSelectedNonUSEdition && !isNewUser;
+	return !hasUserSelectedNonUSEdition && isNewUser;
 };
 
-// todo - semantic html accordion-details?
+interface Props {
+	guardianBaseURL: string;
+}
+
 export const ExpandableMarketingCardWrapper = ({ guardianBaseURL }: Props) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [isClosed, setIsClosed] = useState(false);
@@ -70,13 +71,42 @@ export const ExpandableMarketingCardWrapper = ({ guardianBaseURL }: Props) => {
 		: 'Why the Guardian has no paywall';
 
 	return (
-		<ExpandableMarketingCard
-			guardianBaseURL={guardianBaseURL}
-			heading={heading}
-			kicker={kicker}
-			isExpanded={isExpanded}
-			setIsExpanded={setIsExpanded}
-			setIsClosed={setIsClosed}
-		/>
+		<>
+			<Hide when="below" breakpoint="leftCol">
+				<div
+					role="button"
+					tabIndex={0}
+					onKeyDown={(event) => {
+						if (event.key === 'Enter') {
+							setIsExpanded(true);
+						}
+						if (event.key === 'Escape') {
+							setIsClosed(true);
+						}
+					}}
+					onClick={() => {
+						setIsExpanded(true);
+					}}
+				>
+					<ExpandableMarketingCard
+						guardianBaseURL={guardianBaseURL}
+						heading={heading}
+						kicker={kicker}
+						isExpanded={isExpanded}
+						setIsClosed={setIsClosed}
+					/>
+				</div>
+			</Hide>
+			<Hide when="above" breakpoint="leftCol">
+				<ExpandableMarketingCardSwipeable
+					guardianBaseURL={guardianBaseURL}
+					heading={heading}
+					kicker={kicker}
+					isExpanded={isExpanded}
+					setIsExpanded={setIsExpanded}
+					setIsClosed={setIsClosed}
+				/>
+			</Hide>
+		</>
 	);
 };

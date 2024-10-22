@@ -2,7 +2,11 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { getSublinks, trails } from '../../fixtures/manual/trails';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '../lib/format';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+} from '../lib/articleFormat';
 import type { DCRGroupedTrails } from '../types/front';
 import { DynamicPackage } from './DynamicPackage';
 import { FrontSection } from './FrontSection';

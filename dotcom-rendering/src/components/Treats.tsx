@@ -8,7 +8,7 @@ import {
 } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
 import { Fragment } from 'react';
-import { ArticleDesign, ArticleDisplay } from '../lib/format';
+import { ArticleDesign, ArticleDisplay } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { TreatType } from '../types/front';
 import { FormatBoundary } from './FormatBoundary';

@@ -1,6 +1,6 @@
 import { isUndefined } from '@guardian/libs';
 import { JSDOM } from 'jsdom';
-import { ArticleDisplay, type ArticleFormat } from '../lib/format';
+import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
 import type { FEElement, StarRating, TextBlockElement } from '../types/content';
 
 const isFalseH3 = (element: FEElement): boolean => {
