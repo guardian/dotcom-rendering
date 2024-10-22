@@ -14,7 +14,7 @@ import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { AudioPlayer } from '../components/AudioPlayer/AudioPlayer';
+import { AudioPlayerWrapper } from '../components/AudioPlayerWrapper.importable';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
@@ -83,82 +83,80 @@ const AudioGrid = ({ children }: { children: React.ReactNode }) => (
 				${from.wide} {
 					grid-template-columns: 219px 1px 620px 80px 300px;
 					grid-template-areas:
-									'title  border  headline   headline   .'
-									'.  	border  disclaimer disclaimer right-column'
-									'.   	border  standfirst standfirst right-column'
-									'image  border  media 	   media      right-column'
-									'meta	border  body       body       right-column'
-									'.      border  .          .          right-column';
+						'title  border  headline   headline   .'
+						'.  	border  disclaimer disclaimer right-column'
+						'.   	border  standfirst standfirst right-column'
+						'image  border  media 	   media      right-column'
+						'meta	border  body       body       right-column'
+						'.      border  .          .          right-column';
 				}
 
 				/*
-						Explanation of each unit of grid-template-columns
+					Explanation of each unit of grid-template-columns
 
-						Left Column
-						Vertical grey border
-						Main content
-						Right Column
-					*/
+					Left Column
+					Vertical grey border
+					Main content
+					Right Column
+				*/
 				${until.wide} {
 					grid-template-columns: 140px 1px 620px 300px;
 					grid-template-areas:
-								'title  border  headline     .'
-								'.  	border  disclaimer   right-column'
-								'.  	border  standfirst   right-column'
-								'image  border  media   	 right-column'
-								'meta   border  body         right-column'
-								'.      border  .            right-column';
+						'title  border  headline     .'
+						'.  	border  disclaimer   right-column'
+						'.  	border  standfirst   right-column'
+						'image  border  media   	 right-column'
+						'meta   border  body         right-column'
+						'.      border  .            right-column';
 				}
 
 				/*
-						Explanation of each unit of grid-template-columns
+					Explanation of each unit of grid-template-columns
 
-						Main content
-						Right Column
-					*/
+					Main content
+					Right Column
+				*/
 				${until.leftCol} {
 					grid-template-columns: 620px 300px;
 					grid-template-areas:
-								'title         .'
-								'headline      .'
-								'disclaimer    right-column'
-								'standfirst    right-column'
-								'media    	   right-column'
-								'image         right-column'
-								'meta          right-column'
-								'body          right-column'
-								'.             right-column';
+						'title         .'
+						'headline      .'
+						'disclaimer    right-column'
+						'standfirst    right-column'
+						'media    	   right-column'
+						'image         right-column'
+						'meta          right-column'
+						'body          right-column'
+						'.             right-column';
 				}
 
 				${until.desktop} {
 					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
-								'title'
-								'headline'
-								'disclaimer'
-								'standfirst'
-								'media'
-								'image'
-								'meta'
-								'body'
-								;
+						'title'
+						'headline'
+						'disclaimer'
+						'standfirst'
+						'media'
+						'image'
+						'meta'
+						'body';
 				}
 
 				${until.tablet} {
 					grid-column-gap: 0;
-
 					grid-template-columns: 100%; /* Main content */
-
 					grid-template-areas:
-								'title'
-								'headline'
-								'disclaimer'
-								'standfirst'
-								'media'
-								'image'
-								'meta'
-								'body';
+						'title'
+						'headline'
+						'disclaimer'
+						'standfirst'
+						'media'
+						'image'
+						'meta'
+						'body';
 				}
+			}
 		`}
 	>
 		{children}
@@ -319,14 +317,20 @@ export const AudioLayout = (props: WebProps) => {
 				>
 					<AudioGrid>
 						<GridItem area="media">
-							<div>
-								{audioData && (
-									<AudioPlayer
+							{audioData && (
+								<Island
+									priority="critical"
+									defer={{ until: 'visible' }}
+								>
+									<AudioPlayerWrapper
+										/* contentIsNotSensitive={true} */
+										/* isAcastEnabled={true} */
+										/* readerCanBeShownAds={true} */
 										src={audioData.audioDownloadUrl}
 										mediaId={audioData.mediaId}
 									/>
-								)}
-							</div>
+								</Island>
+							)}
 						</GridItem>
 						<GridItem area="title" element="aside">
 							<ArticleTitle
