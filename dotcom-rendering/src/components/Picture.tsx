@@ -16,9 +16,9 @@ import type { Loading } from './CardPicture';
 
 export type Orientation = 'portrait' | 'landscape';
 
-export type PictureRoleType = RoleType | 'podcastCover';
+type PictureRoleType = RoleType | 'podcastCover';
 
-interface Props {
+type Props = {
 	role: PictureRoleType;
 	format: ArticleFormat;
 	master: string;
@@ -31,7 +31,7 @@ interface Props {
 	orientation?: Orientation;
 	onLoad?: () => void;
 	aspectRatio?: string;
-}
+};
 
 export type ImageWidthType = { breakpoint: number; width: number };
 
