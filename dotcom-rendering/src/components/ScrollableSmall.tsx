@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/source/foundations';
+import { from, space } from '@guardian/source/foundations';
 import { palette } from '../palette';
 import type {
 	DCRContainerPalette,
@@ -63,7 +63,12 @@ export const ScrollableSmall = ({
 }: Props) => {
 	return (
 		<Island priority="feature" defer={{ until: 'visible' }}>
-			<ScrollableCarousel carouselLength={trails.length}>
+			<ScrollableCarousel
+				carouselColumnLayout={{
+					totalCards: trails.length,
+					peepingCardWidth: space[8],
+				}}
+			>
 				{trails.map((trail) => {
 					return (
 						<li

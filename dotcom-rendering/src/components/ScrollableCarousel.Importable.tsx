@@ -14,9 +14,14 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import { palette } from '../palette';
 
+type CarouselColumnLayout = {
+	totalCards: number;
+	peepingCardWidth: number;
+};
+
 type Props = {
 	children: React.ReactNode;
-	carouselLength: number;
+	carouselColumnLayout: CarouselColumnLayout;
 };
 
 /**
@@ -134,19 +139,22 @@ const buttonLayoutStyles = css`
 /**
  * Generates CSS styles for a grid layout used in a carousel.
  *
- * @param {number} totalCards - The total number of cards in the carousel.
+ * @param {CarouselColumnLayout} carouselColumnLayout - An object containing the total number of cards in the carousel and the desired peeping card width.
  * @returns {string} - The CSS styles for the grid layout.
  */
-const generateCarouselColumnStyles = (totalCards: number) => {
-	const peepingCardWidth = space[8];
-
+const generateCarouselColumnStyles = (
+	carouselColumnLayout: CarouselColumnLayout,
+) => {
 	return css`
 		grid-template-columns: repeat(
-			${totalCards},
-			calc((100% - ${peepingCardWidth}px - 20px))
+			${carouselColumnLayout.totalCards},
+			calc((100% - ${carouselColumnLayout.peepingCardWidth}px - 20px))
 		);
 		${from.tablet} {
-			grid-template-columns: repeat(${totalCards}, calc(50% - 10px));
+			grid-template-columns: repeat(
+				${carouselColumnLayout.totalCards},
+				calc(50% - 10px)
+			);
 		}
 	`;
 };
@@ -158,7 +166,10 @@ const generateCarouselColumnStyles = (totalCards: number) => {
  *
  * The carouselling arrow buttons need to run javascript.
  */
-export const ScrollableCarousel = ({ children, carouselLength }: Props) => {
+export const ScrollableCarousel = ({
+	children,
+	carouselColumnLayout,
+}: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
 	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
@@ -218,7 +229,7 @@ export const ScrollableCarousel = ({ children, carouselLength }: Props) => {
 				ref={carouselRef}
 				css={[
 					carouselStyles,
-					generateCarouselColumnStyles(carouselLength),
+					generateCarouselColumnStyles(carouselColumnLayout),
 				]}
 				data-heatphan-type="carousel"
 			>
@@ -226,7 +237,7 @@ export const ScrollableCarousel = ({ children, carouselLength }: Props) => {
 			</ol>
 			<div css={buttonContainerStyles}>
 				<Hide until={'tablet'}>
-					{carouselLength > 2 && (
+					{carouselColumnLayout.totalCards > 2 && (
 						<div css={buttonLayoutStyles}>
 							<Button
 								hideLabel={true}
