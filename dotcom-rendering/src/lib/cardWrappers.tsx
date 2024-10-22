@@ -61,7 +61,7 @@ export const Card100Media50 = ({
 			containerPalette={containerPalette}
 			showAge={showAge}
 			absoluteServerTimes={absoluteServerTimes}
-			headlineSizes={{ desktop: 'medium', mobile: 'xxsmall' }}
+			headlineSizes={{ desktop: 'medium', tablet: 'xxsmall' }}
 			image={trail.image}
 			imageSize="medium"
 			imagePositionOnDesktop="right"
@@ -112,7 +112,7 @@ export const Card100Media75 = ({
 			containerPalette={containerPalette}
 			showAge={showAge}
 			absoluteServerTimes={absoluteServerTimes}
-			headlineSizes={{ desktop: 'medium', mobile: 'xsmall' }}
+			headlineSizes={{ desktop: 'medium', tablet: 'xsmall' }}
 			image={trail.image}
 			imageSize="jumbo"
 			imagePositionOnDesktop="right"
@@ -166,7 +166,7 @@ export const Card100Media100 = ({
 			containerPalette={containerPalette}
 			showAge={showAge}
 			absoluteServerTimes={absoluteServerTimes}
-			headlineSizes={{ desktop: 'medium', mobile: 'xsmall' }}
+			headlineSizes={{ desktop: 'medium', tablet: 'xsmall' }}
 			image={trail.image}
 			imagePositionOnDesktop="top"
 			imagePositionOnMobile="top"
@@ -209,7 +209,7 @@ export const Card100Media100Tall = ({
 			containerPalette={containerPalette}
 			showAge={showAge}
 			absoluteServerTimes={absoluteServerTimes}
-			headlineSizes={{ desktop: 'xsmall', mobile: 'xsmall' }}
+			headlineSizes={{ desktop: 'xsmall', tablet: 'xsmall' }}
 			image={trail.image}
 			imagePositionOnDesktop="top"
 			imagePositionOnMobile="top"
@@ -264,7 +264,7 @@ export const Card75Media50Right = ({
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
 			trailTextColour={palette('--card-headline')}
-			headlineSizes={{ desktop: 'small', mobile: 'xsmall' }}
+			headlineSizes={{ desktop: 'small', tablet: 'xsmall' }}
 		/>
 	);
 };
@@ -309,7 +309,7 @@ export const Card75Media50Left = ({
 			imageSize="large"
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
-			headlineSizes={{ desktop: 'small', mobile: 'xsmall' }}
+			headlineSizes={{ desktop: 'small', tablet: 'xsmall' }}
 			trailTextColour={palette('--card-headline')}
 		/>
 	);
@@ -350,7 +350,7 @@ export const Card25Media25 = ({
 			imageSize="small"
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
-			headlineSizes={{ desktop: 'xsmall', mobile: 'xxsmall' }}
+			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
 			isPlayableMediaCard={false}
 			trailTextColour={palette('--card-headline')}
 		/>
@@ -392,7 +392,7 @@ export const Card25Media25SmallHeadline = ({
 			imageSize="small"
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
-			headlineSizes={{ desktop: 'xxsmall', mobile: 'xxsmall' }}
+			headlineSizes={{ desktop: 'xxsmall', tablet: 'xxsmall' }}
 			isPlayableMediaCard={false}
 			trailTextColour={palette('--card-headline')}
 		/>
@@ -433,7 +433,7 @@ export const Card25Media25Tall = ({
 			imageSize="small"
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
-			headlineSizes={{ desktop: 'xsmall', mobile: 'xxsmall' }}
+			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
 			trailText={
 				isUndefined(trail.avatarUrl) &&
 				(isUndefined(trail.supportingContent) ||
@@ -481,7 +481,7 @@ export const Card25Media25TallNoTrail = ({
 			imageSize="small"
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
-			headlineSizes={{ desktop: 'xsmall', mobile: 'xxsmall' }}
+			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			isPlayableMediaCard={false}
 			trailTextColour={palette('--card-headline')}
@@ -522,7 +522,7 @@ export const Card25Media25TallSmallHeadline = ({
 			imageSize="small"
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
-			headlineSizes={{ desktop: 'xxsmall', mobile: 'xxsmall' }}
+			headlineSizes={{ desktop: 'xxsmall', tablet: 'xxsmall' }}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			isPlayableMediaCard={false}
 			trailTextColour={palette('--card-headline')}
@@ -556,7 +556,7 @@ export const Card50Media50 = ({
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
-			headlineSizes={{ desktop: 'small', mobile: 'xsmall' }}
+			headlineSizes={{ desktop: 'small', tablet: 'xsmall' }}
 			imageSize="medium"
 			imagePositionOnDesktop="top"
 			imagePositionOnMobile="top"
@@ -608,7 +608,7 @@ export const Card50Media50Tall = ({
 			imageSize="medium"
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
-			headlineSizes={{ desktop: 'small', mobile: 'xsmall' }}
+			headlineSizes={{ desktop: 'small', tablet: 'xsmall' }}
 			trailTextColour={palette('--card-headline')}
 		/>
 	);
@@ -643,7 +643,7 @@ export const Card66Media66 = ({
 			showAge={showAge}
 			absoluteServerTimes={absoluteServerTimes}
 			trailText={trail.trailText}
-			headlineSizes={{ desktop: 'xsmall', mobile: 'xxsmall' }}
+			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
 			imagePositionOnDesktop="top"
 			imagePositionOnMobile="top"
 			imageSize="large"
@@ -689,7 +689,7 @@ export const Card33Media33 = ({
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
 			trailTextColour={palette('--card-headline')}
-			headlineSizes={{ desktop: 'xsmall', mobile: 'xxsmall' }}
+			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
 		/>
 	);
 };
@@ -726,7 +726,7 @@ export const Card33Media33Tall = ({
 			imagePositionOnMobile="left"
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
-			headlineSizes={{ desktop: 'xsmall', mobile: 'xxsmall' }}
+			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			supportingContentAlignment="vertical"
 			trailTextColour={palette('--card-headline')}
@@ -768,7 +768,7 @@ export const Card33Media33MobileTopTall = ({
 			imagePositionOnMobile="top"
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
-			headlineSizes={{ desktop: 'xsmall', mobile: 'xsmall' }}
+			headlineSizes={{ desktop: 'xsmall', tablet: 'xsmall' }}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			supportingContentAlignment="vertical"
 			trailTextColour={palette('--card-headline')}

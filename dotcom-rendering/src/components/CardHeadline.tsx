@@ -41,7 +41,6 @@ type Props = {
 	isExternalLink?: boolean;
 	/** Is the headline inside a Highlights card? */
 	isHighlights?: boolean;
-	bylineSize?: SmallHeadlineSize;
 };
 
 const headlineSize = {
@@ -185,6 +184,25 @@ export const WithLink = ({
 	return <>{children}</>;
 };
 
+const getLegacyFontSizes = (size: HeadlineSize): SmallHeadlineSize => {
+	switch (size) {
+		case 'xxlarge':
+			return 'ginormous';
+		case 'medium':
+			return 'huge';
+		case 'small':
+			return 'large';
+		case 'xsmall':
+			return 'medium';
+		case 'xxsmall':
+			return 'small';
+		case 'tiny':
+			return 'tiny';
+		default:
+			return 'medium';
+	}
+};
+
 export const CardHeadline = ({
 	headlineText,
 	format,
@@ -192,13 +210,13 @@ export const CardHeadline = ({
 	kickerText,
 	showPulsingDot,
 	hasInlineKicker,
-	fontSizes = { desktop: 'xxsmall' },
+	/** headline medium 20 on desktop and headline medium 17 on tablet and mobile */
+	fontSizes = { desktop: 'xsmall', tablet: 'xxsmall', mobile: 'xxsmall' },
 	byline,
 	showByline,
 	linkTo,
 	isExternalLink,
 	isHighlights = false,
-	bylineSize = 'medium',
 }: Props) => {
 	const kickerColour = isHighlights
 		? palette('--highlights-card-kicker-text')
@@ -211,9 +229,7 @@ export const CardHeadline = ({
 			? getLabSize(fontSizes)
 			: getFontSize(fontSizes);
 
-	if (format.theme === ArticleSpecial.Labs) {
-		console.log(fontSizes);
-	}
+	const bylineSize = getLegacyFontSizes(fontSizes.desktop);
 	return (
 		<WithLink linkTo={linkTo}>
 			<h3
@@ -221,11 +237,11 @@ export const CardHeadline = ({
 					isSublink ? 'card-sublink-headline' : 'card-headline'
 				}`}
 				css={[
-					fonts,
-					isSublink &&
-						css`
-							${textSans14}
-						`,
+					isSublink
+						? css`
+								${textSans14}
+						  `
+						: fonts,
 				]}
 			>
 				{!!kickerText && (

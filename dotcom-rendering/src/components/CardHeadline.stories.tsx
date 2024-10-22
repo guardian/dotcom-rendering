@@ -171,7 +171,10 @@ export const MobileSize: StoryObj = ({ format }: StoryProps) => (
 				<CardHeadline
 					headlineText={`This is how a mobile ${size} card headline looks`}
 					format={format}
-					fontSizes={{ desktop: 'xsmall', mobile: size }}
+					fontSizes={{
+						desktop: 'xsmall',
+						tablet: size,
+					}}
 				/>
 			</Section>
 		))}

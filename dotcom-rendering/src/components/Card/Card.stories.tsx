@@ -267,7 +267,7 @@ export const WithExternalLink = () => {
 					{...basicCardProps}
 					imagePositionOnDesktop="right"
 					kickerText="Instagram"
-					headlineSizes={{ desktop: 'medium' }}
+					headlineSizes={{ desktop: 'medium', tablet: 'small' }}
 					headlineText="Follow The Guardian now"
 					isExternalLink={true}
 				/>
@@ -1373,7 +1373,7 @@ export const DynamoWithSpecialPaletteVariations = () => {
 				containerType="dynamic/package"
 				isDynamo={true}
 				kickerText="Main kicker"
-				headlineSizes={{ desktop: 'medium' }}
+				headlineSizes={{ desktop: 'medium', tablet: 'small' }}
 				imagePositionOnDesktop="bottom"
 				imagePositionOnMobile="bottom"
 				imageSize="large"

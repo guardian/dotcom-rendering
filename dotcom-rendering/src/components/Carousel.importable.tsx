@@ -543,7 +543,6 @@ const CarouselCard = ({
 				index={index}
 				showTopBarDesktop={!isOnwardContent}
 				showTopBarMobile={false}
-				headlineSizes={{ desktop: 'xsmall', mobile: 'xxsmall' }}
 			/>
 		</LI>
 	);

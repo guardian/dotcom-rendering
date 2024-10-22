@@ -54,7 +54,7 @@ const Snap100 = ({
 					absoluteServerTimes={absoluteServerTimes}
 					headlineSizes={{
 						desktop: 'small',
-						mobile: 'xxsmall',
+						tablet: 'xxsmall',
 					}}
 					imagePositionOnDesktop="right"
 					imagePositionOnMobile="left"
@@ -95,8 +95,12 @@ const Card100 = ({
 					absoluteServerTimes={absoluteServerTimes}
 					headlineSizes={
 						cards[0].isBoosted
-							? { desktop: 'xxlarge' }
-							: { desktop: 'medium' }
+							? {
+									desktop: 'xxlarge',
+									tablet: 'xlarge',
+									mobile: 'large',
+							  }
+							: { desktop: 'medium', tablet: 'small' }
 					}
 					imagePositionOnDesktop="bottom"
 					imagePositionOnMobile="bottom"
@@ -139,7 +143,7 @@ const Card75_Card25 = ({
 						containerType="dynamic/package"
 						showAge={showAge}
 						absoluteServerTimes={absoluteServerTimes}
-						headlineSizes={{ desktop: 'small', mobile: 'small' }}
+						headlineSizes={{ desktop: 'small' }}
 						imagePositionOnDesktop="right"
 						imagePositionOnMobile="bottom"
 						imageSize="medium"
@@ -458,7 +462,7 @@ const Card75_ColumnOfCards25 = ({
 						containerType="dynamic/package"
 						showAge={showAge}
 						absoluteServerTimes={absoluteServerTimes}
-						headlineSizes={{ desktop: 'small' }}
+						headlineSizes={{ desktop: 'medium', tablet: 'small' }}
 						imagePositionOnDesktop="bottom"
 						imagePositionOnMobile="bottom"
 						imageSize="large"
@@ -497,7 +501,10 @@ const Card75_ColumnOfCards25 = ({
 									headlineSizes={
 										cardIndex === 0 ||
 										remaining.length === 2
-											? { desktop: 'xsmall' }
+											? {
+													desktop: 'xsmall',
+													tablet: 'xxsmall',
+											  }
 											: { desktop: 'xxsmall' }
 									}
 									supportingContent={limitSupportingContent(

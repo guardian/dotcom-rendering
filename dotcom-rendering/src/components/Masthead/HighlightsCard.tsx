@@ -154,6 +154,7 @@ export const HighlightsCard = ({
 						format={format}
 						fontSizes={{
 							desktop: 'xsmall',
+							tablet: 'xxsmall',
 							mobileMedium: 'xxsmall',
 							mobile: 'tiny',
 						}}
