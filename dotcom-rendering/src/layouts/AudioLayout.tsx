@@ -14,7 +14,7 @@ import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { AudioPlayerWrapper } from '../components/AudioPlayerWrapper.importable';
+import { AudioPlayerWithConsent } from '../components/AudioPlayerWithConsent.importable';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
@@ -322,7 +322,7 @@ export const AudioLayout = (props: WebProps) => {
 									priority="critical"
 									defer={{ until: 'visible' }}
 								>
-									<AudioPlayerWrapper
+									<AudioPlayerWithConsent
 										/* contentIsNotSensitive={true} */
 										/* isAcastEnabled={true} */
 										/* readerCanBeShownAds={true} */

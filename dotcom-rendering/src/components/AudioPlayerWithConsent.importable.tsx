@@ -18,7 +18,7 @@ type Props = {
  *
  * (No visual story exists)
  */
-export const AudioPlayerWrapper = ({ duration, src, mediaId }: Props) => {
+export const AudioPlayerWithConsent = ({ duration, src, mediaId }: Props) => {
 	const [finalSrc, setFinalSrc] = useState<string>(src);
 
 	useEffect(() => {
