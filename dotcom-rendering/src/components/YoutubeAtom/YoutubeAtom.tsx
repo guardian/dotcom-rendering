@@ -7,6 +7,7 @@ import type {
 	ImagePositionType,
 	ImageSizeType,
 } from '../Card/components/ImageWrapper';
+import { AspectRatio } from '../CardPicture';
 import { MaintainAspectRatio } from '../MaintainAspectRatio';
 import type { VideoCategory } from './YoutubeAtomOverlay';
 import { YoutubeAtomOverlay } from './YoutubeAtomOverlay';
@@ -51,7 +52,7 @@ export type Props = {
 	imageSize: ImageSizeType;
 	imagePositionOnMobile: ImagePositionType;
 	renderingTarget: RenderingTarget;
-	aspectRatio?: string;
+	aspectRatio?: AspectRatio;
 };
 
 export const YoutubeAtom = ({
