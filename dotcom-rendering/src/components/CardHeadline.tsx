@@ -56,47 +56,6 @@ const headlineSize = {
 	tiny: headlineMedium14,
 };
 
-export type HeadlineSize = keyof typeof headlineSize;
-
-export type ResponsiveFontSize = {
-	desktop: HeadlineSize;
-	tablet?: HeadlineSize;
-	mobile?: HeadlineSize;
-	mobileMedium?: HeadlineSize;
-};
-
-const getFontSize = ({
-	desktop,
-	tablet,
-	mobileMedium,
-	mobile,
-}: ResponsiveFontSize) => {
-	return css`
-		${headlineSize[desktop]};
-
-		${tablet &&
-		css`
-			${until.desktop} {
-				${headlineSize[tablet]};
-			}
-		`}
-
-		${mobile &&
-		css`
-			${until.tablet} {
-				${headlineSize[mobile]};
-			}
-		`}
-
-		${mobileMedium &&
-		css`
-			${between.mobileMedium.and.tablet} {
-				${headlineSize[mobileMedium]};
-			}
-		`}
-	`;
-};
-
 const textSansSize = {
 	xxxlarge: textSans20,
 	xxlarge: textSans20,
@@ -110,33 +69,45 @@ const textSansSize = {
 	tiny: textSans12,
 };
 
-const getLabSize = ({
-	desktop,
-	tablet,
-	mobileMedium,
-	mobile,
-}: ResponsiveFontSize) => {
+export type HeadlineSize = keyof typeof headlineSize;
+export type TextSansSize = keyof typeof textSansSize;
+
+export type ResponsiveFontSize = {
+	desktop: HeadlineSize;
+	tablet?: HeadlineSize;
+	mobile?: HeadlineSize;
+	mobileMedium?: HeadlineSize;
+};
+
+const getFontSize = (
+	sizes: ResponsiveFontSize,
+	family: 'headline' | 'textSans',
+) => {
+	const { desktop, tablet, mobileMedium, mobile } = sizes;
+
+	const fontSize = family === 'headline' ? headlineSize : textSansSize;
+
 	return css`
-		${textSansSize[desktop]};
+		${fontSize[desktop]};
 
 		${tablet &&
 		css`
 			${until.desktop} {
-				${textSansSize[tablet]};
+				${fontSize[tablet]};
 			}
 		`}
 
 		${mobile &&
 		css`
 			${until.tablet} {
-				${textSansSize[mobile]};
+				${fontSize[mobile]};
 			}
 		`}
 
 		${mobileMedium &&
 		css`
 			${between.mobileMedium.and.tablet} {
-				${textSansSize[mobileMedium]};
+				${fontSize[mobileMedium]};
 			}
 		`}
 	`;
@@ -184,7 +155,11 @@ export const WithLink = ({
 	return <>{children}</>;
 };
 
-const getLegacyFontSizes = (size: HeadlineSize): SmallHeadlineSize => {
+/**
+ * The Byline component uses a different type to determine font sizes but infers the size from the desktop headline size.
+ * This function converts the headline size to the appropriate byline size.
+ */
+const getBylineFontSizes = (size: HeadlineSize): SmallHeadlineSize => {
 	switch (size) {
 		case 'xxlarge':
 			return 'ginormous';
@@ -224,12 +199,14 @@ export const CardHeadline = ({
 
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
+
 	const fonts =
 		format.theme === ArticleSpecial.Labs
-			? getLabSize(fontSizes)
-			: getFontSize(fontSizes);
+			? getFontSize(fontSizes, 'textSans')
+			: getFontSize(fontSizes, 'headline');
 
-	const bylineSize = getLegacyFontSizes(fontSizes.desktop);
+	const bylineSize = getBylineFontSizes(fontSizes.desktop);
+
 	return (
 		<WithLink linkTo={linkTo}>
 			<h3
@@ -285,85 +262,3 @@ export const CardHeadline = ({
 		</WithLink>
 	);
 };
-
-/** MOBILE FIRST APPROACH */
-// const getFontSize = ({
-// 	desktop,
-// 	tablet,
-// 	mobileMedium,
-// 	mobile,
-// }: ResponsiveFontSize) => {
-// 	return css`
-// 		${headlineSize[mobile]};
-
-// 		${mobileMedium &&
-// 		css`
-// 			${between.mobileMedium.and.tablet} {
-// 				${headlineSize[mobileMedium]};
-// 			}
-// 		`}
-
-// 		${tablet &&
-// 		css`
-// 			${between.tablet.and.desktop} {
-// 				${headlineSize[tablet]};
-// 			}
-// 		`}
-
-// 		${desktop &&
-// 		css`
-// 			${from.desktop} {
-// 				${headlineSize[desktop]};
-// 			}
-// 		`}
-// 	`;
-// };
-
-// { desktop: 'xsmall', mobile: 'xxsmall' } ==> medium, small
-// 		(desktop) => (xsmall) => textSans20;
-// 		(tablet) => textSans17;
-// 		(mobile) => textSans15;
-// // { desktop: 'xxsmall'} ==> small
-// 	${textSans15}
-
-// const labTextStyles = (size: SmallHeadlineSize) => {
-// 	switch (size) {
-// 		case 'ginormous':
-// 		case 'huge':
-// 		case 'large':
-// 			return css`
-// 				${textSans20};
-// 				${until.desktop} {
-// 					${textSans17};
-// 				}
-// 			`;
-// 		case 'medium':
-// 			return css`
-// 				${textSans20};
-// 				/**
-// 				 * Typography preset styles should not be overridden.
-// 				 * This has been done because the styles do not directly map to the new presets.
-// 				 * Please speak to your team's designer and update this to use a more appropriate preset.
-// 				 */
-// 				line-height: 1.15;
-// 				${until.desktop} {
-// 					${textSans17};
-// 					/**
-// 					 * Typography preset styles should not be overridden.
-// 					 * This has been done because the styles do not directly map to the new presets.
-// 					 * Please speak to your team's designer and update this to use a more appropriate preset.
-// 					 */
-// 					line-height: 1.15;
-// 				}
-// 				padding-bottom: ${space[1]}px;
-// 			`;
-// 		case 'small':
-// 			return css`
-// 				${textSans15};
-// 			`;
-// 		case 'tiny':
-// 			return css`
-// 				${textSans12};
-// 			`;
-// 	}
-// };
