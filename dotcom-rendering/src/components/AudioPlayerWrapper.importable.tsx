@@ -1,6 +1,6 @@
 import { getConsentFor, onConsentChange } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import { AudioPlayer as Player } from './AudioPlayer/AudioPlayer';
+import { AudioPlayer } from './AudioPlayer/AudioPlayer';
 
 type Props = {
 	mediaId: string;
@@ -33,5 +33,5 @@ export const AudioPlayerWrapper = ({ duration, src, mediaId }: Props) => {
 		});
 	}, [src]);
 
-	return <Player src={finalSrc} mediaId={mediaId} duration={duration} />;
+	return <AudioPlayer src={finalSrc} mediaId={mediaId} duration={duration} />;
 };
