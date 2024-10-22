@@ -247,16 +247,13 @@ export const UsEoy2024: ReactComponent<Props> = ({
 							},
 						})}
 						onCtaClick={() => {
-							void submitComponentEvent(
-								{
-									component: {
-										componentType: 'ACQUISITIONS_THRASHER',
-										id: componentId,
-									},
-									action: 'CLICK',
+							submitTrackingEvent({
+								component: {
+									componentType: 'ACQUISITIONS_THRASHER',
+									id: componentId,
 								},
-								'Web',
-							);
+								action: 'CLICK',
+							});
 						}}
 					/>
 				</div>
