@@ -153,16 +153,9 @@ const articleCountAboveContainerStyles = css`
 	margin-bottom: ${space[4]}px;
 `;
 
-const tickerContainerStyles = (
-	isInTestVariant: boolean,
-	heading: string | undefined,
-) => css`
+const tickerContainerStyles = (heading: string | undefined) => css`
 	padding-bottom: ${space[5]}px;
-	padding-top: ${getVariantOrControlStyle(
-		isInTestVariant && !heading,
-		'24px',
-		'4px',
-	)};
+	padding-top: ${getVariantOrControlStyle(!heading, '24px', '4px')};
 `;
 
 // EpicHeader - local component
@@ -457,10 +450,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 
 			{tickerSettings?.tickerData && (
 				<div
-					css={tickerContainerStyles(
-						isColourInTestVariant,
-						tickerSettings.copy.countLabel,
-					)}
+					css={tickerContainerStyles(tickerSettings.copy.countLabel)}
 				>
 					<Ticker
 						currencySymbol={tickerSettings.currencySymbol}
