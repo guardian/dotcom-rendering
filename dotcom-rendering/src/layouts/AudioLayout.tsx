@@ -14,6 +14,7 @@ import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
+import { AudioPlayer } from '../components/AudioPlayer/AudioPlayer';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
@@ -24,7 +25,6 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
-import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
@@ -47,6 +47,7 @@ import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
+import type { FEElement } from '../types/content';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const AudioGrid = ({ children }: { children: React.ReactNode }) => (
@@ -223,8 +224,26 @@ interface WebProps extends Props {
 	NAV: NavType;
 }
 
+export const getAudioData = (
+	mainMediaElements: FEElement[] | undefined,
+): { audioDownloadUrl: string; mediaId: string } | undefined => {
+	const audioBlockElement = mainMediaElements?.find(
+		(element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.AudioBlockElement',
+	);
+	if (audioBlockElement?.assets[0] && audioBlockElement.elementId) {
+		return {
+			audioDownloadUrl: audioBlockElement.assets[0].url,
+			mediaId: audioBlockElement.elementId,
+		};
+	}
+	return undefined;
+};
+
 export const AudioLayout = (props: WebProps) => {
 	const { article, format } = props;
+	const audioData = getAudioData(article.mainMediaElements);
 
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
@@ -317,20 +336,12 @@ export const AudioLayout = (props: WebProps) => {
 					<AudioGrid>
 						<GridItem area="media">
 							<div>
-								<MainMedia
-									format={format}
-									elements={article.mainMediaElements}
-									host={host}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									ajaxUrl={article.config.ajaxUrl}
-									abTests={article.config.abTests}
-									switches={article.config.switches}
-									isAdFreeUser={article.isAdFreeUser}
-									isSensitive={article.config.isSensitive}
-									editionId={article.editionId}
-									hideCaption={true}
-								/>
+								{audioData && (
+									<AudioPlayer
+										src={audioData.audioDownloadUrl}
+										mediaId={audioData.mediaId}
+									/>
+								)}
 							</div>
 						</GridItem>
 						<GridItem area="title" element="aside">

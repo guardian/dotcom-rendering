@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import { getAudioData } from '../layouts/AudioLayout';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -282,18 +283,6 @@ const metaNumbersExtrasLiveBlog = css`
 	}
 `;
 
-const getAudioDownloadUrl = (
-	mainMediaElements: FEElement[] | undefined,
-): string => {
-	const audioBlockElement = mainMediaElements?.find(
-		(element) =>
-			element._type ===
-			'model.dotcomrendering.pageElements.AudioBlockElement',
-	);
-
-	return audioBlockElement?.assets[0]?.url ?? '';
-};
-
 const getSeriesTag = (tags: TagType[]): TagType | undefined => {
 	return tags.find((tag) => tag.type === 'Series' && tag.podcast);
 };
@@ -339,7 +328,7 @@ export const ArticleMeta = ({
 
 	const { renderingTarget } = useConfig();
 
-	const audioDownloadUrl = getAudioDownloadUrl(mainMediaElements);
+	const audioData = getAudioData(mainMediaElements);
 	const podcastTag = getPodcastTag(tags);
 	const rssFeedUrl = getRssFeedUrl(tags);
 
@@ -385,7 +374,9 @@ export const ArticleMeta = ({
 									image={podcastTag.image}
 									spotifyUrl={podcastTag.spotifyUrl}
 									subscriptionUrl={podcastTag.subscriptionUrl}
-									audioDownloadUrl={audioDownloadUrl}
+									audioDownloadUrl={
+										audioData?.audioDownloadUrl
+									}
 									rssFeedUrl={rssFeedUrl}
 								/>
 							)}
