@@ -4,11 +4,20 @@ import {
 	from,
 	space,
 	textSans14,
+	until,
 } from '@guardian/source/foundations';
-import { LinkButton, SvgDownload } from '@guardian/source/react-components';
+import {
+	Hide,
+	LinkButton,
+	SvgDownload,
+} from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { ReactElement } from 'react';
+import type { ArticleFormat } from '../lib/articleFormat';
 import { palette as themePalette } from '../palette';
-import type { Podcast } from '../types/tag';
+import type { Podcast, TagType } from '../types/tag';
+import { GridItem } from './GridItem';
+import { PodcastCoverImage } from './PodcastCoverImage';
 
 type PodcastButtonProps = {
 	label: string;
@@ -41,6 +50,7 @@ const podcastTitleStyles = css`
 	color: ${themePalette('--podcast-meta-title')};
 	${articleBold17};
 	padding: ${space[2]}px 0;
+	grid-area: meta-title;
 `;
 
 const podcastButtonStyles = css`
@@ -60,16 +70,20 @@ const podcastButtonStyles = css`
 `;
 
 const podcastButtonListStyles = css`
-	display: inline-flex;
-	flex-wrap: wrap;
-
+	grid-area: meta-links;
 	${from.leftCol} {
 		display: block;
 	}
 `;
 
 const PodcastButton = ({ label, url, icon }: PodcastButtonProps) => (
-	<li>
+	<li
+		css={css`
+			${until.leftCol} {
+				display: inline-block;
+			}
+		`}
+	>
 		<LinkButton
 			size="small"
 			href={url}
@@ -84,17 +98,41 @@ const PodcastButton = ({ label, url, icon }: PodcastButtonProps) => (
 interface PodcastMetaProps extends Podcast {
 	rssFeedUrl?: string;
 	audioDownloadUrl?: string;
+	format: ArticleFormat;
+	podcastSeries: TagType;
 }
 
 export const PodcastMeta = ({
+	format,
+	podcastSeries,
 	subscriptionUrl,
 	spotifyUrl,
 	rssFeedUrl,
 	audioDownloadUrl,
 }: PodcastMetaProps) => {
 	return (
-		<>
+		<div
+			css={css`
+				${until.leftCol} {
+					display: grid;
+					grid-template-columns: 140px 1fr;
+					grid-column-gap: ${space[3]}px;
+					grid-template-areas:
+						'meta-title   meta-title'
+						'meta-image   meta-links'
+						'meta-lines   meta-lines';
+				}
+			`}
+		>
 			<div css={podcastTitleStyles}>More ways to listen</div>
+			<Hide from="leftCol">
+				<GridItem area="meta-image">
+					<PodcastCoverImage
+						format={format}
+						podcastSeries={podcastSeries}
+					/>
+				</GridItem>
+			</Hide>
 			<ul css={podcastButtonListStyles}>
 				{!!subscriptionUrl && (
 					<PodcastButton
@@ -121,6 +159,15 @@ export const PodcastMeta = ({
 					/>
 				)}
 			</ul>
-		</>
+
+			<StraightLines
+				cssOverrides={css`
+					grid-area: meta-lines;
+					margin: ${space[3]}px 0 ${space[2]}px;
+				`}
+				count={1}
+				color={themePalette('--straight-lines')}
+			/>
+		</div>
 	);
 };

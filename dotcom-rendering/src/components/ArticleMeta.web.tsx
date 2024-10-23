@@ -328,6 +328,7 @@ export const ArticleMeta = ({
 
 	const { renderingTarget } = useConfig();
 
+	const seriesTag = getSeriesTag(tags);
 	const audioData = getAudioData(mainMediaElements);
 	const podcastTag = getPodcastTag(tags);
 	const rssFeedUrl = getRssFeedUrl(tags);
@@ -369,8 +370,10 @@ export const ArticleMeta = ({
 							</MetaAvatarContainer>
 						)}
 						<div>
-							{isAudio && podcastTag && (
+							{isAudio && podcastTag && seriesTag && (
 								<PodcastMeta
+									podcastSeries={seriesTag}
+									format={format}
 									image={podcastTag.image}
 									spotifyUrl={podcastTag.spotifyUrl}
 									subscriptionUrl={podcastTag.subscriptionUrl}
