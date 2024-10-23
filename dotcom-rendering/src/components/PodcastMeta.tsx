@@ -6,16 +6,13 @@ import {
 	textSans14,
 	until,
 } from '@guardian/source/foundations';
-import {
-	Hide,
-	LinkButton,
-	SvgDownload,
-} from '@guardian/source/react-components';
+import { LinkButton, SvgDownload } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { ReactElement } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette as themePalette } from '../palette';
 import type { Podcast, TagType } from '../types/tag';
+import { DecideLines } from './DecideLines';
 import { GridItem } from './GridItem';
 import { PodcastCoverImage } from './PodcastCoverImage';
 
@@ -113,26 +110,32 @@ export const PodcastMeta = ({
 	return (
 		<div
 			css={css`
+				margin-top: -2px;
 				${until.leftCol} {
 					display: grid;
 					grid-template-columns: 140px 1fr;
 					grid-column-gap: ${space[3]}px;
 					grid-template-areas:
+						'meta-three   meta-three'
 						'meta-title   meta-title'
 						'meta-image   meta-links'
 						'meta-lines   meta-lines';
 				}
 			`}
 		>
+			<GridItem area="meta-image">
+				<PodcastCoverImage
+					format={format}
+					podcastSeries={podcastSeries}
+				/>
+			</GridItem>
+			<GridItem area="meta-three">
+				<DecideLines
+					format={format}
+					color={themePalette('--article-border')}
+				/>
+			</GridItem>
 			<div css={podcastTitleStyles}>More ways to listen</div>
-			<Hide from="leftCol">
-				<GridItem area="meta-image">
-					<PodcastCoverImage
-						format={format}
-						podcastSeries={podcastSeries}
-					/>
-				</GridItem>
-			</Hide>
 			<ul css={podcastButtonListStyles}>
 				{!!subscriptionUrl && (
 					<PodcastButton

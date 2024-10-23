@@ -17,7 +17,6 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { AudioPlayerWithConsent } from '../components/AudioPlayerWithConsent.importable';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
-import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ExpandableMarketingCardWrapper } from '../components/ExpandableMarketingCardWrapper.importable';
 import { Footer } from '../components/Footer';
@@ -30,7 +29,6 @@ import { MostViewedFooterData } from '../components/MostViewedFooterData.importa
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import { PodcastCoverImage } from '../components/PodcastCoverImage';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
@@ -98,7 +96,7 @@ const AudioGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'title  border  headline     .'
 						'.  	border  disclaimer   right-column'
-						'image  border  media   	 right-column'
+						'meta  border  media   	 right-column'
 						'meta   border  standfirst   right-column'
 						'meta   border  body         right-column'
 						'.      border  .            right-column';
@@ -108,8 +106,8 @@ const AudioGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'title  border  headline    headline   .'
 						'.  	border  disclaimer disclaimer right-column'
-						'image  border  media      media	  right-column'
-						'image  border  standfirst standfirst right-column'
+						'meta   border  media      media	  right-column'
+						'meta   border  standfirst standfirst right-column'
 						'meta   border  body       body       right-column'
 						'.      border  .          .          right-column';
 				}
@@ -146,17 +144,6 @@ const usCardStyles = css`
 	}
 `;
 
-const stretchLines = css`
-	${until.phablet} {
-		margin-left: -20px;
-		margin-right: -20px;
-	}
-	${until.mobileLandscape} {
-		margin-left: -10px;
-		margin-right: -10px;
-	}
-`;
-
 interface Props {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
@@ -188,8 +175,6 @@ export const AudioLayout = (props: WebProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const renderAds = canRenderAds(article);
-
-	const podcastSeries = article.tags.find((tag) => tag.type === 'Series');
 
 	return (
 		<>
@@ -289,14 +274,6 @@ export const AudioLayout = (props: WebProps) => {
 							</div>
 						</GridItem>
 						<GridItem area="meta" element="aside">
-							<div css={maxWidth}>
-								<div css={stretchLines}>
-									<DecideLines
-										format={format}
-										color={themePalette('--article-border')}
-									/>
-								</div>
-							</div>
 							<>
 								<div css={maxWidth}>
 									<ArticleMeta
@@ -344,16 +321,6 @@ export const AudioLayout = (props: WebProps) => {
 								</div>
 							</>
 						</GridItem>
-						<GridItem area="image" element="aside">
-							<Hide until="leftCol">
-								{podcastSeries && (
-									<PodcastCoverImage
-										format={format}
-										podcastSeries={podcastSeries}
-									/>
-								)}
-							</Hide>
-						</GridItem>
 						<GridItem area="media">
 							{audioData && (
 								<Island
@@ -369,6 +336,14 @@ export const AudioLayout = (props: WebProps) => {
 									/>
 								</Island>
 							)}
+							<StraightLines
+								cssOverrides={css`
+									display: block;
+									margin-bottom: ${space[2]}px;
+								`}
+								count={1}
+								color={themePalette('--straight-lines')}
+							/>
 						</GridItem>
 						<GridItem area="standfirst">
 							<Standfirst
