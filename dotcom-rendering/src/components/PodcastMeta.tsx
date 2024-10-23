@@ -169,7 +169,7 @@ export const PodcastMeta = ({
 					margin: ${space[3]}px 0 ${space[2]}px;
 				`}
 				count={1}
-				color={themePalette('--straight-lines')}
+				color={themePalette('--article-border')}
 			/>
 		</div>
 	);
