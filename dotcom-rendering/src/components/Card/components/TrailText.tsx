@@ -58,10 +58,13 @@ export const TrailText = ({
 				fontStyles(trailTextSize),
 				padTop && topPadding,
 			]}
-			dangerouslySetInnerHTML={{
-				__html: text,
-			}}
-		/>
+		>
+			<div
+				dangerouslySetInnerHTML={{
+					__html: text,
+				}}
+			/>
+		</div>
 	);
 	return hideUntil ? (
 		<Hide until={hideUntil}>{trailText}</Hide>
