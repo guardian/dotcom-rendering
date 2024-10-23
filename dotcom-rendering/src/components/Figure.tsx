@@ -18,21 +18,14 @@ type Props = {
 const roleCss = (isDatawrapperGraphic: boolean) => {
 	return {
 		inline: css`
-			margin-top: ${space[isDatawrapperGraphic ? 8 : 3]}px;
-			margin-bottom: ${space[isDatawrapperGraphic ? 8 : 3]}px;
+			margin-top: ${space[isDatawrapperGraphic ? 6 : 3]}px;
+			margin-bottom: ${space[isDatawrapperGraphic ? 6 : 3]}px;
 		`,
 
 		supporting: css`
 			clear: left;
-			margin-top: ${space[isDatawrapperGraphic ? 8 : 3]}px;
-			margin-bottom: ${space[isDatawrapperGraphic ? 8 : 3]}px;
-			${isDatawrapperGraphic
-				? `border-bottom: 1px solid ${themePalette(
-						'--branding-border',
-				  )};
-                  padding-bottom: ${space[4]}px;
-				`
-				: ''}
+			margin-top: ${space[isDatawrapperGraphic ? 6 : 3]}px;
+			margin-bottom: ${space[isDatawrapperGraphic ? 6 : 3]}px;
 
 			${from.tablet} {
 				position: relative;
@@ -41,10 +34,17 @@ const roleCss = (isDatawrapperGraphic: boolean) => {
 				margin-right: 20px;
 				line-height: 0;
 				margin-top: ${space[2]}px;
-				${isDatawrapperGraphic ? `margin-bottom: ${space[5]}px;` : ''}
 			}
 			${from.leftCol} {
 				margin-left: -160px;
+
+				${isDatawrapperGraphic ? `margin-bottom: ${space[2]}px;` : ''}
+				${isDatawrapperGraphic ? `padding-bottom: ${space[4]}px;` : ''}
+				${isDatawrapperGraphic
+					? `border-bottom: 1px solid ${themePalette(
+							'--branding-border',
+					  )};`
+					: ''}
 			}
 			${from.wide} {
 				width: 380px;
@@ -53,15 +53,8 @@ const roleCss = (isDatawrapperGraphic: boolean) => {
 		`,
 
 		immersive: css`
-			margin-top: ${space[3]}px;
-			margin-bottom: ${space[3]}px;
-			${isDatawrapperGraphic
-				? `border-bottom: 1px solid ${themePalette(
-						'--branding-border',
-				  )};
-                  padding-bottom: ${space[4]}px;
-				`
-				: ''}
+			margin-top: ${space[isDatawrapperGraphic ? 6 : 3]}px;
+			margin-bottom: ${space[isDatawrapperGraphic ? 6 : 3]}px;
 
 			${until.tablet} {
 				margin-left: -20px;
@@ -82,6 +75,14 @@ const roleCss = (isDatawrapperGraphic: boolean) => {
 			${from.leftCol} {
 				margin-left: -160px;
 				margin-right: -320px;
+
+				${isDatawrapperGraphic ? `margin-bottom: ${space[4]}px;` : ''}
+				${isDatawrapperGraphic ? `padding-bottom: ${space[4]}px;` : ''}
+				${isDatawrapperGraphic
+					? `border-bottom: 1px solid ${themePalette(
+							'--branding-border',
+					  )};`
+					: ''}
 			}
 			${from.wide} {
 				margin-left: -240px;
@@ -90,19 +91,20 @@ const roleCss = (isDatawrapperGraphic: boolean) => {
 		`,
 
 		showcase: css`
-			margin-top: ${space[isDatawrapperGraphic ? 8 : 3]}px;
-			margin-bottom: ${space[isDatawrapperGraphic ? 8 : 3]}px;
+			margin-top: ${space[isDatawrapperGraphic ? 6 : 3]}px;
+			margin-bottom: ${space[isDatawrapperGraphic ? 6 : 3]}px;
 			position: relative;
-			${isDatawrapperGraphic
-				? `border-bottom: 1px solid ${themePalette(
-						'--branding-border',
-				  )};
-                  padding-bottom: ${space[4]}px;
-				`
-				: ''}
 
 			${from.leftCol} {
 				margin-left: -160px;
+
+				${isDatawrapperGraphic ? `margin-bottom: ${space[4]}px;` : ''}
+				${isDatawrapperGraphic ? `padding-bottom: ${space[4]}px;` : ''}
+				${isDatawrapperGraphic
+					? `border-bottom: 1px solid ${themePalette(
+							'--branding-border',
+					  )};`
+					: ''}
 			}
 			${from.wide} {
 				margin-left: -240px;
