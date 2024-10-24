@@ -8,6 +8,8 @@ import { CurrentTime, Duration } from './components/time';
 import { Volume } from './components/Volume';
 import { Wrapper } from './components/Wrapper';
 
+// ********************* ophan stuff *********************
+
 // possible events for audio in ophan
 type AudioEvents = TAudioEventType extends `audio:content:${infer E}`
 	? E
@@ -20,6 +22,21 @@ type AudioProgressEvents = Extract<
 > extends `${infer N extends number}`
 	? N
 	: never;
+
+const reportAudioEvent = (mediaId: string, eventName: AudioEvents) => {
+	const audioEvent: AudioEvent = {
+		id: mediaId,
+		eventType: `audio:content:${eventName}`,
+	};
+
+	void getOphan('Web').then((ophan) => {
+		ophan.record({
+			audio: audioEvent,
+		});
+	});
+};
+
+// ********************* Component *********************
 
 type AudioPlayerProps = {
 	/** The audio source you want to play. */
@@ -36,19 +53,6 @@ type AudioPlayerProps = {
 	showVolumeControls?: boolean;
 	/** media element ID for Ophan */
 	mediaId: string;
-};
-
-const reportAudioEvent = (mediaId: string, eventName: AudioEvents) => {
-	const audioEvent: AudioEvent = {
-		id: mediaId,
-		eventType: `audio:content:${eventName}`,
-	};
-
-	void getOphan('Web').then((ophan) => {
-		ophan.record({
-			audio: audioEvent,
-		});
-	});
 };
 
 /**
