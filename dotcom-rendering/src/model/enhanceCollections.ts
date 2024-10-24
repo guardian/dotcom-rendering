@@ -14,7 +14,6 @@ const FORBIDDEN_CONTAINERS = [
 ];
 
 const UNSUPPORTED_CONTAINERS = [
-	'scrollable/medium',
 	'scrollable/feature',
 	'static/feature/2',
 	'static/medium/4',
