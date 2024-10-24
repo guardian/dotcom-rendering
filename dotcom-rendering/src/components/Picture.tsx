@@ -16,7 +16,10 @@ import type { Loading } from './CardPicture';
 
 export type Orientation = 'portrait' | 'landscape';
 
-type PictureRoleType = RoleType | 'podcastCover';
+type PictureRoleType =
+	| RoleType
+	// Custom image role types that are used but do not come from CAPI / FE
+	| 'podcastCover';
 
 type Props = {
 	role: PictureRoleType;

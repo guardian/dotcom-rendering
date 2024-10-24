@@ -153,10 +153,6 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 
 /**
  * A component used in the carousel fronts containers (e.g. small/medium/feature)
- *
- *  ## Why does this need to be an Island?
- *
- * The carouselling arrow buttons need to run javascript.
  */
 export const ScrollableCarousel = ({ children, carouselLength }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);

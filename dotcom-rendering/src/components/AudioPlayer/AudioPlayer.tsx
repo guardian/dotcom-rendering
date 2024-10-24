@@ -8,6 +8,8 @@ import { CurrentTime, Duration } from './components/time';
 import { Volume } from './components/Volume';
 import { Wrapper } from './components/Wrapper';
 
+// ********************* ophan stuff *********************
+
 // possible events for audio in ophan
 type AudioEvents = TAudioEventType extends `audio:content:${infer E}`
 	? E
@@ -20,6 +22,21 @@ type AudioProgressEvents = Extract<
 > extends `${infer N extends number}`
 	? N
 	: never;
+
+const reportAudioEvent = (mediaId: string, eventName: AudioEvents) => {
+	const audioEvent: AudioEvent = {
+		id: mediaId,
+		eventType: `audio:content:${eventName}`,
+	};
+
+	void getOphan('Web').then((ophan) => {
+		ophan.record({
+			audio: audioEvent,
+		});
+	});
+};
+
+// ********************* Component *********************
 
 type AudioPlayerProps = {
 	/** The audio source you want to play. */
@@ -47,31 +64,6 @@ export const AudioPlayer = ({
 	showVolumeControls = true,
 	mediaId,
 }: AudioPlayerProps) => {
-	// ********************* ophan stuff *********************
-
-	// we'll send listening progress reports to ophan at these percentage points
-	// through playback (100% is handled by the 'ended' event)
-	const audioProgressEvents = useRef<Set<AudioProgressEvents>>(
-		new Set([25, 50, 75]),
-	);
-
-	// wrapper to send audio events to ophan
-	const reportAudioEvent = useCallback(
-		(eventName: AudioEvents) => {
-			const audioEvent: AudioEvent = {
-				id: mediaId,
-				eventType: `audio:content:${eventName}`,
-			};
-
-			void getOphan('Web').then((ophan) => {
-				ophan.record({
-					audio: audioEvent,
-				});
-			});
-		},
-		[mediaId],
-	);
-
 	// ********************* player *********************
 
 	// state for displaying feedback to the user
@@ -89,15 +81,15 @@ export const AudioPlayer = ({
 	// ref to the <audio /> element that handles playback
 	const audioRef = useRef<HTMLAudioElement>(null);
 
+	// ********************* ophan stuff *********************
+
+	// we'll send listening progress reports to ophan at these percentage points
+	// through playback (100% is handled by the 'ended' event)
+	const audioProgressEvents = useRef<Set<AudioProgressEvents>>(
+		new Set([25, 50, 75]),
+	);
+
 	// ******************** events *********************
-
-	const onWaiting = useCallback(() => {
-		setIsWaiting(true);
-	}, []);
-
-	const onCanPlay = useCallback(() => {
-		setIsWaiting(false);
-	}, []);
 
 	const onTimeupdate = useCallback(() => {
 		if (audioRef.current) {
@@ -115,30 +107,21 @@ export const AudioPlayer = ({
 				for (const stage of audioProgressEvents.current) {
 					if (newProgress >= stage) {
 						audioProgressEvents.current.delete(stage);
-						reportAudioEvent(String(stage) as AudioEvents);
+						reportAudioEvent(mediaId, String(stage) as AudioEvents);
 					}
 				}
 			}
 		}
-	}, [isPlaying, reportAudioEvent]);
+	}, [isPlaying, mediaId]);
 
 	const onPlay = useCallback(() => {
 		setIsPlaying(true);
 
 		if (isFirstPlay.current) {
 			isFirstPlay.current = false;
-
-			reportAudioEvent('play');
+			reportAudioEvent(mediaId, 'play');
 		}
-	}, [reportAudioEvent]);
-
-	const onPause = useCallback(() => {
-		setIsPlaying(false);
-	}, []);
-
-	const onEnded = useCallback(() => {
-		reportAudioEvent('end');
-	}, [reportAudioEvent]);
+	}, [mediaId]);
 
 	const onProgress = useCallback(() => {
 		if (audioRef.current) {
@@ -263,6 +246,12 @@ export const AudioPlayer = ({
 
 		const audio = audioRef.current;
 
+		const onPause = () => setIsPlaying(false);
+		const onEnded = () => reportAudioEvent(mediaId, 'end');
+
+		const onWaiting = () => setIsWaiting(true);
+		const onCanPlay = () => setIsWaiting(false);
+
 		audio.addEventListener('waiting', onWaiting);
 		audio.addEventListener('canplay', onCanPlay);
 		audio.addEventListener('timeupdate', onTimeupdate);
@@ -286,17 +275,7 @@ export const AudioPlayer = ({
 			audio.removeEventListener('error', onError);
 			audio.removeEventListener('progress', onProgress);
 		};
-	}, [
-		onTimeupdate,
-		onDurationChange,
-		onPlay,
-		onPause,
-		onEnded,
-		onError,
-		onWaiting,
-		onCanPlay,
-		onProgress,
-	]);
+	}, [onTimeupdate, onDurationChange, onPlay, onError, onProgress, mediaId]);
 
 	return (
 		<>

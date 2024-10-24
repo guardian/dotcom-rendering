@@ -7,6 +7,7 @@ import type {
 	ImagePositionType,
 	ImageSizeType,
 } from '../Card/components/ImageWrapper';
+import type { AspectRatio } from '../CardPicture';
 import { MaintainAspectRatio } from '../MaintainAspectRatio';
 import type { VideoCategory } from './YoutubeAtomOverlay';
 import { YoutubeAtomOverlay } from './YoutubeAtomOverlay';
@@ -51,6 +52,7 @@ export type Props = {
 	imageSize: ImageSizeType;
 	imagePositionOnMobile: ImagePositionType;
 	renderingTarget: RenderingTarget;
+	aspectRatio?: AspectRatio;
 };
 
 export const YoutubeAtom = ({
@@ -79,6 +81,7 @@ export const YoutubeAtom = ({
 	imageSize,
 	imagePositionOnMobile,
 	renderingTarget,
+	aspectRatio,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -196,7 +199,11 @@ export const YoutubeAtom = ({
 				setIsClosed={setIsClosed}
 				shouldPauseOutOfView={shouldPauseOutOfView}
 			>
-				<MaintainAspectRatio height={height} width={width}>
+				<MaintainAspectRatio
+					height={height}
+					width={width}
+					aspectRatio={aspectRatio}
+				>
 					{
 						/**
 						 * Consent and ad targeting are initially undefined and set by subsequent re-renders
@@ -246,6 +253,7 @@ export const YoutubeAtom = ({
 							showTextOverlay={showTextOverlay}
 							imageSize={imageSize}
 							imagePositionOnMobile={imagePositionOnMobile}
+							aspectRatio={aspectRatio}
 						/>
 					)}
 					{showPlaceholder && (

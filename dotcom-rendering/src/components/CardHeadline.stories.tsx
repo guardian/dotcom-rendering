@@ -9,7 +9,7 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import type { DCRContainerPalette } from '../types/front';
-import { CardHeadline } from './CardHeadline';
+import { CardHeadline, type HeadlineSize } from './CardHeadline';
 import { ContainerOverrides } from './ContainerOverrides';
 import { Section } from './Section';
 
@@ -18,12 +18,16 @@ export default {
 	title: 'Components/CardHeadline',
 };
 
-const smallHeadlineSizes: SmallHeadlineSize[] = [
-	'ginormous',
-	'huge',
+const headlineSize: HeadlineSize[] = [
+	'xxxlarge',
+	'xxlarge',
+	'xlarge',
 	'large',
 	'medium',
 	'small',
+	'xsmall',
+	'xxsmall',
+	'xxxsmall',
 	'tiny',
 ];
 
@@ -48,7 +52,7 @@ Article.decorators = [
 
 export const Analysis: StoryObj = ({ format }: StoryProps) => (
 	<>
-		{smallHeadlineSizes.map((size) => (
+		{headlineSize.map((size) => (
 			<Section
 				key={size}
 				fullWidth={true}
@@ -63,7 +67,7 @@ export const Analysis: StoryObj = ({ format }: StoryProps) => (
 						'Unknown'
 					} card headline looks`}
 					format={format}
-					size={size}
+					fontSizes={{ desktop: size }}
 				/>
 			</Section>
 		))}
@@ -126,7 +130,7 @@ Feature.decorators = [
 
 export const Size: StoryObj = ({ format }: StoryProps) => (
 	<>
-		{smallHeadlineSizes.map((size) => (
+		{headlineSize.map((size) => (
 			<Section
 				key={size}
 				fullWidth={true}
@@ -137,7 +141,7 @@ export const Size: StoryObj = ({ format }: StoryProps) => (
 				<CardHeadline
 					headlineText={`This is how a ${size} card headline looks`}
 					format={format}
-					size={size}
+					fontSizes={{ desktop: size }}
 				/>
 			</Section>
 		))}
@@ -156,7 +160,7 @@ Size.decorators = [
 
 export const MobileSize: StoryObj = ({ format }: StoryProps) => (
 	<>
-		{smallHeadlineSizes.map((size) => (
+		{headlineSize.map((size) => (
 			<Section
 				key={size}
 				fullWidth={true}
@@ -167,8 +171,10 @@ export const MobileSize: StoryObj = ({ format }: StoryProps) => (
 				<CardHeadline
 					headlineText={`This is how a mobile ${size} card headline looks`}
 					format={format}
-					size="medium"
-					sizeOnMobile={size}
+					fontSizes={{
+						desktop: 'xsmall',
+						tablet: size,
+					}}
 				/>
 			</Section>
 		))}
@@ -280,7 +286,7 @@ export const Opinion: StoryObj = ({ format }: StoryProps) => (
 			headlineText="This is how small card headline for opinion articles look"
 			format={format}
 			showQuotes={true}
-			size="small"
+			fontSizes={{ desktop: 'xxsmall' }}
 		/>
 	</Section>
 );
@@ -297,7 +303,7 @@ Opinion.decorators = [
 
 export const OpinionKicker: StoryObj = ({ format }: StoryProps) => (
 	<>
-		{smallHeadlineSizes.map((size) => (
+		{headlineSize.map((size) => (
 			<Section
 				key={size}
 				fullWidth={true}
@@ -310,7 +316,7 @@ export const OpinionKicker: StoryObj = ({ format }: StoryProps) => (
 					format={format}
 					showQuotes={true}
 					kickerText="George Monbiot"
-					size={size}
+					fontSizes={{ desktop: size }}
 				/>
 			</Section>
 		))}

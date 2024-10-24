@@ -25,7 +25,7 @@ import type { MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
 import { CardCommentCount } from '../CardCommentCount.importable';
-import { CardHeadline } from '../CardHeadline';
+import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
 import type { AspectRatio, Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
@@ -62,9 +62,7 @@ export type Props = {
 	format: ArticleFormat;
 	absoluteServerTimes: boolean;
 	headlineText: string;
-	headlineSize?: SmallHeadlineSize;
-	headlineSizeOnMobile?: SmallHeadlineSize;
-	headlineSizeOnTablet?: SmallHeadlineSize;
+	headlineSizes?: ResponsiveFontSize;
 	showQuotedHeadline?: boolean;
 	byline?: string;
 	showByline?: boolean;
@@ -118,8 +116,6 @@ export type Props = {
 	isTagPage?: boolean;
 	/** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
 	aspectRatio?: AspectRatio;
-	/** Alows the consumer to use a larger font size group for boost styling*/
-	boostedFontSizes?: boolean;
 	index?: number;
 	/** The Splash card in a flexible container gets a different visual treatment to other cards*/
 	isFlexSplash?: boolean;
@@ -267,9 +263,7 @@ export const Card = ({
 	linkTo,
 	format,
 	headlineText,
-	headlineSize,
-	headlineSizeOnMobile,
-	headlineSizeOnTablet,
+	headlineSizes,
 	showQuotedHeadline,
 	byline,
 	showByline,
@@ -313,7 +307,6 @@ export const Card = ({
 	absoluteServerTimes,
 	isTagPage = false,
 	aspectRatio,
-	boostedFontSizes,
 	index = 0,
 	isFlexSplash,
 	showTopBarDesktop = true,
@@ -544,9 +537,7 @@ export const Card = ({
 					<CardHeadline
 						headlineText={headlineText}
 						format={format}
-						size={headlineSize}
-						sizeOnMobile={headlineSizeOnMobile}
-						sizeOnTablet={headlineSizeOnTablet}
+						fontSizes={headlineSizes}
 						showQuotes={showQuotes}
 						kickerText={
 							format.design === ArticleDesign.LiveBlog &&
@@ -561,7 +552,6 @@ export const Card = ({
 						byline={byline}
 						showByline={showByline}
 						isExternalLink={isExternalLink}
-						boostedFontSizes={boostedFontSizes}
 					/>
 					{!isUndefined(starRating) ? (
 						<StarRatingComponent
@@ -665,15 +655,24 @@ export const Card = ({
 												imagePositionOnMobile={
 													imagePositionOnMobile
 												}
+												//** TODO: IMPROVE THIS MAPPING */
 												// image size defaults to small if not provided. However, if the headline size is large or greater, we want to assume the image is also large so that the play icon is correctly sized.
 												imageSize={
-													headlineSize === 'huge' ||
-													headlineSize === 'large' ||
-													headlineSize === 'ginormous'
+													[
+														'small',
+														'medium',
+														'large',
+														'xlarge',
+														'xxlarge',
+													].includes(
+														headlineSizes?.desktop ??
+															'',
+													)
 														? 'large'
 														: imageSize
 												}
 												enableAds={false}
+												aspectRatio={aspectRatio}
 											/>
 										</Island>
 									</div>
@@ -752,9 +751,7 @@ export const Card = ({
 									<CardHeadline
 										headlineText={headlineText}
 										format={format}
-										size={headlineSize}
-										sizeOnMobile={headlineSizeOnMobile}
-										sizeOnTablet={headlineSizeOnTablet}
+										fontSizes={headlineSizes}
 										showQuotes={showQuotes}
 										kickerText={
 											format.design ===
@@ -771,7 +768,6 @@ export const Card = ({
 										byline={byline}
 										showByline={showByline}
 										isExternalLink={isExternalLink}
-										boostedFontSizes={boostedFontSizes}
 									/>
 									{!isUndefined(starRating) ? (
 										<StarRatingComponent
