@@ -43,6 +43,21 @@ const normalizeAmplitude = (data: number[]) => {
 	return data.map((n) => n * multiplier * 100);
 };
 
+/**
+ * Compresses an of values to a range between the threshold and the existing
+ * maximum.
+ */
+const compress = (array: number[], threshold: number) => {
+	const minValue = Math.min(...array);
+	const maxValue = Math.max(...array);
+
+	return array.map(
+		(x) =>
+			((x - minValue) / (maxValue - minValue)) * (maxValue - threshold) +
+			threshold,
+	);
+};
+
 /** Returns a string of the specified length, repeating the input string as necessary. */
 function padString(str: string, length: number) {
 	// Repeat the string until it is longer than the desired length
@@ -74,8 +89,11 @@ function generateWaveform(url: string, bars: number) {
 	// Normalize the amplitude of the fake audio data
 	const normalized = normalizeAmplitude(shuffled);
 
+	// Compress the amplitude of the fake audio data, like a podcast would
+	const compressed = compress(normalized, 60);
+
 	// Return the normalized the amplitude of the fake audio data
-	return normalized;
+	return compressed;
 }
 
 type Theme = {
