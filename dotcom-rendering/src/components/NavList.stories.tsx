@@ -6,7 +6,7 @@ import { NavList } from './NavList';
 
 export default {
 	component: NavList,
-	title: 'Components/NavList',
+	title: 'Components/Containers/NavList',
 	parameters: {
 		chromatic: {
 			viewports: [
