@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
-import { palette as themePalette } from '../palette';
 import type { FEElement, RoleType } from '../types/content';
 
 type Props = {
@@ -15,182 +14,152 @@ type Props = {
 	isTimeline?: boolean;
 };
 
-const roleCss = (isDatawrapperGraphic: boolean) => {
-	return {
-		inline: css`
-			margin-top: ${space[isDatawrapperGraphic ? 6 : 3]}px;
-			margin-bottom: ${space[isDatawrapperGraphic ? 6 : 3]}px;
-		`,
+const roleCss = {
+	inline: css`
+		margin-top: ${space[3]}px;
+		margin-bottom: ${space[3]}px;
+	`,
 
-		supporting: css`
-			clear: left;
-			margin-top: ${space[isDatawrapperGraphic ? 6 : 3]}px;
-			margin-bottom: ${space[isDatawrapperGraphic ? 6 : 3]}px;
-
-			${from.tablet} {
-				position: relative;
-				float: left;
-				width: 300px;
-				margin-right: 20px;
-				line-height: 0;
-				margin-top: ${space[2]}px;
-			}
-			${from.leftCol} {
-				margin-left: -160px;
-
-				${isDatawrapperGraphic ? `margin-bottom: ${space[2]}px;` : ''}
-				${isDatawrapperGraphic ? `padding-bottom: ${space[4]}px;` : ''}
-				${isDatawrapperGraphic
-					? `border-bottom: 1px solid ${themePalette(
-							'--branding-border',
-					  )};`
-					: ''}
-			}
-			${from.wide} {
-				width: 380px;
-				margin-left: -240px;
-			}
-		`,
-
-		immersive: css`
-			margin-top: ${space[isDatawrapperGraphic ? 6 : 3]}px;
-			margin-bottom: ${space[isDatawrapperGraphic ? 6 : 3]}px;
-
-			${until.tablet} {
-				margin-left: -20px;
-				margin-right: -20px;
-			}
-			${until.mobileLandscape} {
-				margin-left: -10px;
-				margin-right: -10px;
-			}
-			${from.tablet} {
-				margin-left: -20px;
-				margin-right: -100px;
-			}
-			${from.desktop} {
-				margin-left: -20px;
-				margin-right: -340px;
-			}
-			${from.leftCol} {
-				margin-left: -160px;
-				margin-right: -320px;
-
-				${isDatawrapperGraphic ? `margin-bottom: ${space[4]}px;` : ''}
-				${isDatawrapperGraphic ? `padding-bottom: ${space[4]}px;` : ''}
-				${isDatawrapperGraphic
-					? `border-bottom: 1px solid ${themePalette(
-							'--branding-border',
-					  )};`
-					: ''}
-			}
-			${from.wide} {
-				margin-left: -240px;
-				margin-right: -400px;
-			}
-		`,
-
-		showcase: css`
-			margin-top: ${space[isDatawrapperGraphic ? 6 : 3]}px;
-			margin-bottom: ${space[isDatawrapperGraphic ? 6 : 3]}px;
+	supporting: css`
+		clear: left;
+		margin-top: ${space[3]}px;
+		margin-bottom: ${space[3]}px;
+		${from.tablet} {
 			position: relative;
-
-			${from.leftCol} {
-				margin-left: -160px;
-
-				${isDatawrapperGraphic ? `margin-bottom: ${space[4]}px;` : ''}
-				${isDatawrapperGraphic ? `padding-bottom: ${space[4]}px;` : ''}
-				${isDatawrapperGraphic
-					? `border-bottom: 1px solid ${themePalette(
-							'--branding-border',
-					  )};`
-					: ''}
-			}
-			${from.wide} {
-				margin-left: -240px;
-			}
-		`,
-
-		thumbnail: css`
+			float: left;
+			width: 300px;
+			margin-right: 20px;
+			line-height: 0;
 			margin-top: ${space[2]}px;
-			margin-bottom: ${space[2]}px;
-			float: left;
-			clear: left;
-			width: 120px;
-			margin-right: 20px;
-			${from.tablet} {
-				width: 140px;
-			}
-			${from.wide} {
-				margin-left: -240px;
-			}
-			${from.leftCol} {
-				position: relative;
-				margin-left: -160px;
-			}
-		`,
+		}
+		${from.leftCol} {
+			margin-left: -160px;
+		}
+		${from.wide} {
+			width: 380px;
+			margin-left: -240px;
+		}
+	`,
 
-		// This is a special use case where we want RichLinks to appear wider when in the left col
-		richLink: css`
-			margin-bottom: ${space[1]}px;
-			float: left;
-			clear: left;
-			width: 8.75rem;
-			margin-right: 20px;
+	immersive: css`
+		margin-top: ${space[3]}px;
+		margin-bottom: ${space[3]}px;
+		${until.tablet} {
+			margin-left: -20px;
+			margin-right: -20px;
+		}
+		${until.mobileLandscape} {
+			margin-left: -10px;
+			margin-right: -10px;
+		}
+		${from.tablet} {
+			margin-left: -20px;
+			margin-right: -100px;
+		}
+		${from.desktop} {
+			margin-left: -20px;
+			margin-right: -340px;
+		}
+		${from.leftCol} {
+			margin-left: -160px;
+			margin-right: -320px;
+		}
+		${from.wide} {
+			margin-left: -240px;
+			margin-right: -400px;
+		}
+	`,
 
-			/*
+	showcase: css`
+		margin-top: ${space[3]}px;
+		margin-bottom: ${space[3]}px;
+		position: relative;
+		${from.leftCol} {
+			margin-left: -160px;
+		}
+		${from.wide} {
+			margin-left: -240px;
+		}
+	`,
+
+	thumbnail: css`
+		margin-top: ${space[2]}px;
+		margin-bottom: ${space[2]}px;
+		float: left;
+		clear: left;
+		width: 120px;
+		margin-right: 20px;
+		${from.tablet} {
+			width: 140px;
+		}
+		${from.wide} {
+			margin-left: -240px;
+		}
+		${from.leftCol} {
+			position: relative;
+			margin-left: -160px;
+		}
+	`,
+
+	// This is a special use case where we want RichLinks to appear wider when in the left col
+	richLink: css`
+		margin-bottom: ${space[1]}px;
+		float: left;
+		clear: left;
+		width: 8.75rem;
+		margin-right: 20px;
+
+		/*
 		 Acts as until.mobileMedium but accounts for font scaling. On small screens and/or
 		 at certain font sizes, the RichLink will change to a full width version
 		*/
-			@media (max-width: 23.4rem) {
-				width: 100%;
-				box-sizing: border-box;
+		@media (max-width: 23.4rem) {
+			width: 100%;
+			box-sizing: border-box;
 
-				img,
-				.avatar {
-					display: none;
-				}
+			img,
+			.avatar {
+				display: none;
 			}
+		}
 
-			${from.tablet} {
-				width: 140px;
-			}
-			${from.leftCol} {
-				position: relative;
-				margin-left: -160px;
-				width: 140px;
-			}
-			${from.wide} {
-				margin-left: -240px;
-				width: 220px;
-			}
-		`,
+		${from.tablet} {
+			width: 140px;
+		}
+		${from.leftCol} {
+			position: relative;
+			margin-left: -160px;
+			width: 140px;
+		}
+		${from.wide} {
+			margin-left: -240px;
+			width: 220px;
+		}
+	`,
 
-		halfWidth: css`
-			margin-top: ${space[3]}px;
-			margin-bottom: ${space[3]}px;
-			width: 50%;
-			float: left;
-			clear: left;
-			margin-right: 16px;
-		`,
-	};
+	halfWidth: css`
+		margin-top: ${space[3]}px;
+		margin-bottom: ${space[3]}px;
+		width: 50%;
+		float: left;
+		clear: left;
+		margin-right: 16px;
+	`,
 };
 
 // Used for vast majority of layouts.
 export const defaultRoleStyles = (
 	role: RoleType | 'richLink',
 	format: ArticleFormat,
-	isDatawrapperGraphic: boolean,
 	isTimeline = false,
 ) => {
 	switch (role) {
 		case 'inline':
-			return roleCss(isDatawrapperGraphic).inline;
+			return roleCss.inline;
 		case 'supporting':
-			return roleCss(isDatawrapperGraphic).supporting;
+			return roleCss.supporting;
 		case 'immersive':
-			return roleCss(isDatawrapperGraphic).immersive;
+			return roleCss.immersive;
 		case 'showcase':
 			if (isTimeline) {
 				return css`
@@ -206,28 +175,28 @@ export const defaultRoleStyles = (
 					}
 				`;
 			}
-			return roleCss(isDatawrapperGraphic).showcase;
+			return roleCss.showcase;
 		case 'thumbnail':
 			switch (format.design) {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 					// In blogs we don't want to use negative left margins
 					return css`
-						${roleCss(isDatawrapperGraphic).thumbnail}
+						${roleCss.thumbnail}
 						/* It's important we use the media query here to ensure we override the default values */
 						${from.leftCol} {
 							margin-left: 0px;
 						}
 					`;
 				default:
-					return roleCss(isDatawrapperGraphic).thumbnail;
+					return roleCss.thumbnail;
 			}
 		case 'richLink':
-			return roleCss(isDatawrapperGraphic).richLink;
+			return roleCss.richLink;
 		case 'halfWidth':
-			return roleCss(isDatawrapperGraphic).halfWidth;
+			return roleCss.halfWidth;
 		default:
-			return roleCss(isDatawrapperGraphic).inline;
+			return roleCss.inline;
 	}
 };
 
@@ -261,7 +230,7 @@ export const Figure = ({
 	return (
 		<figure
 			id={id}
-			css={defaultRoleStyles(role, format, false, isTimeline)}
+			css={defaultRoleStyles(role, format, isTimeline)}
 			data-spacefinder-role={role}
 			data-spacefinder-type={type}
 			className={className}

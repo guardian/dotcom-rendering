@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { article17, space, textSans17 } from '@guardian/source/foundations';
+import {
+	article17,
+	from,
+	space,
+	textSans17,
+} from '@guardian/source/foundations';
 import libDebounce from 'lodash.debounce';
 import { useRef, useState } from 'react';
 import { interactiveLegacyFigureClasses } from '../layouts/lib/interactiveLegacyStyling';
@@ -119,6 +124,71 @@ const wrapperStyle = ({
 	`
 		: ''}
 `;
+
+const datawrapperRoleStyles = (role: RoleType) => {
+	switch (role) {
+		case 'inline':
+			return datawrapperRoleCss.inline;
+		case 'supporting':
+			return datawrapperRoleCss.supporting;
+		case 'immersive':
+			return datawrapperRoleCss.immersive;
+		case 'showcase':
+			return datawrapperRoleCss.showcase;
+		case 'thumbnail':
+			return datawrapperRoleCss.thumbnail;
+		case 'halfWidth':
+			return datawrapperRoleCss.halfWidth;
+	}
+};
+
+const datawrapperRoleCss = {
+	inline: css`
+		margin-top: ${space[6]}px;
+		margin-bottom: ${space[6]}px;
+	`,
+
+	supporting: css`
+		clear: left;
+		margin-top: ${space[6]}px;
+		margin-bottom: ${space[6]}px;
+
+		${from.leftCol} {
+			margin-bottom: ${space[2]}px;
+			padding-bottom: ${space[4]}px;
+			border-bottom: 1px solid ${themePalette('--branding-border')};
+		}
+		${from.wide} {
+			width: 380px;
+			margin-left: -240px;
+		}
+	`,
+
+	immersive: css`
+		margin-top: ${space[6]}px;
+		margin-bottom: ${space[6]}px;
+
+		${from.leftCol} {
+			margin-bottom: ${space[4]}px;
+			padding-bottom: ${space[4]}px;
+			border-bottom: 1px solid ${themePalette('--branding-border')};
+		}
+	`,
+
+	showcase: css`
+		margin-top: ${space[6]}px;
+		margin-bottom: ${space[6]}px;
+
+		${from.leftCol} {
+			margin-bottom: ${space[4]}px;
+			padding-bottom: ${space[4]}px;
+			border-bottom: 1px solid ${themePalette('--branding-border')};
+		}
+	`,
+
+	thumbnail: css``,
+	halfWidth: css``,
+};
 
 const placeholderLinkStyle = css`
 	position: absolute;
@@ -318,7 +388,8 @@ export const InteractiveBlockComponent = ({
 				css={[
 					isMainMedia
 						? mainMediaFigureStyles
-						: defaultRoleStyles(role, format, isDatawrapperGraphic),
+						: defaultRoleStyles(role, format),
+					isDatawrapperGraphic ? datawrapperRoleStyles(role) : '',
 					wrapperStyle({
 						format,
 						role,
