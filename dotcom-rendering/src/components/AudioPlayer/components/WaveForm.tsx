@@ -168,11 +168,11 @@ export const WaveForm = ({
 					})}
 				</g>
 
-				<clipPath id="buffer-clip-path">
+				<clipPath id={`buffer-clip-path-${id}`}>
 					<rect height="100" width={(buffer / 100) * totalWidth} />
 				</clipPath>
 
-				<clipPath id="progress-clip-path">
+				<clipPath id={`progress-clip-path-${id}`}>
 					<rect height="100" width={(progress / 100) * totalWidth} />
 				</clipPath>
 			</defs>
@@ -183,14 +183,14 @@ export const WaveForm = ({
 			{/* buffer wave */}
 			<use
 				href={`#bars-${id}`}
-				clipPath="url(#buffer-clip-path)"
+				clipPath={`url(#buffer-clip-path-${id})`}
 				fill={theme.buffer}
 			/>
 
 			{/* progress wave */}
 			<use
 				href={`#bars-${id}`}
-				clipPath="url(#progress-clip-path)"
+				clipPath={`url(#progress-clip-path-${id})`}
 				fill={theme.progress}
 			/>
 		</svg>
