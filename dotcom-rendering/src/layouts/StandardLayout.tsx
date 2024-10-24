@@ -435,7 +435,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = isWeb && canRenderAds(article);
 
-	const podcastSeries = article.tags.find((tag) => tag.type === 'Series');
+	const seriesTag = article.tags.find((tag) => tag.type === 'Series');
 
 	return (
 		<>
@@ -756,25 +756,21 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								</>
 							)}
 						</GridItem>
-						{format.design === ArticleDesign.Audio &&
-							podcastSeries && (
-								<GridItem area="image" element="aside">
-									<div css={podcastResponsiveCoverImage}>
-										<Picture
-											role={'podcastCover'}
-											format={format}
-											master={
-												podcastSeries.podcast?.image ??
-												''
-											}
-											alt={podcastSeries.title}
-											height={1}
-											width={1}
-											loading="lazy"
-										/>
-									</div>
-								</GridItem>
-							)}
+						{format.design === ArticleDesign.Audio && seriesTag && (
+							<GridItem area="image" element="aside">
+								<div css={podcastResponsiveCoverImage}>
+									<Picture
+										role={'podcastCover'}
+										format={format}
+										master={seriesTag.podcast?.image ?? ''}
+										alt={seriesTag.title}
+										height={1}
+										width={1}
+										loading="lazy"
+									/>
+								</div>
+							</GridItem>
+						)}
 						<GridItem area="body">
 							{isWeb && (
 								<Hide from="leftCol">
