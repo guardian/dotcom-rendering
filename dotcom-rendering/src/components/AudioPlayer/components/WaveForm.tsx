@@ -43,6 +43,21 @@ const normalizeAmplitude = (data: number[]) => {
 	return data.map((n) => n * multiplier * 100);
 };
 
+/**
+ * Compresses an of values to a range between the threshold and the existing
+ * maximum.
+ */
+const compress = (array: number[], threshold: number) => {
+	const minValue = Math.min(...array);
+	const maxValue = Math.max(...array);
+
+	return array.map(
+		(x) =>
+			((x - minValue) / (maxValue - minValue)) * (maxValue - threshold) +
+			threshold,
+	);
+};
+
 /** Returns a string of the specified length, repeating the input string as necessary. */
 function padString(str: string, length: number) {
 	// Repeat the string until it is longer than the desired length
@@ -74,8 +89,11 @@ function generateWaveform(url: string, bars: number) {
 	// Normalize the amplitude of the fake audio data
 	const normalized = normalizeAmplitude(shuffled);
 
+	// Compress the amplitude of the fake audio data, like a podcast would
+	const compressed = compress(normalized, 60);
+
 	// Return the normalized the amplitude of the fake audio data
-	return normalized;
+	return compressed;
 }
 
 type Theme = {
@@ -150,11 +168,11 @@ export const WaveForm = ({
 					})}
 				</g>
 
-				<clipPath id="buffer-clip-path">
+				<clipPath id={`buffer-clip-path-${id}`}>
 					<rect height="100" width={(buffer / 100) * totalWidth} />
 				</clipPath>
 
-				<clipPath id="progress-clip-path">
+				<clipPath id={`progress-clip-path-${id}`}>
 					<rect height="100" width={(progress / 100) * totalWidth} />
 				</clipPath>
 			</defs>
@@ -165,14 +183,14 @@ export const WaveForm = ({
 			{/* buffer wave */}
 			<use
 				href={`#bars-${id}`}
-				clipPath="url(#buffer-clip-path)"
+				clipPath={`url(#buffer-clip-path-${id})`}
 				fill={theme.buffer}
 			/>
 
 			{/* progress wave */}
 			<use
 				href={`#bars-${id}`}
-				clipPath="url(#progress-clip-path)"
+				clipPath={`url(#progress-clip-path-${id})`}
 				fill={theme.progress}
 			/>
 		</svg>
