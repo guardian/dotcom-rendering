@@ -84,8 +84,8 @@ const AudioGrid = ({ children }: { children: React.ReactNode }) => (
 						'title         .'
 						'headline      .'
 						'disclaimer    right-column'
-						'media    	   right-column'
-						'standfirst    right-column'
+						'media         right-column'
+						'standfirst     right-column'
 						'meta          right-column'
 						'body          right-column'
 						'.             right-column';
@@ -95,9 +95,9 @@ const AudioGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-columns: 140px 1px 620px 300px;
 					grid-template-areas:
 						'title  border  headline     .'
-						'.  	border  disclaimer   right-column'
-						'meta  border  media   	 right-column'
-						'meta   border  standfirst   right-column'
+						'.      border  disclaimer   right-column'
+						'meta   border  media        right-column'
+						'meta   border  standfirst    right-column'
 						'meta   border  body         right-column'
 						'.      border  .            right-column';
 				}
