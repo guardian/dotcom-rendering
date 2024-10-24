@@ -178,7 +178,6 @@ export const SupportingContent = ({
 							>
 								<CardHeadline
 									format={subLinkFormat}
-									size="tiny"
 									hasInlineKicker={true}
 									linkTo={subLink.url}
 									showPulsingDot={
