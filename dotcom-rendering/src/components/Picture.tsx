@@ -16,8 +16,13 @@ import type { Loading } from './CardPicture';
 
 export type Orientation = 'portrait' | 'landscape';
 
+type PictureRoleType =
+	| RoleType
+	// Custom image role types that are used but do not come from CAPI / FE
+	| 'podcastCover';
+
 type Props = {
-	role: RoleType;
+	role: PictureRoleType;
 	format: ArticleFormat;
 	master: string;
 	alt: string;
@@ -54,7 +59,7 @@ const decideImageWidths = ({
 	isLightbox,
 	orientation,
 }: {
-	role: RoleType;
+	role: PictureRoleType;
 	isMainMedia?: boolean;
 	format: ArticleFormat;
 	isLightbox: boolean;
@@ -163,6 +168,11 @@ const decideImageWidths = ({
 			case 'supporting':
 			case 'halfWidth':
 				return [{ breakpoint: breakpoints.mobile, width: 445 }];
+			case 'podcastCover':
+				return [
+					{ breakpoint: breakpoints.mobile, width: 140 },
+					{ breakpoint: breakpoints.wide, width: 219 },
+				];
 			case 'inline':
 			default:
 				return [
