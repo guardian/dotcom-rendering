@@ -7,8 +7,8 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
-	getAllDesigns,
-	getAllThemes,
+	getFormatsForDesigns,
+	getFormatsForThemes,
 	Pillar,
 } from '../lib/articleFormat';
 import { RenderArticleElement } from '../lib/renderElement';
@@ -78,7 +78,7 @@ export const ThemeVariations = {
 	},
 	decorators: [centreColumnDecorator],
 	parameters: {
-		formats: getAllThemes({
+		formats: getFormatsForThemes({
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 		}),
@@ -98,7 +98,7 @@ export const DesignVariations = {
 	args: ThemeVariations.args,
 	decorators: [centreColumnDecorator],
 	parameters: {
-		formats: getAllDesigns({
+		formats: getFormatsForDesigns({
 			theme: Pillar.News,
 			display: ArticleDisplay.Standard,
 		}).filter(isNotAudioDesign),

@@ -186,22 +186,25 @@ const isTheme = (theme: string | ArticleTheme): theme is ArticleTheme =>
 const isDesign = (design: string | ArticleDesign): design is ArticleDesign =>
 	!isString(design);
 
-export const getAllThemes = ({
+export const getFormatsForThemes = ({
 	display,
 	design,
+	ignore,
 }: {
 	display: ArticleDisplay;
 	design: ArticleDesign;
+	ignore?: ArticleTheme[];
 }): Array<ArticleFormat> =>
 	Object.values({ ...Pillar, ...ArticleSpecial })
 		.filter(isTheme)
+		.filter((theme) => !ignore?.includes(theme))
 		.map((theme) => ({
 			theme,
 			display,
 			design,
 		}));
 
-export const getAllDesigns = ({
+export const getFormatsForDesigns = ({
 	display,
 	theme,
 	ignore,

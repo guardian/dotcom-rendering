@@ -12,7 +12,7 @@ import { allModes } from '../../.storybook/modes';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	getAllThemes,
+	getFormatsForThemes,
 	Pillar,
 } from '../lib/articleFormat';
 import { palette } from '../palette';
@@ -154,7 +154,7 @@ export const LiveBlogDesignWithBranding = {
 	},
 	parameters: {
 		config: { darkModeAvailable: true },
-		formats: getAllThemes({
+		formats: getFormatsForThemes({
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.LiveBlog,
 		}),
@@ -196,7 +196,7 @@ export const FeatureDesignWithABylineMismatchingTheContributorTag = {
 	},
 	parameters: {
 		...Default.parameters,
-		formats: getAllThemes({
+		formats: getFormatsForThemes({
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Feature,
 		}),
@@ -220,7 +220,7 @@ export const FeatureDesignWithSmallBylineImage = {
 	},
 	parameters: {
 		...Default.parameters,
-		formats: getAllThemes({
+		formats: getFormatsForThemes({
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Feature,
 		}),
@@ -231,7 +231,7 @@ export const CommentDesign = {
 	...Default,
 	parameters: {
 		...Default.parameters,
-		formats: getAllThemes({
+		formats: getFormatsForThemes({
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Comment,
 		}),
@@ -242,7 +242,7 @@ export const InterviewDesign = {
 	...Default,
 	parameters: {
 		...Default.parameters,
-		formats: getAllThemes({
+		formats: getFormatsForThemes({
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Interview,
 		}),
@@ -253,7 +253,7 @@ export const ImmersiveDisplay = {
 	...Default,
 	parameters: {
 		...Default.parameters,
-		formats: getAllThemes({
+		formats: getFormatsForThemes({
 			display: ArticleDisplay.Immersive,
 			design: ArticleDesign.Standard,
 		}),
@@ -285,7 +285,7 @@ export const FeatureDesignWithTwoContributors = {
 	},
 	parameters: {
 		...Default.parameters,
-		formats: getAllThemes({
+		formats: getFormatsForThemes({
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Feature,
 		}),
@@ -296,7 +296,7 @@ export const DeadBlogDesign = {
 	...Default,
 	parameters: {
 		...Default.parameters,
-		formats: getAllThemes({
+		formats: getFormatsForThemes({
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.DeadBlog,
 		}),
@@ -322,7 +322,7 @@ export const VideoDesignWithSource = {
 	},
 	parameters: {
 		...Default.parameters,
-		formats: getAllThemes({
+		formats: getFormatsForThemes({
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Video,
 		}),

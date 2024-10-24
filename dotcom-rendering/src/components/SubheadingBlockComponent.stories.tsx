@@ -4,8 +4,8 @@ import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	getAllDesigns,
-	getAllThemes,
+	getFormatsForDesigns,
+	getFormatsForThemes,
 	Pillar,
 } from '../lib/articleFormat';
 import { SubheadingBlockComponent } from './SubheadingBlockComponent';
@@ -83,7 +83,7 @@ export const StandardDisplayThemeVariation = {
 	decorators: [
 		GlobalStylesDecorator,
 		splitTheme(
-			getAllThemes({
+			getFormatsForThemes({
 				// we need a design that colours h2s to illustrate the theme variation
 				design: ArticleDesign.Analysis,
 				display: ArticleDisplay.Standard,
@@ -96,7 +96,7 @@ export const StandardDisplayDesignVariation = {
 	decorators: [
 		GlobalStylesDecorator,
 		splitTheme(
-			getAllDesigns({
+			getFormatsForDesigns({
 				theme: Pillar.News,
 				display: ArticleDisplay.Standard,
 			}),
@@ -108,12 +108,12 @@ export const ImmersiveDisplayThemeVariation = {
 	decorators: [
 		GlobalStylesDecorator,
 		splitTheme(
-			getAllThemes({
+			getFormatsForThemes({
 				// we need a design that colours h2s to illustrate the theme variation
 				design: ArticleDesign.Analysis,
 				display: ArticleDisplay.Immersive,
 			}).concat(
-				getAllThemes({
+				getFormatsForThemes({
 					// and a design that does not colour h2s to illustrate the lack of theme variation
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Immersive,
@@ -127,7 +127,7 @@ export const ImmersiveDisplayDesignVariation = {
 	decorators: [
 		GlobalStylesDecorator,
 		splitTheme(
-			getAllDesigns({
+			getFormatsForDesigns({
 				theme: Pillar.News,
 				display: ArticleDisplay.Immersive,
 			}),

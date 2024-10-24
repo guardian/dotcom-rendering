@@ -5,8 +5,8 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
-	getAllDesigns,
-	getAllThemes,
+	getFormatsForDesigns,
+	getFormatsForThemes,
 	Pillar,
 } from '../lib/articleFormat';
 import { BlockquoteBlockComponent } from './BlockquoteBlockComponent';
@@ -49,7 +49,7 @@ export const QuotedStandardDesignAllThemes = {
 		quoted: true,
 	},
 	parameters: {
-		formats: getAllThemes({
+		formats: getFormatsForThemes({
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 		}),
@@ -59,7 +59,7 @@ export const QuotedStandardDesignAllThemes = {
 export const QuotedLiveBlogDesignAllThemes = {
 	args: QuotedStandardDesignAllThemes.args,
 	parameters: {
-		formats: getAllThemes({
+		formats: getFormatsForThemes({
 			design: ArticleDesign.LiveBlog,
 			display: ArticleDisplay.Standard,
 		}),
@@ -69,7 +69,7 @@ export const QuotedLiveBlogDesignAllThemes = {
 export const QuotedDeadBlogDesignAllThemes = {
 	args: QuotedStandardDesignAllThemes.args,
 	parameters: {
-		formats: getAllThemes({
+		formats: getFormatsForThemes({
 			design: ArticleDesign.DeadBlog,
 			display: ArticleDisplay.Standard,
 		}),
@@ -79,7 +79,7 @@ export const QuotedDeadBlogDesignAllThemes = {
 export const QuotedAllDesignsNewsTheme = {
 	args: QuotedStandardDesignAllThemes.args,
 	parameters: {
-		formats: getAllDesigns({
+		formats: getFormatsForDesigns({
 			display: ArticleDisplay.Standard,
 			theme: Pillar.News,
 			ignore: [ArticleDesign.Audio],
@@ -90,7 +90,7 @@ export const QuotedAllDesignsNewsTheme = {
 export const QuotedAllDesignsCultureTheme = {
 	args: QuotedStandardDesignAllThemes.args,
 	parameters: {
-		formats: getAllDesigns({
+		formats: getFormatsForDesigns({
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Culture,
 			ignore: [ArticleDesign.Audio],
@@ -101,7 +101,7 @@ export const QuotedAllDesignsCultureTheme = {
 export const QuotedAllDesignsSportTheme = {
 	args: QuotedStandardDesignAllThemes.args,
 	parameters: {
-		formats: getAllDesigns({
+		formats: getFormatsForDesigns({
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Sport,
 			ignore: [ArticleDesign.Audio],

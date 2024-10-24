@@ -4,7 +4,7 @@ import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	getAllThemes,
+	getFormatsForThemes,
 } from '../lib/articleFormat';
 import { Pagination } from './Pagination';
 
@@ -17,7 +17,7 @@ export default {
 	},
 };
 
-const formats = getAllThemes({
+const formats = getFormatsForThemes({
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,
 });
