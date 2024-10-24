@@ -7,7 +7,7 @@ import {
 	ArticleDisplay,
 	ArticleSpecial,
 	formatToString,
-	getFormatsForThemes,
+	getAllThemes,
 	Pillar,
 } from '../lib/articleFormat';
 import { palette } from '../palette';
@@ -57,7 +57,7 @@ export const StandardDesign = {
 		webPublicationDateDeprecated: '',
 	},
 	parameters: {
-		formats: getFormatsForThemes({
+		formats: getAllThemes({
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 		}),
@@ -67,7 +67,7 @@ export const StandardDesign = {
 export const FeatureDesign = {
 	...StandardDesign,
 	parameters: {
-		formats: getFormatsForThemes({
+		formats: getAllThemes({
 			design: ArticleDesign.Feature,
 			display: ArticleDisplay.Standard,
 		}),
@@ -154,7 +154,7 @@ export const CommentDesignOpinionTheme = {
 export const AnalysisDesign = {
 	...StandardDesign,
 	parameters: {
-		formats: getFormatsForThemes({
+		formats: getAllThemes({
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Analysis,
 		}),

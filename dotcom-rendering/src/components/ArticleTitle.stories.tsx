@@ -6,7 +6,7 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
-	getFormatsForThemes,
+	getAllThemes,
 	Pillar,
 } from '../lib/articleFormat';
 import { ArticleTitle } from './ArticleTitle';
@@ -228,7 +228,7 @@ export const DeadBlogDesignMultipleThemesWithBlogTag = {
 		...LiveBlogDesignWithBlogTag.args,
 	},
 	parameters: {
-		formats: getFormatsForThemes({
+		formats: getAllThemes({
 			design: ArticleDesign.DeadBlog,
 			display: ArticleDisplay.Standard,
 		}),

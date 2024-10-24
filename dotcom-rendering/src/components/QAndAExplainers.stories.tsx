@@ -6,7 +6,7 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
-	getFormatsForThemes,
+	getAllThemes,
 	Pillar,
 } from '../lib/articleFormat';
 import { RenderArticleElement } from '../lib/renderElement';
@@ -65,7 +65,7 @@ export const AllThemes = {
 	},
 	decorators: [centreColumnDecorator],
 	parameters: {
-		formats: getFormatsForThemes({
+		formats: getAllThemes({
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 		}),

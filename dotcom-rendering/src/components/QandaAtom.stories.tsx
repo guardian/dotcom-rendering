@@ -8,7 +8,7 @@ import {
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	getFormatsForThemes,
+	getAllThemes,
 	Pillar,
 } from '../lib/articleFormat';
 import { QandaAtom as QandaAtomComponent } from './QandaAtom.importable';
@@ -31,7 +31,7 @@ export const DefaultStoryExpanded: Story = {
 	args: { ...imageStoryExpanded },
 	decorators: [
 		splitTheme(
-			getFormatsForThemes({
+			getAllThemes({
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
 			}),

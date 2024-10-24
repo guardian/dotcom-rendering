@@ -5,7 +5,7 @@ import { allModes } from '../../.storybook/modes';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	getFormatsForThemes,
+	getAllThemes,
 	Pillar,
 } from '../lib/articleFormat';
 import { ArticleMetaApps } from './ArticleMeta.apps';
@@ -77,7 +77,7 @@ export const WithAvatarAndFollowStory = {
 	},
 	parameters: {
 		...WithFollowStory.parameters,
-		formats: getFormatsForThemes({
+		formats: getAllThemes({
 			...WithFollowStory.args.format,
 			design: ArticleDesign.Feature,
 		}),

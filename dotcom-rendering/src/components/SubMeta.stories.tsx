@@ -4,7 +4,7 @@ import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	getFormatsForThemes,
+	getAllThemes,
 } from '../lib/articleFormat';
 import { SubMeta } from './SubMeta';
 
@@ -76,7 +76,7 @@ export const StandardStory = ({ format }: StoryProps) => {
 StandardStory.storyName = 'Standard - All pillars';
 StandardStory.decorators = [splitTheme()];
 
-const allDeadBlogThemes = getFormatsForThemes({
+const allDeadBlogThemes = getAllThemes({
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.DeadBlog,
 });
