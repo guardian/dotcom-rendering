@@ -301,6 +301,7 @@ export const AudioPlayer = ({
 					canJumpToPoint={Boolean(audioRef.current?.duration)}
 					buffer={buffer}
 					progress={progress}
+					src={src}
 					onMouseDown={jumpToPoint}
 					onMouseUp={stopScrubbing}
 					onMouseMove={scrub}
