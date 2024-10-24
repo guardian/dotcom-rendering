@@ -152,8 +152,12 @@ export const HighlightsCard = ({
 					<CardHeadline
 						headlineText={headlineText}
 						format={format}
-						size="medium"
-						sizeOnMobile="small"
+						fontSizes={{
+							desktop: 'xsmall',
+							tablet: 'xxsmall',
+							mobileMedium: 'xxsmall',
+							mobile: 'tiny',
+						}}
 						showPulsingDot={
 							format.design === ArticleDesign.LiveBlog
 						}

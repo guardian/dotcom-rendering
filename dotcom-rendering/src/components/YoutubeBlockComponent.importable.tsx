@@ -8,6 +8,7 @@ import type {
 	ImagePositionType,
 	ImageSizeType,
 } from './Card/components/ImageWrapper';
+import type { AspectRatio } from './CardPicture';
 import { useConfig } from './ConfigContext';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
@@ -40,6 +41,7 @@ type Props = {
 	imageSize?: ImageSizeType;
 	imagePositionOnMobile?: ImagePositionType;
 	enableAds: boolean;
+	aspectRatio?: AspectRatio;
 };
 
 /**
@@ -81,6 +83,7 @@ export const YoutubeBlockComponent = ({
 	imageSize = 'large',
 	imagePositionOnMobile = 'none',
 	enableAds,
+	aspectRatio,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -173,6 +176,7 @@ export const YoutubeBlockComponent = ({
 				imageSize={imageSize}
 				imagePositionOnMobile={imagePositionOnMobile}
 				renderingTarget={renderingTarget}
+				aspectRatio={aspectRatio}
 			/>
 			{!hideCaption && (
 				<Caption

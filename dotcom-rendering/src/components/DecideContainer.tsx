@@ -27,7 +27,8 @@ import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
 import { NavList } from './NavList';
 import { ScrollableHighlights } from './ScrollableHighlights.importable';
-import { ScrollableSmall } from './ScrollableSmall';
+import { ScrollableMedium } from './ScrollableMedium.importable';
+import { ScrollableSmall } from './ScrollableSmall.importable';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -252,16 +253,30 @@ export const DecideContainer = ({
 			);
 		case 'scrollable/small':
 			return (
-				<ScrollableSmall
-					trails={trails}
-					imageLoading={imageLoading}
-					containerType={'scrollable/small'}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
-				/>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<ScrollableSmall
+						trails={trails}
+						imageLoading={imageLoading}
+						containerType={'scrollable/small'}
+						containerPalette={containerPalette}
+						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
+					/>
+				</Island>
 			);
 		case 'scrollable/medium':
+			return (
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<ScrollableMedium
+						trails={trails}
+						imageLoading={imageLoading}
+						containerType={'scrollable/small'}
+						containerPalette={containerPalette}
+						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
+					/>
+				</Island>
+			);
 		case 'scrollable/feature':
 		case 'static/feature/2':
 		case 'static/medium/4':

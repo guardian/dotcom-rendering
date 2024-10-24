@@ -76,7 +76,7 @@ const tertiaryButtonOverrides = css`
 	/* stylelint-disable-next-line declaration-no-important */
 	border: 1px solid ${palette.neutral[7]} !important;
 	/* stylelint-disable-next-line declaration-no-important */
-	background-color: ${palette.neutral[100]} !important;
+	background-color: transparent !important;
 
 	:hover {
 		/* stylelint-disable-next-line declaration-no-important */

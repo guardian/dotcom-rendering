@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import {
 	between,
-	from,
 	headlineMedium14,
+	headlineMedium15,
 	headlineMedium17,
 	headlineMedium20,
 	headlineMedium24,
@@ -11,7 +11,6 @@ import {
 	headlineMedium42,
 	headlineMedium50,
 	headlineMedium64,
-	space,
 	textSans12,
 	textSans14,
 	textSans15,
@@ -35,11 +34,7 @@ type Props = {
 	showPulsingDot?: boolean;
 	hasInlineKicker?: boolean;
 	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
-	size?: SmallHeadlineSize;
-	sizeOnMobile?: SmallHeadlineSize;
-	sizeOnTablet?: SmallHeadlineSize;
-	/* Controls which font size group to use, regular or boosted. Each group maps internally to the smallHeadlineSize type*/
-	boostedFontSizes?: boolean;
+	fontSizes?: ResponsiveFontSize;
 	byline?: string;
 	showByline?: boolean;
 	linkTo?: string; // If provided, the headline is wrapped in a link
@@ -48,177 +43,74 @@ type Props = {
 	isHighlights?: boolean;
 };
 
-/** These represent a new set of fonts. They are extra large font sizes that, as a group, are only used on headlines */
-const boostedFontStyles = ({ size }: { size: SmallHeadlineSize }) => {
-	switch (size) {
-		case 'ginormous':
-			return `${headlineMedium64}`;
-		case 'huge':
-			return `${headlineMedium50}`;
-		case 'large':
-			return `${headlineMedium42}`;
-		case 'medium':
-			return `${headlineMedium34}`;
-		case 'small':
-			return `${headlineMedium28}`;
-		case 'tiny':
-			return `${headlineMedium24}`;
-	}
+const headlineSize = {
+	xxxlarge: headlineMedium64,
+	xxlarge: headlineMedium50,
+	xlarge: headlineMedium42,
+	large: headlineMedium34,
+	medium: headlineMedium28,
+	small: headlineMedium24,
+	xsmall: headlineMedium20,
+	xxsmall: headlineMedium17,
+	xxxsmall: headlineMedium15,
+	tiny: headlineMedium14,
 };
 
-const fontStyles = ({
-	size,
-	boostedFontSizes,
-}: {
-	size: SmallHeadlineSize;
-	boostedFontSizes: boolean;
-}) => {
-	if (boostedFontSizes) return boostedFontStyles({ size });
-
-	switch (size) {
-		case 'ginormous':
-			return css`
-				${from.desktop} {
-					${headlineMedium50}
-				}
-			`;
-		case 'huge':
-			return css`
-				${headlineMedium28}
-			`;
-		case 'large':
-			return css`
-				${headlineMedium24}
-			`;
-		case 'medium':
-			return css`
-				${headlineMedium20}
-			`;
-		case 'small':
-			return css`
-				${headlineMedium17}
-			`;
-		case 'tiny':
-			return css`
-				${headlineMedium14}
-			`;
-	}
+const textSansSize = {
+	xxxlarge: textSans20,
+	xxlarge: textSans20,
+	xlarge: textSans20,
+	large: textSans20,
+	medium: textSans20,
+	small: textSans20,
+	xsmall: textSans20,
+	xxsmall: textSans17,
+	xxxsmall: textSans15,
+	tiny: textSans12,
 };
-const fontStylesOnTablet = ({
-	size,
-	boostedFontSizes,
-}: {
-	size?: SmallHeadlineSize;
-	boostedFontSizes: boolean;
-}) => {
-	/* Currently, tablet-specific headline sizing only applies to boosted fonts where a tablet font size has been supplied */
-	if (size && boostedFontSizes) {
-		return css`
-			${between.tablet.and.desktop} {
-				${boostedFontStyles({ size })}
+
+export type HeadlineSize = keyof typeof headlineSize;
+export type TextSansSize = keyof typeof textSansSize;
+
+export type ResponsiveFontSize = {
+	desktop: HeadlineSize;
+	tablet?: HeadlineSize;
+	mobile?: HeadlineSize;
+	mobileMedium?: HeadlineSize;
+};
+
+const getFontSize = (
+	sizes: ResponsiveFontSize,
+	family: 'headline' | 'textSans',
+) => {
+	const { desktop, tablet, mobileMedium, mobile } = sizes;
+
+	const fontSize = family === 'headline' ? headlineSize : textSansSize;
+
+	return css`
+		${fontSize[desktop]};
+
+		${tablet &&
+		css`
+			${until.desktop} {
+				${fontSize[tablet]};
 			}
-		`;
-	}
-	return null;
-};
+		`}
 
-const fontStylesOnMobile = ({
-	size,
-	boostedFontSizes,
-}: {
-	size: SmallHeadlineSize;
-	boostedFontSizes: boolean;
-}) => {
-	if (boostedFontSizes) {
-		return css`
+		${mobile &&
+		css`
 			${until.tablet} {
-				${boostedFontStyles({ size })}
+				${fontSize[mobile]};
 			}
-		`;
-	}
+		`}
 
-	switch (size) {
-		case 'ginormous':
-			return css`
-				${until.mobileLandscape} {
-					${headlineMedium34}
-				}
-				${between.mobileLandscape.and.desktop} {
-					${headlineMedium42}
-				}
-			`;
-		case 'huge':
-			return css`
-				${until.desktop} {
-					${headlineMedium24}
-				}
-			`;
-		case 'large':
-			return css`
-				${until.desktop} {
-					${headlineMedium20}
-				}
-			`;
-		case 'medium':
-			return css`
-				${until.desktop} {
-					${headlineMedium17}
-				}
-			`;
-		case 'small':
-			return css`
-				${until.mobileMedium} {
-					${headlineMedium14}
-				}
-				${between.mobileMedium.and.desktop} {
-					${headlineMedium17}
-				}
-			`;
-		default:
-			return undefined;
-	}
-};
-
-const labTextStyles = (size: SmallHeadlineSize) => {
-	switch (size) {
-		case 'ginormous':
-		case 'huge':
-		case 'large':
-			return css`
-				${textSans20};
-				${until.desktop} {
-					${textSans17};
-				}
-			`;
-		case 'medium':
-			return css`
-				${textSans20};
-				/**
-				 * Typography preset styles should not be overridden.
-				 * This has been done because the styles do not directly map to the new presets.
-				 * Please speak to your team's designer and update this to use a more appropriate preset.
-				 */
-				line-height: 1.15;
-				${until.desktop} {
-					${textSans17};
-					/**
-					 * Typography preset styles should not be overridden.
-					 * This has been done because the styles do not directly map to the new presets.
-					 * Please speak to your team's designer and update this to use a more appropriate preset.
-					 */
-					line-height: 1.15;
-				}
-				padding-bottom: ${space[1]}px;
-			`;
-		case 'small':
-			return css`
-				${textSans15};
-			`;
-		case 'tiny':
-			return css`
-				${textSans12};
-			`;
-	}
+		${mobileMedium &&
+		css`
+			${between.mobileMedium.and.tablet} {
+				${fontSize[mobileMedium]};
+			}
+		`}
+	`;
 };
 
 const sublinkStyles = css`
@@ -263,6 +155,29 @@ export const WithLink = ({
 	return <>{children}</>;
 };
 
+/**
+ * The Byline component uses a different type to determine font sizes but infers the size from the desktop headline size.
+ * This function converts the headline size to the appropriate byline size.
+ */
+const getBylineFontSizes = (size: HeadlineSize): SmallHeadlineSize => {
+	switch (size) {
+		case 'xxlarge':
+			return 'ginormous';
+		case 'medium':
+			return 'huge';
+		case 'small':
+			return 'large';
+		case 'xsmall':
+			return 'medium';
+		case 'xxsmall':
+			return 'small';
+		case 'tiny':
+			return 'tiny';
+		default:
+			return 'medium';
+	}
+};
+
 export const CardHeadline = ({
 	headlineText,
 	format,
@@ -270,10 +185,8 @@ export const CardHeadline = ({
 	kickerText,
 	showPulsingDot,
 	hasInlineKicker,
-	size = 'medium',
-	sizeOnMobile,
-	sizeOnTablet,
-	boostedFontSizes = false,
+	/** headline medium 20 on desktop and headline medium 17 on tablet and mobile */
+	fontSizes = { desktop: 'xsmall', tablet: 'xxsmall', mobile: 'xxsmall' },
 	byline,
 	showByline,
 	linkTo,
@@ -287,6 +200,13 @@ export const CardHeadline = ({
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
 
+	const fonts =
+		format.theme === ArticleSpecial.Labs
+			? getFontSize(fontSizes, 'textSans')
+			: getFontSize(fontSizes, 'headline');
+
+	const bylineSize = getBylineFontSizes(fontSizes.desktop);
+
 	return (
 		<WithLink linkTo={linkTo}>
 			<h3
@@ -294,25 +214,11 @@ export const CardHeadline = ({
 					isSublink ? 'card-sublink-headline' : 'card-headline'
 				}`}
 				css={[
-					format.theme !== ArticleSpecial.Labs &&
-						fontStylesOnMobile({
-							size: sizeOnMobile ?? size,
-							boostedFontSizes,
-						}),
-
-					format.theme !== ArticleSpecial.Labs &&
-						fontStylesOnTablet({
-							size: sizeOnTablet,
-							boostedFontSizes,
-						}),
-					format.theme === ArticleSpecial.Labs
-						? labTextStyles(size)
-						: fontStyles({ size, boostedFontSizes }),
-					isSublink &&
-						size === 'tiny' &&
-						css`
-							${textSans14}
-						`,
+					isSublink
+						? css`
+								${textSans14}
+						  `
+						: fonts,
 				]}
 			>
 				{!!kickerText && (
@@ -350,7 +256,7 @@ export const CardHeadline = ({
 				<Byline
 					text={byline}
 					isLabs={format.theme === ArticleSpecial.Labs}
-					size={size}
+					size={bylineSize}
 				/>
 			)}
 		</WithLink>

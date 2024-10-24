@@ -30,6 +30,7 @@ import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
+import { UsEoy2024Wrapper } from '../components/UsEoy2024Wrapper.importable';
 import { WeatherWrapper } from '../components/WeatherWrapper.importable';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { badgeFromBranding, isPaidContentSameBranding } from '../lib/branding';
@@ -304,6 +305,36 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					if (collection.collectionType === 'scrollable/highlights') {
 						// Highlights are rendered in the Masthead component
 						return null;
+					}
+
+					if (
+						collection.displayName === 'US end-of-year 2024' &&
+						pageId.toLowerCase() === 'us'
+					) {
+						return (
+							<ContainerOverrides
+								key={ophanName}
+								containerPalette={collection.containerPalette}
+							>
+								<Section
+									fullWidth={true}
+									padBottom={false}
+									showSideBorders={false}
+									padSides={false}
+									showTopBorder={false}
+									ophanComponentLink={ophanComponentLink}
+									ophanComponentName={ophanName}
+									hasPageSkin={hasPageSkin}
+								>
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
+										<UsEoy2024Wrapper />
+									</Island>
+								</Section>
+							</ContainerOverrides>
+						);
 					}
 
 					if (collection.collectionType === 'fixed/thrasher') {
