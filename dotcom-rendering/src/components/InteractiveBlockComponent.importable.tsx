@@ -1,4 +1,5 @@
-import { SerializedStyles, css } from '@emotion/react';
+import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import {
 	article17,
