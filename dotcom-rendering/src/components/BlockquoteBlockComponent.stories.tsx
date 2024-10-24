@@ -92,7 +92,6 @@ export const QuotedAllDesignsNewsTheme = {
 		formats: getAllDesigns({
 			display: ArticleDisplay.Standard,
 			theme: Pillar.News,
-			ignore: [ArticleDesign.Audio],
 		}),
 	},
 } satisfies Story;
@@ -103,7 +102,6 @@ export const QuotedAllDesignsCultureTheme = {
 		formats: getAllDesigns({
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Culture,
-			ignore: [ArticleDesign.Audio],
 		}),
 	},
 } satisfies Story;
@@ -114,7 +112,6 @@ export const QuotedAllDesignsSportTheme = {
 		formats: getAllDesigns({
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Sport,
-			ignore: [ArticleDesign.Audio],
 		}),
 	},
 } satisfies Story;
