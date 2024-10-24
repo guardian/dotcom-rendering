@@ -6,6 +6,7 @@ import {
 import type { NavType } from '../model/extract-nav';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { AudioLayout } from './AudioLayout';
 import { CommentLayout } from './CommentLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
@@ -262,6 +263,14 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+						/>
+					);
+				case ArticleDesign.Audio:
+					return (
+						<AudioLayout
+							article={article}
+							format={format}
+							NAV={NAV}
 						/>
 					);
 				default:

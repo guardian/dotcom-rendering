@@ -35,6 +35,7 @@ export interface Guardian {
 			isDev?: boolean;
 			userAttributesApiUrl?: string;
 			idApiUrl?: string;
+			isPodcast?: boolean;
 		};
 		libs: {
 			googletag: string;
