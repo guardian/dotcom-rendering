@@ -49,6 +49,7 @@ import { CardWrapper } from './components/CardWrapper';
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import type {
+	ImageFixedSizeOptions,
 	ImagePositionType,
 	ImageSizeType,
 } from './components/ImageWrapper';
@@ -427,6 +428,20 @@ export const Card = ({
 		containerType === 'flexible/special' ||
 		containerType === 'flexible/general';
 
+	const isSmallCard = containerType === 'scrollable/small';
+
+	const imageFixedSizeOptions = (): ImageFixedSizeOptions => {
+		if (isSmallCard) {
+			return {
+				mobile: 'tiny',
+				tablet: 'small',
+				desktop: 'small',
+			};
+		}
+		if (isFlexibleContainer) return { mobile: 'small' };
+		return { mobile: 'medium' };
+	};
+
 	const headlinePosition = getHeadlinePosition({
 		containerType,
 		isFlexSplash,
@@ -450,8 +465,9 @@ export const Card = ({
 	/** Determines the gap of between card components based on card properties */
 	const getGapSize = (): GapSize => {
 		if (isOnwardContent) return 'none';
-		if (hasBackgroundColour) return 'small';
-		if (isFlexSplash) return 'medium';
+		if (hasBackgroundColour) return 'tiny';
+		if (isFlexSplash) return 'small';
+		if (isSmallCard) return 'medium';
 		if (
 			isFlexibleContainer &&
 			(imagePositionOnDesktop === 'left' ||
@@ -459,7 +475,7 @@ export const Card = ({
 		) {
 			return 'large';
 		}
-		return 'medium';
+		return 'small';
 	};
 
 	/**
@@ -580,11 +596,11 @@ export const Card = ({
 				{media && (
 					<ImageWrapper
 						imageSize={imageSize}
+						imageFixedSizes={imageFixedSizeOptions()}
 						imageType={media.type}
 						imagePositionOnDesktop={imagePositionOnDesktop}
 						imagePositionOnMobile={imagePositionOnMobile}
 						showPlayIcon={showPlayIcon}
-						isFlexibleContainer={isFlexibleContainer}
 					>
 						{media.type === 'slideshow' && (
 							<Slideshow

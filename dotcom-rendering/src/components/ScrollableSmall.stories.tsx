@@ -1,3 +1,4 @@
+import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/highlights-trails';
@@ -8,6 +9,15 @@ import { ScrollableSmall } from './ScrollableSmall.importable';
 export default {
 	title: 'Components/ScrollableSmall',
 	component: ScrollableSmall,
+	parameters: {
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.tablet,
+				breakpoints.wide,
+			],
+		},
+	},
 	args: {
 		trails,
 		containerPalette: undefined,
@@ -19,8 +29,6 @@ export default {
 } as Meta;
 
 type Story = StoryObj<typeof ScrollableSmall>;
-
-export const Default = {};
 
 export const WithFrontSection = {
 	render: (args) => (

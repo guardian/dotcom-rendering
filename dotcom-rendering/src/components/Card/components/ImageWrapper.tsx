@@ -3,19 +3,31 @@ import { css } from '@emotion/react';
 import { between, from, until } from '@guardian/source/foundations';
 import { PlayIcon } from './PlayIcon';
 
-export type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
+const imageFixedSize = {
+	tiny: 86,
+	small: 122.5,
+	medium: 125,
+};
 
+type ImageFixedSize = keyof typeof imageFixedSize;
+
+export type ImageFixedSizeOptions = {
+	mobile: ImageFixedSize;
+	tablet?: ImageFixedSize;
+	desktop?: ImageFixedSize;
+};
+
+export type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
 export type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo' | 'carousel';
 
 type Props = {
 	children: React.ReactNode;
 	imageSize: ImageSizeType;
+	imageFixedSizes?: ImageFixedSizeOptions;
 	imageType?: CardImageType;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	showPlayIcon: boolean;
-	/** Flexible containers require different styling */
-	isFlexibleContainer?: boolean;
 };
 
 /**
@@ -54,25 +66,49 @@ const flexBasisStyles = ({
 			`;
 	}
 };
-/** Below tablet, we fix the size of the image and add a margin
-around it. The corresponding content flex grows to fill the space */
-const fixedImageWidth = (isFlexibleContainer: boolean) => css`
+/**
+ * Below tablet, we fix the size of the image and add a margin around it.
+ * The corresponding content flex grows to fill the space.
+ *
+ * Fixed images sizes can optionally be applied at tablet and desktop.
+ */
+const fixImageWidthStyles = (width: number) => css`
+	width: ${width}px;
+	flex-shrink: 0;
+	flex-basis: unset;
+	align-self: flex-start;
+`;
+
+const fixImageWidth = ({
+	mobile,
+	tablet,
+	desktop,
+}: ImageFixedSizeOptions) => css`
 	${until.tablet} {
-		width: ${isFlexibleContainer ? '97.5px' : '125px'};
-		flex-shrink: 0;
-		flex-basis: unset;
-		align-self: flex-start;
+		${fixImageWidthStyles(imageFixedSize[mobile])}
 	}
+	${tablet &&
+	css`
+		${between.tablet.and.desktop} {
+			${fixImageWidthStyles(imageFixedSize[tablet])}
+		}
+	`}
+	${desktop &&
+	css`
+		${from.desktop} {
+			${fixImageWidthStyles(imageFixedSize[desktop])}
+		}
+	`}
 `;
 
 export const ImageWrapper = ({
 	children,
 	imageSize,
+	imageFixedSizes = { mobile: 'medium' },
 	imageType,
 	imagePositionOnDesktop,
 	imagePositionOnMobile,
 	showPlayIcon,
-	isFlexibleContainer = false,
 }: Props) => {
 	const isHorizontalOnDesktop =
 		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
@@ -103,7 +139,7 @@ export const ImageWrapper = ({
 							display: none;
 						}
 					`,
-				isHorizontalOnMobile && fixedImageWidth(isFlexibleContainer),
+				isHorizontalOnMobile && fixImageWidth(imageFixedSizes),
 
 				isHorizontalOnDesktop &&
 					css`
