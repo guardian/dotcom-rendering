@@ -14,6 +14,10 @@ const styles = css`
 	clear: both;
 	margin: ${remSpace[4]} 0;
 	background: ${palette('--ad-background')};
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 
 	${until.phablet} {
 		margin: 1em 0px;
@@ -24,6 +28,8 @@ const adLabelsStyles = css`
 	${textSans14}
 	padding: ${remSpace[3]};
 	float: left;
+	display: flex;
+	justify-content: center;
 
 	/* We need to account for padding on both sides */
 	width: calc(100% - 2 * ${remSpace[3]});
@@ -40,6 +46,7 @@ const adLabelsStyles = css`
 const adSlotStyles = css`
 	clear: both;
 	padding-bottom: ${adHeightPx}px;
+	width: 100%;
 `;
 
 const adSlotSquareStyles = css`
