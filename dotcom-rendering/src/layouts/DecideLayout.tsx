@@ -6,6 +6,7 @@ import {
 import type { NavType } from '../model/extract-nav';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { AudioLayout } from './AudioLayout';
 import { CommentLayout } from './CommentLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
@@ -15,7 +16,6 @@ import { NewsletterSignupLayout } from './NewsletterSignupLayout';
 import { PictureLayout } from './PictureLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { StandardLayout } from './StandardLayout';
-import { AudioLayout } from './AudioLayout';
 
 interface BaseProps {
 	article: ArticleDeprecated;
