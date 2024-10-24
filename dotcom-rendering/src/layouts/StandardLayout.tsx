@@ -40,7 +40,6 @@ import { MostViewedFooterData } from '../components/MostViewedFooterData.importa
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import { Picture } from '../components/Picture';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
@@ -121,7 +120,7 @@ const StandardGrid = ({
 						? css`
 								grid-template-areas:
 									'title  border  headline   headline   .'
-									'image  border  disclaimer disclaimer right-column'
+									'.      border  disclaimer disclaimer right-column'
 									'meta   border  media      media      right-column'
 									'meta   border  standfirst standfirst right-column'
 									'.      border  body       body       right-column'
@@ -164,7 +163,7 @@ const StandardGrid = ({
 					? css`
 							grid-template-areas:
 								'title  border  headline     .'
-								'image  border  disclaimer   right-column'
+								'.      border  disclaimer   right-column'
 								'meta   border  media        right-column'
 								'meta   border  standfirst   right-column'
 								'meta   border  body         right-column'
@@ -210,7 +209,6 @@ const StandardGrid = ({
 								'disclaimer    right-column'
 								'media         right-column'
 								'standfirst    right-column'
-								'image         right-column'
 								'meta          right-column'
 								'body          right-column'
 								'.             right-column';
@@ -250,7 +248,6 @@ const StandardGrid = ({
 								'disclaimer'
 								'media'
 								'standfirst'
-								'image'
 								'meta'
 								'body';
 					  `
@@ -290,7 +287,6 @@ const StandardGrid = ({
 								'disclaimer'
 								'media'
 								'standfirst'
-								'image'
 								'meta'
 								'body';
 					  `
@@ -345,20 +341,6 @@ const stretchLines = css`
 	${until.mobileLandscape} {
 		margin-left: -10px;
 		margin-right: -10px;
-	}
-`;
-
-const podcastResponsiveCoverImage = css`
-	img {
-		width: 140px;
-		height: 140px;
-	}
-	margin: 0.375rem 0 0.375rem 0;
-	${from.wide} {
-		img {
-			width: 219px;
-			height: 219px;
-		}
 	}
 `;
 
@@ -434,8 +416,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const renderAds = isWeb && canRenderAds(article);
-
-	const seriesTag = article.tags.find((tag) => tag.type === 'Series');
 
 	return (
 		<>
@@ -756,21 +736,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								</>
 							)}
 						</GridItem>
-						{format.design === ArticleDesign.Audio && seriesTag && (
-							<GridItem area="image" element="aside">
-								<div css={podcastResponsiveCoverImage}>
-									<Picture
-										role={'podcastCover'}
-										format={format}
-										master={seriesTag.podcast?.image ?? ''}
-										alt={seriesTag.title}
-										height={1}
-										width={1}
-										loading="lazy"
-									/>
-								</div>
-							</GridItem>
-						)}
 						<GridItem area="body">
 							{isWeb && (
 								<Hide from="leftCol">
