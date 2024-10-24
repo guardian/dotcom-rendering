@@ -3285,12 +3285,11 @@ const articleLinkBorderHoverLight: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.Audio) {
 		return sourcePalette.neutral[86];
 	}
+
 	if (theme === ArticleSpecial.Labs) {
 		return sourcePalette.neutral[7];
 	}
-	if (design === ArticleDesign.Audio) {
-		return sourcePalette.neutral[86];
-	}
+
 	if (theme === ArticleSpecial.SpecialReport) {
 		return sourcePalette.specialReport[100];
 	}
