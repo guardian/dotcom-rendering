@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { SerializedStyles, css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import {
 	article17,
@@ -125,7 +125,7 @@ const wrapperStyle = ({
 		: ''}
 `;
 
-const datawrapperRoleStyles = (role: RoleType) => {
+const datawrapperRoleStyles = (role: RoleType): SerializedStyles | null => {
 	switch (role) {
 		case 'inline':
 			return datawrapperRoleCss.inline;
@@ -136,9 +136,8 @@ const datawrapperRoleStyles = (role: RoleType) => {
 		case 'showcase':
 			return datawrapperRoleCss.showcase;
 		case 'thumbnail':
-			return datawrapperRoleCss.thumbnail;
 		case 'halfWidth':
-			return datawrapperRoleCss.halfWidth;
+			return null;
 	}
 };
 
@@ -185,9 +184,6 @@ const datawrapperRoleCss = {
 			border-bottom: 1px solid ${themePalette('--branding-border')};
 		}
 	`,
-
-	thumbnail: css``,
-	halfWidth: css``,
 };
 
 const placeholderLinkStyle = css`
@@ -389,7 +385,7 @@ export const InteractiveBlockComponent = ({
 					isMainMedia
 						? mainMediaFigureStyles
 						: defaultRoleStyles(role, format),
-					isDatawrapperGraphic ? datawrapperRoleStyles(role) : '',
+					isDatawrapperGraphic ? datawrapperRoleStyles(role) : null,
 					wrapperStyle({
 						format,
 						role,
