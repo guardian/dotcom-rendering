@@ -45,8 +45,12 @@ const themeButtonDisabled: Partial<ThemeButton> = {
 const carouselContainerStyles = css`
 	display: flex;
 	flex-direction: column-reverse;
+	${from.tablet} {
+		gap: ${space[2]}px;
+	}
 	${from.wide} {
 		flex-direction: row;
+		gap: ${space[1]}px;
 	}
 
 	/* Extend carousel into outer margins on mobile */
@@ -121,9 +125,6 @@ const carouselStyles = css`
 
 const buttonContainerStyles = css`
 	margin-left: auto;
-	${from.wide} {
-		margin-left: ${space[1]}px;
-	}
 `;
 
 const buttonLayoutStyles = css`
