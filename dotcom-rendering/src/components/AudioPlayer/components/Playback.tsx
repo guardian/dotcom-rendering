@@ -60,7 +60,7 @@ Playback.Play = ({
 } & ButtonProps) => {
 	return (
 		<button
-			aria-label={isPlaying ? "Pause" : "Play"}
+			aria-label={isPlaying ? 'Pause' : 'Play'}
 			type="button"
 			css={[
 				buttonBaseCss,
