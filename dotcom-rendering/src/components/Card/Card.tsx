@@ -674,6 +674,7 @@ export const Card = ({
 														: imageSize
 												}
 												enableAds={false}
+												aspectRatio={aspectRatio}
 											/>
 										</Island>
 									</div>

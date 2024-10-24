@@ -8,16 +8,27 @@ type Props = {
 	alt: string;
 	height: number;
 	width: number;
+	aspectRatio?: string;
 };
 
-export const YoutubeAtomPicture = ({ image, alt, height, width }: Props) => {
-	const sources = generateSources(getSourceImageUrl(image), [
-		{ breakpoint: breakpoints.mobile, width: 465 },
-		{ breakpoint: breakpoints.mobileLandscape, width: 645 },
-		{ breakpoint: breakpoints.phablet, width: 620 },
-		{ breakpoint: breakpoints.tablet, width: 700 },
-		{ breakpoint: breakpoints.desktop, width: 620 },
-	]);
+export const YoutubeAtomPicture = ({
+	image,
+	alt,
+	height,
+	width,
+	aspectRatio,
+}: Props) => {
+	const sources = generateSources(
+		getSourceImageUrl(image),
+		[
+			{ breakpoint: breakpoints.mobile, width: 465 },
+			{ breakpoint: breakpoints.mobileLandscape, width: 645 },
+			{ breakpoint: breakpoints.phablet, width: 620 },
+			{ breakpoint: breakpoints.tablet, width: 700 },
+			{ breakpoint: breakpoints.desktop, width: 620 },
+		],
+		aspectRatio,
+	);
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
