@@ -76,7 +76,10 @@ export const ScrollableSmall = ({
 							containerPalette={containerPalette}
 							containerType={containerType}
 							showAge={!!showAge}
-							headlineSizes={{ desktop: 'xxsmall' }}
+							headlineSizes={{
+								desktop: 'xxsmall',
+								mobile: 'xxxsmall',
+							}}
 							imagePositionOnDesktop="left"
 							imagePositionOnMobile="left"
 							imageSize="small" // TODO - needs fixed width images
