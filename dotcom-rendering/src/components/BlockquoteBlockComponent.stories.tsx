@@ -82,7 +82,6 @@ export const QuotedAllDesignsNewsTheme = {
 		formats: getFormatsForDesigns({
 			display: ArticleDisplay.Standard,
 			theme: Pillar.News,
-			ignore: [ArticleDesign.Audio],
 		}),
 	},
 } satisfies Story;
@@ -93,7 +92,6 @@ export const QuotedAllDesignsCultureTheme = {
 		formats: getFormatsForDesigns({
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Culture,
-			ignore: [ArticleDesign.Audio],
 		}),
 	},
 } satisfies Story;
@@ -104,7 +102,6 @@ export const QuotedAllDesignsSportTheme = {
 		formats: getFormatsForDesigns({
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Sport,
-			ignore: [ArticleDesign.Audio],
 		}),
 	},
 } satisfies Story;
@@ -117,6 +114,20 @@ export const QuotedCommentDesignSpecialReportAltTheme = {
 				design: ArticleDesign.Comment,
 				display: ArticleDisplay.Standard,
 				theme: ArticleSpecial.SpecialReportAlt,
+			},
+		],
+	},
+} satisfies Story;
+
+export const QuotedCommentDesignAudio = {
+	args: QuotedStandardDesignAllThemes.args,
+	parameters: {
+		background: 'dark',
+		formats: [
+			{
+				design: ArticleDesign.Audio,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
 			},
 		],
 	},
