@@ -29,7 +29,6 @@ const bylineStyles = (size: SmallHeadlineSize, isLabs: boolean) => {
 			if (isLabs) {
 				return css`
 					${textSansItalic24};
-					font-size: 24px;
 					line-height: 24px;
 					${until.desktop} {
 						${textSansItalic24};

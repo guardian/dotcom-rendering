@@ -11,6 +11,7 @@ import type {
 import { LI } from './Card/components/LI';
 import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
+import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
 import type { Alignment } from './SupportingContent';
@@ -24,9 +25,7 @@ type Props = {
 };
 
 type BoostProperties = {
-	headlineSize: SmallHeadlineSize;
-	headlineSizeOnMobile: SmallHeadlineSize;
-	headlineSizeOnTablet: SmallHeadlineSize;
+	headlineSizes: ResponsiveFontSize;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	imageSize: ImageSizeType;
@@ -46,9 +45,11 @@ const determineCardProperties = (
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
 			return {
-				headlineSize: 'large',
-				headlineSizeOnMobile: 'small',
-				headlineSizeOnTablet: 'medium',
+				headlineSizes: {
+					desktop: 'xlarge',
+					tablet: 'large',
+					mobile: 'medium',
+				},
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'large',
@@ -60,9 +61,11 @@ const determineCardProperties = (
 
 		case 'boost':
 			return {
-				headlineSize: 'huge',
-				headlineSizeOnMobile: 'medium',
-				headlineSizeOnTablet: 'large',
+				headlineSizes: {
+					desktop: 'xxlarge',
+					tablet: 'xlarge',
+					mobile: 'large',
+				},
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'jumbo',
@@ -73,9 +76,11 @@ const determineCardProperties = (
 			};
 		case 'megaboost':
 			return {
-				headlineSize: 'huge',
-				headlineSizeOnMobile: 'large',
-				headlineSizeOnTablet: 'large',
+				headlineSizes: {
+					desktop: 'xxlarge',
+					tablet: 'xlarge',
+					mobile: 'xlarge',
+				},
 				imagePositionOnDesktop: 'bottom',
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'jumbo',
@@ -85,9 +90,11 @@ const determineCardProperties = (
 			};
 		case 'gigaboost':
 			return {
-				headlineSize: 'ginormous',
-				headlineSizeOnMobile: 'huge',
-				headlineSizeOnTablet: 'huge',
+				headlineSizes: {
+					desktop: 'xxxlarge',
+					tablet: 'xxlarge',
+					mobile: 'xxlarge',
+				},
 				imagePositionOnDesktop: 'bottom',
 				imagePositionOnMobile: 'bottom',
 				imageSize: 'jumbo',
@@ -114,9 +121,7 @@ export const OneCardLayout = ({
 	if (!card) return null;
 
 	const {
-		headlineSize,
-		headlineSizeOnMobile,
-		headlineSizeOnTablet,
+		headlineSizes,
 		imagePositionOnDesktop,
 		imagePositionOnMobile,
 		imageSize,
@@ -136,9 +141,7 @@ export const OneCardLayout = ({
 					containerType="flexible/special"
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
-					headlineSize={headlineSize}
-					headlineSizeOnMobile={headlineSizeOnMobile}
-					headlineSizeOnTablet={headlineSizeOnTablet}
+					headlineSizes={headlineSizes}
 					imagePositionOnDesktop={imagePositionOnDesktop}
 					imagePositionOnMobile={imagePositionOnMobile}
 					imageSize={imageSize}
@@ -150,7 +153,6 @@ export const OneCardLayout = ({
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
 					liveUpdatesAlignment={liveUpdatesAlignment}
-					boostedFontSizes={true}
 					isFlexSplash={true}
 					showTopBarDesktop={false}
 					showTopBarMobile={true}

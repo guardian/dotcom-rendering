@@ -30,7 +30,7 @@ const basicCardProps: CardProps = {
 	headlineText: 'Headline text',
 	trailText:
 		'The 29-year-old source behind the biggest intelligence leak in the NSA’s history explains his motives',
-	headlineSize: 'medium',
+	headlineSizes: { desktop: 'xsmall' },
 	kickerText: '',
 	webPublicationDate: new Date(Date.now() - 60 * 60 * 1000).toString(),
 	image: {
@@ -209,34 +209,35 @@ export default {
 	],
 };
 
+/** TODO : Update stories once initial chromatic check has passed on new font size scale */
 export const WithDifferentHeadlineSizes = () => {
 	return (
 		<CardGroup>
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					headlineSize="tiny"
+					headlineSizes={{ desktop: 'tiny' }}
 					headlineText="tiny"
 				/>
 			</CardWrapper>
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					headlineSize="small"
+					headlineSizes={{ desktop: 'xxsmall' }}
 					headlineText="small"
 				/>
 			</CardWrapper>
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					headlineSize="medium"
+					headlineSizes={{ desktop: 'xsmall' }}
 					headlineText="medium"
 				/>
 			</CardWrapper>
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					headlineSize="large"
+					headlineSizes={{ desktop: 'small' }}
 					headlineText="large"
 				/>
 			</CardWrapper>
@@ -266,7 +267,7 @@ export const WithExternalLink = () => {
 					{...basicCardProps}
 					imagePositionOnDesktop="right"
 					kickerText="Instagram"
-					headlineSize="huge"
+					headlineSizes={{ desktop: 'medium', tablet: 'small' }}
 					headlineText="Follow The Guardian now"
 					isExternalLink={true}
 				/>
@@ -1103,7 +1104,7 @@ export const WithLetterDesign = () => {
 		<CardWrapper>
 			<Card
 				{...basicCardProps}
-				headlineSize="small"
+				headlineSizes={{ desktop: 'xxsmall' }}
 				headlineText="Culture"
 				format={{
 					display: ArticleDisplay.Standard,
@@ -1122,7 +1123,7 @@ export const WithLetterDesignAndShowQuotedHeadline = () => {
 		<CardWrapper>
 			<Card
 				{...basicCardProps}
-				headlineSize="small"
+				headlineSizes={{ desktop: 'xxsmall' }}
 				headlineText="Culture"
 				showQuotedHeadline={true}
 				format={{
@@ -1372,7 +1373,7 @@ export const DynamoWithSpecialPaletteVariations = () => {
 				containerType="dynamic/package"
 				isDynamo={true}
 				kickerText="Main kicker"
-				headlineSize="huge"
+				headlineSizes={{ desktop: 'medium', tablet: 'small' }}
 				imagePositionOnDesktop="bottom"
 				imagePositionOnMobile="bottom"
 				imageSize="large"
