@@ -204,12 +204,15 @@ export const getAllThemes = ({
 export const getAllDesigns = ({
 	display,
 	theme,
+	ignore,
 }: {
 	display: ArticleDisplay;
 	theme: ArticleTheme;
+	ignore?: ArticleDesign[];
 }): Array<ArticleFormat> =>
 	Object.values({ ...ArticleDesign })
 		.filter(isDesign)
+		.filter((design) => !ignore?.includes(design))
 		.map((design) => ({
 			theme,
 			display,
