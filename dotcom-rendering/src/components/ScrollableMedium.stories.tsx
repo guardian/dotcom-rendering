@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/highlights-trails';
 import { FrontSection } from './FrontSection';
-import { ScrollableMedium } from './ScrollableMedium';
+import { ScrollableMedium } from './ScrollableMedium.importable';
 
 export default {
 	title: 'Components/ScrollableMedium',

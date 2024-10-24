@@ -7,8 +7,7 @@ import type {
 	DCRFrontCard,
 } from '../types/front';
 import { FrontCard } from './FrontCard';
-import { Island } from './Island';
-import { ScrollableCarousel } from './ScrollableCarousel.Importable';
+import { ScrollableCarousel } from './ScrollableCarousel';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -62,40 +61,35 @@ export const ScrollableMedium = ({
 	showAge,
 }: Props) => {
 	return (
-		<Island priority="feature" defer={{ until: 'visible' }}>
-			<ScrollableCarousel carouselLength={trails.length}>
-				{trails.map((trail) => {
-					return (
-						<li
-							key={trail.url}
-							css={[itemStyles, verticalLineStyles]}
-						>
-							<FrontCard
-								trail={trail}
-								imageLoading={imageLoading}
-								absoluteServerTimes={!!absoluteServerTimes}
-								containerPalette={containerPalette}
-								containerType={containerType}
-								showAge={!!showAge}
-								headlineSizes={{
-									desktop: 'xsmall',
-									tablet: 'xxsmall',
-								}}
-								imagePositionOnDesktop="bottom"
-								imagePositionOnMobile="bottom"
-								imageSize="small" // TODO - needs fixed width images
-								trailText={undefined} // unsupported
-								supportingContent={undefined} // unsupported
-								aspectRatio="5:4"
-								kickerText={trail.kickerText}
-								showLivePlayable={trail.showLivePlayable}
-								showTopBarDesktop={false}
-								showTopBarMobile={false}
-							/>
-						</li>
-					);
-				})}
-			</ScrollableCarousel>
-		</Island>
+		<ScrollableCarousel carouselLength={trails.length}>
+			{trails.map((trail) => {
+				return (
+					<li key={trail.url} css={[itemStyles, verticalLineStyles]}>
+						<FrontCard
+							trail={trail}
+							imageLoading={imageLoading}
+							absoluteServerTimes={!!absoluteServerTimes}
+							containerPalette={containerPalette}
+							containerType={containerType}
+							showAge={!!showAge}
+							headlineSizes={{
+								desktop: 'xsmall',
+								tablet: 'xxsmall',
+							}}
+							imagePositionOnDesktop="bottom"
+							imagePositionOnMobile="bottom"
+							imageSize="small" // TODO - needs fixed width images
+							trailText={undefined} // unsupported
+							supportingContent={undefined} // unsupported
+							aspectRatio="5:4"
+							kickerText={trail.kickerText}
+							showLivePlayable={trail.showLivePlayable}
+							showTopBarDesktop={false}
+							showTopBarMobile={false}
+						/>
+					</li>
+				);
+			})}
+		</ScrollableCarousel>
 	);
 };
