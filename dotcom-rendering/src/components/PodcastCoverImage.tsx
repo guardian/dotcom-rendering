@@ -20,18 +20,18 @@ const podcastResponsiveCoverImage = css`
 
 export const PodcastCoverImage = ({
 	format,
-	podcastSeries,
+	series,
 }: {
 	format: ArticleFormat;
-	podcastSeries: TagType;
+	series: TagType;
 }) => {
 	return (
 		<div css={podcastResponsiveCoverImage}>
 			<Picture
 				role={'podcastCover'}
 				format={format}
-				master={podcastSeries.podcast?.image ?? ''}
-				alt={podcastSeries.title}
+				master={series.podcast?.image ?? ''}
+				alt={series.title}
 				height={1}
 				width={1}
 				loading="lazy"

@@ -96,12 +96,12 @@ interface PodcastMetaProps extends Podcast {
 	rssFeedUrl?: string;
 	audioDownloadUrl?: string;
 	format: ArticleFormat;
-	podcastSeries: TagType;
+	series: TagType;
 }
 
 export const PodcastMeta = ({
 	format,
-	podcastSeries,
+	series,
 	subscriptionUrl,
 	spotifyUrl,
 	rssFeedUrl,
@@ -124,10 +124,7 @@ export const PodcastMeta = ({
 			`}
 		>
 			<GridItem area="meta-image">
-				<PodcastCoverImage
-					format={format}
-					podcastSeries={podcastSeries}
-				/>
+				<PodcastCoverImage format={format} series={series} />
 			</GridItem>
 			<GridItem area="meta-three">
 				<DecideLines

@@ -287,7 +287,7 @@ const getSeriesTag = (tags: TagType[]): TagType | undefined => {
 	return tags.find((tag) => tag.type === 'Series' && tag.podcast);
 };
 
-const getPodcastTag = (tags: TagType[]): Podcast | undefined => {
+const getPodcast = (tags: TagType[]): Podcast | undefined => {
 	const seriesTag = getSeriesTag(tags);
 
 	return seriesTag?.podcast;
@@ -330,7 +330,7 @@ export const ArticleMeta = ({
 
 	const seriesTag = getSeriesTag(tags);
 	const audioData = getAudioData(mainMediaElements);
-	const podcastTag = getPodcastTag(tags);
+	const podcast = getPodcast(tags);
 	const rssFeedUrl = getRssFeedUrl(tags);
 
 	return (
@@ -370,13 +370,13 @@ export const ArticleMeta = ({
 							</MetaAvatarContainer>
 						)}
 						<div>
-							{isAudio && podcastTag && seriesTag && (
+							{isAudio && podcast && seriesTag && (
 								<PodcastMeta
-									podcastSeries={seriesTag}
+									series={seriesTag}
 									format={format}
-									image={podcastTag.image}
-									spotifyUrl={podcastTag.spotifyUrl}
-									subscriptionUrl={podcastTag.subscriptionUrl}
+									image={podcast.image}
+									spotifyUrl={podcast.spotifyUrl}
+									subscriptionUrl={podcast.subscriptionUrl}
 									audioDownloadUrl={
 										audioData?.audioDownloadUrl
 									}

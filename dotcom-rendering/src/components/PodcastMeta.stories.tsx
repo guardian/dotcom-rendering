@@ -51,7 +51,7 @@ export const Default = () => (
 	>
 		<Wrapper>
 			<PodcastMeta
-				podcastSeries={podcastSeries}
+				series={podcastSeries}
 				format={format}
 				spotifyUrl="#"
 				subscriptionUrl="#"
