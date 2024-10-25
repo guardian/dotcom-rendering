@@ -504,6 +504,7 @@ export const AudioLayout = (props: WebProps) => {
 												!!article.config
 													.shouldHideReaderRevenue
 											}
+											shouldHideMostViewed={true}
 										/>
 									</Island>
 								</RightColumn>
