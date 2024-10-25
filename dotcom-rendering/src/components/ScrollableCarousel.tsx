@@ -3,6 +3,7 @@ import {
 	from,
 	headlineMedium24Object,
 	space,
+	until,
 } from '@guardian/source/foundations';
 import type { ThemeButton } from '@guardian/source/react-components';
 import {
@@ -136,26 +137,19 @@ const itemStyles = css`
 	scroll-snap-align: start;
 	grid-area: span 1;
 	position: relative;
-	:not(:last-child)::after {
+	::before {
 		content: '';
 		position: absolute;
 		top: 0;
 		bottom: 0;
-		right: -10px;
+		left: -10px;
 		width: 1px;
 		background-color: ${palette('--card-border-top')};
 		transform: translateX(-50%);
 	}
-	${from.leftCol} {
+	${until.leftCol} {
 		:first-child::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: -10px;
-			width: 1px;
-			background-color: ${palette('--card-border-top')};
-			transform: translateX(-50%);
+			background-color: transparent;
 		}
 	}
 `;
