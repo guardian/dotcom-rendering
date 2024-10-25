@@ -465,9 +465,6 @@ export const YoutubeAtomPlayer = ({
 						videoId,
 						playerVars: {
 							controls: 1,
-							// @ts-expect-error -- advised by YouTube for Android but does not exist in @types/youtube
-							external_fullscreen:
-								renderingTarget === 'Apps' ? 1 : 0,
 							fs: 1,
 							modestbranding: 1,
 							origin,
