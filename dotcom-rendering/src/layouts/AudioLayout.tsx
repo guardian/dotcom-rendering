@@ -14,7 +14,7 @@ import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { AudioPlayerWithConsent } from '../components/AudioPlayerWithConsent.importable';
+import { AudioPlayerWrapper } from '../components/AudioPlayerWrapper.importable';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DiscussionLayout } from '../components/DiscussionLayout';
@@ -327,10 +327,8 @@ export const AudioLayout = (props: WebProps) => {
 									priority="critical"
 									defer={{ until: 'visible' }}
 								>
-									<AudioPlayerWithConsent
+									<AudioPlayerWrapper
 										/* contentIsNotSensitive={true} */
-										/* isAcastEnabled={true} */
-										/* readerCanBeShownAds={true} */
 										src={audioData.audioDownloadUrl}
 										mediaId={audioData.mediaId}
 									/>
