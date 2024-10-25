@@ -1,9 +1,13 @@
-import { css } from '@emotion/react';
 import type { StoryObj } from '@storybook/react';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { ArticleContainer } from './ArticleContainer';
+import { Flex } from './Flex';
 import { InteractiveBlockComponent } from './InteractiveBlockComponent.importable';
+import { LeftColumn } from './LeftColumn';
+import { RightColumn } from './RightColumn';
+import { Section } from './Section';
 import { TextBlockComponent } from './TextBlockComponent';
 
 export default {
@@ -26,14 +30,25 @@ const SomeText = () => (
 );
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			padding-left: 250px;
-			padding-right: 20px;
-		`}
-	>
-		{children}
-	</div>
+	<Section fullWidth={true} showTopBorder={false}>
+		<Flex>
+			<LeftColumn>
+				<></>
+			</LeftColumn>
+			<ArticleContainer
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: Pillar.News,
+				}}
+			>
+				{children}
+			</ArticleContainer>
+			<RightColumn>
+				<></>
+			</RightColumn>
+		</Flex>
+	</Section>
 );
 
 const defaultFormat = {
@@ -157,5 +172,125 @@ export const NonBootJs: StoryObj = ({ format }: StoryProps) => {
 };
 NonBootJs.storyName = 'Non-boot.js interactive element';
 NonBootJs.decorators = [
+	splitTheme([defaultFormat], { orientation: 'vertical' }),
+];
+
+export const DatawrapperInline = ({ format }: StoryProps) => {
+	return (
+		<Wrapper>
+			<SomeText />
+			<SomeText />
+			<InteractiveBlockComponent
+				url="https://interactive.guim.co.uk/datawrapper-test/embed/5ApVq/1/"
+				scriptUrl="https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js"
+				alt="map"
+				role="inline"
+				format={format}
+				isMainMedia={false}
+			/>
+			<SomeText />
+			<SomeText />
+			<SomeText />
+		</Wrapper>
+	);
+};
+DatawrapperInline.storyName = 'Datawrapper Inline role';
+DatawrapperInline.decorators = [
+	splitTheme([defaultFormat], { orientation: 'vertical' }),
+];
+
+export const DatawrapperSupporting = ({ format }: StoryProps) => {
+	return (
+		<Wrapper>
+			<SomeText />
+			<SomeText />
+			<InteractiveBlockComponent
+				url="https://interactive.guim.co.uk/datawrapper-test/embed/5ApVq/1/"
+				scriptUrl="https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js"
+				alt="map"
+				role="supporting"
+				format={format}
+				isMainMedia={false}
+			/>
+			<SomeText />
+			<SomeText />
+			<SomeText />
+		</Wrapper>
+	);
+};
+DatawrapperSupporting.storyName = 'Datawrapper Supporting role';
+DatawrapperSupporting.decorators = [
+	splitTheme([defaultFormat], { orientation: 'vertical' }),
+];
+
+export const DatawrapperShowcase = ({ format }: StoryProps) => {
+	return (
+		<Wrapper>
+			<SomeText />
+			<SomeText />
+			<InteractiveBlockComponent
+				url="https://interactive.guim.co.uk/datawrapper-test/embed/5ApVq/1/"
+				scriptUrl="https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js"
+				alt="map"
+				role="showcase"
+				format={format}
+				isMainMedia={false}
+			/>
+			<SomeText />
+			<SomeText />
+			<SomeText />
+		</Wrapper>
+	);
+};
+DatawrapperShowcase.storyName = 'Datawrapper Showcase role';
+DatawrapperShowcase.decorators = [
+	splitTheme([defaultFormat], { orientation: 'vertical' }),
+];
+
+export const DatawrapperThumbnail = ({ format }: StoryProps) => {
+	return (
+		<Wrapper>
+			<SomeText />
+			<SomeText />
+			<InteractiveBlockComponent
+				url="https://interactive.guim.co.uk/datawrapper-test/embed/5ApVq/1/"
+				scriptUrl="https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js"
+				alt="map"
+				role="thumbnail"
+				format={format}
+				isMainMedia={false}
+			/>
+			<SomeText />
+			<SomeText />
+			<SomeText />
+		</Wrapper>
+	);
+};
+DatawrapperThumbnail.storyName = 'Datawrapper Thumbnail role';
+DatawrapperThumbnail.decorators = [
+	splitTheme([defaultFormat], { orientation: 'vertical' }),
+];
+
+export const DatawrapperImmersive = ({ format }: StoryProps) => {
+	return (
+		<Wrapper>
+			<SomeText />
+			<SomeText />
+			<InteractiveBlockComponent
+				url="https://interactive.guim.co.uk/datawrapper-test/embed/5ApVq/1/"
+				scriptUrl="https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js"
+				alt="map"
+				role="immersive"
+				format={format}
+				isMainMedia={false}
+			/>
+			<SomeText />
+			<SomeText />
+			<SomeText />
+		</Wrapper>
+	);
+};
+DatawrapperImmersive.storyName = 'Datawrapper Immersive role';
+DatawrapperImmersive.decorators = [
 	splitTheme([defaultFormat], { orientation: 'vertical' }),
 ];
