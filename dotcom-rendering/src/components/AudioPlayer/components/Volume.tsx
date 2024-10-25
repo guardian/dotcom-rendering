@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { from, palette } from '@guardian/source/foundations';
-import { SvgAudio } from '@guardian/source/react-components';
+import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { buttonBaseCss } from '../styles';
 
 type ButtonProps = React.ComponentPropsWithoutRef<'button'>;
@@ -63,7 +63,7 @@ Volume.Mute = ({
 	...props
 }: { isMuted: boolean } & Omit<ButtonProps, 'children'>) => (
 	<Control aria-label="Mute" {...props}>
-		<SvgAudio
+		<SvgAudioMute
 			theme={{
 				fill: isMuted ? palette.brandAlt[400] : palette.neutral[46],
 			}}
