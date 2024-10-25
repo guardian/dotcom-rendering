@@ -14,6 +14,7 @@ type Props = {
 	isPaidContent: boolean;
 	renderAds: boolean;
 	shouldHideReaderRevenue: boolean;
+	shouldHideMostViewed?: boolean;
 };
 
 /**
@@ -41,6 +42,7 @@ export const MostViewedRightWithAd = ({
 	isPaidContent,
 	renderAds,
 	shouldHideReaderRevenue,
+	shouldHideMostViewed = false,
 }: Props) => {
 	const componentDataAttribute = 'most-viewed-right-container';
 	const { renderingTarget } = useConfig();
@@ -75,7 +77,7 @@ export const MostViewedRightWithAd = ({
 				/>
 			) : null}
 
-			{!isPaidContent ? (
+			{!isPaidContent && !shouldHideMostViewed ? (
 				<MostViewedRightWrapper
 					maxHeightPx={MAX_HEIGHT_PX}
 					componentDataAttribute={componentDataAttribute}
