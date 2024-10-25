@@ -5,7 +5,6 @@ import { getOphan } from '../../client/ophan/ophan';
 import { Playback } from './components/Playback';
 import { ProgressBar } from './components/ProgressBar';
 import { CurrentTime, Duration } from './components/time';
-import { Volume } from './components/Volume';
 import { Wrapper } from './components/Wrapper';
 
 // ********************* ophan stuff *********************
@@ -46,11 +45,6 @@ type AudioPlayerProps = {
 	 * If it's not provided it will be calculated once the audio is loaded.
 	 */
 	duration?: number;
-	/**
-	 * Optionally hide the volume controls if setting the volume is better
-	 * handled elsewhere, e.g on a mobile device.
-	 */
-	showVolumeControls?: boolean;
 	/** media element ID for Ophan */
 	mediaId: string;
 };
@@ -61,14 +55,12 @@ type AudioPlayerProps = {
 export const AudioPlayer = ({
 	src,
 	duration: preCalculatedDuration,
-	showVolumeControls = true,
 	mediaId,
 }: AudioPlayerProps) => {
 	// ********************* player *********************
 
 	// state for displaying feedback to the user
 	const [isPlaying, setIsPlaying] = useState(false);
-	const [isMuted, setIsMuted] = useState(false);
 	const [currentTime, setCurrentTime] = useState(0);
 	const [duration, setDuration] = useState(preCalculatedDuration);
 	const [progress, setProgress] = useState(0);
@@ -225,20 +217,6 @@ export const AudioPlayer = ({
 		setIsScrubbing(false);
 	}, []);
 
-	const mute = useCallback(() => {
-		if (audioRef.current) {
-			audioRef.current.volume = 0;
-			setIsMuted(true);
-		}
-	}, []);
-
-	const unMute = useCallback(() => {
-		if (audioRef.current) {
-			audioRef.current.volume = 1;
-			setIsMuted(false);
-		}
-	}, []);
-
 	// ********************* effects *********************
 
 	useEffect(() => {
@@ -292,7 +270,7 @@ export const AudioPlayer = ({
 			</audio>
 
 			{/* custom guardian controls that interact with the native player */}
-			<Wrapper showVolumeControls={showVolumeControls}>
+			<Wrapper>
 				<CurrentTime currentTime={currentTime} />
 				<Duration duration={duration} />
 
@@ -322,13 +300,6 @@ export const AudioPlayer = ({
 						disabled={isWaiting || !isPlaying}
 					/>
 				</Playback>
-
-				{showVolumeControls && (
-					<Volume>
-						<Volume.UnMute onClick={unMute} isMuted={isMuted} />
-						<Volume.Mute onClick={mute} isMuted={isMuted} />
-					</Volume>
-				)}
 			</Wrapper>
 		</>
 	);

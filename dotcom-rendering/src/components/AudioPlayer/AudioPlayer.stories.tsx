@@ -18,7 +18,6 @@ export const AudioPlayer = {
 		// src: audioFile,
 		src: 'https://audio.guim.co.uk/2024/10/18-57753-USEE_181024.mp3',
 		mediaId: 'mediaId',
-		showVolumeControls: true,
 	},
 	parameters: {
 		// We only want to snapshot the `multipleFormats` version below.
