@@ -452,7 +452,6 @@ export const YoutubeAtomPlayer = ({
 								renderingTarget === 'Apps' ? 1 : 0,
 							fs: 1,
 							modestbranding: 1,
-							origin,
 							playsinline: 1,
 							rel: 0,
 						},
