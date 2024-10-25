@@ -2217,6 +2217,8 @@ const standfirstLinkBorderLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.news[600];
 			}
+		case ArticleDesign.Audio:
+			return sourcePalette.neutral[86];
 		default:
 			switch (theme) {
 				case ArticleSpecial.SpecialReport:
@@ -2368,24 +2370,7 @@ const standfirstLinkTextLight: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.neutral[86];
 			}
 		case ArticleDesign.Audio:
-			switch (theme) {
-				case Pillar.News:
-					return sourcePalette.news[500];
-				case Pillar.Opinion:
-					return sourcePalette.opinion[500];
-				case Pillar.Sport:
-					return sourcePalette.sport[500];
-				case Pillar.Culture:
-					return sourcePalette.culture[500];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[500];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[300];
-			}
+			return sourcePalette.neutral[86];
 		default:
 			switch (theme) {
 				case ArticleSpecial.SpecialReport:

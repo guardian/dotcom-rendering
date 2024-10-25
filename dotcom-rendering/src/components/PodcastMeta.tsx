@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import {
-	articleBold17,
 	from,
+	headlineBold17,
 	space,
 	textSans14,
 	until,
@@ -45,7 +45,7 @@ const ApplePodcastsSvg = () => (
 
 const podcastTitleStyles = css`
 	color: ${themePalette('--podcast-meta-title')};
-	${articleBold17};
+	${headlineBold17};
 	padding: ${space[2]}px 0;
 	grid-area: meta-title;
 `;
