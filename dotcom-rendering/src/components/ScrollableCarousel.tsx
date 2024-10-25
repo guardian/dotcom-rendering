@@ -132,6 +132,34 @@ const buttonLayoutStyles = css`
 	gap: ${space[1]}px;
 `;
 
+const itemStyles = css`
+	scroll-snap-align: start;
+	grid-area: span 1;
+	position: relative;
+	:not(:last-child)::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: -10px;
+		width: 1px;
+		background-color: ${palette('--card-border-top')};
+		transform: translateX(-50%);
+	}
+	${from.leftCol} {
+		:first-child::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: -10px;
+			width: 1px;
+			background-color: ${palette('--card-border-top')};
+			transform: translateX(-50%);
+		}
+	}
+`;
+
 /**
  * Generates CSS styles for a grid layout used in a carousel.
  *
@@ -267,3 +295,7 @@ export const ScrollableCarousel = ({ children, carouselLength }: Props) => {
 		</div>
 	);
 };
+
+ScrollableCarousel.Item = ({ children }: { children: React.ReactNode }) => (
+	<li css={itemStyles}>{children}</li>
+);
