@@ -1,13 +1,18 @@
 import { useId, useMemo } from 'react';
 
 /**
- * Create a [`Generator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) for deterministic series of numbers
- * which are guaranteed to be contained inside a specific range.
- *
- * Based on a pseudo random number generator generator ([linear congruential
+ * Pseudo random number generator generator ([linear congruential
  * generator](https://en.wikipedia.org/wiki/Linear_congruential_generator)).
- * Seeding with an audio file URL ensures that a specific file always
- * returns the same (fake) series of bars.
+ *
+ * I'll be honest, I don't fully understand it, but it creates a pseudo random
+ * number generator based on a seed, in this case a string.
+ *
+ * It's deterministic, so calls to the function it returns will always return
+ * the same results, given the same seed.
+ *
+ * Copilot helped me with it...
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator
  */
 function* waveformGenerator(
 	/** the URL of the audio source file */
