@@ -17,12 +17,14 @@ function* waveformGenerator(
 	/** a destination range for values */
 	[min, max]: [number, number],
 ) {
-	/** a sort of hash of the URL */
-	const urlToNumber = url
-		.split('')
-		.reduce((sum, character) => sum + character.charCodeAt(0), 0);
 	const modulus = 2147483648;
-	const seed = urlToNumber % modulus;
+	/** a sort of hash of the URL */
+	const seed = url
+		.split('')
+		.reduce(
+			(sum, character) => (sum + character.charCodeAt(0)) % modulus,
+			0,
+		);
 	const multiplier = 1103515245;
 	const increment = 12345;
 

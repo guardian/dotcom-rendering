@@ -1,6 +1,12 @@
 import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { article17, space, textSans17 } from '@guardian/source/foundations';
+import {
+	article17,
+	from,
+	space,
+	textSans17,
+} from '@guardian/source/foundations';
 import libDebounce from 'lodash.debounce';
 import { useRef, useState } from 'react';
 import { interactiveLegacyFigureClasses } from '../layouts/lib/interactiveLegacyStyling';
@@ -99,10 +105,12 @@ const wrapperStyle = ({
 	format,
 	role,
 	loaded,
+	isDatawrapperGraphic,
 }: {
 	format: ArticleFormat;
 	role: RoleType;
 	loaded: boolean;
+	isDatawrapperGraphic: boolean;
 }) => css`
 	${format.theme === ArticleSpecial.Labs ? textSans17 : article17}
 	background-color: ${themePalette('--interactive-block-background')};
@@ -110,7 +118,74 @@ const wrapperStyle = ({
 	position: relative;
 	display: flex;
 	flex-direction: column;
+	${isDatawrapperGraphic
+		? `
+	border-top: 1px solid ${themePalette('--branding-border')};
+	padding-top: ${space[2]}px;
+	`
+		: ''}
 `;
+
+const datawrapperRoleStyles = (role: RoleType): SerializedStyles | null => {
+	switch (role) {
+		case 'inline':
+			return datawrapperRoleCss.inline;
+		case 'supporting':
+			return datawrapperRoleCss.supporting;
+		case 'immersive':
+			return datawrapperRoleCss.immersive;
+		case 'showcase':
+			return datawrapperRoleCss.showcase;
+		case 'thumbnail':
+		case 'halfWidth':
+			return null;
+	}
+};
+
+const datawrapperRoleCss = {
+	inline: css`
+		margin-top: ${space[6]}px;
+		margin-bottom: ${space[6]}px;
+	`,
+
+	supporting: css`
+		clear: left;
+		margin-top: ${space[6]}px;
+		margin-bottom: ${space[6]}px;
+
+		${from.leftCol} {
+			margin-bottom: ${space[2]}px;
+			padding-bottom: ${space[4]}px;
+			border-bottom: 1px solid ${themePalette('--branding-border')};
+		}
+		${from.wide} {
+			width: 380px;
+			margin-left: -240px;
+		}
+	`,
+
+	immersive: css`
+		margin-top: ${space[6]}px;
+		margin-bottom: ${space[6]}px;
+
+		${from.leftCol} {
+			margin-bottom: ${space[4]}px;
+			padding-bottom: ${space[4]}px;
+			border-bottom: 1px solid ${themePalette('--branding-border')};
+		}
+	`,
+
+	showcase: css`
+		margin-top: ${space[6]}px;
+		margin-bottom: ${space[6]}px;
+
+		${from.leftCol} {
+			margin-bottom: ${space[4]}px;
+			padding-bottom: ${space[4]}px;
+			border-bottom: 1px solid ${themePalette('--branding-border')};
+		}
+	`,
+};
 
 const placeholderLinkStyle = css`
 	position: absolute;
@@ -295,6 +370,13 @@ export const InteractiveBlockComponent = ({
 		}
 	}, [loaded]);
 
+	const isDatawrapperGraphic =
+		url == undefined
+			? false
+			: /^https?:\/\/interactive\.guim\.co\.uk\/datawrapper(-test)?\/embed/.test(
+					url,
+			  );
+
 	return (
 		<>
 			<figure
@@ -304,7 +386,13 @@ export const InteractiveBlockComponent = ({
 					isMainMedia
 						? mainMediaFigureStyles
 						: defaultRoleStyles(role, format),
-					wrapperStyle({ format, role, loaded }),
+					isDatawrapperGraphic ? datawrapperRoleStyles(role) : null,
+					wrapperStyle({
+						format,
+						role,
+						loaded,
+						isDatawrapperGraphic,
+					}),
 				]}
 				className={interactiveLegacyFigureClasses(
 					'model.dotcomrendering.pageElements.InteractiveBlockElement',
