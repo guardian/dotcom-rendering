@@ -181,7 +181,7 @@ export const DatawrapperInline = ({ format }: StoryProps) => {
 			<SomeText />
 			<SomeText />
 			<InteractiveBlockComponent
-				url="https://interactive.guim.co.uk/datawrapper-test/embed/IIdJx/25/"
+				url="https://interactive.guim.co.uk/datawrapper-test/embed/5ApVq/1/"
 				scriptUrl="https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js"
 				alt="map"
 				role="inline"
@@ -205,7 +205,7 @@ export const DatawrapperSupporting = ({ format }: StoryProps) => {
 			<SomeText />
 			<SomeText />
 			<InteractiveBlockComponent
-				url="https://interactive.guim.co.uk/datawrapper-test/embed/IIdJx/25/"
+				url="https://interactive.guim.co.uk/datawrapper-test/embed/5ApVq/1/"
 				scriptUrl="https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js"
 				alt="map"
 				role="supporting"
@@ -229,7 +229,7 @@ export const DatawrapperShowcase = ({ format }: StoryProps) => {
 			<SomeText />
 			<SomeText />
 			<InteractiveBlockComponent
-				url="https://interactive.guim.co.uk/datawrapper-test/embed/IIdJx/25/"
+				url="https://interactive.guim.co.uk/datawrapper-test/embed/5ApVq/1/"
 				scriptUrl="https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js"
 				alt="map"
 				role="showcase"
@@ -253,7 +253,7 @@ export const DatawrapperThumbnail = ({ format }: StoryProps) => {
 			<SomeText />
 			<SomeText />
 			<InteractiveBlockComponent
-				url="https://interactive.guim.co.uk/datawrapper-test/embed/IIdJx/25/"
+				url="https://interactive.guim.co.uk/datawrapper-test/embed/5ApVq/1/"
 				scriptUrl="https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js"
 				alt="map"
 				role="thumbnail"
@@ -277,7 +277,7 @@ export const DatawrapperImmersive = ({ format }: StoryProps) => {
 			<SomeText />
 			<SomeText />
 			<InteractiveBlockComponent
-				url="https://interactive.guim.co.uk/datawrapper-test/embed/IIdJx/25/"
+				url="https://interactive.guim.co.uk/datawrapper-test/embed/5ApVq/1/"
 				scriptUrl="https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js"
 				alt="map"
 				role="immersive"
