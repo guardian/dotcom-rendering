@@ -6,6 +6,8 @@ type Props = {
 	mediaId: string;
 	duration?: number;
 	src: string;
+	contentIsNotSensitive: boolean;
+	isAcastEnabled: boolean;
 };
 
 /**
@@ -18,20 +20,34 @@ type Props = {
  *
  * (No visual story exists)
  */
-export const AudioPlayerWrapper = ({ duration, src, mediaId }: Props) => {
+export const AudioPlayerWrapper = ({
+	duration,
+	src,
+	mediaId,
+	contentIsNotSensitive,
+	isAcastEnabled,
+}: Props) => {
 	const [finalSrc, setFinalSrc] = useState<string>(src);
 
 	useEffect(() => {
-		onConsentChange((consentState) => {
-			const consentForAcast = getConsentFor('acast', consentState);
-			const isAcastEnabled = window.guardian.config.switches.acast;
-			const isPodcast = window.guardian.config.page.isPodcast;
+		// this is how frontend checks for whether to show ads or not,
+		// and it's on the window in DCR but it's not clear how...
+		// so this just carries over the existing logic
+		// https://github.com/guardian/frontend/blob/ba57677baaa06f37235e8d7a983cb383d0f5c989/static/src/javascripts/projects/common/modules/audio/index.js#L25-L44
+		const isPodcast = window.guardian.config.page.isPodcast;
 
-			if (isAcastEnabled && isPodcast && consentForAcast) {
-				setFinalSrc(src.replace('https://', 'https://flex.acast.com/'));
-			}
-		});
-	}, [src]);
+		if (contentIsNotSensitive && isAcastEnabled && isPodcast) {
+			onConsentChange((consentState) => {
+				const consentForAcast = getConsentFor('acast', consentState);
+
+				if (consentForAcast) {
+					setFinalSrc(
+						src.replace('https://', 'https://flex.acast.com/'),
+					);
+				}
+			});
+		}
+	}, [src, contentIsNotSensitive, isAcastEnabled]);
 
 	return <AudioPlayer src={finalSrc} mediaId={mediaId} duration={duration} />;
 };

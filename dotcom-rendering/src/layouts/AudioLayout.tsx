@@ -328,7 +328,12 @@ export const AudioLayout = (props: WebProps) => {
 									defer={{ until: 'visible' }}
 								>
 									<AudioPlayerWrapper
-										/* contentIsNotSensitive={true} */
+										contentIsNotSensitive={
+											!article.config.isSensitive
+										}
+										isAcastEnabled={
+											!!article.config.switches.acast
+										}
 										src={audioData.audioDownloadUrl}
 										mediaId={audioData.mediaId}
 									/>
