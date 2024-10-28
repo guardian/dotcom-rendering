@@ -161,8 +161,8 @@ const itemStyles = css`
  * Generates CSS styles for a grid layout used in a carousel.
  *
  * @param {number} totalCards - The total number of cards in the carousel.
- * @param {number} visibleCardsMobile - Number of cards to show at once on mobile.
- * @param {number} visibleCardsTablet - Number of cards to show at once on tablet.
+ * @param {number} visibleCardsOnMobile - Number of cards to show at once on mobile.
+ * @param {number} visibleCardsOnTablet - Number of cards to show at once on tablet.
  * @returns {string} - The CSS styles for the grid layout.
  */
 const generateCarouselColumnStyles = (
@@ -276,7 +276,7 @@ export const ScrollableCarousel = ({
 			</ol>
 			<div css={buttonContainerStyles}>
 				<Hide until={'tablet'}>
-					{carouselLength > 2 && (
+					{carouselLength > visibleCardsOnTablet && (
 						<div css={buttonLayoutStyles}>
 							<Button
 								hideLabel={true}
