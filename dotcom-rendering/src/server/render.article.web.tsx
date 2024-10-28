@@ -262,7 +262,6 @@ export const renderBlocks = ({
 
 	const editionId = isEditionId(edition) ? edition : 'UK';
 
-	// Only currently supported for Web
 	const config: Config = {
 		renderingTarget: 'Web',
 		darkModeAvailable: abTests.darkModeWebVariant === 'variant',
