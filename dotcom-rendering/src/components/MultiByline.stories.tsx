@@ -1,14 +1,13 @@
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
+import { ArticleDisplay, ArticleSpecial, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
 import { images } from '../../fixtures/generated/images';
-import { getAllDesigns, getAllThemes } from '../lib/format';
+import {
+	ArticleDesign,
+	getAllDesigns,
+	getAllThemes,
+} from '../lib/articleFormat';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { TextBlockElement } from '../types/content';
 import { MultiByline } from './MultiByline';

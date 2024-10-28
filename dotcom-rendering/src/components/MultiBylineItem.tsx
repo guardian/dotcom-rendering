@@ -1,11 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	ArticleDesign,
-	ArticleDisplay,
-	type ArticleFormat,
-	ArticleSpecial,
-} from '@guardian/libs';
-import {
 	from,
 	headlineLightItalic24,
 	headlineLightItalic28,
@@ -21,6 +15,12 @@ import {
 	textSansItalic17,
 } from '@guardian/source/foundations';
 import sanitise from 'sanitize-html';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../lib/articleFormat';
 import { slugify } from '../model/enhance-H2s';
 import { palette } from '../palette';
 import type { MultiBylineItem as MultiBylineItemModel } from '../types/content';
