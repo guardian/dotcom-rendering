@@ -2217,6 +2217,8 @@ const standfirstLinkBorderLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.news[600];
 			}
+		case ArticleDesign.Audio:
+			return sourcePalette.neutral[86];
 		default:
 			switch (theme) {
 				case ArticleSpecial.SpecialReport:
@@ -2368,24 +2370,7 @@ const standfirstLinkTextLight: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.neutral[86];
 			}
 		case ArticleDesign.Audio:
-			switch (theme) {
-				case Pillar.News:
-					return sourcePalette.news[500];
-				case Pillar.Opinion:
-					return sourcePalette.opinion[500];
-				case Pillar.Sport:
-					return sourcePalette.sport[500];
-				case Pillar.Culture:
-					return sourcePalette.culture[500];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[500];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[300];
-			}
+			return sourcePalette.neutral[86];
 		default:
 			switch (theme) {
 				case ArticleSpecial.SpecialReport:
@@ -3131,6 +3116,9 @@ const articleSectionTitleDark: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 
 const articleLinkTextLight: PaletteFunction = ({ design, theme }) => {
+	if (design === ArticleDesign.Audio) {
+		return sourcePalette.neutral[86];
+	}
 	if (design === ArticleDesign.Analysis) return sourcePalette.news[300];
 	switch (theme) {
 		case Pillar.Lifestyle:
@@ -3170,8 +3158,10 @@ const articleLinkTextDark: PaletteFunction = ({ display, theme }) => {
 };
 
 const articleLinkBorderLight: PaletteFunction = ({ design, theme }) => {
+	if (design === ArticleDesign.Audio) {
+		return sourcePalette.neutral[46];
+	}
 	if (theme === ArticleSpecial.Labs) return sourcePalette.neutral[60];
-
 	if (theme === ArticleSpecial.SpecialReport) {
 		return sourcePalette.specialReport[300];
 	}
@@ -3205,6 +3195,9 @@ const articleMetaLinesDark: PaletteFunction = ({ design }) => {
 };
 
 const articleLinkHoverLight: PaletteFunction = ({ design, theme }) => {
+	if (design === ArticleDesign.Audio) {
+		return sourcePalette.neutral[86];
+	}
 	switch (design) {
 		case ArticleDesign.DeadBlog:
 			switch (theme) {
@@ -3274,7 +3267,14 @@ const articleLinkHoverLight: PaletteFunction = ({ design, theme }) => {
 const articleLinkHoverDark: PaletteFunction = (f) => articleLinkTextDark(f);
 
 const articleLinkBorderHoverLight: PaletteFunction = ({ design, theme }) => {
-	if (theme === ArticleSpecial.Labs) return sourcePalette.neutral[7];
+	if (design === ArticleDesign.Audio) {
+		return sourcePalette.neutral[86];
+	}
+
+	if (theme === ArticleSpecial.Labs) {
+		return sourcePalette.neutral[7];
+	}
+
 	if (theme === ArticleSpecial.SpecialReport) {
 		return sourcePalette.specialReport[100];
 	}

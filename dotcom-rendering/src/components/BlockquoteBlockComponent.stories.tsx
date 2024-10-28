@@ -76,6 +76,16 @@ export const QuotedDeadBlogDesignAllThemes = {
 	},
 } satisfies Story;
 
+export const QuotedCommentDesignAudioAllThemes = {
+	args: QuotedStandardDesignAllThemes.args,
+	parameters: {
+		formats: getAllThemes({
+			design: ArticleDesign.Audio,
+			display: ArticleDisplay.Standard,
+		}),
+	},
+} satisfies Story;
+
 export const QuotedAllDesignsNewsTheme = {
 	args: QuotedStandardDesignAllThemes.args,
 	parameters: {

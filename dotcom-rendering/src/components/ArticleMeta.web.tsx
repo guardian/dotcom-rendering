@@ -8,6 +8,7 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import { getAudioData } from '../lib/audio-data';
 import { getSoleContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
@@ -282,23 +283,11 @@ const metaNumbersExtrasLiveBlog = css`
 	}
 `;
 
-const getAudioDownloadUrl = (
-	mainMediaElements: FEElement[] | undefined,
-): string => {
-	const audioBlockElement = mainMediaElements?.find(
-		(element) =>
-			element._type ===
-			'model.dotcomrendering.pageElements.AudioBlockElement',
-	);
-
-	return audioBlockElement?.assets[0]?.url ?? '';
-};
-
 const getSeriesTag = (tags: TagType[]): TagType | undefined => {
 	return tags.find((tag) => tag.type === 'Series' && tag.podcast);
 };
 
-const getPodcastTag = (tags: TagType[]): Podcast | undefined => {
+const getPodcast = (tags: TagType[]): Podcast | undefined => {
 	const seriesTag = getSeriesTag(tags);
 
 	return seriesTag?.podcast;
@@ -339,8 +328,9 @@ export const ArticleMeta = ({
 
 	const { renderingTarget } = useConfig();
 
-	const audioDownloadUrl = getAudioDownloadUrl(mainMediaElements);
-	const podcastTag = getPodcastTag(tags);
+	const seriesTag = getSeriesTag(tags);
+	const audioData = getAudioData(mainMediaElements);
+	const podcast = getPodcast(tags);
 	const rssFeedUrl = getRssFeedUrl(tags);
 
 	return (
@@ -380,12 +370,16 @@ export const ArticleMeta = ({
 							</MetaAvatarContainer>
 						)}
 						<div>
-							{isAudio && podcastTag && (
+							{isAudio && podcast && seriesTag && (
 								<PodcastMeta
-									image={podcastTag.image}
-									spotifyUrl={podcastTag.spotifyUrl}
-									subscriptionUrl={podcastTag.subscriptionUrl}
-									audioDownloadUrl={audioDownloadUrl}
+									series={seriesTag}
+									format={format}
+									image={podcast.image}
+									spotifyUrl={podcast.spotifyUrl}
+									subscriptionUrl={podcast.subscriptionUrl}
+									audioDownloadUrl={
+										audioData?.audioDownloadUrl
+									}
 									rssFeedUrl={rssFeedUrl}
 								/>
 							)}

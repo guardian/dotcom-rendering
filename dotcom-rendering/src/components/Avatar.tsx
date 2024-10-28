@@ -8,6 +8,7 @@ const picture = css`
 	height: 100%;
 	width: 100%;
 	overflow: hidden;
+	min-width: 60px;
 `;
 
 const round = css`

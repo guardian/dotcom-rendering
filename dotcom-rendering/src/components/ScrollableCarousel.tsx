@@ -45,8 +45,12 @@ const themeButtonDisabled: Partial<ThemeButton> = {
 const carouselContainerStyles = css`
 	display: flex;
 	flex-direction: column-reverse;
+	${from.tablet} {
+		gap: ${space[2]}px;
+	}
 	${from.wide} {
 		flex-direction: row;
+		gap: ${space[1]}px;
 	}
 
 	/* Extend carousel into outer margins on mobile */
@@ -121,9 +125,6 @@ const carouselStyles = css`
 
 const buttonContainerStyles = css`
 	margin-left: auto;
-	${from.wide} {
-		margin-left: ${space[1]}px;
-	}
 `;
 
 const buttonLayoutStyles = css`
@@ -153,10 +154,6 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 
 /**
  * A component used in the carousel fronts containers (e.g. small/medium/feature)
- *
- *  ## Why does this need to be an Island?
- *
- * The carouselling arrow buttons need to run javascript.
  */
 export const ScrollableCarousel = ({ children, carouselLength }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
