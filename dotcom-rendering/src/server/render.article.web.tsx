@@ -63,8 +63,7 @@ export const renderHtml = ({
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
 			<ArticlePage
-				format={format}
-				article={frontendData}
+				article={article}
 				NAV={NAV}
 				renderingTarget={renderingTarget}
 			/>

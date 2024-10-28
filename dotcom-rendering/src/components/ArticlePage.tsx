@@ -2,11 +2,11 @@ import { Global } from '@emotion/react';
 import { StrictMode } from 'react';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
-import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
+import { ArticleDesign } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
-import type { ArticleDeprecated } from '../types/article';
+import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
@@ -24,8 +24,7 @@ import { SetAdTargeting } from './SetAdTargeting.importable';
 import { SkipTo } from './SkipTo';
 
 interface BaseProps {
-	article: ArticleDeprecated;
-	format: ArticleFormat;
+	article: Article;
 	renderingTarget: RenderingTarget;
 }
 
@@ -43,19 +42,22 @@ interface AppProps extends BaseProps {
  * Article is a high level wrapper for article pages on Dotcom. Sets strict mode and some globals
  */
 export const ArticlePage = (props: WebProps | AppProps) => {
-	const { article, format, renderingTarget } = props;
+	const {
+		article: { format, frontendData },
+		renderingTarget,
+	} = props;
 
 	const adTargeting = buildAdTargeting({
-		isAdFreeUser: article.isAdFreeUser,
-		isSensitive: article.config.isSensitive,
-		edition: article.config.edition,
-		section: article.config.section,
-		sharedAdTargeting: article.config.sharedAdTargeting,
-		adUnit: article.config.adUnit,
+		isAdFreeUser: frontendData.isAdFreeUser,
+		isSensitive: frontendData.config.isSensitive,
+		edition: frontendData.config.edition,
+		section: frontendData.config.section,
+		sharedAdTargeting: frontendData.config.sharedAdTargeting,
+		adUnit: frontendData.config.adUnit,
 	});
 
 	const isWeb = renderingTarget === 'Web';
-	const webLightbox = isWeb && !!article.config.switches.lightbox;
+	const webLightbox = isWeb && !!frontendData.config.switches.lightbox;
 	const { darkModeAvailable } = useConfig();
 
 	return (
@@ -67,12 +69,12 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					<SkipTo id="navigation" label="Skip to navigation" />
 				</>
 			)}
-			{webLightbox && article.imagesForLightbox.length > 0 && (
+			{webLightbox && frontendData.imagesForLightbox.length > 0 && (
 				<>
 					<Island priority="feature" defer={{ until: 'hash' }}>
 						<LightboxLayout
 							format={format}
-							images={article.imagesForLightbox}
+							images={frontendData.imagesForLightbox}
 						/>
 					</Island>
 					<Island priority="feature" defer={{ until: 'idle' }}>
@@ -97,30 +99,32 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					<Island priority="critical">
 						<Metrics
 							commercialMetricsEnabled={
-								!!article.config.switches.commercialMetrics
+								!!frontendData.config.switches.commercialMetrics
 							}
-							tests={article.config.abTests}
+							tests={frontendData.config.abTests}
 						/>
 					</Island>
 					<Island priority="feature" defer={{ until: 'idle' }}>
-						<BrazeMessaging idApiUrl={article.config.idApiUrl} />
+						<BrazeMessaging
+							idApiUrl={frontendData.config.idApiUrl}
+						/>
 					</Island>
 
 					<Island priority="feature" defer={{ until: 'idle' }}>
 						<ReaderRevenueDev
 							shouldHideReaderRevenue={
-								article.shouldHideReaderRevenue
+								frontendData.shouldHideReaderRevenue
 							}
 						/>
 					</Island>
 					<Island priority="critical">
 						<SetABTests
 							abTestSwitches={filterABTestSwitches(
-								article.config.switches,
+								frontendData.config.switches,
 							)}
-							pageIsSensitive={article.config.isSensitive}
-							isDev={!!article.config.isDev}
-							serverSideTests={article.config.abTests}
+							pageIsSensitive={frontendData.config.isSensitive}
+							isDev={!!frontendData.config.isDev}
+							serverSideTests={frontendData.config.abTests}
 						/>
 					</Island>
 				</>
@@ -133,7 +137,9 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 				<Island priority="critical">
 					<SendTargetingParams
 						editionCommercialProperties={
-							article.commercialProperties[article.editionId]
+							frontendData.commercialProperties[
+								frontendData.editionId
+							]
 						}
 					/>
 				</Island>
@@ -162,13 +168,13 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			)}
 			{renderingTarget === 'Apps' ? (
 				<DecideLayout
-					article={article}
+					article={frontendData}
 					format={format}
 					renderingTarget={renderingTarget}
 				/>
 			) : (
 				<DecideLayout
-					article={article}
+					article={frontendData}
 					NAV={props.NAV}
 					format={format}
 					renderingTarget={renderingTarget}

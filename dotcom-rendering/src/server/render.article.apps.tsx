@@ -31,11 +31,7 @@ export const renderArticle = (
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
-			<ArticlePage
-				format={format}
-				article={frontendData}
-				renderingTarget={renderingTarget}
-			/>
+			<ArticlePage article={article} renderingTarget={renderingTarget} />
 		</ConfigProvider>,
 	);
 
