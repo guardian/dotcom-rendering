@@ -29,6 +29,7 @@ import { NavList } from './NavList';
 import { ScrollableHighlights } from './ScrollableHighlights.importable';
 import { ScrollableMedium } from './ScrollableMedium.importable';
 import { ScrollableSmall } from './ScrollableSmall.importable';
+import { StaticMediumFour } from './StaticMediumFour';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -277,9 +278,18 @@ export const DecideContainer = ({
 					/>
 				</Island>
 			);
+		case 'static/medium/4':
+			return (
+				<StaticMediumFour
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
+					imageLoading={imageLoading}
+				/>
+			);
 		case 'scrollable/feature':
 		case 'static/feature/2':
-		case 'static/medium/4':
 		default:
 			return <p>{containerType} is not yet supported</p>;
 	}
