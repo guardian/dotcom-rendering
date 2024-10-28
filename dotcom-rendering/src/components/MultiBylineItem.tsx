@@ -114,9 +114,7 @@ export const nonAnchorHeadlineStyles = ({
 			 * This has been done because the styles do not directly map to the new presets.
 			 * Please speak to your team's designer and update this to use a more appropriate preset.
 			 */
-			${fontWeight === 'light' && headlineLightItalic24};
-			${fontWeight === 'medium' && headlineMediumItalic24};
-			${fontWeight === 'bold' && headlineLightItalic24};
+			${fontWeight === 'medium' ? headlineMediumItalic24 : headlineLightItalic24};
 		`};
 
 	${from.tablet} {
@@ -128,9 +126,7 @@ export const nonAnchorHeadlineStyles = ({
 				 * This has been done because the styles do not directly map to the new presets.
 				 * Please speak to your team's designer and update this to use a more appropriate preset.
 				 */
-				${fontWeight === 'light' && headlineLightItalic28};
-				${fontWeight === 'medium' && headlineMediumItalic28};
-				${fontWeight === 'bold' && headlineLightItalic28};
+				${fontWeight === 'medium' ? headlineMediumItalic28 : headlineLightItalic28};
 			`};
 	}
 
@@ -155,9 +151,13 @@ export const nonAnchorHeadlineStyles = ({
 				 * Please speak to your team's designer and update this to use a more appropriate preset.
 				 */
 				${textSans24};
-				${fontWeight === 'light' && 'font-weight: 300;'};
-				${fontWeight === 'medium' && 'font-weight: 500;'};
-				${fontWeight === 'bold' && 'font-weight: 700;'};
+				${
+					fontWeight === 'light'
+						? 'font-weight: 300;'
+						: fontWeight === 'medium'
+						? 'font-weight: 500;'
+						: 'font-weight: 700;'
+				};
 				line-height: 1.15;
 			`};
 
@@ -180,9 +180,13 @@ export const nonAnchorHeadlineStyles = ({
 					 * Please speak to your team's designer and update this to use a more appropriate preset.
 					 */
 					${textSans28};
-					${fontWeight === 'light' && 'font-weight: 300;'};
-					${fontWeight === 'medium' && 'font-weight: 500;'};
-					${fontWeight === 'bold' && 'font-weight: 700;'};
+					${
+						fontWeight === 'light'
+							? 'font-weight: 300;'
+							: fontWeight === 'medium'
+							? 'font-weight: 500;'
+							: 'font-weight: 700;'
+					};
 					line-height: 1.15;
 				`};
 		}
