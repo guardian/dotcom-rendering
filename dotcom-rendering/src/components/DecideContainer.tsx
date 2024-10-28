@@ -12,6 +12,7 @@ import { DynamicSlowMPU } from './DynamicSlowMPU';
 import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
 import { FixedMediumFastXI } from './FixedMediumFastXI';
 import { FixedMediumFastXII } from './FixedMediumFastXII';
+import { StaticMediumFour } from './StaticMediumFour';
 import { FixedMediumSlowVI } from './FixedMediumSlowVI';
 import { FixedMediumSlowVII } from './FixedMediumSlowVII';
 import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU';
@@ -49,6 +50,7 @@ export const DecideContainer = ({
 	absoluteServerTimes,
 	imageLoading,
 }: Props) => {
+	console.log('containerType:', containerType);
 	// If you add a new container type which contains an MPU, you must also add it to
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -277,9 +279,18 @@ export const DecideContainer = ({
 					/>
 				</Island>
 			);
+		case 'static/medium/4':
+			return (
+				<StaticMediumFour
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
+					imageLoading={imageLoading}
+				/>
+			);
 		case 'scrollable/feature':
 		case 'static/feature/2':
-		case 'static/medium/4':
 		default:
 			return <p>{containerType} is not yet supported</p>;
 	}
