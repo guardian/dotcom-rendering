@@ -14,8 +14,7 @@ import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
-import { LightboxHash } from './LightboxHash.importable';
-import { LightboxLayout } from './LightboxLayout.importable';
+import { Lightbox } from './Lightbox';
 import { Metrics } from './Metrics.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { SendTargetingParams } from './SendTargetingParams.importable';
@@ -57,7 +56,6 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 	});
 
 	const isWeb = renderingTarget === 'Web';
-	const webLightbox = isWeb && !!frontendData.config.switches.lightbox;
 	const { darkModeAvailable } = useConfig();
 
 	return (
@@ -69,20 +67,19 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					<SkipTo id="navigation" label="Skip to navigation" />
 				</>
 			)}
-			{webLightbox && frontendData.imagesForLightbox.length > 0 && (
-				<>
-					<Island priority="feature" defer={{ until: 'hash' }}>
-						<LightboxLayout
-							format={format}
-							images={frontendData.imagesForLightbox}
-						/>
-					</Island>
-					<Island priority="feature" defer={{ until: 'idle' }}>
-						<LightboxHash />
-					</Island>
-				</>
-			)}
-
+			<Lightbox
+				format={format}
+				switches={frontendData.config.switches}
+				{...(renderingTarget === 'Web'
+					? {
+							lightboxImages: frontendData.imagesForLightbox,
+							renderingTarget,
+					  }
+					: {
+							lightboxImages: frontendData.imagesForAppsLightbox,
+							renderingTarget,
+					  })}
+			/>
 			<Island priority="enhancement" defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
