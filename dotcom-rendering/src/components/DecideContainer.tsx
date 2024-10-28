@@ -50,7 +50,6 @@ export const DecideContainer = ({
 	absoluteServerTimes,
 	imageLoading,
 }: Props) => {
-	console.log('containerType:', containerType);
 	// If you add a new container type which contains an MPU, you must also add it to
 	switch (containerType) {
 		case 'dynamic/fast':
