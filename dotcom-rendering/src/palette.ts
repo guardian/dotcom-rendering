@@ -59,14 +59,7 @@ const textblockTextLight: PaletteFunction = (format: ArticleFormat) => {
 	}
 };
 
-const textblockTextDark: PaletteFunction = (format: ArticleFormat) => {
-	switch (format.design) {
-		case ArticleDesign.Audio:
-			return sourcePalette.neutral[7];
-		default:
-			return 'inherit';
-	}
-};
+const textblockTextDark: PaletteFunction = () => 'inherit';
 
 const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 	switch (display) {
