@@ -3,6 +3,7 @@ import {
 	from,
 	headlineMedium24Object,
 	space,
+	until,
 } from '@guardian/source/foundations';
 import type { ThemeButton } from '@guardian/source/react-components';
 import {
@@ -130,6 +131,27 @@ const buttonContainerStyles = css`
 const buttonLayoutStyles = css`
 	display: flex;
 	gap: ${space[1]}px;
+`;
+
+const itemStyles = css`
+	scroll-snap-align: start;
+	grid-area: span 1;
+	position: relative;
+	::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: -10px;
+		width: 1px;
+		background-color: ${palette('--card-border-top')};
+		transform: translateX(-50%);
+	}
+	${until.leftCol} {
+		:first-child::before {
+			background-color: transparent;
+		}
+	}
 `;
 
 /**
@@ -267,3 +289,7 @@ export const ScrollableCarousel = ({ children, carouselLength }: Props) => {
 		</div>
 	);
 };
+
+ScrollableCarousel.Item = ({ children }: { children: React.ReactNode }) => (
+	<li css={itemStyles}>{children}</li>
+);

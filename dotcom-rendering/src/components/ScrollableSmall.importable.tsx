@@ -1,6 +1,3 @@
-import { css } from '@emotion/react';
-import { from } from '@guardian/source/foundations';
-import { palette } from '../palette';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
@@ -17,37 +14,6 @@ type Props = {
 	imageLoading: 'lazy' | 'eager';
 	containerType: DCRContainerType;
 };
-
-const itemStyles = css`
-	scroll-snap-align: start;
-	grid-area: span 1;
-	position: relative;
-`;
-
-const verticalLineStyles = css`
-	:not(:last-child)::after {
-		content: '';
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		right: -10px;
-		width: 1px;
-		background-color: ${palette('--card-border-top')};
-		transform: translateX(-50%);
-	}
-	${from.leftCol} {
-		:first-child::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: -10px;
-			width: 1px;
-			background-color: ${palette('--card-border-top')};
-			transform: translateX(-50%);
-		}
-	}
-`;
 
 /**
  * A container used on fronts to display a carousel of small cards
@@ -68,7 +34,7 @@ export const ScrollableSmall = ({
 		<ScrollableCarousel carouselLength={trails.length}>
 			{trails.map((trail) => {
 				return (
-					<li key={trail.url} css={[itemStyles, verticalLineStyles]}>
+					<ScrollableCarousel.Item key={trail.url}>
 						<FrontCard
 							trail={trail}
 							imageLoading={imageLoading}
@@ -91,7 +57,7 @@ export const ScrollableSmall = ({
 							showTopBarDesktop={false}
 							showTopBarMobile={false}
 						/>
-					</li>
+					</ScrollableCarousel.Item>
 				);
 			})}
 		</ScrollableCarousel>
