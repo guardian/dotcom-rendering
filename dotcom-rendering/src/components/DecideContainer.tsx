@@ -12,7 +12,6 @@ import { DynamicSlowMPU } from './DynamicSlowMPU';
 import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
 import { FixedMediumFastXI } from './FixedMediumFastXI';
 import { FixedMediumFastXII } from './FixedMediumFastXII';
-import { StaticMediumFour } from './StaticMediumFour';
 import { FixedMediumSlowVI } from './FixedMediumSlowVI';
 import { FixedMediumSlowVII } from './FixedMediumSlowVII';
 import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU';
@@ -30,6 +29,7 @@ import { NavList } from './NavList';
 import { ScrollableHighlights } from './ScrollableHighlights.importable';
 import { ScrollableMedium } from './ScrollableMedium.importable';
 import { ScrollableSmall } from './ScrollableSmall.importable';
+import { StaticMediumFour } from './StaticMediumFour';
 
 type Props = {
 	trails: DCRFrontCard[];

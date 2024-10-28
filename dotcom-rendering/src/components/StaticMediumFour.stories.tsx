@@ -2,8 +2,8 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
-import { StaticMediumFour } from './StaticMediumFour';
 import { FrontSection } from './FrontSection';
+import { StaticMediumFour } from './StaticMediumFour';
 
 const meta = {
 	component: StaticMediumFour,
@@ -18,7 +18,7 @@ const meta = {
 		},
 	},
 	args: {
-		trails: trails,
+		trails,
 		showAge: true,
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
