@@ -170,6 +170,11 @@ const generateCarouselColumnStyles = (
 	visibleCardsOnTablet: number,
 ) => {
 	const peepingCardWidth = space[8];
+	const cardGap = 20;
+	const offsetPeepingCardWidth =
+		peepingCardWidth / visibleCardsOnMobile + cardGap;
+	const offsetCardGap =
+		(cardGap * (visibleCardsOnTablet - 1)) / visibleCardsOnTablet;
 
 	return css`
 		/**
@@ -179,17 +184,12 @@ const generateCarouselColumnStyles = (
 		 */
 		grid-template-columns: repeat(
 			${totalCards},
-			calc(
-				(
-					(100% / ${visibleCardsOnMobile}) -
-						${peepingCardWidth / visibleCardsOnMobile}px - 20px
-				)
-			)
+			calc(${100 / visibleCardsOnMobile}% - ${offsetPeepingCardWidth}px)
 		);
 		${from.tablet} {
 			grid-template-columns: repeat(
 				${totalCards},
-				calc((100% / ${visibleCardsOnTablet}) - 10px)
+				calc(${100 / visibleCardsOnTablet}% - ${offsetCardGap}px)
 			);
 		}
 	`;
