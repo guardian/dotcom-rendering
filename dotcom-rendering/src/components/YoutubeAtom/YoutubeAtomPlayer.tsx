@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, Global } from '@emotion/react';
 import type { Participations } from '@guardian/ab-core';
 import { buildImaAdTagUrl } from '@guardian/commercial';
 import type { ConsentState } from '@guardian/libs';
@@ -11,6 +11,7 @@ import {
 	useState,
 } from 'react';
 import { getVideoClient } from '../../lib/bridgetApi';
+import { getZIndex } from '../../lib/getZIndex';
 import { getAuthStatus } from '../../lib/identity';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { google } from './ima';
@@ -72,6 +73,20 @@ const imaPlayerStyles = css`
 	left: 0;
 	width: 100%;
 	height: 100%;
+`;
+
+const fullscreenStyles = (id: string) => css`
+	html {
+		overflow: hidden;
+	}
+	iframe#${id} {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		z-index: ${getZIndex('youTubeFullscreen')};
+	}
 `;
 
 /**
@@ -398,6 +413,9 @@ export const YoutubeAtomPlayer = ({
 	});
 
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
+	const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+	const [applyFullscreenStyles, setApplyFullscreenStyles] =
+		useState<boolean>(false);
 	const playerReadyCallback = useCallback(() => setPlayerReady(true), []);
 	const playerListeners = useRef<PlayerListeners>([]);
 	/**
@@ -447,9 +465,6 @@ export const YoutubeAtomPlayer = ({
 						videoId,
 						playerVars: {
 							controls: 1,
-							// @ts-expect-error -- advised by YouTube for Android but does not exist in @types/youtube
-							external_fullscreen:
-								renderingTarget === 'Apps' ? 1 : 0,
 							fs: 1,
 							modestbranding: 1,
 							origin,
@@ -472,8 +487,7 @@ export const YoutubeAtomPlayer = ({
 										from: 'YoutubeAtomPlayer fullscreen',
 										videoId,
 									});
-									// For Android only, iOS will stub the method
-									void getVideoClient().fullscreen();
+									setIsFullscreen((prev) => !prev);
 								}
 							},
 						},
@@ -645,16 +659,35 @@ export const YoutubeAtomPlayer = ({
 	}, []);
 
 	/**
+	 * For apps rendered articles that return true for `setFullscreen` the web layer
+	 * needs to handle the application of fullscreen styles
+	 *
+	 * This is only for the YouTube player in Android web views which does not support fullscreen
+	 */
+	useEffect(() => {
+		if (renderingTarget === 'Apps') {
+			const videoClient = getVideoClient();
+			void videoClient.setFullscreen(isFullscreen).then((success) => {
+				if (success) {
+					setApplyFullscreenStyles(isFullscreen);
+				}
+			});
+		}
+	}, [isFullscreen, renderingTarget]);
+
+	/**
 	 * An element for the YouTube player to hook into the dom
 	 */
 	return (
-		<div
-			id={id}
-			data-atom-id={id}
-			data-testid={id}
-			data-atom-type="youtube"
-			title={title}
-			css={enableAds && imaPlayerStyles}
-		></div>
+		<>
+			{applyFullscreenStyles && <Global styles={fullscreenStyles(id)} />}
+			<div
+				id={id}
+				data-testid={id}
+				data-atom-type="youtube"
+				title={title}
+				css={enableAds && imaPlayerStyles}
+			></div>
+		</>
 	);
 };
