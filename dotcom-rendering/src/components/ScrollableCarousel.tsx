@@ -136,6 +136,7 @@ const buttonLayoutStyles = css`
 `;
 
 const itemStyles = css`
+	display: flex;
 	scroll-snap-align: start;
 	grid-area: span 1;
 	position: relative;
