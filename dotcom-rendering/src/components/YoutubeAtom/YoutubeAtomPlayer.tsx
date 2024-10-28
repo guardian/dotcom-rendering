@@ -83,8 +83,8 @@ const fullscreenStyles = (id: string) => css`
 		position: fixed;
 		top: 0;
 		left: 0;
-		width: 100vw;
-		height: 100vh;
+		width: 100svw;
+		height: 100svh;
 		z-index: ${getZIndex('youTubeFullscreen')};
 	}
 `;
