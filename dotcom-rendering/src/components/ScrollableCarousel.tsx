@@ -44,7 +44,24 @@ const themeButtonDisabled: Partial<ThemeButton> = {
 	textTertiary: palette('--carousel-chevron-disabled'),
 };
 
-const carouselContainerStyles = css`
+const containerStyles = css`
+	/* Extend carousel into outer margins on mobile */
+	margin-left: -10px;
+	margin-right: -10px;
+	${from.mobileLandscape} {
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+	${from.tablet} {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	${from.leftCol} {
+		margin-left: -10px;
+	}
+`;
+
+const containerWithNavigationStyles = css`
 	display: flex;
 	flex-direction: column-reverse;
 	${from.tablet} {
@@ -56,14 +73,6 @@ const carouselContainerStyles = css`
 		gap: ${space[1]}px;
 	}
 
-	/* Extend carousel into outer margins on mobile */
-	margin-left: -10px;
-	margin-right: -10px;
-	${from.mobileLandscape} {
-		margin-left: -20px;
-		margin-right: -20px;
-	}
-
 	/**
 	 * From tablet, pull container up so navigation buttons align with title.
 	 * The margin is calculated from the front section title font size and line
@@ -73,8 +82,6 @@ const carouselContainerStyles = css`
 	 * into the right-hand column.
 	 */
 	${from.tablet} {
-		margin-left: 10px;
-		margin-right: 10px;
 		margin-top: calc(
 			(-${titlePreset.fontSize} * ${titlePreset.lineHeight}) -
 				${space[3]}px
@@ -82,7 +89,6 @@ const carouselContainerStyles = css`
 	}
 	${from.leftCol} {
 		margin-top: 0;
-		margin-left: -10px;
 	}
 	${from.wide} {
 		margin-right: calc(${space[2]}px - ${gridColumnWidth} - ${gridGap});
@@ -210,6 +216,8 @@ export const ScrollableCarousel = ({
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
 	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
 
+	const showNavigation = carouselLength > visibleCardsOnTablet;
+
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
 
@@ -260,7 +268,12 @@ export const ScrollableCarousel = ({
 	}, []);
 
 	return (
-		<div css={carouselContainerStyles}>
+		<div
+			css={[
+				containerStyles,
+				showNavigation && containerWithNavigationStyles,
+			]}
+		>
 			<ol
 				ref={carouselRef}
 				css={[
@@ -275,7 +288,7 @@ export const ScrollableCarousel = ({
 			>
 				{children}
 			</ol>
-			{carouselLength > visibleCardsOnTablet && (
+			{showNavigation && (
 				<div css={buttonStyles}>
 					<Button
 						hideLabel={true}
