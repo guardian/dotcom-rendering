@@ -27,6 +27,7 @@ import {
 import { enhanceTags } from '../model/enhanceTags';
 import type { NavType } from '../model/extract-nav';
 import type { DCRTagPageType } from '../types/tagPage';
+import { CrosswordsPressreaderLayout } from './CrosswordsPressreaderLayout';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
@@ -50,6 +51,8 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 		tags,
 	} = tagPage;
 
+	console.log('tag page!', tagPage);
+
 	const renderAds = canRenderAds(tagPage);
 
 	const desktopAdPositions = renderAds
@@ -64,6 +67,11 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 
 	const isAccessibilityPage =
 		tagPage.config.pageId === 'help/accessibility-help';
+
+	const isCrosswordsPage = tagPage.config.pageId === 'crosswords';
+	if (isCrosswordsPage) {
+		return <CrosswordsPressreaderLayout tagPage={tagPage} />;
+	}
 
 	return (
 		<>
