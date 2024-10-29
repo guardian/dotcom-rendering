@@ -26,11 +26,6 @@ export default {
 		imageLoading: 'eager',
 		containerType: 'scrollable/small',
 	},
-} as Meta;
-
-type Story = StoryObj<typeof ScrollableSmall>;
-
-export const WithFrontSection = {
 	render: (args) => (
 		<FrontSection
 			title="Scrollable small"
@@ -41,7 +36,35 @@ export const WithFrontSection = {
 			<ScrollableSmall {...args} />
 		</FrontSection>
 	),
-} satisfies Story;
+} as Meta<typeof ScrollableSmall>;
+
+type Story = StoryObj<typeof ScrollableSmall>;
+
+export const WithMultipleCards: Story = {};
+
+export const WithOneCard: Story = {
+	args: {
+		trails: trails.slice(0, 1),
+	},
+};
+
+export const WithTwoCards: Story = {
+	args: {
+		trails: trails.slice(0, 2),
+	},
+};
+
+export const WithThreeCards: Story = {
+	args: {
+		trails: trails.slice(0, 3),
+	},
+};
+
+export const WithFourCards: Story = {
+	args: {
+		trails: trails.slice(0, 4),
+	},
+};
 
 const containerPalettes = [
 	'InvestigationPalette',
@@ -59,7 +82,7 @@ const containerPalettes = [
 	'MediaPalette' | 'PodcastPalette'
 >[];
 
-export const WithSpecialPaletteVariations = {
+export const WithSpecialPaletteVariations: Story = {
 	render: (args) => (
 		<>
 			{containerPalettes.map((containerPalette) => (
@@ -79,4 +102,4 @@ export const WithSpecialPaletteVariations = {
 			))}
 		</>
 	),
-} satisfies Story;
+};
