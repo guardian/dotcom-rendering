@@ -205,8 +205,10 @@ export const nonAnchorHeadlineStyles = ({
 export const multiBylineBylineStyles = (format: ArticleFormat) => css`
 	${nonAnchorHeadlineStyles({ format, fontWeight: 'light' })}
 	padding-bottom: 8px;
+	/* stylelint-disable-next-line declaration-no-important */
 	font-style: italic !important;
 	margin-top: -4px;
+	/* stylelint-disable-next-line declaration-no-important */
 	font-weight: 300 !important;
 	color: ${neutral[46]};
 	a {
@@ -232,13 +234,13 @@ const bylineTextStyles = css`
 	flex-grow: 1;
 `;
 
+// TODO: make this different size based on screen size
 const bylineImageStyles = css`
 	width: 80px;
 	border-radius: 50%;
 	margin-bottom: -8px;
 	height: 80px;
 	min-width: 80px;
-	// TODO: make this different size based on screen size
 	overflow: hidden;
 	align-self: flex-end;
 	${from.tablet} {
