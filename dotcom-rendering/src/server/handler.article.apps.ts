@@ -28,7 +28,7 @@ export const handleAppsInteractive: RequestHandler = ({ body }, res) => {
 };
 
 export const handleAppsBlocks: RequestHandler = ({ body }, res) => {
-	recordTypeAndPlatform('blocks');
+	recordTypeAndPlatform('blocks', 'app');
 	const {
 		blocks,
 		format,
