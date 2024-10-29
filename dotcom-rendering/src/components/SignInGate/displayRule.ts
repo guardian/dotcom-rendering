@@ -71,7 +71,10 @@ export const hasRequiredConsents = (): Promise<boolean> =>
 	onConsent()
 		.then(({ canTarget }: ConsentState) => canTarget)
 		.catch(() => false);
-
+// TODO
+// Check the checks if that need consent
+// Is there anything we can use to get daily article count?
+// Can we show the sign in gate for users who have opted out
 export const canShowSignInGate = ({
 	isSignedIn,
 	currentTest,
