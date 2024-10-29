@@ -18,6 +18,8 @@ import { palette } from '../palette';
 type Props = {
 	children: React.ReactNode;
 	carouselLength: number;
+	visibleCardsOnMobile: number;
+	visibleCardsOnTablet: number;
 };
 
 /**
@@ -134,6 +136,7 @@ const buttonLayoutStyles = css`
 `;
 
 const itemStyles = css`
+	display: flex;
 	scroll-snap-align: start;
 	grid-area: span 1;
 	position: relative;
@@ -158,18 +161,37 @@ const itemStyles = css`
  * Generates CSS styles for a grid layout used in a carousel.
  *
  * @param {number} totalCards - The total number of cards in the carousel.
+ * @param {number} visibleCardsOnMobile - Number of cards to show at once on mobile.
+ * @param {number} visibleCardsOnTablet - Number of cards to show at once on tablet.
  * @returns {string} - The CSS styles for the grid layout.
  */
-const generateCarouselColumnStyles = (totalCards: number) => {
+const generateCarouselColumnStyles = (
+	totalCards: number,
+	visibleCardsOnMobile: number,
+	visibleCardsOnTablet: number,
+) => {
 	const peepingCardWidth = space[8];
+	const cardGap = 20;
+	const offsetPeepingCardWidth =
+		peepingCardWidth / visibleCardsOnMobile + cardGap;
+	const offsetCardGap =
+		(cardGap * (visibleCardsOnTablet - 1)) / visibleCardsOnTablet;
 
 	return css`
+		/**
+		 * On mobile, a 32px wide 'peeping' card is always shown to the right in
+		 * addition to the specified number of visible cards to indicate the
+		 * carousel can be scrolled.
+		 */
 		grid-template-columns: repeat(
 			${totalCards},
-			calc((100% - ${peepingCardWidth}px - 20px))
+			calc(${100 / visibleCardsOnMobile}% - ${offsetPeepingCardWidth}px)
 		);
 		${from.tablet} {
-			grid-template-columns: repeat(${totalCards}, calc(50% - 10px));
+			grid-template-columns: repeat(
+				${totalCards},
+				calc(${100 / visibleCardsOnTablet}% - ${offsetCardGap}px)
+			);
 		}
 	`;
 };
@@ -177,7 +199,12 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 /**
  * A component used in the carousel fronts containers (e.g. small/medium/feature)
  */
-export const ScrollableCarousel = ({ children, carouselLength }: Props) => {
+export const ScrollableCarousel = ({
+	children,
+	carouselLength,
+	visibleCardsOnMobile,
+	visibleCardsOnTablet,
+}: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
 	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
@@ -237,7 +264,11 @@ export const ScrollableCarousel = ({ children, carouselLength }: Props) => {
 				ref={carouselRef}
 				css={[
 					carouselStyles,
-					generateCarouselColumnStyles(carouselLength),
+					generateCarouselColumnStyles(
+						carouselLength,
+						visibleCardsOnMobile,
+						visibleCardsOnTablet,
+					),
 				]}
 				data-heatphan-type="carousel"
 			>
@@ -245,7 +276,7 @@ export const ScrollableCarousel = ({ children, carouselLength }: Props) => {
 			</ol>
 			<div css={buttonContainerStyles}>
 				<Hide until={'tablet'}>
-					{carouselLength > 2 && (
+					{carouselLength > visibleCardsOnTablet && (
 						<div css={buttonLayoutStyles}>
 							<Button
 								hideLabel={true}

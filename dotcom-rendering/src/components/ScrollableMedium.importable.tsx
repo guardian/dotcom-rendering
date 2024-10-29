@@ -31,7 +31,11 @@ export const ScrollableMedium = ({
 	showAge,
 }: Props) => {
 	return (
-		<ScrollableCarousel carouselLength={trails.length}>
+		<ScrollableCarousel
+			carouselLength={trails.length}
+			visibleCardsOnMobile={2}
+			visibleCardsOnTablet={4}
+		>
 			{trails.map((trail) => {
 				return (
 					<ScrollableCarousel.Item key={trail.url}>
@@ -48,7 +52,7 @@ export const ScrollableMedium = ({
 							}}
 							imagePositionOnDesktop="bottom"
 							imagePositionOnMobile="bottom"
-							imageSize="small" // TODO - needs fixed width images
+							imageSize="medium"
 							trailText={undefined} // unsupported
 							supportingContent={undefined} // unsupported
 							aspectRatio="5:4"
