@@ -13,7 +13,7 @@ type Props = {
 	showImage?: boolean;
 };
 
-export const StaticMediumFour = ({
+export const StaticFeatureTwo = ({
 	trails,
 	containerPalette,
 	showAge,
@@ -34,7 +34,7 @@ export const StaticMediumFour = ({
 				return (
 					<LI
 						stretch={false}
-						percentage={'25%'}
+						percentage={'50%'}
 						key={card.url}
 						padSides={true}
 						showDivider={cardIndex > 0}
