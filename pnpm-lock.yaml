@@ -338,8 +338,8 @@ importers:
         specifier: 50.13.0
         version: 50.13.0(@swc/core@1.7.26)(@types/node@20.14.10)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.5.3)
       '@guardian/commercial':
-        specifier: 23.0.0
-        version: 23.0.0(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@19.1.0)(@guardian/source@8.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+        specifier: 23.2.0
+        version: 23.2.0(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@19.1.0)(@guardian/source@8.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
       '@guardian/core-web-vitals':
         specifier: 7.0.0
         version: 7.0.0(@guardian/libs@19.1.0)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3)
@@ -4019,8 +4019,8 @@ packages:
       - typescript
     dev: false
 
-  /@guardian/commercial@23.0.0(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@19.1.0)(@guardian/source@8.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
-    resolution: {integrity: sha512-IUEBsWXJ4RrzMcBIp/a44YWVIxbrzmSy859c0wcI7aOXMyVCcEDyzf2cJ7wyp73+MwRdBh6gQoANDSHqr7AOhw==}
+  /@guardian/commercial@23.2.0(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@19.1.0)(@guardian/source@8.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
+    resolution: {integrity: sha512-aQss6IZQN10Io3OfZ+4uSiEAJwhW9waEpos4bbUI5S3yx0dV75kuz33ba0/wt2szT34RdMVTq4NgtQWiUeNqwg==}
     peerDependencies:
       '@guardian/ab-core': ^8.0.0
       '@guardian/core-web-vitals': ^7.0.0
@@ -4036,7 +4036,7 @@ packages:
       '@guardian/identity-auth': 2.1.0(@guardian/libs@19.1.0)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/identity-auth-frontend': 4.0.0(@guardian/identity-auth@2.1.0)(@guardian/libs@19.1.0)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/libs': 19.1.0(tslib@2.6.2)(typescript@5.5.3)
-      '@guardian/prebid.js': 8.52.0-6(react-dom@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/prebid.js': 8.52.0-7(react-dom@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source': 8.0.0(@emotion/react@11.11.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@octokit/core': 6.1.2
       fastdom: 1.0.12
@@ -4336,8 +4336,8 @@ packages:
       '@guardian/tsconfig': 1.0.0
     dev: false
 
-  /@guardian/prebid.js@8.52.0-6(react-dom@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3):
-    resolution: {integrity: sha512-YBsPkX5XxHSVNWw1PDX4c6WArH7e5FOomFM59QVIDuWNqrI2vyORvN7df2JukiDvCBxVggGUc1n77Lub2jstZw==}
+  /@guardian/prebid.js@8.52.0-7(react-dom@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3):
+    resolution: {integrity: sha512-RWg8vyyfZccrqRXu5w+nnghsskYCHkLWQqXdFh1iSadYRU+exuNcynxStKdzUZdPNnh8aUyEuMIoaZXHmEZEYg==}
     engines: {node: '>=12.0.0'}
     dependencies:
       '@babel/core': 7.25.8
