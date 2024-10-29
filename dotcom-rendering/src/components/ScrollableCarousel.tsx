@@ -8,7 +8,6 @@ import {
 import type { ThemeButton } from '@guardian/source/react-components';
 import {
 	Button,
-	Hide,
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
@@ -128,13 +127,13 @@ const carouselStyles = css`
 	}
 `;
 
-const buttonContainerStyles = css`
-	margin-left: auto;
-`;
-
-const buttonLayoutStyles = css`
-	display: flex;
-	gap: ${space[1]}px;
+const buttonStyles = css`
+	display: none;
+	${from.tablet} {
+		display: flex;
+		gap: ${space[1]}px;
+		margin-left: auto;
+	}
 `;
 
 const itemStyles = css`
@@ -276,49 +275,45 @@ export const ScrollableCarousel = ({
 			>
 				{children}
 			</ol>
-			<div css={buttonContainerStyles}>
-				<Hide until={'tablet'}>
-					{carouselLength > visibleCardsOnTablet && (
-						<div css={buttonLayoutStyles}>
-							<Button
-								hideLabel={true}
-								iconSide="left"
-								icon={<SvgChevronLeftSingle />}
-								onClick={() => scrollTo('left')}
-								priority="tertiary"
-								theme={
-									previousButtonEnabled
-										? themeButton
-										: themeButtonDisabled
-								}
-								size="small"
-								disabled={!previousButtonEnabled}
-								// TODO
-								// aria-label="Move stories backwards"
-								// data-link-name="container left chevron"
-							/>
+			{carouselLength > visibleCardsOnTablet && (
+				<div css={buttonStyles}>
+					<Button
+						hideLabel={true}
+						iconSide="left"
+						icon={<SvgChevronLeftSingle />}
+						onClick={() => scrollTo('left')}
+						priority="tertiary"
+						theme={
+							previousButtonEnabled
+								? themeButton
+								: themeButtonDisabled
+						}
+						size="small"
+						disabled={!previousButtonEnabled}
+						// TODO
+						// aria-label="Move stories backwards"
+						// data-link-name="container left chevron"
+					/>
 
-							<Button
-								hideLabel={true}
-								iconSide="left"
-								icon={<SvgChevronRightSingle />}
-								onClick={() => scrollTo('right')}
-								priority="tertiary"
-								theme={
-									nextButtonEnabled
-										? themeButton
-										: themeButtonDisabled
-								}
-								size="small"
-								disabled={!nextButtonEnabled}
-								// TODO
-								// aria-label="Move stories forwards"
-								// data-link-name="container right chevron"
-							/>
-						</div>
-					)}
-				</Hide>
-			</div>
+					<Button
+						hideLabel={true}
+						iconSide="left"
+						icon={<SvgChevronRightSingle />}
+						onClick={() => scrollTo('right')}
+						priority="tertiary"
+						theme={
+							nextButtonEnabled
+								? themeButton
+								: themeButtonDisabled
+						}
+						size="small"
+						disabled={!nextButtonEnabled}
+						// TODO
+						// aria-label="Move stories forwards"
+						// data-link-name="container right chevron"
+					/>
+				</div>
+			)}
 		</div>
 	);
 };
