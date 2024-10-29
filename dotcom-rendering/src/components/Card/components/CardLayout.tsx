@@ -24,22 +24,6 @@ const containerStyles = css`
 	flex-basis: 100%;
 `;
 
-const decideDirection = (imagePosition: ImagePositionType) => {
-	switch (imagePosition) {
-		case 'top':
-			return 'column';
-		case 'bottom':
-			return 'column-reverse';
-		case 'left':
-			return 'row';
-		case 'right':
-			return 'row-reverse';
-		// If there's no image (so no imagePosition) default to top down
-		case 'none':
-			return 'column';
-	}
-};
-
 // Until mobile landscape, show 1 card on small screens
 // Above mobile landscape, show 1 full card and min 20vw of second card
 const videoWidth = css`
@@ -64,36 +48,71 @@ const minWidth = (minWidthInPixels?: number) => {
 	`;
 };
 
+/**
+ * Cards with an avatar are a special case as these are rendered horizontally
+ * on mobile and vertically on desktop by default, with the avatar on the right
+ * or bottom of the card respectively.
+ *
+ * A boosted card in a `dynamic/slow` container is an exception to this as it is
+ * rendered horizontally on desktop by overriding `imagePositionOnDesktop`
+ *
+ * `scrollable/medium` is another exception as the medium cards require a
+ * vertical layout at all breakpoints so we explicitly check that the image
+ * position for desktop and mobile are both set to `bottom` to avoid affecting
+ * existing layouts where the default position values are relied upon.
+ */
+const decideDirection = (
+	imagePositionOnDesktop: ImagePositionType,
+	imagePositionOnMobile: ImagePositionType,
+	hasAvatar?: boolean,
+) => {
+	const imagePosition = {
+		top: 'column',
+		bottom: 'column-reverse',
+		left: 'row',
+		right: 'row-reverse',
+		none: 'column',
+	};
+
+	if (hasAvatar) {
+		if (
+			imagePositionOnMobile === 'bottom' &&
+			imagePositionOnDesktop === 'bottom'
+		) {
+			return [imagePosition['bottom'], imagePosition['bottom']];
+		}
+
+		if (
+			imagePositionOnDesktop === 'left' ||
+			imagePositionOnDesktop === 'right'
+		) {
+			return [imagePosition['right'], imagePosition['right']];
+		}
+
+		return [imagePosition['bottom'], imagePosition['right']];
+	}
+
+	return [
+		imagePosition[imagePositionOnDesktop],
+		imagePosition[imagePositionOnMobile],
+	];
+};
+
 const decidePosition = (
 	imagePositionOnDesktop: ImagePositionType,
 	imagePositionOnMobile: ImagePositionType,
-	imageType?: CardImageType,
+	hasAvatar?: boolean,
 ) => {
-	if (imageType === 'avatar') {
-		switch (imagePositionOnDesktop) {
-			case 'left':
-			case 'right': {
-				return css`
-					flex-direction: row-reverse;
-					${from.tablet} {
-						flex-direction: row-reverse;
-					}
-				`;
-			}
-			default: {
-				return css`
-					flex-direction: row-reverse;
-					${from.tablet} {
-						flex-direction: column-reverse;
-					}
-				`;
-			}
-		}
-	}
+	const [directionOnDesktop, directionOnMobile] = decideDirection(
+		imagePositionOnDesktop,
+		imagePositionOnMobile,
+		hasAvatar,
+	);
+
 	return css`
-		flex-direction: ${decideDirection(imagePositionOnMobile)};
+		flex-direction: ${directionOnMobile};
 		${from.tablet} {
-			flex-direction: ${decideDirection(imagePositionOnDesktop)};
+			flex-direction: ${directionOnDesktop};
 		}
 	`;
 };
@@ -133,7 +152,7 @@ export const CardLayout = ({
 			decidePosition(
 				imagePositionOnDesktop,
 				imagePositionOnMobile,
-				imageType,
+				imageType === 'avatar',
 			),
 		]}
 		style={{
