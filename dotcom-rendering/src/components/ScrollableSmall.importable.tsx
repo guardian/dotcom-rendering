@@ -31,7 +31,11 @@ export const ScrollableSmall = ({
 	showAge,
 }: Props) => {
 	return (
-		<ScrollableCarousel carouselLength={trails.length}>
+		<ScrollableCarousel
+			carouselLength={trails.length}
+			visibleCardsOnMobile={1}
+			visibleCardsOnTablet={2}
+		>
 			{trails.map((trail) => {
 				return (
 					<ScrollableCarousel.Item key={trail.url}>
@@ -48,7 +52,7 @@ export const ScrollableSmall = ({
 							}}
 							imagePositionOnDesktop="left"
 							imagePositionOnMobile="left"
-							imageSize="small" // TODO - needs fixed width images
+							imageSize="small"
 							trailText={undefined} // unsupported
 							supportingContent={undefined} // unsupported
 							aspectRatio="5:4"
