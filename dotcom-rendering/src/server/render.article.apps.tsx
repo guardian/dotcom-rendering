@@ -160,7 +160,7 @@ export const renderAppsBlocks = ({
 
 	const config: Config = {
 		renderingTarget: 'Apps',
-		darkModeAvailable: abTests.darkModeWebVariant === 'variant',
+		darkModeAvailable: true,
 		assetOrigin: ASSET_ORIGIN,
 		editionId,
 	};
