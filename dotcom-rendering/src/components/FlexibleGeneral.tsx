@@ -332,6 +332,8 @@ export const StandardCardLayout = ({
 	absoluteServerTimes: boolean;
 	showImage?: boolean;
 }) => {
+	if (cards.length === 0) return null;
+
 	return (
 		<UL
 			direction="row"

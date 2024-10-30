@@ -178,6 +178,7 @@ const TwoCardOrFourCardLayout = ({
 	absoluteServerTimes: boolean;
 	showImage?: boolean;
 }) => {
+	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
 	return (
 		<UL
@@ -242,7 +243,6 @@ export const FlexibleSpecial = ({
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
 			/>
-
 			<OneCardLayout
 				cards={splash}
 				containerPalette={containerPalette}
@@ -250,7 +250,6 @@ export const FlexibleSpecial = ({
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
 			/>
-
 			<TwoCardOrFourCardLayout
 				cards={cards}
 				containerPalette={containerPalette}
