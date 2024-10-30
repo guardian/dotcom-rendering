@@ -10,7 +10,7 @@ const ARTICLE_COUNT_OPT_OUT_COOKIE = {
 	daysToLive: 90,
 };
 
-const DAILY_ARTICLE_COUNT_STORAGE_KEY = 'gu.history.dailyArticleCount';
+// const DAILY_ARTICLE_COUNT_STORAGE_KEY = 'gu.history.dailyArticleCount';
 const WEEKLY_ARTICLE_COUNT_STORAGE_KEY = 'gu.history.weeklyArticleCount';
 const ARTICLES_THIS_WEEK_STORAGE_KEY = 'gu.history.articleCountsThisWeek';
 
@@ -25,7 +25,8 @@ export const removeArticleCountOptOutCookie = (): void =>
 	removeCookie({ name: ARTICLE_COUNT_OPT_OUT_COOKIE.name });
 
 export const removeArticleCountFromLocalStorage = (): void => {
-	storage.local.remove(DAILY_ARTICLE_COUNT_STORAGE_KEY);
+	console.log('removeArticleCountFromLocalStorage');
+	// storage.local.remove(DAILY_ARTICLE_COUNT_STORAGE_KEY);
 	storage.local.remove(WEEKLY_ARTICLE_COUNT_STORAGE_KEY);
 	storage.local.remove(ARTICLES_THIS_WEEK_STORAGE_KEY);
 };
