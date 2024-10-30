@@ -7,7 +7,7 @@ import type { ServerSideTests, Switches } from '../types/config';
 import type { MultiBylineItem, StarRating } from '../types/content';
 import { MultiBylineItem as MultiBylineItemComponent } from './MultiBylineItem';
 
-interface MiniProfilesProps {
+interface MultiBylineProps {
 	format: ArticleFormat;
 	ajaxUrl: string;
 	host?: string;
@@ -48,14 +48,14 @@ export const MultiByline = ({
 	starRating,
 	RenderArticleElement,
 	isLastElement,
-}: MiniProfilesProps) => {
+}: MultiBylineProps) => {
 	return (
 		<ol data-ignore="global-ol-styling">
 			{multiBylineItems.map((multiBylineItem, index) => (
 				<MultiBylineItemComponent
 					multiBylineItem={multiBylineItem}
 					format={format}
-					key={`${multiBylineItem.title}-${index}`}
+					key={multiBylineItem.title}
 				>
 					{multiBylineItem.body.map((element) => (
 						// eslint-disable-next-line react/jsx-key -- The element array should remain consistent as it's derived from the order of elements in CAPI
