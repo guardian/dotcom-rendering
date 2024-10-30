@@ -11,6 +11,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Get started',
 			newsletters: [
+				'the-long-wave',
 				'morning-briefing', // First Edition
 				'the-stakes-us-election-edition',
 				'saturday-edition',
@@ -46,6 +47,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Weekend reads',
 			newsletters: [
+				'the-filter',
 				'inside-saturday',
 				'five-great-reads',
 				'house-to-home',
@@ -112,6 +114,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'Get started',
 			newsletters: [
 				'the-stakes-us-election-edition',
+				'the-long-wave',
 				'us-morning-newsletter', // First Thing
 				'trump-on-trial',
 				'well-actually',
@@ -209,6 +212,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'Get started',
 			newsletters: [
 				'breaking-news-australia',
+				'the-long-wave',
 				'morning-mail',
 				'afternoon-update',
 				'the-crunch',
