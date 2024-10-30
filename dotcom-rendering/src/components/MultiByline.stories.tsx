@@ -119,12 +119,44 @@ export const ThemeVariations = {
 	},
 } satisfies Story;
 
-export const DesignVariations = {
+export const DesignVariationsNews = {
 	args: ThemeVariations.args,
 	decorators: [centreColumnDecorator],
 	parameters: {
 		formats: getAllDesigns({
 			theme: Pillar.News,
+			display: ArticleDisplay.Standard,
+		}),
+		chromatic: {
+			modes: {
+				horizontal: allModes.splitHorizontal,
+			},
+		},
+	},
+} satisfies Story;
+
+export const DesignVariationsCulture = {
+	args: ThemeVariations.args,
+	decorators: [centreColumnDecorator],
+	parameters: {
+		formats: getAllDesigns({
+			theme: Pillar.Culture,
+			display: ArticleDisplay.Standard,
+		}),
+		chromatic: {
+			modes: {
+				horizontal: allModes.splitHorizontal,
+			},
+		},
+	},
+} satisfies Story;
+
+export const DesignVariationsOpinion = {
+	args: ThemeVariations.args,
+	decorators: [centreColumnDecorator],
+	parameters: {
+		formats: getAllDesigns({
+			theme: Pillar.Opinion,
 			display: ArticleDisplay.Standard,
 		}),
 		chromatic: {
