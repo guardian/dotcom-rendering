@@ -111,7 +111,7 @@ const setAppsConfiguration = async (
 		const requiresWebFullscreen = await videoClient.setFullscreen(false);
 		const updatedConfiguration = {
 			...basePlayerConfiguration,
-			external_fullscreen: requiresWebFullscreen,
+			external_fullscreen: requiresWebFullscreen ? 1 : 0,
 		};
 		return updatedConfiguration;
 	}
