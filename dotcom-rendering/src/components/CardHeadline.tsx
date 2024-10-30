@@ -233,9 +233,10 @@ export const CardHeadline = ({
 				<span
 					css={[
 						css`
-							color: ${isHighlights
+							color: white;
+							/* color: ${isHighlights
 								? palette('--highlights-card-headline')
-								: palette('--card-headline')};
+								: palette('--card-headline')}; */
 						`,
 					]}
 					className="show-underline"

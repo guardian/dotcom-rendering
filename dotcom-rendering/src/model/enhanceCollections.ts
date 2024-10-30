@@ -13,19 +13,18 @@ const FORBIDDEN_CONTAINERS = [
 	'qatar treat',
 ];
 
-const UNSUPPORTED_CONTAINERS = ['scrollable/feature', 'static/feature/2'];
-
 const PALETTE_STYLES_URI =
 	'https://content.guardianapis.com/atom/interactive/interactives/2022/03/29/fronts-container-colours/default';
 
-const isSupported = (collection: FECollectionType): boolean =>
-	!(
-		UNSUPPORTED_CONTAINERS.includes(collection.collectionType) ||
+const isSupported = (collection: FECollectionType): boolean => {
+	console.log('type::', collection.collectionType);
+	return !(
 		FORBIDDEN_CONTAINERS.includes(collection.displayName) ||
 		collection.curated.some(
 			(card) => card.properties.embedUri === PALETTE_STYLES_URI,
 		)
 	);
+};
 
 const findCollectionSuitableForFrontBranding = (
 	collections: FECollectionType[],
@@ -64,6 +63,7 @@ export const enhanceCollections = ({
 }): DCRCollectionType[] => {
 	const indexToShowFrontBranding =
 		findCollectionSuitableForFrontBranding(collections);
+
 	return collections.filter(isSupported).map((collection, index) => {
 		const { id, displayName, collectionType, hasMore, href, description } =
 			collection;

@@ -47,7 +47,7 @@ export const generateImageURL = ({
 	const url = new URL(mainImage);
 
 	// In CODE, we do not generate optimised replacement images
-	if (url.hostname === 's3-eu-west-1.amazonaws.com') return url.href;
+	// if (url.hostname === 's3-eu-west-1.amazonaws.com') return url.href;
 
 	const params = new URLSearchParams({
 		width: imageWidth.toString(),
@@ -56,7 +56,9 @@ export const generateImageURL = ({
 		crop: aspectRatio,
 	});
 
-	return `https://i.guim.co.uk/img/${getServiceFromUrl(url)}${
+	const anna = `https://i.guimcode.co.uk/img/${getServiceFromUrl(url)}${
 		url.pathname
 	}?${params.toString()}`;
+	console.log(anna);
+	return anna;
 };
