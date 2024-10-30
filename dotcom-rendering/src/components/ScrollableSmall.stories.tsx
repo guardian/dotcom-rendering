@@ -6,7 +6,7 @@ import type { DCRContainerPalette } from '../types/front';
 import { FrontSection } from './FrontSection';
 import { ScrollableSmall } from './ScrollableSmall.importable';
 
-export default {
+const meta = {
 	title: 'Components/ScrollableSmall',
 	component: ScrollableSmall,
 	parameters: {
@@ -36,35 +36,37 @@ export default {
 			<ScrollableSmall {...args} />
 		</FrontSection>
 	),
-} as Meta<typeof ScrollableSmall>;
+} satisfies Meta<typeof ScrollableSmall>;
+
+export default meta;
 
 type Story = StoryObj<typeof ScrollableSmall>;
 
-export const WithMultipleCards: Story = {};
+export const WithMultipleCards = {} satisfies Story;
 
-export const WithOneCard: Story = {
+export const WithOneCard = {
 	args: {
 		trails: trails.slice(0, 1),
 	},
-};
+} satisfies Story;
 
-export const WithTwoCards: Story = {
+export const WithTwoCards = {
 	args: {
 		trails: trails.slice(0, 2),
 	},
-};
+} satisfies Story;
 
-export const WithThreeCards: Story = {
+export const WithThreeCards = {
 	args: {
 		trails: trails.slice(0, 3),
 	},
-};
+} satisfies Story;
 
-export const WithFourCards: Story = {
+export const WithFourCards = {
 	args: {
 		trails: trails.slice(0, 4),
 	},
-};
+} satisfies Story;
 
 const containerPalettes = [
 	'InvestigationPalette',
@@ -82,7 +84,7 @@ const containerPalettes = [
 	'MediaPalette' | 'PodcastPalette'
 >[];
 
-export const WithSpecialPaletteVariations: Story = {
+export const WithSpecialPaletteVariations = {
 	render: (args) => (
 		<>
 			{containerPalettes.map((containerPalette) => (
@@ -102,4 +104,4 @@ export const WithSpecialPaletteVariations: Story = {
 			))}
 		</>
 	),
-};
+} satisfies Story;
