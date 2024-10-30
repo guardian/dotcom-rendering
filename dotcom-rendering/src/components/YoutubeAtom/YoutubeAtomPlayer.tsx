@@ -90,6 +90,35 @@ const fullscreenStyles = (id: string) => css`
 `;
 
 /**
+ * We set the external_fullscreen configuration property depending on
+ * whether the native layer needs to delegate fullscreen styling to
+ * the webview.
+ *
+ * This is true for Android but not for iOS which handles fullscreen
+ * natively. The Bridget method setFullscreen returns a value to
+ * indicate this requirement. We use it here by passing a value of
+ * false for fullscreen when intialising the player to determine
+ * the value we need to pass for external_fullscreen.
+ *
+ * external_fullscreen is allowed listed on our CODE and PROD domains.
+ */
+const setAppsConfiguration = async (
+	basePlayerConfiguration: YouTubePlayerArgs,
+	renderingTarget: RenderingTarget,
+) => {
+	if (renderingTarget === 'Apps') {
+		const videoClient = getVideoClient();
+		const requiresWebFullscreen = await videoClient.setFullscreen(false);
+		const updatedConfiguration = {
+			...basePlayerConfiguration,
+			external_fullscreen: requiresWebFullscreen,
+		};
+		return updatedConfiguration;
+	}
+	return Promise.resolve(basePlayerConfiguration);
+};
+
+/**
  * Dispatches a custom play event so that other players listening
  * for this event will stop playing
  */
@@ -465,9 +494,6 @@ export const YoutubeAtomPlayer = ({
 						videoId,
 						playerVars: {
 							controls: 1,
-							// @ts-expect-error -- advised by YouTube for Android but does not exist in @types/youtube
-							external_fullscreen:
-								renderingTarget === 'Apps' ? 1 : 0,
 							fs: 1,
 							modestbranding: 1,
 							origin,
@@ -499,31 +525,42 @@ export const YoutubeAtomPlayer = ({
 					enableIma: enableAds,
 				};
 
-				if (enableAds) {
-					isSignedIn()
-						.then((signedIn) => {
-							player.current = new YouTubePlayer({
-								...basePlayerConfiguration,
-								imaAdsRequestCallback:
-									createImaAdsRequestCallback(
-										adTargeting,
-										consentState,
-										abTestParticipations,
-										signedIn,
-									),
-								imaAdManagerListeners:
-									createImaManagerListeners(uniqueId),
-							});
-						})
-						.catch((error: Error) => {
-							window.guardian.modules.sentry.reportError(
-								error,
-								'youtube-atom-player-ima',
+				const basePlayerConfigurationWithApps = setAppsConfiguration(
+					basePlayerConfiguration,
+					renderingTarget,
+				);
+
+				void basePlayerConfigurationWithApps.then(
+					(playerConfiguration) => {
+						if (enableAds) {
+							isSignedIn()
+								.then((signedIn) => {
+									player.current = new YouTubePlayer({
+										...playerConfiguration,
+										imaAdsRequestCallback:
+											createImaAdsRequestCallback(
+												adTargeting,
+												consentState,
+												abTestParticipations,
+												signedIn,
+											),
+										imaAdManagerListeners:
+											createImaManagerListeners(uniqueId),
+									});
+								})
+								.catch((error: Error) => {
+									window.guardian.modules.sentry.reportError(
+										error,
+										'youtube-atom-player-ima',
+									);
+								});
+						} else {
+							player.current = new YouTubePlayer(
+								playerConfiguration,
 							);
-						});
-				} else {
-					player.current = new YouTubePlayer(basePlayerConfiguration);
-				}
+						}
+					},
+				);
 
 				/**
 				 * Pause the current video when another video is played
