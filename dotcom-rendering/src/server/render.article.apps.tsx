@@ -134,7 +134,7 @@ window.twttr = (function(d, s, id) {
 };
 
 /**
- * blocksToHtml is used by the /Blocks endpoint as part of keeping liveblogs live
+ * renderAppsBlocks is used by the /AppsBlocks endpoint as part of keeping liveblogs live
  * It takes an array of json blocks and returns the resulting html string
  *
  * @returns string (the html)
