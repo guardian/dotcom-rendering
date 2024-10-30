@@ -10,7 +10,6 @@ import { StraightLines } from '@guardian/source-development-kitchen/react-compon
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
-import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -374,11 +373,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 					<>
 						<Island priority="critical">
 							<AdPortals />
-						</Island>
-						<Island priority="feature" defer={{ until: 'idle' }}>
-							<AppsLightboxImageStore
-								images={article.imagesForAppsLightbox}
-							/>
 						</Island>
 					</>
 				)}

@@ -12,7 +12,6 @@ import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsFooter } from '../components/AppsFooter.importable';
-import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -394,11 +393,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					<>
 						<Island priority="critical">
 							<AdPortals />
-						</Island>
-						<Island priority="feature" defer={{ until: 'idle' }}>
-							<AppsLightboxImageStore
-								images={article.imagesForAppsLightbox}
-							/>
 						</Island>
 					</>
 				)}
