@@ -14,7 +14,7 @@ import {
 	textSans34,
 	textSansItalic17,
 } from '@guardian/source/foundations';
-import sanitise from 'sanitize-html';
+import sanitise, { defaults } from 'sanitize-html';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -220,6 +220,11 @@ export const multiBylineBylineStyles = (format: ArticleFormat) => css`
 			text-decoration: underline;
 		}
 	}
+	span[data-contributor-rel='author'] {
+		${subheadingStyles(format)}
+		color: ${neutral[46]};
+		font-style: normal;
+	}
 `;
 
 const bylineWrapperStyles = css`
@@ -296,7 +301,12 @@ const Byline = ({
 	contributors,
 	format,
 }: BylineProps) => {
-	const sanitizedHtml = sanitise(bylineHtml, {});
+	const sanitizedHtml = sanitise(bylineHtml, {
+		allowedAttributes: {
+			...defaults.allowedAttributes,
+			span: ['data-contributor-rel'],
+		},
+	});
 
 	return (
 		<div css={bylineWrapperStyles}>
