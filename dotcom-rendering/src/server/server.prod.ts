@@ -10,6 +10,7 @@ import {
 } from './handler.article.amp';
 import {
 	handleAppsArticle,
+	handleAppsBlocks,
 	handleAppsInteractive,
 } from './handler.article.apps';
 import {
@@ -78,6 +79,7 @@ export const prodServer = (): void => {
 	);
 	app.post('/AppsArticle', logRenderTime, handleAppsArticle);
 	app.post('/AppsInteractive', logRenderTime, handleAppsInteractive);
+	app.post('/AppsBlocks', logRenderTime, handleAppsBlocks);
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get(

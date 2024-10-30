@@ -3,6 +3,7 @@ import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslet
 import { handleAMPArticle } from './handler.article.amp';
 import {
 	handleAppsArticle,
+	handleAppsBlocks,
 	handleAppsInteractive,
 } from './handler.article.apps';
 import {
@@ -85,6 +86,8 @@ export const devServer = (): Handler => {
 				return handleAppsArticle(req, res, next);
 			case 'AppsInteractive':
 				return handleAppsInteractive(req, res, next);
+			case 'AppsBlocks':
+				return handleAppsBlocks(req, res, next);
 			default: {
 				// Do not redirect assets urls
 				if (req.url.match(ASSETS_URL)) return next();

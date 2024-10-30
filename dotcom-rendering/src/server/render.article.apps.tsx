@@ -1,17 +1,24 @@
 import { isString } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
-import { ArticleDesign } from '../lib/articleFormat';
+import { LiveBlogRenderer } from '../components/LiveBlogRenderer';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	decideFormat,
+} from '../lib/articleFormat';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
 	getPathFromManifest,
 } from '../lib/assets';
+import { isEditionId } from '../lib/edition';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { createGuardian } from '../model/guardian';
 import type { Article } from '../types/article';
 import type { Config } from '../types/configContext';
 import type { FEElement } from '../types/content';
+import type { FEBlocksRequest } from '../types/frontend';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 export const renderArticle = (
@@ -124,4 +131,68 @@ window.twttr = (function(d, s, id) {
 		prefetchScripts: clientScripts,
 		html: renderedPage,
 	};
+};
+
+/**
+ * renderAppsBlocks is used by the /AppsBlocks endpoint as part of keeping liveblogs live
+ * It takes an array of json blocks and returns the resulting html string
+ *
+ * @returns string (the html)
+ */
+export const renderAppsBlocks = ({
+	blocks,
+	format: FEFormat,
+	host,
+	pageId,
+	webTitle,
+	ajaxUrl,
+	isAdFreeUser,
+	isSensitive,
+	section,
+	switches,
+	keywordIds,
+	abTests = {},
+	edition,
+}: FEBlocksRequest): string => {
+	const format: ArticleFormat = decideFormat(FEFormat);
+
+	const editionId = isEditionId(edition) ? edition : 'UK';
+
+	const config: Config = {
+		renderingTarget: 'Apps',
+		darkModeAvailable: true,
+		assetOrigin: ASSET_ORIGIN,
+		editionId,
+	};
+
+	const { html, extractedCss } = renderToStringWithEmotion(
+		<ConfigProvider value={config}>
+			<LiveBlogRenderer
+				blocks={blocks}
+				format={format}
+				host={host}
+				pageId={pageId}
+				webTitle={webTitle}
+				ajaxUrl={ajaxUrl}
+				isSensitive={isSensitive}
+				isAdFreeUser={isAdFreeUser}
+				abTests={abTests}
+				switches={switches}
+				isLiveUpdate={true}
+				sectionId={section}
+				// The props below are never used because isLiveUpdate is true but, typescript...
+				shouldHideReaderRevenue={false}
+				tags={[]}
+				isPaidContent={false}
+				contributionsServiceUrl=""
+				keywordIds={keywordIds}
+				editionId={editionId}
+				onFirstPage={false}
+				keyEvents={[]}
+				filterKeyEvents={false}
+			/>
+		</ConfigProvider>,
+	);
+
+	return `${extractedCss}${html}`;
 };
