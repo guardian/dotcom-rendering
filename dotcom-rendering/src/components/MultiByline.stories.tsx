@@ -73,6 +73,14 @@ export const ThemeVariations = {
 				title: 'A further subheading',
 				body: [testTextElement],
 			},
+			{
+				title: 'This byline has a contributor with no link',
+				bio: testBioText,
+				body: [testTextElement],
+				byline: 'Steve McQueen on Paul Gilroy',
+				bylineHtml:
+					"<span data-contributor-rel='author'>Steve McQueen</span> on Paul Gilroy",
+			},
 		],
 		isLastElement: true,
 		/**
