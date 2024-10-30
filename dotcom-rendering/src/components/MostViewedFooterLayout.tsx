@@ -38,6 +38,9 @@ const advertMargin = (hasHideButton: boolean, isDeeplyRead: boolean) => css`
 	${from.leftCol} {
 		margin-top: 10px;
 	}
+	${from.wide} {
+		margin-left: 16px;
+	}
 	${hasHideButton && from.leftCol} {
 		margin-top: 2px;
 	}
