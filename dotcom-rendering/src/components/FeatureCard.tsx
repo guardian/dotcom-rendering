@@ -268,6 +268,7 @@ export const FeatureCard = ({
 
 				<CardFooter
 					format={format}
+					showLivePlayable={false}
 					age={
 						<CardAge
 							showClock={!!showClock}
@@ -282,7 +283,6 @@ export const FeatureCard = ({
 							discussionApiUrl={discussionApiUrl}
 						/>
 					}
-					showLivePlayable={false}
 				/>
 			</div>
 		</div>

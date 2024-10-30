@@ -81,7 +81,6 @@ export const StaticFeatureTwo = ({
 								isExternalLink={card.isExternalLink}
 								branding={card.branding}
 								containerPalette={containerPalette}
-								showAge={showAge}
 								absoluteServerTimes={absoluteServerTimes}
 								imageLoading={imageLoading}
 								aspectRatio="4:5"
