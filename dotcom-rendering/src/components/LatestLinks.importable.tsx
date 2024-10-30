@@ -29,6 +29,7 @@ type Props = {
 const header = css`
 	padding: ${space[2]}px 0;
 	${textSansBold17};
+	color: ${themePalette('--card-headline')};
 `;
 
 const horizontal = css`
