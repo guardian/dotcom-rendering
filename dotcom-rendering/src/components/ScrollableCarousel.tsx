@@ -51,10 +51,11 @@ const carouselContainerStyles = css`
 	${from.tablet} {
 		gap: ${space[2]}px;
 	}
-	${from.wide} {
+	/** this is breaking the big card carousel */
+	/* ${from.wide} {
 		flex-direction: row;
 		gap: ${space[1]}px;
-	}
+	} */
 
 	/* Extend carousel into outer margins on mobile */
 	margin-left: -10px;

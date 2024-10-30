@@ -8,17 +8,13 @@ type Props = {
 	trails: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
 	absoluteServerTimes: boolean;
-	showImage?: boolean;
 };
 export const StaticFeatureTwo = ({
 	trails,
 	containerPalette,
-	showAge,
 	absoluteServerTimes,
 	imageLoading,
-	showImage = true,
 }: Props) => {
 	const cards = trails.splice(0, 2);
 
@@ -30,7 +26,7 @@ export const StaticFeatureTwo = ({
 				showTopBar={true}
 				isFlexibleContainer={true}
 			>
-				{cards.map((card, cardIndex) => {
+				{cards.map((card) => {
 					return (
 						<LI
 							stretch={false}
@@ -38,26 +34,6 @@ export const StaticFeatureTwo = ({
 							key={card.url}
 							padSides={true}
 						>
-							{
-								/* <FrontCard
-								trail={card}
-								containerPalette={containerPalette}
-								showAge={showAge}
-								absoluteServerTimes={absoluteServerTimes}
-								image={showImage ? card.image : undefined}
-								imageLoading={imageLoading}
-								imagePositionOnDesktop={'bottom'}
-								/* we don't want to support sublinks on standard cards here so we hard code to undefined */
-								// 	supportingContent={undefined}
-								// 	imageSize={'medium'}
-								// 	aspectRatio="5:4"
-								// 	kickerText={card.kickerText}
-								// 	showLivePlayable={false}
-								// 	showTopBarDesktop={false}
-								// 	showTopBarMobile={true}
-								// />
-								// */}
-							}
 							<FeatureCard
 								linkTo={card.url}
 								format={card.format}
@@ -84,6 +60,9 @@ export const StaticFeatureTwo = ({
 								absoluteServerTimes={absoluteServerTimes}
 								imageLoading={imageLoading}
 								aspectRatio="4:5"
+								cardType="static"
+								imageSize={'feature-large'}
+								headlineSizes={{ desktop: 'medium' }}
 							/>
 						</LI>
 					);
