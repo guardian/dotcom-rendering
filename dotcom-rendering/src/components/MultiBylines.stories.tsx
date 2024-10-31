@@ -70,6 +70,15 @@ export const ThemeVariations = {
 					"<span data-contributor-rel='author'>Steve McQueen</span> on Paul Gilroy",
 			},
 		],
+		tags: [
+			{
+				title: 'Richard Hillgrove',
+				id: 'profile/richard-hillgrove',
+				type: 'contributor',
+				bylineImageUrl:
+					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2011/5/24/1306249890287/Richard-Hillgrove.jpg?width=100&dpr=2&s=none',
+			},
+		],
 		isLastElement: true,
 		/**
 		 * This will be replaced by the `formats` parameter, but it's
@@ -227,6 +236,15 @@ export const Images = {
 						data: { ...images[2].data, caption: 'Sunset' },
 					},
 				],
+			},
+		],
+		tags: [
+			{
+				title: 'Richard Hillgrove',
+				id: 'profile/richard-hillgrove',
+				type: 'contributor',
+				bylineImageUrl:
+					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2011/5/24/1306249890287/Richard-Hillgrove.jpg?width=100&dpr=2&s=none',
 			},
 		],
 	},

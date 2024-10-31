@@ -24,6 +24,7 @@ import {
 import { slugify } from '../model/enhance-H2s';
 import { palette } from '../palette';
 import type { MultiByline as MultiBylineModel } from '../types/content';
+import type { TagType } from '../types/tag';
 import { subheadingStyles } from './Subheading';
 
 const multiBylineItemStyles = css`
@@ -239,7 +240,6 @@ const bylineTextStyles = css`
 	flex-grow: 1;
 `;
 
-// TODO: make this different size based on screen size
 const bylineImageStyles = css`
 	width: 80px;
 	border-radius: 50%;
@@ -261,12 +261,14 @@ const bylineImageStyles = css`
 interface MultiBylineItemProps {
 	multiByline: MultiBylineModel;
 	format: ArticleFormat;
+	tags: TagType[];
 	children: React.ReactNode;
 }
 
 export const MultiByline = ({
 	multiByline,
 	format,
+	tags,
 	children,
 }: MultiBylineItemProps) => {
 	return (
@@ -279,6 +281,7 @@ export const MultiByline = ({
 					contributorIds={multiByline.contributorIds ?? []}
 					imageOverrideUrl={multiByline.imageOverrideUrl}
 					format={format}
+					tags={tags}
 				/>
 				<Bio html={multiByline.bio} />
 				{children}
@@ -294,6 +297,7 @@ type BylineProps = {
 	imageOverrideUrl?: string;
 	contributorIds: string[];
 	format: ArticleFormat;
+	tags: TagType[];
 };
 
 const Byline = ({
@@ -303,6 +307,7 @@ const Byline = ({
 	imageOverrideUrl,
 	contributorIds,
 	format,
+	tags,
 }: BylineProps) => {
 	const sanitizedHtml = sanitise(bylineHtml, {
 		allowedAttributes: {
@@ -310,6 +315,9 @@ const Byline = ({
 			span: ['data-contributor-rel'],
 		},
 	});
+	const imageUrl =
+		imageOverrideUrl ??
+		tags.find((tag) => tag.id === contributorIds[0])?.bylineImageUrl;
 
 	return (
 		<div css={bylineWrapperStyles}>
@@ -333,14 +341,9 @@ const Byline = ({
 					/>
 				) : null}
 			</div>
-			{/* TODO: fetch image url from contributor tag */}
-			{imageOverrideUrl ?? contributorIds[0] ? (
-				<img
-					src={imageOverrideUrl ?? contributorIds[0]}
-					alt={byline}
-					css={bylineImageStyles}
-				></img>
-			) : null}
+			{!!imageUrl && (
+				<img src={imageUrl} alt={byline} css={bylineImageStyles}></img>
+			)}
 		</div>
 	);
 };
