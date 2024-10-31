@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
+import { space } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../lib/useCommentCount';
-// import type { Branding } from '../types/branding';
 import type { StarRating as Rating } from '../types/content';
 import type {
 	DCRContainerPalette,
@@ -11,10 +11,11 @@ import type {
 	DCRSupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
-import { isWithinTwelveHours, StarRatingComponent } from './Card/Card';
+import { StarRatingComponent } from './Card/Card';
 import { CardAge as AgeStamp } from './Card/components/CardAge';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
+import { HeadlineWrapper } from './Card/components/HeadlineWrapper';
 import type {
 	ImagePositionType,
 	ImageSizeType,
@@ -46,7 +47,6 @@ export type Props = {
 	/** Size is ignored when position = 'top' because in that case the image flows based on width */
 	imageSize?: ImageSizeType;
 	imageLoading: Loading;
-	isOnwardContent?: boolean;
 	showClock?: boolean;
 	mainMedia?: MainMedia;
 
@@ -58,6 +58,7 @@ export type Props = {
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	starRating?: Rating;
+	minWidthInPixels?: number;
 	/** Used for Ophan tracking */
 	dataLinkName?: string;
 	/** Only used on Labs cards */
@@ -70,10 +71,13 @@ export type Props = {
 	isExternalLink: boolean;
 	/** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
 	aspectRatio?: AspectRatio;
-	index?: number;
 };
 
 const baseCardStyles = css`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
 	/* We absolutely position the faux link
 		so this is required here */
 	position: relative;
@@ -92,19 +96,6 @@ const baseCardStyles = css`
 	/* a tag specific styles */
 	color: inherit;
 	text-decoration: none;
-`;
-
-const overlayStyles = css`
-	position: absolute;
-	width: 100%;
-	bottom: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	flex-grow: 1;
-	padding: 8px;
-	backdrop-filter: blur(12px);
-	row-gap: 8px;
 `;
 
 const getMedia = ({
@@ -129,6 +120,14 @@ const getMedia = ({
 		return { type: 'picture', imageUrl, imageAltText } as const;
 	}
 	return undefined;
+};
+
+export const isWithinTwelveHours = (webPublicationDate: string): boolean => {
+	const timeDiffMs = Math.abs(
+		new Date().getTime() - new Date(webPublicationDate).getTime(),
+	);
+	const timeDiffHours = timeDiffMs / (1000 * 60 * 60);
+	return timeDiffHours <= 12;
 };
 
 const CardAge = ({
@@ -231,10 +230,10 @@ export const FeatureCard = ({
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
-	/**TODO: Check if feaure cards should be playable */
 	// If the card isn't playable, we need to show a play icon.
 	// Otherwise, this is handled by the YoutubeAtom
-	const showPlayIcon = mainMedia?.type === 'Video' && !isPlayableMediaCard;
+	/**TODO: Determin if these cards should be playable */
+	const showPlayIcon = mainMedia?.type === 'Video';
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -258,6 +257,9 @@ export const FeatureCard = ({
 						css={[
 							css`
 								display: flex;
+								flex-basis: 100%;
+								width: 100%;
+								gap: ${space[2]}px;
 								flex-direction: column;
 							`,
 						]}
@@ -326,34 +328,48 @@ export const FeatureCard = ({
 											)}
 									</>
 								)}
-								<div css={overlayStyles}>
-									<CardHeadline
-										headlineText={headlineText}
-										format={format}
-										fontSizes={headlineSizes}
-										showQuotes={false}
-										kickerText={
-											format.design ===
-												ArticleDesign.LiveBlog &&
-											!kickerText
-												? 'Live'
-												: kickerText
-										}
-										showPulsingDot={
-											format.design ===
-												ArticleDesign.LiveBlog ||
-											showPulsingDot
-										}
-										byline={byline}
-										showByline={showByline}
-										isExternalLink={isExternalLink}
-									/>
-									{starRating !== undefined ? (
-										<StarRatingComponent
-											rating={starRating}
-											cardHasImage={!!image}
+								<div
+									css={css`
+										position: absolute;
+										bottom: 0;
+										display: flex;
+										flex-direction: column;
+										justify-content: flex-start;
+										flex-grow: 1;
+										padding: 8px;
+										backdrop-filter: blur(12px);
+									`}
+								>
+									<HeadlineWrapper>
+										<CardHeadline
+											headlineText={headlineText}
+											format={format}
+											fontSizes={headlineSizes}
+											showQuotes={false}
+											kickerText={
+												format.design ===
+													ArticleDesign.LiveBlog &&
+												!kickerText
+													? 'Live'
+													: kickerText
+											}
+											showPulsingDot={
+												format.design ===
+													ArticleDesign.LiveBlog ||
+												showPulsingDot
+											}
+											byline={byline}
+											showByline={showByline}
+											isExternalLink={isExternalLink}
 										/>
-									) : null}
+										{starRating !== undefined ? (
+											<StarRatingComponent
+												rating={starRating}
+												cardHasImage={!!image}
+											/>
+										) : null}
+									</HeadlineWrapper>
+
 									<CardFooter
 										format={format}
 										age={
@@ -376,7 +392,7 @@ export const FeatureCard = ({
 												}
 											/>
 										}
-										/**TODO: check if this is needed */
+										/**TODO: Determine if this is needed */
 										// cardBranding={
 										// 	branding ? (
 										// 		<CardBranding
@@ -403,7 +419,6 @@ export const FeatureCard = ({
 							supportingContent={supportingContent}
 							containerPalette={containerPalette}
 							alignment={'vertical'}
-							fillBackground={true}
 						/>
 					)}
 				</div>
