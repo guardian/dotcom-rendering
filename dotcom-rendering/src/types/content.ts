@@ -350,13 +350,13 @@ export interface MiniProfile {
 	endNote?: string;
 }
 
-export interface MultiBylineItem {
+export interface MultiByline {
 	title: string;
 	body: FEElement[];
 	bio?: string;
 	endNote?: string;
 	imageOverrideUrl?: string;
-	contributors?: BlockContributor[];
+	contributorIds?: string[];
 	byline?: string;
 	bylineHtml?: string;
 }
@@ -376,16 +376,29 @@ interface MiniProfilesBlockElement {
 	miniProfiles: MiniProfile[];
 }
 
-interface ListItem {
+interface MultiBylinesBlockElement {
+	_type: 'model.dotcomrendering.pageElements.MultiBylinesBlockElement';
+	multiBylines: MultiByline[];
+}
+
+export interface ListItem {
 	title?: string;
 	elements: FEElement[];
 	bio?: string;
 	endNote?: string;
+	imageOverrideUrl?: string;
+	contributorIds?: string[];
+	byline?: string;
+	bylineHtml?: string;
 }
 
 export interface ListBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ListBlockElement';
-	listElementType: 'KeyTakeaways' | 'QAndAExplainer' | 'MiniProfiles';
+	listElementType:
+		| 'KeyTakeaways'
+		| 'QAndAExplainer'
+		| 'MiniProfiles'
+		| 'MultiByline';
 	items: ListItem[];
 	elementId: string;
 }
@@ -776,6 +789,7 @@ export type FEElement =
 	| MapBlockElement
 	| MediaAtomBlockElement
 	| MiniProfilesBlockElement
+	| MultiBylinesBlockElement
 	| MultiImageBlockElement
 	| NumberedTitleBlockElement
 	| NewsletterSignupBlockElement
