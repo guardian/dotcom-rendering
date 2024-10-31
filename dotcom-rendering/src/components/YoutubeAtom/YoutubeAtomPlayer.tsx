@@ -530,37 +530,34 @@ export const YoutubeAtomPlayer = ({
 					renderingTarget,
 				);
 
-				void basePlayerConfigurationWithApps.then(
-					(playerConfiguration) => {
-						if (enableAds) {
-							isSignedIn()
-								.then((signedIn) => {
-									player.current = new YouTubePlayer({
-										...playerConfiguration,
-										imaAdsRequestCallback:
-											createImaAdsRequestCallback(
-												adTargeting,
-												consentState,
-												abTestParticipations,
-												signedIn,
-											),
-										imaAdManagerListeners:
-											createImaManagerListeners(uniqueId),
-									});
-								})
-								.catch((error: Error) => {
-									window.guardian.modules.sentry.reportError(
-										error,
-										'youtube-atom-player-ima',
-									);
-								});
-						} else {
-							player.current = new YouTubePlayer(
-								playerConfiguration,
-							);
-						}
-					},
-				);
+				void Promise.allSettled([
+					basePlayerConfigurationWithApps,
+					isSignedIn(),
+				]).then(([playerConfigurationResult, isSignedInResult]) => {
+					const playerConfiguration =
+						playerConfigurationResult.status === 'fulfilled'
+							? playerConfigurationResult.value
+							: basePlayerConfiguration;
+					const isSignedInValue =
+						isSignedInResult.status === 'fulfilled'
+							? isSignedInResult.value
+							: false;
+					if (enableAds) {
+						player.current = new YouTubePlayer({
+							...playerConfiguration,
+							imaAdsRequestCallback: createImaAdsRequestCallback(
+								adTargeting,
+								consentState,
+								abTestParticipations,
+								isSignedInValue,
+							),
+							imaAdManagerListeners:
+								createImaManagerListeners(uniqueId),
+						});
+					} else {
+						player.current = new YouTubePlayer(playerConfiguration);
+					}
+				});
 
 				/**
 				 * Pause the current video when another video is played
@@ -662,6 +659,23 @@ export const YoutubeAtomPlayer = ({
 	}, [pauseVideo]);
 
 	/**
+	 * For apps rendered articles that return true for `setFullscreen` the web layer
+	 * needs to handle the application of fullscreen styles
+	 *
+	 * This is only for the YouTube player in Android web views which does not support fullscreen
+	 */
+	useEffect(() => {
+		if (renderingTarget === 'Apps') {
+			const videoClient = getVideoClient();
+			void videoClient.setFullscreen(isFullscreen).then((success) => {
+				if (success) {
+					setApplyFullscreenStyles(isFullscreen);
+				}
+			});
+		}
+	}, [isFullscreen, renderingTarget]);
+
+	/**
 	 * Unregister listeners useLayoutEffect
 	 */
 	useLayoutEffect(() => {
@@ -697,23 +711,6 @@ export const YoutubeAtomPlayer = ({
 			}
 		};
 	}, []);
-
-	/**
-	 * For apps rendered articles that return true for `setFullscreen` the web layer
-	 * needs to handle the application of fullscreen styles
-	 *
-	 * This is only for the YouTube player in Android web views which does not support fullscreen
-	 */
-	useEffect(() => {
-		if (renderingTarget === 'Apps') {
-			const videoClient = getVideoClient();
-			void videoClient.setFullscreen(isFullscreen).then((success) => {
-				if (success) {
-					setApplyFullscreenStyles(isFullscreen);
-				}
-			});
-		}
-	}, [isFullscreen, renderingTarget]);
 
 	/**
 	 * An element for the YouTube player to hook into the dom
