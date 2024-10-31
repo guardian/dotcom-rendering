@@ -8,6 +8,7 @@ import type {
 	MultiByline as MultiBylineModel,
 	StarRating,
 } from '../types/content';
+import type { TagType } from '../types/tag';
 import { MultiByline as MultiBylineItemComponent } from './MultiByline';
 
 interface MultiBylineProps {
@@ -24,6 +25,7 @@ interface MultiBylineProps {
 	starRating?: StarRating;
 	multiBylines: MultiBylineModel[];
 	RenderArticleElement: ArticleElementRenderer;
+	tags: TagType[];
 	/**
 	 * Whether this is the last element in the article. If true, no separator will be rendered.
 	 */
@@ -50,6 +52,7 @@ export const MultiBylines = ({
 	hideCaption,
 	starRating,
 	RenderArticleElement,
+	tags,
 	isLastElement,
 }: MultiBylineProps) => {
 	return (
@@ -58,6 +61,7 @@ export const MultiBylines = ({
 				<MultiBylineItemComponent
 					multiByline={multiBylineItem}
 					format={format}
+					tags={tags}
 					key={multiBylineItem.title}
 				>
 					{multiBylineItem.body.map((element) => (

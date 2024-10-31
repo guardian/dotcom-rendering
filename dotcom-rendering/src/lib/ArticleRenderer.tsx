@@ -83,6 +83,7 @@ export const ArticleRenderer = ({
 				editionId={editionId}
 				totalElements={length}
 				isSectionedMiniProfilesArticle={isSectionedMiniProfilesArticle}
+				tags={tags}
 			/>
 		);
 	});
