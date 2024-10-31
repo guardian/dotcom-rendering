@@ -4,6 +4,7 @@ import { Link } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../lib/useCommentCount';
+import { palette } from '../palette';
 import type { StarRating as Rating } from '../types/content';
 import type {
 	DCRContainerPalette,
@@ -19,6 +20,7 @@ import type {
 	ImagePositionType,
 	ImageSizeType,
 } from './Card/components/ImageWrapper';
+import { TrailText } from './Card/components/TrailText';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from './CardHeadline';
 import type { AspectRatio, Loading } from './CardPicture';
@@ -28,8 +30,6 @@ import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
 import { MediaDuration } from './MediaDuration';
 import { SupportingContent } from './SupportingContent';
-import { palette } from '../palette';
-import { TrailText } from './Card/components/TrailText';
 
 export type Position = 'inner' | 'outer' | 'none';
 
