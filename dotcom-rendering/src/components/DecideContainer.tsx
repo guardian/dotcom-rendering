@@ -31,6 +31,7 @@ import { ScrollableHighlights } from './ScrollableHighlights.importable';
 import { ScrollableMedium } from './ScrollableMedium.importable';
 import { ScrollableSmall } from './ScrollableSmall.importable';
 import { StaticMediumFour } from './StaticMediumFour';
+import { StaticFeatureTwo } from './StaticFeatureTwo';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -301,6 +302,14 @@ export const DecideContainer = ({
 				</Island>
 			);
 		case 'static/feature/2':
+			return (
+				<StaticFeatureTwo
+					trails={trails}
+					containerPalette={containerPalette}
+					absoluteServerTimes={absoluteServerTimes}
+					imageLoading={imageLoading}
+				/>
+			);
 		default:
 			return <p>{containerType} is not yet supported</p>;
 	}
