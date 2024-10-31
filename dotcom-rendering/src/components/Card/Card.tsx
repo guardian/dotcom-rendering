@@ -498,7 +498,7 @@ export const Card = ({
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
 					isDynamo={isDynamo}
-					isFlexSplash={isFlexSplash}
+					fillBackground={isFlexSplash}
 				/>
 			);
 		}
@@ -509,7 +509,7 @@ export const Card = ({
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
 					isDynamo={isDynamo}
-					isFlexSplash={isFlexSplash}
+					fillBackground={isFlexSplash}
 				/>
 			</Hide>
 		);
@@ -526,7 +526,7 @@ export const Card = ({
 					alignment="vertical"
 					containerPalette={containerPalette}
 					isDynamo={isDynamo}
-					isFlexSplash={isFlexSplash}
+					fillBackground={isFlexSplash}
 				/>
 			</Hide>
 		);
