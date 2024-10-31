@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { breakpoints, from } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { Props as CardProps, FeatureCard } from './FeatureCard';
+import { type Props as CardProps, FeatureCard } from './FeatureCard';
 
 const cardProps: CardProps = {
 	linkTo: '',
@@ -12,8 +12,6 @@ const cardProps: CardProps = {
 		theme: Pillar.News,
 	},
 	headlineText: 'Headline text',
-	trailText:
-		'The 29-year-old source behind the biggest intelligence leak in the NSA’s history explains his motives',
 	kickerText: 'Kicker',
 	webPublicationDate: new Date(Date.now() - 60 * 60 * 1000).toString(),
 	image: {
