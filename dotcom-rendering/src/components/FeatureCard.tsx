@@ -265,8 +265,6 @@ export const FeatureCard = ({
 						{media && (
 							<div
 								css={css`
-									//** check if these styles are needed  */
-
 									/* position relative is required here to bound the image overlay */
 									position: relative;
 									img {
