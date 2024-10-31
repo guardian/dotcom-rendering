@@ -1,7 +1,12 @@
 import { decideCollectionBranding } from '../lib/branding';
 import type { EditionId } from '../lib/edition';
 import type { Branding } from '../types/branding';
-import type { DCRCollectionType, FECollectionType } from '../types/front';
+import type {
+	DCRCollectionType,
+	DCRContainerLevel,
+	FECollectionType,
+	FEContainerPalette,
+} from '../types/front';
 import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';
 import { enhanceTreats } from './enhanceTreats';
@@ -11,6 +16,16 @@ const FORBIDDEN_CONTAINERS = [
 	'culture-treat',
 	'newsletter treat',
 	'qatar treat',
+];
+
+const FAIRGROUND_CONTAINERS = [
+	'scrollable/feature',
+	'static/feature/2',
+	'flexible/special',
+	'flexible/general',
+	'scrollable/small',
+	'scrollable/medium',
+	'static/medium/4',
 ];
 
 const PALETTE_STYLES_URI =
@@ -40,6 +55,14 @@ const findCollectionSuitableForFrontBranding = (
 		return undefined;
 	}
 	return index;
+};
+
+const getContainerLevel = (
+	levels?: FEContainerPalette[],
+): DCRContainerLevel | undefined => {
+	if (levels?.includes('Primary')) return 'Primary';
+	if (levels?.includes('Secondary')) return 'Secondary';
+	return undefined;
 };
 
 export const enhanceCollections = ({
@@ -89,6 +112,15 @@ export const enhanceCollections = ({
 			},
 		);
 
+		/** "Primary" or "Secondary" container level styling should only be applied to fairground containers
+		 * Ideally this logic would (and might) exist in the fronts tool.
+		 */
+		const containerLevel = FAIRGROUND_CONTAINERS.includes(collectionType)
+			? getContainerLevel(
+					collection.config.metadata?.map((meta) => meta.type),
+			  )
+			: undefined;
+
 		return {
 			id,
 			displayName,
@@ -128,6 +160,7 @@ export const enhanceCollections = ({
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
 			targetedTerritory: collection.targetedTerritory,
+			containerLevel,
 		};
 	});
 };

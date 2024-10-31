@@ -119,7 +119,9 @@ export type FEContainerPalette =
 	| 'Podcast'
 	| 'Branded'
 	| 'BreakingPalette'
-	| 'SpecialReportAltPalette';
+	| 'SpecialReportAltPalette'
+	| 'Primary'
+	| 'Secondary';
 
 export type FEFrontCardStyle =
 	| 'SpecialReport'
@@ -152,6 +154,8 @@ export type DCRContainerPalette =
 
 // TODO: These may need to be declared differently than the front types in the future
 export type DCRContainerType = FEContainerType;
+
+export type DCRContainerLevel = 'Primary' | 'Secondary';
 
 /** @see https://github.com/guardian/frontend/blob/0bf69f55a/common/app/model/content/Atom.scala#L191-L196 */
 interface MediaAsset {
@@ -407,6 +411,7 @@ export type DCRCollectionType = {
 	description?: string;
 	collectionType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
+	containerLevel?: DCRContainerLevel;
 	grouped: DCRGroupedTrails;
 	curated: DCRFrontCard[];
 	backfill: DCRFrontCard[];
