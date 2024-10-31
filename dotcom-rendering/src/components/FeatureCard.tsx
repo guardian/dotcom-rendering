@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { space } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
