@@ -29,6 +29,7 @@ import { NavList } from './NavList';
 import { ScrollableHighlights } from './ScrollableHighlights.importable';
 import { ScrollableMedium } from './ScrollableMedium.importable';
 import { ScrollableSmall } from './ScrollableSmall.importable';
+import { StaticFeatureTwo } from './StaticFeatureTwo';
 import { StaticMediumFour } from './StaticMediumFour';
 
 type Props = {
@@ -288,8 +289,16 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 				/>
 			);
-		case 'scrollable/feature':
 		case 'static/feature/2':
+			return (
+				<StaticFeatureTwo
+					trails={trails}
+					containerPalette={containerPalette}
+					absoluteServerTimes={absoluteServerTimes}
+					imageLoading={imageLoading}
+				/>
+			);
+		case 'scrollable/feature':
 		default:
 			return <p>{containerType} is not yet supported</p>;
 	}

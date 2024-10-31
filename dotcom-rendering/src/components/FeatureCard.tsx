@@ -376,7 +376,7 @@ export const FeatureCard = ({
 												}
 											/>
 										}
-										/**TODO: check if this is needed */
+										/** TODO: check if this is needed */
 										// cardBranding={
 										// 	branding ? (
 										// 		<CardBranding
