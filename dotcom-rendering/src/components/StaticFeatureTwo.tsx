@@ -40,7 +40,6 @@ export const StaticFeatureTwo = ({
 								headlineText={card.headline}
 								byline={card.byline}
 								showByline={card.showByline}
-								showQuotedHeadline={card.showQuotedHeadline}
 								webPublicationDate={card.webPublicationDate}
 								kickerText={card.kickerText}
 								showPulsingDot={
@@ -60,7 +59,6 @@ export const StaticFeatureTwo = ({
 								absoluteServerTimes={absoluteServerTimes}
 								imageLoading={imageLoading}
 								aspectRatio="4:5"
-								cardType="static"
 								imageSize={'feature-large'}
 								headlineSizes={{ desktop: 'medium' }}
 							/>

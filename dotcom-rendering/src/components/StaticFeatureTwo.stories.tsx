@@ -19,7 +19,6 @@ const meta = {
 	},
 	args: {
 		trails,
-		showAge: true,
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
 	},
