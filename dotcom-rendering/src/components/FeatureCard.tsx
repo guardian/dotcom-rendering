@@ -3,13 +3,11 @@ import { Link } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../lib/useCommentCount';
-import type { Branding } from '../types/branding';
+// import type { Branding } from '../types/branding';
 import type { StarRating as Rating } from '../types/content';
 import type {
 	DCRContainerPalette,
-	DCRContainerType,
 	DCRFrontImage,
-	DCRSnapType,
 	DCRSupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
@@ -48,10 +46,7 @@ export type Props = {
 	/** Size is ignored when position = 'top' because in that case the image flows based on width */
 	imageSize?: ImageSizeType;
 	imageLoading: Loading;
-	isCrossword?: boolean;
 	isOnwardContent?: boolean;
-	trailText?: string;
-	avatarUrl?: string;
 	showClock?: boolean;
 	mainMedia?: MainMedia;
 
@@ -63,16 +58,13 @@ export type Props = {
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	starRating?: Rating;
-	minWidthInPixels?: number;
 	/** Used for Ophan tracking */
 	dataLinkName?: string;
 	/** Only used on Labs cards */
-	branding?: Branding;
+	// branding?: Branding;
 	/** Supporting content refers to sublinks */
 	supportingContent?: DCRSupportingContent[];
-	snapData?: DCRSnapType;
 	containerPalette?: DCRContainerPalette;
-	containerType?: DCRContainerType;
 	discussionApiUrl: string;
 	discussionId?: string;
 	isExternalLink: boolean;
@@ -227,7 +219,7 @@ export const FeatureCard = ({
 	kickerText,
 	showPulsingDot,
 	dataLinkName,
-	branding,
+	// branding,
 	supportingContent,
 	containerPalette,
 	discussionApiUrl,
