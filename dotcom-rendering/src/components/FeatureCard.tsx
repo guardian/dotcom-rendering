@@ -15,7 +15,6 @@ import { StarRatingComponent } from './Card/Card';
 import { CardAge as AgeStamp } from './Card/components/CardAge';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
-import { HeadlineWrapper } from './Card/components/HeadlineWrapper';
 import type {
 	ImagePositionType,
 	ImageSizeType,
@@ -29,6 +28,8 @@ import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
 import { MediaDuration } from './MediaDuration';
 import { SupportingContent } from './SupportingContent';
+import { palette } from 'src/palette';
+import { TrailText } from './Card/components/TrailText';
 
 export type Position = 'inner' | 'outer' | 'none';
 
@@ -42,14 +43,14 @@ export type Props = {
 	showByline?: boolean;
 	webPublicationDate?: string;
 	image?: DCRFrontImage;
-	imagePositionOnDesktop?: ImagePositionType;
-	imagePositionOnMobile?: ImagePositionType;
+	imagePositionOnDesktop?: ImagePositionType /** TODO Remove this prop  */;
+	imagePositionOnMobile?: ImagePositionType /** TODO Remove this prop  */;
 	/** Size is ignored when position = 'top' because in that case the image flows based on width */
 	imageSize?: ImageSizeType;
 	imageLoading: Loading;
 	showClock?: boolean;
 	mainMedia?: MainMedia;
-
+	trailText?: string;
 	/** Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size
 	 * At 300px or below, the player will begin to lose functionality e.g. volume controls being omitted.
 	 * Youtube requires a minimum width 200px.
@@ -58,7 +59,6 @@ export type Props = {
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	starRating?: Rating;
-	minWidthInPixels?: number;
 	/** Used for Ophan tracking */
 	dataLinkName?: string;
 	/** Only used on Labs cards */
@@ -96,6 +96,18 @@ const baseCardStyles = css`
 	/* a tag specific styles */
 	color: inherit;
 	text-decoration: none;
+`;
+
+const overlayStyles = css`
+	position: absolute;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	flex-grow: 1;
+	padding: 8px;
+	row-gap: 8px;
+	backdrop-filter: blur(12px);
 `;
 
 const getMedia = ({
@@ -211,6 +223,7 @@ export const FeatureCard = ({
 	imagePositionOnDesktop = 'top',
 	imagePositionOnMobile = 'left',
 	imageSize = 'small',
+	trailText,
 	imageLoading,
 	showClock,
 	mainMedia,
@@ -328,47 +341,45 @@ export const FeatureCard = ({
 											)}
 									</>
 								)}
-								<div
-									css={css`
-										position: absolute;
-										bottom: 0;
-										display: flex;
-										flex-direction: column;
-										justify-content: flex-start;
-										flex-grow: 1;
-										padding: 8px;
-										backdrop-filter: blur(12px);
-									`}
-								>
-									<HeadlineWrapper>
-										<CardHeadline
-											headlineText={headlineText}
-											format={format}
-											fontSizes={headlineSizes}
-											showQuotes={false}
-											kickerText={
-												format.design ===
-													ArticleDesign.LiveBlog &&
-												!kickerText
-													? 'Live'
-													: kickerText
-											}
-											showPulsingDot={
-												format.design ===
-													ArticleDesign.LiveBlog ||
-												showPulsingDot
-											}
-											byline={byline}
-											showByline={showByline}
-											isExternalLink={isExternalLink}
+								<div css={overlayStyles}>
+									<CardHeadline
+										headlineText={headlineText}
+										format={format}
+										fontSizes={headlineSizes}
+										showQuotes={false}
+										kickerText={
+											format.design ===
+												ArticleDesign.LiveBlog &&
+											!kickerText
+												? 'Live'
+												: kickerText
+										}
+										showPulsingDot={
+											format.design ===
+												ArticleDesign.LiveBlog ||
+											showPulsingDot
+										}
+										byline={byline}
+										showByline={showByline}
+										isExternalLink={isExternalLink}
+									/>
+
+									{starRating !== undefined ? (
+										<StarRatingComponent
+											rating={starRating}
+											cardHasImage={!!image}
 										/>
-										{starRating !== undefined ? (
-											<StarRatingComponent
-												rating={starRating}
-												cardHasImage={!!image}
-											/>
-										) : null}
-									</HeadlineWrapper>
+									) : null}
+
+									{!!trailText && (
+										<TrailText
+											trailText={trailText}
+											trailTextColour={palette(
+												'--feature-card-trail-text',
+											)}
+											trailTextSize={'regular'}
+										/>
+									)}
 
 									<CardFooter
 										format={format}
