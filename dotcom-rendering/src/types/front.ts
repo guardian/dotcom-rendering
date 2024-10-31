@@ -119,7 +119,9 @@ export type FEContainerPalette =
 	| 'Podcast'
 	| 'Branded'
 	| 'BreakingPalette'
-	| 'SpecialReportAltPalette';
+	| 'SpecialReportAltPalette'
+	| 'Primary'
+	| 'Secondary';
 
 export type FEFrontCardStyle =
 	| 'SpecialReport'
@@ -409,6 +411,7 @@ export type DCRCollectionType = {
 	description?: string;
 	collectionType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
+	containerLevel?: DCRContainerLevel;
 	grouped: DCRGroupedTrails;
 	curated: DCRFrontCard[];
 	backfill: DCRFrontCard[];
