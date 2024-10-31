@@ -30,8 +30,8 @@ import { ScrollableFeature } from './ScrollableFeature.importable';
 import { ScrollableHighlights } from './ScrollableHighlights.importable';
 import { ScrollableMedium } from './ScrollableMedium.importable';
 import { ScrollableSmall } from './ScrollableSmall.importable';
-import { StaticMediumFour } from './StaticMediumFour';
 import { StaticFeatureTwo } from './StaticFeatureTwo';
+import { StaticMediumFour } from './StaticMediumFour';
 
 type Props = {
 	trails: DCRFrontCard[];
