@@ -1,12 +1,9 @@
 import { css } from '@emotion/react';
-import { from, space, until } from '@guardian/source/foundations';
+import { space } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
-import { palette as sourcePalette } from '@guardian/source/foundations';
-import { isMediaCard } from '../lib/cardHelpers';
 import { getZIndex } from '../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../lib/useCommentCount';
-import { palette } from '../palette';
 import type { Branding } from '../types/branding';
 import type { StarRating as Rating } from '../types/content';
 import type {
@@ -19,37 +16,28 @@ import type {
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
 import type { OnwardsSource } from '../types/onwards';
-import { Avatar } from './Avatar';
-import { AvatarContainer } from './Card/components/AvatarContainer';
-import { CardAge } from './Card/components/CardAge';
+import { CardAge as AgeStamp } from './Card/components/CardAge';
 import { CardBranding } from './Card/components/CardBranding';
 import { CardFooter } from './Card/components/CardFooter';
-import { CardLayout, type GapSize } from './Card/components/CardLayout';
 import { CardLink } from './Card/components/CardLink';
-import { CardWrapper } from './Card/components/CardWrapper';
-import { ContentWrapper } from './Card/components/ContentWrapper';
 import { HeadlineWrapper } from './Card/components/HeadlineWrapper';
 import type {
 	ImagePositionType,
 	ImageSizeType,
 } from './Card/components/ImageWrapper';
-import { ImageWrapper } from './Card/components/ImageWrapper';
 import { type TrailTextSize } from './Card/components/TrailText';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from './CardHeadline';
 import type { AspectRatio, Loading } from './CardPicture';
 import { CardPicture } from './CardPicture';
+import { ContainerOverrides } from './ContainerOverrides';
+import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
-import { LatestLinks } from './LatestLinks.importable';
 import { MediaDuration } from './MediaDuration';
-import { Slideshow } from './Slideshow';
 import { Snap } from './Snap';
 import { SnapCssSandbox } from './SnapCssSandbox';
 import type { Alignment } from './SupportingContent';
 import { SupportingContent } from './SupportingContent';
-import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
-import { ContainerOverrides } from './ContainerOverrides';
-import { FormatBoundary } from './FormatBoundary';
 
 export type Position = 'inner' | 'outer' | 'none';
 
@@ -171,49 +159,6 @@ const baseCardStyles = css`
 	text-decoration: none;
 `;
 
-const hoverStyles = css`
-	:hover .image-overlay {
-		position: absolute;
-		top: 0;
-		width: 100%;
-		height: 100%;
-		left: 0;
-		background-color: ${sourcePalette.neutral[7]};
-		opacity: 0.1;
-	}
-
-	/* Only underline the headline element we want to target (not kickers/sublink headlines) */
-	:hover .card-headline .show-underline {
-		text-decoration: underline;
-	}
-`;
-
-/** When we hover on sublinks, we want to prevent the general hover styles applying */
-const sublinkHoverStyles = css`
-	:has(ul.sublinks:hover) {
-		.card-headline .show-underline {
-			text-decoration: none;
-		}
-	}
-`;
-
-const desktopTopBarStyles = css`
-	:before {
-		border-top: 1px solid ${palette('--card-border-top')};
-		content: '';
-		z-index: 2;
-		width: 100%;
-		padding-bottom: ${space[2]}px;
-		background-color: unset;
-	}
-`;
-
-const mobileTopBarStyles = css`
-	${until.tablet} {
-		${desktopTopBarStyles}
-	}
-`;
-
 const getMedia = ({
 	imageUrl,
 	imageAltText,
@@ -246,35 +191,80 @@ export const isWithinTwelveHours = (webPublicationDate: string): boolean => {
 	return timeDiffHours <= 12;
 };
 
-// const getCardWidth = (type: 'static' | 'carousel') => {
-// 	if (type === 'static') {
-// 		return css`
-// 			width: 325;
-// 			${from.tablet} {
-// 				width: 337;
-// 			}
-// 			${from.desktop} {
-// 				width: 460;
-// 			}
-// 		`;
-// 	}
-// 	return css`
-// 		width: 325;
-// 		${from.tablet} {
-// 			width: 220;
-// 		}
-// 		${from.desktop} {
-// 			width: 300;
-// 		}
-// 	`;
-// };
+const CardAge = ({
+	showClock,
+	absoluteServerTimes,
+	webPublicationDate,
+}: {
+	showClock: boolean;
+	absoluteServerTimes: boolean;
+	webPublicationDate?: string;
+}) => {
+	if (!webPublicationDate) return undefined;
+	const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
+
+	return (
+		<AgeStamp
+			webPublication={{
+				date: webPublicationDate,
+				isWithinTwelveHours: withinTwelveHours,
+			}}
+			showClock={showClock}
+			isOnwardContent={false}
+			absoluteServerTimes={absoluteServerTimes}
+			isTagPage={false}
+		/>
+	);
+};
+
+const CommentCount = ({
+	discussionId,
+	linkTo,
+	discussionApiUrl,
+}: {
+	linkTo: string;
+	discussionApiUrl?: string;
+	discussionId?: string;
+}) => {
+	if (!discussionId) return null;
+	if (!discussionApiUrl) return null;
+	return (
+		<Link
+			{...{
+				[DISCUSSION_ID_DATA_ATTRIBUTE]: discussionId,
+			}}
+			data-ignore="global-link-styling"
+			data-link-name="Comment count"
+			href={`${linkTo}#comments`}
+			cssOverrides={css`
+				/* See: https://css-tricks.com/nested-links/ */
+				${getZIndex('card-nested-link')}
+				/* The following styles turn off those provided by Link */
+				color: inherit;
+				/* stylelint-disable-next-line property-disallowed-list */
+				font-family: inherit;
+				font-size: inherit;
+				line-height: inherit;
+				text-decoration: none;
+				min-height: 10px;
+			`}
+		>
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<CardCommentCount
+					discussionApiUrl={discussionApiUrl}
+					discussionId={discussionId}
+					isOnwardContent={false}
+				/>
+			</Island>
+		</Link>
+	);
+};
 
 export const FeatureCard = ({
 	linkTo,
 	format,
 	headlineText,
 	headlineSizes,
-	showQuotedHeadline,
 	byline,
 	showByline,
 	webPublicationDate,
@@ -283,108 +273,32 @@ export const FeatureCard = ({
 	imagePositionOnMobile = 'left',
 	imageSize = 'small',
 	imageLoading,
-	trailText,
-	avatarUrl,
 	showClock,
 	mainMedia,
 	isPlayableMediaCard,
 	kickerText,
 	showPulsingDot,
-	starRating,
-	minWidthInPixels,
 	dataLinkName,
 	branding,
 	supportingContent,
 	supportingContentAlignment = 'vertical',
 	snapData,
 	containerPalette,
-	containerType,
 	showAge = true,
 	discussionApiUrl,
 	discussionId,
 	isDynamo,
-	isCrossword,
 	isOnwardContent = false,
 	isExternalLink,
-	slideshowImages,
 	showLivePlayable = false,
-	liveUpdatesAlignment = 'vertical',
-	liveUpdatesPosition = 'inner',
 	onwardsSource,
-	pauseOffscreenVideo = false,
 	showMainVideo = true,
 	absoluteServerTimes,
 	isTagPage = false,
 	aspectRatio,
-	index = 0,
 	isFlexSplash,
-	showTopBarDesktop = true,
-	showTopBarMobile = false,
-	cardType,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
-
-	// const showQuotes = !!showQuotedHeadline;
-
-	const isOpinion =
-		format.design === ArticleDesign.Comment ||
-		format.design === ArticleDesign.Editorial ||
-		format.design === ArticleDesign.Letter;
-
-	const decideAge = () => {
-		if (!webPublicationDate) return undefined;
-		const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
-
-		const shouldShowAge =
-			isTagPage || !!onwardsSource || (showAge && withinTwelveHours);
-
-		if (!shouldShowAge) return undefined;
-
-		return (
-			<CardAge
-				webPublication={{
-					date: webPublicationDate,
-					isWithinTwelveHours: withinTwelveHours,
-				}}
-				showClock={showClock}
-				isOnwardContent={isOnwardContent}
-				absoluteServerTimes={absoluteServerTimes}
-				isTagPage={isTagPage}
-			/>
-		);
-	};
-
-	const CommentCount = () =>
-		!!discussionId && (
-			<Link
-				{...{
-					[DISCUSSION_ID_DATA_ATTRIBUTE]: discussionId,
-				}}
-				data-ignore="global-link-styling"
-				data-link-name="Comment count"
-				href={`${linkTo}#comments`}
-				cssOverrides={css`
-					/* See: https://css-tricks.com/nested-links/ */
-					${getZIndex('card-nested-link')}
-					/* The following styles turn off those provided by Link */
-				color: inherit;
-					/* stylelint-disable-next-line property-disallowed-list */
-					font-family: inherit;
-					font-size: inherit;
-					line-height: inherit;
-					text-decoration: none;
-					min-height: 10px;
-				`}
-			>
-				<Island priority="feature" defer={{ until: 'visible' }}>
-					<CardCommentCount
-						discussionApiUrl={discussionApiUrl}
-						discussionId={discussionId}
-						isOnwardContent={isOnwardContent}
-					/>
-				</Island>
-			</Link>
-		);
 
 	if (snapData?.embedHtml) {
 		return (
@@ -409,15 +323,7 @@ export const FeatureCard = ({
 	return (
 		<FormatBoundary format={format}>
 			<ContainerOverrides containerPalette={containerPalette}>
-				<div
-					css={[
-						baseCardStyles,
-						hoverStyles,
-						sublinkHoverStyles,
-						showTopBarDesktop && desktopTopBarStyles,
-						showTopBarMobile && mobileTopBarStyles,
-					]}
-				>
+				<div css={[baseCardStyles]}>
 					<CardLink
 						linkTo={linkTo}
 						headlineText={headlineText}
@@ -449,124 +355,29 @@ export const FeatureCard = ({
 							>
 								{media.type === 'video' && (
 									<>
-										{showMainVideo ? (
-											<div
-												data-chromatic="ignore"
-												data-component="youtube-atom"
-												css={css`
-													display: block;
-													position: relative;
-													${getZIndex(
-														'card-nested-link',
-													)}
-												`}
-											>
-												<Island
-													priority="critical"
-													defer={{ until: 'visible' }}
-												>
-													<YoutubeBlockComponent
-														id={media.mainMedia.id}
-														assetId={
-															media.mainMedia
-																.videoId
-														}
-														index={index}
-														duration={
-															media.mainMedia
-																.duration
-														}
-														posterImage={
-															media.mainMedia
-																.images
-														}
-														overrideImage={
-															media.imageUrl
-														}
-														width={
-															media.mainMedia
-																.width
-														}
-														height={
-															media.mainMedia
-																.height
-														}
-														origin={
-															media.mainMedia
-																.origin
-														}
-														mediaTitle={
-															headlineText
-														}
-														expired={
-															media.mainMedia
-																.expired
-														}
-														format={format}
-														isMainMedia={true}
-														hideCaption={true}
-														stickyVideos={false}
-														kickerText={kickerText}
-														pauseOffscreenVideo={
-															pauseOffscreenVideo
-														}
-														showTextOverlay={
-															containerType ===
-															'fixed/video'
-														}
-														imagePositionOnMobile={
-															imagePositionOnMobile
-														}
-														//** TODO: IMPROVE THIS MAPPING */
-														// image size defaults to small if not provided. However, if the headline size is large or greater, we want to assume the image is also large so that the play icon is correctly sized.
-														imageSize={
-															[
-																'small',
-																'medium',
-																'large',
-																'xlarge',
-																'xxlarge',
-															].includes(
-																headlineSizes?.desktop ??
-																	'',
-															)
-																? 'large'
-																: imageSize
-														}
-														enableAds={false}
-														aspectRatio={
-															aspectRatio
-														}
-													/>
-												</Island>
-											</div>
-										) : (
-											<div>
-												<CardPicture
-													mainImage={
-														media.imageUrl
-															? media.imageUrl
-															: media.mainMedia.images.reduce(
-																	(
-																		prev,
-																		current,
-																	) =>
-																		prev.width >
-																		current.width
-																			? prev
-																			: current,
-															  ).url
-													}
-													imageSize={imageSize}
-													alt={headlineText}
-													loading={imageLoading}
-													roundedCorners={
-														isOnwardContent
-													}
-													aspectRatio={aspectRatio}
-												/>
-											</div>
-										)}
+										<div>
+											<CardPicture
+												mainImage={
+													media.imageUrl
+														? media.imageUrl
+														: media.mainMedia.images.reduce(
+																(
+																	prev,
+																	current,
+																) =>
+																	prev.width >
+																	current.width
+																		? prev
+																		: current,
+														  ).url
+												}
+												imageSize={imageSize}
+												alt={headlineText}
+												loading={imageLoading}
+												roundedCorners={isOnwardContent}
+												aspectRatio={aspectRatio}
+											/>
+										</div>
 									</>
 								)}
 								{media.type === 'picture' && (
@@ -604,7 +415,7 @@ export const FeatureCard = ({
 										justify-content: flex-start;
 										flex-grow: 1;
 										padding: 8px;
-										/* filter: blur(12px); */
+										backdrop-filter: blur(12px);
 									`}
 								>
 									<HeadlineWrapper>
@@ -633,8 +444,26 @@ export const FeatureCard = ({
 
 									<CardFooter
 										format={format}
-										age={decideAge()}
-										commentCount={<CommentCount />}
+										age={
+											<CardAge
+												webPublicationDate={
+													webPublicationDate
+												}
+												showClock={!!showClock}
+												absoluteServerTimes={
+													absoluteServerTimes
+												}
+											/>
+										}
+										commentCount={
+											<CommentCount
+												linkTo={linkTo}
+												discussionId={discussionId}
+												discussionApiUrl={
+													discussionApiUrl
+												}
+											/>
+										}
 										cardBranding={
 											branding ? (
 												<CardBranding
@@ -649,7 +478,7 @@ export const FeatureCard = ({
 												/>
 											) : undefined
 										}
-										showLivePlayable={showLivePlayable}
+										showLivePlayable={false}
 									/>
 								</div>
 							</div>
