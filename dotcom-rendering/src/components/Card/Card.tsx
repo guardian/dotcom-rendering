@@ -127,7 +127,7 @@ export type Props = {
 	trailTextColour?: string;
 };
 
-const starWrapper = (cardHasImage: boolean) => css`
+export const starWrapper = (cardHasImage: boolean) => css`
 	background-color: ${sourcePalette.brandAlt[400]};
 	color: ${sourcePalette.neutral[0]};
 	margin-top: ${cardHasImage ? '2' : space[1]}px;
@@ -138,7 +138,7 @@ const starWrapper = (cardHasImage: boolean) => css`
 	}
 `;
 
-const StarRatingComponent = ({
+export const StarRatingComponent = ({
 	rating,
 	cardHasImage,
 }: {

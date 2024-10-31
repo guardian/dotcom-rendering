@@ -10,14 +10,11 @@ import type {
 	DCRContainerPalette,
 	DCRContainerType,
 	DCRFrontImage,
-	DCRSlideshowImage,
 	DCRSnapType,
 	DCRSupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
-import type { OnwardsSource } from '../types/onwards';
 import { CardAge as AgeStamp } from './Card/components/CardAge';
-import { CardBranding } from './Card/components/CardBranding';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
 import { HeadlineWrapper } from './Card/components/HeadlineWrapper';
@@ -25,7 +22,6 @@ import type {
 	ImagePositionType,
 	ImageSizeType,
 } from './Card/components/ImageWrapper';
-import { type TrailTextSize } from './Card/components/TrailText';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from './CardHeadline';
 import type { AspectRatio, Loading } from './CardPicture';
@@ -34,10 +30,9 @@ import { ContainerOverrides } from './ContainerOverrides';
 import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
 import { MediaDuration } from './MediaDuration';
-import { Snap } from './Snap';
-import { SnapCssSandbox } from './SnapCssSandbox';
-import type { Alignment } from './SupportingContent';
 import { SupportingContent } from './SupportingContent';
+import { isUndefined } from 'util';
+import { StarRatingComponent } from './Card/Card';
 
 export type Position = 'inner' | 'outer' | 'none';
 
@@ -47,7 +42,6 @@ export type Props = {
 	absoluteServerTimes: boolean;
 	headlineText: string;
 	headlineSizes?: ResponsiveFontSize;
-	showQuotedHeadline?: boolean;
 	byline?: string;
 	showByline?: boolean;
 	webPublicationDate?: string;
@@ -63,6 +57,7 @@ export type Props = {
 	avatarUrl?: string;
 	showClock?: boolean;
 	mainMedia?: MainMedia;
+
 	/** Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size
 	 * At 300px or below, the player will begin to lose functionality e.g. volume controls being omitted.
 	 * Youtube requires a minimum width 200px.
@@ -78,61 +73,16 @@ export type Props = {
 	branding?: Branding;
 	/** Supporting content refers to sublinks */
 	supportingContent?: DCRSupportingContent[];
-	supportingContentAlignment?: Alignment;
-	supportingContentPosition?: Position;
 	snapData?: DCRSnapType;
 	containerPalette?: DCRContainerPalette;
 	containerType?: DCRContainerType;
-	showAge?: boolean;
 	discussionApiUrl: string;
 	discussionId?: string;
-	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
-	isDynamo?: boolean;
 	isExternalLink: boolean;
-	slideshowImages?: DCRSlideshowImage[];
-	/** Determines if liveblog update links are displayed on a card */
-	showLivePlayable?: boolean;
-	liveUpdatesAlignment?: Alignment;
-	liveUpdatesPosition?: Position;
-	onwardsSource?: OnwardsSource;
-	pauseOffscreenVideo?: boolean;
-	showMainVideo?: boolean;
-	isTagPage?: boolean;
 	/** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
 	aspectRatio?: AspectRatio;
 	index?: number;
-	/** The Splash card in a flexible container gets a different visual treatment to other cards*/
-	isFlexSplash?: boolean;
-	showTopBarDesktop?: boolean;
-	showTopBarMobile?: boolean;
-	trailTextSize?: TrailTextSize;
-	/** If specified, overrides trail text colour */
-	trailTextColour?: string;
-	cardType: 'static' | 'carousel';
 };
-
-// const starWrapper = (cardHasImage: boolean) => css`
-// 	background-color: ${sourcePalette.brandAlt[400]};
-// 	color: ${sourcePalette.neutral[0]};
-// 	margin-top: ${cardHasImage ? '2' : space[1]}px;
-// 	display: inline-block;
-
-// 	${from.tablet} {
-// 		margin-top: ${space[1]}px;
-// 	}
-// `;
-
-// const StarRatingComponent = ({
-// 	rating,
-// 	cardHasImage,
-// }: {
-// 	rating: Rating;
-// 	cardHasImage: boolean;
-// }) => (
-// 	<div css={starWrapper(cardHasImage)}>
-// 		<StarRating rating={rating} size="small" />
-// 	</div>
-// );
 
 const baseCardStyles = css`
 	display: flex;
@@ -281,37 +231,20 @@ export const FeatureCard = ({
 	dataLinkName,
 	branding,
 	supportingContent,
-	supportingContentAlignment = 'vertical',
-	snapData,
 	containerPalette,
-	showAge = true,
 	discussionApiUrl,
 	discussionId,
-	isDynamo,
-	isOnwardContent = false,
 	isExternalLink,
-	showLivePlayable = false,
-	onwardsSource,
-	showMainVideo = true,
 	absoluteServerTimes,
-	isTagPage = false,
 	aspectRatio,
-	isFlexSplash,
+	starRating,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
-	if (snapData?.embedHtml) {
-		return (
-			<SnapCssSandbox snapData={snapData}>
-				<Snap snapData={snapData} dataLinkName={dataLinkName} />
-			</SnapCssSandbox>
-		);
-	}
-
 	// If the card isn't playable, we need to show a play icon.
 	// Otherwise, this is handled by the YoutubeAtom
-	const showPlayIcon =
-		mainMedia?.type === 'Video' && !isPlayableMediaCard && showMainVideo;
+	/**TODO: Determin if these cards should be playable */
+	const showPlayIcon = mainMedia?.type === 'Video' && !isPlayableMediaCard;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -374,7 +307,7 @@ export const FeatureCard = ({
 												imageSize={imageSize}
 												alt={headlineText}
 												loading={imageLoading}
-												roundedCorners={isOnwardContent}
+												roundedCorners={false}
 												aspectRatio={aspectRatio}
 											/>
 										</div>
@@ -387,7 +320,7 @@ export const FeatureCard = ({
 											imageSize={imageSize}
 											alt={media.imageAltText}
 											loading={imageLoading}
-											roundedCorners={isOnwardContent}
+											roundedCorners={false}
 											aspectRatio={aspectRatio}
 										/>
 										{showPlayIcon &&
@@ -440,6 +373,12 @@ export const FeatureCard = ({
 											showByline={showByline}
 											isExternalLink={isExternalLink}
 										/>
+										{starRating !== undefined ? (
+											<StarRatingComponent
+												rating={starRating}
+												cardHasImage={!!image}
+											/>
+										) : null}
 									</HeadlineWrapper>
 
 									<CardFooter
@@ -464,20 +403,21 @@ export const FeatureCard = ({
 												}
 											/>
 										}
-										cardBranding={
-											branding ? (
-												<CardBranding
-													branding={branding}
-													format={format}
-													onwardsSource={
-														onwardsSource
-													}
-													containerPalette={
-														containerPalette
-													}
-												/>
-											) : undefined
-										}
+										/**TODO: Determine if this is needed */
+										// cardBranding={
+										// 	branding ? (
+										// 		<CardBranding
+										// 			branding={branding}
+										// 			format={format}
+										// 			onwardsSource={
+										// 				onwardsSource
+										// 			}
+										// 			containerPalette={
+										// 				containerPalette
+										// 			}
+										// 		/>
+										// 	) : undefined
+										// }
 										showLivePlayable={false}
 									/>
 								</div>
@@ -489,9 +429,7 @@ export const FeatureCard = ({
 						<SupportingContent
 							supportingContent={supportingContent}
 							containerPalette={containerPalette}
-							alignment={supportingContentAlignment}
-							isDynamo={isDynamo}
-							isFlexSplash={isFlexSplash}
+							alignment={'vertical'}
 						/>
 					)}
 				</div>
