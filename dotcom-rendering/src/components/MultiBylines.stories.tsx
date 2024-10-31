@@ -10,12 +10,12 @@ import {
 } from '../lib/articleFormat';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { TextBlockElement } from '../types/content';
-import { MultiByline } from './MultiByline';
+import { MultiBylines } from './MultiBylines';
 
 const meta = {
-	component: MultiByline,
-	title: 'Components/MultiByline',
-} satisfies Meta<typeof MultiByline>;
+	component: MultiBylines,
+	title: 'Components/MultiBylines',
+} satisfies Meta<typeof MultiBylines>;
 
 export default meta;
 
@@ -36,7 +36,7 @@ const testBioText = testParagraph + testListHtml;
 
 export const ThemeVariations = {
 	args: {
-		multiBylineItems: [
+		multiBylines: [
 			{
 				title: 'This subheading is quite long so is likely to run on to multiple lines',
 				bio: testBioText,
@@ -44,13 +44,7 @@ export const ThemeVariations = {
 				byline: 'Richard Hillgrove Political Editor',
 				bylineHtml:
 					"<a href='/profile/richard-hillgrove'>Richard Hillgrove</a> Political Editor",
-				contributors: [
-					{
-						name: 'Richard Hillgrove',
-						imageUrl:
-							'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2011/5/24/1306249890287/Richard-Hillgrove.jpg?width=100&dpr=2&s=none',
-					},
-				],
+				contributorIds: ['profile/richard-hillgrove'],
 			},
 			{
 				title: 'My hot take',
@@ -59,13 +53,7 @@ export const ThemeVariations = {
 				byline: 'Guardian Contributor',
 				bylineHtml:
 					"<a href='/profile/richard-hillgrove'>Richard Hillgrove</a>",
-				contributors: [
-					{
-						name: 'Richard Hillgrove',
-						imageUrl:
-							'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2011/5/24/1306249890287/Richard-Hillgrove.jpg?width=100&dpr=2&s=none',
-					},
-				],
+				contributorIds: ['profile/richard-hillgrove'],
 				imageOverrideUrl:
 					'https://i.guim.co.uk/img/uploads/2024/09/17/Maurice_Casey.png?width=180&dpr=1&s=none',
 			},
@@ -214,7 +202,7 @@ export const Images = {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Culture,
 		},
-		multiBylineItems: [
+		multiBylines: [
 			{
 				title: 'The first byline',
 				bio: testBioText,
@@ -227,13 +215,7 @@ export const Images = {
 				byline: 'Richard Hillgrove Guardian Contributor',
 				bylineHtml:
 					"<a href='/profile/richard-hillgrove'>Richard Hillgrove</a>",
-				contributors: [
-					{
-						name: 'Richard Hillgrove',
-						imageUrl:
-							'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2011/5/24/1306249890287/Richard-Hillgrove.jpg?width=100&dpr=2&s=none',
-					},
-				],
+				contributorIds: ['profile/richard-hillgrove'],
 			},
 			{
 				title: 'The second byline',

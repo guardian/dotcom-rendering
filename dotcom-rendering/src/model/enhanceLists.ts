@@ -1,5 +1,5 @@
 import { isUndefined } from '@guardian/libs';
-import type { FEElement, ListBlockElement } from '../types/content';
+import type { FEElement, ListBlockElement, ListItem } from '../types/content';
 
 type ElementsEnhancer = (elements: FEElement[]) => FEElement[];
 
@@ -60,6 +60,36 @@ const constructMiniProfile =
 		return [];
 	};
 
+const constructMultiByline =
+	(enhanceElements: ElementsEnhancer) =>
+	({
+		title,
+		elements,
+		bio,
+		endNote,
+		imageOverrideUrl,
+		contributorIds,
+		byline,
+		bylineHtml,
+	}: ListItem) => {
+		// if the element is missing its title for any reason, we will skip it
+		if (!isUndefined(title) && title !== '') {
+			return [
+				{
+					title,
+					bio,
+					endNote,
+					imageOverrideUrl,
+					contributorIds,
+					byline,
+					bylineHtml,
+					body: enhanceElements(elements),
+				},
+			];
+		}
+		return [];
+	};
+
 const enhanceListBlockElement = (
 	element: ListBlockElement,
 	elementsEnhancer: ElementsEnhancer,
@@ -89,6 +119,15 @@ const enhanceListBlockElement = (
 					_type: 'model.dotcomrendering.pageElements.MiniProfilesBlockElement',
 					miniProfiles: element.items.flatMap(
 						constructMiniProfile(elementsEnhancer),
+					),
+				},
+			];
+		case 'MultiByline':
+			return [
+				{
+					_type: 'model.dotcomrendering.pageElements.MultiBylinesBlockElement',
+					multiBylines: element.items.flatMap(
+						constructMultiByline(elementsEnhancer),
 					),
 				},
 			];
