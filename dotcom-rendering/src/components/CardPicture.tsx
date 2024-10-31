@@ -7,7 +7,7 @@ import type { ImageWidthType } from './Picture';
 import { generateSources, getFallbackSource } from './Picture';
 
 export type Loading = NonNullable<ImgHTMLAttributes<unknown>['loading']>;
-export type AspectRatio = '5:3' | '5:4';
+export type AspectRatio = '5:3' | '5:4' | '4:5';
 
 type Props = {
 	imageSize: ImageSizeType;
@@ -71,6 +71,20 @@ const decideImageWidths = (
 				{ breakpoint: breakpoints.tablet, width: 680 },
 				{ breakpoint: breakpoints.desktop, width: 940 },
 			];
+
+		case 'feature':
+			return [
+				{ breakpoint: breakpoints.mobile, width: 325 },
+
+				{ breakpoint: breakpoints.tablet, width: 220 },
+				{ breakpoint: breakpoints.desktop, width: 300 },
+			];
+		case 'feature-large':
+			return [
+				{ breakpoint: breakpoints.mobile, width: 325 },
+				{ breakpoint: breakpoints.tablet, width: 337 },
+				{ breakpoint: breakpoints.desktop, width: 460 },
+			];
 	}
 };
 
@@ -85,16 +99,26 @@ const block = css`
 	display: block;
 `;
 
+const getAspectRatioPadding = (aspectRatio?: AspectRatio): string => {
+	switch (aspectRatio) {
+		case '5:4':
+			return '80%';
+		case '4:5':
+			return '125%';
+		case '5:3':
+		default:
+			return '60%';
+	}
+};
 /**
  * On fronts, Fairground cards have an image ration of 5:4.
  * This is due to replace the existing card ratio of 5:3
  * For now, we are keeping both ratios.
  */
 const decideAspectRatioStyles = (aspectRatio?: AspectRatio) => {
+	const paddingRatio = getAspectRatioPadding(aspectRatio);
 	return css`
-		padding-top: ${aspectRatio === '5:4'
-			? `${(4 / 5) * 100}%`
-			: `${(3 / 5) * 100}%`};
+		padding-top: ${paddingRatio};
 		position: relative;
 		& > * {
 			position: absolute;

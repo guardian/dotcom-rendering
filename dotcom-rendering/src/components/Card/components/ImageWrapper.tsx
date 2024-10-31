@@ -18,7 +18,14 @@ export type ImageFixedSizeOptions = {
 };
 
 export type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
-export type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo' | 'carousel';
+export type ImageSizeType =
+	| 'small'
+	| 'medium'
+	| 'large'
+	| 'jumbo'
+	| 'carousel'
+	| 'feature'
+	| 'feature-large';
 
 type Props = {
 	children: React.ReactNode;
