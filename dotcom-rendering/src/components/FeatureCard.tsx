@@ -28,7 +28,7 @@ import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
 import { MediaDuration } from './MediaDuration';
 import { SupportingContent } from './SupportingContent';
-import { palette } from 'src/palette';
+import { palette } from '../palette';
 import { TrailText } from './Card/components/TrailText';
 
 export type Position = 'inner' | 'outer' | 'none';
