@@ -3,7 +3,7 @@ import { adSizes, constants } from '@guardian/commercial';
 import { space } from '@guardian/source/foundations';
 import { palette } from '../palette';
 import { AdBlockAsk } from './AdBlockAsk.importable';
-import { adContainerStyles, AdSlot } from './AdSlot.web';
+import { AdSlot } from './AdSlot.web';
 import { Hide } from './Hide';
 import { Island } from './Island';
 
@@ -31,14 +31,6 @@ const headerAdWrapper = css`
 
 	position: sticky;
 	top: 0;
-`;
-
-// Remove this once new `ad-slot-container--centre-slot` class is in place
-const topAboveNavContainer = css`
-	&[top-above-nav-ad-rendered] {
-		margin: auto;
-	}
-	padding-bottom: ${padding}px;
 `;
 
 /**
@@ -89,11 +81,7 @@ export const HeaderAdSlot = ({
 						/>
 					</Island>
 					<div
-						css={[
-							adContainerStyles,
-							topAboveNavContainer,
-							topAboveNavStyles,
-						]}
+						css={[topAboveNavStyles]}
 						className="ad-slot-container"
 					>
 						<AdSlot position="top-above-nav" />

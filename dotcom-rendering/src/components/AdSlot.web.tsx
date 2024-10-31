@@ -1,16 +1,15 @@
 import { css } from '@emotion/react';
 import type { SlotName } from '@guardian/commercial';
-import { adSizes, constants } from '@guardian/commercial';
+import { adSizes } from '@guardian/commercial';
 import {
 	between,
 	breakpoints,
 	from,
 	palette,
-	space,
-	textSans12,
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
+import { labelBoxStyles, labelHeight, labelStyles } from '../lib/adStyles';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
@@ -68,82 +67,10 @@ type RemainingProps = {
  */
 type Props = DefaultProps & (RightProps | InlineProps | RemainingProps);
 
-const labelHeight = constants.AD_LABEL_HEIGHT;
 const halfPageAdHeight = adSizes.halfPage.height;
-
-const individualLabelCSS = css`
-	${textSans12};
-	height: ${labelHeight}px;
-	max-height: ${labelHeight}px;
-	background-color: ${schemedPalette('--ad-background')};
-	padding-top: 3px;
-	border-top: 1px solid ${schemedPalette('--ad-border')};
-	color: ${schemedPalette('--ad-labels-text')};
-	text-align: center;
-	box-sizing: border-box;
-`;
 
 const outOfPageStyles = css`
 	height: 0;
-`;
-
-export const labelStyles = css`
-	.ad-slot__scroll {
-		${individualLabelCSS}
-		position: relative;
-		&.visible {
-			visibility: initial;
-		}
-		&.hidden {
-			visibility: hidden;
-		}
-	}
-	.ad-slot__close-button {
-		display: none;
-	}
-
-	.ad-slot__scroll {
-		position: fixed;
-		bottom: 0;
-		width: 100%;
-		${individualLabelCSS}
-	}
-
-	.ad-slot:not[data-label-show='true']::before {
-		content: '';
-		display: block;
-		height: ${labelHeight}px;
-		visibility: hidden;
-	}
-
-	.ad-slot[data-label-show='true']:not(.ad-slot--interscroller)::before {
-		content: attr(ad-label-text);
-		display: block;
-		position: relative;
-		${individualLabelCSS}
-	}
-
-	.ad-slot__adtest-cookie-clear-link {
-		${textSans12};
-		text-align: left;
-		position: absolute;
-		left: 268px;
-		top: 1px;
-		z-index: 10;
-		padding: 0;
-		border: 0;
-	}
-
-	.ad-slot--interscroller[data-label-show='true']::before {
-		content: 'Advertisement';
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		border: 0;
-		display: block;
-		${individualLabelCSS}
-	}
 `;
 
 const darkLabelStyles = css`
@@ -151,25 +78,6 @@ const darkLabelStyles = css`
 		background-color: transparent;
 		border-top-color: ${palette.neutral[20]};
 		color: ${palette.neutral[86]};
-	}
-`;
-
-const adContainerCollapseStyles = css`
-	& .ad-slot.ad-slot--collapse {
-		display: none;
-	}
-`;
-
-const adContainerCentreSlotStyles = css`
-	&.ad-slot-container--centre-slot {
-		width: fit-content;
-		margin: 0 auto;
-	}
-`;
-
-const adSlotCollapseStyles = css`
-	&.ad-slot.ad-slot--collapse {
-		display: none;
 	}
 `;
 
@@ -243,15 +151,6 @@ const merchandisingAdStyles = css`
 		${between.phablet.and.desktop} {
 			display: none;
 		}
-	}
-`;
-
-const inlineAdStyles = css`
-	position: relative;
-	background-color: ${schemedPalette('--ad-background-article-inner')};
-
-	${until.tablet} {
-		display: none;
 	}
 `;
 
@@ -401,28 +300,6 @@ const liveBlogTopContainerStyles = css`
 	display: flex;
 	justify-content: center;
 `;
-/**
- * For implementation in Frontend, see mark: dca5c7dd-dda4-4922-9317-a55a3789fe4c
- * These styles come mostly from RichLink in DCR.
- */
-export const carrotAdStyles = css`
-	.ad-slot--carrot {
-		float: left;
-		clear: both;
-		width: 140px;
-		margin-right: 20px;
-		margin-bottom: ${space[1]}px;
-		${from.leftCol} {
-			position: relative;
-			margin-left: -160px;
-			width: 140px;
-		}
-		${from.wide} {
-			margin-left: -240px;
-			width: 220px;
-		}
-	}
-`;
 
 const mobileStickyAdStyles = css`
 	position: fixed;
@@ -476,7 +353,7 @@ const mobileStickyAdStyles = css`
 		content: 'Advertisement';
 		display: block;
 		position: relative;
-		${individualLabelCSS}
+		${labelBoxStyles}
 	}
 `;
 
@@ -490,12 +367,6 @@ const mobileStickyAdStylesFullWidth = css`
 		padding-right: calc((100% - ${adSizes.mobilesticky.width}px) / 2);
 	}
 `;
-
-export const adContainerStyles = [
-	adContainerCollapseStyles,
-	labelStyles,
-	adContainerCentreSlotStyles,
-];
 
 export const AdSlot = ({
 	position,
@@ -511,10 +382,7 @@ export const AdSlot = ({
 			switch (display) {
 				case ArticleDisplay.Immersive: {
 					return (
-						<div
-							className="ad-slot-container"
-							css={adContainerStyles}
-						>
+						<div className="ad-slot-container">
 							<div
 								id="dfp-ad--right"
 								css={rightAdStyles}
@@ -538,10 +406,7 @@ export const AdSlot = ({
 					return (
 						<div
 							className="ad-slot-container"
-							css={[
-								adContainerStyles,
-								showcaseRightColumnContainerStyles,
-							]}
+							css={[showcaseRightColumnContainerStyles]}
 						>
 							<div
 								id="dfp-ad--right"
@@ -625,7 +490,7 @@ export const AdSlot = ({
 			}
 		case 'comments': {
 			return (
-				<div className="ad-slot-container" css={adContainerStyles}>
+				<div className="ad-slot-container">
 					<div
 						id="dfp-ad--comments"
 						className={[
@@ -666,7 +531,7 @@ export const AdSlot = ({
 				<Hide until="tablet">
 					<div
 						className="ad-slot-container"
-						css={[adContainerStyles, mostPopContainerStyles]}
+						css={[mostPopContainerStyles]}
 					>
 						<div
 							id="dfp-ad--mostpop"
@@ -694,7 +559,7 @@ export const AdSlot = ({
 			return (
 				<div
 					className="ad-slot-container"
-					css={[merchandisingAdContainerStyles, adContainerStyles]}
+					css={[merchandisingAdContainerStyles]}
 				>
 					<div
 						id="dfp-ad--merchandising-high"
@@ -707,7 +572,6 @@ export const AdSlot = ({
 							fluidAdStyles,
 							fluidFullWidthAdStyles,
 							merchandisingAdStyles,
-							adSlotCollapseStyles,
 						]}
 						data-link-name="ad slot merchandising-high"
 						data-name="merchandising-high"
@@ -721,7 +585,7 @@ export const AdSlot = ({
 			return (
 				<div
 					className="ad-slot-container"
-					css={[merchandisingAdContainerStyles, adContainerStyles]}
+					css={[merchandisingAdContainerStyles]}
 				>
 					<div
 						id="dfp-ad--merchandising"
@@ -734,7 +598,6 @@ export const AdSlot = ({
 							fluidAdStyles,
 							fluidFullWidthAdStyles,
 							merchandisingAdStyles,
-							adSlotCollapseStyles,
 						]}
 						data-link-name="ad slot merchandising"
 						data-name="merchandising"
@@ -755,7 +618,6 @@ export const AdSlot = ({
 						css={[
 							frontsBannerAdContainerStyles,
 							hasPageskin && frontsBannerCollapseStyles,
-							adContainerStyles,
 						]}
 					>
 						<div
@@ -789,7 +651,7 @@ export const AdSlot = ({
 						'ad-slot',
 						'ad-slot--survey',
 					].join(' ')}
-					css={[outOfPageStyles, adSlotCollapseStyles]}
+					css={[outOfPageStyles]}
 					data-link-name="ad slot survey"
 					data-name="survey"
 					data-label="false"
@@ -799,34 +661,31 @@ export const AdSlot = ({
 				/>
 			);
 		}
-		case 'inline': {
-			const advertId = `inline${index + 1}`;
-			return (
-				<div className="ad-slot-container" css={adContainerStyles}>
-					<div
-						id={`dfp-ad--${advertId}`}
-						className={[
-							'js-ad-slot',
-							'ad-slot',
-							`ad-slot--${advertId}`,
-							'ad-slot--container-inline',
-							'ad-slot--rendered',
-						].join(' ')}
-						css={inlineAdStyles}
-						data-link-name={`ad slot ${advertId}`}
-						data-name={advertId}
-						aria-hidden="true"
-					/>
-				</div>
-			);
-		}
+		// case 'inline': {
+		// 	const advertId = `inline${index + 1}`;
+		// 	return (
+		// 		<div className="ad-slot-container" css={adContainerStyles}>
+		// 			<div
+		// 				id={`dfp-ad--${advertId}`}
+		// 				className={[
+		// 					'js-ad-slot',
+		// 					'ad-slot',
+		// 					`ad-slot--${advertId}`,
+		// 					'ad-slot--container-inline',
+		// 					'ad-slot--rendered',
+		// 				].join(' ')}
+		// 				css={inlineAdStyles}
+		// 				data-link-name={`ad slot ${advertId}`}
+		// 				data-name={advertId}
+		// 				aria-hidden="true"
+		// 			/>
+		// 		</div>
+		// 	);
+		// }
 		case 'liveblog-inline': {
 			const advertId = `inline${index + 1}`;
 			return (
-				<div
-					className="ad-slot-container ad-slot-desktop"
-					css={adContainerStyles}
-				>
+				<div className="ad-slot-container ad-slot-desktop">
 					<div
 						id={`dfp-ad--${advertId}`}
 						className={[
@@ -848,10 +707,7 @@ export const AdSlot = ({
 		case 'liveblog-inline-mobile': {
 			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
-				<div
-					className="ad-slot-container ad-slot-mobile"
-					css={adContainerStyles}
-				>
+				<div className="ad-slot-container ad-slot-mobile">
 					<div
 						id={`dfp-ad--${advertId}--mobile`}
 						className={[
@@ -874,7 +730,7 @@ export const AdSlot = ({
 			return (
 				<div
 					className="ad-slot-container"
-					css={[adContainerStyles, liveBlogTopContainerStyles]}
+					css={[liveBlogTopContainerStyles]}
 				>
 					<div
 						id="dfp-ad--liveblog-top"
@@ -899,7 +755,7 @@ export const AdSlot = ({
 		case 'mobile-front': {
 			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
-				<div className="ad-slot-container" css={adContainerStyles}>
+				<div className="ad-slot-container">
 					<div
 						id={`dfp-ad--${advertId}--mobile`}
 						className={[
@@ -921,7 +777,7 @@ export const AdSlot = ({
 		}
 		case 'pageskin': {
 			return (
-				<div className="ad-slot-container" css={adContainerStyles}>
+				<div className="ad-slot-container">
 					<div
 						id="dfp-ad--pageskin-inread"
 						className={[
@@ -944,7 +800,7 @@ export const AdSlot = ({
 		}
 		case 'article-end': {
 			return (
-				<div className="ad-slot-container" css={adContainerStyles}>
+				<div className="ad-slot-container">
 					<div
 						id="dfp-ad--article-end"
 						className={[

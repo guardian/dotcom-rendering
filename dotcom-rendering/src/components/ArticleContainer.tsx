@@ -1,9 +1,7 @@
 import { css } from '@emotion/react';
-import { adSizes, constants } from '@guardian/commercial';
-import { from, space, until } from '@guardian/source/foundations';
+import { from, until } from '@guardian/source/foundations';
+import { articleAdSlotStyles } from '../lib/adStyles';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
-import { palette } from '../palette';
-import { carrotAdStyles, labelStyles } from './AdSlot.web';
 
 type Props = {
 	format: ArticleFormat;
@@ -62,142 +60,9 @@ const articleWrapper = css`
 	z-index: 1;
 `;
 
-const adStyles = css`
-	.ad-slot {
-		@media print {
-			/* stylelint-disable-next-line declaration-no-important */
-			display: none !important;
-		}
-		&.ad-slot--collapse {
-			display: none;
-		}
-	}
-	.ad-slot--mostpop {
-		${from.desktop} {
-			margin: 0;
-			width: auto;
-		}
-	}
-	.ad-slot--fluid {
-		width: 100%;
-	}
-
-	.ad-slot-container {
-		margin: ${space[3]}px auto;
-		:not(:has(.ad-slot)) {
-			margin: 0;
-		}
-
-		/* this is centring the ad iframe as they are display: inline; elements by default */
-		text-align: center;
-		display: flex;
-		justify-content: center;
-
-		${from.tablet} {
-			background-color: ${palette('--ad-background')};
-		}
-
-		/* Prevent merger with any nearby float left elements e.g. rich-links */
-		${until.desktop} {
-			clear: left;
-		}
-
-		.ad-slot {
-			${from.tablet} {
-				/* from tablet the ad slot will stretch to the full width of the container and the iframe will be centred by the text-align: center; on the container */
-				flex: 1;
-				/* Ensures slots do not take on 100% of the container height, allowing them to be sticky in containers */
-				align-self: flex-start;
-			}
-
-			/*
-			   Ensure that the ad slot is centred,
-			   the element with this class name is inserted by GAM into the ad slot
-			*/
-			.ad-slot__content {
-				margin-left: auto;
-				margin-right: auto;
-			}
-		}
-
-		.ad-slot--interscroller {
-			/* this fixes inter-scrollers stealing mouse events */
-			overflow: hidden;
-			position: relative;
-
-			/* position the iframe absolutely (relative to the slot) so that it is in the correct position to detect viewability */
-			.ad-slot__content {
-				position: absolute;
-				height: 100%;
-				left: 0;
-				top: 0;
-				right: 0;
-
-				/* must be behind as the actual ad is on top of the iframe */
-				z-index: -1;
-			}
-		}
-	}
-
-	.ad-slot-container--offset-right {
-		${from.desktop} {
-			float: right;
-			max-width: 300px;
-			margin-right: -330px;
-			background-color: transparent;
-		}
-
-		${from.leftCol} {
-			margin-right: -310px;
-		}
-
-		${from.wide} {
-			margin-right: -400px;
-		}
-	}
-
-	/* Give ad slots inserted on the client side a placeholder height.
-	   Let the ad slot take control of its height once rendered. */
-	.ad-slot--inline:not(.ad-slot--rendered) {
-		min-height: ${adSizes.outstreamMobile.height +
-		constants.AD_LABEL_HEIGHT}px;
-
-		${from.desktop} {
-			min-height: ${adSizes.mpu.height + constants.AD_LABEL_HEIGHT}px;
-		}
-	}
-
-	/* Give inline1 ad slot a different placeholder height comparing to subsequent-inlines to reduce CLS.
-	   Let the ad slot take control of its height once rendered.
-	   IMPORTANT NOTE: We currently do not serve OPT-OUT for inline1 but we will need to change this value before we do. */
-	.ad-slot--inline1:not(.ad-slot--rendered) {
-		${from.desktop} {
-			min-height: ${adSizes.outstreamDesktop.height +
-			constants.AD_LABEL_HEIGHT}px;
-		}
-	}
-
-	/* This refers to the inline top-above-nav slot used on mobile pages, NOT the
-	   top-above-nav that is inserted above the navigation. */
-	.ad-slot--top-above-nav:not(.ad-slot--rendered) {
-		${until.tablet} {
-			min-height: ${adSizes.outstreamMobile.height +
-			constants.AD_LABEL_HEIGHT}px;
-		}
-	}
-`;
-
 export const ArticleContainer = ({ children, format }: Props) => {
 	return (
-		<div
-			css={[
-				articleWrapper,
-				articleWidth(format),
-				adStyles,
-				carrotAdStyles,
-				labelStyles,
-			]}
-		>
+		<div css={[articleWrapper, articleWidth(format), articleAdSlotStyles]}>
 			{children}
 		</div>
 	);

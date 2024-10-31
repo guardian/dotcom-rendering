@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
-import { adContainerStyles } from '../components/AdSlot.web';
 import { useConfig } from '../components/ConfigContext';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';
+// import { adContainerStyles } from './adStyles';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
 import type { EditionId } from './edition';
 import { RenderArticleElement } from './renderElement';
@@ -20,9 +20,9 @@ const commercialPosition = css`
 //
 // spacefinder is scoped to placing elements in spaces within the .article-body-commercial-selector
 // hence we scope the styles at the same level
-const adStylesDynamic = css`
-	${adContainerStyles}
-`;
+// const adStylesDynamic = css`
+// 	${adContainerStyles}
+// `;
 
 type Props = {
 	format: ArticleFormat;
@@ -111,7 +111,7 @@ export const ArticleRenderer = ({
 					? interactiveLegacyClasses.contentMainColumn
 					: '',
 			].join(' ')}
-			css={[adStylesDynamic, commercialPosition]}
+			css={[commercialPosition]}
 		>
 			{renderingTarget === 'Apps'
 				? renderedElements
