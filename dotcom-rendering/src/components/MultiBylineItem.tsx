@@ -243,11 +243,13 @@ const bylineTextStyles = css`
 const bylineImageStyles = css`
 	width: 80px;
 	border-radius: 50%;
+	margin-left: 10px;
 	margin-bottom: -8px;
 	height: 80px;
 	min-width: 80px;
 	overflow: hidden;
 	align-self: flex-end;
+	background-color: ${palette('--multi-byline-avatar-background')};
 	${from.tablet} {
 		height: 120px;
 		min-width: 120px;
@@ -275,6 +277,7 @@ export const MultiBylineItem = ({
 					byline={multiBylineItem.byline ?? ''}
 					bylineHtml={multiBylineItem.bylineHtml ?? ''}
 					contributors={multiBylineItem.contributors ?? []}
+					imageOverrideUrl={multiBylineItem.imageOverrideUrl}
 					format={format}
 				/>
 				<Bio html={multiBylineItem.bio} />
