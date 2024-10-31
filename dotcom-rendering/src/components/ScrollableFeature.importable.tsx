@@ -1,10 +1,6 @@
-import { Picture } from 'fixtures/generated/dcr-articles/Picture';
 import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { FeatureCard } from './FeatureCard';
 import { ScrollableCarousel } from './ScrollableCarousel';
-import { CardPicture } from './CardPicture';
-import { MainMedia } from 'src/types/mainMedia';
-import { css } from '@emotion/react';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -21,30 +17,6 @@ type Props = {
  * The carouselling arrow buttons need to run javascript.
  */
 
-const getMedia = ({
-	imageUrl,
-	imageAltText,
-	mainMedia,
-	isPlayableMediaCard,
-}: {
-	imageUrl?: string;
-	imageAltText?: string;
-	mainMedia?: MainMedia;
-	isPlayableMediaCard?: boolean;
-}) => {
-	if (mainMedia && mainMedia.type === 'Video' && isPlayableMediaCard) {
-		return {
-			type: 'video',
-			mainMedia,
-			...(imageUrl && { imageUrl }),
-		} as const;
-	}
-	if (imageUrl) {
-		return { type: 'picture', imageUrl, imageAltText } as const;
-	}
-	return undefined;
-};
-
 export const ScrollableFeature = ({
 	trails,
 	containerPalette,
@@ -58,12 +30,6 @@ export const ScrollableFeature = ({
 			visibleCardsOnTablet={3}
 		>
 			{trails.map((card) => {
-				const media = getMedia({
-					imageUrl: card.image?.src,
-					imageAltText: card.image?.altText,
-					mainMedia: card.mainMedia,
-					isPlayableMediaCard: false,
-				});
 				return (
 					<ScrollableCarousel.Item key={card.url}>
 						<FeatureCard
@@ -72,7 +38,6 @@ export const ScrollableFeature = ({
 							headlineText={card.headline}
 							byline={card.byline}
 							showByline={card.showByline}
-							showQuotedHeadline={card.showQuotedHeadline}
 							webPublicationDate={card.webPublicationDate}
 							kickerText={card.kickerText}
 							showPulsingDot={
@@ -92,7 +57,6 @@ export const ScrollableFeature = ({
 							absoluteServerTimes={absoluteServerTimes}
 							imageLoading={imageLoading}
 							aspectRatio="4:5"
-							cardType="carousel"
 							imageSize={'feature'}
 							headlineSizes={{ desktop: 'xsmall' }}
 						/>
