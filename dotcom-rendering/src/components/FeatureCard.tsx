@@ -14,6 +14,7 @@ import type {
 	DCRSupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
+import { StarRatingComponent } from './Card/Card';
 import { CardAge as AgeStamp } from './Card/components/CardAge';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
@@ -31,8 +32,6 @@ import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
 import { MediaDuration } from './MediaDuration';
 import { SupportingContent } from './SupportingContent';
-import { isUndefined } from 'util';
-import { StarRatingComponent } from './Card/Card';
 
 export type Position = 'inner' | 'outer' | 'none';
 
