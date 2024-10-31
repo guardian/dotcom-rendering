@@ -31,6 +31,7 @@ import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
 import { MiniProfiles } from '../components/MiniProfiles';
+import { MultiBylines } from '../components/MultiBylines';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
 import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
@@ -68,6 +69,7 @@ import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType, StarRating } from '../types/content';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
 import type { EditionId } from './edition';
+import { getSharingUrls } from './sharing-urls';
 
 type Props = {
 	format: ArticleFormat;
@@ -489,6 +491,22 @@ export const renderElement = ({
 					RenderArticleElement={RenderArticleElement}
 					isLastElement={index === totalElements - 1}
 					sectioned={!!isSectionedMiniProfilesArticle}
+				/>
+			);
+		case 'model.dotcomrendering.pageElements.MultiBylinesBlockElement':
+			return (
+				<MultiBylines
+					multiBylines={element.multiBylines}
+					format={format}
+					ajaxUrl={ajaxUrl}
+					pageId={pageId}
+					isAdFreeUser={isAdFreeUser}
+					isSensitive={isSensitive}
+					abTests={abTests}
+					switches={switches}
+					editionId={editionId}
+					RenderArticleElement={RenderArticleElement}
+					isLastElement={index === totalElements - 1}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
