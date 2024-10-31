@@ -57,6 +57,11 @@ const findCollectionSuitableForFrontBranding = (
 	return index;
 };
 
+/**
+ * The container levels are passed across on the config metadata object from frontend.
+ * This is largely used for container palettes which is why the accepted type is `FEContainerPalette[]`.
+ * The function will return the container level if it is found in the metadata.
+ * */
 const getContainerLevel = (
 	levels?: FEContainerPalette[],
 ): DCRContainerLevel | undefined => {
