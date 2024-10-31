@@ -75,7 +75,6 @@ const decideImageWidths = (
 		case 'feature':
 			return [
 				{ breakpoint: breakpoints.mobile, width: 325 },
-
 				{ breakpoint: breakpoints.tablet, width: 220 },
 				{ breakpoint: breakpoints.desktop, width: 300 },
 			];
