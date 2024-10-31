@@ -40,7 +40,6 @@ export const ScrollableFeature = ({
 							showByline={card.showByline}
 							webPublicationDate={card.webPublicationDate}
 							kickerText={card.kickerText}
-							showPulsingDot={false}
 							showClock={false}
 							image={card.image}
 							isPlayableMediaCard={true}
@@ -56,7 +55,11 @@ export const ScrollableFeature = ({
 							imageLoading={imageLoading}
 							aspectRatio="4:5"
 							imageSize={'feature'}
-							headlineSizes={{ desktop: 'xsmall' }}
+							headlineSizes={{
+								desktop: 'xsmall',
+								tablet: 'xxsmall',
+								mobile: 'xsmall',
+							}}
 						/>
 					</ScrollableCarousel.Item>
 				);
