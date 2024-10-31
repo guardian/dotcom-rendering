@@ -661,6 +661,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								collectionBranding={
 									collection.collectionBranding
 								}
+								containerLevel={collection.containerLevel}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
