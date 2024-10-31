@@ -138,7 +138,7 @@ const starWrapper = (cardHasImage: boolean) => css`
 	}
 `;
 
-const StarRatingComponent = ({
+export const StarRatingComponent = ({
 	rating,
 	cardHasImage,
 }: {
@@ -252,7 +252,7 @@ const getHeadlinePosition = ({
 	return 'inner';
 };
 
-const isWithinTwelveHours = (webPublicationDate: string): boolean => {
+export const isWithinTwelveHours = (webPublicationDate: string): boolean => {
 	const timeDiffMs = Math.abs(
 		new Date().getTime() - new Date(webPublicationDate).getTime(),
 	);
