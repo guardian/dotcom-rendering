@@ -16,7 +16,6 @@ type Props = {
  *
  * The carouselling arrow buttons need to run javascript.
  */
-
 export const ScrollableFeature = ({
 	trails,
 	containerPalette,

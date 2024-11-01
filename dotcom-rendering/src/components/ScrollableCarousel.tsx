@@ -52,11 +52,10 @@ const carouselContainerStyles = css`
 		gap: ${space[2]}px;
 	}
 
-	/** this is breaking the big card at wide breakpoint carousel */
-	/* ${from.wide} {
+	${from.wide} {
 		flex-direction: row;
 		gap: ${space[1]}px;
-	} */
+	}
 
 	/* Extend carousel into outer margins on mobile */
 	margin-left: -10px;
@@ -93,6 +92,7 @@ const carouselContainerStyles = css`
 
 const carouselStyles = css`
 	display: grid;
+	width: 100%;
 	grid-auto-columns: 1fr;
 	grid-auto-flow: column;
 	gap: 20px;
