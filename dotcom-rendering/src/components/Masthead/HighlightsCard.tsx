@@ -164,7 +164,8 @@ export const HighlightsCard = ({
 						kickerText={kickerText}
 						isExternalLink={isExternalLink}
 						showQuotes={showQuotedHeadline}
-						isHighlights={true}
+						headlineColour={palette('--highlights-card-headline')}
+						kickerColour={palette('--highlights-card-kicker-text')}
 					/>
 				</div>
 

@@ -39,8 +39,10 @@ type Props = {
 	showByline?: boolean;
 	linkTo?: string; // If provided, the headline is wrapped in a link
 	isExternalLink?: boolean;
-	/** Is the headline inside a Highlights card? */
-	isHighlights?: boolean;
+	/** Optional override of the standard card headline colour */
+	headlineColour?: string;
+	/** Optional override of the standard card kicker colour */
+	kickerColour?: string;
 };
 
 const headlineSize = {
@@ -191,12 +193,9 @@ export const CardHeadline = ({
 	showByline,
 	linkTo,
 	isExternalLink,
-	isHighlights = false,
+	headlineColour = palette('--card-headline'),
+	kickerColour = palette('--card-kicker-text'),
 }: Props) => {
-	const kickerColour = isHighlights
-		? palette('--highlights-card-kicker-text')
-		: palette('--card-kicker-text');
-
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
 
@@ -231,13 +230,9 @@ export const CardHeadline = ({
 				)}
 				{showQuotes && <QuoteIcon colour={kickerColour} />}
 				<span
-					css={[
-						css`
-							color: ${isHighlights
-								? palette('--highlights-card-headline')
-								: palette('--card-headline')};
-						`,
-					]}
+					css={css`
+						color: ${headlineColour};
+					`}
 					className="show-underline"
 				>
 					{headlineText}
@@ -257,6 +252,7 @@ export const CardHeadline = ({
 					text={byline}
 					isLabs={format.theme === ArticleSpecial.Labs}
 					size={bylineSize}
+					colour={kickerColour}
 				/>
 			)}
 		</WithLink>

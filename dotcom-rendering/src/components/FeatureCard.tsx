@@ -166,6 +166,7 @@ const CardAge = ({
 			isOnwardContent={false}
 			absoluteServerTimes={absoluteServerTimes}
 			isTagPage={false}
+			colour={palette('--feature-card-footer-text')}
 		/>
 	);
 };
@@ -207,6 +208,7 @@ const CommentCount = ({
 					discussionApiUrl={discussionApiUrl}
 					discussionId={discussionId}
 					isOnwardContent={false}
+					colour={palette('--feature-card-footer-text')}
 				/>
 			</Island>
 		</Link>
@@ -364,6 +366,12 @@ export const FeatureCard = ({
 										byline={byline}
 										showByline={showByline}
 										isExternalLink={isExternalLink}
+										headlineColour={palette(
+											'--feature-card-headline',
+										)}
+										kickerColour={palette(
+											'--feature-card-kicker-text',
+										)}
 									/>
 
 									{starRating !== undefined ? (
