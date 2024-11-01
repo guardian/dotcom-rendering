@@ -243,7 +243,6 @@ const bylineTextStyles = css`
 	${from.tablet} {
 		margin-bottom: ${space[9]}px;
 	}
-}
 `;
 
 const bylineImageStyles = css`
