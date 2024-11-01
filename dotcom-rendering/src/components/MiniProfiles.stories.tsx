@@ -92,7 +92,7 @@ export const ThemeVariations = {
 } satisfies Story;
 
 // Audio designs don't support mini profiles
-export const isNotAudioDesign = (format: ArticleFormat) =>
+const isNotAudioDesign = (format: ArticleFormat) =>
 	format.design !== ArticleDesign.Audio;
 
 export const DesignVariations = {
