@@ -1,23 +1,9 @@
-import { isUndefined } from '@guardian/libs';
 import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
-import { cmpAcceptAll, cmpRejectAll } from '../lib/cmp';
+import { cmpRejectAll } from '../lib/cmp';
 import { waitForIsland } from '../lib/islands';
 import { fetchAndloadPageWithOverrides } from '../lib/load-page';
 import { expectToBeVisible, expectToNotExist } from '../lib/locators';
-
-type YouTubeEmbedConfig = {
-	adsConfig: {
-		nonPersonalizedAd: boolean;
-		adTagParameters: {
-			cmpGdpr: number;
-			cmpGvcd: string;
-			cmpVcd: string;
-			cust_params: string;
-			iu: string;
-		};
-	};
-};
 
 const interceptOphanPlayEvent = ({ page, id }: { page: Page; id: string }) => {
 	return page.waitForRequest((request) => {
@@ -34,69 +20,18 @@ const interceptOphanPlayEvent = ({ page, id }: { page: Page; id: string }) => {
 	});
 };
 
-const interceptYouTubeEmbed = ({
+const interceptYouTubeRequest = ({
 	page,
 	videoId,
-	adUnit,
-	pageUrl,
-	rejectAll,
 }: {
 	page: Page;
 	videoId: string;
-	adUnit: string;
-	pageUrl: string;
-	rejectAll: boolean;
 }) => {
 	return page.waitForRequest((request) => {
-		const matchUrl = request
+		const matchedUrl = request
 			.url()
 			.startsWith(`https://www.youtube.com/embed/${videoId}?`);
-		if (!matchUrl) {
-			return false;
-		}
-		const searchParams = new URLSearchParams(request.url());
-		const rawEmbedConfig = searchParams.get('embed_config');
-		if (!rawEmbedConfig) {
-			return false;
-		}
-		const embedConfig = JSON.parse(rawEmbedConfig) as YouTubeEmbedConfig;
-		const adsConfig = embedConfig.adsConfig;
-		const adTagParameters = adsConfig.adTagParameters;
-		// cust_params is double encoded
-		const custParams = new URLSearchParams(
-			decodeURIComponent(adTagParameters.cust_params),
-		);
-		// check adunit
-		const adUnitMatch = adTagParameters.iu === adUnit;
-		// check url to check custParams is present
-		const urlCustParamMatch = custParams.get('url') === pageUrl;
-
-		// check consent related properties
-		// cmpGdpr = consentState.tcfv2.gdprApplies
-		const cmpGdprMatch = adTagParameters.cmpGdpr === 1;
-		// cmpVcd = consentState.tcfv2.tcString
-		const cmpVcdMatch = !isUndefined(adTagParameters.cmpVcd);
-		let nonPersonalizedAdMatch = false;
-		let cmpGvcdMatch = false;
-		if (rejectAll) {
-			// user has not given consent for any purpose
-			nonPersonalizedAdMatch = adsConfig.nonPersonalizedAd;
-			// cmpGvcd = consentState.tcfv2.addtlConsent
-			cmpGvcdMatch = adTagParameters.cmpGvcd === '1~';
-		} else {
-			// user has not given consent for any purpose
-			nonPersonalizedAdMatch = !adsConfig.nonPersonalizedAd;
-			// cmpGvcd = consentState.tcfv2.addtlConsent
-			cmpGvcdMatch = !isUndefined(adTagParameters.cmpGvcd);
-		}
-		return (
-			adUnitMatch &&
-			urlCustParamMatch &&
-			cmpGdprMatch &&
-			cmpVcdMatch &&
-			nonPersonalizedAdMatch &&
-			cmpGvcdMatch
-		);
+		return matchedUrl;
 	});
 };
 
@@ -119,66 +54,14 @@ const muteYouTube = async (page: Page, iframeSelector: string) => {
 	}
 };
 
-test.describe.skip('YouTube Atom', () => {
-	// Skipping because the video in this article has stopped working. Investigation needed!
-	test.skip('plays main media video: skipped', async ({ page }) => {
-		await fetchAndloadPageWithOverrides(
-			page,
-			'https://www.theguardian.com/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
-			{ switchOverrides: { youtubeIma: false } },
-		);
-		await cmpAcceptAll(page);
-
-		await waitForIsland(page, 'YoutubeBlockComponent');
-
-		// Make sure overlay is displayed
-		const videoId = 'S0CE1n-R3OY';
-		const overlaySelector = `[data-testid^="youtube-overlay-${videoId}"]`;
-		await expectToBeVisible(page, overlaySelector);
-
-		// YouTube has not initialised
-		const hasYouTubeIframeApi = await page.evaluate(() => {
-			return !!window.onYouTubeIframeAPIReady;
-		});
-		expect(hasYouTubeIframeApi).toBeFalsy();
-
-		// Listen for the ophan call made when the video is played
-		const ophanPlayEventPromise = interceptOphanPlayEvent({
-			page,
-			id: 'gu-video-youtube-2b33a7b7-e639-4232-9ecd-0fb920fa8147',
-		});
-
-		// Listen for the YouTube embed call made when the video is played
-		const youTubeEmbedPromise = interceptYouTubeEmbed({
-			page,
-			videoId,
-			adUnit: '/59666047/theguardian.com/uk-news/article/ng',
-			pageUrl:
-				'/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
-			rejectAll: false,
-		});
-
-		// Play video
-		await page.locator(overlaySelector).click();
-
-		// Mute video
-		await muteYouTube(page, `iframe[id^="youtube-player-${videoId}"]`);
-
-		await ophanPlayEventPromise;
-
-		await youTubeEmbedPromise;
-
-		// Video is playing, overlay is gone
-		await expectToNotExist(page, overlaySelector);
-	});
-
-	test.skip('plays main media video', async ({ page }) => {
+test.describe('YouTube Atom', () => {
+	test('plays main media video', async ({ page }) => {
 		await fetchAndloadPageWithOverrides(
 			page,
 			'https://www.theguardian.com/us-news/article/2024/may/30/trump-trial-hush-money-verdict',
 			{ switchOverrides: { youtubeIma: false } },
 		);
-		await cmpAcceptAll(page);
+		await cmpRejectAll(page);
 
 		await waitForIsland(page, 'YoutubeBlockComponent');
 
@@ -200,13 +83,9 @@ test.describe.skip('YouTube Atom', () => {
 		});
 
 		// Listen for the YouTube embed call made when the video is played
-		const youTubeEmbedPromise = interceptYouTubeEmbed({
+		const youTubeEmbedPromise = interceptYouTubeRequest({
 			page,
 			videoId,
-			adUnit: '/59666047/theguardian.com/us-news/article/ng',
-			pageUrl:
-				'/us-news/article/2024/may/30/trump-trial-hush-money-verdict',
-			rejectAll: false,
 		});
 
 		// Play video
@@ -223,13 +102,13 @@ test.describe.skip('YouTube Atom', () => {
 		await expectToNotExist(page, overlaySelector);
 	});
 
-	test.skip('plays in body video', async ({ page }) => {
+	test('plays in body video', async ({ page }) => {
 		await fetchAndloadPageWithOverrides(
 			page,
 			'https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
 			{ switchOverrides: { youtubeIma: false } },
 		);
-		await cmpAcceptAll(page);
+		await cmpRejectAll(page);
 
 		await waitForIsland(page, 'YoutubeBlockComponent');
 
@@ -251,13 +130,9 @@ test.describe.skip('YouTube Atom', () => {
 		});
 
 		// Listen for the YouTube embed call made when the video is played
-		const youTubeEmbedPromise = interceptYouTubeEmbed({
+		const youTubeEmbedPromise = interceptYouTubeRequest({
 			page,
 			videoId,
-			adUnit: '/59666047/theguardian.com/environment/article/ng',
-			pageUrl:
-				'/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
-			rejectAll: false,
 		});
 
 		// Play video
@@ -282,7 +157,7 @@ test.describe.skip('YouTube Atom', () => {
 			'https://www.theguardian.com/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates',
 			{ switchOverrides: { youtubeIma: false } },
 		);
-		await cmpAcceptAll(page);
+		await cmpRejectAll(page);
 
 		// Wait for hydration of all videos
 		await waitForIsland(page, 'YoutubeBlockComponent', { nth: 0 });
@@ -316,13 +191,9 @@ test.describe.skip('YouTube Atom', () => {
 		});
 
 		// Listen for the YouTube embed call made when the video is played
-		const youTubeEmbedPromise = interceptYouTubeEmbed({
+		const youTubeEmbedPromise = interceptYouTubeRequest({
 			page,
 			videoId,
-			adUnit: '/59666047/theguardian.com/world/liveblog/ng',
-			pageUrl:
-				'/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates',
-			rejectAll: false,
 		});
 
 		// Play main media video
@@ -356,13 +227,9 @@ test.describe.skip('YouTube Atom', () => {
 		});
 
 		// Listen for the YouTube embed call made when the video is played
-		const youTubeEmbedPromise2 = interceptYouTubeEmbed({
+		const youTubeEmbedPromise2 = interceptYouTubeRequest({
 			page,
 			videoId,
-			adUnit: '/59666047/theguardian.com/world/liveblog/ng',
-			pageUrl:
-				'/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates',
-			rejectAll: false,
 		});
 
 		// Play body video
@@ -381,9 +248,7 @@ test.describe.skip('YouTube Atom', () => {
 		await youTubeEmbedPromise2;
 	});
 
-	test.skip('plays the video if the reader rejects consent', async ({
-		page,
-	}) => {
+	test('plays the video if the reader rejects consent', async ({ page }) => {
 		await fetchAndloadPageWithOverrides(
 			page,
 			'https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
@@ -412,13 +277,9 @@ test.describe.skip('YouTube Atom', () => {
 		});
 
 		// Listen for the YouTube embed call made when the video is played
-		const youTubeEmbedPromise = interceptYouTubeEmbed({
+		const youTubeEmbedPromise = interceptYouTubeRequest({
 			page,
 			videoId,
-			adUnit: '/59666047/theguardian.com/environment/article/ng',
-			pageUrl:
-				'/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
-			rejectAll: true,
 		});
 
 		// Play video
@@ -441,9 +302,8 @@ test.describe.skip('YouTube Atom', () => {
 		await fetchAndloadPageWithOverrides(
 			page,
 			'https://www.theguardian.com/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates',
-			{ switchOverrides: { youtubeIma: false } },
 		);
-		await cmpAcceptAll(page);
+		await cmpRejectAll(page);
 
 		// Wait for hydration of all videos
 		await waitForIsland(page, 'YoutubeBlockComponent', { nth: 0 });

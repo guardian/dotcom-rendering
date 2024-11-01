@@ -41,7 +41,7 @@ const loadPage = async (
 
 /**
  * Create a POST request to the /Article endpoint so we can override config
- * and switches in the json sent to DCR
+ * and switches in the fixture json sent to DCR
  */
 const loadPageWithOverrides = async (
 	page: Page,
@@ -100,7 +100,8 @@ const loadPageNoOkta = async (
 };
 
 /**
- * Fetch the page json from PROD then load it as a POST with overrides
+ * Fetch the page json from PROD, apply overrides then load locally
+ * Useful for when we want to test content that isn't a current fixture
  */
 const fetchAndloadPageWithOverrides = async (
 	page: Page,
