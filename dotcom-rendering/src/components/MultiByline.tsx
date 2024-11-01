@@ -26,6 +26,7 @@ import { palette } from '../palette';
 import type { MultiByline as MultiBylineModel } from '../types/content';
 import type { TagType } from '../types/tag';
 import { subheadingStyles } from './Subheading';
+import { EndNote } from './MiniProfile';
 
 const multiBylineItemStyles = css`
 	padding-top: 8px;
@@ -285,6 +286,9 @@ export const MultiByline = ({
 				/>
 				<Bio html={multiByline.bio} />
 				{children}
+				{multiByline.endNote ? (
+					<EndNote text={multiByline.endNote} />
+				) : null}
 			</li>
 		</>
 	);
