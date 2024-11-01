@@ -60,6 +60,7 @@ export const ThemeVariations = {
 			{
 				title: 'A further subheading',
 				body: [testTextElement],
+				endNote: 'This is an end note.',
 			},
 			{
 				title: 'This byline has a contributor with no link',
@@ -116,44 +117,12 @@ export const ThemeVariations = {
 	},
 } satisfies Story;
 
-export const DesignVariationsNews = {
+export const DesignVariations = {
 	args: ThemeVariations.args,
 	decorators: [centreColumnDecorator],
 	parameters: {
 		formats: getAllDesigns({
 			theme: Pillar.News,
-			display: ArticleDisplay.Standard,
-		}),
-		chromatic: {
-			modes: {
-				horizontal: allModes.splitHorizontal,
-			},
-		},
-	},
-} satisfies Story;
-
-export const DesignVariationsCulture = {
-	args: ThemeVariations.args,
-	decorators: [centreColumnDecorator],
-	parameters: {
-		formats: getAllDesigns({
-			theme: Pillar.Culture,
-			display: ArticleDisplay.Standard,
-		}),
-		chromatic: {
-			modes: {
-				horizontal: allModes.splitHorizontal,
-			},
-		},
-	},
-} satisfies Story;
-
-export const DesignVariationsOpinion = {
-	args: ThemeVariations.args,
-	decorators: [centreColumnDecorator],
-	parameters: {
-		formats: getAllDesigns({
-			theme: Pillar.Opinion,
 			display: ArticleDisplay.Standard,
 		}),
 		chromatic: {
