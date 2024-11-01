@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
 import { images } from '../../fixtures/generated/images';
+import type { ArticleFormat } from '../lib/articleFormat';
 import {
 	ArticleDesign,
 	getAllDesigns,
@@ -10,7 +11,6 @@ import {
 } from '../lib/articleFormat';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { TextBlockElement } from '../types/content';
-import { isNotAudioDesign } from './MiniProfiles.stories';
 import { MultiBylines } from './MultiBylines';
 
 const meta = {
@@ -26,7 +26,7 @@ const testTextElement: TextBlockElement = {
 	_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 	elementId: 'test-text-element-id-1',
 	dropCap: 'on', // this should be overruled by multi byline which always sets forceDropCap="off"
-	html: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit. Etiam porta mauris nec sagittis luctus.</p>',
+	html: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada.</p>',
 };
 
 const testParagraph =
@@ -48,7 +48,7 @@ export const ThemeVariations = {
 				contributorIds: ['profile/richard-hillgrove'],
 			},
 			{
-				title: 'My hot take',
+				title: 'A byline with an image override url',
 				bio: testBioText,
 				body: [testTextElement],
 				byline: 'Guardian Contributor',
@@ -117,6 +117,10 @@ export const ThemeVariations = {
 		},
 	},
 } satisfies Story;
+
+// Audio designs don't support multi-bylines
+const isNotAudioDesign = (format: ArticleFormat) =>
+	format.design !== ArticleDesign.Audio;
 
 export const DesignVariations = {
 	args: ThemeVariations.args,
