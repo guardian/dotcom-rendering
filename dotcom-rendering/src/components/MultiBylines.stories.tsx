@@ -10,6 +10,7 @@ import {
 } from '../lib/articleFormat';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { TextBlockElement } from '../types/content';
+import { isNotAudioDesign } from './MiniProfiles.stories';
 import { MultiBylines } from './MultiBylines';
 
 const meta = {
@@ -124,7 +125,7 @@ export const DesignVariations = {
 		formats: getAllDesigns({
 			theme: Pillar.News,
 			display: ArticleDisplay.Standard,
-		}),
+		}).filter(isNotAudioDesign),
 		chromatic: {
 			modes: {
 				horizontal: allModes.splitHorizontal,
