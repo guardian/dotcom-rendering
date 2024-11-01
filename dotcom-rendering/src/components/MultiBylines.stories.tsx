@@ -9,8 +9,9 @@ import {
 	getAllDesigns,
 	getAllThemes,
 } from '../lib/articleFormat';
+import type { EditionId } from '../lib/edition';
 import { RenderArticleElement } from '../lib/renderElement';
-import type { TextBlockElement } from '../types/content';
+import type { MultiByline, TextBlockElement } from '../types/content';
 import { MultiBylines } from './MultiBylines';
 
 const meta = {
@@ -35,75 +36,84 @@ const testListHtml =
 	'<ul><li><p>This is the <em>first</em> item in the list</p></li><li><p>The second item has a <a href="#">hyperlink</a>.</p></li></ul>';
 const testBioText = testParagraph + testListHtml;
 
-export const ThemeVariations = {
-	args: {
-		multiBylines: [
-			{
-				title: 'This subheading is quite long so is likely to run on to multiple lines',
-				bio: testBioText,
-				body: [testTextElement],
-				byline: 'Richard Hillgrove Political Editor',
-				bylineHtml:
-					"<a href='/profile/richard-hillgrove'>Richard Hillgrove</a> Political Editor",
-				contributorIds: ['profile/richard-hillgrove'],
-			},
-			{
-				title: 'A byline with an image override url',
-				bio: testBioText,
-				body: [testTextElement],
-				byline: 'Guardian Contributor',
-				bylineHtml:
-					"<a href='/profile/richard-hillgrove'>Richard Hillgrove</a>",
-				contributorIds: ['profile/richard-hillgrove'],
-				imageOverrideUrl:
-					'https://i.guim.co.uk/img/uploads/2024/09/17/Maurice_Casey.png?width=180&dpr=1&s=none',
-			},
-			{
-				title: 'A further subheading',
-				body: [testTextElement],
-				endNote: 'This is an end note.',
-			},
-			{
-				title: 'This byline has a contributor with no link',
-				bio: testBioText,
-				body: [testTextElement],
-				byline: 'Steve McQueen on Paul Gilroy',
-				bylineHtml:
-					"<span data-contributor-rel='author'>Steve McQueen</span> on Paul Gilroy",
-			},
-		],
-		tags: [
-			{
-				title: 'Richard Hillgrove',
-				id: 'profile/richard-hillgrove',
-				type: 'contributor',
-				bylineLargeImageUrl:
-					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2011/5/24/1306249890287/Richard-Hillgrove.jpg?width=100&dpr=2&s=none',
-			},
-		],
-		isLastElement: true,
-		/**
-		 * This will be replaced by the `formats` parameter, but it's
-		 * required by the type.
-		 */
-		format: {
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
+const multiBylineWithLongHeader = {
+	title: 'This subheading is quite long so is likely to run on to multiple lines',
+	bio: testBioText,
+	body: [testTextElement],
+	byline: 'Richard Hillgrove Political Editor',
+	bylineHtml:
+		"<a href='/profile/richard-hillgrove'>Richard Hillgrove</a> Political Editor",
+	contributorIds: ['profile/richard-hillgrove'],
+};
+
+const multiBylineWithImageOverride = {
+	title: 'A byline with an image override url',
+	bio: testBioText,
+	body: [testTextElement],
+	byline: 'Guardian Contributor',
+	bylineHtml: "<a href='/profile/richard-hillgrove'>Richard Hillgrove</a>",
+	contributorIds: ['profile/richard-hillgrove'],
+	imageOverrideUrl:
+		'https://i.guim.co.uk/img/uploads/2024/09/17/Maurice_Casey.png?width=180&dpr=1&s=none',
+};
+
+const multiBylineWithNoByline = {
+	title: 'A further subheading',
+	body: [testTextElement],
+	endNote: 'This is an end note.',
+};
+
+const multiBylineWithNoContributorLink = {
+	title: 'This byline has a contributor with no link',
+	bio: testBioText,
+	body: [testTextElement],
+	byline: 'Steve McQueen on Paul Gilroy',
+	bylineHtml:
+		"<span data-contributor-rel='author'>Steve McQueen</span> on Paul Gilroy",
+};
+
+const args = (multiBylines: MultiByline[]) => ({
+	multiBylines,
+	tags: [
+		{
+			title: 'Richard Hillgrove',
+			id: 'profile/richard-hillgrove',
+			type: 'contributor',
+			bylineLargeImageUrl:
+				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2011/5/24/1306249890287/Richard-Hillgrove.jpg?width=100&dpr=2&s=none',
 		},
-		abTests: {},
-		/**
-		 * This is used for rich links. An empty string isn't technically valid,
-		 * but there are no rich links in this example.
-		 */
-		ajaxUrl: '',
-		editionId: 'UK',
-		isAdFreeUser: false,
-		isSensitive: false,
-		pageId: 'testID',
-		switches: {},
-		RenderArticleElement,
+	],
+	isLastElement: true,
+	/**
+	 * This will be replaced by the `formats` parameter, but it's
+	 * required by the type.
+	 */
+	format: {
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.News,
 	},
+	abTests: {},
+	/**
+	 * This is used for rich links. An empty string isn't technically valid,
+	 * but there are no rich links in this example.
+	 */
+	ajaxUrl: '',
+	editionId: 'UK' as EditionId,
+	isAdFreeUser: false,
+	isSensitive: false,
+	pageId: 'testID',
+	switches: {},
+	RenderArticleElement,
+});
+
+export const ThemeVariations = {
+	args: args([
+		multiBylineWithLongHeader,
+		multiBylineWithImageOverride,
+		multiBylineWithNoByline,
+		multiBylineWithNoContributorLink,
+	]),
 	decorators: [centreColumnDecorator],
 	parameters: {
 		formats: getAllThemes({
@@ -123,7 +133,39 @@ const isNotAudioDesign = (format: ArticleFormat) =>
 	format.design !== ArticleDesign.Audio;
 
 export const DesignVariations = {
-	args: ThemeVariations.args,
+	args: args([multiBylineWithLongHeader, multiBylineWithNoByline]),
+	decorators: [centreColumnDecorator],
+	parameters: {
+		formats: getAllDesigns({
+			theme: Pillar.News,
+			display: ArticleDisplay.Standard,
+		}).filter(isNotAudioDesign),
+		chromatic: {
+			modes: {
+				horizontal: allModes.splitHorizontal,
+			},
+		},
+	},
+} satisfies Story;
+
+export const DesignVariationsWithImageOverride = {
+	args: args([multiBylineWithImageOverride]),
+	decorators: [centreColumnDecorator],
+	parameters: {
+		formats: getAllDesigns({
+			theme: Pillar.News,
+			display: ArticleDisplay.Standard,
+		}).filter(isNotAudioDesign),
+		chromatic: {
+			modes: {
+				horizontal: allModes.splitHorizontal,
+			},
+		},
+	},
+} satisfies Story;
+
+export const DesignVariationsWithNoContributorLink = {
+	args: args([multiBylineWithNoContributorLink]),
 	decorators: [centreColumnDecorator],
 	parameters: {
 		formats: getAllDesigns({
