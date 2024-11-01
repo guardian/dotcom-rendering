@@ -25,8 +25,9 @@ import { slugify } from '../model/enhance-H2s';
 import { palette } from '../palette';
 import type { MultiByline as MultiBylineModel } from '../types/content';
 import type { TagType } from '../types/tag';
-import { subheadingStyles } from './Subheading';
+import { Avatar } from './Avatar';
 import { EndNote } from './MiniProfile';
+import { subheadingStyles } from './Subheading';
 
 const multiBylineItemStyles = css`
 	padding-top: 8px;
@@ -250,13 +251,16 @@ const bylineImageStyles = css`
 	min-width: 80px;
 	overflow: hidden;
 	align-self: flex-end;
-	background-color: ${palette('--multi-byline-avatar-background')};
 	${from.tablet} {
 		height: 120px;
 		min-width: 120px;
 		width: 120px;
 		margin-bottom: -12px;
 	}
+`;
+
+const avatarStyles = css`
+	background-color: ${palette('--multi-byline-avatar-background')};
 `;
 
 interface MultiBylineItemProps {
@@ -321,7 +325,7 @@ const Byline = ({
 	});
 	const imageUrl =
 		imageOverrideUrl ??
-		tags.find((tag) => tag.id === contributorIds[0])?.bylineImageUrl;
+		tags.find((tag) => tag.id === contributorIds[0])?.bylineLargeImageUrl;
 
 	return (
 		<div css={bylineWrapperStyles}>
@@ -346,7 +350,13 @@ const Byline = ({
 				) : null}
 			</div>
 			{!!imageUrl && (
-				<img src={imageUrl} alt={byline} css={bylineImageStyles}></img>
+				<div css={bylineImageStyles}>
+					<Avatar
+						src={imageUrl}
+						alt={byline}
+						cssOverrides={avatarStyles}
+					/>
+				</div>
 			)}
 		</div>
 	);

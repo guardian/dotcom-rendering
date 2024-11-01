@@ -1,3 +1,4 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { Fragment } from 'react';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
@@ -51,9 +52,10 @@ type Props = {
 	src: string;
 	alt: string;
 	shape?: AvatarShape;
+	cssOverrides?: SerializedStyles;
 };
 
-export const Avatar = ({ src, alt, shape = 'round' }: Props) => {
+export const Avatar = ({ src, alt, shape = 'round', cssOverrides }: Props) => {
 	const sources = generateSources(getSourceImageUrl(src), [
 		{ breakpoint: 320, width: 75 },
 		{ breakpoint: 740, width: 140 },
@@ -84,6 +86,7 @@ export const Avatar = ({ src, alt, shape = 'round' }: Props) => {
 							'--avatar-background-colour',
 						)};
 					`,
+				cssOverrides,
 			]}
 		>
 			{sources.map((source) => {
