@@ -26,6 +26,7 @@ import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
 import { NavList } from './NavList';
+import { ScrollableFeature } from './ScrollableFeature.importable';
 import { ScrollableHighlights } from './ScrollableHighlights.importable';
 import { ScrollableMedium } from './ScrollableMedium.importable';
 import { ScrollableSmall } from './ScrollableSmall.importable';
@@ -289,6 +290,16 @@ export const DecideContainer = ({
 				/>
 			);
 		case 'scrollable/feature':
+			return (
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<ScrollableFeature
+						trails={trails}
+						imageLoading={imageLoading}
+						containerPalette={containerPalette}
+						absoluteServerTimes={absoluteServerTimes}
+					/>
+				</Island>
+			);
 		case 'static/feature/2':
 		default:
 			return <p>{containerType} is not yet supported</p>;

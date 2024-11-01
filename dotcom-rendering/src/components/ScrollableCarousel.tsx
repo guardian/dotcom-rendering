@@ -51,6 +51,7 @@ const carouselContainerStyles = css`
 	${from.tablet} {
 		gap: ${space[2]}px;
 	}
+
 	${from.wide} {
 		flex-direction: row;
 		gap: ${space[1]}px;
@@ -91,6 +92,7 @@ const carouselContainerStyles = css`
 
 const carouselStyles = css`
 	display: grid;
+	width: 100%;
 	grid-auto-columns: 1fr;
 	grid-auto-flow: column;
 	gap: 20px;
