@@ -9,14 +9,12 @@ import {
 	neutral,
 	space,
 	textSans14,
-	textSans24,
-	textSans28,
-	textSans34,
-	textSansItalic17,
+	textSansItalic24,
+	textSansItalic28,
+	textSansItalic34,
 } from '@guardian/source/foundations';
 import sanitise, { defaults } from 'sanitize-html';
 import {
-	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
@@ -31,11 +29,6 @@ import { subheadingStyles } from './Subheading';
 
 const multiBylineItemStyles = css`
 	padding-top: 8px;
-`;
-
-const labsBylineStyles = css`
-	${textSansItalic17};
-	line-height: 1.4;
 `;
 
 const headingLineStyles = css`
@@ -143,7 +136,7 @@ export const nonAnchorHeadlineStyles = ({
 				 * This has been done because the styles do not directly map to the new presets.
 				 * Please speak to your team's designer and update this to use a more appropriate preset.
 				 */
-				${textSans28};
+				${textSansItalic28};
 				font-weight: 300;
 				line-height: 1.15;
 			`
@@ -153,7 +146,7 @@ export const nonAnchorHeadlineStyles = ({
 				 * This has been done because the styles do not directly map to the new presets.
 				 * Please speak to your team's designer and update this to use a more appropriate preset.
 				 */
-				${textSans24};
+				${textSansItalic24};
 				${
 					fontWeight === 'light'
 						? 'font-weight: 300;'
@@ -172,7 +165,7 @@ export const nonAnchorHeadlineStyles = ({
 					 * This has been done because the styles do not directly map to the new presets.
 					 * Please speak to your team's designer and update this to use a more appropriate preset.
 					 */
-					${textSans34};
+					${textSansItalic34};
 					font-weight: 300;
 					line-height: 1.15;
 				`
@@ -182,7 +175,7 @@ export const nonAnchorHeadlineStyles = ({
 					 * This has been done because the styles do not directly map to the new presets.
 					 * Please speak to your team's designer and update this to use a more appropriate preset.
 					 */
-					${textSans28};
+					${textSansItalic28};
 					${
 						fontWeight === 'light'
 							? 'font-weight: 300;'
@@ -205,13 +198,11 @@ export const nonAnchorHeadlineStyles = ({
 	}
 `;
 
-export const multiBylineBylineStyles = (format: ArticleFormat) => css`
+export const bylineStyles = (format: ArticleFormat) => css`
 	${nonAnchorHeadlineStyles({ format, fontWeight: 'light' })}
-	/* stylelint-disable-next-line declaration-no-important */
-	font-style: italic !important;
+	font-style: italic;
 	margin-top: -4px;
-	/* stylelint-disable-next-line declaration-no-important */
-	font-weight: 300 !important;
+	font-weight: 300;
 	color: ${neutral[46]};
 	a {
 		${subheadingStyles(format)}
@@ -338,12 +329,7 @@ const Byline = ({
 				</h3>
 				{bylineHtml ? (
 					<h3
-						css={[
-							multiBylineBylineStyles(format),
-							format.theme === ArticleSpecial.Labs &&
-								labsBylineStyles,
-							format.design === ArticleDesign.LiveBlog,
-						]}
+						css={bylineStyles(format)}
 						dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
 					/>
 				) : null}
