@@ -101,6 +101,8 @@ const baseCardStyles = css`
 const overlayStyles = css`
 	position: absolute;
 	bottom: 0;
+	left: 0;
+	right: 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
