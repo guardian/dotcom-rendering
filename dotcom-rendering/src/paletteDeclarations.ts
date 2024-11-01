@@ -4366,11 +4366,6 @@ const mostViewedTabBorderDark: PaletteFunction = ({ theme }) => {
 	}
 };
 
-const multiBylineAvatarBackgroundLight: PaletteFunction = () =>
-	sourcePalette.neutral[86];
-const multiBylineAvatarBackgroundDark: PaletteFunction = () =>
-	sourcePalette.neutral[38];
-
 const mostViewedTabBorderLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -6709,10 +6704,6 @@ const paletteColours = {
 	'--most-viewed-tab-border': {
 		light: mostViewedTabBorderLight,
 		dark: mostViewedTabBorderDark,
-	},
-	'--multi-byline-avatar-background': {
-		light: multiBylineAvatarBackgroundLight,
-		dark: multiBylineAvatarBackgroundDark,
 	},
 	'--nav-reader-revenue-link-text': {
 		light: navReaderRevenueLinkText,

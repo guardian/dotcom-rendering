@@ -76,7 +76,7 @@ export const ThemeVariations = {
 				title: 'Richard Hillgrove',
 				id: 'profile/richard-hillgrove',
 				type: 'contributor',
-				bylineImageUrl:
+				bylineLargeImageUrl:
 					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2011/5/24/1306249890287/Richard-Hillgrove.jpg?width=100&dpr=2&s=none',
 			},
 		],
