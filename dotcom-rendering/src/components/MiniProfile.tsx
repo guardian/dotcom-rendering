@@ -138,7 +138,7 @@ const Bio = ({ html }: { html?: string }) => {
 	);
 };
 
-const EndNote = ({ text }: { text?: string }) => {
+export const EndNote = ({ text }: { text?: string }) => {
 	if (!text) return null;
 	return (
 		<p css={endNoteStyles}>
