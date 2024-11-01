@@ -107,9 +107,9 @@ const overlayStyles = css`
 	flex-direction: column;
 	justify-content: flex-start;
 	flex-grow: 1;
-	padding: 8px;
-	row-gap: 8px;
-	backdrop-filter: blur(12px);
+	padding: ${space[2]}px;
+	row-gap: ${space[2]}px;
+	backdrop-filter: blur(12px) brightness(0.7);
 `;
 
 const getMedia = ({
