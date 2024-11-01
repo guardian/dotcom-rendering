@@ -207,7 +207,6 @@ export const nonAnchorHeadlineStyles = ({
 
 export const multiBylineBylineStyles = (format: ArticleFormat) => css`
 	${nonAnchorHeadlineStyles({ format, fontWeight: 'light' })}
-	padding-bottom: 8px;
 	/* stylelint-disable-next-line declaration-no-important */
 	font-style: italic !important;
 	margin-top: -4px;
@@ -240,6 +239,11 @@ const bylineWrapperStyles = css`
 
 const bylineTextStyles = css`
 	flex-grow: 1;
+	margin-bottom: ${space[6]}px;
+	${from.tablet} {
+		margin-bottom: ${space[9]}px;
+	}
+}
 `;
 
 const bylineImageStyles = css`
