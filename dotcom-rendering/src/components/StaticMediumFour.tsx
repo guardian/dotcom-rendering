@@ -42,7 +42,7 @@ export const StaticMediumFour = ({
 						<FrontCard
 							trail={card}
 							containerPalette={containerPalette}
-							containerType="flexible/special"
+							containerType="static/medium/4"
 							showAge={showAge}
 							absoluteServerTimes={absoluteServerTimes}
 							image={showImage ? card.image : undefined}

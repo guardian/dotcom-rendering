@@ -1,13 +1,13 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
-import { trails } from '../../fixtures/manual/highlights-trails';
+import { trails } from '../../fixtures/manual/trails';
 import { FrontSection } from './FrontSection';
-import { ScrollableFeature } from './ScrollableFeature.importable';
+import { StaticFeatureTwo } from './StaticFeatureTwo';
 
-export default {
-	title: 'Components/ScrollableFeature',
-	component: ScrollableFeature,
+const meta = {
+	component: StaticFeatureTwo,
+	title: 'Components/StaticFeatureTwo',
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -19,23 +19,27 @@ export default {
 	},
 	args: {
 		trails,
-		containerPalette: undefined,
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
 	},
-} as Meta;
-
-type Story = StoryObj<typeof ScrollableFeature>;
-
-export const WithFrontSection = {
 	render: (args) => (
 		<FrontSection
-			title="Scrollable feature"
 			discussionApiUrl={discussionApiUrl}
 			editionId={'UK'}
-			showTopBorder={false}
+			showTopBorder={true}
 		>
-			<ScrollableFeature {...args} />
+			<StaticFeatureTwo {...args} />
 		</FrontSection>
 	),
-} satisfies Story;
+} satisfies Meta<typeof StaticFeatureTwo>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+	name: 'Default Story',
+	args: {
+		trails: trails.slice(0, 2),
+	},
+};
