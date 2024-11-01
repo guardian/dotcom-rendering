@@ -661,27 +661,6 @@ export const AdSlot = ({
 				/>
 			);
 		}
-		// case 'inline': {
-		// 	const advertId = `inline${index + 1}`;
-		// 	return (
-		// 		<div className="ad-slot-container" css={adContainerStyles}>
-		// 			<div
-		// 				id={`dfp-ad--${advertId}`}
-		// 				className={[
-		// 					'js-ad-slot',
-		// 					'ad-slot',
-		// 					`ad-slot--${advertId}`,
-		// 					'ad-slot--container-inline',
-		// 					'ad-slot--rendered',
-		// 				].join(' ')}
-		// 				css={inlineAdStyles}
-		// 				data-link-name={`ad slot ${advertId}`}
-		// 				data-name={advertId}
-		// 				aria-hidden="true"
-		// 			/>
-		// 		</div>
-		// 	);
-		// }
 		case 'liveblog-inline': {
 			const advertId = `inline${index + 1}`;
 			return (
