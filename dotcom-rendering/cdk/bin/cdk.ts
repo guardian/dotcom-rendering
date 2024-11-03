@@ -28,8 +28,9 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 	stage: 'PROD',
 	domainName: 'article-rendering.guardianapis.com',
 	scaling: {
-		minimumInstances: 36,
-		maximumInstances: 180,
+		minimumInstances: 72,
+		// DevX recommend max instances are 10x of min in PROD
+		maximumInstances: 720,
 		policies: {
 			step: {
 				cpu: cpuScalingSteps,
@@ -68,8 +69,8 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 	stage: 'PROD',
 	domainName: 'facia-rendering.guardianapis.com',
 	scaling: {
-		minimumInstances: 18,
-		maximumInstances: 180,
+		minimumInstances: 36,
+		maximumInstances: 360,
 		policies: {
 			step: {
 				cpu: cpuScalingSteps,
@@ -108,8 +109,8 @@ new RenderingCDKStack(cdkApp, 'TagPageRendering-PROD', {
 	stage: 'PROD',
 	domainName: 'tag-page-rendering.guardianapis.com',
 	scaling: {
-		minimumInstances: 15,
-		maximumInstances: 150,
+		minimumInstances: 30,
+		maximumInstances: 300,
 		policies: {
 			step: {
 				cpu: cpuScalingSteps,
@@ -148,8 +149,8 @@ new RenderingCDKStack(cdkApp, 'InteractiveRendering-PROD', {
 	stage: 'PROD',
 	domainName: 'interactive-rendering.guardianapis.com',
 	scaling: {
-		minimumInstances: 3,
-		maximumInstances: 30,
+		minimumInstances: 12,
+		maximumInstances: 120,
 		policies: {
 			step: {
 				cpu: cpuScalingSteps,
