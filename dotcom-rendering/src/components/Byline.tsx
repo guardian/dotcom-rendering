@@ -15,11 +15,13 @@ type Props = {
 	text: string;
 	isLabs: boolean;
 	size: SmallHeadlineSize;
+	/** Optional override of the standard text colour */
+	colour?: string;
 };
 
-const baseStyles = css`
+const baseStyles = (colour: string) => css`
 	display: block;
-	color: ${palette('--byline')};
+	color: ${colour};
 `;
 
 const bylineStyles = (size: SmallHeadlineSize, isLabs: boolean) => {
@@ -97,6 +99,15 @@ const bylineStyles = (size: SmallHeadlineSize, isLabs: boolean) => {
 	}
 };
 
-export const Byline = ({ text, isLabs, size }: Props) => {
-	return <span css={[baseStyles, bylineStyles(size, isLabs)]}>{text}</span>;
+export const Byline = ({
+	text,
+	isLabs,
+	size,
+	colour = palette('--byline'),
+}: Props) => {
+	return (
+		<span css={[baseStyles(colour), bylineStyles(size, isLabs)]}>
+			{text}
+		</span>
+	);
 };

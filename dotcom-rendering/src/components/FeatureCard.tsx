@@ -107,9 +107,9 @@ const overlayStyles = css`
 	flex-direction: column;
 	justify-content: flex-start;
 	flex-grow: 1;
-	padding: 8px;
-	row-gap: 8px;
-	backdrop-filter: blur(12px);
+	padding: ${space[2]}px;
+	row-gap: ${space[2]}px;
+	backdrop-filter: blur(12px) brightness(0.7);
 `;
 
 const getMedia = ({
@@ -166,6 +166,7 @@ const CardAge = ({
 			isOnwardContent={false}
 			absoluteServerTimes={absoluteServerTimes}
 			isTagPage={false}
+			colour={palette('--feature-card-footer-text')}
 		/>
 	);
 };
@@ -207,6 +208,7 @@ const CommentCount = ({
 					discussionApiUrl={discussionApiUrl}
 					discussionId={discussionId}
 					isOnwardContent={false}
+					colour={palette('--feature-card-footer-text')}
 				/>
 			</Island>
 		</Link>
@@ -364,6 +366,12 @@ export const FeatureCard = ({
 										byline={byline}
 										showByline={showByline}
 										isExternalLink={isExternalLink}
+										headlineColour={palette(
+											'--feature-card-headline',
+										)}
+										kickerColour={palette(
+											'--feature-card-kicker-text',
+										)}
 									/>
 
 									{starRating !== undefined ? (
