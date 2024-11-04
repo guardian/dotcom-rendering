@@ -4,7 +4,7 @@ import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStylin
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';
-// import { adContainerStyles } from './adStyles';
+import { spacefinderAdSlotStyles } from './adStyles';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
 import type { EditionId } from './edition';
 import { RenderArticleElement } from './renderElement';
@@ -14,15 +14,6 @@ import { withSignInGateSlot } from './withSignInGateSlot';
 const commercialPosition = css`
 	position: relative;
 `;
-
-// These styles are applied to dynamic ad slots (i.e. slots that are not fixed), e.g. ads inserted
-// by spacefinder across all layout types (articles, comments, etc)
-//
-// spacefinder is scoped to placing elements in spaces within the .article-body-commercial-selector
-// hence we scope the styles at the same level
-// const adStylesDynamic = css`
-// 	${adContainerStyles}
-// `;
 
 type Props = {
 	format: ArticleFormat;
@@ -111,7 +102,7 @@ export const ArticleRenderer = ({
 					? interactiveLegacyClasses.contentMainColumn
 					: '',
 			].join(' ')}
-			css={[commercialPosition]}
+			css={[commercialPosition, spacefinderAdSlotStyles]}
 		>
 			{renderingTarget === 'Apps'
 				? renderedElements

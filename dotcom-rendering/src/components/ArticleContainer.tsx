@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { from, until } from '@guardian/source/foundations';
-import { articleAdSlotStyles } from '../lib/adStyles';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 
 type Props = {
@@ -61,9 +60,5 @@ const articleWrapper = css`
 `;
 
 export const ArticleContainer = ({ children, format }: Props) => {
-	return (
-		<div css={[articleWrapper, articleWidth(format), articleAdSlotStyles]}>
-			{children}
-		</div>
-	);
+	return <div css={[articleWrapper, articleWidth(format)]}>{children}</div>;
 };

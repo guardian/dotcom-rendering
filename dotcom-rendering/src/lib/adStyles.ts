@@ -5,7 +5,7 @@ import { palette } from '../palette';
 
 const labelHeight = constants.AD_LABEL_HEIGHT;
 
-export const labelBoxStyles = css`
+const labelBoxStyles = css`
 	${textSans12};
 	height: ${labelHeight}px;
 	max-height: ${labelHeight}px;
@@ -214,16 +214,26 @@ const inlineAdSlotStyles = css`
 	}
 `;
 
-/* Styles applied to all ads regardless of their position, or method of insertion */
+/*
+	Styles applied to all ads regardless of their position, or method of insertion,
+	These are applied as part of `rootStyles`
+ */
 const rootAdStyles = [labelStyles, adSlotStyles, adSlotContainerStyles];
 
-/* Styles applied only to ads within an article inserted by spacefinder added to the ArticleContainer component */
-const articleAdSlotStyles = [inlineAdSlotContainerStyles, inlineAdSlotStyles];
+/*
+	Styles applied only to ads within an article inserted by spacefinder
+	applied to the ArticleRenderer component which spacefinder is scoped
+	to via the `.article-body-commercial-selector` class
+*/
+const spacefinderAdSlotStyles = [
+	inlineAdSlotContainerStyles,
+	inlineAdSlotStyles,
+];
 
 export {
 	labelHeight,
-	adSlotStyles,
-	articleAdSlotStyles,
+	labelBoxStyles,
 	labelStyles,
 	rootAdStyles,
+	spacefinderAdSlotStyles,
 };
