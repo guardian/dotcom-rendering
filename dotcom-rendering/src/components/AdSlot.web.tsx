@@ -18,8 +18,12 @@ import type { FEArticleType } from '../types/frontend';
 import { AdBlockAsk } from './AdBlockAsk.importable';
 import { Island } from './Island';
 
-// When requesting from Ad Manager these are all "inline" slots
-type InlineSlot = 'liveblog-inline' | 'liveblog-inline-mobile' | 'mobile-front';
+// There are multiple of these ad slots on the page
+type IndexedSlot =
+	| 'fronts-banner'
+	| 'liveblog-inline'
+	| 'liveblog-inline-mobile'
+	| 'mobile-front';
 
 // TODO move to commercial
 type SlotNamesWithPageSkin = SlotName | 'pageskin';
@@ -48,8 +52,8 @@ type DefaultProps = {
 // for dark ad labels
 type ColourScheme = 'light' | 'dark';
 
-type InlineProps = {
-	position: InlineSlot;
+type IndexedSlotProps = {
+	position: IndexedSlot;
 	colourScheme?: ColourScheme;
 	index: number;
 	shouldHideReaderRevenue?: never;
@@ -63,7 +67,7 @@ type RightProps = {
 };
 
 type RemainingProps = {
-	position: Exclude<ServerRenderedSlot, InlineSlot>;
+	position: Exclude<ServerRenderedSlot, IndexedSlot>;
 	colourScheme?: ColourScheme;
 	index?: never;
 	shouldHideReaderRevenue?: never;
@@ -76,7 +80,7 @@ type RemainingProps = {
  * - If `position` is `right` then we expect the `shouldHideReaderRevenue` prop
  * - If not, then we explicitly refuse these properties
  */
-type Props = DefaultProps & (RightProps | InlineProps | RemainingProps);
+type Props = DefaultProps & (RightProps | IndexedSlotProps | RemainingProps);
 
 const halfPageAdHeight = adSizes.halfPage.height;
 
