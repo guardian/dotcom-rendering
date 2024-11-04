@@ -13,8 +13,8 @@ import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import {
 	getLastOneOffContributionTimestamp,
-	hasCmpConsentForArticleCount,
 	hasCmpConsentForBrowserId,
+	hasCmpConsentForWeeklyArticleCount,
 	hasOptedOutOfArticleCount,
 	isRecurringContributor,
 	MODULES_VERSION,
@@ -150,7 +150,8 @@ export const canShowReaderRevenueEpic = async (
 		? lazyFetchEmailWithTimeout(idApiUrl)
 		: undefined;
 
-	const hasConsentForArticleCount = await hasCmpConsentForArticleCount();
+	const hasConsentForArticleCount =
+		await hasCmpConsentForWeeklyArticleCount();
 
 	return {
 		show: true,
