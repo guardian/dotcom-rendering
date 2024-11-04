@@ -325,6 +325,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						heading={content.mainContent.heading}
 						mobileHeading={content.mobileContent.heading}
 						headerSettings={templateSettings.headerSettings}
+						headingSize={design.fonts?.heading.size ?? 'medium'}
 					/>
 				</div>
 				<div css={styles.contentContainer(showReminder)}>
