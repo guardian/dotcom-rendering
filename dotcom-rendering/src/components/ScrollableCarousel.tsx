@@ -37,11 +37,13 @@ const gridGap = '20px';
 const themeButton: Partial<ThemeButton> = {
 	borderTertiary: palette('--carousel-chevron-border'),
 	textTertiary: palette('--carousel-chevron'),
+	backgroundTertiaryHover: palette('--carousel-chevron-hover'),
 };
 
 const themeButtonDisabled: Partial<ThemeButton> = {
 	borderTertiary: palette('--carousel-chevron-border-disabled'),
 	textTertiary: palette('--carousel-chevron-disabled'),
+	backgroundTertiaryHover: palette('--carousel-chevron-hover'),
 };
 
 const containerStyles = css`
