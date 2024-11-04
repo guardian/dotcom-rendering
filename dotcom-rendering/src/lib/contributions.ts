@@ -26,7 +26,7 @@ export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
 	'gu.contributions.contrib-timestamp';
 
 //  Local storage keys
-const DAILY_ARTICLE_COUNT_KEY = 'gu.history.dailyArticleCount';
+// const DAILY_ARTICLE_COUNT_KEY = 'gu.history.dailyArticleCount';
 const WEEKLY_ARTICLE_COUNT_KEY = 'gu.history.weeklyArticleCount';
 export const NO_RR_BANNER_KEY = 'gu.noRRBanner';
 
@@ -184,7 +184,9 @@ export const hasArticleCountOptOutCookie = (): boolean =>
 	getCookie({ name: OPT_OUT_OF_ARTICLE_COUNT_COOKIE }) !== null;
 
 const removeArticleCountsFromLocalStorage = () => {
-	storage.local.remove(DAILY_ARTICLE_COUNT_KEY);
+	// eslint-disable-next-line no-console
+	console.log('Removing article counts from local storage');
+	// storage.local.remove(DAILY_ARTICLE_COUNT_KEY);
 	storage.local.remove(WEEKLY_ARTICLE_COUNT_KEY);
 };
 
