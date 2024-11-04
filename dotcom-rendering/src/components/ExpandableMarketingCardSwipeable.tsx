@@ -144,6 +144,7 @@ export const ExpandableMarketingCardSwipeable = ({
 		return (
 			<div css={[stickyContainerStyles]}>
 				<div
+					data-link-name="us-expandable-marketing-card expand"
 					css={[
 						absoluteContainerStyles,
 						isDown &&
