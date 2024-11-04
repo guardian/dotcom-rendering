@@ -28,9 +28,9 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 	stage: 'PROD',
 	domainName: 'article-rendering.guardianapis.com',
 	scaling: {
-		minimumInstances: 72,
+		minimumInstances: 48,
 		// DevX recommend max instances are 10x of min in PROD
-		maximumInstances: 720,
+		maximumInstances: 480,
 		policies: {
 			step: {
 				cpu: cpuScalingSteps,
