@@ -21,12 +21,7 @@ const labelStyles = css`
 	.ad-slot[data-label-show='true']::before {
 		content: attr(ad-label-text);
 		display: block;
-		position: relative;
 		${labelBoxStyles}
-	}
-
-	.ad-slot[data-label-show='true'].ad-slot--interscroller::before {
-		display: none;
 	}
 
 	.ad-slot__adtest-cookie-clear-link {
@@ -41,19 +36,35 @@ const labelStyles = css`
 	}
 `;
 
-const adContainerCentreSlotStyles = css`
-	&.ad-slot-container--centre-slot {
-		width: fit-content;
-		margin: 0 auto;
-	}
-`;
-
-// const adContainerStyles = [labelStyles, adContainerCentreSlotStyles];
-
 const adSlotContainerStyles = css`
 	.ad-slot-container {
 		max-width: 100vw;
 		position: relative;
+	}
+`;
+
+const adSlotStyles = css`
+	.ad-slot {
+		/* this is centring the ad iframe as they are display: inline; elements by default */
+		text-align: center;
+
+		/*
+			Ensure that the ad slot is centred,
+			the element with this class name is inserted by GAM into the ad slot
+		*/
+		.ad-slot__content {
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		@media print {
+			/* stylelint-disable-next-line declaration-no-important */
+			display: none !important;
+		}
+
+		&.ad-slot--collapse {
+			display: none;
+		}
 	}
 `;
 
@@ -89,12 +100,17 @@ const inlineAdSlotContainerStyles = css`
 				/* must be behind as the actual ad is on top of the iframe */
 				z-index: -1;
 			}
+
+			/* Hide default label, interscrollers have a special label */
+			&::before {
+				display: none;
+			}
 		}
 	}
 
 	/*
-	Some ads are in the right column, inline2+ for example.
-*/
+		To push inline2+ on desktop to the right column
+	*/
 	.ad-slot-container--offset-right {
 		${from.desktop} {
 			float: right;
@@ -113,41 +129,15 @@ const inlineAdSlotContainerStyles = css`
 	}
 `;
 
-const adSlotStyles = css`
-	.ad-slot {
-		/* this is centring the ad iframe as they are display: inline; elements by default */
-		text-align: center;
-
-		${from.tablet} {
+const inlineAdSlotStyles = css`
+	${from.tablet} {
+		.ad-slot {
 			/* from tablet the ad slot will stretch to the full width of the container and the iframe will be centred by the text-align: center; on the container */
 			flex: 1;
 			/* Ensures slots do not take on 100% of the container height, allowing them to be sticky in containers */
 			align-self: flex-start;
 		}
-
-		/*
-			Ensure that the ad slot is centred,
-			the element with this class name is inserted by GAM into the ad slot
-		*/
-		.ad-slot__content {
-			margin-left: auto;
-			margin-right: auto;
-		}
-
-		@media print {
-			/* stylelint-disable-next-line declaration-no-important */
-			display: none !important;
-		}
-
-		&.ad-slot--collapse {
-			display: none;
-		}
 	}
-`;
-
-/* Styles applied only to ads within an article inserted by spacefinder */
-const articleAdSlotStyles = css`
-	${inlineAdSlotContainerStyles}
 
 	/* Give ad slots inserted on the client side a placeholder height.
    Let the ad slot take control of its height once rendered. */
@@ -224,16 +214,16 @@ const articleAdSlotStyles = css`
 	}
 `;
 
-/* Styles applied to all ads regardless of their position */
+/* Styles applied to all ads regardless of their position, or method of insertion */
 const rootAdStyles = [labelStyles, adSlotStyles, adSlotContainerStyles];
+
+/* Styles applied only to ads within an article inserted by spacefinder added to the ArticleContainer component */
+const articleAdSlotStyles = [inlineAdSlotContainerStyles, inlineAdSlotStyles];
 
 export {
 	labelHeight,
-	// adSlotContainerStyles,
 	adSlotStyles,
 	articleAdSlotStyles,
 	labelStyles,
-	adContainerCentreSlotStyles,
-	// adContainerStyles,
 	rootAdStyles,
 };

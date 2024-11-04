@@ -18,12 +18,26 @@ import type { FEArticleType } from '../types/frontend';
 import { AdBlockAsk } from './AdBlockAsk.importable';
 import { Island } from './Island';
 
-type InlinePosition =
-	| 'fronts-banner'
+// When requesting from Ad Manager these are all "inline" slots
+type InlineSlot = 'liveblog-inline' | 'liveblog-inline-mobile' | 'mobile-front';
+
+// TODO move to commercial
+type SlotNamesWithPageSkin = SlotName | 'pageskin';
+
+type ServerRenderedSlot = Exclude<
+	SlotNamesWithPageSkin,
+	| 'carrot'
+	| 'comments-expanded'
+	| 'crossword-banner'
+	| 'crossword-banner-mobile'
+	| 'exclusion'
+	| 'external'
 	| 'inline'
-	| 'liveblog-inline'
-	| 'liveblog-inline-mobile'
-	| 'mobile-front';
+	| 'mobile-sticky'
+	| 'football-right'
+	| 'sponsor-logo'
+	| 'interactive'
+>;
 
 type DefaultProps = {
 	display?: ArticleDisplay;
@@ -31,14 +45,11 @@ type DefaultProps = {
 	hasPageskin?: boolean;
 };
 
-// TODO move to commercial
-type SlotNamesWithPageSkin = SlotName | 'pageskin';
-
 // for dark ad labels
 type ColourScheme = 'light' | 'dark';
 
 type InlineProps = {
-	position: InlinePosition;
+	position: InlineSlot;
 	colourScheme?: ColourScheme;
 	index: number;
 	shouldHideReaderRevenue?: never;
@@ -52,7 +63,7 @@ type RightProps = {
 };
 
 type RemainingProps = {
-	position: Exclude<SlotNamesWithPageSkin, InlinePosition | 'right'>;
+	position: Exclude<ServerRenderedSlot, InlineSlot>;
 	colourScheme?: ColourScheme;
 	index?: never;
 	shouldHideReaderRevenue?: never;
@@ -82,19 +93,6 @@ const darkLabelStyles = css`
 `;
 
 /**
- * For CSS in Frontend, see mark: 9473ae05-a901-4a8d-a51d-1b9c894d6e1f
- */
-const fluidAdStyles = css`
-	&.ad-slot--fluid {
-		min-height: 250px;
-		line-height: 10px;
-		padding: 0;
-		margin: 0;
-		overflow: visible;
-	}
-`;
-
-/**
  * Usage according to DAP (Digital Ad Production)
  *
  * #### Desktop
@@ -109,8 +107,13 @@ const fluidAdStyles = css`
  * - `interscroller` &rarr; `top-above-nav`
  * - `mobile-revealer` &rarr; `top-above-nav`
  */
-const fluidFullWidthAdStyles = css`
+const fluidAdStyles = css`
 	&.ad-slot--fluid {
+		min-height: 250px;
+		line-height: 10px;
+		padding: 0;
+		margin: 0;
+		overflow: visible;
 		width: 100%;
 	}
 `;
@@ -133,6 +136,11 @@ const showcaseRightColumnStyles = css`
 const merchandisingAdContainerStyles = css`
 	display: flex;
 	justify-content: center;
+
+	&.ad-slot-container--centre-slot {
+		width: fit-content;
+		margin: 0 auto;
+	}
 `;
 
 const merchandisingAdStyles = css`
@@ -519,7 +527,7 @@ export const AdSlot = ({
 						'ad-slot--mpu-banner-ad',
 						'ad-slot--rendered',
 					].join(' ')}
-					css={[fluidAdStyles, fluidFullWidthAdStyles]}
+					css={[fluidAdStyles]}
 					data-link-name="ad slot top-above-nav"
 					data-name="top-above-nav"
 					aria-hidden="true"
@@ -542,11 +550,7 @@ export const AdSlot = ({
 								'ad-slot--mpu-banner-ad',
 								'ad-slot--rendered',
 							].join(' ')}
-							css={[
-								fluidAdStyles,
-								fluidFullWidthAdStyles,
-								mostPopAdStyles,
-							]}
+							css={[fluidAdStyles, mostPopAdStyles]}
 							data-link-name="ad slot mostpop"
 							data-name="mostpop"
 							aria-hidden="true"
@@ -568,11 +572,7 @@ export const AdSlot = ({
 							'ad-slot',
 							'ad-slot--merchandising-high',
 						].join(' ')}
-						css={[
-							fluidAdStyles,
-							fluidFullWidthAdStyles,
-							merchandisingAdStyles,
-						]}
+						css={[fluidAdStyles, merchandisingAdStyles]}
 						data-link-name="ad slot merchandising-high"
 						data-name="merchandising-high"
 						data-refresh="false"
@@ -594,11 +594,7 @@ export const AdSlot = ({
 							'ad-slot',
 							'ad-slot--merchandising',
 						].join(' ')}
-						css={[
-							fluidAdStyles,
-							fluidFullWidthAdStyles,
-							merchandisingAdStyles,
-						]}
+						css={[fluidAdStyles, merchandisingAdStyles]}
 						data-link-name="ad slot merchandising"
 						data-name="merchandising"
 						aria-hidden="true"
@@ -629,11 +625,7 @@ export const AdSlot = ({
 								'ad-slot--rendered',
 								hasPageskin && 'ad-slot--collapse',
 							].join(' ')}
-							css={[
-								fluidAdStyles,
-								fluidFullWidthAdStyles,
-								frontsBannerAdStyles,
-							]}
+							css={[fluidAdStyles, frontsBannerAdStyles]}
 							data-link-name={`ad slot ${advertId}`}
 							data-name={`${advertId}`}
 							aria-hidden="true"
@@ -719,11 +711,7 @@ export const AdSlot = ({
 							'ad-slot--liveblog-top',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[
-							fluidAdStyles,
-							fluidFullWidthAdStyles,
-							liveBlogTopAdStyles,
-						]}
+						css={[fluidAdStyles, liveBlogTopAdStyles]}
 						data-link-name="ad slot liveblog-top"
 						data-name="liveblog-top"
 						aria-hidden="true"
@@ -746,7 +734,7 @@ export const AdSlot = ({
 							'mobile-only',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[mobileFrontAdStyles, fluidFullWidthAdStyles]}
+						css={[mobileFrontAdStyles]}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
 						aria-hidden="true"
@@ -788,11 +776,7 @@ export const AdSlot = ({
 							'ad-slot--article-end',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[
-							fluidAdStyles,
-							fluidFullWidthAdStyles,
-							articleEndAdStyles,
-						]}
+						css={[fluidAdStyles, articleEndAdStyles]}
 						data-link-name="ad slot article-end"
 						data-name="article-end"
 						aria-hidden="true"
@@ -800,8 +784,6 @@ export const AdSlot = ({
 				</div>
 			);
 		}
-		default:
-			return null;
 	}
 };
 
