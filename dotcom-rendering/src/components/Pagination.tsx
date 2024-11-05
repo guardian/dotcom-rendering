@@ -57,6 +57,20 @@ const decidePaginationCss = css`
 	}
 `;
 
+const getPagePath = (
+	pagePath: string,
+	renderingTarget: RenderingTarget,
+	fragment: string,
+) => {
+	const searchParams = new URLSearchParams(pagePath);
+
+	if (renderingTarget === 'Apps') {
+		searchParams.append('dcr', 'apps');
+	}
+
+	return `${searchParams.toString()}#${fragment}`;
+};
+
 export const Pagination = ({
 	currentPage,
 	totalPages,
@@ -67,7 +81,6 @@ export const Pagination = ({
 	renderingTarget,
 }: Props) => {
 	const cssOverrides = decidePaginationCss;
-	const appsParam = renderingTarget === 'Apps' ? '&dcr=apps' : '';
 
 	return (
 		<nav id={id} css={grid}>
@@ -86,7 +99,11 @@ export const Pagination = ({
 									iconSide="left"
 									hideLabel={true}
 									// There’s no pagination at the top of the newest page
-									href={`${newest}${appsParam}#maincontent`}
+									href={getPagePath(
+										newest,
+										renderingTarget,
+										'maincontent',
+									)}
 									cssOverrides={cssOverrides}
 								>
 									Newest
@@ -99,7 +116,11 @@ export const Pagination = ({
 									icon={<SvgChevronLeftDouble />}
 									iconSide="left"
 									// There’s no pagination at the top of the newest page
-									href={`${newest}${appsParam}#maincontent`}
+									href={getPagePath(
+										newest,
+										renderingTarget,
+										'maincontent',
+									)}
 									cssOverrides={cssOverrides}
 								>
 									Newest
@@ -113,7 +134,7 @@ export const Pagination = ({
 							priority="tertiary"
 							icon={<SvgChevronLeftSingle />}
 							hideLabel={true}
-							href={`${newer}${appsParam}#${id}`}
+							href={getPagePath(newer, renderingTarget, id)}
 							cssOverrides={cssOverrides}
 						>
 							Previous
@@ -142,7 +163,7 @@ export const Pagination = ({
 							priority="tertiary"
 							icon={<SvgChevronRightSingle />}
 							hideLabel={true}
-							href={`${older}${appsParam}#${id}`}
+							href={getPagePath(older, renderingTarget, id)}
 							cssOverrides={cssOverrides}
 						>
 							Next
@@ -156,7 +177,11 @@ export const Pagination = ({
 									priority="tertiary"
 									icon={<SvgChevronRightDouble />}
 									iconSide="right"
-									href={`${oldest}${appsParam}#${id}`}
+									href={getPagePath(
+										oldest,
+										renderingTarget,
+										id,
+									)}
 									hideLabel={true}
 									cssOverrides={cssOverrides}
 								>
@@ -169,7 +194,11 @@ export const Pagination = ({
 									priority="tertiary"
 									icon={<SvgChevronRightDouble />}
 									iconSide="right"
-									href={`${oldest}${appsParam}#${id}`}
+									href={getPagePath(
+										oldest,
+										renderingTarget,
+										id,
+									)}
 									cssOverrides={cssOverrides}
 								>
 									Oldest
