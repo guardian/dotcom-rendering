@@ -133,7 +133,7 @@ export const KeyEventCard = ({
 			<Link
 				priority="secondary"
 				cssOverrides={css([linkStyles, isSummary && summaryStyles])}
-				href={`${url}${appsParam}`}
+				href={url}
 				data-link-name={`key event card | ${cardPosition}`}
 			>
 				<div css={timeStyles}>
