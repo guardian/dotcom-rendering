@@ -102,11 +102,9 @@ const carouselStyles = css`
 	grid-auto-flow: column;
 	gap: 20px;
 	overflow-x: auto;
-	overflow-y: hidden;
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
-	overscroll-behavior-x: contain;
-	overscroll-behavior-y: auto;
+	overscroll-behavior: contain auto;
 	/**
 	 * Hide scrollbars
 	 * See: https://stackoverflow.com/a/38994837
@@ -115,17 +113,19 @@ const carouselStyles = css`
 		display: none; /* Safari and Chrome */
 	}
 	scrollbar-width: none; /* Firefox */
-	position: relative;
 
 	padding-left: 10px;
+	padding-right: 10px;
 	scroll-padding-left: 10px;
 	${from.mobileLandscape} {
 		padding-left: 20px;
+		padding-right: 20px;
 		scroll-padding-left: 20px;
 	}
 	${from.tablet} {
-		padding-left: 0px;
-		scroll-padding-left: 0px;
+		padding-left: 0;
+		padding-right: 0;
+		scroll-padding-left: 0;
 	}
 	${from.leftCol} {
 		padding-left: 20px;
@@ -186,14 +186,31 @@ const generateCarouselColumnStyles = (
 
 	return css`
 		/**
-		 * On mobile, a 32px wide 'peeping' card is always shown to the right in
-		 * addition to the specified number of visible cards to indicate the
-		 * carousel can be scrolled.
+		 * On mobile a 32px slice of the next card is shown to indicate there
+		 * are more cards that can be scrolled to. Extra padding is also added
+		 * to the left and right to align cards with the page grid as the
+		 * carousel extends into the outer margins on mobile.
+		 *
+		 * These values are divided by the number of visible cards and
+		 * subtracted from their width so they are shown at the correct size.
 		 */
 		grid-template-columns: repeat(
 			${totalCards},
-			calc(${100 / visibleCardsOnMobile}% - ${offsetPeepingCardWidth}px)
+			calc(
+				(100% / ${visibleCardsOnMobile}) - ${offsetPeepingCardWidth}px +
+					${10 / visibleCardsOnMobile}px
+			)
 		);
+		${from.mobileLandscape} {
+			grid-template-columns: repeat(
+				${totalCards},
+				calc(
+					(100% / ${visibleCardsOnMobile}) -
+						${offsetPeepingCardWidth}px +
+						${20 / visibleCardsOnMobile}px
+				)
+			);
+		}
 		${from.tablet} {
 			grid-template-columns: repeat(
 				${totalCards},
