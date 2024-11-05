@@ -4375,8 +4375,10 @@ const carouselTitleHighlightDark: PaletteFunction = ({ theme, design }) => {
 
 const carouselChevronLight: PaletteFunction = () => sourcePalette.neutral[7];
 const carouselChevronDark: PaletteFunction = () => sourcePalette.neutral[86];
-const carouselChevronHoverLight: PaletteFunction = () => '#e5e5e5'; // Source tertiary button default hover colour - not in palette
-const carouselChevronHoverDark: PaletteFunction = () => '#e5e5e5';
+const carouselChevronHoverLight: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[73], 0.2);
+const carouselChevronHoverDark: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[73], 0.2);
 const carouselChevronBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[73];
 const carouselChevronBorderDark: PaletteFunction = () =>
