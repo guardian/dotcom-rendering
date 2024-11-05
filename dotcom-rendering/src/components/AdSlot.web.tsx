@@ -171,6 +171,10 @@ const rightAdStyles = css`
 	max-width: 300px;
 `;
 
+const liveblogInlineContainerStyles = css`
+	margin: 12px auto;
+`;
+
 const liveblogInlineAdStyles = css`
 	position: relative;
 	min-height: ${adSizes.mpu.height + labelHeight}px;
@@ -660,7 +664,10 @@ export const AdSlot = ({
 		case 'liveblog-inline': {
 			const advertId = `inline${index + 1}`;
 			return (
-				<div className="ad-slot-container ad-slot-desktop">
+				<div
+					className="ad-slot-container ad-slot-desktop"
+					css={liveblogInlineContainerStyles}
+				>
 					<div
 						id={`dfp-ad--${advertId}`}
 						className={[
@@ -682,7 +689,10 @@ export const AdSlot = ({
 		case 'liveblog-inline-mobile': {
 			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
-				<div className="ad-slot-container ad-slot-mobile">
+				<div
+					className="ad-slot-container ad-slot-mobile"
+					css={liveblogInlineContainerStyles}
+				>
 					<div
 						id={`dfp-ad--${advertId}--mobile`}
 						className={[
