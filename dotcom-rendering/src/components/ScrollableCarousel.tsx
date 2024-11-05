@@ -3,7 +3,6 @@ import {
 	from,
 	space,
 	textSansBold17Object,
-	until,
 } from '@guardian/source/foundations';
 import type { ThemeButton } from '@guardian/source/react-components';
 import {
@@ -47,6 +46,7 @@ const themeButtonDisabled: Partial<ThemeButton> = {
 };
 
 const containerStyles = css`
+	position: relative;
 	/* Extend carousel into outer margins on mobile */
 	margin-left: -10px;
 	margin-right: -10px;
@@ -60,6 +60,16 @@ const containerStyles = css`
 	}
 	${from.leftCol} {
 		margin-left: 0;
+		::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: -0;
+			width: 1px;
+			background-color: ${palette('--card-border-top')};
+			transform: translateX(-50%);
+		}
 	}
 `;
 
