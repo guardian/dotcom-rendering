@@ -9,6 +9,7 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
+import { RenderingTarget } from 'src/types/renderingTarget';
 
 type Props = {
 	currentPage: number;
@@ -17,6 +18,7 @@ type Props = {
 	newer?: string;
 	oldest?: string;
 	older?: string;
+	renderingTarget: RenderingTarget;
 };
 
 /** Used to scroll the page to this point when using permalinks */
@@ -62,8 +64,10 @@ export const Pagination = ({
 	older,
 	newest,
 	newer,
+	renderingTarget,
 }: Props) => {
 	const cssOverrides = decidePaginationCss;
+	const appsParam = renderingTarget === 'Apps' ? '&dcr=apps' : '';
 
 	return (
 		<nav id={id} css={grid}>
@@ -82,7 +86,7 @@ export const Pagination = ({
 									iconSide="left"
 									hideLabel={true}
 									// There’s no pagination at the top of the newest page
-									href={`${newest}#maincontent`}
+									href={`${newest}${appsParam}#maincontent`}
 									cssOverrides={cssOverrides}
 								>
 									Newest
@@ -95,7 +99,7 @@ export const Pagination = ({
 									icon={<SvgChevronLeftDouble />}
 									iconSide="left"
 									// There’s no pagination at the top of the newest page
-									href={`${newest}#maincontent`}
+									href={`${newest}${appsParam}#maincontent`}
 									cssOverrides={cssOverrides}
 								>
 									Newest
@@ -109,7 +113,7 @@ export const Pagination = ({
 							priority="tertiary"
 							icon={<SvgChevronLeftSingle />}
 							hideLabel={true}
-							href={`${newer}#${id}`}
+							href={`${newer}${appsParam}#${id}`}
 							cssOverrides={cssOverrides}
 						>
 							Previous
@@ -138,7 +142,7 @@ export const Pagination = ({
 							priority="tertiary"
 							icon={<SvgChevronRightSingle />}
 							hideLabel={true}
-							href={`${older}#${id}`}
+							href={`${older}${appsParam}#${id}`}
 							cssOverrides={cssOverrides}
 						>
 							Next
@@ -152,7 +156,7 @@ export const Pagination = ({
 									priority="tertiary"
 									icon={<SvgChevronRightDouble />}
 									iconSide="right"
-									href={`${oldest}#${id}`}
+									href={`${oldest}${appsParam}#${id}`}
 									hideLabel={true}
 									cssOverrides={cssOverrides}
 								>
@@ -165,7 +169,7 @@ export const Pagination = ({
 									priority="tertiary"
 									icon={<SvgChevronRightDouble />}
 									iconSide="right"
-									href={`${oldest}#${id}`}
+									href={`${oldest}${appsParam}#${id}`}
 									cssOverrides={cssOverrides}
 								>
 									Oldest

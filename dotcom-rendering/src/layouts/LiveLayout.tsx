@@ -777,6 +777,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													oldest={pagination.oldest}
 													newer={pagination.newer}
 													older={pagination.older}
+													renderingTarget={
+														renderingTarget
+													}
 												/>
 											)}
 											<ArticleBody
@@ -849,6 +852,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													oldest={pagination.oldest}
 													newer={pagination.newer}
 													older={pagination.older}
+													renderingTarget={
+														renderingTarget
+													}
 												/>
 											)}
 											<StraightLines

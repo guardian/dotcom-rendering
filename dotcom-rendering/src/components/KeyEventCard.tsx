@@ -8,6 +8,7 @@ import {
 import { Link } from '@guardian/source/react-components';
 import { palette } from '../palette';
 import { DateTime } from './DateTime';
+import { useConfig } from './ConfigContext';
 
 interface Props {
 	id: string;
@@ -120,15 +121,19 @@ export const KeyEventCard = ({
 	cardPosition = 'unknown position',
 	absoluteServerTimes,
 }: Props) => {
+	const { renderingTarget } = useConfig();
+	const appsParam = renderingTarget === 'Apps' ? '&dcr=apps' : '';
+
 	const url = `?filterKeyEvents=${String(
 		filterKeyEvents,
-	)}&page=with:block-${id}#block-${id}`;
+	)}&page=with:block-${id}${appsParam}#block-${id}`;
+
 	return (
 		<li css={listItemStyles}>
 			<Link
 				priority="secondary"
 				cssOverrides={css([linkStyles, isSummary && summaryStyles])}
-				href={url}
+				href={`${url}${appsParam}`}
 				data-link-name={`key event card | ${cardPosition}`}
 			>
 				<div css={timeStyles}>
