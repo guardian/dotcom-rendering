@@ -59,7 +59,7 @@ const containerStyles = css`
 		margin-right: 10px;
 	}
 	${from.leftCol} {
-		margin-left: -10px;
+		margin-left: 0;
 	}
 `;
 
@@ -130,8 +130,8 @@ const carouselStyles = css`
 		scroll-padding-left: 0;
 	}
 	${from.leftCol} {
-		padding-left: 20px;
-		scroll-padding-left: 20px;
+		padding-left: 10px;
+		scroll-padding-left: 10px;
 	}
 `;
 
@@ -149,7 +149,7 @@ const itemStyles = css`
 	scroll-snap-align: start;
 	grid-area: span 1;
 	position: relative;
-	::before {
+	:not(:first-child)::before {
 		content: '';
 		position: absolute;
 		top: 0;
@@ -158,11 +158,6 @@ const itemStyles = css`
 		width: 1px;
 		background-color: ${palette('--card-border-top')};
 		transform: translateX(-50%);
-	}
-	${until.leftCol} {
-		:first-child::before {
-			background-color: transparent;
-		}
 	}
 `;
 
