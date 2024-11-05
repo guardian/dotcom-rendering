@@ -100,13 +100,18 @@ export const Review: Story = {
 	},
 };
 
-export const Sport: Story = {
+export const SportLiveBlog: Story = {
 	args: {
 		image: {
 			src: 'https://media.guim.co.uk/e9a9adba2ba6a984317eeb42ad0ef5dfbee0ed1d/0_229_4972_2984/master/4972.jpg',
 			altText: 'alt text',
 		},
-		format: { ...cardProps.format, theme: Pillar.Sport },
+		format: {
+			...cardProps.format,
+			theme: Pillar.Sport,
+			design: ArticleDesign.LiveBlog,
+		},
+		showPulsingDot: true,
 	},
 };
 
