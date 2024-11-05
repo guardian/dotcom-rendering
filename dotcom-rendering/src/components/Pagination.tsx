@@ -9,7 +9,7 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
-import { RenderingTarget } from 'src/types/renderingTarget';
+import type { RenderingTarget } from '../types/renderingTarget';
 
 type Props = {
 	currentPage: number;

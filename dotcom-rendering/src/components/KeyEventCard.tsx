@@ -7,8 +7,8 @@ import {
 } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
 import { palette } from '../palette';
-import { DateTime } from './DateTime';
 import { useConfig } from './ConfigContext';
+import { DateTime } from './DateTime';
 
 interface Props {
 	id: string;
