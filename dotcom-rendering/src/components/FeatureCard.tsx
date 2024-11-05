@@ -12,7 +12,6 @@ import type {
 	DCRSupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
-import { StarRatingComponent } from './Card/Card';
 import { CardAge as AgeStamp } from './Card/components/CardAge';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
@@ -29,6 +28,7 @@ import { ContainerOverrides } from './ContainerOverrides';
 import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
 import { MediaDuration } from './MediaDuration';
+import { StarRating } from './StarRating/StarRating';
 import { SupportingContent } from './SupportingContent';
 
 export type Position = 'inner' | 'outer' | 'none';
@@ -71,6 +71,7 @@ export type Props = {
 	isExternalLink: boolean;
 	/** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
 	aspectRatio?: AspectRatio;
+	showQuotes?: boolean;
 };
 
 const baseCardStyles = css`
@@ -110,6 +111,14 @@ const overlayStyles = css`
 	padding: ${space[2]}px;
 	row-gap: ${space[2]}px;
 	backdrop-filter: blur(12px) brightness(0.7);
+`;
+
+const starRatingWrapper = css`
+	background-color: ${palette('--star-rating-background')};
+	color: ${palette('--star-rating-fill')};
+	margin-top: ${space[1]}px;
+	display: inline-block;
+	width: fit-content;
 `;
 
 const getMedia = ({
@@ -244,6 +253,7 @@ export const FeatureCard = ({
 	absoluteServerTimes,
 	aspectRatio,
 	starRating,
+	showQuotes,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -350,7 +360,7 @@ export const FeatureCard = ({
 										headlineText={headlineText}
 										format={format}
 										fontSizes={headlineSizes}
-										showQuotes={false}
+										showQuotes={showQuotes}
 										kickerText={
 											format.design ===
 												ArticleDesign.LiveBlog &&
@@ -375,10 +385,12 @@ export const FeatureCard = ({
 									/>
 
 									{starRating !== undefined ? (
-										<StarRatingComponent
-											rating={starRating}
-											cardHasImage={!!image}
-										/>
+										<div css={starRatingWrapper}>
+											<StarRating
+												rating={starRating}
+												size="small"
+											/>
+										</div>
 									) : null}
 
 									{!!trailText && (
