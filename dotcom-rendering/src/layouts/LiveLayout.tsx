@@ -569,6 +569,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									filterKeyEvents={article.filterKeyEvents}
 									id={'key-events-carousel-desktop'}
 									absoluteServerTimes={absoluteServerTimes}
+									renderingTarget={renderingTarget}
 								/>
 							</Island>
 						</Hide>

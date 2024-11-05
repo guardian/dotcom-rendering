@@ -60,6 +60,7 @@ export const SummaryCard = () => (
 			filterKeyEvents={false}
 			isSummary={true}
 			absoluteServerTimes={true}
+			renderingTarget="Web"
 		/>
 	</ul>
 );
@@ -76,6 +77,7 @@ export const StandardCard = () => (
 			isSummary={events[0].isSummary}
 			filterKeyEvents={false}
 			absoluteServerTimes={true}
+			renderingTarget="Web"
 		/>
 	</ul>
 );
@@ -93,6 +95,7 @@ export const MultipleCards = () => (
 				isSummary={event.isSummary}
 				filterKeyEvents={false}
 				absoluteServerTimes={true}
+				renderingTarget="Web"
 			/>
 		))}
 	</ul>
