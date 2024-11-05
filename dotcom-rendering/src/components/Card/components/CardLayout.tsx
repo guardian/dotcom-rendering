@@ -62,8 +62,8 @@ const minWidth = (minWidthInPixels?: number) => {
  * existing layouts where the default position values are relied upon.
  */
 const decideDirection = (
-	imagePositionOnDesktop: ImagePositionType,
 	imagePositionOnMobile: ImagePositionType,
+	imagePositionOnDesktop: ImagePositionType,
 	hasAvatar?: boolean,
 ) => {
 	const imagePosition = {
@@ -79,40 +79,49 @@ const decideDirection = (
 			imagePositionOnMobile === 'bottom' &&
 			imagePositionOnDesktop === 'bottom'
 		) {
-			return [imagePosition['bottom'], imagePosition['bottom']];
+			return {
+				mobile: imagePosition['bottom'],
+				desktop: imagePosition['bottom'],
+			};
 		}
 
 		if (
 			imagePositionOnDesktop === 'left' ||
 			imagePositionOnDesktop === 'right'
 		) {
-			return [imagePosition['right'], imagePosition['right']];
+			return {
+				mobile: imagePosition['right'],
+				desktop: imagePosition['right'],
+			};
 		}
 
-		return [imagePosition['bottom'], imagePosition['right']];
+		return {
+			mobile: imagePosition['right'],
+			desktop: imagePosition['bottom'],
+		};
 	}
 
-	return [
-		imagePosition[imagePositionOnDesktop],
-		imagePosition[imagePositionOnMobile],
-	];
+	return {
+		mobile: imagePosition[imagePositionOnMobile],
+		desktop: imagePosition[imagePositionOnDesktop],
+	};
 };
 
 const decidePosition = (
-	imagePositionOnDesktop: ImagePositionType,
 	imagePositionOnMobile: ImagePositionType,
+	imagePositionOnDesktop: ImagePositionType,
 	hasAvatar?: boolean,
 ) => {
-	const [directionOnDesktop, directionOnMobile] = decideDirection(
-		imagePositionOnDesktop,
+	const { mobile, desktop } = decideDirection(
 		imagePositionOnMobile,
+		imagePositionOnDesktop,
 		hasAvatar,
 	);
 
 	return css`
-		flex-direction: ${directionOnMobile};
+		flex-direction: ${mobile};
 		${from.tablet} {
-			flex-direction: ${directionOnDesktop};
+			flex-direction: ${desktop};
 		}
 	`;
 };
@@ -150,8 +159,8 @@ export const CardLayout = ({
 				? videoWidth
 				: minWidth(minWidthInPixels),
 			decidePosition(
-				imagePositionOnDesktop,
 				imagePositionOnMobile,
+				imagePositionOnDesktop,
 				imageType === 'avatar',
 			),
 		]}
