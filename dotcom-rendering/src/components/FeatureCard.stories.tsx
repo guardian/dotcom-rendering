@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { breakpoints, from } from '@guardian/source/foundations';
+import { from } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { type Props as CardProps, FeatureCard } from './FeatureCard';
@@ -63,15 +63,6 @@ const CardWrapper = ({ children }: { children: React.ReactNode }) => {
 const meta = {
 	component: FeatureCard,
 	title: 'Components/FeatureCard',
-	parameters: {
-		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.tablet,
-				breakpoints.wide,
-			],
-		},
-	},
 	args: cardProps,
 	render: (args) => (
 		<CardWrapper>
@@ -112,6 +103,7 @@ export const SportLiveBlog: Story = {
 			design: ArticleDesign.LiveBlog,
 		},
 		showPulsingDot: true,
+		showClock: true,
 	},
 };
 
