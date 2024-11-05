@@ -222,6 +222,11 @@ export const hasOptedOutOfArticleCount = async (): Promise<boolean> => {
 	return !hasCmpConsent || hasArticleCountOptOutCookie();
 };
 
+export const hasOptedOutOfWeeklyArticleCount = async (): Promise<boolean> => {
+	const hasCmpConsent = await hasCmpConsentForWeeklyArticleCount();
+	return !hasCmpConsent || hasArticleCountOptOutCookie();
+};
+
 // A hook to find out if a user has opted out of article counting
 export const useHasOptedOutOfArticleCount = (): boolean | 'Pending' => {
 	const [hasOptedOut, setHasOptedOut] = useState<boolean | 'Pending'>(

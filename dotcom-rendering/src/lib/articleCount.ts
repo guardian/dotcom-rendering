@@ -5,7 +5,7 @@ import {
 } from '@guardian/support-dotcom-components';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
-import { hasOptedOutOfArticleCount } from '../lib/contributions';
+import { hasOptedOutOfWeeklyArticleCount } from '../lib/contributions';
 import type { DailyArticleHistory } from '../lib/dailyArticleCount';
 import {
 	getDailyArticleCount,
@@ -23,8 +23,6 @@ export const getArticleCounts = async (
 	tags: TagType[],
 	contentType: string,
 ): Promise<ArticleCounts | undefined> => {
-	if (await hasOptedOutOfArticleCount()) return undefined;
-
 	// See https://github.com/guardian/frontend/blob/9c8707d894c858dd17de1c7c1499f6b91f5287bc/common/app/model/DotcomContentType.scala#L29
 	const shouldIncrement = [
 		'article',
@@ -45,7 +43,10 @@ export const getArticleCounts = async (
 		.filter((tag) => ['tone', 'keyword'].includes(tag.type.toLowerCase()))
 		.map((tag) => tag.id);
 
-	if (!window.guardian.weeklyArticleCount) {
+	if (
+		!window.guardian.weeklyArticleCount &&
+		!(await hasOptedOutOfWeeklyArticleCount())
+	) {
 		if (shouldIncrement) {
 			incrementWeeklyArticleCount(
 				storage.local,
