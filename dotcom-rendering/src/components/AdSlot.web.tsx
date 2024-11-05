@@ -544,7 +544,7 @@ export const AdSlot = ({
 								'ad-slot--mpu-banner-ad',
 								'ad-slot--rendered',
 							].join(' ')}
-							css={[fluidAdStyles, mostPopAdStyles]}
+							css={[mostPopAdStyles]}
 							data-link-name="ad slot mostpop"
 							data-name="mostpop"
 							aria-hidden="true"
@@ -566,7 +566,7 @@ export const AdSlot = ({
 							'ad-slot',
 							'ad-slot--merchandising-high',
 						].join(' ')}
-						css={[fluidAdStyles, merchandisingAdStyles]}
+						css={[merchandisingAdStyles]}
 						data-link-name="ad slot merchandising-high"
 						data-name="merchandising-high"
 						data-refresh="false"
@@ -588,7 +588,7 @@ export const AdSlot = ({
 							'ad-slot',
 							'ad-slot--merchandising',
 						].join(' ')}
-						css={[fluidAdStyles, merchandisingAdStyles]}
+						css={[merchandisingAdStyles]}
 						data-link-name="ad slot merchandising"
 						data-name="merchandising"
 						aria-hidden="true"
@@ -619,7 +619,7 @@ export const AdSlot = ({
 								'ad-slot--rendered',
 								hasPageskin && 'ad-slot--collapse',
 							].join(' ')}
-							css={[fluidAdStyles, frontsBannerAdStyles]}
+							css={[frontsBannerAdStyles]}
 							data-link-name={`ad slot ${advertId}`}
 							data-name={`${advertId}`}
 							aria-hidden="true"
@@ -711,7 +711,7 @@ export const AdSlot = ({
 							'ad-slot--liveblog-top',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[fluidAdStyles, liveBlogTopAdStyles]}
+						css={[liveBlogTopAdStyles]}
 						data-link-name="ad slot liveblog-top"
 						data-name="liveblog-top"
 						aria-hidden="true"
@@ -776,7 +776,7 @@ export const AdSlot = ({
 							'ad-slot--article-end',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[fluidAdStyles, articleEndAdStyles]}
+						css={[articleEndAdStyles]}
 						data-link-name="ad slot article-end"
 						data-name="article-end"
 						aria-hidden="true"

@@ -65,6 +65,29 @@ const adSlotStyles = css`
 		&.ad-slot--collapse {
 			display: none;
 		}
+
+		/**
+		* Usage according to DAP (Digital Ad Production)
+		*
+		* #### Desktop
+		* - 'fabric' > 'top-above-nav','merchandising-high','merchandising'
+		* - 'fabric-custom' > 'top-above-nav','merchandising-high','merchandising'
+		* - 'fabric-expandable' > 'merchandising-high'
+		* - 'fabric-third-party' > 'top-above-nav','merchandising-high','merchandising'
+		* - 'fabric-video' > 'top-above-nav','merchandising-high'
+		* - 'fabric-video-expandable' > 'merchandising-high'
+		*
+		* #### Mobile
+		* - 'interscroller' > 'top-above-nav'
+		* - 'mobile-revealer' > 'top-above-nav'
+		*/
+		&.ad-slot--fluid {
+			min-height: 250px;
+			padding: 0;
+			margin: 0;
+			overflow: visible;
+			width: 100%;
+		}
 	}
 `;
 
