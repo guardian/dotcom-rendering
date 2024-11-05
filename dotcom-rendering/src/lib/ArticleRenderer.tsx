@@ -4,7 +4,7 @@ import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStylin
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';
-import { spacefinderAdSlotStyles } from './adStyles';
+import { spacefinderAdStyles } from './adStyles';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
 import type { EditionId } from './edition';
 import { RenderArticleElement } from './renderElement';
@@ -102,7 +102,7 @@ export const ArticleRenderer = ({
 					? interactiveLegacyClasses.contentMainColumn
 					: '',
 			].join(' ')}
-			css={[commercialPosition, spacefinderAdSlotStyles]}
+			css={[commercialPosition, spacefinderAdStyles]}
 		>
 			{renderingTarget === 'Apps'
 				? renderedElements

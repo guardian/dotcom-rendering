@@ -91,7 +91,7 @@ const adSlotStyles = css`
 	}
 `;
 
-const inlineAdSlotContainerStyles = css`
+const spacefinderAdSlotContainerStyles = css`
 	.ad-slot-container {
 		margin: 12px auto;
 		text-align: center;
@@ -152,7 +152,7 @@ const inlineAdSlotContainerStyles = css`
 	}
 `;
 
-const inlineAdSlotStyles = css`
+const spacefinderAdSlotStyles = css`
 	${from.tablet} {
 		.ad-slot {
 			/* from tablet the ad slot will stretch to the full width of the container and the iframe will be centred by the text-align: center; on the container */
@@ -248,9 +248,9 @@ const rootAdStyles = [labelStyles, adSlotStyles, adSlotContainerStyles];
 	applied to the ArticleRenderer component which spacefinder is scoped
 	to via the `.article-body-commercial-selector` class
 */
-const spacefinderAdSlotStyles = [
-	inlineAdSlotContainerStyles,
-	inlineAdSlotStyles,
+const spacefinderAdStyles = [
+	spacefinderAdSlotContainerStyles,
+	spacefinderAdSlotStyles,
 ];
 
 export {
@@ -258,5 +258,5 @@ export {
 	labelBoxStyles,
 	labelStyles,
 	rootAdStyles,
-	spacefinderAdSlotStyles,
+	spacefinderAdStyles,
 };
