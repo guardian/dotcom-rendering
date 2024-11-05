@@ -96,30 +96,12 @@ const darkLabelStyles = css`
 	}
 `;
 
-/**
- * Usage according to DAP (Digital Ad Production)
- *
- * #### Desktop
- * - `fabric` &rarr; `top-above-nav`,`merchandising-high`,`merchandising`
- * - `fabric-custom` &rarr; `top-above-nav`,`merchandising-high`,`merchandising`
- * - `fabric-expandable` &rarr; `merchandising-high`
- * - `fabric-third-party` &rarr; `top-above-nav`,`merchandising-high`,`merchandising`
- * - `fabric-video` &rarr; `top-above-nav`,`merchandising-high`
- * - `fabric-video-expandable` &rarr; `merchandising-high`
- *
- * #### Mobile
- * - `interscroller` &rarr; `top-above-nav`
- * - `mobile-revealer` &rarr; `top-above-nav`
- */
-const fluidAdStyles = css`
-	&.ad-slot--fluid {
-		min-height: 250px;
-		line-height: 10px;
-		padding: 0;
-		margin: 0;
-		overflow: visible;
-		width: 100%;
-	}
+const topAboveNavContainerStyles = css`
+	padding-bottom: 18px;
+	position: relative;
+	margin: 0 auto;
+	text-align: left;
+	display: block;
 `;
 
 /**
@@ -527,19 +509,23 @@ export const AdSlot = ({
 		case 'top-above-nav': {
 			return (
 				<div
-					id="dfp-ad--top-above-nav"
-					className={[
-						'js-ad-slot',
-						'ad-slot',
-						'ad-slot--top-above-nav',
-						'ad-slot--mpu-banner-ad',
-						'ad-slot--rendered',
-					].join(' ')}
-					css={[fluidAdStyles]}
-					data-link-name="ad slot top-above-nav"
-					data-name="top-above-nav"
-					aria-hidden="true"
-				></div>
+					css={[topAboveNavContainerStyles]}
+					className="ad-slot-container"
+				>
+					<div
+						id="dfp-ad--top-above-nav"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--top-above-nav',
+							'ad-slot--mpu-banner-ad',
+							'ad-slot--rendered',
+						].join(' ')}
+						data-link-name="ad slot top-above-nav"
+						data-name="top-above-nav"
+						aria-hidden="true"
+					></div>
+				</div>
 			);
 		}
 		case 'mostpop': {

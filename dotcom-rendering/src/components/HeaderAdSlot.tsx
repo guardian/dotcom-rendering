@@ -41,13 +41,6 @@ const headerMinSizeStyles = css`
 	min-width: ${adSizes.leaderboard.width}px;
 `;
 
-const topAboveNavStyles = css`
-	position: relative;
-	margin: 0 auto;
-	text-align: left;
-	display: block;
-`;
-
 export const HeaderAdSlot = ({
 	shouldHideReaderRevenue,
 	isPaidContent,
@@ -80,12 +73,7 @@ export const HeaderAdSlot = ({
 							isPaidContent={isPaidContent}
 						/>
 					</Island>
-					<div
-						css={[topAboveNavStyles]}
-						className="ad-slot-container"
-					>
-						<AdSlot position="top-above-nav" />
-					</div>
+					<AdSlot position="top-above-nav" />
 				</div>
 			</div>
 		</Hide>
