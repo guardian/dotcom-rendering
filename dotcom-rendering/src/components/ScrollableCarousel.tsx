@@ -8,7 +8,6 @@ import {
 import type { ThemeButton } from '@guardian/source/react-components';
 import {
 	Button,
-	Hide,
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
@@ -45,23 +44,33 @@ const themeButtonDisabled: Partial<ThemeButton> = {
 	textTertiary: palette('--carousel-chevron-disabled'),
 };
 
-const carouselContainerStyles = css`
-	display: flex;
-	flex-direction: column-reverse;
-	${from.tablet} {
-		gap: ${space[2]}px;
-	}
-	${from.wide} {
-		flex-direction: row;
-		gap: ${space[1]}px;
-	}
-
+const containerStyles = css`
 	/* Extend carousel into outer margins on mobile */
 	margin-left: -10px;
 	margin-right: -10px;
 	${from.mobileLandscape} {
 		margin-left: -20px;
 		margin-right: -20px;
+	}
+	${from.tablet} {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	${from.leftCol} {
+		margin-left: -10px;
+	}
+`;
+
+const containerWithNavigationStyles = css`
+	display: flex;
+	flex-direction: column-reverse;
+	${from.tablet} {
+		gap: ${space[2]}px;
+	}
+
+	${from.wide} {
+		flex-direction: row;
+		gap: ${space[1]}px;
 	}
 
 	/**
@@ -73,8 +82,6 @@ const carouselContainerStyles = css`
 	 * into the right-hand column.
 	 */
 	${from.tablet} {
-		margin-left: 10px;
-		margin-right: 10px;
 		margin-top: calc(
 			(-${titlePreset.fontSize} * ${titlePreset.lineHeight}) -
 				${space[3]}px
@@ -82,7 +89,6 @@ const carouselContainerStyles = css`
 	}
 	${from.leftCol} {
 		margin-top: 0;
-		margin-left: -10px;
 	}
 	${from.wide} {
 		margin-right: calc(${space[2]}px - ${gridColumnWidth} - ${gridGap});
@@ -91,15 +97,14 @@ const carouselContainerStyles = css`
 
 const carouselStyles = css`
 	display: grid;
+	width: 100%;
 	grid-auto-columns: 1fr;
 	grid-auto-flow: column;
 	gap: 20px;
 	overflow-x: auto;
-	overflow-y: hidden;
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
-	overscroll-behavior-x: contain;
-	overscroll-behavior-y: auto;
+	overscroll-behavior: contain auto;
 	/**
 	 * Hide scrollbars
 	 * See: https://stackoverflow.com/a/38994837
@@ -108,17 +113,19 @@ const carouselStyles = css`
 		display: none; /* Safari and Chrome */
 	}
 	scrollbar-width: none; /* Firefox */
-	position: relative;
 
 	padding-left: 10px;
+	padding-right: 10px;
 	scroll-padding-left: 10px;
 	${from.mobileLandscape} {
 		padding-left: 20px;
+		padding-right: 20px;
 		scroll-padding-left: 20px;
 	}
 	${from.tablet} {
-		padding-left: 0px;
-		scroll-padding-left: 0px;
+		padding-left: 0;
+		padding-right: 0;
+		scroll-padding-left: 0;
 	}
 	${from.leftCol} {
 		padding-left: 20px;
@@ -126,13 +133,13 @@ const carouselStyles = css`
 	}
 `;
 
-const buttonContainerStyles = css`
-	margin-left: auto;
-`;
-
-const buttonLayoutStyles = css`
-	display: flex;
-	gap: ${space[1]}px;
+const buttonStyles = css`
+	display: none;
+	${from.tablet} {
+		display: flex;
+		gap: ${space[1]}px;
+		margin-left: auto;
+	}
 `;
 
 const itemStyles = css`
@@ -179,14 +186,31 @@ const generateCarouselColumnStyles = (
 
 	return css`
 		/**
-		 * On mobile, a 32px wide 'peeping' card is always shown to the right in
-		 * addition to the specified number of visible cards to indicate the
-		 * carousel can be scrolled.
+		 * On mobile a 32px slice of the next card is shown to indicate there
+		 * are more cards that can be scrolled to. Extra padding is also added
+		 * to the left and right to align cards with the page grid as the
+		 * carousel extends into the outer margins on mobile.
+		 *
+		 * These values are divided by the number of visible cards and
+		 * subtracted from their width so they are shown at the correct size.
 		 */
 		grid-template-columns: repeat(
 			${totalCards},
-			calc(${100 / visibleCardsOnMobile}% - ${offsetPeepingCardWidth}px)
+			calc(
+				(100% / ${visibleCardsOnMobile}) - ${offsetPeepingCardWidth}px +
+					${10 / visibleCardsOnMobile}px
+			)
 		);
+		${from.mobileLandscape} {
+			grid-template-columns: repeat(
+				${totalCards},
+				calc(
+					(100% / ${visibleCardsOnMobile}) -
+						${offsetPeepingCardWidth}px +
+						${20 / visibleCardsOnMobile}px
+				)
+			);
+		}
 		${from.tablet} {
 			grid-template-columns: repeat(
 				${totalCards},
@@ -208,6 +232,8 @@ export const ScrollableCarousel = ({
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
 	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
+
+	const showNavigation = carouselLength > visibleCardsOnTablet;
 
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
@@ -259,7 +285,12 @@ export const ScrollableCarousel = ({
 	}, []);
 
 	return (
-		<div css={carouselContainerStyles}>
+		<div
+			css={[
+				containerStyles,
+				showNavigation && containerWithNavigationStyles,
+			]}
+		>
 			<ol
 				ref={carouselRef}
 				css={[
@@ -274,49 +305,45 @@ export const ScrollableCarousel = ({
 			>
 				{children}
 			</ol>
-			<div css={buttonContainerStyles}>
-				<Hide until={'tablet'}>
-					{carouselLength > visibleCardsOnTablet && (
-						<div css={buttonLayoutStyles}>
-							<Button
-								hideLabel={true}
-								iconSide="left"
-								icon={<SvgChevronLeftSingle />}
-								onClick={() => scrollTo('left')}
-								priority="tertiary"
-								theme={
-									previousButtonEnabled
-										? themeButton
-										: themeButtonDisabled
-								}
-								size="small"
-								disabled={!previousButtonEnabled}
-								// TODO
-								// aria-label="Move stories backwards"
-								// data-link-name="container left chevron"
-							/>
+			{showNavigation && (
+				<div css={buttonStyles}>
+					<Button
+						hideLabel={true}
+						iconSide="left"
+						icon={<SvgChevronLeftSingle />}
+						onClick={() => scrollTo('left')}
+						priority="tertiary"
+						theme={
+							previousButtonEnabled
+								? themeButton
+								: themeButtonDisabled
+						}
+						size="small"
+						disabled={!previousButtonEnabled}
+						// TODO
+						// aria-label="Move stories backwards"
+						// data-link-name="container left chevron"
+					/>
 
-							<Button
-								hideLabel={true}
-								iconSide="left"
-								icon={<SvgChevronRightSingle />}
-								onClick={() => scrollTo('right')}
-								priority="tertiary"
-								theme={
-									nextButtonEnabled
-										? themeButton
-										: themeButtonDisabled
-								}
-								size="small"
-								disabled={!nextButtonEnabled}
-								// TODO
-								// aria-label="Move stories forwards"
-								// data-link-name="container right chevron"
-							/>
-						</div>
-					)}
-				</Hide>
-			</div>
+					<Button
+						hideLabel={true}
+						iconSide="left"
+						icon={<SvgChevronRightSingle />}
+						onClick={() => scrollTo('right')}
+						priority="tertiary"
+						theme={
+							nextButtonEnabled
+								? themeButton
+								: themeButtonDisabled
+						}
+						size="small"
+						disabled={!nextButtonEnabled}
+						// TODO
+						// aria-label="Move stories forwards"
+						// data-link-name="container right chevron"
+					/>
+				</div>
+			)}
 		</div>
 	);
 };

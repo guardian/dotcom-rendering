@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
+import { getOphan } from '../client/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { ExpandableMarketingCard } from './ExpandableMarketingCard';
 
@@ -136,6 +137,22 @@ export const ExpandableMarketingCardSwipeable = ({
 		};
 	}, [topOfBody]);
 
+	useEffect(() => {
+		const reportView = () => {
+			void getOphan('Web').then((ophan) => {
+				ophan.record({
+					interaction: {
+						component: 'us-expandable-marketing-card',
+						value: 'us-expandable-marketing-card visible',
+					},
+				});
+			});
+		};
+		if (shouldDisplayCard) {
+			reportView();
+		}
+	}, [shouldDisplayCard]);
+
 	if (!shouldDisplayCard) {
 		return null;
 	}
@@ -144,6 +161,7 @@ export const ExpandableMarketingCardSwipeable = ({
 		return (
 			<div css={[stickyContainerStyles]}>
 				<div
+					data-link-name="us-expandable-marketing-card expand"
 					css={[
 						absoluteContainerStyles,
 						isDown &&

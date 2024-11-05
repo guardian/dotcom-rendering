@@ -798,7 +798,9 @@ export const MobileStickyContainer = ({
 			className="mobilesticky-container"
 			css={[
 				mobileStickyAdStyles,
-				(contentType === 'Article' || pageId.startsWith('football/')) &&
+				(contentType === 'Article' ||
+					contentType === 'Interactive' ||
+					pageId.startsWith('football/')) &&
 					mobileStickyAdStylesFullWidth,
 			]}
 		/>

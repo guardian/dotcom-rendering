@@ -6,7 +6,7 @@ import type { DCRContainerPalette } from '../types/front';
 import { FrontSection } from './FrontSection';
 import { ScrollableSmall } from './ScrollableSmall.importable';
 
-export default {
+const meta = {
 	title: 'Components/ScrollableSmall',
 	component: ScrollableSmall,
 	parameters: {
@@ -26,11 +26,6 @@ export default {
 		imageLoading: 'eager',
 		containerType: 'scrollable/small',
 	},
-} as Meta;
-
-type Story = StoryObj<typeof ScrollableSmall>;
-
-export const WithFrontSection = {
 	render: (args) => (
 		<FrontSection
 			title="Scrollable small"
@@ -41,6 +36,36 @@ export const WithFrontSection = {
 			<ScrollableSmall {...args} />
 		</FrontSection>
 	),
+} satisfies Meta<typeof ScrollableSmall>;
+
+export default meta;
+
+type Story = StoryObj<typeof ScrollableSmall>;
+
+export const WithMultipleCards = {} satisfies Story;
+
+export const WithOneCard = {
+	args: {
+		trails: trails.slice(0, 1),
+	},
+} satisfies Story;
+
+export const WithTwoCards = {
+	args: {
+		trails: trails.slice(0, 2),
+	},
+} satisfies Story;
+
+export const WithThreeCards = {
+	args: {
+		trails: trails.slice(0, 3),
+	},
+} satisfies Story;
+
+export const WithFourCards = {
+	args: {
+		trails: trails.slice(0, 4),
+	},
 } satisfies Story;
 
 const containerPalettes = [

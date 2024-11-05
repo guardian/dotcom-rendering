@@ -172,9 +172,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const Highlights = () => {
 		const showHighlights =
 			// Must be opted into the Europe beta test or in preview
-			(abTests.europeBetaFrontVariant === 'variant' || isPreview) &&
-			// Must either be a network front or the Europe beta front (or training version of it) in order to see Highlights
-			(front.isNetworkFront || front.pageId.startsWith('europe-beta'));
+			abTests.europeBetaFrontVariant === 'variant' || isPreview;
 
 		const highlightsCollection =
 			front.pressedPage.collections.find(isHighlights);

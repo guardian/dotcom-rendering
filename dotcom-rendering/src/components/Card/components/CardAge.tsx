@@ -14,22 +14,19 @@ type Props = {
 	showClock?: boolean;
 	isOnwardContent?: boolean;
 	isTagPage: boolean;
+	colour?: string;
 };
 
-const ageStyles = (isOnwardsContent?: boolean) => {
+const ageStyles = (colour: string) => {
 	return css`
 		${textSansBold12};
 
-		color: ${isOnwardsContent
-			? palette('--card-footer-onwards-content')
-			: palette('--card-footer-text')};
+		color: ${colour};
 
 		margin-top: -4px;
 
 		svg {
-			fill: ${isOnwardsContent
-				? palette('--card-footer-onwards-content')
-				: palette('--card-footer-text')};
+			fill: ${colour};
 			margin-bottom: -1px;
 			height: 11px;
 			width: 11px;
@@ -44,13 +41,20 @@ export const CardAge = ({
 	isOnwardContent,
 	absoluteServerTimes,
 	isTagPage,
+	colour = palette('--card-footer-text'),
 }: Props) => {
 	if (timeAgo(new Date(webPublication.date).getTime()) === false) {
 		return null;
 	}
 
 	return (
-		<span css={ageStyles(isOnwardContent)}>
+		<span
+			css={ageStyles(
+				isOnwardContent
+					? palette('--card-footer-onwards-content')
+					: colour,
+			)}
+		>
 			{showClock && <ClockIcon />}
 			{isTagPage ? (
 				<DateTime

@@ -17,22 +17,11 @@ type Props = {
 	discussionId: string;
 	isDynamo?: true;
 	isOnwardContent?: boolean;
+	/** Optional override of default comment count colour */
+	colour?: string;
 };
 
-const getCommentCountColour = (
-	isDynamo?: boolean,
-	isOnwardContent?: boolean,
-) => {
-	if (isDynamo) {
-		return themePalette('--card-trail-text');
-	} else if (isOnwardContent) {
-		return themePalette('--card-footer-onwards-content');
-	} else {
-		return themePalette('--card-footer-text');
-	}
-};
-
-const containerStyles = (isDynamo?: boolean, isOnwardContent?: boolean) => css`
+const containerStyles = (colour: string) => css`
 	display: flex;
 	flex-direction: row;
 	${textSansBold12};
@@ -43,16 +32,16 @@ const containerStyles = (isDynamo?: boolean, isOnwardContent?: boolean) => css`
 	 */
 	line-height: 1.15;
 	margin-top: -4px;
-	color: ${getCommentCountColour(isDynamo, isOnwardContent)};
+	color: ${colour};
 `;
 
-const svgStyles = (isDynamo?: boolean, isOnwardContent?: boolean) => css`
+const svgStyles = (colour: string) => css`
 	svg {
 		margin-bottom: -5px;
 		height: 14px;
 		width: 14px;
 		margin-right: 2px;
-		fill: ${getCommentCountColour(isDynamo, isOnwardContent)};
+		fill: ${colour};
 	}
 `;
 
@@ -78,14 +67,26 @@ export const CardCommentCount = ({
 	discussionId,
 	isDynamo,
 	isOnwardContent,
+	colour = themePalette('--card-footer-text'),
 }: Props) => {
 	const count = useCommentCount(discussionApiUrl, discussionId);
 
 	const { long, short } = formatCount(count);
+
+	const getCommentCountColour = (): string => {
+		if (isDynamo) {
+			return themePalette('--card-trail-text');
+		} else if (isOnwardContent) {
+			return themePalette('--card-footer-onwards-content');
+		} else {
+			return colour;
+		}
+	};
+
 	return (
 		<ContainerOverrides containerPalette={containerPalette}>
-			<div css={containerStyles(isDynamo, isOnwardContent)}>
-				<div css={svgStyles(isDynamo, isOnwardContent)}>
+			<div css={containerStyles(getCommentCountColour())}>
+				<div css={svgStyles(getCommentCountColour())}>
 					<CommentIcon />
 				</div>
 				<div css={longStyles}>{long}</div>

@@ -5759,6 +5759,21 @@ const editorialButtonText: PaletteFunction = (format: ArticleFormat) => {
 	}
 };
 
+const featureCardKickerTextLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.neutral[86];
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(theme, 600);
+	}
+};
+
 // ----- Palette ----- //
 
 /**
@@ -6423,6 +6438,22 @@ const paletteColours = {
 	'--explainer-atom-background': {
 		light: explainerAtomBackgroundLight,
 		dark: explainerAtomBackgroundDark,
+	},
+	'--feature-card-footer-text': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--feature-card-headline': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--feature-card-kicker-text': {
+		light: featureCardKickerTextLight,
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--feature-card-trail-text': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[20],
 	},
 	'--filter-key-events-toggle-border-top': {
 		light: () => sourcePalette.neutral[86],
