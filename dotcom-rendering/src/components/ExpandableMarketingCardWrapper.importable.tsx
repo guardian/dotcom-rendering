@@ -63,10 +63,7 @@ export const ExpandableMarketingCardWrapper = ({ guardianBaseURL }: Props) => {
 	}
 
 	const heading = 'No billionaire approved this';
-
-	const kicker = isInVariantBubble
-		? 'How the Guardian is different'
-		: 'Why the Guardian has no paywall';
+	const kicker = 'How the Guardian is different';
 
 	return (
 		<>
