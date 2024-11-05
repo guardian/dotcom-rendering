@@ -52,7 +52,8 @@ type Props = {
 	containerName?: string;
 	/** Fronts containers can have their styling overridden using a `containerPalette` */
 	containerPalette?: DCRContainerPalette;
-	/** Fronts containers can have their styling overridden using a `containerLevel`. If used, this can be either "Primary" or "Secondary", both of which have different styles*/
+	/** Fronts containers can have their styling overridden using a `containerLevel`.
+	 * If used, this can be either "Primary" or "Secondary", both of which have different styles */
 	containerLevel?: DCRContainerLevel;
 
 	/** Defaults to `false`. If true a Hide button is show top right allowing this section

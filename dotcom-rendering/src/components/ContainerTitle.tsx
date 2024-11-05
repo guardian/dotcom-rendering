@@ -37,19 +37,12 @@ const headerStyles = css`
 	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
 `;
 
-const containerLevelStyling = (level: DCRContainerLevel) => {
-	if (level === 'Primary') {
-		return css`
-			${headlineBold28};
-		`;
-	}
-	if (level === 'Secondary') {
-		return css`
-			${textSansBold17};
-		`;
-	}
-	return null;
-};
+const primaryTitleStyles = css`
+	${headlineBold28};
+`;
+const secondaryTitleStyles = css`
+	${textSansBold17};
+`;
 
 const headerStylesWithUrl = css`
 	:hover {
@@ -134,8 +127,9 @@ export const ContainerTitle = ({
 							headerStylesWithUrl,
 							headerStyles,
 							lightweightHeader && article17,
-							containerLevel &&
-								containerLevelStyling(containerLevel),
+							containerLevel === 'Primary' && primaryTitleStyles,
+							containerLevel === 'Secondary' &&
+								secondaryTitleStyles,
 						]}
 					>
 						{localisedTitle(title, editionId)}
@@ -147,7 +141,8 @@ export const ContainerTitle = ({
 					css={[
 						headerStyles,
 						lightweightHeader && article17,
-						containerLevel && containerLevelStyling(containerLevel),
+						containerLevel === 'Primary' && primaryTitleStyles,
+						containerLevel === 'Secondary' && secondaryTitleStyles,
 					]}
 				>
 					{localisedTitle(title, editionId)}
