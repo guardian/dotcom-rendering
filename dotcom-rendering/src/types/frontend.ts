@@ -4,6 +4,7 @@ import type { FEArticleBadgeType } from './badge';
 import type { CommercialProperties } from './commercial';
 import type { ConfigType, ServerSideTests } from './config';
 import type {
+	Crossword,
 	FEElement,
 	ImageBlockElement,
 	Newsletter,
@@ -121,6 +122,7 @@ export interface FEArticleType {
 	showTableOfContents: boolean;
 	lang?: string;
 	isRightToLeftLang?: boolean;
+	crossword?: Crossword;
 }
 
 type PageTypeType = {
