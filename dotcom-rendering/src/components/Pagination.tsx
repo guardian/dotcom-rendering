@@ -68,7 +68,7 @@ const getPagePath = (
 		searchParams.append('dcr', 'apps');
 	}
 
-	return `${searchParams.toString()}#${fragment}`;
+	return `?${searchParams.toString()}#${fragment}`;
 };
 
 export const Pagination = ({
