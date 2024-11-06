@@ -31,8 +31,8 @@ const titlePreset = textSansBold17Object;
  * Grid sizing to calculate negative margin used to pull navigation buttons
  * out side of `FrontSection` container at `wide` breakpoint.
  */
-const gridColumnWidth = '60px';
-const gridGap = '20px';
+const gridColumnWidth = 60;
+const gridGap = 20;
 
 const themeButton: Partial<ThemeButton> = {
 	borderTertiary: palette('--carousel-chevron-border'),
@@ -120,7 +120,7 @@ const containerWithNavigationStyles = css`
 		}
 	}
 	${from.wide} {
-		margin-right: calc(${space[2]}px - ${gridColumnWidth} - ${gridGap});
+		margin-right: calc(${space[2]}px - ${gridColumnWidth}px - ${gridGap}px);
 		::before {
 			top: 0;
 		}
