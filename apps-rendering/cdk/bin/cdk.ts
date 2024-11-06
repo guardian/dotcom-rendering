@@ -25,8 +25,8 @@ new MobileAppsRendering(app, 'MobileAppsRendering-PROD', {
 	stage: 'PROD',
 	recordPrefix: 'mobile-rendering',
 	asgCapacity: {
-		minimumInstances: 6,
-		maximumInstances: 24,
+		minimumInstances: 3,
+		maximumInstances: 12,
 	},
 	instanceSize: InstanceSize.MICRO,
 	appsRenderingDomain: 'mobile-aws.guardianapis.com',
@@ -55,8 +55,8 @@ new MobileAppsRendering(app, 'MobileAppsRenderingPreview-PROD', {
 	stage: 'PROD',
 	recordPrefix: 'mobile-preview-rendering',
 	asgCapacity: {
-		minimumInstances: 2,
-		maximumInstances: 4,
+		minimumInstances: 1,
+		maximumInstances: 2,
 	},
 	instanceSize: InstanceSize.MICRO,
 	appsRenderingDomain: 'mobile-aws.guardianapis.com',
