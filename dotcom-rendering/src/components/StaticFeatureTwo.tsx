@@ -17,63 +17,60 @@ export const StaticFeatureTwo = ({
 	absoluteServerTimes,
 	imageLoading,
 }: Props) => {
-	const cards = trails.splice(0, 2);
+	const cards = trails.slice(0, 2);
 
 	return (
-		<>
-			<UL
-				direction="row"
-				padBottom={true}
-				showTopBar={true}
-				isFlexibleContainer={true}
-			>
-				{cards.map((card) => {
-					return (
-						<LI
-							stretch={false}
-							percentage={'50%'}
-							key={card.url}
-							padSides={true}
-						>
-							<FeatureCard
-								linkTo={card.url}
-								format={card.format}
-								headlineText={card.headline}
-								byline={card.byline}
-								showByline={card.showByline}
-								webPublicationDate={card.webPublicationDate}
-								kickerText={card.kickerText}
-								/** TODO check if the pulsing dot should be be supported */
-								showPulsingDot={
-									card.format.design ===
-									ArticleDesign.LiveBlog
-								}
-								/** TODO - implement show age */
-								showClock={false}
-								image={card.image}
-								isPlayableMediaCard={true}
-								starRating={card.starRating}
-								dataLinkName={card.dataLinkName}
-								discussionApiUrl={card.discussionApiUrl}
-								discussionId={card.discussionId}
-								mainMedia={card.mainMedia}
-								isExternalLink={card.isExternalLink}
-								// branding={card.branding}
-								containerPalette={containerPalette}
-								trailText={card.trailText}
-								absoluteServerTimes={absoluteServerTimes}
-								imageLoading={imageLoading}
-								aspectRatio="4:5"
-								imageSize="feature-large"
-								headlineSizes={{
-									desktop: 'medium',
-									tablet: 'small',
-								}}
-							/>
-						</LI>
-					);
-				})}
-			</UL>
-		</>
+		<UL
+			direction="row"
+			padBottom={true}
+			showTopBar={true}
+			isFlexibleContainer={true}
+		>
+			{cards.map((card) => {
+				return (
+					<LI
+						stretch={false}
+						percentage={'50%'}
+						key={card.url}
+						padSides={true}
+					>
+						<FeatureCard
+							linkTo={card.url}
+							format={card.format}
+							headlineText={card.headline}
+							byline={card.byline}
+							showByline={card.showByline}
+							webPublicationDate={card.webPublicationDate}
+							kickerText={card.kickerText}
+							/** TODO check if the pulsing dot should be be supported */
+							showPulsingDot={
+								card.format.design === ArticleDesign.LiveBlog
+							}
+							/** TODO - implement show age */
+							showClock={false}
+							image={card.image}
+							isPlayableMediaCard={true}
+							starRating={card.starRating}
+							dataLinkName={card.dataLinkName}
+							discussionApiUrl={card.discussionApiUrl}
+							discussionId={card.discussionId}
+							mainMedia={card.mainMedia}
+							isExternalLink={card.isExternalLink}
+							// branding={card.branding}
+							containerPalette={containerPalette}
+							trailText={card.trailText}
+							absoluteServerTimes={absoluteServerTimes}
+							imageLoading={imageLoading}
+							aspectRatio="4:5"
+							imageSize="feature-large"
+							headlineSizes={{
+								desktop: 'medium',
+								tablet: 'small',
+							}}
+						/>
+					</LI>
+				);
+			})}
+		</UL>
 	);
 };

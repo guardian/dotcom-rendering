@@ -87,7 +87,7 @@ export default meta;
 
 type Story = StoryObj<typeof ScrollableFeature>;
 
-export const Default = {} satisfies Story;
+export const Default = {};
 
 const containerPalettes = [
 	'InvestigationPalette',
