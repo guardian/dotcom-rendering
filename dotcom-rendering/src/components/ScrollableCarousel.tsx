@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	height,
 	space,
 	textSansBold17Object,
 } from '@guardian/source/foundations';
@@ -45,9 +46,18 @@ const themeButtonDisabled: Partial<ThemeButton> = {
 	backgroundTertiaryHover: 'transparent',
 };
 
+/**
+ * On mobile the carousel extends into the outer margins to use the full width
+ * of the screen. From tablet onwards the carousel sits within the page grid.
+ *
+ * The FrontSection container adds a -10px negative margin to either side of
+ * the content from tablet so we add the margins back to align the carousel with
+ * the grid. From leftCol we retain FrontSection's -10px negative margin on the
+ * left side so that the carousel extends into the the middle of the gutter
+ * between the grid columns to meet the dividing line.
+ */
 const containerStyles = css`
 	position: relative;
-	/* Extend carousel into outer margins on mobile */
 	margin-left: -10px;
 	margin-right: -10px;
 	${from.mobileLandscape} {
@@ -65,7 +75,7 @@ const containerStyles = css`
 			position: absolute;
 			top: 0;
 			bottom: 0;
-			left: -0;
+			left: 0;
 			width: 1px;
 			background-color: ${palette('--card-border-top')};
 			transform: translateX(-50%);
@@ -92,6 +102,10 @@ const containerWithNavigationStyles = css`
 	 *
 	 * From wide, the navigation buttons are pulled out of the main content area
 	 * into the right-hand column.
+	 *
+	 * Between leftCol and wide the top of the fixed dividing line is pushed
+	 * down so it starts below the navigation buttons and gap, and aligns with
+	 * the top of the carousel.
 	 */
 	${from.tablet} {
 		margin-top: calc(
@@ -101,9 +115,15 @@ const containerWithNavigationStyles = css`
 	}
 	${from.leftCol} {
 		margin-top: 0;
+		::before {
+			top: ${height.ctaSmall + space[2]}px;
+		}
 	}
 	${from.wide} {
 		margin-right: calc(${space[2]}px - ${gridColumnWidth} - ${gridGap});
+		::before {
+			top: 0;
+		}
 	}
 `;
 
