@@ -4375,6 +4375,10 @@ const carouselTitleHighlightDark: PaletteFunction = ({ theme, design }) => {
 
 const carouselChevronLight: PaletteFunction = () => sourcePalette.neutral[7];
 const carouselChevronDark: PaletteFunction = () => sourcePalette.neutral[86];
+const carouselChevronHoverLight: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[73], 0.2);
+const carouselChevronHoverDark: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[73], 0.2);
 const carouselChevronBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[73];
 const carouselChevronBorderDark: PaletteFunction = () =>
@@ -6146,6 +6150,10 @@ const paletteColours = {
 	'--carousel-chevron-disabled': {
 		light: carouselChevronDisabledLight,
 		dark: carouselChevronDisabledDark,
+	},
+	'--carousel-chevron-hover': {
+		light: carouselChevronHoverLight,
+		dark: carouselChevronHoverDark,
 	},
 	'--carousel-dot': {
 		light: carouselDotLight,
