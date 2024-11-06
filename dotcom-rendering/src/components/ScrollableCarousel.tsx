@@ -43,7 +43,7 @@ const themeButton: Partial<ThemeButton> = {
 const themeButtonDisabled: Partial<ThemeButton> = {
 	borderTertiary: palette('--carousel-chevron-border-disabled'),
 	textTertiary: palette('--carousel-chevron-disabled'),
-	backgroundTertiaryHover: palette('--carousel-chevron-hover'),
+	backgroundTertiaryHover: 'transparent',
 };
 
 const containerStyles = css`
