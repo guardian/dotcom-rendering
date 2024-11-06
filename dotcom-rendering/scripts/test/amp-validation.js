@@ -15,7 +15,6 @@ amphtmlValidator.getInstance().then((validator) => {
 		'football/2021/feb/02/wolves-arsenal-premier-league-match-report',
 		'global-development/2021/feb/02/myanmar-coup-military-tightens-grip-amid-calls-for-suu-kyi-to-be-freed',
 		'world/2021/feb/03/academic-jailed-in-iran-pulls-off-daring-escape-back-to-britain-kameel-ahmady',
-		,
 		'global-development/2021/feb/03/decades-of-progress-on-extreme-poverty-now-in-reverse-due-to-covid',
 		'world/2021/feb/02/vienna-man-body-apartment-two-months-forgotten',
 		'world/2021/feb/02/italian-president-sergio-mattarella-to-seek-a-high-profile-government',
