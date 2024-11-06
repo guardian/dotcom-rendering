@@ -113,6 +113,25 @@ const timeStyles = css`
 	display: block;
 `;
 
+export const getUrl = ({
+	filterKeyEvents,
+	renderingTarget,
+	id,
+}: {
+	filterKeyEvents: boolean;
+	renderingTarget: RenderingTarget;
+	id: string;
+}) => {
+	const searchParams = new URLSearchParams();
+	searchParams.append('filterKeyEvents', String(filterKeyEvents));
+	searchParams.append('page', `with:block-${id}`);
+	if (renderingTarget === 'Apps') {
+		searchParams.append('dcr', 'apps');
+	}
+
+	return `?${searchParams.toString()}#block-${id}`;
+};
+
 export const KeyEventCard = ({
 	id,
 	blockFirstPublished,
@@ -123,14 +142,7 @@ export const KeyEventCard = ({
 	absoluteServerTimes,
 	renderingTarget,
 }: Props) => {
-	const searchParams = new URLSearchParams();
-	searchParams.append('filterKeyEvents', String(filterKeyEvents));
-	searchParams.append('page', `with:block-${id}`);
-	if (renderingTarget === 'Apps') {
-		searchParams.append('dcr', 'apps');
-	}
-
-	const url = `?${searchParams.toString()}#block-${id}`;
+	const url = getUrl({ filterKeyEvents, renderingTarget, id });
 
 	return (
 		<li css={listItemStyles}>
