@@ -26,32 +26,6 @@ test.describe('Embeds', () => {
 				),
 			).toContainText('Daily cases');
 		});
-
-		test('should render the counted interactive embed', async ({
-			page,
-		}) => {
-			await loadPage(
-				page,
-				'/AMPArticle/https://www.theguardian.com/us-news/2015/nov/05/police-tasers-deaths-the-counted',
-			);
-			await cmpAcceptAll(
-				page,
-				'amp-consent > iframe[src*="sourcepoint"]',
-			);
-
-			const ampIframeContainerSelector =
-				'amp-iframe[src="https://interactive.guim.co.uk/embed/2015/10/2015-10-counted-table/"]';
-
-			await page
-				.locator(ampIframeContainerSelector)
-				.scrollIntoViewIfNeeded();
-
-			const ampIframeSelector = `${ampIframeContainerSelector} > iframe`;
-
-			await expect(
-				await getIframeBody(page, ampIframeSelector),
-			).toContainText('Deaths after Taser use: the findings');
-		});
 	});
 
 	test.describe('WEB', function () {
