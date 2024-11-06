@@ -1,4 +1,5 @@
-import { Crossword } from '@guardian/source-development-kitchen/dist/react-components';
+import { EditionsCrossword } from '../components/EditionsCrossword.importable';
+import { Island } from '../components/Island';
 import type { Article } from '../types/article';
 
 interface Props {
@@ -6,27 +7,39 @@ interface Props {
 }
 
 export const EditionsCrosswordLayout = ({ article }: Props) => {
-	console.log(article.frontendData);
+	const { crossword } = article.frontendData;
+	if (
+		!crossword?.id ||
+		!crossword.number ||
+		!crossword.name ||
+		!crossword.date ||
+		crossword.webPublicationDate == null ||
+		!crossword.solutionAvailable ||
+		crossword.dateSolutionAvailable == null ||
+		!crossword.pdf
+	) {
+		console.error('Crossword data is missing or incomplete:', crossword);
+		return null;
+	}
 	return (
 		<main data-layout="EditionsCrosswordLayout">
-			<Crossword
-				data={{
-					crosswordType: 'quick',
-					date: '2023-10-01',
-					dimensions: { cols: 15, rows: 15 },
-					entries: [],
-					id: 'example-id',
-					number: 1,
-					solutionAvailable: false,
-					name: 'Example Crossword',
-				}}
-			/>
-			;
-			{/* <div>
-				{article.frontendData.crossword?.entries.map((entry, index) => (
-					<div key={index}>{JSON.stringify(entry)}</div>
-				))}
-			</div> */}
+			<Island priority="critical">
+				<EditionsCrossword
+					data={{
+						id: crossword.id,
+						number: crossword.number,
+						name: crossword.name,
+						date: crossword.date,
+						webPublicationDate: crossword.webPublicationDate,
+						entries: crossword.entries,
+						solutionAvailable: crossword.solutionAvailable,
+						dateSolutionAvailable: crossword.dateSolutionAvailable,
+						dimensions: crossword.dimensions,
+						crosswordType: crossword.crosswordType,
+						pdf: crossword.pdf,
+					}}
+				/>
+			</Island>
 		</main>
 	);
 };
