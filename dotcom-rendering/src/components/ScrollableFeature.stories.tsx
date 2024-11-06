@@ -76,6 +76,7 @@ const meta = {
 			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
 			showTopBorder={false}
+			containerLevel="Secondary"
 		>
 			<ScrollableFeature {...args} />
 		</FrontSection>
@@ -106,18 +107,20 @@ const containerPalettes = [
 
 export const WithSpecialPaletteVariations = {
 	parameters: {
+		/** We only want one breakpoint snapshotted for special palette variations */
 		chromatic: { viewports: [breakpoints.desktop] },
 	},
 	render: (args) => (
 		<>
 			{containerPalettes.map((containerPalette) => (
 				<FrontSection
-					title="Scrollable feature"
+					title={containerPalette}
 					discussionApiUrl={discussionApiUrl}
 					editionId="UK"
 					showTopBorder={false}
 					key={containerPalette}
 					containerPalette={containerPalette}
+					containerLevel="Secondary"
 				>
 					<ScrollableFeature
 						{...args}
