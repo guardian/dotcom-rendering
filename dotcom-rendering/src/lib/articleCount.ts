@@ -33,8 +33,6 @@ export const getArticleCounts = async (
 		'audio',
 	].includes(contentType.toLowerCase());
 
-	console.log('getArticleCounts', shouldIncrement);
-
 	// hasOptedOut needs to be done before we check if articleCount is set in the window
 	// This is because a potential race condition where one invocation of getArticleCounts
 	// is waiting for hasOptedOut another invocation might receive it and increment the article count.

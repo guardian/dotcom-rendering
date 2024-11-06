@@ -26,7 +26,6 @@ export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
 	'gu.contributions.contrib-timestamp';
 
 //  Local storage keys
-// const DAILY_ARTICLE_COUNT_KEY = 'gu.history.dailyArticleCount';
 const WEEKLY_ARTICLE_COUNT_KEY = 'gu.history.weeklyArticleCount';
 export const NO_RR_BANNER_KEY = 'gu.noRRBanner';
 
@@ -183,16 +182,8 @@ const REQUIRED_CONSENTS_FOR_BROWSER_ID = [1, 3, 5, 7];
 export const hasArticleCountOptOutCookie = (): boolean =>
 	getCookie({ name: OPT_OUT_OF_ARTICLE_COUNT_COOKIE }) !== null;
 
-// const removeArticleCountsFromLocalStorage = () => {
-// 	storage.local.remove(DAILY_ARTICLE_COUNT_KEY);
-// 	storage.local.remove(WEEKLY_ARTICLE_COUNT_KEY);
-// };
-
 const removeWeeklyArticleCountsFromLocalStorage = () =>
 	storage.local.remove(WEEKLY_ARTICLE_COUNT_KEY);
-
-// const removeDailyArticleCountsFromLocalStorage = () =>
-// 	storage.local.remove(DAILY_ARTICLE_COUNT_KEY);
 
 export const hasCmpConsentForWeeklyArticleCount = (): Promise<boolean> => {
 	return new Promise((resolve) => {
