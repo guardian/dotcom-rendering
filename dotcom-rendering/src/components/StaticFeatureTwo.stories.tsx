@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
-import { trails } from '../../fixtures/manual/trails';
+import { trails as trailsFixture } from '../../fixtures/manual/trails';
 import { FrontSection } from './FrontSection';
 import { StaticFeatureTwo } from './StaticFeatureTwo';
 
@@ -18,7 +18,7 @@ const meta = {
 		},
 	},
 	args: {
-		trails,
+		trails: trailsFixture.slice(0, 2),
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
 	},
@@ -37,9 +37,4 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-	name: 'Default Story',
-	args: {
-		trails: trails.slice(0, 2),
-	},
-};
+export const Default: Story = {};

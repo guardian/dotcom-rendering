@@ -1,3 +1,4 @@
+import { ArticleDesign } from '../lib/articleFormat';
 import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { FeatureCard } from './FeatureCard';
 import { ScrollableCarousel } from './ScrollableCarousel';
@@ -39,6 +40,11 @@ export const ScrollableFeature = ({
 							showByline={card.showByline}
 							webPublicationDate={card.webPublicationDate}
 							kickerText={card.kickerText}
+							/** TODO check if the pulsing dot should be be supported */
+							showPulsingDot={
+								card.format.design === ArticleDesign.LiveBlog
+							}
+							/** TODO - implement show age */
 							showClock={false}
 							image={card.image}
 							isPlayableMediaCard={true}
@@ -53,7 +59,7 @@ export const ScrollableFeature = ({
 							absoluteServerTimes={absoluteServerTimes}
 							imageLoading={imageLoading}
 							aspectRatio="4:5"
-							imageSize={'feature'}
+							imageSize="feature"
 							headlineSizes={{
 								desktop: 'xsmall',
 								tablet: 'xxsmall',

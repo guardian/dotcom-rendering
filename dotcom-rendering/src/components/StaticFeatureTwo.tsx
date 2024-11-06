@@ -1,3 +1,4 @@
+import { ArticleDesign } from '../lib/articleFormat';
 import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -43,7 +44,11 @@ export const StaticFeatureTwo = ({
 								webPublicationDate={card.webPublicationDate}
 								kickerText={card.kickerText}
 								/** TODO check if the pulsing dot should be be supported */
-								showPulsingDot={false}
+								showPulsingDot={
+									card.format.design ===
+									ArticleDesign.LiveBlog
+								}
+								/** TODO - implement show age */
 								showClock={false}
 								image={card.image}
 								isPlayableMediaCard={true}
@@ -59,7 +64,7 @@ export const StaticFeatureTwo = ({
 								absoluteServerTimes={absoluteServerTimes}
 								imageLoading={imageLoading}
 								aspectRatio="4:5"
-								imageSize={'feature-large'}
+								imageSize="feature-large"
 								headlineSizes={{
 									desktop: 'medium',
 									tablet: 'small',
