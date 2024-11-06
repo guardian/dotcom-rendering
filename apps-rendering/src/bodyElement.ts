@@ -498,28 +498,47 @@ const parse =
 
 				const parser = parse(context, campaigns, atoms);
 
-				const isMiniProfile =
-					listTypeData.type === ListType.MINI_PROFILES;
-				if (isMiniProfile) {
-					return listTypeData.items.flatMap((item) => {
-						return (
-							item.title ? parseSubheading(item.title) : []
-						).concat(
-							item.bio
-								? flattenTextElement(
-										context.docParser(item.bio),
-								  ).map((elem) => Result.ok(elem))
-								: [],
-							item.elements.flatMap(parser),
-							item.endNote ? parseEmphasis(item.endNote) : [],
-						);
-					});
-				} else {
-					return listTypeData.items.flatMap((item) => {
-						return (
-							item.title ? parseTitle(item.title) : []
-						).concat(item.elements.flatMap(parser));
-					});
+				switch (listTypeData.type) {
+					case ListType.MINI_PROFILES:
+						return listTypeData.items.flatMap((item) => {
+							return (
+								item.title ? parseSubheading(item.title) : []
+							).concat(
+								item.bio
+									? flattenTextElement(
+											context.docParser(item.bio),
+									  ).map((elem) => Result.ok(elem))
+									: [],
+								item.elements.flatMap(parser),
+								item.endNote ? parseEmphasis(item.endNote) : [],
+							);
+						});
+					case ListType.MULTI_BYLINE:
+						return listTypeData.items.flatMap((item) => {
+							return (
+								item.title ? parseSubheading(item.title) : []
+							).concat(
+								item.bylineHtml
+									? flattenTextElement(
+											context.docParser(
+												`<p>${item.bylineHtml}</p>`,
+											),
+									  ).map((elem) => Result.ok(elem))
+									: [],
+								item.bio
+									? flattenTextElement(
+											context.docParser(item.bio),
+									  ).map((elem) => Result.ok(elem))
+									: [],
+								item.elements.flatMap(parser),
+							);
+						});
+					default:
+						return listTypeData.items.flatMap((item) => {
+							return (
+								item.title ? parseTitle(item.title) : []
+							).concat(item.elements.flatMap(parser));
+						});
 				}
 			}
 

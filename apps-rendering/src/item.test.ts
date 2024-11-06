@@ -571,7 +571,7 @@ describe('embed elements', () => {
 });
 
 describe('list elements', () => {
-	test('parses non-mini profiles list elements', () => {
+	test('parses key takeaways list elements', () => {
 		const embedElement = {
 			type: ElementType.EMBED,
 			assets: [],
@@ -598,8 +598,6 @@ describe('list elements', () => {
 					{
 						title: 'Some title 1',
 						elements: [embedElement, textElement, textElement],
-						bio: 'Some bio 1',
-						endNote: 'Some end note 1',
 					},
 					{
 						title: 'Some title 2',
@@ -696,6 +694,52 @@ describe('list elements', () => {
 		expect(
 			item.body[8].kind === ElementKind.Text &&
 				item.body[8].doc.firstChild?.textContent == 'Some title 3',
+		).toBe(true);
+	});
+
+	test('parses multi-byline list elements', () => {
+		const textElement = {
+			type: ElementType.TEXT,
+			assets: [],
+			textTypeData: {
+				html: '<p>paragraph</p>',
+			},
+		};
+
+		const listElement = {
+			type: ElementType.LIST,
+			assets: [],
+			listTypeData: {
+				items: [
+					{
+						title: 'Some title 1',
+						elements: [textElement],
+						bio: '<p>Some bio 1</p>',
+						bylineHtml: '<a href="/123">Some byline 1</a>',
+					},
+					{
+						title: 'Some title 2',
+						elements: [textElement],
+						bio: '<p>Some bio 2</p>',
+						bylineHtml: '<a href="/456">Some byline 2</a>',
+					},
+				],
+				type: ListType.MULTI_BYLINE,
+			},
+		};
+		const item = f(articleContentWith(listElement)) as Standard;
+
+		expect(
+			item.body[0].kind === ElementKind.Text &&
+				item.body[0].doc.firstChild?.textContent == 'Some title 1',
+		).toBe(true);
+		expect(
+			item.body[1].kind === ElementKind.Text &&
+				item.body[1].doc.textContent == 'Some byline 1',
+		).toBe(true);
+		expect(
+			item.body[2].kind === ElementKind.Text &&
+				item.body[2].doc.textContent === 'Some bio 1',
 		).toBe(true);
 	});
 
