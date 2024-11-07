@@ -4388,9 +4388,9 @@ const carouselChevronDisabledLight: PaletteFunction = () =>
 const carouselChevronDisabledDark: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[86], 0.32);
 const carouselChevronBorderDisabledLight: PaletteFunction = () =>
-	transparentColour(sourcePalette.neutral[73], 0.32);
+	transparentColour(sourcePalette.neutral[73], 0.2);
 const carouselChevronBorderDisabledDark: PaletteFunction = () =>
-	transparentColour(sourcePalette.neutral[73], 0.32);
+	transparentColour(sourcePalette.neutral[73], 0.2);
 
 const mostViewedFooterHoverLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
