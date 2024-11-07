@@ -18,13 +18,8 @@ export interface ArticleCounts {
 	dailyArticleHistory: DailyArticleHistory;
 }
 
-export const getArticleCounts = async (
-	pageId: string,
-	tags: TagType[],
-	contentType: string,
-): Promise<ArticleCounts | undefined> => {
-	// See https://github.com/guardian/frontend/blob/9c8707d894c858dd17de1c7c1499f6b91f5287bc/common/app/model/DotcomContentType.scala#L29
-	const shouldIncrement = [
+export const shouldIncrementArticleCount = (contentType: string): boolean => {
+	return [
 		'article',
 		'liveblog',
 		'gallery',
@@ -32,20 +27,38 @@ export const getArticleCounts = async (
 		'interactive',
 		'audio',
 	].includes(contentType.toLowerCase());
+};
 
-	// hasOptedOut needs to be done before we check if articleCount is set in the window
-	// This is because a potential race condition where one invocation of getArticleCounts
-	// is waiting for hasOptedOut another invocation might receive it and increment the article count.
+export const getDailyArticleCounts = (
+	contentType: string,
+): DailyArticleHistory | undefined => {
+	if (shouldIncrementArticleCount(contentType)) {
+		incrementDailyArticleCount();
+	}
+	window.guardian.dailyArticleCount = getDailyArticleCount();
 
-	const keywordAndToneTagIds: string[] = tags
-		.filter((tag) => ['tone', 'keyword'].includes(tag.type.toLowerCase()))
-		.map((tag) => tag.id);
+	return window.guardian.dailyArticleCount;
+};
 
-	if (
-		!window.guardian.weeklyArticleCount &&
-		!(await hasOptedOutOfWeeklyArticleCount())
-	) {
-		if (shouldIncrement) {
+export const getWeeklyArticleCounts = async (
+	pageId: string,
+	tags: TagType[],
+	contentType: string,
+): Promise<WeeklyArticleHistory | undefined> => {
+	// See https://github.com/guardian/frontend/blob/9c8707d894c858dd17de1c7c1499f6b91f5287bc/common/app/model/DotcomContentType.scala#L29
+	if (await hasOptedOutOfWeeklyArticleCount()) return undefined;
+
+	if (!window.guardian.weeklyArticleCount) {
+		if (shouldIncrementArticleCount(contentType)) {
+			// hasOptedOut needs to be done before we check if articleCount is set in the window
+			// This is because a potential race condition where one invocation of getArticleCounts
+			// is waiting for hasOptedOut another invocation might receive it and increment the article count.
+
+			const keywordAndToneTagIds: string[] = tags
+				.filter((tag) =>
+					['tone', 'keyword'].includes(tag.type.toLowerCase()),
+				)
+				.map((tag) => tag.id);
 			incrementWeeklyArticleCount(
 				storage.local,
 				pageId,
@@ -56,16 +69,19 @@ export const getArticleCounts = async (
 			storage.local,
 		);
 	}
-	if (!window.guardian.dailyArticleCount) {
-		if (shouldIncrement) {
-			incrementDailyArticleCount();
-		}
-		window.guardian.dailyArticleCount = getDailyArticleCount();
-	}
 
+	return window.guardian.weeklyArticleCount;
+};
+
+export const getArticleCounts = async (
+	pageId: string,
+	tags: TagType[],
+	contentType: string,
+): Promise<ArticleCounts | undefined> => {
 	return {
-		weeklyArticleHistory: window.guardian.weeklyArticleCount ?? [],
-		dailyArticleHistory: window.guardian.dailyArticleCount ?? [],
+		weeklyArticleHistory:
+			(await getWeeklyArticleCounts(pageId, tags, contentType)) ?? [],
+		dailyArticleHistory: getDailyArticleCounts(pageId) ?? [],
 	};
 };
 
