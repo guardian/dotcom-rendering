@@ -23,12 +23,22 @@ const getTestParagraphElements = (length: number): TextBlockElement[] =>
 		html: '<p>I am a paragraph</p>',
 	});
 
-const getImageElement = (): ImageBlockElement => ({
+const getInlineImageElement = (): ImageBlockElement => ({
 	_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 	media: { allImages: [] },
 	data: {},
 	displayCredit: true,
 	role: 'inline',
+	imageSources: [],
+	elementId: '12345',
+});
+
+const getThumbnailImageElement = (): ImageBlockElement => ({
+	_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+	media: { allImages: [] },
+	data: {},
+	displayCredit: true,
+	role: 'thumbnail',
 	imageSources: [],
 	elementId: '12345',
 });
@@ -105,12 +115,12 @@ describe('Enhancing ad placeholders', () => {
 		},
 	);
 
-	describe('should not insert an ad placeholder before an image element', () => {
+	describe('should not insert an ad placeholder before an inline image element, but can insert it after the image', () => {
 		const threeParagraphs = getTestParagraphElements(3);
 
 		const elements = [
 			...threeParagraphs,
-			getImageElement(),
+			getInlineImageElement(),
 			...threeParagraphs,
 		];
 
@@ -127,6 +137,30 @@ describe('Enhancing ad placeholders', () => {
 
 		// Expect one placeholder to be present after the fourth element only
 		expect(placeholderIndices).toEqual([4]);
+	});
+
+	describe('should not insert an ad placeholder after a thumbnail image element', () => {
+		const threeParagraphs = getTestParagraphElements(3);
+
+		const elements = [
+			...threeParagraphs,
+			getThumbnailImageElement(),
+			...threeParagraphs,
+		];
+
+		const input: FEElement[] = elements;
+
+		const output = enhanceAdPlaceholders(exampleFormat, 'Apps')(input);
+		const outputPlaceholders = output.filter(elementIsAdPlaceholder);
+
+		expect(outputPlaceholders.length).toEqual(1);
+
+		const placeholderIndices = output.flatMap((el, idx) =>
+			elementIsAdPlaceholder(el) ? [idx] : [],
+		);
+
+		// Expect one placeholder to be present after the fifth element only
+		expect(placeholderIndices).toEqual([5]);
 	});
 
 	describe('should not insert an ad placeholder after an element which is not an image or text', () => {
