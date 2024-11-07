@@ -2669,8 +2669,8 @@ const cardKickerTextDark: PaletteFunction = ({ theme }) => {
 	}
 };
 
-const cardBackgroundHoverLight: PaletteFunction = () =>
-	sourcePalette.neutral[93];
+const cardBackgroundHover: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[7], 0.1);
 
 const captionTextLight: PaletteFunction = ({ design, theme }) => {
 	switch (theme) {
@@ -6072,8 +6072,8 @@ const paletteColours = {
 		dark: cardBackgroundDark,
 	},
 	'--card-background-hover': {
-		light: cardBackgroundHoverLight,
-		dark: cardBackgroundDark,
+		light: cardBackgroundHover,
+		dark: cardBackgroundHover,
 	},
 	'--card-border-supporting': {
 		light: cardBorderSupportingLight,

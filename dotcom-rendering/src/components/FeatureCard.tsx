@@ -99,6 +99,23 @@ const baseCardStyles = css`
 	text-decoration: none;
 `;
 
+const hoverStyles = css`
+	:hover .image-overlay {
+		cursor: pointer;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		background-color: ${palette('--card-background-hover')};
+	}
+
+	/* Only underline the headline element we want to target (not kickers/sublink headlines) */
+	:hover .card-headline .show-underline {
+		text-decoration: underline;
+	}
+`;
+
 const overlayStyles = css`
 	position: absolute;
 	bottom: 0;
@@ -272,7 +289,7 @@ export const FeatureCard = ({
 	return (
 		<FormatBoundary format={format}>
 			<ContainerOverrides containerPalette={containerPalette}>
-				<div css={[baseCardStyles]}>
+				<div css={[baseCardStyles, hoverStyles]}>
 					<CardLink
 						linkTo={linkTo}
 						headlineText={headlineText}
@@ -294,7 +311,6 @@ export const FeatureCard = ({
 						{media && (
 							<div
 								css={css`
-									/* position relative is required here to bound the image overlay */
 									position: relative;
 									img {
 										width: 100%;
@@ -329,6 +345,7 @@ export const FeatureCard = ({
 										</div>
 									</>
 								)}
+
 								{media.type === 'picture' && (
 									<>
 										<CardPicture
@@ -355,6 +372,10 @@ export const FeatureCard = ({
 											)}
 									</>
 								)}
+
+								{/* This image overlay is styled when the CardLink is hovered */}
+								<div className="image-overlay" />
+
 								<div css={overlayStyles}>
 									<CardHeadline
 										headlineText={headlineText}
