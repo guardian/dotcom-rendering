@@ -112,8 +112,7 @@ const hoverStyles = css`
 		height: 100%;
 		width: 100%;
 		border-radius: 100%;
-		background-color: ${palette('--highlights-card-headline')};
-		opacity: 0.1;
+		background-color: ${palette('--card-background-hover')};
 	}
 
 	/* Only underline the headline element we want to target (not kickers/sublink headlines) */
