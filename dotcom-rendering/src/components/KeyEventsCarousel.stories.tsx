@@ -67,6 +67,7 @@ export const SingleKeyEventCarousel = () => {
 				filterKeyEvents={false}
 				id="key-events-carousel-desktop"
 				absoluteServerTimes={true}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -81,6 +82,7 @@ export const ShortKeyEventCarousel = () => {
 				filterKeyEvents={false}
 				id="key-events-carousel-desktop"
 				absoluteServerTimes={true}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -95,6 +97,7 @@ export const LongKeyEventCarousel = () => {
 				filterKeyEvents={false}
 				id="key-events-carousel-desktop"
 				absoluteServerTimes={true}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);

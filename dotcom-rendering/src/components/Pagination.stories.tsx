@@ -32,6 +32,7 @@ export const notFirstPage = ({ format }: StoryProps) => (
 			older="older"
 			newer="newer"
 			newest="newest"
+			renderingTarget="Web"
 		/>
 	</>
 );
@@ -49,6 +50,7 @@ export const firstPageStory = ({ format }: StoryProps) => (
 			older="older"
 			newer="newer"
 			newest="newest"
+			renderingTarget="Web"
 		/>
 	</>
 );
@@ -66,6 +68,7 @@ export const lastPage = ({ format }: StoryProps) => (
 			older="older"
 			newer="newer"
 			newest="newest"
+			renderingTarget="Web"
 		/>
 	</>
 );
