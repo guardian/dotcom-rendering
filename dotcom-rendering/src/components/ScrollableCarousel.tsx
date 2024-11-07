@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headlineMedium24Object,
 	space,
+	textSansBold17Object,
 	until,
 } from '@guardian/source/foundations';
 import type { ThemeButton } from '@guardian/source/react-components';
@@ -25,7 +25,7 @@ type Props = {
  * This needs to match the `FrontSection` title font and is used to calculate
  * the negative margin that aligns the navigation buttons with the title.
  */
-const titlePreset = headlineMedium24Object;
+const titlePreset = textSansBold17Object;
 
 /**
  * Grid sizing to calculate negative margin used to pull navigation buttons

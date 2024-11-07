@@ -461,6 +461,10 @@ export const FrontSection = ({
 		!!collectionId &&
 		!!pageId &&
 		!!ajaxUrl;
+	const showVerticalRule =
+		!hasPageSkin &&
+		containerLevel !== 'Primary' &&
+		containerLevel !== 'Secondary';
 
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
@@ -501,7 +505,7 @@ export const FrontSection = ({
 							// only ever having <CPScott> as the leftContent
 							title?.toLowerCase() === 'opinion',
 						),
-						!hasPageSkin &&
+						showVerticalRule &&
 							sectionHeadlineFromLeftCol(
 								schemePalette('--section-border'),
 							),
