@@ -28,7 +28,7 @@ const getImageElement = (): ImageBlockElement => ({
 	media: { allImages: [] },
 	data: {},
 	displayCredit: true,
-	role: 'supporting',
+	role: 'inline',
 	imageSources: [],
 	elementId: '12345',
 });
