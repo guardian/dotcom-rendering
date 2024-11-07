@@ -82,8 +82,12 @@ const fullscreenStyles = (id: string) => css`
 	iframe#${id} {
 		position: fixed;
 		top: 0;
-		left: 0;
+		/* override vw and vh with vsw and vsh if supported */
+		width: 100vw;
+		height: 100vh;
+		/* stylelint-disable-next-line declaration-block-no-duplicate-properties */
 		width: 100svw;
+		/* stylelint-disable-next-line declaration-block-no-duplicate-properties */
 		height: 100svh;
 		${getZIndex('youTubeFullscreen')};
 	}
