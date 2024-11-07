@@ -1,8 +1,7 @@
 import { isString } from '@guardian/libs';
 import { ConfigProvider } from '../components/ConfigContext';
 import { EditionsCrosswordPage } from '../components/EditionsCrosswordPage';
-import { isAmpSupported } from '../components/Elements.amp';
-import { ArticleDesign, Pillar } from '../lib/articleFormat';
+import { ArticleDesign } from '../lib/articleFormat';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -14,27 +13,18 @@ import { polyfillIO } from '../lib/polyfill.io';
 import { createGuardian as createWindowGuardian } from '../model/guardian';
 import type { Article } from '../types/article';
 import type { Config } from '../types/configContext';
-import type { FEElement } from '../types/content';
-import type { TagType } from '../types/tag';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 interface Props {
 	article: Article;
 }
 
-const decideTitle = ({ format, frontendData }: Article): string => {
-	if (format.theme === Pillar.Opinion && frontendData.byline) {
-		return `${frontendData.headline} | ${frontendData.byline} | The Guardian`;
-	}
-	return `${frontendData.headline} | ${frontendData.sectionLabel} | The Guardian`;
-};
-
 export const renderCrosswordHtml = ({
 	article,
 }: Props): { html: string; prefetchScripts: string[] } => {
 	const { format, frontendData } = article;
 
-	const title = decideTitle(article);
+	const title = `${frontendData.headline} | ${frontendData.sectionLabel} | The Guardian`;
 	const linkedData = frontendData.linkedData;
 
 	const renderingTarget = 'Web';
@@ -50,26 +40,6 @@ export const renderCrosswordHtml = ({
 		<ConfigProvider value={config}>
 			<EditionsCrosswordPage article={article} />
 		</ConfigProvider>,
-	);
-
-	// We want to only insert script tags for the elements or main media elements on this page view
-	// so we need to check what elements we have and use the mapping to the the chunk name
-	const elements: FEElement[] = frontendData.blocks
-		.map((block) => block.elements)
-		.flat();
-
-	const pageHasNonBootInteractiveElements = elements.some(
-		(element) =>
-			element._type ===
-				'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
-			element.scriptUrl !==
-				'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js', // We have rewritten this standard behaviour into Dotcom Rendering
-	);
-
-	const pageHasTweetElements = elements.some(
-		(element) =>
-			element._type ===
-			'model.dotcomrendering.pageElements.TweetBlockElement',
 	);
 
 	const build = getModulesBuild({
@@ -90,8 +60,6 @@ export const renderCrosswordHtml = ({
 		getPathFromManifest(build, 'index.js'),
 		process.env.COMMERCIAL_BUNDLE_URL ??
 			frontendData.config.commercialBundleUrl,
-		pageHasNonBootInteractiveElements &&
-			`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 	].filter(isString);
 	const legacyScripts = [
 		getPathFromManifest('client.web.legacy', 'frameworks.js'),
@@ -131,61 +99,12 @@ export const renderCrosswordHtml = ({
 		unknownConfig: frontendData.config,
 	});
 
-	const getAmpLink = (tags: TagType[]) => {
-		if (
-			format.design === ArticleDesign.Interactive ||
-			format.design === ArticleDesign.FullPageInteractive
-		) {
-			return undefined;
-		}
-
-		if (
-			!isAmpSupported({
-				format,
-				tags,
-				elements: frontendData.blocks.flatMap(
-					(block) => block.elements,
-				),
-				switches: frontendData.config.switches,
-				main: frontendData.main,
-			})
-		) {
-			return undefined;
-		}
-
-		return `https://amp.theguardian.com/${frontendData.pageId}`;
-	};
-
-	// Only include AMP link for interactives which have the 'ampinteractive' tag
-	const ampLink = getAmpLink(frontendData.tags);
-
-	const { openGraphData, twitterData } = frontendData;
+	const { openGraphData } = frontendData;
 	const keywords =
 		typeof frontendData.config.keywords === 'undefined' ||
 		frontendData.config.keywords === 'Network Front'
 			? ''
 			: frontendData.config.keywords;
-
-	const initTwitter = `
-<script>
-// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/set-up-twitter-for-websites
-window.twttr = (function(d, s, id) {
-	var js, fjs = d.getElementsByTagName(s)[0],
-	t = window.twttr || {};
-	if (d.getElementById(id)) return t;
-	js = d.createElement(s);
-	js.id = id;
-	js.src = "https://platform.twitter.com/widgets.js";
-	fjs.parentNode.insertBefore(js, fjs);
-
-	t._e = [];
-	t.ready = function(f) {
-	t._e.push(f);
-	};
-
-	return t;
-}(document, "script", "twitter-wjs"));
-</script>`;
 
 	const { canonicalUrl } = frontendData;
 
@@ -197,20 +116,12 @@ window.twttr = (function(d, s, id) {
 		title,
 		description: frontendData.trailText,
 		guardian,
-		ampLink,
 		openGraphData,
-		twitterData,
 		keywords,
-		initTwitter:
-			pageHasTweetElements || format.design === ArticleDesign.LiveBlog
-				? initTwitter
-				: undefined,
 		canonicalUrl,
 		renderingTarget: 'Web',
 		weAreHiring: !!frontendData.config.switches.weAreHiring,
 		config,
-		hasLiveBlogTopAd: !!frontendData.config.hasLiveBlogTopAd,
-		hasSurveyAd: !!frontendData.config.hasSurveyAd,
 		onlyLightColourScheme:
 			format.design === ArticleDesign.FullPageInteractive ||
 			format.design === ArticleDesign.Interactive,
