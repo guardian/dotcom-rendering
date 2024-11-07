@@ -101,7 +101,6 @@ const baseCardStyles = css`
 
 const hoverStyles = css`
 	:hover .image-overlay {
-		cursor: pointer;
 		position: absolute;
 		top: 0;
 		width: 100%;
