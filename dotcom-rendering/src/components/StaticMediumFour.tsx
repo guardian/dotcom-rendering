@@ -21,7 +21,7 @@ export const StaticMediumFour = ({
 	imageLoading,
 	showImage = true,
 }: Props) => {
-	const cards = trails.splice(0, 4);
+	const cards = trails.slice(0, 4);
 
 	return (
 		<UL

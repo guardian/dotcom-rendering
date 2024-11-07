@@ -32,6 +32,7 @@ const meta = {
 			discussionApiUrl={discussionApiUrl}
 			editionId={'UK'}
 			showTopBorder={false}
+			containerLevel="Secondary"
 		>
 			<ScrollableSmall {...args} />
 		</FrontSection>
@@ -42,31 +43,31 @@ export default meta;
 
 type Story = StoryObj<typeof ScrollableSmall>;
 
-export const WithMultipleCards = {} satisfies Story;
-
-export const WithOneCard = {
-	args: {
-		trails: trails.slice(0, 1),
-	},
-} satisfies Story;
-
-export const WithTwoCards = {
-	args: {
-		trails: trails.slice(0, 2),
-	},
-} satisfies Story;
-
-export const WithThreeCards = {
-	args: {
-		trails: trails.slice(0, 3),
-	},
-} satisfies Story;
+export const WithMultipleCards = {};
 
 export const WithFourCards = {
 	args: {
 		trails: trails.slice(0, 4),
 	},
-} satisfies Story;
+};
+
+export const WithThreeCards = {
+	args: {
+		trails: trails.slice(0, 3),
+	},
+};
+
+export const WithOneCard = {
+	args: {
+		trails: trails.slice(0, 1),
+	},
+};
+
+export const WithTwoCards = {
+	args: {
+		trails: trails.slice(0, 2),
+	},
+};
 
 const containerPalettes = [
 	'InvestigationPalette',
@@ -85,16 +86,21 @@ const containerPalettes = [
 >[];
 
 export const WithSpecialPaletteVariations = {
+	parameters: {
+		/** We only want one breakpoint snapshotted for special palette variations */
+		chromatic: { viewports: [breakpoints.desktop] },
+	},
 	render: (args) => (
 		<>
 			{containerPalettes.map((containerPalette) => (
 				<FrontSection
-					title="Scrollable small"
+					title={containerPalette}
 					discussionApiUrl={discussionApiUrl}
-					editionId={'UK'}
+					editionId="UK"
 					showTopBorder={false}
 					key={containerPalette}
 					containerPalette={containerPalette}
+					containerLevel="Secondary"
 				>
 					<ScrollableSmall
 						{...args}
