@@ -107,15 +107,15 @@ const setAppsConfiguration = async (
 	renderingTarget: RenderingTarget,
 ) => {
 	if (renderingTarget === 'Apps') {
-		const videoClient = getVideoClient();
-		const requiresWebFullscreen = await videoClient.setFullscreen(false);
+		const requiresWebFullscreen =
+			await getVideoClient().setFullscreen(false);
 		const updatedConfiguration = {
 			...basePlayerConfiguration,
 			external_fullscreen: requiresWebFullscreen ? 1 : 0,
 		};
 		return updatedConfiguration;
 	}
-	return Promise.resolve(basePlayerConfiguration);
+	return basePlayerConfiguration;
 };
 
 /**
@@ -406,7 +406,7 @@ const isSignedIn = async (): Promise<boolean> => {
 			);
 		}
 	}
-	return Promise.resolve(false);
+	return false;
 };
 
 export const YoutubeAtomPlayer = ({
