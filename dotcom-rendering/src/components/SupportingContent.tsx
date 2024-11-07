@@ -16,7 +16,10 @@ type Props = {
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
 	isDynamo?: boolean;
-	fillBackground?: boolean;
+	/** Allows sublinks container to have a background colour on mobile screen sizes */
+	fillBackgroundOnMobile?: boolean;
+	/** Allows sublinks container to have a background colour on desktop screen sizes */
+	fillBackgroundOnDesktop?: boolean;
 };
 
 /**
@@ -121,20 +124,29 @@ const wrapperStyles = css`
 	}
 `;
 
-const backgroundFill = css`
-	/** background fill should only apply to sublinks on mobile breakpoints */
+const backgroundFillMobile = css`
 	${until.tablet} {
 		padding: ${space[2]}px;
 		padding-bottom: ${space[3]}px;
 		background-color: ${palette('--card-sublinks-background')};
 	}
 `;
+
+const backgroundFillDesktop = css`
+	${from.tablet} {
+		padding: ${space[2]}px;
+		padding-bottom: ${space[3]}px;
+		background-color: ${palette('--card-sublinks-background')};
+	}
+`;
+
 export const SupportingContent = ({
 	supportingContent,
 	alignment,
 	containerPalette,
 	isDynamo,
-	fillBackground = false,
+	fillBackgroundOnMobile = false,
+	fillBackgroundOnDesktop = false,
 }: Props) => {
 	const columnSpan = getColumnSpan(supportingContent.length);
 	return (
@@ -144,7 +156,8 @@ export const SupportingContent = ({
 				wrapperStyles,
 				baseGrid,
 				(isDynamo ?? alignment === 'horizontal') && horizontalGrid,
-				fillBackground && backgroundFill,
+				fillBackgroundOnMobile && backgroundFillMobile,
+				fillBackgroundOnDesktop && backgroundFillDesktop,
 			]}
 		>
 			{supportingContent.map((subLink, index) => {

@@ -67,6 +67,7 @@ export const StaticFeatureTwo = ({
 								desktop: 'medium',
 								tablet: 'small',
 							}}
+							supportingContent={card.supportingContent}
 						/>
 					</LI>
 				);
