@@ -53,8 +53,11 @@ const isSuitablePosition = (
 const isParagraph = (element: FEElement) =>
 	element._type === 'model.dotcomrendering.pageElements.TextBlockElement';
 
-const isImage = (element: FEElement) =>
-	element._type === 'model.dotcomrendering.pageElements.ImageBlockElement';
+// We don't want to insert an ad after a thumbnail image as it looks bad
+const isEligibleImage = (element: FEElement) =>
+	element._type === 'model.dotcomrendering.pageElements.ImageBlockElement' &&
+	element.role !== 'thumbnail' &&
+	element.role !== 'supporting';
 
 const insertPlaceholder = (
 	prevElements: FEElement[],
@@ -89,7 +92,7 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 			idx: number,
 		): ReducerAccumulator => {
 			const elementCounter =
-				isParagraph(currentElement) || isImage(currentElement)
+				isParagraph(currentElement) || isEligibleImage(currentElement)
 					? prev.elementCounter + 1
 					: prev.elementCounter;
 
@@ -114,7 +117,8 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 					? prev.numberOfAdsInserted + 1
 					: prev.numberOfAdsInserted,
 				prevIsParagraphOrImage:
-					isParagraph(currentElement) || isImage(currentElement),
+					isParagraph(currentElement) ||
+					isEligibleImage(currentElement),
 			};
 		},
 		// Initial value for reducer function
