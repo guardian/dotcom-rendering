@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	height,
 	space,
 	textSansBold17Object,
-	until,
 } from '@guardian/source/foundations';
 import type { ThemeButton } from '@guardian/source/react-components';
 import {
@@ -31,8 +31,8 @@ const titlePreset = textSansBold17Object;
  * Grid sizing to calculate negative margin used to pull navigation buttons
  * out side of `FrontSection` container at `wide` breakpoint.
  */
-const gridColumnWidth = '60px';
-const gridGap = '20px';
+const gridColumnWidth = 60;
+const gridGap = 20;
 
 const themeButton: Partial<ThemeButton> = {
 	borderTertiary: palette('--carousel-chevron-border'),
@@ -46,8 +46,18 @@ const themeButtonDisabled: Partial<ThemeButton> = {
 	backgroundTertiaryHover: 'transparent',
 };
 
+/**
+ * On mobile the carousel extends into the outer margins to use the full width
+ * of the screen. From tablet onwards the carousel sits within the page grid.
+ *
+ * The FrontSection container adds a -10px negative margin to either side of
+ * the content from tablet so we add the margins back to align the carousel with
+ * the grid. From leftCol we retain FrontSection's -10px negative margin on the
+ * left side so that the carousel extends into the the middle of the gutter
+ * between the grid columns to meet the dividing line.
+ */
 const containerStyles = css`
-	/* Extend carousel into outer margins on mobile */
+	position: relative;
 	margin-left: -10px;
 	margin-right: -10px;
 	${from.mobileLandscape} {
@@ -59,7 +69,17 @@ const containerStyles = css`
 		margin-right: 10px;
 	}
 	${from.leftCol} {
-		margin-left: -10px;
+		margin-left: 0;
+		::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			width: 1px;
+			background-color: ${palette('--card-border-top')};
+			transform: translateX(-50%);
+		}
 	}
 `;
 
@@ -82,6 +102,10 @@ const containerWithNavigationStyles = css`
 	 *
 	 * From wide, the navigation buttons are pulled out of the main content area
 	 * into the right-hand column.
+	 *
+	 * Between leftCol and wide the top of the fixed dividing line is pushed
+	 * down so it starts below the navigation buttons and gap, and aligns with
+	 * the top of the carousel.
 	 */
 	${from.tablet} {
 		margin-top: calc(
@@ -91,9 +115,15 @@ const containerWithNavigationStyles = css`
 	}
 	${from.leftCol} {
 		margin-top: 0;
+		::before {
+			top: ${height.ctaSmall + space[2]}px;
+		}
 	}
 	${from.wide} {
-		margin-right: calc(${space[2]}px - ${gridColumnWidth} - ${gridGap});
+		margin-right: calc(${space[2]}px - ${gridColumnWidth}px - ${gridGap}px);
+		::before {
+			top: 0;
+		}
 	}
 `;
 
@@ -130,8 +160,8 @@ const carouselStyles = css`
 		scroll-padding-left: 0;
 	}
 	${from.leftCol} {
-		padding-left: 20px;
-		scroll-padding-left: 20px;
+		padding-left: 10px;
+		scroll-padding-left: 10px;
 	}
 `;
 
@@ -149,7 +179,7 @@ const itemStyles = css`
 	scroll-snap-align: start;
 	grid-area: span 1;
 	position: relative;
-	::before {
+	:not(:first-child)::before {
 		content: '';
 		position: absolute;
 		top: 0;
@@ -158,11 +188,6 @@ const itemStyles = css`
 		width: 1px;
 		background-color: ${palette('--card-border-top')};
 		transform: translateX(-50%);
-	}
-	${until.leftCol} {
-		:first-child::before {
-			background-color: transparent;
-		}
 	}
 `;
 
