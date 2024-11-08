@@ -114,6 +114,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Get started',
 			newsletters: [
+				'fighting-back',
 				'the-long-wave',
 				'the-stakes-us-election-edition',
 				'us-morning-newsletter', // First Thing
