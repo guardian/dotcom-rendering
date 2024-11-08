@@ -1,18 +1,12 @@
-import type { Newsletter } from '../types/content';
+import type { Newsletter, NewsletterLayout } from '../types/content';
 import type {
 	DCRNewslettersPageType,
 	FENewslettersPageType,
 	GroupedNewsletters,
 } from '../types/newslettersPage';
 
-export type StaticGroups = {
-	title: string;
-	subtitle?: string;
-	newsletters: string[];
-}[];
-
 const mapLayoutToGroups = (
-	staticGroups: StaticGroups,
+	layout: NewsletterLayout,
 	newsletters: Newsletter[],
 ): GroupedNewsletters => {
 	const newsletterRecord = newsletters.reduce<
@@ -22,7 +16,7 @@ const mapLayoutToGroups = (
 		return record;
 	}, {});
 
-	const mapped = staticGroups.map((group) => ({
+	const mapped = layout.map((group) => ({
 		title: group.title,
 		subtitle: group.subtitle,
 		newsletters: group.newsletters.reduce<Newsletter[]>((list, name) => {
