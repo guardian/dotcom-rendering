@@ -477,6 +477,7 @@ export const FrontSection = ({
 				data-link-name={ophanComponentLink}
 				data-component={ophanComponentName}
 				data-container-name={containerName}
+				data-container-level={containerLevel}
 				css={[
 					fallbackStyles,
 					containerStylesUntilLeftCol,
