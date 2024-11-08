@@ -13,7 +13,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'the-long-wave',
 				'morning-briefing', // First Edition
-				'the-stakes-us-election-edition',
+				'fighting-back',
 				'saturday-edition',
 				'word-of-mouth', // Feast
 				'the-guide-staying-in',
@@ -62,13 +62,14 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'The world explained',
 			newsletters: [
 				'this-is-europe',
-				'trump-on-trial',
+				'the-stakes-us-election-edition', // The Stakes — Presidential Transition
 				'follow-margaret-sullivan',
 				'follow-robert-reich',
 				'follow-mehdi-hasan',
 				'global-dispatch',
 				'documentaries',
 				'her-stage',
+				'trump-on-trial',
 			],
 		},
 		{
@@ -113,8 +114,8 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Get started',
 			newsletters: [
-				'the-stakes-us-election-edition',
 				'the-long-wave',
+				'the-stakes-us-election-edition',
 				'us-morning-newsletter', // First Thing
 				'trump-on-trial',
 				'well-actually',
