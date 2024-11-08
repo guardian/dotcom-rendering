@@ -32,12 +32,19 @@ export const shouldIncrementArticleCount = (contentType: string): boolean => {
 export const getDailyArticleCounts = (
 	contentType: string,
 ): DailyArticleHistory | undefined => {
+	console.log('getDailyArticleCounts');
 	if (!window.guardian.dailyArticleCount) {
 		if (shouldIncrementArticleCount(contentType)) {
 			incrementDailyArticleCount();
 		}
 		window.guardian.dailyArticleCount = getDailyArticleCount();
 	}
+
+	// eslint-disable-next-line no-console
+	console.log(
+		'window.guardian.dailyArticleCount:',
+		window.guardian.dailyArticleCount,
+	);
 	return window.guardian.dailyArticleCount;
 };
 
@@ -79,10 +86,12 @@ export const getArticleCounts = async (
 	tags: TagType[],
 	contentType: string,
 ): Promise<ArticleCounts | undefined> => {
+	getDailyArticleCounts(contentType);
+	await getWeeklyArticleCounts(pageId, tags, contentType);
+
 	return {
-		dailyArticleHistory: getDailyArticleCounts(pageId) ?? [],
-		weeklyArticleHistory:
-			(await getWeeklyArticleCounts(pageId, tags, contentType)) ?? [],
+		dailyArticleHistory: window.guardian.dailyArticleCount ?? [],
+		weeklyArticleHistory: window.guardian.weeklyArticleCount ?? [],
 	};
 };
 
