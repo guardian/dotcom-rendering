@@ -4,10 +4,14 @@ import type {
 	FENewslettersPageType,
 	GroupedNewsletters,
 } from '../types/newslettersPage';
-import type { StaticGroups } from './newsletter-grouping';
-import { groups } from './newsletter-grouping';
 
-const mapStaticGroups = (
+export type StaticGroups = {
+	title: string;
+	subtitle?: string;
+	newsletters: string[];
+}[];
+
+const mapLayoutToGroups = (
 	staticGroups: StaticGroups,
 	newsletters: Newsletter[],
 ): GroupedNewsletters => {
@@ -63,11 +67,10 @@ const reduceToDefaultGrouping = (
 const getGroups = (
 	newsletterPageData: FENewslettersPageType,
 ): GroupedNewsletters => {
-	const { newsletters, editionId } = newsletterPageData;
-	const staticGroup = groups[editionId] ?? groups['UK'];
+	const { newsletters, layout } = newsletterPageData;
 
-	return staticGroup
-		? mapStaticGroups(staticGroup, newsletters)
+	return layout
+		? mapLayoutToGroups(layout, newsletters)
 		: reduceToDefaultGrouping(newsletters);
 };
 
