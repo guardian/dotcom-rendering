@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	headlineBold28Object,
 	height,
 	space,
 	textSansBold17Object,
@@ -22,17 +23,21 @@ type Props = {
 };
 
 /**
- * This needs to match the `FrontSection` title font and is used to calculate
- * the negative margin that aligns the navigation buttons with the title.
+ * Primary and Secondary containers have different typographic styles for the
+ * titles. We get the font size and line height values for these from the
+ * typography presets so we can calculate the offset needed to align the
+ * navigation buttons with the title on tablet and desktop.
  */
-const titlePreset = textSansBold17Object;
+const primaryTitlePreset = headlineBold28Object;
+const secondaryTitlePreset = textSansBold17Object;
 
 /**
- * Grid sizing to calculate negative margin used to pull navigation buttons
- * out side of `FrontSection` container at `wide` breakpoint.
+ * Grid sizing values to calculate negative margin used to pull navigation
+ * buttons outside of container into the outer grid column at wide breakpoint.
  */
 const gridColumnWidth = 60;
 const gridGap = 20;
+const gridGapMobile = 10;
 
 const themeButton: Partial<ThemeButton> = {
 	borderTertiary: palette('--carousel-chevron-border'),
@@ -58,15 +63,15 @@ const themeButtonDisabled: Partial<ThemeButton> = {
  */
 const containerStyles = css`
 	position: relative;
-	margin-left: -10px;
-	margin-right: -10px;
+	margin-left: -${gridGapMobile}px;
+	margin-right: -${gridGapMobile}px;
 	${from.mobileLandscape} {
-		margin-left: -20px;
-		margin-right: -20px;
+		margin-left: -${gridGap}px;
+		margin-right: -${gridGap}px;
 	}
 	${from.tablet} {
-		margin-left: 10px;
-		margin-right: 10px;
+		margin-left: ${gridGap / 2}px;
+		margin-right: ${gridGap / 2}px;
 	}
 	${from.leftCol} {
 		margin-left: 0;
@@ -108,10 +113,18 @@ const containerWithNavigationStyles = css`
 	 * the top of the carousel.
 	 */
 	${from.tablet} {
-		margin-top: calc(
-			(-${titlePreset.fontSize} * ${titlePreset.lineHeight}) -
-				${space[3]}px
-		);
+		[data-container-level='Primary'] & {
+			margin-top: calc(
+				-${primaryTitlePreset.fontSize} * ${primaryTitlePreset.lineHeight} -
+					${space[3]}px
+			);
+		}
+		[data-container-level='Secondary'] & {
+			margin-top: calc(
+				-${secondaryTitlePreset.fontSize} * ${secondaryTitlePreset.lineHeight} -
+					${space[3]}px
+			);
+		}
 	}
 	${from.leftCol} {
 		margin-top: 0;
@@ -120,7 +133,7 @@ const containerWithNavigationStyles = css`
 		}
 	}
 	${from.wide} {
-		margin-right: calc(${space[2]}px - ${gridColumnWidth}px - ${gridGap}px);
+		margin-right: -${gridColumnWidth + gridGap / 2}px;
 		::before {
 			top: 0;
 		}
@@ -146,13 +159,13 @@ const carouselStyles = css`
 	}
 	scrollbar-width: none; /* Firefox */
 
-	padding-left: 10px;
-	padding-right: 10px;
-	scroll-padding-left: 10px;
+	padding-left: ${gridGapMobile}px;
+	padding-right: ${gridGapMobile}px;
+	scroll-padding-left: ${gridGapMobile}px;
 	${from.mobileLandscape} {
-		padding-left: 20px;
-		padding-right: 20px;
-		scroll-padding-left: 20px;
+		padding-left: ${gridGap}px;
+		padding-right: ${gridGap}px;
+		scroll-padding-left: ${gridGap}px;
 	}
 	${from.tablet} {
 		padding-left: 0;
@@ -160,8 +173,8 @@ const carouselStyles = css`
 		scroll-padding-left: 0;
 	}
 	${from.leftCol} {
-		padding-left: 10px;
-		scroll-padding-left: 10px;
+		padding-left: ${gridGap / 2}px;
+		scroll-padding-left: ${gridGap / 2}px;
 	}
 `;
 
@@ -225,7 +238,7 @@ const generateCarouselColumnStyles = (
 			${totalCards},
 			calc(
 				(100% / ${visibleCardsOnMobile}) - ${offsetPeepingCardWidth}px +
-					${10 / visibleCardsOnMobile}px
+					${gridGapMobile / visibleCardsOnMobile}px
 			)
 		);
 		${from.mobileLandscape} {
@@ -234,7 +247,7 @@ const generateCarouselColumnStyles = (
 				calc(
 					(100% / ${visibleCardsOnMobile}) -
 						${offsetPeepingCardWidth}px +
-						${20 / visibleCardsOnMobile}px
+						${gridGap / visibleCardsOnMobile}px
 				)
 			);
 		}
