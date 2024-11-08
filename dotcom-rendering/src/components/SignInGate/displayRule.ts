@@ -119,8 +119,8 @@ export const canShowSignInGateMandatory: ({
 	currentLocaleCode,
 }: CanShowGateProps) => {
 	return (
-		(await hasRequiredConsents()) &&
-		(await canShowSignInGate({
+		// (await hasRequiredConsents()) &&
+		await canShowSignInGate({
 			isSignedIn,
 			currentTest,
 			contentType,
@@ -129,7 +129,7 @@ export const canShowSignInGateMandatory: ({
 			isPaidContent,
 			isPreview,
 			currentLocaleCode,
-		}))
+		})
 	);
 };
 
