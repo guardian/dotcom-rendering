@@ -12,7 +12,6 @@ import type {
 	DCRSupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
-import { StarRatingComponent } from './Card/Card';
 import { CardAge as AgeStamp } from './Card/components/CardAge';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
@@ -29,6 +28,7 @@ import { ContainerOverrides } from './ContainerOverrides';
 import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
 import { MediaDuration } from './MediaDuration';
+import { StarRating } from './StarRating/StarRating';
 import { SupportingContent } from './SupportingContent';
 
 export type Position = 'inner' | 'outer' | 'none';
@@ -71,6 +71,7 @@ export type Props = {
 	isExternalLink: boolean;
 	/** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
 	aspectRatio?: AspectRatio;
+	showQuotes?: boolean;
 };
 
 const baseCardStyles = css`
@@ -98,6 +99,22 @@ const baseCardStyles = css`
 	text-decoration: none;
 `;
 
+const hoverStyles = css`
+	:hover .image-overlay {
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		background-color: ${palette('--card-background-hover')};
+	}
+
+	/* Only underline the headline element we want to target (not kickers/sublink headlines) */
+	:hover .card-headline .show-underline {
+		text-decoration: underline;
+	}
+`;
+
 const overlayStyles = css`
 	position: absolute;
 	bottom: 0;
@@ -110,6 +127,14 @@ const overlayStyles = css`
 	padding: ${space[2]}px;
 	row-gap: ${space[2]}px;
 	backdrop-filter: blur(12px) brightness(0.7);
+`;
+
+const starRatingWrapper = css`
+	background-color: ${palette('--star-rating-background')};
+	color: ${palette('--star-rating-fill')};
+	margin-top: ${space[1]}px;
+	display: inline-block;
+	width: fit-content;
 `;
 
 const getMedia = ({
@@ -244,6 +269,7 @@ export const FeatureCard = ({
 	absoluteServerTimes,
 	aspectRatio,
 	starRating,
+	showQuotes,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -262,7 +288,7 @@ export const FeatureCard = ({
 	return (
 		<FormatBoundary format={format}>
 			<ContainerOverrides containerPalette={containerPalette}>
-				<div css={[baseCardStyles]}>
+				<div css={[baseCardStyles, hoverStyles]}>
 					<CardLink
 						linkTo={linkTo}
 						headlineText={headlineText}
@@ -284,7 +310,6 @@ export const FeatureCard = ({
 						{media && (
 							<div
 								css={css`
-									/* position relative is required here to bound the image overlay */
 									position: relative;
 									img {
 										width: 100%;
@@ -319,6 +344,7 @@ export const FeatureCard = ({
 										</div>
 									</>
 								)}
+
 								{media.type === 'picture' && (
 									<>
 										<CardPicture
@@ -345,12 +371,16 @@ export const FeatureCard = ({
 											)}
 									</>
 								)}
+
+								{/* This image overlay is styled when the CardLink is hovered */}
+								<div className="image-overlay" />
+
 								<div css={overlayStyles}>
 									<CardHeadline
 										headlineText={headlineText}
 										format={format}
 										fontSizes={headlineSizes}
-										showQuotes={false}
+										showQuotes={showQuotes}
 										kickerText={
 											format.design ===
 												ArticleDesign.LiveBlog &&
@@ -375,10 +405,12 @@ export const FeatureCard = ({
 									/>
 
 									{starRating !== undefined ? (
-										<StarRatingComponent
-											rating={starRating}
-											cardHasImage={!!image}
-										/>
+										<div css={starRatingWrapper}>
+											<StarRating
+												rating={starRating}
+												size="small"
+											/>
+										</div>
 									) : null}
 
 									{!!trailText && (

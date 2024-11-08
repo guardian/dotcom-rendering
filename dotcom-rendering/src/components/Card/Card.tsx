@@ -138,7 +138,7 @@ const starWrapper = (cardHasImage: boolean) => css`
 	}
 `;
 
-export const StarRatingComponent = ({
+const StarRatingComponent = ({
 	rating,
 	cardHasImage,
 }: {

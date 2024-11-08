@@ -1,9 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	palette as sourcePalette,
-	space,
-	until,
-} from '@guardian/source/foundations';
+import { space, until } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../../../lib/articleFormat';
 import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
@@ -51,8 +47,7 @@ const hoverStyles = css`
 		width: 100%;
 		height: 100%;
 		left: 0;
-		background-color: ${sourcePalette.neutral[7]};
-		opacity: 0.1;
+		background-color: ${palette('--card-background-hover')};
 	}
 
 	/* Only underline the headline element we want to target (not kickers/sublink headlines) */

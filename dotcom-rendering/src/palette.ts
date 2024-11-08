@@ -2669,8 +2669,8 @@ const cardKickerTextDark: PaletteFunction = ({ theme }) => {
 	}
 };
 
-const cardBackgroundHoverLight: PaletteFunction = () =>
-	sourcePalette.neutral[93];
+const cardBackgroundHover: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[7], 0.1);
 
 const captionTextLight: PaletteFunction = ({ design, theme }) => {
 	switch (theme) {
@@ -4375,6 +4375,10 @@ const carouselTitleHighlightDark: PaletteFunction = ({ theme, design }) => {
 
 const carouselChevronLight: PaletteFunction = () => sourcePalette.neutral[7];
 const carouselChevronDark: PaletteFunction = () => sourcePalette.neutral[86];
+const carouselChevronHoverLight: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[73], 0.2);
+const carouselChevronHoverDark: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[73], 0.2);
 const carouselChevronBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[73];
 const carouselChevronBorderDark: PaletteFunction = () =>
@@ -4384,9 +4388,9 @@ const carouselChevronDisabledLight: PaletteFunction = () =>
 const carouselChevronDisabledDark: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[86], 0.32);
 const carouselChevronBorderDisabledLight: PaletteFunction = () =>
-	transparentColour(sourcePalette.neutral[73], 0.32);
+	transparentColour(sourcePalette.neutral[73], 0.2);
 const carouselChevronBorderDisabledDark: PaletteFunction = () =>
-	transparentColour(sourcePalette.neutral[73], 0.32);
+	transparentColour(sourcePalette.neutral[73], 0.2);
 
 const mostViewedFooterHoverLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
@@ -6068,8 +6072,8 @@ const paletteColours = {
 		dark: cardBackgroundDark,
 	},
 	'--card-background-hover': {
-		light: cardBackgroundHoverLight,
-		dark: cardBackgroundDark,
+		light: cardBackgroundHover,
+		dark: cardBackgroundHover,
 	},
 	'--card-border-supporting': {
 		light: cardBorderSupportingLight,
@@ -6146,6 +6150,10 @@ const paletteColours = {
 	'--carousel-chevron-disabled': {
 		light: carouselChevronDisabledLight,
 		dark: carouselChevronDisabledDark,
+	},
+	'--carousel-chevron-hover': {
+		light: carouselChevronHoverLight,
+		dark: carouselChevronHoverDark,
 	},
 	'--carousel-dot': {
 		light: carouselDotLight,

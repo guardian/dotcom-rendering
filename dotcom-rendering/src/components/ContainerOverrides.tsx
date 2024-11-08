@@ -1055,6 +1055,11 @@ const carouselChevronLight: ContainerFunction = (containerPalette) =>
 const carouselChevronDark: ContainerFunction = (containerPalette) =>
 	cardHeadlineDark(containerPalette);
 
+const carouselChevronHoverLight: ContainerFunction = (containerPalette) =>
+	transparentColour(cardHeadlineLight(containerPalette), 0.1);
+const carouselChevronHoverDark: ContainerFunction = (containerPalette) =>
+	transparentColour(cardHeadlineDark(containerPalette), 0.1);
+
 const carouselChevronBorderLight: ContainerFunction = (containerPalette) =>
 	transparentColour(cardHeadlineLight(containerPalette), 0.2);
 const carouselChevronBorderDark: ContainerFunction = (containerPalette) =>
@@ -1200,6 +1205,10 @@ const containerColours = {
 	'--carousel-chevron-disabled': {
 		light: carouselChevronDisabledLight,
 		dark: carouselChevronDisabledDark,
+	},
+	'--carousel-chevron-hover': {
+		light: carouselChevronHoverLight,
+		dark: carouselChevronHoverDark,
 	},
 	'--section-border': {
 		light: sectionBorderLight,

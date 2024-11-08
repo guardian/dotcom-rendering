@@ -4,12 +4,15 @@ import {
 	between,
 	headlineBold17,
 	headlineBold24,
+	headlineBold28,
 	space,
 	textEgyptian17,
+	textSansBold17,
 	until,
 } from '@guardian/source/foundations';
 import { type EditionId, getEditionFromId } from '../lib/edition';
 import { palette as schemePalette } from '../palette';
+import type { DCRContainerLevel } from '../types/front';
 import { localisedTitle } from './Localisation';
 
 type Props = {
@@ -20,6 +23,7 @@ type Props = {
 	showDateHeader?: boolean;
 	editionId?: EditionId;
 	lightweightHeader?: boolean;
+	containerLevel?: DCRContainerLevel;
 };
 
 const linkStyles = css`
@@ -31,6 +35,13 @@ const headerStyles = css`
 	padding-bottom: ${space[1]}px;
 	padding-top: 6px;
 	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
+`;
+
+const primaryTitleStyles = css`
+	${headlineBold28};
+`;
+const secondaryTitleStyles = css`
+	${textSansBold17};
 `;
 
 const headerStylesWithUrl = css`
@@ -94,6 +105,7 @@ export const ContainerTitle = ({
 	showDateHeader,
 	editionId,
 	fontColour = schemePalette('--article-section-title'),
+	containerLevel,
 }: Props) => {
 	if (!title) return null;
 
@@ -115,6 +127,9 @@ export const ContainerTitle = ({
 							headerStylesWithUrl,
 							headerStyles,
 							lightweightHeader && article17,
+							containerLevel === 'Primary' && primaryTitleStyles,
+							containerLevel === 'Secondary' &&
+								secondaryTitleStyles,
 						]}
 					>
 						{localisedTitle(title, editionId)}
@@ -123,7 +138,12 @@ export const ContainerTitle = ({
 			) : (
 				<h2
 					style={{ color: fontColour }}
-					css={[headerStyles, lightweightHeader && article17]}
+					css={[
+						headerStyles,
+						lightweightHeader && article17,
+						containerLevel === 'Primary' && primaryTitleStyles,
+						containerLevel === 'Secondary' && secondaryTitleStyles,
+					]}
 				>
 					{localisedTitle(title, editionId)}
 				</h2>

@@ -6,7 +6,11 @@ import type { EditionId } from '../lib/edition';
 import { hideAge } from '../lib/hideAge';
 import { palette, palette as schemePalette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
-import type { DCRContainerPalette, TreatType } from '../types/front';
+import type {
+	DCRContainerLevel,
+	DCRContainerPalette,
+	TreatType,
+} from '../types/front';
 import type { DCRFrontPagination } from '../types/tagPage';
 import { isAustralianTerritory, type Territory } from '../types/territory';
 import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
@@ -48,6 +52,10 @@ type Props = {
 	containerName?: string;
 	/** Fronts containers can have their styling overridden using a `containerPalette` */
 	containerPalette?: DCRContainerPalette;
+	/** Fronts containers can have their styling overridden using a `containerLevel`.
+	 * If used, this can be either "Primary" or "Secondary", both of which have different styles */
+	containerLevel?: DCRContainerLevel;
+
 	/** Defaults to `false`. If true a Hide button is show top right allowing this section
 	 * to be collapsed
 	 */
@@ -421,6 +429,7 @@ export const FrontSection = ({
 	children,
 	containerName,
 	containerPalette,
+	containerLevel,
 	description,
 	editionId,
 	leftContent,
@@ -452,6 +461,10 @@ export const FrontSection = ({
 		!!collectionId &&
 		!!pageId &&
 		!!ajaxUrl;
+	const showVerticalRule =
+		!hasPageSkin &&
+		containerLevel !== 'Primary' &&
+		containerLevel !== 'Secondary';
 
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
@@ -492,7 +505,7 @@ export const FrontSection = ({
 							// only ever having <CPScott> as the leftContent
 							title?.toLowerCase() === 'opinion',
 						),
-						!hasPageSkin &&
+						showVerticalRule &&
 							sectionHeadlineFromLeftCol(
 								schemePalette('--section-border'),
 							),
@@ -513,6 +526,7 @@ export const FrontSection = ({
 								url={!isOnPaidContentFront ? url : undefined}
 								showDateHeader={showDateHeader}
 								editionId={editionId}
+								containerLevel={containerLevel}
 							/>
 						}
 						collectionBranding={collectionBranding}

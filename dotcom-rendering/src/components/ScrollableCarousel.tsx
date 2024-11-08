@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headlineMedium24Object,
+	height,
 	space,
-	until,
+	textSansBold17Object,
 } from '@guardian/source/foundations';
 import type { ThemeButton } from '@guardian/source/react-components';
 import {
@@ -25,27 +25,39 @@ type Props = {
  * This needs to match the `FrontSection` title font and is used to calculate
  * the negative margin that aligns the navigation buttons with the title.
  */
-const titlePreset = headlineMedium24Object;
+const titlePreset = textSansBold17Object;
 
 /**
  * Grid sizing to calculate negative margin used to pull navigation buttons
  * out side of `FrontSection` container at `wide` breakpoint.
  */
-const gridColumnWidth = '60px';
-const gridGap = '20px';
+const gridColumnWidth = 60;
+const gridGap = 20;
 
 const themeButton: Partial<ThemeButton> = {
 	borderTertiary: palette('--carousel-chevron-border'),
 	textTertiary: palette('--carousel-chevron'),
+	backgroundTertiaryHover: palette('--carousel-chevron-hover'),
 };
 
 const themeButtonDisabled: Partial<ThemeButton> = {
 	borderTertiary: palette('--carousel-chevron-border-disabled'),
 	textTertiary: palette('--carousel-chevron-disabled'),
+	backgroundTertiaryHover: 'transparent',
 };
 
+/**
+ * On mobile the carousel extends into the outer margins to use the full width
+ * of the screen. From tablet onwards the carousel sits within the page grid.
+ *
+ * The FrontSection container adds a -10px negative margin to either side of
+ * the content from tablet so we add the margins back to align the carousel with
+ * the grid. From leftCol we retain FrontSection's -10px negative margin on the
+ * left side so that the carousel extends into the the middle of the gutter
+ * between the grid columns to meet the dividing line.
+ */
 const containerStyles = css`
-	/* Extend carousel into outer margins on mobile */
+	position: relative;
 	margin-left: -10px;
 	margin-right: -10px;
 	${from.mobileLandscape} {
@@ -57,7 +69,17 @@ const containerStyles = css`
 		margin-right: 10px;
 	}
 	${from.leftCol} {
-		margin-left: -10px;
+		margin-left: 0;
+		::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			width: 1px;
+			background-color: ${palette('--card-border-top')};
+			transform: translateX(-50%);
+		}
 	}
 `;
 
@@ -80,6 +102,10 @@ const containerWithNavigationStyles = css`
 	 *
 	 * From wide, the navigation buttons are pulled out of the main content area
 	 * into the right-hand column.
+	 *
+	 * Between leftCol and wide the top of the fixed dividing line is pushed
+	 * down so it starts below the navigation buttons and gap, and aligns with
+	 * the top of the carousel.
 	 */
 	${from.tablet} {
 		margin-top: calc(
@@ -89,9 +115,15 @@ const containerWithNavigationStyles = css`
 	}
 	${from.leftCol} {
 		margin-top: 0;
+		::before {
+			top: ${height.ctaSmall + space[2]}px;
+		}
 	}
 	${from.wide} {
-		margin-right: calc(${space[2]}px - ${gridColumnWidth} - ${gridGap});
+		margin-right: calc(${space[2]}px - ${gridColumnWidth}px - ${gridGap}px);
+		::before {
+			top: 0;
+		}
 	}
 `;
 
@@ -102,11 +134,9 @@ const carouselStyles = css`
 	grid-auto-flow: column;
 	gap: 20px;
 	overflow-x: auto;
-	overflow-y: hidden;
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
-	overscroll-behavior-x: contain;
-	overscroll-behavior-y: auto;
+	overscroll-behavior: contain auto;
 	/**
 	 * Hide scrollbars
 	 * See: https://stackoverflow.com/a/38994837
@@ -115,21 +145,23 @@ const carouselStyles = css`
 		display: none; /* Safari and Chrome */
 	}
 	scrollbar-width: none; /* Firefox */
-	position: relative;
 
 	padding-left: 10px;
+	padding-right: 10px;
 	scroll-padding-left: 10px;
 	${from.mobileLandscape} {
 		padding-left: 20px;
+		padding-right: 20px;
 		scroll-padding-left: 20px;
 	}
 	${from.tablet} {
-		padding-left: 0px;
-		scroll-padding-left: 0px;
+		padding-left: 0;
+		padding-right: 0;
+		scroll-padding-left: 0;
 	}
 	${from.leftCol} {
-		padding-left: 20px;
-		scroll-padding-left: 20px;
+		padding-left: 10px;
+		scroll-padding-left: 10px;
 	}
 `;
 
@@ -147,7 +179,7 @@ const itemStyles = css`
 	scroll-snap-align: start;
 	grid-area: span 1;
 	position: relative;
-	::before {
+	:not(:first-child)::before {
 		content: '';
 		position: absolute;
 		top: 0;
@@ -156,11 +188,6 @@ const itemStyles = css`
 		width: 1px;
 		background-color: ${palette('--card-border-top')};
 		transform: translateX(-50%);
-	}
-	${until.leftCol} {
-		:first-child::before {
-			background-color: transparent;
-		}
 	}
 `;
 
@@ -186,14 +213,31 @@ const generateCarouselColumnStyles = (
 
 	return css`
 		/**
-		 * On mobile, a 32px wide 'peeping' card is always shown to the right in
-		 * addition to the specified number of visible cards to indicate the
-		 * carousel can be scrolled.
+		 * On mobile a 32px slice of the next card is shown to indicate there
+		 * are more cards that can be scrolled to. Extra padding is also added
+		 * to the left and right to align cards with the page grid as the
+		 * carousel extends into the outer margins on mobile.
+		 *
+		 * These values are divided by the number of visible cards and
+		 * subtracted from their width so they are shown at the correct size.
 		 */
 		grid-template-columns: repeat(
 			${totalCards},
-			calc(${100 / visibleCardsOnMobile}% - ${offsetPeepingCardWidth}px)
+			calc(
+				(100% / ${visibleCardsOnMobile}) - ${offsetPeepingCardWidth}px +
+					${10 / visibleCardsOnMobile}px
+			)
 		);
+		${from.mobileLandscape} {
+			grid-template-columns: repeat(
+				${totalCards},
+				calc(
+					(100% / ${visibleCardsOnMobile}) -
+						${offsetPeepingCardWidth}px +
+						${20 / visibleCardsOnMobile}px
+				)
+			);
+		}
 		${from.tablet} {
 			grid-template-columns: repeat(
 				${totalCards},

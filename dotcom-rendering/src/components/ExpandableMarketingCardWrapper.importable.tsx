@@ -62,13 +62,8 @@ export const ExpandableMarketingCardWrapper = ({ guardianBaseURL }: Props) => {
 		return null;
 	}
 
-	const heading = isInVariantBubble
-		? 'Pop your US news bubble'
-		: 'Yes, this story is free';
-
-	const kicker = isInVariantBubble
-		? 'How the Guardian is different'
-		: 'Why the Guardian has no paywall';
+	const heading = 'No billionaire approved this';
+	const kicker = 'How the Guardian is different';
 
 	return (
 		<>

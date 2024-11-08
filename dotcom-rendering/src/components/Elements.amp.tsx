@@ -99,13 +99,14 @@ export const isAmpSupported = ({
 		if (!hasAmpInteractiveTag) return false;
 	}
 
-	if (
-		tags.some(
-			(tag) =>
-				tag.id === 'type/video' ||
-				tag.id === 'thefilter/series/the-filter',
-		)
-	) {
+	const excludedTagIds = new Set([
+		'type/video',
+		'thefilter/series/the-filter',
+		'us-news/us-news',
+		'us-news/us-elections-2024',
+	]);
+
+	if (tags.some((tag) => excludedTagIds.has(tag.id))) {
 		return false;
 	}
 

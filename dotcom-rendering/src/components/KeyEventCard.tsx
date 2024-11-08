@@ -7,6 +7,7 @@ import {
 } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
 import { palette } from '../palette';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { DateTime } from './DateTime';
 
 interface Props {
@@ -17,6 +18,7 @@ interface Props {
 	filterKeyEvents: boolean;
 	absoluteServerTimes: boolean;
 	cardPosition?: string;
+	renderingTarget: RenderingTarget;
 }
 
 const linkStyles = css`
@@ -111,6 +113,25 @@ const timeStyles = css`
 	display: block;
 `;
 
+export const getUrl = ({
+	filterKeyEvents,
+	renderingTarget,
+	id,
+}: {
+	filterKeyEvents: boolean;
+	renderingTarget: RenderingTarget;
+	id: string;
+}) => {
+	const searchParams = new URLSearchParams();
+	searchParams.append('filterKeyEvents', String(filterKeyEvents));
+	searchParams.append('page', `with:block-${id}`);
+	if (renderingTarget === 'Apps') {
+		searchParams.append('dcr', 'apps');
+	}
+
+	return `?${searchParams.toString()}#block-${id}`;
+};
+
 export const KeyEventCard = ({
 	id,
 	blockFirstPublished,
@@ -119,10 +140,10 @@ export const KeyEventCard = ({
 	filterKeyEvents,
 	cardPosition = 'unknown position',
 	absoluteServerTimes,
+	renderingTarget,
 }: Props) => {
-	const url = `?filterKeyEvents=${String(
-		filterKeyEvents,
-	)}&page=with:block-${id}#block-${id}`;
+	const url = getUrl({ filterKeyEvents, renderingTarget, id });
+
 	return (
 		<li css={listItemStyles}>
 			<Link

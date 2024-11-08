@@ -96,6 +96,23 @@ export const ContainerStory = {
 	args: { title: 'Default Container', showTopBorder: false },
 };
 
+export const PrimaryContainerStory = {
+	name: 'primary container',
+	args: {
+		title: 'Primary Container',
+		showTopBorder: false,
+		containerLevel: 'Primary',
+	},
+};
+export const SecondaryContainerStory = {
+	name: 'secondary container',
+	args: {
+		title: 'Secondary Container',
+		showTopBorder: false,
+		containerLevel: 'Secondary',
+	},
+};
+
 export const NoTitleStory = {
 	name: 'with no title',
 	args: { showTopBorder: false },

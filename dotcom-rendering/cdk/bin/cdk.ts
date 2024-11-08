@@ -29,7 +29,7 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 	domainName: 'article-rendering.guardianapis.com',
 	scaling: {
 		minimumInstances: 36,
-		maximumInstances: 180,
+		maximumInstances: 360,
 		policies: {
 			step: {
 				cpu: cpuScalingSteps,
