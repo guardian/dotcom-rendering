@@ -21,13 +21,29 @@ export const allModes = {
 		globalColourScheme: 'horizontal',
 		viewport: breakpoints.tablet,
 	},
+	'vertical mobile': {
+		globalColourScheme: 'vertical',
+		viewport: breakpoints.mobile,
+	},
 	'vertical mobileMedium': {
 		globalColourScheme: 'vertical',
 		viewport: breakpoints.mobileMedium,
 	},
+	'vertical mobileLandscape': {
+		globalColourScheme: 'vertical',
+		viewport: breakpoints.mobileLandscape,
+	},
+	'vertical phablet': {
+		globalColourScheme: 'vertical',
+		viewport: breakpoints.phablet,
+	},
 	'vertical tablet': {
 		globalColourScheme: 'vertical',
 		viewport: breakpoints.tablet,
+	},
+	'vertical desktop': {
+		globalColourScheme: 'vertical',
+		viewport: breakpoints.desktop,
 	},
 	'light desktop': {
 		globalColourScheme: 'light',
