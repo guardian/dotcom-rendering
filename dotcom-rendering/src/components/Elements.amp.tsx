@@ -102,8 +102,6 @@ export const isAmpSupported = ({
 	const excludedTagIds = new Set([
 		'type/video',
 		'thefilter/series/the-filter',
-		'us-news/us-news',
-		'us-news/us-elections-2024',
 	]);
 
 	if (tags.some((tag) => excludedTagIds.has(tag.id))) {
