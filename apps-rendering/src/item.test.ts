@@ -615,17 +615,17 @@ describe('list elements', () => {
 
 		expect(
 			item.body[0].kind === ElementKind.HeadingTwo &&
-				item.body[0].doc.firstChild?.textContent == 'Some title 1',
+				item.body[0].doc.firstChild?.textContent === 'Some title 1',
 		).toBe(true);
 		expect(item.body[1].kind).toBe(ElementKind.Embed);
 		expect(
 			item.body[4].kind === ElementKind.HeadingTwo &&
-				item.body[4].doc.firstChild?.textContent == 'Some title 2',
+				item.body[4].doc.firstChild?.textContent === 'Some title 2',
 		).toBe(true);
 		expect(item.body[5].kind).toBe(ElementKind.Text);
 		expect(
 			item.body[6].kind === ElementKind.HeadingTwo &&
-				item.body[6].doc.firstChild?.textContent == 'Some title 3',
+				item.body[6].doc.firstChild?.textContent === 'Some title 3',
 		).toBe(true);
 	});
 
@@ -675,7 +675,7 @@ describe('list elements', () => {
 
 		expect(
 			item.body[0].kind === ElementKind.Text &&
-				item.body[0].doc.firstChild?.textContent == 'Some title 1',
+				item.body[0].doc.firstChild?.textContent === 'Some title 1',
 		).toBe(true);
 		expect(
 			item.body[1].kind === ElementKind.Text &&
@@ -688,12 +688,12 @@ describe('list elements', () => {
 		).toBe(true);
 		expect(
 			item.body[6].kind === ElementKind.Text &&
-				item.body[6].doc.firstChild?.textContent == 'Some title 2',
+				item.body[6].doc.firstChild?.textContent === 'Some title 2',
 		).toBe(true);
 		expect(item.body[7].kind).toBe(ElementKind.Text);
 		expect(
 			item.body[8].kind === ElementKind.Text &&
-				item.body[8].doc.firstChild?.textContent == 'Some title 3',
+				item.body[8].doc.firstChild?.textContent === 'Some title 3',
 		).toBe(true);
 	});
 
@@ -731,11 +731,11 @@ describe('list elements', () => {
 
 		expect(
 			item.body[0].kind === ElementKind.Text &&
-				item.body[0].doc.firstChild?.textContent == 'Some title 1',
+				item.body[0].doc.firstChild?.textContent === 'Some title 1',
 		).toBe(true);
 		expect(
 			item.body[1].kind === ElementKind.Text &&
-				item.body[1].doc.textContent == 'Some byline 1',
+				item.body[1].doc.textContent === 'Some byline 1',
 		).toBe(true);
 		expect(
 			item.body[2].kind === ElementKind.Text &&

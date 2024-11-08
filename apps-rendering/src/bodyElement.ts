@@ -519,17 +519,9 @@ const parse =
 								item.title ? parseSubheading(item.title) : []
 							).concat(
 								item.bylineHtml
-									? flattenTextElement(
-											context.docParser(
-												`<p>${item.bylineHtml}</p>`,
-											),
-									  ).map((elem) => Result.ok(elem))
+									? parseWithTags(['p'])(item.bylineHtml)
 									: [],
-								item.bio
-									? flattenTextElement(
-											context.docParser(item.bio),
-									  ).map((elem) => Result.ok(elem))
-									: [],
+								item.bio ? parseWithTags([])(item.bio) : [],
 								item.elements.flatMap(parser),
 							);
 						});
