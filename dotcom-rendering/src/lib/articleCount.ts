@@ -32,7 +32,6 @@ export const shouldIncrementArticleCount = (contentType: string): boolean => {
 export const getDailyArticleCounts = (
 	contentType: string,
 ): DailyArticleHistory | undefined => {
-	console.log('getDailyArticleCounts');
 	if (!window.guardian.dailyArticleCount) {
 		if (shouldIncrementArticleCount(contentType)) {
 			incrementDailyArticleCount();
@@ -40,11 +39,6 @@ export const getDailyArticleCounts = (
 		window.guardian.dailyArticleCount = getDailyArticleCount();
 	}
 
-	// eslint-disable-next-line no-console
-	console.log(
-		'window.guardian.dailyArticleCount:',
-		window.guardian.dailyArticleCount,
-	);
 	return window.guardian.dailyArticleCount;
 };
 
