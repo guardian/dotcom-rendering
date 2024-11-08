@@ -48,6 +48,11 @@ type FENewslettersConfigType = {
 export interface FENewslettersPageType {
 	id: string;
 	newsletters: Newsletter[];
+	layout?: {
+		title: string;
+		subtitle?: string;
+		newsletters: string[];
+	}[];
 	editionId: EditionId;
 	subscribeUrl: string;
 	contributionsServiceUrl: string;
