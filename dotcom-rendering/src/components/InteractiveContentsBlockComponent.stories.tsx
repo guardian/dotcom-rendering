@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { NumberedList } from '../../fixtures/generated/dcr-articles/NumberedList';
+import { NumberedList } from '../../fixtures/generated/fe-articles/NumberedList';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { enhanceInteractiveContentsElements } from '../model/enhance-interactive-contents-elements';
 import type { InteractiveContentsBlockElement } from '../types/content';
 import { InteractiveContentsBlockComponent } from './InteractiveContentsBlockComponent.importable';
 
 const interactiveContentsBlock = enhanceInteractiveContentsElements(
-	NumberedList.frontendData.blocks[0]?.elements ?? [],
+	NumberedList.blocks[0]?.elements ?? [],
 ).find(
 	(element): element is InteractiveContentsBlockElement =>
 		element._type ===
