@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	between,
 	from,
 	headlineBold28Object,
 	height,
@@ -112,7 +113,7 @@ const containerWithNavigationStyles = css`
 	 * down so it starts below the navigation buttons and gap, and aligns with
 	 * the top of the carousel.
 	 */
-	${from.tablet} {
+	${between.tablet.and.leftCol} {
 		[data-container-level='Primary'] & {
 			margin-top: calc(
 				-${primaryTitlePreset.fontSize} * ${primaryTitlePreset.lineHeight} -
@@ -126,17 +127,13 @@ const containerWithNavigationStyles = css`
 			);
 		}
 	}
-	${from.leftCol} {
-		margin-top: 0;
+	${between.leftCol.and.wide} {
 		::before {
 			top: ${height.ctaSmall + space[2]}px;
 		}
 	}
 	${from.wide} {
 		margin-right: -${gridColumnWidth + gridGap / 2}px;
-		::before {
-			top: 0;
-		}
 	}
 `;
 
