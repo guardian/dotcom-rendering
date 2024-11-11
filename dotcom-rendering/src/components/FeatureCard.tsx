@@ -471,7 +471,9 @@ export const FeatureCard = ({
 						<SupportingContent
 							supportingContent={supportingContent}
 							containerPalette={containerPalette}
-							alignment={'vertical'}
+							alignment="vertical"
+							fillBackgroundOnDesktop={true}
+							fillBackgroundOnMobile={true}
 						/>
 					)}
 				</div>
