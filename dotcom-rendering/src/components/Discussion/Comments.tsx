@@ -13,7 +13,6 @@ import type {
 import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
-import { labelStyles } from '../AdSlot.web';
 import { useConfig } from '../ConfigContext';
 import { useDispatch } from '../DispatchContext';
 import { CommentContainer } from './CommentContainer';
@@ -440,7 +439,7 @@ export const Comments = ({
 				<NoComments />
 			) : (
 				<ul
-					css={[commentContainerStyles, labelStyles]}
+					css={[commentContainerStyles]}
 					data-commercial-id="comments-column"
 				>
 					{comments.map((comment) => (
