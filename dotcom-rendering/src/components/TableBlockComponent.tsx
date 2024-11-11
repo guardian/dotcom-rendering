@@ -8,6 +8,7 @@ const tableEmbed = css`
 		width: 100%;
 		background: ${palette.neutral[97]};
 		border-top: 0.0625rem solid ${palette.focus[400]};
+		color: ${palette.neutral[7]};
 		border-collapse: inherit;
 		tr:nth-child(odd) > td {
 			background-color: ${palette.neutral[93]};
