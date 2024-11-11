@@ -45,6 +45,10 @@ export const allModes = {
 		globalColourScheme: 'vertical',
 		viewport: breakpoints.desktop,
 	},
+	'vertical leftCol': {
+		globalColourScheme: 'vertical',
+		viewport: breakpoints.leftCol,
+	},
 	'light desktop': {
 		globalColourScheme: 'light',
 		viewport: breakpoints.desktop,

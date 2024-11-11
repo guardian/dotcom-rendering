@@ -76,6 +76,14 @@ export const PhotoEssayWithWidthLimited = {
 		...PhotoEssay.args,
 		shouldLimitWidth: true,
 	},
+	parameters: {
+		chromatic: {
+			modes: {
+				'vertical mobileMedium': { disable: true },
+				'vertical leftCol': allModes['vertical leftCol'],
+			},
+		},
+	},
 } satisfies Story;
 
 export const WithCredit = {
@@ -96,6 +104,9 @@ export const WithWidthLimited = {
 		captionText: 'This is how a caption looks with width limited',
 		format: Standard.args.format,
 		shouldLimitWidth: true,
+	},
+	parameters: {
+		chromatic: PhotoEssayWithWidthLimited.parameters.chromatic,
 	},
 } satisfies Story;
 
