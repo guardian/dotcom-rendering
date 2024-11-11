@@ -8,6 +8,7 @@ import {
 } from '@guardian/source/react-components';
 import { useRef } from 'react';
 import { palette } from '../palette';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { KeyEventCard } from './KeyEventCard';
 
 interface Props {
@@ -15,6 +16,7 @@ interface Props {
 	filterKeyEvents: boolean;
 	id: 'key-events-carousel-desktop' | 'key-events-carousel-mobile';
 	absoluteServerTimes: boolean;
+	renderingTarget: RenderingTarget;
 }
 type ValidBlock = Block & {
 	title: string;
@@ -107,6 +109,7 @@ export const KeyEventsCarousel = ({
 	filterKeyEvents,
 	id,
 	absoluteServerTimes,
+	renderingTarget,
 }: Props) => {
 	const carousel = useRef<HTMLDivElement | null>(null);
 	const cardWidth = 200;
@@ -146,6 +149,7 @@ export const KeyEventsCarousel = ({
 								title={keyEvent.title}
 								cardPosition={`${index} of ${carouselLength}`}
 								absoluteServerTimes={absoluteServerTimes}
+								renderingTarget={renderingTarget}
 							/>
 						);
 					})}

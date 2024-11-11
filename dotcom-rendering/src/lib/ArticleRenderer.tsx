@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
-import { adContainerStyles } from '../components/AdSlot.web';
 import { useConfig } from '../components/ConfigContext';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';
+import { spacefinderAdStyles } from './adStyles';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
 import type { EditionId } from './edition';
 import { RenderArticleElement } from './renderElement';
@@ -13,15 +13,6 @@ import { withSignInGateSlot } from './withSignInGateSlot';
 // This is required for spacefinder to work!
 const commercialPosition = css`
 	position: relative;
-`;
-
-// These styles are applied to dynamic ad slots (i.e. slots that are not fixed), e.g. ads inserted
-// by spacefinder across all layout types (articles, comments, etc)
-//
-// spacefinder is scoped to placing elements in spaces within the .article-body-commercial-selector
-// hence we scope the styles at the same level
-const adStylesDynamic = css`
-	${adContainerStyles}
 `;
 
 type Props = {
@@ -111,7 +102,7 @@ export const ArticleRenderer = ({
 					? interactiveLegacyClasses.contentMainColumn
 					: '',
 			].join(' ')}
-			css={[adStylesDynamic, commercialPosition]}
+			css={[commercialPosition, spacefinderAdStyles]}
 		>
 			{renderingTarget === 'Apps'
 				? renderedElements

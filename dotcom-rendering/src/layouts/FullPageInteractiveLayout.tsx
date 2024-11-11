@@ -4,10 +4,7 @@ import {
 	palette as sourcePalette,
 	until,
 } from '@guardian/source/foundations';
-import {
-	adContainerStyles,
-	MobileStickyContainer,
-} from '../components/AdSlot.web';
+import { MobileStickyContainer } from '../components/AdSlot.web';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -108,8 +105,6 @@ const Renderer = ({
 	});
 
 	const adStyles = css`
-		${adContainerStyles}
-
 		${from.tablet} {
 			.mobile-only .ad-slot {
 				display: none;

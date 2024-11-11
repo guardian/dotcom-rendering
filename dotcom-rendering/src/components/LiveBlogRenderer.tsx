@@ -103,6 +103,7 @@ export const LiveBlogRenderer = ({
 							filterKeyEvents={filterKeyEvents}
 							id={'key-events-carousel-mobile'}
 							absoluteServerTimes={absoluteServerTimes}
+							renderingTarget={renderingTarget}
 						/>
 					</Island>
 					<Island priority="feature" defer={{ until: 'visible' }}>
