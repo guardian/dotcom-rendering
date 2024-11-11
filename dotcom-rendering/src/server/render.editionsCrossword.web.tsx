@@ -1,19 +1,15 @@
 import { isString } from '@guardian/libs';
-import { ConfigProvider } from '../components/ConfigContext';
 import { EditionsCrosswordPage } from '../components/EditionsCrosswordPage';
-import { ArticleDesign } from '../lib/articleFormat';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
-	getModulesBuild,
 	getPathFromManifest,
 } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
-import { polyfillIO } from '../lib/polyfill.io';
 import { createGuardian as createWindowGuardian } from '../model/guardian';
 import type { Article } from '../types/article';
 import type { Config } from '../types/configContext';
-import { htmlPageTemplate } from './htmlPageTemplate';
+import { htmlCrosswordPageTemplate } from './htmlCrosswordPageTemplate';
 
 interface Props {
 	article: Article;
@@ -22,10 +18,7 @@ interface Props {
 export const renderCrosswordHtml = ({
 	article,
 }: Props): { html: string; prefetchScripts: string[] } => {
-	const { format, frontendData } = article;
-
-	const title = `${frontendData.headline} | ${frontendData.sectionLabel} | The Guardian`;
-	const linkedData = frontendData.linkedData;
+	const { frontendData } = article;
 
 	const renderingTarget = 'Web';
 	const config: Config = {
@@ -36,39 +29,16 @@ export const renderCrosswordHtml = ({
 		editionId: frontendData.editionId,
 	};
 
-	const { html, extractedCss } = renderToStringWithEmotion(
-		<ConfigProvider value={config}>
-			<EditionsCrosswordPage article={article} />
-		</ConfigProvider>,
+	const { html } = renderToStringWithEmotion(
+		<EditionsCrosswordPage article={article} />,
 	);
 
-	const build = getModulesBuild({
-		tests: frontendData.config.abTests,
-		switches: frontendData.config.switches,
-	});
-
-	/**
-	 * The highest priority scripts.
-	 * These scripts have a considerable impact on site performance.
-	 * Only scripts critical to application execution may go in here.
-	 * Please talk to the dotcom platform team before adding more.
-	 * Scripts will be executed in the order they appear in this array
-	 */
 	const prefetchScripts = [
-		polyfillIO,
-		getPathFromManifest(build, 'frameworks.js'),
-		getPathFromManifest(build, 'index.js'),
-		process.env.COMMERCIAL_BUNDLE_URL ??
-			frontendData.config.commercialBundleUrl,
+		getPathFromManifest('client.apps', 'index.js'),
 	].filter(isString);
-	const legacyScripts = [
-		getPathFromManifest('client.web.legacy', 'frameworks.js'),
-		getPathFromManifest('client.web.legacy', 'index.js'),
-	];
 
 	const scriptTags = generateScriptTags([
-		...prefetchScripts,
-		...legacyScripts,
+		getPathFromManifest('client.apps', 'index.js'),
 	]);
 
 	/**
@@ -99,32 +69,11 @@ export const renderCrosswordHtml = ({
 		unknownConfig: frontendData.config,
 	});
 
-	const { openGraphData } = frontendData;
-	const keywords =
-		typeof frontendData.config.keywords === 'undefined' ||
-		frontendData.config.keywords === 'Network Front'
-			? ''
-			: frontendData.config.keywords;
-
-	const { canonicalUrl } = frontendData;
-
-	const pageHtml = htmlPageTemplate({
-		linkedData,
+	const pageHtml = htmlCrosswordPageTemplate({
 		scriptTags,
-		css: extractedCss,
 		html,
-		title,
-		description: frontendData.trailText,
 		guardian,
-		openGraphData,
-		keywords,
-		canonicalUrl,
-		renderingTarget: 'Web',
-		weAreHiring: !!frontendData.config.switches.weAreHiring,
 		config,
-		onlyLightColourScheme:
-			format.design === ArticleDesign.FullPageInteractive ||
-			format.design === ArticleDesign.Interactive,
 	});
 
 	return { html: pageHtml, prefetchScripts };
