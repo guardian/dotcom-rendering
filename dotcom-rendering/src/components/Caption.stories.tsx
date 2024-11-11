@@ -76,6 +76,18 @@ export const PhotoEssayWithWidthLimited = {
 		...PhotoEssay.args,
 		shouldLimitWidth: true,
 	},
+	decorators: [
+		(Story) => (
+			<>
+				<Story />
+				<div
+					css={css`
+						height: 100px;
+					`}
+				/>
+			</>
+		),
+	],
 	parameters: {
 		chromatic: {
 			modes: {
