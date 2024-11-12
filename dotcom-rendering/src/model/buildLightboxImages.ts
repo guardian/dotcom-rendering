@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { isUndefined } from '@guardian/libs';
 import { getLargest, getMaster } from '../lib/image';
+import type { Block } from '../types/blocks';
 import type {
 	CartoonBlockElement,
 	FEElement,

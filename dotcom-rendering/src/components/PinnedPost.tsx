@@ -17,6 +17,7 @@ import {
 	SvgPlus,
 } from '@guardian/source/react-components';
 import { palette } from '../palette';
+import type { Block } from '../types/blocks';
 import { DateTime } from './DateTime';
 
 const pinnedPostContainer = css`

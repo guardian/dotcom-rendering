@@ -3,6 +3,7 @@ import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import type { FEFrontType } from '../../src/types/front';
+import type { Block } from '../types/blocks';
 import type { FEArticleType } from '../types/frontend';
 import type { FENewslettersPageType } from '../types/newslettersPage';
 import type { FETagPageType } from '../types/tagPage';
