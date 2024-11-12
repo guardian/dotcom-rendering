@@ -6551,6 +6551,10 @@ const paletteColours = {
 		light: interactiveBlockBackgroundLight,
 		dark: interactiveBlockBackgroundDark,
 	},
+	'--interactive-block-background-datawrapper': {
+		light: interactiveBlockBackgroundLight,
+		dark: articleBackgroundDark,
+	},
 	'--interactive-contents-hover': {
 		light: interactiveContentsHoverLight,
 		dark: interactiveContentsHoverDark,
