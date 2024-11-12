@@ -22,3 +22,19 @@ export interface AdTargetParam {
 	name: string;
 	value: string | string[];
 }
+
+type CustomParams = {
+	sens: 't' | 'f';
+	urlkw: string[];
+	[key: string]: string | string[] | number | number[] | boolean | boolean[];
+};
+
+export type AdTargeting =
+	| {
+			adUnit: string;
+			customParams: CustomParams;
+			disableAds?: false;
+	  }
+	| {
+			disableAds: true;
+	  };
