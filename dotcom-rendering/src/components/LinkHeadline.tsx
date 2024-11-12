@@ -6,6 +6,7 @@ import {
 	headlineMedium28,
 } from '@guardian/source/foundations';
 import { palette } from '../palette';
+import type { SmallHeadlineSize } from '../types/layout';
 import { Byline } from './Byline';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';

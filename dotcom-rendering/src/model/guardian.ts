@@ -1,5 +1,10 @@
 import type { EditionId } from '../lib/edition';
-import type { ConfigType, ServerSideTests, Switches } from '../types/config';
+import type {
+	ConfigType,
+	ServerSideTests,
+	StageType,
+	Switches,
+} from '../types/config';
 import type { ReportError } from '../types/sentry';
 
 export interface Guardian {

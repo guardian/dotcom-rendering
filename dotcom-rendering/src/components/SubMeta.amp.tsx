@@ -10,6 +10,7 @@ import type { ArticleTheme } from '../lib/articleFormat';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import type { BaseLinkType } from '../model/extract-nav';
 import CommentIcon from '../static/icons/comment.svg';
+import type { SharePlatform } from '../types/layout';
 import { ShareIcons } from './ShareIcons.amp';
 
 const guardianLines = (pillar: ArticleTheme) => css`

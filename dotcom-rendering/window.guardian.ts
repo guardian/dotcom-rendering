@@ -11,6 +11,7 @@ import type { google } from './src/components/YoutubeAtom/ima';
 import type { DailyArticleHistory } from './src/lib/dailyArticleCount';
 import type { ReaderRevenueDevUtils } from './src/lib/readerRevenueDevUtils';
 import type { Guardian } from './src/model/guardian';
+import type { LiveUpdateType } from './src/types/liveBlog';
 
 declare global {
 	/* ~ Here, declare things that go in the global namespace, or augment

@@ -20,7 +20,8 @@ import {
 import { getSoleContributor, isContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
 import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
-import type { StarRating as Rating } from '../types/content';
+import type { ContentType, StarRating as Rating } from '../types/content';
+import type { RichLinkCardType } from '../types/layout';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { FormatBoundary } from './FormatBoundary';

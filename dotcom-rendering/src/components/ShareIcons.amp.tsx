@@ -13,6 +13,7 @@ import LinkedInIcon from '../static/icons/linked-in.svg';
 import MessengerIcon from '../static/icons/messenger.svg';
 import TwitterIconPadded from '../static/icons/twitter-padded.svg';
 import WhatsAppIcon from '../static/icons/whatsapp.svg';
+import type { SharePlatform } from '../types/layout';
 
 const pillarFill = pillarMap(
 	(pillar) => css`

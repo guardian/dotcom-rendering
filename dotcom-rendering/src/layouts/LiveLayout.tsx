@@ -56,6 +56,7 @@ import { getZIndex } from '../lib/getZIndex';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
+import type { PaginationType } from '../types/liveBlog';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -266,7 +267,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
 
 	// Set a default pagination if it is missing from CAPI
-	const pagination: Pagination = article.pagination ?? {
+	const pagination: PaginationType = article.pagination ?? {
 		currentPage: 1,
 		totalPages: 1,
 	};

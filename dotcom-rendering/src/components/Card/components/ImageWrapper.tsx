@@ -1,6 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { between, from, until } from '@guardian/source/foundations';
+import type { CardImageType } from '../../../types/layout';
 import { PlayIcon } from './PlayIcon';
 
 const imageFixedSize = {
