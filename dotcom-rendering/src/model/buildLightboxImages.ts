@@ -114,6 +114,13 @@ const getImages = (
 			return element.items.flatMap((item) =>
 				item.elements.flatMap(getImages),
 			);
+		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
+			return element.sections.flatMap((section) =>
+				section.events.flatMap((event) =>
+					event.body.flatMap(getImages),
+				),
+			);
+
 		default:
 			return [];
 	}
