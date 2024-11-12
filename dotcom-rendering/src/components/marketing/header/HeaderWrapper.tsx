@@ -8,7 +8,7 @@ import { headerPropsSchema } from '@guardian/support-dotcom-components';
 import type {
 	Cta,
 	HeaderProps,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import { useCallback, useEffect } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import type { ReactComponent } from '../lib/ReactComponent';

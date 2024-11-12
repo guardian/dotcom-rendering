@@ -4,7 +4,7 @@ import {
 	onConsentChange,
 	storage,
 } from '@guardian/libs';
-import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import { useEffect, useState } from 'react';
 import type { ArticleDeprecated } from '../types/article';
 import type { DCRFrontType } from '../types/front';

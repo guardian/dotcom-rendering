@@ -26,7 +26,7 @@ import type {
 	BannerDesignImage,
 	ConfigurableDesign,
 	Image,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import {
 	removeMediaRulePrefix,

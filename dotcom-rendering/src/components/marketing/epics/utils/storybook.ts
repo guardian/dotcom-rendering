@@ -8,9 +8,9 @@ import type {
 	EpicVariant,
 	PageTracking,
 	Tracking,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
-import type { TestTracking } from '@guardian/support-dotcom-components/dist/shared/src/types/abTests/shared';
-import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/src/types/props/epic';
+} from '@guardian/support-dotcom-components/dist/shared/types';
+import type { TestTracking } from '@guardian/support-dotcom-components/dist/shared/types/abTests/shared';
+import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types/props/epic';
 
 const variant: EpicVariant = {
 	name: 'control',

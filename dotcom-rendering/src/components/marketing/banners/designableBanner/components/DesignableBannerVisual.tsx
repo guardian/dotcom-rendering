@@ -5,7 +5,7 @@
  */
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
-import type { Image } from '@guardian/support-dotcom-components/dist/shared/src/types';
+import type { Image } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ImageAttrs } from '../../../shared/ResponsiveImage';
 import { ResponsiveImage } from '../../../shared/ResponsiveImage';
 import type { BannerId } from '../../common/types';

@@ -10,13 +10,12 @@ import type {
 	HeaderPayload,
 	ModuleData,
 	ModuleDataResponse,
-} from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+} from '@guardian/support-dotcom-components/dist/dotcom/types';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import {
 	getLastOneOffContributionDate,
 	getPurchaseInfo,
-	MODULES_VERSION,
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
 import { setAutomat } from '../lib/setAutomat';
@@ -79,7 +78,6 @@ const ReaderRevenueLinksRemote = ({
 			targeting: {
 				showSupportMessaging: !hideSupportMessagingForUser,
 				countryCode,
-				modulesVersion: MODULES_VERSION,
 				mvtId: Number(
 					getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 				),

@@ -3,7 +3,7 @@ import {
 	getWeeklyArticleHistory,
 	incrementWeeklyArticleCount,
 } from '@guardian/support-dotcom-components';
-import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import { useEffect, useState } from 'react';
 import { hasOptedOutOfArticleCount } from '../lib/contributions';
 import type { DailyArticleHistory } from '../lib/dailyArticleCount';

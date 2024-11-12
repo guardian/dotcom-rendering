@@ -8,7 +8,7 @@ import type {
 	ModuleData,
 	ModuleDataResponse,
 	WeeklyArticleHistory,
-} from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+} from '@guardian/support-dotcom-components/dist/dotcom/types';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import {
@@ -17,7 +17,6 @@ import {
 	hasCmpConsentForBrowserId,
 	hasOptedOutOfArticleCount,
 	isRecurringContributor,
-	MODULES_VERSION,
 	shouldHideSupportMessaging,
 } from '../../lib/contributions';
 import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
@@ -92,7 +91,6 @@ const buildPayload = async (
 		hasOptedOutOfArticleCount: await hasOptedOutOfArticleCount(),
 		mvtId: Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })),
 		countryCode: data.countryCode,
-		modulesVersion: MODULES_VERSION,
 		url: window.location.origin + window.location.pathname,
 		browserId: (await hasCmpConsentForBrowserId())
 			? data.browserId

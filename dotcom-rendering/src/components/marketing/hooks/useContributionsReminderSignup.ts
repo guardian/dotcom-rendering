@@ -8,7 +8,7 @@ import type {
 	ReminderComponent,
 	ReminderPlatform,
 	ReminderStage,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import { useState } from 'react';
 import {
 	addContributionReminderCookie,
