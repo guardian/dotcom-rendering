@@ -38,3 +38,21 @@ export type AdTargeting =
 	| {
 			disableAds: true;
 	  };
+
+export interface ReaderRevenueCategories {
+	contribute: string;
+	subscribe: string;
+	support: string;
+	supporter: string;
+	gifting?: string;
+}
+
+export interface ReaderRevenuePositions {
+	header: ReaderRevenueCategories;
+	footer: ReaderRevenueCategories;
+	sideMenu: ReaderRevenueCategories;
+	ampHeader: ReaderRevenueCategories;
+	ampFooter: ReaderRevenueCategories;
+}
+
+export type ReaderRevenuePosition = keyof ReaderRevenuePositions;

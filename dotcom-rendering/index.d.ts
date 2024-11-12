@@ -13,24 +13,6 @@ interface SectionNielsenAPI {
 	apiID: string;
 }
 
-interface ReaderRevenueCategories {
-	contribute: string;
-	subscribe: string;
-	support: string;
-	supporter: string;
-	gifting?: string;
-}
-
-interface ReaderRevenuePositions {
-	header: ReaderRevenueCategories;
-	footer: ReaderRevenueCategories;
-	sideMenu: ReaderRevenueCategories;
-	ampHeader: ReaderRevenueCategories;
-	ampFooter: ReaderRevenueCategories;
-}
-
-type ReaderRevenuePosition = keyof ReaderRevenuePositions;
-
 interface MembershipPlaceholder {
 	campaignCode?: string;
 }
