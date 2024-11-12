@@ -2697,6 +2697,9 @@
                             "collectionType": {
                                 "$ref": "#/definitions/FEContainerType"
                             },
+                            "containerLevel": {
+                                "$ref": "#/definitions/FEContainerLevel"
+                            },
                             "uneditable": {
                                 "type": "boolean"
                             },
@@ -3227,6 +3230,13 @@
                 "scrollable/small",
                 "static/feature/2",
                 "static/medium/4"
+            ],
+            "type": "string"
+        },
+        "FEContainerLevel": {
+            "enum": [
+                "Primary",
+                "Secondary"
             ],
             "type": "string"
         },

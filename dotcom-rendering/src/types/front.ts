@@ -103,6 +103,8 @@ type FEContainerType =
 	| 'static/feature/2'
 	| 'static/medium/4';
 
+export type FEContainerLevel = 'Primary' | 'Secondary';
+
 export type FEContainerPalette =
 	| 'EventPalette'
 	| 'SombreAltPalette'
@@ -120,8 +122,7 @@ export type FEContainerPalette =
 	| 'Branded'
 	| 'BreakingPalette'
 	| 'SpecialReportAltPalette'
-	| 'Primary'
-	| 'Secondary';
+	| FEContainerLevel;
 
 export type FEFrontCardStyle =
 	| 'SpecialReport'
@@ -155,7 +156,7 @@ export type DCRContainerPalette =
 // TODO: These may need to be declared differently than the front types in the future
 export type DCRContainerType = FEContainerType;
 
-export type DCRContainerLevel = 'Primary' | 'Secondary';
+export type DCRContainerLevel = FEContainerLevel;
 
 /** @see https://github.com/guardian/frontend/blob/0bf69f55a/common/app/model/content/Atom.scala#L191-L196 */
 interface MediaAsset {
@@ -394,6 +395,7 @@ export type FECollectionType = {
 	href?: string;
 	groups?: string[];
 	collectionType: FEContainerType;
+	containerLevel?: FEContainerLevel;
 	uneditable: boolean;
 	showTags: boolean;
 	showSections: boolean;
