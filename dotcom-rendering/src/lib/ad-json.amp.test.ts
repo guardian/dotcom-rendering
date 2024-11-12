@@ -1,4 +1,5 @@
 import { isUndefined } from '@guardian/libs';
+import type { AdTargetParam } from '../types/commercial';
 import { adJson, stringify } from './ad-json.amp';
 
 const paramSet: AdTargetParam[] = [

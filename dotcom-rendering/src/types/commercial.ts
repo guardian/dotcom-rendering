@@ -17,3 +17,8 @@ export type CommercialProperties = {
 export type FrontsBannerAdCollections = {
 	[key: string]: string[];
 };
+
+export interface AdTargetParam {
+	name: string;
+	value: string | string[];
+}

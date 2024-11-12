@@ -8,11 +8,6 @@ type SharePlatform =
 
 // shared type declarations
 
-interface AdTargetParam {
-	name: string;
-	value: string | string[];
-}
-
 type CustomParams = {
 	sens: 't' | 'f';
 	urlkw: string[];
