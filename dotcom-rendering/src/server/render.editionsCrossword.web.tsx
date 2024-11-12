@@ -34,11 +34,11 @@ export const renderCrosswordHtml = ({
 	);
 
 	const prefetchScripts = [
-		getPathFromManifest('client.apps', 'index.js'),
+		getPathFromManifest('client.editionsCrossword', 'index.js'),
 	].filter(isString);
 
 	const scriptTags = generateScriptTags([
-		getPathFromManifest('client.apps', 'index.js'),
+		getPathFromManifest('client.editionsCrossword', 'index.js'),
 	]);
 
 	/**

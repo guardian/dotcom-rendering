@@ -39,6 +39,8 @@ const getEntryIndex = (build) => {
 	switch (build) {
 		case 'client.apps':
 			return './src/client/main.apps.ts';
+		case 'client.editionsCrossword':
+			return './src/client/main.editionsCrossword.ts';
 		default:
 			return './src/client/main.web.ts';
 	}
@@ -80,6 +82,7 @@ const getLoaders = (build) => {
 			];
 		case 'client.apps':
 			return swcLoader(['android >= 5', 'ios >= 12']);
+		case 'client.editionsCrossword':
 		case 'client.web.variant':
 		case 'client.web':
 			return swcLoader(getBrowserTargets());
@@ -186,7 +189,8 @@ module.exports.getLoaders = getLoaders;
  * Tracking is done natively.
  *
  * @param {Build} build */
-const getExternalModules = (build) =>
+const getExternalModules = (build) => {
 	build === 'client.apps'
 		? { '@guardian/ophan-tracker-js': 'guardian.ophan' }
 		: undefined;
+};
