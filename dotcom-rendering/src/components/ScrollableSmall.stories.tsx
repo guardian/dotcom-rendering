@@ -69,6 +69,20 @@ export const WithTwoCards = {
 	},
 };
 
+export const WithPrimaryContainer = {
+	render: (args) => (
+		<FrontSection
+			title="Scrollable small"
+			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
+			showTopBorder={false}
+			containerLevel="Primary"
+		>
+			<ScrollableSmall {...args} />
+		</FrontSection>
+	),
+} satisfies Story;
+
 const containerPalettes = [
 	'InvestigationPalette',
 	'LongRunningPalette',
