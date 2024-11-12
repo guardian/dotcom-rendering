@@ -7,6 +7,7 @@ const execa = require('execa');
 const { config } = require('../../fixtures/config');
 const { configOverrides } = require('../../fixtures/config-overrides');
 const { switchOverrides } = require('../../fixtures/switch-overrides');
+const { validateAsArticleType } = require('../../src/model/validate');
 const { enhanceArticleType } = require('../../src/types/article');
 
 const root = resolve(__dirname, '..', '..');
@@ -172,7 +173,8 @@ const requests = articles.map((article) => {
 				frontendJson.format.design = 'LiveBlogDesign';
 			}
 
-			const dcrArticle = enhanceArticleType(frontendJson);
+			const frontendData = validateAsArticleType(frontendJson);
+			const dcrArticle = enhanceArticleType(frontendData);
 
 			// manual hack for Video articles
 			if (article.name === 'Video') {

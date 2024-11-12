@@ -1,7 +1,7 @@
 import type { RequestHandler } from 'express';
 import { decideFormat } from '../lib/articleFormat';
 import { enhanceBlocks } from '../model/enhanceBlocks';
-import { validateAsBlock } from '../model/validate';
+import { validateAsArticleType, validateAsBlock } from '../model/validate';
 import { enhanceArticleType } from '../types/article';
 import type { FEBlocksRequest } from '../types/frontend';
 import { makePrefetchHeader } from './lib/header';
@@ -11,7 +11,8 @@ import { renderAppsBlocks, renderArticle } from './render.article.apps';
 export const handleAppsArticle: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'apps');
 
-	const article = enhanceArticleType(body, 'Apps');
+	const frontendData = validateAsArticleType(body);
+	const article = enhanceArticleType(frontendData, 'Apps');
 	const { html, prefetchScripts } = renderArticle(article);
 
 	// The Android app will cache these assets to enable offline reading
@@ -21,7 +22,8 @@ export const handleAppsArticle: RequestHandler = ({ body }, res) => {
 export const handleAppsInteractive: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('interactive', 'app');
 
-	const article = enhanceArticleType(body, 'Apps');
+	const frontendData = validateAsArticleType(body);
+	const article = enhanceArticleType(frontendData, 'Apps');
 	const { html, prefetchScripts } = renderArticle(article);
 
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
