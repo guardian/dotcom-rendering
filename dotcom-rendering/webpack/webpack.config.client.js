@@ -52,6 +52,7 @@ const getEntryIndex = (build) => {
  */
 const getLoaders = (build) => {
 	switch (build) {
+		case 'client.editionsCrossword':
 		case 'client.web.legacy':
 			return [
 				{
@@ -82,7 +83,6 @@ const getLoaders = (build) => {
 			];
 		case 'client.apps':
 			return swcLoader(['android >= 5', 'ios >= 12']);
-		case 'client.editionsCrossword':
 		case 'client.web.variant':
 		case 'client.web':
 			return swcLoader(getBrowserTargets());
