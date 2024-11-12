@@ -5,6 +5,7 @@ import {
 	type ArticleTheme,
 } from '../lib/articleFormat';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
+import type { AdTargeting } from '../types/commercial';
 import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';

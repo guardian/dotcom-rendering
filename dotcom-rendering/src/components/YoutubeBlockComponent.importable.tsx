@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
+import type { AdTargeting } from '../types/commercial';
 import { Caption } from './Caption';
 import type {
 	ImagePositionType,

@@ -4,6 +4,7 @@ import {
 	type ArticleTheme,
 } from '../lib/articleFormat';
 import type { AMPArticleModel } from '../types/article.amp';
+import type { AdTargeting } from '../types/commercial';
 import { TopMetaAnalysis } from './TopMetaAnalysis.amp';
 import { TopMetaNews } from './TopMetaNews.amp';
 import { TopMetaOpinion } from './TopMetaOpinion.amp';
