@@ -89,6 +89,20 @@ type Story = StoryObj<typeof ScrollableFeature>;
 
 export const Default = {};
 
+export const WithPrimaryContainer = {
+	render: (args) => (
+		<FrontSection
+			title="Scrollable feature"
+			discussionApiUrl={discussionApiUrl}
+			editionId="UK"
+			showTopBorder={false}
+			containerLevel="Primary"
+		>
+			<ScrollableFeature {...args} />
+		</FrontSection>
+	),
+} satisfies Story;
+
 const containerPalettes = [
 	'InvestigationPalette',
 	'LongRunningPalette',

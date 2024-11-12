@@ -69,6 +69,20 @@ export const WithFourCards = {
 	},
 } satisfies Story;
 
+export const WithPrimaryContainer = {
+	render: (args) => (
+		<FrontSection
+			title="Scrollable medium"
+			discussionApiUrl={discussionApiUrl}
+			editionId="UK"
+			showTopBorder={false}
+			containerLevel="Primary"
+		>
+			<ScrollableMedium {...args} />
+		</FrontSection>
+	),
+} satisfies Story;
+
 const containerPalettes = [
 	'InvestigationPalette',
 	'LongRunningPalette',
