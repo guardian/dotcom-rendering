@@ -230,10 +230,7 @@ export const ExpandableMarketingCard = ({
 								type="faded"
 								styles={imageTopStyles}
 							/>
-							<section
-								data-link-name="us-expandable-marketing-card expand"
-								css={contractedSummaryStyles}
-							>
+							<section css={contractedSummaryStyles}>
 								<div css={headingStyles}>
 									<h2>{heading}</h2>
 									<div css={arrowStyles}>
