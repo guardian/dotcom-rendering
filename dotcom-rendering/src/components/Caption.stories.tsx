@@ -117,6 +117,7 @@ export const WithWidthLimited = {
 		format: Standard.args.format,
 		shouldLimitWidth: true,
 	},
+	decorators: PhotoEssayWithWidthLimited.decorators,
 	parameters: {
 		chromatic: PhotoEssayWithWidthLimited.parameters.chromatic,
 	},
