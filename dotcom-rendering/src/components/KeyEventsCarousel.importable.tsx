@@ -7,11 +7,11 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
 import { useRef } from 'react';
+import { getVideoClient } from '../lib/bridgetApi';
 import { palette } from '../palette';
 import type { Block } from '../types/blocks';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { KeyEventCard } from './KeyEventCard';
-import { getVideoClient } from '../lib/bridgetApi';
 
 interface Props {
 	keyEvents: Block[];
