@@ -17,3 +17,42 @@ export type CommercialProperties = {
 export type FrontsBannerAdCollections = {
 	[key: string]: string[];
 };
+
+export interface AdTargetParam {
+	name: string;
+	value: string | string[];
+}
+
+type CustomParams = {
+	sens: 't' | 'f';
+	urlkw: string[];
+	[key: string]: string | string[] | number | number[] | boolean | boolean[];
+};
+
+export type AdTargeting =
+	| {
+			adUnit: string;
+			customParams: CustomParams;
+			disableAds?: false;
+	  }
+	| {
+			disableAds: true;
+	  };
+
+export interface ReaderRevenueCategories {
+	contribute: string;
+	subscribe: string;
+	support: string;
+	supporter: string;
+	gifting?: string;
+}
+
+export interface ReaderRevenuePositions {
+	header: ReaderRevenueCategories;
+	footer: ReaderRevenueCategories;
+	sideMenu: ReaderRevenueCategories;
+	ampHeader: ReaderRevenueCategories;
+	ampFooter: ReaderRevenueCategories;
+}
+
+export type ReaderRevenuePosition = keyof ReaderRevenuePositions;

@@ -1,5 +1,6 @@
 import type { ArticleTheme } from '../lib/articleFormat';
 import { constructQuery } from '../lib/querystring';
+import type { AdTargeting } from '../types/commercial';
 import type { YoutubeBlockElement } from '../types/content';
 import { Caption } from './Caption.amp';
 

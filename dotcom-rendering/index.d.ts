@@ -8,49 +8,10 @@ type SharePlatform =
 
 // shared type declarations
 
-interface AdTargetParam {
-	name: string;
-	value: string | string[];
-}
-
-type CustomParams = {
-	sens: 't' | 'f';
-	urlkw: string[];
-	[key: string]: string | string[] | number | number[] | boolean | boolean[];
-};
-
-type AdTargeting =
-	| {
-			adUnit: string;
-			customParams: CustomParams;
-			disableAds?: false;
-	  }
-	| {
-			disableAds: true;
-	  };
-
 interface SectionNielsenAPI {
 	name: string;
 	apiID: string;
 }
-
-interface ReaderRevenueCategories {
-	contribute: string;
-	subscribe: string;
-	support: string;
-	supporter: string;
-	gifting?: string;
-}
-
-interface ReaderRevenuePositions {
-	header: ReaderRevenueCategories;
-	footer: ReaderRevenueCategories;
-	sideMenu: ReaderRevenueCategories;
-	ampHeader: ReaderRevenueCategories;
-	ampFooter: ReaderRevenueCategories;
-}
-
-type ReaderRevenuePosition = keyof ReaderRevenuePositions;
 
 interface MembershipPlaceholder {
 	campaignCode?: string;

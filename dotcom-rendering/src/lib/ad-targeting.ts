@@ -1,4 +1,5 @@
 import { isString } from '@guardian/libs';
+import type { AdTargeting } from '../types/commercial';
 
 export type SharedAdTargeting = Record<string, unknown>;
 

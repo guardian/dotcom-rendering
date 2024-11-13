@@ -11,6 +11,7 @@ import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
 import { usePageViewId } from '../../../../lib/usePageViewId';
 import type { LinkType } from '../../../../model/extract-nav';
 import { palette as themePalette } from '../../../../palette';
+import type { ReaderRevenuePositions } from '../../../../types/commercial';
 import { useConfig } from '../../../ConfigContext';
 import { expandedNavLinkStyles, hideFromDesktop } from '../commonStyles';
 

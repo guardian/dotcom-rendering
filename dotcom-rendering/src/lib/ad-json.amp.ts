@@ -1,3 +1,5 @@
+import type { AdTargetParam } from '../types/commercial';
+
 // Passed raw as configuration to the ad
 interface KV {
 	name: string;

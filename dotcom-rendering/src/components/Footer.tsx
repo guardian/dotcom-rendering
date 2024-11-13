@@ -20,6 +20,7 @@ import type { EditionId } from '../lib/edition';
 import { clearFix } from '../lib/mixins';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { PillarLinkType } from '../model/extract-nav';
+import type { ReaderRevenueCategories } from '../types/commercial';
 import type { FooterType } from '../types/footer';
 import { BackToTop } from './BackToTop';
 import { FooterLabel } from './FooterLabel.importable';

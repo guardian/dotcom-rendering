@@ -13,6 +13,7 @@ import {
 import { getVideoClient } from '../../lib/bridgetApi';
 import { getZIndex } from '../../lib/getZIndex';
 import { getAuthStatus } from '../../lib/identity';
+import type { AdTargeting } from '../../types/commercial';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { google } from './ima';
 import type { VideoEventKey } from './YoutubeAtom';
