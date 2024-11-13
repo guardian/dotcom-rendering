@@ -10,7 +10,7 @@ import {
 import type {
 	ContributionFrequency,
 	SelectedAmountsVariant,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import type { BannerEnrichedCta } from '../banners/common/types';
 import type { SupportTier } from '../epics/utils/threeTierChoiceCardAmounts';

@@ -1,4 +1,4 @@
-import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/src/types/props/epic';
+import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types/props/epic';
 import { useState } from 'react';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import { ThreeTierChoiceCards } from '../ThreeTierChoiceCards';

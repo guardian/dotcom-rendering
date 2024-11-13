@@ -12,7 +12,7 @@ import {
 	neutral,
 	space,
 } from '@guardian/source/foundations';
-import type { Image } from '@guardian/support-dotcom-components/dist/shared/src/types';
+import type { Image } from '@guardian/support-dotcom-components/dist/shared/types';
 import {
 	removeMediaRulePrefix,
 	useMatchMedia,

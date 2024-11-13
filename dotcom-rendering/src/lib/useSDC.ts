@@ -7,7 +7,7 @@ import {
 import type {
 	BannerPayload,
 	EpicPayload,
-} from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+} from '@guardian/support-dotcom-components/dist/dotcom/types';
 import useSWRImmutable from 'swr/immutable';
 
 const useSDC = <T>(

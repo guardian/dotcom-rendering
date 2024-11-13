@@ -11,7 +11,7 @@ import { ChoiceCard, ChoiceCardGroup } from '@guardian/source/react-components';
 import type {
 	ContributionFrequency,
 	SelectedAmountsVariant,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ChoiceCardSelection } from '../../../../lib/choiceCards';
 import { contributionType } from '../../../../lib/choiceCards';
 import type { ReactComponent } from '../../../../lib/ReactComponent';

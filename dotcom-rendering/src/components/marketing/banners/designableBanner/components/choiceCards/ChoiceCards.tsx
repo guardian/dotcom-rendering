@@ -7,7 +7,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
 import { from, space } from '@guardian/source/foundations';
-import type { SelectedAmountsVariant } from '@guardian/support-dotcom-components/dist/shared/src/types';
+import type { SelectedAmountsVariant } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect } from 'react';
 import { useIsInView } from '../../../../../../lib/useIsInView';
 import type { ContentType } from '../../../../hooks/useChoiceCards';

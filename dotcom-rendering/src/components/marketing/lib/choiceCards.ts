@@ -6,7 +6,7 @@
 import type {
 	ContributionFrequency,
 	ContributionType,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
+} from '@guardian/support-dotcom-components/dist/shared/types';
 
 export interface ChoiceCardSelection {
 	frequency: ContributionFrequency;
