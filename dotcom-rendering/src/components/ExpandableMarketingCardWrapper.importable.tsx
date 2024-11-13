@@ -69,6 +69,7 @@ export const ExpandableMarketingCardWrapper = ({ guardianBaseURL }: Props) => {
 		<>
 			<Hide when="below" breakpoint="leftCol">
 				<div
+					data-component="us-expandable-marketing-card"
 					role={!isExpanded ? 'button' : 'none'}
 					tabIndex={0}
 					onKeyDown={(event) => {
