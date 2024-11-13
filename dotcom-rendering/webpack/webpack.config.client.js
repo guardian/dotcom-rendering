@@ -100,7 +100,7 @@ module.exports = ({ build }) => ({
 	},
 	optimization:
 		// We don't need chunk optimization for apps as we use the 'LimitChunkCountPlugin' to produce just 1 chunk
-		build === 'client.apps'
+		build === 'client.apps' || build === 'client.editionsCrossword'
 			? undefined
 			: {
 					splitChunks: {
@@ -141,7 +141,7 @@ module.exports = ({ build }) => ({
 		new WebpackManifestPlugin({
 			fileName: `manifest.${build}.json`,
 		}),
-		...(build === 'client.apps'
+		...(build === 'client.apps' || build === 'client.editionsCrossword'
 			? [
 					new webpack.optimize.LimitChunkCountPlugin({
 						maxChunks: 1,
