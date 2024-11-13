@@ -1,4 +1,5 @@
 import type { EditionId } from '../lib/edition';
+import type { Block } from './blocks';
 import type { CommercialProperties } from './commercial';
 import type { FEElement } from './content';
 import type { FEFormat, FELinkType, LegacyPillar } from './frontend';

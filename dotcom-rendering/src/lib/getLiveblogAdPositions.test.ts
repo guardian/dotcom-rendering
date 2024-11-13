@@ -1,4 +1,5 @@
 import { liveBlock as mockBlock } from '../../fixtures/manual/liveBlock';
+import type { Block } from '../types/blocks';
 import { getLiveblogAdPositions } from './getLiveblogAdPositions';
 
 describe('get liveblog ad positions', () => {

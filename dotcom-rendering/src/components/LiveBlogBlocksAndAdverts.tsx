@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import { getLiveblogAdPositions } from '../lib/getLiveblogAdPositions';
+import type { Block } from '../types/blocks';
 import type { ServerSideTests, Switches } from '../types/config';
 import { AdPlaceholder } from './AdPlaceholder.apps';
 import { AdSlot } from './AdSlot.web';
