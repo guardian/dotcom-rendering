@@ -4087,6 +4087,38 @@ const interactiveBlockBackgroundLight: PaletteFunction = ({
 
 const interactiveBlockBackgroundDark = () => sourcePalette.neutral[100];
 
+const interactiveBlockBackgroundDatawrapperDark: PaletteFunction = ({
+	design,
+	theme,
+}) => {
+	switch (design) {
+		case ArticleDesign.DeadBlog:
+			return sourcePalette.neutral[7];
+		case ArticleDesign.LiveBlog:
+			return sourcePalette.neutral[10];
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[100];
+				default:
+					return sourcePalette.neutral[10];
+			}
+		default:
+			return sourcePalette.neutral[10];
+	}
+};
+
 const mostViewedHeadlineLight = (): string => sourcePalette.neutral[7];
 const mostViewedHeadlineDark = (): string => sourcePalette.neutral[86];
 
@@ -6553,7 +6585,7 @@ const paletteColours = {
 	},
 	'--interactive-block-background-datawrapper': {
 		light: interactiveBlockBackgroundLight,
-		dark: articleBackgroundDark,
+		dark: interactiveBlockBackgroundDatawrapperDark,
 	},
 	'--interactive-contents-hover': {
 		light: interactiveContentsHoverLight,
