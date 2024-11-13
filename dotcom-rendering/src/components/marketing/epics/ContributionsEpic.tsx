@@ -36,7 +36,6 @@ import {
 } from '../lib/tracking';
 import { logEpicView } from '../lib/viewLog';
 import type { OphanTracking } from '../shared/ArticleCountOptOutPopup';
-import { withParsedProps } from '../shared/ModuleWrapper';
 import { BylineWithHeadshot } from './BylineWithHeadshot';
 import { ContributionsEpicArticleCountAboveWithOptOut } from './ContributionsEpicArticleCountAboveWithOptOut';
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
@@ -536,7 +535,13 @@ export const validate = (props: unknown): props is EpicProps => {
 	return result.success;
 };
 
-const validatedEpic = withParsedProps(ContributionsEpic, validate);
+export const validatedEpic: ReactComponent<EpicProps> = (props) => {
+	if (validate(props)) {
+		return <ContributionsEpic {...props} />;
+	}
+	return <></>;
+};
+
 const unValidatedEpic = ContributionsEpic;
 export {
 	validatedEpic as ContributionsEpic,
