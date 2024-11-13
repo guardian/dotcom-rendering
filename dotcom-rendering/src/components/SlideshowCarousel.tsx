@@ -3,6 +3,7 @@ import {
 	palette as sourcePalette,
 	space,
 	textSansBold12,
+	width,
 } from '@guardian/source/foundations';
 import type { ThemeButton } from '@guardian/source/react-components';
 import {
@@ -66,11 +67,36 @@ const captionStyles = css`
 	padding: 60px ${space[2]}px ${space[2]}px;
 `;
 
+const navigationStyles = css`
+	display: flex;
+	align-items: center;
+	margin-top: ${space[2]}px;
+`;
+
+const paginationStyles = css`
+	display: flex;
+	justify-content: center;
+	gap: ${space[1]}px;
+	flex: 1 0 0;
+	padding-left: ${space[2] + width.ctaSmall * 2}px;
+`;
+
+const dotStyles = css`
+	width: 6px;
+	height: 6px;
+	border-radius: 100%;
+	background-color: ${sourcePalette.neutral[86]};
+`;
+
+// const selectedDotStyles = css`
+// 	width: 8px;
+// 	height: 8px;
+// 	background-color: ${sourcePalette.neutral[0]};
+// `;
+
 const buttonStyles = css`
 	display: flex;
-	justify-content: flex-end;
 	gap: ${space[2]}px;
-	margin-top: ${space[2]}px;
 `;
 
 export const SlideshowCarousel = ({
@@ -162,38 +188,47 @@ export const SlideshowCarousel = ({
 					);
 				})}
 			</ul>
-			<div css={buttonStyles}>
-				<Button
-					hideLabel={true}
-					iconSide="left"
-					icon={<SvgChevronLeftSingle />}
-					onClick={() => scrollTo('left')}
-					priority="tertiary"
-					theme={
-						previousButtonEnabled
-							? themeButton
-							: themeButtonDisabled
-					}
-					size="small"
-					disabled={!previousButtonEnabled}
-					aria-label="Move image carousel backwards"
-					// TODO: data-link-name="slideshow carousel left chevron"
-				/>
+			<div css={navigationStyles}>
+				<div css={paginationStyles}>
+					{takeFirst(images, 10).map((image) => (
+						<span css={dotStyles} key={image.imageSrc} />
+					))}
+				</div>
+				<div css={buttonStyles}>
+					<Button
+						hideLabel={true}
+						iconSide="left"
+						icon={<SvgChevronLeftSingle />}
+						onClick={() => scrollTo('left')}
+						priority="tertiary"
+						theme={
+							previousButtonEnabled
+								? themeButton
+								: themeButtonDisabled
+						}
+						size="small"
+						disabled={!previousButtonEnabled}
+						aria-label="Move image carousel backwards"
+						// TODO: data-link-name="slideshow carousel left chevron"
+					/>
 
-				<Button
-					hideLabel={true}
-					iconSide="left"
-					icon={<SvgChevronRightSingle />}
-					onClick={() => scrollTo('right')}
-					priority="tertiary"
-					theme={
-						nextButtonEnabled ? themeButton : themeButtonDisabled
-					}
-					size="small"
-					disabled={!nextButtonEnabled}
-					aria-label="Move image carousel forwards"
-					// TODO: data-link-name="slideshow carousel right chevron"
-				/>
+					<Button
+						hideLabel={true}
+						iconSide="left"
+						icon={<SvgChevronRightSingle />}
+						onClick={() => scrollTo('right')}
+						priority="tertiary"
+						theme={
+							nextButtonEnabled
+								? themeButton
+								: themeButtonDisabled
+						}
+						size="small"
+						disabled={!nextButtonEnabled}
+						aria-label="Move image carousel forwards"
+						// TODO: data-link-name="slideshow carousel right chevron"
+					/>
+				</div>
 			</div>
 		</div>
 	);
