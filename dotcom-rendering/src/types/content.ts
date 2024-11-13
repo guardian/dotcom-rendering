@@ -1037,3 +1037,32 @@ export type Newsletter = {
 	regionFocus?: string;
 	illustrationCard?: string;
 };
+
+type CrosswordEntry = {
+	id: string;
+	number: number;
+	humanNumber: string;
+	clue: string;
+	direction: 'across' | 'down';
+	length: number;
+	group: string[];
+	position: {
+		x: number;
+		y: number;
+	};
+	separatorLocations: {
+		[key: string]: number[];
+	};
+	solution: string;
+};
+
+export type Crossword = {
+	id: string;
+	number: number;
+	name: string;
+	date: number;
+	webPublicationDate: number;
+	entries: CrosswordEntry[];
+	crosswordType: string;
+	pdf: string;
+};
