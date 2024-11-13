@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { cmp } from '@guardian/libs';
 import { getCookie, startPerformanceMeasure, storage } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
 import type {
 	EpicPayload,
@@ -23,7 +24,6 @@ import type { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
 import type { TagType } from '../../types/tag';
 import { useConfig } from '../ConfigContext';
-import { ComponentEvent } from '@guardian/ophan-tracker-js';
 
 export type EpicConfig = {
 	module: ModuleData;
