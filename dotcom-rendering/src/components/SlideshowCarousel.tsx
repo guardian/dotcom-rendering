@@ -80,7 +80,7 @@ export const SlideshowCarousel = ({
 	images: readonly DCRSlideshowImage[];
 	imageSize: ImageSizeType;
 }) => {
-	const carouselRef = useRef<HTMLOListElement | null>(null);
+	const carouselRef = useRef<HTMLUListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
 	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
 
@@ -176,9 +176,8 @@ export const SlideshowCarousel = ({
 					}
 					size="small"
 					disabled={!previousButtonEnabled}
-					// TODO
-					// aria-label="Previous story"
-					// data-link-name="container left chevron"
+					aria-label="Move image carousel backwards"
+					// TODO: data-link-name="slideshow carousel left chevron"
 				/>
 
 				<Button
@@ -192,9 +191,8 @@ export const SlideshowCarousel = ({
 					}
 					size="small"
 					disabled={!nextButtonEnabled}
-					// TODO
-					// aria-label="Next story"
-					// data-link-name="container right chevron"
+					aria-label="Move image carousel forwards"
+					// TODO: data-link-name="slideshow carousel right chevron"
 				/>
 			</div>
 		</div>
