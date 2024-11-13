@@ -434,6 +434,174 @@
         },
         "isRightToLeftLang": {
             "type": "boolean"
+        },
+        "crossword": {
+            "type": "object",
+            "properties": {
+                "creator": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "webUrl": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "name",
+                        "webUrl"
+                    ]
+                },
+                "crosswordType": {
+                    "enum": [
+                        "cryptic",
+                        "everyman",
+                        "prize",
+                        "quick",
+                        "quick-cryptic",
+                        "quiptic",
+                        "special",
+                        "speedy",
+                        "weekend"
+                    ],
+                    "type": "string"
+                },
+                "date": {
+                    "type": "number"
+                },
+                "dateSolutionAvailable": {
+                    "type": "number"
+                },
+                "dimensions": {
+                    "type": "object",
+                    "properties": {
+                        "cols": {
+                            "type": "number"
+                        },
+                        "rows": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "cols",
+                        "rows"
+                    ]
+                },
+                "entries": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "clue": {
+                                "type": "string"
+                            },
+                            "direction": {
+                                "enum": [
+                                    "across",
+                                    "down"
+                                ],
+                                "type": "string"
+                            },
+                            "group": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "humanNumber": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "length": {
+                                "type": "number"
+                            },
+                            "number": {
+                                "type": "number"
+                            },
+                            "position": {
+                                "type": "object",
+                                "properties": {
+                                    "x": {
+                                        "type": "number"
+                                    },
+                                    "y": {
+                                        "type": "number"
+                                    }
+                                },
+                                "required": [
+                                    "x",
+                                    "y"
+                                ]
+                            },
+                            "separatorLocations": {
+                                "type": "object",
+                                "properties": {
+                                    ",": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "-": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "number"
+                                        }
+                                    }
+                                }
+                            },
+                            "solution": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "clue",
+                            "direction",
+                            "group",
+                            "humanNumber",
+                            "id",
+                            "length",
+                            "number",
+                            "position",
+                            "separatorLocations"
+                        ]
+                    }
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "number"
+                },
+                "pdf": {
+                    "type": "string"
+                },
+                "solutionAvailable": {
+                    "type": "boolean"
+                },
+                "webPublicationDate": {
+                    "type": "number"
+                },
+                "instructions": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "crosswordType",
+                "date",
+                "dimensions",
+                "entries",
+                "id",
+                "name",
+                "number",
+                "solutionAvailable"
+            ]
         }
     },
     "required": [
