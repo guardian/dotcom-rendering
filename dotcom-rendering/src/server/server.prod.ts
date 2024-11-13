@@ -20,6 +20,7 @@ import {
 	handleBlocks,
 	handleInteractive,
 } from './handler.article.web';
+import { handleEditionsCrossword } from './handler.editionsCrossword';
 import {
 	handleFront,
 	handleFrontJson,
@@ -80,6 +81,7 @@ export const prodServer = (): void => {
 	app.post('/AppsArticle', logRenderTime, handleAppsArticle);
 	app.post('/AppsInteractive', logRenderTime, handleAppsInteractive);
 	app.post('/AppsBlocks', logRenderTime, handleAppsBlocks);
+	app.post('/EditionsCrossword', logRenderTime, handleEditionsCrossword);
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get(

@@ -37,9 +37,7 @@ export const renderCrosswordHtml = ({
 		getPathFromManifest('client.editionsCrossword', 'index.js'),
 	].filter(isString);
 
-	const scriptTags = generateScriptTags([
-		getPathFromManifest('client.editionsCrossword', 'index.js'),
-	]);
+	const scriptTags = generateScriptTags([...prefetchScripts]);
 
 	/**
 	 * We escape windowGuardian here to prevent errors when the data

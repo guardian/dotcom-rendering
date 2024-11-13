@@ -37,10 +37,10 @@ const generateName = (build) => {
  */
 const getEntryIndex = (build) => {
 	switch (build) {
-		case 'client.apps':
-			return './src/client/main.apps.ts';
 		case 'client.editionsCrossword':
 			return './src/client/main.editionsCrossword.ts';
+		case 'client.apps':
+			return './src/client/main.apps.ts';
 		default:
 			return './src/client/main.web.ts';
 	}
@@ -52,7 +52,6 @@ const getEntryIndex = (build) => {
  */
 const getLoaders = (build) => {
 	switch (build) {
-		case 'client.editionsCrossword':
 		case 'client.web.legacy':
 			return [
 				{
@@ -81,6 +80,7 @@ const getLoaders = (build) => {
 					},
 				},
 			];
+		case 'client.editionsCrossword':
 		case 'client.apps':
 			return swcLoader(['android >= 5', 'ios >= 12']);
 		case 'client.web.variant':
