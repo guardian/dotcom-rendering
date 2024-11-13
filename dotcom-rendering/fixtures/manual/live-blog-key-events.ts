@@ -1,3 +1,5 @@
+import type { Block } from '../../src/types/blocks';
+
 export const SingleKeyEvent: Block[] = [
 	{
 		id: '60300f5f8f08ad21ea60071e',

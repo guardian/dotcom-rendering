@@ -3,6 +3,7 @@ import { isUndefined } from '@guardian/libs';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import { RenderArticleElement } from '../lib/renderElement';
+import type { Block } from '../types/blocks';
 import type { ServerSideTests, Switches } from '../types/config';
 import { Island } from './Island';
 import { LastUpdated } from './LastUpdated';

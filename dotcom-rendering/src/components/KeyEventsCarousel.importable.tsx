@@ -8,6 +8,7 @@ import {
 } from '@guardian/source/react-components';
 import { useRef } from 'react';
 import { palette } from '../palette';
+import type { Block } from '../types/blocks';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { KeyEventCard } from './KeyEventCard';
 
