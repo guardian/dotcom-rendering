@@ -10,6 +10,7 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
+import { useEffect, useRef, useState } from 'react';
 import { takeFirst } from '../lib/tuple';
 import { palette } from '../palette';
 import type { DCRSlideshowImage } from '../types/front';
@@ -78,59 +79,124 @@ export const SlideshowCarousel = ({
 }: {
 	images: readonly DCRSlideshowImage[];
 	imageSize: ImageSizeType;
-}) => (
-	<div>
-		<ul css={carouselStyles}>
-			{takeFirst(images, 10).map((image, index) => {
-				const loading = index > 0 ? 'lazy' : 'eager';
-				return (
-					<li css={carouselItemStyles} key={image.imageSrc}>
-						<figure>
-							<CardPicture
-								mainImage={image.imageSrc}
-								imageSize={imageSize}
-								aspectRatio="5:4"
-								alt={image.imageCaption}
-								loading={loading}
-							/>
-							{!!image.imageCaption && (
-								<figcaption css={captionStyles}>
-									{image.imageCaption}
-								</figcaption>
-							)}
-						</figure>
-					</li>
-				);
-			})}
-		</ul>
-		<div css={buttonStyles}>
-			<Button
-				hideLabel={true}
-				iconSide="left"
-				icon={<SvgChevronLeftSingle />}
-				// onClick={() => scrollTo('left')}
-				priority="tertiary"
-				theme={themeButtonDisabled}
-				size="small"
-				// disabled={!previousButtonEnabled}
-				// TODO
-				// aria-label="Previous story"
-				// data-link-name="container left chevron"
-			/>
+}) => {
+	const carouselRef = useRef<HTMLOListElement | null>(null);
+	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
+	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
 
-			<Button
-				hideLabel={true}
-				iconSide="left"
-				icon={<SvgChevronRightSingle />}
-				// onClick={() => scrollTo('right')}
-				priority="tertiary"
-				theme={themeButton}
-				size="small"
-				// disabled={!nextButtonEnabled}
-				// TODO
-				// aria-label="Next story"
-				// data-link-name="container right chevron"
-			/>
+	const scrollTo = (direction: 'left' | 'right') => {
+		if (!carouselRef.current) return;
+
+		const cardWidth =
+			carouselRef.current.querySelector('li')?.offsetWidth ?? 0;
+		const offset = direction === 'left' ? -cardWidth : cardWidth;
+		carouselRef.current.scrollBy({
+			left: offset,
+			behavior: 'smooth',
+		});
+	};
+
+	/**
+	 * Updates state of navigation buttons based on carousel's scroll position.
+	 *
+	 * This function checks the current scroll position of the carousel and sets
+	 * the styles of the previous and next buttons accordingly. The previous
+	 * button is disabled if the carousel is at the start, and the next button
+	 * is disabled if the carousel is at the end.
+	 */
+	const updateButtonVisibilityOnScroll = () => {
+		const carouselElement = carouselRef.current;
+		if (!carouselElement) return;
+
+		const scrollLeft = carouselElement.scrollLeft;
+		const maxScrollLeft =
+			carouselElement.scrollWidth - carouselElement.clientWidth;
+
+		setPreviousButtonEnabled(scrollLeft > 0);
+		setNextButtonEnabled(scrollLeft < maxScrollLeft);
+	};
+
+	useEffect(() => {
+		const carouselElement = carouselRef.current;
+		if (!carouselElement) return;
+
+		carouselElement.addEventListener(
+			'scroll',
+			updateButtonVisibilityOnScroll,
+		);
+
+		return () => {
+			carouselElement.removeEventListener(
+				'scroll',
+				updateButtonVisibilityOnScroll,
+			);
+		};
+	}, []);
+
+	return (
+		<div>
+			<ul
+				ref={carouselRef}
+				css={carouselStyles}
+				data-heatphan-type="carousel"
+			>
+				{takeFirst(images, 10).map((image, index) => {
+					const loading = index > 0 ? 'lazy' : 'eager';
+					return (
+						<li css={carouselItemStyles} key={image.imageSrc}>
+							<figure>
+								<CardPicture
+									mainImage={image.imageSrc}
+									imageSize={imageSize}
+									aspectRatio="5:4"
+									alt={image.imageCaption}
+									loading={loading}
+								/>
+								{!!image.imageCaption && (
+									<figcaption css={captionStyles}>
+										{image.imageCaption}
+									</figcaption>
+								)}
+							</figure>
+						</li>
+					);
+				})}
+			</ul>
+			<div css={buttonStyles}>
+				<Button
+					hideLabel={true}
+					iconSide="left"
+					icon={<SvgChevronLeftSingle />}
+					onClick={() => scrollTo('left')}
+					priority="tertiary"
+					theme={
+						previousButtonEnabled
+							? themeButton
+							: themeButtonDisabled
+					}
+					size="small"
+					disabled={!previousButtonEnabled}
+					// TODO
+					// aria-label="Previous story"
+					// data-link-name="container left chevron"
+				/>
+
+				<Button
+					hideLabel={true}
+					iconSide="left"
+					icon={<SvgChevronRightSingle />}
+					onClick={() => scrollTo('right')}
+					priority="tertiary"
+					theme={
+						nextButtonEnabled ? themeButton : themeButtonDisabled
+					}
+					size="small"
+					disabled={!nextButtonEnabled}
+					// TODO
+					// aria-label="Next story"
+					// data-link-name="container right chevron"
+				/>
+			</div>
 		</div>
-	</div>
-);
+	);
+};
