@@ -11,6 +11,7 @@ import { palette } from '../palette';
 import type { Block } from '../types/blocks';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { KeyEventCard } from './KeyEventCard';
+import { getVideoClient } from '../lib/bridgetApi';
 
 interface Props {
 	keyEvents: Block[];
@@ -121,6 +122,17 @@ export const KeyEventsCarousel = ({
 	const goNext = () => {
 		if (carousel.current) carousel.current.scrollLeft += cardWidth;
 	};
+
+	const onTouchStart = async () => {
+		console.log('User started scrolling');
+		await getVideoClient().setFullscreen(true);
+	};
+
+	const onTouchEnd = async () => {
+		console.log('User stopped scrolling');
+		await getVideoClient().setFullscreen(false);
+	};
+
 	const filteredKeyEvents = keyEvents.filter(isValidKeyEvent);
 	const carouselLength = filteredKeyEvents.length;
 	const shortCarousel = carouselLength <= 4;
@@ -132,6 +144,9 @@ export const KeyEventsCarousel = ({
 				<div css={titleStyles}>Key events</div>
 			</Hide>
 			<div
+				// onScroll={onScrollCarousel}
+				onTouchStart={onTouchStart}
+				onTouchEnd={onTouchEnd}
 				ref={carousel}
 				id="key-events-carousel"
 				css={[carouselStyles, shortCarousel && leftMarginStyles]}
