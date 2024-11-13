@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import type { OphanComponentEvent } from '@guardian/libs';
-import { cmp, isUndefined } from '@guardian/libs';
+import { cmp } from '@guardian/libs';
 import { getCookie, startPerformanceMeasure, storage } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
 import type {
 	EpicPayload,
@@ -31,17 +31,6 @@ export type EpicConfig = {
 	hasConsentForArticleCount: boolean;
 	stage: string;
 };
-
-type EpicProps = {
-	fetchEmail?: () => Promise<string | null>;
-	submitComponentEvent?: (componentEvent: OphanComponentEvent) => void;
-	openCmp: () => void;
-	hasConsentForArticleCount: boolean;
-	stage: string;
-	// Also anything specified by support-dotcom-components
-};
-
-type EpicType = React.ElementType<EpicProps>;
 
 const wrapperMargins = css`
 	margin: 18px 0;
@@ -167,7 +156,7 @@ export const ReaderRevenueEpic = ({
 	hasConsentForArticleCount,
 	stage,
 }: EpicConfig) => {
-	const [Epic, setEpic] = useState<EpicType>();
+	const [Epic, setEpic] = useState<React.ElementType | null>(null);
 	const { renderingTarget } = useConfig();
 
 	const openCmp = () => {
@@ -204,14 +193,14 @@ export const ReaderRevenueEpic = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	if (!isUndefined(Epic)) {
+	if (Epic !== null) {
 		return (
 			<div css={wrapperMargins}>
 				{}
 				<Epic
 					{...module.props}
 					fetchEmail={fetchEmail}
-					submitComponentEvent={(event) =>
+					submitComponentEvent={(event: ComponentEvent) =>
 						void submitComponentEvent(event, renderingTarget)
 					}
 					openCmp={openCmp}

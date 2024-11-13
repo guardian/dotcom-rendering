@@ -18,7 +18,6 @@ import {
 	createClickEventFromTracking,
 	isProfileUrl,
 } from '../lib/tracking';
-import { withParsedProps } from '../shared/ModuleWrapper';
 
 export interface HeaderEnrichedCta {
 	ctaUrl: string;
@@ -177,5 +176,12 @@ const validate = (props: unknown): props is HeaderProps => {
 
 export const validatedHeaderWrapper = (
 	Header: ReactComponent<HeaderRenderProps>,
-): ReactComponent<HeaderProps> =>
-	withParsedProps(headerWrapper(Header), validate);
+): ReactComponent<HeaderProps> => {
+	return (props: HeaderProps) => {
+		if (validate(props)) {
+			const Module = headerWrapper(Header);
+			return <Module {...props} />;
+		}
+		return <></>;
+	};
+};
