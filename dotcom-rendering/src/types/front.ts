@@ -370,6 +370,7 @@ type FECollectionConfigType = {
 	displayName: string;
 	metadata?: { type: FEContainerPalette }[];
 	collectionType: FEContainerType;
+	collectionLevel?: FEContainerLevel;
 	href?: string;
 	groups?: string[];
 	uneditable: boolean;
@@ -395,7 +396,6 @@ export type FECollectionType = {
 	href?: string;
 	groups?: string[];
 	collectionType: FEContainerType;
-	containerLevel?: FEContainerLevel;
 	uneditable: boolean;
 	showTags: boolean;
 	showSections: boolean;
@@ -413,7 +413,6 @@ export type DCRCollectionType = {
 	description?: string;
 	collectionType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
-	containerLevel?: DCRContainerLevel;
 	grouped: DCRGroupedTrails;
 	curated: DCRFrontCard[];
 	backfill: DCRFrontCard[];
@@ -421,6 +420,7 @@ export type DCRCollectionType = {
 	href?: string;
 	config: {
 		showDateHeader: boolean;
+		containerLevel?: DCRContainerLevel;
 	};
 	/**
 	 * @property {?boolean} canShowMore - Whether the 'show more' button should be shown.
