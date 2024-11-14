@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	palette as sourcePalette,
-	space,
-	textSansBold12,
-	width,
-} from '@guardian/source/foundations';
+import { space, textSansBold12, width } from '@guardian/source/foundations';
 import type { ThemeButton } from '@guardian/source/react-components';
 import {
 	Button,
@@ -63,7 +58,7 @@ const captionStyles = css`
 		rgba(0, 0, 0, 0) 0%,
 		rgba(0, 0, 0, 0.8) 100%
 	);
-	color: ${sourcePalette.neutral[100]};
+	color: ${palette('--slideshow-caption')};
 	padding: 60px ${space[2]}px ${space[2]}px;
 `;
 
@@ -76,6 +71,7 @@ const navigationStyles = css`
 const paginationStyles = css`
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	gap: ${space[1]}px;
 	flex: 1 0 0;
 	padding-left: ${space[2] + width.ctaSmall * 2}px;
@@ -85,14 +81,13 @@ const dotStyles = css`
 	width: 7px;
 	height: 7px;
 	border-radius: 100%;
-	background-color: ${sourcePalette.neutral[7]};
-	opacity: 0.2;
+	background-color: ${palette('--slideshow-pagination-dot')};
 `;
 
-const selectedDotStyles = css`
+const activeDotStyles = css`
 	width: 8px;
 	height: 8px;
-	opacity: 1;
+	background-color: ${palette('--slideshow-pagination-dot-active')};
 `;
 
 const buttonStyles = css`
@@ -202,7 +197,7 @@ export const SlideshowCarousel = ({
 						<span
 							css={[
 								dotStyles,
-								currentPage === index && selectedDotStyles,
+								currentPage === index && activeDotStyles,
 							]}
 							key={image.imageSrc}
 						/>

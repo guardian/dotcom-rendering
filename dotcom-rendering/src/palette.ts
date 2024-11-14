@@ -4392,6 +4392,17 @@ const carouselChevronBorderDisabledLight: PaletteFunction = () =>
 const carouselChevronBorderDisabledDark: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[73], 0.32);
 
+const slideshowCaptionLight: PaletteFunction = () => sourcePalette.neutral[100];
+const slideshowCaptionDark: PaletteFunction = () => sourcePalette.neutral[100];
+const slideshowPaginationDotLight: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[7], 0.2);
+const slideshowPaginationDotDark: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[86], 0.2);
+const slideshowPaginationDotActiveLight: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+const slideshowPaginationDotActiveDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
 const mostViewedFooterHoverLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 const mostViewedFooterHoverDark: PaletteFunction = () =>
@@ -6982,6 +6993,18 @@ const paletteColours = {
 	'--sign-in-link-underline': {
 		light: signInLinkLineLight,
 		dark: signInLinkLineDark,
+	},
+	'--slideshow-caption': {
+		light: slideshowCaptionLight,
+		dark: slideshowCaptionDark,
+	},
+	'--slideshow-pagination-dot': {
+		light: slideshowPaginationDotLight,
+		dark: slideshowPaginationDotDark,
+	},
+	'--slideshow-pagination-dot-active': {
+		light: slideshowPaginationDotActiveLight,
+		dark: slideshowPaginationDotActiveDark,
 	},
 	'--staff-contributor-badge': {
 		light: staffBadgeLight,
