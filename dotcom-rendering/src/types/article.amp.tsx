@@ -3,6 +3,7 @@ import type { Block } from './blocks';
 import type { CommercialProperties } from './commercial';
 import type { FEElement } from './content';
 import type { FEFormat, FELinkType, LegacyPillar } from './frontend';
+import type { PaginationType } from './liveBlog';
 import type { TagType } from './tag';
 
 // This is a subset of FEArticleType for use in AMP and as a result there needs to be parity between the types of shared fields.
@@ -13,7 +14,7 @@ export interface AMPArticleModel {
 	webTitle: string;
 	mainMediaElements: FEElement[];
 	keyEvents: Block[]; // liveblog-specific
-	pagination?: Pagination;
+	pagination?: PaginationType;
 	blocks: Block[];
 	byline?: string;
 	webPublicationDateDeprecated: string;

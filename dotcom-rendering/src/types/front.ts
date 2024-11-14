@@ -6,7 +6,7 @@ import type {
 } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import type { Branding, CollectionBranding, EditionBranding } from './branding';
-import type { ServerSideTests, Switches } from './config';
+import type { ServerSideTests, StageType, Switches } from './config';
 import type { BoostLevel, Image, StarRating } from './content';
 import type { FooterType } from './footer';
 import type { FEFormat, FENavType } from './frontend';

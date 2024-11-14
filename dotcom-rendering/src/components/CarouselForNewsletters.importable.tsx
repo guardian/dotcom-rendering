@@ -13,6 +13,7 @@ import { useEffect, useRef, useState } from 'react';
 import { formatAttrString } from '../lib/formatAttrString';
 import { getZIndex } from '../lib/getZIndex';
 import type { Newsletter } from '../types/content';
+import type { LeftColSize } from '../types/layout';
 import type { OnwardsSource } from '../types/onwards';
 import { LI } from './Card/components/LI';
 import { Hide } from './Hide';

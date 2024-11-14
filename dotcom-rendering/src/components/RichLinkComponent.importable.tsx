@@ -1,7 +1,12 @@
 import { type ArticleFormat, decideFormat } from '../lib/articleFormat';
 import { useApi } from '../lib/useApi';
-import type { RichLinkBlockElement, StarRating } from '../types/content';
+import type {
+	ContentType,
+	RichLinkBlockElement,
+	StarRating,
+} from '../types/content';
 import type { FEFormat } from '../types/frontend';
+import type { RichLinkCardType } from '../types/layout';
 import type { TagType } from '../types/tag';
 import { RichLink } from './RichLink';
 

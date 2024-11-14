@@ -21,6 +21,7 @@ import type {
 	DCRContainerType,
 	DCRFrontImage,
 } from '../types/front';
+import type { LeftColSize } from '../types/layout';
 import type { MainMedia } from '../types/mainMedia';
 import type { OnwardsSource } from '../types/onwards';
 import type { TrailType } from '../types/trails';

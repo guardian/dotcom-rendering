@@ -1,3 +1,8 @@
+interface SectionNielsenAPI {
+	name: string;
+	apiID: string;
+}
+
 const sections = [
 	{
 		name: 'Guardian',
