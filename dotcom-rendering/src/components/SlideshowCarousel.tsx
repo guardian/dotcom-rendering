@@ -1,9 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	palette as sourcePalette,
-	space,
-	textSansBold12,
-} from '@guardian/source/foundations';
+import { space, textSansBold12, width } from '@guardian/source/foundations';
 import type { ThemeButton } from '@guardian/source/react-components';
 import {
 	Button,
@@ -62,15 +58,45 @@ const captionStyles = css`
 		rgba(0, 0, 0, 0) 0%,
 		rgba(0, 0, 0, 0.8) 100%
 	);
-	color: ${sourcePalette.neutral[100]};
+	color: ${palette('--slideshow-caption')};
 	padding: 60px ${space[2]}px ${space[2]}px;
+`;
+
+const navigationStyles = css`
+	display: flex;
+	align-items: center;
+	margin-top: ${space[2]}px;
+`;
+
+/**
+ * Padding is added to the left of the navigation dots to match the width of the
+ * navigation buttons on the right so they are centred below the image.
+ */
+const paginationStyles = css`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: ${space[1]}px;
+	flex: 1 0 0;
+	padding-left: ${width.ctaSmall * 2 + space[2]}px;
+`;
+
+const dotStyles = css`
+	width: 7px;
+	height: 7px;
+	border-radius: 100%;
+	background-color: ${palette('--slideshow-pagination-dot')};
+`;
+
+const activeDotStyles = css`
+	width: 8px;
+	height: 8px;
+	background-color: ${palette('--slideshow-pagination-dot-active')};
 `;
 
 const buttonStyles = css`
 	display: flex;
-	justify-content: flex-end;
 	gap: ${space[2]}px;
-	margin-top: ${space[2]}px;
 `;
 
 export const SlideshowCarousel = ({
@@ -83,6 +109,7 @@ export const SlideshowCarousel = ({
 	const carouselRef = useRef<HTMLUListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
 	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
+	const [currentPage, setCurrentPage] = useState(0);
 
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
@@ -104,16 +131,22 @@ export const SlideshowCarousel = ({
 	 * button is disabled if the carousel is at the start, and the next button
 	 * is disabled if the carousel is at the end.
 	 */
-	const updateButtonVisibilityOnScroll = () => {
+	const updatePaginationStateOnScroll = () => {
 		const carouselElement = carouselRef.current;
 		if (!carouselElement) return;
 
 		const scrollLeft = carouselElement.scrollLeft;
+
 		const maxScrollLeft =
 			carouselElement.scrollWidth - carouselElement.clientWidth;
 
 		setPreviousButtonEnabled(scrollLeft > 0);
 		setNextButtonEnabled(scrollLeft < maxScrollLeft);
+
+		const cardWidth = carouselElement.querySelector('li')?.offsetWidth ?? 0;
+		const page = Math.round(scrollLeft / cardWidth);
+
+		setCurrentPage(page);
 	};
 
 	useEffect(() => {
@@ -122,13 +155,13 @@ export const SlideshowCarousel = ({
 
 		carouselElement.addEventListener(
 			'scroll',
-			updateButtonVisibilityOnScroll,
+			updatePaginationStateOnScroll,
 		);
 
 		return () => {
 			carouselElement.removeEventListener(
 				'scroll',
-				updateButtonVisibilityOnScroll,
+				updatePaginationStateOnScroll,
 			);
 		};
 	}, []);
@@ -162,38 +195,53 @@ export const SlideshowCarousel = ({
 					);
 				})}
 			</ul>
-			<div css={buttonStyles}>
-				<Button
-					hideLabel={true}
-					iconSide="left"
-					icon={<SvgChevronLeftSingle />}
-					onClick={() => scrollTo('left')}
-					priority="tertiary"
-					theme={
-						previousButtonEnabled
-							? themeButton
-							: themeButtonDisabled
-					}
-					size="small"
-					disabled={!previousButtonEnabled}
-					aria-label="Move image carousel backwards"
-					// TODO: data-link-name="slideshow carousel left chevron"
-				/>
+			<div css={navigationStyles}>
+				<div css={paginationStyles}>
+					{takeFirst(images, 10).map((image, index) => (
+						<span
+							css={[
+								dotStyles,
+								currentPage === index && activeDotStyles,
+							]}
+							key={image.imageSrc}
+						/>
+					))}
+				</div>
+				<div css={buttonStyles}>
+					<Button
+						hideLabel={true}
+						iconSide="left"
+						icon={<SvgChevronLeftSingle />}
+						onClick={() => scrollTo('left')}
+						priority="tertiary"
+						theme={
+							previousButtonEnabled
+								? themeButton
+								: themeButtonDisabled
+						}
+						size="small"
+						disabled={!previousButtonEnabled}
+						aria-label="View next image in slideshow"
+						// TODO: data-link-name="slideshow carousel left chevron"
+					/>
 
-				<Button
-					hideLabel={true}
-					iconSide="left"
-					icon={<SvgChevronRightSingle />}
-					onClick={() => scrollTo('right')}
-					priority="tertiary"
-					theme={
-						nextButtonEnabled ? themeButton : themeButtonDisabled
-					}
-					size="small"
-					disabled={!nextButtonEnabled}
-					aria-label="Move image carousel forwards"
-					// TODO: data-link-name="slideshow carousel right chevron"
-				/>
+					<Button
+						hideLabel={true}
+						iconSide="left"
+						icon={<SvgChevronRightSingle />}
+						onClick={() => scrollTo('right')}
+						priority="tertiary"
+						theme={
+							nextButtonEnabled
+								? themeButton
+								: themeButtonDisabled
+						}
+						size="small"
+						disabled={!nextButtonEnabled}
+						aria-label="View previous image in slideshow"
+						// TODO: data-link-name="slideshow carousel right chevron"
+					/>
+				</div>
 			</div>
 		</div>
 	);
