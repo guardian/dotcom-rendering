@@ -68,13 +68,17 @@ const navigationStyles = css`
 	margin-top: ${space[2]}px;
 `;
 
+/**
+ * Padding is added to the left of the navigation dots to match the width of the
+ * navigation buttons on the right so they are centred below the image.
+ */
 const paginationStyles = css`
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	gap: ${space[1]}px;
 	flex: 1 0 0;
-	padding-left: ${space[2] + width.ctaSmall * 2}px;
+	padding-left: ${width.ctaSmall * 2 + space[2]}px;
 `;
 
 const dotStyles = css`
