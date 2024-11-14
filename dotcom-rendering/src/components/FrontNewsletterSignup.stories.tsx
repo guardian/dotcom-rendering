@@ -21,6 +21,8 @@ export const inThrasher = () => {
 				successDescription:
 					"We'll send you Guardian Australia's Morning Mail every weekday",
 				regionFocus: 'AU',
+				illustrationCard:
+					'https://uploads.guim.co.uk/2024/11/12/5_3_fight_back.jpg',
 			}}
 		/>
 	);

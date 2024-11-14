@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { palette, space, until } from '@guardian/source/foundations';
+import {
+	headlineBold24,
+	textSans14,
+	space,
+	until,
+	palette,
+} from '@guardian/source/foundations';
 import { SvgGuardianLogo } from '@guardian/source/react-components';
 import type { Newsletter } from '../types/content';
 import type { DCRContainerType } from '../types/front';
@@ -52,6 +58,7 @@ export const FrontNewsletterSignup = ({ newsletter, containerType }: Props) => {
 				css={{
 					backgroundColor: palette.brand[400],
 					color: palette.neutral[100],
+					padding: space[2],
 				}}
 			>
 				<div
@@ -62,7 +69,7 @@ export const FrontNewsletterSignup = ({ newsletter, containerType }: Props) => {
 					<div css={[cellStyle, logoContainerStyle()]}>
 						<SvgGuardianLogo
 							textColor={palette.neutral[100]}
-							width={200}
+							width={100}
 						/>
 						<NewsletterBadge />
 					</div>
@@ -73,16 +80,38 @@ export const FrontNewsletterSignup = ({ newsletter, containerType }: Props) => {
 								border: `2px dashed ${palette.neutral[100]}`,
 								padding: space[3],
 								flex: 1,
+								display: 'flex',
+								gap: space[3],
 							}}
 						>
-							<p>{newsletter.name}</p>
-							<p>{newsletter.description}</p>
-							<SecureSignup
-								newsletterId={newsletter.identityName}
-								successDescription={
-									newsletter.successDescription
-								}
+							<img
+								src={newsletter.illustrationCard}
+								alt=""
+								width={250}
+								height={150}
 							/>
+							<div>
+								<p
+									css={css(`
+									${headlineBold24}
+								`)}
+								>
+									{newsletter.name}
+								</p>
+								<p
+									css={css(`
+									${textSans14}
+								`)}
+								>
+									{newsletter.description}
+								</p>
+								<SecureSignup
+									newsletterId={newsletter.identityName}
+									successDescription={
+										newsletter.successDescription
+									}
+								/>
+							</div>
 						</div>
 					</div>
 					<div css={[cellStyle, rightDivStyle(false)]}>
