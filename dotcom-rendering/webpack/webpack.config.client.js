@@ -190,7 +190,14 @@ module.exports.getLoaders = getLoaders;
  *
  * @param {Build} build */
 const getExternalModules = (build) => {
-	build === 'client.apps'
-		? { '@guardian/ophan-tracker-js': 'guardian.ophan' }
-		: undefined;
+	if (build === 'client.apps') {
+		return { '@guardian/ophan-tracker-js': 'guardian.ophan' };
+	}
+	if (build === 'client.editionsCrossword') {
+		return {
+			'@guardian/ophan-tracker-js': 'guardian.ophan',
+			'@guardian/commercial': 'guardian.commercial',
+		};
+	}
+	return undefined;
 };
