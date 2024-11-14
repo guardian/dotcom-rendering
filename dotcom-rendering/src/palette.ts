@@ -4109,12 +4109,12 @@ const interactiveBlockBackgroundDatawrapperDark: PaletteFunction = ({
 		case ArticleDesign.Editorial:
 			switch (theme) {
 				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[100];
+					return sourcePalette.specialReportAlt[100]; // same as articleBackgroundDark
 				default:
-					return sourcePalette.neutral[10];
+					return sourcePalette.neutral[10]; // same as articleBackgroundDark
 			}
 		default:
-			return sourcePalette.neutral[10];
+			return sourcePalette.neutral[10]; // same as articleBackgroundDark
 	}
 };
 
