@@ -28,6 +28,7 @@ import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
 import type { AspectRatio, Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
+import { FrontNewsletterSignup } from '../FrontNewsletterSignup';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
 import { MediaDuration } from '../MediaDuration';
@@ -384,6 +385,16 @@ export const Card = ({
 				</Island>
 			</Link>
 		);
+
+	const { newsletter } = snapData ?? {};
+	if (newsletter) {
+		return (
+			<FrontNewsletterSignup
+				newsletter={newsletter}
+				containerType={containerType}
+			/>
+		);
+	}
 
 	if (snapData?.embedHtml) {
 		return (
