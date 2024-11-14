@@ -4093,9 +4093,8 @@ const interactiveBlockBackgroundDatawrapperDark: PaletteFunction = ({
 }) => {
 	switch (design) {
 		case ArticleDesign.DeadBlog:
-			return sourcePalette.neutral[7];
 		case ArticleDesign.LiveBlog:
-			return sourcePalette.neutral[10];
+			return sourcePalette.neutral[10]; // same as liveBlockContainerBackgroundDark
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
 		case ArticleDesign.Explainer:
