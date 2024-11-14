@@ -103,6 +103,8 @@ type FEContainerType =
 	| 'static/feature/2'
 	| 'static/medium/4';
 
+export type FEContainerLevel = 'Primary' | 'Secondary';
+
 export type FEContainerPalette =
 	| 'EventPalette'
 	| 'SombreAltPalette'
@@ -119,7 +121,8 @@ export type FEContainerPalette =
 	| 'Podcast'
 	| 'Branded'
 	| 'BreakingPalette'
-	| 'SpecialReportAltPalette';
+	| 'SpecialReportAltPalette'
+	| FEContainerLevel;
 
 export type FEFrontCardStyle =
 	| 'SpecialReport'
@@ -153,7 +156,7 @@ export type DCRContainerPalette =
 // TODO: These may need to be declared differently than the front types in the future
 export type DCRContainerType = FEContainerType;
 
-export type DCRContainerLevel = 'Primary' | 'Secondary';
+export type DCRContainerLevel = FEContainerLevel;
 
 /** @see https://github.com/guardian/frontend/blob/0bf69f55a/common/app/model/content/Atom.scala#L191-L196 */
 interface MediaAsset {
@@ -367,6 +370,7 @@ type FECollectionConfigType = {
 	displayName: string;
 	metadata?: { type: FEContainerPalette }[];
 	collectionType: FEContainerType;
+	collectionLevel?: FEContainerLevel;
 	href?: string;
 	groups?: string[];
 	uneditable: boolean;
@@ -416,6 +420,7 @@ export type DCRCollectionType = {
 	href?: string;
 	config: {
 		showDateHeader: boolean;
+		containerLevel?: DCRContainerLevel;
 	};
 	/**
 	 * @property {?boolean} canShowMore - Whether the 'show more' button should be shown.

@@ -2738,6 +2738,9 @@
                                     "collectionType": {
                                         "$ref": "#/definitions/FEContainerType"
                                     },
+                                    "collectionLevel": {
+                                        "$ref": "#/definitions/FEContainerLevel"
+                                    },
                                     "href": {
                                         "type": "string"
                                     },
@@ -3244,10 +3247,19 @@
                 "LongRunningAltPalette",
                 "LongRunningPalette",
                 "Podcast",
+                "Primary",
+                "Secondary",
                 "SombreAltPalette",
                 "SombrePalette",
                 "Special",
                 "SpecialReportAltPalette"
+            ],
+            "type": "string"
+        },
+        "FEContainerLevel": {
+            "enum": [
+                "Primary",
+                "Secondary"
             ],
             "type": "string"
         },
