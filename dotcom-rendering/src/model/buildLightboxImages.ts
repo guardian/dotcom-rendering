@@ -1,4 +1,3 @@
-import { randomUUID } from 'node:crypto';
 import { isUndefined } from '@guardian/libs';
 import { getLargest, getMaster } from '../lib/image';
 import type { Block } from '../types/blocks';
@@ -177,8 +176,8 @@ export const buildLightboxImages = (
 	// we deduplicate the array here
 	return [
 		...new Map(
-			lightboxImages.map<[string, ImageForLightbox]>((image) => [
-				decideImageId(image) ?? randomUUID(),
+			lightboxImages.map<[string, ImageForLightbox]>((image, index) => [
+				decideImageId(image) ?? `lightbox-image-id-${index}`,
 				image,
 			]),
 		).values(),
