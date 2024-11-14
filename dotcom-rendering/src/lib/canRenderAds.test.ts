@@ -1,5 +1,8 @@
-import { Standard as standardPage } from '../../fixtures/generated/dcr-articles/Standard';
+import { Standard } from '../../fixtures/generated/fe-articles/Standard';
+import { enhanceArticleType } from '../types/article';
 import { canRenderAds } from './canRenderAds';
+
+const standardPage = enhanceArticleType(Standard, 'Web');
 
 describe('canRenderAds', () => {
 	it('shows ads by default', () => {
