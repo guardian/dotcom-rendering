@@ -82,17 +82,18 @@ const paginationStyles = css`
 `;
 
 const dotStyles = css`
-	width: 6px;
-	height: 6px;
+	width: 7px;
+	height: 7px;
 	border-radius: 100%;
-	background-color: ${sourcePalette.neutral[86]};
+	background-color: ${sourcePalette.neutral[7]};
+	opacity: 0.2;
 `;
 
-// const selectedDotStyles = css`
-// 	width: 8px;
-// 	height: 8px;
-// 	background-color: ${sourcePalette.neutral[0]};
-// `;
+const selectedDotStyles = css`
+	width: 8px;
+	height: 8px;
+	opacity: 1;
+`;
 
 const buttonStyles = css`
 	display: flex;
@@ -109,6 +110,7 @@ export const SlideshowCarousel = ({
 	const carouselRef = useRef<HTMLUListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
 	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
+	const [currentPage, setCurrentPage] = useState(0);
 
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
@@ -130,16 +132,22 @@ export const SlideshowCarousel = ({
 	 * button is disabled if the carousel is at the start, and the next button
 	 * is disabled if the carousel is at the end.
 	 */
-	const updateButtonVisibilityOnScroll = () => {
+	const updatePaginationStateOnScroll = () => {
 		const carouselElement = carouselRef.current;
 		if (!carouselElement) return;
 
 		const scrollLeft = carouselElement.scrollLeft;
+
 		const maxScrollLeft =
 			carouselElement.scrollWidth - carouselElement.clientWidth;
 
 		setPreviousButtonEnabled(scrollLeft > 0);
 		setNextButtonEnabled(scrollLeft < maxScrollLeft);
+
+		const cardWidth = carouselElement.querySelector('li')?.offsetWidth ?? 0;
+		const page = Math.round(scrollLeft / cardWidth);
+
+		setCurrentPage(page);
 	};
 
 	useEffect(() => {
@@ -148,13 +156,13 @@ export const SlideshowCarousel = ({
 
 		carouselElement.addEventListener(
 			'scroll',
-			updateButtonVisibilityOnScroll,
+			updatePaginationStateOnScroll,
 		);
 
 		return () => {
 			carouselElement.removeEventListener(
 				'scroll',
-				updateButtonVisibilityOnScroll,
+				updatePaginationStateOnScroll,
 			);
 		};
 	}, []);
@@ -190,8 +198,14 @@ export const SlideshowCarousel = ({
 			</ul>
 			<div css={navigationStyles}>
 				<div css={paginationStyles}>
-					{takeFirst(images, 10).map((image) => (
-						<span css={dotStyles} key={image.imageSrc} />
+					{takeFirst(images, 10).map((image, index) => (
+						<span
+							css={[
+								dotStyles,
+								currentPage === index && selectedDotStyles,
+							]}
+							key={image.imageSrc}
+						/>
 					))}
 				</div>
 				<div css={buttonStyles}>
