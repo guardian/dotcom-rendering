@@ -36,6 +36,7 @@ type Props = {
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	showPlayIcon: boolean;
+	hideImageOverlay?: boolean;
 };
 
 /**
@@ -117,6 +118,7 @@ export const ImageWrapper = ({
 	imagePositionOnDesktop,
 	imagePositionOnMobile,
 	showPlayIcon,
+	hideImageOverlay,
 }: Props) => {
 	const isHorizontalOnDesktop =
 		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
@@ -168,9 +170,8 @@ export const ImageWrapper = ({
 			<>
 				{children}
 				{/* This image overlay is styled when the CardLink is hovered */}
-				{(imageType === 'picture' || imageType === 'slideshow') && (
-					<div className="image-overlay" />
-				)}
+				{(imageType === 'picture' || imageType === 'slideshow') &&
+					!hideImageOverlay && <div className="image-overlay" />}
 				{imageType === 'picture' && showPlayIcon && (
 					<PlayIcon
 						imageSize={imageSize}

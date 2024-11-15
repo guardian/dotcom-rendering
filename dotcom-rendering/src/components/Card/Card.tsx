@@ -605,6 +605,9 @@ export const Card = ({
 						imagePositionOnDesktop={imagePositionOnDesktop}
 						imagePositionOnMobile={imagePositionOnMobile}
 						showPlayIcon={showPlayIcon}
+						hideImageOverlay={
+							media.type === 'slideshow' && isFlexibleContainer
+						}
 					>
 						{media.type === 'slideshow' &&
 							(isFlexibleContainer ? (
