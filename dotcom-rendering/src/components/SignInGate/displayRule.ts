@@ -118,19 +118,16 @@ export const canShowSignInGateMandatory: ({
 	isPreview,
 	currentLocaleCode,
 }: CanShowGateProps) => {
-	return (
-		// (await hasRequiredConsents()) &&
-		await canShowSignInGate({
-			isSignedIn,
-			currentTest,
-			contentType,
-			sectionId,
-			tags,
-			isPaidContent,
-			isPreview,
-			currentLocaleCode,
-		})
-	);
+	return await canShowSignInGate({
+		isSignedIn,
+		currentTest,
+		contentType,
+		sectionId,
+		tags,
+		isPaidContent,
+		isPreview,
+		currentLocaleCode,
+	});
 };
 
 const US_REGION_CODES: (CountryCode | undefined)[] = [
