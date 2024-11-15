@@ -29,6 +29,14 @@ export const shouldIncrementArticleCount = (contentType: string): boolean => {
 	].includes(contentType.toLowerCase());
 };
 
+/**
+ * This function is used to get the daily article counts.
+ * It will increment the count if the contentType is listed in the shouldIncrementArticleCount function.
+ * This will return and increment the dailyArticleCount for unconsented and consented users.
+ *
+ * @param {string} contentType
+ * @return {*}  {(DailyArticleHistory | undefined)}
+ */
 export const getDailyArticleCounts = (
 	contentType: string,
 ): DailyArticleHistory | undefined => {
@@ -42,6 +50,16 @@ export const getDailyArticleCounts = (
 	return window.guardian.dailyArticleCount;
 };
 
+/**
+ * This function is used to get the weekly article counts
+ * It will increment the count if the contentType is listed in the shouldIncrementArticleCount function.
+ * This will return and increment the weeklyArticleCount for only consented users.
+ *
+ * @param {string} pageId
+ * @param {TagType[]} tags
+ * @param {string} contentType
+ * @return {*}  {(Promise<WeeklyArticleHistory | undefined>)}
+ */
 export const getWeeklyArticleCounts = async (
 	pageId: string,
 	tags: TagType[],
