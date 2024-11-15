@@ -1,13 +1,14 @@
 import type { RequestHandler } from 'express';
-import { enhanceArticleType } from '../types/article';
+import { validateAsEditionsCrosswordType } from '../model/validate';
 import { makePrefetchHeader } from './lib/header';
 import { renderCrosswordHtml } from './render.editionsCrossword.web';
 
 export const handleEditionsCrossword: RequestHandler = ({ body }, res) => {
-	const article = enhanceArticleType(body, 'Web');
-	const { html, prefetchScripts } = renderCrosswordHtml({
-		article,
-	});
-
-	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
+	const editionsCrosswords = validateAsEditionsCrosswordType(body);
+	// const { html, prefetchScripts } = renderCrosswordHtml({
+	// 	editionsCrosswords,
+	// });
+	console.log(editionsCrosswords);
+	res.sendStatus(200);
+	// res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };

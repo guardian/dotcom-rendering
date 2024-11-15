@@ -3,11 +3,13 @@ import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import type { FEFrontType } from '../../src/types/front';
+import type { FEEditionsCrosswords } from '../types/editionsCrossword';
 import type { FEArticleType } from '../types/frontend';
 import type { FENewslettersPageType } from '../types/newslettersPage';
 import type { FETagPageType } from '../types/tagPage';
 import articleSchema from './article-schema.json';
 import blockSchema from './block-schema.json';
+import editionsCrosswordSchema from './editions-crossword-schema.json';
 import frontSchema from './front-schema.json';
 import newslettersPageSchema from './newsletter-page-schema.json';
 import tagPageSchema from './tag-page-schema.json';
@@ -29,6 +31,9 @@ const validateAllEditorialNewslettersPage = ajv.compile<FENewslettersPageType>(
 	newslettersPageSchema,
 );
 const validateBlock = ajv.compile<Block[]>(blockSchema);
+const validateEditionsCrossword = ajv.compile<FEEditionsCrosswords>(
+	editionsCrosswordSchema,
+);
 
 export const validateAsArticleType = (data: unknown): FEArticleType => {
 	if (validateArticle(data)) return data;
@@ -39,6 +44,18 @@ export const validateAsArticleType = (data: unknown): FEArticleType => {
 	throw new TypeError(
 		`Unable to validate request body for url ${url}.\n
             ${JSON.stringify(validateArticle.errors, null, 2)}`,
+	);
+};
+
+export const validateAsEditionsCrosswordType = (
+	data: unknown,
+): FEEditionsCrosswords => {
+	if (validateEditionsCrossword(data)) {
+		return data;
+	}
+	throw new TypeError(
+		`Unable to validate request body for editions crosswords.\n
+		${JSON.stringify(validateEditionsCrossword.errors, null, 2)}`,
 	);
 };
 
