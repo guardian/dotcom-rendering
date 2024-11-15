@@ -9,7 +9,7 @@ import type {
 	ConfigurableDesign,
 	HexColour,
 	Tracking,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
+} from '@guardian/support-dotcom-components/dist/shared/types';
 
 export const tracking: Tracking = {
 	ophanPageId: 'kbluzw2csbf83eabedel',

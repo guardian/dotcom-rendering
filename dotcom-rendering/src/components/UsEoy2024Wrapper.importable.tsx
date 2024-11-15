@@ -16,7 +16,7 @@ import { Ticker } from '@guardian/source-development-kitchen/react-components';
 import type {
 	SelectedAmountsVariant,
 	TickerData,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { shouldHideSupportMessaging } from '../lib/contributions';

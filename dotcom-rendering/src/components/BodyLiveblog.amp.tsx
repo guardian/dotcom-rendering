@@ -9,6 +9,7 @@ import { decideTheme } from '../lib/articleFormat';
 import { getSharingUrls } from '../lib/sharing-urls';
 import RefreshIcon from '../static/icons/refresh.svg';
 import type { AMPArticleModel } from '../types/article.amp';
+import type { AdTargeting } from '../types/commercial';
 import type { ConfigType } from '../types/config';
 import { Blocks } from './Blocks.amp';
 import { KeyEvents } from './KeyEvents.amp';

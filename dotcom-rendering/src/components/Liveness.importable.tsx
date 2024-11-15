@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import { getEmotionCache } from '../client/islands/emotion';
 import { initHydration } from '../client/islands/initHydration';
 import { useApi } from '../lib/useApi';
+import type { LiveUpdateType } from '../types/liveBlog';
 import { Toast } from './Toast';
 
 type Props = {

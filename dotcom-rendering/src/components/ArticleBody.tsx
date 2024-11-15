@@ -16,6 +16,7 @@ import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { revealStyles } from '../lib/revealStyles';
 import { palette as themePalette } from '../palette';
 import type { TableOfContentsItem } from '../types/article';
+import type { Block } from '../types/blocks';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { TagType } from '../types/tag';
 import { Island } from './Island';

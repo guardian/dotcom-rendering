@@ -15,7 +15,7 @@ import type {
 	EpicVariant,
 	TargetingAbTest,
 	Tracking,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
+} from '@guardian/support-dotcom-components/dist/shared/types';
 
 // TRACKING VIA support.theguardian.com
 type LinkParams = {

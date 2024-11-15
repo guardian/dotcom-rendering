@@ -9,9 +9,9 @@ import type {
 	BannerPayload,
 	ModuleData,
 	ModuleDataResponse,
-} from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import type { AbandonedBasket } from '@guardian/support-dotcom-components/dist/shared/src/types';
-import type { TestTracking } from '@guardian/support-dotcom-components/dist/shared/src/types/abTests/shared';
+} from '@guardian/support-dotcom-components/dist/dotcom/types';
+import type { AbandonedBasket } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { TestTracking } from '@guardian/support-dotcom-components/dist/shared/types/abTests/shared';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import type { ArticleCounts } from '../../lib/articleCount';
@@ -20,7 +20,6 @@ import {
 	getPurchaseInfo,
 	hasCmpConsentForBrowserId,
 	hasOptedOutOfArticleCount,
-	MODULES_VERSION,
 	recentlyClosedBanner,
 	setLocalNoBannerCachePeriod,
 	shouldHideSupportMessaging,
@@ -158,7 +157,6 @@ const buildPayload = async ({
 			weeklyArticleHistory,
 			articleCountToday,
 			hasOptedOutOfArticleCount: optedOutOfArticleCount,
-			modulesVersion: MODULES_VERSION,
 			sectionId,
 			tagIds: tags.map((tag) => tag.id),
 			contentType,

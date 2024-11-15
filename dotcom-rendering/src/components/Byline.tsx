@@ -10,6 +10,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { palette } from '../palette';
+import type { SmallHeadlineSize } from '../types/layout';
 
 type Props = {
 	text: string;

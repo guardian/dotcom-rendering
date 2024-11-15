@@ -1,5 +1,6 @@
 import { isUndefined } from '@guardian/libs';
 import { type ArticleFormat } from '../lib/articleFormat';
+import type { Block } from '../types/blocks';
 import type {
 	FEElement,
 	ImageBlockElement,

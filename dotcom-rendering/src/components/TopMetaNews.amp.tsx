@@ -11,6 +11,7 @@ import type { ArticleTheme } from '../lib/articleFormat';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import { getSharingUrls } from '../lib/sharing-urls';
 import type { AMPArticleModel } from '../types/article.amp';
+import type { AdTargeting } from '../types/commercial';
 import { Branding, BrandingRegionContainer } from './Branding.amp';
 import { Byline } from './Byline.amp';
 import { MainMedia } from './MainMedia.amp';

@@ -5,8 +5,8 @@
  */
 import '@testing-library/jest-dom';
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
-import type { ReminderFields } from '@guardian/support-dotcom-components/dist/shared/src/lib';
-import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/src/types/props/epic';
+import type { ReminderFields } from '@guardian/support-dotcom-components/dist/shared/lib';
+import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types/props/epic';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { ContributionsEpicUnvalidated as ContributionsEpic } from './ContributionsEpic';
 import { props as baseProps } from './utils/storybook';

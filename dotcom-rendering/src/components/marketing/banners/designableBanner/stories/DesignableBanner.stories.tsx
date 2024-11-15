@@ -12,7 +12,7 @@ import type {
 	BannerDesignImage,
 	SelectedAmountsVariant,
 	TickerSettings,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
 import { DesignableBannerUnvalidated as DesignableBanner } from '../../../banners/designableBanner/DesignableBanner';

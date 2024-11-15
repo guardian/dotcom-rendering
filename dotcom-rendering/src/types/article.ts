@@ -6,7 +6,7 @@ import { enhanceBlocks, enhanceMainMedia } from '../model/enhanceBlocks';
 import { enhanceCommercialProperties } from '../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../model/enhanceTableOfContents';
-import { validateAsArticleType } from '../model/validate';
+import type { Block } from './blocks';
 import type { ImageForLightbox } from './content';
 import type { FEArticleType } from './frontend';
 import { type RenderingTarget } from './renderingTarget';
@@ -52,10 +52,9 @@ const enhancePinnedPost = (
 };
 
 export const enhanceArticleType = (
-	body: unknown,
+	data: FEArticleType,
 	renderingTarget: RenderingTarget,
 ): Article => {
-	const data = validateAsArticleType(body);
 	const format = decideFormat(data.format);
 
 	const imagesForLightbox = data.config.switches.lightbox

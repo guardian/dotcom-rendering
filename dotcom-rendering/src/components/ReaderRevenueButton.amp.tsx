@@ -7,6 +7,7 @@ import {
 } from '@guardian/source/foundations';
 import type { NavType } from '../model/extract-nav';
 import ArrowRight from '../static/icons/arrow-right.svg';
+import type { ReaderRevenuePosition } from '../types/commercial';
 
 const supportStyles = css`
 	align-self: flex-start;

@@ -1,4 +1,5 @@
 import type { FEFrontCardStyle } from '../types/front';
+import type { RichLinkCardType } from '../types/layout';
 import {
 	ArticleDesign,
 	type ArticleFormat,

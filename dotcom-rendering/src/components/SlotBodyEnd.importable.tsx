@@ -7,7 +7,7 @@ import { adSizes, type SizeMapping } from '@guardian/commercial';
 import type { CountryCode } from '@guardian/libs';
 import { getCookie, isString, isUndefined } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
-import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
 import type {

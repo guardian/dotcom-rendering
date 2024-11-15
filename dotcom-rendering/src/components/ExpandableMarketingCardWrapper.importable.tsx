@@ -69,10 +69,11 @@ export const ExpandableMarketingCardWrapper = ({ guardianBaseURL }: Props) => {
 		<>
 			<Hide when="below" breakpoint="leftCol">
 				<div
-					role="button"
+					data-component="us-expandable-marketing-card"
+					role={!isExpanded ? 'button' : 'none'}
 					tabIndex={0}
 					onKeyDown={(event) => {
-						if (event.key === 'Enter') {
+						if (event.key === 'Enter' && !isExpanded) {
 							setIsExpanded(true);
 						}
 						if (event.key === 'Escape') {
@@ -80,8 +81,13 @@ export const ExpandableMarketingCardWrapper = ({ guardianBaseURL }: Props) => {
 						}
 					}}
 					onClick={() => {
-						setIsExpanded(true);
+						!isExpanded && setIsExpanded(true);
 					}}
+					data-link-name={
+						!isExpanded
+							? 'us-expandable-marketing-card expand'
+							: undefined
+					}
 				>
 					<ExpandableMarketingCard
 						guardianBaseURL={guardianBaseURL}

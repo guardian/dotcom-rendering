@@ -5,7 +5,7 @@
  */
 import type { OphanComponentEvent } from '@guardian/libs';
 import type { SecondaryCtaType } from '@guardian/support-dotcom-components';
-import type { ReminderFields } from '@guardian/support-dotcom-components/dist/shared/src/lib';
+import type { ReminderFields } from '@guardian/support-dotcom-components/dist/shared/lib';
 import type {
 	ArticleCounts,
 	ArticleCountType,
@@ -13,8 +13,8 @@ import type {
 	SelectedAmountsVariant,
 	SeparateArticleCount,
 	TickerSettings,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
-import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/src/types/props/shared';
+} from '@guardian/support-dotcom-components/dist/shared/types';
+import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/types/props/shared';
 
 export type BannerId = 'designable-banner' | 'sign-in-prompt-banner';
 

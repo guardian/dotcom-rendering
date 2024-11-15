@@ -3,6 +3,7 @@ import type { ConsentState } from '@guardian/libs';
 import type { Decorator, Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
+import type { AdTargeting } from '../../types/commercial';
 import type {
 	ImagePositionType,
 	ImageSizeType,

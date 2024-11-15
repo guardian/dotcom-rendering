@@ -9,10 +9,11 @@ import {
 	headlineBold24,
 	headlineBold28,
 	headlineBold34,
+	headlineMedium17,
 	neutral,
 	space,
 } from '@guardian/source/foundations';
-import type { Image } from '@guardian/support-dotcom-components/dist/shared/src/types';
+import type { Image } from '@guardian/support-dotcom-components/dist/shared/types';
 import {
 	removeMediaRulePrefix,
 	useMatchMedia,
@@ -24,15 +25,17 @@ interface DesignableBannerHeaderProps {
 	heading: JSX.Element | JSX.Element[] | null;
 	mobileHeading: JSX.Element | JSX.Element[] | null;
 	headerSettings: HeaderSettings | undefined;
+	headlineSize: 'small' | 'medium' | 'large';
 }
 
 export function DesignableBannerHeader({
 	heading,
 	mobileHeading,
 	headerSettings,
+	headlineSize,
 }: DesignableBannerHeaderProps): JSX.Element {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
-	const styles = getStyles(headerSettings);
+	const styles = getStyles(headerSettings, headlineSize);
 
 	const resolveImage = (settings: Image) => {
 		return (
@@ -55,7 +58,10 @@ export function DesignableBannerHeader({
 	);
 }
 
-const getStyles = (headerSettings: HeaderSettings | undefined) => {
+const getStyles = (
+	headerSettings: HeaderSettings | undefined,
+	headlineSize: 'small' | 'medium' | 'large',
+) => {
 	const color = headerSettings?.textColour ?? neutral[0];
 	const copyTopMargin = headerSettings?.headerImage ? space[6] : space[3];
 	const containerMargin = headerSettings?.headerImage ? `${space[6]}px` : '0';
@@ -70,7 +76,7 @@ const getStyles = (headerSettings: HeaderSettings | undefined) => {
 				margin: ${copyTopMargin}px 0 ${space[3]}px;
 				color: ${color};
 
-				${headlineBold24}
+				${headlineSize === 'small' ? headlineMedium17 : headlineBold24}
 				${from.tablet} {
 					${headlineBold28}
 					margin-bottom: ${space[6]}px;

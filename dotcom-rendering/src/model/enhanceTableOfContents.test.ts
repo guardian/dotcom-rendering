@@ -1,4 +1,5 @@
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
+import type { Block } from '../types/blocks';
 import { enhanceTableOfContents } from './enhanceTableOfContents';
 
 describe('Enhance Table of Contents', () => {

@@ -6,6 +6,7 @@ import {
 } from '@guardian/source/foundations';
 import { blockLink } from '../lib/block-link.amp';
 import DownArrow from '../static/icons/down-arrow.svg';
+import type { Block } from '../types/blocks';
 
 const headingStyle = css`
 	${headlineMedium20};

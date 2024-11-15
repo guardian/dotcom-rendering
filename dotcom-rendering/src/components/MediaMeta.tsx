@@ -5,6 +5,7 @@ import {
 	SvgVideo,
 } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
+import type { MediaType } from '../types/layout';
 
 type Props = {
 	mediaType: MediaType;
