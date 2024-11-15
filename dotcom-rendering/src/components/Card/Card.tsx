@@ -33,6 +33,7 @@ import { LatestLinks } from '../LatestLinks.importable';
 import { MediaDuration } from '../MediaDuration';
 import { MediaMeta } from '../MediaMeta';
 import { Slideshow } from '../Slideshow';
+import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
 import { SnapCssSandbox } from '../SnapCssSandbox';
 import { StarRating } from '../StarRating/StarRating';
@@ -605,13 +606,31 @@ export const Card = ({
 						imagePositionOnMobile={imagePositionOnMobile}
 						showPlayIcon={showPlayIcon}
 					>
-						{media.type === 'slideshow' && (
-							<Slideshow
-								images={media.slideshowImages}
-								imageSize={imageSize}
-								isDynamo={isDynamo}
-							/>
-						)}
+						{media.type === 'slideshow' &&
+							(isFlexibleContainer ? (
+								<div
+									css={css`
+										position: relative;
+										${getZIndex('card-nested-link')}
+									`}
+								>
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
+										<SlideshowCarousel
+											images={media.slideshowImages}
+											imageSize={imageSize}
+										/>
+									</Island>
+								</div>
+							) : (
+								<Slideshow
+									images={media.slideshowImages}
+									imageSize={imageSize}
+									isDynamo={isDynamo}
+								/>
+							))}
 						{media.type === 'avatar' && (
 							<AvatarContainer
 								imageSize={imageSize}
