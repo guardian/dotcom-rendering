@@ -3,7 +3,7 @@ import { breakpoints, space } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ReactNode } from 'react';
 import type { DCRSlideshowImage } from '../types/front';
-import { SlideshowCarousel } from './SlideshowCarousel';
+import { SlideshowCarousel } from './SlideshowCarousel.importable';
 
 const meta = {
 	component: SlideshowCarousel,
