@@ -116,6 +116,7 @@ export const KeyEventsCarousel = ({
 }: Props) => {
 	const carousel = useRef<HTMLDivElement | null>(null);
 	const cardWidth = 200;
+	const isApps = renderingTarget === 'Apps';
 
 	const goPrevious = () => {
 		if (carousel.current) carousel.current.scrollLeft -= cardWidth;
@@ -152,8 +153,8 @@ export const KeyEventsCarousel = ({
 				<div css={titleStyles}>Key events</div>
 			</Hide>
 			<div
-				onTouchStart={onTouchStart}
-				onTouchEnd={debouncedOnTouchEnd}
+				onTouchStart={isApps ? onTouchStart : undefined}
+				onTouchEnd={isApps ? debouncedOnTouchEnd : undefined}
 				ref={carousel}
 				id="key-events-carousel"
 				css={[carouselStyles, shortCarousel && leftMarginStyles]}
