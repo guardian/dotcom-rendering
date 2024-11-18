@@ -34,7 +34,16 @@ export const EditionsCrosswordLayout = ({ editionsCrossword }: Props) => {
 							crossword.dateSolutionAvailable,
 						).getTime(),
 						dimensions: crossword.dimensions,
-						crosswordType: crossword.type,
+						crosswordType: crossword.type as
+							| 'cryptic'
+							| 'everyman'
+							| 'prize'
+							| 'quick-cryptic'
+							| 'quick'
+							| 'quiptic'
+							| 'special'
+							| 'speedy'
+							| 'weekend',
 						pdf: crossword.pdf,
 					}}
 				/>
