@@ -1,21 +1,18 @@
 import { EditionsCrossword } from '../components/EditionsCrossword.importable';
 import { Island } from '../components/Island';
-import type { Article } from '../types/article';
+import type { FEEditionsCrossword } from '../types/editionsCrossword';
 
 interface Props {
-	article: Article;
+	editionsCrossword: FEEditionsCrossword;
 }
 
-export const EditionsCrosswordLayout = ({ article }: Props) => {
-	const { crossword } = article.frontendData;
+export const EditionsCrosswordLayout = ({ editionsCrossword }: Props) => {
+	const crossword: FEEditionsCrossword = editionsCrossword;
 	if (
-		!crossword?.id ||
 		!crossword.number ||
 		!crossword.name ||
 		!crossword.date ||
-		crossword.webPublicationDate == null ||
 		!crossword.solutionAvailable ||
-		crossword.dateSolutionAvailable == null ||
 		!crossword.pdf
 	) {
 		console.error('Crossword data is missing or incomplete:', crossword);
@@ -26,16 +23,18 @@ export const EditionsCrosswordLayout = ({ article }: Props) => {
 			<Island priority="critical">
 				<EditionsCrossword
 					data={{
-						id: crossword.id,
+						id: crossword.name,
 						number: crossword.number,
 						name: crossword.name,
-						date: crossword.date,
-						webPublicationDate: crossword.webPublicationDate,
+						date: new Date(crossword.date).getTime(),
+						webPublicationDate: new Date(crossword.date).getTime(),
 						entries: crossword.entries,
 						solutionAvailable: crossword.solutionAvailable,
-						dateSolutionAvailable: crossword.dateSolutionAvailable,
+						dateSolutionAvailable: new Date(
+							crossword.dateSolutionAvailable,
+						).getTime(),
 						dimensions: crossword.dimensions,
-						crosswordType: crossword.crosswordType,
+						crosswordType: crossword.type,
 						pdf: crossword.pdf,
 					}}
 				/>

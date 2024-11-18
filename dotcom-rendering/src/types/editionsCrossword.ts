@@ -25,7 +25,7 @@ type FECrosswordDimensions = {
 	rows: number;
 };
 
-type FEEditionsCrossword = {
+export type FEEditionsCrossword = {
 	name: string;
 	type: string;
 	number: number;

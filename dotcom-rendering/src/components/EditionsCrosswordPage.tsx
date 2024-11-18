@@ -1,15 +1,20 @@
 import { StrictMode } from 'react';
 import { EditionsCrosswordLayout } from '../layouts/EditionsCrosswordLayout';
-import type { Article } from '../types/article';
+import type { FEEditionsCrosswords } from '../types/editionsCrossword';
 
 interface Props {
-	article: Article;
+	editionsCrosswords: FEEditionsCrosswords;
 }
 
-export const EditionsCrosswordPage = ({ article }: Props) => {
+export const EditionsCrosswordPage = ({ editionsCrosswords }: Props) => {
 	return (
 		<StrictMode>
-			<EditionsCrosswordLayout article={article} />
+			<EditionsCrosswordLayout
+				editionsCrossword={editionsCrosswords.cryptic}
+			/>
+			<EditionsCrosswordLayout
+				editionsCrossword={editionsCrosswords.quick}
+			/>
 		</StrictMode>
 	);
 };
