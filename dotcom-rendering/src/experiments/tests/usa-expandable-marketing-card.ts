@@ -31,5 +31,11 @@ export const UsaExpandableMarketingCard: ABTest = {
 				/* no-op */
 			},
 		},
+		{
+			id: 'variant-billionaire',
+			test: (): void => {
+				/* no-op */
+			},
+		},
 	],
 };
