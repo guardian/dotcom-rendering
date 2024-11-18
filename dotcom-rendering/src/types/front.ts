@@ -122,7 +122,7 @@ export type FEContainerPalette =
 	| 'Branded'
 	| 'BreakingPalette'
 	| 'SpecialReportAltPalette'
-	| FEContainerLevel;
+	| 'SecondaryLevel';
 
 export type FEFrontCardStyle =
 	| 'SpecialReport'
