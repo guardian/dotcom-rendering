@@ -6,13 +6,13 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
-import { useCallback, useRef } from 'react';
+import debounce from 'lodash.debounce';
+import { useMemo, useRef } from 'react';
 import { getVideoClient } from '../lib/bridgetApi';
 import { palette } from '../palette';
 import type { Block } from '../types/blocks';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { KeyEventCard } from './KeyEventCard';
-import debounce from 'lodash.debounce';
 
 interface Props {
 	keyEvents: Block[];
@@ -132,11 +132,12 @@ export const KeyEventsCarousel = ({
 		debouncedOnTouchEnd.cancel();
 	};
 
-	const debouncedOnTouchEnd = useCallback(
-		debounce(() => {
-			console.log('User stopped scrolling');
-			getVideoClient().setFullscreen(false).catch(console.error);
-		}, 500),
+	const debouncedOnTouchEnd = useMemo(
+		() =>
+			debounce(() => {
+				console.log('User stopped scrolling');
+				getVideoClient().setFullscreen(false).catch(console.error);
+			}, 500),
 		[],
 	);
 
