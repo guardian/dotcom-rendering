@@ -36,6 +36,11 @@ type Props = {
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	showPlayIcon: boolean;
+	/**
+	 * Forces hiding the image overlay added to pictures & slideshows on hover.
+	 * This is to allow hiding the overlay on slideshow carousels where we don't
+	 * want it to be shown whilst retaining it for existing slideshows.
+	 */
 	hideImageOverlay?: boolean;
 };
 
