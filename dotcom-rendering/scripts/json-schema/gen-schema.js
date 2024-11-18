@@ -7,6 +7,7 @@ const {
 	getNewsletterPageSchema,
 	getTagPageSchema,
 	getBlockSchema,
+	getEditionsCrosswordSchema,
 } = require('./get-schema');
 
 const root = path.resolve(__dirname, '..', '..');
@@ -16,6 +17,7 @@ const frontSchema = getFrontSchema();
 const tagPageSchema = getTagPageSchema();
 const newsletterPageSchema = getNewsletterPageSchema();
 const blockSchema = getBlockSchema();
+const editionsCrosswordSchema = getEditionsCrosswordSchema();
 
 fs.writeFile(
 	`${root}/src/model/article-schema.json`,
@@ -64,6 +66,17 @@ fs.writeFile(
 fs.writeFile(
 	`${root}/src/model/block-schema.json`,
 	blockSchema,
+	'utf8',
+	(err) => {
+		if (err) {
+			console.log(err);
+		}
+	},
+);
+
+fs.writeFile(
+	`${root}/src/model/editions-crossword-schema.json`,
+	editionsCrosswordSchema,
 	'utf8',
 	(err) => {
 		if (err) {

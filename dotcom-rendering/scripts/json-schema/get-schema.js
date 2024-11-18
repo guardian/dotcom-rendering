@@ -9,6 +9,7 @@ const program = TJS.getProgramFromFiles(
 		path.resolve(`${root}/src/types/frontend.ts`),
 		path.resolve(`${root}/src/types/tagPage.ts`),
 		path.resolve(`${root}/src/types/newslettersPage.ts`),
+		path.resolve(`${root}/src/types/editionsCrossword.ts`),
 	],
 	{
 		skipLibCheck: true,
@@ -57,10 +58,19 @@ const getBlockSchema = () => {
 	);
 };
 
+const getEditionsCrosswordSchema = () => {
+	return JSON.stringify(
+		TJS.generateSchema(program, 'FEEditionsCrosswords', settings),
+		null,
+		4,
+	);
+};
+
 module.exports = {
 	getArticleSchema,
 	getFrontSchema,
 	getTagPageSchema,
 	getNewsletterPageSchema,
 	getBlockSchema,
+	getEditionsCrosswordSchema,
 };
