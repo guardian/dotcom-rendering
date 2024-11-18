@@ -37,6 +37,8 @@ const generateName = (build) => {
  */
 const getEntryIndex = (build) => {
 	switch (build) {
+		case 'client.editionsCrossword':
+			return './src/client/main.editionsCrossword.ts';
 		case 'client.apps':
 			return './src/client/main.apps.ts';
 		default:
@@ -78,6 +80,7 @@ const getLoaders = (build) => {
 					},
 				},
 			];
+		case 'client.editionsCrossword':
 		case 'client.apps':
 			return swcLoader(['android >= 5', 'ios >= 12']);
 		case 'client.web.variant':
@@ -97,7 +100,7 @@ module.exports = ({ build }) => ({
 	},
 	optimization:
 		// We don't need chunk optimization for apps as we use the 'LimitChunkCountPlugin' to produce just 1 chunk
-		build === 'client.apps'
+		build === 'client.apps' || build === 'client.editionsCrossword'
 			? undefined
 			: {
 					splitChunks: {
@@ -138,7 +141,7 @@ module.exports = ({ build }) => ({
 		new WebpackManifestPlugin({
 			fileName: `manifest.${build}.json`,
 		}),
-		...(build === 'client.apps'
+		...(build === 'client.apps' || build === 'client.editionsCrossword'
 			? [
 					new webpack.optimize.LimitChunkCountPlugin({
 						maxChunks: 1,
@@ -186,7 +189,15 @@ module.exports.getLoaders = getLoaders;
  * Tracking is done natively.
  *
  * @param {Build} build */
-const getExternalModules = (build) =>
-	build === 'client.apps'
-		? { '@guardian/ophan-tracker-js': 'guardian.ophan' }
-		: undefined;
+const getExternalModules = (build) => {
+	if (build === 'client.apps') {
+		return { '@guardian/ophan-tracker-js': 'guardian.ophan' };
+	}
+	if (build === 'client.editionsCrossword') {
+		return {
+			'@guardian/ophan-tracker-js': 'guardian.ophan',
+			'@guardian/commercial': 'guardian.commercial',
+		};
+	}
+	return undefined;
+};

@@ -116,6 +116,7 @@ const clientBuilds = [
 		? /** @type {const} */ (['client.web.legacy'])
 		: []),
 	'client.apps',
+	'client.editionsCrossword',
 ];
 
 module.exports = [

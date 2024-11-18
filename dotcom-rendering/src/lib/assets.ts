@@ -62,7 +62,8 @@ export type Build =
 	| 'client.apps'
 	| 'client.web'
 	| 'client.web.variant'
-	| 'client.web.legacy';
+	| 'client.web.legacy'
+	| 'client.editionsCrossword';
 
 type ManifestPath = `./manifest.${Build}.json`;
 
@@ -108,6 +109,9 @@ export const WEB = getScriptRegex('client.web');
 export const WEB_VARIANT_SCRIPT = getScriptRegex('client.web.variant');
 export const WEB_LEGACY_SCRIPT = getScriptRegex('client.web.legacy');
 export const APPS_SCRIPT = getScriptRegex('client.apps');
+export const EDITIONS_CROSSWORD_SCRIPT = getScriptRegex(
+	'client.editionsCrossword',
+);
 
 export const generateScriptTags = (scripts: string[]): string[] =>
 	scripts.filter(isString).map((script) => {
@@ -117,7 +121,8 @@ export const generateScriptTags = (scripts: string[]): string[] =>
 		if (
 			script.match(WEB) ??
 			script.match(WEB_VARIANT_SCRIPT) ??
-			script.match(APPS_SCRIPT)
+			script.match(APPS_SCRIPT) ??
+			script.match(EDITIONS_CROSSWORD_SCRIPT)
 		) {
 			return `<script type="module" src="${script}"></script>`;
 		}
