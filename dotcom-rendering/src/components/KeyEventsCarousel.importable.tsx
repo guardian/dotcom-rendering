@@ -6,12 +6,13 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { getVideoClient } from '../lib/bridgetApi';
 import { palette } from '../palette';
 import type { Block } from '../types/blocks';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { KeyEventCard } from './KeyEventCard';
+import debounce from 'lodash.debounce';
 
 interface Props {
 	keyEvents: Block[];
@@ -126,12 +127,18 @@ export const KeyEventsCarousel = ({
 	const onTouchStart = async () => {
 		console.log('User started scrolling');
 		await getVideoClient().setFullscreen(true);
+
+		// Cancel the debounced onTouchEnd if it's pending
+		debouncedOnTouchEnd.cancel();
 	};
 
-	const onTouchEnd = async () => {
-		console.log('User stopped scrolling');
-		await getVideoClient().setFullscreen(false);
-	};
+	const debouncedOnTouchEnd = useCallback(
+		debounce(() => {
+			console.log('User stopped scrolling');
+			getVideoClient().setFullscreen(false).catch(console.error);
+		}, 500),
+		[],
+	);
 
 	const filteredKeyEvents = keyEvents.filter(isValidKeyEvent);
 	const carouselLength = filteredKeyEvents.length;
@@ -144,9 +151,8 @@ export const KeyEventsCarousel = ({
 				<div css={titleStyles}>Key events</div>
 			</Hide>
 			<div
-				// onScroll={onScrollCarousel}
 				onTouchStart={onTouchStart}
-				onTouchEnd={onTouchEnd}
+				onTouchEnd={debouncedOnTouchEnd}
 				ref={carousel}
 				id="key-events-carousel"
 				css={[carouselStyles, shortCarousel && leftMarginStyles]}
