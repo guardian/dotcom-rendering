@@ -14,13 +14,13 @@ type Variant = {
 	heading: string;
 	kicker: string;
 };
-const variantBubble: Variant = {
-	heading: 'Pop your US news bubble',
-	kicker: 'How the Guardian is different',
-};
 const variantFree: Variant = {
 	heading: 'Yes, this story is free',
 	kicker: 'Why the Guardian has no paywall',
+};
+const variantBubble: Variant = {
+	heading: 'Pop your US news bubble',
+	kicker: 'How the Guardian is different',
 };
 const variantBillionaire: Variant = {
 	heading: 'No billionaire approved this',
@@ -62,23 +62,14 @@ const getVariant = (abTestAPI: ABTestAPI | undefined): VariantName | null => {
 
 const getVariantCopy = (variant: VariantName): Variant => {
 	if (variant === 'variant-free') {
-		return {
-			heading: variantFree.heading,
-			kicker: variantFree.kicker,
-		};
+		return variantFree;
 	}
 
 	if (variant === 'variant-bubble') {
-		return {
-			heading: variantBubble.heading,
-			kicker: variantBubble.kicker,
-		};
+		return variantBubble;
 	}
 
-	return {
-		heading: variantBillionaire.heading,
-		kicker: variantBillionaire.kicker,
-	};
+	return variantBillionaire;
 };
 
 const isFirstOrSecondArticle = () => {
