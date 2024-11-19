@@ -32,6 +32,14 @@ const activeDotStyles = css`
 	background-color: ${palette('--slideshow-pagination-dot-active')};
 `;
 
+const moreDotStyles = css`
+	transform: scale(0.85);
+`;
+
+const hiddenDotStyles = css`
+	transform: scale(0);
+`;
+
 export const ScrollingDots = ({
 	total,
 	current,
@@ -63,12 +71,63 @@ export const ScrollingDots = ({
 		};
 	};
 
+	const dotScale = (index: number) => {
+		if (index === dotsVisible - 1 && current < scrollThreshold) {
+			return moreDotStyles;
+		}
+
+		if (
+			index === total - dotsVisible &&
+			current >= total - scrollThreshold - 1
+		) {
+			return moreDotStyles;
+		}
+
+		if (
+			index === current + scrollThreshold &&
+			current >= scrollThreshold &&
+			current < total - scrollThreshold - 1
+		) {
+			return moreDotStyles;
+		}
+
+		if (
+			index === current - scrollThreshold &&
+			current > scrollThreshold &&
+			current <= total - scrollThreshold - 1
+		) {
+			return moreDotStyles;
+		}
+
+		if (
+			index === current + scrollThreshold + 1 &&
+			current >= scrollThreshold &&
+			current < total - scrollThreshold - 1
+		) {
+			return hiddenDotStyles;
+		}
+
+		if (
+			index === current - scrollThreshold - 1 &&
+			current > scrollThreshold &&
+			current <= total - scrollThreshold - 1
+		) {
+			return hiddenDotStyles;
+		}
+
+		return;
+	};
+
 	return (
 		<div css={scrollingDotContainerStyles}>
 			<div css={scrollingDotStyles(total)} style={scrollingDotOffset()}>
 				{Array.from({ length: total }, (_, index) => (
 					<span
-						css={[dotStyles, current === index && activeDotStyles]}
+						css={[
+							dotStyles,
+							current === index && activeDotStyles,
+							dotScale(index),
+						]}
 						key={index}
 					/>
 				))}
