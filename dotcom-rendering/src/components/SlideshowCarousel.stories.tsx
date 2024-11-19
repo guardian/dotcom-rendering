@@ -26,13 +26,23 @@ type Story = StoryObj<typeof meta>;
 const images = [
 	{
 		imageSrc:
+			'https://media.guim.co.uk/7cffd9d6809318a9d92c719c473d193caf95d601/0_0_3110_2074/3110.jpg',
+		imageCaption:
+			'Land Rover parked somewhere on the Roseland Heritage Coast, Cornwall.',
+	},
+	{
+		imageSrc:
+			'https://media.guim.co.uk/c36af9ca4c805e161ec991df550277db32637f32/0_0_3110_2074/3110.jpg',
+		imageCaption:
+			'Kudhva, architectural hideouts on the north Cornish coast',
+	},
+	{
+		imageSrc:
 			'https://media.guim.co.uk/4199670a084d3179778332af3ee6297486332e91/0_0_4000_3000/master/4000.jpg',
-		imageCaption: 'First image in slideshow',
 	},
 	{
 		imageSrc:
 			'https://media.guim.co.uk/fe27aabf35683caa6b89f2781ee5d0ad9042e209/0_0_4800_3197/master/4800.jpg',
-		imageCaption: 'Second image',
 	},
 	{
 		imageSrc:
