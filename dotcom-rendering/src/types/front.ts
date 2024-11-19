@@ -105,7 +105,7 @@ type FEContainerType =
 
 export type FEContainerLevel = 'Primary' | 'Secondary';
 
-export type FEContainerPalette =
+export type FEMetadata =
 	| 'EventPalette'
 	| 'SombreAltPalette'
 	| 'EventAltPalette'
@@ -122,7 +122,8 @@ export type FEContainerPalette =
 	| 'Branded'
 	| 'BreakingPalette'
 	| 'SpecialReportAltPalette'
-	| FEContainerLevel;
+	/** There is no Primary level in the original metadata, it is inferred by frontend */
+	| 'Secondary';
 
 export type FEFrontCardStyle =
 	| 'SpecialReport'
@@ -368,7 +369,7 @@ export type DCRSnapType = {
 
 type FECollectionConfigType = {
 	displayName: string;
-	metadata?: { type: FEContainerPalette }[];
+	metadata?: { type: FEMetadata }[];
 	collectionType: FEContainerType;
 	collectionLevel?: FEContainerLevel;
 	href?: string;
