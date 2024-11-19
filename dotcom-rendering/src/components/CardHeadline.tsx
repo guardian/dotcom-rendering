@@ -158,29 +158,6 @@ export const WithLink = ({
 	return <>{children}</>;
 };
 
-/**
- * The Byline component uses a different type to determine font sizes but infers the size from the desktop headline size.
- * This function converts the headline size to the appropriate byline size.
- */
-const getBylineFontSizes = (size: HeadlineSize): SmallHeadlineSize => {
-	switch (size) {
-		case 'xxlarge':
-			return 'ginormous';
-		case 'medium':
-			return 'huge';
-		case 'small':
-			return 'large';
-		case 'xsmall':
-			return 'medium';
-		case 'xxsmall':
-			return 'small';
-		case 'tiny':
-			return 'tiny';
-		default:
-			return 'medium';
-	}
-};
-
 export const CardHeadline = ({
 	headlineText,
 	format,
@@ -204,8 +181,6 @@ export const CardHeadline = ({
 		format.theme === ArticleSpecial.Labs
 			? getFontSize(fontSizes, 'textSans')
 			: getFontSize(fontSizes, 'headline');
-
-	const bylineSize = getBylineFontSizes(fontSizes.desktop);
 
 	return (
 		<WithLink linkTo={linkTo}>
@@ -249,12 +224,7 @@ export const CardHeadline = ({
 				</span>
 			</h3>
 			{!!byline && showByline && (
-				<Byline
-					text={byline}
-					isLabs={format.theme === ArticleSpecial.Labs}
-					size={bylineSize}
-					colour={kickerColour}
-				/>
+				<Byline text={byline} colour={kickerColour} fonts={fonts} />
 			)}
 		</WithLink>
 	);
