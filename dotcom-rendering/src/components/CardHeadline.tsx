@@ -23,7 +23,6 @@ import React from 'react';
 import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
-import type { SmallHeadlineSize } from '../types/layout';
 import { Byline } from './Byline';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';
