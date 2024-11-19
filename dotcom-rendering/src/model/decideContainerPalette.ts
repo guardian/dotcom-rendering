@@ -1,32 +1,30 @@
 /**
- *
- * Utility function to convert between FE and DCR container palettes
+ * Utility function to extract container palette information from the frontend container metadata field
  */
-
-import type { DCRContainerPalette, FEContainerPalette } from '../types/front';
+import type { DCRContainerPalette, FEContainerMetadata } from '../types/front';
 
 export const decideContainerPalette = (
-	palettes?: FEContainerPalette[],
+	metadata?: FEContainerMetadata[],
 	options?: { canBeBranded?: boolean },
 ): DCRContainerPalette | undefined => {
-	if (palettes?.includes('EventPalette')) return 'EventPalette';
-	if (palettes?.includes('SombreAltPalette')) return 'SombreAltPalette';
-	if (palettes?.includes('EventAltPalette')) return 'EventAltPalette';
-	if (palettes?.includes('InvestigationPalette')) {
+	if (metadata?.includes('EventPalette')) return 'EventPalette';
+	if (metadata?.includes('SombreAltPalette')) return 'SombreAltPalette';
+	if (metadata?.includes('EventAltPalette')) return 'EventAltPalette';
+	if (metadata?.includes('InvestigationPalette')) {
 		return 'InvestigationPalette';
 	}
-	if (palettes?.includes('LongRunningAltPalette')) {
+	if (metadata?.includes('LongRunningAltPalette')) {
 		return 'LongRunningAltPalette';
 	}
-	if (palettes?.includes('LongRunningPalette')) return 'LongRunningPalette';
-	if (palettes?.includes('SombrePalette')) return 'SombrePalette';
-	if (palettes?.includes('BreakingPalette')) return 'BreakingPalette';
-	if (palettes?.includes('SpecialReportAltPalette')) {
+	if (metadata?.includes('LongRunningPalette')) return 'LongRunningPalette';
+	if (metadata?.includes('SombrePalette')) return 'SombrePalette';
+	if (metadata?.includes('BreakingPalette')) return 'BreakingPalette';
+	if (metadata?.includes('SpecialReportAltPalette')) {
 		return 'SpecialReportAltPalette';
 	}
-	if (palettes?.includes('Branded') && options?.canBeBranded) {
+	if (metadata?.includes('Branded') && options?.canBeBranded) {
 		return 'Branded';
 	}
-	if (palettes?.includes('Podcast')) return 'PodcastPalette';
+	if (metadata?.includes('Podcast')) return 'PodcastPalette';
 	return undefined;
 };
