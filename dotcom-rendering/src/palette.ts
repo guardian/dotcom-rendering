@@ -1173,86 +1173,9 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 			return sourcePalette.neutral[86];
 	}
 };
-const avatarLight: PaletteFunction = ({ design, theme }) => {
-	switch (design) {
-		case ArticleDesign.Standard:
-		case ArticleDesign.Review:
-		case ArticleDesign.Explainer:
-		case ArticleDesign.Feature:
-		case ArticleDesign.Interview:
-		case ArticleDesign.Interactive:
-		case ArticleDesign.PhotoEssay:
-		case ArticleDesign.FullPageInteractive:
-		case ArticleDesign.NewsletterSignup:
-		case ArticleDesign.Comment:
-		case ArticleDesign.Letter:
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Analysis:
-			switch (theme) {
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[800];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[300];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
-				case Pillar.Opinion:
-					return sourcePalette.opinion[300];
-				case Pillar.Culture:
-					return sourcePalette.culture[500];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
-				case Pillar.Sport:
-					return sourcePalette.sport[500];
-				case Pillar.News:
-					return sourcePalette.news[500];
-			}
-		default:
-			switch (theme) {
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[800];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.news[500];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
-				case Pillar.Opinion:
-					return sourcePalette.opinion[300];
-				case Pillar.Culture:
-					return sourcePalette.culture[500];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
-				case Pillar.Sport:
-					return sourcePalette.sport[500];
-				case Pillar.News:
-					return sourcePalette.news[500];
-			}
-	}
-};
+const avatarLight: PaletteFunction = () => sourcePalette.neutral[97];
 
-const avatarDark: PaletteFunction = ({ design, theme }) => {
-	switch (design) {
-		case ArticleDesign.Standard:
-		case ArticleDesign.Review:
-		case ArticleDesign.Explainer:
-		case ArticleDesign.Feature:
-		case ArticleDesign.Interview:
-		case ArticleDesign.Interactive:
-		case ArticleDesign.PhotoEssay:
-		case ArticleDesign.FullPageInteractive:
-		case ArticleDesign.NewsletterSignup:
-		case ArticleDesign.Comment:
-		case ArticleDesign.Letter:
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Analysis:
-			switch (theme) {
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.neutral[46];
-				default:
-					return sourcePalette.neutral[20];
-			}
-		default:
-			return sourcePalette.neutral[20];
-	}
-};
+const avatarDark: PaletteFunction = () => sourcePalette.neutral[97];
 
 const followTextLight: PaletteFunction = ({ design }) => {
 	switch (design) {
