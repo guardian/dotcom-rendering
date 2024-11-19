@@ -11,8 +11,8 @@ import {
 } from '@guardian/source/react-components';
 import { useState } from 'react';
 import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
+import type { TableOfContentsItem } from '../model/enhanceTableOfContents';
 import { palette } from '../palette';
-import type { TableOfContentsItem } from '../types/article';
 
 interface Props {
 	tableOfContents: TableOfContentsItem[];
