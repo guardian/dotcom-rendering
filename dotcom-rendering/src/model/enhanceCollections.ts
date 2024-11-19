@@ -129,6 +129,7 @@ export const enhanceCollections = ({
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
 			targetedTerritory: collection.targetedTerritory,
+			aspectRatio: collection.config.aspectRatio,
 		};
 	});
 };

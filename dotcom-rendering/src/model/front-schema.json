@@ -2779,9 +2779,13 @@
                                     },
                                     "platform": {
                                         "type": "string"
+                                    },
+                                    "aspectRatio": {
+                                        "$ref": "#/definitions/AspectRatio"
                                     }
                                 },
                                 "required": [
+                                    "aspectRatio",
                                     "collectionType",
                                     "displayName",
                                     "excludeFromRss",
@@ -3260,6 +3264,15 @@
             "enum": [
                 "Primary",
                 "Secondary"
+            ],
+            "type": "string"
+        },
+        "AspectRatio": {
+            "enum": [
+                "1:1",
+                "4:5",
+                "5:3",
+                "5:4"
             ],
             "type": "string"
         },
