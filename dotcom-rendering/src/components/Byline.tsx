@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import {
-	headlineMediumItalic17,
-	headlineMediumItalic20,
-	headlineMediumItalic24,
-	headlineMediumItalic28,
+	headlineMedium17,
+	headlineMedium20,
+	headlineMedium24,
+	headlineMedium28,
 	textSansItalic17,
 	textSansItalic20,
 	textSansItalic24,
@@ -40,9 +40,9 @@ const bylineStyles = (size: SmallHeadlineSize, isLabs: boolean) => {
 				`;
 			}
 			return css`
-				${headlineMediumItalic28};
+				${headlineMedium28};
 				${until.desktop} {
-					${headlineMediumItalic24};
+					${headlineMedium24};
 				}
 			`;
 		case 'large': {
@@ -58,9 +58,9 @@ const bylineStyles = (size: SmallHeadlineSize, isLabs: boolean) => {
 				`;
 			}
 			return css`
-				${headlineMediumItalic24};
+				${headlineMedium24};
 				${until.desktop} {
-					${headlineMediumItalic20};
+					${headlineMedium20};
 				}
 			`;
 		}
@@ -76,9 +76,9 @@ const bylineStyles = (size: SmallHeadlineSize, isLabs: boolean) => {
 				`;
 			}
 			return css`
-				${headlineMediumItalic20};
+				${headlineMedium20};
 				${until.desktop} {
-					${headlineMediumItalic17};
+					${headlineMedium17};
 				}
 			`;
 		}
@@ -90,12 +90,12 @@ const bylineStyles = (size: SmallHeadlineSize, isLabs: boolean) => {
 				`;
 			}
 			return css`
-				${headlineMediumItalic17};
+				${headlineMedium17};
 			`;
 		}
 		case 'tiny':
 			return css`
-				${headlineMediumItalic17};
+				${headlineMedium17};
 			`;
 	}
 };
