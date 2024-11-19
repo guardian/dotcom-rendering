@@ -1,8 +1,6 @@
 /**
- *
- * Utility function to convert between FE and DCR container palettes
+ * Utility function to extract container palette information from the container metdata field from frontend
  */
-
 import type { DCRContainerPalette, FEContainerMetadata } from '../types/front';
 
 export const decideContainerPalette = (
