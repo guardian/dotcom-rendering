@@ -31,7 +31,7 @@ import type { ReactComponent } from './marketing/lib/ReactComponent';
 const styles = {
 	container: css`
 		/* stylelint-disable-next-line color-no-hex */
-		background: #051d32;
+		background: #f3afd9;
 		color: ${palette.neutral[100]};
 	`,
 	grid: css`
@@ -72,7 +72,7 @@ const styles = {
 		}
 		h2 {
 			margin: ${space[2]}px 0 ${space[4]}px;
-			color: ${palette.neutral[100]};
+			color: ${'#670055'};
 
 			${headlineMedium24}
 			${from.tablet} {
@@ -84,7 +84,7 @@ const styles = {
 		}
 		${from.leftCol} {
 			grid-column: 2;
-			border-left: 1px solid rgba(255, 255, 255, 0.2);
+			border-left: 1px solid rgba(0, 0, 0, 0.2);
 			padding-left: ${space[2]}px;
 		}
 	`,
@@ -93,6 +93,7 @@ const styles = {
 		strong {
 			${textEgyptianBold17};
 		}
+		color: ${'#1A2835'};
 	`,
 	ticker: css`
 		margin-bottom: ${space[4]}px;
@@ -117,11 +118,11 @@ const tickerSettings = {
 	currencySymbol: '$',
 	copy: {},
 	tickerStylingSettings: {
-		filledProgressColour: '#64B7C4',
-		progressBarBackgroundColour: 'rgba(34, 75, 95, 1)',
+		filledProgressColour: '#016D67',
+		progressBarBackgroundColour: 'rgba(1, 109, 103, 0.3)',
 		headlineColour: '#000000',
-		totalColour: '#64B7C4',
-		goalColour: '#FFFFFF',
+		totalColour: '#1A2835',
+		goalColour: '#016D67',
 	},
 };
 
@@ -200,10 +201,10 @@ export const UsEoy2024: ReactComponent<Props> = ({
 		<div css={styles.container}>
 			<div css={styles.grid}>
 				<div css={styles.logo}>
-					<SvgGuardianLogo textColor={'#FFFFFF'} width={100} />
+					<SvgGuardianLogo textColor={'#000000'} width={100} />
 				</div>
 				<div css={styles.heading}>
-					<h2>Can you help us hit our goal?</h2>
+					<h2>This Giving Tuesday, give to the Guardian.</h2>
 					<div css={styles.body}>
 						<div css={styles.ticker}>
 							<Ticker
@@ -216,12 +217,12 @@ export const UsEoy2024: ReactComponent<Props> = ({
 								size={'medium'}
 							/>
 						</div>
-						With no billionaire owner or shareholders pulling our
-						strings, reader support keeps us fiercely independent.
+						We’re funded by readers, not billionaires - which means
+						we can publish factual journalism with no outside
+						influence.
 						<strong>
 							{' '}
-							Help us hit our most important annual fundraising
-							goal so we can keep going.
+							Help us raise $4m to keep going in 2025.
 						</strong>
 					</div>
 				</div>
@@ -238,11 +239,11 @@ export const UsEoy2024: ReactComponent<Props> = ({
 						getCtaUrl={getCtaUrl}
 						cssCtaOverides={buttonStyles({
 							default: {
-								backgroundColour: '#C41C1C',
+								backgroundColour: '#016D67',
 								textColour: '#FFFFFF',
 							},
 							hover: {
-								backgroundColour: '#C41C1C',
+								backgroundColour: '#891414',
 								textColour: '#FFFFFF',
 							},
 						})}
