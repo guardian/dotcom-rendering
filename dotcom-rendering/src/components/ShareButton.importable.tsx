@@ -189,6 +189,12 @@ export const ShareButton = ({
 	const isLiveBlogMeta =
 		format.design === ArticleDesign.LiveBlog && context === 'ArticleMeta';
 
+	const isLiveBlogBlockDesktop =
+		typeof window !== 'undefined' &&
+		format.design === ArticleDesign.LiveBlog &&
+		context === 'LiveBlock' &&
+		window.innerWidth > 980;
+
 	const shareData = useMemo(
 		() => ({
 			title: webTitle,
@@ -202,14 +208,18 @@ export const ShareButton = ({
 	);
 
 	useEffect(() => {
-		if ('share' in navigator && navigator.canShare(shareData)) {
+		if (
+			!isLiveBlogBlockDesktop &&
+			'share' in navigator &&
+			navigator.canShare(shareData)
+		) {
 			setButtonKind('native');
 		} else if ('clipboard' in navigator) {
 			setButtonKind('copy');
 		} else {
 			setButtonKind('email');
 		}
-	}, [shareData]);
+	}, [shareData, isLiveBlogBlockDesktop]);
 
 	useEffect(() => {
 		if (!isCopied) return;
