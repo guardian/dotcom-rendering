@@ -3,10 +3,10 @@
  * Utility function to convert between FE and DCR container palettes
  */
 
-import type { DCRContainerPalette, FEMetadata } from '../types/front';
+import type { DCRContainerPalette, FEContainerMetadata } from '../types/front';
 
 export const decideContainerPalette = (
-	metadata?: FEMetadata[],
+	metadata?: FEContainerMetadata[],
 	options?: { canBeBranded?: boolean },
 ): DCRContainerPalette | undefined => {
 	if (metadata?.includes('EventPalette')) return 'EventPalette';

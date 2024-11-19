@@ -105,7 +105,7 @@ type FEContainerType =
 
 export type FEContainerLevel = 'Primary' | 'Secondary';
 
-export type FEMetadata =
+export type FEContainerMetadata =
 	| 'EventPalette'
 	| 'SombreAltPalette'
 	| 'EventAltPalette'
@@ -369,7 +369,7 @@ export type DCRSnapType = {
 
 type FECollectionConfigType = {
 	displayName: string;
-	metadata?: { type: FEMetadata }[];
+	metadata?: { type: FEContainerMetadata }[];
 	collectionType: FEContainerType;
 	collectionLevel?: FEContainerLevel;
 	href?: string;
