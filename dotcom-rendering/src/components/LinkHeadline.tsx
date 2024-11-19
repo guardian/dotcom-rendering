@@ -1,15 +1,20 @@
 import { css } from '@emotion/react';
 import {
+	headlineMedium14,
 	headlineMedium17,
 	headlineMedium20,
 	headlineMedium24,
 	headlineMedium28,
+	textSans17,
+	textSans20,
+	textSans24,
+	until,
 } from '@guardian/source/foundations';
 import { palette } from '../palette';
 import type { SmallHeadlineSize } from '../types/layout';
-import { Byline } from './Byline';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';
+import { Byline } from './Byline';
 
 type HeadlineLink = {
 	to: string; // the href for the anchor tag
@@ -51,8 +56,40 @@ const fontStyles = (size: SmallHeadlineSize) => {
 			`;
 		case 'tiny':
 			return css`
-				${headlineMedium17};
-				font-size: 14px;
+				${headlineMedium14};
+			`;
+	}
+};
+
+const bylineLabsStyles = (size: SmallHeadlineSize) => {
+	switch (size) {
+		case 'ginormous':
+		case 'huge':
+			return css`
+				${textSans24};
+			`;
+
+		case 'large': {
+			return css`
+				${textSans24};
+				${until.desktop} {
+					${textSans20};
+				}
+			`;
+		}
+		case 'medium': {
+			return css`
+				${textSans20};
+				${until.desktop} {
+					${textSans17};
+				}
+			`;
+		}
+		case 'small':
+		case 'tiny':
+		default:
+			return css`
+				${textSans17};
 			`;
 	}
 };
@@ -119,7 +156,14 @@ export const LinkHeadline = ({
 						{headlineText}
 					</a>
 					{!!byline && (
-						<Byline text={byline} size={size} isLabs={isLabs} />
+						<Byline
+							fonts={
+								isLabs
+									? bylineLabsStyles(size)
+									: fontStyles(size)
+							}
+							text={byline}
+						/>
 					)}
 				</>
 			) : (
@@ -127,7 +171,14 @@ export const LinkHeadline = ({
 				<>
 					<span>{headlineText}</span>
 					{!!byline && (
-						<Byline text={byline} size={size} isLabs={isLabs} />
+						<Byline
+							fonts={
+								isLabs
+									? bylineLabsStyles(size)
+									: fontStyles(size)
+							}
+							text={byline}
+						/>
 					)}
 				</>
 			)}
