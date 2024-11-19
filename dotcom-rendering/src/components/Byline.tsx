@@ -4,9 +4,9 @@ import {
 	headlineMedium20,
 	headlineMedium24,
 	headlineMedium28,
-	textSansItalic17,
-	textSansItalic20,
-	textSansItalic24,
+	textSans17,
+	textSans20,
+	textSans24,
 	until,
 } from '@guardian/source/foundations';
 import { palette } from '../palette';
@@ -31,12 +31,7 @@ const bylineStyles = (size: SmallHeadlineSize, isLabs: boolean) => {
 		case 'huge':
 			if (isLabs) {
 				return css`
-					${textSansItalic24};
-					line-height: 24px;
-					${until.desktop} {
-						${textSansItalic24};
-						line-height: 20px;
-					}
+					${textSans24};
 				`;
 			}
 			return css`
@@ -48,12 +43,9 @@ const bylineStyles = (size: SmallHeadlineSize, isLabs: boolean) => {
 		case 'large': {
 			if (isLabs) {
 				return css`
-					${textSansItalic20};
-					font-size: 24px;
-					line-height: 24px;
+					${textSans24};
 					${until.desktop} {
-						${textSansItalic20};
-						line-height: 20px;
+						${textSans20};
 					}
 				`;
 			}
@@ -67,11 +59,9 @@ const bylineStyles = (size: SmallHeadlineSize, isLabs: boolean) => {
 		case 'medium': {
 			if (isLabs) {
 				return css`
-					${textSansItalic20};
-					line-height: 20px;
+					${textSans20};
 					${until.desktop} {
-						${textSansItalic17};
-						line-height: 18px;
+						${textSans17};
 					}
 				`;
 			}
@@ -85,8 +75,7 @@ const bylineStyles = (size: SmallHeadlineSize, isLabs: boolean) => {
 		case 'small': {
 			if (isLabs) {
 				return css`
-					${textSansItalic17};
-					line-height: 18px;
+					${textSans17};
 				`;
 			}
 			return css`
