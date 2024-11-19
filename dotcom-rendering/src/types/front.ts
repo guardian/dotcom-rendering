@@ -122,7 +122,6 @@ export type FEContainerMetadata =
 	| 'Branded'
 	| 'BreakingPalette'
 	| 'SpecialReportAltPalette'
-	/** There is no Primary level in the original metadata, it is inferred by frontend */
 	| 'Secondary';
 
 export type FEFrontCardStyle =

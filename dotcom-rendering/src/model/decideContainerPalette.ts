@@ -1,5 +1,5 @@
 /**
- * Utility function to extract container palette information from the container metdata field from frontend
+ * Utility function to extract container palette information from the frontend container metadata field
  */
 import type { DCRContainerPalette, FEContainerMetadata } from '../types/front';
 
