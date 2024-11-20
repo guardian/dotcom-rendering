@@ -385,7 +385,7 @@ type FECollectionConfigType = {
 	showTimestamps: boolean;
 	hideShowMore: boolean;
 	platform: string;
-	aspectRatio: AspectRatio;
+	aspectRatio?: AspectRatio;
 };
 
 export type FECollectionType = {
@@ -434,7 +434,7 @@ export type DCRCollectionType = {
 	canShowMore?: boolean;
 	collectionBranding?: CollectionBranding;
 	targetedTerritory?: Territory;
-	aspectRatio: AspectRatio;
+	aspectRatio?: AspectRatio;
 };
 
 export type DCRGroupedTrails = {

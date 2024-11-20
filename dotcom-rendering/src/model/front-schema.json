@@ -2785,7 +2785,6 @@
                                     }
                                 },
                                 "required": [
-                                    "aspectRatio",
                                     "collectionType",
                                     "displayName",
                                     "excludeFromRss",
