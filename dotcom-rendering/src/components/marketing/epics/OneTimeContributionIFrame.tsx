@@ -31,16 +31,17 @@ function getIframeUrl(stage: boolean, countryCode: string | undefined): string {
 	return `${baseUrl}/${countryCode}/one-time-checkout-embed`;
 }
 
-// Helper function to determine the base URL
+// Helper function to determine the base URL based on the stage
 function getBaseUrl(stage: boolean): string {
-	/*if (stage === 'PROD') {
+	if (stage === 'PROD') {
 		return 'https://support.theguardian.com';
 	} else if (stage === 'CODE') {
 		return 'https://support.code.dev-theguardian.com';
-	}*/
+	}
 	return 'https://support.thegulocal.com';
 }
 
+//Need to check if there is already an existing function that does this
 function getCountryCode(countryCode: string): string | undefined {
 	if (countryCode === 'GB') {
 		return 'uk';

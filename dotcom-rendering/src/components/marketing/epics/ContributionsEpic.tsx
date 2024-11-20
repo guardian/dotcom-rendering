@@ -41,6 +41,7 @@ import { ContributionsEpicArticleCountAboveWithOptOut } from './ContributionsEpi
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
 import { ContributionsEpicSignInCta } from './ContributionsEpicSignInCta';
 import { ContributionsEpicCtasContainer } from './ctas/ContributionsEpicCtasContainer';
+import { OneTimeContributionIFrame } from './OneTimeContributionIFrame';
 
 // Hard-coded AB TEST - picking up ab test name and variant name from the tracking object
 // then applying a different colour if it matches, or the default colour if it doesn't.
@@ -343,8 +344,13 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	hasConsentForArticleCount,
 	stage,
 }: EpicProps) => {
-	const { image, tickerSettings, choiceCardAmounts, newsletterSignup } =
-		variant;
+	const {
+		image,
+		tickerSettings,
+		choiceCardAmounts,
+		newsletterSignup,
+		oneTimeContribution,
+	} = variant;
 
 	const isColourInTestVariant: boolean =
 		tracking.abTestName.includes('_ARTICLE_EPIC_BG_COLOUR') &&
@@ -504,7 +510,9 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				/>
 			)}
 
-			{newsletterSignup ? (
+			{oneTimeContribution && !newsletterSignup ? (
+				<OneTimeContributionIFrame src="https://support.thegulocal.com/us/one-time-checkout-embed" />
+			) : newsletterSignup ? (
 				<ContributionsEpicNewsletterSignup
 					newsletterId={newsletterSignup.newsletterId}
 					successDescription={newsletterSignup.successDescription}
