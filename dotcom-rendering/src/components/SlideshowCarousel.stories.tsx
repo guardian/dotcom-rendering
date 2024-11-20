@@ -5,9 +5,22 @@ import type { ReactNode } from 'react';
 import type { DCRSlideshowImage } from '../types/front';
 import { SlideshowCarousel } from './SlideshowCarousel.importable';
 
+const Wrapper = ({ children }: { children: ReactNode }) => {
+	const styles = css`
+		margin: ${space[2]}px;
+		max-width: 460px;
+	`;
+	return <div css={styles}>{children}</div>;
+};
+
 const meta = {
 	component: SlideshowCarousel,
 	title: 'Components/SlideshowCarousel',
+	render: (args) => (
+		<Wrapper>
+			<SlideshowCarousel {...args} />
+		</Wrapper>
+	),
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -62,22 +75,23 @@ const images = [
 	},
 ] as const satisfies readonly DCRSlideshowImage[];
 
-const Wrapper = ({ children }: { children: ReactNode }) => {
-	const styles = css`
-		margin: ${space[2]}px;
-		max-width: 460px;
-	`;
-	return <div css={styles}>{children}</div>;
-};
-
-export const Default = {
-	render: (args) => (
-		<Wrapper>
-			<SlideshowCarousel {...args} />
-		</Wrapper>
-	),
+export const WithMultipleImages = {
 	args: {
 		images,
+		imageSize: 'medium',
+	},
+} satisfies Story;
+
+export const WithThreeImages = {
+	args: {
+		images: images.slice(0, 3),
+		imageSize: 'medium',
+	},
+} satisfies Story;
+
+export const WithOneImage = {
+	args: {
+		images: images.slice(0, 1),
 		imageSize: 'medium',
 	},
 } satisfies Story;
