@@ -136,7 +136,7 @@ export const SlideshowCarouselScrollingDots = ({
 
 		/**
 		 * If we've hit the scroll threshold and the current dot is just
-		 * offscreen to the left apply the offscreen style so the dor size
+		 * offscreen to the left apply the offscreen style so the dot size
 		 * scales as it scrolls into or out of view
 		 */
 		if (
