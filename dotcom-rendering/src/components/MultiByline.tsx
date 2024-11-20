@@ -24,7 +24,7 @@ import { palette } from '../palette';
 import type { MultiByline as MultiBylineModel } from '../types/content';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
-import { EndNote } from './MiniProfile';
+import { EndNote } from './EndNote';
 import { subheadingStyles } from './Subheading';
 
 const multiBylineItemStyles = css`
