@@ -174,23 +174,6 @@ const getFontSize = (sizes: ResponsiveFontSize, family: FontFamily) => {
 	`;
 };
 
-export const WithLink = ({
-	linkTo,
-	children,
-}: {
-	linkTo?: string;
-	children: React.ReactNode;
-}) => {
-	if (linkTo) {
-		return (
-			<Link href={linkTo} cssOverrides={sublinkStyles}>
-				{children}
-			</Link>
-		);
-	}
-	return <>{children}</>;
-};
-
 const getFonts = (format: ArticleFormat, fontSizes: ResponsiveFontSize) => {
 	if (format.theme === ArticleSpecial.Labs) {
 		return getFontSize(fontSizes, FontFamily.TextSans);
@@ -206,6 +189,23 @@ const getFonts = (format: ArticleFormat, fontSizes: ResponsiveFontSize) => {
 	}
 
 	return getFontSize(fontSizes, FontFamily.HeadlineMedium);
+};
+
+export const WithLink = ({
+	linkTo,
+	children,
+}: {
+	linkTo?: string;
+	children: React.ReactNode;
+}) => {
+	if (linkTo) {
+		return (
+			<Link href={linkTo} cssOverrides={sublinkStyles}>
+				{children}
+			</Link>
+		);
+	}
+	return <>{children}</>;
 };
 
 export const CardHeadline = ({
