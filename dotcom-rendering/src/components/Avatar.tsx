@@ -1,4 +1,3 @@
-import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { Fragment } from 'react';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
@@ -22,6 +21,10 @@ const img = css`
 	object-fit: cover;
 	height: 100%;
 	width: 100%;
+`;
+
+const multiBylineAvatar = css`
+	background-color: ${palette('--multi-byline-avatar-background')};
 `;
 
 /**
@@ -52,10 +55,15 @@ type Props = {
 	src: string;
 	alt: string;
 	shape?: AvatarShape;
-	cssOverrides?: SerializedStyles;
+	isMultiBylineAvatar?: boolean;
 };
 
-export const Avatar = ({ src, alt, shape = 'round', cssOverrides }: Props) => {
+export const Avatar = ({
+	src,
+	alt,
+	shape = 'round',
+	isMultiBylineAvatar = false,
+}: Props) => {
 	const sources = generateSources(getSourceImageUrl(src), [
 		{ breakpoint: 320, width: 75 },
 		{ breakpoint: 740, width: 140 },
@@ -86,7 +94,7 @@ export const Avatar = ({ src, alt, shape = 'round', cssOverrides }: Props) => {
 							'--avatar-background-colour',
 						)};
 					`,
-				cssOverrides,
+				isMultiBylineAvatar ? multiBylineAvatar : '',
 			]}
 		>
 			{sources.map((source) => {

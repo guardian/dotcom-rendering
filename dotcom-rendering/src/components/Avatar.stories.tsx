@@ -33,3 +33,15 @@ export const RoundAvatar = {
 	},
 	name: 'Round Avatar Cutout With Coloured Background',
 } satisfies Story;
+
+export const MultiByline = {
+	args: {
+		src: 'https://uploads.guim.co.uk/2017/10/06/George-Monbiot,-L.png',
+		alt: 'The alt of the image',
+		isMultiBylineAvatar: true,
+	},
+	parameters: {
+		size: '136px',
+	},
+	name: 'Multi-byline, Opinion Theme',
+} satisfies Story;

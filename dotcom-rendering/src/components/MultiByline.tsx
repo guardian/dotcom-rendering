@@ -253,10 +253,6 @@ const bylineImageStyles = css`
 	}
 `;
 
-const avatarStyles = css`
-	background-color: ${palette('--multi-byline-avatar-background')};
-`;
-
 interface MultiBylineItemProps {
 	multiByline: MultiBylineModel;
 	format: ArticleFormat;
@@ -343,7 +339,7 @@ const Byline = ({
 					<Avatar
 						src={imageUrl}
 						alt={byline}
-						cssOverrides={avatarStyles}
+						isMultiBylineAvatar={true}
 					/>
 				</div>
 			)}
