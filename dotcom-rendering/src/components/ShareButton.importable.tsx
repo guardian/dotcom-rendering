@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette, until } from '@guardian/source/foundations';
+import { breakpoints, palette, until } from '@guardian/source/foundations';
 import type { Size } from '@guardian/source/react-components';
 import {
 	Button,
@@ -10,6 +10,7 @@ import {
 import { useEffect, useMemo, useState } from 'react';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { transparentColour } from '../lib/transparentColour';
+import { useMatchMedia } from '../lib/useMatchMedia';
 import { palette as themePalette } from '../palette';
 
 type Props = {
@@ -189,11 +190,9 @@ export const ShareButton = ({
 	const isLiveBlogMeta =
 		format.design === ArticleDesign.LiveBlog && context === 'ArticleMeta';
 
-	const isLiveBlogBlockDesktop =
-		typeof window !== 'undefined' &&
-		format.design === ArticleDesign.LiveBlog &&
-		context === 'LiveBlock' &&
-		window.innerWidth > 980;
+	const isDesktop = useMatchMedia(`(min-width: ${breakpoints.desktop}px)`);
+
+	const isLiveBlogBlockDesktop = isDesktop && context === 'LiveBlock';
 
 	const shareData = useMemo(
 		() => ({
