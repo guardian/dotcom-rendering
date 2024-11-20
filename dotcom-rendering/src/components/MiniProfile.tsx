@@ -5,6 +5,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { slugify } from '../model/enhance-H2s';
 import { palette } from '../palette';
 import type { MiniProfile as MiniProfileModel } from '../types/content';
+import { EndNote } from './EndNote';
 import { Heading } from './Heading';
 import { headingLineStyles } from './KeyTakeaway';
 import { subheadingStyles } from './Subheading';
@@ -59,12 +60,6 @@ const bioStyles = css`
 	strong {
 		font-weight: bold;
 	}
-`;
-
-const endNoteStyles = css`
-	${textSans14};
-	color: ${palette('--mini-profiles-text-subdued')};
-	margin-bottom: ${space[3]}px;
 `;
 
 const bottomBorderStyles = css`
@@ -135,14 +130,5 @@ const Bio = ({ html }: { html?: string }) => {
 			/>
 			<div css={bottomBorderStyles} />
 		</>
-	);
-};
-
-export const EndNote = ({ text }: { text?: string }) => {
-	if (!text) return null;
-	return (
-		<p css={endNoteStyles}>
-			<em>{text}</em>
-		</p>
 	);
 };
