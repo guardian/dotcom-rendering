@@ -72,6 +72,8 @@ export const ScrollingDots = ({
 	};
 
 	const dotScale = (index: number) => {
+		if (total <= dotsVisible) return;
+
 		if (index === dotsVisible - 1 && current < scrollThreshold) {
 			return moreDotStyles;
 		}

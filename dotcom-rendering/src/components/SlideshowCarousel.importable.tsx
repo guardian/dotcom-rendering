@@ -153,6 +153,9 @@ export const SlideshowCarousel = ({
 		};
 	}, []);
 
+	/**
+	 * Restrict slideshow to a maximum of 10 images
+	 */
 	const slideshowImages = takeFirst(images, 10);
 	const slideshowImageCount = slideshowImages.length;
 
@@ -186,49 +189,51 @@ export const SlideshowCarousel = ({
 				})}
 			</ul>
 
-			<div css={navigationStyles}>
-				<div css={scrollingDotStyles}>
-					<ScrollingDots
-						total={slideshowImageCount}
-						current={currentPage}
-					/>
-				</div>
-				<div css={buttonStyles}>
-					<Button
-						hideLabel={true}
-						iconSide="left"
-						icon={<SvgChevronLeftSingle />}
-						onClick={() => scrollTo('left')}
-						priority="tertiary"
-						theme={
-							previousButtonEnabled
-								? themeButton
-								: themeButtonDisabled
-						}
-						size="small"
-						disabled={!previousButtonEnabled}
-						aria-label="View next image in slideshow"
-						// TODO: data-link-name="slideshow carousel left chevron"
-					/>
+			{slideshowImageCount > 1 && (
+				<div css={navigationStyles}>
+					<div css={scrollingDotStyles}>
+						<ScrollingDots
+							total={slideshowImageCount}
+							current={currentPage}
+						/>
+					</div>
+					<div css={buttonStyles}>
+						<Button
+							hideLabel={true}
+							iconSide="left"
+							icon={<SvgChevronLeftSingle />}
+							onClick={() => scrollTo('left')}
+							priority="tertiary"
+							theme={
+								previousButtonEnabled
+									? themeButton
+									: themeButtonDisabled
+							}
+							size="small"
+							disabled={!previousButtonEnabled}
+							aria-label="View next image in slideshow"
+							// TODO: data-link-name="slideshow carousel left chevron"
+						/>
 
-					<Button
-						hideLabel={true}
-						iconSide="left"
-						icon={<SvgChevronRightSingle />}
-						onClick={() => scrollTo('right')}
-						priority="tertiary"
-						theme={
-							nextButtonEnabled
-								? themeButton
-								: themeButtonDisabled
-						}
-						size="small"
-						disabled={!nextButtonEnabled}
-						aria-label="View previous image in slideshow"
-						// TODO: data-link-name="slideshow carousel right chevron"
-					/>
+						<Button
+							hideLabel={true}
+							iconSide="left"
+							icon={<SvgChevronRightSingle />}
+							onClick={() => scrollTo('right')}
+							priority="tertiary"
+							theme={
+								nextButtonEnabled
+									? themeButton
+									: themeButtonDisabled
+							}
+							size="small"
+							disabled={!nextButtonEnabled}
+							aria-label="View previous image in slideshow"
+							// TODO: data-link-name="slideshow carousel right chevron"
+						/>
+					</div>
 				</div>
-			</div>
+			)}
 		</div>
 	);
 };
