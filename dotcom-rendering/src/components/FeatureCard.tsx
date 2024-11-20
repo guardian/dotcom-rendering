@@ -7,6 +7,7 @@ import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../lib/useCommentCount';
 import { palette } from '../palette';
 import type { StarRating as Rating } from '../types/content';
 import type {
+	AspectRatio,
 	DCRContainerPalette,
 	DCRFrontImage,
 	DCRSupportingContent,
@@ -22,7 +23,7 @@ import type {
 import { TrailText } from './Card/components/TrailText';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from './CardHeadline';
-import type { AspectRatio, Loading } from './CardPicture';
+import type { Loading } from './CardPicture';
 import { CardPicture } from './CardPicture';
 import { ContainerOverrides } from './ContainerOverrides';
 import { FormatBoundary } from './FormatBoundary';
