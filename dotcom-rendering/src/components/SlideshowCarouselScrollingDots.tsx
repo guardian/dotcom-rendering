@@ -40,7 +40,7 @@ const offscreenDotStyles = css`
 	transform: scale(0);
 `;
 
-export const ScrollingDots = ({
+export const SlideshowCarouselScrollingDots = ({
 	total,
 	current,
 }: {

@@ -12,7 +12,7 @@ import { palette } from '../palette';
 import type { DCRSlideshowImage } from '../types/front';
 import type { ImageSizeType } from './Card/components/ImageWrapper';
 import { CardPicture } from './CardPicture';
-import { ScrollingDots } from './ScrollingDots';
+import { SlideshowCarouselScrollingDots } from './SlideshowCarouselScrollingDots';
 
 const themeButton: Partial<ThemeButton> = {
 	borderTertiary: palette('--carousel-chevron-border'),
@@ -192,7 +192,7 @@ export const SlideshowCarousel = ({
 			{slideshowImageCount > 1 && (
 				<div css={navigationStyles}>
 					<div css={scrollingDotStyles}>
-						<ScrollingDots
+						<SlideshowCarouselScrollingDots
 							total={slideshowImageCount}
 							current={currentPage}
 						/>
