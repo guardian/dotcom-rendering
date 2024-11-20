@@ -152,6 +152,14 @@ const usEOYTickerStylingSettings: TickerSettings['tickerStylingSettings'] = {
 	goalColour: '#000000',
 };
 
+const ausEOYTickerStylingSettings: TickerSettings['tickerStylingSettings'] = {
+	filledProgressColour: '#FBBCC7',
+	progressBarBackgroundColour: 'rgba(196, 28, 28, 0.30)',
+	headlineColour: '#000000',
+	totalColour: '#FBBCC7',
+	goalColour: '#000000',
+};
+
 const articleCountAboveContainerStyles = css`
 	margin-bottom: ${space[4]}px;
 `;
@@ -460,7 +468,9 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 						}}
 						tickerData={tickerSettings.tickerData}
 						tickerStylingSettings={
-							isColourInTestVariant
+							tickerSettings.name === 'AU'
+								? ausEOYTickerStylingSettings
+								: isColourInTestVariant
 								? usEOYTickerStylingSettings
 								: defaultTickerStylingSettings
 						}
