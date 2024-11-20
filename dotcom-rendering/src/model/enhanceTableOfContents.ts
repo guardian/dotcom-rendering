@@ -1,11 +1,15 @@
 import { JSDOM } from 'jsdom';
-import type { TableOfContentsItem } from '../types/article';
 import type { Block } from '../types/blocks';
 import type {
 	NumberedTitleBlockElement,
 	SubheadingBlockElement,
 } from '../types/content';
 import { slugify } from './enhance-H2s';
+
+export interface TableOfContentsItem {
+	id: string;
+	title: string;
+}
 
 const extractText = (
 	element: SubheadingBlockElement | NumberedTitleBlockElement,

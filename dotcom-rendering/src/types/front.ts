@@ -105,7 +105,7 @@ type FEContainerType =
 
 export type FEContainerLevel = 'Primary' | 'Secondary';
 
-export type FEContainerPalette =
+export type FEContainerMetadata =
 	| 'EventPalette'
 	| 'SombreAltPalette'
 	| 'EventAltPalette'
@@ -122,7 +122,7 @@ export type FEContainerPalette =
 	| 'Branded'
 	| 'BreakingPalette'
 	| 'SpecialReportAltPalette'
-	| FEContainerLevel;
+	| 'Secondary';
 
 export type FEFrontCardStyle =
 	| 'SpecialReport'
@@ -370,7 +370,7 @@ export type AspectRatio = '5:3' | '5:4' | '4:5' | '1:1';
 
 type FECollectionConfigType = {
 	displayName: string;
-	metadata?: { type: FEContainerPalette }[];
+	metadata?: { type: FEContainerMetadata }[];
 	collectionType: FEContainerType;
 	collectionLevel?: FEContainerLevel;
 	href?: string;

@@ -2727,7 +2727,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "type": {
-                                                    "$ref": "#/definitions/FEContainerPalette"
+                                                    "$ref": "#/definitions/FEContainerMetadata"
                                                 }
                                             },
                                             "required": [
@@ -3237,7 +3237,7 @@
             ],
             "type": "string"
         },
-        "FEContainerPalette": {
+        "FEContainerMetadata": {
             "enum": [
                 "Branded",
                 "Breaking",
@@ -3251,7 +3251,6 @@
                 "LongRunningAltPalette",
                 "LongRunningPalette",
                 "Podcast",
-                "Primary",
                 "Secondary",
                 "SombreAltPalette",
                 "SombrePalette",
