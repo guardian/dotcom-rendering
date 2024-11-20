@@ -32,11 +32,11 @@ const activeDotStyles = css`
 	background-color: ${palette('--slideshow-pagination-dot-active')};
 `;
 
-const moreDotStyles = css`
+const trailingDotStyles = css`
 	transform: scale(0.85);
 `;
 
-const hiddenDotStyles = css`
+const offscreenDotStyles = css`
 	transform: scale(0);
 `;
 
@@ -47,7 +47,7 @@ export const ScrollingDots = ({
 	total: number;
 	current: number;
 }) => {
-	const scrollingDotOffset = () => {
+	const scrollDots = () => {
 		const offsetPerDot = -(dotSize + dotGap);
 
 		if (total <= dotsVisible) return;
@@ -71,50 +71,80 @@ export const ScrollingDots = ({
 		};
 	};
 
-	const dotScale = (index: number) => {
+	const scaleDot = (index: number) => {
 		if (total <= dotsVisible) return;
 
+		/**
+		 * If we haven't reached the scroll threshold and the current dot is the
+		 * last visible dot apply trailing style to indicate additional pages
+		 * to the right
+		 */
 		if (index === dotsVisible - 1 && current < scrollThreshold) {
-			return moreDotStyles;
+			return trailingDotStyles;
 		}
 
+		/**
+		 * If we're past the scroll threshold at the end and the current dot is
+		 * the first visible dot apply trailing style to indicate additional
+		 * pages to the left
+		 */
 		if (
 			index === total - dotsVisible &&
 			current >= total - scrollThreshold - 1
 		) {
-			return moreDotStyles;
+			return trailingDotStyles;
 		}
 
+		/**
+		 * If we've hit the scroll threshold and the current dot is the last
+		 * visible dot and there are more dots to the right apply the trailing
+		 * style to indicate additional pages to the right
+		 */
 		if (
 			index === current + scrollThreshold &&
 			current >= scrollThreshold &&
 			current < total - scrollThreshold - 1
 		) {
-			return moreDotStyles;
+			return trailingDotStyles;
 		}
 
+		/**
+		 * If we've hit the scroll threshold and the current dot is the first
+		 * visible dot and there are more dots to the left apply the trailing
+		 * style to indicate additional pages to the left
+		 */
 		if (
 			index === current - scrollThreshold &&
 			current > scrollThreshold &&
 			current <= total - scrollThreshold - 1
 		) {
-			return moreDotStyles;
+			return trailingDotStyles;
 		}
 
+		/**
+		 * If we've hit the scroll threshold and the current dot is just
+		 * offscreen to the right apply the offscreen style so the dot size
+		 * scales as it scrolls into or out of view
+		 */
 		if (
 			index === current + scrollThreshold + 1 &&
 			current >= scrollThreshold &&
 			current < total - scrollThreshold - 1
 		) {
-			return hiddenDotStyles;
+			return offscreenDotStyles;
 		}
 
+		/**
+		 * If we've hit the scroll threshold and the current dot is just
+		 * offscreen to the left apply the offscreen style so the dor size
+		 * scales as it scrolls into or out of view
+		 */
 		if (
 			index === current - scrollThreshold - 1 &&
 			current > scrollThreshold &&
 			current <= total - scrollThreshold - 1
 		) {
-			return hiddenDotStyles;
+			return offscreenDotStyles;
 		}
 
 		return;
@@ -122,13 +152,13 @@ export const ScrollingDots = ({
 
 	return (
 		<div css={scrollingDotContainerStyles}>
-			<div css={scrollingDotStyles(total)} style={scrollingDotOffset()}>
+			<div css={scrollingDotStyles(total)} style={scrollDots()}>
 				{Array.from({ length: total }, (_, index) => (
 					<span
 						css={[
 							dotStyles,
 							current === index && activeDotStyles,
-							dotScale(index),
+							scaleDot(index),
 						]}
 						key={index}
 					/>
