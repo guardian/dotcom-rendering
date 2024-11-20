@@ -12,6 +12,7 @@ import { palette } from '../palette';
 import type { DCRSlideshowImage } from '../types/front';
 import type { ImageSizeType } from './Card/components/ImageWrapper';
 import { CardPicture } from './CardPicture';
+import { SlideshowCarouselScrollingDots } from './SlideshowCarouselScrollingDots';
 
 const themeButton: Partial<ThemeButton> = {
 	borderTertiary: palette('--carousel-chevron-border'),
@@ -68,35 +69,21 @@ const navigationStyles = css`
 	margin-top: ${space[2]}px;
 `;
 
-/**
- * Padding is added to the left of the navigation dots to match the width of the
- * navigation buttons on the right so they are centred below the image.
- */
-const paginationStyles = css`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: ${space[1]}px;
-	flex: 1 0 0;
-	padding-left: ${width.ctaSmall * 2 + space[2]}px;
-`;
-
-const dotStyles = css`
-	width: 7px;
-	height: 7px;
-	border-radius: 100%;
-	background-color: ${palette('--slideshow-pagination-dot')};
-`;
-
-const activeDotStyles = css`
-	width: 8px;
-	height: 8px;
-	background-color: ${palette('--slideshow-pagination-dot-active')};
-`;
-
 const buttonStyles = css`
 	display: flex;
 	gap: ${space[2]}px;
+`;
+
+/**
+ * Padding is added to the left of the scrolling navigation dots to match the
+ * width of the navigation buttons on the right. This allows them to be centred
+ * below the slideshow image.
+ */
+const scrollingDotStyles = css`
+	display: flex;
+	justify-content: center;
+	flex: 1 0 0;
+	padding-left: ${width.ctaSmall * 2 + space[2]}px;
 `;
 
 export const SlideshowCarousel = ({
@@ -166,6 +153,12 @@ export const SlideshowCarousel = ({
 		};
 	}, []);
 
+	/**
+	 * Restrict slideshow to a maximum of 10 images
+	 */
+	const slideshowImages = takeFirst(images, 10);
+	const slideshowImageCount = slideshowImages.length;
+
 	return (
 		<div>
 			<ul
@@ -173,7 +166,7 @@ export const SlideshowCarousel = ({
 				css={carouselStyles}
 				data-heatphan-type="carousel"
 			>
-				{takeFirst(images, 10).map((image, index) => {
+				{slideshowImages.map((image, index) => {
 					const loading = index > 0 ? 'lazy' : 'eager';
 					return (
 						<li css={carouselItemStyles} key={image.imageSrc}>
@@ -195,54 +188,52 @@ export const SlideshowCarousel = ({
 					);
 				})}
 			</ul>
-			<div css={navigationStyles}>
-				<div css={paginationStyles}>
-					{takeFirst(images, 10).map((image, index) => (
-						<span
-							css={[
-								dotStyles,
-								currentPage === index && activeDotStyles,
-							]}
-							key={image.imageSrc}
-						/>
-					))}
-				</div>
-				<div css={buttonStyles}>
-					<Button
-						hideLabel={true}
-						iconSide="left"
-						icon={<SvgChevronLeftSingle />}
-						onClick={() => scrollTo('left')}
-						priority="tertiary"
-						theme={
-							previousButtonEnabled
-								? themeButton
-								: themeButtonDisabled
-						}
-						size="small"
-						disabled={!previousButtonEnabled}
-						aria-label="View next image in slideshow"
-						// TODO: data-link-name="slideshow carousel left chevron"
-					/>
 
-					<Button
-						hideLabel={true}
-						iconSide="left"
-						icon={<SvgChevronRightSingle />}
-						onClick={() => scrollTo('right')}
-						priority="tertiary"
-						theme={
-							nextButtonEnabled
-								? themeButton
-								: themeButtonDisabled
-						}
-						size="small"
-						disabled={!nextButtonEnabled}
-						aria-label="View previous image in slideshow"
-						// TODO: data-link-name="slideshow carousel right chevron"
-					/>
+			{slideshowImageCount > 1 && (
+				<div css={navigationStyles}>
+					<div css={scrollingDotStyles}>
+						<SlideshowCarouselScrollingDots
+							total={slideshowImageCount}
+							current={currentPage}
+						/>
+					</div>
+					<div css={buttonStyles}>
+						<Button
+							hideLabel={true}
+							iconSide="left"
+							icon={<SvgChevronLeftSingle />}
+							onClick={() => scrollTo('left')}
+							priority="tertiary"
+							theme={
+								previousButtonEnabled
+									? themeButton
+									: themeButtonDisabled
+							}
+							size="small"
+							disabled={!previousButtonEnabled}
+							aria-label="View next image in slideshow"
+							// TODO: data-link-name="slideshow carousel left chevron"
+						/>
+
+						<Button
+							hideLabel={true}
+							iconSide="left"
+							icon={<SvgChevronRightSingle />}
+							onClick={() => scrollTo('right')}
+							priority="tertiary"
+							theme={
+								nextButtonEnabled
+									? themeButton
+									: themeButtonDisabled
+							}
+							size="small"
+							disabled={!nextButtonEnabled}
+							aria-label="View previous image in slideshow"
+							// TODO: data-link-name="slideshow carousel right chevron"
+						/>
+					</div>
 				</div>
-			</div>
+			)}
 		</div>
 	);
 };
