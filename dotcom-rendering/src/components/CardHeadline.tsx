@@ -1,6 +1,16 @@
 import { css } from '@emotion/react';
 import {
 	between,
+	headlineLight14,
+	headlineLight15,
+	headlineLight17,
+	headlineLight20,
+	headlineLight24,
+	headlineLight28,
+	headlineLight34,
+	headlineLight42,
+	headlineLight50,
+	headlineLight64,
 	headlineMedium14,
 	headlineMedium15,
 	headlineMedium17,
@@ -20,7 +30,11 @@ import {
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
 import React from 'react';
-import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
 import { Byline } from './Byline';
@@ -28,91 +42,25 @@ import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';
 
 type Props = {
-	headlineText: string; // The text shown
-	format: ArticleFormat; // Used to decide when to add type specific styles
+	/** The text shown */
+	headlineText: string;
+	/** Used to decide when to add type specific styles */
+	format: ArticleFormat;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	hasInlineKicker?: boolean;
-	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
+	/** Even with design !== Comment, a piece can be opinion */
+	showQuotes?: boolean;
 	fontSizes?: ResponsiveFontSize;
 	byline?: string;
 	showByline?: boolean;
-	linkTo?: string; // If provided, the headline is wrapped in a link
+	/** If provided, the headline is wrapped in a link */
+	linkTo?: string;
 	isExternalLink?: boolean;
 	/** Optional override of the standard card headline colour */
 	headlineColour?: string;
 	/** Optional override of the standard card kicker colour */
 	kickerColour?: string;
-};
-
-const headlineSize = {
-	xxxlarge: headlineMedium64,
-	xxlarge: headlineMedium50,
-	xlarge: headlineMedium42,
-	large: headlineMedium34,
-	medium: headlineMedium28,
-	small: headlineMedium24,
-	xsmall: headlineMedium20,
-	xxsmall: headlineMedium17,
-	xxxsmall: headlineMedium15,
-	tiny: headlineMedium14,
-};
-
-const textSansSize = {
-	xxxlarge: textSans20,
-	xxlarge: textSans20,
-	xlarge: textSans20,
-	large: textSans20,
-	medium: textSans20,
-	small: textSans20,
-	xsmall: textSans20,
-	xxsmall: textSans17,
-	xxxsmall: textSans15,
-	tiny: textSans12,
-};
-
-export type HeadlineSize = keyof typeof headlineSize;
-export type TextSansSize = keyof typeof textSansSize;
-
-export type ResponsiveFontSize = {
-	desktop: HeadlineSize;
-	tablet?: HeadlineSize;
-	mobile?: HeadlineSize;
-	mobileMedium?: HeadlineSize;
-};
-
-const getFontSize = (
-	sizes: ResponsiveFontSize,
-	family: 'headline' | 'textSans',
-) => {
-	const { desktop, tablet, mobileMedium, mobile } = sizes;
-
-	const fontSize = family === 'headline' ? headlineSize : textSansSize;
-
-	return css`
-		${fontSize[desktop]};
-
-		${tablet &&
-		css`
-			${until.desktop} {
-				${fontSize[tablet]};
-			}
-		`}
-
-		${mobile &&
-		css`
-			${until.tablet} {
-				${fontSize[mobile]};
-			}
-		`}
-
-		${mobileMedium &&
-		css`
-			${between.mobileMedium.and.tablet} {
-				${fontSize[mobileMedium]};
-			}
-		`}
-	`;
 };
 
 const sublinkStyles = css`
@@ -140,6 +88,92 @@ const sublinkStyles = css`
 	}
 `;
 
+/** These represent the font groups used by card headline */
+const fontFamilies = {
+	headlineMedium: {
+		xxxlarge: headlineMedium64,
+		xxlarge: headlineMedium50,
+		xlarge: headlineMedium42,
+		large: headlineMedium34,
+		medium: headlineMedium28,
+		small: headlineMedium24,
+		xsmall: headlineMedium20,
+		xxsmall: headlineMedium17,
+		xxxsmall: headlineMedium15,
+		tiny: headlineMedium14,
+	},
+	headlineLight: {
+		xxxlarge: headlineLight64,
+		xxlarge: headlineLight50,
+		xlarge: headlineLight42,
+		large: headlineLight34,
+		medium: headlineLight28,
+		small: headlineLight24,
+		xsmall: headlineLight20,
+		xxsmall: headlineLight17,
+		xxxsmall: headlineLight15,
+		tiny: headlineLight14,
+	},
+	textSans: {
+		xxxlarge: textSans20,
+		xxlarge: textSans20,
+		xlarge: textSans20,
+		large: textSans20,
+		medium: textSans20,
+		small: textSans20,
+		xsmall: textSans20,
+		xxsmall: textSans17,
+		xxxsmall: textSans15,
+		tiny: textSans12,
+	},
+} as const;
+
+export enum FontFamily {
+	HeadlineMedium = 'headlineMedium',
+	HeadlineLight = 'headlineLight',
+	TextSans = 'textSans',
+}
+
+export type HeadlineSize = keyof typeof fontFamilies.headlineMedium;
+
+export type ResponsiveFontSize = {
+	desktop: HeadlineSize;
+	tablet?: HeadlineSize;
+	mobile?: HeadlineSize;
+	mobileMedium?: HeadlineSize;
+};
+
+const getFontSize = (sizes: ResponsiveFontSize, family: FontFamily) => {
+	const font = fontFamilies[family];
+
+	const { desktop, tablet, mobileMedium, mobile } = sizes;
+
+	return css`
+		${font[desktop]};
+
+		${tablet &&
+		css`
+			${until.desktop} {
+				${font[tablet]};
+			}
+		`}
+
+		${mobile &&
+		css`
+			${until.tablet} {
+				${font[mobile]};
+			}
+		`}
+
+		${mobileMedium &&
+		css`
+			${between.mobileMedium.and.tablet} {
+				${font[mobileMedium]};
+			}
+		`}
+	`;
+};
+
 export const WithLink = ({
 	linkTo,
 	children,
@@ -155,6 +189,23 @@ export const WithLink = ({
 		);
 	}
 	return <>{children}</>;
+};
+
+const getFonts = (format: ArticleFormat, fontSizes: ResponsiveFontSize) => {
+	if (format.theme === ArticleSpecial.Labs) {
+		return getFontSize(fontSizes, FontFamily.TextSans);
+	}
+
+	if (
+		/** Any of these designs are considered an "opinion" */
+		format.design === ArticleDesign.Comment ||
+		format.design === ArticleDesign.Editorial ||
+		format.design === ArticleDesign.Letter
+	) {
+		return getFontSize(fontSizes, FontFamily.HeadlineLight);
+	}
+
+	return getFontSize(fontSizes, FontFamily.HeadlineMedium);
 };
 
 export const CardHeadline = ({
@@ -176,10 +227,7 @@ export const CardHeadline = ({
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
 
-	const fonts =
-		format.theme === ArticleSpecial.Labs
-			? getFontSize(fontSizes, 'textSans')
-			: getFontSize(fontSizes, 'headline');
+	const fonts = getFonts(format, fontSizes);
 
 	return (
 		<WithLink linkTo={linkTo}>
