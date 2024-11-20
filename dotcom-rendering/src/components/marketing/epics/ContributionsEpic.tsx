@@ -349,7 +349,6 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 		tickerSettings,
 		choiceCardAmounts,
 		newsletterSignup,
-		oneTimeContribution,
 	} = variant;
 
 	const isColourInTestVariant: boolean =
@@ -509,10 +508,10 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					isColourInTestVariant={isColourInTestVariant}
 				/>
 			)}
-
-			{oneTimeContribution && !newsletterSignup ? (
-				<OneTimeContributionIFrame src="https://support.thegulocal.com/us/one-time-checkout-embed" />
-			) : newsletterSignup ? (
+			{/*Need to determine when/how we show the embed payment, as well as fixing the logic
+			around country code and the stage. There is a recorded demo on the PR description/ or speak to Charley
+				<OneTimeContributionIFrame countryCode={countryCode} stage={stage}/>*/}
+			 newsletterSignup ? (
 				<ContributionsEpicNewsletterSignup
 					newsletterId={newsletterSignup.newsletterId}
 					successDescription={newsletterSignup.successDescription}
@@ -531,8 +530,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					amountsVariantName={choiceCardAmounts?.variantName}
 					isColourInTestVariant={isColourInTestVariant}
 				/>
-			)}
-
+			)
 			{variant.showSignInLink && <ContributionsEpicSignInCta />}
 		</section>
 	);
