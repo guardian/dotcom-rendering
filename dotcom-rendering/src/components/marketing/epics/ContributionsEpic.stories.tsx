@@ -487,7 +487,7 @@ export const WithThreeTierDiscountChoiceCards: Story = {
 			cta: {
 				text: 'Support the Guardian',
 				baseUrl:
-					'https://support.theguardian.com/uk/contribute?promoCode=OCT_DISCOUNT_50_3_MONTHS',
+					'https://support.theguardian.com/uk/contribute?promoCode=BLACK_FRIDAY_DISCOUNT_2024',
 			},
 		},
 	},
