@@ -6924,6 +6924,10 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[20],
 		dark: () => sourcePalette.neutral[86],
 	},
+	'--section-border-secondary': {
+		light: () => sourcePalette.neutral[73],
+		dark: () => sourcePalette.neutral[38],
+	},
 	'--section-date': {
 		light: () => sourcePalette.news[400],
 		dark: () => sourcePalette.news[600],
