@@ -2662,6 +2662,9 @@
             },
             "required": [
                 "body",
+                "byline",
+                "bylineHtml",
+                "contributorIds",
                 "title"
             ]
         },
