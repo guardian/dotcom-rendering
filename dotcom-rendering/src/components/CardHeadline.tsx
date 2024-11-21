@@ -128,7 +128,7 @@ const fontFamilies = {
 	},
 } as const;
 
-export enum FontFamily {
+enum FontFamily {
 	HeadlineMedium = 'headlineMedium',
 	HeadlineLight = 'headlineLight',
 	TextSans = 'textSans',
