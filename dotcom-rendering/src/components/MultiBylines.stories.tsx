@@ -57,12 +57,6 @@ const multiBylineWithImageOverride = {
 		'https://i.guim.co.uk/img/uploads/2024/09/17/Maurice_Casey.png?width=180&dpr=1&s=none',
 };
 
-const multiBylineWithNoByline = {
-	title: 'A further subheading',
-	body: [testTextElement],
-	endNote: 'This is an end note.',
-};
-
 const multiBylineWithNoContributorLink = {
 	title: 'This byline has a contributor with no link',
 	bio: testBioText,
@@ -70,6 +64,7 @@ const multiBylineWithNoContributorLink = {
 	byline: 'Steve McQueen on Paul Gilroy',
 	bylineHtml:
 		"<span data-contributor-rel='author'>Steve McQueen</span> on Paul Gilroy",
+	contributorIds: [],
 };
 
 const args = (multiBylines: MultiByline[]) => ({
@@ -111,7 +106,6 @@ export const ThemeVariations = {
 	args: args([
 		multiBylineWithLongHeader,
 		multiBylineWithImageOverride,
-		multiBylineWithNoByline,
 		multiBylineWithNoContributorLink,
 	]),
 	decorators: [centreColumnDecorator],
@@ -133,7 +127,7 @@ const isNotAudioDesign = (format: ArticleFormat) =>
 	format.design !== ArticleDesign.Audio;
 
 export const DesignVariations = {
-	args: args([multiBylineWithLongHeader, multiBylineWithNoByline]),
+	args: args([multiBylineWithLongHeader]),
 	decorators: [centreColumnDecorator],
 	parameters: {
 		formats: getAllDesigns({
@@ -252,6 +246,10 @@ export const Images = {
 						data: { ...images[2].data, caption: 'Sunset' },
 					},
 				],
+				byline: 'Steve McQueen on Paul Gilroy',
+				bylineHtml:
+					"<span data-contributor-rel='author'>Steve McQueen</span> on Paul Gilroy",
+				contributorIds: [],
 			},
 		],
 		tags: [

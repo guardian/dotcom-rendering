@@ -356,9 +356,9 @@ export interface MultiByline {
 	bio?: string;
 	endNote?: string;
 	imageOverrideUrl?: string;
-	contributorIds?: string[];
-	byline?: string;
-	bylineHtml?: string;
+	contributorIds: string[];
+	byline: string;
+	bylineHtml: string;
 }
 
 export interface KeyTakeawaysBlockElement {
