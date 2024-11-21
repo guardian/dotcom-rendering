@@ -17,6 +17,7 @@ import { MultiBylines } from './MultiBylines';
 const meta = {
 	component: MultiBylines,
 	title: 'Components/MultiBylines',
+	decorators: [centreColumnDecorator],
 } satisfies Meta<typeof MultiBylines>;
 
 export default meta;
@@ -108,7 +109,6 @@ export const ThemeVariations = {
 		multiBylineWithImageOverride,
 		multiBylineWithNoContributorLink,
 	]),
-	decorators: [centreColumnDecorator],
 	parameters: {
 		formats: getAllThemes({
 			design: ArticleDesign.Standard,
@@ -128,7 +128,6 @@ const isNotAudioDesign = (format: ArticleFormat) =>
 
 export const DesignVariations = {
 	args: args([multiBylineWithLongHeader]),
-	decorators: [centreColumnDecorator],
 	parameters: {
 		formats: getAllDesigns({
 			theme: Pillar.News,
@@ -144,39 +143,16 @@ export const DesignVariations = {
 
 export const DesignVariationsWithImageOverride = {
 	args: args([multiBylineWithImageOverride]),
-	decorators: [centreColumnDecorator],
-	parameters: {
-		formats: getAllDesigns({
-			theme: Pillar.News,
-			display: ArticleDisplay.Standard,
-		}).filter(isNotAudioDesign),
-		chromatic: {
-			modes: {
-				horizontal: allModes.splitHorizontal,
-			},
-		},
-	},
+	parameters: DesignVariations.parameters,
 } satisfies Story;
 
 export const DesignVariationsWithNoContributorLink = {
 	args: args([multiBylineWithNoContributorLink]),
-	decorators: [centreColumnDecorator],
-	parameters: {
-		formats: getAllDesigns({
-			theme: Pillar.News,
-			display: ArticleDisplay.Standard,
-		}).filter(isNotAudioDesign),
-		chromatic: {
-			modes: {
-				horizontal: allModes.splitHorizontal,
-			},
-		},
-	},
+	parameters: DesignVariations.parameters,
 } satisfies Story;
 
 export const OtherVariations = {
 	args: ThemeVariations.args,
-	decorators: [centreColumnDecorator],
 	parameters: {
 		formats: [
 			{
@@ -262,7 +238,6 @@ export const Images = {
 			},
 		],
 	},
-	decorators: [centreColumnDecorator],
 	parameters: {
 		chromatic: {
 			modes: {
@@ -282,5 +257,4 @@ export const WithSeparatorLine = {
 			theme: Pillar.Culture,
 		},
 	},
-	decorators: [centreColumnDecorator],
 } satisfies Story;
