@@ -12,7 +12,7 @@ interface Props {
 export const renderCrosswordHtml = ({
 	editionsCrosswords,
 }: Props): { html: string; prefetchScripts: string[] } => {
-	const { html } = renderToStringWithEmotion(
+	const { html, extractedCss } = renderToStringWithEmotion(
 		<EditionsCrosswordPage editionsCrosswords={editionsCrosswords} />,
 	);
 
@@ -23,8 +23,9 @@ export const renderCrosswordHtml = ({
 	const scriptTags = generateScriptTags([...prefetchScripts]);
 
 	const pageHtml = htmlCrosswordPageTemplate({
-		scriptTags,
+		css: extractedCss,
 		html,
+		scriptTags,
 	});
 
 	return { html: pageHtml, prefetchScripts };
