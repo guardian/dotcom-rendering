@@ -313,17 +313,15 @@ const sectionTreats = css`
 	}
 `;
 
-const decoration = (borderColour: string) => {
-	/** element which contains border and inner background colour, if set */
-	return css`
-		grid-row: 1 / -1;
-		grid-column: decoration;
+/** element which contains border and inner background colour, if set */
+const decoration = css`
+	grid-row: 1 / -1;
+	grid-column: decoration;
 
-		border-width: 1px;
-		border-color: ${borderColour};
-		border-style: none;
-	`;
-};
+	border-width: 1px;
+	border-color: ${schemePalette('--section-border')};
+	border-style: none;
+`;
 
 /** only visible once content stops sticking to left and right edges */
 const sideBorders = css`
@@ -340,6 +338,18 @@ const topBorder = css`
 
 const bottomPadding = css`
 	padding-bottom: ${space[9]}px;
+`;
+
+const containerLevelBottomPadding = css`
+	padding-bottom: ${space[6]}px;
+`;
+
+const primaryLevelTopMargin = css`
+	margin-top: 16px;
+`;
+
+const primaryLevelTopBorder = css`
+	border-top: 2px solid ${schemePalette('--section-border-primary')};
 `;
 
 /**
@@ -461,10 +471,7 @@ export const FrontSection = ({
 		!!collectionId &&
 		!!pageId &&
 		!!ajaxUrl;
-	const showVerticalRule =
-		!hasPageSkin &&
-		containerLevel !== 'Primary' &&
-		containerLevel !== 'Secondary';
+	const showVerticalRule = !hasPageSkin && !containerLevel;
 
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
@@ -483,6 +490,10 @@ export const FrontSection = ({
 					containerStylesUntilLeftCol,
 					!hasPageSkin && containerStylesFromLeftCol,
 					hasPageSkin && pageSkinContainer,
+					containerLevel === 'Primary' && primaryLevelTopMargin,
+					showTopBorder &&
+						containerLevel === 'Primary' &&
+						primaryLevelTopBorder,
 				]}
 				style={{
 					backgroundColor: schemePalette(
@@ -492,9 +503,9 @@ export const FrontSection = ({
 			>
 				<div
 					css={[
-						decoration(schemePalette('--section-border')),
+						decoration,
 						sideBorders,
-						showTopBorder && topBorder,
+						showTopBorder && !containerLevel && topBorder,
 					]}
 				/>
 
@@ -559,6 +570,7 @@ export const FrontSection = ({
 						sectionContentPadded,
 						sectionBottomContent,
 						bottomPadding,
+						!!containerLevel && containerLevelBottomPadding,
 					]}
 				>
 					{isString(targetedTerritory) &&
