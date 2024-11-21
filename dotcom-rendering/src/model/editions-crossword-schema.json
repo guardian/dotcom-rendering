@@ -1,346 +1,180 @@
 {
     "type": "object",
     "properties": {
-        "quick": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "number": {
-                    "type": "number"
-                },
-                "date": {
-                    "type": "string"
-                },
-                "dimensions": {
-                    "type": "object",
-                    "properties": {
-                        "cols": {
-                            "type": "number"
-                        },
-                        "rows": {
-                            "type": "number"
-                        }
+        "crosswords": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
                     },
-                    "required": [
-                        "cols",
-                        "rows"
-                    ]
-                },
-                "entries": {
-                    "type": "array",
-                    "items": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "number": {
+                        "type": "number"
+                    },
+                    "date": {
+                        "type": "string"
+                    },
+                    "dimensions": {
                         "type": "object",
                         "properties": {
-                            "id": {
-                                "type": "string"
-                            },
-                            "number": {
+                            "cols": {
                                 "type": "number"
                             },
-                            "humanNumber": {
-                                "type": "string"
-                            },
-                            "direction": {
-                                "enum": [
-                                    "across",
-                                    "down"
-                                ],
-                                "type": "string"
-                            },
-                            "position": {
-                                "type": "object",
-                                "properties": {
-                                    "x": {
-                                        "type": "number"
+                            "rows": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "cols",
+                            "rows"
+                        ]
+                    },
+                    "entries": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "number": {
+                                    "type": "number"
+                                },
+                                "humanNumber": {
+                                    "type": "string"
+                                },
+                                "direction": {
+                                    "enum": [
+                                        "across",
+                                        "down"
+                                    ],
+                                    "type": "string"
+                                },
+                                "position": {
+                                    "type": "object",
+                                    "properties": {
+                                        "x": {
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "type": "number"
+                                        }
                                     },
-                                    "y": {
-                                        "type": "number"
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ]
+                                },
+                                "separatorLocations": {
+                                    "type": "object",
+                                    "properties": {
+                                        ",": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "number"
+                                            }
+                                        },
+                                        "-": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "number"
+                                            }
+                                        }
                                     }
                                 },
-                                "required": [
-                                    "x",
-                                    "y"
-                                ]
-                            },
-                            "separatorLocations": {
-                                "type": "object",
-                                "properties": {
-                                    ",": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "number"
-                                        }
-                                    },
-                                    "-": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "number"
-                                        }
+                                "length": {
+                                    "type": "number"
+                                },
+                                "clue": {
+                                    "type": "string"
+                                },
+                                "group": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
                                     }
-                                }
-                            },
-                            "length": {
-                                "type": "number"
-                            },
-                            "clue": {
-                                "type": "string"
-                            },
-                            "group": {
-                                "type": "array",
-                                "items": {
+                                },
+                                "solution": {
+                                    "type": "string"
+                                },
+                                "format": {
                                     "type": "string"
                                 }
                             },
-                            "solution": {
+                            "required": [
+                                "clue",
+                                "direction",
+                                "format",
+                                "group",
+                                "humanNumber",
+                                "id",
+                                "length",
+                                "number",
+                                "position",
+                                "separatorLocations",
+                                "solution"
+                            ]
+                        }
+                    },
+                    "solutionAvailable": {
+                        "type": "boolean"
+                    },
+                    "hasNumbers": {
+                        "type": "boolean"
+                    },
+                    "randomCluesOrdering": {
+                        "type": "boolean"
+                    },
+                    "instructions": {
+                        "type": "string"
+                    },
+                    "creator": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
                                 "type": "string"
                             },
-                            "format": {
+                            "webUrl": {
                                 "type": "string"
                             }
                         },
                         "required": [
-                            "clue",
-                            "direction",
-                            "format",
-                            "group",
-                            "humanNumber",
-                            "id",
-                            "length",
-                            "number",
-                            "position",
-                            "separatorLocations",
-                            "solution"
+                            "name",
+                            "webUrl"
                         ]
+                    },
+                    "pdf": {
+                        "type": "string"
+                    },
+                    "annotatedSolution": {
+                        "type": "string"
+                    },
+                    "dateSolutionAvailable": {
+                        "type": "string"
                     }
                 },
-                "solutionAvailable": {
-                    "type": "boolean"
-                },
-                "hasNumbers": {
-                    "type": "boolean"
-                },
-                "randomCluesOrdering": {
-                    "type": "boolean"
-                },
-                "instructions": {
-                    "type": "string"
-                },
-                "creator": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string"
-                        },
-                        "webUrl": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "name",
-                        "webUrl"
-                    ]
-                },
-                "pdf": {
-                    "type": "string"
-                },
-                "annotatedSolution": {
-                    "type": "string"
-                },
-                "dateSolutionAvailable": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "date",
-                "dateSolutionAvailable",
-                "dimensions",
-                "entries",
-                "hasNumbers",
-                "name",
-                "number",
-                "pdf",
-                "randomCluesOrdering",
-                "solutionAvailable",
-                "type"
-            ]
-        },
-        "cryptic": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "number": {
-                    "type": "number"
-                },
-                "date": {
-                    "type": "string"
-                },
-                "dimensions": {
-                    "type": "object",
-                    "properties": {
-                        "cols": {
-                            "type": "number"
-                        },
-                        "rows": {
-                            "type": "number"
-                        }
-                    },
-                    "required": [
-                        "cols",
-                        "rows"
-                    ]
-                },
-                "entries": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "string"
-                            },
-                            "number": {
-                                "type": "number"
-                            },
-                            "humanNumber": {
-                                "type": "string"
-                            },
-                            "direction": {
-                                "enum": [
-                                    "across",
-                                    "down"
-                                ],
-                                "type": "string"
-                            },
-                            "position": {
-                                "type": "object",
-                                "properties": {
-                                    "x": {
-                                        "type": "number"
-                                    },
-                                    "y": {
-                                        "type": "number"
-                                    }
-                                },
-                                "required": [
-                                    "x",
-                                    "y"
-                                ]
-                            },
-                            "separatorLocations": {
-                                "type": "object",
-                                "properties": {
-                                    ",": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "number"
-                                        }
-                                    },
-                                    "-": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "number"
-                                        }
-                                    }
-                                }
-                            },
-                            "length": {
-                                "type": "number"
-                            },
-                            "clue": {
-                                "type": "string"
-                            },
-                            "group": {
-                                "type": "array",
-                                "items": {
-                                    "type": "string"
-                                }
-                            },
-                            "solution": {
-                                "type": "string"
-                            },
-                            "format": {
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "clue",
-                            "direction",
-                            "format",
-                            "group",
-                            "humanNumber",
-                            "id",
-                            "length",
-                            "number",
-                            "position",
-                            "separatorLocations",
-                            "solution"
-                        ]
-                    }
-                },
-                "solutionAvailable": {
-                    "type": "boolean"
-                },
-                "hasNumbers": {
-                    "type": "boolean"
-                },
-                "randomCluesOrdering": {
-                    "type": "boolean"
-                },
-                "instructions": {
-                    "type": "string"
-                },
-                "creator": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string"
-                        },
-                        "webUrl": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "name",
-                        "webUrl"
-                    ]
-                },
-                "pdf": {
-                    "type": "string"
-                },
-                "annotatedSolution": {
-                    "type": "string"
-                },
-                "dateSolutionAvailable": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "date",
-                "dateSolutionAvailable",
-                "dimensions",
-                "entries",
-                "hasNumbers",
-                "name",
-                "number",
-                "pdf",
-                "randomCluesOrdering",
-                "solutionAvailable",
-                "type"
-            ]
+                "required": [
+                    "date",
+                    "dateSolutionAvailable",
+                    "dimensions",
+                    "entries",
+                    "hasNumbers",
+                    "name",
+                    "number",
+                    "pdf",
+                    "randomCluesOrdering",
+                    "solutionAvailable",
+                    "type"
+                ]
+            }
         }
     },
     "required": [
-        "cryptic",
-        "quick"
+        "crosswords"
     ],
     "$schema": "http://json-schema.org/draft-07/schema#"
 }

@@ -1,6 +1,5 @@
 export type FEEditionsCrosswords = {
-	quick: FEEditionsCrossword;
-	cryptic: FEEditionsCrossword;
+	crosswords: FEEditionsCrossword[];
 };
 
 type FECrosswordEntry = {
