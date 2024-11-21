@@ -609,6 +609,23 @@ export const Card = ({
 							media.type === 'slideshow' && isFlexibleContainer
 						}
 					>
+						{showCommentFooter && (
+							<CardFooter
+								format={format}
+								age={decideAge()}
+								commentCount={<CommentCount />}
+								cardBranding={
+									branding ? (
+										<CardBranding
+											branding={branding}
+											format={format}
+											onwardsSource={onwardsSource}
+										/>
+									) : undefined
+								}
+								showLivePlayable={showLivePlayable}
+							/>
+						)}
 						{media.type === 'slideshow' &&
 							(isFlexibleContainer ? (
 								<div
@@ -927,24 +944,6 @@ export const Card = ({
 					</Island>
 				)}
 				{decideOuterSublinks()}
-
-				{showCommentFooter && (
-					<CardFooter
-						format={format}
-						age={decideAge()}
-						commentCount={<CommentCount />}
-						cardBranding={
-							branding ? (
-								<CardBranding
-									branding={branding}
-									format={format}
-									onwardsSource={onwardsSource}
-								/>
-							) : undefined
-						}
-						showLivePlayable={showLivePlayable}
-					/>
-				)}
 			</div>
 		</CardWrapper>
 	);

@@ -145,7 +145,7 @@ export const ImageWrapper = ({
 				imageType === 'avatar' &&
 					css`
 						display: flex;
-						justify-content: flex-end;
+						justify-content: space-between;
 					`,
 				/* If no image position for mobile is provided then hide the image */
 				imagePositionOnMobile === 'none' &&
