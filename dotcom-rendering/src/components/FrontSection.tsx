@@ -126,6 +126,7 @@ const containerStylesUntilLeftCol = css`
 	display: grid;
 
 	grid-template-rows:
+		[primary-spacing-start primary-spacing-end] auto
 		[headline-start show-hide-start] auto
 		[show-hide-end headline-end content-toggleable-start content-start] auto
 		[content-end content-toggleable-end bottom-content-start] auto
@@ -174,6 +175,7 @@ const containerStylesUntilLeftCol = css`
 const containerStylesFromLeftCol = css`
 	${from.leftCol} {
 		grid-template-rows:
+			[primary-spacing-start primary-spacing-end] auto
 			[headline-start show-hide-start content-start] auto
 			[show-hide-end content-toggleable-start] auto
 			[headline-end treats-start] auto
@@ -194,6 +196,7 @@ const containerStylesFromLeftCol = css`
 
 	${from.wide} {
 		grid-template-rows:
+			[primary-spacing-start primary-spacing-end] auto
 			[headline-start content-start content-toggleable-start show-hide-start] auto
 			[show-hide-end] auto
 			[headline-end treats-start] auto
@@ -344,12 +347,21 @@ const containerLevelBottomPadding = css`
 	padding-bottom: ${space[6]}px;
 `;
 
-const primaryLevelTopMargin = css`
-	margin-top: 16px;
+/** Adds space above the border of primary level containers without
+ * causing gaps in the vertical side borders from tablet upwards
+ */
+const primaryLevelTopSpacer = css`
+	grid-row: primary-spacing;
+	grid-column: 1 / -1;
+	height: ${space[4]}px;
+	width: 100%;
 `;
 
+/** Must be combined with the primaryLevelTopSpacer to achieve the desired effect
+ */
 const primaryLevelTopBorder = css`
-	border-top: 2px solid ${schemePalette('--section-border-primary')};
+	z-index: 1;
+	border-bottom: 2px solid ${schemePalette('--section-border-primary')};
 `;
 
 /**
@@ -490,10 +502,6 @@ export const FrontSection = ({
 					containerStylesUntilLeftCol,
 					!hasPageSkin && containerStylesFromLeftCol,
 					hasPageSkin && pageSkinContainer,
-					containerLevel === 'Primary' && primaryLevelTopMargin,
-					showTopBorder &&
-						containerLevel === 'Primary' &&
-						primaryLevelTopBorder,
 				]}
 				style={{
 					backgroundColor: schemePalette(
@@ -501,6 +509,15 @@ export const FrontSection = ({
 					),
 				}}
 			>
+				{containerLevel === 'Primary' && (
+					<div
+						css={[
+							primaryLevelTopSpacer,
+							showTopBorder && primaryLevelTopBorder,
+						]}
+					/>
+				)}
+
 				<div
 					css={[
 						decoration,
