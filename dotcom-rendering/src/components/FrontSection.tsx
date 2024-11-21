@@ -366,6 +366,10 @@ const secondaryLevelTopBorder = css`
 	grid-row: primary-spacing;
 	grid-column: content;
 	border-top: 1px solid ${schemePalette('--section-border-secondary')};
+
+	${from.leftCol} {
+		grid-column: title-start / hide-end;
+	}
 `;
 
 /**
