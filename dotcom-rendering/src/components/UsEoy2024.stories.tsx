@@ -18,5 +18,6 @@ export const Default = {
 		},
 		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		submitTrackingEvent: () => {},
+		date: new Date('2024-11-26T00:00:00Z'),
 	},
 } satisfies Story;
