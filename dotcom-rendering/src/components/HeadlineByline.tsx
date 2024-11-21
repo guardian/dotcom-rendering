@@ -160,11 +160,11 @@ type Props = {
 };
 
 export const HeadlineByline = ({ format, byline, tags }: Props) => {
+	const { renderingTarget } = useConfig();
 	if (byline === '') {
 		return null;
 	}
 	/** This is required for a staggered design release between web and app. This will be removed changes are ready for release on ios/android   */
-	const { renderingTarget } = useConfig();
 	const isApps = renderingTarget === 'Apps';
 
 	const hasSingleContributor = !!getSoleContributor(tags, byline);
