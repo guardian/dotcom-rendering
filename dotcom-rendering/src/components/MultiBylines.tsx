@@ -56,7 +56,7 @@ export const MultiBylines = ({
 	isLastElement,
 }: MultiBylineProps) => {
 	return (
-		<ol data-ignore="global-ol-styling">
+		<>
 			{multiBylines.map((multiBylineItem, index) => (
 				<MultiBylineItemComponent
 					multiByline={multiBylineItem}
@@ -89,6 +89,6 @@ export const MultiBylines = ({
 				</MultiBylineItemComponent>
 			))}
 			{!isLastElement && <hr css={separatorStyles} />}
-		</ol>
+		</>
 	);
 };
