@@ -3,7 +3,7 @@ import { palette } from '../palette';
 
 type Props = {
 	text: string;
-	fonts: SerializedStyles;
+	fontStyles: SerializedStyles;
 	/** Optional override of the standard text colour */
 	colour?: string;
 };
@@ -15,8 +15,8 @@ const baseStyles = (colour: string) => css`
 
 export const Byline = ({
 	text,
-	fonts,
+	fontStyles,
 	colour = palette('--byline'),
 }: Props) => {
-	return <span css={[baseStyles(colour), fonts]}>{text}</span>;
+	return <span css={[baseStyles(colour), fontStyles]}>{text}</span>;
 };

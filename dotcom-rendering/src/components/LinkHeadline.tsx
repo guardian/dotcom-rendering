@@ -157,7 +157,7 @@ export const LinkHeadline = ({
 					</a>
 					{!!byline && (
 						<Byline
-							fonts={
+							fontStyles={
 								isLabs
 									? bylineLabsStyles(size)
 									: fontStyles(size)
@@ -172,7 +172,7 @@ export const LinkHeadline = ({
 					<span>{headlineText}</span>
 					{!!byline && (
 						<Byline
-							fonts={
+							fontStyles={
 								isLabs
 									? bylineLabsStyles(size)
 									: fontStyles(size)
