@@ -204,7 +204,7 @@ export const MultiByline = ({
 	children,
 }: MultiBylineItemProps) => {
 	return (
-		<li css={multiBylineItemStyles} data-spacefinder-role="nested">
+		<div css={multiBylineItemStyles} data-spacefinder-role="nested">
 			<Byline
 				title={multiByline.title}
 				byline={multiByline.byline ?? ''}
@@ -219,7 +219,7 @@ export const MultiByline = ({
 			{multiByline.endNote ? (
 				<EndNote text={multiByline.endNote} />
 			) : null}
-		</li>
+		</div>
 	);
 };
 
