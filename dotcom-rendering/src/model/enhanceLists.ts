@@ -80,9 +80,9 @@ const constructMultiByline =
 					bio,
 					endNote,
 					imageOverrideUrl,
-					contributorIds,
-					byline,
-					bylineHtml,
+					contributorIds: contributorIds ?? [],
+					byline: byline ?? '',
+					bylineHtml: bylineHtml ?? '',
 					body: enhanceElements(elements),
 				},
 			];
