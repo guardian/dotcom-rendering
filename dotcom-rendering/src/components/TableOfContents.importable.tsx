@@ -75,7 +75,7 @@ const detailsStyles = css`
 	&.make-sticky {
 		position: sticky;
 		top: 0;
-		background: white;
+		background: ${palette('--article-background')};
 		z-index: 4;
 		max-height: 100vh;
 		overflow: scroll;
@@ -83,7 +83,7 @@ const detailsStyles = css`
 			position: sticky;
 			top: 0;
 			z-index: 5;
-			background: white;
+			background: ${palette('--article-background')};
 		}
 	}
 `;
