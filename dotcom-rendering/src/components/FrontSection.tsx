@@ -351,17 +351,21 @@ const containerLevelBottomPadding = css`
  * causing gaps in the vertical side borders from tablet upwards
  */
 const primaryLevelTopSpacer = css`
-	grid-row: primary-spacing;
-	grid-column: 1 / -1;
 	height: ${space[4]}px;
 	width: 100%;
 `;
 
-/** Must be combined with the primaryLevelTopSpacer to achieve the desired effect
- */
 const primaryLevelTopBorder = css`
-	z-index: 1;
+	grid-row: primary-spacing;
+	grid-column: 1 / -1;
 	border-bottom: 2px solid ${schemePalette('--section-border-primary')};
+	z-index: 1;
+`;
+
+const secondaryLevelTopBorder = css`
+	grid-row: primary-spacing;
+	grid-column: content;
+	border-top: 1px solid ${schemePalette('--section-border-secondary')};
 `;
 
 /**
@@ -509,11 +513,17 @@ export const FrontSection = ({
 					),
 				}}
 			>
-				{containerLevel === 'Primary' && (
+				{!!containerLevel && (
 					<div
 						css={[
-							primaryLevelTopSpacer,
-							showTopBorder && primaryLevelTopBorder,
+							containerLevel === 'Primary' &&
+								primaryLevelTopSpacer,
+							showTopBorder &&
+								containerLevel === 'Primary' &&
+								primaryLevelTopBorder,
+							showTopBorder &&
+								containerLevel === 'Secondary' &&
+								secondaryLevelTopBorder,
 						]}
 					/>
 				)}
