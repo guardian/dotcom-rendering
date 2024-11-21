@@ -11,9 +11,9 @@ import {
 } from '@guardian/source/react-components';
 import { useState } from 'react';
 import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
+import { getZIndex } from '../lib/getZIndex';
 import type { TableOfContentsItem } from '../model/enhanceTableOfContents';
 import { palette } from '../palette';
-import { getZIndex } from '../lib/getZIndex';
 
 interface Props {
 	tableOfContents: TableOfContentsItem[];
@@ -191,7 +191,7 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 						<a
 							href={`#${item.id}`}
 							css={[anchorStyles, paddingStyles]}
-							onClick={(e): void => {
+							onClick={(): void => {
 								setOpen((state) => !state);
 							}}
 						>
