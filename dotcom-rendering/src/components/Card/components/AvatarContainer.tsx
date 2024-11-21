@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, space, until } from '@guardian/source/foundations';
+import { space, until } from '@guardian/source/foundations';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
 type Props = {
@@ -14,12 +14,6 @@ const sideMarginStyles = css`
 
 const topMarginStyles = css`
 	margin-top: ${space[1]}px;
-`;
-
-const largerTopMargin = css`
-	${from.tablet} {
-		margin-top: 50px;
-	}
 `;
 
 const sizingStyles = (
@@ -69,15 +63,11 @@ export const AvatarContainer = ({
 	imageSize,
 	imagePositionOnDesktop,
 }: Props) => {
-	const isVertical =
-		imagePositionOnDesktop === 'top' || imagePositionOnDesktop === 'bottom';
-
 	return (
 		<div
 			css={[
 				sideMarginStyles,
 				topMarginStyles,
-				isVertical && largerTopMargin,
 				sizingStyles(imageSize, imagePositionOnDesktop),
 			]}
 		>
