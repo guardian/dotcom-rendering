@@ -32,7 +32,7 @@ const styles = {
 	container: css`
 		/* stylelint-disable-next-line color-no-hex */
 		background: #041d35;
-		color: #ffffff;
+		color: ${palette.neutral[100]};
 	`,
 	grid: css`
 		display: grid;
