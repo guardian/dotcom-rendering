@@ -600,8 +600,9 @@ export const FrontSection = ({
 					css={[
 						sectionContentPadded,
 						sectionBottomContent,
-						bottomPadding,
-						!!containerLevel && containerLevelBottomPadding,
+						containerLevel
+							? containerLevelBottomPadding
+							: bottomPadding,
 					]}
 				>
 					{isString(targetedTerritory) &&
