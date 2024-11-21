@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import { palette } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
+import { palette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { MiniProfile, StarRating } from '../types/content';
 import { MiniProfile as MiniProfileComponent } from './MiniProfile';
@@ -31,7 +31,7 @@ interface MiniProfilesProps {
 const separatorStyles = css`
 	width: 140px;
 	margin: 8px 0 2px 0;
-	border-top: 1px solid ${palette.neutral[86]};
+	border-top: 1px solid ${palette('--article-border')};
 `;
 
 export const MiniProfiles = ({
