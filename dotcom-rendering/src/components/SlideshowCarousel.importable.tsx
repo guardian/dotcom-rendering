@@ -75,8 +75,11 @@ const navigationStyles = css`
 `;
 
 const buttonStyles = css`
-	display: flex;
-	gap: ${space[2]}px;
+	display: none;
+	${from.tablet} {
+		display: flex;
+		gap: ${space[2]}px;
+	}
 `;
 
 /**
