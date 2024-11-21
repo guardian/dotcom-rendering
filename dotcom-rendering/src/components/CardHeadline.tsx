@@ -227,7 +227,7 @@ export const CardHeadline = ({
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
 
-	const fonts = getFonts(format, fontSizes);
+	const fontStyles = getFonts(format, fontSizes);
 
 	return (
 		<WithLink linkTo={linkTo}>
@@ -240,7 +240,7 @@ export const CardHeadline = ({
 						? css`
 								${textSans14}
 						  `
-						: fonts,
+						: fontStyles,
 				]}
 			>
 				{!!kickerText && (
@@ -271,7 +271,11 @@ export const CardHeadline = ({
 				</span>
 			</h3>
 			{!!byline && showByline && (
-				<Byline text={byline} colour={kickerColour} fonts={fonts} />
+				<Byline
+					text={byline}
+					colour={kickerColour}
+					fontStyles={fontStyles}
+				/>
 			)}
 		</WithLink>
 	);
