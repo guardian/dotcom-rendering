@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { space, textSansBold12, width } from '@guardian/source/foundations';
+import {
+	from,
+	space,
+	textSansBold12,
+	width,
+} from '@guardian/source/foundations';
 import type { ThemeButton } from '@guardian/source/react-components';
 import {
 	Button,
@@ -49,18 +54,18 @@ const carouselItemStyles = css`
 `;
 
 const captionStyles = css`
-	${textSansBold12}
 	position: absolute;
 	bottom: 0;
 	left: 0;
 	right: 0;
+	${textSansBold12}
+	color: ${palette('--slideshow-caption')};
 	background: linear-gradient(
 		to bottom,
 		rgba(0, 0, 0, 0) 0%,
 		rgba(0, 0, 0, 0.8) 100%
 	);
-	color: ${palette('--slideshow-caption')};
-	padding: 60px ${space[2]}px ${space[2]}px;
+	padding: 40px ${space[2]}px ${space[2]}px;
 `;
 
 const navigationStyles = css`
@@ -76,14 +81,16 @@ const buttonStyles = css`
 
 /**
  * Padding is added to the left of the scrolling navigation dots to match the
- * width of the navigation buttons on the right. This allows them to be centred
- * below the slideshow image.
+ * width of the navigation buttons on the right at tablet and above. This allows
+ * them to be centred below the slideshow image.
  */
 const scrollingDotStyles = css`
 	display: flex;
 	justify-content: center;
 	flex: 1 0 0;
-	padding-left: ${width.ctaSmall * 2 + space[2]}px;
+	${from.tablet} {
+		padding-left: ${width.ctaSmall * 2 + space[2]}px;
+	}
 `;
 
 export const SlideshowCarousel = ({
