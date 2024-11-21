@@ -26,6 +26,7 @@ export const EditionsCrosswordLayout = ({ editionsCrossword }: Props) => {
 						id: crossword.name,
 						number: crossword.number,
 						name: crossword.name,
+						creator: crossword.creator,
 						date: new Date(crossword.date).getTime(),
 						webPublicationDate: new Date(crossword.date).getTime(),
 						entries: crossword.entries,
