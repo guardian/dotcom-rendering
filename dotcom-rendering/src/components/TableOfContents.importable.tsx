@@ -71,6 +71,21 @@ const detailsStyles = css`
 	summary::-webkit-details-marker {
 		display: none;
 	}
+
+	&.make-sticky {
+		position: sticky;
+		top: 0;
+		background: white;
+		z-index: 4;
+		max-height: 100vh;
+		overflow: scroll;
+		summary {
+			position: sticky;
+			top: 0;
+			z-index: 5;
+			background: white;
+		}
+	}
 `;
 
 const summaryStyles = css`
@@ -127,6 +142,7 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 		<details
 			open={open}
 			css={detailsStyles}
+			className={tableOfContents.length > 5 ? 'make-sticky' : ''}
 			data-component="table-of-contents"
 		>
 			<summary
