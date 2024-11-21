@@ -190,6 +190,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					showAge={false}
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading="eager"
+					aspectRatio={
+						highlightsCollection.aspectRatio
+							? highlightsCollection.aspectRatio
+							: '1:1'
+					}
 				/>
 			)
 		);
@@ -506,6 +511,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										absoluteServerTimes={
 											absoluteServerTimes
 										}
+										aspectRatio={
+											collection.aspectRatio
+												? collection.aspectRatio
+												: '5:3'
+										}
 									/>
 								</LabsSection>
 								{decideMerchHighAndMobileAdSlots(
@@ -677,6 +687,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									imageLoading={imageLoading}
 									absoluteServerTimes={absoluteServerTimes}
+									aspectRatio={
+										collection.aspectRatio
+											? collection.aspectRatio
+											: '5:3'
+									}
 								/>
 							</FrontSection>
 							{decideMerchHighAndMobileAdSlots(

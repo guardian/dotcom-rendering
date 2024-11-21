@@ -1,5 +1,6 @@
 import type { ImgHTMLAttributes } from 'react';
 import type {
+	AspectRatio,
 	DCRContainerPalette,
 	DCRContainerType,
 	DCRFrontCard,
@@ -41,6 +42,7 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
+	aspectRatio: AspectRatio;
 };
 
 export const DecideContainer = ({
@@ -51,6 +53,7 @@ export const DecideContainer = ({
 	showAge,
 	absoluteServerTimes,
 	imageLoading,
+	aspectRatio,
 }: Props) => {
 	// If you add a new container type which contains an MPU, you must also add it to
 	switch (containerType) {
@@ -252,6 +255,7 @@ export const DecideContainer = ({
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
+					aspectRatio={aspectRatio}
 				/>
 			);
 		case 'scrollable/small':
