@@ -42,7 +42,7 @@ const headingMarginStyle = css`
 	margin-bottom: ${space[2]}px;
 `;
 
-export const nonAnchorHeadlineStyles = ({
+const nonAnchorHeadlineStyles = ({
 	format,
 	fontWeight,
 }: {
@@ -145,7 +145,7 @@ export const nonAnchorHeadlineStyles = ({
 	}
 `;
 
-export const bylineStyles = (format: ArticleFormat) => css`
+const bylineStyles = (format: ArticleFormat) => css`
 	${nonAnchorHeadlineStyles({ format, fontWeight: 'light' })}
 	font-style: italic;
 	margin-top: -4px;
