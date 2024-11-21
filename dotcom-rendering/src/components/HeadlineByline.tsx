@@ -36,10 +36,17 @@ const wrapperStyles = css`
 	z-index: 1;
 `;
 
-const interviewBylineBoxStyles = (format: ArticleFormat) => css`
-	${format.theme === ArticleSpecial.Labs
-		? textSansItalic20
-		: headlineMediumItalic20}
+const interviewBylineBoxStyles = (
+	format: ArticleFormat,
+	isApps: boolean,
+) => css`
+	${isApps
+		? format.theme === ArticleSpecial.Labs
+			? textSansItalic20
+			: headlineMediumItalic20
+		: format.theme === ArticleSpecial.Labs
+		? textSans20
+		: headlineMedium20}
 	${format.theme !== ArticleSpecial.Labs && 'line-height: 1.4;'}
 	background-color: ${schemedPalette('--byline-background')};
 	box-shadow:
@@ -88,13 +95,13 @@ const opinionStyles = (format: ArticleFormat, isApps: boolean) => css`
 	}
 `;
 
-const analysisStyles = css`
-	${headlineLightItalic34};
+const analysisStyles = (isApps: boolean) => css`
+	${isApps ? headlineLightItalic34 : headlineLight34};
 	line-height: 38px;
 	color: ${schemedPalette('--byline-anchor')};
 
 	${until.tablet} {
-		${headlineLightItalic28}
+		${isApps ? headlineLightItalic28 : headlineLight28}
 	}
 
 	a {
@@ -185,7 +192,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 				case ArticleDesign.Interview:
 					return (
 						<div css={wrapperStyles}>
-							<div css={interviewBylineBoxStyles(format)}>
+							<div css={interviewBylineBoxStyles(format, isApps)}>
 								<BylineLink
 									byline={byline}
 									tags={tags}
@@ -220,7 +227,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 						<div css={opinionWrapperStyles}>
 							<div
 								css={[
-									analysisStyles,
+									analysisStyles(isApps),
 									hasSingleContributor &&
 										analysisSingleContributorStyles,
 								]}
