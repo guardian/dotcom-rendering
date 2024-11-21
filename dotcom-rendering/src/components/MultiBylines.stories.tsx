@@ -11,7 +11,7 @@ import {
 } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import { RenderArticleElement } from '../lib/renderElement';
-import type { MultiByline, TextBlockElement } from '../types/content';
+import type { TextBlockElement } from '../types/content';
 import { MultiBylines } from './MultiBylines';
 
 const meta = {
@@ -68,47 +68,45 @@ const multiBylineWithNoContributorLink = {
 	contributorIds: [],
 };
 
-const args = (multiBylines: MultiByline[]) => ({
-	multiBylines,
-	tags: [
-		{
-			title: 'Richard Hillgrove',
-			id: 'profile/richard-hillgrove',
-			type: 'contributor',
-			bylineLargeImageUrl:
-				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2011/5/24/1306249890287/Richard-Hillgrove.jpg?width=100&dpr=2&s=none',
-		},
-	],
-	isLastElement: true,
-	/**
-	 * This will be replaced by the `formats` parameter, but it's
-	 * required by the type.
-	 */
-	format: {
-		design: ArticleDesign.Standard,
-		display: ArticleDisplay.Standard,
-		theme: Pillar.News,
-	},
-	abTests: {},
-	/**
-	 * This is used for rich links. An empty string isn't technically valid,
-	 * but there are no rich links in this example.
-	 */
-	ajaxUrl: '',
-	editionId: 'UK' as EditionId,
-	isAdFreeUser: false,
-	isSensitive: false,
-	pageId: 'testID',
-	switches: {},
-	RenderArticleElement,
-});
-
 export const ThemeVariations = {
-	args: args([
-		multiBylineWithLongHeader,
-		multiBylineWithImageOverride,
-		multiBylineWithNoContributorLink,
-	]),
+	args: {
+		multiBylines: [
+			multiBylineWithLongHeader,
+			multiBylineWithImageOverride,
+			multiBylineWithNoContributorLink,
+		],
+		tags: [
+			{
+				title: 'Richard Hillgrove',
+				id: 'profile/richard-hillgrove',
+				type: 'contributor',
+				bylineLargeImageUrl:
+					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2011/5/24/1306249890287/Richard-Hillgrove.jpg?width=100&dpr=2&s=none',
+			},
+		],
+		isLastElement: true,
+		/**
+		 * This will be replaced by the `formats` parameter, but it's
+		 * required by the type.
+		 */
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.News,
+		},
+		abTests: {},
+		/**
+		 * This is used for rich links. An empty string isn't technically valid,
+		 * but there are no rich links in this example.
+		 */
+		ajaxUrl: '',
+		editionId: 'UK' as EditionId,
+		isAdFreeUser: false,
+		isSensitive: false,
+		pageId: 'testID',
+		switches: {},
+		RenderArticleElement,
+	},
 	parameters: {
 		formats: getAllThemes({
 			design: ArticleDesign.Standard,
@@ -127,7 +125,10 @@ const isNotAudioDesign = (format: ArticleFormat) =>
 	format.design !== ArticleDesign.Audio;
 
 export const DesignVariations = {
-	args: args([multiBylineWithLongHeader]),
+	args: {
+		...ThemeVariations.args,
+		multiBylines: [multiBylineWithLongHeader],
+	},
 	parameters: {
 		formats: getAllDesigns({
 			theme: Pillar.News,
@@ -142,12 +143,18 @@ export const DesignVariations = {
 } satisfies Story;
 
 export const DesignVariationsWithImageOverride = {
-	args: args([multiBylineWithImageOverride]),
+	args: {
+		...ThemeVariations.args,
+		multiBylines: [multiBylineWithImageOverride],
+	},
 	parameters: DesignVariations.parameters,
 } satisfies Story;
 
 export const DesignVariationsWithNoContributorLink = {
-	args: args([multiBylineWithNoContributorLink]),
+	args: {
+		...ThemeVariations.args,
+		multiBylines: [multiBylineWithNoContributorLink],
+	},
 	parameters: DesignVariations.parameters,
 } satisfies Story;
 
@@ -226,15 +233,6 @@ export const Images = {
 				bylineHtml:
 					"<span data-contributor-rel='author'>Steve McQueen</span> on Paul Gilroy",
 				contributorIds: [],
-			},
-		],
-		tags: [
-			{
-				title: 'Richard Hillgrove',
-				id: 'profile/richard-hillgrove',
-				type: 'contributor',
-				bylineImageUrl:
-					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2011/5/24/1306249890287/Richard-Hillgrove.jpg?width=100&dpr=2&s=none',
 			},
 		],
 	},
