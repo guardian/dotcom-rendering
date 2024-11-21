@@ -52,11 +52,6 @@ const nonAnchorHeadlineStyles = ({
 	${format.display === ArticleDisplay.Immersive
 		? headlineLightItalic28
 		: `
-			/**
-			 * Typography preset styles should not be overridden.
-			 * This has been done because the styles do not directly map to the new presets.
-			 * Please speak to your team's designer and update this to use a more appropriate preset.
-			 */
 			${fontWeight === 'medium' ? headlineMediumItalic24 : headlineLightItalic24};
 		`};
 
@@ -64,11 +59,6 @@ const nonAnchorHeadlineStyles = ({
 		${format.display === ArticleDisplay.Immersive
 			? headlineLightItalic34
 			: `
-				/**
-				 * Typography preset styles should not be overridden.
-				 * This has been done because the styles do not directly map to the new presets.
-				 * Please speak to your team's designer and update this to use a more appropriate preset.
-				 */
 				${fontWeight === 'medium' ? headlineMediumItalic28 : headlineLightItalic28};
 			`};
 	}
