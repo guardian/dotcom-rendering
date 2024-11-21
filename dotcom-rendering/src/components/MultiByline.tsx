@@ -207,9 +207,9 @@ export const MultiByline = ({
 		<div css={multiBylineItemStyles} data-spacefinder-role="nested">
 			<Byline
 				title={multiByline.title}
-				byline={multiByline.byline ?? ''}
-				bylineHtml={multiByline.bylineHtml ?? ''}
-				contributorIds={multiByline.contributorIds ?? []}
+				byline={multiByline.byline}
+				bylineHtml={multiByline.bylineHtml}
+				contributorIds={multiByline.contributorIds}
 				imageOverrideUrl={multiByline.imageOverrideUrl}
 				format={format}
 				tags={tags}
@@ -262,12 +262,10 @@ const Byline = ({
 				>
 					{title}
 				</h2>
-				{bylineHtml ? (
-					<h3
-						css={bylineStyles(format)}
-						dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
-					/>
-				) : null}
+				<h3
+					css={bylineStyles(format)}
+					dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
+				/>
 			</div>
 			{!!imageUrl && (
 				<div css={bylineImageStyles}>
