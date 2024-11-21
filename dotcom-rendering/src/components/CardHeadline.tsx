@@ -126,7 +126,7 @@ const fontFamilies = {
 		xxxsmall: textSans15,
 		tiny: textSans12,
 	},
-} as const;
+};
 
 enum FontFamily {
 	HeadlineMedium = 'headlineMedium',
