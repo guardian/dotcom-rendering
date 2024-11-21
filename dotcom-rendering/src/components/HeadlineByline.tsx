@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	headlineLight28,
+	headlineLight34,
 	headlineLightItalic28,
 	headlineLightItalic34,
 	headlineMedium20,
@@ -10,6 +12,7 @@ import {
 	space,
 	textSans20,
 	textSans24,
+	textSans34,
 	textSansItalic20,
 	textSansItalic34,
 	until,
@@ -24,6 +27,7 @@ import { getSoleContributor } from '../lib/byline';
 import { palette as schemedPalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { BylineLink } from './BylineLink';
+import { useConfig } from './ConfigContext';
 
 const wrapperStyles = css`
 	margin-left: 6px;
@@ -58,17 +62,21 @@ const opinionWrapperStyles = css`
 	display: inline-block;
 `;
 
-const opinionStyles = (format: ArticleFormat) => css`
-	${format.theme === ArticleSpecial.Labs
-		? textSansItalic34
-		: headlineLightItalic34}
+const opinionStyles = (format: ArticleFormat, isApps: boolean) => css`
+	${isApps
+		? format.theme === ArticleSpecial.Labs
+			? textSansItalic34
+			: headlineLightItalic34
+		: format.theme === ArticleSpecial.Labs
+		? textSans34
+		: headlineLight34}
 	line-height: 38px;
 	/* Used to prevent the byline stretching full width */
 	display: inline;
 	color: ${schemedPalette('--byline')};
 
 	${until.tablet} {
-		${headlineLightItalic28}
+		${isApps ? headlineLightItalic28 : headlineLight28}
 	}
 
 	a {
@@ -148,6 +156,9 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 	if (byline === '') {
 		return null;
 	}
+	/** This is required for a staggered design release between web and app. This will be removed changes are ready for release on ios/android   */
+	const { renderingTarget } = useConfig();
+	const isApps = renderingTarget === 'Apps';
 
 	const hasSingleContributor = !!getSoleContributor(tags, byline);
 
@@ -194,7 +205,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 								hasSingleContributor && authorBylineWithImage,
 							]}
 						>
-							<div css={opinionStyles(format)}>
+							<div css={opinionStyles(format, isApps)}>
 								<BylineLink
 									byline={byline}
 									tags={tags}
