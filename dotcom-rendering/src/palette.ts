@@ -1173,9 +1173,9 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 			return sourcePalette.neutral[86];
 	}
 };
-const avatarLight: PaletteFunction = () => sourcePalette.neutral[97];
+const avatarLight: PaletteFunction = () => sourcePalette.neutral[93];
 
-const avatarDark: PaletteFunction = () => sourcePalette.neutral[97];
+const avatarDark: PaletteFunction = () => sourcePalette.neutral[93];
 
 const followTextLight: PaletteFunction = ({ design }) => {
 	switch (design) {
