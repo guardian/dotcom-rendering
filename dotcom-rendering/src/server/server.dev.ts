@@ -12,6 +12,7 @@ import {
 	handleBlocks,
 	handleInteractive,
 } from './handler.article.web';
+import { handleEditionsCrossword } from './handler.editionsCrossword';
 import {
 	handleFront,
 	handleFrontJson,
@@ -88,6 +89,8 @@ export const devServer = (): Handler => {
 				return handleAppsInteractive(req, res, next);
 			case 'AppsBlocks':
 				return handleAppsBlocks(req, res, next);
+			case 'EditionsCrossword':
+				return handleEditionsCrossword(req, res, next);
 			default: {
 				// Do not redirect assets urls
 				if (req.url.match(ASSETS_URL)) return next();

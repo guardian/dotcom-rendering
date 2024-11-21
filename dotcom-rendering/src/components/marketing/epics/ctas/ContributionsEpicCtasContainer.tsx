@@ -58,7 +58,7 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 		showChoiceCards && variant.name.includes('US_CHECKOUT_PAGE');
 
 	const hasSupporterPlusPromoCode =
-		variant.cta?.baseUrl.includes('OCT_DISCOUNT_50_3_MONTHS') ?? false;
+		variant.cta?.baseUrl.includes('BLACK_FRIDAY_DISCOUNT_2024') ?? false;
 
 	const variantOfChoiceCard =
 		countryCode === 'US' && showUSSupportCheckout
