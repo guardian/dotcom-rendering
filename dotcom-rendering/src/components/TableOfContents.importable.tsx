@@ -13,6 +13,7 @@ import { useState } from 'react';
 import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
 import type { TableOfContentsItem } from '../model/enhanceTableOfContents';
 import { palette } from '../palette';
+import { getZIndex } from '../lib/getZIndex';
 
 interface Props {
 	tableOfContents: TableOfContentsItem[];
@@ -71,20 +72,19 @@ const detailsStyles = css`
 	summary::-webkit-details-marker {
 		display: none;
 	}
-
-	&.make-sticky {
+`;
+const stickyStyles = css`
+	position: sticky;
+	top: 0;
+	background: ${palette('--article-background')};
+	${getZIndex('tableOfContents')}
+	max-height: 100vh;
+	overflow: scroll;
+	summary {
 		position: sticky;
 		top: 0;
+		z-index: 1;
 		background: ${palette('--article-background')};
-		z-index: 4;
-		max-height: 100vh;
-		overflow: scroll;
-		summary {
-			position: sticky;
-			top: 0;
-			z-index: 5;
-			background: ${palette('--article-background')};
-		}
 	}
 `;
 
@@ -141,8 +141,10 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 	return (
 		<details
 			open={open}
-			css={detailsStyles}
-			className={tableOfContents.length > 5 ? 'make-sticky' : ''}
+			css={[
+				detailsStyles,
+				tableOfContents.length > 5 ? stickyStyles : undefined,
+			]}
 			data-component="table-of-contents"
 		>
 			<summary
@@ -189,6 +191,9 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 						<a
 							href={`#${item.id}`}
 							css={[anchorStyles, paddingStyles]}
+							onClick={(e): void => {
+								setOpen((state) => !state);
+							}}
 						>
 							{item.title}
 						</a>
