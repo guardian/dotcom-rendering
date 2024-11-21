@@ -256,12 +256,12 @@ const Byline = ({
 		<div css={bylineWrapperStyles}>
 			<div css={bylineTextStyles}>
 				<hr css={headingLineStyles} />
-				<h3
+				<h2
 					id={slugify(title)}
 					css={[subheadingStyles(format), headingMarginStyle]}
 				>
 					{title}
-				</h3>
+				</h2>
 				{bylineHtml ? (
 					<h3
 						css={bylineStyles(format)}
