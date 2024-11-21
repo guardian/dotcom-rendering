@@ -214,24 +214,22 @@ export const MultiByline = ({
 	children,
 }: MultiBylineItemProps) => {
 	return (
-		<>
-			<li css={multiBylineItemStyles} data-spacefinder-role="nested">
-				<Byline
-					title={multiByline.title}
-					byline={multiByline.byline ?? ''}
-					bylineHtml={multiByline.bylineHtml ?? ''}
-					contributorIds={multiByline.contributorIds ?? []}
-					imageOverrideUrl={multiByline.imageOverrideUrl}
-					format={format}
-					tags={tags}
-				/>
-				<Bio html={multiByline.bio} />
-				{children}
-				{multiByline.endNote ? (
-					<EndNote text={multiByline.endNote} />
-				) : null}
-			</li>
-		</>
+		<li css={multiBylineItemStyles} data-spacefinder-role="nested">
+			<Byline
+				title={multiByline.title}
+				byline={multiByline.byline ?? ''}
+				bylineHtml={multiByline.bylineHtml ?? ''}
+				contributorIds={multiByline.contributorIds ?? []}
+				imageOverrideUrl={multiByline.imageOverrideUrl}
+				format={format}
+				tags={tags}
+			/>
+			<Bio html={multiByline.bio} />
+			{children}
+			{multiByline.endNote ? (
+				<EndNote text={multiByline.endNote} />
+			) : null}
+		</li>
 	);
 };
 
