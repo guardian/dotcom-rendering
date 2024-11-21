@@ -1,11 +1,11 @@
+import { css } from '@emotion/react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
+import { palette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { QAndAExplainer, StarRating } from '../types/content';
 import { QAndAExplainer as QAndAExplainerComponent } from './QAndAExplainer';
-import { css } from '@emotion/react';
-import { palette } from '../palette';
 
 interface Props {
 	qAndAExplainers: QAndAExplainer[];
