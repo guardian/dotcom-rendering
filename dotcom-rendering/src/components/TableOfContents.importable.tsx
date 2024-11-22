@@ -83,7 +83,7 @@ const stickyStyles = css`
 		background: ${palette('--article-background')};
 	}
 	ul {
-		max-height: 100vh;
+		max-height: 90vh;
 		overflow-y: auto;
 	}
 `;
