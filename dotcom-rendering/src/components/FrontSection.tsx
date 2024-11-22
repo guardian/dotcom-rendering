@@ -353,6 +353,7 @@ const containerLevelBottomPadding = css`
 const primaryLevelTopSpacer = css`
 	height: ${space[4]}px;
 	width: 100%;
+	background-color: ${schemePalette('--front-page-background')};
 `;
 
 const primaryLevelTopBorder = css`
