@@ -65,7 +65,7 @@ const captionStyles = css`
 		rgba(0, 0, 0, 0) 0%,
 		rgba(0, 0, 0, 0.8) 100%
 	);
-	padding: 40px ${space[2]}px ${space[2]}px;
+	padding: ${space[10]}px ${space[2]}px ${space[2]}px;
 `;
 
 const navigationStyles = css`
