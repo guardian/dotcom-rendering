@@ -238,12 +238,12 @@ export const AuEoy2024: ReactComponent<Props> = ({
 						getCtaUrl={getCtaUrl}
 						cssCtaOverides={buttonStyles({
 							default: {
-								backgroundColour: '#C41C1C',
-								textColour: '#FFFFFF',
+								backgroundColour: '#FEBBC7',
+								textColour: '#062962',
 							},
 							hover: {
-								backgroundColour: '#C41C1C',
-								textColour: '#FFFFFF',
+								backgroundColour: '#FEBBC7',
+								textColour: '#062962',
 							},
 						})}
 						onCtaClick={() => {
