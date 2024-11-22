@@ -29,6 +29,7 @@ const bannerWrapper = css`
 	/* stylelint-disable-next-line declaration-no-important */
 	position: fixed !important;
 	bottom: 0;
+	/* stylelint-disable-next-line declaration-no-important */
 	z-index: ${getZIndex('banner')} !important;
 	max-height: 90vh;
 	overflow: auto;
