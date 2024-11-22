@@ -11,6 +11,7 @@ import {
 } from '@guardian/source/react-components';
 import { useState } from 'react';
 import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
+import { getZIndex } from '../lib/getZIndex';
 import type { TableOfContentsItem } from '../model/enhanceTableOfContents';
 import { palette } from '../palette';
 
@@ -72,6 +73,20 @@ const detailsStyles = css`
 		display: none;
 	}
 `;
+const stickyStyles = css`
+	position: sticky;
+	top: 0;
+	background: ${palette('--article-background')};
+	z-index: ${getZIndex('tableOfContents')};
+	max-height: 100vh;
+	overflow: scroll;
+	summary {
+		position: sticky;
+		top: 0;
+		z-index: 1;
+		background: ${palette('--article-background')};
+	}
+`;
 
 const summaryStyles = css`
 	display: flex;
@@ -126,7 +141,10 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 	return (
 		<details
 			open={open}
-			css={detailsStyles}
+			css={[
+				detailsStyles,
+				tableOfContents.length > 5 ? stickyStyles : undefined,
+			]}
 			data-component="table-of-contents"
 		>
 			<summary
@@ -173,6 +191,9 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 						<a
 							href={`#${item.id}`}
 							css={[anchorStyles, paddingStyles]}
+							onClick={(): void => {
+								setOpen((state) => !state);
+							}}
 						>
 							{item.title}
 						</a>

@@ -217,7 +217,7 @@ const CommentCount = ({
 			href={`${linkTo}#comments`}
 			cssOverrides={css`
 				/* See: https://css-tricks.com/nested-links/ */
-				${getZIndex('card-nested-link')}
+				z-index: ${getZIndex('card-nested-link')};
 				/* The following styles turn off those provided by Link */
 				color: inherit;
 				/* stylelint-disable-next-line property-disallowed-list */

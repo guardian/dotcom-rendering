@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import type { ZIndex } from '../../lib/getZIndex';
-import { getZIndex, getZIndexImportant } from '../../lib/getZIndex';
+import { getZIndex, type ZIndex } from '../../lib/getZIndex';
 import { palette } from '../../palette';
 
 type Props = {
@@ -18,7 +17,7 @@ const stickyStyles = css`
 `;
 
 const addZindex = (zIndex: ZIndex = 'stickyAdWrapper') => css`
-	${getZIndex(zIndex)}
+	z-index: ${getZIndex(zIndex)};
 `;
 
 const background = css`
@@ -30,7 +29,8 @@ const bannerWrapper = css`
 	/* stylelint-disable-next-line declaration-no-important */
 	position: fixed !important;
 	bottom: 0;
-	${getZIndexImportant('banner')}
+	/* stylelint-disable-next-line declaration-no-important */
+	z-index: ${getZIndex('banner')} !important;
 	max-height: 90vh;
 	overflow: auto;
 	/* stylelint-disable-next-line declaration-no-important */

@@ -35,7 +35,7 @@ const hideBannerStyles = css`
 const stickyContainerStyles = css`
 	position: sticky;
 	top: 0;
-	${getZIndex('expandableMarketingCardOverlay')};
+	z-index: ${getZIndex('expandableMarketingCardOverlay')};
 
 	/* The component slides in from the left-hand side */
 	animation: slidein 2.4s linear;
