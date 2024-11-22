@@ -9,12 +9,12 @@ interface Props {
 export const EditionsCrosswordPage = ({ editionsCrosswords }: Props) => {
 	return (
 		<StrictMode>
-			<EditionsCrosswordLayout
+			{/* <EditionsCrosswordLayout
 				editionsCrossword={editionsCrosswords.cryptic}
 			/>
 			<EditionsCrosswordLayout
 				editionsCrossword={editionsCrosswords.quick}
-			/>
+			/> */}
 		</StrictMode>
 	);
 };
