@@ -6492,6 +6492,7 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[10],
 	},
+	/** This should match --front-container-background but does not have a container override set */
 	'--front-page-background': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[10],
