@@ -332,6 +332,7 @@ const sideBorders = css`
 		margin: 0 -20px;
 		border-left-style: solid;
 		border-right-style: solid;
+		z-index: 1;
 	}
 `;
 
@@ -351,16 +352,21 @@ const containerLevelBottomPadding = css`
  * causing gaps in the vertical side borders from tablet upwards
  */
 const primaryLevelTopSpacer = css`
-	height: ${space[4]}px;
-	width: 100%;
-	background-color: ${schemePalette('--front-page-background')};
-`;
-
-const primaryLevelTopBorder = css`
 	grid-row: spacing-top;
 	grid-column: 1 / -1;
-	border-bottom: 2px solid ${schemePalette('--section-border-primary')};
-	z-index: 1;
+	height: ${space[4]}px;
+	background-color: ${schemePalette('--front-page-background')};
+	position: relative;
+`;
+
+/** Absolutely positioned horizontal rule within the primary level spacing element */
+const primaryLevelTopBorder = css`
+	height: 2px;
+	width: 100%;
+	background-color: ${schemePalette('--section-border-primary')};
+	position: absolute;
+	bottom: 0;
+	z-index: 2;
 `;
 
 const secondaryLevelTopBorder = css`
@@ -523,14 +529,16 @@ export const FrontSection = ({
 						css={[
 							containerLevel === 'Primary' &&
 								primaryLevelTopSpacer,
-							showTopBorder &&
-								containerLevel === 'Primary' &&
-								primaryLevelTopBorder,
+
 							showTopBorder &&
 								containerLevel === 'Secondary' &&
 								secondaryLevelTopBorder,
 						]}
-					/>
+					>
+						{showTopBorder && containerLevel === 'Primary' && (
+							<div css={primaryLevelTopBorder} />
+						)}
+					</div>
 				)}
 
 				<div
