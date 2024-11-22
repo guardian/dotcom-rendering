@@ -363,7 +363,10 @@ export const StandardCardLayout = ({
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
 							imagePositionOnDesktop={'left'}
-							supportingContent={card.supportingContent}
+							supportingContent={card.supportingContent?.slice(
+								0,
+								2,
+							)}
 							supportingContentAlignment="vertical"
 							supportingContentPosition="outer"
 							imageSize={'medium'}

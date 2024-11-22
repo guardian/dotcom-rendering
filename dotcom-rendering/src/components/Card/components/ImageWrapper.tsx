@@ -36,6 +36,12 @@ type Props = {
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	showPlayIcon: boolean;
+	/**
+	 * Forces hiding the image overlay added to pictures & slideshows on hover.
+	 * This is to allow hiding the overlay on slideshow carousels where we don't
+	 * want it to be shown whilst retaining it for existing slideshows.
+	 */
+	hideImageOverlay?: boolean;
 };
 
 /**
@@ -117,6 +123,7 @@ export const ImageWrapper = ({
 	imagePositionOnDesktop,
 	imagePositionOnMobile,
 	showPlayIcon,
+	hideImageOverlay,
 }: Props) => {
 	const isHorizontalOnDesktop =
 		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
@@ -168,9 +175,8 @@ export const ImageWrapper = ({
 			<>
 				{children}
 				{/* This image overlay is styled when the CardLink is hovered */}
-				{(imageType === 'picture' || imageType === 'slideshow') && (
-					<div className="image-overlay" />
-				)}
+				{(imageType === 'picture' || imageType === 'slideshow') &&
+					!hideImageOverlay && <div className="image-overlay" />}
 				{imageType === 'picture' && showPlayIcon && (
 					<PlayIcon
 						imageSize={imageSize}
