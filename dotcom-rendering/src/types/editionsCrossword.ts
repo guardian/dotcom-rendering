@@ -1,6 +1,5 @@
 export type FEEditionsCrosswords = {
-	quick: FEEditionsCrossword;
-	cryptic: FEEditionsCrossword;
+	crosswords: FEEditionsCrossword[];
 };
 
 type FECrosswordEntry = {
@@ -17,7 +16,7 @@ type FECrosswordEntry = {
 	clue: string;
 	group: string[];
 	solution: string;
-	format: string;
+	format: unknown;
 };
 
 type FECrosswordDimensions = {
@@ -37,7 +36,7 @@ export type FEEditionsCrossword = {
 	randomCluesOrdering: boolean;
 	instructions?: string;
 	creator?: { name: string; webUrl: string };
-	pdf: string;
+	pdf?: string;
 	annotatedSolution?: string;
 	dateSolutionAvailable: string;
 };
