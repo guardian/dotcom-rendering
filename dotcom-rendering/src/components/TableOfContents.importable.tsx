@@ -77,7 +77,7 @@ const stickyStyles = css`
 	position: sticky;
 	top: 0;
 	background: ${palette('--article-background')};
-	${getZIndex('tableOfContents')}
+	z-index: ${getZIndex('tableOfContents')};
 	max-height: 100vh;
 	overflow: scroll;
 	summary {

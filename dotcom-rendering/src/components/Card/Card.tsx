@@ -365,9 +365,9 @@ export const Card = ({
 				href={`${linkTo}#comments`}
 				cssOverrides={css`
 					/* See: https://css-tricks.com/nested-links/ */
-					${getZIndex('card-nested-link')}
+					z-index: ${getZIndex('card-nested-link')};
 					/* The following styles turn off those provided by Link */
-				color: inherit;
+					color: inherit;
 					/* stylelint-disable-next-line property-disallowed-list */
 					font-family: inherit;
 					font-size: inherit;
@@ -614,7 +614,9 @@ export const Card = ({
 								<div
 									css={css`
 										position: relative;
-										${getZIndex('card-nested-link')}
+										z-index: ${getZIndex(
+											'card-nested-link',
+										)};
 									`}
 								>
 									<Island
@@ -654,7 +656,9 @@ export const Card = ({
 										css={css`
 											display: block;
 											position: relative;
-											${getZIndex('card-nested-link')}
+											z-index: ${getZIndex(
+												'card-nested-link',
+											)};
 										`}
 									>
 										<Island

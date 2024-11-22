@@ -4,7 +4,7 @@ import { getZIndex } from '../../../lib/getZIndex';
 
 const fauxLinkStyles = css`
 	position: absolute;
-	${getZIndex('card-link')};
+	z-index: ${getZIndex('card-link')};
 	top: 0;
 	right: 0;
 	bottom: 0;
