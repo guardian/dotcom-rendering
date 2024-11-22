@@ -281,10 +281,10 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	};
 
 	const ausEOYTickerStylingSettings = {
-		filledProgressColour: '#FBBCC7',
-		progressBarBackgroundColour: 'rgba(196, 28, 28, 0.30)',
+		filledProgressColour: '#C41C1C',
+		progressBarBackgroundColour: '#D9A78E',
 		headlineColour: '#000000',
-		totalColour: '#FBBCC7',
+		totalColour: '#C41C1C',
 		goalColour: '#000000',
 	};
 
@@ -299,7 +299,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	);
 
 	const getHeaderContainerCss = () => {
-		if (templateSettings.headerSettings?.headerImage) {
+		if (templateSettings?.headerSettings?.headerImage) {
 			return styles.headerWithImageContainer(
 				templateSettings.containerSettings.backgroundColour,
 			);

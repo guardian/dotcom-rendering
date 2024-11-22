@@ -116,14 +116,6 @@ const defaultTickerStylingSettings: TickerSettings['tickerStylingSettings'] = {
 	goalColour: '#000000',
 };
 
-const ausEOYTickerStylingSettings: TickerSettings['tickerStylingSettings'] = {
-	filledProgressColour: '#FBBCC7',
-	progressBarBackgroundColour: 'rgba(196, 28, 28, 0.30)',
-	headlineColour: '#000000',
-	totalColour: '#FBBCC7',
-	goalColour: '#000000',
-};
-
 interface LiveblogEpicBodyParagraphProps {
 	paragraph: string;
 	numArticles: number;
@@ -237,11 +229,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 								headline: tickerSettings.copy.countLabel,
 							}}
 							tickerData={tickerSettings.tickerData}
-							tickerStylingSettings={
-								tickerSettings.name === 'AU'
-									? ausEOYTickerStylingSettings
-									: defaultTickerStylingSettings
-							}
+							tickerStylingSettings={defaultTickerStylingSettings}
 							size={'medium'}
 						/>
 					</div>
