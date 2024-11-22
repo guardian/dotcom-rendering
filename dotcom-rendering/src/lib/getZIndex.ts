@@ -77,6 +77,9 @@ const indices = [
 	// Overlay for expandable marketing card (currently US only)
 	'expandableMarketingCardOverlay',
 
+	// Sticky table of contents element
+	'tableOfContents',
+
 	// Article headline (should be above main media)
 	'articleHeadline',
 	'immersiveBlackBox',
