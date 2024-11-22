@@ -317,8 +317,8 @@ export const UsEoy2024: ReactComponent<Props> = ({
 	} = useChoiceCards(choiceCardAmounts, 'US', cta, cta);
 
 	const isGivingTuesday =
-		date >= new Date('2024-11-27T00:00:01Z') &&
-		date < new Date('2024-12-04T23:59:59Z');
+		date >= new Date('2024-11-27T00:00:01') &&
+		date < new Date('2024-12-03T23:59:59');
 
 	return (
 		<div
