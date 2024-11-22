@@ -6525,6 +6525,10 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[10],
 	},
+	'--front-page-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[10],
+	},
 	'--heading-line': {
 		light: headingLineLight,
 		dark: headingLineDark,
