@@ -3,7 +3,7 @@ import {
 	headlineBold17,
 	headlineLight17,
 	space,
-	textSans14,
+	textSansBold14,
 } from '@guardian/source/foundations';
 import {
 	SvgChevronDownSingle,
@@ -78,13 +78,13 @@ const stickyStyles = css`
 	top: 0;
 	background: ${palette('--article-background')};
 	z-index: ${getZIndex('tableOfContents')};
-	max-height: 100vh;
-	overflow: scroll;
 	summary {
-		position: sticky;
-		top: 0;
 		z-index: 1;
 		background: ${palette('--article-background')};
+	}
+	ul {
+		max-height: 90vh;
+		overflow-y: auto;
 	}
 `;
 
@@ -108,7 +108,7 @@ const summaryStyles = css`
 `;
 
 const titleStyle = css`
-	${textSans14}
+	${textSansBold14}
 	color:${palette('--table-of-contents')};
 `;
 
