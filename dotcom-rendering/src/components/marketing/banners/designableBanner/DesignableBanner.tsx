@@ -280,14 +280,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		},
 	};
 
-	const ausEOYTickerStylingSettings = {
-		filledProgressColour: '#C41C1C',
-		progressBarBackgroundColour: '#D9A78E',
-		headlineColour: '#000000',
-		totalColour: '#C41C1C',
-		goalColour: '#000000',
-	};
-
 	// const isTabletOrAbove = useMediaQuery(from.tablet);
 	const mainOrMobileContent = isTabletOrAbove
 		? content.mainContent
@@ -299,7 +291,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	);
 
 	const getHeaderContainerCss = () => {
-		if (templateSettings?.headerSettings?.headerImage) {
+		if (templateSettings.headerSettings?.headerImage) {
 			return styles.headerWithImageContainer(
 				templateSettings.containerSettings.backgroundColour,
 			);
@@ -358,9 +350,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									}}
 									tickerData={tickerSettings.tickerData}
 									tickerStylingSettings={
-										tickerSettings.name === 'AU'
-											? ausEOYTickerStylingSettings
-											: templateSettings.tickerStylingSettings
+										templateSettings.tickerStylingSettings
 									}
 									size={'medium'}
 								/>
