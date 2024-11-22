@@ -109,7 +109,7 @@ const StandardGrid = ({
 								grid-template-areas:
 									'title  border  matchNav   . right-column'
 									'title  border  matchtabs  . right-column'
-									'.      border  headline   . right-column'
+									'title  border  headline   . right-column'
 									'.      border  standfirst . right-column'
 									'meta   border  media      . right-column'
 									'meta   border  body       . right-column'
@@ -152,7 +152,7 @@ const StandardGrid = ({
 							grid-template-areas:
 								'title  border  matchNav     right-column'
 								'title  border  matchtabs    right-column'
-								'.      border  headline     right-column'
+								'title  border  headline     right-column'
 								'.      border  standfirst   right-column'
 								'meta   border  media        right-column'
 								'meta   border  body         right-column'
