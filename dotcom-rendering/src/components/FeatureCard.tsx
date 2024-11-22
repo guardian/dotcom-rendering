@@ -125,8 +125,9 @@ const overlayStyles = css`
 	flex-direction: column;
 	justify-content: flex-start;
 	flex-grow: 1;
-	padding: ${space[2]}px;
 	gap: ${space[1]}px;
+	padding: 72px ${space[2]}px ${space[2]}px;
+	mask-image: linear-gradient(180deg, transparent 0, rgb(0, 0, 0) 64px);
 	backdrop-filter: blur(12px) brightness(0.7);
 `;
 
