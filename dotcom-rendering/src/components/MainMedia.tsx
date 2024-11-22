@@ -47,9 +47,9 @@ const immersiveWrapper = css`
         we use this grow here to ensure the content fills the available height
     */
 	flex-grow: 1;
-	${getZIndex('mainMedia')}
+	z-index: ${getZIndex('mainMedia')};
 	/* Prevent the immersive image 100vh from spilling into main content */
-    overflow: hidden;
+	overflow: hidden;
 `;
 
 const chooseWrapper = (format: ArticleFormat) => {

@@ -330,7 +330,7 @@ const RemoteBanner = ({ module, fetchEmail }: RemoteBannerProps) => {
 			<div
 				css={css`
 					width: 100%;
-					${getZIndex('banner')}
+					z-index: ${getZIndex('banner')};
 				`}
 			>
 				{}

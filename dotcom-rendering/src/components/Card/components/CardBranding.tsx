@@ -35,7 +35,7 @@ const brandingWrapperStyle = css`
 	text-align: right;
 	flex: auto;
 	/* See: https://css-tricks.com/nested-links/ */
-	${getZIndex('card-nested-link')}
+	z-index: ${getZIndex('card-nested-link')};
 	position: relative;
 `;
 
