@@ -381,6 +381,12 @@ export const FeatureCard = ({
 								<div className="image-overlay" />
 
 								<div css={overlayStyles}>
+									{/**
+									 * Without the wrapping div the headline and
+									 * byline would have space inserted between
+									 * them due to being direct children of the
+									 * flex container
+									 */}
 									<div>
 										<CardHeadline
 											headlineText={headlineText}
