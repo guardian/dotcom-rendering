@@ -3,6 +3,7 @@ import { isString } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import type { EditionId } from '../lib/edition';
+import { getZIndex } from '../lib/getZIndex';
 import { hideAge } from '../lib/hideAge';
 import { palette, palette as schemePalette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
@@ -332,7 +333,7 @@ const sideBorders = css`
 		margin: 0 -20px;
 		border-left-style: solid;
 		border-right-style: solid;
-		z-index: 1;
+		z-index: ${getZIndex('frontSectionSideBorders')};
 	}
 `;
 
