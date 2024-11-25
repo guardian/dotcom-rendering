@@ -27,7 +27,7 @@ const cardProps: CardProps = {
 	aspectRatio: '4:5',
 	byline: 'Byline text',
 	showByline: true,
-	headlineSizes: { desktop: 'medium' },
+	headlineSizes: { desktop: 'small' },
 	showPulsingDot: false,
 	showClock: false,
 	imageSize: 'feature',
