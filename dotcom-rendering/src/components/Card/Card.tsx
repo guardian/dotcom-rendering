@@ -14,6 +14,7 @@ import { palette } from '../../palette';
 import type { Branding } from '../../types/branding';
 import type { StarRating as Rating } from '../../types/content';
 import type {
+	AspectRatio,
 	DCRContainerPalette,
 	DCRContainerType,
 	DCRFrontImage,
@@ -26,7 +27,7 @@ import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
 import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
-import type { AspectRatio, Loading } from '../CardPicture';
+import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
@@ -365,9 +366,9 @@ export const Card = ({
 				href={`${linkTo}#comments`}
 				cssOverrides={css`
 					/* See: https://css-tricks.com/nested-links/ */
-					${getZIndex('card-nested-link')}
+					z-index: ${getZIndex('card-nested-link')};
 					/* The following styles turn off those provided by Link */
-				color: inherit;
+					color: inherit;
 					/* stylelint-disable-next-line property-disallowed-list */
 					font-family: inherit;
 					font-size: inherit;
@@ -614,7 +615,9 @@ export const Card = ({
 								<div
 									css={css`
 										position: relative;
-										${getZIndex('card-nested-link')}
+										z-index: ${getZIndex(
+											'card-nested-link',
+										)};
 									`}
 								>
 									<Island
@@ -654,7 +657,9 @@ export const Card = ({
 										css={css`
 											display: block;
 											position: relative;
-											${getZIndex('card-nested-link')}
+											z-index: ${getZIndex(
+												'card-nested-link',
+											)};
 										`}
 									>
 										<Island
