@@ -40,7 +40,7 @@ export const expandedMenuStyles = css`
 `;
 
 const wrapperMainMenuStyles = css`
-	${getZIndex('expanded-veggie-menu-wrapper')}
+	z-index: ${getZIndex('expanded-veggie-menu-wrapper')};
 	left: 0;
 	top: 0;
 
@@ -62,7 +62,7 @@ const wrapperMainMenuStyles = css`
 const mainMenuStyles = css`
 	background-color: ${themePalette('--masthead-nav-background')};
 	${textSans20};
-	${getZIndex('expanded-veggie-menu')}
+	z-index: ${getZIndex('expanded-veggie-menu')};
 	left: 0;
 	top: 0;
 	box-sizing: border-box;

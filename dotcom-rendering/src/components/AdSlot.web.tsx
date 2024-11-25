@@ -306,7 +306,7 @@ const mobileStickyAdStyles = css`
 	margin: 0 auto;
 	right: 0;
 	left: 0;
-	${getZIndex('mobileSticky')}
+	z-index: ${getZIndex('mobileSticky')};
 	${from.phablet} {
 		display: none;
 	}

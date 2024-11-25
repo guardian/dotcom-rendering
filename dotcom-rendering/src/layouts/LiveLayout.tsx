@@ -601,7 +601,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								css={css`
 									position: sticky;
 									top: 0;
-									${getZIndex('toast')};
+									z-index: ${getZIndex('toast')};
 									display: flex;
 									justify-content: center;
 								`}

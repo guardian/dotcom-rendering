@@ -16,7 +16,7 @@
  *
  * const myCss = css`
  *    color: blue;
- *    ${getZIndex('TheGuardian')}
+ *    z-index: ${getZIndex('TheGuardian')};
  * `;
  *
  * As new items are added, all z-indexes are adjusted
@@ -100,14 +100,8 @@ const indices = [
 // Implementation code - you don't need to change this to get a new index
 export type ZIndex = (typeof indices)[number];
 
-const decideIndex = (name: ZIndex): number => {
+export const getZIndex = (name: ZIndex): number => {
 	const index = indices.indexOf(name);
 	if (index === -1) return -1; // indexOf returns -1 if there is no match
 	return indices.length - index; // reverse the indices: last item gets 1
 };
-
-export const getZIndex = (zIndex: ZIndex): string =>
-	`z-index: ${decideIndex(zIndex)};`;
-
-export const getZIndexImportant = (zIndex: ZIndex): string =>
-	`z-index: ${decideIndex(zIndex)} !important;`;
