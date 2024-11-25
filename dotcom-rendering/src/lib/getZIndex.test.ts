@@ -17,5 +17,8 @@ describe('getZIndex', () => {
 		expect(getZIndex('card-nested-link')).toBeGreaterThan(
 			getZIndex('card-link'),
 		);
+		expect(getZIndex('card-link')).toBeGreaterThan(
+			getZIndex('frontSectionSideBorders'),
+		);
 	});
 });
