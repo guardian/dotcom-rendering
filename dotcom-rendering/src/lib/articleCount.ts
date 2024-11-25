@@ -19,6 +19,7 @@ export interface ArticleCounts {
 }
 
 export const shouldIncrementArticleCount = (contentType: string): boolean => {
+	// See https://github.com/guardian/frontend/blob/9c8707d894c858dd17de1c7c1499f6b91f5287bc/common/app/model/DotcomContentType.scala#L29
 	return [
 		'article',
 		'liveblog',
@@ -65,7 +66,6 @@ export const getWeeklyArticleCounts = async (
 	tags: TagType[],
 	contentType: string,
 ): Promise<WeeklyArticleHistory | undefined> => {
-	// See https://github.com/guardian/frontend/blob/9c8707d894c858dd17de1c7c1499f6b91f5287bc/common/app/model/DotcomContentType.scala#L29
 	if (await hasOptedOutOfWeeklyArticleCount()) return undefined;
 
 	if (!window.guardian.weeklyArticleCount) {
