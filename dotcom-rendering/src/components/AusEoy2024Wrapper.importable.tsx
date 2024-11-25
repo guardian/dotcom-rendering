@@ -149,18 +149,18 @@ const choiceCardAmounts: SelectedAmountsVariant = {
 	displayContributionType: ['ONE_OFF', 'MONTHLY', 'ANNUAL'],
 	amountsCardData: {
 		ONE_OFF: {
-			amounts: [75, 125],
-			defaultAmount: 75,
+			amounts: [75, 120],
+			defaultAmount: 120,
 			hideChooseYourAmount: false,
 		},
 		MONTHLY: {
-			amounts: [5, 15],
-			defaultAmount: 15,
+			amounts: [10, 20],
+			defaultAmount: 20,
 			hideChooseYourAmount: false,
 		},
 		ANNUAL: {
-			amounts: [60, 150],
-			defaultAmount: 150,
+			amounts: [80, 200],
+			defaultAmount: 200,
 			hideChooseYourAmount: false,
 		},
 	},
