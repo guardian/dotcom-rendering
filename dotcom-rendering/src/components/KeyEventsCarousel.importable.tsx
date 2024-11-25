@@ -7,7 +7,7 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
 import { useRef } from 'react';
-import { getVideoClient } from '../lib/bridgetApi';
+import { getInteractionClient } from '../lib/bridgetApi';
 import { palette } from '../palette';
 import type { Block } from '../types/blocks';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -125,11 +125,11 @@ export const KeyEventsCarousel = ({
 	};
 
 	const onTouchStart = async () => {
-		await getVideoClient().setFullscreen(true);
+		await getInteractionClient().disableArticleSwipe(true);
 	};
 
 	const onTouchEnd = async () => {
-		await getVideoClient().setFullscreen(false);
+		await getInteractionClient().disableArticleSwipe(false);
 	};
 
 	const filteredKeyEvents = keyEvents.filter(isValidKeyEvent);
