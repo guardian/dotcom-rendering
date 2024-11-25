@@ -126,6 +126,7 @@ const containerStylesUntilLeftCol = css`
 	display: grid;
 
 	grid-template-rows:
+		[spacing-top-start spacing-top-end] auto
 		[headline-start show-hide-start] auto
 		[show-hide-end headline-end content-toggleable-start content-start] auto
 		[content-end content-toggleable-end bottom-content-start] auto
@@ -174,6 +175,7 @@ const containerStylesUntilLeftCol = css`
 const containerStylesFromLeftCol = css`
 	${from.leftCol} {
 		grid-template-rows:
+			[spacing-top-start spacing-top-end] auto
 			[headline-start show-hide-start content-start] auto
 			[show-hide-end content-toggleable-start] auto
 			[headline-end treats-start] auto
@@ -194,6 +196,7 @@ const containerStylesFromLeftCol = css`
 
 	${from.wide} {
 		grid-template-rows:
+			[spacing-top-start spacing-top-end] auto
 			[headline-start content-start content-toggleable-start show-hide-start] auto
 			[show-hide-end] auto
 			[headline-end treats-start] auto
@@ -313,17 +316,15 @@ const sectionTreats = css`
 	}
 `;
 
-const decoration = (borderColour: string) => {
-	/** element which contains border and inner background colour, if set */
-	return css`
-		grid-row: 1 / -1;
-		grid-column: decoration;
+/** element which contains border and inner background colour, if set */
+const decoration = css`
+	grid-row: 1 / -1;
+	grid-column: decoration;
 
-		border-width: 1px;
-		border-color: ${borderColour};
-		border-style: none;
-	`;
-};
+	border-width: 1px;
+	border-color: ${schemePalette('--section-border')};
+	border-style: none;
+`;
 
 /** only visible once content stops sticking to left and right edges */
 const sideBorders = css`
@@ -331,6 +332,7 @@ const sideBorders = css`
 		margin: 0 -20px;
 		border-left-style: solid;
 		border-right-style: solid;
+		z-index: 1;
 	}
 `;
 
@@ -340,6 +342,41 @@ const topBorder = css`
 
 const bottomPadding = css`
 	padding-bottom: ${space[9]}px;
+`;
+
+const containerLevelBottomPadding = css`
+	padding-bottom: ${space[6]}px;
+`;
+
+/** Adds space above the border of primary level containers without
+ * causing gaps in the vertical side borders from tablet upwards
+ */
+const primaryLevelTopSpacer = css`
+	grid-row: spacing-top;
+	grid-column: 1 / -1;
+	height: ${space[4]}px;
+	background-color: ${schemePalette('--front-page-background')};
+	position: relative;
+`;
+
+/** Absolutely positioned horizontal rule within the primary level spacing element */
+const primaryLevelTopBorder = css`
+	height: 2px;
+	width: 100%;
+	background-color: ${schemePalette('--section-border-primary')};
+	position: absolute;
+	bottom: 0;
+	z-index: 2;
+`;
+
+const secondaryLevelTopBorder = css`
+	grid-row: spacing-top;
+	grid-column: content;
+	border-top: 1px solid ${schemePalette('--section-border-secondary')};
+
+	${from.leftCol} {
+		grid-column: title-start / hide-end;
+	}
 `;
 
 /**
@@ -461,10 +498,7 @@ export const FrontSection = ({
 		!!collectionId &&
 		!!pageId &&
 		!!ajaxUrl;
-	const showVerticalRule =
-		!hasPageSkin &&
-		containerLevel !== 'Primary' &&
-		containerLevel !== 'Secondary';
+	const showVerticalRule = !hasPageSkin && !containerLevel;
 
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
@@ -490,11 +524,28 @@ export const FrontSection = ({
 					),
 				}}
 			>
+				{!!containerLevel && (
+					<div
+						css={[
+							containerLevel === 'Primary' &&
+								primaryLevelTopSpacer,
+
+							showTopBorder &&
+								containerLevel === 'Secondary' &&
+								secondaryLevelTopBorder,
+						]}
+					>
+						{showTopBorder && containerLevel === 'Primary' && (
+							<div css={primaryLevelTopBorder} />
+						)}
+					</div>
+				)}
+
 				<div
 					css={[
-						decoration(schemePalette('--section-border')),
+						decoration,
 						sideBorders,
-						showTopBorder && topBorder,
+						showTopBorder && !containerLevel && topBorder,
 					]}
 				/>
 
@@ -558,7 +609,9 @@ export const FrontSection = ({
 					css={[
 						sectionContentPadded,
 						sectionBottomContent,
-						bottomPadding,
+						containerLevel
+							? containerLevelBottomPadding
+							: bottomPadding,
 					]}
 				>
 					{isString(targetedTerritory) &&
