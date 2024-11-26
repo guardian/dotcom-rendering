@@ -28,7 +28,6 @@ import { useConfig } from './ConfigContext';
 import { FormatBoundary } from './FormatBoundary';
 import { QuoteIcon } from './QuoteIcon';
 import { StarRating } from './StarRating/StarRating';
-import { useConfig } from './ConfigContext';
 
 interface Props {
 	richLinkIndex: number;
