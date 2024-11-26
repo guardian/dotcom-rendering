@@ -69,6 +69,7 @@ const meta = {
 		containerPalette: undefined,
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
+		aspectRatio: '4:5',
 	},
 	render: (args) => (
 		<FrontSection

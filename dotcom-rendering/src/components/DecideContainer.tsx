@@ -303,6 +303,7 @@ export const DecideContainer = ({
 						imageLoading={imageLoading}
 						containerPalette={containerPalette}
 						absoluteServerTimes={absoluteServerTimes}
+						aspectRatio={aspectRatio}
 					/>
 				</Island>
 			);
