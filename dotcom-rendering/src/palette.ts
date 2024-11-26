@@ -1173,7 +1173,11 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 			return sourcePalette.neutral[86];
 	}
 };
-const avatarLight: PaletteFunction = ({ design, theme }) => {
+const avatarLight: PaletteFunction = () => sourcePalette.neutral[93];
+
+const avatarDark: PaletteFunction = () => sourcePalette.neutral[93];
+
+const avatarColourLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
@@ -1228,7 +1232,7 @@ const avatarLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const avatarDark: PaletteFunction = ({ design, theme }) => {
+const avatarColourDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
@@ -6020,6 +6024,10 @@ const paletteColours = {
 	'--avatar-background': {
 		light: avatarLight,
 		dark: avatarDark,
+	},
+	'--avatar-background-colour': {
+		light: avatarColourLight,
+		dark: avatarColourDark,
 	},
 	'--block-quote-fill': {
 		light: blockQuoteFillLight,
