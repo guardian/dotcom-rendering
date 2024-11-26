@@ -718,7 +718,6 @@ export const renderElement = ({
 						host,
 						isPinnedPost,
 						starRating,
-						tags,
 					})}
 					format={format}
 				/>
