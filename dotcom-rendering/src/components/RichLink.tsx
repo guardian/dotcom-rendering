@@ -27,6 +27,7 @@ import { Avatar } from './Avatar';
 import { FormatBoundary } from './FormatBoundary';
 import { QuoteIcon } from './QuoteIcon';
 import { StarRating } from './StarRating/StarRating';
+import { useConfig } from './ConfigContext';
 
 interface Props {
 	richLinkIndex: number;
@@ -107,6 +108,14 @@ const labsTitleStyles = css`
 
 const bylineStyles = css`
 	color: ${themePalette('--rich-link-text')};
+	${headlineMedium14};
+
+	${from.wide} {
+		${headlineMedium20};
+	}
+`;
+
+const italicBylineStyles = css`
 	${headlineMediumItalic14};
 
 	${from.wide} {
@@ -201,6 +210,7 @@ export const RichLink = ({
 	contributorImage,
 	isPlaceholder,
 }: Props) => {
+	const { renderingTarget } = useConfig();
 	const linkText =
 		cardStyle === 'letters' ? `${headlineText} | Letters ` : headlineText;
 
@@ -267,7 +277,15 @@ export const RichLink = ({
 							</div>
 
 							{isOpinion && byline !== '' && (
-								<div css={bylineStyles}>{byline}</div>
+								<div
+									css={[
+										bylineStyles,
+										renderingTarget === 'Apps' &&
+											italicBylineStyles,
+									]}
+								>
+									{byline}
+								</div>
 							)}
 
 							{!isUndefined(starRating) ? (
