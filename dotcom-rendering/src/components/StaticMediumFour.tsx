@@ -1,4 +1,8 @@
-import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
+import type {
+	AspectRatio,
+	DCRContainerPalette,
+	DCRFrontCard,
+} from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
@@ -11,6 +15,7 @@ type Props = {
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	showImage?: boolean;
+	aspectRatio: AspectRatio;
 };
 
 export const StaticMediumFour = ({
@@ -20,6 +25,7 @@ export const StaticMediumFour = ({
 	absoluteServerTimes,
 	imageLoading,
 	showImage = true,
+	aspectRatio,
 }: Props) => {
 	const cards = trails.slice(0, 4);
 
@@ -51,7 +57,7 @@ export const StaticMediumFour = ({
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
 							imageSize={'medium'}
-							aspectRatio="5:4"
+							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}
 							showTopBarDesktop={false}

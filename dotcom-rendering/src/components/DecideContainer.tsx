@@ -295,6 +295,7 @@ export const DecideContainer = ({
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
+					aspectRatio={aspectRatio}
 				/>
 			);
 		case 'scrollable/feature':
