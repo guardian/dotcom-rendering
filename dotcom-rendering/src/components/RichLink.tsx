@@ -24,10 +24,10 @@ import type { ContentType, StarRating as Rating } from '../types/content';
 import type { RichLinkCardType } from '../types/layout';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
+import { useConfig } from './ConfigContext';
 import { FormatBoundary } from './FormatBoundary';
 import { QuoteIcon } from './QuoteIcon';
 import { StarRating } from './StarRating/StarRating';
-import { useConfig } from './ConfigContext';
 
 interface Props {
 	richLinkIndex: number;
