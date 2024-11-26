@@ -126,7 +126,7 @@ const overlayStyles = css`
 	justify-content: flex-start;
 	flex-grow: 1;
 	padding: ${space[2]}px;
-	row-gap: ${space[2]}px;
+	gap: ${space[1]}px;
 	backdrop-filter: blur(12px) brightness(0.7);
 `;
 
@@ -136,6 +136,10 @@ const starRatingWrapper = css`
 	margin-top: ${space[1]}px;
 	display: inline-block;
 	width: fit-content;
+`;
+
+const trailTextWrapper = css`
+	margin-top: ${space[3]}px;
 `;
 
 const getMedia = ({
@@ -377,33 +381,41 @@ export const FeatureCard = ({
 								<div className="image-overlay" />
 
 								<div css={overlayStyles}>
-									<CardHeadline
-										headlineText={headlineText}
-										format={format}
-										fontSizes={headlineSizes}
-										showQuotes={showQuotes}
-										kickerText={
-											format.design ===
-												ArticleDesign.LiveBlog &&
-											!kickerText
-												? 'Live'
-												: kickerText
-										}
-										showPulsingDot={
-											format.design ===
-												ArticleDesign.LiveBlog ||
-											showPulsingDot
-										}
-										byline={byline}
-										showByline={showByline}
-										isExternalLink={isExternalLink}
-										headlineColour={palette(
-											'--feature-card-headline',
-										)}
-										kickerColour={palette(
-											'--feature-card-kicker-text',
-										)}
-									/>
+									{/**
+									 * Without the wrapping div the headline and
+									 * byline would have space inserted between
+									 * them due to being direct children of the
+									 * flex container
+									 */}
+									<div>
+										<CardHeadline
+											headlineText={headlineText}
+											format={format}
+											fontSizes={headlineSizes}
+											showQuotes={showQuotes}
+											kickerText={
+												format.design ===
+													ArticleDesign.LiveBlog &&
+												!kickerText
+													? 'Live'
+													: kickerText
+											}
+											showPulsingDot={
+												format.design ===
+													ArticleDesign.LiveBlog ||
+												showPulsingDot
+											}
+											byline={byline}
+											showByline={showByline}
+											isExternalLink={isExternalLink}
+											headlineColour={palette(
+												'--feature-card-headline',
+											)}
+											kickerColour={palette(
+												'--feature-card-kicker-text',
+											)}
+										/>
+									</div>
 
 									{starRating !== undefined ? (
 										<div css={starRatingWrapper}>
@@ -415,13 +427,16 @@ export const FeatureCard = ({
 									) : null}
 
 									{!!trailText && (
-										<TrailText
-											trailText={trailText}
-											trailTextColour={palette(
-												'--feature-card-trail-text',
-											)}
-											trailTextSize={'regular'}
-										/>
+										<div css={trailTextWrapper}>
+											<TrailText
+												trailText={trailText}
+												trailTextColour={palette(
+													'--feature-card-trail-text',
+												)}
+												trailTextSize={'regular'}
+												padBottom={false}
+											/>
+										</div>
 									)}
 
 									<CardFooter
