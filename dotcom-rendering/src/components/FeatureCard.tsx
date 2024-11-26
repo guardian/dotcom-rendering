@@ -80,9 +80,9 @@ const baseCardStyles = css`
 	flex-direction: column;
 	justify-content: space-between;
 	width: 100%;
-	/* We absolutely position the faux link
-		so this is required here */
+	/* We absolutely position the faux link so this is required here */
 	position: relative;
+	background-color: ${palette('--feature-card-background')};
 
 	/* Target Safari 10.1 */
 	/* https://www.browserstack.com/guide/create-browser-specific-css */

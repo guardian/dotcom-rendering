@@ -6456,6 +6456,10 @@ const paletteColours = {
 		light: explainerAtomBackgroundLight,
 		dark: explainerAtomBackgroundDark,
 	},
+	'--feature-card-background': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[38],
+	},
 	'--feature-card-footer-text': {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
