@@ -193,7 +193,6 @@ const CardAge = ({
 				isWithinTwelveHours: withinTwelveHours,
 			}}
 			showClock={showClock}
-			isOnwardContent={false}
 			absoluteServerTimes={absoluteServerTimes}
 			isTagPage={false}
 			colour={palette('--feature-card-footer-text')}
@@ -237,7 +236,6 @@ const CommentCount = ({
 				<CardCommentCount
 					discussionApiUrl={discussionApiUrl}
 					discussionId={discussionId}
-					isOnwardContent={false}
 					colour={palette('--feature-card-footer-text')}
 				/>
 			</Island>
