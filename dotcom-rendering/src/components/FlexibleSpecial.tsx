@@ -1,5 +1,6 @@
 import type { BoostLevel } from '../types/content';
 import type {
+	AspectRatio,
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
@@ -22,6 +23,7 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
+	aspectRatio: AspectRatio;
 };
 
 type BoostProperties = {
@@ -110,12 +112,14 @@ export const OneCardLayout = ({
 	showAge,
 	absoluteServerTimes,
 	imageLoading,
+	aspectRatio,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
+	aspectRatio: AspectRatio;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -149,7 +153,7 @@ export const OneCardLayout = ({
 					supportingContent={card.supportingContent}
 					supportingContentAlignment={supportingContentAlignment}
 					imageLoading={imageLoading}
-					aspectRatio="5:4"
+					aspectRatio={aspectRatio}
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
 					liveUpdatesAlignment={liveUpdatesAlignment}
@@ -170,6 +174,7 @@ const TwoCardOrFourCardLayout = ({
 	absoluteServerTimes,
 	showImage = true,
 	imageLoading,
+	aspectRatio,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -177,6 +182,7 @@ const TwoCardOrFourCardLayout = ({
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	showImage?: boolean;
+	aspectRatio: AspectRatio;
 }) => {
 	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
@@ -210,7 +216,7 @@ const TwoCardOrFourCardLayout = ({
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
 							imageSize={'medium'}
-							aspectRatio="5:4"
+							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}
 							showTopBarDesktop={false}
@@ -229,6 +235,7 @@ export const FlexibleSpecial = ({
 	showAge,
 	absoluteServerTimes,
 	imageLoading,
+	aspectRatio,
 }: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1);
 	const splash = [...groupedTrails.standard].slice(0, 1);
@@ -242,6 +249,7 @@ export const FlexibleSpecial = ({
 				showAge={showAge}
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
+				aspectRatio={aspectRatio}
 			/>
 			<OneCardLayout
 				cards={splash}
@@ -249,6 +257,7 @@ export const FlexibleSpecial = ({
 				showAge={showAge}
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
+				aspectRatio={aspectRatio}
 			/>
 			<TwoCardOrFourCardLayout
 				cards={cards}
@@ -256,6 +265,7 @@ export const FlexibleSpecial = ({
 				showAge={showAge}
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
+				aspectRatio={aspectRatio}
 			/>
 		</>
 	);
