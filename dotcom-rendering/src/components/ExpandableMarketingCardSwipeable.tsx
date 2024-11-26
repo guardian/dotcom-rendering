@@ -35,7 +35,7 @@ const hideBannerStyles = css`
 const stickyContainerStyles = css`
 	position: sticky;
 	top: 0;
-	${getZIndex('expandableMarketingCardOverlay')};
+	z-index: ${getZIndex('expandableMarketingCardOverlay')};
 
 	/* The component slides in from the left-hand side */
 	animation: slidein 2.4s linear;
@@ -159,7 +159,10 @@ export const ExpandableMarketingCardSwipeable = ({
 
 	if (!isExpanded) {
 		return (
-			<div css={[stickyContainerStyles]}>
+			<div
+				data-component="us-expandable-marketing-card"
+				css={[stickyContainerStyles]}
+			>
 				<div
 					data-link-name="us-expandable-marketing-card expand"
 					css={[
@@ -236,7 +239,10 @@ export const ExpandableMarketingCardSwipeable = ({
 	}
 
 	return (
-		<div css={[stickyContainerStyles]}>
+		<div
+			data-component="us-expandable-marketing-card"
+			css={[stickyContainerStyles]}
+		>
 			<div
 				css={[absoluteContainerStyles]}
 				role="button"

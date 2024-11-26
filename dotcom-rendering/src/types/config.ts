@@ -1,6 +1,8 @@
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 
+export type StageType = 'DEV' | 'CODE' | 'PROD';
+
 export interface CommercialConfigType {
 	isPaidContent?: boolean;
 	pageId: string;

@@ -6,7 +6,7 @@ import type {
 } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import type { Branding, CollectionBranding, EditionBranding } from './branding';
-import type { ServerSideTests, Switches } from './config';
+import type { ServerSideTests, StageType, Switches } from './config';
 import type { BoostLevel, Image, Newsletter, StarRating } from './content';
 import type { FooterType } from './footer';
 import type { FEFormat, FENavType } from './frontend';
@@ -103,7 +103,9 @@ type FEContainerType =
 	| 'static/feature/2'
 	| 'static/medium/4';
 
-export type FEContainerPalette =
+export type FEContainerLevel = 'Primary' | 'Secondary';
+
+export type FEContainerMetadata =
 	| 'EventPalette'
 	| 'SombreAltPalette'
 	| 'EventAltPalette'
@@ -119,7 +121,8 @@ export type FEContainerPalette =
 	| 'Podcast'
 	| 'Branded'
 	| 'BreakingPalette'
-	| 'SpecialReportAltPalette';
+	| 'SpecialReportAltPalette'
+	| 'Secondary';
 
 export type FEFrontCardStyle =
 	| 'SpecialReport'
@@ -153,7 +156,7 @@ export type DCRContainerPalette =
 // TODO: These may need to be declared differently than the front types in the future
 export type DCRContainerType = FEContainerType;
 
-export type DCRContainerLevel = 'Primary' | 'Secondary';
+export type DCRContainerLevel = FEContainerLevel;
 
 /** @see https://github.com/guardian/frontend/blob/0bf69f55a/common/app/model/content/Atom.scala#L191-L196 */
 interface MediaAsset {
@@ -365,10 +368,13 @@ export type DCRSnapType = {
 	newsletter?: Newsletter;
 };
 
+export type AspectRatio = '5:3' | '5:4' | '4:5' | '1:1';
+
 type FECollectionConfigType = {
 	displayName: string;
-	metadata?: { type: FEContainerPalette }[];
+	metadata?: { type: FEContainerMetadata }[];
 	collectionType: FEContainerType;
+	collectionLevel?: FEContainerLevel;
 	href?: string;
 	groups?: string[];
 	uneditable: boolean;
@@ -381,6 +387,7 @@ type FECollectionConfigType = {
 	showTimestamps: boolean;
 	hideShowMore: boolean;
 	platform: string;
+	aspectRatio?: AspectRatio;
 };
 
 export type FECollectionType = {
@@ -418,6 +425,7 @@ export type DCRCollectionType = {
 	href?: string;
 	config: {
 		showDateHeader: boolean;
+		containerLevel?: DCRContainerLevel;
 	};
 	/**
 	 * @property {?boolean} canShowMore - Whether the 'show more' button should be shown.
@@ -428,6 +436,7 @@ export type DCRCollectionType = {
 	canShowMore?: boolean;
 	collectionBranding?: CollectionBranding;
 	targetedTerritory?: Territory;
+	aspectRatio?: AspectRatio;
 };
 
 export type DCRGroupedTrails = {

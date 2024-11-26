@@ -1,6 +1,7 @@
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { FEArticleBadgeType } from './badge';
+import type { Block } from './blocks';
 import type {
 	CommercialProperties,
 	ReaderRevenuePositions,
@@ -13,6 +14,7 @@ import type {
 	StarRating,
 } from './content';
 import type { FooterType } from './footer';
+import type { PaginationType } from './liveBlog';
 import type { FEOnwards } from './onwards';
 import type { MatchType } from './sport';
 import type { TagType } from './tag';
@@ -35,7 +37,7 @@ export interface FEArticleType {
 	keyEvents: Block[];
 	blocks: Block[];
 	pinnedPost?: Block;
-	pagination?: Pagination;
+	pagination?: PaginationType;
 	byline?: string;
 	/** @deprecated - will be removed in the next model version */
 	author?: unknown;

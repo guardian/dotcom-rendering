@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import type { DCRContainerType } from '../../../types/front';
+import type { CardImageType } from '../../../types/layout';
 import type { ImagePositionType } from './ImageWrapper';
 
 const padding = 20;

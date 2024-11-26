@@ -10,12 +10,12 @@ import {
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import { palette } from '../../palette';
+import type { AspectRatio } from '../../types/front';
 import type {
 	ImagePositionType,
 	ImageSizeType,
 } from '../Card/components/ImageWrapper';
 import { PlayIcon } from '../Card/components/PlayIcon';
-import type { AspectRatio } from '../CardPicture';
 import { FormatBoundary } from '../FormatBoundary';
 import { Kicker } from '../Kicker';
 import { secondsToDuration } from '../MediaDuration';

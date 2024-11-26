@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isObject } from '@guardian/libs';
 import { from } from '@guardian/source/foundations';
 import type { SWRConfiguration } from 'swr';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
@@ -35,6 +36,36 @@ const fallbackData = {
 	homeTeam: fallbackTeam,
 	awayTeam: fallbackTeam,
 } satisfies MatchData;
+
+const validateMatchData = (data: unknown): data is MatchData => {
+	if (!isObject(data)) {
+		return false;
+	}
+
+	const homeTeam = data.homeTeam;
+	if (
+		!isObject(homeTeam) ||
+		typeof homeTeam.name !== 'string' ||
+		homeTeam.name.length === 0 ||
+		typeof homeTeam.score !== 'number' ||
+		isNaN(homeTeam.score)
+	) {
+		return false;
+	}
+
+	const awayTeam = data.awayTeam;
+	if (
+		!isObject(awayTeam) ||
+		typeof awayTeam.name !== 'string' ||
+		awayTeam.name.length === 0 ||
+		typeof awayTeam.score !== 'number' ||
+		isNaN(awayTeam.score)
+	) {
+		return false;
+	}
+
+	return true;
+};
 
 /**
  * Wrapper around `MatchNav` with loading and fallback.
@@ -97,7 +128,14 @@ export const GetMatchNav = ({
 			);
 		}
 	}
-	if (data) {
+
+	if (!data) {
+		// this should never happen because we pass fallback data to SWR
+		return null;
+	}
+
+	const isDataValid = validateMatchData(data);
+	if (isDataValid) {
 		return (
 			<MatchNav
 				homeTeam={data.homeTeam}
@@ -107,6 +145,6 @@ export const GetMatchNav = ({
 		);
 	}
 
-	// this should never happen because we pass fallback data to SWR
+	// Invalid data indicates that we do not have the data for this fixture, likely because the match is old.
 	return null;
 };

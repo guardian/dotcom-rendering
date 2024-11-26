@@ -14,6 +14,7 @@ import { palette } from '../../palette';
 import type { Branding } from '../../types/branding';
 import type { StarRating as Rating } from '../../types/content';
 import type {
+	AspectRatio,
 	DCRContainerPalette,
 	DCRContainerType,
 	DCRFrontImage,
@@ -26,7 +27,7 @@ import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
 import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
-import type { AspectRatio, Loading } from '../CardPicture';
+import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { FrontNewsletterSignup } from '../FrontNewsletterSignup';
 import { Island } from '../Island';
@@ -34,6 +35,7 @@ import { LatestLinks } from '../LatestLinks.importable';
 import { MediaDuration } from '../MediaDuration';
 import { MediaMeta } from '../MediaMeta';
 import { Slideshow } from '../Slideshow';
+import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
 import { SnapCssSandbox } from '../SnapCssSandbox';
 import { StarRating } from '../StarRating/StarRating';
@@ -365,9 +367,9 @@ export const Card = ({
 				href={`${linkTo}#comments`}
 				cssOverrides={css`
 					/* See: https://css-tricks.com/nested-links/ */
-					${getZIndex('card-nested-link')}
+					z-index: ${getZIndex('card-nested-link')};
 					/* The following styles turn off those provided by Link */
-				color: inherit;
+					color: inherit;
 					/* stylelint-disable-next-line property-disallowed-list */
 					font-family: inherit;
 					font-size: inherit;
@@ -615,14 +617,37 @@ export const Card = ({
 						imagePositionOnDesktop={imagePositionOnDesktop}
 						imagePositionOnMobile={imagePositionOnMobile}
 						showPlayIcon={showPlayIcon}
+						hideImageOverlay={
+							media.type === 'slideshow' && isFlexibleContainer
+						}
 					>
-						{media.type === 'slideshow' && (
-							<Slideshow
-								images={media.slideshowImages}
-								imageSize={imageSize}
-								isDynamo={isDynamo}
-							/>
-						)}
+						{media.type === 'slideshow' &&
+							(isFlexibleContainer ? (
+								<div
+									css={css`
+										position: relative;
+										z-index: ${getZIndex(
+											'card-nested-link',
+										)};
+									`}
+								>
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
+										<SlideshowCarousel
+											images={media.slideshowImages}
+											imageSize={imageSize}
+										/>
+									</Island>
+								</div>
+							) : (
+								<Slideshow
+									images={media.slideshowImages}
+									imageSize={imageSize}
+									isDynamo={isDynamo}
+								/>
+							))}
 						{media.type === 'avatar' && (
 							<AvatarContainer
 								imageSize={imageSize}
@@ -643,7 +668,9 @@ export const Card = ({
 										css={css`
 											display: block;
 											position: relative;
-											${getZIndex('card-nested-link')}
+											z-index: ${getZIndex(
+												'card-nested-link',
+											)};
 										`}
 									>
 										<Island

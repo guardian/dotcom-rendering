@@ -5,6 +5,7 @@ import { blockLink } from '../lib/block-link.amp';
 import type { EditionId } from '../lib/edition';
 import { findBlockAdSlots } from '../lib/find-adslots.amp';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
+import type { Block } from '../types/blocks';
 import type { AdTargeting, CommercialProperties } from '../types/commercial';
 import type { Switches } from '../types/config';
 import { Elements } from './Elements.amp';

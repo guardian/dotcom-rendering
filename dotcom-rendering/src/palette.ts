@@ -4087,6 +4087,37 @@ const interactiveBlockBackgroundLight: PaletteFunction = ({
 
 const interactiveBlockBackgroundDark = () => sourcePalette.neutral[100];
 
+const interactiveBlockBackgroundDatawrapperDark: PaletteFunction = ({
+	design,
+	theme,
+}) => {
+	switch (design) {
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.LiveBlog:
+			return sourcePalette.neutral[10]; // same as liveBlockContainerBackgroundDark
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[100]; // same as articleBackgroundDark
+				default:
+					return sourcePalette.neutral[10]; // same as articleBackgroundDark
+			}
+		default:
+			return sourcePalette.neutral[10]; // same as articleBackgroundDark
+	}
+};
+
 const mostViewedHeadlineLight = (): string => sourcePalette.neutral[7];
 const mostViewedHeadlineDark = (): string => sourcePalette.neutral[86];
 
@@ -4391,6 +4422,17 @@ const carouselChevronBorderDisabledLight: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[73], 0.32);
 const carouselChevronBorderDisabledDark: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[73], 0.32);
+
+const slideshowCaptionLight: PaletteFunction = () => sourcePalette.neutral[100];
+const slideshowCaptionDark: PaletteFunction = () => sourcePalette.neutral[100];
+const slideshowPaginationDotLight: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[7], 0.2);
+const slideshowPaginationDotDark: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[86], 0.2);
+const slideshowPaginationDotActiveLight: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+const slideshowPaginationDotActiveDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
 
 const mostViewedFooterHoverLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
@@ -6551,6 +6593,10 @@ const paletteColours = {
 		light: interactiveBlockBackgroundLight,
 		dark: interactiveBlockBackgroundDark,
 	},
+	'--interactive-block-background-datawrapper': {
+		light: interactiveBlockBackgroundLight,
+		dark: interactiveBlockBackgroundDatawrapperDark,
+	},
 	'--interactive-contents-hover': {
 		light: interactiveContentsHoverLight,
 		dark: interactiveContentsHoverDark,
@@ -6982,6 +7028,18 @@ const paletteColours = {
 	'--sign-in-link-underline': {
 		light: signInLinkLineLight,
 		dark: signInLinkLineDark,
+	},
+	'--slideshow-caption': {
+		light: slideshowCaptionLight,
+		dark: slideshowCaptionDark,
+	},
+	'--slideshow-pagination-dot': {
+		light: slideshowPaginationDotLight,
+		dark: slideshowPaginationDotDark,
+	},
+	'--slideshow-pagination-dot-active': {
+		light: slideshowPaginationDotActiveLight,
+		dark: slideshowPaginationDotActiveDark,
 	},
 	'--staff-contributor-badge': {
 		light: staffBadgeLight,

@@ -2,12 +2,12 @@ import { css } from '@emotion/react';
 import { breakpoints, space } from '@guardian/source/foundations';
 import type { ImgHTMLAttributes } from 'react';
 import React from 'react';
+import type { AspectRatio } from '../types/front';
 import type { ImageSizeType } from './Card/components/ImageWrapper';
 import type { ImageWidthType } from './Picture';
 import { generateSources, getFallbackSource } from './Picture';
 
 export type Loading = NonNullable<ImgHTMLAttributes<unknown>['loading']>;
-export type AspectRatio = '5:3' | '5:4' | '4:5';
 
 type Props = {
 	imageSize: ImageSizeType;

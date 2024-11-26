@@ -5,7 +5,11 @@ import { buildLightboxImages } from '../model/buildLightboxImages';
 import { enhanceBlocks, enhanceMainMedia } from '../model/enhanceBlocks';
 import { enhanceCommercialProperties } from '../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../model/enhanceStandfirst';
-import { enhanceTableOfContents } from '../model/enhanceTableOfContents';
+import {
+	enhanceTableOfContents,
+	type TableOfContentsItem,
+} from '../model/enhanceTableOfContents';
+import { enhancePinnedPost } from '../model/pinnedPost';
 import type { ImageForLightbox } from './content';
 import type { FEArticleType } from './frontend';
 import { type RenderingTarget } from './renderingTarget';
@@ -24,30 +28,6 @@ export type ArticleDeprecated = FEArticleType & {
 export type Article = {
 	format: ArticleFormat;
 	frontendData: ArticleDeprecated;
-};
-
-export interface TableOfContents {
-	items: TableOfContentsItem[];
-}
-
-export interface TableOfContentsItem {
-	id: string;
-	title: string;
-}
-
-const enhancePinnedPost = (
-	format: ArticleFormat,
-	renderingTarget: RenderingTarget,
-	block?: Block,
-): Block | undefined => {
-	if (!block) return;
-
-	return enhanceBlocks([block], format, {
-		renderingTarget,
-		imagesForLightbox: [],
-		promotedNewsletter: undefined,
-		hasAffiliateLinksDisclaimer: false,
-	})[0];
 };
 
 export const enhanceArticleType = (

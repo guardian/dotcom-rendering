@@ -21,6 +21,7 @@ import type {
 	DCRContainerType,
 	DCRFrontImage,
 } from '../types/front';
+import type { LeftColSize } from '../types/layout';
 import type { MainMedia } from '../types/mainMedia';
 import type { OnwardsSource } from '../types/onwards';
 import type { TrailType } from '../types/trails';
@@ -254,7 +255,7 @@ const buttonContainerStyle = css`
 	flex-direction: column;
 	justify-content: center;
 	position: absolute;
-	${getZIndex('onwardsCarousel')}
+	z-index: ${getZIndex('onwardsCarousel')};
 	height: 100%;
 	padding-bottom: 36px; /* Align buttons centrally with cards */
 

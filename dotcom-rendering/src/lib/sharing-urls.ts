@@ -1,3 +1,5 @@
+import type { SharePlatform } from '../types/layout';
+
 const appendParamsToBaseUrl: (
 	baseUrl: string,
 	params: {

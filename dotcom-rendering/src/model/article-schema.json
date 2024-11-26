@@ -39,7 +39,7 @@
             "$ref": "#/definitions/Block"
         },
         "pagination": {
-            "$ref": "#/definitions/Pagination"
+            "$ref": "#/definitions/PaginationType"
         },
         "byline": {
             "type": "string"
@@ -4101,7 +4101,7 @@
                 "name"
             ]
         },
-        "Pagination": {
+        "PaginationType": {
             "type": "object",
             "properties": {
                 "currentPage": {

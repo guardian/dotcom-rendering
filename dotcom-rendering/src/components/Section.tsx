@@ -5,6 +5,7 @@ import type { EditionId } from '../lib/edition';
 import { hiddenStyles } from '../lib/hiddenStyles';
 import { palette } from '../palette';
 import type { TreatType } from '../types/front';
+import type { LeftColSize } from '../types/layout';
 import { ContainerTitle } from './ContainerTitle';
 import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';

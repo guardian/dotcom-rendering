@@ -19,7 +19,7 @@ const container = css`
 	position: relative;
 	top: 0;
 	background-color: ${palette.brand[800]};
-	${getZIndex('editionSwitcherBanner')};
+	z-index: ${getZIndex('editionSwitcherBanner')};
 `;
 
 const content = css`
