@@ -316,6 +316,7 @@ export const DecideContainer = ({
 					containerPalette={containerPalette}
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
+					aspectRatio={aspectRatio}
 				/>
 			);
 		default:

@@ -1,5 +1,9 @@
 import { ArticleDesign } from '../lib/articleFormat';
-import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
+import type {
+	AspectRatio,
+	DCRContainerPalette,
+	DCRFrontCard,
+} from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
@@ -10,12 +14,14 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	absoluteServerTimes: boolean;
+	aspectRatio: AspectRatio;
 };
 export const StaticFeatureTwo = ({
 	trails,
 	containerPalette,
 	absoluteServerTimes,
 	imageLoading,
+	aspectRatio,
 }: Props) => {
 	const cards = trails.slice(0, 2);
 
@@ -61,7 +67,7 @@ export const StaticFeatureTwo = ({
 							trailText={card.trailText}
 							absoluteServerTimes={absoluteServerTimes}
 							imageLoading={imageLoading}
-							aspectRatio="4:5"
+							aspectRatio={aspectRatio}
 							imageSize="feature-large"
 							headlineSizes={{
 								desktop: 'medium',
