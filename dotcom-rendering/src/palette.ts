@@ -2523,11 +2523,8 @@ const cardMetaTextLight: PaletteFunction = (format) =>
 
 const cardMetaTextDark: PaletteFunction = () => sourcePalette.neutral[60];
 
-const cardBackgroundLight: PaletteFunction = (format) =>
+const cardBackground: PaletteFunction = (format) =>
 	isMediaCard(format) ? sourcePalette.neutral[20] : 'transparent';
-
-const cardBackgroundDark: PaletteFunction = (format) =>
-	isMediaCard(format) ? sourcePalette.neutral[10] : 'transparent';
 
 const cardHeadlineTextLight: PaletteFunction = (format) =>
 	isMediaCard(format) ? sourcePalette.neutral[100] : sourcePalette.neutral[7];
@@ -6084,8 +6081,8 @@ const paletteColours = {
 		dark: captionTextDark,
 	},
 	'--card-background': {
-		light: cardBackgroundLight,
-		dark: cardBackgroundDark,
+		light: cardBackground,
+		dark: cardBackground,
 	},
 	'--card-background-hover': {
 		light: cardBackgroundHover,
