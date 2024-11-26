@@ -6,7 +6,7 @@ import {
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
-import { AuEoy2024Wrapper } from '../components/AusEoy2024Wrapper.importable';
+import { AuEoy2024Wrapper } from '../components/AuEoy2024Wrapper.importable';
 import { Carousel } from '../components/Carousel.importable';
 import { ContainerOverrides } from '../components/ContainerOverrides';
 import { CPScottHeader } from '../components/CPScottHeader';

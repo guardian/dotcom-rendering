@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { AuEoy2024 } from './AusEoy2024Wrapper.importable';
+import { AuEoy2024 } from './AuEoy2024Wrapper.importable';
 
 const meta = {
 	title: 'Components/AusEoy2024',
