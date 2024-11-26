@@ -76,6 +76,7 @@ const listElements = [
 	'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement',
 	'model.dotcomrendering.pageElements.ListBlockElement',
 	'model.dotcomrendering.pageElements.MiniProfilesBlockElement',
+	'model.dotcomrendering.pageElements.MultiBylinesBlockElement',
 	'model.dotcomrendering.pageElements.TimelineBlockElement',
 	'model.dotcomrendering.pageElements.QAndAExplainerBlockElement',
 ];
