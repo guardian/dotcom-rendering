@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import {
-	headlineBold14,
 	headlineBold24,
 	space,
 	textSans14,
 	until,
 } from '@guardian/source/foundations';
 import { SvgGuardianLogo } from '@guardian/source/react-components';
+import type { EditionId } from '../lib/edition';
 import type { ColourName } from '../palette';
 import { palette as schemePalette } from '../palette';
 import type { Newsletter } from '../types/content';
@@ -20,6 +20,8 @@ import { SecureSignup } from './SecureSignup.importable';
 interface Props {
 	newsletter: Newsletter;
 	containerPalette?: DCRContainerPalette;
+	editionId: EditionId;
+	discussionApiUrl: string;
 }
 
 const logoContainerStyle = () => css`
@@ -43,13 +45,15 @@ const getThemeBackgroundColour = (newsletterTheme: string): ColourName => {
 export const ThrasherSlotNewsletterSignup = ({
 	newsletter,
 	containerPalette,
+	editionId,
+	discussionApiUrl,
 }: Props) => {
 	return (
 		<ContainerOverrides containerPalette={containerPalette}>
 			<FrontSection
 				containerPalette={containerPalette}
-				editionId="UK"
-				discussionApiUrl="/"
+				editionId={editionId}
+				discussionApiUrl={discussionApiUrl}
 				leftContent={
 					<div css={[logoContainerStyle()]}>
 						<SvgGuardianLogo

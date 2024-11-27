@@ -22,13 +22,21 @@ const newsletter = {
 };
 
 export const standard = () => {
-	return <ThrasherSlotNewsletterSignup newsletter={newsletter} />;
+	return (
+		<ThrasherSlotNewsletterSignup
+			newsletter={newsletter}
+			editionId={'UK'}
+			discussionApiUrl={''}
+		/>
+	);
 };
 
 export const sport = () => {
 	return (
 		<ThrasherSlotNewsletterSignup
 			newsletter={{ ...newsletter, theme: 'sport' }}
+			editionId={'UK'}
+			discussionApiUrl={''}
 		/>
 	);
 };
@@ -36,6 +44,8 @@ export const culture = () => {
 	return (
 		<ThrasherSlotNewsletterSignup
 			newsletter={{ ...newsletter, theme: 'culture' }}
+			editionId={'UK'}
+			discussionApiUrl={''}
 		/>
 	);
 };
@@ -43,6 +53,8 @@ export const lifestyle = () => {
 	return (
 		<ThrasherSlotNewsletterSignup
 			newsletter={{ ...newsletter, theme: 'lifestyle' }}
+			editionId={'UK'}
+			discussionApiUrl={''}
 		/>
 	);
 };
@@ -50,6 +62,8 @@ export const opinion = () => {
 	return (
 		<ThrasherSlotNewsletterSignup
 			newsletter={{ ...newsletter, theme: 'opinion' }}
+			editionId={'UK'}
+			discussionApiUrl={''}
 		/>
 	);
 };
@@ -59,6 +73,8 @@ export const withInvestigationPalette = () => {
 		<ThrasherSlotNewsletterSignup
 			containerPalette={'InvestigationPalette'}
 			newsletter={newsletter}
+			editionId={'UK'}
+			discussionApiUrl={''}
 		/>
 	);
 };
@@ -67,6 +83,8 @@ export const withSombrePalette = () => {
 		<ThrasherSlotNewsletterSignup
 			containerPalette={'SombrePalette'}
 			newsletter={newsletter}
+			editionId={'UK'}
+			discussionApiUrl={''}
 		/>
 	);
 };
@@ -75,6 +93,8 @@ export const withBreakingPalette = () => {
 		<ThrasherSlotNewsletterSignup
 			containerPalette={'BreakingPalette'}
 			newsletter={newsletter}
+			editionId={'UK'}
+			discussionApiUrl={''}
 		/>
 	);
 };
