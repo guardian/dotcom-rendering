@@ -77,6 +77,16 @@ const decideDirection = (
 
 	if (hasAvatar) {
 		if (
+			(imagePositionOnDesktop === 'left' ||
+				imagePositionOnDesktop === 'right') &&
+			imagePositionOnMobile === 'bottom'
+		) {
+			return {
+				mobile: imagePosition['bottom'],
+				desktop: imagePosition['right'],
+			};
+		}
+		if (
 			imagePositionOnMobile === 'bottom' &&
 			imagePositionOnDesktop === 'bottom'
 		) {
