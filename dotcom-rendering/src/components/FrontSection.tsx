@@ -126,7 +126,6 @@ const containerStylesUntilLeftCol = css`
 	display: grid;
 
 	grid-template-rows:
-		[spacing-top-start spacing-top-end] auto
 		[headline-start show-hide-start] auto
 		[show-hide-end headline-end content-toggleable-start content-start] auto
 		[content-end content-toggleable-end bottom-content-start] auto
@@ -175,7 +174,6 @@ const containerStylesUntilLeftCol = css`
 const containerStylesFromLeftCol = css`
 	${from.leftCol} {
 		grid-template-rows:
-			[spacing-top-start spacing-top-end] auto
 			[headline-start show-hide-start content-start] auto
 			[show-hide-end content-toggleable-start] auto
 			[headline-end treats-start] auto
@@ -196,7 +194,6 @@ const containerStylesFromLeftCol = css`
 
 	${from.wide} {
 		grid-template-rows:
-			[spacing-top-start spacing-top-end] auto
 			[headline-start content-start content-toggleable-start show-hide-start] auto
 			[show-hide-end] auto
 			[headline-end treats-start] auto
@@ -390,7 +387,7 @@ const primaryLevelTopSpacer = css`
 `;
 
 const primaryLevelTopBorder = css`
-	grid-row: spacing-top;
+	grid-row: 1;
 	grid-column: 1 / -1;
 	border-top: 2px solid ${schemePalette('--section-border-primary')};
 	/** Ensures the top border sits above the side borders */
@@ -398,7 +395,7 @@ const primaryLevelTopBorder = css`
 `;
 
 const secondaryLevelTopBorder = css`
-	grid-row: spacing-top;
+	grid-row: 1;
 	grid-column: decoration;
 	border-top: 1px solid ${schemePalette('--section-border-secondary')};
 `;
