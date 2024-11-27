@@ -1,14 +1,13 @@
-import { FrontNewsletterSignup } from './FrontNewsletterSignup';
+import { ThrasherSlotNewsletterSignup } from './ThrasherSlotNewsletterSignup';
 
 export default {
-	component: FrontNewsletterSignup,
-	title: 'Components/FrontNewsletterSignup',
+	component: ThrasherSlotNewsletterSignup,
+	title: 'Components/ThrasherSlotNewsletterSignup',
 };
 
-export const inThrasher = () => {
+export const standard = () => {
 	return (
-		<FrontNewsletterSignup
-			containerType="fixed/thrasher"
+		<ThrasherSlotNewsletterSignup
 			newsletter={{
 				identityName: 'morning-mail',
 				name: 'Morning Mail',
