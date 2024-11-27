@@ -91,6 +91,7 @@ type Props = {
 	isTimeline?: boolean;
 	totalElements?: number;
 	isListElement?: boolean;
+	isSectionedMiniProfilesArticle?: boolean;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -150,6 +151,7 @@ export const renderElement = ({
 	isTimeline = false,
 	totalElements = 0,
 	isListElement = false,
+	isSectionedMiniProfilesArticle = false,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -490,6 +492,7 @@ export const renderElement = ({
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
 					isLastElement={index === totalElements - 1}
+					sectioned={!!isSectionedMiniProfilesArticle}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
@@ -891,6 +894,7 @@ export const RenderArticleElement = ({
 	isTimeline,
 	totalElements,
 	isListElement,
+	isSectionedMiniProfilesArticle,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -915,6 +919,7 @@ export const RenderArticleElement = ({
 		isTimeline,
 		totalElements,
 		isListElement,
+		isSectionedMiniProfilesArticle,
 	});
 
 	const needsFigure = !bareElements.has(element._type);
