@@ -26,7 +26,7 @@ export const renderCrosswordHtml = ({
 	};
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
-			<EditionsCrosswordPage editionsCrosswords={editionsCrosswords} />,
+			<EditionsCrosswordPage editionsCrosswords={editionsCrosswords} />
 		</ConfigProvider>,
 	);
 

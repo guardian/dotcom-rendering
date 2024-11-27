@@ -1,54 +1,50 @@
+import type { CrosswordData } from '@guardian/source-development-kitchen/dist/react-components/crossword/@types/crossword';
 import { EditionsCrossword } from '../components/EditionsCrossword.importable';
 import { Island } from '../components/Island';
 import type { FEEditionsCrossword } from '../types/editionsCrossword';
 
 interface Props {
-	editionsCrossword: FEEditionsCrossword;
+	editionsCrosswords: FEEditionsCrossword[];
 }
 
-export const EditionsCrosswordLayout = ({ editionsCrossword }: Props) => {
-	const crossword: FEEditionsCrossword = editionsCrossword;
-	if (
-		!crossword.number ||
-		!crossword.name ||
-		!crossword.date ||
-		!crossword.solutionAvailable ||
-		!crossword.pdf
-	) {
-		console.error('Crossword data is missing or incomplete:', crossword);
-		return null;
-	}
+const getTodaysCrosswords = (
+	editionsCrosswords: FEEditionsCrossword[],
+): FEEditionsCrossword[] => {
+	const today = new Date().toISOString().split('T')[0] ?? '2024-11-27';
+
+	return editionsCrosswords.filter(({ date }) => {
+		return date.startsWith(today);
+	});
+};
+
+const transformCrosswordData = (crossword: FEEditionsCrossword) => ({
+	id: crossword.name,
+	number: crossword.number,
+	name: crossword.name,
+	creator: crossword.creator,
+	date: new Date(crossword.date).getTime(),
+	webPublicationDate: new Date(crossword.date).getTime(),
+	entries: crossword.entries,
+	solutionAvailable: crossword.solutionAvailable,
+	dateSolutionAvailable: new Date(crossword.dateSolutionAvailable).getTime(),
+	dimensions: crossword.dimensions,
+	crosswordType: crossword.type as CrosswordData['crosswordType'],
+	pdf: crossword.pdf,
+});
+
+export const EditionsCrosswordLayout = ({ editionsCrosswords }: Props) => {
+	const todaysCrosswords = getTodaysCrosswords(editionsCrosswords);
+
 	return (
 		<main data-layout="EditionsCrosswordLayout">
-			<Island priority="critical">
-				<EditionsCrossword
-					data={{
-						id: crossword.name,
-						number: crossword.number,
-						name: crossword.name,
-						creator: crossword.creator,
-						date: new Date(crossword.date).getTime(),
-						webPublicationDate: new Date(crossword.date).getTime(),
-						entries: crossword.entries,
-						solutionAvailable: crossword.solutionAvailable,
-						dateSolutionAvailable: new Date(
-							crossword.dateSolutionAvailable,
-						).getTime(),
-						dimensions: crossword.dimensions,
-						crosswordType: crossword.type as
-							| 'cryptic'
-							| 'everyman'
-							| 'prize'
-							| 'quick-cryptic'
-							| 'quick'
-							| 'quiptic'
-							| 'special'
-							| 'speedy'
-							| 'weekend',
-						pdf: crossword.pdf,
-					}}
-				/>
-			</Island>
+			{todaysCrosswords.map((crossword) => {
+				const data = transformCrosswordData(crossword);
+				return (
+					<Island priority="critical" key={data.id}>
+						<EditionsCrossword data={data} />
+					</Island>
+				);
+			})}
 		</main>
 	);
 };
