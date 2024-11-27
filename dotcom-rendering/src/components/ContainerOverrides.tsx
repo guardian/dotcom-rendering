@@ -34,6 +34,8 @@ const cardHeadlineLight: ContainerFunction = (
 			return sourcePalette.neutral[20];
 		case 'MediaPalette':
 			return sourcePalette.neutral[100];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.neutral[100];
 	}
 };
 const cardHeadlineDark: ContainerFunction = (
@@ -64,6 +66,8 @@ const cardHeadlineDark: ContainerFunction = (
 			return sourcePalette.neutral[86];
 		case 'MediaPalette':
 			return sourcePalette.neutral[100];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.neutral[0];
 	}
 };
 
@@ -95,6 +99,8 @@ const cardTrailTextLight: ContainerFunction = (
 			return sourcePalette.neutral[38];
 		case 'MediaPalette':
 			return sourcePalette.neutral[93];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.neutral[0];
 	}
 };
 const cardTrailTextDark: ContainerFunction = (
@@ -125,6 +131,8 @@ const cardTrailTextDark: ContainerFunction = (
 			return sourcePalette.neutral[86];
 		case 'MediaPalette':
 			return sourcePalette.neutral[100];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.neutral[0];
 	}
 };
 
@@ -153,6 +161,8 @@ const cardKickerTextLight: ContainerFunction = (containerPalette) => {
 		case 'PodcastPalette':
 		case 'MediaPalette':
 			return sourcePalette.neutral[7];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.neutral[0];
 	}
 };
 
@@ -181,6 +191,8 @@ const cardKickerTextDark: ContainerFunction = (containerPalette) => {
 		case 'PodcastPalette':
 		case 'MediaPalette':
 			return sourcePalette.neutral[7];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.neutral[0];
 	}
 };
 
@@ -208,6 +220,7 @@ const kickerTextLiveLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[97];
 		case 'MediaPalette':
 		case 'PodcastPalette':
+		case 'NewsletterSignUpPalette':
 			return 'inherit';
 	}
 };
@@ -236,6 +249,7 @@ const kickerTextLiveDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[20];
 		case 'MediaPalette':
 		case 'PodcastPalette':
+		case 'NewsletterSignUpPalette':
 			return 'inherit';
 	}
 };
@@ -264,6 +278,7 @@ const kickerBackgroundLiveLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.labs[200];
 		case 'PodcastPalette':
 		case 'MediaPalette':
+		case 'NewsletterSignUpPalette':
 			return sourcePalette.neutral[7];
 	}
 };
@@ -291,6 +306,7 @@ const kickerBackgroundLiveDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.labs[400];
 		case 'PodcastPalette':
 		case 'MediaPalette':
+		case 'NewsletterSignUpPalette':
 			return sourcePalette.neutral[7];
 	}
 };
@@ -321,6 +337,8 @@ const sectionToggleButtonLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[46];
 		case 'PodcastPalette':
 			return sourcePalette.neutral[86];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.neutral[86];
 	}
 };
 const sectionToggleButtonDark: ContainerFunction = (containerPalette) => {
@@ -348,6 +366,8 @@ const sectionToggleButtonDark: ContainerFunction = (containerPalette) => {
 		case 'MediaPalette':
 			return sourcePalette.neutral[46];
 		case 'PodcastPalette':
+			return sourcePalette.neutral[86];
+		case 'NewsletterSignUpPalette':
 			return sourcePalette.neutral[86];
 	}
 };
@@ -377,6 +397,8 @@ const sectionToggleButtonHoverLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[7];
 		case 'PodcastPalette':
 			return sourcePalette.neutral[100];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.neutral[100];
 	}
 };
 const sectionToggleButtonHoverDark: ContainerFunction = (containerPalette) => {
@@ -404,6 +426,8 @@ const sectionToggleButtonHoverDark: ContainerFunction = (containerPalette) => {
 		case 'MediaPalette':
 			return 'inherit';
 		case 'PodcastPalette':
+			return 'inherit';
+		case 'NewsletterSignUpPalette':
 			return 'inherit';
 	}
 };
@@ -433,6 +457,8 @@ const cardBorderTopLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[46];
 		case 'PodcastPalette':
 			return sourcePalette.neutral[86];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.brand[400];
 	}
 };
 
@@ -460,6 +486,8 @@ const cardBorderTopDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[46];
 		case 'PodcastPalette':
 			return sourcePalette.neutral[86];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.brand[400];
 	}
 };
 
@@ -488,6 +516,8 @@ const cardSublinksBackgroundLight: ContainerFunction = (containerPalette) => {
 		case 'MediaPalette':
 			return sourcePalette.neutral[46];
 		case 'PodcastPalette':
+			return sourcePalette.neutral[86];
+		case 'NewsletterSignUpPalette':
 			return sourcePalette.neutral[86];
 	}
 };
@@ -518,6 +548,8 @@ const cardSublinksBackgroundDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[46];
 		case 'PodcastPalette':
 			return sourcePalette.neutral[86];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.neutral[86];
 	}
 };
 
@@ -547,6 +579,8 @@ const articleBorderLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[46];
 		case 'PodcastPalette':
 			return sourcePalette.neutral[86];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.neutral[86];
 	}
 };
 
@@ -572,6 +606,8 @@ const articleBorderDark: ContainerFunction = (containerPalette) => {
 		case 'MediaPalette':
 			return sourcePalette.neutral[46];
 		case 'PodcastPalette':
+			return sourcePalette.neutral[10];
+		case 'NewsletterSignUpPalette':
 			return sourcePalette.neutral[10];
 	}
 };
@@ -602,6 +638,8 @@ const cardBackgroundLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[0];
 		case 'PodcastPalette':
 			return sourcePalette.neutral[100];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.neutral[100];
 	}
 };
 
@@ -627,6 +665,7 @@ const cardBackgroundDark: ContainerFunction = (containerPalette) => {
 		case 'EventPalette':
 		case 'EventAltPalette':
 		case 'PodcastPalette':
+		case 'NewsletterSignUpPalette':
 			return 'inherit';
 	}
 };
@@ -657,6 +696,8 @@ const sectionBackgroundLight: ContainerFunction = (containerPalette) => {
 			return 'transparent';
 		case 'PodcastPalette':
 			return sourcePalette.neutral[100];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.brand[400];
 	}
 };
 
@@ -685,6 +726,8 @@ const sectionBackgroundDark: ContainerFunction = (containerPalette) => {
 			return sectionBackgroundLight(containerPalette);
 		case 'PodcastPalette':
 			return sourcePalette.neutral[7];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.brand[400];
 	}
 };
 
@@ -703,6 +746,7 @@ const sectionBackgroundLeftLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 		case 'MediaPalette':
 		case 'PodcastPalette':
+		case 'NewsletterSignUpPalette':
 			return palette('--section-background');
 	}
 };
@@ -722,6 +766,7 @@ const sectionBackgroundLeftDark: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 		case 'MediaPalette':
 		case 'PodcastPalette':
+		case 'NewsletterSignUpPalette':
 			return palette('--section-background');
 	}
 };
@@ -751,6 +796,8 @@ const cardBorderSupportingLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[46];
 		case 'PodcastPalette':
 			return sourcePalette.neutral[86];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.brand[400];
 	}
 };
 const cardBorderSupportingDark: ContainerFunction = (containerPalette) => {
@@ -777,6 +824,8 @@ const cardBorderSupportingDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[46];
 		case 'PodcastPalette':
 			return sourcePalette.neutral[86];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.brand[400];
 	}
 };
 
@@ -800,6 +849,8 @@ const sectionBorderLight: ContainerFunction = (containerPalette) => {
 			return transparentColour(sourcePalette.neutral[46], 0.3);
 		case 'MediaPalette':
 			return sourcePalette.neutral[46];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.brand[400];
 	}
 };
 const sectionBorderDark: ContainerFunction = (containerPalette) => {
@@ -826,6 +877,8 @@ const sectionBorderDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[46];
 		case 'PodcastPalette':
 			return sourcePalette.neutral[86];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.brand[400];
 	}
 };
 
@@ -855,6 +908,8 @@ const sectionDateLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[100];
 		case 'PodcastPalette':
 			return sourcePalette.neutral[100];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.neutral[100];
 	}
 };
 
@@ -880,6 +935,8 @@ const sectionDateDark: ContainerFunction = (containerPalette) => {
 		case 'MediaPalette':
 			return sourcePalette.neutral[100];
 		case 'PodcastPalette':
+			return sourcePalette.neutral[100];
+		case 'NewsletterSignUpPalette':
 			return sourcePalette.neutral[100];
 	}
 };
@@ -911,6 +968,8 @@ const sectionTitleLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[100];
 		case 'PodcastPalette':
 			return sourcePalette.neutral[7];
+		case 'NewsletterSignUpPalette':
+			return sourcePalette.neutral[7];
 	}
 };
 
@@ -940,6 +999,8 @@ const sectionTitleDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[100];
 		case 'PodcastPalette':
 			return 'inherit';
+		case 'NewsletterSignUpPalette':
+			return 'inherit';
 	}
 };
 
@@ -958,6 +1019,7 @@ const treatTextLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 		case 'MediaPalette':
 		case 'PodcastPalette':
+		case 'NewsletterSignUpPalette':
 			return 'inherit';
 	}
 };
@@ -977,6 +1039,7 @@ const treatTextDark: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 		case 'MediaPalette':
 		case 'PodcastPalette':
+		case 'NewsletterSignUpPalette':
 			return 'inherit';
 	}
 };

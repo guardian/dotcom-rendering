@@ -7,7 +7,7 @@ import { Link } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
 
 interface Props {
-	textColor?: 'supporting' | 'regular';
+	textColor?: 'supporting' | 'regular' | 'on-brand';
 }
 
 const GUARDIAN_PRIVACY_POLICY =
@@ -48,7 +48,7 @@ const termsStyle = css`
 		font-weight: bold;
 	}
 `;
-const textStyles = (textColor: 'supporting' | 'regular') => {
+const textStyles = (textColor: 'supporting' | 'regular' | 'on-brand') => {
 	switch (textColor) {
 		case 'supporting':
 			return css`
@@ -67,6 +67,19 @@ const textStyles = (textColor: 'supporting' | 'regular') => {
 				a,
 				strong {
 					color: ${themePalette('--privacy-text-regular')};
+					:hover {
+						color: inherit;
+					}
+				}
+			`;
+		case 'on-brand':
+			return css`
+				color: ${sourcePalette.neutral[93]};
+				strong {
+					color: ${sourcePalette.brandAlt[400]};
+				}
+				a {
+					color: ${sourcePalette.neutral[97]};
 					:hover {
 						color: inherit;
 					}

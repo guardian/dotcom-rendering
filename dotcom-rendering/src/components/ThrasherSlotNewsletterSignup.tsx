@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	headlineBold24,
+	palette,
 	space,
 	textSans14,
 	until,
@@ -25,6 +26,7 @@ interface Props {
 }
 
 const logoContainerStyle = () => css`
+	padding-top: ${space[2]}px;
 	max-width: 115px;
 	min-width: 115px;
 `;
@@ -44,7 +46,7 @@ const getThemeBackgroundColour = (newsletterTheme: string): ColourName => {
 
 export const ThrasherSlotNewsletterSignup = ({
 	newsletter,
-	containerPalette,
+	containerPalette = 'NewsletterSignUpPalette',
 	editionId,
 	discussionApiUrl,
 }: Props) => {
@@ -57,7 +59,7 @@ export const ThrasherSlotNewsletterSignup = ({
 				leftContent={
 					<div css={[logoContainerStyle()]}>
 						<SvgGuardianLogo
-							textColor={schemePalette('--article-section-title')}
+							textColor={palette.neutral[100]}
 							width={100}
 						/>
 						<NewsletterBadge />
@@ -107,7 +109,7 @@ export const ThrasherSlotNewsletterSignup = ({
 							flex: 1;
 						`}
 					>
-						<NewsletterPrivacyMessage textColor="supporting" />
+						<NewsletterPrivacyMessage textColor="on-brand" />
 					</div>
 				</div>
 			</FrontSection>
