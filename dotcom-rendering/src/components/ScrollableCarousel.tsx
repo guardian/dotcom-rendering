@@ -305,19 +305,30 @@ export const ScrollableCarousel = ({
 		setNextButtonEnabled(scrollLeft < maxScrollLeft - cardWidth / 2);
 	};
 
+	const throttle = (callback: () => void) => {
+		let isThrottled: boolean = false;
+		return function () {
+			if (!isThrottled) {
+				callback();
+				isThrottled = true;
+				setTimeout(() => (isThrottled = false), 200);
+			}
+		};
+	};
+
 	useEffect(() => {
 		const carouselElement = carouselRef.current;
 		if (!carouselElement) return;
 
 		carouselElement.addEventListener(
 			'scroll',
-			updateButtonVisibilityOnScroll,
+			throttle(updateButtonVisibilityOnScroll),
 		);
 
 		return () => {
 			carouselElement.removeEventListener(
 				'scroll',
-				updateButtonVisibilityOnScroll,
+				throttle(updateButtonVisibilityOnScroll),
 			);
 		};
 	}, []);
