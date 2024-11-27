@@ -76,6 +76,7 @@ const decideDirection = (
 	};
 
 	if (hasAvatar) {
+		/** TODO: should this be limited to fairground only? */
 		if (
 			(imagePositionOnDesktop === 'left' ||
 				imagePositionOnDesktop === 'right') &&
