@@ -76,6 +76,7 @@ type BoostedSplashProperties = {
 	supportingContentAlignment: Alignment;
 	liveUpdatesAlignment: Alignment;
 	trailTextSize: TrailTextSize;
+	avatarUrl?: string;
 };
 
 /**
@@ -84,6 +85,7 @@ type BoostedSplashProperties = {
 const decideSplashCardProperties = (
 	boostLevel: BoostLevel,
 	supportingContentLength: number,
+	avatarUrl?: string,
 ): BoostedSplashProperties => {
 	switch (boostLevel) {
 		// boostedfont sizing
@@ -112,7 +114,7 @@ const decideSplashCardProperties = (
 				},
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: 'bottom',
-				imageSize: 'jumbo',
+				imageSize: avatarUrl ? 'large' : 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
@@ -176,6 +178,7 @@ export const SplashCardLayout = ({
 	} = decideSplashCardProperties(
 		card.boostLevel ?? 'default',
 		card.supportingContent?.length ?? 0,
+		card.avatarUrl,
 	);
 
 	return (
@@ -228,6 +231,7 @@ type BoostedCardProperties = {
  */
 const decideCardProperties = (
 	boostLevel: Omit<BoostLevel, 'default' | 'gigaboost'> = 'boost',
+	avatarUrl?: string,
 ): BoostedCardProperties => {
 	switch (boostLevel) {
 		case 'megaboost':
@@ -249,7 +253,7 @@ const decideCardProperties = (
 					tablet: 'small',
 					mobile: 'small',
 				},
-				imageSize: 'medium',
+				imageSize: avatarUrl ? 'large' : 'medium',
 				liveUpdatesPosition: 'inner',
 				supportingContentAlignment: 'horizontal',
 			};
@@ -277,7 +281,7 @@ export const BoostedCardLayout = ({
 		imageSize,
 		supportingContentAlignment,
 		liveUpdatesPosition,
-	} = decideCardProperties(card.boostLevel);
+	} = decideCardProperties(card.boostLevel, card.avatarUrl);
 	return (
 		<UL padBottom={true} hasLargeSpacing={true} showTopBar={true}>
 			<LI
