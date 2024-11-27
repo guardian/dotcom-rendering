@@ -70,6 +70,22 @@ export const ReaderRevenueLinks = ({
 		referrerUrl,
 	});
 
+	/** Additional links configured to only appear on the US edition */
+	const usEditionLinks = [
+		{
+			longTitle: 'Newsletters',
+			title: 'Newsletters',
+			mobileOnly: true,
+			url: '/email-newsletters',
+		},
+		{
+			longTitle: 'Download the app',
+			title: 'Download the app',
+			mobileOnly: true,
+			url: 'https://app.adjust.com/1hskf6nd?adgroup=USHeader',
+		},
+	];
+
 	const links: LinkType[] = [
 		{
 			longTitle: 'Support us',
@@ -83,6 +99,7 @@ export const ReaderRevenueLinks = ({
 			mobileOnly: true,
 			url: printSubUrl,
 		},
+		...(editionId === 'US' ? usEditionLinks : []),
 	];
 
 	return (

@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import {
-	headlineMediumItalic17,
-	headlineMediumItalic20,
-	headlineMediumItalic24,
-	headlineMediumItalic28,
-	textSansItalic17,
-	textSansItalic20,
-	textSansItalic24,
+	headlineMedium17,
+	headlineMedium20,
+	headlineMedium24,
+	headlineMedium28,
+	textSans17,
+	textSans20,
+	textSans24,
 	until,
 } from '@guardian/source/foundations';
 import { palette } from '../palette';
@@ -31,71 +31,60 @@ const bylineStyles = (size: SmallHeadlineSize, isLabs: boolean) => {
 		case 'huge':
 			if (isLabs) {
 				return css`
-					${textSansItalic24};
-					line-height: 24px;
-					${until.desktop} {
-						${textSansItalic24};
-						line-height: 20px;
-					}
+					${textSans24};
 				`;
 			}
 			return css`
-				${headlineMediumItalic28};
+				${headlineMedium28};
 				${until.desktop} {
-					${headlineMediumItalic24};
+					${headlineMedium24};
 				}
 			`;
 		case 'large': {
 			if (isLabs) {
 				return css`
-					${textSansItalic20};
-					font-size: 24px;
-					line-height: 24px;
+					${textSans24};
 					${until.desktop} {
-						${textSansItalic20};
-						line-height: 20px;
+						${textSans20};
 					}
 				`;
 			}
 			return css`
-				${headlineMediumItalic24};
+				${headlineMedium24};
 				${until.desktop} {
-					${headlineMediumItalic20};
+					${headlineMedium20};
 				}
 			`;
 		}
 		case 'medium': {
 			if (isLabs) {
 				return css`
-					${textSansItalic20};
-					line-height: 20px;
+					${textSans20};
 					${until.desktop} {
-						${textSansItalic17};
-						line-height: 18px;
+						${textSans17};
 					}
 				`;
 			}
 			return css`
-				${headlineMediumItalic20};
+				${headlineMedium20};
 				${until.desktop} {
-					${headlineMediumItalic17};
+					${headlineMedium17};
 				}
 			`;
 		}
 		case 'small': {
 			if (isLabs) {
 				return css`
-					${textSansItalic17};
-					line-height: 18px;
+					${textSans17};
 				`;
 			}
 			return css`
-				${headlineMediumItalic17};
+				${headlineMedium17};
 			`;
 		}
 		case 'tiny':
 			return css`
-				${headlineMediumItalic17};
+				${headlineMedium17};
 			`;
 	}
 };

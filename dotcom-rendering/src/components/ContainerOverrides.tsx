@@ -1077,6 +1077,28 @@ const carouselChevronBorderDisabledDark: ContainerFunction = (
 	containerPalette,
 ) => transparentColour(cardHeadlineDark(containerPalette), 0.4);
 
+const slideshowPaginationDotLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'BreakingPalette':
+		case 'InvestigationPalette':
+		case 'SombrePalette':
+		case 'SombreAltPalette':
+			return transparentColour(cardHeadlineLight(containerPalette), 0.4);
+		default:
+			return transparentColour(cardHeadlineLight(containerPalette), 0.2);
+	}
+};
+
+const slideshowPaginationDotDark: ContainerFunction = (containerPalette) =>
+	transparentColour(cardHeadlineDark(containerPalette), 0.4);
+
+const slideshowPaginationDotActiveLight: ContainerFunction = (
+	containerPalette,
+) => cardHeadlineLight(containerPalette);
+const slideshowPaginationDotActiveDark: ContainerFunction = (
+	containerPalette,
+) => cardHeadlineDark(containerPalette);
+
 type ColourName = Parameters<typeof palette>[0];
 
 type ContainerFunction = (containerPalette: DCRContainerPalette) => string;
@@ -1209,6 +1231,14 @@ const containerColours = {
 	'--carousel-chevron-hover': {
 		light: carouselChevronHoverLight,
 		dark: carouselChevronHoverDark,
+	},
+	'--slideshow-pagination-dot': {
+		light: slideshowPaginationDotLight,
+		dark: slideshowPaginationDotDark,
+	},
+	'--slideshow-pagination-dot-active': {
+		light: slideshowPaginationDotActiveLight,
+		dark: slideshowPaginationDotActiveDark,
 	},
 	'--section-border': {
 		light: sectionBorderLight,

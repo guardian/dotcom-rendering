@@ -207,7 +207,7 @@ const usCardStyles = css`
 	align-self: start;
 	position: sticky;
 	top: 0;
-	${getZIndex('expandableMarketingCardOverlay')}
+	z-index: ${getZIndex('expandableMarketingCardOverlay')};
 
 	${from.leftCol} {
 		margin-top: ${space[6]}px;

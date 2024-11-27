@@ -63,10 +63,7 @@ export const StaticFeatureTwo = ({
 							imageLoading={imageLoading}
 							aspectRatio="4:5"
 							imageSize="feature-large"
-							headlineSizes={{
-								desktop: 'medium',
-								tablet: 'small',
-							}}
+							headlineSizes={{ desktop: 'small' }}
 							supportingContent={card.supportingContent}
 						/>
 					</LI>

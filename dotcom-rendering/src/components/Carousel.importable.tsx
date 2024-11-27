@@ -255,7 +255,7 @@ const buttonContainerStyle = css`
 	flex-direction: column;
 	justify-content: center;
 	position: absolute;
-	${getZIndex('onwardsCarousel')}
+	z-index: ${getZIndex('onwardsCarousel')};
 	height: 100%;
 	padding-bottom: 36px; /* Align buttons centrally with cards */
 

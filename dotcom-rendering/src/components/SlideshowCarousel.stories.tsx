@@ -1,40 +1,11 @@
 import { css } from '@emotion/react';
-import { breakpoints, space } from '@guardian/source/foundations';
+import { breakpoints, space, textSans17 } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ReactNode } from 'react';
-import type { DCRSlideshowImage } from '../types/front';
+import { palette } from '../palette';
+import type { DCRContainerPalette, DCRSlideshowImage } from '../types/front';
+import { ContainerOverrides } from './ContainerOverrides';
 import { SlideshowCarousel } from './SlideshowCarousel.importable';
-
-const Wrapper = ({ children }: { children: ReactNode }) => {
-	const styles = css`
-		margin: ${space[2]}px;
-		max-width: 460px;
-	`;
-	return <div css={styles}>{children}</div>;
-};
-
-const meta = {
-	component: SlideshowCarousel,
-	title: 'Components/SlideshowCarousel',
-	render: (args) => (
-		<Wrapper>
-			<SlideshowCarousel {...args} />
-		</Wrapper>
-	),
-	parameters: {
-		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.tablet,
-				breakpoints.leftCol,
-			],
-		},
-	},
-} satisfies Meta<typeof SlideshowCarousel>;
-
-export default meta;
-
-type Story = StoryObj<typeof meta>;
 
 const images = [
 	{
@@ -75,23 +46,109 @@ const images = [
 	},
 ] as const satisfies readonly DCRSlideshowImage[];
 
-export const WithMultipleImages = {
+const Wrapper = ({
+	children,
+	heading,
+}: {
+	children: ReactNode;
+	heading?: string;
+}) => {
+	const sectionStyles = css`
+		padding: ${space[4]}px;
+		background: ${palette('--card-background')};
+	`;
+	const containerStyles = css`
+		max-width: 460px;
+	`;
+	const headingStyles = css`
+		${textSans17};
+		color: ${palette('--card-headline')};
+		margin-bottom: ${space[2]}px;
+	`;
+	return (
+		<section css={sectionStyles}>
+			<div css={containerStyles}>
+				{!!heading && <h2 css={headingStyles}>{heading}</h2>}
+				{children}
+			</div>
+		</section>
+	);
+};
+
+const meta = {
+	component: SlideshowCarousel,
+	title: 'Components/SlideshowCarousel',
+	parameters: {
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.tablet,
+				breakpoints.leftCol,
+			],
+		},
+	},
 	args: {
 		images,
 		imageSize: 'medium',
 	},
-} satisfies Story;
+	render: (args) => (
+		<Wrapper>
+			<SlideshowCarousel {...args} />
+		</Wrapper>
+	),
+} satisfies Meta<typeof SlideshowCarousel>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const WithMultipleImages = {} satisfies Story;
 
 export const WithThreeImages = {
 	args: {
 		images: images.slice(0, 3),
-		imageSize: 'medium',
 	},
 } satisfies Story;
 
 export const WithOneImage = {
 	args: {
 		images: images.slice(0, 1),
-		imageSize: 'medium',
 	},
+} satisfies Story;
+
+const containerPalettes = [
+	'InvestigationPalette',
+	'LongRunningPalette',
+	'SombrePalette',
+	'BreakingPalette',
+	'EventPalette',
+	'EventAltPalette',
+	'LongRunningAltPalette',
+	'SombreAltPalette',
+	'SpecialReportAltPalette',
+	'Branded',
+] as const satisfies readonly Omit<
+	DCRContainerPalette,
+	'MediaPalette' | 'PodcastPalette'
+>[];
+
+export const WithSpecialPaletteVariations = {
+	parameters: {
+		/** We only want one breakpoint snapshotted for special palette variations */
+		chromatic: { viewports: [breakpoints.desktop] },
+	},
+	render: (args) => (
+		<>
+			{containerPalettes.map((containerPalette) => (
+				<ContainerOverrides
+					containerPalette={containerPalette}
+					key={containerPalette}
+				>
+					<Wrapper heading={containerPalette}>
+						<SlideshowCarousel {...args} />
+					</Wrapper>
+				</ContainerOverrides>
+			))}
+		</>
+	),
 } satisfies Story;

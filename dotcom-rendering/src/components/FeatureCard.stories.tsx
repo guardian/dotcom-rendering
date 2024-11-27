@@ -27,7 +27,7 @@ const cardProps: CardProps = {
 	aspectRatio: '4:5',
 	byline: 'Byline text',
 	showByline: true,
-	headlineSizes: { desktop: 'medium' },
+	headlineSizes: { desktop: 'small' },
 	showPulsingDot: false,
 	showClock: false,
 	imageSize: 'feature',
@@ -115,6 +115,21 @@ export const Opinion: Story = {
 		},
 		showQuotes: true,
 		format: { ...cardProps.format, theme: Pillar.Opinion },
+	},
+};
+
+export const WithTrailText: Story = {
+	args: {
+		kickerText: undefined,
+		headlineText: 'Nigel Slater’s recipe for coffee cream liqueur trifle',
+		image: {
+			src: 'https://media.guim.co.uk/9194170f3170be3f48f1924a7434f0b69c7adb77/205_0_5825_3496/master/5825.jpg',
+			altText: 'Hazelnut Tiramisu',
+		},
+		format: { ...cardProps.format, theme: Pillar.Lifestyle },
+		byline: undefined,
+		trailText:
+			'Part trifle, part tiramisu… this midweek treat ticks all the right boxes',
 	},
 };
 
