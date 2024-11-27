@@ -313,8 +313,8 @@ const sectionTreats = css`
 	}
 `;
 
-/** element which contains border and inner background colour, if set */
 const decoration = css`
+	/** element which contains border and inner background colour, if set */
 	grid-row: 1 / -1;
 	grid-column: decoration;
 
