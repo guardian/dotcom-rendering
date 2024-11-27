@@ -19,7 +19,6 @@ import {
 import { EditionSwitcherBanner } from '../components/EditionSwitcherBanner.importable';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
-import { FrontNewsletterSignup } from '../components/FrontNewsletterSignup';
 import { FrontSection } from '../components/FrontSection';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -368,17 +367,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					}
 
 					if (collection.collectionType === 'fixed/thrasher') {
-						const newsletter = trail.snapData?.newsletter;
-						if (newsletter) {
-							return (
-								<FrontNewsletterSignup
-									key={ophanName}
-									newsletter={newsletter}
-									containerType="fixed/thrasher"
-								/>
-							);
-						}
-
 						return (
 							<ContainerOverrides
 								key={ophanName}
