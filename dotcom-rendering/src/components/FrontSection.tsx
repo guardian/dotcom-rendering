@@ -396,8 +396,11 @@ const primaryLevelTopBorder = css`
 
 const secondaryLevelTopBorder = css`
 	grid-row: 1;
-	grid-column: decoration;
+	grid-column: content;
 	border-top: 1px solid ${schemePalette('--section-border-secondary')};
+	${from.tablet} {
+		grid-column: decoration;
+	}
 `;
 
 /**
