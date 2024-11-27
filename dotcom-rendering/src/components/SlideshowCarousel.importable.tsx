@@ -142,19 +142,27 @@ export const SlideshowCarousel = ({
 		setCurrentPage(Math.round(scrollLeft / cardWidth));
 	};
 
+	const throttle = (callback: () => void) => {
+		let requestId: number;
+		return function () {
+			cancelAnimationFrame(requestId);
+			requestId = requestAnimationFrame(callback);
+		};
+	};
+
 	useEffect(() => {
 		const carouselElement = carouselRef.current;
 		if (!carouselElement) return;
 
 		carouselElement.addEventListener(
 			'scroll',
-			updatePaginationStateOnScroll,
+			throttle(updatePaginationStateOnScroll),
 		);
 
 		return () => {
 			carouselElement.removeEventListener(
 				'scroll',
-				updatePaginationStateOnScroll,
+				throttle(updatePaginationStateOnScroll),
 			);
 		};
 	}, []);
