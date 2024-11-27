@@ -116,8 +116,16 @@ export const MiniProfile = ({
 	);
 };
 
+const containsText = (html: string) => {
+	const htmlWithoutTags = sanitise(html, {
+		allowedTags: [],
+		allowedAttributes: {},
+	});
+	return htmlWithoutTags.length > 0;
+};
+
 const Bio = ({ html }: { html?: string }) => {
-	if (!html) return null;
+	if (!html || !containsText(html)) return null;
 	const sanitizedHtml = sanitise(html, {});
 	return (
 		<>
