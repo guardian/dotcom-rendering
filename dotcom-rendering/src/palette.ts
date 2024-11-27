@@ -6925,10 +6925,6 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
 	},
-	'--section-border-primary': {
-		light: () => sourcePalette.neutral[20],
-		dark: () => sourcePalette.neutral[86],
-	},
 	'--section-border-secondary': {
 		light: () => sourcePalette.neutral[73],
 		dark: () => sourcePalette.neutral[38],

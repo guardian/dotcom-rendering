@@ -348,27 +348,6 @@ const containerLevelBottomPadding = css`
 	padding-bottom: ${space[6]}px;
 `;
 
-/** Adds space above the border of primary level containers without
- * causing gaps in the vertical side borders from tablet upwards
- */
-const primaryLevelTopSpacer = css`
-	grid-row: spacing-top;
-	grid-column: 1 / -1;
-	height: ${space[4]}px;
-	background-color: ${schemePalette('--front-page-background')};
-	position: relative;
-`;
-
-/** Absolutely positioned horizontal rule within the primary level spacing element */
-const primaryLevelTopBorder = css`
-	height: 2px;
-	width: 100%;
-	background-color: ${schemePalette('--section-border-primary')};
-	position: absolute;
-	bottom: 0;
-	z-index: 2;
-`;
-
 const secondaryLevelTopBorder = css`
 	grid-row: spacing-top;
 	grid-column: content;
@@ -527,18 +506,11 @@ export const FrontSection = ({
 				{!!containerLevel && (
 					<div
 						css={[
-							containerLevel === 'Primary' &&
-								primaryLevelTopSpacer,
-
 							showTopBorder &&
 								containerLevel === 'Secondary' &&
 								secondaryLevelTopBorder,
 						]}
-					>
-						{showTopBorder && containerLevel === 'Primary' && (
-							<div css={primaryLevelTopBorder} />
-						)}
-					</div>
+					></div>
 				)}
 
 				<div
