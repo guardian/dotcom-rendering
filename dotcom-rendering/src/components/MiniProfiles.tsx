@@ -51,6 +51,8 @@ export const MiniProfiles = ({
 	isLastElement,
 	sectioned,
 }: MiniProfilesProps) => {
+	const displaySeparator = !isLastElement && !sectioned;
+
 	return (
 		<ol data-ignore="global-ol-styling">
 			{miniProfiles.map((miniProfile, index) => (
@@ -85,7 +87,7 @@ export const MiniProfiles = ({
 					))}
 				</MiniProfileComponent>
 			))}
-			{!isLastElement && <hr css={separatorStyles} />}
+			{displaySeparator && <hr css={separatorStyles} />}
 		</ol>
 	);
 };
