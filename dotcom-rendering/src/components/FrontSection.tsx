@@ -514,7 +514,7 @@ export const FrontSection = ({
 	collectionBranding,
 	isTagPage = false,
 }: Props) => {
-	const isToggleable = toggleable && !!sectionId;
+	const isToggleable = toggleable && !!sectionId && !containerLevel;
 	const showMore =
 		canShowMore &&
 		!!title &&
