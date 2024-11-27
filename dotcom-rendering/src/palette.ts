@@ -6425,6 +6425,26 @@ const paletteColours = {
 		light: editorialButtonText,
 		dark: editorialButtonText,
 	},
+	'--email-signup-background-culture': {
+		light: () => pillarPalette(Pillar.Culture, 600),
+		dark: () => pillarPalette(Pillar.Culture, 200),
+	},
+	'--email-signup-background-lifestyle': {
+		light: () => pillarPalette(Pillar.Lifestyle, 600),
+		dark: () => pillarPalette(Pillar.Lifestyle, 200),
+	},
+	'--email-signup-background-opinion': {
+		light: () => pillarPalette(Pillar.Opinion, 600),
+		dark: () => pillarPalette(Pillar.Opinion, 200),
+	},
+	'--email-signup-background-sport': {
+		light: () => pillarPalette(Pillar.Sport, 600),
+		dark: () => pillarPalette(Pillar.Sport, 200),
+	},
+	'--email-signup-background-standard': {
+		light: () => pillarPalette(Pillar.News, 600),
+		dark: () => pillarPalette(Pillar.News, 200),
+	},
 	'--email-signup-button-background': {
 		light: emailSignupButtonBackgroundLight,
 		dark: emailSignupButtonBackgroundDark,
@@ -7327,4 +7347,4 @@ const paletteDeclarations = (
 
 // ----- Exports ----- //
 
-export { palette as palette, paletteDeclarations };
+export { palette as palette, paletteDeclarations, ColourName };

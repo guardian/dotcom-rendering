@@ -1,11 +1,14 @@
 import { css } from '@emotion/react';
 import {
-	palette,
+	headlineBold14,
+	headlineBold24,
 	space,
 	textSans14,
 	until,
 } from '@guardian/source/foundations';
 import { SvgGuardianLogo } from '@guardian/source/react-components';
+import type { ColourName } from '../palette';
+import { palette as schemePalette } from '../palette';
 import type { Newsletter } from '../types/content';
 import type { DCRContainerPalette } from '../types/front';
 import { ContainerOverrides } from './ContainerOverrides';
@@ -24,6 +27,19 @@ const logoContainerStyle = () => css`
 	min-width: 115px;
 `;
 
+const getThemeBackgroundColour = (newsletterTheme: string): ColourName => {
+	switch (newsletterTheme) {
+		case 'culture':
+		case 'sport':
+		case 'lifestyle':
+		case 'opinion':
+			return `--email-signup-background-${newsletterTheme}`;
+		case 'news':
+		default:
+			return '--email-signup-background-standard';
+	}
+};
+
 export const ThrasherSlotNewsletterSignup = ({
 	newsletter,
 	containerPalette,
@@ -34,11 +50,10 @@ export const ThrasherSlotNewsletterSignup = ({
 				containerPalette={containerPalette}
 				editionId="UK"
 				discussionApiUrl="/"
-				title={newsletter.name}
 				leftContent={
 					<div css={[logoContainerStyle()]}>
 						<SvgGuardianLogo
-							textColor={palette.neutral[0]}
+							textColor={schemePalette('--article-section-title')}
 							width={100}
 						/>
 						<NewsletterBadge />
@@ -56,12 +71,21 @@ export const ThrasherSlotNewsletterSignup = ({
 				>
 					<div
 						css={css`
-							background-color: ${palette.news[400]};
-							border: 2px dashed ${palette.neutral[100]};
-							padding: ${space[1]}px;
+							background-color: ${schemePalette(
+								getThemeBackgroundColour(newsletter.theme),
+							)};
+							padding: ${space[2]}px;
+							border-radius: ${space[2]}px;
 							flex: 3;
 						`}
 					>
+						<p
+							css={css(`
+									${headlineBold24}
+								`)}
+						>
+							{newsletter.name}
+						</p>
 						<p
 							css={css(`
 									${textSans14}

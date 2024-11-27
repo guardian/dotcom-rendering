@@ -24,6 +24,36 @@ const newsletter = {
 export const standard = () => {
 	return <ThrasherSlotNewsletterSignup newsletter={newsletter} />;
 };
+
+export const sport = () => {
+	return (
+		<ThrasherSlotNewsletterSignup
+			newsletter={{ ...newsletter, theme: 'sport' }}
+		/>
+	);
+};
+export const culture = () => {
+	return (
+		<ThrasherSlotNewsletterSignup
+			newsletter={{ ...newsletter, theme: 'culture' }}
+		/>
+	);
+};
+export const lifestyle = () => {
+	return (
+		<ThrasherSlotNewsletterSignup
+			newsletter={{ ...newsletter, theme: 'lifestyle' }}
+		/>
+	);
+};
+export const opinion = () => {
+	return (
+		<ThrasherSlotNewsletterSignup
+			newsletter={{ ...newsletter, theme: 'opinion' }}
+		/>
+	);
+};
+
 export const withInvestigationPalette = () => {
 	return (
 		<ThrasherSlotNewsletterSignup
