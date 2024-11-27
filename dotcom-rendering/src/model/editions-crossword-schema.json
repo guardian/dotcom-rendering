@@ -100,21 +100,18 @@
                                 },
                                 "solution": {
                                     "type": "string"
-                                },
-                                "format": {}
+                                }
                             },
                             "required": [
                                 "clue",
                                 "direction",
-                                "format",
                                 "group",
                                 "humanNumber",
                                 "id",
                                 "length",
                                 "number",
                                 "position",
-                                "separatorLocations",
-                                "solution"
+                                "separatorLocations"
                             ]
                         }
                     },
