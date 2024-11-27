@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	headlineLight28,
+	headlineLight34,
 	headlineLightItalic28,
 	headlineLightItalic34,
 	headlineMedium20,
@@ -10,6 +12,7 @@ import {
 	space,
 	textSans20,
 	textSans24,
+	textSans34,
 	textSansItalic20,
 	textSansItalic34,
 	until,
@@ -24,6 +27,7 @@ import { getSoleContributor } from '../lib/byline';
 import { palette as schemedPalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { BylineLink } from './BylineLink';
+import { useConfig } from './ConfigContext';
 
 const wrapperStyles = css`
 	margin-left: 6px;
@@ -32,10 +36,17 @@ const wrapperStyles = css`
 	z-index: 1;
 `;
 
-const interviewBylineBoxStyles = (format: ArticleFormat) => css`
-	${format.theme === ArticleSpecial.Labs
-		? textSansItalic20
-		: headlineMediumItalic20}
+const interviewBylineBoxStyles = (
+	format: ArticleFormat,
+	isApps: boolean,
+) => css`
+	${isApps
+		? format.theme === ArticleSpecial.Labs
+			? textSansItalic20
+			: headlineMediumItalic20
+		: format.theme === ArticleSpecial.Labs
+		? textSans20
+		: headlineMedium20}
 	${format.theme !== ArticleSpecial.Labs && 'line-height: 1.4;'}
 	background-color: ${schemedPalette('--byline-background')};
 	box-shadow:
@@ -58,17 +69,21 @@ const opinionWrapperStyles = css`
 	display: inline-block;
 `;
 
-const opinionStyles = (format: ArticleFormat) => css`
-	${format.theme === ArticleSpecial.Labs
-		? textSansItalic34
-		: headlineLightItalic34}
+const opinionStyles = (format: ArticleFormat, isApps: boolean) => css`
+	${isApps
+		? format.theme === ArticleSpecial.Labs
+			? textSansItalic34
+			: headlineLightItalic34
+		: format.theme === ArticleSpecial.Labs
+		? textSans34
+		: headlineLight34}
 	line-height: 38px;
 	/* Used to prevent the byline stretching full width */
 	display: inline;
 	color: ${schemedPalette('--byline')};
 
 	${until.tablet} {
-		${headlineLightItalic28}
+		${isApps ? headlineLightItalic28 : headlineLight28}
 	}
 
 	a {
@@ -80,13 +95,13 @@ const opinionStyles = (format: ArticleFormat) => css`
 	}
 `;
 
-const analysisStyles = css`
-	${headlineLightItalic34};
+const analysisStyles = (isApps: boolean) => css`
+	${isApps ? headlineLightItalic34 : headlineLight34};
 	line-height: 38px;
 	color: ${schemedPalette('--byline-anchor')};
 
 	${until.tablet} {
-		${headlineLightItalic28}
+		${isApps ? headlineLightItalic28 : headlineLight28}
 	}
 
 	a {
@@ -145,9 +160,12 @@ type Props = {
 };
 
 export const HeadlineByline = ({ format, byline, tags }: Props) => {
+	const { renderingTarget } = useConfig();
 	if (byline === '') {
 		return null;
 	}
+	/** This is required for a staggered design release between web and app. This will be removed changes are ready for release on ios/android   */
+	const isApps = renderingTarget === 'Apps';
 
 	const hasSingleContributor = !!getSoleContributor(tags, byline);
 
@@ -174,7 +192,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 				case ArticleDesign.Interview:
 					return (
 						<div css={wrapperStyles}>
-							<div css={interviewBylineBoxStyles(format)}>
+							<div css={interviewBylineBoxStyles(format, isApps)}>
 								<BylineLink
 									byline={byline}
 									tags={tags}
@@ -194,7 +212,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 								hasSingleContributor && authorBylineWithImage,
 							]}
 						>
-							<div css={opinionStyles(format)}>
+							<div css={opinionStyles(format, isApps)}>
 								<BylineLink
 									byline={byline}
 									tags={tags}
@@ -209,7 +227,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 						<div css={opinionWrapperStyles}>
 							<div
 								css={[
-									analysisStyles,
+									analysisStyles(isApps),
 									hasSingleContributor &&
 										analysisSingleContributorStyles,
 								]}

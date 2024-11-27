@@ -42,7 +42,7 @@ interface Props {
 }
 
 const ulStyles = css`
-	${getZIndex('dropdown')}
+	z-index: ${getZIndex('dropdown')};
 	list-style: none;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
 	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */

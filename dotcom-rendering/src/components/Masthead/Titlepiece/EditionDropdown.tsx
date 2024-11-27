@@ -23,7 +23,7 @@ interface EditionDropdownProps {
 }
 
 const editionDropdownStyles = css`
-	${getZIndex('mastheadEditionDropdown')};
+	z-index: ${getZIndex('mastheadEditionDropdown')};
 	display: flex;
 	/** Required to absolutely position the dropdown menu */
 	position: relative;

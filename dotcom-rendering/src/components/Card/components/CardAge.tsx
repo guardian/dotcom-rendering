@@ -12,7 +12,6 @@ type Props = {
 		isWithinTwelveHours: boolean;
 	};
 	showClock?: boolean;
-	isOnwardContent?: boolean;
 	isTagPage: boolean;
 	colour?: string;
 };
@@ -38,7 +37,6 @@ const ageStyles = (colour: string) => {
 export const CardAge = ({
 	webPublication,
 	showClock,
-	isOnwardContent,
 	absoluteServerTimes,
 	isTagPage,
 	colour = palette('--card-footer-text'),
@@ -48,13 +46,7 @@ export const CardAge = ({
 	}
 
 	return (
-		<span
-			css={ageStyles(
-				isOnwardContent
-					? palette('--card-footer-onwards-content')
-					: colour,
-			)}
-		>
+		<span css={ageStyles(colour)}>
 			{showClock && <ClockIcon />}
 			{isTagPage ? (
 				<DateTime

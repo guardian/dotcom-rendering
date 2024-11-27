@@ -223,7 +223,7 @@ const immersiveWrapper = css`
         This z-index is what ensures the headline text shows above the pseudo black
         box that extends the black background to the right
     */
-	${getZIndex('articleHeadline')}
+	z-index: ${getZIndex('articleHeadline')};
 	${until.mobileLandscape} {
 		margin-right: 40px;
 	}

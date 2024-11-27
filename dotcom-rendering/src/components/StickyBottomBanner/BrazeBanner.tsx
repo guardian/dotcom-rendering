@@ -31,7 +31,7 @@ const containerStyles = css`
 	position: fixed;
 	bottom: -1px;
 	width: 100%;
-	${getZIndex('banner')}
+	z-index: ${getZIndex('banner')};
 `;
 
 // We can show a Braze banner if:

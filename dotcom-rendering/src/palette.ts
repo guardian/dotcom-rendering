@@ -1173,7 +1173,11 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 			return sourcePalette.neutral[86];
 	}
 };
-const avatarLight: PaletteFunction = ({ design, theme }) => {
+const avatarLight: PaletteFunction = () => sourcePalette.neutral[93];
+
+const avatarDark: PaletteFunction = () => sourcePalette.neutral[93];
+
+const avatarColourLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
@@ -1228,7 +1232,7 @@ const avatarLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const avatarDark: PaletteFunction = ({ design, theme }) => {
+const avatarColourDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
@@ -2519,45 +2523,8 @@ const cardMetaTextLight: PaletteFunction = (format) =>
 
 const cardMetaTextDark: PaletteFunction = () => sourcePalette.neutral[60];
 
-const cardOnwardContentFooterLight: PaletteFunction = (format) =>
-	isMediaCard(format)
-		? sourcePalette.neutral[100]
-		: sourcePalette.neutral[46];
-
-const cardOnwardContentFooterDark = (): string => {
-	return sourcePalette.neutral[60];
-};
-
-const cardBackgroundLight: PaletteFunction = (format) =>
+const cardBackground: PaletteFunction = (format) =>
 	isMediaCard(format) ? sourcePalette.neutral[20] : 'transparent';
-
-const cardBackgroundDark: PaletteFunction = (format) =>
-	isMediaCard(format) ? sourcePalette.neutral[10] : 'transparent';
-
-const onwardPlaceholderBackgroundLight: PaletteFunction = (format) =>
-	isMediaCard(format) ? 'transparent' : articleBackgroundLight(format);
-
-const onwardPlaceholderBackgroundDark: PaletteFunction = ({
-	design,
-	display,
-	theme,
-}) =>
-	articleBackgroundDark({
-		design,
-		display,
-		theme,
-	});
-
-const onwardContentCardBackgroundLight: PaletteFunction = (format) =>
-	isMediaCard(format) ? sourcePalette.neutral[46] : 'transparent';
-
-const onwardContentCardBackgroundDark: PaletteFunction = (format) =>
-	isMediaCard(format) ? sourcePalette.neutral[20] : 'transparent';
-
-const onwardContentCardHoverLight: PaletteFunction = (format) =>
-	isMediaCard(format) ? sourcePalette.neutral[20] : sourcePalette.neutral[97];
-const onwardContentCardHoverDark: PaletteFunction = (format) =>
-	isMediaCard(format) ? sourcePalette.neutral[46] : sourcePalette.neutral[10];
 
 const cardHeadlineTextLight: PaletteFunction = (format) =>
 	isMediaCard(format) ? sourcePalette.neutral[100] : sourcePalette.neutral[7];
@@ -6021,6 +5988,10 @@ const paletteColours = {
 		light: avatarLight,
 		dark: avatarDark,
 	},
+	'--avatar-background-colour': {
+		light: avatarColourLight,
+		dark: avatarColourDark,
+	},
 	'--block-quote-fill': {
 		light: blockQuoteFillLight,
 		dark: blockQuoteFillDark,
@@ -6110,8 +6081,8 @@ const paletteColours = {
 		dark: captionTextDark,
 	},
 	'--card-background': {
-		light: cardBackgroundLight,
-		dark: cardBackgroundDark,
+		light: cardBackground,
+		dark: cardBackground,
 	},
 	'--card-background-hover': {
 		light: cardBackgroundHover,
@@ -6124,10 +6095,6 @@ const paletteColours = {
 	'--card-border-top': {
 		light: cardBorderTopLight,
 		dark: cardBorderTopDark,
-	},
-	'--card-footer-onwards-content': {
-		light: cardOnwardContentFooterLight,
-		dark: cardOnwardContentFooterDark,
 	},
 	'--card-footer-text': {
 		light: cardMetaTextLight,
@@ -6804,18 +6771,6 @@ const paletteColours = {
 	'--numbered-list-title': {
 		light: numberedListTitleLight,
 		dark: numberedListTitleDark,
-	},
-	'--onward-content-card-background': {
-		light: onwardContentCardBackgroundLight,
-		dark: onwardContentCardBackgroundDark,
-	},
-	'--onward-content-card-hover': {
-		light: onwardContentCardHoverLight,
-		dark: onwardContentCardHoverDark,
-	},
-	'--onward-placeholder-background': {
-		light: onwardPlaceholderBackgroundLight,
-		dark: onwardPlaceholderBackgroundDark,
 	},
 	'--pagination-text': {
 		light: paginationTextLight,

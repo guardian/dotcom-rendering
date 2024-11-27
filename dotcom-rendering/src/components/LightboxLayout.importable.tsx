@@ -204,7 +204,7 @@ export const LightboxLayout = ({ format, images }: Props) => {
 					html.lightbox-open {
 						#gu-lightbox {
 							position: fixed;
-							${getZIndex('lightbox')};
+							z-index: ${getZIndex('lightbox')};
 						}
 
 						body {

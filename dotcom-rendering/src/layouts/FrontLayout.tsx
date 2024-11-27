@@ -6,6 +6,7 @@ import {
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
+import { AuEoy2024Wrapper } from '../components/AuEoy2024Wrapper.importable';
 import { Carousel } from '../components/Carousel.importable';
 import { ContainerOverrides } from '../components/ContainerOverrides';
 import { CPScottHeader } from '../components/CPScottHeader';
@@ -329,6 +330,36 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										defer={{ until: 'visible' }}
 									>
 										<UsEoy2024Wrapper />
+									</Island>
+								</Section>
+							</ContainerOverrides>
+						);
+					}
+
+					if (
+						collection.displayName === 'AU end-of-year 2024' &&
+						pageId.toLowerCase() === 'au'
+					) {
+						return (
+							<ContainerOverrides
+								key={ophanName}
+								containerPalette={collection.containerPalette}
+							>
+								<Section
+									fullWidth={true}
+									padBottom={false}
+									showSideBorders={false}
+									padSides={false}
+									showTopBorder={false}
+									ophanComponentLink={ophanComponentLink}
+									ophanComponentName={ophanName}
+									hasPageSkin={hasPageSkin}
+								>
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
+										<AuEoy2024Wrapper />
 									</Island>
 								</Section>
 							</ContainerOverrides>

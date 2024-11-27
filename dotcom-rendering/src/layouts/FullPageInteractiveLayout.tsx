@@ -136,7 +136,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 		<section
 			/* Note, some interactives require this - e.g. https://www.theguardian.com/environment/ng-interactive/2015/jun/05/carbon-bomb-the-coal-boom-choking-china. */
 			css={css`
-				${getZIndex('fullPageInteractiveHeaderWrapper')};
+				z-index: ${getZIndex('fullPageInteractiveHeaderWrapper')};
 				position: relative;
 			`}
 		>
