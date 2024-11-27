@@ -299,9 +299,10 @@ export const ScrollableCarousel = ({
 		const scrollLeft = carouselElement.scrollLeft;
 		const maxScrollLeft =
 			carouselElement.scrollWidth - carouselElement.clientWidth;
+		const cardWidth = carouselElement.querySelector('li')?.offsetWidth ?? 0;
 
-		setPreviousButtonEnabled(scrollLeft > 0);
-		setNextButtonEnabled(scrollLeft < maxScrollLeft);
+		setPreviousButtonEnabled(scrollLeft > cardWidth / 2);
+		setNextButtonEnabled(scrollLeft < maxScrollLeft - cardWidth / 2);
 	};
 
 	useEffect(() => {

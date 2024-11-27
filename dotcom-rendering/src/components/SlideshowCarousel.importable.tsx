@@ -133,17 +133,13 @@ export const SlideshowCarousel = ({
 		if (!carouselElement) return;
 
 		const scrollLeft = carouselElement.scrollLeft;
-
 		const maxScrollLeft =
 			carouselElement.scrollWidth - carouselElement.clientWidth;
-
-		setPreviousButtonEnabled(scrollLeft > 0);
-		setNextButtonEnabled(scrollLeft < maxScrollLeft);
-
 		const cardWidth = carouselElement.querySelector('li')?.offsetWidth ?? 0;
-		const page = Math.round(scrollLeft / cardWidth);
 
-		setCurrentPage(page);
+		setPreviousButtonEnabled(scrollLeft > cardWidth / 2);
+		setNextButtonEnabled(scrollLeft < maxScrollLeft - cardWidth / 2);
+		setCurrentPage(Math.round(scrollLeft / cardWidth));
 	};
 
 	useEffect(() => {
