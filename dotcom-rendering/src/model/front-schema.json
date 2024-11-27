@@ -1105,51 +1105,6 @@
                                                 },
                                                 "embedJs": {
                                                     "type": "string"
-                                                },
-                                                "newsletter": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "listId": {
-                                                            "type": "number"
-                                                        },
-                                                        "identityName": {
-                                                            "type": "string"
-                                                        },
-                                                        "name": {
-                                                            "type": "string"
-                                                        },
-                                                        "description": {
-                                                            "type": "string"
-                                                        },
-                                                        "frequency": {
-                                                            "type": "string"
-                                                        },
-                                                        "successDescription": {
-                                                            "type": "string"
-                                                        },
-                                                        "theme": {
-                                                            "type": "string"
-                                                        },
-                                                        "group": {
-                                                            "type": "string"
-                                                        },
-                                                        "regionFocus": {
-                                                            "type": "string"
-                                                        },
-                                                        "illustrationCard": {
-                                                            "type": "string"
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "description",
-                                                        "frequency",
-                                                        "group",
-                                                        "identityName",
-                                                        "listId",
-                                                        "name",
-                                                        "successDescription",
-                                                        "theme"
-                                                    ]
                                                 }
                                             }
                                         },
@@ -1884,51 +1839,6 @@
                                                 },
                                                 "embedJs": {
                                                     "type": "string"
-                                                },
-                                                "newsletter": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "listId": {
-                                                            "type": "number"
-                                                        },
-                                                        "identityName": {
-                                                            "type": "string"
-                                                        },
-                                                        "name": {
-                                                            "type": "string"
-                                                        },
-                                                        "description": {
-                                                            "type": "string"
-                                                        },
-                                                        "frequency": {
-                                                            "type": "string"
-                                                        },
-                                                        "successDescription": {
-                                                            "type": "string"
-                                                        },
-                                                        "theme": {
-                                                            "type": "string"
-                                                        },
-                                                        "group": {
-                                                            "type": "string"
-                                                        },
-                                                        "regionFocus": {
-                                                            "type": "string"
-                                                        },
-                                                        "illustrationCard": {
-                                                            "type": "string"
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "description",
-                                                        "frequency",
-                                                        "group",
-                                                        "identityName",
-                                                        "listId",
-                                                        "name",
-                                                        "successDescription",
-                                                        "theme"
-                                                    ]
                                                 }
                                             }
                                         },
@@ -2663,51 +2573,6 @@
                                                 },
                                                 "embedJs": {
                                                     "type": "string"
-                                                },
-                                                "newsletter": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "listId": {
-                                                            "type": "number"
-                                                        },
-                                                        "identityName": {
-                                                            "type": "string"
-                                                        },
-                                                        "name": {
-                                                            "type": "string"
-                                                        },
-                                                        "description": {
-                                                            "type": "string"
-                                                        },
-                                                        "frequency": {
-                                                            "type": "string"
-                                                        },
-                                                        "successDescription": {
-                                                            "type": "string"
-                                                        },
-                                                        "theme": {
-                                                            "type": "string"
-                                                        },
-                                                        "group": {
-                                                            "type": "string"
-                                                        },
-                                                        "regionFocus": {
-                                                            "type": "string"
-                                                        },
-                                                        "illustrationCard": {
-                                                            "type": "string"
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "description",
-                                                        "frequency",
-                                                        "group",
-                                                        "identityName",
-                                                        "listId",
-                                                        "name",
-                                                        "successDescription",
-                                                        "theme"
-                                                    ]
                                                 }
                                             }
                                         },
@@ -3749,51 +3614,6 @@
                         },
                         "embedJs": {
                             "type": "string"
-                        },
-                        "newsletter": {
-                            "type": "object",
-                            "properties": {
-                                "listId": {
-                                    "type": "number"
-                                },
-                                "identityName": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                },
-                                "description": {
-                                    "type": "string"
-                                },
-                                "frequency": {
-                                    "type": "string"
-                                },
-                                "successDescription": {
-                                    "type": "string"
-                                },
-                                "theme": {
-                                    "type": "string"
-                                },
-                                "group": {
-                                    "type": "string"
-                                },
-                                "regionFocus": {
-                                    "type": "string"
-                                },
-                                "illustrationCard": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "description",
-                                "frequency",
-                                "group",
-                                "identityName",
-                                "listId",
-                                "name",
-                                "successDescription",
-                                "theme"
-                            ]
                         }
                     }
                 },

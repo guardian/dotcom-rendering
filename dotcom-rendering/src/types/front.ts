@@ -7,7 +7,7 @@ import type {
 import type { EditionId } from '../lib/edition';
 import type { Branding, CollectionBranding, EditionBranding } from './branding';
 import type { ServerSideTests, StageType, Switches } from './config';
-import type { BoostLevel, Image, Newsletter, StarRating } from './content';
+import type { BoostLevel, Image, StarRating } from './content';
 import type { FooterType } from './footer';
 import type { FEFormat, FENavType } from './frontend';
 import type { MainMedia } from './mainMedia';
@@ -358,14 +358,12 @@ export type FESnapType = {
 	embedHtml?: string;
 	embedCss?: string;
 	embedJs?: string;
-	newsletter?: Newsletter;
 };
 
 export type DCRSnapType = {
 	embedHtml?: string;
 	embedCss?: string;
 	embedJs?: string;
-	newsletter?: Newsletter;
 };
 
 export type AspectRatio = '5:3' | '5:4' | '4:5' | '1:1';
