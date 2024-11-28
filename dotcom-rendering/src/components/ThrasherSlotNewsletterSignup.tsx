@@ -17,6 +17,7 @@ import { FrontSection } from './FrontSection';
 import { NewsletterBadge } from './NewsletterBadge';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { SecureSignup } from './SecureSignup.importable';
+import { NewsletterDetail } from './NewsletterDetail';
 
 interface Props {
 	newsletter: Newsletter;
@@ -25,10 +26,50 @@ interface Props {
 	discussionApiUrl: string;
 }
 
-const logoContainerStyle = () => css`
+const logoContainerStyle = css`
 	padding-top: ${space[2]}px;
 	max-width: 115px;
 	min-width: 115px;
+`;
+
+const leftContentStyle = css`
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	min-height: 160px;
+
+	${until.leftCol} {
+		min-height: unset;
+		width: 100%;
+		flex-direction: row-reverse;
+	}
+`;
+
+const mainContentStyle = css`
+	display: flex;
+	gap: ${space[2]}px;
+	${until.desktop} {
+		flex-direction: column;
+	}
+`;
+
+const privacyTextStyle = css`
+	flex: 1;
+`;
+
+const promotionStyle = (themeText: string) => css`
+	flex: 3;
+	background-color: ${schemePalette(getThemeBackgroundColour(themeText))};
+	padding: ${space[2]}px;
+	border-radius: ${space[2]}px;
+
+	h3 {
+		${headlineBold24}
+	}
+
+	p {
+		${textSans14}
+	}
 `;
 
 const getThemeBackgroundColour = (newsletterTheme: string): ColourName => {
@@ -57,61 +98,34 @@ export const ThrasherSlotNewsletterSignup = ({
 				editionId={editionId}
 				discussionApiUrl={discussionApiUrl}
 				leftContent={
-					<div css={[logoContainerStyle()]}>
-						<SvgGuardianLogo
+					<section css={leftContentStyle}>
+						<div css={logoContainerStyle}>
+							<SvgGuardianLogo
+								textColor={palette.neutral[100]}
+								width={100}
+							/>
+							<NewsletterBadge />
+						</div>
+						<NewsletterDetail
+							text={newsletter.frequency}
 							textColor={palette.neutral[100]}
-							width={100}
 						/>
-						<NewsletterBadge />
-					</div>
+					</section>
 				}
 			>
-				<div
-					css={css`
-						display: flex;
-						gap: ${space[2]}px;
-						${until.desktop} {
-							flex-direction: column;
-						}
-					`}
-				>
-					<div
-						css={css`
-							background-color: ${schemePalette(
-								getThemeBackgroundColour(newsletter.theme),
-							)};
-							padding: ${space[2]}px;
-							border-radius: ${space[2]}px;
-							flex: 3;
-						`}
-					>
-						<p
-							css={css(`
-									${headlineBold24}
-								`)}
-						>
-							{newsletter.name}
-						</p>
-						<p
-							css={css(`
-									${textSans14}
-								`)}
-						>
-							{newsletter.description}
-						</p>
+				<section css={mainContentStyle}>
+					<article css={promotionStyle(newsletter.theme)}>
+						<h3>{newsletter.name}</h3>
+						<p>{newsletter.description}</p>
 						<SecureSignup
 							newsletterId={newsletter.identityName}
 							successDescription={newsletter.successDescription}
 						/>
-					</div>
-					<div
-						css={css`
-							flex: 1;
-						`}
-					>
+					</article>
+					<aside css={privacyTextStyle}>
 						<NewsletterPrivacyMessage textColor="on-brand" />
-					</div>
-				</div>
+					</aside>
+				</section>
 			</FrontSection>
 		</ContainerOverrides>
 	);

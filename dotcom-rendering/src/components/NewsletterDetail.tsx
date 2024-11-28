@@ -8,6 +8,7 @@ import { SvgNewsletter } from '@guardian/source/react-components';
 
 type Props = {
 	text: string;
+	textColor?: string;
 	iconSize?: 'normal' | 'small';
 };
 
@@ -28,8 +29,9 @@ const svgStyle = (iconSize: 'normal' | 'small') => css`
 	}
 `;
 
-const spanStyle = css`
+const spanStyle = (textColor?: string) => css`
 	${textSansBold14};
+	${!!textColor && `color: ${textColor};`}
 	/**
 	 * Typography preset styles should not be overridden.
 	 * This has been done because the styles do not directly map to the new presets.
@@ -38,11 +40,15 @@ const spanStyle = css`
 	line-height: 1.15;
 `;
 
-export const NewsletterDetail = ({ text, iconSize = 'normal' }: Props) => (
+export const NewsletterDetail = ({
+	text,
+	iconSize = 'normal',
+	textColor,
+}: Props) => (
 	<div css={containerStyle}>
 		<div css={svgStyle(iconSize)}>
 			<SvgNewsletter />
 		</div>
-		<span css={spanStyle}>{text}</span>
+		<span css={spanStyle(textColor)}>{text}</span>
 	</div>
 );
