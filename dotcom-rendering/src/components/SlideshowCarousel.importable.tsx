@@ -124,9 +124,9 @@ export const SlideshowCarousel = ({
 	 * Updates state of navigation buttons based on carousel's scroll position.
 	 *
 	 * This function checks the current scroll position of the carousel and sets
-	 * the styles of the previous and next buttons accordingly. The previous
-	 * button is disabled if the carousel is at the start, and the next button
-	 * is disabled if the carousel is at the end.
+	 * the styles of the previous and next buttons accordingly. The button state
+	 * is toggled when the midpoint of the first or last card has been scrolled
+	 * in or out of view.
 	 */
 	const updatePaginationStateOnScroll = () => {
 		const carouselElement = carouselRef.current;
@@ -142,7 +142,13 @@ export const SlideshowCarousel = ({
 		setCurrentPage(Math.round(scrollLeft / cardWidth));
 	};
 
-	const throttle = (callback: () => void) => {
+	/**
+	 * Throttle scroll events to optimise performance. As the scroll events are
+	 * used to trigger the pagination dot animation we're using
+	 * `requestAnimationFrame` rather than `setTimeout` to ensure this animates
+	 * smoothly in sync with the carousel being scrolled.
+	 */
+	const throttleEvent = (callback: () => void) => {
 		let requestId: number;
 		return function () {
 			cancelAnimationFrame(requestId);
@@ -156,13 +162,13 @@ export const SlideshowCarousel = ({
 
 		carouselElement.addEventListener(
 			'scroll',
-			throttle(updatePaginationStateOnScroll),
+			throttleEvent(updatePaginationStateOnScroll),
 		);
 
 		return () => {
 			carouselElement.removeEventListener(
 				'scroll',
-				throttle(updatePaginationStateOnScroll),
+				throttleEvent(updatePaginationStateOnScroll),
 			);
 		};
 	}, []);
