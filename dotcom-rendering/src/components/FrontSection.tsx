@@ -258,7 +258,7 @@ const sectionHeadlineHeight = css`
 	}
 `;
 
-const paddings = css`
+const topPadding = css`
 	padding-top: ${space[2]}px;
 `;
 
@@ -338,10 +338,6 @@ const topBorder = css`
 
 const bottomPadding = css`
 	padding-bottom: ${space[9]}px;
-`;
-
-const containerLevelBottomPadding = css`
-	padding-bottom: ${space[6]}px;
 `;
 
 /** Adds space above the border of primary level containers without
@@ -624,7 +620,7 @@ export const FrontSection = ({
 							sectionContent,
 							sectionContentPadded,
 							sectionContentRow(toggleable),
-							paddings,
+							topPadding,
 						]}
 						id={`container-${sectionId}`}
 					>
@@ -635,9 +631,7 @@ export const FrontSection = ({
 						css={[
 							sectionContentPadded,
 							sectionBottomContent,
-							containerLevel
-								? containerLevelBottomPadding
-								: bottomPadding,
+							!containerLevel && bottomPadding,
 						]}
 					>
 						{isString(targetedTerritory) &&
@@ -680,7 +674,7 @@ export const FrontSection = ({
 					</div>
 
 					{treats && !hasPageSkin && (
-						<div css={[sectionTreats, paddings]}>
+						<div css={[sectionTreats, topPadding]}>
 							<Treats
 								treats={treats}
 								borderColour={palette('--section-border')}
