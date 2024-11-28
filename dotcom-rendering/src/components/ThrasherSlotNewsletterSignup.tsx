@@ -18,6 +18,7 @@ import { NewsletterBadge } from './NewsletterBadge';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { SecureSignup } from './SecureSignup.importable';
 import { NewsletterDetail } from './NewsletterDetail';
+import { CardPicture } from './CardPicture';
 
 interface Props {
 	newsletter: Newsletter;
@@ -59,6 +60,7 @@ const privacyTextStyle = css`
 
 const promotionStyle = (themeText: string) => css`
 	flex: 3;
+	display: flex;
 	background-color: ${schemePalette(getThemeBackgroundColour(themeText))};
 	padding: ${space[2]}px;
 	border-radius: ${space[2]}px;
@@ -69,6 +71,35 @@ const promotionStyle = (themeText: string) => css`
 
 	p {
 		${textSans14}
+	}
+
+	flex-direction: row;
+	gap: ${space[1]}px;
+
+	${until.phablet} {
+		flex-direction: column;
+	}
+`;
+
+const mobileImageWrapperStyle = css`
+	display: none;
+
+	${until.phablet} {
+		display: block;
+	}
+`;
+
+const phabletAndHigherImageWrapperStyle = css`
+	display: block;
+	min-width: 164px;
+	min-height: 164px;
+
+	${until.phablet} {
+		display: none;
+	}
+
+	picture {
+		height: 100%;
 	}
 `;
 
@@ -115,12 +146,38 @@ export const ThrasherSlotNewsletterSignup = ({
 			>
 				<section css={mainContentStyle}>
 					<article css={promotionStyle(newsletter.theme)}>
-						<h3>{newsletter.name}</h3>
-						<p>{newsletter.description}</p>
-						<SecureSignup
-							newsletterId={newsletter.identityName}
-							successDescription={newsletter.successDescription}
-						/>
+						{newsletter.illustrationCard && (
+							<div css={mobileImageWrapperStyle}>
+								<CardPicture
+									imageSize="small"
+									alt=""
+									mainImage={newsletter.illustrationCard}
+									loading="lazy"
+									aspectRatio={'5:3'}
+								/>
+							</div>
+						)}
+						{newsletter.illustrationSquare && (
+							<div css={phabletAndHigherImageWrapperStyle}>
+								<CardPicture
+									imageSize="small"
+									alt=""
+									mainImage={newsletter.illustrationSquare}
+									loading="lazy"
+									aspectRatio={'1:1'}
+								/>
+							</div>
+						)}
+						<div>
+							<h3>{newsletter.name}</h3>
+							<p>{newsletter.description}</p>
+							<SecureSignup
+								newsletterId={newsletter.identityName}
+								successDescription={
+									newsletter.successDescription
+								}
+							/>
+						</div>
 					</article>
 					<aside css={privacyTextStyle}>
 						<NewsletterPrivacyMessage textColor="on-brand" />

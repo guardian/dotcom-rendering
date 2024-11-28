@@ -19,6 +19,8 @@ const newsletter = {
 	regionFocus: 'AU',
 	illustrationCard:
 		'https://uploads.guim.co.uk/2024/11/12/5_3_fight_back.jpg',
+	illustrationSquare:
+		'https://uploads.guim.co.uk/2024/10/28/Disapsora_1-1_200w.jpg',
 };
 
 export const standard = () => {

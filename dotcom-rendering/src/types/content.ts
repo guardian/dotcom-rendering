@@ -1053,4 +1053,5 @@ export type Newsletter = {
 	group: string;
 	regionFocus?: string;
 	illustrationCard?: string;
+	illustrationSquare?: string; // TO DO - need to support this property in newsletters API and frontend
 };
