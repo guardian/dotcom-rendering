@@ -100,7 +100,6 @@ export const PrimaryContainerStory = {
 	name: 'primary container',
 	args: {
 		title: 'Primary Container',
-		showTopBorder: false,
 		containerLevel: 'Primary',
 	},
 };
@@ -108,7 +107,6 @@ export const SecondaryContainerStory = {
 	name: 'secondary container',
 	args: {
 		title: 'Secondary Container',
-		showTopBorder: false,
 		containerLevel: 'Secondary',
 	},
 };

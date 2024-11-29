@@ -31,7 +31,6 @@ const meta = {
 			title="Scrollable medium"
 			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
-			showTopBorder={false}
 			containerLevel="Secondary"
 		>
 			<ScrollableMedium {...args} />
@@ -75,7 +74,6 @@ export const WithPrimaryContainer = {
 			title="Scrollable medium"
 			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
-			showTopBorder={false}
 			containerLevel="Primary"
 		>
 			<ScrollableMedium {...args} />
@@ -111,7 +109,6 @@ export const WithSpecialPaletteVariations = {
 					title={containerPalette}
 					discussionApiUrl={discussionApiUrl}
 					editionId="UK"
-					showTopBorder={false}
 					key={containerPalette}
 					containerPalette={containerPalette}
 					containerLevel="Secondary"

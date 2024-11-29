@@ -6492,6 +6492,11 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[10],
 	},
+	/** This should match --front-container-background but does not have a container override set */
+	'--front-page-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[10],
+	},
 	'--heading-line': {
 		light: headingLineLight,
 		dark: headingLineDark,
@@ -6919,6 +6924,14 @@ const paletteColours = {
 	'--section-border': {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
+	},
+	'--section-border-primary': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--section-border-secondary': {
+		light: () => sourcePalette.neutral[73],
+		dark: () => sourcePalette.neutral[38],
 	},
 	'--section-date': {
 		light: () => sourcePalette.news[400],
