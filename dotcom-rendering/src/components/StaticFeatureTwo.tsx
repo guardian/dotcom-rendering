@@ -24,7 +24,7 @@ export const StaticFeatureTwo = ({
 			direction="row"
 			padBottom={true}
 			showTopBar={true}
-			isFlexibleContainer={true}
+			hasLargeSpacing={true}
 		>
 			{cards.map((card) => {
 				return (

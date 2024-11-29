@@ -5,7 +5,10 @@ import { palette } from '../../../palette';
 
 type Direction = 'row' | 'column' | 'row-reverse';
 
-const ulStyles = (direction: Direction, isFlexibleContainer: boolean) => css`
+const getSpacingPx = (hasLargeSpacing: boolean) =>
+	hasLargeSpacing ? space[6] : space[3];
+
+const ulStyles = (direction: Direction, spacingPx: number) => css`
 	width: 100%;
 	position: relative;
 	display: flex;
@@ -16,7 +19,7 @@ const ulStyles = (direction: Direction, isFlexibleContainer: boolean) => css`
 	}
 
 	& > li {
-		margin-bottom: ${isFlexibleContainer ? space[6] : space[3]}px;
+		margin-bottom: ${spacingPx}px;
 	}
 
 	@supports (row-gap: 1em) {
@@ -24,7 +27,7 @@ const ulStyles = (direction: Direction, isFlexibleContainer: boolean) => css`
 			margin-bottom: 0;
 		}
 		/* Supported in flex layout is lacking: https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap#browser_compatibility */
-		row-gap: ${isFlexibleContainer ? space[6] : space[3]}px;
+		row-gap: ${spacingPx}px;
 	}
 `;
 
@@ -34,8 +37,8 @@ const wrapStyles = css`
 	}
 `;
 
-const marginBottomStyles = (isFlexibleContainer: boolean) => css`
-	margin-bottom: ${isFlexibleContainer ? space[6] : space[3]}px;
+const marginBottom = (spacingPx: number) => css`
+	margin-bottom: ${spacingPx}px;
 `;
 
 const topBarStyles = (splitTopBar: boolean) => css`
@@ -78,8 +81,8 @@ type Props = {
 	showTopBar?: boolean;
 	/** Used to add a gap in the center of the top bar */
 	splitTopBar?: boolean;
-	/** Used to give flexible container stories additional space */
-	isFlexibleContainer?: boolean;
+	/** Used to give beta containers additional space */
+	hasLargeSpacing?: boolean;
 	/** Overrides the vertical divider colour */
 	verticalDividerColour?: string;
 };
@@ -91,16 +94,17 @@ export const UL = ({
 	padBottom = false,
 	wrapCards = false,
 	showTopBar = false,
-	isFlexibleContainer = false,
+	hasLargeSpacing = false,
 	splitTopBar = false,
 	verticalDividerColour = palette('--section-border'),
 }: Props) => {
+	const spacingPx = getSpacingPx(hasLargeSpacing);
 	return (
 		<ul
 			css={[
-				ulStyles(direction, isFlexibleContainer),
+				ulStyles(direction, spacingPx),
 				showDivider && verticalDivider(verticalDividerColour),
-				padBottom && marginBottomStyles(isFlexibleContainer),
+				padBottom && marginBottom(spacingPx),
 				wrapCards && wrapStyles,
 				showTopBar && topBarStyles(splitTopBar),
 			]}
