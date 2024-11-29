@@ -517,7 +517,8 @@ export const FrontSection = ({
 		!!sectionId &&
 		!!collectionId &&
 		!!pageId &&
-		!!ajaxUrl;
+		!!ajaxUrl &&
+		!containerLevel;
 	const showVerticalRule = !hasPageSkin && !containerLevel;
 
 	/**
