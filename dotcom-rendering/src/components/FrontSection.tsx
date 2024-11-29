@@ -289,6 +289,22 @@ const sectionContentPadded = css`
 	}
 `;
 
+const sectionContentBorderFromLeftCol = css`
+	position: relative;
+	${from.leftCol} {
+		:before {
+			content: '';
+			position: absolute;
+			top: ${space[2]}px;
+			bottom: ${space[6]}px;
+			border-left: 1px solid ${schemePalette('--section-border')};
+			/** Hack to align exactly with the left border of the first scrollable card
+			 * TODO - fix this properly */
+			left: -0.5px;
+		}
+	}
+`;
+
 const sectionBottomContent = css`
 	grid-row: bottom-content;
 	grid-column: content;
@@ -519,7 +535,7 @@ export const FrontSection = ({
 		!!pageId &&
 		!!ajaxUrl &&
 		!containerLevel;
-	const showVerticalRule = !hasPageSkin && !containerLevel;
+	const showVerticalRule = !hasPageSkin;
 
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
@@ -579,6 +595,7 @@ export const FrontSection = ({
 								title?.toLowerCase() === 'opinion',
 							),
 							showVerticalRule &&
+								!containerLevel &&
 								sectionHeadlineFromLeftCol(
 									schemePalette('--section-border'),
 								),
@@ -622,6 +639,9 @@ export const FrontSection = ({
 							sectionContentPadded,
 							sectionContentRow(toggleable),
 							topPadding,
+							showVerticalRule &&
+								!!containerLevel &&
+								sectionContentBorderFromLeftCol,
 						]}
 						id={`container-${sectionId}`}
 					>
