@@ -334,6 +334,9 @@ export const FeatureCard = ({
 							<div
 								css={css`
 									position: relative;
+									background-color: ${palette(
+										'--feature-card-background',
+									)};
 									img {
 										width: 100%;
 										display: block;
