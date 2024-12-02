@@ -75,6 +75,9 @@ const containerStyles = css`
 		margin-left: ${gridGap / 2}px;
 		margin-right: ${gridGap / 2}px;
 	}
+	${from.leftCol} {
+		margin-left: 0;
+	}
 `;
 
 const containerWithNavigationStyles = css`
