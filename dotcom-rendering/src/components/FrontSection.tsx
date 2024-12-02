@@ -298,9 +298,7 @@ const sectionContentBorderFromLeftCol = css`
 			top: ${space[2]}px;
 			bottom: ${space[6]}px;
 			border-left: 1px solid ${schemePalette('--section-border')};
-			/** Hack to align exactly with the left border of the first scrollable card
-			 * TODO - fix this properly */
-			left: -0.5px;
+			transform: translateX(-50%);
 		}
 	}
 `;
