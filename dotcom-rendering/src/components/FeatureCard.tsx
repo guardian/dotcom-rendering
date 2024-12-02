@@ -76,24 +76,9 @@ export type Props = {
 };
 
 const baseCardStyles = css`
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	width: 100%;
 	/* We absolutely position the faux link
 		so this is required here */
 	position: relative;
-
-	/* Target Safari 10.1 */
-	/* https://www.browserstack.com/guide/create-browser-specific-css */
-	@media not all and (min-resolution: 0.001dpcm) {
-		@supports (-webkit-appearance: none) and
-			(not (stroke-color: transparent)) {
-			display: grid;
-			grid-auto-rows: min-content;
-			align-content: start;
-		}
-	}
 
 	/* a tag specific styles */
 	color: inherit;
@@ -102,11 +87,7 @@ const baseCardStyles = css`
 
 const hoverStyles = css`
 	:hover .image-overlay {
-		position: absolute;
-		top: 0;
-		width: 100%;
-		height: 100%;
-		left: 0;
+		position: relative;
 		background-color: ${palette('--card-background-hover')};
 	}
 
@@ -125,10 +106,7 @@ const hoverStyles = css`
  * https://css-tricks.com/easing-linear-gradients/
  */
 const overlayStyles = css`
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
+	place-self: end;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -319,190 +297,174 @@ export const FeatureCard = ({
 						isExternalLink={isExternalLink}
 					/>
 
-					<div
-						css={[
-							css`
-								display: flex;
-								flex-basis: 100%;
-								width: 100%;
-								gap: ${space[2]}px;
-								flex-direction: column;
-							`,
-						]}
-					>
-						{media && (
-							<div
-								css={css`
-									position: relative;
-									background-color: ${palette(
-										'--feature-card-background',
-									)};
-									img {
-										width: 100%;
-										display: block;
-									}
-								`}
-							>
-								{media.type === 'video' && (
-									<>
-										<div>
-											<CardPicture
-												mainImage={
-													media.imageUrl
-														? media.imageUrl
-														: media.mainMedia.images.reduce(
-																(
-																	prev,
-																	current,
-																) =>
-																	prev.width >
-																	current.width
-																		? prev
-																		: current,
-														  ).url
-												}
-												imageSize={imageSize}
-												alt={headlineText}
-												loading={imageLoading}
-												roundedCorners={false}
-												aspectRatio={aspectRatio}
-											/>
-										</div>
-									</>
-								)}
-
-								{media.type === 'picture' && (
-									<>
+					{media && (
+						<div
+							css={css`
+								display: grid;
+								place-content: center;
+								background-color: ${palette(
+									'--feature-card-background',
+								)};
+								> * {
+									grid-area: 1 / 1;
+								}
+								img {
+									width: 100%;
+									display: block;
+								}
+							`}
+						>
+							{media.type === 'video' && (
+								<>
+									<div>
 										<CardPicture
-											mainImage={media.imageUrl}
+											mainImage={
+												media.imageUrl
+													? media.imageUrl
+													: media.mainMedia.images.reduce(
+															(prev, current) =>
+																prev.width >
+																current.width
+																	? prev
+																	: current,
+													  ).url
+											}
 											imageSize={imageSize}
-											alt={media.imageAltText}
+											alt={headlineText}
 											loading={imageLoading}
 											roundedCorners={false}
 											aspectRatio={aspectRatio}
 										/>
-										{showPlayIcon &&
-											mainMedia.duration > 0 && (
-												<MediaDuration
-													mediaDuration={
-														mainMedia.duration
-													}
-													imagePositionOnDesktop={
-														imagePositionOnDesktop
-													}
-													imagePositionOnMobile={
-														imagePositionOnMobile
-													}
-												/>
-											)}
-									</>
-								)}
-
-								{/* This image overlay is styled when the CardLink is hovered */}
-								<div className="image-overlay" />
-
-								<div css={overlayStyles}>
-									{/**
-									 * Without the wrapping div the headline and
-									 * byline would have space inserted between
-									 * them due to being direct children of the
-									 * flex container
-									 */}
-									<div>
-										<CardHeadline
-											headlineText={headlineText}
-											format={format}
-											fontSizes={headlineSizes}
-											showQuotes={showQuotes}
-											kickerText={
-												format.design ===
-													ArticleDesign.LiveBlog &&
-												!kickerText
-													? 'Live'
-													: kickerText
-											}
-											showPulsingDot={
-												format.design ===
-													ArticleDesign.LiveBlog ||
-												showPulsingDot
-											}
-											byline={byline}
-											showByline={showByline}
-											isExternalLink={isExternalLink}
-											headlineColour={palette(
-												'--feature-card-headline',
-											)}
-											kickerColour={palette(
-												'--feature-card-kicker-text',
-											)}
-										/>
 									</div>
+								</>
+							)}
 
-									{starRating !== undefined ? (
-										<div css={starRatingWrapper}>
-											<StarRating
-												rating={starRating}
-												size="small"
-											/>
-										</div>
-									) : null}
-
-									{!!trailText && (
-										<div css={trailTextWrapper}>
-											<TrailText
-												trailText={trailText}
-												trailTextColour={palette(
-													'--feature-card-trail-text',
-												)}
-												trailTextSize={'regular'}
-												padBottom={false}
-											/>
-										</div>
+							{media.type === 'picture' && (
+								<>
+									<CardPicture
+										mainImage={media.imageUrl}
+										imageSize={imageSize}
+										alt={media.imageAltText}
+										loading={imageLoading}
+										roundedCorners={false}
+										aspectRatio={aspectRatio}
+									/>
+									{showPlayIcon && mainMedia.duration > 0 && (
+										<MediaDuration
+											mediaDuration={mainMedia.duration}
+											imagePositionOnDesktop={
+												imagePositionOnDesktop
+											}
+											imagePositionOnMobile={
+												imagePositionOnMobile
+											}
+										/>
 									)}
+								</>
+							)}
 
-									<CardFooter
+							{/* This image overlay is styled when the CardLink is hovered */}
+							<div className="image-overlay" />
+
+							<div css={overlayStyles}>
+								{/**
+								 * Without the wrapping div the headline and
+								 * byline would have space inserted between
+								 * them due to being direct children of the
+								 * flex container
+								 */}
+								<div>
+									<CardHeadline
+										headlineText={headlineText}
 										format={format}
-										age={
-											<CardAge
-												webPublicationDate={
-													webPublicationDate
-												}
-												showClock={!!showClock}
-												absoluteServerTimes={
-													absoluteServerTimes
-												}
-											/>
+										fontSizes={headlineSizes}
+										showQuotes={showQuotes}
+										kickerText={
+											format.design ===
+												ArticleDesign.LiveBlog &&
+											!kickerText
+												? 'Live'
+												: kickerText
 										}
-										commentCount={
-											<CommentCount
-												linkTo={linkTo}
-												discussionId={discussionId}
-												discussionApiUrl={
-													discussionApiUrl
-												}
-											/>
+										showPulsingDot={
+											format.design ===
+												ArticleDesign.LiveBlog ||
+											showPulsingDot
 										}
-										/**TODO: Determine if this is needed */
-										// cardBranding={
-										// 	branding ? (
-										// 		<CardBranding
-										// 			branding={branding}
-										// 			format={format}
-										// 			onwardsSource={
-										// 				onwardsSource
-										// 			}
-										// 			containerPalette={
-										// 				containerPalette
-										// 			}
-										// 		/>
-										// 	) : undefined
-										// }
-										showLivePlayable={false}
+										byline={byline}
+										showByline={showByline}
+										isExternalLink={isExternalLink}
+										headlineColour={palette(
+											'--feature-card-headline',
+										)}
+										kickerColour={palette(
+											'--feature-card-kicker-text',
+										)}
 									/>
 								</div>
+
+								{starRating !== undefined ? (
+									<div css={starRatingWrapper}>
+										<StarRating
+											rating={starRating}
+											size="small"
+										/>
+									</div>
+								) : null}
+
+								{!!trailText && (
+									<div css={trailTextWrapper}>
+										<TrailText
+											trailText={trailText}
+											trailTextColour={palette(
+												'--feature-card-trail-text',
+											)}
+											trailTextSize={'regular'}
+											padBottom={false}
+										/>
+									</div>
+								)}
+
+								<CardFooter
+									format={format}
+									age={
+										<CardAge
+											webPublicationDate={
+												webPublicationDate
+											}
+											showClock={!!showClock}
+											absoluteServerTimes={
+												absoluteServerTimes
+											}
+										/>
+									}
+									commentCount={
+										<CommentCount
+											linkTo={linkTo}
+											discussionId={discussionId}
+											discussionApiUrl={discussionApiUrl}
+										/>
+									}
+									/**TODO: Determine if this is needed */
+									// cardBranding={
+									// 	branding ? (
+									// 		<CardBranding
+									// 			branding={branding}
+									// 			format={format}
+									// 			onwardsSource={
+									// 				onwardsSource
+									// 			}
+									// 			containerPalette={
+									// 				containerPalette
+									// 			}
+									// 		/>
+									// 	) : undefined
+									// }
+									showLivePlayable={false}
+								/>
 							</div>
-						)}
-					</div>
+						</div>
+					)}
 
 					{hasSublinks && (
 						<SupportingContent
