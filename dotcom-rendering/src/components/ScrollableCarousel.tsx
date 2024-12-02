@@ -3,7 +3,6 @@ import {
 	between,
 	from,
 	headlineBold28Object,
-	height,
 	space,
 	textSansBold17Object,
 } from '@guardian/source/foundations';
@@ -116,11 +115,6 @@ const containerWithNavigationStyles = css`
 				-${secondaryTitlePreset.fontSize} * ${secondaryTitlePreset.lineHeight} -
 					${space[3]}px
 			);
-		}
-	}
-	${between.leftCol.and.wide} {
-		::before {
-			top: ${height.ctaSmall + space[2]}px;
 		}
 	}
 	${from.wide} {
