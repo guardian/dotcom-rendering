@@ -184,6 +184,7 @@ export const BylineLink = ({
 
 	const { renderingTarget } = useConfig();
 	const isApps = renderingTarget === 'Apps';
+
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 
 	return (

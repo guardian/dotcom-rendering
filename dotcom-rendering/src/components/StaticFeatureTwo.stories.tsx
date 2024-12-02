@@ -29,7 +29,6 @@ const meta = {
 			title="Static feature two"
 			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
-			showTopBorder={true}
 			containerLevel="Primary"
 		>
 			<StaticFeatureTwo {...args} />
@@ -71,7 +70,6 @@ export const WithSpecialPaletteVariations = {
 					title={containerPalette}
 					discussionApiUrl={discussionApiUrl}
 					editionId="UK"
-					showTopBorder={false}
 					key={containerPalette}
 					containerPalette={containerPalette}
 					containerLevel="Primary"

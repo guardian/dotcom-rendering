@@ -119,7 +119,7 @@ const getFontSize = (
 const sublinkStyles = css`
 	display: block;
 	/* See: https://css-tricks.com/nested-links/ */
-	${getZIndex('card-nested-link')}
+	z-index: ${getZIndex('card-nested-link')};
 	/* The following styles turn off those provided by Link */
 	color: inherit;
 	text-decoration: none;

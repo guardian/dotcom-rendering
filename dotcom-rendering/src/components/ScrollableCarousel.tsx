@@ -3,7 +3,6 @@ import {
 	between,
 	from,
 	headlineBold28Object,
-	height,
 	space,
 	textSansBold17Object,
 } from '@guardian/source/foundations';
@@ -64,6 +63,7 @@ const themeButtonDisabled: Partial<ThemeButton> = {
  */
 const containerStyles = css`
 	position: relative;
+	margin-bottom: ${space[6]}px;
 	margin-left: -${gridGapMobile}px;
 	margin-right: -${gridGapMobile}px;
 	${from.mobileLandscape} {
@@ -76,16 +76,6 @@ const containerStyles = css`
 	}
 	${from.leftCol} {
 		margin-left: 0;
-		::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			width: 1px;
-			background-color: ${palette('--card-border-top')};
-			transform: translateX(-50%);
-		}
 	}
 `;
 
@@ -125,11 +115,6 @@ const containerWithNavigationStyles = css`
 				-${secondaryTitlePreset.fontSize} * ${secondaryTitlePreset.lineHeight} -
 					${space[3]}px
 			);
-		}
-	}
-	${between.leftCol.and.wide} {
-		::before {
-			top: ${height.ctaSmall + space[2]}px;
 		}
 	}
 	${from.wide} {
@@ -288,9 +273,9 @@ export const ScrollableCarousel = ({
 	 * Updates state of navigation buttons based on carousel's scroll position.
 	 *
 	 * This function checks the current scroll position of the carousel and sets
-	 * the styles of the previous and next buttons accordingly. The previous
-	 * button is disabled if the carousel is at the start, and the next button
-	 * is disabled if the carousel is at the end.
+	 * the styles of the previous and next buttons accordingly. The button state
+	 * is toggled when the midpoint of the first or last card has been scrolled
+	 * in or out of view.
 	 */
 	const updateButtonVisibilityOnScroll = () => {
 		const carouselElement = carouselRef.current;
@@ -299,9 +284,27 @@ export const ScrollableCarousel = ({
 		const scrollLeft = carouselElement.scrollLeft;
 		const maxScrollLeft =
 			carouselElement.scrollWidth - carouselElement.clientWidth;
+		const cardWidth = carouselElement.querySelector('li')?.offsetWidth ?? 0;
 
-		setPreviousButtonEnabled(scrollLeft > 0);
-		setNextButtonEnabled(scrollLeft < maxScrollLeft);
+		setPreviousButtonEnabled(scrollLeft > cardWidth / 2);
+		setNextButtonEnabled(scrollLeft < maxScrollLeft - cardWidth / 2);
+	};
+
+	/**
+	 * Throttle scroll events to optimise performance. As we're only using this
+	 * to toggle button state as the carousel is scrolled we don't need to
+	 * handle every event. This function ensures the callback is only called
+	 * once every 200ms, no matter how many scroll events are fired.
+	 */
+	const throttleEvent = (callback: () => void) => {
+		let isThrottled: boolean = false;
+		return function () {
+			if (!isThrottled) {
+				callback();
+				isThrottled = true;
+				setTimeout(() => (isThrottled = false), 200);
+			}
+		};
 	};
 
 	useEffect(() => {
@@ -310,13 +313,13 @@ export const ScrollableCarousel = ({
 
 		carouselElement.addEventListener(
 			'scroll',
-			updateButtonVisibilityOnScroll,
+			throttleEvent(updateButtonVisibilityOnScroll),
 		);
 
 		return () => {
 			carouselElement.removeEventListener(
 				'scroll',
-				updateButtonVisibilityOnScroll,
+				throttleEvent(updateButtonVisibilityOnScroll),
 			);
 		};
 	}, []);

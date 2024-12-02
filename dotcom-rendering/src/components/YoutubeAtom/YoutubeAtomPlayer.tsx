@@ -90,7 +90,7 @@ const fullscreenStyles = (id: string) => css`
 		width: 100svw;
 		/* stylelint-disable-next-line declaration-block-no-duplicate-properties */
 		height: 100svh;
-		${getZIndex('youTubeFullscreen')};
+		z-index: ${getZIndex('youTubeFullscreen')};
 	}
 `;
 

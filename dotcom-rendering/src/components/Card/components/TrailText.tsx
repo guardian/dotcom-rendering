@@ -17,6 +17,8 @@ type Props = {
 	trailTextColour?: string;
 	/** Controls visibility of trail text on various breakpoints */
 	hideUntil?: 'tablet' | 'desktop';
+	/** Defaults to `true`. Adds padding to the bottom of the trail text */
+	padBottom?: boolean;
 	/** Adds padding to the top of the trail text */
 	padTop?: boolean;
 };
@@ -24,6 +26,9 @@ type Props = {
 const trailTextStyles = css`
 	display: flex;
 	flex-direction: column;
+`;
+
+const bottomPadding = css`
 	padding-bottom: ${space[2]}px;
 `;
 
@@ -46,6 +51,7 @@ export const TrailText = ({
 	trailTextSize = 'regular',
 	trailTextColour = palette('--card-trail-text'),
 	hideUntil,
+	padBottom = true,
 	padTop = false,
 }: Props) => {
 	const trailText = (
@@ -56,6 +62,7 @@ export const TrailText = ({
 					color: ${trailTextColour};
 				`,
 				fontStyles(trailTextSize),
+				padBottom && bottomPadding,
 				padTop && topPadding,
 			]}
 		>

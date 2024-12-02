@@ -348,7 +348,6 @@ export const Card = ({
 					isWithinTwelveHours: withinTwelveHours,
 				}}
 				showClock={showClock}
-				isOnwardContent={isOnwardContent}
 				absoluteServerTimes={absoluteServerTimes}
 				isTagPage={isTagPage}
 			/>
@@ -366,9 +365,9 @@ export const Card = ({
 				href={`${linkTo}#comments`}
 				cssOverrides={css`
 					/* See: https://css-tricks.com/nested-links/ */
-					${getZIndex('card-nested-link')}
+					z-index: ${getZIndex('card-nested-link')};
 					/* The following styles turn off those provided by Link */
-				color: inherit;
+					color: inherit;
 					/* stylelint-disable-next-line property-disallowed-list */
 					font-family: inherit;
 					font-size: inherit;
@@ -381,7 +380,6 @@ export const Card = ({
 					<CardCommentCount
 						discussionApiUrl={discussionApiUrl}
 						discussionId={discussionId}
-						isOnwardContent={isOnwardContent}
 					/>
 				</Island>
 			</Link>
@@ -414,10 +412,6 @@ export const Card = ({
 	// we render the footer in a different location
 	const showCommentFooter =
 		isOpinion && !isOnwardContent && media?.type === 'avatar';
-
-	const cardBackgroundColour = isOnwardContent
-		? palette('--onward-content-card-background')
-		: palette('--card-background');
 
 	/**
 	 * Some cards in standard containers have contrasting background colours.
@@ -553,7 +547,7 @@ export const Card = ({
 					css={css`
 						padding-bottom: ${space[5]}px;
 					`}
-					style={{ backgroundColor: cardBackgroundColour }}
+					style={{ backgroundColor: palette('--card-background') }}
 				>
 					<CardHeadline
 						headlineText={headlineText}
@@ -590,7 +584,7 @@ export const Card = ({
 			)}
 
 			<CardLayout
-				cardBackgroundColour={cardBackgroundColour}
+				cardBackgroundColour={palette('--card-background')}
 				imagePositionOnDesktop={imagePositionOnDesktop}
 				imagePositionOnMobile={imagePositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
@@ -615,7 +609,9 @@ export const Card = ({
 								<div
 									css={css`
 										position: relative;
-										${getZIndex('card-nested-link')}
+										z-index: ${getZIndex(
+											'card-nested-link',
+										)};
 									`}
 								>
 									<Island
@@ -655,7 +651,9 @@ export const Card = ({
 										css={css`
 											display: block;
 											position: relative;
-											${getZIndex('card-nested-link')}
+											z-index: ${getZIndex(
+												'card-nested-link',
+											)};
 										`}
 									>
 										<Island

@@ -6,6 +6,7 @@ import {
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
+import { AuEoy2024Wrapper } from '../components/AuEoy2024Wrapper.importable';
 import { Carousel } from '../components/Carousel.importable';
 import { ContainerOverrides } from '../components/ContainerOverrides';
 import { CPScottHeader } from '../components/CPScottHeader';
@@ -364,6 +365,36 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
+					if (
+						collection.displayName === 'AU end-of-year 2024' &&
+						pageId.toLowerCase() === 'au'
+					) {
+						return (
+							<ContainerOverrides
+								key={ophanName}
+								containerPalette={collection.containerPalette}
+							>
+								<Section
+									fullWidth={true}
+									padBottom={false}
+									showSideBorders={false}
+									padSides={false}
+									showTopBorder={false}
+									ophanComponentLink={ophanComponentLink}
+									ophanComponentName={ophanName}
+									hasPageSkin={hasPageSkin}
+								>
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
+										<AuEoy2024Wrapper />
+									</Island>
+								</Section>
+							</ContainerOverrides>
+						);
+					}
+
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
 							<ContainerOverrides
@@ -428,10 +459,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							: undefined;
 
 						return (
-							<ContainerOverrides
-								key={ophanName}
-								containerPalette={collection.containerPalette}
-							>
+							<div key={ophanName}>
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
@@ -491,16 +519,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									mobileAdPositions,
 									hasPageSkin,
 								)}
-							</ContainerOverrides>
+							</div>
 						);
 					}
 
 					if (collection.containerPalette === 'Branded') {
 						return (
-							<ContainerOverrides
-								key={ophanName}
-								containerPalette={collection.containerPalette}
-							>
+							<div key={ophanName}>
 								<LabsSection
 									title={collection.displayName}
 									collectionId={collection.id}
@@ -553,7 +578,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									mobileAdPositions,
 									hasPageSkin,
 								)}
-							</ContainerOverrides>
+							</div>
 						);
 					}
 
@@ -565,10 +590,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							collection.containerPalette ?? 'MediaPalette';
 
 						return (
-							<ContainerOverrides
-								key={ophanName}
-								containerPalette={containerPalette}
-							>
+							<div key={ophanName}>
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
@@ -640,15 +662,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										mobileAdPositions,
 										hasPageSkin,
 									)}
-							</ContainerOverrides>
+							</div>
 						);
 					}
 
 					return (
-						<ContainerOverrides
-							key={ophanName}
-							containerPalette={collection.containerPalette}
-						>
+						<div key={ophanName}>
 							{decideFrontsBannerAdSlot(
 								renderAds,
 								hasPageSkin,
@@ -730,7 +749,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								mobileAdPositions,
 								hasPageSkin,
 							)}
-						</ContainerOverrides>
+						</div>
 					);
 				})}
 			</main>

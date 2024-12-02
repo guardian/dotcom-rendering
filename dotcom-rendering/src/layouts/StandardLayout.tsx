@@ -109,7 +109,7 @@ const StandardGrid = ({
 								grid-template-areas:
 									'title  border  matchNav   . right-column'
 									'title  border  matchtabs  . right-column'
-									'.      border  headline   . right-column'
+									'title  border  headline   . right-column'
 									'.      border  standfirst . right-column'
 									'meta   border  media      . right-column'
 									'meta   border  body       . right-column'
@@ -152,7 +152,7 @@ const StandardGrid = ({
 							grid-template-areas:
 								'title  border  matchNav     right-column'
 								'title  border  matchtabs    right-column'
-								'.      border  headline     right-column'
+								'title  border  headline     right-column'
 								'.      border  standfirst   right-column'
 								'meta   border  media        right-column'
 								'meta   border  body         right-column'
@@ -316,7 +316,7 @@ const usCardStyles = css`
 	align-self: start;
 	position: sticky;
 	top: 0;
-	${getZIndex('expandableMarketingCardOverlay')}
+	z-index: ${getZIndex('expandableMarketingCardOverlay')};
 
 	${from.leftCol} {
 		margin-top: ${space[6]}px;

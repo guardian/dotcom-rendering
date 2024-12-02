@@ -30,7 +30,6 @@ const meta = {
 			title="Static medium four"
 			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
-			showTopBorder={true}
 			containerLevel="Primary"
 		>
 			<StaticMediumFour {...args} />
@@ -98,7 +97,6 @@ export const WithSpecialPaletteVariations = {
 					title={containerPalette}
 					discussionApiUrl={discussionApiUrl}
 					editionId="UK"
-					showTopBorder={false}
 					key={containerPalette}
 					containerPalette={containerPalette}
 					containerLevel="Primary"

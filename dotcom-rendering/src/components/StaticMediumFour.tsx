@@ -34,7 +34,7 @@ export const StaticMediumFour = ({
 			direction="row"
 			padBottom={true}
 			showTopBar={true}
-			isFlexibleContainer={true}
+			hasLargeSpacing={true}
 		>
 			{cards.map((card, cardIndex) => {
 				return (

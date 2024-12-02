@@ -30,7 +30,7 @@ export const StaticFeatureTwo = ({
 			direction="row"
 			padBottom={true}
 			showTopBar={true}
-			isFlexibleContainer={true}
+			hasLargeSpacing={true}
 		>
 			{cards.map((card) => {
 				return (
@@ -69,10 +69,7 @@ export const StaticFeatureTwo = ({
 							imageLoading={imageLoading}
 							aspectRatio={aspectRatio}
 							imageSize="feature-large"
-							headlineSizes={{
-								desktop: 'medium',
-								tablet: 'small',
-							}}
+							headlineSizes={{ desktop: 'small' }}
 							supportingContent={card.supportingContent}
 						/>
 					</LI>
