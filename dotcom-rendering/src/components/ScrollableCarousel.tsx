@@ -3,7 +3,6 @@ import {
 	between,
 	from,
 	headlineBold28Object,
-	height,
 	space,
 	textSansBold17Object,
 } from '@guardian/source/foundations';
@@ -77,16 +76,6 @@ const containerStyles = css`
 	}
 	${from.leftCol} {
 		margin-left: 0;
-		::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			width: 1px;
-			background-color: ${palette('--card-border-top')};
-			transform: translateX(-50%);
-		}
 	}
 `;
 
@@ -126,11 +115,6 @@ const containerWithNavigationStyles = css`
 				-${secondaryTitlePreset.fontSize} * ${secondaryTitlePreset.lineHeight} -
 					${space[3]}px
 			);
-		}
-	}
-	${between.leftCol.and.wide} {
-		::before {
-			top: ${height.ctaSmall + space[2]}px;
 		}
 	}
 	${from.wide} {
