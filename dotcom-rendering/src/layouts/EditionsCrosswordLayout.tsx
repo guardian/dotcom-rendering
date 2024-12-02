@@ -1,5 +1,5 @@
 import type { CrosswordData } from '@guardian/source-development-kitchen/dist/react-components/crossword/@types/crossword';
-import { EditionsCrossword } from '../components/EditionsCrossword.importable';
+import { EditionsCrossword } from '../components/EditionsCrossword';
 import { Island } from '../components/Island';
 import type { FEEditionsCrossword } from '../types/editionsCrossword';
 
@@ -36,15 +36,9 @@ export const EditionsCrosswordLayout = ({ editionsCrosswords }: Props) => {
 	const todaysCrosswords = getTodaysCrosswords(editionsCrosswords);
 
 	return (
-		<main data-layout="EditionsCrosswordLayout">
-			{todaysCrosswords.map((crossword) => {
-				const data = transformCrosswordData(crossword);
-				return (
-					<Island priority="critical" key={data.id}>
-						<EditionsCrossword data={data} />
-					</Island>
-				);
-			})}
-		</main>
+		<main
+			id="editions-crossword-player"
+			data-crosswords={JSON.stringify(editionsCrosswords)}
+		></main>
 	);
 };

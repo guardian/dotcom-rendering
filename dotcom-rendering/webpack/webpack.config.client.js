@@ -38,7 +38,7 @@ const generateName = (build) => {
 const getEntryIndex = (build) => {
 	switch (build) {
 		case 'client.editionsCrossword':
-			return './src/client/main.editionsCrossword.ts';
+			return './src/client/main.editionsCrossword.tsx';
 		case 'client.apps':
 			return './src/client/main.apps.ts';
 		default:
