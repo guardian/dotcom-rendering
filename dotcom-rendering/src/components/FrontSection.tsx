@@ -299,6 +299,8 @@ const sectionContentBorderFromLeftCol = css`
 			bottom: ${space[6]}px;
 			border-left: 1px solid ${schemePalette('--section-border')};
 			transform: translateX(-50%);
+			/** Keeps the vertical divider ontop of carousel item dividers */
+			z-index: 1;
 		}
 	}
 `;
