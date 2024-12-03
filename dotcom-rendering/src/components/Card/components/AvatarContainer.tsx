@@ -1,11 +1,14 @@
 import { css } from '@emotion/react';
-import { from, space, until } from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
 type Props = {
 	children: React.ReactNode;
 	imageSize: ImageSizeType;
 	imagePositionOnDesktop: ImagePositionType;
+	imagePositionOnMobile: ImagePositionType;
+	hasKicker: boolean;
+	isFairgroundContainer?: boolean;
 };
 
 const sideMarginStyles = css`
@@ -16,19 +19,97 @@ const topMarginStyles = css`
 	margin-top: ${space[1]}px;
 `;
 
+const kickerTopMarginStyles = css`
+	margin-top: 1.15rem;
+`;
+
 const largerTopMargin = css`
 	${from.tablet} {
 		margin-top: 50px;
 	}
 `;
 
-const sizingStyles = (
+const fairgroundSizingStyles = (
 	imageSize: ImageSizeType,
-	imagePositionOnDesktop: ImagePositionType,
+	isVerticalOnDesktop: boolean,
+	isVerticalOnMobile: boolean,
 ) => {
-	const isVertical =
-		imagePositionOnDesktop === 'top' || imagePositionOnDesktop === 'bottom';
+	if (isVerticalOnDesktop && isVerticalOnMobile) {
+		return css`
+			width: 95px;
+			height: 95px;
+			${between.tablet.and.desktop} {
+				height: 70px;
+				width: 70px;
+			}
+		`;
+	}
 
+	if (isVerticalOnDesktop && !isVerticalOnMobile) {
+		return css`
+			width: 95px;
+			height: 95px;
+			${until.desktop} {
+				height: 70px;
+				width: 70px;
+			}
+			${until.tablet} {
+				height: 90px;
+				width: 90px;
+			}
+		`;
+	}
+
+	switch (imageSize) {
+		case 'small':
+			return css`
+				width: 80px;
+				height: 80px;
+			`;
+		case 'large':
+			return css`
+				width: 150px;
+				height: 150px;
+				${until.desktop} {
+					height: 130px;
+					width: 130px;
+				}
+				${until.tablet} {
+					height: 150px;
+					width: 150px;
+				}
+			`;
+		case 'jumbo':
+			return css`
+				width: 190px;
+				height: 190px;
+				${until.desktop} {
+					height: 160px;
+					width: 160px;
+				}
+				${until.tablet} {
+					height: 180px;
+					width: 180px;
+				}
+			`;
+		case 'medium':
+		default:
+			return css`
+				width: 95px;
+				height: 95px;
+				${until.desktop} {
+					height: 85px;
+					width: 85px;
+				}
+				${until.tablet} {
+					height: 80px;
+					width: 80px;
+				}
+			`;
+	}
+};
+
+const sizingStyles = (imageSize: ImageSizeType, isVertical: boolean) => {
 	switch (imageSize) {
 		case 'small':
 			return css`
@@ -68,18 +149,35 @@ export const AvatarContainer = ({
 	children,
 	imageSize,
 	imagePositionOnDesktop,
+	imagePositionOnMobile,
+	hasKicker,
+	isFairgroundContainer,
 }: Props) => {
-	const isVertical =
+	const isVerticalOnDesktop =
 		imagePositionOnDesktop === 'top' || imagePositionOnDesktop === 'bottom';
+	const isVerticalOnMobile =
+		imagePositionOnMobile === 'top' || imagePositionOnMobile === 'bottom';
 
 	return (
 		<div
-			css={[
-				sideMarginStyles,
-				topMarginStyles,
-				isVertical && largerTopMargin,
-				sizingStyles(imageSize, imagePositionOnDesktop),
-			]}
+			css={
+				isFairgroundContainer
+					? [
+							sideMarginStyles,
+							hasKicker && kickerTopMarginStyles,
+							fairgroundSizingStyles(
+								imageSize,
+								isVerticalOnDesktop,
+								isVerticalOnMobile,
+							),
+					  ]
+					: [
+							sideMarginStyles,
+							topMarginStyles,
+							isVerticalOnDesktop && largerTopMargin,
+							sizingStyles(imageSize, isVerticalOnDesktop),
+					  ]
+			}
 		>
 			{children}
 		</div>

@@ -59,6 +59,16 @@ import { ImageWrapper } from './components/ImageWrapper';
 import { TrailText, type TrailTextSize } from './components/TrailText';
 
 export type Position = 'inner' | 'outer' | 'none';
+export const FAIRGROUND_CONTAINERS = [
+	'scrollable/highlights',
+	'flexible/special',
+	'flexible/general',
+	'scrollable/small',
+	'scrollable/medium',
+	'scrollable/feature',
+	'static/feature/2',
+	'static/medium/4',
+];
 
 export type Props = {
 	linkTo: string;
@@ -426,6 +436,10 @@ export const Card = ({
 
 	const isSmallCard = containerType === 'scrollable/small';
 
+	const isFairgroundContainer = FAIRGROUND_CONTAINERS.includes(
+		containerType ?? '',
+	);
+
 	const imageFixedSizeOptions = (): ImageFixedSizeOptions => {
 		if (isSmallCard) {
 			return {
@@ -635,6 +649,9 @@ export const Card = ({
 							<AvatarContainer
 								imageSize={imageSize}
 								imagePositionOnDesktop={imagePositionOnDesktop}
+								imagePositionOnMobile={imagePositionOnMobile}
+								hasKicker={!!kickerText}
+								isFairgroundContainer={isFairgroundContainer}
 							>
 								<Avatar
 									src={media.avatarUrl}

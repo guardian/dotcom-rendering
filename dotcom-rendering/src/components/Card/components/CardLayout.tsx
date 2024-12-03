@@ -3,6 +3,7 @@ import { isUndefined } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import type { DCRContainerType } from '../../../types/front';
 import type { CardImageType } from '../../../types/layout';
+import { FAIRGROUND_CONTAINERS } from '../Card';
 import type { ImagePositionType } from './ImageWrapper';
 
 const padding = 20;
@@ -65,6 +66,7 @@ const minWidth = (minWidthInPixels?: number) => {
 const decideDirection = (
 	imagePositionOnMobile: ImagePositionType,
 	imagePositionOnDesktop: ImagePositionType,
+	isFairgroundContainer: boolean,
 	hasAvatar?: boolean,
 ) => {
 	const imagePosition = {
@@ -74,10 +76,9 @@ const decideDirection = (
 		right: 'row-reverse',
 		none: 'column',
 	};
-
 	if (hasAvatar) {
-		/** TODO: should this be limited to fairground only? */
 		if (
+			isFairgroundContainer &&
 			(imagePositionOnDesktop === 'left' ||
 				imagePositionOnDesktop === 'right') &&
 			imagePositionOnMobile === 'bottom'
@@ -122,11 +123,13 @@ const decideDirection = (
 const decidePosition = (
 	imagePositionOnMobile: ImagePositionType,
 	imagePositionOnDesktop: ImagePositionType,
+	isFairgroundContainer: boolean,
 	hasAvatar?: boolean,
 ) => {
 	const { mobile, desktop } = decideDirection(
 		imagePositionOnMobile,
 		imagePositionOnDesktop,
+		isFairgroundContainer,
 		hasAvatar,
 	);
 
@@ -163,24 +166,30 @@ export const CardLayout = ({
 	imageType,
 	containerType,
 	gapSize = 'small',
-}: Props) => (
-	<div
-		css={[
-			containerStyles,
-			containerType === 'fixed/video'
-				? videoWidth
-				: minWidth(minWidthInPixels),
-			decidePosition(
-				imagePositionOnMobile,
-				imagePositionOnDesktop,
-				imageType === 'avatar',
-			),
-		]}
-		style={{
-			backgroundColor: cardBackgroundColour,
-			gap: decideGap(gapSize),
-		}}
-	>
-		{children}
-	</div>
-);
+}: Props) => {
+	const isFairgroundContainer = FAIRGROUND_CONTAINERS.includes(
+		containerType ?? '',
+	);
+	return (
+		<div
+			css={[
+				containerStyles,
+				containerType === 'fixed/video'
+					? videoWidth
+					: minWidth(minWidthInPixels),
+				decidePosition(
+					imagePositionOnMobile,
+					imagePositionOnDesktop,
+					isFairgroundContainer,
+					imageType === 'avatar',
+				),
+			]}
+			style={{
+				backgroundColor: cardBackgroundColour,
+				gap: decideGap(gapSize),
+			}}
+		>
+			{children}
+		</div>
+	);
+};
