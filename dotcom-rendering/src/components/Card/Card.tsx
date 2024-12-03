@@ -605,6 +605,7 @@ export const Card = ({
 				imageType={media?.type}
 				containerType={containerType}
 				gapSize={getGapSize()}
+				isFairgroundContainer={isFairgroundContainer}
 			>
 				{media && (
 					<ImageWrapper
