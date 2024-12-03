@@ -31,7 +31,7 @@ import type { ReactComponent } from './marketing/lib/ReactComponent';
 const styles = {
 	container: css`
 		/* stylelint-disable-next-line color-no-hex */
-		background: #051d32;
+		background: #041d35;
 		color: ${palette.neutral[100]};
 	`,
 	grid: css`
@@ -113,139 +113,21 @@ const styles = {
 	`,
 };
 
-const stylesGivingTuesday = {
-	container: css`
-		/* stylelint-disable-next-line color-no-hex */
-		background: #f3afd9;
-		color: ${palette.neutral[100]};
-	`,
-	grid: css`
-		display: grid;
-		flex-direction: column;
-		position: relative;
-		padding: 0 ${space[3]}px ${space[4]}px ${space[3]}px;
-		${from.tablet} {
-			display: grid;
-			grid-template-columns: 350px 350px;
-			padding: 0 ${space[5]}px ${space[4]}px ${space[5]}px;
-		}
-		${from.desktop} {
-			grid-template-columns: 462px 462px;
-			column-gap: ${space[4]}px;
-		}
-		${from.leftCol} {
-			grid-template-columns: 148px 482px 482px;
-			column-gap: 0;
-		}
-		${from.wide} {
-			grid-template-columns: 228px 482px 482px;
-		}
-	`,
-	logo: css`
-		display: none;
-		${from.leftCol} {
-			display: block;
-			grid-column: 1;
-			grid-row: 1;
-			margin-top: ${space[2]}px;
-		}
-	`,
-	heading: css`
-		${from.tablet} {
-			grid-column: 1;
-			grid-row: 1;
-		}
-		h2 {
-			margin: ${space[2]}px 0 ${space[4]}px;
-			color: ${'#670055'};
-
-			${headlineMedium24}
-			${from.tablet} {
-				${headlineMedium28}
-			}
-			${from.leftCol} {
-				${headlineMedium34}
-			}
-		}
-		${from.leftCol} {
-			grid-column: 2;
-			border-left: 1px solid rgba(0, 0, 0, 0.2);
-			padding-left: ${space[2]}px;
-		}
-	`,
-	body: css`
-		${textEgyptian17};
-		strong {
-			${textEgyptianBold17};
-		}
-		color: ${'#1A2835'};
-	`,
-	ticker: css`
-		margin-bottom: ${space[4]}px;
-	`,
-	choiceCards: css`
-		margin-top: ${space[6]}px;
-		${from.tablet} {
-			grid-column: 2;
-			grid-row: 1;
-			align-self: flex-start;
-			display: flex;
-			justify-content: flex-end;
-		}
-		${from.leftCol} {
-			grid-column: 3;
-			margin-right: ${space[3]}px;
-		}
-	`,
-};
-
 const tickerSettings = {
 	currencySymbol: '$',
 	copy: {},
 	tickerStylingSettings: {
-		filledProgressColour: '#64B7C4',
-		progressBarBackgroundColour: 'rgba(34, 75, 95, 1)',
+		filledProgressColour: '#FFBAC8',
+		progressBarBackgroundColour: '#1F4153',
 		headlineColour: '#000000',
-		totalColour: '#64B7C4',
+		totalColour: '#FEBBC7',
 		goalColour: '#FFFFFF',
 	},
 };
 
-const tickerSettingsGivingTuesday = {
-	currencySymbol: '$',
-	copy: {},
-	tickerStylingSettings: {
-		filledProgressColour: '#016D67',
-		progressBarBackgroundColour: 'rgba(1, 109, 103, 0.3)',
-		headlineColour: '#000000',
-		totalColour: '#016D67',
-		goalColour: '#1A2835',
-	},
-};
-
-const heading = (isGivingTuesday: boolean) => {
-	return isGivingTuesday
-		? 'This Giving Tuesday, give to the Guardian.'
-		: 'Can you help us hit our goal?';
-};
-const bodyCopy = (isGivingTuesday: boolean) => {
-	const givingTuesdayCopy =
-		'We’re funded by readers, not billionaires - which means we can publish factual journalism with no outside influence.';
-	const normalCopy =
-		'With no billionaire owner or shareholders pulling our strings, reader support keeps us fiercely independent.';
-	return isGivingTuesday ? givingTuesdayCopy : normalCopy;
-};
-
-const bodyCopyHighlightedText = (isGivingTuesday: boolean) => {
-	const givingTuesdayCopy = 'Help us raise $4m to keep going in 2025.';
-	const normalCopy =
-		'Help us hit our most important annual fundraising goal so we can keep going.';
-	return isGivingTuesday ? givingTuesdayCopy : normalCopy;
-};
-
 const getTickerData = async (): Promise<TickerData | undefined> => {
 	const data = await fetch(
-		'https://support.theguardian.com/ticker/US.json',
+		'https://support.theguardian.com/ticker/AU.json',
 	).then((response) => response.json());
 
 	if (isObject(data)) {
@@ -261,52 +143,50 @@ const getTickerData = async (): Promise<TickerData | undefined> => {
 };
 
 const choiceCardAmounts: SelectedAmountsVariant = {
-	testName: 'us-eoy-front-amounts',
+	testName: 'au-eoy-front-amounts',
 	variantName: 'CONTROL',
 	defaultContributionType: 'MONTHLY',
 	displayContributionType: ['ONE_OFF', 'MONTHLY', 'ANNUAL'],
 	amountsCardData: {
 		ONE_OFF: {
-			amounts: [75, 125],
-			defaultAmount: 75,
+			amounts: [75, 120],
+			defaultAmount: 120,
 			hideChooseYourAmount: false,
 		},
 		MONTHLY: {
-			amounts: [5, 15],
-			defaultAmount: 15,
+			amounts: [10, 20],
+			defaultAmount: 20,
 			hideChooseYourAmount: false,
 		},
 		ANNUAL: {
-			amounts: [60, 150],
-			defaultAmount: 150,
+			amounts: [80, 200],
+			defaultAmount: 200,
 			hideChooseYourAmount: false,
 		},
 	},
 };
 const choiceCardSettings: ChoiceCardSettings = {
 	buttonColour: '#FFFFFF',
-	buttonTextColour: '#000000',
-	buttonBorderColour: '#000000',
-	buttonSelectColour: '#E3F6FF',
-	buttonSelectTextColour: '#000000',
-	buttonSelectBorderColour: '#0077B6',
+	buttonTextColour: '#767676',
+	buttonBorderColour: '#999999',
+	buttonSelectColour: '#FFE8EC',
+	buttonSelectTextColour: '#062962',
+	buttonSelectBorderColour: '#FEBBC7',
 };
-const componentId = 'USEOY24_LAUNCH_UPDATED_THRASHER';
+const componentId = 'AUEOY24_LAUNCH_UPDATED_THRASHER';
 const cta = {
-	ctaUrl: `https://support.theguardian.com/us/contribute?acquisitionData={"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_THRASHER","componentId":"${componentId}","campaignCode":"USEOY24"}&INTCMP=USEOY24`,
+	ctaUrl: `https://support.theguardian.com/au/contribute?acquisitionData={"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_THRASHER","componentId":"${componentId}","campaignCode":"AUEOY24"}&INTCMP=AUEOY24`,
 	ctaText: 'Support us',
 };
 
 interface Props {
 	tickerData: TickerData;
 	submitTrackingEvent: (event: ComponentEvent) => void;
-	date: Date;
 }
 
-export const UsEoy2024: ReactComponent<Props> = ({
+export const AuEoy2024: ReactComponent<Props> = ({
 	tickerData,
 	submitTrackingEvent,
-	date,
 }: Props): JSX.Element => {
 	const {
 		choiceCardSelection,
@@ -314,79 +194,38 @@ export const UsEoy2024: ReactComponent<Props> = ({
 		getCtaText,
 		getCtaUrl,
 		currencySymbol,
-	} = useChoiceCards(choiceCardAmounts, 'US', cta, cta);
-
-	const isGivingTuesday =
-		date >= new Date('2024-11-27T00:00:01') &&
-		date < new Date('2024-12-03T23:59:59');
+	} = useChoiceCards(choiceCardAmounts, 'AU', cta, cta);
 
 	return (
-		<div
-			css={
-				isGivingTuesday
-					? stylesGivingTuesday.container
-					: styles.container
-			}
-		>
-			<div css={isGivingTuesday ? stylesGivingTuesday.grid : styles.grid}>
-				<div
-					css={
-						isGivingTuesday ? stylesGivingTuesday.logo : styles.logo
-					}
-				>
-					<SvgGuardianLogo
-						textColor={isGivingTuesday ? '#000000' : '#FFFFFF'}
-						width={100}
-					/>
+		<div css={styles.container}>
+			<div css={styles.grid}>
+				<div css={styles.logo}>
+					<SvgGuardianLogo textColor={'#FFFFFF'} width={100} />
 				</div>
-				<div
-					css={
-						isGivingTuesday
-							? stylesGivingTuesday.heading
-							: styles.heading
-					}
-				>
-					<h2>{heading(isGivingTuesday)}</h2>
-					<div
-						css={
-							isGivingTuesday
-								? stylesGivingTuesday.body
-								: styles.body
-						}
-					>
-						<div
-							css={
-								isGivingTuesday
-									? stylesGivingTuesday.ticker
-									: styles.ticker
-							}
-						>
+				<div css={styles.heading}>
+					<h2>Can you help us hit our goal?</h2>
+					<div css={styles.body}>
+						<div css={styles.ticker}>
 							<Ticker
 								currencySymbol={tickerSettings.currencySymbol}
 								copy={{}}
 								tickerData={tickerData}
 								tickerStylingSettings={
-									isGivingTuesday
-										? tickerSettingsGivingTuesday.tickerStylingSettings
-										: tickerSettings.tickerStylingSettings
+									tickerSettings.tickerStylingSettings
 								}
 								size={'medium'}
 							/>
 						</div>
-						{bodyCopy(isGivingTuesday)}
+						With no billionaire owner or shareholders pulling our
+						strings, reader support keeps us fiercely independent.
 						<strong>
 							{' '}
-							{bodyCopyHighlightedText(isGivingTuesday)}
+							As we prepare for the challenges of 2025, will you
+							support us?
 						</strong>
 					</div>
 				</div>
-				<div
-					css={
-						isGivingTuesday
-							? stylesGivingTuesday.choiceCards
-							: styles.choiceCards
-					}
-				>
+				<div css={styles.choiceCards}>
 					<ChoiceCards
 						setSelectionsCallback={setChoiceCardSelection}
 						selection={choiceCardSelection}
@@ -399,16 +238,12 @@ export const UsEoy2024: ReactComponent<Props> = ({
 						getCtaUrl={getCtaUrl}
 						cssCtaOverides={buttonStyles({
 							default: {
-								backgroundColour: isGivingTuesday
-									? '#016D67'
-									: '#C41C1C',
-								textColour: '#FFFFFF',
+								backgroundColour: '#FEBBC7',
+								textColour: '#062962',
 							},
 							hover: {
-								backgroundColour: isGivingTuesday
-									? '#891414'
-									: '#C41C1C',
-								textColour: '#FFFFFF',
+								backgroundColour: '#FEBBC7',
+								textColour: '#062962',
 							},
 						})}
 						onCtaClick={() => {
@@ -427,7 +262,7 @@ export const UsEoy2024: ReactComponent<Props> = ({
 	);
 };
 
-export const UsEoy2024Wrapper = (): JSX.Element => {
+export const AuEoy2024Wrapper = (): JSX.Element => {
 	const [tickerData, setTickerData] = useState<TickerData | undefined>();
 
 	const [showSupportMessagingForUser, setShowSupportMessaging] =
@@ -450,15 +285,13 @@ export const UsEoy2024Wrapper = (): JSX.Element => {
 	const submitTrackingEvent = (event: ComponentEvent) => {
 		void submitComponentEvent(event, renderingTarget);
 	};
-	const now = new Date();
 
 	return (
 		<>
 			{showSupportMessagingForUser && tickerData && (
-				<UsEoy2024
+				<AuEoy2024
 					tickerData={tickerData}
 					submitTrackingEvent={submitTrackingEvent}
-					date={now}
 				/>
 			)}
 		</>

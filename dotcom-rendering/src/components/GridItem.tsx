@@ -16,7 +16,7 @@ const rightColumnStyles = css`
 	top: 0;
 	right: 0;
 	/* Pop me below the body */
-	${getZIndex('rightColumnArea')}
+	z-index: ${getZIndex('rightColumnArea')};
 
 	@supports (display: grid) {
 		position: relative;
@@ -25,7 +25,7 @@ const rightColumnStyles = css`
 
 const bodyStyles = css`
 	/* Pop me above the right column */
-	${getZIndex('bodyArea')}
+	z-index: ${getZIndex('bodyArea')};
 `;
 
 const gridArea = css`

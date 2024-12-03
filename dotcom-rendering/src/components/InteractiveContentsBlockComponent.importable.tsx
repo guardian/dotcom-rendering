@@ -69,7 +69,7 @@ const stickyNavBaseStyles = css`
 	background-color: ${sourcePalette.neutral[100]};
 	border: 1px solid ${sourcePalette.neutral[86]};
 	top: 0;
-	${getZIndex('banner')}
+	z-index: ${getZIndex('banner')};
 `;
 
 const olStyles = css`

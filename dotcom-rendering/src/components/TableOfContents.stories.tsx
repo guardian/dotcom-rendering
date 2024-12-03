@@ -7,7 +7,7 @@ import {
 	type ArticleFormat,
 	Pillar,
 } from '../lib/articleFormat';
-import type { TableOfContentsItem } from '../types/article';
+import type { TableOfContentsItem } from '../model/enhanceTableOfContents';
 import { TableOfContents } from './TableOfContents.importable';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {

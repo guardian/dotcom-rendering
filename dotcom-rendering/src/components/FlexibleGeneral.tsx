@@ -179,7 +179,7 @@ export const SplashCardLayout = ({
 	);
 
 	return (
-		<UL padBottom={true} isFlexibleContainer={true} showTopBar={false}>
+		<UL padBottom={true} hasLargeSpacing={true} showTopBar={false}>
 			<LI
 				padSides={true}
 				verticalDividerColour={palette('--card-border-supporting')}
@@ -279,7 +279,7 @@ export const BoostedCardLayout = ({
 		liveUpdatesPosition,
 	} = decideCardProperties(card.boostLevel);
 	return (
-		<UL padBottom={true} isFlexibleContainer={true} showTopBar={true}>
+		<UL padBottom={true} hasLargeSpacing={true} showTopBar={true}>
 			<LI
 				padSides={true}
 				verticalDividerColour={palette('--card-border-supporting')}
@@ -338,7 +338,7 @@ export const StandardCardLayout = ({
 		<UL
 			direction="row"
 			padBottom={true}
-			isFlexibleContainer={true}
+			hasLargeSpacing={true}
 			showTopBar={true}
 			splitTopBar={!isFirstRow}
 		>
@@ -363,7 +363,10 @@ export const StandardCardLayout = ({
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
 							imagePositionOnDesktop={'left'}
-							supportingContent={card.supportingContent}
+							supportingContent={card.supportingContent?.slice(
+								0,
+								2,
+							)}
 							supportingContentAlignment="vertical"
 							supportingContentPosition="outer"
 							imageSize={'medium'}

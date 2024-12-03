@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { UsEoy2024 } from './UsEoy2024Wrapper.importable';
+import { AuEoy2024 } from './AuEoy2024Wrapper.importable';
 
 const meta = {
-	title: 'Components/UsEoy2024',
-	component: UsEoy2024,
-} satisfies Meta<typeof UsEoy2024>;
+	title: 'Components/AusEoy2024',
+	component: AuEoy2024,
+} satisfies Meta<typeof AuEoy2024>;
 
 export default meta;
 
@@ -18,6 +18,5 @@ export const Default = {
 		},
 		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		submitTrackingEvent: () => {},
-		date: new Date('2024-11-26T00:00:00Z'),
 	},
 } satisfies Story;

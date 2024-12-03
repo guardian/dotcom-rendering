@@ -2727,7 +2727,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "type": {
-                                                    "$ref": "#/definitions/FEContainerPalette"
+                                                    "$ref": "#/definitions/FEContainerMetadata"
                                                 }
                                             },
                                             "required": [
@@ -2779,6 +2779,9 @@
                                     },
                                     "platform": {
                                         "type": "string"
+                                    },
+                                    "aspectRatio": {
+                                        "$ref": "#/definitions/AspectRatio"
                                     }
                                 },
                                 "required": [
@@ -3233,7 +3236,7 @@
             ],
             "type": "string"
         },
-        "FEContainerPalette": {
+        "FEContainerMetadata": {
             "enum": [
                 "Branded",
                 "Breaking",
@@ -3247,7 +3250,6 @@
                 "LongRunningAltPalette",
                 "LongRunningPalette",
                 "Podcast",
-                "Primary",
                 "Secondary",
                 "SombreAltPalette",
                 "SombrePalette",
@@ -3260,6 +3262,15 @@
             "enum": [
                 "Primary",
                 "Secondary"
+            ],
+            "type": "string"
+        },
+        "AspectRatio": {
+            "enum": [
+                "1:1",
+                "4:5",
+                "5:3",
+                "5:4"
             ],
             "type": "string"
         },

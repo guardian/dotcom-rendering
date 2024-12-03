@@ -465,7 +465,8 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 						}}
 						tickerData={tickerSettings.tickerData}
 						tickerStylingSettings={
-							isColourInTestVariant
+							isColourInTestVariant ||
+							tickerSettings.name === 'AU'
 								? usEOYTickerStylingSettings
 								: defaultTickerStylingSettings
 						}

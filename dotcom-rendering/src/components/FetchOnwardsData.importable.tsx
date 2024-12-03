@@ -58,7 +58,7 @@ export const FetchOnwardsData = ({
 			<Placeholder
 				height={340} // best guess at typical height
 				shouldShimmer={false}
-				backgroundColor={palette('--onward-placeholder-background')}
+				backgroundColor={palette('--article-background')}
 			/>
 		);
 	}
