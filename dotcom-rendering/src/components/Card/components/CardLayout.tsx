@@ -3,7 +3,6 @@ import { isUndefined } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import type { DCRContainerType } from '../../../types/front';
 import type { CardImageType } from '../../../types/layout';
-import { FAIRGROUND_CONTAINERS } from '../Card';
 import type { ImagePositionType } from './ImageWrapper';
 
 const padding = 20;
@@ -19,6 +18,7 @@ type Props = {
 	minWidthInPixels?: number;
 	containerType?: DCRContainerType;
 	gapSize?: GapSize;
+	isFairgroundContainer: boolean;
 };
 
 const containerStyles = css`
@@ -166,10 +166,8 @@ export const CardLayout = ({
 	imageType,
 	containerType,
 	gapSize = 'small',
+	isFairgroundContainer,
 }: Props) => {
-	const isFairgroundContainer = FAIRGROUND_CONTAINERS.includes(
-		containerType ?? '',
-	);
 	return (
 		<div
 			css={[
