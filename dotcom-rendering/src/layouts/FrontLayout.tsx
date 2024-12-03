@@ -430,10 +430,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							: undefined;
 
 						return (
-							<ContainerOverrides
-								key={ophanName}
-								containerPalette={collection.containerPalette}
-							>
+							<div key={ophanName}>
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
@@ -493,16 +490,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									mobileAdPositions,
 									hasPageSkin,
 								)}
-							</ContainerOverrides>
+							</div>
 						);
 					}
 
 					if (collection.containerPalette === 'Branded') {
 						return (
-							<ContainerOverrides
-								key={ophanName}
-								containerPalette={collection.containerPalette}
-							>
+							<div key={ophanName}>
 								<LabsSection
 									title={collection.displayName}
 									collectionId={collection.id}
@@ -548,7 +542,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									mobileAdPositions,
 									hasPageSkin,
 								)}
-							</ContainerOverrides>
+							</div>
 						);
 					}
 
@@ -560,10 +554,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							collection.containerPalette ?? 'MediaPalette';
 
 						return (
-							<ContainerOverrides
-								key={ophanName}
-								containerPalette={containerPalette}
-							>
+							<div key={ophanName}>
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
@@ -635,15 +626,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										mobileAdPositions,
 										hasPageSkin,
 									)}
-							</ContainerOverrides>
+							</div>
 						);
 					}
 
 					return (
-						<ContainerOverrides
-							key={ophanName}
-							containerPalette={collection.containerPalette}
-						>
+						<div key={ophanName}>
 							{decideFrontsBannerAdSlot(
 								renderAds,
 								hasPageSkin,
@@ -718,7 +706,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								mobileAdPositions,
 								hasPageSkin,
 							)}
-						</ContainerOverrides>
+						</div>
 					);
 				})}
 			</main>

@@ -75,6 +75,7 @@ export const ThemeVariations = {
 		pageId: 'testID',
 		switches: {},
 		RenderArticleElement,
+		sectioned: false,
 	},
 	decorators: [centreColumnDecorator],
 	parameters: {
@@ -196,6 +197,19 @@ export const WithSeparatorLine = {
 	args: {
 		...ThemeVariations.args,
 		isLastElement: false,
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Culture,
+		},
+	},
+	decorators: [centreColumnDecorator],
+} satisfies Story;
+
+export const Sectioned = {
+	args: {
+		...ThemeVariations.args,
+		sectioned: true,
 		format: {
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,

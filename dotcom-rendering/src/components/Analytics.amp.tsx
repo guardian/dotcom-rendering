@@ -88,7 +88,7 @@ export const Analytics = ({
 		`<amp-analytics data-block-on-consent="_till_accepted" config="https://uk-script.dotmetrics.net/AmpConfig.json?dom=www.theguardian.com&tag=${ipsosSectionName}">
             <script type="application/json">
                 {
-                    "enabled": "$EQUALS(\${ampGeo(ISOCountry)}, gb)"
+					"enabled": "$IF($EQUALS(\${ampGeo(ISOCountry)}, gb),'true', '$EQUALS(\${ampGeo(ISOCountry)}, aus)')"
                 }
             </script>
         </amp-analytics>`,

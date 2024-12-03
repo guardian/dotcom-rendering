@@ -16,7 +16,6 @@ type Props = {
 	discussionApiUrl: string;
 	discussionId: string;
 	isDynamo?: true;
-	isOnwardContent?: boolean;
 	/** Optional override of default comment count colour */
 	colour?: string;
 };
@@ -66,7 +65,6 @@ export const CardCommentCount = ({
 	discussionApiUrl,
 	discussionId,
 	isDynamo,
-	isOnwardContent,
 	colour = themePalette('--card-footer-text'),
 }: Props) => {
 	const count = useCommentCount(discussionApiUrl, discussionId);
@@ -76,8 +74,6 @@ export const CardCommentCount = ({
 	const getCommentCountColour = (): string => {
 		if (isDynamo) {
 			return themePalette('--card-trail-text');
-		} else if (isOnwardContent) {
-			return themePalette('--card-footer-onwards-content');
 		} else {
 			return colour;
 		}
