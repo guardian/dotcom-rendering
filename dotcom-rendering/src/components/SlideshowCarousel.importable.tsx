@@ -78,7 +78,7 @@ const buttonStyles = css`
 	display: none;
 	${from.tablet} {
 		display: flex;
-		gap: ${space[2]}px;
+		gap: ${space[1]}px;
 	}
 `;
 
