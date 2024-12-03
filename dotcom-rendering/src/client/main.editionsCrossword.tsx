@@ -14,5 +14,9 @@ if (element === null) {
 	}
 	const crosswords = JSON.parse(crosswordsData) as FEEditionsCrossword[];
 	const root = createRoot(element);
-	root.render(<EditionsCrossword data={crosswords} />);
+	root.render(
+		<>
+			<EditionsCrossword data={crosswords} />
+		</>,
+	);
 }
