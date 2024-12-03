@@ -7,8 +7,7 @@ type Props = {
 	imageSize: ImageSizeType;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
-	hasKicker: boolean;
-	isFairgroundContainer?: boolean;
+	isFairgroundContainer: boolean;
 };
 
 const sideMarginStyles = css`
@@ -17,10 +16,6 @@ const sideMarginStyles = css`
 
 const topMarginStyles = css`
 	margin-top: ${space[1]}px;
-`;
-
-const kickerTopMarginStyles = css`
-	margin-top: 1.15rem;
 `;
 
 const largerTopMargin = css`
@@ -150,7 +145,6 @@ export const AvatarContainer = ({
 	imageSize,
 	imagePositionOnDesktop,
 	imagePositionOnMobile,
-	hasKicker,
 	isFairgroundContainer,
 }: Props) => {
 	const isVerticalOnDesktop =
@@ -164,7 +158,6 @@ export const AvatarContainer = ({
 				isFairgroundContainer
 					? [
 							sideMarginStyles,
-							hasKicker && kickerTopMarginStyles,
 							fairgroundSizingStyles(
 								imageSize,
 								isVerticalOnDesktop,
