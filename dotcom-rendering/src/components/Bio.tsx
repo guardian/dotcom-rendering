@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, space, textSans14 } from '@guardian/source/foundations';
+import { space, textSans14 } from '@guardian/source/foundations';
 import sanitise from 'sanitize-html';
 import { palette } from '../palette';
 
@@ -20,7 +20,7 @@ const bioStyles = css`
 		text-underline-offset: 3px;
 	}
 	a:not(:hover) {
-		text-decoration-color: ${neutral[86]};
+		text-decoration-color: ${palette('--bio-link-underline')};
 	}
 	a:hover {
 		text-decoration: underline;

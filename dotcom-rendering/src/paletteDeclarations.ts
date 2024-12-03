@@ -5418,6 +5418,8 @@ const lastUpdatedTextDark: PaletteFunction = ({ theme, design }) => {
 	}
 };
 
+const bioLinkUnderline: PaletteFunction = () => sourcePalette.neutral[86];
+
 const bioTextSubduedLight: PaletteFunction = () => sourcePalette.neutral[46];
 const bioTextSubduedDark: PaletteFunction = () => sourcePalette.neutral[86];
 
@@ -5955,6 +5957,10 @@ const paletteColours = {
 	'--avatar-background': {
 		light: avatarLight,
 		dark: avatarDark,
+	},
+	'--bio-link-underline': {
+		light: bioLinkUnderline,
+		dark: bioLinkUnderline,
 	},
 	'--bio-text-subdued': {
 		light: bioTextSubduedLight,
