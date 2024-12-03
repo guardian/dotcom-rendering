@@ -11,7 +11,7 @@ import { palette } from '../palette';
 const bioStyles = css`
 	${textSans14};
 	padding: ${space[1]}px 0;
-	color: ${palette('--mini-profiles-text-subdued')};
+	color: ${palette('--bio-text-subdued')};
 	p {
 		margin-bottom: ${space[2]}px;
 	}

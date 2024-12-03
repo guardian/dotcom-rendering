@@ -5460,10 +5460,12 @@ const lastUpdatedTextDark: PaletteFunction = ({ theme, design }) => {
 	}
 };
 
-const miniProfilesTextSubduedLight: PaletteFunction = () =>
+const bioTextSubduedLight: PaletteFunction = () => sourcePalette.neutral[46];
+const bioTextSubduedDark: PaletteFunction = () => sourcePalette.neutral[86];
+
+const endNoteTextSubduedLight: PaletteFunction = () =>
 	sourcePalette.neutral[46];
-const miniProfilesTextSubduedDark: PaletteFunction = () =>
-	sourcePalette.neutral[86];
+const endNoteTextSubduedDark: PaletteFunction = () => sourcePalette.neutral[86];
 
 const interactiveAtomBackgroundLight: PaletteFunction = () => 'transparent';
 const interactiveAtomBackgroundDark: PaletteFunction = () =>
@@ -5997,6 +5999,10 @@ const paletteColours = {
 		light: avatarColourLight,
 		dark: avatarColourDark,
 	},
+	'--bio-text-subdued': {
+		light: bioTextSubduedLight,
+		dark: bioTextSubduedDark,
+	},
 	'--block-quote-fill': {
 		light: blockQuoteFillLight,
 		dark: blockQuoteFillDark,
@@ -6413,6 +6419,10 @@ const paletteColours = {
 		light: emailSignupTextSubduedLight,
 		dark: emailSignupTextSubduedDark,
 	},
+	'--end-note-text-subdued': {
+		light: endNoteTextSubduedLight,
+		dark: endNoteTextSubduedDark,
+	},
 	'--expandable-atom-background': {
 		light: expandableAtomBackgroundLight,
 		dark: expandableAtomBackgroundDark,
@@ -6733,10 +6743,6 @@ const paletteColours = {
 	'--match-tab-border-active': {
 		light: matchActiveTabBorderLight,
 		dark: matchActiveTabBorderDark,
-	},
-	'--mini-profiles-text-subdued': {
-		light: miniProfilesTextSubduedLight,
-		dark: miniProfilesTextSubduedDark,
 	},
 	'--most-viewed-description': {
 		light: () => sourcePalette.neutral[46],
