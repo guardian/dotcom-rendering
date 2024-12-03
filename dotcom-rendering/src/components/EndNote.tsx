@@ -4,7 +4,7 @@ import { palette } from '../palette';
 
 const endNoteStyles = css`
 	${textSans14};
-	color: ${palette('--mini-profiles-text-subdued')};
+	color: ${palette('--end-note-text-subdued')};
 	margin-bottom: ${space[3]}px;
 `;
 
