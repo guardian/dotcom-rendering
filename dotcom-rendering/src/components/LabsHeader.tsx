@@ -24,6 +24,8 @@ const FlexWrapper = ({ children }: { children: React.ReactNode }) => (
 			height: ${LABS_HEADER_HEIGHT}px;
 			display: flex;
 			justify-content: space-between;
+
+			color: ${palette.neutral[7]};
 		`}
 	>
 		{children}
