@@ -651,7 +651,6 @@ export const Card = ({
 								imageSize={imageSize}
 								imagePositionOnDesktop={imagePositionOnDesktop}
 								imagePositionOnMobile={imagePositionOnMobile}
-								hasKicker={!!kickerText}
 								isFairgroundContainer={isFairgroundContainer}
 							>
 								<Avatar
