@@ -56,6 +56,13 @@ export const ArticleRenderer = ({
 	abTests,
 	editionId,
 }: Props) => {
+	const isSectionedMiniProfilesArticle =
+		elements.filter(
+			(element) =>
+				element._type ===
+				'model.dotcomrendering.pageElements.MiniProfilesBlockElement',
+		).length > 1;
+
 	const renderedElements = elements.map((element, index, { length }) => {
 		return (
 			<RenderArticleElement
@@ -75,6 +82,7 @@ export const ArticleRenderer = ({
 				abTests={abTests}
 				editionId={editionId}
 				totalElements={length}
+				isSectionedMiniProfilesArticle={isSectionedMiniProfilesArticle}
 			/>
 		);
 	});
