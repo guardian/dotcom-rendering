@@ -1,22 +1,38 @@
 import { css } from '@emotion/react';
 import { space, textSansBold12 } from '@guardian/source/foundations';
+import type { ReactElement } from 'react';
+
+type IconSide = 'left' | 'right';
 
 interface Props {
-	content: JSX.Element;
+	content: string | ReactElement;
+	prefix?: string;
+	icon?: ReactElement;
+	iconSide?: IconSide;
 }
 
 const pillStyles = css`
 	display: inline-flex;
 	align-items: center;
 	gap: ${space[1]}px;
-	padding: ${space[1]}px 10px;
+	padding: 0 10px;
 	border-radius: ${space[3]}px;
 	${textSansBold12};
 	color: white;
 	background-color: rgba(18, 18, 18, 0.7);
 `;
 
-export const IconMedia = () => (
+const pillContentStyles = css`
+	padding: ${space[1]}px 0;
+`;
+
+const pillPrefixStyles = css`
+	margin-right: 2px;
+	padding-right: 6px;
+	border-right: 1px solid rgba(255, 255, 255, 0.5);
+`;
+
+export const MediaIcon = () => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		height="10"
@@ -33,7 +49,7 @@ export const IconMedia = () => (
 	</svg>
 );
 
-export const IconCamera = () => (
+export const GalleryIcon = () => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		height="10"
@@ -50,6 +66,13 @@ export const IconCamera = () => (
 	</svg>
 );
 
-export const Pill = ({ content }: Props) => (
-	<span css={pillStyles}>{content}</span>
+export const Pill = ({ content, prefix, icon, iconSide }: Props) => (
+	<div css={pillStyles}>
+		{icon && iconSide !== 'right' ? icon : ''}
+		{!!prefix && (
+			<span css={[pillContentStyles, pillPrefixStyles]}>{prefix}</span>
+		)}
+		<span css={pillContentStyles}>{content}</span>
+		{icon && iconSide === 'right' ? icon : ''}
+	</div>
 );
