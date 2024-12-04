@@ -6,9 +6,16 @@ import { palette } from '../palette';
 type IconSide = 'left' | 'right';
 
 interface Props {
+	/**
+	 * Main content of pill. This can be a string or an element. eg.
+	 * <time>2:35</time>
+	 */
 	content: string | ReactElement;
+	/** Optional prefix displayed before main content with a dividing line */
 	prefix?: string;
+	/** Optional icon displayed before or after content */
 	icon?: ReactElement;
+	/** Optional icon position (icon is on the left by default) */
 	iconSide?: IconSide;
 }
 
