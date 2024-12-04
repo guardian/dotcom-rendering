@@ -1,9 +1,9 @@
 import type { ABTest } from '@guardian/ab-core';
 
 export const onwardsContentArticle: ABTest = {
-	id: 'onwardsContentArticle',
-	start: '2024-11-25',
-	expiry: '2024-01-29',
+	id: 'OnwardsContentArticle',
+	start: '2024-12-05',
+	expiry: '2025-01-29',
 	author: 'dotcom.platform@guardian.co.uk',
 	description:
 		'Test the impact of showing the galleries onwards content component on article pages.',
