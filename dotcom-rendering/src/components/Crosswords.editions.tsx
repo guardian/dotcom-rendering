@@ -5,6 +5,7 @@ import {
 	groupByDate,
 } from '../types/editionsCrossword';
 import { CrosswordSelect } from './CrosswordSelect.editions';
+import Crossword from '@guardian/react-crossword';
 
 type Props = {
 	crosswords: FEEditionsCrossword[];
@@ -68,6 +69,15 @@ const CrosswordsWithInitialDate = ({
 
 	const crossword = crosswordsByDate[date]?.at(crosswordIndex);
 
+	const crosswordElement =
+		crossword === undefined ? null : (
+			<Crossword
+				data={crossword}
+				id={crossword.name}
+				key={crossword.name}
+			/>
+		);
+
 	return (
 		<>
 			<CrosswordSelect
@@ -82,13 +92,7 @@ const CrosswordsWithInitialDate = ({
 				crosswordIndex={crosswordIndex}
 				onCrosswordIndexChange={setCrosswordIndex}
 			/>
-			{crossword === undefined ? null : (
-				<ul>
-					{crossword.entries.map((entry) => (
-						<li key={entry.id}>{entry.clue}</li>
-					))}
-				</ul>
-			)}
+			{crosswordElement}
 		</>
 	);
 };

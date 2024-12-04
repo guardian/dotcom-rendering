@@ -69,7 +69,18 @@ exports.parseURL = parseURL;
 exports.getContentFromURLMiddleware = async (req, res, next) => {
 	if (req.path === '/EditionsCrossword') {
 		req.body = { crosswords: [crypticCrossword] };
-		next();
+		try {
+			const url = new URL(
+				'http://localhost:9000/crosswords/digital-edition',
+			);
+			const content = await getContentFromURL(url, req.headers);
+			console.log(content);
+			req.body = content;
+			next();
+		} catch (error) {
+			console.error(error);
+			next(error);
+		}
 	} else {
 		const sourceURL = parseURL(req.originalUrl);
 		if (sourceURL) {

@@ -3,6 +3,7 @@ import css from '@guardian/react-crossword/lib/index.css';
 import { createRoot } from 'react-dom/client';
 import { EditionsCrossword } from '../components/EditionsCrossword';
 import type { FEEditionsCrossword } from '../types/editionsCrossword';
+import { Crosswords } from '../components/Crosswords.editions';
 
 const style = document.createElement('style');
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- We know this will be a string
@@ -22,7 +23,7 @@ if (element === null) {
 	const root = createRoot(element);
 	root.render(
 		<>
-			<EditionsCrossword data={crosswords} />
+			<Crosswords crosswords={crosswords} timeZone={undefined} />
 		</>,
 	);
 }
