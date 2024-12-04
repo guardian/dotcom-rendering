@@ -49,6 +49,7 @@ import type {
 	DCRCollectionType,
 	DCRContainerType,
 	DCRFrontType,
+	DCRGroupedTrails,
 } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
@@ -329,46 +330,34 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					// We also need to remove the branding for the cards in grouped
 					// trails for dynamic containers
-					const groupedWithoutBranding = isPaidContentSameBranding(
-						collection.collectionBranding,
-					)
-						? {
-								snap: collection.grouped.snap.map(
-									(labTrail) => ({
+					const groupedWithoutBranding: DCRGroupedTrails = (() => {
+						if (
+							isPaidContentSameBranding(
+								collection.collectionBranding,
+							)
+						) {
+							const groupedTrailsWithoutBranding: DCRGroupedTrails =
+								{
+									snap: [],
+									huge: [],
+									veryBig: [],
+									big: [],
+									standard: [],
+									splash: [],
+								};
+							for (const key of Object.keys(
+								collection.grouped,
+							) as (keyof DCRGroupedTrails)[]) {
+								groupedTrailsWithoutBranding[key] =
+									collection.grouped[key].map((labTrail) => ({
 										...labTrail,
 										branding: undefined,
-									}),
-								),
-								huge: collection.grouped.huge.map(
-									(labTrail) => ({
-										...labTrail,
-										branding: undefined,
-									}),
-								),
-								veryBig: collection.grouped.veryBig.map(
-									(labTrail) => ({
-										...labTrail,
-										branding: undefined,
-									}),
-								),
-								big: collection.grouped.big.map((labTrail) => ({
-									...labTrail,
-									branding: undefined,
-								})),
-								standard: collection.grouped.standard.map(
-									(labTrail) => ({
-										...labTrail,
-										branding: undefined,
-									}),
-								),
-								splash: collection.grouped.splash.map(
-									(labTrail) => ({
-										...labTrail,
-										branding: undefined,
-									}),
-								),
-						  }
-						: collection.grouped;
+									}));
+							}
+							return groupedTrailsWithoutBranding;
+						}
+						return collection.grouped;
+					})();
 
 					if (collection.collectionType === 'scrollable/highlights') {
 						// Highlights are rendered in the Masthead component
