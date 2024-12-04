@@ -11,8 +11,6 @@ import { UL } from './Card/components/UL';
 import { LeftColumn } from './LeftColumn';
 import { Placeholder } from './Placeholder';
 
-type Props = { url: string; discussionApiUrl: string };
-
 type OnwardsResponse = {
 	trails: FETrailType[];
 	heading: string;
@@ -70,6 +68,12 @@ const convertFETrailToDcrTrail = (
 		webPublicationDate: trail.webPublicationDate,
 	}));
 
+type Props = { url: string; discussionApiUrl: string };
+
+/**
+ * Big Six refers to the style of the onwards content container. It displays six article
+ * cards in a gallery-style container, as opposed to a carousel.
+ */
 export const BigSixOnwardsContent = ({ url, discussionApiUrl }: Props) => {
 	const { data, error } = useApi<OnwardsResponse>(url);
 
@@ -99,7 +103,10 @@ export const BigSixOnwardsContent = ({ url, discussionApiUrl }: Props) => {
 	const secondSlice25 = trails.slice(2, 6);
 
 	return (
-		<div css={containerStyles}>
+		<div
+			data-component="onwards-content-gallery-style"
+			css={containerStyles}
+		>
 			<LeftColumn>
 				<h2 css={headerStyles}>
 					<span>{data.heading}</span>
@@ -122,7 +129,7 @@ export const BigSixOnwardsContent = ({ url, discussionApiUrl }: Props) => {
 								format={trail.format}
 								headlineText={trail.headline}
 								image={trail.image}
-								dataLinkName={trail.dataLinkName}
+								dataLinkName={`onwards-content-gallery-style ${trail.dataLinkName}`}
 								discussionId={trail.discussionId}
 								discussionApiUrl={trail.discussionApiUrl}
 								isExternalLink={trail.isExternalLink}
@@ -149,7 +156,7 @@ export const BigSixOnwardsContent = ({ url, discussionApiUrl }: Props) => {
 								format={trail.format}
 								headlineText={trail.headline}
 								image={trail.image}
-								dataLinkName={trail.dataLinkName}
+								dataLinkName={`onwards-content-gallery-style ${trail.dataLinkName}`}
 								discussionId={trail.discussionId}
 								discussionApiUrl={trail.discussionApiUrl}
 								isExternalLink={trail.isExternalLink}
@@ -177,7 +184,7 @@ export const BigSixOnwardsContent = ({ url, discussionApiUrl }: Props) => {
 								format={trail.format}
 								headlineText={trail.headline}
 								image={trail.image}
-								dataLinkName={trail.dataLinkName}
+								dataLinkName={`onwards-content-gallery-style ${trail.dataLinkName}`}
 								discussionId={trail.discussionId}
 								discussionApiUrl={trail.discussionApiUrl}
 								isExternalLink={trail.isExternalLink}
