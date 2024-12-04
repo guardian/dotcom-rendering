@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { space, textSansBold12 } from '@guardian/source/foundations';
 import type { ReactElement } from 'react';
+import { palette } from '../palette';
 
 type IconSide = 'left' | 'right';
 
@@ -18,8 +19,8 @@ const pillStyles = css`
 	padding: 0 10px;
 	border-radius: ${space[3]}px;
 	${textSansBold12};
-	color: white;
-	background-color: rgba(18, 18, 18, 0.7);
+	color: ${palette('--pill-text')};
+	background-color: ${palette('--pill-background')};
 `;
 
 const pillContentStyles = css`
@@ -29,7 +30,7 @@ const pillContentStyles = css`
 const pillPrefixStyles = css`
 	margin-right: 2px;
 	padding-right: 6px;
-	border-right: 1px solid rgba(255, 255, 255, 0.5);
+	border-right: 1px solid ${palette('--pill-divider')};
 `;
 
 export const MediaIcon = () => (
