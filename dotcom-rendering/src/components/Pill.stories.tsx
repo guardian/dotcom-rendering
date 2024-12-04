@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { GalleryIcon, MediaIcon, Pill } from './Pill';
+import { GalleryIcon, Pill, VideoIcon } from './Pill';
 
 const meta: Meta<typeof Pill> = {
 	title: 'Components/Pill',
@@ -15,10 +15,10 @@ type Story = StoryObj<typeof Pill>;
 
 export const Default = {} satisfies Story;
 
-export const WithMediaIcon = {
+export const WithVideoIcon = {
 	args: {
 		content: <time>3:35</time>,
-		icon: <MediaIcon />,
+		icon: <VideoIcon />,
 	},
 } satisfies Story;
 

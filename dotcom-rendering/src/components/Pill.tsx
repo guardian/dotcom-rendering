@@ -33,7 +33,7 @@ const pillPrefixStyles = css`
 	border-right: 1px solid ${palette('--pill-divider')};
 `;
 
-export const MediaIcon = () => (
+export const VideoIcon = () => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		height="10"
