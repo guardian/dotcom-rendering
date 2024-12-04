@@ -74,9 +74,9 @@ export const GalleryIcon = () => (
 	</svg>
 );
 
-export const Pill = ({ content, prefix, icon, iconSide }: Props) => (
+export const Pill = ({ content, prefix, icon, iconSide = 'left' }: Props) => (
 	<div css={pillStyles}>
-		{icon && iconSide !== 'right' ? icon : ''}
+		{icon && iconSide === 'left' ? icon : ''}
 		{!!prefix && (
 			<span css={[pillContentStyles, pillPrefixStyles]}>{prefix}</span>
 		)}
