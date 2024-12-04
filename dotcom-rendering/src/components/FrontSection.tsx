@@ -55,7 +55,8 @@ type Props = {
 	/** Fronts containers can have their styling overridden using a `containerLevel`.
 	 * If used, this can be either "Primary" or "Secondary", both of which have different styles */
 	containerLevel?: DCRContainerLevel;
-
+	/** Fronts containers spacing rules vary depending on the size of their container spacing which is derived from if the next container is a primary or secondary. */
+	containerSpacing: 'large' | 'small';
 	/** Defaults to `false`. If true a Hide button is show top right allowing this section
 	 * to be collapsed
 	 */
@@ -503,6 +504,7 @@ export const FrontSection = ({
 	containerName,
 	containerPalette,
 	containerLevel,
+	containerSpacing,
 	description,
 	editionId,
 	leftContent,
