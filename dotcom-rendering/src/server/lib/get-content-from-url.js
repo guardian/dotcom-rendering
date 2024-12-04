@@ -1,3 +1,7 @@
+const {
+	crypticCrossword,
+} = require('../../../fixtures/manual/editionsCrossword.js');
+
 /** @type {(_: [string, unknown]) => _ is [string, string]} */
 const isStringTuple = (_) => typeof _[1] === 'string';
 
@@ -63,24 +67,31 @@ exports.parseURL = parseURL;
 
 /** @type {import('webpack-dev-server').ExpressRequestHandler} */
 exports.getContentFromURLMiddleware = async (req, res, next) => {
-	const sourceURL = parseURL(req.originalUrl);
+	if (req.path === '/EditionsCrossword') {
+		req.body = { crosswords: [crypticCrossword] };
+		next();
+	} else {
+		const sourceURL = parseURL(req.originalUrl);
+		if (sourceURL) {
+			if (
+				req.path.startsWith('/AMP') &&
+				sourceURL.hostname === 'www.theguardian.com'
+			) {
+				res.redirect(
+					req.path.replace(
+						'www.theguardian.com',
+						'amp.theguardian.com',
+					),
+				);
+			}
 
-	if (sourceURL) {
-		if (
-			req.path.startsWith('/AMP') &&
-			sourceURL.hostname === 'www.theguardian.com'
-		) {
-			res.redirect(
-				req.path.replace('www.theguardian.com', 'amp.theguardian.com'),
-			);
+			try {
+				req.body = await getContentFromURL(sourceURL, req.headers);
+			} catch (error) {
+				console.error(error);
+				next(error);
+			}
 		}
-
-		try {
-			req.body = await getContentFromURL(sourceURL, req.headers);
-		} catch (error) {
-			console.error(error);
-			next(error);
-		}
+		next();
 	}
-	next();
 };

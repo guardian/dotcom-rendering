@@ -7,6 +7,6 @@ interface EditionsCrosswordProps {
 
 export const EditionsCrossword = ({ data }: EditionsCrosswordProps) => (
 	<>
-		<Crossword data={data} />
+		<Crossword data={data[0]} />
 	</>
 );
