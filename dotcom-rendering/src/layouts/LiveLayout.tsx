@@ -45,7 +45,6 @@ import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
-import { StickyLiveblogAskWrapper } from '../components/StickyLiveblogAskWrapper.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
@@ -716,22 +715,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										/>
 									</div>
 								</Hide>
-
-								{isWeb && (
-									<Hide until="desktop">
-										<Island
-											priority="feature"
-											defer={{ until: 'visible' }}
-										>
-											<StickyLiveblogAskWrapper
-												referrerUrl={article.webURL}
-												shouldHideReaderRevenueOnArticle={
-													article.shouldHideReaderRevenue
-												}
-											/>
-										</Island>
-									</Hide>
-								)}
 
 								{/* Match stats */}
 								{!!footballMatchUrl && (
