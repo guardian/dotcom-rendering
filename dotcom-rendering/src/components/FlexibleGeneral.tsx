@@ -1,6 +1,7 @@
 import { palette } from '../palette';
 import type { BoostLevel } from '../types/content';
 import type {
+	AspectRatio,
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
@@ -24,6 +25,7 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
+	aspectRatio: AspectRatio;
 };
 
 type RowLayout = 'oneCard' | 'oneCardBoosted' | 'twoCard';
@@ -155,12 +157,14 @@ export const SplashCardLayout = ({
 	showAge,
 	absoluteServerTimes,
 	imageLoading,
+	aspectRatio,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
+	aspectRatio: AspectRatio;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -202,7 +206,7 @@ export const SplashCardLayout = ({
 							: supportingContentAlignment
 					}
 					imageLoading={imageLoading}
-					aspectRatio="5:4"
+					aspectRatio={aspectRatio}
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
 					liveUpdatesAlignment={liveUpdatesAlignment}
@@ -262,12 +266,14 @@ export const BoostedCardLayout = ({
 	showAge,
 	absoluteServerTimes,
 	imageLoading,
+	aspectRatio,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
+	aspectRatio: AspectRatio;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -302,7 +308,7 @@ export const BoostedCardLayout = ({
 							: supportingContentAlignment
 					}
 					imageLoading={imageLoading}
-					aspectRatio="5:4"
+					aspectRatio={aspectRatio}
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
 					liveUpdatesAlignment="horizontal"
@@ -323,6 +329,7 @@ export const StandardCardLayout = ({
 	showImage = true,
 	imageLoading,
 	isFirstRow,
+	aspectRatio,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -331,6 +338,7 @@ export const StandardCardLayout = ({
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	showImage?: boolean;
+	aspectRatio: AspectRatio;
 }) => {
 	if (cards.length === 0) return null;
 
@@ -370,7 +378,7 @@ export const StandardCardLayout = ({
 							supportingContentAlignment="vertical"
 							supportingContentPosition="outer"
 							imageSize={'medium'}
-							aspectRatio="5:4"
+							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}
 							showTopBarDesktop={false}
@@ -400,6 +408,7 @@ export const FlexibleGeneral = ({
 	showAge,
 	absoluteServerTimes,
 	imageLoading,
+	aspectRatio,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1);
 	const cards = [...groupedTrails.standard].slice(0, 8);
@@ -414,6 +423,7 @@ export const FlexibleGeneral = ({
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
+					aspectRatio={aspectRatio}
 				/>
 			)}
 
@@ -427,6 +437,7 @@ export const FlexibleGeneral = ({
 								showAge={showAge}
 								absoluteServerTimes={absoluteServerTimes}
 								imageLoading={imageLoading}
+								aspectRatio={aspectRatio}
 							/>
 						);
 
@@ -441,6 +452,7 @@ export const FlexibleGeneral = ({
 								absoluteServerTimes={absoluteServerTimes}
 								imageLoading={imageLoading}
 								isFirstRow={i === 0}
+								aspectRatio={aspectRatio}
 							/>
 						);
 				}

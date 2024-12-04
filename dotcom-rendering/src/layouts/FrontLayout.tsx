@@ -45,7 +45,11 @@ import {
 import { hideAge } from '../lib/hideAge';
 import type { NavType } from '../model/extract-nav';
 import { palette as schemePalette } from '../palette';
-import { type DCRCollectionType, type DCRFrontType } from '../types/front';
+import type {
+	DCRCollectionType,
+	DCRContainerType,
+	DCRFrontType,
+} from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -170,6 +174,24 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const { absoluteServerTimes = false } = front.config.switches;
 
+	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
+		switch (collectionType) {
+			case 'scrollable/feature':
+			case 'static/feature/2':
+				return '4:5';
+			case 'flexible/general':
+			case 'flexible/special':
+			case 'scrollable/small':
+			case 'scrollable/medium':
+			case 'static/medium/4':
+				return '5:4';
+			case 'scrollable/highlights':
+				return '1:1';
+			default:
+				return '5:3';
+		}
+	};
+
 	const Highlights = () => {
 		const showHighlights =
 			// Must be opted into the Europe beta test or in preview
@@ -191,6 +213,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					showAge={false}
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading="eager"
+					aspectRatio={
+						highlightsCollection.aspectRatio ??
+						fallbackAspectRatio(highlightsCollection.collectionType)
+					}
 				/>
 			)
 		);
@@ -531,6 +557,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										absoluteServerTimes={
 											absoluteServerTimes
 										}
+										aspectRatio={
+											collection.aspectRatio ??
+											fallbackAspectRatio(
+												collection.collectionType,
+											)
+										}
 									/>
 								</LabsSection>
 								{decideMerchHighAndMobileAdSlots(
@@ -696,6 +728,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									imageLoading={imageLoading}
 									absoluteServerTimes={absoluteServerTimes}
+									aspectRatio={
+										collection.aspectRatio ??
+										fallbackAspectRatio(
+											collection.collectionType,
+										)
+									}
 								/>
 							</FrontSection>
 							{decideMerchHighAndMobileAdSlots(

@@ -22,6 +22,7 @@ const meta = {
 		trails: trails.slice(0, 2),
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
+		aspectRatio: '4:5',
 	},
 	render: (args) => (
 		<FrontSection

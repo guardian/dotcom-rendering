@@ -1,5 +1,9 @@
 import { ArticleDesign } from '../lib/articleFormat';
-import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
+import type {
+	AspectRatio,
+	DCRContainerPalette,
+	DCRFrontCard,
+} from '../types/front';
 import { FeatureCard } from './FeatureCard';
 import { ScrollableCarousel } from './ScrollableCarousel';
 
@@ -8,6 +12,7 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	absoluteServerTimes: boolean;
 	imageLoading: 'lazy' | 'eager';
+	aspectRatio: AspectRatio;
 };
 
 /**
@@ -22,6 +27,7 @@ export const ScrollableFeature = ({
 	containerPalette,
 	absoluteServerTimes,
 	imageLoading,
+	aspectRatio,
 }: Props) => {
 	return (
 		<ScrollableCarousel
@@ -58,7 +64,7 @@ export const ScrollableFeature = ({
 							containerPalette={containerPalette}
 							absoluteServerTimes={absoluteServerTimes}
 							imageLoading={imageLoading}
-							aspectRatio="4:5"
+							aspectRatio={aspectRatio}
 							imageSize="feature"
 							headlineSizes={{
 								desktop: 'xsmall',
