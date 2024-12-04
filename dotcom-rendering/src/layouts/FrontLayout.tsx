@@ -174,7 +174,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const { absoluteServerTimes = false } = front.config.switches;
 
-	const fallBackAspectRatio = (collectionType: DCRContainerType) => {
+	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
 			case 'scrollable/feature':
 			case 'static/feature/2':
@@ -214,11 +214,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading="eager"
 					aspectRatio={
-						highlightsCollection.aspectRatio
-							? highlightsCollection.aspectRatio
-							: fallBackAspectRatio(
-									highlightsCollection.collectionType,
-							  )
+						highlightsCollection.aspectRatio ??
+						fallbackAspectRatio(highlightsCollection.collectionType)
 					}
 				/>
 			)
@@ -561,11 +558,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											absoluteServerTimes
 										}
 										aspectRatio={
-											collection.aspectRatio
-												? collection.aspectRatio
-												: fallBackAspectRatio(
-														collection.collectionType,
-												  )
+											collection.aspectRatio ??
+											fallbackAspectRatio(
+												collection.collectionType,
+											)
 										}
 									/>
 								</LabsSection>
@@ -733,11 +729,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									imageLoading={imageLoading}
 									absoluteServerTimes={absoluteServerTimes}
 									aspectRatio={
-										collection.aspectRatio
-											? collection.aspectRatio
-											: fallBackAspectRatio(
-													collection.collectionType,
-											  )
+										collection.aspectRatio ??
+										fallbackAspectRatio(
+											collection.collectionType,
+										)
 									}
 								/>
 							</FrontSection>
