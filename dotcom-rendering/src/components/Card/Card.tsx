@@ -60,7 +60,7 @@ import { ImageWrapper } from './components/ImageWrapper';
 import { TrailText, type TrailTextSize } from './components/TrailText';
 
 export type Position = 'inner' | 'outer' | 'none';
-export const FAIRGROUND_CONTAINERS = [
+export const BETA_CONTAINERS = [
 	'scrollable/highlights',
 	'flexible/special',
 	'flexible/general',
@@ -476,9 +476,7 @@ export const Card = ({
 
 	const isSmallCard = containerType === 'scrollable/small';
 
-	const isFairgroundContainer = FAIRGROUND_CONTAINERS.includes(
-		containerType ?? '',
-	);
+	const isBetaContainer = BETA_CONTAINERS.includes(containerType ?? '');
 
 	const imageFixedSizeOptions = (): ImageFixedSizeOptions => {
 		if (isSmallCard) {
@@ -647,7 +645,7 @@ export const Card = ({
 				imageType={media?.type}
 				containerType={containerType}
 				gapSize={getGapSize()}
-				isFairgroundContainer={isFairgroundContainer}
+				isBetaContainer={isBetaContainer}
 			>
 				{media && (
 					<ImageWrapper
@@ -694,7 +692,7 @@ export const Card = ({
 								imageSize={imageSize}
 								imagePositionOnDesktop={imagePositionOnDesktop}
 								imagePositionOnMobile={imagePositionOnMobile}
-								isFairgroundContainer={isFairgroundContainer}
+								isBetaContainer={isBetaContainer}
 							>
 								<Avatar
 									src={media.avatarUrl}

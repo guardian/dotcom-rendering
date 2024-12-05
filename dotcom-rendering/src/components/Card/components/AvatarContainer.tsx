@@ -7,7 +7,7 @@ type Props = {
 	imageSize: ImageSizeType;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
-	isFairgroundContainer: boolean;
+	isBetaContainer: boolean;
 };
 
 const sideMarginStyles = css`
@@ -145,7 +145,7 @@ export const AvatarContainer = ({
 	imageSize,
 	imagePositionOnDesktop,
 	imagePositionOnMobile,
-	isFairgroundContainer,
+	isBetaContainer,
 }: Props) => {
 	const isVerticalOnDesktop =
 		imagePositionOnDesktop === 'top' || imagePositionOnDesktop === 'bottom';
@@ -154,23 +154,18 @@ export const AvatarContainer = ({
 
 	return (
 		<div
-			css={
-				isFairgroundContainer
-					? [
-							sideMarginStyles,
-							fairgroundSizingStyles(
-								imageSize,
-								isVerticalOnDesktop,
-								isVerticalOnMobile,
-							),
-					  ]
-					: [
-							sideMarginStyles,
-							topMarginStyles,
-							isVerticalOnDesktop && largerTopMargin,
-							sizingStyles(imageSize, isVerticalOnDesktop),
-					  ]
-			}
+			css={[
+				sideMarginStyles,
+				!isBetaContainer && topMarginStyles,
+				!isBetaContainer && isVerticalOnDesktop && largerTopMargin,
+				isBetaContainer
+					? fairgroundSizingStyles(
+							imageSize,
+							isVerticalOnDesktop,
+							isVerticalOnMobile,
+					  )
+					: sizingStyles(imageSize, isVerticalOnDesktop),
+			]}
 		>
 			{children}
 		</div>

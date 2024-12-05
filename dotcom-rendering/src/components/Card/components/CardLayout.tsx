@@ -18,7 +18,7 @@ type Props = {
 	minWidthInPixels?: number;
 	containerType?: DCRContainerType;
 	gapSize?: GapSize;
-	isFairgroundContainer: boolean;
+	isBetaContainer: boolean;
 };
 
 const containerStyles = css`
@@ -66,7 +66,7 @@ const minWidth = (minWidthInPixels?: number) => {
 const decideDirection = (
 	imagePositionOnMobile: ImagePositionType,
 	imagePositionOnDesktop: ImagePositionType,
-	isFairgroundContainer: boolean,
+	isBetaContainer: boolean,
 	hasAvatar?: boolean,
 ) => {
 	const imagePosition = {
@@ -91,7 +91,7 @@ const decideDirection = (
 			imagePositionOnDesktop === 'left' ||
 			imagePositionOnDesktop === 'right'
 		) {
-			if (isFairgroundContainer && imagePositionOnMobile === 'bottom') {
+			if (isBetaContainer && imagePositionOnMobile === 'bottom') {
 				return {
 					mobile: imagePosition['bottom'],
 					desktop: imagePosition['right'],
@@ -103,12 +103,14 @@ const decideDirection = (
 			};
 		}
 
+		// Default case for avatar: Mobile right, Desktop bottom
 		return {
 			mobile: imagePosition['right'],
 			desktop: imagePosition['bottom'],
 		};
 	}
 
+	// Handle cases without an avatar
 	return {
 		mobile: imagePosition[imagePositionOnMobile],
 		desktop: imagePosition[imagePositionOnDesktop],
@@ -161,7 +163,7 @@ export const CardLayout = ({
 	imageType,
 	containerType,
 	gapSize = 'small',
-	isFairgroundContainer,
+	isBetaContainer,
 }: Props) => {
 	return (
 		<div
@@ -173,7 +175,7 @@ export const CardLayout = ({
 				decidePosition(
 					imagePositionOnMobile,
 					imagePositionOnDesktop,
-					isFairgroundContainer,
+					isBetaContainer,
 					imageType === 'avatar',
 				),
 			]}
