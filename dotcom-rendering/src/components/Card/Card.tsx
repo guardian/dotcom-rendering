@@ -60,6 +60,17 @@ import { TrailText, type TrailTextSize } from './components/TrailText';
 
 export type Position = 'inner' | 'outer' | 'none';
 
+export const BETA_CONTAINERS = [
+	'scrollable/highlights',
+	'flexible/special',
+	'flexible/general',
+	'scrollable/small',
+	'scrollable/medium',
+	'scrollable/feature',
+	'static/feature/2',
+	'static/medium/4',
+];
+
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
@@ -332,6 +343,8 @@ export const Card = ({
 		format.design === ArticleDesign.Editorial ||
 		format.design === ArticleDesign.Letter;
 
+	const isBetaContainer = BETA_CONTAINERS.includes(containerType ?? '');
+
 	const decideAge = () => {
 		if (!webPublicationDate) return undefined;
 		const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
@@ -567,6 +580,7 @@ export const Card = ({
 						byline={byline}
 						showByline={showByline}
 						isExternalLink={isExternalLink}
+						isBetaContainer={isBetaContainer}
 					/>
 					{!isUndefined(starRating) ? (
 						<StarRatingComponent
@@ -808,6 +822,7 @@ export const Card = ({
 										byline={byline}
 										showByline={showByline}
 										isExternalLink={isExternalLink}
+										isBetaContainer={isBetaContainer}
 									/>
 									{!isUndefined(starRating) ? (
 										<StarRatingComponent
