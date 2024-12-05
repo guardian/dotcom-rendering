@@ -250,7 +250,7 @@ const Byline = ({
 	});
 	const imageUrl =
 		imageOverrideUrl ??
-		tags.find((tag) => tag.id === contributorIds[0])?.bylineLargeImageUrl;
+		tags.find((tag) => tag.id === contributorIds[0])?.bylineImageUrl;
 
 	return (
 		<div css={bylineWrapperStyles}>
