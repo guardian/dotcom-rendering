@@ -367,7 +367,7 @@ const mobileStickyAdStylesFullWidth = css`
 	}
 `;
 
-const extraContainerSpacingStyles = css`
+const extraContainerBottomSpacingStyles = css`
 	margin-bottom: 16px;
 `;
 
@@ -563,14 +563,7 @@ export const AdSlot = ({
 			return (
 				<div
 					className="ad-slot-container"
-					css={[
-						merchandisingAdContainerStyles,
-						containerSpacing === 'large' &&
-							extraContainerSpacingStyles,
-						css`
-							outline: green solid 1px;
-						`,
-					]}
+					css={[merchandisingAdContainerStyles]}
 				>
 					<div
 						id="dfp-ad--merchandising-high"
@@ -579,7 +572,14 @@ export const AdSlot = ({
 							'ad-slot',
 							'ad-slot--merchandising-high',
 						].join(' ')}
-						css={[merchandisingAdStyles]}
+						css={[
+							merchandisingAdStyles,
+							containerSpacing &&
+								extraContainerBottomSpacingStyles,
+							css`
+								outline: green solid 1px;
+							`,
+						]}
 						data-link-name="ad slot merchandising-high"
 						data-name="merchandising-high"
 						data-refresh="false"
@@ -616,8 +616,7 @@ export const AdSlot = ({
 					className="top-fronts-banner-ad-container"
 					css={[
 						frontsBannerAdTopContainerStyles,
-						containerSpacing === 'large' &&
-							extraContainerSpacingStyles,
+						containerSpacing && extraContainerBottomSpacingStyles,
 						css`
 							outline: hotpink solid 1px;
 						`,
@@ -756,8 +755,8 @@ export const AdSlot = ({
 						].join(' ')}
 						css={[
 							mobileFrontAdStyles,
-							containerSpacing === 'large' &&
-								extraContainerSpacingStyles,
+							containerSpacing &&
+								extraContainerBottomSpacingStyles,
 							css`
 								outline: red solid 1px;
 							`,

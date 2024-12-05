@@ -499,7 +499,6 @@ export const FrontSection = ({
 		!!ajaxUrl &&
 		!containerLevel;
 	const showVerticalRule = !hasPageSkin;
-	console.log({ containerName, containerSpacing });
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
 	 * this id pre-existed showMore so is probably also being used for something else.
@@ -517,7 +516,6 @@ export const FrontSection = ({
 					containerStylesUntilLeftCol,
 					!hasPageSkin && containerStylesFromLeftCol,
 					hasPageSkin && pageSkinContainer,
-					containerSpacing === 'large' && extraBottomPadding,
 				]}
 				style={{
 					backgroundColor: schemePalette(
@@ -608,6 +606,7 @@ export const FrontSection = ({
 						sectionContentPadded,
 						sectionBottomContent,
 						!containerLevel && bottomPadding,
+						containerSpacing === 'large' && extraBottomPadding,
 					]}
 				>
 					{isString(targetedTerritory) &&

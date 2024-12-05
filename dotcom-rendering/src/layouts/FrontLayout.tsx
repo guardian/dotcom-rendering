@@ -386,6 +386,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											<Section
 												fullWidth={true}
 												padSides={false}
+												padBottom={
+													collection.containerSpacing ===
+													'large'
+												}
 												showTopBorder={false}
 												showSideBorders={false}
 												ophanComponentLink={
