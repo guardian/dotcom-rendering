@@ -78,17 +78,6 @@ const decideDirection = (
 	};
 	if (hasAvatar) {
 		if (
-			isFairgroundContainer &&
-			(imagePositionOnDesktop === 'left' ||
-				imagePositionOnDesktop === 'right') &&
-			imagePositionOnMobile === 'bottom'
-		) {
-			return {
-				mobile: imagePosition['bottom'],
-				desktop: imagePosition['right'],
-			};
-		}
-		if (
 			imagePositionOnMobile === 'bottom' &&
 			imagePositionOnDesktop === 'bottom'
 		) {
@@ -102,6 +91,12 @@ const decideDirection = (
 			imagePositionOnDesktop === 'left' ||
 			imagePositionOnDesktop === 'right'
 		) {
+			if (isFairgroundContainer && imagePositionOnMobile === 'bottom') {
+				return {
+					mobile: imagePosition['bottom'],
+					desktop: imagePosition['right'],
+				};
+			}
 			return {
 				mobile: imagePosition['right'],
 				desktop: imagePosition['right'],
