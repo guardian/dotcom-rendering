@@ -17,7 +17,7 @@ import type {
 	FESupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
-import type { TagType } from '../types/tag';
+import type { PodcastSeriesImage, TagType } from '../types/tag';
 import { enhanceSnaps } from './enhanceSnaps';
 import { enhanceTags } from './enhanceTags';
 
@@ -101,6 +101,19 @@ const decideImage = (trail: FEFrontCard) => {
 	}
 
 	return trail.properties.maybeContent?.trail.trailPicture?.allImages[0]?.url;
+};
+
+const getPodcast = (trail: FEFrontCard): PodcastSeriesImage | undefined => {
+	const podcastFromTags = trail.properties.maybeContent?.tags.tags
+		.map(({ properties }) => properties)
+		.find(({ tagType, podcast }) => tagType === 'Series' && !!podcast);
+
+	return podcastFromTags?.podcast?.image
+		? {
+				src: podcastFromTags.podcast.image,
+				altText: podcastFromTags.webTitle,
+		  }
+		: undefined;
 };
 
 const decideKicker = (
@@ -247,6 +260,8 @@ export const enhanceCards = (
 
 		const imageSrc = decideImage(faciaCard);
 
+		const podcastImage = getPodcast(faciaCard);
+
 		const isContributorTagPage = !!pageId && pageId.startsWith('profile/');
 
 		return {
@@ -307,5 +322,6 @@ export const enhanceCards = (
 							?.allImages[0]?.fields.altText ?? '',
 				},
 			}),
+			podcastImage,
 		};
 	});

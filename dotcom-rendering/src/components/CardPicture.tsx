@@ -104,13 +104,15 @@ const getAspectRatioPadding = (aspectRatio?: AspectRatio): string => {
 			return '80%';
 		case '4:5':
 			return '125%';
+		case '1:1':
+			return '100%';
 		case '5:3':
 		default:
 			return '60%';
 	}
 };
 /**
- * On fronts, Fairground cards have an image ration of 5:4.
+ * On fronts, Fairground cards have an image ratio of 5:4.
  * This is due to replace the existing card ratio of 5:3
  * For now, we are keeping both ratios.
  */
