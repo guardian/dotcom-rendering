@@ -69,13 +69,13 @@ const meta = {
 		containerPalette: undefined,
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
+		aspectRatio: '4:5',
 	},
 	render: (args) => (
 		<FrontSection
 			title="Scrollable feature"
 			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
-			showTopBorder={false}
 			containerLevel="Secondary"
 		>
 			<ScrollableFeature {...args} />
@@ -95,7 +95,6 @@ export const WithPrimaryContainer = {
 			title="Scrollable feature"
 			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
-			showTopBorder={false}
 			containerLevel="Primary"
 		>
 			<ScrollableFeature {...args} />
@@ -131,7 +130,6 @@ export const WithSpecialPaletteVariations = {
 					title={containerPalette}
 					discussionApiUrl={discussionApiUrl}
 					editionId="UK"
-					showTopBorder={false}
 					key={containerPalette}
 					containerPalette={containerPalette}
 					containerLevel="Secondary"

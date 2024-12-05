@@ -116,6 +116,14 @@ const hoverStyles = css`
 	}
 `;
 
+/**
+ * Image mask gradient has additional colour stops to emulate a non-linear
+ * ease in / ease out curve to make the transition smoother. Values were
+ * generated with https://non-boring-gradients.netlify.app and manually
+ * optimised. (Opacity values have been rounded and the number of colour stops
+ * reduced.) The following article has more detail on non-linear gradients:
+ * https://css-tricks.com/easing-linear-gradients/
+ */
 const overlayStyles = css`
 	position: absolute;
 	bottom: 0;
@@ -125,9 +133,21 @@ const overlayStyles = css`
 	flex-direction: column;
 	justify-content: flex-start;
 	flex-grow: 1;
-	padding: ${space[2]}px;
 	gap: ${space[1]}px;
-	backdrop-filter: blur(12px) brightness(0.7);
+	padding: 64px ${space[2]}px ${space[2]}px;
+	mask-image: linear-gradient(
+		180deg,
+		transparent 0px,
+		rgba(0, 0, 0, 0.0381) 8px,
+		rgba(0, 0, 0, 0.1464) 16px,
+		rgba(0, 0, 0, 0.3087) 24px,
+		rgba(0, 0, 0, 0.5) 32px,
+		rgba(0, 0, 0, 0.6913) 40px,
+		rgba(0, 0, 0, 0.8536) 48px,
+		rgba(0, 0, 0, 0.9619) 56px,
+		rgb(0, 0, 0) 64px
+	);
+	backdrop-filter: blur(12px) brightness(0.5);
 `;
 
 const starRatingWrapper = css`
@@ -193,7 +213,6 @@ const CardAge = ({
 				isWithinTwelveHours: withinTwelveHours,
 			}}
 			showClock={showClock}
-			isOnwardContent={false}
 			absoluteServerTimes={absoluteServerTimes}
 			isTagPage={false}
 			colour={palette('--feature-card-footer-text')}
@@ -237,7 +256,6 @@ const CommentCount = ({
 				<CardCommentCount
 					discussionApiUrl={discussionApiUrl}
 					discussionId={discussionId}
-					isOnwardContent={false}
 					colour={palette('--feature-card-footer-text')}
 				/>
 			</Island>
@@ -316,6 +334,9 @@ export const FeatureCard = ({
 							<div
 								css={css`
 									position: relative;
+									background-color: ${palette(
+										'--feature-card-background',
+									)};
 									img {
 										width: 100%;
 										display: block;

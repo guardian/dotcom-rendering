@@ -464,63 +464,12 @@ const cardBorderTopDark: ContainerFunction = (containerPalette) => {
 };
 
 const cardSublinksBackgroundLight: ContainerFunction = (containerPalette) => {
-	switch (containerPalette) {
-		case 'LongRunningPalette':
-			return sourcePalette.neutral[93];
-		case 'LongRunningAltPalette':
-			return sourcePalette.neutral[86];
-		case 'SombrePalette':
-			return sourcePalette.neutral[38];
-		case 'SombreAltPalette':
-			return sourcePalette.neutral[20];
-		case 'InvestigationPalette':
-			return sourcePalette.neutral[46];
-		case 'BreakingPalette':
-			return sourcePalette.news[100];
-		case 'EventPalette':
-			return sourcePalette.neutral[86];
-		case 'EventAltPalette':
-			return sourcePalette.neutral[93];
-		case 'SpecialReportAltPalette':
-			return sourcePalette.neutral[86];
-		case 'Branded':
-			return sourcePalette.neutral[86];
-		case 'MediaPalette':
-			return sourcePalette.neutral[46];
-		case 'PodcastPalette':
-			return sourcePalette.neutral[86];
-	}
+	return cardBackgroundLight(containerPalette);
 };
 
 const cardSublinksBackgroundDark: ContainerFunction = (containerPalette) => {
-	switch (containerPalette) {
-		case 'LongRunningPalette':
-			return sourcePalette.brand[100];
-		case 'LongRunningAltPalette':
-			return sourcePalette.neutral[10];
-		case 'SombrePalette':
-			return sourcePalette.neutral[20];
-		case 'SombreAltPalette':
-			return sourcePalette.neutral[10];
-		case 'BreakingPalette':
-			return sourcePalette.news[100];
-		case 'InvestigationPalette':
-			return sourcePalette.neutral[38];
-		case 'EventPalette':
-			return sourcePalette.neutral[10];
-		case 'EventAltPalette':
-			return sourcePalette.neutral[10];
-		case 'SpecialReportAltPalette':
-			return sourcePalette.neutral[20];
-		case 'Branded':
-			return sourcePalette.neutral[10];
-		case 'MediaPalette':
-			return sourcePalette.neutral[46];
-		case 'PodcastPalette':
-			return sourcePalette.neutral[86];
-	}
+	return cardBackgroundDark(containerPalette);
 };
-
 const articleBorderLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':

@@ -22,13 +22,13 @@ const meta = {
 		trails: trails.slice(0, 2),
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
+		aspectRatio: '4:5',
 	},
 	render: (args) => (
 		<FrontSection
 			title="Static feature two"
 			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
-			showTopBorder={true}
 			containerLevel="Primary"
 		>
 			<StaticFeatureTwo {...args} />
@@ -70,7 +70,6 @@ export const WithSpecialPaletteVariations = {
 					title={containerPalette}
 					discussionApiUrl={discussionApiUrl}
 					editionId="UK"
-					showTopBorder={false}
 					key={containerPalette}
 					containerPalette={containerPalette}
 					containerLevel="Primary"

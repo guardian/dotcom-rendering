@@ -218,8 +218,8 @@ const tickerSettingsGivingTuesday = {
 		filledProgressColour: '#016D67',
 		progressBarBackgroundColour: 'rgba(1, 109, 103, 0.3)',
 		headlineColour: '#000000',
-		totalColour: '#1A2835',
-		goalColour: '#016D67',
+		totalColour: '#016D67',
+		goalColour: '#1A2835',
 	},
 };
 
