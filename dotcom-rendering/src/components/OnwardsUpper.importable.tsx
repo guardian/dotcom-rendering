@@ -332,7 +332,7 @@ export const OnwardsUpper = ({
 					/>
 				</Section>
 			)}
-			{!isPaidContent && curatedDataUrl !== undefined && (
+			{!!curatedDataUrl && !isPaidContent && (
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-border')}

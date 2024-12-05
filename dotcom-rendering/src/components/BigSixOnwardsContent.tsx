@@ -102,6 +102,8 @@ export const BigSixOnwardsContent = ({ url, discussionApiUrl }: Props) => {
 	const firstSlice25 = trails.slice(1, 2);
 	const secondSlice25 = trails.slice(2, 6);
 
+	const heading = data.heading || data.displayname;
+
 	return (
 		<div
 			data-component="onwards-content-gallery-style"
@@ -109,11 +111,11 @@ export const BigSixOnwardsContent = ({ url, discussionApiUrl }: Props) => {
 		>
 			<LeftColumn>
 				<h2 css={headerStyles}>
-					<span>{data.heading}</span>
+					<span>{heading}</span>
 				</h2>
 			</LeftColumn>
 			<h2 css={mobileHeaderStyles}>
-				<span>{data.heading}</span>
+				<span>{heading}</span>
 			</h2>
 			<div>
 				<UL direction="row" padBottom={true}>
