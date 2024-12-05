@@ -1,7 +1,3 @@
-const {
-	crypticCrossword,
-} = require('../../../fixtures/manual/editionsCrossword.js');
-
 /** @type {(_: [string, unknown]) => _ is [string, string]} */
 const isStringTuple = (_) => typeof _[1] === 'string';
 
@@ -68,13 +64,11 @@ exports.parseURL = parseURL;
 /** @type {import('webpack-dev-server').ExpressRequestHandler} */
 exports.getContentFromURLMiddleware = async (req, res, next) => {
 	if (req.path === '/EditionsCrossword') {
-		req.body = { crosswords: [crypticCrossword] };
 		try {
 			const url = new URL(
-				'http://localhost:9000/crosswords/digital-edition',
+				'https://www.theguardian.com/crosswords/digital-edition',
 			);
 			const content = await getContentFromURL(url, req.headers);
-			console.log(content);
 			req.body = content;
 			next();
 		} catch (error) {
