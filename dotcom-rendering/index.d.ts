@@ -88,6 +88,10 @@ declare namespace JSX {
 		 * To avoid race conditions, it is best to add this attribute only
 		 * to server-rendered HTML.
 		 *
+		 * Some elements are not trackable, e.g. `div`, `span`.
+		 * Refer to the Ophan documentation for more information.
+		 * https://github.com/guardian/ophan/blob/0f365862682cd97cc50cf381299e0f4875e2996c/tracker-js/src/click-path-capture.js
+		 *
 		 * Add `data-component="component-name"` to the element you want
 		 * to track. Then `add data-link-name="link-name"` to the anchor for which
 		 * clicks will be tracked.
