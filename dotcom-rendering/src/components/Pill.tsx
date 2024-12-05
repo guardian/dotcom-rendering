@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { space, textSansBold12 } from '@guardian/source/foundations';
-import type { ReactElement } from 'react';
+import { cloneElement, type ReactElement } from 'react';
 import { palette } from '../palette';
 
 type IconSide = 'left' | 'right';
@@ -30,9 +30,6 @@ const pillStyles = css`
 	background-color: ${palette('--pill-background')};
 	svg {
 		flex: none;
-		fill: currentColor;
-		width: auto;
-		height: 20px;
 		margin: 0 -3px; /* Compensate for whitespace around icon */
 	}
 `;
@@ -47,13 +44,25 @@ const pillPrefixStyles = css`
 	border-right: 1px solid ${palette('--pill-divider')};
 `;
 
-export const Pill = ({ content, prefix, icon, iconSide = 'left' }: Props) => (
-	<div css={pillStyles}>
-		{icon && iconSide === 'left' ? icon : ''}
-		{!!prefix && (
-			<span css={[pillContentStyles, pillPrefixStyles]}>{prefix}</span>
-		)}
-		<span css={pillContentStyles}>{content}</span>
-		{icon && iconSide === 'right' ? icon : ''}
-	</div>
-);
+export const Pill = ({ content, prefix, icon, iconSide = 'left' }: Props) => {
+	const Icon = () =>
+		icon
+			? cloneElement(icon, {
+					size: 'xsmall',
+					theme: { fill: 'currentColor' },
+			  })
+			: null;
+
+	return (
+		<div css={pillStyles}>
+			{iconSide === 'left' && <Icon />}
+			{!!prefix && (
+				<span css={[pillContentStyles, pillPrefixStyles]}>
+					{prefix}
+				</span>
+			)}
+			<span css={pillContentStyles}>{content}</span>
+			{iconSide === 'right' && <Icon />}
+		</div>
+	);
+};
