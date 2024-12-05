@@ -1,4 +1,4 @@
-import { from, width } from '@guardian/source/foundations';
+import { from } from '@guardian/source/foundations';
 import { Option, Select } from '@guardian/source/react-components';
 
 type Props<Crossword> = {
