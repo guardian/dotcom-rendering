@@ -139,7 +139,7 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** If specified, overrides trail text colour */
 	trailTextColour?: string;
-	/** The src of the square podcast series image, if exists */
+	/** The square podcast series image, if it exists for a card */
 	podcastImage?: PodcastSeriesImage;
 };
 
