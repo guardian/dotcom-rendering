@@ -1,9 +1,7 @@
-import {
-	SvgCamera,
-	SvgMediaControlsPlay,
-} from '@guardian/source/react-components';
+import { SvgCamera } from '@guardian/source/react-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Pill } from './Pill';
+import { SvgMediaControlsPlay } from './SvgMediaControlsPlay';
 
 const meta: Meta<typeof Pill> = {
 	title: 'Components/Pill',
