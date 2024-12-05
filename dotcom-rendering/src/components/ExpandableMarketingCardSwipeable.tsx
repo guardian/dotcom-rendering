@@ -175,6 +175,25 @@ export const ExpandableMarketingCardSwipeable = ({
 		}
 	}, [abTestVariant, isExpanded]);
 
+	useEffect(() => {
+		if (hasSwipedLeft) {
+			void submitComponentEvent(
+				{
+					component: {
+						componentType: 'CONTAINER',
+						id: 'us-expandable-marketing-card',
+					},
+					action: 'CLOSE',
+					abTest: {
+						name: 'UsaExpandableMarketingCard',
+						variant: abTestVariant,
+					},
+				},
+				'Web',
+			);
+		}
+	}, [abTestVariant, hasSwipedLeft]);
+
 	if (!shouldDisplayCard) {
 		return null;
 	}
