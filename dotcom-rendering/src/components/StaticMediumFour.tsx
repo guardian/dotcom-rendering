@@ -30,12 +30,7 @@ export const StaticMediumFour = ({
 	const cards = trails.slice(0, 4);
 
 	return (
-		<UL
-			direction="row"
-			padBottom={true}
-			showTopBar={true}
-			hasLargeSpacing={true}
-		>
+		<UL direction="row" padBottom={true} hasLargeSpacing={true}>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI
