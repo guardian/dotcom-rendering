@@ -12,6 +12,7 @@ export const decideMerchHighAndMobileAdSlots = (
 	isPaidContent: boolean | undefined,
 	mobileAdPositions: (number | undefined)[],
 	hasPageSkin: boolean,
+	containerSpacing?: string,
 ) => {
 	if (!renderAds) return null;
 
@@ -27,6 +28,7 @@ export const decideMerchHighAndMobileAdSlots = (
 				<AdSlot
 					data-print-layout="hide"
 					position="merchandising-high"
+					containerSpacing={containerSpacing}
 				/>
 			</Hide>
 		);
@@ -39,6 +41,7 @@ export const decideMerchHighAndMobileAdSlots = (
 					index={mobileAdPositions.indexOf(index)}
 					data-print-layout="hide"
 					position="mobile-front"
+					containerSpacing={containerSpacing}
 				/>
 			</Hide>
 		);
@@ -92,6 +95,7 @@ export const decideFrontsBannerAdSlot = (
 	hasPageSkin: boolean,
 	index: number,
 	desktopAdPositions: number[],
+	containerSpacing?: 'small' | 'large',
 ) => {
 	if (!renderAds || hasPageSkin) {
 		return null;
@@ -107,6 +111,7 @@ export const decideFrontsBannerAdSlot = (
 				position="fronts-banner"
 				index={adIndex + 1}
 				hasPageskin={hasPageSkin}
+				containerSpacing={containerSpacing}
 			/>
 		);
 	}

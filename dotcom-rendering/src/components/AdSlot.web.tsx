@@ -47,6 +47,7 @@ type DefaultProps = {
 	display?: ArticleDisplay;
 	isPaidContent?: boolean;
 	hasPageskin?: boolean;
+	containerSpacing?: string;
 };
 
 // for dark ad labels
@@ -366,6 +367,10 @@ const mobileStickyAdStylesFullWidth = css`
 	}
 `;
 
+const extraContainerBottomSpacingStyles = css`
+	margin-bottom: 16px;
+`;
+
 export const AdSlot = ({
 	position,
 	display,
@@ -374,6 +379,7 @@ export const AdSlot = ({
 	hasPageskin = false,
 	shouldHideReaderRevenue = false,
 	colourScheme = 'light',
+	containerSpacing,
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -566,7 +572,14 @@ export const AdSlot = ({
 							'ad-slot',
 							'ad-slot--merchandising-high',
 						].join(' ')}
-						css={[merchandisingAdStyles]}
+						css={[
+							merchandisingAdStyles,
+							containerSpacing &&
+								extraContainerBottomSpacingStyles,
+							css`
+								outline: green solid 1px;
+							`,
+						]}
 						data-link-name="ad slot merchandising-high"
 						data-name="merchandising-high"
 						data-refresh="false"
@@ -601,7 +614,13 @@ export const AdSlot = ({
 			return (
 				<div
 					className="top-fronts-banner-ad-container"
-					css={frontsBannerAdTopContainerStyles}
+					css={[
+						frontsBannerAdTopContainerStyles,
+						containerSpacing && extraContainerBottomSpacingStyles,
+						css`
+							outline: hotpink solid 1px;
+						`,
+					]}
 				>
 					<div
 						className="ad-slot-container"
@@ -734,7 +753,14 @@ export const AdSlot = ({
 							'mobile-only',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[mobileFrontAdStyles]}
+						css={[
+							mobileFrontAdStyles,
+							containerSpacing &&
+								extraContainerBottomSpacingStyles,
+							css`
+								outline: red solid 1px;
+							`,
+						]}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
 						aria-hidden="true"

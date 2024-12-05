@@ -15,7 +15,7 @@ const sidePadding = css`
 `;
 
 const bottomPadding = css`
-	padding-bottom: ${space[9]}px;
+	padding-bottom: ${space[4]}px;
 `;
 
 const sideBorderStyles = css`

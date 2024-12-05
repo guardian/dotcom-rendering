@@ -412,6 +412,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											<Section
 												fullWidth={true}
 												padSides={false}
+												padBottom={
+													collection.containerSpacing ===
+													'large'
+												}
 												showTopBorder={false}
 												showSideBorders={false}
 												ophanComponentLink={
@@ -440,6 +444,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											.isPaidContent,
 										mobileAdPositions,
 										hasPageSkin,
+										collection.containerSpacing,
 									)}
 								</div>
 							</ContainerOverrides>
@@ -482,6 +487,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									containerName={collection.collectionType}
 									containerPalette={
 										collection.containerPalette
+									}
+									containerSpacing={
+										collection.containerSpacing
 									}
 									sectionId={ophanName}
 									showDateHeader={
@@ -669,6 +677,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								hasPageSkin,
 								index,
 								desktopAdPositions,
+								collection.containerSpacing,
 							)}
 							<FrontSection
 								title={collection.displayName}
@@ -713,6 +722,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								containerLevel={
 									collection.config.containerLevel
 								}
+								containerSpacing={collection.containerSpacing}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
@@ -743,6 +753,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.pressedPage.frontProperties.isPaidContent,
 								mobileAdPositions,
 								hasPageSkin,
+								collection.containerSpacing,
 							)}
 						</div>
 					);
