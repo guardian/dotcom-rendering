@@ -1,5 +1,9 @@
+import {
+	SvgCamera,
+	SvgMediaControlsPlay,
+} from '@guardian/source/react-components';
 import type { Meta, StoryObj } from '@storybook/react';
-import { GalleryIcon, Pill, VideoIcon } from './Pill';
+import { Pill } from './Pill';
 
 const meta: Meta<typeof Pill> = {
 	title: 'Components/Pill',
@@ -18,14 +22,14 @@ export const Default = {} satisfies Story;
 export const WithVideoIcon = {
 	args: {
 		content: <time>3:35</time>,
-		icon: <VideoIcon />,
+		icon: <SvgMediaControlsPlay />,
 	},
 } satisfies Story;
 
 export const WithGalleryIcon = {
 	args: {
 		content: '10',
-		icon: <GalleryIcon />,
+		icon: <SvgCamera />,
 		iconSide: 'right',
 	},
 } satisfies Story;
@@ -34,7 +38,7 @@ export const WithGalleryIconAndPrefix = {
 	args: {
 		content: '10',
 		prefix: 'Gallery',
-		icon: <GalleryIcon />,
+		icon: <SvgCamera />,
 		iconSide: 'right',
 	},
 } satisfies Story;
