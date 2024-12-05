@@ -4,10 +4,14 @@ import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import { palette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
-import type { MiniProfile, StarRating } from '../types/content';
-import { MiniProfile as MiniProfileComponent } from './MiniProfile';
+import type {
+	MultiByline as MultiBylineModel,
+	StarRating,
+} from '../types/content';
+import type { TagType } from '../types/tag';
+import { MultiByline as MultiBylineItemComponent } from './MultiByline';
 
-interface MiniProfilesProps {
+interface MultiBylineProps {
 	format: ArticleFormat;
 	ajaxUrl: string;
 	host?: string;
@@ -19,13 +23,13 @@ interface MiniProfilesProps {
 	editionId: EditionId;
 	hideCaption?: boolean;
 	starRating?: StarRating;
-	miniProfiles: MiniProfile[];
+	multiBylines: MultiBylineModel[];
 	RenderArticleElement: ArticleElementRenderer;
+	tags: TagType[];
 	/**
 	 * Whether this is the last element in the article. If true, no separator will be rendered.
 	 */
 	isLastElement: boolean;
-	sectioned: boolean;
 }
 
 const separatorStyles = css`
@@ -34,8 +38,8 @@ const separatorStyles = css`
 	border-top: 1px solid ${palette('--article-border')};
 `;
 
-export const MiniProfiles = ({
-	miniProfiles,
+export const MultiBylines = ({
+	multiBylines,
 	format,
 	ajaxUrl,
 	host,
@@ -48,22 +52,19 @@ export const MiniProfiles = ({
 	hideCaption,
 	starRating,
 	RenderArticleElement,
+	tags,
 	isLastElement,
-	sectioned,
-}: MiniProfilesProps) => {
-	const displaySeparator = !isLastElement && !sectioned;
-
+}: MultiBylineProps) => {
 	return (
-		<ol data-ignore="global-ol-styling">
-			{miniProfiles.map((miniProfile, index) => (
-				// eslint-disable-next-line react/no-array-index-key -- Title should usually be identical, but in case it isn't, also use array index
-				<MiniProfileComponent
-					miniProfile={miniProfile}
+		<>
+			{multiBylines.map((multiBylineItem, index) => (
+				<MultiBylineItemComponent
+					multiByline={multiBylineItem}
 					format={format}
-					key={`${miniProfile.title}-${index}`}
-					sectioned={sectioned}
+					tags={tags}
+					key={multiBylineItem.title}
 				>
-					{miniProfile.body.map((element) => (
+					{multiBylineItem.body.map((element) => (
 						// eslint-disable-next-line react/jsx-key -- The element array should remain consistent as it's derived from the order of elements in CAPI
 						<RenderArticleElement
 							format={format}
@@ -73,7 +74,7 @@ export const MiniProfiles = ({
 							index={index}
 							isMainMedia={false}
 							pageId={pageId}
-							webTitle={miniProfile.title}
+							webTitle={multiBylineItem.title}
 							isAdFreeUser={isAdFreeUser}
 							isSensitive={isSensitive}
 							switches={switches}
@@ -85,9 +86,9 @@ export const MiniProfiles = ({
 							isListElement={true}
 						/>
 					))}
-				</MiniProfileComponent>
+				</MultiBylineItemComponent>
 			))}
-			{displaySeparator && <hr css={separatorStyles} />}
-		</ol>
+			{!isLastElement && <hr css={separatorStyles} />}
+		</>
 	);
 };
