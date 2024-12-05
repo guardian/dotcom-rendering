@@ -103,7 +103,13 @@ const decideImage = (trail: FEFrontCard) => {
 	return trail.properties.maybeContent?.trail.trailPicture?.allImages[0]?.url;
 };
 
-const getPodcast = (trail: FEFrontCard): PodcastSeriesImage | undefined => {
+/**
+ * Fetches podcast series image if it exists within the tags on a trail.
+ * Also provides alt text for this image (series name) for when it is rendered.
+ */
+const getPodcastSeriesImage = (
+	trail: FEFrontCard,
+): PodcastSeriesImage | undefined => {
 	const podcastFromTags = trail.properties.maybeContent?.tags.tags
 		.map(({ properties }) => properties)
 		.find(({ tagType, podcast }) => tagType === 'Series' && !!podcast);
@@ -260,7 +266,7 @@ export const enhanceCards = (
 
 		const imageSrc = decideImage(faciaCard);
 
-		const podcastImage = getPodcast(faciaCard);
+		const podcastImage = getPodcastSeriesImage(faciaCard);
 
 		const isContributorTagPage = !!pageId && pageId.startsWith('profile/');
 
