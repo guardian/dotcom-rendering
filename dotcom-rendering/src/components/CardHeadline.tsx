@@ -61,6 +61,7 @@ type Props = {
 	headlineColour?: string;
 	/** Optional override of the standard card kicker colour */
 	kickerColour?: string;
+	isBetaContainer?: boolean;
 };
 
 const sublinkStyles = css`
@@ -174,16 +175,21 @@ const getFontSize = (sizes: ResponsiveFontSize, family: FontFamily) => {
 	`;
 };
 
-const getFonts = (format: ArticleFormat, fontSizes: ResponsiveFontSize) => {
+const getFonts = (
+	format: ArticleFormat,
+	fontSizes: ResponsiveFontSize,
+	isBetaContainer: boolean,
+) => {
 	if (format.theme === ArticleSpecial.Labs) {
 		return getFontSize(fontSizes, FontFamily.TextSans);
 	}
 
 	if (
+		isBetaContainer &&
 		/** Any of these designs are considered an "opinion" */
-		format.design === ArticleDesign.Comment ||
-		format.design === ArticleDesign.Editorial ||
-		format.design === ArticleDesign.Letter
+		(format.design === ArticleDesign.Comment ||
+			format.design === ArticleDesign.Editorial ||
+			format.design === ArticleDesign.Letter)
 	) {
 		return getFontSize(fontSizes, FontFamily.HeadlineLight);
 	}
@@ -223,11 +229,12 @@ export const CardHeadline = ({
 	isExternalLink,
 	headlineColour = palette('--card-headline'),
 	kickerColour = palette('--card-kicker-text'),
+	isBetaContainer = false,
 }: Props) => {
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
 
-	const fontStyles = getFonts(format, fontSizes);
+	const fontStyles = getFonts(format, fontSizes, isBetaContainer);
 
 	return (
 		<WithLink linkTo={linkTo}>
