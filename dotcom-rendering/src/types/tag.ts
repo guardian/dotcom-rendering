@@ -27,6 +27,7 @@ export type FETagType = {
 		url?: string;
 		webUrl?: string;
 		references?: Reference[];
+		podcast?: Podcast;
 	};
 	pagination?: FEPagination;
 };
@@ -40,6 +41,11 @@ export type Podcast = {
 	subscriptionUrl?: string;
 	spotifyUrl?: string;
 	image?: string;
+};
+
+export type PodcastSeriesImage = {
+	src?: string;
+	altText?: string;
 };
 
 export type TagType = {
