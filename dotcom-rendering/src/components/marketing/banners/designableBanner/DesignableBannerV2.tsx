@@ -4,7 +4,7 @@ import {
 	from,
 	neutral,
 	space,
-	until,
+	sport,
 } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import { ThreeTierChoiceCards } from '../../epics/ThreeTierChoiceCards';
@@ -107,7 +107,13 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		articleCounts.forTargetedWeeks >= 5;
 
 	return (
-		<div>
+		<div
+			css={styles.outerContainer(
+				templateSettings.containerSettings.backgroundColour,
+				templateSettings.containerSettings.textColor,
+				iosAppBannerPresent,
+			)}
+		>
 			<div css={styles.containerOverrides}>
 				<DesignableBannerCloseButton
 					onCloseClick={onCloseClick}
@@ -152,7 +158,13 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 };
 
 const styles = {
-	outerContainer: (limitHeight: boolean) => css`
+	outerContainer: (
+		background: string,
+		textColor: string | undefined,
+		limitHeight: boolean,
+	) => css`
+		background: ${background};
+		color: ${textColor};
 		${limitHeight ? 'max-height: 70vh;' : ''}
 		overflow: auto;
 
