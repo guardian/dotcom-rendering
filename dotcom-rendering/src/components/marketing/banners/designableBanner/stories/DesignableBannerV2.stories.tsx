@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
-import { props } from '../../utils/storybook';
+import { props, reducedBodyCopy } from '../../utils/storybook';
 import { DesignableBannerV2 } from '../DesignableBannerV2';
 
 type WithJsonProps<T> = T & { json?: string };
@@ -33,6 +33,12 @@ export const BasicDesignableBannerV2: Story = {
 		...meta.args,
 		separateArticleCountSettings: {
 			type: 'above',
+		},
+		content: {
+			...reducedBodyCopy,
+		},
+		mobileContent: {
+			...reducedBodyCopy,
 		},
 	},
 };
