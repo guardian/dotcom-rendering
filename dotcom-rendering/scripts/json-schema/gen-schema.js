@@ -18,6 +18,7 @@ const tagPageSchema = getTagPageSchema();
 const newsletterPageSchema = getNewsletterPageSchema();
 const blockSchema = getBlockSchema();
 const editionsCrosswordSchema = getEditionsCrosswordSchema();
+const sportsSchema = getArticleSchema();
 
 fs.writeFile(
 	`${root}/src/model/article-schema.json`,

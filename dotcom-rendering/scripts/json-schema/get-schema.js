@@ -26,6 +26,14 @@ const getArticleSchema = () => {
 	);
 };
 
+const getSportsSchema = () => {
+	return JSON.stringify(
+		TJS.generateSchema(program, 'FELiveScoresType', settings),
+		null,
+		4,
+	);
+};
+
 const getFrontSchema = () => {
 	return JSON.stringify(
 		TJS.generateSchema(program, 'FEFrontType', settings),
