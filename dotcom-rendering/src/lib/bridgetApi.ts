@@ -4,6 +4,7 @@ import * as Commercial from '@guardian/bridget/Commercial';
 import * as Discussion from '@guardian/bridget/Discussion';
 import * as Environment from '@guardian/bridget/Environment';
 import * as Gallery from '@guardian/bridget/Gallery';
+import * as Interaction from '@guardian/bridget/Interaction';
 import * as Metrics from '@guardian/bridget/Metrics';
 import * as Navigation from '@guardian/bridget/Navigation';
 import * as Newsletters from '@guardian/bridget/Newsletters';
@@ -164,4 +165,16 @@ export const getDiscussionClient = (): Discussion.Client<void> => {
 		);
 	}
 	return discussionClient;
+};
+
+let interactionClient: Interaction.Client<void> | undefined = undefined;
+export const getInteractionClient = (): Interaction.Client<void> => {
+	if (!interactionClient) {
+		interactionClient = createAppClient<Interaction.Client<void>>(
+			Interaction.Client,
+			'buffered',
+			'compact',
+		);
+	}
+	return interactionClient;
 };

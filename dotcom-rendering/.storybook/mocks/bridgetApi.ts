@@ -86,6 +86,10 @@ export const getDiscussionClient: BridgetApi<'getDiscussionClient'> = () => ({
 	recommend: async () => discussionErrorResponse,
 });
 
+export const getInteractionClient: BridgetApi<
+	'getInteractionClient'
+> = () => ({});
+
 export const ensure_all_exports_are_present = {
 	getUserClient,
 	getAcquisitionsClient,
@@ -100,6 +104,7 @@ export const ensure_all_exports_are_present = {
 	getNewslettersClient,
 	getDiscussionClient,
 	getTagClient,
+	getInteractionClient,
 } satisfies {
 	[Method in keyof BridgeModule]: BridgetApi<Method>;
 };
