@@ -112,7 +112,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 				<DesignableBannerCloseButton
 					onCloseClick={onCloseClick}
 					settings={templateSettings.closeButtonSettings}
-					styleOverides={styles.closeButtonOverrides(true)}
+					styleOverides={styles.closeButtonOverrides}
 				/>
 				<div>
 					<DesignableBannerHeader
@@ -146,8 +146,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					setSelectedProduct={setThreeTierChoiceCardSelectedProduct}
 					variantOfChoiceCard={variantOfChoiceCard}
 				/>
-
-				{/*insert guardain logo?*/}
 			</div>
 		</div>
 	);
@@ -185,7 +183,7 @@ const styles = {
 			width: 100%;
 			max-width: 1300px;
 			margin: 0 auto;
-			padding: 0 ${space[5]}px;
+			padding: 0 ${space[3]}px;
 		}
 
 		${from.desktop} {
@@ -199,28 +197,11 @@ const styles = {
 
 		${templateSpacing.bannerContainer};
 	`,
-	closeButtonOverrides: (isGridCell: boolean) => css`
-		${until.tablet} {
-			position: fixed;
-			margin-top: ${space[3]}px;
-			padding-right: 10px;
-			right: 0;
-		}
-
-		${from.tablet} {
-			margin-top: ${space[3]}px;
-
-			${isGridCell
-				? css`
-						grid-column: 2;
-						grid-row: 1;
-				  `
-				: css`
-						margin-bottom: ${space[3]}px;
-						display: flex;
-						justify-content: flex-end;
-				  `}
-		}
+	closeButtonOverrides: css`
+		margin-top: ${space[3]}px;
+		grid-column: 2;
+		grid-row: 1;
+		justify-content: flex-end;
 	`,
 };
 
