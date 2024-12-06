@@ -5706,6 +5706,12 @@ const featureCardKickerTextLight: PaletteFunction = ({ theme }) => {
 	}
 };
 
+const pillText: PaletteFunction = () => sourcePalette.neutral[100];
+const pillBackground: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[7], 0.7);
+const pillDivider: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[100], 0.5);
+
 // ----- Palette ----- //
 
 /**
@@ -6699,6 +6705,18 @@ const paletteColours = {
 	'--pagination-text': {
 		light: paginationTextLight,
 		dark: paginationTextDark,
+	},
+	'--pill-background': {
+		light: pillBackground,
+		dark: pillBackground,
+	},
+	'--pill-divider': {
+		light: pillDivider,
+		dark: pillDivider,
+	},
+	'--pill-text': {
+		light: pillText,
+		dark: pillText,
 	},
 	'--pinned-post-background': {
 		light: liveBlockContainerBackgroundLight,
