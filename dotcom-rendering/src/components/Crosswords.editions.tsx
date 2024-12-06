@@ -1,3 +1,4 @@
+import Crossword from '@guardian/react-crossword';
 import { useEffect, useState } from 'react';
 import {
 	type CrosswordsByDate,
@@ -83,11 +84,11 @@ const CrosswordsWithInitialDate = ({
 				onCrosswordIndexChange={setCrosswordIndex}
 			/>
 			{crossword === undefined ? null : (
-				<ul>
-					{crossword.entries.map((entry) => (
-						<li key={entry.id}>{entry.clue}</li>
-					))}
-				</ul>
+				<Crossword
+					data={crossword}
+					id={crossword.name}
+					key={crossword.name}
+				/>
 			)}
 		</>
 	);

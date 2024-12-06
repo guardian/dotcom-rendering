@@ -15,7 +15,7 @@ type FECrosswordEntry = {
 	length: number;
 	clue: string;
 	group: string[];
-	solution: string;
+	solution?: string;
 	format?: string;
 };
 

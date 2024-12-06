@@ -14,6 +14,59 @@ declare module 'dynamic-import-polyfill' {
 	}) => void;
 }
 
+declare module '@guardian/react-crossword' {
+	import type { FC } from 'react';
+
+	export type Cell = {
+		number: number;
+		value: string;
+	};
+
+	export type Clue = {
+		id: string;
+		number: number;
+		humanNumber: string;
+		direction: 'across' | 'down';
+		position: { x: number; y: number };
+		separatorLocations: {
+			','?: number[];
+			'-'?: number[];
+		};
+		length: number;
+		clue: string;
+		group: string[];
+		solution?: string;
+		format?: string;
+	};
+
+	export type CrosswordProps = {
+		id: string;
+		data: {
+			id?: string;
+			number: number;
+			name: string;
+			date: string;
+			dimensions: { cols: number; rows: number };
+			entries: Clue[];
+			solutionAvailable: boolean;
+			hasNumbers: boolean;
+			randomCluesOrdering: boolean;
+			instructions?: string;
+			creator?: { name: string; webUrl: string };
+			pdf?: string;
+			annotatedSolution?: string;
+			dateSolutionAvailable: string;
+		};
+		onCorrect?: (cell: Cell) => void;
+		onLoaded?: () => void;
+	};
+
+	const Crossword: FC<CrosswordProps>;
+
+	// eslint-disable-next-line import/no-default-export -- react-crossword uses default exports
+	export default Crossword;
+}
+
 // SVG handling
 declare module '*.svg' {
 	const content: any;

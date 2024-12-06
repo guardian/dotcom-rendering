@@ -114,8 +114,7 @@
                                 "length",
                                 "number",
                                 "position",
-                                "separatorLocations",
-                                "solution"
+                                "separatorLocations"
                             ]
                         }
                     },
