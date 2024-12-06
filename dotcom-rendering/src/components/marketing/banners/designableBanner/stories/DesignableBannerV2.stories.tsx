@@ -27,6 +27,12 @@ const meta: Meta<Props> = {
 export default meta;
 
 type Story = StoryObj<Props>;
-export const Default: Story = {
+export const BasicDesignableBannerV2: Story = {
 	name: 'Basic DesignableBannerV2',
+	args: {
+		...meta.args,
+		separateArticleCountSettings: {
+			type: 'above',
+		},
+	},
 };
