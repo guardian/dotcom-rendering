@@ -1,5 +1,4 @@
 /* eslint-disable ssr-friendly/no-dom-globals-in-module-scope */
-import './webpackPublicPath';
 import css from '@guardian/react-crossword/lib/index.css';
 import { createRoot } from 'react-dom/client';
 import { Crosswords } from '../components/Crosswords.editions';
