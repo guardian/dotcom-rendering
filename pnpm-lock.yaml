@@ -361,6 +361,9 @@ importers:
       '@guardian/ophan-tracker-js':
         specifier: 2.2.5
         version: 2.2.5
+      '@guardian/react-crossword-next':
+        specifier: npm:@guardian/react-crossword@0.0.0-canary-20241128162754
+        version: /@guardian/react-crossword@0.0.0-canary-20241128162754(@emotion/react@11.11.3)(@guardian/libs@19.2.1)(@guardian/source@8.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -4251,6 +4254,33 @@ packages:
     dependencies:
       prettier: 3.0.3
       tslib: 2.6.2
+    dev: false
+
+  /@guardian/react-crossword@0.0.0-canary-20241128162754(@emotion/react@11.11.3)(@guardian/libs@19.2.1)(@guardian/source@8.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
+    resolution: {integrity: sha512-RLmjgGUV6V1DCOKfprUi2SZhpTLw1TSxH7DDFP2maAZUmq6NpYgWZDbezY+m9+IHTuEQfLQYbyyJl0dCcj8bZQ==}
+    peerDependencies:
+      '@emotion/react': ^11.11.3
+      '@guardian/libs': ^19.1.0
+      '@guardian/source': ^8.0.0
+      '@types/react': ^18.2.79
+      react: ^18.2.0
+      typescript: ~5.5.2
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@emotion/react': 11.11.3(@types/react@18.3.1)(react@18.3.1)
+      '@guardian/libs': 19.2.1(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/source': 8.0.0(@emotion/react@11.11.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
+      '@types/react': 18.3.1
+      react: 18.3.1
+      tslib: 2.6.2
+      typescript: 5.5.3
+      use-local-storage-state: 19.5.0(react-dom@18.3.1)(react@18.3.1)
+    transitivePeerDependencies:
+      - react-dom
     dev: false
 
   /@guardian/renditions@0.2.0:
@@ -17559,6 +17589,17 @@ packages:
     dependencies:
       punycode: 1.4.1
       qs: 6.13.0
+    dev: false
+
+  /use-local-storage-state@19.5.0(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-sUJAyFvsmqMpBhdwaRr7GTKkkoxb6PWeNVvpBDrLuwQF1PpbJRKIbOYeLLeqJI7B3wdfFlLLCBbmOdopiSTBOw==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
     dev: false
 
   /util-deprecate@1.0.2:
