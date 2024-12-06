@@ -1,4 +1,6 @@
-const quickCrossword = {
+import type { FEEditionsCrossword } from '../../src/types/editionsCrossword';
+
+export const quickCrossword: FEEditionsCrossword = {
 	date: '2024-11-01T23:00:00Z',
 	dateSolutionAvailable: '2024-11-01T23:00:00Z',
 	dimensions: {
@@ -31,7 +33,7 @@ const quickCrossword = {
 	type: 'quick',
 };
 
-const crypticCrossword = {
+export const crypticCrossword: FEEditionsCrossword = {
 	date: '2024-11-01T23:00:00Z',
 	dateSolutionAvailable: '2024-11-01T23:00:00Z',
 	dimensions: {
@@ -62,9 +64,4 @@ const crypticCrossword = {
 	randomCluesOrdering: false,
 	solutionAvailable: true,
 	type: 'cryptic',
-};
-
-module.exports = {
-	crypticCrossword,
-	quickCrossword,
 };
