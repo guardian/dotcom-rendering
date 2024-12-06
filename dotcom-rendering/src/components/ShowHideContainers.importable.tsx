@@ -1,5 +1,6 @@
 import { isObject, isString, storage } from '@guardian/libs';
 import { useEffect } from 'react';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 
 type ContainerStates = { [id: string]: string };
 
@@ -19,14 +20,16 @@ const getContainerStates = (): ContainerStates => {
 };
 
 type Props = {
-	/** When in the ON position, we remove the show/hide functionality for all
-	 * containers on the page if the user does not have any hidden containers */
+	/** When in the ON position, we remove the show/hide functionality for all containers
+	 * on the page if the user is not signed in and does not have any hidden containers */
 	disableFrontContainerToggleSwitch: boolean;
 };
 
 export const ShowHideContainers = ({
 	disableFrontContainerToggleSwitch,
 }: Props) => {
+	const isSignedIn = useIsSignedIn();
+
 	useEffect(() => {
 		const containerStates = getContainerStates();
 
@@ -67,9 +70,16 @@ export const ShowHideContainers = ({
 			.every((state) => state !== 'closed');
 
 		for (const e of allShowHideButtons) {
-			// We want to remove the ability to toggle front containers between expanded and collapsed states.
-			// The first part of doing this is removing the feature for those who do not currently use it.
-			if (disableFrontContainerToggleSwitch && allContainersAreExpanded) {
+			// Users are not able to hide containers if the following three conditions are met:
+			// - They are not signed in
+			// - The disableFrontContainerToggleSwitch is on
+			// - All containers are expanded
+			// Otherwise, they should be able to hide containers
+			if (
+				!(isSignedIn === 'Pending' ? false : isSignedIn) &&
+				disableFrontContainerToggleSwitch &&
+				allContainersAreExpanded
+			) {
 				e.remove();
 			}
 
@@ -82,7 +92,7 @@ export const ShowHideContainers = ({
 				toggleContainer(sectionId, e);
 			}
 		}
-	}, [disableFrontContainerToggleSwitch]);
+	}, [isSignedIn, disableFrontContainerToggleSwitch]);
 
 	return <></>;
 };
