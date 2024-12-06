@@ -11,9 +11,11 @@ import type { FETagPageType } from '../types/tagPage';
 import articleSchema from './article-schema.json';
 import blockSchema from './block-schema.json';
 import editionsCrosswordSchema from './editions-crossword-schema.json';
+import sportSchema from './sports-schema.json';
 import frontSchema from './front-schema.json';
 import newslettersPageSchema from './newsletter-page-schema.json';
 import tagPageSchema from './tag-page-schema.json';
+import { FELiveScoresType } from 'src/types/sports';
 
 const options: Options = {
 	verbose: false,
@@ -36,6 +38,8 @@ const validateEditionsCrossword = ajv.compile<FEEditionsCrosswords>(
 	editionsCrosswordSchema,
 );
 
+const validateSports = ajv.compile<FELiveScoresType>(sportSchema);
+
 export const validateAsArticleType = (data: unknown): FEArticleType => {
 	if (validateArticle(data)) return data;
 
@@ -57,6 +61,16 @@ export const validateAsEditionsCrosswordType = (
 	throw new TypeError(
 		`Unable to validate request body for editions crosswords.\n
 		${JSON.stringify(validateEditionsCrossword.errors, null, 2)}`,
+	);
+};
+
+export const validateAsSports = (data: unknown): FELiveScoresType => {
+	if (validateSports(data)) {
+		return data;
+	}
+	throw new TypeError(
+		`Unable to validate request body for editions crosswords.\n
+		${JSON.stringify(validateSports.errors, null, 2)}`,
 	);
 };
 
