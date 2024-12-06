@@ -94,7 +94,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		},
 		highlightedTextSettings: {
 			textColour: neutral[0],
-			highlightColour: brandAlt[400],
+			highlightColour: neutral[100], //setting to not show as we may want this in the future?
 		},
 		articleCountTextColour: neutral[0],
 		bannerId: 'designable-banner',

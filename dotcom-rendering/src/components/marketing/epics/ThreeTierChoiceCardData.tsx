@@ -118,19 +118,16 @@ export const ChoiceCardTestData_TwoTier_REGULAR: ChoiceInfo[] = [
 		benefitsLabel: 'All-access digital',
 		benefits: () => [
 			'Unlimited access to the Guardian app',
-			'Unlimited access to our new Feast App',
 			'Ad-free reading on all your devices',
-			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
-			'Far fewer asks for support',
+			'Exclusive newsletter for supporters',
+			'And much more!',
 		],
 		recommended: true,
 	},
 	{
 		supportTier: 'OneOff',
-		label: (
-			amount: number,
-			currencySymbol: string,
-		): JSX.Element | string => <>Support us from just ${currencySymbol}1</>,
+		label: (amount: number, currencySymbol: string): string =>
+			`Support us from just ${currencySymbol}1`,
 		benefitsLabel: undefined,
 		benefits: (currencySymbol: string) => [
 			`We welcome support of any size, any time - whether you choose to give ${currencySymbol}1 or more`,
