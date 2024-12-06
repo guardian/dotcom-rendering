@@ -36,10 +36,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		setThreeTierChoiceCardSelectedProduct,
 	] = useState<SupportTier>('SupporterPlus');
 
-	const variantOfChoiceCard =
-		countryCode === 'US'
-			? 'US_THREE_TIER_CHOICE_CARDS'
-			: 'THREE_TIER_CHOICE_CARDS';
+	const variantOfChoiceCard = 'TWO_TIER_CHOICE_CARDS'; //this may need changed when US involved
 
 	useEffect(() => {
 		setIosAppBannerPresent(
