@@ -23,10 +23,6 @@ const img = css`
 	width: 100%;
 `;
 
-const multiBylineAvatar = css`
-	background-color: ${palette('--multi-byline-avatar-background')};
-`;
-
 /**
  * Used on `picture` and `img` to prevent having a line-height,
  * as these elements are which are `inline` by default.
@@ -55,15 +51,9 @@ type Props = {
 	src: string;
 	alt: string;
 	shape?: AvatarShape;
-	isMultiBylineAvatar?: boolean;
 };
 
-export const Avatar = ({
-	src,
-	alt,
-	shape = 'round',
-	isMultiBylineAvatar = false,
-}: Props) => {
+export const Avatar = ({ src, alt, shape = 'round' }: Props) => {
 	const sources = generateSources(getSourceImageUrl(src), [
 		{ breakpoint: 320, width: 75 },
 		{ breakpoint: 740, width: 140 },
@@ -94,7 +84,6 @@ export const Avatar = ({
 							'--avatar-background-colour',
 						)};
 					`,
-				isMultiBylineAvatar ? multiBylineAvatar : '',
 			]}
 		>
 			{sources.map((source) => {

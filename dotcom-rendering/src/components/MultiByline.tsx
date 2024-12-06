@@ -269,11 +269,7 @@ const Byline = ({
 			</div>
 			{!!imageUrl && (
 				<div css={bylineImageStyles}>
-					<Avatar
-						src={imageUrl}
-						alt={byline}
-						isMultiBylineAvatar={true}
-					/>
+					<Avatar src={imageUrl} alt={byline} />
 				</div>
 			)}
 		</div>
