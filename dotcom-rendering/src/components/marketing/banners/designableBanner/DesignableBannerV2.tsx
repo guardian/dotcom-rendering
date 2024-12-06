@@ -62,6 +62,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		return <></>;
 	}
 
+	//All config hard coded for the tests - TODO make this configurable in the future
 	const templateSettings: BannerTemplateSettings = {
 		containerSettings: {
 			backgroundColour: neutral[100],
@@ -94,7 +95,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		},
 		highlightedTextSettings: {
 			textColour: neutral[0],
-			highlightColour: neutral[100], //setting to not show as we may want this in the future?
+			highlightColour: neutral[100], //set to be white as we may want this in the future?
 		},
 		articleCountTextColour: neutral[0],
 		bannerId: 'designable-banner',
