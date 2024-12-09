@@ -1,4 +1,9 @@
-import { type ArticleFormat, decideFormat } from '../lib/articleFormat';
+import { randomUUID } from 'node:crypto';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	decideFormat,
+} from '../lib/articleFormat';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import { appsLightboxImages } from '../model/appsLightboxImages';
 import { buildLightboxImages } from '../model/buildLightboxImages';
@@ -28,6 +33,40 @@ export type ArticleDeprecated = FEArticleType & {
 export type Article = {
 	format: ArticleFormat;
 	frontendData: ArticleDeprecated;
+};
+
+export const enhanceCrossword = (article: Article): Article => {
+	if (article.frontendData.crossword) {
+		const element = {
+			_type: 'model.dotcomrendering.pageElements.CrosswordElement' as const,
+			crossword: article.frontendData.crossword,
+		};
+		return {
+			...article,
+			format: { ...article.format, design: ArticleDesign.Crossword },
+			frontendData: {
+				...article.frontendData,
+				blocks: [
+					{
+						id: randomUUID(),
+						elements: [element],
+						attributes: {
+							pinned: false,
+							keyEvent: false,
+							summary: false,
+						},
+						primaryDateLine:
+							article.frontendData.webPublicationDateDisplay,
+						secondaryDateLine:
+							article.frontendData
+								.webPublicationSecondaryDateDisplay,
+					},
+				],
+			},
+		};
+	}
+
+	throw new TypeError('article did not contain a crossword');
 };
 
 export const enhanceArticleType = (
