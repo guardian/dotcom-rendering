@@ -129,6 +129,7 @@ const carouselStyles = css`
 	grid-auto-flow: column;
 	gap: 20px;
 	overflow-x: auto;
+	overflow-y: hidden;
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	overscroll-behavior: contain auto;

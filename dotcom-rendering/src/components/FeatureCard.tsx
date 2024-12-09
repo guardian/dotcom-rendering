@@ -435,6 +435,7 @@ export const FeatureCard = ({
 											kickerColour={palette(
 												'--feature-card-kicker-text',
 											)}
+											isBetaContainer={true}
 										/>
 									</div>
 

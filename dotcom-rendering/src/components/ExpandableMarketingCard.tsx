@@ -253,7 +253,7 @@ export const ExpandableMarketingCard = ({
 							<div css={headingStyles}>
 								<h2>{heading}</h2>
 								<button
-									data-link-name="us-expandable-marketing-card close"
+									data-link-name="us-expandable-marketing-card close-button"
 									onClick={() => {
 										setIsClosed(true);
 									}}

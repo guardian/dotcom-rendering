@@ -1475,8 +1475,8 @@ export const WithAFiveFourAspectRatio = () => {
 						}}
 						format={{
 							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Comment,
-							theme: Pillar.Opinion,
+							design: ArticleDesign.Standard,
+							theme: Pillar.News,
 						}}
 						aspectRatio="5:4"
 					/>
@@ -1500,7 +1500,7 @@ export const WithNoGap = () => {
 						isOnwardContent={true}
 						format={{
 							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Comment,
+							design: ArticleDesign.Standard,
 							theme: Pillar.Opinion,
 						}}
 					/>
@@ -1548,7 +1548,7 @@ export const WithASmallGap = () => {
 						imagePositionOnDesktop="left"
 						format={{
 							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Comment,
+							design: ArticleDesign.Standard,
 							theme: Pillar.Opinion,
 						}}
 					/>
@@ -1573,7 +1573,7 @@ export const WithAMediumGap = () => {
 						imagePositionOnDesktop="left"
 						format={{
 							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Comment,
+							design: ArticleDesign.Standard,
 							theme: Pillar.Opinion,
 						}}
 					/>
@@ -1598,7 +1598,7 @@ export const WithALargeGap = () => {
 						imagePositionOnDesktop="left"
 						format={{
 							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Comment,
+							design: ArticleDesign.Standard,
 							theme: Pillar.Opinion,
 						}}
 						showTopBarDesktop={false}

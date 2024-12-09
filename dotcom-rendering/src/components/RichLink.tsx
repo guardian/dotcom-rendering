@@ -5,8 +5,6 @@ import {
 	headlineMedium14,
 	headlineMedium17,
 	headlineMedium20,
-	headlineMediumItalic14,
-	headlineMediumItalic20,
 	textSans17,
 	textSansBold12,
 	textSansBold15,
@@ -24,7 +22,6 @@ import type { ContentType, StarRating as Rating } from '../types/content';
 import type { RichLinkCardType } from '../types/layout';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
-import { useConfig } from './ConfigContext';
 import { FormatBoundary } from './FormatBoundary';
 import { QuoteIcon } from './QuoteIcon';
 import { StarRating } from './StarRating/StarRating';
@@ -115,14 +112,6 @@ const bylineStyles = css`
 	}
 `;
 
-const italicBylineStyles = css`
-	${headlineMediumItalic14};
-
-	${from.wide} {
-		${headlineMediumItalic20};
-	}
-`;
-
 const contributorWrapperStyles = css`
 	width: 5rem;
 	height: 5rem;
@@ -210,7 +199,6 @@ export const RichLink = ({
 	contributorImage,
 	isPlaceholder,
 }: Props) => {
-	const { renderingTarget } = useConfig();
 	const linkText =
 		cardStyle === 'letters' ? `${headlineText} | Letters ` : headlineText;
 
@@ -277,15 +265,7 @@ export const RichLink = ({
 							</div>
 
 							{isOpinion && byline !== '' && (
-								<div
-									css={[
-										bylineStyles,
-										renderingTarget === 'Apps' &&
-											italicBylineStyles,
-									]}
-								>
-									{byline}
-								</div>
+								<div css={[bylineStyles]}>{byline}</div>
 							)}
 
 							{!isUndefined(starRating) ? (
