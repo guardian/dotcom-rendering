@@ -5376,6 +5376,9 @@ const lastUpdatedTextDark: PaletteFunction = ({ theme, design }) => {
 
 const bioLinkUnderline: PaletteFunction = () => sourcePalette.neutral[86];
 
+const multiBylineNonLinkedTextLight: PaletteFunction = () => sourcePalette.neutral[46];
+const multiBylineNonLinkedTextDark: PaletteFunction = () => sourcePalette.neutral[60];
+
 const bioTextSubduedLight: PaletteFunction = () => sourcePalette.neutral[46];
 const bioTextSubduedDark: PaletteFunction = () => sourcePalette.neutral[86];
 
@@ -6681,6 +6684,10 @@ const paletteColours = {
 	'--most-viewed-tab-border': {
 		light: mostViewedTabBorderLight,
 		dark: mostViewedTabBorderDark,
+	},
+	'--multi-byline-non-linked-text': {
+		light: multiBylineNonLinkedTextLight,
+		dark: multiBylineNonLinkedTextDark,
 	},
 	'--nav-reader-revenue-link-text': {
 		light: navReaderRevenueLinkText,
