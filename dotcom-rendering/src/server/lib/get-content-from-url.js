@@ -63,24 +63,40 @@ exports.parseURL = parseURL;
 
 /** @type {import('webpack-dev-server').ExpressRequestHandler} */
 exports.getContentFromURLMiddleware = async (req, res, next) => {
-	const sourceURL = parseURL(req.originalUrl);
-
-	if (sourceURL) {
-		if (
-			req.path.startsWith('/AMP') &&
-			sourceURL.hostname === 'www.theguardian.com'
-		) {
-			res.redirect(
-				req.path.replace('www.theguardian.com', 'amp.theguardian.com'),
-			);
-		}
-
+	if (req.path === '/EditionsCrossword') {
 		try {
-			req.body = await getContentFromURL(sourceURL, req.headers);
+			const url = new URL(
+				'https://www.theguardian.com/crosswords/digital-edition',
+			);
+			const content = await getContentFromURL(url, req.headers);
+			req.body = content;
+			next();
 		} catch (error) {
 			console.error(error);
 			next(error);
 		}
+	} else {
+		const sourceURL = parseURL(req.originalUrl);
+		if (sourceURL) {
+			if (
+				req.path.startsWith('/AMP') &&
+				sourceURL.hostname === 'www.theguardian.com'
+			) {
+				res.redirect(
+					req.path.replace(
+						'www.theguardian.com',
+						'amp.theguardian.com',
+					),
+				);
+			}
+
+			try {
+				req.body = await getContentFromURL(sourceURL, req.headers);
+			} catch (error) {
+				console.error(error);
+				next(error);
+			}
+		}
+		next();
 	}
-	next();
 };
