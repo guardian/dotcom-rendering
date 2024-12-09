@@ -1,5 +1,5 @@
 import { isUndefined } from '@guardian/libs';
-import type { DCRCollectionType } from '../types/front';
+import type { DCRCollectionType, DCRContainerType } from '../types/front';
 import {
 	MAX_FRONTS_BANNER_ADS,
 	MAX_FRONTS_MOBILE_ADS,
@@ -14,8 +14,6 @@ type GroupedCounts = {
 	standard: number;
 };
 
-type AdCandidate = Pick<DCRCollectionType, 'collectionType'>;
-
 const getMerchHighPosition = (collectionCount: number): number =>
 	collectionCount >= 4 ? 2 : 0;
 
@@ -23,32 +21,51 @@ const getMerchHighPosition = (collectionCount: number): number =>
  * This happens on the recipes front, where the first container is a thrasher
  * @see https://github.com/guardian/frontend/pull/20617
  */
-const isFirstContainerAndThrasher = (collectionType: string, index: number) =>
-	index === 0 && collectionType === 'fixed/thrasher';
+const isFirstContainerAndThrasher = (
+	collectionType: DCRContainerType,
+	index: number,
+) => index === 0 && collectionType === 'fixed/thrasher';
 
 const isMerchHighPosition = (
 	collectionIndex: number,
 	merchHighPosition: number,
 ): boolean => collectionIndex === merchHighPosition;
 
-const isBeforeThrasher = (index: number, collections: AdCandidate[]) =>
+const isBeforeThrasher = (index: number, collections: DCRCollectionType[]) =>
 	collections[index + 1]?.collectionType === 'fixed/thrasher';
 
-const isMostViewedContainer = (collection: AdCandidate) =>
+const isMostViewedContainer = (collection: DCRCollectionType) =>
 	collection.collectionType === 'news/most-popular';
 
-const shouldInsertAd =
-	(merchHighPosition: number) =>
-	(collection: AdCandidate, index: number, collections: AdCandidate[]) =>
-		!(
-			isFirstContainerAndThrasher(collection.collectionType, index) ||
-			isMerchHighPosition(index, merchHighPosition) ||
-			isBeforeThrasher(index, collections) ||
-			isMostViewedContainer(collection)
-		);
+const isSecondaryLevelContainer = (collection: DCRCollectionType | undefined) =>
+	collection?.config.containerLevel === 'Secondary';
 
-const isEvenIndex = (_collection: unknown, index: number): boolean =>
-	index % 2 === 0;
+const isBeforeASecondaryLevelContainer = (
+	index: number,
+	collections: DCRCollectionType[],
+) => isSecondaryLevelContainer(collections[index + 1]);
+
+/** Detemines whether an ad can be inserted above the current container on mobile */
+const isPossibleMobileAdPosition =
+	(merchHighPosition: number) =>
+	(
+		collection: DCRCollectionType,
+		index: number,
+		collections: DCRCollectionType[],
+	) => {
+		const adPositionCriteria: boolean[] = [
+			!isFirstContainerAndThrasher(collection.collectionType, index),
+			!isMerchHighPosition(index, merchHighPosition),
+			!isBeforeThrasher(index, collections),
+			!isMostViewedContainer(collection),
+			!isBeforeASecondaryLevelContainer(index, collections),
+		];
+
+		/** If all rules are satisifed, this is a possible ad position */
+		return adPositionCriteria.every((rule) => rule);
+	};
+
+const isEvenIndex = (_: unknown, index: number): boolean => index % 2 === 0;
 
 /**
  * We do not insert mobile ads:
@@ -59,13 +76,15 @@ const isEvenIndex = (_collection: unknown, index: number): boolean =>
  * After we've filtered out the containers next to which we can insert an ad,
  * we take every other container, up to a maximum of 10, for targeting MPU insertion.
  */
-const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
+const getMobileAdPositions = (collections: DCRCollectionType[]): number[] => {
 	const merchHighPosition = getMerchHighPosition(collections.length);
 
 	return collections
-		.filter(shouldInsertAd(merchHighPosition))
+		.filter(isPossibleMobileAdPosition(merchHighPosition))
 		.filter(isEvenIndex)
-		.map((collection: AdCandidate) => collections.indexOf(collection))
+		.map((collection) =>
+			collections.findIndex(({ id }) => id === collection.id),
+		)
 		.filter((adPosition: number) => adPosition !== -1)
 		.slice(0, MAX_FRONTS_MOBILE_ADS);
 };
