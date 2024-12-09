@@ -12,8 +12,6 @@ export const htmlCrosswordPageTemplate = (props: Props): string => {
 				<meta charset="utf-8">
 				<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 				<meta name="robots" content="noindex">
-				<script id="config" type="application/json">
-       			 </script>
                 ${scriptTags.join('\n')}
 			</head>
 			<body>

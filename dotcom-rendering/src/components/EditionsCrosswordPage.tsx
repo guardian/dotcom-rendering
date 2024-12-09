@@ -1,5 +1,4 @@
 import { StrictMode } from 'react';
-import { EditionsCrosswordLayout } from '../layouts/EditionsCrosswordLayout';
 import type { FEEditionsCrosswords } from '../types/editionsCrossword';
 
 interface Props {
@@ -9,9 +8,10 @@ interface Props {
 export const EditionsCrosswordPage = ({ editionsCrosswords }: Props) => {
 	return (
 		<StrictMode>
-			<EditionsCrosswordLayout
-				editionsCrosswords={editionsCrosswords.crosswords}
-			/>
+			<main
+				id="editions-crossword-player"
+				data-crosswords={JSON.stringify(editionsCrosswords.crosswords)}
+			></main>
 		</StrictMode>
 	);
 };
