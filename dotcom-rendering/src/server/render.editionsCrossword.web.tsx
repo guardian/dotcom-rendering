@@ -20,7 +20,7 @@ export const renderCrosswordHtml = ({
 		getPathFromManifest('client.editionsCrossword', 'index.js'),
 	].filter(isString);
 
-	const scriptTags = generateScriptTags([...prefetchScripts]);
+	const scriptTags = generateScriptTags(prefetchScripts);
 
 	const pageHtml = htmlCrosswordPageTemplate({
 		html,
