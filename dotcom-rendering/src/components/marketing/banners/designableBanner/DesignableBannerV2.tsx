@@ -1,11 +1,6 @@
 import { css } from '@emotion/react';
-import {
-	brandAlt,
-	from,
-	neutral,
-	space,
-	sport,
-} from '@guardian/source/foundations';
+import { brandAlt, from, neutral, space } from '@guardian/source/foundations';
+import { LinkButton } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { ThreeTierChoiceCards } from '../../epics/ThreeTierChoiceCards';
 import type { SupportTier } from '../../epics/utils/threeTierChoiceCardAmounts';
@@ -28,6 +23,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	separateArticleCountSettings,
 	submitComponentEvent,
 	design,
+	onCtaClick,
 }: BannerRenderProps): JSX.Element => {
 	const [iosAppBannerPresent, setIosAppBannerPresent] = useState(false);
 
@@ -136,7 +132,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 							copy={separateArticleCountSettings?.copy}
 						/>
 					)}
-					<div css={templateSpacing.bannerBodyCopy}>
+					<div>
 						<DesignableBannerBody
 							mainContent={content.mainContent}
 							mobileContent={content.mobileContent}
@@ -146,12 +142,29 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 						/>
 					</div>
 				</div>
-				<ThreeTierChoiceCards
-					countryCode={countryCode}
-					selectedProduct={threeTierChoiceCardSelectedProduct}
-					setSelectedProduct={setThreeTierChoiceCardSelectedProduct}
-					variantOfChoiceCard={variantOfChoiceCard}
-				/>
+				<div>
+					<ThreeTierChoiceCards
+						countryCode={countryCode}
+						selectedProduct={threeTierChoiceCardSelectedProduct}
+						setSelectedProduct={
+							setThreeTierChoiceCardSelectedProduct
+						}
+						variantOfChoiceCard={variantOfChoiceCard}
+					/>
+				</div>
+				<div css={styles.linkButtonContainer}>
+					<LinkButton
+						href={
+							'https://support.theguardian.com/contribute/one-off'
+						}
+						onClick={onCtaClick}
+						size="small"
+						priority="primary"
+						cssOverrides={styles.linkButtonOverrides}
+					>
+						Continue
+					</LinkButton>
+				</div>
 			</div>
 		</div>
 	);
@@ -195,7 +208,6 @@ const styles = {
 			width: 100%;
 			max-width: 1300px;
 			margin: 0 auto;
-			padding: 0 ${space[3]}px;
 		}
 
 		${from.desktop} {
@@ -214,6 +226,16 @@ const styles = {
 		grid-column: 2;
 		grid-row: 1;
 		justify-content: flex-end;
+	`,
+	linkButtonOverrides: css`
+		background-color: ${brandAlt[400]};
+		color: ${neutral[0]};
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+	`,
+	linkButtonContainer: css`
+		padding-top: ${space[3]}px;
 	`,
 };
 
