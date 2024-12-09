@@ -57,6 +57,7 @@ export const devServer = {
 			},
 		},
 		setupMiddlewares: (middlewares, { app, compiler }) => {
+			console.log('marji 2: ');
 			if (!app) {
 				throw new Error('webpack-dev-server is not defined');
 			}
