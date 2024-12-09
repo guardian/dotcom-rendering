@@ -8,6 +8,7 @@ import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { AudioLayout } from './AudioLayout';
 import { CommentLayout } from './CommentLayout';
+import { CrosswordLayout } from './CrosswordLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
@@ -271,6 +272,15 @@ const DecideLayoutWeb = ({
 							article={article}
 							format={format}
 							NAV={NAV}
+						/>
+					);
+				case ArticleDesign.Crossword:
+					return (
+						<CrosswordLayout
+							article={article}
+							NAV={NAV}
+							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				default:

@@ -3,7 +3,7 @@ import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles
 import { decideFormat } from '../lib/articleFormat';
 import { enhanceBlocks } from '../model/enhanceBlocks';
 import { validateAsArticleType, validateAsBlock } from '../model/validate';
-import { enhanceArticleType } from '../types/article';
+import { enhanceArticleType, enhanceCrossword } from '../types/article';
 import type { FEBlocksRequest } from '../types/frontend';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
@@ -49,6 +49,18 @@ export const handleInteractive: RequestHandler = ({ body }, res) => {
 	const article = enhanceArticleType(frontendData, 'Web');
 	const { html, prefetchScripts } = renderHtml({
 		article,
+	});
+
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
+};
+
+export const handleCrossword: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('crossword', 'web');
+
+	const article = enhanceArticleType(body, 'Web');
+	const crosswordArticle = enhanceCrossword(article);
+	const { html, prefetchScripts } = renderHtml({
+		article: crosswordArticle,
 	});
 
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
