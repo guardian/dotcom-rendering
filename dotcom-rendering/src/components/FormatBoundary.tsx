@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
-import { paletteDeclarations } from '../palette';
+import { paletteDeclarations } from '../paletteDeclarations';
 import { useConfig } from './ConfigContext';
 
 type Props = {

@@ -3,7 +3,7 @@ import {
 	focusHalo,
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
-import { paletteDeclarations } from '../palette';
+import { paletteDeclarations } from '../paletteDeclarations';
 import { rootAdStyles } from './adStyles';
 import type { ArticleFormat } from './articleFormat';
 

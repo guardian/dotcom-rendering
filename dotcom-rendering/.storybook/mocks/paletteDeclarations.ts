@@ -1,5 +1,5 @@
 import { ArticleFormat } from '../../src/lib/articleFormat';
-import { paletteDeclarations } from '../../src/palette';
+import { paletteDeclarations } from '../../src/paletteDeclarations';
 
 /**
  * For some unknown reason, Storybook rejects all CSS variables if one of them ends in the text "label"
