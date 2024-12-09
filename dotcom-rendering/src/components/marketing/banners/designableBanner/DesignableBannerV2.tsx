@@ -2,6 +2,10 @@ import { css } from '@emotion/react';
 import { brandAlt, from, neutral, space } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
+import {
+	removeMediaRulePrefix,
+	useMatchMedia,
+} from '../../../../lib/useMatchMedia';
 import { ThreeTierChoiceCards } from '../../epics/ThreeTierChoiceCards';
 import type { SupportTier } from '../../epics/utils/threeTierChoiceCardAmounts';
 import type { ReactComponent } from '../../lib/ReactComponent';
@@ -25,6 +29,8 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	design,
 	onCtaClick,
 }: BannerRenderProps): JSX.Element => {
+	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
+
 	const [iosAppBannerPresent, setIosAppBannerPresent] = useState(false);
 
 	const [
@@ -102,7 +108,9 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 			separateArticleCount) &&
 		articleCounts.forTargetedWeeks >= 5;
 
-	return (
+	return isTabletOrAbove ? (
+		<div>TO DO</div>
+	) : (
 		<div
 			css={styles.outerContainer(
 				templateSettings.containerSettings.backgroundColour,
