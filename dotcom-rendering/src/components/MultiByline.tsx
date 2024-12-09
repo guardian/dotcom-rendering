@@ -6,7 +6,6 @@ import {
 	headlineLightItalic34,
 	headlineMediumItalic24,
 	headlineMediumItalic28,
-	neutral,
 	space,
 	textSansItalic24,
 	textSansItalic28,
@@ -140,7 +139,7 @@ const bylineStyles = (format: ArticleFormat) => css`
 	font-style: italic;
 	margin-top: -4px;
 	font-weight: 300;
-	color: ${neutral[46]};
+	color: ${palette('--multi-byline-non-linked-text')};
 	a {
 		${subheadingStyles(format)}
 		color: ${palette('--link-kicker-text')};
@@ -152,7 +151,7 @@ const bylineStyles = (format: ArticleFormat) => css`
 	}
 	span[data-contributor-rel='author'] {
 		${subheadingStyles(format)}
-		color: ${neutral[46]};
+		color: ${palette('--multi-byline-non-linked-text')};
 		font-style: normal;
 	}
 `;
