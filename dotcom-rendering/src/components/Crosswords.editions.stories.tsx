@@ -48,10 +48,9 @@ export const UKTimezone = {
 			'Tuesday quick crossword is rendered initially',
 			async () => {
 				await waitFor(() => {
-					const clue = canvas.getByRole('listitem');
-					return expect(clue.textContent).toEqual(
-						args.crosswords[0]?.entries[0]?.clue,
-					);
+					const clue = args.crosswords[0]?.entries[0]?.clue;
+					const listItem = canvas.getByText(clue as string);
+					return expect(listItem).toBeInTheDocument();
 				});
 			},
 		);
