@@ -40,6 +40,16 @@ const isMostViewedContainer = (collection: DCRCollectionType) =>
 const isSecondaryLevelContainer = (collection: DCRCollectionType | undefined) =>
 	collection?.config.containerLevel === 'Secondary';
 
+/**
+ * For front pages using Primary / Secondary level containers,
+ * we avoid inserting ads before Secondary containers
+ *
+ * Examples to demonstrate:
+ * Primary | Advert | Primary ✅
+ * Primary | Advert | Secondary ❌
+ * Secondary | Advert | Secondary ❌
+ * Secondary | Advert | Primary ✅
+ */
 const isBeforeASecondaryLevelContainer = (
 	index: number,
 	collections: DCRCollectionType[],
@@ -78,10 +88,16 @@ const isEvenIndex = (_: unknown, index: number): boolean => index % 2 === 0;
  */
 const getMobileAdPositions = (collections: DCRCollectionType[]): number[] => {
 	const merchHighPosition = getMerchHighPosition(collections.length);
+	const hasSecondaryLevelContainers = collections.some(
+		isSecondaryLevelContainer,
+	);
 
 	return collections
 		.filter(isPossibleMobileAdPosition(merchHighPosition))
-		.filter(isEvenIndex)
+		.filter(
+			/** If there are no secondary level containers, we pick every other container to be a possible ad position */
+			(_, index) => hasSecondaryLevelContainers || isEvenIndex(_, index),
+		)
 		.map((collection) =>
 			collections.findIndex(({ id }) => id === collection.id),
 		)
