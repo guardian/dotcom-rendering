@@ -1,3 +1,5 @@
+import { css } from '@emotion/react';
+import { palette, space } from '@guardian/source/foundations';
 import { SvgCamera } from '@guardian/source/react-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Pill } from './Pill';
@@ -6,37 +8,72 @@ import { SvgMediaControlsPlay } from './SvgMediaControlsPlay';
 const meta: Meta<typeof Pill> = {
 	title: 'Components/Pill',
 	component: Pill,
-	args: {
-		content: 'Pill',
-	},
 } satisfies Meta<typeof Pill>;
 
 export default meta;
 
 type Story = StoryObj<typeof Pill>;
 
-export const Default = {} satisfies Story;
+const liveStyles = css`
+	::before {
+		content: '';
+		display: inline-block;
+		width: 0.75em;
+		height: 0.75em;
+		border-radius: 100%;
+		background-color: ${palette.news[500]};
+		margin-right: ${space[1]}px;
+	}
+`;
+
+export const Default = {
+	render: () => (
+		<Pill>
+			<Pill.Segment>Pill</Pill.Segment>
+		</Pill>
+	),
+} satisfies Story;
 
 export const WithVideoIcon = {
-	args: {
-		content: <time>3:35</time>,
-		icon: <SvgMediaControlsPlay />,
-	},
+	render: () => (
+		<Pill>
+			<Pill.Segment>
+				<SvgMediaControlsPlay />
+				<time>3:35</time>
+			</Pill.Segment>
+		</Pill>
+	),
 } satisfies Story;
 
 export const WithGalleryIcon = {
-	args: {
-		content: '10',
-		icon: <SvgCamera />,
-		iconSide: 'right',
-	},
+	render: () => (
+		<Pill>
+			<Pill.Segment>
+				10
+				<SvgCamera />
+			</Pill.Segment>
+		</Pill>
+	),
 } satisfies Story;
 
-export const WithGalleryIconAndPrefix = {
-	args: {
-		content: '10',
-		prefix: 'Gallery',
-		icon: <SvgCamera />,
-		iconSide: 'right',
-	},
+export const WithLiveIndicator = {
+	render: () => (
+		<Pill>
+			<Pill.Segment>
+				<span css={liveStyles}>Live</span>
+			</Pill.Segment>
+		</Pill>
+	),
+} satisfies Story;
+
+export const Segmented = {
+	render: () => (
+		<Pill>
+			<Pill.Segment>Gallery</Pill.Segment>
+			<Pill.Segment>
+				10
+				<SvgCamera />
+			</Pill.Segment>
+		</Pill>
+	),
 } satisfies Story;
