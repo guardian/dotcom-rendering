@@ -83,6 +83,17 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 				textColour: neutral[0],
 			},
 		},
+		//not used in this design but is required to be passed in
+		secondaryCtaSettings: {
+			default: {
+				backgroundColour: brandAlt[400],
+				textColour: neutral[0],
+			},
+			hover: {
+				backgroundColour: brandAlt[400],
+				textColour: neutral[0],
+			},
+		},
 		closeButtonSettings: {
 			default: {
 				backgroundColour: neutral[100],

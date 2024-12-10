@@ -41,7 +41,7 @@ export interface HeaderSettings {
 export interface BannerTemplateSettings {
 	containerSettings: ContainerSettings;
 	primaryCtaSettings: CtaSettings;
-	secondaryCtaSettings?: CtaSettings;
+	secondaryCtaSettings: CtaSettings;
 	closeButtonSettings: CtaSettings;
 	highlightedTextSettings: HighlightedTextSettings;
 	setReminderCtaSettings?: CtaSettings;

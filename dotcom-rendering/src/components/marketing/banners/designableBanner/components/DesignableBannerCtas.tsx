@@ -18,7 +18,7 @@ interface DesignableBannerCtasProps {
 	onPrimaryCtaClick: () => void;
 	onSecondaryCtaClick?: () => void;
 	primaryCtaSettings: CtaSettings;
-	secondaryCtaSettings?: CtaSettings;
+	secondaryCtaSettings: CtaSettings;
 }
 
 export function DesignableBannerCtas({
