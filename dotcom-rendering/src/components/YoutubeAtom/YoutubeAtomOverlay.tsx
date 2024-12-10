@@ -19,6 +19,7 @@ import { FormatBoundary } from '../FormatBoundary';
 import { Kicker } from '../Kicker';
 import { secondsToDuration } from '../MediaDuration';
 import { Pill } from '../Pill';
+import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 import { YoutubeAtomPicture } from './YoutubeAtomPicture';
 
 export type VideoCategory = 'live' | 'documentary' | 'explainer';
@@ -71,10 +72,17 @@ const overlayStyles = css`
 	}
 `;
 
-const pillStyles = css`
+const pillPositionStyles = (smallCard: boolean) => css`
 	position: absolute;
-	top: ${space[2]}px;
-	right: ${space[2]}px;
+	${smallCard
+		? css`
+				bottom: ${space[1]}px;
+				left: ${space[1]}px;
+		  `
+		: css`
+				top: ${space[2]}px;
+				right: ${space[2]}px;
+		  `};
 `;
 
 const liveStyles = css`
@@ -139,8 +147,8 @@ export const YoutubeAtomOverlay = ({
 	const showPill = !!videoCategory || hasDuration;
 	const isLive = videoCategory === 'live';
 	const image = overrideImage ?? posterImage;
-	// const hidePillOnMobile =
-	// 	imagePositionOnMobile === 'right' || imagePositionOnMobile === 'left';
+	const isSmallCard =
+		imagePositionOnMobile === 'right' || imagePositionOnMobile === 'left';
 
 	return (
 		<FormatBoundary format={format}>
@@ -161,9 +169,9 @@ export const YoutubeAtomOverlay = ({
 					/>
 				)}
 				{showPill && (
-					<div css={pillStyles}>
+					<div css={pillPositionStyles(isSmallCard)}>
 						<Pill>
-							{!!videoCategory && (
+							{!!videoCategory && !isSmallCard && (
 								<Pill.Segment>
 									<span css={isLive && liveStyles}>
 										{capitalise(videoCategory)}
@@ -172,16 +180,19 @@ export const YoutubeAtomOverlay = ({
 							)}
 							{!!hasDuration && (
 								<Pill.Segment>
+									{isSmallCard && <SvgMediaControlsPlay />}
 									{secondsToDuration(duration)}
 								</Pill.Segment>
 							)}
 						</Pill>
 					</div>
 				)}
-				<PlayIcon
-					imageSize={imageSize}
-					imagePositionOnMobile={imagePositionOnMobile}
-				/>
+				{!isSmallCard && (
+					<PlayIcon
+						imageSize={imageSize}
+						imagePositionOnMobile={imagePositionOnMobile}
+					/>
+				)}
 				{showTextOverlay && (
 					<div css={textOverlayStyles}>
 						{!!kicker && (
