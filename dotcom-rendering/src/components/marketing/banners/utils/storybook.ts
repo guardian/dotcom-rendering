@@ -77,7 +77,7 @@ export const reducedBodyCopy = {
 		'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
 	], //Max 180 charcters this example is 175ish
 	cta: {
-		text: 'Support us',
+		text: 'Continue',
 		baseUrl: 'https://support.theguardian.com/contribute/one-off',
 	},
 };
