@@ -16,7 +16,7 @@ import { buttonStyles } from '../styles/buttonStyles';
 interface DesignableBannerCtasProps {
 	mainOrMobileContent: BannerRenderedContent;
 	onPrimaryCtaClick: () => void;
-	onSecondaryCtaClick?: () => void;
+	onSecondaryCtaClick: () => void;
 	primaryCtaSettings: CtaSettings;
 	secondaryCtaSettings: CtaSettings;
 }
