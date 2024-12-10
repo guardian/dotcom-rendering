@@ -126,6 +126,7 @@ export interface FEArticleType {
 	showTableOfContents: boolean;
 	lang?: string;
 	isRightToLeftLang?: boolean;
+	crossword?: GuardianCrossword & { instructions: string };
 }
 
 type PageTypeType = {
@@ -202,7 +203,8 @@ export type FEDesign =
 	| 'FullPageInteractiveDesign'
 	| 'NewsletterSignupDesign'
 	| 'TimelineDesign'
-	| 'ProfileDesign'; // FEDisplay is the display information passed through from frontend (originating in the capi scala client) and dictates the displaystyle of the content e.g. Immersive
+	| 'ProfileDesign'
+	| 'CrosswordDesign'; // FEDisplay is the display information passed through from frontend (originating in the capi scala client) and dictates the displaystyle of the content e.g. Immersive
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala
 
 export type FEDisplay =
