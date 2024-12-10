@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { brandAlt, from, neutral, space } from '@guardian/source/foundations';
-import { LinkButton } from '@guardian/source/react-components';
+import { LinkButton, SvgGuardianLogo } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import {
 	removeMediaRulePrefix,
@@ -109,7 +109,11 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		articleCounts.forTargetedWeeks >= 5;
 
 	return isTabletOrAbove ? (
-		<div>TO DO</div>
+		<>
+			<div css={styles.guardianLogoContainer}>
+				<SvgGuardianLogo />
+			</div>
+		</>
 	) : (
 		<div
 			css={styles.outerContainer(
@@ -244,6 +248,18 @@ const styles = {
 	`,
 	linkButtonContainer: css`
 		padding-top: ${space[3]}px;
+	`,
+	guardianLogoContainer: css`
+		display: none;
+		${from.tablet} {
+			display: block;
+			width: 100px;
+		}
+		grid-column: 1;
+		grid-row: 1;
+		justify-self: start;
+		padding-top: ${space[3]}px;
+		padding-left: ${space[3]}px;
 	`,
 };
 
