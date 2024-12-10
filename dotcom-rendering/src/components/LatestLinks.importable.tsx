@@ -61,7 +61,7 @@ const bold = css`
 		width: 0.75em;
 		margin-right: ${space[1]}px;
 		display: inline-block;
-		background-color: currentColor;
+		background-color: ${themePalette('--card-kicker-text')};
 		border-radius: 100%;
 	}
 `;
@@ -186,7 +186,7 @@ export const LatestLinks = ({
 									{index > 0 && (
 										<li
 											key={block.id + ' : divider'}
-											css={[dividerStyles]}
+											css={dividerStyles}
 										></li>
 									)}
 									<li
@@ -201,7 +201,7 @@ export const LatestLinks = ({
 												css={bold}
 												style={{
 													color: themePalette(
-														'--card-kicker-text',
+														'--card-trail-text',
 													),
 												}}
 											>
