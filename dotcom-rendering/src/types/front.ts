@@ -347,6 +347,7 @@ export type DCRFrontCard = {
 	slideshowImages?: DCRSlideshowImage[];
 	showLivePlayable: boolean;
 	showMainVideo?: boolean;
+	podcastImageSrc?: string;
 };
 
 export type DCRSlideshowImage = {
