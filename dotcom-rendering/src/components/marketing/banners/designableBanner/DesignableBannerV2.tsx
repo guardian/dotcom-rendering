@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { brandAlt, from, neutral, space } from '@guardian/source/foundations';
-import { LinkButton, SvgGuardianLogo } from '@guardian/source/react-components';
+import { SvgGuardianLogo } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import {
 	removeMediaRulePrefix,
@@ -14,6 +14,7 @@ import type { BannerRenderProps } from '../common/types';
 import { DesignableBannerArticleCount } from './components/DesignableBannerArticleCount';
 import { DesignableBannerBody } from './components/DesignableBannerBody';
 import { DesignableBannerCloseButton } from './components/DesignableBannerCloseButton';
+import { DesignableBannerCtas } from './components/DesignableBannerCtas';
 import { DesignableBannerHeader } from './components/DesignableBannerHeader';
 import type { BannerTemplateSettings } from './settings';
 import { templateSpacing } from './styles/templateStyles';
@@ -28,6 +29,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	submitComponentEvent,
 	design,
 	onCtaClick,
+	onSecondaryCtaClick,
 }: BannerRenderProps): JSX.Element => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 
@@ -114,6 +116,10 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		bannerId: 'designable-banner',
 	};
 
+	const mainOrMobileContent = isTabletOrAbove
+		? content.mainContent
+		: content.mobileContent;
+
 	const showAboveArticleCount =
 		(separateArticleCountSettings?.type === 'above' ||
 			separateArticleCount) &&
@@ -176,17 +182,15 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					/>
 				</div>
 				<div css={styles.linkButtonContainer}>
-					<LinkButton
-						href={
-							'https://support.theguardian.com/contribute/one-off'
+					<DesignableBannerCtas
+						mainOrMobileContent={mainOrMobileContent}
+						onPrimaryCtaClick={onCtaClick}
+						onSecondaryCtaClick={onSecondaryCtaClick}
+						primaryCtaSettings={templateSettings.primaryCtaSettings}
+						secondaryCtaSettings={
+							templateSettings.secondaryCtaSettings
 						}
-						onClick={onCtaClick}
-						size="small"
-						priority="primary"
-						cssOverrides={styles.linkButtonOverrides}
-					>
-						Continue
-					</LinkButton>
+					/>
 				</div>
 			</div>
 		</div>
