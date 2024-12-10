@@ -1,8 +1,10 @@
 import { css } from '@emotion/react';
+import { breakpoints } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { palette } from '../palette';
-import { generateSources, getFallbackSource } from './Picture';
+import { ImageSizeType } from './Card/components/ImageWrapper';
+import { generateSources, getFallbackSource, ImageWidthType } from './Picture';
 
 const picture = css`
 	height: 100%;
@@ -50,13 +52,51 @@ type Props = {
 	src: string;
 	alt: string;
 	shape?: AvatarShape;
+	imageSize?: ImageSizeType;
 };
 
-export const Avatar = ({ src, alt, shape = 'round' }: Props) => {
-	const sources = generateSources(getSourceImageUrl(src), [
-		{ breakpoint: 320, width: 75 },
-		{ breakpoint: 740, width: 140 },
-	]);
+const decideImageWidths = (
+	imageSize?: ImageSizeType,
+): [ImageWidthType, ...ImageWidthType[]] => {
+	if (!imageSize) {
+		return [
+			{ breakpoint: breakpoints.mobile, width: 75 },
+			{ breakpoint: breakpoints.tablet, width: 140 },
+		];
+	}
+	switch (imageSize) {
+		case 'small':
+			return [{ breakpoint: breakpoints.mobile, width: 80 }];
+
+		case 'medium':
+		default:
+			return [
+				{ breakpoint: breakpoints.mobile, width: 80 },
+				{ breakpoint: breakpoints.tablet, width: 85 },
+				{ breakpoint: breakpoints.desktop, width: 95 },
+			];
+
+		case 'large':
+			return [
+				{ breakpoint: breakpoints.mobile, width: 150 },
+				{ breakpoint: breakpoints.tablet, width: 130 },
+				{ breakpoint: breakpoints.desktop, width: 150 },
+			];
+
+		case 'jumbo':
+			return [
+				{ breakpoint: breakpoints.mobile, width: 180 },
+				{ breakpoint: breakpoints.tablet, width: 160 },
+				{ breakpoint: breakpoints.desktop, width: 190 },
+			];
+	}
+};
+
+export const Avatar = ({ src, alt, shape = 'round', imageSize }: Props) => {
+	const sources = generateSources(
+		getSourceImageUrl(src),
+		decideImageWidths(imageSize),
+	);
 
 	/**
 	 * The assumption here is readers on devices that do not support srcset

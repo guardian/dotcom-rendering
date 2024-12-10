@@ -519,7 +519,9 @@ export const Card = ({
 			return 'small';
 		}
 		if (isSmallCard) return 'medium';
-
+		if (isBetaContainer && media?.type === 'avatar') {
+			return 'small';
+		}
 		if (
 			isFlexibleContainer &&
 			(imagePositionOnDesktop === 'left' ||
@@ -697,6 +699,9 @@ export const Card = ({
 								<Avatar
 									src={media.avatarUrl}
 									alt={byline ?? ''}
+									imageSize={
+										isBetaContainer ? imageSize : undefined
+									}
 								/>
 							</AvatarContainer>
 						)}
