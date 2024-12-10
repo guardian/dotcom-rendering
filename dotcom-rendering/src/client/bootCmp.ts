@@ -69,6 +69,7 @@ const initialiseCmp = async () => {
 			pageViewId,
 		},
 		country,
+		subscribed: window.location.search.includes('subscribed'),
 	});
 	log('dotcom', 'CMP initialised');
 };
