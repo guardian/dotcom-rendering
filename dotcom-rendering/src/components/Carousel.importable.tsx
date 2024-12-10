@@ -453,6 +453,7 @@ const Title = ({
 			<span css={titleStyle(isCuratedContent)}>{title}</span>
 		</h2>
 	);
+
 type CarouselCardProps = {
 	isFirst: boolean;
 	index: number;
@@ -500,6 +501,7 @@ const CarouselCard = ({
 }: CarouselCardProps) => {
 	const isVideoContainer = containerType === 'fixed/video';
 	const cardImagePosition = isOnwardContent ? 'bottom' : 'top';
+
 	return (
 		<LI
 			percentage="25%"

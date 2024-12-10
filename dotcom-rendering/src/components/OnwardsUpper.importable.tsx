@@ -6,10 +6,12 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
+import { useAB } from '../lib/useAB';
 import { useIsAndroid } from '../lib/useIsAndroid';
 import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
 import type { TagType } from '../types/tag';
+import { BigSixOnwardsContent } from './BigSixOnwardsContent';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
 import { Section } from './Section';
 
@@ -214,6 +216,12 @@ export const OnwardsUpper = ({
 	discussionApiUrl,
 	absoluteServerTimes,
 }: Props) => {
+	const abTestAPI = useAB()?.api;
+	const isInOnwardsAbTestVariant = abTestAPI?.isUserInVariant(
+		'OnwardsContentArticle',
+		'variant',
+	);
+
 	const isAndroid = useIsAndroid();
 
 	if (isAndroid) return null;
@@ -260,10 +268,12 @@ export const OnwardsUpper = ({
 
 		// --- Tag excludes --- //
 		const tagsToExclude = [];
+
 		// Exclude ad features from non-ad feature content
 		if (!isPaidContent) {
 			tagsToExclude.push('tone/advertisement-features');
 		}
+
 		// We don't want to show professional network content on videos or interactives
 		if (
 			contentType.toLowerCase() === 'video' ||
@@ -296,7 +306,18 @@ export const OnwardsUpper = ({
 
 	return (
 		<div css={onwardsWrapper}>
-			{!!url && (
+			{!!url && isInOnwardsAbTestVariant && (
+				<Section
+					fullWidth={true}
+					borderColour={palette('--article-border')}
+				>
+					<BigSixOnwardsContent
+						url={url}
+						discussionApiUrl={discussionApiUrl}
+					/>
+				</Section>
+			)}
+			{!!url && !isInOnwardsAbTestVariant && (
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-border')}
@@ -311,7 +332,7 @@ export const OnwardsUpper = ({
 					/>
 				</Section>
 			)}
-			{!!(!isPaidContent && curatedDataUrl) && (
+			{!!curatedDataUrl && !isPaidContent && (
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-border')}
