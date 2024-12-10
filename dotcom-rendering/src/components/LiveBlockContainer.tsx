@@ -7,7 +7,6 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { palette } from '../palette';
-import { useConfig } from './ConfigContext';
 import { FirstPublished } from './FirstPublished';
 
 type BlockContributor = {
@@ -68,8 +67,6 @@ const BlockByline = ({
 	name: string;
 	imageUrl?: string;
 }) => {
-	const { renderingTarget } = useConfig();
-	const isApps = renderingTarget === 'Apps';
 	return (
 		<div
 			css={css`
@@ -94,9 +91,7 @@ const BlockByline = ({
 							width: 100%;
 							height: 100%;
 							object-fit: cover;
-							background-color: ${isApps
-								? palette('--avatar-background-colour')
-								: palette('--avatar-background')};
+							background-color: ${palette('--avatar-background')};
 						`}
 					/>
 				</div>

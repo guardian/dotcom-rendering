@@ -272,6 +272,20 @@
                                                                             "type"
                                                                         ]
                                                                     }
+                                                                },
+                                                                "podcast": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "subscriptionUrl": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "spotifyUrl": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "image": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    }
                                                                 }
                                                             },
                                                             "required": [
@@ -827,6 +841,20 @@
                                                 "id",
                                                 "type"
                                             ]
+                                        }
+                                    },
+                                    "podcast": {
+                                        "type": "object",
+                                        "properties": {
+                                            "subscriptionUrl": {
+                                                "type": "string"
+                                            },
+                                            "spotifyUrl": {
+                                                "type": "string"
+                                            },
+                                            "image": {
+                                                "type": "string"
+                                            }
                                         }
                                     }
                                 },

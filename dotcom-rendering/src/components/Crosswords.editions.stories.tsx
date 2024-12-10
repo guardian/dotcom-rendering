@@ -50,7 +50,7 @@ export const UKTimezone = {
 				await waitFor(() => {
 					const clue = canvas.getByRole('listitem');
 					return expect(clue.textContent).toEqual(
-						args.crosswords[0]?.entries[0]?.clue,
+						`1${args.crosswords[0]?.entries[0]?.clue}`,
 					);
 				});
 			},

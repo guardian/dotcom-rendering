@@ -24,6 +24,7 @@ import type {
 } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
+import type { PodcastSeriesImage } from '../../types/tag';
 import { Avatar } from '../Avatar';
 import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
@@ -59,6 +60,17 @@ import { ImageWrapper } from './components/ImageWrapper';
 import { TrailText, type TrailTextSize } from './components/TrailText';
 
 export type Position = 'inner' | 'outer' | 'none';
+
+export const BETA_CONTAINERS = [
+	'scrollable/highlights',
+	'flexible/special',
+	'flexible/general',
+	'scrollable/small',
+	'scrollable/medium',
+	'scrollable/feature',
+	'static/feature/2',
+	'static/medium/4',
+];
 
 export type Props = {
 	linkTo: string;
@@ -127,6 +139,8 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** If specified, overrides trail text colour */
 	trailTextColour?: string;
+	/** The square podcast series image, if it exists for a card */
+	podcastImage?: PodcastSeriesImage;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -179,6 +193,7 @@ const getMedia = ({
 	slideshowImages,
 	mainMedia,
 	isPlayableMediaCard,
+	podcastImage,
 }: {
 	imageUrl?: string;
 	imageAltText?: string;
@@ -187,6 +202,7 @@ const getMedia = ({
 	slideshowImages?: DCRSlideshowImage[];
 	mainMedia?: MainMedia;
 	isPlayableMediaCard?: boolean;
+	podcastImage?: PodcastSeriesImage;
 }) => {
 	if (mainMedia && mainMedia.type === 'Video' && isPlayableMediaCard) {
 		return {
@@ -197,6 +213,13 @@ const getMedia = ({
 	}
 	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
 	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
+	if (podcastImage) {
+		return {
+			type: 'podcast',
+			podcastImage,
+			trailImage: { src: imageUrl, altText: imageAltText },
+		} as const;
+	}
 	if (imageUrl) {
 		const type = isCrossword ? 'crossword' : 'picture';
 		return { type, imageUrl, imageAltText } as const;
@@ -316,6 +339,7 @@ export const Card = ({
 	showTopBarMobile = false,
 	trailTextSize,
 	trailTextColour,
+	podcastImage,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -331,6 +355,8 @@ export const Card = ({
 		format.design === ArticleDesign.Comment ||
 		format.design === ArticleDesign.Editorial ||
 		format.design === ArticleDesign.Letter;
+
+	const isBetaContainer = BETA_CONTAINERS.includes(containerType ?? '');
 
 	const decideAge = () => {
 		if (!webPublicationDate) return undefined;
@@ -406,6 +432,7 @@ export const Card = ({
 		slideshowImages,
 		mainMedia,
 		isPlayableMediaCard,
+		podcastImage,
 	});
 
 	// For opinion type cards with avatars (which aren't onwards content)
@@ -567,6 +594,7 @@ export const Card = ({
 						byline={byline}
 						showByline={showByline}
 						isExternalLink={isExternalLink}
+						isBetaContainer={isBetaContainer}
 					/>
 					{!isUndefined(starRating) ? (
 						<StarRatingComponent
@@ -808,6 +836,7 @@ export const Card = ({
 										byline={byline}
 										showByline={showByline}
 										isExternalLink={isExternalLink}
+										isBetaContainer={isBetaContainer}
 									/>
 									{!isUndefined(starRating) ? (
 										<StarRatingComponent

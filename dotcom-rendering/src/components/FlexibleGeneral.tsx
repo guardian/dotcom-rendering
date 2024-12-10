@@ -267,6 +267,7 @@ export const BoostedCardLayout = ({
 	absoluteServerTimes,
 	imageLoading,
 	aspectRatio,
+	isFirstRow,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -274,6 +275,7 @@ export const BoostedCardLayout = ({
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
+	isFirstRow: boolean;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -285,7 +287,7 @@ export const BoostedCardLayout = ({
 		liveUpdatesPosition,
 	} = decideCardProperties(card.boostLevel);
 	return (
-		<UL padBottom={true} hasLargeSpacing={true} showTopBar={true}>
+		<UL padBottom={true} hasLargeSpacing={true} showTopBar={!isFirstRow}>
 			<LI
 				padSides={true}
 				verticalDividerColour={palette('--card-border-supporting')}
@@ -329,11 +331,13 @@ export const StandardCardLayout = ({
 	showImage = true,
 	imageLoading,
 	isFirstRow,
+	isFirstStandardRow,
 	aspectRatio,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
-	isFirstRow: boolean;
+	isFirstRow?: boolean;
+	isFirstStandardRow?: boolean;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
@@ -347,8 +351,9 @@ export const StandardCardLayout = ({
 			direction="row"
 			padBottom={true}
 			hasLargeSpacing={true}
-			showTopBar={true}
-			splitTopBar={!isFirstRow}
+			showTopBar={!isFirstRow}
+			/** We use one full top bar for the first row and use a split one for subsequent rows */
+			splitTopBar={!isFirstStandardRow}
 		>
 			{cards.map((card, cardIndex) => {
 				return (
@@ -438,6 +443,7 @@ export const FlexibleGeneral = ({
 								absoluteServerTimes={absoluteServerTimes}
 								imageLoading={imageLoading}
 								aspectRatio={aspectRatio}
+								isFirstRow={!splash.length && i === 0}
 							/>
 						);
 
@@ -451,7 +457,8 @@ export const FlexibleGeneral = ({
 								showAge={showAge}
 								absoluteServerTimes={absoluteServerTimes}
 								imageLoading={imageLoading}
-								isFirstRow={i === 0}
+								isFirstRow={!splash.length && i === 0}
+								isFirstStandardRow={i === 0}
 								aspectRatio={aspectRatio}
 							/>
 						);
