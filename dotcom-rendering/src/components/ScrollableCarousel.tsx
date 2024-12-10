@@ -6,14 +6,10 @@ import {
 	space,
 	textSansBold17Object,
 } from '@guardian/source/foundations';
-import type { ThemeButton } from '@guardian/source/react-components';
-import {
-	Button,
-	SvgChevronLeftSingle,
-	SvgChevronRightSingle,
-} from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { palette } from '../palette';
+import { CarouselNavigationButtons } from './CarouselNavigationButtons';
 
 type Props = {
 	children: React.ReactNode;
@@ -38,18 +34,6 @@ const secondaryTitlePreset = textSansBold17Object;
 const gridColumnWidth = 60;
 const gridGap = 20;
 const gridGapMobile = 10;
-
-const themeButton: Partial<ThemeButton> = {
-	borderTertiary: palette('--carousel-chevron-border'),
-	textTertiary: palette('--carousel-chevron'),
-	backgroundTertiaryHover: palette('--carousel-chevron-hover'),
-};
-
-const themeButtonDisabled: Partial<ThemeButton> = {
-	borderTertiary: palette('--carousel-chevron-border-disabled'),
-	textTertiary: palette('--carousel-chevron-disabled'),
-	backgroundTertiaryHover: 'transparent',
-};
 
 /**
  * On mobile the carousel extends into the outer margins to use the full width
@@ -158,15 +142,6 @@ const carouselStyles = css`
 	${from.leftCol} {
 		padding-left: ${gridGap / 2}px;
 		scroll-padding-left: ${gridGap / 2}px;
-	}
-`;
-
-const buttonStyles = css`
-	display: none;
-	${from.tablet} {
-		display: flex;
-		gap: ${space[1]}px;
-		margin-left: auto;
 	}
 `;
 
@@ -346,44 +321,22 @@ export const ScrollableCarousel = ({
 			>
 				{children}
 			</ol>
-			{showNavigation && (
-				<div css={buttonStyles}>
-					<Button
-						hideLabel={true}
-						iconSide="left"
-						icon={<SvgChevronLeftSingle />}
-						onClick={() => scrollTo('left')}
-						priority="tertiary"
-						theme={
-							previousButtonEnabled
-								? themeButton
-								: themeButtonDisabled
-						}
-						size="small"
-						disabled={!previousButtonEnabled}
-						// TODO
-						// aria-label="Move stories backwards"
-						// data-link-name="container left chevron"
-					/>
 
-					<Button
-						hideLabel={true}
-						iconSide="left"
-						icon={<SvgChevronRightSingle />}
-						onClick={() => scrollTo('right')}
-						priority="tertiary"
-						theme={
-							nextButtonEnabled
-								? themeButton
-								: themeButtonDisabled
-						}
-						size="small"
-						disabled={!nextButtonEnabled}
-						// TODO
-						// aria-label="Move stories forwards"
-						// data-link-name="container right chevron"
-					/>
-				</div>
+			{showNavigation && (
+				<CarouselNavigationButtons
+					previousButtonEnabled={previousButtonEnabled}
+					nextButtonEnabled={nextButtonEnabled}
+					onClickPreviousButton={() => scrollTo('left')}
+					onClickNextButton={() => scrollTo('right')}
+					dataLinkNamePreviousButton={nestedOphanComponents(
+						'carousel',
+						'previous-button',
+					)}
+					dataLinkNameNextButton={nestedOphanComponents(
+						'carousel',
+						'next-button',
+					)}
+				/>
 			)}
 		</div>
 	);
