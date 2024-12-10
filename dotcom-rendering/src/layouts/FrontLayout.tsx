@@ -32,7 +32,6 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { UsEoy2024Wrapper } from '../components/UsEoy2024Wrapper.importable';
-import { WeatherWrapper } from '../components/WeatherWrapper.importable';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { badgeFromBranding, isPaidContentSameBranding } from '../lib/branding';
 import { canRenderAds } from '../lib/canRenderAds';
@@ -94,7 +93,6 @@ const isToggleable = (
 const decideLeftContent = (
 	front: DCRFrontType,
 	collection: DCRCollectionType,
-	hasPageSkin: boolean,
 ) => {
 	// show CPScott?
 	if (
@@ -104,24 +102,6 @@ const decideLeftContent = (
 		collection.displayName.toLowerCase() === 'opinion'
 	) {
 		return <CPScottHeader />;
-	}
-
-	// show weather?
-	if (
-		front.config.switches['weather'] &&
-		isNetworkFrontPageId(front.config.pageId) &&
-		// based on https://github.com/guardian/frontend/blob/473aafd168fec7f2a578a52c8e84982e3ec10fea/common/app/views/support/GetClasses.scala#L107
-		collection.displayName.toLowerCase() === 'headlines' &&
-		!hasPageSkin
-	) {
-		return (
-			<Island priority="feature" defer={{ until: 'idle' }}>
-				<WeatherWrapper
-					ajaxUrl={front.config.ajaxUrl}
-					edition={front.editionId}
-				/>
-			</Island>
-		);
 	}
 
 	// show nothing!
@@ -691,7 +671,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								leftContent={decideLeftContent(
 									front,
 									collection,
-									hasPageSkin,
 								)}
 								sectionId={ophanName}
 								collectionId={collection.id}
