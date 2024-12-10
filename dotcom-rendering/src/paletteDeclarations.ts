@@ -2479,21 +2479,21 @@ const cardBorderSupportingLight: PaletteFunction = () =>
 const cardBorderSupportingDark: PaletteFunction = () =>
 	sourcePalette.neutral[46];
 
-const cardMetaTextLight: PaletteFunction = (format) =>
-	isMediaCard(format) ? sourcePalette.neutral[86] : sourcePalette.neutral[46];
+const cardMetaTextLight: PaletteFunction = () => sourcePalette.neutral[46];
 
 const cardMetaTextDark: PaletteFunction = () => sourcePalette.neutral[60];
 
-const cardBackground: PaletteFunction = (format) =>
+const cardBackgroundLight: PaletteFunction = (format) =>
+	isMediaCard(format) ? sourcePalette.neutral[97] : 'transparent';
+
+const cardBackgroundDark: PaletteFunction = (format) =>
 	isMediaCard(format) ? sourcePalette.neutral[20] : 'transparent';
 
-const cardHeadlineTextLight: PaletteFunction = (format) =>
-	isMediaCard(format) ? sourcePalette.neutral[100] : sourcePalette.neutral[7];
+const cardHeadlineTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 
 const cardTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
-const cardTrailTextLight: PaletteFunction = (format) =>
-	isMediaCard(format) ? sourcePalette.neutral[86] : sourcePalette.neutral[38];
+const cardTrailTextLight: PaletteFunction = () => sourcePalette.neutral[38];
 const cardTrailTextDark: PaletteFunction = () => sourcePalette.neutral[73];
 
 const liveKickerBackgroundLight: PaletteFunction = (format) => {
@@ -6061,8 +6061,8 @@ const paletteColours = {
 		dark: captionTextDark,
 	},
 	'--card-background': {
-		light: cardBackground,
-		dark: cardBackground,
+		light: cardBackgroundLight,
+		dark: cardBackgroundDark,
 	},
 	'--card-background-hover': {
 		light: cardBackgroundHover,
