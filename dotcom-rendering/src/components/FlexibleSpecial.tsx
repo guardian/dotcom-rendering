@@ -113,6 +113,7 @@ export const OneCardLayout = ({
 	absoluteServerTimes,
 	imageLoading,
 	aspectRatio,
+	isLastRow,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -120,6 +121,7 @@ export const OneCardLayout = ({
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
+	isLastRow: boolean;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -137,7 +139,7 @@ export const OneCardLayout = ({
 		card.supportingContent?.length ?? 0,
 	);
 	return (
-		<UL padBottom={true} hasLargeSpacing={true}>
+		<UL padBottom={!isLastRow} hasLargeSpacing={!isLastRow}>
 			<LI padSides={true}>
 				<FrontCard
 					trail={card}
@@ -187,12 +189,7 @@ const TwoCardOrFourCardLayout = ({
 	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
 	return (
-		<UL
-			direction="row"
-			padBottom={true}
-			showTopBar={true}
-			hasLargeSpacing={true}
-		>
+		<UL direction="row" showTopBar={true}>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI
@@ -250,6 +247,7 @@ export const FlexibleSpecial = ({
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
 				aspectRatio={aspectRatio}
+				isLastRow={!splash && !cards}
 			/>
 			<OneCardLayout
 				cards={splash}
@@ -258,6 +256,7 @@ export const FlexibleSpecial = ({
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
 				aspectRatio={aspectRatio}
+				isLastRow={!cards}
 			/>
 			<TwoCardOrFourCardLayout
 				cards={cards}

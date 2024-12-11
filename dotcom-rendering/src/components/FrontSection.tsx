@@ -297,7 +297,7 @@ const sectionContentBorderFromLeftCol = css`
 			content: '';
 			position: absolute;
 			top: ${space[2]}px;
-			bottom: ${space[6]}px;
+			bottom: 0px;
 			border-left: 1px solid ${schemePalette('--section-border')};
 			transform: translateX(-50%);
 			/** Keeps the vertical divider ontop of carousel item dividers */
@@ -357,9 +357,14 @@ const bottomPadding = css`
 	padding-bottom: ${space[9]}px;
 `;
 
-const extraBottomPadding = css`
-	padding-bottom: ${space[4]}px;
+const smallBottomPadding = css`
+	padding-bottom: ${space[6]}px;
 `;
+
+const largeBottomPadding = css`
+	padding-bottom: ${space[10]}px;
+`;
+
 const primaryLevelTopBorder = css`
 	grid-row: 1;
 	grid-column: 1 / -1;
@@ -606,7 +611,8 @@ export const FrontSection = ({
 						sectionContentPadded,
 						sectionBottomContent,
 						!containerLevel && bottomPadding,
-						containerSpacing === 'large' && extraBottomPadding,
+						containerSpacing === 'small' && smallBottomPadding,
+						containerSpacing === 'large' && largeBottomPadding,
 					]}
 				>
 					{isString(targetedTerritory) &&
