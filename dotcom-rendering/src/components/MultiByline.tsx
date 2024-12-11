@@ -240,10 +240,7 @@ const Byline = ({
 			</div>
 			{!!imageUrl && (
 				<div css={bylineImageStyles}>
-					<Avatar
-						src={imageUrl}
-						alt={byline}
-					/>
+					<Avatar src={imageUrl} alt={byline} />
 				</div>
 			)}
 		</div>
