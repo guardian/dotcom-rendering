@@ -113,7 +113,7 @@ const styles = {
 	`,
 };
 
-const stylesGivingTuesday = {
+const stylesSubCampaign = {
 	container: css`
 		/* stylelint-disable-next-line color-no-hex */
 		background: #f3afd9;
@@ -211,7 +211,7 @@ const tickerSettings = {
 	},
 };
 
-const tickerSettingsGivingTuesday = {
+const tickerSettingsSubCampaign = {
 	currencySymbol: '$',
 	copy: {},
 	tickerStylingSettings: {
@@ -223,24 +223,24 @@ const tickerSettingsGivingTuesday = {
 	},
 };
 
-const heading = (isGivingTuesday: boolean) => {
-	return isGivingTuesday
+const heading = (isSubCampaign: boolean) => {
+	return isSubCampaign
 		? 'This Giving Tuesday, give to the Guardian.'
 		: 'Can you help us hit our goal?';
 };
-const bodyCopy = (isGivingTuesday: boolean) => {
-	const givingTuesdayCopy =
+const bodyCopy = (isSubCampaign: boolean) => {
+	const SubCampaignCopy =
 		'We’re funded by readers, not billionaires - which means we can publish factual journalism with no outside influence.';
 	const normalCopy =
 		'With no billionaire owner or shareholders pulling our strings, reader support keeps us fiercely independent.';
-	return isGivingTuesday ? givingTuesdayCopy : normalCopy;
+	return isSubCampaign ? SubCampaignCopy : normalCopy;
 };
 
-const bodyCopyHighlightedText = (isGivingTuesday: boolean) => {
-	const givingTuesdayCopy = 'Help us raise $4m to keep going in 2025.';
+const bodyCopyHighlightedText = (isSubCampaign: boolean) => {
+	const SubCampaignCopy = 'Help us raise $4m to keep going in 2025.';
 	const normalCopy =
 		'Help us hit our most important annual fundraising goal so we can keep going.';
-	return isGivingTuesday ? givingTuesdayCopy : normalCopy;
+	return isSubCampaign ? SubCampaignCopy : normalCopy;
 };
 
 const getTickerData = async (): Promise<TickerData | undefined> => {
@@ -316,48 +316,40 @@ export const UsEoy2024: ReactComponent<Props> = ({
 		currencySymbol,
 	} = useChoiceCards(choiceCardAmounts, 'US', cta, cta);
 
-	const isGivingTuesday =
-		date >= new Date('2024-11-27T00:00:01') &&
-		date < new Date('2024-12-03T23:59:59');
+	const isSubCampaign =
+		date >= new Date('2024-12-11T00:00:01') &&
+		date < new Date('2024-12-11T16:00:00');
+	// date >= new Date('2024-12-20T00:00:01') &&
+	// date < new Date('2024-12-31T23:59:59');
 
 	return (
 		<div
-			css={
-				isGivingTuesday
-					? stylesGivingTuesday.container
-					: styles.container
-			}
+			css={isSubCampaign ? stylesSubCampaign.container : styles.container}
 		>
-			<div css={isGivingTuesday ? stylesGivingTuesday.grid : styles.grid}>
-				<div
-					css={
-						isGivingTuesday ? stylesGivingTuesday.logo : styles.logo
-					}
-				>
+			<div css={isSubCampaign ? stylesSubCampaign.grid : styles.grid}>
+				<div css={isSubCampaign ? stylesSubCampaign.logo : styles.logo}>
 					<SvgGuardianLogo
-						textColor={isGivingTuesday ? '#000000' : '#FFFFFF'}
+						textColor={isSubCampaign ? '#000000' : '#FFFFFF'}
 						width={100}
 					/>
 				</div>
 				<div
 					css={
-						isGivingTuesday
-							? stylesGivingTuesday.heading
+						isSubCampaign
+							? stylesSubCampaign.heading
 							: styles.heading
 					}
 				>
-					<h2>{heading(isGivingTuesday)}</h2>
+					<h2>{heading(isSubCampaign)}</h2>
 					<div
 						css={
-							isGivingTuesday
-								? stylesGivingTuesday.body
-								: styles.body
+							isSubCampaign ? stylesSubCampaign.body : styles.body
 						}
 					>
 						<div
 							css={
-								isGivingTuesday
-									? stylesGivingTuesday.ticker
+								isSubCampaign
+									? stylesSubCampaign.ticker
 									: styles.ticker
 							}
 						>
@@ -366,24 +358,24 @@ export const UsEoy2024: ReactComponent<Props> = ({
 								copy={{}}
 								tickerData={tickerData}
 								tickerStylingSettings={
-									isGivingTuesday
-										? tickerSettingsGivingTuesday.tickerStylingSettings
+									isSubCampaign
+										? tickerSettingsSubCampaign.tickerStylingSettings
 										: tickerSettings.tickerStylingSettings
 								}
 								size={'medium'}
 							/>
 						</div>
-						{bodyCopy(isGivingTuesday)}
+						{bodyCopy(isSubCampaign)}
 						<strong>
 							{' '}
-							{bodyCopyHighlightedText(isGivingTuesday)}
+							{bodyCopyHighlightedText(isSubCampaign)}
 						</strong>
 					</div>
 				</div>
 				<div
 					css={
-						isGivingTuesday
-							? stylesGivingTuesday.choiceCards
+						isSubCampaign
+							? stylesSubCampaign.choiceCards
 							: styles.choiceCards
 					}
 				>
@@ -399,13 +391,13 @@ export const UsEoy2024: ReactComponent<Props> = ({
 						getCtaUrl={getCtaUrl}
 						cssCtaOverides={buttonStyles({
 							default: {
-								backgroundColour: isGivingTuesday
+								backgroundColour: isSubCampaign
 									? '#016D67'
 									: '#C41C1C',
 								textColour: '#FFFFFF',
 							},
 							hover: {
-								backgroundColour: isGivingTuesday
+								backgroundColour: isSubCampaign
 									? '#891414'
 									: '#C41C1C',
 								textColour: '#FFFFFF',
