@@ -29,7 +29,7 @@ const iconWrapperStyles = (hasKicker: boolean) => css`
 		margin-right: auto;
 		margin-top: 2px;
 		display: block;
-		fill: ${themePalette('--card-background-media')};
+		fill: ${themePalette('--card-media-icon')};
 	}
 `;
 

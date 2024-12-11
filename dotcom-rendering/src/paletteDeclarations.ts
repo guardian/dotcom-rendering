@@ -2485,10 +2485,15 @@ const cardMetaTextDark: PaletteFunction = () => sourcePalette.neutral[60];
 const cardBackgroundLight: PaletteFunction = () => 'transparent';
 const cardBackgroundDark: PaletteFunction = () => 'transparent';
 
-const cardBackgroundMediaLight: PaletteFunction = () =>
+const cardMediaBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
-const cardBackgroundMediaDark: PaletteFunction = () =>
+const cardMediaBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
+
+const cardMediaIconLight: PaletteFunction = (format) =>
+	cardMediaBackgroundLight(format);
+const cardMediaIconDark: PaletteFunction = (format) =>
+	cardMediaBackgroundDark(format);
 
 const cardHeadlineTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 
@@ -6069,10 +6074,6 @@ const paletteColours = {
 		light: cardBackgroundHover,
 		dark: cardBackgroundHover,
 	},
-	'--card-background-media': {
-		light: cardBackgroundMediaLight,
-		dark: cardBackgroundMediaDark,
-	},
 	'--card-border-supporting': {
 		light: cardBorderSupportingLight,
 		dark: cardBorderSupportingDark,
@@ -6092,6 +6093,14 @@ const paletteColours = {
 	'--card-kicker-text': {
 		light: cardKickerTextLight,
 		dark: cardKickerTextDark,
+	},
+	'--card-media-background': {
+		light: cardMediaBackgroundLight,
+		dark: cardMediaBackgroundDark,
+	},
+	'--card-media-icon': {
+		light: cardMediaIconLight,
+		dark: cardMediaIconDark,
 	},
 	'--card-sublinks-background': {
 		light: cardSublinksBackgroundLight,
