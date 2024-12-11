@@ -9,7 +9,6 @@ import { createPortal } from 'react-dom';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { useArticleCounts } from '../lib/articleCount';
 import {
-	getLastOneOffContributionTimestamp,
 	shouldHideSupportMessaging,
 	useHasOptedOutOfArticleCount,
 } from '../lib/contributions';
@@ -124,8 +123,6 @@ const usePayload = ({
 			isPaidContent,
 			tags,
 			showSupportMessaging: !hideSupportMessagingForUser,
-			lastOneOffContributionDate:
-				getLastOneOffContributionTimestamp() ?? undefined,
 			mvtId,
 			countryCode,
 			epicViewLog: getEpicViewLog(storage.local),
