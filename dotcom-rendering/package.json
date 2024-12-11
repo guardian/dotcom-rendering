@@ -40,7 +40,7 @@
 		"@guardian/braze-components": "21.0.0",
 		"@guardian/bridget": "8.1.0",
 		"@guardian/browserslist-config": "6.1.0",
-		"@guardian/cdk": "50.13.0",
+		"@guardian/cdk": "61.0.2",
 		"@guardian/commercial": "23.7.4",
 		"@guardian/core-web-vitals": "7.0.0",
 		"@guardian/eslint-config": "7.0.1",
