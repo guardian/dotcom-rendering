@@ -76,13 +76,14 @@ const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
  *
  * A result of 3 would approximately be the height of a typical desktop viewport (~900px).
  * A result of 1 would be a third of the height, a result of 1.5 would be half, etc.
+ * A result of 6 indicates a container is at least double the height of a typical desktop viewport.
  */
 const getCollectionHeight = (
 	collction: Pick<
 		DCRCollectionType,
 		'collectionType' | 'containerPalette' | 'grouped'
 	>,
-): 0.5 | 1 | 1.5 | 2 | 2.5 | 3 => {
+): 0.5 | 1 | 1.5 | 2 | 2.5 | 3 | 6 => {
 	const { collectionType, containerPalette, grouped } = collction;
 
 	if (containerPalette === 'PodcastPalette') {
@@ -175,11 +176,16 @@ const getCollectionHeight = (
 
 		case 'flexible/general':
 			if (groupedCounts.splash && !groupedCounts.standard) {
-				return 2;
-			} else if (groupedCounts.splash && groupedCounts.standard > 2) {
-				return 3;
-			} else {
 				return 2.5;
+			} else if (groupedCounts.splash && groupedCounts.standard > 2) {
+				return 6;
+			} else if (
+				grouped.splash[0]?.boostLevel === 'megaboost' ||
+				grouped.splash[0]?.boostLevel === 'gigaboost'
+			) {
+				return 6;
+			} else {
+				return 3;
 			}
 
 		default:
