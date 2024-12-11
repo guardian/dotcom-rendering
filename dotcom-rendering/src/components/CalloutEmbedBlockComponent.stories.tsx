@@ -2,7 +2,6 @@ import type { Decorator, Meta, StoryObj } from '@storybook/react';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
 import { calloutCampaign } from '../../fixtures/manual/calloutCampaign';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { customMockFetch } from '../lib/mockRESTCalls';
 import { CalloutEmbedBlockComponent as CalloutEmbedBlock } from './CalloutEmbedBlockComponent.importable';
 
@@ -39,11 +38,6 @@ const goodRequest: Decorator<Story['args']> = (Story) => {
 export const CalloutEmbedBlockComponent = {
 	args: {
 		callout: calloutCampaign,
-		format: {
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Standard,
-			theme: Pillar.News,
-		},
 	},
 	decorators: [goodRequest],
 } satisfies Story;

@@ -6,15 +6,13 @@ import {
 } from '@guardian/source/foundations';
 import { Button } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
-import type { ArticleFormat } from '../lib/articleFormat';
-import { decidePalette } from '../lib/decidePalette';
+import { palette } from '../palette';
 import MinusIcon from '../static/icons/minus.svg';
 import PlusIcon from '../static/icons/plus.svg';
 import type {
 	CalloutBlockElement,
 	CalloutBlockElementV2,
 } from '../types/content';
-import type { Palette } from '../types/palette';
 import { Form } from './CalloutEmbed/Form';
 
 const wrapperStyles = css`
@@ -79,10 +77,10 @@ const summaryContentWrapper = css`
 	flex-direction: row;
 `;
 
-const speechBubbleStyles = (palette: Palette) => css`
+const speechBubbleStyles = css`
 	${textSansBold17}
 	color: ${srcPalette.neutral[100]};
-	background-color: ${palette.background.speechBubble};
+	background-color: ${palette('--speech-bubble-background')};
 	min-width: 88px;
 	padding-bottom: 6px;
 	padding-left: 10px;
@@ -93,7 +91,7 @@ const speechBubbleStyles = (palette: Palette) => css`
 		height: 22px;
 		border-bottom-right-radius: 18px;
 		position: absolute;
-		background-color: ${palette.background.speechBubble};
+		background-color: ${palette('--speech-bubble-background')};
 	}
 `;
 
@@ -147,10 +145,8 @@ type FormDataType = { [key in string]: unknown };
  */
 export const CalloutEmbedBlockComponent = ({
 	callout,
-	format,
 }: {
 	callout: CalloutBlockElement | CalloutBlockElementV2;
-	format: ArticleFormat;
 }) => {
 	let expandFormButtonRef: HTMLButtonElement | null = null;
 	let firstFieldElementRef: HTMLElement | null = null;
@@ -159,8 +155,6 @@ export const CalloutEmbedBlockComponent = ({
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [error, setError] = useState('');
 	const [submissionSuccess, setSubmissionSuccess] = useState(false);
-
-	const palette = decidePalette(format);
 
 	const { title, description, formFields } = callout;
 
@@ -312,7 +306,7 @@ export const CalloutEmbedBlockComponent = ({
 					<summary css={summaryStyles}>
 						<div css={summaryContentWrapper}>
 							<div css={speechBubbleWrapperStyles}>
-								<div css={speechBubbleStyles(palette)}>
+								<div css={speechBubbleStyles}>
 									<h4>Share your story</h4>
 								</div>
 							</div>
@@ -338,7 +332,7 @@ export const CalloutEmbedBlockComponent = ({
 				<summary css={summaryStyles}>
 					<div css={summaryContentWrapper}>
 						<div css={speechBubbleWrapperStyles}>
-							<div css={speechBubbleStyles(palette)}>
+							<div css={speechBubbleStyles}>
 								<h4>Share your story</h4>
 							</div>
 						</div>

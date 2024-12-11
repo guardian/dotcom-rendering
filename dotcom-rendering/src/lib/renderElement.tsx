@@ -185,10 +185,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.CalloutBlockElement':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<CalloutEmbedBlockComponent
-						callout={element}
-						format={format}
-					/>
+					<CalloutEmbedBlockComponent callout={element} />
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
