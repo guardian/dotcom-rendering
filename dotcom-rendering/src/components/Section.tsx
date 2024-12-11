@@ -10,8 +10,9 @@ import { ContainerTitle } from './ContainerTitle';
 import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
 import { Hide } from './Hide';
+import { Island } from './Island';
 import { LeftColumn } from './LeftColumn';
-import { ShowHideButton } from './ShowHideButton';
+import { ShowHideButton } from './ShowHideButton.importable';
 import { Treats } from './Treats';
 
 /**
@@ -364,7 +365,12 @@ export const Section = ({
 							/>
 						</MaybeHideAboveLeftCol>
 						{toggleable && !!sectionId && (
-							<ShowHideButton sectionId={sectionId} />
+							<Island
+								priority="enhancement"
+								defer={{ until: 'idle' }}
+							>
+								<ShowHideButton sectionId={sectionId} />
+							</Island>
 						)}
 					</div>
 					{toggleable && sectionId ? (
