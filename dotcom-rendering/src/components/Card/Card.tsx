@@ -442,7 +442,7 @@ export const Card = ({
 
 	const hasMedia = isMediaCard(format);
 	const backgroundColour = hasMedia
-		? palette('--card-background-media')
+		? palette('--card-media-background')
 		: palette('--card-background');
 
 	/**
