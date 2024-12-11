@@ -61,36 +61,6 @@ export const hasSupporterCookie = (
 	}
 };
 
-// Determine if user is a recurring contributor by checking if they are signed in
-// AND have at least one of the relevant cookies.
-// We need to look at both User Attributes and Frontend Support cookies
-// as the former might not reflect the latest contributor status, since it's set upon signing in.
-// Frontend Support cookies are set when a contribution is made.
-export const isRecurringContributor = (isSignedIn: boolean): boolean => {
-	// Attributes cookie - we want this to have a specific value
-	const isRecurringContributorFromAttrs =
-		getCookie({ name: RECURRING_CONTRIBUTOR_COOKIE }) === 'true';
-
-	// Support cookies - we only care whether these exist
-	const hasMonthlyContributionCookie =
-		getCookie({
-			name: SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE,
-			shouldMemoize: true,
-		}) !== null;
-	const hasAnnualContributionCookie =
-		getCookie({
-			name: SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE,
-			shouldMemoize: true,
-		}) !== null;
-
-	return (
-		isSignedIn &&
-		(isRecurringContributorFromAttrs ||
-			hasMonthlyContributionCookie ||
-			hasAnnualContributionCookie)
-	);
-};
-
 // looks at attribute and support cookies
 // ONE_OFF_CONTRIBUTION_DATE_COOKIE (attributes cookie, when loggin in)
 // SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE (support cookie, when making one-off contribution)
@@ -168,11 +138,7 @@ export const shouldHideSupportMessaging = (
 	if (hasCookie === 'Pending') {
 		return 'Pending';
 	} else {
-		return (
-			hasCookie ||
-			isRecurringContributor(isSignedIn) ||
-			isRecentOneOffContributor()
-		);
+		return hasCookie || isRecentOneOffContributor();
 	}
 };
 
