@@ -34,6 +34,7 @@ module.exports = {
 		devMiddleware: {
 			publicPath: '/assets/',
 			serverSideRender: true,
+			writeToDisk: true,
 			headers: (req, res) => {
 				// Allow any localhost request from accessing the assets
 				if (
