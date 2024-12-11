@@ -1031,6 +1031,9 @@
                                                 },
                                                 "isLive": {
                                                     "type": "boolean"
+                                                },
+                                                "galleryCount": {
+                                                    "type": "number"
                                                 }
                                             },
                                             "required": [
@@ -1779,6 +1782,9 @@
                                                 },
                                                 "isLive": {
                                                     "type": "boolean"
+                                                },
+                                                "galleryCount": {
+                                                    "type": "number"
                                                 }
                                             },
                                             "required": [
@@ -2527,6 +2533,9 @@
                                                 },
                                                 "isLive": {
                                                     "type": "boolean"
+                                                },
+                                                "galleryCount": {
+                                                    "type": "number"
                                                 }
                                             },
                                             "required": [

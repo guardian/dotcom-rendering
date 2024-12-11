@@ -141,6 +141,7 @@ export type Props = {
 	trailTextColour?: string;
 	/** The square podcast series image, if it exists for a card */
 	podcastImage?: PodcastSeriesImage;
+	galleryCount?: number;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -340,6 +341,7 @@ export const Card = ({
 	trailTextSize,
 	trailTextColour,
 	podcastImage,
+	galleryCount,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
