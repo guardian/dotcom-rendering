@@ -1,6 +1,10 @@
 import { css } from '@emotion/react';
-import { cmp } from '@guardian/libs';
-import { getCookie, startPerformanceMeasure, storage } from '@guardian/libs';
+import {
+	cmp,
+	getCookie,
+	startPerformanceMeasure,
+	storage,
+} from '@guardian/libs';
 import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
 import type {
@@ -12,11 +16,9 @@ import type {
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import {
-	getLastOneOffContributionTimestamp,
 	hasCmpConsentForBrowserId,
 	hasCmpConsentForWeeklyArticleCount,
 	hasOptedOutOfArticleCount,
-	isRecurringContributor,
 	shouldHideSupportMessaging,
 } from '../../lib/contributions';
 import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
@@ -70,10 +72,6 @@ const buildPayload = async (
 		isPaidContent: data.isPaidContent,
 		tags: data.tags,
 		showSupportMessaging: !data.hideSupportMessagingForUser,
-		isRecurringContributor: isRecurringContributor(
-			data.isSignedIn ?? false,
-		),
-		lastOneOffContributionDate: getLastOneOffContributionTimestamp(),
 		epicViewLog: getEpicViewLog(storage.local),
 		weeklyArticleHistory: await data.asyncArticleCount,
 
