@@ -16,7 +16,6 @@ import {
 	hasCmpConsentForBrowserId,
 	hasCmpConsentForWeeklyArticleCount,
 	hasOptedOutOfArticleCount,
-	isRecurringContributor,
 	shouldHideSupportMessaging,
 } from '../../lib/contributions';
 import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
@@ -70,9 +69,6 @@ const buildPayload = async (
 		isPaidContent: data.isPaidContent,
 		tags: data.tags,
 		showSupportMessaging: !data.hideSupportMessagingForUser,
-		isRecurringContributor: isRecurringContributor(
-			data.isSignedIn ?? false,
-		),
 		lastOneOffContributionDate: getLastOneOffContributionTimestamp(),
 		epicViewLog: getEpicViewLog(storage.local),
 		weeklyArticleHistory: await data.asyncArticleCount,
