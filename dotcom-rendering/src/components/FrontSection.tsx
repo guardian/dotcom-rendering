@@ -19,7 +19,7 @@ import { ContainerTitle } from './ContainerTitle';
 import { FrontPagination } from './FrontPagination';
 import { FrontSectionTitle } from './FrontSectionTitle';
 import { Island } from './Island';
-import { ShowHideButton } from './ShowHideButton';
+import { ShowHideButton } from './ShowHideButton.importable';
 import { ShowMore } from './ShowMore.importable';
 import { Treats } from './Treats';
 
@@ -579,7 +579,12 @@ export const FrontSection = ({
 
 				{isToggleable && (
 					<div css={sectionShowHide}>
-						<ShowHideButton sectionId={sectionId} />
+						<Island
+							priority="enhancement"
+							defer={{ until: 'idle' }}
+						>
+							<ShowHideButton sectionId={sectionId} />
+						</Island>
 					</div>
 				)}
 
