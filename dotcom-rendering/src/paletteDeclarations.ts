@@ -22,7 +22,6 @@ import {
 	type ArticleTheme,
 	Pillar,
 } from './lib/articleFormat';
-import { isMediaCard } from './lib/cardHelpers';
 import { transparentColour } from './lib/transparentColour';
 
 // ----- Palette Functions ----- //
@@ -2483,11 +2482,13 @@ const cardMetaTextLight: PaletteFunction = () => sourcePalette.neutral[46];
 
 const cardMetaTextDark: PaletteFunction = () => sourcePalette.neutral[60];
 
-const cardBackgroundLight: PaletteFunction = (format) =>
-	isMediaCard(format) ? sourcePalette.neutral[97] : 'transparent';
+const cardBackgroundLight: PaletteFunction = () => 'transparent';
+const cardBackgroundDark: PaletteFunction = () => 'transparent';
 
-const cardBackgroundDark: PaletteFunction = (format) =>
-	isMediaCard(format) ? sourcePalette.neutral[20] : 'transparent';
+const cardBackgroundMediaLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const cardBackgroundMediaDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
 
 const cardHeadlineTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 
@@ -6067,6 +6068,10 @@ const paletteColours = {
 	'--card-background-hover': {
 		light: cardBackgroundHover,
 		dark: cardBackgroundHover,
+	},
+	'--card-background-media': {
+		light: cardBackgroundMediaLight,
+		dark: cardBackgroundMediaDark,
 	},
 	'--card-border-supporting': {
 		light: cardBorderSupportingLight,

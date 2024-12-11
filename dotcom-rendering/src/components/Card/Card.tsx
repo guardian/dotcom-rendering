@@ -446,11 +446,18 @@ export const Card = ({
 	const showCommentFooter =
 		isOpinion && !isOnwardContent && media?.type === 'avatar';
 
+	const hasMedia = isMediaCard(format);
+	const backgroundColour = hasMedia
+		? palette('--card-background-media')
+		: palette('--card-background');
+
 	/**
 	 * Some cards in standard containers have contrasting background colours.
 	 * We need to add additional padding to these cards to keep the text readable.
 	 */
-	const hasBackgroundColour = !containerPalette && isMediaCard(format);
+	const hasBackgroundColour = !containerPalette && hasMedia;
+
+	/* Set background colour depending
 
 	/* Whilst we migrate to the new container types, we need to check which container we are in. */
 	const isFlexibleContainer =
@@ -580,7 +587,7 @@ export const Card = ({
 					css={css`
 						padding-bottom: ${space[5]}px;
 					`}
-					style={{ backgroundColor: palette('--card-background') }}
+					style={{ backgroundColor: backgroundColour }}
 				>
 					<CardHeadline
 						headlineText={headlineText}
@@ -618,7 +625,7 @@ export const Card = ({
 			)}
 
 			<CardLayout
-				cardBackgroundColour={palette('--card-background')}
+				cardBackgroundColour={backgroundColour}
 				imagePositionOnDesktop={imagePositionOnDesktop}
 				imagePositionOnMobile={imagePositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
