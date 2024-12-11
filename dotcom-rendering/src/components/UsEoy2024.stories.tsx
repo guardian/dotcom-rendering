@@ -21,3 +21,15 @@ export const Default = {
 		date: new Date('2024-11-26T00:00:00Z'),
 	},
 } satisfies Story;
+
+export const FinalCountdown = {
+	args: {
+		tickerData: {
+			total: 1000000,
+			goal: 2000000,
+		},
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
+		submitTrackingEvent: () => {},
+		date: new Date('2024-12-26T00:00:00Z'),
+	},
+} satisfies Story;
