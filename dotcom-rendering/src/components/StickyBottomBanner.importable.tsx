@@ -16,7 +16,6 @@ import { pickMessage } from '../lib/messagePicker';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
-import { useIsAndroid } from '../lib/useIsAndroid';
 import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
@@ -246,7 +245,7 @@ export const StickyBottomBanner = ({
 		isPreview,
 		currentLocaleCode: countryCode,
 	});
-	const isAndroidWebview = !!useIsAndroid();
+	const isAndroidWebview = false; // TODO: fix in upcoming commit !!useIsAndroid();
 
 	useEffect(() => {
 		setAsyncArticleCounts(getArticleCounts(pageId, tags, contentType));
