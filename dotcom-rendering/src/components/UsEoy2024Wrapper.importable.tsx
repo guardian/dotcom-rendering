@@ -225,7 +225,7 @@ const tickerSettingsSubCampaign = {
 
 const heading = (isSubCampaign: boolean) => {
 	return isSubCampaign
-		? 'This Giving Tuesday, give to the Guardian.'
+		? 'Last chance to support us this year'
 		: 'Can you help us hit our goal?';
 };
 const bodyCopy = (isSubCampaign: boolean) => {
@@ -237,7 +237,7 @@ const bodyCopy = (isSubCampaign: boolean) => {
 };
 
 const bodyCopyHighlightedText = (isSubCampaign: boolean) => {
-	const SubCampaignCopy = 'Help us raise $4m to keep going in 2025.';
+	const SubCampaignCopy = 'Help us keep going in 2025.';
 	const normalCopy =
 		'Help us hit our most important annual fundraising goal so we can keep going.';
 	return isSubCampaign ? SubCampaignCopy : normalCopy;
