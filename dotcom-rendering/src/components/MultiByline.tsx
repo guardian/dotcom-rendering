@@ -6,6 +6,7 @@ import {
 	headlineLightItalic34,
 	headlineMediumItalic24,
 	headlineMediumItalic28,
+	headlineMediumItalic34,
 	space,
 	textSansItalic24,
 	textSansItalic28,
@@ -13,6 +14,7 @@ import {
 } from '@guardian/source/foundations';
 import sanitise, { defaults } from 'sanitize-html';
 import {
+	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
@@ -41,104 +43,74 @@ const headingMarginStyle = css`
 	margin-bottom: ${space[2]}px;
 `;
 
-const nonAnchorHeadlineStyles = ({
+const fontStyles = ({
 	format,
 	fontWeight,
 }: {
 	format: ArticleFormat;
-	fontWeight: 'light' | 'medium' | 'bold';
+	fontWeight: 'light' | 'medium';
 }) => css`
 	${format.display === ArticleDisplay.Immersive
-		? headlineLightItalic28
-		: `
-			${fontWeight === 'medium' ? headlineMediumItalic24 : headlineLightItalic24};
-		`};
+		? fontWeight === 'light'
+			? headlineLightItalic28
+			: headlineMediumItalic28
+		: fontWeight === 'light'
+		? headlineLightItalic24
+		: headlineMediumItalic24};
 
 	${from.tablet} {
 		${format.display === ArticleDisplay.Immersive
-			? headlineLightItalic34
-			: `
-				${fontWeight === 'medium' ? headlineMediumItalic28 : headlineLightItalic28};
-			`};
+			? fontWeight === 'light'
+				? headlineLightItalic34
+				: headlineMediumItalic34
+			: fontWeight === 'light'
+			? headlineLightItalic28
+			: headlineMediumItalic28}
 	}
 
 	/** Labs uses sans text */
 	${format.theme === ArticleSpecial.Labs &&
 	css`
 		${format.display === ArticleDisplay.Immersive
-			? `
-				/**
-				 * Typography preset styles should not be overridden.
-				 * This has been done because the styles do not directly map to the new presets.
-				 * Please speak to your team's designer and update this to use a more appropriate preset.
-				 */
-				${textSansItalic28};
-				font-weight: 300;
-				line-height: 1.15;
-			`
-			: `
-				/**
-				 * Typography preset styles should not be overridden.
-				 * This has been done because the styles do not directly map to the new presets.
-				 * Please speak to your team's designer and update this to use a more appropriate preset.
-				 */
-				${textSansItalic24};
-				${
-					fontWeight === 'light'
-						? 'font-weight: 300;'
-						: fontWeight === 'medium'
-						? 'font-weight: 500;'
-						: 'font-weight: 700;'
-				};
-				line-height: 1.15;
-			`};
+			? textSansItalic28
+			: textSansItalic24}
 
 		${from.tablet} {
 			${format.display === ArticleDisplay.Immersive
-				? `
-					/**
-					 * Typography preset styles should not be overridden.
-					 * This has been done because the styles do not directly map to the new presets.
-					 * Please speak to your team's designer and update this to use a more appropriate preset.
-					 */
-					${textSansItalic34};
-					font-weight: 300;
-					line-height: 1.15;
-				`
-				: `
-					/**
-					 * Typography preset styles should not be overridden.
-					 * This has been done because the styles do not directly map to the new presets.
-					 * Please speak to your team's designer and update this to use a more appropriate preset.
-					 */
-					${textSansItalic28};
-					${
-						fontWeight === 'light'
-							? 'font-weight: 300;'
-							: fontWeight === 'medium'
-							? 'font-weight: 500;'
-							: 'font-weight: 700;'
-					};
-					line-height: 1.15;
-				`};
+				? textSansItalic34
+				: textSansItalic28}
 		}
 	`}
-
-	color: ${palette('--subheading-text')};
-
-	/* We don't allow additional font weight inside h2 tags except for immersive articles */
-	strong {
-		font-weight: ${format.display === ArticleDisplay.Immersive
-			? 'bold'
-			: 'inherit'};
-	}
 `;
 
+const nonAnchorHeadlineStyles = (format: ArticleFormat) => {
+	switch (format.design) {
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+			return fontStyles({ format, fontWeight: 'light' });
+
+		case ArticleDesign.Standard:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review:
+			return fontStyles({ format, fontWeight: 'medium' });
+
+		default:
+			return fontStyles({ format, fontWeight: 'medium' });
+	}
+};
+
 const bylineStyles = (format: ArticleFormat) => css`
-	${nonAnchorHeadlineStyles({ format, fontWeight: 'light' })}
-	font-style: italic;
+	${nonAnchorHeadlineStyles(format)}
 	margin-top: -4px;
-	font-weight: 300;
 	color: ${palette('--multi-byline-non-linked-text')};
 	a {
 		${subheadingStyles(format)}
