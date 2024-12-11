@@ -94,6 +94,10 @@ const styles = {
 			${textEgyptianBold17};
 		}
 	`,
+	highlight: css`
+		background-color: inherit;
+		color: inherit;
+	`,
 	ticker: css`
 		margin-bottom: ${space[4]}px;
 	`,
@@ -116,7 +120,7 @@ const styles = {
 const stylesSubCampaign = {
 	container: css`
 		/* stylelint-disable-next-line color-no-hex */
-		background: #f3afd9;
+		background: #edb438;
 		color: ${palette.neutral[100]};
 	`,
 	grid: css`
@@ -157,7 +161,7 @@ const stylesSubCampaign = {
 		}
 		h2 {
 			margin: ${space[2]}px 0 ${space[4]}px;
-			color: ${'#670055'};
+			color: ${'#1A2835'};
 
 			${headlineMedium24}
 			${from.tablet} {
@@ -179,6 +183,11 @@ const stylesSubCampaign = {
 			${textEgyptianBold17};
 		}
 		color: ${'#1A2835'};
+	`,
+	highlight: css`
+		background-color: ${'#670055'};
+		color: ${'#F6F6F6'};
+		padding-left: 2px;
 	`,
 	ticker: css`
 		margin-bottom: ${space[4]}px;
@@ -317,10 +326,8 @@ export const UsEoy2024: ReactComponent<Props> = ({
 	} = useChoiceCards(choiceCardAmounts, 'US', cta, cta);
 
 	const isSubCampaign =
-		date >= new Date('2024-12-11T00:00:01') &&
-		date < new Date('2024-12-11T16:00:00');
-	// date >= new Date('2024-12-20T00:00:01') &&
-	// date < new Date('2024-12-31T23:59:59');
+		date >= new Date('2024-12-20T00:00:01') &&
+		date < new Date('2024-12-31T23:59:59');
 
 	return (
 		<div
@@ -368,7 +375,15 @@ export const UsEoy2024: ReactComponent<Props> = ({
 						{bodyCopy(isSubCampaign)}
 						<strong>
 							{' '}
-							{bodyCopyHighlightedText(isSubCampaign)}
+							<span
+								css={
+									isSubCampaign
+										? stylesSubCampaign.highlight
+										: styles.highlight
+								}
+							>
+								{bodyCopyHighlightedText(isSubCampaign)}
+							</span>
 						</strong>
 					</div>
 				</div>
@@ -398,7 +413,7 @@ export const UsEoy2024: ReactComponent<Props> = ({
 							},
 							hover: {
 								backgroundColour: isSubCampaign
-									? '#891414'
+									? '#670055'
 									: '#C41C1C',
 								textColour: '#FFFFFF',
 							},
