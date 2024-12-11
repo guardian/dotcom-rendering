@@ -13,7 +13,6 @@ type Props = {
 const showHideButtonCss = css`
 	button {
 		${textSans14};
-		/* margin-top: ${space[2]}px; */
 		margin-right: 10px;
 		margin-bottom: ${space[2]}px;
 		position: relative;
