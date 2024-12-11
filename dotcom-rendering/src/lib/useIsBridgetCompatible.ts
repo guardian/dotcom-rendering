@@ -10,15 +10,20 @@ export const useIsBridgetCompatible = (
 	);
 
 	useEffect(() => {
-		void getEnvironmentClient()
-			.nativeThriftPackageVersion()
-			.then((bridgetVersion) => {
-				setIsCompatible(compare(bridgetVersion, requiredVersion, '>='));
-			})
-			.catch((error) => {
-				setIsCompatible(false);
-				console.log('nativeThriftPackageVersion', { error });
-			});
+		hasMinimumBridgetVersion(requiredVersion).then(setIsCompatible);
 	}, [requiredVersion]);
 	return isCompatible;
 };
+
+export const hasMinimumBridgetVersion = (
+	requiredVersion: string,
+): Promise<boolean> =>
+	getEnvironmentClient()
+		.nativeThriftPackageVersion()
+		.then((bridgetVersion) => {
+			return compare(bridgetVersion, requiredVersion, '>=');
+		})
+		.catch((error) => {
+			console.log('nativeThriftPackageVersion', { error });
+			return false;
+		});

@@ -12,7 +12,7 @@ import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { formatAttrString } from '../lib/formatAttrString';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';
-import { useIsAndroid } from '../lib/useIsAndroid';
+import { useIsHorizontalScrollingSupported } from '../lib/useIsHorizontalScrollingSupported';
 import { palette as themePalette } from '../palette';
 import type { Branding } from '../types/branding';
 import type { StarRating } from '../types/content';
@@ -796,7 +796,7 @@ export const Carousel = ({
 
 	const [index, setIndex] = useState(0);
 	const [maxIndex, setMaxIndex] = useState(0);
-	const isAndroid = useIsAndroid();
+	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
 
 	const arrowName = 'carousel-small-arrow';
 
@@ -905,7 +905,7 @@ export const Carousel = ({
 	// when index changes and compare it against the prior maxIndex only.
 	useEffect(() => setMaxIndex((m) => Math.max(index, m)), [index]);
 
-	if (isAndroid) {
+	if (!isHorizontalScrollingSupported) {
 		return null;
 	}
 

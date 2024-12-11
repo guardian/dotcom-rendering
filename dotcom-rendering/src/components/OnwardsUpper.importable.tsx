@@ -6,7 +6,7 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
-import { useIsAndroid } from '../lib/useIsAndroid';
+import { useIsHorizontalScrollingSupported } from '../lib/useIsHorizontalScrollingSupported';
 import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
 import type { TagType } from '../types/tag';
@@ -214,9 +214,9 @@ export const OnwardsUpper = ({
 	discussionApiUrl,
 	absoluteServerTimes,
 }: Props) => {
-	const isAndroid = useIsAndroid();
+	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
 
-	if (isAndroid) return null;
+	if (!isHorizontalScrollingSupported) return null;
 
 	// Related content can be a collection of articles based on
 	// two things, 1: A popular tag, or 2: A generic text match
