@@ -745,6 +745,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								containerLevel={
 									collection.config.containerLevel
 								}
+								containerSpacing={collection.containerSpacing}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
