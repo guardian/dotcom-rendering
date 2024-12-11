@@ -446,18 +446,15 @@ export const Card = ({
 	const showCommentFooter =
 		isOpinion && !isOnwardContent && media?.type === 'avatar';
 
-	const hasMedia = isMediaCard(format);
-	const backgroundColour = hasMedia
+	/**
+-	 * Media cards have contrasting background colours. We add additional
+	 * padding to these cards to keep the text readable.
+-	 */
+	const hasBackgroundColour = isMediaCard(format);
+
+	const backgroundColour = hasBackgroundColour
 		? palette('--card-media-background')
 		: palette('--card-background');
-
-	/**
-	 * Some cards in standard containers have contrasting background colours.
-	 * We need to add additional padding to these cards to keep the text readable.
-	 */
-	const hasBackgroundColour = !containerPalette && hasMedia;
-
-	/* Set background colour depending
 
 	/* Whilst we migrate to the new container types, we need to check which container we are in. */
 	const isFlexibleContainer =
