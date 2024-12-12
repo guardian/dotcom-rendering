@@ -1823,6 +1823,23 @@ const accordionBackgroundDark: PaletteFunction = () =>
 const accordionBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 
+const tableBlockTextLight: PaletteFunction = () => sourcePalette.neutral[7];
+const tableBlockTextDark: PaletteFunction = () => sourcePalette.neutral[86];
+const tableBlockBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const tableBlockBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+const tableBlockStripeLight: PaletteFunction = () => sourcePalette.neutral[93];
+const tableBlockStripeDark: PaletteFunction = () => sourcePalette.neutral[20];
+const tableBlockTextFirstColumnLight: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+const tableBlockTextFirstColumnDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+const tableBlockBorderTopLight: PaletteFunction = () =>
+	sourcePalette.brand[500];
+const tableBlockBorderTopDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+
 const tableOfContentsLight: PaletteFunction = () => sourcePalette.neutral[7];
 const tableOfContentsDark: PaletteFunction = () => sourcePalette.neutral[86];
 const tableOfContentsBorderLight: PaletteFunction = () =>
@@ -7085,6 +7102,26 @@ const paletteColours = {
 	'--syndication-button-text': {
 		light: syndicationButtonTextLight,
 		dark: syndicationButtonTextDark,
+	},
+	'--table-block-background': {
+		light: tableBlockBackgroundLight,
+		dark: tableBlockBackgroundDark,
+	},
+	'--table-block-border-top': {
+		light: tableBlockBorderTopLight,
+		dark: tableBlockBorderTopDark,
+	},
+	'--table-block-stripe': {
+		light: tableBlockStripeLight,
+		dark: tableBlockStripeDark,
+	},
+	'--table-block-text': {
+		light: tableBlockTextLight,
+		dark: tableBlockTextDark,
+	},
+	'--table-block-text-first-column': {
+		light: tableBlockTextFirstColumnLight,
+		dark: tableBlockTextFirstColumnDark,
 	},
 	'--table-of-contents': {
 		light: tableOfContentsLight,
