@@ -1,3 +1,4 @@
+import { type CrosswordProps } from '@guardian/react-crossword-next';
 import type { ArticleTheme } from '../lib/articleFormat';
 
 export type StarRating = 0 | 1 | 2 | 3 | 4 | 5;
@@ -735,7 +736,7 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 
 export interface CrosswordElement {
 	_type: 'model.dotcomrendering.pageElements.CrosswordElement';
-	crossword: GuardianCrossword & { instructions?: string };
+	crossword: CrosswordProps['data'] & { instructions?: string };
 }
 
 export type FEElement =

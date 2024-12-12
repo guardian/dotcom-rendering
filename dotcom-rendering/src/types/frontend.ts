@@ -1,3 +1,4 @@
+import { type CrosswordProps } from '@guardian/react-crossword-next';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { FEArticleBadgeType } from './badge';
@@ -126,7 +127,7 @@ export interface FEArticleType {
 	showTableOfContents: boolean;
 	lang?: string;
 	isRightToLeftLang?: boolean;
-	crossword?: GuardianCrossword & { instructions: string };
+	crossword?: CrosswordProps['data'] & { instructions: string };
 }
 
 type PageTypeType = {

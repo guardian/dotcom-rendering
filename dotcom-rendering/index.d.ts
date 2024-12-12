@@ -2,9 +2,6 @@
 // 3rd party type declarations //
 // ------------------------------
 
-type GuardianCrossword =
-	import('@guardian/react-crossword-next').CrosswordProps['data'];
-
 declare module 'chromatic/isChromatic';
 
 declare module 'dynamic-import-polyfill' {

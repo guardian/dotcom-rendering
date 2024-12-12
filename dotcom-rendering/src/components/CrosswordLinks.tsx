@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
+import { type CrosswordProps } from '@guardian/react-crossword-next';
 import { textSans15 } from '@guardian/source/foundations';
 import { palette } from '../palette';
 
@@ -19,7 +20,7 @@ export const CrosswordLinks = ({
 	crossword,
 	className,
 }: {
-	crossword: GuardianCrossword;
+	crossword: CrosswordProps['data'];
 	className?: string;
 }) => {
 	return (
