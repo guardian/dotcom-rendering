@@ -247,7 +247,7 @@ export const FlexibleSpecial = ({
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
 				aspectRatio={aspectRatio}
-				isLastRow={!splash && !cards}
+				isLastRow={splash.length === 0 && cards.length === 0}
 			/>
 			<OneCardLayout
 				cards={splash}
@@ -256,7 +256,7 @@ export const FlexibleSpecial = ({
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
 				aspectRatio={aspectRatio}
-				isLastRow={!cards}
+				isLastRow={cards.length === 0}
 			/>
 			<TwoCardOrFourCardLayout
 				cards={cards}

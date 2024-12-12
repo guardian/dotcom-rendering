@@ -443,7 +443,7 @@ export const FlexibleGeneral = ({
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
-					isLastRow={!cards}
+					isLastRow={cards.length === 0}
 				/>
 			)}
 
