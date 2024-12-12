@@ -24,9 +24,6 @@ const articleWidth = (format: ArticleFormat) => {
 				}
 			`;
 		}
-		case ArticleDesign.Crossword:
-			/* The crossword player manages its own width; */
-			return null;
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
 			return css`
