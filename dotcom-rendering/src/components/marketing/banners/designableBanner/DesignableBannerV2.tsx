@@ -191,6 +191,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 							/>
 						</div>
 						<div css={styles.linkButtonContainer}>
+							//using this means using the payment icons...
 							<DesignableBannerCtas
 								mainOrMobileContent={mainOrMobileContent}
 								onPrimaryCtaClick={onCtaClick}
