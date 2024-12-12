@@ -552,6 +552,9 @@
                             },
                             "isLive": {
                                 "type": "boolean"
+                            },
+                            "galleryCount": {
+                                "type": "number"
                             }
                         },
                         "required": [
