@@ -11,7 +11,7 @@ import {
 	type TableOfContentsItem,
 } from '../model/enhanceTableOfContents';
 import { enhancePinnedPost } from '../model/pinnedPost';
-import type { ImageForLightbox } from './content';
+import type { CrosswordElement, ImageForLightbox } from './content';
 import type { FEArticleType } from './frontend';
 import { type RenderingTarget } from './renderingTarget';
 
@@ -31,12 +31,12 @@ export type Article = {
 	frontendData: ArticleDeprecated;
 };
 
-export const enhanceCrossword = (article: Article): Article => {
+export const enhanceCrosswordArticle = (article: Article): Article => {
 	if (isUndefined(article.frontendData.crossword)) {
 		throw new TypeError('article does not contain a crossword');
 	}
 
-	const element = {
+	const element: CrosswordElement = {
 		_type: 'model.dotcomrendering.pageElements.CrosswordElement' as const,
 		crossword: article.frontendData.crossword,
 	};
