@@ -4894,32 +4894,21 @@ const staffPickBadgeTextDark: PaletteFunction = () => sourcePalette.neutral[7];
 
 const speechBubbleBackgroundLight: PaletteFunction = ({ theme, design }) => {
 	switch (theme) {
-		case Pillar.News: {
+		case Pillar.News:
 			return design === ArticleDesign.Analysis
 				? sourcePalette.news[300]
 				: sourcePalette.news[400];
-		}
-		case Pillar.Opinion: {
-			return sourcePalette.opinion[400];
-		}
-		case Pillar.Sport: {
-			return sourcePalette.sport[400];
-		}
-		case Pillar.Culture: {
-			return sourcePalette.culture[400];
-		}
-		case Pillar.Lifestyle: {
-			return sourcePalette.lifestyle[400];
-		}
-		case ArticleSpecial.Labs: {
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(theme, 400);
+		case ArticleSpecial.Labs:
 			return sourcePalette.labs[400];
-		}
-		case ArticleSpecial.SpecialReport: {
+		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[400];
-		}
-		case ArticleSpecial.SpecialReportAlt: {
+		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[200];
-		}
 	}
 };
 
