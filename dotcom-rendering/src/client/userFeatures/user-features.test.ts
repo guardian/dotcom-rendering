@@ -35,18 +35,11 @@ const getAuthStatus = getAuthStatus_ as jest.MockedFunction<
 
 const PERSISTENCE_KEYS = {
 	USER_FEATURES_EXPIRY_COOKIE: 'gu_user_features_expiry',
-	PAYING_MEMBER_COOKIE: 'gu_paying_member',
-	RECURRING_CONTRIBUTOR_COOKIE: 'gu_recurring_contributor',
 	AD_FREE_USER_COOKIE: 'GU_AF1',
 	ACTION_REQUIRED_FOR_COOKIE: 'gu_action_required_for',
 	DIGITAL_SUBSCRIBER_COOKIE: 'gu_digital_subscriber',
 	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE: 'gu.contributions.contrib-timestamp',
-	ONE_OFF_CONTRIBUTION_DATE_COOKIE: 'gu_one_off_contribution_date',
 	HIDE_SUPPORT_MESSAGING_COOKIE: 'gu_hide_support_messaging',
-	SUPPORT_MONTHLY_CONTRIBUTION_COOKIE:
-		'gu.contributions.recurring.contrib-timestamp.Monthly',
-	SUPPORT_ANNUAL_CONTRIBUTION_COOKIE:
-		'gu.contributions.recurring.contrib-timestamp.Annual',
 };
 
 const setAllFeaturesData = (opts: { isExpired: boolean }) => {
@@ -58,11 +51,6 @@ const setAllFeaturesData = (opts: { isExpired: boolean }) => {
 	const adFreeExpiryDate = opts.isExpired
 		? new Date(currentTime - msInOneDay * 2)
 		: new Date(currentTime + msInOneDay * 2);
-	setCookie({ name: PERSISTENCE_KEYS.PAYING_MEMBER_COOKIE, value: 'true' });
-	setCookie({
-		name: PERSISTENCE_KEYS.RECURRING_CONTRIBUTOR_COOKIE,
-		value: 'true',
-	});
 	setCookie({
 		name: PERSISTENCE_KEYS.DIGITAL_SUBSCRIBER_COOKIE,
 		value: 'true',
@@ -86,8 +74,6 @@ const setAllFeaturesData = (opts: { isExpired: boolean }) => {
 };
 
 const deleteAllFeaturesData = () => {
-	removeCookie({ name: PERSISTENCE_KEYS.PAYING_MEMBER_COOKIE });
-	removeCookie({ name: PERSISTENCE_KEYS.RECURRING_CONTRIBUTOR_COOKIE });
 	removeCookie({ name: PERSISTENCE_KEYS.DIGITAL_SUBSCRIBER_COOKIE });
 	removeCookie({ name: PERSISTENCE_KEYS.USER_FEATURES_EXPIRY_COOKIE });
 	removeCookie({ name: PERSISTENCE_KEYS.AD_FREE_USER_COOKIE });
@@ -126,14 +112,6 @@ describe('Refreshing the features data', () => {
 			setAllFeaturesData({ isExpired: true });
 			await refresh();
 			expect(
-				getCookie({ name: PERSISTENCE_KEYS.PAYING_MEMBER_COOKIE }),
-			).toBe('true');
-			expect(
-				getCookie({
-					name: PERSISTENCE_KEYS.RECURRING_CONTRIBUTOR_COOKIE,
-				}),
-			).toBe('true');
-			expect(
 				getCookie({
 					name: PERSISTENCE_KEYS.USER_FEATURES_EXPIRY_COOKIE,
 				}),
@@ -147,15 +125,6 @@ describe('Refreshing the features data', () => {
 			setAllFeaturesData({ isExpired: false });
 			await refresh();
 			expect(fetchJsonSpy).not.toHaveBeenCalled();
-		});
-
-		it('Performs an update if membership-frontend wipes just the paying-member cookie', async () => {
-			// Set everything except paying-member cookie
-			setAllFeaturesData({ isExpired: true });
-			removeCookie({ name: PERSISTENCE_KEYS.PAYING_MEMBER_COOKIE });
-
-			await refresh();
-			expect(fetchJsonSpy).toHaveBeenCalledTimes(1);
 		});
 	});
 });
@@ -177,14 +146,6 @@ describe('If user signed out', () => {
 		await refresh();
 		expect(
 			getCookie({ name: PERSISTENCE_KEYS.AD_FREE_USER_COOKIE }),
-		).toBeNull();
-		expect(
-			getCookie({ name: PERSISTENCE_KEYS.PAYING_MEMBER_COOKIE }),
-		).toBeNull();
-		expect(
-			getCookie({
-				name: PERSISTENCE_KEYS.RECURRING_CONTRIBUTOR_COOKIE,
-			}),
 		).toBeNull();
 		expect(
 			getCookie({ name: PERSISTENCE_KEYS.DIGITAL_SUBSCRIBER_COOKIE }),
@@ -271,14 +232,6 @@ describe('Storing new feature data', () => {
 		);
 		return refresh().then(() => {
 			expect(
-				getCookie({ name: PERSISTENCE_KEYS.PAYING_MEMBER_COOKIE }),
-			).toBe('false');
-			expect(
-				getCookie({
-					name: PERSISTENCE_KEYS.RECURRING_CONTRIBUTOR_COOKIE,
-				}),
-			).toBe('false');
-			expect(
 				getCookie({ name: PERSISTENCE_KEYS.DIGITAL_SUBSCRIBER_COOKIE }),
 			).toBe('false');
 			expect(
@@ -300,14 +253,6 @@ describe('Storing new feature data', () => {
 			}),
 		);
 		return refresh().then(() => {
-			expect(
-				getCookie({ name: PERSISTENCE_KEYS.PAYING_MEMBER_COOKIE }),
-			).toBe('true');
-			expect(
-				getCookie({
-					name: PERSISTENCE_KEYS.RECURRING_CONTRIBUTOR_COOKIE,
-				}),
-			).toBe('true');
 			expect(
 				getCookie({ name: PERSISTENCE_KEYS.DIGITAL_SUBSCRIBER_COOKIE }),
 			).toBe('true');

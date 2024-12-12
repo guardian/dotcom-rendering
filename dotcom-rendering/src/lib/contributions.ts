@@ -16,11 +16,7 @@ export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
 export const RECURRING_CONTRIBUTOR_COOKIE = 'gu_recurring_contributor';
 export const OPT_OUT_OF_ARTICLE_COUNT_COOKIE = 'gu_article_count_opt_out';
 
-// Support Frontend cookies (created when a contribution is made)
-export const SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE =
-	'gu.contributions.recurring.contrib-timestamp.Monthly'; // TODO: delete this, no longer needed
-export const SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE =
-	'gu.contributions.recurring.contrib-timestamp.Annual'; // TODO: delete this, no longer needed
+// Support Frontend cookie (created when a contribution is made)
 export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
 	'gu.contributions.contrib-timestamp';
 
