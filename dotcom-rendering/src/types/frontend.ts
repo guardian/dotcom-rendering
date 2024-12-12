@@ -127,7 +127,7 @@ export interface FEArticleType {
 	showTableOfContents: boolean;
 	lang?: string;
 	isRightToLeftLang?: boolean;
-	crossword?: CrosswordProps['data'] & { instructions: string };
+	crossword?: CrosswordProps['data'];
 }
 
 type PageTypeType = {
