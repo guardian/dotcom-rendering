@@ -438,116 +438,101 @@
             "type": "boolean"
         },
         "crossword": {
-            "allOf": [
-                {
+            "type": "object",
+            "properties": {
+                "creator": {
                     "type": "object",
                     "properties": {
-                        "creator": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                },
-                                "webUrl": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "name",
-                                "webUrl"
-                            ]
-                        },
-                        "crosswordType": {
-                            "enum": [
-                                "cryptic",
-                                "everyman",
-                                "prize",
-                                "quick",
-                                "quick-cryptic",
-                                "quiptic",
-                                "special",
-                                "speedy",
-                                "weekend"
-                            ],
-                            "type": "string"
-                        },
-                        "date": {
-                            "type": "number"
-                        },
-                        "dateSolutionAvailable": {
-                            "type": "number"
-                        },
-                        "dimensions": {
-                            "type": "object",
-                            "properties": {
-                                "rows": {
-                                    "type": "number"
-                                },
-                                "cols": {
-                                    "type": "number"
-                                }
-                            },
-                            "required": [
-                                "cols",
-                                "rows"
-                            ]
-                        },
-                        "entries": {
-                            "type": "array",
-                            "items": [
-                                {
-                                    "$ref": "#/definitions/CAPIEntry"
-                                }
-                            ],
-                            "minItems": 1,
-                            "additionalItems": {
-                                "$ref": "#/definitions/CAPIEntry"
-                            }
-                        },
-                        "id": {
-                            "type": "string"
-                        },
                         "name": {
                             "type": "string"
                         },
-                        "number": {
-                            "type": "number"
-                        },
-                        "pdf": {
-                            "type": "string"
-                        },
-                        "solutionAvailable": {
-                            "type": "boolean"
-                        },
-                        "webPublicationDate": {
-                            "type": "number"
-                        },
-                        "instructions": {
+                        "webUrl": {
                             "type": "string"
                         }
                     },
                     "required": [
-                        "crosswordType",
-                        "date",
-                        "dimensions",
-                        "entries",
-                        "id",
                         "name",
-                        "number",
-                        "solutionAvailable"
+                        "webUrl"
                     ]
                 },
-                {
+                "crosswordType": {
+                    "enum": [
+                        "cryptic",
+                        "everyman",
+                        "prize",
+                        "quick",
+                        "quick-cryptic",
+                        "quiptic",
+                        "special",
+                        "speedy",
+                        "weekend"
+                    ],
+                    "type": "string"
+                },
+                "date": {
+                    "type": "number"
+                },
+                "dateSolutionAvailable": {
+                    "type": "number"
+                },
+                "dimensions": {
                     "type": "object",
                     "properties": {
-                        "instructions": {
-                            "type": "string"
+                        "rows": {
+                            "type": "number"
+                        },
+                        "cols": {
+                            "type": "number"
                         }
                     },
                     "required": [
-                        "instructions"
+                        "cols",
+                        "rows"
                     ]
+                },
+                "entries": {
+                    "type": "array",
+                    "items": [
+                        {
+                            "$ref": "#/definitions/CAPIEntry"
+                        }
+                    ],
+                    "minItems": 1,
+                    "additionalItems": {
+                        "$ref": "#/definitions/CAPIEntry"
+                    }
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "number"
+                },
+                "pdf": {
+                    "type": "string"
+                },
+                "solutionAvailable": {
+                    "type": "boolean"
+                },
+                "webPublicationDate": {
+                    "type": "number"
+                },
+                "instructions": {
+                    "type": "string"
                 }
+            },
+            "required": [
+                "crosswordType",
+                "date",
+                "dimensions",
+                "entries",
+                "id",
+                "name",
+                "number",
+                "solutionAvailable"
             ]
         }
     },
@@ -4102,113 +4087,101 @@
                     "const": "model.dotcomrendering.pageElements.CrosswordElement"
                 },
                 "crossword": {
-                    "allOf": [
-                        {
+                    "type": "object",
+                    "properties": {
+                        "creator": {
                             "type": "object",
                             "properties": {
-                                "creator": {
-                                    "type": "object",
-                                    "properties": {
-                                        "name": {
-                                            "type": "string"
-                                        },
-                                        "webUrl": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": [
-                                        "name",
-                                        "webUrl"
-                                    ]
-                                },
-                                "crosswordType": {
-                                    "enum": [
-                                        "cryptic",
-                                        "everyman",
-                                        "prize",
-                                        "quick",
-                                        "quick-cryptic",
-                                        "quiptic",
-                                        "special",
-                                        "speedy",
-                                        "weekend"
-                                    ],
-                                    "type": "string"
-                                },
-                                "date": {
-                                    "type": "number"
-                                },
-                                "dateSolutionAvailable": {
-                                    "type": "number"
-                                },
-                                "dimensions": {
-                                    "type": "object",
-                                    "properties": {
-                                        "rows": {
-                                            "type": "number"
-                                        },
-                                        "cols": {
-                                            "type": "number"
-                                        }
-                                    },
-                                    "required": [
-                                        "cols",
-                                        "rows"
-                                    ]
-                                },
-                                "entries": {
-                                    "type": "array",
-                                    "items": [
-                                        {
-                                            "$ref": "#/definitions/CAPIEntry"
-                                        }
-                                    ],
-                                    "minItems": 1,
-                                    "additionalItems": {
-                                        "$ref": "#/definitions/CAPIEntry"
-                                    }
-                                },
-                                "id": {
-                                    "type": "string"
-                                },
                                 "name": {
                                     "type": "string"
                                 },
-                                "number": {
-                                    "type": "number"
-                                },
-                                "pdf": {
-                                    "type": "string"
-                                },
-                                "solutionAvailable": {
-                                    "type": "boolean"
-                                },
-                                "webPublicationDate": {
-                                    "type": "number"
-                                },
-                                "instructions": {
+                                "webUrl": {
                                     "type": "string"
                                 }
                             },
                             "required": [
-                                "crosswordType",
-                                "date",
-                                "dimensions",
-                                "entries",
-                                "id",
                                 "name",
-                                "number",
-                                "solutionAvailable"
+                                "webUrl"
                             ]
                         },
-                        {
+                        "crosswordType": {
+                            "enum": [
+                                "cryptic",
+                                "everyman",
+                                "prize",
+                                "quick",
+                                "quick-cryptic",
+                                "quiptic",
+                                "special",
+                                "speedy",
+                                "weekend"
+                            ],
+                            "type": "string"
+                        },
+                        "date": {
+                            "type": "number"
+                        },
+                        "dateSolutionAvailable": {
+                            "type": "number"
+                        },
+                        "dimensions": {
                             "type": "object",
                             "properties": {
-                                "instructions": {
-                                    "type": "string"
+                                "rows": {
+                                    "type": "number"
+                                },
+                                "cols": {
+                                    "type": "number"
                                 }
+                            },
+                            "required": [
+                                "cols",
+                                "rows"
+                            ]
+                        },
+                        "entries": {
+                            "type": "array",
+                            "items": [
+                                {
+                                    "$ref": "#/definitions/CAPIEntry"
+                                }
+                            ],
+                            "minItems": 1,
+                            "additionalItems": {
+                                "$ref": "#/definitions/CAPIEntry"
                             }
+                        },
+                        "id": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "number": {
+                            "type": "number"
+                        },
+                        "pdf": {
+                            "type": "string"
+                        },
+                        "solutionAvailable": {
+                            "type": "boolean"
+                        },
+                        "webPublicationDate": {
+                            "type": "number"
+                        },
+                        "instructions": {
+                            "type": "string"
                         }
+                    },
+                    "required": [
+                        "crosswordType",
+                        "date",
+                        "dimensions",
+                        "entries",
+                        "id",
+                        "name",
+                        "number",
+                        "solutionAvailable"
                     ]
                 }
             },
