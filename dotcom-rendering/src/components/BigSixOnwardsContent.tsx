@@ -131,7 +131,7 @@ export const BigSixOnwardsContent = ({ url, discussionApiUrl }: Props) => {
 								format={trail.format}
 								headlineText={trail.headline}
 								image={trail.image}
-								dataLinkName={`onwards-content-gallery-style ${trail.dataLinkName}`}
+								dataLinkName={`onwards-content-gallery-style ${trail.dataLinkName}-position-0`}
 								discussionId={trail.discussionId}
 								discussionApiUrl={trail.discussionApiUrl}
 								isExternalLink={trail.isExternalLink}
@@ -158,7 +158,7 @@ export const BigSixOnwardsContent = ({ url, discussionApiUrl }: Props) => {
 								format={trail.format}
 								headlineText={trail.headline}
 								image={trail.image}
-								dataLinkName={`onwards-content-gallery-style ${trail.dataLinkName}`}
+								dataLinkName={`onwards-content-gallery-style ${trail.dataLinkName}-position-1`}
 								discussionId={trail.discussionId}
 								discussionApiUrl={trail.discussionApiUrl}
 								isExternalLink={trail.isExternalLink}
@@ -170,32 +170,40 @@ export const BigSixOnwardsContent = ({ url, discussionApiUrl }: Props) => {
 					))}
 				</UL>
 				<UL direction="row">
-					{secondSlice25.map((trail, index) => (
-						<LI
-							key={trail.url}
-							padSides={true}
-							showDivider={index > 0}
-						>
-							<Card
-								absoluteServerTimes={false}
-								imagePositionOnDesktop="top"
-								imagePositionOnMobile="left"
-								imageSize="small"
-								imageLoading="lazy"
-								linkTo={trail.url}
-								format={trail.format}
-								headlineText={trail.headline}
-								image={trail.image}
-								dataLinkName={`onwards-content-gallery-style ${trail.dataLinkName}`}
-								discussionId={trail.discussionId}
-								discussionApiUrl={trail.discussionApiUrl}
-								isExternalLink={trail.isExternalLink}
-								showAge={true}
-								webPublicationDate={trail.webPublicationDate}
-								onwardsSource="related-content"
-							/>
-						</LI>
-					))}
+					{secondSlice25.map((trail, index) => {
+						const dataLinkName = `onwards-content-gallery-style ${
+							trail.dataLinkName
+						}-position-${index + 2}`;
+
+						return (
+							<LI
+								key={trail.url}
+								padSides={true}
+								showDivider={index > 0}
+							>
+								<Card
+									absoluteServerTimes={false}
+									imagePositionOnDesktop="top"
+									imagePositionOnMobile="left"
+									imageSize="small"
+									imageLoading="lazy"
+									linkTo={trail.url}
+									format={trail.format}
+									headlineText={trail.headline}
+									image={trail.image}
+									dataLinkName={dataLinkName}
+									discussionId={trail.discussionId}
+									discussionApiUrl={trail.discussionApiUrl}
+									isExternalLink={trail.isExternalLink}
+									showAge={true}
+									webPublicationDate={
+										trail.webPublicationDate
+									}
+									onwardsSource="related-content"
+								/>
+							</LI>
+						);
+					})}
 				</UL>
 			</div>
 		</div>
