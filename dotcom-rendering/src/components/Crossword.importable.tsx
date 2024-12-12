@@ -9,20 +9,23 @@ import {
 	textSans12,
 	textSans14,
 } from '@guardian/source/foundations';
+import type { ReactNode } from 'react';
 import { memo } from 'react';
 
-const CluesHeader = memo(({ direction }: { direction: 'across' | 'down' }) => {
+const CluesHeader = memo(({ children }: { children: ReactNode }) => {
 	return (
 		<div
 			css={css`
 				${headlineBold17};
 				border-top: 1px solid ${palette.neutral[86]};
 				border-bottom: 1px dotted ${palette.neutral[86]};
+				background-color: ${palette.neutral[100]};
 				height: 2em;
 				margin-bottom: 0.5em;
+				text-transform: capitalize;
 			`}
 		>
-			{direction}
+			{children}
 		</div>
 	);
 });
@@ -32,11 +35,8 @@ const Layout: CrosswordProps['Layout'] = ({
 	Clues,
 	Controls,
 	SavedMessage,
-	// gridWidth - coming in next version of package
+	gridWidth,
 }) => {
-	// replace with gridWidth from props when package is updated
-	const gridWidth = '496';
-
 	return (
 		<div
 			css={css`
