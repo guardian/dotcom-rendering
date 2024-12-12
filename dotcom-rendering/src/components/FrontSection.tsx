@@ -297,7 +297,7 @@ const sectionContentBorderFromLeftCol = css`
 			content: '';
 			position: absolute;
 			top: ${space[2]}px;
-			bottom: 0px;
+			bottom: 0;
 			border-left: 1px solid ${schemePalette('--section-border')};
 			transform: translateX(-50%);
 			/** Keeps the vertical divider ontop of carousel item dividers */
