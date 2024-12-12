@@ -5,7 +5,7 @@ import {
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
-import { Hide, Link } from '@guardian/source/react-components';
+import { Hide, Link, SvgCamera } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import { isMediaCard as isAMediaCard } from '../../lib/cardHelpers';
 import { getZIndex } from '../../lib/getZIndex';
@@ -34,6 +34,7 @@ import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
 import { MediaDuration } from '../MediaDuration';
 import { MediaMeta } from '../MediaMeta';
+import { Pill } from '../Pill';
 import { Slideshow } from '../Slideshow';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
@@ -432,6 +433,9 @@ export const Card = ({
 	const showPlayIcon =
 		mainMedia?.type === 'Video' && !canPlayInline && showMainVideo;
 
+	// Check media type to determine if we should show a pill or media icon
+	const showPill = mainMedia?.type === 'Gallery';
+
 	const media = getMedia({
 		imageUrl: image?.src,
 		imageAltText: image?.altText,
@@ -616,7 +620,7 @@ export const Card = ({
 							cardHasImage={!!image}
 						/>
 					) : null}
-					{!!mainMedia && mainMedia.type !== 'Video' && (
+					{!!mainMedia && mainMedia.type !== 'Video' && !showPill && (
 						<MediaMeta
 							mediaType={mainMedia.type}
 							hasKicker={!!kickerText}
@@ -860,7 +864,8 @@ export const Card = ({
 										/>
 									) : null}
 									{!!mainMedia &&
-										mainMedia.type !== 'Video' && (
+										mainMedia.type !== 'Video' &&
+										!showPill && (
 											<MediaMeta
 												mediaType={mainMedia.type}
 												hasKicker={!!kickerText}
@@ -879,7 +884,28 @@ export const Card = ({
 								/>
 							)}
 
-							{!showCommentFooter && (
+							{!showCommentFooter && showPill ? (
+								<div
+									css={css`
+										margin-top: auto;
+									`}
+								>
+									{branding && (
+										<CardBranding
+											branding={branding}
+											format={format}
+											onwardsSource={onwardsSource}
+											containerPalette={containerPalette}
+										/>
+									)}
+									<Pill
+										prefix="Gallery"
+										content={(galleryCount ?? 0).toString()}
+										icon={<SvgCamera />}
+										iconSide="right"
+									/>
+								</div>
+							) : (
 								<CardFooter
 									format={format}
 									age={decideAge()}
