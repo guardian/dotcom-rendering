@@ -1,5 +1,9 @@
 import { isUndefined } from '@guardian/libs';
-import { type ArticleFormat, decideFormat } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	decideFormat,
+} from '../lib/articleFormat';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import { appsLightboxImages } from '../model/appsLightboxImages';
 import { buildLightboxImages } from '../model/buildLightboxImages';
@@ -43,7 +47,13 @@ export const enhanceCrosswordArticle = (article: Article): Article => {
 
 	return {
 		...article,
-		format: { ...article.format },
+		format: {
+			...article.format,
+
+			// THIS IS TEMPORARY WAY TO WORK ON THE LAYOUT
+			design: ArticleDesign.Crossword, // DO NOT MERGE THIS INTO MAIN!!!
+			// OK?
+		},
 		frontendData: {
 			...article.frontendData,
 			blocks: [
