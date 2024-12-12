@@ -85,6 +85,7 @@ const isFirstOrSecondArticle = () => {
 };
 
 const isNewUSUser = async () => {
+	return true;
 	const isUserInUS = (await getLocaleCode()) === 'US';
 	if (!isUserInUS) {
 		return false;
