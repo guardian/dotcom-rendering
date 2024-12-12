@@ -26,7 +26,7 @@ export const StaticFeatureTwo = ({
 	const cards = trails.slice(0, 2);
 
 	return (
-		<UL direction="row" padBottom={true} hasLargeSpacing={true}>
+		<UL direction="row">
 			{cards.map((card) => {
 				return (
 					<LI
