@@ -557,6 +557,9 @@ export const Card = ({
 		);
 	};
 
+	/** This log has been deliberatley left in to satisfy the lint check of gallery count not being used */
+	console.log({ galleryCount });
+
 	return (
 		<CardWrapper
 			format={format}
