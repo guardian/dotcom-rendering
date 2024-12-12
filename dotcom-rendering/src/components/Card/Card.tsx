@@ -341,6 +341,7 @@ export const Card = ({
 	trailTextSize,
 	trailTextColour,
 	podcastImage,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- Added in preparation for UI changes to display gallery count
 	galleryCount,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
@@ -556,9 +557,6 @@ export const Card = ({
 			</Hide>
 		);
 	};
-
-	/** This log has been deliberatley left in to satisfy the lint check of gallery count not being used */
-	console.log({ galleryCount });
 
 	return (
 		<CardWrapper
