@@ -4892,6 +4892,26 @@ const staffPickBadgeTextLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const staffPickBadgeTextDark: PaletteFunction = () => sourcePalette.neutral[7];
 
+const speechBubbleBackgroundLight: PaletteFunction = ({ theme, design }) => {
+	switch (theme) {
+		case Pillar.News:
+			return design === ArticleDesign.Analysis
+				? sourcePalette.news[300]
+				: sourcePalette.news[400];
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(theme, 400);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+
 const staffBadgeLight: PaletteFunction = () => sourcePalette.brand[400];
 const staffBadgeDark: PaletteFunction = () => sourcePalette.neutral[100];
 
@@ -6945,6 +6965,10 @@ const paletteColours = {
 	'--slideshow-pagination-dot-active': {
 		light: slideshowPaginationDotActiveLight,
 		dark: slideshowPaginationDotActiveDark,
+	},
+	'--speech-bubble-background': {
+		light: speechBubbleBackgroundLight,
+		dark: speechBubbleBackgroundLight,
 	},
 	'--staff-contributor-badge': {
 		light: staffBadgeLight,
