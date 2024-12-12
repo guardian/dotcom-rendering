@@ -158,6 +158,7 @@ export const SplashCardLayout = ({
 	absoluteServerTimes,
 	imageLoading,
 	aspectRatio,
+	isLastRow,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -165,6 +166,7 @@ export const SplashCardLayout = ({
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
+	isLastRow: boolean;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -183,7 +185,11 @@ export const SplashCardLayout = ({
 	);
 
 	return (
-		<UL padBottom={true} hasLargeSpacing={true} showTopBar={false}>
+		<UL
+			padBottom={!isLastRow}
+			hasLargeSpacing={!isLastRow}
+			showTopBar={false}
+		>
 			<LI
 				padSides={true}
 				verticalDividerColour={palette('--card-border-supporting')}
@@ -268,6 +274,7 @@ export const BoostedCardLayout = ({
 	imageLoading,
 	aspectRatio,
 	isFirstRow,
+	isLastRow,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -276,6 +283,7 @@ export const BoostedCardLayout = ({
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
 	isFirstRow: boolean;
+	isLastRow: boolean;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -287,7 +295,11 @@ export const BoostedCardLayout = ({
 		liveUpdatesPosition,
 	} = decideCardProperties(card.boostLevel);
 	return (
-		<UL padBottom={true} hasLargeSpacing={true} showTopBar={!isFirstRow}>
+		<UL
+			showTopBar={!isFirstRow}
+			padBottom={!isLastRow}
+			hasLargeSpacing={!isLastRow}
+		>
 			<LI
 				padSides={true}
 				verticalDividerColour={palette('--card-border-supporting')}
@@ -333,6 +345,7 @@ export const StandardCardLayout = ({
 	isFirstRow,
 	isFirstStandardRow,
 	aspectRatio,
+	isLastRow,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -343,14 +356,15 @@ export const StandardCardLayout = ({
 	absoluteServerTimes: boolean;
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
+	isLastRow: boolean;
 }) => {
 	if (cards.length === 0) return null;
 
 	return (
 		<UL
 			direction="row"
-			padBottom={true}
-			hasLargeSpacing={true}
+			padBottom={!isLastRow}
+			hasLargeSpacing={!isLastRow}
 			showTopBar={!isFirstRow}
 			/** We use one full top bar for the first row and use a split one for subsequent rows */
 			splitTopBar={!isFirstStandardRow}
@@ -429,6 +443,7 @@ export const FlexibleGeneral = ({
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
+					isLastRow={cards.length === 0}
 				/>
 			)}
 
@@ -444,6 +459,7 @@ export const FlexibleGeneral = ({
 								imageLoading={imageLoading}
 								aspectRatio={aspectRatio}
 								isFirstRow={!splash.length && i === 0}
+								isLastRow={i === groupedCards.length - 1}
 							/>
 						);
 
@@ -460,6 +476,7 @@ export const FlexibleGeneral = ({
 								isFirstRow={!splash.length && i === 0}
 								isFirstStandardRow={i === 0}
 								aspectRatio={aspectRatio}
+								isLastRow={i === groupedCards.length - 1}
 							/>
 						);
 				}
