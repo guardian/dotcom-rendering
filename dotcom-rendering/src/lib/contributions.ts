@@ -14,14 +14,9 @@ import type { DCRTagPageType } from '../types/tagPage';
 // User Attributes API cookies (created on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
 export const RECURRING_CONTRIBUTOR_COOKIE = 'gu_recurring_contributor';
-export const ONE_OFF_CONTRIBUTION_DATE_COOKIE = 'gu_one_off_contribution_date';
 export const OPT_OUT_OF_ARTICLE_COUNT_COOKIE = 'gu_article_count_opt_out';
 
-// Support Frontend cookies (created when a contribution is made)
-export const SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE =
-	'gu.contributions.recurring.contrib-timestamp.Monthly';
-export const SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE =
-	'gu.contributions.recurring.contrib-timestamp.Annual';
+// Support Frontend cookie (created when a contribution is made)
 export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
 	'gu.contributions.contrib-timestamp';
 
@@ -61,86 +56,24 @@ export const hasSupporterCookie = (
 	}
 };
 
-// Determine if user is a recurring contributor by checking if they are signed in
-// AND have at least one of the relevant cookies.
-// We need to look at both User Attributes and Frontend Support cookies
-// as the former might not reflect the latest contributor status, since it's set upon signing in.
-// Frontend Support cookies are set when a contribution is made.
-export const isRecurringContributor = (isSignedIn: boolean): boolean => {
-	// Attributes cookie - we want this to have a specific value
-	const isRecurringContributorFromAttrs =
-		getCookie({ name: RECURRING_CONTRIBUTOR_COOKIE }) === 'true';
-
-	// Support cookies - we only care whether these exist
-	const hasMonthlyContributionCookie =
-		getCookie({
-			name: SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE,
-			shouldMemoize: true,
-		}) !== null;
-	const hasAnnualContributionCookie =
-		getCookie({
-			name: SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE,
-			shouldMemoize: true,
-		}) !== null;
-
-	return (
-		isSignedIn &&
-		(isRecurringContributorFromAttrs ||
-			hasMonthlyContributionCookie ||
-			hasAnnualContributionCookie)
-	);
-};
-
-// looks at attribute and support cookies
-// ONE_OFF_CONTRIBUTION_DATE_COOKIE (attributes cookie, when loggin in)
-// SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE (support cookie, when making one-off contribution)
-// Get the date of the latest one-off contribution by looking at the two relevant cookies
-// and returning a Unix epoch string of the latest date found.
+// looks at the SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE (set by support-frontend when making one-off contribution)
+// and returns a Unix epoch int of the date if it exists.
 export const getLastOneOffContributionTimestamp = (): number | undefined => {
-	// Attributes cookie - expects YYYY-MM-DD
-	const contributionDateFromAttributes = getCookie({
-		name: ONE_OFF_CONTRIBUTION_DATE_COOKIE,
-	});
-
 	// Support cookies - expects Unix epoch
 	const contributionDateFromSupport = getCookie({
 		name: SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
 	});
 
-	if (!contributionDateFromAttributes && !contributionDateFromSupport) {
+	if (!contributionDateFromSupport) {
 		return undefined;
 	}
 
-	// Parse dates into common format so they can be compared
-	const parsedDateFromAttributes = contributionDateFromAttributes
-		? Date.parse(contributionDateFromAttributes)
-		: 0;
+	// Parse dates into common a number
 	const parsedDateFromSupport = contributionDateFromSupport
 		? parseInt(contributionDateFromSupport, 10)
 		: 0;
 
-	// Return most recent date
-	// Condition only passed if 'parsedDateFromAttributes' is NOT NaN
-	if (parsedDateFromAttributes > parsedDateFromSupport) {
-		return parsedDateFromAttributes;
-	}
-
 	return parsedDateFromSupport || undefined; // This guards against 'parsedDateFromSupport' being NaN
-};
-
-export const getLastOneOffContributionDate = (): string | undefined => {
-	const timestamp = getLastOneOffContributionTimestamp();
-
-	if (isUndefined(timestamp)) {
-		return undefined;
-	}
-
-	const date = new Date(timestamp);
-	const year = date.getFullYear();
-	const month = (date.getMonth() + 1).toString().padStart(2, '0');
-	const day = date.getDate().toString().padStart(2, '0');
-
-	return `${year}-${month}-${day}`;
 };
 
 const dateDiffDays = (from: number, to: number): number => {
@@ -168,11 +101,7 @@ export const shouldHideSupportMessaging = (
 	if (hasCookie === 'Pending') {
 		return 'Pending';
 	} else {
-		return (
-			hasCookie ||
-			isRecurringContributor(isSignedIn) ||
-			isRecentOneOffContributor()
-		);
+		return hasCookie || isRecentOneOffContributor();
 	}
 };
 

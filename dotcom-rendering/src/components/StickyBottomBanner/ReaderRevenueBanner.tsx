@@ -16,7 +16,6 @@ import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import type { ArticleCounts } from '../../lib/articleCount';
 import {
-	getLastOneOffContributionDate,
 	getPurchaseInfo,
 	hasCmpConsentForBrowserId,
 	hasOptedOutOfArticleCount,
@@ -165,7 +164,6 @@ const buildPayload = async ({
 				: undefined,
 			purchaseInfo: getPurchaseInfo(),
 			isSignedIn,
-			lastOneOffContributionDate: getLastOneOffContributionDate(),
 			hasConsented: userConsent,
 			abandonedBasket: parseAbandonedBasket(
 				getCookie({ name: 'GU_CO_INCOMPLETE', shouldMemoize: true }),
