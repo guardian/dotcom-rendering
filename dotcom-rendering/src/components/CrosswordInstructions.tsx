@@ -16,12 +16,10 @@ const headerStyles = css`
 
 export const CrosswordInstructions = ({
 	instructions,
-	className,
 }: {
 	instructions: string;
-	className?: string;
 }) => (
-	<div css={instructionsStyles} className={className}>
+	<div css={instructionsStyles}>
 		<strong css={headerStyles}>Special instructions: </strong>
 		{instructions}
 	</div>

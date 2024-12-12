@@ -418,7 +418,6 @@ export const CrosswordLayout = (props: WebProps | AppsProps) => {
 										instructions={
 											article.crossword.instructions
 										}
-										css={maxWidth}
 									/>
 								</GridItem>
 							)}
