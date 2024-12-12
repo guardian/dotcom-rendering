@@ -18,14 +18,12 @@ const crosswordLinkStyles = css`
 
 export const CrosswordLinks = ({
 	crossword,
-	className,
 }: {
 	crossword: CrosswordProps['data'];
-	className?: string;
 }) => {
 	return (
 		isUndefined(crossword.pdf) || (
-			<span css={crosswordLinkStyles} className={className}>
+			<span css={crosswordLinkStyles}>
 				<a target="_blank" href={crossword.pdf} rel="noreferrer">
 					PDF version
 				</a>
