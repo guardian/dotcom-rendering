@@ -18,7 +18,6 @@ import {
 	handleArticleJson,
 	handleArticlePerfTest,
 	handleBlocks,
-	handleCrossword,
 	handleInteractive,
 } from './handler.article.web';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
@@ -68,7 +67,6 @@ export const prodServer = (): void => {
 	app.post('/AMPArticle', logRenderTime, handleAMPArticle);
 	app.post('/Interactive', logRenderTime, handleInteractive);
 	app.post('/AMPInteractive', logRenderTime, handleAMPArticle);
-	app.post('/Crossword', logRenderTime, handleCrossword);
 	app.post('/Blocks', logRenderTime, handleBlocks);
 	app.post('/Front', logRenderTime, handleFront);
 	app.post('/FrontJSON', logRenderTime, handleFrontJson);

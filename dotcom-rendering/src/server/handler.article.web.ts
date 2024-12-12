@@ -14,8 +14,12 @@ export const handleArticle: RequestHandler = ({ body }, res) => {
 
 	const frontendData = validateAsArticleType(body);
 	const article = enhanceArticleType(frontendData, 'Web');
+
+	const crosswordArticle =
+		article.frontendData.crossword && enhanceCrossword(article);
+
 	const { html, prefetchScripts } = renderHtml({
-		article,
+		article: crosswordArticle ?? article,
 	});
 
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
@@ -49,18 +53,6 @@ export const handleInteractive: RequestHandler = ({ body }, res) => {
 	const article = enhanceArticleType(frontendData, 'Web');
 	const { html, prefetchScripts } = renderHtml({
 		article,
-	});
-
-	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
-};
-
-export const handleCrossword: RequestHandler = ({ body }, res) => {
-	recordTypeAndPlatform('crossword', 'web');
-
-	const article = enhanceArticleType(body, 'Web');
-	const crosswordArticle = enhanceCrossword(article);
-	const { html, prefetchScripts } = renderHtml({
-		article: crosswordArticle,
 	});
 
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
