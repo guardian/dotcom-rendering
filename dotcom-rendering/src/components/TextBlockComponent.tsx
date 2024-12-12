@@ -17,7 +17,6 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
-import { decidePalette } from '../lib/decidePalette';
 import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
 import { palette as themePalette } from '../palette';
 import { logger } from '../server/lib/logging';
@@ -228,7 +227,7 @@ const styles = (format: ArticleFormat) => css`
 		border-radius: 50%;
 		height: ${remSpace[2]};
 		width: ${remSpace[2]};
-		background-color: ${decidePalette(format).background.bullet};
+		background-color: ${themePalette('--textblock-bullet-background')};
 	}
 
 	${until.tablet} {
