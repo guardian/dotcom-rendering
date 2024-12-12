@@ -125,13 +125,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 			separateArticleCount) &&
 		articleCounts.forTargetedWeeks >= 5;
 
-	return isTabletOrAbove ? (
-		<>
-			<div css={styles.guardianLogoContainer}>
-				<SvgGuardianLogo />
-			</div>
-		</>
-	) : (
+	return (
 		<div
 			css={styles.outerContainer(
 				templateSettings.containerSettings.backgroundColour,
@@ -145,6 +139,17 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					settings={templateSettings.closeButtonSettings}
 					styleOverides={styles.closeButtonOverrides}
 				/>
+
+				{isTabletOrAbove && (
+					<>
+						<div css={styles.containerOverrides}>
+							<div css={styles.guardianLogoContainer}>
+								<SvgGuardianLogo />
+							</div>
+						</div>
+					</>
+				)}
+
 				<div>
 					<DesignableBannerHeader
 						heading={content.mainContent.heading}
@@ -161,37 +166,45 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 							copy={separateArticleCountSettings?.copy}
 						/>
 					)}
-					<div>
-						<DesignableBannerBody
-							mainContent={content.mainContent}
-							mobileContent={content.mobileContent}
-							highlightedTextSettings={
-								templateSettings.highlightedTextSettings
-							}
-						/>
-					</div>
 				</div>
 				<div>
-					<ThreeTierChoiceCards
-						countryCode={countryCode}
-						selectedProduct={threeTierChoiceCardSelectedProduct}
-						setSelectedProduct={
-							setThreeTierChoiceCardSelectedProduct
-						}
-						variantOfChoiceCard={variantOfChoiceCard}
-					/>
-				</div>
-				<div css={styles.linkButtonContainer}>
-					<DesignableBannerCtas
-						mainOrMobileContent={mainOrMobileContent}
-						onPrimaryCtaClick={onCtaClick}
-						onSecondaryCtaClick={onSecondaryCtaClick}
-						primaryCtaSettings={templateSettings.primaryCtaSettings}
-						secondaryCtaSettings={
-							templateSettings.secondaryCtaSettings
+					<DesignableBannerBody
+						mainContent={content.mainContent}
+						mobileContent={content.mobileContent}
+						highlightedTextSettings={
+							templateSettings.highlightedTextSettings
 						}
 					/>
 				</div>
+				{!isTabletOrAbove && (
+					<>
+						<div>
+							<ThreeTierChoiceCards
+								countryCode={countryCode}
+								selectedProduct={
+									threeTierChoiceCardSelectedProduct
+								}
+								setSelectedProduct={
+									setThreeTierChoiceCardSelectedProduct
+								}
+								variantOfChoiceCard={variantOfChoiceCard}
+							/>
+						</div>
+						<div css={styles.linkButtonContainer}>
+							<DesignableBannerCtas
+								mainOrMobileContent={mainOrMobileContent}
+								onPrimaryCtaClick={onCtaClick}
+								onSecondaryCtaClick={onSecondaryCtaClick}
+								primaryCtaSettings={
+									templateSettings.primaryCtaSettings
+								}
+								secondaryCtaSettings={
+									templateSettings.secondaryCtaSettings
+								}
+							/>
+						</div>
+					</>
+				)}
 			</div>
 		</div>
 	);
@@ -226,6 +239,7 @@ const styles = {
 		flex-direction: column;
 		position: relative;
 		padding: 0 10px;
+		overflow: auto;
 
 		${from.tablet} {
 			display: grid;
@@ -235,6 +249,7 @@ const styles = {
 			width: 100%;
 			max-width: 1300px;
 			margin: 0 auto;
+			align-items: start;
 		}
 
 		${from.desktop} {
@@ -252,7 +267,7 @@ const styles = {
 		margin-top: ${space[3]}px;
 		grid-column: 2;
 		grid-row: 1;
-		justify-content: flex-end;
+		justify-content: end;
 	`,
 	linkButtonOverrides: css`
 		background-color: ${brandAlt[400]};
@@ -265,14 +280,11 @@ const styles = {
 		padding-top: ${space[3]}px;
 	`,
 	guardianLogoContainer: css`
-		display: none;
-		${from.tablet} {
-			display: block;
-			width: 100px;
-		}
+		width: 100px;
 		grid-column: 1;
 		grid-row: 1;
 		justify-self: start;
+		align-self: start;
 		padding-top: ${space[3]}px;
 		padding-left: ${space[3]}px;
 	`,
