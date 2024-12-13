@@ -50,8 +50,33 @@ const pillarPalette = (
 	}
 };
 
-const textblockTextLight: PaletteFunction = (format: ArticleFormat) => {
-	switch (format.design) {
+const textblockBulletLight: PaletteFunction = ({ theme, design }) => {
+	switch (theme) {
+		case Pillar.News: {
+			return design === ArticleDesign.Analysis
+				? sourcePalette.news[300]
+				: sourcePalette.news[400];
+		}
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle: {
+			return pillarPalette(theme, 400);
+		}
+		case ArticleSpecial.Labs: {
+			return sourcePalette.neutral[7];
+		}
+		case ArticleSpecial.SpecialReport: {
+			return sourcePalette.specialReport[300];
+		}
+		case ArticleSpecial.SpecialReportAlt: {
+			return sourcePalette.specialReportAlt[200];
+		}
+	}
+};
+
+const textblockTextLight: PaletteFunction = ({ design }) => {
+	switch (design) {
 		case ArticleDesign.Audio:
 			return sourcePalette.neutral[97];
 		default:
@@ -7138,6 +7163,10 @@ const paletteColours = {
 	'--tag-page-chevron': {
 		light: () => sourcePalette.neutral[0],
 		dark: () => sourcePalette.neutral[86],
+	},
+	'--textblock-bullet-background': {
+		light: textblockBulletLight,
+		dark: textblockBulletLight,
 	},
 	'--textblock-text': {
 		light: textblockTextLight,

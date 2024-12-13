@@ -86,22 +86,6 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 	}
 };
 
-const backgroundBullet = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport) {
-		return specialReport[300];
-	}
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
-		}
-	}
-	return pillarPalette[format.theme].main;
-};
-
 const backgroundBulletStandfirst = (format: ArticleFormat): string => {
 	if (
 		format.design === ArticleDesign.DeadBlog ||
@@ -425,7 +409,6 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 		background: {
 			analysisContrast: backgroundAnalysisContrastColour(),
 			analysisContrastHover: backgroundAnalysisContrastHoverColour(),
-			bullet: backgroundBullet(format),
 			bulletStandfirst: backgroundBulletStandfirst(format),
 			filterButton: backgroundFilterButton(),
 			filterButtonHover: backgroundFilterButtonHover(format),
