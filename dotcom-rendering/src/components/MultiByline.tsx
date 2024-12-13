@@ -116,7 +116,6 @@ const bylineStyles = (format: ArticleFormat) => css`
 		${subheadingStyles(format)}
 		color: ${palette('--link-kicker-text')};
 		text-decoration: none;
-		font-style: normal;
 		:hover {
 			text-decoration: underline;
 		}
@@ -124,7 +123,6 @@ const bylineStyles = (format: ArticleFormat) => css`
 	span[data-contributor-rel='author'] {
 		${subheadingStyles(format)}
 		color: ${palette('--multi-byline-non-linked-text')};
-		font-style: normal;
 	}
 `;
 
