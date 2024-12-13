@@ -21,7 +21,11 @@ export const hasMinimumBridgetVersion = (
 	getEnvironmentClient()
 		.nativeThriftPackageVersion()
 		.then((bridgetVersion) => {
-			return compare(bridgetVersion, requiredVersion, '>=');
+			return compare(
+				bridgetVersion.replace(/^v/i, ''),
+				requiredVersion.replace(/^v/i, ''),
+				'>=',
+			);
 		})
 		.catch((error) => {
 			console.log('nativeThriftPackageVersion', { error });

@@ -32,6 +32,8 @@ import { ContainerOverrides } from './ContainerOverrides';
 import { FormatBoundary } from './FormatBoundary';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
+import { getInteractionClient } from '../lib/bridgetApi';
+import { RenderingTarget } from 'src/types/renderingTarget';
 
 type Props = {
 	heading: string;
@@ -42,6 +44,7 @@ type Props = {
 	leftColSize: LeftColSize;
 	discussionApiUrl: string;
 	absoluteServerTimes: boolean;
+	renderingTarget: RenderingTarget;
 };
 
 type ArticleProps = Props & {
@@ -792,6 +795,7 @@ export const Carousel = ({
 	discussionApiUrl,
 	isOnwardContent = true,
 	absoluteServerTimes,
+	renderingTarget,
 	...props
 }: ArticleProps | FrontProps) => {
 	const carouselRef = useRef<HTMLUListElement>(null);
@@ -799,6 +803,8 @@ export const Carousel = ({
 	const [index, setIndex] = useState(0);
 	const [maxIndex, setMaxIndex] = useState(0);
 	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
+
+	const isApps = renderingTarget === 'Apps';
 
 	const arrowName = 'carousel-small-arrow';
 
@@ -907,6 +913,14 @@ export const Carousel = ({
 	// when index changes and compare it against the prior maxIndex only.
 	useEffect(() => setMaxIndex((m) => Math.max(index, m)), [index]);
 
+	const onTouchStart = async () => {
+		await getInteractionClient().disableArticleSwipe(true);
+	};
+
+	const onTouchEnd = async () => {
+		await getInteractionClient().disableArticleSwipe(false);
+	};
+
 	if (!isHorizontalScrollingSupported) {
 		return null;
 	}
@@ -974,6 +988,8 @@ export const Carousel = ({
 						ref={carouselRef}
 						data-component={`carousel-small | maxIndex-${maxIndex}`}
 						data-heatphan-type="carousel"
+						onTouchStart={isApps ? onTouchStart : undefined}
+						onTouchEnd={isApps ? onTouchEnd : undefined}
 					>
 						{trails.map((trail, i) => {
 							const {

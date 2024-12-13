@@ -53,6 +53,7 @@ import type {
 } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { useConfig } from '../components/ConfigContext';
 
 interface Props {
 	front: DCRFrontType;
@@ -134,6 +135,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		config: { isPaidContent, hasPageSkin: hasPageSkinConfig, pageId },
 		editionId,
 	} = front;
+
+	const { renderingTarget } = useConfig();
 
 	const renderAds = canRenderAds(front);
 
@@ -676,6 +679,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											absoluteServerTimes={
 												absoluteServerTimes
 											}
+											renderingTarget={renderingTarget}
 										/>
 									</Island>
 								</Section>

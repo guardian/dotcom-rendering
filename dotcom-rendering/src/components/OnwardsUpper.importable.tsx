@@ -14,6 +14,7 @@ import type { TagType } from '../types/tag';
 import { BigSixOnwardsContent } from './BigSixOnwardsContent';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
 import { Section } from './Section';
+import { RenderingTarget } from 'src/types/renderingTarget';
 
 type PillarForContainer =
 	| 'headlines'
@@ -181,6 +182,7 @@ type Props = {
 	shortUrlId: string;
 	discussionApiUrl: string;
 	absoluteServerTimes: boolean;
+	renderingTarget: RenderingTarget;
 };
 
 /**
@@ -215,6 +217,7 @@ export const OnwardsUpper = ({
 	shortUrlId,
 	discussionApiUrl,
 	absoluteServerTimes,
+	renderingTarget,
 }: Props) => {
 	const abTestAPI = useAB()?.api;
 	const isInOnwardsAbTestVariant = abTestAPI?.isUserInVariant(
@@ -329,6 +332,7 @@ export const OnwardsUpper = ({
 						format={format}
 						discussionApiUrl={discussionApiUrl}
 						absoluteServerTimes={absoluteServerTimes}
+						renderingTarget={renderingTarget}
 					/>
 				</Section>
 			)}
@@ -344,6 +348,7 @@ export const OnwardsUpper = ({
 						format={format}
 						discussionApiUrl={discussionApiUrl}
 						absoluteServerTimes={absoluteServerTimes}
+						renderingTarget={renderingTarget}
 					/>
 				</Section>
 			)}
