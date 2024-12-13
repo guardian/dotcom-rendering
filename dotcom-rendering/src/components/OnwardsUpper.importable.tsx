@@ -10,11 +10,11 @@ import { useAB } from '../lib/useAB';
 import { useIsHorizontalScrollingSupported } from '../lib/useIsHorizontalScrollingSupported';
 import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { BigSixOnwardsContent } from './BigSixOnwardsContent';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
 import { Section } from './Section';
-import { RenderingTarget } from 'src/types/renderingTarget';
 
 type PillarForContainer =
 	| 'headlines'

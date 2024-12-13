@@ -8,6 +8,7 @@ import {
 import { AdSlot } from '../components/AdSlot.web';
 import { AuEoy2024Wrapper } from '../components/AuEoy2024Wrapper.importable';
 import { Carousel } from '../components/Carousel.importable';
+import { useConfig } from '../components/ConfigContext';
 import { ContainerOverrides } from '../components/ContainerOverrides';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
@@ -53,7 +54,6 @@ import type {
 } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { useConfig } from '../components/ConfigContext';
 
 interface Props {
 	front: DCRFrontType;
