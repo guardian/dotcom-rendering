@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { from, headlineBold24, space } from '@guardian/source/foundations';
 import { decideFormat } from '../lib/articleFormat';
+import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { useApi } from '../lib/useApi';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
@@ -25,6 +26,8 @@ const containerStyles = css`
 
 	${from.leftCol} {
 		flex-direction: row;
+	}
+	${from.wide} {
 		padding-right: 80px;
 	}
 `;
@@ -57,7 +60,11 @@ const convertFETrailToDcrTrail = (
 		format: decideFormat(trail.format),
 		headline: trail.headline,
 		image: {
-			src: trail.masterImage ?? '',
+			src: trail.masterImage
+				? trail.masterImage
+				: trail.image
+				? getSourceImageUrl(trail.image)
+				: '',
 			altText: trail.linkText ?? '',
 		},
 		isExternalLink: false,
@@ -126,7 +133,7 @@ export const BigSixOnwardsContent = ({ url, discussionApiUrl }: Props) => {
 								imagePositionOnDesktop="right"
 								imagePositionOnMobile="top"
 								imageSize="large"
-								imageLoading="lazy"
+								imageLoading="eager"
 								linkTo={trail.url}
 								format={trail.format}
 								headlineText={trail.headline}
@@ -153,7 +160,7 @@ export const BigSixOnwardsContent = ({ url, discussionApiUrl }: Props) => {
 								imagePositionOnDesktop="top"
 								imagePositionOnMobile="left"
 								imageSize="small"
-								imageLoading="lazy"
+								imageLoading="eager"
 								linkTo={trail.url}
 								format={trail.format}
 								headlineText={trail.headline}
@@ -186,7 +193,7 @@ export const BigSixOnwardsContent = ({ url, discussionApiUrl }: Props) => {
 									imagePositionOnDesktop="top"
 									imagePositionOnMobile="left"
 									imageSize="small"
-									imageLoading="lazy"
+									imageLoading="eager"
 									linkTo={trail.url}
 									format={trail.format}
 									headlineText={trail.headline}
