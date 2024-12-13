@@ -25,7 +25,8 @@ export const useIsHorizontalScrollingSupported = (): boolean => {
 
 	useEffect(() => {
 		if (renderingTarget === 'Apps') {
-			hasMinimumBridgetVersion('8.1.1').then(
+			// TODO: update version after new bridget patch is published
+			hasMinimumBridgetVersion('8.1.0').then(
 				setHorizontalScrollingSupported,
 			);
 		}
