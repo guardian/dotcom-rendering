@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { AdSlot, labelStyles } from './AdSlot.web';
+import { AdSlot } from './AdSlot.web';
 import { useConfig } from './ConfigContext';
 import { DiscussionApps } from './DiscussionApps.importable';
 import { DiscussionMeta } from './DiscussionMeta.importable';
@@ -123,7 +123,6 @@ export const DiscussionLayout = ({
 										gap: 100vh;
 										height: 100%;
 									`,
-									labelStyles,
 								]}
 							>
 								<AdSlot

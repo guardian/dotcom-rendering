@@ -5,6 +5,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { slugify } from '../model/enhance-H2s';
 import { palette } from '../palette';
 import type { MiniProfile as MiniProfileModel } from '../types/content';
+import { Heading } from './Heading';
 import { headingLineStyles } from './KeyTakeaway';
 import { subheadingStyles } from './Subheading';
 
@@ -75,27 +76,36 @@ const headingMarginStyle = css`
 	margin-bottom: ${space[2]}px;
 `;
 
+const sectionedTitleStyle = css`
+	font-size: 1.5rem;
+`;
+
 interface MiniProfileProps {
 	miniProfile: MiniProfileModel;
 	format: ArticleFormat;
 	children: React.ReactNode;
+	sectioned: boolean;
 }
 
 export const MiniProfile = ({
 	miniProfile,
 	format,
 	children,
+	sectioned,
 }: MiniProfileProps) => {
 	return (
 		<>
 			<li css={miniProfileStyles} data-spacefinder-role="nested">
 				<hr css={headingLineStyles} />
-				<h3
+				<Heading
 					id={slugify(miniProfile.title)}
 					css={[subheadingStyles(format), headingMarginStyle]}
+					level={sectioned ? 3 : 2}
 				>
-					{miniProfile.title}
-				</h3>
+					<span css={sectioned && sectionedTitleStyle}>
+						{miniProfile.title}
+					</span>
+				</Heading>
 				<Bio html={miniProfile.bio} />
 				{children}
 				{miniProfile.endNote ? (
@@ -106,8 +116,16 @@ export const MiniProfile = ({
 	);
 };
 
+const containsText = (html: string) => {
+	const htmlWithoutTags = sanitise(html, {
+		allowedTags: [],
+		allowedAttributes: {},
+	});
+	return htmlWithoutTags.length > 0;
+};
+
 const Bio = ({ html }: { html?: string }) => {
-	if (!html) return null;
+	if (!html || !containsText(html)) return null;
 	const sanitizedHtml = sanitise(html, {});
 	return (
 		<>

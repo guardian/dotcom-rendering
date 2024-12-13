@@ -1,18 +1,15 @@
 import { css } from '@emotion/react';
 import {
+	between,
 	from,
-	height,
+	headlineBold28Object,
 	space,
 	textSansBold17Object,
 } from '@guardian/source/foundations';
-import type { ThemeButton } from '@guardian/source/react-components';
-import {
-	Button,
-	SvgChevronLeftSingle,
-	SvgChevronRightSingle,
-} from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { palette } from '../palette';
+import { CarouselNavigationButtons } from './CarouselNavigationButtons';
 
 type Props = {
 	children: React.ReactNode;
@@ -22,29 +19,21 @@ type Props = {
 };
 
 /**
- * This needs to match the `FrontSection` title font and is used to calculate
- * the negative margin that aligns the navigation buttons with the title.
+ * Primary and Secondary containers have different typographic styles for the
+ * titles. We get the font size and line height values for these from the
+ * typography presets so we can calculate the offset needed to align the
+ * navigation buttons with the title on tablet and desktop.
  */
-const titlePreset = textSansBold17Object;
+const primaryTitlePreset = headlineBold28Object;
+const secondaryTitlePreset = textSansBold17Object;
 
 /**
- * Grid sizing to calculate negative margin used to pull navigation buttons
- * out side of `FrontSection` container at `wide` breakpoint.
+ * Grid sizing values to calculate negative margin used to pull navigation
+ * buttons outside of container into the outer grid column at wide breakpoint.
  */
 const gridColumnWidth = 60;
 const gridGap = 20;
-
-const themeButton: Partial<ThemeButton> = {
-	borderTertiary: palette('--carousel-chevron-border'),
-	textTertiary: palette('--carousel-chevron'),
-	backgroundTertiaryHover: palette('--carousel-chevron-hover'),
-};
-
-const themeButtonDisabled: Partial<ThemeButton> = {
-	borderTertiary: palette('--carousel-chevron-border-disabled'),
-	textTertiary: palette('--carousel-chevron-disabled'),
-	backgroundTertiaryHover: 'transparent',
-};
+const gridGapMobile = 10;
 
 /**
  * On mobile the carousel extends into the outer margins to use the full width
@@ -58,28 +47,18 @@ const themeButtonDisabled: Partial<ThemeButton> = {
  */
 const containerStyles = css`
 	position: relative;
-	margin-left: -10px;
-	margin-right: -10px;
+	margin-left: -${gridGapMobile}px;
+	margin-right: -${gridGapMobile}px;
 	${from.mobileLandscape} {
-		margin-left: -20px;
-		margin-right: -20px;
+		margin-left: -${gridGap}px;
+		margin-right: -${gridGap}px;
 	}
 	${from.tablet} {
-		margin-left: 10px;
-		margin-right: 10px;
+		margin-left: ${gridGap / 2}px;
+		margin-right: ${gridGap / 2}px;
 	}
 	${from.leftCol} {
 		margin-left: 0;
-		::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			width: 1px;
-			background-color: ${palette('--card-border-top')};
-			transform: translateX(-50%);
-		}
 	}
 `;
 
@@ -107,23 +86,22 @@ const containerWithNavigationStyles = css`
 	 * down so it starts below the navigation buttons and gap, and aligns with
 	 * the top of the carousel.
 	 */
-	${from.tablet} {
-		margin-top: calc(
-			(-${titlePreset.fontSize} * ${titlePreset.lineHeight}) -
-				${space[3]}px
-		);
-	}
-	${from.leftCol} {
-		margin-top: 0;
-		::before {
-			top: ${height.ctaSmall + space[2]}px;
+	${between.tablet.and.leftCol} {
+		[data-container-level='Primary'] & {
+			margin-top: calc(
+				-${primaryTitlePreset.fontSize} * ${primaryTitlePreset.lineHeight} -
+					${space[3]}px
+			);
+		}
+		[data-container-level='Secondary'] & {
+			margin-top: calc(
+				-${secondaryTitlePreset.fontSize} * ${secondaryTitlePreset.lineHeight} -
+					${space[3]}px
+			);
 		}
 	}
 	${from.wide} {
-		margin-right: calc(${space[2]}px - ${gridColumnWidth}px - ${gridGap}px);
-		::before {
-			top: 0;
-		}
+		margin-right: -${gridColumnWidth + gridGap / 2}px;
 	}
 `;
 
@@ -134,6 +112,7 @@ const carouselStyles = css`
 	grid-auto-flow: column;
 	gap: 20px;
 	overflow-x: auto;
+	overflow-y: hidden;
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	overscroll-behavior: contain auto;
@@ -146,13 +125,13 @@ const carouselStyles = css`
 	}
 	scrollbar-width: none; /* Firefox */
 
-	padding-left: 10px;
-	padding-right: 10px;
-	scroll-padding-left: 10px;
+	padding-left: ${gridGapMobile}px;
+	padding-right: ${gridGapMobile}px;
+	scroll-padding-left: ${gridGapMobile}px;
 	${from.mobileLandscape} {
-		padding-left: 20px;
-		padding-right: 20px;
-		scroll-padding-left: 20px;
+		padding-left: ${gridGap}px;
+		padding-right: ${gridGap}px;
+		scroll-padding-left: ${gridGap}px;
 	}
 	${from.tablet} {
 		padding-left: 0;
@@ -160,17 +139,8 @@ const carouselStyles = css`
 		scroll-padding-left: 0;
 	}
 	${from.leftCol} {
-		padding-left: 10px;
-		scroll-padding-left: 10px;
-	}
-`;
-
-const buttonStyles = css`
-	display: none;
-	${from.tablet} {
-		display: flex;
-		gap: ${space[1]}px;
-		margin-left: auto;
+		padding-left: ${gridGap / 2}px;
+		scroll-padding-left: ${gridGap / 2}px;
 	}
 `;
 
@@ -225,7 +195,7 @@ const generateCarouselColumnStyles = (
 			${totalCards},
 			calc(
 				(100% / ${visibleCardsOnMobile}) - ${offsetPeepingCardWidth}px +
-					${10 / visibleCardsOnMobile}px
+					${gridGapMobile / visibleCardsOnMobile}px
 			)
 		);
 		${from.mobileLandscape} {
@@ -234,7 +204,7 @@ const generateCarouselColumnStyles = (
 				calc(
 					(100% / ${visibleCardsOnMobile}) -
 						${offsetPeepingCardWidth}px +
-						${20 / visibleCardsOnMobile}px
+						${gridGap / visibleCardsOnMobile}px
 				)
 			);
 		}
@@ -278,9 +248,9 @@ export const ScrollableCarousel = ({
 	 * Updates state of navigation buttons based on carousel's scroll position.
 	 *
 	 * This function checks the current scroll position of the carousel and sets
-	 * the styles of the previous and next buttons accordingly. The previous
-	 * button is disabled if the carousel is at the start, and the next button
-	 * is disabled if the carousel is at the end.
+	 * the styles of the previous and next buttons accordingly. The button state
+	 * is toggled when the midpoint of the first or last card has been scrolled
+	 * in or out of view.
 	 */
 	const updateButtonVisibilityOnScroll = () => {
 		const carouselElement = carouselRef.current;
@@ -289,9 +259,27 @@ export const ScrollableCarousel = ({
 		const scrollLeft = carouselElement.scrollLeft;
 		const maxScrollLeft =
 			carouselElement.scrollWidth - carouselElement.clientWidth;
+		const cardWidth = carouselElement.querySelector('li')?.offsetWidth ?? 0;
 
-		setPreviousButtonEnabled(scrollLeft > 0);
-		setNextButtonEnabled(scrollLeft < maxScrollLeft);
+		setPreviousButtonEnabled(scrollLeft > cardWidth / 2);
+		setNextButtonEnabled(scrollLeft < maxScrollLeft - cardWidth / 2);
+	};
+
+	/**
+	 * Throttle scroll events to optimise performance. As we're only using this
+	 * to toggle button state as the carousel is scrolled we don't need to
+	 * handle every event. This function ensures the callback is only called
+	 * once every 200ms, no matter how many scroll events are fired.
+	 */
+	const throttleEvent = (callback: () => void) => {
+		let isThrottled: boolean = false;
+		return function () {
+			if (!isThrottled) {
+				callback();
+				isThrottled = true;
+				setTimeout(() => (isThrottled = false), 200);
+			}
+		};
 	};
 
 	useEffect(() => {
@@ -300,13 +288,13 @@ export const ScrollableCarousel = ({
 
 		carouselElement.addEventListener(
 			'scroll',
-			updateButtonVisibilityOnScroll,
+			throttleEvent(updateButtonVisibilityOnScroll),
 		);
 
 		return () => {
 			carouselElement.removeEventListener(
 				'scroll',
-				updateButtonVisibilityOnScroll,
+				throttleEvent(updateButtonVisibilityOnScroll),
 			);
 		};
 	}, []);
@@ -332,44 +320,22 @@ export const ScrollableCarousel = ({
 			>
 				{children}
 			</ol>
-			{showNavigation && (
-				<div css={buttonStyles}>
-					<Button
-						hideLabel={true}
-						iconSide="left"
-						icon={<SvgChevronLeftSingle />}
-						onClick={() => scrollTo('left')}
-						priority="tertiary"
-						theme={
-							previousButtonEnabled
-								? themeButton
-								: themeButtonDisabled
-						}
-						size="small"
-						disabled={!previousButtonEnabled}
-						// TODO
-						// aria-label="Move stories backwards"
-						// data-link-name="container left chevron"
-					/>
 
-					<Button
-						hideLabel={true}
-						iconSide="left"
-						icon={<SvgChevronRightSingle />}
-						onClick={() => scrollTo('right')}
-						priority="tertiary"
-						theme={
-							nextButtonEnabled
-								? themeButton
-								: themeButtonDisabled
-						}
-						size="small"
-						disabled={!nextButtonEnabled}
-						// TODO
-						// aria-label="Move stories forwards"
-						// data-link-name="container right chevron"
-					/>
-				</div>
+			{showNavigation && (
+				<CarouselNavigationButtons
+					previousButtonEnabled={previousButtonEnabled}
+					nextButtonEnabled={nextButtonEnabled}
+					onClickPreviousButton={() => scrollTo('left')}
+					onClickNextButton={() => scrollTo('right')}
+					dataLinkNamePreviousButton={nestedOphanComponents(
+						'carousel',
+						'previous-button',
+					)}
+					dataLinkNameNextButton={nestedOphanComponents(
+						'carousel',
+						'next-button',
+					)}
+				/>
 			)}
 		</div>
 	);

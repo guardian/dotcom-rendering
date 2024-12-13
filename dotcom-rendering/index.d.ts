@@ -1,170 +1,3 @@
-type SharePlatform =
-	| 'facebook'
-	| 'twitter'
-	| 'email'
-	| 'whatsApp'
-	| 'linkedIn'
-	| 'messenger';
-
-// shared type declarations
-
-interface AdTargetParam {
-	name: string;
-	value: string | string[];
-}
-
-type CustomParams = {
-	sens: 't' | 'f';
-	urlkw: string[];
-	[key: string]: string | string[] | number | number[] | boolean | boolean[];
-};
-
-type AdTargeting =
-	| {
-			adUnit: string;
-			customParams: CustomParams;
-			disableAds?: false;
-	  }
-	| {
-			disableAds: true;
-	  };
-
-interface SectionNielsenAPI {
-	name: string;
-	apiID: string;
-}
-
-interface ReaderRevenueCategories {
-	contribute: string;
-	subscribe: string;
-	support: string;
-	supporter: string;
-	gifting?: string;
-}
-
-interface ReaderRevenuePositions {
-	header: ReaderRevenueCategories;
-	footer: ReaderRevenueCategories;
-	sideMenu: ReaderRevenueCategories;
-	ampHeader: ReaderRevenueCategories;
-	ampFooter: ReaderRevenueCategories;
-}
-
-type ReaderRevenuePosition = keyof ReaderRevenuePositions;
-
-interface MembershipPlaceholder {
-	campaignCode?: string;
-}
-
-interface Attributes {
-	pinned: boolean;
-	summary: boolean;
-	keyEvent: boolean;
-	membershipPlaceholder?: MembershipPlaceholder;
-}
-
-interface BlockContributor {
-	name: string;
-	imageUrl?: string;
-	largeImageUrl?: string;
-}
-
-interface Block {
-	id: string;
-	elements: import('./src/types/content').FEElement[];
-	attributes: Attributes;
-	blockCreatedOn?: number;
-	blockCreatedOnDisplay?: string;
-	blockLastUpdated?: number;
-	blockLastUpdatedDisplay?: string;
-	title?: string;
-	blockFirstPublished?: number;
-	blockFirstPublishedDisplay?: string;
-	blockFirstPublishedDisplayNoTimezone?: string;
-	primaryDateLine: string;
-	secondaryDateLine: string;
-	createdOn?: number;
-	createdOnDisplay?: string;
-	lastUpdated?: number;
-	lastUpdatedDisplay?: string;
-	firstPublished?: number;
-	firstPublishedDisplay?: string;
-	contributors?: BlockContributor[];
-}
-
-interface Pagination {
-	currentPage: number;
-	totalPages: number;
-	newest?: string;
-	newer?: string;
-	oldest?: string;
-	older?: string;
-}
-
-type ContentType =
-	| 'article'
-	| 'network'
-	| 'section'
-	| 'imageContent'
-	| 'interactive'
-	| 'gallery'
-	| 'video'
-	| 'audio'
-	| 'liveBlog'
-	| 'tag'
-	| 'index'
-	| 'crossword'
-	| 'survey'
-	| 'signup'
-	| 'userid';
-
-type StageType = 'DEV' | 'CODE' | 'PROD';
-
-type CardImageType = 'picture' | 'avatar' | 'crossword' | 'slideshow' | 'video';
-
-type SmallHeadlineSize =
-	| 'tiny'
-	| 'small'
-	| 'medium'
-	| 'large'
-	| 'huge'
-	| 'ginormous';
-
-type MediaType = 'Video' | 'Audio' | 'Gallery';
-
-type LeftColSize = 'compact' | 'wide';
-
-type UserBadge = {
-	name: string;
-};
-
-// ------------
-// Liveblogs //
-// ------------
-type LiveUpdateType = {
-	numNewBlocks: number;
-	html: string;
-	mostRecentBlockId: string;
-};
-
-// ------------
-// RichLinks //
-// ------------
-type RichLinkCardType =
-	| 'special-report'
-	| 'live'
-	| 'dead'
-	| 'feature'
-	| 'editorial'
-	| 'comment'
-	| 'podcast'
-	| 'media'
-	| 'analysis'
-	| 'review'
-	| 'letters'
-	| 'external'
-	| 'news';
-
 // ------------------------------
 // 3rd party type declarations //
 // ------------------------------
@@ -179,6 +12,59 @@ declare module 'dynamic-import-polyfill' {
 		modulePath?: string;
 		importFunctionName?: string;
 	}) => void;
+}
+
+declare module '@guardian/react-crossword' {
+	import type { FC } from 'react';
+
+	export type Cell = {
+		number: number;
+		value: string;
+	};
+
+	export type Clue = {
+		id: string;
+		number: number;
+		humanNumber: string;
+		direction: 'across' | 'down';
+		position: { x: number; y: number };
+		separatorLocations: {
+			','?: number[];
+			'-'?: number[];
+		};
+		length: number;
+		clue: string;
+		group: string[];
+		solution?: string;
+		format?: string;
+	};
+
+	export type CrosswordProps = {
+		id: string;
+		data: {
+			id?: string;
+			number: number;
+			name: string;
+			date: string;
+			dimensions: { cols: number; rows: number };
+			entries: Clue[];
+			solutionAvailable: boolean;
+			hasNumbers: boolean;
+			randomCluesOrdering: boolean;
+			instructions?: string;
+			creator?: { name: string; webUrl: string };
+			pdf?: string;
+			annotatedSolution?: string;
+			dateSolutionAvailable: string;
+		};
+		onCorrect?: (cell: Cell) => void;
+		onLoaded?: () => void;
+	};
+
+	const Crossword: FC<CrosswordProps>;
+
+	// eslint-disable-next-line import/no-default-export -- react-crossword uses default exports
+	export default Crossword;
 }
 
 // SVG handling
@@ -254,6 +140,10 @@ declare namespace JSX {
 		 * on components that have the `data-link-name` attribute.
 		 * To avoid race conditions, it is best to add this attribute only
 		 * to server-rendered HTML.
+		 *
+		 * Some elements are not trackable, e.g. `div`, `span`.
+		 * Refer to the Ophan documentation for more information.
+		 * https://github.com/guardian/ophan/blob/0f365862682cd97cc50cf381299e0f4875e2996c/tracker-js/src/click-path-capture.js
 		 *
 		 * Add `data-component="component-name"` to the element you want
 		 * to track. Then `add data-link-name="link-name"` to the anchor for which

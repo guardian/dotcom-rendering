@@ -7,6 +7,7 @@ import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../lib/useCommentCount';
 import { palette } from '../palette';
 import type { StarRating as Rating } from '../types/content';
 import type {
+	AspectRatio,
 	DCRContainerPalette,
 	DCRFrontImage,
 	DCRSupportingContent,
@@ -22,7 +23,7 @@ import type {
 import { TrailText } from './Card/components/TrailText';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from './CardHeadline';
-import type { AspectRatio, Loading } from './CardPicture';
+import type { Loading } from './CardPicture';
 import { CardPicture } from './CardPicture';
 import { ContainerOverrides } from './ContainerOverrides';
 import { FormatBoundary } from './FormatBoundary';
@@ -115,6 +116,14 @@ const hoverStyles = css`
 	}
 `;
 
+/**
+ * Image mask gradient has additional colour stops to emulate a non-linear
+ * ease in / ease out curve to make the transition smoother. Values were
+ * generated with https://non-boring-gradients.netlify.app and manually
+ * optimised. (Opacity values have been rounded and the number of colour stops
+ * reduced.) The following article has more detail on non-linear gradients:
+ * https://css-tricks.com/easing-linear-gradients/
+ */
 const overlayStyles = css`
 	position: absolute;
 	bottom: 0;
@@ -124,9 +133,21 @@ const overlayStyles = css`
 	flex-direction: column;
 	justify-content: flex-start;
 	flex-grow: 1;
-	padding: ${space[2]}px;
-	row-gap: ${space[2]}px;
-	backdrop-filter: blur(12px) brightness(0.7);
+	gap: ${space[1]}px;
+	padding: 64px ${space[2]}px ${space[2]}px;
+	mask-image: linear-gradient(
+		180deg,
+		transparent 0px,
+		rgba(0, 0, 0, 0.0381) 8px,
+		rgba(0, 0, 0, 0.1464) 16px,
+		rgba(0, 0, 0, 0.3087) 24px,
+		rgba(0, 0, 0, 0.5) 32px,
+		rgba(0, 0, 0, 0.6913) 40px,
+		rgba(0, 0, 0, 0.8536) 48px,
+		rgba(0, 0, 0, 0.9619) 56px,
+		rgb(0, 0, 0) 64px
+	);
+	backdrop-filter: blur(12px) brightness(0.5);
 `;
 
 const starRatingWrapper = css`
@@ -135,6 +156,10 @@ const starRatingWrapper = css`
 	margin-top: ${space[1]}px;
 	display: inline-block;
 	width: fit-content;
+`;
+
+const trailTextWrapper = css`
+	margin-top: ${space[3]}px;
 `;
 
 const getMedia = ({
@@ -188,7 +213,6 @@ const CardAge = ({
 				isWithinTwelveHours: withinTwelveHours,
 			}}
 			showClock={showClock}
-			isOnwardContent={false}
 			absoluteServerTimes={absoluteServerTimes}
 			isTagPage={false}
 			colour={palette('--feature-card-footer-text')}
@@ -217,7 +241,7 @@ const CommentCount = ({
 			href={`${linkTo}#comments`}
 			cssOverrides={css`
 				/* See: https://css-tricks.com/nested-links/ */
-				${getZIndex('card-nested-link')}
+				z-index: ${getZIndex('card-nested-link')};
 				/* The following styles turn off those provided by Link */
 				color: inherit;
 				/* stylelint-disable-next-line property-disallowed-list */
@@ -232,7 +256,6 @@ const CommentCount = ({
 				<CardCommentCount
 					discussionApiUrl={discussionApiUrl}
 					discussionId={discussionId}
-					isOnwardContent={false}
 					colour={palette('--feature-card-footer-text')}
 				/>
 			</Island>
@@ -311,6 +334,9 @@ export const FeatureCard = ({
 							<div
 								css={css`
 									position: relative;
+									background-color: ${palette(
+										'--feature-card-background',
+									)};
 									img {
 										width: 100%;
 										display: block;
@@ -376,33 +402,42 @@ export const FeatureCard = ({
 								<div className="image-overlay" />
 
 								<div css={overlayStyles}>
-									<CardHeadline
-										headlineText={headlineText}
-										format={format}
-										fontSizes={headlineSizes}
-										showQuotes={showQuotes}
-										kickerText={
-											format.design ===
-												ArticleDesign.LiveBlog &&
-											!kickerText
-												? 'Live'
-												: kickerText
-										}
-										showPulsingDot={
-											format.design ===
-												ArticleDesign.LiveBlog ||
-											showPulsingDot
-										}
-										byline={byline}
-										showByline={showByline}
-										isExternalLink={isExternalLink}
-										headlineColour={palette(
-											'--feature-card-headline',
-										)}
-										kickerColour={palette(
-											'--feature-card-kicker-text',
-										)}
-									/>
+									{/**
+									 * Without the wrapping div the headline and
+									 * byline would have space inserted between
+									 * them due to being direct children of the
+									 * flex container
+									 */}
+									<div>
+										<CardHeadline
+											headlineText={headlineText}
+											format={format}
+											fontSizes={headlineSizes}
+											showQuotes={showQuotes}
+											kickerText={
+												format.design ===
+													ArticleDesign.LiveBlog &&
+												!kickerText
+													? 'Live'
+													: kickerText
+											}
+											showPulsingDot={
+												format.design ===
+													ArticleDesign.LiveBlog ||
+												showPulsingDot
+											}
+											byline={byline}
+											showByline={showByline}
+											isExternalLink={isExternalLink}
+											headlineColour={palette(
+												'--feature-card-headline',
+											)}
+											kickerColour={palette(
+												'--feature-card-kicker-text',
+											)}
+											isBetaContainer={true}
+										/>
+									</div>
 
 									{starRating !== undefined ? (
 										<div css={starRatingWrapper}>
@@ -414,13 +449,16 @@ export const FeatureCard = ({
 									) : null}
 
 									{!!trailText && (
-										<TrailText
-											trailText={trailText}
-											trailTextColour={palette(
-												'--feature-card-trail-text',
-											)}
-											trailTextSize={'regular'}
-										/>
+										<div css={trailTextWrapper}>
+											<TrailText
+												trailText={trailText}
+												trailTextColour={palette(
+													'--feature-card-trail-text',
+												)}
+												trailTextSize={'regular'}
+												padBottom={false}
+											/>
+										</div>
 									)}
 
 									<CardFooter
@@ -471,7 +509,9 @@ export const FeatureCard = ({
 						<SupportingContent
 							supportingContent={supportingContent}
 							containerPalette={containerPalette}
-							alignment={'vertical'}
+							alignment="vertical"
+							fillBackgroundOnDesktop={true}
+							fillBackgroundOnMobile={true}
 						/>
 					)}
 				</div>

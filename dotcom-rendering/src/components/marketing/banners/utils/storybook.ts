@@ -9,7 +9,7 @@ import type {
 	ConfigurableDesign,
 	HexColour,
 	Tracking,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
+} from '@guardian/support-dotcom-components/dist/shared/types';
 
 export const tracking: Tracking = {
 	ophanPageId: 'kbluzw2csbf83eabedel',
@@ -69,6 +69,17 @@ export const mobileContentNoHeading = {
 export const mobileContentWithHeading = {
 	...mobileContentNoHeading,
 	heading: 'Show your support for reader-funded journalism',
+};
+
+export const reducedBodyCopy = {
+	heading: 'Lorem ipsum dolor sit amet, et lorem.', // Max 40 characters. Example is 37 characters.
+	paragraphs: [
+		'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
+	], //Max 180 charcters this example is 175ish
+	cta: {
+		text: 'Continue',
+		baseUrl: 'https://support.theguardian.com/contribute/one-off',
+	},
 };
 
 const hexColourStringRegex = /^([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})$/i;

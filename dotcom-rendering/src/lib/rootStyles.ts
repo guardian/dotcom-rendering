@@ -3,7 +3,8 @@ import {
 	focusHalo,
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
-import { paletteDeclarations } from '../palette';
+import { paletteDeclarations } from '../paletteDeclarations';
+import { rootAdStyles } from './adStyles';
 import type { ArticleFormat } from './articleFormat';
 
 /**
@@ -49,8 +50,5 @@ export const rootStyles = (
 		color: ${sourcePalette.neutral[7]};
 	}
 
-	.ad-slot-container {
-		/* prevent third-party code from breaking our layout */
-		max-width: 100vw;
-	}
+	${rootAdStyles}
 `;

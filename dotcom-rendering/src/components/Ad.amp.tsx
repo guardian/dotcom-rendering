@@ -2,7 +2,11 @@ import { adJson, stringify } from '../lib/ad-json.amp';
 import type { EditionId } from '../lib/edition';
 import type { AdType } from '../lib/real-time-config.amp';
 import { realTimeConfig } from '../lib/real-time-config.amp';
-import type { CommercialProperties } from '../types/commercial';
+import type {
+	AdTargeting,
+	AdTargetParam,
+	CommercialProperties,
+} from '../types/commercial';
 
 // Largest size first
 const inlineSizes = [

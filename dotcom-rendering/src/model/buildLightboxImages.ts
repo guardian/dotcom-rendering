@@ -1,6 +1,6 @@
-import { randomUUID } from 'node:crypto';
 import { isUndefined } from '@guardian/libs';
 import { getLargest, getMaster } from '../lib/image';
+import type { Block } from '../types/blocks';
 import type {
 	CartoonBlockElement,
 	FEElement,
@@ -114,6 +114,13 @@ const getImages = (
 			return element.items.flatMap((item) =>
 				item.elements.flatMap(getImages),
 			);
+		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
+			return element.sections.flatMap((section) =>
+				section.events.flatMap((event) =>
+					event.body.flatMap(getImages),
+				),
+			);
+
 		default:
 			return [];
 	}
@@ -169,8 +176,8 @@ export const buildLightboxImages = (
 	// we deduplicate the array here
 	return [
 		...new Map(
-			lightboxImages.map<[string, ImageForLightbox]>((image) => [
-				decideImageId(image) ?? randomUUID(),
+			lightboxImages.map<[string, ImageForLightbox]>((image, index) => [
+				decideImageId(image) ?? `lightbox-image-id-${index}`,
 				image,
 			]),
 		).values(),

@@ -5,8 +5,6 @@ import {
 	headlineMedium14,
 	headlineMedium17,
 	headlineMedium20,
-	headlineMediumItalic14,
-	headlineMediumItalic20,
 	textSans17,
 	textSansBold12,
 	textSansBold15,
@@ -20,7 +18,8 @@ import {
 import { getSoleContributor, isContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
 import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
-import type { StarRating as Rating } from '../types/content';
+import type { ContentType, StarRating as Rating } from '../types/content';
+import type { RichLinkCardType } from '../types/layout';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { FormatBoundary } from './FormatBoundary';
@@ -106,10 +105,10 @@ const labsTitleStyles = css`
 
 const bylineStyles = css`
 	color: ${themePalette('--rich-link-text')};
-	${headlineMediumItalic14};
+	${headlineMedium14};
 
 	${from.wide} {
-		${headlineMediumItalic20};
+		${headlineMedium20};
 	}
 `;
 
@@ -266,7 +265,7 @@ export const RichLink = ({
 							</div>
 
 							{isOpinion && byline !== '' && (
-								<div css={bylineStyles}>{byline}</div>
+								<div css={[bylineStyles]}>{byline}</div>
 							)}
 
 							{!isUndefined(starRating) ? (

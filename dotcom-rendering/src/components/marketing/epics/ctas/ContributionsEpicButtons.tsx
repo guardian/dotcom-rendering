@@ -11,11 +11,11 @@ import {
 	countryCodeToCountryGroupId,
 	SecondaryCtaType,
 } from '@guardian/support-dotcom-components';
-import type { EpicVariant } from '@guardian/support-dotcom-components/dist/shared/src/types/abTests/epic';
+import type { EpicVariant } from '@guardian/support-dotcom-components/dist/shared/types/abTests/epic';
 import type {
 	Cta,
 	Tracking,
-} from '@guardian/support-dotcom-components/dist/shared/src/types/props/shared';
+} from '@guardian/support-dotcom-components/dist/shared/types/props/shared';
 import { useEffect } from 'react';
 import { useIsInView } from '../../../../lib/useIsInView';
 import { hasSetReminder } from '../../lib/reminders';

@@ -5,7 +5,7 @@ import {
 	space,
 	textSans34,
 } from '@guardian/source/foundations';
-import { Standard } from '../../fixtures/generated/dcr-articles/Standard';
+import { Standard } from '../../fixtures/generated/fe-articles/Standard';
 import { Pillar } from '../lib/articleFormat';
 import { editionList } from '../lib/edition';
 import { extractNAV } from '../model/extract-nav';
@@ -45,12 +45,10 @@ export const Footers = () => (
 				</h1>
 				<Wrapper>
 					<Footer
-						pageFooter={Standard.frontendData.pageFooter}
+						pageFooter={Standard.pageFooter}
 						selectedPillar={Pillar.News}
-						pillars={extractNAV(Standard.frontendData.nav).pillars}
-						urls={
-							Standard.frontendData.nav.readerRevenueLinks.header
-						}
+						pillars={extractNAV(Standard.nav).pillars}
+						urls={Standard.nav.readerRevenueLinks.header}
 						editionId={editionId}
 					/>
 				</Wrapper>

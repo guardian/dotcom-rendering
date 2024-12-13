@@ -13,6 +13,7 @@ import { useEffect, useRef, useState } from 'react';
 import { formatAttrString } from '../lib/formatAttrString';
 import { getZIndex } from '../lib/getZIndex';
 import type { Newsletter } from '../types/content';
+import type { LeftColSize } from '../types/layout';
 import type { OnwardsSource } from '../types/onwards';
 import { LI } from './Card/components/LI';
 import { Hide } from './Hide';
@@ -188,7 +189,7 @@ const buttonContainerStyle = css`
 	flex-direction: column;
 	justify-content: center;
 	position: absolute;
-	${getZIndex('onwardsCarousel')}
+	z-index: ${getZIndex('onwardsCarousel')};
 	height: 100%;
 	padding-bottom: 36px; /* Align buttons centrally with cards */
 

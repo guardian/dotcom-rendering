@@ -1,3 +1,4 @@
+import type { ABTestAPI } from '@guardian/ab-core';
 import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import type { DailyArticle } from '../lib/dailyArticleCount';
@@ -7,6 +8,76 @@ import { useAB } from '../lib/useAB';
 import { ExpandableMarketingCard } from './ExpandableMarketingCard';
 import { ExpandableMarketingCardSwipeable } from './ExpandableMarketingCardSwipeable';
 import { Hide } from './Hide';
+
+export type UsBannerTestVariantName =
+	| 'variant-free'
+	| 'variant-bubble'
+	| 'variant-billionaire';
+
+type Variant = {
+	heading: string;
+	kicker: string;
+};
+
+const variantFree: Variant = {
+	heading: 'Yes, this story is free',
+	kicker: 'Why the Guardian has no paywall',
+};
+const variantBubble: Variant = {
+	heading: 'Pop your US news bubble',
+	kicker: 'How the Guardian is different',
+};
+const variantBillionaire: Variant = {
+	heading: 'No billionaire approved this',
+	kicker: 'How the Guardian is different',
+};
+
+const getVariant = (
+	abTestAPI: ABTestAPI | undefined,
+): UsBannerTestVariantName | null => {
+	if (!abTestAPI) {
+		return null;
+	}
+
+	const isInVariantFree = abTestAPI.isUserInVariant(
+		'UsaExpandableMarketingCard',
+		'variant-free',
+	);
+	const isInVariantBubble = abTestAPI.isUserInVariant(
+		'UsaExpandableMarketingCard',
+		'variant-bubble',
+	);
+	const isInVariantBillionaire = abTestAPI.isUserInVariant(
+		'UsaExpandableMarketingCard',
+		'variant-billionaire',
+	);
+
+	if (isInVariantFree) {
+		return 'variant-free';
+	}
+
+	if (isInVariantBubble) {
+		return 'variant-bubble';
+	}
+
+	if (isInVariantBillionaire) {
+		return 'variant-billionaire';
+	}
+
+	return null;
+};
+
+const getVariantCopy = (variant: UsBannerTestVariantName): Variant => {
+	if (variant === 'variant-free') {
+		return variantFree;
+	}
+
+	if (variant === 'variant-bubble') {
+		return variantBubble;
+	}
+
+	return variantBillionaire;
+};
 
 const isFirstOrSecondArticle = () => {
 	const [dailyCount = {} as DailyArticle] = getDailyArticleCount() ?? [];
@@ -40,15 +111,7 @@ export const ExpandableMarketingCardWrapper = ({ guardianBaseURL }: Props) => {
 	const [isApplicableUser, setIsApplicableUser] = useState(false);
 
 	const abTestAPI = useAB()?.api;
-	const isInVariantFree = !!abTestAPI?.isUserInVariant(
-		'UsaExpandableMarketingCard',
-		'variant-free',
-	);
-	const isInVariantBubble = !!abTestAPI?.isUserInVariant(
-		'UsaExpandableMarketingCard',
-		'variant-bubble',
-	);
-	const isInEitherVariant = isInVariantFree || isInVariantBubble;
+	const abTestVariant = getVariant(abTestAPI);
 
 	useEffect(() => {
 		void isNewUSUser().then((show) => {
@@ -58,21 +121,21 @@ export const ExpandableMarketingCardWrapper = ({ guardianBaseURL }: Props) => {
 		});
 	}, []);
 
-	if (!isInEitherVariant || !isApplicableUser || isClosed) {
+	if (!abTestVariant || !isApplicableUser || isClosed) {
 		return null;
 	}
 
-	const heading = 'No billionaire approved this';
-	const kicker = 'How the Guardian is different';
+	const { heading, kicker } = getVariantCopy(abTestVariant);
 
 	return (
 		<>
 			<Hide when="below" breakpoint="leftCol">
 				<div
-					role="button"
+					data-component="us-expandable-marketing-card"
+					role={!isExpanded ? 'button' : 'none'}
 					tabIndex={0}
 					onKeyDown={(event) => {
-						if (event.key === 'Enter') {
+						if (event.key === 'Enter' && !isExpanded) {
 							setIsExpanded(true);
 						}
 						if (event.key === 'Escape') {
@@ -80,7 +143,7 @@ export const ExpandableMarketingCardWrapper = ({ guardianBaseURL }: Props) => {
 						}
 					}}
 					onClick={() => {
-						setIsExpanded(true);
+						!isExpanded && setIsExpanded(true);
 					}}
 				>
 					<ExpandableMarketingCard
@@ -100,6 +163,7 @@ export const ExpandableMarketingCardWrapper = ({ guardianBaseURL }: Props) => {
 					isExpanded={isExpanded}
 					setIsExpanded={setIsExpanded}
 					setIsClosed={setIsClosed}
+					abTestVariant={abTestVariant}
 				/>
 			</Hide>
 		</>

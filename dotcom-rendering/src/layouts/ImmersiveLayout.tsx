@@ -171,7 +171,7 @@ const usCardStyles = css`
 	align-self: start;
 	position: sticky;
 	top: 0;
-	${getZIndex('expandableMarketingCardOverlay')}
+	z-index: ${getZIndex('expandableMarketingCardOverlay')};
 
 	${from.leftCol} {
 		margin-top: ${space[6]}px;
@@ -238,7 +238,7 @@ const Box = ({ children }: { children: React.ReactNode }) => (
 					width: 50%;
 					right: 0;
 					background-color: ${themePalette('--headline-background')};
-					${getZIndex('immersiveBlackBox')}
+					z-index: ${getZIndex('immersiveBlackBox')};
 					top: 0;
 					bottom: 0;
 				}
@@ -410,7 +410,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									the text appears above the pseudo Box element
 								*/
 								position: relative;
-								${getZIndex('articleHeadline')};
+								z-index: ${getZIndex('articleHeadline')};
 							`}
 						>
 							<Section

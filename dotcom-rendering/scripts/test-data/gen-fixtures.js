@@ -7,7 +7,7 @@ const execa = require('execa');
 const { config } = require('../../fixtures/config');
 const { configOverrides } = require('../../fixtures/config-overrides');
 const { switchOverrides } = require('../../fixtures/switch-overrides');
-const { enhanceArticleType } = require('../../src/types/article');
+const { validateAsArticleType } = require('../../src/model/validate');
 
 const root = resolve(__dirname, '..', '..');
 
@@ -172,44 +172,24 @@ const requests = articles.map((article) => {
 				frontendJson.format.design = 'LiveBlogDesign';
 			}
 
-			const dcrArticle = enhanceArticleType(frontendJson);
-
-			// manual hack for Video articles
-			if (article.name === 'Video') {
-				dcrArticle.frontendData.config.source = 'TMN';
-			}
-
-			// Write the new DCR fixture data
-			const dcrContents = `${HEADER}
-				import type { Article } from '../../../src/types/article';
-
-				export const ${article.name}: Article = ${JSON.stringify(dcrArticle, null, 4)}
-			`;
-
-			const dcrTypeFile = fs.writeFile(
-				`${root}/fixtures/generated/dcr-articles/${article.name}.ts`,
-				dcrContents,
-				'utf8',
-			);
+			const frontendData = validateAsArticleType(frontendJson);
 
 			// Write the new frontend fixture data
 			const frontendContents = `${HEADER}
 				import type { FEArticleType } from '../../../src/types/frontend';
 
 				export const ${article.name}: FEArticleType = ${JSON.stringify(
-					frontendJson,
+					frontendData,
 					null,
 					4,
 				)}
 			`;
 
-			const frontendTypeFile = fs.writeFile(
+			return fs.writeFile(
 				`${root}/fixtures/generated/fe-articles/${article.name}.ts`,
 				frontendContents,
 				'utf8',
 			);
-
-			return Promise.all([frontendTypeFile, dcrTypeFile]);
 		})
 		.then(() => `${article.name}.ts`)
 		.catch((err) => {

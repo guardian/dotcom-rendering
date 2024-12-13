@@ -1,6 +1,7 @@
 import { palette } from '../palette';
 import type { BoostLevel } from '../types/content';
 import type {
+	AspectRatio,
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
@@ -24,6 +25,7 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
+	aspectRatio: AspectRatio;
 };
 
 type RowLayout = 'oneCard' | 'oneCardBoosted' | 'twoCard';
@@ -155,12 +157,16 @@ export const SplashCardLayout = ({
 	showAge,
 	absoluteServerTimes,
 	imageLoading,
+	aspectRatio,
+	isLastRow,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
+	aspectRatio: AspectRatio;
+	isLastRow: boolean;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -179,7 +185,11 @@ export const SplashCardLayout = ({
 	);
 
 	return (
-		<UL padBottom={true} isFlexibleContainer={true} showTopBar={false}>
+		<UL
+			padBottom={!isLastRow}
+			hasLargeSpacing={!isLastRow}
+			showTopBar={false}
+		>
 			<LI
 				padSides={true}
 				verticalDividerColour={palette('--card-border-supporting')}
@@ -202,7 +212,7 @@ export const SplashCardLayout = ({
 							: supportingContentAlignment
 					}
 					imageLoading={imageLoading}
-					aspectRatio="5:4"
+					aspectRatio={aspectRatio}
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
 					liveUpdatesAlignment={liveUpdatesAlignment}
@@ -262,12 +272,18 @@ export const BoostedCardLayout = ({
 	showAge,
 	absoluteServerTimes,
 	imageLoading,
+	aspectRatio,
+	isFirstRow,
+	isLastRow,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
+	aspectRatio: AspectRatio;
+	isFirstRow: boolean;
+	isLastRow: boolean;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -279,7 +295,11 @@ export const BoostedCardLayout = ({
 		liveUpdatesPosition,
 	} = decideCardProperties(card.boostLevel);
 	return (
-		<UL padBottom={true} isFlexibleContainer={true} showTopBar={true}>
+		<UL
+			showTopBar={!isFirstRow}
+			padBottom={!isLastRow}
+			hasLargeSpacing={!isLastRow}
+		>
 			<LI
 				padSides={true}
 				verticalDividerColour={palette('--card-border-supporting')}
@@ -302,7 +322,7 @@ export const BoostedCardLayout = ({
 							: supportingContentAlignment
 					}
 					imageLoading={imageLoading}
-					aspectRatio="5:4"
+					aspectRatio={aspectRatio}
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
 					liveUpdatesAlignment="horizontal"
@@ -323,24 +343,31 @@ export const StandardCardLayout = ({
 	showImage = true,
 	imageLoading,
 	isFirstRow,
+	isFirstStandardRow,
+	aspectRatio,
+	isLastRow,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
-	isFirstRow: boolean;
+	isFirstRow?: boolean;
+	isFirstStandardRow?: boolean;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	showImage?: boolean;
+	aspectRatio: AspectRatio;
+	isLastRow: boolean;
 }) => {
 	if (cards.length === 0) return null;
 
 	return (
 		<UL
 			direction="row"
-			padBottom={true}
-			isFlexibleContainer={true}
-			showTopBar={true}
-			splitTopBar={!isFirstRow}
+			padBottom={!isLastRow}
+			hasLargeSpacing={!isLastRow}
+			showTopBar={!isFirstRow}
+			/** We use one full top bar for the first row and use a split one for subsequent rows */
+			splitTopBar={!isFirstStandardRow}
 		>
 			{cards.map((card, cardIndex) => {
 				return (
@@ -363,11 +390,14 @@ export const StandardCardLayout = ({
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
 							imagePositionOnDesktop={'left'}
-							supportingContent={card.supportingContent}
+							supportingContent={card.supportingContent?.slice(
+								0,
+								2,
+							)}
 							supportingContentAlignment="vertical"
 							supportingContentPosition="outer"
 							imageSize={'medium'}
-							aspectRatio="5:4"
+							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}
 							showTopBarDesktop={false}
@@ -397,6 +427,7 @@ export const FlexibleGeneral = ({
 	showAge,
 	absoluteServerTimes,
 	imageLoading,
+	aspectRatio,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1);
 	const cards = [...groupedTrails.standard].slice(0, 8);
@@ -411,6 +442,8 @@ export const FlexibleGeneral = ({
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
+					aspectRatio={aspectRatio}
+					isLastRow={cards.length === 0}
 				/>
 			)}
 
@@ -424,6 +457,9 @@ export const FlexibleGeneral = ({
 								showAge={showAge}
 								absoluteServerTimes={absoluteServerTimes}
 								imageLoading={imageLoading}
+								aspectRatio={aspectRatio}
+								isFirstRow={!splash.length && i === 0}
+								isLastRow={i === groupedCards.length - 1}
 							/>
 						);
 
@@ -437,7 +473,10 @@ export const FlexibleGeneral = ({
 								showAge={showAge}
 								absoluteServerTimes={absoluteServerTimes}
 								imageLoading={imageLoading}
-								isFirstRow={i === 0}
+								isFirstRow={!splash.length && i === 0}
+								isFirstStandardRow={i === 0}
+								aspectRatio={aspectRatio}
+								isLastRow={i === groupedCards.length - 1}
 							/>
 						);
 				}

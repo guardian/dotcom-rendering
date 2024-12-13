@@ -1,3 +1,5 @@
+import type { Block } from '../../src/types/blocks';
+
 export const liveBlock: Block = {
 	secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
 	blockFirstPublishedDisplay: '19.30 GMT',

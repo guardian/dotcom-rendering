@@ -8,7 +8,7 @@ import { headerPropsSchema } from '@guardian/support-dotcom-components';
 import type {
 	Cta,
 	HeaderProps,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import { useCallback, useEffect } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import type { ReactComponent } from '../lib/ReactComponent';
@@ -18,7 +18,6 @@ import {
 	createClickEventFromTracking,
 	isProfileUrl,
 } from '../lib/tracking';
-import { withParsedProps } from '../shared/ModuleWrapper';
 
 export interface HeaderEnrichedCta {
 	ctaUrl: string;
@@ -177,5 +176,12 @@ const validate = (props: unknown): props is HeaderProps => {
 
 export const validatedHeaderWrapper = (
 	Header: ReactComponent<HeaderRenderProps>,
-): ReactComponent<HeaderProps> =>
-	withParsedProps(headerWrapper(Header), validate);
+): ReactComponent<HeaderProps> => {
+	return (props: HeaderProps) => {
+		if (validate(props)) {
+			const Module = headerWrapper(Header);
+			return <Module {...props} />;
+		}
+		return <></>;
+	};
+};

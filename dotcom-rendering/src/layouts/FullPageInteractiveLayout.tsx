@@ -4,10 +4,7 @@ import {
 	palette as sourcePalette,
 	until,
 } from '@guardian/source/foundations';
-import {
-	adContainerStyles,
-	MobileStickyContainer,
-} from '../components/AdSlot.web';
+import { MobileStickyContainer } from '../components/AdSlot.web';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -108,8 +105,6 @@ const Renderer = ({
 	});
 
 	const adStyles = css`
-		${adContainerStyles}
-
 		${from.tablet} {
 			.mobile-only .ad-slot {
 				display: none;
@@ -141,7 +136,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 		<section
 			/* Note, some interactives require this - e.g. https://www.theguardian.com/environment/ng-interactive/2015/jun/05/carbon-bomb-the-coal-boom-choking-china. */
 			css={css`
-				${getZIndex('fullPageInteractiveHeaderWrapper')};
+				z-index: ${getZIndex('fullPageInteractiveHeaderWrapper')};
 				position: relative;
 			`}
 		>

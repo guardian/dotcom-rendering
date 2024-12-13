@@ -25,13 +25,13 @@ const meta = {
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
 		containerType: 'scrollable/medium',
+		aspectRatio: '5:4',
 	},
 	render: (args) => (
 		<FrontSection
 			title="Scrollable medium"
 			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
-			showTopBorder={false}
 			containerLevel="Secondary"
 		>
 			<ScrollableMedium {...args} />
@@ -69,6 +69,19 @@ export const WithFourCards = {
 	},
 } satisfies Story;
 
+export const WithPrimaryContainer = {
+	render: (args) => (
+		<FrontSection
+			title="Scrollable medium"
+			discussionApiUrl={discussionApiUrl}
+			editionId="UK"
+			containerLevel="Primary"
+		>
+			<ScrollableMedium {...args} />
+		</FrontSection>
+	),
+} satisfies Story;
+
 const containerPalettes = [
 	'InvestigationPalette',
 	'LongRunningPalette',
@@ -97,7 +110,6 @@ export const WithSpecialPaletteVariations = {
 					title={containerPalette}
 					discussionApiUrl={discussionApiUrl}
 					editionId="UK"
-					showTopBorder={false}
 					key={containerPalette}
 					containerPalette={containerPalette}
 					containerLevel="Secondary"

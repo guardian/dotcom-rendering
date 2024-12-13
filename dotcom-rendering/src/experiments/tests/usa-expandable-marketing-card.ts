@@ -7,7 +7,7 @@ export const UsaExpandableMarketingCard: ABTest = {
 	author: 'dotcom.platform@guardian.co.uk',
 	description:
 		'Test the impact of showing the user a component that highlights the Guardians journalism.',
-	audience: 15 / 100,
+	audience: 40 / 100,
 	audienceOffset: 0 / 100,
 	audienceCriteria: 'US-based users that see the US edition.',
 	successMeasure: 'Users are more likely to engage with the site.',
@@ -27,6 +27,12 @@ export const UsaExpandableMarketingCard: ABTest = {
 		},
 		{
 			id: 'variant-bubble',
+			test: (): void => {
+				/* no-op */
+			},
+		},
+		{
+			id: 'variant-billionaire',
 			test: (): void => {
 				/* no-op */
 			},

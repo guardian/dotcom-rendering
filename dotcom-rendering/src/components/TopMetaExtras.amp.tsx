@@ -7,6 +7,7 @@ import {
 	pillarPalette_DO_NOT_USE,
 } from '../lib/pillars';
 import ClockIcon from '../static/icons/clock.svg';
+import type { SharePlatform } from '../types/layout';
 import { ShareIcons } from './ShareIcons.amp';
 
 const pillarColours = pillarMap(

@@ -25,6 +25,7 @@ interface MiniProfilesProps {
 	 * Whether this is the last element in the article. If true, no separator will be rendered.
 	 */
 	isLastElement: boolean;
+	sectioned: boolean;
 }
 
 const separatorStyles = css`
@@ -48,7 +49,10 @@ export const MiniProfiles = ({
 	starRating,
 	RenderArticleElement,
 	isLastElement,
+	sectioned,
 }: MiniProfilesProps) => {
+	const displaySeparator = !isLastElement && !sectioned;
+
 	return (
 		<ol data-ignore="global-ol-styling">
 			{miniProfiles.map((miniProfile, index) => (
@@ -57,6 +61,7 @@ export const MiniProfiles = ({
 					miniProfile={miniProfile}
 					format={format}
 					key={`${miniProfile.title}-${index}`}
+					sectioned={sectioned}
 				>
 					{miniProfile.body.map((element) => (
 						// eslint-disable-next-line react/jsx-key -- The element array should remain consistent as it's derived from the order of elements in CAPI
@@ -82,7 +87,7 @@ export const MiniProfiles = ({
 					))}
 				</MiniProfileComponent>
 			))}
-			{!isLastElement && <hr css={separatorStyles} />}
+			{displaySeparator && <hr css={separatorStyles} />}
 		</ol>
 	);
 };

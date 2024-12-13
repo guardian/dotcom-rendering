@@ -1,3 +1,4 @@
+import type { Block } from '../types/blocks';
 import {
 	calculateApproximateBlockHeight,
 	shouldDisplayAd,

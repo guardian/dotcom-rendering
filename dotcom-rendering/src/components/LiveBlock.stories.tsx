@@ -4,6 +4,7 @@ import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { images } from '../../fixtures/generated/images';
 import { liveBlock } from '../../fixtures/manual/liveBlock';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import type { Block } from '../types/blocks';
 import { LiveBlock } from './LiveBlock';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {

@@ -6,6 +6,7 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
+import type { LeftColSize } from '../types/layout';
 
 const leftWidth = (size: LeftColSize, hasPageSkin: boolean) => {
 	if (hasPageSkin) {

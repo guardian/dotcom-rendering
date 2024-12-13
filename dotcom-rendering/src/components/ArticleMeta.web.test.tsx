@@ -5,7 +5,9 @@ import { ArticleMeta, shouldShowContributor } from './ArticleMeta.web';
 import { ConfigProvider } from './ConfigContext';
 
 jest.mock('../lib/bridgetApi', () => jest.fn());
-
+jest.mock('../lib/useMatchMedia', () => ({
+	useMatchMedia: jest.fn(() => true),
+}));
 describe('ArticleMeta', () => {
 	it('It should contain legacy class names to support customised styling in interactives', () => {
 		const format = {

@@ -1,23 +1,24 @@
 import { css } from '@emotion/react';
-import type { OphanComponentEvent } from '@guardian/libs';
-import { cmp, isUndefined } from '@guardian/libs';
-import { getCookie, startPerformanceMeasure, storage } from '@guardian/libs';
+import {
+	cmp,
+	getCookie,
+	startPerformanceMeasure,
+	storage,
+} from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
 import type {
 	EpicPayload,
 	ModuleData,
 	ModuleDataResponse,
 	WeeklyArticleHistory,
-} from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+} from '@guardian/support-dotcom-components/dist/dotcom/types';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import {
-	getLastOneOffContributionTimestamp,
-	hasCmpConsentForArticleCount,
 	hasCmpConsentForBrowserId,
+	hasCmpConsentForWeeklyArticleCount,
 	hasOptedOutOfArticleCount,
-	isRecurringContributor,
-	MODULES_VERSION,
 	shouldHideSupportMessaging,
 } from '../../lib/contributions';
 import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
@@ -32,17 +33,6 @@ export type EpicConfig = {
 	hasConsentForArticleCount: boolean;
 	stage: string;
 };
-
-type EpicProps = {
-	fetchEmail?: () => Promise<string | null>;
-	submitComponentEvent?: (componentEvent: OphanComponentEvent) => void;
-	openCmp: () => void;
-	hasConsentForArticleCount: boolean;
-	stage: string;
-	// Also anything specified by support-dotcom-components
-};
-
-type EpicType = React.ElementType<EpicProps>;
 
 const wrapperMargins = css`
 	margin: 18px 0;
@@ -82,17 +72,12 @@ const buildPayload = async (
 		isPaidContent: data.isPaidContent,
 		tags: data.tags,
 		showSupportMessaging: !data.hideSupportMessagingForUser,
-		isRecurringContributor: isRecurringContributor(
-			data.isSignedIn ?? false,
-		),
-		lastOneOffContributionDate: getLastOneOffContributionTimestamp(),
 		epicViewLog: getEpicViewLog(storage.local),
 		weeklyArticleHistory: await data.asyncArticleCount,
 
 		hasOptedOutOfArticleCount: await hasOptedOutOfArticleCount(),
 		mvtId: Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })),
 		countryCode: data.countryCode,
-		modulesVersion: MODULES_VERSION,
 		url: window.location.origin + window.location.pathname,
 		browserId: (await hasCmpConsentForBrowserId())
 			? data.browserId
@@ -150,7 +135,8 @@ export const canShowReaderRevenueEpic = async (
 		? lazyFetchEmailWithTimeout(idApiUrl)
 		: undefined;
 
-	const hasConsentForArticleCount = await hasCmpConsentForArticleCount();
+	const hasConsentForArticleCount =
+		await hasCmpConsentForWeeklyArticleCount();
 
 	return {
 		show: true,
@@ -169,7 +155,7 @@ export const ReaderRevenueEpic = ({
 	hasConsentForArticleCount,
 	stage,
 }: EpicConfig) => {
-	const [Epic, setEpic] = useState<EpicType>();
+	const [Epic, setEpic] = useState<React.ElementType | null>(null);
 	const { renderingTarget } = useConfig();
 
 	const openCmp = () => {
@@ -206,14 +192,14 @@ export const ReaderRevenueEpic = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	if (!isUndefined(Epic)) {
+	if (Epic !== null) {
 		return (
 			<div css={wrapperMargins}>
 				{}
 				<Epic
 					{...module.props}
 					fetchEmail={fetchEmail}
-					submitComponentEvent={(event) =>
+					submitComponentEvent={(event: ComponentEvent) =>
 						void submitComponentEvent(event, renderingTarget)
 					}
 					openCmp={openCmp}

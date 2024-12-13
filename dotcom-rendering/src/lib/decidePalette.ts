@@ -138,18 +138,6 @@ const backgroundBulletStandfirst = (format: ArticleFormat): string => {
 	return neutral[86]; // default previously defined in Standfirst.tsx
 };
 
-const backgroundSpeechBubble = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
-		}
-	}
-	return pillarPalette[format.theme].main;
-};
-
 const backgroundFilterButtonHover = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -439,7 +427,6 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			analysisContrastHover: backgroundAnalysisContrastHoverColour(),
 			bullet: backgroundBullet(format),
 			bulletStandfirst: backgroundBulletStandfirst(format),
-			speechBubble: backgroundSpeechBubble(format),
 			filterButton: backgroundFilterButton(),
 			filterButtonHover: backgroundFilterButtonHover(format),
 			filterButtonActive: backgroundFilterButtonActive(format),

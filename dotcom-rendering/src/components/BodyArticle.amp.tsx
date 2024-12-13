@@ -15,6 +15,7 @@ import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import { getSharingUrls } from '../lib/sharing-urls';
 import { insertDisclaimerElement } from '../model/enhance-disclaimer';
 import type { AMPArticleModel } from '../types/article.amp';
+import type { AdTargeting } from '../types/commercial';
 import type { ConfigType } from '../types/config';
 import { Elements } from './Elements.amp';
 import { Epic } from './Epic.amp';

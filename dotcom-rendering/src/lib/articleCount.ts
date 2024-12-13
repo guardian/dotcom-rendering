@@ -3,9 +3,9 @@ import {
 	getWeeklyArticleHistory,
 	incrementWeeklyArticleCount,
 } from '@guardian/support-dotcom-components';
-import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import { useEffect, useState } from 'react';
-import { hasOptedOutOfArticleCount } from '../lib/contributions';
+import { hasOptedOutOfWeeklyArticleCount } from '../lib/contributions';
 import type { DailyArticleHistory } from '../lib/dailyArticleCount';
 import {
 	getDailyArticleCount,
@@ -18,15 +18,9 @@ export interface ArticleCounts {
 	dailyArticleHistory: DailyArticleHistory;
 }
 
-export const getArticleCounts = async (
-	pageId: string,
-	tags: TagType[],
-	contentType: string,
-): Promise<ArticleCounts | undefined> => {
-	if (await hasOptedOutOfArticleCount()) return undefined;
-
+export const shouldIncrementArticleCount = (contentType: string): boolean => {
 	// See https://github.com/guardian/frontend/blob/9c8707d894c858dd17de1c7c1499f6b91f5287bc/common/app/model/DotcomContentType.scala#L29
-	const shouldIncrement = [
+	return [
 		'article',
 		'liveblog',
 		'gallery',
@@ -34,17 +28,57 @@ export const getArticleCounts = async (
 		'interactive',
 		'audio',
 	].includes(contentType.toLowerCase());
+};
 
-	// hasOptedOut needs to be done before we check if articleCount is set in the window
-	// This is because a potential race condition where one invocation of getArticleCounts
-	// is waiting for hasOptedOut another invocation might receive it and increment the article count.
+/**
+ * This function is used to get the daily article counts.
+ * It will increment the count if the contentType is listed in the shouldIncrementArticleCount function.
+ * This will return and increment the dailyArticleCount for unconsented and consented users.
+ *
+ * @param {string} contentType
+ * @return {*}  {(DailyArticleHistory | undefined)}
+ */
+export const getDailyArticleCounts = (
+	contentType: string,
+): DailyArticleHistory | undefined => {
+	if (!window.guardian.dailyArticleCount) {
+		if (shouldIncrementArticleCount(contentType)) {
+			incrementDailyArticleCount();
+		}
+		window.guardian.dailyArticleCount = getDailyArticleCount();
+	}
 
-	const keywordAndToneTagIds: string[] = tags
-		.filter((tag) => ['tone', 'keyword'].includes(tag.type.toLowerCase()))
-		.map((tag) => tag.id);
+	return window.guardian.dailyArticleCount;
+};
+
+/**
+ * This function is used to get the weekly article counts
+ * It will increment the count if the contentType is listed in the shouldIncrementArticleCount function.
+ * This will return and increment the weeklyArticleCount for only consented users.
+ *
+ * @param {string} pageId
+ * @param {TagType[]} tags
+ * @param {string} contentType
+ * @return {*}  {(Promise<WeeklyArticleHistory | undefined>)}
+ */
+export const getWeeklyArticleCounts = async (
+	pageId: string,
+	tags: TagType[],
+	contentType: string,
+): Promise<WeeklyArticleHistory | undefined> => {
+	if (await hasOptedOutOfWeeklyArticleCount()) return undefined;
 
 	if (!window.guardian.weeklyArticleCount) {
-		if (shouldIncrement) {
+		if (shouldIncrementArticleCount(contentType)) {
+			// hasOptedOut needs to be done before we check if articleCount is set in the window
+			// This is because a potential race condition where one invocation of getArticleCounts
+			// is waiting for hasOptedOut another invocation might receive it and increment the article count.
+
+			const keywordAndToneTagIds: string[] = tags
+				.filter((tag) =>
+					['tone', 'keyword'].includes(tag.type.toLowerCase()),
+				)
+				.map((tag) => tag.id);
 			incrementWeeklyArticleCount(
 				storage.local,
 				pageId,
@@ -55,16 +89,21 @@ export const getArticleCounts = async (
 			storage.local,
 		);
 	}
-	if (!window.guardian.dailyArticleCount) {
-		if (shouldIncrement) {
-			incrementDailyArticleCount();
-		}
-		window.guardian.dailyArticleCount = getDailyArticleCount();
-	}
+
+	return window.guardian.weeklyArticleCount;
+};
+
+export const getArticleCounts = async (
+	pageId: string,
+	tags: TagType[],
+	contentType: string,
+): Promise<ArticleCounts | undefined> => {
+	getDailyArticleCounts(contentType);
+	await getWeeklyArticleCounts(pageId, tags, contentType);
 
 	return {
-		weeklyArticleHistory: window.guardian.weeklyArticleCount ?? [],
 		dailyArticleHistory: window.guardian.dailyArticleCount ?? [],
+		weeklyArticleHistory: window.guardian.weeklyArticleCount ?? [],
 	};
 };
 

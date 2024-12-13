@@ -3,14 +3,12 @@ import type { OphanComponentEvent } from '@guardian/libs';
 import { getCookie, isUndefined, log, storage } from '@guardian/libs';
 import { space } from '@guardian/source/foundations';
 import { getEpicViewLog } from '@guardian/support-dotcom-components';
-import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { useArticleCounts } from '../lib/articleCount';
 import {
-	getLastOneOffContributionTimestamp,
-	isRecurringContributor,
 	shouldHideSupportMessaging,
 	useHasOptedOutOfArticleCount,
 } from '../lib/contributions';
@@ -125,15 +123,11 @@ const usePayload = ({
 			isPaidContent,
 			tags,
 			showSupportMessaging: !hideSupportMessagingForUser,
-			isRecurringContributor: isRecurringContributor(isSignedIn),
-			lastOneOffContributionDate:
-				getLastOneOffContributionTimestamp() ?? undefined,
 			mvtId,
 			countryCode,
 			epicViewLog: getEpicViewLog(storage.local),
 			weeklyArticleHistory: articleCounts?.weeklyArticleHistory,
 			hasOptedOutOfArticleCount,
-			modulesVersion: 'v3',
 			url: window.location.origin + window.location.pathname,
 		},
 	};

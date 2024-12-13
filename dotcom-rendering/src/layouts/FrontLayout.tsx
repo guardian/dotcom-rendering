@@ -6,6 +6,7 @@ import {
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
+import { AuEoy2024Wrapper } from '../components/AuEoy2024Wrapper.importable';
 import { Carousel } from '../components/Carousel.importable';
 import { ContainerOverrides } from '../components/ContainerOverrides';
 import { CPScottHeader } from '../components/CPScottHeader';
@@ -44,7 +45,12 @@ import {
 import { hideAge } from '../lib/hideAge';
 import type { NavType } from '../model/extract-nav';
 import { palette as schemePalette } from '../palette';
-import { type DCRCollectionType, type DCRFrontType } from '../types/front';
+import type {
+	DCRCollectionType,
+	DCRContainerType,
+	DCRFrontType,
+	DCRGroupedTrails,
+} from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -169,6 +175,24 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const { absoluteServerTimes = false } = front.config.switches;
 
+	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
+		switch (collectionType) {
+			case 'scrollable/feature':
+			case 'static/feature/2':
+				return '4:5';
+			case 'flexible/general':
+			case 'flexible/special':
+			case 'scrollable/small':
+			case 'scrollable/medium':
+			case 'static/medium/4':
+				return '5:4';
+			case 'scrollable/highlights':
+				return '1:1';
+			default:
+				return '5:3';
+		}
+	};
+
 	const Highlights = () => {
 		const showHighlights =
 			// Must be opted into the Europe beta test or in preview
@@ -190,6 +214,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					showAge={false}
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading="eager"
+					aspectRatio={
+						highlightsCollection.aspectRatio ??
+						fallbackAspectRatio(highlightsCollection.collectionType)
+					}
 				/>
 			)
 		);
@@ -300,6 +328,37 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						  }))
 						: trails;
 
+					// We also need to remove the branding for the cards in grouped
+					// trails for dynamic containers
+					const groupedWithoutBranding: DCRGroupedTrails = (() => {
+						if (
+							isPaidContentSameBranding(
+								collection.collectionBranding,
+							)
+						) {
+							const groupedTrailsWithoutBranding: DCRGroupedTrails =
+								{
+									snap: [],
+									huge: [],
+									veryBig: [],
+									big: [],
+									standard: [],
+									splash: [],
+								};
+							for (const key of Object.keys(
+								collection.grouped,
+							) as (keyof DCRGroupedTrails)[]) {
+								groupedTrailsWithoutBranding[key] =
+									collection.grouped[key].map((labTrail) => ({
+										...labTrail,
+										branding: undefined,
+									}));
+							}
+							return groupedTrailsWithoutBranding;
+						}
+						return collection.grouped;
+					})();
+
 					if (collection.collectionType === 'scrollable/highlights') {
 						// Highlights are rendered in the Masthead component
 						return null;
@@ -329,6 +388,36 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										defer={{ until: 'visible' }}
 									>
 										<UsEoy2024Wrapper />
+									</Island>
+								</Section>
+							</ContainerOverrides>
+						);
+					}
+
+					if (
+						collection.displayName === 'AU end-of-year 2024' &&
+						pageId.toLowerCase() === 'au'
+					) {
+						return (
+							<ContainerOverrides
+								key={ophanName}
+								containerPalette={collection.containerPalette}
+							>
+								<Section
+									fullWidth={true}
+									padBottom={false}
+									showSideBorders={false}
+									padSides={false}
+									showTopBorder={false}
+									ophanComponentLink={ophanComponentLink}
+									ophanComponentName={ophanName}
+									hasPageSkin={hasPageSkin}
+								>
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
+										<AuEoy2024Wrapper />
 									</Island>
 								</Section>
 							</ContainerOverrides>
@@ -399,10 +488,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							: undefined;
 
 						return (
-							<ContainerOverrides
-								key={ophanName}
-								containerPalette={collection.containerPalette}
-							>
+							<div key={ophanName}>
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
@@ -462,16 +548,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									mobileAdPositions,
 									hasPageSkin,
 								)}
-							</ContainerOverrides>
+							</div>
 						);
 					}
 
 					if (collection.containerPalette === 'Branded') {
 						return (
-							<ContainerOverrides
-								key={ophanName}
-								containerPalette={collection.containerPalette}
-							>
+							<div key={ophanName}>
 								<LabsSection
 									title={collection.displayName}
 									collectionId={collection.id}
@@ -506,6 +589,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										absoluteServerTimes={
 											absoluteServerTimes
 										}
+										aspectRatio={
+											collection.aspectRatio ??
+											fallbackAspectRatio(
+												collection.collectionType,
+											)
+										}
 									/>
 								</LabsSection>
 								{decideMerchHighAndMobileAdSlots(
@@ -517,7 +606,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									mobileAdPositions,
 									hasPageSkin,
 								)}
-							</ContainerOverrides>
+							</div>
 						);
 					}
 
@@ -529,10 +618,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							collection.containerPalette ?? 'MediaPalette';
 
 						return (
-							<ContainerOverrides
-								key={ophanName}
-								containerPalette={containerPalette}
-							>
+							<div key={ophanName}>
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
@@ -604,15 +690,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										mobileAdPositions,
 										hasPageSkin,
 									)}
-							</ContainerOverrides>
+							</div>
 						);
 					}
 
 					return (
-						<ContainerOverrides
-							key={ophanName}
-							containerPalette={collection.containerPalette}
-						>
+						<div key={ophanName}>
 							{decideFrontsBannerAdSlot(
 								renderAds,
 								hasPageSkin,
@@ -659,10 +742,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								collectionBranding={
 									collection.collectionBranding
 								}
+								containerLevel={
+									collection.config.containerLevel
+								}
+								containerSpacing={collection.containerSpacing}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
-									groupedTrails={collection.grouped}
+									groupedTrails={groupedWithoutBranding}
 									containerType={collection.collectionType}
 									containerPalette={
 										collection.containerPalette
@@ -674,6 +761,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									imageLoading={imageLoading}
 									absoluteServerTimes={absoluteServerTimes}
+									aspectRatio={
+										collection.aspectRatio ??
+										fallbackAspectRatio(
+											collection.collectionType,
+										)
+									}
 								/>
 							</FrontSection>
 							{decideMerchHighAndMobileAdSlots(
@@ -684,7 +777,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								mobileAdPositions,
 								hasPageSkin,
 							)}
-						</ContainerOverrides>
+						</div>
 					);
 				})}
 			</main>

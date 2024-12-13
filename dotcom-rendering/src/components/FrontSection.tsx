@@ -55,7 +55,8 @@ type Props = {
 	/** Fronts containers can have their styling overridden using a `containerLevel`.
 	 * If used, this can be either "Primary" or "Secondary", both of which have different styles */
 	containerLevel?: DCRContainerLevel;
-
+	/** Fronts containers spacing rules vary depending on the size of their container spacing which is derived from if the next container is a primary or secondary. */
+	containerSpacing?: 'large' | 'small';
 	/** Defaults to `false`. If true a Hide button is show top right allowing this section
 	 * to be collapsed
 	 */
@@ -258,7 +259,7 @@ const sectionHeadlineHeight = css`
 	}
 `;
 
-const paddings = css`
+const topPadding = css`
 	padding-top: ${space[2]}px;
 `;
 
@@ -289,6 +290,22 @@ const sectionContentPadded = css`
 	}
 `;
 
+const sectionContentBorderFromLeftCol = css`
+	position: relative;
+	${from.leftCol} {
+		:before {
+			content: '';
+			position: absolute;
+			top: ${space[2]}px;
+			bottom: 0;
+			border-left: 1px solid ${schemePalette('--section-border')};
+			transform: translateX(-50%);
+			/** Keeps the vertical divider ontop of carousel item dividers */
+			z-index: 1;
+		}
+	}
+`;
+
 const sectionBottomContent = css`
 	grid-row: bottom-content;
 	grid-column: content;
@@ -313,17 +330,15 @@ const sectionTreats = css`
 	}
 `;
 
-const decoration = (borderColour: string) => {
+const decoration = css`
 	/** element which contains border and inner background colour, if set */
-	return css`
-		grid-row: 1 / -1;
-		grid-column: decoration;
+	grid-row: 1 / -1;
+	grid-column: decoration;
 
-		border-width: 1px;
-		border-color: ${borderColour};
-		border-style: none;
-	`;
-};
+	border-width: 1px;
+	border-color: ${schemePalette('--section-border')};
+	border-style: none;
+`;
 
 /** only visible once content stops sticking to left and right edges */
 const sideBorders = css`
@@ -340,6 +355,31 @@ const topBorder = css`
 
 const bottomPadding = css`
 	padding-bottom: ${space[9]}px;
+`;
+
+const smallBottomPadding = css`
+	padding-bottom: ${space[6]}px;
+`;
+
+const largeBottomPadding = css`
+	padding-bottom: ${space[10]}px;
+`;
+
+const primaryLevelTopBorder = css`
+	grid-row: 1;
+	grid-column: 1 / -1;
+	border-top: 2px solid ${schemePalette('--section-border-primary')};
+	/** Ensures the top border sits above the side borders */
+	z-index: 1;
+`;
+
+const secondaryLevelTopBorder = css`
+	grid-row: 1;
+	grid-column: content;
+	border-top: 1px solid ${schemePalette('--section-border-secondary')};
+	${from.tablet} {
+		grid-column: decoration;
+	}
 `;
 
 /**
@@ -430,6 +470,7 @@ export const FrontSection = ({
 	containerName,
 	containerPalette,
 	containerLevel,
+	containerSpacing,
 	description,
 	editionId,
 	leftContent,
@@ -453,19 +494,16 @@ export const FrontSection = ({
 	collectionBranding,
 	isTagPage = false,
 }: Props) => {
-	const isToggleable = toggleable && !!sectionId;
+	const isToggleable = toggleable && !!sectionId && !containerLevel;
 	const showMore =
 		canShowMore &&
 		!!title &&
 		!!sectionId &&
 		!!collectionId &&
 		!!pageId &&
-		!!ajaxUrl;
-	const showVerticalRule =
-		!hasPageSkin &&
-		containerLevel !== 'Primary' &&
-		containerLevel !== 'Secondary';
-
+		!!ajaxUrl &&
+		!containerLevel;
+	const showVerticalRule = !hasPageSkin;
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
 	 * this id pre-existed showMore so is probably also being used for something else.
@@ -477,6 +515,7 @@ export const FrontSection = ({
 				data-link-name={ophanComponentLink}
 				data-component={ophanComponentName}
 				data-container-name={containerName}
+				data-container-level={containerLevel}
 				css={[
 					fallbackStyles,
 					containerStylesUntilLeftCol,
@@ -489,11 +528,21 @@ export const FrontSection = ({
 					),
 				}}
 			>
+				{!!containerLevel && showTopBorder && (
+					<div
+						css={[
+							containerLevel === 'Secondary'
+								? secondaryLevelTopBorder
+								: primaryLevelTopBorder,
+						]}
+					/>
+				)}
+
 				<div
 					css={[
-						decoration(schemePalette('--section-border')),
+						decoration,
 						sideBorders,
-						showTopBorder && topBorder,
+						showTopBorder && !containerLevel && topBorder,
 					]}
 				/>
 
@@ -506,6 +555,7 @@ export const FrontSection = ({
 							title?.toLowerCase() === 'opinion',
 						),
 						showVerticalRule &&
+							!containerLevel &&
 							sectionHeadlineFromLeftCol(
 								schemePalette('--section-border'),
 							),
@@ -546,7 +596,10 @@ export const FrontSection = ({
 						sectionContent,
 						sectionContentPadded,
 						sectionContentRow(toggleable),
-						paddings,
+						topPadding,
+						showVerticalRule &&
+							!!containerLevel &&
+							sectionContentBorderFromLeftCol,
 					]}
 					id={`container-${sectionId}`}
 				>
@@ -557,7 +610,9 @@ export const FrontSection = ({
 					css={[
 						sectionContentPadded,
 						sectionBottomContent,
-						bottomPadding,
+						!containerLevel && bottomPadding,
+						containerSpacing === 'small' && smallBottomPadding,
+						containerSpacing === 'large' && largeBottomPadding,
 					]}
 				>
 					{isString(targetedTerritory) &&
@@ -597,7 +652,7 @@ export const FrontSection = ({
 				</div>
 
 				{treats && !hasPageSkin && (
-					<div css={[sectionTreats, paddings]}>
+					<div css={[sectionTreats, topPadding]}>
 						<Treats
 							treats={treats}
 							borderColour={palette('--section-border')}

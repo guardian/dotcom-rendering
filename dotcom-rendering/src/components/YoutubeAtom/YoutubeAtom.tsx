@@ -2,12 +2,13 @@ import type { Participations } from '@guardian/ab-core';
 import type { ConsentState } from '@guardian/libs';
 import { useCallback, useState } from 'react';
 import type { ArticleFormat } from '../../lib/articleFormat';
+import type { AdTargeting } from '../../types/commercial';
+import type { AspectRatio } from '../../types/front';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type {
 	ImagePositionType,
 	ImageSizeType,
 } from '../Card/components/ImageWrapper';
-import type { AspectRatio } from '../CardPicture';
 import { MaintainAspectRatio } from '../MaintainAspectRatio';
 import type { VideoCategory } from './YoutubeAtomOverlay';
 import { YoutubeAtomOverlay } from './YoutubeAtomOverlay';

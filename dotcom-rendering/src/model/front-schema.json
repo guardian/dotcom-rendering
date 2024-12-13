@@ -751,6 +751,20 @@
                                                                                                 "type"
                                                                                             ]
                                                                                         }
+                                                                                    },
+                                                                                    "podcast": {
+                                                                                        "type": "object",
+                                                                                        "properties": {
+                                                                                            "subscriptionUrl": {
+                                                                                                "type": "string"
+                                                                                            },
+                                                                                            "spotifyUrl": {
+                                                                                                "type": "string"
+                                                                                            },
+                                                                                            "image": {
+                                                                                                "type": "string"
+                                                                                            }
+                                                                                        }
                                                                                     }
                                                                                 },
                                                                                 "required": [
@@ -1017,6 +1031,9 @@
                                                 },
                                                 "isLive": {
                                                     "type": "boolean"
+                                                },
+                                                "galleryCount": {
+                                                    "type": "number"
                                                 }
                                             },
                                             "required": [
@@ -1485,6 +1502,20 @@
                                                                                                 "type"
                                                                                             ]
                                                                                         }
+                                                                                    },
+                                                                                    "podcast": {
+                                                                                        "type": "object",
+                                                                                        "properties": {
+                                                                                            "subscriptionUrl": {
+                                                                                                "type": "string"
+                                                                                            },
+                                                                                            "spotifyUrl": {
+                                                                                                "type": "string"
+                                                                                            },
+                                                                                            "image": {
+                                                                                                "type": "string"
+                                                                                            }
+                                                                                        }
                                                                                     }
                                                                                 },
                                                                                 "required": [
@@ -1751,6 +1782,9 @@
                                                 },
                                                 "isLive": {
                                                     "type": "boolean"
+                                                },
+                                                "galleryCount": {
+                                                    "type": "number"
                                                 }
                                             },
                                             "required": [
@@ -2219,6 +2253,20 @@
                                                                                                 "type"
                                                                                             ]
                                                                                         }
+                                                                                    },
+                                                                                    "podcast": {
+                                                                                        "type": "object",
+                                                                                        "properties": {
+                                                                                            "subscriptionUrl": {
+                                                                                                "type": "string"
+                                                                                            },
+                                                                                            "spotifyUrl": {
+                                                                                                "type": "string"
+                                                                                            },
+                                                                                            "image": {
+                                                                                                "type": "string"
+                                                                                            }
+                                                                                        }
                                                                                     }
                                                                                 },
                                                                                 "required": [
@@ -2485,6 +2533,9 @@
                                                 },
                                                 "isLive": {
                                                     "type": "boolean"
+                                                },
+                                                "galleryCount": {
+                                                    "type": "number"
                                                 }
                                             },
                                             "required": [
@@ -2727,7 +2778,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "type": {
-                                                    "$ref": "#/definitions/FEContainerPalette"
+                                                    "$ref": "#/definitions/FEContainerMetadata"
                                                 }
                                             },
                                             "required": [
@@ -2737,6 +2788,9 @@
                                     },
                                     "collectionType": {
                                         "$ref": "#/definitions/FEContainerType"
+                                    },
+                                    "collectionLevel": {
+                                        "$ref": "#/definitions/FEContainerLevel"
                                     },
                                     "href": {
                                         "type": "string"
@@ -2776,6 +2830,9 @@
                                     },
                                     "platform": {
                                         "type": "string"
+                                    },
+                                    "aspectRatio": {
+                                        "$ref": "#/definitions/AspectRatio"
                                     }
                                 },
                                 "required": [
@@ -3230,7 +3287,7 @@
             ],
             "type": "string"
         },
-        "FEContainerPalette": {
+        "FEContainerMetadata": {
             "enum": [
                 "Branded",
                 "Breaking",
@@ -3244,10 +3301,27 @@
                 "LongRunningAltPalette",
                 "LongRunningPalette",
                 "Podcast",
+                "Secondary",
                 "SombreAltPalette",
                 "SombrePalette",
                 "Special",
                 "SpecialReportAltPalette"
+            ],
+            "type": "string"
+        },
+        "FEContainerLevel": {
+            "enum": [
+                "Primary",
+                "Secondary"
+            ],
+            "type": "string"
+        },
+        "AspectRatio": {
+            "enum": [
+                "1:1",
+                "4:5",
+                "5:3",
+                "5:4"
             ],
             "type": "string"
         },

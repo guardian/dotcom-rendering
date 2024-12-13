@@ -36,7 +36,7 @@ const Position = ({
 			css={css`
 				/* Decide where the content revealed by details appears */
 				position: absolute;
-				${getZIndex('summaryDetails')}
+				z-index: ${getZIndex('summaryDetails')};
 				${positionStyles}
 			`}
 		>

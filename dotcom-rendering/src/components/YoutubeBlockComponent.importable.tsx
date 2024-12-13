@@ -3,12 +3,13 @@ import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
+import type { AdTargeting } from '../types/commercial';
+import type { AspectRatio } from '../types/front';
 import { Caption } from './Caption';
 import type {
 	ImagePositionType,
 	ImageSizeType,
 } from './Card/components/ImageWrapper';
-import type { AspectRatio } from './CardPicture';
 import { useConfig } from './ConfigContext';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';

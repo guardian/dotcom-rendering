@@ -1,42 +1,43 @@
-import { css } from '@emotion/react';
+import type { Decorator, Meta, StoryObj } from '@storybook/react';
+import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import { allModes } from '../../.storybook/modes';
 import { calloutCampaign } from '../../fixtures/manual/calloutCampaign';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { customMockFetch } from '../lib/mockRESTCalls';
-import { CalloutEmbedBlockComponent } from './CalloutEmbedBlockComponent.importable';
+import { CalloutEmbedBlockComponent as CalloutEmbedBlock } from './CalloutEmbedBlockComponent.importable';
 
-export default {
-	component: CalloutEmbedBlockComponent,
-	title: 'Components/CalloutEmbedBlockComponent',
-};
-
-const mockGoodRequestFetch = customMockFetch([
-	{
-		mockedMethod: 'POST',
-		mockedUrl:
-			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
-		mockedStatus: 201,
+const meta = {
+	component: CalloutEmbedBlock,
+	title: 'Components/Callout Embed Block Component',
+	decorators: [centreColumnDecorator],
+	parameters: {
+		chromatic: {
+			modes: {
+				'light mobileMedium': allModes['light mobileMedium'],
+			},
+		},
 	},
-]);
+} satisfies Meta<typeof CalloutEmbedBlock>;
 
-export const Default = () => {
-	global.fetch = mockGoodRequestFetch;
+export default meta;
 
-	return (
-		<div
-			css={css`
-				width: 630px;
-				padding: 15px;
-			`}
-		>
-			<CalloutEmbedBlockComponent
-				callout={calloutCampaign}
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
-			/>
-		</div>
-	);
+type Story = StoryObj<typeof meta>;
+
+const goodRequest: Decorator<Story['args']> = (Story) => {
+	global.fetch = customMockFetch([
+		{
+			mockedMethod: 'POST',
+			mockedUrl:
+				'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
+			mockedStatus: 201,
+		},
+	]);
+
+	return <Story />;
 };
-Default.storyName = 'default';
+
+export const CalloutEmbedBlockComponent = {
+	args: {
+		callout: calloutCampaign,
+	},
+	decorators: [goodRequest],
+} satisfies Story;

@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
 import { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
-import { getOphan } from '../client/ophan/ophan';
+import { getOphan, submitComponentEvent } from '../client/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { ExpandableMarketingCard } from './ExpandableMarketingCard';
+import type { UsBannerTestVariantName } from './ExpandableMarketingCardWrapper.importable';
 
 // The minimum length of the left swipe on the x-axis to close the banner
 const LEFT_SWIPE_THRESHOLD_PX = 20;
@@ -25,6 +26,7 @@ interface Props {
 	isExpanded: boolean;
 	setIsExpanded: Dispatch<SetStateAction<boolean>>;
 	setIsClosed: Dispatch<SetStateAction<boolean>>;
+	abTestVariant: UsBannerTestVariantName;
 }
 
 const hideBannerStyles = css`
@@ -35,7 +37,7 @@ const hideBannerStyles = css`
 const stickyContainerStyles = css`
 	position: sticky;
 	top: 0;
-	${getZIndex('expandableMarketingCardOverlay')};
+	z-index: ${getZIndex('expandableMarketingCardOverlay')};
 
 	/* The component slides in from the left-hand side */
 	animation: slidein 2.4s linear;
@@ -86,6 +88,7 @@ export const ExpandableMarketingCardSwipeable = ({
 	isExpanded,
 	setIsExpanded,
 	setIsClosed,
+	abTestVariant,
 }: Props) => {
 	const [lastDownXCoord, setLastDownXCoord] = useState<number | null>(null);
 	const [lastDownYCoord, setLastDownYCoord] = useState<number | null>(null);
@@ -153,15 +156,55 @@ export const ExpandableMarketingCardSwipeable = ({
 		}
 	}, [shouldDisplayCard]);
 
+	useEffect(() => {
+		if (isExpanded) {
+			void submitComponentEvent(
+				{
+					component: {
+						componentType: 'CONTAINER',
+						id: 'us-expandable-marketing-card',
+					},
+					action: 'EXPAND',
+					abTest: {
+						name: 'UsaExpandableMarketingCard',
+						variant: abTestVariant,
+					},
+				},
+				'Web',
+			);
+		}
+	}, [abTestVariant, isExpanded]);
+
+	useEffect(() => {
+		if (hasSwipedLeft) {
+			void submitComponentEvent(
+				{
+					component: {
+						componentType: 'CONTAINER',
+						id: 'us-expandable-marketing-card',
+					},
+					action: 'CLOSE',
+					abTest: {
+						name: 'UsaExpandableMarketingCard',
+						variant: abTestVariant,
+					},
+				},
+				'Web',
+			);
+		}
+	}, [abTestVariant, hasSwipedLeft]);
+
 	if (!shouldDisplayCard) {
 		return null;
 	}
 
 	if (!isExpanded) {
 		return (
-			<div css={[stickyContainerStyles]}>
+			<div
+				data-component="us-expandable-marketing-card"
+				css={[stickyContainerStyles]}
+			>
 				<div
-					data-link-name="us-expandable-marketing-card expand"
 					css={[
 						absoluteContainerStyles,
 						isDown &&
@@ -236,7 +279,10 @@ export const ExpandableMarketingCardSwipeable = ({
 	}
 
 	return (
-		<div css={[stickyContainerStyles]}>
+		<div
+			data-component="us-expandable-marketing-card"
+			css={[stickyContainerStyles]}
+		>
 			<div
 				css={[absoluteContainerStyles]}
 				role="button"

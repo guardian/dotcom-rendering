@@ -10,7 +10,7 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
-import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/src/types/props/shared';
+import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/types/props/shared';
 import { useEffect, useMemo, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { shouldHideSupportMessaging } from '../lib/contributions';

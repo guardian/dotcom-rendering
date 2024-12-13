@@ -15,7 +15,7 @@ import type {
 	BannerProps,
 	Cta,
 	SecondaryCta,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect } from 'react';
 import { useIsInView } from '../../../../lib/useIsInView';
 import type { ReactComponent } from '../../lib/ReactComponent';
@@ -29,7 +29,6 @@ import {
 	createViewEventFromTracking,
 	isProfileUrl,
 } from '../../lib/tracking';
-import { withParsedProps } from '../../shared/ModuleWrapper';
 import type { CloseableBannerProps } from '../utils/withCloseable';
 import { withCloseable } from '../utils/withCloseable';
 import type {
@@ -360,6 +359,11 @@ export const validatedBannerWrapper = (
 	Banner: ReactComponent<BannerRenderProps>,
 	bannerId: BannerId,
 ): ReactComponent<BannerProps> => {
-	const withoutValidation = bannerWrapper(Banner, bannerId);
-	return withParsedProps(withoutValidation, validate);
+	return (props: BannerProps) => {
+		if (validate(props)) {
+			const Module = bannerWrapper(Banner, bannerId);
+			return <Module {...props} />;
+		}
+		return <></>;
+	};
 };

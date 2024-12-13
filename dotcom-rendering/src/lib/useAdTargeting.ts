@@ -1,6 +1,7 @@
 import { log } from '@guardian/libs';
 import { mutate } from 'swr';
 import useSWRImmutable from 'swr/immutable';
+import type { AdTargeting } from '../types/commercial';
 
 const key = 'ad-targeting';
 const apiPromise = new Promise<AdTargeting>(() => {

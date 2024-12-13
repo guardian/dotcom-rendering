@@ -22,7 +22,7 @@ import {
 import type {
 	EpicProps,
 	Stage,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import { useArticleCountOptOut } from '../hooks/useArticleCountOptOut';
@@ -36,7 +36,6 @@ import {
 } from '../lib/tracking';
 import { logEpicView } from '../lib/viewLog';
 import type { OphanTracking } from '../shared/ArticleCountOptOutPopup';
-import { withParsedProps } from '../shared/ModuleWrapper';
 import { BylineWithHeadshot } from './BylineWithHeadshot';
 import { ContributionsEpicArticleCountAboveWithOptOut } from './ContributionsEpicArticleCountAboveWithOptOut';
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
@@ -461,7 +460,8 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 						}}
 						tickerData={tickerSettings.tickerData}
 						tickerStylingSettings={
-							isColourInTestVariant
+							isColourInTestVariant ||
+							tickerSettings.name === 'AU'
 								? usEOYTickerStylingSettings
 								: defaultTickerStylingSettings
 						}
@@ -536,7 +536,13 @@ export const validate = (props: unknown): props is EpicProps => {
 	return result.success;
 };
 
-const validatedEpic = withParsedProps(ContributionsEpic, validate);
+export const validatedEpic: ReactComponent<EpicProps> = (props) => {
+	if (validate(props)) {
+		return <ContributionsEpic {...props} />;
+	}
+	return <></>;
+};
+
 const unValidatedEpic = ContributionsEpic;
 export {
 	validatedEpic as ContributionsEpic,

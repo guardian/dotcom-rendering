@@ -42,6 +42,13 @@ const findCollectionSuitableForFrontBranding = (
 	return index;
 };
 
+/** Depending on the next sibling of the container, we assign either large or small spacing rules during render */
+const getContainerSpacing = (nextSiblingCollection?: FECollectionType) => {
+	const nextCollectionIsPrimary =
+		nextSiblingCollection?.config.collectionLevel === 'Primary';
+	return nextCollectionIsPrimary ? 'large' : 'small';
+};
+
 export const enhanceCollections = ({
 	collections,
 	editionId,
@@ -89,6 +96,8 @@ export const enhanceCollections = ({
 			},
 		);
 
+		const containerSpacing = getContainerSpacing(collections[index + 1]);
+
 		return {
 			id,
 			displayName,
@@ -99,6 +108,7 @@ export const enhanceCollections = ({
 			collectionType,
 			href,
 			containerPalette,
+			containerSpacing,
 			collectionBranding,
 			grouped: groupCards(
 				collectionType,
@@ -125,9 +135,11 @@ export const enhanceCollections = ({
 			),
 			config: {
 				showDateHeader: collection.config.showDateHeader,
+				containerLevel: collection.config.collectionLevel,
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
 			targetedTerritory: collection.targetedTerritory,
+			aspectRatio: collection.config.aspectRatio,
 		};
 	});
 };

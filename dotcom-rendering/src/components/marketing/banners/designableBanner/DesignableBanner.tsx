@@ -26,7 +26,7 @@ import type {
 	BannerDesignImage,
 	ConfigurableDesign,
 	Image,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import {
 	removeMediaRulePrefix,
@@ -325,6 +325,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						heading={content.mainContent.heading}
 						mobileHeading={content.mobileContent.heading}
 						headerSettings={templateSettings.headerSettings}
+						headlineSize={design.fonts?.heading.size ?? 'medium'}
 					/>
 				</div>
 				<div css={styles.contentContainer(showReminder)}>
@@ -625,7 +626,7 @@ const styles = {
 		}
 	`,
 	reminderText: css`
-		${textSans17}
+		${textSans17};
 		display: none;
 
 		${from.tablet} {
@@ -633,7 +634,7 @@ const styles = {
 		}
 	`,
 	reminderCta: ({ default: defaultSettings }: CtaSettings) => css`
-		${textSansBold17}
+		${textSansBold17};
 		color: ${defaultSettings.backgroundColour};
 		display: inline;
 		height: auto;

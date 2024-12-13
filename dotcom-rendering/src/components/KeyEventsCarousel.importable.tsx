@@ -7,7 +7,9 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
 import { useRef } from 'react';
+import { getInteractionClient } from '../lib/bridgetApi';
 import { palette } from '../palette';
+import type { Block } from '../types/blocks';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { KeyEventCard } from './KeyEventCard';
 
@@ -113,6 +115,7 @@ export const KeyEventsCarousel = ({
 }: Props) => {
 	const carousel = useRef<HTMLDivElement | null>(null);
 	const cardWidth = 200;
+	const isApps = renderingTarget === 'Apps';
 
 	const goPrevious = () => {
 		if (carousel.current) carousel.current.scrollLeft -= cardWidth;
@@ -120,6 +123,15 @@ export const KeyEventsCarousel = ({
 	const goNext = () => {
 		if (carousel.current) carousel.current.scrollLeft += cardWidth;
 	};
+
+	const onTouchStart = async () => {
+		await getInteractionClient().disableArticleSwipe(true);
+	};
+
+	const onTouchEnd = async () => {
+		await getInteractionClient().disableArticleSwipe(false);
+	};
+
 	const filteredKeyEvents = keyEvents.filter(isValidKeyEvent);
 	const carouselLength = filteredKeyEvents.length;
 	const shortCarousel = carouselLength <= 4;
@@ -131,6 +143,8 @@ export const KeyEventsCarousel = ({
 				<div css={titleStyles}>Key events</div>
 			</Hide>
 			<div
+				onTouchStart={isApps ? onTouchStart : undefined}
+				onTouchEnd={isApps ? onTouchEnd : undefined}
 				ref={carousel}
 				id="key-events-carousel"
 				css={[carouselStyles, shortCarousel && leftMarginStyles]}

@@ -15,6 +15,7 @@ import {
 import { palette } from '../palette';
 import CameraSvg from '../static/icons/camera.svg';
 import VideoSvg from '../static/icons/video-icon.svg';
+import type { MediaType } from '../types/layout';
 
 type Props = {
 	captionText?: string;
