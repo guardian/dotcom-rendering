@@ -12,6 +12,7 @@ import type { OnwardsSource } from '../types/onwards';
 import type { TagType } from '../types/tag';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
 import { Section } from './Section';
+import { RenderingTarget } from 'src/types/renderingTarget';
 
 type PillarForContainer =
 	| 'headlines'
@@ -179,6 +180,7 @@ type Props = {
 	shortUrlId: string;
 	discussionApiUrl: string;
 	absoluteServerTimes: boolean;
+	renderingTarget: RenderingTarget;
 };
 
 /**
@@ -213,6 +215,7 @@ export const OnwardsUpper = ({
 	shortUrlId,
 	discussionApiUrl,
 	absoluteServerTimes,
+	renderingTarget,
 }: Props) => {
 
 	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
@@ -311,6 +314,7 @@ export const OnwardsUpper = ({
 						format={format}
 						discussionApiUrl={discussionApiUrl}
 						absoluteServerTimes={absoluteServerTimes}
+						renderingTarget={renderingTarget}
 					/>
 				</Section>
 			)}
@@ -326,6 +330,7 @@ export const OnwardsUpper = ({
 						format={format}
 						discussionApiUrl={discussionApiUrl}
 						absoluteServerTimes={absoluteServerTimes}
+						renderingTarget={renderingTarget}
 					/>
 				</Section>
 			)}
