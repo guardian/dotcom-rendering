@@ -3,8 +3,6 @@ import {
 	from,
 	headlineBold14,
 	space,
-	textSansBold14,
-	textSansBold17,
 	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
@@ -59,32 +57,6 @@ const editionSwitcherMenuStyles = css`
 const slimNavEditionSwitcherOverrides = css`
 	${until.tablet} {
 		justify-self: start;
-	}
-`;
-
-const accreditationStyles = css`
-	${gridContent}
-	grid-row: 1;
-	justify-self: start;
-	align-self: start;
-	display: flex;
-	flex-wrap: wrap;
-	padding-top: 10px;
-	color: ${themePalette('--masthead-accreditation-text')};
-
-	${textSansBold14}
-
-	${until.mobileMedium} {
-		display: none;
-	}
-	${until.mobileLandscape} {
-		max-width: 100px;
-	}
-`;
-
-const accreditationStylesFromLeftCol = css`
-	${from.leftCol} {
-		${textSansBold17}
 	}
 `;
 
@@ -539,18 +511,6 @@ export const Titlepiece = ({
 			>
 				<Logo />
 			</div>
-
-			{/* Accreditation text */}
-			{!showSlimNav && editionId === 'UK' && (
-				<span
-					css={[
-						accreditationStyles,
-						!hasPageSkin && accreditationStylesFromLeftCol,
-					]}
-				>
-					News provider of the year
-				</span>
-			)}
 
 			{/** Expanded menu checkbox */}
 			<input

@@ -290,6 +290,7 @@ export type FEFrontCard = {
 		shortUrl: string;
 		group: string;
 		isLive: boolean;
+		galleryCount?: number;
 	};
 	discussion: {
 		isCommentable: boolean;
@@ -348,6 +349,7 @@ export type DCRFrontCard = {
 	slideshowImages?: DCRSlideshowImage[];
 	showMainVideo?: boolean;
 	podcastImageSrc?: string;
+	galleryCount?: number;
 };
 
 export type DCRSlideshowImage = {

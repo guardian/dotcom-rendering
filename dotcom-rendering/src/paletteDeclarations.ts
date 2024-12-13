@@ -50,8 +50,33 @@ const pillarPalette = (
 	}
 };
 
-const textblockTextLight: PaletteFunction = (format: ArticleFormat) => {
-	switch (format.design) {
+const textblockBulletLight: PaletteFunction = ({ theme, design }) => {
+	switch (theme) {
+		case Pillar.News: {
+			return design === ArticleDesign.Analysis
+				? sourcePalette.news[300]
+				: sourcePalette.news[400];
+		}
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle: {
+			return pillarPalette(theme, 400);
+		}
+		case ArticleSpecial.Labs: {
+			return sourcePalette.neutral[7];
+		}
+		case ArticleSpecial.SpecialReport: {
+			return sourcePalette.specialReport[300];
+		}
+		case ArticleSpecial.SpecialReportAlt: {
+			return sourcePalette.specialReportAlt[200];
+		}
+	}
+};
+
+const textblockTextLight: PaletteFunction = ({ design }) => {
+	switch (design) {
 		case ArticleDesign.Audio:
 			return sourcePalette.neutral[97];
 		default:
@@ -1822,6 +1847,23 @@ const accordionBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
 const accordionBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
+
+const tableBlockTextLight: PaletteFunction = () => sourcePalette.neutral[7];
+const tableBlockTextDark: PaletteFunction = () => sourcePalette.neutral[86];
+const tableBlockBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const tableBlockBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+const tableBlockStripeLight: PaletteFunction = () => sourcePalette.neutral[93];
+const tableBlockStripeDark: PaletteFunction = () => sourcePalette.neutral[20];
+const tableBlockTextFirstColumnLight: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+const tableBlockTextFirstColumnDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+const tableBlockBorderTopLight: PaletteFunction = () =>
+	sourcePalette.brand[500];
+const tableBlockBorderTopDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
 
 const tableOfContentsLight: PaletteFunction = () => sourcePalette.neutral[7];
 const tableOfContentsDark: PaletteFunction = () => sourcePalette.neutral[86];
@@ -5463,9 +5505,6 @@ const highlightsCardKickerText: PaletteFunction = (format) => {
 	}
 };
 
-const mastheadAccreditationText: PaletteFunction = () =>
-	sourcePalette.brandAlt[400];
-
 const pinnedPostBorderLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -6598,10 +6637,6 @@ const paletteColours = {
 		light: liveBlockContainerBackgroundLight,
 		dark: liveBlockContainerBackgroundDark,
 	},
-	'--masthead-accreditation-text': {
-		light: mastheadAccreditationText,
-		dark: mastheadAccreditationText,
-	},
 	'--masthead-nav-background': {
 		light: mastheadNavBackground,
 		dark: mastheadNavBackground,
@@ -7086,6 +7121,26 @@ const paletteColours = {
 		light: syndicationButtonTextLight,
 		dark: syndicationButtonTextDark,
 	},
+	'--table-block-background': {
+		light: tableBlockBackgroundLight,
+		dark: tableBlockBackgroundDark,
+	},
+	'--table-block-border-top': {
+		light: tableBlockBorderTopLight,
+		dark: tableBlockBorderTopDark,
+	},
+	'--table-block-stripe': {
+		light: tableBlockStripeLight,
+		dark: tableBlockStripeDark,
+	},
+	'--table-block-text': {
+		light: tableBlockTextLight,
+		dark: tableBlockTextDark,
+	},
+	'--table-block-text-first-column': {
+		light: tableBlockTextFirstColumnLight,
+		dark: tableBlockTextFirstColumnDark,
+	},
 	'--table-of-contents': {
 		light: tableOfContentsLight,
 		dark: tableOfContentsDark,
@@ -7101,6 +7156,10 @@ const paletteColours = {
 	'--tag-page-chevron': {
 		light: () => sourcePalette.neutral[0],
 		dark: () => sourcePalette.neutral[86],
+	},
+	'--textblock-bullet-background': {
+		light: textblockBulletLight,
+		dark: textblockBulletLight,
 	},
 	'--textblock-text': {
 		light: textblockTextLight,
