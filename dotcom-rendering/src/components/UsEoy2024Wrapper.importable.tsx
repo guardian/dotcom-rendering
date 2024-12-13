@@ -413,7 +413,7 @@ export const UsEoy2024: ReactComponent<Props> = ({
 							},
 							hover: {
 								backgroundColour: isSubCampaign
-									? '#670055'
+									? '#891414'
 									: '#C41C1C',
 								textColour: '#FFFFFF',
 							},
