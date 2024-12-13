@@ -17,7 +17,6 @@ import { DesignableBannerCloseButton } from './components/DesignableBannerCloseB
 import { DesignableBannerCtas } from './components/DesignableBannerCtas';
 import { DesignableBannerHeader } from './components/DesignableBannerHeader';
 import type { BannerTemplateSettings } from './settings';
-import { templateSpacing } from './styles/templateStyles';
 
 const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	content,
@@ -150,32 +149,35 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					</>
 				)}
 
-				<div>
+				<div css={styles.middleColumnContainer}>
 					<DesignableBannerHeader
 						heading={content.mainContent.heading}
 						mobileHeading={content.mobileContent.heading}
 						headerSettings={templateSettings.headerSettings}
 						headlineSize={design.fonts?.heading.size ?? 'medium'}
 					/>
-				</div>
-				<div>
-					{showAboveArticleCount && (
-						<DesignableBannerArticleCount
-							numArticles={articleCounts.forTargetedWeeks}
-							settings={templateSettings}
-							copy={separateArticleCountSettings?.copy}
+					<div>
+						{showAboveArticleCount && (
+							<DesignableBannerArticleCount
+								numArticles={articleCounts.forTargetedWeeks}
+								settings={templateSettings}
+								copy={separateArticleCountSettings?.copy}
+							/>
+						)}
+						<DesignableBannerBody
+							mainContent={content.mainContent}
+							mobileContent={content.mobileContent}
+							highlightedTextSettings={
+								templateSettings.highlightedTextSettings
+							}
 						/>
-					)}
+					</div>
 				</div>
-				<div>
-					<DesignableBannerBody
-						mainContent={content.mainContent}
-						mobileContent={content.mobileContent}
-						highlightedTextSettings={
-							templateSettings.highlightedTextSettings
-						}
-					/>
+				<div css={styles.thirdColumnContainer}>
+					{' '}
+					choice cards go here{' '}
 				</div>
+
 				{!isTabletOrAbove && (
 					<>
 						<div>
@@ -191,7 +193,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 							/>
 						</div>
 						<div css={styles.linkButtonContainer}>
-							//using this means using the payment icons...
+							{/*using this means using the payment icons...*/}
 							<DesignableBannerCtas
 								mainOrMobileContent={mainOrMobileContent}
 								onPrimaryCtaClick={onCtaClick}
@@ -244,29 +246,18 @@ const styles = {
 
 		${from.tablet} {
 			display: grid;
-			grid-template-columns: 1fr 280px;
+			grid-template-columns: auto 1fr 1fr;
 			grid-template-rows: auto 1fr auto;
-			column-gap: ${space[5]}px;
 			width: 100%;
 			max-width: 1300px;
 			margin: 0 auto;
 			align-items: start;
+			column-gap: 10px;
 		}
-
-		${from.desktop} {
-			column-gap: 60px;
-			grid-template-columns: 1fr 460px;
-		}
-
-		${from.wide} {
-			column-gap: 100px;
-		}
-
-		${templateSpacing.bannerContainer};
 	`,
 	closeButtonOverrides: css`
 		margin-top: ${space[3]}px;
-		grid-column: 2;
+		grid-column: 3;
 		grid-row: 1;
 		justify-content: end;
 	`,
@@ -288,6 +279,17 @@ const styles = {
 		align-self: start;
 		padding-top: ${space[3]}px;
 		padding-left: ${space[3]}px;
+	`,
+	middleColumnContainer: css`
+		${from.tablet} {
+			grid-column: 2;
+			grid-row: 2;
+			column-gap: 20px;
+	`,
+	thirdColumnContainer: css`
+		${from.tablet} {
+			grid-column: 3;
+			grid-row: 2;
 	`,
 };
 
