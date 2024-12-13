@@ -866,6 +866,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									article.config.discussionApiUrl
 								}
 								absoluteServerTimes={absoluteServerTimes}
+								renderingTarget={renderingTarget}
 							/>
 						</Island>
 					</Section>
@@ -889,6 +890,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
 						absoluteServerTimes={absoluteServerTimes}
+						renderingTarget={renderingTarget}
 					/>
 				</Island>
 

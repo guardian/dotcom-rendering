@@ -46,6 +46,7 @@ import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const AudioGrid = ({ children }: { children: React.ReactNode }) => (
@@ -147,14 +148,16 @@ const usCardStyles = css`
 interface Props {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 }
 
 interface WebProps extends Props {
 	NAV: NavType;
+	renderingTarget: 'Web';
 }
 
 export const AudioLayout = (props: WebProps) => {
-	const { article, format } = props;
+	const { article, format, renderingTarget } = props;
 	const audioData = getAudioData(article.mainMediaElements);
 
 	const {
@@ -552,6 +555,7 @@ export const AudioLayout = (props: WebProps) => {
 									article.config.discussionApiUrl
 								}
 								absoluteServerTimes={absoluteServerTimes}
+								renderingTarget={renderingTarget}
 							/>
 						</Island>
 					</Section>
@@ -575,6 +579,7 @@ export const AudioLayout = (props: WebProps) => {
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
 						absoluteServerTimes={absoluteServerTimes}
+						renderingTarget={renderingTarget}
 					/>
 				</Island>
 				{showComments && (
