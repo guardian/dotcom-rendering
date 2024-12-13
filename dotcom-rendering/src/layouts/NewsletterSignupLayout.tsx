@@ -40,8 +40,8 @@ import { decideTrail } from '../lib/decideTrail';
 import { isValidUrl } from '../lib/isValidUrl';
 import type { NavType } from '../model/extract-nav';
 import type { ArticleDeprecated } from '../types/article';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { RenderingTarget } from '../types/renderingTarget';
 
 type Props = {
 	article: ArticleDeprecated;
