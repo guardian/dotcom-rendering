@@ -28,7 +28,7 @@ import { Bio } from './Bio';
 import { EndNote } from './EndNote';
 import { subheadingStyles } from './Subheading';
 
-const multiBylineItemStyles = css`
+const multiBylineStyles = css`
 	padding-top: 8px;
 `;
 
@@ -159,21 +159,16 @@ const bylineImageStyles = css`
 	}
 `;
 
-interface MultiBylineItemProps {
+interface Props {
 	multiByline: MultiBylineModel;
 	format: ArticleFormat;
 	tags: TagType[];
 	children: React.ReactNode;
 }
 
-export const MultiByline = ({
-	multiByline,
-	format,
-	tags,
-	children,
-}: MultiBylineItemProps) => {
+export const MultiByline = ({ multiByline, format, tags, children }: Props) => {
 	return (
-		<div css={multiBylineItemStyles} data-spacefinder-role="nested">
+		<div css={multiBylineStyles} data-spacefinder-role="nested">
 			<Byline
 				title={multiByline.title}
 				byline={multiByline.byline}

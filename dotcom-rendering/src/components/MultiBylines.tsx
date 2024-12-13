@@ -9,7 +9,7 @@ import type {
 	StarRating,
 } from '../types/content';
 import type { TagType } from '../types/tag';
-import { MultiByline as MultiBylineItemComponent } from './MultiByline';
+import { MultiByline } from './MultiByline';
 
 interface MultiBylineProps {
 	format: ArticleFormat;
@@ -57,14 +57,14 @@ export const MultiBylines = ({
 }: MultiBylineProps) => {
 	return (
 		<>
-			{multiBylines.map((multiBylineItem, index) => (
-				<MultiBylineItemComponent
-					multiByline={multiBylineItem}
+			{multiBylines.map((multiByline, index) => (
+				<MultiByline
+					multiByline={multiByline}
 					format={format}
 					tags={tags}
-					key={multiBylineItem.title}
+					key={multiByline.title}
 				>
-					{multiBylineItem.body.map((element) => (
+					{multiByline.body.map((element) => (
 						// eslint-disable-next-line react/jsx-key -- The element array should remain consistent as it's derived from the order of elements in CAPI
 						<RenderArticleElement
 							format={format}
@@ -74,7 +74,7 @@ export const MultiBylines = ({
 							index={index}
 							isMainMedia={false}
 							pageId={pageId}
-							webTitle={multiBylineItem.title}
+							webTitle={multiByline.title}
 							isAdFreeUser={isAdFreeUser}
 							isSensitive={isSensitive}
 							switches={switches}
@@ -86,7 +86,7 @@ export const MultiBylines = ({
 							isListElement={true}
 						/>
 					))}
-				</MultiBylineItemComponent>
+				</MultiByline>
 			))}
 			{!isLastElement && <hr css={separatorStyles} />}
 		</>
