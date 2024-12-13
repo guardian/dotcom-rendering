@@ -5505,9 +5505,6 @@ const highlightsCardKickerText: PaletteFunction = (format) => {
 	}
 };
 
-const mastheadAccreditationText: PaletteFunction = () =>
-	sourcePalette.brandAlt[400];
-
 const pinnedPostBorderLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -6639,10 +6636,6 @@ const paletteColours = {
 	'--live-block-container-background': {
 		light: liveBlockContainerBackgroundLight,
 		dark: liveBlockContainerBackgroundDark,
-	},
-	'--masthead-accreditation-text': {
-		light: mastheadAccreditationText,
-		dark: mastheadAccreditationText,
 	},
 	'--masthead-nav-background': {
 		light: mastheadNavBackground,
