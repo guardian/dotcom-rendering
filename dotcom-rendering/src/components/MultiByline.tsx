@@ -220,16 +220,18 @@ const Byline = ({
 		<div css={bylineWrapperStyles}>
 			<div css={bylineTextStyles}>
 				<hr css={headingLineStyles} />
-				<h2
-					id={slugify(title)}
-					css={[subheadingStyles(format), headingMarginStyle]}
-				>
-					{title}
-				</h2>
-				<h3
-					css={bylineStyles(format)}
-					dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
-				/>
+				<hgroup>
+					<h2
+						id={slugify(title)}
+						css={[subheadingStyles(format), headingMarginStyle]}
+					>
+						{title}
+					</h2>
+					<p
+						css={bylineStyles(format)}
+						dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
+					/>
+				</hgroup>
 			</div>
 			{!!imageUrl && (
 				<div css={bylineImageStyles}>
