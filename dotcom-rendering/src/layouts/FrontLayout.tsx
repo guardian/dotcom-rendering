@@ -49,6 +49,7 @@ import type {
 	DCRCollectionType,
 	DCRContainerType,
 	DCRFrontType,
+	DCRGroupedTrails,
 } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
@@ -326,6 +327,37 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								branding: undefined,
 						  }))
 						: trails;
+
+					// We also need to remove the branding for the cards in grouped
+					// trails for dynamic containers
+					const groupedWithoutBranding: DCRGroupedTrails = (() => {
+						if (
+							isPaidContentSameBranding(
+								collection.collectionBranding,
+							)
+						) {
+							const groupedTrailsWithoutBranding: DCRGroupedTrails =
+								{
+									snap: [],
+									huge: [],
+									veryBig: [],
+									big: [],
+									standard: [],
+									splash: [],
+								};
+							for (const key of Object.keys(
+								collection.grouped,
+							) as (keyof DCRGroupedTrails)[]) {
+								groupedTrailsWithoutBranding[key] =
+									collection.grouped[key].map((labTrail) => ({
+										...labTrail,
+										branding: undefined,
+									}));
+							}
+							return groupedTrailsWithoutBranding;
+						}
+						return collection.grouped;
+					})();
 
 					if (collection.collectionType === 'scrollable/highlights') {
 						// Highlights are rendered in the Masthead component
@@ -713,10 +745,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								containerLevel={
 									collection.config.containerLevel
 								}
+								containerSpacing={collection.containerSpacing}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
-									groupedTrails={collection.grouped}
+									groupedTrails={groupedWithoutBranding}
 									containerType={collection.collectionType}
 									containerPalette={
 										collection.containerPalette

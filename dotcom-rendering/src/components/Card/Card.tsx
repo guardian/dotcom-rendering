@@ -24,6 +24,7 @@ import type {
 } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
+import type { PodcastSeriesImage } from '../../types/tag';
 import { Avatar } from '../Avatar';
 import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
@@ -138,6 +139,9 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** If specified, overrides trail text colour */
 	trailTextColour?: string;
+	/** The square podcast series image, if it exists for a card */
+	podcastImage?: PodcastSeriesImage;
+	galleryCount?: number;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -190,6 +194,7 @@ const getMedia = ({
 	slideshowImages,
 	mainMedia,
 	isPlayableMediaCard,
+	podcastImage,
 }: {
 	imageUrl?: string;
 	imageAltText?: string;
@@ -198,6 +203,7 @@ const getMedia = ({
 	slideshowImages?: DCRSlideshowImage[];
 	mainMedia?: MainMedia;
 	isPlayableMediaCard?: boolean;
+	podcastImage?: PodcastSeriesImage;
 }) => {
 	if (mainMedia && mainMedia.type === 'Video' && isPlayableMediaCard) {
 		return {
@@ -208,6 +214,13 @@ const getMedia = ({
 	}
 	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
 	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
+	if (podcastImage) {
+		return {
+			type: 'podcast',
+			podcastImage,
+			trailImage: { src: imageUrl, altText: imageAltText },
+		} as const;
+	}
 	if (imageUrl) {
 		const type = isCrossword ? 'crossword' : 'picture';
 		return { type, imageUrl, imageAltText } as const;
@@ -327,6 +340,9 @@ export const Card = ({
 	showTopBarMobile = false,
 	trailTextSize,
 	trailTextColour,
+	podcastImage,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- Added in preparation for UI changes to display gallery count
+	galleryCount,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -419,6 +435,7 @@ export const Card = ({
 		slideshowImages,
 		mainMedia,
 		isPlayableMediaCard,
+		podcastImage,
 	});
 
 	// For opinion type cards with avatars (which aren't onwards content)

@@ -55,7 +55,8 @@ type Props = {
 	/** Fronts containers can have their styling overridden using a `containerLevel`.
 	 * If used, this can be either "Primary" or "Secondary", both of which have different styles */
 	containerLevel?: DCRContainerLevel;
-
+	/** Fronts containers spacing rules vary depending on the size of their container spacing which is derived from if the next container is a primary or secondary. */
+	containerSpacing?: 'large' | 'small';
 	/** Defaults to `false`. If true a Hide button is show top right allowing this section
 	 * to be collapsed
 	 */
@@ -296,7 +297,7 @@ const sectionContentBorderFromLeftCol = css`
 			content: '';
 			position: absolute;
 			top: ${space[2]}px;
-			bottom: ${space[6]}px;
+			bottom: 0;
 			border-left: 1px solid ${schemePalette('--section-border')};
 			transform: translateX(-50%);
 			/** Keeps the vertical divider ontop of carousel item dividers */
@@ -356,46 +357,12 @@ const bottomPadding = css`
 	padding-bottom: ${space[9]}px;
 `;
 
-/** Adds space above the border of primary level containers without
- * causing gaps in the vertical side borders from tablet upwards
- */
-const primaryLevelTopSpacer = css`
-	height: ${space[4]}px;
-	background-color: ${schemePalette('--front-page-background')};
-	${from.tablet} {
-		display: grid;
-		column-gap: 20px;
-		grid-template-columns:
-			minmax(0, 1fr)
-			[decoration-start]
-			repeat(12, 40px)
-			[decoration-end]
-			minmax(0, 1fr);
-	}
-	${from.desktop} {
-		grid-template-columns:
-			minmax(0, 1fr)
-			[decoration-start]
-			repeat(12, 60px)
-			[decoration-end]
-			minmax(0, 1fr);
-	}
-	${from.leftCol} {
-		grid-template-columns:
-			minmax(0, 1fr)
-			[decoration-start]
-			repeat(14, 60px)
-			[decoration-end]
-			minmax(0, 1fr);
-	}
-	${from.wide} {
-		grid-template-columns:
-			minmax(0, 1fr)
-			[decoration-start]
-			repeat(16, 60px)
-			[decoration-end]
-			minmax(0, 1fr);
-	}
+const smallBottomPadding = css`
+	padding-bottom: ${space[6]}px;
+`;
+
+const largeBottomPadding = css`
+	padding-bottom: ${space[10]}px;
 `;
 
 const primaryLevelTopBorder = css`
@@ -503,6 +470,7 @@ export const FrontSection = ({
 	containerName,
 	containerPalette,
 	containerLevel,
+	containerSpacing,
 	description,
 	editionId,
 	leftContent,
@@ -536,174 +504,162 @@ export const FrontSection = ({
 		!!ajaxUrl &&
 		!containerLevel;
 	const showVerticalRule = !hasPageSkin;
-
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
 	 * this id pre-existed showMore so is probably also being used for something else.
 	 */
 	return (
-		<>
-			{/** Primary level containers have additional spacing above the horizontal rule */}
-			{containerLevel === 'Primary' && (
-				<div css={primaryLevelTopSpacer}>
-					<div css={[decoration, sideBorders]} />
-				</div>
-			)}
-			<ContainerOverrides containerPalette={containerPalette}>
-				<section
-					id={sectionId}
-					data-link-name={ophanComponentLink}
-					data-component={ophanComponentName}
-					data-container-name={containerName}
-					data-container-level={containerLevel}
-					css={[
-						fallbackStyles,
-						containerStylesUntilLeftCol,
-						!hasPageSkin && containerStylesFromLeftCol,
-						hasPageSkin && pageSkinContainer,
-					]}
-					style={{
-						backgroundColor: schemePalette(
-							'--front-container-background',
-						),
-					}}
-				>
-					{!!containerLevel && showTopBorder && (
-						<div
-							css={[
-								containerLevel === 'Secondary'
-									? secondaryLevelTopBorder
-									: primaryLevelTopBorder,
-							]}
-						/>
-					)}
-
+		<ContainerOverrides containerPalette={containerPalette}>
+			<section
+				id={sectionId}
+				data-link-name={ophanComponentLink}
+				data-component={ophanComponentName}
+				data-container-name={containerName}
+				data-container-level={containerLevel}
+				css={[
+					fallbackStyles,
+					containerStylesUntilLeftCol,
+					!hasPageSkin && containerStylesFromLeftCol,
+					hasPageSkin && pageSkinContainer,
+				]}
+				style={{
+					backgroundColor: schemePalette(
+						'--front-container-background',
+					),
+				}}
+			>
+				{!!containerLevel && showTopBorder && (
 					<div
 						css={[
-							decoration,
-							sideBorders,
-							showTopBorder && !containerLevel && topBorder,
+							containerLevel === 'Secondary'
+								? secondaryLevelTopBorder
+								: primaryLevelTopBorder,
 						]}
 					/>
+				)}
 
-					<div
-						css={[
-							sectionHeadlineUntilLeftCol(
-								// TODO FIXME:
-								// This relies on sections called "opinion"
-								// only ever having <CPScott> as the leftContent
-								title?.toLowerCase() === 'opinion',
+				<div
+					css={[
+						decoration,
+						sideBorders,
+						showTopBorder && !containerLevel && topBorder,
+					]}
+				/>
+
+				<div
+					css={[
+						sectionHeadlineUntilLeftCol(
+							// TODO FIXME:
+							// This relies on sections called "opinion"
+							// only ever having <CPScott> as the leftContent
+							title?.toLowerCase() === 'opinion',
+						),
+						showVerticalRule &&
+							!containerLevel &&
+							sectionHeadlineFromLeftCol(
+								schemePalette('--section-border'),
 							),
-							showVerticalRule &&
-								!containerLevel &&
-								sectionHeadlineFromLeftCol(
-									schemePalette('--section-border'),
-								),
-							title?.toLowerCase() === 'headlines' &&
-								sectionHeadlineHeight,
-						]}
-					>
-						<FrontSectionTitle
-							title={
-								<ContainerTitle
-									title={title}
-									lightweightHeader={isTagPage}
-									description={description}
-									fontColour={schemePalette(
-										'--article-section-title',
-									)}
-									// On paid fronts the title is not treated as a link
-									url={
-										!isOnPaidContentFront ? url : undefined
-									}
-									showDateHeader={showDateHeader}
-									editionId={editionId}
-									containerLevel={containerLevel}
-								/>
-							}
-							collectionBranding={collectionBranding}
+						title?.toLowerCase() === 'headlines' &&
+							sectionHeadlineHeight,
+					]}
+				>
+					<FrontSectionTitle
+						title={
+							<ContainerTitle
+								title={title}
+								lightweightHeader={isTagPage}
+								description={description}
+								fontColour={schemePalette(
+									'--article-section-title',
+								)}
+								// On paid fronts the title is not treated as a link
+								url={!isOnPaidContentFront ? url : undefined}
+								showDateHeader={showDateHeader}
+								editionId={editionId}
+								containerLevel={containerLevel}
+							/>
+						}
+						collectionBranding={collectionBranding}
+					/>
+
+					{leftContent}
+				</div>
+
+				{isToggleable && (
+					<div css={sectionShowHide}>
+						<ShowHideButton sectionId={sectionId} />
+					</div>
+				)}
+
+				<div
+					css={[
+						sectionContent,
+						sectionContentPadded,
+						sectionContentRow(toggleable),
+						topPadding,
+						showVerticalRule &&
+							!!containerLevel &&
+							sectionContentBorderFromLeftCol,
+					]}
+					id={`container-${sectionId}`}
+				>
+					{children}
+				</div>
+
+				<div
+					css={[
+						sectionContentPadded,
+						sectionBottomContent,
+						!containerLevel && bottomPadding,
+						containerSpacing === 'small' && smallBottomPadding,
+						containerSpacing === 'large' && largeBottomPadding,
+					]}
+				>
+					{isString(targetedTerritory) &&
+					isAustralianTerritory(targetedTerritory) ? (
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<AustralianTerritorySwitcher
+								targetedTerritory={targetedTerritory}
+							/>
+						</Island>
+					) : showMore ? (
+						<Island
+							priority="feature"
+							defer={{ until: 'interaction' }}
+						>
+							<ShowMore
+								title={title}
+								sectionId={sectionId}
+								collectionId={collectionId}
+								pageId={pageId}
+								ajaxUrl={ajaxUrl}
+								editionId={editionId}
+								containerPalette={containerPalette}
+								showAge={!hideAge.includes(title)}
+								discussionApiUrl={discussionApiUrl}
+							/>
+						</Island>
+					) : null}
+					{pagination && (
+						<FrontPagination
+							sectionName={pagination.sectionName}
+							totalContent={pagination.totalContent}
+							currentPage={pagination.currentPage}
+							lastPage={pagination.lastPage}
+							pageId={pagination.pageId}
 						/>
-
-						{leftContent}
-					</div>
-
-					{isToggleable && (
-						<div css={sectionShowHide}>
-							<ShowHideButton sectionId={sectionId} />
-						</div>
 					)}
+				</div>
 
-					<div
-						css={[
-							sectionContent,
-							sectionContentPadded,
-							sectionContentRow(toggleable),
-							topPadding,
-							showVerticalRule &&
-								!!containerLevel &&
-								sectionContentBorderFromLeftCol,
-						]}
-						id={`container-${sectionId}`}
-					>
-						{children}
+				{treats && !hasPageSkin && (
+					<div css={[sectionTreats, topPadding]}>
+						<Treats
+							treats={treats}
+							borderColour={palette('--section-border')}
+						/>
 					</div>
-
-					<div
-						css={[
-							sectionContentPadded,
-							sectionBottomContent,
-							!containerLevel && bottomPadding,
-						]}
-					>
-						{isString(targetedTerritory) &&
-						isAustralianTerritory(targetedTerritory) ? (
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<AustralianTerritorySwitcher
-									targetedTerritory={targetedTerritory}
-								/>
-							</Island>
-						) : showMore ? (
-							<Island
-								priority="feature"
-								defer={{ until: 'interaction' }}
-							>
-								<ShowMore
-									title={title}
-									sectionId={sectionId}
-									collectionId={collectionId}
-									pageId={pageId}
-									ajaxUrl={ajaxUrl}
-									editionId={editionId}
-									containerPalette={containerPalette}
-									showAge={!hideAge.includes(title)}
-									discussionApiUrl={discussionApiUrl}
-								/>
-							</Island>
-						) : null}
-						{pagination && (
-							<FrontPagination
-								sectionName={pagination.sectionName}
-								totalContent={pagination.totalContent}
-								currentPage={pagination.currentPage}
-								lastPage={pagination.lastPage}
-								pageId={pagination.pageId}
-							/>
-						)}
-					</div>
-
-					{treats && !hasPageSkin && (
-						<div css={[sectionTreats, topPadding]}>
-							<Treats
-								treats={treats}
-								borderColour={palette('--section-border')}
-							/>
-						</div>
-					)}
-				</section>
-			</ContainerOverrides>
-		</>
+				)}
+			</section>
+		</ContainerOverrides>
 	);
 };

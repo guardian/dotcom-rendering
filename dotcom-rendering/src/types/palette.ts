@@ -16,9 +16,7 @@ export type Palette = {
 	background: {
 		analysisContrast: Colour;
 		analysisContrastHover: Colour;
-		bullet: Colour;
 		bulletStandfirst: Colour;
-		speechBubble: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
