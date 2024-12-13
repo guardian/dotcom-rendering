@@ -10,7 +10,7 @@ export const useIsBridgetCompatible = (
 	);
 
 	useEffect(() => {
-		hasMinimumBridgetVersion(requiredVersion).then(setIsCompatible);
+		void hasMinimumBridgetVersion(requiredVersion).then(setIsCompatible);
 	}, [requiredVersion]);
 	return isCompatible;
 };

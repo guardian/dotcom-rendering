@@ -6,10 +6,10 @@ import { useApi } from '../lib/useApi';
 import { addDiscussionIds } from '../lib/useCommentCount';
 import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { FETrailType, TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
 import { Placeholder } from './Placeholder';
-import { RenderingTarget } from 'src/types/renderingTarget';
 
 type Props = {
 	url: string;

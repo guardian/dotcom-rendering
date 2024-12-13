@@ -9,6 +9,7 @@ import {
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
+import { getInteractionClient } from '../lib/bridgetApi';
 import { formatAttrString } from '../lib/formatAttrString';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';
@@ -24,6 +25,7 @@ import type {
 import type { LeftColSize } from '../types/layout';
 import type { MainMedia } from '../types/mainMedia';
 import type { OnwardsSource } from '../types/onwards';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
@@ -32,8 +34,6 @@ import { ContainerOverrides } from './ContainerOverrides';
 import { FormatBoundary } from './FormatBoundary';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
-import { getInteractionClient } from '../lib/bridgetApi';
-import { RenderingTarget } from 'src/types/renderingTarget';
 
 type Props = {
 	heading: string;
