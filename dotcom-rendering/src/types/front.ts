@@ -290,6 +290,7 @@ export type FEFrontCard = {
 		shortUrl: string;
 		group: string;
 		isLive: boolean;
+		galleryCount?: number;
 	};
 	discussion: {
 		isCommentable: boolean;
@@ -323,6 +324,11 @@ export type DCRFrontCard = {
 	url: string;
 	headline: string;
 	showQuotedHeadline: boolean;
+	/** @see JSX.IntrinsicAttributes["data-link-name"] */
+	dataLinkName: string;
+	discussionApiUrl: string;
+	isExternalLink: boolean;
+	showLivePlayable: boolean;
 	trailText?: string;
 	starRating?: StarRating;
 	webPublicationDate?: string;
@@ -333,21 +339,17 @@ export type DCRFrontCard = {
 	isBoosted?: boolean;
 	boostLevel?: BoostLevel;
 	isCrossword?: boolean;
-	/** @see JSX.IntrinsicAttributes["data-link-name"] */
-	dataLinkName: string;
-	discussionApiUrl: string;
 	discussionId?: string;
 	byline?: string;
 	showByline?: boolean;
 	avatarUrl?: string;
 	mainMedia?: MainMedia;
-	isExternalLink: boolean;
 	embedUri?: string;
 	branding?: Branding;
 	slideshowImages?: DCRSlideshowImage[];
-	showLivePlayable: boolean;
 	showMainVideo?: boolean;
 	podcastImageSrc?: string;
+	galleryCount?: number;
 };
 
 export type DCRSlideshowImage = {
@@ -417,6 +419,7 @@ export type DCRCollectionType = {
 	description?: string;
 	collectionType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
+	containerSpacing?: 'large' | 'small';
 	grouped: DCRGroupedTrails;
 	curated: DCRFrontCard[];
 	backfill: DCRFrontCard[];

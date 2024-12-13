@@ -626,7 +626,7 @@ const styles = {
 		}
 	`,
 	reminderText: css`
-		${textSans17}
+		${textSans17};
 		display: none;
 
 		${from.tablet} {
@@ -634,7 +634,7 @@ const styles = {
 		}
 	`,
 	reminderCta: ({ default: defaultSettings }: CtaSettings) => css`
-		${textSansBold17}
+		${textSansBold17};
 		color: ${defaultSettings.backgroundColour};
 		display: inline;
 		height: auto;
