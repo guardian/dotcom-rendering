@@ -347,7 +347,6 @@ export const Card = ({
 	trailTextSize,
 	trailTextColour,
 	podcastImage,
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- Added in preparation for UI changes to display gallery count
 	galleryCount,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
@@ -419,6 +418,21 @@ export const Card = ({
 				</Island>
 			</Link>
 		);
+
+	const MediaPill = () => (
+		<div
+			css={css`
+				margin-top: auto;
+			`}
+		>
+			<Pill
+				prefix="Gallery"
+				content={galleryCount?.toString() ?? ''}
+				icon={<SvgCamera />}
+				iconSide="right"
+			/>
+		</div>
+	);
 
 	if (snapData?.embedHtml) {
 		return (
@@ -894,11 +908,8 @@ export const Card = ({
 							)}
 
 							{!showCommentFooter && showPill ? (
-								<div
-									css={css`
-										margin-top: auto;
-									`}
-								>
+								<>
+									<MediaPill />
 									{branding && (
 										<CardBranding
 											branding={branding}
@@ -907,13 +918,7 @@ export const Card = ({
 											containerPalette={containerPalette}
 										/>
 									)}
-									<Pill
-										prefix="Gallery"
-										content={(galleryCount ?? 0).toString()}
-										icon={<SvgCamera />}
-										iconSide="right"
-									/>
-								</div>
+								</>
 							) : (
 								<CardFooter
 									format={format}
