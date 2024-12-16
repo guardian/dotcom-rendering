@@ -11,6 +11,7 @@ import type { SupportTier } from '../../epics/utils/threeTierChoiceCardAmounts';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
+import { ThreeTierChoiceCardsV2 } from '../ThreeTierChoiceCardsV2';
 import { DesignableBannerArticleCount } from './components/DesignableBannerArticleCount';
 import { DesignableBannerBody } from './components/DesignableBannerBody';
 import { DesignableBannerCloseButton } from './components/DesignableBannerCloseButton';
@@ -174,8 +175,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					</div>
 				</div>
 				<div css={styles.thirdColumnContainer}>
-					{' '}
-					choice cards go here{' '}
+					<ThreeTierChoiceCardsV2 />
 				</div>
 
 				{!isTabletOrAbove && (
