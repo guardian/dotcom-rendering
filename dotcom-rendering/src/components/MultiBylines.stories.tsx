@@ -44,17 +44,7 @@ const multiBylineWithLongHeader = {
 	byline: 'Richard Hillgrove Political Editor',
 	bylineHtml:
 		"<a href='/profile/richard-hillgrove'>Richard Hillgrove</a> Political Editor",
-	contributorIds: ['profile/richard-hillgrove'],
-};
-
-const multiBylineWithImageOverride = {
-	title: 'A byline with an image override url',
-	bio: testBioText,
-	body: [testTextElement],
-	byline: 'Guardian Contributor',
-	bylineHtml: "<a href='/profile/richard-hillgrove'>Richard Hillgrove</a>",
-	contributorIds: ['profile/richard-hillgrove'],
-	imageOverrideUrl:
+	imageUrl:
 		'https://i.guim.co.uk/img/uploads/2024/09/17/Maurice_Casey.png?width=180&dpr=1&s=none',
 };
 
@@ -65,24 +55,13 @@ const multiBylineWithNoContributorLink = {
 	byline: 'Steve McQueen on Paul Gilroy',
 	bylineHtml:
 		"<span data-contributor-rel='author'>Steve McQueen</span> on Paul Gilroy",
-	contributorIds: [],
 };
 
 export const ThemeVariations = {
 	args: {
 		multiBylines: [
 			multiBylineWithLongHeader,
-			multiBylineWithImageOverride,
 			multiBylineWithNoContributorLink,
-		],
-		tags: [
-			{
-				title: 'Richard Hillgrove',
-				id: 'profile/richard-hillgrove',
-				type: 'contributor',
-				bylineImageUrl:
-					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2011/5/24/1306249890287/Richard-Hillgrove.jpg?width=100&dpr=2&s=none',
-			},
 		],
 		isLastElement: true,
 		/**
@@ -140,14 +119,6 @@ export const DesignVariations = {
 			},
 		},
 	},
-} satisfies Story;
-
-export const DesignVariationsWithImageOverride = {
-	args: {
-		...ThemeVariations.args,
-		multiBylines: [multiBylineWithImageOverride],
-	},
-	parameters: DesignVariations.parameters,
 } satisfies Story;
 
 export const DesignVariationsWithNoContributorLink = {
@@ -217,7 +188,6 @@ export const Images = {
 				byline: 'Richard Hillgrove Guardian Contributor',
 				bylineHtml:
 					"<a href='/profile/richard-hillgrove'>Richard Hillgrove</a>",
-				contributorIds: ['profile/richard-hillgrove'],
 			},
 			{
 				title: 'The second byline',
@@ -232,7 +202,6 @@ export const Images = {
 				byline: 'Steve McQueen on Paul Gilroy',
 				bylineHtml:
 					"<span data-contributor-rel='author'>Steve McQueen</span> on Paul Gilroy",
-				contributorIds: [],
 			},
 		],
 	},
