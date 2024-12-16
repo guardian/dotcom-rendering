@@ -113,11 +113,7 @@ const wrapperStyle = ({
 	isDatawrapperGraphic: boolean;
 }) => css`
 	${format.theme === ArticleSpecial.Labs ? textSans17 : article17}
-	background-color: ${themePalette(
-		isDatawrapperGraphic
-			? '--interactive-block-background-datawrapper'
-			: '--interactive-block-background',
-	)};
+	background-color: ${themePalette('--interactive-block-background')};
 	min-height: ${getMinHeight(role, loaded)};
 	position: relative;
 	display: flex;
