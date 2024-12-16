@@ -235,7 +235,7 @@ const tickerSettingsSubCampaign = {
 const heading = (isSubCampaign: boolean) => {
 	return isSubCampaign
 		? 'Last chance to support us this year'
-		: 'Can you help us hit our goal?';
+		: 'Can you help us beat our goal?';
 };
 const bodyCopy = (isSubCampaign: boolean) => {
 	const SubCampaignCopy =
@@ -248,7 +248,7 @@ const bodyCopy = (isSubCampaign: boolean) => {
 const bodyCopyHighlightedText = (isSubCampaign: boolean) => {
 	const SubCampaignCopy = 'Help us keep going in 2025.';
 	const normalCopy =
-		'Help us hit our most important annual fundraising goal so we can keep going.';
+		'Help us raise as much as we can to power our journalism in 2025.';
 	return isSubCampaign ? SubCampaignCopy : normalCopy;
 };
 
