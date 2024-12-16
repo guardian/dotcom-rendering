@@ -907,37 +907,47 @@ export const Card = ({
 								/>
 							)}
 
-							{!showCommentFooter && showPill ? (
+							{!showCommentFooter && (
 								<>
-									<MediaPill />
-									{branding && (
-										<CardBranding
-											branding={branding}
+									{showPill ? (
+										<>
+											<MediaPill />
+											{branding && (
+												<CardBranding
+													branding={branding}
+													format={format}
+													onwardsSource={
+														onwardsSource
+													}
+													containerPalette={
+														containerPalette
+													}
+												/>
+											)}
+										</>
+									) : (
+										<CardFooter
 											format={format}
-											onwardsSource={onwardsSource}
-											containerPalette={containerPalette}
+											age={decideAge()}
+											commentCount={<CommentCount />}
+											cardBranding={
+												branding ? (
+													<CardBranding
+														branding={branding}
+														format={format}
+														onwardsSource={
+															onwardsSource
+														}
+														containerPalette={
+															containerPalette
+														}
+													/>
+												) : undefined
+											}
+											showLivePlayable={showLivePlayable}
 										/>
 									)}
 								</>
-							) : (
-								<CardFooter
-									format={format}
-									age={decideAge()}
-									commentCount={<CommentCount />}
-									cardBranding={
-										branding ? (
-											<CardBranding
-												branding={branding}
-												format={format}
-												onwardsSource={onwardsSource}
-												containerPalette={
-													containerPalette
-												}
-											/>
-										) : undefined
-									}
-									showLivePlayable={showLivePlayable}
-								/>
 							)}
 							{showLivePlayable &&
 								liveUpdatesPosition === 'inner' && (
