@@ -2231,14 +2231,8 @@
                 "endNote": {
                     "type": "string"
                 },
-                "imageOverrideUrl": {
+                "imageUrl": {
                     "type": "string"
-                },
-                "contributorIds": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
                 },
                 "byline": {
                     "type": "string"
@@ -2251,7 +2245,6 @@
                 "body",
                 "byline",
                 "bylineHtml",
-                "contributorIds",
                 "title"
             ]
         },

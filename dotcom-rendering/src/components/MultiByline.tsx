@@ -22,7 +22,6 @@ import {
 import { slugify } from '../model/enhance-H2s';
 import { palette } from '../palette';
 import type { MultiByline as MultiBylineModel } from '../types/content';
-import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { Bio } from './Bio';
 import { EndNote } from './EndNote';
@@ -162,21 +161,18 @@ const bylineImageStyles = css`
 interface Props {
 	multiByline: MultiBylineModel;
 	format: ArticleFormat;
-	tags: TagType[];
 	children: React.ReactNode;
 }
 
-export const MultiByline = ({ multiByline, format, tags, children }: Props) => {
+export const MultiByline = ({ multiByline, format, children }: Props) => {
 	return (
 		<div css={multiBylineStyles} data-spacefinder-role="nested">
 			<Byline
 				title={multiByline.title}
 				byline={multiByline.byline}
 				bylineHtml={multiByline.bylineHtml}
-				contributorIds={multiByline.contributorIds}
-				imageOverrideUrl={multiByline.imageOverrideUrl}
+				imageUrl={multiByline.imageUrl}
 				format={format}
-				tags={tags}
 			/>
 			<Bio html={multiByline.bio} />
 			{children}
@@ -191,20 +187,16 @@ type BylineProps = {
 	title: string;
 	bylineHtml: string;
 	byline: string;
-	imageOverrideUrl?: string;
-	contributorIds: string[];
+	imageUrl?: string;
 	format: ArticleFormat;
-	tags: TagType[];
 };
 
 const Byline = ({
 	title,
 	bylineHtml,
 	byline,
-	imageOverrideUrl,
-	contributorIds,
+	imageUrl,
 	format,
-	tags,
 }: BylineProps) => {
 	const sanitizedHtml = sanitise(bylineHtml, {
 		allowedAttributes: {
@@ -212,9 +204,6 @@ const Byline = ({
 			span: ['data-contributor-rel'],
 		},
 	});
-	const imageUrl =
-		imageOverrideUrl ??
-		tags.find((tag) => tag.id === contributorIds[0])?.bylineImageUrl;
 
 	return (
 		<div css={bylineWrapperStyles}>

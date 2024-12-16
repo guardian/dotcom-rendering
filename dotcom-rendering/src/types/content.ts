@@ -355,8 +355,7 @@ export interface MultiByline {
 	body: FEElement[];
 	bio?: string;
 	endNote?: string;
-	imageOverrideUrl?: string;
-	contributorIds: string[];
+	imageUrl?: string;
 	byline: string;
 	bylineHtml: string;
 }

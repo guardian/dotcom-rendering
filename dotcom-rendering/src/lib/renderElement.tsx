@@ -67,7 +67,6 @@ import {
 } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType, StarRating } from '../types/content';
-import type { TagType } from '../types/tag';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
 import type { EditionId } from './edition';
 import { getSharingUrls } from './sharing-urls';
@@ -94,7 +93,6 @@ type Props = {
 	totalElements?: number;
 	isListElement?: boolean;
 	isSectionedMiniProfilesArticle?: boolean;
-	tags?: TagType[];
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -155,7 +153,6 @@ export const renderElement = ({
 	totalElements = 0,
 	isListElement = false,
 	isSectionedMiniProfilesArticle = false,
-	tags = [],
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -509,7 +506,6 @@ export const renderElement = ({
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
-					tags={tags}
 					isLastElement={index === totalElements - 1}
 				/>
 			);
@@ -916,7 +912,6 @@ export const RenderArticleElement = ({
 	totalElements,
 	isListElement,
 	isSectionedMiniProfilesArticle,
-	tags = [],
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -942,7 +937,6 @@ export const RenderArticleElement = ({
 		totalElements,
 		isListElement,
 		isSectionedMiniProfilesArticle,
-		tags,
 	});
 
 	const needsFigure = !bareElements.has(element._type);
