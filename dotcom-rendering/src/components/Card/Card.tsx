@@ -288,6 +288,34 @@ export const isWithinTwelveHours = (webPublicationDate: string): boolean => {
 	return timeDiffHours <= 12;
 };
 
+const podcastImageStyles = (imageSize: ImageSizeType) => {
+	switch (imageSize) {
+		case 'small':
+			return css`
+				width: 69px;
+				height: 69px;
+				${from.tablet} {
+					width: 98px;
+					height: 98px;
+				}
+			`;
+
+		case 'medium':
+			return css`
+				width: 98px;
+				height: 98px;
+				${from.tablet} {
+					width: 120px;
+					height: 120px;
+				}
+			`;
+		default:
+			return css`
+				width: 120px;
+				height: 120px;
+			`;
+	}
+};
 export const Card = ({
 	linkTo,
 	format,
@@ -803,6 +831,25 @@ export const Card = ({
 						)}
 						{media.type === 'crossword' && (
 							<img src={media.imageUrl} alt="" />
+						)}
+						{media.type === 'podcast' && media.podcastImage.src && (
+							<div
+								css={[
+									css`
+										margin: 8px;
+									`,
+									podcastImageStyles(imageSize),
+								]}
+							>
+								<CardPicture
+									mainImage={media.podcastImage.src}
+									imageSize={imageSize}
+									alt={media.imageAltText}
+									loading={imageLoading}
+									roundedCorners={isOnwardContent}
+									aspectRatio={'1:1'}
+								/>
+							</div>
 						)}
 					</ImageWrapper>
 				)}
