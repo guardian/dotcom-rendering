@@ -43,7 +43,6 @@ export const enhanceCrosswordArticle = (article: Article): Article => {
 
 	return {
 		...article,
-		format: { ...article.format },
 		frontendData: {
 			...article.frontendData,
 			blocks: [
