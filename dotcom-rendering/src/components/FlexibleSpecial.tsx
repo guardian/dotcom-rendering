@@ -1,3 +1,4 @@
+import { isMediaCard } from '../lib/cardHelpers';
 import type { BoostLevel } from '../types/content';
 import type {
 	AspectRatio,
@@ -170,6 +171,15 @@ export const OneCardLayout = ({
 	);
 };
 
+const getImagePosition = (
+	hasTwoOrFewerCards: boolean,
+	isMediaCard: boolean,
+) => {
+	if (isMediaCard && !hasTwoOrFewerCards) return 'top';
+	if (hasTwoOrFewerCards) return 'left';
+	return 'bottom';
+};
+
 const TwoCardOrFourCardLayout = ({
 	cards,
 	containerPalette,
@@ -208,9 +218,10 @@ const TwoCardOrFourCardLayout = ({
 							absoluteServerTimes={absoluteServerTimes}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
-							imagePositionOnDesktop={
-								hasTwoOrFewerCards ? 'left' : 'bottom'
-							}
+							imagePositionOnDesktop={getImagePosition(
+								hasTwoOrFewerCards,
+								isMediaCard(card.format),
+							)}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
 							imageSize={'medium'}
