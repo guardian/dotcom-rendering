@@ -923,6 +923,7 @@ export const trails: [
 			shortUrl: 'https://www.theguardian.com/p/mhe94',
 			group: '0',
 			isLive: false,
+			galleryCount: 11,
 		},
 		discussion: {
 			isCommentable: false,
@@ -1450,6 +1451,7 @@ export const trails: [
 			shortUrl: 'https://www.theguardian.com/p/mgmvx',
 			group: '0',
 			isLive: false,
+			galleryCount: 19,
 		},
 		discussion: {
 			isCommentable: false,
