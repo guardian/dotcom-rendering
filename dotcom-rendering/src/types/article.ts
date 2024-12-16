@@ -37,7 +37,7 @@ export const enhanceCrosswordArticle = (article: Article): Article => {
 	}
 
 	const element: CrosswordElement = {
-		_type: 'model.dotcomrendering.pageElements.CrosswordElement' as const,
+		_type: 'model.dotcomrendering.pageElements.CrosswordElement',
 		crossword: article.frontendData.crossword,
 	};
 
