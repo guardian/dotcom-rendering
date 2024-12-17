@@ -195,6 +195,7 @@ const getMedia = ({
 	mainMedia,
 	isPlayableMediaCard,
 	podcastImage,
+	isBetaContainer,
 }: {
 	imageUrl?: string;
 	imageAltText?: string;
@@ -204,6 +205,7 @@ const getMedia = ({
 	mainMedia?: MainMedia;
 	isPlayableMediaCard?: boolean;
 	podcastImage?: PodcastSeriesImage;
+	isBetaContainer: boolean;
 }) => {
 	if (mainMedia && mainMedia.type === 'Video' && isPlayableMediaCard) {
 		return {
@@ -214,7 +216,7 @@ const getMedia = ({
 	}
 	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
 	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
-	if (podcastImage) {
+	if (podcastImage && isBetaContainer) {
 		return {
 			type: 'podcast',
 			podcastImage,
@@ -436,6 +438,7 @@ export const Card = ({
 		mainMedia,
 		isPlayableMediaCard,
 		podcastImage,
+		isBetaContainer,
 	});
 
 	// For opinion type cards with avatars (which aren't onwards content)
