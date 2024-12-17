@@ -64,6 +64,8 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		return <></>;
 	}
 
+	const landingPageUrl = 'https://support.theguardian.com/contribute';
+
 	//All config hard coded for the tests - TODO make this configurable in the future
 	const templateSettings: BannerTemplateSettings = {
 		containerSettings: {
@@ -188,7 +190,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 						</div>
 						<div css={styles.linkButtonContainer}>
 							<LinkButton
-								href={'https://theguardian.co.uk'} //TODO update url
+								href={landingPageUrl} // update url
 								onClick={onCtaClick}
 								size="small"
 								priority="primary"
