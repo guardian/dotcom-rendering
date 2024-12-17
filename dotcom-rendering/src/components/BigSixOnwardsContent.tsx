@@ -32,6 +32,10 @@ const containerStyles = css`
 	}
 `;
 
+const cardsContainer = css`
+	padding-top: ${space[2]}px;
+`;
+
 const headerStyles = css`
 	${headlineBold24};
 	color: ${palette('--carousel-text')};
@@ -124,7 +128,7 @@ export const BigSixOnwardsContent = ({ url, discussionApiUrl }: Props) => {
 			<h2 css={mobileHeaderStyles}>
 				<span>{heading}</span>
 			</h2>
-			<div>
+			<div css={cardsContainer}>
 				<UL direction="row" padBottom={true}>
 					{firstSlice75.map((trail) => (
 						<LI key={trail.url} padSides={true} percentage="75%">
