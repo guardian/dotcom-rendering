@@ -167,6 +167,7 @@ export const OneCardLayout = ({
 					showTopBarMobile={true}
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
+					showAccentImage={true}
 				/>
 			</LI>
 		</UL>
