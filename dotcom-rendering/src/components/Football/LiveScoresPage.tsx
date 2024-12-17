@@ -1,9 +1,9 @@
-import { FELiveScoresType } from 'src/types/sports';
+import { FEFootballPageType } from 'src/types/sports';
 import { css } from '@emotion/react';
 import { MatchList } from './MatchList';
 
 interface Props {
-	liveScores: FELiveScoresType;
+	liveScores: FEFootballPageType;
 }
 
 const sportsPageStyles = css`
@@ -34,13 +34,9 @@ export const LiveScoresPage = ({ liveScores }: Props) => {
 					css={[matchContainerStyles]}
 					data-show-more-contains="football-matches"
 				>
-					{liveScores.matchesGroupedByDateAndCompetition.map(
-						(item) => {
-							return (
-								<MatchList dateCompetition={item}></MatchList>
-							);
-						},
-					)}
+					{liveScores.matchesList.map((item) => {
+						return <MatchList dateCompetition={item}></MatchList>;
+					})}
 				</div>
 			</div>
 		</article>

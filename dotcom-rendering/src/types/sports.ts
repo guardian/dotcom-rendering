@@ -20,6 +20,11 @@ type MatchDayTeam = {
 	scorers?: string;
 };
 
+type Competition = {
+	id: string;
+	name: string;
+};
+
 type FootballMatch = {
 	id: string;
 	date: Date;
@@ -47,6 +52,7 @@ type MatchDay = FootballMatch & {
 	matchStatus: string;
 	attendance?: string;
 	referee?: string;
+	competition?: Competition;
 };
 
 type Result = FootballMatch & {
@@ -87,7 +93,7 @@ type LeagueTeam = {
 
 type LeagueTableEntry = { stageNumber: string; round: Round; team: LeagueTeam };
 
-type Competition = {
+type CompetitionSummary = {
 	id: string;
 	url: string;
 	fullName: string;
@@ -102,17 +108,17 @@ type Competition = {
 };
 
 type CompetitionMatch = {
-	competition: Competition;
+	competitionSummary: CompetitionSummary;
 	matches: FootballMatchType[];
 };
 
 export type DateCompetitionMatch = {
 	date: string;
-	competitions: CompetitionMatch[];
+	competitionMatches: CompetitionMatch[];
 };
 
-export type FELiveScoresType = {
+export type FEFootballPageType = {
 	pageTitle: string;
-	type: string;
-	matchesGroupedByDateAndCompetition: DateCompetitionMatch[];
+	pageType: string;
+	matchesList: DateCompetitionMatch[];
 };

@@ -15,7 +15,7 @@ import sportSchema from './sports-schema.json';
 import frontSchema from './front-schema.json';
 import newslettersPageSchema from './newsletter-page-schema.json';
 import tagPageSchema from './tag-page-schema.json';
-import { FELiveScoresType } from 'src/types/sports';
+import { FEFootballPageType } from 'src/types/sports';
 
 const options: Options = {
 	verbose: false,
@@ -38,7 +38,7 @@ const validateEditionsCrossword = ajv.compile<FEEditionsCrosswords>(
 	editionsCrosswordSchema,
 );
 
-const validateSports = ajv.compile<FELiveScoresType>(sportSchema);
+const validateSports = ajv.compile<FEFootballPageType>(sportSchema);
 
 export const validateAsArticleType = (data: unknown): FEArticleType => {
 	if (validateArticle(data)) return data;
@@ -64,7 +64,7 @@ export const validateAsEditionsCrosswordType = (
 	);
 };
 
-export const validateAsSports = (data: unknown): FELiveScoresType => {
+export const validateAsSports = (data: unknown): FEFootballPageType => {
 	if (validateSports(data)) {
 		return data;
 	}

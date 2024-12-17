@@ -8,9 +8,9 @@ export const MatchList: React.FC<Props> = ({ dateCompetition }) => {
 	return (
 		<>
 			<div>{dateCompetition.date}</div>
-			{dateCompetition.competitions.map((comp) => (
-				<div key={comp.competition.id}>
-					<h3>{comp.competition.fullName}</h3>
+			{dateCompetition.competitionMatches.map((comp) => (
+				<div key={comp.competitionSummary.id}>
+					<h3>{comp.competitionSummary.fullName}</h3>
 					<table>
 						<thead hidden>
 							<tr>

@@ -1,4 +1,4 @@
-import { FELiveScoresType } from '../types/sports';
+import { FEFootballPageType } from '../types/sports';
 import { LiveScoresPage } from '../components/Football/LiveScoresPage';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getPathFromManifest } from '../lib/assets';
@@ -6,7 +6,7 @@ import { polyfillIO } from '../lib/polyfill.io';
 import { isString } from '@guardian/libs';
 
 interface Props {
-	sports: FELiveScoresType;
+	sports: FEFootballPageType;
 }
 
 export const renderSportsHtml = ({
