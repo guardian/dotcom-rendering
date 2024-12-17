@@ -140,16 +140,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					styleOverides={styles.closeButtonOverrides}
 				/>
 
-				{isTabletOrAbove && (
-					<>
-						<div css={styles.containerOverrides}>
-							<div css={styles.guardianLogoContainer}>
-								<SvgGuardianLogo />
-							</div>
-						</div>
-					</>
-				)}
-
 				<div css={styles.middleColumnContainer}>
 					<DesignableBannerHeader
 						heading={content.mainContent.heading}
@@ -174,9 +164,19 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 						/>
 					</div>
 				</div>
-				<div css={styles.thirdColumnContainer}>
-					<ThreeTierChoiceCardsV2 />
-				</div>
+
+				{isTabletOrAbove && (
+					<>
+						<div css={styles.containerOverrides}>
+							<div css={styles.guardianLogoContainer}>
+								<SvgGuardianLogo />
+							</div>
+						</div>
+						<div css={styles.thirdColumnContainer}>
+							<ThreeTierChoiceCardsV2 />
+						</div>
+					</>
+				)}
 
 				{!isTabletOrAbove && (
 					<>
