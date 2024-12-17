@@ -142,6 +142,7 @@ export type Props = {
 	/** The square podcast series image, if it exists for a card */
 	podcastImage?: PodcastSeriesImage;
 	galleryCount?: number;
+	showAccentImage?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -220,7 +221,7 @@ const getMedia = ({
 		return {
 			type: 'podcast',
 			podcastImage,
-			trailImage: { src: imageUrl, altText: imageAltText },
+			...(imageUrl && { imageUrl }),
 		} as const;
 	}
 	if (imageUrl) {
@@ -260,11 +261,14 @@ const getHeadlinePosition = ({
 	isFlexSplash,
 	containerType,
 	showLivePlayable,
+	isMediaCard,
 }: {
 	containerType?: DCRContainerType;
 	isFlexSplash?: boolean;
 	showLivePlayable: boolean;
+	isMediaCard: boolean;
 }) => {
+	if (isMediaCard) return 'inner';
 	if (containerType === 'flexible/special' && isFlexSplash) {
 		return 'outer';
 	}
@@ -316,6 +320,7 @@ const podcastImageStyles = (imageSize: ImageSizeType) => {
 			`;
 	}
 };
+
 export const Card = ({
 	linkTo,
 	format,
@@ -373,7 +378,9 @@ export const Card = ({
 	podcastImage,
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- Added in preparation for UI changes to display gallery count
 	galleryCount,
+	showAccentImage = false,
 }: Props) => {
+	console.log({ headlineText, showAccentImage });
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
 		supportingContent,
@@ -469,6 +476,8 @@ export const Card = ({
 		isBetaContainer,
 	});
 
+	console.log({ headlineText, media });
+
 	// For opinion type cards with avatars (which aren't onwards content)
 	// we render the footer in a different location
 	const showCommentFooter =
@@ -507,6 +516,7 @@ export const Card = ({
 		containerType,
 		isFlexSplash,
 		showLivePlayable,
+		isMediaCard: isMediaCard(format),
 	});
 
 	const hideTrailTextUntil = () => {
@@ -832,24 +842,36 @@ export const Card = ({
 						{media.type === 'crossword' && (
 							<img src={media.imageUrl} alt="" />
 						)}
-						{media.type === 'podcast' && media.podcastImage.src && (
-							<div
-								css={[
-									css`
-										margin: 8px;
-									`,
-									podcastImageStyles(imageSize),
-								]}
-							>
-								<CardPicture
-									mainImage={media.podcastImage.src}
-									imageSize={imageSize}
-									alt={media.imageAltText}
-									loading={imageLoading}
-									roundedCorners={isOnwardContent}
-									aspectRatio={'1:1'}
-								/>
-							</div>
+						{media.type === 'podcast' && (
+							<>
+								{media.podcastImage.src && !showAccentImage ? (
+									<div
+										css={[
+											css`
+												margin: 8px;
+											`,
+											podcastImageStyles(imageSize),
+										]}
+									>
+										<CardPicture
+											mainImage={media.podcastImage.src}
+											imageSize={'small'}
+											alt={media.imageAltText}
+											loading={imageLoading}
+											roundedCorners={isOnwardContent}
+											aspectRatio={'1:1'}
+										/>
+									</div>
+								) : (
+									<CardPicture
+										mainImage={media.imageUrl ?? ''}
+										imageSize={imageSize}
+										alt={media.imageAltText}
+										loading={imageLoading}
+										aspectRatio={aspectRatio}
+									/>
+								)}
+							</>
 						)}
 					</ImageWrapper>
 				)}
@@ -895,6 +917,12 @@ export const Card = ({
 										showByline={showByline}
 										isExternalLink={isExternalLink}
 										isBetaContainer={isBetaContainer}
+										accentImage={
+											showAccentImage &&
+											media?.type === 'podcast'
+												? media?.podcastImage?.src
+												: ''
+										}
 									/>
 									{!isUndefined(starRating) ? (
 										<StarRatingComponent
@@ -912,7 +940,7 @@ export const Card = ({
 								</HeadlineWrapper>
 							)}
 
-							{!!trailText && (
+							{!!trailText && media?.type !== 'podcast' && (
 								<TrailText
 									trailText={trailText}
 									trailTextColour={trailTextColour}

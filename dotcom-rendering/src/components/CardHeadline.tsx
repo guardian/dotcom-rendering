@@ -62,6 +62,7 @@ type Props = {
 	/** Optional override of the standard card kicker colour */
 	kickerColour?: string;
 	isBetaContainer?: boolean;
+	accentImage?: string;
 };
 
 const sublinkStyles = css`
@@ -230,6 +231,7 @@ export const CardHeadline = ({
 	headlineColour = palette('--card-headline'),
 	kickerColour = palette('--card-kicker-text'),
 	isBetaContainer = false,
+	accentImage,
 }: Props) => {
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
@@ -256,6 +258,7 @@ export const CardHeadline = ({
 						color={kickerColour}
 						showPulsingDot={showPulsingDot}
 						isInline={hasInlineKicker}
+						accentImage={accentImage}
 					/>
 				)}
 				{showQuotes && <QuoteIcon colour={kickerColour} />}

@@ -43,6 +43,7 @@ type BoostProperties = {
 const determineCardProperties = (
 	boostLevel: BoostLevel,
 	supportingContentLength: number,
+	isMediaCard: boolean,
 ): BoostProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
@@ -54,7 +55,7 @@ const determineCardProperties = (
 					mobile: 'medium',
 				},
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnMobile: isMediaCard ? 'top' : 'bottom',
 				imageSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
@@ -70,7 +71,7 @@ const determineCardProperties = (
 					mobile: 'large',
 				},
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnMobile: isMediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
@@ -84,8 +85,8 @@ const determineCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'xlarge',
 				},
-				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnDesktop: isMediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: isMediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
@@ -98,8 +99,8 @@ const determineCardProperties = (
 					tablet: 'xxlarge',
 					mobile: 'xxlarge',
 				},
-				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnDesktop: isMediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: isMediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
@@ -138,6 +139,7 @@ export const OneCardLayout = ({
 	} = determineCardProperties(
 		card.boostLevel ?? 'default',
 		card.supportingContent?.length ?? 0,
+		isMediaCard(card.format),
 	);
 	return (
 		<UL padBottom={!isLastRow} hasLargeSpacing={!isLastRow}>
@@ -165,6 +167,7 @@ export const OneCardLayout = ({
 					showTopBarMobile={true}
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
+					showAccentImage={true}
 				/>
 			</LI>
 		</UL>

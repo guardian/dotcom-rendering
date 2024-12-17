@@ -1,3 +1,4 @@
+import { isMediaCard } from '../lib/cardHelpers';
 import { palette } from '../palette';
 import type { BoostLevel } from '../types/content';
 import type {
@@ -86,6 +87,7 @@ type BoostedSplashProperties = {
 const decideSplashCardProperties = (
 	boostLevel: BoostLevel,
 	supportingContentLength: number,
+	isMediaCard: boolean,
 ): BoostedSplashProperties => {
 	switch (boostLevel) {
 		// boostedfont sizing
@@ -98,7 +100,7 @@ const decideSplashCardProperties = (
 					mobile: 'medium',
 				},
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnMobile: isMediaCard ? 'top' : 'bottom',
 				imageSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
@@ -113,7 +115,7 @@ const decideSplashCardProperties = (
 					mobile: 'large',
 				},
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnMobile: isMediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
@@ -127,8 +129,8 @@ const decideSplashCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'xlarge',
 				},
-				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnDesktop: isMediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: isMediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
@@ -141,8 +143,8 @@ const decideSplashCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'xxlarge',
 				},
-				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnDesktop: isMediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: isMediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
@@ -182,6 +184,7 @@ export const SplashCardLayout = ({
 	} = decideSplashCardProperties(
 		card.boostLevel ?? 'default',
 		card.supportingContent?.length ?? 0,
+		isMediaCard(card.format),
 	);
 
 	return (
@@ -221,6 +224,7 @@ export const SplashCardLayout = ({
 					showTopBarMobile={true}
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
+					showAccentImage={true}
 				/>
 			</LI>
 		</UL>
@@ -313,7 +317,9 @@ export const BoostedCardLayout = ({
 					absoluteServerTimes={absoluteServerTimes}
 					headlineSizes={headlineSizes}
 					imagePositionOnDesktop={'right'}
-					imagePositionOnMobile={'bottom'}
+					imagePositionOnMobile={
+						isMediaCard(card.format) ? 'top' : 'bottom'
+					}
 					imageSize={imageSize}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
@@ -331,6 +337,7 @@ export const BoostedCardLayout = ({
 					showTopBarMobile={true}
 					liveUpdatesPosition={liveUpdatesPosition}
 					canPlayInline={true}
+					showAccentImage={true}
 				/>
 			</LI>
 		</UL>
