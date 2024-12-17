@@ -18,7 +18,7 @@ export const ThreeTierChoiceCardsV2 = () => {
 				<div css={styles.priceHeadline}>From just £1</div>
 				<div>
 					<LinkButton
-						href={'https://theguardian.co.uk'}
+						href={'https://theguardian.co.uk'} //TODO update url
 						cssOverrides={styles.linkButtonStyles}
 					>
 						Continue
@@ -35,7 +35,7 @@ export const ThreeTierChoiceCardsV2 = () => {
 				<div css={styles.priceHeadline}>£12/month</div>
 				<div>
 					<LinkButton
-						href={'https://theguardian.co.uk'}
+						href={'https://theguardian.co.uk'} //TODO update url
 						cssOverrides={styles.linkButtonStyles}
 					>
 						Continue
@@ -71,33 +71,34 @@ const styles = {
 
 	priceHeadline: css`
 		${textSansBold20};
-		padding-bottom: 20px;
+		padding-bottom: ${space[5]}px;
 	`,
 
 	benefitsBodyCopy: css`
 		${textSans12};
-		padding-top: 12px;
+		padding-top: ${space[3]}px;
 	`,
 
 	container: css`
 		display: flex;
-		gap: 20px;
+		gap: ${space[5]}px;
+		padding-left: ${space[5]}px;
 	`,
 
 	choiceCardStyles: css`
 		width: 220px;
-		height: 286px;
-		padding: 20px 12px 12px 12px;
+		height: auto;
+		padding: ${space[5]}px ${space[3]}px ${space[3]}px ${space[3]}px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		flex-shrink: 0;
-		border-radius: 12px;
+		border-radius: ${space[3]}px;
 		background: #f1f8fc;
 	`,
 
 	recommendedPillStyles: css`
-		border-radius: 4px;
+		border-radius: ${space[1]}px;
 		padding: ${space[1]}px ${space[2]}px;
 		background-color: ${palette.brand[400]};
 		${textSansBold14};
@@ -123,7 +124,7 @@ const styles = {
 		color: ${palette.neutral[7]};
 		list-style: none;
 		margin: 0 0 0 -4px;
-		padding: 0;
+		padding-top: ${space[5]}px;
 
 		li + li {
 			margin-top: ${space[2]}px;
@@ -132,7 +133,7 @@ const styles = {
 		li {
 			display: flex;
 			align-items: flex-start;
-			margin-top: ${space[2]}px;
+			margin-bottom: ${space[2]}px;
 		}
 
 		svg {

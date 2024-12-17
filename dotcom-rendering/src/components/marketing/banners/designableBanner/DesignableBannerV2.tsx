@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { brandAlt, from, neutral, space } from '@guardian/source/foundations';
-import { SvgGuardianLogo } from '@guardian/source/react-components';
+import { LinkButton, SvgGuardianLogo } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import {
 	removeMediaRulePrefix,
@@ -15,7 +15,6 @@ import { ThreeTierChoiceCardsV2 } from '../ThreeTierChoiceCardsV2';
 import { DesignableBannerArticleCount } from './components/DesignableBannerArticleCount';
 import { DesignableBannerBody } from './components/DesignableBannerBody';
 import { DesignableBannerCloseButton } from './components/DesignableBannerCloseButton';
-import { DesignableBannerCtas } from './components/DesignableBannerCtas';
 import { DesignableBannerHeader } from './components/DesignableBannerHeader';
 import type { BannerTemplateSettings } from './settings';
 
@@ -29,7 +28,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	submitComponentEvent,
 	design,
 	onCtaClick,
-	onSecondaryCtaClick,
 }: BannerRenderProps): JSX.Element => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 
@@ -116,10 +114,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		bannerId: 'designable-banner',
 	};
 
-	const mainOrMobileContent = isTabletOrAbove
-		? content.mainContent
-		: content.mobileContent;
-
 	const showAboveArticleCount =
 		(separateArticleCountSettings?.type === 'above' ||
 			separateArticleCount) &&
@@ -193,18 +187,15 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 							/>
 						</div>
 						<div css={styles.linkButtonContainer}>
-							{/*using this means using the payment icons...*/}
-							<DesignableBannerCtas
-								mainOrMobileContent={mainOrMobileContent}
-								onPrimaryCtaClick={onCtaClick}
-								onSecondaryCtaClick={onSecondaryCtaClick}
-								primaryCtaSettings={
-									templateSettings.primaryCtaSettings
-								}
-								secondaryCtaSettings={
-									templateSettings.secondaryCtaSettings
-								}
-							/>
+							<LinkButton
+								href={'https://theguardian.co.uk'} //TODO update url
+								onClick={onCtaClick}
+								size="small"
+								priority="primary"
+								cssOverrides={styles.linkButtonOverrides}
+							>
+								Continue
+							</LinkButton>
 						</div>
 					</>
 				)}
@@ -223,19 +214,6 @@ const styles = {
 		color: ${textColor};
 		${limitHeight ? 'max-height: 70vh;' : ''}
 		overflow: auto;
-
-		* {
-			box-sizing: border-box;
-		}
-
-		${from.tablet} {
-			border-top: 1px solid ${neutral[0]};
-		}
-
-		b,
-		strong {
-			font-weight: bold;
-		}
 	`,
 	containerOverrides: css`
 		display: flex;
@@ -263,6 +241,7 @@ const styles = {
 	`,
 	linkButtonOverrides: css`
 		background-color: ${brandAlt[400]};
+		//hover colour TBC
 		color: ${neutral[0]};
 		display: flex;
 		flex-wrap: wrap;
@@ -284,7 +263,7 @@ const styles = {
 		${from.tablet} {
 			grid-column: 2;
 			grid-row: 2;
-			column-gap: 20px;
+			column-gap: ${space[5]}px;
 	`,
 	thirdColumnContainer: css`
 		${from.tablet} {
