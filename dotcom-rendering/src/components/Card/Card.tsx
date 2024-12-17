@@ -498,7 +498,7 @@ export const Card = ({
 	/** Determines the gap of between card components based on card properties */
 	const getGapSize = (): GapSize => {
 		if (isOnwardContent) return 'none';
-		if (hasBackgroundColour) return 'tiny';
+		if (hasBackgroundColour && !isFlexibleContainer) return 'tiny';
 		if (!!isFlexSplash || (isFlexibleContainer && imageSize === 'jumbo')) {
 			return 'small';
 		}
@@ -814,6 +814,7 @@ export const Card = ({
 						imagePositionOnDesktop={imagePositionOnDesktop}
 						hasBackgroundColour={hasBackgroundColour}
 						isOnwardContent={isOnwardContent}
+						isFlexibleContainer={isFlexibleContainer}
 					>
 						{/* This div is needed to keep the headline and trail text justified at the start */}
 						<div
