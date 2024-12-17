@@ -57,6 +57,7 @@ export const StaticMediumFour = ({
 							showLivePlayable={false}
 							showTopBarDesktop={false}
 							showTopBarMobile={true}
+							canPlayInline={false}
 						/>
 					</LI>
 				);

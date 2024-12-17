@@ -220,6 +220,7 @@ export const SplashCardLayout = ({
 					showTopBarDesktop={false}
 					showTopBarMobile={true}
 					trailTextSize={trailTextSize}
+					canPlayInline={true}
 				/>
 			</LI>
 		</UL>
@@ -329,6 +330,7 @@ export const BoostedCardLayout = ({
 					showTopBarDesktop={false}
 					showTopBarMobile={true}
 					liveUpdatesPosition={liveUpdatesPosition}
+					canPlayInline={true}
 				/>
 			</LI>
 		</UL>
@@ -413,6 +415,7 @@ export const StandardCardLayout = ({
 									  }
 									: undefined
 							}
+							canPlayInline={false}
 						/>
 					</LI>
 				);
