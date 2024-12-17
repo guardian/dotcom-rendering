@@ -226,9 +226,7 @@ const styles = {
 			display: grid;
 			grid-template-columns: auto 1fr 1fr;
 			grid-template-rows: auto 1fr auto;
-			width: 100%;
 			max-width: 1300px;
-			margin: 0 auto;
 			align-items: start;
 			column-gap: 10px;
 		}
@@ -251,24 +249,36 @@ const styles = {
 		padding-top: ${space[3]}px;
 	`,
 	guardianLogoContainer: css`
-		width: 100px;
-		grid-column: 1;
-		grid-row: 1;
-		justify-self: start;
-		align-self: start;
-		padding-top: ${space[3]}px;
-		padding-left: ${space[3]}px;
+		${from.desktop} {
+			width: 100px;
+			grid-column: 1;
+			grid-row: 1;
+			justify-self: start;
+			align-self: start;
+			padding-top: ${space[3]}px;
+			padding-left: ${space[3]}px;
+		}
 	`,
 	middleColumnContainer: css`
 		${from.tablet} {
+			grid-row: 2;
+			justify-self: center;
+			padding-bottom: ${space[5]}px;
+		}
+		${from.desktop} {
 			grid-column: 2;
 			grid-row: 2;
-			column-gap: ${space[5]}px;
+		}
 	`,
 	thirdColumnContainer: css`
 		${from.tablet} {
+			grid-row: 3;
+			justify-self: center;
+		}
+		${from.desktop} {
 			grid-column: 3;
 			grid-row: 2;
+		}
 	`,
 };
 
