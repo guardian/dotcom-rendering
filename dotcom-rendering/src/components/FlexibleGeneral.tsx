@@ -224,6 +224,7 @@ export const SplashCardLayout = ({
 					showTopBarMobile={true}
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
+					showAccentImage={true}
 				/>
 			</LI>
 		</UL>
@@ -336,6 +337,7 @@ export const BoostedCardLayout = ({
 					showTopBarMobile={true}
 					liveUpdatesPosition={liveUpdatesPosition}
 					canPlayInline={true}
+					showAccentImage={true}
 				/>
 			</LI>
 		</UL>

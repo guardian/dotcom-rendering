@@ -6,6 +6,7 @@ import {
 	textSansBold15,
 } from '@guardian/source/foundations';
 import { palette } from '../palette';
+import { CardPicture } from './CardPicture';
 import { Island } from './Island';
 import { PulsingDot } from './PulsingDot.importable';
 
@@ -17,6 +18,7 @@ type Props = {
 	isInline?: boolean;
 	/** Controls the weight of the standard, non-live kicker. Defaults to regular */
 	fontWeight?: 'regular' | 'bold';
+	accentImage?: string;
 };
 
 const standardTextStyles = css`
@@ -62,6 +64,7 @@ export const Kicker = ({
 	showPulsingDot,
 	isInline,
 	fontWeight = 'regular',
+	accentImage,
 }: Props) => {
 	/**
 	 * @todo
@@ -88,6 +91,24 @@ export const Kicker = ({
 					: 'transparent',
 			}}
 		>
+			{accentImage && (
+				<div
+					css={[
+						css`
+							height: 88px;
+							width: 88px;
+						`,
+					]}
+				>
+					<CardPicture
+						mainImage={accentImage}
+						imageSize={'small'}
+						alt={'media.imageAltText'} // TODO : pass through
+						loading={'lazy'}
+						aspectRatio={'1:1'}
+					/>
+				</div>
+			)}
 			{showPulsingDot && (
 				<Island priority="enhancement" defer={{ until: 'visible' }}>
 					<PulsingDot colour={palette('--kicker-pulsing-dot-live')} />
