@@ -33,7 +33,6 @@ import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
 import { MediaDuration } from '../MediaDuration';
-import { MediaMeta } from '../MediaMeta';
 import { Pill } from '../Pill';
 import { Slideshow } from '../Slideshow';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
@@ -42,6 +41,7 @@ import { SnapCssSandbox } from '../SnapCssSandbox';
 import { StarRating } from '../StarRating/StarRating';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
+import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 import { YoutubeBlockComponent } from '../YoutubeBlockComponent.importable';
 import { AvatarContainer } from './components/AvatarContainer';
 import { CardAge } from './components/CardAge';
@@ -425,12 +425,20 @@ export const Card = ({
 				margin-top: auto;
 			`}
 		>
-			<Pill
-				prefix="Gallery"
-				content={galleryCount?.toString() ?? ''}
-				icon={<SvgCamera />}
-				iconSide="right"
-			/>
+			{mainMedia?.type === 'Audio' && (
+				<Pill
+					content="0:00" // TODO: get podcast duration
+					icon={<SvgMediaControlsPlay />}
+				/>
+			)}
+			{mainMedia?.type === 'Gallery' && (
+				<Pill
+					prefix="Gallery"
+					content={galleryCount?.toString() ?? ''}
+					icon={<SvgCamera />}
+					iconSide="right"
+				/>
+			)}
 		</div>
 	);
 
@@ -448,7 +456,8 @@ export const Card = ({
 		mainMedia?.type === 'Video' && !canPlayInline && showMainVideo;
 
 	// Check media type to determine if we should show a pill or media icon
-	const showPill = mainMedia?.type === 'Gallery';
+	const showPill =
+		mainMedia?.type === 'Audio' || mainMedia?.type === 'Gallery';
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -634,12 +643,6 @@ export const Card = ({
 							cardHasImage={!!image}
 						/>
 					) : null}
-					{!!mainMedia && mainMedia.type !== 'Video' && !showPill && (
-						<MediaMeta
-							mediaType={mainMedia.type}
-							hasKicker={!!kickerText}
-						/>
-					)}
 				</div>
 			)}
 
@@ -877,14 +880,6 @@ export const Card = ({
 											cardHasImage={!!image}
 										/>
 									) : null}
-									{!!mainMedia &&
-										mainMedia.type !== 'Video' &&
-										!showPill && (
-											<MediaMeta
-												mediaType={mainMedia.type}
-												hasKicker={!!kickerText}
-											/>
-										)}
 								</HeadlineWrapper>
 							)}
 
