@@ -9,6 +9,7 @@ import { palette } from '../palette';
 import { CardPicture } from './CardPicture';
 import { Island } from './Island';
 import { PulsingDot } from './PulsingDot.importable';
+import { PodcastSeriesImage } from '../types/tag';
 
 type Props = {
 	text: string;
@@ -18,7 +19,7 @@ type Props = {
 	isInline?: boolean;
 	/** Controls the weight of the standard, non-live kicker. Defaults to regular */
 	fontWeight?: 'regular' | 'bold';
-	accentImage?: string;
+	accentImage?: PodcastSeriesImage;
 };
 
 const standardTextStyles = css`
@@ -91,7 +92,7 @@ export const Kicker = ({
 					: 'transparent',
 			}}
 		>
-			{accentImage && (
+			{accentImage?.src && (
 				<div
 					css={[
 						css`
@@ -101,9 +102,9 @@ export const Kicker = ({
 					]}
 				>
 					<CardPicture
-						mainImage={accentImage}
+						mainImage={accentImage.src}
 						imageSize={'small'}
-						alt={'media.imageAltText'} // TODO : pass through
+						alt={accentImage.altText}
 						loading={'lazy'}
 						aspectRatio={'1:1'}
 					/>
