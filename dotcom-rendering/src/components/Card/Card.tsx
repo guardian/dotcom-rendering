@@ -933,8 +933,8 @@ export const Card = ({
 										accentImage={
 											showAccentImage &&
 											media?.type === 'podcast'
-												? media?.podcastImage?.src
-												: ''
+												? media?.podcastImage
+												: undefined
 										}
 									/>
 									{!isUndefined(starRating) ? (
