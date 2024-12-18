@@ -380,7 +380,6 @@ export const Card = ({
 	galleryCount,
 	showAccentImage = false,
 }: Props) => {
-	console.log({ headlineText, showAccentImage });
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
 		supportingContent,
