@@ -37,6 +37,7 @@ import {
 } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
+import { PodcastSeriesImage } from '../types/tag';
 import { Byline } from './Byline';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';
@@ -62,7 +63,7 @@ type Props = {
 	/** Optional override of the standard card kicker colour */
 	kickerColour?: string;
 	isBetaContainer?: boolean;
-	accentImage?: string;
+	accentImage?: PodcastSeriesImage;
 };
 
 const sublinkStyles = css`
