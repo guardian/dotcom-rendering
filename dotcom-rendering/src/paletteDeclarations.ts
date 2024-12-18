@@ -22,7 +22,6 @@ import {
 	type ArticleTheme,
 	Pillar,
 } from './lib/articleFormat';
-import { isMediaCard } from './lib/cardHelpers';
 import { transparentColour } from './lib/transparentColour';
 
 // ----- Palette Functions ----- //
@@ -2479,21 +2478,28 @@ const cardBorderSupportingLight: PaletteFunction = () =>
 const cardBorderSupportingDark: PaletteFunction = () =>
 	sourcePalette.neutral[46];
 
-const cardMetaTextLight: PaletteFunction = (format) =>
-	isMediaCard(format) ? sourcePalette.neutral[86] : sourcePalette.neutral[46];
+const cardMetaTextLight: PaletteFunction = () => sourcePalette.neutral[46];
 
 const cardMetaTextDark: PaletteFunction = () => sourcePalette.neutral[60];
 
-const cardBackground: PaletteFunction = (format) =>
-	isMediaCard(format) ? sourcePalette.neutral[20] : 'transparent';
+const cardBackgroundLight: PaletteFunction = () => 'transparent';
+const cardBackgroundDark: PaletteFunction = () => 'transparent';
 
-const cardHeadlineTextLight: PaletteFunction = (format) =>
-	isMediaCard(format) ? sourcePalette.neutral[100] : sourcePalette.neutral[7];
+const cardMediaBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const cardMediaBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
+const cardMediaIconLight: PaletteFunction = (format) =>
+	cardMediaBackgroundLight(format);
+const cardMediaIconDark: PaletteFunction = (format) =>
+	cardMediaBackgroundDark(format);
+
+const cardHeadlineTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 
 const cardTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
-const cardTrailTextLight: PaletteFunction = (format) =>
-	isMediaCard(format) ? sourcePalette.neutral[86] : sourcePalette.neutral[38];
+const cardTrailTextLight: PaletteFunction = () => sourcePalette.neutral[38];
 const cardTrailTextDark: PaletteFunction = () => sourcePalette.neutral[73];
 
 const liveKickerBackgroundLight: PaletteFunction = (format) => {
@@ -2539,44 +2545,20 @@ const liveKickerPulsingDot: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[97], 0.75);
 
 const cardKickerTextLight: PaletteFunction = (format) => {
-	switch (format.design) {
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Audio:
-		case ArticleDesign.Video:
-			switch (format.theme) {
-				case Pillar.News:
-					return sourcePalette.news[550];
-				case Pillar.Sport:
-					return sourcePalette.sport[600];
-				case Pillar.Opinion:
-					return sourcePalette.opinion[550];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
-				case Pillar.Culture:
-					return sourcePalette.culture[500];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.news[400];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[200];
-			}
-		default:
-			switch (format.theme) {
-				case Pillar.Opinion:
-					return pillarPalette(format.theme, 300);
-				case Pillar.Sport:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-				case Pillar.News:
-					return pillarPalette(format.theme, 400);
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[200];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.news[400];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[200];
-			}
+	switch (format.theme) {
+		case Pillar.Opinion:
+			return pillarPalette(format.theme, 300);
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+		case Pillar.News:
+			return pillarPalette(format.theme, 400);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.news[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
 	}
 };
 
@@ -6061,8 +6043,8 @@ const paletteColours = {
 		dark: captionTextDark,
 	},
 	'--card-background': {
-		light: cardBackground,
-		dark: cardBackground,
+		light: cardBackgroundLight,
+		dark: cardBackgroundDark,
 	},
 	'--card-background-hover': {
 		light: cardBackgroundHover,
@@ -6087,6 +6069,14 @@ const paletteColours = {
 	'--card-kicker-text': {
 		light: cardKickerTextLight,
 		dark: cardKickerTextDark,
+	},
+	'--card-media-background': {
+		light: cardMediaBackgroundLight,
+		dark: cardMediaBackgroundDark,
+	},
+	'--card-media-icon': {
+		light: cardMediaIconLight,
+		dark: cardMediaIconDark,
 	},
 	'--card-sublinks-background': {
 		light: cardSublinksBackgroundLight,
