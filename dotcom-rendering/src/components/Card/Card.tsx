@@ -455,7 +455,7 @@ export const Card = ({
 	const showPlayIcon =
 		mainMedia?.type === 'Video' && !canPlayInline && showMainVideo;
 
-	// Check media type to determine if we should show a pill or media icon
+	// Check media type to determine if we show a pill or article metadata
 	const showPill =
 		mainMedia?.type === 'Audio' || mainMedia?.type === 'Gallery';
 
