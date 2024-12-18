@@ -98,7 +98,7 @@ export type Props = {
 	 * At 300px or below, the player will begin to lose functionality e.g. volume controls being omitted.
 	 * Youtube requires a minimum width 200px.
 	 */
-	isPlayableMediaCard?: boolean;
+	canPlayInline?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	starRating?: Rating;
@@ -193,7 +193,7 @@ const getMedia = ({
 	isCrossword,
 	slideshowImages,
 	mainMedia,
-	isPlayableMediaCard,
+	canPlayInline,
 	podcastImage,
 	isBetaContainer,
 }: {
@@ -203,11 +203,11 @@ const getMedia = ({
 	isCrossword?: boolean;
 	slideshowImages?: DCRSlideshowImage[];
 	mainMedia?: MainMedia;
-	isPlayableMediaCard?: boolean;
+	canPlayInline?: boolean;
 	podcastImage?: PodcastSeriesImage;
 	isBetaContainer: boolean;
 }) => {
-	if (mainMedia && mainMedia.type === 'Video' && isPlayableMediaCard) {
+	if (mainMedia && mainMedia.type === 'Video' && canPlayInline) {
 		return {
 			type: 'video',
 			mainMedia,
@@ -306,7 +306,7 @@ export const Card = ({
 	avatarUrl,
 	showClock,
 	mainMedia,
-	isPlayableMediaCard,
+	canPlayInline,
 	kickerText,
 	showPulsingDot,
 	starRating,
@@ -427,7 +427,7 @@ export const Card = ({
 	// If the card isn't playable, we need to show a play icon.
 	// Otherwise, this is handled by the YoutubeAtom
 	const showPlayIcon =
-		mainMedia?.type === 'Video' && !isPlayableMediaCard && showMainVideo;
+		mainMedia?.type === 'Video' && !canPlayInline && showMainVideo;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -436,7 +436,7 @@ export const Card = ({
 		isCrossword,
 		slideshowImages,
 		mainMedia,
-		isPlayableMediaCard,
+		canPlayInline,
 		podcastImage,
 		isBetaContainer,
 	});

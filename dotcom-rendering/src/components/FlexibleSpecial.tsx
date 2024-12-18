@@ -163,6 +163,7 @@ export const OneCardLayout = ({
 					showTopBarDesktop={false}
 					showTopBarMobile={true}
 					trailTextSize={trailTextSize}
+					canPlayInline={true}
 				/>
 			</LI>
 		</UL>
@@ -218,6 +219,7 @@ const TwoCardOrFourCardLayout = ({
 							showLivePlayable={false}
 							showTopBarDesktop={false}
 							showTopBarMobile={true}
+							canPlayInline={false}
 						/>
 					</LI>
 				);
