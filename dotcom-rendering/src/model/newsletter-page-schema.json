@@ -52,6 +52,30 @@
                 ]
             }
         },
+        "layout": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "subtitle": {
+                        "type": "string"
+                    },
+                    "newsletters": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "newsletters",
+                    "title"
+                ]
+            }
+        },
         "editionId": {
             "$ref": "#/definitions/EditionId"
         },

@@ -1054,3 +1054,9 @@ export type Newsletter = {
 	regionFocus?: string;
 	illustrationCard?: string;
 };
+
+export type NewsletterLayout = {
+	title: string;
+	subtitle?: string;
+	newsletters: string[];
+}[];
