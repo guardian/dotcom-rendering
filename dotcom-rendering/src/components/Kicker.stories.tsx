@@ -110,3 +110,17 @@ export const CardKickerWithContainerOverrides = {
 		</>
 	),
 };
+
+export const CardKickerWithAccentImage = () => {
+	<Kicker
+		text="Standard kicker"
+		color={palette('--card-kicker-text')}
+		showPulsingDot={false}
+		isInline={false}
+		accentImage={{
+			src: 'https://uploads.guim.co.uk/2022/02/10/TiF_FINAL_3000x3000.jpg',
+			altText: 'Today in Focus',
+		}}
+	/>;
+};
+CardKickerWithAccentImage.storyName = 'Card kicker with accent image';
