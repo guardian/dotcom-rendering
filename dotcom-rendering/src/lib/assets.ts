@@ -43,8 +43,6 @@ export const decideAssetOrigin = (
 
 const isDev = process.env.NODE_ENV === 'development';
 
-console.log(process.env.NODE_ENV);
-
 export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE, isDev);
 
 const isAssetHash = (manifest: unknown): manifest is AssetHash =>
