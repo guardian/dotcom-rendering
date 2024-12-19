@@ -7,7 +7,7 @@ import {
 } from '@guardian/source/foundations';
 import { Hide, Link } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
-import { isMediaCard } from '../../lib/cardHelpers';
+import { isMediaCard as isAMediaCard } from '../../lib/cardHelpers';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { palette } from '../../palette';
@@ -260,11 +260,14 @@ const getHeadlinePosition = ({
 	isFlexSplash,
 	containerType,
 	showLivePlayable,
+	isMediaCard,
 }: {
 	containerType?: DCRContainerType;
 	isFlexSplash?: boolean;
 	showLivePlayable: boolean;
+	isMediaCard: boolean;
 }) => {
+	if (isMediaCard) return 'inner';
 	if (containerType === 'flexible/special' && isFlexSplash) {
 		return 'outer';
 	}
@@ -450,9 +453,9 @@ export const Card = ({
 -	 * Media cards have contrasting background colours. We add additional
 	 * padding to these cards to keep the text readable.
 -	 */
-	const hasBackgroundColour = isMediaCard(format);
+	const isMediaCard = isAMediaCard(format);
 
-	const backgroundColour = hasBackgroundColour
+	const backgroundColour = isMediaCard
 		? palette('--card-media-background')
 		: palette('--card-background');
 
@@ -479,6 +482,7 @@ export const Card = ({
 		containerType,
 		isFlexSplash,
 		showLivePlayable,
+		isMediaCard,
 	});
 
 	const hideTrailTextUntil = () => {
@@ -498,7 +502,7 @@ export const Card = ({
 	/** Determines the gap of between card components based on card properties */
 	const getGapSize = (): GapSize => {
 		if (isOnwardContent) return 'none';
-		if (hasBackgroundColour && !isFlexibleContainer) return 'tiny';
+		if (isMediaCard && !isFlexibleContainer) return 'tiny';
 		if (!!isFlexSplash || (isFlexibleContainer && imageSize === 'jumbo')) {
 			return 'small';
 		}
@@ -812,7 +816,7 @@ export const Card = ({
 						imageType={media?.type}
 						imageSize={imageSize}
 						imagePositionOnDesktop={imagePositionOnDesktop}
-						hasBackgroundColour={hasBackgroundColour}
+						hasBackgroundColour={isMediaCard}
 						isOnwardContent={isOnwardContent}
 						isFlexibleContainer={isFlexibleContainer}
 					>
@@ -943,9 +947,7 @@ export const Card = ({
 			<div
 				style={{
 					padding:
-						hasBackgroundColour || isOnwardContent
-							? `0 ${space[2]}px`
-							: 0,
+						isMediaCard || isOnwardContent ? `0 ${space[2]}px` : 0,
 				}}
 			>
 				{showLivePlayable && liveUpdatesPosition === 'outer' && (
