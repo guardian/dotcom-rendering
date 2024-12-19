@@ -406,7 +406,9 @@ export const StandardCardLayout = ({
 							)}
 							supportingContentAlignment="vertical"
 							supportingContentPosition="outer"
-							imageSize={'medium'}
+							imageSize={
+								isMediaCard(card.format) ? 'small' : 'medium'
+							}
 							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}
