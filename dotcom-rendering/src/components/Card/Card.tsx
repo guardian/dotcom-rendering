@@ -6,7 +6,11 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { Hide, Link, SvgCamera } from '@guardian/source/react-components';
-import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../../lib/articleFormat';
 import { isMediaCard as isAMediaCard } from '../../lib/cardHelpers';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
@@ -898,18 +902,20 @@ export const Card = ({
 									{showPill ? (
 										<>
 											<MediaPill />
-											{branding && (
-												<CardBranding
-													branding={branding}
-													format={format}
-													onwardsSource={
-														onwardsSource
-													}
-													containerPalette={
-														containerPalette
-													}
-												/>
-											)}
+											{format.theme ===
+												ArticleSpecial.Labs &&
+												branding && (
+													<CardBranding
+														branding={branding}
+														format={format}
+														onwardsSource={
+															onwardsSource
+														}
+														containerPalette={
+															containerPalette
+														}
+													/>
+												)}
 										</>
 									) : (
 										<CardFooter
