@@ -264,7 +264,8 @@ const styles = {
 	middleColumnContainer: css`
 		${from.tablet} {
 			grid-row: 2;
-			justify-self: center;
+			grid-column: 2;
+			width: 100%;
 			padding-bottom: ${space[5]}px;
 		}
 		${from.desktop} {
@@ -275,7 +276,7 @@ const styles = {
 	thirdColumnContainer: css`
 		${from.tablet} {
 			grid-row: 3;
-			justify-self: center;
+			grid-column: 2;
 		}
 		${from.desktop} {
 			grid-column: 3;
