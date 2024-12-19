@@ -44,7 +44,7 @@ type BoostProperties = {
 const determineCardProperties = (
 	boostLevel: BoostLevel,
 	supportingContentLength: number,
-	isMediaCard: boolean,
+	isAMediaCard: boolean,
 ): BoostProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
@@ -56,7 +56,7 @@ const determineCardProperties = (
 					mobile: 'medium',
 				},
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: isMediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: isAMediaCard ? 'top' : 'bottom',
 				imageSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
@@ -72,7 +72,7 @@ const determineCardProperties = (
 					mobile: 'large',
 				},
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: isMediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: isAMediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
@@ -86,8 +86,8 @@ const determineCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'xlarge',
 				},
-				imagePositionOnDesktop: isMediaCard ? 'top' : 'bottom',
-				imagePositionOnMobile: isMediaCard ? 'top' : 'bottom',
+				imagePositionOnDesktop: isAMediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: isAMediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
@@ -100,8 +100,8 @@ const determineCardProperties = (
 					tablet: 'xxlarge',
 					mobile: 'xxlarge',
 				},
-				imagePositionOnDesktop: isMediaCard ? 'top' : 'bottom',
-				imagePositionOnMobile: isMediaCard ? 'top' : 'bottom',
+				imagePositionOnDesktop: isAMediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: isAMediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
@@ -177,9 +177,9 @@ export const OneCardLayout = ({
 
 const getImagePosition = (
 	hasTwoOrFewerCards: boolean,
-	isMediaCard: boolean,
+	isAMediaCard: boolean,
 ) => {
-	if (isMediaCard && !hasTwoOrFewerCards) return 'top';
+	if (isAMediaCard && !hasTwoOrFewerCards) return 'top';
 	if (hasTwoOrFewerCards) return 'left';
 	return 'bottom';
 };

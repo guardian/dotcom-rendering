@@ -88,7 +88,7 @@ type BoostedSplashProperties = {
 const decideSplashCardProperties = (
 	boostLevel: BoostLevel,
 	supportingContentLength: number,
-	isMediaCard: boolean,
+	isAMediaCard: boolean,
 ): BoostedSplashProperties => {
 	switch (boostLevel) {
 		// boostedfont sizing
@@ -101,7 +101,7 @@ const decideSplashCardProperties = (
 					mobile: 'medium',
 				},
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: isMediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: isAMediaCard ? 'top' : 'bottom',
 				imageSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
@@ -116,7 +116,7 @@ const decideSplashCardProperties = (
 					mobile: 'large',
 				},
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: isMediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: isAMediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
@@ -130,8 +130,8 @@ const decideSplashCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'xlarge',
 				},
-				imagePositionOnDesktop: isMediaCard ? 'top' : 'bottom',
-				imagePositionOnMobile: isMediaCard ? 'top' : 'bottom',
+				imagePositionOnDesktop: isAMediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: isAMediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
@@ -144,8 +144,8 @@ const decideSplashCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'xxlarge',
 				},
-				imagePositionOnDesktop: isMediaCard ? 'top' : 'bottom',
-				imagePositionOnMobile: isMediaCard ? 'top' : 'bottom',
+				imagePositionOnDesktop: isAMediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: isAMediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',

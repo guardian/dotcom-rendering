@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import {
 	space,
 	textSans15,
@@ -6,10 +7,10 @@ import {
 	textSansBold15,
 } from '@guardian/source/foundations';
 import { palette } from '../palette';
+import type { PodcastSeriesImage } from '../types/tag';
 import { CardPicture } from './CardPicture';
 import { Island } from './Island';
 import { PulsingDot } from './PulsingDot.importable';
-import { PodcastSeriesImage } from '../types/tag';
 
 type Props = {
 	text: string;
@@ -92,7 +93,7 @@ export const Kicker = ({
 					: 'transparent',
 			}}
 		>
-			{accentImage?.src && (
+			{!isUndefined(accentImage?.src) && (
 				<div
 					css={[
 						css`
