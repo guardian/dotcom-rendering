@@ -64,6 +64,7 @@ const flexBasisStyles = ({
 const paddingStyles = (
 	imagePosition: ImagePositionType,
 	isFlexibleContainer: boolean,
+	paddingSize: '4' | '8',
 ) => {
 	/**
 	 * If we're in a flexible container there is a 20px gap between the image
@@ -72,18 +73,18 @@ const paddingStyles = (
 	 */
 	if (isFlexibleContainer && imagePosition === 'left') {
 		return css`
-			padding: ${space[1]}px ${space[1]}px ${space[1]}px 0;
+			padding: ${paddingSize}px ${paddingSize}px ${paddingSize}px 0;
 		`;
 	}
 
 	if (isFlexibleContainer && imagePosition === 'right') {
 		return css`
-			padding: ${space[1]}px 0 ${space[1]}px ${space[1]}px;
+			padding: ${paddingSize}px 0 ${paddingSize}px ${paddingSize}px;
 		`;
 	}
 
 	return css`
-		padding: ${space[1]}px;
+		padding: ${paddingSize}px;
 	`;
 };
 
@@ -95,6 +96,7 @@ type Props = {
 	hasBackgroundColour?: boolean;
 	isOnwardContent?: boolean;
 	isFlexibleContainer?: boolean;
+	largePadding?: boolean;
 };
 
 export const ContentWrapper = ({
@@ -108,6 +110,7 @@ export const ContentWrapper = ({
 }: Props) => {
 	const isHorizontalOnDesktop =
 		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
+	const paddingWidth = hasBackgroundColour ? '8' : '4';
 
 	return (
 		<div
@@ -116,7 +119,11 @@ export const ContentWrapper = ({
 				isHorizontalOnDesktop &&
 					flexBasisStyles({ imageSize, imageType }),
 				(!!hasBackgroundColour || !!isOnwardContent) &&
-					paddingStyles(imagePositionOnDesktop, isFlexibleContainer),
+					paddingStyles(
+						imagePositionOnDesktop,
+						isFlexibleContainer,
+						paddingWidth,
+					),
 			]}
 		>
 			{children}
