@@ -2,7 +2,6 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { between, from, until } from '@guardian/source/foundations';
 import type { CardImageType } from '../../../types/layout';
-import { PlayIcon } from './PlayIcon';
 
 const imageFixedSize = {
 	tiny: 86,
@@ -35,7 +34,6 @@ type Props = {
 	imageType?: CardImageType;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
-	showPlayIcon: boolean;
 	/**
 	 * Forces hiding the image overlay added to pictures & slideshows on hover.
 	 * This is to allow hiding the overlay on slideshow carousels where we don't
@@ -122,7 +120,6 @@ export const ImageWrapper = ({
 	imageType,
 	imagePositionOnDesktop,
 	imagePositionOnMobile,
-	showPlayIcon,
 	hideImageOverlay,
 }: Props) => {
 	const isHorizontalOnDesktop =
@@ -177,12 +174,6 @@ export const ImageWrapper = ({
 				{/* This image overlay is styled when the CardLink is hovered */}
 				{(imageType === 'picture' || imageType === 'slideshow') &&
 					!hideImageOverlay && <div className="image-overlay" />}
-				{imageType === 'picture' && showPlayIcon && (
-					<PlayIcon
-						imageSize={imageSize}
-						imagePositionOnMobile={imagePositionOnMobile}
-					/>
-				)}
 			</>
 		</div>
 	);
