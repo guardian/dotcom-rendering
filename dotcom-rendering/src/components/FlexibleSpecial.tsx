@@ -17,6 +17,7 @@ import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
 import type { Alignment } from './SupportingContent';
+
 type Props = {
 	groupedTrails: DCRGroupedTrails;
 	imageLoading: Loading;
