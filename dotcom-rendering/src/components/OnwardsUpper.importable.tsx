@@ -7,9 +7,10 @@ import {
 } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import { useAB } from '../lib/useAB';
-import { useIsAndroid } from '../lib/useIsAndroid';
+import { useIsHorizontalScrollingSupported } from '../lib/useIsHorizontalScrollingSupported';
 import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { BigSixOnwardsContent } from './BigSixOnwardsContent';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
@@ -181,6 +182,7 @@ type Props = {
 	shortUrlId: string;
 	discussionApiUrl: string;
 	absoluteServerTimes: boolean;
+	renderingTarget: RenderingTarget;
 };
 
 /**
@@ -215,6 +217,7 @@ export const OnwardsUpper = ({
 	shortUrlId,
 	discussionApiUrl,
 	absoluteServerTimes,
+	renderingTarget,
 }: Props) => {
 	const abTestAPI = useAB()?.api;
 	const isInOnwardsAbTestVariant = abTestAPI?.isUserInVariant(
@@ -222,9 +225,9 @@ export const OnwardsUpper = ({
 		'variant',
 	);
 
-	const isAndroid = useIsAndroid();
+	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
 
-	if (isAndroid) return null;
+	if (!isHorizontalScrollingSupported) return null;
 
 	// Related content can be a collection of articles based on
 	// two things, 1: A popular tag, or 2: A generic text match
@@ -329,6 +332,7 @@ export const OnwardsUpper = ({
 						format={format}
 						discussionApiUrl={discussionApiUrl}
 						absoluteServerTimes={absoluteServerTimes}
+						renderingTarget={renderingTarget}
 					/>
 				</Section>
 			)}
@@ -344,6 +348,7 @@ export const OnwardsUpper = ({
 						format={format}
 						discussionApiUrl={discussionApiUrl}
 						absoluteServerTimes={absoluteServerTimes}
+						renderingTarget={renderingTarget}
 					/>
 				</Section>
 			)}
