@@ -6,7 +6,6 @@ import {
 	headlineMedium20,
 	palette as sourcePalette,
 	space,
-	textSansBold12,
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import { palette } from '../../palette';
@@ -19,6 +18,8 @@ import { PlayIcon } from '../Card/components/PlayIcon';
 import { FormatBoundary } from '../FormatBoundary';
 import { Kicker } from '../Kicker';
 import { secondsToDuration } from '../MediaDuration';
+import { Pill } from '../Pill';
+import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 import { YoutubeAtomPicture } from './YoutubeAtomPicture';
 
 export type VideoCategory = 'live' | 'documentary' | 'explainer';
@@ -71,40 +72,28 @@ const overlayStyles = css`
 	}
 `;
 
-const pillStyles = css`
+const pillPositionStyles = (smallCard: boolean) => css`
 	position: absolute;
-	top: ${space[2]}px;
-	right: ${space[2]}px;
-	${textSansBold12};
-	background-color: rgba(0, 0, 0, 0.7);
-	color: ${sourcePalette.neutral[100]};
-	border-radius: ${space[3]}px;
-	padding: 0 6px;
-	display: inline-flex;
-`;
-
-const pillItemStyles = css`
-	/* Target all but the first element, and add a border */
-	:nth-of-type(n + 2) {
-		border-left: 1px solid rgba(255, 255, 255, 0.5);
-	}
-`;
-
-const pillTextStyles = css`
-	line-height: ${space[4]}px;
-	padding: ${space[1]}px 6px;
+	${smallCard
+		? css`
+				bottom: ${space[1]}px;
+				left: ${space[1]}px;
+		  `
+		: css`
+				top: ${space[2]}px;
+				right: ${space[2]}px;
+		  `};
 `;
 
 const liveStyles = css`
 	::before {
 		content: '';
-		width: 9px;
-		height: 9px;
-		border-radius: 50%;
-		background-color: ${sourcePalette.news[500]};
 		display: inline-block;
-		position: relative;
-		margin-right: 0.1875rem;
+		width: 0.75em;
+		height: 0.75em;
+		border-radius: 100%;
+		background-color: ${sourcePalette.news[500]};
+		margin-right: ${space[1]}px;
 	}
 `;
 
@@ -158,7 +147,7 @@ export const YoutubeAtomOverlay = ({
 	const showPill = !!videoCategory || hasDuration;
 	const isLive = videoCategory === 'live';
 	const image = overrideImage ?? posterImage;
-	const hidePillOnMobile =
+	const isSmallCard =
 		imagePositionOnMobile === 'right' || imagePositionOnMobile === 'left';
 
 	return (
@@ -180,37 +169,30 @@ export const YoutubeAtomOverlay = ({
 					/>
 				)}
 				{showPill && (
-					<div
-						css={
-							hidePillOnMobile
-								? css`
-										display: none;
-								  `
-								: pillStyles
-						}
-					>
-						{!!videoCategory && (
-							<div css={pillItemStyles}>
-								<div
-									css={[pillTextStyles, isLive && liveStyles]}
-								>
-									{capitalise(videoCategory)}
-								</div>
-							</div>
-						)}
-						{!!hasDuration && (
-							<div css={pillItemStyles}>
-								<div css={pillTextStyles}>
+					<div css={pillPositionStyles(isSmallCard)}>
+						<Pill>
+							{!!videoCategory && !isSmallCard && (
+								<Pill.Segment>
+									<span css={isLive && liveStyles}>
+										{capitalise(videoCategory)}
+									</span>
+								</Pill.Segment>
+							)}
+							{!!hasDuration && (
+								<Pill.Segment>
+									{isSmallCard && <SvgMediaControlsPlay />}
 									{secondsToDuration(duration)}
-								</div>
-							</div>
-						)}
+								</Pill.Segment>
+							)}
+						</Pill>
 					</div>
 				)}
-				<PlayIcon
-					imageSize={imageSize}
-					imagePositionOnMobile={imagePositionOnMobile}
-				/>
+				{!isSmallCard && (
+					<PlayIcon
+						imageSize={imageSize}
+						imagePositionOnMobile={imagePositionOnMobile}
+					/>
+				)}
 				{showTextOverlay && (
 					<div css={textOverlayStyles}>
 						{!!kicker && (
