@@ -218,6 +218,7 @@ const getMedia = ({
 	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
 	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
 	if (podcastImage && isBetaContainer) {
+		console.log({ podcastImage });
 		return {
 			type: 'podcast',
 			podcastImage,
@@ -291,11 +292,6 @@ export const isWithinTwelveHours = (webPublicationDate: string): boolean => {
 	const timeDiffHours = timeDiffMs / (1000 * 60 * 60);
 	return timeDiffHours <= 12;
 };
-
-const podcastMarginStyles = css`
-	margin-left: 8px;
-	margin-top: 8px;
-`;
 
 const podcastImageStyles = (imageSize: ImageSizeType) => {
 	switch (imageSize) {
