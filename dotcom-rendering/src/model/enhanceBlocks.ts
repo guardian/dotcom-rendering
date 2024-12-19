@@ -8,6 +8,7 @@ import type {
 	Newsletter,
 } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
+import type { TagType } from '../types/tag';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 import { enhanceDisclaimer } from './enhance-disclaimer';
@@ -30,6 +31,7 @@ type Options = {
 	imagesForLightbox: ImageForLightbox[];
 	hasAffiliateLinksDisclaimer: boolean;
 	audioArticleImage?: ImageBlockElement;
+	tags?: TagType[];
 };
 
 const enhanceNewsletterSignup =
@@ -55,7 +57,10 @@ export const enhanceElements =
 	(format: ArticleFormat, blockId: string, options: Options) =>
 	(elements: FEElement[]): FEElement[] =>
 		[
-			enhanceLists(enhanceElements(format, blockId, options)),
+			enhanceLists(
+				enhanceElements(format, blockId, options),
+				options.tags,
+			),
 			enhanceTimeline(enhanceElements(format, blockId, options)),
 			enhanceDividers,
 			enhanceH2s,
