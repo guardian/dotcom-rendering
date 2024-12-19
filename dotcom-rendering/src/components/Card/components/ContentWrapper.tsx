@@ -97,6 +97,7 @@ type Props = {
 	imagePositionOnDesktop: ImagePositionType;
 	padContent?: 'small' | 'large';
 	isFlexibleContainer?: boolean;
+	largePadding?: boolean;
 };
 
 export const ContentWrapper = ({
