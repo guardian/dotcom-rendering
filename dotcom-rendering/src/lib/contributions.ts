@@ -6,9 +6,9 @@ import type { DCRFrontType } from '../types/front';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import type { DCRTagPageType } from '../types/tagPage';
 
-// User Attributes API cookies (created on sign-in)
+// User Attributes API cookie (created on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
-export const RECURRING_CONTRIBUTOR_COOKIE = 'gu_recurring_contributor';
+
 export const OPT_OUT_OF_ARTICLE_COUNT_COOKIE = 'gu_article_count_opt_out';
 
 //  Local storage keys
