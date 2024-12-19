@@ -351,7 +351,7 @@ export const Card25Media25 = ({
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
-			isPlayableMediaCard={false}
+			canPlayInline={false}
 			trailTextColour={palette('--card-headline')}
 		/>
 	);
@@ -393,7 +393,7 @@ export const Card25Media25SmallHeadline = ({
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'xxsmall', tablet: 'xxsmall' }}
-			isPlayableMediaCard={false}
+			canPlayInline={false}
 			trailTextColour={palette('--card-headline')}
 		/>
 	);
@@ -442,7 +442,7 @@ export const Card25Media25Tall = ({
 					: undefined
 			}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
-			isPlayableMediaCard={false}
+			canPlayInline={false}
 			trailTextColour={palette('--card-headline')}
 		/>
 	);
@@ -483,7 +483,7 @@ export const Card25Media25TallNoTrail = ({
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
-			isPlayableMediaCard={false}
+			canPlayInline={false}
 			trailTextColour={palette('--card-headline')}
 		/>
 	);
@@ -524,7 +524,7 @@ export const Card25Media25TallSmallHeadline = ({
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'xxsmall', tablet: 'xxsmall' }}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
-			isPlayableMediaCard={false}
+			canPlayInline={false}
 			trailTextColour={palette('--card-headline')}
 		/>
 	);
@@ -805,7 +805,7 @@ export const CardDefault = ({
 			imageLoading={'lazy'}
 			avatarUrl={undefined}
 			headlineSizes={{ desktop: 'xxsmall' }}
-			isPlayableMediaCard={false}
+			canPlayInline={false}
 			isTagPage={isTagPage}
 			trailTextColour={palette('--card-headline')}
 		/>
@@ -844,7 +844,7 @@ export const CardDefaultMedia = ({
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'xxsmall' }}
-			isPlayableMediaCard={false}
+			canPlayInline={false}
 			trailTextColour={palette('--card-headline')}
 		/>
 	);
@@ -882,7 +882,7 @@ export const CardDefaultMediaMobile = ({
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'xxsmall' }}
-			isPlayableMediaCard={false}
+			canPlayInline={false}
 			trailTextColour={palette('--card-headline')}
 		/>
 	);

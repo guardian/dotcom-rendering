@@ -14,7 +14,6 @@ import type {
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import {
-	getLastOneOffContributionDate,
 	getPurchaseInfo,
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
@@ -81,7 +80,6 @@ const ReaderRevenueLinksRemote = ({
 				mvtId: Number(
 					getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 				),
-				lastOneOffContributionDate: getLastOneOffContributionDate(),
 				purchaseInfo: getPurchaseInfo(),
 				isSignedIn,
 			},

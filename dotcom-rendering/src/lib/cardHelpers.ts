@@ -40,7 +40,7 @@ export const cardHasDarkBackground = (
 		case 'PodcastPalette':
 		// If no containerPalette provided, card is in a standard container
 		case undefined: {
-			return isMediaCard(format);
+			return false;
 		}
 	}
 };

@@ -33,7 +33,7 @@ const basicCardProps: CardProps = {
 	imagePositionOnDesktop: 'top',
 	isExternalLink: false,
 	showLivePlayable: false,
-	isPlayableMediaCard: true,
+	canPlayInline: true,
 	imageLoading: 'eager',
 	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 	absoluteServerTimes: true,

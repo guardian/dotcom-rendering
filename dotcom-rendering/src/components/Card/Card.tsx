@@ -98,7 +98,7 @@ export type Props = {
 	 * At 300px or below, the player will begin to lose functionality e.g. volume controls being omitted.
 	 * Youtube requires a minimum width 200px.
 	 */
-	isPlayableMediaCard?: boolean;
+	canPlayInline?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	starRating?: Rating;
@@ -141,6 +141,7 @@ export type Props = {
 	trailTextColour?: string;
 	/** The square podcast series image, if it exists for a card */
 	podcastImage?: PodcastSeriesImage;
+	galleryCount?: number;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -192,8 +193,9 @@ const getMedia = ({
 	isCrossword,
 	slideshowImages,
 	mainMedia,
-	isPlayableMediaCard,
+	canPlayInline,
 	podcastImage,
+	isBetaContainer,
 }: {
 	imageUrl?: string;
 	imageAltText?: string;
@@ -201,10 +203,11 @@ const getMedia = ({
 	isCrossword?: boolean;
 	slideshowImages?: DCRSlideshowImage[];
 	mainMedia?: MainMedia;
-	isPlayableMediaCard?: boolean;
+	canPlayInline?: boolean;
 	podcastImage?: PodcastSeriesImage;
+	isBetaContainer: boolean;
 }) => {
-	if (mainMedia && mainMedia.type === 'Video' && isPlayableMediaCard) {
+	if (mainMedia && mainMedia.type === 'Video' && canPlayInline) {
 		return {
 			type: 'video',
 			mainMedia,
@@ -213,7 +216,7 @@ const getMedia = ({
 	}
 	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
 	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
-	if (podcastImage) {
+	if (podcastImage && isBetaContainer) {
 		return {
 			type: 'podcast',
 			podcastImage,
@@ -303,7 +306,7 @@ export const Card = ({
 	avatarUrl,
 	showClock,
 	mainMedia,
-	isPlayableMediaCard,
+	canPlayInline,
 	kickerText,
 	showPulsingDot,
 	starRating,
@@ -340,6 +343,8 @@ export const Card = ({
 	trailTextSize,
 	trailTextColour,
 	podcastImage,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- Added in preparation for UI changes to display gallery count
+	galleryCount,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -422,7 +427,7 @@ export const Card = ({
 	// If the card isn't playable, we need to show a play icon.
 	// Otherwise, this is handled by the YoutubeAtom
 	const showPlayIcon =
-		mainMedia?.type === 'Video' && !isPlayableMediaCard && showMainVideo;
+		mainMedia?.type === 'Video' && !canPlayInline && showMainVideo;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -431,8 +436,9 @@ export const Card = ({
 		isCrossword,
 		slideshowImages,
 		mainMedia,
-		isPlayableMediaCard,
+		canPlayInline,
 		podcastImage,
+		isBetaContainer,
 	});
 
 	// For opinion type cards with avatars (which aren't onwards content)
@@ -441,10 +447,14 @@ export const Card = ({
 		isOpinion && !isOnwardContent && media?.type === 'avatar';
 
 	/**
-	 * Some cards in standard containers have contrasting background colours.
-	 * We need to add additional padding to these cards to keep the text readable.
-	 */
-	const hasBackgroundColour = !containerPalette && isMediaCard(format);
+-	 * Media cards have contrasting background colours. We add additional
+	 * padding to these cards to keep the text readable.
+-	 */
+	const hasBackgroundColour = isMediaCard(format);
+
+	const backgroundColour = hasBackgroundColour
+		? palette('--card-media-background')
+		: palette('--card-background');
 
 	/* Whilst we migrate to the new container types, we need to check which container we are in. */
 	const isFlexibleContainer =
@@ -488,7 +498,7 @@ export const Card = ({
 	/** Determines the gap of between card components based on card properties */
 	const getGapSize = (): GapSize => {
 		if (isOnwardContent) return 'none';
-		if (hasBackgroundColour) return 'tiny';
+		if (hasBackgroundColour && !isFlexibleContainer) return 'tiny';
 		if (!!isFlexSplash || (isFlexibleContainer && imageSize === 'jumbo')) {
 			return 'small';
 		}
@@ -574,7 +584,7 @@ export const Card = ({
 					css={css`
 						padding-bottom: ${space[5]}px;
 					`}
-					style={{ backgroundColor: palette('--card-background') }}
+					style={{ backgroundColor: backgroundColour }}
 				>
 					<CardHeadline
 						headlineText={headlineText}
@@ -612,7 +622,7 @@ export const Card = ({
 			)}
 
 			<CardLayout
-				cardBackgroundColour={palette('--card-background')}
+				cardBackgroundColour={backgroundColour}
 				imagePositionOnDesktop={imagePositionOnDesktop}
 				imagePositionOnMobile={imagePositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
@@ -804,6 +814,7 @@ export const Card = ({
 						imagePositionOnDesktop={imagePositionOnDesktop}
 						hasBackgroundColour={hasBackgroundColour}
 						isOnwardContent={isOnwardContent}
+						isFlexibleContainer={isFlexibleContainer}
 					>
 						{/* This div is needed to keep the headline and trail text justified at the start */}
 						<div

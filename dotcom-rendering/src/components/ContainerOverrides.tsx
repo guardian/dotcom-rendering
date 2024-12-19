@@ -580,6 +580,16 @@ const cardBackgroundDark: ContainerFunction = (containerPalette) => {
 	}
 };
 
+const cardMediaBackgroundLight: ContainerFunction = (containerPalette) =>
+	transparentColour(cardHeadlineLight(containerPalette), 0.1);
+const cardMediaBackgroundDark: ContainerFunction = (containerPalette) =>
+	transparentColour(cardHeadlineDark(containerPalette), 0.1);
+
+const cardMediaIconLight: ContainerFunction = (containerPalette) =>
+	cardBackgroundLight(containerPalette);
+const cardMediaIconDark: ContainerFunction = (containerPalette) =>
+	cardBackgroundDark(containerPalette);
+
 const sectionBackgroundLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'InvestigationPalette':
@@ -1068,6 +1078,14 @@ const containerColours = {
 	'--card-kicker-text': {
 		light: cardKickerTextLight,
 		dark: cardKickerTextDark,
+	},
+	'--card-media-background': {
+		light: cardMediaBackgroundLight,
+		dark: cardMediaBackgroundDark,
+	},
+	'--card-media-icon': {
+		light: cardMediaIconLight,
+		dark: cardMediaIconDark,
 	},
 	'--card-sublinks-background': {
 		light: cardSublinksBackgroundLight,

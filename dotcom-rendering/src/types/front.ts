@@ -11,7 +11,7 @@ import type { BoostLevel, Image, StarRating } from './content';
 import type { FooterType } from './footer';
 import type { FEFormat, FENavType } from './frontend';
 import type { MainMedia } from './mainMedia';
-import type { FETagType } from './tag';
+import type { FETagType, PodcastSeriesImage } from './tag';
 import type { Territory } from './territory';
 import type { FETrailType, TrailType } from './trails';
 
@@ -290,6 +290,7 @@ export type FEFrontCard = {
 		shortUrl: string;
 		group: string;
 		isLive: boolean;
+		galleryCount?: number;
 	};
 	discussion: {
 		isCommentable: boolean;
@@ -347,7 +348,8 @@ export type DCRFrontCard = {
 	branding?: Branding;
 	slideshowImages?: DCRSlideshowImage[];
 	showMainVideo?: boolean;
-	podcastImageSrc?: string;
+	galleryCount?: number;
+	podcastImage?: PodcastSeriesImage;
 };
 
 export type DCRSlideshowImage = {
