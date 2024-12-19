@@ -14,28 +14,38 @@ export const BASE_URL_DEV = 'http://localhost:3030/';
 export type AssetOrigin =
 	| 'https://assets.guim.co.uk/'
 	| 'https://assets-code.guim.co.uk/'
-	| typeof BASE_URL_DEV;
+	| typeof BASE_URL_DEV
+	| '/';
 
 /**
  * Decides the url to use for fetching assets
  *
  * @param {'PROD' | 'CODE' | undefined} stage the environment code is executing in
- * @returns {string}
+ * @param {boolean} isDev whether the environment is development
+ * @returns {AssetOrigin}
  */
-export const decideAssetOrigin = (stage: string | undefined): AssetOrigin => {
+export const decideAssetOrigin = (
+	stage: string | undefined,
+	isDev?: boolean,
+): AssetOrigin => {
+	if (isDev) {
+		return BASE_URL_DEV;
+	}
 	switch (stage?.toUpperCase()) {
 		case 'PROD':
 			return 'https://assets.guim.co.uk/';
 		case 'CODE':
 			return 'https://assets-code.guim.co.uk/';
 		default:
-			return BASE_URL_DEV;
+			return '/';
 	}
 };
 
 const isDev = process.env.NODE_ENV === 'development';
 
-export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE);
+console.log(process.env.NODE_ENV);
+
+export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE, isDev);
 
 const isAssetHash = (manifest: unknown): manifest is AssetHash =>
 	isObject(manifest) &&
