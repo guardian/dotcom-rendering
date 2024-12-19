@@ -221,7 +221,7 @@ const getMedia = ({
 		return {
 			type: 'podcast',
 			podcastImage,
-			...(imageUrl && { imageUrl }),
+			trailImage: { src: imageUrl, altText: imageAltText },
 		} as const;
 	}
 	if (imageUrl) {
@@ -261,14 +261,14 @@ const getHeadlinePosition = ({
 	isFlexSplash,
 	containerType,
 	showLivePlayable,
-	isMediaCard,
+	isAMediaCard,
 }: {
 	containerType?: DCRContainerType;
 	isFlexSplash?: boolean;
 	showLivePlayable: boolean;
-	isMediaCard: boolean;
+	isAMediaCard: boolean;
 }) => {
-	if (isMediaCard) return 'inner';
+	if (isAMediaCard) return 'inner';
 	if (containerType === 'flexible/special' && isFlexSplash) {
 		return 'outer';
 	}
@@ -291,6 +291,11 @@ export const isWithinTwelveHours = (webPublicationDate: string): boolean => {
 	const timeDiffHours = timeDiffMs / (1000 * 60 * 60);
 	return timeDiffHours <= 12;
 };
+
+const podcastMarginStyles = css`
+	margin-left: 8px;
+	margin-top: 8px;
+`;
 
 const podcastImageStyles = (imageSize: ImageSizeType) => {
 	switch (imageSize) {
@@ -475,8 +480,6 @@ export const Card = ({
 		isBetaContainer,
 	});
 
-	console.log({ headlineText, media });
-
 	// For opinion type cards with avatars (which aren't onwards content)
 	// we render the footer in a different location
 	const showCommentFooter =
@@ -515,7 +518,7 @@ export const Card = ({
 		containerType,
 		isFlexSplash,
 		showLivePlayable,
-		isMediaCard: isMediaCard(format),
+		isAMediaCard: isMediaCard(format),
 	});
 
 	const hideTrailTextUntil = () => {
@@ -846,9 +849,7 @@ export const Card = ({
 								{media.podcastImage.src && !showAccentImage ? (
 									<div
 										css={[
-											css`
-												margin: 8px;
-											`,
+											podcastMarginStyles,
 											podcastImageStyles(imageSize),
 										]}
 									>
@@ -863,9 +864,9 @@ export const Card = ({
 									</div>
 								) : (
 									<CardPicture
-										mainImage={media.imageUrl ?? ''}
+										mainImage={media.trailImage.src ?? ''}
 										imageSize={imageSize}
-										alt={media.imageAltText}
+										alt={media.trailImage.altText}
 										loading={imageLoading}
 										aspectRatio={aspectRatio}
 									/>
