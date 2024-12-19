@@ -37,7 +37,7 @@ import {
 } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
-import { PodcastSeriesImage } from '../types/tag';
+import type { PodcastSeriesImage } from '../types/tag';
 import { Byline } from './Byline';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';
