@@ -262,6 +262,8 @@ const styles = {
 		}
 	`,
 	middleColumnContainer: css`
+		display: flex;
+		flex-direction: column;
 		${from.tablet} {
 			grid-row: 2;
 			grid-column: 2;
@@ -274,6 +276,8 @@ const styles = {
 		}
 	`,
 	thirdColumnContainer: css`
+		display: flex;
+		flex-direction: column;
 		${from.tablet} {
 			grid-row: 3;
 			grid-column: 2;
