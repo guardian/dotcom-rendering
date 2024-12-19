@@ -185,7 +185,7 @@ const stylesSubCampaign = {
 		color: ${'#1A2835'};
 	`,
 	highlight: css`
-		background-color: ${'#670055'};
+		background-color: ${'#016D67'};
 		color: ${'#F6F6F6'};
 		padding-left: 2px;
 	`,
@@ -413,7 +413,7 @@ export const UsEoy2024: ReactComponent<Props> = ({
 							},
 							hover: {
 								backgroundColour: isSubCampaign
-									? '#891414'
+									? '#01544F'
 									: '#C41C1C',
 								textColour: '#FFFFFF',
 							},
