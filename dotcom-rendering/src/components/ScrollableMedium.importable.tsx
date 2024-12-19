@@ -1,3 +1,4 @@
+import { isMediaCard } from 'src/lib/cardHelpers';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
@@ -40,6 +41,9 @@ export const ScrollableMedium = ({
 			visibleCardsOnTablet={4}
 		>
 			{trails.map((trail) => {
+				const imagePosition = isMediaCard(trail.format)
+					? 'top'
+					: 'bottom';
 				return (
 					<ScrollableCarousel.Item key={trail.url}>
 						<FrontCard
@@ -53,8 +57,8 @@ export const ScrollableMedium = ({
 								desktop: 'xsmall',
 								tablet: 'xxsmall',
 							}}
-							imagePositionOnDesktop="bottom"
-							imagePositionOnMobile="bottom"
+							imagePositionOnDesktop={imagePosition}
+							imagePositionOnMobile={imagePosition}
 							imageSize="medium"
 							trailText={undefined} // unsupported
 							supportingContent={undefined} // unsupported
