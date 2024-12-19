@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { BUILD_VARIANT } from '../../webpack/bundles';
 import {
 	APPS_SCRIPT,
+	BASE_URL_DEV,
 	decideAssetOrigin,
 	getModulesBuild,
 	getPathFromManifest,
@@ -27,9 +28,9 @@ describe('decideAssetOrigin for stage', () => {
 		);
 	});
 	it('DEV', () => {
-		expect(decideAssetOrigin('DEV')).toEqual('/');
-		expect(decideAssetOrigin('dev')).toEqual('/');
-		expect(decideAssetOrigin(undefined)).toEqual('/');
+		expect(decideAssetOrigin('DEV', true)).toEqual(BASE_URL_DEV);
+		expect(decideAssetOrigin('dev', true)).toEqual(BASE_URL_DEV);
+		expect(decideAssetOrigin(undefined, false)).toEqual('/');
 	});
 });
 
