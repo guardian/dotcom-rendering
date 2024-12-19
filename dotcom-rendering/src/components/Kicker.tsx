@@ -99,6 +99,7 @@ export const Kicker = ({
 						css`
 							height: 88px;
 							width: 88px;
+							margin-bottom: 8px;
 						`,
 					]}
 				>
