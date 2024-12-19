@@ -1,14 +1,10 @@
 import { setCookie, storage } from '@guardian/libs';
-import MockDate from 'mockdate';
 import {
-	getLastOneOffContributionTimestamp,
-	hasSupporterCookie,
 	HIDE_SUPPORT_MESSAGING_COOKIE,
-	isRecentOneOffContributor,
 	NO_RR_BANNER_KEY,
 	recentlyClosedBanner,
 	setLocalNoBannerCachePeriod,
-	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
+	shouldHideSupportMessaging,
 	withinLocalNoBannerCachePeriod,
 } from './contributions';
 
@@ -20,75 +16,6 @@ const clearAllCookies = () => {
 		document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT`;
 	}
 };
-
-describe('getLastOneOffContributionTimestamp', () => {
-	beforeEach(clearAllCookies);
-
-	it('returns a support cookie date if found', () => {
-		const somePastDate = 1582567969093;
-		setCookie({
-			name: SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
-			value: String(somePastDate),
-		});
-		const lastOneOffContributionDate = getLastOneOffContributionTimestamp();
-		expect(lastOneOffContributionDate).toBe(somePastDate);
-	});
-
-	it('returns undefined if the date cannot be parsed correctly', () => {
-		setCookie({
-			name: SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
-			value: 'NOT_A_DATE',
-		});
-
-		const lastOneOffContributionDate = getLastOneOffContributionTimestamp();
-		expect(lastOneOffContributionDate).toBeUndefined();
-	});
-
-	it('returns an empty string if no one-off contribution found', () => {
-		const lastOneOffContributionDate = getLastOneOffContributionTimestamp();
-		expect(lastOneOffContributionDate).toBeUndefined();
-	});
-});
-
-describe('isRecentOneOffContributor', () => {
-	beforeEach(clearAllCookies);
-	afterEach(() => {
-		MockDate.reset();
-	});
-
-	it('returns false if there is no one-off contribution cookie', () => {
-		expect(isRecentOneOffContributor()).toBe(false);
-	});
-
-	it('returns true if there are 5 days between the last contribution date and now', () => {
-		setCookie({
-			name: SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
-			value: Date.parse('2018-08-01').toString(),
-		});
-
-		MockDate.set(Date.parse('2018-08-07T10:50:34'));
-		expect(isRecentOneOffContributor()).toBe(true);
-	});
-
-	it('returns true if there are 0 days between the last contribution date and now', () => {
-		const theDate = Date.parse('2018-08-01T13:00:30');
-		setCookie({
-			name: SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
-			value: theDate.toString(),
-		});
-		MockDate.set(theDate);
-		expect(isRecentOneOffContributor()).toBe(true);
-	});
-
-	it('returns false if the one-off contribution was more than 3 months ago', () => {
-		setCookie({
-			name: SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
-			value: Date.parse('2018-08-01').toString(),
-		});
-		MockDate.set(Date.parse('2019-08-01T13:00:30'));
-		expect(isRecentOneOffContributor()).toBe(false);
-	});
-});
 
 describe('getPurchaseInfo', () => {
 	let getPurchaseInfo: () => any;
@@ -176,7 +103,7 @@ describe('withinLocalNoBannerCachePeriod', () => {
 	});
 });
 
-describe('hasSupporterCookie', () => {
+describe('shouldHideSupportMessaging', () => {
 	beforeEach(clearAllCookies);
 
 	it('returns false if cookie exists and is set to false', () => {
@@ -184,7 +111,7 @@ describe('hasSupporterCookie', () => {
 			name: HIDE_SUPPORT_MESSAGING_COOKIE,
 			value: 'false',
 		});
-		expect(hasSupporterCookie(true)).toEqual(false);
+		expect(shouldHideSupportMessaging(true)).toEqual(false);
 	});
 
 	it('returns true if cookie exists and is set to true', () => {
@@ -192,14 +119,14 @@ describe('hasSupporterCookie', () => {
 			name: HIDE_SUPPORT_MESSAGING_COOKIE,
 			value: 'true',
 		});
-		expect(hasSupporterCookie(true)).toEqual(true);
+		expect(shouldHideSupportMessaging(true)).toEqual(true);
 	});
 
 	it('returns false if cookie does not exist and user is signed out', () => {
-		expect(hasSupporterCookie(false)).toEqual(false);
+		expect(shouldHideSupportMessaging(false)).toEqual(false);
 	});
 
 	it('returns Pending if cookie does not exist and user is signed in', () => {
-		expect(hasSupporterCookie(true)).toEqual('Pending');
+		expect(shouldHideSupportMessaging(true)).toEqual('Pending');
 	});
 });

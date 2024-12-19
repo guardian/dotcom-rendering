@@ -1,9 +1,4 @@
-import {
-	getCookie,
-	isUndefined,
-	onConsentChange,
-	storage,
-} from '@guardian/libs';
+import { getCookie, onConsentChange, storage } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import { useEffect, useState } from 'react';
 import type { ArticleDeprecated } from '../types/article';
@@ -16,10 +11,6 @@ export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
 export const RECURRING_CONTRIBUTOR_COOKIE = 'gu_recurring_contributor';
 export const OPT_OUT_OF_ARTICLE_COUNT_COOKIE = 'gu_article_count_opt_out';
 
-// Support Frontend cookie (created when a contribution is made)
-export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
-	'gu.contributions.contrib-timestamp';
-
 //  Local storage keys
 const WEEKLY_ARTICLE_COUNT_KEY = 'gu.history.weeklyArticleCount';
 export const NO_RR_BANNER_KEY = 'gu.noRRBanner';
@@ -28,12 +19,8 @@ export const NO_RR_BANNER_KEY = 'gu.noRRBanner';
 export const MODULES_VERSION = 'v3';
 
 // Returns true if we should hide support messaging because the user is a supporter.
-// Checks the cookie that is set by the User Attributes API upon signing in.
-// Value computed server-side and looks at all of the user's active products,
-// including but not limited to recurring & one-off contributions,
-// paper & digital subscriptions, as well as user tiers (GU supporters/staff/partners/patrons).
-// https://github.com/guardian/members-data-api/blob/3a72dc00b9389968d91e5930686aaf34d8040c52/membership-attribute-service/app/models/Attributes.scala
-export const hasSupporterCookie = (
+// Checks the cookie that is set by support-frontend on checkout and the User Attributes API upon signing in.
+export const shouldHideSupportMessaging = (
 	isSignedIn: boolean,
 ): boolean | 'Pending' => {
 	const cookie = getCookie({ name: HIDE_SUPPORT_MESSAGING_COOKIE });
@@ -53,55 +40,6 @@ export const hasSupporterCookie = (
 			} else {
 				return false;
 			}
-	}
-};
-
-// looks at the SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE (set by support-frontend when making one-off contribution)
-// and returns a Unix epoch int of the date if it exists.
-export const getLastOneOffContributionTimestamp = (): number | undefined => {
-	// Support cookies - expects Unix epoch
-	const contributionDateFromSupport = getCookie({
-		name: SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
-	});
-
-	if (!contributionDateFromSupport) {
-		return undefined;
-	}
-
-	// Parse dates into common a number
-	const parsedDateFromSupport = contributionDateFromSupport
-		? parseInt(contributionDateFromSupport, 10)
-		: 0;
-
-	return parsedDateFromSupport || undefined; // This guards against 'parsedDateFromSupport' being NaN
-};
-
-const dateDiffDays = (from: number, to: number): number => {
-	const oneDayMs = 1000 * 60 * 60 * 24;
-	const diffMs = to - from;
-	return Math.floor(diffMs / oneDayMs);
-};
-
-const AskPauseDays = 90;
-
-export const isRecentOneOffContributor = (): boolean => {
-	const lastContributionDate = getLastOneOffContributionTimestamp();
-	if (!isUndefined(lastContributionDate)) {
-		const now = Date.now();
-		return dateDiffDays(lastContributionDate, now) <= AskPauseDays;
-	}
-
-	return false;
-};
-
-export const shouldHideSupportMessaging = (
-	isSignedIn: boolean,
-): boolean | 'Pending' => {
-	const hasCookie = hasSupporterCookie(isSignedIn);
-	if (hasCookie === 'Pending') {
-		return 'Pending';
-	} else {
-		return hasCookie || isRecentOneOffContributor();
 	}
 };
 
