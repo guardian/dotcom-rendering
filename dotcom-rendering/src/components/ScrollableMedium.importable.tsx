@@ -1,4 +1,4 @@
-import { isMediaCard } from 'src/lib/cardHelpers';
+import { isMediaCard } from '../lib/cardHelpers';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
