@@ -681,6 +681,7 @@ export const Card = ({
 						hideImageOverlay={
 							media.type === 'slideshow' && isFlexibleContainer
 						}
+						padImage={isMediaCard(format)}
 					>
 						{media.type === 'slideshow' &&
 							(isFlexibleContainer ? (
@@ -847,12 +848,7 @@ export const Card = ({
 						{media.type === 'podcast' && (
 							<>
 								{media.podcastImage.src && !showAccentImage ? (
-									<div
-										css={[
-											podcastMarginStyles,
-											podcastImageStyles(imageSize),
-										]}
-									>
+									<div css={[podcastImageStyles(imageSize)]}>
 										<CardPicture
 											mainImage={media.podcastImage.src}
 											imageSize={'small'}

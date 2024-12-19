@@ -42,6 +42,7 @@ type Props = {
 	 * want it to be shown whilst retaining it for existing slideshows.
 	 */
 	hideImageOverlay?: boolean;
+	padImage?: boolean;
 };
 
 /**
@@ -124,6 +125,7 @@ export const ImageWrapper = ({
 	imagePositionOnMobile,
 	showPlayIcon,
 	hideImageOverlay,
+	padImage,
 }: Props) => {
 	const isHorizontalOnDesktop =
 		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
@@ -172,6 +174,10 @@ export const ImageWrapper = ({
 						display: block;
 					}
 				`,
+				padImage &&
+					css`
+						padding: 8px;
+					`,
 			]}
 		>
 			<>
