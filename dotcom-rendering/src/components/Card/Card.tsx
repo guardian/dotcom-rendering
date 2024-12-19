@@ -535,6 +535,8 @@ export const Card = ({
 	const getGapSize = (): GapSize => {
 		if (isOnwardContent) return 'none';
 		if (isMediaCard && !isFlexibleContainer) return 'tiny';
+		if (isMediaCard && isFlexibleContainer) return 'none';
+
 		if (!!isFlexSplash || (isFlexibleContainer && imageSize === 'jumbo')) {
 			return 'small';
 		}
