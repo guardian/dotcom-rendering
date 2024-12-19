@@ -1,3 +1,4 @@
+import { isMediaCard } from '../lib/cardHelpers';
 import type { BoostLevel } from '../types/content';
 import type {
 	AspectRatio,
@@ -42,6 +43,7 @@ type BoostProperties = {
 const determineCardProperties = (
 	boostLevel: BoostLevel,
 	supportingContentLength: number,
+	mediaCard: boolean,
 ): BoostProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
@@ -53,7 +55,7 @@ const determineCardProperties = (
 					mobile: 'medium',
 				},
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				imageSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
@@ -69,7 +71,7 @@ const determineCardProperties = (
 					mobile: 'large',
 				},
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
@@ -83,8 +85,8 @@ const determineCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'xlarge',
 				},
-				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
@@ -97,8 +99,8 @@ const determineCardProperties = (
 					tablet: 'xxlarge',
 					mobile: 'xxlarge',
 				},
-				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
@@ -137,6 +139,7 @@ export const OneCardLayout = ({
 	} = determineCardProperties(
 		card.boostLevel ?? 'default',
 		card.supportingContent?.length ?? 0,
+		isMediaCard(card.format),
 	);
 	return (
 		<UL padBottom={!isLastRow} hasLargeSpacing={!isLastRow}>
@@ -168,6 +171,15 @@ export const OneCardLayout = ({
 			</LI>
 		</UL>
 	);
+};
+
+const getImagePosition = (
+	hasTwoOrFewerCards: boolean,
+	isAMediaCard: boolean,
+) => {
+	if (isAMediaCard && !hasTwoOrFewerCards) return 'top';
+	if (hasTwoOrFewerCards) return 'left';
+	return 'bottom';
 };
 
 const TwoCardOrFourCardLayout = ({
@@ -208,9 +220,10 @@ const TwoCardOrFourCardLayout = ({
 							absoluteServerTimes={absoluteServerTimes}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
-							imagePositionOnDesktop={
-								hasTwoOrFewerCards ? 'left' : 'bottom'
-							}
+							imagePositionOnDesktop={getImagePosition(
+								hasTwoOrFewerCards,
+								isMediaCard(card.format),
+							)}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
 							imageSize={'medium'}
