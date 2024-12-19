@@ -1,0 +1,16 @@
+{
+    "type": "object",
+    "properties": {
+        "pageTitle": {
+			 "type": "string"
+		},
+		"pageType": {
+			"type": "string"
+		}
+    },
+    "required": [
+        "pageTitle",
+		"pageType"
+    ],
+    "$schema": "http://json-schema.org/draft-07/schema#"
+}
