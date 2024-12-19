@@ -13,7 +13,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'the-long-wave',
 				'morning-briefing', // First Edition
-				'fighting-back',
+				'the-overwhelm',
 				'saturday-edition',
 				'word-of-mouth', // Feast
 				'the-guide-staying-in',
@@ -39,9 +39,9 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'sleeve-notes',
 				'whats-on',
 				'bookmarks',
-				'hear-here',
 				'art-weekly',
 				'design-review',
+				'documentaries',
 			],
 		},
 		{
@@ -63,11 +63,11 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'this-is-europe',
 				'the-stakes-us-election-edition', // The Stakes — Presidential Transition
+				'fighting-back',
 				'follow-margaret-sullivan',
 				'follow-robert-reich',
 				'follow-mehdi-hasan',
 				'global-dispatch',
-				'documentaries',
 				'her-stage',
 				'trump-on-trial',
 			],
@@ -115,6 +115,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'Get started',
 			newsletters: [
 				'fighting-back',
+				'the-overwhelm',
 				'the-long-wave',
 				'the-stakes-us-election-edition',
 				'us-morning-newsletter', // First Thing
@@ -214,7 +215,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'Get started',
 			newsletters: [
 				'breaking-news-australia',
-				'the-long-wave',
+				'the-overwhelm',
 				'morning-mail',
 				'afternoon-update',
 				'the-crunch',
@@ -266,6 +267,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'The world explained',
 			newsletters: [
+				'the-long-wave',
 				'trump-on-trial',
 				'global-dispatch',
 				'patriarchy',
