@@ -1,16 +1,8 @@
 import { getCookie, removeCookie, setCookie, storage } from '@guardian/libs';
-import {
-	HIDE_SUPPORT_MESSAGING_COOKIE,
-	RECURRING_CONTRIBUTOR_COOKIE,
-	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
-} from './contributions';
+import { HIDE_SUPPORT_MESSAGING_COOKIE } from './contributions';
 import { getLocaleCode } from './getCountryCode';
 
-const readerRevenueCookies = [
-	HIDE_SUPPORT_MESSAGING_COOKIE,
-	RECURRING_CONTRIBUTOR_COOKIE,
-	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
-];
+const readerRevenueCookies = [HIDE_SUPPORT_MESSAGING_COOKIE];
 
 const clearEpicViewLog = (): void =>
 	storage.local.remove('gu.contributions.views');
@@ -21,12 +13,6 @@ const clearBannerLastClosedAt = (): void => {
 	storage.local.remove('gu.prefs.abandonedBasketLastClosedAt');
 	storage.local.remove('gu.noRRBannerTimestamp');
 };
-
-const fakeOneOffContributor = (): void =>
-	setCookie({
-		name: SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
-		value: Date.now().toString(),
-	});
 
 const MULTIVARIATE_ID_COOKIE = 'GU_mvt_id';
 const MAX_CLIENT_MVT_ID = 1000000;
@@ -75,10 +61,6 @@ const clearCommonReaderRevenueStateAndReload = (
 
 	for (const cookie of readerRevenueCookies) removeCookie({ name: cookie });
 	clearEpicViewLog();
-
-	if (asExistingSupporter) {
-		fakeOneOffContributor();
-	}
 
 	window.location.reload();
 };
