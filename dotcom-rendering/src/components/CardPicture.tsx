@@ -104,6 +104,8 @@ const getAspectRatioPadding = (aspectRatio?: AspectRatio): string => {
 			return '80%';
 		case '4:5':
 			return '125%';
+		case '1:1':
+			return '100%';
 		case '5:3':
 		default:
 			return '60%';
