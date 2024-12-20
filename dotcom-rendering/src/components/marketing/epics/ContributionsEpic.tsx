@@ -41,6 +41,7 @@ import { ContributionsEpicArticleCountAboveWithOptOut } from './ContributionsEpi
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
 import { ContributionsEpicSignInCta } from './ContributionsEpicSignInCta';
 import { ContributionsEpicCtasContainer } from './ctas/ContributionsEpicCtasContainer';
+import { OneTimeContributionIFrame } from './OneTimeContributionIFrame';
 
 // Hard-coded AB TEST - picking up ab test name and variant name from the tracking object
 // then applying a different colour if it matches, or the default colour if it doesn't.
@@ -343,8 +344,12 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	hasConsentForArticleCount,
 	stage,
 }: EpicProps) => {
-	const { image, tickerSettings, choiceCardAmounts, newsletterSignup } =
-		variant;
+	const {
+		image,
+		tickerSettings,
+		choiceCardAmounts,
+		newsletterSignup,
+	} = variant;
 
 	const isColourInTestVariant: boolean =
 		tracking.abTestName.includes('_ARTICLE_EPIC_BG_COLOUR') &&
@@ -504,8 +509,10 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					isColourInTestVariant={isColourInTestVariant}
 				/>
 			)}
-
-			{newsletterSignup ? (
+			{/*Need to determine when/how we show the embed payment, as well as fixing the logic
+			around country code and the stage. There is a recorded demo on the PR description/ or speak to Charley
+				<OneTimeContributionIFrame countryCode={countryCode} stage={stage}/>*/}
+			 newsletterSignup ? (
 				<ContributionsEpicNewsletterSignup
 					newsletterId={newsletterSignup.newsletterId}
 					successDescription={newsletterSignup.successDescription}
@@ -524,8 +531,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					amountsVariantName={choiceCardAmounts?.variantName}
 					isColourInTestVariant={isColourInTestVariant}
 				/>
-			)}
-
+			)
 			{variant.showSignInLink && <ContributionsEpicSignInCta />}
 		</section>
 	);
