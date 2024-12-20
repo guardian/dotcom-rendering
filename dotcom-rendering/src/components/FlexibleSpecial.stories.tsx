@@ -32,6 +32,7 @@ const meta = {
 		showAge: true,
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
+		aspectRatio: '5:4',
 	},
 	render: (args) => (
 		<FrontSection

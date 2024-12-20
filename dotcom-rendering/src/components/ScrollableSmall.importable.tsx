@@ -1,4 +1,5 @@
 import type {
+	AspectRatio,
 	DCRContainerPalette,
 	DCRContainerType,
 	DCRFrontCard,
@@ -13,6 +14,7 @@ type Props = {
 	absoluteServerTimes?: boolean;
 	imageLoading: 'lazy' | 'eager';
 	containerType: DCRContainerType;
+	aspectRatio: AspectRatio;
 };
 
 /**
@@ -29,6 +31,7 @@ export const ScrollableSmall = ({
 	absoluteServerTimes,
 	imageLoading,
 	showAge,
+	aspectRatio,
 }: Props) => {
 	return (
 		<ScrollableCarousel
@@ -55,11 +58,12 @@ export const ScrollableSmall = ({
 							imageSize="small"
 							trailText={undefined} // unsupported
 							supportingContent={undefined} // unsupported
-							aspectRatio="5:4"
+							aspectRatio={aspectRatio}
 							kickerText={trail.kickerText}
 							showLivePlayable={trail.showLivePlayable}
 							showTopBarDesktop={false}
 							showTopBarMobile={false}
+							canPlayInline={false}
 						/>
 					</ScrollableCarousel.Item>
 				);

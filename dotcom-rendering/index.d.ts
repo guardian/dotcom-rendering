@@ -14,6 +14,59 @@ declare module 'dynamic-import-polyfill' {
 	}) => void;
 }
 
+declare module '@guardian/react-crossword' {
+	import type { FC } from 'react';
+
+	export type Cell = {
+		number: number;
+		value: string;
+	};
+
+	export type Clue = {
+		id: string;
+		number: number;
+		humanNumber: string;
+		direction: 'across' | 'down';
+		position: { x: number; y: number };
+		separatorLocations: {
+			','?: number[];
+			'-'?: number[];
+		};
+		length: number;
+		clue: string;
+		group: string[];
+		solution?: string;
+		format?: string;
+	};
+
+	export type CrosswordProps = {
+		id: string;
+		data: {
+			id?: string;
+			number: number;
+			name: string;
+			date: string;
+			dimensions: { cols: number; rows: number };
+			entries: Clue[];
+			solutionAvailable: boolean;
+			hasNumbers: boolean;
+			randomCluesOrdering: boolean;
+			instructions?: string;
+			creator?: { name: string; webUrl: string };
+			pdf?: string;
+			annotatedSolution?: string;
+			dateSolutionAvailable: string;
+		};
+		onCorrect?: (cell: Cell) => void;
+		onLoaded?: () => void;
+	};
+
+	const Crossword: FC<CrosswordProps>;
+
+	// eslint-disable-next-line import/no-default-export -- react-crossword uses default exports
+	export default Crossword;
+}
+
 // SVG handling
 declare module '*.svg' {
 	const content: any;
@@ -87,6 +140,10 @@ declare namespace JSX {
 		 * on components that have the `data-link-name` attribute.
 		 * To avoid race conditions, it is best to add this attribute only
 		 * to server-rendered HTML.
+		 *
+		 * Some elements are not trackable, e.g. `div`, `span`.
+		 * Refer to the Ophan documentation for more information.
+		 * https://github.com/guardian/ophan/blob/0f365862682cd97cc50cf381299e0f4875e2996c/tracker-js/src/click-path-capture.js
 		 *
 		 * Add `data-component="component-name"` to the element you want
 		 * to track. Then `add data-link-name="link-name"` to the anchor for which

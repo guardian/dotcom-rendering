@@ -25,6 +25,7 @@ const meta = {
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
 		containerType: 'scrollable/medium',
+		aspectRatio: '5:4',
 	},
 	render: (args) => (
 		<FrontSection

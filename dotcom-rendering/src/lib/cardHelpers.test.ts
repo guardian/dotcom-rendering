@@ -33,7 +33,7 @@ describe('cardHasDarkBackground', () => {
 		{
 			format: galleryFormat,
 			containerPalette: undefined,
-			expectedResult: true,
+			expectedResult: false,
 		},
 		{
 			format: pictureFormat,

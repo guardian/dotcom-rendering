@@ -1,5 +1,7 @@
+import { isMediaCard } from '../lib/cardHelpers';
 import type { BoostLevel } from '../types/content';
 import type {
+	AspectRatio,
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
@@ -22,6 +24,7 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
+	aspectRatio: AspectRatio;
 };
 
 type BoostProperties = {
@@ -40,6 +43,7 @@ type BoostProperties = {
 const determineCardProperties = (
 	boostLevel: BoostLevel,
 	supportingContentLength: number,
+	mediaCard: boolean,
 ): BoostProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
@@ -51,7 +55,7 @@ const determineCardProperties = (
 					mobile: 'medium',
 				},
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				imageSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
@@ -67,7 +71,7 @@ const determineCardProperties = (
 					mobile: 'large',
 				},
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
@@ -81,8 +85,8 @@ const determineCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'xlarge',
 				},
-				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
@@ -95,8 +99,8 @@ const determineCardProperties = (
 					tablet: 'xxlarge',
 					mobile: 'xxlarge',
 				},
-				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
@@ -110,12 +114,16 @@ export const OneCardLayout = ({
 	showAge,
 	absoluteServerTimes,
 	imageLoading,
+	aspectRatio,
+	isLastRow,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
+	aspectRatio: AspectRatio;
+	isLastRow: boolean;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -131,9 +139,10 @@ export const OneCardLayout = ({
 	} = determineCardProperties(
 		card.boostLevel ?? 'default',
 		card.supportingContent?.length ?? 0,
+		isMediaCard(card.format),
 	);
 	return (
-		<UL padBottom={true} hasLargeSpacing={true}>
+		<UL padBottom={!isLastRow} hasLargeSpacing={!isLastRow}>
 			<LI padSides={true}>
 				<FrontCard
 					trail={card}
@@ -149,7 +158,7 @@ export const OneCardLayout = ({
 					supportingContent={card.supportingContent}
 					supportingContentAlignment={supportingContentAlignment}
 					imageLoading={imageLoading}
-					aspectRatio="5:4"
+					aspectRatio={aspectRatio}
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
 					liveUpdatesAlignment={liveUpdatesAlignment}
@@ -157,10 +166,20 @@ export const OneCardLayout = ({
 					showTopBarDesktop={false}
 					showTopBarMobile={true}
 					trailTextSize={trailTextSize}
+					canPlayInline={true}
 				/>
 			</LI>
 		</UL>
 	);
+};
+
+const getImagePosition = (
+	hasTwoOrFewerCards: boolean,
+	isAMediaCard: boolean,
+) => {
+	if (isAMediaCard && !hasTwoOrFewerCards) return 'top';
+	if (hasTwoOrFewerCards) return 'left';
+	return 'bottom';
 };
 
 const TwoCardOrFourCardLayout = ({
@@ -170,6 +189,7 @@ const TwoCardOrFourCardLayout = ({
 	absoluteServerTimes,
 	showImage = true,
 	imageLoading,
+	aspectRatio,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -177,16 +197,12 @@ const TwoCardOrFourCardLayout = ({
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	showImage?: boolean;
+	aspectRatio: AspectRatio;
 }) => {
 	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
 	return (
-		<UL
-			direction="row"
-			padBottom={true}
-			showTopBar={true}
-			hasLargeSpacing={true}
-		>
+		<UL direction="row" showTopBar={true}>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI
@@ -204,17 +220,19 @@ const TwoCardOrFourCardLayout = ({
 							absoluteServerTimes={absoluteServerTimes}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
-							imagePositionOnDesktop={
-								hasTwoOrFewerCards ? 'left' : 'bottom'
-							}
+							imagePositionOnDesktop={getImagePosition(
+								hasTwoOrFewerCards,
+								isMediaCard(card.format),
+							)}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
 							imageSize={'medium'}
-							aspectRatio="5:4"
+							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}
 							showTopBarDesktop={false}
 							showTopBarMobile={true}
+							canPlayInline={false}
 						/>
 					</LI>
 				);
@@ -229,6 +247,7 @@ export const FlexibleSpecial = ({
 	showAge,
 	absoluteServerTimes,
 	imageLoading,
+	aspectRatio,
 }: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1);
 	const splash = [...groupedTrails.standard].slice(0, 1);
@@ -242,6 +261,8 @@ export const FlexibleSpecial = ({
 				showAge={showAge}
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
+				aspectRatio={aspectRatio}
+				isLastRow={splash.length === 0 && cards.length === 0}
 			/>
 			<OneCardLayout
 				cards={splash}
@@ -249,6 +270,8 @@ export const FlexibleSpecial = ({
 				showAge={showAge}
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
+				aspectRatio={aspectRatio}
+				isLastRow={cards.length === 0}
 			/>
 			<TwoCardOrFourCardLayout
 				cards={cards}
@@ -256,6 +279,7 @@ export const FlexibleSpecial = ({
 				showAge={showAge}
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
+				aspectRatio={aspectRatio}
 			/>
 		</>
 	);

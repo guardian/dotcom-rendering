@@ -1,4 +1,6 @@
+import { isMediaCard } from '../lib/cardHelpers';
 import type {
+	AspectRatio,
 	DCRContainerPalette,
 	DCRContainerType,
 	DCRFrontCard,
@@ -13,6 +15,7 @@ type Props = {
 	absoluteServerTimes?: boolean;
 	imageLoading: 'lazy' | 'eager';
 	containerType: DCRContainerType;
+	aspectRatio: AspectRatio;
 };
 
 /**
@@ -29,6 +32,7 @@ export const ScrollableMedium = ({
 	absoluteServerTimes,
 	imageLoading,
 	showAge,
+	aspectRatio,
 }: Props) => {
 	return (
 		<ScrollableCarousel
@@ -37,6 +41,9 @@ export const ScrollableMedium = ({
 			visibleCardsOnTablet={4}
 		>
 			{trails.map((trail) => {
+				const imagePosition = isMediaCard(trail.format)
+					? 'top'
+					: 'bottom';
 				return (
 					<ScrollableCarousel.Item key={trail.url}>
 						<FrontCard
@@ -50,12 +57,12 @@ export const ScrollableMedium = ({
 								desktop: 'xsmall',
 								tablet: 'xxsmall',
 							}}
-							imagePositionOnDesktop="bottom"
-							imagePositionOnMobile="bottom"
+							imagePositionOnDesktop={imagePosition}
+							imagePositionOnMobile={imagePosition}
 							imageSize="medium"
 							trailText={undefined} // unsupported
 							supportingContent={undefined} // unsupported
-							aspectRatio="5:4"
+							aspectRatio={aspectRatio}
 							kickerText={trail.kickerText}
 							showLivePlayable={trail.showLivePlayable}
 							showTopBarDesktop={false}

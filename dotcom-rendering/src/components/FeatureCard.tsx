@@ -56,7 +56,7 @@ export type Props = {
 	 * At 300px or below, the player will begin to lose functionality e.g. volume controls being omitted.
 	 * Youtube requires a minimum width 200px.
 	 */
-	isPlayableMediaCard?: boolean;
+	canPlayInline?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	starRating?: Rating;
@@ -166,14 +166,14 @@ const getMedia = ({
 	imageUrl,
 	imageAltText,
 	mainMedia,
-	isPlayableMediaCard,
+	canPlayInline,
 }: {
 	imageUrl?: string;
 	imageAltText?: string;
 	mainMedia?: MainMedia;
-	isPlayableMediaCard?: boolean;
+	canPlayInline?: boolean;
 }) => {
-	if (mainMedia && mainMedia.type === 'Video' && isPlayableMediaCard) {
+	if (mainMedia && mainMedia.type === 'Video' && canPlayInline) {
 		return {
 			type: 'video',
 			mainMedia,
@@ -279,7 +279,7 @@ export const FeatureCard = ({
 	imageLoading,
 	showClock,
 	mainMedia,
-	isPlayableMediaCard,
+	canPlayInline,
 	kickerText,
 	showPulsingDot,
 	dataLinkName,
@@ -305,7 +305,7 @@ export const FeatureCard = ({
 		imageUrl: image?.src,
 		imageAltText: image?.altText,
 		mainMedia,
-		isPlayableMediaCard,
+		canPlayInline,
 	});
 
 	return (
@@ -435,6 +435,7 @@ export const FeatureCard = ({
 											kickerColour={palette(
 												'--feature-card-kicker-text',
 											)}
+											isBetaContainer={true}
 										/>
 									</div>
 

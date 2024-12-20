@@ -34,6 +34,7 @@ const themeButtonDisabled: Partial<ThemeButton> = {
 const carouselStyles = css`
 	display: flex;
 	overflow-x: auto;
+	overflow-y: hidden;
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	overscroll-behavior: contain auto;

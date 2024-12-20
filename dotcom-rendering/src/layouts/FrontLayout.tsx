@@ -45,7 +45,12 @@ import {
 import { hideAge } from '../lib/hideAge';
 import type { NavType } from '../model/extract-nav';
 import { palette as schemePalette } from '../palette';
-import { type DCRCollectionType, type DCRFrontType } from '../types/front';
+import type {
+	DCRCollectionType,
+	DCRContainerType,
+	DCRFrontType,
+	DCRGroupedTrails,
+} from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -170,6 +175,24 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const { absoluteServerTimes = false } = front.config.switches;
 
+	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
+		switch (collectionType) {
+			case 'scrollable/feature':
+			case 'static/feature/2':
+				return '4:5';
+			case 'flexible/general':
+			case 'flexible/special':
+			case 'scrollable/small':
+			case 'scrollable/medium':
+			case 'static/medium/4':
+				return '5:4';
+			case 'scrollable/highlights':
+				return '1:1';
+			default:
+				return '5:3';
+		}
+	};
+
 	const Highlights = () => {
 		const showHighlights =
 			// Must be opted into the Europe beta test or in preview
@@ -191,6 +214,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					showAge={false}
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading="eager"
+					aspectRatio={
+						highlightsCollection.aspectRatio ??
+						fallbackAspectRatio(highlightsCollection.collectionType)
+					}
 				/>
 			)
 		);
@@ -300,6 +327,37 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								branding: undefined,
 						  }))
 						: trails;
+
+					// We also need to remove the branding for the cards in grouped
+					// trails for dynamic containers
+					const groupedWithoutBranding: DCRGroupedTrails = (() => {
+						if (
+							isPaidContentSameBranding(
+								collection.collectionBranding,
+							)
+						) {
+							const groupedTrailsWithoutBranding: DCRGroupedTrails =
+								{
+									snap: [],
+									huge: [],
+									veryBig: [],
+									big: [],
+									standard: [],
+									splash: [],
+								};
+							for (const key of Object.keys(
+								collection.grouped,
+							) as (keyof DCRGroupedTrails)[]) {
+								groupedTrailsWithoutBranding[key] =
+									collection.grouped[key].map((labTrail) => ({
+										...labTrail,
+										branding: undefined,
+									}));
+							}
+							return groupedTrailsWithoutBranding;
+						}
+						return collection.grouped;
+					})();
 
 					if (collection.collectionType === 'scrollable/highlights') {
 						// Highlights are rendered in the Masthead component
@@ -531,6 +589,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										absoluteServerTimes={
 											absoluteServerTimes
 										}
+										aspectRatio={
+											collection.aspectRatio ??
+											fallbackAspectRatio(
+												collection.collectionType,
+											)
+										}
 									/>
 								</LabsSection>
 								{decideMerchHighAndMobileAdSlots(
@@ -681,10 +745,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								containerLevel={
 									collection.config.containerLevel
 								}
+								containerSpacing={collection.containerSpacing}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
-									groupedTrails={collection.grouped}
+									groupedTrails={groupedWithoutBranding}
 									containerType={collection.collectionType}
 									containerPalette={
 										collection.containerPalette
@@ -696,6 +761,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									imageLoading={imageLoading}
 									absoluteServerTimes={absoluteServerTimes}
+									aspectRatio={
+										collection.aspectRatio ??
+										fallbackAspectRatio(
+											collection.collectionType,
+										)
+									}
 								/>
 							</FrontSection>
 							{decideMerchHighAndMobileAdSlots(

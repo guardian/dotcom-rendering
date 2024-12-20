@@ -9,11 +9,16 @@ import { ExpandableMarketingCard } from './ExpandableMarketingCard';
 import { ExpandableMarketingCardSwipeable } from './ExpandableMarketingCardSwipeable';
 import { Hide } from './Hide';
 
-type VariantName = 'variant-free' | 'variant-bubble' | 'variant-billionaire';
+export type UsBannerTestVariantName =
+	| 'variant-free'
+	| 'variant-bubble'
+	| 'variant-billionaire';
+
 type Variant = {
 	heading: string;
 	kicker: string;
 };
+
 const variantFree: Variant = {
 	heading: 'Yes, this story is free',
 	kicker: 'Why the Guardian has no paywall',
@@ -27,7 +32,9 @@ const variantBillionaire: Variant = {
 	kicker: 'How the Guardian is different',
 };
 
-const getVariant = (abTestAPI: ABTestAPI | undefined): VariantName | null => {
+const getVariant = (
+	abTestAPI: ABTestAPI | undefined,
+): UsBannerTestVariantName | null => {
 	if (!abTestAPI) {
 		return null;
 	}
@@ -60,7 +67,7 @@ const getVariant = (abTestAPI: ABTestAPI | undefined): VariantName | null => {
 	return null;
 };
 
-const getVariantCopy = (variant: VariantName): Variant => {
+const getVariantCopy = (variant: UsBannerTestVariantName): Variant => {
 	if (variant === 'variant-free') {
 		return variantFree;
 	}
@@ -138,11 +145,6 @@ export const ExpandableMarketingCardWrapper = ({ guardianBaseURL }: Props) => {
 					onClick={() => {
 						!isExpanded && setIsExpanded(true);
 					}}
-					data-link-name={
-						!isExpanded
-							? 'us-expandable-marketing-card expand'
-							: undefined
-					}
 				>
 					<ExpandableMarketingCard
 						guardianBaseURL={guardianBaseURL}
@@ -161,6 +163,7 @@ export const ExpandableMarketingCardWrapper = ({ guardianBaseURL }: Props) => {
 					isExpanded={isExpanded}
 					setIsExpanded={setIsExpanded}
 					setIsClosed={setIsClosed}
+					abTestVariant={abTestVariant}
 				/>
 			</Hide>
 		</>

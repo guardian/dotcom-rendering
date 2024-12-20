@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { Fragment } from 'react';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { palette } from '../palette';
-import { useConfig } from './ConfigContext';
 import { generateSources, getFallbackSource } from './Picture';
 
 const picture = css`
@@ -69,22 +68,10 @@ export const Avatar = ({ src, alt, shape = 'round' }: Props) => {
 	 */
 	const fallbackSource = getFallbackSource(sources);
 
-	const { renderingTarget } = useConfig();
-	const isApps = renderingTarget === 'Apps';
 	return (
 		<picture
 			// data-size={imageSize}
-			css={[
-				block,
-				picture,
-				shape === 'round' && round,
-				isApps &&
-					css`
-						background-color: ${palette(
-							'--avatar-background-colour',
-						)};
-					`,
-			]}
+			css={[block, picture, shape === 'round' && round]}
 		>
 			{sources.map((source) => {
 				return (
