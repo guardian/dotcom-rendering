@@ -79,6 +79,8 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							lightboxImages: frontendData.imagesForAppsLightbox,
 							renderingTarget,
 					  })}
+				path={frontendData.pageId}
+				tags={frontendData.tags}
 			/>
 			<Island priority="enhancement" defer={{ until: 'idle' }}>
 				<FocusStyles />

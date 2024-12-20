@@ -7,11 +7,14 @@ import { AppsLightboxImageStore } from './AppsLightboxImageStore.importable';
 import { Island } from './Island';
 import { LightboxHash } from './LightboxHash.importable';
 import { LightboxLayout } from './LightboxLayout.importable';
+import { TagType } from '../types/tag';
 
 interface BaseProps {
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 	switches: Switches;
+	path: string;
+	tags: TagType[]
 }
 
 interface WebProps extends BaseProps {
@@ -29,6 +32,8 @@ export const Lightbox = ({
 	lightboxImages,
 	renderingTarget,
 	switches,
+	path,
+	tags
 }: WebProps | AppProps) => {
 	switch (renderingTarget) {
 		case 'Web':
@@ -46,6 +51,8 @@ export const Lightbox = ({
 						<LightboxLayout
 							format={format}
 							images={lightboxImages}
+							path={path}
+							tags={tags}
 						/>
 					</Island>
 					<Island priority="feature" defer={{ until: 'idle' }}>

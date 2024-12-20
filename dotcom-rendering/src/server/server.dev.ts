@@ -88,6 +88,8 @@ export const devServer = (): Handler => {
 				return handleAppsInteractive(req, res, next);
 			case 'AppsBlocks':
 				return handleAppsBlocks(req, res, next);
+			case 'NextPrevious':
+				return
 			default: {
 				// Do not redirect assets urls
 				if (req.url.match(ASSETS_URL)) return next();

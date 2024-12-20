@@ -4,9 +4,12 @@ import { from, space } from '@guardian/source/foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useState } from 'react';
 import screenfull from 'screenfull';
-import type { ArticleFormat } from '../lib/articleFormat';
+import { ArticleDesign, ArticleFormat } from '../lib/articleFormat';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxImages } from './LightboxImages';
+import { fetchJson } from '../client/userFeatures/user-features-lib';
+import { TagType } from '../types/tag';
+import { Navigation } from './LightboxLayout.importable';
 
 /**
  * Translate the pixel (scrollLeft) document value into a numeric
@@ -199,6 +202,8 @@ const goForward = (
 	const { length } = images;
 	pulseButton(nextButton);
 	const positionNow = getPosition(lightbox, imageList);
+	console.log("POSition now!", positionNow, length)
+	console.log("full image list", imageList)
 	if (positionNow != null) {
 		const newPosition = getNextPosition(positionNow, length);
 		scrollTo(newPosition, lightbox, imageList);
@@ -313,6 +318,7 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 	const images = Array.from(
 		lightbox.querySelectorAll<HTMLImageElement>('li img'),
 	);
+	console.log("INIT IMAGES", images)
 
 	const captionLinks =
 		lightbox.querySelectorAll<HTMLAnchorElement>('li aside a');
@@ -429,6 +435,7 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 		goBack(lightbox, images, previousButton, imageList);
 	});
 	nextButton.addEventListener('click', () => {
+		console.log("FORward!", images, imageList)
 		goForward(lightbox, images, nextButton, imageList);
 	});
 	infoButton.addEventListener('click', () => {
@@ -545,12 +552,34 @@ const ulStyles = css`
 	scrollbar-width: none; /* Firefox */
 `;
 
+type ImageNext = {
+	total: number;
+	direction: 'past' | 'future';
+	images: {
+		images: ImageForLightbox[]
+	}[];
+};
+
+const getNextPrevious = async (seriesTag: string, path: string)=> {
+	const next = await fetchJson(`http://localhost:9000/getnext/${seriesTag}/${path}?dcr=tru&show-fields=all`)
+	const previous = await fetchJson(`http://localhost:9000/getprev/${seriesTag}/${path}?dcr=true&show-fields=all`)
+	return {
+		next: next as ImageNext,
+		previous: previous as ImageNext
+	}
+}
+
+
 export const LightboxJavascript = ({
 	format,
 	images,
+	path,
+	tags
 }: {
 	format: ArticleFormat;
 	images: ImageForLightbox[];
+	path: string;
+	tags: TagType[];
 }) => {
 	/**
 	 * Hydration has been requested so the first step is to render the list of images and put them into
@@ -566,23 +595,64 @@ export const LightboxJavascript = ({
 	 */
 	const lightbox = useElementById('gu-lightbox');
 	const [initialised, setInitialised] = useState(false);
+	const [position, setPosition] = useState<number>(1)
+	const [totalImages, setTotalImages] = useState<number>(0)
+	const [nextnextImages, setNextNextImages] = useState<ImageForLightbox[]>([])
+
+	console.log("IMAGES FOR LIGHTBOX", images)
+
+	const isPicture = format.design === ArticleDesign.Picture
 
 	useEffect(() => {
-		if (!lightbox) return;
+		if (!lightbox || nextnextImages.length === 0) return;
+		const renderedImages = Array.from(
+			lightbox.querySelectorAll<HTMLImageElement>('li img'),
+		);
+		if (renderedImages.length === 0) {
+			log('dotcom', '💡 No images found in lightbox, skipping');
+			return;
+		}
+
 		if (initialised) {
 			log('dotcom', '💡 Lightbox already initialised, skipping');
 			return;
 		}
 		initialiseLightbox(lightbox);
 		setInitialised(true);
-	}, [initialised, lightbox]);
+	}, [initialised, lightbox, nextnextImages]);
+
+	useEffect(() => {
+		if (isPicture) {
+			const seriesTag = tags.find(t => t.type === "Series")?.id
+			console.log(`SERIES ${seriesTag}`)
+			if (seriesTag) {
+				void getNextPrevious(seriesTag, path).then(nextPrev => {
+					console.log("setting all the shite YARRR")
+					setPosition(nextPrev.previous.total + 1)
+					setTotalImages(nextPrev.previous.total + nextPrev.next.total + 1)
+					const currentImageNewPosition = images[0] as ImageForLightbox;
+					console.log("NEXT PREV", nextPrev)
+					const nextNextImages = [...nextPrev.previous.images.reverse().flatMap(i => i.images), currentImageNewPosition, ...nextPrev.next.images.flatMap(i => i.images)]
+					const nextNextWithPosition = nextNextImages.map((i, index) => ({...i, position: index + 1}))
+					console.log("NEXT NEXT NEXT", nextNextWithPosition)
+					setNextNextImages(nextNextWithPosition)
+				}).catch((err) => {
+					console.error("YEARRRRGH")
+					console.error(err)
+				})
+			}
+		}
+	}, [path, tags, isPicture, initialised, lightbox, images]);
 
 	if (!lightbox) return null;
 
 	log('dotcom', '💡 Generating HTML for lightbox images...');
 	return (
-		<ul css={ulStyles} aria-label="All images">
-			<LightboxImages format={format} images={images} />;
-		</ul>
+		<>
+			<ul css={ulStyles} aria-label="All images">
+				<LightboxImages format={format} images={nextnextImages} />;
+			</ul>
+			<Navigation totalImages={isPicture? nextnextImages.length : images.length} initialPosition={isPicture ? position : 1}/>
+		</>
 	);
 };

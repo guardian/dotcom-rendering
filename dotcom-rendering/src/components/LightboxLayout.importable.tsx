@@ -17,10 +17,13 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxJavascript } from './LightboxJavascript';
+import type { TagType } from '../types/tag';
 
 type Props = {
 	format: ArticleFormat;
 	images: ImageForLightbox[];
+	path: string;
+	tags: TagType[];
 };
 
 const lightboxStyles = css`
@@ -196,7 +199,103 @@ const Selection = ({
 	);
 };
 
-export const LightboxLayout = ({ format, images }: Props) => {
+export const Navigation = ({totalImages, initialPosition = 1}:{totalImages: number, initialPosition: number}) => {
+	return <nav css={navStyles}>
+		<button
+			type="button"
+			css={[buttonStyles, closeButtonStyles]}
+			className="close"
+			title="Close [ESC or Q]"
+		>
+			<SvgCross isAnnouncedByScreenReader={false} />
+			<span
+				css={css`
+									${visuallyHidden}
+								`}
+			>
+								Close dialogue
+							</span>
+		</button>
+		<Hide until="tablet">
+			<Selection countOfImages={totalImages} initialPosition={initialPosition}/>
+		</Hide>
+		<button
+			type="button"
+			css={[
+				buttonStyles,
+				arrowButtonStyles,
+				css`
+									order: 1;
+									${until.tablet} {
+										order: 2;
+									}
+								`,
+							]}
+							className="next"
+							title="Next image [→]"
+						>
+							<SvgArrowRightStraight
+								isAnnouncedByScreenReader={false}
+							/>
+							<span
+								css={css`
+									${visuallyHidden}
+								`}
+			>
+								Next image
+							</span>
+		</button>
+		<button
+			type="button"
+			css={[
+				buttonStyles,
+				arrowButtonStyles,
+				css`
+									order: 2;
+									${until.tablet} {
+										order: 1;
+									}
+								`,
+							]}
+							className="previous"
+							title="Previous image [←]"
+						>
+							<SvgArrowLeftStraight
+								isAnnouncedByScreenReader={false}
+							/>
+							<span
+								css={css`
+									${visuallyHidden}
+								`}
+			>
+								Previous image
+							</span>
+		</button>
+		<button
+			type="button"
+			css={[
+				buttonStyles,
+				infoButtonStyles,
+				css`
+									order: 3;
+								`,
+			]}
+			className="info"
+			title="Toggle caption [i]"
+		>
+			<SvgInfo />
+			<span
+				css={css`
+									${visuallyHidden}
+								`}
+			>
+								Toggle caption
+							</span>
+		</button>
+	</nav>
+}
+
+export const LightboxLayout = ({ format, images, path, tags }: Props) => {
 	return (
 		<>
 			<Global
@@ -222,100 +321,7 @@ export const LightboxLayout = ({ format, images }: Props) => {
 				hidden={true}
 			>
 				<div css={containerStyles}>
-					<LightboxJavascript format={format} images={images} />
-					<nav css={navStyles}>
-						<button
-							type="button"
-							css={[buttonStyles, closeButtonStyles]}
-							className="close"
-							title="Close [ESC or Q]"
-						>
-							<SvgCross isAnnouncedByScreenReader={false} />
-							<span
-								css={css`
-									${visuallyHidden}
-								`}
-							>
-								Close dialogue
-							</span>
-						</button>
-						<Hide until="tablet">
-							<Selection countOfImages={images.length} />
-						</Hide>
-						<button
-							type="button"
-							css={[
-								buttonStyles,
-								arrowButtonStyles,
-								css`
-									order: 1;
-									${until.tablet} {
-										order: 2;
-									}
-								`,
-							]}
-							className="next"
-							title="Next image [→]"
-						>
-							<SvgArrowRightStraight
-								isAnnouncedByScreenReader={false}
-							/>
-							<span
-								css={css`
-									${visuallyHidden}
-								`}
-							>
-								Next image
-							</span>
-						</button>
-						<button
-							type="button"
-							css={[
-								buttonStyles,
-								arrowButtonStyles,
-								css`
-									order: 2;
-									${until.tablet} {
-										order: 1;
-									}
-								`,
-							]}
-							className="previous"
-							title="Previous image [←]"
-						>
-							<SvgArrowLeftStraight
-								isAnnouncedByScreenReader={false}
-							/>
-							<span
-								css={css`
-									${visuallyHidden}
-								`}
-							>
-								Previous image
-							</span>
-						</button>
-						<button
-							type="button"
-							css={[
-								buttonStyles,
-								infoButtonStyles,
-								css`
-									order: 3;
-								`,
-							]}
-							className="info"
-							title="Toggle caption [i]"
-						>
-							<SvgInfo />
-							<span
-								css={css`
-									${visuallyHidden}
-								`}
-							>
-								Toggle caption
-							</span>
-						</button>
-					</nav>
+					<LightboxJavascript format={format} images={images} path={path} tags={tags} />
 				</div>
 			</div>
 		</>
