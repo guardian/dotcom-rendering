@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { brandAlt, from, neutral, space } from '@guardian/source/foundations';
-import { SvgGuardianLogo } from '@guardian/source/react-components';
+import { LinkButton, SvgGuardianLogo } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import {
 	removeMediaRulePrefix,
@@ -11,13 +11,12 @@ import type { SupportTier } from '../../epics/utils/threeTierChoiceCardAmounts';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
+import { ThreeTierChoiceCardsV2 } from '../ThreeTierChoiceCardsV2';
 import { DesignableBannerArticleCount } from './components/DesignableBannerArticleCount';
 import { DesignableBannerBody } from './components/DesignableBannerBody';
 import { DesignableBannerCloseButton } from './components/DesignableBannerCloseButton';
-import { DesignableBannerCtas } from './components/DesignableBannerCtas';
 import { DesignableBannerHeader } from './components/DesignableBannerHeader';
 import type { BannerTemplateSettings } from './settings';
-import { templateSpacing } from './styles/templateStyles';
 
 const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	content,
@@ -29,7 +28,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	submitComponentEvent,
 	design,
 	onCtaClick,
-	onSecondaryCtaClick,
 }: BannerRenderProps): JSX.Element => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 
@@ -65,6 +63,8 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	if (!design) {
 		return <></>;
 	}
+
+	const landingPageUrl = 'https://support.theguardian.com/contribute';
 
 	//All config hard coded for the tests - TODO make this configurable in the future
 	const templateSettings: BannerTemplateSettings = {
@@ -116,22 +116,12 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		bannerId: 'designable-banner',
 	};
 
-	const mainOrMobileContent = isTabletOrAbove
-		? content.mainContent
-		: content.mobileContent;
-
 	const showAboveArticleCount =
 		(separateArticleCountSettings?.type === 'above' ||
 			separateArticleCount) &&
 		articleCounts.forTargetedWeeks >= 5;
 
-	return isTabletOrAbove ? (
-		<>
-			<div css={styles.guardianLogoContainer}>
-				<SvgGuardianLogo />
-			</div>
-		</>
-	) : (
+	return (
 		<div
 			css={styles.outerContainer(
 				templateSettings.containerSettings.backgroundColour,
@@ -145,23 +135,22 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					settings={templateSettings.closeButtonSettings}
 					styleOverides={styles.closeButtonOverrides}
 				/>
-				<div>
+
+				<div css={styles.middleColumnContainer}>
 					<DesignableBannerHeader
 						heading={content.mainContent.heading}
 						mobileHeading={content.mobileContent.heading}
 						headerSettings={templateSettings.headerSettings}
 						headlineSize={design.fonts?.heading.size ?? 'medium'}
 					/>
-				</div>
-				<div>
-					{showAboveArticleCount && (
-						<DesignableBannerArticleCount
-							numArticles={articleCounts.forTargetedWeeks}
-							settings={templateSettings}
-							copy={separateArticleCountSettings?.copy}
-						/>
-					)}
 					<div>
+						{showAboveArticleCount && (
+							<DesignableBannerArticleCount
+								numArticles={articleCounts.forTargetedWeeks}
+								settings={templateSettings}
+								copy={separateArticleCountSettings?.copy}
+							/>
+						)}
 						<DesignableBannerBody
 							mainContent={content.mainContent}
 							mobileContent={content.mobileContent}
@@ -171,27 +160,47 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 						/>
 					</div>
 				</div>
-				<div>
-					<ThreeTierChoiceCards
-						countryCode={countryCode}
-						selectedProduct={threeTierChoiceCardSelectedProduct}
-						setSelectedProduct={
-							setThreeTierChoiceCardSelectedProduct
-						}
-						variantOfChoiceCard={variantOfChoiceCard}
-					/>
-				</div>
-				<div css={styles.linkButtonContainer}>
-					<DesignableBannerCtas
-						mainOrMobileContent={mainOrMobileContent}
-						onPrimaryCtaClick={onCtaClick}
-						onSecondaryCtaClick={onSecondaryCtaClick}
-						primaryCtaSettings={templateSettings.primaryCtaSettings}
-						secondaryCtaSettings={
-							templateSettings.secondaryCtaSettings
-						}
-					/>
-				</div>
+
+				{isTabletOrAbove && (
+					<>
+						<div css={styles.containerOverrides}>
+							<div css={styles.guardianLogoContainer}>
+								<SvgGuardianLogo />
+							</div>
+						</div>
+						<div css={styles.thirdColumnContainer}>
+							<ThreeTierChoiceCardsV2 />
+						</div>
+					</>
+				)}
+
+				{!isTabletOrAbove && (
+					<>
+						<div>
+							<ThreeTierChoiceCards
+								countryCode={countryCode}
+								selectedProduct={
+									threeTierChoiceCardSelectedProduct
+								}
+								setSelectedProduct={
+									setThreeTierChoiceCardSelectedProduct
+								}
+								variantOfChoiceCard={variantOfChoiceCard}
+							/>
+						</div>
+						<div css={styles.linkButtonContainer}>
+							<LinkButton
+								href={landingPageUrl} // update url
+								onClick={onCtaClick}
+								size="small"
+								priority="primary"
+								cssOverrides={styles.linkButtonOverrides}
+							>
+								Continue
+							</LinkButton>
+						</div>
+					</>
+				)}
 			</div>
 		</div>
 	);
@@ -207,55 +216,32 @@ const styles = {
 		color: ${textColor};
 		${limitHeight ? 'max-height: 70vh;' : ''}
 		overflow: auto;
-
-		* {
-			box-sizing: border-box;
-		}
-
-		${from.tablet} {
-			border-top: 1px solid ${neutral[0]};
-		}
-
-		b,
-		strong {
-			font-weight: bold;
-		}
 	`,
 	containerOverrides: css`
 		display: flex;
 		flex-direction: column;
 		position: relative;
 		padding: 0 10px;
+		overflow: auto;
 
 		${from.tablet} {
 			display: grid;
-			grid-template-columns: 1fr 280px;
+			grid-template-columns: auto 1fr 1fr;
 			grid-template-rows: auto 1fr auto;
-			column-gap: ${space[5]}px;
-			width: 100%;
 			max-width: 1300px;
-			margin: 0 auto;
+			align-items: start;
+			column-gap: 10px;
 		}
-
-		${from.desktop} {
-			column-gap: 60px;
-			grid-template-columns: 1fr 460px;
-		}
-
-		${from.wide} {
-			column-gap: 100px;
-		}
-
-		${templateSpacing.bannerContainer};
 	`,
 	closeButtonOverrides: css`
 		margin-top: ${space[3]}px;
-		grid-column: 2;
+		grid-column: 3;
 		grid-row: 1;
-		justify-content: flex-end;
+		justify-content: end;
 	`,
 	linkButtonOverrides: css`
 		background-color: ${brandAlt[400]};
+		//hover colour TBC
 		color: ${neutral[0]};
 		display: flex;
 		flex-wrap: wrap;
@@ -265,16 +251,41 @@ const styles = {
 		padding-top: ${space[3]}px;
 	`,
 	guardianLogoContainer: css`
-		display: none;
-		${from.tablet} {
-			display: block;
+		${from.desktop} {
 			width: 100px;
+			grid-column: 1;
+			grid-row: 1;
+			justify-self: start;
+			align-self: start;
+			padding-top: ${space[3]}px;
+			padding-left: ${space[3]}px;
 		}
-		grid-column: 1;
-		grid-row: 1;
-		justify-self: start;
-		padding-top: ${space[3]}px;
-		padding-left: ${space[3]}px;
+	`,
+	middleColumnContainer: css`
+		display: flex;
+		flex-direction: column;
+		${from.tablet} {
+			grid-row: 2;
+			grid-column: 2;
+			width: 100%;
+			padding-bottom: ${space[5]}px;
+		}
+		${from.desktop} {
+			grid-column: 2;
+			grid-row: 2;
+		}
+	`,
+	thirdColumnContainer: css`
+		display: flex;
+		flex-direction: column;
+		${from.tablet} {
+			grid-row: 3;
+			grid-column: 2;
+		}
+		${from.desktop} {
+			grid-column: 3;
+			grid-row: 2;
+		}
 	`,
 };
 

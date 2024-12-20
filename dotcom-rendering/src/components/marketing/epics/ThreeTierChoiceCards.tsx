@@ -129,7 +129,7 @@ export type ChoiceInfo = {
 	recommended: boolean;
 };
 
-function getChoiceAmount(
+export function getChoiceAmount(
 	supportTier: SupportTier,
 	ratePlan: SupportRatePlan,
 	countryGroupId: CountryGroupId,
@@ -164,15 +164,15 @@ const SupportingBenefits = ({
 	);
 };
 
-const RecommendedPill = () => {
+export const RecommendedPill = () => {
 	return <div css={recommendedPillStyles}>Recommended</div>;
 };
 
-const DiscountedPill = ({ discount }: { discount: number }) => {
+export const DiscountedPill = ({ discount }: { discount: number }) => {
 	return <div css={discountedPillStyles}>{discount}% off</div>;
 };
 
-type ThreeTierChoiceCardsProps = {
+export type ThreeTierChoiceCardsProps = {
 	selectedProduct: SupportTier;
 	setSelectedProduct: Dispatch<SetStateAction<SupportTier>>;
 	countryCode?: string;
@@ -180,7 +180,7 @@ type ThreeTierChoiceCardsProps = {
 	supporterPlusDiscount?: number;
 };
 
-const getChoiceCardData = (choiceCardVariant: string): ChoiceInfo[] => {
+export const getChoiceCardData = (choiceCardVariant: string): ChoiceInfo[] => {
 	switch (choiceCardVariant) {
 		case 'US_THREE_TIER_CHOICE_CARDS':
 			return ChoiceCardTestData_US;
