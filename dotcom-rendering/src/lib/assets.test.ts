@@ -28,9 +28,9 @@ describe('decideAssetOrigin for stage', () => {
 		);
 	});
 	it('DEV', () => {
-		expect(decideAssetOrigin('DEV', true)).toEqual(BASE_URL_DEV);
-		expect(decideAssetOrigin('dev', true)).toEqual(BASE_URL_DEV);
-		expect(decideAssetOrigin(undefined, false)).toEqual('/');
+		expect(decideAssetOrigin('DEV')).toEqual(BASE_URL_DEV);
+		expect(decideAssetOrigin('dev')).toEqual(BASE_URL_DEV);
+		expect(decideAssetOrigin(undefined)).toEqual(BASE_URL_DEV);
 	});
 });
 
@@ -82,13 +82,13 @@ describe('getPathFromManifest', () => {
 
 	it('returns correct hashed asset (1)', () => {
 		expect(getPathFromManifest('client.web', '7305.client.web.js')).toBe(
-			'/assets/7305.client.web.8cdc05567d98ebd9f67e.js',
+			'http://localhost:3030/assets/7305.client.web.8cdc05567d98ebd9f67e.js',
 		);
 	});
 
 	it('returns correct hashed asset (2)', () => {
 		expect(getPathFromManifest('client.web', '356.client.web.js')).toBe(
-			'/assets/356.client.web.0a1bbdf8c7a5e5826b7c.js',
+			'http://localhost:3030/assets/356.client.web.0a1bbdf8c7a5e5826b7c.js',
 		);
 	});
 

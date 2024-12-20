@@ -21,29 +21,22 @@ export type AssetOrigin =
  * Decides the url to use for fetching assets
  *
  * @param {'PROD' | 'CODE' | undefined} stage the environment code is executing in
- * @param {boolean} isDev whether the environment is development
  * @returns {AssetOrigin}
  */
-export const decideAssetOrigin = (
-	stage: string | undefined,
-	isDev?: boolean,
-): AssetOrigin => {
-	if (isDev) {
-		return BASE_URL_DEV;
-	}
+export const decideAssetOrigin = (stage: string | undefined): AssetOrigin => {
 	switch (stage?.toUpperCase()) {
 		case 'PROD':
 			return 'https://assets.guim.co.uk/';
 		case 'CODE':
 			return 'https://assets-code.guim.co.uk/';
 		default:
-			return '/';
+			return BASE_URL_DEV;
 	}
 };
 
 const isDev = process.env.NODE_ENV === 'development';
 
-export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE, isDev);
+export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE);
 
 const isAssetHash = (manifest: unknown): manifest is AssetHash =>
 	isObject(manifest) &&
