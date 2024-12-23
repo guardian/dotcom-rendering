@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { parse } from 'valibot';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import { discussion } from '../../../fixtures/manual/discussion';
 import { discussionWithTwoComments as discussionWithTwoCommentsMock } from '../../../fixtures/manual/discussionWithTwoComments';
 import { legacyDiscussionWithoutThreading } from '../../../fixtures/manual/legacyDiscussionWithoutThreading';
@@ -15,7 +15,26 @@ import { discussionApiResponseSchema } from '../../lib/discussion';
 import { ok } from '../../lib/result';
 import { Comments } from './Comments';
 
-export default { component: Comments, title: 'Discussion/App' };
+const meta = {
+	component: Comments,
+	title: 'Discussion/App',
+	decorators: [
+		(Story) => (
+			<div
+				css={css`
+					max-width: 1240px;
+					padding: 20px;
+				`}
+			>
+				<Story />
+			</div>
+		),
+	],
+} satisfies Meta<typeof Comments>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 const discussionMock = parse(discussionApiResponseSchema, discussion);
 if (discussionMock.status !== 'ok') throw new Error('Invalid mock');
@@ -71,387 +90,164 @@ const defaultCommentForm = {
 	previewBody: '',
 } satisfies CommentFormProps;
 
-export const LoggedOutHiddenPicks = () => (
-	<div
-		css={css`
-			width: 100%;
-			max-width: 620px;
-		`}
-	>
-		<Comments
-			shortUrl={discussionMock.discussion.key}
-			baseUrl="https://discussion.theguardian.com/discussion-api"
-			isClosedForComments={false}
-			isClosedForRecommendations={false}
-			additionalHeaders={{
-				'D2-X-UID': 'testD2Header',
-				'GU-Client': 'testClientHeader',
-			}}
-			expanded={false}
-			onPermalinkClick={() => {}}
-			apiKey=""
-			idApiUrl="https://idapi.theguardian.com"
-			page={3}
-			filters={filters}
-			topLevelCommentCount={
-				discussionMock.discussion.topLevelCommentCount
-			}
-			loading={false}
-			comments={discussionMock.discussion.comments}
-			topForm={defaultCommentForm}
-			replyForm={defaultCommentForm}
-			bottomForm={defaultCommentForm}
-			reportAbuse={() => Promise.resolve(ok(true))}
-		/>
-	</div>
-);
-LoggedOutHiddenPicks.storyName = 'when logged out, unexpanded and with picks';
-LoggedOutHiddenPicks.decorators = [
-	splitTheme([
-		{
-			...format,
-			theme: Pillar.Culture,
+export const LoggedOutHiddenPicks = {
+	name: 'When logged out, unexpanded and with picks',
+	args: {
+		shortUrl: discussionMock.discussion.key,
+		baseUrl: 'https://discussion.theguardian.com/discussion-api',
+		isClosedForComments: false,
+		isClosedForRecommendations: false,
+		additionalHeaders: {
+			'D2-X-UID': 'testD2Header',
+			'GU-Client': 'testClientHeader',
 		},
-	]),
-];
+		expanded: false,
+		onPermalinkClick: () => {},
+		apiKey: '',
+		idApiUrl: 'https://idapi.theguardian.com',
+		page: 3,
+		filters,
+		topLevelCommentCount: discussionMock.discussion.topLevelCommentCount,
+		loading: false,
+		comments: discussionMock.discussion.comments,
+		topForm: defaultCommentForm,
+		replyForm: defaultCommentForm,
+		bottomForm: defaultCommentForm,
+		reportAbuse: () => Promise.resolve(ok(true)),
+	},
+	decorators: [
+		splitTheme([
+			{
+				...format,
+				theme: Pillar.Culture,
+			},
+		]),
+	],
+} satisfies Story;
 
-export const InitialPage = () => (
-	<div
-		css={css`
-			width: 100%;
-			max-width: 620px;
-		`}
-	>
-		<Comments
-			shortUrl={discussionMock.discussion.key}
-			baseUrl="https://discussion.theguardian.com/discussion-api"
-			isClosedForComments={false}
-			isClosedForRecommendations={false}
-			additionalHeaders={{
-				'D2-X-UID': 'testD2Header',
-				'GU-Client': 'testClientHeader',
-			}}
-			expanded={true}
-			onPermalinkClick={() => {}}
-			apiKey=""
-			idApiUrl="https://idapi.theguardian.com"
-			page={1}
-			filters={filters}
-			topLevelCommentCount={
-				discussionMock.discussion.topLevelCommentCount
-			}
-			loading={false}
-			comments={discussionMock.discussion.comments}
-			topForm={defaultCommentForm}
-			replyForm={defaultCommentForm}
-			bottomForm={defaultCommentForm}
-			reportAbuse={() => Promise.resolve(ok(true))}
-		/>
-	</div>
-);
-InitialPage.storyName = 'with initial page set to 1';
-InitialPage.decorators = [
-	splitTheme([
-		{
-			...format,
-			theme: Pillar.Lifestyle,
-		},
-	]),
-];
+export const InitialPage = {
+	...LoggedOutHiddenPicks,
+	name: 'With initial page set to 1',
+	args: {
+		...LoggedOutHiddenPicks.args,
+		expanded: true,
+		page: 1,
+	},
+	decorators: [
+		splitTheme([
+			{
+				...format,
+				theme: Pillar.Lifestyle,
+			},
+		]),
+	],
+} satisfies Story;
 
-export const LoggedInHiddenNoPicks = () => {
-	return (
-		<div
-			css={css`
-				width: 100%;
-				max-width: 620px;
-			`}
-		>
-			<Comments
-				shortUrl="p/abc123"
-				isClosedForComments={false}
-				isClosedForRecommendations={false}
-				user={aUser}
-				baseUrl="https://discussion.theguardian.com/discussion-api"
-				additionalHeaders={{
-					'D2-X-UID': 'testD2Header',
-					'GU-Client': 'testClientHeader',
-				}}
-				expanded={false}
-				onPermalinkClick={() => {}}
-				apiKey=""
-				idApiUrl="https://idapi.theguardian.com"
-				page={3}
-				filters={filters}
-				topLevelCommentCount={
-					discussionMock.discussion.topLevelCommentCount
-				}
-				loading={false}
-				comments={discussionMock.discussion.comments}
-				topForm={defaultCommentForm}
-				replyForm={{ ...defaultCommentForm }}
-				bottomForm={defaultCommentForm}
-				reportAbuse={() => Promise.resolve(ok(true))}
-			/>
-		</div>
-	);
-};
-LoggedInHiddenNoPicks.storyName =
-	'when logged in, with no picks and not expanded';
-LoggedInHiddenNoPicks.decorators = [splitTheme([format])];
+export const LoggedInHiddenNoPicks = {
+	...LoggedOutHiddenPicks,
+	name: 'When logged in, with no picks and not expanded',
+	args: {
+		...LoggedOutHiddenPicks.args,
+		shortUrl: 'p/abc123',
+		user: aUser,
+	},
+	decorators: [splitTheme([format])],
+} satisfies Story;
 
-export const LoggedIn = () => {
-	return (
-		<div
-			css={css`
-				width: 100%;
-				max-width: 620px;
-			`}
-		>
-			<Comments
-				shortUrl="p/abc123"
-				isClosedForComments={false}
-				isClosedForRecommendations={false}
-				user={aUser}
-				baseUrl="https://discussion.theguardian.com/discussion-api"
-				additionalHeaders={{
-					'D2-X-UID': 'testD2Header',
-					'GU-Client': 'testClientHeader',
-				}}
-				expanded={true}
-				onPermalinkClick={() => {}}
-				apiKey=""
-				idApiUrl="https://idapi.theguardian.com"
-				page={3}
-				filters={filters}
-				topLevelCommentCount={
-					discussionMock.discussion.topLevelCommentCount
-				}
-				loading={false}
-				comments={discussionMock.discussion.comments}
-				topForm={defaultCommentForm}
-				replyForm={defaultCommentForm}
-				bottomForm={defaultCommentForm}
-				reportAbuse={() => Promise.resolve(ok(true))}
-			/>
-		</div>
-	);
-};
-LoggedIn.storyName = 'when logged in and expanded';
-LoggedIn.decorators = [lightDecorator([format])];
+export const LoggedIn = {
+	...LoggedInHiddenNoPicks,
+	name: 'When logged in and expanded',
+	args: {
+		...LoggedOutHiddenPicks.args,
+		expanded: true,
+	},
+	decorators: [splitTheme([format])],
+} satisfies Story;
 
-export const LoggedInShortDiscussion = () => {
-	return (
-		<div
-			css={css`
-				width: 100%;
-				max-width: 620px;
-			`}
-		>
-			<Comments
-				shortUrl={discussionWithTwoComments.discussion.key} // Two comments"
-				isClosedForComments={false}
-				isClosedForRecommendations={false}
-				user={aUser}
-				baseUrl="https://discussion.theguardian.com/discussion-api"
-				additionalHeaders={{
-					'D2-X-UID': 'testD2Header',
-					'GU-Client': 'testClientHeader',
-				}}
-				expanded={true}
-				onPermalinkClick={() => {}}
-				apiKey=""
-				idApiUrl="https://idapi.theguardian.com"
-				page={3}
-				filters={filters}
-				topLevelCommentCount={
-					discussionWithTwoComments.discussion.topLevelCommentCount
-				}
-				loading={false}
-				comments={discussionWithTwoComments.discussion.comments}
-				topForm={defaultCommentForm}
-				replyForm={defaultCommentForm}
-				bottomForm={defaultCommentForm}
-				reportAbuse={() => Promise.resolve(ok(true))}
-			/>
-		</div>
-	);
-};
-LoggedInShortDiscussion.decorators = [splitTheme([format])];
+export const LoggedInShortDiscussion = {
+	...LoggedInHiddenNoPicks,
+	args: {
+		...LoggedInHiddenNoPicks.args,
+		shortUrl: discussionWithTwoComments.discussion.key,
+		expanded: true,
+		topLevelCommentCount:
+			discussionWithTwoComments.discussion.topLevelCommentCount,
+		comments: discussionWithTwoComments.discussion.comments,
+	},
+	decorators: [splitTheme([format])],
+} satisfies Story;
 
-export const LoggedOutHiddenNoPicks = () => (
-	<div
-		css={css`
-			width: 100%;
-			max-width: 620px;
-		`}
-	>
-		<Comments
-			shortUrl="p/abc123"
-			isClosedForComments={false}
-			isClosedForRecommendations={false}
-			baseUrl="https://discussion.theguardian.com/discussion-api"
-			additionalHeaders={{
-				'D2-X-UID': 'testD2Header',
-				'GU-Client': 'testClientHeader',
-			}}
-			expanded={false}
-			onPermalinkClick={() => {}}
-			apiKey=""
-			idApiUrl="https://idapi.theguardian.com"
-			page={3}
-			filters={filters}
-			topLevelCommentCount={
-				discussionMock.discussion.topLevelCommentCount
-			}
-			loading={false}
-			comments={discussionMock.discussion.comments}
-			topForm={defaultCommentForm}
-			replyForm={defaultCommentForm}
-			bottomForm={defaultCommentForm}
-			reportAbuse={() => Promise.resolve(ok(true))}
-		/>
-	</div>
-);
+export const LoggedOutHiddenNoPicks = {
+	...LoggedOutHiddenPicks,
+	args: {
+		...LoggedOutHiddenPicks.args,
+		shortUrl: 'p/abc123',
+	},
+	name: 'When logged out, with no picks and not expanded',
+	decorators: [
+		splitTheme([
+			{
+				...format,
+				theme: Pillar.Sport,
+			},
+		]),
+	],
+} satisfies Story;
 
-LoggedOutHiddenNoPicks.storyName =
-	'when logged out, with no picks and not expanded';
-LoggedOutHiddenNoPicks.decorators = [
-	splitTheme([
-		{
-			...format,
-			theme: Pillar.Sport,
-		},
-	]),
-];
+export const Closed = {
+	...LoggedOutHiddenPicks,
+	args: {
+		...LoggedOutHiddenPicks.args,
+		isClosedForComments: true,
+		user: aUser,
+		expanded: true,
+	},
+	name: 'Logged in but closed for comments',
+	decorators: [
+		splitTheme([
+			{
+				...format,
+				theme: Pillar.Lifestyle,
+			},
+		]),
+	],
+} satisfies Story;
 
-export const Closed = () => (
-	<div
-		css={css`
-			width: 100%;
-			max-width: 620px;
-		`}
-	>
-		<Comments
-			shortUrl={discussionMock.discussion.key}
-			baseUrl="https://discussion.theguardian.com/discussion-api"
-			isClosedForComments={true}
-			isClosedForRecommendations={false}
-			user={aUser}
-			additionalHeaders={{
-				'D2-X-UID': 'testD2Header',
-				'GU-Client': 'testClientHeader',
-			}}
-			expanded={true}
-			onPermalinkClick={() => {}}
-			apiKey=""
-			idApiUrl="https://idapi.theguardian.com"
-			page={3}
-			filters={filters}
-			topLevelCommentCount={
-				discussionMock.discussion.topLevelCommentCount
-			}
-			loading={false}
-			comments={discussionMock.discussion.comments}
-			topForm={defaultCommentForm}
-			replyForm={defaultCommentForm}
-			bottomForm={defaultCommentForm}
-			reportAbuse={() => Promise.resolve(ok(true))}
-		/>
-	</div>
-);
-Closed.storyName = 'Logged in but closed for comments';
-Closed.decorators = [
-	splitTheme([
-		{
-			...format,
-			theme: Pillar.Lifestyle,
-		},
-	]),
-];
+export const NoComments = {
+	...LoggedOutHiddenPicks,
+	args: {
+		...LoggedOutHiddenPicks.args,
+		shortUrl: 'p/39f5x',
+		topLevelCommentCount: 0,
+		comments: [],
+	},
+	decorators: [
+		splitTheme([
+			{
+				...format,
+				theme: Pillar.Culture,
+			},
+		]),
+	],
+} satisfies Story;
 
-export const NoComments = () => (
-	<div
-		css={css`
-			width: 100%;
-			max-width: 620px;
-		`}
-	>
-		<Comments
-			shortUrl="p/39f5x" // A discussion with zero comments
-			baseUrl="https://discussion.theguardian.com/discussion-api"
-			isClosedForComments={false}
-			isClosedForRecommendations={false}
-			additionalHeaders={{
-				'D2-X-UID': 'testD2Header',
-				'GU-Client': 'testClientHeader',
-			}}
-			expanded={false}
-			onPermalinkClick={() => {}}
-			apiKey=""
-			idApiUrl="https://idapi.theguardian.com"
-			page={3}
-			filters={filters}
-			topLevelCommentCount={0}
-			loading={false}
-			comments={[]}
-			topForm={defaultCommentForm}
-			replyForm={defaultCommentForm}
-			bottomForm={defaultCommentForm}
-			reportAbuse={() => Promise.resolve(ok(true))}
-		/>
-	</div>
-);
-NoComments.storyName = 'when no comments have been made';
-NoComments.decorators = [
-	splitTheme([
-		{
-			...format,
-			theme: Pillar.Culture,
-		},
-	]),
-];
-
-export const LegacyDiscussion = () => (
-	<div
-		css={css`
-			width: 100%;
-			max-width: 620px;
-		`}
-	>
-		<Comments
-			shortUrl={legacyDiscussionWithoutThreading.discussion.key} // A 'legacy' discussion that doesn't allow threading
-			baseUrl="https://discussion.theguardian.com/discussion-api"
-			isClosedForComments={false}
-			isClosedForRecommendations={false}
-			additionalHeaders={{
-				'D2-X-UID': 'testD2Header',
-				'GU-Client': 'testClientHeader',
-			}}
-			expanded={false}
-			onPermalinkClick={() => {}}
-			apiKey=""
-			idApiUrl="https://idapi.theguardian.com"
-			page={2}
-			filters={filters}
-			topLevelCommentCount={
-				legacyDiscussionWithoutThreading.discussion.commentCount
-			}
-			loading={false}
-			comments={legacyDiscussionWithoutThreading.discussion.comments}
-			topForm={defaultCommentForm}
-			replyForm={defaultCommentForm}
-			bottomForm={defaultCommentForm}
-			reportAbuse={() => Promise.resolve(ok(true))}
-		/>
-	</div>
-);
-LegacyDiscussion.storyName = "a legacy discussion that doesn't allow threading";
-LegacyDiscussion.decorators = [
-	splitTheme([
-		{
-			...format,
-			theme: Pillar.Culture,
-		},
-	]),
-];
+export const LegacyDiscussion = {
+	...LoggedOutHiddenPicks,
+	args: {
+		...LoggedOutHiddenPicks.args,
+		shortUrl: legacyDiscussionWithoutThreading.discussion.key,
+		page: 2,
+		topLevelCommentCount:
+			legacyDiscussionWithoutThreading.discussion.commentCount,
+		comments: legacyDiscussionWithoutThreading.discussion.comments,
+	},
+	name: "A legacy discussion that doesn't allow threading",
+	decorators: [
+		splitTheme([
+			{
+				...format,
+				theme: Pillar.Culture,
+			},
+		]),
+	],
+} satisfies Story;
