@@ -8,6 +8,6 @@ export const decidePublicPath = (): string => {
 	const isLocalHost = window.location.hostname === 'localhost';
 	// Use relative path if running locally or in CI
 	return isDev || isLocalHost
-		? '/assets/'
+		? 'http://localhost:3030/assets/'
 		: `${window.guardian.config.frontendAssetsFullURL}assets/`;
 };
