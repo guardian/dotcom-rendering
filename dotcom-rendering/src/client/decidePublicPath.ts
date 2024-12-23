@@ -6,13 +6,14 @@
 export const decidePublicPath = (): string => {
 	const isDev = process.env.NODE_ENV === 'development';
 	const isLocalHost = window.location.hostname === 'localhost';
+	const isPlaywright = process.env.PLAYWRIGHT === 'true';
 
-	if (isLocalHost) {
-		return 'http://localhost:3030/assets/';
+	if (isPlaywright) {
+		return `/assets/`;
 	}
 
-	if (isDev) {
-		return '/assets/';
+	if (isDev || isLocalHost) {
+		return `http://localhost:3030/assets/`;
 	}
 
 	return `${window.guardian.config.frontendAssetsFullURL}assets/`;
