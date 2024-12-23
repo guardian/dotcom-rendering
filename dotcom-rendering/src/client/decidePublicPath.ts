@@ -8,7 +8,7 @@ export const decidePublicPath = (): string => {
 	const isLocalHost = window.location.hostname === 'localhost';
 	const isPlaywright = process.env.PLAYWRIGHT === 'true';
 
-	if (isPlaywright) {
+	if (isPlaywright && isDev) {
 		return `/assets/`;
 	}
 
