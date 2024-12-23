@@ -45,6 +45,7 @@ const basicCardProps: CardProps = {
 	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api/',
 	showMainVideo: true,
 	absoluteServerTimes: true,
+	galleryCount: 8,
 };
 
 const aBasicLink = {
