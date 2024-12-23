@@ -34,6 +34,15 @@ export const ScribdDocument: Story = {
 	},
 };
 
+/**
+ * Skipped (flaky).
+ *
+ * This story fails intermittently. The text: "fit width" in
+ * the button in the bottom-right sometimes causes a difference.
+ * often different in the snapshot.
+ *
+ * Example: https://www.chromatic.com/test?appId=63e251470cfbe61776b0ef19&id=676405bf6014bfa8ccddc7be
+ */
 export const DocumentCloudDocument: Story = {
 	args: {
 		embedUrl: 'https://embed.documentcloud.org/documents/20417938-test-pdf',
@@ -43,5 +52,8 @@ export const DocumentCloudDocument: Story = {
 		source: 'DocumentCloud',
 		isTracking: false,
 		isMainMedia: false,
+	},
+	parameters: {
+		chromatic: { disableSnapshot: true },
 	},
 };

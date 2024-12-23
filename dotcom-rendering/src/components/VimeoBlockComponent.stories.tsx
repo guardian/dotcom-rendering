@@ -69,6 +69,14 @@ largeAspectRatio.story = {
 	chromatic: { disable: true },
 };
 
+/**
+ * Skipped (flaky).
+ *
+ * This story fails intermittently. Sometimes the video doesn't load
+ * with the error message: "We couldn't verify the security of your connection."
+ *
+ * Example: https://www.chromatic.com/test?appId=63e251470cfbe61776b0ef19&id=6762b11e0dbf28eb24702ff1
+ */
 export const verticalAspectRatio = () => {
 	return (
 		<Wrapper>
@@ -92,3 +100,6 @@ export const verticalAspectRatio = () => {
 	);
 };
 verticalAspectRatio.storyName = 'with vertical aspect ratio';
+verticalAspectRatio.story = {
+	chromatic: { disableSnapshot: true },
+};
