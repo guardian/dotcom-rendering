@@ -10,11 +10,6 @@ import {
 
 export default {
 	title: 'Components/WitnessBlockComponent',
-	parameters: {
-		chromatic: {
-			disable: true,
-		},
-	},
 };
 
 const sportFormat = {

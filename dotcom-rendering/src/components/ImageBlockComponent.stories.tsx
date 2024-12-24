@@ -535,6 +535,5 @@ HalfWidthWide.storyName = 'with role halfWidth';
 HalfWidthWide.story = {
 	parameters: {
 		viewport: { defaultViewport: 'wide' },
-		chromatic: { disable: true },
 	},
 };

@@ -5,11 +5,6 @@ import { YoutubeEmbedBlockComponent } from './YoutubeEmbedBlockComponent';
 export default {
 	component: YoutubeEmbedBlockComponent,
 	title: 'Components/YoutubeEmbedComponent',
-	parameters: {
-		chromatic: {
-			disable: true,
-		},
-	},
 };
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (

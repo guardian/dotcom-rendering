@@ -49,11 +49,6 @@ const Generic = () => (
 		/>
 	</div>
 );
-Generic.story = {
-	parameters: {
-		chromatic: { disable: true },
-	},
-};
 
 // I'm disabling the requirement for a return type because that doesnt make sense here 🤷. It
 // popped up after I removed the FC type which was causing problems when I tried to set parameters
@@ -92,11 +87,6 @@ const Youtube = () => (
 		/>
 	</div>
 );
-Youtube.story = {
-	parameters: {
-		chromatic: { disable: true },
-	},
-};
 
 // I'm disabling the requirement for a return type because that doesnt make sense here 🤷. It
 // popped up after I removed the FC type which was causing problems when I tried to set parameters
@@ -135,11 +125,6 @@ const Spotify = () => (
 		/>
 	</div>
 );
-Spotify.story = {
-	parameters: {
-		chromatic: { disable: true },
-	},
-};
 
 // I'm disabling the requirement for a return type because that doesnt make sense here 🤷. It
 // popped up after I removed the FC type which was causing problems when I tried to set parameters
@@ -176,11 +161,6 @@ const Instagram = () => (
 		/>
 	</div>
 );
-Instagram.story = {
-	parameters: {
-		chromatic: { disable: true },
-	},
-};
 
 // ----- Exports ----- //
 

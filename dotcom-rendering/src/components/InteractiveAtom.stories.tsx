@@ -33,10 +33,6 @@ export const Default = {
 			<StoryComponent />
 		</div>
 	),
-	parameters: {
-		// This interactive uses animation which is causing false negatives for Chromatic
-		chromatic: { disable: true },
-	},
 } satisfies Story;
 
 export const ImmersiveMainMedia = {
@@ -58,8 +54,4 @@ export const ImmersiveMainMedia = {
 			<StoryComponent />
 		</div>
 	),
-	parameters: {
-		// This interactive uses animation which is causing false negatives for Chromatic
-		chromatic: { disable: true },
-	},
 } satisfies Story;

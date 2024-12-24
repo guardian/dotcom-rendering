@@ -5,11 +5,6 @@ import { VideoAtom } from './VideoAtom';
 const meta = {
 	title: 'Components/VideoAtom',
 	component: VideoAtom,
-	parameters: {
-		// Chromatic ignores video elements by design so there's no point trying to snapshot here
-		// https://www.chromatic.com/docs/ignoring-elements
-		chromatic: { disable: true },
-	},
 } satisfies Meta<typeof VideoAtom>;
 
 export default meta;

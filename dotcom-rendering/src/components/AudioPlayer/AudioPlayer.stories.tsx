@@ -19,10 +19,6 @@ export const AudioPlayer = {
 		src: 'https://audio.guim.co.uk/2024/10/18-57753-USEE_181024.mp3',
 		mediaId: 'mediaId',
 	},
-	parameters: {
-		// We only want to snapshot the `multipleFormats` version below.
-		chromatic: { disable: true },
-	},
 } satisfies Story;
 
 export const MultipleFormats = {

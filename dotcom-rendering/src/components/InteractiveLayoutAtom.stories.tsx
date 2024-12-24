@@ -29,8 +29,4 @@ export const InteractiveLayoutAtom = {
 			<StoryComponent />
 		</div>
 	),
-	parameters: {
-		// This interactive uses animation which is causing false negatives for Chromatic
-		chromatic: { disable: true },
-	},
 } satisfies Story;

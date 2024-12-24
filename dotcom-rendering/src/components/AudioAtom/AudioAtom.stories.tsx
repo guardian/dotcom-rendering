@@ -21,10 +21,6 @@ export const AudioAtom = {
 		title: 'Q&A and Detective Wilson',
 		duration: 849,
 	},
-	parameters: {
-		// We only want to snapshot the `multipleFormats` version below.
-		chromatic: { disable: true },
-	},
 } satisfies Story;
 
 export const MultipleFormats = {
