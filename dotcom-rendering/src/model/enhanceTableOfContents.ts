@@ -80,6 +80,16 @@ export const enhanceTableOfContents = (
 				}
 			} else if (
 				element._type ===
+				'model.dotcomrendering.pageElements.MultiBylinesBlockElement'
+			) {
+				for (const multiByline of element.multiBylines) {
+					tocItems.push({
+						id: slugify(multiByline.title),
+						title: multiByline.title,
+					});
+				}
+			} else if (
+				element._type ===
 					'model.dotcomrendering.pageElements.SubheadingBlockElement' ||
 				element._type ===
 					'model.dotcomrendering.pageElements.NumberedTitleBlockElement'
