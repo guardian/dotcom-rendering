@@ -143,6 +143,14 @@ export const InitialPage = {
 	],
 } satisfies Story;
 
+/**
+ * Skipped (flaky).
+ *
+ * This story fails intermittently. The monospaced
+ * text: "code" is often different in the snapshot.
+ *
+ * Example: https://www.chromatic.com/test?appId=63e251470cfbe61776b0ef19&id=6659d8e7fde909fdd4dbf8b9
+ */
 export const LoggedInHiddenNoPicks = {
 	...LoggedOutHiddenPicks,
 	name: 'When logged in, with no picks and not expanded',
@@ -152,6 +160,9 @@ export const LoggedInHiddenNoPicks = {
 		user: aUser,
 	},
 	decorators: [splitTheme([format])],
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
 } satisfies Story;
 
 export const LoggedIn = {
