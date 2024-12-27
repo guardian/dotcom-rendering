@@ -5,12 +5,21 @@ import {
 	examplePersonalityQuestions,
 	exampleResultBuckets,
 } from '../../fixtures/manual/personalityQuizAtom';
-import { sharingUrls } from '../../fixtures/manual/sharingUrls';
-import { Pillar } from '../lib/articleFormat';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import {
 	findMostReferredToBucketId,
 	PersonalityQuizAtom,
 } from './PersonalityQuizAtom.importable';
+
+jest.mock('../lib/useMatchMedia', () => ({
+	useMatchMedia: jest.fn(() => true),
+}));
+
+const defaultFormat = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.News,
+};
 
 describe('PersonalityQuiz', () => {
 	it('should render', () => {
@@ -19,8 +28,9 @@ describe('PersonalityQuiz', () => {
 				id="123abc"
 				questions={examplePersonalityQuestions}
 				resultBuckets={exampleResultBuckets}
-				sharingUrls={sharingUrls}
-				theme={Pillar.News}
+				pageId={'/'}
+				webTitle={'Quiz title'}
+				format={defaultFormat}
 			/>,
 		);
 
@@ -37,8 +47,9 @@ describe('PersonalityQuiz', () => {
 					id="123abc"
 					questions={examplePersonalityQuestions}
 					resultBuckets={exampleResultBuckets}
-					sharingUrls={sharingUrls}
-					theme={Pillar.News}
+					pageId={'/'}
+					webTitle={'Quiz title'}
+					format={defaultFormat}
 				/>,
 			);
 
@@ -48,8 +59,9 @@ describe('PersonalityQuiz', () => {
 					id="123abc"
 					questions={examplePersonalityQuestions}
 					resultBuckets={exampleResultBuckets}
-					sharingUrls={sharingUrls}
-					theme={Pillar.News}
+					pageId={'/'}
+					webTitle={'Quiz title'}
+					format={defaultFormat}
 				/>,
 			);
 
@@ -64,8 +76,9 @@ describe('PersonalityQuiz', () => {
 					id="123abc"
 					questions={examplePersonalityQuestions}
 					resultBuckets={exampleResultBuckets}
-					sharingUrls={sharingUrls}
-					theme={Pillar.News}
+					pageId={'/'}
+					webTitle={'Quiz title'}
+					format={defaultFormat}
 				/>,
 			);
 
@@ -75,8 +88,9 @@ describe('PersonalityQuiz', () => {
 					id="123abc"
 					questions={examplePersonalityQuestions}
 					resultBuckets={exampleResultBuckets}
-					sharingUrls={sharingUrls}
-					theme={Pillar.News}
+					pageId={'/'}
+					webTitle={'Quiz title'}
+					format={defaultFormat}
 				/>,
 			);
 
@@ -91,8 +105,9 @@ describe('PersonalityQuiz', () => {
 					id="123abc"
 					questions={examplePersonalityQuestions}
 					resultBuckets={exampleResultBuckets}
-					sharingUrls={sharingUrls}
-					theme={Pillar.News}
+					pageId={'/'}
+					webTitle={'Quiz title'}
+					format={defaultFormat}
 				/>,
 			);
 
@@ -107,8 +122,9 @@ describe('PersonalityQuiz', () => {
 					id="123abc"
 					questions={examplePersonalityQuestions}
 					resultBuckets={exampleResultBuckets}
-					sharingUrls={sharingUrls}
-					theme={Pillar.News}
+					pageId={'/'}
+					webTitle={'Quiz title'}
+					format={defaultFormat}
 				/>,
 			);
 
@@ -124,8 +140,9 @@ describe('PersonalityQuiz', () => {
 					id="123abc"
 					questions={examplePersonalityQuestions}
 					resultBuckets={exampleResultBuckets}
-					sharingUrls={sharingUrls}
-					theme={Pillar.News}
+					pageId={'/'}
+					webTitle={'Quiz title'}
+					format={defaultFormat}
 				/>,
 			);
 
