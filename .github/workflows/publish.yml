@@ -55,7 +55,7 @@ jobs:
 
       # All rendering apps deployment
       - name: Upload rendering apps to RiffRaff
-        uses: guardian/actions-riff-raff@v4.1.1
+        uses: guardian/actions-riff-raff@dependabot/npm_and_yarn/aws-sdk-5bb87a9087
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
