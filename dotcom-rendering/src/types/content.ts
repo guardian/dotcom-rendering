@@ -1,4 +1,4 @@
-import type { ArticleTheme } from '../lib/articleFormat';
+import type { ArticleFormat } from '../lib/articleFormat';
 
 export type StarRating = 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -1008,16 +1008,18 @@ export type KnowledgeQuizAtomType = {
 	id: string;
 	questions: QuestionType[];
 	resultGroups: ResultGroupsType[];
-	sharingUrls: SharingUrlsType;
-	theme: ArticleTheme;
+	pageId: string;
+	webTitle: string;
+	format: ArticleFormat;
 };
 
 export type PersonalityQuizAtomType = {
 	id: string;
 	questions: QuestionType[];
 	resultBuckets: ResultsBucketType[];
-	sharingUrls: SharingUrlsType;
-	theme: ArticleTheme;
+	pageId: string;
+	webTitle: string;
+	format: ArticleFormat;
 };
 
 export type QuizSelectionType = Record<string, AnswerType>;

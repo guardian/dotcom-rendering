@@ -4,7 +4,6 @@ import {
 	examplePersonalityQuestions,
 	exampleResultBuckets,
 } from '../../fixtures/manual/personalityQuizAtom';
-import { sharingUrls } from '../../fixtures/manual/sharingUrls';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -27,8 +26,13 @@ export const Default = {
 		id: 'quiz-id',
 		questions: examplePersonalityQuestions,
 		resultBuckets: exampleResultBuckets,
-		sharingUrls,
-		theme: Pillar.News,
+		pageId: '/',
+		webTitle: 'Quiz title',
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Comment,
+			theme: Pillar.News,
+		},
 	},
 	decorators: [
 		splitTheme([
@@ -45,7 +49,6 @@ export const LabsTheme = {
 	args: {
 		...Default.args,
 		id: '2c6bf552-2827-4256-b3a0-f557d215c394',
-		theme: ArticleSpecial.Labs,
 	},
 	decorators: [
 		splitTheme([
