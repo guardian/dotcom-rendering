@@ -728,9 +728,9 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 	assets: WitnessAssetType[];
 	isThirdPartyTracking: boolean;
 	witnessTypeData:
-		| WitnessTypeDataImage
-		| WitnessTypeDataVideo
-		| WitnessTypeDataText;
+	| WitnessTypeDataImage
+	| WitnessTypeDataVideo
+	| WitnessTypeDataText;
 }
 export type FEElement =
 	| AdPlaceholderBlockElement
@@ -1058,7 +1058,9 @@ export type Newsletter = {
 };
 
 export type NewsletterLayout = {
-	title: string;
-	subtitle?: string;
-	newsletters: string[];
-}[];
+	groups: {
+		title: string;
+		subtitle?: string;
+		newsletters: string[];
+	}[]
+};

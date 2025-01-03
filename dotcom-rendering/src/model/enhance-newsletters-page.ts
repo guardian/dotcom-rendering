@@ -16,7 +16,7 @@ const mapLayoutToGroups = (
 		return record;
 	}, {});
 
-	const mapped = layout.map((group) => ({
+	const mapped = layout.groups.map((group) => ({
 		title: group.title,
 		subtitle: group.subtitle,
 		newsletters: group.newsletters.reduce<Newsletter[]>((list, name) => {
