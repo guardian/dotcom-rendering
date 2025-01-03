@@ -62,34 +62,34 @@ const listStyleNone = css`
 	background-image: repeating-linear-gradient(
 			to bottom,
 			${palette('--sub-meta-background')} 0px,
-			${palette('--sub-meta-background')} 36px,
-			transparent 36px,
-			transparent 37px,
-			${palette('--sub-meta-background')} 37px,
-			${palette('--sub-meta-background')} 48px
+			${palette('--sub-meta-background')} 2.25rem,
+			transparent 2.25rem,
+			transparent 2.3125rem,
+			${palette('--sub-meta-background')} 2.3125rem,
+			${palette('--sub-meta-background')} 3rem
 		),
 		repeating-linear-gradient(
 			to right,
 			${palette('--article-border')} 0px,
-			${palette('--article-border')} 3px,
-			transparent 3px,
-			transparent 5px
+			${palette('--article-border')} 0.1875rem,
+			transparent 0.1875rem,
+			transparent 0.3125rem
 		);
 	background-position: top;
 	background-repeat: no-repeat;
 `;
 
 const listWrapper = css`
-	padding-bottom: 12px;
+	padding-bottom: 0.75rem;
 	margin-bottom: 6px;
 	border-bottom: 1px solid ${palette('--article-border')};
 `;
 
 const listItemStyles = css`
 	${textSans14};
-	border: 1px solid ${palette('--sub-meta-text')};
-	border-radius: 12px;
-	padding: 2px 9px;
+	border: 0.0625rem solid ${palette('--sub-meta-text')};
+	border-radius: 0.75rem;
+	padding: 0.125rem 0.5625rem;
 	:hover {
 		background-color: ${palette('--sub-meta-text')};
 		a {
