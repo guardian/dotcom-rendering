@@ -40,7 +40,7 @@ const basicCardProps: CardProps = {
 	imagePositionOnDesktop: 'top',
 	showAge: true,
 	isExternalLink: false,
-	isPlayableMediaCard: true,
+	canPlayInline: true,
 	imageLoading: 'eager',
 	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api/',
 	showMainVideo: true,
@@ -1001,7 +1001,7 @@ export const WhenVideoWithPlayButton = () => {
 						}}
 						imagePositionOnDesktop="top"
 						mainMedia={mainVideo}
-						isPlayableMediaCard={false}
+						canPlayInline={false}
 					/>
 				</LI>
 			</UL>
@@ -1032,7 +1032,7 @@ export const WhenVideoWithPlayButton = () => {
 								}}
 								imagePositionOnDesktop="left"
 								mainMedia={mainVideo}
-								isPlayableMediaCard={false}
+								canPlayInline={false}
 							/>
 						</LI>
 						<LI padSides={true}>
@@ -1045,7 +1045,7 @@ export const WhenVideoWithPlayButton = () => {
 								}}
 								imagePositionOnDesktop="right"
 								mainMedia={mainVideo}
-								isPlayableMediaCard={false}
+								canPlayInline={false}
 							/>
 						</LI>
 
@@ -1059,7 +1059,7 @@ export const WhenVideoWithPlayButton = () => {
 								}}
 								imagePositionOnDesktop="right"
 								mainMedia={mainVideo}
-								isPlayableMediaCard={false}
+								canPlayInline={false}
 							/>
 						</LI>
 					</UL>

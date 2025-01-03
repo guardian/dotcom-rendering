@@ -7,7 +7,7 @@ import {
 } from '@guardian/source/foundations';
 import { Hide, Link } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
-import { isMediaCard } from '../../lib/cardHelpers';
+import { isMediaCard as isAMediaCard } from '../../lib/cardHelpers';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { palette } from '../../palette';
@@ -98,7 +98,7 @@ export type Props = {
 	 * At 300px or below, the player will begin to lose functionality e.g. volume controls being omitted.
 	 * Youtube requires a minimum width 200px.
 	 */
-	isPlayableMediaCard?: boolean;
+	canPlayInline?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	starRating?: Rating;
@@ -193,8 +193,9 @@ const getMedia = ({
 	isCrossword,
 	slideshowImages,
 	mainMedia,
-	isPlayableMediaCard,
+	canPlayInline,
 	podcastImage,
+	isBetaContainer,
 }: {
 	imageUrl?: string;
 	imageAltText?: string;
@@ -202,10 +203,11 @@ const getMedia = ({
 	isCrossword?: boolean;
 	slideshowImages?: DCRSlideshowImage[];
 	mainMedia?: MainMedia;
-	isPlayableMediaCard?: boolean;
+	canPlayInline?: boolean;
 	podcastImage?: PodcastSeriesImage;
+	isBetaContainer: boolean;
 }) => {
-	if (mainMedia && mainMedia.type === 'Video' && isPlayableMediaCard) {
+	if (mainMedia && mainMedia.type === 'Video' && canPlayInline) {
 		return {
 			type: 'video',
 			mainMedia,
@@ -214,7 +216,7 @@ const getMedia = ({
 	}
 	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
 	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
-	if (podcastImage) {
+	if (podcastImage && isBetaContainer) {
 		return {
 			type: 'podcast',
 			podcastImage,
@@ -258,11 +260,14 @@ const getHeadlinePosition = ({
 	isFlexSplash,
 	containerType,
 	showLivePlayable,
+	isMediaCard,
 }: {
 	containerType?: DCRContainerType;
 	isFlexSplash?: boolean;
 	showLivePlayable: boolean;
+	isMediaCard: boolean;
 }) => {
+	if (isMediaCard) return 'inner';
 	if (containerType === 'flexible/special' && isFlexSplash) {
 		return 'outer';
 	}
@@ -304,7 +309,7 @@ export const Card = ({
 	avatarUrl,
 	showClock,
 	mainMedia,
-	isPlayableMediaCard,
+	canPlayInline,
 	kickerText,
 	showPulsingDot,
 	starRating,
@@ -425,7 +430,7 @@ export const Card = ({
 	// If the card isn't playable, we need to show a play icon.
 	// Otherwise, this is handled by the YoutubeAtom
 	const showPlayIcon =
-		mainMedia?.type === 'Video' && !isPlayableMediaCard && showMainVideo;
+		mainMedia?.type === 'Video' && !canPlayInline && showMainVideo;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -434,8 +439,9 @@ export const Card = ({
 		isCrossword,
 		slideshowImages,
 		mainMedia,
-		isPlayableMediaCard,
+		canPlayInline,
 		podcastImage,
+		isBetaContainer,
 	});
 
 	// For opinion type cards with avatars (which aren't onwards content)
@@ -444,10 +450,14 @@ export const Card = ({
 		isOpinion && !isOnwardContent && media?.type === 'avatar';
 
 	/**
-	 * Some cards in standard containers have contrasting background colours.
-	 * We need to add additional padding to these cards to keep the text readable.
-	 */
-	const hasBackgroundColour = !containerPalette && isMediaCard(format);
+-	 * Media cards have contrasting background colours. We add additional
+	 * padding to these cards to keep the text readable.
+-	 */
+	const isMediaCard = isAMediaCard(format);
+
+	const backgroundColour = isMediaCard
+		? palette('--card-media-background')
+		: palette('--card-background');
 
 	/* Whilst we migrate to the new container types, we need to check which container we are in. */
 	const isFlexibleContainer =
@@ -472,6 +482,7 @@ export const Card = ({
 		containerType,
 		isFlexSplash,
 		showLivePlayable,
+		isMediaCard,
 	});
 
 	const hideTrailTextUntil = () => {
@@ -491,7 +502,7 @@ export const Card = ({
 	/** Determines the gap of between card components based on card properties */
 	const getGapSize = (): GapSize => {
 		if (isOnwardContent) return 'none';
-		if (hasBackgroundColour) return 'tiny';
+		if (isMediaCard && !isFlexibleContainer) return 'tiny';
 		if (!!isFlexSplash || (isFlexibleContainer && imageSize === 'jumbo')) {
 			return 'small';
 		}
@@ -577,7 +588,7 @@ export const Card = ({
 					css={css`
 						padding-bottom: ${space[5]}px;
 					`}
-					style={{ backgroundColor: palette('--card-background') }}
+					style={{ backgroundColor: backgroundColour }}
 				>
 					<CardHeadline
 						headlineText={headlineText}
@@ -615,7 +626,7 @@ export const Card = ({
 			)}
 
 			<CardLayout
-				cardBackgroundColour={palette('--card-background')}
+				cardBackgroundColour={backgroundColour}
 				imagePositionOnDesktop={imagePositionOnDesktop}
 				imagePositionOnMobile={imagePositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
@@ -805,8 +816,9 @@ export const Card = ({
 						imageType={media?.type}
 						imageSize={imageSize}
 						imagePositionOnDesktop={imagePositionOnDesktop}
-						hasBackgroundColour={hasBackgroundColour}
+						hasBackgroundColour={isMediaCard}
 						isOnwardContent={isOnwardContent}
+						isFlexibleContainer={isFlexibleContainer}
 					>
 						{/* This div is needed to keep the headline and trail text justified at the start */}
 						<div
@@ -935,9 +947,7 @@ export const Card = ({
 			<div
 				style={{
 					padding:
-						hasBackgroundColour || isOnwardContent
-							? `0 ${space[2]}px`
-							: 0,
+						isMediaCard || isOnwardContent ? `0 ${space[2]}px` : 0,
 				}}
 			>
 				{showLivePlayable && liveUpdatesPosition === 'outer' && (

@@ -63,6 +63,7 @@ export const ScrollableSmall = ({
 							showLivePlayable={trail.showLivePlayable}
 							showTopBarDesktop={false}
 							showTopBarMobile={false}
+							canPlayInline={false}
 						/>
 					</ScrollableCarousel.Item>
 				);

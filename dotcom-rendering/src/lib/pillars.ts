@@ -61,8 +61,9 @@ type SpecialAltPalette = {
 	800: ColourType;
 };
 
-// pillarPalette_DO_NOT_USE should no longer be used. Use palette from  decidePalette instead
-
+/**
+ * @deprecated Use `palette` from `palette.ts` instead
+ */
 export const pillarPalette_DO_NOT_USE: Record<
 	ArticleTheme,
 	PillarPalette | SpecialPalette | LabsPalette | SpecialAltPalette
