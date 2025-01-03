@@ -39,7 +39,6 @@ export const ChoiceCardTestData_REGULAR: ChoiceInfo[] = [
 		benefits: () => [
 			'Unlimited access to the Guardian app',
 			'Unlimited access to our new Feast App',
-			'Ad-free reading on all your devices',
 			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
 			'Far fewer asks for support',
 		],
@@ -73,7 +72,6 @@ export const ChoiceCardTestData_US: ChoiceInfo[] = [
 		benefits: () => [
 			'Unlimited access to the Guardian app',
 			'Unlimited access to our new Feast App',
-			'Ad-free reading on all your devices',
 			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
 			'Far fewer asks for support',
 		],
@@ -118,7 +116,6 @@ export const ChoiceCardTestData_TwoTier_REGULAR: ChoiceInfo[] = [
 		benefitsLabel: 'All-access digital',
 		benefits: () => [
 			'Unlimited access to the Guardian app',
-			'Ad-free reading on all your devices',
 			'Exclusive newsletter for supporters',
 			'And much more!',
 		],
