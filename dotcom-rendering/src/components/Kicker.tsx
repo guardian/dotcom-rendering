@@ -108,7 +108,6 @@ export const Kicker = ({
 						loading={'lazy'}
 						aspectRatio={'1:1'}
 					/>
-					s
 				</div>
 			)}
 			{showPulsingDot && (

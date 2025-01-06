@@ -41,6 +41,7 @@ import type { PodcastSeriesImage } from '../types/tag';
 import { Byline } from './Byline';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';
+
 type Props = {
 	/** The text shown */
 	headlineText: string;

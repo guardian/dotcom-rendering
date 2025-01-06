@@ -1,4 +1,4 @@
-import { ArticleDesign } from 'src/lib/articleFormat';
+import { ArticleDesign } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
 import type { BoostLevel } from '../types/content';
 import type {
