@@ -88,16 +88,16 @@ const constructMultiByline =
 				?.bylineImageUrl;
 		}
 
-		// if the element is missing its title for any reason, we will skip it
-		if (!isUndefined(title) && title !== '') {
+		// if the element is missing its title, byline, or bylineHtml for any reason, we will skip it
+		if (title && byline && bylineHtml) {
 			return [
 				{
 					title,
 					bio,
 					endNote,
 					imageUrl,
-					byline: byline ?? '',
-					bylineHtml: bylineHtml ?? '',
+					byline,
+					bylineHtml,
 					body: enhanceElements(elements),
 				},
 			];
