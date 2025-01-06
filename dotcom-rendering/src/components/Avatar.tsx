@@ -3,8 +3,12 @@ import { breakpoints } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { palette } from '../palette';
-import { ImageSizeType } from './Card/components/ImageWrapper';
-import { generateSources, getFallbackSource, ImageWidthType } from './Picture';
+import type { ImageSizeType } from './Card/components/ImageWrapper';
+import {
+	generateSources,
+	getFallbackSource,
+	type ImageWidthType,
+} from './Picture';
 
 const picture = css`
 	height: 100%;

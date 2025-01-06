@@ -164,27 +164,25 @@ export const CardLayout = ({
 	containerType,
 	gapSize = 'small',
 	isBetaContainer,
-}: Props) => {
-	return (
-		<div
-			css={[
-				containerStyles,
-				containerType === 'fixed/video'
-					? videoWidth
-					: minWidth(minWidthInPixels),
-				decidePosition(
-					imagePositionOnMobile,
-					imagePositionOnDesktop,
-					isBetaContainer,
-					imageType === 'avatar',
-				),
-			]}
-			style={{
-				backgroundColor: cardBackgroundColour,
-				gap: decideGap(gapSize),
-			}}
-		>
-			{children}
-		</div>
-	);
-};
+}: Props) => (
+	<div
+		css={[
+			containerStyles,
+			containerType === 'fixed/video'
+				? videoWidth
+				: minWidth(minWidthInPixels),
+			decidePosition(
+				imagePositionOnMobile,
+				imagePositionOnDesktop,
+				isBetaContainer,
+				imageType === 'avatar',
+			),
+		]}
+		style={{
+			backgroundColor: cardBackgroundColour,
+			gap: decideGap(gapSize),
+		}}
+	>
+		{children}
+	</div>
+);
