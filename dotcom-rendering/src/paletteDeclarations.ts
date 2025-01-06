@@ -5520,28 +5520,6 @@ const pinnedPostBorderDark: PaletteFunction = ({ theme }) => {
 	}
 };
 
-const expandableMarketingCardBackground: PaletteFunction = () =>
-	sourcePalette.brand[400];
-
-const expandableMarketingCardSvgFill: PaletteFunction = () =>
-	sourcePalette.neutral[0];
-
-const expandableMarketingCardButtonBackground: PaletteFunction = () =>
-	sourcePalette.neutral[100];
-
-const expandableMarketingCardSvgBackground: PaletteFunction = () =>
-	sourcePalette.neutral[100];
-
-const expandableMarketingCardFillBackgroundLight: PaletteFunction = (
-	format,
-) => {
-	return articleBackgroundLight(format) === 'transparent'
-		? sourcePalette.neutral[100]
-		: articleBackgroundLight(format);
-};
-const expandableMarketingCardFillBackgroundDark: PaletteFunction = (format) =>
-	articleBackgroundDark(format);
-
 const youtubeOverlayKicker: PaletteFunction = ({ theme }: ArticleFormat) => {
 	switch (theme) {
 		case Pillar.News:
@@ -6378,6 +6356,38 @@ const paletteColours = {
 		light: emailSignupTextSubduedLight,
 		dark: emailSignupTextSubduedDark,
 	},
+	'--eu-parliament-ecr': {
+		light: () => sourcePalette.brand[500],
+		dark: () => '#009AE1',
+	},
+	'--eu-parliament-epp': {
+		light: () => '#3DBBE2',
+		dark: () => '#3DBBE2',
+	},
+	'--eu-parliament-greensefa': {
+		light: () => '#39A566',
+		dark: () => '#39A566',
+	},
+	'--eu-parliament-ni': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => '#A1A1A1',
+	},
+	'--eu-parliament-renew': {
+		light: () => '#FF7F0F',
+		dark: () => '#FF7F0F',
+	},
+	'--eu-parliament-sd': {
+		light: () => sourcePalette.news[400],
+		dark: () => '#DC2E1C',
+	},
+	'--eu-parliament-theleft': {
+		light: () => '#8B0000',
+		dark: () => '#B23C2D',
+	},
+	'--eu-parliament-unknown': {
+		light: () => '#848484',
+		dark: () => sourcePalette.neutral[46],
+	},
 	'--expandable-atom-background': {
 		light: expandableAtomBackgroundLight,
 		dark: expandableAtomBackgroundDark,
@@ -6397,26 +6407,6 @@ const paletteColours = {
 	'--expandable-atom-text-hover': {
 		light: expandableAtomTextHoverLight,
 		dark: expandableAtomTextHoverDark,
-	},
-	'--expandable-marketing-card-background': {
-		light: expandableMarketingCardBackground,
-		dark: expandableMarketingCardBackground,
-	},
-	'--expandable-marketing-card-button-background': {
-		light: expandableMarketingCardButtonBackground,
-		dark: expandableMarketingCardButtonBackground,
-	},
-	'--expandable-marketing-card-fill-background': {
-		light: expandableMarketingCardFillBackgroundLight,
-		dark: expandableMarketingCardFillBackgroundDark,
-	},
-	'--expandable-marketing-card-svg-background': {
-		light: expandableMarketingCardSvgBackground,
-		dark: expandableMarketingCardSvgBackground,
-	},
-	'--expandable-marketing-card-svg-fill': {
-		light: expandableMarketingCardSvgFill,
-		dark: expandableMarketingCardSvgFill,
 	},
 	'--explainer-atom-accent': {
 		light: explainerAtomAccentLight,
@@ -6995,6 +6985,18 @@ const paletteColours = {
 		light: speechBubbleBackgroundLight,
 		dark: speechBubbleBackgroundLight,
 	},
+	'--stacked-progress-background': {
+		light: () => sourcePalette.neutral[86],
+		/**
+		 * Custom colour to prevent clashes with the neutral palette, which
+		 * is sometimes used for sections of the stacked progress bar.
+		 */
+		dark: () => '#606060',
+	},
+	'--stacked-progress-to-win': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
+	},
 	'--staff-contributor-badge': {
 		light: staffBadgeLight,
 		dark: staffBadgeDark,
@@ -7194,6 +7196,34 @@ const paletteColours = {
 	'--trending-topics-text': {
 		light: () => sourcePalette.neutral[20],
 		dark: () => sourcePalette.neutral[73],
+	},
+	'--uk-elections-conservative': {
+		light: () => sourcePalette.sport[400],
+		dark: () => '#009AE1',
+	},
+	'--uk-elections-labour': {
+		light: () => sourcePalette.news[400],
+		dark: () => '#DC2E1C',
+	},
+	'--uk-elections-lib-dem': {
+		light: () => sourcePalette.opinion[450],
+		dark: () => sourcePalette.opinion[500],
+	},
+	'--uk-elections-reform': {
+		light: () => '#3DBBE2',
+		dark: () => '#3DBBE2',
+	},
+	'--uk-elections-snp': {
+		light: () => '#F5DC00',
+		dark: () => '#F5DC00',
+	},
+	'--us-elections-democrats': {
+		light: () => '#093CA3',
+		dark: () => '#3261DB',
+	},
+	'--us-elections-republicans': {
+		light: () => sourcePalette.news[400],
+		dark: () => '#DC2E1C',
 	},
 	'--weather-icon': {
 		light: () => sourcePalette.neutral[97],

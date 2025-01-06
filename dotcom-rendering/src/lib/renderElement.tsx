@@ -64,7 +64,6 @@ import {
 	interactiveLegacyFigureClasses,
 	isInteractive,
 } from '../layouts/lib/interactiveLegacyStyling';
-import { getSharingUrls } from '../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType, StarRating } from '../types/content';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
@@ -583,8 +582,9 @@ export const renderElement = ({
 								id={element.id}
 								questions={element.questions}
 								resultBuckets={element.resultBuckets}
-								sharingUrls={getSharingUrls(pageId, webTitle)}
-								theme={format.theme}
+								pageId={pageId}
+								webTitle={webTitle}
+								format={format}
 							/>
 						</Island>
 					)}
@@ -597,8 +597,9 @@ export const renderElement = ({
 								id={element.id}
 								questions={element.questions}
 								resultGroups={element.resultGroups}
-								sharingUrls={getSharingUrls(pageId, webTitle)}
-								theme={format.theme}
+								pageId={pageId}
+								webTitle={webTitle}
+								format={format}
 							/>
 						</Island>
 					)}

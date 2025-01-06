@@ -6,7 +6,6 @@ import {
 	natureResultGroups,
 	resultGroups,
 } from '../../fixtures/manual/knowledgeQuizAtom';
-import { sharingUrls } from '../../fixtures/manual/sharingUrls';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -29,8 +28,13 @@ export const Default = {
 		id: '2c6bf552-2827-4256-b3a0-f557d215c394',
 		questions: exampleKnowledgeQuestions,
 		resultGroups,
-		sharingUrls,
-		theme: Pillar.News,
+		pageId: '/',
+		webTitle: 'Quiz title',
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Comment,
+			theme: Pillar.News,
+		},
 	},
 	decorators: [
 		splitTheme([
@@ -63,7 +67,6 @@ export const BatchedResults = {
 export const LabsTheme = {
 	args: {
 		...Default.args,
-		theme: ArticleSpecial.Labs,
 	},
 	decorators: [
 		splitTheme([

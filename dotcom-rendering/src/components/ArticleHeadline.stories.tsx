@@ -253,6 +253,14 @@ export const EditorialDesign = {
 	},
 } satisfies Story;
 
+/**
+ * Skipped (flaky).
+ *
+ * This story fails intermittently. It is unclear to whether it is the icon, the
+ * image, the font, or something else that is causing the issue.
+ *
+ * Example: https://www.chromatic.com/test?appId=637e406971a9af18ddba0505&id=665eecc338adeba89d31f92b
+ */
 export const MatchReportDesignSportTheme = {
 	args: {
 		...StandardDesign.args,
@@ -263,6 +271,9 @@ export const MatchReportDesignSportTheme = {
 		},
 	},
 	name: 'MatchReport Design, Sport Theme',
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
 } satisfies Story;
 
 export const LiveBlogDesign = {
