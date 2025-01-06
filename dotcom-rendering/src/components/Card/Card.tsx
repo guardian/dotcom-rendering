@@ -154,16 +154,6 @@ export type Props = {
 	audioDuration?: string;
 };
 
-const waveformWrapper = css`
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	svg {
-		display: block;
-		height: 33px;
-	}
-`;
-
 const starWrapper = (cardHasImage: boolean) => css`
 	background-color: ${sourcePalette.brandAlt[400]};
 	color: ${sourcePalette.neutral[0]};
@@ -186,6 +176,25 @@ const StarRatingComponent = ({
 		<StarRating rating={rating} size="small" />
 	</div>
 );
+
+const waveformWrapper = (
+	imagePositionOnMobile?: ImagePositionType,
+	imagePositionOnDesktop?: ImagePositionType,
+) => css`
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	svg {
+		display: block;
+		height: ${imagePositionOnMobile === 'top' ? 50 : 29}px;
+		${from.mobileMedium} {
+			height: ${imagePositionOnMobile === 'top' ? 50 : 33}px;
+		}
+		${from.tablet} {
+			height: ${imagePositionOnDesktop === 'top' ? 50 : 33}px;
+		}
+	}
+`;
 
 const HorizontalDivider = () => (
 	<div
@@ -726,7 +735,12 @@ export const Card = ({
 				 * card, behind everything else
 				 */}
 				{mainMedia?.type === 'Audio' && (
-					<div css={waveformWrapper}>
+					<div
+						css={waveformWrapper(
+							imagePositionOnMobile,
+							imagePositionOnDesktop,
+						)}
+					>
 						<SvgWaveform />
 					</div>
 				)}
