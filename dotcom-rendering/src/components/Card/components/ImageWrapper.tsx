@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { between, from, until } from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import type { CardImageType } from '../../../types/layout';
 import { PlayIcon } from './PlayIcon';
 
@@ -42,6 +42,7 @@ type Props = {
 	 * want it to be shown whilst retaining it for existing slideshows.
 	 */
 	hideImageOverlay?: boolean;
+	padImage?: boolean;
 };
 
 /**
@@ -115,6 +116,10 @@ const fixImageWidth = ({
 	`}
 `;
 
+const imagePadding = css`
+	padding: ${space[2]}px;
+`;
+
 export const ImageWrapper = ({
 	children,
 	imageSize,
@@ -124,6 +129,7 @@ export const ImageWrapper = ({
 	imagePositionOnMobile,
 	showPlayIcon,
 	hideImageOverlay,
+	padImage,
 }: Props) => {
 	const isHorizontalOnDesktop =
 		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
@@ -170,6 +176,7 @@ export const ImageWrapper = ({
 						display: block;
 					}
 				`,
+				padImage && imagePadding,
 			]}
 		>
 			<>
