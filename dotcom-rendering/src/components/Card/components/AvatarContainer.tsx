@@ -24,20 +24,46 @@ const largerTopMargin = css`
 	}
 `;
 
-const fairgroundSizingStyles = (
+const sizingStyles = (
 	imageSize: ImageSizeType,
+	isBetaContainer: boolean,
 	isVerticalOnDesktop: boolean,
 	isVerticalOnMobile: boolean,
 ) => {
-	if (isVerticalOnDesktop && isVerticalOnMobile) {
-		return css`
-			width: 90px;
-			height: 90px;
-			${until.desktop} {
-				height: 80px;
-				width: 80px;
-			}
-		`;
+	if (!isBetaContainer) {
+		switch (imageSize) {
+			case 'small':
+				return css`
+					${until.tablet} {
+						height: 73px;
+						width: 73px;
+					}
+
+					height: ${isVerticalOnDesktop ? '132px' : '73px'};
+					width: ${isVerticalOnDesktop ? '132px' : '73px'};
+				`;
+			case 'jumbo':
+				return css`
+					height: ${isVerticalOnDesktop ? '132px' : '180px'};
+					width: ${isVerticalOnDesktop ? '132px' : '180px'};
+				`;
+			default:
+				return css`
+					/* Below 980 */
+					${until.desktop} {
+						height: 108px;
+						width: 108px;
+					}
+					/* Below 740 */
+					${until.tablet} {
+						height: 73px;
+						width: 73px;
+					}
+					/* Otherwise */
+					height: 132px;
+					width: 132px;
+				`;
+		}
 	}
 
 	if (isVerticalOnDesktop && !isVerticalOnMobile) {
@@ -92,42 +118,6 @@ const fairgroundSizingStyles = (
 	}
 };
 
-const sizingStyles = (imageSize: ImageSizeType, isVertical: boolean) => {
-	switch (imageSize) {
-		case 'small':
-			return css`
-				${until.tablet} {
-					height: 73px;
-					width: 73px;
-				}
-
-				height: ${isVertical ? '132px' : '73px'};
-				width: ${isVertical ? '132px' : '73px'};
-			`;
-		case 'jumbo':
-			return css`
-				height: ${isVertical ? '132px' : '180px'};
-				width: ${isVertical ? '132px' : '180px'};
-			`;
-		default:
-			return css`
-				/* Below 980 */
-				${until.desktop} {
-					height: 108px;
-					width: 108px;
-				}
-				/* Below 740 */
-				${until.tablet} {
-					height: 73px;
-					width: 73px;
-				}
-				/* Otherwise */
-				height: 132px;
-				width: 132px;
-			`;
-	}
-};
-
 export const AvatarContainer = ({
 	children,
 	imageSize,
@@ -146,13 +136,12 @@ export const AvatarContainer = ({
 				sideMarginStyles,
 				!isBetaContainer && topMarginStyles,
 				!isBetaContainer && isVerticalOnDesktop && largerTopMargin,
-				isBetaContainer
-					? fairgroundSizingStyles(
-							imageSize,
-							isVerticalOnDesktop,
-							isVerticalOnMobile,
-					  )
-					: sizingStyles(imageSize, isVerticalOnDesktop),
+				sizingStyles(
+					imageSize,
+					isBetaContainer,
+					isVerticalOnDesktop,
+					isVerticalOnMobile,
+				),
 			]}
 		>
 			{children}
