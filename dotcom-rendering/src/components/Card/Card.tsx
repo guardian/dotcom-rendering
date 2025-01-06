@@ -71,17 +71,6 @@ export const BETA_CONTAINERS = [
 	'static/medium/4',
 ];
 
-export const BETA_CONTAINERS = [
-	'scrollable/highlights',
-	'flexible/special',
-	'flexible/general',
-	'scrollable/small',
-	'scrollable/medium',
-	'scrollable/feature',
-	'static/feature/2',
-	'static/medium/4',
-];
-
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
@@ -475,8 +464,6 @@ export const Card = ({
 		containerType === 'flexible/general';
 
 	const isSmallCard = containerType === 'scrollable/small';
-
-	const isBetaContainer = BETA_CONTAINERS.includes(containerType ?? '');
 
 	const imageFixedSizeOptions = (): ImageFixedSizeOptions => {
 		if (isSmallCard) {

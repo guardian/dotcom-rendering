@@ -56,14 +56,8 @@ type Props = {
 };
 
 const decideImageWidths = (
-	imageSize?: ImageSizeType,
+	imageSize: ImageSizeType,
 ): [ImageWidthType, ...ImageWidthType[]] => {
-	if (!imageSize) {
-		return [
-			{ breakpoint: breakpoints.mobile, width: 75 },
-			{ breakpoint: breakpoints.tablet, width: 140 },
-		];
-	}
 	switch (imageSize) {
 		case 'small':
 			return [{ breakpoint: breakpoints.mobile, width: 80 }];
@@ -72,8 +66,7 @@ const decideImageWidths = (
 		default:
 			return [
 				{ breakpoint: breakpoints.mobile, width: 80 },
-				{ breakpoint: breakpoints.tablet, width: 85 },
-				{ breakpoint: breakpoints.desktop, width: 95 },
+				{ breakpoint: breakpoints.desktop, width: 90 },
 			];
 
 		case 'large':
@@ -92,11 +85,17 @@ const decideImageWidths = (
 	}
 };
 
+const defaultImageSizes: [ImageWidthType, ...ImageWidthType[]] = [
+	{ breakpoint: breakpoints.mobile, width: 75 },
+	{ breakpoint: breakpoints.tablet, width: 140 },
+];
+
 export const Avatar = ({ src, alt, shape = 'round', imageSize }: Props) => {
-	const sources = generateSources(
-		getSourceImageUrl(src),
-		decideImageWidths(imageSize),
-	);
+	const imageWidths = imageSize
+		? decideImageWidths(imageSize)
+		: defaultImageSizes;
+
+	const sources = generateSources(getSourceImageUrl(src), imageWidths);
 
 	/**
 	 * The assumption here is readers on devices that do not support srcset

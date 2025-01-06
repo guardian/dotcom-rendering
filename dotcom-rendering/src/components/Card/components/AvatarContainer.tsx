@@ -31,26 +31,22 @@ const fairgroundSizingStyles = (
 ) => {
 	if (isVerticalOnDesktop && isVerticalOnMobile) {
 		return css`
-			width: 95px;
-			height: 95px;
-			${between.tablet.and.desktop} {
-				height: 70px;
-				width: 70px;
+			width: 90px;
+			height: 90px;
+			${until.desktop} {
+				height: 80px;
+				width: 80px;
 			}
 		`;
 	}
 
 	if (isVerticalOnDesktop && !isVerticalOnMobile) {
 		return css`
-			width: 95px;
-			height: 95px;
-			${until.desktop} {
+			width: 90px;
+			height: 90px;
+			${between.tablet.and.desktop} {
 				height: 70px;
 				width: 70px;
-			}
-			${until.tablet} {
-				height: 90px;
-				width: 90px;
 			}
 		`;
 	}
@@ -65,13 +61,9 @@ const fairgroundSizingStyles = (
 			return css`
 				width: 150px;
 				height: 150px;
-				${until.desktop} {
+				${between.tablet.and.desktop} {
 					height: 130px;
 					width: 130px;
-				}
-				${until.tablet} {
-					height: 150px;
-					width: 150px;
 				}
 			`;
 		case 'jumbo':
@@ -90,12 +82,8 @@ const fairgroundSizingStyles = (
 		case 'medium':
 		default:
 			return css`
-				width: 95px;
-				height: 95px;
-				${until.desktop} {
-					height: 85px;
-					width: 85px;
-				}
+				width: 90px;
+				height: 90px;
 				${until.tablet} {
 					height: 80px;
 					width: 80px;
