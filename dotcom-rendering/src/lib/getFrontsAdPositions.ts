@@ -15,7 +15,7 @@ type GroupedCounts = {
 	splash: number;
 };
 
-type AdCandidate = Pick<DCRCollectionType, 'collectionType'>;
+type AdCandidate = Pick<DCRCollectionType, 'collectionType' | 'config'>;
 
 const getMerchHighPosition = (collectionCount: number): number =>
 	collectionCount >= 4 ? 2 : 0;
@@ -38,6 +38,15 @@ const isBeforeThrasher = (index: number, collections: AdCandidate[]) =>
 const isMostViewedContainer = (collection: AdCandidate) =>
 	collection.collectionType === 'news/most-popular';
 
+const isSecondaryLevelContainer = (collection: AdCandidate | undefined) =>
+	collection?.config.containerLevel === 'Secondary';
+
+const isBeforeASecondaryLevelContainer = (
+	index: number,
+	collections: AdCandidate[],
+) => isSecondaryLevelContainer(collections[index + 1]);
+
+/** Detemines whether an ad can be inserted above the current container on mobile */
 const shouldInsertAd =
 	(merchHighPosition: number) =>
 	(collection: AdCandidate, index: number, collections: AdCandidate[]) =>
@@ -45,7 +54,8 @@ const shouldInsertAd =
 			isFirstContainerAndThrasher(collection.collectionType, index) ||
 			isMerchHighPosition(index, merchHighPosition) ||
 			isBeforeThrasher(index, collections) ||
-			isMostViewedContainer(collection)
+			isMostViewedContainer(collection) ||
+			isBeforeASecondaryLevelContainer(index, collections)
 		);
 
 const isEvenIndex = (_collection: unknown, index: number): boolean =>
