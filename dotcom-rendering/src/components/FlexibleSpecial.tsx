@@ -1,3 +1,4 @@
+import { ArticleDesign } from 'src/lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
 import type { BoostLevel } from '../types/content';
 import type {
@@ -167,6 +168,7 @@ export const OneCardLayout = ({
 					showTopBarMobile={true}
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
+					showKickerImage={card.format.design === ArticleDesign.Audio}
 				/>
 			</LI>
 		</UL>
