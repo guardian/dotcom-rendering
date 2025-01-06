@@ -5418,10 +5418,19 @@ const lastUpdatedTextDark: PaletteFunction = ({ theme, design }) => {
 	}
 };
 
-const miniProfilesTextSubduedLight: PaletteFunction = () =>
+const bioLinkUnderline: PaletteFunction = () => sourcePalette.neutral[86];
+
+const multiBylineNonLinkedTextLight: PaletteFunction = () =>
 	sourcePalette.neutral[46];
-const miniProfilesTextSubduedDark: PaletteFunction = () =>
-	sourcePalette.neutral[86];
+const multiBylineNonLinkedTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+
+const bioTextSubduedLight: PaletteFunction = () => sourcePalette.neutral[46];
+const bioTextSubduedDark: PaletteFunction = () => sourcePalette.neutral[86];
+
+const endNoteTextSubduedLight: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+const endNoteTextSubduedDark: PaletteFunction = () => sourcePalette.neutral[86];
 
 const interactiveAtomBackgroundLight: PaletteFunction = () => 'transparent';
 const interactiveAtomBackgroundDark: PaletteFunction = () =>
@@ -5932,6 +5941,14 @@ const paletteColours = {
 		light: avatarLight,
 		dark: avatarDark,
 	},
+	'--bio-link-underline': {
+		light: bioLinkUnderline,
+		dark: bioLinkUnderline,
+	},
+	'--bio-text-subdued': {
+		light: bioTextSubduedLight,
+		dark: bioTextSubduedDark,
+	},
 	'--block-quote-fill': {
 		light: blockQuoteFillLight,
 		dark: blockQuoteFillDark,
@@ -6356,6 +6373,10 @@ const paletteColours = {
 		light: emailSignupTextSubduedLight,
 		dark: emailSignupTextSubduedDark,
 	},
+	'--end-note-text-subdued': {
+		light: endNoteTextSubduedLight,
+		dark: endNoteTextSubduedDark,
+	},
 	'--eu-parliament-ecr': {
 		light: () => sourcePalette.brand[500],
 		dark: () => '#009AE1',
@@ -6685,10 +6706,6 @@ const paletteColours = {
 		light: matchActiveTabBorderLight,
 		dark: matchActiveTabBorderDark,
 	},
-	'--mini-profiles-text-subdued': {
-		light: miniProfilesTextSubduedLight,
-		dark: miniProfilesTextSubduedDark,
-	},
 	'--most-viewed-description': {
 		light: () => sourcePalette.neutral[46],
 		dark: () => sourcePalette.neutral[60],
@@ -6704,6 +6721,10 @@ const paletteColours = {
 	'--most-viewed-tab-border': {
 		light: mostViewedTabBorderLight,
 		dark: mostViewedTabBorderDark,
+	},
+	'--multi-byline-non-linked-text': {
+		light: multiBylineNonLinkedTextLight,
+		dark: multiBylineNonLinkedTextDark,
 	},
 	'--nav-reader-revenue-link-text': {
 		light: navReaderRevenueLinkText,
