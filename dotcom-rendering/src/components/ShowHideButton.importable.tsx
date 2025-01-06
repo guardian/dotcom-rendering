@@ -40,8 +40,8 @@ const getContainerStates = (): ContainerStates => {
  * Component to toggle the visibility of a front container. Used within FrontSection.
  **/
 export const ShowHideButton = ({ sectionId }: Props) => {
-	const [isExpanded, setIsExpanded] = useState(true);
 	const [containerStates, setContainerStates] = useState<ContainerStates>({});
+	const [isExpanded, setIsExpanded] = useState(true);
 	const textShowHide = isExpanded ? 'Hide' : 'Show';
 	const isSignedIn = useIsSignedIn();
 
@@ -58,12 +58,21 @@ export const ShowHideButton = ({ sectionId }: Props) => {
 		}
 
 		storage.local.set(`gu.prefs.container-states`, containerStates);
-		setIsExpanded(!isExpanded);
 	};
 
 	useEffect(() => {
+		const section: Element | null =
+			window.document.getElementById(sectionId);
+
 		setContainerStates(getContainerStates());
-	}, []);
+
+		const isClosed = containerStates[sectionId] === 'closed';
+		setIsExpanded(!isClosed);
+
+		isClosed
+			? section?.classList.add('hidden')
+			: section?.classList.remove('hidden');
+	}, [containerStates, sectionId]);
 
 	return (
 		isSignedIn === true && (
