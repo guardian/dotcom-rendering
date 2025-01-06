@@ -123,13 +123,11 @@ const requestNewData = () => {
 const featuresDataIsOld = () =>
 	cookieIsExpiredOrMissing(USER_FEATURES_EXPIRY_COOKIE);
 
-const userNeedsNewFeatureData = (): boolean => featuresDataIsOld();
-
 const userHasDataAfterSignout = async (): Promise<boolean> =>
 	!(await isUserLoggedInOktaRefactor()) && userHasData();
 
 const refresh = async (): Promise<void> => {
-	if ((await isUserLoggedInOktaRefactor()) && userNeedsNewFeatureData()) {
+	if ((await isUserLoggedInOktaRefactor()) && featuresDataIsOld()) {
 		return requestNewData();
 	} else if ((await userHasDataAfterSignout()) && !forcedAdFreeMode) {
 		deleteOldData();
