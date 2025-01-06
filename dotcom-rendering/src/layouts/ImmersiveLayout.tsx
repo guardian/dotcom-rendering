@@ -22,7 +22,6 @@ import { Caption } from '../components/Caption';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { ExpandableMarketingCardWrapper } from '../components/ExpandableMarketingCardWrapper.importable';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
@@ -164,26 +163,6 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 const maxWidth = css`
 	${from.desktop} {
 		max-width: 620px;
-	}
-`;
-
-const usCardStyles = css`
-	align-self: start;
-	position: sticky;
-	top: 0;
-	z-index: ${getZIndex('expandableMarketingCardOverlay')};
-
-	${from.leftCol} {
-		margin-top: ${space[6]}px;
-		margin-bottom: ${space[9]}px;
-
-		/* To align with rich links - if we move this feature to production, we should remove this and make rich link align with everything instead */
-		margin-left: 1px;
-		margin-right: -1px;
-	}
-
-	${from.wide} {
-		margin-left: 0;
 	}
 `;
 
@@ -648,50 +627,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										{!!article.affiliateLinksDisclaimer && (
 											<AffiliateDisclaimer />
 										)}
-										{isWeb && (
-											<div css={usCardStyles}>
-												<Hide
-													when="below"
-													breakpoint="leftCol"
-												>
-													<Island
-														priority="enhancement"
-														defer={{
-															until: 'visible',
-														}}
-													>
-														<ExpandableMarketingCardWrapper
-															guardianBaseURL={
-																article.guardianBaseURL
-															}
-														/>
-													</Island>
-												</Hide>
-											</div>
-										)}
 									</>
 								)}
 							</div>
 						</GridItem>
 						<GridItem area="body">
-							{isWeb && (
-								<Hide when="above" breakpoint="leftCol">
-									<Island
-										priority="enhancement"
-										/**
-										 * We display the card immediately if the viewport is below the top of
-										 * the article body, so we must use "idle" instead of "visible".
-										 */
-										defer={{ until: 'idle' }}
-									>
-										<ExpandableMarketingCardWrapper
-											guardianBaseURL={
-												article.guardianBaseURL
-											}
-										/>
-									</Island>
-								</Hide>
-							)}
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}

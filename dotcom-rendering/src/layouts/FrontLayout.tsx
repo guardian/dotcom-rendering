@@ -742,9 +742,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								collectionBranding={
 									collection.collectionBranding
 								}
-								containerLevel={
-									collection.config.containerLevel
-								}
+								containerLevel={collection.containerLevel}
 								containerSpacing={collection.containerSpacing}
 							>
 								<DecideContainer
