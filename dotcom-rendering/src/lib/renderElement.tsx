@@ -69,7 +69,6 @@ import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType, StarRating } from '../types/content';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
 import type { EditionId } from './edition';
-import { getSharingUrls } from './sharing-urls';
 
 type Props = {
 	format: ArticleFormat;
