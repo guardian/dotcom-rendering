@@ -4,7 +4,6 @@ import { adBlockAsk } from './tests/ad-block-ask';
 import { consentlessAds } from './tests/consentless-ads';
 import { integrateIma } from './tests/integrate-ima';
 import { mpuWhenNoEpic } from './tests/mpu-when-no-epic';
-import { onwardsContentArticle } from './tests/onwards-content-article';
 import { optimiseSpacefinderInline } from './tests/optimise-spacefinder-inline';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
@@ -22,5 +21,4 @@ export const tests: ABTest[] = [
 	adBlockAsk,
 	optimiseSpacefinderInline,
 	UsaExpandableMarketingCard,
-	onwardsContentArticle,
 ];
