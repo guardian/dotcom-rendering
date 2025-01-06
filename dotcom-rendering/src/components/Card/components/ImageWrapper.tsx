@@ -140,7 +140,9 @@ export const ImageWrapper = ({
 					flexBasisStyles({
 						imageSize,
 					}),
-				(imageType === 'picture' || imageType === 'video') &&
+				(imageType === 'picture' ||
+					imageType === 'video' ||
+					imageType === 'podcast') &&
 					isHorizontalOnDesktop &&
 					flexBasisStyles({
 						imageSize,
