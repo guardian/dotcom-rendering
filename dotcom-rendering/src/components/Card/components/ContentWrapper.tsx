@@ -64,7 +64,10 @@ const flexBasisStyles = ({
 const paddingStyles = (
 	imagePosition: ImagePositionType,
 	isFlexibleContainer: boolean,
+	paddingWidth: 'small' | 'large',
 ) => {
+	const paddingSize =
+		paddingWidth === 'small' ? `${space[1]}` : `${space[2]}`;
 	/**
 	 * If we're in a flexible container there is a 20px gap between the image
 	 * and content. We don't apply padding to the content on the same edge as
@@ -72,18 +75,18 @@ const paddingStyles = (
 	 */
 	if (isFlexibleContainer && imagePosition === 'left') {
 		return css`
-			padding: ${space[1]}px ${space[1]}px ${space[1]}px 0;
+			padding: ${paddingSize}px ${paddingSize}px ${paddingSize}px 0;
 		`;
 	}
 
 	if (isFlexibleContainer && imagePosition === 'right') {
 		return css`
-			padding: ${space[1]}px 0 ${space[1]}px ${space[1]}px;
+			padding: ${paddingSize}px 0 ${paddingSize}px ${paddingSize}px;
 		`;
 	}
 
 	return css`
-		padding: ${space[1]}px;
+		padding: ${paddingSize}px;
 	`;
 };
 
@@ -92,8 +95,7 @@ type Props = {
 	imageType?: CardImageType;
 	imageSize: ImageSizeType;
 	imagePositionOnDesktop: ImagePositionType;
-	hasBackgroundColour?: boolean;
-	isOnwardContent?: boolean;
+	padContent?: 'small' | 'large';
 	isFlexibleContainer?: boolean;
 };
 
@@ -102,8 +104,7 @@ export const ContentWrapper = ({
 	imageType,
 	imageSize,
 	imagePositionOnDesktop,
-	hasBackgroundColour,
-	isOnwardContent,
+	padContent,
 	isFlexibleContainer = false,
 }: Props) => {
 	const isHorizontalOnDesktop =
@@ -115,8 +116,12 @@ export const ContentWrapper = ({
 				sizingStyles,
 				isHorizontalOnDesktop &&
 					flexBasisStyles({ imageSize, imageType }),
-				(!!hasBackgroundColour || !!isOnwardContent) &&
-					paddingStyles(imagePositionOnDesktop, isFlexibleContainer),
+				padContent &&
+					paddingStyles(
+						imagePositionOnDesktop,
+						isFlexibleContainer,
+						padContent,
+					),
 			]}
 		>
 			{children}
