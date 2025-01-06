@@ -570,12 +570,12 @@ export const Card = ({
 	};
 
 	const determinePadContent = (
-		isMediaCard: boolean,
-		isBetaContainer: boolean,
-		isOnwardContent: boolean,
+		mediaCard: boolean,
+		betaContainer: boolean,
+		onwardContent: boolean,
 	): 'large' | 'small' | undefined => {
-		if (isMediaCard && isBetaContainer) return 'large';
-		if (isMediaCard || isOnwardContent) return 'small';
+		if (mediaCard && betaContainer) return 'large';
+		if (mediaCard || onwardContent) return 'small';
 		return undefined;
 	};
 
