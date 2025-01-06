@@ -843,6 +843,31 @@ export const Card = ({
 						{media.type === 'crossword' && (
 							<img src={media.imageUrl} alt="" />
 						)}
+
+						{media.type === 'podcast' && (
+							<>
+								{media.podcastImage.src ? (
+									<div css={[podcastImageStyles(imageSize)]}>
+										<CardPicture
+											mainImage={media.podcastImage.src}
+											imageSize={'small'}
+											alt={media.imageAltText}
+											loading={imageLoading}
+											roundedCorners={isOnwardContent}
+											aspectRatio={'1:1'}
+										/>
+									</div>
+								) : (
+									<CardPicture
+										mainImage={media.trailImage.src ?? ''}
+										imageSize={imageSize}
+										alt={media.trailImage.altText}
+										loading={imageLoading}
+										aspectRatio={aspectRatio}
+									/>
+								)}
+							</>
+						)}
 					</ImageWrapper>
 				)}
 
