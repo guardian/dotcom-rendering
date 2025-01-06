@@ -141,6 +141,8 @@ export type Props = {
 	trailTextColour?: string;
 	/** The square podcast series image, if it exists for a card */
 	podcastImage?: PodcastSeriesImage;
+	/** A kicker image is seperate to the main media and renders as part of the kicker */
+	showKickerImage?: boolean;
 	galleryCount?: number;
 };
 
@@ -375,6 +377,7 @@ export const Card = ({
 	trailTextSize,
 	trailTextColour,
 	podcastImage,
+	showKickerImage = false,
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- Added in preparation for UI changes to display gallery count
 	galleryCount,
 }: Props) => {
@@ -846,7 +849,7 @@ export const Card = ({
 
 						{media.type === 'podcast' && (
 							<>
-								{media.podcastImage.src ? (
+								{media.podcastImage.src && !showKickerImage ? (
 									<div css={[podcastImageStyles(imageSize)]}>
 										<CardPicture
 											mainImage={media.podcastImage.src}
@@ -915,6 +918,12 @@ export const Card = ({
 										showByline={showByline}
 										isExternalLink={isExternalLink}
 										isBetaContainer={isBetaContainer}
+										kickerImage={
+											showKickerImage &&
+											media?.type === 'podcast'
+												? media?.podcastImage
+												: undefined
+										}
 									/>
 									{!isUndefined(starRating) ? (
 										<StarRatingComponent

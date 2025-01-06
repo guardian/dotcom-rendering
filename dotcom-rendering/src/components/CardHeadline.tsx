@@ -37,10 +37,10 @@ import {
 } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
+import type { PodcastSeriesImage } from '../types/tag';
 import { Byline } from './Byline';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';
-
 type Props = {
 	/** The text shown */
 	headlineText: string;
@@ -62,6 +62,7 @@ type Props = {
 	/** Optional override of the standard card kicker colour */
 	kickerColour?: string;
 	isBetaContainer?: boolean;
+	kickerImage?: PodcastSeriesImage;
 };
 
 const sublinkStyles = css`
@@ -230,6 +231,7 @@ export const CardHeadline = ({
 	headlineColour = palette('--card-headline'),
 	kickerColour = palette('--card-kicker-text'),
 	isBetaContainer = false,
+	kickerImage,
 }: Props) => {
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
@@ -256,6 +258,7 @@ export const CardHeadline = ({
 						color={kickerColour}
 						showPulsingDot={showPulsingDot}
 						isInline={hasInlineKicker}
+						image={kickerImage}
 					/>
 				)}
 				{showQuotes && <QuoteIcon colour={kickerColour} />}
