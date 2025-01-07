@@ -7,12 +7,23 @@ import {
 import { refresh } from './user-features';
 import { fetchJson } from './user-features-lib';
 
+const fakeUserFeatures = {
+	showSupportMessaging: false,
+	contentAccess: {
+		digitalPack: true,
+		recurringContributor: false,
+		paidMember: true,
+	},
+};
+
 jest.mock('./user-features-lib', () => {
 	// Only mock the fetchJson function, rather than the whole module
 	const original = jest.requireActual('./user-features-lib');
 	return {
 		...original,
-		fetchJson: jest.fn(() => Promise.resolve()),
+		fetchJson: jest.fn(() => {
+			return Promise.resolve(fakeUserFeatures);
+		}),
 	};
 });
 
@@ -81,7 +92,7 @@ describe('Refreshing the features data', () => {
 			getAuthStatus.mockResolvedValue({
 				kind: 'SignedInWithOkta',
 			} as AuthStatus);
-			fetchJsonSpy.mockReturnValue(Promise.resolve());
+			fetchJsonSpy.mockReturnValue(Promise.resolve(fakeUserFeatures));
 		});
 
 		it('Performs an update if the user has missing data', async () => {
