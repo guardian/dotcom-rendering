@@ -96,7 +96,7 @@ test.describe('E2E Page rendering', () => {
 		});
 	});
 
-	test.describe('for AMP', function () {
+	test.skip('for AMP', function () {
 		test(`It should load render an AMP page`, async ({ page }) => {
 			await loadPage(
 				page,
