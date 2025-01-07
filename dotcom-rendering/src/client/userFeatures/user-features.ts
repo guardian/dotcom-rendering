@@ -27,7 +27,6 @@ import {
 import type { UserFeaturesResponse } from './user-features-lib';
 
 const USER_FEATURES_EXPIRY_COOKIE = 'gu_user_features_expiry';
-const ACTION_REQUIRED_FOR_COOKIE = 'gu_action_required_for';
 const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
 const AD_FREE_USER_COOKIE = 'GU_AF1';
 
@@ -36,7 +35,6 @@ const forcedAdFreeMode = !!/[#&]noadsaf(&.*)?$/.exec(window.location.hash);
 const userHasData = () => {
 	const cookie =
 		getAdFreeCookie() ??
-		getCookie({ name: ACTION_REQUIRED_FOR_COOKIE }) ??
 		getCookie({ name: USER_FEATURES_EXPIRY_COOKIE }) ??
 		getCookie({ name: HIDE_SUPPORT_MESSAGING_COOKIE });
 	return !!cookie;
@@ -65,14 +63,6 @@ const persistResponse = (JsonResponse: UserFeaturesResponse) => {
 		value: String(!JsonResponse.showSupportMessaging),
 	});
 
-	removeCookie({ name: ACTION_REQUIRED_FOR_COOKIE });
-	if (JsonResponse.alertAvailableFor) {
-		setCookie({
-			name: ACTION_REQUIRED_FOR_COOKIE,
-			value: JsonResponse.alertAvailableFor,
-		});
-	}
-
 	if (JsonResponse.contentAccess.digitalPack) {
 		setAdFreeCookie(2);
 	} else if (adFreeDataIsPresent() && !forcedAdFreeMode) {
@@ -83,7 +73,6 @@ const persistResponse = (JsonResponse: UserFeaturesResponse) => {
 const deleteOldData = (): void => {
 	removeCookie({ name: AD_FREE_USER_COOKIE });
 	removeCookie({ name: USER_FEATURES_EXPIRY_COOKIE });
-	removeCookie({ name: ACTION_REQUIRED_FOR_COOKIE });
 	removeCookie({ name: HIDE_SUPPORT_MESSAGING_COOKIE });
 };
 
