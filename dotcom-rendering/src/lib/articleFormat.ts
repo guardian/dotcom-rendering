@@ -7,6 +7,7 @@ export enum ArticleDesign {
 	Gallery,
 	Audio,
 	Video,
+	Crossword,
 	Review,
 	Analysis,
 	Explainer,
@@ -230,6 +231,8 @@ const designToFEDesign = (design: ArticleDesign): FEDesign => {
 			return 'AudioDesign';
 		case ArticleDesign.Video:
 			return 'VideoDesign';
+		case ArticleDesign.Crossword:
+			return 'CrosswordDesign';
 		case ArticleDesign.Review:
 			return 'ReviewDesign';
 		case ArticleDesign.Analysis:
