@@ -645,6 +645,7 @@ export const Card = ({
 						hideImageOverlay={
 							media.type === 'slideshow' && isFlexibleContainer
 						}
+						padImage={isMediaCard && isBetaContainer}
 					>
 						{media.type === 'slideshow' &&
 							(isFlexibleContainer ? (
