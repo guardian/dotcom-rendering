@@ -869,7 +869,7 @@ export const Card = ({
 								</HeadlineWrapper>
 							)}
 
-							{!!trailText && (
+							{!!trailText && media?.type !== 'podcast' && (
 								<TrailText
 									trailText={trailText}
 									trailTextColour={trailTextColour}
