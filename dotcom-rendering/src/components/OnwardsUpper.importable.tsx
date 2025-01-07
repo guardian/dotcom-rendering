@@ -6,12 +6,10 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
-import { useAB } from '../lib/useAB';
 import { useIsAndroid } from '../lib/useIsAndroid';
 import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
 import type { TagType } from '../types/tag';
-import { BigSixOnwardsContent } from './BigSixOnwardsContent';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
 import { Section } from './Section';
 
@@ -216,14 +214,7 @@ export const OnwardsUpper = ({
 	discussionApiUrl,
 	absoluteServerTimes,
 }: Props) => {
-	const abTestAPI = useAB()?.api;
-	const isInOnwardsAbTestVariant = abTestAPI?.isUserInVariant(
-		'OnwardsContentArticle',
-		'variant',
-	);
-
 	const isAndroid = useIsAndroid();
-
 	if (isAndroid) return null;
 
 	// Related content can be a collection of articles based on
@@ -306,18 +297,7 @@ export const OnwardsUpper = ({
 
 	return (
 		<div css={onwardsWrapper}>
-			{!!url && isInOnwardsAbTestVariant && (
-				<Section
-					fullWidth={true}
-					borderColour={palette('--article-border')}
-				>
-					<BigSixOnwardsContent
-						url={url}
-						discussionApiUrl={discussionApiUrl}
-					/>
-				</Section>
-			)}
-			{!!url && !isInOnwardsAbTestVariant && (
+			{!!url && (
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-border')}
