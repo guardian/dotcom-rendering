@@ -427,11 +427,6 @@ export const Card = ({
 		);
 	}
 
-	// If the card isn't playable, we need to show a play icon.
-	// Otherwise, this is handled by the YoutubeAtom
-	const showPlayIcon =
-		mainMedia?.type === 'Video' && !canPlayInline && showMainVideo;
-
 	const media = getMedia({
 		imageUrl: image?.src,
 		imageAltText: image?.altText,
@@ -651,7 +646,6 @@ export const Card = ({
 						imageType={media.type}
 						imagePositionOnDesktop={imagePositionOnDesktop}
 						imagePositionOnMobile={imagePositionOnMobile}
-						showPlayIcon={showPlayIcon}
 						hideImageOverlay={
 							media.type === 'slideshow' && isFlexibleContainer
 						}
@@ -803,17 +797,18 @@ export const Card = ({
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
 								/>
-								{showPlayIcon && mainMedia.duration > 0 && (
-									<MediaDuration
-										mediaDuration={mainMedia.duration}
-										imagePositionOnDesktop={
-											imagePositionOnDesktop
-										}
-										imagePositionOnMobile={
-											imagePositionOnMobile
-										}
-									/>
-								)}
+								{mainMedia?.type === 'Video' &&
+									mainMedia.duration > 0 && (
+										<MediaDuration
+											mediaDuration={mainMedia.duration}
+											imagePositionOnDesktop={
+												imagePositionOnDesktop
+											}
+											imagePositionOnMobile={
+												imagePositionOnMobile
+											}
+										/>
+									)}
 							</>
 						)}
 						{media.type === 'crossword' && (
