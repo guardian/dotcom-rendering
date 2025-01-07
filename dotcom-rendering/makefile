@@ -82,13 +82,6 @@ playwright-open: clear clean-dist install build
 	$(call log, "starting DEV server and opening Playwright UI")
 	@pnpm playwright:open
 
-# AMP validation has been temporarly turned off whilst we trial removing AMP pages.
-# If AMP is permanently removed, this check should be deleted.
-
-# ampValidation: clean-dist install
-# 	$(call log, "starting AMP Validation test")
-# 	@node scripts/test/amp-validation.js
-
 buildCheck:
 	$(call log, "checking build files")
 	@node ./scripts/test/build-check.js
