@@ -4,7 +4,8 @@ export type SharePlatform =
 	| 'email'
 	| 'whatsApp'
 	| 'linkedIn'
-	| 'messenger';
+	| 'messenger'
+	| 'bluesky';
 
 export type RichLinkCardType =
 	| 'special-report'

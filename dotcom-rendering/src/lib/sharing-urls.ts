@@ -86,6 +86,13 @@ export const getSharingUrls = (
 			},
 			baseUrl: 'fb-messenger://share',
 		},
+		bluesky: {
+			userMessage: 'Share on Bluesky',
+			params: {
+				text: `"${title}" ${articleUrl}`,
+			},
+			baseUrl: 'bluesky://intent/compose',
+		},
 	};
 
 	return Object.keys(platforms).reduce((shareUrls, platform) => {
