@@ -96,25 +96,5 @@ test.describe('E2E Page rendering', () => {
 		});
 	});
 
-	test.skip('for AMP', function () {
-		test(`It should load render an AMP page`, async ({ page }) => {
-			await loadPage(
-				page,
-				`/AMPArticle/https://amp.theguardian.com/commentisfree/2019/oct/16/impostor-syndrome-class-unfairness`,
-			);
-
-			await expect(page.locator('header').first()).toContainText(
-				'Opinion',
-			);
-
-			// In this AMP Article we'd expect three advert slots to be inserted
-			// (note each of these slots will itself contain a regional slot, that will only appear in certain geos)
-			// And each to have the follow IDs
-			await expect(page.locator('#ad-1')).toBeAttached();
-			await expect(page.locator('#ad-2')).toBeAttached();
-			await expect(page.locator('#ad-3')).toBeAttached();
-		});
-	});
-
 	// TODO e2e add skipped tests from article.e2e.cy.js
 });
