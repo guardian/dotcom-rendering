@@ -291,6 +291,7 @@ export type FEFrontCard = {
 		group: string;
 		isLive: boolean;
 		galleryCount?: number;
+		audioDuration?: string;
 	};
 	discussion: {
 		isCommentable: boolean;
@@ -350,6 +351,7 @@ export type DCRFrontCard = {
 	showMainVideo?: boolean;
 	galleryCount?: number;
 	podcastImage?: PodcastSeriesImage;
+	audioDuration?: string;
 };
 
 export type DCRSlideshowImage = {

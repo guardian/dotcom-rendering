@@ -1034,6 +1034,9 @@
                                                 },
                                                 "galleryCount": {
                                                     "type": "number"
+                                                },
+                                                "audioDuration": {
+                                                    "type": "string"
                                                 }
                                             },
                                             "required": [
@@ -1785,6 +1788,9 @@
                                                 },
                                                 "galleryCount": {
                                                     "type": "number"
+                                                },
+                                                "audioDuration": {
+                                                    "type": "string"
                                                 }
                                             },
                                             "required": [
@@ -2536,6 +2542,9 @@
                                                 },
                                                 "galleryCount": {
                                                     "type": "number"
+                                                },
+                                                "audioDuration": {
+                                                    "type": "string"
                                                 }
                                             },
                                             "required": [
