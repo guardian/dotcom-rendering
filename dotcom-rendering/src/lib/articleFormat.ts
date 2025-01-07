@@ -76,6 +76,8 @@ export const decideDesign = ({ design }: Partial<FEFormat>): ArticleDesign => {
 			return ArticleDesign.Audio;
 		case 'VideoDesign':
 			return ArticleDesign.Video;
+		case 'CrosswordDesign':
+			return ArticleDesign.Crossword;
 		case 'ReviewDesign':
 			return ArticleDesign.Review;
 		case 'AnalysisDesign':
