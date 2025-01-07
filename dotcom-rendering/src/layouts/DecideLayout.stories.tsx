@@ -237,7 +237,11 @@ export const WebPhotoEssayImmersiveLabsLight: Story = {
 	},
 	parameters: {
 		...webParameters,
-		chromatic: { disableSnapshot: true },
+		chromatic: {
+			ignoreSelectors: [
+				'[data-testid="interactive-element-Amazon%20The%20Romanoffs%20footer"]',
+			],
+		},
 	},
 };
 
