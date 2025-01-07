@@ -147,7 +147,6 @@ export type Props = {
 	/** The square podcast series image, if it exists for a card */
 	podcastImage?: PodcastSeriesImage;
 	galleryCount?: number;
-	// eslint-disable-next-line react/no-unused-prop-types -- adding
 	audioDuration?: string;
 };
 
@@ -354,6 +353,7 @@ export const Card = ({
 	trailTextColour,
 	podcastImage,
 	galleryCount,
+	audioDuration,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -433,7 +433,7 @@ export const Card = ({
 		>
 			{mainMedia?.type === 'Audio' && (
 				<Pill
-					content="0:00" // TODO: get podcast duration
+					content={audioDuration ?? ''}
 					icon={<SvgMediaControlsPlay />}
 				/>
 			)}
