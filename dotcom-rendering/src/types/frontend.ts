@@ -172,12 +172,12 @@ type ThemePillar =
 	| 'LifestylePillar';
 
 type ThemeSpecial = 'SpecialReportTheme' | 'Labs' | 'SpecialReportAltTheme';
-export type FETheme = ThemePillar | ThemeSpecial;
+type FETheme = ThemePillar | ThemeSpecial;
 
 // FEDesign is what frontend gives (originating in the capi scala client) us on the Format field
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala
 
-export type FEDesign =
+type FEDesign =
 	| 'ArticleDesign'
 	| 'PictureDesign'
 	| 'GalleryDesign'
@@ -205,7 +205,7 @@ export type FEDesign =
 	| 'ProfileDesign'; // FEDisplay is the display information passed through from frontend (originating in the capi scala client) and dictates the displaystyle of the content e.g. Immersive
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala
 
-export type FEDisplay =
+type FEDisplay =
 	| 'StandardDisplay'
 	| 'ImmersiveDisplay'
 	| 'ShowcaseDisplay'
