@@ -525,13 +525,15 @@ export const Card = ({
 		if (sublinkPosition === 'none') return null;
 		if (sublinkPosition === 'outer') {
 			return (
-				<SupportingContent
-					supportingContent={supportingContent}
-					containerPalette={containerPalette}
-					alignment={supportingContentAlignment}
-					isDynamo={isDynamo}
-					fillBackgroundOnMobile={isFlexSplash}
-				/>
+				<div style={{ flexBasis: `100%` }}>
+					<SupportingContent
+						supportingContent={supportingContent}
+						containerPalette={containerPalette}
+						alignment={supportingContentAlignment}
+						isDynamo={isDynamo}
+						fillBackgroundOnMobile={isFlexSplash}
+					/>
+				</div>
 			);
 		}
 		return (
@@ -954,6 +956,14 @@ export const Card = ({
 			</CardLayout>
 
 			<div
+				css={
+					/** If we have liveblog links or sublink links in the outer position, we set flex-basis so that they sit below the image */
+					(liveUpdatesPosition === 'outer' ||
+						sublinkPosition === 'outer') &&
+					css`
+						flex-basis: 100%;
+					`
+				}
 				style={{
 					padding:
 						isMediaCard || isOnwardContent ? `0 ${space[2]}px` : 0,
