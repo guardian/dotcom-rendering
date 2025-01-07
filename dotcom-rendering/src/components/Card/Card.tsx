@@ -569,6 +569,16 @@ export const Card = ({
 		);
 	};
 
+	const determinePadContent = (
+		mediaCard: boolean,
+		betaContainer: boolean,
+		onwardContent: boolean,
+	): 'large' | 'small' | undefined => {
+		if (mediaCard && betaContainer) return 'large';
+		if (mediaCard || onwardContent) return 'small';
+		return undefined;
+	};
+
 	return (
 		<CardWrapper
 			format={format}
@@ -817,8 +827,11 @@ export const Card = ({
 						imageType={media?.type}
 						imageSize={imageSize}
 						imagePositionOnDesktop={imagePositionOnDesktop}
-						hasBackgroundColour={isMediaCard}
-						isOnwardContent={isOnwardContent}
+						padContent={determinePadContent(
+							isMediaCard,
+							isBetaContainer,
+							isOnwardContent,
+						)}
 						isFlexibleContainer={isFlexibleContainer}
 					>
 						{/* This div is needed to keep the headline and trail text justified at the start */}
