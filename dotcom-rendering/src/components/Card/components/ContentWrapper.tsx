@@ -64,10 +64,8 @@ const flexBasisStyles = ({
 const paddingStyles = (
 	imagePosition: ImagePositionType,
 	isFlexibleContainer: boolean,
-	paddingWidth: 'small' | 'large',
+	paddingWidth: 1 | 2,
 ) => {
-	const paddingSize =
-		paddingWidth === 'small' ? `${space[1]}` : `${space[2]}`;
 	/**
 	 * If we're in a flexible container there is a 20px gap between the image
 	 * and content. We don't apply padding to the content on the same edge as
@@ -75,18 +73,20 @@ const paddingStyles = (
 	 */
 	if (isFlexibleContainer && imagePosition === 'left') {
 		return css`
-			padding: ${paddingSize}px ${paddingSize}px ${paddingSize}px 0;
+			padding: ${space[paddingWidth]}px ${space[paddingWidth]}px
+				${space[paddingWidth]}px 0;
 		`;
 	}
 
 	if (isFlexibleContainer && imagePosition === 'right') {
 		return css`
-			padding: ${paddingSize}px 0 ${paddingSize}px ${paddingSize}px;
+			padding: ${space[paddingWidth]}px 0 ${space[paddingWidth]}px
+				${space[paddingWidth]}px;
 		`;
 	}
 
 	return css`
-		padding: ${paddingSize}px;
+		padding: ${space[paddingWidth]}px;
 	`;
 };
 
@@ -120,7 +120,7 @@ export const ContentWrapper = ({
 					paddingStyles(
 						imagePositionOnDesktop,
 						isFlexibleContainer,
-						padContent,
+						padContent === 'small' ? 1 : 2,
 					),
 			]}
 		>
