@@ -183,9 +183,11 @@ const waveformWrapper = (
 ) => css`
 	position: absolute;
 	left: 0;
+	right: 0;
 	bottom: 0;
 	svg {
 		display: block;
+		width: 100%;
 		height: ${imagePositionOnMobile === 'top' ? 50 : 29}px;
 		${from.mobileMedium} {
 			height: ${imagePositionOnMobile === 'top' ? 50 : 33}px;
