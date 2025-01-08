@@ -144,8 +144,11 @@ const rightAdStyles = css`
 	background-color: ${schemedPalette('--ad-background-article-inner')};
 	max-width: 300px;
 
-	// the right slot label style should be dark on audio and video articles even in light mode
-	// other slots will stay the same, the right ad slot is the only one to overlay the dark background
+	/**
+	 * The right slot label should be dark on audio and video articles even
+	 * in light mode. Other slots will stay the same as the right ad slot is
+	 * the only one to overlay the dark section of Audio/Video pages.
+	 */
 	.ad-slot--right[data-label-show='true']::before {
 		background-color: ${schemedPalette('--ad-background-article-inner')};
 		border-top-color: ${schemedPalette('--ad-border-article-inner')};
