@@ -525,15 +525,13 @@ export const Card = ({
 		if (sublinkPosition === 'none') return null;
 		if (sublinkPosition === 'outer') {
 			return (
-				<div style={{ flexBasis: `100%` }}>
-					<SupportingContent
-						supportingContent={supportingContent}
-						containerPalette={containerPalette}
-						alignment={supportingContentAlignment}
-						isDynamo={isDynamo}
-						fillBackgroundOnMobile={isFlexSplash}
-					/>
-				</div>
+				<SupportingContent
+					supportingContent={supportingContent}
+					containerPalette={containerPalette}
+					alignment={supportingContentAlignment}
+					isDynamo={isDynamo}
+					fillBackgroundOnMobile={isFlexSplash}
+				/>
 			);
 		}
 		return (
@@ -957,7 +955,8 @@ export const Card = ({
 
 			<div
 				css={
-					/** If we have liveblog links or sublink links in the outer position, we set flex-basis so that they sit below the image */
+					/** If beta containers have liveblog links or sublink links in the outer position, we set flex-basis so that they sit below the image */
+					isBetaContainer &&
 					(liveUpdatesPosition === 'outer' ||
 						sublinkPosition === 'outer') &&
 					css`
