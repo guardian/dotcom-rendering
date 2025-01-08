@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import { between, from, until } from '@guardian/source/foundations';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import { isMediaCard } from '../../lib/cardHelpers';
@@ -186,7 +187,7 @@ export const HighlightsCard = ({
 					/>
 				</div>
 
-				{starRating ? (
+				{!isUndefined(starRating) ? (
 					<div css={starWrapper}>
 						<StarRating rating={starRating} size="small" />
 					</div>
