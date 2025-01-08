@@ -4,22 +4,22 @@ import {
 	testCollectionsUs,
 } from '../../fixtures/manual/frontCollections';
 import type { DCRCollectionType } from '../types/front';
-import type { AdCandidate } from './getFrontsAdPositions';
 import {
+	type AdCandidate,
 	getFrontsBannerAdPositions,
 	getMobileAdPositions,
 } from './getFrontsAdPositions';
 
 const defaultTestCollections: AdCandidate[] = [...Array<number>(12)].map(
-	() => ({
-		collectionType: 'fixed/large/slow-XIV',
-	}),
+	() => ({ collectionType: 'fixed/large/slow-XIV' }),
 );
 
 describe('Mobile Ads', () => {
 	it(`Should not insert ad after container if it's the first one and it's a thrasher`, () => {
-		const testCollections = [...defaultTestCollections];
-		testCollections.unshift({ collectionType: 'fixed/thrasher' });
+		const testCollections = [
+			{ collectionType: 'fixed/thrasher' },
+			...defaultTestCollections,
+		] satisfies AdCandidate[];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
@@ -212,6 +212,82 @@ describe('Mobile Ads', () => {
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
 		expect(mobileAdPositions).toEqual([1, 3, 5, 7, 9, 11]);
+	});
+
+	it('Europe Network Front, with beta containers and more than 4 collections, with thrashers in various places', () => {
+		const testCollections: AdCandidate[] = [
+			{ collectionType: 'flexible/general', containerLevel: 'Primary' }, // Ad position 0
+			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' },
+			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' },
+			{
+				collectionType: 'scrollable/medium',
+				containerLevel: 'Secondary',
+			},
+			{
+				collectionType: 'scrollable/feature',
+				containerLevel: 'Secondary',
+			}, // Ad position 4
+			{ collectionType: 'static/feature/2', containerLevel: 'Primary' },
+			{
+				collectionType: 'scrollable/medium',
+				containerLevel: 'Secondary',
+			}, // Ad position 6
+			{ collectionType: 'flexible/special', containerLevel: 'Primary' },
+			{ collectionType: 'fixed/thrasher' }, // Ad position 8
+			{ collectionType: 'flexible/general', containerLevel: 'Primary' },
+			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ad position 10
+			{ collectionType: 'static/feature/2', containerLevel: 'Primary' },
+			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' },
+			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' },
+			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ad position 14
+			{ collectionType: 'static/feature/2', containerLevel: 'Primary' },
+			{
+				collectionType: 'scrollable/medium',
+				containerLevel: 'Secondary',
+			},
+			{
+				collectionType: 'scrollable/medium',
+				containerLevel: 'Secondary',
+			},
+			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' },
+			{ collectionType: 'fixed/thrasher' }, // Ad position 19
+			{ collectionType: 'static/feature/2', containerLevel: 'Primary' },
+			{
+				collectionType: 'scrollable/medium',
+				containerLevel: 'Secondary',
+			},
+			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' },
+			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' },
+			{
+				collectionType: 'scrollable/medium',
+				containerLevel: 'Secondary',
+			},
+			{
+				collectionType: 'scrollable/medium',
+				containerLevel: 'Secondary',
+			},
+			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' },
+			{
+				collectionType: 'scrollable/medium',
+				containerLevel: 'Secondary',
+			}, // Ad position 27
+			{ collectionType: 'flexible/general', containerLevel: 'Primary' },
+			{
+				collectionType: 'scrollable/medium',
+				containerLevel: 'Secondary',
+			},
+			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ad position 30
+			{ collectionType: 'flexible/general', containerLevel: 'Primary' },
+			{
+				collectionType: 'scrollable/feature',
+				containerLevel: 'Secondary',
+			},
+			{ collectionType: 'news/most-popular' },
+		];
+
+		const mobileAdPositions = getMobileAdPositions(testCollections);
+
+		expect(mobileAdPositions).toEqual([0, 4, 6, 8, 10, 14, 19, 27, 30, 32]);
 	});
 });
 
