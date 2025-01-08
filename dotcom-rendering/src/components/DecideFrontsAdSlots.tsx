@@ -1,15 +1,9 @@
-import { css } from '@emotion/react';
 import { Hide } from '@guardian/source/react-components';
 import type { ReactNode } from 'react';
 import { getMerchHighPosition } from '../lib/getFrontsAdPositions';
 import { palette as themePalette } from '../palette';
 import { AdSlot } from './AdSlot.web';
 import { Section } from './Section';
-
-/** !!! DO NOT MERGE TO MAIN! !!! */
-const tempHighlighting = (colour: string) => css`
-	border: 4px solid ${colour};
-`;
 
 export const decideMerchHighAndMobileAdSlots = (
 	renderAds: boolean,
@@ -30,13 +24,10 @@ export const decideMerchHighAndMobileAdSlots = (
 	if (shouldInsertMerchHighSlot) {
 		return (
 			<Hide from="desktop">
-				<div css={tempHighlighting('orange')}>
-					{index}
-					<AdSlot
-						data-print-layout="hide"
-						position="merchandising-high"
-					/>
-				</div>
+				<AdSlot
+					data-print-layout="hide"
+					position="merchandising-high"
+				/>
 			</Hide>
 		);
 	}
@@ -44,14 +35,11 @@ export const decideMerchHighAndMobileAdSlots = (
 	if (mobileAdPositions.includes(index)) {
 		return (
 			<Hide from="tablet">
-				<div css={tempHighlighting('red')}>
-					{index}
-					<AdSlot
-						index={mobileAdPositions.indexOf(index)}
-						data-print-layout="hide"
-						position="mobile-front"
-					/>
-				</div>
+				<AdSlot
+					index={mobileAdPositions.indexOf(index)}
+					data-print-layout="hide"
+					position="mobile-front"
+				/>
 			</Hide>
 		);
 	}
