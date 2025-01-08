@@ -426,11 +426,6 @@ export const Card = ({
 		);
 	}
 
-	// If the card isn't playable, we need to show a play icon.
-	// Otherwise, this is handled by the YoutubeAtom
-	const showPlayIcon =
-		mainMedia?.type === 'Video' && !canPlayInline && showMainVideo;
-
 	const media = getMedia({
 		imageUrl: image?.src,
 		imageAltText: image?.altText,
@@ -570,6 +565,16 @@ export const Card = ({
 		);
 	};
 
+	const determinePadContent = (
+		mediaCard: boolean,
+		betaContainer: boolean,
+		onwardContent: boolean,
+	): 'large' | 'small' | undefined => {
+		if (mediaCard && betaContainer) return 'large';
+		if (mediaCard || onwardContent) return 'small';
+		return undefined;
+	};
+
 	return (
 		<CardWrapper
 			format={format}
@@ -643,7 +648,6 @@ export const Card = ({
 						imageType={media.type}
 						imagePositionOnDesktop={imagePositionOnDesktop}
 						imagePositionOnMobile={imagePositionOnMobile}
-						showPlayIcon={showPlayIcon}
 						hideImageOverlay={
 							media.type === 'slideshow' && isFlexibleContainer
 						}
@@ -800,17 +804,18 @@ export const Card = ({
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
 								/>
-								{showPlayIcon && mainMedia.duration > 0 && (
-									<MediaDuration
-										mediaDuration={mainMedia.duration}
-										imagePositionOnDesktop={
-											imagePositionOnDesktop
-										}
-										imagePositionOnMobile={
-											imagePositionOnMobile
-										}
-									/>
-								)}
+								{mainMedia?.type === 'Video' &&
+									mainMedia.duration > 0 && (
+										<MediaDuration
+											mediaDuration={mainMedia.duration}
+											imagePositionOnDesktop={
+												imagePositionOnDesktop
+											}
+											imagePositionOnMobile={
+												imagePositionOnMobile
+											}
+										/>
+									)}
 							</>
 						)}
 						{media.type === 'crossword' && (
@@ -824,8 +829,11 @@ export const Card = ({
 						imageType={media?.type}
 						imageSize={imageSize}
 						imagePositionOnDesktop={imagePositionOnDesktop}
-						hasBackgroundColour={isMediaCard}
-						isOnwardContent={isOnwardContent}
+						padContent={determinePadContent(
+							isMediaCard,
+							isBetaContainer,
+							isOnwardContent,
+						)}
 						isFlexibleContainer={isFlexibleContainer}
 					>
 						{/* This div is needed to keep the headline and trail text justified at the start */}
