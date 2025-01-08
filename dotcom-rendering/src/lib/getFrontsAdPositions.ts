@@ -17,9 +17,6 @@ type GroupedCounts = {
 
 type AdCandidate = Pick<DCRCollectionType, 'collectionType'>;
 
-const getMerchHighPosition = (collectionCount: number): number =>
-	collectionCount >= 4 ? 2 : 0;
-
 /**
  * This happens on the recipes front, where the first container is a thrasher
  * @see https://github.com/guardian/frontend/pull/20617
@@ -27,26 +24,22 @@ const getMerchHighPosition = (collectionCount: number): number =>
 const isFirstContainerAndThrasher = (collectionType: string, index: number) =>
 	index === 0 && collectionType === 'fixed/thrasher';
 
-const isMerchHighPosition = (
-	collectionIndex: number,
-	merchHighPosition: number,
-): boolean => collectionIndex === merchHighPosition;
-
 const isBeforeThrasher = (index: number, collections: AdCandidate[]) =>
 	collections[index + 1]?.collectionType === 'fixed/thrasher';
 
 const isMostViewedContainer = (collection: AdCandidate) =>
 	collection.collectionType === 'news/most-popular';
 
-const shouldInsertAd =
-	(merchHighPosition: number) =>
-	(collection: AdCandidate, index: number, collections: AdCandidate[]) =>
-		!(
-			isFirstContainerAndThrasher(collection.collectionType, index) ||
-			isMerchHighPosition(index, merchHighPosition) ||
-			isBeforeThrasher(index, collections) ||
-			isMostViewedContainer(collection)
-		);
+const shouldInsertAd = (
+	collection: AdCandidate,
+	index: number,
+	collections: AdCandidate[],
+) =>
+	!(
+		isFirstContainerAndThrasher(collection.collectionType, index) ||
+		isBeforeThrasher(index, collections) ||
+		isMostViewedContainer(collection)
+	);
 
 const isEvenIndex = (_collection: unknown, index: number): boolean =>
 	index % 2 === 0;
@@ -61,10 +54,8 @@ const isEvenIndex = (_collection: unknown, index: number): boolean =>
  * we take every other container, up to a maximum of 10, for targeting MPU insertion.
  */
 const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
-	const merchHighPosition = getMerchHighPosition(collections.length);
-
 	return collections
-		.filter(shouldInsertAd(merchHighPosition))
+		.filter(shouldInsertAd)
 		.filter(isEvenIndex)
 		.map((collection: AdCandidate) => collections.indexOf(collection))
 		.filter((adPosition: number) => adPosition !== -1)
@@ -268,10 +259,4 @@ const getFrontsBannerAdPositions = (
 		{ heightSinceAd: 0, adPositions: [] },
 	).adPositions;
 
-export {
-	isEvenIndex,
-	isMerchHighPosition,
-	getMerchHighPosition,
-	getMobileAdPositions,
-	getFrontsBannerAdPositions,
-};
+export { isEvenIndex, getMobileAdPositions, getFrontsBannerAdPositions };

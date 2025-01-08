@@ -1,9 +1,13 @@
 import { Hide } from '@guardian/source/react-components';
 import type { ReactNode } from 'react';
-import { getMerchHighPosition } from '../lib/getFrontsAdPositions';
 import { palette as themePalette } from '../palette';
 import { AdSlot } from './AdSlot.web';
 import { Section } from './Section';
+
+/** The merchandising high slot is usually the second ad position on a page.
+ * If there are fewer than 4 collections it is first ad position. */
+const getMerchHighSlot = (collectionCount: number): number =>
+	collectionCount >= 4 ? 1 : 0;
 
 export const decideMerchHighAndMobileAdSlots = (
 	renderAds: boolean,
@@ -16,10 +20,11 @@ export const decideMerchHighAndMobileAdSlots = (
 	if (!renderAds) return null;
 
 	const minContainers = isPaidContent ? 1 : 2;
+	const merchHighSlot = getMerchHighSlot(collectionCount);
 	const shouldInsertMerchHighSlot =
 		!hasPageSkin &&
 		collectionCount > minContainers &&
-		index === getMerchHighPosition(collectionCount);
+		index === mobileAdPositions[merchHighSlot];
 
 	if (shouldInsertMerchHighSlot) {
 		return (
