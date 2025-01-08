@@ -186,7 +186,7 @@ export const HighlightsCard = ({
 					/>
 				</div>
 
-				{!!starRating ? (
+				{starRating ? (
 					<div css={starWrapper}>
 						<StarRating rating={starRating} size="small" />
 					</div>

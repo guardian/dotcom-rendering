@@ -151,7 +151,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
-	const { abTests, isPreview } = front.config;
+	// const { abTests, isPreview } = front.config;
 
 	const { absoluteServerTimes = false } = front.config.switches;
 
@@ -174,9 +174,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	};
 
 	const Highlights = () => {
-		const showHighlights =
-			// Must be opted into the Europe beta test or in preview
-			abTests.europeBetaFrontVariant === 'variant' || isPreview;
+		const showHighlights = true;
+		// Must be opted into the Europe beta test or in preview
+		// abTests.europeBetaFrontVariant === 'variant' || isPreview;
 
 		const highlightsCollection =
 			front.pressedPage.collections.find(isHighlights);
