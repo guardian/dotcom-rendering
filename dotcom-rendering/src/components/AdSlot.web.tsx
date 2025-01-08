@@ -88,14 +88,6 @@ const outOfPageStyles = css`
 	height: 0;
 `;
 
-const darkLabelStyles = css`
-	.ad-slot[data-label-show='true']:not(.ad-slot--interscroller)::before {
-		background-color: ${schemedPalette('--article-inner-background')};
-		border-top-color: ${palette.neutral[20]};
-		color: ${palette.neutral[86]};
-	}
-`;
-
 const topAboveNavContainerStyles = css`
 	padding-bottom: 18px;
 	position: relative;
@@ -151,6 +143,14 @@ const merchandisingAdStyles = css`
 const rightAdStyles = css`
 	background-color: ${schemedPalette('--ad-background-article-inner')};
 	max-width: 300px;
+
+	// the right slot label style should be dark on audio and video articles even in light mode
+	// other slots will stay the same, the right ad slot is the only one to overlay the dark background
+	.ad-slot--right[data-label-show='true']::before {
+		background-color: ${schemedPalette('--ad-background-article-inner')};
+		border-top-color: ${schemedPalette('--ad-border-article-inner')};
+		color: ${schemedPalette('--ad-labels-text-article-inner')};
+	}
 `;
 
 const liveblogInlineContainerStyles = css`
@@ -373,7 +373,6 @@ export const AdSlot = ({
 	index,
 	hasPageskin = false,
 	shouldHideReaderRevenue = false,
-	colourScheme = 'light',
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -451,7 +450,7 @@ export const AdSlot = ({
 										max-height: 100%;
 									`,
 									labelStyles,
-									colourScheme === 'dark' && darkLabelStyles,
+									rightAdStyles,
 								]}
 							>
 								<div
