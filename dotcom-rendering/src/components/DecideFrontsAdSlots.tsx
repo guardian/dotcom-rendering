@@ -31,6 +31,7 @@ export const decideMerchHighAndMobileAdSlots = (
 		return (
 			<Hide from="desktop">
 				<div css={tempHighlighting('orange')}>
+					{index}
 					<AdSlot
 						data-print-layout="hide"
 						position="merchandising-high"
@@ -44,6 +45,7 @@ export const decideMerchHighAndMobileAdSlots = (
 		return (
 			<Hide from="tablet">
 				<div css={tempHighlighting('red')}>
+					{index}
 					<AdSlot
 						index={mobileAdPositions.indexOf(index)}
 						data-print-layout="hide"
