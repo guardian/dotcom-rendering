@@ -25,35 +25,15 @@ describe('Mobile Ads', () => {
 		expect(mobileAdPositions).not.toContain(0);
 	});
 
-	// MerchandiseHigh is in position:
-	// 2: when it's a network front and collections are equal or more than 4
-	// 0: when collections are less than 4
-	it.each([
-		[4, 2],
-		[5, 2],
-		[99, 2],
-		[3, 0],
-		[2, 0],
-		[0, 0],
-	])(
-		`should not insert an ad in the merchandising-high position when there are %i collections and merchandising-high is in position %i`,
-		(numCollections, merchHighPosition) => {
-			const mobileAdPositions = getMobileAdPositions(
-				defaultTestCollections.slice(0, numCollections),
-			);
-			expect(mobileAdPositions).not.toContain(merchHighPosition);
-		},
-	);
-
-	it('Should not insert ad after a thrasher container', () => {
+	it('Should not insert ad before a thrasher container', () => {
 		const testCollections = [...defaultTestCollections];
 		testCollections.splice(6, 0, { collectionType: 'fixed/thrasher' });
 		testCollections.splice(9, 0, { collectionType: 'fixed/thrasher' });
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).not.toContain(7);
-		expect(mobileAdPositions).not.toContain(10);
+		expect(mobileAdPositions).not.toContain(5);
+		expect(mobileAdPositions).not.toContain(8);
 	});
 
 	// We used https://www.theguardian.com/uk/commentisfree as a blueprint
@@ -76,7 +56,7 @@ describe('Mobile Ads', () => {
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 3, 5, 7, 9, 11]);
+		expect(mobileAdPositions).toEqual([0, 2, 4, 6, 8, 10]);
 	});
 
 	// We used https://www.theguardian.com/uk as a blueprint
@@ -110,7 +90,7 @@ describe('Mobile Ads', () => {
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 3, 6, 9, 12, 16, 18, 20, 22]);
+		expect(mobileAdPositions).toEqual([0, 2, 4, 8, 11, 14, 17, 19, 21]);
 	});
 
 	// We used https://www.theguardian.com/international as a blueprint
@@ -140,7 +120,7 @@ describe('Mobile Ads', () => {
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 3, 6, 9, 13, 15, 17]);
+		expect(mobileAdPositions).toEqual([0, 2, 5, 7, 11, 14, 16, 18]);
 	});
 
 	// We used https://www.theguardian.com/us as a blueprint
@@ -171,7 +151,7 @@ describe('Mobile Ads', () => {
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 4, 7, 10, 13, 15, 17]);
+		expect(mobileAdPositions).toEqual([0, 2, 5, 9, 12, 14, 16, 19]);
 	});
 
 	// We used https://www.theguardian.com/uk/lifeandstyle as a blueprint
@@ -197,7 +177,7 @@ describe('Mobile Ads', () => {
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 4, 8, 10, 13]);
+		expect(mobileAdPositions).toEqual([0, 3, 6, 9, 12, 14]);
 	});
 
 	// We used https://www.theguardian.com/tone/recipes as a blueprint
@@ -221,7 +201,7 @@ describe('Mobile Ads', () => {
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([1, 4, 6, 8, 10, 12]);
+		expect(mobileAdPositions).toEqual([1, 3, 5, 7, 9, 11]);
 	});
 });
 
