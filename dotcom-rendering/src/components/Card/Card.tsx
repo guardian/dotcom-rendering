@@ -37,6 +37,7 @@ import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
 import { MediaDuration } from '../MediaDuration';
+import { MediaMeta } from '../MediaMeta';
 import { Pill } from '../Pill';
 import { Slideshow } from '../Slideshow';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
@@ -483,9 +484,14 @@ export const Card = ({
 		);
 	}
 
-	// Check media type to determine if we should show a pill or media icon
+	/**
+	 * Check media type to determine if pill, or article metadata & icon shown.
+	 * Currently pills are only shown within beta containers.
+	 */
 	const showPill =
-		mainMedia?.type === 'Audio' || mainMedia?.type === 'Gallery';
+		isBetaContainer &&
+		mainMedia &&
+		(mainMedia.type === 'Audio' || mainMedia.type === 'Gallery');
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -681,6 +687,12 @@ export const Card = ({
 							cardHasImage={!!image}
 						/>
 					) : null}
+					{!!mainMedia && mainMedia.type !== 'Video' && !showPill && (
+						<MediaMeta
+							mediaType={mainMedia.type}
+							hasKicker={!!kickerText}
+						/>
+					)}
 				</div>
 			)}
 
@@ -947,6 +959,14 @@ export const Card = ({
 											cardHasImage={!!image}
 										/>
 									) : null}
+									{!!mainMedia &&
+										mainMedia.type !== 'Video' &&
+										!showPill && (
+											<MediaMeta
+												mediaType={mainMedia.type}
+												hasKicker={!!kickerText}
+											/>
+										)}
 								</HeadlineWrapper>
 							)}
 
