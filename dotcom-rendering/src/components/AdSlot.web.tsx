@@ -90,7 +90,7 @@ const outOfPageStyles = css`
 
 const darkLabelStyles = css`
 	.ad-slot[data-label-show='true']:not(.ad-slot--interscroller)::before {
-		background-color: transparent;
+		background-color: ${schemedPalette('--article-inner-background')};
 		border-top-color: ${palette.neutral[20]};
 		color: ${palette.neutral[86]};
 	}
