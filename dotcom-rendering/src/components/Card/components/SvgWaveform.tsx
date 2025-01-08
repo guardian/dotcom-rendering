@@ -1,6 +1,11 @@
 import { useId } from 'react';
 import { palette } from '../../../palette';
 
+/**
+ * Static waveform image used as a background on podcast media cards.
+ * The waveform is a repeating pattern so can be used at any width.
+ */
+
 export const SvgWaveform = () => {
 	const id = useId();
 
