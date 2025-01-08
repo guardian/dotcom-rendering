@@ -135,12 +135,8 @@ export const ImageWrapper = ({
 	return (
 		<div
 			css={[
-				imageType === 'slideshow' &&
-					isHorizontalOnDesktop &&
-					flexBasisStyles({
-						imageSize,
-					}),
-				(imageType === 'picture' ||
+				(imageType === 'slideshow' ||
+					imageType === 'picture' ||
 					imageType === 'video' ||
 					imageType === 'podcast') &&
 					isHorizontalOnDesktop &&
