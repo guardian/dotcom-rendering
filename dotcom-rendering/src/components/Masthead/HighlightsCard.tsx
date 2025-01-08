@@ -3,6 +3,7 @@ import { between, from, until } from '@guardian/source/foundations';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import { isMediaCard } from '../../lib/cardHelpers';
 import { palette } from '../../palette';
+import type { StarRating as Rating } from '../../types/content';
 import type { DCRFrontImage } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
 import { Avatar } from '../Avatar';
@@ -12,6 +13,7 @@ import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { FormatBoundary } from '../FormatBoundary';
 import { Icon } from '../MediaMeta';
+import { StarRating } from '../StarRating/StarRating';
 
 export type HighlightsCardProps = {
 	linkTo: string;
@@ -26,6 +28,7 @@ export type HighlightsCardProps = {
 	dataLinkName: string;
 	byline?: string;
 	isExternalLink: boolean;
+	starRating?: Rating;
 };
 
 const gridContainer = css`
@@ -37,6 +40,7 @@ const gridContainer = css`
 	gap: 8px;
 	grid-template-areas:
 		'headline 	headline'
+		'rating rating'
 		'media-icon image';
 
 	/* Applied word-break: break-word to prevent text overflow
@@ -121,6 +125,18 @@ const hoverStyles = css`
 	}
 `;
 
+const starWrapper = css`
+	background-color: ${palette('--star-rating-background')};
+	color: ${palette('--star-rating-fill')};
+	width: fit-content;
+	height: fit-content;
+	grid-area: rating;
+	${from.desktop} {
+		grid-area: media-icon;
+		align-self: flex-end;
+	}
+`;
+
 export const HighlightsCard = ({
 	linkTo,
 	format,
@@ -134,6 +150,7 @@ export const HighlightsCard = ({
 	dataLinkName,
 	byline,
 	isExternalLink,
+	starRating,
 }: HighlightsCardProps) => {
 	const showMediaIcon = isMediaCard(format);
 
@@ -168,6 +185,12 @@ export const HighlightsCard = ({
 						isBetaContainer={true}
 					/>
 				</div>
+
+				{!!starRating ? (
+					<div css={starWrapper}>
+						<StarRating rating={starRating} size="small" />
+					</div>
+				) : null}
 
 				{!!mainMedia && showMediaIcon && (
 					<div css={mediaIcon}>
