@@ -62,8 +62,8 @@ importers:
         specifier: 11.11.0
         version: 11.11.0
       '@guardian/apps-rendering-api-models':
-        specifier: 10.0.0
-        version: 10.0.0
+        specifier: 11.0.0-PREVIEW.update-content-api-models.2025-01-08T1653.6e4f988c
+        version: 11.0.0-PREVIEW.update-content-api-models.2025-01-08T1653.6e4f988c
       '@guardian/bridget':
         specifier: 7.0.0
         version: 7.0.0
@@ -71,8 +71,8 @@ importers:
         specifier: 50.13.0
         version: 50.13.0(@types/node@18.18.14)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.5.3)
       '@guardian/content-api-models':
-        specifier: 25.0.0
-        version: 25.0.0
+        specifier: 26.0.0
+        version: 26.0.0
       '@guardian/content-atom-model':
         specifier: 4.0.1
         version: 4.0.1
@@ -3745,11 +3745,11 @@ packages:
       typescript: 5.5.3
     dev: false
 
-  /@guardian/apps-rendering-api-models@10.0.0:
-    resolution: {integrity: sha512-tonbINIMib4TlBYiJyBpTZ6mEANGeSwpDkv35v1KhlsLXXDLsAZ5BVaYEAbWlxCOgoJboNMD7Y7pZqZvY+kVow==}
+  /@guardian/apps-rendering-api-models@11.0.0-PREVIEW.update-content-api-models.2025-01-08T1653.6e4f988c:
+    resolution: {integrity: sha512-kOYr+Vgg/SbCMpT9b11bJJkVNbaBdINnJl4Mf5pv+BWCaeqjObOqegCh1Vs7u88Qx6XnPgw31gONsEVCRH8auA==}
     dependencies:
-      '@guardian/content-api-models': 25.0.0
-      '@guardian/content-atom-model': 4.0.1
+      '@guardian/content-api-models': 26.0.0
+      '@guardian/content-atom-model': 4.0.4
       '@guardian/content-entity-model': 3.0.3
       '@guardian/story-packages-model': 2.2.0
       '@types/node-int64': 0.4.32
@@ -3933,8 +3933,8 @@ packages:
       - whiskers
     dev: false
 
-  /@guardian/content-api-models@25.0.0:
-    resolution: {integrity: sha512-6QlboykRlvfo2vR2N9Z9mWjkTzuplPVEsMvkkwEZqbA21iGr1XkoIrGGlGUvLM+i67KCABMQsTki3JLEVa7EGQ==}
+  /@guardian/content-api-models@26.0.0:
+    resolution: {integrity: sha512-41kW0r/aq8LDgrs4sBnBIGeNTzYbqUM+9qYL3y5nR+8pKZJ3lF1NPIcsdcoG1nRhrkhLnqsehfJ/oWgwPPBg/w==}
     dependencies:
       '@guardian/content-atom-model': 4.0.4
       '@guardian/content-entity-model': 3.0.3
