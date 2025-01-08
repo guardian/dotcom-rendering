@@ -143,12 +143,13 @@ const merchandisingAdStyles = css`
 const rightAdStyles = css`
 	background-color: ${schemedPalette('--ad-background-article-inner')};
 	max-width: 300px;
+`;
 
-	/**
-	 * The right slot label should be dark on audio and video articles even
-	 * in light mode. Other slots will stay the same as the right ad slot is
-	 * the only one to overlay the dark section of Audio/Video pages.
-	 */
+/*** The right slot label should be dark on audio and video articles even
+ * in light mode. Other slots will stay the same as the right ad slot is
+ * the only one to overlay the dark section of Audio/Video pages.
+ */
+const rightAdLabelStyles = css`
 	.ad-slot--right[data-label-show='true']::before {
 		background-color: ${schemedPalette('--ad-background-article-inner')};
 		border-top-color: ${schemedPalette('--ad-border-article-inner')};
@@ -453,7 +454,7 @@ export const AdSlot = ({
 										max-height: 100%;
 									`,
 									labelStyles,
-									rightAdStyles,
+									rightAdLabelStyles,
 								]}
 							>
 								<div

@@ -1915,7 +1915,7 @@ const articleInnerAdBackgroundLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Video:
 			switch (theme) {
 				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[86];
+					return sourcePalette.neutral[97];
 				default:
 					return sourcePalette.neutral[0];
 			}
@@ -1942,7 +1942,7 @@ const articleInnerAdBorderLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Video:
 			switch (theme) {
 				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[60];
+					return sourcePalette.neutral[86];
 				default:
 					return sourcePalette.neutral[20];
 			}
