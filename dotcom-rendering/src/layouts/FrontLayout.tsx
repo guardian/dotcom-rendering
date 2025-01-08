@@ -30,7 +30,6 @@ import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
-import { WeatherWrapper } from '../components/WeatherWrapper.importable';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { badgeFromBranding, isPaidContentSameBranding } from '../lib/branding';
 import { canRenderAds } from '../lib/canRenderAds';
