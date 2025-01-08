@@ -15,7 +15,10 @@ type GroupedCounts = {
 	splash: number;
 };
 
-type AdCandidate = Pick<DCRCollectionType, 'collectionType' | 'config'>;
+export type AdCandidate = Pick<
+	DCRCollectionType,
+	'collectionType' | 'containerLevel'
+>;
 
 const getMerchHighPosition = (collectionCount: number): number =>
 	collectionCount >= 4 ? 2 : 0;
@@ -38,25 +41,37 @@ const isBeforeThrasher = (index: number, collections: AdCandidate[]) =>
 const isMostViewedContainer = (collection: AdCandidate) =>
 	collection.collectionType === 'news/most-popular';
 
-const isSecondaryLevelContainer = (collection: AdCandidate | undefined) =>
-	collection?.config.containerLevel === 'Secondary';
-
-const isBeforeASecondaryLevelContainer = (
+const isBeforeSecondaryLevelContainer = (
 	index: number,
 	collections: AdCandidate[],
-) => isSecondaryLevelContainer(collections[index + 1]);
+) => collections[index + 1]?.containerLevel === 'Secondary';
 
-/** Detemines whether an ad can be inserted above the current container on mobile */
-const shouldInsertAd =
-	(merchHighPosition: number) =>
-	(collection: AdCandidate, index: number, collections: AdCandidate[]) =>
-		!(
-			isFirstContainerAndThrasher(collection.collectionType, index) ||
-			isMerchHighPosition(index, merchHighPosition) ||
-			isBeforeThrasher(index, collections) ||
-			isMostViewedContainer(collection) ||
-			isBeforeASecondaryLevelContainer(index, collections)
-		);
+const hasSecondaryLevelContainers = (collections: AdCandidate[]) =>
+	!!collections.find((c) => c.containerLevel === 'Secondary');
+
+/** Determines whether an ad can be inserted below the current container on mobile */
+const canInsertAd =
+	(merchHighPosition: number, hasSecondaryContainers: boolean) =>
+	(collection: AdCandidate, index: number, collections: AdCandidate[]) => {
+		/** Base rules are separated from beta ones to avoid changing ad placement logic for fronts without beta containers */
+		const conditions = [
+			!isFirstContainerAndThrasher(collection.collectionType, index),
+			!isMerchHighPosition(index, merchHighPosition),
+			!isBeforeThrasher(index, collections),
+			!isMostViewedContainer(collection),
+		];
+
+		/** Beta rules exist for fronts with primary and secondary level containers */
+		const betaConditions = [
+			// Allow insertion after first container and prevent insertion before a secondary level container
+			index === 0 || !isBeforeSecondaryLevelContainer(index, collections),
+		];
+
+		// Ad insertion is possible if every condition is met
+		return hasSecondaryContainers
+			? [...conditions, ...betaConditions].every(Boolean)
+			: conditions.every(Boolean);
+	};
 
 const isEvenIndex = (_collection: unknown, index: number): boolean =>
 	index % 2 === 0;
@@ -67,18 +82,26 @@ const isEvenIndex = (_collection: unknown, index: number): boolean =>
  * b. next to the merchandising-high ad slot
  * c. before a thrasher
  * d. after the Most Viewed container.
+ * e. before a secondary level container
  * After we've filtered out the containers next to which we can insert an ad,
- * we take every other container, up to a maximum of 10, for targeting MPU insertion.
+ * we take every other container (if no secondary level containers exist),
+ * up to a maximum of 10, for targeting MPU insertion.
  */
 const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
 	const merchHighPosition = getMerchHighPosition(collections.length);
+	const hasSecondaryContainers = hasSecondaryLevelContainers(collections);
 
-	return collections
-		.filter(shouldInsertAd(merchHighPosition))
-		.filter(isEvenIndex)
-		.map((collection: AdCandidate) => collections.indexOf(collection))
-		.filter((adPosition: number) => adPosition !== -1)
-		.slice(0, MAX_FRONTS_MOBILE_ADS);
+	return (
+		collections
+			.filter(canInsertAd(merchHighPosition, hasSecondaryContainers))
+			// Use every other ad position if the front has no secondary containers
+			.filter((c, i) =>
+				hasSecondaryContainers ? true : isEvenIndex(c, i),
+			)
+			.map((collection: AdCandidate) => collections.indexOf(collection))
+			.filter((adPosition: number) => adPosition !== -1)
+			.slice(0, MAX_FRONTS_MOBILE_ADS)
+	);
 };
 
 /**
