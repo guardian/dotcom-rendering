@@ -296,11 +296,6 @@ export const FeatureCard = ({
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
-	// If the card isn't playable, we need to show a play icon.
-	// Otherwise, this is handled by the YoutubeAtom
-	/**TODO: Determin if these cards should be playable */
-	const showPlayIcon = mainMedia?.type === 'Video';
-
 	const media = getMedia({
 		imageUrl: image?.src,
 		imageAltText: image?.altText,
@@ -381,7 +376,7 @@ export const FeatureCard = ({
 											roundedCorners={false}
 											aspectRatio={aspectRatio}
 										/>
-										{showPlayIcon &&
+										{mainMedia?.type === 'Video' &&
 											mainMedia.duration > 0 && (
 												<MediaDuration
 													mediaDuration={
