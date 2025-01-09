@@ -67,6 +67,8 @@ export const ScrollableMedium = ({
 							showLivePlayable={trail.showLivePlayable}
 							showTopBarDesktop={false}
 							showTopBarMobile={false}
+							/** These cards are not big enough (>300px) so video should not play inline  */
+							canPlayInline={false}
 						/>
 					</ScrollableCarousel.Item>
 				);
