@@ -520,7 +520,6 @@ export type FEFrontConfigType = {
 	stripePublicToken: string;
 	googleRecaptchaSiteKey: string;
 	discussionD2Uid: string;
-	weatherapiurl: string;
 	googleSearchUrl: string;
 	optimizeEpicUrl: string;
 	stage: StageType;
