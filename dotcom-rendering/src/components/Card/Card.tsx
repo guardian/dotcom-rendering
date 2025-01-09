@@ -150,6 +150,7 @@ export type Props = {
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
 	galleryCount?: number;
+	audioDuration?: string;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -385,6 +386,7 @@ export const Card = ({
 	podcastImage,
 	showKickerImage = false,
 	galleryCount,
+	audioDuration,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -464,7 +466,7 @@ export const Card = ({
 		>
 			{mainMedia?.type === 'Audio' && (
 				<Pill
-					content="0:00" // TODO: get podcast duration
+					content={audioDuration ?? ''}
 					icon={<SvgMediaControlsPlay />}
 				/>
 			)}

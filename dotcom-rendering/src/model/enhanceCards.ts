@@ -329,5 +329,6 @@ export const enhanceCards = (
 			}),
 			podcastImage,
 			galleryCount: faciaCard.card.galleryCount,
+			audioDuration: faciaCard.card.audioDuration,
 		};
 	});
