@@ -9,8 +9,6 @@ import { createPortal } from 'react-dom';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { useArticleCounts } from '../lib/articleCount';
 import {
-	getLastOneOffContributionTimestamp,
-	isRecurringContributor,
 	shouldHideSupportMessaging,
 	useHasOptedOutOfArticleCount,
 } from '../lib/contributions';
@@ -125,15 +123,13 @@ const usePayload = ({
 			isPaidContent,
 			tags,
 			showSupportMessaging: !hideSupportMessagingForUser,
-			isRecurringContributor: isRecurringContributor(isSignedIn),
-			lastOneOffContributionDate:
-				getLastOneOffContributionTimestamp() ?? undefined,
 			mvtId,
 			countryCode,
 			epicViewLog: getEpicViewLog(storage.local),
 			weeklyArticleHistory: articleCounts?.weeklyArticleHistory,
 			hasOptedOutOfArticleCount,
 			url: window.location.origin + window.location.pathname,
+			isSignedIn,
 		},
 	};
 };

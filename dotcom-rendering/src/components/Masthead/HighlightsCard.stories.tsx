@@ -92,3 +92,16 @@ export const WithLiveKicker: Story = {
 	parameters: {},
 	name: 'With Live Kicker',
 };
+
+export const WithStarRating: Story = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.Culture,
+		},
+		starRating: 4,
+	},
+	parameters: {},
+	name: 'With Star Rating',
+};

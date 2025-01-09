@@ -1,3 +1,5 @@
+import { ArticleDesign } from '../lib/articleFormat';
+import { isMediaCard } from '../lib/cardHelpers';
 import { palette } from '../palette';
 import type { BoostLevel } from '../types/content';
 import type {
@@ -86,6 +88,7 @@ type BoostedSplashProperties = {
 const decideSplashCardProperties = (
 	boostLevel: BoostLevel,
 	supportingContentLength: number,
+	mediaCard: boolean,
 ): BoostedSplashProperties => {
 	switch (boostLevel) {
 		// boostedfont sizing
@@ -98,7 +101,7 @@ const decideSplashCardProperties = (
 					mobile: 'medium',
 				},
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				imageSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
@@ -113,7 +116,7 @@ const decideSplashCardProperties = (
 					mobile: 'large',
 				},
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
@@ -127,8 +130,8 @@ const decideSplashCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'xlarge',
 				},
-				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
@@ -141,8 +144,8 @@ const decideSplashCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'xxlarge',
 				},
-				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
@@ -158,6 +161,7 @@ export const SplashCardLayout = ({
 	absoluteServerTimes,
 	imageLoading,
 	aspectRatio,
+	isLastRow,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -165,6 +169,7 @@ export const SplashCardLayout = ({
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
+	isLastRow: boolean;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -180,10 +185,15 @@ export const SplashCardLayout = ({
 	} = decideSplashCardProperties(
 		card.boostLevel ?? 'default',
 		card.supportingContent?.length ?? 0,
+		isMediaCard(card.format),
 	);
 
 	return (
-		<UL padBottom={true} hasLargeSpacing={true} showTopBar={false}>
+		<UL
+			padBottom={!isLastRow}
+			hasLargeSpacing={!isLastRow}
+			showTopBar={false}
+		>
 			<LI
 				padSides={true}
 				verticalDividerColour={palette('--card-border-supporting')}
@@ -214,6 +224,8 @@ export const SplashCardLayout = ({
 					showTopBarDesktop={false}
 					showTopBarMobile={true}
 					trailTextSize={trailTextSize}
+					canPlayInline={true}
+					showKickerImage={card.format.design === ArticleDesign.Audio}
 				/>
 			</LI>
 		</UL>
@@ -268,6 +280,7 @@ export const BoostedCardLayout = ({
 	imageLoading,
 	aspectRatio,
 	isFirstRow,
+	isLastRow,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -276,6 +289,7 @@ export const BoostedCardLayout = ({
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
 	isFirstRow: boolean;
+	isLastRow: boolean;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -287,7 +301,11 @@ export const BoostedCardLayout = ({
 		liveUpdatesPosition,
 	} = decideCardProperties(card.boostLevel);
 	return (
-		<UL padBottom={true} hasLargeSpacing={true} showTopBar={!isFirstRow}>
+		<UL
+			showTopBar={!isFirstRow}
+			padBottom={!isLastRow}
+			hasLargeSpacing={!isLastRow}
+		>
 			<LI
 				padSides={true}
 				verticalDividerColour={palette('--card-border-supporting')}
@@ -299,8 +317,10 @@ export const BoostedCardLayout = ({
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
 					headlineSizes={headlineSizes}
-					imagePositionOnDesktop={'right'}
-					imagePositionOnMobile={'bottom'}
+					imagePositionOnDesktop="right"
+					imagePositionOnMobile={
+						isMediaCard(card.format) ? 'top' : 'bottom'
+					}
 					imageSize={imageSize}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
@@ -317,6 +337,8 @@ export const BoostedCardLayout = ({
 					showTopBarDesktop={false}
 					showTopBarMobile={true}
 					liveUpdatesPosition={liveUpdatesPosition}
+					canPlayInline={true}
+					showKickerImage={card.format.design === ArticleDesign.Audio}
 				/>
 			</LI>
 		</UL>
@@ -333,6 +355,7 @@ export const StandardCardLayout = ({
 	isFirstRow,
 	isFirstStandardRow,
 	aspectRatio,
+	isLastRow,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -343,14 +366,15 @@ export const StandardCardLayout = ({
 	absoluteServerTimes: boolean;
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
+	isLastRow: boolean;
 }) => {
 	if (cards.length === 0) return null;
 
 	return (
 		<UL
 			direction="row"
-			padBottom={true}
-			hasLargeSpacing={true}
+			padBottom={!isLastRow}
+			hasLargeSpacing={!isLastRow}
 			showTopBar={!isFirstRow}
 			/** We use one full top bar for the first row and use a split one for subsequent rows */
 			splitTopBar={!isFirstStandardRow}
@@ -382,7 +406,11 @@ export const StandardCardLayout = ({
 							)}
 							supportingContentAlignment="vertical"
 							supportingContentPosition="outer"
-							imageSize={'medium'}
+							imageSize={
+								card.format.design === ArticleDesign.Audio
+									? 'small'
+									: 'medium'
+							}
 							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}
@@ -399,6 +427,7 @@ export const StandardCardLayout = ({
 									  }
 									: undefined
 							}
+							canPlayInline={false}
 						/>
 					</LI>
 				);
@@ -429,6 +458,7 @@ export const FlexibleGeneral = ({
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
+					isLastRow={cards.length === 0}
 				/>
 			)}
 
@@ -444,6 +474,7 @@ export const FlexibleGeneral = ({
 								imageLoading={imageLoading}
 								aspectRatio={aspectRatio}
 								isFirstRow={!splash.length && i === 0}
+								isLastRow={i === groupedCards.length - 1}
 							/>
 						);
 
@@ -460,6 +491,7 @@ export const FlexibleGeneral = ({
 								isFirstRow={!splash.length && i === 0}
 								isFirstStandardRow={i === 0}
 								aspectRatio={aspectRatio}
+								isLastRow={i === groupedCards.length - 1}
 							/>
 						);
 				}

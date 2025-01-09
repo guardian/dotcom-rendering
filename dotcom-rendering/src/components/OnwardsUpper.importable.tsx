@@ -215,7 +215,6 @@ export const OnwardsUpper = ({
 	absoluteServerTimes,
 }: Props) => {
 	const isAndroid = useIsAndroid();
-
 	if (isAndroid) return null;
 
 	// Related content can be a collection of articles based on
@@ -260,10 +259,12 @@ export const OnwardsUpper = ({
 
 		// --- Tag excludes --- //
 		const tagsToExclude = [];
+
 		// Exclude ad features from non-ad feature content
 		if (!isPaidContent) {
 			tagsToExclude.push('tone/advertisement-features');
 		}
+
 		// We don't want to show professional network content on videos or interactives
 		if (
 			contentType.toLowerCase() === 'video' ||
@@ -311,7 +312,7 @@ export const OnwardsUpper = ({
 					/>
 				</Section>
 			)}
-			{!!(!isPaidContent && curatedDataUrl) && (
+			{!!curatedDataUrl && !isPaidContent && (
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-border')}

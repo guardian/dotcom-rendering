@@ -10,14 +10,14 @@ import {
 } from '@guardian/source/foundations';
 import { Button, Radio, RadioGroup } from '@guardian/source/react-components';
 import { Fragment, useEffect, useState } from 'react';
-import { ArticleSpecial, type ArticleTheme } from '../lib/articleFormat';
+import { ArticleSpecial } from '../lib/articleFormat';
+import type { ArticleFormat, ArticleTheme } from '../lib/articleFormat';
 import type {
 	AnswerType,
 	KnowledgeQuizAtomType,
 	QuestionType,
 	QuizSelectionType,
 	ResultGroupsType,
-	SharingUrlsType,
 } from '../types/content';
 import {
 	CorrectSelectedAnswer,
@@ -26,7 +26,7 @@ import {
 	radioButtonWrapperStyles,
 	UnselectedAnswer,
 } from './Answers';
-import { SharingIcons } from './SharingIcons';
+import { ShareButton } from './ShareButton.importable';
 
 const fieldsetStyle = css`
 	margin-bottom: 12px;
@@ -42,10 +42,12 @@ export const KnowledgeQuizAtom = ({
 	id,
 	questions,
 	resultGroups,
-	sharingUrls,
-	theme,
+	pageId,
+	webTitle,
+	format,
 }: KnowledgeQuizAtomType) => {
 	const [quizSelection, setQuizSelection] = useState<QuizSelectionType>({});
+	const theme = format.theme;
 
 	const haveAllQuestionsBeenAnswered =
 		Object.keys(quizSelection).length === questions.length;
@@ -57,7 +59,9 @@ export const KnowledgeQuizAtom = ({
 					<Result
 						quizSelection={quizSelection}
 						resultGroups={resultGroups}
-						sharingUrls={sharingUrls}
+						pageId={pageId}
+						webTitle={webTitle}
+						format={format}
 					/>
 				</div>
 			)}
@@ -81,7 +85,9 @@ export const KnowledgeQuizAtom = ({
 					<Result
 						quizSelection={quizSelection}
 						resultGroups={resultGroups}
-						sharingUrls={sharingUrls}
+						pageId={pageId}
+						webTitle={webTitle}
+						format={format}
 					/>
 				</div>
 			)}
@@ -182,7 +188,7 @@ export const Question = ({
 							const spaceKey = 32;
 							const enterKey = 13;
 							if (
-								e.keyCode === spaceKey ??
+								e.keyCode === spaceKey ||
 								e.keyCode === enterKey
 							) {
 								setHasSubmitted(true);
@@ -319,11 +325,15 @@ const resultHeaderStyles = css`
 export const Result = ({
 	quizSelection,
 	resultGroups,
-	sharingUrls,
+	pageId,
+	webTitle,
+	format,
 }: {
 	quizSelection: Record<string, AnswerType>;
 	resultGroups: ResultGroupsType[];
-	sharingUrls: SharingUrlsType;
+	pageId: string;
+	webTitle: string;
+	format: ArticleFormat;
 }) => {
 	const totalNumberOfQuestions = Object.keys(quizSelection).length;
 	const numberOfCorrectAnswers = Object.keys(quizSelection).filter(
@@ -387,17 +397,11 @@ export const Result = ({
 
 			<hr />
 			<div css={resultHeaderStyles}>Challenge your friends</div>
-			<SharingIcons
-				sharingUrls={sharingUrls}
-				displayIcons={[
-					'facebook',
-					'twitter',
-					'email',
-					'whatsApp',
-					'messenger',
-					'linkedIn',
-					'pinterest',
-				]}
+			<ShareButton
+				pageId={pageId}
+				webTitle={webTitle}
+				format={format}
+				context="ArticleMeta"
 			/>
 		</div>
 	);

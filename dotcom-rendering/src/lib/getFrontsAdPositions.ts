@@ -12,6 +12,7 @@ type GroupedCounts = {
 	veryBig: number;
 	big: number;
 	standard: number;
+	splash: number;
 };
 
 type AdCandidate = Pick<DCRCollectionType, 'collectionType'>;
@@ -75,13 +76,14 @@ const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
  *
  * A result of 3 would approximately be the height of a typical desktop viewport (~900px).
  * A result of 1 would be a third of the height, a result of 1.5 would be half, etc.
+ * A result of 6 indicates a container is at least double the height of a typical desktop viewport.
  */
 const getCollectionHeight = (
 	collction: Pick<
 		DCRCollectionType,
 		'collectionType' | 'containerPalette' | 'grouped'
 	>,
-): 0.5 | 1 | 1.5 | 2 | 2.5 | 3 => {
+): 0.5 | 1 | 1.5 | 2 | 2.5 | 3 | 6 => {
 	const { collectionType, containerPalette, grouped } = collction;
 
 	if (containerPalette === 'PodcastPalette') {
@@ -95,18 +97,22 @@ const getCollectionHeight = (
 		veryBig: grouped.veryBig.length,
 		big: grouped.big.length,
 		standard: grouped.standard.length,
+		splash: grouped.splash.length,
 	};
 
 	switch (collectionType) {
 		// Some thrashers are very small. Since we'd prefer to have ads above content rather than thrashers,
 		// err on the side of inserting fewer ads, by setting the number on the small side for thrashers
 		case 'fixed/thrasher':
+		case 'scrollable/small':
 			return 0.5;
 
 		case 'fixed/small/slow-IV':
 		case 'fixed/small/slow-V-mpu':
 		case 'nav/list':
 		case 'nav/media-list':
+		case 'scrollable/medium':
+		case 'static/medium/4':
 			return 1;
 
 		case 'fixed/small/slow-I':
@@ -116,6 +122,7 @@ const getCollectionHeight = (
 		case 'fixed/small/fast-VIII':
 		case 'fixed/video':
 		case 'fixed/video/vertical':
+		case 'scrollable/feature':
 			return 1.5;
 
 		case 'fixed/medium/slow-VI':
@@ -123,6 +130,7 @@ const getCollectionHeight = (
 		case 'fixed/medium/slow-XII-mpu':
 		case 'fixed/medium/fast-XI':
 		case 'fixed/medium/fast-XII':
+		case 'static/feature/2':
 			return 2;
 
 		case 'fixed/large/slow-XIV':
@@ -156,6 +164,29 @@ const getCollectionHeight = (
 				return 1;
 			}
 			return 1;
+
+		case 'flexible/special':
+			if (groupedCounts.snap && !groupedCounts.splash) {
+				return 1.5;
+			} else if (groupedCounts.splash && !groupedCounts.standard) {
+				return 2.5;
+			} else {
+				return 3;
+			}
+
+		case 'flexible/general':
+			if (groupedCounts.splash && !groupedCounts.standard) {
+				return 2.5;
+			} else if (groupedCounts.splash && groupedCounts.standard > 2) {
+				return 6;
+			} else if (
+				grouped.splash[0]?.boostLevel === 'megaboost' ||
+				grouped.splash[0]?.boostLevel === 'gigaboost'
+			) {
+				return 6;
+			} else {
+				return 3;
+			}
 
 		default:
 			return 1; // Unknown collection type.

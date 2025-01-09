@@ -46,6 +46,7 @@ export const enhanceArticleType = (
 		imagesForLightbox,
 		hasAffiliateLinksDisclaimer: !!data.affiliateLinksDisclaimer,
 		audioArticleImage: data.audioArticleImage,
+		tags: data.tags,
 	});
 
 	const mainMediaElements = enhanceMainMedia(

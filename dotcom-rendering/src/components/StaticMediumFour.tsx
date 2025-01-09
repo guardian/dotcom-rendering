@@ -1,3 +1,4 @@
+import { isMediaCard } from '../lib/cardHelpers';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
@@ -30,7 +31,7 @@ export const StaticMediumFour = ({
 	const cards = trails.slice(0, 4);
 
 	return (
-		<UL direction="row" padBottom={true} hasLargeSpacing={true}>
+		<UL direction="row">
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI
@@ -48,7 +49,9 @@ export const StaticMediumFour = ({
 							absoluteServerTimes={absoluteServerTimes}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
-							imagePositionOnDesktop={'bottom'}
+							imagePositionOnDesktop={
+								isMediaCard(card.format) ? 'top' : 'bottom'
+							}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
 							imageSize={'medium'}
@@ -57,6 +60,7 @@ export const StaticMediumFour = ({
 							showLivePlayable={false}
 							showTopBarDesktop={false}
 							showTopBarMobile={true}
+							canPlayInline={false}
 						/>
 					</LI>
 				);

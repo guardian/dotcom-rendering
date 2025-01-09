@@ -84,10 +84,7 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 						'title  border  headline'
 						'.      border  standfirst'
 						'meta   border  media'
-						'uscard border  media'
-						'uscard border  submeta'
-						'uscard border  .'
-						'uscard border  .';
+						'meta   border  submeta';
 				}
 
 				${until.wide} {
@@ -96,10 +93,7 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 						'title  border  headline    headline   headline'
 						'.      border  standfirst  standfirst standfirst'
 						'meta   border  media       media      media'
-						'uscard border  media       media      media'
-						'uscard border  submeta     submeta    submeta'
-						'uscard border  .           .          .'
-						'uscard border  .           .          .';
+						'meta   border  submeta     submeta    submeta';
 				}
 
 				/*

@@ -47,7 +47,6 @@ const gridGapMobile = 10;
  */
 const containerStyles = css`
 	position: relative;
-	margin-bottom: ${space[6]}px;
 	margin-left: -${gridGapMobile}px;
 	margin-right: -${gridGapMobile}px;
 	${from.mobileLandscape} {
