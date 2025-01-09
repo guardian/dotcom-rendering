@@ -229,6 +229,7 @@ const styles = {
 			grid-template-columns: 1fr 1fr 1fr;
 			grid-template-rows: auto 1fr auto;
 			align-items: center;
+			padding-bottom: ${space[8]}px;
 		}
 
 		${from.desktop} {
@@ -238,6 +239,7 @@ const styles = {
 			max-width: 1300px;
 			align-items: start;
 			column-gap: 10px;
+			padding-bottom: ${space[10]}px;
 		}
 	`,
 	closeButtonOverrides: css`
