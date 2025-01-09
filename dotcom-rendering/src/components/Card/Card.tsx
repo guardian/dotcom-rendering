@@ -1008,6 +1008,15 @@ export const Card = ({
 			</CardLayout>
 
 			<div
+				css={
+					/** If beta containers have liveblog links or sublink links in the outer position, we set flex-basis so that they sit below the image */
+					isBetaContainer &&
+					(liveUpdatesPosition === 'outer' ||
+						sublinkPosition === 'outer') &&
+					css`
+						flex-basis: 100%;
+					`
+				}
 				style={{
 					padding:
 						isMediaCard || isOnwardContent ? `0 ${space[2]}px` : 0,
