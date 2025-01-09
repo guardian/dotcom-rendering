@@ -5,8 +5,12 @@ import {
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
-import { Hide, Link } from '@guardian/source/react-components';
-import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
+import { Hide, Link, SvgCamera } from '@guardian/source/react-components';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../../lib/articleFormat';
 import { isMediaCard as isAMediaCard } from '../../lib/cardHelpers';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
@@ -34,6 +38,7 @@ import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
 import { MediaDuration } from '../MediaDuration';
 import { MediaMeta } from '../MediaMeta';
+import { Pill } from '../Pill';
 import { Slideshow } from '../Slideshow';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
@@ -41,6 +46,7 @@ import { SnapCssSandbox } from '../SnapCssSandbox';
 import { StarRating } from '../StarRating/StarRating';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
+import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 import { YoutubeBlockComponent } from '../YoutubeBlockComponent.importable';
 import { AvatarContainer } from './components/AvatarContainer';
 import { CardAge } from './components/CardAge';
@@ -378,7 +384,6 @@ export const Card = ({
 	trailTextColour,
 	podcastImage,
 	showKickerImage = false,
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- Added in preparation for UI changes to display gallery count
 	galleryCount,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
@@ -451,6 +456,29 @@ export const Card = ({
 			</Link>
 		);
 
+	const MediaPill = () => (
+		<div
+			css={css`
+				margin-top: auto;
+			`}
+		>
+			{mainMedia?.type === 'Audio' && (
+				<Pill
+					content="0:00" // TODO: get podcast duration
+					icon={<SvgMediaControlsPlay />}
+				/>
+			)}
+			{mainMedia?.type === 'Gallery' && (
+				<Pill
+					prefix="Gallery"
+					content={galleryCount?.toString() ?? ''}
+					icon={<SvgCamera />}
+					iconSide="right"
+				/>
+			)}
+		</div>
+	);
+
 	if (snapData?.embedHtml) {
 		return (
 			<SnapCssSandbox snapData={snapData}>
@@ -458,6 +486,15 @@ export const Card = ({
 			</SnapCssSandbox>
 		);
 	}
+
+	/**
+	 * Check media type to determine if pill, or article metadata & icon shown.
+	 * Currently pills are only shown within beta containers.
+	 */
+	const showPill =
+		isBetaContainer &&
+		mainMedia &&
+		(mainMedia.type === 'Audio' || mainMedia.type === 'Gallery');
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -653,7 +690,7 @@ export const Card = ({
 							cardHasImage={!!image}
 						/>
 					) : null}
-					{!!mainMedia && mainMedia.type !== 'Video' && (
+					{!!mainMedia && mainMedia.type !== 'Video' && !showPill && (
 						<MediaMeta
 							mediaType={mainMedia.type}
 							hasKicker={!!kickerText}
@@ -932,7 +969,8 @@ export const Card = ({
 										/>
 									) : null}
 									{!!mainMedia &&
-										mainMedia.type !== 'Video' && (
+										mainMedia.type !== 'Video' &&
+										!showPill && (
 											<MediaMeta
 												mediaType={mainMedia.type}
 												hasKicker={!!kickerText}
@@ -952,24 +990,48 @@ export const Card = ({
 							)}
 
 							{!showCommentFooter && (
-								<CardFooter
-									format={format}
-									age={decideAge()}
-									commentCount={<CommentCount />}
-									cardBranding={
-										branding ? (
-											<CardBranding
-												branding={branding}
-												format={format}
-												onwardsSource={onwardsSource}
-												containerPalette={
-													containerPalette
-												}
-											/>
-										) : undefined
-									}
-									showLivePlayable={showLivePlayable}
-								/>
+								<>
+									{showPill ? (
+										<>
+											<MediaPill />
+											{format.theme ===
+												ArticleSpecial.Labs &&
+												branding && (
+													<CardBranding
+														branding={branding}
+														format={format}
+														onwardsSource={
+															onwardsSource
+														}
+														containerPalette={
+															containerPalette
+														}
+													/>
+												)}
+										</>
+									) : (
+										<CardFooter
+											format={format}
+											age={decideAge()}
+											commentCount={<CommentCount />}
+											cardBranding={
+												branding ? (
+													<CardBranding
+														branding={branding}
+														format={format}
+														onwardsSource={
+															onwardsSource
+														}
+														containerPalette={
+															containerPalette
+														}
+													/>
+												) : undefined
+											}
+											showLivePlayable={showLivePlayable}
+										/>
+									)}
+								</>
 							)}
 							{showLivePlayable &&
 								liveUpdatesPosition === 'inner' && (
