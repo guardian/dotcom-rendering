@@ -186,6 +186,35 @@ const HorizontalDivider = () => (
 	/>
 );
 
+const podcastImageStyles = (imageSize: ImageSizeType) => {
+	switch (imageSize) {
+		case 'small':
+			return css`
+				width: 69px;
+				height: 69px;
+				${from.tablet} {
+					width: 98px;
+					height: 98px;
+				}
+			`;
+
+		case 'medium':
+			return css`
+				width: 98px;
+				height: 98px;
+				${from.tablet} {
+					width: 120px;
+					height: 120px;
+				}
+			`;
+		default:
+			return css`
+				width: 120px;
+				height: 120px;
+			`;
+	}
+};
+
 const getMedia = ({
 	imageUrl,
 	imageAltText,
@@ -813,6 +842,31 @@ export const Card = ({
 						)}
 						{media.type === 'crossword' && (
 							<img src={media.imageUrl} alt="" />
+						)}
+
+						{media.type === 'podcast' && (
+							<>
+								{media.podcastImage.src ? (
+									<div css={[podcastImageStyles(imageSize)]}>
+										<CardPicture
+											mainImage={media.podcastImage.src}
+											imageSize={'small'}
+											alt={media.imageAltText}
+											loading={imageLoading}
+											roundedCorners={isOnwardContent}
+											aspectRatio={'1:1'}
+										/>
+									</div>
+								) : (
+									<CardPicture
+										mainImage={media.trailImage.src ?? ''}
+										imageSize={imageSize}
+										alt={media.trailImage.altText}
+										loading={imageLoading}
+										aspectRatio={aspectRatio}
+									/>
+								)}
+							</>
 						)}
 					</ImageWrapper>
 				)}
