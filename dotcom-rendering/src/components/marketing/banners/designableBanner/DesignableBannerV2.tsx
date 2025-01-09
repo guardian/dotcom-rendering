@@ -30,6 +30,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	onCtaClick,
 }: BannerRenderProps): JSX.Element => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
+	const isDesktopOrAbove = useMatchMedia(removeMediaRulePrefix(from.desktop));
 
 	const [iosAppBannerPresent, setIosAppBannerPresent] = useState(false);
 
@@ -163,11 +164,13 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 
 				{isTabletOrAbove && (
 					<>
-						<div css={styles.containerOverrides}>
-							<div css={styles.guardianLogoContainer}>
-								<SvgGuardianLogo />
+						{isDesktopOrAbove && (
+							<div css={styles.containerOverrides}>
+								<div css={styles.guardianLogoContainer}>
+									<SvgGuardianLogo />
+								</div>
 							</div>
-						</div>
+						)}
 						<div css={styles.thirdColumnContainer}>
 							<ThreeTierChoiceCardsV2 />
 						</div>
@@ -223,6 +226,10 @@ const styles = {
 		position: relative;
 		padding: 0 10px;
 		overflow: auto;
+
+		${from.mobile} {
+			padding-bottom: ${space[4]}px;
+		}
 
 		${from.tablet} {
 			display: grid;
