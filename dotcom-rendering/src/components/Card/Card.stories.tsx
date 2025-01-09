@@ -46,6 +46,7 @@ const basicCardProps: CardProps = {
 	showMainVideo: true,
 	absoluteServerTimes: true,
 	galleryCount: 8,
+	audioDuration: '20:25',
 };
 
 const aBasicLink = {
