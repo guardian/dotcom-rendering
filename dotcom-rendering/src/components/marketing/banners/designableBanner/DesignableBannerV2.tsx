@@ -258,7 +258,6 @@ const styles = {
 	`,
 	linkButtonOverrides: css`
 		background-color: ${brandAlt[400]};
-		//hover colour TBC
 		color: ${neutral[0]};
 		display: flex;
 		flex-wrap: wrap;
