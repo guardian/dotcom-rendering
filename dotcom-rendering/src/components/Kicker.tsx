@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import {
 	space,
 	textSans15,
@@ -6,6 +7,8 @@ import {
 	textSansBold15,
 } from '@guardian/source/foundations';
 import { palette } from '../palette';
+import type { PodcastSeriesImage } from '../types/tag';
+import { CardPicture } from './CardPicture';
 import { Island } from './Island';
 import { PulsingDot } from './PulsingDot.importable';
 
@@ -17,6 +20,7 @@ type Props = {
 	isInline?: boolean;
 	/** Controls the weight of the standard, non-live kicker. Defaults to regular */
 	fontWeight?: 'regular' | 'bold';
+	image?: PodcastSeriesImage;
 };
 
 const standardTextStyles = css`
@@ -51,6 +55,12 @@ const inlineKickerStyles = css`
 	line-height: inherit;
 `;
 
+const imageStyles = css`
+	height: 88px;
+	width: 88px;
+	margin-bottom: ${space[2]}px;
+`;
+
 /**
  * The kicker is a prefix to be used with a headline (e.g. 'Live')
  *
@@ -62,6 +72,7 @@ export const Kicker = ({
 	showPulsingDot,
 	isInline,
 	fontWeight = 'regular',
+	image,
 }: Props) => {
 	/**
 	 * @todo
@@ -88,6 +99,17 @@ export const Kicker = ({
 					: 'transparent',
 			}}
 		>
+			{!isUndefined(image?.src) && (
+				<div css={imageStyles}>
+					<CardPicture
+						mainImage={image.src}
+						imageSize={'small'}
+						alt={image.altText}
+						loading={'lazy'}
+						aspectRatio={'1:1'}
+					/>
+				</div>
+			)}
 			{showPulsingDot && (
 				<Island priority="enhancement" defer={{ until: 'visible' }}>
 					<PulsingDot colour={palette('--kicker-pulsing-dot-live')} />
