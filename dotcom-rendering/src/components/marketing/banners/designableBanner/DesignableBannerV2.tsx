@@ -226,6 +226,13 @@ const styles = {
 
 		${from.tablet} {
 			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			grid-template-rows: auto 1fr auto;
+			align-items: center;
+		}
+
+		${from.desktop} {
+			display: grid;
 			grid-template-columns: auto 1fr 1fr;
 			grid-template-rows: auto 1fr auto;
 			max-width: 1300px;
