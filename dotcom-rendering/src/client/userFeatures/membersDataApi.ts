@@ -1,8 +1,8 @@
 import { isBoolean, isObject } from '@guardian/libs';
 import type { SignedInWithCookies, SignedInWithOkta } from '../../lib/identity';
 import { getOptionsHeadersWithOkta } from '../../lib/identity';
-import type { UserBenefits } from './user-features-lib';
-import { fetchJson } from './user-features-lib';
+import { fetchJson } from './fetchJson';
+import type { UserBenefits } from './user-features';
 
 const dates = {
 	1: '01',

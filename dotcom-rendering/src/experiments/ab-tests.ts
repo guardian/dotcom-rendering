@@ -7,7 +7,6 @@ import { mpuWhenNoEpic } from './tests/mpu-when-no-epic';
 import { optimiseSpacefinderInline } from './tests/optimise-spacefinder-inline';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
-import { userBenefitsApi } from './tests/user-benefits-api';
 
 // keep in sync with ab-tests in frontend
 // https://github.com/guardian/frontend/tree/main/static/src/javascripts/projects/common/modules/experiments/ab-tests.ts
@@ -20,5 +19,4 @@ export const tests: ABTest[] = [
 	mpuWhenNoEpic,
 	adBlockAsk,
 	optimiseSpacefinderInline,
-	userBenefitsApi,
 ];
