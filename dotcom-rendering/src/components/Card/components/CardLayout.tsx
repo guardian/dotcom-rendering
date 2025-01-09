@@ -21,8 +21,6 @@ type Props = {
 };
 
 const containerStyles = css`
-	position: relative;
-	overflow: hidden;
 	display: flex;
 	flex-basis: 100%;
 `;
