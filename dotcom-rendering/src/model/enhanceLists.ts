@@ -1,5 +1,11 @@
 import { isUndefined } from '@guardian/libs';
-import type { FEElement, ListBlockElement } from '../types/content';
+import type {
+	FEElement,
+	ListBlockElement,
+	ListItem,
+	MultiByline,
+} from '../types/content';
+import type { TagType } from '../types/tag';
 
 type ElementsEnhancer = (elements: FEElement[]) => FEElement[];
 
@@ -60,9 +66,49 @@ const constructMiniProfile =
 		return [];
 	};
 
+const constructMultiByline =
+	(enhanceElements: ElementsEnhancer, tags?: TagType[]) =>
+	({
+		title,
+		elements,
+		bio,
+		endNote,
+		imageOverrideUrl,
+		contributorIds,
+		byline,
+		bylineHtml,
+	}: ListItem): MultiByline[] => {
+		const contributorIdsArray = contributorIds ?? [];
+
+		let imageUrl;
+		if (imageOverrideUrl) {
+			imageUrl = imageOverrideUrl;
+		} else if (tags) {
+			imageUrl = tags.find((tag) => tag.id === contributorIdsArray[0])
+				?.bylineImageUrl;
+		}
+
+		// if the element is missing its title, byline, or bylineHtml for any reason, we will skip it
+		if (title && byline && bylineHtml) {
+			return [
+				{
+					title,
+					bio,
+					endNote,
+					imageUrl,
+					byline,
+					bylineHtml,
+					body: enhanceElements(elements),
+				},
+			];
+		}
+		return [];
+	};
+
 const enhanceListBlockElement = (
 	element: ListBlockElement,
 	elementsEnhancer: ElementsEnhancer,
+	tags?: TagType[],
 ): FEElement[] => {
 	switch (element.listElementType) {
 		case 'KeyTakeaways':
@@ -92,6 +138,15 @@ const enhanceListBlockElement = (
 					),
 				},
 			];
+		case 'MultiByline':
+			return [
+				{
+					_type: 'model.dotcomrendering.pageElements.MultiBylinesBlockElement',
+					multiBylines: element.items.flatMap(
+						constructMultiByline(elementsEnhancer, tags),
+					),
+				},
+			];
 		/**
 		 * If it's an unsupported list element, ignore the structure
 		 * and return the body elements.
@@ -102,11 +157,11 @@ const enhanceListBlockElement = (
 };
 
 const enhance =
-	(elementsEnhancer: ElementsEnhancer) =>
+	(elementsEnhancer: ElementsEnhancer, tags?: TagType[]) =>
 	(element: FEElement): FEElement[] => {
 		switch (element._type) {
 			case 'model.dotcomrendering.pageElements.ListBlockElement': {
-				return enhanceListBlockElement(element, elementsEnhancer);
+				return enhanceListBlockElement(element, elementsEnhancer, tags);
 			}
 			default:
 				return [element];
@@ -114,6 +169,6 @@ const enhance =
 	};
 
 export const enhanceLists =
-	(elementsEnhancer: ElementsEnhancer) =>
+	(elementsEnhancer: ElementsEnhancer, tags?: TagType[]) =>
 	(elements: FEElement[]): FEElement[] =>
-		elements.flatMap(enhance(elementsEnhancer));
+		elements.flatMap(enhance(elementsEnhancer, tags));

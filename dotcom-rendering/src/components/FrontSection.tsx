@@ -253,12 +253,6 @@ const sectionHeadlineFromLeftCol = (borderColour: string) => css`
 	}
 `;
 
-const sectionHeadlineHeight = css`
-	${until.tablet} {
-		min-height: 58px;
-	}
-`;
-
 const topPadding = css`
 	padding-top: ${space[2]}px;
 `;
@@ -559,8 +553,6 @@ export const FrontSection = ({
 							sectionHeadlineFromLeftCol(
 								schemePalette('--section-border'),
 							),
-						title?.toLowerCase() === 'headlines' &&
-							sectionHeadlineHeight,
 					]}
 				>
 					<FrontSectionTitle

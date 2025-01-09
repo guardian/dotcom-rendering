@@ -7,7 +7,7 @@ import {
 } from '@guardian/source/foundations';
 import { Hide, Link } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
-import { isMediaCard } from '../../lib/cardHelpers';
+import { isMediaCard as isAMediaCard } from '../../lib/cardHelpers';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { palette } from '../../palette';
@@ -260,11 +260,14 @@ const getHeadlinePosition = ({
 	isFlexSplash,
 	containerType,
 	showLivePlayable,
+	isMediaCard,
 }: {
 	containerType?: DCRContainerType;
 	isFlexSplash?: boolean;
 	showLivePlayable: boolean;
+	isMediaCard: boolean;
 }) => {
+	if (isMediaCard) return 'inner';
 	if (containerType === 'flexible/special' && isFlexSplash) {
 		return 'outer';
 	}
@@ -424,11 +427,6 @@ export const Card = ({
 		);
 	}
 
-	// If the card isn't playable, we need to show a play icon.
-	// Otherwise, this is handled by the YoutubeAtom
-	const showPlayIcon =
-		mainMedia?.type === 'Video' && !canPlayInline && showMainVideo;
-
 	const media = getMedia({
 		imageUrl: image?.src,
 		imageAltText: image?.altText,
@@ -450,9 +448,9 @@ export const Card = ({
 -	 * Media cards have contrasting background colours. We add additional
 	 * padding to these cards to keep the text readable.
 -	 */
-	const hasBackgroundColour = isMediaCard(format);
+	const isMediaCard = isAMediaCard(format);
 
-	const backgroundColour = hasBackgroundColour
+	const backgroundColour = isMediaCard
 		? palette('--card-media-background')
 		: palette('--card-background');
 
@@ -479,6 +477,7 @@ export const Card = ({
 		containerType,
 		isFlexSplash,
 		showLivePlayable,
+		isMediaCard,
 	});
 
 	const hideTrailTextUntil = () => {
@@ -498,7 +497,7 @@ export const Card = ({
 	/** Determines the gap of between card components based on card properties */
 	const getGapSize = (): GapSize => {
 		if (isOnwardContent) return 'none';
-		if (hasBackgroundColour && !isFlexibleContainer) return 'tiny';
+		if (isMediaCard && !isFlexibleContainer) return 'tiny';
 		if (!!isFlexSplash || (isFlexibleContainer && imageSize === 'jumbo')) {
 			return 'small';
 		}
@@ -563,6 +562,16 @@ export const Card = ({
 				/>
 			</Hide>
 		);
+	};
+
+	const determinePadContent = (
+		mediaCard: boolean,
+		betaContainer: boolean,
+		onwardContent: boolean,
+	): 'large' | 'small' | undefined => {
+		if (mediaCard && betaContainer) return 'large';
+		if (mediaCard || onwardContent) return 'small';
+		return undefined;
 	};
 
 	return (
@@ -637,10 +646,10 @@ export const Card = ({
 						imageType={media.type}
 						imagePositionOnDesktop={imagePositionOnDesktop}
 						imagePositionOnMobile={imagePositionOnMobile}
-						showPlayIcon={showPlayIcon}
 						hideImageOverlay={
 							media.type === 'slideshow' && isFlexibleContainer
 						}
+						padImage={isMediaCard && isBetaContainer}
 					>
 						{media.type === 'slideshow' &&
 							(isFlexibleContainer ? (
@@ -788,17 +797,18 @@ export const Card = ({
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
 								/>
-								{showPlayIcon && mainMedia.duration > 0 && (
-									<MediaDuration
-										mediaDuration={mainMedia.duration}
-										imagePositionOnDesktop={
-											imagePositionOnDesktop
-										}
-										imagePositionOnMobile={
-											imagePositionOnMobile
-										}
-									/>
-								)}
+								{mainMedia?.type === 'Video' &&
+									mainMedia.duration > 0 && (
+										<MediaDuration
+											mediaDuration={mainMedia.duration}
+											imagePositionOnDesktop={
+												imagePositionOnDesktop
+											}
+											imagePositionOnMobile={
+												imagePositionOnMobile
+											}
+										/>
+									)}
 							</>
 						)}
 						{media.type === 'crossword' && (
@@ -812,8 +822,11 @@ export const Card = ({
 						imageType={media?.type}
 						imageSize={imageSize}
 						imagePositionOnDesktop={imagePositionOnDesktop}
-						hasBackgroundColour={hasBackgroundColour}
-						isOnwardContent={isOnwardContent}
+						padContent={determinePadContent(
+							isMediaCard,
+							isBetaContainer,
+							isOnwardContent,
+						)}
 						isFlexibleContainer={isFlexibleContainer}
 					>
 						{/* This div is needed to keep the headline and trail text justified at the start */}
@@ -865,7 +878,7 @@ export const Card = ({
 								</HeadlineWrapper>
 							)}
 
-							{!!trailText && (
+							{!!trailText && media?.type !== 'podcast' && (
 								<TrailText
 									trailText={trailText}
 									trailTextColour={trailTextColour}
@@ -943,9 +956,7 @@ export const Card = ({
 			<div
 				style={{
 					padding:
-						hasBackgroundColour || isOnwardContent
-							? `0 ${space[2]}px`
-							: 0,
+						isMediaCard || isOnwardContent ? `0 ${space[2]}px` : 0,
 				}}
 			>
 				{showLivePlayable && liveUpdatesPosition === 'outer' && (

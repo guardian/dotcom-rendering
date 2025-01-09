@@ -94,6 +94,7 @@ const listElements = [
 	'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement',
 	'model.dotcomrendering.pageElements.QAndAExplainerBlockElement',
 	'model.dotcomrendering.pageElements.MiniProfilesBlockElement',
+	'model.dotcomrendering.pageElements.MultiBylinesBlockElement',
 	'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement',
 	'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
 ] as const;

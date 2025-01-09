@@ -6,28 +6,6 @@ import { loadPage } from '../lib/load-page';
 import { expectToBeVisible } from '../lib/locators';
 
 test.describe('Embeds', () => {
-	test.describe('AMP', () => {
-		test('should render the corona interactive atom embed', async ({
-			page,
-		}) => {
-			await loadPage(
-				page,
-				'/AMPArticle/https://www.theguardian.com/world/2020/apr/24/new-mother-dies-of-coronavirus-six-days-after-giving-birth',
-			);
-			await cmpAcceptAll(
-				page,
-				'amp-consent > iframe[src*="sourcepoint"]',
-			);
-
-			await expect(
-				await getIframeBody(
-					page,
-					'amp-iframe[data-testid="atom-embed-url"] > iframe',
-				),
-			).toContainText('Daily cases');
-		});
-	});
-
 	test.describe('WEB', function () {
 		test('should render the click to view overlay revealing the embed when clicked', async ({
 			page,

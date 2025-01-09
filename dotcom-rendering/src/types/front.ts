@@ -419,6 +419,7 @@ export type DCRCollectionType = {
 	description?: string;
 	collectionType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
+	containerLevel?: DCRContainerLevel;
 	containerSpacing?: 'large' | 'small';
 	grouped: DCRGroupedTrails;
 	curated: DCRFrontCard[];
@@ -427,7 +428,6 @@ export type DCRCollectionType = {
 	href?: string;
 	config: {
 		showDateHeader: boolean;
-		containerLevel?: DCRContainerLevel;
 	};
 	/**
 	 * @property {?boolean} canShowMore - Whether the 'show more' button should be shown.
@@ -520,7 +520,6 @@ export type FEFrontConfigType = {
 	stripePublicToken: string;
 	googleRecaptchaSiteKey: string;
 	discussionD2Uid: string;
-	weatherapiurl: string;
 	googleSearchUrl: string;
 	optimizeEpicUrl: string;
 	stage: StageType;

@@ -129,6 +129,7 @@ const usePayload = ({
 			weeklyArticleHistory: articleCounts?.weeklyArticleHistory,
 			hasOptedOutOfArticleCount,
 			url: window.location.origin + window.location.pathname,
+			isSignedIn,
 		},
 	};
 };

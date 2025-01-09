@@ -1,8 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { between, from, until } from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import type { CardImageType } from '../../../types/layout';
-import { PlayIcon } from './PlayIcon';
 
 const imageFixedSize = {
 	tiny: 86,
@@ -35,13 +34,13 @@ type Props = {
 	imageType?: CardImageType;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
-	showPlayIcon: boolean;
 	/**
 	 * Forces hiding the image overlay added to pictures & slideshows on hover.
 	 * This is to allow hiding the overlay on slideshow carousels where we don't
 	 * want it to be shown whilst retaining it for existing slideshows.
 	 */
 	hideImageOverlay?: boolean;
+	padImage?: boolean;
 };
 
 /**
@@ -115,6 +114,10 @@ const fixImageWidth = ({
 	`}
 `;
 
+const imagePadding = css`
+	padding: ${space[2]}px;
+`;
+
 export const ImageWrapper = ({
 	children,
 	imageSize,
@@ -122,8 +125,8 @@ export const ImageWrapper = ({
 	imageType,
 	imagePositionOnDesktop,
 	imagePositionOnMobile,
-	showPlayIcon,
 	hideImageOverlay,
+	padImage,
 }: Props) => {
 	const isHorizontalOnDesktop =
 		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
@@ -170,6 +173,7 @@ export const ImageWrapper = ({
 						display: block;
 					}
 				`,
+				padImage && imagePadding,
 			]}
 		>
 			<>
@@ -177,12 +181,6 @@ export const ImageWrapper = ({
 				{/* This image overlay is styled when the CardLink is hovered */}
 				{(imageType === 'picture' || imageType === 'slideshow') &&
 					!hideImageOverlay && <div className="image-overlay" />}
-				{imageType === 'picture' && showPlayIcon && (
-					<PlayIcon
-						imageSize={imageSize}
-						imagePositionOnMobile={imagePositionOnMobile}
-					/>
-				)}
 			</>
 		</div>
 	);

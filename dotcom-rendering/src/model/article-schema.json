@@ -588,6 +588,9 @@
                     "$ref": "#/definitions/MiniProfilesBlockElement"
                 },
                 {
+                    "$ref": "#/definitions/MultiBylinesBlockElement"
+                },
+                {
                     "$ref": "#/definitions/MultiImageBlockElement"
                 },
                 {
@@ -2398,6 +2401,7 @@
                     "enum": [
                         "KeyTakeaways",
                         "MiniProfiles",
+                        "MultiByline",
                         "QAndAExplainer"
                     ],
                     "type": "string"
@@ -2435,6 +2439,21 @@
                     "type": "string"
                 },
                 "endNote": {
+                    "type": "string"
+                },
+                "imageOverrideUrl": {
+                    "type": "string"
+                },
+                "contributorIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "byline": {
+                    "type": "string"
+                },
+                "bylineHtml": {
                     "type": "string"
                 }
             },
@@ -2585,6 +2604,60 @@
             },
             "required": [
                 "body",
+                "title"
+            ]
+        },
+        "MultiBylinesBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.MultiBylinesBlockElement"
+                },
+                "multiBylines": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MultiByline"
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "multiBylines"
+            ]
+        },
+        "MultiByline": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "body": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FEElement"
+                    }
+                },
+                "bio": {
+                    "type": "string"
+                },
+                "endNote": {
+                    "type": "string"
+                },
+                "imageUrl": {
+                    "type": "string"
+                },
+                "byline": {
+                    "type": "string"
+                },
+                "bylineHtml": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "body",
+                "byline",
+                "bylineHtml",
                 "title"
             ]
         },

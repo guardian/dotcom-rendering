@@ -10,16 +10,16 @@ import {
 import { Button, Radio, RadioGroup } from '@guardian/source/react-components';
 import type { KeyboardEvent, MouseEvent } from 'react';
 import { memo, useEffect, useState } from 'react';
-import { ArticleSpecial, type ArticleTheme } from '../lib/articleFormat';
+import { ArticleSpecial } from '../lib/articleFormat';
+import type { ArticleFormat, ArticleTheme } from '../lib/articleFormat';
 import type {
 	AnswerType,
 	PersonalityQuizAtomType,
 	QuestionType,
 	ResultsBucketType,
-	SharingUrlsType,
 } from '../types/content';
 import { radioButtonWrapperStyles } from './Answers';
-import { SharingIcons } from './SharingIcons';
+import { ShareButton } from './ShareButton.importable';
 
 const answersWrapperStyle = (theme: ArticleTheme) => css`
 	margin-bottom: 12px;
@@ -90,8 +90,9 @@ export const PersonalityQuizAtom = ({
 	id,
 	questions,
 	resultBuckets,
-	sharingUrls,
-	theme,
+	pageId,
+	webTitle,
+	format,
 }: PersonalityQuizAtomType) => {
 	const [selectedGlobalAnswers, setSelectedGlobalAnswers] = useState<
 		Record<string, string>
@@ -140,6 +141,7 @@ export const PersonalityQuizAtom = ({
 		resultBuckets,
 		questions,
 	]);
+	const theme = format.theme;
 
 	return (
 		<form data-atom-id={id} data-atom-type="personalityquiz">
@@ -147,7 +149,9 @@ export const PersonalityQuizAtom = ({
 				<div data-testid="quiz-results-block-top">
 					<Result
 						resultBuckets={topSelectedResult}
-						sharingUrls={sharingUrls}
+						pageId={pageId}
+						webTitle={webTitle}
+						format={format}
 					/>
 				</div>
 			)}
@@ -183,7 +187,9 @@ export const PersonalityQuizAtom = ({
 				<div data-testid="quiz-results-block-bottom">
 					<Result
 						resultBuckets={topSelectedResult}
-						sharingUrls={sharingUrls}
+						pageId={pageId}
+						webTitle={webTitle}
+						format={format}
 					/>
 				</div>
 			)}
@@ -202,7 +208,7 @@ export const PersonalityQuizAtom = ({
 					onKeyDown={(e: React.KeyboardEvent<HTMLButtonElement>) => {
 						const spaceKey = 32;
 						const enterKey = 13;
-						if (e.keyCode === spaceKey ?? e.keyCode === enterKey) {
+						if (e.keyCode === spaceKey || e.keyCode === enterKey) {
 							onSubmit(e);
 						}
 					}}
@@ -220,7 +226,7 @@ export const PersonalityQuizAtom = ({
 					onKeyDown={(e: React.KeyboardEvent<HTMLButtonElement>) => {
 						const spaceKey = 32;
 						const enterKey = 13;
-						if (e.keyCode === spaceKey ?? e.keyCode === enterKey) {
+						if (e.keyCode === spaceKey || e.keyCode === enterKey) {
 							setSelectedGlobalAnswers({});
 							setHasSubmittedAnswers(false);
 							setTopSelectedResult(null);
@@ -401,27 +407,25 @@ const resultDescriptionStyles = css`
 
 export const Result = ({
 	resultBuckets,
-	sharingUrls,
+	pageId,
+	webTitle,
+	format,
 }: {
 	resultBuckets: ResultsBucketType;
-	sharingUrls: SharingUrlsType;
+	pageId: string;
+	webTitle: string;
+	format: ArticleFormat;
 }) => (
 	<div css={resultWrapperStyles}>
 		<div css={resultHeaderStyles}>{resultBuckets.title}</div>
 		<div css={resultDescriptionStyles}>{resultBuckets.description}</div>
 		<hr />
 		<div css={resultHeaderStyles}>Challenge your friends</div>
-		<SharingIcons
-			sharingUrls={sharingUrls}
-			displayIcons={[
-				'facebook',
-				'twitter',
-				'email',
-				'whatsApp',
-				'messenger',
-				'linkedIn',
-				'pinterest',
-			]}
+		<ShareButton
+			pageId={pageId}
+			webTitle={webTitle}
+			format={format}
+			context="ArticleMeta"
 		/>
 	</div>
 );
