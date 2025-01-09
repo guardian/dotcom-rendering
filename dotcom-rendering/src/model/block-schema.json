@@ -428,6 +428,9 @@
                     "type": "string",
                     "const": "model.dotcomrendering.pageElements.AudioBlockElement"
                 },
+                "id": {
+                    "type": "string"
+                },
                 "elementId": {
                     "type": "string"
                 },
