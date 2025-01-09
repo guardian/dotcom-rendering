@@ -63,6 +63,7 @@ import type {
 	ImageSizeType,
 } from './components/ImageWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
+import { SvgWaveform } from './components/SvgWaveform';
 import { TrailText, type TrailTextSize } from './components/TrailText';
 
 export type Position = 'inner' | 'outer' | 'none';
@@ -175,6 +176,27 @@ const StarRatingComponent = ({
 		<StarRating rating={rating} size="small" />
 	</div>
 );
+
+const waveformWrapper = (
+	imagePositionOnMobile?: ImagePositionType,
+	imagePositionOnDesktop?: ImagePositionType,
+) => css`
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	svg {
+		display: block;
+		width: 100%;
+		height: ${imagePositionOnMobile === 'top' ? 50 : 29}px;
+		${from.mobileMedium} {
+			height: ${imagePositionOnMobile === 'top' ? 50 : 33}px;
+		}
+		${from.tablet} {
+			height: ${imagePositionOnDesktop === 'top' ? 50 : 33}px;
+		}
+	}
+`;
 
 const HorizontalDivider = () => (
 	<div
@@ -710,6 +732,20 @@ export const Card = ({
 				containerType={containerType}
 				gapSize={getGapSize()}
 			>
+				{/**
+				 * Waveform for podcasts is absolutely positioned at bottom of
+				 * card, behind everything else
+				 */}
+				{isBetaContainer && mainMedia?.type === 'Audio' && (
+					<div
+						css={waveformWrapper(
+							imagePositionOnMobile,
+							imagePositionOnDesktop,
+						)}
+					>
+						<SvgWaveform />
+					</div>
+				)}
 				{media && (
 					<ImageWrapper
 						imageSize={imageSize}
@@ -928,6 +964,7 @@ export const Card = ({
 						{/* This div is needed to keep the headline and trail text justified at the start */}
 						<div
 							css={css`
+								position: relative;
 								display: flex;
 								flex-direction: column;
 								justify-content: flex-start;
