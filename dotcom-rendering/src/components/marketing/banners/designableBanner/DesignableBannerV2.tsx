@@ -242,6 +242,7 @@ const styles = {
 	`,
 	closeButtonOverrides: css`
 		margin-top: ${space[3]}px;
+		margin-bottom: ${space[3]}px;
 		grid-column: 3;
 		grid-row: 1;
 		justify-content: end;
