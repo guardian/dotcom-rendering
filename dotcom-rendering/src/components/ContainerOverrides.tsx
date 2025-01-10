@@ -590,6 +590,15 @@ const cardMediaIconLight: ContainerFunction = (containerPalette) =>
 const cardMediaIconDark: ContainerFunction = (containerPalette) =>
 	cardBackgroundDark(containerPalette);
 
+/**
+ * TODO: These are placeholder colours based on existing overrides and should
+ * be updated when designs have been finalised.
+ */
+const cardMediaWaveformLight: ContainerFunction = (containerPalette) =>
+	transparentColour(cardHeadlineLight(containerPalette), 0.2);
+const cardMediaWaveformDark: ContainerFunction = (containerPalette) =>
+	transparentColour(cardHeadlineDark(containerPalette), 0.2);
+
 const sectionBackgroundLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'InvestigationPalette':
@@ -1086,6 +1095,10 @@ const containerColours = {
 	'--card-media-icon': {
 		light: cardMediaIconLight,
 		dark: cardMediaIconDark,
+	},
+	'--card-media-waveform': {
+		light: cardMediaWaveformLight,
+		dark: cardMediaWaveformDark,
 	},
 	'--card-sublinks-background': {
 		light: cardSublinksBackgroundLight,
