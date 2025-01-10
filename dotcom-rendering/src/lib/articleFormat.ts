@@ -7,7 +7,6 @@ export enum ArticleDesign {
 	Gallery,
 	Audio,
 	Video,
-	Crossword,
 	Review,
 	Analysis,
 	Explainer,
@@ -29,6 +28,7 @@ export enum ArticleDesign {
 	NewsletterSignup,
 	Timeline,
 	Profile,
+	Crossword,
 }
 
 export enum ArticleDisplay {
@@ -76,8 +76,6 @@ export const decideDesign = ({ design }: Partial<FEFormat>): ArticleDesign => {
 			return ArticleDesign.Audio;
 		case 'VideoDesign':
 			return ArticleDesign.Video;
-		case 'CrosswordDesign':
-			return ArticleDesign.Crossword;
 		case 'ReviewDesign':
 			return ArticleDesign.Review;
 		case 'AnalysisDesign':
@@ -118,6 +116,8 @@ export const decideDesign = ({ design }: Partial<FEFormat>): ArticleDesign => {
 			return ArticleDesign.Timeline;
 		case 'ProfileDesign':
 			return ArticleDesign.Profile;
+		case 'CrosswordDesign':
+			return ArticleDesign.Crossword;
 		default:
 			return ArticleDesign.Standard;
 	}
