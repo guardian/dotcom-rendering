@@ -241,9 +241,6 @@
                 "discussionD2Uid": {
                     "type": "string"
                 },
-                "weatherapiurl": {
-                    "type": "string"
-                },
                 "googleSearchUrl": {
                     "type": "string"
                 },
@@ -346,7 +343,6 @@
                 "supportUrl",
                 "switches",
                 "userAttributesApiUrl",
-                "weatherapiurl",
                 "webTitle"
             ]
         },
@@ -1034,6 +1030,9 @@
                                                 },
                                                 "galleryCount": {
                                                     "type": "number"
+                                                },
+                                                "audioDuration": {
+                                                    "type": "string"
                                                 }
                                             },
                                             "required": [
@@ -1785,6 +1784,9 @@
                                                 },
                                                 "galleryCount": {
                                                     "type": "number"
+                                                },
+                                                "audioDuration": {
+                                                    "type": "string"
                                                 }
                                             },
                                             "required": [
@@ -2536,6 +2538,9 @@
                                                 },
                                                 "galleryCount": {
                                                     "type": "number"
+                                                },
+                                                "audioDuration": {
+                                                    "type": "string"
                                                 }
                                             },
                                             "required": [

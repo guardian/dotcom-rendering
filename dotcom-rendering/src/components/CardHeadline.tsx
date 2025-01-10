@@ -37,6 +37,7 @@ import {
 } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
+import type { PodcastSeriesImage } from '../types/tag';
 import { Byline } from './Byline';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';
@@ -62,6 +63,7 @@ type Props = {
 	/** Optional override of the standard card kicker colour */
 	kickerColour?: string;
 	isBetaContainer?: boolean;
+	kickerImage?: PodcastSeriesImage;
 };
 
 const sublinkStyles = css`
@@ -115,17 +117,18 @@ const fontFamilies = {
 		xxxsmall: headlineLight15,
 		tiny: headlineLight14,
 	},
+	/** Line height for sans style headlines for labs is overridden to match that of other headlines (1.15) */
 	textSans: {
-		xxxlarge: textSans20,
-		xxlarge: textSans20,
-		xlarge: textSans20,
-		large: textSans20,
-		medium: textSans20,
-		small: textSans20,
-		xsmall: textSans20,
-		xxsmall: textSans17,
-		xxxsmall: textSans15,
-		tiny: textSans12,
+		xxxlarge: `${textSans20}\n\tline-height: 1.15;\n`,
+		xxlarge: `${textSans20}\n\tline-height: 1.15;\n`,
+		xlarge: `${textSans20}\n\tline-height: 1.15;\n`,
+		large: `${textSans20}\n\tline-height: 1.15;\n`,
+		medium: `${textSans20}\n\tline-height: 1.15;\n`,
+		small: `${textSans20}\n\tline-height: 1.15;\n`,
+		xsmall: `${textSans20}\n\tline-height: 1.15;\n`,
+		xxsmall: `${textSans17}\n\tline-height: 1.15;\n`,
+		xxxsmall: `${textSans15}\n\tline-height: 1.15;\n`,
+		tiny: `${textSans12}\n\tline-height: 1.15;\n`,
 	},
 } as const;
 
@@ -230,6 +233,7 @@ export const CardHeadline = ({
 	headlineColour = palette('--card-headline'),
 	kickerColour = palette('--card-kicker-text'),
 	isBetaContainer = false,
+	kickerImage,
 }: Props) => {
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
@@ -256,6 +260,7 @@ export const CardHeadline = ({
 						color={kickerColour}
 						showPulsingDot={showPulsingDot}
 						isInline={hasInlineKicker}
+						image={kickerImage}
 					/>
 				)}
 				{showQuotes && <QuoteIcon colour={kickerColour} />}

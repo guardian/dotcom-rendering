@@ -2495,6 +2495,9 @@ const cardMediaIconLight: PaletteFunction = (format) =>
 const cardMediaIconDark: PaletteFunction = (format) =>
 	cardMediaBackgroundDark(format);
 
+const cardMediaWaveformLight: PaletteFunction = () => sourcePalette.neutral[86];
+const cardMediaWaveformDark: PaletteFunction = () => sourcePalette.neutral[38];
+
 const cardHeadlineTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 
 const cardTextDark: PaletteFunction = () => sourcePalette.neutral[86];
@@ -6073,6 +6076,10 @@ const paletteColours = {
 		light: cardMediaIconLight,
 		dark: cardMediaIconDark,
 	},
+	'--card-media-waveform': {
+		light: cardMediaWaveformLight,
+		dark: cardMediaWaveformDark,
+	},
 	'--card-sublinks-background': {
 		light: cardSublinksBackgroundLight,
 		dark: cardSublinksBackgroundDark,
@@ -7245,10 +7252,6 @@ const paletteColours = {
 	'--us-elections-republicans': {
 		light: () => sourcePalette.news[400],
 		dark: () => '#DC2E1C',
-	},
-	'--weather-icon': {
-		light: () => sourcePalette.neutral[97],
-		dark: () => sourcePalette.neutral[7],
 	},
 	'--witness-title-author': {
 		light: witnessTitleAuthor,

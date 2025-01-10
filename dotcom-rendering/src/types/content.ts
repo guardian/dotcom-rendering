@@ -45,6 +45,7 @@ export interface AudioAtomBlockElement {
 
 interface AudioBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AudioBlockElement';
+	id?: string;
 	elementId: string;
 	assets: AudioAsset[];
 }

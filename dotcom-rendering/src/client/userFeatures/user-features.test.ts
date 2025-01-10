@@ -36,7 +36,6 @@ const getAuthStatus = getAuthStatus_ as jest.MockedFunction<
 const PERSISTENCE_KEYS = {
 	USER_FEATURES_EXPIRY_COOKIE: 'gu_user_features_expiry',
 	AD_FREE_USER_COOKIE: 'GU_AF1',
-	ACTION_REQUIRED_FOR_COOKIE: 'gu_action_required_for',
 	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE: 'gu.contributions.contrib-timestamp',
 	HIDE_SUPPORT_MESSAGING_COOKIE: 'gu_hide_support_messaging',
 };
@@ -62,16 +61,11 @@ const setAllFeaturesData = (opts: { isExpired: boolean }) => {
 		name: PERSISTENCE_KEYS.USER_FEATURES_EXPIRY_COOKIE,
 		value: expiryDate.getTime().toString(),
 	});
-	setCookie({
-		name: PERSISTENCE_KEYS.ACTION_REQUIRED_FOR_COOKIE,
-		value: 'test',
-	});
 };
 
 const deleteAllFeaturesData = () => {
 	removeCookie({ name: PERSISTENCE_KEYS.USER_FEATURES_EXPIRY_COOKIE });
 	removeCookie({ name: PERSISTENCE_KEYS.AD_FREE_USER_COOKIE });
-	removeCookie({ name: PERSISTENCE_KEYS.ACTION_REQUIRED_FOR_COOKIE });
 	removeCookie({ name: PERSISTENCE_KEYS.HIDE_SUPPORT_MESSAGING_COOKIE });
 };
 
