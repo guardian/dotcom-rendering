@@ -272,7 +272,6 @@ const styles = {
 		grid-row: 1;
 		justify-self: start;
 		align-self: start;
-		//	padding-top: ${space[3]}px;
 	`,
 	middleColumnContainer: css`
 		display: flex;
