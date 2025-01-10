@@ -103,7 +103,7 @@ const styles = {
 	`,
 
 	recommendedPillStyles: css`
-		border-radius: 4px;
+		border-radius: ${space[1]}px;
 		padding: ${space[1]}px ${space[2]}px;
 		background-color: ${palette.brand[400]};
 		${textSansBold14};
