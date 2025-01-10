@@ -49,7 +49,6 @@ const refresh = async (): Promise<void> => {
 	} else if ((await userHasDataAfterSignOut()) && !forcedAdFreeMode) {
 		deleteAllCookies();
 	}
-	return Promise.resolve();
 };
 
 const requestNewData = () => {
