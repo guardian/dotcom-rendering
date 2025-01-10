@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	from,
 	palette,
 	space,
 	textSans12,
@@ -100,6 +99,7 @@ const styles = {
 		flex-shrink: 0;
 		border-radius: ${space[3]}px;
 		background: #f1f8fc;
+		position: relative;
 	`,
 
 	recommendedPillStyles: css`
@@ -109,13 +109,8 @@ const styles = {
 		${textSansBold14};
 		color: ${palette.neutral[100]};
 		position: absolute;
-		right: auto;
-		${from.tablet} {
-			top: 250px;
-		}
-		${from.desktop} {
-			top: 74px;
-		}
+		top: 0; // Aligns to the middle of the choice card
+		transform: translateY(-50%); // Centers it vertically on the choice card
 	`,
 
 	linkButtonStyles: css`
