@@ -1887,14 +1887,38 @@ const podcastMetaButtonBackgroundHoverDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
 
 const adLabelsTextLight: PaletteFunction = () => sourcePalette.neutral[46];
+
+const articleInnerAdLabelsTextLight: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[46];
+				default:
+					return sourcePalette.neutral[86];
+			}
+		default:
+			return sourcePalette.neutral[46];
+	}
+};
+
 const adLabelsTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
 const adBackgroundLight: PaletteFunction = () => sourcePalette.neutral[97];
 
 const adBackgroundDark: PaletteFunction = () => sourcePalette.neutral[20];
 
-const articleInnerAdBackgroundLight: PaletteFunction = ({ design }) => {
+const articleInnerAdBackgroundLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[97];
+				default:
+					return sourcePalette.neutral[0];
+			}
 		case ArticleDesign.LiveBlog:
 			return sourcePalette.neutral[93];
 		default:
@@ -1912,32 +1936,22 @@ const articleInnerAdBackgroundDark: PaletteFunction = ({ design }) => {
 
 const adBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
 
-const adBorderDark: PaletteFunction = () => sourcePalette.neutral[38];
+const articleInnerAdBorderLight: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[86];
+				default:
+					return sourcePalette.neutral[20];
+			}
+		default:
+			return sourcePalette.neutral[86];
+	}
+};
 
-const adSupportBannerBackgroundLight: PaletteFunction = () => {
-	return sourcePalette.neutral[93];
-};
-const adSupportBannerBackgroundDark: PaletteFunction = () => {
-	return sourcePalette.neutral[46];
-};
-const adSupportBannerButtonBackgroundLight: PaletteFunction = () => {
-	return sourcePalette.brand[400];
-};
-const adSupportBannerButtonBackgroundDark: PaletteFunction = () => {
-	return sourcePalette.neutral[100];
-};
-const adSupportBannerButtonTextLight: PaletteFunction = () => {
-	return sourcePalette.neutral[100];
-};
-const adSupportBannerButtonTextDark: PaletteFunction = () => {
-	return sourcePalette.neutral[0];
-};
-const adSupportBannerTextLight: PaletteFunction = () => {
-	return sourcePalette.brand[400];
-};
-const adSupportBannerTextDark: PaletteFunction = () => {
-	return sourcePalette.neutral[100];
-};
+const adBorderDark: PaletteFunction = () => sourcePalette.neutral[38];
 
 const appsFooterLinksTextLight: PaletteFunction = () =>
 	sourcePalette.neutral[7];
@@ -2494,6 +2508,9 @@ const cardMediaIconLight: PaletteFunction = (format) =>
 	cardMediaBackgroundLight(format);
 const cardMediaIconDark: PaletteFunction = (format) =>
 	cardMediaBackgroundDark(format);
+
+const cardMediaWaveformLight: PaletteFunction = () => sourcePalette.neutral[86];
+const cardMediaWaveformDark: PaletteFunction = () => sourcePalette.neutral[38];
 
 const cardHeadlineTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 
@@ -5418,10 +5435,19 @@ const lastUpdatedTextDark: PaletteFunction = ({ theme, design }) => {
 	}
 };
 
-const miniProfilesTextSubduedLight: PaletteFunction = () =>
+const bioLinkUnderline: PaletteFunction = () => sourcePalette.neutral[86];
+
+const multiBylineNonLinkedTextLight: PaletteFunction = () =>
 	sourcePalette.neutral[46];
-const miniProfilesTextSubduedDark: PaletteFunction = () =>
-	sourcePalette.neutral[86];
+const multiBylineNonLinkedTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+
+const bioTextSubduedLight: PaletteFunction = () => sourcePalette.neutral[46];
+const bioTextSubduedDark: PaletteFunction = () => sourcePalette.neutral[86];
+
+const endNoteTextSubduedLight: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+const endNoteTextSubduedDark: PaletteFunction = () => sourcePalette.neutral[86];
 
 const interactiveAtomBackgroundLight: PaletteFunction = () => 'transparent';
 const interactiveAtomBackgroundDark: PaletteFunction = () =>
@@ -5519,28 +5545,6 @@ const pinnedPostBorderDark: PaletteFunction = ({ theme }) => {
 			return sourcePalette.news[200];
 	}
 };
-
-const expandableMarketingCardBackground: PaletteFunction = () =>
-	sourcePalette.brand[400];
-
-const expandableMarketingCardSvgFill: PaletteFunction = () =>
-	sourcePalette.neutral[0];
-
-const expandableMarketingCardButtonBackground: PaletteFunction = () =>
-	sourcePalette.neutral[100];
-
-const expandableMarketingCardSvgBackground: PaletteFunction = () =>
-	sourcePalette.neutral[100];
-
-const expandableMarketingCardFillBackgroundLight: PaletteFunction = (
-	format,
-) => {
-	return articleBackgroundLight(format) === 'transparent'
-		? sourcePalette.neutral[100]
-		: articleBackgroundLight(format);
-};
-const expandableMarketingCardFillBackgroundDark: PaletteFunction = (format) =>
-	articleBackgroundDark(format);
 
 const youtubeOverlayKicker: PaletteFunction = ({ theme }: ArticleFormat) => {
 	switch (theme) {
@@ -5822,25 +5826,17 @@ const paletteColours = {
 		light: adBorderLight,
 		dark: adBorderDark,
 	},
+	'--ad-border-article-inner': {
+		light: articleInnerAdBorderLight,
+		dark: adBorderDark,
+	},
 	'--ad-labels-text': {
 		light: adLabelsTextLight,
 		dark: adLabelsTextDark,
 	},
-	'--ad-support-banner-background': {
-		light: adSupportBannerBackgroundLight,
-		dark: adSupportBannerBackgroundDark,
-	},
-	'--ad-support-banner-button-background': {
-		light: adSupportBannerButtonBackgroundLight,
-		dark: adSupportBannerButtonBackgroundDark,
-	},
-	'--ad-support-banner-button-text': {
-		light: adSupportBannerButtonTextLight,
-		dark: adSupportBannerButtonTextDark,
-	},
-	'--ad-support-banner-text': {
-		light: adSupportBannerTextLight,
-		dark: adSupportBannerTextDark,
+	'--ad-labels-text-article-inner': {
+		light: articleInnerAdLabelsTextLight,
+		dark: adLabelsTextDark,
 	},
 	'--affiliate-disclaimer-background': {
 		light: affiliateDisclaimerBackgroundLight,
@@ -5953,6 +5949,14 @@ const paletteColours = {
 	'--avatar-background': {
 		light: avatarLight,
 		dark: avatarDark,
+	},
+	'--bio-link-underline': {
+		light: bioLinkUnderline,
+		dark: bioLinkUnderline,
+	},
+	'--bio-text-subdued': {
+		light: bioTextSubduedLight,
+		dark: bioTextSubduedDark,
 	},
 	'--block-quote-fill': {
 		light: blockQuoteFillLight,
@@ -6077,6 +6081,10 @@ const paletteColours = {
 	'--card-media-icon': {
 		light: cardMediaIconLight,
 		dark: cardMediaIconDark,
+	},
+	'--card-media-waveform': {
+		light: cardMediaWaveformLight,
+		dark: cardMediaWaveformDark,
 	},
 	'--card-sublinks-background': {
 		light: cardSublinksBackgroundLight,
@@ -6378,6 +6386,10 @@ const paletteColours = {
 		light: emailSignupTextSubduedLight,
 		dark: emailSignupTextSubduedDark,
 	},
+	'--end-note-text-subdued': {
+		light: endNoteTextSubduedLight,
+		dark: endNoteTextSubduedDark,
+	},
 	'--eu-parliament-ecr': {
 		light: () => sourcePalette.brand[500],
 		dark: () => '#009AE1',
@@ -6429,26 +6441,6 @@ const paletteColours = {
 	'--expandable-atom-text-hover': {
 		light: expandableAtomTextHoverLight,
 		dark: expandableAtomTextHoverDark,
-	},
-	'--expandable-marketing-card-background': {
-		light: expandableMarketingCardBackground,
-		dark: expandableMarketingCardBackground,
-	},
-	'--expandable-marketing-card-button-background': {
-		light: expandableMarketingCardButtonBackground,
-		dark: expandableMarketingCardButtonBackground,
-	},
-	'--expandable-marketing-card-fill-background': {
-		light: expandableMarketingCardFillBackgroundLight,
-		dark: expandableMarketingCardFillBackgroundDark,
-	},
-	'--expandable-marketing-card-svg-background': {
-		light: expandableMarketingCardSvgBackground,
-		dark: expandableMarketingCardSvgBackground,
-	},
-	'--expandable-marketing-card-svg-fill': {
-		light: expandableMarketingCardSvgFill,
-		dark: expandableMarketingCardSvgFill,
 	},
 	'--explainer-atom-accent': {
 		light: explainerAtomAccentLight,
@@ -6727,10 +6719,6 @@ const paletteColours = {
 		light: matchActiveTabBorderLight,
 		dark: matchActiveTabBorderDark,
 	},
-	'--mini-profiles-text-subdued': {
-		light: miniProfilesTextSubduedLight,
-		dark: miniProfilesTextSubduedDark,
-	},
 	'--most-viewed-description': {
 		light: () => sourcePalette.neutral[46],
 		dark: () => sourcePalette.neutral[60],
@@ -6746,6 +6734,10 @@ const paletteColours = {
 	'--most-viewed-tab-border': {
 		light: mostViewedTabBorderLight,
 		dark: mostViewedTabBorderDark,
+	},
+	'--multi-byline-non-linked-text': {
+		light: multiBylineNonLinkedTextLight,
+		dark: multiBylineNonLinkedTextDark,
 	},
 	'--nav-reader-revenue-link-text': {
 		light: navReaderRevenueLinkText,
@@ -7266,10 +7258,6 @@ const paletteColours = {
 	'--us-elections-republicans': {
 		light: () => sourcePalette.news[400],
 		dark: () => '#DC2E1C',
-	},
-	'--weather-icon': {
-		light: () => sourcePalette.neutral[97],
-		dark: () => sourcePalette.neutral[7],
 	},
 	'--witness-title-author': {
 		light: witnessTitleAuthor,

@@ -31,6 +31,7 @@ import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
 import { MiniProfiles } from '../components/MiniProfiles';
+import { MultiBylines } from '../components/MultiBylines';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
 import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
@@ -491,6 +492,22 @@ export const renderElement = ({
 					sectioned={!!isSectionedMiniProfilesArticle}
 				/>
 			);
+		case 'model.dotcomrendering.pageElements.MultiBylinesBlockElement':
+			return (
+				<MultiBylines
+					multiBylines={element.multiBylines}
+					format={format}
+					ajaxUrl={ajaxUrl}
+					pageId={pageId}
+					isAdFreeUser={isAdFreeUser}
+					isSensitive={isSensitive}
+					abTests={abTests}
+					switches={switches}
+					editionId={editionId}
+					RenderArticleElement={RenderArticleElement}
+					isLastElement={index === totalElements - 1}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
 			return (
 				<MultiImageBlockComponent
@@ -568,6 +585,7 @@ export const renderElement = ({
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
+					isLastElement={index === totalElements - 1}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':

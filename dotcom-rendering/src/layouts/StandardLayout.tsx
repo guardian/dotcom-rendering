@@ -3,7 +3,6 @@ import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
-	space,
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
@@ -23,7 +22,6 @@ import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { ExpandableMarketingCardWrapper } from '../components/ExpandableMarketingCardWrapper.importable';
 import { Footer } from '../components/Footer';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
@@ -55,7 +53,6 @@ import {
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
-import { getZIndex } from '../lib/getZIndex';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -309,26 +306,6 @@ const StandardGrid = ({
 const maxWidth = css`
 	${from.desktop} {
 		max-width: 620px;
-	}
-`;
-
-const usCardStyles = css`
-	align-self: start;
-	position: sticky;
-	top: 0;
-	z-index: ${getZIndex('expandableMarketingCardOverlay')};
-
-	${from.leftCol} {
-		margin-top: ${space[6]}px;
-		margin-bottom: ${space[9]}px;
-
-		/* To align with rich links - if we move this feature to production, we should remove this and make rich link align with everything instead */
-		margin-left: 1px;
-		margin-right: -1px;
-	}
-
-	${from.wide} {
-		margin-left: 0;
 	}
 `;
 
@@ -676,79 +653,37 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									</Hide>
 								</>
 							) : (
-								<>
-									<div css={maxWidth}>
-										<ArticleMeta
-											branding={branding}
-											format={format}
-											pageId={article.pageId}
-											webTitle={article.webTitle}
-											byline={article.byline}
-											source={article.config.source}
-											tags={article.tags}
-											primaryDateline={
-												article.webPublicationDateDisplay
-											}
-											secondaryDateline={
-												article.webPublicationSecondaryDateDisplay
-											}
-											isCommentable={
-												article.isCommentable
-											}
-											discussionApiUrl={
-												article.config.discussionApiUrl
-											}
-											shortUrlId={
-												article.config.shortUrlId
-											}
-											mainMediaElements={
-												article.mainMediaElements
-											}
-										/>
-										{!!article.affiliateLinksDisclaimer && (
-											<AffiliateDisclaimer />
-										)}
-									</div>
-									{isWeb && (
-										<div css={usCardStyles}>
-											<Hide until="leftCol">
-												<Island
-													priority="enhancement"
-													defer={{
-														until: 'visible',
-													}}
-												>
-													<ExpandableMarketingCardWrapper
-														guardianBaseURL={
-															article.guardianBaseURL
-														}
-													/>
-												</Island>
-											</Hide>
-										</div>
+								<div css={maxWidth}>
+									<ArticleMeta
+										branding={branding}
+										format={format}
+										pageId={article.pageId}
+										webTitle={article.webTitle}
+										byline={article.byline}
+										source={article.config.source}
+										tags={article.tags}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											article.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={article.isCommentable}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										shortUrlId={article.config.shortUrlId}
+										mainMediaElements={
+											article.mainMediaElements
+										}
+									/>
+									{!!article.affiliateLinksDisclaimer && (
+										<AffiliateDisclaimer />
 									)}
-								</>
+								</div>
 							)}
 						</GridItem>
 						<GridItem area="body">
-							{isWeb && (
-								<Hide from="leftCol">
-									<Island
-										priority="enhancement"
-										/**
-										 * We display the card immediately if the viewport is below the top of
-										 * the article body, so we must use "idle" instead of "visible".
-										 */
-										defer={{ until: 'idle' }}
-									>
-										<ExpandableMarketingCardWrapper
-											guardianBaseURL={
-												article.guardianBaseURL
-											}
-										/>
-									</Island>
-								</Hide>
-							)}
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
