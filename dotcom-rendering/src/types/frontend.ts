@@ -183,6 +183,7 @@ type FEDesign =
 	| 'GalleryDesign'
 	| 'AudioDesign'
 	| 'VideoDesign'
+	| 'CrosswordDesign'
 	| 'ReviewDesign'
 	| 'AnalysisDesign'
 	| 'CommentDesign'
