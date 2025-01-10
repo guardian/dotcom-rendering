@@ -184,6 +184,7 @@ export type FEDesign =
 	| 'AudioDesign'
 	| 'VideoDesign'
 	| 'ReviewDesign'
+	| 'CrosswordDesign'
 	| 'AnalysisDesign'
 	| 'CommentDesign'
 	| 'ExplainerDesign'

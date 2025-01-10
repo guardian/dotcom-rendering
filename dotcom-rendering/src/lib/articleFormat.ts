@@ -7,6 +7,7 @@ export enum ArticleDesign {
 	Gallery,
 	Audio,
 	Video,
+	Crossword,
 	Review,
 	Analysis,
 	Explainer,
@@ -75,6 +76,8 @@ export const decideDesign = ({ design }: Partial<FEFormat>): ArticleDesign => {
 			return ArticleDesign.Audio;
 		case 'VideoDesign':
 			return ArticleDesign.Video;
+		case 'CrosswordDesign':
+			return ArticleDesign.Crossword;
 		case 'ReviewDesign':
 			return ArticleDesign.Review;
 		case 'AnalysisDesign':
@@ -226,6 +229,8 @@ const designToFEDesign = (design: ArticleDesign): FEDesign => {
 			return 'PictureDesign';
 		case ArticleDesign.Gallery:
 			return 'GalleryDesign';
+		case ArticleDesign.Crossword:
+			return 'CrosswordDesign';
 		case ArticleDesign.Audio:
 			return 'AudioDesign';
 		case ArticleDesign.Video:
