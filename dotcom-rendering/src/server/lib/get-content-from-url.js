@@ -27,11 +27,18 @@ async function getContentFromURL(url, _headers) {
 			.filter(isStringTuple),
 	);
 
+	console.log(`fetch url: ${jsonUrl}`);
+
 	// pick all the keys from the JSON except `html`
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- we don't want `html` in the config
 	const { html, ...config } = await fetch(jsonUrl, { headers })
-		.then((response) => response.json())
+		.then((response) => {
+			console.log(response);
+
+			return response.json();
+		})
 		.catch((error) => {
+			console.log(error);
 			if (error?.type === 'invalid-json') {
 				throw new Error(
 					'Did not receive JSON response - are you sure this URL supports .json?dcr requests?',
