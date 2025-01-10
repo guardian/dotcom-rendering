@@ -1953,31 +1953,6 @@ const articleInnerAdBorderLight: PaletteFunction = ({ design, theme }) => {
 
 const adBorderDark: PaletteFunction = () => sourcePalette.neutral[38];
 
-const adSupportBannerBackgroundLight: PaletteFunction = () => {
-	return sourcePalette.neutral[93];
-};
-const adSupportBannerBackgroundDark: PaletteFunction = () => {
-	return sourcePalette.neutral[46];
-};
-const adSupportBannerButtonBackgroundLight: PaletteFunction = () => {
-	return sourcePalette.brand[400];
-};
-const adSupportBannerButtonBackgroundDark: PaletteFunction = () => {
-	return sourcePalette.neutral[100];
-};
-const adSupportBannerButtonTextLight: PaletteFunction = () => {
-	return sourcePalette.neutral[100];
-};
-const adSupportBannerButtonTextDark: PaletteFunction = () => {
-	return sourcePalette.neutral[0];
-};
-const adSupportBannerTextLight: PaletteFunction = () => {
-	return sourcePalette.brand[400];
-};
-const adSupportBannerTextDark: PaletteFunction = () => {
-	return sourcePalette.neutral[100];
-};
-
 const appsFooterLinksTextLight: PaletteFunction = () =>
 	sourcePalette.neutral[7];
 const appsFooterLinksTextDark: PaletteFunction = () =>
@@ -5862,22 +5837,6 @@ const paletteColours = {
 	'--ad-labels-text-article-inner': {
 		light: articleInnerAdLabelsTextLight,
 		dark: adLabelsTextDark,
-	},
-	'--ad-support-banner-background': {
-		light: adSupportBannerBackgroundLight,
-		dark: adSupportBannerBackgroundDark,
-	},
-	'--ad-support-banner-button-background': {
-		light: adSupportBannerButtonBackgroundLight,
-		dark: adSupportBannerButtonBackgroundDark,
-	},
-	'--ad-support-banner-button-text': {
-		light: adSupportBannerButtonTextLight,
-		dark: adSupportBannerButtonTextDark,
-	},
-	'--ad-support-banner-text': {
-		light: adSupportBannerTextLight,
-		dark: adSupportBannerTextDark,
 	},
 	'--affiliate-disclaimer-background': {
 		light: affiliateDisclaimerBackgroundLight,
