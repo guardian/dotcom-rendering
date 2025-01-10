@@ -286,10 +286,6 @@ const styles = {
 			width: 100%;
 			padding-bottom: ${space[5]}px;
 		}
-		${from.desktop} {
-			grid-column: 2;
-			grid-row: 2;
-		}
 	`,
 	thirdColumnContainer: css`
 		display: flex;
@@ -299,8 +295,8 @@ const styles = {
 			grid-column: 2;
 		}
 		${from.desktop} {
-			grid-column: 3;
 			grid-row: 2;
+			grid-column: 3;
 		}
 	`,
 };
