@@ -224,7 +224,7 @@ const styles = {
 		display: flex;
 		flex-direction: column;
 		position: relative;
-		padding: 0 10px;
+		padding-right: 10px;
 		overflow: auto;
 
 		${from.mobile} {
