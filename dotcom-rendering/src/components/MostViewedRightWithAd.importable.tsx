@@ -1,9 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	ArticleDesign,
-	type ArticleFormat,
-	ArticleSpecial,
-} from '../lib/articleFormat';
+import { type ArticleFormat } from '../lib/articleFormat';
 import { RightAdsPlaceholder } from './AdPlaceholder.apps';
 import { AdSlot } from './AdSlot.web';
 import { useConfig } from './ConfigContext';
@@ -47,10 +43,6 @@ export const MostViewedRightWithAd = ({
 	const componentDataAttribute = 'most-viewed-right-container';
 	const { renderingTarget } = useConfig();
 	const isApps = renderingTarget === 'Apps';
-	const useDarkColourScheme =
-		(format.design === ArticleDesign.Video ||
-			format.design === ArticleDesign.Audio) &&
-		format.theme !== ArticleSpecial.Labs;
 
 	return (
 		<div
@@ -73,7 +65,6 @@ export const MostViewedRightWithAd = ({
 					display={format.display}
 					isPaidContent={isPaidContent}
 					shouldHideReaderRevenue={shouldHideReaderRevenue}
-					colourScheme={useDarkColourScheme ? 'dark' : 'light'}
 				/>
 			) : null}
 

@@ -555,6 +555,9 @@
                             },
                             "galleryCount": {
                                 "type": "number"
+                            },
+                            "audioDuration": {
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -1279,6 +1282,7 @@
                 "ArticleDesign",
                 "AudioDesign",
                 "CommentDesign",
+                "CrosswordDesign",
                 "DeadBlogDesign",
                 "EditorialDesign",
                 "ExplainerDesign",
