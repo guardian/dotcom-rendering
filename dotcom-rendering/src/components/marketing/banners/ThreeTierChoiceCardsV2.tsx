@@ -1,14 +1,18 @@
 import { css } from '@emotion/react';
 import {
+	from,
 	palette,
 	space,
 	textSans12,
 	textSans15,
 	textSansBold14,
 	textSansBold20,
-	until,
 } from '@guardian/source/foundations';
 import { LinkButton, SvgTickRound } from '@guardian/source/react-components';
+
+const RecommendedPill = () => {
+	return <div css={styles.recommendedPillStyles}>Recommended</div>;
+};
 
 export const ThreeTierChoiceCardsV2 = () => {
 	return (
@@ -29,35 +33,37 @@ export const ThreeTierChoiceCardsV2 = () => {
 					choose to give £1 or more.
 				</div>
 			</div>
-
-			<div css={styles.choiceCardStyles}>
-				<div css={styles.greyHeadline}>Support monthly</div>
-				<div css={styles.priceHeadline}>£12/month</div>
-				<div>
-					<LinkButton
-						href={'https://support.theguardian.com/contribute'} // URL will need to be updated
-						cssOverrides={styles.linkButtonStyles}
-					>
-						Continue
-					</LinkButton>
+			<div>
+				<div css={styles.choiceCardStyles}>
+					<RecommendedPill />
+					<div css={styles.greyHeadline}>Support monthly</div>
+					<div css={styles.priceHeadline}>£12/month</div>
+					<div>
+						<LinkButton
+							href={'https://support.theguardian.com/contribute'} // URL will need to be updated
+							cssOverrides={styles.linkButtonStyles}
+						>
+							Continue
+						</LinkButton>
+					</div>
+					<ul css={styles.benefitsStyles}>
+						<li>
+							<SvgTickRound size="xsmall" /> Unlimited access to
+							the Guardian app
+						</li>
+						<li>
+							<SvgTickRound size="xsmall" /> Ad-free reading on
+							all your devices
+						</li>
+						<li>
+							<SvgTickRound size="xsmall" /> Exclusive weekly
+							newsletter
+						</li>
+						<li>
+							<SvgTickRound size="xsmall" /> And much more!
+						</li>
+					</ul>
 				</div>
-				<ul css={styles.benefitsStyles}>
-					<li>
-						<SvgTickRound size="xsmall" /> Unlimited access to the
-						Guardian app
-					</li>
-					<li>
-						<SvgTickRound size="xsmall" /> Ad-free reading on all
-						your devices
-					</li>
-					<li>
-						<SvgTickRound size="xsmall" /> Exclusive weekly
-						newsletter
-					</li>
-					<li>
-						<SvgTickRound size="xsmall" /> And much more!
-					</li>
-				</ul>
 			</div>
 		</div>
 	);
@@ -97,17 +103,19 @@ const styles = {
 	`,
 
 	recommendedPillStyles: css`
-		border-radius: ${space[1]}px;
+		border-radius: 4px;
 		padding: ${space[1]}px ${space[2]}px;
 		background-color: ${palette.brand[400]};
 		${textSansBold14};
 		color: ${palette.neutral[100]};
 		position: absolute;
-		top: -${space[2]}px;
-		${until.phablet} {
-			right: ${space[3]}px;
+		right: auto;
+		${from.tablet} {
+			top: 250px;
 		}
-		right: ${space[5]}px;
+		${from.desktop} {
+			top: 74px;
+		}
 	`,
 
 	linkButtonStyles: css`

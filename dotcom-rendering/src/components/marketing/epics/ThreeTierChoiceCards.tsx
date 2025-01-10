@@ -164,7 +164,7 @@ const SupportingBenefits = ({
 	);
 };
 
-export const RecommendedPill = () => {
+const RecommendedPill = () => {
 	return <div css={recommendedPillStyles}>Recommended</div>;
 };
 
