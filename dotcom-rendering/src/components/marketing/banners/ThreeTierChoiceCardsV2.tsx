@@ -98,7 +98,7 @@ const styles = {
 		align-items: center;
 		flex-shrink: 0;
 		border-radius: ${space[3]}px;
-		background: #f1f8fc;
+		background: ${palette.sport[800]};
 		position: relative;
 	`,
 
@@ -109,8 +109,8 @@ const styles = {
 		${textSansBold14};
 		color: ${palette.neutral[100]};
 		position: absolute;
-		top: 0; // Aligns to the middle of the choice card
-		transform: translateY(-50%); // Centers it vertically on the choice card
+		top: 0;
+		transform: translateY(-50%);
 	`,
 
 	linkButtonStyles: css`

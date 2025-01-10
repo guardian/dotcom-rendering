@@ -165,10 +165,8 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 				{isTabletOrAbove && (
 					<>
 						{isDesktopOrAbove && (
-							<div css={styles.containerOverrides}>
-								<div css={styles.guardianLogoContainer}>
-									<SvgGuardianLogo />
-								</div>
+							<div css={styles.guardianLogoContainer}>
+								<SvgGuardianLogo />
 							</div>
 						)}
 						<div css={styles.thirdColumnContainer}>
@@ -224,16 +222,18 @@ const styles = {
 		display: flex;
 		flex-direction: column;
 		position: relative;
-		padding-right: 10px;
+		${from.desktop} {
+			padding: 0;
+		}
 		overflow: auto;
 
 		${from.mobile} {
-			padding-bottom: ${space[4]}px;
+			padding: 10px 10px 0 16px;
 		}
 
 		${from.tablet} {
 			display: grid;
-			grid-template-columns: 1fr 1fr 1fr; //Confirm with design on column widths on tablet
+			grid-template-columns: 1fr 1fr 1fr;
 			grid-template-rows: auto 1fr auto;
 			align-items: center;
 			padding-bottom: ${space[8]}px;
@@ -267,15 +267,12 @@ const styles = {
 		padding-top: ${space[3]}px;
 	`,
 	guardianLogoContainer: css`
-		${from.desktop} {
-			width: 100px;
-			grid-column: 1;
-			grid-row: 1;
-			justify-self: start;
-			align-self: start;
-			padding-top: ${space[3]}px;
-			padding-left: ${space[3]}px;
-		}
+		width: 100px;
+		grid-column: 1;
+		grid-row: 1;
+		justify-self: start;
+		align-self: start;
+		//	padding-top: ${space[3]}px;
 	`,
 	middleColumnContainer: css`
 		display: flex;
