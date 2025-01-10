@@ -168,7 +168,7 @@ export const RecommendedPill = () => {
 	return <div css={recommendedPillStyles}>Recommended</div>;
 };
 
-export const DiscountedPill = ({ discount }: { discount: number }) => {
+const DiscountedPill = ({ discount }: { discount: number }) => {
 	return <div css={discountedPillStyles}>{discount}% off</div>;
 };
 

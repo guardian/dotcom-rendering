@@ -67,7 +67,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 
 	const landingPageUrl = 'https://support.theguardian.com/contribute';
 
-	//All config hard coded for the tests - TODO make this configurable in the future
+	//Work required to wire in the new designs to the banner design tooling config: https://trello.com/c/sLa1GEg7/355-3-tier-banners-wire-in-config-to-tooling
 	const templateSettings: BannerTemplateSettings = {
 		containerSettings: {
 			backgroundColour: neutral[100],
@@ -193,7 +193,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 						</div>
 						<div css={styles.linkButtonContainer}>
 							<LinkButton
-								href={landingPageUrl} // update url
+								href={landingPageUrl}
 								onClick={onCtaClick}
 								size="small"
 								priority="primary"
@@ -233,7 +233,7 @@ const styles = {
 
 		${from.tablet} {
 			display: grid;
-			grid-template-columns: 1fr 1fr 1fr;
+			grid-template-columns: 1fr 1fr 1fr; //Confirm with design on column widths on tablet
 			grid-template-rows: auto 1fr auto;
 			align-items: center;
 			padding-bottom: ${space[8]}px;

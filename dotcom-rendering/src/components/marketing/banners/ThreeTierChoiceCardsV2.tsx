@@ -18,7 +18,7 @@ export const ThreeTierChoiceCardsV2 = () => {
 				<div css={styles.priceHeadline}>From just £1</div>
 				<div>
 					<LinkButton
-						href={'https://support.theguardian.com/contribute'} // update url
+						href={'https://support.theguardian.com/contribute'} // URL will need to be updated
 						cssOverrides={styles.linkButtonStyles}
 					>
 						Continue
@@ -35,7 +35,7 @@ export const ThreeTierChoiceCardsV2 = () => {
 				<div css={styles.priceHeadline}>£12/month</div>
 				<div>
 					<LinkButton
-						href={'https://support.theguardian.com/contribute'} //update url
+						href={'https://support.theguardian.com/contribute'} // URL will need to be updated
 						cssOverrides={styles.linkButtonStyles}
 					>
 						Continue
