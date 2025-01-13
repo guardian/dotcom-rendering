@@ -47,8 +47,6 @@ const validateResponse = (
 		isObject(response) &&
 		isBoolean(response.showSupportMessaging) &&
 		isObject(response.contentAccess) &&
-		isBoolean(response.contentAccess.paidMember) &&
-		isBoolean(response.contentAccess.recurringContributor) &&
 		isBoolean(response.contentAccess.digitalPack)
 	);
 };
