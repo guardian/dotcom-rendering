@@ -217,7 +217,6 @@ export const OnwardsUpper = ({
 	absoluteServerTimes,
 	renderingTarget,
 }: Props) => {
-
 	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
 
 	if (!isHorizontalScrollingSupported) return null;
