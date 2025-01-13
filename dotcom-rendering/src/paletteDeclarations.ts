@@ -1052,9 +1052,7 @@ const datelineDark: PaletteFunction = ({ design, theme }) => {
 const headlineBorder: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
-			return 'rgba(255,255,255, 0.2)';
-		case ArticleDesign.DeadBlog:
-			return '#CDCDCD';
+			return transparentColour(sourcePalette.neutral[100], 0.2);
 		default:
 			return sourcePalette.neutral[86];
 	}
@@ -2282,9 +2280,7 @@ const standfirstBackgroundDark: PaletteFunction = ({ design, theme }) => {
 const standfirstBorder: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
-			return 'rgba(255,255,255, 0.2)';
-		case ArticleDesign.DeadBlog:
-			return '#BDBDBD';
+			return transparentColour(sourcePalette.neutral[100], 0.2);
 		default:
 			return sourcePalette.neutral[86];
 	}
