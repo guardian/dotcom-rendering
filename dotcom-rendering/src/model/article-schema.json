@@ -841,6 +841,9 @@
                     "type": "string",
                     "const": "model.dotcomrendering.pageElements.AudioBlockElement"
                 },
+                "id": {
+                    "type": "string"
+                },
                 "elementId": {
                     "type": "string"
                 },
@@ -4217,6 +4220,7 @@
                 "ArticleDesign",
                 "AudioDesign",
                 "CommentDesign",
+                "CrosswordDesign",
                 "DeadBlogDesign",
                 "EditorialDesign",
                 "ExplainerDesign",

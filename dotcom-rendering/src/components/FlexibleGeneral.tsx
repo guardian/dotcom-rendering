@@ -1,3 +1,4 @@
+import { ArticleDesign } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
 import { palette } from '../palette';
 import type { BoostLevel } from '../types/content';
@@ -227,6 +228,7 @@ export const SplashCardLayout = ({
 					showTopBarMobile={true}
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
+					showKickerImage={card.format.design === ArticleDesign.Audio}
 				/>
 			</LI>
 		</UL>
@@ -340,6 +342,7 @@ export const BoostedCardLayout = ({
 					showTopBarMobile={true}
 					liveUpdatesPosition={liveUpdatesPosition}
 					canPlayInline={true}
+					showKickerImage={card.format.design === ArticleDesign.Audio}
 				/>
 			</LI>
 		</UL>
@@ -407,7 +410,11 @@ export const StandardCardLayout = ({
 							)}
 							supportingContentAlignment="vertical"
 							supportingContentPosition="outer"
-							imageSize={'medium'}
+							imageSize={
+								card.format.design === ArticleDesign.Audio
+									? 'small'
+									: 'medium'
+							}
 							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}
