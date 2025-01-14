@@ -1,4 +1,4 @@
-import { isBoolean, isObject } from '@guardian/libs';
+import { isObject } from '@guardian/libs';
 import {
 	getOptionsHeadersWithOkta,
 	type SignedInWithCookies,
@@ -37,5 +37,5 @@ export const syncDataFromUserBenefitsApi = async (
 const validateResponse = (
 	response: unknown,
 ): response is UserBenefitsResponse => {
-	return isObject(response) && isBoolean(response.benefits);
+	return isObject(response) && Array.isArray(response.benefits);
 };
