@@ -97,6 +97,6 @@ const Layout: CrosswordProps['Layout'] = ({
 	);
 };
 
-export const Crossword = (data: CrosswordProps['data']) => (
+export const Crossword = ({ data }: { data: CrosswordProps['data'] }) => (
 	<ReactCrossword data={data} Layout={Layout} />
 );
