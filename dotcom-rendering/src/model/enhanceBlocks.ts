@@ -31,7 +31,7 @@ type Options = {
 	imagesForLightbox: ImageForLightbox[];
 	hasAffiliateLinksDisclaimer: boolean;
 	audioArticleImage?: ImageBlockElement;
-	crossword?: Block;
+	crosswordBlock?: Block;
 	tags?: TagType[];
 };
 
@@ -107,18 +107,22 @@ export const enhanceBlocks = (
 	options: Options,
 ): Block[] => {
 	const additionalElements: FEElement[] = [];
+	const additionalBlocks: Block[] = [];
 	if (options.audioArticleImage) {
 		additionalElements.push(options.audioArticleImage);
 	}
-	if (options.crossword) {
-		blocks.push(options.crossword);
+	if (options.crosswordBlock) {
+		additionalBlocks.push(options.crosswordBlock);
 	}
-	return blocks.map((block) => ({
-		...block,
-		elements: enhanceElements(
-			format,
-			block.id,
-			options,
-		)([...block.elements, ...additionalElements]),
-	}));
+	return [
+		...blocks.map((block) => ({
+			...block,
+			elements: enhanceElements(
+				format,
+				block.id,
+				options,
+			)([...block.elements, ...additionalElements]),
+		})),
+		...additionalBlocks,
+	];
 };
