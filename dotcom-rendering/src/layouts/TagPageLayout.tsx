@@ -3,12 +3,12 @@ import { palette } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { Accessibility } from '../components/Accessibility.importable';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
-import {
-	decideFrontsBannerAdSlot,
-	decideMerchandisingSlot,
-	decideMerchHighAndMobileAdSlots,
-} from '../components/DecideFrontsAdSlots';
 import { Footer } from '../components/Footer';
+import {
+	FrontsBannerAdSlot,
+	MerchandisingAdSlot,
+	MobileAdSlot,
+} from '../components/FrontsAdSlots';
 import { FrontSection } from '../components/FrontSection';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -143,11 +143,14 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 
 					return (
 						<Fragment key={containerId}>
-							{decideFrontsBannerAdSlot(
-								renderAds,
-								hasPageSkin,
-								index,
-								desktopAdPositions,
+							{desktopAdPositions.includes(index) && (
+								<FrontsBannerAdSlot
+									renderAds={renderAds}
+									hasPageSkin={hasPageSkin}
+									adSlotIndex={desktopAdPositions.indexOf(
+										index,
+									)}
+								/>
 							)}
 							<FrontSection
 								title={title}
@@ -181,13 +184,13 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									isTagPage={true}
 								/>
 							</FrontSection>
-							{decideMerchHighAndMobileAdSlots(
-								renderAds,
-								index,
-								tagPage.groupedTrails.length,
-								isPaidContent,
-								mobileAdPositions,
-								hasPageSkin,
+							{mobileAdPositions.includes(index) && (
+								<MobileAdSlot
+									renderAds={renderAds}
+									adSlotIndex={mobileAdPositions.indexOf(
+										index,
+									)}
+								/>
 							)}
 						</Fragment>
 					);
@@ -202,7 +205,10 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 				<TrendingTopics trendingTopics={tagPage.trendingTopics} />
 			</Section>
 
-			{decideMerchandisingSlot(renderAds, hasPageSkin)}
+			<MerchandisingAdSlot
+				renderAds={renderAds}
+				hasPageSkin={hasPageSkin}
+			/>
 
 			{NAV.subNavSections && (
 				<Section
