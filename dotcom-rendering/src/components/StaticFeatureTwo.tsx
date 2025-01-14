@@ -50,7 +50,7 @@ export const StaticFeatureTwo = ({
 							/** TODO - implement show age */
 							showClock={false}
 							image={card.image}
-							isPlayableMediaCard={true}
+							canPlayInline={true}
 							starRating={card.starRating}
 							dataLinkName={card.dataLinkName}
 							discussionApiUrl={card.discussionApiUrl}

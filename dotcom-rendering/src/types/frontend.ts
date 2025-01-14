@@ -179,7 +179,7 @@ type ThemePillar =
 	| 'LifestylePillar';
 
 type ThemeSpecial = 'SpecialReportTheme' | 'Labs' | 'SpecialReportAltTheme';
-export type FETheme = ThemePillar | ThemeSpecial;
+type FETheme = ThemePillar | ThemeSpecial;
 
 /**
  * FEDesign is what frontend gives (originating in the capi scala client) us on the Format field
@@ -191,6 +191,7 @@ export type FEDesign =
 	| 'GalleryDesign'
 	| 'AudioDesign'
 	| 'VideoDesign'
+	| 'CrosswordDesign'
 	| 'ReviewDesign'
 	| 'AnalysisDesign'
 	| 'CommentDesign'

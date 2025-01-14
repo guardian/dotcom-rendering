@@ -5,9 +5,13 @@ import {
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
-import { Hide, Link } from '@guardian/source/react-components';
-import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
-import { isMediaCard } from '../../lib/cardHelpers';
+import { Hide, Link, SvgCamera } from '@guardian/source/react-components';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../../lib/articleFormat';
+import { isMediaCard as isAMediaCard } from '../../lib/cardHelpers';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { palette } from '../../palette';
@@ -34,6 +38,7 @@ import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
 import { MediaDuration } from '../MediaDuration';
 import { MediaMeta } from '../MediaMeta';
+import { Pill } from '../Pill';
 import { Slideshow } from '../Slideshow';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
@@ -41,6 +46,7 @@ import { SnapCssSandbox } from '../SnapCssSandbox';
 import { StarRating } from '../StarRating/StarRating';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
+import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 import { YoutubeBlockComponent } from '../YoutubeBlockComponent.importable';
 import { AvatarContainer } from './components/AvatarContainer';
 import { CardAge } from './components/CardAge';
@@ -57,10 +63,10 @@ import type {
 	ImageSizeType,
 } from './components/ImageWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
+import { SvgWaveform } from './components/SvgWaveform';
 import { TrailText, type TrailTextSize } from './components/TrailText';
 
 export type Position = 'inner' | 'outer' | 'none';
-
 export const BETA_CONTAINERS = [
 	'scrollable/highlights',
 	'flexible/special',
@@ -98,7 +104,7 @@ export type Props = {
 	 * At 300px or below, the player will begin to lose functionality e.g. volume controls being omitted.
 	 * Youtube requires a minimum width 200px.
 	 */
-	isPlayableMediaCard?: boolean;
+	canPlayInline?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	starRating?: Rating;
@@ -141,6 +147,10 @@ export type Props = {
 	trailTextColour?: string;
 	/** The square podcast series image, if it exists for a card */
 	podcastImage?: PodcastSeriesImage;
+	/** A kicker image is seperate to the main media and renders as part of the kicker */
+	showKickerImage?: boolean;
+	galleryCount?: number;
+	audioDuration?: string;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -166,6 +176,27 @@ const StarRatingComponent = ({
 	</div>
 );
 
+const waveformWrapper = (
+	imagePositionOnMobile?: ImagePositionType,
+	imagePositionOnDesktop?: ImagePositionType,
+) => css`
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	svg {
+		display: block;
+		width: 100%;
+		height: ${imagePositionOnMobile === 'top' ? 50 : 29}px;
+		${from.mobileMedium} {
+			height: ${imagePositionOnMobile === 'top' ? 50 : 33}px;
+		}
+		${from.tablet} {
+			height: ${imagePositionOnDesktop === 'top' ? 50 : 33}px;
+		}
+	}
+`;
+
 const HorizontalDivider = () => (
 	<div
 		css={css`
@@ -185,6 +216,35 @@ const HorizontalDivider = () => (
 	/>
 );
 
+const podcastImageStyles = (imageSize: ImageSizeType) => {
+	switch (imageSize) {
+		case 'small':
+			return css`
+				width: 69px;
+				height: 69px;
+				${from.tablet} {
+					width: 98px;
+					height: 98px;
+				}
+			`;
+
+		case 'medium':
+			return css`
+				width: 98px;
+				height: 98px;
+				${from.tablet} {
+					width: 120px;
+					height: 120px;
+				}
+			`;
+		default:
+			return css`
+				width: 120px;
+				height: 120px;
+			`;
+	}
+};
+
 const getMedia = ({
 	imageUrl,
 	imageAltText,
@@ -192,8 +252,9 @@ const getMedia = ({
 	isCrossword,
 	slideshowImages,
 	mainMedia,
-	isPlayableMediaCard,
+	canPlayInline,
 	podcastImage,
+	isBetaContainer,
 }: {
 	imageUrl?: string;
 	imageAltText?: string;
@@ -201,10 +262,11 @@ const getMedia = ({
 	isCrossword?: boolean;
 	slideshowImages?: DCRSlideshowImage[];
 	mainMedia?: MainMedia;
-	isPlayableMediaCard?: boolean;
+	canPlayInline?: boolean;
 	podcastImage?: PodcastSeriesImage;
+	isBetaContainer: boolean;
 }) => {
-	if (mainMedia && mainMedia.type === 'Video' && isPlayableMediaCard) {
+	if (mainMedia && mainMedia.type === 'Video' && canPlayInline) {
 		return {
 			type: 'video',
 			mainMedia,
@@ -213,7 +275,7 @@ const getMedia = ({
 	}
 	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
 	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
-	if (podcastImage) {
+	if (podcastImage && isBetaContainer) {
 		return {
 			type: 'podcast',
 			podcastImage,
@@ -257,11 +319,14 @@ const getHeadlinePosition = ({
 	isFlexSplash,
 	containerType,
 	showLivePlayable,
+	isMediaCard,
 }: {
 	containerType?: DCRContainerType;
 	isFlexSplash?: boolean;
 	showLivePlayable: boolean;
+	isMediaCard: boolean;
 }) => {
+	if (isMediaCard) return 'inner';
 	if (containerType === 'flexible/special' && isFlexSplash) {
 		return 'outer';
 	}
@@ -303,7 +368,7 @@ export const Card = ({
 	avatarUrl,
 	showClock,
 	mainMedia,
-	isPlayableMediaCard,
+	canPlayInline,
 	kickerText,
 	showPulsingDot,
 	starRating,
@@ -340,6 +405,9 @@ export const Card = ({
 	trailTextSize,
 	trailTextColour,
 	podcastImage,
+	showKickerImage = false,
+	galleryCount,
+	audioDuration,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -411,6 +479,29 @@ export const Card = ({
 			</Link>
 		);
 
+	const MediaPill = () => (
+		<div
+			css={css`
+				margin-top: auto;
+			`}
+		>
+			{mainMedia?.type === 'Audio' && (
+				<Pill
+					content={audioDuration ?? ''}
+					icon={<SvgMediaControlsPlay />}
+				/>
+			)}
+			{mainMedia?.type === 'Gallery' && (
+				<Pill
+					prefix="Gallery"
+					content={galleryCount?.toString() ?? ''}
+					icon={<SvgCamera />}
+					iconSide="right"
+				/>
+			)}
+		</div>
+	);
+
 	if (snapData?.embedHtml) {
 		return (
 			<SnapCssSandbox snapData={snapData}>
@@ -419,10 +510,14 @@ export const Card = ({
 		);
 	}
 
-	// If the card isn't playable, we need to show a play icon.
-	// Otherwise, this is handled by the YoutubeAtom
-	const showPlayIcon =
-		mainMedia?.type === 'Video' && !isPlayableMediaCard && showMainVideo;
+	/**
+	 * Check media type to determine if pill, or article metadata & icon shown.
+	 * Currently pills are only shown within beta containers.
+	 */
+	const showPill =
+		isBetaContainer &&
+		mainMedia &&
+		(mainMedia.type === 'Audio' || mainMedia.type === 'Gallery');
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -431,8 +526,9 @@ export const Card = ({
 		isCrossword,
 		slideshowImages,
 		mainMedia,
-		isPlayableMediaCard,
+		canPlayInline,
 		podcastImage,
+		isBetaContainer,
 	});
 
 	// For opinion type cards with avatars (which aren't onwards content)
@@ -441,10 +537,14 @@ export const Card = ({
 		isOpinion && !isOnwardContent && media?.type === 'avatar';
 
 	/**
-	 * Some cards in standard containers have contrasting background colours.
-	 * We need to add additional padding to these cards to keep the text readable.
-	 */
-	const hasBackgroundColour = !containerPalette && isMediaCard(format);
+-	 * Media cards have contrasting background colours. We add additional
+	 * padding to these cards to keep the text readable.
+-	 */
+	const isMediaCard = isAMediaCard(format);
+
+	const backgroundColour = isMediaCard
+		? palette('--card-media-background')
+		: palette('--card-background');
 
 	/* Whilst we migrate to the new container types, we need to check which container we are in. */
 	const isFlexibleContainer =
@@ -469,6 +569,7 @@ export const Card = ({
 		containerType,
 		isFlexSplash,
 		showLivePlayable,
+		isMediaCard,
 	});
 
 	const hideTrailTextUntil = () => {
@@ -488,12 +589,14 @@ export const Card = ({
 	/** Determines the gap of between card components based on card properties */
 	const getGapSize = (): GapSize => {
 		if (isOnwardContent) return 'none';
-		if (hasBackgroundColour) return 'tiny';
+		if (isMediaCard && !isFlexibleContainer) return 'tiny';
 		if (!!isFlexSplash || (isFlexibleContainer && imageSize === 'jumbo')) {
 			return 'small';
 		}
 		if (isSmallCard) return 'medium';
-
+		if (isBetaContainer && media?.type === 'avatar') {
+			return 'small';
+		}
 		if (
 			isFlexibleContainer &&
 			(imagePositionOnDesktop === 'left' ||
@@ -555,6 +658,16 @@ export const Card = ({
 		);
 	};
 
+	const determinePadContent = (
+		mediaCard: boolean,
+		betaContainer: boolean,
+		onwardContent: boolean,
+	): 'large' | 'small' | undefined => {
+		if (mediaCard && betaContainer) return 'large';
+		if (mediaCard || onwardContent) return 'small';
+		return undefined;
+	};
+
 	return (
 		<CardWrapper
 			format={format}
@@ -574,7 +687,7 @@ export const Card = ({
 					css={css`
 						padding-bottom: ${space[5]}px;
 					`}
-					style={{ backgroundColor: palette('--card-background') }}
+					style={{ backgroundColor: backgroundColour }}
 				>
 					<CardHeadline
 						headlineText={headlineText}
@@ -602,7 +715,7 @@ export const Card = ({
 							cardHasImage={!!image}
 						/>
 					) : null}
-					{!!mainMedia && mainMedia.type !== 'Video' && (
+					{!!mainMedia && mainMedia.type !== 'Video' && !showPill && (
 						<MediaMeta
 							mediaType={mainMedia.type}
 							hasKicker={!!kickerText}
@@ -612,14 +725,29 @@ export const Card = ({
 			)}
 
 			<CardLayout
-				cardBackgroundColour={palette('--card-background')}
+				cardBackgroundColour={backgroundColour}
 				imagePositionOnDesktop={imagePositionOnDesktop}
 				imagePositionOnMobile={imagePositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
 				imageType={media?.type}
 				containerType={containerType}
 				gapSize={getGapSize()}
+				isBetaContainer={isBetaContainer}
 			>
+				{/**
+				 * Waveform for podcasts is absolutely positioned at bottom of
+				 * card, behind everything else
+				 */}
+				{isBetaContainer && mainMedia?.type === 'Audio' && (
+					<div
+						css={waveformWrapper(
+							imagePositionOnMobile,
+							imagePositionOnDesktop,
+						)}
+					>
+						<SvgWaveform />
+					</div>
+				)}
 				{media && (
 					<ImageWrapper
 						imageSize={imageSize}
@@ -627,10 +755,10 @@ export const Card = ({
 						imageType={media.type}
 						imagePositionOnDesktop={imagePositionOnDesktop}
 						imagePositionOnMobile={imagePositionOnMobile}
-						showPlayIcon={showPlayIcon}
 						hideImageOverlay={
 							media.type === 'slideshow' && isFlexibleContainer
 						}
+						padImage={isMediaCard && isBetaContainer}
 					>
 						{media.type === 'slideshow' &&
 							(isFlexibleContainer ? (
@@ -663,10 +791,15 @@ export const Card = ({
 							<AvatarContainer
 								imageSize={imageSize}
 								imagePositionOnDesktop={imagePositionOnDesktop}
+								imagePositionOnMobile={imagePositionOnMobile}
+								isBetaContainer={isBetaContainer}
 							>
 								<Avatar
 									src={media.avatarUrl}
 									alt={byline ?? ''}
+									imageSize={
+										isBetaContainer ? imageSize : undefined
+									}
 								/>
 							</AvatarContainer>
 						)}
@@ -778,21 +911,47 @@ export const Card = ({
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
 								/>
-								{showPlayIcon && mainMedia.duration > 0 && (
-									<MediaDuration
-										mediaDuration={mainMedia.duration}
-										imagePositionOnDesktop={
-											imagePositionOnDesktop
-										}
-										imagePositionOnMobile={
-											imagePositionOnMobile
-										}
-									/>
-								)}
+								{mainMedia?.type === 'Video' &&
+									mainMedia.duration > 0 && (
+										<MediaDuration
+											mediaDuration={mainMedia.duration}
+											imagePositionOnDesktop={
+												imagePositionOnDesktop
+											}
+											imagePositionOnMobile={
+												imagePositionOnMobile
+											}
+										/>
+									)}
 							</>
 						)}
 						{media.type === 'crossword' && (
 							<img src={media.imageUrl} alt="" />
+						)}
+
+						{media.type === 'podcast' && (
+							<>
+								{media.podcastImage.src && !showKickerImage ? (
+									<div css={[podcastImageStyles(imageSize)]}>
+										<CardPicture
+											mainImage={media.podcastImage.src}
+											imageSize={'small'}
+											alt={media.imageAltText}
+											loading={imageLoading}
+											roundedCorners={isOnwardContent}
+											aspectRatio={'1:1'}
+										/>
+									</div>
+								) : (
+									<CardPicture
+										mainImage={media.trailImage.src ?? ''}
+										imageSize={imageSize}
+										alt={media.trailImage.altText}
+										loading={imageLoading}
+										aspectRatio={aspectRatio}
+									/>
+								)}
+							</>
 						)}
 					</ImageWrapper>
 				)}
@@ -802,12 +961,17 @@ export const Card = ({
 						imageType={media?.type}
 						imageSize={imageSize}
 						imagePositionOnDesktop={imagePositionOnDesktop}
-						hasBackgroundColour={hasBackgroundColour}
-						isOnwardContent={isOnwardContent}
+						padContent={determinePadContent(
+							isMediaCard,
+							isBetaContainer,
+							isOnwardContent,
+						)}
+						isFlexibleContainer={isFlexibleContainer}
 					>
 						{/* This div is needed to keep the headline and trail text justified at the start */}
 						<div
 							css={css`
+								position: relative;
 								display: flex;
 								flex-direction: column;
 								justify-content: flex-start;
@@ -837,6 +1001,12 @@ export const Card = ({
 										showByline={showByline}
 										isExternalLink={isExternalLink}
 										isBetaContainer={isBetaContainer}
+										kickerImage={
+											showKickerImage &&
+											media?.type === 'podcast'
+												? media?.podcastImage
+												: undefined
+										}
 									/>
 									{!isUndefined(starRating) ? (
 										<StarRatingComponent
@@ -845,7 +1015,8 @@ export const Card = ({
 										/>
 									) : null}
 									{!!mainMedia &&
-										mainMedia.type !== 'Video' && (
+										mainMedia.type !== 'Video' &&
+										!showPill && (
 											<MediaMeta
 												mediaType={mainMedia.type}
 												hasKicker={!!kickerText}
@@ -854,7 +1025,7 @@ export const Card = ({
 								</HeadlineWrapper>
 							)}
 
-							{!!trailText && (
+							{!!trailText && media?.type !== 'podcast' && (
 								<TrailText
 									trailText={trailText}
 									trailTextColour={trailTextColour}
@@ -865,24 +1036,48 @@ export const Card = ({
 							)}
 
 							{!showCommentFooter && (
-								<CardFooter
-									format={format}
-									age={decideAge()}
-									commentCount={<CommentCount />}
-									cardBranding={
-										branding ? (
-											<CardBranding
-												branding={branding}
-												format={format}
-												onwardsSource={onwardsSource}
-												containerPalette={
-													containerPalette
-												}
-											/>
-										) : undefined
-									}
-									showLivePlayable={showLivePlayable}
-								/>
+								<>
+									{showPill ? (
+										<>
+											<MediaPill />
+											{format.theme ===
+												ArticleSpecial.Labs &&
+												branding && (
+													<CardBranding
+														branding={branding}
+														format={format}
+														onwardsSource={
+															onwardsSource
+														}
+														containerPalette={
+															containerPalette
+														}
+													/>
+												)}
+										</>
+									) : (
+										<CardFooter
+											format={format}
+											age={decideAge()}
+											commentCount={<CommentCount />}
+											cardBranding={
+												branding ? (
+													<CardBranding
+														branding={branding}
+														format={format}
+														onwardsSource={
+															onwardsSource
+														}
+														containerPalette={
+															containerPalette
+														}
+													/>
+												) : undefined
+											}
+											showLivePlayable={showLivePlayable}
+										/>
+									)}
+								</>
 							)}
 							{showLivePlayable &&
 								liveUpdatesPosition === 'inner' && (
@@ -930,11 +1125,18 @@ export const Card = ({
 			</CardLayout>
 
 			<div
+				css={
+					/** If beta containers have liveblog links or sublink links in the outer position, we set flex-basis so that they sit below the image */
+					isBetaContainer &&
+					(liveUpdatesPosition === 'outer' ||
+						sublinkPosition === 'outer') &&
+					css`
+						flex-basis: 100%;
+					`
+				}
 				style={{
 					padding:
-						hasBackgroundColour || isOnwardContent
-							? `0 ${space[2]}px`
-							: 0,
+						isMediaCard || isOnwardContent ? `0 ${space[2]}px` : 0,
 				}}
 			>
 				{showLivePlayable && liveUpdatesPosition === 'outer' && (

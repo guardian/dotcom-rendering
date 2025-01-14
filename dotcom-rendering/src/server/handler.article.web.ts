@@ -3,7 +3,7 @@ import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles
 import { decideFormat } from '../lib/articleFormat';
 import { enhanceBlocks } from '../model/enhanceBlocks';
 import { validateAsArticleType, validateAsBlock } from '../model/validate';
-import { enhanceArticleType, enhanceCrosswordArticle } from '../types/article';
+import { enhanceArticleType } from '../types/article';
 import type { FEBlocksRequest } from '../types/frontend';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
@@ -13,12 +13,7 @@ export const handleArticle: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'web');
 
 	const frontendData = validateAsArticleType(body);
-	let article = enhanceArticleType(frontendData, 'Web');
-
-	if (article.frontendData.crossword) {
-		article = enhanceCrosswordArticle(article);
-	}
-
+	const article = enhanceArticleType(frontendData, 'Web');
 	const { html, prefetchScripts } = renderHtml({
 		article,
 	});

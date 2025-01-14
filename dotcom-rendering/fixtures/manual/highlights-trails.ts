@@ -1,8 +1,17 @@
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	Pillar,
+} from '../../src/lib/articleFormat';
 import type { DCRFrontCard } from '../../src/types/front';
 
 export const trails: Array<DCRFrontCard> = [
 	{
-		format: { display: 3, theme: 2, design: 10 },
+		format: {
+			theme: Pillar.Sport,
+			design: ArticleDesign.Feature,
+			display: ArticleDisplay.NumberedList,
+		},
 		dataLinkName: 'feature | group-0 | card-@1',
 		url: '/football/article/2024/may/13/premier-league-10-talking-points-from-the-weekends-action',
 		headline: 'Conceição off the bench to score injury time winner',
@@ -36,7 +45,11 @@ export const trails: Array<DCRFrontCard> = [
 		},
 	},
 	{
-		format: { display: 0, theme: 3, design: 10 },
+		format: {
+			theme: Pillar.Culture,
+			design: ArticleDesign.Feature,
+			display: ArticleDisplay.Standard,
+		},
 		dataLinkName: 'feature | group-0 | card-@2',
 		url: '/tv-and-radio/article/2024/may/12/eurovision-2024-everything-we-learned-from-to-the-uk-wild-unpopularity',
 		headline: 'Eurovision 2024: everything we learned',
@@ -70,7 +83,11 @@ export const trails: Array<DCRFrontCard> = [
 		},
 	},
 	{
-		format: { display: 0, theme: 4, design: 0 },
+		format: {
+			theme: Pillar.Lifestyle,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		},
 		dataLinkName: 'news | group-0 | card-@3',
 		url: '/money/article/2024/jul/22/number-of-new-uk-buy-to-let-mortgages-halves-in-just-over-a-year',
 		headline:
@@ -104,7 +121,11 @@ export const trails: Array<DCRFrontCard> = [
 		},
 	},
 	{
-		format: { display: 0, theme: 1, design: 8 },
+		format: {
+			theme: Pillar.Opinion,
+			design: ArticleDesign.Comment,
+			display: ArticleDisplay.Standard,
+		},
 		dataLinkName: 'comment | group-0 | card-@4',
 		url: '/commentisfree/article/2024/may/10/piers-morgan-baby-reindeer-netflix-interview',
 		headline: 'Restaurants are disproportionately expensive',
@@ -138,7 +159,11 @@ export const trails: Array<DCRFrontCard> = [
 		},
 	},
 	{
-		format: { display: 3, theme: 2, design: 10 },
+		format: {
+			theme: Pillar.Sport,
+			design: ArticleDesign.Feature,
+			display: ArticleDisplay.NumberedList,
+		},
 		dataLinkName: 'feature | group-0 | card-@1',
 		url: '/football/article/2024/may/13/premier-league-10-talking-points-from-the-weekends-action',
 		headline: 'Conceição off the bench to score injury time winner',
@@ -172,7 +197,11 @@ export const trails: Array<DCRFrontCard> = [
 		},
 	},
 	{
-		format: { display: 0, theme: 3, design: 10 },
+		format: {
+			theme: Pillar.Culture,
+			design: ArticleDesign.Feature,
+			display: ArticleDisplay.Standard,
+		},
 		dataLinkName: 'feature | group-0 | card-@2',
 		url: '/tv-and-radio/article/2024/may/12/eurovision-2024-everything-we-learned-from-to-the-uk-wild-unpopularity',
 		headline: 'Eurovision 2024: everything we learned',
@@ -206,7 +235,11 @@ export const trails: Array<DCRFrontCard> = [
 		},
 	},
 	{
-		format: { display: 0, theme: 4, design: 0 },
+		format: {
+			theme: Pillar.Lifestyle,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		},
 		dataLinkName: 'news | group-0 | card-@3',
 		url: '/money/article/2024/jul/22/number-of-new-uk-buy-to-let-mortgages-halves-in-just-over-a-year',
 		headline:
@@ -240,7 +273,11 @@ export const trails: Array<DCRFrontCard> = [
 		},
 	},
 	{
-		format: { display: 0, theme: 1, design: 8 },
+		format: {
+			theme: Pillar.Opinion,
+			design: ArticleDesign.Comment,
+			display: ArticleDisplay.Standard,
+		},
 		dataLinkName: 'comment | group-0 | card-@4',
 		url: '/commentisfree/article/2024/may/10/piers-morgan-baby-reindeer-netflix-interview',
 		headline: 'Restaurants are disproportionately expensive',
@@ -276,7 +313,11 @@ export const trails: Array<DCRFrontCard> = [
 ];
 
 export const defaultCard: DCRFrontCard = {
-	format: { display: 0, theme: 4, design: 0 },
+	format: {
+		theme: Pillar.Lifestyle,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+	},
 	dataLinkName: 'news | group-0 | card-@3',
 	url: '/money/article/2024/jul/22/number-of-new-uk-buy-to-let-mortgages-halves-in-just-over-a-year',
 	headline:

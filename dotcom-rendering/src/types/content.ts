@@ -1,5 +1,5 @@
 import { type CrosswordProps } from '@guardian/react-crossword-next';
-import type { ArticleTheme } from '../lib/articleFormat';
+import type { ArticleFormat } from '../lib/articleFormat';
 
 export type StarRating = 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -46,6 +46,7 @@ export interface AudioAtomBlockElement {
 
 interface AudioBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AudioBlockElement';
+	id?: string;
 	elementId: string;
 	assets: AudioAsset[];
 }
@@ -351,6 +352,16 @@ export interface MiniProfile {
 	endNote?: string;
 }
 
+export interface MultiByline {
+	title: string;
+	body: FEElement[];
+	bio?: string;
+	endNote?: string;
+	imageUrl?: string;
+	byline: string;
+	bylineHtml: string;
+}
+
 export interface KeyTakeawaysBlockElement {
 	_type: 'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement';
 	keyTakeaways: KeyTakeaway[];
@@ -366,16 +377,29 @@ interface MiniProfilesBlockElement {
 	miniProfiles: MiniProfile[];
 }
 
-interface ListItem {
+interface MultiBylinesBlockElement {
+	_type: 'model.dotcomrendering.pageElements.MultiBylinesBlockElement';
+	multiBylines: MultiByline[];
+}
+
+export interface ListItem {
 	title?: string;
 	elements: FEElement[];
 	bio?: string;
 	endNote?: string;
+	imageOverrideUrl?: string;
+	contributorIds?: string[];
+	byline?: string;
+	bylineHtml?: string;
 }
 
 export interface ListBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ListBlockElement';
-	listElementType: 'KeyTakeaways' | 'QAndAExplainer' | 'MiniProfiles';
+	listElementType:
+		| 'KeyTakeaways'
+		| 'QAndAExplainer'
+		| 'MiniProfiles'
+		| 'MultiByline';
 	items: ListItem[];
 	elementId: string;
 }
@@ -772,6 +796,7 @@ export type FEElement =
 	| MapBlockElement
 	| MediaAtomBlockElement
 	| MiniProfilesBlockElement
+	| MultiBylinesBlockElement
 	| MultiImageBlockElement
 	| NumberedTitleBlockElement
 	| NewsletterSignupBlockElement
@@ -1016,16 +1041,18 @@ export type KnowledgeQuizAtomType = {
 	id: string;
 	questions: QuestionType[];
 	resultGroups: ResultGroupsType[];
-	sharingUrls: SharingUrlsType;
-	theme: ArticleTheme;
+	pageId: string;
+	webTitle: string;
+	format: ArticleFormat;
 };
 
 export type PersonalityQuizAtomType = {
 	id: string;
 	questions: QuestionType[];
 	resultBuckets: ResultsBucketType[];
-	sharingUrls: SharingUrlsType;
-	theme: ArticleTheme;
+	pageId: string;
+	webTitle: string;
+	format: ArticleFormat;
 };
 
 export type QuizSelectionType = Record<string, AnswerType>;

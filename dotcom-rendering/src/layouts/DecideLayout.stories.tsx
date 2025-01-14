@@ -222,12 +222,23 @@ export const AppsPictureShowcaseOpinionDark: Story = {
 	parameters: appsParameters,
 };
 
+/**
+ * Skipped (flaky).
+ *
+ * This story fails intermittently as an iframe is inserted into the page
+ * which is sometimes registered by the snapshot.
+ *
+ * Example: https://www.chromatic.com/test?appId=63e251470cfbe61776b0ef19&id=675aaa4f3aa384bd64bde3a1
+ */
 export const WebPhotoEssayImmersiveLabsLight: Story = {
 	args: {
 		article: enhanceArticleType(PhotoEssayImmersiveLabsFixture, 'Web')
 			.frontendData,
 	},
-	parameters: webParameters,
+	parameters: {
+		...webParameters,
+		chromatic: { disableSnapshot: true },
+	},
 };
 
 const standardStandardLabsWebFixture: ArticleDeprecated = {
