@@ -43,6 +43,7 @@ type Props = {
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
+	maxItemsToDisplay?: number;
 };
 
 export const DecideContainer = ({
@@ -54,6 +55,7 @@ export const DecideContainer = ({
 	absoluteServerTimes,
 	imageLoading,
 	aspectRatio,
+	maxItemsToDisplay,
 }: Props) => {
 	// If you add a new container type which contains an MPU, you must also add it to
 	switch (containerType) {
@@ -257,6 +259,7 @@ export const DecideContainer = ({
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
+					maxItemsToDisplay={maxItemsToDisplay}
 				/>
 			);
 		case 'scrollable/small':

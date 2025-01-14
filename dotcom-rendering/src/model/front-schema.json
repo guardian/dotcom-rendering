@@ -2836,6 +2836,14 @@
                                     "platform": {
                                         "type": "string"
                                     },
+                                    "displayHints": {
+                                        "type": "object",
+                                        "properties": {
+                                            "maxItemsToDisplay": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    },
                                     "aspectRatio": {
                                         "$ref": "#/definitions/AspectRatio"
                                     }

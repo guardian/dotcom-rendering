@@ -278,6 +278,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					</Island>
 				)}
 				{filteredCollections.map((collection, index) => {
+					console.log('collection', collection);
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
 						collection.backfill,
@@ -513,6 +514,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 												collection.collectionType,
 											)
 										}
+										maxItemsToDisplay={
+											collection.config.displayHints
+												?.maxItemsToDisplay
+										}
 									/>
 								</LabsSection>
 								{decideMerchHighAndMobileAdSlots(
@@ -681,6 +686,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										fallbackAspectRatio(
 											collection.collectionType,
 										)
+									}
+									maxItemsToDisplay={
+										collection.config.displayHints
+											?.maxItemsToDisplay
 									}
 								/>
 							</FrontSection>

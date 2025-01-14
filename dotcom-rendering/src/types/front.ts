@@ -390,6 +390,9 @@ type FECollectionConfigType = {
 	showTimestamps: boolean;
 	hideShowMore: boolean;
 	platform: string;
+	displayHints?: {
+		maxItemsToDisplay?: number;
+	};
 	aspectRatio?: AspectRatio;
 };
 
@@ -430,6 +433,9 @@ export type DCRCollectionType = {
 	href?: string;
 	config: {
 		showDateHeader: boolean;
+		displayHints?: {
+			maxItemsToDisplay?: number;
+		};
 	};
 	/**
 	 * @property {?boolean} canShowMore - Whether the 'show more' button should be shown.

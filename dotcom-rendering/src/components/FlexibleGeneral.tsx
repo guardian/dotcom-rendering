@@ -28,6 +28,7 @@ type Props = {
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
+	maxItemsToDisplay?: number;
 };
 
 type RowLayout = 'oneCard' | 'oneCardBoosted' | 'twoCard';
@@ -443,9 +444,12 @@ export const FlexibleGeneral = ({
 	absoluteServerTimes,
 	imageLoading,
 	aspectRatio,
+	maxItemsToDisplay,
 }: Props) => {
+	console.log('maxItemsToDisplay', maxItemsToDisplay);
 	const splash = [...groupedTrails.splash].slice(0, 1);
-	const cards = [...groupedTrails.standard].slice(0, 8);
+	const cardNumber = maxItemsToDisplay ?? 8;
+	const cards = [...groupedTrails.standard].slice(0, cardNumber);
 	const groupedCards = decideCardPositions(cards);
 
 	return (

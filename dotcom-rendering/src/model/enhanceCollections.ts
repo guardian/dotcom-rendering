@@ -136,6 +136,10 @@ export const enhanceCollections = ({
 			),
 			config: {
 				showDateHeader: collection.config.showDateHeader,
+				displayHints: {
+					maxItemsToDisplay:
+						collection.config.displayHints?.maxItemsToDisplay,
+				},
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
 			targetedTerritory: collection.targetedTerritory,
