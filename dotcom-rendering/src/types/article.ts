@@ -11,7 +11,6 @@ import {
 	type TableOfContentsItem,
 } from '../model/enhanceTableOfContents';
 import { enhancePinnedPost } from '../model/pinnedPost';
-import type { Block } from './blocks';
 import type { ImageForLightbox } from './content';
 import type { FEArticleType } from './frontend';
 import { type RenderingTarget } from './renderingTarget';
@@ -38,9 +37,9 @@ export const enhanceArticleType = (
 ): Article => {
 	const format = decideFormat(data.format);
 
-	const crosswordBlock: Block | undefined = buildCrosswordBlock(data);
+	const crosswordBlock = buildCrosswordBlock(data);
 
-	const additionalBlocks: Block[] = crosswordBlock ? [crosswordBlock] : [];
+	const additionalBlocks = crosswordBlock ? [crosswordBlock] : [];
 
 	const imagesForLightbox = data.config.switches.lightbox
 		? buildLightboxImages(data.format, data.blocks, data.mainMediaElements)
