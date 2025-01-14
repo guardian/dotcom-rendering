@@ -15,7 +15,7 @@ type GroupedCounts = {
 	splash: number;
 };
 
-type AdCandidate = Pick<DCRCollectionType, 'collectionType'>;
+export type AdCandidate = Pick<DCRCollectionType, 'collectionType'>;
 
 /** The Merch high slot is directly before the most viewed container  */
 const getMerchHighPosition = (collections: AdCandidate[]): number => {
