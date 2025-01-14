@@ -12,19 +12,14 @@ import {
 import { fetchJson } from './fetchJson';
 import { deleteAllCookies, refresh } from './user-features';
 
-const fakeUserFeatures = {
-	showSupportMessaging: false,
-	contentAccess: {
-		digitalPack: true,
-		recurringContributor: false,
-		paidMember: true,
-	},
+const fakeUserBenefits = {
+	benefits: ['adFree', 'hideSupportMessaging'],
 };
 
 jest.mock('./fetchJson', () => {
 	return {
 		fetchJson: jest.fn(() => {
-			return Promise.resolve(fakeUserFeatures);
+			return Promise.resolve(fakeUserBenefits);
 		}),
 	};
 });
@@ -70,7 +65,7 @@ describe('Refreshing the features data', () => {
 			getAuthStatus.mockResolvedValue({
 				kind: 'SignedInWithOkta',
 			} as AuthStatus);
-			fetchJsonSpy.mockReturnValue(Promise.resolve(fakeUserFeatures));
+			fetchJsonSpy.mockReturnValue(Promise.resolve(fakeUserBenefits));
 		});
 
 		it('Performs an update if the user has missing data', async () => {
@@ -124,21 +119,8 @@ describe('If user signed out', () => {
 
 describe('Storing new feature data', () => {
 	beforeEach(() => {
-		const mockResponse = {
-			userId: 'abc',
-			showSupportMessaging: false,
-			contentAccess: {
-				member: false,
-				paidMember: false,
-				recurringContributor: false,
-				digitalPack: false,
-				paperSubscriber: false,
-				guardianWeeklySubscriber: false,
-			},
-		};
-
 		jest.resetAllMocks();
-		fetchJsonSpy.mockReturnValue(Promise.resolve(mockResponse));
+		fetchJsonSpy.mockReturnValue(Promise.resolve(fakeUserBenefits));
 		deleteAllCookies();
 		isUserLoggedInOktaRefactor.mockResolvedValue(true);
 		getAuthStatus.mockResolvedValue({
@@ -146,16 +128,10 @@ describe('Storing new feature data', () => {
 		} as AuthStatus);
 	});
 
-	it('Puts the paying-member state and ad-free state in appropriate cookie', () => {
+	it('Puts the ad-free state in appropriate cookie', () => {
 		fetchJsonSpy.mockReturnValueOnce(
 			Promise.resolve({
-				showSupportMessaging: false,
-				contentAccess: {
-					paidMember: false,
-					recurringContributor: false,
-					digitalPack: false,
-				},
-				adFree: false,
+				benefits: [],
 			}),
 		);
 		return refresh().then(() => {
@@ -163,16 +139,10 @@ describe('Storing new feature data', () => {
 		});
 	});
 
-	it('Puts the paying-member state and ad-free state in appropriate cookie', () => {
+	it('Puts the ad-free state in appropriate cookie', () => {
 		fetchJsonSpy.mockReturnValueOnce(
 			Promise.resolve({
-				showSupportMessaging: false,
-				contentAccess: {
-					paidMember: true,
-					recurringContributor: true,
-					digitalPack: true,
-				},
-				adFree: true,
+				benefits: ['adFree'],
 			}),
 		);
 		return refresh().then(() => {
