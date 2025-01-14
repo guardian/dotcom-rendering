@@ -17,8 +17,11 @@ type GroupedCounts = {
 
 type AdCandidate = Pick<DCRCollectionType, 'collectionType'>;
 
-const getMerchHighPosition = (collectionCount: number): number =>
-	collectionCount >= 4 ? 2 : 0;
+/** The Merch high slot is directly before the most viewed container  */
+const getMerchHighPosition = (collections: AdCandidate[]): number => {
+	const mostViewedPosition = collections.findIndex(isMostViewedContainer);
+	return mostViewedPosition - 1;
+};
 
 /**
  * This happens on the recipes front, where the first container is a thrasher
@@ -76,7 +79,7 @@ const isEvenIndex = (_collection: unknown, index: number): boolean =>
  * up to a maximum of `MAX_FRONTS_MOBILE_ADS`
  */
 const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
-	const merchHighPosition = getMerchHighPosition(collections.length);
+	const merchHighPosition = getMerchHighPosition(collections);
 
 	return collections
 		.filter(canInsertMobileAd(merchHighPosition))
