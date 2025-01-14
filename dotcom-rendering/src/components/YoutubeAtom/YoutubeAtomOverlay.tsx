@@ -73,16 +73,15 @@ const pillStyles = css`
 	top: ${space[2]}px;
 	right: ${space[2]}px;
 	${textSansBold12};
-	color: ${palette('--pill-text')};
+	color: ${palette('--pill-background')};
 `;
 
 const durationPillStyles = css`
 	background-color: rgba(0, 0, 0, 0.7);
 	border-radius: ${space[3]}px;
-	padding: 0 6px;
+	padding: ${space[1]}px 6px;
 	display: inline-flex;
 	line-height: ${space[4]}px;
-	padding: ${space[1]}px 6px;
 `;
 
 const livePillStyles = css`
