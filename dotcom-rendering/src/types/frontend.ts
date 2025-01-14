@@ -211,8 +211,7 @@ export type FEDesign =
 	| 'FullPageInteractiveDesign'
 	| 'NewsletterSignupDesign'
 	| 'TimelineDesign'
-	| 'ProfileDesign'
-	| 'CrosswordDesign';
+	| 'ProfileDesign';
 
 /** FEDisplay is the display information passed through from frontend (originating in the capi scala client) and dictates the display style of the content e.g. Immersive
 https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala */
