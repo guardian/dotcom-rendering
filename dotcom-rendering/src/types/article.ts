@@ -40,6 +40,8 @@ export const enhanceArticleType = (
 
 	const crosswordBlock: Block | undefined = buildCrosswordBlock(data);
 
+	const additionalBlocks: Block[] = crosswordBlock ? [crosswordBlock] : [];
+
 	const imagesForLightbox = data.config.switches.lightbox
 		? buildLightboxImages(data.format, data.blocks, data.mainMediaElements)
 		: [];
@@ -50,7 +52,7 @@ export const enhanceArticleType = (
 		imagesForLightbox,
 		hasAffiliateLinksDisclaimer: !!data.affiliateLinksDisclaimer,
 		audioArticleImage: data.audioArticleImage,
-		crosswordBlock,
+		additionalBlocks,
 		tags: data.tags,
 	});
 
