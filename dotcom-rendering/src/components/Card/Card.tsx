@@ -604,6 +604,13 @@ export const Card = ({
 		) {
 			return 'large';
 		}
+		if (
+			isBetaContainer &&
+			(imagePositionOnDesktop === 'top' ||
+				imagePositionOnDesktop === 'bottom')
+		) {
+			return 'tiny';
+		}
 		return 'small';
 	};
 
