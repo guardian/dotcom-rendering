@@ -349,12 +349,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								containerPalette={collection.containerPalette}
 							>
 								<div css={[hasPageSkin && pageSkinContainer]}>
-									<FrontsBannerAdSlot
-										renderAds={renderAds}
-										hasPageSkin={hasPageSkin}
-										index={index}
-										desktopAdPositions={desktopAdPositions}
-									/>
+									{desktopAdPositions.includes(index) && (
+										<FrontsBannerAdSlot
+											renderAds={renderAds}
+											hasPageSkin={hasPageSkin}
+											adSlotIndex={desktopAdPositions.indexOf(
+												index,
+											)}
+										/>
+									)}
 									{!!trail.embedUri && (
 										<SnapCssSandbox
 											snapData={trail.snapData}
@@ -411,12 +414,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 						return (
 							<div key={ophanName}>
-								<FrontsBannerAdSlot
-									renderAds={renderAds}
-									hasPageSkin={hasPageSkin}
-									index={index}
-									desktopAdPositions={desktopAdPositions}
-								/>
+								{desktopAdPositions.includes(index) && (
+									<FrontsBannerAdSlot
+										renderAds={renderAds}
+										hasPageSkin={hasPageSkin}
+										adSlotIndex={desktopAdPositions.indexOf(
+											index,
+										)}
+									/>
+								)}
 								<FrontSection
 									toggleable={true}
 									key={ophanName}
@@ -545,12 +551,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 						return (
 							<div key={ophanName}>
-								<FrontsBannerAdSlot
-									renderAds={renderAds}
-									hasPageSkin={hasPageSkin}
-									index={index}
-									desktopAdPositions={desktopAdPositions}
-								/>
+								{desktopAdPositions.includes(index) && (
+									<FrontsBannerAdSlot
+										renderAds={renderAds}
+										hasPageSkin={hasPageSkin}
+										adSlotIndex={desktopAdPositions.indexOf(
+											index,
+										)}
+									/>
+								)}
 								<Section
 									title={collection.displayName}
 									sectionId={`container-${ophanName}`}
@@ -623,12 +632,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					return (
 						<div key={ophanName}>
-							<FrontsBannerAdSlot
-								renderAds={renderAds}
-								hasPageSkin={hasPageSkin}
-								index={index}
-								desktopAdPositions={desktopAdPositions}
-							/>
+							{desktopAdPositions.includes(index) && (
+								<FrontsBannerAdSlot
+									renderAds={renderAds}
+									hasPageSkin={hasPageSkin}
+									adSlotIndex={desktopAdPositions.indexOf(
+										index,
+									)}
+								/>
+							)}
 							<FrontSection
 								title={collection.displayName}
 								description={collection.description}

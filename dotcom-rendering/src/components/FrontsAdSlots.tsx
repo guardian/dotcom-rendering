@@ -65,25 +65,29 @@ export const MerchandisingSlot = ({
 	renderAds: boolean;
 	hasPageSkin: boolean;
 }) => {
-	if (!renderAds) return null;
 	return (
-		<Section
-			fullWidth={true}
-			data-print-layout="hide"
-			padSides={false}
-			showTopBorder={false}
-			showSideBorders={false}
-			backgroundColour={themePalette('--article-section-background')}
-			element="aside"
-		>
-			{hasPageSkin ? (
-				<Hide from="desktop">
+		renderAds && (
+			<Section
+				fullWidth={true}
+				data-print-layout="hide"
+				padSides={false}
+				showTopBorder={false}
+				showSideBorders={false}
+				backgroundColour={themePalette('--article-section-background')}
+				element="aside"
+			>
+				{hasPageSkin ? (
+					<Hide from="desktop">
+						<AdSlot
+							data-print-layout="hide"
+							position="merchandising"
+						/>
+					</Hide>
+				) : (
 					<AdSlot data-print-layout="hide" position="merchandising" />
-				</Hide>
-			) : (
-				<AdSlot data-print-layout="hide" position="merchandising" />
-			)}
-		</Section>
+				)}
+			</Section>
+		)
 	);
 };
 
@@ -94,31 +98,21 @@ export const MerchandisingSlot = ({
 export const FrontsBannerAdSlot = ({
 	renderAds,
 	hasPageSkin,
-	index,
-	desktopAdPositions,
+	adSlotIndex,
 }: {
 	renderAds: boolean;
 	hasPageSkin: boolean;
-	index: number;
-	desktopAdPositions: number[];
+	adSlotIndex: number;
 }) => {
-	if (!renderAds || hasPageSkin) {
-		return null;
-	}
-
-	if (desktopAdPositions.includes(index)) {
-		const adIndex = desktopAdPositions.indexOf(index);
-		if (adIndex === -1) return null;
-
-		return (
+	return (
+		renderAds &&
+		!hasPageSkin && (
 			<AdSlot
 				data-print-layout="hide"
 				position="fronts-banner"
-				index={adIndex + 1}
+				index={adSlotIndex + 1}
 				hasPageskin={hasPageSkin}
 			/>
-		);
-	}
-
-	return null;
+		)
+	);
 };

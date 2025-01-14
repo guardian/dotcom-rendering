@@ -139,12 +139,15 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 
 					return (
 						<Fragment key={containerId}>
-							<FrontsBannerAdSlot
-								renderAds={renderAds}
-								hasPageSkin={hasPageSkin}
-								index={index}
-								desktopAdPositions={desktopAdPositions}
-							/>
+							{desktopAdPositions.includes(index) && (
+								<FrontsBannerAdSlot
+									renderAds={renderAds}
+									hasPageSkin={hasPageSkin}
+									adSlotIndex={desktopAdPositions.indexOf(
+										index,
+									)}
+								/>
+							)}
 							<FrontSection
 								title={title}
 								url={url}
