@@ -87,16 +87,15 @@ export const FrontsBannerAdSlot = ({
 	hasPageSkin: boolean;
 	adSlotIndex: number;
 }) => {
-	if (!renderAds || hasPageSkin) {
-		return null;
-	}
-
 	return (
-		<AdSlot
-			data-print-layout="hide"
-			position="fronts-banner"
-			index={adSlotIndex + 1}
-			hasPageskin={hasPageSkin}
-		/>
+		renderAds &&
+		!hasPageSkin && (
+			<AdSlot
+				data-print-layout="hide"
+				position="fronts-banner"
+				index={adSlotIndex + 1}
+				hasPageskin={hasPageSkin}
+			/>
+		)
 	);
 };
