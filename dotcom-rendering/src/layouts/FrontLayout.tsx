@@ -10,14 +10,14 @@ import { Carousel } from '../components/Carousel.importable';
 import { ContainerOverrides } from '../components/ContainerOverrides';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
-import {
-	decideFrontsBannerAdSlot,
-	decideMerchandisingSlot,
-	decideMerchHighAndMobileAdSlots,
-} from '../components/DecideFrontsAdSlots';
 import { EditionSwitcherBanner } from '../components/EditionSwitcherBanner.importable';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
+import {
+	FrontsBannerAdSlot,
+	MerchandisingSlot,
+	MerchHighOrMobileAdSlot,
+} from '../components/FrontsAdSlots';
 import { FrontSection } from '../components/FrontSection';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -349,12 +349,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								containerPalette={collection.containerPalette}
 							>
 								<div css={[hasPageSkin && pageSkinContainer]}>
-									{decideFrontsBannerAdSlot(
-										renderAds,
-										hasPageSkin,
-										index,
-										desktopAdPositions,
-									)}
+									<FrontsBannerAdSlot
+										renderAds={renderAds}
+										hasPageSkin={hasPageSkin}
+										index={index}
+										desktopAdPositions={desktopAdPositions}
+									/>
 									{!!trail.embedUri && (
 										<SnapCssSandbox
 											snapData={trail.snapData}
@@ -382,15 +382,19 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											</Section>
 										</SnapCssSandbox>
 									)}
-									{decideMerchHighAndMobileAdSlots(
-										renderAds,
-										index,
-										filteredCollections.length,
-										front.pressedPage.frontProperties
-											.isPaidContent,
-										mobileAdPositions,
-										hasPageSkin,
-									)}
+									<MerchHighOrMobileAdSlot
+										renderAds={renderAds}
+										index={index}
+										collectionCount={
+											filteredCollections.length
+										}
+										isPaidContent={
+											front.pressedPage.frontProperties
+												.isPaidContent
+										}
+										mobileAdPositions={mobileAdPositions}
+										hasPageSkin={hasPageSkin}
+									/>
 								</div>
 							</ContainerOverrides>
 						);
@@ -407,12 +411,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 						return (
 							<div key={ophanName}>
-								{decideFrontsBannerAdSlot(
-									renderAds,
-									hasPageSkin,
-									index,
-									desktopAdPositions,
-								)}
+								<FrontsBannerAdSlot
+									renderAds={renderAds}
+									hasPageSkin={hasPageSkin}
+									index={index}
+									desktopAdPositions={desktopAdPositions}
+								/>
 								<FrontSection
 									toggleable={true}
 									key={ophanName}
@@ -457,15 +461,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										renderAds={renderAds}
 									/>
 								</FrontSection>
-								{decideMerchHighAndMobileAdSlots(
-									renderAds,
-									index,
-									filteredCollections.length,
-									front.pressedPage.frontProperties
-										.isPaidContent,
-									mobileAdPositions,
-									hasPageSkin,
-								)}
+								<MerchHighOrMobileAdSlot
+									renderAds={renderAds}
+									index={index}
+									collectionCount={filteredCollections.length}
+									isPaidContent={
+										front.pressedPage.frontProperties
+											.isPaidContent
+									}
+									mobileAdPositions={mobileAdPositions}
+									hasPageSkin={hasPageSkin}
+								/>
 							</div>
 						);
 					}
@@ -515,15 +521,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										}
 									/>
 								</LabsSection>
-								{decideMerchHighAndMobileAdSlots(
-									renderAds,
-									index,
-									filteredCollections.length,
-									front.pressedPage.frontProperties
-										.isPaidContent,
-									mobileAdPositions,
-									hasPageSkin,
-								)}
+								<MerchHighOrMobileAdSlot
+									renderAds={renderAds}
+									index={index}
+									collectionCount={filteredCollections.length}
+									isPaidContent={
+										front.pressedPage.frontProperties
+											.isPaidContent
+									}
+									mobileAdPositions={mobileAdPositions}
+									hasPageSkin={hasPageSkin}
+								/>
 							</div>
 						);
 					}
@@ -537,12 +545,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 						return (
 							<div key={ophanName}>
-								{decideFrontsBannerAdSlot(
-									renderAds,
-									hasPageSkin,
-									index,
-									desktopAdPositions,
-								)}
+								<FrontsBannerAdSlot
+									renderAds={renderAds}
+									hasPageSkin={hasPageSkin}
+									index={index}
+									desktopAdPositions={desktopAdPositions}
+								/>
 								<Section
 									title={collection.displayName}
 									sectionId={`container-${ophanName}`}
@@ -598,28 +606,29 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									</Island>
 								</Section>
 
-								{renderAds &&
-									decideMerchHighAndMobileAdSlots(
-										renderAds,
-										index,
-										filteredCollections.length,
+								<MerchHighOrMobileAdSlot
+									renderAds={renderAds}
+									index={index}
+									collectionCount={filteredCollections.length}
+									isPaidContent={
 										front.pressedPage.frontProperties
-											.isPaidContent,
-										mobileAdPositions,
-										hasPageSkin,
-									)}
+											.isPaidContent
+									}
+									mobileAdPositions={mobileAdPositions}
+									hasPageSkin={hasPageSkin}
+								/>
 							</div>
 						);
 					}
 
 					return (
 						<div key={ophanName}>
-							{decideFrontsBannerAdSlot(
-								renderAds,
-								hasPageSkin,
-								index,
-								desktopAdPositions,
-							)}
+							<FrontsBannerAdSlot
+								renderAds={renderAds}
+								hasPageSkin={hasPageSkin}
+								index={index}
+								desktopAdPositions={desktopAdPositions}
+							/>
 							<FrontSection
 								title={collection.displayName}
 								description={collection.description}
@@ -684,14 +693,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 								/>
 							</FrontSection>
-							{decideMerchHighAndMobileAdSlots(
-								renderAds,
-								index,
-								filteredCollections.length,
-								front.pressedPage.frontProperties.isPaidContent,
-								mobileAdPositions,
-								hasPageSkin,
-							)}
+							<MerchHighOrMobileAdSlot
+								renderAds={renderAds}
+								index={index}
+								collectionCount={filteredCollections.length}
+								isPaidContent={
+									front.pressedPage.frontProperties
+										.isPaidContent
+								}
+								mobileAdPositions={mobileAdPositions}
+								hasPageSkin={hasPageSkin}
+							/>
 						</div>
 					);
 				})}
@@ -707,7 +719,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				<TrendingTopics trendingTopics={front.trendingTopics} />
 			</Section>
 
-			{decideMerchandisingSlot(renderAds, hasPageSkin)}
+			<MerchandisingSlot
+				renderAds={renderAds}
+				hasPageSkin={hasPageSkin}
+			/>
 
 			{NAV.subNavSections && (
 				<Section
