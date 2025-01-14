@@ -79,7 +79,7 @@ const pillStyles = css`
 const durationPillStyles = css`
 	background-color: rgba(0, 0, 0, 0.7);
 	border-radius: ${space[3]}px;
-	padding: ${space[1]}px 6px;
+	padding: ${space[1]}px ${space[3]}px;
 	display: inline-flex;
 	line-height: ${space[4]}px;
 `;
