@@ -76,6 +76,10 @@ export const MostViewedFooterData = ({
 		MostViewedFooterPayloadType | FETrailTabType[]
 	>(url);
 
+	console.log('error', error);
+	console.log('loading', loading);
+	console.log('data', data);
+
 	if (error) {
 		window.guardian.modules.sentry.reportError(error, 'most-viewed-footer');
 		return null;
