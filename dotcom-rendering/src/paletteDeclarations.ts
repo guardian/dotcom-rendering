@@ -5756,7 +5756,7 @@ const pillBackground: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[7], 0.7);
 const pillDivider: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[100], 0.5);
-
+const pillLiveBullet: PaletteFunction = () => sourcePalette.news[500];
 // ----- Palette ----- //
 
 /**
@@ -6786,6 +6786,10 @@ const paletteColours = {
 	'--pill-text': {
 		light: pillText,
 		dark: pillText,
+	},
+	'--pill-bullet': {
+		light: pillLiveBullet,
+		dark: pillLiveBullet,
 	},
 	'--pinned-post-background': {
 		light: liveBlockContainerBackgroundLight,

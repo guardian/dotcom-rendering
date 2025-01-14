@@ -73,7 +73,7 @@ const pillStyles = css`
 	top: ${space[2]}px;
 	right: ${space[2]}px;
 	${textSansBold12};
-	color: ${sourcePalette.neutral[100]};
+	color: ${palette('--pill-text')};
 `;
 
 const durationPillStyles = css`
@@ -89,7 +89,7 @@ const livePillStyles = css`
 	border-radius: ${space[10]}px;
 	padding: ${space[1]}px ${space[2]}px;
 	gap: ${space[2]}px;
-	background-color: rgba(18, 18, 18, 0.7);
+	background-color: ${palette('--pill-background')};
 	display: flex;
 	align-items: center;
 `;
@@ -100,7 +100,7 @@ const liveBulletStyles = css`
 		width: 9px;
 		height: 9px;
 		border-radius: 50%;
-		background-color: ${sourcePalette.news[500]};
+		background-color: ${palette('--pill-bullet')};
 		display: inline-block;
 		position: relative;
 		margin-right: 0.1875rem;
