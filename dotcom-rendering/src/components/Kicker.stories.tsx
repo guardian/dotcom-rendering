@@ -110,3 +110,18 @@ export const CardKickerWithContainerOverrides = {
 		</>
 	),
 };
+
+export const CardKickerWithImage = () => {
+	<Kicker
+		text="Standard kicker"
+		color={palette('--card-kicker-text')}
+		showPulsingDot={false}
+		isInline={false}
+		image={{
+			src: 'https://uploads.guim.co.uk/2022/02/10/TiF_FINAL_3000x3000.jpg',
+			altText: 'Today in Focus',
+		}}
+	/>;
+};
+
+CardKickerWithImage.storyName = 'Card kicker with image';

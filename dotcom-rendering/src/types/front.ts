@@ -11,7 +11,7 @@ import type { BoostLevel, Image, StarRating } from './content';
 import type { FooterType } from './footer';
 import type { FEFormat, FENavType } from './frontend';
 import type { MainMedia } from './mainMedia';
-import type { FETagType } from './tag';
+import type { FETagType, PodcastSeriesImage } from './tag';
 import type { Territory } from './territory';
 import type { FETrailType, TrailType } from './trails';
 
@@ -290,6 +290,8 @@ export type FEFrontCard = {
 		shortUrl: string;
 		group: string;
 		isLive: boolean;
+		galleryCount?: number;
+		audioDuration?: string;
 	};
 	discussion: {
 		isCommentable: boolean;
@@ -347,7 +349,9 @@ export type DCRFrontCard = {
 	branding?: Branding;
 	slideshowImages?: DCRSlideshowImage[];
 	showMainVideo?: boolean;
-	podcastImageSrc?: string;
+	galleryCount?: number;
+	podcastImage?: PodcastSeriesImage;
+	audioDuration?: string;
 };
 
 export type DCRSlideshowImage = {
@@ -417,6 +421,7 @@ export type DCRCollectionType = {
 	description?: string;
 	collectionType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
+	containerLevel?: DCRContainerLevel;
 	containerSpacing?: 'large' | 'small';
 	grouped: DCRGroupedTrails;
 	curated: DCRFrontCard[];
@@ -425,7 +430,6 @@ export type DCRCollectionType = {
 	href?: string;
 	config: {
 		showDateHeader: boolean;
-		containerLevel?: DCRContainerLevel;
 	};
 	/**
 	 * @property {?boolean} canShowMore - Whether the 'show more' button should be shown.
@@ -518,7 +522,6 @@ export type FEFrontConfigType = {
 	stripePublicToken: string;
 	googleRecaptchaSiteKey: string;
 	discussionD2Uid: string;
-	weatherapiurl: string;
 	googleSearchUrl: string;
 	optimizeEpicUrl: string;
 	stage: StageType;

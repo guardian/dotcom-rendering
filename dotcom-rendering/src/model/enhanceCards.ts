@@ -269,7 +269,6 @@ export const enhanceCards = (
 		const podcastImage = getPodcastSeriesImage(faciaCard);
 
 		const isContributorTagPage = !!pageId && pageId.startsWith('profile/');
-
 		return {
 			format,
 			dataLinkName,
@@ -329,5 +328,7 @@ export const enhanceCards = (
 				},
 			}),
 			podcastImage,
+			galleryCount: faciaCard.card.galleryCount,
+			audioDuration: faciaCard.card.audioDuration,
 		};
 	});

@@ -8,10 +8,10 @@ export const getAudioData = (
 			element._type ===
 			'model.dotcomrendering.pageElements.AudioBlockElement',
 	);
-	if (audioBlockElement?.assets[0] && audioBlockElement.elementId) {
+	if (audioBlockElement?.assets[0] && audioBlockElement.id) {
 		return {
 			audioDownloadUrl: audioBlockElement.assets[0].url,
-			mediaId: audioBlockElement.elementId,
+			mediaId: audioBlockElement.id,
 		};
 	}
 	return undefined;

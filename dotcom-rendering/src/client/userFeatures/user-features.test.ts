@@ -4,7 +4,7 @@ import {
 	getAuthStatus as getAuthStatus_,
 	isUserLoggedInOktaRefactor as isUserLoggedInOktaRefactor_,
 } from '../../lib/identity';
-import { isDigitalSubscriber, refresh } from './user-features';
+import { refresh } from './user-features';
 import { fetchJson } from './user-features-lib';
 
 jest.mock('./user-features-lib', () => {
@@ -36,8 +36,6 @@ const getAuthStatus = getAuthStatus_ as jest.MockedFunction<
 const PERSISTENCE_KEYS = {
 	USER_FEATURES_EXPIRY_COOKIE: 'gu_user_features_expiry',
 	AD_FREE_USER_COOKIE: 'GU_AF1',
-	ACTION_REQUIRED_FOR_COOKIE: 'gu_action_required_for',
-	DIGITAL_SUBSCRIBER_COOKIE: 'gu_digital_subscriber',
 	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE: 'gu.contributions.contrib-timestamp',
 	HIDE_SUPPORT_MESSAGING_COOKIE: 'gu_hide_support_messaging',
 };
@@ -52,10 +50,6 @@ const setAllFeaturesData = (opts: { isExpired: boolean }) => {
 		? new Date(currentTime - msInOneDay * 2)
 		: new Date(currentTime + msInOneDay * 2);
 	setCookie({
-		name: PERSISTENCE_KEYS.DIGITAL_SUBSCRIBER_COOKIE,
-		value: 'true',
-	});
-	setCookie({
 		name: PERSISTENCE_KEYS.HIDE_SUPPORT_MESSAGING_COOKIE,
 		value: 'true',
 	});
@@ -67,17 +61,11 @@ const setAllFeaturesData = (opts: { isExpired: boolean }) => {
 		name: PERSISTENCE_KEYS.USER_FEATURES_EXPIRY_COOKIE,
 		value: expiryDate.getTime().toString(),
 	});
-	setCookie({
-		name: PERSISTENCE_KEYS.ACTION_REQUIRED_FOR_COOKIE,
-		value: 'test',
-	});
 };
 
 const deleteAllFeaturesData = () => {
-	removeCookie({ name: PERSISTENCE_KEYS.DIGITAL_SUBSCRIBER_COOKIE });
 	removeCookie({ name: PERSISTENCE_KEYS.USER_FEATURES_EXPIRY_COOKIE });
 	removeCookie({ name: PERSISTENCE_KEYS.AD_FREE_USER_COOKIE });
-	removeCookie({ name: PERSISTENCE_KEYS.ACTION_REQUIRED_FOR_COOKIE });
 	removeCookie({ name: PERSISTENCE_KEYS.HIDE_SUPPORT_MESSAGING_COOKIE });
 };
 
@@ -148,49 +136,10 @@ describe('If user signed out', () => {
 			getCookie({ name: PERSISTENCE_KEYS.AD_FREE_USER_COOKIE }),
 		).toBeNull();
 		expect(
-			getCookie({ name: PERSISTENCE_KEYS.DIGITAL_SUBSCRIBER_COOKIE }),
-		).toBeNull();
-		expect(
 			getCookie({
 				name: PERSISTENCE_KEYS.USER_FEATURES_EXPIRY_COOKIE,
 			}),
 		).toBeNull();
-	});
-});
-
-describe('The isDigitalSubscriber getter', () => {
-	it('Is false when the user is logged out', () => {
-		jest.resetAllMocks();
-		isUserLoggedInOktaRefactor.mockResolvedValue(false);
-		expect(isDigitalSubscriber()).toBe(false);
-	});
-
-	describe('When the user is logged in', () => {
-		beforeEach(() => {
-			jest.resetAllMocks();
-			isUserLoggedInOktaRefactor.mockResolvedValue(true);
-		});
-
-		it('Is true when the user has a `true` digital subscriber cookie', () => {
-			setCookie({
-				name: PERSISTENCE_KEYS.DIGITAL_SUBSCRIBER_COOKIE,
-				value: 'true',
-			});
-			expect(isDigitalSubscriber()).toBe(true);
-		});
-
-		it('Is false when the user has a `false` digital subscriber cookie', () => {
-			setCookie({
-				name: PERSISTENCE_KEYS.DIGITAL_SUBSCRIBER_COOKIE,
-				value: 'false',
-			});
-			expect(isDigitalSubscriber()).toBe(false);
-		});
-
-		it('Is false when the user has no digital subscriber cookie', () => {
-			removeCookie({ name: PERSISTENCE_KEYS.DIGITAL_SUBSCRIBER_COOKIE });
-			expect(isDigitalSubscriber()).toBe(false);
-		});
 	});
 });
 
@@ -232,9 +181,6 @@ describe('Storing new feature data', () => {
 		);
 		return refresh().then(() => {
 			expect(
-				getCookie({ name: PERSISTENCE_KEYS.DIGITAL_SUBSCRIBER_COOKIE }),
-			).toBe('false');
-			expect(
 				getCookie({ name: PERSISTENCE_KEYS.AD_FREE_USER_COOKIE }),
 			).toBeNull();
 		});
@@ -253,9 +199,6 @@ describe('Storing new feature data', () => {
 			}),
 		);
 		return refresh().then(() => {
-			expect(
-				getCookie({ name: PERSISTENCE_KEYS.DIGITAL_SUBSCRIBER_COOKIE }),
-			).toBe('true');
 			expect(
 				getCookie({ name: PERSISTENCE_KEYS.AD_FREE_USER_COOKIE }),
 			).toBeTruthy();

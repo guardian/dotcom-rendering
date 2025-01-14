@@ -253,12 +253,6 @@ const sectionHeadlineFromLeftCol = (borderColour: string) => css`
 	}
 `;
 
-const sectionHeadlineHeight = css`
-	${until.tablet} {
-		min-height: 58px;
-	}
-`;
-
 const topPadding = css`
 	padding-top: ${space[2]}px;
 `;
@@ -371,6 +365,7 @@ const primaryLevelTopBorder = css`
 	border-top: 2px solid ${schemePalette('--section-border-primary')};
 	/** Ensures the top border sits above the side borders */
 	z-index: 1;
+	height: fit-content;
 `;
 
 const secondaryLevelTopBorder = css`
@@ -559,8 +554,6 @@ export const FrontSection = ({
 							sectionHeadlineFromLeftCol(
 								schemePalette('--section-border'),
 							),
-						title?.toLowerCase() === 'headlines' &&
-							sectionHeadlineHeight,
 					]}
 				>
 					<FrontSectionTitle

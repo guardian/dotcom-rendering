@@ -1,3 +1,5 @@
+import { ArticleDesign } from '../lib/articleFormat';
+import { isMediaCard } from '../lib/cardHelpers';
 import { palette } from '../palette';
 import type { BoostLevel } from '../types/content';
 import type {
@@ -78,6 +80,7 @@ type BoostedSplashProperties = {
 	supportingContentAlignment: Alignment;
 	liveUpdatesAlignment: Alignment;
 	trailTextSize: TrailTextSize;
+	avatarUrl?: string;
 };
 
 /**
@@ -86,6 +89,8 @@ type BoostedSplashProperties = {
 const decideSplashCardProperties = (
 	boostLevel: BoostLevel,
 	supportingContentLength: number,
+	mediaCard: boolean,
+	avatarUrl?: string,
 ): BoostedSplashProperties => {
 	switch (boostLevel) {
 		// boostedfont sizing
@@ -98,7 +103,7 @@ const decideSplashCardProperties = (
 					mobile: 'medium',
 				},
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				imageSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
@@ -113,8 +118,8 @@ const decideSplashCardProperties = (
 					mobile: 'large',
 				},
 				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: 'bottom',
-				imageSize: 'jumbo',
+				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
+				imageSize: avatarUrl ? 'large' : 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
@@ -127,8 +132,8 @@ const decideSplashCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'xlarge',
 				},
-				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
@@ -141,8 +146,8 @@ const decideSplashCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'xxlarge',
 				},
-				imagePositionOnDesktop: 'bottom',
-				imagePositionOnMobile: 'bottom',
+				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
+				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
@@ -182,6 +187,8 @@ export const SplashCardLayout = ({
 	} = decideSplashCardProperties(
 		card.boostLevel ?? 'default',
 		card.supportingContent?.length ?? 0,
+		isMediaCard(card.format),
+		card.avatarUrl,
 	);
 
 	return (
@@ -220,6 +227,8 @@ export const SplashCardLayout = ({
 					showTopBarDesktop={false}
 					showTopBarMobile={true}
 					trailTextSize={trailTextSize}
+					canPlayInline={true}
+					showKickerImage={card.format.design === ArticleDesign.Audio}
 				/>
 			</LI>
 		</UL>
@@ -238,6 +247,7 @@ type BoostedCardProperties = {
  */
 const decideCardProperties = (
 	boostLevel: Omit<BoostLevel, 'default' | 'gigaboost'> = 'boost',
+	avatarUrl?: string,
 ): BoostedCardProperties => {
 	switch (boostLevel) {
 		case 'megaboost':
@@ -259,7 +269,7 @@ const decideCardProperties = (
 					tablet: 'small',
 					mobile: 'small',
 				},
-				imageSize: 'medium',
+				imageSize: avatarUrl ? 'large' : 'medium',
 				liveUpdatesPosition: 'inner',
 				supportingContentAlignment: 'horizontal',
 			};
@@ -293,7 +303,7 @@ export const BoostedCardLayout = ({
 		imageSize,
 		supportingContentAlignment,
 		liveUpdatesPosition,
-	} = decideCardProperties(card.boostLevel);
+	} = decideCardProperties(card.boostLevel, card.avatarUrl);
 	return (
 		<UL
 			showTopBar={!isFirstRow}
@@ -311,8 +321,10 @@ export const BoostedCardLayout = ({
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
 					headlineSizes={headlineSizes}
-					imagePositionOnDesktop={'right'}
-					imagePositionOnMobile={'bottom'}
+					imagePositionOnDesktop="right"
+					imagePositionOnMobile={
+						isMediaCard(card.format) ? 'top' : 'bottom'
+					}
 					imageSize={imageSize}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
@@ -329,6 +341,8 @@ export const BoostedCardLayout = ({
 					showTopBarDesktop={false}
 					showTopBarMobile={true}
 					liveUpdatesPosition={liveUpdatesPosition}
+					canPlayInline={true}
+					showKickerImage={card.format.design === ArticleDesign.Audio}
 				/>
 			</LI>
 		</UL>
@@ -396,7 +410,11 @@ export const StandardCardLayout = ({
 							)}
 							supportingContentAlignment="vertical"
 							supportingContentPosition="outer"
-							imageSize={'medium'}
+							imageSize={
+								card.format.design === ArticleDesign.Audio
+									? 'small'
+									: 'medium'
+							}
 							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}
@@ -413,6 +431,7 @@ export const StandardCardLayout = ({
 									  }
 									: undefined
 							}
+							canPlayInline={false}
 						/>
 					</LI>
 				);

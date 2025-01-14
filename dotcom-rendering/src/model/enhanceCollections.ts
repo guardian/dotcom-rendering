@@ -108,6 +108,7 @@ export const enhanceCollections = ({
 			collectionType,
 			href,
 			containerPalette,
+			containerLevel: collection.config.collectionLevel,
 			containerSpacing,
 			collectionBranding,
 			grouped: groupCards(
@@ -135,7 +136,6 @@ export const enhanceCollections = ({
 			),
 			config: {
 				showDateHeader: collection.config.showDateHeader,
-				containerLevel: collection.config.collectionLevel,
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
 			targetedTerritory: collection.targetedTerritory,

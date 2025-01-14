@@ -241,9 +241,6 @@
                 "discussionD2Uid": {
                     "type": "string"
                 },
-                "weatherapiurl": {
-                    "type": "string"
-                },
                 "googleSearchUrl": {
                     "type": "string"
                 },
@@ -346,7 +343,6 @@
                 "supportUrl",
                 "switches",
                 "userAttributesApiUrl",
-                "weatherapiurl",
                 "webTitle"
             ]
         },
@@ -1032,6 +1028,12 @@
                                                 },
                                                 "isLive": {
                                                     "type": "boolean"
+                                                },
+                                                "galleryCount": {
+                                                    "type": "number"
+                                                },
+                                                "audioDuration": {
+                                                    "type": "string"
                                                 }
                                             },
                                             "required": [
@@ -1783,6 +1785,12 @@
                                                 },
                                                 "isLive": {
                                                     "type": "boolean"
+                                                },
+                                                "galleryCount": {
+                                                    "type": "number"
+                                                },
+                                                "audioDuration": {
+                                                    "type": "string"
                                                 }
                                             },
                                             "required": [
@@ -2534,6 +2542,12 @@
                                                 },
                                                 "isLive": {
                                                     "type": "boolean"
+                                                },
+                                                "galleryCount": {
+                                                    "type": "number"
+                                                },
+                                                "audioDuration": {
+                                                    "type": "string"
                                                 }
                                             },
                                             "required": [
@@ -3051,6 +3065,7 @@
                 "ArticleDesign",
                 "AudioDesign",
                 "CommentDesign",
+                "CrosswordDesign",
                 "DeadBlogDesign",
                 "EditorialDesign",
                 "ExplainerDesign",

@@ -32,6 +32,7 @@ import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
 import { MiniProfiles } from '../components/MiniProfiles';
+import { MultiBylines } from '../components/MultiBylines';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
 import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
@@ -65,7 +66,6 @@ import {
 	interactiveLegacyFigureClasses,
 	isInteractive,
 } from '../layouts/lib/interactiveLegacyStyling';
-import { getSharingUrls } from '../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType, StarRating } from '../types/content';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
@@ -493,6 +493,22 @@ export const renderElement = ({
 					sectioned={!!isSectionedMiniProfilesArticle}
 				/>
 			);
+		case 'model.dotcomrendering.pageElements.MultiBylinesBlockElement':
+			return (
+				<MultiBylines
+					multiBylines={element.multiBylines}
+					format={format}
+					ajaxUrl={ajaxUrl}
+					pageId={pageId}
+					isAdFreeUser={isAdFreeUser}
+					isSensitive={isSensitive}
+					abTests={abTests}
+					switches={switches}
+					editionId={editionId}
+					RenderArticleElement={RenderArticleElement}
+					isLastElement={index === totalElements - 1}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
 			return (
 				<MultiImageBlockComponent
@@ -570,6 +586,7 @@ export const renderElement = ({
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
+					isLastElement={index === totalElements - 1}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
@@ -584,8 +601,9 @@ export const renderElement = ({
 								id={element.id}
 								questions={element.questions}
 								resultBuckets={element.resultBuckets}
-								sharingUrls={getSharingUrls(pageId, webTitle)}
-								theme={format.theme}
+								pageId={pageId}
+								webTitle={webTitle}
+								format={format}
 							/>
 						</Island>
 					)}
@@ -598,8 +616,9 @@ export const renderElement = ({
 								id={element.id}
 								questions={element.questions}
 								resultGroups={element.resultGroups}
-								sharingUrls={getSharingUrls(pageId, webTitle)}
-								theme={format.theme}
+								pageId={pageId}
+								webTitle={webTitle}
+								format={format}
 							/>
 						</Island>
 					)}
