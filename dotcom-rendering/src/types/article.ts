@@ -1,7 +1,7 @@
-import { isUndefined } from '@guardian/libs';
 import { type ArticleFormat, decideFormat } from '../lib/articleFormat';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import { appsLightboxImages } from '../model/appsLightboxImages';
+import { buildCrosswordBlock } from '../model/buildCrosswordBlock';
 import { buildLightboxImages } from '../model/buildLightboxImages';
 import { enhanceBlocks, enhanceMainMedia } from '../model/enhanceBlocks';
 import { enhanceCommercialProperties } from '../model/enhanceCommercialProperties';
@@ -11,7 +11,8 @@ import {
 	type TableOfContentsItem,
 } from '../model/enhanceTableOfContents';
 import { enhancePinnedPost } from '../model/pinnedPost';
-import type { CrosswordElement, ImageForLightbox } from './content';
+import type { Block } from './blocks';
+import type { ImageForLightbox } from './content';
 import type { FEArticleType } from './frontend';
 import { type RenderingTarget } from './renderingTarget';
 
@@ -31,44 +32,13 @@ export type Article = {
 	frontendData: ArticleDeprecated;
 };
 
-export const enhanceCrosswordArticle = (article: Article): Article => {
-	if (isUndefined(article.frontendData.crossword)) {
-		throw new TypeError('article does not contain a crossword');
-	}
-
-	const element: CrosswordElement = {
-		_type: 'model.dotcomrendering.pageElements.CrosswordElement',
-		crossword: article.frontendData.crossword,
-	};
-
-	return {
-		...article,
-		frontendData: {
-			...article.frontendData,
-			blocks: [
-				{
-					id: article.frontendData.crossword.id,
-					elements: [element],
-					attributes: {
-						pinned: false,
-						keyEvent: false,
-						summary: false,
-					},
-					primaryDateLine:
-						article.frontendData.webPublicationDateDisplay,
-					secondaryDateLine:
-						article.frontendData.webPublicationSecondaryDateDisplay,
-				},
-			],
-		},
-	};
-};
-
 export const enhanceArticleType = (
 	data: FEArticleType,
 	renderingTarget: RenderingTarget,
 ): Article => {
 	const format = decideFormat(data.format);
+
+	const crossword: Block | undefined = buildCrosswordBlock(data);
 
 	const imagesForLightbox = data.config.switches.lightbox
 		? buildLightboxImages(data.format, data.blocks, data.mainMediaElements)
@@ -80,6 +50,7 @@ export const enhanceArticleType = (
 		imagesForLightbox,
 		hasAffiliateLinksDisclaimer: !!data.affiliateLinksDisclaimer,
 		audioArticleImage: data.audioArticleImage,
+		crossword,
 		tags: data.tags,
 	});
 

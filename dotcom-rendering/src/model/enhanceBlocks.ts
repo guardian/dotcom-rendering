@@ -31,6 +31,7 @@ type Options = {
 	imagesForLightbox: ImageForLightbox[];
 	hasAffiliateLinksDisclaimer: boolean;
 	audioArticleImage?: ImageBlockElement;
+	crossword?: Block;
 	tags?: TagType[];
 };
 
@@ -105,9 +106,12 @@ export const enhanceBlocks = (
 	format: ArticleFormat,
 	options: Options,
 ): Block[] => {
-	const additionalElement: FEElement[] = [];
+	const additionalElements: FEElement[] = [];
 	if (options.audioArticleImage) {
-		additionalElement.push(options.audioArticleImage);
+		additionalElements.push(options.audioArticleImage);
+	}
+	if (options.crossword) {
+		blocks.push(options.crossword);
 	}
 	return blocks.map((block) => ({
 		...block,
@@ -115,6 +119,6 @@ export const enhanceBlocks = (
 			format,
 			block.id,
 			options,
-		)([...block.elements, ...additionalElement]),
+		)([...block.elements, ...additionalElements]),
 	}));
 };
