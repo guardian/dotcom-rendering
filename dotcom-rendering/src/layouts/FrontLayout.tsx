@@ -16,7 +16,8 @@ import { FrontMostViewed } from '../components/FrontMostViewed';
 import {
 	FrontsBannerAdSlot,
 	MerchandisingSlot,
-	MerchHighOrMobileAdSlot,
+	MerchHighAdSlot,
+	MobileAdSlot,
 } from '../components/FrontsAdSlots';
 import { FrontSection } from '../components/FrontSection';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -37,6 +38,7 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { editionList } from '../lib/edition';
 import {
 	getFrontsBannerAdPositions,
+	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
@@ -119,6 +121,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const filteredCollections = front.pressedPage.collections.filter(
 		(collection) => !isHighlights(collection),
+	);
+
+	const merchHighAdPosition = getMerchHighPosition(
+		filteredCollections.length,
 	);
 
 	const mobileAdPositions = renderAds
@@ -385,19 +391,28 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											</Section>
 										</SnapCssSandbox>
 									)}
-									<MerchHighOrMobileAdSlot
-										renderAds={renderAds}
-										index={index}
-										collectionCount={
-											filteredCollections.length
-										}
-										isPaidContent={
-											front.pressedPage.frontProperties
-												.isPaidContent
-										}
-										mobileAdPositions={mobileAdPositions}
-										hasPageSkin={hasPageSkin}
-									/>
+									{mobileAdPositions.includes(index) && (
+										<MobileAdSlot
+											renderAds={renderAds}
+											adSlotIndex={mobileAdPositions.indexOf(
+												index,
+											)}
+										/>
+									)}
+									{index === merchHighAdPosition && (
+										<MerchHighAdSlot
+											renderAds={renderAds}
+											collectionCount={
+												filteredCollections.length
+											}
+											isPaidContent={
+												!!front.pressedPage
+													.frontProperties
+													.isPaidContent
+											}
+											hasPageSkin={hasPageSkin}
+										/>
+									)}
 								</div>
 							</ContainerOverrides>
 						);
@@ -467,17 +482,27 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										renderAds={renderAds}
 									/>
 								</FrontSection>
-								<MerchHighOrMobileAdSlot
-									renderAds={renderAds}
-									index={index}
-									collectionCount={filteredCollections.length}
-									isPaidContent={
-										front.pressedPage.frontProperties
-											.isPaidContent
-									}
-									mobileAdPositions={mobileAdPositions}
-									hasPageSkin={hasPageSkin}
-								/>
+								{mobileAdPositions.includes(index) && (
+									<MobileAdSlot
+										renderAds={renderAds}
+										adSlotIndex={mobileAdPositions.indexOf(
+											index,
+										)}
+									/>
+								)}
+								{index === merchHighAdPosition && (
+									<MerchHighAdSlot
+										renderAds={renderAds}
+										collectionCount={
+											filteredCollections.length
+										}
+										isPaidContent={
+											!!front.pressedPage.frontProperties
+												.isPaidContent
+										}
+										hasPageSkin={hasPageSkin}
+									/>
+								)}
 							</div>
 						);
 					}
@@ -527,17 +552,27 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										}
 									/>
 								</LabsSection>
-								<MerchHighOrMobileAdSlot
-									renderAds={renderAds}
-									index={index}
-									collectionCount={filteredCollections.length}
-									isPaidContent={
-										front.pressedPage.frontProperties
-											.isPaidContent
-									}
-									mobileAdPositions={mobileAdPositions}
-									hasPageSkin={hasPageSkin}
-								/>
+								{mobileAdPositions.includes(index) && (
+									<MobileAdSlot
+										renderAds={renderAds}
+										adSlotIndex={mobileAdPositions.indexOf(
+											index,
+										)}
+									/>
+								)}
+								{index === merchHighAdPosition && (
+									<MerchHighAdSlot
+										renderAds={renderAds}
+										collectionCount={
+											filteredCollections.length
+										}
+										isPaidContent={
+											!!front.pressedPage.frontProperties
+												.isPaidContent
+										}
+										hasPageSkin={hasPageSkin}
+									/>
+								)}
 							</div>
 						);
 					}
@@ -615,17 +650,27 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									</Island>
 								</Section>
 
-								<MerchHighOrMobileAdSlot
-									renderAds={renderAds}
-									index={index}
-									collectionCount={filteredCollections.length}
-									isPaidContent={
-										front.pressedPage.frontProperties
-											.isPaidContent
-									}
-									mobileAdPositions={mobileAdPositions}
-									hasPageSkin={hasPageSkin}
-								/>
+								{mobileAdPositions.includes(index) && (
+									<MobileAdSlot
+										renderAds={renderAds}
+										adSlotIndex={mobileAdPositions.indexOf(
+											index,
+										)}
+									/>
+								)}
+								{index === merchHighAdPosition && (
+									<MerchHighAdSlot
+										renderAds={renderAds}
+										collectionCount={
+											filteredCollections.length
+										}
+										isPaidContent={
+											!!front.pressedPage.frontProperties
+												.isPaidContent
+										}
+										hasPageSkin={hasPageSkin}
+									/>
+								)}
 							</div>
 						);
 					}
@@ -705,17 +750,25 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 								/>
 							</FrontSection>
-							<MerchHighOrMobileAdSlot
-								renderAds={renderAds}
-								index={index}
-								collectionCount={filteredCollections.length}
-								isPaidContent={
-									front.pressedPage.frontProperties
-										.isPaidContent
-								}
-								mobileAdPositions={mobileAdPositions}
-								hasPageSkin={hasPageSkin}
-							/>
+							{mobileAdPositions.includes(index) && (
+								<MobileAdSlot
+									renderAds={renderAds}
+									adSlotIndex={mobileAdPositions.indexOf(
+										index,
+									)}
+								/>
+							)}
+							{index === merchHighAdPosition && (
+								<MerchHighAdSlot
+									renderAds={renderAds}
+									collectionCount={filteredCollections.length}
+									isPaidContent={
+										!!front.pressedPage.frontProperties
+											.isPaidContent
+									}
+									hasPageSkin={hasPageSkin}
+								/>
+							)}
 						</div>
 					);
 				})}

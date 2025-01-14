@@ -1,56 +1,53 @@
 import { Hide } from '@guardian/source/react-components';
-import { getMerchHighPosition } from '../lib/getFrontsAdPositions';
 import { palette as themePalette } from '../palette';
 import { AdSlot } from './AdSlot.web';
 import { Section } from './Section';
 
-export const MerchHighOrMobileAdSlot = ({
+export const MobileAdSlot = ({
 	renderAds,
-	index,
-	collectionCount,
-	isPaidContent,
-	mobileAdPositions,
-	hasPageSkin,
+	adSlotIndex,
 }: {
 	renderAds: boolean;
-	index: number;
-	collectionCount: number;
-	isPaidContent: boolean | undefined;
-	mobileAdPositions: (number | undefined)[];
-	hasPageSkin: boolean;
+	adSlotIndex: number;
 }) => {
-	if (!renderAds) return null;
+	return (
+		renderAds && (
+			<Hide from="tablet">
+				<AdSlot
+					index={adSlotIndex}
+					data-print-layout="hide"
+					position="mobile-front"
+				/>
+			</Hide>
+		)
+	);
+};
 
+export const MerchHighAdSlot = ({
+	renderAds,
+	hasPageSkin,
+	isPaidContent,
+	collectionCount,
+}: {
+	renderAds: boolean;
+	hasPageSkin: boolean;
+	isPaidContent: boolean;
+	collectionCount: number;
+}) => {
 	const minContainers = isPaidContent ? 1 : 2;
 	const shouldInsertMerchHighSlot =
-		!hasPageSkin &&
-		collectionCount > minContainers &&
-		index === getMerchHighPosition(collectionCount);
+		renderAds && !hasPageSkin && collectionCount > minContainers;
 
-	if (shouldInsertMerchHighSlot) {
-		return (
+	return (
+		shouldInsertMerchHighSlot && (
 			<Hide from="desktop">
 				<AdSlot
 					data-print-layout="hide"
 					position="merchandising-high"
 				/>
 			</Hide>
-		);
-	}
-
-	if (mobileAdPositions.includes(index)) {
-		return (
-			<Hide from="tablet">
-				<AdSlot
-					index={mobileAdPositions.indexOf(index)}
-					data-print-layout="hide"
-					position="mobile-front"
-				/>
-			</Hide>
-		);
-	}
-
-	return null;
+		)
+	);
 };
 
 /**
