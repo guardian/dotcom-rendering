@@ -3,11 +3,7 @@ import {
 	MAX_FRONTS_BANNER_ADS,
 	MAX_FRONTS_MOBILE_ADS,
 } from './commercial-constants';
-import {
-	getMerchHighPosition,
-	isEvenIndex,
-	isMerchHighPosition,
-} from './getFrontsAdPositions';
+import { isEvenIndex } from './getFrontsAdPositions';
 
 /**
  * Uses a very similar approach to pressed fronts, except we
@@ -20,10 +16,7 @@ import {
 const getTagPageMobileAdPositions = (
 	collections: Array<GroupedTrailsBase>,
 ): number[] => {
-	const merchHighPosition = getMerchHighPosition(collections.length);
-
 	return collections
-		.filter((_, index) => !isMerchHighPosition(index, merchHighPosition))
 		.filter(isEvenIndex)
 		.map((collection) =>
 			collections.findIndex(
