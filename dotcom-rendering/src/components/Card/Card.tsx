@@ -595,7 +595,7 @@ export const Card = ({
 		}
 		if (isSmallCard) return 'medium';
 		if (isBetaContainer && media?.type === 'avatar') {
-			return 'small';
+			return 'tiny';
 		}
 		if (
 			isFlexibleContainer &&
