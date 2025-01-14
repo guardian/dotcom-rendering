@@ -1,11 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	between,
-	from,
-	headlineBold28Object,
-	space,
-	textSansBold17Object,
-} from '@guardian/source/foundations';
+import { from, space } from '@guardian/source/foundations';
 import { useEffect, useRef, useState } from 'react';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { palette } from '../palette';
@@ -16,22 +10,13 @@ type Props = {
 	carouselLength: number;
 	visibleCardsOnMobile: number;
 	visibleCardsOnTablet: number;
+	displayName?: string;
 };
-
-/**
- * Primary and Secondary containers have different typographic styles for the
- * titles. We get the font size and line height values for these from the
- * typography presets so we can calculate the offset needed to align the
- * navigation buttons with the title on tablet and desktop.
- */
-const primaryTitlePreset = headlineBold28Object;
-const secondaryTitlePreset = textSansBold17Object;
 
 /**
  * Grid sizing values to calculate negative margin used to pull navigation
  * buttons outside of container into the outer grid column at wide breakpoint.
  */
-const gridColumnWidth = 60;
 const gridGap = 20;
 const gridGapMobile = 10;
 
@@ -59,49 +44,6 @@ const containerStyles = css`
 	}
 	${from.leftCol} {
 		margin-left: 0;
-	}
-`;
-
-const containerWithNavigationStyles = css`
-	display: flex;
-	flex-direction: column-reverse;
-	${from.tablet} {
-		gap: ${space[2]}px;
-	}
-
-	${from.wide} {
-		flex-direction: row;
-		gap: ${space[1]}px;
-	}
-
-	/**
-	 * From tablet, pull container up so navigation buttons align with title.
-	 * The margin is calculated from the front section title font size and line
-	 * height, and the default container spacing.
-	 *
-	 * From wide, the navigation buttons are pulled out of the main content area
-	 * into the right-hand column.
-	 *
-	 * Between leftCol and wide the top of the fixed dividing line is pushed
-	 * down so it starts below the navigation buttons and gap, and aligns with
-	 * the top of the carousel.
-	 */
-	${between.tablet.and.leftCol} {
-		[data-container-level='Primary'] & {
-			margin-top: calc(
-				-${primaryTitlePreset.fontSize} * ${primaryTitlePreset.lineHeight} -
-					${space[3]}px
-			);
-		}
-		[data-container-level='Secondary'] & {
-			margin-top: calc(
-				-${secondaryTitlePreset.fontSize} * ${secondaryTitlePreset.lineHeight} -
-					${space[3]}px
-			);
-		}
-	}
-	${from.wide} {
-		margin-right: -${gridColumnWidth + gridGap / 2}px;
 	}
 `;
 
@@ -225,6 +167,7 @@ export const ScrollableCarousel = ({
 	carouselLength,
 	visibleCardsOnMobile,
 	visibleCardsOnTablet,
+	displayName,
 }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
@@ -303,7 +246,7 @@ export const ScrollableCarousel = ({
 		<div
 			css={[
 				containerStyles,
-				showNavigation && containerWithNavigationStyles,
+				// showNavigation && containerWithNavigationStyles,
 			]}
 		>
 			<ol
@@ -327,6 +270,7 @@ export const ScrollableCarousel = ({
 					nextButtonEnabled={nextButtonEnabled}
 					onClickPreviousButton={() => scrollTo('left')}
 					onClickNextButton={() => scrollTo('right')}
+					displayName={displayName ?? ''}
 					dataLinkNamePreviousButton={nestedOphanComponents(
 						'carousel',
 						'previous-button',

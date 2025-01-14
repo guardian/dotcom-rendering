@@ -199,6 +199,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						highlightsCollection.aspectRatio ??
 						fallbackAspectRatio(highlightsCollection.collectionType)
 					}
+					displayName={highlightsCollection.displayName}
 				/>
 			)
 		);
@@ -528,6 +529,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 												collection.collectionType,
 											)
 										}
+										displayName={collection.displayName}
 									/>
 								</LabsSection>
 								{mobileAdPositions.includes(index) && (
@@ -709,6 +711,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								}
 								containerLevel={collection.containerLevel}
 								containerSpacing={collection.containerSpacing}
+								isScrollable={
+									collection.collectionType ===
+										'scrollable/small' ||
+									collection.collectionType ===
+										'scrollable/medium' ||
+									collection.collectionType ===
+										'scrollable/feature'
+								}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
@@ -730,6 +740,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											collection.collectionType,
 										)
 									}
+									displayName={collection.displayName}
 								/>
 							</FrontSection>
 							{mobileAdPositions.includes(index) && (

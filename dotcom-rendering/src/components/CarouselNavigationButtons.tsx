@@ -1,20 +1,24 @@
 import { css } from '@emotion/react';
-import { from, space } from '@guardian/source/foundations';
-import type { ThemeButton } from '@guardian/source/react-components';
 import {
 	Button,
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
+	ThemeButton,
 } from '@guardian/source/react-components';
+import { from, space } from '@guardian/source/foundations';
+import { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import { palette } from '../palette';
 
-type Props = {
+type CarouselNavigationProps = {
 	previousButtonEnabled: boolean;
 	nextButtonEnabled: boolean;
 	onClickPreviousButton: () => void;
 	onClickNextButton: () => void;
 	dataLinkNameNextButton: string;
 	dataLinkNamePreviousButton: string;
+	/** Unique identifier for the carousel navigation container. */
+	displayName: string;
 };
 
 const themeButton: Partial<ThemeButton> = {
@@ -35,21 +39,54 @@ const buttonStyles = css`
 		display: flex;
 		gap: ${space[1]}px;
 		margin-left: auto;
+		padding-top: ${space[2]}px;
 	}
 `;
 
 /**
- * Navigation buttons for use in a carousel-like component
+ *
+ * Navigation buttons for a carousel-like component.
+ *
+ * This component renders "Previous" and "Next" navigation buttons, designed for controlling a carousel-like component.
+ *
+ * These buttons are rendered using a React portal. A portal allows rendering the button elements outside of the
+ * normal React component hierarchy, enabling flexibility in their placement within the DOM. This is particularly
+ * useful when the buttons need to be positioned outside the visual boundaries of the carousel component itself,
+ * such as on the fronts containers.
+ *
+ * The portal dynamically identifies a DOM element by constructing its ID using the `displayName` prop and
+ * appends the suffix `-carousel-navigation`. This allows us to create distinct navigation portals per carousel.
+ *
+ * If the target DOM element is not found, a warning is logged in the
+ * console. The buttons will not be rendered if the portal target is unavailable.
+ *
  */
 export const CarouselNavigationButtons = ({
 	previousButtonEnabled,
 	nextButtonEnabled,
 	onClickPreviousButton,
 	onClickNextButton,
-	dataLinkNameNextButton,
 	dataLinkNamePreviousButton,
-}: Props) => {
-	return (
+	dataLinkNameNextButton,
+	displayName,
+}: CarouselNavigationProps) => {
+	const [portalNode, setPortalNode] = useState<HTMLElement | null>(null);
+
+	useEffect(() => {
+		const node = document.getElementById(
+			`${displayName}-carousel-navigation`,
+		);
+		if (!node) {
+			console.warn(
+				`Portal node with ID "${displayName}-carousel-navigation" not found.`,
+			);
+		}
+		setPortalNode(node);
+	}, []);
+
+	if (!portalNode) return null;
+
+	return ReactDOM.createPortal(
 		<div
 			aria-controls="carousel"
 			aria-label="carousel arrows"
@@ -84,6 +121,7 @@ export const CarouselNavigationButtons = ({
 				value="next"
 				data-link-name={dataLinkNameNextButton}
 			/>
-		</div>
+		</div>,
+		portalNode,
 	);
 };

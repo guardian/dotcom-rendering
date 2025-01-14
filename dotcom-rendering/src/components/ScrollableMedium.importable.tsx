@@ -16,6 +16,7 @@ type Props = {
 	imageLoading: 'lazy' | 'eager';
 	containerType: DCRContainerType;
 	aspectRatio: AspectRatio;
+	displayName: string;
 };
 
 /**
@@ -33,12 +34,14 @@ export const ScrollableMedium = ({
 	imageLoading,
 	showAge,
 	aspectRatio,
+	displayName,
 }: Props) => {
 	return (
 		<ScrollableCarousel
 			carouselLength={trails.length}
 			visibleCardsOnMobile={2}
 			visibleCardsOnTablet={4}
+			displayName={displayName}
 		>
 			{trails.map((trail) => {
 				const imagePosition = isMediaCard(trail.format)

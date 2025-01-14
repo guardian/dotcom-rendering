@@ -43,6 +43,7 @@ type Props = {
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
+	displayName: string;
 };
 
 export const DecideContainer = ({
@@ -54,6 +55,7 @@ export const DecideContainer = ({
 	absoluteServerTimes,
 	imageLoading,
 	aspectRatio,
+	displayName,
 }: Props) => {
 	// If you add a new container type which contains an MPU, you must also add it to
 	switch (containerType) {
@@ -270,6 +272,7 @@ export const DecideContainer = ({
 						showAge={showAge}
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
+						displayName={displayName}
 					/>
 				</Island>
 			);
@@ -284,6 +287,7 @@ export const DecideContainer = ({
 						showAge={showAge}
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
+						displayName={displayName}
 					/>
 				</Island>
 			);
@@ -307,6 +311,7 @@ export const DecideContainer = ({
 						containerPalette={containerPalette}
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
+						displayName={displayName}
 					/>
 				</Island>
 			);
