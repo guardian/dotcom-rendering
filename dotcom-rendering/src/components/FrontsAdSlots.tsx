@@ -10,15 +10,17 @@ export const MobileAdSlot = ({
 	renderAds: boolean;
 	adSlotIndex: number;
 }) => {
-	return renderAds ? (
-		<Hide from="tablet">
-			<AdSlot
-				index={adSlotIndex}
-				data-print-layout="hide"
-				position="mobile-front"
-			/>
-		</Hide>
-	) : null;
+	return (
+		renderAds && (
+			<Hide from="tablet">
+				<AdSlot
+					index={adSlotIndex}
+					data-print-layout="hide"
+					position="mobile-front"
+				/>
+			</Hide>
+		)
+	);
 };
 
 export const MerchandisingHighAdSlot = ({
@@ -36,11 +38,16 @@ export const MerchandisingHighAdSlot = ({
 	const shouldInsertMerchHighSlot =
 		renderAds && !hasPageSkin && collectionCount > minContainers;
 
-	return shouldInsertMerchHighSlot ? (
-		<Hide from="desktop">
-			<AdSlot data-print-layout="hide" position="merchandising-high" />
-		</Hide>
-	) : null;
+	return (
+		!!shouldInsertMerchHighSlot && (
+			<Hide from="desktop">
+				<AdSlot
+					data-print-layout="hide"
+					position="merchandising-high"
+				/>
+			</Hide>
+		)
+	);
 };
 
 /**
@@ -54,25 +61,30 @@ export const MerchandisingAdSlot = ({
 	renderAds: boolean;
 	hasPageSkin: boolean;
 }) => {
-	return renderAds ? (
-		<Section
-			fullWidth={true}
-			data-print-layout="hide"
-			padSides={false}
-			showTopBorder={false}
-			showSideBorders={false}
-			backgroundColour={themePalette('--article-section-background')}
-			element="aside"
-		>
-			{hasPageSkin ? (
-				<Hide from="desktop">
+	return (
+		renderAds && (
+			<Section
+				fullWidth={true}
+				data-print-layout="hide"
+				padSides={false}
+				showTopBorder={false}
+				showSideBorders={false}
+				backgroundColour={themePalette('--article-section-background')}
+				element="aside"
+			>
+				{hasPageSkin ? (
+					<Hide from="desktop">
+						<AdSlot
+							data-print-layout="hide"
+							position="merchandising"
+						/>
+					</Hide>
+				) : (
 					<AdSlot data-print-layout="hide" position="merchandising" />
-				</Hide>
-			) : (
-				<AdSlot data-print-layout="hide" position="merchandising" />
-			)}
-		</Section>
-	) : null;
+				)}
+			</Section>
+		)
+	);
 };
 
 /**
