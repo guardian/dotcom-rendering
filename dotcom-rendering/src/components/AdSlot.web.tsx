@@ -480,6 +480,7 @@ export const AdSlot = ({
 									]}
 									data-link-name="ad slot right"
 									data-name="right"
+									data-testid="slot"
 									aria-hidden="true"
 								/>
 							</div>
