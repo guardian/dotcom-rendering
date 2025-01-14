@@ -12,7 +12,6 @@ import { AdSlot } from './AdSlot.web';
 const meta = {
 	component: AdSlot,
 	title: 'Components/Ad Slot (web)',
-	decorators: [rightColumnDecorator],
 } satisfies Meta<typeof AdSlot>;
 
 export default meta;
@@ -22,16 +21,11 @@ type Story = StoryObj<typeof meta>;
 const adLabelsStyles = css`
 	${textSans14}
 	padding: ${remSpace[3]};
-	float: left;
 	display: flex;
 	justify-content: center;
-
-	/* We need to account for padding on both sides */
-	width: calc(100% - 2 * ${remSpace[3]});
-
+	width: 100%;
 	p {
 		margin: 0;
-		float: left;
 		font-size: 16px;
 		font-weight: 400;
 		color: ${palette('--ad-labels-text')};
@@ -39,8 +33,12 @@ const adLabelsStyles = css`
 `;
 
 const rightAdSlotStyles = css`
-	clear: both;
-	padding-bottom: 258px;
+	padding-bottom: 250px;
+	width: 300px;
+`;
+
+const topAboveNavAdSlotStyles = css`
+	padding-bottom: 250px;
 	width: 100%;
 `;
 
@@ -62,10 +60,23 @@ export const Right = {
 		position: 'right',
 		display: ArticleDisplay.Standard,
 	},
+	decorators: [rightColumnDecorator],
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
 		const slot = await canvas.findByTestId('slot');
 
 		renderTestAd(rightAdSlotStyles, slot);
+	},
+} satisfies Story;
+
+export const TopAboveNav = {
+	args: {
+		position: 'top-above-nav',
+	},
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement);
+		const slot = await canvas.findByTestId('slot');
+
+		renderTestAd(topAboveNavAdSlotStyles, slot);
 	},
 } satisfies Story;

@@ -527,6 +527,7 @@ export const AdSlot = ({
 						].join(' ')}
 						data-link-name="ad slot top-above-nav"
 						data-name="top-above-nav"
+						data-testid="slot"
 						aria-hidden="true"
 					></div>
 				</div>
