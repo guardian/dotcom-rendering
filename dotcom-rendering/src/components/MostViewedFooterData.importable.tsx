@@ -7,7 +7,7 @@ import { useApi } from '../lib/useApi';
 import { palette } from '../palette';
 import type { FETrailTabType, TrailTabType } from '../types/trails';
 import { MostViewedFooter } from './MostViewedFooter.importable';
-import { Placeholder } from './Placeholder';
+import { MostViewedFooterPlaceholder } from './MostViewedFooterPlaceholder';
 
 interface Props {
 	sectionId?: string;
@@ -72,13 +72,17 @@ export const MostViewedFooterData = ({
 	const variantFromRunnable = runnableTest?.variantToRun.id ?? 'not-runnable';
 
 	const url = buildSectionUrl(ajaxUrl, edition, sectionId);
-	const { data, error } = useApi<
+	const { data, loading, error } = useApi<
 		MostViewedFooterPayloadType | FETrailTabType[]
 	>(url);
 
 	if (error) {
 		window.guardian.modules.sentry.reportError(error, 'most-viewed-footer');
 		return null;
+	}
+
+	if (loading) {
+		return <MostViewedFooterPlaceholder />;
 	}
 
 	if (data) {
@@ -94,5 +98,5 @@ export const MostViewedFooterData = ({
 		);
 	}
 
-	return <Placeholder height={360} />;
+	return null;
 };
