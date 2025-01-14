@@ -15,7 +15,7 @@ type Props = {
 	imageLoading: 'lazy' | 'eager';
 	containerType: DCRContainerType;
 	aspectRatio: AspectRatio;
-	displayName: string;
+	sectionId: string;
 };
 
 /**
@@ -33,14 +33,14 @@ export const ScrollableSmall = ({
 	imageLoading,
 	showAge,
 	aspectRatio,
-	displayName,
+	sectionId,
 }: Props) => {
 	return (
 		<ScrollableCarousel
 			carouselLength={trails.length}
 			visibleCardsOnMobile={1}
 			visibleCardsOnTablet={2}
-			displayName={displayName}
+			sectionId={sectionId}
 		>
 			{trails.map((trail) => {
 				return (

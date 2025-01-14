@@ -90,6 +90,7 @@ type Props = {
 	discussionApiUrl: string;
 	collectionBranding?: CollectionBranding;
 	isTagPage?: boolean;
+	isScrollableContainer?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -169,6 +170,17 @@ const containerStylesUntilLeftCol = css`
 			60px
 			[decoration-end content-end title-end hide-end]
 			minmax(0, 1fr);
+	}
+`;
+
+const containerScrollableStylesFromLeftCol = css`
+	${between.leftCol.and.wide} {
+		grid-template-rows:
+			[headline-start show-hide-start] auto
+			[show-hide-end content-toggleable-start content-start] auto
+			[headline-end treats-start] auto
+			[content-end content-toggleable-end treats-end bottom-content-start] auto
+			[bottom-content-end];
 	}
 `;
 
@@ -261,6 +273,13 @@ const sectionShowHide = css`
 	grid-row: show-hide;
 	grid-column: hide;
 	justify-self: end;
+	display: flex;
+	align-items: flex-end;
+	${from.wide} {
+		flex-direction: column-reverse;
+		justify-content: flex-end;
+		align-items: flex-end;
+	}
 `;
 
 const sectionContent = css`
@@ -488,8 +507,9 @@ export const FrontSection = ({
 	discussionApiUrl,
 	collectionBranding,
 	isTagPage = false,
+	isScrollableContainer = false,
 }: Props) => {
-	const isToggleable = toggleable && !!sectionId && !containerLevel;
+	const isToggleable = toggleable && !!sectionId;
 	const showMore =
 		canShowMore &&
 		!!title &&
@@ -515,6 +535,10 @@ export const FrontSection = ({
 					fallbackStyles,
 					containerStylesUntilLeftCol,
 					!hasPageSkin && containerStylesFromLeftCol,
+					!hasPageSkin &&
+						isScrollableContainer &&
+						containerScrollableStylesFromLeftCol,
+
 					hasPageSkin && pageSkinContainer,
 				]}
 				style={{
@@ -578,9 +602,10 @@ export const FrontSection = ({
 					{leftContent}
 				</div>
 
-				{isToggleable && (
+				{(isToggleable || isScrollableContainer) && (
 					<div css={sectionShowHide}>
 						<ShowHideButton sectionId={sectionId} />
+						{/* <div id={`${sectionId}-carousel-navigation`}></div> */}
 					</div>
 				)}
 

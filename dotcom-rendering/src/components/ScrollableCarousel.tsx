@@ -10,7 +10,7 @@ type Props = {
 	carouselLength: number;
 	visibleCardsOnMobile: number;
 	visibleCardsOnTablet: number;
-	displayName?: string;
+	sectionId?: string;
 };
 
 /**
@@ -167,7 +167,7 @@ export const ScrollableCarousel = ({
 	carouselLength,
 	visibleCardsOnMobile,
 	visibleCardsOnTablet,
-	displayName,
+	sectionId,
 }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
@@ -270,7 +270,7 @@ export const ScrollableCarousel = ({
 					nextButtonEnabled={nextButtonEnabled}
 					onClickPreviousButton={() => scrollTo('left')}
 					onClickNextButton={() => scrollTo('right')}
-					displayName={displayName ?? ''}
+					sectionId={sectionId ?? ''}
 					dataLinkNamePreviousButton={nestedOphanComponents(
 						'carousel',
 						'previous-button',

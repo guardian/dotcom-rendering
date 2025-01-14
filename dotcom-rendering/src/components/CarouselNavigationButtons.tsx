@@ -18,7 +18,7 @@ type CarouselNavigationProps = {
 	dataLinkNameNextButton: string;
 	dataLinkNamePreviousButton: string;
 	/** Unique identifier for the carousel navigation container. */
-	displayName: string;
+	sectionId: string;
 };
 
 const themeButton: Partial<ThemeButton> = {
@@ -54,7 +54,7 @@ const buttonStyles = css`
  * useful when the buttons need to be positioned outside the visual boundaries of the carousel component itself,
  * such as on the fronts containers.
  *
- * The portal dynamically identifies a DOM element by constructing its ID using the `displayName` prop and
+ * The portal dynamically identifies a DOM element by constructing its ID using the `sectionId` prop and
  * appends the suffix `-carousel-navigation`. This allows us to create distinct navigation portals per carousel.
  *
  * If the target DOM element is not found, a warning is logged in the
@@ -68,17 +68,16 @@ export const CarouselNavigationButtons = ({
 	onClickNextButton,
 	dataLinkNamePreviousButton,
 	dataLinkNameNextButton,
-	displayName,
+	sectionId,
 }: CarouselNavigationProps) => {
 	const [portalNode, setPortalNode] = useState<HTMLElement | null>(null);
-
 	useEffect(() => {
 		const node = document.getElementById(
-			`${displayName}-carousel-navigation`,
+			`${sectionId}-carousel-navigation`,
 		);
 		if (!node) {
 			console.warn(
-				`Portal node with ID "${displayName}-carousel-navigation" not found.`,
+				`Portal node with ID "${sectionId}-carousel-navigation" not found.`,
 			);
 		}
 		setPortalNode(node);
