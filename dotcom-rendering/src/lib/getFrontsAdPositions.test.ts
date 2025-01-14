@@ -4,16 +4,17 @@ import {
 	testCollectionsUs,
 } from '../../fixtures/manual/frontCollections';
 import type { DCRCollectionType } from '../types/front';
+import type { AdCandidate } from './getFrontsAdPositions';
 import {
 	getFrontsBannerAdPositions,
 	getMobileAdPositions,
 } from './getFrontsAdPositions';
 
-const defaultTestCollections: Pick<DCRCollectionType, 'collectionType'>[] = [
-	...Array<number>(12),
-].map(() => ({
-	collectionType: 'fixed/large/slow-XIV',
-}));
+const defaultTestCollections: AdCandidate[] = [...Array<number>(12)].map(
+	() => ({
+		collectionType: 'fixed/large/slow-XIV',
+	}),
+);
 
 describe('Mobile Ads', () => {
 	it(`Should not insert ad after container if it's the first one and it's a thrasher`, () => {
@@ -25,25 +26,14 @@ describe('Mobile Ads', () => {
 		expect(mobileAdPositions).not.toContain(0);
 	});
 
-	// MerchandiseHigh is in position:
-	// 2: when it's a network front and collections are equal or more than 4
-	// 0: when collections are less than 4
-	it.each([
-		[4, 2],
-		[5, 2],
-		[99, 2],
-		[3, 0],
-		[2, 0],
-		[0, 0],
-	])(
-		`should not insert an ad in the merchandising-high position when there are %i collections and merchandising-high is in position %i`,
-		(numCollections, merchHighPosition) => {
-			const mobileAdPositions = getMobileAdPositions(
-				defaultTestCollections.slice(0, numCollections),
-			);
-			expect(mobileAdPositions).not.toContain(merchHighPosition);
-		},
-	);
+	it(`should not insert an ad in the merchandising-high position`, () => {
+		const testCollections = [
+			...defaultTestCollections.slice(0, 3),
+			{ collectionType: 'news/most-popular' },
+		] satisfies AdCandidate[];
+		const mobileAdPositions = getMobileAdPositions(testCollections);
+		expect(mobileAdPositions).not.toContain(3);
+	});
 
 	it('Should not insert ad after a thrasher container', () => {
 		const testCollections = [...defaultTestCollections];
