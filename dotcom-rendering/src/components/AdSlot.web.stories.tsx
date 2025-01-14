@@ -1,12 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { within } from '@storybook/test';
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { remSpace, textSans14 } from '@guardian/source/foundations';
-import { rightColumnDecorator } from '../../.storybook/decorators/gridDecorators';
-import { AdSlot } from './AdSlot.web';
-import { palette } from '../palette';
-import { ArticleDisplay } from '../lib/articleFormat';
+import type { Meta, StoryObj } from '@storybook/react';
+import { within } from '@storybook/test';
 import { createRoot } from 'react-dom/client';
+import { rightColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import { ArticleDisplay } from '../lib/articleFormat';
+import { palette } from '../palette';
+import { AdSlot } from './AdSlot.web';
 
 const meta = {
 	component: AdSlot,
@@ -37,13 +38,26 @@ const adLabelsStyles = css`
 	}
 `;
 
-const adSlotStyles = css`
+const rightAdSlotStyles = css`
 	clear: both;
 	padding-bottom: 258px;
 	width: 100%;
 `;
 
-export const RightStandard = {
+function renderTestAd(adStyles: SerializedStyles, slot: HTMLElement) {
+	const root = createRoot(slot);
+
+	root.render(
+		<aside>
+			<div css={adLabelsStyles}>
+				<p>Advertisement</p>
+			</div>
+			<div css={adStyles}></div>
+		</aside>,
+	);
+}
+
+export const Right = {
 	args: {
 		position: 'right',
 		display: ArticleDisplay.Standard,
@@ -52,15 +66,6 @@ export const RightStandard = {
 		const canvas = within(canvasElement);
 		const slot = await canvas.findByTestId('slot');
 
-		const root = createRoot(slot);
-
-		root.render(
-			<aside>
-				<div css={adLabelsStyles}>
-					<p>Advertisement</p>
-				</div>
-				<div css={adSlotStyles}></div>
-			</aside>,
-		);
+		renderTestAd(rightAdSlotStyles, slot);
 	},
 } satisfies Story;
