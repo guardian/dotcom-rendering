@@ -41,7 +41,7 @@
 		"@emotion/jest": "11.11.0",
 		"@emotion/react": "11.11.3",
 		"@emotion/server": "11.11.0",
-		"@guardian/apps-rendering-api-models": "11.0.0-PREVIEW.update-content-api-models.2025-01-08T1653.6e4f988c",
+		"@guardian/apps-rendering-api-models": "11.0.0",
 		"@guardian/bridget": "7.0.0",
 		"@guardian/cdk": "50.13.0",
 		"@guardian/content-api-models": "26.0.0",
