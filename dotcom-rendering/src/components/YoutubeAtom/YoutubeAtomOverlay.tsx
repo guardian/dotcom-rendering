@@ -21,8 +21,6 @@ import { Kicker } from '../Kicker';
 import { secondsToDuration } from '../MediaDuration';
 import { YoutubeAtomPicture } from './YoutubeAtomPicture';
 
-export type VideoCategory = 'live' | 'documentary' | 'explainer';
-
 type Props = {
 	uniqueId: string;
 	overrideImage?: string;
@@ -33,7 +31,6 @@ type Props = {
 	duration?: number; // in seconds
 	title?: string;
 	onClick: () => void;
-	videoCategory?: VideoCategory;
 	kicker?: string;
 	format: ArticleFormat;
 	showTextOverlay?: boolean;
@@ -76,26 +73,28 @@ const pillStyles = css`
 	top: ${space[2]}px;
 	right: ${space[2]}px;
 	${textSansBold12};
-	background-color: rgba(0, 0, 0, 0.7);
 	color: ${sourcePalette.neutral[100]};
+`;
+
+const durationPillStyles = css`
+	background-color: rgba(0, 0, 0, 0.7);
 	border-radius: ${space[3]}px;
 	padding: 0 6px;
 	display: inline-flex;
-`;
-
-const pillItemStyles = css`
-	/* Target all but the first element, and add a border */
-	:nth-of-type(n + 2) {
-		border-left: 1px solid rgba(255, 255, 255, 0.5);
-	}
-`;
-
-const pillTextStyles = css`
 	line-height: ${space[4]}px;
 	padding: ${space[1]}px 6px;
 `;
 
-const liveStyles = css`
+const livePillStyles = css`
+	border-radius: ${space[10]}px;
+	padding: ${space[1]}px ${space[2]}px;
+	gap: ${space[2]}px;
+	background-color: rgba(18, 18, 18, 0.7);
+	display: flex;
+	align-items: center;
+`;
+
+const liveBulletStyles = css`
 	::before {
 		content: '';
 		width: 9px;
@@ -132,8 +131,6 @@ const titleStyles = css`
 		${headlineMedium20};
 	}
 `;
-const capitalise = (str: string): string =>
-	str.charAt(0).toUpperCase() + str.slice(1);
 
 export const YoutubeAtomOverlay = ({
 	uniqueId,
@@ -145,7 +142,6 @@ export const YoutubeAtomOverlay = ({
 	duration,
 	title,
 	onClick,
-	videoCategory,
 	kicker,
 	format,
 	showTextOverlay,
@@ -155,8 +151,8 @@ export const YoutubeAtomOverlay = ({
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
-	const showPill = !!videoCategory || hasDuration;
-	const isLive = videoCategory === 'live';
+	//** We infer that a video is a livestream if the duration is set to 0. This is a soft contract with Editorial who manual set the duration of videos   */
+	const isLiveStream = duration === 0;
 	const image = overrideImage ?? posterImage;
 	const hidePillOnMobile =
 		imagePositionOnMobile === 'right' || imagePositionOnMobile === 'left';
@@ -179,32 +175,22 @@ export const YoutubeAtomOverlay = ({
 						aspectRatio={aspectRatio}
 					/>
 				)}
-				{showPill && (
+				{isLiveStream && (
+					<div css={[pillStyles, livePillStyles, liveBulletStyles]}>
+						Live
+					</div>
+				)}
+				{hasDuration && (
 					<div
 						css={
 							hidePillOnMobile
 								? css`
 										display: none;
 								  `
-								: pillStyles
+								: [pillStyles, durationPillStyles]
 						}
 					>
-						{!!videoCategory && (
-							<div css={pillItemStyles}>
-								<div
-									css={[pillTextStyles, isLive && liveStyles]}
-								>
-									{capitalise(videoCategory)}
-								</div>
-							</div>
-						)}
-						{!!hasDuration && (
-							<div css={pillItemStyles}>
-								<div css={pillTextStyles}>
-									{secondsToDuration(duration)}
-								</div>
-							</div>
-						)}
+						{secondsToDuration(duration)}
 					</div>
 				)}
 				<PlayIcon
