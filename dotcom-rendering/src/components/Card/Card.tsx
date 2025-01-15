@@ -515,7 +515,6 @@ export const Card = ({
 	 * Currently pills are only shown within beta containers.
 	 */
 	const showPill =
-		isBetaContainer &&
 		mainMedia &&
 		(mainMedia.type === 'Audio' || mainMedia.type === 'Gallery');
 
@@ -715,7 +714,7 @@ export const Card = ({
 							cardHasImage={!!image}
 						/>
 					) : null}
-					{!!mainMedia && mainMedia.type !== 'Video' && !showPill && (
+					{!showPill && !!mainMedia && mainMedia.type !== 'Video' && (
 						<MediaMeta
 							mediaType={mainMedia.type}
 							hasKicker={!!kickerText}
@@ -738,7 +737,7 @@ export const Card = ({
 				 * Waveform for podcasts is absolutely positioned at bottom of
 				 * card, behind everything else
 				 */}
-				{isBetaContainer && mainMedia?.type === 'Audio' && (
+				{mainMedia?.type === 'Audio' && (
 					<div
 						css={waveformWrapper(
 							imagePositionOnMobile,
@@ -1014,9 +1013,9 @@ export const Card = ({
 											cardHasImage={!!image}
 										/>
 									) : null}
-									{!!mainMedia &&
-										mainMedia.type !== 'Video' &&
-										!showPill && (
+									{!showPill &&
+										!!mainMedia &&
+										mainMedia.type !== 'Video' && (
 											<MediaMeta
 												mediaType={mainMedia.type}
 												hasKicker={!!kickerText}

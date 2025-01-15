@@ -590,6 +590,50 @@ const cardMediaIconLight: ContainerFunction = (containerPalette) =>
 const cardMediaIconDark: ContainerFunction = (containerPalette) =>
 	cardBackgroundDark(containerPalette);
 
+const cardMediaWaveformLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+		case 'SombrePalette':
+		case 'SombreAltPalette':
+			return sourcePalette.neutral[46];
+		case 'LongRunningPalette':
+		case 'EventPalette':
+		case 'MediaPalette':
+		case 'PodcastPalette':
+		case 'Branded':
+			return sourcePalette.neutral[86];
+		case 'LongRunningAltPalette':
+			return sourcePalette.neutral[73];
+		case 'BreakingPalette':
+			return sourcePalette.news[300];
+		case 'EventAltPalette':
+			return sourcePalette.culture[600];
+		case 'SpecialReportAltPalette':
+			return sourcePalette.specialReportAlt[800];
+	}
+};
+
+const cardMediaWaveformDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+		case 'LongRunningAltPalette':
+		case 'SombrePalette':
+		case 'SombreAltPalette':
+		case 'EventPalette':
+		case 'SpecialReportAltPalette':
+		case 'MediaPalette':
+		case 'PodcastPalette':
+		case 'Branded':
+			return sourcePalette.neutral[38];
+		case 'LongRunningPalette':
+			return sourcePalette.brand[400];
+		case 'BreakingPalette':
+			return sourcePalette.news[300];
+		case 'EventAltPalette':
+			return sourcePalette.culture[300];
+	}
+};
+
 const sectionBackgroundLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'InvestigationPalette':
@@ -1086,6 +1130,10 @@ const containerColours = {
 	'--card-media-icon': {
 		light: cardMediaIconLight,
 		dark: cardMediaIconDark,
+	},
+	'--card-media-waveform': {
+		light: cardMediaWaveformLight,
+		dark: cardMediaWaveformDark,
 	},
 	'--card-sublinks-background': {
 		light: cardSublinksBackgroundLight,

@@ -1290,21 +1290,22 @@ export const WithSpecialPaletteVariations = () => {
 						isLabs
 							? {
 									display: ArticleDisplay.Standard,
-									design: ArticleDesign.Gallery,
+									design: ArticleDesign.Audio,
 									theme: ArticleSpecial.Labs,
 							  }
 							: {
 									display: ArticleDisplay.Standard,
-									design: ArticleDesign.Gallery,
+									design: ArticleDesign.Audio,
 									theme: Pillar.Lifestyle,
 							  }
 					}
+					headlineText="Audio"
 					kickerText="Kicker"
 					trailText=""
 					imagePositionOnDesktop="top"
 					imagePositionOnMobile="left"
 					imageSize="medium"
-					mainMedia={mainGallery}
+					mainMedia={{ ...mainAudio, duration: 90 }}
 					containerPalette={containerPalette}
 				/>
 			</LI>
