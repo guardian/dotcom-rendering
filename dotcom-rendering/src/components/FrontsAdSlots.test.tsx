@@ -29,20 +29,6 @@ describe('MerchHighAdSlot', () => {
 		const { container } = render(
 			<MerchHighAdSlot
 				renderAds={false}
-				hasPageSkin={false}
-				isPaidContent={false}
-				collectionCount={4}
-			/>,
-		);
-
-		expect(container.innerHTML).toBe('');
-	});
-
-	it('should return null if there is a page skin', () => {
-		const { container } = render(
-			<MerchHighAdSlot
-				renderAds={true}
-				hasPageSkin={true}
 				isPaidContent={false}
 				collectionCount={4}
 			/>,
@@ -55,7 +41,6 @@ describe('MerchHighAdSlot', () => {
 		const { container } = render(
 			<MerchHighAdSlot
 				renderAds={true}
-				hasPageSkin={false}
 				isPaidContent={false}
 				collectionCount={2}
 			/>,
@@ -68,7 +53,6 @@ describe('MerchHighAdSlot', () => {
 		const { container } = render(
 			<MerchHighAdSlot
 				renderAds={true}
-				hasPageSkin={false}
 				isPaidContent={true}
 				collectionCount={1}
 			/>,
@@ -81,7 +65,6 @@ describe('MerchHighAdSlot', () => {
 		const { container } = render(
 			<MerchHighAdSlot
 				renderAds={true}
-				hasPageSkin={false}
 				isPaidContent={false}
 				collectionCount={4}
 			/>,
