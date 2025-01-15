@@ -1,6 +1,13 @@
 import { css } from '@emotion/react';
-import { brandAlt, from, neutral, space } from '@guardian/source/foundations';
+import {
+	brandAlt,
+	from,
+	neutral,
+	space,
+	specialReport,
+} from '@guardian/source/foundations';
 import { LinkButton, SvgGuardianLogo } from '@guardian/source/react-components';
+import { hexColourToString } from '@guardian/support-dotcom-components';
 import { useEffect, useState } from 'react';
 import {
 	removeMediaRulePrefix,
@@ -65,55 +72,88 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		return <></>;
 	}
 
+	const { basic, primaryCta, secondaryCta, highlightedText, closeButton } =
+		design.colours;
+
 	const landingPageUrl = 'https://support.theguardian.com/contribute';
 
 	//Work required to wire in the new designs to the banner design tooling config: https://trello.com/c/sLa1GEg7/355-3-tier-banners-wire-in-config-to-tooling
 	const templateSettings: BannerTemplateSettings = {
 		containerSettings: {
-			backgroundColour: neutral[100],
-			textColor: neutral[0],
+			backgroundColour: hexColourToString(basic.background),
+			textColor: hexColourToString(basic.bodyText),
 		},
 		headerSettings: {
-			textColour: neutral[0],
+			textColour: hexColourToString(basic.headerText),
 		},
 		primaryCtaSettings: {
 			default: {
-				backgroundColour: brandAlt[400],
-				textColour: neutral[0],
+				backgroundColour: hexColourToString(
+					primaryCta.default.background,
+				),
+				textColour: hexColourToString(primaryCta.default.text),
 			},
 			hover: {
-				backgroundColour: brandAlt[400],
-				textColour: neutral[0],
+				backgroundColour: hexColourToString(
+					primaryCta.hover.background,
+				),
+				textColour: hexColourToString(primaryCta.hover.text),
 			},
 		},
 		//not used in this design but is required to be passed in
 		secondaryCtaSettings: {
 			default: {
-				backgroundColour: brandAlt[400],
-				textColour: neutral[0],
+				backgroundColour: hexColourToString(
+					secondaryCta.default.background,
+				),
+				textColour: hexColourToString(secondaryCta.default.text),
+				border: `1px solid ${
+					secondaryCta.default.border
+						? hexColourToString(secondaryCta.default.border)
+						: undefined
+				}`,
 			},
 			hover: {
-				backgroundColour: brandAlt[400],
-				textColour: neutral[0],
+				backgroundColour: hexColourToString(
+					secondaryCta.hover.background,
+				),
+				textColour: hexColourToString(secondaryCta.hover.text),
+				border: `1px solid ${
+					secondaryCta.hover.border
+						? hexColourToString(secondaryCta.hover.border)
+						: undefined
+				}`,
 			},
 		},
 		closeButtonSettings: {
 			default: {
-				backgroundColour: neutral[100],
-				textColour: neutral[0],
-				border: `1px solid ${neutral[38]}`,
+				backgroundColour: hexColourToString(
+					closeButton.default.background,
+				),
+				textColour: hexColourToString(closeButton.default.text),
+				border: `1px solid ${
+					closeButton.default.border
+						? hexColourToString(closeButton.default.border)
+						: specialReport[100]
+				}`,
 			},
 			hover: {
-				backgroundColour: neutral[100],
-				textColour: neutral[0],
-				border: `1px solid ${neutral[100]}`,
+				backgroundColour: hexColourToString(
+					closeButton.hover.background,
+				),
+				textColour: hexColourToString(closeButton.hover.text),
+				border: `1px solid ${
+					closeButton.hover.border
+						? hexColourToString(closeButton.hover.border)
+						: neutral[100]
+				}`,
 			},
 		},
 		highlightedTextSettings: {
-			textColour: neutral[0],
-			highlightColour: neutral[100], //set to be white as we may want this in the future?
+			textColour: hexColourToString(highlightedText.text),
+			highlightColour: hexColourToString(highlightedText.highlight),
 		},
-		articleCountTextColour: neutral[0],
+		articleCountTextColour: hexColourToString(basic.articleCountText),
 		bannerId: 'designable-banner',
 	};
 
