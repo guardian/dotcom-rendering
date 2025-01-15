@@ -201,7 +201,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 										tagPage.groupedTrails.length
 									}
 									isPaidContent={!!isPaidContent}
-									hasPageSkin={hasPageSkin}
 								/>
 							)}
 						</Fragment>

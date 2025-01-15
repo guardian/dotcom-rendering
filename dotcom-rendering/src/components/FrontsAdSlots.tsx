@@ -25,18 +25,16 @@ export const MobileAdSlot = ({
 
 export const MerchHighAdSlot = ({
 	renderAds,
-	hasPageSkin,
 	isPaidContent,
 	collectionCount,
 }: {
 	renderAds: boolean;
-	hasPageSkin: boolean;
 	isPaidContent: boolean;
 	collectionCount: number;
 }) => {
 	const minContainers = isPaidContent ? 1 : 2;
 	const shouldInsertMerchHighSlot =
-		renderAds && !hasPageSkin && collectionCount > minContainers;
+		renderAds && collectionCount > minContainers;
 
 	return (
 		shouldInsertMerchHighSlot && (

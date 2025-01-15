@@ -410,7 +410,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 													.frontProperties
 													.isPaidContent
 											}
-											hasPageSkin={hasPageSkin}
 										/>
 									)}
 								</div>
@@ -500,7 +499,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											!!front.pressedPage.frontProperties
 												.isPaidContent
 										}
-										hasPageSkin={hasPageSkin}
 									/>
 								)}
 							</div>
@@ -570,7 +568,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											!!front.pressedPage.frontProperties
 												.isPaidContent
 										}
-										hasPageSkin={hasPageSkin}
 									/>
 								)}
 							</div>
@@ -668,7 +665,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											!!front.pressedPage.frontProperties
 												.isPaidContent
 										}
-										hasPageSkin={hasPageSkin}
 									/>
 								)}
 							</div>
@@ -766,7 +762,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										!!front.pressedPage.frontProperties
 											.isPaidContent
 									}
-									hasPageSkin={hasPageSkin}
 								/>
 							)}
 						</div>
