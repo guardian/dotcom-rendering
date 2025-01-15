@@ -397,6 +397,7 @@ export const AdSlot = ({
 								].join(' ')}
 								data-link-name="ad slot right"
 								data-name="right"
+								data-testid="slot"
 								aria-hidden="true"
 							/>
 						</div>
@@ -422,6 +423,7 @@ export const AdSlot = ({
 								].join(' ')}
 								data-link-name="ad slot right"
 								data-name="right"
+								data-testid="slot"
 								aria-hidden="true"
 							/>
 						</div>
@@ -480,6 +482,7 @@ export const AdSlot = ({
 									]}
 									data-link-name="ad slot right"
 									data-name="right"
+									data-testid="slot"
 									aria-hidden="true"
 								/>
 							</div>
@@ -504,6 +507,7 @@ export const AdSlot = ({
 						].join(' ')}
 						data-link-name="ad slot comments"
 						data-name="comments"
+						data-testid="slot"
 						aria-hidden="true"
 					/>
 				</div>
@@ -526,6 +530,7 @@ export const AdSlot = ({
 						].join(' ')}
 						data-link-name="ad slot top-above-nav"
 						data-name="top-above-nav"
+						data-testid="slot"
 						aria-hidden="true"
 					></div>
 				</div>
@@ -550,6 +555,7 @@ export const AdSlot = ({
 							css={[mostPopAdStyles]}
 							data-link-name="ad slot mostpop"
 							data-name="mostpop"
+							data-testid="slot"
 							aria-hidden="true"
 						/>
 					</div>
@@ -573,6 +579,7 @@ export const AdSlot = ({
 						data-link-name="ad slot merchandising-high"
 						data-name="merchandising-high"
 						data-refresh="false"
+						data-testid="slot"
 						aria-hidden="true"
 					/>
 				</div>
@@ -594,6 +601,7 @@ export const AdSlot = ({
 						css={[merchandisingAdStyles]}
 						data-link-name="ad slot merchandising"
 						data-name="merchandising"
+						data-testid="slot"
 						aria-hidden="true"
 					/>
 				</div>
@@ -625,6 +633,7 @@ export const AdSlot = ({
 							css={[frontsBannerAdStyles]}
 							data-link-name={`ad slot ${advertId}`}
 							data-name={`${advertId}`}
+							data-testid="slot"
 							aria-hidden="true"
 						/>
 					</div>
@@ -646,6 +655,7 @@ export const AdSlot = ({
 					data-label="false"
 					data-refresh="false"
 					data-out-of-page="true"
+					data-testid="slot"
 					aria-hidden="true"
 				/>
 			);
@@ -717,6 +727,7 @@ export const AdSlot = ({
 						css={[liveBlogTopAdStyles]}
 						data-link-name="ad slot liveblog-top"
 						data-name="liveblog-top"
+						data-testid="slot"
 						aria-hidden="true"
 					/>
 				</div>
@@ -740,6 +751,7 @@ export const AdSlot = ({
 						css={[mobileFrontAdStyles]}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
+						data-testid="slot"
 						aria-hidden="true"
 					/>
 				</div>
@@ -763,6 +775,7 @@ export const AdSlot = ({
 						data-refresh="false"
 						data-out-of-page="true"
 						data-wide="1,1"
+						data-testid="slot"
 						aria-hidden="true"
 					/>
 				</div>
@@ -782,6 +795,7 @@ export const AdSlot = ({
 						css={[articleEndAdStyles]}
 						data-link-name="ad slot article-end"
 						data-name="article-end"
+						data-testid="slot"
 						aria-hidden="true"
 					/>
 				</div>
