@@ -6779,6 +6779,10 @@ const paletteColours = {
 		light: pillBackground,
 		dark: pillBackground,
 	},
+	'--pill-bullet': {
+		light: pillLiveBullet,
+		dark: pillLiveBullet,
+	},
 	'--pill-divider': {
 		light: pillDivider,
 		dark: pillDivider,
@@ -6786,10 +6790,6 @@ const paletteColours = {
 	'--pill-text': {
 		light: pillText,
 		dark: pillText,
-	},
-	'--pill-bullet': {
-		light: pillLiveBullet,
-		dark: pillLiveBullet,
 	},
 	'--pinned-post-background': {
 		light: liveBlockContainerBackgroundLight,
