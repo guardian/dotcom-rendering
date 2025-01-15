@@ -17,7 +17,6 @@ import { Metrics } from './Metrics.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
-import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SkipTo } from './SkipTo';
 
 type Props = {
@@ -69,13 +68,6 @@ export const FrontPage = ({ front, NAV }: Props) => {
 						!!front.config.switches.commercialMetrics
 					}
 					tests={front.config.abTests}
-				/>
-			</Island>
-			<Island priority="enhancement" defer={{ until: 'idle' }}>
-				<ShowHideContainers
-					disableFrontContainerToggleSwitch={
-						!!front.config.switches.disableFrontContainerShowHide
-					}
 				/>
 			</Island>
 			<Island priority="critical">

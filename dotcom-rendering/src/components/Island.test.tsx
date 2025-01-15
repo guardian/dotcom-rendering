@@ -31,7 +31,7 @@ import { SendTargetingParams } from './SendTargetingParams.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
 import { ShareButton } from './ShareButton.importable';
-import { ShowHideContainers } from './ShowHideContainers.importable';
+import { ShowHideButton } from './ShowHideButton.importable';
 import { SignInGateSelector } from './SignInGateSelector.importable';
 import { SlotBodyEnd } from './SlotBodyEnd.importable';
 import { StickyBottomBanner } from './StickyBottomBanner.importable';
@@ -364,13 +364,9 @@ describe('Island: server-side rendering', () => {
 		).not.toThrow();
 	});
 
-	test('ShowHideContainers', () => {
+	test('ShowHideButton', () => {
 		expect(() =>
-			renderToString(
-				<ShowHideContainers
-					disableFrontContainerToggleSwitch={false}
-				/>,
-			),
+			renderToString(<ShowHideButton sectionId="opinion" />),
 		).not.toThrow();
 	});
 
