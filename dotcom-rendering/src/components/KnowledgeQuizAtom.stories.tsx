@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { userEvent, within } from '@storybook/test';
+import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import { allModes } from '../../.storybook/modes';
 import {
 	exampleKnowledgeQuestions,
 	natureQuestions,
@@ -17,6 +19,14 @@ import { KnowledgeQuizAtom } from './KnowledgeQuizAtom.importable';
 const meta = {
 	title: 'Components/KnowledgeQuizAtom',
 	component: KnowledgeQuizAtom,
+	decorators: centreColumnDecorator,
+	parameters: {
+		chromatic: {
+			modes: {
+				horizontal: allModes.splitHorizontal,
+			},
+		},
+	},
 } satisfies Meta<typeof KnowledgeQuizAtom>;
 
 export default meta;
@@ -36,15 +46,33 @@ export const Default = {
 			theme: Pillar.News,
 		},
 	},
-	decorators: [
-		splitTheme([
-			{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Comment,
-				theme: Pillar.News,
+} satisfies Story;
+
+export const WithResults = {
+	...Default,
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement);
+
+		const questions = canvas.getAllByRole('listitem');
+
+		for (const question of questions) {
+			const questionElement = within(question);
+			const [firstAnswer] = questionElement.getAllByRole('radio');
+			const revealButton = questionElement.getByRole('button');
+
+			await userEvent.click(firstAnswer!);
+			await userEvent.click(revealButton);
+		}
+	},
+	parameters: {
+		chromatic: {
+			modes: {
+				horizontal: { disable: true },
+				'vertical mobileLandscape':
+					allModes['vertical mobileLandscape'],
 			},
-		]),
-	],
+		},
+	},
 } satisfies Story;
 
 export const BatchedResults = {
@@ -53,28 +81,15 @@ export const BatchedResults = {
 		questions: natureQuestions,
 		resultGroups: natureResultGroups,
 	},
-	decorators: [
-		splitTheme([
-			{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Comment,
-				theme: Pillar.News,
-			},
-		]),
-	],
 } satisfies Story;
 
 export const LabsTheme = {
 	args: {
 		...Default.args,
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Comment,
+			theme: ArticleSpecial.Labs,
+		},
 	},
-	decorators: [
-		splitTheme([
-			{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Comment,
-				theme: ArticleSpecial.Labs,
-			},
-		]),
-	],
 } satisfies Story;
