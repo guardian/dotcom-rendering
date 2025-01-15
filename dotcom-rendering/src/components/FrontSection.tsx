@@ -604,8 +604,17 @@ export const FrontSection = ({
 
 				{(isToggleable || isScrollableContainer) && (
 					<div css={sectionShowHide}>
-						<ShowHideButton sectionId={sectionId} />
-						{/* <div id={`${sectionId}-carousel-navigation`}></div> */}
+						{isToggleable && (
+							<ShowHideButton sectionId={sectionId} />
+						)}
+						{isScrollableContainer && (
+							<div
+								css={css`
+									height: 44px;
+								`}
+								id={`${sectionId}-carousel-navigation`}
+							></div>
+						)}
 					</div>
 				)}
 
