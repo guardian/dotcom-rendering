@@ -263,6 +263,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.Audio:
@@ -271,6 +272,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							format={format}
 							NAV={NAV}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				default:

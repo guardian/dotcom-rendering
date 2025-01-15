@@ -9,10 +9,11 @@ import {
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
+import { getInteractionClient } from '../lib/bridgetApi';
 import { formatAttrString } from '../lib/formatAttrString';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';
-import { useIsAndroid } from '../lib/useIsAndroid';
+import { useIsHorizontalScrollingSupported } from '../lib/useIsHorizontalScrollingSupported';
 import { palette as themePalette } from '../palette';
 import type { Branding } from '../types/branding';
 import type { StarRating } from '../types/content';
@@ -24,6 +25,7 @@ import type {
 import type { LeftColSize } from '../types/layout';
 import type { MainMedia } from '../types/mainMedia';
 import type { OnwardsSource } from '../types/onwards';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
@@ -42,6 +44,7 @@ type Props = {
 	leftColSize: LeftColSize;
 	discussionApiUrl: string;
 	absoluteServerTimes: boolean;
+	renderingTarget: RenderingTarget;
 };
 
 type ArticleProps = Props & {
@@ -792,13 +795,16 @@ export const Carousel = ({
 	discussionApiUrl,
 	isOnwardContent = true,
 	absoluteServerTimes,
+	renderingTarget,
 	...props
 }: ArticleProps | FrontProps) => {
 	const carouselRef = useRef<HTMLUListElement>(null);
 
 	const [index, setIndex] = useState(0);
 	const [maxIndex, setMaxIndex] = useState(0);
-	const isAndroid = useIsAndroid();
+	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
+
+	const isApps = renderingTarget === 'Apps';
 
 	const arrowName = 'carousel-small-arrow';
 
@@ -907,7 +913,15 @@ export const Carousel = ({
 	// when index changes and compare it against the prior maxIndex only.
 	useEffect(() => setMaxIndex((m) => Math.max(index, m)), [index]);
 
-	if (isAndroid) {
+	const onTouchStart = async () => {
+		await getInteractionClient().disableArticleSwipe(true);
+	};
+
+	const onTouchEnd = async () => {
+		await getInteractionClient().disableArticleSwipe(false);
+	};
+
+	if (!isHorizontalScrollingSupported) {
 		return null;
 	}
 
@@ -974,6 +988,8 @@ export const Carousel = ({
 						ref={carouselRef}
 						data-component={`carousel-small | maxIndex-${maxIndex}`}
 						data-heatphan-type="carousel"
+						onTouchStart={isApps ? onTouchStart : undefined}
+						onTouchEnd={isApps ? onTouchEnd : undefined}
 					>
 						{trails.map((trail, i) => {
 							const {

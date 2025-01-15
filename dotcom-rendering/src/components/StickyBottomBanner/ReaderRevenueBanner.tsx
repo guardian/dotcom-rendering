@@ -62,7 +62,6 @@ type CanShowProps = BaseProps & {
 	idApiUrl: string;
 	signInGateWillShow: boolean;
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
-	isAndroidWebview: boolean;
 };
 
 type ReaderRevenueComponentType =
@@ -192,14 +191,8 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	idApiUrl,
 	signInGateWillShow,
 	asyncArticleCounts,
-	isAndroidWebview,
 }) => {
 	if (!remoteBannerConfig) return { show: false };
-
-	if (isAndroidWebview) {
-		// Do not show banners on Android app webview, due to buggy behaviour with the buttons
-		return { show: false };
-	}
 
 	if (
 		shouldHideReaderRevenue ||
