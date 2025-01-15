@@ -446,7 +446,6 @@ const containerPalettes = [
 	'SpecialReportAltPalette',
 	'Branded',
 	'MediaPalette',
-	'PodcastPalette',
 ] as const satisfies readonly DCRContainerPalette[];
 export const WithContainerOverrides: StoryObj = ({ format }: StoryProps) => (
 	<>

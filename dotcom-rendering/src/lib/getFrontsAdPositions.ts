@@ -79,16 +79,9 @@ const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
  * A result of 6 indicates a container is at least double the height of a typical desktop viewport.
  */
 const getCollectionHeight = (
-	collction: Pick<
-		DCRCollectionType,
-		'collectionType' | 'containerPalette' | 'grouped'
-	>,
+	collction: Pick<DCRCollectionType, 'collectionType' | 'grouped'>,
 ): 0.5 | 1 | 1.5 | 2 | 2.5 | 3 | 6 => {
-	const { collectionType, containerPalette, grouped } = collction;
-
-	if (containerPalette === 'PodcastPalette') {
-		return 1.5;
-	}
+	const { collectionType, grouped } = collction;
 
 	// The height of some dynamic layouts depend on the sizes of the cards that are passed to them.
 	const groupedCounts: GroupedCounts = {
@@ -123,6 +116,7 @@ const getCollectionHeight = (
 		case 'fixed/video':
 		case 'fixed/video/vertical':
 		case 'scrollable/feature':
+		case 'scrollable/podcast':
 			return 1.5;
 
 		case 'fixed/medium/slow-VI':

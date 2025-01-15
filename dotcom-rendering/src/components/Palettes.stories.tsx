@@ -260,27 +260,3 @@ export const MediaPalette = {
 		</FrontSection>
 	),
 } satisfies Story;
-
-export const PodcastPalette = {
-	render: () => (
-		<FrontSection
-			title="Podcast Palette"
-			collectionId={''}
-			pageId={''}
-			ajaxUrl={''}
-			sectionId={'podcast-palette'}
-			ophanComponentName={'podcast-palette'}
-			ophanComponentLink={'podcast-palette'}
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
-			<DynamicFast
-				groupedTrails={groupedTrails}
-				containerPalette="PodcastPalette"
-				showAge={true}
-				absoluteServerTimes={true}
-				imageLoading="eager"
-			/>
-		</FrontSection>
-	),
-} satisfies Story;

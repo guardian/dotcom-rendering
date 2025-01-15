@@ -28,8 +28,6 @@ const cardHeadlineLight: ContainerFunction = (
 			return sourcePalette.neutral[93];
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[100];
-		case 'PodcastPalette':
-			return sourcePalette.neutral[100];
 		case 'Branded':
 			return sourcePalette.neutral[20];
 		case 'MediaPalette':
@@ -58,8 +56,6 @@ const cardHeadlineDark: ContainerFunction = (
 			return sourcePalette.neutral[93];
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[700];
-		case 'PodcastPalette':
-			return sourcePalette.neutral[100];
 		case 'Branded':
 			return sourcePalette.neutral[86];
 		case 'MediaPalette':
@@ -89,8 +85,6 @@ const cardTrailTextLight: ContainerFunction = (
 			return sourcePalette.neutral[86];
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[100];
-		case 'PodcastPalette':
-			return sourcePalette.neutral[93];
 		case 'Branded':
 			return sourcePalette.neutral[38];
 		case 'MediaPalette':
@@ -119,8 +113,6 @@ const cardTrailTextDark: ContainerFunction = (
 			return sourcePalette.neutral[93];
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[700];
-		case 'PodcastPalette':
-			return sourcePalette.neutral[100];
 		case 'Branded':
 			return sourcePalette.neutral[86];
 		case 'MediaPalette':
@@ -150,7 +142,6 @@ const cardKickerTextLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
 			return sourcePalette.labs[200];
-		case 'PodcastPalette':
 		case 'MediaPalette':
 			return sourcePalette.neutral[7];
 	}
@@ -178,7 +169,6 @@ const cardKickerTextDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[700];
 		case 'Branded':
 			return sourcePalette.labs[400];
-		case 'PodcastPalette':
 		case 'MediaPalette':
 			return sourcePalette.neutral[7];
 	}
@@ -207,7 +197,6 @@ const kickerTextLiveLight: ContainerFunction = (containerPalette) => {
 		case 'Branded':
 			return sourcePalette.neutral[97];
 		case 'MediaPalette':
-		case 'PodcastPalette':
 			return 'inherit';
 	}
 };
@@ -235,7 +224,6 @@ const kickerTextLiveDark: ContainerFunction = (containerPalette) => {
 		case 'Branded':
 			return sourcePalette.neutral[20];
 		case 'MediaPalette':
-		case 'PodcastPalette':
 			return 'inherit';
 	}
 };
@@ -262,7 +250,6 @@ const kickerBackgroundLiveLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
 			return sourcePalette.labs[200];
-		case 'PodcastPalette':
 		case 'MediaPalette':
 			return sourcePalette.neutral[7];
 	}
@@ -289,7 +276,6 @@ const kickerBackgroundLiveDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[700];
 		case 'Branded':
 			return sourcePalette.labs[400];
-		case 'PodcastPalette':
 		case 'MediaPalette':
 			return sourcePalette.neutral[7];
 	}
@@ -319,8 +305,6 @@ const sectionToggleButtonLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[7];
 		case 'MediaPalette':
 			return sourcePalette.neutral[46];
-		case 'PodcastPalette':
-			return sourcePalette.neutral[86];
 	}
 };
 const sectionToggleButtonDark: ContainerFunction = (containerPalette) => {
@@ -347,8 +331,6 @@ const sectionToggleButtonDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[7];
 		case 'MediaPalette':
 			return sourcePalette.neutral[46];
-		case 'PodcastPalette':
-			return sourcePalette.neutral[86];
 	}
 };
 const sectionToggleButtonHoverLight: ContainerFunction = (containerPalette) => {
@@ -375,8 +357,6 @@ const sectionToggleButtonHoverLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[20];
 		case 'MediaPalette':
 			return sourcePalette.neutral[7];
-		case 'PodcastPalette':
-			return sourcePalette.neutral[100];
 	}
 };
 const sectionToggleButtonHoverDark: ContainerFunction = (containerPalette) => {
@@ -402,8 +382,6 @@ const sectionToggleButtonHoverDark: ContainerFunction = (containerPalette) => {
 		case 'Branded':
 			return 'inherit';
 		case 'MediaPalette':
-			return 'inherit';
-		case 'PodcastPalette':
 			return 'inherit';
 	}
 };
@@ -431,8 +409,6 @@ const cardBorderTopLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[73];
 		case 'MediaPalette':
 			return sourcePalette.neutral[46];
-		case 'PodcastPalette':
-			return sourcePalette.neutral[86];
 	}
 };
 
@@ -458,8 +434,6 @@ const cardBorderTopDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[60];
 		case 'MediaPalette':
 			return sourcePalette.neutral[46];
-		case 'PodcastPalette':
-			return sourcePalette.neutral[86];
 	}
 };
 
@@ -494,8 +468,6 @@ const articleBorderLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[73];
 		case 'MediaPalette':
 			return sourcePalette.neutral[46];
-		case 'PodcastPalette':
-			return sourcePalette.neutral[86];
 	}
 };
 
@@ -520,8 +492,6 @@ const articleBorderDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[38];
 		case 'MediaPalette':
 			return sourcePalette.neutral[46];
-		case 'PodcastPalette':
-			return sourcePalette.neutral[10];
 	}
 };
 
@@ -549,8 +519,6 @@ const cardBackgroundLight: ContainerFunction = (containerPalette) => {
 			return palette('--section-background');
 		case 'MediaPalette':
 			return sourcePalette.neutral[0];
-		case 'PodcastPalette':
-			return sourcePalette.neutral[100];
 	}
 };
 
@@ -575,7 +543,6 @@ const cardBackgroundDark: ContainerFunction = (containerPalette) => {
 		case 'SombreAltPalette':
 		case 'EventPalette':
 		case 'EventAltPalette':
-		case 'PodcastPalette':
 			return 'inherit';
 	}
 };
@@ -613,9 +580,8 @@ const sectionBackgroundLight: ContainerFunction = (containerPalette) => {
 		case 'Branded':
 			return sourcePalette.neutral[93];
 		case 'MediaPalette':
+		default:
 			return 'transparent';
-		case 'PodcastPalette':
-			return sourcePalette.neutral[100];
 	}
 };
 
@@ -642,8 +608,6 @@ const sectionBackgroundDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[20];
 		case 'MediaPalette':
 			return sectionBackgroundLight(containerPalette);
-		case 'PodcastPalette':
-			return sourcePalette.neutral[7];
 	}
 };
 
@@ -661,7 +625,6 @@ const sectionBackgroundLeftLight: ContainerFunction = (containerPalette) => {
 		case 'SombreAltPalette':
 		case 'SpecialReportAltPalette':
 		case 'MediaPalette':
-		case 'PodcastPalette':
 			return palette('--section-background');
 	}
 };
@@ -680,7 +643,6 @@ const sectionBackgroundLeftDark: ContainerFunction = (containerPalette) => {
 		case 'SombreAltPalette':
 		case 'SpecialReportAltPalette':
 		case 'MediaPalette':
-		case 'PodcastPalette':
 			return palette('--section-background');
 	}
 };
@@ -708,8 +670,6 @@ const cardBorderSupportingLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[73];
 		case 'MediaPalette':
 			return sourcePalette.neutral[46];
-		case 'PodcastPalette':
-			return sourcePalette.neutral[86];
 	}
 };
 const cardBorderSupportingDark: ContainerFunction = (containerPalette) => {
@@ -734,8 +694,6 @@ const cardBorderSupportingDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[46];
 		case 'MediaPalette':
 			return sourcePalette.neutral[46];
-		case 'PodcastPalette':
-			return sourcePalette.neutral[86];
 	}
 };
 
@@ -746,7 +704,6 @@ const sectionBorderLight: ContainerFunction = (containerPalette) => {
 		case 'EventPalette':
 		case 'EventAltPalette':
 		case 'Branded':
-		case 'PodcastPalette':
 			return sourcePalette.neutral[86];
 		case 'SombrePalette':
 		case 'SombreAltPalette':
@@ -783,8 +740,6 @@ const sectionBorderDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[46];
 		case 'MediaPalette':
 			return sourcePalette.neutral[46];
-		case 'PodcastPalette':
-			return sourcePalette.neutral[86];
 	}
 };
 
@@ -812,8 +767,6 @@ const sectionDateLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[100];
 		case 'MediaPalette':
 			return sourcePalette.neutral[100];
-		case 'PodcastPalette':
-			return sourcePalette.neutral[100];
 	}
 };
 
@@ -837,8 +790,6 @@ const sectionDateDark: ContainerFunction = (containerPalette) => {
 		case 'Branded':
 			return sourcePalette.neutral[100];
 		case 'MediaPalette':
-			return sourcePalette.neutral[100];
-		case 'PodcastPalette':
 			return sourcePalette.neutral[100];
 	}
 };
@@ -868,8 +819,6 @@ const sectionTitleLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[100];
 		case 'MediaPalette':
 			return sourcePalette.neutral[100];
-		case 'PodcastPalette':
-			return sourcePalette.neutral[7];
 	}
 };
 
@@ -897,8 +846,6 @@ const sectionTitleDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[97];
 		case 'MediaPalette':
 			return sourcePalette.neutral[100];
-		case 'PodcastPalette':
-			return 'inherit';
 	}
 };
 
@@ -916,7 +863,6 @@ const treatTextLight: ContainerFunction = (containerPalette) => {
 		case 'BreakingPalette':
 		case 'SpecialReportAltPalette':
 		case 'MediaPalette':
-		case 'PodcastPalette':
 			return 'inherit';
 	}
 };
@@ -935,15 +881,12 @@ const treatTextDark: ContainerFunction = (containerPalette) => {
 		case 'BreakingPalette':
 		case 'SpecialReportAltPalette':
 		case 'MediaPalette':
-		case 'PodcastPalette':
 			return 'inherit';
 	}
 };
 
 const carouselDotLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
-		case 'PodcastPalette':
-			return sourcePalette.neutral[86];
 		case 'MediaPalette':
 			return sourcePalette.neutral[86];
 		default:
@@ -953,8 +896,6 @@ const carouselDotLight: ContainerFunction = (containerPalette) => {
 
 const carouselDotDark: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
-		case 'PodcastPalette':
-			return sourcePalette.neutral[20];
 		case 'MediaPalette':
 			return carouselDotLight(containerPalette);
 		default:
@@ -964,8 +905,6 @@ const carouselDotDark: ContainerFunction = (containerPalette) => {
 
 const carouselActiveDotLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
-		case 'PodcastPalette':
-			return sourcePalette.neutral[7];
 		case 'MediaPalette':
 			return sourcePalette.brandAlt[400];
 		default:
@@ -975,8 +914,6 @@ const carouselActiveDotLight: ContainerFunction = (containerPalette) => {
 
 const carouselActiveDotDark: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
-		case 'PodcastPalette':
-			return sourcePalette.neutral[86];
 		default:
 			return sourcePalette.news[400];
 	}
@@ -984,8 +921,6 @@ const carouselActiveDotDark: ContainerFunction = (containerPalette) => {
 
 const carouselArrow: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
-		case 'PodcastPalette':
-			return sourcePalette.neutral[100];
 		default:
 			return sourcePalette.neutral[7];
 	}
@@ -993,8 +928,6 @@ const carouselArrow: ContainerFunction = (containerPalette) => {
 
 const carouselArrowBackground: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
-		case 'PodcastPalette':
-			return sourcePalette.neutral[7];
 		default:
 			return sourcePalette.brandAlt[400];
 	}
@@ -1002,8 +935,6 @@ const carouselArrowBackground: ContainerFunction = (containerPalette) => {
 
 const carouselArrowBackgroundHover: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
-		case 'PodcastPalette':
-			return sourcePalette.brandAlt[400];
 		default:
 			return sourcePalette.brandAlt[200];
 	}
