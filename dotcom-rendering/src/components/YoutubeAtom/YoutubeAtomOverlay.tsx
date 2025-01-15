@@ -73,7 +73,7 @@ const pillStyles = css`
 	top: ${space[2]}px;
 	right: ${space[2]}px;
 	${textSansBold12};
-	color: ${palette('--pill-background')};
+	color: ${palette('--pill-text')};
 `;
 
 const durationPillStyles = css`
