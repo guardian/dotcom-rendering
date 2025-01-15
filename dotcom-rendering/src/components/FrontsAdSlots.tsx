@@ -1,18 +1,24 @@
 import { Hide } from '@guardian/source/react-components';
-import type { ReactNode } from 'react';
 import { getMerchHighPosition } from '../lib/getFrontsAdPositions';
 import { palette as themePalette } from '../palette';
 import { AdSlot } from './AdSlot.web';
 import { Section } from './Section';
 
-export const decideMerchHighAndMobileAdSlots = (
-	renderAds: boolean,
-	index: number,
-	collectionCount: number,
-	isPaidContent: boolean | undefined,
-	mobileAdPositions: (number | undefined)[],
-	hasPageSkin: boolean,
-) => {
+export const MerchHighOrMobileAdSlot = ({
+	renderAds,
+	index,
+	collectionCount,
+	isPaidContent,
+	mobileAdPositions,
+	hasPageSkin,
+}: {
+	renderAds: boolean;
+	index: number;
+	collectionCount: number;
+	isPaidContent: boolean | undefined;
+	mobileAdPositions: (number | undefined)[];
+	hasPageSkin: boolean;
+}) => {
 	if (!renderAds) return null;
 
 	const minContainers = isPaidContent ? 1 : 2;
@@ -52,12 +58,15 @@ export const decideMerchHighAndMobileAdSlots = (
  * Page skins are only active above desktop breakpoints
  *
  */
-export const decideMerchandisingSlot = (
-	renderAds: boolean,
-	hasPageSkin: boolean,
-) => {
+export const MerchandisingSlot = ({
+	renderAds,
+	hasPageSkin,
+}: {
+	renderAds: boolean;
+	hasPageSkin: boolean;
+}) => {
 	if (!renderAds) return null;
-	const MerchandisingSection = ({ children }: { children: ReactNode }) => (
+	return (
 		<Section
 			fullWidth={true}
 			data-print-layout="hide"
@@ -67,19 +76,14 @@ export const decideMerchandisingSlot = (
 			backgroundColour={themePalette('--article-section-background')}
 			element="aside"
 		>
-			{children}
-		</Section>
-	);
-	return hasPageSkin ? (
-		<MerchandisingSection>
-			<Hide from="desktop">
+			{hasPageSkin ? (
+				<Hide from="desktop">
+					<AdSlot data-print-layout="hide" position="merchandising" />
+				</Hide>
+			) : (
 				<AdSlot data-print-layout="hide" position="merchandising" />
-			</Hide>
-		</MerchandisingSection>
-	) : (
-		<MerchandisingSection>
-			<AdSlot data-print-layout="hide" position="merchandising" />
-		</MerchandisingSection>
+			)}
+		</Section>
 	);
 };
 
@@ -87,18 +91,23 @@ export const decideMerchandisingSlot = (
  * Renders a fronts-banner ad when in the fronts banner AB test.
  * Only applies to network fronts on desktop screens and wider.
  */
-export const decideFrontsBannerAdSlot = (
-	renderAds: boolean,
-	hasPageSkin: boolean,
-	index: number,
-	desktopAdPositions: number[],
-) => {
+export const FrontsBannerAdSlot = ({
+	renderAds,
+	hasPageSkin,
+	index,
+	desktopAdPositions,
+}: {
+	renderAds: boolean;
+	hasPageSkin: boolean;
+	index: number;
+	desktopAdPositions: number[];
+}) => {
 	if (!renderAds || hasPageSkin) {
 		return null;
 	}
 
 	if (desktopAdPositions.includes(index)) {
-		const adIndex = desktopAdPositions.findIndex((_) => _ === index);
+		const adIndex = desktopAdPositions.indexOf(index);
 		if (adIndex === -1) return null;
 
 		return (

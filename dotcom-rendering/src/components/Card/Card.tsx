@@ -67,7 +67,6 @@ import { SvgWaveform } from './components/SvgWaveform';
 import { TrailText, type TrailTextSize } from './components/TrailText';
 
 export type Position = 'inner' | 'outer' | 'none';
-
 export const BETA_CONTAINERS = [
 	'scrollable/highlights',
 	'flexible/special',
@@ -594,7 +593,9 @@ export const Card = ({
 			return 'small';
 		}
 		if (isSmallCard) return 'medium';
-
+		if (isBetaContainer && media?.type === 'avatar') {
+			return 'small';
+		}
 		if (
 			isFlexibleContainer &&
 			(imagePositionOnDesktop === 'left' ||
@@ -730,6 +731,7 @@ export const Card = ({
 				imageType={media?.type}
 				containerType={containerType}
 				gapSize={getGapSize()}
+				isBetaContainer={isBetaContainer}
 			>
 				{/**
 				 * Waveform for podcasts is absolutely positioned at bottom of
@@ -788,10 +790,15 @@ export const Card = ({
 							<AvatarContainer
 								imageSize={imageSize}
 								imagePositionOnDesktop={imagePositionOnDesktop}
+								imagePositionOnMobile={imagePositionOnMobile}
+								isBetaContainer={isBetaContainer}
 							>
 								<Avatar
 									src={media.avatarUrl}
 									alt={byline ?? ''}
+									imageSize={
+										isBetaContainer ? imageSize : undefined
+									}
 								/>
 							</AvatarContainer>
 						)}

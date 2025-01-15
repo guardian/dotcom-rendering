@@ -1,18 +1,31 @@
-import { getCookie, removeCookie, setCookie } from '@guardian/libs';
 import type { AuthStatus } from '../../lib/identity';
 import {
 	getAuthStatus as getAuthStatus_,
 	isUserLoggedInOktaRefactor as isUserLoggedInOktaRefactor_,
 } from '../../lib/identity';
-import { refresh } from './user-features';
-import { fetchJson } from './user-features-lib';
+import { getAdFreeCookie, setAdFreeCookie } from './cookies/adFree';
+import { setHideSupportMessagingCookie } from './cookies/hideSupportMessaging';
+import {
+	getUserFeaturesExpiryCookie,
+	setUserFeaturesExpiryCookie,
+} from './cookies/userFeaturesExpiry';
+import { fetchJson } from './fetchJson';
+import { deleteAllCookies, refresh } from './user-features';
 
-jest.mock('./user-features-lib', () => {
-	// Only mock the fetchJson function, rather than the whole module
-	const original = jest.requireActual('./user-features-lib');
+const fakeUserFeatures = {
+	showSupportMessaging: false,
+	contentAccess: {
+		digitalPack: true,
+		recurringContributor: false,
+		paidMember: true,
+	},
+};
+
+jest.mock('./fetchJson', () => {
 	return {
-		...original,
-		fetchJson: jest.fn(() => Promise.resolve()),
+		fetchJson: jest.fn(() => {
+			return Promise.resolve(fakeUserFeatures);
+		}),
 	};
 });
 
@@ -33,40 +46,16 @@ const getAuthStatus = getAuthStatus_ as jest.MockedFunction<
 	typeof getAuthStatus_
 >;
 
-const PERSISTENCE_KEYS = {
-	USER_FEATURES_EXPIRY_COOKIE: 'gu_user_features_expiry',
-	AD_FREE_USER_COOKIE: 'GU_AF1',
-	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE: 'gu.contributions.contrib-timestamp',
-	HIDE_SUPPORT_MESSAGING_COOKIE: 'gu_hide_support_messaging',
-};
-
 const setAllFeaturesData = (opts: { isExpired: boolean }) => {
 	const currentTime = new Date().getTime();
 	const msInOneDay = 24 * 60 * 60 * 1000;
 	const expiryDate = opts.isExpired
 		? new Date(currentTime - msInOneDay)
 		: new Date(currentTime + msInOneDay);
-	const adFreeExpiryDate = opts.isExpired
-		? new Date(currentTime - msInOneDay * 2)
-		: new Date(currentTime + msInOneDay * 2);
-	setCookie({
-		name: PERSISTENCE_KEYS.HIDE_SUPPORT_MESSAGING_COOKIE,
-		value: 'true',
-	});
-	setCookie({
-		name: PERSISTENCE_KEYS.AD_FREE_USER_COOKIE,
-		value: adFreeExpiryDate.getTime().toString(),
-	});
-	setCookie({
-		name: PERSISTENCE_KEYS.USER_FEATURES_EXPIRY_COOKIE,
-		value: expiryDate.getTime().toString(),
-	});
-};
 
-const deleteAllFeaturesData = () => {
-	removeCookie({ name: PERSISTENCE_KEYS.USER_FEATURES_EXPIRY_COOKIE });
-	removeCookie({ name: PERSISTENCE_KEYS.AD_FREE_USER_COOKIE });
-	removeCookie({ name: PERSISTENCE_KEYS.HIDE_SUPPORT_MESSAGING_COOKIE });
+	setHideSupportMessagingCookie(true);
+	setAdFreeCookie(2);
+	setUserFeaturesExpiryCookie(expiryDate.getTime().toString());
 };
 
 beforeAll(() => {
@@ -81,11 +70,11 @@ describe('Refreshing the features data', () => {
 			getAuthStatus.mockResolvedValue({
 				kind: 'SignedInWithOkta',
 			} as AuthStatus);
-			fetchJsonSpy.mockReturnValue(Promise.resolve());
+			fetchJsonSpy.mockReturnValue(Promise.resolve(fakeUserFeatures));
 		});
 
 		it('Performs an update if the user has missing data', async () => {
-			deleteAllFeaturesData();
+			deleteAllCookies();
 			await refresh();
 			expect(fetchJsonSpy).toHaveBeenCalledTimes(1);
 		});
@@ -99,14 +88,10 @@ describe('Refreshing the features data', () => {
 		it('Does not delete the data just because it has expired', async () => {
 			setAllFeaturesData({ isExpired: true });
 			await refresh();
-			expect(
-				getCookie({
-					name: PERSISTENCE_KEYS.USER_FEATURES_EXPIRY_COOKIE,
-				}),
-			).toEqual(expect.stringMatching(/\d{13}/));
-			expect(
-				getCookie({ name: PERSISTENCE_KEYS.AD_FREE_USER_COOKIE }),
-			).toEqual(expect.stringMatching(/\d{13}/));
+			expect(getUserFeaturesExpiryCookie()).toEqual(
+				expect.stringMatching(/\d{13}/),
+			);
+			expect(getAdFreeCookie()).toEqual(expect.stringMatching(/\d{13}/));
 		});
 
 		it('Does not perform update if user has fresh feature data', async () => {
@@ -124,7 +109,7 @@ describe('If user signed out', () => {
 	});
 
 	it('Does not perform update, even if feature data missing', async () => {
-		deleteAllFeaturesData();
+		deleteAllCookies();
 		await refresh();
 		expect(fetchJsonSpy).not.toHaveBeenCalled();
 	});
@@ -132,14 +117,8 @@ describe('If user signed out', () => {
 	it('Deletes leftover feature data', async () => {
 		setAllFeaturesData({ isExpired: false });
 		await refresh();
-		expect(
-			getCookie({ name: PERSISTENCE_KEYS.AD_FREE_USER_COOKIE }),
-		).toBeNull();
-		expect(
-			getCookie({
-				name: PERSISTENCE_KEYS.USER_FEATURES_EXPIRY_COOKIE,
-			}),
-		).toBeNull();
+		expect(getAdFreeCookie()).toBeNull();
+		expect(getUserFeaturesExpiryCookie()).toBeNull();
 	});
 });
 
@@ -160,7 +139,7 @@ describe('Storing new feature data', () => {
 
 		jest.resetAllMocks();
 		fetchJsonSpy.mockReturnValue(Promise.resolve(mockResponse));
-		deleteAllFeaturesData();
+		deleteAllCookies();
 		isUserLoggedInOktaRefactor.mockResolvedValue(true);
 		getAuthStatus.mockResolvedValue({
 			kind: 'SignedInWithOkta',
@@ -180,9 +159,7 @@ describe('Storing new feature data', () => {
 			}),
 		);
 		return refresh().then(() => {
-			expect(
-				getCookie({ name: PERSISTENCE_KEYS.AD_FREE_USER_COOKIE }),
-			).toBeNull();
+			expect(getAdFreeCookie()).toBeNull();
 		});
 	});
 
@@ -199,16 +176,12 @@ describe('Storing new feature data', () => {
 			}),
 		);
 		return refresh().then(() => {
-			expect(
-				getCookie({ name: PERSISTENCE_KEYS.AD_FREE_USER_COOKIE }),
-			).toBeTruthy();
+			expect(getAdFreeCookie()).toBeTruthy();
 			expect(
 				Number.isNaN(
 					parseInt(
 						// @ts-expect-error -- we’re testing it
-						getCookie({
-							name: PERSISTENCE_KEYS.AD_FREE_USER_COOKIE,
-						}),
+						getAdFreeCookie(),
 						10,
 					),
 				),
@@ -218,9 +191,7 @@ describe('Storing new feature data', () => {
 
 	it('Puts an expiry date in an accompanying cookie', () =>
 		refresh().then(() => {
-			const expiryDate = getCookie({
-				name: PERSISTENCE_KEYS.USER_FEATURES_EXPIRY_COOKIE,
-			});
+			const expiryDate = getUserFeaturesExpiryCookie();
 			expect(expiryDate).toBeTruthy();
 			// @ts-expect-error -- we’re testing it
 			expect(Number.isNaN(parseInt(expiryDate, 10))).toBe(false);
@@ -228,9 +199,7 @@ describe('Storing new feature data', () => {
 
 	it('The expiry date is in the future', () =>
 		refresh().then(() => {
-			const expiryDateString = getCookie({
-				name: PERSISTENCE_KEYS.USER_FEATURES_EXPIRY_COOKIE,
-			});
+			const expiryDateString = getUserFeaturesExpiryCookie();
 			// @ts-expect-error -- we’re testing it
 			const expiryDateEpoch = parseInt(expiryDateString, 10);
 			const currentTimeEpoch = new Date().getTime();

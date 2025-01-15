@@ -365,6 +365,7 @@ const primaryLevelTopBorder = css`
 	border-top: 2px solid ${schemePalette('--section-border-primary')};
 	/** Ensures the top border sits above the side borders */
 	z-index: 1;
+	height: fit-content;
 `;
 
 const secondaryLevelTopBorder = css`

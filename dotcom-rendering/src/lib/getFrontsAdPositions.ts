@@ -38,33 +38,48 @@ const isBeforeThrasher = (index: number, collections: AdCandidate[]) =>
 const isMostViewedContainer = (collection: AdCandidate) =>
 	collection.collectionType === 'news/most-popular';
 
-const shouldInsertAd =
+/**
+ * Checks if mobile ad insertion is possible immediately after the
+ * position of the current collection
+ *
+ * . ------------------ .
+ * | Current collection |
+ * | ------------------ | <-- Maybe ad position
+ * | Next collection    |
+ * ' ------------------ '
+ */
+const canInsertMobileAd =
 	(merchHighPosition: number) =>
-	(collection: AdCandidate, index: number, collections: AdCandidate[]) =>
-		!(
-			isFirstContainerAndThrasher(collection.collectionType, index) ||
-			isMerchHighPosition(index, merchHighPosition) ||
-			isBeforeThrasher(index, collections) ||
-			isMostViewedContainer(collection)
-		);
+	(collection: AdCandidate, index: number, collections: AdCandidate[]) => {
+		/**
+		 * Ad slots can only be inserted after positions that satisfy the following rules:
+		 * - Is NOT the slot used for the merch high position
+		 * - Is NOT a thrasher if it is the first container
+		 * - Is NOT before a thrasher
+		 * - Is NOT the most viewed container
+		 */
+		const rules = [
+			!isMerchHighPosition(index, merchHighPosition),
+			!isFirstContainerAndThrasher(collection.collectionType, index),
+			!isBeforeThrasher(index, collections),
+			!isMostViewedContainer(collection),
+		];
+
+		return rules.every(Boolean);
+	};
 
 const isEvenIndex = (_collection: unknown, index: number): boolean =>
 	index % 2 === 0;
 
 /**
- * We do not insert mobile ads:
- * a. after the first container if it is a thrasher
- * b. next to the merchandising-high ad slot
- * c. before a thrasher
- * d. after the Most Viewed container.
- * After we've filtered out the containers next to which we can insert an ad,
- * we take every other container, up to a maximum of 10, for targeting MPU insertion.
+ * Filters out unsuitable positions then takes every other position for possible ad insertion,
+ * up to a maximum of `MAX_FRONTS_MOBILE_ADS`
  */
 const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
 	const merchHighPosition = getMerchHighPosition(collections.length);
 
 	return collections
-		.filter(shouldInsertAd(merchHighPosition))
+		.filter(canInsertMobileAd(merchHighPosition))
 		.filter(isEvenIndex)
 		.map((collection: AdCandidate) => collections.indexOf(collection))
 		.filter((adPosition: number) => adPosition !== -1)
