@@ -208,7 +208,6 @@ export const WithPosterImage = {
 		},
 		posterImage:
 			'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/1920.jpg',
-		videoCategory: 'documentary',
 		title: 'How Donald Trump’s broken promises failed Ohio | Anywhere but Washington',
 	},
 	decorators: [OverlayAutoplayExplainer, Container],
@@ -226,7 +225,6 @@ export const WithOverlayAndPosterImage = {
 		posterImage: WithPosterImage.args.posterImage,
 		overrideImage:
 			'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg',
-		videoCategory: 'live',
 		title: 'How Donald Trump’s broken promises failed Ohio',
 		kicker: 'Breaking News',
 		showTextOverlay: true,
@@ -425,7 +423,6 @@ export const WithPosterImageWithAds = {
 	args: {
 		...WithPosterImage.args,
 		...adTargetingAndConsentGiven,
-		videoCategory: undefined,
 	},
 	decorators: [Container],
 	parameters: {
@@ -437,7 +434,6 @@ export const WithOverlayAndPosterImageWithAds = {
 	args: {
 		...WithOverlayAndPosterImage.args,
 		...adTargetingAndConsentGiven,
-		videoCategory: undefined,
 		kicker: undefined,
 		showTextOverlay: undefined,
 	},
@@ -502,4 +498,24 @@ export const MultipleStickyVideosWithAds = {
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},
+} satisfies Story;
+
+export const LiveStream = {
+	args: {
+		...baseConfiguration,
+		videoId: '3jpXAMwRSu4',
+		alt: 'Microscopic image of COVID',
+		format: {
+			theme: Pillar.News,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		},
+		overrideImage:
+			'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=aff4b8255693eb449f13070df88e9cac',
+		height: undefined,
+		width: undefined,
+		title: 'How to stop the spread of coronavirus',
+		duration: 0,
+	},
+	decorators: [OverlayAutoplayExplainer, Container],
 } satisfies Story;
