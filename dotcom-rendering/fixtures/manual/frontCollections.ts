@@ -235,7 +235,7 @@ const testCollectionsUs: Pick<
 	},
 	{
 		collectionType: 'fixed/medium/slow-VII',
-		containerPalette: 'PodcastPalette',
+		containerPalette: undefined,
 		displayName: 'Podcasts',
 		grouped: defaultGrouped,
 	},
