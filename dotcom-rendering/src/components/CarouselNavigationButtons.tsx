@@ -40,6 +40,9 @@ const buttonStyles = css`
 		gap: ${space[1]}px;
 		margin-left: auto;
 		padding-top: ${space[2]}px;
+		.hidden > & {
+			display: none;
+		}
 	}
 `;
 

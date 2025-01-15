@@ -28,15 +28,23 @@ export const ShowHideContainers = () => {
 			const section: Element | null =
 				window.document.getElementById(sectionId);
 
+			const carouselButtons: Element | null =
+				window.document.getElementById(
+					`${sectionId}-carousel-navigation`,
+				);
+
 			if (isExpanded) {
 				containerStates[sectionId] = 'closed';
 				section?.classList.add('hidden');
+				carouselButtons?.classList.add('hidden');
+
 				element.innerHTML = 'Show';
 				element.setAttribute('aria-expanded', 'false');
 				element.setAttribute('data-link-name', 'Show');
 			} else {
 				containerStates[sectionId] = 'opened';
 				section?.classList.remove('hidden');
+				carouselButtons?.classList.remove('hidden');
 				element.innerHTML = 'Hide';
 				element.setAttribute('aria-expanded', 'true');
 				element.setAttribute('data-link-name', 'Hide');
