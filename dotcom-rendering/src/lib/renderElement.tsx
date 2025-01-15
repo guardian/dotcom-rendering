@@ -9,6 +9,7 @@ import { CartoonComponent } from '../components/CartoonComponent';
 import { ChartAtom } from '../components/ChartAtom.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
+import { Crossword } from '../components/Crossword.importable';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
 import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper';
@@ -860,6 +861,12 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement': {
 			return <AffiliateDisclaimerInline />;
 		}
+		case 'model.dotcomrendering.pageElements.CrosswordElement':
+			return (
+				<Island priority="critical" defer={{ until: 'visible' }}>
+					<Crossword data={element.crossword} />
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':

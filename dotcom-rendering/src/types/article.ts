@@ -1,6 +1,7 @@
 import { type ArticleFormat, decideFormat } from '../lib/articleFormat';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import { appsLightboxImages } from '../model/appsLightboxImages';
+import { buildCrosswordBlock } from '../model/buildCrosswordBlock';
 import { buildLightboxImages } from '../model/buildLightboxImages';
 import { enhanceBlocks, enhanceMainMedia } from '../model/enhanceBlocks';
 import { enhanceCommercialProperties } from '../model/enhanceCommercialProperties';
@@ -36,6 +37,10 @@ export const enhanceArticleType = (
 ): Article => {
 	const format = decideFormat(data.format);
 
+	const crosswordBlock = buildCrosswordBlock(data);
+
+	const additionalBlocks = crosswordBlock ? [crosswordBlock] : [];
+
 	const imagesForLightbox = data.config.switches.lightbox
 		? buildLightboxImages(data.format, data.blocks, data.mainMediaElements)
 		: [];
@@ -46,6 +51,7 @@ export const enhanceArticleType = (
 		imagesForLightbox,
 		hasAffiliateLinksDisclaimer: !!data.affiliateLinksDisclaimer,
 		audioArticleImage: data.audioArticleImage,
+		additionalBlocks,
 		tags: data.tags,
 	});
 

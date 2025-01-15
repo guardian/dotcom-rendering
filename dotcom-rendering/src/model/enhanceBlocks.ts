@@ -31,6 +31,7 @@ type Options = {
 	imagesForLightbox: ImageForLightbox[];
 	hasAffiliateLinksDisclaimer: boolean;
 	audioArticleImage?: ImageBlockElement;
+	additionalBlocks?: Block[];
 	tags?: TagType[];
 };
 
@@ -105,16 +106,20 @@ export const enhanceBlocks = (
 	format: ArticleFormat,
 	options: Options,
 ): Block[] => {
-	const additionalElement: FEElement[] = [];
+	const additionalElements: FEElement[] = [];
+	const additionalBlocks: Block[] = options.additionalBlocks ?? [];
 	if (options.audioArticleImage) {
-		additionalElement.push(options.audioArticleImage);
+		additionalElements.push(options.audioArticleImage);
 	}
-	return blocks.map((block) => ({
-		...block,
-		elements: enhanceElements(
-			format,
-			block.id,
-			options,
-		)([...block.elements, ...additionalElement]),
-	}));
+	return [
+		...blocks.map((block) => ({
+			...block,
+			elements: enhanceElements(
+				format,
+				block.id,
+				options,
+			)([...block.elements, ...additionalElements]),
+		})),
+		...additionalBlocks,
+	];
 };

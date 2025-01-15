@@ -119,6 +119,7 @@
             }
         },
         "format": {
+            "description": "FEFormat is the stringified version of Format passed through from Frontend.\nIt gets converted to the `@guardian/libs` format on platform",
             "type": "object",
             "properties": {
                 "design": {
@@ -262,6 +263,7 @@
                         "$ref": "#/definitions/OnwardsSource"
                     },
                     "format": {
+                        "description": "FEFormat is the stringified version of Format passed through from Frontend.\nIt gets converted to the `@guardian/libs` format on platform",
                         "type": "object",
                         "properties": {
                             "design": {
@@ -434,6 +436,104 @@
         },
         "isRightToLeftLang": {
             "type": "boolean"
+        },
+        "crossword": {
+            "type": "object",
+            "properties": {
+                "creator": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "webUrl": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "name",
+                        "webUrl"
+                    ]
+                },
+                "crosswordType": {
+                    "enum": [
+                        "cryptic",
+                        "everyman",
+                        "prize",
+                        "quick",
+                        "quick-cryptic",
+                        "quiptic",
+                        "special",
+                        "speedy",
+                        "weekend"
+                    ],
+                    "type": "string"
+                },
+                "date": {
+                    "type": "number"
+                },
+                "dateSolutionAvailable": {
+                    "type": "number"
+                },
+                "dimensions": {
+                    "type": "object",
+                    "properties": {
+                        "rows": {
+                            "type": "number"
+                        },
+                        "cols": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "cols",
+                        "rows"
+                    ]
+                },
+                "entries": {
+                    "type": "array",
+                    "items": [
+                        {
+                            "$ref": "#/definitions/CAPIEntry"
+                        }
+                    ],
+                    "minItems": 1,
+                    "additionalItems": {
+                        "$ref": "#/definitions/CAPIEntry"
+                    }
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "number"
+                },
+                "pdf": {
+                    "type": "string"
+                },
+                "solutionAvailable": {
+                    "type": "boolean"
+                },
+                "webPublicationDate": {
+                    "type": "number"
+                },
+                "instructions": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "crosswordType",
+                "date",
+                "dimensions",
+                "entries",
+                "id",
+                "name",
+                "number",
+                "solutionAvailable"
+            ]
         }
     },
     "required": [
@@ -765,6 +865,9 @@
                 },
                 {
                     "$ref": "#/definitions/WitnessTypeBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/CrosswordElement"
                 }
             ]
         },
@@ -4052,6 +4155,241 @@
                 "witnessEmbedType"
             ]
         },
+        "CrosswordElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.CrosswordElement"
+                },
+                "crossword": {
+                    "type": "object",
+                    "properties": {
+                        "creator": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "webUrl": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "webUrl"
+                            ]
+                        },
+                        "crosswordType": {
+                            "enum": [
+                                "cryptic",
+                                "everyman",
+                                "prize",
+                                "quick",
+                                "quick-cryptic",
+                                "quiptic",
+                                "special",
+                                "speedy",
+                                "weekend"
+                            ],
+                            "type": "string"
+                        },
+                        "date": {
+                            "type": "number"
+                        },
+                        "dateSolutionAvailable": {
+                            "type": "number"
+                        },
+                        "dimensions": {
+                            "type": "object",
+                            "properties": {
+                                "rows": {
+                                    "type": "number"
+                                },
+                                "cols": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "cols",
+                                "rows"
+                            ]
+                        },
+                        "entries": {
+                            "type": "array",
+                            "items": [
+                                {
+                                    "$ref": "#/definitions/CAPIEntry"
+                                }
+                            ],
+                            "minItems": 1,
+                            "additionalItems": {
+                                "$ref": "#/definitions/CAPIEntry"
+                            }
+                        },
+                        "id": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "number": {
+                            "type": "number"
+                        },
+                        "pdf": {
+                            "type": "string"
+                        },
+                        "solutionAvailable": {
+                            "type": "boolean"
+                        },
+                        "webPublicationDate": {
+                            "type": "number"
+                        },
+                        "instructions": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "crosswordType",
+                        "date",
+                        "dimensions",
+                        "entries",
+                        "id",
+                        "name",
+                        "number",
+                        "solutionAvailable"
+                    ]
+                }
+            },
+            "required": [
+                "_type",
+                "crossword"
+            ]
+        },
+        "CAPIEntry": {
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "anyOf": [
+                                {
+                                    "type": "string",
+                                    "pattern": "^[0-9]*-across$"
+                                },
+                                {
+                                    "type": "string",
+                                    "pattern": "^[0-9]*-down$"
+                                }
+                            ]
+                        },
+                        "group": {
+                            "type": "array",
+                            "items": [
+                                {
+                                    "anyOf": [
+                                        {
+                                            "type": "string",
+                                            "pattern": "^[0-9]*-across$"
+                                        },
+                                        {
+                                            "type": "string",
+                                            "pattern": "^[0-9]*-down$"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "minItems": 1,
+                            "additionalItems": {
+                                "anyOf": [
+                                    {
+                                        "type": "string",
+                                        "pattern": "^[0-9]*-across$"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "pattern": "^[0-9]*-down$"
+                                    }
+                                ]
+                            }
+                        },
+                        "number": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "group",
+                        "id",
+                        "number"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "direction": {
+                            "$ref": "#/definitions/Direction"
+                        },
+                        "position": {
+                            "$ref": "#/definitions/Coords",
+                            "description": "Coords of first cell"
+                        },
+                        "clue": {
+                            "description": "The clue for the current entry",
+                            "type": "string"
+                        },
+                        "humanNumber": {
+                            "description": "The number for the clue",
+                            "type": "string"
+                        },
+                        "solution": {
+                            "description": "The solution to the entry's clue",
+                            "type": "string"
+                        },
+                        "length": {
+                            "description": "The length of the solution (we don't always have a solution)",
+                            "type": "number"
+                        },
+                        "separatorLocations": {
+                            "$ref": "#/definitions/Record<string,number[]>",
+                            "description": "Separators for multi-part solutions e.g.\n- ready,steady,go\n- tofu-eating"
+                        }
+                    },
+                    "required": [
+                        "clue",
+                        "direction",
+                        "humanNumber",
+                        "length",
+                        "position",
+                        "separatorLocations"
+                    ]
+                }
+            ]
+        },
+        "Direction": {
+            "enum": [
+                "across",
+                "down"
+            ],
+            "type": "string"
+        },
+        "Coords": {
+            "type": "object",
+            "properties": {
+                "x": {
+                    "type": "number"
+                },
+                "y": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "x",
+                "y"
+            ]
+        },
+        "Record<string,number[]>": {
+            "type": "object"
+        },
         "Block": {
             "type": "object",
             "properties": {
@@ -4215,6 +4553,7 @@
             "type": "string"
         },
         "FEDesign": {
+            "description": "FEDesign is what frontend gives (originating in the capi scala client) us on the Format field\nhttps://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala",
             "enum": [
                 "AnalysisDesign",
                 "ArticleDesign",
@@ -4259,6 +4598,7 @@
             "type": "string"
         },
         "FEDisplay": {
+            "description": "FEDisplay is the display information passed through from frontend (originating in the capi scala client) and dictates the display style of the content e.g. Immersive\nhttps://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala",
             "enum": [
                 "ImmersiveDisplay",
                 "NumberedListDisplay",
@@ -4279,6 +4619,7 @@
             "type": "string"
         },
         "FELinkType": {
+            "description": "Data types for the API request bodies from clients that require transformation before internal use.\nWhere data types are coming from Frontend we try to use the 'FE' prefix.\nPrior to this we used 'CAPI' as a prefix which wasn't entirely accurate, and some data structures never received the prefix, meaning some are still missing it.",
             "type": "object",
             "properties": {
                 "url": {
@@ -4536,6 +4877,7 @@
             "type": "object",
             "properties": {
                 "format": {
+                    "description": "FEFormat is the stringified version of Format passed through from Frontend.\nIt gets converted to the `@guardian/libs` format on platform",
                     "type": "object",
                     "properties": {
                         "design": {
