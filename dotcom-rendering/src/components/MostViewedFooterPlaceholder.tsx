@@ -17,6 +17,7 @@ const listContainer = css`
 	grid-template-columns: 1fr;
 	grid-template-rows: repeat(10, 70px);
 	grid-auto-flow: column;
+	border-left: 1px solid var(--article-border);
 
 	${from.mobileLandscape} {
 		grid-template-columns: 1fr;
@@ -32,7 +33,6 @@ const listContainer = css`
 const listItem = css`
 	position: relative;
 	border-top: 1px solid var(--article-border);
-	border-left: 1px solid var(--article-border);
 	border-right: 1px solid var(--article-border);
 `;
 
