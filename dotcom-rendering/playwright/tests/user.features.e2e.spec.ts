@@ -4,11 +4,12 @@ import { disableCMP } from '../lib/cmp';
 import { addCookie } from '../lib/cookies';
 import { loadPageNoOkta } from '../lib/load-page';
 
-test.describe('User cookies tests', () => {
+// skipped for now because we need to handle sign in with okta, not just cookies
+test.skip('User cookies tests', () => {
 	const userAttributesApiUrl =
 		'https://members-data-api.theguardian.com/user-attributes';
 	const userBenefitsApiUrl =
-		'https://user-benefits.code.dev-guardianapis.com';
+		'https://user-benefits.code.dev-guardianapis.com/benefits/me';
 	test(`Request to user features API is sent when no user features expiry cookie`, async ({
 		context,
 		page,
@@ -21,9 +22,7 @@ test.describe('User cookies tests', () => {
 
 		await disableCMP(context);
 
-		const userBenefitsApiPromise = page.waitForRequest(
-			`${userBenefitsApiUrl}/me`,
-		);
+		const userBenefitsApiPromise = page.waitForRequest(userBenefitsApiUrl);
 
 		await loadPageNoOkta(page, standardArticle, {
 			// user-features expects this config to be present
@@ -68,9 +67,7 @@ test.describe('User cookies tests', () => {
 
 		await disableCMP(context);
 
-		const userBenefitsApiPromise = page.waitForRequest(
-			`${userBenefitsApiUrl}/me`,
-		);
+		const userBenefitsApiPromise = page.waitForRequest(userBenefitsApiUrl);
 
 		await loadPageNoOkta(page, standardArticle, {
 			// user-features expects this config to be present
