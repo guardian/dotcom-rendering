@@ -9,7 +9,6 @@ import {
 	rightColumnDecorator,
 } from '../../.storybook/decorators/gridDecorators';
 import { ArticleDisplay } from '../lib/articleFormat';
-import { palette } from '../palette';
 import { AdSlot } from './AdSlot.web';
 
 const meta = {
@@ -31,31 +30,37 @@ const adLabelsStyles = css`
 		margin: 0;
 		font-size: 16px;
 		font-weight: 400;
-		color: ${palette('--ad-labels-text')};
 	}
 `;
 
-const rightAdSlotStyles = css`
+const squareAdStyles = css`
 	padding-bottom: 250px;
 	width: 300px;
 `;
 
-const topAboveNavAdSlotStyles = css`
+const bannerAdStyles = css`
 	padding-bottom: 250px;
 	width: 100%;
 `;
 
-function renderTestAd(adStyles: SerializedStyles, slot: HTMLElement) {
-	const root = createRoot(slot);
+function renderTestAd(
+	adStyles: SerializedStyles,
+	slotId = 'slot',
+): Story['play'] {
+	return async ({ canvasElement }) => {
+		const canvas = within(canvasElement);
+		const slot = await canvas.findByTestId(slotId);
+		const root = createRoot(slot);
 
-	root.render(
-		<aside>
-			<div css={adLabelsStyles}>
-				<p>Advertisement</p>
-			</div>
-			<div css={adStyles}></div>
-		</aside>,
-	);
+		root.render(
+			<aside>
+				<div css={adLabelsStyles}>
+					<p>Advertisement</p>
+				</div>
+				<div css={adStyles}></div>
+			</aside>,
+		);
+	};
 }
 
 export const Right = {
@@ -64,24 +69,14 @@ export const Right = {
 		display: ArticleDisplay.Standard,
 	},
 	decorators: [rightColumnDecorator],
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
-		const slot = await canvas.findByTestId('slot');
-
-		renderTestAd(rightAdSlotStyles, slot);
-	},
+	play: renderTestAd(squareAdStyles),
 } satisfies Story;
 
 export const TopAboveNav = {
 	args: {
 		position: 'top-above-nav',
 	},
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
-		const slot = await canvas.findByTestId('slot');
-
-		renderTestAd(topAboveNavAdSlotStyles, slot);
-	},
+	play: renderTestAd(bannerAdStyles),
 } satisfies Story;
 
 export const FrontsBanner = {
@@ -89,12 +84,7 @@ export const FrontsBanner = {
 		position: 'fronts-banner',
 		index: 1,
 	},
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
-		const slot = await canvas.findByTestId('slot');
-
-		renderTestAd(topAboveNavAdSlotStyles, slot);
-	},
+	play: renderTestAd(bannerAdStyles),
 } satisfies Story;
 
 export const LiveblogInline = {
@@ -103,12 +93,7 @@ export const LiveblogInline = {
 		index: 0,
 	},
 	decorators: [centreColumnDecorator],
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
-		const slot = await canvas.findByTestId('liveblog-inline--inline1');
-
-		renderTestAd(topAboveNavAdSlotStyles, slot);
-	},
+	play: renderTestAd(bannerAdStyles, 'liveblog-inline--inline1'),
 } satisfies Story;
 
 export const Merchandising = {
@@ -116,10 +101,5 @@ export const Merchandising = {
 		position: 'merchandising',
 	},
 	decorators: [centreColumnDecorator],
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
-		const slot = await canvas.findByTestId('slot');
-
-		renderTestAd(topAboveNavAdSlotStyles, slot);
-	},
+	play: renderTestAd(bannerAdStyles),
 } satisfies Story;
