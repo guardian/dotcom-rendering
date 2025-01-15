@@ -4,7 +4,10 @@ import { remSpace, textSans14 } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { within } from '@storybook/test';
 import { createRoot } from 'react-dom/client';
-import { rightColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import {
+	centreColumnDecorator,
+	rightColumnDecorator,
+} from '../../.storybook/decorators/gridDecorators';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { AdSlot } from './AdSlot.web';
@@ -73,6 +76,46 @@ export const TopAboveNav = {
 	args: {
 		position: 'top-above-nav',
 	},
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement);
+		const slot = await canvas.findByTestId('slot');
+
+		renderTestAd(topAboveNavAdSlotStyles, slot);
+	},
+} satisfies Story;
+
+export const FrontsBanner = {
+	args: {
+		position: 'fronts-banner',
+		index: 1,
+	},
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement);
+		const slot = await canvas.findByTestId('slot');
+
+		renderTestAd(topAboveNavAdSlotStyles, slot);
+	},
+} satisfies Story;
+
+export const LiveblogInline = {
+	args: {
+		position: 'liveblog-inline',
+		index: 0,
+	},
+	decorators: [centreColumnDecorator],
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement);
+		const slot = await canvas.findByTestId('liveblog-inline--inline1');
+
+		renderTestAd(topAboveNavAdSlotStyles, slot);
+	},
+} satisfies Story;
+
+export const Merchandising = {
+	args: {
+		position: 'merchandising',
+	},
+	decorators: [centreColumnDecorator],
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
 		const slot = await canvas.findByTestId('slot');
