@@ -515,6 +515,7 @@ export const Card = ({
 	 * Currently pills are only shown within beta containers.
 	 */
 	const showPill =
+		isBetaContainer &&
 		mainMedia &&
 		(mainMedia.type === 'Audio' || mainMedia.type === 'Gallery');
 
@@ -737,7 +738,7 @@ export const Card = ({
 				 * Waveform for podcasts is absolutely positioned at bottom of
 				 * card, behind everything else
 				 */}
-				{mainMedia?.type === 'Audio' && (
+				{isBetaContainer && mainMedia?.type === 'Audio' && (
 					<div
 						css={waveformWrapper(
 							imagePositionOnMobile,
