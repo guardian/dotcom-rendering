@@ -6847,6 +6847,18 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[38],
 	},
+	'--quiz-atom-button-background': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--quiz-atom-button-background-hover': {
+		light: () => '#234B8A',
+		dark: () => sourcePalette.neutral[93],
+	},
+	'--quiz-atom-button-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.brand[400],
+	},
 	'--quiz-atom-check-mark': {
 		light: () => sourcePalette.neutral[0],
 		dark: () => sourcePalette.neutral[97],
@@ -6854,6 +6866,18 @@ const paletteColours = {
 	'--quiz-atom-incorrect-answer-background': {
 		light: () => sourcePalette.news[400],
 		dark: () => sourcePalette.news[300],
+	},
+	'--quiz-atom-results-background': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[10],
+	},
+	'--quiz-atom-results-border': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--quiz-atom-results-text': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--quote-icon-fill': {
 		light: richLinkQuoteFillLight,
