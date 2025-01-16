@@ -75,9 +75,8 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	const { basic, primaryCta, secondaryCta, highlightedText, closeButton } =
 		design.colours;
 
-	const landingPageUrl = 'https://support.theguardian.com/contribute';
+	const landingPageUrl = 'https://support.theguardian.com/contribute'; //this URL will need to be confirmed and then updated before the test is launched
 
-	//Work required to wire in the new designs to the banner design tooling config: https://trello.com/c/sLa1GEg7/355-3-tier-banners-wire-in-config-to-tooling
 	const templateSettings: BannerTemplateSettings = {
 		containerSettings: {
 			backgroundColour: hexColourToString(basic.background),
