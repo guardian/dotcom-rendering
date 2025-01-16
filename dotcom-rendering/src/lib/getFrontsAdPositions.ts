@@ -100,7 +100,7 @@ const isEvenIndex = (_collection: unknown, index: number): boolean =>
  * up to a maximum of `MAX_FRONTS_MOBILE_ADS`
  */
 const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
-	const merchHighPosition = getMerchHighPosition(collections.length);
+	const merchHighPosition = getMerchHighPosition(collections);
 	const hasSecondaryContainers = hasSecondaryLevelContainers(collections);
 
 	return (

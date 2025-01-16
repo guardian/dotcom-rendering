@@ -254,13 +254,13 @@ describe('Mobile Ads', () => {
 			{
 				collectionType: 'scrollable/feature',
 				containerLevel: 'Secondary',
-			}, // Ad position (21)
+			}, // Ignored - is merch high position
 			{ collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 4, 6, 8, 10, 14, 19, 21]);
+		expect(mobileAdPositions).toEqual([0, 4, 6, 8, 10, 14, 19]);
 	});
 });
 
