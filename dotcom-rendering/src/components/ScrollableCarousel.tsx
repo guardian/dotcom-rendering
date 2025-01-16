@@ -243,12 +243,7 @@ export const ScrollableCarousel = ({
 	}, []);
 
 	return (
-		<div
-			css={[
-				containerStyles,
-				// showNavigation && containerWithNavigationStyles,
-			]}
-		>
+		<div css={containerStyles}>
 			<ol
 				ref={carouselRef}
 				css={[

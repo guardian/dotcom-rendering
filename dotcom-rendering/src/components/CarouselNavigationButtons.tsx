@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
+import { from, space } from '@guardian/source/foundations';
 import {
 	Button,
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
-	ThemeButton,
+	type ThemeButton,
 } from '@guardian/source/react-components';
-import { from, space } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { palette } from '../palette';
@@ -40,9 +40,6 @@ const buttonStyles = css`
 		gap: ${space[1]}px;
 		margin-left: auto;
 		padding-top: ${space[2]}px;
-		.hidden > & {
-			display: none;
-		}
 	}
 `;
 
@@ -84,7 +81,7 @@ export const CarouselNavigationButtons = ({
 			);
 		}
 		setPortalNode(node);
-	}, []);
+	}, [sectionId]);
 
 	if (!portalNode) return null;
 
