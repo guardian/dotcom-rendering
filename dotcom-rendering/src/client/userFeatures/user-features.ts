@@ -5,6 +5,7 @@
  */
 
 import { getAuthStatus, isUserLoggedInOktaRefactor } from '../../lib/identity';
+import { useAB } from '../../lib/useAB';
 import {
 	adFreeDataIsPresent,
 	getAdFreeCookie,
@@ -53,9 +54,8 @@ const refresh = async (): Promise<void> => {
 };
 
 const shouldUseUserBenefitsApi = (): boolean => {
-	return true;
-	// const abTestAPI = useAB()?.api;
-	// return !!abTestAPI?.isUserInVariant('UserBenefitsApi', 'variant');
+	const abTestAPI = useAB()?.api;
+	return !!abTestAPI?.isUserInVariant('UserBenefitsApi', 'variant');
 };
 
 const requestNewData = async () => {

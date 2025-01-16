@@ -15,7 +15,7 @@ export const syncDataFromUserBenefitsApi = async (
 ): Promise<UserBenefits> => {
 	const response = await fetchJson(
 		window.guardian.config.page.userBenefitsApiUrl ??
-			'https://user-benefits.code.dev-guardianapis.com/benefits/me',
+			'/USER_BENEFIT_API_NOT_FOUND',
 		{
 			mode: 'cors',
 			...getOptionsHeadersWithOkta(signedInAuthStatus),
