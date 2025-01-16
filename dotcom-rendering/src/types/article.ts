@@ -37,10 +37,6 @@ export const enhanceArticleType = (
 ): Article => {
 	const format = decideFormat(data.format);
 
-	const crosswordBlock = buildCrosswordBlock(data);
-
-	const additionalBlocks = crosswordBlock ? [crosswordBlock] : [];
-
 	const imagesForLightbox = data.config.switches.lightbox
 		? buildLightboxImages(data.format, data.blocks, data.mainMediaElements)
 		: [];
@@ -51,9 +47,13 @@ export const enhanceArticleType = (
 		imagesForLightbox,
 		hasAffiliateLinksDisclaimer: !!data.affiliateLinksDisclaimer,
 		audioArticleImage: data.audioArticleImage,
-		additionalBlocks,
 		tags: data.tags,
 	});
+
+	const crosswordBlock = buildCrosswordBlock(data);
+	const additionalBlocks = crosswordBlock ? [crosswordBlock] : [];
+
+	const blocks = [...enhancedBlocks, ...additionalBlocks];
 
 	const mainMediaElements = enhanceMainMedia(
 		format,
@@ -67,7 +67,7 @@ export const enhanceArticleType = (
 		frontendData: {
 			...data,
 			mainMediaElements,
-			blocks: enhancedBlocks,
+			blocks,
 			pinnedPost: enhancePinnedPost(
 				format,
 				renderingTarget,
