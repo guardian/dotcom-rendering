@@ -3,12 +3,13 @@ import { palette } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { Accessibility } from '../components/Accessibility.importable';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
-import {
-	decideFrontsBannerAdSlot,
-	decideMerchandisingSlot,
-	decideMerchHighAndMobileAdSlots,
-} from '../components/DecideFrontsAdSlots';
 import { Footer } from '../components/Footer';
+import {
+	FrontsBannerAdSlot,
+	MerchandisingSlot,
+	MerchHighAdSlot,
+	MobileAdSlot,
+} from '../components/FrontsAdSlots';
 import { FrontSection } from '../components/FrontSection';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -20,6 +21,7 @@ import { TagPageHeader } from '../components/TagPageHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
+import { getMerchHighPosition } from '../lib/getFrontsAdPositions';
 import {
 	getTagPageBannerAdPositions,
 	getTagPageMobileAdPositions,
@@ -56,6 +58,10 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 		? getTagPageBannerAdPositions(tagPage.groupedTrails.length)
 		: [];
 
+	const merchHighAdPosition = getMerchHighPosition(
+		tagPage.groupedTrails.length,
+	);
+
 	const mobileAdPositions = renderAds
 		? getTagPageMobileAdPositions(tagPage.groupedTrails)
 		: [];
@@ -68,40 +74,36 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
-				<>
-					{renderAds && (
-						<Stuck>
-							<Section
-								fullWidth={true}
-								showTopBorder={false}
-								showSideBorders={false}
-								padSides={false}
-								shouldCenter={false}
-							>
-								<HeaderAdSlot
-									isPaidContent={
-										!!tagPage.config.isPaidContent
-									}
-									shouldHideReaderRevenue={false}
-								/>
-							</Section>
-						</Stuck>
-					)}
+				{renderAds && (
+					<Stuck>
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							showSideBorders={false}
+							padSides={false}
+							shouldCenter={false}
+						>
+							<HeaderAdSlot
+								isPaidContent={!!tagPage.config.isPaidContent}
+								shouldHideReaderRevenue={false}
+							/>
+						</Section>
+					</Stuck>
+				)}
 
-					<Masthead
-						nav={NAV}
-						editionId={tagPage.editionId}
-						idUrl={tagPage.config.idUrl}
-						mmaUrl={tagPage.config.mmaUrl}
-						discussionApiUrl={tagPage.config.discussionApiUrl}
-						idApiUrl={tagPage.config.idApiUrl}
-						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={true}
-						showSlimNav={false}
-						hasPageSkin={hasPageSkin}
-						pageId={pageId}
-					/>
-				</>
+				<Masthead
+					nav={NAV}
+					editionId={tagPage.editionId}
+					idUrl={tagPage.config.idUrl}
+					mmaUrl={tagPage.config.mmaUrl}
+					discussionApiUrl={tagPage.config.discussionApiUrl}
+					idApiUrl={tagPage.config.idApiUrl}
+					contributionsServiceUrl={contributionsServiceUrl}
+					showSubNav={true}
+					showSlimNav={false}
+					hasPageSkin={hasPageSkin}
+					pageId={pageId}
+				/>
 			</div>
 
 			<main data-layout="TagPageLayout" id="maincontent">
@@ -143,11 +145,14 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 
 					return (
 						<Fragment key={containerId}>
-							{decideFrontsBannerAdSlot(
-								renderAds,
-								hasPageSkin,
-								index,
-								desktopAdPositions,
+							{desktopAdPositions.includes(index) && (
+								<FrontsBannerAdSlot
+									renderAds={renderAds}
+									hasPageSkin={hasPageSkin}
+									adSlotIndex={desktopAdPositions.indexOf(
+										index,
+									)}
+								/>
 							)}
 							<FrontSection
 								title={title}
@@ -181,13 +186,22 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									isTagPage={true}
 								/>
 							</FrontSection>
-							{decideMerchHighAndMobileAdSlots(
-								renderAds,
-								index,
-								tagPage.groupedTrails.length,
-								isPaidContent,
-								mobileAdPositions,
-								hasPageSkin,
+							{mobileAdPositions.includes(index) && (
+								<MobileAdSlot
+									renderAds={renderAds}
+									adSlotIndex={mobileAdPositions.indexOf(
+										index,
+									)}
+								/>
+							)}
+							{index === merchHighAdPosition && (
+								<MerchHighAdSlot
+									renderAds={renderAds}
+									collectionCount={
+										tagPage.groupedTrails.length
+									}
+									isPaidContent={!!isPaidContent}
+								/>
 							)}
 						</Fragment>
 					);
@@ -202,7 +216,10 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 				<TrendingTopics trendingTopics={tagPage.trendingTopics} />
 			</Section>
 
-			{decideMerchandisingSlot(renderAds, hasPageSkin)}
+			<MerchandisingSlot
+				renderAds={renderAds}
+				hasPageSkin={hasPageSkin}
+			/>
 
 			{NAV.subNavSections && (
 				<Section
