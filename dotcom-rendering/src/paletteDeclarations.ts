@@ -6875,8 +6875,12 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[46],
 	},
-	'--quiz-atom-results-text': {
+	'--quiz-atom-results-number': {
 		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--quiz-atom-results-text': {
+		light: () => sourcePalette.neutral[20],
 		dark: () => sourcePalette.neutral[86],
 	},
 	'--quote-icon-fill': {

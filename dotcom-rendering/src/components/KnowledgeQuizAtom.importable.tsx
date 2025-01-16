@@ -324,6 +324,7 @@ const resultDescriptionStyles = css`
 
 const resultsNumberStyles = css`
 	${textSansBold34}
+	color: ${palette('--quiz-atom-results-number')};
 `;
 
 const resultHeaderStyles = css`
