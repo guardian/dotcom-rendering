@@ -123,9 +123,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		(collection) => !isHighlights(collection),
 	);
 
-	const merchHighAdPosition = getMerchHighPosition(
-		filteredCollections.length,
-	);
+	const merchHighAdPosition = getMerchHighPosition(filteredCollections);
 
 	const mobileAdPositions = renderAds
 		? getMobileAdPositions(filteredCollections)
@@ -487,18 +485,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										adSlotIndex={mobileAdPositions.indexOf(
 											index,
 										)}
-									/>
-								)}
-								{index === merchHighAdPosition && (
-									<MerchHighAdSlot
-										renderAds={renderAds}
-										collectionCount={
-											filteredCollections.length
-										}
-										isPaidContent={
-											!!front.pressedPage.frontProperties
-												.isPaidContent
-										}
 									/>
 								)}
 							</div>
