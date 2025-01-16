@@ -61,6 +61,7 @@ const initialiseCmp = async () => {
 	const { pageViewId } = window.guardian.config.ophan;
 
 	const country = code ?? undefined;
+	const subscriber = window.location.search.includes('subscriber');
 	cmp.init({
 		pubData: {
 			platform: 'next-gen',
@@ -69,6 +70,7 @@ const initialiseCmp = async () => {
 			pageViewId,
 		},
 		country,
+		subscriber,
 	});
 	log('dotcom', 'CMP initialised');
 };
