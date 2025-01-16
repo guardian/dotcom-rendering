@@ -610,7 +610,12 @@ export const FrontSection = ({
 						{isScrollableContainer && (
 							<div
 								css={css`
-									height: 44px;
+									${until.leftCol} {
+										height: 44px;
+									}
+									.hidden & {
+										display: none;
+									}
 								`}
 								id={`${sectionId}-carousel-navigation`}
 							></div>
