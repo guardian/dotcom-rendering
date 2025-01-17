@@ -55,6 +55,7 @@ const setAllFeaturesData = (opts: { isExpired: boolean }) => {
 
 beforeAll(() => {
 	window.guardian.config.page.userAttributesApiUrl = '';
+	window.guardian.config.tests['useUserBenefitsApiVariant'] = 'variant';
 });
 
 describe('Refreshing the features data', () => {
