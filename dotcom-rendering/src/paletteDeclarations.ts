@@ -1052,9 +1052,7 @@ const datelineDark: PaletteFunction = ({ design, theme }) => {
 const headlineBorder: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
-			return 'rgba(255,255,255, 0.2)';
-		case ArticleDesign.DeadBlog:
-			return '#CDCDCD';
+			return transparentColour(sourcePalette.neutral[100], 0.2);
 		default:
 			return sourcePalette.neutral[86];
 	}
@@ -2282,9 +2280,7 @@ const standfirstBackgroundDark: PaletteFunction = ({ design, theme }) => {
 const standfirstBorder: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
-			return 'rgba(255,255,255, 0.2)';
-		case ArticleDesign.DeadBlog:
-			return '#BDBDBD';
+			return transparentColour(sourcePalette.neutral[100], 0.2);
 		default:
 			return sourcePalette.neutral[86];
 	}
@@ -5756,7 +5752,7 @@ const pillBackground: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[7], 0.7);
 const pillDivider: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[100], 0.5);
-
+const pillLiveBullet: PaletteFunction = () => sourcePalette.news[500];
 // ----- Palette ----- //
 
 /**
@@ -6778,6 +6774,10 @@ const paletteColours = {
 	'--pill-background': {
 		light: pillBackground,
 		dark: pillBackground,
+	},
+	'--pill-bullet': {
+		light: pillLiveBullet,
+		dark: pillLiveBullet,
 	},
 	'--pill-divider': {
 		light: pillDivider,

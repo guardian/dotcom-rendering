@@ -7,7 +7,7 @@ import { Footer } from '../components/Footer';
 import {
 	FrontsBannerAdSlot,
 	MerchandisingSlot,
-	MerchHighOrMobileAdSlot,
+	MobileAdSlot,
 } from '../components/FrontsAdSlots';
 import { FrontSection } from '../components/FrontSection';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -139,12 +139,15 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 
 					return (
 						<Fragment key={containerId}>
-							<FrontsBannerAdSlot
-								renderAds={renderAds}
-								hasPageSkin={hasPageSkin}
-								index={index}
-								desktopAdPositions={desktopAdPositions}
-							/>
+							{desktopAdPositions.includes(index) && (
+								<FrontsBannerAdSlot
+									renderAds={renderAds}
+									hasPageSkin={hasPageSkin}
+									adSlotIndex={desktopAdPositions.indexOf(
+										index,
+									)}
+								/>
+							)}
 							<FrontSection
 								title={title}
 								url={url}
@@ -177,14 +180,14 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									isTagPage={true}
 								/>
 							</FrontSection>
-							<MerchHighOrMobileAdSlot
-								renderAds={renderAds}
-								index={index}
-								collectionCount={tagPage.groupedTrails.length}
-								isPaidContent={isPaidContent}
-								mobileAdPositions={mobileAdPositions}
-								hasPageSkin={hasPageSkin}
-							/>
+							{mobileAdPositions.includes(index) && (
+								<MobileAdSlot
+									renderAds={renderAds}
+									adSlotIndex={mobileAdPositions.indexOf(
+										index,
+									)}
+								/>
+							)}
 						</Fragment>
 					);
 				})}

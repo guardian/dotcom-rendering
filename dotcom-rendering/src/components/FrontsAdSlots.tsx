@@ -1,56 +1,51 @@
 import { Hide } from '@guardian/source/react-components';
-import { getMerchHighPosition } from '../lib/getFrontsAdPositions';
 import { palette as themePalette } from '../palette';
 import { AdSlot } from './AdSlot.web';
 import { Section } from './Section';
 
-export const MerchHighOrMobileAdSlot = ({
+export const MobileAdSlot = ({
 	renderAds,
-	index,
-	collectionCount,
-	isPaidContent,
-	mobileAdPositions,
-	hasPageSkin,
+	adSlotIndex,
 }: {
 	renderAds: boolean;
-	index: number;
-	collectionCount: number;
-	isPaidContent: boolean | undefined;
-	mobileAdPositions: (number | undefined)[];
-	hasPageSkin: boolean;
+	adSlotIndex: number;
 }) => {
-	if (!renderAds) return null;
+	return (
+		renderAds && (
+			<Hide from="tablet">
+				<AdSlot
+					index={adSlotIndex}
+					data-print-layout="hide"
+					position="mobile-front"
+				/>
+			</Hide>
+		)
+	);
+};
 
+export const MerchHighAdSlot = ({
+	renderAds,
+	isPaidContent,
+	collectionCount,
+}: {
+	renderAds: boolean;
+	isPaidContent: boolean;
+	collectionCount: number;
+}) => {
 	const minContainers = isPaidContent ? 1 : 2;
 	const shouldInsertMerchHighSlot =
-		!hasPageSkin &&
-		collectionCount > minContainers &&
-		index === getMerchHighPosition(collectionCount);
+		renderAds && collectionCount > minContainers;
 
-	if (shouldInsertMerchHighSlot) {
-		return (
+	return (
+		shouldInsertMerchHighSlot && (
 			<Hide from="desktop">
 				<AdSlot
 					data-print-layout="hide"
 					position="merchandising-high"
 				/>
 			</Hide>
-		);
-	}
-
-	if (mobileAdPositions.includes(index)) {
-		return (
-			<Hide from="tablet">
-				<AdSlot
-					index={mobileAdPositions.indexOf(index)}
-					data-print-layout="hide"
-					position="mobile-front"
-				/>
-			</Hide>
-		);
-	}
-
-	return null;
+		)
+	);
 };
 
 /**
@@ -65,25 +60,29 @@ export const MerchandisingSlot = ({
 	renderAds: boolean;
 	hasPageSkin: boolean;
 }) => {
-	if (!renderAds) return null;
 	return (
-		<Section
-			fullWidth={true}
-			data-print-layout="hide"
-			padSides={false}
-			showTopBorder={false}
-			showSideBorders={false}
-			backgroundColour={themePalette('--article-section-background')}
-			element="aside"
-		>
-			{hasPageSkin ? (
-				<Hide from="desktop">
+		renderAds && (
+			<Section
+				fullWidth={true}
+				data-print-layout="hide"
+				padSides={false}
+				showTopBorder={false}
+				showSideBorders={false}
+				backgroundColour={themePalette('--article-section-background')}
+				element="aside"
+			>
+				{hasPageSkin ? (
+					<Hide from="desktop">
+						<AdSlot
+							data-print-layout="hide"
+							position="merchandising"
+						/>
+					</Hide>
+				) : (
 					<AdSlot data-print-layout="hide" position="merchandising" />
-				</Hide>
-			) : (
-				<AdSlot data-print-layout="hide" position="merchandising" />
-			)}
-		</Section>
+				)}
+			</Section>
+		)
 	);
 };
 
@@ -94,31 +93,21 @@ export const MerchandisingSlot = ({
 export const FrontsBannerAdSlot = ({
 	renderAds,
 	hasPageSkin,
-	index,
-	desktopAdPositions,
+	adSlotIndex,
 }: {
 	renderAds: boolean;
 	hasPageSkin: boolean;
-	index: number;
-	desktopAdPositions: number[];
+	adSlotIndex: number;
 }) => {
-	if (!renderAds || hasPageSkin) {
-		return null;
-	}
-
-	if (desktopAdPositions.includes(index)) {
-		const adIndex = desktopAdPositions.indexOf(index);
-		if (adIndex === -1) return null;
-
-		return (
+	return (
+		renderAds &&
+		!hasPageSkin && (
 			<AdSlot
 				data-print-layout="hide"
 				position="fronts-banner"
-				index={adIndex + 1}
+				index={adSlotIndex + 1}
 				hasPageskin={hasPageSkin}
 			/>
-		);
-	}
-
-	return null;
+		)
+	);
 };

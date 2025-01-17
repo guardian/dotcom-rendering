@@ -1,20 +1,77 @@
 import { render } from '@testing-library/react';
-import { FrontsBannerAdSlot, MerchHighOrMobileAdSlot } from './FrontsAdSlots';
+import {
+	FrontsBannerAdSlot,
+	MerchHighAdSlot,
+	MobileAdSlot,
+} from './FrontsAdSlots';
 
-describe('MerchHighOrMobileAdSlot', () => {
+describe('MobileAdSlot', () => {
 	it("should return null if we shouldn't render ads", () => {
 		const { container } = render(
-			<MerchHighOrMobileAdSlot
+			<MobileAdSlot renderAds={false} adSlotIndex={4} />,
+		);
+
+		expect(container.innerHTML).toBe('');
+	});
+
+	it('should render ad slot if renderAds is true', () => {
+		const { container } = render(
+			<MobileAdSlot renderAds={true} adSlotIndex={4} />,
+		);
+
+		expect(container.innerHTML).not.toBe('');
+		expect(container.innerHTML).toMatch('ad slot inline');
+	});
+});
+
+describe('MerchHighAdSlot', () => {
+	it("should return null if we shouldn't render ads", () => {
+		const { container } = render(
+			<MerchHighAdSlot
 				renderAds={false}
-				index={4}
-				collectionCount={10}
 				isPaidContent={false}
-				mobileAdPositions={[]}
-				hasPageSkin={false}
+				collectionCount={4}
 			/>,
 		);
 
 		expect(container.innerHTML).toBe('');
+	});
+
+	it('should return null if front has 2 or fewer containers', () => {
+		const { container } = render(
+			<MerchHighAdSlot
+				renderAds={true}
+				isPaidContent={false}
+				collectionCount={2}
+			/>,
+		);
+
+		expect(container.innerHTML).toBe('');
+	});
+
+	it('should return null if it is paid content and front has 1 or fewer containers', () => {
+		const { container } = render(
+			<MerchHighAdSlot
+				renderAds={true}
+				isPaidContent={true}
+				collectionCount={1}
+			/>,
+		);
+
+		expect(container.innerHTML).toBe('');
+	});
+
+	it('should render the merch high slot if more than 2 containers', () => {
+		const { container } = render(
+			<MerchHighAdSlot
+				renderAds={true}
+				isPaidContent={false}
+				collectionCount={4}
+			/>,
+		);
+
+		expect(container.innerHTML).not.toBe('');
+		expect(container.innerHTML).toMatch('ad slot merchandising-high');
 	});
 });
 
@@ -24,8 +81,7 @@ describe('FrontsBannerAdSlot', () => {
 			<FrontsBannerAdSlot
 				renderAds={false}
 				hasPageSkin={false}
-				index={2}
-				desktopAdPositions={[2, 5]}
+				adSlotIndex={2}
 			/>,
 		);
 
@@ -37,52 +93,23 @@ describe('FrontsBannerAdSlot', () => {
 			<FrontsBannerAdSlot
 				renderAds={true}
 				hasPageSkin={true}
-				index={2}
-				desktopAdPositions={[2, 5]}
+				adSlotIndex={2}
 			/>,
 		);
 
 		expect(container.innerHTML).toBe('');
 	});
 
-	test.each([
-		[[2, 5], 3],
-		[[2, 5], 0],
-		[[], 1],
-	])(
-		'should return null if desktopAdPositions %p does NOT contain index %i',
-		(adPositions, i) => {
-			const { container } = render(
-				<FrontsBannerAdSlot
-					renderAds={true}
-					hasPageSkin={false}
-					index={i}
-					desktopAdPositions={adPositions}
-				/>,
-			);
+	it('should render ad slot if there is no page skin and renderAds is true', () => {
+		const { container } = render(
+			<FrontsBannerAdSlot
+				renderAds={true}
+				hasPageSkin={false}
+				adSlotIndex={2}
+			/>,
+		);
 
-			expect(container.innerHTML).toBe('');
-		},
-	);
-
-	test.each([
-		[[2, 5], 2],
-		[[2, 5], 5],
-		[[1], 1],
-	])(
-		'should NOT return null if desktopAdPositions %p contains index %i',
-		(adPositions, i) => {
-			const { container } = render(
-				<FrontsBannerAdSlot
-					renderAds={true}
-					hasPageSkin={false}
-					index={i}
-					desktopAdPositions={adPositions}
-				/>,
-			);
-
-			expect(container.innerHTML).not.toBe('');
-			expect(container.innerHTML).toMatch('ad-slot-container');
-		},
-	);
+		expect(container.innerHTML).not.toBe('');
+		expect(container.innerHTML).toMatch('ad slot fronts-banner');
+	});
 });

@@ -15,10 +15,16 @@ type GroupedCounts = {
 	splash: number;
 };
 
-type AdCandidate = Pick<DCRCollectionType, 'collectionType'>;
+export type AdCandidate = Pick<
+	DCRCollectionType,
+	'collectionType' | 'containerLevel'
+>;
 
-const getMerchHighPosition = (collectionCount: number): number =>
-	collectionCount >= 4 ? 2 : 0;
+/** The Merch high slot is directly before the most viewed container  */
+const getMerchHighPosition = (collections: AdCandidate[]): number => {
+	const mostViewedPosition = collections.findIndex(isMostViewedContainer);
+	return mostViewedPosition - 1;
+};
 
 /**
  * This happens on the recipes front, where the first container is a thrasher
@@ -38,37 +44,78 @@ const isBeforeThrasher = (index: number, collections: AdCandidate[]) =>
 const isMostViewedContainer = (collection: AdCandidate) =>
 	collection.collectionType === 'news/most-popular';
 
-const shouldInsertAd =
-	(merchHighPosition: number) =>
-	(collection: AdCandidate, index: number, collections: AdCandidate[]) =>
-		!(
-			isFirstContainerAndThrasher(collection.collectionType, index) ||
-			isMerchHighPosition(index, merchHighPosition) ||
-			isBeforeThrasher(index, collections) ||
-			isMostViewedContainer(collection)
-		);
+const isBeforeSecondaryLevelContainer = (
+	index: number,
+	collections: AdCandidate[],
+) => collections[index + 1]?.containerLevel === 'Secondary';
+
+const hasSecondaryLevelContainers = (collections: AdCandidate[]) =>
+	!!collections.find((c) => c.containerLevel === 'Secondary');
+
+/**
+ * Checks if mobile ad insertion is possible immediately after the
+ * position of the current collection
+ *
+ * . ------------------ .
+ * | Current collection |
+ * | ------------------ | <-- Maybe ad position
+ * | Next collection    |
+ * ' ------------------ '
+ */
+const canInsertMobileAd =
+	(merchHighPosition: number, hasSecondaryContainers: boolean) =>
+	(collection: AdCandidate, index: number, collections: AdCandidate[]) => {
+		/**
+		 * Ad slots can only be inserted after positions that satisfy the following rules:
+		 * - Is NOT the slot used for the merch high position
+		 * - Is NOT a thrasher if it is the first container
+		 * - Is NOT before a thrasher
+		 * - Is NOT the most viewed container
+		 */
+		const rules = [
+			!isMerchHighPosition(index, merchHighPosition),
+			!isFirstContainerAndThrasher(collection.collectionType, index),
+			!isBeforeThrasher(index, collections),
+			!isMostViewedContainer(collection),
+		];
+
+		/** Additional rules exist for "beta" fronts which have primary and secondary level containers */
+		const betaFrontRules = [
+			// Allow insertion after first container at any time but for all other situations,
+			// prevent insertion before a secondary level container
+			index === 0 || !isBeforeSecondaryLevelContainer(index, collections),
+		];
+
+		// Ad insertion is possible if every condition is met
+		return hasSecondaryContainers
+			? [...rules, ...betaFrontRules].every(Boolean)
+			: rules.every(Boolean);
+	};
 
 const isEvenIndex = (_collection: unknown, index: number): boolean =>
 	index % 2 === 0;
 
 /**
- * We do not insert mobile ads:
- * a. after the first container if it is a thrasher
- * b. next to the merchandising-high ad slot
- * c. before a thrasher
- * d. after the Most Viewed container.
- * After we've filtered out the containers next to which we can insert an ad,
- * we take every other container, up to a maximum of 10, for targeting MPU insertion.
+ * Filters out unsuitable positions then takes every other position for possible ad insertion,
+ * up to a maximum of `MAX_FRONTS_MOBILE_ADS`
  */
 const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
-	const merchHighPosition = getMerchHighPosition(collections.length);
+	const merchHighPosition = getMerchHighPosition(collections);
+	const hasSecondaryContainers = hasSecondaryLevelContainers(collections);
 
-	return collections
-		.filter(shouldInsertAd(merchHighPosition))
-		.filter(isEvenIndex)
-		.map((collection: AdCandidate) => collections.indexOf(collection))
-		.filter((adPosition: number) => adPosition !== -1)
-		.slice(0, MAX_FRONTS_MOBILE_ADS);
+	return (
+		collections
+			.filter(
+				canInsertMobileAd(merchHighPosition, hasSecondaryContainers),
+			)
+			// Use every other ad position if the front has no secondary containers
+			.filter((c, i) =>
+				hasSecondaryContainers ? true : isEvenIndex(c, i),
+			)
+			.map((collection: AdCandidate) => collections.indexOf(collection))
+			.filter((adPosition: number) => adPosition !== -1)
+			.slice(0, MAX_FRONTS_MOBILE_ADS)
+	);
 };
 
 /**
