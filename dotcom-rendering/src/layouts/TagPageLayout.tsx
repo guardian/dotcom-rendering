@@ -7,7 +7,6 @@ import { Footer } from '../components/Footer';
 import {
 	FrontsBannerAdSlot,
 	MerchandisingSlot,
-	MerchHighAdSlot,
 	MobileAdSlot,
 } from '../components/FrontsAdSlots';
 import { FrontSection } from '../components/FrontSection';
@@ -21,7 +20,6 @@ import { TagPageHeader } from '../components/TagPageHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { getMerchHighPosition } from '../lib/getFrontsAdPositions';
 import {
 	getTagPageBannerAdPositions,
 	getTagPageMobileAdPositions,
@@ -57,10 +55,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const desktopAdPositions = renderAds
 		? getTagPageBannerAdPositions(tagPage.groupedTrails.length)
 		: [];
-
-	const merchHighAdPosition = getMerchHighPosition(
-		tagPage.groupedTrails.length,
-	);
 
 	const mobileAdPositions = renderAds
 		? getTagPageMobileAdPositions(tagPage.groupedTrails)
@@ -192,15 +186,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									adSlotIndex={mobileAdPositions.indexOf(
 										index,
 									)}
-								/>
-							)}
-							{index === merchHighAdPosition && (
-								<MerchHighAdSlot
-									renderAds={renderAds}
-									collectionCount={
-										tagPage.groupedTrails.length
-									}
-									isPaidContent={!!isPaidContent}
 								/>
 							)}
 						</Fragment>
