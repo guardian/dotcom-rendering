@@ -1,6 +1,13 @@
 import { css } from '@emotion/react';
-import { brandAlt, from, neutral, space } from '@guardian/source/foundations';
-import { SvgGuardianLogo } from '@guardian/source/react-components';
+import {
+	brandAlt,
+	from,
+	neutral,
+	space,
+	specialReport,
+} from '@guardian/source/foundations';
+import { LinkButton, SvgGuardianLogo } from '@guardian/source/react-components';
+import { hexColourToString } from '@guardian/support-dotcom-components';
 import { useEffect, useState } from 'react';
 import {
 	removeMediaRulePrefix,
@@ -11,13 +18,12 @@ import type { SupportTier } from '../../epics/utils/threeTierChoiceCardAmounts';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
+import { ThreeTierChoiceCardsV2 } from '../ThreeTierChoiceCardsV2';
 import { DesignableBannerArticleCount } from './components/DesignableBannerArticleCount';
 import { DesignableBannerBody } from './components/DesignableBannerBody';
 import { DesignableBannerCloseButton } from './components/DesignableBannerCloseButton';
-import { DesignableBannerCtas } from './components/DesignableBannerCtas';
 import { DesignableBannerHeader } from './components/DesignableBannerHeader';
 import type { BannerTemplateSettings } from './settings';
-import { templateSpacing } from './styles/templateStyles';
 
 const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	content,
@@ -29,9 +35,9 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	submitComponentEvent,
 	design,
 	onCtaClick,
-	onSecondaryCtaClick,
 }: BannerRenderProps): JSX.Element => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
+	const isDesktopOrAbove = useMatchMedia(removeMediaRulePrefix(from.desktop));
 
 	const [iosAppBannerPresent, setIosAppBannerPresent] = useState(false);
 
@@ -66,72 +72,96 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		return <></>;
 	}
 
-	//All config hard coded for the tests - TODO make this configurable in the future
+	const { basic, primaryCta, secondaryCta, highlightedText, closeButton } =
+		design.colours;
+
+	const landingPageUrl = 'https://support.theguardian.com/contribute'; //this URL will need to be confirmed and then updated before the test is launched
+
 	const templateSettings: BannerTemplateSettings = {
 		containerSettings: {
-			backgroundColour: neutral[100],
-			textColor: neutral[0],
+			backgroundColour: hexColourToString(basic.background),
+			textColor: hexColourToString(basic.bodyText),
 		},
 		headerSettings: {
-			textColour: neutral[0],
+			textColour: hexColourToString(basic.headerText),
 		},
 		primaryCtaSettings: {
 			default: {
-				backgroundColour: brandAlt[400],
-				textColour: neutral[0],
+				backgroundColour: hexColourToString(
+					primaryCta.default.background,
+				),
+				textColour: hexColourToString(primaryCta.default.text),
 			},
 			hover: {
-				backgroundColour: brandAlt[400],
-				textColour: neutral[0],
+				backgroundColour: hexColourToString(
+					primaryCta.hover.background,
+				),
+				textColour: hexColourToString(primaryCta.hover.text),
 			},
 		},
 		//not used in this design but is required to be passed in
 		secondaryCtaSettings: {
 			default: {
-				backgroundColour: brandAlt[400],
-				textColour: neutral[0],
+				backgroundColour: hexColourToString(
+					secondaryCta.default.background,
+				),
+				textColour: hexColourToString(secondaryCta.default.text),
+				border: `1px solid ${
+					secondaryCta.default.border
+						? hexColourToString(secondaryCta.default.border)
+						: undefined
+				}`,
 			},
 			hover: {
-				backgroundColour: brandAlt[400],
-				textColour: neutral[0],
+				backgroundColour: hexColourToString(
+					secondaryCta.hover.background,
+				),
+				textColour: hexColourToString(secondaryCta.hover.text),
+				border: `1px solid ${
+					secondaryCta.hover.border
+						? hexColourToString(secondaryCta.hover.border)
+						: undefined
+				}`,
 			},
 		},
 		closeButtonSettings: {
 			default: {
-				backgroundColour: neutral[100],
-				textColour: neutral[0],
-				border: `1px solid ${neutral[38]}`,
+				backgroundColour: hexColourToString(
+					closeButton.default.background,
+				),
+				textColour: hexColourToString(closeButton.default.text),
+				border: `1px solid ${
+					closeButton.default.border
+						? hexColourToString(closeButton.default.border)
+						: specialReport[100]
+				}`,
 			},
 			hover: {
-				backgroundColour: neutral[100],
-				textColour: neutral[0],
-				border: `1px solid ${neutral[100]}`,
+				backgroundColour: hexColourToString(
+					closeButton.hover.background,
+				),
+				textColour: hexColourToString(closeButton.hover.text),
+				border: `1px solid ${
+					closeButton.hover.border
+						? hexColourToString(closeButton.hover.border)
+						: neutral[100]
+				}`,
 			},
 		},
 		highlightedTextSettings: {
-			textColour: neutral[0],
-			highlightColour: neutral[100], //set to be white as we may want this in the future?
+			textColour: hexColourToString(highlightedText.text),
+			highlightColour: hexColourToString(highlightedText.highlight),
 		},
-		articleCountTextColour: neutral[0],
+		articleCountTextColour: hexColourToString(basic.articleCountText),
 		bannerId: 'designable-banner',
 	};
-
-	const mainOrMobileContent = isTabletOrAbove
-		? content.mainContent
-		: content.mobileContent;
 
 	const showAboveArticleCount =
 		(separateArticleCountSettings?.type === 'above' ||
 			separateArticleCount) &&
 		articleCounts.forTargetedWeeks >= 5;
 
-	return isTabletOrAbove ? (
-		<>
-			<div css={styles.guardianLogoContainer}>
-				<SvgGuardianLogo />
-			</div>
-		</>
-	) : (
+	return (
 		<div
 			css={styles.outerContainer(
 				templateSettings.containerSettings.backgroundColour,
@@ -145,23 +175,22 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					settings={templateSettings.closeButtonSettings}
 					styleOverides={styles.closeButtonOverrides}
 				/>
-				<div>
+
+				<div css={styles.middleColumnContainer}>
 					<DesignableBannerHeader
 						heading={content.mainContent.heading}
 						mobileHeading={content.mobileContent.heading}
 						headerSettings={templateSettings.headerSettings}
 						headlineSize={design.fonts?.heading.size ?? 'medium'}
 					/>
-				</div>
-				<div>
-					{showAboveArticleCount && (
-						<DesignableBannerArticleCount
-							numArticles={articleCounts.forTargetedWeeks}
-							settings={templateSettings}
-							copy={separateArticleCountSettings?.copy}
-						/>
-					)}
 					<div>
+						{showAboveArticleCount && (
+							<DesignableBannerArticleCount
+								numArticles={articleCounts.forTargetedWeeks}
+								settings={templateSettings}
+								copy={separateArticleCountSettings?.copy}
+							/>
+						)}
 						<DesignableBannerBody
 							mainContent={content.mainContent}
 							mobileContent={content.mobileContent}
@@ -171,27 +200,47 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 						/>
 					</div>
 				</div>
-				<div>
-					<ThreeTierChoiceCards
-						countryCode={countryCode}
-						selectedProduct={threeTierChoiceCardSelectedProduct}
-						setSelectedProduct={
-							setThreeTierChoiceCardSelectedProduct
-						}
-						variantOfChoiceCard={variantOfChoiceCard}
-					/>
-				</div>
-				<div css={styles.linkButtonContainer}>
-					<DesignableBannerCtas
-						mainOrMobileContent={mainOrMobileContent}
-						onPrimaryCtaClick={onCtaClick}
-						onSecondaryCtaClick={onSecondaryCtaClick}
-						primaryCtaSettings={templateSettings.primaryCtaSettings}
-						secondaryCtaSettings={
-							templateSettings.secondaryCtaSettings
-						}
-					/>
-				</div>
+
+				{isTabletOrAbove && (
+					<>
+						{isDesktopOrAbove && (
+							<div css={styles.guardianLogoContainer}>
+								<SvgGuardianLogo />
+							</div>
+						)}
+						<div css={styles.thirdColumnContainer}>
+							<ThreeTierChoiceCardsV2 />
+						</div>
+					</>
+				)}
+
+				{!isTabletOrAbove && (
+					<>
+						<div>
+							<ThreeTierChoiceCards
+								countryCode={countryCode}
+								selectedProduct={
+									threeTierChoiceCardSelectedProduct
+								}
+								setSelectedProduct={
+									setThreeTierChoiceCardSelectedProduct
+								}
+								variantOfChoiceCard={variantOfChoiceCard}
+							/>
+						</div>
+						<div css={styles.linkButtonContainer}>
+							<LinkButton
+								href={landingPageUrl}
+								onClick={onCtaClick}
+								size="small"
+								priority="primary"
+								cssOverrides={styles.linkButtonOverrides}
+							>
+								Continue
+							</LinkButton>
+						</div>
+					</>
+				)}
 			</div>
 		</div>
 	);
@@ -207,52 +256,44 @@ const styles = {
 		color: ${textColor};
 		${limitHeight ? 'max-height: 70vh;' : ''}
 		overflow: auto;
-
-		* {
-			box-sizing: border-box;
-		}
-
-		${from.tablet} {
-			border-top: 1px solid ${neutral[0]};
-		}
-
-		b,
-		strong {
-			font-weight: bold;
-		}
 	`,
 	containerOverrides: css`
 		display: flex;
 		flex-direction: column;
 		position: relative;
-		padding: 0 10px;
+		${from.desktop} {
+			padding: 0;
+		}
+		overflow: auto;
+
+		${from.mobile} {
+			padding: 10px 10px 0 16px;
+		}
 
 		${from.tablet} {
 			display: grid;
-			grid-template-columns: 1fr 280px;
+			grid-template-columns: 1fr 1fr 1fr;
 			grid-template-rows: auto 1fr auto;
-			column-gap: ${space[5]}px;
-			width: 100%;
-			max-width: 1300px;
-			margin: 0 auto;
+			align-items: center;
+			padding-bottom: ${space[8]}px;
 		}
 
 		${from.desktop} {
-			column-gap: 60px;
-			grid-template-columns: 1fr 460px;
+			display: grid;
+			grid-template-columns: auto 1fr 1fr;
+			grid-template-rows: auto 1fr auto;
+			max-width: 1300px;
+			align-items: start;
+			column-gap: 10px;
+			padding-bottom: ${space[10]}px;
 		}
-
-		${from.wide} {
-			column-gap: 100px;
-		}
-
-		${templateSpacing.bannerContainer};
 	`,
 	closeButtonOverrides: css`
 		margin-top: ${space[3]}px;
-		grid-column: 2;
+		margin-bottom: ${space[3]}px;
+		grid-column: 3;
 		grid-row: 1;
-		justify-content: flex-end;
+		justify-content: end;
 	`,
 	linkButtonOverrides: css`
 		background-color: ${brandAlt[400]};
@@ -265,16 +306,33 @@ const styles = {
 		padding-top: ${space[3]}px;
 	`,
 	guardianLogoContainer: css`
-		display: none;
-		${from.tablet} {
-			display: block;
-			width: 100px;
-		}
+		width: 100px;
 		grid-column: 1;
 		grid-row: 1;
 		justify-self: start;
-		padding-top: ${space[3]}px;
-		padding-left: ${space[3]}px;
+		align-self: start;
+	`,
+	middleColumnContainer: css`
+		display: flex;
+		flex-direction: column;
+		${from.tablet} {
+			grid-row: 2;
+			grid-column: 2;
+			width: 100%;
+			padding-bottom: ${space[5]}px;
+		}
+	`,
+	thirdColumnContainer: css`
+		display: flex;
+		flex-direction: column;
+		${from.tablet} {
+			grid-row: 3;
+			grid-column: 2;
+		}
+		${from.desktop} {
+			grid-row: 2;
+			grid-column: 3;
+		}
 	`,
 };
 
