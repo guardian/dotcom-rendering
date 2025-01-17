@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import {
 	article17,
-	palette,
 	space,
 	textSans17,
 	textSansBold17,
@@ -12,6 +11,7 @@ import { Button, Radio, RadioGroup } from '@guardian/source/react-components';
 import { Fragment, useEffect, useState } from 'react';
 import { ArticleSpecial } from '../lib/articleFormat';
 import type { ArticleFormat, ArticleTheme } from '../lib/articleFormat';
+import { palette } from '../palette';
 import type {
 	AnswerType,
 	KnowledgeQuizAtomType,
@@ -182,6 +182,15 @@ export const Question = ({
 						onClick={() => {
 							setHasSubmitted(true);
 						}}
+						theme={{
+							backgroundPrimary: palette(
+								'--quiz-atom-button-background',
+							),
+							textPrimary: palette('--quiz-atom-button-text'),
+							backgroundPrimaryHover: palette(
+								'--quiz-atom-button-background-hover',
+							),
+						}}
 						onKeyDown={(
 							e: React.KeyboardEvent<HTMLButtonElement>,
 						) => {
@@ -299,10 +308,12 @@ const Answers = ({
 };
 
 const resultWrapperStyles = css`
-	background-color: ${palette.neutral[93]};
+	background-color: ${palette('--quiz-atom-results-background')};
+	color: ${palette('--quiz-atom-results-text')};
 	margin-top: ${space[3]}px;
 	margin-bottom: ${space[3]}px;
 	padding: ${space[2]}px;
+	border: 1px solid ${palette('--quiz-atom-results-border')};
 `;
 
 const resultDescriptionStyles = css`
@@ -313,13 +324,12 @@ const resultDescriptionStyles = css`
 
 const resultsNumberStyles = css`
 	${textSansBold34}
-	color: ${palette.brand[400]};
+	color: ${palette('--quiz-atom-results-number')};
 `;
 
 const resultHeaderStyles = css`
 	${textSansBold17}
-	color: ${palette.neutral[20]};
-	padding-bottom: ${space[1]}px;
+	padding-bottom: ${space[2]}px;
 `;
 
 export const Result = ({
