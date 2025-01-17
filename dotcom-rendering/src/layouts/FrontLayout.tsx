@@ -348,10 +348,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
-							<ContainerOverrides
-								key={ophanName}
-								containerPalette={collection.containerPalette}
-							>
+							<div key={ophanName}>
 								<div css={[hasPageSkin && pageSkinContainer]}>
 									{desktopAdPositions.includes(index) && (
 										<FrontsBannerAdSlot
@@ -362,32 +359,44 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											)}
 										/>
 									)}
+
 									{!!trail.embedUri && (
-										<SnapCssSandbox
-											snapData={trail.snapData}
+										<ContainerOverrides
+											key={ophanName}
+											containerPalette={
+												collection.containerPalette
+											}
 										>
-											<Section
-												fullWidth={true}
-												padSides={false}
-												showTopBorder={false}
-												showSideBorders={false}
-												ophanComponentLink={
-													ophanComponentLink
-												}
-												ophanComponentName={ophanName}
-												containerName={
-													collection.collectionType
-												}
-												hasPageSkin={hasPageSkin}
+											<SnapCssSandbox
+												snapData={trail.snapData}
 											>
-												<Snap
-													snapData={trail.snapData}
-													dataLinkName={
-														trail.dataLinkName
+												<Section
+													fullWidth={true}
+													padSides={false}
+													showTopBorder={false}
+													showSideBorders={false}
+													ophanComponentLink={
+														ophanComponentLink
 													}
-												/>
-											</Section>
-										</SnapCssSandbox>
+													ophanComponentName={
+														ophanName
+													}
+													containerName={
+														collection.collectionType
+													}
+													hasPageSkin={hasPageSkin}
+												>
+													<Snap
+														snapData={
+															trail.snapData
+														}
+														dataLinkName={
+															trail.dataLinkName
+														}
+													/>
+												</Section>
+											</SnapCssSandbox>
+										</ContainerOverrides>
 									)}
 									{mobileAdPositions.includes(index) && (
 										<MobileAdSlot
@@ -411,7 +420,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										/>
 									)}
 								</div>
-							</ContainerOverrides>
+							</div>
 						);
 					}
 
@@ -578,61 +587,67 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)}
 									/>
 								)}
-								<Section
-									title={collection.displayName}
-									sectionId={`container-${ophanName}`}
-									ophanComponentName={ophanName}
-									ophanComponentLink={ophanComponentLink}
-									containerName={collection.collectionType}
-									fullWidth={true}
-									padBottom={true}
-									showSideBorders={
-										collection.collectionType !==
-										'fixed/video'
-									}
-									showTopBorder={index > 0}
-									padContent={false}
-									url={collection.href}
-									showDateHeader={
-										collection.config.showDateHeader
-									}
-									editionId={front.editionId}
-									backgroundColour={schemePalette(
-										'--section-background',
-									)}
-									innerBackgroundColour={
-										containerPalette === 'MediaPalette'
-											? sourcePalette.neutral[0]
-											: undefined
-									}
-									hasPageSkin={hasPageSkin}
+								<ContainerOverrides
+									containerPalette={containerPalette}
 								>
-									<Island
-										priority="feature"
-										defer={{ until: 'visible' }}
+									<Section
+										title={collection.displayName}
+										sectionId={`container-${ophanName}`}
+										ophanComponentName={ophanName}
+										ophanComponentLink={ophanComponentLink}
+										containerName={
+											collection.collectionType
+										}
+										fullWidth={true}
+										padBottom={true}
+										showSideBorders={
+											collection.collectionType !==
+											'fixed/video'
+										}
+										showTopBorder={index > 0}
+										padContent={false}
+										url={collection.href}
+										showDateHeader={
+											collection.config.showDateHeader
+										}
+										editionId={front.editionId}
+										backgroundColour={schemePalette(
+											'--section-background',
+										)}
+										innerBackgroundColour={
+											containerPalette === 'MediaPalette'
+												? sourcePalette.neutral[0]
+												: undefined
+										}
+										hasPageSkin={hasPageSkin}
 									>
-										<Carousel
-											isOnwardContent={false}
-											heading={collection.displayName}
-											trails={trails}
-											onwardsSource={'unknown-source'}
-											palette={containerPalette}
-											leftColSize={'compact'}
-											containerType={
-												collection.collectionType
-											}
-											hasPageSkin={hasPageSkin}
-											url={collection.href}
-											discussionApiUrl={
-												front.config.discussionApiUrl
-											}
-											absoluteServerTimes={
-												absoluteServerTimes
-											}
-										/>
-									</Island>
-								</Section>
-
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
+										>
+											<Carousel
+												isOnwardContent={false}
+												heading={collection.displayName}
+												trails={trails}
+												onwardsSource={'unknown-source'}
+												palette={containerPalette}
+												leftColSize={'compact'}
+												containerType={
+													collection.collectionType
+												}
+												hasPageSkin={hasPageSkin}
+												url={collection.href}
+												discussionApiUrl={
+													front.config
+														.discussionApiUrl
+												}
+												absoluteServerTimes={
+													absoluteServerTimes
+												}
+											/>
+										</Island>
+									</Section>
+								</ContainerOverrides>
 								{mobileAdPositions.includes(index) && (
 									<MobileAdSlot
 										renderAds={renderAds}
@@ -761,6 +776,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				ophanComponentName="trending-topics"
 				data-component="trending-topics"
 				hasPageSkin={hasPageSkin}
+				backgroundColour={schemePalette('--section-background')}
 			>
 				<TrendingTopics trendingTopics={front.trendingTopics} />
 			</Section>
