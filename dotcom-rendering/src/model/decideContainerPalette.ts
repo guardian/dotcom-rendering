@@ -25,6 +25,5 @@ export const decideContainerPalette = (
 	if (metadata?.includes('Branded') && options?.canBeBranded) {
 		return 'Branded';
 	}
-	if (metadata?.includes('Podcast')) return 'PodcastPalette';
 	return undefined;
 };

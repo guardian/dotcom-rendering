@@ -50,7 +50,7 @@ type ArticleProps = Props & {
 };
 
 type FrontProps = Props & {
-	palette: DCRContainerPalette;
+	palette?: DCRContainerPalette;
 	containerType?: DCRContainerType;
 	hasPageSkin?: boolean;
 	isOnwardContent?: false;
@@ -96,7 +96,7 @@ const CarouselColours = ({
 	props,
 	children,
 }: {
-	props: { format: ArticleFormat } | { palette: DCRContainerPalette };
+	props: { format: ArticleFormat } | { palette?: DCRContainerPalette };
 	children: React.ReactElement;
 }): React.ReactElement => {
 	if ('palette' in props) {

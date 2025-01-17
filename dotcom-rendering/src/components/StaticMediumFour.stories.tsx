@@ -80,10 +80,7 @@ const containerPalettes = [
 	'SombreAltPalette',
 	'SpecialReportAltPalette',
 	'Branded',
-] as const satisfies readonly Omit<
-	DCRContainerPalette,
-	'MediaPalette' | 'PodcastPalette'
->[];
+] as const satisfies readonly Omit<DCRContainerPalette, 'MediaPalette'>[];
 
 export const WithSpecialPaletteVariations = {
 	parameters: {

@@ -97,7 +97,16 @@ export const enhanceCollections = ({
 		);
 
 		const containerSpacing = getContainerSpacing(collections[index + 1]);
+		const isPodcastContainer = collection.config.metadata?.some(
+			(meta) => meta.type === 'Podcast',
+		);
 
+		console.log({ isPodcastContainer });
+		const dcrCollectionType = !!isPodcastContainer
+			? 'scrollable/podcast'
+			: collectionType;
+
+		console.log({ dcrCollectionType });
 		return {
 			id,
 			displayName,
@@ -105,7 +114,7 @@ export const enhanceCollections = ({
 				onPageDescription && index === 0
 					? onPageDescription
 					: description,
-			collectionType,
+			collectionType: dcrCollectionType,
 			href,
 			containerPalette,
 			containerLevel: collection.config.collectionLevel,

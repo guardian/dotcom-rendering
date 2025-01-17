@@ -562,11 +562,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					if (
 						collection.collectionType === 'fixed/video' ||
-						collection.containerPalette === 'PodcastPalette'
+						collection.collectionType === 'scrollable/podcast'
 					) {
-						const containerPalette =
-							collection.containerPalette ?? 'MediaPalette';
-
 						return (
 							<div key={ophanName}>
 								{desktopAdPositions.includes(index) && (
@@ -601,7 +598,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										'--section-background',
 									)}
 									innerBackgroundColour={
-										containerPalette === 'MediaPalette'
+										collection.collectionType ===
+										'fixed/video'
 											? sourcePalette.neutral[0]
 											: undefined
 									}
@@ -616,7 +614,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											heading={collection.displayName}
 											trails={trails}
 											onwardsSource={'unknown-source'}
-											palette={containerPalette}
 											leftColSize={'compact'}
 											containerType={
 												collection.collectionType
