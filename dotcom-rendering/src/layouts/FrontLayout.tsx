@@ -1,6 +1,5 @@
 import { isOneOf } from '@guardian/libs';
 import {
-	background,
 	brandBackground,
 	brandBorder,
 	palette as sourcePalette,
@@ -358,43 +357,33 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)}
 									/>
 								)}
-
 								{!!trail.embedUri && (
-									<ContainerOverrides
-										key={ophanName}
-										containerPalette={
-											collection.containerPalette
-										}
-									>
-										<SnapCssSandbox
-											snapData={trail.snapData}
+									<SnapCssSandbox snapData={trail.snapData}>
+										<Section
+											fullWidth={true}
+											padSides={false}
+											showTopBorder={false}
+											showSideBorders={false}
+											ophanComponentLink={
+												ophanComponentLink
+											}
+											ophanComponentName={ophanName}
+											containerName={
+												collection.collectionType
+											}
+											hasPageSkin={hasPageSkin}
+											backgroundColour={schemePalette(
+												'--front-container-background',
+											)}
 										>
-											<Section
-												fullWidth={true}
-												padSides={false}
-												showTopBorder={false}
-												showSideBorders={false}
-												ophanComponentLink={
-													ophanComponentLink
+											<Snap
+												snapData={trail.snapData}
+												dataLinkName={
+													trail.dataLinkName
 												}
-												ophanComponentName={ophanName}
-												containerName={
-													collection.collectionType
-												}
-												hasPageSkin={hasPageSkin}
-												backgroundColour={schemePalette(
-													'--section-background',
-												)}
-											>
-												<Snap
-													snapData={trail.snapData}
-													dataLinkName={
-														trail.dataLinkName
-													}
-												/>
-											</Section>
-										</SnapCssSandbox>
-									</ContainerOverrides>
+											/>
+										</Section>
+									</SnapCssSandbox>
 								)}
 								{mobileAdPositions.includes(index) && (
 									<MobileAdSlot
@@ -608,7 +597,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										}
 										editionId={front.editionId}
 										backgroundColour={schemePalette(
-											'--section-background',
+											'--front-container-background',
 										)}
 										innerBackgroundColour={
 											containerPalette === 'MediaPalette'
@@ -772,7 +761,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				ophanComponentName="trending-topics"
 				data-component="trending-topics"
 				hasPageSkin={hasPageSkin}
-				backgroundColour={schemePalette('--section-background')}
+				backgroundColour={schemePalette('--front-container-background')}
 			>
 				<TrendingTopics trendingTopics={front.trendingTopics} />
 			</Section>
@@ -789,9 +778,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					data-print-layout="hide"
 					padSides={false}
 					element="aside"
-					backgroundColour={
-						hasPageSkin ? background.primary : undefined
-					}
+					backgroundColour={schemePalette(
+						'--front-container-background',
+					)}
 				>
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
