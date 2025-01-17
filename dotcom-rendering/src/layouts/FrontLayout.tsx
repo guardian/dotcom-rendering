@@ -349,77 +349,73 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
 							<div key={ophanName}>
-								<div css={[hasPageSkin && pageSkinContainer]}>
-									{desktopAdPositions.includes(index) && (
-										<FrontsBannerAdSlot
-											renderAds={renderAds}
-											hasPageSkin={hasPageSkin}
-											adSlotIndex={desktopAdPositions.indexOf(
-												index,
-											)}
-										/>
-									)}
+								{desktopAdPositions.includes(index) && (
+									<FrontsBannerAdSlot
+										renderAds={renderAds}
+										hasPageSkin={hasPageSkin}
+										adSlotIndex={desktopAdPositions.indexOf(
+											index,
+										)}
+									/>
+								)}
 
-									{!!trail.embedUri && (
-										<ContainerOverrides
-											key={ophanName}
-											containerPalette={
-												collection.containerPalette
-											}
+								{!!trail.embedUri && (
+									<ContainerOverrides
+										key={ophanName}
+										containerPalette={
+											collection.containerPalette
+										}
+									>
+										<SnapCssSandbox
+											snapData={trail.snapData}
 										>
-											<SnapCssSandbox
-												snapData={trail.snapData}
+											<Section
+												fullWidth={true}
+												padSides={false}
+												showTopBorder={false}
+												showSideBorders={false}
+												ophanComponentLink={
+													ophanComponentLink
+												}
+												ophanComponentName={ophanName}
+												containerName={
+													collection.collectionType
+												}
+												hasPageSkin={hasPageSkin}
+												backgroundColour={schemePalette(
+													'--section-background',
+												)}
 											>
-												<Section
-													fullWidth={true}
-													padSides={false}
-													showTopBorder={false}
-													showSideBorders={false}
-													ophanComponentLink={
-														ophanComponentLink
+												<Snap
+													snapData={trail.snapData}
+													dataLinkName={
+														trail.dataLinkName
 													}
-													ophanComponentName={
-														ophanName
-													}
-													containerName={
-														collection.collectionType
-													}
-													hasPageSkin={hasPageSkin}
-												>
-													<Snap
-														snapData={
-															trail.snapData
-														}
-														dataLinkName={
-															trail.dataLinkName
-														}
-													/>
-												</Section>
-											</SnapCssSandbox>
-										</ContainerOverrides>
-									)}
-									{mobileAdPositions.includes(index) && (
-										<MobileAdSlot
-											renderAds={renderAds}
-											adSlotIndex={mobileAdPositions.indexOf(
-												index,
-											)}
-										/>
-									)}
-									{index === merchHighAdPosition && (
-										<MerchHighAdSlot
-											renderAds={renderAds}
-											collectionCount={
-												filteredCollections.length
-											}
-											isPaidContent={
-												!!front.pressedPage
-													.frontProperties
-													.isPaidContent
-											}
-										/>
-									)}
-								</div>
+												/>
+											</Section>
+										</SnapCssSandbox>
+									</ContainerOverrides>
+								)}
+								{mobileAdPositions.includes(index) && (
+									<MobileAdSlot
+										renderAds={renderAds}
+										adSlotIndex={mobileAdPositions.indexOf(
+											index,
+										)}
+									/>
+								)}
+								{index === merchHighAdPosition && (
+									<MerchHighAdSlot
+										renderAds={renderAds}
+										collectionCount={
+											filteredCollections.length
+										}
+										isPaidContent={
+											!!front.pressedPage.frontProperties
+												.isPaidContent
+										}
+									/>
+								)}
 							</div>
 						);
 					}
