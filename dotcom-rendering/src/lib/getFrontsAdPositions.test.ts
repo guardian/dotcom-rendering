@@ -2,14 +2,15 @@ import {
 	brandedTestCollections,
 	testCollectionsUk,
 	testCollectionsUs,
+	testCollectionsWithSecondaryLevel,
 } from '../../fixtures/manual/frontCollections';
 import {
-	type AdCandidate,
+	type AdCandidateMobile,
 	getFrontsBannerAdPositions,
 	getMobileAdPositions,
 } from './getFrontsAdPositions';
 
-const defaultTestCollections: AdCandidate[] = [...Array<number>(12)].map(
+const defaultTestCollections: AdCandidateMobile[] = [...Array<number>(12)].map(
 	() => ({ collectionType: 'fixed/large/slow-XIV' }),
 );
 
@@ -18,7 +19,7 @@ describe('Mobile Ads', () => {
 		const testCollections = [
 			{ collectionType: 'fixed/thrasher' },
 			...defaultTestCollections,
-		] satisfies AdCandidate[];
+		] satisfies AdCandidateMobile[];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
@@ -29,7 +30,7 @@ describe('Mobile Ads', () => {
 		const testCollections = [
 			...defaultTestCollections.slice(0, 3),
 			{ collectionType: 'news/most-popular' },
-		] satisfies AdCandidate[];
+		] satisfies AdCandidateMobile[];
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 		expect(mobileAdPositions).not.toContain(3);
 	});
@@ -47,7 +48,7 @@ describe('Mobile Ads', () => {
 
 	// We used https://www.theguardian.com/uk/commentisfree as a blueprint
 	it('Non-network front, with more than 4 collections, without thrashers', () => {
-		const testCollections: AdCandidate[] = [
+		const testCollections: AdCandidateMobile[] = [
 			{ collectionType: 'fixed/large/slow-XIV' }, // Ad position (0)
 			{ collectionType: 'fixed/medium/slow-VI' },
 			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (2)
@@ -70,7 +71,7 @@ describe('Mobile Ads', () => {
 
 	// We used https://www.theguardian.com/uk as a blueprint
 	it('UK Network Front, with more than 4 collections, with thrashers at various places', () => {
-		const testCollections: AdCandidate[] = [
+		const testCollections: AdCandidateMobile[] = [
 			{ collectionType: 'dynamic/fast' }, // Ad position (0)
 			{ collectionType: 'fixed/small/slow-IV' },
 			{ collectionType: 'dynamic/slow' }, // Ad position (2)
@@ -104,7 +105,7 @@ describe('Mobile Ads', () => {
 
 	// We used https://www.theguardian.com/international as a blueprint
 	it('International Network Front, with more than 4 collections, with thrashers at various places', () => {
-		const testCollections: AdCandidate[] = [
+		const testCollections: AdCandidateMobile[] = [
 			{ collectionType: 'dynamic/fast' }, // Ad position (0)
 			{ collectionType: 'fixed/small/slow-IV' },
 			{ collectionType: 'dynamic/slow' }, // Ad position (2)
@@ -134,7 +135,7 @@ describe('Mobile Ads', () => {
 
 	// We used https://www.theguardian.com/us as a blueprint
 	it('US Network Front, with more than 4 collections, with thrashers at various places', () => {
-		const testCollections: AdCandidate[] = [
+		const testCollections: AdCandidateMobile[] = [
 			{ collectionType: 'dynamic/fast' }, // Ad position (0)
 			{ collectionType: 'fixed/small/slow-IV' },
 			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (2)
@@ -165,7 +166,7 @@ describe('Mobile Ads', () => {
 
 	// We used https://www.theguardian.com/uk/lifeandstyle as a blueprint
 	it('Lifeandstyle front, with more than 4 collections, with thrashers at various places', () => {
-		const testCollections: AdCandidate[] = [
+		const testCollections: AdCandidateMobile[] = [
 			{ collectionType: 'dynamic/slow' }, // Ad position (0)
 			{ collectionType: 'fixed/medium/slow-VI' }, // Ignored - before thrasher
 			{ collectionType: 'fixed/thrasher' },
@@ -191,7 +192,7 @@ describe('Mobile Ads', () => {
 
 	// We used https://www.theguardian.com/tone/recipes as a blueprint
 	it('Recipes front, with more than 4 collections, with thrasher at the first position', () => {
-		const testCollections: AdCandidate[] = [
+		const testCollections: AdCandidateMobile[] = [
 			{ collectionType: 'fixed/thrasher' }, // Ignored - is first container and thrasher
 			{ collectionType: 'fixed/medium/slow-VI' }, // Ad position (1)
 			{ collectionType: 'fixed/small/slow-V-third' },
@@ -214,7 +215,7 @@ describe('Mobile Ads', () => {
 	});
 
 	it('Europe Network Front, with beta containers and more than 4 collections, with thrashers in various places', () => {
-		const testCollections: AdCandidate[] = [
+		const testCollections: AdCandidateMobile[] = [
 			{ collectionType: 'flexible/general', containerLevel: 'Primary' }, // Ad position (0)
 			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ignored - is before secondary container
 			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ignored - is before secondary container
@@ -281,6 +282,15 @@ describe('Standard fronts fronts-banner ad slots', () => {
 		const adPositions = getFrontsBannerAdPositions(
 			brandedTestCollections,
 			'uk',
+		);
+
+		expect(adPositions).toEqual([]);
+	});
+
+	it('does NOT insert ads above secondary level containers', () => {
+		const adPositions = getFrontsBannerAdPositions(
+			testCollectionsWithSecondaryLevel,
+			'europe',
 		);
 
 		expect(adPositions).toEqual([]);

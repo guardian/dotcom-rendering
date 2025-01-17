@@ -129,22 +129,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		: [];
 
 	const desktopAdPositions = renderAds
-		? getFrontsBannerAdPositions(
-				filteredCollections.map(
-					({
-						collectionType,
-						containerPalette,
-						displayName,
-						grouped,
-					}) => ({
-						collectionType,
-						containerPalette,
-						displayName,
-						grouped,
-					}),
-				),
-				pageId,
-		  )
+		? getFrontsBannerAdPositions(filteredCollections, pageId)
 		: [];
 
 	const showMostPopular =
