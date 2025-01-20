@@ -715,7 +715,7 @@ export const Card = ({
 							cardHasImage={!!image}
 						/>
 					) : null}
-					{!!mainMedia && mainMedia.type !== 'Video' && !showPill && (
+					{!showPill && !!mainMedia && mainMedia.type !== 'Video' && (
 						<MediaMeta
 							mediaType={mainMedia.type}
 							hasKicker={!!kickerText}
@@ -1014,9 +1014,9 @@ export const Card = ({
 											cardHasImage={!!image}
 										/>
 									) : null}
-									{!!mainMedia &&
-										mainMedia.type !== 'Video' &&
-										!showPill && (
+									{!showPill &&
+										!!mainMedia &&
+										mainMedia.type !== 'Video' && (
 											<MediaMeta
 												mediaType={mainMedia.type}
 												hasKicker={!!kickerText}
