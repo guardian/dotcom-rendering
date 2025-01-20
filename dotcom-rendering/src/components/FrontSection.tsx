@@ -626,7 +626,10 @@ export const FrontSection = ({
 				{(isToggleable || hasNavigationButtons) && (
 					<div css={sectionControls}>
 						{isToggleable && (
-							<ShowHideButton sectionId={sectionId} />
+							<ShowHideButton
+								sectionId={sectionId}
+								betaContainer={!!containerLevel}
+							/>
 						)}
 						{hasNavigationButtons && (
 							<div

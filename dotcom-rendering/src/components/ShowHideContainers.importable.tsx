@@ -81,17 +81,14 @@ export const ShowHideContainers = () => {
 
 		for (const e of allShowHideButtons) {
 			const sectionId = e.getAttribute('data-show-hide-button');
+			const isBetaContainer = e.getAttribute('data-beta-container');
 			if (!sectionId) continue;
 
-			if (isSignedIn === false) {
+			if (isSignedIn === false && isBetaContainer === 'true') {
 				// Only signed in users can show/hide containers so we visually hide these buttons.
 				e.classList.add('hidden');
-			} else if (isSignedIn === true) {
+			} else if (isSignedIn === true || isBetaContainer === 'false') {
 				e.classList.remove('hidden');
-
-				const sectionId = e.getAttribute('data-show-hide-button');
-				if (!sectionId) continue;
-
 				e.onclick = () => toggleContainer(sectionId, e);
 
 				if (containerStates[sectionId] === 'closed') {

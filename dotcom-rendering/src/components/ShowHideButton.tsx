@@ -5,6 +5,7 @@ import { palette } from '../palette';
 
 type Props = {
 	sectionId: string;
+	betaContainer: boolean;
 };
 
 const showHideButtonCss = css`
@@ -22,13 +23,14 @@ const showHideButtonCss = css`
  * This component creates the styled button for showing & hiding a container,
  * The functionality for this is implemented in a single island 'ShownHideContainers.importable'
  **/
-export const ShowHideButton = ({ sectionId }: Props) => {
+export const ShowHideButton = ({ sectionId, betaContainer }: Props) => {
 	return (
 		<ButtonLink
 			priority="secondary"
 			data-link-name="Hide"
 			cssOverrides={showHideButtonCss}
 			data-show-hide-button={sectionId}
+			data-beta-container={betaContainer}
 			aria-controls={sectionId}
 			aria-expanded={true}
 			theme={{
