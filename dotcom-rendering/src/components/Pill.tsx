@@ -17,6 +17,8 @@ interface Props {
 	icon?: ReactElement;
 	/** Optional icon position (icon is on the left by default) */
 	iconSide?: IconSide;
+	/** Optional icon size */
+	iconSize?: 'xsmall' | 'small' | 'medium' | 'large';
 }
 
 const pillStyles = css`
@@ -44,15 +46,20 @@ const pillPrefixStyles = css`
 	border-right: 1px solid ${palette('--pill-divider')};
 `;
 
-export const Pill = ({ content, prefix, icon, iconSide = 'left' }: Props) => {
+export const Pill = ({
+	content,
+	prefix,
+	icon,
+	iconSide = 'left',
+	iconSize = 'xsmall',
+}: Props) => {
 	const Icon = () =>
 		icon
 			? cloneElement(icon, {
-					size: 'xsmall',
+					size: iconSize,
 					theme: { fill: 'currentColor' },
 			  })
 			: null;
-
 	return (
 		<div css={pillStyles}>
 			{iconSide === 'left' && <Icon />}
