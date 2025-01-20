@@ -297,10 +297,10 @@ const getFrontsBannerAdPositions = (
 			const isMaxAdsReached = adPositions.length >= MAX_FRONTS_BANNER_ADS;
 
 			if (isFinalCollection || isMaxAdsReached) {
+				// Stop inserting adverts all together
 				return accumulator;
 			}
 
-			const collectionHeight = getCollectionHeight(collection);
 			const prevCollection = collections[index - 1];
 			const isFirstCollection = isUndefined(prevCollection);
 
@@ -313,19 +313,19 @@ const getFrontsBannerAdPositions = (
 					prevCollection,
 				)
 			) {
-				// Inserting an ad, resetting the height since ad
+				// Inserting advert, resetting the height since ad
+				// to the height of the current collection
 				return {
-					...accumulator,
 					adPositions: [...adPositions, index],
-					heightSinceAd: collectionHeight,
+					heightSinceAd: getCollectionHeight(collection),
 				};
 			} else {
-				// Not inserting ad, moving onto next container and
-				// adding the height onto the height since ad
+				// Not inserting advert, moving onto the next container
+				// and increasing the height since ad
 				return {
-					...accumulator,
-					heightSinceAd: (accumulator.heightSinceAd +=
-						collectionHeight),
+					adPositions,
+					heightSinceAd:
+						heightSinceAd + getCollectionHeight(collection),
 				};
 			}
 		},
