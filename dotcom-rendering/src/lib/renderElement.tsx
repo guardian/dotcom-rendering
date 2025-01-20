@@ -9,7 +9,7 @@ import { CartoonComponent } from '../components/CartoonComponent';
 import { ChartAtom } from '../components/ChartAtom.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
-import { Crossword } from '../components/Crossword.importable';
+import { CrosswordComponent } from '../components/CrosswordComponent.importable';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
 import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper';
@@ -864,7 +864,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.CrosswordElement':
 			return (
 				<Island priority="critical" defer={{ until: 'visible' }}>
-					<Crossword data={element.crossword} />
+					<CrosswordComponent data={element.crossword} />
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
