@@ -1,6 +1,6 @@
 import { isObject, isString, storage } from '@guardian/libs';
 import { useEffect } from 'react';
-import { useIsSignedIn } from 'src/lib/useAuthStatus';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 
 type ContainerStates = { [id: string]: string };
 
