@@ -263,6 +263,8 @@ export const ScrollableHighlights = ({ trails }: Props) => {
 								showQuotedHeadline={trail.showQuotedHeadline}
 								mainMedia={trail.mainMedia}
 								starRating={trail.starRating}
+								galleryCount={trail.galleryCount}
+								audioDuration={trail.audioDuration}
 							/>
 						</li>
 					);
