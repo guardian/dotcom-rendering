@@ -2,8 +2,14 @@ import { isObject, isString, storage } from '@guardian/libs';
 import { useEffect } from 'react';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 
+/**
+ * A mapping of container IDs to their states ('opened' or 'closed').
+ */
 type ContainerStates = { [id: string]: string };
 
+/**
+ * Type guard to check if an item is a valid `ContainerStates` object.
+ */
 const isContainerStates = (item: unknown): item is ContainerStates => {
 	if (!isObject(item)) return false;
 	if (!Object.keys(item).every(isString)) return false;
@@ -19,6 +25,18 @@ const getContainerStates = (): ContainerStates => {
 	return item;
 };
 
+/**
+ * A component that manages the show/hide functionality of containers
+ * based on user interaction and signed-in status.
+ *
+ * This component:
+ * - Reads container states from local storage.
+ * - Toggles the visibility of containers when buttons are clicked.
+ * - Updates container states in local storage.
+ * - Hides or shows buttons based on the signed-in status of the user.
+ *
+ * @returns {JSX.Element} - A React fragment (renders nothing to the DOM directly).
+ */
 export const ShowHideContainers = () => {
 	const isSignedIn = useIsSignedIn();
 	useEffect(() => {
@@ -65,22 +83,19 @@ export const ShowHideContainers = () => {
 			const sectionId = e.getAttribute('data-show-hide-button');
 			if (!sectionId) continue;
 
-			for (const e of allShowHideButtons) {
-				if (isSignedIn === false) {
-					// hide all show hide buttons
-					e.classList.add('hidden');
-				} else if (isSignedIn === true) {
-					// unhide buttons then....
-					e.classList.remove('hidden');
+			if (isSignedIn === false) {
+				// Only signed in users can show/hide containers so we visually hide these buttons.
+				e.classList.add('hidden');
+			} else if (isSignedIn === true) {
+				e.classList.remove('hidden');
 
-					const sectionId = e.getAttribute('data-show-hide-button');
-					if (!sectionId) continue;
+				const sectionId = e.getAttribute('data-show-hide-button');
+				if (!sectionId) continue;
 
-					e.onclick = () => toggleContainer(sectionId, e);
+				e.onclick = () => toggleContainer(sectionId, e);
 
-					if (containerStates[sectionId] === 'closed') {
-						toggleContainer(sectionId, e);
-					}
+				if (containerStates[sectionId] === 'closed') {
+					toggleContainer(sectionId, e);
 				}
 			}
 		}
