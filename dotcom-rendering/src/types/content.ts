@@ -1,3 +1,4 @@
+import { type CrosswordProps } from '@guardian/react-crossword-next';
 import type { ArticleFormat } from '../lib/articleFormat';
 
 export type StarRating = 0 | 1 | 2 | 3 | 4 | 5;
@@ -45,6 +46,7 @@ export interface AudioAtomBlockElement {
 
 interface AudioBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AudioBlockElement';
+	id?: string;
 	elementId: string;
 	assets: AudioAsset[];
 }
@@ -755,6 +757,12 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 		| WitnessTypeDataVideo
 		| WitnessTypeDataText;
 }
+
+export interface CrosswordElement {
+	_type: 'model.dotcomrendering.pageElements.CrosswordElement';
+	crossword: CrosswordProps['data'];
+}
+
 export type FEElement =
 	| AdPlaceholderBlockElement
 	| AudioAtomBlockElement
@@ -815,7 +823,8 @@ export type FEElement =
 	| VideoYoutubeBlockElement
 	| VineBlockElement
 	| YoutubeBlockElement
-	| WitnessTypeBlockElement;
+	| WitnessTypeBlockElement
+	| CrosswordElement;
 
 // -------------------------------------
 // Misc

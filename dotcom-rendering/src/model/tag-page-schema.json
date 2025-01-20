@@ -138,6 +138,7 @@
                                                 ]
                                             },
                                             "format": {
+                                                "description": "FEFormat is the stringified version of Format passed through from Frontend.\nIt gets converted to the `@guardian/libs` format on platform",
                                                 "type": "object",
                                                 "properties": {
                                                     "design": {
@@ -555,6 +556,9 @@
                             },
                             "galleryCount": {
                                 "type": "number"
+                            },
+                            "audioDuration": {
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -614,6 +618,7 @@
                         ]
                     },
                     "format": {
+                        "description": "FEFormat is the stringified version of Format passed through from Frontend.\nIt gets converted to the `@guardian/libs` format on platform",
                         "type": "object",
                         "properties": {
                             "design": {
@@ -702,6 +707,7 @@
                                     ]
                                 },
                                 "format": {
+                                    "description": "FEFormat is the stringified version of Format passed through from Frontend.\nIt gets converted to the `@guardian/libs` format on platform",
                                     "type": "object",
                                     "properties": {
                                         "design": {
@@ -1131,9 +1137,6 @@
                 "discussionD2Uid": {
                     "type": "string"
                 },
-                "weatherapiurl": {
-                    "type": "string"
-                },
                 "googleSearchUrl": {
                     "type": "string"
                 },
@@ -1236,7 +1239,6 @@
                 "supportUrl",
                 "switches",
                 "userAttributesApiUrl",
-                "weatherapiurl",
                 "webTitle"
             ]
         },
@@ -1278,11 +1280,13 @@
     ],
     "definitions": {
         "FEDesign": {
+            "description": "FEDesign is what frontend gives (originating in the capi scala client) us on the Format field\nhttps://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala",
             "enum": [
                 "AnalysisDesign",
                 "ArticleDesign",
                 "AudioDesign",
                 "CommentDesign",
+                "CrosswordDesign",
                 "DeadBlogDesign",
                 "EditorialDesign",
                 "ExplainerDesign",
@@ -1321,6 +1325,7 @@
             "type": "string"
         },
         "FEDisplay": {
+            "description": "FEDisplay is the display information passed through from frontend (originating in the capi scala client) and dictates the display style of the content e.g. Immersive\nhttps://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala",
             "enum": [
                 "ImmersiveDisplay",
                 "NumberedListDisplay",
@@ -1708,6 +1713,7 @@
             ]
         },
         "FELinkType": {
+            "description": "Data types for the API request bodies from clients that require transformation before internal use.\nWhere data types are coming from Frontend we try to use the 'FE' prefix.\nPrior to this we used 'CAPI' as a prefix which wasn't entirely accurate, and some data structures never received the prefix, meaning some are still missing it.",
             "type": "object",
             "properties": {
                 "url": {

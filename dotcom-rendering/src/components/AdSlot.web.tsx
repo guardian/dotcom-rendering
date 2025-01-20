@@ -88,14 +88,6 @@ const outOfPageStyles = css`
 	height: 0;
 `;
 
-const darkLabelStyles = css`
-	.ad-slot[data-label-show='true']:not(.ad-slot--interscroller)::before {
-		background-color: transparent;
-		border-top-color: ${palette.neutral[20]};
-		color: ${palette.neutral[86]};
-	}
-`;
-
 const topAboveNavContainerStyles = css`
 	padding-bottom: 18px;
 	position: relative;
@@ -151,6 +143,18 @@ const merchandisingAdStyles = css`
 const rightAdStyles = css`
 	background-color: ${schemedPalette('--ad-background-article-inner')};
 	max-width: 300px;
+`;
+
+/*** The right slot label should be dark on audio and video articles even
+ * in light mode. Other slots will stay the same as the right ad slot is
+ * the only one to overlay the dark section of Audio/Video pages.
+ */
+const rightAdLabelStyles = css`
+	.ad-slot--right[data-label-show='true']::before {
+		background-color: ${schemedPalette('--ad-background-article-inner')};
+		border-top-color: ${schemedPalette('--ad-border-article-inner')};
+		color: ${schemedPalette('--ad-labels-text-article-inner')};
+	}
 `;
 
 const liveblogInlineContainerStyles = css`
@@ -373,7 +377,6 @@ export const AdSlot = ({
 	index,
 	hasPageskin = false,
 	shouldHideReaderRevenue = false,
-	colourScheme = 'light',
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -394,6 +397,7 @@ export const AdSlot = ({
 								].join(' ')}
 								data-link-name="ad slot right"
 								data-name="right"
+								data-testid="slot"
 								aria-hidden="true"
 							/>
 						</div>
@@ -419,6 +423,7 @@ export const AdSlot = ({
 								].join(' ')}
 								data-link-name="ad slot right"
 								data-name="right"
+								data-testid="slot"
 								aria-hidden="true"
 							/>
 						</div>
@@ -451,7 +456,7 @@ export const AdSlot = ({
 										max-height: 100%;
 									`,
 									labelStyles,
-									colourScheme === 'dark' && darkLabelStyles,
+									rightAdLabelStyles,
 								]}
 							>
 								<div
@@ -477,6 +482,7 @@ export const AdSlot = ({
 									]}
 									data-link-name="ad slot right"
 									data-name="right"
+									data-testid="slot"
 									aria-hidden="true"
 								/>
 							</div>
@@ -501,6 +507,7 @@ export const AdSlot = ({
 						].join(' ')}
 						data-link-name="ad slot comments"
 						data-name="comments"
+						data-testid="slot"
 						aria-hidden="true"
 					/>
 				</div>
@@ -523,6 +530,7 @@ export const AdSlot = ({
 						].join(' ')}
 						data-link-name="ad slot top-above-nav"
 						data-name="top-above-nav"
+						data-testid="slot"
 						aria-hidden="true"
 					></div>
 				</div>
@@ -547,6 +555,7 @@ export const AdSlot = ({
 							css={[mostPopAdStyles]}
 							data-link-name="ad slot mostpop"
 							data-name="mostpop"
+							data-testid="slot"
 							aria-hidden="true"
 						/>
 					</div>
@@ -570,6 +579,7 @@ export const AdSlot = ({
 						data-link-name="ad slot merchandising-high"
 						data-name="merchandising-high"
 						data-refresh="false"
+						data-testid="slot"
 						aria-hidden="true"
 					/>
 				</div>
@@ -591,6 +601,7 @@ export const AdSlot = ({
 						css={[merchandisingAdStyles]}
 						data-link-name="ad slot merchandising"
 						data-name="merchandising"
+						data-testid="slot"
 						aria-hidden="true"
 					/>
 				</div>
@@ -622,6 +633,7 @@ export const AdSlot = ({
 							css={[frontsBannerAdStyles]}
 							data-link-name={`ad slot ${advertId}`}
 							data-name={`${advertId}`}
+							data-testid="slot"
 							aria-hidden="true"
 						/>
 					</div>
@@ -643,6 +655,7 @@ export const AdSlot = ({
 					data-label="false"
 					data-refresh="false"
 					data-out-of-page="true"
+					data-testid="slot"
 					aria-hidden="true"
 				/>
 			);
@@ -714,6 +727,7 @@ export const AdSlot = ({
 						css={[liveBlogTopAdStyles]}
 						data-link-name="ad slot liveblog-top"
 						data-name="liveblog-top"
+						data-testid="slot"
 						aria-hidden="true"
 					/>
 				</div>
@@ -737,6 +751,7 @@ export const AdSlot = ({
 						css={[mobileFrontAdStyles]}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
+						data-testid="slot"
 						aria-hidden="true"
 					/>
 				</div>
@@ -760,6 +775,7 @@ export const AdSlot = ({
 						data-refresh="false"
 						data-out-of-page="true"
 						data-wide="1,1"
+						data-testid="slot"
 						aria-hidden="true"
 					/>
 				</div>
@@ -779,6 +795,7 @@ export const AdSlot = ({
 						css={[articleEndAdStyles]}
 						data-link-name="ad slot article-end"
 						data-name="article-end"
+						data-testid="slot"
 						aria-hidden="true"
 					/>
 				</div>

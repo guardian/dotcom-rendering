@@ -1,3 +1,4 @@
+import { ArticleDesign } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
 import { palette } from '../palette';
 import type { BoostLevel } from '../types/content';
@@ -79,6 +80,7 @@ type BoostedSplashProperties = {
 	supportingContentAlignment: Alignment;
 	liveUpdatesAlignment: Alignment;
 	trailTextSize: TrailTextSize;
+	avatarUrl?: string;
 };
 
 /**
@@ -88,6 +90,7 @@ const decideSplashCardProperties = (
 	boostLevel: BoostLevel,
 	supportingContentLength: number,
 	mediaCard: boolean,
+	avatarUrl?: string,
 ): BoostedSplashProperties => {
 	switch (boostLevel) {
 		// boostedfont sizing
@@ -116,7 +119,7 @@ const decideSplashCardProperties = (
 				},
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
-				imageSize: 'jumbo',
+				imageSize: avatarUrl ? 'large' : 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
@@ -185,6 +188,7 @@ export const SplashCardLayout = ({
 		card.boostLevel ?? 'default',
 		card.supportingContent?.length ?? 0,
 		isMediaCard(card.format),
+		card.avatarUrl,
 	);
 
 	return (
@@ -224,6 +228,7 @@ export const SplashCardLayout = ({
 					showTopBarMobile={true}
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
+					showKickerImage={card.format.design === ArticleDesign.Audio}
 				/>
 			</LI>
 		</UL>
@@ -242,6 +247,7 @@ type BoostedCardProperties = {
  */
 const decideCardProperties = (
 	boostLevel: Omit<BoostLevel, 'default' | 'gigaboost'> = 'boost',
+	avatarUrl?: string,
 ): BoostedCardProperties => {
 	switch (boostLevel) {
 		case 'megaboost':
@@ -263,7 +269,7 @@ const decideCardProperties = (
 					tablet: 'small',
 					mobile: 'small',
 				},
-				imageSize: 'medium',
+				imageSize: avatarUrl ? 'large' : 'medium',
 				liveUpdatesPosition: 'inner',
 				supportingContentAlignment: 'horizontal',
 			};
@@ -297,7 +303,7 @@ export const BoostedCardLayout = ({
 		imageSize,
 		supportingContentAlignment,
 		liveUpdatesPosition,
-	} = decideCardProperties(card.boostLevel);
+	} = decideCardProperties(card.boostLevel, card.avatarUrl);
 	return (
 		<UL
 			showTopBar={!isFirstRow}
@@ -336,6 +342,7 @@ export const BoostedCardLayout = ({
 					showTopBarMobile={true}
 					liveUpdatesPosition={liveUpdatesPosition}
 					canPlayInline={true}
+					showKickerImage={card.format.design === ArticleDesign.Audio}
 				/>
 			</LI>
 		</UL>
@@ -403,7 +410,11 @@ export const StandardCardLayout = ({
 							)}
 							supportingContentAlignment="vertical"
 							supportingContentPosition="outer"
-							imageSize={'medium'}
+							imageSize={
+								card.format.design === ArticleDesign.Audio
+									? 'small'
+									: 'medium'
+							}
 							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}
@@ -438,7 +449,7 @@ export const FlexibleGeneral = ({
 	aspectRatio,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1);
-	const cards = [...groupedTrails.standard].slice(0, 8);
+	const cards = [...groupedTrails.standard].slice(0, 19);
 	const groupedCards = decideCardPositions(cards);
 
 	return (

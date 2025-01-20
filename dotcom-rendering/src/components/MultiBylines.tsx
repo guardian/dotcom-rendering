@@ -31,6 +31,7 @@ interface MultiBylineProps {
 }
 
 const separatorStyles = css`
+	border: none;
 	width: 140px;
 	margin: 8px 0 2px 0;
 	border-top: 1px solid ${palette('--article-border')};
