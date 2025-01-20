@@ -13,7 +13,7 @@ const showHideButtonCss = css`
 	position: relative;
 	align-items: bottom;
 	text-decoration: none;
-	.hidden & {
+	&.hidden {
 		display: none;
 	}
 `;
