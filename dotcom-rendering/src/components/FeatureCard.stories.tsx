@@ -118,6 +118,19 @@ export const Opinion: Story = {
 	},
 };
 
+export const Gallery: Story = {
+	args: {
+		image: {
+			src: 'https://media.guim.co.uk/7b500cfe9afe4e211ad771c86e66297c9c22993b/0_61_4801_2880/master/4801.jpg',
+			altText: 'alt text',
+		},
+		mainMedia: {
+			type: 'Gallery',
+		},
+		galleryCount: 12,
+	},
+};
+
 export const WithTrailText: Story = {
 	args: {
 		kickerText: undefined,

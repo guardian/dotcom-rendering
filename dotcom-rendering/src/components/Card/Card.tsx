@@ -1004,7 +1004,7 @@ export const Card = ({
 										kickerImage={
 											showKickerImage &&
 											media?.type === 'podcast'
-												? media?.podcastImage
+												? media.podcastImage
 												: undefined
 										}
 									/>
