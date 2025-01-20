@@ -1,5 +1,6 @@
 import { isObject, isString, storage } from '@guardian/libs';
 import { useEffect } from 'react';
+import { useIsSignedIn } from 'src/lib/useAuthStatus';
 
 type ContainerStates = { [id: string]: string };
 
@@ -19,6 +20,7 @@ const getContainerStates = (): ContainerStates => {
 };
 
 export const ShowHideContainers = () => {
+	const isSignedIn = useIsSignedIn();
 	useEffect(() => {
 		const containerStates = getContainerStates();
 
@@ -63,13 +65,26 @@ export const ShowHideContainers = () => {
 			const sectionId = e.getAttribute('data-show-hide-button');
 			if (!sectionId) continue;
 
-			e.onclick = () => toggleContainer(sectionId, e);
+			for (const e of allShowHideButtons) {
+				if (isSignedIn === false) {
+					// hide all show hide buttons
+					e.classList.add('hidden');
+				} else if (isSignedIn === true) {
+					// unhide buttons then....
+					e.classList.remove('hidden');
 
-			if (containerStates[sectionId] === 'closed') {
-				toggleContainer(sectionId, e);
+					const sectionId = e.getAttribute('data-show-hide-button');
+					if (!sectionId) continue;
+
+					e.onclick = () => toggleContainer(sectionId, e);
+
+					if (containerStates[sectionId] === 'closed') {
+						toggleContainer(sectionId, e);
+					}
+				}
 			}
 		}
-	}, []);
+	}, [isSignedIn]);
 
 	return <></>;
 };
