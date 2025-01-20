@@ -13,14 +13,14 @@ type UserBenefitsResponse = {
 export const syncDataFromUserBenefitsApi = async (
 	signedInAuthStatus: SignedInWithOkta | SignedInWithCookies,
 ): Promise<UserBenefits> => {
-	const response = await fetchJson(
-		window.guardian.config.page.userBenefitsApiUrl ??
-			'/USER_BENEFIT_API_NOT_FOUND',
-		{
-			mode: 'cors',
-			...getOptionsHeadersWithOkta(signedInAuthStatus),
-		},
-	);
+	const url = window.guardian.config.page.userBenefitsApiUrl;
+	if (!url) {
+		throw new Error('userBenefitsApiUrl is not defined');
+	}
+	const response = await fetchJson(url, {
+		mode: 'cors',
+		...getOptionsHeadersWithOkta(signedInAuthStatus),
+	});
 	if (!validateResponse(response)) {
 		throw new Error('invalid response');
 	}

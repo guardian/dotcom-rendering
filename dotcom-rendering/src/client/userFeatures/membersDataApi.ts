@@ -87,16 +87,14 @@ export const syncDataFromMembersDataApi: (
 ) => Promise<UserBenefits> = async (
 	signedInAuthStatus: SignedInWithOkta | SignedInWithCookies,
 ) => {
-	const response = await fetchJson(
-		`${
-			window.guardian.config.page.userAttributesApiUrl ??
-			'/USER_ATTRIBUTE_API_NOT_FOUND'
-		}/me`,
-		{
-			mode: 'cors',
-			...getOptionsHeadersWithOkta(signedInAuthStatus),
-		},
-	);
+	const url = window.guardian.config.page.userAttributesApiUrl;
+	if (!url) {
+		throw new Error('userAttributesApiUrl is not defined');
+	}
+	const response = await fetchJson(url, {
+		mode: 'cors',
+		...getOptionsHeadersWithOkta(signedInAuthStatus),
+	});
 	if (!validateResponse(response)) {
 		throw new Error('invalid response');
 	}
