@@ -449,7 +449,7 @@ export const FlexibleGeneral = ({
 	aspectRatio,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1);
-	const cards = [...groupedTrails.standard].slice(0, 8);
+	const cards = [...groupedTrails.standard].slice(0, 19);
 	const groupedCards = decideCardPositions(cards);
 
 	return (

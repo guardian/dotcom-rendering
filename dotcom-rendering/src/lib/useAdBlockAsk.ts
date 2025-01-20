@@ -1,7 +1,7 @@
 import { EventTimer } from '@guardian/commercial';
 import { getConsentFor, onConsentChange } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import { adFreeDataIsPresent } from '../client/userFeatures/user-features-lib';
+import { adFreeDataIsPresent } from '../client/userFeatures/cookies/adFree';
 import { useAB } from './useAB';
 import { useDetectAdBlock } from './useDetectAdBlock';
 

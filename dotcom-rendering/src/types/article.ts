@@ -55,6 +55,11 @@ export const enhanceArticleType = (
 		tags: data.tags,
 	});
 
+	const crosswordBlock = buildCrosswordBlock(data);
+	const additionalBlocks = crosswordBlock ? [crosswordBlock] : [];
+
+	const blocks = [...enhancedBlocks, ...additionalBlocks];
+
 	const mainMediaElements = enhanceMainMedia(
 		format,
 		imagesForLightbox,
@@ -67,7 +72,7 @@ export const enhanceArticleType = (
 		frontendData: {
 			...data,
 			mainMediaElements,
-			blocks: enhancedBlocks,
+			blocks,
 			pinnedPost: enhancePinnedPost(
 				format,
 				renderingTarget,
