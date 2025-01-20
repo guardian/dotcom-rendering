@@ -3,9 +3,9 @@ import { Standard as standardArticle } from '../../fixtures/generated/fe-article
 import { disableCMP } from '../lib/cmp';
 import { addCookie } from '../lib/cookies';
 import { loadPageNoOkta } from '../lib/load-page';
+import { stubResponse } from '../lib/network';
 
-// skipped for now because we need to handle sign in with okta, not just cookies
-test.skip('User cookies tests', () => {
+test.describe('User cookies tests', () => {
 	const userAttributesApiUrl =
 		'https://members-data-api.theguardian.com/user-attributes';
 	const userBenefitsApiUrl =
@@ -22,7 +22,12 @@ test.skip('User cookies tests', () => {
 
 		await disableCMP(context);
 
-		const userBenefitsApiPromise = page.waitForRequest(userBenefitsApiUrl);
+		const userBenefitsApiPromise = stubResponse(page, userBenefitsApiUrl, {
+			status: 200,
+			body: JSON.stringify({
+				benefits: ['adFree', 'hideSupportMessaging'],
+			}),
+		});
 
 		await loadPageNoOkta(page, standardArticle, {
 			// user-features expects this config to be present
@@ -67,7 +72,12 @@ test.skip('User cookies tests', () => {
 
 		await disableCMP(context);
 
-		const userBenefitsApiPromise = page.waitForRequest(userBenefitsApiUrl);
+		const userBenefitsApiPromise = stubResponse(page, userBenefitsApiUrl, {
+			status: 200,
+			body: JSON.stringify({
+				benefits: ['adFree', 'hideSupportMessaging'],
+			}),
+		});
 
 		await loadPageNoOkta(page, standardArticle, {
 			// user-features expects this config to be present
