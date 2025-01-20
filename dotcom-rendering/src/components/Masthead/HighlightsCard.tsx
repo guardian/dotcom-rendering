@@ -8,7 +8,7 @@ import {
 } from '@guardian/source/foundations';
 import { SvgCamera } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
-import { isMediaCard } from '../../lib/cardHelpers';
+import { isMediaCard as isMedia } from '../../lib/cardHelpers';
 import { palette } from '../../palette';
 import type { StarRating as Rating } from '../../types/content';
 import type { DCRFrontImage } from '../../types/front';
@@ -79,6 +79,20 @@ const gridContainer = css`
 		grid-template-areas:
 			'headline 	image'
 			'media-icon image';
+	}
+`;
+
+const mediaGrid = css`
+	grid-template-areas:
+		'image'
+		'headline'
+		'media-icon';
+
+	${from.desktop} {
+		width: 300px;
+		grid-template-areas:
+			'image headline'
+			'image media-icon';
 	}
 `;
 
@@ -175,7 +189,7 @@ export const HighlightsCard = ({
 	galleryCount,
 	audioDuration,
 }: HighlightsCardProps) => {
-	const showMediaIcon = isMediaCard(format);
+	const isMediaCard = isMedia(format);
 	const MediaPill = () => (
 		<div css={mediaIcon}>
 			{mainMedia?.type === 'Video' && (
@@ -205,7 +219,7 @@ export const HighlightsCard = ({
 	);
 	return (
 		<FormatBoundary format={format}>
-			<div css={[gridContainer, hoverStyles]}>
+			<div css={[gridContainer, hoverStyles, isMediaCard && mediaGrid]}>
 				<CardLink
 					linkTo={linkTo}
 					headlineText={headlineText}
@@ -241,7 +255,7 @@ export const HighlightsCard = ({
 					</div>
 				) : null}
 
-				{!!mainMedia && showMediaIcon && MediaPill()}
+				{!!mainMedia && isMediaCard && MediaPill()}
 
 				<div css={imageArea}>
 					{(avatarUrl && (
