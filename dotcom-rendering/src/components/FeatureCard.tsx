@@ -375,11 +375,6 @@ export const FeatureCard = ({
 											roundedCorners={false}
 											aspectRatio={aspectRatio}
 										/>
-										{/**
-										 * If the card isn't playable, we need to show a play icon.
-										 * Otherwise, this is handled by the YoutubeAtom.
-										 * TODO: Determine if these cards should be playable
-										 */}
 										{isVideoMainMedia &&
 											mainMedia.duration > 0 && (
 												<MediaDuration
