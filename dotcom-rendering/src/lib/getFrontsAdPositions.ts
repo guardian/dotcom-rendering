@@ -20,15 +20,6 @@ export type AdCandidateMobile = Pick<
 	'collectionType' | 'containerLevel'
 >;
 
-type AdCandidateDesktop = Pick<
-	DCRCollectionType,
-	| 'collectionType'
-	| 'containerPalette'
-	| 'containerLevel'
-	| 'grouped'
-	| 'displayName'
->;
-
 /** The Merch high slot is directly before the most viewed container  */
 const getMerchHighPosition = (collections: AdCandidateMobile[]): number => {
 	const mostViewedPosition = collections.findIndex(isMostViewedContainer);
@@ -139,7 +130,7 @@ const getMobileAdPositions = (collections: AdCandidateMobile[]): number[] => {
  * A result of 6 indicates a container is at least double the height of a typical desktop viewport.
  */
 const getCollectionHeight = (
-	collction: AdCandidateDesktop,
+	collction: DCRCollectionType,
 ): 0.5 | 1 | 1.5 | 2 | 2.5 | 3 | 6 => {
 	const { collectionType, containerPalette, grouped } = collction;
 
@@ -263,8 +254,8 @@ const getCollectionHeight = (
 const canInsertDesktopAd = (
 	heightSinceAd: number,
 	pageId: string,
-	collection: AdCandidateDesktop,
-	previousCollection: AdCandidateDesktop,
+	collection: DCRCollectionType,
+	previousCollection: DCRCollectionType,
 ) => {
 	if (
 		collection.containerPalette === 'Branded' ||
@@ -298,66 +289,48 @@ const getFrontsBannerAdPositions = (
 	collections: DCRCollectionType[],
 	pageId: string,
 ): number[] =>
-	collections
-		// Just extract fields we need
-		.map(
-			({
-				collectionType,
-				containerPalette,
-				containerLevel,
-				displayName,
-				grouped,
-			}) => ({
-				collectionType,
-				containerPalette,
-				containerLevel,
-				displayName,
-				grouped,
-			}),
-		)
-		.reduce<{ heightSinceAd: number; adPositions: number[] }>(
-			(accumulator, collection, index) => {
-				const { heightSinceAd, adPositions } = accumulator;
+	collections.reduce<{ heightSinceAd: number; adPositions: number[] }>(
+		(accumulator, collection, index) => {
+			const { heightSinceAd, adPositions } = accumulator;
 
-				const isFinalCollection = index === collections.length - 1;
-				const isMaxAdsReached =
-					adPositions.length >= MAX_FRONTS_BANNER_ADS;
+			const isFinalCollection = index === collections.length - 1;
+			const isMaxAdsReached = adPositions.length >= MAX_FRONTS_BANNER_ADS;
 
-				if (isFinalCollection || isMaxAdsReached) {
-					return accumulator;
-				}
+			if (isFinalCollection || isMaxAdsReached) {
+				return accumulator;
+			}
 
-				const collectionHeight = getCollectionHeight(collection);
-				const prevCollection = collections[index - 1];
-				const isFirstCollection = isUndefined(prevCollection);
+			const collectionHeight = getCollectionHeight(collection);
+			const prevCollection = collections[index - 1];
+			const isFirstCollection = isUndefined(prevCollection);
 
-				if (
-					!isFirstCollection &&
-					canInsertDesktopAd(
-						heightSinceAd,
-						pageId,
-						collection,
-						prevCollection,
-					)
-				) {
-					// Inserting an ad, resetting the height since ad
-					return {
-						...accumulator,
-						adPositions: [...adPositions, index],
-						heightSinceAd: collectionHeight,
-					};
-				} else {
-					// Not inserting ad, moving onto next container and
-					// adding the height onto the height since ad
-					return {
-						...accumulator,
-						heightSinceAd: (accumulator.heightSinceAd +=
-							collectionHeight),
-					};
-				}
-			},
-			{ heightSinceAd: 0, adPositions: [] },
-		).adPositions;
+			if (
+				!isFirstCollection &&
+				canInsertDesktopAd(
+					heightSinceAd,
+					pageId,
+					collection,
+					prevCollection,
+				)
+			) {
+				// Inserting an ad, resetting the height since ad
+				return {
+					...accumulator,
+					adPositions: [...adPositions, index],
+					heightSinceAd: collectionHeight,
+				};
+			} else {
+				// Not inserting ad, moving onto next container and
+				// adding the height onto the height since ad
+				return {
+					...accumulator,
+					heightSinceAd: (accumulator.heightSinceAd +=
+						collectionHeight),
+				};
+			}
+		},
+		{ heightSinceAd: 0, adPositions: [] },
+	).adPositions;
 
 export {
 	isEvenIndex,
