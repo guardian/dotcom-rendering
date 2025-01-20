@@ -365,13 +365,7 @@ describe('Island: server-side rendering', () => {
 	});
 
 	test('ShowHideContainers', () => {
-		expect(() =>
-			renderToString(
-				<ShowHideContainers
-					disableFrontContainerToggleSwitch={false}
-				/>,
-			),
-		).not.toThrow();
+		expect(() => renderToString(<ShowHideContainers />)).not.toThrow();
 	});
 
 	test('SignInGateSelector', () => {
