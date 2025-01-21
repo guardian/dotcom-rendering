@@ -19,7 +19,7 @@ type Props = {
 	imagePositionOnMobile: ImagePositionType;
 	minWidthInPixels?: number;
 	containerType?: DCRContainerType;
-	gapSizes?: GapSizes;
+	gapSizes: GapSizes;
 	isBetaContainer: boolean;
 };
 
@@ -164,7 +164,7 @@ export const CardLayout = ({
 	minWidthInPixels,
 	imageType,
 	containerType,
-	gapSizes = { row: 'small', column: 'small' },
+	gapSizes,
 	isBetaContainer,
 }: Props) => {
 	return (
