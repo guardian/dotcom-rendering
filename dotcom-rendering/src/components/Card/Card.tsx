@@ -52,7 +52,7 @@ import { AvatarContainer } from './components/AvatarContainer';
 import { CardAge } from './components/CardAge';
 import { CardBranding } from './components/CardBranding';
 import { CardFooter } from './components/CardFooter';
-import { CardLayout, type GapSize } from './components/CardLayout';
+import { CardLayout, type GapSizes } from './components/CardLayout';
 import { CardLink } from './components/CardLink';
 import { CardWrapper } from './components/CardWrapper';
 import { ContentWrapper } from './components/ContentWrapper';
@@ -587,31 +587,51 @@ export const Card = ({
 	};
 
 	/** Determines the gap of between card components based on card properties */
-	const getGapSize = (): GapSize => {
-		if (isOnwardContent) return 'none';
-		if (isMediaCard && !isFlexibleContainer) return 'tiny';
-		if (!!isFlexSplash || (isFlexibleContainer && imageSize === 'jumbo')) {
-			return 'small';
+	const getGapSizes = (): GapSizes => {
+		if (isOnwardContent) {
+			return {
+				row: 'none',
+				column: 'none',
+			};
 		}
-		if (isSmallCard) return 'medium';
+		if (isMediaCard && !isFlexibleContainer) {
+			return {
+				row: 'tiny',
+				column: 'tiny',
+			};
+		}
+		if (!!isFlexSplash || (isFlexibleContainer && imageSize === 'jumbo')) {
+			return {
+				row: 'small',
+				column: 'small',
+			};
+		}
+		if (isSmallCard) {
+			return {
+				row: 'medium',
+				column: 'medium',
+			};
+		}
 		if (isBetaContainer && media?.type === 'avatar') {
-			return 'small';
+			return {
+				row: 'small',
+				column: 'small',
+			};
 		}
 		if (
 			isFlexibleContainer &&
 			(imagePositionOnDesktop === 'left' ||
 				imagePositionOnDesktop === 'right')
 		) {
-			return 'large';
+			return {
+				row: 'large',
+				column: 'large',
+			};
 		}
-		if (
-			isBetaContainer &&
-			(imagePositionOnDesktop === 'top' ||
-				imagePositionOnDesktop === 'bottom')
-		) {
-			return 'tiny';
-		}
-		return 'small';
+		return {
+			row: isBetaContainer ? 'tiny' : 'small',
+			column: 'small',
+		};
 	};
 
 	/**
@@ -738,7 +758,7 @@ export const Card = ({
 				minWidthInPixels={minWidthInPixels}
 				imageType={media?.type}
 				containerType={containerType}
-				gapSize={getGapSize()}
+				gapSizes={getGapSizes()}
 				isBetaContainer={isBetaContainer}
 			>
 				{/**
