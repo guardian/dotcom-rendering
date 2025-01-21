@@ -71,6 +71,7 @@ export const ScrollableFeature = ({
 								tablet: 'xxsmall',
 								mobile: 'xsmall',
 							}}
+							galleryCount={card.galleryCount}
 						/>
 					</ScrollableCarousel.Item>
 				);

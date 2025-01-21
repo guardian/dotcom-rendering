@@ -73,6 +73,7 @@ export type Props = {
 	/** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
 	aspectRatio?: AspectRatio;
 	showQuotes?: boolean;
+	galleryCount?: number;
 };
 
 const baseCardStyles = css`
@@ -231,6 +232,7 @@ const CommentCount = ({
 }) => {
 	if (!discussionId) return null;
 	if (!discussionApiUrl) return null;
+
 	return (
 		<Link
 			{...{
@@ -293,13 +295,11 @@ export const FeatureCard = ({
 	aspectRatio,
 	starRating,
 	showQuotes,
+	galleryCount,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
-	// If the card isn't playable, we need to show a play icon.
-	// Otherwise, this is handled by the YoutubeAtom
-	/**TODO: Determin if these cards should be playable */
-	const showPlayIcon = mainMedia?.type === 'Video';
+	const isVideoMainMedia = mainMedia?.type === 'Video';
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -318,7 +318,6 @@ export const FeatureCard = ({
 						dataLinkName={dataLinkName}
 						isExternalLink={isExternalLink}
 					/>
-
 					<div
 						css={[
 							css`
@@ -344,31 +343,26 @@ export const FeatureCard = ({
 								`}
 							>
 								{media.type === 'video' && (
-									<>
-										<div>
-											<CardPicture
-												mainImage={
-													media.imageUrl
-														? media.imageUrl
-														: media.mainMedia.images.reduce(
-																(
-																	prev,
-																	current,
-																) =>
-																	prev.width >
-																	current.width
-																		? prev
-																		: current,
-														  ).url
-												}
-												imageSize={imageSize}
-												alt={headlineText}
-												loading={imageLoading}
-												roundedCorners={false}
-												aspectRatio={aspectRatio}
-											/>
-										</div>
-									</>
+									<div>
+										<CardPicture
+											mainImage={
+												media.imageUrl
+													? media.imageUrl
+													: media.mainMedia.images.reduce(
+															(prev, current) =>
+																prev.width >
+																current.width
+																	? prev
+																	: current,
+													  ).url
+											}
+											imageSize={imageSize}
+											alt={headlineText}
+											loading={imageLoading}
+											roundedCorners={false}
+											aspectRatio={aspectRatio}
+										/>
+									</div>
 								)}
 
 								{media.type === 'picture' && (
@@ -381,7 +375,7 @@ export const FeatureCard = ({
 											roundedCorners={false}
 											aspectRatio={aspectRatio}
 										/>
-										{showPlayIcon &&
+										{isVideoMainMedia &&
 											mainMedia.duration > 0 && (
 												<MediaDuration
 													mediaDuration={
@@ -460,7 +454,6 @@ export const FeatureCard = ({
 											/>
 										</div>
 									)}
-
 									<CardFooter
 										format={format}
 										age={
@@ -499,12 +492,13 @@ export const FeatureCard = ({
 										// 	) : undefined
 										// }
 										showLivePlayable={false}
+										mediaType={mainMedia?.type}
+										galleryCount={galleryCount}
 									/>
 								</div>
 							</div>
 						)}
 					</div>
-
 					{hasSublinks && (
 						<SupportingContent
 							supportingContent={supportingContent}
