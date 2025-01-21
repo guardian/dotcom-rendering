@@ -23,6 +23,7 @@ import {
 	setUserFeaturesExpiryCookie,
 } from './cookies/userFeaturesExpiry';
 import { syncDataFromMembersDataApi } from './membersDataApi';
+import { syncDataFromUserBenefitsApi } from './userBenefitsApi';
 
 export type UserBenefits = {
 	adFree: boolean;
@@ -51,19 +52,23 @@ const refresh = async (): Promise<void> => {
 	}
 };
 
-const requestNewData = () => {
-	return getAuthStatus()
-		.then((authStatus) =>
-			authStatus.kind === 'SignedInWithCookies' ||
-			authStatus.kind === 'SignedInWithOkta'
-				? authStatus
-				: Promise.reject('The user is not signed in'),
-		)
-		.then((signedInAuthStatus) => {
-			return syncDataFromMembersDataApi(signedInAuthStatus).then(
-				persistResponse,
-			);
-		});
+const shouldUseUserBenefitsApi = (): boolean => {
+	return !!window.guardian.config.tests['useUserBenefitsApiVariant'];
+};
+
+const requestNewData = async () => {
+	const authStatus = await getAuthStatus();
+	if (
+		authStatus.kind !== 'SignedInWithCookies' &&
+		authStatus.kind !== 'SignedInWithOkta'
+	) {
+		return Promise.reject('The user is not signed in');
+	}
+	if (shouldUseUserBenefitsApi()) {
+		return syncDataFromUserBenefitsApi(authStatus).then(persistResponse);
+	} else {
+		return syncDataFromMembersDataApi(authStatus).then(persistResponse);
+	}
 };
 
 const timeInDaysFromNow = (daysFromNow: number): string => {

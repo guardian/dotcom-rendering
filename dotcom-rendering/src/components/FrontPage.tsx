@@ -72,11 +72,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 				/>
 			</Island>
 			<Island priority="enhancement" defer={{ until: 'idle' }}>
-				<ShowHideContainers
-					disableFrontContainerToggleSwitch={
-						!!front.config.switches.disableFrontContainerShowHide
-					}
-				/>
+				<ShowHideContainers />
 			</Island>
 			<Island priority="critical">
 				<SetABTests
