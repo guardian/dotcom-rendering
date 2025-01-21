@@ -90,7 +90,7 @@ type Props = {
 	discussionApiUrl: string;
 	collectionBranding?: CollectionBranding;
 	isTagPage?: boolean;
-	isScrollableContainer?: boolean;
+	hasNavigationButtons?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -128,8 +128,8 @@ const containerStylesUntilLeftCol = css`
 	display: grid;
 
 	grid-template-rows:
-		[headline-start show-hide-start] auto
-		[show-hide-end headline-end content-toggleable-start content-start] auto
+		[headline-start controls-start] auto
+		[controls-end headline-end content-toggleable-start content-start] auto
 		[content-end content-toggleable-end bottom-content-start] auto
 		[bottom-content-end];
 
@@ -176,19 +176,27 @@ const containerStylesUntilLeftCol = css`
 const containerScrollableStylesFromLeftCol = css`
 	${between.leftCol.and.wide} {
 		grid-template-rows:
-			[headline-start show-hide-start] auto
-			[show-hide-end content-toggleable-start content-start] auto
+			[headline-start controls-start] auto
+			[controls-end content-toggleable-start content-start] auto
 			[headline-end treats-start] auto
 			[content-end content-toggleable-end treats-end bottom-content-start] auto
 			[bottom-content-end];
+	}
+
+	${from.wide} {
+		grid-template-rows:
+			[headline-start content-start content-toggleable-start controls-start] auto
+			[headline-end treats-start] auto
+			[content-end content-toggleable-end treats-end controls-end bottom-content-start] auto
+			[ bottom-content-end];
 	}
 `;
 
 const containerStylesFromLeftCol = css`
 	${from.leftCol} {
 		grid-template-rows:
-			[headline-start show-hide-start content-start] auto
-			[show-hide-end content-toggleable-start] auto
+			[headline-start controls-start content-start] auto
+			[controls-end content-toggleable-start] auto
 			[headline-end treats-start] auto
 			[content-end content-toggleable-end treats-end bottom-content-start] auto
 			[bottom-content-end];
@@ -207,8 +215,8 @@ const containerStylesFromLeftCol = css`
 
 	${from.wide} {
 		grid-template-rows:
-			[headline-start content-start content-toggleable-start show-hide-start] auto
-			[show-hide-end] auto
+			[headline-start content-start content-toggleable-start controls-start] auto
+			[controls-end] auto
 			[headline-end treats-start] auto
 			[content-end content-toggleable-end treats-end bottom-content-start] auto
 			[bottom-content-end];
@@ -269,8 +277,8 @@ const topPadding = css`
 	padding-top: ${space[2]}px;
 `;
 
-const sectionShowHide = css`
-	grid-row: show-hide;
+const sectionControls = css`
+	grid-row: controls;
 	grid-column: hide;
 	justify-self: end;
 	display: flex;
@@ -279,6 +287,10 @@ const sectionShowHide = css`
 		flex-direction: column-reverse;
 		justify-content: flex-end;
 		align-items: flex-end;
+		/** we want to add space between the items in the controls section only when both items are there and visible */
+		:has(.carouselNavigationPlaceholder:not(.hidden)) {
+			justify-content: space-between;
+		}
 	}
 `;
 
@@ -396,6 +408,15 @@ const secondaryLevelTopBorder = css`
 	}
 `;
 
+const carouselNavigationPlaceholder = css`
+	${until.leftCol} {
+		height: 44px;
+	}
+	.hidden & {
+		display: none;
+	}
+`;
+
 /**
  * # Front Container
  *
@@ -507,7 +528,7 @@ export const FrontSection = ({
 	discussionApiUrl,
 	collectionBranding,
 	isTagPage = false,
-	isScrollableContainer = false,
+	hasNavigationButtons = false,
 }: Props) => {
 	const isToggleable = toggleable && !!sectionId;
 	const showMore =
@@ -536,7 +557,7 @@ export const FrontSection = ({
 					containerStylesUntilLeftCol,
 					!hasPageSkin && containerStylesFromLeftCol,
 					!hasPageSkin &&
-						isScrollableContainer &&
+						hasNavigationButtons &&
 						containerScrollableStylesFromLeftCol,
 
 					hasPageSkin && pageSkinContainer,
@@ -602,21 +623,15 @@ export const FrontSection = ({
 					{leftContent}
 				</div>
 
-				{(isToggleable || isScrollableContainer) && (
-					<div css={sectionShowHide}>
+				{(isToggleable || hasNavigationButtons) && (
+					<div css={sectionControls}>
 						{isToggleable && (
 							<ShowHideButton sectionId={sectionId} />
 						)}
-						{isScrollableContainer && (
+						{hasNavigationButtons && (
 							<div
-								css={css`
-									${until.leftCol} {
-										height: 44px;
-									}
-									.hidden & {
-										display: none;
-									}
-								`}
+								css={carouselNavigationPlaceholder}
+								className="carouselNavigationPlaceholder"
 								id={`${sectionId}-carousel-navigation`}
 							></div>
 						)}

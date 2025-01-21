@@ -713,13 +713,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								}
 								containerLevel={collection.containerLevel}
 								containerSpacing={collection.containerSpacing}
-								isScrollableContainer={
+								hasNavigationButtons={
 									collection.collectionType ===
 										'scrollable/small' ||
 									collection.collectionType ===
-										'scrollable/medium' ||
-									collection.collectionType ===
-										'scrollable/feature'
+										'scrollable/medium'
 								}
 							>
 								<DecideContainer
