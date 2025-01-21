@@ -3,6 +3,7 @@ import { isUndefined } from '@guardian/libs';
 import {
 	between,
 	from,
+	space,
 	textSansBold12,
 	until,
 } from '@guardian/source/foundations';
@@ -103,6 +104,8 @@ const headline = css`
 const mediaIcon = css`
 	grid-area: media-icon;
 	align-self: end;
+	display: flex;
+	align-items: flex-end;
 `;
 
 const audioPill = css`
@@ -112,10 +115,9 @@ const audioPill = css`
 `;
 
 const audioPillIcon = css`
-	width: 26px;
-	height: 26px;
-	/* We’re using the text colour for the icon badge */
-	background-color: ${palette('--highlight-card-audio-icon')};
+	width: ${space[6]}px;
+	height: ${space[6]}px;
+	background-color: ${palette('--pill-background')};
 	border-radius: 50%;
 
 	> svg {
