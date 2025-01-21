@@ -121,9 +121,6 @@ const audioPillIcon = css`
 	border-radius: 50%;
 
 	> svg {
-		margin-left: auto;
-		margin-right: auto;
-		display: block;
 		fill: ${palette('--highlights-container-background')};
 	}
 `;
