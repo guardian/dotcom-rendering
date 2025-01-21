@@ -54,8 +54,8 @@ const setAllFeaturesData = (opts: { isExpired: boolean }) => {
 		: new Date(currentTime + msInOneDay);
 
 	setHideSupportMessagingCookie(true);
-	setAdFreeCookie(2);
-	setAllowRejectAllCookie(2);
+	setAdFreeCookie();
+	setAllowRejectAllCookie();
 	setUserFeaturesExpiryCookie(expiryDate.getTime().toString());
 };
 
