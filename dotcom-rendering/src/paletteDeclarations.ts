@@ -5510,7 +5510,7 @@ const highlightsCardKickerText: PaletteFunction = (format) => {
 };
 const highlightsCardAudioIcon: PaletteFunction = () => sourcePalette.brand[100];
 const highlightsCardAudioText: PaletteFunction = () =>
-	sourcePalette.neutral[10];
+	sourcePalette.neutral[20];
 
 const pinnedPostBorderLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
