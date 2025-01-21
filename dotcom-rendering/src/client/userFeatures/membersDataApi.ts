@@ -101,6 +101,7 @@ export const syncDataFromMembersDataApi: (
 	return {
 		hideSupportMessaging: !response.showSupportMessaging,
 		adFree: response.contentAccess.digitalPack,
+		allowRejectAll: false, // TODO: Placeholder until Guardian Light has been renamed to Guardian AdLite in the mdapi response
 	};
 };
 

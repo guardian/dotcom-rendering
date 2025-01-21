@@ -4,6 +4,11 @@ import {
 	isUserLoggedInOktaRefactor as isUserLoggedInOktaRefactor_,
 } from '../../lib/identity';
 import { getAdFreeCookie, setAdFreeCookie } from './cookies/adFree';
+import {
+	allowRejectAll,
+	getAllowRejectAllCookie,
+	setAllowRejectAllCookie,
+} from './cookies/allowRejectAll';
 import { setHideSupportMessagingCookie } from './cookies/hideSupportMessaging';
 import {
 	getUserFeaturesExpiryCookie,
@@ -50,6 +55,7 @@ const setAllFeaturesData = (opts: { isExpired: boolean }) => {
 
 	setHideSupportMessagingCookie(true);
 	setAdFreeCookie(2);
+	setAllowRejectAllCookie(2);
 	setUserFeaturesExpiryCookie(expiryDate.getTime().toString());
 };
 
@@ -154,6 +160,37 @@ describe('Storing new feature data', () => {
 					parseInt(
 						// @ts-expect-error -- we’re testing it
 						getAdFreeCookie(),
+						10,
+					),
+				),
+			).toBe(false);
+		});
+	});
+
+	it('Puts the allowRejectAll state in appropriate cookie', () => {
+		fetchJsonSpy.mockReturnValueOnce(
+			Promise.resolve({
+				benefits: [],
+			}),
+		);
+		return refresh().then(() => {
+			expect(getAllowRejectAllCookie()).toBeNull();
+		});
+	});
+
+	it('Puts the allowRejectAll state in appropriate cookie', () => {
+		fetchJsonSpy.mockReturnValueOnce(
+			Promise.resolve({
+				benefits: ['allowRejectAll'],
+			}),
+		);
+		return refresh().then(() => {
+			expect(allowRejectAll()).toBe(true);
+			expect(
+				Number.isNaN(
+					parseInt(
+						// @ts-expect-error -- we’re testing it
+						getAllowRejectAllCookie(),
 						10,
 					),
 				),
