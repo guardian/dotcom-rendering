@@ -39,7 +39,6 @@ const buttonStyles = css`
 		display: flex;
 		gap: ${space[1]}px;
 		margin-left: auto;
-		padding-top: ${space[2]}px;
 	}
 `;
 

@@ -282,7 +282,7 @@ const sectionControls = css`
 	grid-column: hide;
 	justify-self: end;
 	display: flex;
-	align-items: flex-end;
+	padding-top: ${space[2]}px;
 	${from.wide} {
 		flex-direction: column-reverse;
 		justify-content: flex-end;
