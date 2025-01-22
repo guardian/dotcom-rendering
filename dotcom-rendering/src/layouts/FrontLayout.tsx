@@ -621,7 +621,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 												absoluteServerTimes={
 													absoluteServerTimes
 												}
-												renderingTarget={renderingTarget}
+												renderingTarget={
+													renderingTarget
+												}
 											/>
 										</Island>
 									</Section>
