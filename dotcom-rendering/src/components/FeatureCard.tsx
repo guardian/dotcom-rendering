@@ -13,6 +13,7 @@ import type {
 	DCRSupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
+import type { PodcastSeriesImage } from '../types/tag';
 import { CardAge as AgeStamp } from './Card/components/CardAge';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
@@ -74,6 +75,8 @@ export type Props = {
 	aspectRatio?: AspectRatio;
 	showQuotes?: boolean;
 	galleryCount?: number;
+	podcastImage?: PodcastSeriesImage;
+	audioDuration?: string;
 };
 
 const baseCardStyles = css`
@@ -117,6 +120,13 @@ const hoverStyles = css`
 	}
 `;
 
+const contentStyles = css`
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+`;
+
 /**
  * Image mask gradient has additional colour stops to emulate a non-linear
  * ease in / ease out curve to make the transition smoother. Values were
@@ -126,14 +136,9 @@ const hoverStyles = css`
  * https://css-tricks.com/easing-linear-gradients/
  */
 const overlayStyles = css`
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	flex-grow: 1;
 	gap: ${space[1]}px;
 	padding: 64px ${space[2]}px ${space[2]}px;
 	mask-image: linear-gradient(
@@ -149,6 +154,24 @@ const overlayStyles = css`
 		rgb(0, 0, 0) 64px
 	);
 	backdrop-filter: blur(12px) brightness(0.5);
+`;
+
+const podcastImageContainerStyles = css`
+	position: relative;
+	/* Needs to display above of the image mask overlay */
+	z-index: ${getZIndex('card-podcast-image')};
+`;
+
+const podcastImageStyles = css`
+	height: 80px;
+	width: 80px;
+	position: absolute;
+	/**
+	 * Displays 8px above the text.
+	 * desired space above text (8px) - padding-top of text container (64px) = -56px
+	 */
+	bottom: -${space[14]}px;
+	left: ${space[2]}px;
 `;
 
 const starRatingWrapper = css`
@@ -296,6 +319,8 @@ export const FeatureCard = ({
 	starRating,
 	showQuotes,
 	galleryCount,
+	podcastImage,
+	audioDuration,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -336,10 +361,6 @@ export const FeatureCard = ({
 									background-color: ${palette(
 										'--feature-card-background',
 									)};
-									img {
-										width: 100%;
-										display: block;
-									}
 								`}
 							>
 								{media.type === 'video' && (
@@ -395,106 +416,133 @@ export const FeatureCard = ({
 								{/* This image overlay is styled when the CardLink is hovered */}
 								<div className="image-overlay" />
 
-								<div css={overlayStyles}>
-									{/**
-									 * Without the wrapping div the headline and
-									 * byline would have space inserted between
-									 * them due to being direct children of the
-									 * flex container
-									 */}
-									<div>
-										<CardHeadline
-											headlineText={headlineText}
+								<div css={contentStyles}>
+									{mainMedia?.type === 'Audio' &&
+										!!podcastImage?.src && (
+											<div
+												css={
+													podcastImageContainerStyles
+												}
+											>
+												<div css={podcastImageStyles}>
+													<CardPicture
+														mainImage={
+															podcastImage.src
+														}
+														imageSize="podcast"
+														alt={
+															podcastImage.altText ??
+															''
+														}
+														loading="lazy"
+														roundedCorners={true}
+														aspectRatio="1:1"
+													/>
+												</div>
+											</div>
+										)}
+									<div css={overlayStyles}>
+										{/**
+										 * Without the wrapping div the headline and
+										 * byline would have space inserted between
+										 * them due to being direct children of the
+										 * flex container
+										 */}
+										<div>
+											<CardHeadline
+												headlineText={headlineText}
+												format={format}
+												fontSizes={headlineSizes}
+												showQuotes={showQuotes}
+												kickerText={
+													format.design ===
+														ArticleDesign.LiveBlog &&
+													!kickerText
+														? 'Live'
+														: kickerText
+												}
+												showPulsingDot={
+													format.design ===
+														ArticleDesign.LiveBlog ||
+													showPulsingDot
+												}
+												byline={byline}
+												showByline={showByline}
+												isExternalLink={isExternalLink}
+												headlineColour={palette(
+													'--feature-card-headline',
+												)}
+												kickerColour={palette(
+													'--feature-card-kicker-text',
+												)}
+												isBetaContainer={true}
+											/>
+										</div>
+
+										{starRating !== undefined ? (
+											<div css={starRatingWrapper}>
+												<StarRating
+													rating={starRating}
+													size="small"
+												/>
+											</div>
+										) : null}
+
+										{!!trailText && (
+											<div css={trailTextWrapper}>
+												<TrailText
+													trailText={trailText}
+													trailTextColour={palette(
+														'--feature-card-trail-text',
+													)}
+													trailTextSize={'regular'}
+													padBottom={false}
+												/>
+											</div>
+										)}
+										<CardFooter
 											format={format}
-											fontSizes={headlineSizes}
-											showQuotes={showQuotes}
-											kickerText={
-												format.design ===
-													ArticleDesign.LiveBlog &&
-												!kickerText
-													? 'Live'
-													: kickerText
+											age={
+												<CardAge
+													webPublicationDate={
+														webPublicationDate
+													}
+													showClock={!!showClock}
+													absoluteServerTimes={
+														absoluteServerTimes
+													}
+												/>
 											}
-											showPulsingDot={
-												format.design ===
-													ArticleDesign.LiveBlog ||
-												showPulsingDot
+											commentCount={
+												<CommentCount
+													linkTo={linkTo}
+													discussionId={discussionId}
+													discussionApiUrl={
+														discussionApiUrl
+													}
+												/>
 											}
-											byline={byline}
-											showByline={showByline}
-											isExternalLink={isExternalLink}
-											headlineColour={palette(
-												'--feature-card-headline',
-											)}
-											kickerColour={palette(
-												'--feature-card-kicker-text',
-											)}
-											isBetaContainer={true}
+											/**TODO: Determine if this is needed */
+											// cardBranding={
+											// 	branding ? (
+											// 		<CardBranding
+											// 			branding={branding}
+											// 			format={format}
+											// 			onwardsSource={
+											// 				onwardsSource
+											// 			}
+											// 			containerPalette={
+											// 				containerPalette
+											// 			}
+											// 		/>
+											// 	) : undefined
+											// }
+											showLivePlayable={false}
+											mediaType={mainMedia?.type}
+											galleryCount={galleryCount}
+											audioDuration={audioDuration}
 										/>
 									</div>
-
-									{starRating !== undefined ? (
-										<div css={starRatingWrapper}>
-											<StarRating
-												rating={starRating}
-												size="small"
-											/>
-										</div>
-									) : null}
-
-									{!!trailText && (
-										<div css={trailTextWrapper}>
-											<TrailText
-												trailText={trailText}
-												trailTextColour={palette(
-													'--feature-card-trail-text',
-												)}
-												trailTextSize={'regular'}
-												padBottom={false}
-											/>
-										</div>
-									)}
-									<CardFooter
-										format={format}
-										age={
-											<CardAge
-												webPublicationDate={
-													webPublicationDate
-												}
-												showClock={!!showClock}
-												absoluteServerTimes={
-													absoluteServerTimes
-												}
-											/>
-										}
-										commentCount={
-											<CommentCount
-												linkTo={linkTo}
-												discussionId={discussionId}
-												discussionApiUrl={
-													discussionApiUrl
-												}
-											/>
-										}
-										/**TODO: Determine if this is needed */
-										// cardBranding={
-										// 	branding ? (
-										// 		<CardBranding
-										// 			branding={branding}
-										// 			format={format}
-										// 			onwardsSource={
-										// 				onwardsSource
-										// 			}
-										// 			containerPalette={
-										// 				containerPalette
-										// 			}
-										// 		/>
-										// 	) : undefined
-										// }
-										showLivePlayable={false}
-										mediaType={mainMedia?.type}
-										galleryCount={galleryCount}
-									/>
 								</div>
 							</div>
 						)}
