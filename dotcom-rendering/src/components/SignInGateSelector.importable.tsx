@@ -475,7 +475,7 @@ const SignInGateSelectorAuxia = ({
 	}, [gateSelector]);
 
 	useEffect(() => {
-		if (gateVariant && currentTest) {
+		if (currentTest) {
 			void gateVariant
 				.canShow({
 					isSignedIn: !!isSignedIn,
@@ -501,7 +501,7 @@ const SignInGateSelectorAuxia = ({
 		countryCode,
 	]);
 
-	if (!currentTest || !gateVariant || isUndefined(pageViewId)) {
+	if (!currentTest || isUndefined(pageViewId)) {
 		return null;
 	}
 
