@@ -38,6 +38,17 @@ type Props = {
 	switches: Switches;
 };
 
+type PropsAuxia = {
+	contentType: string;
+	sectionId?: string;
+	tags: TagType[];
+	isPaidContent: boolean;
+	isPreview: boolean;
+	host?: string;
+	pageId: string;
+	idUrl?: string;
+};
+
 // interface for the component which shows the sign in gate
 interface ShowSignInGateProps {
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
@@ -258,7 +269,6 @@ export const SignInGateSelector = ({
 			host,
 			pageId,
 			idUrl,
-			switches,
 		});
 	}
 };
@@ -418,8 +428,7 @@ const SignInGateSelectorAuxia = ({
 	host = 'https://theguardian.com/',
 	pageId,
 	idUrl = 'https://profile.theguardian.com',
-	switches,
-}: Props) => {
+}: PropsAuxia) => {
 	/*
 		comment group: auxia-prototype-e55a86ef
 		This function if the Auxia prototype for the SignInGateSelector component.
@@ -442,24 +451,6 @@ const SignInGateSelectorAuxia = ({
 	const { renderingTarget } = useConfig();
 	const gateSelector = useSignInGateSelector();
 	const pageViewId = usePageViewId(renderingTarget);
-
-	// START: Checkout Complete Personalisation
-	const [personaliseSwitch, setPersonaliseSwitch] = useState(false);
-	const checkoutCompleteCookieData = useCheckoutCompleteCookieData();
-
-	const personaliseComponentId = (
-		currentComponentId: string | undefined,
-	): string | undefined => {
-		if (!currentComponentId) return undefined;
-		if (!checkoutCompleteCookieData) return currentComponentId;
-		const { userType, product } = checkoutCompleteCookieData;
-		return `${currentComponentId}_personalised_${userType}_${product}`;
-	};
-	const shouldPersonaliseComponentId = (): boolean => {
-		return personaliseSwitch && !!checkoutCompleteCookieData;
-	};
-	const { personaliseSignInGateAfterCheckout } = switches;
-	// END: Checkout Complete Personalisation
 
 	const countryCode = useCountryCode('sign-in-gate-selector');
 
@@ -484,14 +475,6 @@ const SignInGateSelectorAuxia = ({
 			setCurrentTest(gateSelectorTest);
 		}
 	}, [gateSelector]);
-
-	useEffect(() => {
-		if (personaliseSignInGateAfterCheckout) {
-			setPersonaliseSwitch(personaliseSignInGateAfterCheckout);
-		} else {
-			setPersonaliseSwitch(false);
-		}
-	}, [personaliseSignInGateAfterCheckout]);
 
 	useEffect(() => {
 		if (gateVariant && currentTest) {
@@ -523,11 +506,8 @@ const SignInGateSelectorAuxia = ({
 	if (!currentTest || !gateVariant || isUndefined(pageViewId)) {
 		return null;
 	}
-	const signInGateComponentId = signInGateTestIdToComponentId[currentTest.id];
 
-	const componentId = shouldPersonaliseComponentId()
-		? personaliseComponentId(signInGateComponentId)
-		: signInGateComponentId;
+	const componentId = 'main_variant_5';
 
 	const ctaUrlParams = {
 		pageId,
@@ -540,8 +520,7 @@ const SignInGateSelectorAuxia = ({
 
 	return (
 		<>
-			{/* Sign In Gate Display Logic */}
-			{!isGateDismissed && canShowGate && !!componentId && (
+			{!isGateDismissed && canShowGate && (
 				<ShowSignInGateAuxia
 					// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 					setShowGate={(show) => setIsGateDismissed(!show)}
