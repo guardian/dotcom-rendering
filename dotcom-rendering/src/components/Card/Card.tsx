@@ -36,7 +36,7 @@ import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
-import { MediaDuration } from '../MediaDuration';
+import { MediaDuration, secondsToDuration } from '../MediaDuration';
 import { MediaMeta } from '../MediaMeta';
 import { Pill } from '../Pill';
 import { Slideshow } from '../Slideshow';
@@ -485,6 +485,14 @@ export const Card = ({
 				margin-top: auto;
 			`}
 		>
+			{mainMedia?.type === 'Video' &&
+				format.design === ArticleDesign.Video && (
+					<Pill
+						content={secondsToDuration(mainMedia.duration)}
+						icon={<SvgMediaControlsPlay />}
+						iconSize={'small'}
+					/>
+				)}
 			{mainMedia?.type === 'Audio' && (
 				<Pill
 					content={audioDuration ?? ''}
