@@ -260,7 +260,8 @@ const decideCardProperties = (
 				},
 				imageSize: 'jumbo',
 				liveUpdatesPosition: 'outer',
-				supportingContentAlignment: 'horizontal',
+				supportingContentAlignment:
+					supportingContentLength >= 2 ? 'horizontal' : 'vertical',
 			};
 		case 'boost':
 		default:
