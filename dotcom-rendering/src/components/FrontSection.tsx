@@ -411,7 +411,7 @@ const secondaryLevelTopBorder = css`
 
 const carouselNavigationPlaceholder = css`
 	${until.leftCol} {
-		height: 44px;
+		min-height: 44px;
 	}
 	.hidden & {
 		display: none;
