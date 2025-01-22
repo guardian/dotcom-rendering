@@ -568,6 +568,7 @@ export const ImageComponent = ({
 					shouldLimitWidth={shouldLimitWidth}
 					isMainMedia={isMainMedia}
 					padCaption={role === 'showcase' && isTimeline}
+					isImmersive={role === 'immersive'}
 				/>
 			)}
 		</>

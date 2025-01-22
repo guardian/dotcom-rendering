@@ -9,6 +9,8 @@ const padding = 20;
 
 export type GapSize = 'none' | 'tiny' | 'small' | 'medium' | 'large';
 
+export type GapSizes = { row: GapSize; column: GapSize };
+
 type Props = {
 	children: React.ReactNode;
 	cardBackgroundColour: string;
@@ -17,7 +19,7 @@ type Props = {
 	imagePositionOnMobile: ImagePositionType;
 	minWidthInPixels?: number;
 	containerType?: DCRContainerType;
-	gapSize?: GapSize;
+	gapSizes: GapSizes;
 	isBetaContainer: boolean;
 };
 
@@ -162,27 +164,30 @@ export const CardLayout = ({
 	minWidthInPixels,
 	imageType,
 	containerType,
-	gapSize = 'small',
+	gapSizes,
 	isBetaContainer,
-}: Props) => (
-	<div
-		css={[
-			containerStyles,
-			containerType === 'fixed/video'
-				? videoWidth
-				: minWidth(minWidthInPixels),
-			decidePosition(
-				imagePositionOnMobile,
-				imagePositionOnDesktop,
-				isBetaContainer,
-				imageType === 'avatar',
-			),
-		]}
-		style={{
-			backgroundColor: cardBackgroundColour,
-			gap: decideGap(gapSize),
-		}}
-	>
-		{children}
-	</div>
-);
+}: Props) => {
+	return (
+		<div
+			css={[
+				containerStyles,
+				containerType === 'fixed/video'
+					? videoWidth
+					: minWidth(minWidthInPixels),
+				decidePosition(
+					imagePositionOnMobile,
+					imagePositionOnDesktop,
+					isBetaContainer,
+					imageType === 'avatar',
+				),
+			]}
+			style={{
+				backgroundColor: cardBackgroundColour,
+				rowGap: decideGap(gapSizes.row),
+				columnGap: decideGap(gapSizes.column),
+			}}
+		>
+			{children}
+		</div>
+	);
+};
