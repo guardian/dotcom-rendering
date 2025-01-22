@@ -39,9 +39,8 @@ const getContainerStates = (): ContainerStates => {
  */
 export const ShowHideContainers = () => {
 	const isSignedIn = useIsSignedIn();
+	const containerStates = getContainerStates();
 	useEffect(() => {
-		const containerStates = getContainerStates();
-
 		const toggleContainer = (sectionId: string, element: HTMLElement) => {
 			const isExpanded = element.getAttribute('aria-expanded') === 'true';
 
@@ -83,10 +82,14 @@ export const ShowHideContainers = () => {
 			const sectionId = e.getAttribute('data-show-hide-button');
 			const isBetaContainer = e.getAttribute('data-beta-container');
 			if (!sectionId) continue;
+
 			if (isSignedIn === 'Pending') return;
+			/** We have disabled show hide for beta containers when the user is not signed in.
+			 *  It is still available for legacy containers regardless of sign in state.
+			 */
 			if (isSignedIn === false && isBetaContainer === 'true') {
-				// Only signed in users can show/hide containers so we visually hide these buttons.
 				e.classList.add('hidden');
+				/** if either the user is signed in, or we are in a legacy container, show the toggle */
 			} else if (isSignedIn === true || isBetaContainer === 'false') {
 				e.classList.remove('hidden');
 				e.onclick = () => toggleContainer(sectionId, e);
@@ -96,7 +99,7 @@ export const ShowHideContainers = () => {
 				}
 			}
 		}
-	}, [isSignedIn]);
+	}, [isSignedIn, containerStates]);
 
 	return <></>;
 };
