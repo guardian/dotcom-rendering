@@ -19,6 +19,7 @@ import {
 	incrementUserDismissedGateCount,
 	setUserDismissedGate,
 } from './SignInGate/dismissGate';
+import { signInGateComponent as gateMainVariant } from './SignInGate/gates/main-variant';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGate';
 import type {
 	CheckoutCompleteCookieData,
@@ -440,9 +441,7 @@ const SignInGateSelectorAuxia = ({
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
 	);
-	const [gateVariant, setGateVariant] = useState<
-		SignInGateComponent | undefined
-	>(undefined);
+	const gateVariant = gateMainVariant;
 	const [currentTest, setCurrentTest] = useState<
 		CurrentSignInGateABTest | undefined
 	>(undefined);
@@ -471,7 +470,6 @@ const SignInGateSelectorAuxia = ({
 			CurrentSignInGateABTest | null,
 		];
 		if (gateSelectorVariant && gateSelectorTest) {
-			setGateVariant(gateSelectorVariant);
 			setCurrentTest(gateSelectorTest);
 		}
 	}, [gateSelector]);
