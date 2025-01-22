@@ -57,13 +57,10 @@ interface ShowSignInGateProps {
 */
 interface ShowSignInGateAuxiaProps {
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
-	abTest: CurrentSignInGateABTest;
 	signInUrl: string;
 	registerUrl: string;
 	gateVariant: SignInGateComponent;
 	host: string;
-	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
-	personaliseSignInGateAfterCheckoutSwitch?: boolean;
 }
 
 const dismissGate = (
@@ -76,6 +73,16 @@ const dismissGate = (
 		currentAbTestValue.variant,
 		currentAbTestValue.name,
 	);
+};
+
+/*
+	comment group: auxia-prototype-e55a86ef
+	Auxia version of the dismissGate function.
+*/
+const dismissGateAuxia = (
+	setShowGate: React.Dispatch<React.SetStateAction<boolean>>,
+) => {
+	setShowGate(false);
 };
 
 // function to generate the profile.theguardian.com url with tracking params
@@ -536,15 +543,12 @@ const SignInGateSelectorAuxia = ({
 			{/* Sign In Gate Display Logic */}
 			{!isGateDismissed && canShowGate && !!componentId && (
 				<ShowSignInGateAuxia
-					abTest={currentTest}
 					// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 					setShowGate={(show) => setIsGateDismissed(!show)}
 					signInUrl={generateGatewayUrl('signin', ctaUrlParams)}
 					registerUrl={generateGatewayUrl('register', ctaUrlParams)}
 					gateVariant={gateVariant}
 					host={host}
-					checkoutCompleteCookieData={checkoutCompleteCookieData}
-					personaliseSignInGateAfterCheckoutSwitch={personaliseSwitch}
 				/>
 			)}
 		</>
@@ -552,33 +556,21 @@ const SignInGateSelectorAuxia = ({
 };
 
 const ShowSignInGateAuxia = ({
-	abTest,
 	setShowGate,
 	signInUrl,
 	registerUrl,
 	gateVariant,
 	host,
-	checkoutCompleteCookieData,
-	personaliseSignInGateAfterCheckoutSwitch,
 }: ShowSignInGateAuxiaProps) => {
 	/*
 		comment group: auxia-prototype-e55a86ef
 		This function if the Auxia prototype for the ShowSignInGate component.
 	*/
 
-	const renderingTarget = 'Web';
 	const componentId = 'main_variant_5';
-
-	// use effect hook to fire view event tracking only on initial render
-	useEffect(() => {
-		submitViewEventTracking(
-			{
-				component: withComponentId(componentId),
-				abTest,
-			},
-			renderingTarget,
-		);
-	}, [abTest]);
+	const abTest = undefined;
+	const checkoutCompleteCookieData = undefined;
+	const personaliseSignInGateAfterCheckoutSwitch = undefined;
 
 	// some sign in gate ab test variants may not need to show a gate
 	// therefore the gate is optional
@@ -590,7 +582,7 @@ const ShowSignInGateAuxia = ({
 			signInUrl,
 			registerUrl,
 			dismissGate: () => {
-				dismissGate(setShowGate, abTest);
+				dismissGateAuxia(setShowGate);
 			},
 			abTest,
 			ophanComponentId: componentId,
@@ -601,3 +593,17 @@ const ShowSignInGateAuxia = ({
 	// return nothing if no gate needs to be shown
 	return <></>;
 };
+
+/*
+export type SignInGateProps = {
+	signInUrl: string;
+	registerUrl: string;
+	guUrl: string;
+	dismissGate: () => void;
+	ophanComponentId: string;
+	abTest?: CurrentSignInGateABTest;
+	isMandatory?: boolean;
+	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
+	personaliseSignInGateAfterCheckoutSwitch?: boolean;
+};
+*/
