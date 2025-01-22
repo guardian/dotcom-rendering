@@ -51,6 +51,21 @@ interface ShowSignInGateProps {
 	personaliseSignInGateAfterCheckoutSwitch?: boolean;
 }
 
+/*
+	comment group: auxia-prototype-e55a86ef
+	Signature for the ShowSignInGateAuxia component.
+*/
+interface ShowSignInGateAuxiaProps {
+	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
+	abTest: CurrentSignInGateABTest;
+	signInUrl: string;
+	registerUrl: string;
+	gateVariant: SignInGateComponent;
+	host: string;
+	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
+	personaliseSignInGateAfterCheckoutSwitch?: boolean;
+}
+
 const dismissGate = (
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>,
 	currentAbTestValue: CurrentSignInGateABTest,
@@ -520,9 +535,8 @@ const SignInGateSelectorAuxia = ({
 		<>
 			{/* Sign In Gate Display Logic */}
 			{!isGateDismissed && canShowGate && !!componentId && (
-				<ShowSignInGate
+				<ShowSignInGateAuxia
 					abTest={currentTest}
-					componentId={componentId}
 					// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 					setShowGate={(show) => setIsGateDismissed(!show)}
 					signInUrl={generateGatewayUrl('signin', ctaUrlParams)}
@@ -535,4 +549,55 @@ const SignInGateSelectorAuxia = ({
 			)}
 		</>
 	);
+};
+
+const ShowSignInGateAuxia = ({
+	abTest,
+	setShowGate,
+	signInUrl,
+	registerUrl,
+	gateVariant,
+	host,
+	checkoutCompleteCookieData,
+	personaliseSignInGateAfterCheckoutSwitch,
+}: ShowSignInGateAuxiaProps) => {
+	/*
+		comment group: auxia-prototype-e55a86ef
+		This function if the Auxia prototype for the ShowSignInGate component.
+	*/
+
+	const renderingTarget = 'Web';
+	const componentId = 'main_variant_5';
+
+	// use effect hook to fire view event tracking only on initial render
+	useEffect(() => {
+		submitViewEventTracking(
+			{
+				component: withComponentId(componentId),
+				abTest,
+			},
+			renderingTarget,
+		);
+	}, [abTest]);
+
+	// some sign in gate ab test variants may not need to show a gate
+	// therefore the gate is optional
+	// this is because we want a section of the audience to never see the gate
+	// but still fire a view event if they are eligible to see the gate
+	if (gateVariant.gate) {
+		return gateVariant.gate({
+			guUrl: host,
+			signInUrl,
+			registerUrl,
+			dismissGate: () => {
+				dismissGate(setShowGate, abTest);
+			},
+			abTest,
+			ophanComponentId: componentId,
+			checkoutCompleteCookieData,
+			personaliseSignInGateAfterCheckoutSwitch,
+		});
+	}
+	// return nothing if no gate needs to be shown
+	return <></>;
 };
