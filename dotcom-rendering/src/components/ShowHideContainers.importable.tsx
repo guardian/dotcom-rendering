@@ -83,7 +83,7 @@ export const ShowHideContainers = () => {
 			const sectionId = e.getAttribute('data-show-hide-button');
 			const isBetaContainer = e.getAttribute('data-beta-container');
 			if (!sectionId) continue;
-
+			if (isSignedIn === 'Pending') return;
 			if (isSignedIn === false && isBetaContainer === 'true') {
 				// Only signed in users can show/hide containers so we visually hide these buttons.
 				e.classList.add('hidden');
