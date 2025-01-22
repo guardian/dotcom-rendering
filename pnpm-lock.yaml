@@ -62,8 +62,8 @@ importers:
         specifier: 11.11.0
         version: 11.11.0
       '@guardian/apps-rendering-api-models':
-        specifier: 10.0.0
-        version: 10.0.0
+        specifier: 11.0.0
+        version: 11.0.0
       '@guardian/bridget':
         specifier: 7.0.0
         version: 7.0.0
@@ -71,8 +71,8 @@ importers:
         specifier: 50.13.0
         version: 50.13.0(@types/node@18.18.14)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.5.3)
       '@guardian/content-api-models':
-        specifier: 25.0.0
-        version: 25.0.0
+        specifier: 26.0.0
+        version: 26.0.0
       '@guardian/content-atom-model':
         specifier: 4.0.1
         version: 4.0.1
@@ -3745,11 +3745,11 @@ packages:
       typescript: 5.5.3
     dev: false
 
-  /@guardian/apps-rendering-api-models@10.0.0:
-    resolution: {integrity: sha512-tonbINIMib4TlBYiJyBpTZ6mEANGeSwpDkv35v1KhlsLXXDLsAZ5BVaYEAbWlxCOgoJboNMD7Y7pZqZvY+kVow==}
+  /@guardian/apps-rendering-api-models@11.0.0:
+    resolution: {integrity: sha512-cmyMiQK4jSiCX4nN3wHnSqB6StKZ4Gek2q6p3l8g4ZJRq46nl0OcTvNm5/SsrjHPsOArImN9XKiaNP4BVZvRoQ==}
     dependencies:
-      '@guardian/content-api-models': 25.0.0
-      '@guardian/content-atom-model': 4.0.1
+      '@guardian/content-api-models': 26.0.0
+      '@guardian/content-atom-model': 4.0.4
       '@guardian/content-entity-model': 3.0.3
       '@guardian/story-packages-model': 2.2.0
       '@types/node-int64': 0.4.32
@@ -3933,8 +3933,8 @@ packages:
       - whiskers
     dev: false
 
-  /@guardian/content-api-models@25.0.0:
-    resolution: {integrity: sha512-6QlboykRlvfo2vR2N9Z9mWjkTzuplPVEsMvkkwEZqbA21iGr1XkoIrGGlGUvLM+i67KCABMQsTki3JLEVa7EGQ==}
+  /@guardian/content-api-models@26.0.0:
+    resolution: {integrity: sha512-41kW0r/aq8LDgrs4sBnBIGeNTzYbqUM+9qYL3y5nR+8pKZJ3lF1NPIcsdcoG1nRhrkhLnqsehfJ/oWgwPPBg/w==}
     dependencies:
       '@guardian/content-atom-model': 4.0.4
       '@guardian/content-entity-model': 3.0.3
@@ -4027,7 +4027,7 @@ packages:
       '@typescript-eslint/parser': 6.18.0(eslint@8.56.0)(typescript@5.5.3)
       eslint: 8.56.0
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@6.18.0)(eslint-plugin-import@2.29.1)(eslint@8.56.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint@8.56.0)
       tslib: 2.6.2
       typescript: 5.5.3
     transitivePeerDependencies:
@@ -6221,7 +6221,7 @@ packages:
       react-docgen-typescript: 2.2.2(typescript@5.5.3)
       tslib: 2.6.2
       typescript: 5.5.3
-      webpack: 5.97.1(@swc/core@1.9.2)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.97.1(esbuild@0.18.20)(webpack-cli@5.1.4)
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -7779,8 +7779,8 @@ packages:
       webpack: 5.x.x
       webpack-cli: 5.x.x
     dependencies:
-      webpack: 5.97.1(@swc/core@1.9.2)(esbuild@0.18.20)(webpack-cli@5.1.4)
-      webpack-cli: 5.1.4(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.1.0)(webpack@5.97.1)
+      webpack: 5.97.1(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack-cli: 5.1.4(webpack-dev-server@5.1.0)(webpack@5.97.1)
     dev: false
 
   /@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.97.1):
@@ -7790,8 +7790,8 @@ packages:
       webpack: 5.x.x
       webpack-cli: 5.x.x
     dependencies:
-      webpack: 5.97.1(@swc/core@1.9.2)(esbuild@0.18.20)(webpack-cli@5.1.4)
-      webpack-cli: 5.1.4(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.1.0)(webpack@5.97.1)
+      webpack: 5.97.1(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack-cli: 5.1.4(webpack-dev-server@5.1.0)(webpack@5.97.1)
     dev: false
 
   /@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack-dev-server@5.1.0)(webpack@5.97.1):
@@ -7805,8 +7805,8 @@ packages:
       webpack-dev-server:
         optional: true
     dependencies:
-      webpack: 5.97.1(@swc/core@1.9.2)(esbuild@0.18.20)(webpack-cli@5.1.4)
-      webpack-cli: 5.1.4(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.1.0)(webpack@5.97.1)
+      webpack: 5.97.1(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack-cli: 5.1.4(webpack-dev-server@5.1.0)(webpack@5.97.1)
       webpack-dev-server: 5.1.0(webpack-cli@5.1.4)(webpack@5.97.1)
     dev: false
 
@@ -8414,7 +8414,7 @@ packages:
       '@babel/core': 7.26.0
       find-cache-dir: 4.0.0
       schema-utils: 4.2.0
-      webpack: 5.97.1(@swc/core@1.9.2)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.97.1(esbuild@0.18.20)(webpack-cli@5.1.4)
     dev: false
 
   /babel-plugin-istanbul@6.1.1:
@@ -9582,7 +9582,7 @@ packages:
       postcss-modules-values: 4.0.0(postcss@8.4.47)
       postcss-value-parser: 4.2.0
       semver: 7.5.4
-      webpack: 5.97.1(@swc/core@1.9.2)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.97.1(esbuild@0.18.20)(webpack-cli@5.1.4)
     dev: false
 
   /css-loader@7.1.2(webpack@5.97.1):
@@ -10560,7 +10560,7 @@ packages:
       enhanced-resolve: 5.17.0
       eslint: 8.56.0
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint@8.56.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.2
       is-core-module: 2.15.1
@@ -11566,7 +11566,7 @@ packages:
       semver: 7.5.4
       tapable: 2.2.1
       typescript: 5.5.3
-      webpack: 5.97.1(@swc/core@1.9.2)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.97.1(esbuild@0.18.20)(webpack-cli@5.1.4)
     dev: false
 
   /form-data-encoder@2.1.4:
@@ -16750,7 +16750,7 @@ packages:
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
-      webpack: 5.97.1(@swc/core@1.9.2)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.97.1(esbuild@0.18.20)(webpack-cli@5.1.4)
     dev: false
 
   /stylelint-config-recommended@14.0.0(stylelint@16.5.0):
@@ -17236,7 +17236,7 @@ packages:
       semver: 7.5.4
       source-map: 0.7.4
       typescript: 5.5.3
-      webpack: 5.97.1(@swc/core@1.9.2)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.97.1(esbuild@0.18.20)(webpack-cli@5.1.4)
     dev: false
 
   /ts-node@10.9.2(@swc/core@1.9.2)(@types/node@16.18.68)(typescript@5.1.6):
@@ -18029,7 +18029,7 @@ packages:
       mime-types: 2.1.35
       range-parser: 1.2.1
       schema-utils: 4.2.0
-      webpack: 5.97.1(@swc/core@1.9.2)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.97.1(esbuild@0.18.20)(webpack-cli@5.1.4)
     dev: false
 
   /webpack-dev-middleware@7.4.2(webpack@5.97.1):
@@ -18089,8 +18089,8 @@ packages:
       serve-index: 1.9.1
       sockjs: 0.3.24
       spdy: 4.0.2
-      webpack: 5.97.1(@swc/core@1.9.2)(esbuild@0.18.20)(webpack-cli@5.1.4)
-      webpack-cli: 5.1.4(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.1.0)(webpack@5.97.1)
+      webpack: 5.97.1(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack-cli: 5.1.4(webpack-dev-server@5.1.0)(webpack@5.97.1)
       webpack-dev-middleware: 7.4.2(webpack@5.97.1)
       ws: 8.18.0
     transitivePeerDependencies:
@@ -18135,7 +18135,7 @@ packages:
       webpack: ^5.47.0
     dependencies:
       tapable: 2.2.1
-      webpack: 5.97.1(@swc/core@1.9.2)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.97.1(esbuild@0.18.20)(webpack-cli@5.1.4)
       webpack-sources: 2.3.1
     dev: false
     patched: true
