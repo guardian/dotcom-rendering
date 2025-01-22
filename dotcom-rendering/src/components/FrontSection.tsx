@@ -91,6 +91,7 @@ type Props = {
 	collectionBranding?: CollectionBranding;
 	isTagPage?: boolean;
 	hasNavigationButtons?: boolean;
+	isBetaContainer?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -529,6 +530,7 @@ export const FrontSection = ({
 	collectionBranding,
 	isTagPage = false,
 	hasNavigationButtons = false,
+	isBetaContainer,
 }: Props) => {
 	const isToggleable = toggleable && !!sectionId;
 	const showMore =
@@ -628,7 +630,7 @@ export const FrontSection = ({
 						{isToggleable && (
 							<ShowHideButton
 								sectionId={sectionId}
-								betaContainer={!!containerLevel}
+								isBetaContainer={!!isBetaContainer}
 							/>
 						)}
 						{hasNavigationButtons && (

@@ -366,7 +366,7 @@ export const Section = ({
 						{toggleable && !!sectionId && (
 							<ShowHideButton
 								sectionId={sectionId}
-								betaContainer={false}
+								isBetaContainer={false}
 							/>
 						)}
 					</div>
