@@ -35,7 +35,7 @@ export const SignInGateMain = ({
 		<div css={signInGateContainer} data-testid="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
 			<div css={firstParagraphOverlay} />
-			<h1 css={headingStyles}>Register: it’s quick and easy</h1>
+			<h1 css={headingStyles}>Register: it’s quick and easy (Pascal)</h1>
 			<p css={bodyBold}>
 				It’s still free to read – this is not a paywall
 			</p>

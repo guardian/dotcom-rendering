@@ -193,6 +193,30 @@ export const SignInGateSelector = ({
 	idUrl = 'https://profile.theguardian.com',
 	switches,
 }: Props) => {
+	return SignInGateSelectorDefault({
+		contentType,
+		sectionId,
+		tags,
+		isPaidContent,
+		isPreview,
+		host,
+		pageId,
+		idUrl,
+		switches,
+	});
+};
+
+const SignInGateSelectorDefault = ({
+	contentType,
+	sectionId = '',
+	tags,
+	isPaidContent,
+	isPreview,
+	host = 'https://theguardian.com/',
+	pageId,
+	idUrl = 'https://profile.theguardian.com',
+	switches,
+}: Props) => {
 	const authStatus = useAuthStatus();
 	const isSignedIn =
 		authStatus.kind === 'SignedInWithOkta' ||
