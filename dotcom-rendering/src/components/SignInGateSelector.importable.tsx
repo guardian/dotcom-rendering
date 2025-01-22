@@ -193,17 +193,52 @@ export const SignInGateSelector = ({
 	idUrl = 'https://profile.theguardian.com',
 	switches,
 }: Props) => {
-	return SignInGateSelectorDefault({
-		contentType,
-		sectionId,
-		tags,
-		isPaidContent,
-		isPreview,
-		host,
-		pageId,
-		idUrl,
-		switches,
-	});
+	/*
+		Date: January 2025
+		comment group: auxia-prototype-e55a86ef
+		Author: Pascal
+
+		We are currently starting to evaluate a new approach for the decision to display the sign gate or not: an
+		external API, that will be returning that decision. The company offering that API is called Auxia and
+		can be found here: https://www.auxia.io
+
+		At this aim I have move the existing legacy version of the SignInGateSelector to SignInGateSelectorDefault,
+		and I am introducing SignInGateSelectorAuxia, which is the new component that will be using the Auxia API.
+
+		This work, until further notice is the implementation and evaluation of a prototype.
+
+		All comments related to this prototype comes under the same comment group: auxia-prototype-e55a86ef
+		(follow it if one day you want to decommission the entire prototype).
+	*/
+
+	// TODO: replace this conditional by an AB test
+	const useDefault = false;
+
+	if (useDefault) {
+		return SignInGateSelectorDefault({
+			contentType,
+			sectionId,
+			tags,
+			isPaidContent,
+			isPreview,
+			host,
+			pageId,
+			idUrl,
+			switches,
+		});
+	} else {
+		return SignInGateSelectorAuxia({
+			contentType,
+			sectionId,
+			tags,
+			isPaidContent,
+			isPreview,
+			host,
+			pageId,
+			idUrl,
+			switches,
+		});
+	}
 };
 
 const SignInGateSelectorDefault = ({
@@ -217,6 +252,156 @@ const SignInGateSelectorDefault = ({
 	idUrl = 'https://profile.theguardian.com',
 	switches,
 }: Props) => {
+	const authStatus = useAuthStatus();
+	const isSignedIn =
+		authStatus.kind === 'SignedInWithOkta' ||
+		authStatus.kind === 'SignedInWithCookies';
+	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
+		undefined,
+	);
+	const [gateVariant, setGateVariant] = useState<
+		SignInGateComponent | undefined
+	>(undefined);
+	const [currentTest, setCurrentTest] = useState<
+		CurrentSignInGateABTest | undefined
+	>(undefined);
+	const [canShowGate, setCanShowGate] = useState(false);
+
+	const { renderingTarget } = useConfig();
+	const gateSelector = useSignInGateSelector();
+	const pageViewId = usePageViewId(renderingTarget);
+
+	// START: Checkout Complete Personalisation
+	const [personaliseSwitch, setPersonaliseSwitch] = useState(false);
+	const checkoutCompleteCookieData = useCheckoutCompleteCookieData();
+
+	const personaliseComponentId = (
+		currentComponentId: string | undefined,
+	): string | undefined => {
+		if (!currentComponentId) return undefined;
+		if (!checkoutCompleteCookieData) return currentComponentId;
+		const { userType, product } = checkoutCompleteCookieData;
+		return `${currentComponentId}_personalised_${userType}_${product}`;
+	};
+	const shouldPersonaliseComponentId = (): boolean => {
+		return personaliseSwitch && !!checkoutCompleteCookieData;
+	};
+	const { personaliseSignInGateAfterCheckout } = switches;
+	// END: Checkout Complete Personalisation
+
+	const countryCode = useCountryCode('sign-in-gate-selector');
+
+	useOnce(() => {
+		// this hook will fire when the sign in gate is dismissed
+		// which will happen when the showGate state is set to false
+		// this only happens within the dismissGate method
+		if (isGateDismissed) {
+			document.dispatchEvent(
+				new CustomEvent('article:sign-in-gate-dismissed'),
+			);
+		}
+	}, [isGateDismissed]);
+
+	useOnce(() => {
+		const [gateSelectorVariant, gateSelectorTest] = gateSelector as [
+			SignInGateComponent | null,
+			CurrentSignInGateABTest | null,
+		];
+		if (gateSelectorVariant && gateSelectorTest) {
+			setGateVariant(gateSelectorVariant);
+			setCurrentTest(gateSelectorTest);
+		}
+	}, [gateSelector]);
+
+	useEffect(() => {
+		if (personaliseSignInGateAfterCheckout) {
+			setPersonaliseSwitch(personaliseSignInGateAfterCheckout);
+		} else {
+			setPersonaliseSwitch(false);
+		}
+	}, [personaliseSignInGateAfterCheckout]);
+
+	useEffect(() => {
+		if (gateVariant && currentTest) {
+			void gateVariant
+				.canShow({
+					isSignedIn: !!isSignedIn,
+					currentTest,
+					contentType,
+					sectionId,
+					tags,
+					isPaidContent,
+					isPreview,
+					currentLocaleCode: countryCode,
+				})
+				.then(setCanShowGate);
+		}
+	}, [
+		currentTest,
+		gateVariant,
+		isSignedIn,
+		contentType,
+		sectionId,
+		tags,
+		isPaidContent,
+		isPreview,
+		countryCode,
+	]);
+
+	if (!currentTest || !gateVariant || isUndefined(pageViewId)) {
+		return null;
+	}
+	const signInGateComponentId = signInGateTestIdToComponentId[currentTest.id];
+
+	const componentId = shouldPersonaliseComponentId()
+		? personaliseComponentId(signInGateComponentId)
+		: signInGateComponentId;
+
+	const ctaUrlParams = {
+		pageId,
+		host,
+		pageViewId,
+		idUrl,
+		currentTest,
+		componentId,
+	} satisfies Parameters<typeof generateGatewayUrl>[1];
+
+	return (
+		<>
+			{/* Sign In Gate Display Logic */}
+			{!isGateDismissed && canShowGate && !!componentId && (
+				<ShowSignInGate
+					abTest={currentTest}
+					componentId={componentId}
+					// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
+					setShowGate={(show) => setIsGateDismissed(!show)}
+					signInUrl={generateGatewayUrl('signin', ctaUrlParams)}
+					registerUrl={generateGatewayUrl('register', ctaUrlParams)}
+					gateVariant={gateVariant}
+					host={host}
+					checkoutCompleteCookieData={checkoutCompleteCookieData}
+					personaliseSignInGateAfterCheckoutSwitch={personaliseSwitch}
+				/>
+			)}
+		</>
+	);
+};
+
+const SignInGateSelectorAuxia = ({
+	contentType,
+	sectionId = '',
+	tags,
+	isPaidContent,
+	isPreview,
+	host = 'https://theguardian.com/',
+	pageId,
+	idUrl = 'https://profile.theguardian.com',
+	switches,
+}: Props) => {
+	/*
+		comment group: auxia-prototype-e55a86ef
+		This function if the Auxia prototype for the SignInGateSelector component.
+	*/
 	const authStatus = useAuthStatus();
 	const isSignedIn =
 		authStatus.kind === 'SignedInWithOkta' ||
