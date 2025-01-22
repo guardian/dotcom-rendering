@@ -48,7 +48,7 @@ const bigNumber = css`
 
 export const MostViewedFooterPlaceholder = () => {
 	return (
-		<>
+		<div data-name="placeholder">
 			<div css={tabs} />
 			<ol css={listContainer}>
 				{Array.from(Array(10), (_, i) => (
@@ -59,6 +59,6 @@ export const MostViewedFooterPlaceholder = () => {
 					</li>
 				))}
 			</ol>
-		</>
+		</div>
 	);
 };
