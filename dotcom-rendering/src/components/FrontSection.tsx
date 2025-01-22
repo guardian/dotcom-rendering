@@ -189,7 +189,7 @@ const containerScrollableStylesFromLeftCol = css`
 			[headline-start content-start content-toggleable-start controls-start] auto
 			[headline-end treats-start] auto
 			[content-end content-toggleable-end treats-end controls-end bottom-content-start] auto
-			[ bottom-content-end];
+			[bottom-content-end];
 	}
 `;
 
