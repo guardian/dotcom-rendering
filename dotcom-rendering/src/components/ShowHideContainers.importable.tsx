@@ -93,6 +93,10 @@ export const ShowHideContainers = () => {
 		);
 
 		for (const button of showHideButtons) {
+			/**
+			 * We need if a user is signed in before we can make any further decisions about show/hide buttons.
+			 * If the state is still pending, return early to prevent any flickering of the buttons.
+			 */
 			if (isSignedIn === 'Pending') return;
 
 			const sectionId = button.getAttribute('data-show-hide-button');
