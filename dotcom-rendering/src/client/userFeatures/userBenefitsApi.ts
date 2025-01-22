@@ -29,6 +29,7 @@ export const syncDataFromUserBenefitsApi = async (
 			'hideSupportMessaging',
 		),
 		adFree: response.benefits.includes('adFree'),
+		allowRejectAll: response.benefits.includes('allowRejectAll'),
 	};
 };
 

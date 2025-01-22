@@ -12,6 +12,11 @@ import {
 	setAdFreeCookie,
 } from './cookies/adFree';
 import {
+	getAllowRejectAllCookie,
+	removeAllowRejectAllCookie,
+	setAllowRejectAllCookie,
+} from './cookies/allowRejectAll';
+import {
 	getHideSupportMessagingCookie,
 	removeHideSupportMessagingCookie,
 	setHideSupportMessagingCookie,
@@ -28,13 +33,15 @@ import { syncDataFromUserBenefitsApi } from './userBenefitsApi';
 export type UserBenefits = {
 	adFree: boolean;
 	hideSupportMessaging: boolean;
+	allowRejectAll: boolean;
 };
 
 const userHasData = () => {
 	const cookie =
 		getAdFreeCookie() ??
 		getUserFeaturesExpiryCookie() ??
-		getHideSupportMessagingCookie();
+		getHideSupportMessagingCookie() ??
+		getAllowRejectAllCookie();
 	return !!cookie;
 };
 
@@ -86,12 +93,18 @@ const persistResponse = (userBenefitsResponse: UserBenefits) => {
 	} else if (adFreeDataIsPresent() && !forcedAdFreeMode) {
 		removeAdFreeCookie();
 	}
+	if (userBenefitsResponse.allowRejectAll) {
+		setAllowRejectAllCookie(2);
+	} else {
+		removeAllowRejectAllCookie();
+	}
 };
 
 export const deleteAllCookies = (): void => {
 	removeAdFreeCookie();
 	removeHideSupportMessagingCookie();
 	removeUserFeaturesExpiryCookie();
+	removeAllowRejectAllCookie();
 };
 
 export { refresh };
