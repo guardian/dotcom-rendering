@@ -113,7 +113,6 @@ export const ShowHideContainers = () => {
 			 */
 			if (isBetaContainer === 'true' && !isSignedIn) {
 				button.classList.add('hidden');
-				return;
 			} else {
 				initialiseShowHide(sectionId, button, containerStates);
 			}
