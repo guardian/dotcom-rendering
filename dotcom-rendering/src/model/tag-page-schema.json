@@ -977,7 +977,7 @@
                 "beaconUrl": {
                     "type": "string"
                 },
-                "userAttributesApiUrl": {
+                "userBenefitsApiUrl": {
                     "type": "string"
                 },
                 "host": {
@@ -1238,7 +1238,7 @@
                 "stripePublicToken",
                 "supportUrl",
                 "switches",
-                "userAttributesApiUrl",
+                "userBenefitsApiUrl",
                 "webTitle"
             ]
         },

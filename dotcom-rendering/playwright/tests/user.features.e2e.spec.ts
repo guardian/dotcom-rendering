@@ -6,8 +6,6 @@ import { loadPageNoOkta } from '../lib/load-page';
 import { stubResponse } from '../lib/network';
 
 test.describe('User cookies tests', () => {
-	const userAttributesApiUrl =
-		'https://members-data-api.theguardian.com/user-attributes';
 	const userBenefitsApiUrl =
 		'https://user-benefits.code.dev-guardianapis.com/benefits/me';
 	test(`Request to user features API is sent when no user features expiry cookie`, async ({
@@ -32,7 +30,6 @@ test.describe('User cookies tests', () => {
 		await loadPageNoOkta(page, standardArticle, {
 			// user-features expects this config to be present
 			configOverrides: {
-				userAttributesApiUrl,
 				userBenefitsApiUrl,
 			},
 		});
@@ -82,7 +79,6 @@ test.describe('User cookies tests', () => {
 		await loadPageNoOkta(page, standardArticle, {
 			// user-features expects this config to be present
 			configOverrides: {
-				userAttributesApiUrl,
 				userBenefitsApiUrl,
 			},
 		});
