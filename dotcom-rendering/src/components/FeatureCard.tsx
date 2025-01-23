@@ -189,8 +189,8 @@ const trailTextWrapper = css`
 
 const videoPillStyles = css`
 	position: absolute;
-	top: 8px;
-	right: 8px;
+	top: ${space[2]}px;
+	right: ${space[2]}px;
 `;
 
 const getMedia = ({
@@ -551,11 +551,7 @@ export const FeatureCard = ({
 											// 	) : undefined
 											// }
 											showLivePlayable={false}
-											// The media duration is displayed in the top-right on a video article card
-											isVideo={
-												isVideoMainMedia &&
-												!isVideoArticle
-											}
+											isVideo={isVideoArticle}
 											isAudio={isAudioArticle}
 											isGallery={isGalleryArticle}
 											videoDuration={videoDuration}
@@ -564,8 +560,9 @@ export const FeatureCard = ({
 										/>
 									</div>
 								</div>
-
-								{isVideoArticle &&
+								{/* On video article cards, the duration is displayed in the footer */}
+								{!isVideoArticle &&
+								isVideoMainMedia &&
 								videoDuration !== undefined ? (
 									<div css={videoPillStyles}>
 										<Pill
