@@ -39,6 +39,9 @@ const decideImageWidths = (
 		// 		{ breakpoint: breakpoints.desktop, width: 140 },
 		// 	];
 
+		case 'podcast':
+			return [{ breakpoint: breakpoints.mobile, width: 80 }];
+
 		case 'carousel':
 			return [{ breakpoint: breakpoints.mobile, width: 220 }];
 

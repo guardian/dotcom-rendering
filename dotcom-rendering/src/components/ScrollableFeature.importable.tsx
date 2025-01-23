@@ -72,6 +72,8 @@ export const ScrollableFeature = ({
 								mobile: 'xsmall',
 							}}
 							galleryCount={card.galleryCount}
+							podcastImage={card.podcastImage}
+							audioDuration={card.audioDuration}
 						/>
 					</ScrollableCarousel.Item>
 				);

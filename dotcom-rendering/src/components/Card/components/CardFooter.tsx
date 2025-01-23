@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { palette, space, textSansBold12 } from '@guardian/source/foundations';
 import { SvgCamera } from '@guardian/source/react-components';
 import { Pill } from '../../../components/Pill';
+import { SvgMediaControlsPlay } from '../../../components/SvgMediaControlsPlay';
 import { type ArticleFormat, ArticleSpecial } from '../../../lib/articleFormat';
 import type { MainMedia } from '../../../types/mainMedia';
 
@@ -46,6 +47,7 @@ type Props = {
 	cardBranding?: JSX.Element;
 	mediaType?: MainMedia['type'];
 	galleryCount?: number;
+	audioDuration?: string;
 };
 
 export const CardFooter = ({
@@ -56,11 +58,23 @@ export const CardFooter = ({
 	showLivePlayable,
 	mediaType,
 	galleryCount,
+	audioDuration,
 }: Props) => {
 	if (showLivePlayable) return null;
 
 	if (format.theme === ArticleSpecial.Labs && cardBranding) {
 		return <footer css={labStyles}>{cardBranding}</footer>;
+	}
+
+	if (mediaType === 'Audio' && audioDuration !== undefined) {
+		return (
+			<footer css={contentStyles}>
+				<Pill
+					content={<time>{audioDuration}</time>}
+					icon={<SvgMediaControlsPlay />}
+				/>
+			</footer>
+		);
 	}
 
 	if (mediaType === 'Gallery') {
