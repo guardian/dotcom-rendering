@@ -247,6 +247,7 @@ type BoostedCardProperties = {
  */
 const decideCardProperties = (
 	boostLevel: Omit<BoostLevel, 'default' | 'gigaboost'> = 'boost',
+	supportingContentLength: number,
 	avatarUrl?: string,
 ): BoostedCardProperties => {
 	switch (boostLevel) {
@@ -259,7 +260,8 @@ const decideCardProperties = (
 				},
 				imageSize: 'jumbo',
 				liveUpdatesPosition: 'outer',
-				supportingContentAlignment: 'horizontal',
+				supportingContentAlignment:
+					supportingContentLength >= 2 ? 'horizontal' : 'vertical',
 			};
 		case 'boost':
 		default:
@@ -271,7 +273,8 @@ const decideCardProperties = (
 				},
 				imageSize: avatarUrl ? 'large' : 'medium',
 				liveUpdatesPosition: 'inner',
-				supportingContentAlignment: 'horizontal',
+				supportingContentAlignment:
+					supportingContentLength >= 2 ? 'horizontal' : 'vertical',
 			};
 	}
 };
@@ -303,7 +306,11 @@ export const BoostedCardLayout = ({
 		imageSize,
 		supportingContentAlignment,
 		liveUpdatesPosition,
-	} = decideCardProperties(card.boostLevel, card.avatarUrl);
+	} = decideCardProperties(
+		card.boostLevel,
+		card.supportingContent?.length ?? 0,
+		card.avatarUrl,
+	);
 	return (
 		<UL
 			showTopBar={!isFirstRow}
