@@ -82,20 +82,6 @@ const gridContainer = css`
 	}
 `;
 
-const mediaGrid = css`
-	grid-template-areas:
-		'image'
-		'headline'
-		'media-icon';
-
-	${from.desktop} {
-		width: 300px;
-		grid-template-areas:
-			'image headline'
-			'image media-icon';
-	}
-`;
-
 const headline = css`
 	grid-area: headline;
 `;
@@ -103,32 +89,6 @@ const headline = css`
 const mediaIcon = css`
 	grid-area: media-icon;
 	align-self: end;
-`;
-
-const audioPill = css`
-	display: flex;
-	align-items: center;
-	column-gap: 4px;
-`;
-
-const audioPillIcon = css`
-	width: 26px;
-	height: 26px;
-	/* We’re using the text colour for the icon badge */
-	background-color: ${palette('--highlight-card-audio-icon')};
-	border-radius: 50%;
-
-	> svg {
-		margin-left: auto;
-		margin-right: auto;
-		display: block;
-		fill: ${palette('--highlights-container-background')};
-	}
-`;
-
-const audioPillText = css`
-	${textSansBold12};
-	color: ${palette('--highlight-card-audio-text')};
 `;
 
 const imageArea = css`
@@ -190,22 +150,22 @@ export const HighlightsCard = ({
 	audioDuration,
 }: HighlightsCardProps) => {
 	const isMediaCard = isMedia(format);
+
 	const MediaPill = () => (
 		<div css={mediaIcon}>
-			{mainMedia?.type === 'Video' && (
+			{mainMedia?.type === 'Video' && mainMedia.duration && (
 				<Pill
 					content={secondsToDuration(mainMedia.duration)}
 					icon={<SvgMediaControlsPlay />}
 					iconSize={'small'}
 				/>
 			)}
-			{mainMedia?.type === 'Audio' && (
-				<div css={audioPill}>
-					<div css={audioPillIcon}>
-						<SvgMediaControlsPlay />
-					</div>
-					<span css={audioPillText}>{audioDuration}</span>
-				</div>
+			{mainMedia?.type === 'Audio' && audioDuration && (
+				<Pill
+					content={audioDuration}
+					icon={<SvgMediaControlsPlay />}
+					iconSize={'small'}
+				/>
 			)}
 			{mainMedia?.type === 'Gallery' && (
 				<Pill
@@ -217,9 +177,10 @@ export const HighlightsCard = ({
 			)}
 		</div>
 	);
+
 	return (
 		<FormatBoundary format={format}>
-			<div css={[gridContainer, hoverStyles, isMediaCard && mediaGrid]}>
+			<div css={[gridContainer, hoverStyles]}>
 				<CardLink
 					linkTo={linkTo}
 					headlineText={headlineText}
