@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import { Link, SvgMediaControlsPlay } from '@guardian/source/react-components';
+import { Link } from '@guardian/source/react-components';
+import { SvgMediaControlsPlay } from '../components/SvgMediaControlsPlay';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
 import { getZIndex } from '../lib/getZIndex';
@@ -186,6 +187,24 @@ const starRatingWrapper = css`
 
 const trailTextWrapper = css`
 	margin-top: ${space[3]}px;
+`;
+
+const playIconWidth = 56;
+const playIconStyles = css`
+	position: absolute;
+	/**
+	 * Subject to change. We will wait to see how fronts editors use the
+	 * headlines and standfirsts before we decide on a final position.
+	 */
+	top: 35%;
+	left: calc(50% - ${playIconWidth / 2}px);
+	width: ${playIconWidth}px;
+	height: ${playIconWidth}px;
+	background-color: ${palette('--feature-card-play-icon-background')};
+	opacity: 0.7;
+	border-radius: 50%;
+	border: 1px solid ${palette('--feature-card-play-icon-border')};
+	fill: ${palette('--feature-card-play-icon-fill')};
 `;
 
 const videoPillStyles = css`
@@ -561,8 +580,13 @@ export const FeatureCard = ({
 										/>
 									</div>
 								</div>
+								{canPlayInline && isVideoMainMedia && (
+									<div css={playIconStyles}>
+										<SvgMediaControlsPlay />
+									</div>
+								)}
 								{/* On video article cards, the duration is displayed in the footer */}
-								{!isVideoArticle &&
+								{isVideoArticle &&
 								isVideoMainMedia &&
 								videoDuration !== undefined ? (
 									<div css={videoPillStyles}>

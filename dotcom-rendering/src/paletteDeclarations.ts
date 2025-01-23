@@ -6465,6 +6465,18 @@ const paletteColours = {
 		light: featureCardKickerTextLight,
 		dark: () => sourcePalette.neutral[20],
 	},
+	'--feature-card-play-icon-background': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--feature-card-play-icon-border': {
+		light: () => sourcePalette.neutral[60],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--feature-card-play-icon-fill': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
 	'--feature-card-trail-text': {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
