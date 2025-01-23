@@ -3,8 +3,13 @@ import { Standard as standardArticle } from '../../fixtures/generated/fe-article
 import { disableCMP } from '../lib/cmp';
 import { addCookie } from '../lib/cookies';
 import { loadPageNoOkta } from '../lib/load-page';
+import { stubResponse } from '../lib/network';
 
 test.describe('User cookies tests', () => {
+	const userAttributesApiUrl =
+		'https://members-data-api.theguardian.com/user-attributes';
+	const userBenefitsApiUrl =
+		'https://user-benefits.code.dev-guardianapis.com/benefits/me';
 	test(`Request to user features API is sent when no user features expiry cookie`, async ({
 		context,
 		page,
@@ -17,19 +22,22 @@ test.describe('User cookies tests', () => {
 
 		await disableCMP(context);
 
-		const membersDataApiPromise = page.waitForRequest(
-			'https://members-data-api.theguardian.com/user-attributes/me',
-		);
+		const userBenefitsApiPromise = stubResponse(page, userBenefitsApiUrl, {
+			status: 200,
+			body: JSON.stringify({
+				benefits: ['adFree', 'hideSupportMessaging'],
+			}),
+		});
 
 		await loadPageNoOkta(page, standardArticle, {
 			// user-features expects this config to be present
 			configOverrides: {
-				userAttributesApiUrl:
-					'https://members-data-api.theguardian.com/user-attributes',
+				userAttributesApiUrl,
+				userBenefitsApiUrl,
 			},
 		});
 
-		await membersDataApiPromise;
+		await userBenefitsApiPromise;
 
 		// expect GU_U to still be present so it has not been deleted by user-features
 		expect(
@@ -64,19 +72,22 @@ test.describe('User cookies tests', () => {
 
 		await disableCMP(context);
 
-		const membersDataApiPromise = page.waitForRequest(
-			'https://members-data-api.theguardian.com/user-attributes/me',
-		);
+		const userBenefitsApiPromise = stubResponse(page, userBenefitsApiUrl, {
+			status: 200,
+			body: JSON.stringify({
+				benefits: ['adFree', 'hideSupportMessaging'],
+			}),
+		});
 
 		await loadPageNoOkta(page, standardArticle, {
 			// user-features expects this config to be present
 			configOverrides: {
-				userAttributesApiUrl:
-					'https://members-data-api.theguardian.com/user-attributes',
+				userAttributesApiUrl,
+				userBenefitsApiUrl,
 			},
 		});
 
-		await membersDataApiPromise;
+		await userBenefitsApiPromise;
 	});
 
 	test(`Existing old cookie data is deleted when the user is signed out`, async ({

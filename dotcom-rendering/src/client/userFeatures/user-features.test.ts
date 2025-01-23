@@ -4,6 +4,11 @@ import {
 	isUserLoggedInOktaRefactor as isUserLoggedInOktaRefactor_,
 } from '../../lib/identity';
 import { getAdFreeCookie, setAdFreeCookie } from './cookies/adFree';
+import {
+	allowRejectAll,
+	getAllowRejectAllCookie,
+	setAllowRejectAllCookie,
+} from './cookies/allowRejectAll';
 import { setHideSupportMessagingCookie } from './cookies/hideSupportMessaging';
 import {
 	getUserFeaturesExpiryCookie,
@@ -12,19 +17,14 @@ import {
 import { fetchJson } from './fetchJson';
 import { deleteAllCookies, refresh } from './user-features';
 
-const fakeUserFeatures = {
-	showSupportMessaging: false,
-	contentAccess: {
-		digitalPack: true,
-		recurringContributor: false,
-		paidMember: true,
-	},
+const fakeUserBenefits = {
+	benefits: ['adFree', 'hideSupportMessaging'],
 };
 
 jest.mock('./fetchJson', () => {
 	return {
 		fetchJson: jest.fn(() => {
-			return Promise.resolve(fakeUserFeatures);
+			return Promise.resolve(fakeUserBenefits);
 		}),
 	};
 });
@@ -54,12 +54,15 @@ const setAllFeaturesData = (opts: { isExpired: boolean }) => {
 		: new Date(currentTime + msInOneDay);
 
 	setHideSupportMessagingCookie(true);
-	setAdFreeCookie(2);
+	setAdFreeCookie();
+	setAllowRejectAllCookie();
 	setUserFeaturesExpiryCookie(expiryDate.getTime().toString());
 };
 
 beforeAll(() => {
 	window.guardian.config.page.userAttributesApiUrl = '';
+	window.guardian.config.page.userBenefitsApiUrl = 'fake-url';
+	window.guardian.config.tests['useUserBenefitsApiVariant'] = 'variant';
 });
 
 describe('Refreshing the features data', () => {
@@ -70,7 +73,7 @@ describe('Refreshing the features data', () => {
 			getAuthStatus.mockResolvedValue({
 				kind: 'SignedInWithOkta',
 			} as AuthStatus);
-			fetchJsonSpy.mockReturnValue(Promise.resolve(fakeUserFeatures));
+			fetchJsonSpy.mockReturnValue(Promise.resolve(fakeUserBenefits));
 		});
 
 		it('Performs an update if the user has missing data', async () => {
@@ -124,21 +127,8 @@ describe('If user signed out', () => {
 
 describe('Storing new feature data', () => {
 	beforeEach(() => {
-		const mockResponse = {
-			userId: 'abc',
-			showSupportMessaging: false,
-			contentAccess: {
-				member: false,
-				paidMember: false,
-				recurringContributor: false,
-				digitalPack: false,
-				paperSubscriber: false,
-				guardianWeeklySubscriber: false,
-			},
-		};
-
 		jest.resetAllMocks();
-		fetchJsonSpy.mockReturnValue(Promise.resolve(mockResponse));
+		fetchJsonSpy.mockReturnValue(Promise.resolve(fakeUserBenefits));
 		deleteAllCookies();
 		isUserLoggedInOktaRefactor.mockResolvedValue(true);
 		getAuthStatus.mockResolvedValue({
@@ -146,16 +136,10 @@ describe('Storing new feature data', () => {
 		} as AuthStatus);
 	});
 
-	it('Puts the paying-member state and ad-free state in appropriate cookie', () => {
+	it('Puts the ad-free state in appropriate cookie', () => {
 		fetchJsonSpy.mockReturnValueOnce(
 			Promise.resolve({
-				showSupportMessaging: false,
-				contentAccess: {
-					paidMember: false,
-					recurringContributor: false,
-					digitalPack: false,
-				},
-				adFree: false,
+				benefits: [],
 			}),
 		);
 		return refresh().then(() => {
@@ -163,16 +147,10 @@ describe('Storing new feature data', () => {
 		});
 	});
 
-	it('Puts the paying-member state and ad-free state in appropriate cookie', () => {
+	it('Puts the ad-free state in appropriate cookie', () => {
 		fetchJsonSpy.mockReturnValueOnce(
 			Promise.resolve({
-				showSupportMessaging: false,
-				contentAccess: {
-					paidMember: true,
-					recurringContributor: true,
-					digitalPack: true,
-				},
-				adFree: true,
+				benefits: ['adFree'],
 			}),
 		);
 		return refresh().then(() => {
@@ -182,6 +160,37 @@ describe('Storing new feature data', () => {
 					parseInt(
 						// @ts-expect-error -- we’re testing it
 						getAdFreeCookie(),
+						10,
+					),
+				),
+			).toBe(false);
+		});
+	});
+
+	it('Puts the allowRejectAll state in appropriate cookie', () => {
+		fetchJsonSpy.mockReturnValueOnce(
+			Promise.resolve({
+				benefits: [],
+			}),
+		);
+		return refresh().then(() => {
+			expect(getAllowRejectAllCookie()).toBeNull();
+		});
+	});
+
+	it('Puts the allowRejectAll state in appropriate cookie', () => {
+		fetchJsonSpy.mockReturnValueOnce(
+			Promise.resolve({
+				benefits: ['allowRejectAll'],
+			}),
+		);
+		return refresh().then(() => {
+			expect(allowRejectAll()).toBe(true);
+			expect(
+				Number.isNaN(
+					parseInt(
+						// @ts-expect-error -- we’re testing it
+						getAllowRejectAllCookie(),
 						10,
 					),
 				),
