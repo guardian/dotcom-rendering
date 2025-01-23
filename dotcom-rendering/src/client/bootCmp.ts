@@ -69,6 +69,8 @@ const initialiseCmp = async () => {
 			pageViewId,
 		},
 		country,
+		isUserSignedIn: window.location.search.includes('CMP_SIGNED_IN'),
+		useNonAdvertisedList: window.location.search.includes('CMP_MAIN'),
 	});
 	log('dotcom', 'CMP initialised');
 };
