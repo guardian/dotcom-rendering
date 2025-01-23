@@ -435,7 +435,7 @@ export const FeatureCard = ({
 															''
 														}
 														loading="lazy"
-														roundedCorners={true}
+														roundedCorners={false}
 														aspectRatio="1:1"
 													/>
 												</div>
