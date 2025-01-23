@@ -426,6 +426,14 @@ export const Card = ({
 
 	const isBetaContainer = BETA_CONTAINERS.includes(containerType ?? '');
 
+	/** A video article is standalone video content and is considered a media card.  */
+	const isVideoArticle =
+		mainMedia?.type === 'Video' && format.design === ArticleDesign.Video;
+
+	/** Article that have video as the main media but are not a video article are not considered a media card and are styled differenently as a consequence. */
+	const isVideoMainMedia =
+		mainMedia?.type === 'Video' && format.design !== ArticleDesign.Video;
+
 	const decideAge = () => {
 		if (!webPublicationDate) return undefined;
 		const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
@@ -485,14 +493,13 @@ export const Card = ({
 				margin-top: auto;
 			`}
 		>
-			{mainMedia?.type === 'Video' &&
-				format.design === ArticleDesign.Video && (
-					<Pill
-						content={secondsToDuration(mainMedia.duration)}
-						icon={<SvgMediaControlsPlay />}
-						iconSize={'small'}
-					/>
-				)}
+			{isVideoArticle && (
+				<Pill
+					content={secondsToDuration(mainMedia.duration)}
+					icon={<SvgMediaControlsPlay />}
+					iconSize={'small'}
+				/>
+			)}
 			{mainMedia?.type === 'Audio' && (
 				<Pill
 					content={audioDuration ?? ''}
@@ -946,18 +953,23 @@ export const Card = ({
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
 								/>
-								{mainMedia?.type === 'Video' &&
-									mainMedia.duration > 0 && (
-										<MediaDuration
-											mediaDuration={mainMedia.duration}
-											imagePositionOnDesktop={
-												imagePositionOnDesktop
-											}
-											imagePositionOnMobile={
-												imagePositionOnMobile
-											}
+								{isVideoMainMedia && mainMedia.duration > 0 && (
+									<div
+										css={css`
+											position: absolute;
+											top: ${space[2]}px;
+											right: ${space[2]}px;
+										`}
+									>
+										<Pill
+											content={secondsToDuration(
+												mainMedia.duration,
+											)}
+											icon={<SvgMediaControlsPlay />}
+											iconSize={'small'}
 										/>
-									)}
+									</div>
+								)}
 							</>
 						)}
 						{media.type === 'crossword' && (
