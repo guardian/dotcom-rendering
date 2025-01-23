@@ -9,6 +9,7 @@ import { palette } from '../../palette';
 import type { StarRating as Rating } from '../../types/content';
 import type { DCRFrontImage } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
+import { PodcastSeriesImage } from '../../types/tag';
 import { Avatar } from '../Avatar';
 import { CardLink } from '../Card/components/CardLink';
 import { CardHeadline } from '../CardHeadline';
@@ -18,8 +19,6 @@ import { FormatBoundary } from '../FormatBoundary';
 import { Pill } from '../Pill';
 import { StarRating } from '../StarRating/StarRating';
 import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
-import { PodcastSeriesImage } from '../../types/tag';
-import { PodcastCoverImage } from '../PodcastCoverImage';
 
 export type HighlightsCardProps = {
 	linkTo: string;
