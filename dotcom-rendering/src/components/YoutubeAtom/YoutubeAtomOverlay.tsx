@@ -9,6 +9,7 @@ import {
 	textSansBold12,
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../../lib/articleFormat';
+import { secondsToDuration } from '../../lib/formatTime';
 import { palette } from '../../palette';
 import type { AspectRatio } from '../../types/front';
 import type {
@@ -18,7 +19,6 @@ import type {
 import { PlayIcon } from '../Card/components/PlayIcon';
 import { FormatBoundary } from '../FormatBoundary';
 import { Kicker } from '../Kicker';
-import { secondsToDuration } from '../MediaDuration';
 import { YoutubeAtomPicture } from './YoutubeAtomPicture';
 
 type Props = {

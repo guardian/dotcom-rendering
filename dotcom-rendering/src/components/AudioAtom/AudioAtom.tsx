@@ -7,6 +7,7 @@ import {
 } from '@guardian/source/foundations';
 import type { MouseEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
+import { formatTime } from '../../lib/formatTime';
 import { palette } from '../../palette';
 
 const wrapperStyles = css`
@@ -149,15 +150,6 @@ const timeDurationStyle = css`
 const timeStyles = css`
 	${textSans15}
 `;
-
-const formatNum = (t: number) => t.toFixed(0).padStart(2, '0');
-
-const formatTime = (t: number) => {
-	const second = Math.floor(t % 60);
-	const minute = Math.floor((t % 3600) / 60);
-	const hour = Math.floor(t / 3600);
-	return `${formatNum(hour)}:${formatNum(minute)}:${formatNum(second)}`;
-};
 
 const PauseSVG = () => (
 	<svg css={svgPauseStyle} width="30px" height="30px" viewBox="0 0 30 30">
