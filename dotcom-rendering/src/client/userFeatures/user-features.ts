@@ -27,7 +27,6 @@ import {
 	removeUserFeaturesExpiryCookie,
 	setUserFeaturesExpiryCookie,
 } from './cookies/userFeaturesExpiry';
-import { syncDataFromMembersDataApi } from './membersDataApi';
 import { syncDataFromUserBenefitsApi } from './userBenefitsApi';
 
 export type UserBenefits = {
@@ -59,10 +58,6 @@ const refresh = async (): Promise<void> => {
 	}
 };
 
-const shouldUseUserBenefitsApi = (): boolean => {
-	return !!window.guardian.config.tests['useUserBenefitsApiVariant'];
-};
-
 const requestNewData = async () => {
 	const authStatus = await getAuthStatus();
 	if (
@@ -71,11 +66,7 @@ const requestNewData = async () => {
 	) {
 		return Promise.reject('The user is not signed in');
 	}
-	if (shouldUseUserBenefitsApi()) {
-		return syncDataFromUserBenefitsApi(authStatus).then(persistResponse);
-	} else {
-		return syncDataFromMembersDataApi(authStatus).then(persistResponse);
-	}
+	return syncDataFromUserBenefitsApi(authStatus).then(persistResponse);
 };
 
 const timeInDaysFromNow = (daysFromNow: number): string => {
