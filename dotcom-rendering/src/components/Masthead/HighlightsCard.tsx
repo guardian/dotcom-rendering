@@ -10,6 +10,7 @@ import {
 import { SvgCamera } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import { isMediaCard as isMedia } from '../../lib/cardHelpers';
+import { secondsToDuration } from '../../lib/formatTime';
 import { palette } from '../../palette';
 import type { StarRating as Rating } from '../../types/content';
 import type { DCRFrontImage } from '../../types/front';
@@ -20,7 +21,6 @@ import { CardHeadline } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { FormatBoundary } from '../FormatBoundary';
-import { secondsToDuration } from '../MediaDuration';
 import { Pill } from '../Pill';
 import { StarRating } from '../StarRating/StarRating';
 import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
