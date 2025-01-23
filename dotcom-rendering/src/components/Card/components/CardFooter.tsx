@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { palette, space, textSansBold12 } from '@guardian/source/foundations';
 import { SvgCamera } from '@guardian/source/react-components';
-import { secondsToDuration } from '../../../components/MediaDuration';
 import { Pill } from '../../../components/Pill';
 import { SvgMediaControlsPlay } from '../../../components/SvgMediaControlsPlay';
 import { type ArticleFormat, ArticleSpecial } from '../../../lib/articleFormat';
+import { secondsToDuration } from '../../../lib/formatTime';
 
 const contentStyles = css`
 	margin-top: auto;
