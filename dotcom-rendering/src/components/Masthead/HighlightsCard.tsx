@@ -44,11 +44,10 @@ const gridContainer = css`
 	position the card link overlay */
 	position: relative;
 	column-gap: ${space[2]}px;
-	row-gap: ${space[1]}px;
 	grid-template-areas:
-		'headline'
-		'media-icon'
-		'image';
+		'headline headline'
+		'media-icon media-icon'
+		'. image';
 
 	/* Applied word-break: break-word to prevent text overflow
 	and ensure long words break onto the next line.
@@ -80,6 +79,7 @@ const gridContainer = css`
 
 const headline = css`
 	grid-area: headline;
+	margin-bottom: ${space[1]}px;
 `;
 
 const mediaIcon = css`
@@ -92,9 +92,14 @@ const imageArea = css`
 	grid-area: image;
 	height: 106px;
 	width: 106px;
-	align-self: start;
+	align-self: end;
+
 	position: relative;
+	${until.desktop} {
+		padding-top: ${space[2]}px;
+	}
 	${from.desktop} {
+		align-self: start;
 		height: 112px;
 		width: 112px;
 	}
