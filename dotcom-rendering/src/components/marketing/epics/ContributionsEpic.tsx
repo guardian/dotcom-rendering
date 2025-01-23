@@ -19,16 +19,12 @@ import {
 	epicPropsSchema,
 	replaceNonArticleCountPlaceholders,
 } from '@guardian/support-dotcom-components';
-import type {
-	EpicProps,
-	Stage,
-} from '@guardian/support-dotcom-components/dist/shared/types';
+import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import { useArticleCountOptOut } from '../hooks/useArticleCountOptOut';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { replaceArticleCount } from '../lib/replaceArticleCount';
-import { isProd } from '../lib/stage';
 import {
 	addTrackingParamsToBodyLinks,
 	createInsertEventFromTracking,
@@ -303,34 +299,6 @@ const EpicBody: ReactComponent<BodyProps> = ({
 	);
 };
 
-const sendEpicViewEvent = (
-	url: string,
-	abTestName: string,
-	abTestVariant: string,
-	stage?: Stage,
-	countryCode?: string,
-): void => {
-	const path = 'events/epic-view';
-	const host = isProd(stage)
-		? 'https://contributions.guardianapis.com'
-		: 'https://contributions.code.dev-guardianapis.com';
-	const eventBody = JSON.stringify({
-		url,
-		countryCode,
-		abTests: [{ name: abTestName, variant: abTestVariant }],
-	});
-
-	void fetch(`${host}/${path}`, {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: eventBody,
-	}).then((response) => {
-		if (!response.ok) {
-			console.log('Epic view event request failed', response);
-		}
-	});
-};
-
 const ContributionsEpic: ReactComponent<EpicProps> = ({
 	variant,
 	tracking,
@@ -360,17 +328,6 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 
 	useEffect(() => {
 		if (hasBeenSeen) {
-			// For the event stream
-			if (!window.guardian.config.isDev && stage !== 'DEV') {
-				sendEpicViewEvent(
-					tracking.referrerUrl,
-					tracking.abTestName,
-					tracking.abTestVariant,
-					stage,
-					countryCode,
-				);
-			}
-
 			// For epic view count
 			logEpicView(tracking.abTestName);
 
