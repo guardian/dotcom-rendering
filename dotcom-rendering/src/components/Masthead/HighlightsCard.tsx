@@ -1,12 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import {
-	between,
-	from,
-	space,
-	textSansBold12,
-	until,
-} from '@guardian/source/foundations';
+import { between, from, until } from '@guardian/source/foundations';
 import { SvgCamera } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import { isMediaCard as isMedia } from '../../lib/cardHelpers';
@@ -51,9 +45,9 @@ const gridContainer = css`
 	position: relative;
 	gap: 8px;
 	grid-template-areas:
-		'headline 	headline'
-		'rating rating'
-		'media-icon image';
+		'headline'
+		'media-icon'
+		'image';
 
 	/* Applied word-break: break-word to prevent text overflow
 	and ensure long words break onto the next line.
@@ -89,7 +83,6 @@ const headline = css`
 
 const mediaIcon = css`
 	grid-area: media-icon;
-	align-self: end;
 	display: flex;
 	align-items: flex-end;
 `;
@@ -127,12 +120,8 @@ const starWrapper = css`
 	background-color: ${palette('--star-rating-background')};
 	color: ${palette('--star-rating-fill')};
 	width: fit-content;
-	height: fit-content;
-	grid-area: rating;
-	${from.desktop} {
-		grid-area: media-icon;
-		align-self: flex-end;
-	}
+	grid-area: media-icon;
+	align-self: flex-end;
 `;
 
 export const HighlightsCard = ({
