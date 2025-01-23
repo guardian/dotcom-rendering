@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import { Link } from '@guardian/source/react-components';
+import { Link, SvgMediaControlsPlay } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../lib/useCommentCount';
@@ -29,7 +29,8 @@ import { CardPicture } from './CardPicture';
 import { ContainerOverrides } from './ContainerOverrides';
 import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
-import { MediaDuration } from './MediaDuration';
+import { MediaDuration, secondsToDuration } from './MediaDuration';
+import { Pill } from './Pill';
 import { StarRating } from './StarRating/StarRating';
 import { SupportingContent } from './SupportingContent';
 
@@ -186,6 +187,12 @@ const trailTextWrapper = css`
 	margin-top: ${space[3]}px;
 `;
 
+const videoPillStyles = css`
+	position: absolute;
+	top: 8px;
+	right: 8px;
+`;
+
 const getMedia = ({
 	imageUrl,
 	imageAltText,
@@ -325,6 +332,12 @@ export const FeatureCard = ({
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
 	const isVideoMainMedia = mainMedia?.type === 'Video';
+	const isVideoArticle = format.design === ArticleDesign.Video;
+	const isAudioArticle = format.design === ArticleDesign.Audio;
+	const isGalleryArticle = format.design === ArticleDesign.Gallery;
+
+	const videoDuration =
+		mainMedia?.type === 'Video' ? mainMedia.duration : undefined;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -538,12 +551,35 @@ export const FeatureCard = ({
 											// 	) : undefined
 											// }
 											showLivePlayable={false}
-											mediaType={mainMedia?.type}
-											galleryCount={galleryCount}
+											// The media duration is displayed in the top-right on a video article card
+											isVideo={
+												isVideoMainMedia &&
+												!isVideoArticle
+											}
+											isAudio={isAudioArticle}
+											isGallery={isGalleryArticle}
+											videoDuration={videoDuration}
 											audioDuration={audioDuration}
+											galleryCount={galleryCount}
 										/>
 									</div>
 								</div>
+
+								{isVideoArticle &&
+								videoDuration !== undefined ? (
+									<div css={videoPillStyles}>
+										<Pill
+											content={
+												<time>
+													{secondsToDuration(
+														videoDuration,
+													)}
+												</time>
+											}
+											icon={<SvgMediaControlsPlay />}
+										/>
+									</div>
+								) : null}
 							</div>
 						)}
 					</div>

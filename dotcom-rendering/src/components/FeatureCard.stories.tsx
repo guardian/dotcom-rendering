@@ -120,6 +120,10 @@ export const Opinion: Story = {
 
 export const Podcast: Story = {
 	args: {
+		format: {
+			...cardProps.format,
+			design: ArticleDesign.Audio,
+		},
 		image: {
 			src: 'https://media.guim.co.uk/ecb7f0bebe473d6ef1375b5cb60b78f9466a5779/0_229_3435_2061/master/3435.jpg',
 			altText: 'alt text',
@@ -138,6 +142,10 @@ export const Podcast: Story = {
 
 export const Gallery: Story = {
 	args: {
+		format: {
+			...cardProps.format,
+			design: ArticleDesign.Gallery,
+		},
 		image: {
 			src: 'https://media.guim.co.uk/7b500cfe9afe4e211ad771c86e66297c9c22993b/0_61_4801_2880/master/4801.jpg',
 			altText: 'alt text',
@@ -146,6 +154,52 @@ export const Gallery: Story = {
 			type: 'Gallery',
 		},
 		galleryCount: 12,
+	},
+};
+
+// A video article
+export const Video: Story = {
+	args: {
+		format: {
+			...cardProps.format,
+			design: ArticleDesign.Video,
+		},
+		image: {
+			src: 'https://media.guim.co.uk/f2aedd24e5414073a653f68112e0ad070c6f4a2b/254_0_7493_4500/master/7493.jpg',
+			altText: 'alt text',
+		},
+		mainMedia: {
+			type: 'Video',
+			id: 'video-id',
+			videoId: 'video-id',
+			height: 1080,
+			width: 1920,
+			origin: 'origin',
+			title: 'Video Title',
+			duration: 120,
+			expired: false,
+			images: [
+				{
+					url: 'https://media.guim.co.uk/video-thumbnail.jpg',
+					width: 1920,
+				},
+			],
+		},
+	},
+};
+
+// A standard (non-video) article with a video main media
+export const VideoMainMedia: Story = {
+	args: {
+		...Video.args,
+		image: {
+			src: 'https://media.guim.co.uk/4612af5f4667888fa697139cf570b6373d93a710/2446_345_3218_1931/master/3218.jpg',
+			altText: 'alt text',
+		},
+		format: {
+			...cardProps.format,
+			design: ArticleDesign.Standard,
+		},
 	},
 };
 

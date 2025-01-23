@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { palette, space, textSansBold12 } from '@guardian/source/foundations';
 import { SvgCamera } from '@guardian/source/react-components';
+import { secondsToDuration } from '../../../components/MediaDuration';
 import { Pill } from '../../../components/Pill';
 import { SvgMediaControlsPlay } from '../../../components/SvgMediaControlsPlay';
 import { type ArticleFormat, ArticleSpecial } from '../../../lib/articleFormat';
-import type { MainMedia } from '../../../types/mainMedia';
 
 const contentStyles = css`
 	margin-top: auto;
@@ -45,9 +45,12 @@ type Props = {
 	age?: JSX.Element;
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
-	mediaType?: MainMedia['type'];
-	galleryCount?: number;
+	isVideo?: boolean;
+	videoDuration?: number;
+	isAudio?: boolean;
 	audioDuration?: string;
+	isGallery?: boolean;
+	galleryCount?: number;
 };
 
 export const CardFooter = ({
@@ -56,9 +59,12 @@ export const CardFooter = ({
 	commentCount,
 	cardBranding,
 	showLivePlayable,
-	mediaType,
-	galleryCount,
+	isVideo,
+	videoDuration,
+	isAudio,
 	audioDuration,
+	isGallery,
+	galleryCount,
 }: Props) => {
 	if (showLivePlayable) return null;
 
@@ -66,7 +72,18 @@ export const CardFooter = ({
 		return <footer css={labStyles}>{cardBranding}</footer>;
 	}
 
-	if (mediaType === 'Audio' && audioDuration !== undefined) {
+	if (isVideo && videoDuration !== undefined) {
+		return (
+			<footer css={contentStyles}>
+				<Pill
+					content={<time>{secondsToDuration(videoDuration)}</time>}
+					icon={<SvgMediaControlsPlay />}
+				/>
+			</footer>
+		);
+	}
+
+	if (isAudio && audioDuration !== undefined) {
 		return (
 			<footer css={contentStyles}>
 				<Pill
@@ -77,11 +94,11 @@ export const CardFooter = ({
 		);
 	}
 
-	if (mediaType === 'Gallery') {
+	if (isGallery && galleryCount !== undefined) {
 		return (
 			<footer css={contentStyles}>
 				<Pill
-					content={galleryCount?.toString() ?? ''}
+					content={galleryCount.toString()}
 					prefix="Gallery"
 					icon={<SvgCamera />}
 					iconSide="right"
