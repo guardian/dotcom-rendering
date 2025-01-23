@@ -1,8 +1,15 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { between, from, until } from '@guardian/source/foundations';
+import {
+	between,
+	from,
+	space,
+	textSansBold12,
+	until,
+} from '@guardian/source/foundations';
+import { SvgCamera } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
-import { isMediaCard } from '../../lib/cardHelpers';
+import { isMediaCard as isMedia } from '../../lib/cardHelpers';
 import { palette } from '../../palette';
 import type { StarRating as Rating } from '../../types/content';
 import type { DCRFrontImage } from '../../types/front';
@@ -13,8 +20,10 @@ import { CardHeadline } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { FormatBoundary } from '../FormatBoundary';
-import { Icon } from '../MediaMeta';
+import { secondsToDuration } from '../MediaDuration';
+import { Pill } from '../Pill';
 import { StarRating } from '../StarRating/StarRating';
+import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 
 export type HighlightsCardProps = {
 	linkTo: string;
@@ -30,6 +39,8 @@ export type HighlightsCardProps = {
 	byline?: string;
 	isExternalLink: boolean;
 	starRating?: Rating;
+	galleryCount?: number;
+	audioDuration?: string;
 };
 
 const gridContainer = css`
@@ -72,6 +83,20 @@ const gridContainer = css`
 	}
 `;
 
+const mediaGrid = css`
+	grid-template-areas:
+		'image'
+		'headline'
+		'media-icon';
+
+	${from.desktop} {
+		width: 300px;
+		grid-template-areas:
+			'image headline'
+			'image media-icon';
+	}
+`;
+
 const headline = css`
 	grid-area: headline;
 `;
@@ -79,22 +104,30 @@ const headline = css`
 const mediaIcon = css`
 	grid-area: media-icon;
 	align-self: end;
-	width: 24px;
-	height: 24px;
-	/* We’re using the text colour for the icon badge */
-	background-color: ${palette('--highlights-card-headline')};
+	display: flex;
+	align-items: flex-end;
+`;
+
+const audioPill = css`
+	display: flex;
+	align-items: center;
+	column-gap: 4px;
+`;
+
+const audioPillIcon = css`
+	width: ${space[6]}px;
+	height: ${space[6]}px;
+	background-color: ${palette('--pill-background')};
 	border-radius: 50%;
-	display: inline-block;
 
 	> svg {
-		width: 20px;
-		height: 20px;
-		margin-left: auto;
-		margin-right: auto;
-		margin-top: 2px;
-		display: block;
 		fill: ${palette('--highlights-container-background')};
 	}
+`;
+
+const audioPillText = css`
+	${textSansBold12};
+	color: ${palette('--highlight-card-audio-text')};
 `;
 
 const imageArea = css`
@@ -152,12 +185,40 @@ export const HighlightsCard = ({
 	byline,
 	isExternalLink,
 	starRating,
+	galleryCount,
+	audioDuration,
 }: HighlightsCardProps) => {
-	const showMediaIcon = isMediaCard(format);
-
+	const isMediaCard = isMedia(format);
+	const MediaPill = () => (
+		<div css={mediaIcon}>
+			{mainMedia?.type === 'Video' && (
+				<Pill
+					content={secondsToDuration(mainMedia.duration)}
+					icon={<SvgMediaControlsPlay />}
+					iconSize={'small'}
+				/>
+			)}
+			{mainMedia?.type === 'Audio' && (
+				<div css={audioPill}>
+					<div css={audioPillIcon}>
+						<SvgMediaControlsPlay />
+					</div>
+					<span css={audioPillText}>{audioDuration}</span>
+				</div>
+			)}
+			{mainMedia?.type === 'Gallery' && (
+				<Pill
+					prefix="Gallery"
+					content={galleryCount?.toString() ?? ''}
+					icon={<SvgCamera />}
+					iconSide="right"
+				/>
+			)}
+		</div>
+	);
 	return (
 		<FormatBoundary format={format}>
-			<div css={[gridContainer, hoverStyles]}>
+			<div css={[gridContainer, hoverStyles, isMediaCard && mediaGrid]}>
 				<CardLink
 					linkTo={linkTo}
 					headlineText={headlineText}
@@ -193,11 +254,7 @@ export const HighlightsCard = ({
 					</div>
 				) : null}
 
-				{!!mainMedia && showMediaIcon && (
-					<div css={mediaIcon}>
-						<Icon mediaType={mainMedia.type} />
-					</div>
-				)}
+				{!!mainMedia && isMediaCard && MediaPill()}
 
 				<div css={imageArea}>
 					{(avatarUrl && (
