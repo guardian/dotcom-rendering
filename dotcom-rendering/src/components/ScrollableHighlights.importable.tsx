@@ -265,6 +265,7 @@ export const ScrollableHighlights = ({ trails }: Props) => {
 								starRating={trail.starRating}
 								galleryCount={trail.galleryCount}
 								audioDuration={trail.audioDuration}
+								podcastImage={trail.podcastImage}
 							/>
 						</li>
 					);
