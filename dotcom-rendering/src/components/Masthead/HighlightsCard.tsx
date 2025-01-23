@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { between, from, until } from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import { SvgCamera } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import { isMediaCard as isMedia } from '../../lib/cardHelpers';
@@ -43,7 +43,8 @@ const gridContainer = css`
 	/** Relative positioning is required to absolutely
 	position the card link overlay */
 	position: relative;
-	gap: 8px;
+	column-gap: ${space[2]}px;
+	row-gap: ${space[1]}px;
 	grid-template-areas:
 		'headline'
 		'media-icon'
@@ -91,12 +92,17 @@ const imageArea = css`
 	grid-area: image;
 	height: 106px;
 	width: 106px;
-	align-self: end;
+	align-self: start;
 	position: relative;
 	${from.desktop} {
 		height: 112px;
 		width: 112px;
 	}
+`;
+
+/** Avatar alignment is an exception and should align with the bottom of the card *if* there is a gap.*/
+const avatarAlignmentStyles = css`
+	align-self: end;
 `;
 
 const hoverStyles = css`
@@ -210,7 +216,7 @@ export const HighlightsCard = ({
 
 				{!!mainMedia && isMediaCard && MediaPill()}
 
-				<div css={imageArea}>
+				<div css={[imageArea, avatarUrl && avatarAlignmentStyles]}>
 					{(avatarUrl && (
 						<Avatar
 							src={avatarUrl}
