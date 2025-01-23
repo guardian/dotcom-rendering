@@ -20,6 +20,8 @@ import { PlayIcon } from '../Card/components/PlayIcon';
 import { FormatBoundary } from '../FormatBoundary';
 import { Kicker } from '../Kicker';
 import { YoutubeAtomPicture } from './YoutubeAtomPicture';
+import { Pill } from '../Pill';
+import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 
 type Props = {
 	uniqueId: string;
@@ -72,16 +74,6 @@ const pillStyles = css`
 	position: absolute;
 	top: ${space[2]}px;
 	right: ${space[2]}px;
-	${textSansBold12};
-	color: ${palette('--pill-text')};
-`;
-
-const durationPillStyles = css`
-	background-color: rgba(0, 0, 0, 0.7);
-	border-radius: ${space[3]}px;
-	padding: ${space[1]}px ${space[3]}px;
-	display: inline-flex;
-	line-height: ${space[4]}px;
 `;
 
 const livePillStyles = css`
@@ -186,10 +178,14 @@ export const YoutubeAtomOverlay = ({
 								? css`
 										display: none;
 								  `
-								: [pillStyles, durationPillStyles]
+								: pillStyles
 						}
 					>
-						{secondsToDuration(duration)}
+						<Pill
+							content={secondsToDuration(duration)}
+							icon={<SvgMediaControlsPlay />}
+							iconSize={'small'}
+						/>
 					</div>
 				)}
 				<PlayIcon
