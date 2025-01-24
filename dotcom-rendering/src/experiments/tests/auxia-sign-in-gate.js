@@ -5,7 +5,7 @@ export const auxiaSignInGate = {
 	author: 'Pascal (Growth Team)',
 	description:
 		'R&D Experiment: using Auxia API to drive the behavior of the SignIn gate',
-	audience: 0.01,
+	audience: 0,
 	audienceOffset: 0,
 	successMeasure: '',
 	audienceCriteria: '',
