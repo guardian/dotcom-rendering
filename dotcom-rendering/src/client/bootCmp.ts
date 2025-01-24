@@ -2,8 +2,10 @@ import type { ConsentState } from '@guardian/libs';
 import { cmp, onConsent } from '@guardian/libs';
 import { getCookie, log } from '@guardian/libs';
 import { getLocaleCode } from '../lib/getCountryCode';
+import { getAuthStatus } from '../lib/identity';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { getOphan } from './ophan/ophan';
+import { adFreeDataIsPresent } from './userFeatures/cookies/adFree';
 
 const submitConsentToOphan = async (renderingTarget: RenderingTarget) => {
 	const consentState: ConsentState = await onConsent();
@@ -59,6 +61,11 @@ const initialiseCmp = async () => {
 	const code = await getLocaleCode();
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const { pageViewId } = window.guardian.config.ophan;
+	const authStatus = await getAuthStatus();
+	const isUserSignedIn =
+		authStatus.kind === 'SignedInWithCookies' ||
+		authStatus.kind === 'SignedInWithOkta';
+	const adFree = adFreeDataIsPresent();
 
 	const country = code ?? undefined;
 	cmp.init({
@@ -69,6 +76,8 @@ const initialiseCmp = async () => {
 			pageViewId,
 		},
 		country,
+		useNonAdvertisedList: adFree,
+		isUserSignedIn,
 	});
 	log('dotcom', 'CMP initialised');
 };
