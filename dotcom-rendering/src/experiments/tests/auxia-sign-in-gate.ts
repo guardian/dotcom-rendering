@@ -1,4 +1,6 @@
-export const auxiaSignInGate = {
+import type { ABTest } from '@guardian/ab-core';
+
+export const auxiaSignInGate: ABTest = {
 	id: 'AuxiaSignInGate',
 	start: '2025-01-23',
 	expiry: '2026-01-30',
@@ -9,7 +11,6 @@ export const auxiaSignInGate = {
 	audienceOffset: 0,
 	successMeasure: '',
 	audienceCriteria: '',
-	ophanComponentId: 'auxia_signin_gate',
 	dataLinkNames: 'AuxiaSignInGate',
 	idealOutcome: '',
 	showForSensitive: false,
@@ -17,7 +18,7 @@ export const auxiaSignInGate = {
 	variants: [
 		{
 			id: 'auxia-signin-gate',
-			test: () => {},
+			test: (): void => {},
 		},
 	],
 };

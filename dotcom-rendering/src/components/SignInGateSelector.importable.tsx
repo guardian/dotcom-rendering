@@ -2,6 +2,7 @@ import { getCookie, isUndefined } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { constructQuery } from '../lib/querystring';
+import { useAB } from '../lib/useAB';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useOnce } from '../lib/useOnce';
@@ -27,6 +28,10 @@ import type {
 	SignInGateComponent,
 } from './SignInGate/types';
 
+// ------------------------------------------------------------------------------------------
+// Default (pre Auxia Integration Experiment) types, SignInGateSelector and ShowSignInGate //
+// ------------------------------------------------------------------------------------------
+
 type Props = {
 	contentType: string;
 	sectionId?: string;
@@ -37,12 +42,6 @@ type Props = {
 	pageId: string;
 	idUrl?: string;
 	switches: Switches;
-};
-
-type PropsAuxia = {
-	host?: string;
-	pageId: string;
-	idUrl?: string;
 };
 
 // interface for the component which shows the sign in gate
@@ -58,18 +57,6 @@ interface ShowSignInGateProps {
 	personaliseSignInGateAfterCheckoutSwitch?: boolean;
 }
 
-/*
-	comment group: auxia-prototype-e55a86ef
-	Signature for the ShowSignInGateAuxia component.
-*/
-interface ShowSignInGateAuxiaProps {
-	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
-	signInUrl: string;
-	registerUrl: string;
-	gateVariant: SignInGateComponent;
-	host: string;
-}
-
 const dismissGate = (
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>,
 	currentAbTestValue: CurrentSignInGateABTest,
@@ -80,16 +67,6 @@ const dismissGate = (
 		currentAbTestValue.variant,
 		currentAbTestValue.name,
 	);
-};
-
-/*
-	comment group: auxia-prototype-e55a86ef
-	Auxia version of the dismissGate function.
-*/
-const dismissGateAuxia = (
-	setShowGate: React.Dispatch<React.SetStateAction<boolean>>,
-) => {
-	setShowGate(false);
 };
 
 // function to generate the profile.theguardian.com url with tracking params
@@ -211,63 +188,6 @@ const useCheckoutCompleteCookieData = () => {
  *
  * (No visual story exists)
  */
-export const SignInGateSelector = ({
-	contentType,
-	sectionId = '',
-	tags,
-	isPaidContent,
-	isPreview,
-	host = 'https://theguardian.com/',
-	pageId,
-	idUrl = 'https://profile.theguardian.com',
-	switches,
-}: Props) => {
-	/*
-		Date: January 2025
-		comment group: auxia-prototype-e55a86ef
-		Author: Pascal
-
-		We are currently starting to evaluate a new approach for the decision to display the sign gate or not: an
-		external API, that will be returning that decision. The company offering that API is called Auxia and
-		can be found here: https://www.auxia.io
-
-		At this aim I have move the existing legacy version of the SignInGateSelector to SignInGateSelectorDefault,
-		and I am introducing SignInGateSelectorAuxia, which is the new component that will be using the Auxia API.
-
-		This work, until further notice is the implementation and evaluation of a prototype.
-
-		All comments related to this prototype comes under the same comment group: auxia-prototype-e55a86ef
-		(follow it if one day you want to decommission the entire prototype).
-
-		PRs for ab test definition:
-		  - https://github.com/guardian/frontend/pull/27743
-		  - https://github.com/guardian/frontend/pull/27744
-		  - https://github.com/guardian/dotcom-rendering/pull/13197
-	*/
-
-	// TODO: replace this conditional by an AB test
-	const useDefault = false;
-
-	if (useDefault) {
-		return SignInGateSelectorDefault({
-			contentType,
-			sectionId,
-			tags,
-			isPaidContent,
-			isPreview,
-			host,
-			pageId,
-			idUrl,
-			switches,
-		});
-	} else {
-		return SignInGateSelectorAuxia({
-			host,
-			pageId,
-			idUrl,
-		});
-	}
-};
 
 const SignInGateSelectorDefault = ({
 	contentType,
@@ -415,8 +335,120 @@ const SignInGateSelectorDefault = ({
 	);
 };
 
-const fetchAuxiaDisplayDataFromProxy = async (): Promise<boolean> => {
-	return Promise.resolve(true);
+// -------------------------------
+// Auxia Integration Experiment //
+// -------------------------------
+
+export const SignInGateSelector = ({
+	contentType,
+	sectionId = '',
+	tags,
+	isPaidContent,
+	isPreview,
+	host = 'https://theguardian.com/',
+	pageId,
+	idUrl = 'https://profile.theguardian.com',
+	switches,
+}: Props) => {
+	const abTestAPI = useAB()?.api;
+	const userIsInAuxiaExperiment = !!abTestAPI?.isUserInVariant(
+		'auxiaSignInGate',
+		'auxia-signin-gate',
+	);
+
+	if (!userIsInAuxiaExperiment) {
+		return SignInGateSelectorDefault({
+			contentType,
+			sectionId,
+			tags,
+			isPaidContent,
+			isPreview,
+			host,
+			pageId,
+			idUrl,
+			switches,
+		});
+	} else {
+		return SignInGateSelectorAuxia({
+			host,
+			pageId,
+			idUrl,
+		});
+	}
+};
+
+/*
+	Date: January 2025
+	comment group: auxia-prototype-e55a86ef
+	Author: Pascal
+
+	We are currently starting to evaluate a new approach for the decision to display the sign gate or not: an
+	external API, that will be returning that decision. The company offering that API is called Auxia and
+	can be found here: https://www.auxia.io
+
+	At this aim I have move the existing legacy version of the SignInGateSelector to SignInGateSelectorDefault,
+	and I am introducing SignInGateSelectorAuxia, which is the new component that will be using the Auxia API.
+
+	This work, until further notice is the implementation and evaluation of a prototype.
+
+	All comments related to this prototype comes under the same comment group: auxia-prototype-e55a86ef
+	(follow it if one day you want to decommission the entire prototype).
+
+	PRs for ab test definition:
+		- https://github.com/guardian/frontend/pull/27743
+		- https://github.com/guardian/frontend/pull/27744
+		- https://github.com/guardian/dotcom-rendering/pull/13197
+*/
+
+type PropsAuxia = {
+	host?: string;
+	pageId: string;
+	idUrl?: string;
+};
+
+/*
+	comment group: auxia-prototype-e55a86ef
+	Signature for the ShowSignInGateAuxia component.
+*/
+interface ShowSignInGateAuxiaProps {
+	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
+	signInUrl: string;
+	registerUrl: string;
+	gateVariant: SignInGateComponent;
+	host: string;
+}
+
+interface SDCProxyData {
+	shouldShowSignInGate: boolean;
+}
+
+/*
+	comment group: auxia-prototype-e55a86ef
+	Auxia version of the dismissGate function.
+*/
+const dismissGateAuxia = (
+	setShowGate: React.Dispatch<React.SetStateAction<boolean>>,
+) => {
+	setShowGate(false);
+};
+
+const fetchAuxiaDisplayDataFromProxy = async (): Promise<SDCProxyData> => {
+	const url = 'https://contributions.guardianapis.com/auxia';
+	const headers = {
+		'Content-Type': 'application/json',
+	};
+	const payload = {};
+	const params = {
+		method: 'POST',
+		headers,
+		body: JSON.stringify(payload),
+	};
+
+	const response = await fetch(url, params);
+
+	const data = (await response.json()) as SDCProxyData;
+
+	return Promise.resolve(data);
 };
 
 const SignInGateSelectorAuxia = ({
@@ -463,7 +495,7 @@ const SignInGateSelectorAuxia = ({
 	useOnce(() => {
 		void (async () => {
 			const data = await fetchAuxiaDisplayDataFromProxy();
-			setShouldShowSignInGateUsingAuxiaAnswer(data);
+			setShouldShowSignInGateUsingAuxiaAnswer(data.shouldShowSignInGate);
 		})().catch((error) => {
 			console.error('Error fetching Auxia display data:', error);
 		});
