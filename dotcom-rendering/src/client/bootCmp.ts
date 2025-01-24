@@ -2,7 +2,7 @@ import type { ConsentState } from '@guardian/libs';
 import { cmp, onConsent } from '@guardian/libs';
 import { getCookie, log } from '@guardian/libs';
 import { getLocaleCode } from '../lib/getCountryCode';
-import { getAuthStatus } from '../lib/identity';
+import { isUserLoggedInOktaRefactor } from '../lib/identity';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { getOphan } from './ophan/ophan';
 import { adFreeDataIsPresent } from './userFeatures/cookies/adFree';
@@ -61,10 +61,7 @@ const initialiseCmp = async () => {
 	const code = await getLocaleCode();
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const { pageViewId } = window.guardian.config.ophan;
-	const authStatus = await getAuthStatus();
-	const isUserSignedIn =
-		authStatus.kind === 'SignedInWithCookies' ||
-		authStatus.kind === 'SignedInWithOkta';
+	const isUserSignedIn = await isUserLoggedInOktaRefactor();
 	const adFree = adFreeDataIsPresent();
 
 	const country = code ?? undefined;
