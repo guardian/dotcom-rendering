@@ -238,6 +238,11 @@ export const SignInGateSelector = ({
 
 		All comments related to this prototype comes under the same comment group: auxia-prototype-e55a86ef
 		(follow it if one day you want to decommission the entire prototype).
+
+		PRs for ab test definition:
+		  - https://github.com/guardian/frontend/pull/27743
+		  - https://github.com/guardian/frontend/pull/27744
+		  - https://github.com/guardian/dotcom-rendering/pull/13197
 	*/
 
 	// TODO: replace this conditional by an AB test
