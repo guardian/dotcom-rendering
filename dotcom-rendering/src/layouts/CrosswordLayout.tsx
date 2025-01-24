@@ -390,7 +390,6 @@ export const CrosswordLayout = (props: WebProps | AppsProps) => {
 											format={format}
 											pageId={article.pageId}
 											webTitle={article.webTitle}
-											byline={article.byline}
 											tags={article.tags}
 											primaryDateline={
 												article.webPublicationDateDisplay
@@ -407,6 +406,7 @@ export const CrosswordLayout = (props: WebProps | AppsProps) => {
 											shortUrlId={
 												article.config.shortUrlId
 											}
+											crossword={article.crossword}
 										/>
 									)}
 								</div>

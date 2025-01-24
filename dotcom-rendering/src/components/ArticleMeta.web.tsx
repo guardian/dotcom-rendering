@@ -13,12 +13,14 @@ import { getSoleContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
 import type { FEElement } from '../types/content';
+import type { FEArticleType } from '../types/frontend';
 import type { Podcast, TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.importable';
 import { CommentCount } from './CommentCount.importable';
 import { useConfig } from './ConfigContext';
 import { Contributor } from './Contributor';
+import { CrosswordSetter } from './CrosswordSetter';
 import { Dateline } from './Dateline';
 import { Island } from './Island';
 import { PodcastMeta } from './PodcastMeta';
@@ -38,6 +40,7 @@ type Props = {
 	shortUrlId: string;
 	isCommentable: boolean;
 	mainMediaElements?: FEElement[];
+	crossword?: FEArticleType['crossword'];
 };
 
 const meta = (format: ArticleFormat) => {
@@ -222,6 +225,7 @@ export const shouldShowContributor = (format: ArticleFormat) => {
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Analysis:
+				case ArticleDesign.Crossword:
 					return false;
 				default:
 					return true;
@@ -313,6 +317,7 @@ export const ArticleMeta = ({
 	shortUrlId,
 	isCommentable,
 	mainMediaElements,
+	crossword,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
@@ -392,6 +397,14 @@ export const ArticleMeta = ({
 									source={source}
 								/>
 							)}
+
+							{crossword?.creator && (
+								<CrosswordSetter
+									setter={crossword.creator.name}
+									profile={crossword.creator.webUrl}
+								/>
+							)}
+
 							<Dateline
 								primaryDateline={primaryDateline}
 								secondaryDateline={secondaryDateline}

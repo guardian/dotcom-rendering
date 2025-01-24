@@ -1,7 +1,6 @@
 import { isString } from '@guardian/libs';
 import { Hide } from '@guardian/source/react-components';
 import { DottedLines } from '@guardian/source-development-kitchen/react-components';
-import { Fragment } from 'react';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import {
 	getBylineComponentsFromTokens,
@@ -159,10 +158,6 @@ const getRenderedTokens = (
 				<Source key="source" source={source} />
 			</>,
 		);
-	}
-
-	if (design === ArticleDesign.Crossword && renderedTokens.length > 0) {
-		return [<Fragment key="set-by">Set by: </Fragment>, ...renderedTokens];
 	}
 
 	return renderedTokens;
