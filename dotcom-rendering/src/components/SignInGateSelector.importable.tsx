@@ -439,8 +439,6 @@ const SignInGateSelectorAuxia = ({
 		id: 'SignInGateMainVariant',
 	};
 
-	const canShowGate = true;
-
 	const { renderingTarget } = useConfig();
 
 	const pageViewId = usePageViewId(renderingTarget);
@@ -473,7 +471,7 @@ const SignInGateSelectorAuxia = ({
 
 	return (
 		<>
-			{!isGateDismissed && canShowGate && (
+			{!isGateDismissed && (
 				<ShowSignInGateAuxia
 					// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 					setShowGate={(show) => setIsGateDismissed(!show)}
