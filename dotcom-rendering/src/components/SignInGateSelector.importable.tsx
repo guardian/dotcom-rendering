@@ -40,11 +40,6 @@ type Props = {
 };
 
 type PropsAuxia = {
-	contentType: string;
-	sectionId?: string;
-	tags: TagType[];
-	isPaidContent: boolean;
-	isPreview: boolean;
 	host?: string;
 	pageId: string;
 	idUrl?: string;
@@ -262,11 +257,6 @@ export const SignInGateSelector = ({
 		});
 	} else {
 		return SignInGateSelectorAuxia({
-			contentType,
-			sectionId,
-			tags,
-			isPaidContent,
-			isPreview,
 			host,
 			pageId,
 			idUrl,
@@ -421,11 +411,6 @@ const SignInGateSelectorDefault = ({
 };
 
 const SignInGateSelectorAuxia = ({
-	contentType,
-	sectionId = '',
-	tags,
-	isPaidContent,
-	isPreview,
 	host = 'https://theguardian.com/',
 	pageId,
 	idUrl = 'https://profile.theguardian.com',
@@ -442,16 +427,18 @@ const SignInGateSelectorAuxia = ({
 		undefined,
 	);
 	const gateVariant = gateMainVariant;
-	const [currentTest, setCurrentTest] = useState<
-		CurrentSignInGateABTest | undefined
-	>(undefined);
-	const [canShowGate, setCanShowGate] = useState(false);
+
+	const currentTest = {
+		name: 'SignInGateMain',
+		variant: 'main-variant-5',
+		id: 'SignInGateMainVariant',
+	};
+
+	const canShowGate = true;
 
 	const { renderingTarget } = useConfig();
-	const gateSelector = useSignInGateSelector();
-	const pageViewId = usePageViewId(renderingTarget);
 
-	const countryCode = useCountryCode('sign-in-gate-selector');
+	const pageViewId = usePageViewId(renderingTarget);
 
 	useOnce(() => {
 		// this hook will fire when the sign in gate is dismissed
@@ -464,44 +451,7 @@ const SignInGateSelectorAuxia = ({
 		}
 	}, [isGateDismissed]);
 
-	useOnce(() => {
-		const [gateSelectorVariant, gateSelectorTest] = gateSelector as [
-			SignInGateComponent | null,
-			CurrentSignInGateABTest | null,
-		];
-		if (gateSelectorVariant && gateSelectorTest) {
-			setCurrentTest(gateSelectorTest);
-		}
-	}, [gateSelector]);
-
-	useEffect(() => {
-		if (currentTest) {
-			void gateVariant
-				.canShow({
-					isSignedIn: !!isSignedIn,
-					currentTest,
-					contentType,
-					sectionId,
-					tags,
-					isPaidContent,
-					isPreview,
-					currentLocaleCode: countryCode,
-				})
-				.then(setCanShowGate);
-		}
-	}, [
-		currentTest,
-		gateVariant,
-		isSignedIn,
-		contentType,
-		sectionId,
-		tags,
-		isPaidContent,
-		isPreview,
-		countryCode,
-	]);
-
-	if (!currentTest || isUndefined(pageViewId)) {
+	if (isUndefined(pageViewId)) {
 		return null;
 	}
 
@@ -570,17 +520,3 @@ const ShowSignInGateAuxia = ({
 	// return nothing if no gate needs to be shown
 	return <></>;
 };
-
-/*
-export type SignInGateProps = {
-	signInUrl: string;
-	registerUrl: string;
-	guUrl: string;
-	dismissGate: () => void;
-	ophanComponentId: string;
-	abTest?: CurrentSignInGateABTest;
-	isMandatory?: boolean;
-	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
-	personaliseSignInGateAfterCheckoutSwitch?: boolean;
-};
-*/
