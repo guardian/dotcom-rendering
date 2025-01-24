@@ -92,6 +92,7 @@ const indices = [
 	// See: https://www.sarasoueidan.com/blog/nested-links/
 	'card-nested-link',
 	'card-link',
+	'card-podcast-image',
 ] as const;
 
 // Implementation code - you don't need to change this to get a new index

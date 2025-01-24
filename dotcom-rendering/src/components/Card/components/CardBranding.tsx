@@ -5,7 +5,6 @@ import {
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import { useConfig } from '../../../components/ConfigContext';
-import type { ArticleFormat } from '../../../lib/articleFormat';
 import { decideCardLogo } from '../../../lib/decideLogo';
 import { getZIndex } from '../../../lib/getZIndex';
 import { getOphanComponents } from '../../../lib/labs';
@@ -16,7 +15,6 @@ import type { OnwardsSource } from '../../../types/onwards';
 
 type Props = {
 	branding: Branding;
-	format: ArticleFormat;
 	onwardsSource: OnwardsSource | undefined;
 	containerPalette?: DCRContainerPalette;
 };
@@ -46,11 +44,10 @@ const labelStyle = css`
 
 export const CardBranding = ({
 	branding,
-	format,
 	onwardsSource,
 	containerPalette,
 }: Props) => {
-	const logo = decideCardLogo(branding, format, containerPalette);
+	const logo = decideCardLogo(branding, containerPalette);
 
 	const { darkModeAvailable } = useConfig();
 

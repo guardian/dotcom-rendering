@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, textSans14 } from '@guardian/source/foundations';
+import { textSans14 } from '@guardian/source/foundations';
 import { ButtonLink } from '@guardian/source/react-components';
 import { palette } from '../palette';
 
@@ -9,10 +9,7 @@ type Props = {
 
 const showHideButtonCss = css`
 	${textSans14};
-
-	margin-top: ${space[2]}px;
 	margin-right: 10px;
-	margin-bottom: ${space[2]}px;
 	position: relative;
 	align-items: bottom;
 	text-decoration: none;

@@ -34,9 +34,7 @@ export const WithGalleryIcon = {
 
 export const WithGalleryIconAndPrefix = {
 	args: {
-		content: '10',
+		...WithGalleryIcon.args,
 		prefix: 'Gallery',
-		icon: <SvgCamera />,
-		iconSide: 'right',
 	},
 } satisfies Story;

@@ -28,6 +28,7 @@ type Props = {
 	isLeftCol?: boolean;
 	mediaType?: MediaType;
 	isMainMedia?: boolean;
+	isImmersive?: boolean;
 };
 
 type IconProps = {
@@ -120,6 +121,25 @@ const captionPadding = css`
 const tabletCaptionPadding = css`
 	${until.desktop} {
 		${captionPadding}
+	}
+`;
+
+const immersivePadding = css`
+	padding-left: 10px;
+	padding-right: 10px;
+	${from.mobileLandscape} {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	${from.tablet} {
+		padding-right: 100px;
+	}
+	${from.desktop} {
+		padding-right: 340px;
+	}
+	${from.leftCol} {
+		padding-left: 0;
+		padding-right: 0;
 	}
 `;
 
@@ -228,6 +248,7 @@ export const Caption = ({
 	isLeftCol,
 	mediaType = 'Gallery',
 	isMainMedia = false,
+	isImmersive = false,
 }: Props) => {
 	// Sometimes captions come thorough as a single blank space, so we trim here to ignore those
 	const noCaption = !captionText?.trim();
@@ -249,6 +270,7 @@ export const Caption = ({
 					(isBlog || mediaType === 'Video') &&
 					tabletCaptionPadding,
 				padCaption && captionPadding,
+				isImmersive && immersivePadding,
 			]}
 			data-spacefinder-role="inline"
 		>

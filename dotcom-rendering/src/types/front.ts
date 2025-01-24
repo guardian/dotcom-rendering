@@ -469,7 +469,6 @@ export type FEFrontConfigType = {
 	pbIndexSites: { [key: string]: unknown }[];
 	ampIframeUrl: string;
 	beaconUrl: string;
-	userAttributesApiUrl: string;
 	host: string;
 	brazeApiKey?: string;
 	calloutsUrl: string;
