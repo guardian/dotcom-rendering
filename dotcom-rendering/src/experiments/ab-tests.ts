@@ -1,6 +1,7 @@
 import type { ABTest } from '@guardian/ab-core';
 import { abTestTest } from './tests/ab-test-test';
 import { adBlockAsk } from './tests/ad-block-ask';
+import { auxiaSignInGate } from './tests/auxia-sign-in-gate';
 import { consentlessAds } from './tests/consentless-ads';
 import { integrateIma } from './tests/integrate-ima';
 import { mpuWhenNoEpic } from './tests/mpu-when-no-epic';
@@ -21,4 +22,5 @@ export const tests: ABTest[] = [
 	adBlockAsk,
 	optimiseSpacefinderInline,
 	userBenefitsApi,
+	auxiaSignInGate,
 ];
