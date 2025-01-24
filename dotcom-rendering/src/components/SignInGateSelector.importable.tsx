@@ -427,6 +427,12 @@ const SignInGateSelectorAuxia = ({
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
 	);
+
+	const [
+		shouldShowSignInGateUsingAuxiaAnswer,
+		setShouldShowSignInGateUsingAuxiaAnswer,
+	] = useState<boolean>(false);
+
 	const gateVariant = gateMainVariant;
 
 	const currentTest = {
@@ -450,6 +456,10 @@ const SignInGateSelectorAuxia = ({
 		}
 	}, [isGateDismissed]);
 
+	useOnce(() => {
+		setShouldShowSignInGateUsingAuxiaAnswer(true);
+	}, [shouldShowSignInGateUsingAuxiaAnswer]);
+
 	if (isUndefined(pageViewId)) {
 		return null;
 	}
@@ -467,7 +477,7 @@ const SignInGateSelectorAuxia = ({
 
 	return (
 		<>
-			{!isGateDismissed && (
+			{!isGateDismissed && shouldShowSignInGateUsingAuxiaAnswer && (
 				<ShowSignInGateAuxia
 					// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 					setShowGate={(show) => setIsGateDismissed(!show)}
