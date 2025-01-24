@@ -3,10 +3,19 @@ import {
 	textEgyptian17,
 	textEgyptianBold17,
 } from '@guardian/source/foundations';
+import sanitise from 'sanitize-html';
 
 const instructionsStyles = css`
 	${textEgyptian17};
 	white-space: pre-line;
+
+	i {
+		font-style: italic;
+	}
+
+	b {
+		font-weight: bold;
+	}
 `;
 
 const headerStyles = css`
@@ -21,6 +30,6 @@ export const CrosswordInstructions = ({
 }) => (
 	<div css={instructionsStyles}>
 		<strong css={headerStyles}>Special instructions: </strong>
-		{instructions}
+		<span dangerouslySetInnerHTML={{ __html: sanitise(instructions) }} />
 	</div>
 );
