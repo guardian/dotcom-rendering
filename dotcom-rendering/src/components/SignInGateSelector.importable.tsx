@@ -424,10 +424,6 @@ const SignInGateSelectorAuxia = ({
 		comment group: auxia-prototype-e55a86ef
 		This function if the Auxia prototype for the SignInGateSelector component.
 	*/
-	const authStatus = useAuthStatus();
-	const isSignedIn =
-		authStatus.kind === 'SignedInWithOkta' ||
-		authStatus.kind === 'SignedInWithCookies';
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
 	);
