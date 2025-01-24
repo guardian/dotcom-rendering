@@ -415,6 +415,10 @@ const SignInGateSelectorDefault = ({
 	);
 };
 
+const fetchAuxiaDisplayDataFromProxy = async (): Promise<boolean> => {
+	return Promise.resolve(true);
+};
+
 const SignInGateSelectorAuxia = ({
 	host = 'https://theguardian.com/',
 	pageId,
@@ -457,7 +461,12 @@ const SignInGateSelectorAuxia = ({
 	}, [isGateDismissed]);
 
 	useOnce(() => {
-		setShouldShowSignInGateUsingAuxiaAnswer(true);
+		void (async () => {
+			const data = await fetchAuxiaDisplayDataFromProxy();
+			setShouldShowSignInGateUsingAuxiaAnswer(data);
+		})().catch((error) => {
+			console.error('Error fetching Auxia display data:', error);
+		});
 	}, [shouldShowSignInGateUsingAuxiaAnswer]);
 
 	if (isUndefined(pageViewId)) {
