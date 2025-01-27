@@ -30,6 +30,7 @@ interface BaseTrailType {
 		discussionId?: string;
 	};
 	mainMedia?: MainMedia;
+	audioDuration?: string;
 }
 
 export interface TrailType extends BaseTrailType {
