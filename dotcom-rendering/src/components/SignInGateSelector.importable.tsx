@@ -352,7 +352,7 @@ export const SignInGateSelector = ({
 }: Props) => {
 	const abTestAPI = useAB()?.api;
 	const userIsInAuxiaExperiment = !!abTestAPI?.isUserInVariant(
-		'auxiaSignInGate',
+		'AuxiaSignInGate',
 		'auxia-signin-gate',
 	);
 
