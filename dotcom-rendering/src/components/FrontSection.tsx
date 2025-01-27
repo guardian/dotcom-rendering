@@ -91,6 +91,7 @@ type Props = {
 	collectionBranding?: CollectionBranding;
 	isTagPage?: boolean;
 	hasNavigationButtons?: boolean;
+	isBetaContainer?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -188,7 +189,7 @@ const containerScrollableStylesFromLeftCol = css`
 			[headline-start content-start content-toggleable-start controls-start] auto
 			[headline-end treats-start] auto
 			[content-end content-toggleable-end treats-end controls-end bottom-content-start] auto
-			[ bottom-content-end];
+			[bottom-content-end];
 	}
 `;
 
@@ -410,7 +411,7 @@ const secondaryLevelTopBorder = css`
 
 const carouselNavigationPlaceholder = css`
 	${until.leftCol} {
-		height: 44px;
+		min-height: 44px;
 	}
 	.hidden & {
 		display: none;
@@ -529,6 +530,7 @@ export const FrontSection = ({
 	collectionBranding,
 	isTagPage = false,
 	hasNavigationButtons = false,
+	isBetaContainer,
 }: Props) => {
 	const isToggleable = toggleable && !!sectionId;
 	const showMore =
@@ -626,7 +628,10 @@ export const FrontSection = ({
 				{(isToggleable || hasNavigationButtons) && (
 					<div css={sectionControls}>
 						{isToggleable && (
-							<ShowHideButton sectionId={sectionId} />
+							<ShowHideButton
+								sectionId={sectionId}
+								isBetaContainer={!!isBetaContainer}
+							/>
 						)}
 						{hasNavigationButtons && (
 							<div
