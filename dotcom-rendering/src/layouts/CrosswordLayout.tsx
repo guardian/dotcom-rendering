@@ -299,12 +299,14 @@ export const CrosswordLayout = (props: WebProps | AppsProps) => {
 										)}
 									/>
 								</Hide>
-								<Standfirst
-									format={format}
-									standfirst={
-										'<a href="https://app.adjust.com/16xt6hai" data-link-name="crossword-mobile-link">Download the Guardian app</a> for a better puzzles experience'
-									}
-								/>
+								<Hide from="desktop">
+									<Standfirst
+										format={format}
+										standfirst={
+											'<a href="https://app.adjust.com/16xt6hai" data-link-name="crossword-mobile-link">Download the Guardian app</a> for a better puzzles experience'
+										}
+									/>
+								</Hide>
 								{article.crossword && (
 									<CrosswordLinks
 										crossword={article.crossword}
