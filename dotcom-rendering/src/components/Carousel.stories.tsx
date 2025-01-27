@@ -270,7 +270,6 @@ export const Headlines: StoryObj = ({ format }: StoryProps) => {
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
 				absoluteServerTimes={true}
-				renderingTarget="Web"
 			/>
 		</Section>
 	);
@@ -296,7 +295,6 @@ export const SingleItemCarousel = () => {
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
 				absoluteServerTimes={true}
-				renderingTarget="Web"
 			/>
 		</Section>
 	);
@@ -351,7 +349,6 @@ export const SingleOpinionCarousel = () => {
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
 				absoluteServerTimes={true}
-				renderingTarget="Web"
 			/>
 		</Section>
 	);
@@ -382,7 +379,6 @@ export const Immersive = () => {
 					leftColSize="compact"
 					discussionApiUrl={discussionApiUrl}
 					absoluteServerTimes={true}
-					renderingTarget="Web"
 				/>
 			</Section>
 		</>
@@ -428,7 +424,6 @@ export const SpecialReportAlt = () => {
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
 				absoluteServerTimes={true}
-				renderingTarget="Web"
 			/>
 		</Section>
 	);
@@ -644,7 +639,6 @@ export const AllCards = () => {
 				discussionApiUrl={discussionApiUrl}
 				format={defaultFormat}
 				absoluteServerTimes={true}
-				renderingTarget="Web"
 			/>
 		</Section>
 	);
@@ -669,7 +663,6 @@ export const FrontCarousel = () => (
 				discussionApiUrl={discussionApiUrl}
 				palette="PodcastPalette"
 				absoluteServerTimes={true}
-				renderingTarget="Web"
 			/>
 		</Section>
 	</>

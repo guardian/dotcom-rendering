@@ -10,24 +10,15 @@ export const useIsBridgetCompatible = (
 	);
 
 	useEffect(() => {
-		void hasMinimumBridgetVersion(requiredVersion).then(setIsCompatible);
+		void getEnvironmentClient()
+			.nativeThriftPackageVersion()
+			.then((bridgetVersion) => {
+				setIsCompatible(compare(bridgetVersion, requiredVersion, '>='));
+			})
+			.catch((error) => {
+				setIsCompatible(false);
+				console.log('nativeThriftPackageVersion', { error });
+			});
 	}, [requiredVersion]);
 	return isCompatible;
 };
-
-export const hasMinimumBridgetVersion = (
-	requiredVersion: string,
-): Promise<boolean> =>
-	getEnvironmentClient()
-		.nativeThriftPackageVersion()
-		.then((bridgetVersion) => {
-			return compare(
-				bridgetVersion.replace(/^v/i, ''),
-				requiredVersion.replace(/^v/i, ''),
-				'>=',
-			);
-		})
-		.catch((error) => {
-			console.log('nativeThriftPackageVersion', { error });
-			return false;
-		});

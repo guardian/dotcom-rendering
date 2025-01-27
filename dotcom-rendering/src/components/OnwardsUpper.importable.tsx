@@ -6,10 +6,9 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
-import { useIsHorizontalScrollingSupported } from '../lib/useIsHorizontalScrollingSupported';
+import { useIsAndroid } from '../lib/useIsAndroid';
 import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
-import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
 import { Section } from './Section';
@@ -180,7 +179,6 @@ type Props = {
 	shortUrlId: string;
 	discussionApiUrl: string;
 	absoluteServerTimes: boolean;
-	renderingTarget: RenderingTarget;
 };
 
 /**
@@ -215,11 +213,9 @@ export const OnwardsUpper = ({
 	shortUrlId,
 	discussionApiUrl,
 	absoluteServerTimes,
-	renderingTarget,
 }: Props) => {
-	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
-
-	if (!isHorizontalScrollingSupported) return null;
+	const isAndroid = useIsAndroid();
+	if (isAndroid) return null;
 
 	// Related content can be a collection of articles based on
 	// two things, 1: A popular tag, or 2: A generic text match
@@ -313,7 +309,6 @@ export const OnwardsUpper = ({
 						format={format}
 						discussionApiUrl={discussionApiUrl}
 						absoluteServerTimes={absoluteServerTimes}
-						renderingTarget={renderingTarget}
 					/>
 				</Section>
 			)}
@@ -329,7 +324,6 @@ export const OnwardsUpper = ({
 						format={format}
 						discussionApiUrl={discussionApiUrl}
 						absoluteServerTimes={absoluteServerTimes}
-						renderingTarget={renderingTarget}
 					/>
 				</Section>
 			)}

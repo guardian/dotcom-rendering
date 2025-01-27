@@ -40,14 +40,12 @@ import { decideTrail } from '../lib/decideTrail';
 import { isValidUrl } from '../lib/isValidUrl';
 import type { NavType } from '../model/extract-nav';
 import type { ArticleDeprecated } from '../types/article';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 type Props = {
 	article: ArticleDeprecated;
 	NAV: NavType;
 	format: ArticleFormat;
-	renderingTarget: RenderingTarget;
 };
 
 const mainColWrapperStyle = css`
@@ -185,12 +183,7 @@ const getMainMediaCaptions = (
 			: undefined,
 	);
 
-export const NewsletterSignupLayout = ({
-	article,
-	NAV,
-	format,
-	renderingTarget,
-}: Props) => {
+export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 	const {
 		promotedNewsletter,
 		config: { host, hasSurveyAd },
@@ -442,7 +435,6 @@ export const NewsletterSignupLayout = ({
 									article.config.discussionApiUrl
 								}
 								absoluteServerTimes={absoluteServerTimes}
-								renderingTarget={renderingTarget}
 							/>
 						</Island>
 					</Section>
@@ -466,7 +458,6 @@ export const NewsletterSignupLayout = ({
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
 						absoluteServerTimes={absoluteServerTimes}
-						renderingTarget={renderingTarget}
 					/>
 				</Island>
 			</main>
