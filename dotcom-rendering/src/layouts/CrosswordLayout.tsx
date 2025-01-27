@@ -66,8 +66,7 @@ const CrosswordGrid = ({ children }: { children: React.ReactNode }) => (
 				display: grid;
 				width: 100%;
 				margin-left: 0;
-
-				grid-column-gap: 10px;
+				grid-column-gap: 20px;
 
 				/*
 					Explanation of each unit of grid-template-columns
@@ -80,11 +79,10 @@ const CrosswordGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-columns: 220px 1fr 300px;
 
 					grid-template-areas:
-						'title  headline                right-column'
-						'.      crossword-links         right-column'
-						'lines  standfirst              right-column'
-						'meta   crossword-instructions  right-column'
-						'body   body                    right-column';
+						'title  headline      right-column'
+						'meta   standfirst    right-column'
+						'meta   instructions  right-column'
+						'body   body          right-column';
 				}
 
 				/*
@@ -98,36 +96,32 @@ const CrosswordGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-columns: 140px 1fr 300px;
 
 					grid-template-areas:
-						'title  headline                right-column'
-						'lines  crossword-links         right-column'
-						'meta   standfirst              right-column'
-						'meta   crossword-instructions  right-column'
-						'body   body                    right-column';
+						'title  headline      right-column'
+						'meta   standfirst    right-column'
+						'meta   instructions  right-column'
+						'body   body          right-column';
 				}
 
 				${until.leftCol} {
-					grid-template-columns: minmax(0, 1fr); /* Main content */
+					grid-template-columns: 1fr 300px;
 					grid-template-areas:
-						'title'
-						'headline'
-						'crossword-links'
-						'standfirst'
-						'lines'
-						'meta'
-						'crossword-instructions'
-						'body';
+						'title         right-column'
+						'headline      right-column'
+						'standfirst    right-column'
+						'meta          right-column'
+						'instructions  right-column'
+						'body          right-column';
 				}
 
 				${until.desktop} {
+					grid-column-gap: 0px;
 					grid-template-columns: minmax(0, 1fr); /* Main content */
 					grid-template-areas:
 						'title'
 						'headline'
-						'crossword-links'
 						'standfirst'
-						'lines'
 						'meta'
-						'crossword-instructions'
+						'instructions'
 						'body';
 				}
 
@@ -137,11 +131,9 @@ const CrosswordGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'title'
 						'headline'
-						'crossword-links'
 						'standfirst'
-						'lines'
 						'meta'
-						'crossword-instructions'
+						'instructions'
 						'body';
 				}
 			}
@@ -298,23 +290,28 @@ export const CrosswordLayout = (props: WebProps | AppsProps) => {
 									/>
 								</div>
 							</GridItem>
-							{article.crossword && (
-								<GridItem area="crossword-links">
-									<CrosswordLinks
-										crossword={article.crossword}
-									/>
-								</GridItem>
-							)}
 							<GridItem area="standfirst">
+								<Hide until="leftCol">
+									<DecideLines
+										format={format}
+										color={themePalette(
+											'--article-meta-lines',
+										)}
+									/>
+								</Hide>
 								<Standfirst
 									format={format}
 									standfirst={
-										'Download the Guardian app for a puzzles experience'
+										'<a href="https://app.adjust.com/16xt6hai" data-link-name="crossword-mobile-link">Download the Guardian app</a> for a better puzzles experience'
 									}
 								/>
+								{article.crossword && (
+									<CrosswordLinks
+										crossword={article.crossword}
+									/>
+								)}
 							</GridItem>
-
-							<GridItem area="lines">
+							<GridItem area="meta" element="aside">
 								<div css={maxWidth}>
 									<div css={stretchLines}>
 										<DecideLines
@@ -324,10 +321,6 @@ export const CrosswordLayout = (props: WebProps | AppsProps) => {
 											)}
 										/>
 									</div>
-								</div>
-							</GridItem>
-							<GridItem area="meta" element="aside">
-								<div css={maxWidth}>
 									{isApps ? (
 										<>
 											<Hide from="leftCol">
@@ -412,7 +405,7 @@ export const CrosswordLayout = (props: WebProps | AppsProps) => {
 								</div>
 							</GridItem>
 							{!!article.crossword?.instructions && (
-								<GridItem area="crossword-instructions">
+								<GridItem area="instructions">
 									<CrosswordInstructions
 										instructions={
 											article.crossword.instructions
