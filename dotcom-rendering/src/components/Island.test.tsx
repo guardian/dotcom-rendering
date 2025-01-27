@@ -205,6 +205,7 @@ describe('Island: server-side rendering', () => {
 						shortUrlId=""
 						discussionApiUrl=""
 						absoluteServerTimes={true}
+						renderingTarget="Web"
 					/>
 				</WithConfig>,
 			),
