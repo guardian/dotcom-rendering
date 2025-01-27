@@ -6,7 +6,6 @@ import {
 	headlineMedium20,
 	palette as sourcePalette,
 	space,
-	textSansBold12,
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import { secondsToDuration } from '../../lib/formatTime';
@@ -19,9 +18,9 @@ import type {
 import { PlayIcon } from '../Card/components/PlayIcon';
 import { FormatBoundary } from '../FormatBoundary';
 import { Kicker } from '../Kicker';
-import { YoutubeAtomPicture } from './YoutubeAtomPicture';
 import { Pill } from '../Pill';
 import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
+import { YoutubeAtomPicture } from './YoutubeAtomPicture';
 
 type Props = {
 	uniqueId: string;
@@ -129,7 +128,7 @@ export const YoutubeAtomOverlay = ({
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
 	//** We infer that a video is a livestream if the duration is set to 0. This is a soft contract with Editorial who manual set the duration of videos   */
-	const isLiveStream = duration === 0;
+	const isLiveStream = !isUndefined(duration) && duration === 0;
 	const image = overrideImage ?? posterImage;
 	const hidePillOnMobile =
 		imagePositionOnMobile === 'right' || imagePositionOnMobile === 'left';
