@@ -12,6 +12,7 @@ import {
 	ArticleSpecial,
 } from '../../lib/articleFormat';
 import { isMediaCard as isAMediaCard } from '../../lib/cardHelpers';
+import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { palette } from '../../palette';
@@ -37,7 +38,6 @@ import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
 import { MediaMeta } from '../MediaMeta';
-import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
 import { Pill } from '../Pill';
 import { Slideshow } from '../Slideshow';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
