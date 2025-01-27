@@ -479,6 +479,7 @@ type CarouselCardProps = {
 	onwardsSource?: OnwardsSource;
 	containerType?: DCRContainerType;
 	starRating?: StarRating;
+	audioDuration?: string;
 };
 
 const CarouselCard = ({
@@ -501,6 +502,7 @@ const CarouselCard = ({
 	absoluteServerTimes,
 	starRating,
 	index,
+	audioDuration,
 }: CarouselCardProps) => {
 	const isVideoContainer = containerType === 'fixed/video';
 	const cardImagePosition = isOnwardContent ? 'bottom' : 'top';
@@ -549,6 +551,7 @@ const CarouselCard = ({
 				index={index}
 				showTopBarDesktop={!isOnwardContent}
 				showTopBarMobile={false}
+				audioDuration={audioDuration}
 			/>
 		</LI>
 	);
@@ -1003,6 +1006,7 @@ export const Carousel = ({
 								discussion,
 								mainMedia,
 								starRating,
+								audioDuration,
 							} = trail;
 
 							// Don't try to render cards that have no publication date. This property is technically optional
@@ -1042,6 +1046,7 @@ export const Carousel = ({
 									discussionApiUrl={discussionApiUrl}
 									isOnwardContent={isOnwardContent}
 									starRating={starRating}
+									audioDuration={audioDuration}
 								/>
 							);
 						})}
