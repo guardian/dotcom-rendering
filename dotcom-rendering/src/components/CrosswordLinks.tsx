@@ -1,19 +1,12 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import { type CrosswordProps } from '@guardian/react-crossword-next';
-import { textSans15 } from '@guardian/source/foundations';
-import { palette } from '../palette';
+import { palette, space } from '@guardian/source/foundations';
+import { LinkButton } from '@guardian/source/react-components';
+import { palette as themePalette } from '../palette';
 
 const crosswordLinkStyles = css`
-	${textSans15};
-
-	a {
-		color: ${palette('--standfirst-link-text')};
-		text-decoration: none;
-		:hover {
-			border-bottom: 1px solid ${palette('--standfirst-link-border')};
-		}
-	}
+	margin: ${space[2]}px 0;
 `;
 
 export const CrosswordLinks = ({
@@ -23,11 +16,30 @@ export const CrosswordLinks = ({
 }) => {
 	return (
 		isUndefined(crossword.pdf) || (
-			<span css={crosswordLinkStyles}>
-				<a target="_blank" href={crossword.pdf} rel="noreferrer">
+			<div css={crosswordLinkStyles}>
+				<LinkButton
+					href={crossword.pdf}
+					size="small"
+					priority="tertiary"
+					target="_blank"
+					rel="noreferrer"
+					// TODO: add to palette and replace CSS override if possible
+					theme={{
+						textTertiary: themePalette('--standfirst-link-text'),
+						borderTertiary: themePalette('--standfirst-link-text'),
+						backgroundTertiaryHover: themePalette(
+							'--standfirst-link-text',
+						),
+					}}
+					cssOverrides={css`
+						:hover {
+							color: ${palette.neutral[100]};
+						}
+					`}
+				>
 					PDF version
-				</a>
-			</span>
+				</LinkButton>
+			</div>
 		)
 	);
 };
