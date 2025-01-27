@@ -110,7 +110,7 @@ export const WithPodcastSeriesImage: Story = {
 	args: {
 		format: {
 			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Standard,
+			design: ArticleDesign.Audio,
 			theme: Pillar.Sport,
 		},
 		podcastImage: {
