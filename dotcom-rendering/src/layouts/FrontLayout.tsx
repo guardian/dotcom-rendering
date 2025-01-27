@@ -6,6 +6,7 @@ import {
 } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
 import { Carousel } from '../components/Carousel.importable';
+import { useConfig } from '../components/ConfigContext';
 import { ContainerOverrides } from '../components/ContainerOverrides';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
@@ -113,6 +114,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		config: { isPaidContent, hasPageSkin: hasPageSkinConfig, pageId },
 		editionId,
 	} = front;
+
+	const { renderingTarget } = useConfig();
 
 	const renderAds = canRenderAds(front);
 
@@ -617,6 +620,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 												}
 												absoluteServerTimes={
 													absoluteServerTimes
+												}
+												renderingTarget={
+													renderingTarget
 												}
 											/>
 										</Island>
