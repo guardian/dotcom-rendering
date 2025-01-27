@@ -36,8 +36,8 @@ import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
-import { MediaDuration, secondsToDuration } from '../MediaDuration';
 import { MediaMeta } from '../MediaMeta';
+import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
 import { Pill } from '../Pill';
 import { Slideshow } from '../Slideshow';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
@@ -342,13 +342,13 @@ const getHeadlinePosition = ({
 	return 'inner';
 };
 
-export const isWithinTwelveHours = (webPublicationDate: string): boolean => {
-	const timeDiffMs = Math.abs(
-		new Date().getTime() - new Date(webPublicationDate).getTime(),
-	);
-	const timeDiffHours = timeDiffMs / (1000 * 60 * 60);
-	return timeDiffHours <= 12;
-};
+const liveBulletStyles = css`
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	background-color: ${palette('--pill-bullet')};
+	margin-right: ${space[1]}px;
+`;
 
 export const Card = ({
 	linkTo,
@@ -494,16 +494,28 @@ export const Card = ({
 			`}
 		>
 			{isVideoArticle && (
-				<Pill
-					content={secondsToDuration(mainMedia.duration)}
-					icon={<SvgMediaControlsPlay />}
-					iconSize={'small'}
-				/>
+				<>
+					{mainMedia.duration === 0 ? (
+						<Pill
+							content={'Live'}
+							icon={<div css={liveBulletStyles} />}
+							iconSize={'small'}
+						/>
+					) : (
+						<Pill
+							content={secondsToDuration(mainMedia.duration)}
+							icon={<SvgMediaControlsPlay />}
+							iconSize={'small'}
+						/>
+					)}
+				</>
 			)}
+
 			{mainMedia?.type === 'Audio' && (
 				<Pill
 					content={audioDuration ?? ''}
 					icon={<SvgMediaControlsPlay />}
+					iconSize={'small'}
 				/>
 			)}
 			{mainMedia?.type === 'Gallery' && (
@@ -529,10 +541,7 @@ export const Card = ({
 	 * Check media type to determine if pill, or article metadata & icon shown.
 	 * Currently pills are only shown within beta containers.
 	 */
-	const showPill =
-		isBetaContainer &&
-		mainMedia &&
-		(mainMedia.type === 'Audio' || mainMedia.type === 'Gallery');
+	const showPill = isBetaContainer && !!mainMedia;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -870,7 +879,11 @@ export const Card = ({
 												}
 												index={index}
 												duration={
-													media.mainMedia.duration
+													isBetaContainer &&
+													isVideoArticle
+														? undefined
+														: media.mainMedia
+																.duration
 												}
 												posterImage={
 													media.mainMedia.images
