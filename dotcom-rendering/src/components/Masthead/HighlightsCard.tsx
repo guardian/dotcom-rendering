@@ -9,7 +9,7 @@ import { palette } from '../../palette';
 import type { StarRating as Rating } from '../../types/content';
 import type { DCRFrontImage } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
-import { PodcastSeriesImage } from '../../types/tag';
+import type { PodcastSeriesImage } from '../../types/tag';
 import { Avatar } from '../Avatar';
 import { CardLink } from '../Card/components/CardLink';
 import { CardHeadline } from '../CardHeadline';
