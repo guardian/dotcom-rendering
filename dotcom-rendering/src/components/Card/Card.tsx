@@ -426,11 +426,17 @@ export const Card = ({
 
 	const isBetaContainer = BETA_CONTAINERS.includes(containerType ?? '');
 
-	/** A video article is standalone video content and is considered a media card.  */
+	/**
+	 * A "video article" refers to standalone video content presented as the main focus of the article.
+	 * It is treated as a media card in the design system.
+	 */
 	const isVideoArticle =
 		mainMedia?.type === 'Video' && format.design === ArticleDesign.Video;
 
-	/** Article that have video as the main media but are not a video article are not considered a media card and are styled differenently as a consequence. */
+	/**
+	 * Articles with a video as the main media but not classified as "video articles"
+	 * are styled differently and are not treated as media cards.
+	 */
 	const isVideoMainMedia =
 		mainMedia?.type === 'Video' && format.design !== ArticleDesign.Video;
 
