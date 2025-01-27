@@ -24,8 +24,8 @@ export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 			pageId: hasPageId(req.body) ? req.body.pageId : 'no-page-id-found',
 			path: req.path,
 			method: req.method,
-			fastlyRequestId: requestId ?? 'fastly-id-not-provided',
 		},
+		fastlyRequestId: requestId ?? 'fastly-id-not-provided',
 		timing: {},
 	};
 
