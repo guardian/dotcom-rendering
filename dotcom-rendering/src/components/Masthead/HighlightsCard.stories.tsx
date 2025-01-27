@@ -105,3 +105,19 @@ export const WithStarRating: Story = {
 	parameters: {},
 	name: 'With Star Rating',
 };
+
+export const WithPodcastSeriesImage: Story = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.Sport,
+		},
+		podcastImage: {
+			src: 'https://uploads.guim.co.uk/2024/08/01/FootballWeekly_FINAL_3000_(1).jpg',
+			altText: 'Football Weekly',
+		},
+	},
+	parameters: {},
+	name: 'With Podcast Series Image',
+};
