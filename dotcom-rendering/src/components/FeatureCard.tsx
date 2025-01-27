@@ -30,7 +30,6 @@ import { CardPicture } from './CardPicture';
 import { ContainerOverrides } from './ContainerOverrides';
 import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
-import { MediaDuration } from './MediaDuration';
 import { Pill } from './Pill';
 import { StarRating } from './StarRating/StarRating';
 import { SupportingContent } from './SupportingContent';
@@ -407,17 +406,20 @@ export const FeatureCard = ({
 										/>
 										{isVideoMainMedia &&
 											mainMedia.duration > 0 && (
-												<MediaDuration
-													mediaDuration={
-														mainMedia.duration
-													}
-													imagePositionOnDesktop={
-														imagePositionOnDesktop
-													}
-													imagePositionOnMobile={
-														imagePositionOnMobile
-													}
-												/>
+												<div css={videoPillStyles}>
+													<Pill
+														content={
+															<time>
+																{secondsToDuration(
+																	videoDuration,
+																)}
+															</time>
+														}
+														icon={
+															<SvgMediaControlsPlay />
+														}
+													/>
+												</div>
 											)}
 									</>
 								)}
