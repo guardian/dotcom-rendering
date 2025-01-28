@@ -973,7 +973,8 @@ export const Card = ({
 									aspectRatio={aspectRatio}
 								/>
 								{(isVideoMainMedia ||
-									(isVideoArticle && !isBetaContainer)) &&
+									(isVideoArticle &&
+										containerType === 'fixed/video')) &&
 									mainMedia.duration > 0 && (
 										<div
 											css={css`
