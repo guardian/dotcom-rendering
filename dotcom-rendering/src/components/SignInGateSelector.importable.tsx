@@ -42,6 +42,7 @@ type Props = {
 	pageId: string;
 	idUrl?: string;
 	switches: Switches;
+	contributionsServiceUrl: string;
 };
 
 // interface for the component which shows the sign in gate
@@ -199,7 +200,14 @@ const SignInGateSelectorDefault = ({
 	pageId,
 	idUrl = 'https://profile.theguardian.com',
 	switches,
+	contributionsServiceUrl,
 }: Props) => {
+	// comment group: auxia-prototype-e55a86ef
+	// The following (useless) instruction only exists to avoid linting error
+	// so that SignInGateSelectorDefault, SignInGateSelectorAuxia and SignInGateSelector
+	// all have the same signature, while we give shape to the Auxia prototype.
+	contributionsServiceUrl;
+
 	const authStatus = useAuthStatus();
 	const isSignedIn =
 		authStatus.kind === 'SignedInWithOkta' ||
@@ -349,6 +357,7 @@ export const SignInGateSelector = ({
 	pageId,
 	idUrl = 'https://profile.theguardian.com',
 	switches,
+	contributionsServiceUrl,
 }: Props) => {
 	const abTestAPI = useAB()?.api;
 	const userIsInAuxiaExperiment = !!abTestAPI?.isUserInVariant(
@@ -367,12 +376,14 @@ export const SignInGateSelector = ({
 			pageId,
 			idUrl,
 			switches,
+			contributionsServiceUrl,
 		});
 	} else {
 		return SignInGateSelectorAuxia({
 			host,
 			pageId,
 			idUrl,
+			contributionsServiceUrl,
 		});
 	}
 };
@@ -404,6 +415,7 @@ type PropsAuxia = {
 	host?: string;
 	pageId: string;
 	idUrl?: string;
+	contributionsServiceUrl: string;
 };
 
 /*
@@ -432,8 +444,10 @@ const dismissGateAuxia = (
 	setShowGate(false);
 };
 
-const fetchAuxiaDisplayDataFromProxy = async (): Promise<SDCProxyData> => {
-	const url = 'https://contributions.guardianapis.com/auxia';
+const fetchAuxiaDisplayDataFromProxy = async (
+	contributionsServiceUrl: string,
+): Promise<SDCProxyData> => {
+	const url = `${contributionsServiceUrl}/auxia`;
 	const headers = {
 		'Content-Type': 'application/json',
 	};
@@ -455,6 +469,7 @@ const SignInGateSelectorAuxia = ({
 	host = 'https://theguardian.com/',
 	pageId,
 	idUrl = 'https://profile.theguardian.com',
+	contributionsServiceUrl,
 }: PropsAuxia) => {
 	/*
 		comment group: auxia-prototype-e55a86ef
@@ -494,7 +509,9 @@ const SignInGateSelectorAuxia = ({
 
 	useOnce(() => {
 		void (async () => {
-			const data = await fetchAuxiaDisplayDataFromProxy();
+			const data = await fetchAuxiaDisplayDataFromProxy(
+				contributionsServiceUrl,
+			);
 			setShouldShowSignInGateUsingAuxiaAnswer(data.shouldShowSignInGate);
 		})().catch((error) => {
 			console.error('Error fetching Auxia display data:', error);

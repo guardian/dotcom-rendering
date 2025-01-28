@@ -34,6 +34,7 @@ type Props = {
 	isSensitive: boolean;
 	abTests: ServerSideTests;
 	editionId: EditionId;
+	contributionsServiceUrl: string;
 };
 
 export const ArticleRenderer = ({
@@ -55,6 +56,7 @@ export const ArticleRenderer = ({
 	isDev,
 	abTests,
 	editionId,
+	contributionsServiceUrl,
 }: Props) => {
 	const isSectionedMiniProfilesArticle =
 		elements.filter(
@@ -129,6 +131,7 @@ export const ArticleRenderer = ({
 						switches,
 						isSensitive,
 						isDev,
+						contributionsServiceUrl,
 				  })}
 		</div>
 	); // classname that space finder is going to target for in-body ads in DCR

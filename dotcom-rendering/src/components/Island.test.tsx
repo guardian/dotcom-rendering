@@ -380,6 +380,7 @@ describe('Island: server-side rendering', () => {
 						isPreview={false}
 						pageId={''}
 						switches={{}}
+						contributionsServiceUrl={''}
 					/>
 				</WithConfig>,
 			),
