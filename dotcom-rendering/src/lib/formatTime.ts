@@ -44,3 +44,11 @@ export const secondsToDuration = (secs?: number): string => {
 	}
 	return duration.join(':');
 };
+
+export const isWithinTwelveHours = (webPublicationDate: string): boolean => {
+	const timeDiffMs = Math.abs(
+		new Date().getTime() - new Date(webPublicationDate).getTime(),
+	);
+	const timeDiffHours = timeDiffMs / (1000 * 60 * 60);
+	return timeDiffHours <= 12;
+};
