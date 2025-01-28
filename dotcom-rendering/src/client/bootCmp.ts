@@ -5,7 +5,7 @@ import { getLocaleCode } from '../lib/getCountryCode';
 // import { isUserLoggedInOktaRefactor } from '../lib/identity';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { getOphan } from './ophan/ophan';
-import { allowRejectAll } from './userFeatures/cookies/allowRejectAll';
+// import { allowRejectAll } from './userFeatures/cookies/allowRejectAll';
 
 const submitConsentToOphan = async (renderingTarget: RenderingTarget) => {
 	const consentState: ConsentState = await onConsent();
@@ -63,7 +63,7 @@ const initialiseCmp = async () => {
 	const { pageViewId } = window.guardian.config.ophan;
 	const isUserSignedIn = false; //await isUserLoggedInOktaRefactor();
 	// If user has the "reject all" benefit then show the reduced, "non-advertised" list
-	const useNonAdvertisedList = allowRejectAll();
+	const useNonAdvertisedList = false; //allowRejectAll();
 
 	const country = code ?? undefined;
 	cmp.init({
