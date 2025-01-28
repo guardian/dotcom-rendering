@@ -217,3 +217,25 @@ export const ForVideos = {
 		},
 	},
 } satisfies Story;
+
+export const WhenImmersive = {
+	args: {
+		captionText:
+			'This is how a caption looks with immersive padding. Additional padding is added to the left and right of the caption to compensate for the negative margins applied to immersive images.',
+		format: Standard.args.format,
+		isImmersive: true,
+	},
+	parameters: {
+		chromatic: {
+			modes: {
+				'vertical mobileMedium': { disable: true },
+				'vertical mobile': allModes['vertical mobile'],
+				'vertical mobileLandscape':
+					allModes['vertical mobileLandscape'],
+				'vertical phablet': allModes['vertical tablet'],
+				'vertical desktop': allModes['vertical desktop'],
+				'vertical leftCol': allModes['vertical leftCol'],
+			},
+		},
+	},
+} satisfies Story;

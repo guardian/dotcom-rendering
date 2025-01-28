@@ -38,7 +38,7 @@ export interface Guardian {
 			brazeApiKey?: string;
 			isPaidContent?: boolean;
 			isDev?: boolean;
-			userAttributesApiUrl?: string;
+			userBenefitsApiUrl?: string;
 			idApiUrl?: string;
 			isPodcast?: boolean;
 		};

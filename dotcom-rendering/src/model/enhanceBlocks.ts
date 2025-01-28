@@ -105,16 +105,18 @@ export const enhanceBlocks = (
 	format: ArticleFormat,
 	options: Options,
 ): Block[] => {
-	const additionalElement: FEElement[] = [];
+	const additionalElements: FEElement[] = [];
 	if (options.audioArticleImage) {
-		additionalElement.push(options.audioArticleImage);
+		additionalElements.push(options.audioArticleImage);
 	}
-	return blocks.map((block) => ({
-		...block,
-		elements: enhanceElements(
-			format,
-			block.id,
-			options,
-		)([...block.elements, ...additionalElement]),
-	}));
+	return [
+		...blocks.map((block) => ({
+			...block,
+			elements: enhanceElements(
+				format,
+				block.id,
+				options,
+			)([...block.elements, ...additionalElements]),
+		})),
+	];
 };

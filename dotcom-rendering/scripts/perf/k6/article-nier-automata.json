@@ -1745,7 +1745,7 @@
 		"buildNumber": "47872",
 		"isPhotoEssay": false,
 		"ampIframeUrl": "https://assets.guim.co.uk/data/vendor/2533d5cb94302889e6a8f1b24b5329e7/amp-iframe.html",
-		"userAttributesApiUrl": "https://members-data-api.theguardian.com/user-attributes",
+		"userBenefitsApiUrl": "https://user-benefits.guardianapis.com",
 		"isLive": false,
 		"publication": "theguardian.com",
 		"brazeApiKey": "7f28c639-8bda-48ff-a3f6-24345abfc07c",

@@ -6,6 +6,7 @@ import { useApi } from '../lib/useApi';
 import { addDiscussionIds } from '../lib/useCommentCount';
 import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { FETrailType, TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
 import { Placeholder } from './Placeholder';
@@ -17,6 +18,7 @@ type Props = {
 	format: ArticleFormat;
 	discussionApiUrl: string;
 	absoluteServerTimes: boolean;
+	renderingTarget: RenderingTarget;
 };
 
 type OnwardsResponse = {
@@ -37,6 +39,7 @@ export const FetchOnwardsData = ({
 	format,
 	discussionApiUrl,
 	absoluteServerTimes,
+	renderingTarget,
 }: Props) => {
 	const { data, error } = useApi<OnwardsResponse>(url);
 
@@ -85,6 +88,7 @@ export const FetchOnwardsData = ({
 				}
 				discussionApiUrl={discussionApiUrl}
 				absoluteServerTimes={absoluteServerTimes}
+				renderingTarget={renderingTarget}
 			/>
 		</div>
 	);

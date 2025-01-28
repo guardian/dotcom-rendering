@@ -1,20 +1,24 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { between, from, until } from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
+import { SvgCamera } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
-import { isMediaCard } from '../../lib/cardHelpers';
+import { isMediaCard as isMedia } from '../../lib/cardHelpers';
+import { secondsToDuration } from '../../lib/formatTime';
 import { palette } from '../../palette';
 import type { StarRating as Rating } from '../../types/content';
 import type { DCRFrontImage } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
+import type { PodcastSeriesImage } from '../../types/tag';
 import { Avatar } from '../Avatar';
 import { CardLink } from '../Card/components/CardLink';
 import { CardHeadline } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { FormatBoundary } from '../FormatBoundary';
-import { Icon } from '../MediaMeta';
+import { Pill } from '../Pill';
 import { StarRating } from '../StarRating/StarRating';
+import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 
 export type HighlightsCardProps = {
 	linkTo: string;
@@ -30,6 +34,10 @@ export type HighlightsCardProps = {
 	byline?: string;
 	isExternalLink: boolean;
 	starRating?: Rating;
+	galleryCount?: number;
+	audioDuration?: string;
+	/** The square podcast series image, if it exists for a card */
+	podcastImage?: PodcastSeriesImage;
 };
 
 const gridContainer = css`
@@ -38,11 +46,11 @@ const gridContainer = css`
 	/** Relative positioning is required to absolutely
 	position the card link overlay */
 	position: relative;
-	gap: 8px;
+	column-gap: ${space[2]}px;
 	grid-template-areas:
-		'headline 	headline'
-		'rating rating'
-		'media-icon image';
+		'headline headline'
+		'media-icon media-icon'
+		'. image';
 
 	/* Applied word-break: break-word to prevent text overflow
 	and ensure long words break onto the next line.
@@ -74,39 +82,32 @@ const gridContainer = css`
 
 const headline = css`
 	grid-area: headline;
+	margin-bottom: ${space[1]}px;
 `;
 
 const mediaIcon = css`
 	grid-area: media-icon;
-	align-self: end;
-	width: 24px;
-	height: 24px;
-	/* We’re using the text colour for the icon badge */
-	background-color: ${palette('--highlights-card-headline')};
-	border-radius: 50%;
-	display: inline-block;
-
-	> svg {
-		width: 20px;
-		height: 20px;
-		margin-left: auto;
-		margin-right: auto;
-		margin-top: 2px;
-		display: block;
-		fill: ${palette('--highlights-container-background')};
-	}
+	display: flex;
+	align-items: flex-end;
 `;
 
 const imageArea = css`
 	grid-area: image;
-	height: 106px;
-	width: 106px;
+	height: 112px;
+	width: 112px;
 	align-self: end;
 	position: relative;
-	${from.desktop} {
-		height: 112px;
-		width: 112px;
+	${until.desktop} {
+		margin-top: ${space[2]}px;
 	}
+	${from.desktop} {
+		align-self: start;
+	}
+`;
+
+/** Avatar alignment is an exception and should align with the bottom of the card *if* there is a gap.*/
+const avatarAlignmentStyles = css`
+	align-self: end;
 `;
 
 const hoverStyles = css`
@@ -116,8 +117,10 @@ const hoverStyles = css`
 		right: 0;
 		height: 100%;
 		width: 100%;
-		border-radius: 100%;
 		background-color: ${palette('--card-background-hover')};
+	}
+	:hover .circular {
+		border-radius: 100%;
 	}
 
 	/* Only underline the headline element we want to target (not kickers/sublink headlines) */
@@ -130,13 +133,63 @@ const starWrapper = css`
 	background-color: ${palette('--star-rating-background')};
 	color: ${palette('--star-rating-fill')};
 	width: fit-content;
-	height: fit-content;
-	grid-area: rating;
-	${from.desktop} {
-		grid-area: media-icon;
-		align-self: flex-end;
-	}
+	grid-area: media-icon;
+	align-self: flex-end;
 `;
+
+const decideImage = (
+	imageLoading: Loading,
+	format: ArticleFormat,
+	image?: DCRFrontImage,
+	podcastImage?: PodcastSeriesImage,
+	avatarUrl?: string,
+	byline?: string,
+) => {
+	if (!image && !avatarUrl) {
+		return null;
+	}
+	if (avatarUrl) {
+		return (
+			<Avatar
+				src={avatarUrl}
+				alt={byline ?? ''}
+				shape="cutout"
+				imageSize="large"
+			/>
+		);
+	}
+	if (format.design === ArticleDesign.Audio && podcastImage?.src) {
+		return (
+			<>
+				<CardPicture
+					imageSize="medium"
+					mainImage={podcastImage.src}
+					alt={podcastImage.altText}
+					loading={imageLoading}
+					isCircular={false}
+					aspectRatio={'1:1'}
+				/>
+				<div className="image-overlay"> </div>
+			</>
+		);
+	}
+	if (!image) {
+		return null;
+	}
+	return (
+		<>
+			<CardPicture
+				imageSize="medium"
+				mainImage={image.src}
+				alt={image.altText}
+				loading={imageLoading}
+				isCircular={true}
+			/>
+			{/* This image overlay is styled when the CardLink is hovered */}
+			<div className="image-overlay circular"> </div>
+		</>
+	);
+};
 
 export const HighlightsCard = ({
 	linkTo,
@@ -152,9 +205,37 @@ export const HighlightsCard = ({
 	byline,
 	isExternalLink,
 	starRating,
+	galleryCount,
+	audioDuration,
+	podcastImage,
 }: HighlightsCardProps) => {
-	const showMediaIcon = isMediaCard(format);
-
+	const isMediaCard = isMedia(format);
+	const MediaPill = () => (
+		<div css={mediaIcon}>
+			{mainMedia?.type === 'Video' && (
+				<Pill
+					content={secondsToDuration(mainMedia.duration)}
+					icon={<SvgMediaControlsPlay />}
+					iconSize={'small'}
+				/>
+			)}
+			{mainMedia?.type === 'Audio' && (
+				<Pill
+					content={audioDuration ?? ''}
+					icon={<SvgMediaControlsPlay />}
+					iconSize={'small'}
+				/>
+			)}
+			{mainMedia?.type === 'Gallery' && (
+				<Pill
+					prefix="Gallery"
+					content={galleryCount?.toString() ?? ''}
+					icon={<SvgCamera />}
+					iconSide="right"
+				/>
+			)}
+		</div>
+	);
 	return (
 		<FormatBoundary format={format}>
 			<div css={[gridContainer, hoverStyles]}>
@@ -193,33 +274,17 @@ export const HighlightsCard = ({
 					</div>
 				) : null}
 
-				{!!mainMedia && showMediaIcon && (
-					<div css={mediaIcon}>
-						<Icon mediaType={mainMedia.type} />
-					</div>
-				)}
+				{!!mainMedia && isMediaCard && MediaPill()}
 
-				<div css={imageArea}>
-					{(avatarUrl && (
-						<Avatar
-							src={avatarUrl}
-							alt={byline ?? ''}
-							shape="cutout"
-						/>
-					)) ??
-						(image && (
-							<>
-								<CardPicture
-									imageSize="medium"
-									mainImage={image.src}
-									alt={image.altText}
-									loading={imageLoading}
-									isCircular={true}
-								/>
-								{/* This image overlay is styled when the CardLink is hovered */}
-								<div className="image-overlay"> </div>
-							</>
-						))}
+				<div css={[imageArea, avatarUrl && avatarAlignmentStyles]}>
+					{decideImage(
+						imageLoading,
+						format,
+						image,
+						podcastImage,
+						avatarUrl,
+						byline,
+					)}
 				</div>
 			</div>
 		</FormatBoundary>

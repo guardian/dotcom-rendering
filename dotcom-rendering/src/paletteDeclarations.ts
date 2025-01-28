@@ -1052,9 +1052,7 @@ const datelineDark: PaletteFunction = ({ design, theme }) => {
 const headlineBorder: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
-			return 'rgba(255,255,255, 0.2)';
-		case ArticleDesign.DeadBlog:
-			return '#CDCDCD';
+			return transparentColour(sourcePalette.neutral[100], 0.2);
 		default:
 			return sourcePalette.neutral[86];
 	}
@@ -2282,9 +2280,7 @@ const standfirstBackgroundDark: PaletteFunction = ({ design, theme }) => {
 const standfirstBorder: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
-			return 'rgba(255,255,255, 0.2)';
-		case ArticleDesign.DeadBlog:
-			return '#BDBDBD';
+			return transparentColour(sourcePalette.neutral[100], 0.2);
 		default:
 			return sourcePalette.neutral[86];
 	}
@@ -5756,7 +5752,7 @@ const pillBackground: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[7], 0.7);
 const pillDivider: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[100], 0.5);
-
+const pillLiveBullet: PaletteFunction = () => sourcePalette.news[500];
 // ----- Palette ----- //
 
 /**
@@ -6779,6 +6775,10 @@ const paletteColours = {
 		light: pillBackground,
 		dark: pillBackground,
 	},
+	'--pill-bullet': {
+		light: pillLiveBullet,
+		dark: pillLiveBullet,
+	},
 	'--pill-divider': {
 		light: pillDivider,
 		dark: pillDivider,
@@ -6847,6 +6847,18 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[38],
 	},
+	'--quiz-atom-button-background': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--quiz-atom-button-background-hover': {
+		light: () => '#234B8A',
+		dark: () => sourcePalette.neutral[93],
+	},
+	'--quiz-atom-button-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.brand[400],
+	},
 	'--quiz-atom-check-mark': {
 		light: () => sourcePalette.neutral[0],
 		dark: () => sourcePalette.neutral[97],
@@ -6854,6 +6866,22 @@ const paletteColours = {
 	'--quiz-atom-incorrect-answer-background': {
 		light: () => sourcePalette.news[400],
 		dark: () => sourcePalette.news[300],
+	},
+	'--quiz-atom-results-background': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[10],
+	},
+	'--quiz-atom-results-border': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--quiz-atom-results-number': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--quiz-atom-results-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--quote-icon-fill': {
 		light: richLinkQuoteFillLight,

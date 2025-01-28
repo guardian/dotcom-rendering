@@ -10,7 +10,6 @@ import type {
 	ImageSizeType,
 } from '../Card/components/ImageWrapper';
 import { MaintainAspectRatio } from '../MaintainAspectRatio';
-import type { VideoCategory } from './YoutubeAtomOverlay';
 import { YoutubeAtomOverlay } from './YoutubeAtomOverlay';
 import { YoutubeAtomPlaceholder } from './YoutubeAtomPlaceholder';
 import { YoutubeAtomPlayer } from './YoutubeAtomPlayer';
@@ -46,7 +45,6 @@ export type Props = {
 	shouldStick?: boolean;
 	isMainMedia?: boolean;
 	abTestParticipations: Participations;
-	videoCategory?: VideoCategory;
 	kicker?: string;
 	shouldPauseOutOfView?: boolean;
 	showTextOverlay?: boolean;
@@ -74,7 +72,6 @@ export const YoutubeAtom = ({
 	shouldStick,
 	isMainMedia,
 	abTestParticipations,
-	videoCategory,
 	kicker,
 	format,
 	shouldPauseOutOfView = false,
@@ -248,7 +245,6 @@ export const YoutubeAtom = ({
 							duration={duration}
 							title={title}
 							onClick={() => setOverlayClicked(true)}
-							videoCategory={videoCategory}
 							kicker={kicker}
 							format={format}
 							showTextOverlay={showTextOverlay}

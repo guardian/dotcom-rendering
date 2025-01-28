@@ -1290,21 +1290,22 @@ export const WithSpecialPaletteVariations = () => {
 						isLabs
 							? {
 									display: ArticleDisplay.Standard,
-									design: ArticleDesign.Gallery,
+									design: ArticleDesign.Audio,
 									theme: ArticleSpecial.Labs,
 							  }
 							: {
 									display: ArticleDisplay.Standard,
-									design: ArticleDesign.Gallery,
+									design: ArticleDesign.Audio,
 									theme: Pillar.Lifestyle,
 							  }
 					}
+					headlineText="Audio"
 					kickerText="Kicker"
 					trailText=""
 					imagePositionOnDesktop="top"
 					imagePositionOnMobile="left"
 					imageSize="medium"
-					mainMedia={mainGallery}
+					mainMedia={{ ...mainAudio, duration: 90 }}
 					containerPalette={containerPalette}
 				/>
 			</LI>
@@ -1605,6 +1606,109 @@ export const WithALargeGap = () => {
 						}}
 						showTopBarDesktop={false}
 						showTopBarMobile={true}
+					/>
+				</div>
+			</CardWrapper>
+		</>
+	);
+};
+
+export const WithNoVerticalGap = () => {
+	return (
+		<>
+			<CardWrapper>
+				<div
+					css={css`
+						width: 280px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						isOnwardContent={true}
+						imagePositionOnDesktop="bottom"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: Pillar.Opinion,
+						}}
+					/>
+				</div>
+			</CardWrapper>
+		</>
+	);
+};
+
+export const WithAVerticalGapWhenLegacyContainer = () => {
+	return (
+		<>
+			<CardWrapper>
+				<div
+					css={css`
+						width: 280px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						containerType={'dynamic/fast'}
+						imagePositionOnDesktop="bottom"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: Pillar.Opinion,
+						}}
+						discussionId={'p/d8ex5'}
+					/>
+				</div>
+			</CardWrapper>
+		</>
+	);
+};
+
+export const WithAVerticalGapWhenBetaContainer = () => {
+	return (
+		<>
+			<CardWrapper>
+				<div
+					css={css`
+						width: 280px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						containerType={'flexible/special'}
+						imagePositionOnDesktop="bottom"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: Pillar.Opinion,
+						}}
+						discussionId={'p/d8ex5'}
+					/>
+				</div>
+			</CardWrapper>
+		</>
+	);
+};
+
+export const WithAVerticalGapWhenScrollableSmallContainer = () => {
+	return (
+		<>
+			<CardWrapper>
+				<div
+					css={css`
+						width: 280px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						containerType={'scrollable/small'}
+						imagePositionOnDesktop="bottom"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: Pillar.Opinion,
+						}}
+						discussionId={'p/d8ex5'}
 					/>
 				</div>
 			</CardWrapper>

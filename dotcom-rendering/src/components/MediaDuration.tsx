@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { space, textSansBold12 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
+import { secondsToDuration } from '../lib/formatTime';
 import type { ImagePositionType } from './Card/components/ImageWrapper';
 
 const durationStyles = css`
@@ -14,29 +15,6 @@ const durationStyles = css`
 	color: white;
 	${textSansBold12};
 `;
-
-export function secondsToDuration(secs?: number): string {
-	if (typeof secs === `undefined` || secs === 0) {
-		return ``;
-	}
-	const seconds = Number(secs);
-	const h = Math.floor(seconds / 3600);
-	const m = Math.floor((seconds % 3600) / 60);
-	const s = Math.floor((seconds % 3600) % 60);
-
-	const duration = [];
-	if (h > 0) {
-		duration.push(h);
-	}
-	if (h === 0 && m > 0 && s === 0) duration.push(`${m}:00`); // e.g 6:00
-	else if (h > 0 && m < 10) duration.push(`0${m}`); // e.g 1:01:11
-	else duration.push(m); // supports 0:59
-	if (s > 0) {
-		if (s < 10) duration.push(`0${s}`);
-		else duration.push(s);
-	}
-	return duration.join(':');
-}
 
 export const MediaDuration = ({
 	mediaDuration,

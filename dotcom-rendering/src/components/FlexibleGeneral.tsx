@@ -80,6 +80,7 @@ type BoostedSplashProperties = {
 	supportingContentAlignment: Alignment;
 	liveUpdatesAlignment: Alignment;
 	trailTextSize: TrailTextSize;
+	avatarUrl?: string;
 };
 
 /**
@@ -89,6 +90,7 @@ const decideSplashCardProperties = (
 	boostLevel: BoostLevel,
 	supportingContentLength: number,
 	mediaCard: boolean,
+	avatarUrl?: string,
 ): BoostedSplashProperties => {
 	switch (boostLevel) {
 		// boostedfont sizing
@@ -117,7 +119,7 @@ const decideSplashCardProperties = (
 				},
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
-				imageSize: 'jumbo',
+				imageSize: avatarUrl ? 'large' : 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
@@ -186,6 +188,7 @@ export const SplashCardLayout = ({
 		card.boostLevel ?? 'default',
 		card.supportingContent?.length ?? 0,
 		isMediaCard(card.format),
+		card.avatarUrl,
 	);
 
 	return (
@@ -244,6 +247,8 @@ type BoostedCardProperties = {
  */
 const decideCardProperties = (
 	boostLevel: Omit<BoostLevel, 'default' | 'gigaboost'> = 'boost',
+	supportingContentLength: number,
+	avatarUrl?: string,
 ): BoostedCardProperties => {
 	switch (boostLevel) {
 		case 'megaboost':
@@ -255,7 +260,8 @@ const decideCardProperties = (
 				},
 				imageSize: 'jumbo',
 				liveUpdatesPosition: 'outer',
-				supportingContentAlignment: 'horizontal',
+				supportingContentAlignment:
+					supportingContentLength >= 2 ? 'horizontal' : 'vertical',
 			};
 		case 'boost':
 		default:
@@ -265,9 +271,10 @@ const decideCardProperties = (
 					tablet: 'small',
 					mobile: 'small',
 				},
-				imageSize: 'medium',
+				imageSize: avatarUrl ? 'large' : 'medium',
 				liveUpdatesPosition: 'inner',
-				supportingContentAlignment: 'horizontal',
+				supportingContentAlignment:
+					supportingContentLength >= 2 ? 'horizontal' : 'vertical',
 			};
 	}
 };
@@ -299,7 +306,11 @@ export const BoostedCardLayout = ({
 		imageSize,
 		supportingContentAlignment,
 		liveUpdatesPosition,
-	} = decideCardProperties(card.boostLevel);
+	} = decideCardProperties(
+		card.boostLevel,
+		card.supportingContent?.length ?? 0,
+		card.avatarUrl,
+	);
 	return (
 		<UL
 			showTopBar={!isFirstRow}
@@ -445,7 +456,7 @@ export const FlexibleGeneral = ({
 	aspectRatio,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1);
-	const cards = [...groupedTrails.standard].slice(0, 8);
+	const cards = [...groupedTrails.standard].slice(0, 19);
 	const groupedCards = decideCardPositions(cards);
 
 	return (
