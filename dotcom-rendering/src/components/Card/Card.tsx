@@ -965,25 +965,23 @@ export const Card = ({
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
 								/>
-								{(isVideoMainMedia ||
-									(isVideoArticle && !isBetaContainer)) &&
-									mainMedia.duration > 0 && (
-										<div
-											css={css`
-												position: absolute;
-												top: ${space[2]}px;
-												right: ${space[2]}px;
-											`}
-										>
-											<Pill
-												content={secondsToDuration(
-													mainMedia.duration,
-												)}
-												icon={<SvgMediaControlsPlay />}
-												iconSize={'small'}
-											/>
-										</div>
-									)}
+								{isVideoMainMedia && mainMedia.duration > 0 && (
+									<div
+										css={css`
+											position: absolute;
+											top: ${space[2]}px;
+											right: ${space[2]}px;
+										`}
+									>
+										<Pill
+											content={secondsToDuration(
+												mainMedia.duration,
+											)}
+											icon={<SvgMediaControlsPlay />}
+											iconSize={'small'}
+										/>
+									</div>
+								)}
 							</>
 						)}
 						{media.type === 'crossword' && (
