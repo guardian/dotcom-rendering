@@ -5002,6 +5002,9 @@
                 },
                 "mainMedia": {
                     "$ref": "#/definitions/MainMedia"
+                },
+                "audioDuration": {
+                    "type": "string"
                 }
             },
             "required": [
