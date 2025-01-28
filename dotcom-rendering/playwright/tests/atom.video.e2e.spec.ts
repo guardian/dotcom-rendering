@@ -383,6 +383,7 @@ test.describe.skip('YouTube Atom', () => {
 
 	test.skip('plays the video if the reader rejects consent', async ({
 		page,
+		context,
 	}) => {
 		await fetchAndloadPageWithOverrides(
 			page,
@@ -390,7 +391,7 @@ test.describe.skip('YouTube Atom', () => {
 			{ switchOverrides: { youtubeIma: false } },
 		);
 
-		await cmpRejectAll(page);
+		await cmpRejectAll(page, context);
 
 		await waitForIsland(page, 'YoutubeBlockComponent');
 
