@@ -1,12 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import {
-	between,
-	from,
-	space,
-	textSansBold12,
-	until,
-} from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import { SvgCamera } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import { isMediaCard as isMedia } from '../../lib/cardHelpers';
@@ -94,28 +88,6 @@ const mediaIcon = css`
 	align-items: flex-end;
 `;
 
-const audioPill = css`
-	display: flex;
-	align-items: center;
-	column-gap: 4px;
-`;
-
-const audioPillIcon = css`
-	width: ${space[6]}px;
-	height: ${space[6]}px;
-	background-color: ${palette('--pill-background')};
-	border-radius: 50%;
-
-	> svg {
-		fill: ${palette('--highlights-container-background')};
-	}
-`;
-
-const audioPillText = css`
-	${textSansBold12};
-	color: ${palette('--highlight-card-audio-text')};
-`;
-
 const imageArea = css`
 	grid-area: image;
 	height: 112px;
@@ -188,12 +160,11 @@ export const HighlightsCard = ({
 				/>
 			)}
 			{mainMedia?.type === 'Audio' && (
-				<div css={audioPill}>
-					<div css={audioPillIcon}>
-						<SvgMediaControlsPlay />
-					</div>
-					<span css={audioPillText}>{audioDuration}</span>
-				</div>
+				<Pill
+					content={audioDuration ?? ''}
+					icon={<SvgMediaControlsPlay />}
+					iconSize={'small'}
+				/>
 			)}
 			{mainMedia?.type === 'Gallery' && (
 				<Pill
