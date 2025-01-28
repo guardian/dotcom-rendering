@@ -430,8 +430,19 @@ interface ShowSignInGateAuxiaProps {
 	host: string;
 }
 
-interface SDCProxyData {
-	shouldShowSignInGate: boolean;
+interface AuxiaAPIResponseDataUserTreatment {
+	treatmentId: string;
+	treatmentTrackingId: string;
+	rank: string;
+	contentLanguageCode: string;
+	treatmentContent: string;
+	treatmentType: string;
+	surface: string;
+}
+
+interface SDCAuxiaProxyResponseData {
+	responseId: string;
+	userTreatment?: AuxiaAPIResponseDataUserTreatment;
 }
 
 /*
@@ -446,7 +457,7 @@ const dismissGateAuxia = (
 
 const fetchAuxiaDisplayDataFromProxy = async (
 	contributionsServiceUrl: string,
-): Promise<SDCProxyData> => {
+): Promise<SDCAuxiaProxyResponseData> => {
 	const url = `${contributionsServiceUrl}/auxia`;
 	const headers = {
 		'Content-Type': 'application/json',
@@ -460,7 +471,7 @@ const fetchAuxiaDisplayDataFromProxy = async (
 
 	const response = await fetch(url, params);
 
-	const data = (await response.json()) as SDCProxyData;
+	const data = (await response.json()) as SDCAuxiaProxyResponseData;
 
 	return Promise.resolve(data);
 };
@@ -512,7 +523,9 @@ const SignInGateSelectorAuxia = ({
 			const data = await fetchAuxiaDisplayDataFromProxy(
 				contributionsServiceUrl,
 			);
-			setShouldShowSignInGateUsingAuxiaAnswer(data.shouldShowSignInGate);
+			setShouldShowSignInGateUsingAuxiaAnswer(
+				data.userTreatment !== undefined,
+			);
 		})().catch((error) => {
 			console.error('Error fetching Auxia display data:', error);
 		});
