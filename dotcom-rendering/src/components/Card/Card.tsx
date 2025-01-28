@@ -787,7 +787,7 @@ export const Card = ({
 				 * Waveform for podcasts is absolutely positioned at bottom of
 				 * card, behind everything else
 				 */}
-				{isBetaContainer && mainMedia?.type === 'Audio' && (
+				{mainMedia?.type === 'Audio' && (
 					<div
 						css={waveformWrapper(
 							imagePositionOnMobile,
@@ -877,8 +877,9 @@ export const Card = ({
 												}
 												index={index}
 												duration={
-													isBetaContainer &&
-													isVideoArticle
+													isVideoArticle &&
+													containerType !=
+														'fixed/video'
 														? undefined
 														: media.mainMedia
 																.duration
