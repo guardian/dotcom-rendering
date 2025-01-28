@@ -61,9 +61,9 @@ const initialiseCmp = async () => {
 	const code = await getLocaleCode();
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const { pageViewId } = window.guardian.config.ophan;
-	// const isUserSignedIn = false; //await isUserLoggedInOktaRefactor();
+	const isUserSignedIn = false; //await isUserLoggedInOktaRefactor();
 	// If user has the "reject all" benefit then show the reduced, "non-advertised" list
-	// const useNonAdvertisedList = false; //allowRejectAll();
+	const useNonAdvertisedList = false; //allowRejectAll();
 
 	const country = code ?? undefined;
 	cmp.init({
@@ -74,8 +74,8 @@ const initialiseCmp = async () => {
 			pageViewId,
 		},
 		country,
-		// useNonAdvertisedList,
-		// isUserSignedIn,
+		useNonAdvertisedList,
+		isUserSignedIn,
 	});
 	log('dotcom', 'CMP initialised');
 };
