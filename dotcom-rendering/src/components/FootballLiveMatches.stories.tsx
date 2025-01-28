@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { FootballLiveMatches as FootballLiveMatchesComponent } from './FootballLiveMatches';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import { FootballLiveMatches as FootballLiveMatchesComponent } from './FootballLiveMatches';
 
 const meta = {
 	title: 'Components/Football Live Matches',

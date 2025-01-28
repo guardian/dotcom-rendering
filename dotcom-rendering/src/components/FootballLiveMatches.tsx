@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import type { FootballMatches } from '../footballMatches';
 
 type Props = {
@@ -7,14 +8,14 @@ type Props = {
 export const FootballLiveMatches = ({ matches }: Props) => (
 	<>
 		{matches.map((day) => (
-			<>
+			<Fragment key={day.date.toISOString()}>
 				<h2>{day.date.toString()}</h2>
 				{day.competitions.map((competition) => (
-					<>
+					<Fragment key={competition.competitionId}>
 						<h3>{competition.name}</h3>
 						<ul>
 							{competition.matches.map((match) => (
-								<li>
+								<li key={match.paId}>
 									<time
 										dateTime={match.dateTime.toISOString()}
 									>
@@ -27,9 +28,9 @@ export const FootballLiveMatches = ({ matches }: Props) => (
 								</li>
 							))}
 						</ul>
-					</>
+					</Fragment>
 				))}
-			</>
+			</Fragment>
 		))}
 	</>
 );
