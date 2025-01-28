@@ -18,10 +18,7 @@ import type { PodcastSeriesImage } from '../types/tag';
 import { CardAge as AgeStamp } from './Card/components/CardAge';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from './Card/components/ImageWrapper';
+import type { ImageSizeType } from './Card/components/ImageWrapper';
 import { TrailText } from './Card/components/TrailText';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from './CardHeadline';
@@ -46,8 +43,6 @@ export type Props = {
 	showByline?: boolean;
 	webPublicationDate?: string;
 	image?: DCRFrontImage;
-	imagePositionOnDesktop?: ImagePositionType /** TODO Remove this prop  */;
-	imagePositionOnMobile?: ImagePositionType /** TODO Remove this prop  */;
 	/** Size is ignored when position = 'top' because in that case the image flows based on width */
 	imageSize?: ImageSizeType;
 	imageLoading: Loading;
@@ -299,8 +294,6 @@ export const FeatureCard = ({
 	showByline,
 	webPublicationDate,
 	image,
-	imagePositionOnDesktop = 'top',
-	imagePositionOnMobile = 'left',
 	imageSize = 'small',
 	trailText,
 	imageLoading,
