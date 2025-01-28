@@ -13,7 +13,6 @@ export type GapSizes = { row: GapSize; column: GapSize };
 
 type Props = {
 	children: React.ReactNode;
-	cardBackgroundColour: string;
 	imageType: CardImageType | undefined;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
@@ -173,7 +172,6 @@ const isVerticalLayout = (imagePosition: ImagePositionType) => {
 
 export const CardLayout = ({
 	children,
-	cardBackgroundColour,
 	imagePositionOnDesktop,
 	imagePositionOnMobile,
 	minWidthInPixels,
@@ -199,7 +197,6 @@ export const CardLayout = ({
 				isVerticalLayout(imagePositionOnDesktop) && desktopFlexBasis,
 			]}
 			style={{
-				backgroundColor: cardBackgroundColour,
 				rowGap: decideGap(gapSizes.row),
 				columnGap: decideGap(gapSizes.column),
 			}}

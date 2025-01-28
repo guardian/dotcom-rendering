@@ -9,6 +9,7 @@ import { FormatBoundary } from '../../FormatBoundary';
 type Props = {
 	children: React.ReactNode;
 	format: ArticleFormat;
+	cardBackgroundColour: string;
 	containerPalette?: DCRContainerPalette;
 	showTopBarDesktop?: boolean;
 	showTopBarMobile?: boolean;
@@ -98,6 +99,7 @@ export const CardWrapper = ({
 	showTopBarDesktop = true,
 	showTopBarMobile = false,
 	isOnwardContent = false,
+	cardBackgroundColour,
 }: Props) => {
 	return (
 		<FormatBoundary format={format}>
@@ -111,6 +113,7 @@ export const CardWrapper = ({
 						showTopBarMobile && mobileTopBarStyles,
 						isOnwardContent && onwardContentStyles,
 					]}
+					style={{ backgroundColor: cardBackgroundColour }}
 				>
 					{children}
 				</div>
