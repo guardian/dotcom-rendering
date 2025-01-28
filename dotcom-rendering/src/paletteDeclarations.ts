@@ -5508,9 +5508,6 @@ const highlightsCardKickerText: PaletteFunction = (format) => {
 			return sourcePalette.specialReportAlt[200];
 	}
 };
-const highlightsCardAudioIcon: PaletteFunction = () => sourcePalette.brand[100];
-const highlightsCardAudioText: PaletteFunction = () =>
-	sourcePalette.neutral[20];
 
 const pinnedPostBorderLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
@@ -6521,14 +6518,6 @@ const paletteColours = {
 	'--headline-match-colour': {
 		light: headlineMatchTextLight,
 		dark: headlineMatchTextDark,
-	},
-	'--highlight-card-audio-icon': {
-		light: highlightsCardAudioIcon,
-		dark: highlightsCardAudioIcon,
-	},
-	'--highlight-card-audio-text': {
-		light: highlightsCardAudioText,
-		dark: highlightsCardAudioText,
 	},
 	'--highlights-card-headline': {
 		light: highlightsCardHeadline,
