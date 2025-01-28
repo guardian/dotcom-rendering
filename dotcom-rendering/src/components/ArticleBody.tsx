@@ -228,6 +228,7 @@ export const ArticleBody = ({
 					isSensitive={isSensitive}
 					abTests={abTests}
 					editionId={editionId}
+					contributionsServiceUrl={contributionsServiceUrl}
 				/>
 			</div>
 		</>
