@@ -117,7 +117,9 @@ export const WithPodcastSeriesImage: Story = {
 			src: 'https://uploads.guim.co.uk/2024/08/01/FootballWeekly_FINAL_3000_(1).jpg',
 			altText: 'Football Weekly',
 		},
+		mainMedia: { type: 'Audio', duration: 31.76 },
 	},
+
 	parameters: {},
 	name: 'With Podcast Series Image',
 };
