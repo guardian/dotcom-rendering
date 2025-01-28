@@ -66,6 +66,7 @@ const initialiseCmp = async () => {
 	const useNonAdvertisedList = false; //allowRejectAll();
 
 	const country = code ?? undefined;
+	console.log('cmp.init');
 	cmp.init({
 		pubData: {
 			platform: 'next-gen',
