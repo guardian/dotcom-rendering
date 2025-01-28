@@ -1,7 +1,7 @@
 import { isUndefined } from '@guardian/libs';
 import type { BrowserContext, Request } from '@playwright/test';
 import { test } from '@playwright/test';
-import { cmpAcceptAll, disableCMP } from '../lib/cmp';
+import { cmpAcceptAll } from '../lib/cmp';
 import { addCookie } from '../lib/cookies';
 import { loadPage } from '../lib/load-page';
 
@@ -30,7 +30,6 @@ test.describe('The banner', function () {
 		page,
 		context,
 	}) => {
-		await disableCMP(context);
 		await optOutOfArticleCountConsent(context);
 		const rrBannerUrl = 'https://contributions.guardianapis.com/banner';
 
@@ -48,7 +47,9 @@ test.describe('The banner', function () {
 			'GB',
 			false,
 		);
+		console.log('before cmpAcceptAll');
 		await cmpAcceptAll(page);
+		console.log('after cmpAcceptAll');
 
 		await rrBannerRequestPromise;
 	});

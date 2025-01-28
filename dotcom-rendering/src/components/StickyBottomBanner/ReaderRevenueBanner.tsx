@@ -127,6 +127,7 @@ const buildPayload = async ({
 	userConsent,
 	hideSupportMessagingForUser,
 }: BuildPayloadProps): Promise<BannerPayload> => {
+	console.log('buildPayload');
 	const articleCounts = await asyncArticleCounts;
 	const weeklyArticleHistory = articleCounts?.weeklyArticleHistory;
 	const articleCountToday = getArticleCountToday(articleCounts);
