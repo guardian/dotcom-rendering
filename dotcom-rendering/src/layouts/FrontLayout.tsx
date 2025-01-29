@@ -61,7 +61,7 @@ interface Props {
 
 const spaces = / /g;
 /** TODO: Confirm with is a valid way to generate component IDs. */
-const ophanComponentId = (name: string) =>
+export const ophanComponentId = (name: string) =>
 	name.toLowerCase().replace(spaces, '-');
 
 const isNetworkFrontPageId = isOneOf(editionList.map(({ pageId }) => pageId));
@@ -191,6 +191,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					sectionId={ophanComponentId(
 						highlightsCollection.displayName,
 					)}
+					frontId={front.pressedPage.id}
 				/>
 			)
 		);
