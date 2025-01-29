@@ -578,7 +578,7 @@ export const FeatureCard = ({
 									</div>
 								)}
 								{/* On video article cards, the duration is displayed in the footer */}
-								{isVideoArticle &&
+								{!isVideoArticle &&
 								isVideoMainMedia &&
 								videoDuration !== undefined ? (
 									<div css={videoPillStyles}>
