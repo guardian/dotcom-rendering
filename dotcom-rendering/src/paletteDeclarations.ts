@@ -5508,9 +5508,6 @@ const highlightsCardKickerText: PaletteFunction = (format) => {
 			return sourcePalette.specialReportAlt[200];
 	}
 };
-const highlightsCardAudioIcon: PaletteFunction = () => sourcePalette.brand[100];
-const highlightsCardAudioText: PaletteFunction = () =>
-	sourcePalette.neutral[20];
 
 const pinnedPostBorderLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
@@ -6465,6 +6462,18 @@ const paletteColours = {
 		light: featureCardKickerTextLight,
 		dark: () => sourcePalette.neutral[20],
 	},
+	'--feature-card-play-icon-background': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--feature-card-play-icon-border': {
+		light: () => sourcePalette.neutral[60],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--feature-card-play-icon-fill': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
 	'--feature-card-trail-text': {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
@@ -6521,14 +6530,6 @@ const paletteColours = {
 	'--headline-match-colour': {
 		light: headlineMatchTextLight,
 		dark: headlineMatchTextDark,
-	},
-	'--highlight-card-audio-icon': {
-		light: highlightsCardAudioIcon,
-		dark: highlightsCardAudioIcon,
-	},
-	'--highlight-card-audio-text': {
-		light: highlightsCardAudioText,
-		dark: highlightsCardAudioText,
 	},
 	'--highlights-card-headline': {
 		light: highlightsCardHeadline,

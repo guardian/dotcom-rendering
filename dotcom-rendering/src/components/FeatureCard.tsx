@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import { Link, SvgMediaControlsPlay } from '@guardian/source/react-components';
+import { Link } from '@guardian/source/react-components';
+import { SvgMediaControlsPlay } from '../components/SvgMediaControlsPlay';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
-import { secondsToDuration } from '../lib/formatTime';
+import { isWithinTwelveHours, secondsToDuration } from '../lib/formatTime';
 import { getZIndex } from '../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../lib/useCommentCount';
 import { palette } from '../palette';
@@ -188,6 +189,24 @@ const trailTextWrapper = css`
 	margin-top: ${space[3]}px;
 `;
 
+const playIconWidth = 56;
+const playIconStyles = css`
+	position: absolute;
+	/**
+	 * Subject to change. We will wait to see how fronts editors use the
+	 * headlines and standfirsts before we decide on a final position.
+	 */
+	top: 35%;
+	left: calc(50% - ${playIconWidth / 2}px);
+	width: ${playIconWidth}px;
+	height: ${playIconWidth}px;
+	background-color: ${palette('--feature-card-play-icon-background')};
+	opacity: 0.7;
+	border-radius: 50%;
+	border: 1px solid ${palette('--feature-card-play-icon-border')};
+	fill: ${palette('--feature-card-play-icon-fill')};
+`;
+
 const videoPillStyles = css`
 	position: absolute;
 	top: ${space[2]}px;
@@ -216,14 +235,6 @@ const getMedia = ({
 		return { type: 'picture', imageUrl, imageAltText } as const;
 	}
 	return undefined;
-};
-
-export const isWithinTwelveHours = (webPublicationDate: string): boolean => {
-	const timeDiffMs = Math.abs(
-		new Date().getTime() - new Date(webPublicationDate).getTime(),
-	);
-	const timeDiffHours = timeDiffMs / (1000 * 60 * 60);
-	return timeDiffHours <= 12;
 };
 
 const CardAge = ({
@@ -561,8 +572,13 @@ export const FeatureCard = ({
 										/>
 									</div>
 								</div>
+								{canPlayInline && isVideoMainMedia && (
+									<div css={playIconStyles}>
+										<SvgMediaControlsPlay />
+									</div>
+								)}
 								{/* On video article cards, the duration is displayed in the footer */}
-								{!isVideoArticle &&
+								{isVideoArticle &&
 								isVideoMainMedia &&
 								videoDuration !== undefined ? (
 									<div css={videoPillStyles}>

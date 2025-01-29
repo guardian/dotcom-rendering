@@ -1,12 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import {
-	between,
-	from,
-	space,
-	textSansBold12,
-	until,
-} from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import { SvgCamera } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import { isMediaCard as isMedia } from '../../lib/cardHelpers';
@@ -15,6 +9,7 @@ import { palette } from '../../palette';
 import type { StarRating as Rating } from '../../types/content';
 import type { DCRFrontImage } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
+import type { PodcastSeriesImage } from '../../types/tag';
 import { Avatar } from '../Avatar';
 import { CardLink } from '../Card/components/CardLink';
 import { CardHeadline } from '../CardHeadline';
@@ -41,6 +36,8 @@ export type HighlightsCardProps = {
 	starRating?: Rating;
 	galleryCount?: number;
 	audioDuration?: string;
+	/** The square podcast series image, if it exists for a card */
+	podcastImage?: PodcastSeriesImage;
 };
 
 const gridContainer = css`
@@ -49,11 +46,11 @@ const gridContainer = css`
 	/** Relative positioning is required to absolutely
 	position the card link overlay */
 	position: relative;
-	gap: 8px;
+	column-gap: ${space[2]}px;
 	grid-template-areas:
-		'headline 	headline'
-		'rating rating'
-		'media-icon image';
+		'headline headline'
+		'media-icon media-icon'
+		'. image';
 
 	/* Applied word-break: break-word to prevent text overflow
 	and ensure long words break onto the next line.
@@ -83,63 +80,34 @@ const gridContainer = css`
 	}
 `;
 
-const mediaGrid = css`
-	grid-template-areas:
-		'image'
-		'headline'
-		'media-icon';
-
-	${from.desktop} {
-		width: 300px;
-		grid-template-areas:
-			'image headline'
-			'image media-icon';
-	}
-`;
-
 const headline = css`
 	grid-area: headline;
+	margin-bottom: ${space[1]}px;
 `;
 
 const mediaIcon = css`
 	grid-area: media-icon;
-	align-self: end;
 	display: flex;
 	align-items: flex-end;
 `;
 
-const audioPill = css`
-	display: flex;
-	align-items: center;
-	column-gap: 4px;
-`;
-
-const audioPillIcon = css`
-	width: ${space[6]}px;
-	height: ${space[6]}px;
-	background-color: ${palette('--pill-background')};
-	border-radius: 50%;
-
-	> svg {
-		fill: ${palette('--highlights-container-background')};
-	}
-`;
-
-const audioPillText = css`
-	${textSansBold12};
-	color: ${palette('--highlight-card-audio-text')};
-`;
-
 const imageArea = css`
 	grid-area: image;
-	height: 106px;
-	width: 106px;
+	height: 112px;
+	width: 112px;
 	align-self: end;
 	position: relative;
-	${from.desktop} {
-		height: 112px;
-		width: 112px;
+	${until.desktop} {
+		margin-top: ${space[2]}px;
 	}
+	${from.desktop} {
+		align-self: start;
+	}
+`;
+
+/** Avatar alignment is an exception and should align with the bottom of the card *if* there is a gap.*/
+const avatarAlignmentStyles = css`
+	align-self: end;
 `;
 
 const hoverStyles = css`
@@ -149,8 +117,10 @@ const hoverStyles = css`
 		right: 0;
 		height: 100%;
 		width: 100%;
-		border-radius: 100%;
 		background-color: ${palette('--card-background-hover')};
+	}
+	:hover .circular {
+		border-radius: 100%;
 	}
 
 	/* Only underline the headline element we want to target (not kickers/sublink headlines) */
@@ -163,13 +133,63 @@ const starWrapper = css`
 	background-color: ${palette('--star-rating-background')};
 	color: ${palette('--star-rating-fill')};
 	width: fit-content;
-	height: fit-content;
-	grid-area: rating;
-	${from.desktop} {
-		grid-area: media-icon;
-		align-self: flex-end;
-	}
+	grid-area: media-icon;
+	align-self: flex-end;
 `;
+
+const decideImage = (
+	imageLoading: Loading,
+	format: ArticleFormat,
+	image?: DCRFrontImage,
+	podcastImage?: PodcastSeriesImage,
+	avatarUrl?: string,
+	byline?: string,
+) => {
+	if (!image && !avatarUrl) {
+		return null;
+	}
+	if (avatarUrl) {
+		return (
+			<Avatar
+				src={avatarUrl}
+				alt={byline ?? ''}
+				shape="cutout"
+				imageSize="large"
+			/>
+		);
+	}
+	if (format.design === ArticleDesign.Audio && podcastImage?.src) {
+		return (
+			<>
+				<CardPicture
+					imageSize="medium"
+					mainImage={podcastImage.src}
+					alt={podcastImage.altText}
+					loading={imageLoading}
+					isCircular={false}
+					aspectRatio={'1:1'}
+				/>
+				<div className="image-overlay"> </div>
+			</>
+		);
+	}
+	if (!image) {
+		return null;
+	}
+	return (
+		<>
+			<CardPicture
+				imageSize="medium"
+				mainImage={image.src}
+				alt={image.altText}
+				loading={imageLoading}
+				isCircular={true}
+			/>
+			{/* This image overlay is styled when the CardLink is hovered */}
+			<div className="image-overlay circular"> </div>
+		</>
+	);
+};
 
 export const HighlightsCard = ({
 	linkTo,
@@ -187,6 +207,7 @@ export const HighlightsCard = ({
 	starRating,
 	galleryCount,
 	audioDuration,
+	podcastImage,
 }: HighlightsCardProps) => {
 	const isMediaCard = isMedia(format);
 	const MediaPill = () => (
@@ -199,12 +220,11 @@ export const HighlightsCard = ({
 				/>
 			)}
 			{mainMedia?.type === 'Audio' && (
-				<div css={audioPill}>
-					<div css={audioPillIcon}>
-						<SvgMediaControlsPlay />
-					</div>
-					<span css={audioPillText}>{audioDuration}</span>
-				</div>
+				<Pill
+					content={audioDuration ?? ''}
+					icon={<SvgMediaControlsPlay />}
+					iconSize={'small'}
+				/>
 			)}
 			{mainMedia?.type === 'Gallery' && (
 				<Pill
@@ -218,7 +238,7 @@ export const HighlightsCard = ({
 	);
 	return (
 		<FormatBoundary format={format}>
-			<div css={[gridContainer, hoverStyles, isMediaCard && mediaGrid]}>
+			<div css={[gridContainer, hoverStyles]}>
 				<CardLink
 					linkTo={linkTo}
 					headlineText={headlineText}
@@ -256,27 +276,15 @@ export const HighlightsCard = ({
 
 				{!!mainMedia && isMediaCard && MediaPill()}
 
-				<div css={imageArea}>
-					{(avatarUrl && (
-						<Avatar
-							src={avatarUrl}
-							alt={byline ?? ''}
-							shape="cutout"
-						/>
-					)) ??
-						(image && (
-							<>
-								<CardPicture
-									imageSize="medium"
-									mainImage={image.src}
-									alt={image.altText}
-									loading={imageLoading}
-									isCircular={true}
-								/>
-								{/* This image overlay is styled when the CardLink is hovered */}
-								<div className="image-overlay"> </div>
-							</>
-						))}
+				<div css={[imageArea, avatarUrl && avatarAlignmentStyles]}>
+					{decideImage(
+						imageLoading,
+						format,
+						image,
+						podcastImage,
+						avatarUrl,
+						byline,
+					)}
 				</div>
 			</div>
 		</FormatBoundary>

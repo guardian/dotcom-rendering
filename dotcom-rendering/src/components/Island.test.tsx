@@ -205,6 +205,7 @@ describe('Island: server-side rendering', () => {
 						shortUrlId=""
 						discussionApiUrl=""
 						absoluteServerTimes={true}
+						renderingTarget="Web"
 					/>
 				</WithConfig>,
 			),
@@ -379,6 +380,7 @@ describe('Island: server-side rendering', () => {
 						isPreview={false}
 						pageId={''}
 						switches={{}}
+						contributionsServiceUrl={''}
 					/>
 				</WithConfig>,
 			),
