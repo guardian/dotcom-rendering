@@ -7,13 +7,10 @@ import {
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import React from 'react';
-import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
-import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
-import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.importable';
@@ -171,18 +168,11 @@ interface WebProps extends CommonProps {
 	renderingTarget: 'Web';
 }
 
-interface AppsProps extends CommonProps {
-	renderingTarget: 'Apps';
-}
-
-export const CrosswordLayout = (props: WebProps | AppsProps) => {
+export const CrosswordLayout = (props: WebProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
 	} = article;
-
-	const isApps = renderingTarget === 'Apps';
-	const isWeb = renderingTarget === 'Web';
 
 	const showComments = article.isCommentable && !isPaidContent;
 
@@ -195,65 +185,54 @@ export const CrosswordLayout = (props: WebProps | AppsProps) => {
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
-	const renderAds = isWeb && canRenderAds(article);
+	const renderAds = canRenderAds(article);
 	return (
 		<>
-			{isWeb && (
-				<>
-					<div>
-						{renderAds && (
-							<Stuck>
-								<div data-print-layout="hide">
-									<Section
-										fullWidth={true}
-										showTopBorder={false}
-										showSideBorders={false}
-										padSides={false}
-										shouldCenter={false}
-									>
-										<HeaderAdSlot
-											isPaidContent={
-												!!article.config.isPaidContent
-											}
-											shouldHideReaderRevenue={
-												!!article.config
-													.shouldHideReaderRevenue
-											}
-										/>
-									</Section>
-								</div>
-							</Stuck>
-						)}
-
-						<Masthead
-							nav={props.NAV}
-							editionId={article.editionId}
-							idUrl={article.config.idUrl}
-							mmaUrl={article.config.mmaUrl}
-							discussionApiUrl={article.config.discussionApiUrl}
-							idApiUrl={article.config.idApiUrl}
-							contributionsServiceUrl={contributionsServiceUrl}
-							showSubNav={format.theme !== ArticleSpecial.Labs}
-							showSlimNav={false}
-							hasPageSkin={false}
-							hasPageSkinContentSelfConstrain={false}
-							pageId={article.pageId}
-						/>
-					</div>
-
-					{renderAds && hasSurveyAd && (
-						<AdSlot position="survey" display={format.display} />
-					)}
-				</>
-			)}
-			<main data-layout="InteractiveLayout">
-				{isApps && (
-					<>
-						<Island priority="critical">
-							<AdPortals />
-						</Island>
-					</>
+			<div>
+				{renderAds && (
+					<Stuck>
+						<div data-print-layout="hide">
+							<Section
+								fullWidth={true}
+								showTopBorder={false}
+								showSideBorders={false}
+								padSides={false}
+								shouldCenter={false}
+							>
+								<HeaderAdSlot
+									isPaidContent={
+										!!article.config.isPaidContent
+									}
+									shouldHideReaderRevenue={
+										!!article.config.shouldHideReaderRevenue
+									}
+								/>
+							</Section>
+						</div>
+					</Stuck>
 				)}
+
+				<Masthead
+					nav={props.NAV}
+					editionId={article.editionId}
+					idUrl={article.config.idUrl}
+					mmaUrl={article.config.mmaUrl}
+					discussionApiUrl={article.config.discussionApiUrl}
+					idApiUrl={article.config.idApiUrl}
+					contributionsServiceUrl={contributionsServiceUrl}
+					showSubNav={format.theme !== ArticleSpecial.Labs}
+					showSlimNav={false}
+					hasPageSkin={false}
+					hasPageSkinContentSelfConstrain={false}
+					pageId={article.pageId}
+				/>
+			</div>
+
+			{renderAds && hasSurveyAd && (
+				<AdSlot position="survey" display={format.display} />
+			)}
+
+			<main data-layout="InteractiveLayout">
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
@@ -323,87 +302,25 @@ export const CrosswordLayout = (props: WebProps | AppsProps) => {
 											)}
 										/>
 									</div>
-									{isApps ? (
-										<>
-											<Hide from="leftCol">
-												<ArticleMetaApps
-													branding={branding}
-													format={format}
-													pageId={article.pageId}
-													byline={article.byline}
-													tags={article.tags}
-													primaryDateline={
-														article.webPublicationDateDisplay
-													}
-													secondaryDateline={
-														article.webPublicationSecondaryDateDisplay
-													}
-													isCommentable={
-														article.isCommentable
-													}
-													discussionApiUrl={
-														article.config
-															.discussionApiUrl
-													}
-													shortUrlId={
-														article.config
-															.shortUrlId
-													}
-												></ArticleMetaApps>
-											</Hide>
-											<Hide until="leftCol">
-												<ArticleMeta
-													branding={branding}
-													format={format}
-													pageId={article.pageId}
-													webTitle={article.webTitle}
-													byline={article.byline}
-													tags={article.tags}
-													primaryDateline={
-														article.webPublicationDateDisplay
-													}
-													secondaryDateline={
-														article.webPublicationSecondaryDateDisplay
-													}
-													isCommentable={
-														article.isCommentable
-													}
-													discussionApiUrl={
-														article.config
-															.discussionApiUrl
-													}
-													shortUrlId={
-														article.config
-															.shortUrlId
-													}
-												/>
-											</Hide>
-										</>
-									) : (
-										<ArticleMeta
-											branding={branding}
-											format={format}
-											pageId={article.pageId}
-											webTitle={article.webTitle}
-											tags={article.tags}
-											primaryDateline={
-												article.webPublicationDateDisplay
-											}
-											secondaryDateline={
-												article.webPublicationSecondaryDateDisplay
-											}
-											isCommentable={
-												article.isCommentable
-											}
-											discussionApiUrl={
-												article.config.discussionApiUrl
-											}
-											shortUrlId={
-												article.config.shortUrlId
-											}
-											crossword={article.crossword}
-										/>
-									)}
+									<ArticleMeta
+										branding={branding}
+										format={format}
+										pageId={article.pageId}
+										webTitle={article.webTitle}
+										tags={article.tags}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											article.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={article.isCommentable}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										shortUrlId={article.config.shortUrlId}
+										crossword={article.crossword}
+									/>
 								</div>
 							</GridItem>
 							{!!article.crossword?.instructions && (
@@ -695,7 +612,7 @@ export const CrosswordLayout = (props: WebProps | AppsProps) => {
 				)}
 			</main>
 
-			{isWeb && props.NAV.subNavSections && (
+			{props.NAV.subNavSections && (
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
@@ -712,74 +629,51 @@ export const CrosswordLayout = (props: WebProps | AppsProps) => {
 				</Section>
 			)}
 
-			{isWeb && (
-				<>
-					<Section
-						fullWidth={true}
-						data-print-layout="hide"
-						padSides={false}
-						backgroundColour={sourcePalette.brand[400]}
-						borderColour={sourcePalette.brand[600]}
-						showSideBorders={false}
-						element="footer"
-					>
-						<Footer
-							pageFooter={article.pageFooter}
-							selectedPillar={props.NAV.selectedPillar}
-							pillars={props.NAV.pillars}
-							urls={article.nav.readerRevenueLinks.footer}
-							editionId={article.editionId}
-						/>
-					</Section>
+			<Section
+				fullWidth={true}
+				data-print-layout="hide"
+				padSides={false}
+				backgroundColour={sourcePalette.brand[400]}
+				borderColour={sourcePalette.brand[600]}
+				showSideBorders={false}
+				element="footer"
+			>
+				<Footer
+					pageFooter={article.pageFooter}
+					selectedPillar={props.NAV.selectedPillar}
+					pillars={props.NAV.pillars}
+					urls={article.nav.readerRevenueLinks.footer}
+					editionId={article.editionId}
+				/>
+			</Section>
 
-					<BannerWrapper data-print-layout="hide">
-						<Island priority="feature" defer={{ until: 'idle' }}>
-							<StickyBottomBanner
-								contentType={article.contentType}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								idApiUrl={article.config.idApiUrl}
-								isMinuteArticle={
-									article.pageType.isMinuteArticle
-								}
-								isPaidContent={article.pageType.isPaidContent}
-								isPreview={!!article.config.isPreview}
-								isSensitive={article.config.isSensitive}
-								pageId={article.pageId}
-								sectionId={article.config.section}
-								shouldHideReaderRevenue={
-									article.shouldHideReaderRevenue
-								}
-								remoteBannerSwitch={
-									!!article.config.switches.remoteBanner
-								}
-								tags={article.tags}
-							/>
-						</Island>
-					</BannerWrapper>
-					<MobileStickyContainer
-						data-print-layout="hide"
+			<BannerWrapper data-print-layout="hide">
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<StickyBottomBanner
 						contentType={article.contentType}
+						contributionsServiceUrl={contributionsServiceUrl}
+						idApiUrl={article.config.idApiUrl}
+						isMinuteArticle={article.pageType.isMinuteArticle}
+						isPaidContent={article.pageType.isPaidContent}
+						isPreview={!!article.config.isPreview}
+						isSensitive={article.config.isSensitive}
 						pageId={article.pageId}
+						sectionId={article.config.section}
+						shouldHideReaderRevenue={
+							article.shouldHideReaderRevenue
+						}
+						remoteBannerSwitch={
+							!!article.config.switches.remoteBanner
+						}
+						tags={article.tags}
 					/>
-				</>
-			)}
-			{isApps && (
-				<Section
-					fullWidth={true}
-					data-print-layout="hide"
-					backgroundColour={themePalette('--apps-footer-background')}
-					borderColour={themePalette('--article-border')}
-					padSides={false}
-					showSideBorders={false}
-					element="footer"
-				>
-					<Island priority="critical">
-						<AppsFooter />
-					</Island>
-				</Section>
-			)}
+				</Island>
+			</BannerWrapper>
+			<MobileStickyContainer
+				data-print-layout="hide"
+				contentType={article.contentType}
+				pageId={article.pageId}
+			/>
 		</>
 	);
 };
