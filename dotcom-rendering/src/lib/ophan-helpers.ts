@@ -3,5 +3,5 @@ export const nestedOphanComponents = (...components: string[]): string =>
 
 const spaces = / /g;
 
-export const ophanComponentId = (name: string) =>
+export const ophanComponentId = (name: string): string =>
 	name.toLowerCase().replace(spaces, '-');
