@@ -2,7 +2,7 @@ import { cmp } from '@guardian/libs';
 import { Button, Link, LinkButton } from '@guardian/source/react-components';
 import { useConfig } from '../../ConfigContext';
 import { trackLink } from '../componentEventTracking';
-import type { SignInGateProps } from '../types';
+import type { SignInGatePropsAuxia, treatmentContentDecoded } from '../types';
 import {
 	actionButtons,
 	bodyBold,
@@ -28,23 +28,26 @@ export const SignInGateAuxia = ({
 	abTest,
 	ophanComponentId,
 	isMandatory = false,
-}: SignInGateProps) => {
+	userTreatment,
+}: SignInGatePropsAuxia) => {
 	const { renderingTarget } = useConfig();
+
+	const treatmentContent = JSON.parse(
+		userTreatment.treatmentContent,
+	) as treatmentContentDecoded;
+	const title = treatmentContent.title;
+	const body = treatmentContent.body;
 
 	return (
 		<div css={signInGateContainer} data-testid="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
 			<div css={firstParagraphOverlay} />
-			<h1 css={headingStyles}>Register: it’s quick and easy (\pi)</h1>
+			<h1 css={headingStyles}>{title}</h1>
 			<p css={bodyBold}>
 				It’s still free to read – this is not a paywall
 			</p>
 			<p css={bodyText}>
-				We’re committed to keeping our quality reporting open. By
-				registering and providing us with insight into your preferences,
-				you’re helping us to engage with you more deeply, and that
-				allows us to keep our journalism free for all. You’ll always be
-				able to control your own{' '}
+				{body}{' '}
 				<button
 					data-testid="sign-in-gate-main_privacy"
 					css={privacyLink}

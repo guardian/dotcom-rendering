@@ -21,11 +21,12 @@ import {
 	setUserDismissedGate,
 } from './SignInGate/dismissGate';
 import { SignInGateAuxia } from './SignInGate/gateDesigns/SignInGateAuxia';
-import { signInGateComponent as gateMainVariant } from './SignInGate/gates/main-variant';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGateMappings';
 import type {
+	AuxiaAPIResponseDataUserTreatment,
 	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
+	SDCAuxiaProxyResponseData,
 	SignInGateComponent,
 } from './SignInGate/types';
 
@@ -428,21 +429,7 @@ interface ShowSignInGateAuxiaProps {
 	signInUrl: string;
 	registerUrl: string;
 	host: string;
-}
-
-interface AuxiaAPIResponseDataUserTreatment {
-	treatmentId: string;
-	treatmentTrackingId: string;
-	rank: string;
-	contentLanguageCode: string;
-	treatmentContent: string;
-	treatmentType: string;
-	surface: string;
-}
-
-interface SDCAuxiaProxyResponseData {
-	responseId: string;
-	userTreatment?: AuxiaAPIResponseDataUserTreatment;
+	userTreatment: AuxiaAPIResponseDataUserTreatment;
 }
 
 /*
@@ -490,12 +477,9 @@ const SignInGateSelectorAuxia = ({
 		undefined,
 	);
 
-	const [
-		shouldShowSignInGateUsingAuxiaAnswer,
-		setShouldShowSignInGateUsingAuxiaAnswer,
-	] = useState<boolean>(false);
-
-	const gateVariant = gateMainVariant;
+	const [auxiaAPIResponseData, setAuxiaAPIResponseData] = useState<
+		SDCAuxiaProxyResponseData | undefined
+	>(undefined);
 
 	const currentTest = {
 		name: 'SignInGateMain',
@@ -523,13 +507,11 @@ const SignInGateSelectorAuxia = ({
 			const data = await fetchAuxiaDisplayDataFromProxy(
 				contributionsServiceUrl,
 			);
-			setShouldShowSignInGateUsingAuxiaAnswer(
-				data.userTreatment !== undefined,
-			);
+			setAuxiaAPIResponseData(data);
 		})().catch((error) => {
 			console.error('Error fetching Auxia display data:', error);
 		});
-	}, [shouldShowSignInGateUsingAuxiaAnswer]);
+	}, [currentTest]);
 
 	if (isUndefined(pageViewId)) {
 		return null;
@@ -548,15 +530,20 @@ const SignInGateSelectorAuxia = ({
 
 	return (
 		<>
-			{!isGateDismissed && shouldShowSignInGateUsingAuxiaAnswer && (
-				<ShowSignInGateAuxia
-					// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
-					setShowGate={(show) => setIsGateDismissed(!show)}
-					signInUrl={generateGatewayUrl('signin', ctaUrlParams)}
-					registerUrl={generateGatewayUrl('register', ctaUrlParams)}
-					host={host}
-				/>
-			)}
+			{!isGateDismissed &&
+				auxiaAPIResponseData?.userTreatment !== undefined && (
+					<ShowSignInGateAuxia
+						// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
+						setShowGate={(show) => setIsGateDismissed(!show)}
+						signInUrl={generateGatewayUrl('signin', ctaUrlParams)}
+						registerUrl={generateGatewayUrl(
+							'register',
+							ctaUrlParams,
+						)}
+						host={host}
+						userTreatment={auxiaAPIResponseData.userTreatment}
+					/>
+				)}
 		</>
 	);
 };
@@ -566,6 +553,7 @@ const ShowSignInGateAuxia = ({
 	signInUrl,
 	registerUrl,
 	host,
+	userTreatment,
 }: ShowSignInGateAuxiaProps) => {
 	/*
 		comment group: auxia-prototype-e55a86ef
@@ -588,5 +576,6 @@ const ShowSignInGateAuxia = ({
 		ophanComponentId: componentId,
 		checkoutCompleteCookieData,
 		personaliseSignInGateAfterCheckoutSwitch,
+		userTreatment,
 	});
 };
