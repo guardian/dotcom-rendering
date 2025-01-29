@@ -20,6 +20,7 @@ import {
 	incrementUserDismissedGateCount,
 	setUserDismissedGate,
 } from './SignInGate/dismissGate';
+import { SignInGateAuxia } from './SignInGate/gateDesigns/SignInGateAuxia';
 import { signInGateComponent as gateMainVariant } from './SignInGate/gates/main-variant';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGateMappings';
 import type {
@@ -426,7 +427,6 @@ interface ShowSignInGateAuxiaProps {
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
 	signInUrl: string;
 	registerUrl: string;
-	gateVariant: SignInGateComponent;
 	host: string;
 }
 
@@ -554,7 +554,6 @@ const SignInGateSelectorAuxia = ({
 					setShowGate={(show) => setIsGateDismissed(!show)}
 					signInUrl={generateGatewayUrl('signin', ctaUrlParams)}
 					registerUrl={generateGatewayUrl('register', ctaUrlParams)}
-					gateVariant={gateVariant}
 					host={host}
 				/>
 			)}
@@ -566,12 +565,11 @@ const ShowSignInGateAuxia = ({
 	setShowGate,
 	signInUrl,
 	registerUrl,
-	gateVariant,
 	host,
 }: ShowSignInGateAuxiaProps) => {
 	/*
 		comment group: auxia-prototype-e55a86ef
-		This function if the Auxia prototype for the ShowSignInGate component.
+		This function is the Auxia version of the ShowSignInGate component.
 	*/
 
 	const componentId = 'main_variant_5';
@@ -579,24 +577,16 @@ const ShowSignInGateAuxia = ({
 	const checkoutCompleteCookieData = undefined;
 	const personaliseSignInGateAfterCheckoutSwitch = undefined;
 
-	// some sign in gate ab test variants may not need to show a gate
-	// therefore the gate is optional
-	// this is because we want a section of the audience to never see the gate
-	// but still fire a view event if they are eligible to see the gate
-	if (gateVariant.gate) {
-		return gateVariant.gate({
-			guUrl: host,
-			signInUrl,
-			registerUrl,
-			dismissGate: () => {
-				dismissGateAuxia(setShowGate);
-			},
-			abTest,
-			ophanComponentId: componentId,
-			checkoutCompleteCookieData,
-			personaliseSignInGateAfterCheckoutSwitch,
-		});
-	}
-	// return nothing if no gate needs to be shown
-	return <></>;
+	return SignInGateAuxia({
+		guUrl: host,
+		signInUrl,
+		registerUrl,
+		dismissGate: () => {
+			dismissGateAuxia(setShowGate);
+		},
+		abTest,
+		ophanComponentId: componentId,
+		checkoutCompleteCookieData,
+		personaliseSignInGateAfterCheckoutSwitch,
+	});
 };
