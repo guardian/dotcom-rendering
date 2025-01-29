@@ -5753,6 +5753,12 @@ const pillBackground: PaletteFunction = () =>
 const pillDivider: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[100], 0.5);
 const pillLiveBullet: PaletteFunction = () => sourcePalette.news[500];
+
+const crosswordCluesHeaderBorderTop: PaletteFunction = () =>
+	sourcePalette.lifestyle[400];
+const crosswordCluesHeaderBorderBottom: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
 // ----- Palette ----- //
 
 /**
@@ -6209,6 +6215,14 @@ const paletteColours = {
 	'--cricket-scoreboard-link-text': {
 		light: cricketScoreboardLinkText,
 		dark: cricketScoreboardLinkText,
+	},
+	'--crossword-clues-header-border-bottom': {
+		light: crosswordCluesHeaderBorderBottom,
+		dark: crosswordCluesHeaderBorderBottom,
+	},
+	'--crossword-clues-header-border-top': {
+		light: crosswordCluesHeaderBorderTop,
+		dark: crosswordCluesHeaderBorderTop,
 	},
 	'--dateline': {
 		light: datelineLight,
