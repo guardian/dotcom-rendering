@@ -165,18 +165,16 @@ const spacefinderAdSlotStyles = css`
 	/* Give ad slots inserted on the client side a placeholder height.
    Let the ad slot take control of its height once rendered. */
 	.ad-slot--inline:not(.ad-slot--rendered) {
-		min-height: ${adSizes.outstreamMobile.height +
-		constants.AD_LABEL_HEIGHT}px;
-
-		${from.desktop} {
-			min-height: ${adSizes.mpu.height + constants.AD_LABEL_HEIGHT}px;
-		}
+		min-height: ${adSizes.mpu.height + constants.AD_LABEL_HEIGHT}px;
 	}
 
 	/* Give inline1 ad slot a different placeholder height comparing to subsequent-inlines to reduce CLS.
    Let the ad slot take control of its height once rendered.
    IMPORTANT NOTE: We currently do not serve OPT-OUT for inline1 but we will need to change this value before we do. */
 	.ad-slot--inline1:not(.ad-slot--rendered) {
+		min-height: ${adSizes.outstreamMobile.height +
+		constants.AD_LABEL_HEIGHT}px;
+
 		${from.desktop} {
 			min-height: ${adSizes.outstreamDesktop.height +
 			constants.AD_LABEL_HEIGHT}px;
