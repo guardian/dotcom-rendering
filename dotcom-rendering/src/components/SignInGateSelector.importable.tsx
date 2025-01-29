@@ -21,7 +21,7 @@ import {
 	setUserDismissedGate,
 } from './SignInGate/dismissGate';
 import { signInGateComponent as gateMainVariant } from './SignInGate/gates/main-variant';
-import { signInGateTestIdToComponentId } from './SignInGate/signInGate';
+import { signInGateTestIdToComponentId } from './SignInGate/signInGateMappings';
 import type {
 	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
