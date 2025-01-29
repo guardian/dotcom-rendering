@@ -1,11 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { FootballLiveMatches as FootballLiveMatchesComponent } from './FootballLiveMatches';
 
 const meta = {
 	title: 'Components/Football Live Matches',
 	component: FootballLiveMatchesComponent,
-	decorators: [centreColumnDecorator],
+	decorators: [
+		// To make it easier to see the top border above the date
+		(Story) => (
+			<>
+				<div css={{ padding: 4 }}></div>
+				<Story />
+			</>
+		),
+	],
 } satisfies Meta<typeof FootballLiveMatchesComponent>;
 
 export default meta;
@@ -14,7 +21,8 @@ type Story = StoryObj<typeof meta>;
 
 export const FootballLiveMatches = {
 	args: {
-		matches: [
+		edition: 'UK',
+		days: [
 			{
 				date: new Date('2025-01-24T00:00:00Z'),
 				competitions: [
@@ -24,11 +32,11 @@ export const FootballLiveMatches = {
 						nation: 'European',
 						matches: [
 							{
-								dateTime: new Date('2025-01-24T19:45:00Z'),
+								dateTime: new Date('2025-01-24T11:11:00Z'),
 								paId: '4482093',
 								homeTeam: {
 									name: 'Torino',
-									score: 1,
+									score: 10,
 								},
 								awayTeam: {
 									name: 'Cagliari',
