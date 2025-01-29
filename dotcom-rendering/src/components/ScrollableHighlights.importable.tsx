@@ -8,7 +8,7 @@ import {
 } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
-import { ophanComponentId } from '../layouts/FrontLayout';
+import { ophanComponentId } from '../lib/ophan-helpers';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
