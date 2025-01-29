@@ -5,8 +5,8 @@ import {
 	from,
 	headlineBold17,
 	space,
-	textSans12,
 	textSans14,
+	textSansItalic12,
 } from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
 import { memo } from 'react';
@@ -65,8 +65,7 @@ const Layout: CrosswordProps['Layout'] = ({
 				<Controls />
 				<div
 					css={css`
-						${textSans12};
-						font-style: italic;
+						${textSansItalic12};
 					`}
 				>
 					<SavedMessage />
