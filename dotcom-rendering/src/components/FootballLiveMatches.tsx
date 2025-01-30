@@ -8,8 +8,8 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Fragment, type ReactNode } from 'react';
-import { grid } from '../grid';
 import type { FootballMatches } from '../footballMatches';
+import { grid } from '../grid';
 import {
 	type EditionId,
 	getLocaleFromEdition,
