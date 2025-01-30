@@ -76,3 +76,48 @@ export type CurrentSignInGateABTest = {
 };
 
 export type SignInGateTestMap = { [name: string]: SignInGateComponent };
+
+// -------------------------------
+// Auxia Integration Experiment //
+// -------------------------------
+/*
+	comment group: auxia-prototype-e55a86ef
+*/
+
+export interface treatmentContentDecoded {
+	title: string;
+	body: string;
+	first_cta_name: string;
+	first_cta_link: string;
+	second_cta_name: string;
+	second_cta_link: string;
+	subtitle: string;
+}
+
+export interface AuxiaAPIResponseDataUserTreatment {
+	treatmentId: string;
+	treatmentTrackingId: string;
+	rank: string;
+	contentLanguageCode: string;
+	treatmentContent: string;
+	treatmentType: string;
+	surface: string;
+}
+
+export interface SDCAuxiaProxyResponseData {
+	responseId: string;
+	userTreatment?: AuxiaAPIResponseDataUserTreatment;
+}
+
+export type SignInGatePropsAuxia = {
+	signInUrl: string;
+	registerUrl: string;
+	guUrl: string;
+	dismissGate: () => void;
+	ophanComponentId: string;
+	abTest?: CurrentSignInGateABTest;
+	isMandatory?: boolean;
+	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
+	personaliseSignInGateAfterCheckoutSwitch?: boolean;
+	userTreatment: AuxiaAPIResponseDataUserTreatment;
+};
