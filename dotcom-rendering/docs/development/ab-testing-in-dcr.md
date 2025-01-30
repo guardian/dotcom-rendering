@@ -16,7 +16,8 @@
 
 ## Gotchas
 
--   Your ABTest Switch name is hyphenated, lower case and starts with `ab-`. The JS AB test ID is in PascalCase. These _must_ match up: `ab-my-cool-ab-test` (serverside test switch name) === `MyCoolAbTest` (JS AB test ID).
+-   The ABTest Switch name must be hyphenated, lower case and must starts with `ab-`; for instance `ab-my-cool-ab-test`. The JavaScript/TypeScript ab-test ID must be in PascalCase; for instance `MyCoolAbTest`.
+-   Assuming that your test has a variant whose id is `variant-1`, The url fragment for opt-in is, then, `#ab-MyCoolAbTest=variant-1`.
 -   Your ABTest Switch has a sell by date and your abTest has an expiry date. Matching them up avoids confusion.
 
 ## Use in Components
