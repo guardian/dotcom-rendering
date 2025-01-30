@@ -17,17 +17,22 @@ const setterStyles = css`
 	}
 `;
 
-type Props = {
-	setter: string;
-	profile: string;
+const isValidProfileUrl = (url: string): boolean => {
+	return url.startsWith('https://www.theguardian.com/profile/');
 };
 
-export const CrosswordSetter = ({ setter, profile }: Props) => (
+type Props = {
+	setter: string;
+	profileUrl: string;
+};
+
+export const CrosswordSetter = ({ setter, profileUrl: profile }: Props) => (
 	<address
 		css={setterStyles}
 		data-component="meta-byline"
 		data-link-name="byline"
 	>
-		Set by: <a href={profile}>{setter}</a>
+		Set by:{' '}
+		{isValidProfileUrl(profile) ? <a href={profile}>{setter}</a> : setter}
 	</address>
 );
