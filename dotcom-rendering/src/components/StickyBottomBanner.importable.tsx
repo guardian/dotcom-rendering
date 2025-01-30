@@ -59,7 +59,7 @@ const getBannerLastClosedAt = (key: string): string | undefined => {
 	return isString(item) ? item : undefined;
 };
 
-const DEFAULT_BANNER_TIMEOUT_MILLIS = 20000;
+const DEFAULT_BANNER_TIMEOUT_MILLIS = 2000;
 
 const buildCmpBannerConfig = (): CandidateConfig<void> => ({
 	candidate: {
