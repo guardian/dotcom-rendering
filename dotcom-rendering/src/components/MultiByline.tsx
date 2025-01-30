@@ -202,6 +202,7 @@ const Byline = ({
 		allowedAttributes: {
 			...defaults.allowedAttributes,
 			span: ['data-contributor-rel'],
+			a: ['data-ignore'],
 		},
 	});
 
