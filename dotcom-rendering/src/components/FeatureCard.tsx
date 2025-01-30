@@ -235,7 +235,7 @@ const CardAge = ({
 			<AgeStamp
 				webPublication={{
 					date: webPublicationDate,
-					isWithinTwelveHours: withinTwelveHours,
+					isWithinTwelveHours: true,
 				}}
 				showClock={showClock}
 				absoluteServerTimes={absoluteServerTimes}
