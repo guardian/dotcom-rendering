@@ -7,7 +7,7 @@ import {
 	textSansBold14,
 	until,
 } from '@guardian/source/foundations';
-import { Fragment, type ReactNode } from 'react';
+import { Fragment, useState, type ReactNode } from 'react';
 import type { FootballMatches } from '../footballMatches';
 import { grid } from '../grid';
 import {
@@ -16,10 +16,12 @@ import {
 	getTimeZoneFromEdition,
 } from '../lib/edition';
 import { palette } from '../palette';
+import { Button, SvgPlus } from '@guardian/source/react-components';
 
 type Props = {
-	days: FootballMatches;
+	initialDays: FootballMatches;
 	edition: EditionId;
+	getMoreDays: () => Promise<FootballMatches>;
 };
 
 const getDateFormatter = (edition: EditionId): Intl.DateTimeFormat =>
@@ -201,9 +203,15 @@ const Scores = ({
 	</span>
 );
 
-export const FootballLiveMatches = ({ edition, days }: Props) => {
+export const FootballLiveMatches = ({
+	edition,
+	initialDays,
+	getMoreDays,
+}: Props) => {
 	const dateFormatter = getDateFormatter(edition);
 	const timeFormatter = getTimeFormatter(edition);
+
+	const [days, setDays] = useState(initialDays);
 
 	return (
 		<>
@@ -242,6 +250,27 @@ export const FootballLiveMatches = ({ edition, days }: Props) => {
 					))}
 				</section>
 			))}
+
+			<div css={css(grid.container)}>
+				<div
+					css={css`
+						${grid.column.centre}
+						padding-top: ${space[10]}px;
+					`}
+				>
+					<Button
+						icon={<SvgPlus />}
+						size="xsmall"
+						onClick={() => {
+							getMoreDays().then((moreDays) =>
+								setDays(days.concat(moreDays)),
+							);
+						}}
+					>
+						More
+					</Button>
+				</div>
+			</div>
 		</>
 	);
 };
