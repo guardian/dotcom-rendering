@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { from } from '@guardian/source/foundations';
+import { from as fromBreakpoint } from '@guardian/source/foundations';
 
 // ----- Columns & Lines ----- //
 
@@ -38,23 +38,23 @@ const container = `
     grid-template-columns: ${mobileColumns};
     column-gap: ${mobileColumnGap};
 
-    ${from.mobileLandscape} {
+    ${fromBreakpoint.mobileLandscape} {
         column-gap: ${columnGap};
     }
 
-    ${from.tablet} {
+    ${fromBreakpoint.tablet} {
         grid-template-columns: ${tabletColumns};
     }
 
-    ${from.desktop} {
+    ${fromBreakpoint.desktop} {
         grid-template-columns: ${desktopColumns};
     }
 
-    ${from.leftCol} {
+    ${fromBreakpoint.leftCol} {
         grid-template-columns: ${leftColColumns};
     }
 
-    ${from.wide} {
+    ${fromBreakpoint.wide} {
         grid-template-columns: ${wideColumns};
     }
 `;
