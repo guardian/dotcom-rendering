@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { Decorator } from '@storybook/react';
-import { grid } from './grid';
+import { grid } from '../../src/grid';
 import { from } from '@guardian/source/foundations';
 
 /**

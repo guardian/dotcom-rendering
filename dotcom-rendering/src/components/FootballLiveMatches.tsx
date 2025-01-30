@@ -13,7 +13,7 @@ import {
 	type LiHTMLAttributes,
 	type TimeHTMLAttributes,
 } from 'react';
-import { grid } from '../../.storybook/decorators/grid';
+import { grid } from '../grid';
 import type { FootballMatches } from '../footballMatches';
 import {
 	type EditionId,
