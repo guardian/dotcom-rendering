@@ -43,6 +43,7 @@ import {
 	getMobileAdPositions,
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
+import { ophanComponentId } from '../lib/ophan-helpers';
 import type { NavType } from '../model/extract-nav';
 import { palette as schemePalette } from '../palette';
 import type {
@@ -58,11 +59,6 @@ interface Props {
 	front: DCRFrontType;
 	NAV: NavType;
 }
-
-const spaces = / /g;
-/** TODO: Confirm with is a valid way to generate component IDs. */
-const ophanComponentId = (name: string) =>
-	name.toLowerCase().replace(spaces, '-');
 
 const isNetworkFrontPageId = isOneOf(editionList.map(({ pageId }) => pageId));
 
@@ -191,6 +187,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					sectionId={ophanComponentId(
 						highlightsCollection.displayName,
 					)}
+					frontId={front.pressedPage.id}
 				/>
 			)
 		);
