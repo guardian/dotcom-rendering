@@ -288,8 +288,9 @@ const sectionControls = css`
 		flex-direction: column-reverse;
 		justify-content: flex-end;
 		align-items: flex-end;
-		/** we want to add space between the items in the controls section only when both items are there and visible */
-		:has(.carouselNavigationPlaceholder:not(.hidden)) {
+		gap: ${space[2]}px;
+		/* we want to add space between the items in the controls section only when there are at least 2 children and neither are hidden */
+		:has(> :not(.hidden):nth-of-type(2)) {
 			justify-content: space-between;
 		}
 	}
@@ -410,7 +411,7 @@ const secondaryLevelTopBorder = css`
 `;
 
 const carouselNavigationPlaceholder = css`
-	${until.leftCol} {
+	${between.tablet.and.leftCol} {
 		min-height: 44px;
 	}
 	.hidden & {
