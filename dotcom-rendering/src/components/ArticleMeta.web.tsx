@@ -401,7 +401,7 @@ export const ArticleMeta = ({
 							{crossword?.creator && (
 								<CrosswordSetter
 									setter={crossword.creator.name}
-									profile={crossword.creator.webUrl}
+									profileUrl={crossword.creator.webUrl}
 								/>
 							)}
 
