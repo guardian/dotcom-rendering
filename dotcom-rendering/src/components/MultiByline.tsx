@@ -117,6 +117,7 @@ const bylineStyles = (format: ArticleFormat) => css`
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;
+			cursor: pointer;
 		}
 	}
 	span[data-contributor-rel='author'] {
