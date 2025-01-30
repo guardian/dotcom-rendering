@@ -206,9 +206,9 @@ export const FootballLiveMatches = ({ edition, days }: Props) => {
 	const timeFormatter = getTimeFormatter(edition);
 
 	return (
-		<section css={css(grid.container)}>
+		<>
 			{days.map((day) => (
-				<Fragment key={day.date.toISOString()}>
+				<section css={css(grid.container)} key={day.date.toISOString()}>
 					<Day>{dateFormatter.format(day.date)}</Day>
 					{day.competitions.map((competition) => (
 						<Fragment key={competition.competitionId}>
@@ -240,8 +240,8 @@ export const FootballLiveMatches = ({ edition, days }: Props) => {
 							</Matches>
 						</Fragment>
 					))}
-				</Fragment>
+				</section>
 			))}
-		</section>
+		</>
 	);
 };
