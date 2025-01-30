@@ -7,12 +7,7 @@ import {
 	textSansBold14,
 	until,
 } from '@guardian/source/foundations';
-import {
-	Fragment,
-	type HTMLAttributes,
-	type LiHTMLAttributes,
-	type TimeHTMLAttributes,
-} from 'react';
+import { Fragment, type ReactNode } from 'react';
 import { grid } from '../grid';
 import type { FootballMatches } from '../footballMatches';
 import {
@@ -45,144 +40,131 @@ const getTimeFormatter = (edition: EditionId): Intl.DateTimeFormat =>
 		timeZone: getTimeZoneFromEdition(edition),
 	});
 
-const Day = (props: HTMLAttributes<HTMLHeadingElement>) => (
+const Day = (props: { children: ReactNode }) => (
 	<h2
-		css={[
-			textSansBold14,
-			grid.column.centre,
-			{
-				borderTopWidth: 1,
-				borderTopStyle: 'solid',
-				borderTopColor: palette('--football-match-list-border'),
-				paddingTop: space[2],
-				[from.leftCol]: [
-					{
-						paddingBottom: space[6],
-					},
-					grid.between('left-column-start', 'centre-column-end'),
-				],
-			},
-		]}
+		css={css`
+			${textSansBold14}
+			${grid.column.centre}
+				border-top: 1px solid ${palette('--football-match-list-border')};
+			padding-top: ${space[2]}px;
+
+			${from.leftCol} {
+				padding-bottom: ${space[6]}px;
+				${grid.between('left-column-start', 'centre-column-end')}
+			}
+		`}
 	>
 		{props.children}
 	</h2>
 );
 
-const CompetitionName = (props: HTMLAttributes<HTMLHeadingElement>) => (
+const CompetitionName = (props: { children: ReactNode }) => (
 	<h3
-		css={[
-			textSansBold14,
-			grid.column.centre,
-			{
-				color: palette('--football-match-list-competition-text'),
-				borderTopWidth: 1,
-				borderTopStyle: 'solid',
-				padding: space[2],
-				backgroundColor: palette('--football-match-list-background'),
-				borderTopColor: palette('--football-match-list-top-border'),
-				marginTop: space[9],
-				[from.leftCol]: [
-					{
-						borderTopColor: palette('--football-match-list-border'),
-						backgroundColor: 'transparent',
-						marginTop: 0,
-						padding: 0,
-						paddingTop: space[1],
-					},
-					grid.column.left,
-					headlineBold17,
-				],
-			},
-		]}
+		css={css`
+			${textSansBold14}
+			${grid.column.centre}
+			color: ${palette('--football-match-list-competition-text')};
+			border-top: 1px solid ${palette('--football-match-list-top-border')};
+			padding: ${space[2]}px;
+			background-color: ${palette('--football-match-list-background')};
+			margin-top: ${space[9]}px;
+
+			${from.leftCol} {
+				border-top-color: ${palette('--football-match-list-border')};
+				background-color: transparent;
+				margin-top: 0;
+				padding: ${space[1]}px 0 0;
+				${grid.column.left}
+				${headlineBold17}
+			}
+		`}
 	>
 		{props.children}
 	</h3>
 );
 
-const Matches = (props: HTMLAttributes<HTMLUListElement>) => (
+const Matches = (props: { children: ReactNode }) => (
 	<ul
 		{...props}
-		css={[
-			grid.column.centre,
-			{
-				[from.leftCol]: {
-					paddingBottom: space[9],
-				},
-			},
-		]}
+		css={css`
+			${grid.column.centre}
+
+			${from.leftCol} {
+				padding-bottom: ${space[9]}px;
+			}
+		`}
 	/>
 );
 
-const Match = (props: LiHTMLAttributes<HTMLLIElement>) => (
+const Match = (props: { children: ReactNode }) => (
 	<li
 		{...props}
-		css={[
-			textSans14,
-			{
-				backgroundColor: palette('--football-match-list-background'),
-				padding: space[2],
-				display: 'flex',
-				borderTopWidth: 1,
-				borderTopStyle: 'solid',
-				borderTopColor: palette('--football-match-list-border'),
-				[until.mobileMedium]: {
-					flexWrap: 'wrap',
-				},
-				[from.leftCol]: {
-					'&:first-of-type': {
-						borderTopColor: palette(
-							'--football-match-list-top-border',
-						),
-					},
-				},
-			},
-		]}
+		css={css`
+			${textSans14}
+			background-color: ${palette('--football-match-list-background')};
+			padding: ${space[2]}px;
+			display: flex;
+			border: 1px solid ${palette('--football-match-list-border')};
+
+			${until.mobileMedium} {
+				flex-wrap: wrap;
+			}
+
+			${from.leftCol} {
+				&:first-of-type {
+					border-top-color: ${palette(
+						'--football-match-list-top-border',
+					)};
+				}
+			}
+		`}
 	/>
 );
 
-const MatchTime = (props: TimeHTMLAttributes<HTMLTimeElement>) => (
+const MatchTime = (props: { children: ReactNode; dateTime: string }) => (
 	<time
 		{...props}
-		css={{
-			width: '5rem',
-			[until.mobileMedium]: {
-				flexBasis: '100%',
-			},
-		}}
+		css={css`
+			width: 5rem;
+
+			${until.mobileMedium} {
+				flex-basis: 100%;
+			}
+		`}
 	/>
 );
 
-const HomeTeam = (props: HTMLAttributes<HTMLSpanElement>) => (
+const HomeTeam = (props: { children: ReactNode }) => (
 	<span
 		{...props}
-		css={{
-			textAlign: 'right',
-			flex: '1 0 0',
-			paddingRight: '1rem',
-		}}
+		css={css`
+			text-align: right;
+			flex: 1 0 0;
+			padding-right: 1rem;
+		`}
 	/>
 );
 
-const AwayTeam = (props: HTMLAttributes<HTMLSpanElement>) => (
+const AwayTeam = (props: { children: ReactNode }) => (
 	<span
 		{...props}
-		css={{
-			flex: '1 0 0',
-			paddingLeft: '1rem',
-		}}
+		css={css`
+			flex: 1 0 0;
+			padding-left: 1rem;
+		`}
 	/>
 );
 
-const Battleline = (props: HTMLAttributes<HTMLSpanElement>) => (
+const Battleline = () => (
 	<span
-		{...props}
-		css={{
-			display: 'block',
-			padding: '0 4px',
-			'&:before': {
-				content: '"-"',
-			},
-		}}
+		css={css`
+			display: block;
+			padding: 0 4px;
+
+			&:before {
+				content: '-';
+			}
+		`}
 	/>
 );
 
@@ -194,25 +176,25 @@ const Scores = ({
 	awayScore: number;
 }) => (
 	<span
-		css={{
-			width: '3rem',
-			display: 'flex',
-		}}
+		css={css`
+			width: 3rem;
+			display: flex;
+		`}
 	>
 		<span
-			css={{
-				textAlign: 'right',
-				flex: '1 0 0',
-			}}
+			css={css`
+				text-align: right;
+				flex: 1 0 0;
+			`}
 		>
 			{homeScore}
 		</span>
 		<Battleline />
 		<span
-			css={{
-				textAlign: 'left',
-				flex: '1 0 0',
-			}}
+			css={css`
+				text-align: left;
+				flex: 1 0 0;
+			`}
 		>
 			{awayScore}
 		</span>
