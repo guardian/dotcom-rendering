@@ -11,6 +11,7 @@ type Props = {
 const showHideButtonCss = css`
 	${textSans14};
 	margin-right: ${space[2]}px;
+	margin-bottom: ${space[2]}px;
 	position: relative;
 	text-decoration: none;
 	&.hidden {
