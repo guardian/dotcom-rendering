@@ -863,8 +863,8 @@ export const renderElement = ({
 		}
 		case 'model.dotcomrendering.pageElements.CrosswordElement':
 			return (
-				<Island priority="critical" defer={{ until: 'visible' }}>
-					<CrosswordComponent data={element.crossword} />
+				<Island priority="enhancement" defer={{ until: 'interaction' }}>
+					<CrosswordComponent />
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
