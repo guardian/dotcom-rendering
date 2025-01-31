@@ -47,7 +47,6 @@ export const StaticFeatureTwo = ({
 							showPulsingDot={
 								card.format.design === ArticleDesign.LiveBlog
 							}
-							/** TODO - implement show age */
 							showClock={false}
 							image={card.image}
 							canPlayInline={true}

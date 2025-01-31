@@ -6462,18 +6462,6 @@ const paletteColours = {
 		light: featureCardKickerTextLight,
 		dark: () => sourcePalette.neutral[20],
 	},
-	'--feature-card-play-icon-background': {
-		light: () => sourcePalette.neutral[7],
-		dark: () => sourcePalette.neutral[7],
-	},
-	'--feature-card-play-icon-border': {
-		light: () => sourcePalette.neutral[60],
-		dark: () => sourcePalette.neutral[60],
-	},
-	'--feature-card-play-icon-fill': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[100],
-	},
 	'--feature-card-trail-text': {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
@@ -6493,6 +6481,22 @@ const paletteColours = {
 	'--follow-text': {
 		light: followTextLight,
 		dark: followTextDark,
+	},
+	'--football-match-list-background': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--football-match-list-border': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[38],
+	},
+	'--football-match-list-competition-text': {
+		light: () => sourcePalette.sport[300],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--football-match-list-top-border': {
+		light: () => sourcePalette.sport[500],
+		dark: () => sourcePalette.neutral[60],
 	},
 	'--front-container-background': {
 		light: () => sourcePalette.neutral[100],
