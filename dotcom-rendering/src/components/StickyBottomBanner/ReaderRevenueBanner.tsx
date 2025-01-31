@@ -127,7 +127,6 @@ const buildPayload = async ({
 	userConsent,
 	hideSupportMessagingForUser,
 }: BuildPayloadProps): Promise<BannerPayload> => {
-	console.log('buildPayload');
 	const articleCounts = await asyncArticleCounts;
 	const weeklyArticleHistory = articleCounts?.weeklyArticleHistory;
 	const articleCountToday = getArticleCountToday(articleCounts);
@@ -193,7 +192,6 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	signInGateWillShow,
 	asyncArticleCounts,
 }) => {
-	console.log('canShowRRBanner');
 	if (!remoteBannerConfig) return { show: false };
 
 	if (
@@ -237,9 +235,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	}
 
 	//Send user consent status to the banner API
-	console.log('calling hasRequiredConsents');
 	const userConsent = await hasRequiredConsents();
-	console.log('userConsent', userConsent);
 
 	const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
 	const bannerPayload = await buildPayload({

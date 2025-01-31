@@ -48,7 +48,6 @@ test.describe('The banner', function () {
 			false,
 		);
 		await cmpAcceptAll(page);
-		console.log('cmpAcceptAll');
 
 		await rrBannerRequestPromise;
 	});
