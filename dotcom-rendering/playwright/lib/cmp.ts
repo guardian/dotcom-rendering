@@ -28,18 +28,7 @@ const cmpAcceptAll = async (page: Page, rootIframe?: string): Promise<void> => {
 /**
  * Reject all on the Sourcepoint CMP banner
  */
-const cmpRejectAll = async (
-	page: Page,
-	context: BrowserContext,
-): Promise<void> => {
-	// We must first allow reject all
-	const expires = new Date();
-	expires.setMonth(expires.getMonth() + 6);
-	await addCookie(context, {
-		name: ALLOW_REJECT_ALL_COOKIE,
-		value: expires.getTime().toString(),
-	});
-
+const cmpRejectAll = async (page: Page): Promise<void> => {
 	const manageMyCookiesButton = page
 		.frameLocator(CMP_LAYER1_IFRAME)
 		.locator(CMP_LAYER2_MANAGE_MY_COOKIES_BUTTON);
@@ -50,6 +39,15 @@ const cmpRejectAll = async (
 	await rejectAllButton.click();
 	// wait for consent settings to apply
 	await new Promise((r) => setTimeout(r, 10000));
+};
+
+const allowRejectAll = (context: BrowserContext): Promise<void> => {
+	const expires = new Date();
+	expires.setMonth(expires.getMonth() + 6);
+	return addCookie(context, {
+		name: ALLOW_REJECT_ALL_COOKIE,
+		value: expires.getTime().toString(),
+	});
 };
 
 /**
@@ -84,6 +82,7 @@ export {
 	cmpAcceptAll,
 	cmpReconsent,
 	cmpRejectAll,
+	allowRejectAll,
 	disableCMP,
 	CMP_LAYER1_IFRAME,
 };

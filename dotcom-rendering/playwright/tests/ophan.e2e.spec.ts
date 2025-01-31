@@ -5,7 +5,12 @@ import {
 	IMPRESSION_REQUEST_PATH,
 	interceptOphanRequest,
 } from 'playwright/lib/ophan';
-import { cmpAcceptAll, cmpRejectAll, disableCMP } from '../lib/cmp';
+import {
+	allowRejectAll,
+	cmpAcceptAll,
+	cmpRejectAll,
+	disableCMP,
+} from '../lib/cmp';
 import { loadPage } from '../lib/load-page';
 
 const articleUrl =
@@ -18,6 +23,7 @@ test.describe('Ophan requests', () => {
 		page,
 		context,
 	}) => {
+		await allowRejectAll(context);
 		const ophanImpressionRequestPromise = interceptOphanRequest({
 			page,
 			path: IMPRESSION_REQUEST_PATH,
@@ -33,7 +39,7 @@ test.describe('Ophan requests', () => {
 			},
 		});
 		await loadPage(page, `/Article/${articleUrl}`);
-		await cmpRejectAll(page, context);
+		await cmpRejectAll(page);
 		await ophanImpressionRequestPromise;
 	});
 
