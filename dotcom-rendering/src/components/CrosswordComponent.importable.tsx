@@ -23,11 +23,12 @@ export const CrosswordComponent = () => {
 				onClick={() => setTabIndex(-1)}
 				tabIndex={tabIndex}
 				xmlns="http://www.w3.org/2000/svg"
+				strokeWidth="1"
 			>
 				<rect width="100" height="100" />
 			</svg>
-			{version}
-			Preact version {React.version}
+			Version from react: {version}
+			Version from preact: {React.version}
 			<div
 				css={css`
 					block-size: 100px;
