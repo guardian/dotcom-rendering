@@ -163,8 +163,8 @@ const spacefinderAdSlotStyles = css`
 	}
 
 	/* Give ad slots inserted on the client side a placeholder height.
-   Let the ad slot take control of its height once rendered. */
-	.ad-slot--inline:not(.ad-slot--rendered) {
+    Let the ad slot take control of its height once rendered. */
+	.ad-slot--inline {
 		min-height: ${adSizes.mpu.height + constants.AD_LABEL_HEIGHT}px;
 	}
 
@@ -172,9 +172,6 @@ const spacefinderAdSlotStyles = css`
    Let the ad slot take control of its height once rendered.
    IMPORTANT NOTE: We currently do not serve OPT-OUT for inline1 but we will need to change this value before we do. */
 	.ad-slot--inline1:not(.ad-slot--rendered) {
-		min-height: ${adSizes.outstreamMobile.height +
-		constants.AD_LABEL_HEIGHT}px;
-
 		${from.desktop} {
 			min-height: ${adSizes.outstreamDesktop.height +
 			constants.AD_LABEL_HEIGHT}px;
@@ -185,8 +182,7 @@ const spacefinderAdSlotStyles = css`
    top-above-nav that is inserted above the navigation. */
 	.ad-slot--top-above-nav:not(.ad-slot--rendered) {
 		${until.tablet} {
-			min-height: ${adSizes.outstreamMobile.height +
-			constants.AD_LABEL_HEIGHT}px;
+			min-height: ${adSizes.mpu.height + constants.AD_LABEL_HEIGHT}px;
 		}
 	}
 
