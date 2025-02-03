@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	headlineBold17,
@@ -117,10 +118,7 @@ const Match = ({
 			padding: ${space[2]}px;
 			display: flex;
 			border: 1px solid ${palette('--football-match-list-border')};
-
-			${until.mobileMedium} {
-				flex-wrap: wrap;
-			}
+			flex-wrap: wrap;
 
 			${from.leftCol} {
 				&:first-of-type {
@@ -154,6 +152,21 @@ const Match = ({
 					awayScore={match.awayTeam.score}
 				/>
 				<AwayTeam>{match.awayTeam.name}</AwayTeam>
+				{isUndefined(match.comment) ? null : (
+					<small
+						css={css`
+							color: ${palette('--football-match-list-sub-text')};
+							flex-basis: 100%;
+							text-align: center;
+							padding-top: ${space[2]}px;
+							${from.mobileMedium} {
+								padding-left: 5rem;
+							}
+						`}
+					>
+						{match.comment}
+					</small>
+				)}
 			</>
 		)}
 	</li>
@@ -161,6 +174,7 @@ const Match = ({
 
 const matchLeftStyle = css`
 	width: 5rem;
+	color: ${palette('--football-match-list-sub-text')};
 
 	${until.mobileMedium} {
 		flex-basis: 100%;
@@ -208,6 +222,7 @@ const Battleline = () => (
 const Versus = () => (
 	<span
 		css={css`
+			color: ${palette('--football-match-list-sub-text')};
 			width: 3rem;
 			display: block;
 			padding: 0 4px;
@@ -229,6 +244,7 @@ const Scores = ({
 		css={css`
 			width: 3rem;
 			display: flex;
+			color: ${palette('--football-match-list-sub-text')};
 		`}
 	>
 		<span
