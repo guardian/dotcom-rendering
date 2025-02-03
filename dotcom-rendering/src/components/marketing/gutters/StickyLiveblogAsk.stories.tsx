@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import { StickyLiveblogAsk } from './StickyLiveblogAskWrapper.importable';
+import { GutterAsk } from './gutterAsk';
 
 export default {
-	component: StickyLiveblogAsk,
+	component: GutterAsk,
 	title: 'Components/Marketing/StickyLiveblogAsk',
 };
 
@@ -21,7 +21,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 export const Default = () => {
 	return (
 		<Wrapper>
-			<StickyLiveblogAsk
+			<GutterAsk
 				url="https://www.theguardian.com/uk"
 				onCtaClick={() => {}}
 			/>
