@@ -230,18 +230,21 @@ const CardAge = ({
 	if (!webPublicationDate) return undefined;
 	const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
 
-	return (
-		<AgeStamp
-			webPublication={{
-				date: webPublicationDate,
-				isWithinTwelveHours: withinTwelveHours,
-			}}
-			showClock={showClock}
-			absoluteServerTimes={absoluteServerTimes}
-			isTagPage={false}
-			colour={palette('--feature-card-footer-text')}
-		/>
-	);
+	if (withinTwelveHours) {
+		return (
+			<AgeStamp
+				webPublication={{
+					date: webPublicationDate,
+					isWithinTwelveHours: true,
+				}}
+				showClock={showClock}
+				absoluteServerTimes={absoluteServerTimes}
+				isTagPage={false}
+				colour={palette('--feature-card-footer-text')}
+			/>
+		);
+	}
+	return <></>;
 };
 
 const CommentCount = ({

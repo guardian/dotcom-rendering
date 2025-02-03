@@ -20,11 +20,13 @@ import {
 	incrementUserDismissedGateCount,
 	setUserDismissedGate,
 } from './SignInGate/dismissGate';
-import { signInGateComponent as gateMainVariant } from './SignInGate/gates/main-variant';
-import { signInGateTestIdToComponentId } from './SignInGate/signInGate';
+import { SignInGateAuxia } from './SignInGate/gateDesigns/SignInGateAuxia';
+import { signInGateTestIdToComponentId } from './SignInGate/signInGateMappings';
 import type {
+	AuxiaAPIResponseDataUserTreatment,
 	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
+	SDCAuxiaProxyResponseData,
 	SignInGateComponent,
 } from './SignInGate/types';
 
@@ -426,23 +428,8 @@ interface ShowSignInGateAuxiaProps {
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
 	signInUrl: string;
 	registerUrl: string;
-	gateVariant: SignInGateComponent;
 	host: string;
-}
-
-interface AuxiaAPIResponseDataUserTreatment {
-	treatmentId: string;
-	treatmentTrackingId: string;
-	rank: string;
-	contentLanguageCode: string;
-	treatmentContent: string;
-	treatmentType: string;
-	surface: string;
-}
-
-interface SDCAuxiaProxyResponseData {
-	responseId: string;
-	userTreatment?: AuxiaAPIResponseDataUserTreatment;
+	userTreatment: AuxiaAPIResponseDataUserTreatment;
 }
 
 /*
@@ -490,12 +477,9 @@ const SignInGateSelectorAuxia = ({
 		undefined,
 	);
 
-	const [
-		shouldShowSignInGateUsingAuxiaAnswer,
-		setShouldShowSignInGateUsingAuxiaAnswer,
-	] = useState<boolean>(false);
-
-	const gateVariant = gateMainVariant;
+	const [auxiaAPIResponseData, setAuxiaAPIResponseData] = useState<
+		SDCAuxiaProxyResponseData | undefined
+	>(undefined);
 
 	const currentTest = {
 		name: 'SignInGateMain',
@@ -523,13 +507,11 @@ const SignInGateSelectorAuxia = ({
 			const data = await fetchAuxiaDisplayDataFromProxy(
 				contributionsServiceUrl,
 			);
-			setShouldShowSignInGateUsingAuxiaAnswer(
-				data.userTreatment !== undefined,
-			);
+			setAuxiaAPIResponseData(data);
 		})().catch((error) => {
 			console.error('Error fetching Auxia display data:', error);
 		});
-	}, [shouldShowSignInGateUsingAuxiaAnswer]);
+	}, [currentTest]);
 
 	if (isUndefined(pageViewId)) {
 		return null;
@@ -548,16 +530,20 @@ const SignInGateSelectorAuxia = ({
 
 	return (
 		<>
-			{!isGateDismissed && shouldShowSignInGateUsingAuxiaAnswer && (
-				<ShowSignInGateAuxia
-					// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
-					setShowGate={(show) => setIsGateDismissed(!show)}
-					signInUrl={generateGatewayUrl('signin', ctaUrlParams)}
-					registerUrl={generateGatewayUrl('register', ctaUrlParams)}
-					gateVariant={gateVariant}
-					host={host}
-				/>
-			)}
+			{!isGateDismissed &&
+				auxiaAPIResponseData?.userTreatment !== undefined && (
+					<ShowSignInGateAuxia
+						// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
+						setShowGate={(show) => setIsGateDismissed(!show)}
+						signInUrl={generateGatewayUrl('signin', ctaUrlParams)}
+						registerUrl={generateGatewayUrl(
+							'register',
+							ctaUrlParams,
+						)}
+						host={host}
+						userTreatment={auxiaAPIResponseData.userTreatment}
+					/>
+				)}
 		</>
 	);
 };
@@ -566,12 +552,12 @@ const ShowSignInGateAuxia = ({
 	setShowGate,
 	signInUrl,
 	registerUrl,
-	gateVariant,
 	host,
+	userTreatment,
 }: ShowSignInGateAuxiaProps) => {
 	/*
 		comment group: auxia-prototype-e55a86ef
-		This function if the Auxia prototype for the ShowSignInGate component.
+		This function is the Auxia version of the ShowSignInGate component.
 	*/
 
 	const componentId = 'main_variant_5';
@@ -579,24 +565,17 @@ const ShowSignInGateAuxia = ({
 	const checkoutCompleteCookieData = undefined;
 	const personaliseSignInGateAfterCheckoutSwitch = undefined;
 
-	// some sign in gate ab test variants may not need to show a gate
-	// therefore the gate is optional
-	// this is because we want a section of the audience to never see the gate
-	// but still fire a view event if they are eligible to see the gate
-	if (gateVariant.gate) {
-		return gateVariant.gate({
-			guUrl: host,
-			signInUrl,
-			registerUrl,
-			dismissGate: () => {
-				dismissGateAuxia(setShowGate);
-			},
-			abTest,
-			ophanComponentId: componentId,
-			checkoutCompleteCookieData,
-			personaliseSignInGateAfterCheckoutSwitch,
-		});
-	}
-	// return nothing if no gate needs to be shown
-	return <></>;
+	return SignInGateAuxia({
+		guUrl: host,
+		signInUrl,
+		registerUrl,
+		dismissGate: () => {
+			dismissGateAuxia(setShowGate);
+		},
+		abTest,
+		ophanComponentId: componentId,
+		checkoutCompleteCookieData,
+		personaliseSignInGateAfterCheckoutSwitch,
+		userTreatment,
+	});
 };

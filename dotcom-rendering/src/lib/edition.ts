@@ -79,6 +79,9 @@ const editionList = [
 	shortTitle: string;
 }>;
 
+type TimeZone = (typeof editionList)[number]['timeZone'];
+type Locale = (typeof editionList)[number]['dateLocale'];
+
 const [ukEdition] = editionList;
 
 /**
@@ -151,9 +154,16 @@ const splitEditionalisedPage = (
 const isEditionalisedPage = (pageId: string): boolean =>
 	!!splitEditionalisedPage(pageId);
 
+const getTimeZoneFromEdition = (edition: EditionId): TimeZone =>
+	getEditionFromId(edition).timeZone;
+
+const getLocaleFromEdition = (edition: EditionId): Locale =>
+	getEditionFromId(edition).dateLocale;
+
 export {
 	EditionId,
 	Edition,
+	TimeZone,
 	editionList,
 	editionalisedPages,
 	getEditionFromId,
@@ -163,4 +173,6 @@ export {
 	isEditionalisedPage,
 	isNetworkFront,
 	splitEditionalisedPage,
+	getTimeZoneFromEdition,
+	getLocaleFromEdition,
 };
