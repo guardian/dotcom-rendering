@@ -445,7 +445,7 @@ const dismissGateAuxia = (
 const fetchAuxiaDisplayDataFromProxy = async (
 	contributionsServiceUrl: string,
 ): Promise<SDCAuxiaProxyResponseData> => {
-	const url = `${contributionsServiceUrl}/auxia`;
+	const url = `${contributionsServiceUrl}/auxia/get-treatments`;
 	const headers = {
 		'Content-Type': 'application/json',
 	};
