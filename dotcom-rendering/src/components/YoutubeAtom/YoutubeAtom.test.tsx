@@ -2,6 +2,7 @@ import type { ConsentState } from '@guardian/libs';
 import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
+import { PlayIcon } from '../Card/components/PlayIcon';
 import { ConfigProvider } from '../ConfigContext';
 import { YoutubeAtom } from './YoutubeAtom';
 
@@ -50,8 +51,10 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
-					imageSize="large"
 					renderingTarget="Web"
+					playIcon={
+						<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+					}
 				/>
 			</ConfigProvider>
 		);
@@ -89,8 +92,10 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
-					imageSize="large"
 					renderingTarget="Web"
+					playIcon={
+						<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+					}
 				/>
 			</ConfigProvider>
 		);
@@ -135,8 +140,10 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
-					imageSize="large"
 					renderingTarget="Web"
+					playIcon={
+						<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+					}
 				/>
 			</ConfigProvider>
 		);
@@ -175,8 +182,10 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
-					imageSize="large"
 					renderingTarget="Web"
+					playIcon={
+						<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+					}
 				/>
 			</ConfigProvider>
 		);
@@ -214,8 +223,10 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
-					imageSize="large"
 					renderingTarget="Web"
+					playIcon={
+						<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+					}
 				/>
 			</ConfigProvider>
 		);
@@ -254,8 +265,10 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
-					imageSize="large"
 					renderingTarget="Web"
+					playIcon={
+						<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+					}
 				/>
 			</ConfigProvider>
 		);
@@ -292,8 +305,10 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
-					imageSize="large"
 					renderingTarget="Web"
+					playIcon={
+						<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+					}
 				/>
 			</ConfigProvider>
 		);
@@ -334,8 +349,13 @@ describe('YoutubeAtom', () => {
 						isMainMedia={false}
 						abTestParticipations={{}}
 						imagePositionOnMobile="left"
-						imageSize="small"
 						renderingTarget="Web"
+						playIcon={
+							<PlayIcon
+								imageSize="small"
+								iconSizeOnMobile="small"
+							/>
+						}
 					/>
 					<YoutubeAtom
 						atomId="atom1"
@@ -355,8 +375,13 @@ describe('YoutubeAtom', () => {
 						isMainMedia={false}
 						abTestParticipations={{}}
 						imagePositionOnMobile="left"
-						imageSize="small"
 						renderingTarget="Web"
+						playIcon={
+							<PlayIcon
+								imageSize="small"
+								iconSizeOnMobile="small"
+							/>
+						}
 					/>
 				</ConfigProvider>
 			</>

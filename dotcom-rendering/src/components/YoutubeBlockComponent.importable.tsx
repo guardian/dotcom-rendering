@@ -1,4 +1,5 @@
 import type { ConsentState } from '@guardian/libs';
+import type { ReactElement } from 'react';
 import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { useAB } from '../lib/useAB';
@@ -6,10 +7,7 @@ import { useAdTargeting } from '../lib/useAdTargeting';
 import type { AdTargeting } from '../types/commercial';
 import type { AspectRatio } from '../types/front';
 import { Caption } from './Caption';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from './Card/components/ImageWrapper';
+import type { ImagePositionType } from './Card/components/ImageWrapper';
 import { useConfig } from './ConfigContext';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
@@ -38,8 +36,7 @@ type Props = {
 	kickerText?: string;
 	pauseOffscreenVideo?: boolean;
 	showTextOverlay?: boolean;
-	// If the youtube block component is used on a card, we can pass in the image size and position on mobile to get the correct styling for the play icon. If it's not used on a card, we can just pass default values to get the standard large play icon.
-	imageSize?: ImageSizeType;
+	playIcon: ReactElement;
 	imagePositionOnMobile?: ImagePositionType;
 	enableAds: boolean;
 	aspectRatio?: AspectRatio;
@@ -81,10 +78,10 @@ export const YoutubeBlockComponent = ({
 	kickerText,
 	pauseOffscreenVideo = false,
 	showTextOverlay,
-	imageSize = 'large',
 	imagePositionOnMobile = 'none',
 	enableAds,
 	aspectRatio,
+	playIcon,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -174,7 +171,7 @@ export const YoutubeBlockComponent = ({
 				kicker={kickerText}
 				shouldPauseOutOfView={pauseOffscreenVideo}
 				showTextOverlay={showTextOverlay}
-				imageSize={imageSize}
+				playIcon={playIcon}
 				imagePositionOnMobile={imagePositionOnMobile}
 				renderingTarget={renderingTarget}
 				aspectRatio={aspectRatio}

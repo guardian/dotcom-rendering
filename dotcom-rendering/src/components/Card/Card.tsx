@@ -63,6 +63,7 @@ import type {
 	ImageSizeType,
 } from './components/ImageWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
+import { PlayIcon } from './components/PlayIcon';
 import { SvgWaveform } from './components/SvgWaveform';
 import { TrailText, type TrailTextSize } from './components/TrailText';
 
@@ -917,21 +918,33 @@ export const Card = ({
 												imagePositionOnMobile={
 													imagePositionOnMobile
 												}
-												//** TODO: IMPROVE THIS MAPPING */
-												// image size defaults to small if not provided. However, if the headline size is large or greater, we want to assume the image is also large so that the play icon is correctly sized.
-												imageSize={
-													[
-														'small',
-														'medium',
-														'large',
-														'xlarge',
-														'xxlarge',
-													].includes(
-														headlineSizes?.desktop ??
-															'',
-													)
-														? 'large'
-														: imageSize
+												playIcon={
+													<PlayIcon
+														//** TODO: IMPROVE THIS MAPPING */
+														// image size defaults to small if not provided. However, if the headline size is large or greater, we want to assume the image is also large so that the play icon is correctly sized.
+														imageSize={
+															[
+																'small',
+																'medium',
+																'large',
+																'xlarge',
+																'xxlarge',
+															].includes(
+																headlineSizes?.desktop ??
+																	'',
+															)
+																? 'large'
+																: imageSize
+														}
+														iconSizeOnMobile={
+															imagePositionOnMobile ===
+																'left' ||
+															imagePositionOnMobile ===
+																'right'
+																? 'small'
+																: 'large'
+														}
+													/>
 												}
 												enableAds={false}
 												aspectRatio={aspectRatio}

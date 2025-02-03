@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { from, palette } from '@guardian/source/foundations';
 import type { ThemeIcon } from '@guardian/source/react-components';
 import { SvgMediaControlsPlay } from '@guardian/source/react-components';
-import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
+import type { ImageSizeType } from './ImageWrapper';
 
 type PlayButtonSize = keyof typeof sizes;
 
@@ -61,26 +61,18 @@ const getIconSizeOnDesktop = (imageSize: ImageSizeType) => {
 	}
 };
 
-const getIconSizeOnMobile = (imagePositionOnMobile: ImagePositionType) =>
-	imagePositionOnMobile === 'left' || imagePositionOnMobile === 'right'
-		? 'small'
-		: 'large';
-
 export const PlayIcon = ({
 	imageSize,
-	imagePositionOnMobile,
+	iconSizeOnMobile,
 }: {
 	imageSize: ImageSizeType;
-	imagePositionOnMobile: ImagePositionType;
+	iconSizeOnMobile: PlayButtonSize;
 }) => {
 	return (
 		<div
 			className="play-icon"
 			css={[
-				iconStyles(
-					getIconSizeOnDesktop(imageSize),
-					getIconSizeOnMobile(imagePositionOnMobile),
-				),
+				iconStyles(getIconSizeOnDesktop(imageSize), iconSizeOnMobile),
 			]}
 		>
 			<SvgMediaControlsPlay theme={theme} />

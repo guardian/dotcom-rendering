@@ -4,10 +4,8 @@ import type { Decorator, Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import type { AdTargeting } from '../../types/commercial';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from '../Card/components/ImageWrapper';
+import type { ImagePositionType } from '../Card/components/ImageWrapper';
+import { PlayIcon } from '../Card/components/PlayIcon';
 import type { Props } from './YoutubeAtom';
 import { YoutubeAtom } from './YoutubeAtom';
 
@@ -130,7 +128,6 @@ const adTargetingAndConsentGiven = {
 } satisfies AdTargeting & ConsentState;
 
 const imagePositionOnMobile: ImagePositionType = 'none';
-const imageSize: ImageSizeType = 'large';
 
 const baseConfiguration = {
 	atomId: 'a2502abd-1373-45a2-b508-3e5a2ec050be',
@@ -154,9 +151,9 @@ const baseConfiguration = {
 	abTestParticipations: {},
 	adTargeting: disableAds,
 	imagePositionOnMobile,
-	imageSize,
 	consentState: consentGiven,
 	renderingTarget: 'Web',
+	playIcon: <PlayIcon imageSize="large" iconSizeOnMobile="large" />,
 } satisfies Partial<Props>;
 
 const NoConsent = {
