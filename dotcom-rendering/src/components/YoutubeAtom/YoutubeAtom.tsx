@@ -1,14 +1,12 @@
 import type { Participations } from '@guardian/ab-core';
 import type { ConsentState } from '@guardian/libs';
+import type { ReactElement } from 'react';
 import { useCallback, useState } from 'react';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import type { AdTargeting } from '../../types/commercial';
 import type { AspectRatio } from '../../types/front';
 import type { RenderingTarget } from '../../types/renderingTarget';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from '../Card/components/ImageWrapper';
+import type { ImagePositionType } from '../Card/components/ImageWrapper';
 import { MaintainAspectRatio } from '../MaintainAspectRatio';
 import { YoutubeAtomOverlay } from './YoutubeAtomOverlay';
 import { YoutubeAtomPlaceholder } from './YoutubeAtomPlaceholder';
@@ -48,10 +46,10 @@ export type Props = {
 	kicker?: string;
 	shouldPauseOutOfView?: boolean;
 	showTextOverlay?: boolean;
-	imageSize: ImageSizeType;
 	imagePositionOnMobile: ImagePositionType;
 	renderingTarget: RenderingTarget;
 	aspectRatio?: AspectRatio;
+	playIcon: ReactElement;
 };
 
 export const YoutubeAtom = ({
@@ -76,10 +74,10 @@ export const YoutubeAtom = ({
 	format,
 	shouldPauseOutOfView = false,
 	showTextOverlay = false,
-	imageSize,
 	imagePositionOnMobile,
 	renderingTarget,
 	aspectRatio,
+	playIcon,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -248,9 +246,12 @@ export const YoutubeAtom = ({
 							kicker={kicker}
 							format={format}
 							showTextOverlay={showTextOverlay}
-							imageSize={imageSize}
-							imagePositionOnMobile={imagePositionOnMobile}
+							hidePillOnMobile={
+								imagePositionOnMobile === 'right' ||
+								imagePositionOnMobile === 'left'
+							}
 							aspectRatio={aspectRatio}
+							playIcon={playIcon}
 						/>
 					)}
 					{showPlaceholder && (
