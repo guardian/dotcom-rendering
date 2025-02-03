@@ -9,26 +9,31 @@ type MatchData = {
 };
 
 export type MatchResult = MatchData & {
+	kind: 'Result';
 	homeTeam: TeamScore;
 	awayTeam: TeamScore;
 };
 
 export type MatchFixture = MatchData & {
+	kind: 'Fixture';
 	homeTeam: string;
 	awayTeam: string;
 };
 
 export type LiveMatch = MatchData & {
+	kind: 'Live';
 	homeTeam: TeamScore;
 	awayTeam: TeamScore;
 	status: string;
 };
 
+export type FootballMatch = MatchResult | MatchFixture | LiveMatch;
+
 type Competition = {
 	competitionId: string;
 	name: string;
 	nation: string;
-	matches: LiveMatch[];
+	matches: FootballMatch[];
 };
 
 export type FootballMatches = Array<{
