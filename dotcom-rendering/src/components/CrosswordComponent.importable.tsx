@@ -36,6 +36,8 @@ const Layout: CrosswordProps['Layout'] = ({
 	Clues,
 	Controls,
 	SavedMessage,
+	AnagramHelper,
+	StickyClue,
 	gridWidth,
 }) => {
 	return (
@@ -50,6 +52,7 @@ const Layout: CrosswordProps['Layout'] = ({
 				}
 			`}
 		>
+			<AnagramHelper />
 			<div
 				css={css`
 					flex-basis: ${gridWidth}px;
@@ -61,6 +64,13 @@ const Layout: CrosswordProps['Layout'] = ({
 					}
 				`}
 			>
+				<StickyClue
+					additionalCss={css`
+						${from.leftCol} {
+							display: none;
+						}
+					`}
+				/>
 				<Grid />
 				<Controls />
 				<div
