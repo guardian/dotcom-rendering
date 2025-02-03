@@ -6494,6 +6494,10 @@ const paletteColours = {
 		light: () => sourcePalette.sport[300],
 		dark: () => sourcePalette.neutral[86],
 	},
+	'--football-match-list-error': {
+		light: () => sourcePalette.error[400],
+		dark: () => sourcePalette.error[500],
+	},
 	'--football-match-list-top-border': {
 		light: () => sourcePalette.sport[500],
 		dark: () => sourcePalette.neutral[60],

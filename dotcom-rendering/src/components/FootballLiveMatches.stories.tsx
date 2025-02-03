@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { FootballLiveMatches as FootballLiveMatchesComponent } from './FootballLiveMatches';
 import { userEvent, within } from '@storybook/test';
+import { error, ok } from '../lib/result';
+import { FootballLiveMatches as FootballLiveMatchesComponent } from './FootballLiveMatches';
 
 const meta = {
 	title: 'Components/Football Live Matches',
@@ -85,11 +86,19 @@ export const FootballLiveMatches = {
 	args: {
 		edition: 'UK',
 		initialDays,
-		getMoreDays: () => Promise.resolve(initialDays),
+		getMoreDays: () => Promise.resolve(ok(initialDays)),
 	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
 		const more = canvas.getByRole('button');
 		await userEvent.click(more);
 	},
+} satisfies Story;
+
+export const ErrorGettingMore = {
+	args: {
+		...FootballLiveMatches.args,
+		getMoreDays: () => Promise.resolve(error('failed')),
+	},
+	play: FootballLiveMatches.play,
 } satisfies Story;

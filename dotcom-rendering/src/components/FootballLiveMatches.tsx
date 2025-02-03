@@ -7,7 +7,12 @@ import {
 	textSansBold14,
 	until,
 } from '@guardian/source/foundations';
-import { Fragment, useState, type ReactNode } from 'react';
+import {
+	Button,
+	InlineError,
+	SvgPlus,
+} from '@guardian/source/react-components';
+import { Fragment, type ReactNode, useState } from 'react';
 import type { FootballMatches } from '../footballMatches';
 import { grid } from '../grid';
 import {
@@ -15,13 +20,13 @@ import {
 	getLocaleFromEdition,
 	getTimeZoneFromEdition,
 } from '../lib/edition';
+import type { Result } from '../lib/result';
 import { palette } from '../palette';
-import { Button, SvgPlus } from '@guardian/source/react-components';
 
 type Props = {
 	initialDays: FootballMatches;
 	edition: EditionId;
-	getMoreDays: () => Promise<FootballMatches>;
+	getMoreDays: () => Promise<Result<'failed', FootballMatches>>;
 };
 
 const getDateFormatter = (edition: EditionId): Intl.DateTimeFormat =>
@@ -212,6 +217,7 @@ export const FootballLiveMatches = ({
 	const timeFormatter = getTimeFormatter(edition);
 
 	const [days, setDays] = useState(initialDays);
+	const [isError, setIsError] = useState<boolean>(false);
 
 	return (
 		<>
@@ -262,13 +268,30 @@ export const FootballLiveMatches = ({
 						icon={<SvgPlus />}
 						size="xsmall"
 						onClick={() => {
-							getMoreDays().then((moreDays) =>
-								setDays(days.concat(moreDays)),
-							);
+							void getMoreDays().then((moreDays) => {
+								if (moreDays.kind === 'ok') {
+									setIsError(false);
+									setDays(days.concat(moreDays.value));
+								} else {
+									setIsError(true);
+								}
+							});
 						}}
 					>
 						More
 					</Button>
+					{isError ? (
+						<InlineError
+							cssOverrides={css`
+								padding-top: ${space[4]}px;
+								color: ${palette(
+									'--football-match-list-error',
+								)};
+							`}
+						>
+							Could not get more matches. Please try again later!
+						</InlineError>
+					) : null}
 				</div>
 			</div>
 		</>
