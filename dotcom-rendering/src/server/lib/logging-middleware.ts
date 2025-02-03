@@ -18,7 +18,7 @@ const hasPageId = (body: unknown): body is { pageId: string } => {
 export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 	const headerValue = req.headers['x-gu-xid'];
 	const requestId = Array.isArray(headerValue) ? headerValue[0] : headerValue;
-	const experimentHeaders = Object.keys(req.headers)
+	const abTests = Object.keys(req.headers)
 		.filter((header) => header.startsWith('x-gu-experiment'))
 		.reduce((acc: { [key: string]: string | undefined }, header) => {
 			acc[header] = req.headers[header] as string | undefined;
@@ -33,7 +33,7 @@ export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 		},
 		fastlyRequestId: requestId ?? 'fastly-id-not-provided',
 		timing: {},
-		experimentHeaders,
+		abTests,
 	};
 
 	res.on('finish', () => {
