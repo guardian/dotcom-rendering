@@ -254,18 +254,26 @@ const buildElementTree =
 					key,
 					children,
 				});
-			case 'A':
+			case 'A': {
+				const href = getAttrs(node)?.getNamedItem('href')?.value;
+				const isSkimlink =
+					!!href && href.startsWith('https://go.skimresources.com');
+
 				return jsx('a', {
-					href: getAttrs(node)?.getNamedItem('href')?.value,
+					href,
 					target: getAttrs(node)?.getNamedItem('target')?.value,
 					'data-link-name':
 						getAttrs(node)?.getNamedItem('data-link-name')?.value,
 					'data-component':
 						getAttrs(node)?.getNamedItem('data-component')?.value,
-					rel: getAttrs(node)?.getNamedItem('rel')?.value,
+					/** Skimlinks are forced to have the rel attribute set to "sponsored" in case it is not set correctly */
+					rel: isSkimlink
+						? 'sponsored'
+						: getAttrs(node)?.getNamedItem('rel')?.value,
 					key,
 					children,
 				});
+			}
 			case 'EM':
 				return jsx('em', {
 					key,
