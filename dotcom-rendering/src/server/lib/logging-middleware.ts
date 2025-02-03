@@ -25,7 +25,7 @@ export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 			path: req.path,
 			method: req.method,
 		},
-		fastlyRequestId: requestId ?? 'fastly-id-not-provided',
+		requestId: requestId ?? 'request-id-not-provided',
 		timing: {},
 	};
 
