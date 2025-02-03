@@ -110,8 +110,6 @@ export interface SDCAuxiaProxyResponseData {
 }
 
 export type SignInGatePropsAuxia = {
-	signInUrl: string;
-	registerUrl: string;
 	guUrl: string;
 	dismissGate: () => void;
 	ophanComponentId: string;
