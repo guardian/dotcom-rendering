@@ -7,7 +7,12 @@ import {
 	textSansBold14,
 	until,
 } from '@guardian/source/foundations';
-import { Fragment, type ReactNode } from 'react';
+import {
+	Button,
+	InlineError,
+	SvgPlus,
+} from '@guardian/source/react-components';
+import { Fragment, type ReactNode, useState } from 'react';
 import type { FootballMatches } from '../footballMatches';
 import { grid } from '../grid';
 import {
@@ -15,11 +20,13 @@ import {
 	getLocaleFromEdition,
 	getTimeZoneFromEdition,
 } from '../lib/edition';
+import type { Result } from '../lib/result';
 import { palette } from '../palette';
 
 type Props = {
-	days: FootballMatches;
+	initialDays: FootballMatches;
 	edition: EditionId;
+	getMoreDays: () => Promise<Result<'failed', FootballMatches>>;
 };
 
 const getDateFormatter = (edition: EditionId): Intl.DateTimeFormat =>
@@ -201,9 +208,16 @@ const Scores = ({
 	</span>
 );
 
-export const FootballLiveMatches = ({ edition, days }: Props) => {
+export const FootballLiveMatches = ({
+	edition,
+	initialDays,
+	getMoreDays,
+}: Props) => {
 	const dateFormatter = getDateFormatter(edition);
 	const timeFormatter = getTimeFormatter(edition);
+
+	const [days, setDays] = useState(initialDays);
+	const [isError, setIsError] = useState<boolean>(false);
 
 	return (
 		<>
@@ -242,6 +256,44 @@ export const FootballLiveMatches = ({ edition, days }: Props) => {
 					))}
 				</section>
 			))}
+
+			<div css={css(grid.container)}>
+				<div
+					css={css`
+						${grid.column.centre}
+						padding-top: ${space[10]}px;
+					`}
+				>
+					<Button
+						icon={<SvgPlus />}
+						size="xsmall"
+						onClick={() => {
+							void getMoreDays().then((moreDays) => {
+								if (moreDays.kind === 'ok') {
+									setIsError(false);
+									setDays(days.concat(moreDays.value));
+								} else {
+									setIsError(true);
+								}
+							});
+						}}
+					>
+						More
+					</Button>
+					{isError ? (
+						<InlineError
+							cssOverrides={css`
+								padding-top: ${space[4]}px;
+								color: ${palette(
+									'--football-match-list-error',
+								)};
+							`}
+						>
+							Could not get more matches. Please try again later!
+						</InlineError>
+					) : null}
+				</div>
+			</div>
 		</>
 	);
 };
