@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/test';
+import type { FootballMatches } from '../footballMatches';
 import { error, ok } from '../lib/result';
-import { FootballLiveMatches as FootballLiveMatchesComponent } from './FootballLiveMatches';
+import { FootballMatchList } from './FootballMatchList';
 
 const meta = {
-	title: 'Components/Football Live Matches',
-	component: FootballLiveMatchesComponent,
+	title: 'Components/Football Match List',
+	component: FootballMatchList,
 	decorators: [
 		// To make it easier to see the top border above the date
 		(Story) => (
@@ -15,13 +16,13 @@ const meta = {
 			</>
 		),
 	],
-} satisfies Meta<typeof FootballLiveMatchesComponent>;
+} satisfies Meta<typeof FootballMatchList>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const initialDays = [
+const initialDays: FootballMatches = [
 	{
 		date: new Date('2025-01-24T00:00:00Z'),
 		competitions: [
@@ -31,6 +32,7 @@ const initialDays = [
 				nation: 'European',
 				matches: [
 					{
+						kind: 'Live',
 						dateTime: new Date('2025-01-24T11:11:00Z'),
 						paId: '4482093',
 						homeTeam: {
@@ -44,17 +46,11 @@ const initialDays = [
 						status: 'FT',
 					},
 					{
+						kind: 'Fixture',
 						dateTime: new Date('2025-01-24T19:45:00Z'),
 						paId: '4482890',
-						homeTeam: {
-							name: 'Auxerre',
-							score: 0,
-						},
-						awayTeam: {
-							name: 'St Etienne',
-							score: 0,
-						},
-						status: 'FT',
+						homeTeam: 'Auxerre',
+						awayTeam: 'St Etienne',
 					},
 				],
 			},
@@ -64,6 +60,7 @@ const initialDays = [
 				nation: 'European',
 				matches: [
 					{
+						kind: 'Result',
 						dateTime: new Date('2025-01-24T20:00:00Z'),
 						paId: '4482835',
 						homeTeam: {
@@ -74,7 +71,6 @@ const initialDays = [
 							name: 'Osasuna',
 							score: 3,
 						},
-						status: 'FT',
 					},
 				],
 			},
@@ -82,7 +78,7 @@ const initialDays = [
 	},
 ];
 
-export const FootballLiveMatches = {
+export const Default = {
 	args: {
 		edition: 'UK',
 		initialDays,
@@ -97,8 +93,8 @@ export const FootballLiveMatches = {
 
 export const ErrorGettingMore = {
 	args: {
-		...FootballLiveMatches.args,
+		...Default.args,
 		getMoreDays: () => Promise.resolve(error('failed')),
 	},
-	play: FootballLiveMatches.play,
+	play: Default.play,
 } satisfies Story;
