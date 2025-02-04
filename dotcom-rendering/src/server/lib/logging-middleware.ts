@@ -22,7 +22,7 @@ export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 	// Extract Guardian-specific abtest headers (headers starting with 'X-GU-EXPERIMENT')
 	const guardianSpecificHeaders = Object.fromEntries(
 		Object.entries(req.headers).filter(([key]) =>
-			key.startsWith('x-gu-experiment'),
+			key.startsWith('X-GU-EXPERIMENT'),
 		),
 	);
 
@@ -33,6 +33,7 @@ export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 			value,
 		]),
 	);
+
 	const loggerState = {
 		request: {
 			pageId: hasPageId(req.body) ? req.body.pageId : 'no-page-id-found',
