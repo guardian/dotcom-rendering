@@ -13,7 +13,7 @@ import {
 	SvgPlus,
 } from '@guardian/source/react-components';
 import { Fragment, type ReactNode, useState } from 'react';
-import type { FootballMatches } from '../footballMatches';
+import type { FootballMatch, FootballMatches } from '../footballMatches';
 import { grid } from '../grid';
 import {
 	type EditionId,
@@ -103,9 +103,14 @@ const Matches = (props: { children: ReactNode }) => (
 	/>
 );
 
-const Match = (props: { children: ReactNode }) => (
+const Match = ({
+	match,
+	timeFormatter,
+}: {
+	match: FootballMatch;
+	timeFormatter: Intl.DateTimeFormat;
+}) => (
 	<li
-		{...props}
 		css={css`
 			${textSans14}
 			background-color: ${palette('--football-match-list-background')};
@@ -125,20 +130,45 @@ const Match = (props: { children: ReactNode }) => (
 				}
 			}
 		`}
-	/>
+	>
+		{match.kind === 'Result' ? (
+			<span css={matchLeftStyle}>FT</span>
+		) : (
+			<MatchTime dateTime={match.dateTime.toISOString()}>
+				{timeFormatter.format(match.dateTime)}
+			</MatchTime>
+		)}
+		{match.kind === 'Fixture' ? (
+			<>
+				<HomeTeam>{match.homeTeam}</HomeTeam>
+
+				<Versus />
+				<AwayTeam>{match.awayTeam}</AwayTeam>
+			</>
+		) : (
+			<>
+				<HomeTeam>{match.homeTeam.name}</HomeTeam>
+
+				<Scores
+					homeScore={match.homeTeam.score}
+					awayScore={match.awayTeam.score}
+				/>
+				<AwayTeam>{match.awayTeam.name}</AwayTeam>
+			</>
+		)}
+	</li>
 );
 
-const MatchTime = (props: { children: ReactNode; dateTime: string }) => (
-	<time
-		{...props}
-		css={css`
-			width: 5rem;
+const matchLeftStyle = css`
+	width: 5rem;
 
-			${until.mobileMedium} {
-				flex-basis: 100%;
-			}
-		`}
-	/>
+	${until.mobileMedium} {
+		flex-basis: 100%;
+	}
+`;
+
+const MatchTime = (props: { children: ReactNode; dateTime: string }) => (
+	<time {...props} css={matchLeftStyle} />
 );
 
 const HomeTeam = (props: { children: ReactNode }) => (
@@ -175,6 +205,19 @@ const Battleline = () => (
 	/>
 );
 
+const Versus = () => (
+	<span
+		css={css`
+			width: 3rem;
+			display: block;
+			padding: 0 4px;
+			text-align: center;
+		`}
+	>
+		v
+	</span>
+);
+
 const Scores = ({
 	homeScore,
 	awayScore,
@@ -208,7 +251,7 @@ const Scores = ({
 	</span>
 );
 
-export const FootballLiveMatches = ({
+export const FootballMatchList = ({
 	edition,
 	initialDays,
 	getMoreDays,
@@ -231,25 +274,11 @@ export const FootballLiveMatches = ({
 							</CompetitionName>
 							<Matches>
 								{competition.matches.map((match) => (
-									<Match key={match.paId}>
-										<MatchTime
-											dateTime={match.dateTime.toISOString()}
-										>
-											{timeFormatter.format(
-												match.dateTime,
-											)}
-										</MatchTime>
-										<HomeTeam>
-											{match.homeTeam.name}
-										</HomeTeam>
-										<Scores
-											homeScore={match.homeTeam.score}
-											awayScore={match.awayTeam.score}
-										/>
-										<AwayTeam>
-											{match.awayTeam.name}
-										</AwayTeam>
-									</Match>
+									<Match
+										key={match.paId}
+										match={match}
+										timeFormatter={timeFormatter}
+									/>
 								))}
 							</Matches>
 						</Fragment>
