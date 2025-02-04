@@ -1,6 +1,7 @@
-import type { RequestHandler } from 'express';
+import type { RequestHandler, Request } from 'express';
 import { logger } from './logging';
 import { loggingStore } from './logging-store';
+import { ConfigType } from 'src/types/config';
 
 const hasPageId = (body: unknown): body is { pageId: string } => {
 	return (
@@ -11,11 +12,20 @@ const hasPageId = (body: unknown): body is { pageId: string } => {
 	);
 };
 
+type RequestBody = {
+	config?: ConfigType;
+	pageId?: string;
+};
+
 /**
  * An Express middleware which handles creating our logger store and logging requests after they've
  * completed.
  */
-export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
+export const requestLoggerMiddleware: RequestHandler = (
+	req: Request<{}, {}, RequestBody>,
+	res,
+	next,
+) => {
 	const headerValue = req.headers['x-gu-xid'];
 	const requestId = Array.isArray(headerValue) ? headerValue[0] : headerValue;
 	const loggerState = {
@@ -26,7 +36,7 @@ export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 		},
 		fastlyRequestId: requestId ?? 'fastly-id-not-provided',
 		timing: {},
-		abTests: JSON.stringify(req.body.config.abTests),
+		abTests: JSON.stringify(req.body.config?.abTests),
 	};
 
 	res.on('finish', () => {
