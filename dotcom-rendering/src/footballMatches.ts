@@ -12,6 +12,7 @@ export type MatchResult = MatchData & {
 	kind: 'Result';
 	homeTeam: TeamScore;
 	awayTeam: TeamScore;
+	comment?: string;
 };
 
 export type MatchFixture = MatchData & {
@@ -25,6 +26,7 @@ export type LiveMatch = MatchData & {
 	homeTeam: TeamScore;
 	awayTeam: TeamScore;
 	status: string;
+	comment?: string;
 };
 
 export type FootballMatch = MatchResult | MatchFixture | LiveMatch;
