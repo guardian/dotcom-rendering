@@ -30,6 +30,12 @@ type Props = {
 	getMoreDays: () => Promise<Result<'failed', FootballMatches>>;
 };
 
+const removeTrailingDotsRegex = /\.+$/;
+
+const removeTrailingDots = (string: string): string => {
+	return string.replace(removeTrailingDotsRegex, '');
+};
+
 const getDateFormatter = (edition: EditionId): Intl.DateTimeFormat =>
 	new Intl.DateTimeFormat('en-GB', {
 		weekday: 'long',
@@ -164,7 +170,7 @@ const Match = ({
 							}
 						`}
 					>
-						{match.comment}
+						{removeTrailingDots(match.comment)}
 					</small>
 				)}
 			</>
