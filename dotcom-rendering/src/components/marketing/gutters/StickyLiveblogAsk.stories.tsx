@@ -1,6 +1,9 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
 import { GutterAsk } from './gutterAsk';
+import { props } from './utils/storybook';
+
+const { variant, onCtaClick } = props;
 
 export default {
 	component: GutterAsk,
@@ -21,10 +24,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 export const Default = () => {
 	return (
 		<Wrapper>
-			<GutterAsk
-				url="https://www.theguardian.com/uk"
-				onCtaClick={() => {}}
-			/>
+			<GutterAsk variant={variant} onCtaClick={onCtaClick} />
 		</Wrapper>
 	);
 };

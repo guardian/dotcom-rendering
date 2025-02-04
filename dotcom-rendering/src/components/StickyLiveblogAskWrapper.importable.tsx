@@ -14,14 +14,13 @@ import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
 import { useConfig } from './ConfigContext';
 import { GutterAsk } from './marketing/gutters/gutterAsk';
+import { props } from './marketing/gutters/utils/storybook';
 import type { ReactComponent } from './marketing/lib/ReactComponent';
 import {
 	addRegionIdAndTrackingParamsToSupportUrl,
 	createClickEventFromTracking,
 	createInsertEventFromTracking,
 } from './marketing/lib/tracking';
-
-const baseUrl = 'https://support.theguardian.com/contribute';
 
 // CSS Styling
 // -------------------------------------------
@@ -44,6 +43,7 @@ interface StickyLiveblogAskWrapperProps {
 	shouldHideReaderRevenueOnArticle: boolean;
 }
 
+const { variant } = props; // TODO: temporary - to be replaced when SDC ready
 const whatAmI = 'sticky-liveblog-ask'; // TODO: eventually this will be renamed.
 
 export const StickyLiveblogAskWrapper: ReactComponent<
@@ -77,16 +77,9 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 			abTestName: '', // stop tracking AB test.
 			abTestVariant: '', // stop tracking AB test.
 			campaignCode: whatAmI,
-			componentType: 'ACQUISITIONS_OTHER',
+			componentType: 'ACQUISITIONS_OTHER', // TODO - this will change in future
 		};
 	}, [pageViewId, referrerUrl]);
-
-	const urlWithRegionAndTracking = addRegionIdAndTrackingParamsToSupportUrl(
-		baseUrl,
-		tracking,
-		undefined,
-		countryCode,
-	);
 
 	const canShow =
 		showSupportMessagingForUser && !shouldHideReaderRevenueOnArticle;
@@ -110,14 +103,21 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 		);
 	};
 
+	useEffect(() => {
+		const baseUrl = variant.content.cta.baseUrl;
+		variant.content.cta.baseUrl = addRegionIdAndTrackingParamsToSupportUrl(
+			baseUrl,
+			tracking,
+			undefined,
+			countryCode,
+		);
+	}, [countryCode, tracking]);
+
 	return (
 		<>
 			{canShow && (
 				<div css={stickyLeft}>
-					<GutterAsk
-						url={urlWithRegionAndTracking}
-						onCtaClick={onCtaClick}
-					/>
+					<GutterAsk variant={variant} onCtaClick={onCtaClick} />
 				</div>
 			)}
 		</>
