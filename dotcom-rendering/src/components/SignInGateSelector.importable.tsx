@@ -383,8 +383,6 @@ export const SignInGateSelector = ({
 	} else {
 		return SignInGateSelectorAuxia({
 			host,
-			pageId,
-			idUrl,
 			contributionsServiceUrl,
 		});
 	}
@@ -415,8 +413,6 @@ export const SignInGateSelector = ({
 
 type PropsAuxia = {
 	host?: string;
-	pageId: string;
-	idUrl?: string;
 	contributionsServiceUrl: string;
 };
 
@@ -425,10 +421,8 @@ type PropsAuxia = {
 	Signature for the ShowSignInGateAuxia component.
 */
 interface ShowSignInGateAuxiaProps {
-	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
-	signInUrl: string;
-	registerUrl: string;
 	host: string;
+	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
 }
 
@@ -445,7 +439,7 @@ const dismissGateAuxia = (
 const fetchAuxiaDisplayDataFromProxy = async (
 	contributionsServiceUrl: string,
 ): Promise<SDCAuxiaProxyResponseData> => {
-	const url = `${contributionsServiceUrl}/auxia`;
+	const url = `${contributionsServiceUrl}/auxia/get-treatments`;
 	const headers = {
 		'Content-Type': 'application/json',
 	};
@@ -465,8 +459,6 @@ const fetchAuxiaDisplayDataFromProxy = async (
 
 const SignInGateSelectorAuxia = ({
 	host = 'https://theguardian.com/',
-	pageId,
-	idUrl = 'https://profile.theguardian.com',
 	contributionsServiceUrl,
 }: PropsAuxia) => {
 	/*
@@ -517,30 +509,14 @@ const SignInGateSelectorAuxia = ({
 		return null;
 	}
 
-	const componentId = 'main_variant_5';
-
-	const ctaUrlParams = {
-		pageId,
-		host,
-		pageViewId,
-		idUrl,
-		currentTest,
-		componentId,
-	} satisfies Parameters<typeof generateGatewayUrl>[1];
-
 	return (
 		<>
 			{!isGateDismissed &&
 				auxiaAPIResponseData?.userTreatment !== undefined && (
 					<ShowSignInGateAuxia
+						host={host}
 						// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 						setShowGate={(show) => setIsGateDismissed(!show)}
-						signInUrl={generateGatewayUrl('signin', ctaUrlParams)}
-						registerUrl={generateGatewayUrl(
-							'register',
-							ctaUrlParams,
-						)}
-						host={host}
 						userTreatment={auxiaAPIResponseData.userTreatment}
 					/>
 				)}
@@ -549,10 +525,8 @@ const SignInGateSelectorAuxia = ({
 };
 
 const ShowSignInGateAuxia = ({
-	setShowGate,
-	signInUrl,
-	registerUrl,
 	host,
+	setShowGate,
 	userTreatment,
 }: ShowSignInGateAuxiaProps) => {
 	/*
@@ -567,8 +541,6 @@ const ShowSignInGateAuxia = ({
 
 	return SignInGateAuxia({
 		guUrl: host,
-		signInUrl,
-		registerUrl,
 		dismissGate: () => {
 			dismissGateAuxia(setShowGate);
 		},
