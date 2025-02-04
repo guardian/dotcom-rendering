@@ -238,6 +238,16 @@ const styles = (format: ArticleFormat) => css`
 	}
 `;
 
+/** A function to check if a URL represents an affiliate link */
+const isSkimlink = (url?: string): boolean => {
+	try {
+		return !!url && new URL(url).host === 'go.skimresources.com';
+	} catch (err: unknown) {
+		// If not a valid URL, it won't be an affiliate link
+		return false;
+	}
+};
+
 const buildElementTree =
 	(format: ArticleFormat, showDropCaps: boolean) =>
 	(node: Node, key: number): ReactNode => {
@@ -256,8 +266,6 @@ const buildElementTree =
 				});
 			case 'A': {
 				const href = getAttrs(node)?.getNamedItem('href')?.value;
-				const isSkimlink =
-					!!href && new URL(href).host === 'go.skimresources.com';
 
 				return jsx('a', {
 					href,
@@ -270,7 +278,7 @@ const buildElementTree =
 					 * Affiliate links must have the rel attribute set to "sponsored"
 					 * @see https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links
 					 */
-					rel: isSkimlink
+					rel: isSkimlink(href)
 						? 'sponsored'
 						: getAttrs(node)?.getNamedItem('rel')?.value,
 					key,
