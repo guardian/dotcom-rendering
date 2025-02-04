@@ -18,13 +18,21 @@ const hasPageId = (body: unknown): body is { pageId: string } => {
 export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 	const headerValue = req.headers['x-gu-xid'];
 	const requestId = Array.isArray(headerValue) ? headerValue[0] : headerValue;
-	const abTests = Object.keys(req.cookies)
-		.filter((cookie) => cookie.startsWith('x-gu-experiment'))
-		.reduce((acc: { [key: string]: string | undefined }, cookie) => {
-			acc[cookie] = req.cookies[cookie] as string | undefined;
-			return acc;
-		}, {});
 
+	// Extract Guardian-specific abtest headers (headers starting with 'X-GU-EXPERIMENT')
+	const guardianSpecificHeaders = Object.fromEntries(
+		Object.entries(req.headers).filter(([key]) =>
+			key.startsWith('x-gu-experiment'),
+		),
+	);
+
+	// Format headers for logging. This format copies the logging paradigm used in Frontend.
+	const abTests = Object.fromEntries(
+		Object.entries(guardianSpecificHeaders).map(([key, value]) => [
+			`req.header.${key}`,
+			value,
+		]),
+	);
 	const loggerState = {
 		request: {
 			pageId: hasPageId(req.body) ? req.body.pageId : 'no-page-id-found',
