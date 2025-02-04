@@ -32,8 +32,8 @@ type Props = {
 
 const REMOVE_TRAILING_DOTS_REGEX = /\.+$/;
 
-const removeTrailingDots = (string: string): string => {
-	return string.replace(REMOVE_TRAILING_DOTS_REGEX, '');
+const removeTrailingDots = (str: string): string => {
+	return str.replace(REMOVE_TRAILING_DOTS_REGEX, '');
 };
 
 const getDateFormatter = (edition: EditionId): Intl.DateTimeFormat =>
