@@ -26,7 +26,7 @@ const baseUrl = 'https://support.theguardian.com/contribute';
 // CSS Styling
 // -------------------------------------------
 
-// outer container
+// outer container handles the position and stickiness
 const stickyLeft = css`
 	background: ${palette.neutral[100]};
 	position: sticky;
