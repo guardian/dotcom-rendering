@@ -19,21 +19,6 @@ export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 	const headerValue = req.headers['x-gu-xid'];
 	const requestId = Array.isArray(headerValue) ? headerValue[0] : headerValue;
 
-	// Extract Guardian-specific abtest headers (headers starting with 'X-GU-EXPERIMENT')
-	const guardianSpecificHeaders = Object.fromEntries(
-		Object.entries(req.headers).filter(([key]) =>
-			key.startsWith('X-GU-EXPERIMENT'),
-		),
-	);
-
-	// Format headers for logging. This format copies the logging paradigm used in Frontend.
-	const abTests = Object.fromEntries(
-		Object.entries(guardianSpecificHeaders).map(([key, value]) => [
-			`req.header.${key}`,
-			value,
-		]),
-	);
-
 	const loggerState = {
 		request: {
 			pageId: hasPageId(req.body) ? req.body.pageId : 'no-page-id-found',
@@ -42,7 +27,7 @@ export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 		},
 		fastlyRequestId: requestId ?? 'fastly-id-not-provided',
 		timing: {},
-		abTests,
+		abTests: req.body.abTests,
 	};
 
 	res.on('finish', () => {
