@@ -1,7 +1,7 @@
-import type { RequestHandler, Request } from 'express';
+import type { Request, RequestHandler } from 'express';
+import type { ConfigType } from '../../types/config';
 import { logger } from './logging';
 import { loggingStore } from './logging-store';
-import { ConfigType } from 'src/types/config';
 
 const hasPageId = (body: unknown): body is { pageId: string } => {
 	return (
