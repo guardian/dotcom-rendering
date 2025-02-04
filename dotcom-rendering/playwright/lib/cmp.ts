@@ -1,4 +1,5 @@
 import type { BrowserContext, Page } from '@playwright/test';
+import { ALLOW_REJECT_ALL_COOKIE } from '../../src/client/userFeatures/cookies/allowRejectAll';
 import { addCookie } from './cookies';
 import { waitForIsland } from './islands';
 
@@ -40,6 +41,15 @@ const cmpRejectAll = async (page: Page): Promise<void> => {
 	await new Promise((r) => setTimeout(r, 2000));
 };
 
+const allowRejectAll = (context: BrowserContext): Promise<void> => {
+	const expires = new Date();
+	expires.setMonth(expires.getMonth() + 6);
+	return addCookie(context, {
+		name: ALLOW_REJECT_ALL_COOKIE,
+		value: expires.getTime().toString(),
+	});
+};
+
 /**
  * Reconsent on the Sourcepoint CMP banner
  *
@@ -72,6 +82,7 @@ export {
 	cmpAcceptAll,
 	cmpReconsent,
 	cmpRejectAll,
+	allowRejectAll,
 	disableCMP,
 	CMP_LAYER1_IFRAME,
 };

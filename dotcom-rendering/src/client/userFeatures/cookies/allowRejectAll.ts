@@ -1,6 +1,6 @@
 import { getCookie, removeCookie, setCookie } from '@guardian/libs';
 
-const ALLOW_REJECT_ALL_COOKIE = 'gu_allow_reject_all';
+export const ALLOW_REJECT_ALL_COOKIE = 'gu_allow_reject_all';
 
 export const getAllowRejectAllCookie = (): string | null =>
 	getCookie({ name: ALLOW_REJECT_ALL_COOKIE });
