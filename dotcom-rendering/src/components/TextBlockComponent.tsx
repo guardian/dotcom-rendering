@@ -257,7 +257,7 @@ const buildElementTree =
 			case 'A': {
 				const href = getAttrs(node)?.getNamedItem('href')?.value;
 				const isSkimlink =
-					!!href && href.startsWith('https://go.skimresources.com');
+					!!href && new URL(href).host === 'go.skimresources.com';
 
 				return jsx('a', {
 					href,
