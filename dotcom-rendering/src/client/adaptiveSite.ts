@@ -20,8 +20,9 @@ export const shouldAdapt = async (): Promise<boolean> => {
 	 * The europe beta front is being served to a 0% audience. This means it's rarely in cache and so it gets adapted more often.
 	 * This is a temporary measure to ensure that the front is not adapted until it is in cache.
 	 */
-	if (window.guardian.config.tests.europeBetaFrontVariant === 'variant')
+	if (window.guardian.config.tests.europeBetaFrontVariant === 'variant') {
 		return false;
+	}
 
 	// only evaluate this code if we want to adapt in response to page performance
 	const { isPerformingPoorly } = await import(
