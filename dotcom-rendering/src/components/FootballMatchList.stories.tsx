@@ -43,7 +43,7 @@ const initialDays: FootballMatches = [
 							name: 'Cagliari',
 							score: 0,
 						},
-						status: 'FT',
+						status: '1st',
 					},
 					{
 						kind: 'Fixture',

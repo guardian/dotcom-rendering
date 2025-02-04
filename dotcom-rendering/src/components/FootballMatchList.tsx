@@ -110,6 +110,52 @@ const Matches = (props: { children: ReactNode }) => (
 	/>
 );
 
+const matchStatusStyles = css`
+	width: 5rem;
+	color: ${palette('--football-match-list-sub-text')};
+
+	${until.mobileMedium} {
+		flex-basis: 100%;
+	}
+`;
+
+const MatchStatus = ({
+	match,
+	timeFormatter,
+}: {
+	match: FootballMatch;
+	timeFormatter: Intl.DateTimeFormat;
+}) => {
+	switch (match.kind) {
+		case 'Result':
+			return <span css={matchStatusStyles}>FT</span>;
+		case 'Live':
+			return (
+				<span
+					css={[
+						matchStatusStyles,
+						css`
+							color: ${palette(
+								'--football-match-list-live-status',
+							)};
+						`,
+					]}
+				>
+					{match.status}
+				</span>
+			);
+		case 'Fixture':
+			return (
+				<time
+					css={matchStatusStyles}
+					dateTime={match.dateTime.toISOString()}
+				>
+					{timeFormatter.format(match.dateTime)}
+				</time>
+			);
+	}
+};
+
 const Match = ({
 	match,
 	timeFormatter,
@@ -118,30 +164,29 @@ const Match = ({
 	timeFormatter: Intl.DateTimeFormat;
 }) => (
 	<li
-		css={css`
-			${textSans14}
-			background-color: ${palette('--football-match-list-background')};
-			padding: ${space[2]}px;
-			display: flex;
-			border: 1px solid ${palette('--football-match-list-border')};
-			flex-wrap: wrap;
+		css={[
+			css`
+				${textSans14}
+				background-color: ${palette(
+					'--football-match-list-background',
+				)};
+				padding: ${space[2]}px;
+				display: flex;
+				border: 1px solid ${palette('--football-match-list-border')};
+				flex-wrap: wrap;
+				${match.kind === 'Live' ? 'font-weight: bold;' : undefined}
 
-			${from.leftCol} {
-				&:first-of-type {
-					border-top-color: ${palette(
-						'--football-match-list-top-border',
-					)};
+				${from.leftCol} {
+					&:first-of-type {
+						border-top-color: ${palette(
+							'--football-match-list-top-border',
+						)};
+					}
 				}
-			}
-		`}
+			`,
+		]}
 	>
-		{match.kind === 'Result' ? (
-			<span css={matchLeftStyle}>FT</span>
-		) : (
-			<MatchTime dateTime={match.dateTime.toISOString()}>
-				{timeFormatter.format(match.dateTime)}
-			</MatchTime>
-		)}
+		<MatchStatus match={match} timeFormatter={timeFormatter} />
 		{match.kind === 'Fixture' ? (
 			<>
 				<HomeTeam>{match.homeTeam}</HomeTeam>
@@ -176,19 +221,6 @@ const Match = ({
 			</>
 		)}
 	</li>
-);
-
-const matchLeftStyle = css`
-	width: 5rem;
-	color: ${palette('--football-match-list-sub-text')};
-
-	${until.mobileMedium} {
-		flex-basis: 100%;
-	}
-`;
-
-const MatchTime = (props: { children: ReactNode; dateTime: string }) => (
-	<time {...props} css={matchLeftStyle} />
 );
 
 const HomeTeam = (props: { children: ReactNode }) => (
