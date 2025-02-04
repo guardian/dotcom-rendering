@@ -2,8 +2,9 @@ import { css } from '@emotion/react';
 import { palette, space, textSansBold12 } from '@guardian/source/foundations';
 import { SvgCamera } from '@guardian/source/react-components';
 import { Pill } from '../../../components/Pill';
+import { SvgMediaControlsPlay } from '../../../components/SvgMediaControlsPlay';
 import { type ArticleFormat, ArticleSpecial } from '../../../lib/articleFormat';
-import type { MainMedia } from '../../../types/mainMedia';
+import { secondsToDuration } from '../../../lib/formatTime';
 
 const contentStyles = css`
 	margin-top: auto;
@@ -44,7 +45,11 @@ type Props = {
 	age?: JSX.Element;
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
-	mediaType?: MainMedia['type'];
+	isVideo?: boolean;
+	videoDuration?: number;
+	isAudio?: boolean;
+	audioDuration?: string;
+	isGallery?: boolean;
 	galleryCount?: number;
 };
 
@@ -54,7 +59,11 @@ export const CardFooter = ({
 	commentCount,
 	cardBranding,
 	showLivePlayable,
-	mediaType,
+	isVideo,
+	videoDuration,
+	isAudio,
+	audioDuration,
+	isGallery,
 	galleryCount,
 }: Props) => {
 	if (showLivePlayable) return null;
@@ -63,11 +72,33 @@ export const CardFooter = ({
 		return <footer css={labStyles}>{cardBranding}</footer>;
 	}
 
-	if (mediaType === 'Gallery') {
+	if (isVideo && videoDuration !== undefined) {
 		return (
 			<footer css={contentStyles}>
 				<Pill
-					content={galleryCount?.toString() ?? ''}
+					content={<time>{secondsToDuration(videoDuration)}</time>}
+					icon={<SvgMediaControlsPlay />}
+				/>
+			</footer>
+		);
+	}
+
+	if (isAudio && audioDuration !== undefined) {
+		return (
+			<footer css={contentStyles}>
+				<Pill
+					content={<time>{audioDuration}</time>}
+					icon={<SvgMediaControlsPlay />}
+				/>
+			</footer>
+		);
+	}
+
+	if (isGallery && galleryCount !== undefined) {
+		return (
+			<footer css={contentStyles}>
+				<Pill
+					content={galleryCount.toString()}
 					prefix="Gallery"
 					icon={<SvgCamera />}
 					iconSide="right"

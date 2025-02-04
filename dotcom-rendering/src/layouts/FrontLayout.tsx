@@ -5,7 +5,9 @@ import {
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
+import { BETA_CONTAINERS } from '../components/Card/Card';
 import { Carousel } from '../components/Carousel.importable';
+import { useConfig } from '../components/ConfigContext';
 import { ContainerOverrides } from '../components/ContainerOverrides';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
@@ -41,6 +43,7 @@ import {
 	getMobileAdPositions,
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
+import { ophanComponentId } from '../lib/ophan-helpers';
 import type { NavType } from '../model/extract-nav';
 import { palette as schemePalette } from '../palette';
 import type {
@@ -56,11 +59,6 @@ interface Props {
 	front: DCRFrontType;
 	NAV: NavType;
 }
-
-const spaces = / /g;
-/** TODO: Confirm with is a valid way to generate component IDs. */
-const ophanComponentId = (name: string) =>
-	name.toLowerCase().replace(spaces, '-');
 
 const isNetworkFrontPageId = isOneOf(editionList.map(({ pageId }) => pageId));
 
@@ -113,6 +111,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		config: { isPaidContent, hasPageSkin: hasPageSkinConfig, pageId },
 		editionId,
 	} = front;
+
+	const { renderingTarget } = useConfig();
 
 	const renderAds = canRenderAds(front);
 
@@ -187,6 +187,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					sectionId={ophanComponentId(
 						highlightsCollection.displayName,
 					)}
+					frontId={front.pressedPage.id}
 				/>
 			)
 		);
@@ -448,6 +449,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									discussionApiUrl={
 										front.config.discussionApiUrl
 									}
+									isBetaContainer={BETA_CONTAINERS.includes(
+										collection.collectionType,
+									)}
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
@@ -618,6 +622,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 												absoluteServerTimes={
 													absoluteServerTimes
 												}
+												renderingTarget={
+													renderingTarget
+												}
 											/>
 										</Island>
 									</Section>
@@ -704,6 +711,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collection.collectionType ===
 										'scrollable/medium'
 								}
+								isBetaContainer={BETA_CONTAINERS.includes(
+									collection.collectionType,
+								)}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}

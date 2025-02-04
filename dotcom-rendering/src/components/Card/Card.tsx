@@ -12,6 +12,7 @@ import {
 	ArticleSpecial,
 } from '../../lib/articleFormat';
 import { isMediaCard as isAMediaCard } from '../../lib/cardHelpers';
+import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { palette } from '../../palette';
@@ -36,7 +37,6 @@ import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
-import { MediaDuration } from '../MediaDuration';
 import { MediaMeta } from '../MediaMeta';
 import { Pill } from '../Pill';
 import { Slideshow } from '../Slideshow';
@@ -342,13 +342,13 @@ const getHeadlinePosition = ({
 	return 'inner';
 };
 
-export const isWithinTwelveHours = (webPublicationDate: string): boolean => {
-	const timeDiffMs = Math.abs(
-		new Date().getTime() - new Date(webPublicationDate).getTime(),
-	);
-	const timeDiffHours = timeDiffMs / (1000 * 60 * 60);
-	return timeDiffHours <= 12;
-};
+const liveBulletStyles = css`
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	background-color: ${palette('--pill-bullet')};
+	margin-right: ${space[1]}px;
+`;
 
 export const Card = ({
 	linkTo,
@@ -426,6 +426,20 @@ export const Card = ({
 
 	const isBetaContainer = BETA_CONTAINERS.includes(containerType ?? '');
 
+	/**
+	 * A "video article" refers to standalone video content presented as the main focus of the article.
+	 * It is treated as a media card in the design system.
+	 */
+	const isVideoArticle =
+		mainMedia?.type === 'Video' && format.design === ArticleDesign.Video;
+
+	/**
+	 * Articles with a video as the main media but not classified as "video articles"
+	 * are styled differently and are not treated as media cards.
+	 */
+	const isVideoMainMedia =
+		mainMedia?.type === 'Video' && format.design !== ArticleDesign.Video;
+
 	const decideAge = () => {
 		if (!webPublicationDate) return undefined;
 		const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
@@ -485,10 +499,29 @@ export const Card = ({
 				margin-top: auto;
 			`}
 		>
+			{isVideoArticle && (
+				<>
+					{mainMedia.duration === 0 ? (
+						<Pill
+							content={'Live'}
+							icon={<div css={liveBulletStyles} />}
+							iconSize={'small'}
+						/>
+					) : (
+						<Pill
+							content={secondsToDuration(mainMedia.duration)}
+							icon={<SvgMediaControlsPlay />}
+							iconSize={'small'}
+						/>
+					)}
+				</>
+			)}
+
 			{mainMedia?.type === 'Audio' && (
 				<Pill
 					content={audioDuration ?? ''}
 					icon={<SvgMediaControlsPlay />}
+					iconSize={'small'}
 				/>
 			)}
 			{mainMedia?.type === 'Gallery' && (
@@ -514,10 +547,7 @@ export const Card = ({
 	 * Check media type to determine if pill, or article metadata & icon shown.
 	 * Currently pills are only shown within beta containers.
 	 */
-	const showPill =
-		isBetaContainer &&
-		mainMedia &&
-		(mainMedia.type === 'Audio' || mainMedia.type === 'Gallery');
+	const showPill = isBetaContainer && !!mainMedia;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -855,7 +885,11 @@ export const Card = ({
 												}
 												index={index}
 												duration={
-													media.mainMedia.duration
+													isBetaContainer &&
+													isVideoArticle
+														? undefined
+														: media.mainMedia
+																.duration
 												}
 												posterImage={
 													media.mainMedia.images
@@ -938,17 +972,24 @@ export const Card = ({
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
 								/>
-								{mainMedia?.type === 'Video' &&
+								{(isVideoMainMedia ||
+									(isVideoArticle && !isBetaContainer)) &&
 									mainMedia.duration > 0 && (
-										<MediaDuration
-											mediaDuration={mainMedia.duration}
-											imagePositionOnDesktop={
-												imagePositionOnDesktop
-											}
-											imagePositionOnMobile={
-												imagePositionOnMobile
-											}
-										/>
+										<div
+											css={css`
+												position: absolute;
+												top: ${space[2]}px;
+												right: ${space[2]}px;
+											`}
+										>
+											<Pill
+												content={secondsToDuration(
+													mainMedia.duration,
+												)}
+												icon={<SvgMediaControlsPlay />}
+												iconSize={'small'}
+											/>
+										</div>
 									)}
 							</>
 						)}
@@ -1072,7 +1113,6 @@ export const Card = ({
 												branding && (
 													<CardBranding
 														branding={branding}
-														format={format}
 														onwardsSource={
 															onwardsSource
 														}
@@ -1091,7 +1131,6 @@ export const Card = ({
 												branding ? (
 													<CardBranding
 														branding={branding}
-														format={format}
 														onwardsSource={
 															onwardsSource
 														}
@@ -1194,7 +1233,6 @@ export const Card = ({
 							branding ? (
 								<CardBranding
 									branding={branding}
-									format={format}
 									onwardsSource={onwardsSource}
 								/>
 							) : undefined

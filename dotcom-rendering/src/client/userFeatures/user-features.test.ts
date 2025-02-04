@@ -60,7 +60,6 @@ const setAllFeaturesData = (opts: { isExpired: boolean }) => {
 };
 
 beforeAll(() => {
-	window.guardian.config.page.userAttributesApiUrl = '';
 	window.guardian.config.page.userBenefitsApiUrl = 'fake-url';
 	window.guardian.config.tests['useUserBenefitsApiVariant'] = 'variant';
 });

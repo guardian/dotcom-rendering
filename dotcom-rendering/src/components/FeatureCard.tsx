@@ -1,7 +1,8 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import { Link } from '@guardian/source/react-components';
+import { Link, SvgMediaControlsPlay } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
+import { isWithinTwelveHours, secondsToDuration } from '../lib/formatTime';
 import { getZIndex } from '../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../lib/useCommentCount';
 import { palette } from '../palette';
@@ -13,6 +14,7 @@ import type {
 	DCRSupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
+import type { PodcastSeriesImage } from '../types/tag';
 import { CardAge as AgeStamp } from './Card/components/CardAge';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
@@ -29,6 +31,7 @@ import { ContainerOverrides } from './ContainerOverrides';
 import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
 import { MediaDuration } from './MediaDuration';
+import { Pill } from './Pill';
 import { StarRating } from './StarRating/StarRating';
 import { SupportingContent } from './SupportingContent';
 
@@ -74,6 +77,8 @@ export type Props = {
 	aspectRatio?: AspectRatio;
 	showQuotes?: boolean;
 	galleryCount?: number;
+	podcastImage?: PodcastSeriesImage;
+	audioDuration?: string;
 };
 
 const baseCardStyles = css`
@@ -117,6 +122,13 @@ const hoverStyles = css`
 	}
 `;
 
+const contentStyles = css`
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+`;
+
 /**
  * Image mask gradient has additional colour stops to emulate a non-linear
  * ease in / ease out curve to make the transition smoother. Values were
@@ -126,14 +138,9 @@ const hoverStyles = css`
  * https://css-tricks.com/easing-linear-gradients/
  */
 const overlayStyles = css`
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	flex-grow: 1;
 	gap: ${space[1]}px;
 	padding: 64px ${space[2]}px ${space[2]}px;
 	mask-image: linear-gradient(
@@ -151,6 +158,24 @@ const overlayStyles = css`
 	backdrop-filter: blur(12px) brightness(0.5);
 `;
 
+const podcastImageContainerStyles = css`
+	position: relative;
+	/* Needs to display above of the image mask overlay */
+	z-index: ${getZIndex('card-podcast-image')};
+`;
+
+const podcastImageStyles = css`
+	height: 80px;
+	width: 80px;
+	position: absolute;
+	/**
+	 * Displays 8px above the text.
+	 * desired space above text (8px) - padding-top of text container (64px) = -56px
+	 */
+	bottom: -${space[14]}px;
+	left: ${space[2]}px;
+`;
+
 const starRatingWrapper = css`
 	background-color: ${palette('--star-rating-background')};
 	color: ${palette('--star-rating-fill')};
@@ -161,6 +186,12 @@ const starRatingWrapper = css`
 
 const trailTextWrapper = css`
 	margin-top: ${space[3]}px;
+`;
+
+const videoPillStyles = css`
+	position: absolute;
+	top: ${space[2]}px;
+	right: ${space[2]}px;
 `;
 
 const getMedia = ({
@@ -187,14 +218,6 @@ const getMedia = ({
 	return undefined;
 };
 
-export const isWithinTwelveHours = (webPublicationDate: string): boolean => {
-	const timeDiffMs = Math.abs(
-		new Date().getTime() - new Date(webPublicationDate).getTime(),
-	);
-	const timeDiffHours = timeDiffMs / (1000 * 60 * 60);
-	return timeDiffHours <= 12;
-};
-
 const CardAge = ({
 	showClock,
 	absoluteServerTimes,
@@ -207,18 +230,21 @@ const CardAge = ({
 	if (!webPublicationDate) return undefined;
 	const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
 
-	return (
-		<AgeStamp
-			webPublication={{
-				date: webPublicationDate,
-				isWithinTwelveHours: withinTwelveHours,
-			}}
-			showClock={showClock}
-			absoluteServerTimes={absoluteServerTimes}
-			isTagPage={false}
-			colour={palette('--feature-card-footer-text')}
-		/>
-	);
+	if (withinTwelveHours) {
+		return (
+			<AgeStamp
+				webPublication={{
+					date: webPublicationDate,
+					isWithinTwelveHours: true,
+				}}
+				showClock={showClock}
+				absoluteServerTimes={absoluteServerTimes}
+				isTagPage={false}
+				colour={palette('--feature-card-footer-text')}
+			/>
+		);
+	}
+	return <></>;
 };
 
 const CommentCount = ({
@@ -296,10 +322,18 @@ export const FeatureCard = ({
 	starRating,
 	showQuotes,
 	galleryCount,
+	podcastImage,
+	audioDuration,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
 	const isVideoMainMedia = mainMedia?.type === 'Video';
+	const isVideoArticle = format.design === ArticleDesign.Video;
+	const isAudioArticle = format.design === ArticleDesign.Audio;
+	const isGalleryArticle = format.design === ArticleDesign.Gallery;
+
+	const videoDuration =
+		mainMedia?.type === 'Video' ? mainMedia.duration : undefined;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -336,10 +370,6 @@ export const FeatureCard = ({
 									background-color: ${palette(
 										'--feature-card-background',
 									)};
-									img {
-										width: 100%;
-										display: block;
-									}
 								`}
 							>
 								{media.type === 'video' && (
@@ -395,107 +425,154 @@ export const FeatureCard = ({
 								{/* This image overlay is styled when the CardLink is hovered */}
 								<div className="image-overlay" />
 
-								<div css={overlayStyles}>
-									{/**
-									 * Without the wrapping div the headline and
-									 * byline would have space inserted between
-									 * them due to being direct children of the
-									 * flex container
-									 */}
-									<div>
-										<CardHeadline
-											headlineText={headlineText}
+								<div css={contentStyles}>
+									{mainMedia?.type === 'Audio' &&
+										!!podcastImage?.src && (
+											<div
+												css={
+													podcastImageContainerStyles
+												}
+											>
+												<div css={podcastImageStyles}>
+													<CardPicture
+														mainImage={
+															podcastImage.src
+														}
+														imageSize="podcast"
+														alt={
+															podcastImage.altText ??
+															''
+														}
+														loading="lazy"
+														roundedCorners={false}
+														aspectRatio="1:1"
+													/>
+												</div>
+											</div>
+										)}
+									<div css={overlayStyles}>
+										{/**
+										 * Without the wrapping div the headline and
+										 * byline would have space inserted between
+										 * them due to being direct children of the
+										 * flex container
+										 */}
+										<div>
+											<CardHeadline
+												headlineText={headlineText}
+												format={format}
+												fontSizes={headlineSizes}
+												showQuotes={showQuotes}
+												kickerText={
+													format.design ===
+														ArticleDesign.LiveBlog &&
+													!kickerText
+														? 'Live'
+														: kickerText
+												}
+												showPulsingDot={
+													format.design ===
+														ArticleDesign.LiveBlog ||
+													showPulsingDot
+												}
+												byline={byline}
+												showByline={showByline}
+												isExternalLink={isExternalLink}
+												headlineColour={palette(
+													'--feature-card-headline',
+												)}
+												kickerColour={palette(
+													'--feature-card-kicker-text',
+												)}
+												isBetaContainer={true}
+											/>
+										</div>
+
+										{starRating !== undefined ? (
+											<div css={starRatingWrapper}>
+												<StarRating
+													rating={starRating}
+													size="small"
+												/>
+											</div>
+										) : null}
+
+										{!!trailText && (
+											<div css={trailTextWrapper}>
+												<TrailText
+													trailText={trailText}
+													trailTextColour={palette(
+														'--feature-card-trail-text',
+													)}
+													trailTextSize={'regular'}
+													padBottom={false}
+												/>
+											</div>
+										)}
+										<CardFooter
 											format={format}
-											fontSizes={headlineSizes}
-											showQuotes={showQuotes}
-											kickerText={
-												format.design ===
-													ArticleDesign.LiveBlog &&
-												!kickerText
-													? 'Live'
-													: kickerText
+											age={
+												<CardAge
+													webPublicationDate={
+														webPublicationDate
+													}
+													showClock={!!showClock}
+													absoluteServerTimes={
+														absoluteServerTimes
+													}
+												/>
 											}
-											showPulsingDot={
-												format.design ===
-													ArticleDesign.LiveBlog ||
-												showPulsingDot
+											commentCount={
+												<CommentCount
+													linkTo={linkTo}
+													discussionId={discussionId}
+													discussionApiUrl={
+														discussionApiUrl
+													}
+												/>
 											}
-											byline={byline}
-											showByline={showByline}
-											isExternalLink={isExternalLink}
-											headlineColour={palette(
-												'--feature-card-headline',
-											)}
-											kickerColour={palette(
-												'--feature-card-kicker-text',
-											)}
-											isBetaContainer={true}
+											/**TODO: Determine if this is needed */
+											// cardBranding={
+											// 	branding ? (
+											// 		<CardBranding
+											// 			branding={branding}
+											// 			format={format}
+											// 			onwardsSource={
+											// 				onwardsSource
+											// 			}
+											// 			containerPalette={
+											// 				containerPalette
+											// 			}
+											// 		/>
+											// 	) : undefined
+											// }
+											showLivePlayable={false}
+											isVideo={isVideoArticle}
+											isAudio={isAudioArticle}
+											isGallery={isGalleryArticle}
+											videoDuration={videoDuration}
+											audioDuration={audioDuration}
+											galleryCount={galleryCount}
 										/>
 									</div>
-
-									{starRating !== undefined ? (
-										<div css={starRatingWrapper}>
-											<StarRating
-												rating={starRating}
-												size="small"
-											/>
-										</div>
-									) : null}
-
-									{!!trailText && (
-										<div css={trailTextWrapper}>
-											<TrailText
-												trailText={trailText}
-												trailTextColour={palette(
-													'--feature-card-trail-text',
-												)}
-												trailTextSize={'regular'}
-												padBottom={false}
-											/>
-										</div>
-									)}
-									<CardFooter
-										format={format}
-										age={
-											<CardAge
-												webPublicationDate={
-													webPublicationDate
-												}
-												showClock={!!showClock}
-												absoluteServerTimes={
-													absoluteServerTimes
-												}
-											/>
-										}
-										commentCount={
-											<CommentCount
-												linkTo={linkTo}
-												discussionId={discussionId}
-												discussionApiUrl={
-													discussionApiUrl
-												}
-											/>
-										}
-										/**TODO: Determine if this is needed */
-										// cardBranding={
-										// 	branding ? (
-										// 		<CardBranding
-										// 			branding={branding}
-										// 			format={format}
-										// 			onwardsSource={
-										// 				onwardsSource
-										// 			}
-										// 			containerPalette={
-										// 				containerPalette
-										// 			}
-										// 		/>
-										// 	) : undefined
-										// }
-										showLivePlayable={false}
-										mediaType={mainMedia?.type}
-										galleryCount={galleryCount}
-									/>
 								</div>
+								{/* On video article cards, the duration is displayed in the footer */}
+								{!isVideoArticle &&
+								isVideoMainMedia &&
+								videoDuration !== undefined ? (
+									<div css={videoPillStyles}>
+										<Pill
+											content={
+												<time>
+													{secondsToDuration(
+														videoDuration,
+													)}
+												</time>
+											}
+											icon={<SvgMediaControlsPlay />}
+										/>
+									</div>
+								) : null}
 							</div>
 						)}
 					</div>

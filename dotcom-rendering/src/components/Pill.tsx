@@ -17,6 +17,8 @@ interface Props {
 	icon?: ReactElement;
 	/** Optional icon position (icon is on the left by default) */
 	iconSide?: IconSide;
+	/** Optional icon size */
+	iconSize?: 'xsmall' | 'small' | 'medium' | 'large';
 }
 
 const pillStyles = css`
@@ -24,7 +26,7 @@ const pillStyles = css`
 	align-items: center;
 	gap: ${space[1]}px;
 	padding: 0 10px;
-	border-radius: ${space[3]}px;
+	border-radius: ${space[10]}px;
 	${textSansBold12};
 	color: ${palette('--pill-text')};
 	background-color: ${palette('--pill-background')};
@@ -36,6 +38,9 @@ const pillStyles = css`
 
 const pillContentStyles = css`
 	padding: ${space[1]}px 0;
+	display: flex;
+	align-items: center;
+	gap: ${space[1]}px;
 `;
 
 const pillPrefixStyles = css`
@@ -43,26 +48,32 @@ const pillPrefixStyles = css`
 	padding-right: 6px;
 	border-right: 1px solid ${palette('--pill-divider')};
 `;
-
-export const Pill = ({ content, prefix, icon, iconSide = 'left' }: Props) => {
-	const Icon = () =>
-		icon
-			? cloneElement(icon, {
-					size: 'xsmall',
-					theme: { fill: 'currentColor' },
-			  })
-			: null;
+export const Pill = ({
+	content,
+	prefix,
+	icon,
+	iconSide = 'left',
+	iconSize = 'xsmall',
+}: Props) => {
+	const renderedIcon =
+		icon &&
+		cloneElement(icon, {
+			size: iconSize,
+			theme: { fill: 'currentColor' },
+		});
 
 	return (
 		<div css={pillStyles}>
-			{iconSide === 'left' && <Icon />}
+			{iconSide === 'left' && renderedIcon}
 			{!!prefix && (
 				<span css={[pillContentStyles, pillPrefixStyles]}>
 					{prefix}
 				</span>
 			)}
-			<span css={pillContentStyles}>{content}</span>
-			{iconSide === 'right' && <Icon />}
+			<span css={pillContentStyles}>
+				{content}
+				{iconSide === 'right' && renderedIcon}
+			</span>
 		</div>
 	);
 };

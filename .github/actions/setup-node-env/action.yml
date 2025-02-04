@@ -4,6 +4,9 @@ description: 'Sets up Node.js environment and installs dependencies'
 runs:
   using: 'composite'
   steps:
+    - run: npm install --global corepack@0.31.0
+      shell: bash
+
     - run: corepack enable
       shell: bash
 

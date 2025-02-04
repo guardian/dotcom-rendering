@@ -6,9 +6,9 @@ import {
 	headlineMedium20,
 	palette as sourcePalette,
 	space,
-	textSansBold12,
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../../lib/articleFormat';
+import { secondsToDuration } from '../../lib/formatTime';
 import { palette } from '../../palette';
 import type { AspectRatio } from '../../types/front';
 import type {
@@ -18,7 +18,8 @@ import type {
 import { PlayIcon } from '../Card/components/PlayIcon';
 import { FormatBoundary } from '../FormatBoundary';
 import { Kicker } from '../Kicker';
-import { secondsToDuration } from '../MediaDuration';
+import { Pill } from '../Pill';
+import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 import { YoutubeAtomPicture } from './YoutubeAtomPicture';
 
 type Props = {
@@ -72,38 +73,14 @@ const pillStyles = css`
 	position: absolute;
 	top: ${space[2]}px;
 	right: ${space[2]}px;
-	${textSansBold12};
-	color: ${palette('--pill-text')};
-`;
-
-const durationPillStyles = css`
-	background-color: rgba(0, 0, 0, 0.7);
-	border-radius: ${space[3]}px;
-	padding: ${space[1]}px ${space[3]}px;
-	display: inline-flex;
-	line-height: ${space[4]}px;
-`;
-
-const livePillStyles = css`
-	border-radius: ${space[10]}px;
-	padding: ${space[1]}px ${space[2]}px;
-	gap: ${space[2]}px;
-	background-color: ${palette('--pill-background')};
-	display: flex;
-	align-items: center;
 `;
 
 const liveBulletStyles = css`
-	::before {
-		content: '';
-		width: 9px;
-		height: 9px;
-		border-radius: 50%;
-		background-color: ${palette('--pill-bullet')};
-		display: inline-block;
-		position: relative;
-		margin-right: 0.1875rem;
-	}
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	background-color: ${palette('--pill-bullet')};
+	margin-right: ${space[1]}px;
 `;
 
 const textOverlayStyles = css`
@@ -151,7 +128,7 @@ export const YoutubeAtomOverlay = ({
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
 	//** We infer that a video is a livestream if the duration is set to 0. This is a soft contract with Editorial who manual set the duration of videos   */
-	const isLiveStream = duration === 0;
+	const isLiveStream = !isUndefined(duration) && duration === 0;
 	const image = overrideImage ?? posterImage;
 	const hidePillOnMobile =
 		imagePositionOnMobile === 'right' || imagePositionOnMobile === 'left';
@@ -175,8 +152,20 @@ export const YoutubeAtomOverlay = ({
 					/>
 				)}
 				{isLiveStream && (
-					<div css={[pillStyles, livePillStyles, liveBulletStyles]}>
-						Live
+					<div
+						css={
+							hidePillOnMobile
+								? css`
+										display: none;
+								  `
+								: pillStyles
+						}
+					>
+						<Pill
+							content={'Live'}
+							icon={<div css={[liveBulletStyles]} />}
+							iconSize={'small'}
+						/>
 					</div>
 				)}
 				{hasDuration && (
@@ -186,10 +175,14 @@ export const YoutubeAtomOverlay = ({
 								? css`
 										display: none;
 								  `
-								: [pillStyles, durationPillStyles]
+								: pillStyles
 						}
 					>
-						{secondsToDuration(duration)}
+						<Pill
+							content={secondsToDuration(duration)}
+							icon={<SvgMediaControlsPlay />}
+							iconSize={'small'}
+						/>
 					</div>
 				)}
 				<PlayIcon

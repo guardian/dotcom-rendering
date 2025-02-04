@@ -114,23 +114,22 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Get started',
 			newsletters: [
-				'fighting-back',
-				'the-overwhelm',
+				'detox-your-kitchen',
+				'the-stakes-us-election-edition', // This Week in Trumpland
 				'the-long-wave',
-				'the-stakes-us-election-edition',
 				'us-morning-newsletter', // First Thing
-				'trump-on-trial',
+				'the-overwhelm',
+				'fighting-back',
 				'well-actually',
 				'reclaim-your-brain',
-				'today-us', // Headlines US
-				'soccer-with-jonathan-wilson',
+				'trump-on-trial',
 			],
 		},
 		{
 			title: 'In depth',
 			newsletters: [
-				'green-light', // Down to Earth
 				'soccer-with-jonathan-wilson',
+				'green-light', // Down to Earth
 				'follow-mehdi-hasan',
 				'follow-robert-reich',
 				'follow-margaret-sullivan',
@@ -148,7 +147,6 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'film-today',
 				'sleeve-notes',
 				'whats-on',
-				'hear-here',
 				'art-weekly',
 				'design-review',
 				'documentaries',
@@ -190,6 +188,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'In brief',
 			newsletters: [
+				'today-us', // Headlines US
 				'best-of-opinion-us',
 				'today-uk', // Headlines UK
 				'best-of-opinion',

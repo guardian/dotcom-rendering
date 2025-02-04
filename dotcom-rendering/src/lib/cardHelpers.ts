@@ -15,7 +15,6 @@ export const isMediaCard = (format: ArticleFormat): boolean => {
 };
 
 export const cardHasDarkBackground = (
-	format: ArticleFormat,
 	containerPalette?: DCRContainerPalette,
 ): boolean => {
 	switch (containerPalette) {
@@ -38,6 +37,7 @@ export const cardHasDarkBackground = (
 		// Special palettes which act more like standard containers
 		case 'MediaPalette':
 		case 'PodcastPalette':
+
 		// If no containerPalette provided, card is in a standard container
 		case undefined: {
 			return false;

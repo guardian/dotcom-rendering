@@ -50,6 +50,7 @@ const getIconSizeOnDesktop = (imageSize: ImageSizeType) => {
 	switch (imageSize) {
 		case 'jumbo':
 		case 'large':
+		case 'podcast':
 		case 'carousel':
 		case 'medium':
 		case 'feature':
