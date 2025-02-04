@@ -18,10 +18,10 @@ const hasPageId = (body: unknown): body is { pageId: string } => {
 export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 	const headerValue = req.headers['x-gu-xid'];
 	const requestId = Array.isArray(headerValue) ? headerValue[0] : headerValue;
-	const abTests = Object.keys(req.headers)
-		.filter((header) => header.startsWith('x-gu-experiment'))
-		.reduce((acc: { [key: string]: string | undefined }, header) => {
-			acc[header] = req.headers[header] as string | undefined;
+	const abTests = Object.keys(req.cookies)
+		.filter((cookie) => cookie.startsWith('x-gu-experiment'))
+		.reduce((acc: { [key: string]: string | undefined }, cookie) => {
+			acc[cookie] = req.cookies[cookie] as string | undefined;
 			return acc;
 		}, {});
 
