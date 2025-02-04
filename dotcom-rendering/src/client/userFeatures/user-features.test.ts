@@ -1,24 +1,36 @@
+import { getCookie } from '@guardian/libs';
 import type { AuthStatus } from '../../lib/identity';
 import {
 	getAuthStatus as getAuthStatus_,
 	isUserLoggedInOktaRefactor as isUserLoggedInOktaRefactor_,
 } from '../../lib/identity';
-import { getAdFreeCookie, setAdFreeCookie } from './cookies/adFree';
+import { AD_FREE_USER_COOKIE, getAdFreeCookie } from './cookies/adFree';
 import {
-	allowRejectAll,
+	ALLOW_REJECT_ALL_COOKIE,
 	getAllowRejectAllCookie,
-	setAllowRejectAllCookie,
 } from './cookies/allowRejectAll';
-import { setHideSupportMessagingCookie } from './cookies/hideSupportMessaging';
+import {
+	getCookieExpiry,
+	setUserBenefitCookie,
+	timeInDaysFromNow,
+} from './cookies/cookieHelpers';
+import {
+	getHideSupportMessagingCookie,
+	HIDE_SUPPORT_MESSAGING_COOKIE,
+} from './cookies/hideSupportMessaging';
 import {
 	getUserFeaturesExpiryCookie,
-	setUserFeaturesExpiryCookie,
+	USER_FEATURES_EXPIRY_COOKIE,
 } from './cookies/userFeaturesExpiry';
 import { fetchJson } from './fetchJson';
 import { deleteAllCookies, refresh } from './user-features';
 
 const fakeUserBenefits = {
 	benefits: ['adFree', 'hideSupportMessaging'],
+};
+
+const noBenefits = {
+	benefits: [],
 };
 
 jest.mock('./fetchJson', () => {
@@ -47,22 +59,41 @@ const getAuthStatus = getAuthStatus_ as jest.MockedFunction<
 >;
 
 const setAllFeaturesData = (opts: { isExpired: boolean }) => {
-	const currentTime = new Date().getTime();
-	const msInOneDay = 24 * 60 * 60 * 1000;
-	const expiryDate = opts.isExpired
-		? new Date(currentTime - msInOneDay)
-		: new Date(currentTime + msInOneDay);
-
-	setHideSupportMessagingCookie(true);
-	setAdFreeCookie();
-	setAllowRejectAllCookie();
-	setUserFeaturesExpiryCookie(expiryDate.getTime().toString());
+	const daysToExpiry = opts.isExpired ? -1 : 1;
+	setUserBenefitCookie(HIDE_SUPPORT_MESSAGING_COOKIE, daysToExpiry);
+	setUserBenefitCookie(AD_FREE_USER_COOKIE, daysToExpiry);
+	setUserBenefitCookie(ALLOW_REJECT_ALL_COOKIE, daysToExpiry);
+	setUserBenefitCookie(USER_FEATURES_EXPIRY_COOKIE, daysToExpiry);
 };
 
 beforeAll(() => {
 	window.guardian.config.page.userBenefitsApiUrl = 'fake-url';
 	window.guardian.config.tests['useUserBenefitsApiVariant'] = 'variant';
 });
+
+const expectUserFeatureExpiryCookieHasBeenSetCorrectly = () => {
+	const expectedNextRefreshDate = new Date(
+		timeInDaysFromNow(1),
+	).toDateString();
+	expect(
+		new Date(
+			getCookieExpiry(USER_FEATURES_EXPIRY_COOKIE) ?? 0,
+		).toDateString(),
+	).toEqual(expectedNextRefreshDate);
+};
+
+const expectAllBenefitsCookiesToBeDeleted = () => {
+	expect(getAdFreeCookie()).toBeNull();
+	expect(getHideSupportMessagingCookie()).toBeNull();
+	expect(getAllowRejectAllCookie()).toBeNull();
+};
+
+const expectAllCookiesToBeSet = () => {
+	expect(getAdFreeCookie()).toBeTruthy();
+	expect(getHideSupportMessagingCookie()).toBeTruthy();
+	expect(getAllowRejectAllCookie()).toBeTruthy();
+	expectUserFeatureExpiryCookieHasBeenSetCorrectly();
+};
 
 describe('Refreshing the features data', () => {
 	describe('If user signed in', () => {
@@ -79,6 +110,7 @@ describe('Refreshing the features data', () => {
 			deleteAllCookies();
 			await refresh();
 			expect(fetchJsonSpy).toHaveBeenCalledTimes(1);
+			expectUserFeatureExpiryCookieHasBeenSetCorrectly();
 		});
 
 		it('Performs an update if the user has expired data', async () => {
@@ -87,16 +119,26 @@ describe('Refreshing the features data', () => {
 			expect(fetchJsonSpy).toHaveBeenCalledTimes(1);
 		});
 
-		it('Does not delete the data just because it has expired', async () => {
-			setAllFeaturesData({ isExpired: true });
+		it(
+			'Deletes all expired user benefits cookies if the api response does not contain the benefit, ' +
+				'but does not delete the user features expiry cookie (so we know when next to check for benefits)',
+			async () => {
+				fetchJsonSpy.mockReturnValueOnce(Promise.resolve(noBenefits));
+				setAllFeaturesData({ isExpired: true });
+				await refresh();
+				expectAllBenefitsCookiesToBeDeleted();
+				expectUserFeatureExpiryCookieHasBeenSetCorrectly();
+			},
+		);
+
+		it('Does not delete non-expired user benefits cookies even if the api response does not contain the benefit', async () => {
+			fetchJsonSpy.mockReturnValueOnce(Promise.resolve(noBenefits));
+			setAllFeaturesData({ isExpired: false });
 			await refresh();
-			expect(getUserFeaturesExpiryCookie()).toEqual(
-				expect.stringMatching(/\d{13}/),
-			);
-			expect(getAdFreeCookie()).toEqual(expect.stringMatching(/\d{13}/));
+			expectAllCookiesToBeSet();
 		});
 
-		it('Does not perform update if user has fresh feature data', async () => {
+		it('Does not perform an update if user has non-expired feature data', async () => {
 			setAllFeaturesData({ isExpired: false });
 			await refresh();
 			expect(fetchJsonSpy).not.toHaveBeenCalled();
@@ -107,110 +149,77 @@ describe('If user signed out', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
 		isUserLoggedInOktaRefactor.mockResolvedValue(false);
-		fetchJsonSpy.mockReturnValue(Promise.resolve());
+		fetchJsonSpy.mockReturnValue(Promise.resolve(noBenefits));
 	});
 
-	it('Does not perform update, even if feature data missing', async () => {
+	it('Does not perform update, even if benefit data missing', async () => {
 		deleteAllCookies();
 		await refresh();
 		expect(fetchJsonSpy).not.toHaveBeenCalled();
 	});
 
-	it('Deletes leftover feature data', async () => {
+	it('Does not delete non-expired user benefits cookies', async () => {
 		setAllFeaturesData({ isExpired: false });
 		await refresh();
-		expect(getAdFreeCookie()).toBeNull();
+		expectAllCookiesToBeSet();
+	});
+
+	it('Does delete expired user benefits cookies', async () => {
+		setAllFeaturesData({ isExpired: true });
+		await refresh();
+		expectAllBenefitsCookiesToBeDeleted();
 		expect(getUserFeaturesExpiryCookie()).toBeNull();
 	});
 });
 
-describe('Storing new feature data', () => {
-	beforeEach(() => {
+describe('Benefit to cookie mapping', () => {
+	type BenefitMapping = {
+		benefit: string;
+		cookie: string;
+	};
+	const allBenefits = [
+		{ benefit: 'adFree', cookie: AD_FREE_USER_COOKIE },
+		{
+			benefit: 'hideSupportMessaging',
+			cookie: HIDE_SUPPORT_MESSAGING_COOKIE,
+		},
+		{ benefit: 'allowRejectAll', cookie: ALLOW_REJECT_ALL_COOKIE },
+	];
+
+	const mappingIsCorrect = async (
+		currentElement: BenefitMapping,
+		otherElements: BenefitMapping[],
+	) => {
 		jest.resetAllMocks();
-		fetchJsonSpy.mockReturnValue(Promise.resolve(fakeUserBenefits));
 		deleteAllCookies();
 		isUserLoggedInOktaRefactor.mockResolvedValue(true);
 		getAuthStatus.mockResolvedValue({
 			kind: 'SignedInWithOkta',
 		} as AuthStatus);
-	});
 
-	it('Puts the ad-free state in appropriate cookie', () => {
+		// Mock the fetchJson function to return the current benefit only
 		fetchJsonSpy.mockReturnValueOnce(
 			Promise.resolve({
-				benefits: [],
+				benefits: [currentElement.benefit],
 			}),
 		);
-		return refresh().then(() => {
-			expect(getAdFreeCookie()).toBeNull();
-		});
+		await refresh();
+		// Check that the cookie is set for the current benefit
+		expect(getCookieExpiry(currentElement.cookie)).toBeTruthy();
+		// Check that cookies are not set for other benefits
+		for (const otherElement of otherElements) {
+			expect(getCookie({ name: otherElement.cookie })).toBeNull();
+		}
+	};
+
+	it('Sets all cookies correctly', async () => {
+		for (const currentElement of allBenefits) {
+			const index = allBenefits.indexOf(currentElement);
+			const otherElements = [
+				...allBenefits.slice(0, index),
+				...allBenefits.slice(index + 1),
+			];
+			await mappingIsCorrect(currentElement, otherElements);
+		}
 	});
-
-	it('Puts the ad-free state in appropriate cookie', () => {
-		fetchJsonSpy.mockReturnValueOnce(
-			Promise.resolve({
-				benefits: ['adFree'],
-			}),
-		);
-		return refresh().then(() => {
-			expect(getAdFreeCookie()).toBeTruthy();
-			expect(
-				Number.isNaN(
-					parseInt(
-						// @ts-expect-error -- we’re testing it
-						getAdFreeCookie(),
-						10,
-					),
-				),
-			).toBe(false);
-		});
-	});
-
-	it('Puts the allowRejectAll state in appropriate cookie', () => {
-		fetchJsonSpy.mockReturnValueOnce(
-			Promise.resolve({
-				benefits: [],
-			}),
-		);
-		return refresh().then(() => {
-			expect(getAllowRejectAllCookie()).toBeNull();
-		});
-	});
-
-	it('Puts the allowRejectAll state in appropriate cookie', () => {
-		fetchJsonSpy.mockReturnValueOnce(
-			Promise.resolve({
-				benefits: ['allowRejectAll'],
-			}),
-		);
-		return refresh().then(() => {
-			expect(allowRejectAll()).toBe(true);
-			expect(
-				Number.isNaN(
-					parseInt(
-						// @ts-expect-error -- we’re testing it
-						getAllowRejectAllCookie(),
-						10,
-					),
-				),
-			).toBe(false);
-		});
-	});
-
-	it('Puts an expiry date in an accompanying cookie', () =>
-		refresh().then(() => {
-			const expiryDate = getUserFeaturesExpiryCookie();
-			expect(expiryDate).toBeTruthy();
-			// @ts-expect-error -- we’re testing it
-			expect(Number.isNaN(parseInt(expiryDate, 10))).toBe(false);
-		}));
-
-	it('The expiry date is in the future', () =>
-		refresh().then(() => {
-			const expiryDateString = getUserFeaturesExpiryCookie();
-			// @ts-expect-error -- we’re testing it
-			const expiryDateEpoch = parseInt(expiryDateString, 10);
-			const currentTimeEpoch = new Date().getTime();
-			expect(currentTimeEpoch < expiryDateEpoch).toBe(true);
-		}));
 });

@@ -1,16 +1,7 @@
 import { getCookie, removeCookie, setCookie, storage } from '@guardian/libs';
-import {
-	HIDE_SUPPORT_MESSAGING_COOKIE,
-	RECURRING_CONTRIBUTOR_COOKIE,
-	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
-} from './contributions';
+import { deleteAllCookies } from '../client/userFeatures/user-features';
+import { SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE } from './contributions';
 import { getLocaleCode } from './getCountryCode';
-
-const readerRevenueCookies = [
-	HIDE_SUPPORT_MESSAGING_COOKIE,
-	RECURRING_CONTRIBUTOR_COOKIE,
-	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
-];
 
 const clearEpicViewLog = (): void =>
 	storage.local.remove('gu.contributions.views');
@@ -73,7 +64,7 @@ const clearCommonReaderRevenueStateAndReload = (
 		return;
 	}
 
-	for (const cookie of readerRevenueCookies) removeCookie({ name: cookie });
+	deleteAllCookies();
 	clearEpicViewLog();
 
 	if (asExistingSupporter) {
