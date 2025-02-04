@@ -6,20 +6,9 @@ import {
 } from '@guardian/source/react-components';
 import type { ReactComponent } from '../lib/ReactComponent';
 
-// const baseUrl = 'https://support.theguardian.com/contribute';
-
 // CSS Styling
 // -------------------------------------------
 
-// outer container
-// const stickyLeft = css`
-// 	background: ${palette.neutral[100]};
-// 	position: sticky;
-// 	top: ${space[3]}px;
-// 	width: 220px;
-// 	margin-left: ${space[5]}px;
-// 	margin-top: ${space[6]}px;
-// `;
 const container = css`
 	background: ${palette.neutral[100]};
 	width: 220px;
