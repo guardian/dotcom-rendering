@@ -5,6 +5,7 @@ import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
 import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.importable';
 import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
+import { PlayIcon } from '../components/Card/components/PlayIcon';
 import { CartoonComponent } from '../components/CartoonComponent';
 import { ChartAtom } from '../components/ChartAtom.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
@@ -855,6 +856,12 @@ export const renderElement = ({
 						origin={host}
 						stickyVideos={!!(isBlog && switches.stickyVideos)}
 						enableAds={true}
+						playIcon={
+							<PlayIcon
+								imageSize="large"
+								iconSizeOnMobile="large"
+							/>
+						}
 					/>
 				</Island>
 			);

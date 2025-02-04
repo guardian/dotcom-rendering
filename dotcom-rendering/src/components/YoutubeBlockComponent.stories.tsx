@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { PlayIcon } from './Card/components/PlayIcon';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { RightColumn } from './RightColumn';
@@ -54,6 +55,9 @@ export const Default = () => {
 				expired={false}
 				stickyVideos={false}
 				enableAds={false}
+				playIcon={
+					<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+				}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -90,6 +94,9 @@ export const Vertical = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
+				playIcon={
+					<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+				}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -127,6 +134,9 @@ export const Expired = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
+				playIcon={
+					<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+				}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -165,6 +175,9 @@ export const WithOverlayImage = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
+				playIcon={
+					<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+				}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -224,6 +237,9 @@ export const WithPosterImage = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
+				playIcon={
+					<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+				}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -284,6 +300,9 @@ export const WithPosterAndOverlayImage = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
+				playIcon={
+					<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+				}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -344,6 +363,9 @@ export const WithShowMainVideoFlagOff = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
+				playIcon={
+					<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+				}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

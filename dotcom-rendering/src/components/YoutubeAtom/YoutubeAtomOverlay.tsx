@@ -7,15 +7,11 @@ import {
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
+import type { ReactElement } from 'react';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import { secondsToDuration } from '../../lib/formatTime';
 import { palette } from '../../palette';
 import type { AspectRatio } from '../../types/front';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from '../Card/components/ImageWrapper';
-import { PlayIcon } from '../Card/components/PlayIcon';
 import { FormatBoundary } from '../FormatBoundary';
 import { Kicker } from '../Kicker';
 import { Pill } from '../Pill';
@@ -35,8 +31,8 @@ type Props = {
 	kicker?: string;
 	format: ArticleFormat;
 	showTextOverlay?: boolean;
-	imageSize: ImageSizeType;
-	imagePositionOnMobile: ImagePositionType;
+	playIcon: ReactElement;
+	hidePillOnMobile: boolean;
 	aspectRatio?: AspectRatio;
 };
 
@@ -121,17 +117,18 @@ export const YoutubeAtomOverlay = ({
 	kicker,
 	format,
 	showTextOverlay,
-	imageSize,
-	imagePositionOnMobile,
+	playIcon,
+	hidePillOnMobile,
 	aspectRatio,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
-	//** We infer that a video is a livestream if the duration is set to 0. This is a soft contract with Editorial who manual set the duration of videos   */
+	/**
+	 * We infer that a video is a livestream if the duration is set to 0. This is
+	 * a soft contract with Editorial who manual set the duration of videos
+	 */
 	const isLiveStream = !isUndefined(duration) && duration === 0;
 	const image = overrideImage ?? posterImage;
-	const hidePillOnMobile =
-		imagePositionOnMobile === 'right' || imagePositionOnMobile === 'left';
 
 	return (
 		<FormatBoundary format={format}>
@@ -162,9 +159,9 @@ export const YoutubeAtomOverlay = ({
 						}
 					>
 						<Pill
-							content={'Live'}
+							content="Live"
 							icon={<div css={[liveBulletStyles]} />}
-							iconSize={'small'}
+							iconSize="small"
 						/>
 					</div>
 				)}
@@ -181,14 +178,11 @@ export const YoutubeAtomOverlay = ({
 						<Pill
 							content={secondsToDuration(duration)}
 							icon={<SvgMediaControlsPlay />}
-							iconSize={'small'}
+							iconSize="small"
 						/>
 					</div>
 				)}
-				<PlayIcon
-					imageSize={imageSize}
-					imagePositionOnMobile={imagePositionOnMobile}
-				/>
+				{playIcon}
 				{showTextOverlay && (
 					<div css={textOverlayStyles}>
 						{!!kicker && (
