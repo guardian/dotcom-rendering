@@ -18,7 +18,6 @@ const hasPageId = (body: unknown): body is { pageId: string } => {
 export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 	const headerValue = req.headers['x-gu-xid'];
 	const requestId = Array.isArray(headerValue) ? headerValue[0] : headerValue;
-
 	const loggerState = {
 		request: {
 			pageId: hasPageId(req.body) ? req.body.pageId : 'no-page-id-found',
@@ -27,7 +26,7 @@ export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 		},
 		fastlyRequestId: requestId ?? 'fastly-id-not-provided',
 		timing: {},
-		abTests: req.body.abTests,
+		abTests: JSON.stringify(req.body.config.abTests),
 	};
 
 	res.on('finish', () => {

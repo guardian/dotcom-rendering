@@ -20,7 +20,7 @@ type DCRLoggingStore = {
 		platform?: string;
 	};
 	fastlyRequestId: string;
-	abTests: { [key: string]: string | string[] | undefined };
+	abTests: string;
 	error?: {
 		message?: string;
 		stack?: string;
