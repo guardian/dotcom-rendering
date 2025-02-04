@@ -6512,6 +6512,10 @@ const paletteColours = {
 		light: () => sourcePalette.error[400],
 		dark: () => sourcePalette.error[500],
 	},
+	'--football-match-list-live-status': {
+		light: () => sourcePalette.sport[500],
+		dark: () => sourcePalette.sport[500],
+	},
 	'--football-match-list-sub-text': {
 		light: () => sourcePalette.neutral[46],
 		dark: () => sourcePalette.neutral[73],
