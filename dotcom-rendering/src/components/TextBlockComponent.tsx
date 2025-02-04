@@ -266,7 +266,10 @@ const buildElementTree =
 						getAttrs(node)?.getNamedItem('data-link-name')?.value,
 					'data-component':
 						getAttrs(node)?.getNamedItem('data-component')?.value,
-					/** Skimlinks are forced to have the rel attribute set to "sponsored" in case it is not set correctly */
+					/**
+					 * Affiliate links must have the rel attribute set to "sponsored"
+					 * @see https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links
+					 */
 					rel: isSkimlink
 						? 'sponsored'
 						: getAttrs(node)?.getNamedItem('rel')?.value,
