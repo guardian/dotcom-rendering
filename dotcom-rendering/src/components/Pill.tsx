@@ -48,7 +48,6 @@ const pillPrefixStyles = css`
 	padding-right: 6px;
 	border-right: 1px solid ${palette('--pill-divider')};
 `;
-
 export const Pill = ({
 	content,
 	prefix,
@@ -56,16 +55,16 @@ export const Pill = ({
 	iconSide = 'left',
 	iconSize = 'xsmall',
 }: Props) => {
-	const Icon = () =>
-		icon
-			? cloneElement(icon, {
-					size: iconSize,
-					theme: { fill: 'currentColor' },
-			  })
-			: null;
+	const renderedIcon =
+		icon &&
+		cloneElement(icon, {
+			size: iconSize,
+			theme: { fill: 'currentColor' },
+		});
+
 	return (
 		<div css={pillStyles}>
-			{iconSide === 'left' && <Icon />}
+			{iconSide === 'left' && renderedIcon}
 			{!!prefix && (
 				<span css={[pillContentStyles, pillPrefixStyles]}>
 					{prefix}
@@ -73,7 +72,7 @@ export const Pill = ({
 			)}
 			<span css={pillContentStyles}>
 				{content}
-				{iconSide === 'right' && <Icon />}
+				{iconSide === 'right' && renderedIcon}
 			</span>
 		</div>
 	);

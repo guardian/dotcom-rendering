@@ -1,0 +1,100 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { userEvent, within } from '@storybook/test';
+import type { FootballMatches } from '../footballMatches';
+import { error, ok } from '../lib/result';
+import { FootballMatchList } from './FootballMatchList';
+
+const meta = {
+	title: 'Components/Football Match List',
+	component: FootballMatchList,
+	decorators: [
+		// To make it easier to see the top border above the date
+		(Story) => (
+			<>
+				<div css={{ padding: 4 }}></div>
+				<Story />
+			</>
+		),
+	],
+} satisfies Meta<typeof FootballMatchList>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+const initialDays: FootballMatches = [
+	{
+		date: new Date('2025-01-24T00:00:00Z'),
+		competitions: [
+			{
+				competitionId: '635',
+				name: 'Serie A',
+				nation: 'European',
+				matches: [
+					{
+						kind: 'Live',
+						dateTime: new Date('2025-01-24T11:11:00Z'),
+						paId: '4482093',
+						homeTeam: {
+							name: 'Torino',
+							score: 10,
+						},
+						awayTeam: {
+							name: 'Cagliari',
+							score: 0,
+						},
+						status: 'FT',
+					},
+					{
+						kind: 'Fixture',
+						dateTime: new Date('2025-01-24T19:45:00Z'),
+						paId: '4482890',
+						homeTeam: 'Auxerre',
+						awayTeam: 'St Etienne',
+					},
+				],
+			},
+			{
+				competitionId: '650',
+				name: 'La Liga',
+				nation: 'European',
+				matches: [
+					{
+						kind: 'Result',
+						dateTime: new Date('2025-01-24T20:00:00Z'),
+						paId: '4482835',
+						homeTeam: {
+							name: 'Las Palmas',
+							score: 2,
+						},
+						awayTeam: {
+							name: 'Osasuna',
+							score: 3,
+						},
+					},
+				],
+			},
+		],
+	},
+];
+
+export const Default = {
+	args: {
+		edition: 'UK',
+		initialDays,
+		getMoreDays: () => Promise.resolve(ok(initialDays)),
+	},
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement);
+		const more = canvas.getByRole('button');
+		await userEvent.click(more);
+	},
+} satisfies Story;
+
+export const ErrorGettingMore = {
+	args: {
+		...Default.args,
+		getMoreDays: () => Promise.resolve(error('failed')),
+	},
+	play: Default.play,
+} satisfies Story;

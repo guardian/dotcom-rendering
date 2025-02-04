@@ -5508,9 +5508,6 @@ const highlightsCardKickerText: PaletteFunction = (format) => {
 			return sourcePalette.specialReportAlt[200];
 	}
 };
-const highlightsCardAudioIcon: PaletteFunction = () => sourcePalette.brand[100];
-const highlightsCardAudioText: PaletteFunction = () =>
-	sourcePalette.neutral[20];
 
 const pinnedPostBorderLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
@@ -6485,6 +6482,26 @@ const paletteColours = {
 		light: followTextLight,
 		dark: followTextDark,
 	},
+	'--football-match-list-background': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--football-match-list-border': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[38],
+	},
+	'--football-match-list-competition-text': {
+		light: () => sourcePalette.sport[300],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--football-match-list-error': {
+		light: () => sourcePalette.error[400],
+		dark: () => sourcePalette.error[500],
+	},
+	'--football-match-list-top-border': {
+		light: () => sourcePalette.sport[500],
+		dark: () => sourcePalette.neutral[60],
+	},
 	'--front-container-background': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[10],
@@ -6521,14 +6538,6 @@ const paletteColours = {
 	'--headline-match-colour': {
 		light: headlineMatchTextLight,
 		dark: headlineMatchTextDark,
-	},
-	'--highlight-card-audio-icon': {
-		light: highlightsCardAudioIcon,
-		dark: highlightsCardAudioIcon,
-	},
-	'--highlight-card-audio-text': {
-		light: highlightsCardAudioText,
-		dark: highlightsCardAudioText,
 	},
 	'--highlights-card-headline': {
 		light: highlightsCardHeadline,

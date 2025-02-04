@@ -8,11 +8,12 @@ import {
 } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
+import { ophanComponentId } from '../lib/ophan-helpers';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
 
-type Props = { trails: DCRFrontCard[] };
+type Props = { trails: DCRFrontCard[]; frontId?: string };
 
 const containerStyles = css`
 	${from.tablet} {
@@ -160,7 +161,22 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 	`;
 };
 
-export const ScrollableHighlights = ({ trails }: Props) => {
+/**
+ * Typically, Ophan tracking data gets determined in the front layout component.
+ * As the highlights exists outside of this front layout (in the header), we need to construct these fields here.
+ * */
+const getOphanInfo = (frontId?: string) => {
+	const ophanComponentName = ophanComponentId('highlights');
+	const ophanComponentLink = `container-${0} | ${ophanComponentName}`;
+	const ophanFrontName = `Front | /${frontId}`;
+	return {
+		ophanComponentName,
+		ophanComponentLink,
+		ophanFrontName,
+	};
+};
+
+export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
 	const imageLoading = 'eager';
@@ -232,10 +248,15 @@ export const ScrollableHighlights = ({ trails }: Props) => {
 		);
 	}, []);
 
+	const { ophanComponentLink, ophanComponentName, ophanFrontName } =
+		getOphanInfo(frontId);
+
 	return (
-		<div css={containerStyles}>
+		<div css={containerStyles} data-link-name={ophanFrontName}>
 			<ol
-				data-component="home-highlights"
+				data-link-name={ophanComponentLink}
+				data-component={ophanComponentName}
+				data-container-name={'scrollable/highlights'}
 				ref={carouselRef}
 				css={[
 					carouselStyles,
@@ -265,6 +286,7 @@ export const ScrollableHighlights = ({ trails }: Props) => {
 								starRating={trail.starRating}
 								galleryCount={trail.galleryCount}
 								audioDuration={trail.audioDuration}
+								podcastImage={trail.podcastImage}
 							/>
 						</li>
 					);

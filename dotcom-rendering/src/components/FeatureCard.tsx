@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
 import { Link, SvgMediaControlsPlay } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
-import { secondsToDuration } from '../lib/formatTime';
+import { isWithinTwelveHours, secondsToDuration } from '../lib/formatTime';
 import { getZIndex } from '../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../lib/useCommentCount';
 import { palette } from '../palette';
@@ -218,14 +218,6 @@ const getMedia = ({
 	return undefined;
 };
 
-export const isWithinTwelveHours = (webPublicationDate: string): boolean => {
-	const timeDiffMs = Math.abs(
-		new Date().getTime() - new Date(webPublicationDate).getTime(),
-	);
-	const timeDiffHours = timeDiffMs / (1000 * 60 * 60);
-	return timeDiffHours <= 12;
-};
-
 const CardAge = ({
 	showClock,
 	absoluteServerTimes,
@@ -238,18 +230,21 @@ const CardAge = ({
 	if (!webPublicationDate) return undefined;
 	const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
 
-	return (
-		<AgeStamp
-			webPublication={{
-				date: webPublicationDate,
-				isWithinTwelveHours: withinTwelveHours,
-			}}
-			showClock={showClock}
-			absoluteServerTimes={absoluteServerTimes}
-			isTagPage={false}
-			colour={palette('--feature-card-footer-text')}
-		/>
-	);
+	if (withinTwelveHours) {
+		return (
+			<AgeStamp
+				webPublication={{
+					date: webPublicationDate,
+					isWithinTwelveHours: true,
+				}}
+				showClock={showClock}
+				absoluteServerTimes={absoluteServerTimes}
+				isTagPage={false}
+				colour={palette('--feature-card-footer-text')}
+			/>
+		);
+	}
+	return <></>;
 };
 
 const CommentCount = ({
