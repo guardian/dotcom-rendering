@@ -22,7 +22,7 @@ const cmpAcceptAll = async (page: Page, rootIframe?: string): Promise<void> => {
 		.locator(CMP_LAYER1_ACCEPT_ALL_BUTTON);
 	await acceptAllButton.click();
 	// wait for consent settings to apply
-	await new Promise((r) => setTimeout(r, 10000));
+	await new Promise((r) => setTimeout(r, 2000));
 };
 
 /**
@@ -38,7 +38,7 @@ const cmpRejectAll = async (page: Page): Promise<void> => {
 		.locator(CMP_LAYER2_REJECT_ALL_BUTTON);
 	await rejectAllButton.click();
 	// wait for consent settings to apply
-	await new Promise((r) => setTimeout(r, 10000));
+	await new Promise((r) => setTimeout(r, 2000));
 };
 
 const allowRejectAll = (context: BrowserContext): Promise<void> => {
