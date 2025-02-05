@@ -156,36 +156,79 @@ const MatchStatus = ({
 	}
 };
 
+function shouldRenderMatchLink(match: FootballMatch, now: Date) {
+	return match.dateTime.getTime() - now.getTime() <= 72 * 60 * 60 * 1000;
+}
+
+const matchListItemStyles = css`
+	background-color: ${palette('--football-match-list-background')};
+	border: 1px solid ${palette('--football-match-list-border')};
+
+	${from.leftCol} {
+		&:first-of-type {
+			border-top-color: ${palette('--football-match-list-top-border')};
+		}
+	}
+`;
+
+const matchStyles = (matchKind: FootballMatch['kind']) => css`
+	${textSans14}
+
+	${matchKind === 'Live' ? 'font-weight: bold;' : undefined}
+
+	display: flex;
+	flex-wrap: wrap;
+	text-decoration: none;
+	padding: ${space[2]}px;
+`;
+
+const MatchWrapper = ({
+	match,
+	now,
+	children,
+}: {
+	match: FootballMatch;
+	now: Date;
+	children: ReactNode;
+}) => {
+	if (shouldRenderMatchLink(match, now)) {
+		return (
+			<li css={matchListItemStyles}>
+				<a
+					href={`https://football.theguardian.com/match-redirect/${match.paId}`}
+					css={[
+						matchStyles(match.kind),
+						css`
+							color: inherit;
+							:hover {
+								background-color: ${palette(
+									'--football-match-hover',
+								)};
+							}
+						`,
+					]}
+				>
+					{children}
+				</a>
+			</li>
+		);
+	}
+
+	return (
+		<li css={[matchListItemStyles, matchStyles(match.kind)]}>{children}</li>
+	);
+};
+
 const Match = ({
 	match,
 	timeFormatter,
+	now,
 }: {
 	match: FootballMatch;
 	timeFormatter: Intl.DateTimeFormat;
+	now: Date;
 }) => (
-	<li
-		css={[
-			css`
-				${textSans14}
-				background-color: ${palette(
-					'--football-match-list-background',
-				)};
-				padding: ${space[2]}px;
-				display: flex;
-				border: 1px solid ${palette('--football-match-list-border')};
-				flex-wrap: wrap;
-				${match.kind === 'Live' ? 'font-weight: bold;' : undefined}
-
-				${from.leftCol} {
-					&:first-of-type {
-						border-top-color: ${palette(
-							'--football-match-list-top-border',
-						)};
-					}
-				}
-			`,
-		]}
-	>
+	<MatchWrapper match={match} now={now}>
 		<MatchStatus match={match} timeFormatter={timeFormatter} />
 		{match.kind === 'Fixture' ? (
 			<>
@@ -220,7 +263,7 @@ const Match = ({
 				)}
 			</>
 		)}
-	</li>
+	</MatchWrapper>
 );
 
 const HomeTeam = (props: { children: ReactNode }) => (
@@ -315,6 +358,7 @@ export const FootballMatchList = ({
 
 	const [days, setDays] = useState(initialDays);
 	const [isError, setIsError] = useState<boolean>(false);
+	const now = new Date();
 
 	return (
 		<>
@@ -332,6 +376,7 @@ export const FootballMatchList = ({
 										key={match.paId}
 										match={match}
 										timeFormatter={timeFormatter}
+										now={now}
 									/>
 								))}
 							</Matches>
