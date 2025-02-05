@@ -6496,6 +6496,10 @@ const paletteColours = {
 		light: followTextLight,
 		dark: followTextDark,
 	},
+	'--football-match-hover': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[38],
+	},
 	'--football-match-list-background': {
 		light: () => sourcePalette.neutral[97],
 		dark: () => sourcePalette.neutral[20],
