@@ -50,7 +50,6 @@ export const ScrollableFeature = ({
 							showPulsingDot={
 								card.format.design === ArticleDesign.LiveBlog
 							}
-							/** TODO - implement show age */
 							showClock={false}
 							image={card.image}
 							canPlayInline={true}
@@ -71,6 +70,9 @@ export const ScrollableFeature = ({
 								tablet: 'xxsmall',
 								mobile: 'xsmall',
 							}}
+							galleryCount={card.galleryCount}
+							podcastImage={card.podcastImage}
+							audioDuration={card.audioDuration}
 						/>
 					</ScrollableCarousel.Item>
 				);

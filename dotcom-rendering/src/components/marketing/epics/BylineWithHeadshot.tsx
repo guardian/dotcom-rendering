@@ -26,14 +26,14 @@ const bylineWithImageContainer = css`
 `;
 
 const bylineCopyContainer = css`
-	width: 70%;
+	width: 50%;
 	position: absolute;
 	bottom: 20px;
 	left: 0;
 `;
 
 const bylineImageContainer = css`
-	max-width: 30%;
+	max-width: 50%;
 	height: 100%;
 	position: absolute;
 	top: 0;

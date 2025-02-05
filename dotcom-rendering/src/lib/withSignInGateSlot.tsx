@@ -20,6 +20,7 @@ type Props = {
 	switches: Switches;
 	isSensitive?: boolean;
 	isDev?: boolean;
+	contributionsServiceUrl: string;
 };
 
 export const withSignInGateSlot = ({
@@ -33,6 +34,7 @@ export const withSignInGateSlot = ({
 	pageId,
 	idUrl,
 	switches,
+	contributionsServiceUrl,
 }: Props): React.ReactNode => {
 	return renderedElements.map((element, i) => {
 		return (
@@ -52,6 +54,9 @@ export const withSignInGateSlot = ({
 								pageId={pageId}
 								idUrl={idUrl}
 								switches={switches}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
 							/>
 						</Island>
 					</div>

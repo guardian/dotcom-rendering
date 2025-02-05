@@ -9,6 +9,8 @@ const padding = 20;
 
 export type GapSize = 'none' | 'tiny' | 'small' | 'medium' | 'large';
 
+export type GapSizes = { row: GapSize; column: GapSize };
+
 type Props = {
 	children: React.ReactNode;
 	cardBackgroundColour: string;
@@ -17,7 +19,8 @@ type Props = {
 	imagePositionOnMobile: ImagePositionType;
 	minWidthInPixels?: number;
 	containerType?: DCRContainerType;
-	gapSize?: GapSize;
+	gapSizes: GapSizes;
+	isBetaContainer: boolean;
 };
 
 const containerStyles = css`
@@ -65,6 +68,7 @@ const minWidth = (minWidthInPixels?: number) => {
 const decideDirection = (
 	imagePositionOnMobile: ImagePositionType,
 	imagePositionOnDesktop: ImagePositionType,
+	isBetaContainer: boolean,
 	hasAvatar?: boolean,
 ) => {
 	const imagePosition = {
@@ -74,7 +78,6 @@ const decideDirection = (
 		right: 'row-reverse',
 		none: 'column',
 	};
-
 	if (hasAvatar) {
 		if (
 			imagePositionOnMobile === 'bottom' &&
@@ -90,18 +93,26 @@ const decideDirection = (
 			imagePositionOnDesktop === 'left' ||
 			imagePositionOnDesktop === 'right'
 		) {
+			if (isBetaContainer && imagePositionOnMobile === 'bottom') {
+				return {
+					mobile: imagePosition['bottom'],
+					desktop: imagePosition['right'],
+				};
+			}
 			return {
 				mobile: imagePosition['right'],
 				desktop: imagePosition['right'],
 			};
 		}
 
+		// Default case for avatar: Mobile right, Desktop bottom
 		return {
 			mobile: imagePosition['right'],
 			desktop: imagePosition['bottom'],
 		};
 	}
 
+	// Handle cases without an avatar
 	return {
 		mobile: imagePosition[imagePositionOnMobile],
 		desktop: imagePosition[imagePositionOnDesktop],
@@ -111,11 +122,13 @@ const decideDirection = (
 const decidePosition = (
 	imagePositionOnMobile: ImagePositionType,
 	imagePositionOnDesktop: ImagePositionType,
+	isFairgroundContainer: boolean,
 	hasAvatar?: boolean,
 ) => {
 	const { mobile, desktop } = decideDirection(
 		imagePositionOnMobile,
 		imagePositionOnDesktop,
+		isFairgroundContainer,
 		hasAvatar,
 	);
 
@@ -151,25 +164,30 @@ export const CardLayout = ({
 	minWidthInPixels,
 	imageType,
 	containerType,
-	gapSize = 'small',
-}: Props) => (
-	<div
-		css={[
-			containerStyles,
-			containerType === 'fixed/video'
-				? videoWidth
-				: minWidth(minWidthInPixels),
-			decidePosition(
-				imagePositionOnMobile,
-				imagePositionOnDesktop,
-				imageType === 'avatar',
-			),
-		]}
-		style={{
-			backgroundColor: cardBackgroundColour,
-			gap: decideGap(gapSize),
-		}}
-	>
-		{children}
-	</div>
-);
+	gapSizes,
+	isBetaContainer,
+}: Props) => {
+	return (
+		<div
+			css={[
+				containerStyles,
+				containerType === 'fixed/video'
+					? videoWidth
+					: minWidth(minWidthInPixels),
+				decidePosition(
+					imagePositionOnMobile,
+					imagePositionOnDesktop,
+					isBetaContainer,
+					imageType === 'avatar',
+				),
+			]}
+			style={{
+				backgroundColor: cardBackgroundColour,
+				rowGap: decideGap(gapSizes.row),
+				columnGap: decideGap(gapSizes.column),
+			}}
+		>
+			{children}
+		</div>
+	);
+};

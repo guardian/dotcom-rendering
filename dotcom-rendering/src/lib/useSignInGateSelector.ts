@@ -2,7 +2,7 @@ import type { ABTest, Runnable } from '@guardian/ab-core';
 import {
 	signInGateTests,
 	signInGateTestVariantToGateMapping,
-} from '../components/SignInGate/signInGate';
+} from '../components/SignInGate/signInGateMappings';
 import type {
 	CurrentSignInGateABTest,
 	SignInGateComponent,

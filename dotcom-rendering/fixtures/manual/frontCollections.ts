@@ -10,217 +10,203 @@ const defaultGrouped = {
 	standard: [],
 };
 
-const testCollectionsUk: Pick<
-	DCRCollectionType,
-	'collectionType' | 'containerPalette' | 'displayName' | 'grouped'
->[] = [
+const defaultValues = {
+	backfill: [],
+	collectionType: 'fixed/small/slow-IV',
+	config: {
+		showDateHeader: false,
+	},
+	curated: [],
+	displayName: 'Display name',
+	id: 'container-id',
+	treats: [],
+	grouped: defaultGrouped,
+} satisfies DCRCollectionType;
+
+export const testCollectionsUk = [
 	{
+		...defaultValues,
 		collectionType: 'dynamic/package',
 		containerPalette: 'EventPalette',
 		displayName: 'Israel-Hamas war',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'dynamic/fast',
-		containerPalette: undefined,
 		displayName: 'Headlines',
 		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/small/slow-IV',
 		containerPalette: 'LongRunningAltPalette',
 		displayName: 'Ukraine invasion',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/small/slow-V-mpu',
-		containerPalette: undefined,
 		displayName: 'News extra',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'dynamic/slow',
-		containerPalette: undefined,
 		displayName: 'Spotlight',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/thrasher',
-		containerPalette: undefined,
 		displayName: 'Morning Mail newsletter (web only)',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'dynamic/slow',
-		containerPalette: undefined,
 		displayName: 'Sport',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'dynamic/slow',
-		containerPalette: undefined,
 		displayName: 'Opinion',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/thrasher',
-		containerPalette: undefined,
 		displayName: 'Wordiply Thrasher',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/medium/slow-VI',
-		containerPalette: undefined,
 		displayName: 'Lifestyle',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/medium/slow-VII',
-		containerPalette: undefined,
 		displayName: 'Culture',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/thrasher',
-		containerPalette: undefined,
 		displayName: 'Guardian Labs',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'dynamic/fast',
-		containerPalette: undefined,
 		displayName: 'Across the country',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/small/slow-IV',
-		containerPalette: undefined,
 		displayName: 'The rural network',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'dynamic/fast',
-		containerPalette: undefined,
 		displayName: 'Around the world',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/thrasher',
-		containerPalette: undefined,
 		displayName: 'Contact the Guardian',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/video',
-		containerPalette: undefined,
 		displayName: 'Videos',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/medium/slow-VI',
-		containerPalette: undefined,
 		displayName: 'Multimedia',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/small/slow-IV',
 		containerPalette: 'Branded',
 		displayName: 'Guardian Labs',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/medium/slow-XII-mpu',
-		containerPalette: undefined,
 		displayName: 'Explore',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/small/slow-I',
-		containerPalette: undefined,
 		displayName: 'The big picture',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'news/most-popular',
-		containerPalette: undefined,
 		displayName: 'Most viewed',
-		grouped: defaultGrouped,
 	},
-];
+] satisfies DCRCollectionType[];
 
-const testCollectionsUs: Pick<
-	DCRCollectionType,
-	'collectionType' | 'containerPalette' | 'displayName' | 'grouped'
->[] = [
+export const testCollectionsWithSecondaryLevel = [
+	...testCollectionsUk.slice(0, 3),
+	{ ...defaultValues, containerLevel: 'Secondary' },
+] satisfies DCRCollectionType[];
+
+export const testCollectionsUs = [
 	{
+		...defaultValues,
 		collectionType: 'dynamic/package',
 		containerPalette: 'EventPalette',
 		displayName: 'Israel-Hamas war',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'dynamic/package',
 		containerPalette: 'EventPalette',
 		displayName: 'Israel-Hamas war',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'dynamic/fast',
-		containerPalette: undefined,
 		displayName: 'Headlines',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/small/slow-IV',
-		containerPalette: undefined,
 		displayName: 'In depth',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'dynamic/slow',
-		containerPalette: undefined,
 		displayName: 'Spotlight',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/small/slow-IV',
 		containerPalette: 'LongRunningAltPalette',
 		displayName: 'Ukraine invasion',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/medium/slow-VI',
-		containerPalette: undefined,
 		displayName: 'Opinion',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'dynamic/slow',
-		containerPalette: undefined,
 		displayName: 'Sports',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/thrasher',
-		containerPalette: undefined,
 		displayName: 'Wordiply thrasher',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/small/slow-IV',
-		containerPalette: undefined,
 		displayName: 'Climate crisis',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'dynamic/fast',
-		containerPalette: undefined,
 		displayName: 'Across the country',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'dynamic/fast',
-		containerPalette: undefined,
 		displayName: 'Around the world',
 		grouped: {
 			...defaultGrouped,
@@ -228,125 +214,106 @@ const testCollectionsUs: Pick<
 		},
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/thrasher',
-		containerPalette: undefined,
 		displayName: 'First Thing email newsletter',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/medium/slow-VII',
 		containerPalette: 'PodcastPalette',
 		displayName: 'Podcasts',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/thrasher',
-		containerPalette: undefined,
 		displayName: 'Documentaries',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/medium/slow-VI',
-		containerPalette: undefined,
 		displayName: 'Culture',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/small/slow-IV',
 		containerPalette: 'Branded',
 		displayName: 'Business briefs',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/medium/slow-VI',
-		containerPalette: undefined,
 		displayName: 'Lifestyle',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/small/slow-IV',
-		containerPalette: undefined,
 		displayName: 'Take part',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/medium/slow-VI',
-		containerPalette: undefined,
 		displayName: 'Explore',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/video',
-		containerPalette: undefined,
 		displayName: 'Video',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/medium/slow-VI',
-		containerPalette: undefined,
 		displayName: 'In pictures',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/thrasher',
-		containerPalette: undefined,
 		displayName: 'Contact the Guardian',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'news/most-popular',
-		containerPalette: undefined,
 		displayName: 'Most viewed',
-		grouped: defaultGrouped,
 	},
-];
+] satisfies DCRCollectionType[];
 
-const brandedTestCollections: Pick<
-	DCRCollectionType,
-	'collectionType' | 'containerPalette' | 'displayName' | 'grouped'
->[] = [
+export const brandedTestCollections = [
 	{
+		...defaultValues,
 		collectionType: 'dynamic/fast',
-		containerPalette: undefined,
 		displayName: 'Headlines',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/small/slow-IV',
 		containerPalette: 'Branded',
 		displayName: 'Guardian Labs',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'dynamic/fast',
-		containerPalette: undefined,
 		displayName: 'Headlines',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/small/slow-IV',
 		containerPalette: 'Branded',
 		displayName: 'Guardian Labs',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'dynamic/fast',
-		containerPalette: undefined,
 		displayName: 'Headlines',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'fixed/small/slow-IV',
 		containerPalette: 'Branded',
 		displayName: 'Guardian Labs',
-		grouped: defaultGrouped,
 	},
 	{
+		...defaultValues,
 		collectionType: 'dynamic/fast',
-		containerPalette: undefined,
 		displayName: 'Headlines',
-		grouped: defaultGrouped,
 	},
-];
-
-export { testCollectionsUk, testCollectionsUs, brandedTestCollections };
+] satisfies DCRCollectionType[];

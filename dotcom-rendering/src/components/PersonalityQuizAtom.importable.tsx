@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import {
 	article17,
-	palette,
+	palette as sourcePalette,
 	space,
 	textSans17,
 	textSansBold17,
@@ -12,6 +12,7 @@ import type { KeyboardEvent, MouseEvent } from 'react';
 import { memo, useEffect, useState } from 'react';
 import { ArticleSpecial } from '../lib/articleFormat';
 import type { ArticleFormat, ArticleTheme } from '../lib/articleFormat';
+import { palette } from '../palette';
 import type {
 	AnswerType,
 	PersonalityQuizAtomType,
@@ -205,6 +206,15 @@ export const PersonalityQuizAtom = ({
 				<Button
 					type="submit"
 					onClick={onSubmit}
+					theme={{
+						backgroundPrimary: palette(
+							'--quiz-atom-button-background',
+						),
+						textPrimary: palette('--quiz-atom-button-text'),
+						backgroundPrimaryHover: palette(
+							'--quiz-atom-button-background-hover',
+						),
+					}}
 					onKeyDown={(e: React.KeyboardEvent<HTMLButtonElement>) => {
 						const spaceKey = 32;
 						const enterKey = 13;
@@ -344,8 +354,8 @@ const AnswersGroup = memo(
 					label {
 						:hover {
 							background-color: ${hasSubmittedAnswers
-								? palette.neutral[97]
-								: palette.neutral[86]};
+								? palette('--quiz-atom-answers-background')
+								: palette('--quiz-atom-answers-hover')};
 						}
 						/* TODO: apply same styles on focus (requires source update) */
 					}
@@ -378,7 +388,7 @@ AnswersGroup.displayName = 'AnswersGroup';
 const missingAnswersStyles = css`
 	${textSansBold17}
 	padding-bottom: ${space[3]}px;
-	color: ${palette.error[500]};
+	color: ${sourcePalette.error[500]};
 `;
 
 export const MissingAnswers = () => (
@@ -388,21 +398,21 @@ export const MissingAnswers = () => (
 );
 
 const resultWrapperStyles = css`
-	background-color: ${palette.neutral[93]};
+	background-color: ${palette('--quiz-atom-results-background')};
+	color: ${palette('--quiz-atom-results-text')};
 	margin-top: ${space[3]}px;
 	margin-bottom: ${space[3]}px;
 	padding: ${space[2]}px;
+	border: 1px solid ${palette('--quiz-atom-results-border')};
 `;
 
 const resultHeaderStyles = css`
 	${textSansBold17}
-	color: ${palette.neutral[20]};
-	padding-bottom: ${space[1]}px;
+	padding-bottom: ${space[2]}px;
 `;
 
 const resultDescriptionStyles = css`
 	${textSans17}
-	color: ${palette.neutral[46]};
 `;
 
 export const Result = ({

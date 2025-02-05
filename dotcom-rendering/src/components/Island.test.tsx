@@ -205,6 +205,7 @@ describe('Island: server-side rendering', () => {
 						shortUrlId=""
 						discussionApiUrl=""
 						absoluteServerTimes={true}
+						renderingTarget="Web"
 					/>
 				</WithConfig>,
 			),
@@ -365,13 +366,7 @@ describe('Island: server-side rendering', () => {
 	});
 
 	test('ShowHideContainers', () => {
-		expect(() =>
-			renderToString(
-				<ShowHideContainers
-					disableFrontContainerToggleSwitch={false}
-				/>,
-			),
-		).not.toThrow();
+		expect(() => renderToString(<ShowHideContainers />)).not.toThrow();
 	});
 
 	test('SignInGateSelector', () => {
@@ -385,6 +380,7 @@ describe('Island: server-side rendering', () => {
 						isPreview={false}
 						pageId={''}
 						switches={{}}
+						contributionsServiceUrl={''}
 					/>
 				</WithConfig>,
 			),

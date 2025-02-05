@@ -15,10 +15,16 @@ type GroupedCounts = {
 	splash: number;
 };
 
-type AdCandidate = Pick<DCRCollectionType, 'collectionType'>;
+export type AdCandidateMobile = Pick<
+	DCRCollectionType,
+	'collectionType' | 'containerLevel'
+>;
 
-const getMerchHighPosition = (collectionCount: number): number =>
-	collectionCount >= 4 ? 2 : 0;
+/** The Merch high slot is directly before the most viewed container  */
+const getMerchHighPosition = (collections: AdCandidateMobile[]): number => {
+	const mostViewedPosition = collections.findIndex(isMostViewedContainer);
+	return mostViewedPosition - 1;
+};
 
 /**
  * This happens on the recipes front, where the first container is a thrasher
@@ -32,43 +38,88 @@ const isMerchHighPosition = (
 	merchHighPosition: number,
 ): boolean => collectionIndex === merchHighPosition;
 
-const isBeforeThrasher = (index: number, collections: AdCandidate[]) =>
+const isBeforeThrasher = (index: number, collections: AdCandidateMobile[]) =>
 	collections[index + 1]?.collectionType === 'fixed/thrasher';
 
-const isMostViewedContainer = (collection: AdCandidate) =>
+const isMostViewedContainer = (collection: AdCandidateMobile) =>
 	collection.collectionType === 'news/most-popular';
 
-const shouldInsertAd =
-	(merchHighPosition: number) =>
-	(collection: AdCandidate, index: number, collections: AdCandidate[]) =>
-		!(
-			isFirstContainerAndThrasher(collection.collectionType, index) ||
-			isMerchHighPosition(index, merchHighPosition) ||
-			isBeforeThrasher(index, collections) ||
-			isMostViewedContainer(collection)
-		);
+const isBeforeSecondaryLevelContainer = (
+	index: number,
+	collections: AdCandidateMobile[],
+) => collections[index + 1]?.containerLevel === 'Secondary';
+
+const hasSecondaryLevelContainers = (collections: AdCandidateMobile[]) =>
+	!!collections.find((c) => c.containerLevel === 'Secondary');
+
+/**
+ * Checks if mobile ad insertion is possible immediately after the
+ * position of the current collection
+ *
+ * . ------------------ .
+ * | Current collection |
+ * | ------------------ | <-- Maybe ad position
+ * | Next collection    |
+ * ' ------------------ '
+ */
+const canInsertMobileAd =
+	(merchHighPosition: number, hasSecondaryContainers: boolean) =>
+	(
+		collection: AdCandidateMobile,
+		index: number,
+		collections: AdCandidateMobile[],
+	) => {
+		/**
+		 * Ad slots can only be inserted after positions that satisfy the following rules:
+		 * - Is NOT the slot used for the merch high position
+		 * - Is NOT a thrasher if it is the first container
+		 * - Is NOT before a thrasher
+		 * - Is NOT the most viewed container
+		 */
+		const rules = [
+			!isMerchHighPosition(index, merchHighPosition),
+			!isFirstContainerAndThrasher(collection.collectionType, index),
+			!isBeforeThrasher(index, collections),
+			!isMostViewedContainer(collection),
+		];
+
+		/** Additional rules exist for "beta" fronts which have primary and secondary level containers */
+		const betaFrontRules = [
+			// Allow insertion after first container at any time but for all other situations,
+			// prevent insertion before a secondary level container
+			index === 0 || !isBeforeSecondaryLevelContainer(index, collections),
+		];
+
+		// Ad insertion is possible if every condition is met
+		return hasSecondaryContainers
+			? [...rules, ...betaFrontRules].every(Boolean)
+			: rules.every(Boolean);
+	};
 
 const isEvenIndex = (_collection: unknown, index: number): boolean =>
 	index % 2 === 0;
 
 /**
- * We do not insert mobile ads:
- * a. after the first container if it is a thrasher
- * b. next to the merchandising-high ad slot
- * c. before a thrasher
- * d. after the Most Viewed container.
- * After we've filtered out the containers next to which we can insert an ad,
- * we take every other container, up to a maximum of 10, for targeting MPU insertion.
+ * Filters out unsuitable positions then takes every other position for possible ad insertion,
+ * up to a maximum of `MAX_FRONTS_MOBILE_ADS`
  */
-const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
-	const merchHighPosition = getMerchHighPosition(collections.length);
+const getMobileAdPositions = (collections: AdCandidateMobile[]): number[] => {
+	const merchHighPosition = getMerchHighPosition(collections);
+	const hasSecondaryContainers = hasSecondaryLevelContainers(collections);
 
-	return collections
-		.filter(shouldInsertAd(merchHighPosition))
-		.filter(isEvenIndex)
-		.map((collection: AdCandidate) => collections.indexOf(collection))
-		.filter((adPosition: number) => adPosition !== -1)
-		.slice(0, MAX_FRONTS_MOBILE_ADS);
+	return (
+		collections
+			.filter(
+				canInsertMobileAd(merchHighPosition, hasSecondaryContainers),
+			)
+			// Use every other ad position if the front has no secondary containers
+			.filter((c, i) =>
+				hasSecondaryContainers ? true : isEvenIndex(c, i),
+			)
+			.map((collection) => collections.indexOf(collection))
+			.filter((adPosition: number) => adPosition !== -1)
+			.slice(0, MAX_FRONTS_MOBILE_ADS)
+	);
 };
 
 /**
@@ -79,10 +130,7 @@ const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
  * A result of 6 indicates a container is at least double the height of a typical desktop viewport.
  */
 const getCollectionHeight = (
-	collction: Pick<
-		DCRCollectionType,
-		'collectionType' | 'containerPalette' | 'grouped'
-	>,
+	collction: DCRCollectionType,
 ): 0.5 | 1 | 1.5 | 2 | 2.5 | 3 | 6 => {
 	const { collectionType, containerPalette, grouped } = collction;
 
@@ -91,14 +139,14 @@ const getCollectionHeight = (
 	}
 
 	// The height of some dynamic layouts depend on the sizes of the cards that are passed to them.
-	const groupedCounts: GroupedCounts = {
+	const groupedCounts = {
 		snap: grouped.snap.length,
 		huge: grouped.huge.length,
 		veryBig: grouped.veryBig.length,
 		big: grouped.big.length,
 		standard: grouped.standard.length,
 		splash: grouped.splash.length,
-	};
+	} satisfies GroupedCounts;
 
 	switch (collectionType) {
 		// Some thrashers are very small. Since we'd prefer to have ads above content rather than thrashers,
@@ -193,11 +241,21 @@ const getCollectionHeight = (
 	}
 };
 
-const canAdGoAboveCollection = (
+/**
+ * Checks if destkop ad insertion is possible immediately before the
+ * position of the current collection
+ *
+ * . ------------------- .
+ * | Previous collection |
+ * | ------------------- | <-- Maybe ad position
+ * | Current collection  |
+ * ' ------------------- '
+ */
+const canInsertDesktopAd = (
 	heightSinceAd: number,
 	pageId: string,
-	collection: Pick<DCRCollectionType, 'displayName' | 'containerPalette'>,
-	previousCollection: Pick<DCRCollectionType, 'containerPalette'>,
+	collection: DCRCollectionType,
+	previousCollection: DCRCollectionType,
 ) => {
 	if (
 		collection.containerPalette === 'Branded' ||
@@ -208,6 +266,10 @@ const canAdGoAboveCollection = (
 
 	const excludedCollections = frontsBannerExcludedCollections[pageId] ?? [];
 	if (excludedCollections.includes(collection.displayName)) {
+		return false;
+	}
+
+	if (collection.containerLevel === 'Secondary') {
 		return false;
 	}
 
@@ -224,10 +286,7 @@ const canAdGoAboveCollection = (
  * last collection and we don't want to sandwich the last collection between two full-width ads.
  */
 const getFrontsBannerAdPositions = (
-	collections: Pick<
-		DCRCollectionType,
-		'displayName' | 'collectionType' | 'containerPalette' | 'grouped'
-	>[],
+	collections: DCRCollectionType[],
 	pageId: string,
 ): number[] =>
 	collections.reduce<{ heightSinceAd: number; adPositions: number[] }>(
@@ -236,34 +295,39 @@ const getFrontsBannerAdPositions = (
 
 			const isFinalCollection = index === collections.length - 1;
 			const isMaxAdsReached = adPositions.length >= MAX_FRONTS_BANNER_ADS;
+
 			if (isFinalCollection || isMaxAdsReached) {
+				// Stop inserting adverts all together
 				return accumulator;
 			}
 
-			const collectionHeight = getCollectionHeight(collection);
 			const prevCollection = collections[index - 1];
 			const isFirstCollection = isUndefined(prevCollection);
-			if (isFirstCollection) {
-				accumulator.heightSinceAd += collectionHeight;
-				return accumulator;
-			}
 
 			if (
-				canAdGoAboveCollection(
+				!isFirstCollection &&
+				canInsertDesktopAd(
 					heightSinceAd,
 					pageId,
 					collection,
 					prevCollection,
 				)
 			) {
+				// Inserting advert, resetting the height since ad
+				// to the height of the current collection
 				return {
-					heightSinceAd: collectionHeight,
 					adPositions: [...adPositions, index],
+					heightSinceAd: getCollectionHeight(collection),
+				};
+			} else {
+				// Not inserting advert, moving onto the next container
+				// and increasing the height since ad
+				return {
+					adPositions,
+					heightSinceAd:
+						heightSinceAd + getCollectionHeight(collection),
 				};
 			}
-
-			accumulator.heightSinceAd += collectionHeight;
-			return accumulator;
 		},
 		{ heightSinceAd: 0, adPositions: [] },
 	).adPositions;

@@ -1,6 +1,7 @@
 import { type ArticleFormat, decideFormat } from '../lib/articleFormat';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import { appsLightboxImages } from '../model/appsLightboxImages';
+import { buildCrosswordBlock } from '../model/buildCrosswordBlock';
 import { buildLightboxImages } from '../model/buildLightboxImages';
 import { enhanceBlocks, enhanceMainMedia } from '../model/enhanceBlocks';
 import { enhanceCommercialProperties } from '../model/enhanceCommercialProperties';
@@ -49,6 +50,11 @@ export const enhanceArticleType = (
 		tags: data.tags,
 	});
 
+	const crosswordBlock = buildCrosswordBlock(data);
+	const additionalBlocks = crosswordBlock ? [crosswordBlock] : [];
+
+	const blocks = [...enhancedBlocks, ...additionalBlocks];
+
 	const mainMediaElements = enhanceMainMedia(
 		format,
 		imagesForLightbox,
@@ -61,7 +67,7 @@ export const enhanceArticleType = (
 		frontendData: {
 			...data,
 			mainMediaElements,
-			blocks: enhancedBlocks,
+			blocks,
 			pinnedPost: enhancePinnedPost(
 				format,
 				renderingTarget,
