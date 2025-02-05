@@ -416,27 +416,20 @@ type PropsAuxia = {
 	contributionsServiceUrl: string;
 };
 
-/*
-	comment group: auxia-prototype-e55a86ef
-	Signature for the ShowSignInGateAuxia component.
-*/
 interface ShowSignInGateAuxiaProps {
 	host: string;
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
+	logTreatmentInteractionCall: () => Promise<void>;
 }
 
-/*
-	comment group: auxia-prototype-e55a86ef
-	Auxia version of the dismissGate function.
-*/
 const dismissGateAuxia = (
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
 	setShowGate(false);
 };
 
-const fetchAuxiaDisplayDataFromProxy = async (
+const fetchProxyGetTreatments = async (
 	contributionsServiceUrl: string,
 ): Promise<SDCAuxiaProxyResponseData> => {
 	const url = `${contributionsServiceUrl}/auxia/get-treatments`;
@@ -455,6 +448,30 @@ const fetchAuxiaDisplayDataFromProxy = async (
 	const data = (await response.json()) as SDCAuxiaProxyResponseData;
 
 	return Promise.resolve(data);
+};
+
+const auxiaLogTreatmentInteraction = async (
+	contributionsServiceUrl: string,
+): Promise<void> => {
+	const url = `${contributionsServiceUrl}/auxia/log-treatment-interaction`;
+	const headers = {
+		'Content-Type': 'application/json',
+	};
+	const payload = {
+		treatmentTrackingId: '105889_336_ad5eb464-68c6-4ca1-805c-294375422b48',
+		treatmentId: '105889',
+		surface: 'ARTICLE_PAGE',
+		interactionType: 'CLICKED',
+		interactionTimeMicros: 1667829258250000,
+		actionName: 'someActionName',
+	};
+	const params = {
+		method: 'POST',
+		headers,
+		body: JSON.stringify(payload),
+	};
+
+	await fetch(url, params);
 };
 
 const SignInGateSelectorAuxia = ({
@@ -496,9 +513,7 @@ const SignInGateSelectorAuxia = ({
 
 	useOnce(() => {
 		void (async () => {
-			const data = await fetchAuxiaDisplayDataFromProxy(
-				contributionsServiceUrl,
-			);
+			const data = await fetchProxyGetTreatments(contributionsServiceUrl);
 			setAuxiaAPIResponseData(data);
 		})().catch((error) => {
 			console.error('Error fetching Auxia display data:', error);
@@ -518,6 +533,11 @@ const SignInGateSelectorAuxia = ({
 						// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 						setShowGate={(show) => setIsGateDismissed(!show)}
 						userTreatment={auxiaAPIResponseData.userTreatment}
+						logTreatmentInteractionCall={async () => {
+							await auxiaLogTreatmentInteraction(
+								contributionsServiceUrl,
+							);
+						}}
 					/>
 				)}
 		</>
@@ -528,12 +548,8 @@ const ShowSignInGateAuxia = ({
 	host,
 	setShowGate,
 	userTreatment,
+	logTreatmentInteractionCall,
 }: ShowSignInGateAuxiaProps) => {
-	/*
-		comment group: auxia-prototype-e55a86ef
-		This function is the Auxia version of the ShowSignInGate component.
-	*/
-
 	const componentId = 'main_variant_5';
 	const abTest = undefined;
 	const checkoutCompleteCookieData = undefined;
@@ -549,5 +565,6 @@ const ShowSignInGateAuxia = ({
 		checkoutCompleteCookieData,
 		personaliseSignInGateAfterCheckoutSwitch,
 		userTreatment,
+		logTreatmentInteractionCall,
 	});
 };
