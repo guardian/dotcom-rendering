@@ -27,7 +27,7 @@ import { palette } from '../palette';
 type Props = {
 	initialDays: FootballMatches;
 	edition: EditionId;
-	getMoreDays: () => Promise<Result<'failed', FootballMatches>>;
+	getMoreDays?: () => Promise<Result<'failed', FootballMatches>>;
 };
 
 const REMOVE_TRAILING_DOTS_REGEX = /\.+$/;
@@ -384,43 +384,46 @@ export const FootballMatchList = ({
 				</section>
 			))}
 
-			<div css={css(grid.container)}>
-				<div
-					css={css`
-						${grid.column.centre}
-						padding-top: ${space[10]}px;
-					`}
-				>
-					<Button
-						icon={<SvgPlus />}
-						size="xsmall"
-						onClick={() => {
-							void getMoreDays().then((moreDays) => {
-								if (moreDays.kind === 'ok') {
-									setIsError(false);
-									setDays(days.concat(moreDays.value));
-								} else {
-									setIsError(true);
-								}
-							});
-						}}
+			{getMoreDays === undefined ? null : (
+				<div css={css(grid.container)}>
+					<div
+						css={css`
+							${grid.column.centre}
+							padding-top: ${space[10]}px;
+						`}
 					>
-						More
-					</Button>
-					{isError ? (
-						<InlineError
-							cssOverrides={css`
-								padding-top: ${space[4]}px;
-								color: ${palette(
-									'--football-match-list-error',
-								)};
-							`}
+						<Button
+							icon={<SvgPlus />}
+							size="xsmall"
+							onClick={() => {
+								void getMoreDays().then((moreDays) => {
+									if (moreDays.kind === 'ok') {
+										setIsError(false);
+										setDays(days.concat(moreDays.value));
+									} else {
+										setIsError(true);
+									}
+								});
+							}}
 						>
-							Could not get more matches. Please try again later!
-						</InlineError>
-					) : null}
+							More
+						</Button>
+						{isError ? (
+							<InlineError
+								cssOverrides={css`
+									padding-top: ${space[4]}px;
+									color: ${palette(
+										'--football-match-list-error',
+									)};
+								`}
+							>
+								Could not get more matches. Please try again
+								later!
+							</InlineError>
+						) : null}
+					</div>
 				</div>
-			</div>
+			)}
 		</>
 	);
 };
