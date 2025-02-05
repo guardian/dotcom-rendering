@@ -450,18 +450,6 @@ const fetchProxyGetTreatments = async (
 	return Promise.resolve(data);
 };
 
-/*
-export interface AuxiaAPIResponseDataUserTreatment {
-	treatmentId: string;
-	treatmentTrackingId: string;
-	rank: string;
-	contentLanguageCode: string;
-	treatmentContent: string;
-	treatmentType: string;
-	surface: string;
-}
-*/
-
 const auxiaLogTreatmentInteraction = async (
 	contributionsServiceUrl: string,
 	userTreatment: AuxiaAPIResponseDataUserTreatment,
