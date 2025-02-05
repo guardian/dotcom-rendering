@@ -22,6 +22,7 @@ const meta = {
 			modes: {
 				'vertical mobile': allModes['vertical mobile'],
 				'vertical desktop': allModes['vertical desktop'],
+				'vertical wide': allModes['splitVertical'],
 			},
 		},
 	},
