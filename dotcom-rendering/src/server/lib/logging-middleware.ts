@@ -1,4 +1,4 @@
-import type { Request, RequestHandler } from 'express';
+import type { RequestHandler } from 'express';
 import type { ConfigType } from '../../types/config';
 import { logger } from './logging';
 import { loggingStore } from './logging-store';
@@ -12,20 +12,20 @@ const hasPageId = (body: unknown): body is { pageId: string } => {
 	);
 };
 
-type RequestBody = {
-	config?: ConfigType;
-	pageId?: string;
+const hasConfig = (body: unknown): body is { config: ConfigType } => {
+	return (
+		!!body &&
+		typeof body === 'object' &&
+		'config' in body &&
+		typeof body.config === 'object'
+	);
 };
 
 /**
  * An Express middleware which handles creating our logger store and logging requests after they've
  * completed.
  */
-export const requestLoggerMiddleware: RequestHandler = (
-	req: Request<{}, {}, RequestBody>,
-	res,
-	next,
-) => {
+export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 	const headerValue = req.headers['x-gu-xid'];
 	const requestId = Array.isArray(headerValue) ? headerValue[0] : headerValue;
 	const loggerState = {
@@ -36,7 +36,9 @@ export const requestLoggerMiddleware: RequestHandler = (
 		},
 		fastlyRequestId: requestId ?? 'fastly-id-not-provided',
 		timing: {},
-		abTests: JSON.stringify(req.body.config?.abTests),
+		abTests: hasConfig(req.body.config.abTests)
+			? JSON.stringify(req.body.config.abTests)
+			: 'no-ab-tests-found',
 	};
 
 	res.on('finish', () => {
