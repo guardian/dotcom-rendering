@@ -11,6 +11,7 @@ import type {
 	ModuleData,
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/types';
+import type { HeaderProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import {
@@ -46,9 +47,9 @@ const ReaderRevenueLinksRemote = ({
 	contributionsServiceUrl,
 }: ReaderRevenueLinksRemoteProps) => {
 	const [supportHeaderResponse, setSupportHeaderResponse] =
-		useState<ModuleData | null>(null);
+		useState<ModuleData<HeaderProps> | null>(null);
 	const [SupportHeader, setSupportHeader] =
-		useState<React.ElementType | null>(null);
+		useState<React.ComponentType<HeaderProps> | null>(null);
 	const isSignedIn = useIsSignedIn();
 
 	const { renderingTarget } = useConfig();
@@ -86,7 +87,7 @@ const ReaderRevenueLinksRemote = ({
 		};
 
 		getHeader(contributionsServiceUrl, requestData)
-			.then((response: ModuleDataResponse) => {
+			.then((response: ModuleDataResponse<HeaderProps>) => {
 				if (!response.data) {
 					return null;
 				}
@@ -100,9 +101,15 @@ const ReaderRevenueLinksRemote = ({
 						  import(`./marketing/header/SignInPromptHeader`)
 						: /* webpackChunkName: "header" */
 						  import(`./marketing/header/Header`)
-				).then((headerModule: { [key: string]: React.ElementType }) => {
-					setSupportHeader(() => headerModule[module.name] ?? null);
-				});
+				).then(
+					(headerModule: {
+						[key: string]: React.ComponentType<HeaderProps>;
+					}) => {
+						setSupportHeader(
+							() => headerModule[module.name] ?? null,
+						);
+					},
+				);
 			})
 			.catch((error) => {
 				const msg = `Error importing RR header links: ${String(error)}`;

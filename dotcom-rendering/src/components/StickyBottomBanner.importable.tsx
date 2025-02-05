@@ -31,6 +31,8 @@ import type {
 	BannerProps,
 	CanShowFunctionType,
 } from './StickyBottomBanner/ReaderRevenueBanner';
+import { RenderingTarget } from '../types/renderingTarget';
+import { ModuleData } from '@guardian/support-dotcom-components/dist/dotcom/types';
 
 type Props = {
 	contentType: string;
@@ -50,7 +52,7 @@ type Props = {
 type RRBannerConfig = {
 	id: string;
 	BannerComponent: typeof ReaderRevenueBanner;
-	canShowFn: CanShowFunctionType<BannerProps>;
+	canShowFn: CanShowFunctionType<ModuleData<BannerProps>>;
 	isEnabled: boolean;
 };
 
@@ -100,6 +102,7 @@ const buildRRBannerConfigWith = ({
 		tags,
 		contributionsServiceUrl,
 		idApiUrl,
+		renderingTarget,
 	}: {
 		isSignedIn: boolean;
 		countryCode: CountryCode;
@@ -115,7 +118,8 @@ const buildRRBannerConfigWith = ({
 		tags: TagType[];
 		contributionsServiceUrl: string;
 		idApiUrl: string;
-	}): CandidateConfig<BannerProps> => {
+		renderingTarget: RenderingTarget;
+	}): CandidateConfig<ModuleData<BannerProps>> => {
 		return {
 			candidate: {
 				id,
@@ -147,6 +151,7 @@ const buildRRBannerConfigWith = ({
 							),
 						isPreview,
 						idApiUrl,
+						renderingTarget,
 						signInGateWillShow,
 						asyncArticleCounts,
 					}),
@@ -278,6 +283,7 @@ export const StickyBottomBanner = ({
 			tags,
 			contributionsServiceUrl,
 			idApiUrl,
+			renderingTarget,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
