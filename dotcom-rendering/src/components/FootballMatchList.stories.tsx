@@ -43,7 +43,7 @@ const initialDays: FootballMatches = [
 							name: 'Cagliari',
 							score: 0,
 						},
-						status: 'FT',
+						status: '1st',
 					},
 					{
 						kind: 'Fixture',
@@ -71,6 +71,29 @@ const initialDays: FootballMatches = [
 							name: 'Osasuna',
 							score: 3,
 						},
+						comment: 'AET',
+					},
+				],
+			},
+			{
+				competitionId: '650',
+				name: 'FA Cup',
+				nation: 'European',
+				matches: [
+					{
+						kind: 'Result',
+						dateTime: new Date('2025-01-25T20:00:00Z'),
+						paId: '4482836',
+						homeTeam: {
+							name: 'Brighton & Hove Albion Women',
+							score: 1,
+						},
+						awayTeam: {
+							name: 'Crystal Palace Women',
+							score: 1,
+						},
+						comment:
+							'Brighton & Hove Albion Women won 4 - 3 on penalties...',
 					},
 				],
 			},

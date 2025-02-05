@@ -5753,6 +5753,12 @@ const pillBackground: PaletteFunction = () =>
 const pillDivider: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[100], 0.5);
 const pillLiveBullet: PaletteFunction = () => sourcePalette.news[500];
+
+const crosswordCluesHeaderBorderTop: PaletteFunction = () =>
+	sourcePalette.lifestyle[400];
+const crosswordCluesHeaderBorderBottom: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
 // ----- Palette ----- //
 
 /**
@@ -6210,6 +6216,14 @@ const paletteColours = {
 		light: cricketScoreboardLinkText,
 		dark: cricketScoreboardLinkText,
 	},
+	'--crossword-clues-header-border-bottom': {
+		light: crosswordCluesHeaderBorderBottom,
+		dark: crosswordCluesHeaderBorderBottom,
+	},
+	'--crossword-clues-header-border-top': {
+		light: crosswordCluesHeaderBorderTop,
+		dark: crosswordCluesHeaderBorderTop,
+	},
 	'--dateline': {
 		light: datelineLight,
 		dark: datelineDark,
@@ -6497,6 +6511,14 @@ const paletteColours = {
 	'--football-match-list-error': {
 		light: () => sourcePalette.error[400],
 		dark: () => sourcePalette.error[500],
+	},
+	'--football-match-list-live-status': {
+		light: () => sourcePalette.sport[500],
+		dark: () => sourcePalette.sport[500],
+	},
+	'--football-match-list-sub-text': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[73],
 	},
 	'--football-match-list-top-border': {
 		light: () => sourcePalette.sport[500],
