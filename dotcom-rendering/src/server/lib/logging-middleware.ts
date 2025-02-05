@@ -36,9 +36,10 @@ export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 		},
 		fastlyRequestId: requestId ?? 'fastly-id-not-provided',
 		timing: {},
-		abTests: hasConfig(req.body.config.abTests)
-			? JSON.stringify(req.body.config.abTests)
-			: 'no-ab-tests-found',
+		abTests:
+			hasConfig(req.body) && req.body.config?.abTests
+				? JSON.stringify(req.body.config.abTests)
+				: 'no-ab-tests-found',
 	};
 
 	res.on('finish', () => {
