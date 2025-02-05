@@ -450,20 +450,35 @@ const fetchProxyGetTreatments = async (
 	return Promise.resolve(data);
 };
 
+/*
+export interface AuxiaAPIResponseDataUserTreatment {
+	treatmentId: string;
+	treatmentTrackingId: string;
+	rank: string;
+	contentLanguageCode: string;
+	treatmentContent: string;
+	treatmentType: string;
+	surface: string;
+}
+*/
+
 const auxiaLogTreatmentInteraction = async (
 	contributionsServiceUrl: string,
+	userTreatment: AuxiaAPIResponseDataUserTreatment,
+	actionName: string,
 ): Promise<void> => {
 	const url = `${contributionsServiceUrl}/auxia/log-treatment-interaction`;
 	const headers = {
 		'Content-Type': 'application/json',
 	};
+	const microTime = Date.now() * 1000;
 	const payload = {
-		treatmentTrackingId: '105889_336_ad5eb464-68c6-4ca1-805c-294375422b48',
-		treatmentId: '105889',
-		surface: 'ARTICLE_PAGE',
+		treatmentTrackingId: userTreatment.treatmentTrackingId,
+		treatmentId: userTreatment.treatmentId,
+		surface: userTreatment.surface,
 		interactionType: 'CLICKED',
-		interactionTimeMicros: 1667829258250000,
-		actionName: 'someActionName',
+		interactionTimeMicros: microTime,
+		actionName,
 	};
 	const params = {
 		method: 'POST',
@@ -536,6 +551,8 @@ const SignInGateSelectorAuxia = ({
 						logTreatmentInteractionCall={async () => {
 							await auxiaLogTreatmentInteraction(
 								contributionsServiceUrl,
+								auxiaGetTreatmentsData.userTreatment!,
+								'gate-dismissed',
 							);
 						}}
 					/>
