@@ -30,6 +30,7 @@ export const StaticFeatureTwo = ({
 	return (
 		<UL direction="row">
 			{cards.map((card) => {
+				// console.log('card', card);
 				return (
 					<LI
 						stretch={false}

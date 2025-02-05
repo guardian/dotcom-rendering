@@ -12,6 +12,8 @@ import type { ArticleFormat } from '../../lib/articleFormat';
 import { secondsToDuration } from '../../lib/formatTime';
 import { palette } from '../../palette';
 import type { AspectRatio } from '../../types/front';
+import { CardFooter } from '../Card/components/CardFooter';
+import { TrailText } from '../Card/components/TrailText';
 import { FormatBoundary } from '../FormatBoundary';
 import { Kicker } from '../Kicker';
 import { Pill } from '../Pill';
@@ -32,8 +34,13 @@ type Props = {
 	format: ArticleFormat;
 	showTextOverlay?: boolean;
 	playIcon: ReactElement;
+	age?: ReactElement;
+	commentCount?: ReactElement;
 	hidePillOnMobile: boolean;
 	aspectRatio?: AspectRatio;
+	trailText?: string;
+	isVideoArticle?: boolean;
+	isFeatureCard?: boolean;
 };
 
 const overlayStyles = css`
@@ -53,7 +60,9 @@ const overlayStyles = css`
 		width: 100%;
 		height: 100%;
 	}
+`;
 
+const cardOverlayStyles = css`
 	.play-icon {
 		transition: transform 300ms;
 	}
@@ -120,6 +129,11 @@ export const YoutubeAtomOverlay = ({
 	playIcon,
 	hidePillOnMobile,
 	aspectRatio,
+	trailText,
+	age,
+	commentCount,
+	isVideoArticle = false,
+	isFeatureCard = false,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
@@ -148,7 +162,7 @@ export const YoutubeAtomOverlay = ({
 						aspectRatio={aspectRatio}
 					/>
 				)}
-				{isLiveStream && (
+				{isLiveStream ? (
 					<div
 						css={
 							hidePillOnMobile
@@ -164,8 +178,7 @@ export const YoutubeAtomOverlay = ({
 							iconSize="small"
 						/>
 					</div>
-				)}
-				{hasDuration && (
+				) : hasDuration && !isVideoArticle ? (
 					<div
 						css={
 							hidePillOnMobile
@@ -181,17 +194,50 @@ export const YoutubeAtomOverlay = ({
 							iconSize="small"
 						/>
 					</div>
-				)}
+				) : null}
+
 				{showTextOverlay ? (
-					<div css={textOverlayStyles}>
+					<div
+						css={[
+							textOverlayStyles,
+							!isFeatureCard && cardOverlayStyles,
+						]}
+					>
 						{!!kicker && (
 							<Kicker
 								text={kicker}
 								color={palette('--youtube-overlay-kicker')}
-								fontWeight="bold"
+								fontWeight={isFeatureCard ? 'regular' : 'bold'}
 							/>
 						)}
 						<div css={titleStyles}>{title}</div>
+						{!!trailText && (
+							<div
+								css={css`
+									margin-top: ${space[3]}px;
+									margin-bottom: ${space[1]}px;
+								`}
+							>
+								<TrailText
+									trailText={trailText}
+									trailTextColour={palette(
+										'--feature-card-trail-text',
+									)}
+									trailTextSize={'regular'}
+									padBottom={false}
+								/>
+							</div>
+						)}
+						{isFeatureCard && (
+							<CardFooter
+								format={format}
+								age={age}
+								commentCount={commentCount}
+								showLivePlayable={false}
+								isVideo={isVideoArticle}
+								videoDuration={duration}
+							/>
+						)}
 					</div>
 				) : null}
 				{playIcon}

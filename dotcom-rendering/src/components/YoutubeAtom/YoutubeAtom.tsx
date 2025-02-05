@@ -50,6 +50,11 @@ export type Props = {
 	renderingTarget: RenderingTarget;
 	aspectRatio?: AspectRatio;
 	playIcon: ReactElement;
+	age?: ReactElement;
+	commentCount?: ReactElement;
+	trailText?: string;
+	isVideoArticle?: boolean;
+	isFeatureCard?: boolean;
 };
 
 export const YoutubeAtom = ({
@@ -78,6 +83,11 @@ export const YoutubeAtom = ({
 	renderingTarget,
 	aspectRatio,
 	playIcon,
+	trailText,
+	age,
+	commentCount,
+	isVideoArticle = false,
+	isFeatureCard = false,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -252,6 +262,11 @@ export const YoutubeAtom = ({
 							}
 							aspectRatio={aspectRatio}
 							playIcon={playIcon}
+							trailText={trailText}
+							age={age}
+							commentCount={commentCount}
+							isVideoArticle={isVideoArticle}
+							isFeatureCard={isFeatureCard}
 						/>
 					)}
 					{showPlaceholder && (

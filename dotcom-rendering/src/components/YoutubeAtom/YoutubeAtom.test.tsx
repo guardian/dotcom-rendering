@@ -56,6 +56,7 @@ describe('YoutubeAtom', () => {
 						<PlayIcon
 							iconSizeOnDesktop="large"
 							iconSizeOnMobile="large"
+							iconWidth="wide"
 						/>
 					}
 				/>
@@ -100,6 +101,7 @@ describe('YoutubeAtom', () => {
 						<PlayIcon
 							iconSizeOnDesktop="large"
 							iconSizeOnMobile="large"
+							iconWidth="wide"
 						/>
 					}
 				/>
@@ -151,6 +153,7 @@ describe('YoutubeAtom', () => {
 						<PlayIcon
 							iconSizeOnDesktop="large"
 							iconSizeOnMobile="large"
+							iconWidth="wide"
 						/>
 					}
 				/>
@@ -196,6 +199,7 @@ describe('YoutubeAtom', () => {
 						<PlayIcon
 							iconSizeOnDesktop="large"
 							iconSizeOnMobile="large"
+							iconWidth="wide"
 						/>
 					}
 				/>
@@ -240,6 +244,7 @@ describe('YoutubeAtom', () => {
 						<PlayIcon
 							iconSizeOnDesktop="large"
 							iconSizeOnMobile="large"
+							iconWidth="wide"
 						/>
 					}
 				/>
@@ -285,6 +290,7 @@ describe('YoutubeAtom', () => {
 						<PlayIcon
 							iconSizeOnDesktop="large"
 							iconSizeOnMobile="large"
+							iconWidth="wide"
 						/>
 					}
 				/>
@@ -328,6 +334,7 @@ describe('YoutubeAtom', () => {
 						<PlayIcon
 							iconSizeOnDesktop="large"
 							iconSizeOnMobile="large"
+							iconWidth="wide"
 						/>
 					}
 				/>
@@ -375,6 +382,7 @@ describe('YoutubeAtom', () => {
 							<PlayIcon
 								iconSizeOnDesktop="large"
 								iconSizeOnMobile="small"
+								iconWidth="wide"
 							/>
 						}
 					/>
@@ -401,6 +409,7 @@ describe('YoutubeAtom', () => {
 							<PlayIcon
 								iconSizeOnDesktop="large"
 								iconSizeOnMobile="small"
+								iconWidth="wide"
 							/>
 						}
 					/>

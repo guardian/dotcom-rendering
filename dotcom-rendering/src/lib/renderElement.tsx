@@ -860,6 +860,7 @@ export const renderElement = ({
 							<PlayIcon
 								iconSizeOnDesktop="large"
 								iconSizeOnMobile="large"
+								iconWidth="wide"
 							/>
 						}
 					/>

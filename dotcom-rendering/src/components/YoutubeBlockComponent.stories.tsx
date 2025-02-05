@@ -59,6 +59,7 @@ export const Default = () => {
 					<PlayIcon
 						iconSizeOnDesktop="large"
 						iconSizeOnMobile="large"
+						iconWidth="wide"
 					/>
 				}
 			/>
@@ -101,6 +102,7 @@ export const Vertical = () => {
 					<PlayIcon
 						iconSizeOnDesktop="large"
 						iconSizeOnMobile="large"
+						iconWidth="wide"
 					/>
 				}
 			/>
@@ -144,6 +146,7 @@ export const Expired = () => {
 					<PlayIcon
 						iconSizeOnDesktop="large"
 						iconSizeOnMobile="large"
+						iconWidth="wide"
 					/>
 				}
 			/>
@@ -188,6 +191,7 @@ export const WithOverlayImage = () => {
 					<PlayIcon
 						iconSizeOnDesktop="large"
 						iconSizeOnMobile="large"
+						iconWidth="wide"
 					/>
 				}
 			/>
@@ -253,6 +257,7 @@ export const WithPosterImage = () => {
 					<PlayIcon
 						iconSizeOnDesktop="large"
 						iconSizeOnMobile="large"
+						iconWidth="wide"
 					/>
 				}
 			/>
@@ -319,6 +324,7 @@ export const WithPosterAndOverlayImage = () => {
 					<PlayIcon
 						iconSizeOnDesktop="large"
 						iconSizeOnMobile="large"
+						iconWidth="wide"
 					/>
 				}
 			/>
@@ -385,6 +391,7 @@ export const WithShowMainVideoFlagOff = () => {
 					<PlayIcon
 						iconSizeOnDesktop="large"
 						iconSizeOnMobile="large"
+						iconWidth="wide"
 					/>
 				}
 			/>

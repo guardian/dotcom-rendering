@@ -233,7 +233,8 @@ const CardAge = ({
 	if (!webPublicationDate) return undefined;
 	const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
 
-	if (withinTwelveHours) {
+	if (!withinTwelveHours) {
+		// TODO - flip
 		return (
 			<AgeStamp
 				webPublication={{
@@ -348,8 +349,6 @@ export const FeatureCard = ({
 
 	const showYoutubeVideo = canPlayInline && mainMedia?.type === 'Video';
 
-	console.log('showYoutubeVideo', showYoutubeVideo);
-
 	return (
 		<FormatBoundary format={format}>
 			<ContainerOverrides containerPalette={containerPalette}>
@@ -372,18 +371,20 @@ export const FeatureCard = ({
 						]}
 					>
 						{showYoutubeVideo && (
-							<div
-								data-chromatic="ignore"
-								data-component="youtube-atom"
-								css={css`
-									display: block;
-									position: relative;
-									z-index: ${getZIndex('card-nested-link')};
-								`}
+							<Island
+								priority="critical"
+								defer={{ until: 'visible' }}
 							>
-								<Island
-									priority="critical"
-									defer={{ until: 'visible' }}
+								<div
+									data-chromatic="ignore"
+									data-component="youtube-atom"
+									css={css`
+										display: block;
+										position: relative;
+										z-index: ${getZIndex(
+											'card-nested-link',
+										)};
+									`}
 								>
 									<YoutubeBlockComponent
 										id={mainMedia.id}
@@ -406,15 +407,39 @@ export const FeatureCard = ({
 										pauseOffscreenVideo={true}
 										showTextOverlay={true}
 										aspectRatio={aspectRatio}
+										trailText={trailText}
+										isVideoArticle={isVideoArticle}
+										isFeatureCard={true}
 										playIcon={
 											<PlayIcon
 												iconSizeOnDesktop="large"
 												iconSizeOnMobile="large"
+												iconWidth="narrow"
+											/>
+										}
+										age={
+											<CardAge
+												webPublicationDate={
+													webPublicationDate
+												}
+												showClock={!!showClock}
+												absoluteServerTimes={
+													absoluteServerTimes
+												}
+											/>
+										}
+										commentCount={
+											<CommentCount
+												linkTo={linkTo}
+												discussionId={discussionId}
+												discussionApiUrl={
+													discussionApiUrl
+												}
 											/>
 										}
 									/>
-								</Island>
-							</div>
+								</div>
+							</Island>
 						)}
 						{!showYoutubeVideo && media && (
 							<div

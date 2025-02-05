@@ -109,8 +109,8 @@ export const CardFooter = ({
 
 	return (
 		<footer css={contentStyles}>
-			{age}
-			{commentCount}
+			{age ?? null}
+			{commentCount ?? null}
 		</footer>
 	);
 };

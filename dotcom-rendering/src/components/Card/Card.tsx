@@ -946,6 +946,7 @@ export const Card = ({
 																? 'small'
 																: 'large'
 														}
+														iconWidth="wide"
 													/>
 												}
 												enableAds={false}

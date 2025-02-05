@@ -38,6 +38,8 @@ type Props = {
 	pauseOffscreenVideo?: boolean;
 	showTextOverlay?: boolean;
 	playIcon: ReactElement;
+	age?: ReactElement;
+	commentCount?: ReactElement;
 	/**
 	 * If the youtube block component is used on a card, we can pass in the image size and
 	 * position on mobile to get the correct styling for the play icon. If it's not used on
@@ -45,6 +47,9 @@ type Props = {
 	 */
 	imagePositionOnMobile?: ImagePositionType;
 	aspectRatio?: AspectRatio;
+	trailText?: string;
+	isVideoArticle?: boolean;
+	isFeatureCard?: boolean;
 };
 
 /**
@@ -87,6 +92,11 @@ export const YoutubeBlockComponent = ({
 	enableAds,
 	aspectRatio,
 	playIcon,
+	age,
+	commentCount,
+	trailText,
+	isVideoArticle = false,
+	isFeatureCard = false,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -180,6 +190,11 @@ export const YoutubeBlockComponent = ({
 				imagePositionOnMobile={imagePositionOnMobile}
 				renderingTarget={renderingTarget}
 				aspectRatio={aspectRatio}
+				trailText={trailText}
+				age={age}
+				commentCount={commentCount}
+				isVideoArticle={isVideoArticle}
+				isFeatureCard={isFeatureCard}
 			/>
 			{!hideCaption && (
 				<Caption
