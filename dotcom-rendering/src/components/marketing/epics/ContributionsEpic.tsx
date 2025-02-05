@@ -309,7 +309,6 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	submitComponentEvent,
 	openCmp,
 	hasConsentForArticleCount,
-	stage,
 }: EpicProps) => {
 	const { image, tickerSettings, choiceCardAmounts, newsletterSignup } =
 		variant;
@@ -341,7 +340,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				);
 			}
 		}
-	}, [hasBeenSeen, submitComponentEvent, countryCode, stage, tracking]);
+	}, [hasBeenSeen, submitComponentEvent, countryCode, tracking]);
 
 	useEffect(() => {
 		if (submitComponentEvent) {

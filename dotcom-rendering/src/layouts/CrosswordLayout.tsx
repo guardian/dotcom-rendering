@@ -420,7 +420,6 @@ export const CrosswordLayout = (props: WebProps) => {
 								shouldHideReaderRevenue={
 									article.shouldHideReaderRevenue
 								}
-								stage={article.config.stage}
 								tags={article.tags}
 								renderAds={renderAds}
 								isLabs={false}
