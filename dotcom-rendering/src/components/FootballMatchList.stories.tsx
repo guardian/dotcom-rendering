@@ -155,3 +155,11 @@ export const ErrorGettingMore = {
 	},
 	play: Default.play,
 } satisfies Story;
+
+export const NoMoreDays = {
+	args: {
+		...Default.args,
+		getMoreDays: undefined,
+	},
+	play: Default.play,
+} satisfies Story;
