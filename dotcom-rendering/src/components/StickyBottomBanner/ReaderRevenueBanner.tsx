@@ -62,24 +62,6 @@ type BuildPayloadProps = BaseProps & {
 	hideSupportMessagingForUser: boolean;
 };
 
-/**
- *      isSignedIn: boolean;
- * 		countryCode: CountryCode;
- * 		isPreview: boolean;
- * 		asyncArticleCounts: Promise<ArticleCounts | undefined>;
- * 		signInGateWillShow?: boolean;
- * 		contentType: string;
- * 		sectionId: string;
- * 		shouldHideReaderRevenue: boolean;
- * 		isMinuteArticle: boolean;
- * 		isPaidContent: boolean;
- * 		isSensitive: boolean;
- * 		tags: TagType[];
- * 		contributionsServiceUrl: string;
- * 		idApiUrl: string;
- * 		renderingTarget: RenderingTarget;
- */
-
 type CanShowProps = BaseProps & {
 	countryCode: CountryCode;
 	remoteBannerConfig: boolean;

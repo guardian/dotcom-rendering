@@ -8,6 +8,8 @@ import type { CountryCode } from '@guardian/libs';
 import { getCookie, isString, isUndefined } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/types';
+import type { ModuleData } from '@guardian/support-dotcom-components/dist/dotcom/types';
+import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
 import type {
@@ -28,10 +30,7 @@ import {
 	canShowReaderRevenueEpic,
 	ReaderRevenueEpic,
 } from './SlotBodyEnd/ReaderRevenueEpic';
-import type {
-	CanShowData as RRCanShowData,
-	EpicConfig as RREpicConfig,
-} from './SlotBodyEnd/ReaderRevenueEpic';
+import type { CanShowData as RRCanShowData } from './SlotBodyEnd/ReaderRevenueEpic';
 
 type Props = {
 	contentType: string;
@@ -42,7 +41,6 @@ type Props = {
 	tags: TagType[];
 	contributionsServiceUrl: string;
 	idApiUrl: string;
-	stage: string;
 	pageId: string;
 	renderAds: boolean;
 	isLabs: boolean;
@@ -55,13 +53,13 @@ const slotStyles = css`
 
 const buildReaderRevenueEpicConfig = (
 	canShowData: RRCanShowData,
-): CandidateConfig<RREpicConfig> => {
+): CandidateConfig<ModuleData<EpicProps>> => {
 	return {
 		candidate: {
 			id: 'reader-revenue-banner',
 			canShow: () => canShowReaderRevenueEpic(canShowData),
-			show: (meta: RREpicConfig) => () => {
-				return <ReaderRevenueEpic {...meta} />;
+			show: (data: ModuleData<EpicProps>) => () => {
+				return <ReaderRevenueEpic {...data} />;
 			},
 		},
 		timeoutMillis: null,
@@ -123,7 +121,6 @@ export const SlotBodyEnd = ({
 	tags,
 	contributionsServiceUrl,
 	idApiUrl,
-	stage,
 	pageId,
 	renderAds,
 	isLabs,
@@ -186,9 +183,9 @@ export const SlotBodyEnd = ({
 			tags,
 			contributionsServiceUrl,
 			idApiUrl,
-			stage,
 			asyncArticleCount,
 			browserId,
+			renderingTarget,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
@@ -225,7 +222,6 @@ export const SlotBodyEnd = ({
 		renderingTarget,
 		sectionId,
 		shouldHideReaderRevenue,
-		stage,
 		tags,
 	]);
 
