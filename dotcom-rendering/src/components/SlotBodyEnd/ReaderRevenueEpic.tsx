@@ -143,7 +143,7 @@ export const canShowReaderRevenueEpic = async (
 			props: {
 				...module.props,
 				hasConsentForArticleCount,
-				...(fetchEmail ? { fetchEmail } : {}),
+				fetchEmail,
 				submitComponentEvent: (componentEvent: OphanComponentEvent) =>
 					void submitComponentEvent(componentEvent, renderingTarget),
 				openCmp,
