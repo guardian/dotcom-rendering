@@ -1,4 +1,4 @@
-import type { GutterAskProps, GutterVariant } from './types';
+import type { GutterAskRenderProps, GutterVariant } from './types';
 
 const variant: GutterVariant = {
 	name: 'default',
@@ -18,9 +18,11 @@ const variant: GutterVariant = {
 	},
 };
 
+const enrichedUrl = 'https://www.theguardian.com/uk';
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const onCtaClick = () => {
 	return undefined;
 }; // TODO: temporary...
 
-export const props: GutterAskProps = { variant, onCtaClick };
+export const props: GutterAskRenderProps = { variant, enrichedUrl, onCtaClick };

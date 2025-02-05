@@ -103,21 +103,23 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 		);
 	};
 
-	useEffect(() => {
-		const baseUrl = variant.content.cta.baseUrl;
-		variant.content.cta.baseUrl = addRegionIdAndTrackingParamsToSupportUrl(
-			baseUrl,
-			tracking,
-			undefined,
-			countryCode,
-		);
-	}, [countryCode, tracking]);
+	const baseUrl = variant.content.cta.baseUrl;
+	const urlWithRegionAndTracking = addRegionIdAndTrackingParamsToSupportUrl(
+		baseUrl,
+		tracking,
+		undefined,
+		countryCode,
+	);
 
 	return (
 		<>
 			{canShow && (
 				<div css={stickyLeft}>
-					<GutterAsk variant={variant} onCtaClick={onCtaClick} />
+					<GutterAsk
+						variant={variant}
+						enrichedUrl={urlWithRegionAndTracking}
+						onCtaClick={onCtaClick}
+					/>
 				</div>
 			)}
 		</>

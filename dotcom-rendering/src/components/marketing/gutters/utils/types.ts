@@ -18,7 +18,8 @@ export type GutterVariant = {
 // end temporary
 
 // internal component
-export interface GutterAskProps {
+export interface GutterAskRenderProps {
 	variant: GutterVariant;
+	enrichedUrl: string;
 	onCtaClick: () => void;
 }

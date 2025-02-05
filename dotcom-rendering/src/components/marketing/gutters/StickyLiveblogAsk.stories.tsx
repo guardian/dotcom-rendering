@@ -3,7 +3,7 @@ import { space } from '@guardian/source/foundations';
 import { GutterAsk } from './gutterAsk';
 import { props } from './utils/storybook';
 
-const { variant, onCtaClick } = props;
+const { variant, enrichedUrl, onCtaClick } = props;
 
 export default {
 	component: GutterAsk,
@@ -24,7 +24,11 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 export const Default = () => {
 	return (
 		<Wrapper>
-			<GutterAsk variant={variant} onCtaClick={onCtaClick} />
+			<GutterAsk
+				variant={variant}
+				enrichedUrl={enrichedUrl}
+				onCtaClick={onCtaClick}
+			/>
 		</Wrapper>
 	);
 };

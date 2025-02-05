@@ -5,7 +5,7 @@ import {
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
 import type { ReactComponent } from '../lib/ReactComponent';
-import type { GutterAskProps } from './utils/types';
+import type { GutterAskRenderProps } from './utils/types';
 
 // CSS Styling
 // -------------------------------------------
@@ -67,10 +67,11 @@ const contributionsTheme = {
 	link: buttonStyles,
 };
 
-export const GutterAsk: ReactComponent<GutterAskProps> = ({
+export const GutterAsk: ReactComponent<GutterAskRenderProps> = ({
 	variant,
+	enrichedUrl,
 	onCtaClick,
-}: GutterAskProps) => (
+}: GutterAskRenderProps) => (
 	<div css={container}>
 		<div css={imageHeader}>
 			<img
@@ -85,7 +86,7 @@ export const GutterAsk: ReactComponent<GutterAskProps> = ({
 			<div css={ctaSection}>
 				<ThemeProvider theme={contributionsTheme}>
 					<LinkButton
-						href={variant.content.cta.baseUrl}
+						href={enrichedUrl}
 						icon={<SvgArrowRightStraight />}
 						iconSide="right"
 						onClick={onCtaClick}
