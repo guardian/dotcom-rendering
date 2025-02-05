@@ -49,7 +49,7 @@ const ReaderRevenueLinksRemote = ({
 	const [supportHeaderResponse, setSupportHeaderResponse] =
 		useState<ModuleData<HeaderProps> | null>(null);
 	const [SupportHeader, setSupportHeader] =
-		useState<React.ComponentType<HeaderProps> | null>(null);
+		useState<React.ElementType<HeaderProps> | null>(null);
 	const isSignedIn = useIsSignedIn();
 
 	const { renderingTarget } = useConfig();
@@ -103,7 +103,7 @@ const ReaderRevenueLinksRemote = ({
 						  import(`./marketing/header/Header`)
 				).then(
 					(headerModule: {
-						[key: string]: React.ComponentType<HeaderProps>;
+						[key: string]: React.ElementType<HeaderProps>;
 					}) => {
 						setSupportHeader(
 							() => headerModule[module.name] ?? null,
