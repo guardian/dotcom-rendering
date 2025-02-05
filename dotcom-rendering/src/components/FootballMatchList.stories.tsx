@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/test';
+import { allModes } from '../../.storybook/modes';
 import type { FootballMatches } from '../footballMatches';
 import { error, ok } from '../lib/result';
 import { FootballMatchList } from './FootballMatchList';
@@ -16,6 +17,15 @@ const meta = {
 			</>
 		),
 	],
+	parameters: {
+		chromatic: {
+			modes: {
+				'vertical mobile': allModes['vertical mobile'],
+				'vertical desktop': allModes['vertical desktop'],
+				'vertical wide': allModes['splitVertical'],
+			},
+		},
+	},
 } satisfies Meta<typeof FootballMatchList>;
 
 export default meta;
@@ -109,8 +119,10 @@ export const Default = {
 	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
-		const more = canvas.getByRole('button');
-		await userEvent.click(more);
+		const moreButtons = canvas.getAllByRole('button');
+		for (const moreButton of moreButtons) {
+			await userEvent.click(moreButton);
+		}
 	},
 } satisfies Story;
 

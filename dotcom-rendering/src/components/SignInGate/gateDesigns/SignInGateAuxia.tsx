@@ -25,6 +25,7 @@ export const SignInGateAuxia = ({
 	ophanComponentId,
 	isMandatory = false,
 	userTreatment,
+	logTreatmentInteractionCall,
 }: SignInGatePropsAuxia) => {
 	const { renderingTarget } = useConfig();
 
@@ -95,6 +96,12 @@ export const SignInGateAuxia = ({
 								renderingTarget,
 								abTest,
 							);
+							logTreatmentInteractionCall().catch((error) => {
+								console.error(
+									'Failed to log treatment interaction:',
+									error,
+								);
+							});
 						}}
 					>
 						I’ll do it later
