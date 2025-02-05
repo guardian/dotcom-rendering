@@ -156,9 +156,8 @@ const MatchStatus = ({
 	}
 };
 
-function shouldRenderMatchLink(match: FootballMatch, now: Date) {
-	return match.dateTime.getTime() - now.getTime() <= 72 * 60 * 60 * 1000;
-}
+export const shouldRenderMatchLink = (matchDateTime: Date, now: Date) =>
+	matchDateTime.getTime() - now.getTime() <= 72 * 60 * 60 * 1000;
 
 const matchListItemStyles = css`
 	background-color: ${palette('--football-match-list-background')};
@@ -191,7 +190,7 @@ const MatchWrapper = ({
 	now: Date;
 	children: ReactNode;
 }) => {
-	if (shouldRenderMatchLink(match, now)) {
+	if (shouldRenderMatchLink(match.dateTime, now)) {
 		return (
 			<li css={matchListItemStyles}>
 				<a
