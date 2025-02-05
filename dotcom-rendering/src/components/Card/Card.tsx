@@ -725,6 +725,10 @@ export const Card = ({
 		return undefined;
 	};
 
+	const isLoopTest =
+		linkTo ===
+		'/uk-news/2025/feb/05/nottingham-attacks-victims-families-call-for-killers-doctors-to-be-named';
+
 	return (
 		<CardWrapper
 			format={format}
@@ -971,6 +975,7 @@ export const Card = ({
 									loading={imageLoading}
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
+									isLoopTest={isLoopTest}
 								/>
 								{(isVideoMainMedia ||
 									(isVideoArticle && !isBetaContainer)) &&
