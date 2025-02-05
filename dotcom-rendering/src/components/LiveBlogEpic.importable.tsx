@@ -4,6 +4,7 @@ import { getCookie, isUndefined, log, storage } from '@guardian/libs';
 import { space } from '@guardian/source/foundations';
 import { getEpicViewLog } from '@guardian/support-dotcom-components';
 import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/types';
+import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { submitComponentEvent } from '../client/ophan/ophan';
@@ -31,8 +32,7 @@ type Props = {
 const useEpic = ({ name }: { name: string }) => {
 	// Using state here to store the Epic component that gets imported allows
 	// us to render it with React (instead of inserting it into the dom manually)
-	const [Epic, setEpic] =
-		useState<React.ElementType<{ [key: string]: unknown }>>();
+	const [Epic, setEpic] = useState<React.ElementType<EpicProps>>();
 
 	useEffect(() => {
 		import(
@@ -140,17 +140,11 @@ const usePayload = ({
  * Dynamically imports and renders a given module
  *
  * @param props
- * @param props.name tring - The name of the component
+ * @param name string - The name of the component
  * @param props.props object - The props of the component
  * @returns The resulting react component
  */
-const Render = ({
-	name,
-	props,
-}: {
-	name: string;
-	props: { [key: string]: unknown };
-}) => {
+const Render = ({ name, props }: { name: string; props: EpicProps }) => {
 	const { Epic } = useEpic({ name });
 
 	if (isUndefined(Epic)) return null;
@@ -192,7 +186,7 @@ const Fetch = ({
 	log('dotcom', 'LiveBlogEpic has a module');
 
 	// Add submitComponentEvent function to props to enable Ophan tracking in the component
-	const props = {
+	const props: EpicProps = {
 		...response.data.module.props,
 		submitComponentEvent: (componentEvent: OphanComponentEvent) =>
 			submitComponentEvent(componentEvent, renderingTarget),
