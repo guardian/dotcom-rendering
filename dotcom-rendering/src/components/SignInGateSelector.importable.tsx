@@ -486,7 +486,7 @@ const SignInGateSelectorAuxia = ({
 		undefined,
 	);
 
-	const [auxiaAPIResponseData, setAuxiaAPIResponseData] = useState<
+	const [auxiaGetTreatmentsData, setAuxiaGetTreatmentsData] = useState<
 		SDCAuxiaProxyResponseData | undefined
 	>(undefined);
 
@@ -514,7 +514,7 @@ const SignInGateSelectorAuxia = ({
 	useOnce(() => {
 		void (async () => {
 			const data = await fetchProxyGetTreatments(contributionsServiceUrl);
-			setAuxiaAPIResponseData(data);
+			setAuxiaGetTreatmentsData(data);
 		})().catch((error) => {
 			console.error('Error fetching Auxia display data:', error);
 		});
@@ -527,12 +527,12 @@ const SignInGateSelectorAuxia = ({
 	return (
 		<>
 			{!isGateDismissed &&
-				auxiaAPIResponseData?.userTreatment !== undefined && (
+				auxiaGetTreatmentsData?.userTreatment !== undefined && (
 					<ShowSignInGateAuxia
 						host={host}
 						// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 						setShowGate={(show) => setIsGateDismissed(!show)}
-						userTreatment={auxiaAPIResponseData.userTreatment}
+						userTreatment={auxiaGetTreatmentsData.userTreatment}
 						logTreatmentInteractionCall={async () => {
 							await auxiaLogTreatmentInteraction(
 								contributionsServiceUrl,
