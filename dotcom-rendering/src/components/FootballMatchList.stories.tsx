@@ -118,8 +118,10 @@ export const Default = {
 	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
-		const more = canvas.getByRole('button');
-		await userEvent.click(more);
+		const moreButtons = canvas.getAllByRole('button');
+		for (const moreButton of moreButtons) {
+			await userEvent.click(moreButton);
+		}
 	},
 } satisfies Story;
 
