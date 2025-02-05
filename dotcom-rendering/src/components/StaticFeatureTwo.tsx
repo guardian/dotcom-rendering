@@ -1,4 +1,3 @@
-import { ArticleDesign } from '../lib/articleFormat';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
@@ -15,6 +14,7 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
+	collectionId: number;
 };
 export const StaticFeatureTwo = ({
 	trails,
@@ -22,6 +22,7 @@ export const StaticFeatureTwo = ({
 	absoluteServerTimes,
 	imageLoading,
 	aspectRatio,
+	collectionId,
 }: Props) => {
 	const cards = trails.slice(0, 2);
 
@@ -43,10 +44,6 @@ export const StaticFeatureTwo = ({
 							showByline={card.showByline}
 							webPublicationDate={card.webPublicationDate}
 							kickerText={card.kickerText}
-							/** TODO check if the pulsing dot should be be supported */
-							showPulsingDot={
-								card.format.design === ArticleDesign.LiveBlog
-							}
 							showClock={false}
 							image={card.image}
 							canPlayInline={true}
@@ -66,6 +63,7 @@ export const StaticFeatureTwo = ({
 							headlineSizes={{ desktop: 'small' }}
 							supportingContent={card.supportingContent}
 							galleryCount={card.galleryCount}
+							collectionId={collectionId}
 						/>
 					</LI>
 				);

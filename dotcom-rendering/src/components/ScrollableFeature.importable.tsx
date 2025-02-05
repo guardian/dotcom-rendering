@@ -1,4 +1,3 @@
-import { ArticleDesign } from '../lib/articleFormat';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
@@ -13,6 +12,7 @@ type Props = {
 	absoluteServerTimes: boolean;
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
+	collectionId: number;
 };
 
 /**
@@ -28,6 +28,7 @@ export const ScrollableFeature = ({
 	absoluteServerTimes,
 	imageLoading,
 	aspectRatio,
+	collectionId,
 }: Props) => {
 	return (
 		<ScrollableCarousel
@@ -36,6 +37,7 @@ export const ScrollableFeature = ({
 			visibleCardsOnTablet={3}
 		>
 			{trails.map((card) => {
+				// console.log('card', card);
 				return (
 					<ScrollableCarousel.Item key={card.url}>
 						<FeatureCard
@@ -46,10 +48,6 @@ export const ScrollableFeature = ({
 							showByline={card.showByline}
 							webPublicationDate={card.webPublicationDate}
 							kickerText={card.kickerText}
-							/** TODO check if the pulsing dot should be be supported */
-							showPulsingDot={
-								card.format.design === ArticleDesign.LiveBlog
-							}
 							showClock={false}
 							image={card.image}
 							canPlayInline={true}
@@ -73,6 +71,7 @@ export const ScrollableFeature = ({
 							galleryCount={card.galleryCount}
 							podcastImage={card.podcastImage}
 							audioDuration={card.audioDuration}
+							collectionId={collectionId}
 						/>
 					</ScrollableCarousel.Item>
 				);

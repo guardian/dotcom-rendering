@@ -34,6 +34,7 @@ import { MediaDuration } from './MediaDuration';
 import { Pill } from './Pill';
 import { StarRating } from './StarRating/StarRating';
 import { SupportingContent } from './SupportingContent';
+import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
 
 export type Position = 'inner' | 'outer' | 'none';
 
@@ -61,7 +62,6 @@ export type Props = {
 	 */
 	canPlayInline?: boolean;
 	kickerText?: string;
-	showPulsingDot?: boolean;
 	starRating?: Rating;
 	/** Used for Ophan tracking */
 	dataLinkName?: string;
@@ -79,6 +79,7 @@ export type Props = {
 	galleryCount?: number;
 	podcastImage?: PodcastSeriesImage;
 	audioDuration?: string;
+	collectionId?: number;
 };
 
 const baseCardStyles = css`
@@ -309,7 +310,6 @@ export const FeatureCard = ({
 	mainMedia,
 	canPlayInline,
 	kickerText,
-	showPulsingDot,
 	dataLinkName,
 	// branding,
 	supportingContent,
@@ -324,6 +324,7 @@ export const FeatureCard = ({
 	galleryCount,
 	podcastImage,
 	audioDuration,
+	collectionId,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -342,16 +343,22 @@ export const FeatureCard = ({
 		canPlayInline,
 	});
 
+	const showYoutubeVideo = canPlayInline && mainMedia?.type === 'Video';
+
+	console.log('collectionId', collectionId);
+
 	return (
 		<FormatBoundary format={format}>
 			<ContainerOverrides containerPalette={containerPalette}>
 				<div css={[baseCardStyles, hoverStyles]}>
-					<CardLink
-						linkTo={linkTo}
-						headlineText={headlineText}
-						dataLinkName={dataLinkName}
-						isExternalLink={isExternalLink}
-					/>
+					{!showYoutubeVideo && (
+						<CardLink
+							linkTo={linkTo}
+							headlineText={headlineText}
+							dataLinkName={dataLinkName}
+							isExternalLink={isExternalLink}
+						/>
+					)}
 					<div
 						css={[
 							css`
@@ -363,7 +370,33 @@ export const FeatureCard = ({
 							`,
 						]}
 					>
-						{media && (
+						{showYoutubeVideo && (
+							<YoutubeBlockComponent
+								altText={headlineText}
+								aspectRatio={aspectRatio}
+								assetId={mainMedia.id}
+								duration={mainMedia.duration}
+								enableAds={false}
+								expired={mainMedia.expired}
+								format={format}
+								height={375}
+								hideCaption={true}
+								id={`${mainMedia.id}-${collectionId}`}
+								imageSize={imageSize}
+								index={collectionId ?? 1}
+								isMainMedia={true}
+								kickerText={kickerText}
+								mediaTitle={mainMedia.title}
+								origin="The Guardian"
+								overrideImage={media?.imageUrl}
+								pauseOffscreenVideo={true}
+								posterImage={mainMedia.images}
+								showTextOverlay={true}
+								stickyVideos={false}
+								width={300}
+							/>
+						)}
+						{!showYoutubeVideo && media && (
 							<div
 								css={css`
 									position: relative;
@@ -472,8 +505,7 @@ export const FeatureCard = ({
 												}
 												showPulsingDot={
 													format.design ===
-														ArticleDesign.LiveBlog ||
-													showPulsingDot
+													ArticleDesign.LiveBlog
 												}
 												byline={byline}
 												showByline={showByline}
@@ -509,6 +541,7 @@ export const FeatureCard = ({
 												/>
 											</div>
 										)}
+
 										<CardFooter
 											format={format}
 											age={

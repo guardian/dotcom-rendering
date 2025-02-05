@@ -133,6 +133,8 @@ export const YoutubeAtomOverlay = ({
 	const hidePillOnMobile =
 		imagePositionOnMobile === 'right' || imagePositionOnMobile === 'left';
 
+	console.log('uniqueId', uniqueId);
+
 	return (
 		<FormatBoundary format={format}>
 			<button
