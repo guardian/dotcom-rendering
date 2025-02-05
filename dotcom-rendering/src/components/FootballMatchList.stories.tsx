@@ -34,7 +34,7 @@ type Story = StoryObj<typeof meta>;
 
 const initialDays: FootballMatches = [
 	{
-		date: new Date('2025-01-24T00:00:00Z'),
+		date: new Date('2022-01-01T00:00:00Z'),
 		competitions: [
 			{
 				competitionId: '635',
@@ -43,7 +43,7 @@ const initialDays: FootballMatches = [
 				matches: [
 					{
 						kind: 'Live',
-						dateTime: new Date('2025-01-24T11:11:00Z'),
+						dateTime: new Date('2022-01-01T11:11:00Z'),
 						paId: '4482093',
 						homeTeam: {
 							name: 'Torino',
@@ -57,7 +57,7 @@ const initialDays: FootballMatches = [
 					},
 					{
 						kind: 'Fixture',
-						dateTime: new Date('2025-01-24T19:45:00Z'),
+						dateTime: new Date('2022-01-01T19:45:00Z'),
 						paId: '4482890',
 						homeTeam: 'Auxerre',
 						awayTeam: 'St Etienne',
@@ -71,7 +71,7 @@ const initialDays: FootballMatches = [
 				matches: [
 					{
 						kind: 'Result',
-						dateTime: new Date('2025-01-24T20:00:00Z'),
+						dateTime: new Date('2022-01-01T20:00:00Z'),
 						paId: '4482835',
 						homeTeam: {
 							name: 'Las Palmas',
@@ -86,13 +86,13 @@ const initialDays: FootballMatches = [
 				],
 			},
 			{
-				competitionId: '650',
+				competitionId: '651',
 				name: 'FA Cup',
 				nation: 'European',
 				matches: [
 					{
 						kind: 'Result',
-						dateTime: new Date('2025-01-25T20:00:00Z'),
+						dateTime: new Date('2022-01-01T20:00:00Z'),
 						paId: '4482836',
 						homeTeam: {
 							name: 'Brighton & Hove Albion Women',
@@ -111,11 +111,33 @@ const initialDays: FootballMatches = [
 	},
 ];
 
+const moreDays: FootballMatches = [
+	{
+		date: new Date('2022-01-05T00:00:00Z'),
+		competitions: [
+			{
+				competitionId: '635',
+				name: 'Serie A',
+				nation: 'European',
+				matches: [
+					{
+						kind: 'Fixture',
+						dateTime: new Date('2022-01-05T19:45:00Z'),
+						paId: '4482890',
+						homeTeam: 'Juventus',
+						awayTeam: 'Roma',
+					},
+				],
+			},
+		],
+	},
+];
+
 export const Default = {
 	args: {
 		edition: 'UK',
 		initialDays,
-		getMoreDays: () => Promise.resolve(ok(initialDays)),
+		getMoreDays: () => Promise.resolve(ok(moreDays)),
 	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
