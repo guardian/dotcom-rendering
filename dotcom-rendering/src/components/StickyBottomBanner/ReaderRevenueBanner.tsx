@@ -299,16 +299,6 @@ export const canShowRRBanner: CanShowFunctionType<
 	};
 };
 
-// export type BannerProps = {
-// 	module: ModuleData;
-// 	fetchEmail?: () => Promise<string | null>;
-// };
-//
-// type RemoteBannerProps = BannerProps & {
-// 	componentTypeName: ReaderRevenueComponentType;
-// 	displayEvent: string;
-// };
-
 export const ReaderRevenueBanner = ({
 	name,
 	props,
