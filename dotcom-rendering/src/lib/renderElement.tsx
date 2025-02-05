@@ -858,7 +858,7 @@ export const renderElement = ({
 						enableAds={true}
 						playIcon={
 							<PlayIcon
-								imageSize="large"
+								iconSizeOnDesktop="large"
 								iconSizeOnMobile="large"
 							/>
 						}

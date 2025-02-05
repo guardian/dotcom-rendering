@@ -922,7 +922,7 @@ export const Card = ({
 													<PlayIcon
 														//** TODO: IMPROVE THIS MAPPING */
 														// image size defaults to small if not provided. However, if the headline size is large or greater, we want to assume the image is also large so that the play icon is correctly sized.
-														imageSize={
+														iconSizeOnDesktop={
 															[
 																'small',
 																'medium',
@@ -932,9 +932,11 @@ export const Card = ({
 															].includes(
 																headlineSizes?.desktop ??
 																	'',
-															)
+															) ||
+															imageSize !==
+																'small'
 																? 'large'
-																: imageSize
+																: 'small'
 														}
 														iconSizeOnMobile={
 															imagePositionOnMobile ===

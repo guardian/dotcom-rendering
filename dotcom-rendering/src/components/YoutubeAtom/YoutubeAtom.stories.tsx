@@ -153,7 +153,7 @@ const baseConfiguration = {
 	imagePositionOnMobile,
 	consentState: consentGiven,
 	renderingTarget: 'Web',
-	playIcon: <PlayIcon imageSize="large" iconSizeOnMobile="large" />,
+	playIcon: <PlayIcon iconSizeOnDesktop="large" iconSizeOnMobile="large" />,
 } satisfies Partial<Props>;
 
 const NoConsent = {

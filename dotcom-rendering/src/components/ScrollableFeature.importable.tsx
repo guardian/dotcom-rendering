@@ -13,6 +13,7 @@ type Props = {
 	absoluteServerTimes: boolean;
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
+	collectionId: number;
 };
 
 /**
@@ -28,6 +29,7 @@ export const ScrollableFeature = ({
 	absoluteServerTimes,
 	imageLoading,
 	aspectRatio,
+	collectionId,
 }: Props) => {
 	return (
 		<ScrollableCarousel
@@ -36,6 +38,7 @@ export const ScrollableFeature = ({
 			visibleCardsOnTablet={3}
 		>
 			{trails.map((card) => {
+				// console.log('card', card);
 				return (
 					<ScrollableCarousel.Item key={card.url}>
 						<FeatureCard
@@ -73,6 +76,7 @@ export const ScrollableFeature = ({
 							galleryCount={card.galleryCount}
 							podcastImage={card.podcastImage}
 							audioDuration={card.audioDuration}
+							collectionId={collectionId}
 						/>
 					</ScrollableCarousel.Item>
 				);

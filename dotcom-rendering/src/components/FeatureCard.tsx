@@ -22,6 +22,7 @@ import type {
 	ImagePositionType,
 	ImageSizeType,
 } from './Card/components/ImageWrapper';
+import { PlayIcon } from './Card/components/PlayIcon';
 import { TrailText } from './Card/components/TrailText';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from './CardHeadline';
@@ -34,6 +35,7 @@ import { MediaDuration } from './MediaDuration';
 import { Pill } from './Pill';
 import { StarRating } from './StarRating/StarRating';
 import { SupportingContent } from './SupportingContent';
+import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
 
 export type Position = 'inner' | 'outer' | 'none';
 
@@ -79,6 +81,7 @@ export type Props = {
 	galleryCount?: number;
 	podcastImage?: PodcastSeriesImage;
 	audioDuration?: string;
+	collectionId?: number;
 };
 
 const baseCardStyles = css`
@@ -324,6 +327,7 @@ export const FeatureCard = ({
 	galleryCount,
 	podcastImage,
 	audioDuration,
+	collectionId,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -341,6 +345,10 @@ export const FeatureCard = ({
 		mainMedia,
 		canPlayInline,
 	});
+
+	const showYoutubeVideo = canPlayInline && mainMedia?.type === 'Video';
+
+	console.log('showYoutubeVideo', showYoutubeVideo);
 
 	return (
 		<FormatBoundary format={format}>
@@ -363,7 +371,52 @@ export const FeatureCard = ({
 							`,
 						]}
 					>
-						{media && (
+						{showYoutubeVideo && (
+							<div
+								data-chromatic="ignore"
+								data-component="youtube-atom"
+								css={css`
+									display: block;
+									position: relative;
+									z-index: ${getZIndex('card-nested-link')};
+								`}
+							>
+								<Island
+									priority="critical"
+									defer={{ until: 'visible' }}
+								>
+									<YoutubeBlockComponent
+										id={mainMedia.id}
+										assetId={mainMedia.videoId}
+										index={`${collectionId}${mainMedia.videoId}`}
+										expired={mainMedia.expired}
+										format={format}
+										stickyVideos={false}
+										enableAds={false}
+										duration={mainMedia.duration}
+										posterImage={mainMedia.images}
+										overrideImage={media?.imageUrl}
+										width={300}
+										height={375}
+										origin="The Guardian"
+										mediaTitle={headlineText}
+										isMainMedia={true}
+										hideCaption={true}
+										kickerText={kickerText}
+										pauseOffscreenVideo={true}
+										showTextOverlay={true}
+										aspectRatio={aspectRatio}
+										playIcon={
+											<PlayIcon
+												iconSizeOnDesktop="large"
+												iconSizeOnMobile="large"
+											/>
+										}
+									/>
+								</Island>
+							</div>
+						)}
+						{!showYoutubeVideo && media && (
 							<div
 								css={css`
 									position: relative;
@@ -509,6 +562,7 @@ export const FeatureCard = ({
 												/>
 											</div>
 										)}
+
 										<CardFooter
 											format={format}
 											age={

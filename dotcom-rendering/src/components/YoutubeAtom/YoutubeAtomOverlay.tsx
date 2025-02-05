@@ -182,8 +182,7 @@ export const YoutubeAtomOverlay = ({
 						/>
 					</div>
 				)}
-				{playIcon}
-				{showTextOverlay && (
+				{showTextOverlay ? (
 					<div css={textOverlayStyles}>
 						{!!kicker && (
 							<Kicker
@@ -194,7 +193,8 @@ export const YoutubeAtomOverlay = ({
 						)}
 						<div css={titleStyles}>{title}</div>
 					</div>
-				)}
+				) : null}
+				{playIcon}
 			</button>
 		</FormatBoundary>
 	);

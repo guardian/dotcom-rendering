@@ -53,7 +53,10 @@ describe('YoutubeAtom', () => {
 					imagePositionOnMobile="none"
 					renderingTarget="Web"
 					playIcon={
-						<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+						<PlayIcon
+							iconSizeOnDesktop="large"
+							iconSizeOnMobile="large"
+						/>
 					}
 				/>
 			</ConfigProvider>
@@ -94,7 +97,10 @@ describe('YoutubeAtom', () => {
 					imagePositionOnMobile="none"
 					renderingTarget="Web"
 					playIcon={
-						<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+						<PlayIcon
+							iconSizeOnDesktop="large"
+							iconSizeOnMobile="large"
+						/>
 					}
 				/>
 			</ConfigProvider>
@@ -142,7 +148,10 @@ describe('YoutubeAtom', () => {
 					imagePositionOnMobile="none"
 					renderingTarget="Web"
 					playIcon={
-						<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+						<PlayIcon
+							iconSizeOnDesktop="large"
+							iconSizeOnMobile="large"
+						/>
 					}
 				/>
 			</ConfigProvider>
@@ -184,7 +193,10 @@ describe('YoutubeAtom', () => {
 					imagePositionOnMobile="none"
 					renderingTarget="Web"
 					playIcon={
-						<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+						<PlayIcon
+							iconSizeOnDesktop="large"
+							iconSizeOnMobile="large"
+						/>
 					}
 				/>
 			</ConfigProvider>
@@ -225,7 +237,10 @@ describe('YoutubeAtom', () => {
 					imagePositionOnMobile="none"
 					renderingTarget="Web"
 					playIcon={
-						<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+						<PlayIcon
+							iconSizeOnDesktop="large"
+							iconSizeOnMobile="large"
+						/>
 					}
 				/>
 			</ConfigProvider>
@@ -267,7 +282,10 @@ describe('YoutubeAtom', () => {
 					imagePositionOnMobile="none"
 					renderingTarget="Web"
 					playIcon={
-						<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+						<PlayIcon
+							iconSizeOnDesktop="large"
+							iconSizeOnMobile="large"
+						/>
 					}
 				/>
 			</ConfigProvider>
@@ -307,7 +325,10 @@ describe('YoutubeAtom', () => {
 					imagePositionOnMobile="none"
 					renderingTarget="Web"
 					playIcon={
-						<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+						<PlayIcon
+							iconSizeOnDesktop="large"
+							iconSizeOnMobile="large"
+						/>
 					}
 				/>
 			</ConfigProvider>
@@ -352,7 +373,7 @@ describe('YoutubeAtom', () => {
 						renderingTarget="Web"
 						playIcon={
 							<PlayIcon
-								imageSize="small"
+								iconSizeOnDesktop="large"
 								iconSizeOnMobile="small"
 							/>
 						}
@@ -378,7 +399,7 @@ describe('YoutubeAtom', () => {
 						renderingTarget="Web"
 						playIcon={
 							<PlayIcon
-								imageSize="small"
+								iconSizeOnDesktop="large"
 								iconSizeOnMobile="small"
 							/>
 						}

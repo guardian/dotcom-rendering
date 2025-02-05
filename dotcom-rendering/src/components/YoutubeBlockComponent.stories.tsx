@@ -56,7 +56,10 @@ export const Default = () => {
 				stickyVideos={false}
 				enableAds={false}
 				playIcon={
-					<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+					<PlayIcon
+						iconSizeOnDesktop="large"
+						iconSizeOnMobile="large"
+					/>
 				}
 			/>
 			<p>
@@ -95,7 +98,10 @@ export const Vertical = () => {
 				stickyVideos={false}
 				enableAds={false}
 				playIcon={
-					<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+					<PlayIcon
+						iconSizeOnDesktop="large"
+						iconSizeOnMobile="large"
+					/>
 				}
 			/>
 			<p>
@@ -135,7 +141,10 @@ export const Expired = () => {
 				stickyVideos={false}
 				enableAds={false}
 				playIcon={
-					<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+					<PlayIcon
+						iconSizeOnDesktop="large"
+						iconSizeOnMobile="large"
+					/>
 				}
 			/>
 			<p>
@@ -176,7 +185,10 @@ export const WithOverlayImage = () => {
 				stickyVideos={false}
 				enableAds={false}
 				playIcon={
-					<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+					<PlayIcon
+						iconSizeOnDesktop="large"
+						iconSizeOnMobile="large"
+					/>
 				}
 			/>
 			<p>
@@ -238,7 +250,10 @@ export const WithPosterImage = () => {
 				stickyVideos={false}
 				enableAds={false}
 				playIcon={
-					<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+					<PlayIcon
+						iconSizeOnDesktop="large"
+						iconSizeOnMobile="large"
+					/>
 				}
 			/>
 			<p>
@@ -301,7 +316,10 @@ export const WithPosterAndOverlayImage = () => {
 				stickyVideos={false}
 				enableAds={false}
 				playIcon={
-					<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+					<PlayIcon
+						iconSizeOnDesktop="large"
+						iconSizeOnMobile="large"
+					/>
 				}
 			/>
 			<p>
@@ -364,7 +382,10 @@ export const WithShowMainVideoFlagOff = () => {
 				stickyVideos={false}
 				enableAds={false}
 				playIcon={
-					<PlayIcon imageSize="large" iconSizeOnMobile="large" />
+					<PlayIcon
+						iconSizeOnDesktop="large"
+						iconSizeOnMobile="large"
+					/>
 				}
 			/>
 			<p>

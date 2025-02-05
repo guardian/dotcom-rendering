@@ -16,11 +16,13 @@ import { YoutubeAtomExpiredOverlay } from './YoutubeAtom/YoutubeAtomExpiredOverl
 type Props = {
 	id: string;
 	assetId: string;
-	index: number;
-	mediaTitle?: string;
-	altText?: string;
+	index: number | string;
 	expired: boolean;
 	format: ArticleFormat;
+	stickyVideos: boolean;
+	enableAds: boolean;
+	mediaTitle?: string;
+	altText?: string;
 	hideCaption?: boolean;
 	overrideImage?: string;
 	posterImage?: {
@@ -32,13 +34,16 @@ type Props = {
 	width?: number;
 	duration?: number; // in seconds
 	origin?: string;
-	stickyVideos: boolean;
 	kickerText?: string;
 	pauseOffscreenVideo?: boolean;
 	showTextOverlay?: boolean;
 	playIcon: ReactElement;
+	/**
+	 * If the youtube block component is used on a card, we can pass in the image size and
+	 * position on mobile to get the correct styling for the play icon. If it's not used on
+	 * a card, we can just pass default values to get the standard large play icon.
+	 */
 	imagePositionOnMobile?: ImagePositionType;
-	enableAds: boolean;
 	aspectRatio?: AspectRatio;
 };
 
@@ -49,7 +54,7 @@ type Props = {
  * @param images an array of the same image at different resolutions
  * @returns largest image from images
  */
-const getLargestImageSize = (
+export const getLargestImageSize = (
 	images: {
 		url: string;
 		width: number;
@@ -164,7 +169,7 @@ export const YoutubeBlockComponent = ({
 						: [ophanTrackerApps(id)]
 				}
 				format={format}
-				origin={process.env.NODE_ENV === 'development' ? '' : origin}
+				origin={origin}
 				shouldStick={renderingTarget === 'Web' ? stickyVideos : false}
 				isMainMedia={isMainMedia}
 				abTestParticipations={abTestParticipations}
