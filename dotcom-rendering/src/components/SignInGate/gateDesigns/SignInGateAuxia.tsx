@@ -73,7 +73,7 @@ export const SignInGateAuxia = ({
 					onClick={() => {
 						trackLink(
 							ophanComponentId,
-							'register-link',
+							'register-link-auxia',
 							renderingTarget,
 							abTest,
 						);
@@ -92,7 +92,7 @@ export const SignInGateAuxia = ({
 							dismissGate();
 							trackLink(
 								ophanComponentId,
-								'not-now',
+								'not-now-auxia',
 								renderingTarget,
 								abTest,
 							);
@@ -121,7 +121,7 @@ export const SignInGateAuxia = ({
 				onClick={() => {
 					trackLink(
 						ophanComponentId,
-						'sign-in-link',
+						'sign-in-link-auxia',
 						renderingTarget,
 						abTest,
 					);
@@ -137,7 +137,7 @@ export const SignInGateAuxia = ({
 					onClick={() => {
 						trackLink(
 							ophanComponentId,
-							'how-link',
+							'how-link-auxia',
 							renderingTarget,
 							abTest,
 						);
@@ -152,7 +152,7 @@ export const SignInGateAuxia = ({
 					onClick={() => {
 						trackLink(
 							ophanComponentId,
-							'why-link',
+							'why-link-auxia',
 							renderingTarget,
 							abTest,
 						);
@@ -167,7 +167,7 @@ export const SignInGateAuxia = ({
 					onClick={() => {
 						trackLink(
 							ophanComponentId,
-							'help-link',
+							'help-link-auxia',
 							renderingTarget,
 							abTest,
 						);
