@@ -39,7 +39,6 @@ const useEpic = ({ name }: { name: string }) => {
 			/* webpackChunkName: "contributions-liveblog-epic" */ `./marketing/epics/ContributionsLiveblogEpic`
 		)
 			.then((epicModule) => {
-				// @ts-expect-error -- currently the type of the props in the response is too general
 				setEpic(() => epicModule.ContributionsLiveblogEpic);
 			})
 			.catch((err) => {
