@@ -64,6 +64,7 @@ const clearCommonReaderRevenueStateAndReload = (
 		return;
 	}
 
+	removeCookie({ name: SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE });
 	deleteAllCookies();
 	clearEpicViewLog();
 

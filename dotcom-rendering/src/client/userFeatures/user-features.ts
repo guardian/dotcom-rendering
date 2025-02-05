@@ -4,17 +4,26 @@
  * https://github.com/guardian/commercial/blob/1a429d6be05657f20df4ca909df7d01a5c3d7402/src/lib/user-features.ts
  */
 
-import { getCookie, removeCookie } from '@guardian/libs';
+import { removeCookie } from '@guardian/libs';
 import { getAuthStatus, isUserLoggedInOktaRefactor } from '../../lib/identity';
-import { AD_FREE_USER_COOKIE } from './cookies/adFree';
-import { ALLOW_REJECT_ALL_COOKIE } from './cookies/allowRejectAll';
+import { AD_FREE_USER_COOKIE, getAdFreeCookie } from './cookies/adFree';
+import {
+	ALLOW_REJECT_ALL_COOKIE,
+	getAllowRejectAllCookie,
+} from './cookies/allowRejectAll';
 import {
 	cookieIsExpired,
 	removeCookieIfExpired,
 	renewUserBenefitCookie,
 } from './cookies/cookieHelpers';
-import { HIDE_SUPPORT_MESSAGING_COOKIE } from './cookies/hideSupportMessaging';
-import { USER_FEATURES_EXPIRY_COOKIE } from './cookies/userFeaturesExpiry';
+import {
+	getHideSupportMessagingCookie,
+	HIDE_SUPPORT_MESSAGING_COOKIE,
+} from './cookies/hideSupportMessaging';
+import {
+	getUserFeaturesExpiryCookie,
+	USER_FEATURES_EXPIRY_COOKIE,
+} from './cookies/userFeaturesExpiry';
 import { syncDataFromUserBenefitsApi } from './userBenefitsApi';
 
 export type UserBenefits = {
@@ -25,10 +34,10 @@ export type UserBenefits = {
 
 const userHasData = () => {
 	const cookie =
-		getCookie({ name: AD_FREE_USER_COOKIE }) ??
-		getCookie({ name: USER_FEATURES_EXPIRY_COOKIE }) ??
-		getCookie({ name: HIDE_SUPPORT_MESSAGING_COOKIE }) ??
-		getCookie({ name: ALLOW_REJECT_ALL_COOKIE });
+		getAdFreeCookie() ??
+		getUserFeaturesExpiryCookie() ??
+		getHideSupportMessagingCookie() ??
+		getAllowRejectAllCookie();
 	return !!cookie;
 };
 
