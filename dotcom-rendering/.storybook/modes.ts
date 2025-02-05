@@ -13,6 +13,10 @@ export const allModes = {
 	splitVertical: {
 		globalColourScheme: 'vertical',
 	},
+	'light mobile': {
+		globalColourScheme: 'light',
+		viewport: breakpoints.mobile,
+	},
 	'light mobileMedium': {
 		globalColourScheme: 'light',
 		viewport: breakpoints.mobileMedium,
