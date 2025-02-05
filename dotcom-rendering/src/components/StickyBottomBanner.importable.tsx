@@ -4,6 +4,8 @@ import type {
 } from '@guardian/braze-components/logic';
 import type { CountryCode } from '@guardian/libs';
 import { cmp, isString, isUndefined, storage } from '@guardian/libs';
+import type { ModuleData } from '@guardian/support-dotcom-components/dist/dotcom/types';
+import type { BannerProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
 import type { ArticleCounts } from '../lib/articleCount';
@@ -17,6 +19,7 @@ import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
 import {
@@ -27,12 +30,7 @@ import {
 	canShowRRBanner,
 	ReaderRevenueBanner,
 } from './StickyBottomBanner/ReaderRevenueBanner';
-import type {
-	BannerProps,
-	CanShowFunctionType,
-} from './StickyBottomBanner/ReaderRevenueBanner';
-import { RenderingTarget } from '../types/renderingTarget';
-import { ModuleData } from '@guardian/support-dotcom-components/dist/dotcom/types';
+import type { CanShowFunctionType } from './StickyBottomBanner/ReaderRevenueBanner';
 
 type Props = {
 	contentType: string;
@@ -156,14 +154,8 @@ const buildRRBannerConfigWith = ({
 						asyncArticleCounts,
 					}),
 				show:
-					({ meta, module, fetchEmail }: BannerProps) =>
-					() => (
-						<BannerComponent
-							meta={meta}
-							module={module}
-							fetchEmail={fetchEmail}
-						/>
-					),
+					({ name, props }: ModuleData<BannerProps>) =>
+					() => <BannerComponent name={name} props={props} />,
 			},
 			timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 		};

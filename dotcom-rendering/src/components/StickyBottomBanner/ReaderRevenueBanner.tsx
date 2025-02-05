@@ -1,6 +1,10 @@
 import { css } from '@emotion/react';
-import type { ConsentState, CountryCode } from '@guardian/libs';
-import { getCookie, onConsent, OphanComponentEvent } from '@guardian/libs';
+import type {
+	ConsentState,
+	CountryCode,
+	OphanComponentEvent,
+} from '@guardian/libs';
+import { getCookie, onConsent } from '@guardian/libs';
 import {
 	abandonedBasketSchema,
 	getBanner,
@@ -31,8 +35,8 @@ import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import { getZIndex } from '../../lib/getZIndex';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
-import { RenderingTarget } from '../../types/renderingTarget';
 
 type BaseProps = {
 	isSignedIn: boolean;
@@ -48,7 +52,6 @@ type BaseProps = {
 	subscriptionBannerLastClosedAt?: string;
 	signInBannerLastClosedAt?: string;
 	abandonedBasketBannerLastClosedAt?: string;
-	renderingTarget: RenderingTarget;
 };
 
 type BuildPayloadProps = BaseProps & {
@@ -59,6 +62,24 @@ type BuildPayloadProps = BaseProps & {
 	hideSupportMessagingForUser: boolean;
 };
 
+/**
+ *      isSignedIn: boolean;
+ * 		countryCode: CountryCode;
+ * 		isPreview: boolean;
+ * 		asyncArticleCounts: Promise<ArticleCounts | undefined>;
+ * 		signInGateWillShow?: boolean;
+ * 		contentType: string;
+ * 		sectionId: string;
+ * 		shouldHideReaderRevenue: boolean;
+ * 		isMinuteArticle: boolean;
+ * 		isPaidContent: boolean;
+ * 		isSensitive: boolean;
+ * 		tags: TagType[];
+ * 		contributionsServiceUrl: string;
+ * 		idApiUrl: string;
+ * 		renderingTarget: RenderingTarget;
+ */
+
 type CanShowProps = BaseProps & {
 	countryCode: CountryCode;
 	remoteBannerConfig: boolean;
@@ -66,6 +87,7 @@ type CanShowProps = BaseProps & {
 	idApiUrl: string;
 	signInGateWillShow: boolean;
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
+	renderingTarget: RenderingTarget;
 };
 
 export type CanShowFunctionType<T> = (
