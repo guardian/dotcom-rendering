@@ -1,5 +1,4 @@
-import { css, Global } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
+import { css } from '@emotion/react';
 import {
 	from,
 	palette as sourcePalette,
@@ -8,33 +7,29 @@ import {
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import React from 'react';
-import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
-import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
-import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
+import { CrosswordInstructions } from '../components/CrosswordInstructions';
+import { CrosswordLinks } from '../components/CrosswordLinks';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
-import { LabsHeader } from '../components/LabsHeader';
-import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
-import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
@@ -46,15 +41,10 @@ import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
-import {
-	interactiveGlobalStyles,
-	interactiveLegacyClasses,
-} from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
-const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
+const CrosswordGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={interactiveLegacyClasses.contentInteractiveGrid}
 		css={css`
 			/* IE Fallback */
 			display: flex;
@@ -73,86 +63,74 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 				display: grid;
 				width: 100%;
 				margin-left: 0;
-
-				grid-column-gap: 10px;
+				grid-column-gap: 20px;
 
 				/*
 					Explanation of each unit of grid-template-columns
 
-					Left Column (220 - 1px border)
-					Vertical grey border
+					Left Column
 					Main content
+					Right Column
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1020px;
+					grid-template-columns: 220px 1fr 300px;
 
 					grid-template-areas:
-						'title  border  headline'
-						'.      border  standfirst'
-						'.      border  media'
-						'.      border  media'
-						'.      border  lines'
-						'.      border  meta'
-						'body   body    body'
-						'.      .       .';
+						'title  headline      right-column'
+						'meta   standfirst    right-column'
+						'meta   instructions  right-column'
+						'body   body          right-column';
 				}
 
 				/*
 					Explanation of each unit of grid-template-columns
 
-					Left Column (220 - 1px border)
-					Vertical grey border
+					Left Column
 					Main content
+					Right Column
 				*/
 				${until.wide} {
-					grid-template-columns: 140px 1px 940px;
+					grid-template-columns: 140px 1fr 300px;
 
 					grid-template-areas:
-						'title  border  headline'
-						'.      border  standfirst'
-						'.      border  media'
-						'.      border  media'
-						'.      border  lines'
-						'.      border  meta'
-						'body   body    body'
-						'.      .       .';
+						'title  headline      right-column'
+						'meta   standfirst    right-column'
+						'meta   instructions  right-column'
+						'body   body          right-column';
 				}
 
 				${until.leftCol} {
-					grid-template-columns: 100%; /* Main content */
+					grid-template-columns: 1fr 300px;
 					grid-template-areas:
-						'title'
-						'headline'
-						'standfirst'
-						'media'
-						'lines'
-						'meta'
-						'body'
-						'.';
+						'title         right-column'
+						'headline      right-column'
+						'standfirst    right-column'
+						'meta          right-column'
+						'instructions  right-column'
+						'body          right-column';
 				}
 
 				${until.desktop} {
-					grid-template-columns: 100%; /* Main content */
+					grid-column-gap: 0px;
+					grid-template-columns: minmax(0, 1fr); /* Main content */
 					grid-template-areas:
 						'title'
 						'headline'
 						'standfirst'
-						'media'
-						'lines'
 						'meta'
+						'instructions'
 						'body';
 				}
 
 				${until.tablet} {
 					grid-column-gap: 0px;
-					grid-template-columns: 100%; /* Main content */
+					grid-template-columns: minmax(0, 1fr); /* Main content */
 					grid-template-areas:
-						'media'
 						'title'
 						'headline'
 						'standfirst'
-						'lines'
 						'meta'
+						'instructions'
 						'body';
 				}
 			}
@@ -179,26 +157,6 @@ const stretchLines = css`
 	}
 `;
 
-const starWrapper = css`
-	margin-bottom: 18px;
-	margin-top: 6px;
-	background-color: ${themePalette('--star-rating-background')};
-	color: ${themePalette('--star-rating-fill')};
-	display: inline-block;
-
-	${until.phablet} {
-		padding-left: 20px;
-		margin-left: -20px;
-	}
-	${until.leftCol} {
-		padding-left: 0px;
-		margin-left: -0px;
-	}
-
-	padding-left: 10px;
-	margin-left: -10px;
-`;
-
 interface CommonProps {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
@@ -210,19 +168,11 @@ interface WebProps extends CommonProps {
 	renderingTarget: 'Web';
 }
 
-interface AppsProps extends CommonProps {
-	renderingTarget: 'Apps';
-}
-
-export const InteractiveLayout = (props: WebProps | AppsProps) => {
+export const CrosswordLayout = (props: WebProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
-		editionId,
 	} = article;
-
-	const isApps = renderingTarget === 'Apps';
-	const isWeb = renderingTarget === 'Web';
 
 	const showComments = article.isCommentable && !isPaidContent;
 
@@ -235,83 +185,54 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
-	const renderAds = isWeb && canRenderAds(article);
+	const renderAds = canRenderAds(article);
 	return (
 		<>
-			{isWeb && (
-				<>
-					{article.isLegacyInteractive && (
-						<Global styles={interactiveGlobalStyles} />
-					)}
-
-					<div>
-						{renderAds && (
-							<Stuck>
-								<div data-print-layout="hide">
-									<Section
-										fullWidth={true}
-										showTopBorder={false}
-										showSideBorders={false}
-										padSides={false}
-										shouldCenter={false}
-									>
-										<HeaderAdSlot
-											isPaidContent={
-												!!article.config.isPaidContent
-											}
-											shouldHideReaderRevenue={
-												!!article.config
-													.shouldHideReaderRevenue
-											}
-										/>
-									</Section>
-								</div>
-							</Stuck>
-						)}
-
-						<Masthead
-							nav={props.NAV}
-							editionId={article.editionId}
-							idUrl={article.config.idUrl}
-							mmaUrl={article.config.mmaUrl}
-							discussionApiUrl={article.config.discussionApiUrl}
-							idApiUrl={article.config.idApiUrl}
-							contributionsServiceUrl={contributionsServiceUrl}
-							showSubNav={format.theme !== ArticleSpecial.Labs}
-							showSlimNav={false}
-							hasPageSkin={false}
-							hasPageSkinContentSelfConstrain={false}
-							pageId={article.pageId}
-						/>
-					</div>
-
-					{format.theme === ArticleSpecial.Labs && (
-						<Stuck>
+			<div>
+				{renderAds && (
+					<Stuck>
+						<div data-print-layout="hide">
 							<Section
 								fullWidth={true}
 								showTopBorder={false}
-								backgroundColour={sourcePalette.labs[400]}
-								borderColour={sourcePalette.neutral[60]}
-								sectionId="labs-header"
+								showSideBorders={false}
+								padSides={false}
+								shouldCenter={false}
 							>
-								<LabsHeader editionId={editionId} />
+								<HeaderAdSlot
+									isPaidContent={
+										!!article.config.isPaidContent
+									}
+									shouldHideReaderRevenue={
+										!!article.config.shouldHideReaderRevenue
+									}
+								/>
 							</Section>
-						</Stuck>
-					)}
-
-					{renderAds && hasSurveyAd && (
-						<AdSlot position="survey" display={format.display} />
-					)}
-				</>
-			)}
-			<main data-layout="InteractiveLayout">
-				{isApps && (
-					<>
-						<Island priority="critical">
-							<AdPortals />
-						</Island>
-					</>
+						</div>
+					</Stuck>
 				)}
+
+				<Masthead
+					nav={props.NAV}
+					editionId={article.editionId}
+					idUrl={article.config.idUrl}
+					mmaUrl={article.config.mmaUrl}
+					discussionApiUrl={article.config.discussionApiUrl}
+					idApiUrl={article.config.idApiUrl}
+					contributionsServiceUrl={contributionsServiceUrl}
+					showSubNav={format.theme !== ArticleSpecial.Labs}
+					showSlimNav={false}
+					hasPageSkin={false}
+					hasPageSkinContentSelfConstrain={false}
+					pageId={article.pageId}
+				/>
+			</div>
+
+			{renderAds && hasSurveyAd && (
+				<AdSlot position="survey" display={format.display} />
+			)}
+
+			<main data-layout="InteractiveLayout">
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
@@ -319,33 +240,11 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					backgroundColour={themePalette('--article-background')}
 					borderColour={themePalette('--article-border')}
 					element="article"
-					className={interactiveLegacyClasses.contentInteractive}
 				>
-					<div
-						className={interactiveLegacyClasses.contentInteractive}
-					>
-						<InteractiveGrid>
-							<GridItem area="media">
-								<div css={maxWidth}>
-									<MainMedia
-										format={format}
-										elements={article.mainMediaElements}
-										host={host}
-										pageId={article.pageId}
-										webTitle={article.webTitle}
-										ajaxUrl={article.config.ajaxUrl}
-										abTests={article.config.abTests}
-										switches={article.config.switches}
-										isAdFreeUser={article.isAdFreeUser}
-										isSensitive={article.config.isSensitive}
-										editionId={article.editionId}
-									/>
-								</div>
-							</GridItem>
+					<div>
+						<CrosswordGrid>
 							<GridItem area="title" element="aside">
-								<div
-									className={`${interactiveLegacyClasses.contentLabels} ${interactiveLegacyClasses.contentLabelsNotImmersive}`}
-								>
+								<div>
 									<ArticleTitle
 										format={format}
 										tags={article.tags}
@@ -356,13 +255,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										}
 									/>
 								</div>
-							</GridItem>
-							<GridItem area="border">
-								{format.theme === ArticleSpecial.Labs ? (
-									<></>
-								) : (
-									<Border />
-								)}
 							</GridItem>
 							<GridItem area="headline">
 								<div css={maxWidth}>
@@ -376,22 +268,31 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										}
 									/>
 								</div>
-								{!isUndefined(article.starRating) ? (
-									<div css={starWrapper}>
-										<StarRating
-											rating={article.starRating}
-											size="large"
-										/>
-									</div>
-								) : null}
 							</GridItem>
 							<GridItem area="standfirst">
-								<Standfirst
-									format={format}
-									standfirst={article.standfirst}
-								/>
+								<Hide until="leftCol">
+									<DecideLines
+										format={format}
+										color={themePalette(
+											'--article-meta-lines',
+										)}
+									/>
+								</Hide>
+								<Hide from="desktop">
+									<Standfirst
+										format={format}
+										standfirst={
+											'<a href="https://app.adjust.com/16xt6hai" data-link-name="crossword-mobile-link">Download the Guardian app</a> for a better puzzles experience'
+										}
+									/>
+								</Hide>
+								{article.crossword && (
+									<CrosswordLinks
+										crossword={article.crossword}
+									/>
+								)}
 							</GridItem>
-							<GridItem area="lines">
+							<GridItem area="meta" element="aside">
 								<div css={maxWidth}>
 									<div css={stretchLines}>
 										<DecideLines
@@ -401,92 +302,36 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 											)}
 										/>
 									</div>
+									<ArticleMeta
+										branding={branding}
+										format={format}
+										pageId={article.pageId}
+										webTitle={article.webTitle}
+										tags={article.tags}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											article.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={article.isCommentable}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										shortUrlId={article.config.shortUrlId}
+										crossword={article.crossword}
+									/>
 								</div>
 							</GridItem>
-							<GridItem area="meta" element="aside">
-								<div css={maxWidth}>
-									{isApps ? (
-										<>
-											<Hide from="leftCol">
-												<ArticleMetaApps
-													branding={branding}
-													format={format}
-													byline={article.byline}
-													tags={article.tags}
-													primaryDateline={
-														article.webPublicationDateDisplay
-													}
-													secondaryDateline={
-														article.webPublicationSecondaryDateDisplay
-													}
-													isCommentable={
-														article.isCommentable
-													}
-													discussionApiUrl={
-														article.config
-															.discussionApiUrl
-													}
-													shortUrlId={
-														article.config
-															.shortUrlId
-													}
-												></ArticleMetaApps>
-											</Hide>
-											<Hide until="leftCol">
-												<ArticleMeta
-													branding={branding}
-													format={format}
-													pageId={article.pageId}
-													webTitle={article.webTitle}
-													byline={article.byline}
-													tags={article.tags}
-													primaryDateline={
-														article.webPublicationDateDisplay
-													}
-													secondaryDateline={
-														article.webPublicationSecondaryDateDisplay
-													}
-													isCommentable={
-														article.isCommentable
-													}
-													discussionApiUrl={
-														article.config
-															.discussionApiUrl
-													}
-													shortUrlId={
-														article.config
-															.shortUrlId
-													}
-												/>
-											</Hide>
-										</>
-									) : (
-										<ArticleMeta
-											branding={branding}
-											format={format}
-											pageId={article.pageId}
-											webTitle={article.webTitle}
-											byline={article.byline}
-											tags={article.tags}
-											primaryDateline={
-												article.webPublicationDateDisplay
-											}
-											secondaryDateline={
-												article.webPublicationSecondaryDateDisplay
-											}
-											isCommentable={
-												article.isCommentable
-											}
-											discussionApiUrl={
-												article.config.discussionApiUrl
-											}
-											shortUrlId={
-												article.config.shortUrlId
-											}
-										/>
-									)}
-								</div>
-							</GridItem>
+							{!!article.crossword?.instructions && (
+								<GridItem area="instructions">
+									<CrosswordInstructions
+										instructions={
+											article.crossword.instructions
+										}
+									/>
+								</GridItem>
+							)}
 							<GridItem area="body" element="article">
 								<ArticleContainer format={format}>
 									<ArticleBody
@@ -527,7 +372,21 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									/>
 								</ArticleContainer>
 							</GridItem>
-						</InteractiveGrid>
+							<GridItem area="right-column">
+								<RightColumn>
+									{renderAds ? (
+										<AdSlot
+											position="right"
+											display={format.display}
+											isPaidContent={isPaidContent}
+											shouldHideReaderRevenue={
+												article.shouldHideReaderRevenue
+											}
+										/>
+									) : null}
+								</RightColumn>
+							</GridItem>
+						</CrosswordGrid>
 					</div>
 				</Section>
 
@@ -752,7 +611,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				)}
 			</main>
 
-			{isWeb && props.NAV.subNavSections && (
+			{props.NAV.subNavSections && (
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
@@ -769,74 +628,51 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				</Section>
 			)}
 
-			{isWeb && (
-				<>
-					<Section
-						fullWidth={true}
-						data-print-layout="hide"
-						padSides={false}
-						backgroundColour={sourcePalette.brand[400]}
-						borderColour={sourcePalette.brand[600]}
-						showSideBorders={false}
-						element="footer"
-					>
-						<Footer
-							pageFooter={article.pageFooter}
-							selectedPillar={props.NAV.selectedPillar}
-							pillars={props.NAV.pillars}
-							urls={article.nav.readerRevenueLinks.footer}
-							editionId={article.editionId}
-						/>
-					</Section>
+			<Section
+				fullWidth={true}
+				data-print-layout="hide"
+				padSides={false}
+				backgroundColour={sourcePalette.brand[400]}
+				borderColour={sourcePalette.brand[600]}
+				showSideBorders={false}
+				element="footer"
+			>
+				<Footer
+					pageFooter={article.pageFooter}
+					selectedPillar={props.NAV.selectedPillar}
+					pillars={props.NAV.pillars}
+					urls={article.nav.readerRevenueLinks.footer}
+					editionId={article.editionId}
+				/>
+			</Section>
 
-					<BannerWrapper data-print-layout="hide">
-						<Island priority="feature" defer={{ until: 'idle' }}>
-							<StickyBottomBanner
-								contentType={article.contentType}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								idApiUrl={article.config.idApiUrl}
-								isMinuteArticle={
-									article.pageType.isMinuteArticle
-								}
-								isPaidContent={article.pageType.isPaidContent}
-								isPreview={!!article.config.isPreview}
-								isSensitive={article.config.isSensitive}
-								pageId={article.pageId}
-								sectionId={article.config.section}
-								shouldHideReaderRevenue={
-									article.shouldHideReaderRevenue
-								}
-								remoteBannerSwitch={
-									!!article.config.switches.remoteBanner
-								}
-								tags={article.tags}
-							/>
-						</Island>
-					</BannerWrapper>
-					<MobileStickyContainer
-						data-print-layout="hide"
+			<BannerWrapper data-print-layout="hide">
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<StickyBottomBanner
 						contentType={article.contentType}
+						contributionsServiceUrl={contributionsServiceUrl}
+						idApiUrl={article.config.idApiUrl}
+						isMinuteArticle={article.pageType.isMinuteArticle}
+						isPaidContent={article.pageType.isPaidContent}
+						isPreview={!!article.config.isPreview}
+						isSensitive={article.config.isSensitive}
 						pageId={article.pageId}
+						sectionId={article.config.section}
+						shouldHideReaderRevenue={
+							article.shouldHideReaderRevenue
+						}
+						remoteBannerSwitch={
+							!!article.config.switches.remoteBanner
+						}
+						tags={article.tags}
 					/>
-				</>
-			)}
-			{isApps && (
-				<Section
-					fullWidth={true}
-					data-print-layout="hide"
-					backgroundColour={themePalette('--apps-footer-background')}
-					borderColour={themePalette('--article-border')}
-					padSides={false}
-					showSideBorders={false}
-					element="footer"
-				>
-					<Island priority="critical">
-						<AppsFooter />
-					</Island>
-				</Section>
-			)}
+				</Island>
+			</BannerWrapper>
+			<MobileStickyContainer
+				data-print-layout="hide"
+				contentType={article.contentType}
+				pageId={article.pageId}
+			/>
 		</>
 	);
 };

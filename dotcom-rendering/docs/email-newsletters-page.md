@@ -13,13 +13,8 @@ It is served using a dedicated route handler ([dotcom-rendering/src/server/handl
 
 ## Arranging the Newsletters
 
-The page model from frontend includes an array of the `Newsletters` that can be rendered on the page, but how those newsletters are sorted and grouped on the layout is determined by the `enhanceNewslettersPage` function.
+The page model from frontend includes an array of the `Newsletters` and an optional `layout` describing which of the `Newsletters` are rendered and how they are sorted and grouped on the page.
 
-In effect, to add a new newsletter to the page, or change the ordering, update the data in this file:
-dotcom-rendering/src/model/newsletter-grouping.ts
+The `layout`s send from frontend are defined in the [newsletters tool](https://newsletters-tool.gutools.co.uk/layouts).
 
-The file allows for alternative arrangements of newsletters based on the `EditionId`. The property used in the arrays of newsletters is the `Newsletter.identityName`.
-
-To find the correct position of the newsletter check this [spreadsheet](https://docs.google.com/spreadsheets/d/1Pfdow0Yj8OzkrnIWqIC-oSzVhwtwwDBdLmFx5hY-Gt4/edit#gid=2084088730)
-
-To find the `identityName` of a newsletter or whether it is launched or draft check the [newsletters tool](https://newsletters-tool.gutools.co.uk/)
+If no `layout` is provided by frontend, the `enhanceNewslettersPage` uses a default grouping to arrange the `Newsletters`.

@@ -109,9 +109,9 @@ export interface SDCAuxiaProxyResponseData {
 	userTreatment?: AuxiaAPIResponseDataUserTreatment;
 }
 
+export type AuxiaInteractionActionName = 'VIEWED' | 'CLICKED' | 'DISMISSED';
+
 export type SignInGatePropsAuxia = {
-	signInUrl: string;
-	registerUrl: string;
 	guUrl: string;
 	dismissGate: () => void;
 	ophanComponentId: string;
@@ -120,4 +120,7 @@ export type SignInGatePropsAuxia = {
 	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
 	personaliseSignInGateAfterCheckoutSwitch?: boolean;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
+	logTreatmentInteractionCall: (
+		actionName: AuxiaInteractionActionName,
+	) => Promise<void>;
 };

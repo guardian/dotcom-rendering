@@ -1,4 +1,3 @@
-import { cmp } from '@guardian/libs';
 import { Button, Link, LinkButton } from '@guardian/source/react-components';
 import { useConfig } from '../../ConfigContext';
 import { trackLink } from '../componentEventTracking';
@@ -13,7 +12,6 @@ import {
 	headingStyles,
 	hideElementsCss,
 	laterButton,
-	privacyLink,
 	registerButton,
 	signInGateContainer,
 	signInHeader,
@@ -21,22 +19,39 @@ import {
 } from './shared';
 
 export const SignInGateAuxia = ({
-	signInUrl,
-	registerUrl,
 	guUrl,
 	dismissGate,
 	abTest,
 	ophanComponentId,
 	isMandatory = false,
 	userTreatment,
+	logTreatmentInteractionCall,
 }: SignInGatePropsAuxia) => {
 	const { renderingTarget } = useConfig();
 
 	const treatmentContent = JSON.parse(
 		userTreatment.treatmentContent,
 	) as treatmentContentDecoded;
+
+	/*
+	sample: {
+		"title": "Sign in for a personlised experience",
+		"body": "By signing into your Guardian account you'll provide us with insights into your preferences that will result in a more personalised experience, including less frequent asks to support. You'll always be able to control your preferences in your own privacy settings.",
+		"first_cta_name": "Sign in",
+		"first_cta_link": "https://profile.theguardian.com/signin?",
+		"second_cta_name": "I'll do it later",
+		"second_cta_link": "https://profile.theguardian.com/signin?",
+		"subtitle": ""
+	}
+	*/
+
 	const title = treatmentContent.title;
 	const body = treatmentContent.body;
+	const firstCtaName = treatmentContent.first_cta_name;
+	const firstCtaLink = treatmentContent.first_cta_link;
+	const secondCtaName = treatmentContent.second_cta_name;
+	const secondCtaLink = treatmentContent.second_cta_link;
+	//const subtitle = treatmentContent.subtitle;
 
 	return (
 		<div css={signInGateContainer} data-testid="sign-in-gate-main">
@@ -46,25 +61,7 @@ export const SignInGateAuxia = ({
 			<p css={bodyBold}>
 				It’s still free to read – this is not a paywall
 			</p>
-			<p css={bodyText}>
-				{body}{' '}
-				<button
-					data-testid="sign-in-gate-main_privacy"
-					css={privacyLink}
-					onClick={() => {
-						cmp.showPrivacyManager();
-						trackLink(
-							ophanComponentId,
-							'privacy',
-							renderingTarget,
-							abTest,
-						);
-					}}
-				>
-					privacy settings
-				</button>
-				.
-			</p>
+			<p css={bodyText}>{body}</p>
 			<div css={actionButtons}>
 				<LinkButton
 					data-testid="sign-in-gate-main_register"
@@ -72,7 +69,7 @@ export const SignInGateAuxia = ({
 					cssOverrides={registerButton}
 					priority="primary"
 					size="small"
-					href={registerUrl}
+					href={firstCtaLink}
 					onClick={() => {
 						trackLink(
 							ophanComponentId,
@@ -80,9 +77,17 @@ export const SignInGateAuxia = ({
 							renderingTarget,
 							abTest,
 						);
+						logTreatmentInteractionCall('CLICKED').catch(
+							(error) => {
+								console.error(
+									'Failed to log treatment interaction:',
+									error,
+								);
+							},
+						);
 					}}
 				>
-					Register for free
+					{firstCtaName}
 				</LinkButton>
 				{!isMandatory && (
 					<Button
@@ -99,6 +104,14 @@ export const SignInGateAuxia = ({
 								renderingTarget,
 								abTest,
 							);
+							logTreatmentInteractionCall('DISMISSED').catch(
+								(error) => {
+									console.error(
+										'Failed to log treatment interaction:',
+										error,
+									);
+								},
+							);
 						}}
 					>
 						I’ll do it later
@@ -114,7 +127,7 @@ export const SignInGateAuxia = ({
 				data-testid="sign-in-gate-main_signin"
 				data-ignore="global-link-styling"
 				cssOverrides={signInLink}
-				href={signInUrl}
+				href={secondCtaLink}
 				onClick={() => {
 					trackLink(
 						ophanComponentId,
@@ -122,9 +135,15 @@ export const SignInGateAuxia = ({
 						renderingTarget,
 						abTest,
 					);
+					logTreatmentInteractionCall('CLICKED').catch((error) => {
+						console.error(
+							'Failed to log treatment interaction:',
+							error,
+						);
+					});
 				}}
 			>
-				Sign In
+				{secondCtaName}
 			</Link>
 
 			<div css={faq}>
