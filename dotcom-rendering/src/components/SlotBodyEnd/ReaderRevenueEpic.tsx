@@ -162,9 +162,7 @@ export const canShowReaderRevenueEpic = async (
 		show: true,
 		meta: {
 			name,
-			props: {
-				...enrichedProps,
-			},
+			props: enrichedProps,
 		},
 	};
 };

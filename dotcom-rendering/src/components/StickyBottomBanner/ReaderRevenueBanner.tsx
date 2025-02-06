@@ -17,6 +17,7 @@ import type {
 import type {
 	AbandonedBasket,
 	BannerProps,
+	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
@@ -70,6 +71,7 @@ type CanShowProps = BaseProps & {
 	signInGateWillShow: boolean;
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
 	renderingTarget: RenderingTarget;
+	ophanPageViewId: string;
 };
 
 export type CanShowFunctionType<T> = (
@@ -198,6 +200,7 @@ export const canShowRRBanner: CanShowFunctionType<
 	renderingTarget,
 	signInGateWillShow,
 	asyncArticleCounts,
+	ophanPageViewId,
 }) => {
 	if (!remoteBannerConfig) return { show: false };
 
@@ -285,15 +288,24 @@ export const canShowRRBanner: CanShowFunctionType<
 		? lazyFetchEmailWithTimeout(idApiUrl)
 		: undefined;
 
+	const tracking: Tracking = {
+		...props.tracking,
+		ophanPageId: ophanPageViewId,
+		platformId: 'GUARDIAN_WEB',
+		referrerUrl: window.location.origin + window.location.pathname,
+	};
+	const enrichedProps: BannerProps = {
+		...props,
+		...tracking,
+		fetchEmail,
+		submitComponentEvent: (componentEvent: OphanComponentEvent) =>
+			void submitComponentEvent(componentEvent, renderingTarget),
+	};
+
 	return {
 		show: true,
 		meta: {
-			props: {
-				...props,
-				fetchEmail,
-				submitComponentEvent: (componentEvent: OphanComponentEvent) =>
-					void submitComponentEvent(componentEvent, renderingTarget),
-			},
+			props: enrichedProps,
 			name,
 		},
 	};
