@@ -90,7 +90,6 @@ const usePayload = ({
 	tags,
 	pageId,
 	ophanPageViewId,
-	pageUrl,
 }: {
 	shouldHideReaderRevenue: boolean;
 	sectionId: string;
@@ -100,7 +99,6 @@ const usePayload = ({
 	pageId: string;
 	keywordIds: string;
 	ophanPageViewId?: string;
-	pageUrl: string;
 }): EpicPayload | undefined => {
 	const articleCounts = useArticleCounts(pageId, tags, 'LiveBlog');
 	const hasOptedOutOfArticleCount = useHasOptedOutOfArticleCount();
@@ -123,7 +121,7 @@ const usePayload = ({
 			ophanPageId: ophanPageViewId,
 			platformId: 'GUARDIAN_WEB',
 			clientName: 'dcr',
-			referrerUrl: pageUrl,
+			referrerUrl: window.location.origin + window.location.pathname,
 		},
 		targeting: {
 			contentType: 'LiveBlog',
@@ -138,7 +136,7 @@ const usePayload = ({
 			epicViewLog: getEpicViewLog(storage.local),
 			weeklyArticleHistory: articleCounts?.weeklyArticleHistory,
 			hasOptedOutOfArticleCount,
-			url: pageUrl,
+			url: window.location.origin + window.location.pathname,
 			isSignedIn,
 		},
 	};
@@ -269,7 +267,6 @@ export const LiveBlogEpic = ({
 		pageId,
 		keywordIds,
 		ophanPageViewId,
-		pageUrl,
 	});
 	if (!ophanPageViewId || !payload || !pageUrl) return null;
 
