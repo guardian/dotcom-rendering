@@ -29,7 +29,6 @@ type Props = {
 	isPaidContent: boolean;
 	tags: TagType[];
 	contributionsServiceUrl: string;
-	host?: string;
 	pageId: string;
 	keywordIds: string;
 	renderingTarget: RenderingTarget;
@@ -89,9 +88,9 @@ const usePayload = ({
 	sectionId,
 	isPaidContent,
 	tags,
-	host,
 	pageId,
 	ophanPageViewId,
+	pageUrl,
 }: {
 	shouldHideReaderRevenue: boolean;
 	sectionId: string;
@@ -101,6 +100,7 @@ const usePayload = ({
 	pageId: string;
 	keywordIds: string;
 	ophanPageViewId?: string;
+	pageUrl: string;
 }): EpicPayload | undefined => {
 	const articleCounts = useArticleCounts(pageId, tags, 'LiveBlog');
 	const hasOptedOutOfArticleCount = useHasOptedOutOfArticleCount();
@@ -118,14 +118,12 @@ const usePayload = ({
 	if (!countryCode) return;
 	log('dotcom', 'LiveBlogEpic has countryCode');
 
-	const url = `${host}/${pageId}`;
-
 	return {
 		tracking: {
 			ophanPageId: ophanPageViewId,
 			platformId: 'GUARDIAN_WEB',
 			clientName: 'dcr',
-			referrerUrl: url,
+			referrerUrl: pageUrl,
 		},
 		targeting: {
 			contentType: 'LiveBlog',
@@ -140,7 +138,7 @@ const usePayload = ({
 			epicViewLog: getEpicViewLog(storage.local),
 			weeklyArticleHistory: articleCounts?.weeklyArticleHistory,
 			hasOptedOutOfArticleCount,
-			url,
+			url: pageUrl,
 			isSignedIn,
 		},
 	};
@@ -182,15 +180,13 @@ const Fetch = ({
 	contributionsServiceUrl,
 	ophanPageViewId,
 	renderingTarget,
-	host,
-	pageId,
+	pageUrl,
 }: {
 	payload: EpicPayload;
 	contributionsServiceUrl: string;
 	ophanPageViewId: string;
 	renderingTarget: RenderingTarget;
-	host?: string;
-	pageId: string;
+	pageUrl: string;
 }) => {
 	const response = useSDCLiveblogEpic(contributionsServiceUrl, payload);
 
@@ -207,7 +203,7 @@ const Fetch = ({
 		...props.tracking,
 		ophanPageId: ophanPageViewId,
 		platformId: 'GUARDIAN_WEB',
-		referrerUrl: `${host}/${pageId}`,
+		referrerUrl: pageUrl,
 	};
 
 	// Add submitComponentEvent function to props to enable Ophan tracking in the component
@@ -250,7 +246,6 @@ export const LiveBlogEpic = ({
 	isPaidContent,
 	tags,
 	contributionsServiceUrl,
-	host,
 	pageId,
 	keywordIds,
 	renderingTarget,
@@ -259,18 +254,24 @@ export const LiveBlogEpic = ({
 
 	const ophanPageViewId = usePageViewId(renderingTarget);
 
+	const [pageUrl, setPageUrl] = useState<string | undefined>();
+
+	useEffect(() => {
+		setPageUrl(window.location.origin + window.location.pathname);
+	}, []);
+
 	// First construct the payload
 	const payload = usePayload({
 		shouldHideReaderRevenue,
 		sectionId,
 		isPaidContent,
 		tags,
-		host,
 		pageId,
 		keywordIds,
 		ophanPageViewId,
+		pageUrl,
 	});
-	if (!ophanPageViewId || !payload) return null;
+	if (!ophanPageViewId || !payload || !pageUrl) return null;
 
 	/**
 	 * Here we decide where to insert the epic.
@@ -312,8 +313,7 @@ export const LiveBlogEpic = ({
 			contributionsServiceUrl={contributionsServiceUrl}
 			ophanPageViewId={ophanPageViewId}
 			renderingTarget={renderingTarget}
-			host={host}
-			pageId={pageId}
+			pageUrl={pageUrl}
 		/>,
 		epicPlaceholder,
 	);

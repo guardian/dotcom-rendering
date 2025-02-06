@@ -148,7 +148,6 @@ export const LiveBlogRenderer = ({
 						tags={tags}
 						isPaidContent={isPaidContent}
 						contributionsServiceUrl={contributionsServiceUrl}
-						host={host}
 						pageId={pageId}
 						keywordIds={keywordIds}
 						renderingTarget={renderingTarget}
