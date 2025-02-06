@@ -323,8 +323,9 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 		tracking.abTestVariant === 'VARIANT';
 
 	const isSimpleThirdChoiceCardInTestVariant: boolean =
-		showChoiceCards &&
-		variant.name.includes('EPIC_SIMPLIFIED_THIRD_CHOICE_CARD');
+		(showChoiceCards &&
+			variant.name.includes('EPIC_SIMPLIFIED_THIRD_CHOICE_CARD')) ??
+		false;
 
 	const { hasOptedOut, onArticleCountOptIn, onArticleCountOptOut } =
 		useArticleCountOptOut();
