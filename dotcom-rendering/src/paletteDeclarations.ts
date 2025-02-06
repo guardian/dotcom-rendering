@@ -5926,13 +5926,13 @@ const paletteColours = {
 		light: articleSectionBackgroundLight,
 		dark: articleSectionBackgroundDark,
 	},
-	'--article-section-title': {
-		light: articleSectionTitleLight,
-		dark: articleSectionTitleDark,
-	},
 	'--article-section-secondary-title': {
 		light: articleSectionSecondaryTitleLight,
 		dark: articleSectionSecondaryTitleDark,
+	},
+	'--article-section-title': {
+		light: articleSectionTitleLight,
+		dark: articleSectionTitleDark,
 	},
 	'--article-text': {
 		light: articleTextLight,
