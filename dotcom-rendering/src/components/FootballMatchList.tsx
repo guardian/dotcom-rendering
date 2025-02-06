@@ -27,6 +27,7 @@ import { palette } from '../palette';
 type Props = {
 	initialDays: FootballMatches;
 	edition: EditionId;
+	host: string;
 	getMoreDays: () => Promise<Result<'failed', FootballMatches>>;
 };
 
@@ -349,6 +350,7 @@ const Scores = ({
 
 export const FootballMatchList = ({
 	edition,
+	host,
 	initialDays,
 	getMoreDays,
 }: Props) => {
@@ -368,7 +370,7 @@ export const FootballMatchList = ({
 						<Fragment key={competition.competitionId}>
 							<CompetitionName>
 								<a
-									href={`https://www.theguardian.com/football/${competition.tag}`}
+									href={`${host}/football/${competition.tag}`}
 									css={css`
 										text-decoration: none;
 										color: inherit;
