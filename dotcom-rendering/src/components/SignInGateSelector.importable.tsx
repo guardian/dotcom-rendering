@@ -24,7 +24,7 @@ import { SignInGateAuxia } from './SignInGate/gateDesigns/SignInGateAuxia';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGateMappings';
 import type {
 	AuxiaAPIResponseDataUserTreatment,
-	AuxiaInteractionActionName,
+	AuxiaInteractionInteractionType,
 	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
 	SDCAuxiaProxyResponseData,
@@ -424,7 +424,7 @@ interface ShowSignInGateAuxiaProps {
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
 	contributionsServiceUrl: string;
 	logTreatmentInteractionCall: (
-		actionName: AuxiaInteractionActionName,
+		interactionType: AuxiaInteractionInteractionType,
 	) => Promise<void>;
 }
 
@@ -458,7 +458,7 @@ const fetchProxyGetTreatments = async (
 const auxiaLogTreatmentInteraction = async (
 	contributionsServiceUrl: string,
 	userTreatment: AuxiaAPIResponseDataUserTreatment,
-	actionName: AuxiaInteractionActionName,
+	interactionType: AuxiaInteractionInteractionType,
 ): Promise<void> => {
 	const url = `${contributionsServiceUrl}/auxia/log-treatment-interaction`;
 	const headers = {
@@ -469,9 +469,9 @@ const auxiaLogTreatmentInteraction = async (
 		treatmentTrackingId: userTreatment.treatmentTrackingId,
 		treatmentId: userTreatment.treatmentId,
 		surface: userTreatment.surface,
-		interactionType: 'CLICKED',
+		interactionType,
 		interactionTimeMicros: microTime,
-		actionName,
+		actionName: '',
 	};
 	const params = {
 		method: 'POST',
@@ -546,12 +546,12 @@ const SignInGateSelectorAuxia = ({
 						userTreatment={auxiaGetTreatmentsData.userTreatment}
 						contributionsServiceUrl={contributionsServiceUrl}
 						logTreatmentInteractionCall={async (
-							actionName: AuxiaInteractionActionName,
+							interactionType: AuxiaInteractionInteractionType,
 						) => {
 							await auxiaLogTreatmentInteraction(
 								contributionsServiceUrl,
 								auxiaGetTreatmentsData.userTreatment!,
-								actionName,
+								interactionType,
 							);
 						}}
 					/>

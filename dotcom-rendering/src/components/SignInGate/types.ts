@@ -109,7 +109,10 @@ export interface SDCAuxiaProxyResponseData {
 	userTreatment?: AuxiaAPIResponseDataUserTreatment;
 }
 
-export type AuxiaInteractionActionName = 'VIEWED' | 'CLICKED' | 'DISMISSED';
+export type AuxiaInteractionInteractionType =
+	| 'VIEWED'
+	| 'CLICKED'
+	| 'DISMISSED';
 
 export type SignInGatePropsAuxia = {
 	guUrl: string;
@@ -121,6 +124,6 @@ export type SignInGatePropsAuxia = {
 	personaliseSignInGateAfterCheckoutSwitch?: boolean;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
 	logTreatmentInteractionCall: (
-		actionName: AuxiaInteractionActionName,
+		interactionType: AuxiaInteractionInteractionType,
 	) => Promise<void>;
 };
