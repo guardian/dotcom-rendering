@@ -419,6 +419,7 @@ type PropsAuxia = {
 interface ShowSignInGateAuxiaProps {
 	host: string;
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
+	abTest: CurrentSignInGateABTest;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
 	logTreatmentInteractionCall: () => Promise<void>;
 }
@@ -493,10 +494,12 @@ const SignInGateSelectorAuxia = ({
 		SDCAuxiaProxyResponseData | undefined
 	>(undefined);
 
-	const currentTest = {
-		name: 'SignInGateMain',
-		variant: 'main-variant-5',
-		id: 'SignInGateMainVariant',
+	// We are using CurrentSignInGateABTest, with the details of the Auxia experiment,
+	// to allow Ophan tracking
+	const abTest: CurrentSignInGateABTest = {
+		name: 'AuxiaSignInGate', // value of dataLinkNames
+		variant: 'auxia-signin-gate', // variant id
+		id: 'AuxiaSignInGate', // test id
 	};
 
 	const { renderingTarget } = useConfig();
@@ -521,7 +524,7 @@ const SignInGateSelectorAuxia = ({
 		})().catch((error) => {
 			console.error('Error fetching Auxia display data:', error);
 		});
-	}, [currentTest]);
+	}, [abTest]);
 
 	if (isUndefined(pageViewId)) {
 		return null;
@@ -535,6 +538,7 @@ const SignInGateSelectorAuxia = ({
 						host={host}
 						// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 						setShowGate={(show) => setIsGateDismissed(!show)}
+						abTest={abTest}
 						userTreatment={auxiaGetTreatmentsData.userTreatment}
 						logTreatmentInteractionCall={async () => {
 							await auxiaLogTreatmentInteraction(
@@ -552,19 +556,11 @@ const SignInGateSelectorAuxia = ({
 const ShowSignInGateAuxia = ({
 	host,
 	setShowGate,
+	abTest,
 	userTreatment,
 	logTreatmentInteractionCall,
 }: ShowSignInGateAuxiaProps) => {
 	const componentId = 'main_variant_5';
-
-	// We are using CurrentSignInGateABTest, with the details of the Auxia experiment,
-	// to allow Ophan tracking
-	const abTest: CurrentSignInGateABTest = {
-		name: 'AuxiaSignInGate', // value of dataLinkNames
-		variant: 'auxia-signin-gate', // variant id
-		id: 'AuxiaSignInGate', // test id
-	};
-
 	const checkoutCompleteCookieData = undefined;
 	const personaliseSignInGateAfterCheckoutSwitch = undefined;
 
