@@ -3031,6 +3031,12 @@ const articleSectionTitleLight: PaletteFunction = () =>
 const articleSectionTitleDark: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 
+const articleSectionSecondaryTitleLight: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
+const articleSectionSecondaryTitleDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
 const articleLinkTextLight: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.Audio) {
 		return sourcePalette.neutral[86];
@@ -5923,6 +5929,10 @@ const paletteColours = {
 	'--article-section-title': {
 		light: articleSectionTitleLight,
 		dark: articleSectionTitleDark,
+	},
+	'--article-section-secondary-title': {
+		light: articleSectionSecondaryTitleLight,
+		dark: articleSectionSecondaryTitleDark,
 	},
 	'--article-text': {
 		light: articleTextLight,
