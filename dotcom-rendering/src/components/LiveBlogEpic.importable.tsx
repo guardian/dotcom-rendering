@@ -95,7 +95,6 @@ const usePayload = ({
 	sectionId: string;
 	isPaidContent: boolean;
 	tags: TagType[];
-	host?: string;
 	pageId: string;
 	keywordIds: string;
 	ophanPageViewId?: string;
