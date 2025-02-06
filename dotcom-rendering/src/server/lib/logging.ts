@@ -12,7 +12,7 @@ const logLocation =
 		: `${path.resolve('logs')}/${logName}`;
 
 const logFields = (logEvent: LoggingEvent): unknown => {
-	const { request, fastlyRequestId } = loggingStore.getStore() ?? {
+	const { request, fastlyRequestId, abTests } = loggingStore.getStore() ?? {
 		request: { pageId: 'outside-request-context' },
 	};
 
@@ -29,6 +29,7 @@ const logFields = (logEvent: LoggingEvent): unknown => {
 		level_value: logEvent.level.level,
 		request,
 		fastlyRequestId,
+		abTests,
 		// NODE_APP_INSTANCE is set by cluster mode
 		thread_name: process.env.NODE_APP_INSTANCE ?? '0',
 	};
