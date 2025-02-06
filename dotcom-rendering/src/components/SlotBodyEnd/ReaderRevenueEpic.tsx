@@ -13,7 +13,10 @@ import type {
 	ModuleDataResponse,
 	WeeklyArticleHistory,
 } from '@guardian/support-dotcom-components/dist/dotcom/types';
-import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types';
+import type {
+	EpicProps,
+	Tracking,
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import {
@@ -47,6 +50,7 @@ export type CanShowData = {
 	asyncArticleCount: Promise<WeeklyArticleHistory | undefined>;
 	browserId?: string;
 	renderingTarget: RenderingTarget;
+	ophanPageViewId: string;
 };
 
 const buildPayload = async (
@@ -90,6 +94,7 @@ export const canShowReaderRevenueEpic = async (
 		contributionsServiceUrl,
 		idApiUrl,
 		renderingTarget,
+		ophanPageViewId,
 	} = data;
 
 	const hideSupportMessagingForUser = shouldHideSupportMessaging(isSignedIn);
@@ -136,17 +141,29 @@ export const canShowReaderRevenueEpic = async (
 		cmp.showPrivacyManager();
 	};
 
+	const { props, name } = module;
+	const tracking: Tracking = {
+		...props.tracking,
+		ophanPageId: ophanPageViewId,
+		platformId: 'GUARDIAN_WEB',
+		referrerUrl: window.location.origin + window.location.pathname,
+	};
+	const enrichedProps: EpicProps = {
+		...props,
+		...tracking,
+		hasConsentForArticleCount,
+		fetchEmail,
+		submitComponentEvent: (componentEvent: OphanComponentEvent) =>
+			void submitComponentEvent(componentEvent, renderingTarget),
+		openCmp,
+	};
+
 	return {
 		show: true,
 		meta: {
-			name: module.name,
+			name,
 			props: {
-				...module.props,
-				hasConsentForArticleCount,
-				fetchEmail,
-				submitComponentEvent: (componentEvent: OphanComponentEvent) =>
-					void submitComponentEvent(componentEvent, renderingTarget),
-				openCmp,
+				...enrichedProps,
 			},
 		},
 	};

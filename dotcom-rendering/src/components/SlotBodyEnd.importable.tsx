@@ -22,6 +22,7 @@ import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
+import { usePageViewId } from '../lib/usePageViewId';
 import type { TagType } from '../types/tag';
 import { AdSlot } from './AdSlot.web';
 import { useConfig } from './ConfigContext';
@@ -131,6 +132,7 @@ export const SlotBodyEnd = ({
 	const countryCode = useCountryCode('slot-body-end');
 	const isSignedIn = useIsSignedIn();
 	const browserId = useBrowserId();
+	const ophanPageViewId = usePageViewId(renderingTarget);
 	const [SelectedEpic, setSelectedEpic] = useState<
 		React.ElementType | null | undefined
 	>();
@@ -167,6 +169,7 @@ export const SlotBodyEnd = ({
 			isUndefined(brazeMessages) ||
 			isUndefined(asyncArticleCount) ||
 			isUndefined(browserId) ||
+			isUndefined(ophanPageViewId) ||
 			isSignedIn === 'Pending'
 		) {
 			return;
@@ -186,6 +189,7 @@ export const SlotBodyEnd = ({
 			asyncArticleCount,
 			browserId,
 			renderingTarget,
+			ophanPageViewId,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
@@ -223,6 +227,7 @@ export const SlotBodyEnd = ({
 		sectionId,
 		shouldHideReaderRevenue,
 		tags,
+		ophanPageViewId,
 	]);
 
 	useEffect(() => {
