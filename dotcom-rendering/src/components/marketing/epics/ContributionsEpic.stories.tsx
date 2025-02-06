@@ -474,6 +474,20 @@ export const WithThreeTierChoiceCardsForUS: Story = {
 	},
 };
 
+export const WithThreeTierChoiceCardsSimplifiedForUS: Story = {
+	name: 'ContributionsEpic with three tier choice cards for US (Simplified third choice)',
+	args: {
+		...meta.args,
+		countryCode: 'US',
+		variant: {
+			...props.variant,
+			name: 'TEST_EPIC_SIMPLIFIED_THIRD_CHOICE_CARD',
+			secondaryCta: undefined,
+			showChoiceCards: true,
+		},
+	},
+};
+
 export const WithThreeTierDiscountChoiceCards: Story = {
 	name: 'ContributionsEpic with discounted three tier choice cards',
 	args: {
