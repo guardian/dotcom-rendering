@@ -24,6 +24,7 @@ import { SignInGateAuxia } from './SignInGate/gateDesigns/SignInGateAuxia';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGateMappings';
 import type {
 	AuxiaAPIResponseDataUserTreatment,
+	AuxiaInteractionActionName,
 	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
 	SDCAuxiaProxyResponseData,
@@ -421,7 +422,9 @@ interface ShowSignInGateAuxiaProps {
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
 	contributionsServiceUrl: string;
-	logTreatmentInteractionCall: (actionName: string) => Promise<void>;
+	logTreatmentInteractionCall: (
+		actionName: AuxiaInteractionActionName,
+	) => Promise<void>;
 }
 
 const dismissGateAuxia = (
@@ -454,7 +457,7 @@ const fetchProxyGetTreatments = async (
 const auxiaLogTreatmentInteraction = async (
 	contributionsServiceUrl: string,
 	userTreatment: AuxiaAPIResponseDataUserTreatment,
-	actionName: string,
+	actionName: AuxiaInteractionActionName,
 ): Promise<void> => {
 	const url = `${contributionsServiceUrl}/auxia/log-treatment-interaction`;
 	const headers = {
@@ -539,7 +542,7 @@ const SignInGateSelectorAuxia = ({
 						userTreatment={auxiaGetTreatmentsData.userTreatment}
 						contributionsServiceUrl={contributionsServiceUrl}
 						logTreatmentInteractionCall={async (
-							actionName: string,
+							actionName: AuxiaInteractionActionName,
 						) => {
 							await auxiaLogTreatmentInteraction(
 								contributionsServiceUrl,
