@@ -114,6 +114,14 @@ export type AuxiaInteractionInteractionType =
 	| 'CLICKED'
 	| 'DISMISSED';
 
+export type AuxiaInteractionActionName =
+	| 'REGISTER-LINK'
+	| 'SIGN-IN-LINK'
+	| 'HOW-TO-LINK'
+	| 'WHY-LINK'
+	| 'HELP-LINK'
+	| '';
+
 export type SignInGatePropsAuxia = {
 	guUrl: string;
 	dismissGate: () => void;
@@ -125,5 +133,6 @@ export type SignInGatePropsAuxia = {
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
 	logTreatmentInteractionCall: (
 		interactionType: AuxiaInteractionInteractionType,
+		actionName: AuxiaInteractionActionName,
 	) => Promise<void>;
 };

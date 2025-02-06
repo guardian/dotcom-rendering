@@ -77,14 +77,15 @@ export const SignInGateAuxia = ({
 							renderingTarget,
 							abTest,
 						);
-						logTreatmentInteractionCall('CLICKED').catch(
-							(error) => {
-								console.error(
-									'Failed to log treatment interaction:',
-									error,
-								);
-							},
-						);
+						logTreatmentInteractionCall(
+							'CLICKED',
+							'REGISTER-LINK',
+						).catch((error) => {
+							console.error(
+								'Failed to log treatment interaction:',
+								error,
+							);
+						});
 					}}
 				>
 					{firstCtaName}
@@ -104,7 +105,7 @@ export const SignInGateAuxia = ({
 								renderingTarget,
 								abTest,
 							);
-							logTreatmentInteractionCall('DISMISSED').catch(
+							logTreatmentInteractionCall('DISMISSED', '').catch(
 								(error) => {
 									console.error(
 										'Failed to log treatment interaction:',
@@ -135,7 +136,10 @@ export const SignInGateAuxia = ({
 						renderingTarget,
 						abTest,
 					);
-					logTreatmentInteractionCall('CLICKED').catch((error) => {
+					logTreatmentInteractionCall(
+						'CLICKED',
+						'SIGN-IN-LINK',
+					).catch((error) => {
 						console.error(
 							'Failed to log treatment interaction:',
 							error,
@@ -157,6 +161,15 @@ export const SignInGateAuxia = ({
 							renderingTarget,
 							abTest,
 						);
+						logTreatmentInteractionCall(
+							'CLICKED',
+							'HOW-TO-LINK',
+						).catch((error) => {
+							console.error(
+								'Failed to log treatment interaction:',
+								error,
+							);
+						});
 					}}
 				>
 					Why register & how does it help?
@@ -172,6 +185,15 @@ export const SignInGateAuxia = ({
 							renderingTarget,
 							abTest,
 						);
+						logTreatmentInteractionCall(
+							'CLICKED',
+							'WHY-LINK',
+						).catch((error) => {
+							console.error(
+								'Failed to log treatment interaction:',
+								error,
+							);
+						});
 					}}
 				>
 					How will my information & data be used?
@@ -187,6 +209,15 @@ export const SignInGateAuxia = ({
 							renderingTarget,
 							abTest,
 						);
+						logTreatmentInteractionCall(
+							'CLICKED',
+							'HELP-LINK',
+						).catch((error) => {
+							console.error(
+								'Failed to log treatment interaction:',
+								error,
+							);
+						});
 					}}
 				>
 					Get help with registering or signing in

@@ -24,6 +24,7 @@ import { SignInGateAuxia } from './SignInGate/gateDesigns/SignInGateAuxia';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGateMappings';
 import type {
 	AuxiaAPIResponseDataUserTreatment,
+	AuxiaInteractionActionName,
 	AuxiaInteractionInteractionType,
 	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
@@ -425,6 +426,7 @@ interface ShowSignInGateAuxiaProps {
 	contributionsServiceUrl: string;
 	logTreatmentInteractionCall: (
 		interactionType: AuxiaInteractionInteractionType,
+		actionName: AuxiaInteractionActionName,
 	) => Promise<void>;
 }
 
@@ -459,6 +461,7 @@ const auxiaLogTreatmentInteraction = async (
 	contributionsServiceUrl: string,
 	userTreatment: AuxiaAPIResponseDataUserTreatment,
 	interactionType: AuxiaInteractionInteractionType,
+	actionName: AuxiaInteractionActionName,
 ): Promise<void> => {
 	const url = `${contributionsServiceUrl}/auxia/log-treatment-interaction`;
 	const headers = {
@@ -471,7 +474,7 @@ const auxiaLogTreatmentInteraction = async (
 		surface: userTreatment.surface,
 		interactionType,
 		interactionTimeMicros: microTime,
-		actionName: '',
+		actionName,
 	};
 	const params = {
 		method: 'POST',
@@ -547,11 +550,13 @@ const SignInGateSelectorAuxia = ({
 						contributionsServiceUrl={contributionsServiceUrl}
 						logTreatmentInteractionCall={async (
 							interactionType: AuxiaInteractionInteractionType,
+							actionName: AuxiaInteractionActionName,
 						) => {
 							await auxiaLogTreatmentInteraction(
 								contributionsServiceUrl,
 								auxiaGetTreatmentsData.userTreatment!,
 								interactionType,
+								actionName,
 							);
 						}}
 					/>
@@ -578,6 +583,7 @@ const ShowSignInGateAuxia = ({
 				contributionsServiceUrl,
 				userTreatment,
 				'VIEWED',
+				'',
 			);
 		})().catch((error) => {
 			console.error('Failed to log treatment interaction:', error);
