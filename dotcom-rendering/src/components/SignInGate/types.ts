@@ -120,7 +120,7 @@ export type AuxiaInteractionActionName =
 	| 'HOW-TO-LINK'
 	| 'WHY-LINK'
 	| 'HELP-LINK'
-	| '';
+	| ''; // used for 'VIEWED' and 'DISMISSED' interactions
 
 export type SignInGatePropsAuxia = {
 	guUrl: string;
