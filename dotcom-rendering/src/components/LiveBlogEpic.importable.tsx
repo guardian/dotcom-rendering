@@ -4,7 +4,10 @@ import { getCookie, isUndefined, log, storage } from '@guardian/libs';
 import { space } from '@guardian/source/foundations';
 import { getEpicViewLog } from '@guardian/support-dotcom-components';
 import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/types';
-import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types';
+import type {
+	EpicProps,
+	Tracking,
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { submitComponentEvent } from '../client/ophan/ophan';
@@ -200,7 +203,7 @@ const Fetch = ({
 
 	const { props } = response.data.module;
 
-	const tracking = {
+	const tracking: Tracking = {
 		...props.tracking,
 		ophanPageId: ophanPageViewId,
 		platformId: 'GUARDIAN_WEB',
