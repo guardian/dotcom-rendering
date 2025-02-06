@@ -25,6 +25,7 @@ import { signInGateTestIdToComponentId } from './SignInGate/signInGateMappings';
 import type {
 	AuxiaAPIResponseDataUserTreatment,
 	AuxiaInteractionActionName,
+	AuxiaInteractionInteractionType,
 	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
 	SDCAuxiaProxyResponseData,
@@ -424,6 +425,7 @@ interface ShowSignInGateAuxiaProps {
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
 	contributionsServiceUrl: string;
 	logTreatmentInteractionCall: (
+		interactionType: AuxiaInteractionInteractionType,
 		actionName: AuxiaInteractionActionName,
 	) => Promise<void>;
 }
@@ -458,6 +460,7 @@ const fetchProxyGetTreatments = async (
 const auxiaLogTreatmentInteraction = async (
 	contributionsServiceUrl: string,
 	userTreatment: AuxiaAPIResponseDataUserTreatment,
+	interactionType: AuxiaInteractionInteractionType,
 	actionName: AuxiaInteractionActionName,
 ): Promise<void> => {
 	const url = `${contributionsServiceUrl}/auxia/log-treatment-interaction`;
@@ -469,7 +472,7 @@ const auxiaLogTreatmentInteraction = async (
 		treatmentTrackingId: userTreatment.treatmentTrackingId,
 		treatmentId: userTreatment.treatmentId,
 		surface: userTreatment.surface,
-		interactionType: 'CLICKED',
+		interactionType,
 		interactionTimeMicros: microTime,
 		actionName,
 	};
@@ -546,11 +549,13 @@ const SignInGateSelectorAuxia = ({
 						userTreatment={auxiaGetTreatmentsData.userTreatment}
 						contributionsServiceUrl={contributionsServiceUrl}
 						logTreatmentInteractionCall={async (
+							interactionType: AuxiaInteractionInteractionType,
 							actionName: AuxiaInteractionActionName,
 						) => {
 							await auxiaLogTreatmentInteraction(
 								contributionsServiceUrl,
 								auxiaGetTreatmentsData.userTreatment!,
+								interactionType,
 								actionName,
 							);
 						}}
@@ -578,6 +583,7 @@ const ShowSignInGateAuxia = ({
 				contributionsServiceUrl,
 				userTreatment,
 				'VIEWED',
+				'',
 			);
 		})().catch((error) => {
 			console.error('Failed to log treatment interaction:', error);

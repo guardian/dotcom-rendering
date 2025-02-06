@@ -109,7 +109,18 @@ export interface SDCAuxiaProxyResponseData {
 	userTreatment?: AuxiaAPIResponseDataUserTreatment;
 }
 
-export type AuxiaInteractionActionName = 'VIEWED' | 'CLICKED' | 'DISMISSED';
+export type AuxiaInteractionInteractionType =
+	| 'VIEWED'
+	| 'CLICKED'
+	| 'DISMISSED';
+
+export type AuxiaInteractionActionName =
+	| 'REGISTER-LINK'
+	| 'SIGN-IN-LINK'
+	| 'HOW-TO-LINK'
+	| 'WHY-LINK'
+	| 'HELP-LINK'
+	| ''; // used for 'VIEWED' and 'DISMISSED' interactions
 
 export type SignInGatePropsAuxia = {
 	guUrl: string;
@@ -121,6 +132,7 @@ export type SignInGatePropsAuxia = {
 	personaliseSignInGateAfterCheckoutSwitch?: boolean;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
 	logTreatmentInteractionCall: (
+		interactionType: AuxiaInteractionInteractionType,
 		actionName: AuxiaInteractionActionName,
 	) => Promise<void>;
 };
