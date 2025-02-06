@@ -257,8 +257,10 @@ describe('Island: server-side rendering', () => {
 					isPaidContent={false}
 					tags={[]}
 					contributionsServiceUrl={''}
+					host={''}
 					pageId={''}
 					keywordIds={''}
+					renderingTarget={'Web'}
 				/>,
 			),
 		).not.toThrow();
