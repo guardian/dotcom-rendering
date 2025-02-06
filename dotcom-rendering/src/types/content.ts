@@ -387,7 +387,7 @@ export interface ListItem {
 	elements: FEElement[];
 	bio?: string;
 	endNote?: string;
-	imageOverrideUrl?: string;
+	contributorImageOverrideUrl?: string;
 	contributorIds?: string[];
 	byline?: string;
 	bylineHtml?: string;
