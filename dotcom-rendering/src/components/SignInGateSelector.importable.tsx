@@ -556,7 +556,15 @@ const ShowSignInGateAuxia = ({
 	logTreatmentInteractionCall,
 }: ShowSignInGateAuxiaProps) => {
 	const componentId = 'main_variant_5';
-	const abTest = undefined;
+
+	// We are using CurrentSignInGateABTest, with the details of the Auxia experiment,
+	// to allow Ophan tracking
+	const abTest: CurrentSignInGateABTest = {
+		name: 'AuxiaSignInGate', // value of dataLinkNames
+		variant: 'auxia-signin-gate', // variant id
+		id: 'AuxiaSignInGate', // test id
+	};
+
 	const checkoutCompleteCookieData = undefined;
 	const personaliseSignInGateAfterCheckoutSwitch = undefined;
 
