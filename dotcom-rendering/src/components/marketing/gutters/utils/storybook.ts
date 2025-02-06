@@ -1,4 +1,4 @@
-import type { GutterAskRenderProps, GutterVariant } from './types';
+import type GutterVariant, { GutterAskRenderProps } from './types';
 
 const variant: GutterVariant = {
 	name: 'default',

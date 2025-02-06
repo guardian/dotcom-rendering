@@ -4,7 +4,12 @@
  * If it does, it may become a more standard feature.
  */
 import { css } from '@emotion/react';
+import { getCookie } from '@guardian/libs';
 import { palette, space } from '@guardian/source/foundations';
+import type {
+	GutterPayload,
+	GutterProps,
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/types/props/shared';
 import { useEffect, useMemo, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
@@ -12,6 +17,7 @@ import { shouldHideSupportMessaging } from '../lib/contributions';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
+import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
 import { GutterAsk } from './marketing/gutters/gutterAsk';
 import { props } from './marketing/gutters/utils/storybook';
@@ -21,6 +27,7 @@ import {
 	createClickEventFromTracking,
 	createInsertEventFromTracking,
 } from './marketing/lib/tracking';
+import { ModuleDataResponse } from 'node_modules/@guardian/support-dotcom-components/dist/dotcom';
 
 // CSS Styling
 // -------------------------------------------
@@ -41,22 +48,34 @@ const stickyLeft = css`
 interface StickyLiveblogAskWrapperProps {
 	referrerUrl: string;
 	shouldHideReaderRevenueOnArticle: boolean;
+	sectionId: string | undefined;
+	tags: TagType[];
+	contributionsServiceUrl: string;
 }
 
 const { variant } = props; // TODO: temporary - to be replaced when SDC ready
+
 const whatAmI = 'sticky-liveblog-ask'; // TODO: eventually this will be renamed.
 
 export const StickyLiveblogAskWrapper: ReactComponent<
 	StickyLiveblogAskWrapperProps
-> = ({ referrerUrl, shouldHideReaderRevenueOnArticle }) => {
+> = ({
+	referrerUrl,
+	shouldHideReaderRevenueOnArticle,
+	sectionId,
+	tags,
+	contributionsServiceUrl,
+}) => {
 	const { renderingTarget } = useConfig();
 	const countryCode = useCountryCode(whatAmI);
 	const pageViewId = usePageViewId(renderingTarget);
 
-	// should we show ourselves?
 	const [showSupportMessagingForUser, setShowSupportMessaging] =
 		useState<boolean>(false);
+
 	const isSignedIn = useIsSignedIn();
+
+	const tagIds = tags.map((tag) => tag.id);
 
 	useEffect(() => {
 		if (isSignedIn !== 'Pending') {
@@ -111,12 +130,58 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 		countryCode,
 	);
 
+	// TODO: develop the payload
+	/**
+	 * usePayload
+	 *
+	 * takes a series of CAPI values, reads consent, the users country, some cookie
+	 * values and then constructs a config object with `tracking` and `targeting`
+	 * properties
+	 *
+	 * @returns the payload object required to make the POST request to contributions
+	 */
+	const buildPayload = (): GutterPayload | undefined => {
+		const mvtId = Number(
+			getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
+		);
+
+		// if (!countryCode) return;
+		const thisCountryCodeTest = countryCode ? countryCode : '';
+		const isUserSignedIn = isSignedIn === 'Pending' ? false : isSignedIn; // TODO: does this work?
+
+		return {
+			tracking: {
+				ophanPageId: window.guardian.config.ophan.pageViewId,
+				platformId: 'GUARDIAN_WEB',
+				referrerUrl: window.location.origin + window.location.pathname,
+				clientName: 'dcr',
+			},
+			targeting: {
+				showSupportMessaging: showSupportMessagingForUser,
+				countryCode: thisCountryCodeTest,
+				mvtId,
+				isSignedIn: isUserSignedIn,
+				tagIds,
+				sectionId,
+			},
+		};
+	};
+
+	const payload = buildPayload();
+	if (!payload) return <></>; // TODO: correct?
+
+	// TODO: useSDCGutterLiveblog to fetch the ModuleDataResponse<GutterProps>
+	const response: ModuleDataResponse<GutterProps> = useSDCGutterLiveblog(
+		contributionsServiceUrl,
+		payload,
+	);
+
 	return (
 		<>
 			{canShow && (
 				<div css={stickyLeft}>
 					<GutterAsk
-						variant={variant}
+						variant={response.data?.module.props.content}
 						enrichedUrl={urlWithRegionAndTracking}
 						onCtaClick={onCtaClick}
 					/>

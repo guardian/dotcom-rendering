@@ -1,3 +1,5 @@
+import type { GutterContent } from '@guardian/support-dotcom-components/dist/shared/types';
+
 // TODO: temporary - once SDC changes in place, switch to using those.
 export type GutterVariant = {
 	name: string;
@@ -19,7 +21,7 @@ export type GutterVariant = {
 
 // internal component
 export interface GutterAskRenderProps {
-	variant: GutterVariant;
+	variant?: GutterContent;
 	enrichedUrl: string;
 	onCtaClick: () => void;
 }

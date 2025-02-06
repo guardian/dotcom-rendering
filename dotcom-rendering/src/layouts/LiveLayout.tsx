@@ -728,6 +728,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												shouldHideReaderRevenueOnArticle={
 													article.shouldHideReaderRevenue
 												}
+												tags={article.tags}
+												sectionId={article.sectionName}
+												contributionsServiceUrl={
+													contributionsServiceUrl
+												}
 											/>
 										</Island>
 									</Hide>

@@ -72,33 +72,38 @@ export const GutterAsk: ReactComponent<GutterAskRenderProps> = ({
 	enrichedUrl,
 	onCtaClick,
 }: GutterAskRenderProps) => (
-	<div css={container}>
-		<div css={imageHeader}>
-			<img
-				src={variant.content.image.mainUrl}
-				alt={variant.content.image.altText}
-				width="150"
-				height="100"
-			/>
-		</div>
-		<div css={textBlock}>
-			<div css={bodySection}>{variant.content.bodyCopy}</div>
-			<div css={ctaSection}>
-				<ThemeProvider theme={contributionsTheme}>
-					<LinkButton
-						href={enrichedUrl}
-						icon={<SvgArrowRightStraight />}
-						iconSide="right"
-						onClick={onCtaClick}
-						target="_blank"
-						rel="noopener noreferrer"
-						priority={'primary'}
-						cssOverrides={cta}
-					>
-						{variant.content.cta.text}
-					</LinkButton>
-				</ThemeProvider>
+	<>
+		{variant && (
+			<div css={container}>
+				<div css={imageHeader}>
+					<img
+						src={variant.content.image.mainUrl}
+						alt={variant.content.image.altText}
+						width="150"
+						height="100"
+					/>
+				</div>
+				<div css={textBlock}>
+					{/* TODO: bodyCopy is a string array and needs to be handled appropriately. */}
+					<div css={bodySection}>{variant.content.bodyCopy}</div>
+					<div css={ctaSection}>
+						<ThemeProvider theme={contributionsTheme}>
+							<LinkButton
+								href={enrichedUrl}
+								icon={<SvgArrowRightStraight />}
+								iconSide="right"
+								onClick={onCtaClick}
+								target="_blank"
+								rel="noopener noreferrer"
+								priority={'primary'}
+								cssOverrides={cta}
+							>
+								{variant.content.cta.text}
+							</LinkButton>
+						</ThemeProvider>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
+		)}
+	</>
 );
