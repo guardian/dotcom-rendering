@@ -177,7 +177,6 @@ const matchStyles = (matchKind: FootballMatch['kind']) => css`
 
 	display: flex;
 	flex-wrap: wrap;
-	text-decoration: none;
 	padding: ${space[2]}px;
 `;
 
@@ -198,6 +197,7 @@ const MatchWrapper = ({
 					css={[
 						matchStyles(match.kind),
 						css`
+							text-decoration: none;
 							color: inherit;
 							:hover {
 								background-color: ${palette(
@@ -367,7 +367,18 @@ export const FootballMatchList = ({
 					{day.competitions.map((competition) => (
 						<Fragment key={competition.competitionId}>
 							<CompetitionName>
-								{competition.name}
+								<a
+									href={`https://www.theguardian.com/football/${competition.tag}`}
+									css={css`
+										text-decoration: none;
+										color: inherit;
+										:hover {
+											text-decoration: underline;
+										}
+									`}
+								>
+									{competition.name}
+								</a>
 							</CompetitionName>
 							<Matches>
 								{competition.matches.map((match) => (
