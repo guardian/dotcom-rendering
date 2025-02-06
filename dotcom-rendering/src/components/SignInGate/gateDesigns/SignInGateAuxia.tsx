@@ -77,6 +77,14 @@ export const SignInGateAuxia = ({
 							renderingTarget,
 							abTest,
 						);
+						logTreatmentInteractionCall('CLICKED').catch(
+							(error) => {
+								console.error(
+									'Failed to log treatment interaction:',
+									error,
+								);
+							},
+						);
 					}}
 				>
 					{firstCtaName}
@@ -96,12 +104,14 @@ export const SignInGateAuxia = ({
 								renderingTarget,
 								abTest,
 							);
-							logTreatmentInteractionCall().catch((error) => {
-								console.error(
-									'Failed to log treatment interaction:',
-									error,
-								);
-							});
+							logTreatmentInteractionCall('DISMISSED').catch(
+								(error) => {
+									console.error(
+										'Failed to log treatment interaction:',
+										error,
+									);
+								},
+							);
 						}}
 					>
 						I’ll do it later
@@ -125,6 +135,12 @@ export const SignInGateAuxia = ({
 						renderingTarget,
 						abTest,
 					);
+					logTreatmentInteractionCall('CLICKED').catch((error) => {
+						console.error(
+							'Failed to log treatment interaction:',
+							error,
+						);
+					});
 				}}
 			>
 				{secondCtaName}

@@ -118,5 +118,5 @@ export type SignInGatePropsAuxia = {
 	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
 	personaliseSignInGateAfterCheckoutSwitch?: boolean;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
-	logTreatmentInteractionCall: () => Promise<void>;
+	logTreatmentInteractionCall: (actionName: string) => Promise<void>;
 };
