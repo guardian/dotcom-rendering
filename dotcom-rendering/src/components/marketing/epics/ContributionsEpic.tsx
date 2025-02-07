@@ -42,8 +42,8 @@ import { ContributionsEpicCtasContainer } from './ctas/ContributionsEpicCtasCont
 // -------------------------------------------
 const wrapperStyles = css`
 	padding: ${space[1]}px ${space[2]}px ${space[3]}px;
-	border-top: 1px solid palette.brandAlt[400];
-	background-color: palette.neutral[97];
+	border-top: 1px solid ${palette.brandAlt[400]};
+	background-color: ${palette.neutral[97]};
 
 	* {
 		::selection {
