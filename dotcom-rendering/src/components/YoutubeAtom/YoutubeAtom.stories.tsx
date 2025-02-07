@@ -4,12 +4,9 @@ import type { Decorator, Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import type { AdTargeting } from '../../types/commercial';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from '../Card/components/ImageWrapper';
 import type { Props } from './YoutubeAtom';
 import { YoutubeAtom } from './YoutubeAtom';
+import { YoutubeAtomCardOverlay } from './YoutubeAtomCardOverlay';
 
 const meta = {
 	title: 'Components/Youtube Atom',
@@ -129,34 +126,33 @@ const adTargetingAndConsentGiven = {
 	...consentGiven,
 } satisfies AdTargeting & ConsentState;
 
-const imagePositionOnMobile: ImagePositionType = 'none';
-const imageSize: ImageSizeType = 'large';
-
 const baseConfiguration = {
 	atomId: 'a2502abd-1373-45a2-b508-3e5a2ec050be',
 	videoId: '-ZCvZmYlQD8',
 	uniqueId: '-ZCvZmYlQD8-1',
-	alt: '',
 	eventEmitters: [
 		// eslint-disable-next-line no-console -- check event emitters are called
 		(e: unknown) => console.log(`event emitter ${String(e)} called`),
 	],
-	duration: 252,
-	format: {
-		theme: Pillar.Culture,
-		design: ArticleDesign.Standard,
-		display: ArticleDisplay.Standard,
-	},
 	height: 450,
 	width: 800,
 	shouldStick: false,
 	isMainMedia: false,
 	abTestParticipations: {},
 	adTargeting: disableAds,
-	imagePositionOnMobile,
-	imageSize,
 	consentState: consentGiven,
 	renderingTarget: 'Web',
+	YoutubeAtomOverlay: (
+		<YoutubeAtomCardOverlay
+			format={{
+				theme: Pillar.News,
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+			}}
+			hidePillOnMobile={false}
+			duration={252}
+		/>
+	),
 } satisfies Partial<Props>;
 
 const NoConsent = {
@@ -178,56 +174,25 @@ export const NoOverlay = {
 	},
 } satisfies Story;
 
-export const WithOverrideImage = {
-	args: {
-		...baseConfiguration,
-		videoId: '3jpXAMwRSu4',
-		alt: 'Microscopic image of COVID',
-		format: {
-			theme: Pillar.News,
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-		},
-		overrideImage:
-			'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=aff4b8255693eb449f13070df88e9cac',
-		height: undefined,
-		width: undefined,
-		title: 'How to stop the spread of coronavirus',
-	},
-	decorators: [OverlayAutoplayExplainer, Container],
-} satisfies Story;
-
 export const WithPosterImage = {
 	args: {
 		...baseConfiguration,
 		videoId: 'N9Cgy-ke5-s',
-		format: {
-			theme: Pillar.Sport,
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-		},
 		posterImage:
 			'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/1920.jpg',
 		title: 'How Donald Trump’s broken promises failed Ohio | Anywhere but Washington',
-	},
-	decorators: [OverlayAutoplayExplainer, Container],
-} satisfies Story;
-
-export const WithOverlayAndPosterImage = {
-	args: {
-		...baseConfiguration,
-		videoId: WithPosterImage.args.videoId,
-		format: {
-			theme: Pillar.Opinion,
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-		},
-		posterImage: WithPosterImage.args.posterImage,
-		overrideImage:
-			'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg',
-		title: 'How Donald Trump’s broken promises failed Ohio',
-		kicker: 'Breaking News',
-		showTextOverlay: true,
+		YoutubeAtomOverlay: (
+			<YoutubeAtomCardOverlay
+				alt="Microscopic image of COVID"
+				format={{
+					theme: Pillar.Sport,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+				}}
+				duration={252}
+				hidePillOnMobile={false}
+			/>
+		),
 	},
 	decorators: [OverlayAutoplayExplainer, Container],
 } satisfies Story;
@@ -236,11 +201,21 @@ export const GiveConsent = {
 	args: {
 		...baseConfiguration,
 		...consentNotGiven,
-		videoId: WithOverrideImage.args.videoId,
-		alt: WithOverrideImage.args.alt,
-		format: WithOverrideImage.args.format,
-		title: WithOverrideImage.args.title,
-		overrideImage: WithOverlayAndPosterImage.args.overrideImage,
+		videoId: WithPosterImage.args.videoId,
+		title: WithPosterImage.args.title,
+		posterImage: WithPosterImage.args.posterImage,
+		YoutubeAtomOverlay: (
+			<YoutubeAtomCardOverlay
+				duration={252}
+				alt="Microscopic image of COVID"
+				format={{
+					theme: Pillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+				}}
+				hidePillOnMobile={false}
+			/>
+		),
 	},
 	render: function Render(args) {
 		const [consented, setConsented] = useState(false);
@@ -385,7 +360,6 @@ export const PausesOffscreen = {
  * The ad enabled tests are a convenience for manual testing.
  *
  */
-
 export const NoConsentWithAds = {
 	args: {
 		...NoConsent.args,
@@ -407,35 +381,10 @@ export const NoOverlayWithAds = {
 	},
 } satisfies Story;
 
-export const WithOverrideImageWithAds = {
-	args: {
-		...WithOverrideImage.args,
-		...adTargetingAndConsentGiven,
-		overrideImage: WithOverlayAndPosterImage.args.overrideImage,
-	},
-	decorators: [Container],
-	parameters: {
-		chromatic: { disableSnapshot: true },
-	},
-} satisfies Story;
-
 export const WithPosterImageWithAds = {
 	args: {
 		...WithPosterImage.args,
 		...adTargetingAndConsentGiven,
-	},
-	decorators: [Container],
-	parameters: {
-		chromatic: { disableSnapshot: true },
-	},
-} satisfies Story;
-
-export const WithOverlayAndPosterImageWithAds = {
-	args: {
-		...WithOverlayAndPosterImage.args,
-		...adTargetingAndConsentGiven,
-		kicker: undefined,
-		showTextOverlay: undefined,
 	},
 	decorators: [Container],
 	parameters: {
@@ -504,18 +453,23 @@ export const LiveStream = {
 	args: {
 		...baseConfiguration,
 		videoId: '3jpXAMwRSu4',
-		alt: 'Microscopic image of COVID',
-		format: {
-			theme: Pillar.News,
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-		},
-		overrideImage:
+		posterImage:
 			'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=aff4b8255693eb449f13070df88e9cac',
 		height: undefined,
 		width: undefined,
 		title: 'How to stop the spread of coronavirus',
-		duration: 0,
+		YoutubeAtomOverlay: (
+			<YoutubeAtomCardOverlay
+				format={{
+					theme: Pillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+				}}
+				hidePillOnMobile={false}
+				alt="Microscopic image of COVID"
+				duration={0}
+			/>
+		),
 	},
 	decorators: [OverlayAutoplayExplainer, Container],
 } satisfies Story;

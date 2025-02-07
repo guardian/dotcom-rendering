@@ -11,34 +11,13 @@ import type { ArticleFormat } from '../../lib/articleFormat';
 import { secondsToDuration } from '../../lib/formatTime';
 import { palette } from '../../palette';
 import type { AspectRatio } from '../../types/front';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from '../Card/components/ImageWrapper';
+import type { PlayButtonSize } from '../Card/components/PlayIcon';
 import { PlayIcon } from '../Card/components/PlayIcon';
 import { FormatBoundary } from '../FormatBoundary';
 import { Kicker } from '../Kicker';
 import { Pill } from '../Pill';
 import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 import { YoutubeAtomPicture } from './YoutubeAtomPicture';
-
-type Props = {
-	uniqueId: string;
-	overrideImage?: string;
-	posterImage?: string;
-	height: number;
-	width: number;
-	alt: string;
-	duration?: number; // in seconds
-	title?: string;
-	onClick: () => void;
-	kicker?: string;
-	format: ArticleFormat;
-	showTextOverlay?: boolean;
-	imageSize: ImageSizeType;
-	imagePositionOnMobile: ImagePositionType;
-	aspectRatio?: AspectRatio;
-};
 
 const overlayStyles = css`
 	background-size: cover;
@@ -108,9 +87,28 @@ const titleStyles = css`
 	}
 `;
 
-export const YoutubeAtomOverlay = ({
+type Props = {
+	format: ArticleFormat;
+	hidePillOnMobile: boolean;
+	uniqueId?: string;
+	posterImage?: string;
+	height?: number;
+	width?: number;
+	alt?: string;
+	duration?: number; // in seconds
+	title?: string;
+	onClick?: () => void;
+	kicker?: string;
+	showTextOverlay?: boolean;
+	aspectRatio?: AspectRatio;
+	iconSizeOnDesktop?: PlayButtonSize;
+	iconSizeOnMobile?: PlayButtonSize;
+};
+
+export const YoutubeAtomCardOverlay = ({
+	format,
+	hidePillOnMobile,
 	uniqueId,
-	overrideImage,
 	posterImage,
 	height,
 	width,
@@ -119,19 +117,18 @@ export const YoutubeAtomOverlay = ({
 	title,
 	onClick,
 	kicker,
-	format,
 	showTextOverlay,
-	imageSize,
-	imagePositionOnMobile,
 	aspectRatio,
+	iconSizeOnDesktop,
+	iconSizeOnMobile,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
-	//** We infer that a video is a livestream if the duration is set to 0. This is a soft contract with Editorial who manual set the duration of videos   */
+	/**
+	 * We infer that a video is a livestream if the duration is set to 0. This is
+	 * a soft contract with Editorial who manual set the duration of videos
+	 */
 	const isLiveStream = !isUndefined(duration) && duration === 0;
-	const image = overrideImage ?? posterImage;
-	const hidePillOnMobile =
-		imagePositionOnMobile === 'right' || imagePositionOnMobile === 'left';
 
 	return (
 		<FormatBoundary format={format}>
@@ -142,16 +139,18 @@ export const YoutubeAtomOverlay = ({
 				aria-label={title ? `Play video: ${title}` : `Play video`}
 				type="button"
 			>
-				{!!image && (
-					<YoutubeAtomPicture
-						image={image}
-						alt={alt}
-						height={height}
-						width={width}
-						aspectRatio={aspectRatio}
-					/>
-				)}
-				{isLiveStream && (
+				{!!posterImage &&
+					height !== undefined &&
+					width !== undefined && (
+						<YoutubeAtomPicture
+							image={posterImage}
+							alt={alt ?? ''}
+							height={height}
+							width={width}
+							aspectRatio={aspectRatio}
+						/>
+					)}
+				{isLiveStream ? (
 					<div
 						css={
 							hidePillOnMobile
@@ -162,13 +161,12 @@ export const YoutubeAtomOverlay = ({
 						}
 					>
 						<Pill
-							content={'Live'}
+							content="Live"
 							icon={<div css={[liveBulletStyles]} />}
-							iconSize={'small'}
+							iconSize="small"
 						/>
 					</div>
-				)}
-				{hasDuration && (
+				) : hasDuration ? (
 					<div
 						css={
 							hidePillOnMobile
@@ -181,13 +179,13 @@ export const YoutubeAtomOverlay = ({
 						<Pill
 							content={secondsToDuration(duration)}
 							icon={<SvgMediaControlsPlay />}
-							iconSize={'small'}
+							iconSize="small"
 						/>
 					</div>
-				)}
+				) : null}
 				<PlayIcon
-					imageSize={imageSize}
-					imagePositionOnMobile={imagePositionOnMobile}
+					iconSizeOnDesktop={iconSizeOnDesktop}
+					iconSizeOnMobile={iconSizeOnMobile}
 				/>
 				{showTextOverlay && (
 					<div css={textOverlayStyles}>

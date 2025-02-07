@@ -60,6 +60,7 @@ import {
 	WitnessTextBlockComponent,
 	WitnessVideoBlockComponent,
 } from '../components/WitnessBlockComponent';
+import { YoutubeAtomCardOverlay } from '../components/YoutubeAtom/YoutubeAtomCardOverlay';
 import { YoutubeBlockComponent } from '../components/YoutubeBlockComponent.importable';
 import { YoutubeEmbedBlockComponent } from '../components/YoutubeEmbedBlockComponent';
 import {
@@ -851,10 +852,16 @@ export const renderElement = ({
 						posterImage={element.posterImage}
 						duration={element.duration}
 						mediaTitle={element.mediaTitle}
-						altText={element.altText}
 						origin={host}
 						stickyVideos={!!(isBlog && switches.stickyVideos)}
 						enableAds={true}
+						YoutubeAtomOverlay={
+							<YoutubeAtomCardOverlay
+								alt={element.altText}
+								format={format}
+								hidePillOnMobile={false}
+							/>
+						}
 					/>
 				</Island>
 			);

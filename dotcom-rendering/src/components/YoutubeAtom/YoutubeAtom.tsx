@@ -1,16 +1,11 @@
 import type { Participations } from '@guardian/ab-core';
 import type { ConsentState } from '@guardian/libs';
-import { useCallback, useState } from 'react';
-import type { ArticleFormat } from '../../lib/articleFormat';
+import type { ReactElement } from 'react';
+import { cloneElement, useCallback, useState } from 'react';
 import type { AdTargeting } from '../../types/commercial';
 import type { AspectRatio } from '../../types/front';
 import type { RenderingTarget } from '../../types/renderingTarget';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from '../Card/components/ImageWrapper';
 import { MaintainAspectRatio } from '../MaintainAspectRatio';
-import { YoutubeAtomOverlay } from './YoutubeAtomOverlay';
 import { YoutubeAtomPlaceholder } from './YoutubeAtomPlaceholder';
 import { YoutubeAtomPlayer } from './YoutubeAtomPlayer';
 import { YoutubeAtomSticky } from './YoutubeAtomSticky';
@@ -30,56 +25,42 @@ export type Props = {
 	atomId: string;
 	videoId: string;
 	uniqueId: string;
-	overrideImage?: string | undefined;
 	posterImage?: string | undefined;
 	adTargeting?: AdTargeting;
 	consentState?: ConsentState;
 	height?: number;
 	width?: number;
 	title?: string;
-	alt: string;
-	duration?: number; // in seconds
 	origin?: string;
 	eventEmitters: Array<(event: VideoEventKey) => void>;
-	format: ArticleFormat;
 	shouldStick?: boolean;
 	isMainMedia?: boolean;
 	abTestParticipations: Participations;
-	kicker?: string;
 	shouldPauseOutOfView?: boolean;
-	showTextOverlay?: boolean;
-	imageSize: ImageSizeType;
-	imagePositionOnMobile: ImagePositionType;
 	renderingTarget: RenderingTarget;
 	aspectRatio?: AspectRatio;
+	YoutubeAtomOverlay: ReactElement;
 };
 
 export const YoutubeAtom = ({
 	atomId,
 	videoId,
 	uniqueId,
-	overrideImage,
 	posterImage,
 	adTargeting,
 	consentState,
 	height = 259,
 	width = 460,
-	alt,
 	title,
-	duration,
 	origin,
 	eventEmitters,
 	shouldStick,
 	isMainMedia,
 	abTestParticipations,
-	kicker,
-	format,
 	shouldPauseOutOfView = false,
-	showTextOverlay = false,
-	imageSize,
-	imagePositionOnMobile,
 	renderingTarget,
 	aspectRatio,
+	YoutubeAtomOverlay,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -137,29 +118,10 @@ export const YoutubeAtom = ({
 	 * 3. When consent and ad targeting is available render the player to initiate loading of the YouTube player
 	 * 4. When the player is ready the placeholder is removed and the YouTube player is shown
 	 */
+	const hasOverlay = !!posterImage;
 
-	const hasOverlay = !!(overrideImage ?? posterImage);
-
-	/**
-	 * Show an overlay if:
-	 *
-	 * - It exists
-	 *
-	 * AND
-	 *
-	 * - It hasn't been clicked
-	 */
 	const showOverlay = hasOverlay && !overlayClicked;
 
-	/**
-	 * Show a placeholder if:
-	 *
-	 * - We don't have an overlay OR the user has clicked the overlay
-	 *
-	 * AND
-	 *
-	 * - The player is not ready
-	 */
 	const showPlaceholder = (!hasOverlay || overlayClicked) && !playerReady;
 
 	let loadPlayer;
@@ -177,6 +139,15 @@ export const YoutubeAtom = ({
 	 * Create a stable callback as it will be a useEffect dependency in YoutubeAtomPlayer
 	 */
 	const playerReadyCallback = useCallback(() => setPlayerReady(true), []);
+
+	const YoutubeAtomOverlayWithCommonProps = cloneElement(YoutubeAtomOverlay, {
+		uniqueId,
+		posterImage,
+		title,
+		height,
+		width,
+		onClick: () => setOverlayClicked(true),
+	});
 
 	return (
 		<div
@@ -234,25 +205,7 @@ export const YoutubeAtom = ({
 							/>
 						)
 					}
-					{showOverlay && (
-						<YoutubeAtomOverlay
-							uniqueId={uniqueId}
-							overrideImage={overrideImage}
-							posterImage={posterImage}
-							height={height}
-							width={width}
-							alt={alt}
-							duration={duration}
-							title={title}
-							onClick={() => setOverlayClicked(true)}
-							kicker={kicker}
-							format={format}
-							showTextOverlay={showTextOverlay}
-							imageSize={imageSize}
-							imagePositionOnMobile={imagePositionOnMobile}
-							aspectRatio={aspectRatio}
-						/>
-					)}
+					{showOverlay && YoutubeAtomOverlayWithCommonProps}
 					{showPlaceholder && (
 						<YoutubeAtomPlaceholder uniqueId={uniqueId} />
 					)}

@@ -1,15 +1,13 @@
 import type { ConsentState } from '@guardian/libs';
+import type { ReactElement } from 'react';
 import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
+import { getLargestImageSize } from '../lib/image';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import type { AdTargeting } from '../types/commercial';
 import type { AspectRatio } from '../types/front';
 import { Caption } from './Caption';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from './Card/components/ImageWrapper';
 import { useConfig } from './ConfigContext';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
@@ -19,10 +17,12 @@ type Props = {
 	id: string;
 	assetId: string;
 	index: number;
-	mediaTitle?: string;
-	altText?: string;
 	expired: boolean;
 	format: ArticleFormat;
+	stickyVideos: boolean;
+	enableAds: boolean;
+	YoutubeAtomOverlay: ReactElement;
+	mediaTitle?: string;
 	hideCaption?: boolean;
 	overrideImage?: string;
 	posterImage?: {
@@ -34,30 +34,9 @@ type Props = {
 	width?: number;
 	duration?: number; // in seconds
 	origin?: string;
-	stickyVideos: boolean;
-	kickerText?: string;
 	pauseOffscreenVideo?: boolean;
-	showTextOverlay?: boolean;
-	// If the youtube block component is used on a card, we can pass in the image size and position on mobile to get the correct styling for the play icon. If it's not used on a card, we can just pass default values to get the standard large play icon.
-	imageSize?: ImageSizeType;
-	imagePositionOnMobile?: ImagePositionType;
-	enableAds: boolean;
 	aspectRatio?: AspectRatio;
 };
-
-/**
- * We do our own image optimization in DCR and only need 1 image. Pick the largest image available to
- * us to avoid up-scaling later.
- *
- * @param images an array of the same image at different resolutions
- * @returns largest image from images
- */
-const getLargestImageSize = (
-	images: {
-		url: string;
-		width: number;
-	}[],
-) => [...images].sort((a, b) => a.width - b.width).pop();
 
 const adTargetingDisabled: AdTargeting = { disableAds: true };
 
@@ -65,25 +44,21 @@ export const YoutubeBlockComponent = ({
 	id,
 	assetId,
 	index,
-	mediaTitle,
-	altText,
+	expired,
 	format,
+	stickyVideos,
+	enableAds,
+	YoutubeAtomOverlay,
+	mediaTitle,
 	hideCaption,
 	overrideImage,
 	posterImage = [],
-	expired,
 	isMainMedia,
 	height = 259,
 	width = 460,
 	duration,
 	origin,
-	stickyVideos,
-	kickerText,
 	pauseOffscreenVideo = false,
-	showTextOverlay,
-	imageSize = 'large',
-	imagePositionOnMobile = 'none',
-	enableAds,
 	aspectRatio,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
@@ -102,6 +77,12 @@ export const YoutubeBlockComponent = ({
 	 * We need to ensure a unique id for each YouTube player on the page.
 	 */
 	const uniqueId = `${assetId}-${index}`;
+
+	/**
+	 * We do our own image optimization in DCR and only need 1 image.
+	 * Pick the largest image available to us to avoid up-scaling later.
+	 */
+	const overlayImage = getLargestImageSize(posterImage)?.url;
 
 	useEffect(() => {
 		if (renderingTarget === 'Web') {
@@ -148,9 +129,7 @@ export const YoutubeBlockComponent = ({
 				atomId={id}
 				videoId={assetId}
 				uniqueId={uniqueId}
-				overrideImage={overrideImage}
-				posterImage={getLargestImageSize(posterImage)?.url}
-				alt={altText ?? mediaTitle ?? ''}
+				posterImage={overrideImage ?? overlayImage}
 				adTargeting={
 					enableAds && renderingTarget === 'Web'
 						? adTargeting
@@ -160,24 +139,19 @@ export const YoutubeBlockComponent = ({
 				height={height}
 				width={width}
 				title={mediaTitle}
-				duration={duration}
 				eventEmitters={
 					renderingTarget === 'Web'
 						? [ophanTrackerWeb(id)]
 						: [ophanTrackerApps(id)]
 				}
-				format={format}
-				origin={process.env.NODE_ENV === 'development' ? '' : origin}
+				origin={origin}
 				shouldStick={renderingTarget === 'Web' ? stickyVideos : false}
 				isMainMedia={isMainMedia}
 				abTestParticipations={abTestParticipations}
-				kicker={kickerText}
 				shouldPauseOutOfView={pauseOffscreenVideo}
-				showTextOverlay={showTextOverlay}
-				imageSize={imageSize}
-				imagePositionOnMobile={imagePositionOnMobile}
 				renderingTarget={renderingTarget}
 				aspectRatio={aspectRatio}
+				YoutubeAtomOverlay={YoutubeAtomOverlay}
 			/>
 			{!hideCaption && (
 				<Caption

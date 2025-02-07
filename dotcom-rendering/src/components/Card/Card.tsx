@@ -47,6 +47,7 @@ import { StarRating } from '../StarRating/StarRating';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
 import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
+import { YoutubeAtomCardOverlay } from '../YoutubeAtom/YoutubeAtomCardOverlay';
 import { YoutubeBlockComponent } from '../YoutubeBlockComponent.importable';
 import { AvatarContainer } from './components/AvatarContainer';
 import { CardAge } from './components/CardAge';
@@ -906,32 +907,54 @@ export const Card = ({
 												isMainMedia={true}
 												hideCaption={true}
 												stickyVideos={false}
-												kickerText={kickerText}
 												pauseOffscreenVideo={
 													pauseOffscreenVideo
 												}
-												showTextOverlay={
-													containerType ===
-													'fixed/video'
-												}
-												imagePositionOnMobile={
-													imagePositionOnMobile
-												}
-												//** TODO: IMPROVE THIS MAPPING */
-												// image size defaults to small if not provided. However, if the headline size is large or greater, we want to assume the image is also large so that the play icon is correctly sized.
-												imageSize={
-													[
-														'small',
-														'medium',
-														'large',
-														'xlarge',
-														'xxlarge',
-													].includes(
-														headlineSizes?.desktop ??
-															'',
-													)
-														? 'large'
-														: imageSize
+												YoutubeAtomOverlay={
+													<YoutubeAtomCardOverlay
+														alt={headlineText}
+														kicker={kickerText}
+														format={format}
+														showTextOverlay={
+															containerType ===
+															'fixed/video'
+														}
+														//** TODO: IMPROVE THIS MAPPING */
+														// image size defaults to small if not provided. However, if the headline size is large or greater, we want to assume the image is also large so that the play icon is correctly sized.
+														iconSizeOnDesktop={
+															[
+																'small',
+																'medium',
+																'large',
+																'xlarge',
+																'xxlarge',
+															].includes(
+																headlineSizes?.desktop ??
+																	'',
+															) ||
+															imageSize !==
+																'small'
+																? 'large'
+																: 'small'
+														}
+														iconSizeOnMobile={
+															imagePositionOnMobile ===
+																'left' ||
+															imagePositionOnMobile ===
+																'right'
+																? 'small'
+																: 'large'
+														}
+														aspectRatio={
+															aspectRatio
+														}
+														hidePillOnMobile={
+															imagePositionOnMobile ===
+																'left' ||
+															imagePositionOnMobile ===
+																'right'
+														}
+													/>
 												}
 												enableAds={false}
 												aspectRatio={aspectRatio}

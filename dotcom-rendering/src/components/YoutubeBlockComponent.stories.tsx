@@ -4,6 +4,7 @@ import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { RightColumn } from './RightColumn';
 import { Section } from './Section';
+import { YoutubeAtomCardOverlay } from './YoutubeAtom/YoutubeAtomCardOverlay';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
 
 export default {
@@ -54,6 +55,16 @@ export const Default = () => {
 				expired={false}
 				stickyVideos={false}
 				enableAds={false}
+				YoutubeAtomOverlay={
+					<YoutubeAtomCardOverlay
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: Pillar.News,
+						}}
+						hidePillOnMobile={false}
+					/>
+				}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -90,6 +101,16 @@ export const Vertical = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
+				YoutubeAtomOverlay={
+					<YoutubeAtomCardOverlay
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: Pillar.News,
+						}}
+						hidePillOnMobile={false}
+					/>
+				}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -127,6 +148,16 @@ export const Expired = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
+				YoutubeAtomOverlay={
+					<YoutubeAtomCardOverlay
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: Pillar.News,
+						}}
+						hidePillOnMobile={false}
+					/>
+				}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -165,6 +196,16 @@ export const WithOverlayImage = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
+				YoutubeAtomOverlay={
+					<YoutubeAtomCardOverlay
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: Pillar.News,
+						}}
+						hidePillOnMobile={false}
+					/>
+				}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -224,6 +265,16 @@ export const WithPosterImage = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
+				YoutubeAtomOverlay={
+					<YoutubeAtomCardOverlay
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: Pillar.News,
+						}}
+						hidePillOnMobile={false}
+					/>
+				}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -284,6 +335,16 @@ export const WithPosterAndOverlayImage = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
+				YoutubeAtomOverlay={
+					<YoutubeAtomCardOverlay
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: Pillar.News,
+						}}
+						hidePillOnMobile={false}
+					/>
+				}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -344,12 +405,22 @@ export const WithShowMainVideoFlagOff = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
+				YoutubeAtomOverlay={
+					<YoutubeAtomCardOverlay
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: Pillar.News,
+						}}
+						hidePillOnMobile={false}
+					/>
+				}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
-				nisi ut aliquip ex ea commodo consequat.{' '}
+				nisi ut aliquip ex ea commodo consequat.
 			</p>
 		</Wrapper>
 	);

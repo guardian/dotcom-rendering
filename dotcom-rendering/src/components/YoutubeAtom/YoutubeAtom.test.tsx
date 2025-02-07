@@ -4,6 +4,7 @@ import { fireEvent, render } from '@testing-library/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import { ConfigProvider } from '../ConfigContext';
 import { YoutubeAtom } from './YoutubeAtom';
+import { YoutubeAtomCardOverlay } from './YoutubeAtomCardOverlay';
 
 const overlayImage =
 	'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=aff4b8255693eb449f13070df88e9cac';
@@ -37,21 +38,23 @@ describe('YoutubeAtom', () => {
 					videoId="c_xtiZNDgGc"
 					uniqueId="c_xtiZNDgGc-1"
 					title="My Youtube video!"
-					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
 					consentState={consentStateCanTarget}
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					imagePositionOnMobile="none"
-					imageSize="large"
 					renderingTarget="Web"
+					YoutubeAtomOverlay={
+						<YoutubeAtomCardOverlay
+							format={{
+								theme: Pillar.News,
+								design: ArticleDesign.Standard,
+								display: ArticleDisplay.Standard,
+							}}
+							hidePillOnMobile={false}
+						/>
+					}
 				/>
 			</ConfigProvider>
 		);
@@ -75,22 +78,24 @@ describe('YoutubeAtom', () => {
 					videoId="c_xtiZNDgGc"
 					uniqueId="c_xtiZNDgGc-1"
 					title="My Youtube video!"
-					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
 					consentState={consentStateCanTarget}
-					overrideImage={overlayImage}
+					posterImage={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					imagePositionOnMobile="none"
-					imageSize="large"
 					renderingTarget="Web"
+					YoutubeAtomOverlay={
+						<YoutubeAtomCardOverlay
+							format={{
+								theme: Pillar.News,
+								design: ArticleDesign.Standard,
+								display: ArticleDisplay.Standard,
+							}}
+							hidePillOnMobile={false}
+						/>
+					}
 				/>
 			</ConfigProvider>
 		);
@@ -122,21 +127,23 @@ describe('YoutubeAtom', () => {
 					videoId="c_xtiZNDgGc"
 					uniqueId="c_xtiZNDgGc-1"
 					title="My Youtube video!"
-					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
 					consentState={consentStateCanTarget}
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					imagePositionOnMobile="none"
-					imageSize="large"
 					renderingTarget="Web"
+					YoutubeAtomOverlay={
+						<YoutubeAtomCardOverlay
+							format={{
+								theme: Pillar.News,
+								design: ArticleDesign.Standard,
+								display: ArticleDisplay.Standard,
+							}}
+							hidePillOnMobile={false}
+						/>
+					}
 				/>
 			</ConfigProvider>
 		);
@@ -161,22 +168,24 @@ describe('YoutubeAtom', () => {
 					videoId="c_xtiZNDgGc"
 					uniqueId="c_xtiZNDgGc-1"
 					title="My Youtube video!"
-					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
 					consentState={consentStateCanTarget}
-					overrideImage={overlayImage}
+					posterImage={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					imagePositionOnMobile="none"
-					imageSize="large"
 					renderingTarget="Web"
+					YoutubeAtomOverlay={
+						<YoutubeAtomCardOverlay
+							format={{
+								theme: Pillar.News,
+								design: ArticleDesign.Standard,
+								display: ArticleDisplay.Standard,
+							}}
+							hidePillOnMobile={false}
+						/>
+					}
 				/>
 			</ConfigProvider>
 		);
@@ -202,20 +211,22 @@ describe('YoutubeAtom', () => {
 					videoId="c_xtiZNDgGc"
 					uniqueId="c_xtiZNDgGc-1"
 					title="My Youtube video!"
-					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					imagePositionOnMobile="none"
-					imageSize="large"
 					renderingTarget="Web"
+					YoutubeAtomOverlay={
+						<YoutubeAtomCardOverlay
+							format={{
+								theme: Pillar.News,
+								design: ArticleDesign.Standard,
+								display: ArticleDisplay.Standard,
+							}}
+							hidePillOnMobile={false}
+						/>
+					}
 				/>
 			</ConfigProvider>
 		);
@@ -241,21 +252,23 @@ describe('YoutubeAtom', () => {
 					videoId="c_xtiZNDgGc"
 					uniqueId="c_xtiZNDgGc-1"
 					title="My Youtube video!"
-					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
-					overrideImage={overlayImage}
+					posterImage={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					imagePositionOnMobile="none"
-					imageSize="large"
 					renderingTarget="Web"
+					YoutubeAtomOverlay={
+						<YoutubeAtomCardOverlay
+							format={{
+								theme: Pillar.News,
+								design: ArticleDesign.Standard,
+								display: ArticleDisplay.Standard,
+							}}
+							hidePillOnMobile={false}
+						/>
+					}
 				/>
 			</ConfigProvider>
 		);
@@ -279,21 +292,23 @@ describe('YoutubeAtom', () => {
 					videoId="c_xtiZNDgGc"
 					uniqueId="c_xtiZNDgGc-1"
 					title="My Youtube video!"
-					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
-					overrideImage={overlayImage}
+					posterImage={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					imagePositionOnMobile="none"
-					imageSize="large"
 					renderingTarget="Web"
+					YoutubeAtomOverlay={
+						<YoutubeAtomCardOverlay
+							format={{
+								theme: Pillar.News,
+								design: ArticleDesign.Standard,
+								display: ArticleDisplay.Standard,
+							}}
+							hidePillOnMobile={false}
+						/>
+					}
 				/>
 			</ConfigProvider>
 		);
@@ -321,42 +336,46 @@ describe('YoutubeAtom', () => {
 						videoId="c_xtiZNDgGc"
 						uniqueId="c_xtiZNDgGc-1"
 						title="My Youtube video!"
-						alt=""
 						adTargeting={{ disableAds: true }}
 						eventEmitters={[]}
-						format={{
-							theme: Pillar.News,
-							design: ArticleDesign.Standard,
-							display: ArticleDisplay.Standard,
-						}}
-						overrideImage={overlayImage}
+						posterImage={overlayImage}
 						shouldStick={false}
 						isMainMedia={false}
 						abTestParticipations={{}}
-						imagePositionOnMobile="left"
-						imageSize="small"
 						renderingTarget="Web"
+						YoutubeAtomOverlay={
+							<YoutubeAtomCardOverlay
+								format={{
+									theme: Pillar.News,
+									design: ArticleDesign.Standard,
+									display: ArticleDisplay.Standard,
+								}}
+								hidePillOnMobile={false}
+							/>
+						}
 					/>
 					<YoutubeAtom
 						atomId="atom1"
 						videoId="c_xtiZNDgGc"
 						uniqueId="c_xtiZNDgGc-2"
 						title="My Youtube video 2!"
-						alt=""
 						adTargeting={{ disableAds: true }}
 						eventEmitters={[]}
-						format={{
-							theme: Pillar.News,
-							design: ArticleDesign.Standard,
-							display: ArticleDisplay.Standard,
-						}}
-						overrideImage={overlayImage}
+						posterImage={overlayImage}
 						shouldStick={false}
 						isMainMedia={false}
 						abTestParticipations={{}}
-						imagePositionOnMobile="left"
-						imageSize="small"
 						renderingTarget="Web"
+						YoutubeAtomOverlay={
+							<YoutubeAtomCardOverlay
+								format={{
+									theme: Pillar.News,
+									design: ArticleDesign.Standard,
+									display: ArticleDisplay.Standard,
+								}}
+								hidePillOnMobile={false}
+							/>
+						}
 					/>
 				</ConfigProvider>
 			</>
