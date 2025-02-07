@@ -31,24 +31,9 @@ const buttonStyles = {
 	borderSecondary: palette.neutral[86],
 };
 
-const buttonStylesForTest = {
-	textPrimary: '#FFFFFF',
-	backgroundPrimary: '#051D32',
-	backgroundPrimaryHover: '#072744',
-	textSecondary: palette.neutral[7],
-	backgroundSecondary: palette.neutral[93],
-	backgroundSecondaryHover: palette.neutral[86],
-	borderSecondary: palette.neutral[86],
-};
-
 const contributionsTheme = {
 	button: buttonStyles,
 	link: buttonStyles,
-};
-
-const contributionsThemeForTest = {
-	button: buttonStylesForTest,
-	link: buttonStylesForTest,
 };
 
 type Url = string;
@@ -67,7 +52,6 @@ type Props = {
 	isTertiary?: boolean;
 	cssOverrides?: SerializedStyles;
 	icon?: React.ReactElement;
-	isColourInTestVariant?: boolean;
 };
 
 // Overrides for tertiary button
@@ -94,7 +78,6 @@ export const EpicButton: ReactComponent<Props> = (allProps: Props) => {
 		isTertiary,
 		cssOverrides,
 		icon,
-		isColourInTestVariant,
 		...props
 	} = allProps;
 
@@ -113,13 +96,7 @@ export const EpicButton: ReactComponent<Props> = (allProps: Props) => {
 		// So we'll map that to 'primary' and apply a CSS override on both of
 		// them so they get the same styles for 'tertiary' priority
 		return (
-			<ThemeProvider
-				theme={
-					isColourInTestVariant
-						? contributionsThemeForTest
-						: contributionsTheme
-				}
-			>
+			<ThemeProvider theme={contributionsTheme}>
 				<LinkButton
 					href={onClickAction}
 					icon={icon ?? <SvgArrowRightStraight />}
@@ -141,13 +118,7 @@ export const EpicButton: ReactComponent<Props> = (allProps: Props) => {
 		);
 	}
 	return (
-		<ThemeProvider
-			theme={
-				isColourInTestVariant
-					? contributionsThemeForTest
-					: contributionsTheme
-			}
-		>
+		<ThemeProvider theme={contributionsTheme}>
 			<DSButton
 				iconSide="right"
 				icon={showArrow ? <SvgArrowRightStraight /> : undefined}
