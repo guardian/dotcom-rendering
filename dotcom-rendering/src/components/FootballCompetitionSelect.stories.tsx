@@ -9,7 +9,7 @@ const meta = {
 	parameters: {
 		chromatic: {
 			modes: {
-				'vertical mobileMedium': allModes['vertical mobile'],
+				'vertical mobileMedium': allModes['vertical mobileMedium'],
 			},
 		},
 	},
