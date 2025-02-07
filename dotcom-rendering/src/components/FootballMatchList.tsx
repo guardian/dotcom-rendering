@@ -27,6 +27,7 @@ import { palette } from '../palette';
 type Props = {
 	initialDays: FootballMatches;
 	edition: EditionId;
+	guardianBaseUrl: string;
 	getMoreDays?: () => Promise<Result<'failed', FootballMatches>>;
 };
 
@@ -177,7 +178,6 @@ const matchStyles = (matchKind: FootballMatch['kind']) => css`
 
 	display: flex;
 	flex-wrap: wrap;
-	text-decoration: none;
 	padding: ${space[2]}px;
 `;
 
@@ -198,6 +198,7 @@ const MatchWrapper = ({
 					css={[
 						matchStyles(match.kind),
 						css`
+							text-decoration: none;
 							color: inherit;
 							:hover {
 								background-color: ${palette(
@@ -349,6 +350,7 @@ const Scores = ({
 
 export const FootballMatchList = ({
 	edition,
+	guardianBaseUrl,
 	initialDays,
 	getMoreDays,
 }: Props) => {
@@ -367,7 +369,18 @@ export const FootballMatchList = ({
 					{day.competitions.map((competition) => (
 						<Fragment key={competition.competitionId}>
 							<CompetitionName>
-								{competition.name}
+								<a
+									href={`${guardianBaseUrl}/${competition.tag}`}
+									css={css`
+										text-decoration: none;
+										color: inherit;
+										:hover {
+											text-decoration: underline;
+										}
+									`}
+								>
+									{competition.name}
+								</a>
 							</CompetitionName>
 							<Matches>
 								{competition.matches.map((match) => (
