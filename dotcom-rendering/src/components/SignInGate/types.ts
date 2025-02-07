@@ -84,14 +84,13 @@ export type SignInGateTestMap = { [name: string]: SignInGateComponent };
 	comment group: auxia-prototype-e55a86ef
 */
 
-export interface treatmentContentDecoded {
+export interface TreatmentContentDecoded {
 	title: string;
+	subtitle: string;
 	body: string;
 	first_cta_name: string;
 	first_cta_link: string;
 	second_cta_name: string;
-	second_cta_link: string;
-	subtitle: string;
 }
 
 export interface AuxiaAPIResponseDataUserTreatment {
@@ -124,6 +123,7 @@ export type AuxiaInteractionActionName =
 
 export type SignInGatePropsAuxia = {
 	guUrl: string;
+	signInUrl: string;
 	dismissGate: () => void;
 	ophanComponentId: string;
 	abTest?: CurrentSignInGateABTest;

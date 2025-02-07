@@ -385,6 +385,8 @@ export const SignInGateSelector = ({
 	} else {
 		return SignInGateSelectorAuxia({
 			host,
+			pageId,
+			idUrl,
 			contributionsServiceUrl,
 		});
 	}
@@ -415,11 +417,14 @@ export const SignInGateSelector = ({
 
 type PropsAuxia = {
 	host?: string;
+	pageId: string;
+	idUrl: string;
 	contributionsServiceUrl: string;
 };
 
 interface ShowSignInGateAuxiaProps {
 	host: string;
+	signInUrl: string;
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
 	abTest: CurrentSignInGateABTest;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
@@ -487,6 +492,8 @@ const auxiaLogTreatmentInteraction = async (
 
 const SignInGateSelectorAuxia = ({
 	host = 'https://theguardian.com/',
+	pageId,
+	idUrl,
 	contributionsServiceUrl,
 }: PropsAuxia) => {
 	/*
@@ -537,12 +544,24 @@ const SignInGateSelectorAuxia = ({
 		return null;
 	}
 
+	const ctaUrlParams = {
+		pageId,
+		host,
+		pageViewId,
+		idUrl,
+		currentTest: abTest,
+		componentId: abTest.id,
+	} satisfies Parameters<typeof generateGatewayUrl>[1];
+
+	const signInUrl = generateGatewayUrl('signin', ctaUrlParams);
+
 	return (
 		<>
 			{!isGateDismissed &&
 				auxiaGetTreatmentsData?.userTreatment !== undefined && (
 					<ShowSignInGateAuxia
 						host={host}
+						signInUrl={signInUrl}
 						// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 						setShowGate={(show) => setIsGateDismissed(!show)}
 						abTest={abTest}
@@ -567,6 +586,7 @@ const SignInGateSelectorAuxia = ({
 
 const ShowSignInGateAuxia = ({
 	host,
+	signInUrl,
 	setShowGate,
 	abTest,
 	userTreatment,
@@ -592,6 +612,7 @@ const ShowSignInGateAuxia = ({
 
 	return SignInGateAuxia({
 		guUrl: host,
+		signInUrl,
 		dismissGate: () => {
 			dismissGateAuxia(setShowGate);
 		},
