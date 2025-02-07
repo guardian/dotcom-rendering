@@ -406,6 +406,15 @@ export const FootballMatchList = ({
 						`}
 					>
 						<Button
+							theme={{
+								textPrimary: palette('--button-text-primary'),
+								backgroundPrimary: palette(
+									'--button-background-primary',
+								),
+								backgroundPrimaryHover: palette(
+									'--button-background-primary-hover',
+								),
+							}}
 							icon={<SvgPlus />}
 							size="xsmall"
 							onClick={() => {
