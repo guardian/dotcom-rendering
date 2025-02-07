@@ -140,7 +140,7 @@ const moreDays: FootballMatches = [
 export const Default = {
 	args: {
 		edition: 'UK',
-		host: 'https://www.theguardian.com',
+		guardianBaseUrl: 'https://www.theguardian.com',
 		initialDays,
 		getMoreDays: () => Promise.resolve(ok(moreDays)),
 	},

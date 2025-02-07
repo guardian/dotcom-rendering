@@ -27,7 +27,7 @@ import { palette } from '../palette';
 type Props = {
 	initialDays: FootballMatches;
 	edition: EditionId;
-	host: string;
+	guardianBaseUrl: string;
 	getMoreDays: () => Promise<Result<'failed', FootballMatches>>;
 };
 
@@ -350,7 +350,7 @@ const Scores = ({
 
 export const FootballMatchList = ({
 	edition,
-	host,
+	guardianBaseUrl,
 	initialDays,
 	getMoreDays,
 }: Props) => {
@@ -370,7 +370,7 @@ export const FootballMatchList = ({
 						<Fragment key={competition.competitionId}>
 							<CompetitionName>
 								<a
-									href={`${host}/${competition.tag}`}
+									href={`${guardianBaseUrl}/${competition.tag}`}
 									css={css`
 										text-decoration: none;
 										color: inherit;
