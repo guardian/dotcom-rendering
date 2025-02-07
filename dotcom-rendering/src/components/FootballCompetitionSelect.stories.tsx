@@ -1,16 +1,24 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, fn, userEvent, waitFor, within } from '@storybook/test';
-import { FootballCompetitionSelect } from './FootballCompetitionSelect';
+import { allModes } from '../../.storybook/modes';
+import { FootballCompetitionSelect as FootballCompetitionSelectComponent } from './FootballCompetitionSelect';
 
 const meta = {
 	title: 'Components/Football Competition Select',
-	component: FootballCompetitionSelect,
-} satisfies Meta<typeof FootballCompetitionSelect>;
+	component: FootballCompetitionSelectComponent,
+	parameters: {
+		chromatic: {
+			modes: {
+				'vertical mobileMedium': allModes['vertical mobile'],
+			},
+		},
+	},
+} satisfies Meta<typeof FootballCompetitionSelectComponent>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default = {
+export const FootballCompetitionSelect = {
 	args: {
 		nations: [
 			{
@@ -35,14 +43,15 @@ export const Default = {
 	play: async ({ args, canvasElement }) => {
 		const canvas = within(canvasElement);
 
-		await userEvent.selectOptions(
-			canvas.getByLabelText('Choose league:'),
-			'football/premierleague',
-		);
-		await waitFor(() =>
-			expect(args.onChange).toHaveBeenLastCalledWith(
-				'football/premierleague',
-			),
-		);
+		const selects = canvas.getAllByLabelText('Choose league:');
+
+		for (const select of selects) {
+			await userEvent.selectOptions(select, 'football/premierleague');
+			await waitFor(() =>
+				expect(args.onChange).toHaveBeenLastCalledWith(
+					'football/premierleague',
+				),
+			);
+		}
 	},
 } satisfies Story;
