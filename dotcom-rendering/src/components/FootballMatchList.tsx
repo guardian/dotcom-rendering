@@ -370,7 +370,7 @@ export const FootballMatchList = ({
 						<Fragment key={competition.competitionId}>
 							<CompetitionName>
 								<a
-									href={`${host}/football/${competition.tag}`}
+									href={`${host}/${competition.tag}`}
 									css={css`
 										text-decoration: none;
 										color: inherit;

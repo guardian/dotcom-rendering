@@ -38,7 +38,7 @@ const initialDays: FootballMatches = [
 		competitions: [
 			{
 				competitionId: '635',
-				tag: 'serieafootball',
+				tag: 'football/serieafootball',
 				name: 'Serie A',
 				nation: 'European',
 				matches: [
@@ -67,7 +67,7 @@ const initialDays: FootballMatches = [
 			},
 			{
 				competitionId: '650',
-				tag: 'laligafootball',
+				tag: 'football/laligafootball',
 				name: 'La Liga',
 				nation: 'European',
 				matches: [
@@ -89,7 +89,7 @@ const initialDays: FootballMatches = [
 			},
 			{
 				competitionId: '651',
-				tag: 'fa-cup',
+				tag: 'football/fa-cup',
 				name: 'FA Cup',
 				nation: 'European',
 				matches: [
@@ -120,7 +120,7 @@ const moreDays: FootballMatches = [
 		competitions: [
 			{
 				competitionId: '635',
-				tag: 'serieafootball',
+				tag: 'football/serieafootball',
 				name: 'Serie A',
 				nation: 'European',
 				matches: [
