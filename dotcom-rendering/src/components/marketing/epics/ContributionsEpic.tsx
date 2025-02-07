@@ -88,8 +88,8 @@ const highlightWrapperStyles = css`
 
 const highlightStyles = css`
 	padding: 2px;
-	background-color: palette.brandAlt[400];
-	color: palette.neutral[7];
+	background-color: ${palette.brandAlt[400]};
+	color: ${palette.neutral[7]};
 `;
 
 const imageWrapperStyles = css`
