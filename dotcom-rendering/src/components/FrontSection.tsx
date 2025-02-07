@@ -610,9 +610,15 @@ export const FrontSection = ({
 								title={title}
 								lightweightHeader={isTagPage}
 								description={description}
-								fontColour={schemePalette(
-									'--article-section-title',
-								)}
+								fontColour={
+									containerLevel === 'Secondary'
+										? schemePalette(
+												'--article-section-secondary-title',
+										  )
+										: schemePalette(
+												'--article-section-title',
+										  )
+								}
 								// On paid fronts the title is not treated as a link
 								url={!isOnPaidContentFront ? url : undefined}
 								showDateHeader={showDateHeader}

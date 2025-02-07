@@ -1155,6 +1155,10 @@ const containerColours = {
 		light: sectionTitleLight,
 		dark: sectionTitleDark,
 	},
+	'--article-section-secondary-title': {
+		light: sectionTitleLight,
+		dark: sectionTitleDark,
+	},
 	'--section-date': {
 		light: sectionDateLight,
 		dark: sectionDateDark,
