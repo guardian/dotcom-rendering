@@ -310,12 +310,22 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	openCmp,
 	hasConsentForArticleCount,
 }: EpicProps) => {
-	const { image, tickerSettings, choiceCardAmounts, newsletterSignup } =
-		variant;
+	const {
+		image,
+		showChoiceCards,
+		tickerSettings,
+		choiceCardAmounts,
+		newsletterSignup,
+	} = variant;
 
 	const isColourInTestVariant: boolean =
 		tracking.abTestName.includes('_ARTICLE_EPIC_BG_COLOUR') &&
 		tracking.abTestVariant === 'VARIANT';
+
+	const isSimpleThirdChoiceCardInTestVariant: boolean =
+		(showChoiceCards &&
+			variant.name.includes('EPIC_SIMPLIFIED_THIRD_CHOICE_CARD')) ??
+		false;
 
 	const { hasOptedOut, onArticleCountOptIn, onArticleCountOptOut } =
 		useArticleCountOptOut();
@@ -479,6 +489,9 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					amountsTestName={choiceCardAmounts?.testName}
 					amountsVariantName={choiceCardAmounts?.variantName}
 					isColourInTestVariant={isColourInTestVariant}
+					isSimpleThirdChoiceCardInTestVariant={
+						isSimpleThirdChoiceCardInTestVariant
+					}
 				/>
 			)}
 
