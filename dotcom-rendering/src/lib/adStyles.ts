@@ -186,7 +186,8 @@ const spacefinderAdSlotStyles = css`
 		}
 	}
 
-	#dfp-ad--top-above-nav--passback {
+	#dfp-ad--top-above-nav--passback,
+	#dfp-ad--inline1--passback {
 		${until.tablet} {
 			background-color: ${palette('--ad-background')};
 		}
