@@ -97,7 +97,8 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 				clientName: 'dcr',
 			},
 			targeting: {
-				showSupportMessaging: showSupportMessagingForUser,
+				showSupportMessaging:
+					shouldHideSupportMessaging(isSignedIn) === false,
 				countryCode,
 				mvtId: Number(
 					getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
@@ -122,14 +123,7 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 				console.log(msg);
 				// TODO: where to log this?
 			});
-	}, [
-		contributionsServiceUrl,
-		countryCode,
-		isSignedIn,
-		sectionId,
-		showSupportMessagingForUser,
-		tagIds,
-	]);
+	}, [contributionsServiceUrl, countryCode, isSignedIn, sectionId, tagIds]);
 
 	// tracking
 	const tracking: Tracking = useMemo(() => {
