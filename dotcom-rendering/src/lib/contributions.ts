@@ -27,7 +27,8 @@ export const NO_RR_BANNER_KEY = 'gu.noRRBanner';
 // See https://github.com/guardian/support-dotcom-components/blob/main/module-versions.md
 export const MODULES_VERSION = 'v3';
 
-// Returns true if we should hide support messaging because the user is a supporter.
+// Returns whether or not the user has a supporter cookie (which is a proxy to deciding if they are a supporter)
+// Note the fact that the return value is not exactly a boolean, but can also be 'Pending'.
 // Checks the cookie that is set by the User Attributes API upon signing in.
 // Value computed server-side and looks at all of the user's active products,
 // including but not limited to recurring & one-off contributions,

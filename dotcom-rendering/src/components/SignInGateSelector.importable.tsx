@@ -1,5 +1,7 @@
 import { getCookie, isUndefined } from '@guardian/libs';
 import { useEffect, useState } from 'react';
+import { hasSupporterCookie } from '../lib/contributions';
+import { getDailyArticleCount, getToday } from '../lib/dailyArticleCount';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { constructQuery } from '../lib/querystring';
 import { useAB } from '../lib/useAB';
@@ -441,14 +443,54 @@ const dismissGateAuxia = (
 	setShowGate(false);
 };
 
+const decide_is_supporter = (): boolean => {
+	// nb: We will not be calling the Auxia API if the user is signed in, so we can set isSignedIn to false.
+	const isSignedIn = false;
+	const is_supporter = hasSupporterCookie(isSignedIn);
+	if (is_supporter === 'Pending') {
+		return true; // This decision is motivated by the definition of hasSupporterCookie, see comment in code, next to its definition.
+	}
+	return is_supporter;
+};
+
+const decide_daily_article_count = (): number => {
+	const value = getDailyArticleCount();
+	if (value === undefined) {
+		return 0;
+	}
+	const today = getToday(); // number of days since unix epoch for today date
+	for (const daily of value) {
+		if (daily.day === today) {
+			return daily.count;
+		}
+	}
+	return 0;
+};
+
 const fetchProxyGetTreatments = async (
 	contributionsServiceUrl: string,
+	pageId: string,
 ): Promise<SDCAuxiaProxyResponseData> => {
+	// We are defaulting to empty string if the cookie is not found, because the API expects a string
+	const browserId = getCookie({ name: 'bwid', shouldMemoize: true }) ?? '';
+
+	const is_supporter = decide_is_supporter();
+
+	const daily_article_count = decide_daily_article_count();
+
+	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
+	const article_identifier = `www.theguardian.com/${pageId}`;
+
 	const url = `${contributionsServiceUrl}/auxia/get-treatments`;
 	const headers = {
 		'Content-Type': 'application/json',
 	};
-	const payload = {};
+	const payload = {
+		browserId,
+		is_supporter,
+		daily_article_count,
+		article_identifier,
+	};
 	const params = {
 		method: 'POST',
 		headers,
@@ -468,12 +510,16 @@ const auxiaLogTreatmentInteraction = async (
 	interactionType: AuxiaInteractionInteractionType,
 	actionName: AuxiaInteractionActionName,
 ): Promise<void> => {
+	// We are defaulting to empty string if the cookie is not found, because the API expects a string
+	const browserId = getCookie({ name: 'bwid', shouldMemoize: true }) ?? '';
+
 	const url = `${contributionsServiceUrl}/auxia/log-treatment-interaction`;
 	const headers = {
 		'Content-Type': 'application/json',
 	};
 	const microTime = Date.now() * 1000;
 	const payload = {
+		browserId,
 		treatmentTrackingId: userTreatment.treatmentTrackingId,
 		treatmentId: userTreatment.treatmentId,
 		surface: userTreatment.surface,
@@ -533,7 +579,10 @@ const SignInGateSelectorAuxia = ({
 
 	useOnce(() => {
 		void (async () => {
-			const data = await fetchProxyGetTreatments(contributionsServiceUrl);
+			const data = await fetchProxyGetTreatments(
+				contributionsServiceUrl,
+				pageId,
+			);
 			setAuxiaGetTreatmentsData(data);
 		})().catch((error) => {
 			console.error('Error fetching Auxia display data:', error);
