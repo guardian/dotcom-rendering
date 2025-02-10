@@ -1,6 +1,6 @@
 import { getCookie, isUndefined } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import { hasSupporterCookie } from '../lib/contributions';
+import { shouldHideSupportMessaging } from '../lib/contributions';
 import { getDailyArticleCount, getToday } from '../lib/dailyArticleCount';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { constructQuery } from '../lib/querystring';
@@ -443,12 +443,20 @@ const dismissGateAuxia = (
 	setShowGate(false);
 };
 
+const decideBrowserId = (): string => {
+	// The way to get the browserId is:
+	// getCookie({ name: 'bwid', shouldMemoize: true })
+	// but we are not calling it for the moment until we have guidance on
+	// how to handle the bwid cookie in the context of this experiment.
+	return '2598326e-7c';
+};
+
 const decideIsSupporter = (): boolean => {
 	// nb: We will not be calling the Auxia API if the user is signed in, so we can set isSignedIn to false.
 	const isSignedIn = false;
-	const is_supporter = hasSupporterCookie(isSignedIn);
+	const is_supporter = shouldHideSupportMessaging(isSignedIn);
 	if (is_supporter === 'Pending') {
-		return true; // This decision is motivated by the definition of hasSupporterCookie, see comment in code, next to its definition.
+		return true;
 	}
 	return is_supporter;
 };
@@ -472,7 +480,7 @@ const fetchProxyGetTreatments = async (
 	pageId: string,
 ): Promise<SDCAuxiaProxyResponseData> => {
 	// We are defaulting to empty string if the cookie is not found, because the API expects a string
-	const browserId = getCookie({ name: 'bwid', shouldMemoize: true }) ?? '';
+	const browserId = decideBrowserId();
 
 	const is_supporter = decideIsSupporter();
 
@@ -511,7 +519,7 @@ const auxiaLogTreatmentInteraction = async (
 	actionName: AuxiaInteractionActionName,
 ): Promise<void> => {
 	// We are defaulting to empty string if the cookie is not found, because the API expects a string
-	const browserId = getCookie({ name: 'bwid', shouldMemoize: true }) ?? '';
+	const browserId = decideBrowserId();
 
 	const url = `${contributionsServiceUrl}/auxia/log-treatment-interaction`;
 	const headers = {
