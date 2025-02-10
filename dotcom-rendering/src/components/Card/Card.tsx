@@ -1041,7 +1041,7 @@ export const Card = ({
 							isOnwardContent,
 						)}
 						padRight={
-							isFlexSplash ||
+							!!isFlexSplash ||
 							(isFlexibleContainer && imageSize === 'jumbo')
 						}
 					>
