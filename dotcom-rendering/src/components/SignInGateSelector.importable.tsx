@@ -448,7 +448,7 @@ const decideBrowserId = (): string => {
 	// getCookie({ name: 'bwid', shouldMemoize: true })
 	// but we are not calling it for the moment until we have guidance on
 	// how to handle the bwid cookie in the context of this experiment.
-	return '2598326e-7c';
+	return '2598326e7c';
 };
 
 const decideIsSupporter = (): boolean => {
