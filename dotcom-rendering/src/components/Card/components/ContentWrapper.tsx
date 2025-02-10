@@ -61,30 +61,7 @@ const flexBasisStyles = ({
 	}
 };
 
-const paddingStyles = (
-	imagePosition: ImagePositionType,
-	isFlexibleContainer: boolean,
-	paddingWidth: 1 | 2,
-) => {
-	/**
-	 * If we're in a flexible container there is a 20px gap between the image
-	 * and content. We don't apply padding to the content on the same edge as
-	 * the image so the content is aligned with the grid.
-	 */
-	if (isFlexibleContainer && imagePosition === 'left') {
-		return css`
-			padding: ${space[paddingWidth]}px ${space[paddingWidth]}px
-				${space[paddingWidth]}px 0;
-		`;
-	}
-
-	if (isFlexibleContainer && imagePosition === 'right') {
-		return css`
-			padding: ${space[paddingWidth]}px 0 ${space[paddingWidth]}px
-				${space[paddingWidth]}px;
-		`;
-	}
-
+const paddingStyles = (paddingWidth: 1 | 2) => {
 	return css`
 		padding: ${space[paddingWidth]}px;
 	`;
@@ -96,7 +73,7 @@ type Props = {
 	imageSize: ImageSizeType;
 	imagePositionOnDesktop: ImagePositionType;
 	padContent?: 'small' | 'large';
-	isFlexibleContainer?: boolean;
+	padRight?: boolean;
 };
 
 export const ContentWrapper = ({
@@ -105,7 +82,7 @@ export const ContentWrapper = ({
 	imageSize,
 	imagePositionOnDesktop,
 	padContent,
-	isFlexibleContainer = false,
+	padRight = false,
 }: Props) => {
 	const isHorizontalOnDesktop =
 		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
@@ -116,12 +93,11 @@ export const ContentWrapper = ({
 				sizingStyles,
 				isHorizontalOnDesktop &&
 					flexBasisStyles({ imageSize, imageType }),
-				padContent &&
-					paddingStyles(
-						imagePositionOnDesktop,
-						isFlexibleContainer,
-						padContent === 'small' ? 1 : 2,
-					),
+				padContent && paddingStyles(padContent === 'small' ? 1 : 2),
+				padRight &&
+					css`
+						padding-right: ${space[5]}px;
+					`,
 			]}
 		>
 			{children}
