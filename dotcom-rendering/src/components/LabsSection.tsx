@@ -30,46 +30,32 @@ import { ShowMore } from './ShowMore.importable';
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */
 	title: string;
-
 	collectionId: string;
-
 	pageId: string;
-
 	ajaxUrl: string;
-
 	/**
 	 * Used by ElementContainer to set the inner element id for it to be used by ShowMore
 	 * */
 	sectionId: string;
-
 	/**
 	 * The string used to set the `data-component` Ophan attribute.
 	 * Also used to set the html `id` property of the top level section element
 	 * */
 	ophanComponentName: string;
-
 	/** The string used to set the `data-link-name` Ophan attribute */
 	ophanComponentLink: string;
-
 	/** The string used to set the `data-container-name` Ophan attribute */
 	containerName?: string;
-
 	/** Enable the "Show More" button on this container to allow readers to load more cards */
 	canShowMore?: boolean;
-
 	/** The title can be made into a link using this property */
 	url?: string;
-
 	/** A sponsor badge can be displayed under the content cards */
 	badge?: DCRBadgeType;
-
 	/** Usually the content cards that will be displayed inside the container */
 	children?: React.ReactNode;
-
 	hasPageSkin?: boolean;
-
 	discussionApiUrl: string;
-
 	/** We use a different link on the logo for US and AUS labs */
 	editionId: EditionId;
 };
@@ -183,6 +169,33 @@ const headerStyles = css`
 const containerMargins = css`
 	${until.tablet} {
 		margin: 10px;
+	}
+`;
+
+const sectionControls = css`
+	grid-row: controls;
+	grid-column: hide;
+	justify-self: end;
+	display: flex;
+	padding-top: ${space[2]}px;
+	${from.wide} {
+		flex-direction: column-reverse;
+		justify-content: flex-end;
+		align-items: flex-end;
+		gap: ${space[2]}px;
+		/* we want to add space between the items in the controls section only when there are at least 2 children and neither are hidden */
+		:has(> :not(.hidden):nth-of-type(2)) {
+			justify-content: space-between;
+		}
+	}
+`;
+
+const carouselNavigationPlaceholder = css`
+	${between.tablet.and.leftCol} {
+		min-height: 44px;
+	}
+	.hidden & {
+		display: none;
 	}
 `;
 
@@ -377,6 +390,7 @@ export const LabsSection = ({
 	hasPageSkin = false,
 	discussionApiUrl,
 	editionId,
+	hasNavigationButtons = false,
 }: Props) => {
 	return (
 		<ContainerOverrides containerPalette="Branded">
@@ -397,6 +411,7 @@ export const LabsSection = ({
 				 * https://forgottenrealms.fandom.com/wiki/Dumathoin
 				 */
 				className={'dumathoin'}
+				css={[]}
 			>
 				<Container hasPageSkin={hasPageSkin}>
 					<LeftColumn hasPageSkin={hasPageSkin}>
@@ -427,6 +442,17 @@ export const LabsSection = ({
 					</LeftColumn>
 					<Content hasPageSkin={hasPageSkin}>
 						{children}
+
+						<div css={sectionControls}>
+							{hasNavigationButtons && (
+								<div
+									css={carouselNavigationPlaceholder}
+									className="carouselNavigationPlaceholder"
+									id={`${sectionId}-carousel-navigation`}
+								></div>
+							)}
+						</div>
+
 						{canShowMore && (
 							<Island
 								priority="feature"
