@@ -163,14 +163,10 @@ const spacefinderAdSlotStyles = css`
 	}
 
 	/* Give ad slots inserted on the client side a placeholder height.
-   Let the ad slot take control of its height once rendered. */
-	.ad-slot--inline:not(.ad-slot--rendered) {
-		min-height: ${adSizes.outstreamMobile.height +
-		constants.AD_LABEL_HEIGHT}px;
-
-		${from.desktop} {
-			min-height: ${adSizes.mpu.height + constants.AD_LABEL_HEIGHT}px;
-		}
+    Let the ad slot take control of its height once rendered. */
+	.ad-slot--inline {
+		min-height: ${adSizes.mpu.height + constants.AD_LABEL_HEIGHT}px;
+		background-color: ${palette('--ad-background')};
 	}
 
 	/* Give inline1 ad slot a different placeholder height comparing to subsequent-inlines to reduce CLS.
@@ -185,10 +181,9 @@ const spacefinderAdSlotStyles = css`
 
 	/* This refers to the inline top-above-nav slot used on mobile pages, NOT the
    top-above-nav that is inserted above the navigation. */
-	.ad-slot--top-above-nav:not(.ad-slot--rendered) {
+	.ad-slot--top-above-nav {
 		${until.tablet} {
-			min-height: ${adSizes.outstreamMobile.height +
-			constants.AD_LABEL_HEIGHT}px;
+			min-height: ${adSizes.mpu.height + constants.AD_LABEL_HEIGHT}px;
 		}
 	}
 
