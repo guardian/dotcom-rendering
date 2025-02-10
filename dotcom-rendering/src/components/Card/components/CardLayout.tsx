@@ -176,7 +176,7 @@ const decideColumnGap = (gapSize: GapSize) => css`
 	column-gap: ${decideGap(gapSize)};
 
 	${until.tablet} {
-		column-gap: ${gapSize === 'large' ? `10px` : decideGap(gapSize)}px;
+		column-gap: ${gapSize === 'large' ? '10px' : decideGap(gapSize)};
 	}
 `;
 
