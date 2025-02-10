@@ -84,14 +84,13 @@ export type SignInGateTestMap = { [name: string]: SignInGateComponent };
 	comment group: auxia-prototype-e55a86ef
 */
 
-export interface treatmentContentDecoded {
+export interface TreatmentContentDecoded {
 	title: string;
+	subtitle: string;
 	body: string;
 	first_cta_name: string;
 	first_cta_link: string;
 	second_cta_name: string;
-	second_cta_link: string;
-	subtitle: string;
 }
 
 export interface AuxiaAPIResponseDataUserTreatment {
@@ -109,8 +108,22 @@ export interface SDCAuxiaProxyResponseData {
 	userTreatment?: AuxiaAPIResponseDataUserTreatment;
 }
 
+export type AuxiaInteractionInteractionType =
+	| 'VIEWED'
+	| 'CLICKED'
+	| 'DISMISSED';
+
+export type AuxiaInteractionActionName =
+	| 'REGISTER-LINK'
+	| 'SIGN-IN-LINK'
+	| 'HOW-TO-LINK'
+	| 'WHY-LINK'
+	| 'HELP-LINK'
+	| ''; // used for 'VIEWED' and 'DISMISSED' interactions
+
 export type SignInGatePropsAuxia = {
 	guUrl: string;
+	signInUrl: string;
 	dismissGate: () => void;
 	ophanComponentId: string;
 	abTest?: CurrentSignInGateABTest;
@@ -118,5 +131,8 @@ export type SignInGatePropsAuxia = {
 	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
 	personaliseSignInGateAfterCheckoutSwitch?: boolean;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
-	logTreatmentInteractionCall: () => Promise<void>;
+	logTreatmentInteractionCall: (
+		interactionType: AuxiaInteractionInteractionType,
+		actionName: AuxiaInteractionActionName,
+	) => Promise<void>;
 };

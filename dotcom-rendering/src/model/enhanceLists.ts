@@ -73,7 +73,7 @@ const constructMultiByline =
 		elements,
 		bio,
 		endNote,
-		imageOverrideUrl,
+		contributorImageOverrideUrl,
 		contributorIds,
 		byline,
 		bylineHtml,
@@ -81,8 +81,8 @@ const constructMultiByline =
 		const contributorIdsArray = contributorIds ?? [];
 
 		let imageUrl;
-		if (imageOverrideUrl) {
-			imageUrl = imageOverrideUrl;
+		if (contributorImageOverrideUrl) {
+			imageUrl = contributorImageOverrideUrl;
 		} else if (tags) {
 			imageUrl = tags.find((tag) => tag.id === contributorIdsArray[0])
 				?.bylineImageUrl;

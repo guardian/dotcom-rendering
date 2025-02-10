@@ -7,6 +7,7 @@ import { palette as sourcePalette } from '@guardian/source/foundations';
 import {
 	buttonThemeBrand,
 	buttonThemeDefault,
+	themeButton,
 } from '@guardian/source/react-components';
 import {
 	expandingWrapperDarkTheme,
@@ -3031,6 +3032,12 @@ const articleSectionTitleLight: PaletteFunction = () =>
 const articleSectionTitleDark: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 
+const articleSectionSecondaryTitleLight: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
+const articleSectionSecondaryTitleDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
 const articleLinkTextLight: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.Audio) {
 		return sourcePalette.neutral[86];
@@ -5920,6 +5927,10 @@ const paletteColours = {
 		light: articleSectionBackgroundLight,
 		dark: articleSectionBackgroundDark,
 	},
+	'--article-section-secondary-title': {
+		light: articleSectionSecondaryTitleLight,
+		dark: articleSectionSecondaryTitleDark,
+	},
 	'--article-section-title': {
 		light: articleSectionTitleLight,
 		dark: articleSectionTitleDark,
@@ -5987,6 +5998,18 @@ const paletteColours = {
 	'--bullet-fill': {
 		light: bulletFillLight,
 		dark: bulletFillDark,
+	},
+	'--button-background-primary': {
+		light: () => themeButton.backgroundPrimary,
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--button-background-primary-hover': {
+		light: () => themeButton.backgroundPrimaryHover,
+		dark: () => '#CACACA',
+	},
+	'--button-text-primary': {
+		light: () => themeButton.textPrimary,
+		dark: () => sourcePalette.brand[400],
 	},
 	'--byline': {
 		light: bylineLight,
@@ -6495,6 +6518,14 @@ const paletteColours = {
 	'--follow-text': {
 		light: followTextLight,
 		dark: followTextDark,
+	},
+	'--football-competition-select-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--football-match-hover': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[38],
 	},
 	'--football-match-list-background': {
 		light: () => sourcePalette.neutral[97],

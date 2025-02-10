@@ -561,7 +561,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								shouldHideReaderRevenue={
 									article.shouldHideReaderRevenue
 								}
-								stage={article.config.stage}
 								tags={article.tags}
 								renderAds={renderAds}
 								isLabs={false}

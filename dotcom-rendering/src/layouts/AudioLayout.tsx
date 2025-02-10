@@ -375,7 +375,6 @@ export const AudioLayout = (props: WebProps) => {
 											shouldHideReaderRevenue={
 												article.shouldHideReaderRevenue
 											}
-											stage={article.config.stage}
 											tags={article.tags}
 											renderAds={renderAds}
 											isLabs={isLabs}

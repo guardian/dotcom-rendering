@@ -24,6 +24,8 @@ import { SignInGateAuxia } from './SignInGate/gateDesigns/SignInGateAuxia';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGateMappings';
 import type {
 	AuxiaAPIResponseDataUserTreatment,
+	AuxiaInteractionActionName,
+	AuxiaInteractionInteractionType,
 	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
 	SDCAuxiaProxyResponseData,
@@ -383,6 +385,8 @@ export const SignInGateSelector = ({
 	} else {
 		return SignInGateSelectorAuxia({
 			host,
+			pageId,
+			idUrl,
 			contributionsServiceUrl,
 		});
 	}
@@ -413,14 +417,22 @@ export const SignInGateSelector = ({
 
 type PropsAuxia = {
 	host?: string;
+	pageId: string;
+	idUrl: string;
 	contributionsServiceUrl: string;
 };
 
 interface ShowSignInGateAuxiaProps {
 	host: string;
+	signInUrl: string;
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
+	abTest: CurrentSignInGateABTest;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
-	logTreatmentInteractionCall: () => Promise<void>;
+	contributionsServiceUrl: string;
+	logTreatmentInteractionCall: (
+		interactionType: AuxiaInteractionInteractionType,
+		actionName: AuxiaInteractionActionName,
+	) => Promise<void>;
 }
 
 const dismissGateAuxia = (
@@ -453,7 +465,8 @@ const fetchProxyGetTreatments = async (
 const auxiaLogTreatmentInteraction = async (
 	contributionsServiceUrl: string,
 	userTreatment: AuxiaAPIResponseDataUserTreatment,
-	actionName: string,
+	interactionType: AuxiaInteractionInteractionType,
+	actionName: AuxiaInteractionActionName,
 ): Promise<void> => {
 	const url = `${contributionsServiceUrl}/auxia/log-treatment-interaction`;
 	const headers = {
@@ -464,7 +477,7 @@ const auxiaLogTreatmentInteraction = async (
 		treatmentTrackingId: userTreatment.treatmentTrackingId,
 		treatmentId: userTreatment.treatmentId,
 		surface: userTreatment.surface,
-		interactionType: 'CLICKED',
+		interactionType,
 		interactionTimeMicros: microTime,
 		actionName,
 	};
@@ -479,6 +492,8 @@ const auxiaLogTreatmentInteraction = async (
 
 const SignInGateSelectorAuxia = ({
 	host = 'https://theguardian.com/',
+	pageId,
+	idUrl,
 	contributionsServiceUrl,
 }: PropsAuxia) => {
 	/*
@@ -493,10 +508,12 @@ const SignInGateSelectorAuxia = ({
 		SDCAuxiaProxyResponseData | undefined
 	>(undefined);
 
-	const currentTest = {
-		name: 'SignInGateMain',
-		variant: 'main-variant-5',
-		id: 'SignInGateMainVariant',
+	// We are using CurrentSignInGateABTest, with the details of the Auxia experiment,
+	// to allow Ophan tracking
+	const abTest: CurrentSignInGateABTest = {
+		name: 'AuxiaSignInGate', // value of dataLinkNames
+		variant: 'auxia-signin-gate', // variant id
+		id: 'AuxiaSignInGate', // test id
 	};
 
 	const { renderingTarget } = useConfig();
@@ -521,11 +538,22 @@ const SignInGateSelectorAuxia = ({
 		})().catch((error) => {
 			console.error('Error fetching Auxia display data:', error);
 		});
-	}, [currentTest]);
+	}, [abTest]);
 
 	if (isUndefined(pageViewId)) {
 		return null;
 	}
+
+	const ctaUrlParams = {
+		pageId,
+		host,
+		pageViewId,
+		idUrl,
+		currentTest: abTest,
+		componentId: abTest.id,
+	} satisfies Parameters<typeof generateGatewayUrl>[1];
+
+	const signInUrl = generateGatewayUrl('signin', ctaUrlParams);
 
 	return (
 		<>
@@ -533,14 +561,21 @@ const SignInGateSelectorAuxia = ({
 				auxiaGetTreatmentsData?.userTreatment !== undefined && (
 					<ShowSignInGateAuxia
 						host={host}
+						signInUrl={signInUrl}
 						// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 						setShowGate={(show) => setIsGateDismissed(!show)}
+						abTest={abTest}
 						userTreatment={auxiaGetTreatmentsData.userTreatment}
-						logTreatmentInteractionCall={async () => {
+						contributionsServiceUrl={contributionsServiceUrl}
+						logTreatmentInteractionCall={async (
+							interactionType: AuxiaInteractionInteractionType,
+							actionName: AuxiaInteractionActionName,
+						) => {
 							await auxiaLogTreatmentInteraction(
 								contributionsServiceUrl,
 								auxiaGetTreatmentsData.userTreatment!,
-								'gate-dismissed',
+								interactionType,
+								actionName,
 							);
 						}}
 					/>
@@ -551,17 +586,33 @@ const SignInGateSelectorAuxia = ({
 
 const ShowSignInGateAuxia = ({
 	host,
+	signInUrl,
 	setShowGate,
+	abTest,
 	userTreatment,
+	contributionsServiceUrl,
 	logTreatmentInteractionCall,
 }: ShowSignInGateAuxiaProps) => {
 	const componentId = 'main_variant_5';
-	const abTest = undefined;
 	const checkoutCompleteCookieData = undefined;
 	const personaliseSignInGateAfterCheckoutSwitch = undefined;
 
+	useOnce(() => {
+		void (async () => {
+			await auxiaLogTreatmentInteraction(
+				contributionsServiceUrl,
+				userTreatment,
+				'VIEWED',
+				'',
+			);
+		})().catch((error) => {
+			console.error('Failed to log treatment interaction:', error);
+		});
+	}, [componentId]);
+
 	return SignInGateAuxia({
 		guUrl: host,
+		signInUrl,
 		dismissGate: () => {
 			dismissGateAuxia(setShowGate);
 		},

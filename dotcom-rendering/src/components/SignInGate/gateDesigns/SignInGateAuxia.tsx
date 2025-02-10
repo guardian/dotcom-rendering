@@ -1,7 +1,7 @@
 import { Button, Link, LinkButton } from '@guardian/source/react-components';
 import { useConfig } from '../../ConfigContext';
 import { trackLink } from '../componentEventTracking';
-import type { SignInGatePropsAuxia, treatmentContentDecoded } from '../types';
+import type { SignInGatePropsAuxia, TreatmentContentDecoded } from '../types';
 import {
 	actionButtons,
 	bodyBold,
@@ -20,6 +20,7 @@ import {
 
 export const SignInGateAuxia = ({
 	guUrl,
+	signInUrl,
 	dismissGate,
 	abTest,
 	ophanComponentId,
@@ -31,17 +32,17 @@ export const SignInGateAuxia = ({
 
 	const treatmentContent = JSON.parse(
 		userTreatment.treatmentContent,
-	) as treatmentContentDecoded;
+	) as TreatmentContentDecoded;
 
 	/*
-	sample: {
+	The treatmentContent object is expected to have the following structure:
+	{
 		"title": "Sign in for a personlised experience",
+		"subtitle": ""
 		"body": "By signing into your Guardian account you'll provide us with insights into your preferences that will result in a more personalised experience, including less frequent asks to support. You'll always be able to control your preferences in your own privacy settings.",
 		"first_cta_name": "Sign in",
 		"first_cta_link": "https://profile.theguardian.com/signin?",
 		"second_cta_name": "I'll do it later",
-		"second_cta_link": "https://profile.theguardian.com/signin?",
-		"subtitle": ""
 	}
 	*/
 
@@ -50,17 +51,14 @@ export const SignInGateAuxia = ({
 	const firstCtaName = treatmentContent.first_cta_name;
 	const firstCtaLink = treatmentContent.first_cta_link;
 	const secondCtaName = treatmentContent.second_cta_name;
-	const secondCtaLink = treatmentContent.second_cta_link;
-	//const subtitle = treatmentContent.subtitle;
+	const subtitle = treatmentContent.subtitle;
 
 	return (
 		<div css={signInGateContainer} data-testid="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
 			<div css={firstParagraphOverlay} />
 			<h1 css={headingStyles}>{title}</h1>
-			<p css={bodyBold}>
-				It’s still free to read – this is not a paywall
-			</p>
+			<p css={bodyBold}>{subtitle}</p>
 			<p css={bodyText}>{body}</p>
 			<div css={actionButtons}>
 				<LinkButton
@@ -77,6 +75,15 @@ export const SignInGateAuxia = ({
 							renderingTarget,
 							abTest,
 						);
+						logTreatmentInteractionCall(
+							'CLICKED',
+							'REGISTER-LINK',
+						).catch((error) => {
+							console.error(
+								'Failed to log treatment interaction:',
+								error,
+							);
+						});
 					}}
 				>
 					{firstCtaName}
@@ -96,15 +103,17 @@ export const SignInGateAuxia = ({
 								renderingTarget,
 								abTest,
 							);
-							logTreatmentInteractionCall().catch((error) => {
-								console.error(
-									'Failed to log treatment interaction:',
-									error,
-								);
-							});
+							logTreatmentInteractionCall('DISMISSED', '').catch(
+								(error) => {
+									console.error(
+										'Failed to log treatment interaction:',
+										error,
+									);
+								},
+							);
 						}}
 					>
-						I’ll do it later
+						{secondCtaName}
 					</Button>
 				)}
 			</div>
@@ -117,7 +126,7 @@ export const SignInGateAuxia = ({
 				data-testid="sign-in-gate-main_signin"
 				data-ignore="global-link-styling"
 				cssOverrides={signInLink}
-				href={secondCtaLink}
+				href={signInUrl}
 				onClick={() => {
 					trackLink(
 						ophanComponentId,
@@ -125,9 +134,18 @@ export const SignInGateAuxia = ({
 						renderingTarget,
 						abTest,
 					);
+					logTreatmentInteractionCall(
+						'CLICKED',
+						'SIGN-IN-LINK',
+					).catch((error) => {
+						console.error(
+							'Failed to log treatment interaction:',
+							error,
+						);
+					});
 				}}
 			>
-				{secondCtaName}
+				Sign In
 			</Link>
 
 			<div css={faq}>
@@ -141,6 +159,15 @@ export const SignInGateAuxia = ({
 							renderingTarget,
 							abTest,
 						);
+						logTreatmentInteractionCall(
+							'CLICKED',
+							'HOW-TO-LINK',
+						).catch((error) => {
+							console.error(
+								'Failed to log treatment interaction:',
+								error,
+							);
+						});
 					}}
 				>
 					Why register & how does it help?
@@ -156,6 +183,15 @@ export const SignInGateAuxia = ({
 							renderingTarget,
 							abTest,
 						);
+						logTreatmentInteractionCall(
+							'CLICKED',
+							'WHY-LINK',
+						).catch((error) => {
+							console.error(
+								'Failed to log treatment interaction:',
+								error,
+							);
+						});
 					}}
 				>
 					How will my information & data be used?
@@ -171,6 +207,15 @@ export const SignInGateAuxia = ({
 							renderingTarget,
 							abTest,
 						);
+						logTreatmentInteractionCall(
+							'CLICKED',
+							'HELP-LINK',
+						).catch((error) => {
+							console.error(
+								'Failed to log treatment interaction:',
+								error,
+							);
+						});
 					}}
 				>
 					Get help with registering or signing in

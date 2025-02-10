@@ -400,7 +400,6 @@ describe('Island: server-side rendering', () => {
 						tags={[]}
 						contributionsServiceUrl={''}
 						idApiUrl={''}
-						stage={''}
 						pageId={''}
 						renderAds={true}
 						isLabs={false}

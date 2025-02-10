@@ -761,7 +761,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											shouldHideReaderRevenue={
 												article.shouldHideReaderRevenue
 											}
-											stage={article.config.stage}
 											tags={article.tags}
 											renderAds={renderAds}
 											isLabs={isLabs}

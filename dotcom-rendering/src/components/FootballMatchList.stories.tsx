@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/test';
+import { allModes } from '../../.storybook/modes';
 import type { FootballMatches } from '../footballMatches';
 import { error, ok } from '../lib/result';
 import { FootballMatchList } from './FootballMatchList';
@@ -16,6 +17,15 @@ const meta = {
 			</>
 		),
 	],
+	parameters: {
+		chromatic: {
+			modes: {
+				'vertical mobile': allModes['vertical mobile'],
+				'vertical desktop': allModes['vertical desktop'],
+				'vertical wide': allModes['splitVertical'],
+			},
+		},
+	},
 } satisfies Meta<typeof FootballMatchList>;
 
 export default meta;
@@ -24,16 +34,17 @@ type Story = StoryObj<typeof meta>;
 
 const initialDays: FootballMatches = [
 	{
-		date: new Date('2025-01-24T00:00:00Z'),
+		date: new Date('2022-01-01T00:00:00Z'),
 		competitions: [
 			{
 				competitionId: '635',
+				tag: 'football/serieafootball',
 				name: 'Serie A',
 				nation: 'European',
 				matches: [
 					{
 						kind: 'Live',
-						dateTime: new Date('2025-01-24T11:11:00Z'),
+						dateTime: new Date('2022-01-01T11:11:00Z'),
 						paId: '4482093',
 						homeTeam: {
 							name: 'Torino',
@@ -47,7 +58,7 @@ const initialDays: FootballMatches = [
 					},
 					{
 						kind: 'Fixture',
-						dateTime: new Date('2025-01-24T19:45:00Z'),
+						dateTime: new Date('2022-01-01T19:45:00Z'),
 						paId: '4482890',
 						homeTeam: 'Auxerre',
 						awayTeam: 'St Etienne',
@@ -56,12 +67,13 @@ const initialDays: FootballMatches = [
 			},
 			{
 				competitionId: '650',
+				tag: 'football/laligafootball',
 				name: 'La Liga',
 				nation: 'European',
 				matches: [
 					{
 						kind: 'Result',
-						dateTime: new Date('2025-01-24T20:00:00Z'),
+						dateTime: new Date('2022-01-01T20:00:00Z'),
 						paId: '4482835',
 						homeTeam: {
 							name: 'Las Palmas',
@@ -76,13 +88,14 @@ const initialDays: FootballMatches = [
 				],
 			},
 			{
-				competitionId: '650',
+				competitionId: '651',
+				tag: 'football/fa-cup',
 				name: 'FA Cup',
 				nation: 'European',
 				matches: [
 					{
 						kind: 'Result',
-						dateTime: new Date('2025-01-25T20:00:00Z'),
+						dateTime: new Date('2022-01-01T20:00:00Z'),
 						paId: '4482836',
 						homeTeam: {
 							name: 'Brighton & Hove Albion Women',
@@ -101,16 +114,42 @@ const initialDays: FootballMatches = [
 	},
 ];
 
+const moreDays: FootballMatches = [
+	{
+		date: new Date('2022-01-05T00:00:00Z'),
+		competitions: [
+			{
+				competitionId: '635',
+				tag: 'football/serieafootball',
+				name: 'Serie A',
+				nation: 'European',
+				matches: [
+					{
+						kind: 'Fixture',
+						dateTime: new Date('2022-01-05T19:45:00Z'),
+						paId: '4482890',
+						homeTeam: 'Juventus',
+						awayTeam: 'Roma',
+					},
+				],
+			},
+		],
+	},
+];
+
 export const Default = {
 	args: {
 		edition: 'UK',
+		guardianBaseUrl: 'https://www.theguardian.com',
 		initialDays,
-		getMoreDays: () => Promise.resolve(ok(initialDays)),
+		getMoreDays: () => Promise.resolve(ok(moreDays)),
 	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
-		const more = canvas.getByRole('button');
-		await userEvent.click(more);
+		const moreButtons = canvas.getAllByRole('button');
+		for (const moreButton of moreButtons) {
+			await userEvent.click(moreButton);
+		}
 	},
 } satisfies Story;
 
@@ -120,4 +159,11 @@ export const ErrorGettingMore = {
 		getMoreDays: () => Promise.resolve(error('failed')),
 	},
 	play: Default.play,
+} satisfies Story;
+
+export const NoMoreDays = {
+	args: {
+		...Default.args,
+		getMoreDays: undefined,
+	},
 } satisfies Story;

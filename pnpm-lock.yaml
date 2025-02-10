@@ -365,8 +365,8 @@ importers:
         specifier: 2.0.2
         version: 2.0.2
       '@guardian/react-crossword-next':
-        specifier: npm:@guardian/react-crossword@0.0.0-canary-20250204105313
-        version: /@guardian/react-crossword@0.0.0-canary-20250204105313(@emotion/react@11.11.3)(@guardian/libs@0.0.0-canary-20250205104100)(@guardian/source@8.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+        specifier: npm:@guardian/react-crossword@0.0.0-canary-20250206165456
+        version: /@guardian/react-crossword@0.0.0-canary-20250206165456(@emotion/react@11.11.3)(@guardian/libs@20.0.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -377,8 +377,8 @@ importers:
         specifier: 12.0.0
         version: 12.0.0(@emotion/react@11.11.3)(@guardian/libs@0.0.0-canary-20250205104100)(@guardian/source@8.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/support-dotcom-components':
-        specifier: 3.2.0
-        version: 3.2.0(@guardian/libs@0.0.0-canary-20250205104100)(zod@3.22.4)
+        specifier: 4.0.0
+        version: 4.0.0(@guardian/libs@20.0.0)(zod@3.22.4)
       '@guardian/tsconfig':
         specifier: 0.2.0
         version: 0.2.0
@@ -4259,8 +4259,8 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@guardian/react-crossword@0.0.0-canary-20250204105313(@emotion/react@11.11.3)(@guardian/libs@0.0.0-canary-20250205104100)(@guardian/source@8.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
-    resolution: {integrity: sha512-eMG2s+Sjy6rNSL4vXmEajDQof2GiS09NuUFS80obyMKohPA+YB13Z8my5xIjJr/DraLX0WtT1deMp0iK98gZ9A==}
+  /@guardian/react-crossword@0.0.0-canary-20250206165456(@emotion/react@11.11.3)(@guardian/libs@20.0.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
+    resolution: {integrity: sha512-0XvUYjqFlsJxYVtdPTpyGEMFYF88mXS+ylBXEF6dTm9fv1WUnONZ0m2C9fV0Zb1affpyQUTjC96JvwNPLvgbyw==}
     peerDependencies:
       '@emotion/react': ^11.11.3
       '@guardian/libs': ^20.0.0
@@ -4408,8 +4408,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/support-dotcom-components@3.2.0(@guardian/libs@0.0.0-canary-20250205104100)(zod@3.22.4):
-    resolution: {integrity: sha512-jxsOmP+DTGdpy3oitRGFjnRfznvOAW+ojRltZQT3qT6Eoe5nkuNc5ip0ok0y4qSnov/3MKn1UxJpvqTQT6okTw==}
+  /@guardian/support-dotcom-components@4.0.0(@guardian/libs@20.0.0)(zod@3.22.4):
+    resolution: {integrity: sha512-MJlL2ToCHUXTe0pwZv/9xVftpzOXNuOPa0lm014qpn978Mue8wFBYYjfZjooW8e8qaIR6eYW3NRx4kpSl76b5A==}
     peerDependencies:
       '@guardian/libs': ^17.0.0
       zod: ^3.22.4
@@ -4423,11 +4423,9 @@ packages:
       jsonschema: 1.4.1
       lodash.debounce: 4.0.8
       log4js: 6.9.1
-      node-fetch: 2.7.0
       seedrandom: 3.0.5
       zod: 3.22.4
     transitivePeerDependencies:
-      - encoding
       - supports-color
     dev: false
 
@@ -14533,18 +14531,6 @@ packages:
     engines: {node: '>=10.5.0'}
     dev: false
 
-  /node-fetch@2.7.0:
-    resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
-    engines: {node: 4.x || >=6.0.0}
-    peerDependencies:
-      encoding: ^0.1.0
-    peerDependenciesMeta:
-      encoding:
-        optional: true
-    dependencies:
-      whatwg-url: 5.0.0
-    dev: false
-
   /node-fetch@3.3.2:
     resolution: {integrity: sha512-dRB78srN/l6gqWulah9SrxeYnxeddIG30+GOqK/9OlLVyLg3HPnr6SqOWTWOXKRwC2eGYCkZ59NNuSgvSrpgOA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
@@ -17076,10 +17062,6 @@ packages:
       url-parse: 1.5.10
     dev: false
 
-  /tr46@0.0.3:
-    resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
-    dev: false
-
   /tr46@2.1.0:
     resolution: {integrity: sha512-15Ih7phfcdP5YxqiB+iDtLoaTz4Nd35+IiAv0kQ5FNKHzXgdWqPoTIqEDDJmXceQt4JZk6lVPT8lnDlPpGDppw==}
     engines: {node: '>=8'}
@@ -17841,10 +17823,6 @@ packages:
     resolution: {integrity: sha512-r4DIlprAGwJ7YM11VZp4R884m0Vmgr6EAKe3P+kO0PPj3Unqyvv59rczf6UiGcb9Z8QxZVcqKNwv/g0WNdWwsw==}
     dev: false
 
-  /webidl-conversions@3.0.1:
-    resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
-    dev: false
-
   /webidl-conversions@5.0.0:
     resolution: {integrity: sha512-VlZwKPCkYKxQgeSbH5EyngOmRp7Ww7I9rQLERETtf5ofd9pGeswWiOtogpEO850jziPRarreGxn5QIiTqpb2wA==}
     engines: {node: '>=8'}
@@ -18275,13 +18253,6 @@ packages:
     dependencies:
       tr46: 4.1.1
       webidl-conversions: 7.0.0
-    dev: false
-
-  /whatwg-url@5.0.0:
-    resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==}
-    dependencies:
-      tr46: 0.0.3
-      webidl-conversions: 3.0.1
     dev: false
 
   /whatwg-url@8.7.0:

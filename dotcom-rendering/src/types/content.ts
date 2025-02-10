@@ -387,7 +387,7 @@ export interface ListItem {
 	elements: FEElement[];
 	bio?: string;
 	endNote?: string;
-	imageOverrideUrl?: string;
+	contributorImageOverrideUrl?: string;
 	contributorIds?: string[];
 	byline?: string;
 	bylineHtml?: string;
@@ -1088,4 +1088,12 @@ export type Newsletter = {
 	group: string;
 	regionFocus?: string;
 	illustrationCard?: string;
+};
+
+export type NewsletterLayout = {
+	groups: {
+		title: string;
+		subtitle?: string;
+		newsletters: string[];
+	}[];
 };
