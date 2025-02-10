@@ -77,15 +77,15 @@ export const GutterAsk: ReactComponent<GutterAskRenderProps> = ({
 			<div css={container}>
 				<div css={imageHeader}>
 					<img
-						src={variant.content.image.mainUrl}
-						alt={variant.content.image.altText}
+						src={variant.image.mainUrl}
+						alt={variant.image.altText}
 						width="150"
 						height="100"
 					/>
 				</div>
 				<div css={textBlock}>
 					{/* TODO: bodyCopy is a string array and needs to be handled appropriately. */}
-					<div css={bodySection}>{variant.content.bodyCopy}</div>
+					<div css={bodySection}>{variant.bodyCopy}</div>
 					<div css={ctaSection}>
 						<ThemeProvider theme={contributionsTheme}>
 							<LinkButton
@@ -98,7 +98,7 @@ export const GutterAsk: ReactComponent<GutterAskRenderProps> = ({
 								priority={'primary'}
 								cssOverrides={cta}
 							>
-								{variant.content.cta.text}
+								{variant.cta!.text}
 							</LinkButton>
 						</ThemeProvider>
 					</div>
