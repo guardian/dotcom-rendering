@@ -1,4 +1,8 @@
-import { getCookie, removeCookie, setCookie } from '@guardian/libs';
+import { removeCookie, setCookie } from '@guardian/libs';
+import { AD_FREE_USER_COOKIE } from './adFree';
+import { ALLOW_REJECT_ALL_COOKIE } from './allowRejectAll';
+import { HIDE_SUPPORT_MESSAGING_COOKIE } from './hideSupportMessaging';
+import { USER_BENEFITS_EXPIRY_COOKIE } from './userBenefitsExpiry';
 
 export const timeInDaysFromNow = (daysFromNow: number): number => {
 	const tmpDate = new Date();
@@ -6,47 +10,21 @@ export const timeInDaysFromNow = (daysFromNow: number): number => {
 	return tmpDate.getTime();
 };
 
-export const setUserBenefitCookie = (
+export const extendCookieExpiry = (
 	cookieName: string,
-	daysTillExpiry: number,
+	daysTillExpiry: number = 1,
 ): void => {
 	const expiresValue = timeInDaysFromNow(daysTillExpiry);
 	setCookie({
 		name: cookieName,
 		value: expiresValue.toString(),
-		daysToLive: 30,
+		daysToLive: daysTillExpiry,
 	});
 };
 
-// Extend the expiry date of the cookie by 1 day unless it already has a longer expiry date
-export const renewUserBenefitCookie = (cookieName: string): void => {
-	const newExpiresValue = timeInDaysFromNow(1);
-	const existingExpiresValue = getCookieExpiry(cookieName);
-	if (
-		existingExpiresValue == undefined ||
-		newExpiresValue > existingExpiresValue
-	) {
-		setUserBenefitCookie(cookieName, 1);
-	}
-};
-
-export const getCookieExpiry = (cookieName: string): number | undefined => {
-	const cookieValue = getCookie({ name: cookieName });
-	if (!cookieValue) return;
-	return parseInt(cookieValue, 10);
-};
-
-export const cookieIsExpired = (cookieName: string): boolean =>
-	!cookieIsValid(cookieName);
-
-export const cookieIsValid = (cookieName: string): boolean => {
-	const timeNow = new Date().getTime();
-	const expiryTime = getCookieExpiry(cookieName);
-	return expiryTime !== undefined && timeNow < expiryTime;
-};
-
-export const removeCookieIfExpired = (cookieName: string): void => {
-	if (cookieIsExpired(cookieName)) {
-		removeCookie({ name: cookieName });
-	}
+export const deleteAllCookies = (): void => {
+	removeCookie({ name: USER_BENEFITS_EXPIRY_COOKIE });
+	removeCookie({ name: AD_FREE_USER_COOKIE });
+	removeCookie({ name: HIDE_SUPPORT_MESSAGING_COOKIE });
+	removeCookie({ name: ALLOW_REJECT_ALL_COOKIE });
 };

@@ -1,5 +1,5 @@
 import { getCookie, removeCookie, setCookie, storage } from '@guardian/libs';
-import { deleteAllCookies } from '../client/userFeatures/user-features';
+import { deleteAllCookies } from '../client/userFeatures/cookies/cookieHelpers';
 import { SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE } from './contributions';
 import { getLocaleCode } from './getCountryCode';
 

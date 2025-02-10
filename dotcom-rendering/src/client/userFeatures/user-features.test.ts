@@ -10,8 +10,8 @@ import {
 	getAllowRejectAllCookie,
 } from './cookies/allowRejectAll';
 import {
-	getCookieExpiry,
-	setUserBenefitCookie,
+	deleteAllCookies,
+	extendCookieExpiry,
 	timeInDaysFromNow,
 } from './cookies/cookieHelpers';
 import {
@@ -19,11 +19,11 @@ import {
 	HIDE_SUPPORT_MESSAGING_COOKIE,
 } from './cookies/hideSupportMessaging';
 import {
-	getUserFeaturesExpiryCookie,
-	USER_FEATURES_EXPIRY_COOKIE,
-} from './cookies/userFeaturesExpiry';
+	getUserBenefitsExpiryCookie,
+	USER_BENEFITS_EXPIRY_COOKIE,
+} from './cookies/userBenefitsExpiry';
 import { fetchJson } from './fetchJson';
-import { deleteAllCookies, refresh } from './user-features';
+import { refresh } from './user-features';
 
 const fakeUserBenefits = {
 	benefits: ['adFree', 'hideSupportMessaging'],
@@ -60,10 +60,10 @@ const getAuthStatus = getAuthStatus_ as jest.MockedFunction<
 
 const setAllFeaturesData = (opts: { isExpired: boolean }) => {
 	const daysToExpiry = opts.isExpired ? -1 : 1;
-	setUserBenefitCookie(HIDE_SUPPORT_MESSAGING_COOKIE, daysToExpiry);
-	setUserBenefitCookie(AD_FREE_USER_COOKIE, daysToExpiry);
-	setUserBenefitCookie(ALLOW_REJECT_ALL_COOKIE, daysToExpiry);
-	setUserBenefitCookie(USER_FEATURES_EXPIRY_COOKIE, daysToExpiry);
+	extendCookieExpiry(HIDE_SUPPORT_MESSAGING_COOKIE, daysToExpiry);
+	extendCookieExpiry(AD_FREE_USER_COOKIE, daysToExpiry);
+	extendCookieExpiry(ALLOW_REJECT_ALL_COOKIE, daysToExpiry);
+	extendCookieExpiry(USER_BENEFITS_EXPIRY_COOKIE, daysToExpiry);
 };
 
 beforeAll(() => {
@@ -77,7 +77,7 @@ const expectUserFeatureExpiryCookieHasBeenSetCorrectly = () => {
 	).toDateString();
 	expect(
 		new Date(
-			getCookieExpiry(USER_FEATURES_EXPIRY_COOKIE) ?? 0,
+			parseInt(getUserBenefitsExpiryCookie() ?? '0', 10),
 		).toDateString(),
 	).toEqual(expectedNextRefreshDate);
 };
@@ -138,7 +138,7 @@ describe('Refreshing the features data', () => {
 			expectAllCookiesToBeSet();
 		});
 
-		it('Does not perform an update if user has non-expired feature data', async () => {
+		it('Does not perform an update if user has non-expired user benefits data', async () => {
 			setAllFeaturesData({ isExpired: false });
 			await refresh();
 			expect(fetchJsonSpy).not.toHaveBeenCalled();
@@ -168,7 +168,7 @@ describe('If user signed out', () => {
 		setAllFeaturesData({ isExpired: true });
 		await refresh();
 		expectAllBenefitsCookiesToBeDeleted();
-		expect(getUserFeaturesExpiryCookie()).toBeNull();
+		expect(getUserBenefitsExpiryCookie()).toBeNull();
 	});
 });
 
@@ -205,7 +205,7 @@ describe('Benefit to cookie mapping', () => {
 		);
 		await refresh();
 		// Check that the cookie is set for the current benefit
-		expect(getCookieExpiry(currentElement.cookie)).toBeTruthy();
+		expect(getCookie({ name: currentElement.cookie })).toBeTruthy();
 		// Check that cookies are not set for other benefits
 		for (const otherElement of otherElements) {
 			expect(getCookie({ name: otherElement.cookie })).toBeNull();

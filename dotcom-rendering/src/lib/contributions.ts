@@ -7,7 +7,7 @@ import {
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import { useEffect, useState } from 'react';
 import { hideSupportMessaging } from '../client/userFeatures/cookies/hideSupportMessaging';
-import { getUserFeaturesExpiryCookie } from '../client/userFeatures/cookies/userFeaturesExpiry';
+import { getUserBenefitsExpiryCookie } from '../client/userFeatures/cookies/userBenefitsExpiry';
 import type { ArticleDeprecated } from '../types/article';
 import type { DCRFrontType } from '../types/front';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
@@ -39,7 +39,7 @@ export const hasHideSupportMessagingCookie = (
 ): boolean | 'Pending' => {
 	if (hideSupportMessaging()) {
 		return true;
-	} else if (isSignedIn && getUserFeaturesExpiryCookie() === null) {
+	} else if (isSignedIn && getUserBenefitsExpiryCookie() === null) {
 		/**
 		 * If the user is signed in, but we don't have data from the user-benefits API yet,
 		 * we do not want to show any messaging.
