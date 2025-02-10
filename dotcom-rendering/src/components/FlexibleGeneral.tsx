@@ -19,6 +19,7 @@ import { UL } from './Card/components/UL';
 import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
+import { FeatureCard } from './ImmersiveFeatureCard';
 import type { Alignment } from './SupportingContent';
 
 type Props = {
@@ -191,6 +192,42 @@ export const SplashCardLayout = ({
 		card.avatarUrl,
 	);
 
+	if (card.format.design === ArticleDesign.Video) {
+		return (
+			<UL>
+				<LI key={card.url} padSides={true}>
+					<FeatureCard
+						linkTo={card.url}
+						format={card.format}
+						headlineText={card.headline}
+						byline={card.byline}
+						showByline={card.showByline}
+						webPublicationDate={card.webPublicationDate}
+						kickerText={card.kickerText}
+						showClock={false}
+						image={card.image}
+						canPlayInline={true}
+						starRating={card.starRating}
+						dataLinkName={card.dataLinkName}
+						discussionApiUrl={card.discussionApiUrl}
+						discussionId={card.discussionId}
+						mainMedia={card.mainMedia}
+						isExternalLink={card.isExternalLink}
+						// branding={card.branding}
+						containerPalette={containerPalette}
+						trailText={card.trailText}
+						absoluteServerTimes={absoluteServerTimes}
+						imageLoading={imageLoading}
+						aspectRatio={aspectRatio}
+						imageSize="immersive-feature"
+						headlineSizes={{ desktop: 'small' }}
+						supportingContent={card.supportingContent}
+						galleryCount={card.galleryCount}
+					/>
+				</LI>
+			</UL>
+		);
+	}
 	return (
 		<UL
 			padBottom={!isLastRow}

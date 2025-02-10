@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, space } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import { Link, SvgMediaControlsPlay } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { isWithinTwelveHours, secondsToDuration } from '../lib/formatTime';
@@ -18,10 +18,7 @@ import type { PodcastSeriesImage } from '../types/tag';
 import { CardAge as AgeStamp } from './Card/components/CardAge';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from './Card/components/ImageWrapper';
+import type { ImageSizeType } from './Card/components/ImageWrapper';
 import { TrailText } from './Card/components/TrailText';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from './CardHeadline';
@@ -30,7 +27,6 @@ import { CardPicture } from './CardPicture';
 import { ContainerOverrides } from './ContainerOverrides';
 import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
-import { MediaDuration } from './MediaDuration';
 import { Pill } from './Pill';
 import { StarRating } from './StarRating/StarRating';
 import { SupportingContent } from './SupportingContent';
@@ -47,8 +43,6 @@ export type Props = {
 	showByline?: boolean;
 	webPublicationDate?: string;
 	image?: DCRFrontImage;
-	imagePositionOnDesktop?: ImagePositionType /** TODO Remove this prop  */;
-	imagePositionOnMobile?: ImagePositionType /** TODO Remove this prop  */;
 	/** Size is ignored when position = 'top' because in that case the image flows based on width */
 	imageSize?: ImageSizeType;
 	imageLoading: Loading;
@@ -79,7 +73,6 @@ export type Props = {
 	galleryCount?: number;
 	podcastImage?: PodcastSeriesImage;
 	audioDuration?: string;
-	isImmersive?: boolean;
 };
 
 const baseCardStyles = css`
@@ -125,9 +118,17 @@ const hoverStyles = css`
 
 const contentStyles = css`
 	position: absolute;
-	bottom: 0;
 	left: 0;
-	width: 100%;
+
+	${until.tablet} {
+		width: 100%;
+		bottom: 0;
+	}
+	${from.tablet} {
+		height: 100%;
+		top: 0;
+		width: 33%;
+	}
 `;
 
 /**
@@ -157,9 +158,7 @@ const overlayStyles = css`
 		rgb(0, 0, 0) 64px
 	);
 	backdrop-filter: blur(12px) brightness(0.5);
-`;
 
-const immersiveOverlayStyles = css`
 	${from.tablet} {
 		height: 100%;
 		padding-top: ${space[2]}px;
@@ -250,21 +249,18 @@ const CardAge = ({
 	if (!webPublicationDate) return undefined;
 	const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
 
-	if (withinTwelveHours) {
-		return (
-			<AgeStamp
-				webPublication={{
-					date: webPublicationDate,
-					isWithinTwelveHours: true,
-				}}
-				showClock={showClock}
-				absoluteServerTimes={absoluteServerTimes}
-				isTagPage={false}
-				colour={palette('--feature-card-footer-text')}
-			/>
-		);
-	}
-	return <></>;
+	return (
+		<AgeStamp
+			webPublication={{
+				date: webPublicationDate,
+				isWithinTwelveHours: withinTwelveHours,
+			}}
+			showClock={showClock}
+			absoluteServerTimes={absoluteServerTimes}
+			isTagPage={false}
+			colour={palette('--feature-card-footer-text')}
+		/>
+	);
 };
 
 const CommentCount = ({
@@ -320,8 +316,6 @@ export const FeatureCard = ({
 	showByline,
 	webPublicationDate,
 	image,
-	imagePositionOnDesktop = 'top',
-	imagePositionOnMobile = 'left',
 	imageSize = 'small',
 	trailText,
 	imageLoading,
@@ -344,7 +338,6 @@ export const FeatureCard = ({
 	galleryCount,
 	podcastImage,
 	audioDuration,
-	isImmersive = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -411,7 +404,8 @@ export const FeatureCard = ({
 											alt={headlineText}
 											loading={imageLoading}
 											roundedCorners={false}
-											aspectRatio={aspectRatio}
+											aspectRatio={'5:3'}
+											mobileAspectRatio={'4:5'}
 										/>
 									</div>
 								)}
@@ -424,21 +418,25 @@ export const FeatureCard = ({
 											alt={media.imageAltText}
 											loading={imageLoading}
 											roundedCorners={false}
-											aspectRatio={aspectRatio}
+											aspectRatio={'5:3'}
+											mobileAspectRatio={'4:5'}
 										/>
 										{isVideoMainMedia &&
 											mainMedia.duration > 0 && (
-												<MediaDuration
-													mediaDuration={
-														mainMedia.duration
-													}
-													imagePositionOnDesktop={
-														imagePositionOnDesktop
-													}
-													imagePositionOnMobile={
-														imagePositionOnMobile
-													}
-												/>
+												<div css={videoPillStyles}>
+													<Pill
+														content={
+															<time>
+																{secondsToDuration(
+																	videoDuration,
+																)}
+															</time>
+														}
+														icon={
+															<SvgMediaControlsPlay />
+														}
+													/>
+												</div>
 											)}
 									</>
 								)}
@@ -471,13 +469,7 @@ export const FeatureCard = ({
 												</div>
 											</div>
 										)}
-									<div
-										css={[
-											overlayStyles,
-											isImmersive &&
-												immersiveOverlayStyles,
-										]}
-									>
+									<div css={overlayStyles}>
 										{/**
 										 * Without the wrapping div the headline and
 										 * byline would have space inserted between

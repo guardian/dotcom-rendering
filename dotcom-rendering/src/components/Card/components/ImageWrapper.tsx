@@ -26,7 +26,8 @@ export type ImageSizeType =
 	| 'carousel'
 	| 'podcast'
 	| 'feature'
-	| 'feature-large';
+	| 'feature-large'
+	| 'immersive-feature';
 
 type Props = {
 	children: React.ReactNode;
