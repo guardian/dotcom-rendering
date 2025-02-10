@@ -166,7 +166,6 @@ const spacefinderAdSlotStyles = css`
     Let the ad slot take control of its height once rendered. */
 	.ad-slot--inline {
 		min-height: ${adSizes.mpu.height + constants.AD_LABEL_HEIGHT}px;
-		background-color: ${palette('--ad-background')};
 	}
 
 	/* Give inline1 ad slot a different placeholder height comparing to subsequent-inlines to reduce CLS.
@@ -184,6 +183,13 @@ const spacefinderAdSlotStyles = css`
 	.ad-slot--top-above-nav {
 		${until.tablet} {
 			min-height: ${adSizes.mpu.height + constants.AD_LABEL_HEIGHT}px;
+		}
+	}
+
+	#dfp-ad--top-above-nav--passback,
+	#dfp-ad--inline1--passback {
+		${until.tablet} {
+			background-color: ${palette('--ad-background')};
 		}
 	}
 
