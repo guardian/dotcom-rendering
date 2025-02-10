@@ -34,6 +34,7 @@ export const StaticFeatureTwo = ({
 						percentage={'50%'}
 						key={card.url}
 						padSides={true}
+						showDivider={true}
 					>
 						<FeatureCard
 							linkTo={card.url}
