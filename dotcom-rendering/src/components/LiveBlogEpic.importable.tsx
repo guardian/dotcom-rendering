@@ -4,7 +4,10 @@ import { getCookie, isUndefined, log, storage } from '@guardian/libs';
 import { space } from '@guardian/source/foundations';
 import { getEpicViewLog } from '@guardian/support-dotcom-components';
 import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/types';
-import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types';
+import type {
+	EpicProps,
+	Tracking,
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { submitComponentEvent } from '../client/ophan/ophan';
@@ -15,9 +18,10 @@ import {
 } from '../lib/contributions';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
+import { usePageViewId } from '../lib/usePageViewId';
 import { useSDCLiveblogEpic } from '../lib/useSDC';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
-import { useConfig } from './ConfigContext';
 
 type Props = {
 	sectionId: string;
@@ -27,6 +31,7 @@ type Props = {
 	contributionsServiceUrl: string;
 	pageId: string;
 	keywordIds: string;
+	renderingTarget: RenderingTarget;
 };
 
 const useEpic = ({ name }: { name: string }) => {
@@ -84,6 +89,7 @@ const usePayload = ({
 	isPaidContent,
 	tags,
 	pageId,
+	ophanPageViewId,
 }: {
 	shouldHideReaderRevenue: boolean;
 	sectionId: string;
@@ -91,6 +97,7 @@ const usePayload = ({
 	tags: TagType[];
 	pageId: string;
 	keywordIds: string;
+	ophanPageViewId?: string;
 }): EpicPayload | undefined => {
 	const articleCounts = useArticleCounts(pageId, tags, 'LiveBlog');
 	const hasOptedOutOfArticleCount = useHasOptedOutOfArticleCount();
@@ -98,6 +105,7 @@ const usePayload = ({
 	const mvtId = useMvtId();
 	const isSignedIn = useIsSignedIn();
 
+	if (!ophanPageViewId) return;
 	if (isSignedIn === 'Pending') return;
 	const hideSupportMessagingForUser = shouldHideSupportMessaging(isSignedIn);
 	if (hideSupportMessagingForUser === 'Pending') return;
@@ -109,7 +117,7 @@ const usePayload = ({
 
 	return {
 		tracking: {
-			ophanPageId: window.guardian.config.ophan.pageViewId,
+			ophanPageId: ophanPageViewId,
 			platformId: 'GUARDIAN_WEB',
 			clientName: 'dcr',
 			referrerUrl: window.location.origin + window.location.pathname,
@@ -163,19 +171,21 @@ const Render = ({ name, props }: { name: string; props: EpicProps }) => {
 
 /**
  * Using the payload, make a fetch request to contributions service
- *
- * @param payload - unknown
- * @param contributionsServiceUrl - string
  */
 const Fetch = ({
 	payload,
 	contributionsServiceUrl,
+	ophanPageViewId,
+	renderingTarget,
+	pageUrl,
 }: {
 	payload: EpicPayload;
 	contributionsServiceUrl: string;
+	ophanPageViewId: string;
+	renderingTarget: RenderingTarget;
+	pageUrl: string;
 }) => {
 	const response = useSDCLiveblogEpic(contributionsServiceUrl, payload);
-	const { renderingTarget } = useConfig();
 
 	// If we didn't get a module in response (or we're still waiting) do nothing. If
 	// no epic should be shown the response is equal to {}, hence the Object.keys
@@ -184,15 +194,25 @@ const Fetch = ({
 	}
 	log('dotcom', 'LiveBlogEpic has a module');
 
+	const { props } = response.data.module;
+
+	const tracking: Tracking = {
+		...props.tracking,
+		ophanPageId: ophanPageViewId,
+		platformId: 'GUARDIAN_WEB',
+		referrerUrl: pageUrl,
+	};
+
 	// Add submitComponentEvent function to props to enable Ophan tracking in the component
-	const props: EpicProps = {
-		...response.data.module.props,
+	const enrichedProps: EpicProps = {
+		...props,
+		tracking,
 		submitComponentEvent: (componentEvent: OphanComponentEvent) =>
 			submitComponentEvent(componentEvent, renderingTarget),
 	};
 
 	// Take any returned module and render it
-	return <Render name={response.data.module.name} props={props} />;
+	return <Render name={response.data.module.name} props={enrichedProps} />;
 };
 
 function insertAfter(referenceNode: HTMLElement, newNode: Element) {
@@ -225,8 +245,17 @@ export const LiveBlogEpic = ({
 	contributionsServiceUrl,
 	pageId,
 	keywordIds,
+	renderingTarget,
 }: Props) => {
 	log('dotcom', 'LiveBlogEpic started');
+
+	const ophanPageViewId = usePageViewId(renderingTarget);
+
+	const [pageUrl, setPageUrl] = useState<string | undefined>();
+
+	useEffect(() => {
+		setPageUrl(window.location.origin + window.location.pathname);
+	}, []);
 
 	// First construct the payload
 	const payload = usePayload({
@@ -236,8 +265,9 @@ export const LiveBlogEpic = ({
 		tags,
 		pageId,
 		keywordIds,
+		ophanPageViewId,
 	});
-	if (!payload) return null;
+	if (!ophanPageViewId || !payload || !pageUrl) return null;
 
 	/**
 	 * Here we decide where to insert the epic.
@@ -277,6 +307,9 @@ export const LiveBlogEpic = ({
 		<Fetch
 			payload={payload}
 			contributionsServiceUrl={contributionsServiceUrl}
+			ophanPageViewId={ophanPageViewId}
+			renderingTarget={renderingTarget}
+			pageUrl={pageUrl}
 		/>,
 		epicPlaceholder,
 	);
