@@ -443,7 +443,7 @@ const dismissGateAuxia = (
 	setShowGate(false);
 };
 
-const decide_is_supporter = (): boolean => {
+const decideIsSupporter = (): boolean => {
 	// nb: We will not be calling the Auxia API if the user is signed in, so we can set isSignedIn to false.
 	const isSignedIn = false;
 	const is_supporter = hasSupporterCookie(isSignedIn);
@@ -453,7 +453,7 @@ const decide_is_supporter = (): boolean => {
 	return is_supporter;
 };
 
-const decide_daily_article_count = (): number => {
+const decideDailyArticleCount = (): number => {
 	const value = getDailyArticleCount();
 	if (value === undefined) {
 		return 0;
@@ -474,9 +474,9 @@ const fetchProxyGetTreatments = async (
 	// We are defaulting to empty string if the cookie is not found, because the API expects a string
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true }) ?? '';
 
-	const is_supporter = decide_is_supporter();
+	const is_supporter = decideIsSupporter();
 
-	const daily_article_count = decide_daily_article_count();
+	const daily_article_count = decideDailyArticleCount();
 
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const article_identifier = `www.theguardian.com/${pageId}`;
