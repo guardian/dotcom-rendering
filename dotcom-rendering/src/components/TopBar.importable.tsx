@@ -143,6 +143,7 @@ export const TopBar = ({
 				>
 					<TopBarSupport
 						contributionsServiceUrl={contributionsServiceUrl}
+						pageUrl={referrerUrl}
 					/>
 				</TopBarLinkContainer>
 

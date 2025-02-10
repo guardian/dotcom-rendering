@@ -18,6 +18,7 @@ import { pickMessage } from '../lib/messagePicker';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
+import { usePageViewId } from '../lib/usePageViewId';
 import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
@@ -101,6 +102,7 @@ const buildRRBannerConfigWith = ({
 		contributionsServiceUrl,
 		idApiUrl,
 		renderingTarget,
+		ophanPageViewId,
 	}: {
 		isSignedIn: boolean;
 		countryCode: CountryCode;
@@ -117,6 +119,7 @@ const buildRRBannerConfigWith = ({
 		contributionsServiceUrl: string;
 		idApiUrl: string;
 		renderingTarget: RenderingTarget;
+		ophanPageViewId: string;
 	}): CandidateConfig<ModuleData<BannerProps>> => {
 		return {
 			candidate: {
@@ -152,6 +155,7 @@ const buildRRBannerConfigWith = ({
 						renderingTarget,
 						signInGateWillShow,
 						asyncArticleCounts,
+						ophanPageViewId,
 					}),
 				show:
 					({ name, props }: ModuleData<BannerProps>) =>
@@ -226,6 +230,7 @@ export const StickyBottomBanner = ({
 
 	const countryCode = useCountryCode('sticky-bottom-banner');
 	const isSignedIn = useIsSignedIn();
+	const ophanPageViewId = usePageViewId(renderingTarget);
 
 	const [SelectedBanner, setSelectedBanner] = useState<MaybeFC | null>(null);
 	const [asyncArticleCounts, setAsyncArticleCounts] =
@@ -252,6 +257,7 @@ export const StickyBottomBanner = ({
 			isUndefined(brazeMessages) ||
 			isUndefined(asyncArticleCounts) ||
 			isUndefined(signInGateWillShow) ||
+			isUndefined(ophanPageViewId) ||
 			isSignedIn === 'Pending'
 		) {
 			return;
@@ -276,6 +282,7 @@ export const StickyBottomBanner = ({
 			contributionsServiceUrl,
 			idApiUrl,
 			renderingTarget,
+			ophanPageViewId,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
@@ -319,6 +326,7 @@ export const StickyBottomBanner = ({
 		shouldHideReaderRevenue,
 		signInGateWillShow,
 		tags,
+		ophanPageViewId,
 	]);
 
 	if (SelectedBanner) {
