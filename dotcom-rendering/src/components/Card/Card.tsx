@@ -628,6 +628,12 @@ export const Card = ({
 			};
 		}
 
+		if (isFlexSplash) {
+			return {
+				row: 'small',
+				column: 'none',
+			};
+		}
 		//** media cards have 4px padding around the content so we have a tiny (4px) gap to account for this and make it 8px total*/
 		if (!isBetaContainer && isMediaCard) {
 			return {
@@ -1034,7 +1040,10 @@ export const Card = ({
 							isBetaContainer,
 							isOnwardContent,
 						)}
-						isFlexibleContainer={isFlexibleContainer}
+						padRight={
+							isFlexSplash ||
+							(isFlexibleContainer && imageSize === 'jumbo')
+						}
 					>
 						{/* This div is needed to keep the headline and trail text justified at the start */}
 						<div
