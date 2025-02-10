@@ -85,6 +85,10 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 			return;
 		}
 
+		setShowSupportMessaging(
+			shouldHideSupportMessaging(isSignedIn) === false,
+		);
+
 		const payload: GutterPayload = {
 			tracking: {
 				ophanPageId: window.guardian.config.ophan.pageViewId,
@@ -127,14 +131,6 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 		tagIds,
 	]);
 
-	useEffect(() => {
-		if (isSignedIn !== 'Pending') {
-			setShowSupportMessaging(
-				shouldHideSupportMessaging(isSignedIn) === false,
-			);
-		}
-	}, [isSignedIn]);
-
 	// tracking
 	const tracking: Tracking = useMemo(() => {
 		return {
@@ -143,20 +139,16 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 			clientName: 'dcr',
 			referrerUrl,
 			// message tests
-			abTestName: '', // TODO: pull this from SDC
-			abTestVariant: '', // TODO: pull this from SDC
-			campaignCode: whatAmI,
+			abTestName: supportGutterResponse
+				? supportGutterResponse.props.tracking.abTestName
+				: '',
+			abTestVariant: supportGutterResponse
+				? supportGutterResponse.props.tracking.abTestVariant
+				: '',
+			campaignCode: whatAmI, // TODO: is this still correct?
 			componentType: 'ACQUISITIONS_OTHER', // TODO - this will change in future
 		};
-	}, [pageViewId, referrerUrl]);
-
-	const baseUrl = supportGutterResponse?.props.content.cta!.baseUrl; // TODO: forced to be defined - correct?
-	const urlWithRegionAndTracking = addRegionIdAndTrackingParamsToSupportUrl(
-		baseUrl!, // TODO: forced to be defined - correct?
-		tracking,
-		undefined,
-		countryCode,
-	);
+	}, [pageViewId, referrerUrl, supportGutterResponse]);
 
 	const canShow =
 		showSupportMessagingForUser && !shouldHideReaderRevenueOnArticle;
@@ -180,17 +172,30 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 		);
 	};
 
-	return (
-		<>
-			{canShow && (
-				<div css={stickyLeft}>
-					<GutterAsk
-						variant={supportGutterResponse?.props.content}
-						enrichedUrl={urlWithRegionAndTracking}
-						onCtaClick={onCtaClick}
-					/>
-				</div>
-			)}
-		</>
-	);
+	if (supportGutterResponse) {
+		const baseUrl = supportGutterResponse.props.content.cta!.baseUrl; // TODO: forced to be defined - correct?
+		const urlWithRegionAndTracking =
+			addRegionIdAndTrackingParamsToSupportUrl(
+				baseUrl,
+				tracking,
+				undefined,
+				countryCode,
+			);
+
+		return (
+			<>
+				{canShow && (
+					<div css={stickyLeft}>
+						<GutterAsk
+							variant={supportGutterResponse.props.content}
+							enrichedUrl={urlWithRegionAndTracking}
+							onCtaClick={onCtaClick}
+						/>
+					</div>
+				)}
+			</>
+		);
+	}
+
+	return <></>; // TODO: is this correct?
 };
