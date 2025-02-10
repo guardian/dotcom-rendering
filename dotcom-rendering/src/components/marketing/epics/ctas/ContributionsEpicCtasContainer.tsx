@@ -13,7 +13,7 @@ interface OnReminderOpen {
 type Props = EpicProps & {
 	amountsTestName?: string;
 	amountsVariantName?: string;
-	isColourInTestVariant?: boolean;
+	isSimpleThirdChoiceCardInTestVariant?: boolean;
 };
 
 export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
@@ -26,7 +26,7 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 	fetchEmail,
 	amountsTestName,
 	amountsVariantName,
-	isColourInTestVariant,
+	isSimpleThirdChoiceCardInTestVariant,
 }: Props): JSX.Element => {
 	// reminders
 	const [fetchedEmail, setFetchedEmail] = useState<string | undefined>(
@@ -54,15 +54,12 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 		setThreeTierChoiceCardSelectedProduct,
 	] = useState<SupportTier>('SupporterPlus');
 
-	const showUSSupportCheckout =
-		showChoiceCards && variant.name.includes('US_CHECKOUT_PAGE');
-
 	const hasSupporterPlusPromoCode =
 		variant.cta?.baseUrl.includes('BLACK_FRIDAY_DISCOUNT_2024') ?? false;
 
 	const variantOfChoiceCard =
-		countryCode === 'US' && showUSSupportCheckout
-			? 'US_CHECKOUT_THREE_TIER_CHOICE_CARDS'
+		countryCode === 'US' && isSimpleThirdChoiceCardInTestVariant
+			? 'US_SIMPLIFY_THIRD_CHOICE_CARD'
 			: countryCode === 'US'
 			? 'US_THREE_TIER_CHOICE_CARDS'
 			: 'THREE_TIER_CHOICE_CARDS';
@@ -119,7 +116,6 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 				amountsVariantName={amountsVariantName}
 				numArticles={articleCounts.for52Weeks}
 				variantOfChoiceCard={variantOfChoiceCard}
-				isColourInTestVariant={isColourInTestVariant}
 			/>
 			{isReminderActive && showReminderFields && (
 				<ContributionsEpicReminder

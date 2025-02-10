@@ -33,6 +33,7 @@ export type FootballMatch = MatchResult | MatchFixture | LiveMatch;
 
 type Competition = {
 	competitionId: string;
+	tag: string;
 	name: string;
 	nation: string;
 	matches: FootballMatch[];

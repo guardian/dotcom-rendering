@@ -38,31 +38,12 @@ import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletter
 import { ContributionsEpicSignInCta } from './ContributionsEpicSignInCta';
 import { ContributionsEpicCtasContainer } from './ctas/ContributionsEpicCtasContainer';
 
-// Hard-coded AB TEST - picking up ab test name and variant name from the tracking object
-// then applying a different colour if it matches, or the default colour if it doesn't.
-const getVariantOrControlStyle = (
-	isInTestVariant: boolean,
-	variant: string,
-	control: string,
-) => {
-	return isInTestVariant ? variant : control;
-};
-
 // CSS Styling
 // -------------------------------------------
-const wrapperStyles = (isInTestVariant: boolean) => css`
+const wrapperStyles = css`
 	padding: ${space[1]}px ${space[2]}px ${space[3]}px;
-	border-top: 1px solid
-		${getVariantOrControlStyle(
-			isInTestVariant,
-			palette.neutral[0],
-			palette.brandAlt[400],
-		)};
-	background-color: ${getVariantOrControlStyle(
-		isInTestVariant,
-		'#E2E3BF',
-		palette.neutral[97],
-	)};
+	border-top: 1px solid ${palette.brandAlt[400]};
+	background-color: ${palette.neutral[97]};
 
 	* {
 		::selection {
@@ -105,18 +86,10 @@ const highlightWrapperStyles = css`
 	${linkStyles};
 `;
 
-const highlightStyles = (isInTestVariant: boolean) => css`
+const highlightStyles = css`
 	padding: 2px;
-	background-color: ${getVariantOrControlStyle(
-		isInTestVariant,
-		'#C41C1C',
-		palette.brandAlt[400],
-	)};
-	color: ${getVariantOrControlStyle(
-		isInTestVariant,
-		palette.neutral[100],
-		palette.neutral[7],
-	)};
+	background-color: ${palette.brandAlt[400]};
+	color: ${palette.neutral[7]};
 `;
 
 const imageWrapperStyles = css`
@@ -138,13 +111,6 @@ const defaultTickerStylingSettings: TickerSettings['tickerStylingSettings'] = {
 	progressBarBackgroundColour: 'rgba(80, 86, 245, 0.35)',
 	headlineColour: '#000000',
 	totalColour: '#5056F5',
-	goalColour: '#000000',
-};
-const usEOYTickerStylingSettings: TickerSettings['tickerStylingSettings'] = {
-	filledProgressColour: '#C41C1C',
-	progressBarBackgroundColour: 'rgba(196, 28, 28, 0.30)',
-	headlineColour: '#000000',
-	totalColour: '#C41C1C',
 	goalColour: '#000000',
 };
 
@@ -189,7 +155,6 @@ type HighlightedProps = {
 	numArticles: number;
 	tracking?: OphanTracking;
 	showAboveArticleCount: boolean;
-	isColourInTestVariant: boolean;
 };
 
 const Highlighted: ReactComponent<HighlightedProps> = ({
@@ -197,7 +162,6 @@ const Highlighted: ReactComponent<HighlightedProps> = ({
 	numArticles,
 	tracking,
 	showAboveArticleCount,
-	isColourInTestVariant,
 }: HighlightedProps) => {
 	const elements = replaceArticleCount(
 		highlightedText,
@@ -210,7 +174,7 @@ const Highlighted: ReactComponent<HighlightedProps> = ({
 	return (
 		<strong css={highlightWrapperStyles}>
 			{' '}
-			<span css={highlightStyles(isColourInTestVariant)}>{elements}</span>
+			<span css={highlightStyles}>{elements}</span>
 		</strong>
 	);
 };
@@ -256,7 +220,6 @@ type BodyProps = {
 	numArticles: number;
 	tracking?: OphanTracking;
 	showAboveArticleCount: boolean;
-	isColourInTestVariant: boolean;
 };
 
 const EpicBody: ReactComponent<BodyProps> = ({
@@ -265,7 +228,6 @@ const EpicBody: ReactComponent<BodyProps> = ({
 	highlightedText,
 	tracking,
 	showAboveArticleCount,
-	isColourInTestVariant,
 }: BodyProps) => {
 	return (
 		<>
@@ -282,9 +244,6 @@ const EpicBody: ReactComponent<BodyProps> = ({
 									numArticles={numArticles}
 									showAboveArticleCount={
 										showAboveArticleCount
-									}
-									isColourInTestVariant={
-										isColourInTestVariant
 									}
 								/>
 							) : null
@@ -310,12 +269,18 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	openCmp,
 	hasConsentForArticleCount,
 }: EpicProps) => {
-	const { image, tickerSettings, choiceCardAmounts, newsletterSignup } =
-		variant;
+	const {
+		image,
+		showChoiceCards,
+		tickerSettings,
+		choiceCardAmounts,
+		newsletterSignup,
+	} = variant;
 
-	const isColourInTestVariant: boolean =
-		tracking.abTestName.includes('_ARTICLE_EPIC_BG_COLOUR') &&
-		tracking.abTestVariant === 'VARIANT';
+	const isSimpleThirdChoiceCardInTestVariant: boolean =
+		(showChoiceCards &&
+			variant.name.includes('EPIC_SIMPLIFIED_THIRD_CHOICE_CARD')) ??
+		false;
 
 	const { hasOptedOut, onArticleCountOptIn, onArticleCountOptOut } =
 		useArticleCountOptOut();
@@ -392,7 +357,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	);
 
 	return (
-		<section ref={setNode} css={wrapperStyles(isColourInTestVariant)}>
+		<section ref={setNode} css={wrapperStyles}>
 			{showAboveArticleCount && (
 				<div css={articleCountAboveContainerStyles}>
 					<ContributionsEpicArticleCountAboveWithOptOut
@@ -415,12 +380,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 							headline: tickerSettings.copy.countLabel,
 						}}
 						tickerData={tickerSettings.tickerData}
-						tickerStylingSettings={
-							isColourInTestVariant ||
-							tickerSettings.name === 'AU'
-								? usEOYTickerStylingSettings
-								: defaultTickerStylingSettings
-						}
+						tickerStylingSettings={defaultTickerStylingSettings}
 						size={'medium'}
 					/>
 				</div>
@@ -451,14 +411,10 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				numArticles={articleCounts.forTargetedWeeks}
 				tracking={ophanTracking}
 				showAboveArticleCount={showAboveArticleCount}
-				isColourInTestVariant={isColourInTestVariant}
 			/>
 
 			{variant.bylineWithImage && (
-				<BylineWithHeadshot
-					bylineWithImage={variant.bylineWithImage}
-					isColourInTestVariant={isColourInTestVariant}
-				/>
+				<BylineWithHeadshot bylineWithImage={variant.bylineWithImage} />
 			)}
 
 			{newsletterSignup ? (
@@ -478,7 +434,9 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					submitComponentEvent={submitComponentEvent}
 					amountsTestName={choiceCardAmounts?.testName}
 					amountsVariantName={choiceCardAmounts?.variantName}
-					isColourInTestVariant={isColourInTestVariant}
+					isSimpleThirdChoiceCardInTestVariant={
+						isSimpleThirdChoiceCardInTestVariant
+					}
 				/>
 			)}
 

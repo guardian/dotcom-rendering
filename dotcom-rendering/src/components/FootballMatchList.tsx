@@ -27,7 +27,8 @@ import { palette } from '../palette';
 type Props = {
 	initialDays: FootballMatches;
 	edition: EditionId;
-	getMoreDays: () => Promise<Result<'failed', FootballMatches>>;
+	guardianBaseUrl: string;
+	getMoreDays?: () => Promise<Result<'failed', FootballMatches>>;
 };
 
 const REMOVE_TRAILING_DOTS_REGEX = /\.+$/;
@@ -177,7 +178,6 @@ const matchStyles = (matchKind: FootballMatch['kind']) => css`
 
 	display: flex;
 	flex-wrap: wrap;
-	text-decoration: none;
 	padding: ${space[2]}px;
 `;
 
@@ -198,6 +198,7 @@ const MatchWrapper = ({
 					css={[
 						matchStyles(match.kind),
 						css`
+							text-decoration: none;
 							color: inherit;
 							:hover {
 								background-color: ${palette(
@@ -349,6 +350,7 @@ const Scores = ({
 
 export const FootballMatchList = ({
 	edition,
+	guardianBaseUrl,
 	initialDays,
 	getMoreDays,
 }: Props) => {
@@ -367,7 +369,18 @@ export const FootballMatchList = ({
 					{day.competitions.map((competition) => (
 						<Fragment key={competition.competitionId}>
 							<CompetitionName>
-								{competition.name}
+								<a
+									href={`${guardianBaseUrl}/${competition.tag}`}
+									css={css`
+										text-decoration: none;
+										color: inherit;
+										:hover {
+											text-decoration: underline;
+										}
+									`}
+								>
+									{competition.name}
+								</a>
 							</CompetitionName>
 							<Matches>
 								{competition.matches.map((match) => (
@@ -384,43 +397,55 @@ export const FootballMatchList = ({
 				</section>
 			))}
 
-			<div css={css(grid.container)}>
-				<div
-					css={css`
-						${grid.column.centre}
-						padding-top: ${space[10]}px;
-					`}
-				>
-					<Button
-						icon={<SvgPlus />}
-						size="xsmall"
-						onClick={() => {
-							void getMoreDays().then((moreDays) => {
-								if (moreDays.kind === 'ok') {
-									setIsError(false);
-									setDays(days.concat(moreDays.value));
-								} else {
-									setIsError(true);
-								}
-							});
-						}}
+			{getMoreDays === undefined ? null : (
+				<div css={css(grid.container)}>
+					<div
+						css={css`
+							${grid.column.centre}
+							padding-top: ${space[10]}px;
+						`}
 					>
-						More
-					</Button>
-					{isError ? (
-						<InlineError
-							cssOverrides={css`
-								padding-top: ${space[4]}px;
-								color: ${palette(
-									'--football-match-list-error',
-								)};
-							`}
+						<Button
+							theme={{
+								textPrimary: palette('--button-text-primary'),
+								backgroundPrimary: palette(
+									'--button-background-primary',
+								),
+								backgroundPrimaryHover: palette(
+									'--button-background-primary-hover',
+								),
+							}}
+							icon={<SvgPlus />}
+							size="xsmall"
+							onClick={() => {
+								void getMoreDays().then((moreDays) => {
+									if (moreDays.kind === 'ok') {
+										setIsError(false);
+										setDays(days.concat(moreDays.value));
+									} else {
+										setIsError(true);
+									}
+								});
+							}}
 						>
-							Could not get more matches. Please try again later!
-						</InlineError>
-					) : null}
+							More
+						</Button>
+						{isError ? (
+							<InlineError
+								cssOverrides={css`
+									padding-top: ${space[4]}px;
+									color: ${palette(
+										'--football-match-list-error',
+									)};
+								`}
+							>
+								Could not get more matches. Please try again
+								later!
+							</InlineError>
+						) : null}
+					</div>
 				</div>
-			</div>
+			)}
 		</>
 	);
 };

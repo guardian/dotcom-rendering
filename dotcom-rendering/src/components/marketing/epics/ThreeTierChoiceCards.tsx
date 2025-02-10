@@ -24,6 +24,7 @@ import {
 	ChoiceCardTestData_REGULAR,
 	ChoiceCardTestData_TwoTier_REGULAR,
 	ChoiceCardTestData_US,
+	ChoiceCardTestData_US_SIMPLIFIED,
 } from './ThreeTierChoiceCardData';
 import type {
 	SupportRatePlan,
@@ -184,8 +185,8 @@ const getChoiceCardData = (choiceCardVariant: string): ChoiceInfo[] => {
 	switch (choiceCardVariant) {
 		case 'US_THREE_TIER_CHOICE_CARDS':
 			return ChoiceCardTestData_US;
-		case 'US_CHECKOUT_THREE_TIER_CHOICE_CARDS':
-			return ChoiceCardTestData_US;
+		case 'US_SIMPLIFY_THIRD_CHOICE_CARD':
+			return ChoiceCardTestData_US_SIMPLIFIED;
 		case 'TWO_TIER_CHOICE_CARDS':
 			return ChoiceCardTestData_TwoTier_REGULAR;
 		default:

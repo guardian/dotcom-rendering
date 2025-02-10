@@ -14,7 +14,6 @@ import type { ReactComponent } from '../lib/ReactComponent';
 
 interface BylineWithHeadshotProps {
 	bylineWithImage: BylineWithImage;
-	isColourInTestVariant: boolean;
 }
 
 const bylineWithImageContainer = css`
@@ -56,7 +55,7 @@ const bylineHeadshotImage = css`
 	object-fit: cover;
 `;
 
-const bylineBottomDecoration = (isInTestVariant: boolean) => css`
+const bylineBottomDecoration = css`
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -67,8 +66,8 @@ const bylineBottomDecoration = (isInTestVariant: boolean) => css`
 	height: calc(0.25rem * 4 + 1px);
 	background-image: repeating-linear-gradient(
 		to bottom,
-		${isInTestVariant ? palette.neutral[0] : palette.neutral[86]},
-		${isInTestVariant ? palette.neutral[0] : palette.neutral[86]} 1px,
+		${palette.neutral[86]},
+		${palette.neutral[86]} 1px,
 		transparent 1px,
 		transparent 0.25rem
 	);
@@ -76,7 +75,6 @@ const bylineBottomDecoration = (isInTestVariant: boolean) => css`
 
 export const BylineWithHeadshot: ReactComponent<BylineWithHeadshotProps> = ({
 	bylineWithImage,
-	isColourInTestVariant,
 }) => {
 	const { name, description, headshot } = bylineWithImage;
 
@@ -88,9 +86,7 @@ export const BylineWithHeadshot: ReactComponent<BylineWithHeadshotProps> = ({
 			</div>
 			{headshot && (
 				<>
-					<div
-						css={bylineBottomDecoration(isColourInTestVariant)}
-					></div>
+					<div css={bylineBottomDecoration}></div>
 					<div css={bylineImageContainer}>
 						<img
 							src={headshot.mainUrl}
