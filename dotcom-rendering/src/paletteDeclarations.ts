@@ -7,6 +7,7 @@ import { palette as sourcePalette } from '@guardian/source/foundations';
 import {
 	buttonThemeBrand,
 	buttonThemeDefault,
+	themeButton,
 } from '@guardian/source/react-components';
 import {
 	expandingWrapperDarkTheme,
@@ -5998,6 +5999,18 @@ const paletteColours = {
 		light: bulletFillLight,
 		dark: bulletFillDark,
 	},
+	'--button-background-primary': {
+		light: () => themeButton.backgroundPrimary,
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--button-background-primary-hover': {
+		light: () => themeButton.backgroundPrimaryHover,
+		dark: () => '#CACACA',
+	},
+	'--button-text-primary': {
+		light: () => themeButton.textPrimary,
+		dark: () => sourcePalette.brand[400],
+	},
 	'--byline': {
 		light: bylineLight,
 		dark: bylineDark,
@@ -6505,6 +6518,10 @@ const paletteColours = {
 	'--follow-text': {
 		light: followTextLight,
 		dark: followTextDark,
+	},
+	'--football-competition-select-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--football-match-hover': {
 		light: () => sourcePalette.neutral[93],

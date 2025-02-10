@@ -38,6 +38,7 @@ const initialDays: FootballMatches = [
 		competitions: [
 			{
 				competitionId: '635',
+				tag: 'football/serieafootball',
 				name: 'Serie A',
 				nation: 'European',
 				matches: [
@@ -66,6 +67,7 @@ const initialDays: FootballMatches = [
 			},
 			{
 				competitionId: '650',
+				tag: 'football/laligafootball',
 				name: 'La Liga',
 				nation: 'European',
 				matches: [
@@ -87,6 +89,7 @@ const initialDays: FootballMatches = [
 			},
 			{
 				competitionId: '651',
+				tag: 'football/fa-cup',
 				name: 'FA Cup',
 				nation: 'European',
 				matches: [
@@ -117,6 +120,7 @@ const moreDays: FootballMatches = [
 		competitions: [
 			{
 				competitionId: '635',
+				tag: 'football/serieafootball',
 				name: 'Serie A',
 				nation: 'European',
 				matches: [
@@ -136,6 +140,7 @@ const moreDays: FootballMatches = [
 export const Default = {
 	args: {
 		edition: 'UK',
+		guardianBaseUrl: 'https://www.theguardian.com',
 		initialDays,
 		getMoreDays: () => Promise.resolve(ok(moreDays)),
 	},
@@ -154,4 +159,11 @@ export const ErrorGettingMore = {
 		getMoreDays: () => Promise.resolve(error('failed')),
 	},
 	play: Default.play,
+} satisfies Story;
+
+export const NoMoreDays = {
+	args: {
+		...Default.args,
+		getMoreDays: undefined,
+	},
 } satisfies Story;
