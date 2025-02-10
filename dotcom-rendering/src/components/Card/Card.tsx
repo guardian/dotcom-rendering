@@ -616,7 +616,10 @@ export const Card = ({
 		}
 	};
 
-	/** Determines the gap of between card components based on card properties */
+	/**
+	 * Determines the gap of between card components based on card properties
+	 * Order matters here as the logic is based on the card properties
+	 */
 	const getGapSizes = (): GapSizes => {
 		if (isOnwardContent) {
 			return {
@@ -624,43 +627,40 @@ export const Card = ({
 				column: 'none',
 			};
 		}
-		if (isMediaCard && !isFlexibleContainer) {
+
+		//** media cards have 4px padding around the content so we have a tiny (4px) gap to account for this and make it 8px total*/
+		if (!isBetaContainer && isMediaCard) {
 			return {
 				row: 'tiny',
 				column: 'tiny',
 			};
 		}
-		if (!!isFlexSplash || (isFlexibleContainer && imageSize === 'jumbo')) {
-			return {
-				row: 'small',
-				column: 'small',
-			};
+
+		//** current cards have small padding for everything */
+		if (!isBetaContainer) {
+			return { row: 'small', column: 'small' };
 		}
+
 		if (isSmallCard) {
 			return {
 				row: 'medium',
 				column: 'medium',
 			};
 		}
-		if (isBetaContainer && media?.type === 'avatar') {
-			return {
-				row: 'small',
-				column: 'small',
-			};
-		}
+
 		if (
-			isFlexibleContainer &&
-			(imagePositionOnDesktop === 'left' ||
-				imagePositionOnDesktop === 'right')
+			imagePositionOnDesktop === 'bottom' ||
+			imagePositionOnMobile === 'bottom'
 		) {
 			return {
-				row: 'large',
+				row: 'tiny',
 				column: 'large',
 			};
 		}
+
 		return {
-			row: isBetaContainer ? 'tiny' : 'small',
-			column: 'small',
+			row: 'small',
+			column: 'large',
 		};
 	};
 
