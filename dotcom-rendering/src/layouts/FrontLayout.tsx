@@ -285,13 +285,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				)}
 				{filteredCollections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
-					const trails = collection.curated.concat(
-						collection.backfill,
-					);
-					const [trail] = trails.map((tr) => ({
-						...tr,
-						isInLoopVideoTest: isInLoopVideoTest && index === 0,
-					}));
+					const trails = collection.curated
+						.concat(collection.backfill)
+						.map((tr) => ({
+							...tr,
+							isInLoopVideoTest: isInLoopVideoTest && index === 0,
+						}));
+					const [trail] = trails;
 
 					// There are some containers that have zero trails. We don't want to render these
 					if (!trail) return null;
