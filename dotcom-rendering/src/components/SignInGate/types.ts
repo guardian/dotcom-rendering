@@ -103,7 +103,12 @@ export interface AuxiaAPIResponseDataUserTreatment {
 	surface: string;
 }
 
-export interface SDCAuxiaProxyResponseData {
+export interface SDCAuxiaGetTreatmentsProxyResponse {
+	status: boolean;
+	data?: SDCAuxiaGetTreatmentsProxyResponseData;
+}
+
+export interface SDCAuxiaGetTreatmentsProxyResponseData {
 	responseId: string;
 	userTreatment?: AuxiaAPIResponseDataUserTreatment;
 }
