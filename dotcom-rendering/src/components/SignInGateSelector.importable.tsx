@@ -490,16 +490,10 @@ const decideDailyArticleCount = (): number => {
 const fetchProxyGetTreatments = async (
 	contributionsServiceUrl: string,
 	pageId: string,
-): Promise<AuxiaGateDisplayData | undefined> => {
-	const browserId = await decideBrowserIdWithConsentCheck();
-	if (browserId === undefined) {
-		return Promise.resolve(undefined);
-	}
-
-	const is_supporter = decideIsSupporter();
-
-	const daily_article_count = decideDailyArticleCount();
-
+	browserId: string,
+	is_supporter: boolean,
+	daily_article_count: number,
+): Promise<SDCAuxiaGetTreatmentsProxyResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const article_identifier = `www.theguardian.com/${pageId}`;
 
@@ -523,6 +517,29 @@ const fetchProxyGetTreatments = async (
 	const response =
 		(await response_raw.json()) as SDCAuxiaGetTreatmentsProxyResponse;
 
+	return Promise.resolve(response);
+};
+
+const buildAuxiaGateDisplayData = async (
+	contributionsServiceUrl: string,
+	pageId: string,
+): Promise<AuxiaGateDisplayData | undefined> => {
+	const browserId = await decideBrowserIdWithConsentCheck();
+	if (browserId === undefined) {
+		return Promise.resolve(undefined);
+	}
+
+	const is_supporter = decideIsSupporter();
+	const daily_article_count = decideDailyArticleCount();
+
+	const response = await fetchProxyGetTreatments(
+		contributionsServiceUrl,
+		pageId,
+		browserId,
+		is_supporter,
+		daily_article_count,
+	);
+
 	if (response.status && response.data) {
 		const answer = {
 			browserId,
@@ -530,6 +547,7 @@ const fetchProxyGetTreatments = async (
 		};
 		return Promise.resolve(answer);
 	}
+
 	return Promise.resolve(undefined);
 };
 
@@ -606,7 +624,7 @@ const SignInGateSelectorAuxia = ({
 
 	useOnce(() => {
 		void (async () => {
-			const data = await fetchProxyGetTreatments(
+			const data = await buildAuxiaGateDisplayData(
 				contributionsServiceUrl,
 				pageId,
 			);
