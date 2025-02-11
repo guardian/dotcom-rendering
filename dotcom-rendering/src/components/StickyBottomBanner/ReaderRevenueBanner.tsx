@@ -293,10 +293,11 @@ export const canShowRRBanner: CanShowFunctionType<
 		ophanPageId: ophanPageViewId,
 		platformId: 'GUARDIAN_WEB',
 		referrerUrl: window.location.origin + window.location.pathname,
+		clientName: 'dcr',
 	};
 	const enrichedProps: BannerProps = {
 		...props,
-		...tracking,
+		tracking,
 		fetchEmail,
 		submitComponentEvent: (componentEvent: OphanComponentEvent) =>
 			void submitComponentEvent(componentEvent, renderingTarget),

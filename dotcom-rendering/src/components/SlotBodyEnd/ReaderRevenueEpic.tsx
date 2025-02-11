@@ -147,10 +147,11 @@ export const canShowReaderRevenueEpic = async (
 		ophanPageId: ophanPageViewId,
 		platformId: 'GUARDIAN_WEB',
 		referrerUrl: window.location.origin + window.location.pathname,
+		clientName: 'dcr',
 	};
 	const enrichedProps: EpicProps = {
 		...props,
-		...tracking,
+		tracking,
 		hasConsentForArticleCount,
 		fetchEmail,
 		submitComponentEvent: (componentEvent: OphanComponentEvent) =>

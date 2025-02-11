@@ -1,17 +1,32 @@
 import { Option, Select } from '@guardian/source/react-components';
+import type { FootballMatchKind } from '../footballMatches';
 import { palette } from '../palette';
 
-type Nations = Array<{
+export type Nations = Array<{
 	name: string;
 	competitions: Array<{ tag: string; name: string }>;
 }>;
 
 type Props = {
 	nations: Nations;
+	kind: Exclude<FootballMatchKind, 'Live'>;
 	onChange: (competitionTag: string) => void;
 };
 
-export const FootballCompetitionSelect = ({ nations, onChange }: Props) => (
+const allLabel = (kind: Exclude<FootballMatchKind, 'Live'>): string => {
+	switch (kind) {
+		case 'Fixture':
+			return 'All fixtures';
+		case 'Result':
+			return 'All results';
+	}
+};
+
+export const FootballCompetitionSelect = ({
+	nations,
+	kind,
+	onChange,
+}: Props) => (
 	<Select
 		label="Choose league:"
 		onChange={(e) => onChange(e.target.value)}
@@ -21,7 +36,7 @@ export const FootballCompetitionSelect = ({ nations, onChange }: Props) => (
 			backgroundInput: palette('--article-background'),
 		}}
 	>
-		<Option value="All">All results</Option>
+		<Option value="All">{allLabel(kind)}</Option>
 		{nations.map((nation) => (
 			<optgroup label={nation.name} key={nation.name}>
 				{nation.competitions.map((competition) => (

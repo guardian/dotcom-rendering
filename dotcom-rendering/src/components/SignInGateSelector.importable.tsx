@@ -30,7 +30,8 @@ import type {
 	AuxiaInteractionInteractionType,
 	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
-	SDCAuxiaProxyResponseData,
+	SDCAuxiaGetTreatmentsProxyResponse,
+	SDCAuxiaGetTreatmentsProxyResponseData,
 	SignInGateComponent,
 } from './SignInGate/types';
 
@@ -448,7 +449,7 @@ const decideBrowserId = (): string => {
 	// getCookie({ name: 'bwid', shouldMemoize: true })
 	// but we are not calling it for the moment until we have guidance on
 	// how to handle the bwid cookie in the context of this experiment.
-	return '2598326e-7c';
+	return '2598326e7c';
 };
 
 const decideIsSupporter = (): boolean => {
@@ -478,7 +479,7 @@ const decideDailyArticleCount = (): number => {
 const fetchProxyGetTreatments = async (
 	contributionsServiceUrl: string,
 	pageId: string,
-): Promise<SDCAuxiaProxyResponseData> => {
+): Promise<SDCAuxiaGetTreatmentsProxyResponseData | undefined> => {
 	// We are defaulting to empty string if the cookie is not found, because the API expects a string
 	const browserId = decideBrowserId();
 
@@ -505,11 +506,14 @@ const fetchProxyGetTreatments = async (
 		body: JSON.stringify(payload),
 	};
 
-	const response = await fetch(url, params);
+	const response_raw = await fetch(url, params);
+	const response =
+		(await response_raw.json()) as SDCAuxiaGetTreatmentsProxyResponse;
 
-	const data = (await response.json()) as SDCAuxiaProxyResponseData;
-
-	return Promise.resolve(data);
+	if (response.status && response.data) {
+		return Promise.resolve(response.data);
+	}
+	return Promise.resolve(undefined);
 };
 
 const auxiaLogTreatmentInteraction = async (
@@ -559,7 +563,7 @@ const SignInGateSelectorAuxia = ({
 	);
 
 	const [auxiaGetTreatmentsData, setAuxiaGetTreatmentsData] = useState<
-		SDCAuxiaProxyResponseData | undefined
+		SDCAuxiaGetTreatmentsProxyResponseData | undefined
 	>(undefined);
 
 	// We are using CurrentSignInGateABTest, with the details of the Auxia experiment,
@@ -591,7 +595,9 @@ const SignInGateSelectorAuxia = ({
 				contributionsServiceUrl,
 				pageId,
 			);
-			setAuxiaGetTreatmentsData(data);
+			if (data !== undefined) {
+				setAuxiaGetTreatmentsData(data);
+			}
 		})().catch((error) => {
 			console.error('Error fetching Auxia display data:', error);
 		});
