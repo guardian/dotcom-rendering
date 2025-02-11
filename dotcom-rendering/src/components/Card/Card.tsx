@@ -294,10 +294,12 @@ const decideSublinkPosition = (
 	alignment?: Alignment,
 	supportingContentPosition?: Position,
 	showLivePlayable?: boolean,
+	isExistingMediaCard?: boolean,
 ): 'inner' | 'outer' | 'none' => {
 	if (!supportingContent || supportingContent.length === 0) {
 		return 'none';
 	}
+	if (isExistingMediaCard) return 'outer';
 
 	if (supportingContentPosition) {
 		return supportingContentPosition;
@@ -408,6 +410,13 @@ export const Card = ({
 	galleryCount,
 	audioDuration,
 }: Props) => {
+	/**
+-	 * Media cards have contrasting background colours. We add additional
+	 * padding to these cards to keep the text readable.
+-	 */
+	const isMediaCard = isAMediaCard(format);
+	const isBetaContainer = BETA_CONTAINERS.includes(containerType ?? '');
+
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
 		supportingContent,
@@ -415,6 +424,7 @@ export const Card = ({
 		supportingContentAlignment,
 		supportingContentPosition,
 		showLivePlayable,
+		isMediaCard && !isBetaContainer,
 	);
 	const showQuotes = !!showQuotedHeadline;
 
@@ -422,8 +432,6 @@ export const Card = ({
 		format.design === ArticleDesign.Comment ||
 		format.design === ArticleDesign.Editorial ||
 		format.design === ArticleDesign.Letter;
-
-	const isBetaContainer = BETA_CONTAINERS.includes(containerType ?? '');
 
 	/**
 	 * A "video article" refers to standalone video content presented as the main focus of the article.
@@ -564,12 +572,6 @@ export const Card = ({
 	const showCommentFooter =
 		isOpinion && !isOnwardContent && media?.type === 'avatar';
 
-	/**
--	 * Media cards have contrasting background colours. We add additional
-	 * padding to these cards to keep the text readable.
--	 */
-	const isMediaCard = isAMediaCard(format);
-
 	const backgroundColour = isMediaCard
 		? palette('--card-media-background')
 		: palette('--card-background');
@@ -679,7 +681,8 @@ export const Card = ({
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
 					isDynamo={isDynamo}
-					fillBackgroundOnMobile={isFlexSplash}
+					fillBackgroundOnDesktop={isMediaCard}
+					fillBackgroundOnMobile={isFlexSplash || isMediaCard}
 				/>
 			);
 		}
@@ -1185,7 +1188,9 @@ export const Card = ({
 				}
 				style={{
 					padding:
-						isMediaCard || isOnwardContent ? `0 ${space[2]}px` : 0,
+						(isMediaCard && isBetaContainer) || isOnwardContent
+							? `0 ${space[2]}px`
+							: 0,
 				}}
 			>
 				{showLivePlayable && liveUpdatesPosition === 'outer' && (
