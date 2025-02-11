@@ -1,3 +1,4 @@
+import { cmp } from '@guardian/libs';
 import { Button, Link, LinkButton } from '@guardian/source/react-components';
 import { useConfig } from '../../ConfigContext';
 import { trackLink } from '../componentEventTracking';
@@ -12,6 +13,7 @@ import {
 	headingStyles,
 	hideElementsCss,
 	laterButton,
+	privacyLink,
 	registerButton,
 	signInGateContainer,
 	signInHeader,
@@ -24,7 +26,6 @@ export const SignInGateAuxia = ({
 	dismissGate,
 	abTest,
 	ophanComponentId,
-	isMandatory = false,
 	userTreatment,
 	logTreatmentInteractionCall,
 }: SignInGatePropsAuxia) => {
@@ -35,31 +36,52 @@ export const SignInGateAuxia = ({
 	) as TreatmentContentDecoded;
 
 	/*
-	The treatmentContent object is expected to have the following structure:
-	{
-		"title": "Sign in for a personlised experience",
-		"subtitle": ""
-		"body": "By signing into your Guardian account you'll provide us with insights into your preferences that will result in a more personalised experience, including less frequent asks to support. You'll always be able to control your preferences in your own privacy settings.",
-		"first_cta_name": "Sign in",
-		"first_cta_link": "https://profile.theguardian.com/signin?",
-		"second_cta_name": "I'll do it later",
-	}
+	The component must be written to gracefully handle empty values for the following field:
+		- subtitle
+		- body
+		- privacy_button_name
 	*/
 
 	const title = treatmentContent.title;
+	const subtitle = treatmentContent.subtitle;
 	const body = treatmentContent.body;
+	const privacy_button_name = treatmentContent.privacy_button_name;
 	const firstCtaName = treatmentContent.first_cta_name;
 	const firstCtaLink = treatmentContent.first_cta_link;
 	const secondCtaName = treatmentContent.second_cta_name;
-	const subtitle = treatmentContent.subtitle;
+
+	const hasContent = (input: string): boolean => {
+		return input !== '';
+	};
 
 	return (
 		<div css={signInGateContainer} data-testid="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
 			<div css={firstParagraphOverlay} />
 			<h1 css={headingStyles}>{title}</h1>
-			<p css={bodyBold}>{subtitle}</p>
-			<p css={bodyText}>{body}</p>
+			{hasContent(subtitle) && <p css={bodyBold}>{subtitle}</p>}
+			{hasContent(body) && (
+				<p css={bodyText}>
+					{body}{' '}
+					{hasContent(privacy_button_name) && (
+						<button
+							data-testid="sign-in-gate-main_privacy"
+							css={privacyLink}
+							onClick={() => {
+								cmp.showPrivacyManager();
+								trackLink(
+									ophanComponentId,
+									'privacy',
+									renderingTarget,
+									abTest,
+								);
+							}}
+						>
+							privacy settings
+						</button>
+					)}
+				</p>
+			)}
 			<div css={actionButtons}>
 				<LinkButton
 					data-testid="sign-in-gate-main_register"
@@ -88,34 +110,32 @@ export const SignInGateAuxia = ({
 				>
 					{firstCtaName}
 				</LinkButton>
-				{!isMandatory && (
-					<Button
-						data-testid="sign-in-gate-main_dismiss"
-						data-ignore="global-link-styling"
-						cssOverrides={laterButton}
-						priority="subdued"
-						size="small"
-						onClick={() => {
-							dismissGate();
-							trackLink(
-								ophanComponentId,
-								'not-now',
-								renderingTarget,
-								abTest,
-							);
-							logTreatmentInteractionCall('DISMISSED', '').catch(
-								(error) => {
-									console.error(
-										'Failed to log treatment interaction:',
-										error,
-									);
-								},
-							);
-						}}
-					>
-						{secondCtaName}
-					</Button>
-				)}
+				<Button
+					data-testid="sign-in-gate-main_dismiss"
+					data-ignore="global-link-styling"
+					cssOverrides={laterButton}
+					priority="subdued"
+					size="small"
+					onClick={() => {
+						dismissGate();
+						trackLink(
+							ophanComponentId,
+							'not-now',
+							renderingTarget,
+							abTest,
+						);
+						logTreatmentInteractionCall('DISMISSED', '').catch(
+							(error) => {
+								console.error(
+									'Failed to log treatment interaction:',
+									error,
+								);
+							},
+						);
+					}}
+				>
+					{secondCtaName}
+				</Button>
 			</div>
 
 			<p css={[bodySeparator, bodyBold, signInHeader]}>
