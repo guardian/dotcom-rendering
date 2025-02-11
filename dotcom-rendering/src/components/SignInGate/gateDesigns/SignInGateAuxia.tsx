@@ -37,21 +37,23 @@ export const SignInGateAuxia = ({
 	/*
 	The treatmentContent object is expected to have the following structure:
 	{
-		"title": "Sign in for a personlised experience",
-		"subtitle": ""
+		"title": "Sign in for a personlised Guardian experience",
 		"body": "By signing into your Guardian account you'll provide us with insights into your preferences that will result in a more personalised experience, including less frequent asks to support. You'll always be able to control your preferences in your own privacy settings.",
 		"first_cta_name": "Sign in",
 		"first_cta_link": "https://profile.theguardian.com/signin?",
 		"second_cta_name": "I'll do it later",
+		"subtitle": "Get less asks for support and more personalised recommendations",
+		"privacy_button_name": "privacy settings"
 	}
 	*/
 
 	const title = treatmentContent.title;
 	const body = treatmentContent.body;
+	const subtitle = treatmentContent.subtitle;
 	const firstCtaName = treatmentContent.first_cta_name;
 	const firstCtaLink = treatmentContent.first_cta_link;
 	const secondCtaName = treatmentContent.second_cta_name;
-	const subtitle = treatmentContent.subtitle;
+	const privacy_button_name = treatmentContent.privacy_button_name;
 
 	return (
 		<div css={signInGateContainer} data-testid="sign-in-gate-main">
