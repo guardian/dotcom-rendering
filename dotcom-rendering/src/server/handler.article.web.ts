@@ -7,7 +7,11 @@ import { enhanceArticleType } from '../types/article';
 import type { FEBlocksRequest } from '../types/frontend';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
-import { renderBlocks, renderHtml } from './render.article.web';
+import {
+	renderBlocks,
+	renderHtml,
+	renderSportDataPage,
+} from './render.article.web';
 
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'web');
@@ -104,4 +108,9 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 	});
 
 	res.status(200).send(html);
+};
+
+export const handleSportDataPage: RequestHandler = ({ body }, res) => {
+	const { html, prefetchScripts } = renderSportDataPage();
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
