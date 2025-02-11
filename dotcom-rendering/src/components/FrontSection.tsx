@@ -1,10 +1,17 @@
 import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
-import { between, from, space, until } from '@guardian/source/foundations';
+import {
+	between,
+	from,
+	space,
+	textSansBold12,
+	until,
+} from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import type { EditionId } from '../lib/edition';
 import { hideAge } from '../lib/hideAge';
 import { palette, palette as schemePalette } from '../palette';
+import type { DCRBadgeType } from '../types/badge';
 import type { CollectionBranding } from '../types/branding';
 import type {
 	DCRContainerLevel,
@@ -14,18 +21,20 @@ import type {
 import type { DCRFrontPagination } from '../types/tagPage';
 import { isAustralianTerritory, type Territory } from '../types/territory';
 import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
+import { Badge } from './Badge';
 import { ContainerOverrides } from './ContainerOverrides';
 import { ContainerTitle } from './ContainerTitle';
 import { FrontPagination } from './FrontPagination';
 import { FrontSectionTitle } from './FrontSectionTitle';
 import { Island } from './Island';
+import { GuardianLabsTitle } from './LabsSection';
 import { ShowHideButton } from './ShowHideButton';
 import { ShowMore } from './ShowMore.importable';
 import { Treats } from './Treats';
 
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */
-	title?: string;
+	title: string;
 	/** This text shows below the title */
 	description?: string;
 	/** The title can be made into a link using this property */
@@ -92,6 +101,9 @@ type Props = {
 	isTagPage?: boolean;
 	hasNavigationButtons?: boolean;
 	isBetaContainer?: boolean;
+	isLabsSection?: boolean;
+	/** A sponsor badge can be displayed under the content cards */
+	sponsorshipBadge?: DCRBadgeType;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -419,6 +431,20 @@ const carouselNavigationPlaceholder = css`
 	}
 `;
 
+const badgeStyles = css`
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+	padding: ${space[2]}px 10px;
+`;
+
+const paidForByStyles = css`
+	${textSansBold12};
+	color: ${palette('--treat-text')};
+	margin-top: ${space[3]}px;
+	margin-bottom: ${space[1]}px;
+`;
+
 /**
  * # Front Container
  *
@@ -532,6 +558,8 @@ export const FrontSection = ({
 	isTagPage = false,
 	hasNavigationButtons = false,
 	isBetaContainer,
+	isLabsSection = false,
+	sponsorshipBadge,
 }: Props) => {
 	const isToggleable = toggleable && !!sectionId;
 	const showMore =
@@ -597,6 +625,10 @@ export const FrontSection = ({
 							// only ever having <CPScott> as the leftContent
 							title?.toLowerCase() === 'opinion',
 						),
+						isLabsSection &&
+							css`
+								background: green;
+							`,
 						showVerticalRule &&
 							!containerLevel &&
 							sectionHeadlineFromLeftCol(
@@ -606,27 +638,34 @@ export const FrontSection = ({
 				>
 					<FrontSectionTitle
 						title={
-							<ContainerTitle
-								title={title}
-								lightweightHeader={isTagPage}
-								description={description}
-								fontColour={
-									containerLevel === 'Secondary'
-										? schemePalette(
-												'--article-section-secondary-title',
-										  )
-										: schemePalette(
-												'--article-section-title',
-										  )
-								}
-								// On paid fronts the title is not treated as a link
-								url={!isOnPaidContentFront ? url : undefined}
-								showDateHeader={showDateHeader}
-								editionId={editionId}
-								containerLevel={containerLevel}
-							/>
+							isLabsSection ? (
+								<GuardianLabsTitle title={title} url={url} />
+							) : (
+								<ContainerTitle
+									title={title}
+									lightweightHeader={isTagPage}
+									description={description}
+									fontColour={
+										containerLevel === 'Secondary'
+											? schemePalette(
+													'--article-section-secondary-title',
+											  )
+											: schemePalette(
+													'--article-section-title',
+											  )
+									}
+									// On paid fronts the title is not treated as a link
+									url={
+										!isOnPaidContentFront ? url : undefined
+									}
+									showDateHeader={showDateHeader}
+									editionId={editionId}
+									containerLevel={containerLevel}
+								/>
+							)
 						}
 						collectionBranding={collectionBranding}
+						isLabsSection={isLabsSection}
 					/>
 
 					{leftContent}
@@ -715,6 +754,19 @@ export const FrontSection = ({
 						<Treats
 							treats={treats}
 							borderColour={palette('--section-border')}
+						/>
+					</div>
+				)}
+
+				{isLabsSection && !!sponsorshipBadge && (
+					<div css={badgeStyles}>
+						<div css={paidForByStyles}>Paid for by</div>
+						<Badge
+							imageSrc={sponsorshipBadge.imageSrc}
+							href={sponsorshipBadge.href}
+							ophanComponentLink={`labs-logo | ${ophanComponentName}`}
+							ophanComponentName={`labs-logo-${ophanComponentName}`}
+							isInLabsSection={true}
 						/>
 					</div>
 				)}

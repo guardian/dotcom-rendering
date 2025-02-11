@@ -172,33 +172,6 @@ const containerMargins = css`
 	}
 `;
 
-const sectionControls = css`
-	grid-row: controls;
-	grid-column: hide;
-	justify-self: end;
-	display: flex;
-	padding-top: ${space[2]}px;
-	${from.wide} {
-		flex-direction: column-reverse;
-		justify-content: flex-end;
-		align-items: flex-end;
-		gap: ${space[2]}px;
-		/* we want to add space between the items in the controls section only when there are at least 2 children and neither are hidden */
-		:has(> :not(.hidden):nth-of-type(2)) {
-			justify-content: space-between;
-		}
-	}
-`;
-
-const carouselNavigationPlaceholder = css`
-	${between.tablet.and.leftCol} {
-		min-height: 44px;
-	}
-	.hidden & {
-		display: none;
-	}
-`;
-
 const badgeStyles = css`
 	display: flex;
 	flex-direction: column;
@@ -213,7 +186,13 @@ const paidForByStyles = css`
 	margin-bottom: ${space[1]}px;
 `;
 
-const GuardianLabsTitle = ({ title, url }: { title: string; url?: string }) => {
+export const GuardianLabsTitle = ({
+	title,
+	url,
+}: {
+	title: string;
+	url?: string;
+}) => {
 	if (url) {
 		return (
 			<a css={linkStyles} href={`/${url}`}>
@@ -294,7 +273,7 @@ const Container = ({
 	</div>
 );
 
-const LabsContainerHeader = ({
+export const LabsContainerHeader = ({
 	summaryBackgroundColour,
 	summaryTextColour,
 	summaryTextSecondaryColour,
@@ -390,7 +369,6 @@ export const LabsSection = ({
 	hasPageSkin = false,
 	discussionApiUrl,
 	editionId,
-	hasNavigationButtons = false,
 }: Props) => {
 	return (
 		<ContainerOverrides containerPalette="Branded">
@@ -442,17 +420,6 @@ export const LabsSection = ({
 					</LeftColumn>
 					<Content hasPageSkin={hasPageSkin}>
 						{children}
-
-						<div css={sectionControls}>
-							{hasNavigationButtons && (
-								<div
-									css={carouselNavigationPlaceholder}
-									className="carouselNavigationPlaceholder"
-									id={`${sectionId}-carousel-navigation`}
-								></div>
-							)}
-						</div>
-
 						{canShowMore && (
 							<Island
 								priority="feature"

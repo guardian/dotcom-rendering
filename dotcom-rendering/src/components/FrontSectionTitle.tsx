@@ -3,17 +3,25 @@ import {
 	from,
 	palette as sourcePalette,
 	textSans12,
+	textSans14,
+	textSansBold14,
 	until,
 } from '@guardian/source/foundations';
-import { Hide } from '@guardian/source/react-components';
+import {
+	Hide,
+	LinkButton,
+	SvgArrowRightStraight,
+} from '@guardian/source/react-components';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import { palette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
 import { Badge } from './Badge';
+import { Details } from './Details';
 
 type Props = {
 	title: React.ReactNode;
 	collectionBranding: CollectionBranding | undefined;
+	isLabsSection?: boolean;
 };
 
 const titleStyle = css`
@@ -77,7 +85,11 @@ const aboutThisLinkAdvertisingPartnerStyles = css`
 	color: ${sourcePalette.news[400]};
 `;
 
-export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
+export const FrontSectionTitle = ({
+	title,
+	collectionBranding,
+	isLabsSection,
+}: Props) => {
 	switch (collectionBranding?.kind) {
 		case 'foundation': {
 			const {
@@ -209,6 +221,69 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 			return <div css={titleStyle}>{title}</div>;
 		}
 		case undefined: {
+			if (isLabsSection) {
+				return (
+					<>
+						<div
+							css={css`
+								display: flex;
+							`}
+						>
+							<div
+								css={css`
+									${textSansBold14};
+									padding-right: 16px;
+								`}
+							>
+								Paid content
+							</div>
+							<Details
+								label={'About'}
+								labelSize="xsmall"
+								positionStyles={css`
+									${until.mobileLandscape} {
+										left: -107px;
+									}
+								`}
+							>
+								<div
+									css={css`
+										background-color: ${sourcePalette
+											.neutral[0]};
+										color: ${sourcePalette.neutral[97]};
+										padding: 20px;
+									`}
+								>
+									<p>
+										Paid content is paid for and controlled
+										by an advertiser and produced by the
+										Guardian Labs team.
+									</p>
+									<br />
+									<LinkButton
+										iconSide="right"
+										size="xsmall"
+										priority="subdued"
+										icon={<SvgArrowRightStraight />}
+										href="https://www.theguardian.com/info/2016/jan/25/content-funding"
+										theme={{
+											textSubdued:
+												sourcePalette.labs[400],
+										}}
+										cssOverrides={css`
+											${textSans14};
+										`}
+									>
+										Learn more about Guardian Labs content
+									</LinkButton>
+								</div>
+							</Details>
+						</div>
+						{title}
+					</>
+				);
+			}
+
 			return <div css={titleStyle}>{title}</div>;
 		}
 		default: {

@@ -523,6 +523,51 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										sectionId={ophanName}
 									/>
 								</LabsSection>
+
+								<FrontSection
+									title={collection.displayName}
+									collectionId={collection.id}
+									pageId={front.pressedPage.id}
+									ajaxUrl={front.config.ajaxUrl}
+									sectionId={`container-${ophanName}`}
+									ophanComponentName={ophanName}
+									ophanComponentLink={ophanComponentLink}
+									containerName={collection.collectionType}
+									canShowMore={collection.canShowMore}
+									url={collection.href}
+									isLabsSection={true}
+									sponsorshipBadge={badgeFromBranding(
+										collection.collectionBranding,
+									)}
+									data-print-layout="hide"
+									hasPageSkin={hasPageSkin}
+									discussionApiUrl={
+										front.config.discussionApiUrl
+									}
+									editionId={editionId}
+								>
+									<DecideContainer
+										trails={trailsWithoutBranding}
+										groupedTrails={collection.grouped}
+										containerType={
+											collection.collectionType
+										}
+										containerPalette={
+											collection.containerPalette
+										}
+										imageLoading={imageLoading}
+										absoluteServerTimes={
+											absoluteServerTimes
+										}
+										aspectRatio={
+											collection.aspectRatio ??
+											fallbackAspectRatio(
+												collection.collectionType,
+											)
+										}
+										sectionId={ophanName}
+									/>
+								</FrontSection>
 								{mobileAdPositions.includes(index) && (
 									<MobileAdSlot
 										renderAds={renderAds}
