@@ -26,6 +26,7 @@ type Props = {
 const containerStyles = css`
 	display: flex;
 	flex-basis: 100%;
+	position: relative;
 `;
 
 // Until mobile landscape, show 1 card on small screens
