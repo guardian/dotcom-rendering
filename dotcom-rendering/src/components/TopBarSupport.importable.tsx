@@ -75,12 +75,6 @@ const ReaderRevenueLinksRemote = ({
 		setAutomat();
 
 		const requestData: HeaderPayload = {
-			tracking: {
-				ophanPageId: pageViewId,
-				platformId: 'GUARDIAN_WEB',
-				referrerUrl: pageUrl,
-				clientName: 'dcr',
-			},
 			targeting: {
 				showSupportMessaging: !hideSupportMessagingForUser,
 				countryCode,
@@ -135,7 +129,6 @@ const ReaderRevenueLinksRemote = ({
 			ophanPageId: pageViewId,
 			platformId: 'GUARDIAN_WEB',
 			referrerUrl: pageUrl,
-			clientName: 'dcr',
 		};
 		const enrichedProps: HeaderProps = {
 			...props,
