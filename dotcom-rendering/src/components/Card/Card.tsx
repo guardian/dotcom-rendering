@@ -400,7 +400,7 @@ export const Card = ({
 	isTagPage = false,
 	aspectRatio,
 	index = 0,
-	isFlexSplash,
+	isFlexSplash = false,
 	showTopBarDesktop = true,
 	showTopBarMobile = false,
 	trailTextSize,
@@ -630,7 +630,7 @@ export const Card = ({
 				column: 'tiny',
 			};
 		}
-		if (!!isFlexSplash || (isFlexibleContainer && imageSize === 'jumbo')) {
+		if (isFlexSplash || (isFlexibleContainer && imageSize === 'jumbo')) {
 			return {
 				row: 'small',
 				column: 'small',
