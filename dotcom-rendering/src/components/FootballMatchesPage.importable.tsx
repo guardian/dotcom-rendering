@@ -10,7 +10,6 @@ import { FootballMatchList } from './FootballMatchList';
 
 type Props = {
 	nations: Nations;
-	title: string;
 	guardianBaseUrl: string;
 	kind: FootballMatchKind;
 	goToCompetitionSpecificPage: (tag: string) => void;
@@ -19,9 +18,23 @@ type Props = {
 	getMoreDays?: () => Promise<Result<'failed', FootballMatches>>;
 };
 
+const createTitle = (kind: FootballMatchKind, edition: EditionId) => {
+	if (edition === 'US' && kind === 'Fixture') {
+		return 'Soccer schedules';
+	}
+
+	switch (kind) {
+		case 'Fixture':
+			return 'Football fixtures';
+		case 'Live':
+			return 'Live football scores';
+		case 'Result':
+			return 'Football results';
+	}
+};
+
 export const FootballMatchesPage = ({
 	nations,
-	title,
 	guardianBaseUrl,
 	kind,
 	goToCompetitionSpecificPage,
@@ -34,9 +47,8 @@ export const FootballMatchesPage = ({
 			<h1
 				css={css`
 					${headlineBold20}
-					padding-top: 6px;
-					padding-bottom: ${space[3]}px;
-					${grid.between('centre-column-start', 'centre-column-end')}
+					padding: ${space[1]}px 0 ${space[3]}px;
+					${grid.column.centre}
 					${from.leftCol} {
 						${grid.between(
 							'left-column-start',
@@ -45,7 +57,7 @@ export const FootballMatchesPage = ({
 					}
 				`}
 			>
-				{title}
+				{createTitle(kind, edition)}
 			</h1>
 			{kind !== 'Live' && (
 				<div
