@@ -135,6 +135,7 @@ const ReaderRevenueLinksRemote = ({
 			ophanPageId: pageViewId,
 			platformId: 'GUARDIAN_WEB',
 			referrerUrl: pageUrl,
+			clientName: 'dcr',
 		};
 		const enrichedProps: HeaderProps = {
 			...props,

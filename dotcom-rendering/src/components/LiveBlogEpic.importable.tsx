@@ -201,6 +201,7 @@ const Fetch = ({
 		ophanPageId: ophanPageViewId,
 		platformId: 'GUARDIAN_WEB',
 		referrerUrl: pageUrl,
+		clientName: 'dcr',
 	};
 
 	// Add submitComponentEvent function to props to enable Ophan tracking in the component
