@@ -1,6 +1,9 @@
 import { getCookie, isUndefined } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import { shouldHideSupportMessaging } from '../lib/contributions';
+import {
+	hasCmpConsentForBrowserId,
+	shouldHideSupportMessaging,
+} from '../lib/contributions';
 import { getDailyArticleCount, getToday } from '../lib/dailyArticleCount';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { constructQuery } from '../lib/querystring';
@@ -26,12 +29,12 @@ import { SignInGateAuxia } from './SignInGate/gateDesigns/SignInGateAuxia';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGateMappings';
 import type {
 	AuxiaAPIResponseDataUserTreatment,
+	AuxiaGateDisplayData,
 	AuxiaInteractionActionName,
 	AuxiaInteractionInteractionType,
 	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
 	SDCAuxiaGetTreatmentsProxyResponse,
-	SDCAuxiaGetTreatmentsProxyResponseData,
 	SignInGateComponent,
 } from './SignInGate/types';
 
@@ -432,6 +435,7 @@ interface ShowSignInGateAuxiaProps {
 	abTest: CurrentSignInGateABTest;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
 	contributionsServiceUrl: string;
+	browserId: string;
 	logTreatmentInteractionCall: (
 		interactionType: AuxiaInteractionInteractionType,
 		actionName: AuxiaInteractionActionName,
@@ -444,12 +448,19 @@ const dismissGateAuxia = (
 	setShowGate(false);
 };
 
-const decideBrowserId = (): string => {
-	// The way to get the browserId is:
-	// getCookie({ name: 'bwid', shouldMemoize: true })
-	// but we are not calling it for the moment until we have guidance on
-	// how to handle the bwid cookie in the context of this experiment.
-	return '2598326e7c';
+const decideBrowserIdWithConsentCheck = async (): Promise<
+	string | undefined
+> => {
+	const hasConsent = await hasCmpConsentForBrowserId();
+	if (!hasConsent) {
+		return Promise.resolve(undefined);
+	}
+
+	const cookie = getCookie({ name: 'bwid', shouldMemoize: true });
+	if (cookie === null) {
+		return Promise.resolve(undefined);
+	}
+	return Promise.resolve(cookie);
 };
 
 const decideIsSupporter = (): boolean => {
@@ -479,14 +490,10 @@ const decideDailyArticleCount = (): number => {
 const fetchProxyGetTreatments = async (
 	contributionsServiceUrl: string,
 	pageId: string,
-): Promise<SDCAuxiaGetTreatmentsProxyResponseData | undefined> => {
-	// We are defaulting to empty string if the cookie is not found, because the API expects a string
-	const browserId = decideBrowserId();
-
-	const is_supporter = decideIsSupporter();
-
-	const daily_article_count = decideDailyArticleCount();
-
+	browserId: string,
+	is_supporter: boolean,
+	daily_article_count: number,
+): Promise<SDCAuxiaGetTreatmentsProxyResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const article_identifier = `www.theguardian.com/${pageId}`;
 
@@ -510,9 +517,37 @@ const fetchProxyGetTreatments = async (
 	const response =
 		(await response_raw.json()) as SDCAuxiaGetTreatmentsProxyResponse;
 
-	if (response.status && response.data) {
-		return Promise.resolve(response.data);
+	return Promise.resolve(response);
+};
+
+const buildAuxiaGateDisplayData = async (
+	contributionsServiceUrl: string,
+	pageId: string,
+): Promise<AuxiaGateDisplayData | undefined> => {
+	const browserId = await decideBrowserIdWithConsentCheck();
+	if (browserId === undefined) {
+		return Promise.resolve(undefined);
 	}
+
+	const is_supporter = decideIsSupporter();
+	const daily_article_count = decideDailyArticleCount();
+
+	const response = await fetchProxyGetTreatments(
+		contributionsServiceUrl,
+		pageId,
+		browserId,
+		is_supporter,
+		daily_article_count,
+	);
+
+	if (response.status && response.data) {
+		const answer = {
+			browserId,
+			auxiaData: response.data,
+		};
+		return Promise.resolve(answer);
+	}
+
 	return Promise.resolve(undefined);
 };
 
@@ -521,10 +556,8 @@ const auxiaLogTreatmentInteraction = async (
 	userTreatment: AuxiaAPIResponseDataUserTreatment,
 	interactionType: AuxiaInteractionInteractionType,
 	actionName: AuxiaInteractionActionName,
+	browserId: string,
 ): Promise<void> => {
-	// We are defaulting to empty string if the cookie is not found, because the API expects a string
-	const browserId = decideBrowserId();
-
 	const url = `${contributionsServiceUrl}/auxia/log-treatment-interaction`;
 	const headers = {
 		'Content-Type': 'application/json',
@@ -562,8 +595,8 @@ const SignInGateSelectorAuxia = ({
 		undefined,
 	);
 
-	const [auxiaGetTreatmentsData, setAuxiaGetTreatmentsData] = useState<
-		SDCAuxiaGetTreatmentsProxyResponseData | undefined
+	const [auxiaGateDisplayData, setAuxiaGateDisplayData] = useState<
+		AuxiaGateDisplayData | undefined
 	>(undefined);
 
 	// We are using CurrentSignInGateABTest, with the details of the Auxia experiment,
@@ -591,12 +624,12 @@ const SignInGateSelectorAuxia = ({
 
 	useOnce(() => {
 		void (async () => {
-			const data = await fetchProxyGetTreatments(
+			const data = await buildAuxiaGateDisplayData(
 				contributionsServiceUrl,
 				pageId,
 			);
 			if (data !== undefined) {
-				setAuxiaGetTreatmentsData(data);
+				setAuxiaGateDisplayData(data);
 			}
 		})().catch((error) => {
 			console.error('Error fetching Auxia display data:', error);
@@ -621,24 +654,28 @@ const SignInGateSelectorAuxia = ({
 	return (
 		<>
 			{!isGateDismissed &&
-				auxiaGetTreatmentsData?.userTreatment !== undefined && (
+				auxiaGateDisplayData?.auxiaData.userTreatment !== undefined && (
 					<ShowSignInGateAuxia
 						host={host}
 						signInUrl={signInUrl}
 						// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 						setShowGate={(show) => setIsGateDismissed(!show)}
 						abTest={abTest}
-						userTreatment={auxiaGetTreatmentsData.userTreatment}
+						userTreatment={
+							auxiaGateDisplayData.auxiaData.userTreatment
+						}
 						contributionsServiceUrl={contributionsServiceUrl}
+						browserId={auxiaGateDisplayData.browserId}
 						logTreatmentInteractionCall={async (
 							interactionType: AuxiaInteractionInteractionType,
 							actionName: AuxiaInteractionActionName,
 						) => {
 							await auxiaLogTreatmentInteraction(
 								contributionsServiceUrl,
-								auxiaGetTreatmentsData.userTreatment!,
+								auxiaGateDisplayData.auxiaData.userTreatment!,
 								interactionType,
 								actionName,
+								auxiaGateDisplayData.browserId,
 							);
 						}}
 					/>
@@ -654,6 +691,7 @@ const ShowSignInGateAuxia = ({
 	abTest,
 	userTreatment,
 	contributionsServiceUrl,
+	browserId,
 	logTreatmentInteractionCall,
 }: ShowSignInGateAuxiaProps) => {
 	const componentId = 'main_variant_5';
@@ -667,6 +705,7 @@ const ShowSignInGateAuxia = ({
 				userTreatment,
 				'VIEWED',
 				'',
+				browserId,
 			);
 		})().catch((error) => {
 			console.error('Failed to log treatment interaction:', error);
