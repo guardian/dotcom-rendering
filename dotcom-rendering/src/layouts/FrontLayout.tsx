@@ -125,7 +125,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const hasPageSkin = renderAds && hasPageSkinConfig;
 
-	const isInLoopVideoTest = abTests.LoopVideoTestVariant === 'variant';
+	const isInLoopVideoTest = abTests.loopVideoTestVariant === 'variant';
+
 	const filteredCollections = isInLoopVideoTest
 		? [
 				testVideoCollection,
@@ -310,7 +311,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								branding: undefined,
 								isInLoopVideoTest,
 						  }))
-						: trails;
+						: trails.map((singleTrail) => ({
+								...singleTrail,
+								isInLoopVideoTest,
+						  }));
 
 					// We also need to remove the branding for the cards in grouped
 					// trails for dynamic containers

@@ -4,6 +4,7 @@ import type { ImgHTMLAttributes } from 'react';
 import React from 'react';
 import type { AspectRatio } from '../types/front';
 import type { ImageSizeType } from './Card/components/ImageWrapper';
+import { LoopABTest } from './LoopABTest';
 import type { ImageWidthType } from './Picture';
 import { generateSources, getFallbackSource } from './Picture';
 
@@ -167,29 +168,7 @@ export const CardPicture = ({
 	const fallbackSource = getFallbackSource(sources);
 
 	if (isInLoopVideoTest) {
-		return (
-			<video
-				id="video1"
-				autoPlay={true}
-				loop={true}
-				muted={true}
-				playsInline={true}
-				controls={true}
-				preload="none"
-				css={[
-					css`
-						width: 100%;
-						height: 100%;
-					`,
-				]}
-			>
-				Your browser does not support the video tag.
-				<source
-					type="video/mp4"
-					src="https://uploads.guim.co.uk/2024/58/19/Deepfake%20clip%20shows%20Nigel%20Farage%20destroying%20Rishi%20Sunak%E2%80%99s%20house%20in%20Minecraft%20--007473ac-3147-41f5-9cf3-d454c28037cf-3.mp4"
-				/>
-			</video>
-		);
+		return <LoopABTest />;
 	}
 
 	return (
