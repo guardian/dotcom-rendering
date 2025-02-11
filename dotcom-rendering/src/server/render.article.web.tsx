@@ -3,6 +3,7 @@ import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
 import { isAmpSupported } from '../components/Elements.amp';
 import { LiveBlogRenderer } from '../components/LiveBlogRenderer';
+import { FootballDataLayout } from '../layouts/FootballDataLayout';
 import {
 	ArticleDesign,
 	type ArticleFormat,
@@ -20,7 +21,10 @@ import { renderToStringWithEmotion } from '../lib/emotion';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { polyfillIO } from '../lib/polyfill.io';
 import { extractNAV } from '../model/extract-nav';
-import { createGuardian as createWindowGuardian } from '../model/guardian';
+import {
+	createGuardian,
+	createGuardian as createWindowGuardian,
+} from '../model/guardian';
 import type { Article } from '../types/article';
 import type { Config } from '../types/configContext';
 import type { FEElement } from '../types/content';
@@ -299,4 +303,69 @@ export const renderBlocks = ({
 	);
 
 	return `${extractedCss}${html}`;
+};
+
+export const renderSportDataPage = () => {
+	const { html, extractedCss } = renderToStringWithEmotion(
+		<FootballDataLayout />,
+	);
+
+	const build = getModulesBuild({
+		switches: {},
+		tests: {},
+	});
+
+	/**
+	 * The highest priority scripts.
+	 * These scripts have a considerable impact on site performance.
+	 * Only scripts critical to application execution may go in here.
+	 * Please talk to the dotcom platform team before adding more.
+	 * Scripts will be executed in the order they appear in this array
+	 */
+	const prefetchScripts = [
+		polyfillIO,
+		getPathFromManifest(build, 'frameworks.js'),
+		getPathFromManifest(build, 'index.js'),
+	].filter(isString);
+
+	const config: Config = {
+		renderingTarget: 'Web',
+		darkModeAvailable: false,
+		assetOrigin: ASSET_ORIGIN,
+		editionId: 'UK',
+	};
+
+	const pageHtml = htmlPageTemplate({
+		scriptTags: [], //scriptTags,
+		css: extractedCss,
+		html,
+		//title,
+		//description,
+		guardian: createGuardian({
+			editionId: 'UK',
+			stage: 'DEV',
+			frontendAssetsFullURL: 'https://m.code.dev-theguardian.com/',
+			revisionNumber: '123456',
+			sentryPublicApiKey: '123456',
+			sentryHost: 'sentry.io',
+			keywordIds: '',
+			dfpAccountId: '123456',
+			adUnit: '123456',
+			ajaxUrl: 'https://m.code.dev-theguardian.com/',
+			googletagUrl: 'https://www.googletagservices.com/tag/js/gpt.js',
+			switches: {},
+			abTests: {},
+			brazeApiKey: '123456',
+			isPaidContent: false,
+			contentType: 'Article',
+			shouldHideReaderRevenue: false,
+			googleRecaptchaSiteKey: '123456',
+		}),
+		keywords: '',
+		renderingTarget: 'Web',
+		weAreHiring: false,
+		config,
+	});
+
+	return { html: pageHtml, prefetchScripts };
 };

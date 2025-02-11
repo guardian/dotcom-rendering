@@ -11,6 +11,7 @@ import {
 	handleArticleJson,
 	handleBlocks,
 	handleInteractive,
+	handleSportDataPage,
 } from './handler.article.web';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import {
@@ -91,6 +92,8 @@ export const devServer = (): Handler => {
 				return handleAppsBlocks(req, res, next);
 			case 'EditionsCrossword':
 				return handleEditionsCrossword(req, res, next);
+			case 'SportData':
+				return handleSportDataPage(req, res, next);
 			default: {
 				// Do not redirect assets urls
 				if (req.url.match(ASSETS_URL)) return next();
