@@ -88,10 +88,10 @@ export interface TreatmentContentDecoded {
 	title: string;
 	subtitle: string;
 	body: string;
+	privacy_button_name: string;
 	first_cta_name: string;
 	first_cta_link: string;
 	second_cta_name: string;
-	privacy_button_name: string;
 }
 
 export interface AuxiaAPIResponseDataUserTreatment {
@@ -133,7 +133,6 @@ export type SignInGatePropsAuxia = {
 	dismissGate: () => void;
 	ophanComponentId: string;
 	abTest?: CurrentSignInGateABTest;
-	isMandatory?: boolean;
 	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
 	personaliseSignInGateAfterCheckoutSwitch?: boolean;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
