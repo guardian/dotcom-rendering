@@ -683,6 +683,8 @@ export const Card = ({
 					isDynamo={isDynamo}
 					fillBackgroundOnDesktop={isMediaCard}
 					fillBackgroundOnMobile={isFlexSplash || isMediaCard}
+					// we don't show a top rule on podcasts cards as sublinks align with the waveform
+					showTopRule={mainMedia?.type !== 'Audio'}
 				/>
 			);
 		}
@@ -694,6 +696,8 @@ export const Card = ({
 					alignment={supportingContentAlignment}
 					isDynamo={isDynamo}
 					fillBackgroundOnMobile={isFlexSplash}
+					// we don't show a top rule on podcasts cards as sublinks align with the waveform
+					showTopRule={mainMedia?.type !== 'Audio'}
 				/>
 			</Hide>
 		);
