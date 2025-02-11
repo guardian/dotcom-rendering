@@ -4,6 +4,7 @@
  * If it does, it may become a more standard feature.
  */
 import { css } from '@emotion/react';
+import type { OphanComponentEvent } from '@guardian/libs';
 import { getCookie, isUndefined } from '@guardian/libs';
 import { palette, space } from '@guardian/source/foundations';
 import { getGutterLiveblog } from '@guardian/support-dotcom-components';
@@ -16,7 +17,7 @@ import type {
 	GutterProps,
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/types/props/shared';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { shouldHideSupportMessaging } from '../lib/contributions';
 import { useIsSignedIn } from '../lib/useAuthStatus';
@@ -24,13 +25,7 @@ import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
-import { GutterAsk } from './marketing/gutters/gutterAsk';
-import type { ReactComponent } from './marketing/lib/ReactComponent';
-import {
-	addRegionIdAndTrackingParamsToSupportUrl,
-	createClickEventFromTracking,
-	createInsertEventFromTracking,
-} from './marketing/lib/tracking';
+import { GutterWrapper } from './marketing/gutters/gutterAsk';
 
 // CSS Styling
 // -------------------------------------------
@@ -49,51 +44,57 @@ const stickyLeft = css`
 
 // StickyLiveblogAskWrapper to allow us to create story
 interface StickyLiveblogAskWrapperProps {
-	referrerUrl: string;
 	shouldHideReaderRevenueOnArticle: boolean;
 	sectionId: string | undefined;
 	tags: TagType[];
 	contributionsServiceUrl: string;
+	pageUrl: string;
 }
 
-const whatAmI = 'sticky-liveblog-ask'; // TODO: eventually this will be renamed.
+interface GutterAskBuilderProps {
+	shouldHideReaderRevenueOnArticle: boolean;
+	sectionId: string | undefined;
+	tags: TagType[];
+	contributionsServiceUrl: string;
+	countryCode: string;
+	pageViewId: string;
+	pageUrl: string;
+}
 
-export const StickyLiveblogAskWrapper: ReactComponent<
-	StickyLiveblogAskWrapperProps
-> = ({
-	referrerUrl,
+const GutterAskBuilder = ({
 	shouldHideReaderRevenueOnArticle,
 	sectionId,
 	tags,
 	contributionsServiceUrl,
-}) => {
-	const { renderingTarget } = useConfig();
-	const countryCode = useCountryCode(whatAmI);
-	const pageViewId = usePageViewId(renderingTarget);
-
-	const [showSupportMessagingForUser, setShowSupportMessaging] =
-		useState<boolean>(false);
+	countryCode,
+	pageViewId,
+	pageUrl,
+}: GutterAskBuilderProps) => {
 	const [supportGutterResponse, setSupportGutterResponse] =
 		useState<ModuleData<GutterProps> | null>(null);
 
+	const { renderingTarget } = useConfig();
 	const isSignedIn = useIsSignedIn();
-	const tagIds = tags.map((tag) => tag.id);
 
 	// get gutter props
 	useEffect((): void => {
 		if (isUndefined(countryCode) || isSignedIn === 'Pending') {
 			return;
 		}
+		const tagIds = tags.map((tag) => tag.id);
 
-		setShowSupportMessaging(
-			shouldHideSupportMessaging(isSignedIn) === false,
-		);
+		const hideSupportMessagingForUser =
+			shouldHideSupportMessaging(isSignedIn);
+		if (hideSupportMessagingForUser === 'Pending') {
+			// We don't yet know the user's supporter status
+			return;
+		}
 
 		const payload: GutterPayload = {
 			tracking: {
-				ophanPageId: window.guardian.config.ophan.pageViewId,
+				ophanPageId: pageViewId,
 				platformId: 'GUARDIAN_WEB',
-				referrerUrl: window.location.origin + window.location.pathname,
+				referrerUrl: pageUrl,
 				clientName: 'dcr',
 			},
 			targeting: {
@@ -123,73 +124,73 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 				console.log(msg);
 				// TODO: where to log this?
 			});
-	}, [contributionsServiceUrl, countryCode, isSignedIn, sectionId, tagIds]);
+	}, [
+		countryCode,
+		isSignedIn,
+		contributionsServiceUrl,
+		pageViewId,
+		pageUrl,
+		sectionId,
+		tags,
+	]);
 
-	// tracking
-	const tracking: Tracking = useMemo(() => {
-		return {
-			ophanPageId: pageViewId ?? '',
-			platformId: 'GUARDIAN_WEB',
-			clientName: 'dcr',
-			referrerUrl,
-			// message tests
-			abTestName: supportGutterResponse
-				? supportGutterResponse.props.tracking.abTestName
-				: '',
-			abTestVariant: supportGutterResponse
-				? supportGutterResponse.props.tracking.abTestVariant
-				: '',
-			campaignCode: whatAmI, // TODO: is this still correct?
-			componentType: 'ACQUISITIONS_OTHER', // TODO - this will change in future
-		};
-	}, [pageViewId, referrerUrl, supportGutterResponse]);
-
-	const canShow =
-		showSupportMessagingForUser && !shouldHideReaderRevenueOnArticle;
-
-	// send event regardless of variant or control
-	// but only where they *could* see the component.
-	useEffect(() => {
-		if (canShow) {
-			// For ophan
-			void submitComponentEvent(
-				createInsertEventFromTracking(tracking, tracking.campaignCode),
-				renderingTarget,
-			);
-		}
-	}, [tracking, renderingTarget, canShow]);
-
-	const onCtaClick = () => {
-		void submitComponentEvent(
-			createClickEventFromTracking(tracking, tracking.campaignCode),
-			renderingTarget,
-		);
-	};
+	const canShow = !shouldHideReaderRevenueOnArticle; // TODO: anything else?
 
 	if (supportGutterResponse) {
-		const baseUrl = supportGutterResponse.props.content.cta!.baseUrl; // TODO: forced to be defined - correct?
-		const urlWithRegionAndTracking =
-			addRegionIdAndTrackingParamsToSupportUrl(
-				baseUrl,
-				tracking,
-				undefined,
-				countryCode,
-			);
+		const { props } = supportGutterResponse;
+
+		const tracking: Tracking = {
+			...props.tracking,
+			ophanPageId: pageViewId,
+			platformId: 'GUARDIAN_WEB',
+			referrerUrl: pageUrl,
+		};
+
+		const enrichedProps: GutterProps = {
+			...props,
+			tracking,
+			countryCode,
+			submitComponentEvent: (componentEvent: OphanComponentEvent) =>
+				submitComponentEvent(componentEvent, renderingTarget),
+		};
 
 		return (
 			<>
 				{canShow && (
 					<div css={stickyLeft}>
-						<GutterAsk
-							variant={supportGutterResponse.props.content}
-							enrichedUrl={urlWithRegionAndTracking}
-							onCtaClick={onCtaClick}
-						/>
+						<GutterWrapper {...enrichedProps} />
 					</div>
 				)}
 			</>
 		);
+	} else {
+		return <></>;
 	}
+};
 
-	return <></>; // TODO: is this correct?
+export const StickyLiveblogAskWrapper = ({
+	shouldHideReaderRevenueOnArticle,
+	sectionId,
+	tags,
+	contributionsServiceUrl,
+	pageUrl,
+}: StickyLiveblogAskWrapperProps) => {
+	const whatAmI = 'sticky-liveblog-ask'; // TODO: eventually this will be renamed.
+	const { renderingTarget } = useConfig();
+	const countryCode = useCountryCode(whatAmI);
+	const pageViewId = usePageViewId(renderingTarget);
+
+	if (isUndefined(countryCode) || isUndefined(pageViewId)) return null;
+
+	return (
+		<GutterAskBuilder
+			shouldHideReaderRevenueOnArticle={shouldHideReaderRevenueOnArticle}
+			sectionId={sectionId}
+			tags={tags}
+			contributionsServiceUrl={contributionsServiceUrl}
+			countryCode={countryCode}
+			pageViewId={pageViewId}
+			pageUrl={pageUrl}
+		/>
+	);
 };

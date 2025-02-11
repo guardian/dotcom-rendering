@@ -724,15 +724,15 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											defer={{ until: 'visible' }}
 										>
 											<StickyLiveblogAskWrapper
-												referrerUrl={article.webURL}
 												shouldHideReaderRevenueOnArticle={
 													article.shouldHideReaderRevenue
 												}
-												tags={article.tags}
 												sectionId={article.sectionName}
+												tags={article.tags}
 												contributionsServiceUrl={
 													contributionsServiceUrl
 												}
+												pageUrl={article.webURL}
 											/>
 										</Island>
 									</Hide>
