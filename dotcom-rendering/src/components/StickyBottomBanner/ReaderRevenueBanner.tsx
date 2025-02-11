@@ -297,7 +297,7 @@ export const canShowRRBanner: CanShowFunctionType<
 	};
 	const enrichedProps: BannerProps = {
 		...props,
-		...tracking,
+		tracking,
 		fetchEmail,
 		submitComponentEvent: (componentEvent: OphanComponentEvent) =>
 			void submitComponentEvent(componentEvent, renderingTarget),

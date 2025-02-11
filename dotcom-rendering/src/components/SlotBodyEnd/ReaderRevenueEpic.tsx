@@ -151,7 +151,7 @@ export const canShowReaderRevenueEpic = async (
 	};
 	const enrichedProps: EpicProps = {
 		...props,
-		...tracking,
+		tracking,
 		hasConsentForArticleCount,
 		fetchEmail,
 		submitComponentEvent: (componentEvent: OphanComponentEvent) =>
