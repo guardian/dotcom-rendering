@@ -26,7 +26,7 @@ const requestBodyHasProperties = (
 };
 
 test.describe('The banner', function () {
-	test.skip('makes a request to the support-dotcom-components service', async ({
+	test('makes a request to the support-dotcom-components service', async ({
 		page,
 		context,
 	}) => {

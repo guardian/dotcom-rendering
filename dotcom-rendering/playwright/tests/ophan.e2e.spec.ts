@@ -14,7 +14,7 @@ const articleUrl =
 const frontUrl = 'https://www.theguardian.com/uk';
 
 test.describe('Ophan requests', () => {
-	test.skip('should make an IMPRESSION request on an article when consent is rejected', async ({
+	test('should make an IMPRESSION request on an article when consent is rejected', async ({
 		page,
 	}) => {
 		const ophanImpressionRequestPromise = interceptOphanRequest({

@@ -98,7 +98,7 @@ test.describe('Embeds', () => {
 
 		// Skipping for now as the change to the affiliate disclaimer block has been reverted
 		// https://github.com/guardian/frontend/pull/26749
-		test.skip('should render the affiliate disclaimer block', async ({
+		test('should render the affiliate disclaimer block', async ({
 			page,
 		}) => {
 			await loadPage(
