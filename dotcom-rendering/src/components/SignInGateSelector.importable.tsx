@@ -29,12 +29,12 @@ import { SignInGateAuxia } from './SignInGate/gateDesigns/SignInGateAuxia';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGateMappings';
 import type {
 	AuxiaAPIResponseDataUserTreatment,
+	AuxiaGateDisplayData,
 	AuxiaInteractionActionName,
 	AuxiaInteractionInteractionType,
 	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
 	SDCAuxiaGetTreatmentsProxyResponse,
-	SDCAuxiaGetTreatmentsProxyResponseData,
 	SignInGateComponent,
 } from './SignInGate/types';
 
@@ -435,6 +435,7 @@ interface ShowSignInGateAuxiaProps {
 	abTest: CurrentSignInGateABTest;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
 	contributionsServiceUrl: string;
+	browserId: string;
 	logTreatmentInteractionCall: (
 		interactionType: AuxiaInteractionInteractionType,
 		actionName: AuxiaInteractionActionName,
@@ -489,7 +490,7 @@ const decideDailyArticleCount = (): number => {
 const fetchProxyGetTreatments = async (
 	contributionsServiceUrl: string,
 	pageId: string,
-): Promise<SDCAuxiaGetTreatmentsProxyResponseData | undefined> => {
+): Promise<AuxiaGateDisplayData | undefined> => {
 	const browserId = await decideBrowserIdWithConsentCheck();
 	if (browserId === undefined) {
 		return Promise.resolve(undefined);
@@ -523,7 +524,11 @@ const fetchProxyGetTreatments = async (
 		(await response_raw.json()) as SDCAuxiaGetTreatmentsProxyResponse;
 
 	if (response.status && response.data) {
-		return Promise.resolve(response.data);
+		const answer = {
+			browserId,
+			auxiaData: response.data,
+		};
+		return Promise.resolve(answer);
 	}
 	return Promise.resolve(undefined);
 };
@@ -533,15 +538,8 @@ const auxiaLogTreatmentInteraction = async (
 	userTreatment: AuxiaAPIResponseDataUserTreatment,
 	interactionType: AuxiaInteractionInteractionType,
 	actionName: AuxiaInteractionActionName,
+	browserId: string,
 ): Promise<void> => {
-	const browserId = await decideBrowserIdWithConsentCheck();
-	if (browserId === undefined) {
-		// Technically this should never happen, as we should not be calling this function
-		// since fetchProxyGetTreatments would not have fired up, and the gate not displayed
-		// if we didn't have consent
-		return Promise.resolve(undefined);
-	}
-
 	const url = `${contributionsServiceUrl}/auxia/log-treatment-interaction`;
 	const headers = {
 		'Content-Type': 'application/json',
@@ -579,8 +577,8 @@ const SignInGateSelectorAuxia = ({
 		undefined,
 	);
 
-	const [auxiaGetTreatmentsData, setAuxiaGetTreatmentsData] = useState<
-		SDCAuxiaGetTreatmentsProxyResponseData | undefined
+	const [auxiaGateDisplayData, setAuxiaGateDisplayData] = useState<
+		AuxiaGateDisplayData | undefined
 	>(undefined);
 
 	// We are using CurrentSignInGateABTest, with the details of the Auxia experiment,
@@ -613,7 +611,7 @@ const SignInGateSelectorAuxia = ({
 				pageId,
 			);
 			if (data !== undefined) {
-				setAuxiaGetTreatmentsData(data);
+				setAuxiaGateDisplayData(data);
 			}
 		})().catch((error) => {
 			console.error('Error fetching Auxia display data:', error);
@@ -638,24 +636,28 @@ const SignInGateSelectorAuxia = ({
 	return (
 		<>
 			{!isGateDismissed &&
-				auxiaGetTreatmentsData?.userTreatment !== undefined && (
+				auxiaGateDisplayData?.auxiaData.userTreatment !== undefined && (
 					<ShowSignInGateAuxia
 						host={host}
 						signInUrl={signInUrl}
 						// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 						setShowGate={(show) => setIsGateDismissed(!show)}
 						abTest={abTest}
-						userTreatment={auxiaGetTreatmentsData.userTreatment}
+						userTreatment={
+							auxiaGateDisplayData.auxiaData.userTreatment
+						}
 						contributionsServiceUrl={contributionsServiceUrl}
+						browserId={auxiaGateDisplayData.browserId}
 						logTreatmentInteractionCall={async (
 							interactionType: AuxiaInteractionInteractionType,
 							actionName: AuxiaInteractionActionName,
 						) => {
 							await auxiaLogTreatmentInteraction(
 								contributionsServiceUrl,
-								auxiaGetTreatmentsData.userTreatment!,
+								auxiaGateDisplayData.auxiaData.userTreatment!,
 								interactionType,
 								actionName,
+								auxiaGateDisplayData.browserId,
 							);
 						}}
 					/>
@@ -671,6 +673,7 @@ const ShowSignInGateAuxia = ({
 	abTest,
 	userTreatment,
 	contributionsServiceUrl,
+	browserId,
 	logTreatmentInteractionCall,
 }: ShowSignInGateAuxiaProps) => {
 	const componentId = 'main_variant_5';
@@ -684,6 +687,7 @@ const ShowSignInGateAuxia = ({
 				userTreatment,
 				'VIEWED',
 				'',
+				browserId,
 			);
 		})().catch((error) => {
 			console.error('Failed to log treatment interaction:', error);
