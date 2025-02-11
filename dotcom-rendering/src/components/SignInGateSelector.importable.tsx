@@ -1,6 +1,9 @@
 import { getCookie, isUndefined } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import { shouldHideSupportMessaging } from '../lib/contributions';
+import {
+	hasCmpConsentForBrowserId,
+	shouldHideSupportMessaging,
+} from '../lib/contributions';
 import { getDailyArticleCount, getToday } from '../lib/dailyArticleCount';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { constructQuery } from '../lib/querystring';
@@ -444,12 +447,19 @@ const dismissGateAuxia = (
 	setShowGate(false);
 };
 
-const decideBrowserId = (): string => {
+const decideBrowserIdWithConsentCheck = async (): Promise<
+	string | undefined
+> => {
+	const hasConsent = await hasCmpConsentForBrowserId();
+	if (!hasConsent) {
+		return Promise.resolve(undefined);
+	}
+
 	// The way to get the browserId is:
 	// getCookie({ name: 'bwid', shouldMemoize: true })
 	// but we are not calling it for the moment until we have guidance on
 	// how to handle the bwid cookie in the context of this experiment.
-	return '2598326e7c';
+	return Promise.resolve('2598326e7c');
 };
 
 const decideIsSupporter = (): boolean => {
@@ -480,8 +490,10 @@ const fetchProxyGetTreatments = async (
 	contributionsServiceUrl: string,
 	pageId: string,
 ): Promise<SDCAuxiaGetTreatmentsProxyResponseData | undefined> => {
-	// We are defaulting to empty string if the cookie is not found, because the API expects a string
-	const browserId = decideBrowserId();
+	const browserId = await decideBrowserIdWithConsentCheck();
+	if (browserId === undefined) {
+		return Promise.resolve(undefined);
+	}
 
 	const is_supporter = decideIsSupporter();
 
@@ -522,8 +534,13 @@ const auxiaLogTreatmentInteraction = async (
 	interactionType: AuxiaInteractionInteractionType,
 	actionName: AuxiaInteractionActionName,
 ): Promise<void> => {
-	// We are defaulting to empty string if the cookie is not found, because the API expects a string
-	const browserId = decideBrowserId();
+	const browserId = await decideBrowserIdWithConsentCheck();
+	if (browserId === undefined) {
+		// Technically this should never happen, as we should not be calling this function
+		// since fetchProxyGetTreatments would not have fired up, and the gate not displayed
+		// if we didn't have consent
+		return Promise.resolve(undefined);
+	}
 
 	const url = `${contributionsServiceUrl}/auxia/log-treatment-interaction`;
 	const headers = {
