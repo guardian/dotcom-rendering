@@ -113,7 +113,6 @@ export const FootballDataLayout = () =>
 				<main id="maincontent">
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<FootballMatchesPage
-							title=""
 							nations={nations}
 							guardianBaseUrl={'https://www.theguardian.com'}
 							kind={'Fixture'}
