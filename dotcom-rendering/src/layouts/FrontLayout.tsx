@@ -288,7 +288,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					const trails = collection.curated.concat(
 						collection.backfill,
 					);
-					const [trail] = trails;
+					const [trail] = trails.map((tr) => ({
+						...tr,
+						isInLoopVideoTest: isInLoopVideoTest && index === 0,
+					}));
 
 					// There are some containers that have zero trails. We don't want to render these
 					if (!trail) return null;
@@ -309,12 +312,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						? trails.map((labTrail) => ({
 								...labTrail,
 								branding: undefined,
-								isInLoopVideoTest,
 						  }))
-						: trails.map((singleTrail) => ({
-								...singleTrail,
-								isInLoopVideoTest,
-						  }));
+						: trails;
 
 					// We also need to remove the branding for the cards in grouped
 					// trails for dynamic containers

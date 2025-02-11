@@ -61,8 +61,3 @@ export const testVideoCollection: DCRCollectionType = {
 		showDateHeader: false,
 	},
 };
-
-export const isInLoopTest = (linkTo: string, index: number): boolean =>
-	index === 0 &&
-	linkTo ===
-		'/science/audio/2024/dec/12/does-googles-mindboggling-new-chip-bring-quantum-computers-any-closer-podcast';
