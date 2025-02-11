@@ -42,10 +42,10 @@ export const SignInGateAuxia = ({
 		"title": "Sign in for a personlised Guardian experience",
 		"subtitle": "Get less asks for support and more personalised recommendations",
 		"body": "By signing into your Guardian account you'll provide us with insights into your preferences that will result in a more personalised experience, including less frequent asks to support. You'll always be able to control your preferences in your own privacy settings.",
+		"privacy_button_name": "privacy settings"
 		"first_cta_name": "Sign in",
 		"first_cta_link": "https://profile.theguardian.com/signin?",
 		"second_cta_name": "I'll do it later",
-		"privacy_button_name": "privacy settings"
 	}
 
 	The component must be written to gracefully handle empty values for the following field:
