@@ -1,5 +1,7 @@
 import { getCookie, isUndefined } from '@guardian/libs';
 import { useEffect, useState } from 'react';
+import { shouldHideSupportMessaging } from '../lib/contributions';
+import { getDailyArticleCount, getToday } from '../lib/dailyArticleCount';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { constructQuery } from '../lib/querystring';
 import { useAB } from '../lib/useAB';
@@ -28,7 +30,8 @@ import type {
 	AuxiaInteractionInteractionType,
 	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
-	SDCAuxiaProxyResponseData,
+	SDCAuxiaGetTreatmentsProxyResponse,
+	SDCAuxiaGetTreatmentsProxyResponseData,
 	SignInGateComponent,
 } from './SignInGate/types';
 
@@ -441,25 +444,76 @@ const dismissGateAuxia = (
 	setShowGate(false);
 };
 
+const decideBrowserId = (): string => {
+	// The way to get the browserId is:
+	// getCookie({ name: 'bwid', shouldMemoize: true })
+	// but we are not calling it for the moment until we have guidance on
+	// how to handle the bwid cookie in the context of this experiment.
+	return '2598326e7c';
+};
+
+const decideIsSupporter = (): boolean => {
+	// nb: We will not be calling the Auxia API if the user is signed in, so we can set isSignedIn to false.
+	const isSignedIn = false;
+	const is_supporter = shouldHideSupportMessaging(isSignedIn);
+	if (is_supporter === 'Pending') {
+		return true;
+	}
+	return is_supporter;
+};
+
+const decideDailyArticleCount = (): number => {
+	const value = getDailyArticleCount();
+	if (value === undefined) {
+		return 0;
+	}
+	const today = getToday(); // number of days since unix epoch for today date
+	for (const daily of value) {
+		if (daily.day === today) {
+			return daily.count;
+		}
+	}
+	return 0;
+};
+
 const fetchProxyGetTreatments = async (
 	contributionsServiceUrl: string,
-): Promise<SDCAuxiaProxyResponseData> => {
+	pageId: string,
+): Promise<SDCAuxiaGetTreatmentsProxyResponseData | undefined> => {
+	// We are defaulting to empty string if the cookie is not found, because the API expects a string
+	const browserId = decideBrowserId();
+
+	const is_supporter = decideIsSupporter();
+
+	const daily_article_count = decideDailyArticleCount();
+
+	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
+	const article_identifier = `www.theguardian.com/${pageId}`;
+
 	const url = `${contributionsServiceUrl}/auxia/get-treatments`;
 	const headers = {
 		'Content-Type': 'application/json',
 	};
-	const payload = {};
+	const payload = {
+		browserId,
+		is_supporter,
+		daily_article_count,
+		article_identifier,
+	};
 	const params = {
 		method: 'POST',
 		headers,
 		body: JSON.stringify(payload),
 	};
 
-	const response = await fetch(url, params);
+	const response_raw = await fetch(url, params);
+	const response =
+		(await response_raw.json()) as SDCAuxiaGetTreatmentsProxyResponse;
 
-	const data = (await response.json()) as SDCAuxiaProxyResponseData;
-
-	return Promise.resolve(data);
+	if (response.status && response.data) {
+		return Promise.resolve(response.data);
+	}
+	return Promise.resolve(undefined);
 };
 
 const auxiaLogTreatmentInteraction = async (
@@ -468,12 +522,16 @@ const auxiaLogTreatmentInteraction = async (
 	interactionType: AuxiaInteractionInteractionType,
 	actionName: AuxiaInteractionActionName,
 ): Promise<void> => {
+	// We are defaulting to empty string if the cookie is not found, because the API expects a string
+	const browserId = decideBrowserId();
+
 	const url = `${contributionsServiceUrl}/auxia/log-treatment-interaction`;
 	const headers = {
 		'Content-Type': 'application/json',
 	};
 	const microTime = Date.now() * 1000;
 	const payload = {
+		browserId,
 		treatmentTrackingId: userTreatment.treatmentTrackingId,
 		treatmentId: userTreatment.treatmentId,
 		surface: userTreatment.surface,
@@ -505,7 +563,7 @@ const SignInGateSelectorAuxia = ({
 	);
 
 	const [auxiaGetTreatmentsData, setAuxiaGetTreatmentsData] = useState<
-		SDCAuxiaProxyResponseData | undefined
+		SDCAuxiaGetTreatmentsProxyResponseData | undefined
 	>(undefined);
 
 	// We are using CurrentSignInGateABTest, with the details of the Auxia experiment,
@@ -533,8 +591,13 @@ const SignInGateSelectorAuxia = ({
 
 	useOnce(() => {
 		void (async () => {
-			const data = await fetchProxyGetTreatments(contributionsServiceUrl);
-			setAuxiaGetTreatmentsData(data);
+			const data = await fetchProxyGetTreatments(
+				contributionsServiceUrl,
+				pageId,
+			);
+			if (data !== undefined) {
+				setAuxiaGetTreatmentsData(data);
+			}
 		})().catch((error) => {
 			console.error('Error fetching Auxia display data:', error);
 		});

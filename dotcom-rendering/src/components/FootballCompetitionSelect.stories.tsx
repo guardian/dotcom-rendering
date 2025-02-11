@@ -38,6 +38,7 @@ export const FootballCompetitionSelect = {
 				],
 			},
 		],
+		kind: 'Result',
 		onChange: fn(),
 	},
 	play: async ({ args, canvasElement }) => {
