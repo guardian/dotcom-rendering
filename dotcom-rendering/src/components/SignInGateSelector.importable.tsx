@@ -456,11 +456,11 @@ const decideBrowserIdWithConsentCheck = async (): Promise<
 		return Promise.resolve(undefined);
 	}
 
-	// The way to get the browserId is:
-	// getCookie({ name: 'bwid', shouldMemoize: true })
-	// but we are not calling it for the moment until we have guidance on
-	// how to handle the bwid cookie in the context of this experiment.
-	return Promise.resolve('2598326e7c');
+	const cookie = getCookie({ name: 'bwid', shouldMemoize: true });
+	if (cookie === null) {
+		return Promise.resolve(undefined);
+	}
+	return Promise.resolve(cookie);
 };
 
 const decideIsSupporter = (): boolean => {
