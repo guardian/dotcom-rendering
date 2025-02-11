@@ -58,7 +58,7 @@ const getAuthStatus = getAuthStatus_ as jest.MockedFunction<
 	typeof getAuthStatus_
 >;
 
-const setAllFeaturesData = (opts: { isExpired: boolean }) => {
+const setAllBenefitsData = (opts: { isExpired: boolean }) => {
 	const daysToExpiry = opts.isExpired ? -1 : 1;
 	extendCookieExpiry(HIDE_SUPPORT_MESSAGING_COOKIE, daysToExpiry);
 	extendCookieExpiry(AD_FREE_USER_COOKIE, daysToExpiry);
@@ -71,7 +71,7 @@ beforeAll(() => {
 	window.guardian.config.tests['useUserBenefitsApiVariant'] = 'variant';
 });
 
-const expectUserFeatureExpiryCookieHasBeenSetCorrectly = () => {
+const expectUserBenefitExpiryCookieHasBeenSetCorrectly = () => {
 	const expectedNextRefreshDate = new Date(
 		timeInDaysFromNow(1),
 	).toDateString();
@@ -92,10 +92,10 @@ const expectAllCookiesToBeSet = () => {
 	expect(getAdFreeCookie()).toBeTruthy();
 	expect(getHideSupportMessagingCookie()).toBeTruthy();
 	expect(getAllowRejectAllCookie()).toBeTruthy();
-	expectUserFeatureExpiryCookieHasBeenSetCorrectly();
+	expectUserBenefitExpiryCookieHasBeenSetCorrectly();
 };
 
-describe('Refreshing the features data', () => {
+describe('Refreshing the benefits data', () => {
 	describe('If user signed in', () => {
 		beforeEach(() => {
 			jest.resetAllMocks();
@@ -110,36 +110,36 @@ describe('Refreshing the features data', () => {
 			deleteAllCookies();
 			await refresh();
 			expect(fetchJsonSpy).toHaveBeenCalledTimes(1);
-			expectUserFeatureExpiryCookieHasBeenSetCorrectly();
+			expectUserBenefitExpiryCookieHasBeenSetCorrectly();
 		});
 
 		it('Performs an update if the user has expired data', async () => {
-			setAllFeaturesData({ isExpired: true });
+			setAllBenefitsData({ isExpired: true });
 			await refresh();
 			expect(fetchJsonSpy).toHaveBeenCalledTimes(1);
 		});
 
 		it(
 			'Deletes all expired user benefits cookies if the api response does not contain the benefit, ' +
-				'but does not delete the user features expiry cookie (so we know when next to check for benefits)',
+				'but does not delete the user benefits expiry cookie (so we know when next to check for benefits)',
 			async () => {
 				fetchJsonSpy.mockReturnValueOnce(Promise.resolve(noBenefits));
-				setAllFeaturesData({ isExpired: true });
+				setAllBenefitsData({ isExpired: true });
 				await refresh();
 				expectAllBenefitsCookiesToBeDeleted();
-				expectUserFeatureExpiryCookieHasBeenSetCorrectly();
+				expectUserBenefitExpiryCookieHasBeenSetCorrectly();
 			},
 		);
 
 		it('Does not delete non-expired user benefits cookies even if the api response does not contain the benefit', async () => {
 			fetchJsonSpy.mockReturnValueOnce(Promise.resolve(noBenefits));
-			setAllFeaturesData({ isExpired: false });
+			setAllBenefitsData({ isExpired: false });
 			await refresh();
 			expectAllCookiesToBeSet();
 		});
 
 		it('Does not perform an update if user has non-expired user benefits data', async () => {
-			setAllFeaturesData({ isExpired: false });
+			setAllBenefitsData({ isExpired: false });
 			await refresh();
 			expect(fetchJsonSpy).not.toHaveBeenCalled();
 		});
@@ -159,13 +159,13 @@ describe('If user signed out', () => {
 	});
 
 	it('Does not delete non-expired user benefits cookies', async () => {
-		setAllFeaturesData({ isExpired: false });
+		setAllBenefitsData({ isExpired: false });
 		await refresh();
 		expectAllCookiesToBeSet();
 	});
 
 	it('Does delete expired user benefits cookies', async () => {
-		setAllFeaturesData({ isExpired: true });
+		setAllBenefitsData({ isExpired: true });
 		await refresh();
 		expectAllBenefitsCookiesToBeDeleted();
 		expect(getUserBenefitsExpiryCookie()).toBeNull();
