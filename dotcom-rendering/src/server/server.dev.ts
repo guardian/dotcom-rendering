@@ -1,5 +1,5 @@
 import type { Handler } from 'express';
-import { version } from 'React';
+import { version } from 'react';
 import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
 import { handleAMPArticle } from './handler.article.amp';
 import {

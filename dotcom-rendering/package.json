@@ -159,8 +159,6 @@
 		"mockdate": "3.0.5",
 		"node-fetch": "3.3.2",
 		"postcss-styled-syntax": "0.6.3",
-		"preact": "10.15.1",
-		"preact-render-to-string": "6.0.2",
 		"react": "18.3.1",
 		"react-dom": "18.3.1",
 		"react-google-recaptcha": "3.1.0",
