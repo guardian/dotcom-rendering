@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
-import { GutterAsk } from './gutterAsk';
+import { GutterAsk } from './GutterAsk';
 import { props } from './utils/storybook';
 
 const { variant, enrichedUrl, onCtaClick } = props;

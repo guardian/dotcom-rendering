@@ -25,7 +25,7 @@ import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
-import { GutterWrapper } from './marketing/gutters/gutterAsk';
+import { GutterWrapper } from './marketing/gutters/GutterAsk';
 
 // CSS Styling
 // -------------------------------------------

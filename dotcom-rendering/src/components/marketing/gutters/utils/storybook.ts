@@ -1,5 +1,5 @@
 import type { GutterContent } from '@guardian/support-dotcom-components/dist/shared/types';
-import type { GutterAskRenderProps } from '../gutterAsk';
+import type { GutterAskRenderProps } from '../GutterAsk';
 
 const variant: GutterContent = {
 	image: {
