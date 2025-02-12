@@ -1192,12 +1192,14 @@ export const Card = ({
 
 			<div
 				css={
-					/** If beta containers have liveblog links or sublink links in the outer position, we set flex-basis so that they sit below the image */
+					/** We allow this area to take up more space so that cards without sublinks next to cards with sublinks have the same meta alignment */
 					isBetaContainer &&
-					(liveUpdatesPosition === 'outer' ||
-						sublinkPosition === 'outer') &&
+					(imagePositionOnDesktop === 'left' ||
+						imagePositionOnDesktop === 'right') &&
 					css`
-						flex-basis: 100%;
+						${from.tablet} {
+							flex-basis: 100%;
+						}
 					`
 				}
 				style={{
