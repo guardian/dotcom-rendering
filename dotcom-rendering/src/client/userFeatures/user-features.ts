@@ -7,7 +7,7 @@
 import { getAuthStatus, isUserLoggedInOktaRefactor } from '../../lib/identity';
 import { AD_FREE_USER_COOKIE } from './cookies/adFree';
 import { ALLOW_REJECT_ALL_COOKIE } from './cookies/allowRejectAll';
-import { extendCookieExpiry } from './cookies/cookieHelpers';
+import { createOrRenewCookie } from './cookies/cookieHelpers';
 import { HIDE_SUPPORT_MESSAGING_COOKIE } from './cookies/hideSupportMessaging';
 import {
 	USER_BENEFITS_EXPIRY_COOKIE,
@@ -42,15 +42,15 @@ const requestNewData = async () => {
 };
 
 const persistResponse = (userBenefitsResponse: UserBenefits) => {
-	extendCookieExpiry(USER_BENEFITS_EXPIRY_COOKIE);
+	createOrRenewCookie(USER_BENEFITS_EXPIRY_COOKIE);
 	if (userBenefitsResponse.hideSupportMessaging) {
-		extendCookieExpiry(HIDE_SUPPORT_MESSAGING_COOKIE);
+		createOrRenewCookie(HIDE_SUPPORT_MESSAGING_COOKIE);
 	}
 	if (userBenefitsResponse.allowRejectAll) {
-		extendCookieExpiry(ALLOW_REJECT_ALL_COOKIE);
+		createOrRenewCookie(ALLOW_REJECT_ALL_COOKIE);
 	}
 	if (userBenefitsResponse.adFree) {
-		extendCookieExpiry(AD_FREE_USER_COOKIE);
+		createOrRenewCookie(AD_FREE_USER_COOKIE);
 	}
 };
 

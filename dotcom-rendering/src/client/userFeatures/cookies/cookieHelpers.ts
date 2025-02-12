@@ -10,7 +10,7 @@ export const timeInDaysFromNow = (daysFromNow: number): number => {
 	return tmpDate.getTime();
 };
 
-export const extendCookieExpiry = (
+export const createOrRenewCookie = (
 	cookieName: string,
 	daysTillExpiry: number = 1,
 ): void => {

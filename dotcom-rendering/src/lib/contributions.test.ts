@@ -1,6 +1,6 @@
 import { setCookie, storage } from '@guardian/libs';
 import MockDate from 'mockdate';
-import { extendCookieExpiry } from '../client/userFeatures/cookies/cookieHelpers';
+import { createOrRenewCookie } from '../client/userFeatures/cookies/cookieHelpers';
 import { HIDE_SUPPORT_MESSAGING_COOKIE } from '../client/userFeatures/cookies/hideSupportMessaging';
 import { USER_BENEFITS_EXPIRY_COOKIE } from '../client/userFeatures/cookies/userBenefitsExpiry';
 import {
@@ -182,12 +182,12 @@ describe('hasSupporterCookie', () => {
 	beforeEach(clearAllCookies);
 
 	it('returns false if user features expiry cookie exists but hide support messaging does not', () => {
-		extendCookieExpiry(USER_BENEFITS_EXPIRY_COOKIE);
+		createOrRenewCookie(USER_BENEFITS_EXPIRY_COOKIE);
 		expect(hasHideSupportMessagingCookie(true)).toEqual(false);
 	});
 
 	it('returns true if cookie exists and is non-expired', () => {
-		extendCookieExpiry(HIDE_SUPPORT_MESSAGING_COOKIE);
+		createOrRenewCookie(HIDE_SUPPORT_MESSAGING_COOKIE);
 		expect(hasHideSupportMessagingCookie(true)).toEqual(true);
 	});
 

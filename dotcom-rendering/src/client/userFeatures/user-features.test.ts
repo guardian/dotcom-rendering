@@ -10,8 +10,8 @@ import {
 	getAllowRejectAllCookie,
 } from './cookies/allowRejectAll';
 import {
+	createOrRenewCookie,
 	deleteAllCookies,
-	extendCookieExpiry,
 	timeInDaysFromNow,
 } from './cookies/cookieHelpers';
 import {
@@ -60,10 +60,10 @@ const getAuthStatus = getAuthStatus_ as jest.MockedFunction<
 
 const setAllBenefitsData = (opts: { isExpired: boolean }) => {
 	const daysToExpiry = opts.isExpired ? -1 : 1;
-	extendCookieExpiry(HIDE_SUPPORT_MESSAGING_COOKIE, daysToExpiry);
-	extendCookieExpiry(AD_FREE_USER_COOKIE, daysToExpiry);
-	extendCookieExpiry(ALLOW_REJECT_ALL_COOKIE, daysToExpiry);
-	extendCookieExpiry(USER_BENEFITS_EXPIRY_COOKIE, daysToExpiry);
+	createOrRenewCookie(HIDE_SUPPORT_MESSAGING_COOKIE, daysToExpiry);
+	createOrRenewCookie(AD_FREE_USER_COOKIE, daysToExpiry);
+	createOrRenewCookie(ALLOW_REJECT_ALL_COOKIE, daysToExpiry);
+	createOrRenewCookie(USER_BENEFITS_EXPIRY_COOKIE, daysToExpiry);
 };
 
 beforeAll(() => {
