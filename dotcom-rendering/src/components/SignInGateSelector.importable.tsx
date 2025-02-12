@@ -442,12 +442,6 @@ interface ShowSignInGateAuxiaProps {
 	) => Promise<void>;
 }
 
-const dismissGateAuxia = (
-	setShowGate: React.Dispatch<React.SetStateAction<boolean>>,
-) => {
-	setShowGate(false);
-};
-
 const decideBrowserIdWithConsentCheck = async (): Promise<
 	string | undefined
 > => {
@@ -716,7 +710,7 @@ const ShowSignInGateAuxia = ({
 		guUrl: host,
 		signInUrl,
 		dismissGate: () => {
-			dismissGateAuxia(setShowGate);
+			setShowGate(false);
 		},
 		abTest,
 		ophanComponentId: componentId,
