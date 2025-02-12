@@ -233,6 +233,8 @@ const SignInGateSelectorDefault = ({
 	>(undefined);
 	const [canShowGate, setCanShowGate] = useState(false);
 
+	console.log('!!! isGateDismissed Auxia', isGateDismissed);
+
 	const { renderingTarget } = useConfig();
 	const gateSelector = useSignInGateSelector();
 	const pageViewId = usePageViewId(renderingTarget);
@@ -376,25 +378,29 @@ export const SignInGateSelector = ({
 	);
 
 	if (!userIsInAuxiaExperiment) {
-		return SignInGateSelectorDefault({
-			contentType,
-			sectionId,
-			tags,
-			isPaidContent,
-			isPreview,
-			host,
-			pageId,
-			idUrl,
-			switches,
-			contributionsServiceUrl,
-		});
+		return (
+			<SignInGateSelectorDefault
+				contentType={contentType}
+				sectionId={sectionId}
+				tags={tags}
+				isPaidContent={isPaidContent}
+				isPreview={isPreview}
+				host={host}
+				pageId={pageId}
+				idUrl={idUrl}
+				switches={switches}
+				contributionsServiceUrl={contributionsServiceUrl}
+			/>
+		);
 	} else {
-		return SignInGateSelectorAuxia({
-			host,
-			pageId,
-			idUrl,
-			contributionsServiceUrl,
-		});
+		return (
+			<SignInGateSelectorAuxia
+				host={host}
+				pageId={pageId}
+				idUrl={idUrl}
+				contributionsServiceUrl={contributionsServiceUrl}
+			/>
+		);
 	}
 };
 
@@ -451,7 +457,7 @@ const dismissGateAuxia = (
 const decideBrowserIdWithConsentCheck = async (): Promise<
 	string | undefined
 > => {
-	return Promise.resolve('test')
+	return Promise.resolve('test');
 	const hasConsent = await hasCmpConsentForBrowserId();
 	if (!hasConsent) {
 		return Promise.resolve(undefined);
@@ -596,6 +602,8 @@ const SignInGateSelectorAuxia = ({
 		undefined,
 	);
 
+	console.log('!!! isGateDismissed', isGateDismissed);
+
 	const [auxiaGateDisplayData, setAuxiaGateDisplayData] = useState<
 		AuxiaGateDisplayData | undefined
 	>(undefined);
@@ -651,8 +659,6 @@ const SignInGateSelectorAuxia = ({
 	} satisfies Parameters<typeof generateGatewayUrl>[1];
 
 	const signInUrl = generateGatewayUrl('signin', ctaUrlParams);
-
-	console.log('isGateDismissed', isGateDismissed);
 
 	return (
 		<>
