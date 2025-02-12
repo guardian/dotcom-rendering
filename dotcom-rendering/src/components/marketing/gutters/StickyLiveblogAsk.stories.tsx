@@ -7,7 +7,7 @@ import { props } from './utils/storybook';
 
 const { variant, enrichedUrl, onCtaClick } = props;
 
-const Wrapper = ({ children }: { children: React.ReactNode }) => (
+const VisualWrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			margin-left: ${space[5]}px;
@@ -35,9 +35,9 @@ const meta: Meta<Props> = {
 			? JSON.parse(lzstring.decompressFromEncodedURIComponent(json))
 			: {};
 		return (
-			<Wrapper>
+			<VisualWrapper>
 				<GutterAsk {...args} {...jsonProps} />
-			</Wrapper>
+			</VisualWrapper>
 		);
 	},
 };

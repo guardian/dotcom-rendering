@@ -17,12 +17,6 @@ import {
 	createClickEventFromTracking,
 } from '../lib/tracking';
 
-export interface GutterAskRenderProps {
-	variant?: GutterContent;
-	enrichedUrl: string;
-	onCtaClick: () => void;
-}
-
 export const GutterWrapper: ReactComponent<GutterProps> = (
 	props: GutterProps,
 ) => {
@@ -101,21 +95,7 @@ export const GutterWrapper: ReactComponent<GutterProps> = (
 	);
 };
 
-type CopyProps = {
-	paragraphs: string[];
-};
-
-const Copy: ReactComponent<CopyProps> = ({ paragraphs }: CopyProps) => {
-	return (
-		<>
-			{paragraphs.map((paragraph, idx) => (
-				<p key={idx}>{paragraph}</p>
-			))}
-		</>
-	);
-};
-
-// start CSS styling --------------------------------------
+// Component styling --------------------------------------
 
 const container = css`
 	background: ${palette.neutral[100]};
@@ -174,7 +154,27 @@ const contributionsTheme = {
 	link: buttonStyles,
 };
 
-// end styling -------------------------------------------
+// Displayed components -----------------------------------
+
+type CopyProps = {
+	paragraphs: string[];
+};
+
+const Copy: ReactComponent<CopyProps> = ({ paragraphs }: CopyProps) => {
+	return (
+		<>
+			{paragraphs.map((paragraph, idx) => (
+				<p key={idx}>{paragraph}</p>
+			))}
+		</>
+	);
+};
+
+export interface GutterAskRenderProps {
+	variant?: GutterContent;
+	enrichedUrl: string;
+	onCtaClick: () => void;
+}
 
 export const GutterAsk: ReactComponent<GutterAskRenderProps> = ({
 	variant,

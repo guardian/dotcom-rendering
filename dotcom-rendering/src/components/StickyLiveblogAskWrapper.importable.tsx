@@ -1,8 +1,3 @@
-/**
- * @file
- * This is a hard coded support ask as a test to see if it works.
- * If it does, it may become a more standard feature.
- */
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
 import { getCookie, isUndefined } from '@guardian/libs';
@@ -27,31 +22,7 @@ import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
 import { GutterWrapper } from './marketing/gutters/GutterAsk';
 
-// CSS Styling
-// -------------------------------------------
-
-// outer container handles the position and stickiness
-const stickyLeft = css`
-	background: ${palette.neutral[100]};
-	position: sticky;
-	top: ${space[3]}px;
-	width: 220px;
-	margin-left: ${space[5]}px;
-	margin-top: ${space[6]}px;
-`;
-
-// -------------------------------------------
-
-// StickyLiveblogAskWrapper to allow us to create story
-interface StickyLiveblogAskWrapperProps {
-	shouldHideReaderRevenueOnArticle: boolean;
-	sectionId: string | undefined;
-	tags: TagType[];
-	contributionsServiceUrl: string;
-	pageUrl: string;
-}
-
-interface GutterAskBuilderProps {
+interface GutterLiveblogAskBuilderProps {
 	shouldHideReaderRevenueOnArticle: boolean;
 	sectionId: string | undefined;
 	tags: TagType[];
@@ -61,7 +32,7 @@ interface GutterAskBuilderProps {
 	pageUrl: string;
 }
 
-const GutterAskBuilder = ({
+const GutterLiveblogAskBuilder = ({
 	shouldHideReaderRevenueOnArticle,
 	sectionId,
 	tags,
@@ -69,7 +40,7 @@ const GutterAskBuilder = ({
 	countryCode,
 	pageViewId,
 	pageUrl,
-}: GutterAskBuilderProps) => {
+}: GutterLiveblogAskBuilderProps) => {
 	const [supportGutterResponse, setSupportGutterResponse] =
 		useState<ModuleData<GutterProps> | null>(null);
 
@@ -107,14 +78,16 @@ const GutterAskBuilder = ({
 		getGutterLiveblog(contributionsServiceUrl, payload)
 			.then((response: ModuleDataResponse<GutterProps>) => {
 				if (!response.data) {
-					throw new Error('Not response.data returned'); // TODO: appropriate?
+					throw new Error(
+						'No response.data returned from getGutterLiveblog',
+					); // TODO: appropriate?
 				}
 
 				const { module } = response.data;
 				setSupportGutterResponse(module);
 			})
 			.catch((error) => {
-				const msg = `Error importing Gutter Props: ${String(error)}`;
+				const msg = `Error: ${String(error)}`;
 				console.log(msg);
 				// TODO: where to log this?
 			});
@@ -162,6 +135,26 @@ const GutterAskBuilder = ({
 	}
 };
 
+// -------------------------------------------------------
+
+// CSS outer container handles the position and stickiness
+const stickyLeft = css`
+	background: ${palette.neutral[100]};
+	position: sticky;
+	top: ${space[3]}px;
+	width: 220px;
+	margin-left: ${space[5]}px;
+	margin-top: ${space[6]}px;
+`;
+
+interface StickyLiveblogAskWrapperProps {
+	shouldHideReaderRevenueOnArticle: boolean;
+	sectionId: string | undefined;
+	tags: TagType[];
+	contributionsServiceUrl: string;
+	pageUrl: string;
+}
+
 export const StickyLiveblogAskWrapper = ({
 	shouldHideReaderRevenueOnArticle,
 	sectionId,
@@ -177,7 +170,7 @@ export const StickyLiveblogAskWrapper = ({
 	if (isUndefined(countryCode) || isUndefined(pageViewId)) return null;
 
 	return (
-		<GutterAskBuilder
+		<GutterLiveblogAskBuilder
 			shouldHideReaderRevenueOnArticle={shouldHideReaderRevenueOnArticle}
 			sectionId={sectionId}
 			tags={tags}

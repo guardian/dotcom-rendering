@@ -20,6 +20,6 @@ const enrichedUrl = 'https://www.theguardian.com/uk';
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const onCtaClick = () => {
 	return undefined;
-}; // TODO: temporary...
+};
 
 export const props: GutterAskRenderProps = { variant, enrichedUrl, onCtaClick };
