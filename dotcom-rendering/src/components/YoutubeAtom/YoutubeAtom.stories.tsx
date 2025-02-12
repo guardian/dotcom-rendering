@@ -142,14 +142,7 @@ const baseConfiguration = {
 	adTargeting: disableAds,
 	consentState: consentGiven,
 	renderingTarget: 'Web',
-	renderOverlay: ({
-		uniqueId,
-		posterImage,
-		title,
-		height,
-		width,
-		onClick,
-	}) => (
+	renderOverlay: ({ uniqueId, posterImage, height, width, onClick }) => (
 		<YoutubeAtomCardOverlay
 			format={{
 				theme: Pillar.News,
@@ -161,7 +154,7 @@ const baseConfiguration = {
 			alt="Microscopic image of COVID"
 			uniqueId={uniqueId}
 			posterImage={posterImage}
-			title={title}
+			title=""
 			height={height}
 			width={width}
 			onClick={onClick}
@@ -195,14 +188,7 @@ export const WithPosterImage = {
 		posterImage:
 			'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/1920.jpg',
 		title: 'How Donald Trump’s broken promises failed Ohio | Anywhere but Washington',
-		renderOverlay: ({
-			uniqueId,
-			posterImage,
-			title,
-			height,
-			width,
-			onClick,
-		}) => (
+		renderOverlay: ({ uniqueId, posterImage, height, width, onClick }) => (
 			<YoutubeAtomCardOverlay
 				format={{
 					theme: Pillar.Sport,
@@ -213,7 +199,9 @@ export const WithPosterImage = {
 				duration={252}
 				uniqueId={uniqueId}
 				posterImage={posterImage}
-				title={title}
+				title={
+					'How Donald Trump’s broken promises failed Ohio | Anywhere but Washington'
+				}
 				height={height}
 				width={width}
 				onClick={onClick}
@@ -472,14 +460,7 @@ export const LiveStream = {
 		height: undefined,
 		width: undefined,
 		title: 'How to stop the spread of coronavirus',
-		renderOverlay: ({
-			uniqueId,
-			posterImage,
-			title,
-			height,
-			width,
-			onClick,
-		}) => (
+		renderOverlay: ({ uniqueId, posterImage, height, width, onClick }) => (
 			<YoutubeAtomCardOverlay
 				format={{
 					theme: Pillar.News,
@@ -491,7 +472,7 @@ export const LiveStream = {
 				alt="Microscopic image of COVID"
 				uniqueId={uniqueId}
 				posterImage={posterImage}
-				title={title}
+				title={'How to stop the spread of coronavirus'}
 				height={height}
 				width={width}
 				onClick={onClick}

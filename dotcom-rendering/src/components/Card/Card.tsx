@@ -913,12 +913,18 @@ export const Card = ({
 												renderOverlay={({
 													uniqueId,
 													posterImage,
-													title,
 													height,
 													width,
 													onClick,
 												}) => (
 													<YoutubeAtomCardOverlay
+														uniqueId={uniqueId}
+														posterImage={
+															posterImage
+														}
+														height={height}
+														width={width}
+														onClick={onClick}
 														alt={headlineText}
 														kicker={kickerText}
 														format={format}
@@ -961,14 +967,7 @@ export const Card = ({
 															imagePositionOnMobile ===
 																'right'
 														}
-														uniqueId={uniqueId}
-														posterImage={
-															posterImage
-														}
-														title={title}
-														height={height}
-														width={width}
-														onClick={onClick}
+														title={headlineText}
 													/>
 												)}
 												enableAds={false}

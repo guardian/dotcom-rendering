@@ -42,14 +42,12 @@ export type Props = {
 	renderOverlay: ({
 		uniqueId,
 		posterImage,
-		title,
 		height,
 		width,
 		onClick,
 	}: {
 		uniqueId: string;
-		posterImage: string | undefined;
-		title: string | undefined;
+		posterImage: string;
 		height: number;
 		width: number;
 		onClick: () => void;
@@ -214,7 +212,6 @@ export const YoutubeAtom = ({
 						renderOverlay({
 							uniqueId,
 							posterImage,
-							title,
 							height,
 							width,
 							onClick: () => setOverlayClicked(true),

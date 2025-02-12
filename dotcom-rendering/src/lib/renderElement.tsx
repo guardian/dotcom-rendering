@@ -858,21 +858,20 @@ export const renderElement = ({
 						renderOverlay={({
 							uniqueId,
 							posterImage,
-							title,
 							height,
 							width,
 							onClick,
 						}) => (
 							<YoutubeAtomCardOverlay
-								alt={element.altText}
-								format={format}
-								hidePillOnMobile={false}
 								uniqueId={uniqueId}
 								posterImage={posterImage}
-								title={title}
 								height={height}
 								width={width}
 								onClick={onClick}
+								alt={element.altText}
+								format={format}
+								hidePillOnMobile={false}
+								title={element.mediaTitle}
 							/>
 						)}
 					/>

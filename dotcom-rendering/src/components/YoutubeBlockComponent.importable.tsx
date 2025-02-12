@@ -21,10 +21,15 @@ type Props = {
 	format: ArticleFormat;
 	stickyVideos: boolean;
 	enableAds: boolean;
-	renderOverlay: (settings: {
+	renderOverlay: ({
+		uniqueId,
+		posterImage,
+		height,
+		width,
+		onClick,
+	}: {
 		uniqueId: string;
 		posterImage: string | undefined;
-		title: string | undefined;
 		height: number;
 		width: number;
 		onClick: () => void;

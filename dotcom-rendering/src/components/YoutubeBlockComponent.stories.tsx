@@ -58,7 +58,6 @@ export const Default = () => {
 				renderOverlay={({
 					uniqueId,
 					posterImage,
-					title,
 					height,
 					width,
 					onClick,
@@ -72,7 +71,9 @@ export const Default = () => {
 						hidePillOnMobile={false}
 						uniqueId={uniqueId}
 						posterImage={posterImage}
-						title={title}
+						title={
+							"Prince Harry and Meghan's 'bombshell' plans explained – video"
+						}
 						height={height}
 						width={width}
 						onClick={onClick}
@@ -117,7 +118,6 @@ export const Vertical = () => {
 				renderOverlay={({
 					uniqueId,
 					posterImage,
-					title,
 					height,
 					width,
 					onClick,
@@ -131,7 +131,9 @@ export const Vertical = () => {
 						hidePillOnMobile={false}
 						uniqueId={uniqueId}
 						posterImage={posterImage}
-						title={title}
+						title={
+							"Prince Harry and Meghan's 'bombshell' plans explained – video"
+						}
 						height={height}
 						width={width}
 						onClick={onClick}
@@ -177,7 +179,6 @@ export const Expired = () => {
 				renderOverlay={({
 					uniqueId,
 					posterImage,
-					title,
 					height,
 					width,
 					onClick,
@@ -191,7 +192,9 @@ export const Expired = () => {
 						hidePillOnMobile={false}
 						uniqueId={uniqueId}
 						posterImage={posterImage}
-						title={title}
+						title={
+							"Prince Harry and Meghan's 'bombshell' plans explained – video"
+						}
 						height={height}
 						width={width}
 						onClick={onClick}
@@ -238,7 +241,6 @@ export const WithOverlayImage = () => {
 				renderOverlay={({
 					uniqueId,
 					posterImage,
-					title,
 					height,
 					width,
 					onClick,
@@ -252,7 +254,9 @@ export const WithOverlayImage = () => {
 						hidePillOnMobile={false}
 						uniqueId={uniqueId}
 						posterImage={posterImage}
-						title={title}
+						title={
+							"Prince Harry and Meghan's 'bombshell' plans explained – video"
+						}
 						height={height}
 						width={width}
 						onClick={onClick}
@@ -320,7 +324,6 @@ export const WithPosterImage = () => {
 				renderOverlay={({
 					uniqueId,
 					posterImage,
-					title,
 					height,
 					width,
 					onClick,
@@ -334,7 +337,9 @@ export const WithPosterImage = () => {
 						hidePillOnMobile={false}
 						uniqueId={uniqueId}
 						posterImage={posterImage}
-						title={title}
+						title={
+							"Prince Harry and Meghan's 'bombshell' plans explained – video"
+						}
 						height={height}
 						width={width}
 						onClick={onClick}
@@ -353,6 +358,8 @@ export const WithPosterImage = () => {
 WithPosterImage.storyName = 'with poster image';
 
 export const WithPosterAndOverlayImage = () => {
+	const title =
+		"Prince Harry and Meghan's 'bombshell' plans explained – video";
 	return (
 		<Wrapper>
 			<p>
@@ -368,7 +375,7 @@ export const WithPosterAndOverlayImage = () => {
 					theme: Pillar.News,
 				}}
 				assetId="d2Q5bXvEgMg"
-				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
+				mediaTitle={title}
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
 				index={0}
 				expired={false}
@@ -403,7 +410,6 @@ export const WithPosterAndOverlayImage = () => {
 				renderOverlay={({
 					uniqueId,
 					posterImage,
-					title,
 					height,
 					width,
 					onClick,
@@ -436,6 +442,11 @@ export const WithPosterAndOverlayImage = () => {
 WithPosterAndOverlayImage.storyName = 'with poster and overlay image';
 
 export const WithShowMainVideoFlagOff = () => {
+	const title =
+		"Prince Harry and Meghan's 'bombshell' plans explained – video";
+	const height = 259;
+	const width = 460;
+
 	return (
 		<Wrapper>
 			<p>
@@ -451,7 +462,7 @@ export const WithShowMainVideoFlagOff = () => {
 					theme: Pillar.News,
 				}}
 				assetId="d2Q5bXvEgMg"
-				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
+				mediaTitle={title}
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
 				index={0}
 				expired={false}
@@ -483,14 +494,7 @@ export const WithShowMainVideoFlagOff = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
-				renderOverlay={({
-					uniqueId,
-					posterImage,
-					title,
-					height,
-					width,
-					onClick,
-				}) => (
+				renderOverlay={({ uniqueId, posterImage, onClick }) => (
 					<YoutubeAtomCardOverlay
 						format={{
 							display: ArticleDisplay.Standard,

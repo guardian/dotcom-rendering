@@ -88,16 +88,16 @@ const titleStyles = css`
 `;
 
 type Props = {
+	uniqueId: string;
+	height: number;
+	width: number;
+	title: string;
+	onClick: () => void;
 	format: ArticleFormat;
 	hidePillOnMobile: boolean;
-	uniqueId?: string;
-	posterImage?: string;
-	height?: number;
-	width?: number;
 	alt?: string;
+	posterImage?: string;
 	duration?: number; // in seconds
-	title?: string;
-	onClick?: () => void;
 	kicker?: string;
 	showTextOverlay?: boolean;
 	aspectRatio?: AspectRatio;
@@ -112,7 +112,7 @@ export const YoutubeAtomCardOverlay = ({
 	posterImage,
 	height,
 	width,
-	alt,
+	alt = '',
 	duration,
 	title,
 	onClick,
@@ -139,17 +139,15 @@ export const YoutubeAtomCardOverlay = ({
 				aria-label={title ? `Play video: ${title}` : `Play video`}
 				type="button"
 			>
-				{!!posterImage &&
-					height !== undefined &&
-					width !== undefined && (
-						<YoutubeAtomPicture
-							image={posterImage}
-							alt={alt ?? ''}
-							height={height}
-							width={width}
-							aspectRatio={aspectRatio}
-						/>
-					)}
+				{!!posterImage && !!height && !!width && (
+					<YoutubeAtomPicture
+						image={posterImage}
+						alt={alt}
+						height={height}
+						width={width}
+						aspectRatio={aspectRatio}
+					/>
+				)}
 				{isLiveStream ? (
 					<div
 						css={
