@@ -101,8 +101,21 @@ export const GutterWrapper: ReactComponent<GutterProps> = (
 	);
 };
 
-// CSS Styling
-// -------------------------------------------
+type CopyProps = {
+	paragraphs: string[];
+};
+
+const Copy: ReactComponent<CopyProps> = ({ paragraphs }: CopyProps) => {
+	return (
+		<>
+			{paragraphs.map((paragraph, idx) => (
+				<p key={idx}>{paragraph}</p>
+			))}
+		</>
+	);
+};
+
+// start CSS styling --------------------------------------
 
 const container = css`
 	background: ${palette.neutral[100]};
@@ -161,43 +174,48 @@ const contributionsTheme = {
 	link: buttonStyles,
 };
 
+// end styling -------------------------------------------
+
 export const GutterAsk: ReactComponent<GutterAskRenderProps> = ({
 	variant,
 	enrichedUrl,
 	onCtaClick,
-}: GutterAskRenderProps) => (
-	<>
-		{variant && (
-			<div css={container}>
-				<div css={imageHeader}>
-					<img
-						src={variant.image.mainUrl}
-						alt={variant.image.altText}
-						width="150"
-						height="100"
-					/>
-				</div>
-				<div css={textBlock}>
-					{/* TODO: bodyCopy is a string array and needs to be handled appropriately. */}
-					<div css={bodySection}>{variant.bodyCopy}</div>
-					<div css={ctaSection}>
-						<ThemeProvider theme={contributionsTheme}>
-							<LinkButton
-								href={enrichedUrl}
-								icon={<SvgArrowRightStraight />}
-								iconSide="right"
-								onClick={onCtaClick}
-								target="_blank"
-								rel="noopener noreferrer"
-								priority={'primary'}
-								cssOverrides={cta}
-							>
-								{variant.cta!.text}
-							</LinkButton>
-						</ThemeProvider>
+}: GutterAskRenderProps) => {
+	return (
+		<>
+			{variant && (
+				<div css={container}>
+					<div css={imageHeader}>
+						<img
+							src={variant.image.mainUrl}
+							alt={variant.image.altText}
+							width="150"
+							height="100"
+						/>
+					</div>
+					<div css={textBlock}>
+						<div css={bodySection}>
+							<Copy paragraphs={variant.bodyCopy} />
+						</div>
+						<div css={ctaSection}>
+							<ThemeProvider theme={contributionsTheme}>
+								<LinkButton
+									href={enrichedUrl}
+									icon={<SvgArrowRightStraight />}
+									iconSide="right"
+									onClick={onCtaClick}
+									target="_blank"
+									rel="noopener noreferrer"
+									priority={'primary'}
+									cssOverrides={cta}
+								>
+									{variant.cta!.text}
+								</LinkButton>
+							</ThemeProvider>
+						</div>
 					</div>
 				</div>
-			</div>
-		)}
-	</>
-);
+			)}
+		</>
+	);
+};
