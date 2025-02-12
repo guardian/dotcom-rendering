@@ -20,7 +20,7 @@ import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
-import { GutterWrapper } from './marketing/gutters/GutterAsk';
+import { GutterAskWrapper } from './marketing/gutters/GutterAsk';
 
 interface GutterLiveblogAskBuilderProps {
 	shouldHideReaderRevenueOnArticle: boolean;
@@ -125,7 +125,7 @@ const GutterLiveblogAskBuilder = ({
 			<>
 				{canShow && (
 					<div css={stickyLeft}>
-						<GutterWrapper {...enrichedProps} />
+						<GutterAskWrapper {...enrichedProps} />
 					</div>
 				)}
 			</>

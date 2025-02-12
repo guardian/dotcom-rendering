@@ -17,7 +17,7 @@ import {
 	createClickEventFromTracking,
 } from '../lib/tracking';
 
-export const GutterWrapper: ReactComponent<GutterProps> = (
+export const GutterAskWrapper: ReactComponent<GutterProps> = (
 	props: GutterProps,
 ) => {
 	const { content, tracking, submitComponentEvent } = props;
