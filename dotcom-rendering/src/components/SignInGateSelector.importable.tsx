@@ -1,9 +1,6 @@
 import { getCookie, isUndefined } from '@guardian/libs';
 import { useEffect, useState, version } from 'react';
-import {
-	hasCmpConsentForBrowserId,
-	shouldHideSupportMessaging,
-} from '../lib/contributions';
+import { shouldHideSupportMessaging } from '../lib/contributions';
 import { getDailyArticleCount, getToday } from '../lib/dailyArticleCount';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { constructQuery } from '../lib/querystring';
@@ -454,16 +451,16 @@ const decideBrowserIdWithConsentCheck = async (): Promise<
 	string | undefined
 > => {
 	return Promise.resolve('test');
-	const hasConsent = await hasCmpConsentForBrowserId();
-	if (!hasConsent) {
-		return Promise.resolve(undefined);
-	}
+	// const hasConsent = await hasCmpConsentForBrowserId();
+	// if (!hasConsent) {
+	// 	return Promise.resolve(undefined);
+	// }
 
-	const cookie = getCookie({ name: 'bwid', shouldMemoize: true });
-	if (cookie === null) {
-		return Promise.resolve(undefined);
-	}
-	return Promise.resolve(cookie);
+	// const cookie = getCookie({ name: 'bwid', shouldMemoize: true });
+	// if (cookie === null) {
+	// 	return Promise.resolve(undefined);
+	// }
+	// return Promise.resolve(cookie);
 };
 
 const decideIsSupporter = (): boolean => {
