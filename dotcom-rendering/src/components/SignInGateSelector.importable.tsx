@@ -451,6 +451,7 @@ const dismissGateAuxia = (
 const decideBrowserIdWithConsentCheck = async (): Promise<
 	string | undefined
 > => {
+	return Promise.resolve('test')
 	const hasConsent = await hasCmpConsentForBrowserId();
 	if (!hasConsent) {
 		return Promise.resolve(undefined);
@@ -650,6 +651,8 @@ const SignInGateSelectorAuxia = ({
 	} satisfies Parameters<typeof generateGatewayUrl>[1];
 
 	const signInUrl = generateGatewayUrl('signin', ctaUrlParams);
+
+	console.log('isGateDismissed', isGateDismissed);
 
 	return (
 		<>
