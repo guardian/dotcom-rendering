@@ -3,7 +3,6 @@ import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
 import { isAmpSupported } from '../components/Elements.amp';
 import { LiveBlogRenderer } from '../components/LiveBlogRenderer';
-import { FootballDataLayout } from '../layouts/FootballDataLayout';
 import {
 	ArticleDesign,
 	type ArticleFormat,
@@ -31,6 +30,7 @@ import type { FEElement } from '../types/content';
 import type { FEBlocksRequest } from '../types/frontend';
 import type { TagType } from '../types/tag';
 import { htmlPageTemplate } from './htmlPageTemplate';
+import { FootballDataPage } from '../components/FootballDataPage';
 
 interface Props {
 	article: Article;
@@ -305,9 +305,19 @@ export const renderBlocks = ({
 	return `${extractedCss}${html}`;
 };
 
-export const renderSportDataPage = () => {
+export const renderFootballDataPage = () => {
+	const config: Config = {
+		renderingTarget: 'Web',
+		darkModeAvailable: false,
+		// TODO: frontendData.config.abTests.darkModeWebVariant === 'variant',
+		assetOrigin: ASSET_ORIGIN,
+		editionId: 'UK',
+		// TODO: frontendData.editionId,
+	};
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<FootballDataLayout />,
+		<ConfigProvider value={config}>
+			<FootballDataPage />
+		</ConfigProvider>,
 	);
 
 	const build = getModulesBuild({
@@ -327,13 +337,6 @@ export const renderSportDataPage = () => {
 		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
 	].filter(isString);
-
-	const config: Config = {
-		renderingTarget: 'Web',
-		darkModeAvailable: false,
-		assetOrigin: ASSET_ORIGIN,
-		editionId: 'UK',
-	};
 
 	const pageHtml = htmlPageTemplate({
 		scriptTags: [], //scriptTags,
