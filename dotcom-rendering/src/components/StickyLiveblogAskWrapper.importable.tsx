@@ -91,12 +91,6 @@ const GutterAskBuilder = ({
 		}
 
 		const payload: GutterPayload = {
-			tracking: {
-				ophanPageId: pageViewId,
-				platformId: 'GUARDIAN_WEB',
-				referrerUrl: pageUrl,
-				clientName: 'dcr',
-			},
 			targeting: {
 				showSupportMessaging:
 					shouldHideSupportMessaging(isSignedIn) === false,
