@@ -1,11 +1,12 @@
 import { Global } from '@emotion/react';
 import { StrictMode } from 'react';
-import { buildAdTargeting } from '../lib/ad-targeting';
+import { FootballDataLayout } from '../layouts/FootballDataLayout';
+// import { buildAdTargeting } from '../lib/ad-targeting';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
-import { filterABTestSwitches } from '../model/enhance-switches';
-import type { NavType } from '../model/extract-nav';
-import type { DCRTagPageType } from '../types/tagPage';
+// import { filterABTestSwitches } from '../model/enhance-switches';
+// import type { NavType } from '../model/extract-nav';
+// import type { DCRTagPageType } from '../types/tagPage';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
@@ -15,11 +16,10 @@ import { Metrics } from './Metrics.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
 import { SkipTo } from './SkipTo';
-import { FootballDataLayout } from '../layouts/FootballDataLayout';
 
-type Props = {
-	// footballPage: FEFootballPageType; TODO: type needs to be created
-};
+// type Props = {
+// 	// footballPage: FEFootballPageType; TODO: type needs to be created
+// };
 
 /**
  * @description
@@ -27,7 +27,7 @@ type Props = {
  *
  * @param {Props} props
  * */
-export const FootballDataPage = ({}: Props) => {
+export const FootballDataPage = () => {
 	// const adTargeting = buildAdTargeting({
 	// 	isAdFreeUser: tagPage.isAdFreeUser,
 	// 	isSensitive: tagPage.config.isSensitive,
