@@ -10,7 +10,7 @@ import { recordTypeAndPlatform } from './lib/logging-store';
 import {
 	renderBlocks,
 	renderHtml,
-	renderSportDataPage,
+	renderFootballDataPage,
 } from './render.article.web';
 
 export const handleArticle: RequestHandler = ({ body }, res) => {
@@ -110,7 +110,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 	res.status(200).send(html);
 };
 
-export const handleSportDataPage: RequestHandler = ({ body }, res) => {
-	const { html, prefetchScripts } = renderSportDataPage();
+export const handleFootballDataPage: RequestHandler = ({ body }, res) => {
+	const { html, prefetchScripts } = renderFootballDataPage();
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };

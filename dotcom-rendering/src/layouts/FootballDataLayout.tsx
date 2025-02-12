@@ -1,9 +1,13 @@
 // import { Masthead } from '../components/Masthead/Masthead';
 // import type { NavType } from '../model/extract-nav';
-
 import { FootballMatchesPage } from '../components/FootballMatchesPage.importable';
 import { Island } from '../components/Island';
 import type { FootballMatches } from '../footballMatches';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { Stuck } from './lib/stickiness';
+import { Section } from '../components/Section';
+import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { Masthead } from '../components/Masthead/Masthead';
 
 // interface Props {
 // 	NAV: NavType;
@@ -108,8 +112,47 @@ const goToCompetitionSpecificPage = () => {
 export const FootballDataLayout = () =>
 	// { NAV }: Props
 	{
+		// const { darkModeAvailable } = useConfig();
+		const format = {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
+		};
 		return (
 			<>
+				<div data-print-layout="hide" id="bannerandheader">
+					{
+						<Stuck>
+							<Section
+								fullWidth={true}
+								showTopBorder={false}
+								showSideBorders={false}
+								padSides={false}
+								shouldCenter={false}
+							>
+								<HeaderAdSlot
+									isPaidContent={true}
+									// isPaidContent={!!tagPage.config.isPaidContent}
+									shouldHideReaderRevenue={false}
+								/>
+							</Section>
+						</Stuck>
+					}
+
+					{/* <Masthead
+								nav={NAV}
+								editionId={tagPage.editionId}
+								idUrl={tagPage.config.idUrl}
+								mmaUrl={tagPage.config.mmaUrl}
+								discussionApiUrl={tagPage.config.discussionApiUrl}
+								idApiUrl={tagPage.config.idApiUrl}
+								contributionsServiceUrl={contributionsServiceUrl}
+								showSubNav={true}
+								showSlimNav={false}
+								hasPageSkin={hasPageSkin}
+								pageId={pageId}
+							/> */}
+				</div>
 				<main id="maincontent">
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<FootballMatchesPage
