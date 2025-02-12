@@ -7,7 +7,6 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
-import { submitComponentEvent } from '../client/ophan/ophan';
 import { ophanComponentId } from '../lib/ophan-helpers';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
@@ -230,22 +229,6 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 				updateButtonVisibilityOnScroll,
 			);
 		};
-	}, []);
-	useEffect(() => {
-		void submitComponentEvent(
-			{
-				abTest: {
-					name: 'masthead-with-highlights',
-					variant: 'inTest',
-				},
-				component: {
-					componentType: 'CAROUSEL',
-					id: 'home-highlights',
-				},
-				action: 'INSERT',
-			},
-			'Web',
-		);
 	}, []);
 
 	const { ophanComponentLink, ophanComponentName, ophanFrontName } =
