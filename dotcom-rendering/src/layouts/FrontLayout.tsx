@@ -125,8 +125,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const hasPageSkin = renderAds && hasPageSkinConfig;
 
-	const isInLoopVideoTest =
-		abTests.loopVideoTestVariant === 'variant' && pageId === 'uk';
+	const isInLoopVideoTest = abTests.loopVideoTestVariant === 'variant';
 
 	const filteredCollections = isInLoopVideoTest
 		? [
