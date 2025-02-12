@@ -14,6 +14,7 @@ const program = TJS.getProgramFromFiles(
 		path.resolve(`${root}/src/types/tagPage.ts`),
 		path.resolve(`${root}/src/types/newslettersPage.ts`),
 		path.resolve(`${root}/src/types/editionsCrossword.ts`),
+		path.resolve(`${root}/src/feFootballDataPage.ts`),
 	],
 	{
 		skipLibCheck: true,
@@ -55,6 +56,10 @@ const schemas = [
 	{
 		typeName: 'FEEditionsCrosswords',
 		file: `${root}/src/model/editions-crossword-schema.json`,
+	},
+	{
+		typeName: 'FEFootballDataPage',
+		file: `${root}/src/model/fe-football-data-page-schema.json`,
 	},
 ];
 
