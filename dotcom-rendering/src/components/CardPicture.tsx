@@ -4,7 +4,7 @@ import type { ImgHTMLAttributes } from 'react';
 import React from 'react';
 import type { AspectRatio } from '../types/front';
 import type { ImageSizeType } from './Card/components/ImageWrapper';
-import { LoopABTest } from './LoopABTest';
+import { LoopVideoABTest } from './LoopVideoABTest';
 import type { ImageWidthType } from './Picture';
 import { generateSources, getFallbackSource } from './Picture';
 
@@ -168,7 +168,7 @@ export const CardPicture = ({
 	const fallbackSource = getFallbackSource(sources);
 
 	if (isInLoopVideoTest) {
-		return <LoopABTest />;
+		return <LoopVideoABTest />;
 	}
 
 	return (

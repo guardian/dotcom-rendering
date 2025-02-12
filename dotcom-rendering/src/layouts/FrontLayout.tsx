@@ -125,7 +125,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const hasPageSkin = renderAds && hasPageSkinConfig;
 
-	const isInLoopVideoTest = abTests.loopVideoTestVariant === 'variant';
+	const isInLoopVideoTest =
+		abTests.loopVideoTestVariant === 'variant' && pageId === 'uk';
 
 	const filteredCollections = isInLoopVideoTest
 		? [
@@ -291,6 +292,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							...tr,
 							isInLoopVideoTest: isInLoopVideoTest && index === 0,
 						}));
+
 					const [trail] = trails;
 
 					// There are some containers that have zero trails. We don't want to render these

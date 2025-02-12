@@ -818,6 +818,7 @@ export const Card = ({
 							media.type === 'slideshow' && isFlexibleContainer
 						}
 						padImage={isMediaCard && isBetaContainer}
+						isInLoopVideoTest={isInLoopVideoTest}
 					>
 						{media.type === 'slideshow' &&
 							(isFlexibleContainer ? (
