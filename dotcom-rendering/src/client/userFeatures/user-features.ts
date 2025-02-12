@@ -5,28 +5,14 @@
  */
 
 import { getAuthStatus, isUserLoggedInOktaRefactor } from '../../lib/identity';
+import { AD_FREE_USER_COOKIE } from './cookies/adFree';
+import { ALLOW_REJECT_ALL_COOKIE } from './cookies/allowRejectAll';
+import { createOrRenewCookie } from './cookies/cookieHelpers';
+import { HIDE_SUPPORT_MESSAGING_COOKIE } from './cookies/hideSupportMessaging';
 import {
-	adFreeDataIsPresent,
-	getAdFreeCookie,
-	removeAdFreeCookie,
-	setAdFreeCookie,
-} from './cookies/adFree';
-import {
-	getAllowRejectAllCookie,
-	removeAllowRejectAllCookie,
-	setAllowRejectAllCookie,
-} from './cookies/allowRejectAll';
-import {
-	getHideSupportMessagingCookie,
-	removeHideSupportMessagingCookie,
-	setHideSupportMessagingCookie,
-} from './cookies/hideSupportMessaging';
-import {
-	featuresDataIsOld,
-	getUserFeaturesExpiryCookie,
-	removeUserFeaturesExpiryCookie,
-	setUserFeaturesExpiryCookie,
-} from './cookies/userFeaturesExpiry';
+	USER_BENEFITS_EXPIRY_COOKIE,
+	userBenefitsDataNeedsRefreshing,
+} from './cookies/userBenefitsExpiry';
 import { syncDataFromUserBenefitsApi } from './userBenefitsApi';
 
 export type UserBenefits = {
@@ -35,26 +21,12 @@ export type UserBenefits = {
 	allowRejectAll: boolean;
 };
 
-const userHasData = () => {
-	const cookie =
-		getAdFreeCookie() ??
-		getUserFeaturesExpiryCookie() ??
-		getHideSupportMessagingCookie() ??
-		getAllowRejectAllCookie();
-	return !!cookie;
-};
-
-const userHasDataAfterSignOut = async (): Promise<boolean> =>
-	!(await isUserLoggedInOktaRefactor()) && userHasData();
-
-export const forcedAdFreeMode = !!/[#&]noadsaf(&.*)?$/.exec(
-	window.location.hash,
-);
 const refresh = async (): Promise<void> => {
-	if ((await isUserLoggedInOktaRefactor()) && featuresDataIsOld()) {
-		return requestNewData();
-	} else if ((await userHasDataAfterSignOut()) && !forcedAdFreeMode) {
-		deleteAllCookies();
+	if (
+		(await isUserLoggedInOktaRefactor()) &&
+		userBenefitsDataNeedsRefreshing()
+	) {
+		await requestNewData();
 	}
 };
 
@@ -69,33 +41,17 @@ const requestNewData = async () => {
 	return syncDataFromUserBenefitsApi(authStatus).then(persistResponse);
 };
 
-const timeInDaysFromNow = (daysFromNow: number): string => {
-	const tmpDate = new Date();
-	tmpDate.setDate(tmpDate.getDate() + daysFromNow);
-	return tmpDate.getTime().toString();
-};
-
 const persistResponse = (userBenefitsResponse: UserBenefits) => {
-	setUserFeaturesExpiryCookie(timeInDaysFromNow(1));
-	setHideSupportMessagingCookie(userBenefitsResponse.hideSupportMessaging);
-
-	if (userBenefitsResponse.adFree) {
-		setAdFreeCookie(2);
-	} else if (adFreeDataIsPresent() && !forcedAdFreeMode) {
-		removeAdFreeCookie();
+	createOrRenewCookie(USER_BENEFITS_EXPIRY_COOKIE);
+	if (userBenefitsResponse.hideSupportMessaging) {
+		createOrRenewCookie(HIDE_SUPPORT_MESSAGING_COOKIE);
 	}
 	if (userBenefitsResponse.allowRejectAll) {
-		setAllowRejectAllCookie(2);
-	} else {
-		removeAllowRejectAllCookie();
+		createOrRenewCookie(ALLOW_REJECT_ALL_COOKIE);
 	}
-};
-
-export const deleteAllCookies = (): void => {
-	removeAdFreeCookie();
-	removeHideSupportMessagingCookie();
-	removeUserFeaturesExpiryCookie();
-	removeAllowRejectAllCookie();
+	if (userBenefitsResponse.adFree) {
+		createOrRenewCookie(AD_FREE_USER_COOKIE);
+	}
 };
 
 export { refresh };

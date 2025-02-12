@@ -3,6 +3,7 @@ import { getConsentFor, onConsentChange } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { adFreeDataIsPresent } from '../client/userFeatures/cookies/adFree';
 import { useAB } from './useAB';
+import { useIsSignedIn } from './useAuthStatus';
 import { useDetectAdBlock } from './useDetectAdBlock';
 
 const useIsInAdBlockAskVariant = (): boolean => {
@@ -20,6 +21,7 @@ export const useAdblockAsk = ({
 	shouldHideReaderRevenue: boolean;
 	isPaidContent: boolean;
 }): boolean => {
+	const isSignedInOrPending: boolean | 'Pending' = useIsSignedIn();
 	const isInVariant = useIsInAdBlockAskVariant();
 	const adBlockerDetected = useDetectAdBlock();
 	const [isAdFree, setIsAdFree] = useState<boolean>(false);
@@ -43,8 +45,13 @@ export const useAdblockAsk = ({
 	}, []);
 
 	useEffect(() => {
-		setIsAdFree(adFreeDataIsPresent());
-	}, []);
+		// If the user's signed in status is pending, assume they are signed in for the purposes of ad-free
+		setIsAdFree(
+			adFreeDataIsPresent(
+				isSignedInOrPending === 'Pending' ? true : isSignedInOrPending,
+			),
+		);
+	}, [isSignedInOrPending]);
 
 	useEffect(() => {
 		// Only perform the detection check in the variant of the AB test, if we haven't already detected an ad-blocker and the reader/content is eligible for displaying such a message
