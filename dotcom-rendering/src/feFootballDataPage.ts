@@ -40,7 +40,7 @@ type FEMatchDayTeam = {
 
 type FEFootballMatchData = {
 	id: string;
-	date: Date;
+	date: string;
 	stage: FEStage;
 	round: FERound;
 	leg: string;
