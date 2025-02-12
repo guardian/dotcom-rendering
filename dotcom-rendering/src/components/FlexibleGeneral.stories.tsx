@@ -203,7 +203,7 @@ export const FourSublinkSplash: Story = {
 	},
 };
 
-export const liveUpdatesCard = {
+const liveUpdatesCard = {
 	url: '/football/live/2023/aug/20/spain-v-england-womens-world-cup-final-live',
 	headline:
 		'Spain 1-0 England: Women’s World Cup 2023 final – as it happened',
