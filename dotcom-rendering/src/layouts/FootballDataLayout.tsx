@@ -1,13 +1,20 @@
 // import { Masthead } from '../components/Masthead/Masthead';
 // import type { NavType } from '../model/extract-nav';
+import { palette } from '@guardian/source/foundations';
+import { MatchReport } from '../../fixtures/generated/fe-articles/MatchReport';
+import { AdSlot } from '../components/AdSlot.web';
 import { FootballMatchesPage } from '../components/FootballMatchesPage.importable';
+import { Footer } from '../components/Footer';
+import { MerchandisingSlot } from '../components/FrontsAdSlots';
+import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { Masthead } from '../components/Masthead/Masthead';
+import { Section } from '../components/Section';
+import { SubNav } from '../components/SubNav.importable';
 import type { FootballMatches } from '../footballMatches';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { extractNAV } from '../model/extract-nav';
 import { Stuck } from './lib/stickiness';
-import { Section } from '../components/Section';
-import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { Masthead } from '../components/Masthead/Masthead';
 
 // interface Props {
 // 	NAV: NavType;
@@ -113,6 +120,9 @@ export const FootballDataLayout = () =>
 	// { NAV }: Props
 	{
 		// const { darkModeAvailable } = useConfig();
+		const NAV = extractNAV(MatchReport['nav']);
+		const pageFooter = MatchReport['pageFooter'];
+		const renderAds = true;
 		const format = {
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Standard,
@@ -139,20 +149,25 @@ export const FootballDataLayout = () =>
 						</Stuck>
 					}
 
-					{/* <Masthead
-								nav={NAV}
-								editionId={tagPage.editionId}
-								idUrl={tagPage.config.idUrl}
-								mmaUrl={tagPage.config.mmaUrl}
-								discussionApiUrl={tagPage.config.discussionApiUrl}
-								idApiUrl={tagPage.config.idApiUrl}
-								contributionsServiceUrl={contributionsServiceUrl}
-								showSubNav={true}
-								showSlimNav={false}
-								hasPageSkin={hasPageSkin}
-								pageId={pageId}
-							/> */}
+					<Masthead
+						nav={NAV}
+						editionId={'UK'}
+						//idUrl={tagPage.config.idUrl}
+						//mmaUrl={tagPage.config.mmaUrl}
+						discussionApiUrl={'tagPage.config.discussionApiUrl'}
+						idApiUrl={'tagPage.config.idApiUrl'}
+						contributionsServiceUrl={'contributionsServiceUrl'}
+						showSubNav={true}
+						showSlimNav={false}
+						//hasPageSkin={hasPageSkin}
+						//pageId={pageId}
+					/>
 				</div>
+
+				{renderAds && (
+					<AdSlot position="right" display={format.display} />
+				)}
+
 				<main id="maincontent">
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<FootballMatchesPage
@@ -167,6 +182,53 @@ export const FootballDataLayout = () =>
 						/>
 					</Island>
 				</main>
+
+				<MerchandisingSlot
+					//renderAds={renderAds}
+					renderAds={true}
+					hasPageSkin={false}
+					//hasPageSkin={hasPageSkin}
+				/>
+
+				{NAV.subNavSections && (
+					<Section
+						fullWidth={true}
+						showTopBorder={true}
+						data-print-layout="hide"
+						padSides={false}
+						element="aside"
+					>
+						<Island
+							priority="enhancement"
+							defer={{ until: 'visible' }}
+						>
+							<SubNav
+								subNavSections={NAV.subNavSections}
+								currentNavLink={NAV.currentNavLink}
+								position="footer"
+							/>
+						</Island>
+					</Section>
+				)}
+
+				<Section
+					fullWidth={true}
+					data-print-layout="hide"
+					padSides={false}
+					backgroundColour={palette.brand[400]}
+					borderColour={palette.brand[600]}
+					showSideBorders={false}
+					showTopBorder={false}
+					element="footer"
+				>
+					<Footer
+						pageFooter={pageFooter}
+						selectedPillar={NAV.selectedPillar}
+						pillars={NAV.pillars}
+						urls={NAV.readerRevenueLinks.footer}
+						editionId={'UK'}
+					/>
+				</Section>
 			</>
 		);
 	};
