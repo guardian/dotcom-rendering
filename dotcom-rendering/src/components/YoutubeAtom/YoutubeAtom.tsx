@@ -1,7 +1,7 @@
 import type { Participations } from '@guardian/ab-core';
 import type { ConsentState } from '@guardian/libs';
 import type { ReactElement } from 'react';
-import { cloneElement, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import type { AdTargeting } from '../../types/commercial';
 import type { AspectRatio } from '../../types/front';
 import type { RenderingTarget } from '../../types/renderingTarget';
@@ -39,7 +39,21 @@ export type Props = {
 	shouldPauseOutOfView?: boolean;
 	renderingTarget: RenderingTarget;
 	aspectRatio?: AspectRatio;
-	YoutubeAtomOverlay: ReactElement;
+	renderOverlay: ({
+		uniqueId,
+		posterImage,
+		title,
+		height,
+		width,
+		onClick,
+	}: {
+		uniqueId: string;
+		posterImage: string | undefined;
+		title: string | undefined;
+		height: number;
+		width: number;
+		onClick: () => void;
+	}) => ReactElement;
 };
 
 export const YoutubeAtom = ({
@@ -60,7 +74,7 @@ export const YoutubeAtom = ({
 	shouldPauseOutOfView = false,
 	renderingTarget,
 	aspectRatio,
-	YoutubeAtomOverlay,
+	renderOverlay,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -140,15 +154,6 @@ export const YoutubeAtom = ({
 	 */
 	const playerReadyCallback = useCallback(() => setPlayerReady(true), []);
 
-	const YoutubeAtomOverlayWithCommonProps = cloneElement(YoutubeAtomOverlay, {
-		uniqueId,
-		posterImage,
-		title,
-		height,
-		width,
-		onClick: () => setOverlayClicked(true),
-	});
-
 	return (
 		<div
 			data-component="youtube-atom"
@@ -205,7 +210,15 @@ export const YoutubeAtom = ({
 							/>
 						)
 					}
-					{showOverlay && YoutubeAtomOverlayWithCommonProps}
+					{showOverlay &&
+						renderOverlay({
+							uniqueId,
+							posterImage,
+							title,
+							height,
+							width,
+							onClick: () => setOverlayClicked(true),
+						})}
 					{showPlaceholder && (
 						<YoutubeAtomPlaceholder uniqueId={uniqueId} />
 					)}

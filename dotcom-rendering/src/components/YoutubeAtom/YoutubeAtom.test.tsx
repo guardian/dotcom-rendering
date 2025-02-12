@@ -24,6 +24,9 @@ const consentStateCanTarget: ConsentState = {
 
 describe('YoutubeAtom', () => {
 	it('Player initialises when no overlay and has consent state', () => {
+		const uniqueId = 'c_xtiZNDgGc-1';
+		const title = 'My Youtube video!';
+
 		const atom = (
 			<ConfigProvider
 				value={{
@@ -36,8 +39,8 @@ describe('YoutubeAtom', () => {
 				<YoutubeAtom
 					atomId="2e9e138b-0a23-4b96-a7f6-0258c0bacc8f"
 					videoId="c_xtiZNDgGc"
-					uniqueId="c_xtiZNDgGc-1"
-					title="My Youtube video!"
+					uniqueId={uniqueId}
+					title={title}
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
 					consentState={consentStateCanTarget}
@@ -45,16 +48,27 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					abTestParticipations={{}}
 					renderingTarget="Web"
-					YoutubeAtomOverlay={
+					renderOverlay={({
+						posterImage,
+						height,
+						width,
+						onClick,
+					}) => (
 						<YoutubeAtomCardOverlay
 							format={{
-								theme: Pillar.News,
-								design: ArticleDesign.Standard,
 								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+								theme: Pillar.News,
 							}}
 							hidePillOnMobile={false}
+							uniqueId={uniqueId}
+							posterImage={posterImage}
+							title={title}
+							height={height}
+							width={width}
+							onClick={onClick}
 						/>
-					}
+					)}
 				/>
 			</ConfigProvider>
 		);
@@ -64,6 +78,9 @@ describe('YoutubeAtom', () => {
 	});
 
 	it('Player initialises when overlay clicked and has consent state', () => {
+		const uniqueId = 'c_xtiZNDgGc-1';
+		const title = 'My Youtube video!';
+
 		const atom = (
 			<ConfigProvider
 				value={{
@@ -76,8 +93,8 @@ describe('YoutubeAtom', () => {
 				<YoutubeAtom
 					atomId="2e9e138b-0a23-4b96-a7f6-0258c0bacc8f"
 					videoId="c_xtiZNDgGc"
-					uniqueId="c_xtiZNDgGc-1"
-					title="My Youtube video!"
+					uniqueId={uniqueId}
+					title={title}
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
 					consentState={consentStateCanTarget}
@@ -86,16 +103,27 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					abTestParticipations={{}}
 					renderingTarget="Web"
-					YoutubeAtomOverlay={
+					renderOverlay={({
+						posterImage,
+						height,
+						width,
+						onClick,
+					}) => (
 						<YoutubeAtomCardOverlay
 							format={{
-								theme: Pillar.News,
-								design: ArticleDesign.Standard,
 								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+								theme: Pillar.News,
 							}}
 							hidePillOnMobile={false}
+							uniqueId={uniqueId}
+							posterImage={posterImage}
+							title={title}
+							height={height}
+							width={width}
+							onClick={onClick}
 						/>
-					}
+					)}
 				/>
 			</ConfigProvider>
 		);
@@ -111,6 +139,7 @@ describe('YoutubeAtom', () => {
 	});
 
 	it('player div has correct title', () => {
+		const uniqueId = 'c_xtiZNDgGc-1';
 		const title = 'My Youtube video!';
 
 		const atom = (
@@ -125,8 +154,8 @@ describe('YoutubeAtom', () => {
 				<YoutubeAtom
 					atomId="2e9e138b-0a23-4b96-a7f6-0258c0bacc8f"
 					videoId="c_xtiZNDgGc"
-					uniqueId="c_xtiZNDgGc-1"
-					title="My Youtube video!"
+					uniqueId={uniqueId}
+					title={title}
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
 					consentState={consentStateCanTarget}
@@ -134,16 +163,27 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					abTestParticipations={{}}
 					renderingTarget="Web"
-					YoutubeAtomOverlay={
+					renderOverlay={({
+						posterImage,
+						height,
+						width,
+						onClick,
+					}) => (
 						<YoutubeAtomCardOverlay
 							format={{
-								theme: Pillar.News,
-								design: ArticleDesign.Standard,
 								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+								theme: Pillar.News,
 							}}
 							hidePillOnMobile={false}
+							uniqueId={uniqueId}
+							posterImage={posterImage}
+							title={title}
+							height={height}
+							width={width}
+							onClick={onClick}
 						/>
-					}
+					)}
 				/>
 			</ConfigProvider>
 		);
@@ -153,7 +193,9 @@ describe('YoutubeAtom', () => {
 	});
 
 	it('overlay has correct aria-label', () => {
+		const uniqueId = 'c_xtiZNDgGc-1';
 		const title = 'My Youtube video!';
+
 		const atom = (
 			<ConfigProvider
 				value={{
@@ -166,8 +208,8 @@ describe('YoutubeAtom', () => {
 				<YoutubeAtom
 					atomId="2e9e138b-0a23-4b96-a7f6-0258c0bacc8f"
 					videoId="c_xtiZNDgGc"
-					uniqueId="c_xtiZNDgGc-1"
-					title="My Youtube video!"
+					uniqueId={uniqueId}
+					title={title}
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
 					consentState={consentStateCanTarget}
@@ -176,16 +218,27 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					abTestParticipations={{}}
 					renderingTarget="Web"
-					YoutubeAtomOverlay={
+					renderOverlay={({
+						posterImage,
+						height,
+						width,
+						onClick,
+					}) => (
 						<YoutubeAtomCardOverlay
 							format={{
-								theme: Pillar.News,
-								design: ArticleDesign.Standard,
 								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+								theme: Pillar.News,
 							}}
 							hidePillOnMobile={false}
+							uniqueId={uniqueId}
+							posterImage={posterImage}
+							title={title}
+							height={height}
+							width={width}
+							onClick={onClick}
 						/>
-					}
+					)}
 				/>
 			</ConfigProvider>
 		);
@@ -197,6 +250,9 @@ describe('YoutubeAtom', () => {
 	});
 
 	it('shows a placeholder if overlay is missing', () => {
+		const uniqueId = 'c_xtiZNDgGc-1';
+		const title = 'My Youtube video!';
+
 		const atom = (
 			<ConfigProvider
 				value={{
@@ -209,24 +265,35 @@ describe('YoutubeAtom', () => {
 				<YoutubeAtom
 					atomId="2e9e138b-0a23-4b96-a7f6-0258c0bacc8f"
 					videoId="c_xtiZNDgGc"
-					uniqueId="c_xtiZNDgGc-1"
-					title="My Youtube video!"
+					uniqueId={uniqueId}
+					title={title}
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
 					renderingTarget="Web"
-					YoutubeAtomOverlay={
+					renderOverlay={({
+						posterImage,
+						height,
+						width,
+						onClick,
+					}) => (
 						<YoutubeAtomCardOverlay
 							format={{
-								theme: Pillar.News,
-								design: ArticleDesign.Standard,
 								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+								theme: Pillar.News,
 							}}
 							hidePillOnMobile={false}
+							uniqueId={uniqueId}
+							posterImage={posterImage}
+							title={title}
+							height={height}
+							width={width}
+							onClick={onClick}
 						/>
-					}
+					)}
 				/>
 			</ConfigProvider>
 		);
@@ -238,6 +305,9 @@ describe('YoutubeAtom', () => {
 	});
 
 	it('shows an overlay if present', () => {
+		const uniqueId = 'c_xtiZNDgGc-1';
+		const title = 'My Youtube video!';
+
 		const atom = (
 			<ConfigProvider
 				value={{
@@ -250,8 +320,8 @@ describe('YoutubeAtom', () => {
 				<YoutubeAtom
 					atomId="2e9e138b-0a23-4b96-a7f6-0258c0bacc8f"
 					videoId="c_xtiZNDgGc"
-					uniqueId="c_xtiZNDgGc-1"
-					title="My Youtube video!"
+					uniqueId={uniqueId}
+					title={title}
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
 					posterImage={overlayImage}
@@ -259,16 +329,27 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					abTestParticipations={{}}
 					renderingTarget="Web"
-					YoutubeAtomOverlay={
+					renderOverlay={({
+						posterImage,
+						height,
+						width,
+						onClick,
+					}) => (
 						<YoutubeAtomCardOverlay
 							format={{
-								theme: Pillar.News,
-								design: ArticleDesign.Standard,
 								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+								theme: Pillar.News,
 							}}
 							hidePillOnMobile={false}
+							uniqueId={uniqueId}
+							posterImage={posterImage}
+							title={title}
+							height={height}
+							width={width}
+							onClick={onClick}
 						/>
-					}
+					)}
 				/>
 			</ConfigProvider>
 		);
@@ -278,6 +359,9 @@ describe('YoutubeAtom', () => {
 	});
 
 	it('hides an overlay once it is clicked', () => {
+		const uniqueId = 'c_xtiZNDgGc-1';
+		const title = 'My Youtube video!';
+
 		const atom = (
 			<ConfigProvider
 				value={{
@@ -290,8 +374,8 @@ describe('YoutubeAtom', () => {
 				<YoutubeAtom
 					atomId="2e9e138b-0a23-4b96-a7f6-0258c0bacc8f"
 					videoId="c_xtiZNDgGc"
-					uniqueId="c_xtiZNDgGc-1"
-					title="My Youtube video!"
+					uniqueId={uniqueId}
+					title={title}
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
 					posterImage={overlayImage}
@@ -299,16 +383,27 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					abTestParticipations={{}}
 					renderingTarget="Web"
-					YoutubeAtomOverlay={
+					renderOverlay={({
+						posterImage,
+						height,
+						width,
+						onClick,
+					}) => (
 						<YoutubeAtomCardOverlay
 							format={{
-								theme: Pillar.News,
-								design: ArticleDesign.Standard,
 								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+								theme: Pillar.News,
 							}}
 							hidePillOnMobile={false}
+							uniqueId={uniqueId}
+							posterImage={posterImage}
+							title={title}
+							height={height}
+							width={width}
+							onClick={onClick}
 						/>
-					}
+					)}
 				/>
 			</ConfigProvider>
 		);
@@ -321,6 +416,9 @@ describe('YoutubeAtom', () => {
 	});
 
 	it('when two Atoms - hides the overlay of the correct player if clicked', () => {
+		const uniqueId = 'c_xtiZNDgGc-1';
+		const title = 'My Youtube video!';
+
 		const atom = (
 			<>
 				<ConfigProvider
@@ -334,8 +432,8 @@ describe('YoutubeAtom', () => {
 					<YoutubeAtom
 						atomId="atom1"
 						videoId="c_xtiZNDgGc"
-						uniqueId="c_xtiZNDgGc-1"
-						title="My Youtube video!"
+						uniqueId={uniqueId}
+						title={title}
 						adTargeting={{ disableAds: true }}
 						eventEmitters={[]}
 						posterImage={overlayImage}
@@ -343,16 +441,27 @@ describe('YoutubeAtom', () => {
 						isMainMedia={false}
 						abTestParticipations={{}}
 						renderingTarget="Web"
-						YoutubeAtomOverlay={
+						renderOverlay={({
+							posterImage,
+							height,
+							width,
+							onClick,
+						}) => (
 							<YoutubeAtomCardOverlay
 								format={{
-									theme: Pillar.News,
-									design: ArticleDesign.Standard,
 									display: ArticleDisplay.Standard,
+									design: ArticleDesign.Standard,
+									theme: Pillar.News,
 								}}
 								hidePillOnMobile={false}
+								uniqueId={uniqueId}
+								posterImage={posterImage}
+								title={title}
+								height={height}
+								width={width}
+								onClick={onClick}
 							/>
-						}
+						)}
 					/>
 					<YoutubeAtom
 						atomId="atom1"
@@ -366,16 +475,27 @@ describe('YoutubeAtom', () => {
 						isMainMedia={false}
 						abTestParticipations={{}}
 						renderingTarget="Web"
-						YoutubeAtomOverlay={
+						renderOverlay={({
+							posterImage,
+							height,
+							width,
+							onClick,
+						}) => (
 							<YoutubeAtomCardOverlay
 								format={{
-									theme: Pillar.News,
-									design: ArticleDesign.Standard,
 									display: ArticleDisplay.Standard,
+									design: ArticleDesign.Standard,
+									theme: Pillar.News,
 								}}
 								hidePillOnMobile={false}
+								uniqueId={uniqueId}
+								posterImage={posterImage}
+								title={title}
+								height={height}
+								width={width}
+								onClick={onClick}
 							/>
-						}
+						)}
 					/>
 				</ConfigProvider>
 			</>

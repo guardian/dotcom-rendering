@@ -142,7 +142,14 @@ const baseConfiguration = {
 	adTargeting: disableAds,
 	consentState: consentGiven,
 	renderingTarget: 'Web',
-	YoutubeAtomOverlay: (
+	renderOverlay: ({
+		uniqueId,
+		posterImage,
+		title,
+		height,
+		width,
+		onClick,
+	}) => (
 		<YoutubeAtomCardOverlay
 			format={{
 				theme: Pillar.News,
@@ -151,6 +158,13 @@ const baseConfiguration = {
 			}}
 			hidePillOnMobile={false}
 			duration={252}
+			alt="Microscopic image of COVID"
+			uniqueId={uniqueId}
+			posterImage={posterImage}
+			title={title}
+			height={height}
+			width={width}
+			onClick={onClick}
 		/>
 	),
 } satisfies Partial<Props>;
@@ -181,16 +195,28 @@ export const WithPosterImage = {
 		posterImage:
 			'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/1920.jpg',
 		title: 'How Donald Trump’s broken promises failed Ohio | Anywhere but Washington',
-		YoutubeAtomOverlay: (
+		renderOverlay: ({
+			uniqueId,
+			posterImage,
+			title,
+			height,
+			width,
+			onClick,
+		}) => (
 			<YoutubeAtomCardOverlay
-				alt="Microscopic image of COVID"
 				format={{
 					theme: Pillar.Sport,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
-				duration={252}
 				hidePillOnMobile={false}
+				duration={252}
+				uniqueId={uniqueId}
+				posterImage={posterImage}
+				title={title}
+				height={height}
+				width={width}
+				onClick={onClick}
 			/>
 		),
 	},
@@ -204,18 +230,6 @@ export const GiveConsent = {
 		videoId: WithPosterImage.args.videoId,
 		title: WithPosterImage.args.title,
 		posterImage: WithPosterImage.args.posterImage,
-		YoutubeAtomOverlay: (
-			<YoutubeAtomCardOverlay
-				duration={252}
-				alt="Microscopic image of COVID"
-				format={{
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				hidePillOnMobile={false}
-			/>
-		),
 	},
 	render: function Render(args) {
 		const [consented, setConsented] = useState(false);
@@ -458,7 +472,14 @@ export const LiveStream = {
 		height: undefined,
 		width: undefined,
 		title: 'How to stop the spread of coronavirus',
-		YoutubeAtomOverlay: (
+		renderOverlay: ({
+			uniqueId,
+			posterImage,
+			title,
+			height,
+			width,
+			onClick,
+		}) => (
 			<YoutubeAtomCardOverlay
 				format={{
 					theme: Pillar.News,
@@ -466,8 +487,14 @@ export const LiveStream = {
 					display: ArticleDisplay.Standard,
 				}}
 				hidePillOnMobile={false}
-				alt="Microscopic image of COVID"
 				duration={0}
+				alt="Microscopic image of COVID"
+				uniqueId={uniqueId}
+				posterImage={posterImage}
+				title={title}
+				height={height}
+				width={width}
+				onClick={onClick}
 			/>
 		),
 	},

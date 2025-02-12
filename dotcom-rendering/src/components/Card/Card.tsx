@@ -910,7 +910,14 @@ export const Card = ({
 												pauseOffscreenVideo={
 													pauseOffscreenVideo
 												}
-												YoutubeAtomOverlay={
+												renderOverlay={({
+													uniqueId,
+													posterImage,
+													title,
+													height,
+													width,
+													onClick,
+												}) => (
 													<YoutubeAtomCardOverlay
 														alt={headlineText}
 														kicker={kickerText}
@@ -954,8 +961,16 @@ export const Card = ({
 															imagePositionOnMobile ===
 																'right'
 														}
+														uniqueId={uniqueId}
+														posterImage={
+															posterImage
+														}
+														title={title}
+														height={height}
+														width={width}
+														onClick={onClick}
 													/>
-												}
+												)}
 												enableAds={false}
 												aspectRatio={aspectRatio}
 											/>

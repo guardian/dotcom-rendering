@@ -21,7 +21,14 @@ type Props = {
 	format: ArticleFormat;
 	stickyVideos: boolean;
 	enableAds: boolean;
-	YoutubeAtomOverlay: ReactElement;
+	renderOverlay: (settings: {
+		uniqueId: string;
+		posterImage: string | undefined;
+		title: string | undefined;
+		height: number;
+		width: number;
+		onClick: () => void;
+	}) => ReactElement;
 	mediaTitle?: string;
 	hideCaption?: boolean;
 	overrideImage?: string;
@@ -48,7 +55,7 @@ export const YoutubeBlockComponent = ({
 	format,
 	stickyVideos,
 	enableAds,
-	YoutubeAtomOverlay,
+	renderOverlay,
 	mediaTitle,
 	hideCaption,
 	overrideImage,
@@ -151,7 +158,7 @@ export const YoutubeBlockComponent = ({
 				shouldPauseOutOfView={pauseOffscreenVideo}
 				renderingTarget={renderingTarget}
 				aspectRatio={aspectRatio}
-				YoutubeAtomOverlay={YoutubeAtomOverlay}
+				renderOverlay={renderOverlay}
 			/>
 			{!hideCaption && (
 				<Caption
