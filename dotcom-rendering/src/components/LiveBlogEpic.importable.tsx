@@ -89,7 +89,6 @@ const usePayload = ({
 	isPaidContent,
 	tags,
 	pageId,
-	ophanPageViewId,
 }: {
 	shouldHideReaderRevenue: boolean;
 	sectionId: string;
@@ -97,7 +96,6 @@ const usePayload = ({
 	tags: TagType[];
 	pageId: string;
 	keywordIds: string;
-	ophanPageViewId?: string;
 }): EpicPayload | undefined => {
 	const articleCounts = useArticleCounts(pageId, tags, 'LiveBlog');
 	const hasOptedOutOfArticleCount = useHasOptedOutOfArticleCount();
@@ -105,7 +103,6 @@ const usePayload = ({
 	const mvtId = useMvtId();
 	const isSignedIn = useIsSignedIn();
 
-	if (!ophanPageViewId) return;
 	if (isSignedIn === 'Pending') return;
 	const hideSupportMessagingForUser = shouldHideSupportMessaging(isSignedIn);
 	if (hideSupportMessagingForUser === 'Pending') return;
@@ -116,12 +113,6 @@ const usePayload = ({
 	log('dotcom', 'LiveBlogEpic has countryCode');
 
 	return {
-		tracking: {
-			ophanPageId: ophanPageViewId,
-			platformId: 'GUARDIAN_WEB',
-			clientName: 'dcr',
-			referrerUrl: window.location.origin + window.location.pathname,
-		},
 		targeting: {
 			contentType: 'LiveBlog',
 			sectionId,
@@ -201,7 +192,6 @@ const Fetch = ({
 		ophanPageId: ophanPageViewId,
 		platformId: 'GUARDIAN_WEB',
 		referrerUrl: pageUrl,
-		clientName: 'dcr',
 	};
 
 	// Add submitComponentEvent function to props to enable Ophan tracking in the component
@@ -266,7 +256,6 @@ export const LiveBlogEpic = ({
 		tags,
 		pageId,
 		keywordIds,
-		ophanPageViewId,
 	});
 	if (!ophanPageViewId || !payload || !pageUrl) return null;
 

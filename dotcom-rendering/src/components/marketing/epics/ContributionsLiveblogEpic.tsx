@@ -17,10 +17,7 @@ import {
 	containsNonArticleCountPlaceholder,
 	replaceNonArticleCountPlaceholders,
 } from '@guardian/support-dotcom-components';
-import type {
-	EpicProps,
-	Tracking,
-} from '@guardian/support-dotcom-components/dist/shared/types';
+import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import type { ReactComponent } from '../lib/ReactComponent';
@@ -33,7 +30,7 @@ import { logEpicView } from '../lib/viewLog';
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
 import { ContributionsEpicCtasContainer } from './ctas/ContributionsEpicCtasContainer';
 
-const container = (tracking: Tracking) => css`
+const container = css`
 	padding: 6px 10px 28px 10px;
 	border-top: 1px solid ${palette.brandAlt[400]};
 	border-bottom: 1px solid ${palette.neutral[86]};
@@ -49,7 +46,7 @@ const container = (tracking: Tracking) => css`
 	}
 
 	${from.tablet} {
-		padding-left: ${tracking.clientName === 'dcr' ? '60px' : '80px'};
+		padding-left: 60px;
 		padding-right: 20px;
 	}
 `;
@@ -74,7 +71,7 @@ const textContainer = css`
 	}
 `;
 
-const yellowHeading = (tracking: Tracking) => css`
+const yellowHeading = css`
 	${headlineBold34};
 	font-size: 28px;
 	color: ${palette.neutral[7]};
@@ -85,7 +82,7 @@ const yellowHeading = (tracking: Tracking) => css`
 
 	padding: 8px 10px 12px 10px;
 	${from.tablet} {
-		padding-left: ${tracking.clientName === 'dcr' ? '60px' : '80px'};
+		padding-left: 60px;
 		padding-right: 20px;
 	}
 `;
@@ -193,10 +190,8 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 
 	return (
 		<div data-testid="contributions-liveblog-epic" ref={setNode}>
-			{!!cleanHeading && (
-				<div css={yellowHeading(tracking)}>{cleanHeading}</div>
-			)}
-			<section css={container(tracking)}>
+			{!!cleanHeading && <div css={yellowHeading}>{cleanHeading}</div>}
+			<section css={container}>
 				<LiveblogEpicBody
 					paragraphs={cleanParagraphs}
 					numArticles={articleCounts.forTargetedWeeks}
