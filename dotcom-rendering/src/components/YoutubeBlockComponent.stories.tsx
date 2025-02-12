@@ -4,7 +4,7 @@ import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { RightColumn } from './RightColumn';
 import { Section } from './Section';
-import { YoutubeAtomCardOverlay } from './YoutubeAtom/YoutubeAtomCardOverlay';
+import { YoutubeAtomOverlayCard } from './YoutubeAtom/YoutubeAtomOverlayCard';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
 
 export default {
@@ -57,12 +57,12 @@ export const Default = () => {
 				enableAds={false}
 				renderOverlay={({
 					uniqueId,
-					posterImage,
+					image,
 					height,
 					width,
 					onClick,
 				}) => (
-					<YoutubeAtomCardOverlay
+					<YoutubeAtomOverlayCard
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -70,7 +70,7 @@ export const Default = () => {
 						}}
 						hidePillOnMobile={false}
 						uniqueId={uniqueId}
-						posterImage={posterImage}
+						image={image}
 						title={
 							"Prince Harry and Meghan's 'bombshell' plans explained – video"
 						}
@@ -117,12 +117,12 @@ export const Vertical = () => {
 				enableAds={false}
 				renderOverlay={({
 					uniqueId,
-					posterImage,
+					image,
 					height,
 					width,
 					onClick,
 				}) => (
-					<YoutubeAtomCardOverlay
+					<YoutubeAtomOverlayCard
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -130,7 +130,7 @@ export const Vertical = () => {
 						}}
 						hidePillOnMobile={false}
 						uniqueId={uniqueId}
-						posterImage={posterImage}
+						image={image}
 						title={
 							"Prince Harry and Meghan's 'bombshell' plans explained – video"
 						}
@@ -178,12 +178,12 @@ export const Expired = () => {
 				enableAds={false}
 				renderOverlay={({
 					uniqueId,
-					posterImage,
+					image,
 					height,
 					width,
 					onClick,
 				}) => (
-					<YoutubeAtomCardOverlay
+					<YoutubeAtomOverlayCard
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -191,7 +191,7 @@ export const Expired = () => {
 						}}
 						hidePillOnMobile={false}
 						uniqueId={uniqueId}
-						posterImage={posterImage}
+						image={image}
 						title={
 							"Prince Harry and Meghan's 'bombshell' plans explained – video"
 						}
@@ -240,12 +240,12 @@ export const WithOverlayImage = () => {
 				enableAds={false}
 				renderOverlay={({
 					uniqueId,
-					posterImage,
+					image,
 					height,
 					width,
 					onClick,
 				}) => (
-					<YoutubeAtomCardOverlay
+					<YoutubeAtomOverlayCard
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -253,7 +253,7 @@ export const WithOverlayImage = () => {
 						}}
 						hidePillOnMobile={false}
 						uniqueId={uniqueId}
-						posterImage={posterImage}
+						image={image}
 						title={
 							"Prince Harry and Meghan's 'bombshell' plans explained – video"
 						}
@@ -274,7 +274,7 @@ export const WithOverlayImage = () => {
 };
 WithOverlayImage.storyName = 'with overlay image';
 
-export const WithPosterImage = () => {
+export const Withimage = () => {
 	return (
 		<Wrapper>
 			<p>
@@ -323,12 +323,12 @@ export const WithPosterImage = () => {
 				enableAds={false}
 				renderOverlay={({
 					uniqueId,
-					posterImage,
+					image,
 					height,
 					width,
 					onClick,
 				}) => (
-					<YoutubeAtomCardOverlay
+					<YoutubeAtomOverlayCard
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -336,7 +336,7 @@ export const WithPosterImage = () => {
 						}}
 						hidePillOnMobile={false}
 						uniqueId={uniqueId}
-						posterImage={posterImage}
+						image={image}
 						title={
 							"Prince Harry and Meghan's 'bombshell' plans explained – video"
 						}
@@ -355,7 +355,7 @@ export const WithPosterImage = () => {
 		</Wrapper>
 	);
 };
-WithPosterImage.storyName = 'with poster image';
+Withimage.storyName = 'with poster image';
 
 export const WithPosterAndOverlayImage = () => {
 	const title =
@@ -409,12 +409,12 @@ export const WithPosterAndOverlayImage = () => {
 				enableAds={false}
 				renderOverlay={({
 					uniqueId,
-					posterImage,
+					image,
 					height,
 					width,
 					onClick,
 				}) => (
-					<YoutubeAtomCardOverlay
+					<YoutubeAtomOverlayCard
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -422,7 +422,7 @@ export const WithPosterAndOverlayImage = () => {
 						}}
 						hidePillOnMobile={false}
 						uniqueId={uniqueId}
-						posterImage={posterImage}
+						image={image}
 						title={title}
 						height={height}
 						width={width}
@@ -444,8 +444,6 @@ WithPosterAndOverlayImage.storyName = 'with poster and overlay image';
 export const WithShowMainVideoFlagOff = () => {
 	const title =
 		"Prince Harry and Meghan's 'bombshell' plans explained – video";
-	const height = 259;
-	const width = 460;
 
 	return (
 		<Wrapper>
@@ -494,8 +492,14 @@ export const WithShowMainVideoFlagOff = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
-				renderOverlay={({ uniqueId, posterImage, onClick }) => (
-					<YoutubeAtomCardOverlay
+				renderOverlay={({
+					uniqueId,
+					image,
+					height,
+					width,
+					onClick,
+				}) => (
+					<YoutubeAtomOverlayCard
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -503,7 +507,7 @@ export const WithShowMainVideoFlagOff = () => {
 						}}
 						hidePillOnMobile={false}
 						uniqueId={uniqueId}
-						posterImage={posterImage}
+						image={image}
 						title={title}
 						height={height}
 						width={width}

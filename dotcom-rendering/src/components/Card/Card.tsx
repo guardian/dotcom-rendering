@@ -47,7 +47,7 @@ import { StarRating } from '../StarRating/StarRating';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
 import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
-import { YoutubeAtomCardOverlay } from '../YoutubeAtom/YoutubeAtomCardOverlay';
+import { YoutubeAtomOverlayCard } from '../YoutubeAtom/YoutubeAtomOverlayCard';
 import { YoutubeBlockComponent } from '../YoutubeBlockComponent.importable';
 import { AvatarContainer } from './components/AvatarContainer';
 import { CardAge } from './components/CardAge';
@@ -912,16 +912,14 @@ export const Card = ({
 												}
 												renderOverlay={({
 													uniqueId,
-													posterImage,
+													image: overlayImage,
 													height,
 													width,
 													onClick,
 												}) => (
-													<YoutubeAtomCardOverlay
+													<YoutubeAtomOverlayCard
 														uniqueId={uniqueId}
-														posterImage={
-															posterImage
-														}
+														image={overlayImage}
 														height={height}
 														width={width}
 														onClick={onClick}

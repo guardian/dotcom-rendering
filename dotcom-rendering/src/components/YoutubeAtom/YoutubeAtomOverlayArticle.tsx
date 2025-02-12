@@ -92,11 +92,11 @@ type Props = {
 	height: number;
 	width: number;
 	title: string;
-	onClick: () => void;
 	format: ArticleFormat;
+	onClick: () => void;
 	hidePillOnMobile: boolean;
 	alt?: string;
-	posterImage?: string;
+	image?: string;
 	duration?: number; // in seconds
 	kicker?: string;
 	showTextOverlay?: boolean;
@@ -105,11 +105,11 @@ type Props = {
 	iconSizeOnMobile?: PlayButtonSize;
 };
 
-export const YoutubeAtomCardOverlay = ({
+export const YoutubeAtomOverlayArticle = ({
 	format,
 	hidePillOnMobile,
 	uniqueId,
-	posterImage,
+	image,
 	height,
 	width,
 	alt = '',
@@ -139,9 +139,9 @@ export const YoutubeAtomCardOverlay = ({
 				aria-label={title ? `Play video: ${title}` : `Play video`}
 				type="button"
 			>
-				{!!posterImage && !!height && !!width && (
+				{!!image && (
 					<YoutubeAtomPicture
-						image={posterImage}
+						image={image}
 						alt={alt}
 						height={height}
 						width={width}

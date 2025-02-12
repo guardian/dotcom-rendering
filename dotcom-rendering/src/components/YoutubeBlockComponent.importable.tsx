@@ -23,13 +23,13 @@ type Props = {
 	enableAds: boolean;
 	renderOverlay: ({
 		uniqueId,
-		posterImage,
+		image,
 		height,
 		width,
 		onClick,
 	}: {
 		uniqueId: string;
-		posterImage: string | undefined;
+		image: string | undefined;
 		height: number;
 		width: number;
 		onClick: () => void;
@@ -141,7 +141,7 @@ export const YoutubeBlockComponent = ({
 				atomId={id}
 				videoId={assetId}
 				uniqueId={uniqueId}
-				posterImage={overrideImage ?? overlayImage}
+				image={overrideImage ?? overlayImage}
 				adTargeting={
 					enableAds && renderingTarget === 'Web'
 						? adTargeting
@@ -156,7 +156,7 @@ export const YoutubeBlockComponent = ({
 						? [ophanTrackerWeb(id)]
 						: [ophanTrackerApps(id)]
 				}
-				origin={origin}
+				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 				shouldStick={renderingTarget === 'Web' ? stickyVideos : false}
 				isMainMedia={isMainMedia}
 				abTestParticipations={abTestParticipations}

@@ -4,7 +4,7 @@ import { fireEvent, render } from '@testing-library/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import { ConfigProvider } from '../ConfigContext';
 import { YoutubeAtom } from './YoutubeAtom';
-import { YoutubeAtomCardOverlay } from './YoutubeAtomCardOverlay';
+import { YoutubeAtomOverlayCard } from './YoutubeAtomOverlayCard';
 
 const overlayImage =
 	'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=aff4b8255693eb449f13070df88e9cac';
@@ -22,11 +22,11 @@ const consentStateCanTarget: ConsentState = {
 	framework: 'tcfv2',
 };
 
+const uniqueId = 'c_xtiZNDgGc-1';
+const title = 'My Youtube video!';
+
 describe('YoutubeAtom', () => {
 	it('Player initialises when no overlay and has consent state', () => {
-		const uniqueId = 'c_xtiZNDgGc-1';
-		const title = 'My Youtube video!';
-
 		const atom = (
 			<ConfigProvider
 				value={{
@@ -48,13 +48,8 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					abTestParticipations={{}}
 					renderingTarget="Web"
-					renderOverlay={({
-						posterImage,
-						height,
-						width,
-						onClick,
-					}) => (
-						<YoutubeAtomCardOverlay
+					renderOverlay={({ image, height, width, onClick }) => (
+						<YoutubeAtomOverlayCard
 							format={{
 								display: ArticleDisplay.Standard,
 								design: ArticleDesign.Standard,
@@ -62,7 +57,7 @@ describe('YoutubeAtom', () => {
 							}}
 							hidePillOnMobile={false}
 							uniqueId={uniqueId}
-							posterImage={posterImage}
+							image={image}
 							title={title}
 							height={height}
 							width={width}
@@ -78,9 +73,6 @@ describe('YoutubeAtom', () => {
 	});
 
 	it('Player initialises when overlay clicked and has consent state', () => {
-		const uniqueId = 'c_xtiZNDgGc-1';
-		const title = 'My Youtube video!';
-
 		const atom = (
 			<ConfigProvider
 				value={{
@@ -98,18 +90,13 @@ describe('YoutubeAtom', () => {
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
 					consentState={consentStateCanTarget}
-					posterImage={overlayImage}
+					image={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
 					renderingTarget="Web"
-					renderOverlay={({
-						posterImage,
-						height,
-						width,
-						onClick,
-					}) => (
-						<YoutubeAtomCardOverlay
+					renderOverlay={({ image, height, width, onClick }) => (
+						<YoutubeAtomOverlayCard
 							format={{
 								display: ArticleDisplay.Standard,
 								design: ArticleDesign.Standard,
@@ -117,7 +104,7 @@ describe('YoutubeAtom', () => {
 							}}
 							hidePillOnMobile={false}
 							uniqueId={uniqueId}
-							posterImage={posterImage}
+							image={image}
 							title={title}
 							height={height}
 							width={width}
@@ -139,9 +126,6 @@ describe('YoutubeAtom', () => {
 	});
 
 	it('player div has correct title', () => {
-		const uniqueId = 'c_xtiZNDgGc-1';
-		const title = 'My Youtube video!';
-
 		const atom = (
 			<ConfigProvider
 				value={{
@@ -163,13 +147,8 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					abTestParticipations={{}}
 					renderingTarget="Web"
-					renderOverlay={({
-						posterImage,
-						height,
-						width,
-						onClick,
-					}) => (
-						<YoutubeAtomCardOverlay
+					renderOverlay={({ image, height, width, onClick }) => (
+						<YoutubeAtomOverlayCard
 							format={{
 								display: ArticleDisplay.Standard,
 								design: ArticleDesign.Standard,
@@ -177,7 +156,7 @@ describe('YoutubeAtom', () => {
 							}}
 							hidePillOnMobile={false}
 							uniqueId={uniqueId}
-							posterImage={posterImage}
+							image={image}
 							title={title}
 							height={height}
 							width={width}
@@ -193,9 +172,6 @@ describe('YoutubeAtom', () => {
 	});
 
 	it('overlay has correct aria-label', () => {
-		const uniqueId = 'c_xtiZNDgGc-1';
-		const title = 'My Youtube video!';
-
 		const atom = (
 			<ConfigProvider
 				value={{
@@ -213,18 +189,13 @@ describe('YoutubeAtom', () => {
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
 					consentState={consentStateCanTarget}
-					posterImage={overlayImage}
+					image={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
 					renderingTarget="Web"
-					renderOverlay={({
-						posterImage,
-						height,
-						width,
-						onClick,
-					}) => (
-						<YoutubeAtomCardOverlay
+					renderOverlay={({ image, height, width, onClick }) => (
+						<YoutubeAtomOverlayCard
 							format={{
 								display: ArticleDisplay.Standard,
 								design: ArticleDesign.Standard,
@@ -232,7 +203,7 @@ describe('YoutubeAtom', () => {
 							}}
 							hidePillOnMobile={false}
 							uniqueId={uniqueId}
-							posterImage={posterImage}
+							image={image}
 							title={title}
 							height={height}
 							width={width}
@@ -250,9 +221,6 @@ describe('YoutubeAtom', () => {
 	});
 
 	it('shows a placeholder if overlay is missing', () => {
-		const uniqueId = 'c_xtiZNDgGc-1';
-		const title = 'My Youtube video!';
-
 		const atom = (
 			<ConfigProvider
 				value={{
@@ -273,13 +241,8 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					abTestParticipations={{}}
 					renderingTarget="Web"
-					renderOverlay={({
-						posterImage,
-						height,
-						width,
-						onClick,
-					}) => (
-						<YoutubeAtomCardOverlay
+					renderOverlay={({ image, height, width, onClick }) => (
+						<YoutubeAtomOverlayCard
 							format={{
 								display: ArticleDisplay.Standard,
 								design: ArticleDesign.Standard,
@@ -287,7 +250,7 @@ describe('YoutubeAtom', () => {
 							}}
 							hidePillOnMobile={false}
 							uniqueId={uniqueId}
-							posterImage={posterImage}
+							image={image}
 							title={title}
 							height={height}
 							width={width}
@@ -305,9 +268,6 @@ describe('YoutubeAtom', () => {
 	});
 
 	it('shows an overlay if present', () => {
-		const uniqueId = 'c_xtiZNDgGc-1';
-		const title = 'My Youtube video!';
-
 		const atom = (
 			<ConfigProvider
 				value={{
@@ -324,18 +284,13 @@ describe('YoutubeAtom', () => {
 					title={title}
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
-					posterImage={overlayImage}
+					image={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
 					renderingTarget="Web"
-					renderOverlay={({
-						posterImage,
-						height,
-						width,
-						onClick,
-					}) => (
-						<YoutubeAtomCardOverlay
+					renderOverlay={({ image, height, width, onClick }) => (
+						<YoutubeAtomOverlayCard
 							format={{
 								display: ArticleDisplay.Standard,
 								design: ArticleDesign.Standard,
@@ -343,7 +298,7 @@ describe('YoutubeAtom', () => {
 							}}
 							hidePillOnMobile={false}
 							uniqueId={uniqueId}
-							posterImage={posterImage}
+							image={image}
 							title={title}
 							height={height}
 							width={width}
@@ -359,9 +314,6 @@ describe('YoutubeAtom', () => {
 	});
 
 	it('hides an overlay once it is clicked', () => {
-		const uniqueId = 'c_xtiZNDgGc-1';
-		const title = 'My Youtube video!';
-
 		const atom = (
 			<ConfigProvider
 				value={{
@@ -378,18 +330,13 @@ describe('YoutubeAtom', () => {
 					title={title}
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
-					posterImage={overlayImage}
+					image={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
 					renderingTarget="Web"
-					renderOverlay={({
-						posterImage,
-						height,
-						width,
-						onClick,
-					}) => (
-						<YoutubeAtomCardOverlay
+					renderOverlay={({ image, height, width, onClick }) => (
+						<YoutubeAtomOverlayCard
 							format={{
 								display: ArticleDisplay.Standard,
 								design: ArticleDesign.Standard,
@@ -397,7 +344,7 @@ describe('YoutubeAtom', () => {
 							}}
 							hidePillOnMobile={false}
 							uniqueId={uniqueId}
-							posterImage={posterImage}
+							image={image}
 							title={title}
 							height={height}
 							width={width}
@@ -416,9 +363,6 @@ describe('YoutubeAtom', () => {
 	});
 
 	it('when two Atoms - hides the overlay of the correct player if clicked', () => {
-		const uniqueId = 'c_xtiZNDgGc-1';
-		const title = 'My Youtube video!';
-
 		const atom = (
 			<>
 				<ConfigProvider
@@ -436,18 +380,13 @@ describe('YoutubeAtom', () => {
 						title={title}
 						adTargeting={{ disableAds: true }}
 						eventEmitters={[]}
-						posterImage={overlayImage}
+						image={overlayImage}
 						shouldStick={false}
 						isMainMedia={false}
 						abTestParticipations={{}}
 						renderingTarget="Web"
-						renderOverlay={({
-							posterImage,
-							height,
-							width,
-							onClick,
-						}) => (
-							<YoutubeAtomCardOverlay
+						renderOverlay={({ image, height, width, onClick }) => (
+							<YoutubeAtomOverlayCard
 								format={{
 									display: ArticleDisplay.Standard,
 									design: ArticleDesign.Standard,
@@ -455,7 +394,7 @@ describe('YoutubeAtom', () => {
 								}}
 								hidePillOnMobile={false}
 								uniqueId={uniqueId}
-								posterImage={posterImage}
+								image={image}
 								title={title}
 								height={height}
 								width={width}
@@ -470,18 +409,13 @@ describe('YoutubeAtom', () => {
 						title="My Youtube video 2!"
 						adTargeting={{ disableAds: true }}
 						eventEmitters={[]}
-						posterImage={overlayImage}
+						image={overlayImage}
 						shouldStick={false}
 						isMainMedia={false}
 						abTestParticipations={{}}
 						renderingTarget="Web"
-						renderOverlay={({
-							posterImage,
-							height,
-							width,
-							onClick,
-						}) => (
-							<YoutubeAtomCardOverlay
+						renderOverlay={({ image, height, width, onClick }) => (
+							<YoutubeAtomOverlayCard
 								format={{
 									display: ArticleDisplay.Standard,
 									design: ArticleDesign.Standard,
@@ -489,7 +423,7 @@ describe('YoutubeAtom', () => {
 								}}
 								hidePillOnMobile={false}
 								uniqueId={uniqueId}
-								posterImage={posterImage}
+								image={image}
 								title={title}
 								height={height}
 								width={width}

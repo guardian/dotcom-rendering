@@ -25,7 +25,7 @@ export type Props = {
 	atomId: string;
 	videoId: string;
 	uniqueId: string;
-	posterImage?: string | undefined;
+	image?: string;
 	adTargeting?: AdTargeting;
 	consentState?: ConsentState;
 	height?: number;
@@ -41,13 +41,13 @@ export type Props = {
 	aspectRatio?: AspectRatio;
 	renderOverlay: ({
 		uniqueId,
-		posterImage,
+		image,
 		height,
 		width,
 		onClick,
 	}: {
 		uniqueId: string;
-		posterImage: string;
+		image: string;
 		height: number;
 		width: number;
 		onClick: () => void;
@@ -58,7 +58,7 @@ export const YoutubeAtom = ({
 	atomId,
 	videoId,
 	uniqueId,
-	posterImage,
+	image,
 	adTargeting,
 	consentState,
 	height = 259,
@@ -130,7 +130,7 @@ export const YoutubeAtom = ({
 	 * 3. When consent and ad targeting is available render the player to initiate loading of the YouTube player
 	 * 4. When the player is ready the placeholder is removed and the YouTube player is shown
 	 */
-	const hasOverlay = !!posterImage;
+	const hasOverlay = !!image;
 
 	const showOverlay = hasOverlay && !overlayClicked;
 
@@ -211,7 +211,7 @@ export const YoutubeAtom = ({
 					{showOverlay &&
 						renderOverlay({
 							uniqueId,
-							posterImage,
+							image,
 							height,
 							width,
 							onClick: () => setOverlayClicked(true),

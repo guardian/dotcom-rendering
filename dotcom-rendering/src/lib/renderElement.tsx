@@ -60,7 +60,7 @@ import {
 	WitnessTextBlockComponent,
 	WitnessVideoBlockComponent,
 } from '../components/WitnessBlockComponent';
-import { YoutubeAtomCardOverlay } from '../components/YoutubeAtom/YoutubeAtomCardOverlay';
+import { YoutubeAtomOverlayArticle } from '../components/YoutubeAtom/YoutubeAtomOverlayArticle';
 import { YoutubeBlockComponent } from '../components/YoutubeBlockComponent.importable';
 import { YoutubeEmbedBlockComponent } from '../components/YoutubeEmbedBlockComponent';
 import {
@@ -857,21 +857,22 @@ export const renderElement = ({
 						enableAds={true}
 						renderOverlay={({
 							uniqueId,
-							posterImage,
+							image,
 							height,
 							width,
 							onClick,
 						}) => (
-							<YoutubeAtomCardOverlay
+							<YoutubeAtomOverlayArticle
 								uniqueId={uniqueId}
-								posterImage={posterImage}
 								height={height}
 								width={width}
-								onClick={onClick}
-								alt={element.altText}
-								format={format}
-								hidePillOnMobile={false}
+								image={image}
 								title={element.mediaTitle}
+								format={format}
+								onClick={onClick}
+								hidePillOnMobile={false}
+								alt={element.altText}
+								duration={element.duration}
 							/>
 						)}
 					/>
