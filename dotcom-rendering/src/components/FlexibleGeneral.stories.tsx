@@ -341,6 +341,126 @@ export const GigaBoostedSplash: Story = {
 		},
 	},
 };
+export const DefaultSplashWithImageSupression: Story = {
+	name: 'Standard splash with image supression',
+	args: {
+		frontSectionTitle: 'Standard splash with image supression',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			splash: [{ ...splashCard, image: undefined }],
+		},
+	},
+};
+
+export const BoostedSplashWithImageSupression: Story = {
+	name: 'Boosted splash with image supression',
+	args: {
+		frontSectionTitle: 'Boosted splash',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			splash: [
+				{
+					...splashCard,
+					boostLevel: 'boost',
+					image: undefined,
+				},
+			],
+		},
+	},
+};
+
+export const MegaBoostedSplashWithImageSupression: Story = {
+	name: 'Mega boosted splash with image supression',
+	args: {
+		frontSectionTitle: 'Mega boosted splash',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			splash: [
+				{
+					...splashCard,
+					boostLevel: 'megaboost',
+					image: undefined,
+				},
+			],
+		},
+	},
+};
+
+export const GigaBoostedSplashWithImageSupression: Story = {
+	name: 'Giga boosted splash with image supression',
+	args: {
+		frontSectionTitle: 'Giga boosted splash',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			splash: [
+				{
+					...splashCard,
+					boostLevel: 'gigaboost',
+					image: undefined,
+				},
+			],
+		},
+	},
+};
+
+export const DefaultSplashWithLiveUpdates: Story = {
+	name: 'Standard splash with live updates',
+	args: {
+		frontSectionTitle: 'Standard splash with live updates',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			splash: [{ ...liveUpdatesCard }],
+		},
+	},
+};
+
+export const BoostedSplashWithLiveUpdates: Story = {
+	name: 'Boosted splash with live updates',
+	args: {
+		frontSectionTitle: 'Boosted splash',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			splash: [
+				{
+					...liveUpdatesCard,
+					boostLevel: 'boost',
+				},
+			],
+		},
+	},
+};
+
+export const MegaBoostedSplashWithLiveUpdates: Story = {
+	name: 'Mega boosted splash with live updates',
+	args: {
+		frontSectionTitle: 'Mega boosted splash',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			splash: [
+				{
+					...liveUpdatesCard,
+					boostLevel: 'megaboost',
+				},
+			],
+		},
+	},
+};
+
+export const GigaBoostedSplashWithLiveUpdates: Story = {
+	name: 'Giga boosted splash with live updates',
+	args: {
+		frontSectionTitle: 'Giga boosted splash',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			splash: [
+				{
+					...liveUpdatesCard,
+					boostLevel: 'gigaboost',
+				},
+			],
+		},
+	},
+};
 
 const containerPalettes = [
 	'InvestigationPalette',
