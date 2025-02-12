@@ -14,7 +14,11 @@ import {
 	SvgPlus,
 } from '@guardian/source/react-components';
 import { Fragment, type ReactNode, useState } from 'react';
-import type { FootballMatch, FootballMatches } from '../footballMatches';
+import type {
+	FootballMatch,
+	FootballMatches,
+	FootballMatchKind,
+} from '../footballMatches';
 import { grid } from '../grid';
 import {
 	type EditionId,
@@ -171,7 +175,7 @@ const matchListItemStyles = css`
 	}
 `;
 
-const matchStyles = (matchKind: FootballMatch['kind']) => css`
+const matchStyles = (matchKind: FootballMatchKind) => css`
 	${textSans14}
 
 	${matchKind === 'Live' ? 'font-weight: bold;' : undefined}

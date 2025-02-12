@@ -72,13 +72,15 @@ const Layout: CrosswordProps['Layout'] = ({
 					`}
 				/>
 				<Grid />
-				<Controls />
-				<div
-					css={css`
-						${textSansItalic12};
-					`}
-				>
-					<SavedMessage />
+				<div data-print-layout="hide">
+					<Controls />
+					<div
+						css={css`
+							${textSansItalic12};
+						`}
+					>
+						<SavedMessage />
+					</div>
 				</div>
 			</div>
 

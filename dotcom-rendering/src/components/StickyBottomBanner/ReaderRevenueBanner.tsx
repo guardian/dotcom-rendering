@@ -140,12 +140,6 @@ const buildPayload = async ({
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 
 	return {
-		tracking: {
-			ophanPageId: window.guardian.config.ophan.pageViewId,
-			platformId: 'GUARDIAN_WEB',
-			clientName: 'dcr',
-			referrerUrl: window.location.origin + window.location.pathname,
-		},
 		targeting: {
 			shouldHideReaderRevenue,
 			isPaidContent,
@@ -293,11 +287,10 @@ export const canShowRRBanner: CanShowFunctionType<
 		ophanPageId: ophanPageViewId,
 		platformId: 'GUARDIAN_WEB',
 		referrerUrl: window.location.origin + window.location.pathname,
-		clientName: 'dcr',
 	};
 	const enrichedProps: BannerProps = {
 		...props,
-		...tracking,
+		tracking,
 		fetchEmail,
 		submitComponentEvent: (componentEvent: OphanComponentEvent) =>
 			void submitComponentEvent(componentEvent, renderingTarget),

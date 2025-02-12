@@ -88,6 +88,10 @@ const indices = [
 	// Main media
 	'mainMedia',
 
+	// The carousel buttons of the highlights container that sits above the header.
+	// Needs to be above 'card-link'.
+	'highlights-carousel-buttons',
+
 	// Nested links in cards should sit above the main card link
 	// See: https://www.sarasoueidan.com/blog/nested-links/
 	'card-nested-link',

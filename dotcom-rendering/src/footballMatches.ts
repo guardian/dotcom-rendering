@@ -30,6 +30,7 @@ export type LiveMatch = MatchData & {
 };
 
 export type FootballMatch = MatchResult | MatchFixture | LiveMatch;
+export type FootballMatchKind = FootballMatch['kind'];
 
 type Competition = {
 	competitionId: string;

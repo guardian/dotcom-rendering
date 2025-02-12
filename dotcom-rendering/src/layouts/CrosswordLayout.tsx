@@ -188,7 +188,7 @@ export const CrosswordLayout = (props: WebProps) => {
 	const renderAds = canRenderAds(article);
 	return (
 		<>
-			<div>
+			<div data-print-layout="hide">
 				{renderAds && (
 					<Stuck>
 						<div data-print-layout="hide">
@@ -244,7 +244,7 @@ export const CrosswordLayout = (props: WebProps) => {
 					<div>
 						<CrosswordGrid>
 							<GridItem area="title" element="aside">
-								<div>
+								<div data-print-layout="hide">
 									<ArticleTitle
 										format={format}
 										tags={article.tags}
@@ -270,31 +270,36 @@ export const CrosswordLayout = (props: WebProps) => {
 								</div>
 							</GridItem>
 							<GridItem area="standfirst">
-								<Hide until="leftCol">
-									<DecideLines
-										format={format}
-										color={themePalette(
-											'--article-meta-lines',
-										)}
-									/>
-								</Hide>
-								<Hide from="desktop">
-									<Standfirst
-										format={format}
-										standfirst={
-											'<a href="https://app.adjust.com/16xt6hai" data-link-name="crossword-mobile-link">Download the Guardian app</a> for a better puzzles experience'
-										}
-									/>
-								</Hide>
-								{article.crossword && (
-									<CrosswordLinks
-										crossword={article.crossword}
-									/>
-								)}
+								<div data-print-layout="hide">
+									<Hide until="leftCol">
+										<DecideLines
+											format={format}
+											color={themePalette(
+												'--article-meta-lines',
+											)}
+										/>
+									</Hide>
+									<Hide from="desktop">
+										<Standfirst
+											format={format}
+											standfirst={
+												'<a href="https://app.adjust.com/16xt6hai" data-link-name="crossword-mobile-link">Download the Guardian app</a> for a better puzzles experience'
+											}
+										/>
+									</Hide>
+									{article.crossword && (
+										<CrosswordLinks
+											crossword={article.crossword}
+										/>
+									)}
+								</div>
 							</GridItem>
 							<GridItem area="meta" element="aside">
 								<div css={maxWidth}>
-									<div css={stretchLines}>
+									<div
+										data-print-layout="hide"
+										css={stretchLines}
+									>
 										<DecideLines
 											format={format}
 											color={themePalette(
@@ -439,7 +444,6 @@ export const CrosswordLayout = (props: WebProps) => {
 				>
 					<StraightLines
 						count={4}
-						data-print-layout="hide"
 						color={themePalette('--straight-lines')}
 						cssOverrides={css`
 							display: block;
@@ -460,15 +464,13 @@ export const CrosswordLayout = (props: WebProps) => {
 						webUrl={article.webURL}
 						webTitle={article.webTitle}
 						showBottomSocialButtons={
-							article.showBottomSocialButtons &&
-							renderingTarget === 'Web'
+							article.showBottomSocialButtons
 						}
 					/>
 				</Section>
 				{renderAds && (
 					<Section
 						fullWidth={true}
-						data-print-layout="hide"
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
