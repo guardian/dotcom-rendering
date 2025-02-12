@@ -166,17 +166,13 @@ check-env: # private
 clear: # private
 	@clear
 
-check-schema:
+check-schemas:
 	$(call log, "Checking schemas")
-	@node scripts/json-schema/check-schema.js
+	@node scripts/jsonSchema/checkSchemas.mjs
 
-gen-schema:
+gen-schemas:
 	$(call log, "Generating new schemas")
-	@node scripts/json-schema/gen-schema.js
-	@git add src/model/article-schema.json
-	@git add src/model/front-schema.json
-	@git add src/model/block-schema.json
-	@git add src/model/tag-page-schema.json
+	@node scripts/jsonSchema/genSchemas.mjs
 
 check-stories:
 	$(call log, "Checking Storybook stories")
