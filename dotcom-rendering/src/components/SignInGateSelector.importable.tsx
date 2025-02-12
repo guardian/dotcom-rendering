@@ -510,7 +510,6 @@ const fetchProxyGetTreatments = async (
 	const response_raw = await fetch(url, params);
 	const response =
 		(await response_raw.json()) as SDCAuxiaGetTreatmentsProxyResponse;
-
 	return Promise.resolve(response);
 };
 
@@ -631,6 +630,7 @@ const SignInGateSelectorAuxia = ({
 			);
 			if (data !== undefined) {
 				setAuxiaGateDisplayData(data);
+				setIsGateDismissed(false);
 			}
 		})().catch((error) => {
 			console.error('Error fetching Auxia display data:', error);
