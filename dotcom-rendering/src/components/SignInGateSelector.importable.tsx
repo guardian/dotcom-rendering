@@ -1,5 +1,5 @@
 import { getCookie, isUndefined } from '@guardian/libs';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, version } from 'react';
 import {
 	hasCmpConsentForBrowserId,
 	shouldHideSupportMessaging,
@@ -222,9 +222,9 @@ const SignInGateSelectorDefault = ({
 	const isSignedIn =
 		authStatus.kind === 'SignedInWithOkta' ||
 		authStatus.kind === 'SignedInWithCookies';
-	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
-		undefined,
-	);
+	const [isGateDismissed2, setIsGateDismissed] = useState<
+		boolean | undefined
+	>(undefined);
 	const [gateVariant, setGateVariant] = useState<
 		SignInGateComponent | undefined
 	>(undefined);
@@ -240,6 +240,8 @@ const SignInGateSelectorDefault = ({
 	// START: Checkout Complete Personalisation
 	const [personaliseSwitch, setPersonaliseSwitch] = useState(false);
 	const checkoutCompleteCookieData = useCheckoutCompleteCookieData();
+
+	console.log('!!! isGateDismissed Default', isGateDismissed2, version);
 
 	const personaliseComponentId = (
 		currentComponentId: string | undefined,
@@ -261,12 +263,12 @@ const SignInGateSelectorDefault = ({
 		// this hook will fire when the sign in gate is dismissed
 		// which will happen when the showGate state is set to false
 		// this only happens within the dismissGate method
-		if (isGateDismissed) {
+		if (isGateDismissed2) {
 			document.dispatchEvent(
 				new CustomEvent('article:sign-in-gate-dismissed'),
 			);
 		}
-	}, [isGateDismissed]);
+	}, [isGateDismissed2]);
 
 	useOnce(() => {
 		const [gateSelectorVariant, gateSelectorTest] = gateSelector as [
@@ -335,7 +337,7 @@ const SignInGateSelectorDefault = ({
 	return (
 		<>
 			{/* Sign In Gate Display Logic */}
-			{!isGateDismissed && canShowGate && !!componentId && (
+			{!isGateDismissed2 && canShowGate && !!componentId && (
 				<ShowSignInGate
 					abTest={currentTest}
 					componentId={componentId}
@@ -451,7 +453,7 @@ const dismissGateAuxia = (
 const decideBrowserIdWithConsentCheck = async (): Promise<
 	string | undefined
 > => {
-	return Promise.resolve('test')
+	return Promise.resolve('test');
 	const hasConsent = await hasCmpConsentForBrowserId();
 	if (!hasConsent) {
 		return Promise.resolve(undefined);
@@ -596,6 +598,8 @@ const SignInGateSelectorAuxia = ({
 		undefined,
 	);
 
+	console.log('!!! isGateDismissed Auxia', isGateDismissed, version);
+
 	const [auxiaGateDisplayData, setAuxiaGateDisplayData] = useState<
 		AuxiaGateDisplayData | undefined
 	>(undefined);
@@ -651,8 +655,6 @@ const SignInGateSelectorAuxia = ({
 	} satisfies Parameters<typeof generateGatewayUrl>[1];
 
 	const signInUrl = generateGatewayUrl('signin', ctaUrlParams);
-
-	console.log('isGateDismissed', isGateDismissed);
 
 	return (
 		<>

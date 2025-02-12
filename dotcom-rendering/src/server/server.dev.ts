@@ -1,4 +1,5 @@
 import type { Handler } from 'express';
+import { version } from 'React';
 import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
 import { handleAMPArticle } from './handler.article.amp';
 import {
@@ -52,6 +53,7 @@ const editionalisefront = (url: string): string => {
 // for more info
 export const devServer = (): Handler => {
 	return (req, res, next) => {
+		console.log('React version:', version);
 		const path = req.path.split('/')[1];
 
 		// handle urls with the ?url=… query param
