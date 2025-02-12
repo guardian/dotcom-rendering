@@ -3,8 +3,13 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../types/front';
+import { liveUpdatesCard } from './FlexibleGeneral.stories';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { FrontSection } from './FrontSection';
+
+type FlexibleSpecialArgsAndCustomArgs = React.ComponentProps<
+	typeof FlexibleSpecial
+> & { frontSectionTitle: string };
 
 const defaultGroupedTrails: DCRGroupedTrails = {
 	huge: [],
@@ -33,9 +38,11 @@ const meta = {
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
+		frontSectionTitle: 'Flexible general',
 	},
-	render: (args) => (
+	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
+			title={frontSectionTitle}
 			discussionApiUrl={discussionApiUrl}
 			editionId={'UK'}
 			showTopBorder={true}
@@ -43,7 +50,7 @@ const meta = {
 			<FlexibleSpecial {...args} />
 		</FrontSection>
 	),
-} satisfies Meta<typeof FlexibleSpecial>;
+} satisfies Meta<FlexibleSpecialArgsAndCustomArgs>;
 
 export default meta;
 
@@ -96,6 +103,105 @@ export const Five: Story = {
 			...defaultGroupedTrails,
 			snap: [],
 			standard: trails.slice(0, 5),
+		},
+	},
+};
+export const DefaultSplashWithImageSupression: Story = {
+	name: 'Standard splash with image supression',
+	args: {
+		frontSectionTitle: 'Standard splash with image supression',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			snap: [],
+			standard: [{ ...trails[0], image: undefined }],
+		},
+	},
+};
+
+export const BoostedSplashWithImageSupression: Story = {
+	name: 'Boosted splash with image supression',
+	args: {
+		frontSectionTitle: 'Boosted splash',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			snap: [],
+			standard: [{ ...trails[0], boostLevel: 'boost', image: undefined }],
+		},
+	},
+};
+
+export const MegaBoostedSplashWithImageSupression: Story = {
+	name: 'Mega boosted splash with image supression',
+	args: {
+		frontSectionTitle: 'Mega boosted splash',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			snap: [],
+			standard: [
+				{ ...trails[0], boostLevel: 'megaboost', image: undefined },
+			],
+		},
+	},
+};
+
+export const GigaBoostedSplashWithImageSupression: Story = {
+	name: 'Giga boosted splash with image supression',
+	args: {
+		frontSectionTitle: 'Giga boosted splash',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			snap: [],
+			standard: [
+				{ ...trails[0], boostLevel: 'gigaboost', image: undefined },
+			],
+		},
+	},
+};
+
+export const DefaultSplashWithLiveUpdates: Story = {
+	name: 'Standard splash with live updates',
+	args: {
+		frontSectionTitle: 'Standard splash',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			snap: [],
+			standard: [{ ...liveUpdatesCard }],
+		},
+	},
+};
+
+export const BoostedSplashWithLiveUpdates: Story = {
+	name: 'Boosted splash with live updates',
+	args: {
+		frontSectionTitle: 'Boosted splash',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			snap: [],
+			standard: [{ ...liveUpdatesCard, boostLevel: 'boost' }],
+		},
+	},
+};
+
+export const MegaBoostedSplashWithLiveUpdates: Story = {
+	name: 'Mega boosted splash with live updates',
+	args: {
+		frontSectionTitle: 'Mega boosted splash',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			snap: [],
+			standard: [{ ...liveUpdatesCard, boostLevel: 'megaboost' }],
+		},
+	},
+};
+
+export const GigaBoostedSplashWithLiveUpdates: Story = {
+	name: 'Giga boosted splash with live updates',
+	args: {
+		frontSectionTitle: 'Giga boosted splash',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			snap: [],
+			standard: [{ ...liveUpdatesCard, boostLevel: 'gigaboost' }],
 		},
 	},
 };
