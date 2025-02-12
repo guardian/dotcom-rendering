@@ -56,12 +56,6 @@ export type CanShowData = {
 const buildPayload = async (
 	data: CanShowData & { hideSupportMessagingForUser: boolean },
 ): Promise<EpicPayload> => ({
-	tracking: {
-		ophanPageId: window.guardian.config.ophan.pageViewId,
-		platformId: 'GUARDIAN_WEB',
-		clientName: 'dcr',
-		referrerUrl: window.location.origin + window.location.pathname,
-	},
 	targeting: {
 		contentType: data.contentType,
 		sectionId: data.sectionId,
@@ -147,7 +141,6 @@ export const canShowReaderRevenueEpic = async (
 		ophanPageId: ophanPageViewId,
 		platformId: 'GUARDIAN_WEB',
 		referrerUrl: window.location.origin + window.location.pathname,
-		clientName: 'dcr',
 	};
 	const enrichedProps: EpicProps = {
 		...props,

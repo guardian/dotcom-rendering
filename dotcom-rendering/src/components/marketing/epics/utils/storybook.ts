@@ -46,7 +46,6 @@ const articleCounts = {
 const pageTracking: PageTracking = {
 	ophanPageId: 'k5nxn0mxg7ytwpkxuwms',
 	platformId: 'GUARDIAN_WEB',
-	clientName: 'dcr',
 	referrerUrl:
 		'http://localhost:3000/politics/2020/jan/17/uk-rules-out-automatic-deportation-of-eu-citizens-verhofstadt-brexit',
 };
