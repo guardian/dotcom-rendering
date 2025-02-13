@@ -2,19 +2,15 @@ import type { ModuleDataResponse } from '@guardian/support-dotcom-components';
 import {
 	getBanner,
 	getEpic,
-	getGutterLiveblog,
 	getLiveblogEpic,
 } from '@guardian/support-dotcom-components';
 import type {
 	BannerPayload,
 	EpicPayload,
-	// GutterPayload, // TODO: added to next SDC change
 } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import type {
 	BannerProps,
 	EpicProps,
-	GutterPayload, // TODO: remove when added to dist/dotcom/types above.
-	GutterProps,
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import useSWRImmutable from 'swr/immutable';
 
@@ -54,8 +50,3 @@ export const useSDCBanner: UseSDC<BannerPayload, BannerProps> = (
 	baseUrl,
 	payload,
 ) => useSDC('banner', () => getBanner(baseUrl, payload));
-
-export const useSDCGutterLiveblog: UseSDC<GutterPayload, GutterProps> = (
-	baseUrl,
-	payload,
-) => useSDC('gutter-liveblog', () => getGutterLiveblog(baseUrl, payload));
