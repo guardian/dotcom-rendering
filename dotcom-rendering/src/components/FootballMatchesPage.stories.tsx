@@ -1,5 +1,6 @@
 import type { StoryObj } from '@storybook/react';
-import { FootballMatchesPage } from './FootballMatchesPage.importable';
+import { fn } from '@storybook/test';
+import { FootballMatchesPage } from './FootballMatchesPage';
 import { Default as MatchListDefault } from './FootballMatchList.stories';
 
 const meta = {
@@ -25,6 +26,7 @@ export const Results = {
 		kind: 'Result',
 		initialDays: MatchListDefault.args.initialDays,
 		edition: 'UK',
+		goToCompetitionSpecificPage: fn(),
 	},
 } satisfies Story;
 
