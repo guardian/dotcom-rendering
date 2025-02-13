@@ -201,7 +201,7 @@ export const ContributionsEpicButtons = ({
 					return {
 						text: cta.text,
 						baseUrl: addChoiceCardsParams(
-							'https://support.theguardian.com/contribute/checkout',
+							'https://support.theguardian.com/one-time-checkout',
 							'ONE_OFF',
 						),
 					};
