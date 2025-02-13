@@ -33,7 +33,7 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
-import { LiveblogGutterAskWrapper } from '../components/LiveblogGutterAsk.importable';
+import { LiveblogGutterAskWrapper } from '../components/LiveblogGutterAskWrapper.importable';
 import { Liveness } from '../components/Liveness.importable';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
