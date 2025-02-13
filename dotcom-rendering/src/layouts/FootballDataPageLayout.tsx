@@ -1,6 +1,6 @@
 import { palette } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
-import { FootballMatchesPage } from '../components/FootballMatchesPage.importable';
+import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.importable';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -164,7 +164,7 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 			<main id="maincontent" data-layout="FootballDataPageLayout">
 				<Section fullWidth={true}>
 					<Island priority="feature" defer={{ until: 'visible' }}>
-						<FootballMatchesPage
+						<FootballMatchesPageWrapper
 							nations={nations}
 							guardianBaseUrl={footballData.guardianBaseURL}
 							// ToDo: determine based on URL
