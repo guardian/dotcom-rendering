@@ -80,9 +80,13 @@ const GutterLiveblogAskBuilder = ({
 				}
 			})
 			.catch((error) => {
-				const msg = `Error: ${String(error)}`;
+				const msg = `Error fetching gutter-ask tests: ${String(error)}`;
+
 				console.log(msg);
-				// TODO: where to log this?
+				window.guardian.modules.sentry.reportError(
+					new Error(msg),
+					'rr-gutter-liveblog-ask-fetch',
+				);
 			});
 	}, [
 		countryCode,
