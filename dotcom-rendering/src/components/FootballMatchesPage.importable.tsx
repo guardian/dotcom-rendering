@@ -12,11 +12,30 @@ type Props = {
 	nations: Nations;
 	guardianBaseUrl: string;
 	kind: FootballMatchKind;
-	goToCompetitionSpecificPage: (tag: string) => void;
 	initialDays: FootballMatches;
 	edition: EditionId;
 	getMoreDays?: () => Promise<Result<'failed', FootballMatches>>;
 };
+
+const getPagePath = (kind: FootballMatchKind) => {
+	switch (kind) {
+		case 'Fixture':
+			return 'fixtures';
+		case 'Live':
+			return 'live';
+		case 'Result':
+			return 'results';
+	}
+};
+
+const goToCompetitionSpecificPage =
+	(guardianBaseUrl: string, kind: FootballMatchKind) => (tag: string) => {
+		const url =
+			tag === 'All'
+				? `${guardianBaseUrl}/football/${getPagePath(kind)}`
+				: `${guardianBaseUrl}/${tag}/${getPagePath(kind)}`;
+		window.location.assign(url);
+	};
 
 const createTitle = (kind: FootballMatchKind, edition: EditionId) => {
 	if (edition === 'US' && kind === 'Fixture') {
@@ -37,7 +56,6 @@ export const FootballMatchesPage = ({
 	nations,
 	guardianBaseUrl,
 	kind,
-	goToCompetitionSpecificPage,
 	initialDays,
 	edition,
 	getMoreDays,
@@ -70,7 +88,10 @@ export const FootballMatchesPage = ({
 					<FootballCompetitionSelect
 						nations={nations}
 						kind={kind}
-						onChange={goToCompetitionSpecificPage}
+						onChange={goToCompetitionSpecificPage(
+							guardianBaseUrl,
+							kind,
+						)}
 					/>
 				</div>
 			)}
