@@ -23,7 +23,7 @@ type Props = WithJsonProps<React.ComponentProps<typeof GutterAsk>>;
 
 const meta: Meta<Props> = {
 	component: GutterAsk,
-	title: 'Components/Marketing/StickyLiveblogAsk',
+	title: 'Components/Marketing/GutterAsk',
 	args: {
 		variant,
 		enrichedUrl,
