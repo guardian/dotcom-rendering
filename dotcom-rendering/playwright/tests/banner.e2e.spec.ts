@@ -34,10 +34,7 @@ test.describe('The banner', function () {
 		const rrBannerUrl = 'https://contributions.guardianapis.com/banner';
 
 		const rrBannerRequestPromise = page.waitForRequest((request) =>
-			requestBodyHasProperties(request, rrBannerUrl, [
-				'targeting',
-				'tracking',
-			]),
+			requestBodyHasProperties(request, rrBannerUrl, ['targeting']),
 		);
 
 		await loadPage(

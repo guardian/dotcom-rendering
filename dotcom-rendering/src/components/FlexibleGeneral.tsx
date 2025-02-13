@@ -90,7 +90,9 @@ const decideSplashCardProperties = (
 	boostLevel: BoostLevel,
 	supportingContentLength: number,
 	mediaCard: boolean,
-	avatarUrl?: string,
+	hasLivePlayable: boolean,
+	imageSuppressed: boolean,
+	avatarUrl: boolean,
 ): BoostedSplashProperties => {
 	switch (boostLevel) {
 		// boostedfont sizing
@@ -98,7 +100,8 @@ const decideSplashCardProperties = (
 		case 'default':
 			return {
 				headlineSizes: {
-					desktop: 'medium',
+					desktop:
+						imageSuppressed || hasLivePlayable ? 'large' : 'medium',
 					tablet: 'medium',
 					mobile: 'medium',
 				},
@@ -113,7 +116,8 @@ const decideSplashCardProperties = (
 		case 'boost':
 			return {
 				headlineSizes: {
-					desktop: 'large',
+					desktop:
+						imageSuppressed || hasLivePlayable ? 'xlarge' : 'large',
 					tablet: 'large',
 					mobile: 'large',
 				},
@@ -128,7 +132,10 @@ const decideSplashCardProperties = (
 		case 'megaboost':
 			return {
 				headlineSizes: {
-					desktop: 'xlarge',
+					desktop:
+						imageSuppressed || hasLivePlayable
+							? 'xxlarge'
+							: 'xlarge',
 					tablet: 'xlarge',
 					mobile: 'xlarge',
 				},
@@ -142,7 +149,10 @@ const decideSplashCardProperties = (
 		case 'gigaboost':
 			return {
 				headlineSizes: {
-					desktop: 'xxlarge',
+					desktop:
+						imageSuppressed || hasLivePlayable
+							? 'xxxlarge'
+							: 'xxlarge',
 					tablet: 'xlarge',
 					mobile: 'xxlarge',
 				},
@@ -188,7 +198,9 @@ export const SplashCardLayout = ({
 		card.boostLevel ?? 'default',
 		card.supportingContent?.length ?? 0,
 		isMediaCard(card.format),
-		card.avatarUrl,
+		card.showLivePlayable,
+		!card.image,
+		!!card.avatarUrl,
 	);
 
 	return (

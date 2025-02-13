@@ -114,6 +114,11 @@ export interface SDCAuxiaGetTreatmentsProxyResponseData {
 	userTreatment?: AuxiaAPIResponseDataUserTreatment;
 }
 
+export interface AuxiaGateDisplayData {
+	browserId: string;
+	auxiaData: SDCAuxiaGetTreatmentsProxyResponseData;
+}
+
 export type AuxiaInteractionInteractionType =
 	| 'VIEWED'
 	| 'CLICKED'
