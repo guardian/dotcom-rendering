@@ -1,14 +1,13 @@
-/* eslint-disable import/order */
-import { useCallback, useEffect } from 'react';
-import { GutterAsk } from './GutterAsk';
-import { useIsInView } from '../../../lib/useIsInView';
 import type { OphanAction } from '@guardian/libs';
+import type { GutterProps } from '@guardian/support-dotcom-components/dist/shared/types/props/gutter';
+import { useCallback, useEffect } from 'react';
+import { useIsInView } from '../../../lib/useIsInView';
+import type { ReactComponent } from '../lib/ReactComponent';
 import {
 	addRegionIdAndTrackingParamsToSupportUrl,
 	createClickEventFromTracking,
 } from '../lib/tracking';
-import type { GutterProps } from '@guardian/support-dotcom-components/dist/shared/types/props/gutter';
-import type { ReactComponent } from '../lib/ReactComponent';
+import { GutterAsk } from './GutterAsk';
 
 export const GutterAskWrapper: ReactComponent<GutterProps> = (
 	props: GutterProps,
