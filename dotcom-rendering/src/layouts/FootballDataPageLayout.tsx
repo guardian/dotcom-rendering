@@ -2,17 +2,16 @@ import { palette } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
 import { FootballMatchesPage } from '../components/FootballMatchesPage.importable';
 import { Footer } from '../components/Footer';
-import { MerchandisingSlot } from '../components/FrontsAdSlots';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
 import type { FEFootballDataPage } from '../feFootballDataPage';
 import type { FootballMatches } from '../footballMatches';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { extractNAV } from '../model/extract-nav';
-import { Stuck } from './lib/stickiness';
+import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
 	footballData: FEFootballDataPage;
@@ -113,16 +112,11 @@ const initialDays: FootballMatches = [
 	},
 ];
 
-export const FootballDataLayout = ({ footballData }: Props) => {
+export const FootballDataPageLayout = ({ footballData }: Props) => {
 	const NAV = extractNAV(footballData.nav);
 	const pageFooter = footballData.pageFooter;
 	// ToDo: call canRenderAds with matching type
 	const renderAds = true;
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.News,
-	};
 
 	// ToDo: use getContributionsServiceUrl
 	//const contributionsServiceUrl = getContributionsServiceUrl(footballData);
@@ -131,7 +125,7 @@ export const FootballDataLayout = ({ footballData }: Props) => {
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
-				{
+				{renderAds && (
 					<Stuck>
 						<Section
 							fullWidth={true}
@@ -148,7 +142,7 @@ export const FootballDataLayout = ({ footballData }: Props) => {
 							/>
 						</Section>
 					</Stuck>
-				}
+				)}
 
 				<Masthead
 					nav={NAV}
@@ -165,9 +159,9 @@ export const FootballDataLayout = ({ footballData }: Props) => {
 				/>
 			</div>
 
-			{renderAds && <AdSlot position="right" display={format.display} />}
+			{renderAds && <AdSlot position="right" />}
 
-			<main id="maincontent">
+			<main id="maincontent" data-layout="FootballDataPageLayout">
 				<Section fullWidth={true}>
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<FootballMatchesPage
@@ -179,11 +173,6 @@ export const FootballDataLayout = ({ footballData }: Props) => {
 							edition={footballData.editionId}
 						/>
 					</Island>
-
-					<MerchandisingSlot
-						renderAds={renderAds}
-						hasPageSkin={footballData.config.hasPageSkin}
-					/>
 				</Section>
 			</main>
 
@@ -223,6 +212,26 @@ export const FootballDataLayout = ({ footballData }: Props) => {
 					editionId={footballData.editionId}
 				/>
 			</Section>
+			<BannerWrapper data-print-layout="hide">
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<StickyBottomBanner
+						contentType={footballData.config.contentType}
+						contributionsServiceUrl={contributionsServiceUrl}
+						idApiUrl={footballData.config.idApiUrl}
+						isMinuteArticle={false}
+						isPaidContent={!!footballData.config.isPaidContent}
+						isPreview={footballData.config.isPreview}
+						isSensitive={footballData.config.isSensitive}
+						pageId={footballData.config.pageId}
+						sectionId={footballData.config.section}
+						shouldHideReaderRevenue={false}
+						remoteBannerSwitch={
+							!!footballData.config.switches.remoteBanner
+						}
+						tags={[]}
+					/>
+				</Island>
+			</BannerWrapper>
 		</>
 	);
 };

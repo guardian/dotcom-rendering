@@ -1,7 +1,7 @@
 import { Global } from '@emotion/react';
 import { StrictMode } from 'react';
 import type { FEFootballDataPage } from '../feFootballDataPage';
-import { FootballDataLayout } from '../layouts/FootballDataLayout';
+import { FootballDataPageLayout } from '../layouts/FootballDataPageLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
@@ -91,7 +91,7 @@ export const FootballDataPage = ({ footballData }: Props) => {
 					if anything is unreadable or odd.
 				</DarkModeMessage>
 			)}
-			<FootballDataLayout footballData={footballData} />,
+			<FootballDataPageLayout footballData={footballData} />,
 		</StrictMode>
 	);
 };

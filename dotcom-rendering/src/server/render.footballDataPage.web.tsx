@@ -61,8 +61,10 @@ export const renderFootballDataPage = (footballData: FEFootballDataPage) => {
 		scriptTags,
 		css: extractedCss,
 		html,
+		// ToDo:
 		//title,
 		//description,
+		canonicalUrl: footballData.canonicalUrl,
 		guardian: createGuardian({
 			editionId: footballData.editionId,
 			stage: footballData.config.stage,
