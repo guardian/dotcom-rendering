@@ -22,7 +22,9 @@ export const GutterAskWrapper: ReactComponent<GutterProps> = (
 ) => {
 	const { content, tracking, submitComponentEvent } = props;
 	const { abTestName, abTestVariant, componentType, campaignCode } = tracking;
-	const { baseUrl } = props.content.cta!; // TODO: cta forced to be defined - correct?
+	const baseUrl = content.cta
+		? content.cta.baseUrl
+		: 'https://support.theguardian.com/contribute';
 
 	const enrichedUrl = addRegionIdAndTrackingParamsToSupportUrl(
 		baseUrl,
@@ -197,22 +199,24 @@ export const GutterAsk: ReactComponent<GutterAskRenderProps> = ({
 						<div css={bodySection}>
 							<Copy paragraphs={variant.bodyCopy} />
 						</div>
-						<div css={ctaSection}>
-							<ThemeProvider theme={contributionsTheme}>
-								<LinkButton
-									href={enrichedUrl}
-									icon={<SvgArrowRightStraight />}
-									iconSide="right"
-									onClick={onCtaClick}
-									target="_blank"
-									rel="noopener noreferrer"
-									priority={'primary'}
-									cssOverrides={cta}
-								>
-									{variant.cta!.text}
-								</LinkButton>
-							</ThemeProvider>
-						</div>
+						{variant.cta && (
+							<div css={ctaSection}>
+								<ThemeProvider theme={contributionsTheme}>
+									<LinkButton
+										href={enrichedUrl}
+										icon={<SvgArrowRightStraight />}
+										iconSide="right"
+										onClick={onCtaClick}
+										target="_blank"
+										rel="noopener noreferrer"
+										priority={'primary'}
+										cssOverrides={cta}
+									>
+										{variant.cta.text}
+									</LinkButton>
+								</ThemeProvider>
+							</div>
+						)}
 					</div>
 				</div>
 			)}
