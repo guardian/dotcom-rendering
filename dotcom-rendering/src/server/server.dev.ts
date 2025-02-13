@@ -10,8 +10,8 @@ import {
 	handleArticle,
 	handleArticleJson,
 	handleBlocks,
-	handleInteractive,
 	handleFootballDataPage,
+	handleInteractive,
 } from './handler.article.web';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import {
