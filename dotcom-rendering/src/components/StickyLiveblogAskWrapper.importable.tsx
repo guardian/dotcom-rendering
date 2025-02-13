@@ -76,14 +76,10 @@ const GutterLiveblogAskBuilder = ({
 
 		getGutterLiveblog(contributionsServiceUrl, payload)
 			.then((response: ModuleDataResponse<GutterProps>) => {
-				if (!response.data) {
-					throw new Error(
-						'No response.data returned from getGutterLiveblog',
-					); // TODO: appropriate?
+				if (response.data) {
+					const { module } = response.data;
+					setSupportGutterResponse(module);
 				}
-
-				const { module } = response.data;
-				setSupportGutterResponse(module);
 			})
 			.catch((error) => {
 				const msg = `Error: ${String(error)}`;
