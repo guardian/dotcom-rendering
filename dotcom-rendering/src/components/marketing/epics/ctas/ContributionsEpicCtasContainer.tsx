@@ -16,6 +16,15 @@ type Props = EpicProps & {
 	isSimpleThirdChoiceCardInTestVariant?: boolean;
 };
 
+const getSupporterPlusDiscount = (url: string): number | undefined => {
+	if (url.includes('50VALENTINES2025')) {
+		return 0.5;
+	} else if (url.includes('33VALENTINES2025')) {
+		return 0.33;
+	}
+	return;
+};
+
 export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 	variant,
 	countryCode,
@@ -54,8 +63,9 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 		setThreeTierChoiceCardSelectedProduct,
 	] = useState<SupportTier>('SupporterPlus');
 
-	const hasSupporterPlusPromoCode =
-		variant.cta?.baseUrl.includes('BLACK_FRIDAY_DISCOUNT_2024') ?? false;
+	const supporterPlusDiscount = variant.cta?.baseUrl
+		? getSupporterPlusDiscount(variant.cta.baseUrl)
+		: undefined;
 
 	const variantOfChoiceCard =
 		countryCode === 'US' && isSimpleThirdChoiceCardInTestVariant
@@ -72,9 +82,7 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 					selectedProduct={threeTierChoiceCardSelectedProduct}
 					setSelectedProduct={setThreeTierChoiceCardSelectedProduct}
 					variantOfChoiceCard={variantOfChoiceCard}
-					supporterPlusDiscount={
-						hasSupporterPlusPromoCode ? 0.5 : undefined
-					}
+					supporterPlusDiscount={supporterPlusDiscount}
 				/>
 			)}
 			<ContributionsEpicButtons
