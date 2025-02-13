@@ -91,10 +91,10 @@ type Props = {
 	uniqueId: string;
 	height: number;
 	width: number;
-	title: string;
 	onClick: () => void;
 	format: ArticleFormat;
 	hidePillOnMobile: boolean;
+	title?: string;
 	alt?: string;
 	image?: string;
 	duration?: number; // in seconds

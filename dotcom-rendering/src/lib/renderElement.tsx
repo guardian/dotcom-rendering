@@ -870,7 +870,6 @@ export const renderElement = ({
 								title={element.mediaTitle}
 								format={format}
 								onClick={onClick}
-								hidePillOnMobile={false}
 								alt={element.altText}
 								duration={element.duration}
 							/>
