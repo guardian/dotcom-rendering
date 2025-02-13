@@ -22,7 +22,7 @@ import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
 import { GutterAskWrapper } from './marketing/gutters/GutterAskWrapper';
 
-interface GutterLiveblogAskBuilderProps {
+interface LiveblogGutterAskBuilderProps {
 	sectionId: string | undefined;
 	tags: TagType[];
 	contributionsServiceUrl: string;
@@ -31,14 +31,14 @@ interface GutterLiveblogAskBuilderProps {
 	pageUrl: string;
 }
 
-const GutterLiveblogAskBuilder = ({
+const LiveblogGutterAskBuilder = ({
 	sectionId,
 	tags,
 	contributionsServiceUrl,
 	countryCode,
 	pageViewId,
 	pageUrl,
-}: GutterLiveblogAskBuilderProps) => {
+}: LiveblogGutterAskBuilderProps) => {
 	const [supportGutterResponse, setSupportGutterResponse] =
 		useState<ModuleData<GutterProps> | null>(null);
 
@@ -140,7 +140,7 @@ const stickyLeft = css`
 	margin-top: ${space[6]}px;
 `;
 
-interface StickyLiveblogAskWrapperProps {
+interface LiveblogGutterAskWrapperProps {
 	shouldHideReaderRevenueOnArticle: boolean;
 	sectionId: string | undefined;
 	tags: TagType[];
@@ -148,13 +148,13 @@ interface StickyLiveblogAskWrapperProps {
 	pageUrl: string;
 }
 
-export const StickyLiveblogAskWrapper = ({
+export const LiveblogGutterAskWrapper = ({
 	shouldHideReaderRevenueOnArticle,
 	sectionId,
 	tags,
 	contributionsServiceUrl,
 	pageUrl,
-}: StickyLiveblogAskWrapperProps) => {
+}: LiveblogGutterAskWrapperProps) => {
 	const { renderingTarget } = useConfig();
 	const countryCode = useCountryCode('liveblog-gutter-ask');
 	const pageViewId = usePageViewId(renderingTarget);
@@ -168,7 +168,7 @@ export const StickyLiveblogAskWrapper = ({
 	}
 
 	return (
-		<GutterLiveblogAskBuilder
+		<LiveblogGutterAskBuilder
 			sectionId={sectionId}
 			tags={tags}
 			contributionsServiceUrl={contributionsServiceUrl}
