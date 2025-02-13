@@ -23,7 +23,6 @@ import { useConfig } from './ConfigContext';
 import { GutterAskWrapper } from './marketing/gutters/GutterAsk';
 
 interface GutterLiveblogAskBuilderProps {
-	shouldHideReaderRevenueOnArticle: boolean;
 	sectionId: string | undefined;
 	tags: TagType[];
 	contributionsServiceUrl: string;
@@ -33,7 +32,6 @@ interface GutterLiveblogAskBuilderProps {
 }
 
 const GutterLiveblogAskBuilder = ({
-	shouldHideReaderRevenueOnArticle,
 	sectionId,
 	tags,
 	contributionsServiceUrl,
@@ -96,8 +94,6 @@ const GutterLiveblogAskBuilder = ({
 		tags,
 	]);
 
-	const canShow = !shouldHideReaderRevenueOnArticle; // TODO: anything else?
-
 	if (supportGutterResponse) {
 		const { props } = supportGutterResponse;
 
@@ -118,11 +114,9 @@ const GutterLiveblogAskBuilder = ({
 
 		return (
 			<>
-				{canShow && (
-					<div css={stickyLeft}>
-						<GutterAskWrapper {...enrichedProps} />
-					</div>
-				)}
+				<div css={stickyLeft}>
+					<GutterAskWrapper {...enrichedProps} />
+				</div>
 			</>
 		);
 	} else {
@@ -157,16 +151,19 @@ export const StickyLiveblogAskWrapper = ({
 	contributionsServiceUrl,
 	pageUrl,
 }: StickyLiveblogAskWrapperProps) => {
-	const whatAmI = 'sticky-liveblog-ask'; // TODO: eventually this will be renamed.
 	const { renderingTarget } = useConfig();
-	const countryCode = useCountryCode(whatAmI);
+	const countryCode = useCountryCode('liveblog-gutter-ask');
 	const pageViewId = usePageViewId(renderingTarget);
 
-	if (isUndefined(countryCode) || isUndefined(pageViewId)) return null;
+	if (
+		shouldHideReaderRevenueOnArticle ||
+		isUndefined(countryCode) ||
+		isUndefined(pageViewId)
+	)
+		return null;
 
 	return (
 		<GutterLiveblogAskBuilder
-			shouldHideReaderRevenueOnArticle={shouldHideReaderRevenueOnArticle}
 			sectionId={sectionId}
 			tags={tags}
 			contributionsServiceUrl={contributionsServiceUrl}
