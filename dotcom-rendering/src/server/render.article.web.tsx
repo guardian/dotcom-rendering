@@ -2,7 +2,9 @@ import { isString } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
 import { isAmpSupported } from '../components/Elements.amp';
+import { FootballDataPage } from '../components/FootballDataPage';
 import { LiveBlogRenderer } from '../components/LiveBlogRenderer';
+import type { FEFootballDataPage } from '../feFootballDataPage';
 import {
 	ArticleDesign,
 	type ArticleFormat,
@@ -30,7 +32,6 @@ import type { FEElement } from '../types/content';
 import type { FEBlocksRequest } from '../types/frontend';
 import type { TagType } from '../types/tag';
 import { htmlPageTemplate } from './htmlPageTemplate';
-import { FootballDataPage } from '../components/FootballDataPage';
 
 interface Props {
 	article: Article;
@@ -305,24 +306,24 @@ export const renderBlocks = ({
 	return `${extractedCss}${html}`;
 };
 
-export const renderFootballDataPage = () => {
+export const renderFootballDataPage = (footballData: FEFootballDataPage) => {
 	const config: Config = {
 		renderingTarget: 'Web',
-		darkModeAvailable: false,
-		// TODO: frontendData.config.abTests.darkModeWebVariant === 'variant',
+		darkModeAvailable:
+			footballData.config.abTests.darkModeWebVariant === 'variant',
 		assetOrigin: ASSET_ORIGIN,
-		editionId: 'UK',
-		// TODO: frontendData.editionId,
+		editionId: footballData.editionId,
 	};
+
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
-			<FootballDataPage />
+			<FootballDataPage footballData={footballData} />
 		</ConfigProvider>,
 	);
 
 	const build = getModulesBuild({
-		switches: {},
-		tests: {},
+		switches: footballData.config.switches,
+		tests: footballData.config.abTests,
 	});
 
 	/**
@@ -336,37 +337,46 @@ export const renderFootballDataPage = () => {
 		polyfillIO,
 		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
+		process.env.COMMERCIAL_BUNDLE_URL ??
+			footballData.config.commercialBundleUrl,
 	].filter(isString);
+	const legacyScripts = [
+		getPathFromManifest('client.web.legacy', 'frameworks.js'),
+		getPathFromManifest('client.web.legacy', 'index.js'),
+	];
+	const scriptTags = generateScriptTags([
+		...prefetchScripts,
+		...legacyScripts,
+	]);
 
 	const pageHtml = htmlPageTemplate({
-		scriptTags: [], //scriptTags,
+		scriptTags,
 		css: extractedCss,
 		html,
 		//title,
 		//description,
 		guardian: createGuardian({
-			editionId: 'UK',
-			stage: 'DEV',
-			frontendAssetsFullURL: 'https://m.code.dev-theguardian.com/',
-			revisionNumber: '123456',
-			sentryPublicApiKey: '123456',
-			sentryHost: 'sentry.io',
-			keywordIds: '',
-			dfpAccountId: '123456',
-			adUnit: '123456',
-			ajaxUrl: 'https://m.code.dev-theguardian.com/',
-			googletagUrl: 'https://www.googletagservices.com/tag/js/gpt.js',
-			switches: {},
-			abTests: {},
-			brazeApiKey: '123456',
-			isPaidContent: false,
-			contentType: 'Article',
-			shouldHideReaderRevenue: false,
-			googleRecaptchaSiteKey: '123456',
+			editionId: footballData.editionId,
+			stage: footballData.config.stage,
+			frontendAssetsFullURL: footballData.config.frontendAssetsFullURL,
+			revisionNumber: footballData.config.revisionNumber,
+			sentryPublicApiKey: footballData.config.sentryPublicApiKey,
+			sentryHost: footballData.config.sentryHost,
+			keywordIds: footballData.config.keywordIds,
+			dfpAccountId: footballData.config.dfpAccountId,
+			adUnit: footballData.config.adUnit,
+			ajaxUrl: footballData.config.ajaxUrl,
+			googletagUrl: footballData.config.googletagUrl,
+			switches: footballData.config.switches,
+			abTests: footballData.config.abTests,
+			brazeApiKey: footballData.config.brazeApiKey,
+			isPaidContent: footballData.config.isPaidContent,
+			contentType: footballData.config.contentType,
+			googleRecaptchaSiteKey: footballData.config.googleRecaptchaSiteKey,
 		}),
-		keywords: '',
+		keywords: footballData.config.keywords,
 		renderingTarget: 'Web',
-		weAreHiring: false,
+		weAreHiring: !!footballData.config.switches.weAreHiring,
 		config,
 	});
 
