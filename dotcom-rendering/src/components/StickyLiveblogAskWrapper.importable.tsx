@@ -20,7 +20,7 @@ import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
-import { GutterAskWrapper } from './marketing/gutters/GutterAsk';
+import { GutterAskWrapper } from './marketing/gutters/GutterAskWrapper';
 
 interface GutterLiveblogAskBuilderProps {
 	sectionId: string | undefined;
