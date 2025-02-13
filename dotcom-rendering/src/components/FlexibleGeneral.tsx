@@ -439,8 +439,7 @@ export const StandardCardLayout = ({
 							showLivePlayable={false}
 							showTopBarDesktop={false}
 							showTopBarMobile={true}
-							// On standard cards, we only show the trail text if the trail image has been hidden
-							trailText={!card.image ? card.trailText : undefined}
+							trailText={undefined}
 							// On standard cards, we increase the headline size if the trail image has been hidden
 							headlineSizes={
 								!card.image
