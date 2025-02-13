@@ -1,7 +1,6 @@
 // import { Masthead } from '../components/Masthead/Masthead';
 // import type { NavType } from '../model/extract-nav';
 import { palette } from '@guardian/source/foundations';
-import { MatchReport } from '../../fixtures/generated/fe-articles/MatchReport';
 import { AdSlot } from '../components/AdSlot.web';
 import { FootballMatchesPage } from '../components/FootballMatchesPage.importable';
 import { Footer } from '../components/Footer';
@@ -11,14 +10,15 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { SubNav } from '../components/SubNav.importable';
+import type { FEFootballDataPage } from '../feFootballDataPage';
 import type { FootballMatches } from '../footballMatches';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { extractNAV } from '../model/extract-nav';
 import { Stuck } from './lib/stickiness';
 
-// interface Props {
-// 	NAV: NavType;
-// }
+interface Props {
+	footballData: FEFootballDataPage;
+}
 
 const nations = [
 	{
@@ -116,119 +116,117 @@ const goToCompetitionSpecificPage = () => {
 	//window.location.replace('https://www.theguardian.com');
 };
 
-export const FootballDataLayout = () =>
-	// { NAV }: Props
-	{
-		// const { darkModeAvailable } = useConfig();
-		const NAV = extractNAV(MatchReport['nav']);
-		const pageFooter = MatchReport['pageFooter'];
-		const renderAds = true;
-		const format = {
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Standard,
-			theme: Pillar.News,
-		};
-		return (
-			<>
-				<div data-print-layout="hide" id="bannerandheader">
-					{
-						<Stuck>
-							<Section
-								fullWidth={true}
-								showTopBorder={false}
-								showSideBorders={false}
-								padSides={false}
-								shouldCenter={false}
-							>
-								<HeaderAdSlot
-									isPaidContent={true}
-									// isPaidContent={!!tagPage.config.isPaidContent}
-									shouldHideReaderRevenue={false}
-								/>
-							</Section>
-						</Stuck>
-					}
+export const FootballDataLayout = ({ footballData }: Props) => {
+	const NAV = extractNAV(footballData.nav);
+	const pageFooter = footballData.pageFooter;
+	// ToDo: call canRenderAds with matching type
+	const renderAds = true;
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: Pillar.News,
+	};
 
-					<Masthead
-						nav={NAV}
-						editionId={'UK'}
-						//idUrl={tagPage.config.idUrl}
-						//mmaUrl={tagPage.config.mmaUrl}
-						discussionApiUrl={'tagPage.config.discussionApiUrl'}
-						idApiUrl={'tagPage.config.idApiUrl'}
-						contributionsServiceUrl={'contributionsServiceUrl'}
-						showSubNav={true}
-						showSlimNav={false}
-						//hasPageSkin={hasPageSkin}
-						//pageId={pageId}
-					/>
-				</div>
+	// ToDo: use getContributionsServiceUrl
+	//const contributionsServiceUrl = getContributionsServiceUrl(footballData);
+	const contributionsServiceUrl = footballData.contributionsServiceUrl;
 
-				{renderAds && (
-					<AdSlot position="right" display={format.display} />
-				)}
-
-				<main id="maincontent">
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<FootballMatchesPage
-							nations={nations}
-							guardianBaseUrl={'https://www.theguardian.com'}
-							kind={'Fixture'}
-							initialDays={initialDays}
-							edition={'UK'}
-							goToCompetitionSpecificPage={
-								goToCompetitionSpecificPage
-							}
-						/>
-					</Island>
-				</main>
-
-				<MerchandisingSlot
-					//renderAds={renderAds}
-					renderAds={true}
-					hasPageSkin={false}
-					//hasPageSkin={hasPageSkin}
-				/>
-
-				{NAV.subNavSections && (
-					<Section
-						fullWidth={true}
-						showTopBorder={true}
-						data-print-layout="hide"
-						padSides={false}
-						element="aside"
-					>
-						<Island
-							priority="enhancement"
-							defer={{ until: 'visible' }}
+	return (
+		<>
+			<div data-print-layout="hide" id="bannerandheader">
+				{
+					<Stuck>
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							showSideBorders={false}
+							padSides={false}
+							shouldCenter={false}
 						>
-							<SubNav
-								subNavSections={NAV.subNavSections}
-								currentNavLink={NAV.currentNavLink}
-								position="footer"
+							<HeaderAdSlot
+								isPaidContent={
+									!!footballData.config.isPaidContent
+								}
+								shouldHideReaderRevenue={false}
 							/>
-						</Island>
-					</Section>
-				)}
+						</Section>
+					</Stuck>
+				}
 
+				<Masthead
+					nav={NAV}
+					editionId={footballData.editionId}
+					idUrl={footballData.config.idUrl}
+					mmaUrl={footballData.config.mmaUrl}
+					discussionApiUrl={footballData.config.discussionApiUrl}
+					idApiUrl={footballData.config.idApiUrl}
+					contributionsServiceUrl={contributionsServiceUrl}
+					showSubNav={true}
+					showSlimNav={false}
+					hasPageSkin={footballData.config.hasPageSkin}
+					pageId={footballData.config.pageId}
+				/>
+			</div>
+
+			{renderAds && <AdSlot position="right" display={format.display} />}
+
+			<main id="maincontent">
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<FootballMatchesPage
+						nations={nations}
+						guardianBaseUrl={footballData.guardianBaseURL}
+						// ToDo: determine based on URL
+						kind={'Fixture'}
+						initialDays={initialDays}
+						edition={footballData.editionId}
+						goToCompetitionSpecificPage={
+							goToCompetitionSpecificPage
+						}
+					/>
+				</Island>
+			</main>
+
+			<MerchandisingSlot
+				renderAds={renderAds}
+				hasPageSkin={footballData.config.hasPageSkin}
+			/>
+
+			{NAV.subNavSections && (
 				<Section
 					fullWidth={true}
+					showTopBorder={true}
 					data-print-layout="hide"
 					padSides={false}
-					backgroundColour={palette.brand[400]}
-					borderColour={palette.brand[600]}
-					showSideBorders={false}
-					showTopBorder={false}
-					element="footer"
+					element="aside"
 				>
-					<Footer
-						pageFooter={pageFooter}
-						selectedPillar={NAV.selectedPillar}
-						pillars={NAV.pillars}
-						urls={NAV.readerRevenueLinks.footer}
-						editionId={'UK'}
-					/>
+					<Island priority="enhancement" defer={{ until: 'visible' }}>
+						<SubNav
+							subNavSections={NAV.subNavSections}
+							currentNavLink={NAV.currentNavLink}
+							position="footer"
+						/>
+					</Island>
 				</Section>
-			</>
-		);
-	};
+			)}
+
+			<Section
+				fullWidth={true}
+				data-print-layout="hide"
+				padSides={false}
+				backgroundColour={palette.brand[400]}
+				borderColour={palette.brand[600]}
+				showSideBorders={false}
+				showTopBorder={false}
+				element="footer"
+			>
+				<Footer
+					pageFooter={pageFooter}
+					selectedPillar={NAV.selectedPillar}
+					pillars={NAV.pillars}
+					urls={NAV.readerRevenueLinks.footer}
+					editionId={footballData.editionId}
+				/>
+			</Section>
+		</>
+	);
+};
