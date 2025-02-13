@@ -18,6 +18,10 @@ interface Props {
 	footballData: FEFootballDataPage;
 }
 
+/*
+	Hardcoded data to test layout
+*/
+
 const nations = [
 	{
 		name: 'England',
@@ -109,11 +113,6 @@ const initialDays: FootballMatches = [
 	},
 ];
 
-const goToCompetitionSpecificPage = () => {
-	console.log('goToCompetitionSpecificPage');
-	//window.location.replace('https://www.theguardian.com');
-};
-
 export const FootballDataLayout = ({ footballData }: Props) => {
 	const NAV = extractNAV(footballData.nav);
 	const pageFooter = footballData.pageFooter;
@@ -178,9 +177,6 @@ export const FootballDataLayout = ({ footballData }: Props) => {
 							kind={'Fixture'}
 							initialDays={initialDays}
 							edition={footballData.editionId}
-							goToCompetitionSpecificPage={
-								goToCompetitionSpecificPage
-							}
 						/>
 					</Island>
 
