@@ -47,7 +47,7 @@ export const FootballMatchesPage = ({
 			<h1
 				css={css`
 					${headlineBold20}
-					padding: ${space[1]}px 0 ${space[3]}px;
+					padding: ${space[2]}px 0 ${space[3]}px;
 					${grid.column.centre}
 					${from.leftCol} {
 						${grid.between(

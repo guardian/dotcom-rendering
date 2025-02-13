@@ -27,7 +27,6 @@ type Props = {
  * @param {Props} props
  * */
 export const FootballDataPage = ({ footballData }: Props) => {
-	console.log({ footballData });
 	const adTargeting = buildAdTargeting({
 		isAdFreeUser: footballData.isAdFreeUser,
 		isSensitive: footballData.config.isSensitive,

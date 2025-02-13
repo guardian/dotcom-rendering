@@ -1,5 +1,3 @@
-// import { Masthead } from '../components/Masthead/Masthead';
-// import type { NavType } from '../model/extract-nav';
 import { palette } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
 import { FootballMatchesPage } from '../components/FootballMatchesPage.importable';
@@ -171,25 +169,27 @@ export const FootballDataLayout = ({ footballData }: Props) => {
 			{renderAds && <AdSlot position="right" display={format.display} />}
 
 			<main id="maincontent">
-				<Island priority="feature" defer={{ until: 'visible' }}>
-					<FootballMatchesPage
-						nations={nations}
-						guardianBaseUrl={footballData.guardianBaseURL}
-						// ToDo: determine based on URL
-						kind={'Fixture'}
-						initialDays={initialDays}
-						edition={footballData.editionId}
-						goToCompetitionSpecificPage={
-							goToCompetitionSpecificPage
-						}
-					/>
-				</Island>
-			</main>
+				<Section fullWidth={true}>
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<FootballMatchesPage
+							nations={nations}
+							guardianBaseUrl={footballData.guardianBaseURL}
+							// ToDo: determine based on URL
+							kind={'Fixture'}
+							initialDays={initialDays}
+							edition={footballData.editionId}
+							goToCompetitionSpecificPage={
+								goToCompetitionSpecificPage
+							}
+						/>
+					</Island>
 
-			<MerchandisingSlot
-				renderAds={renderAds}
-				hasPageSkin={footballData.config.hasPageSkin}
-			/>
+					<MerchandisingSlot
+						renderAds={renderAds}
+						hasPageSkin={footballData.config.hasPageSkin}
+					/>
+				</Section>
+			</main>
 
 			{NAV.subNavSections && (
 				<Section
