@@ -1,7 +1,7 @@
 import type { RequestHandler } from 'express';
 import type { FEFootballDataPage } from '../feFootballDataPage';
 import { makePrefetchHeader } from './lib/header';
-import { renderFootballDataPage } from './render.footballData.web';
+import { renderFootballDataPage } from './render.footballDataPage.web';
 
 export const handleFootballDataPage: RequestHandler = ({ body }, res) => {
 	const footballData = body as FEFootballDataPage;
