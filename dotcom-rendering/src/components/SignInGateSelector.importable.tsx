@@ -376,25 +376,29 @@ export const SignInGateSelector = ({
 	);
 
 	if (!userIsInAuxiaExperiment) {
-		return SignInGateSelectorDefault({
-			contentType,
-			sectionId,
-			tags,
-			isPaidContent,
-			isPreview,
-			host,
-			pageId,
-			idUrl,
-			switches,
-			contributionsServiceUrl,
-		});
+		return (
+			<SignInGateSelectorDefault
+				contentType={contentType}
+				sectionId={sectionId}
+				tags={tags}
+				isPaidContent={isPaidContent}
+				isPreview={isPreview}
+				host={host}
+				pageId={pageId}
+				idUrl={idUrl}
+				switches={switches}
+				contributionsServiceUrl={contributionsServiceUrl}
+			/>
+		);
 	} else {
-		return SignInGateSelectorAuxia({
-			host,
-			pageId,
-			idUrl,
-			contributionsServiceUrl,
-		});
+		return (
+			<SignInGateSelectorAuxia
+				host={host}
+				pageId={pageId}
+				idUrl={idUrl}
+				contributionsServiceUrl={contributionsServiceUrl}
+			/>
+		);
 	}
 };
 
