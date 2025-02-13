@@ -18,6 +18,7 @@ import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';
 import {
+	submitComponentEventTracking,
 	submitViewEventTracking,
 	withComponentId,
 } from './SignInGate/componentEventTracking';
@@ -635,6 +636,19 @@ const SignInGateSelectorAuxia = ({
 			);
 			if (data !== undefined) {
 				setAuxiaGateDisplayData(data);
+				if (data.auxiaData.userTreatment !== undefined) {
+					await submitComponentEventTracking(
+						{
+							component: {
+								componentType: 'SIGN_IN_GATE',
+								id: data.auxiaData.userTreatment.treatmentId,
+							},
+							action: 'VIEW',
+							abTest,
+						},
+						renderingTarget,
+					);
+				}
 			}
 		})().catch((error) => {
 			console.error('Error fetching Auxia display data:', error);
