@@ -1,6 +1,5 @@
 import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
-import type { FEFootballDataPage } from '../feFootballDataPage';
 import { decideFormat } from '../lib/articleFormat';
 import { enhanceBlocks } from '../model/enhanceBlocks';
 import { validateAsArticleType, validateAsBlock } from '../model/validate';
@@ -8,11 +7,7 @@ import { enhanceArticleType } from '../types/article';
 import type { FEBlocksRequest } from '../types/frontend';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
-import {
-	renderBlocks,
-	renderFootballDataPage,
-	renderHtml,
-} from './render.article.web';
+import { renderBlocks, renderHtml } from './render.article.web';
 
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'web');
@@ -109,10 +104,4 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 	});
 
 	res.status(200).send(html);
-};
-
-export const handleFootballDataPage: RequestHandler = ({ body }, res) => {
-	const footballData = body as FEFootballDataPage;
-	const { html, prefetchScripts } = renderFootballDataPage(footballData);
-	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
