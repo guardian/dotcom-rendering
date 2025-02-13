@@ -73,6 +73,7 @@ export const ScrollableFeature = ({
 							galleryCount={card.galleryCount}
 							podcastImage={card.podcastImage}
 							audioDuration={card.audioDuration}
+							trailText={undefined}
 						/>
 					</ScrollableCarousel.Item>
 				);
