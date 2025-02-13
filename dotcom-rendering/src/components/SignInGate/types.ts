@@ -125,6 +125,7 @@ export type AuxiaInteractionInteractionType =
 	| 'DISMISSED';
 
 export type AuxiaInteractionActionName =
+	| 'PRIVACY-BUTTON'
 	| 'REGISTER-LINK'
 	| 'SIGN-IN-LINK'
 	| 'HOW-TO-LINK'
