@@ -159,8 +159,9 @@ export const StickyLiveblogAskWrapper = ({
 		shouldHideReaderRevenueOnArticle ||
 		isUndefined(countryCode) ||
 		isUndefined(pageViewId)
-	)
+	) {
 		return null;
+	}
 
 	return (
 		<GutterLiveblogAskBuilder
