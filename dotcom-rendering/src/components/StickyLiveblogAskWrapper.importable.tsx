@@ -63,8 +63,7 @@ const GutterLiveblogAskBuilder = ({
 
 		const payload: GutterPayload = {
 			targeting: {
-				showSupportMessaging:
-					shouldHideSupportMessaging(isSignedIn) === false,
+				showSupportMessaging: hideSupportMessagingForUser,
 				countryCode,
 				mvtId: Number(
 					getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
