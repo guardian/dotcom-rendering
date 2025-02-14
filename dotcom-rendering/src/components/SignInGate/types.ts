@@ -110,9 +110,9 @@ export interface AuxiaAPIResponseDataUserTreatment {
 
 export interface AuxiaProxyGetTreatmentsPayload {
 	browserId: string | undefined;
-	is_supporter: boolean;
-	daily_article_count: number;
-	article_identifier: string;
+	isSupporter: boolean;
+	dailyArticleCount: number;
+	articleIdentifier: string;
 }
 
 export interface AuxiaProxyGetTreatmentsResponse {
@@ -155,8 +155,8 @@ export interface AuxiaProxyLogTreatmentInteractionPayload {
 
 export interface AuxiaGateReaderPersonalData {
 	browserId: string | undefined;
-	daily_article_count: number;
-	is_supporter: boolean;
+	dailyArticleCount: number;
+	isSupporter: boolean;
 }
 
 export interface AuxiaGateDisplayData {

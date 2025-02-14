@@ -453,11 +453,11 @@ interface ShowSignInGateAuxiaProps {
 const decideIsSupporter = (): boolean => {
 	// nb: We will not be calling the Auxia API if the user is signed in, so we can set isSignedIn to false.
 	const isSignedIn = false;
-	const is_supporter = shouldHideSupportMessaging(isSignedIn);
-	if (is_supporter === 'Pending') {
+	const isSupporter = shouldHideSupportMessaging(isSignedIn);
+	if (isSupporter === 'Pending') {
 		return true;
 	}
-	return is_supporter;
+	return isSupporter;
 };
 
 const decideDailyArticleCount = (): number => {
@@ -478,13 +478,13 @@ const decideAuxiaProxyReaderPersonalData =
 	async (): Promise<AuxiaGateReaderPersonalData> => {
 		const browserId =
 			getCookie({ name: 'bwid', shouldMemoize: true }) ?? '';
-		const daily_article_count = decideDailyArticleCount();
+		const dailyArticleCount = decideDailyArticleCount();
 		const hasConsent = await hasCmpConsentForBrowserId();
-		const is_supporter = decideIsSupporter();
+		const isSupporter = decideIsSupporter();
 		const data = {
 			browserId: hasConsent ? browserId : undefined,
-			daily_article_count,
-			is_supporter,
+			dailyArticleCount,
+			isSupporter,
 		};
 		return Promise.resolve(data);
 	};
@@ -493,11 +493,11 @@ const fetchProxyGetTreatments = async (
 	contributionsServiceUrl: string,
 	pageId: string,
 	browserId: string | undefined,
-	is_supporter: boolean,
-	daily_article_count: number,
+	isSupporter: boolean,
+	dailyArticleCount: number,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
-	const article_identifier = `www.theguardian.com/${pageId}`;
+	const articleIdentifier = `www.theguardian.com/${pageId}`;
 
 	const url = `${contributionsServiceUrl}/auxia/get-treatments`;
 	const headers = {
@@ -505,9 +505,9 @@ const fetchProxyGetTreatments = async (
 	};
 	const payload: AuxiaProxyGetTreatmentsPayload = {
 		browserId,
-		is_supporter,
-		daily_article_count,
-		article_identifier,
+		isSupporter,
+		dailyArticleCount,
+		articleIdentifier,
 	};
 	const params = {
 		method: 'POST',
@@ -531,8 +531,8 @@ const buildAuxiaGateDisplayData = async (
 		contributionsServiceUrl,
 		pageId,
 		readerPersonalData.browserId,
-		readerPersonalData.is_supporter,
-		readerPersonalData.daily_article_count,
+		readerPersonalData.isSupporter,
+		readerPersonalData.dailyArticleCount,
 	);
 	if (response.status && response.data) {
 		const answer = {
