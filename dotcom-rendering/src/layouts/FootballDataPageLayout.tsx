@@ -1,6 +1,6 @@
 import { palette } from '@guardian/source/foundations';
+import { initialDays, nations } from '../../fixtures/manual/footballData';
 import { AdSlot } from '../components/AdSlot.web';
-import { Results } from '../components/FootballMatchesPage.stories';
 import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.importable';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -20,9 +20,8 @@ interface Props {
 /*
 	Hardcoded data to test layout
 */
-
-const nations = Results.args.nations;
-const initialDays = Results.args.initialDays;
+const nationsHardcoded = nations;
+const initialDaysHardcoded = initialDays;
 
 export const FootballDataPageLayout = ({ footballData }: Props) => {
 	const NAV = extractNAV(footballData.nav);
@@ -77,11 +76,11 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 				<Section fullWidth={true}>
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<FootballMatchesPageWrapper
-							nations={nations}
+							nations={nationsHardcoded}
 							guardianBaseUrl={footballData.guardianBaseURL}
 							// ToDo: determine based on URL
 							kind={'Fixture'}
-							initialDays={initialDays}
+							initialDays={initialDaysHardcoded}
 							edition={footballData.editionId}
 						/>
 					</Island>

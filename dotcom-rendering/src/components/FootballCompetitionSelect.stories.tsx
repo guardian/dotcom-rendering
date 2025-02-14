@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, fn, userEvent, waitFor, within } from '@storybook/test';
 import { allModes } from '../../.storybook/modes';
+import { nations } from '../../fixtures/manual/footballData';
 import { FootballCompetitionSelect as FootballCompetitionSelectComponent } from './FootballCompetitionSelect';
 
 const meta = {
@@ -20,24 +21,7 @@ type Story = StoryObj<typeof meta>;
 
 export const FootballCompetitionSelect = {
 	args: {
-		nations: [
-			{
-				name: 'England',
-				competitions: [
-					{ tag: 'football/premierleague', name: 'Premier League' },
-					{ tag: 'football/championship', name: 'Championship' },
-				],
-			},
-			{
-				name: 'Scotland',
-				competitions: [
-					{
-						tag: 'football/scottish-premiership',
-						name: 'Scottish Premiership',
-					},
-				],
-			},
-		],
+		nations,
 		kind: 'Result',
 		onChange: fn(),
 	},
