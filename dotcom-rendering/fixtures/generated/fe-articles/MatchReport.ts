@@ -17,7 +17,7 @@ export const MatchReport: FEArticleType = {
 	version: 3,
 	headline:
 		'André Ayew sparks Swansea victory over Norwich to close gap at top',
-	standfirst: '',
+	standfirst: '<p> </p>',
 	webTitle:
 		'André Ayew sparks Swansea victory over Norwich to close gap at top',
 	mainMediaElements: [
@@ -80,7 +80,7 @@ export const MatchReport: FEArticleType = {
 					},
 				],
 			},
-			elementId: 'c0357842-1d92-4b97-b26e-c344610f2fdd',
+			elementId: '7e9976f6-f220-475c-b9b3-a8427e55df8e',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -280,55 +280,55 @@ export const MatchReport: FEArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>When does a blip become something more major? Whatever this sticky patch is for <a href="https://www.theguardian.com/football/norwichcity" data-component="auto-linked-tag">Norwich City</a>, it is impossible to ignore the changing landscape at the top of the Championship after Swansea cut their lead at the summit to two points courtesy of goals by André Ayew and Conor Hourihane.</p>',
-					elementId: 'cbbfcf69-fecf-42f6-a763-09fa6ef2cd05',
+					elementId: '1b1389de-6315-4d15-8da4-1e5e72e934b1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Norwich may have fired blanks for the fourth successive game but Hourihane is on quite the streak, with a superb strike here his third goal since arriving on loan from Aston Villa a fortnight ago. It looks an increasingly shrewd piece of business.</p>',
-					elementId: '7c81b912-d3c3-4229-98b5-5cf79878b825',
+					elementId: '4da4795a-5aec-4a34-b0bc-3d5d5c65185f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Swansea have a game in hand on the leaders but Brentford and Reading, both of whom also have games up their sleeve, will be equally encouraged by a Norwich team stuck in a rut. Ayew capitalised on an uncharacteristic error by Tim Krul to open the scoring before Hourihane sent a rasping strike beyond the Norwich goalkeeper from distance after the interval.</p>',
-					elementId: 'dd09d1a6-0eda-430a-8551-65114fa0ac1e',
+					elementId: '7303ef37-d3ab-416a-9248-233bc50ff4b4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
 					prefix: 'Related: ',
 					text: "Tim Krul: 'The way we play at Norwich is similar to Holland'",
-					elementId: '3521b487-ba0f-45a7-86c6-08b15546ef09',
+					elementId: 'e21dc9ab-f5f4-4e0b-b423-a5432f159550',
 					role: 'thumbnail',
 					url: 'https://www.theguardian.com/football/football-league-blog/2021/jan/29/tim-krul-way-we-play-norwich-similar-holland-netherlands-goalkeeper',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Swansea should have had a late penalty too, but the referee Simon Hooper waved away appeals despite Ben Gibson appearing to fell the substitute Jordan Morris after Grant Hanley collided with the all-action Connor Roberts.</p>',
-					elementId: '8d7d9811-27f9-4175-b4fc-3903c83a2931',
+					elementId: '16aa3ae3-fdec-4617-931e-ca44d7087006',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>On the eve of this game, Swansea’s unpopular American owners gave a rare interview in which they broke their silence on a multitude of longstanding issues but also made a point of stressing they have not been “taking a victory lap” on the back of their impressive start under Steve Cooper.</p>',
-					elementId: '16729c9e-3ecc-4872-9c89-cee906d5b3b4',
+					elementId: '4475b049-b60f-4a6a-ad31-5ba1109da76c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“There were no expectations at the start of the season so I think it would be unfair to start doing it [building them] now with 19 games to go,” Cooper said. “There are clubs not even in the top 10 with much more resources than us but we’re going well and enjoying the journey and that’s how we work.”</p>',
-					elementId: 'fc3239d9-4171-43e4-aade-562dbaaead5c',
+					elementId: 'cd081e19-3672-4af8-aaa3-49d37c6171f4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Perhaps it was kidology but Daniel Farke had been at pains to play down the significance of the occasion after stuttering to a point at Millwall on Tuesday. Todd Cantwell, among those of interest to the watching England Under-21s manager Aidy Boothroyd, showed touches of class, setting Teemu Pukki free with a wonderfully weighted pass and later Kenny McLean after twirling away from Matt Grimes but the killer instinct again eluded them.</p>',
-					elementId: '9cbcecaa-76ce-4295-a72a-215a69d01e51',
+					elementId: '07fad429-82bd-437e-8852-ce1ca811ba32',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Swansea seized the advantage three minutes before the interval but the goal was a tragicomedy from a Norwich perspective. Krul flapped at Roberts’ in-swinging corner and when the ball dropped, Marc Guehi, another player on Boothroyd’s radar, scooped the ball away from the Norwich goalkeeper’s grasp, allowing Swansea to feast on the leftovers. Jake Bidwell tried his luck and then Ayew fired in his ninth goal of the season. Farke sought a response and Freddie Woodman saved superbly to keep out Grant Hanley’s header on the brink of the interval after the captain met Przemyslaw Placheta’s free-kick.</p>',
-					elementId: 'c70bcc66-53e3-43d1-b9a6-fe764496f523',
+					elementId: '1a6ad0e6-23c0-4244-9213-b50999c14aea',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Krul came out early to limber up for the second half but, before Norwich had a chance to write the wrongs, they found themselves two goals down. Jay Fulton gobbled up possession following a loose pass by McLean and played a sliderule pass infield to Hourihane, who joined on loan last month in search of regular game time. The midfielder steadied himself with first touch and then arrowed a piercing left-footed strike into the corner with his second.</p>',
-					elementId: '8891f7d9-4b50-4285-aec6-bd246197316b',
+					elementId: '7f0332fd-76f4-4ef5-a88a-f8b3ed9182a0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -339,19 +339,19 @@ export const MatchReport: FEArticleType = {
 					alt: 'Fiver',
 					caption:
 						'<strong>The Fiver: sign up and get our daily football email.</strong>',
-					elementId: 'aa7eb059-eefa-4a7b-b779-88742b45592d',
+					elementId: '68e88481-fe98-4b27-a37e-68e523df9ae3',
 					isThirdPartyTracking: false,
 					html: '<iframe id="the-fiver" name="the-fiver" src="https://www.theguardian.com/email/form/plaintone/the-fiver" scrolling="no" seamless="" class="iframed--overflow-hidden email-sub__iframe" height="52px" frameborder="0" data-component="email-embed--the-fiver"></iframe>',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“We didn’t think he was going to come in and score three goals in first three league games, but we’ll take it,” said Cooper. “As soon as it fell to Conor I think everybody in the stadium thought ‘there’s a good chance of this going in.’ Once we lost Morgan [Gibbs-White, who returned to Wolves], I felt we needed a player you fancy to get goals. Conor’s numbers are really good.”</p>',
-					elementId: 'db57e5d5-8014-40b9-a3b2-aa19165d645d',
+					elementId: '65d2cd54-7a1a-48dd-92a6-790b12de041f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Krul shook his head in disbelief and Farke admitted his players are hurting. “When you lose such a spotlight game, of course, you are disappointed,” he said. “I will allow my players to be disappointed because it’s important to feel this and be greedy for this next game. We want this winning feeling back.”</p>',
-					elementId: 'c1f75f3f-7edd-4847-9d8e-cd00ad082bb1',
+					elementId: '02191134-55d9-49c4-b856-44968b7a57a6',
 				},
 			],
 			attributes: {
@@ -368,7 +368,7 @@ export const MatchReport: FEArticleType = {
 			blockFirstPublishedDisplayNoTimezone: '22.16',
 			contributors: [],
 			primaryDateLine: 'Fri 5 Feb 2021 22.16 GMT',
-			secondaryDateLine: 'Last modified on Sat 6 Feb 2021 05.27 GMT',
+			secondaryDateLine: 'Last modified on Tue 10 Sep 2024 10.58 BST',
 		},
 	],
 	author: {
@@ -379,7 +379,7 @@ export const MatchReport: FEArticleType = {
 	webPublicationDateDeprecated: '2021-02-05T22:16:43.000Z',
 	webPublicationDateDisplay: 'Fri 5 Feb 2021 22.16 GMT',
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Sat 6 Feb 2021 05.27 GMT',
+		'Last modified on Tue 10 Sep 2024 10.58 BST',
 	editionLongForm: 'UK edition',
 	editionId: 'UK',
 	pageId: 'football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
@@ -387,11 +387,16 @@ export const MatchReport: FEArticleType = {
 		'https://www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 	format: {
 		design: 'MatchReportDesign',
-		theme: 'SportPillar',
+		theme: 'NewsPillar',
 		display: 'StandardDisplay',
 	},
 	designType: 'MatchReport',
 	tags: [
+		{
+			id: 'tone/matchreports',
+			type: 'Tone',
+			title: 'Match reports',
+		},
 		{
 			id: 'football/championship',
 			type: 'Keyword',
@@ -423,11 +428,6 @@ export const MatchReport: FEArticleType = {
 			title: 'Article',
 		},
 		{
-			id: 'tone/matchreports',
-			type: 'Tone',
-			title: 'Match reports',
-		},
-		{
 			id: 'profile/ben-fisher',
 			type: 'Contributor',
 			title: 'Ben Fisher',
@@ -457,12 +457,11 @@ export const MatchReport: FEArticleType = {
 			title: 'UK Sport',
 		},
 	],
-	pillar: 'sport',
+	pillar: 'news',
 	isLegacyInteractive: false,
 	isImmersive: false,
 	sectionLabel: 'Championship',
 	sectionUrl: 'football/championship',
-	sectionName: 'football',
 	subMetaSectionLinks: [
 		{
 			url: '/football/championship',
@@ -531,7 +530,7 @@ export const MatchReport: FEArticleType = {
 			datePublished: '2021-02-05T22:16:43.000Z',
 			headline:
 				'André Ayew sparks Swansea victory over Norwich to close gap at top',
-			dateModified: '2021-02-06T05:27:20.000Z',
+			dateModified: '2024-09-10T09:58:12.000Z',
 			mainEntityOfPage:
 				'https://www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 		},
@@ -558,13 +557,13 @@ export const MatchReport: FEArticleType = {
 		'og:title':
 			'André Ayew sparks Swansea victory over Norwich to close gap at top',
 		'fb:app_id': '180444840287',
-		'article:modified_time': '2021-02-06T05:27:20.000Z',
+		'article:modified_time': '2024-09-10T09:58:12.000Z',
 		'og:image:height': '720',
 		'og:description':
 			'André Ayew and Conor Hourihane scored in the 2-0 home win against Norwich to lift Swansea to second, only two points behind the leaders',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
-		'article:section': 'Football',
+		'article:section': 'Global',
 		'article:published_time': '2021-02-05T22:16:43.000Z',
 		'article:tag': 'Championship,Swansea City,Norwich City,Football,Sport',
 		'al:ios:app_name': 'The Guardian',
@@ -645,7 +644,6 @@ export const MatchReport: FEArticleType = {
 			brazeSwitch: true,
 			consentManagement: true,
 			commercial: true,
-			redplanetForAus: true,
 			prebidSonobi: true,
 			idProfileNavigation: true,
 			confiantAdVerification: true,
@@ -1004,7 +1002,7 @@ export const MatchReport: FEArticleType = {
 	trailText:
 		'André Ayew and Conor Hourihane scored in the 2-0 home win against Norwich to lift Swansea to second, only two points behind the leaders',
 	nav: {
-		currentUrl: '/football',
+		currentUrl: '/',
 		pillars: [
 			{
 				title: 'News',
@@ -1070,6 +1068,10 @@ export const MatchReport: FEArticleType = {
 						],
 					},
 					{
+						title: 'US politics',
+						url: '/us-news/us-politics',
+					},
+					{
 						title: 'World',
 						url: '/world',
 						longTitle: 'World news',
@@ -1117,6 +1119,10 @@ export const MatchReport: FEArticleType = {
 					{
 						title: 'Climate crisis',
 						url: '/environment/climate-crisis',
+					},
+					{
+						title: 'Middle East',
+						url: '/world/middleeast',
 					},
 					{
 						title: 'Ukraine',
@@ -1243,28 +1249,6 @@ export const MatchReport: FEArticleType = {
 					{
 						title: 'UK politics',
 						url: '/politics',
-					},
-					{
-						title: 'Education',
-						url: '/education',
-						children: [
-							{
-								title: 'Schools',
-								url: '/education/schools',
-							},
-							{
-								title: 'Teachers',
-								url: '/teacher-network',
-							},
-							{
-								title: 'Universities',
-								url: '/education/universities',
-							},
-							{
-								title: 'Students',
-								url: '/education/students',
-							},
-						],
 					},
 					{
 						title: 'Society',
@@ -1447,6 +1431,10 @@ export const MatchReport: FEArticleType = {
 				iconName: 'home',
 				children: [
 					{
+						title: 'The Filter',
+						url: '/uk/thefilter',
+					},
+					{
 						title: 'Fashion',
 						url: '/fashion',
 					},
@@ -1578,7 +1566,7 @@ export const MatchReport: FEArticleType = {
 			},
 			{
 				title: 'Inside the Guardian',
-				url: 'https://www.theguardian.com/membership',
+				url: 'https://www.theguardian.com/insidetheguardian',
 			},
 			{
 				title: 'The Observer',
@@ -1619,6 +1607,22 @@ export const MatchReport: FEArticleType = {
 						url: '/crosswords/series/quick',
 					},
 					{
+						title: 'Speedy',
+						url: '/crosswords/series/speedy',
+					},
+					{
+						title: 'Quick cryptic',
+						url: '/crosswords/series/quick-cryptic',
+					},
+					{
+						title: 'Everyman',
+						url: '/crosswords/series/everyman',
+					},
+					{
+						title: 'Quiptic',
+						url: '/crosswords/series/quiptic',
+					},
+					{
 						title: 'Cryptic',
 						url: '/crosswords/series/cryptic',
 					},
@@ -1627,28 +1631,20 @@ export const MatchReport: FEArticleType = {
 						url: '/crosswords/series/prize',
 					},
 					{
-						title: 'Weekend',
-						url: '/crosswords/series/weekend-crossword',
-					},
-					{
-						title: 'Quiptic',
-						url: '/crosswords/series/quiptic',
+						title: 'Azed',
+						url: '/crosswords/series/azed',
 					},
 					{
 						title: 'Genius',
 						url: '/crosswords/series/genius',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
+						title: 'Weekend',
+						url: '/crosswords/series/weekend-crossword',
 					},
 					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
+						title: 'Special',
+						url: '/crosswords/series/special',
 					},
 				],
 			},
@@ -1699,75 +1695,269 @@ export const MatchReport: FEArticleType = {
 				url: 'https://licensing.theguardian.com/',
 			},
 		],
-		currentNavLinkTitle: 'Football',
-		currentPillarTitle: 'Sport',
+		currentNavLinkTitle: 'News',
+		currentPillarTitle: 'News',
 		subNavSections: {
-			parent: {
-				title: 'Football',
-				url: '/football',
-				children: [
-					{
-						title: 'Live scores',
-						url: '/football/live',
-						longTitle: 'football/live',
-					},
-					{
-						title: 'Tables',
-						url: '/football/tables',
-						longTitle: 'football/tables',
-					},
-					{
-						title: 'Fixtures',
-						url: '/football/fixtures',
-						longTitle: 'football/fixtures',
-					},
-					{
-						title: 'Results',
-						url: '/football/results',
-						longTitle: 'football/results',
-					},
-					{
-						title: 'Competitions',
-						url: '/football/competitions',
-						longTitle: 'football/competitions',
-					},
-					{
-						title: 'Clubs',
-						url: '/football/teams',
-						longTitle: 'football/teams',
-					},
-				],
-			},
 			links: [
 				{
-					title: 'Live scores',
-					url: '/football/live',
-					longTitle: 'football/live',
+					title: 'UK',
+					url: '/uk-news',
+					longTitle: 'UK news',
+					children: [
+						{
+							title: 'UK politics',
+							url: '/politics',
+						},
+						{
+							title: 'Education',
+							url: '/education',
+							children: [
+								{
+									title: 'Schools',
+									url: '/education/schools',
+								},
+								{
+									title: 'Teachers',
+									url: '/teacher-network',
+								},
+								{
+									title: 'Universities',
+									url: '/education/universities',
+								},
+								{
+									title: 'Students',
+									url: '/education/students',
+								},
+							],
+						},
+						{
+							title: 'Media',
+							url: '/media',
+						},
+						{
+							title: 'Society',
+							url: '/society',
+						},
+						{
+							title: 'Law',
+							url: '/law',
+						},
+						{
+							title: 'Scotland',
+							url: '/uk/scotland',
+						},
+						{
+							title: 'Wales',
+							url: '/uk/wales',
+						},
+						{
+							title: 'Northern Ireland',
+							url: '/uk/northernireland',
+						},
+					],
 				},
 				{
-					title: 'Tables',
-					url: '/football/tables',
-					longTitle: 'football/tables',
+					title: 'US politics',
+					url: '/us-news/us-politics',
 				},
 				{
-					title: 'Fixtures',
-					url: '/football/fixtures',
-					longTitle: 'football/fixtures',
+					title: 'World',
+					url: '/world',
+					longTitle: 'World news',
+					children: [
+						{
+							title: 'Europe',
+							url: '/world/europe-news',
+						},
+						{
+							title: 'US',
+							url: '/us-news',
+							longTitle: 'US news',
+						},
+						{
+							title: 'Americas',
+							url: '/world/americas',
+						},
+						{
+							title: 'Asia',
+							url: '/world/asia',
+						},
+						{
+							title: 'Australia',
+							url: '/australia-news',
+							longTitle: 'Australia news',
+						},
+						{
+							title: 'Middle East',
+							url: '/world/middleeast',
+						},
+						{
+							title: 'Africa',
+							url: '/world/africa',
+						},
+						{
+							title: 'Inequality',
+							url: '/inequality',
+						},
+						{
+							title: 'Global development',
+							url: '/global-development',
+						},
+					],
 				},
 				{
-					title: 'Results',
-					url: '/football/results',
-					longTitle: 'football/results',
+					title: 'Climate crisis',
+					url: '/environment/climate-crisis',
 				},
 				{
-					title: 'Competitions',
-					url: '/football/competitions',
-					longTitle: 'football/competitions',
+					title: 'Middle East',
+					url: '/world/middleeast',
 				},
 				{
-					title: 'Clubs',
-					url: '/football/teams',
-					longTitle: 'football/teams',
+					title: 'Ukraine',
+					url: '/world/ukraine',
+				},
+				{
+					title: 'Football',
+					url: '/football',
+					children: [
+						{
+							title: 'Live scores',
+							url: '/football/live',
+							longTitle: 'football/live',
+						},
+						{
+							title: 'Tables',
+							url: '/football/tables',
+							longTitle: 'football/tables',
+						},
+						{
+							title: 'Fixtures',
+							url: '/football/fixtures',
+							longTitle: 'football/fixtures',
+						},
+						{
+							title: 'Results',
+							url: '/football/results',
+							longTitle: 'football/results',
+						},
+						{
+							title: 'Competitions',
+							url: '/football/competitions',
+							longTitle: 'football/competitions',
+						},
+						{
+							title: 'Clubs',
+							url: '/football/teams',
+							longTitle: 'football/teams',
+						},
+					],
+				},
+				{
+					title: 'Newsletters',
+					url: '/email-newsletters',
+				},
+				{
+					title: 'Business',
+					url: '/business',
+					children: [
+						{
+							title: 'Economics',
+							url: '/business/economics',
+						},
+						{
+							title: 'Banking',
+							url: '/business/banking',
+						},
+						{
+							title: 'Money',
+							url: '/money',
+							children: [
+								{
+									title: 'Property',
+									url: '/money/property',
+								},
+								{
+									title: 'Pensions',
+									url: '/money/pensions',
+								},
+								{
+									title: 'Savings',
+									url: '/money/savings',
+								},
+								{
+									title: 'Borrowing',
+									url: '/money/debt',
+								},
+								{
+									title: 'Careers',
+									url: '/money/work-and-careers',
+								},
+							],
+						},
+						{
+							title: 'Markets',
+							url: '/business/stock-markets',
+						},
+						{
+							title: 'Project Syndicate',
+							url: '/business/series/project-syndicate-economists',
+						},
+						{
+							title: 'B2B',
+							url: '/business-to-business',
+						},
+						{
+							title: 'Retail',
+							url: '/business/retail',
+						},
+					],
+				},
+				{
+					title: 'Environment',
+					url: '/environment',
+					children: [
+						{
+							title: 'Climate crisis',
+							url: '/environment/climate-crisis',
+						},
+						{
+							title: 'Wildlife',
+							url: '/environment/wildlife',
+						},
+						{
+							title: 'Energy',
+							url: '/environment/energy',
+						},
+						{
+							title: 'Pollution',
+							url: '/environment/pollution',
+						},
+					],
+				},
+				{
+					title: 'UK politics',
+					url: '/politics',
+				},
+				{
+					title: 'Society',
+					url: '/society',
+				},
+				{
+					title: 'Science',
+					url: '/science',
+				},
+				{
+					title: 'Tech',
+					url: '/technology',
+				},
+				{
+					title: 'Global development',
+					url: '/global-development',
+				},
+				{
+					title: 'Obituaries',
+					url: '/obituaries',
 				},
 			],
 		},
@@ -1836,7 +2026,7 @@ export const MatchReport: FEArticleType = {
 				},
 				{
 					text: 'Help',
-					url: '/help',
+					url: 'https://manage.theguardian.com/help-centre',
 					dataLinkName: 'uk : footer : tech feedback',
 					extraClasses: 'js-tech-feedback-report',
 				},
@@ -1898,8 +2088,14 @@ export const MatchReport: FEArticleType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
+					url: 'https://uploads.guim.co.uk/2024/09/04/Modern_Slavery_Statement_2024_.pdf',
 					dataLinkName: 'uk : footer : modern slavery act statement',
+					extraClasses: '',
+				},
+				{
+					text: 'Tax strategy',
+					url: 'https://uploads.guim.co.uk/2024/08/27/TAX_STRATEGY_FOR_THE_YEAR_ENDED_31_MARCH_2025.pdf',
+					dataLinkName: 'uk : footer : tax strategy',
 					extraClasses: '',
 				},
 				{
@@ -1930,12 +2126,6 @@ export const MatchReport: FEArticleType = {
 					text: 'LinkedIn',
 					url: 'https://www.linkedin.com/company/theguardian',
 					dataLinkName: 'uk : footer : linkedin',
-					extraClasses: '',
-				},
-				{
-					text: 'Twitter',
-					url: 'https://twitter.com/guardian',
-					dataLinkName: 'uk: footer : twitter',
 					extraClasses: '',
 				},
 				{
