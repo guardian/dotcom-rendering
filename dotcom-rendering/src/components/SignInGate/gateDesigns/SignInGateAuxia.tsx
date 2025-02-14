@@ -75,15 +75,10 @@ export const SignInGateAuxia = ({
 									renderingTarget,
 									abTest,
 								);
-								logTreatmentInteractionCall(
+								await logTreatmentInteractionCall(
 									'CLICKED',
 									'PRIVACY-BUTTON',
-								).catch((error) => {
-									console.error(
-										'Failed to log treatment interaction:',
-										error,
-									);
-								});
+								);
 							}}
 						>
 							privacy settings
