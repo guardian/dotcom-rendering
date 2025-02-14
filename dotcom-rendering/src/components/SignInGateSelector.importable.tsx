@@ -480,6 +480,7 @@ const decideDailyArticleCount = (): number => {
 const fetchProxyGetTreatments = async (
 	contributionsServiceUrl: string,
 	pageId: string,
+	user_has_consented_to_personal_data_use: boolean,
 	browserId: string,
 	is_supporter: boolean,
 	daily_article_count: number,
@@ -492,6 +493,7 @@ const fetchProxyGetTreatments = async (
 		'Content-Type': 'application/json',
 	};
 	const payload = {
+		user_has_consented_to_personal_data_use,
 		browserId,
 		is_supporter,
 		daily_article_count,
@@ -525,6 +527,7 @@ const buildAuxiaGateDisplayData = async (
 	const response = await fetchProxyGetTreatments(
 		contributionsServiceUrl,
 		pageId,
+		true, // TODO: compute value
 		browserId,
 		is_supporter,
 		daily_article_count,
