@@ -485,7 +485,6 @@ const decideAuxiaProxyReaderPersonalData =
 			browserId: hasConsent ? browserId : undefined,
 			daily_article_count,
 			is_supporter,
-			user_has_consented_to_personal_data_use: hasConsent,
 		};
 		return Promise.resolve(data);
 	};

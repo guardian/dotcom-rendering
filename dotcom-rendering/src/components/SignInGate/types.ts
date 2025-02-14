@@ -157,7 +157,6 @@ export interface AuxiaGateReaderPersonalData {
 	browserId: string | undefined;
 	daily_article_count: number;
 	is_supporter: boolean;
-	user_has_consented_to_personal_data_use: boolean;
 }
 
 export interface AuxiaGateDisplayData {
