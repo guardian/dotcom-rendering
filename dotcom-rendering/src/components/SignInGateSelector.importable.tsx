@@ -31,14 +31,15 @@ import { signInGateTestIdToComponentId } from './SignInGate/signInGateMappings';
 import type {
 	AuxiaAPIResponseDataUserTreatment,
 	AuxiaGateDisplayData,
+	AuxiaGateReaderPersonalData,
 	AuxiaInteractionActionName,
 	AuxiaInteractionInteractionType,
+	AuxiaProxyGetTreatmentsPayload,
+	AuxiaProxyGetTreatmentsResponse,
+	AuxiaProxyLogTreatmentInteractionPayload,
 	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
-	AuxiaProxyGetTreatmentsResponse,
 	SignInGateComponent,
-	AuxiaProxyGetTreatmentsPayload,
-	AuxiaProxyLogTreatmentInteractionPayload,
 } from './SignInGate/types';
 
 // ------------------------------------------------------------------------------------------
@@ -449,11 +450,17 @@ interface ShowSignInGateAuxiaProps {
 	) => Promise<void>;
 }
 
-const decideBrowserIdWithConsentCheck = async (): Promise<
-	string | undefined
-> => {
-	return Promise.resolve('294375422b48');
-};
+const decideAuxiaProxyReaderPersonalData =
+	async (): Promise<AuxiaGateReaderPersonalData> => {
+		const browserId =
+			getCookie({ name: 'bwid', shouldMemoize: true }) ?? '';
+		const hasConsent = await hasCmpConsentForBrowserId();
+		const data = {
+			browserId,
+			user_has_consented_to_personal_data_use: hasConsent,
+		};
+		return Promise.resolve(data);
+	};
 
 const decideIsSupporter = (): boolean => {
 	// nb: We will not be calling the Auxia API if the user is signed in, so we can set isSignedIn to false.
@@ -518,10 +525,15 @@ const buildAuxiaGateDisplayData = async (
 	contributionsServiceUrl: string,
 	pageId: string,
 ): Promise<AuxiaGateDisplayData | undefined> => {
-	const browserId = await decideBrowserIdWithConsentCheck();
-	if (browserId === undefined) {
+	const readerPersonalData = await decideAuxiaProxyReaderPersonalData();
+
+	if (readerPersonalData === undefined) {
 		return Promise.resolve(undefined);
 	}
+
+	const browserId = readerPersonalData.browserId;
+	const user_has_consented_to_personal_data_use =
+		readerPersonalData.user_has_consented_to_personal_data_use;
 
 	const is_supporter = decideIsSupporter();
 	const daily_article_count = decideDailyArticleCount();
@@ -529,7 +541,7 @@ const buildAuxiaGateDisplayData = async (
 	const response = await fetchProxyGetTreatments(
 		contributionsServiceUrl,
 		pageId,
-		true, // TODO: compute value
+		user_has_consented_to_personal_data_use,
 		browserId,
 		is_supporter,
 		daily_article_count,

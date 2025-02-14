@@ -84,8 +84,7 @@ export type SignInGateTestMap = { [name: string]: SignInGateComponent };
 	comment group: auxia-prototype-e55a86ef
 */
 
-// convention: In the naming of these types, we maintain the distinction between "AuxiaAPI" and "AuxiaProxy"
-// The latter refering to the support-dotcom-components proxy for the Auxia API
+// Convention: In the naming of these types, we maintain the distinction between "AuxiaAPI", "AuxiaProxy" and "AuxiaGate".
 
 // Get Treatments
 
@@ -155,6 +154,14 @@ export interface AuxiaProxyLogTreatmentInteractionPayload {
 }
 
 // DCR Types
+
+// Encapsulate all the data considered personal required for the gate to function
+// (currently limited to browserId) with the indication of whether the
+// reader has consented or not for targettting based on personal data.
+export interface AuxiaGateReaderPersonalData {
+	browserId: string;
+	user_has_consented_to_personal_data_use: boolean;
+}
 
 export interface AuxiaGateDisplayData {
 	browserId: string;
