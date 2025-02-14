@@ -3,17 +3,17 @@ import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import type { FEFrontType } from '../../src/types/front';
+import type { FETagPage } from '../frontend/feTagPage';
+import tagPageSchema from '../frontend/schemas/feTagPage.json';
 import type { Block } from '../types/blocks';
 import type { FEEditionsCrosswords } from '../types/editionsCrossword';
 import type { FEArticleType } from '../types/frontend';
 import type { FENewslettersPageType } from '../types/newslettersPage';
-import type { FETagPageType } from '../types/tagPage';
 import articleSchema from './article-schema.json';
 import blockSchema from './block-schema.json';
 import editionsCrosswordSchema from './editions-crossword-schema.json';
 import frontSchema from './front-schema.json';
 import newslettersPageSchema from './newsletter-page-schema.json';
-import tagPageSchema from './tag-page-schema.json';
 
 const options: Options = {
 	verbose: false,
@@ -27,7 +27,7 @@ addFormats(ajv);
 
 const validateArticle = ajv.compile<FEArticleType>(articleSchema);
 const validateFront = ajv.compile<FEFrontType>(frontSchema);
-const validateTagPage = ajv.compile<FETagPageType>(tagPageSchema);
+const validateTagPage = ajv.compile<FETagPage>(tagPageSchema);
 const validateAllEditorialNewslettersPage = ajv.compile<FENewslettersPageType>(
 	newslettersPageSchema,
 );
@@ -72,7 +72,7 @@ export const validateAsFrontType = (data: unknown): FEFrontType => {
 	);
 };
 
-export const validateAsTagPageType = (data: unknown): FETagPageType => {
+export const validateAsFETagPage = (data: unknown): FETagPage => {
 	if (validateTagPage(data)) return data;
 
 	const url =

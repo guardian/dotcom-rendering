@@ -5,6 +5,7 @@ pnpm-lock.yaml
 
 # generated files
 dotcom-rendering/src/model/*-schema.json
+dotcom-rendering/src/frontend/schemas
 dotcom-rendering/stories/generated
 
 # specific files
