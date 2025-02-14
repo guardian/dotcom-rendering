@@ -61,7 +61,7 @@ const LiveblogGutterAskBuilder = ({
 
 		const payload: GutterPayload = {
 			targeting: {
-				showSupportMessaging: hideSupportMessagingForUser,
+				showSupportMessaging: !hideSupportMessagingForUser,
 				countryCode,
 				mvtId: Number(
 					getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
@@ -156,7 +156,9 @@ export const LiveblogGutterAskWrapper = ({
 	pageUrl,
 }: LiveblogGutterAskWrapperProps) => {
 	const { renderingTarget } = useConfig();
+	// const countryCode = useCountryCode('support-the-Guardian');
 	const countryCode = useCountryCode('liveblog-gutter-ask');
+	// const pageViewId = usePageViewId("Web");
 	const pageViewId = usePageViewId(renderingTarget);
 
 	// TODO: remove console logs.
