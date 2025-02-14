@@ -450,16 +450,7 @@ interface ShowSignInGateAuxiaProps {
 const decideBrowserIdWithConsentCheck = async (): Promise<
 	string | undefined
 > => {
-	const hasConsent = await hasCmpConsentForBrowserId();
-	if (!hasConsent) {
-		return Promise.resolve(undefined);
-	}
-
-	const cookie = getCookie({ name: 'bwid', shouldMemoize: true });
-	if (cookie === null) {
-		return Promise.resolve(undefined);
-	}
-	return Promise.resolve(cookie);
+	return Promise.resolve('294375422b48');
 };
 
 const decideIsSupporter = (): boolean => {
