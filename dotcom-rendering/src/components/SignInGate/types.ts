@@ -87,6 +87,8 @@ export type SignInGateTestMap = { [name: string]: SignInGateComponent };
 // convention: In the naming of these types, we maintain the distinction between "AuxiaAPI" and "AuxiaProxy"
 // The latter refering to the support-dotcom-components proxy for the Auxia API
 
+// Get Treatments
+
 export interface TreatmentContentDecoded {
 	title: string;
 	subtitle: string;
@@ -107,6 +109,14 @@ export interface AuxiaAPIResponseDataUserTreatment {
 	surface: string;
 }
 
+export interface AuxiaProxyGetTreatmentsPayload {
+	user_has_consented_to_personal_data_use: boolean;
+	browserId: string;
+	is_supporter: boolean;
+	daily_article_count: number;
+	article_identifier: string;
+}
+
 export interface AuxiaProxyGetTreatmentsResponse {
 	status: boolean;
 	data?: AuxiaProxyGetTreatmentsProxyResponseData;
@@ -117,10 +127,7 @@ export interface AuxiaProxyGetTreatmentsProxyResponseData {
 	userTreatment?: AuxiaAPIResponseDataUserTreatment;
 }
 
-export interface AuxiaGateDisplayData {
-	browserId: string;
-	auxiaData: AuxiaProxyGetTreatmentsProxyResponseData;
-}
+// Log Treatment Interaction
 
 export type AuxiaInteractionInteractionType =
 	| 'VIEWED'
@@ -135,6 +142,24 @@ export type AuxiaInteractionActionName =
 	| 'WHY-LINK'
 	| 'HELP-LINK'
 	| ''; // used for 'VIEWED' and 'DISMISSED' interactions
+
+export interface AuxiaProxyLogTreatmentInteractionPayload {
+	user_has_consented_to_personal_data_use: boolean;
+	browserId: string;
+	treatmentTrackingId: string;
+	treatmentId: string;
+	surface: string;
+	interactionType: AuxiaInteractionInteractionType;
+	interactionTimeMicros: number;
+	actionName: AuxiaInteractionActionName;
+}
+
+// DCR Types
+
+export interface AuxiaGateDisplayData {
+	browserId: string;
+	auxiaData: AuxiaProxyGetTreatmentsProxyResponseData;
+}
 
 export type SignInGatePropsAuxia = {
 	guUrl: string;

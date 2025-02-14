@@ -37,6 +37,8 @@ import type {
 	CurrentSignInGateABTest,
 	AuxiaProxyGetTreatmentsResponse,
 	SignInGateComponent,
+	AuxiaProxyGetTreatmentsPayload,
+	AuxiaProxyLogTreatmentInteractionPayload,
 } from './SignInGate/types';
 
 // ------------------------------------------------------------------------------------------
@@ -492,7 +494,7 @@ const fetchProxyGetTreatments = async (
 	const headers = {
 		'Content-Type': 'application/json',
 	};
-	const payload = {
+	const payload: AuxiaProxyGetTreatmentsPayload = {
 		user_has_consented_to_personal_data_use,
 		browserId,
 		is_supporter,
@@ -557,7 +559,8 @@ const auxiaLogTreatmentInteraction = async (
 		'Content-Type': 'application/json',
 	};
 	const microTime = Date.now() * 1000;
-	const payload = {
+
+	const payload: AuxiaProxyLogTreatmentInteractionPayload = {
 		user_has_consented_to_personal_data_use,
 		browserId,
 		treatmentTrackingId: userTreatment.treatmentTrackingId,
