@@ -59,6 +59,7 @@ const LiveblogGutterAskBuilder = ({
 			return;
 		}
 
+		// CALL the API
 		const payload: GutterPayload = {
 			targeting: {
 				showSupportMessaging: !hideSupportMessagingForUser,
@@ -156,22 +157,14 @@ export const LiveblogGutterAskWrapper = ({
 	pageUrl,
 }: LiveblogGutterAskWrapperProps) => {
 	const { renderingTarget } = useConfig();
-	// const countryCode = useCountryCode('support-the-Guardian');
 	const countryCode = useCountryCode('liveblog-gutter-ask');
-	// const pageViewId = usePageViewId("Web");
 	const pageViewId = usePageViewId(renderingTarget);
-
-	// TODO: remove console logs.
-	// console.log(`shouldHideReaderRevenueOnArticle is: ${shouldHideReaderRevenueOnArticle}`);
-	// console.log(`countryCode is: ${countryCode}`);
-	// console.log(`pageViewId is: ${pageViewId}`);
 
 	if (
 		shouldHideReaderRevenueOnArticle ||
 		isUndefined(countryCode) ||
 		isUndefined(pageViewId)
 	) {
-		// console.log('something is undefined so hiding');
 		return null;
 	}
 
