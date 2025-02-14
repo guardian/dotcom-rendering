@@ -546,6 +546,7 @@ const buildAuxiaGateDisplayData = async (
 
 const auxiaLogTreatmentInteraction = async (
 	contributionsServiceUrl: string,
+	user_has_consented_to_personal_data_use: boolean,
 	userTreatment: AuxiaAPIResponseDataUserTreatment,
 	interactionType: AuxiaInteractionInteractionType,
 	actionName: AuxiaInteractionActionName,
@@ -557,6 +558,7 @@ const auxiaLogTreatmentInteraction = async (
 	};
 	const microTime = Date.now() * 1000;
 	const payload = {
+		user_has_consented_to_personal_data_use,
 		browserId,
 		treatmentTrackingId: userTreatment.treatmentTrackingId,
 		treatmentId: userTreatment.treatmentId,
@@ -685,6 +687,7 @@ const SignInGateSelectorAuxia = ({
 						) => {
 							await auxiaLogTreatmentInteraction(
 								contributionsServiceUrl,
+								true, // TODO: compute value
 								auxiaGateDisplayData.auxiaData.userTreatment!,
 								interactionType,
 								actionName,
@@ -715,6 +718,7 @@ const ShowSignInGateAuxia = ({
 		void (async () => {
 			await auxiaLogTreatmentInteraction(
 				contributionsServiceUrl,
+				true, // TODO: compute value
 				userTreatment,
 				'VIEWED',
 				'',
