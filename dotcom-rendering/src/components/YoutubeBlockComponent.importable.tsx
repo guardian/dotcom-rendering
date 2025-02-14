@@ -1,15 +1,13 @@
 import type { ConsentState } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
+import { getLargestImageSize } from '../lib/image';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import type { AdTargeting } from '../types/commercial';
 import type { AspectRatio } from '../types/front';
 import { Caption } from './Caption';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from './Card/components/ImageWrapper';
+import type { PlayButtonSize } from './Card/components/PlayIcon';
 import { useConfig } from './ConfigContext';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
@@ -37,27 +35,13 @@ type Props = {
 	stickyVideos: boolean;
 	kickerText?: string;
 	pauseOffscreenVideo?: boolean;
-	showTextOverlay?: boolean;
-	// If the youtube block component is used on a card, we can pass in the image size and position on mobile to get the correct styling for the play icon. If it's not used on a card, we can just pass default values to get the standard large play icon.
-	imageSize?: ImageSizeType;
-	imagePositionOnMobile?: ImagePositionType;
+	showTextOverlay: boolean;
+	iconSizeOnDesktop: PlayButtonSize;
+	iconSizeOnMobile: PlayButtonSize;
+	hidePillOnMobile: boolean;
 	enableAds: boolean;
 	aspectRatio?: AspectRatio;
 };
-
-/**
- * We do our own image optimization in DCR and only need 1 image. Pick the largest image available to
- * us to avoid up-scaling later.
- *
- * @param images an array of the same image at different resolutions
- * @returns largest image from images
- */
-const getLargestImageSize = (
-	images: {
-		url: string;
-		width: number;
-	}[],
-) => [...images].sort((a, b) => a.width - b.width).pop();
 
 const adTargetingDisabled: AdTargeting = { disableAds: true };
 
@@ -81,8 +65,9 @@ export const YoutubeBlockComponent = ({
 	kickerText,
 	pauseOffscreenVideo = false,
 	showTextOverlay,
-	imageSize = 'large',
-	imagePositionOnMobile = 'none',
+	iconSizeOnDesktop,
+	iconSizeOnMobile,
+	hidePillOnMobile,
 	enableAds,
 	aspectRatio,
 }: Props) => {
@@ -102,6 +87,12 @@ export const YoutubeBlockComponent = ({
 	 * We need to ensure a unique id for each YouTube player on the page.
 	 */
 	const uniqueId = `${assetId}-${index}`;
+
+	/**
+	 * We do our own image optimization in DCR and only need 1 image.
+	 * Pick the largest image available to us to avoid up-scaling later.
+	 */
+	const largestPosterImage = getLargestImageSize(posterImage)?.url;
 
 	useEffect(() => {
 		if (renderingTarget === 'Web') {
@@ -148,8 +139,7 @@ export const YoutubeBlockComponent = ({
 				atomId={id}
 				videoId={assetId}
 				uniqueId={uniqueId}
-				overrideImage={overrideImage}
-				posterImage={getLargestImageSize(posterImage)?.url}
+				image={overrideImage ?? largestPosterImage}
 				alt={altText ?? mediaTitle ?? ''}
 				adTargeting={
 					enableAds && renderingTarget === 'Web'
@@ -174,8 +164,9 @@ export const YoutubeBlockComponent = ({
 				kicker={kickerText}
 				shouldPauseOutOfView={pauseOffscreenVideo}
 				showTextOverlay={showTextOverlay}
-				imageSize={imageSize}
-				imagePositionOnMobile={imagePositionOnMobile}
+				iconSizeOnDesktop={iconSizeOnDesktop}
+				iconSizeOnMobile={iconSizeOnMobile}
+				hidePillOnMobile={hidePillOnMobile}
 				renderingTarget={renderingTarget}
 				aspectRatio={aspectRatio}
 			/>
