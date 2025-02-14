@@ -450,18 +450,6 @@ interface ShowSignInGateAuxiaProps {
 	) => Promise<void>;
 }
 
-const decideAuxiaProxyReaderPersonalData =
-	async (): Promise<AuxiaGateReaderPersonalData> => {
-		const browserId =
-			getCookie({ name: 'bwid', shouldMemoize: true }) ?? '';
-		const hasConsent = await hasCmpConsentForBrowserId();
-		const data = {
-			browserId,
-			user_has_consented_to_personal_data_use: hasConsent,
-		};
-		return Promise.resolve(data);
-	};
-
 const decideIsSupporter = (): boolean => {
 	// nb: We will not be calling the Auxia API if the user is signed in, so we can set isSignedIn to false.
 	const isSignedIn = false;
@@ -485,6 +473,22 @@ const decideDailyArticleCount = (): number => {
 	}
 	return 0;
 };
+
+const decideAuxiaProxyReaderPersonalData =
+	async (): Promise<AuxiaGateReaderPersonalData> => {
+		const browserId =
+			getCookie({ name: 'bwid', shouldMemoize: true }) ?? '';
+		const daily_article_count = decideDailyArticleCount();
+		const hasConsent = await hasCmpConsentForBrowserId();
+		const is_supporter = decideIsSupporter();
+		const data = {
+			browserId,
+			daily_article_count,
+			is_supporter,
+			user_has_consented_to_personal_data_use: hasConsent,
+		};
+		return Promise.resolve(data);
+	};
 
 const fetchProxyGetTreatments = async (
 	contributionsServiceUrl: string,
@@ -526,30 +530,17 @@ const buildAuxiaGateDisplayData = async (
 	pageId: string,
 ): Promise<AuxiaGateDisplayData | undefined> => {
 	const readerPersonalData = await decideAuxiaProxyReaderPersonalData();
-
-	if (readerPersonalData === undefined) {
-		return Promise.resolve(undefined);
-	}
-
-	const browserId = readerPersonalData.browserId;
-	const user_has_consented_to_personal_data_use =
-		readerPersonalData.user_has_consented_to_personal_data_use;
-
-	const is_supporter = decideIsSupporter();
-	const daily_article_count = decideDailyArticleCount();
-
 	const response = await fetchProxyGetTreatments(
 		contributionsServiceUrl,
 		pageId,
-		user_has_consented_to_personal_data_use,
-		browserId,
-		is_supporter,
-		daily_article_count,
+		readerPersonalData.user_has_consented_to_personal_data_use,
+		readerPersonalData.browserId,
+		readerPersonalData.is_supporter,
+		readerPersonalData.daily_article_count,
 	);
-
 	if (response.status && response.data) {
 		const answer = {
-			browserId,
+			browserId: readerPersonalData.browserId,
 			auxiaData: response.data,
 		};
 		return Promise.resolve(answer);

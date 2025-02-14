@@ -155,11 +155,10 @@ export interface AuxiaProxyLogTreatmentInteractionPayload {
 
 // DCR Types
 
-// Encapsulate all the data considered personal required for the gate to function
-// (currently limited to browserId) with the indication of whether the
-// reader has consented or not for targettting based on personal data.
 export interface AuxiaGateReaderPersonalData {
 	browserId: string;
+	daily_article_count: number;
+	is_supporter: boolean;
 	user_has_consented_to_personal_data_use: boolean;
 }
 
