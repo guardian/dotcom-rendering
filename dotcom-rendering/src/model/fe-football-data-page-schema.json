@@ -162,8 +162,7 @@
                     "type": "string"
                 },
                 "isFront": {
-                    "type": "boolean",
-                    "const": true
+                    "type": "boolean"
                 },
                 "idWebAppUrl": {
                     "type": "string"
@@ -358,8 +357,6 @@
                 "isPreview",
                 "isProd",
                 "isSensitive",
-                "keywordIds",
-                "keywords",
                 "locationapiurl",
                 "membershipAccess",
                 "membershipUrl",

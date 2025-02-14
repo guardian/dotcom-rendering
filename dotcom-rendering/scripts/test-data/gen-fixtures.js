@@ -7,7 +7,10 @@ const execa = require('execa');
 const { config } = require('../../fixtures/config');
 const { configOverrides } = require('../../fixtures/config-overrides');
 const { switchOverrides } = require('../../fixtures/switch-overrides');
-const { validateAsArticleType } = require('../../src/model/validate');
+const {
+	validateAsArticleType,
+	validateAsFootballDataPageType,
+} = require('../../src/model/validate');
 
 const root = resolve(__dirname, '..', '..');
 
@@ -236,7 +239,7 @@ requests.push(
 // MatchReport fixtures
 requests.push(
 	fetch(
-		'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2022/07/11/8184/7514.json?dcr=true&page=football%2F2022%2Fjul%2F11%2Fengland-norway-womens-euro-2022-group-a-match-report',
+		'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2024/06/30/999/6527.json?dcr=true&page=football%2Farticle%2F2024%2Fjun%2F30%2Fspain-georgia-euro-2024-match-report',
 	)
 		.then((res) => res.json())
 		.then((json) => {
@@ -304,6 +307,38 @@ requests.push(
 		.then(() => 'story-package.ts')
 		.catch((err) => {
 			throw new Error('Failed to create story-package.ts', {
+				cause: err,
+			});
+		}),
+);
+
+requests.push(
+	fetch('https://www.theguardian.com/football/live.json?dcr=true')
+		.then((res) => res.json())
+		.then((json) => {
+			const footballDataPageData = validateAsFootballDataPageType(json);
+			console.log('validate the football');
+
+			// Write the new frontend fixture data
+			const contents = `${HEADER}
+			import type { FEFootballDataPage } from '../../src/feFootballDataPage';
+
+			export const footballData: FEFootballDataPage = ${JSON.stringify(
+				footballDataPageData,
+				null,
+				4,
+			)}
+		`;
+
+			return fs.writeFile(
+				`${root}/fixtures/generated/football-live.ts`,
+				contents,
+				'utf8',
+			);
+		})
+		.then(() => 'football-live.ts')
+		.catch((err) => {
+			throw new Error('Failed to create football-live.ts', {
 				cause: err,
 			});
 		}),

@@ -94,6 +94,13 @@ type FEMatchByDateAndCompetition = {
 	competitionMatches: FECompetitionMatch[];
 };
 
+type FEFootballPageConfig = Omit<
+	FEFrontConfigType,
+	'keywordIds' | 'keywords' | 'isFront'
+> & {
+	isFront: boolean;
+};
+
 export type FEFootballDataPage = {
 	matchesList: FEMatchByDateAndCompetition[];
 	nextPage?: string;
@@ -101,7 +108,7 @@ export type FEFootballDataPage = {
 	nav: FENavType;
 	editionId: EditionId;
 	guardianBaseURL: string;
-	config: FEFrontConfigType;
+	config: FEFootballPageConfig;
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
 	canonicalUrl?: string;

@@ -88,7 +88,7 @@ export const Picture: FEArticleType = {
 					},
 				],
 			},
-			elementId: '217323a6-ddcc-4e7e-b06f-e1ed27e6f344',
+			elementId: 'fcbf0e1d-2e8d-4bc3-acb0-36dcc40d93da',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -559,7 +559,6 @@ export const Picture: FEArticleType = {
 			brazeSwitch: true,
 			consentManagement: true,
 			commercial: true,
-			redplanetForAus: true,
 			prebidSonobi: true,
 			idProfileNavigation: true,
 			confiantAdVerification: true,
@@ -1024,6 +1023,10 @@ export const Picture: FEArticleType = {
 						],
 					},
 					{
+						title: 'US politics',
+						url: '/us-news/us-politics',
+					},
+					{
 						title: 'World',
 						url: '/world',
 						longTitle: 'World news',
@@ -1071,6 +1074,10 @@ export const Picture: FEArticleType = {
 					{
 						title: 'Climate crisis',
 						url: '/environment/climate-crisis',
+					},
+					{
+						title: 'Middle East',
+						url: '/world/middleeast',
 					},
 					{
 						title: 'Ukraine',
@@ -1197,28 +1204,6 @@ export const Picture: FEArticleType = {
 					{
 						title: 'UK politics',
 						url: '/politics',
-					},
-					{
-						title: 'Education',
-						url: '/education',
-						children: [
-							{
-								title: 'Schools',
-								url: '/education/schools',
-							},
-							{
-								title: 'Teachers',
-								url: '/teacher-network',
-							},
-							{
-								title: 'Universities',
-								url: '/education/universities',
-							},
-							{
-								title: 'Students',
-								url: '/education/students',
-							},
-						],
 					},
 					{
 						title: 'Society',
@@ -1401,6 +1386,10 @@ export const Picture: FEArticleType = {
 				iconName: 'home',
 				children: [
 					{
+						title: 'The Filter',
+						url: '/uk/thefilter',
+					},
+					{
 						title: 'Fashion',
 						url: '/fashion',
 					},
@@ -1532,7 +1521,7 @@ export const Picture: FEArticleType = {
 			},
 			{
 				title: 'Inside the Guardian',
-				url: 'https://www.theguardian.com/membership',
+				url: 'https://www.theguardian.com/insidetheguardian',
 			},
 			{
 				title: 'The Observer',
@@ -1573,6 +1562,22 @@ export const Picture: FEArticleType = {
 						url: '/crosswords/series/quick',
 					},
 					{
+						title: 'Speedy',
+						url: '/crosswords/series/speedy',
+					},
+					{
+						title: 'Quick cryptic',
+						url: '/crosswords/series/quick-cryptic',
+					},
+					{
+						title: 'Everyman',
+						url: '/crosswords/series/everyman',
+					},
+					{
+						title: 'Quiptic',
+						url: '/crosswords/series/quiptic',
+					},
+					{
 						title: 'Cryptic',
 						url: '/crosswords/series/cryptic',
 					},
@@ -1581,28 +1586,20 @@ export const Picture: FEArticleType = {
 						url: '/crosswords/series/prize',
 					},
 					{
-						title: 'Weekend',
-						url: '/crosswords/series/weekend-crossword',
-					},
-					{
-						title: 'Quiptic',
-						url: '/crosswords/series/quiptic',
+						title: 'Azed',
+						url: '/crosswords/series/azed',
 					},
 					{
 						title: 'Genius',
 						url: '/crosswords/series/genius',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
+						title: 'Weekend',
+						url: '/crosswords/series/weekend-crossword',
 					},
 					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
+						title: 'Special',
+						url: '/crosswords/series/special',
 					},
 				],
 			},
@@ -1744,7 +1741,7 @@ export const Picture: FEArticleType = {
 				},
 				{
 					text: 'Help',
-					url: '/help',
+					url: 'https://manage.theguardian.com/help-centre',
 					dataLinkName: 'uk : footer : tech feedback',
 					extraClasses: 'js-tech-feedback-report',
 				},
@@ -1806,8 +1803,14 @@ export const Picture: FEArticleType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
+					url: 'https://uploads.guim.co.uk/2024/09/04/Modern_Slavery_Statement_2024_.pdf',
 					dataLinkName: 'uk : footer : modern slavery act statement',
+					extraClasses: '',
+				},
+				{
+					text: 'Tax strategy',
+					url: 'https://uploads.guim.co.uk/2024/08/27/TAX_STRATEGY_FOR_THE_YEAR_ENDED_31_MARCH_2025.pdf',
+					dataLinkName: 'uk : footer : tax strategy',
 					extraClasses: '',
 				},
 				{
@@ -1838,12 +1841,6 @@ export const Picture: FEArticleType = {
 					text: 'LinkedIn',
 					url: 'https://www.linkedin.com/company/theguardian',
 					dataLinkName: 'uk : footer : linkedin',
-					extraClasses: '',
-				},
-				{
-					text: 'Twitter',
-					url: 'https://twitter.com/guardian',
-					dataLinkName: 'uk: footer : twitter',
 					extraClasses: '',
 				},
 				{
