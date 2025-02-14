@@ -443,7 +443,7 @@ interface ShowSignInGateAuxiaProps {
 	abTest: CurrentSignInGateABTest;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
 	contributionsServiceUrl: string;
-	browserId: string;
+	browserId: string | undefined;
 	logTreatmentInteractionCall: (
 		interactionType: AuxiaInteractionInteractionType,
 		actionName: AuxiaInteractionActionName,
@@ -482,7 +482,7 @@ const decideAuxiaProxyReaderPersonalData =
 		const hasConsent = await hasCmpConsentForBrowserId();
 		const is_supporter = decideIsSupporter();
 		const data = {
-			browserId,
+			browserId: hasConsent ? browserId : undefined,
 			daily_article_count,
 			is_supporter,
 			user_has_consented_to_personal_data_use: hasConsent,
@@ -493,8 +493,7 @@ const decideAuxiaProxyReaderPersonalData =
 const fetchProxyGetTreatments = async (
 	contributionsServiceUrl: string,
 	pageId: string,
-	user_has_consented_to_personal_data_use: boolean,
-	browserId: string,
+	browserId: string | undefined,
 	is_supporter: boolean,
 	daily_article_count: number,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
@@ -506,7 +505,6 @@ const fetchProxyGetTreatments = async (
 		'Content-Type': 'application/json',
 	};
 	const payload: AuxiaProxyGetTreatmentsPayload = {
-		user_has_consented_to_personal_data_use,
 		browserId,
 		is_supporter,
 		daily_article_count,
@@ -533,7 +531,6 @@ const buildAuxiaGateDisplayData = async (
 	const response = await fetchProxyGetTreatments(
 		contributionsServiceUrl,
 		pageId,
-		readerPersonalData.user_has_consented_to_personal_data_use,
 		readerPersonalData.browserId,
 		readerPersonalData.is_supporter,
 		readerPersonalData.daily_article_count,
@@ -551,11 +548,10 @@ const buildAuxiaGateDisplayData = async (
 
 const auxiaLogTreatmentInteraction = async (
 	contributionsServiceUrl: string,
-	user_has_consented_to_personal_data_use: boolean,
 	userTreatment: AuxiaAPIResponseDataUserTreatment,
 	interactionType: AuxiaInteractionInteractionType,
 	actionName: AuxiaInteractionActionName,
-	browserId: string,
+	browserId: string | undefined,
 ): Promise<void> => {
 	const url = `${contributionsServiceUrl}/auxia/log-treatment-interaction`;
 	const headers = {
@@ -564,7 +560,6 @@ const auxiaLogTreatmentInteraction = async (
 	const microTime = Date.now() * 1000;
 
 	const payload: AuxiaProxyLogTreatmentInteractionPayload = {
-		user_has_consented_to_personal_data_use,
 		browserId,
 		treatmentTrackingId: userTreatment.treatmentTrackingId,
 		treatmentId: userTreatment.treatmentId,
@@ -693,7 +688,6 @@ const SignInGateSelectorAuxia = ({
 						) => {
 							await auxiaLogTreatmentInteraction(
 								contributionsServiceUrl,
-								true, // TODO: compute value
 								auxiaGateDisplayData.auxiaData.userTreatment!,
 								interactionType,
 								actionName,
@@ -724,7 +718,6 @@ const ShowSignInGateAuxia = ({
 		void (async () => {
 			await auxiaLogTreatmentInteraction(
 				contributionsServiceUrl,
-				true, // TODO: compute value
 				userTreatment,
 				'VIEWED',
 				'',

@@ -109,8 +109,7 @@ export interface AuxiaAPIResponseDataUserTreatment {
 }
 
 export interface AuxiaProxyGetTreatmentsPayload {
-	user_has_consented_to_personal_data_use: boolean;
-	browserId: string;
+	browserId: string | undefined;
 	is_supporter: boolean;
 	daily_article_count: number;
 	article_identifier: string;
@@ -143,8 +142,7 @@ export type AuxiaInteractionActionName =
 	| ''; // used for 'VIEWED' and 'DISMISSED' interactions
 
 export interface AuxiaProxyLogTreatmentInteractionPayload {
-	user_has_consented_to_personal_data_use: boolean;
-	browserId: string;
+	browserId: string | undefined;
 	treatmentTrackingId: string;
 	treatmentId: string;
 	surface: string;
@@ -156,14 +154,14 @@ export interface AuxiaProxyLogTreatmentInteractionPayload {
 // DCR Types
 
 export interface AuxiaGateReaderPersonalData {
-	browserId: string;
+	browserId: string | undefined;
 	daily_article_count: number;
 	is_supporter: boolean;
 	user_has_consented_to_personal_data_use: boolean;
 }
 
 export interface AuxiaGateDisplayData {
-	browserId: string;
+	browserId: string | undefined;
 	auxiaData: AuxiaProxyGetTreatmentsProxyResponseData;
 }
 
