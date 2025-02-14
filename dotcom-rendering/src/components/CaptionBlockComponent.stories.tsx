@@ -84,7 +84,8 @@ export const WithWidthLimited = {
 	parameters: {
 		chromatic: {
 			modes: {
-				'vertical leftCol': allModes['vertical leftCol'],
+				'vertical mobileMedium': { disable: true },
+				'horizontal leftCol': allModes['horizontal leftCol'],
 			},
 		},
 	},
@@ -106,6 +107,14 @@ export const WhenOverlaid = {
 			display: ArticleDisplay.Showcase,
 			design: ArticleDesign.Comment,
 			theme: Pillar.Sport,
+		},
+	},
+	parameters: {
+		chromatic: {
+			modes: {
+				'vertical mobileMedium': { disable: true },
+				'light mobileMedium': allModes['light mobileMedium'],
+			},
 		},
 	},
 } satisfies Story;
