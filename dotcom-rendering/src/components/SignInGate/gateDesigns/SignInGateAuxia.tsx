@@ -67,7 +67,7 @@ export const SignInGateAuxia = ({
 						<button
 							data-testid="sign-in-gate-main_privacy"
 							css={privacyLink}
-							onClick={() => {
+							onClick={async () => {
 								cmp.showPrivacyManager();
 								trackLink(
 									ophanComponentId,
@@ -75,15 +75,10 @@ export const SignInGateAuxia = ({
 									renderingTarget,
 									abTest,
 								);
-								logTreatmentInteractionCall(
+								await logTreatmentInteractionCall(
 									'CLICKED',
 									'PRIVACY-BUTTON',
-								).catch((error) => {
-									console.error(
-										'Failed to log treatment interaction:',
-										error,
-									);
-								});
+								);
 							}}
 						>
 							privacy settings
@@ -99,22 +94,17 @@ export const SignInGateAuxia = ({
 					priority="primary"
 					size="small"
 					href={firstCtaLink}
-					onClick={() => {
+					onClick={async () => {
 						trackLink(
 							ophanComponentId,
 							'register-link',
 							renderingTarget,
 							abTest,
 						);
-						logTreatmentInteractionCall(
+						await logTreatmentInteractionCall(
 							'CLICKED',
 							'REGISTER-LINK',
-						).catch((error) => {
-							console.error(
-								'Failed to log treatment interaction:',
-								error,
-							);
-						});
+						);
 					}}
 				>
 					{firstCtaName}
@@ -125,7 +115,7 @@ export const SignInGateAuxia = ({
 					cssOverrides={laterButton}
 					priority="subdued"
 					size="small"
-					onClick={() => {
+					onClick={async () => {
 						dismissGate();
 						trackLink(
 							ophanComponentId,
@@ -133,14 +123,7 @@ export const SignInGateAuxia = ({
 							renderingTarget,
 							abTest,
 						);
-						logTreatmentInteractionCall('DISMISSED', '').catch(
-							(error) => {
-								console.error(
-									'Failed to log treatment interaction:',
-									error,
-								);
-							},
-						);
+						await logTreatmentInteractionCall('DISMISSED', '');
 					}}
 				>
 					{secondCtaName}
@@ -156,22 +139,17 @@ export const SignInGateAuxia = ({
 				data-ignore="global-link-styling"
 				cssOverrides={signInLink}
 				href={signInUrl}
-				onClick={() => {
+				onClick={async () => {
 					trackLink(
 						ophanComponentId,
 						'sign-in-link',
 						renderingTarget,
 						abTest,
 					);
-					logTreatmentInteractionCall(
+					await logTreatmentInteractionCall(
 						'CLICKED',
 						'SIGN-IN-LINK',
-					).catch((error) => {
-						console.error(
-							'Failed to log treatment interaction:',
-							error,
-						);
-					});
+					);
 				}}
 			>
 				Sign In
@@ -181,22 +159,17 @@ export const SignInGateAuxia = ({
 				<Link
 					data-ignore="global-link-styling"
 					href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}
-					onClick={() => {
+					onClick={async () => {
 						trackLink(
 							ophanComponentId,
 							'how-link',
 							renderingTarget,
 							abTest,
 						);
-						logTreatmentInteractionCall(
+						await logTreatmentInteractionCall(
 							'CLICKED',
 							'HOW-TO-LINK',
-						).catch((error) => {
-							console.error(
-								'Failed to log treatment interaction:',
-								error,
-							);
-						});
+						);
 					}}
 				>
 					Why register & how does it help?
@@ -205,22 +178,17 @@ export const SignInGateAuxia = ({
 				<Link
 					data-ignore="global-link-styling"
 					href={`${guUrl}/info/2014/nov/03/why-your-data-matters-to-us-full-text`}
-					onClick={() => {
+					onClick={async () => {
 						trackLink(
 							ophanComponentId,
 							'why-link',
 							renderingTarget,
 							abTest,
 						);
-						logTreatmentInteractionCall(
+						await logTreatmentInteractionCall(
 							'CLICKED',
 							'WHY-LINK',
-						).catch((error) => {
-							console.error(
-								'Failed to log treatment interaction:',
-								error,
-							);
-						});
+						);
 					}}
 				>
 					How will my information & data be used?
@@ -229,22 +197,17 @@ export const SignInGateAuxia = ({
 				<Link
 					data-ignore="global-link-styling"
 					href={`${guUrl}/help/identity-faq`}
-					onClick={() => {
+					onClick={async () => {
 						trackLink(
 							ophanComponentId,
 							'help-link',
 							renderingTarget,
 							abTest,
 						);
-						logTreatmentInteractionCall(
+						await logTreatmentInteractionCall(
 							'CLICKED',
 							'HELP-LINK',
-						).catch((error) => {
-							console.error(
-								'Failed to log treatment interaction:',
-								error,
-							);
-						});
+						);
 					}}
 				>
 					Get help with registering or signing in
