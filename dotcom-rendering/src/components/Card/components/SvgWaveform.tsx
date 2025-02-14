@@ -6,7 +6,7 @@ import { palette } from '../../../palette';
  * The waveform is a repeating pattern so can be used at any width.
  */
 
-export const SvgWaveform = () => {
+export const SvgWaveform = ({ height = `100%` }) => {
 	const id = useId();
 
 	return (
@@ -20,7 +20,7 @@ export const SvgWaveform = () => {
 				id={`waveform-pattern-${id}`}
 				viewBox="0 0 300 40"
 				width="300"
-				height="100%"
+				height={height}
 				patternUnits="userSpaceOnUse"
 				preserveAspectRatio="none"
 			>
@@ -34,7 +34,7 @@ export const SvgWaveform = () => {
 				x="0"
 				y="0"
 				width="100%"
-				height="100%"
+				height={height}
 				fill={`url(#waveform-pattern-${id})`}
 			></rect>
 		</svg>

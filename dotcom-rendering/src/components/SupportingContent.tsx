@@ -20,6 +20,8 @@ type Props = {
 	fillBackgroundOnMobile?: boolean;
 	/** Allows sublinks container to have a background colour on desktop screen sizes */
 	fillBackgroundOnDesktop?: boolean;
+	/** Defaults to true. Determines if a horiztonal rule is applied to the top of the sublink */
+	showTopRule?: boolean;
 };
 
 /**
@@ -95,7 +97,9 @@ const verticalSublinkStyles = css`
 	:not(:first-child) {
 		${horizontalLineStyle}
 	}
+`;
 
+const topRuleStyles = css`
 	${from.tablet} {
 		:first-child {
 			${horizontalLineStyle}
@@ -144,18 +148,20 @@ export const SupportingContent = ({
 	supportingContent,
 	alignment,
 	containerPalette,
-	isDynamo,
+	isDynamo = false,
 	fillBackgroundOnMobile = false,
 	fillBackgroundOnDesktop = false,
+	showTopRule = true,
 }: Props) => {
 	const columnSpan = getColumnSpan(supportingContent.length);
+	const isHorizontal = isDynamo || alignment === 'horizontal';
 	return (
 		<ul
 			className="sublinks"
 			css={[
 				wrapperStyles,
 				baseGrid,
-				(isDynamo ?? alignment === 'horizontal') && horizontalGrid,
+				isHorizontal && horizontalGrid,
 				fillBackgroundOnMobile && backgroundFillMobile,
 				fillBackgroundOnDesktop && backgroundFillDesktop,
 			]}
@@ -179,9 +185,10 @@ export const SupportingContent = ({
 						key={subLink.url}
 						css={[
 							sublinkBaseStyles,
-							isDynamo ?? alignment === 'horizontal'
+							isHorizontal
 								? horizontalSublinkStyles(columnSpan)
 								: verticalSublinkStyles,
+							!isHorizontal && showTopRule && topRuleStyles,
 						]}
 						data-link-name={`sublinks | ${index + 1}`}
 					>
