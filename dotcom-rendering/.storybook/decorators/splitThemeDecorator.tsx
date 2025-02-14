@@ -163,7 +163,6 @@ export const splitTheme =
 							args={{
 								...context.args,
 								format,
-								theme: 'light',
 							}}
 						/>
 					</div>
@@ -189,7 +188,6 @@ export const splitTheme =
 							args={{
 								...context.args,
 								format,
-								theme: 'dark',
 							}}
 						/>
 					</div>

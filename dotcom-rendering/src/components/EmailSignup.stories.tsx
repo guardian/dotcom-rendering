@@ -1,138 +1,117 @@
-import { breakpoints } from '@guardian/source/foundations';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	type ArticleFormat,
-	Pillar,
-} from '../lib/articleFormat';
+import type { Meta, StoryObj } from '@storybook/react';
+import { allModes } from '../../.storybook/modes';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { EmailSignup } from './EmailSignup';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { Section } from './Section';
 import { SecureSignup } from './SecureSignup.importable';
 
-const withSectionWrapper = (Story: typeof NewsTheme) => (
-	<Section
-		title="EmailSignup"
-		showTopBorder={true}
-		padContent={false}
-		centralBorder="partial"
-	>
-		<Story />
-	</Section>
-);
-
-export default {
+const meta = {
 	component: EmailSignup,
-	title: 'Components/EmailSignup',
+	title: 'Components/Email Signup',
 	parameters: {
-		// Set the viewports in Chromatic at a component level.
 		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.mobileMedium,
-				breakpoints.phablet,
-				breakpoints.tablet,
-				breakpoints.desktop,
-				breakpoints.leftCol,
-				breakpoints.wide,
-			],
+			modes: {
+				'vertical mobile': allModes['vertical mobile'],
+				'vertical mobileMedium': allModes['vertical mobileMedium'],
+				'vertical phablet': allModes['vertical phablet'],
+				'vertical tablet': allModes['vertical tablet'],
+				'vertical desktop': allModes['vertical desktop'],
+				'vertical leftCol': allModes['vertical leftCol'],
+				'vertical wide': allModes['vertical wide'],
+			},
 		},
 	},
-	decorators: [withSectionWrapper],
-};
-
-const defaultFormat: ArticleFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-	theme: Pillar.Culture,
-};
-
-export const Default = ({
-	hidePrivacyMessage,
-}: {
-	hidePrivacyMessage?: boolean;
-}) => (
-	<EmailSignup
-		description="Reviewing the most important stories on feminism and sexism and those fighting for equality"
-		name="The Week in Patriarchy"
-		frequency="Weekly"
-		theme="opinion"
-	>
-		<SecureSignup
-			newsletterId="patriarchy"
-			successDescription="Reviewing the most important stories on feminism and sexism and those fighting for equality"
-		/>
-		{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
-	</EmailSignup>
-);
-
-export const NewsTheme = ({
-	hidePrivacyMessage,
-}: {
-	hidePrivacyMessage?: boolean;
-}) => (
-	<EmailSignup
-		description="Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning"
-		name="First Edition"
-		frequency="Every weekday"
-		theme="news"
-	>
-		<SecureSignup
-			newsletterId="morning-briefing"
-			successDescription="Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning"
-		/>
-		{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
-	</EmailSignup>
-);
-
-export const IrregularFrequency = ({
-	hidePrivacyMessage,
-}: {
-	hidePrivacyMessage?: boolean;
-}) => (
-	<EmailSignup
-		description="Be the first to see our latest thought-provoking films, bringing you bold and original storytelling from around the world"
-		name="Guardian Documentaries"
-		frequency="Whenever a new film is available"
-		theme="features"
-	>
-		<SecureSignup
-			newsletterId="documentaries"
-			successDescription="Be the first to see our latest thought-provoking films, bringing you bold and original storytelling from around the world"
-		/>
-		{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
-	</EmailSignup>
-);
-
-Default.storyName = 'default';
-Default.story = {
-	args: {
-		hidePrivacyMessage: false,
-	},
-	decorators: [splitTheme([defaultFormat], { orientation: 'vertical' })],
-};
-NewsTheme.storyName = 'news theme';
-NewsTheme.story = {
-	args: {
-		hidePrivacyMessage: false,
-	},
 	decorators: [
-		splitTheme(
-			[
-				{
-					...defaultFormat,
-					theme: Pillar.News,
-				},
-			],
-			{ orientation: 'vertical' },
+		(Story) => (
+			<Section
+				title="EmailSignup"
+				showTopBorder={true}
+				padContent={false}
+				centralBorder="partial"
+			>
+				<Story />
+			</Section>
 		),
 	],
-};
-IrregularFrequency.storyName = 'irregular frequency';
-IrregularFrequency.story = {
+} satisfies Meta<typeof EmailSignup>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default = {
 	args: {
-		hidePrivacyMessage: false,
+		description:
+			'Reviewing the most important stories on feminism and sexism and those fighting for equality',
+		name: 'The Week in Patriarchy',
+		frequency: 'Weekly',
+		theme: 'opinion',
+		children: (
+			<>
+				<SecureSignup
+					newsletterId="patriarchy"
+					successDescription="Reviewing the most important stories on feminism and sexism and those fighting for equality"
+				/>
+				<NewsletterPrivacyMessage />
+			</>
+		),
 	},
-	decorators: [splitTheme([defaultFormat], { orientation: 'vertical' })],
-};
+	parameters: {
+		formats: [
+			{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: Pillar.Culture,
+			},
+		],
+	},
+} satisfies Story;
+
+export const NewsTheme = {
+	args: {
+		description:
+			'Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning',
+		name: 'First Edition',
+		frequency: 'Every weekday',
+		theme: 'news',
+		children: (
+			<>
+				<SecureSignup
+					newsletterId="morning-briefing"
+					successDescription="Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning"
+				/>
+				<NewsletterPrivacyMessage />
+			</>
+		),
+	},
+	parameters: {
+		formats: [
+			{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: Pillar.News,
+			},
+		],
+	},
+} satisfies Story;
+
+export const IrregularFrequency = {
+	args: {
+		description:
+			'Be the first to see our latest thought-provoking films, bringing you bold and original storytelling from around the world',
+		name: 'Guardian Documentaries',
+		frequency: 'Whenever a new film is available',
+		theme: 'features',
+		children: (
+			<>
+				<SecureSignup
+					newsletterId="documentaries"
+					successDescription="Be the first to see our latest thought-provoking films, bringing you bold and original storytelling from around the world"
+				/>
+				<NewsletterPrivacyMessage />
+			</>
+		),
+	},
+	parameters: Default.parameters,
+} satisfies Story;
