@@ -587,6 +587,20 @@ const SignInGateSelectorAuxia = ({
 		This function if the Auxia prototype for the SignInGateSelector component.
 	*/
 
+	const buildAbTestTrackingAuxiaVariant = (
+		treatmentId: string,
+	): {
+		name: string;
+		variant: string;
+		id: string;
+	} => {
+		return {
+			name: 'AuxiaSignInGate',
+			variant: treatmentId,
+			id: treatmentId,
+		};
+	};
+
 	const authStatus = useAuthStatus();
 
 	const isSignedIn =
@@ -640,7 +654,9 @@ const SignInGateSelectorAuxia = ({
 								id: data.auxiaData.userTreatment.treatmentId,
 							},
 							action: 'VIEW',
-							abTest,
+							abTest: buildAbTestTrackingAuxiaVariant(
+								data.auxiaData.userTreatment.treatmentId,
+							),
 						},
 						renderingTarget,
 					);
@@ -675,7 +691,10 @@ const SignInGateSelectorAuxia = ({
 						signInUrl={signInUrl}
 						// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 						setShowGate={(show) => setIsGateDismissed(!show)}
-						abTest={abTest}
+						abTest={buildAbTestTrackingAuxiaVariant(
+							auxiaGateDisplayData.auxiaData.userTreatment
+								.treatmentId,
+						)}
 						userTreatment={
 							auxiaGateDisplayData.auxiaData.userTreatment
 						}
