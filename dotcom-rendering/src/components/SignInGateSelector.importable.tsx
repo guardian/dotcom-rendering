@@ -35,7 +35,7 @@ import type {
 	AuxiaInteractionInteractionType,
 	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
-	SDCAuxiaGetTreatmentsProxyResponse,
+	AuxiaProxyGetTreatmentsResponse,
 	SignInGateComponent,
 } from './SignInGate/types';
 
@@ -484,7 +484,7 @@ const fetchProxyGetTreatments = async (
 	browserId: string,
 	is_supporter: boolean,
 	daily_article_count: number,
-): Promise<SDCAuxiaGetTreatmentsProxyResponse> => {
+): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const article_identifier = `www.theguardian.com/${pageId}`;
 
@@ -507,7 +507,7 @@ const fetchProxyGetTreatments = async (
 
 	const response_raw = await fetch(url, params);
 	const response =
-		(await response_raw.json()) as SDCAuxiaGetTreatmentsProxyResponse;
+		(await response_raw.json()) as AuxiaProxyGetTreatmentsResponse;
 
 	return Promise.resolve(response);
 };

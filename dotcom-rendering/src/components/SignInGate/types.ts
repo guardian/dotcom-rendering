@@ -84,6 +84,9 @@ export type SignInGateTestMap = { [name: string]: SignInGateComponent };
 	comment group: auxia-prototype-e55a86ef
 */
 
+// convention: In the naming of these types, we maintain the distinction between "AuxiaAPI" and "AuxiaProxy"
+// The latter refering to the support-dotcom-components proxy for the Auxia API
+
 export interface TreatmentContentDecoded {
 	title: string;
 	subtitle: string;
@@ -104,7 +107,7 @@ export interface AuxiaAPIResponseDataUserTreatment {
 	surface: string;
 }
 
-export interface SDCAuxiaGetTreatmentsProxyResponse {
+export interface AuxiaProxyGetTreatmentsResponse {
 	status: boolean;
 	data?: SDCAuxiaGetTreatmentsProxyResponseData;
 }
