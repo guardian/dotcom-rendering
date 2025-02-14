@@ -84,6 +84,10 @@ export type SignInGateTestMap = { [name: string]: SignInGateComponent };
 	comment group: auxia-prototype-e55a86ef
 */
 
+// Convention: In the naming of these types, we maintain the distinction between "AuxiaAPI", "AuxiaProxy" and "AuxiaGate".
+
+// Get Treatments
+
 export interface TreatmentContentDecoded {
 	title: string;
 	subtitle: string;
@@ -104,20 +108,24 @@ export interface AuxiaAPIResponseDataUserTreatment {
 	surface: string;
 }
 
-export interface SDCAuxiaGetTreatmentsProxyResponse {
-	status: boolean;
-	data?: SDCAuxiaGetTreatmentsProxyResponseData;
+export interface AuxiaProxyGetTreatmentsPayload {
+	browserId: string | undefined;
+	isSupporter: boolean;
+	dailyArticleCount: number;
+	articleIdentifier: string;
 }
 
-export interface SDCAuxiaGetTreatmentsProxyResponseData {
+export interface AuxiaProxyGetTreatmentsResponse {
+	status: boolean;
+	data?: AuxiaProxyGetTreatmentsProxyResponseData;
+}
+
+export interface AuxiaProxyGetTreatmentsProxyResponseData {
 	responseId: string;
 	userTreatment?: AuxiaAPIResponseDataUserTreatment;
 }
 
-export interface AuxiaGateDisplayData {
-	browserId: string;
-	auxiaData: SDCAuxiaGetTreatmentsProxyResponseData;
-}
+// Log Treatment Interaction
 
 export type AuxiaInteractionInteractionType =
 	| 'VIEWED'
@@ -132,6 +140,29 @@ export type AuxiaInteractionActionName =
 	| 'WHY-LINK'
 	| 'HELP-LINK'
 	| ''; // used for 'VIEWED' and 'DISMISSED' interactions
+
+export interface AuxiaProxyLogTreatmentInteractionPayload {
+	browserId: string | undefined;
+	treatmentTrackingId: string;
+	treatmentId: string;
+	surface: string;
+	interactionType: AuxiaInteractionInteractionType;
+	interactionTimeMicros: number;
+	actionName: AuxiaInteractionActionName;
+}
+
+// DCR Types
+
+export interface AuxiaGateReaderPersonalData {
+	browserId: string | undefined;
+	dailyArticleCount: number;
+	isSupporter: boolean;
+}
+
+export interface AuxiaGateDisplayData {
+	browserId: string | undefined;
+	auxiaData: AuxiaProxyGetTreatmentsProxyResponseData;
+}
 
 export type SignInGatePropsAuxia = {
 	guUrl: string;

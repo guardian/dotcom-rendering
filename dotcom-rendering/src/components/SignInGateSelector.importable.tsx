@@ -31,11 +31,14 @@ import { signInGateTestIdToComponentId } from './SignInGate/signInGateMappings';
 import type {
 	AuxiaAPIResponseDataUserTreatment,
 	AuxiaGateDisplayData,
+	AuxiaGateReaderPersonalData,
 	AuxiaInteractionActionName,
 	AuxiaInteractionInteractionType,
+	AuxiaProxyGetTreatmentsPayload,
+	AuxiaProxyGetTreatmentsResponse,
+	AuxiaProxyLogTreatmentInteractionPayload,
 	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
-	SDCAuxiaGetTreatmentsProxyResponse,
 	SignInGateComponent,
 } from './SignInGate/types';
 
@@ -440,36 +443,21 @@ interface ShowSignInGateAuxiaProps {
 	abTest: CurrentSignInGateABTest;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
 	contributionsServiceUrl: string;
-	browserId: string;
+	browserId: string | undefined;
 	logTreatmentInteractionCall: (
 		interactionType: AuxiaInteractionInteractionType,
 		actionName: AuxiaInteractionActionName,
 	) => Promise<void>;
 }
 
-const decideBrowserIdWithConsentCheck = async (): Promise<
-	string | undefined
-> => {
-	const hasConsent = await hasCmpConsentForBrowserId();
-	if (!hasConsent) {
-		return Promise.resolve(undefined);
-	}
-
-	const cookie = getCookie({ name: 'bwid', shouldMemoize: true });
-	if (cookie === null) {
-		return Promise.resolve(undefined);
-	}
-	return Promise.resolve(cookie);
-};
-
 const decideIsSupporter = (): boolean => {
 	// nb: We will not be calling the Auxia API if the user is signed in, so we can set isSignedIn to false.
 	const isSignedIn = false;
-	const is_supporter = shouldHideSupportMessaging(isSignedIn);
-	if (is_supporter === 'Pending') {
+	const isSupporter = shouldHideSupportMessaging(isSignedIn);
+	if (isSupporter === 'Pending') {
 		return true;
 	}
-	return is_supporter;
+	return isSupporter;
 };
 
 const decideDailyArticleCount = (): number => {
@@ -486,25 +474,40 @@ const decideDailyArticleCount = (): number => {
 	return 0;
 };
 
+const decideAuxiaProxyReaderPersonalData =
+	async (): Promise<AuxiaGateReaderPersonalData> => {
+		const browserId =
+			getCookie({ name: 'bwid', shouldMemoize: true }) ?? '';
+		const dailyArticleCount = decideDailyArticleCount();
+		const hasConsent = await hasCmpConsentForBrowserId();
+		const isSupporter = decideIsSupporter();
+		const data = {
+			browserId: hasConsent ? browserId : undefined,
+			dailyArticleCount,
+			isSupporter,
+		};
+		return Promise.resolve(data);
+	};
+
 const fetchProxyGetTreatments = async (
 	contributionsServiceUrl: string,
 	pageId: string,
-	browserId: string,
-	is_supporter: boolean,
-	daily_article_count: number,
-): Promise<SDCAuxiaGetTreatmentsProxyResponse> => {
+	browserId: string | undefined,
+	isSupporter: boolean,
+	dailyArticleCount: number,
+): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
-	const article_identifier = `www.theguardian.com/${pageId}`;
+	const articleIdentifier = `www.theguardian.com/${pageId}`;
 
 	const url = `${contributionsServiceUrl}/auxia/get-treatments`;
 	const headers = {
 		'Content-Type': 'application/json',
 	};
-	const payload = {
+	const payload: AuxiaProxyGetTreatmentsPayload = {
 		browserId,
-		is_supporter,
-		daily_article_count,
-		article_identifier,
+		isSupporter,
+		dailyArticleCount,
+		articleIdentifier,
 	};
 	const params = {
 		method: 'POST',
@@ -514,7 +517,7 @@ const fetchProxyGetTreatments = async (
 
 	const response_raw = await fetch(url, params);
 	const response =
-		(await response_raw.json()) as SDCAuxiaGetTreatmentsProxyResponse;
+		(await response_raw.json()) as AuxiaProxyGetTreatmentsResponse;
 
 	return Promise.resolve(response);
 };
@@ -523,25 +526,17 @@ const buildAuxiaGateDisplayData = async (
 	contributionsServiceUrl: string,
 	pageId: string,
 ): Promise<AuxiaGateDisplayData | undefined> => {
-	const browserId = await decideBrowserIdWithConsentCheck();
-	if (browserId === undefined) {
-		return Promise.resolve(undefined);
-	}
-
-	const is_supporter = decideIsSupporter();
-	const daily_article_count = decideDailyArticleCount();
-
+	const readerPersonalData = await decideAuxiaProxyReaderPersonalData();
 	const response = await fetchProxyGetTreatments(
 		contributionsServiceUrl,
 		pageId,
-		browserId,
-		is_supporter,
-		daily_article_count,
+		readerPersonalData.browserId,
+		readerPersonalData.isSupporter,
+		readerPersonalData.dailyArticleCount,
 	);
-
 	if (response.status && response.data) {
 		const answer = {
-			browserId,
+			browserId: readerPersonalData.browserId,
 			auxiaData: response.data,
 		};
 		return Promise.resolve(answer);
@@ -555,14 +550,15 @@ const auxiaLogTreatmentInteraction = async (
 	userTreatment: AuxiaAPIResponseDataUserTreatment,
 	interactionType: AuxiaInteractionInteractionType,
 	actionName: AuxiaInteractionActionName,
-	browserId: string,
+	browserId: string | undefined,
 ): Promise<void> => {
 	const url = `${contributionsServiceUrl}/auxia/log-treatment-interaction`;
 	const headers = {
 		'Content-Type': 'application/json',
 	};
 	const microTime = Date.now() * 1000;
-	const payload = {
+
+	const payload: AuxiaProxyLogTreatmentInteractionPayload = {
 		browserId,
 		treatmentTrackingId: userTreatment.treatmentTrackingId,
 		treatmentId: userTreatment.treatmentId,
