@@ -99,6 +99,7 @@ type FEFootballPageConfig = Omit<
 	'keywordIds' | 'keywords' | 'isFront'
 > & {
 	isFront: boolean;
+	hasSurveyAd: boolean;
 };
 
 export type FEFootballDataPage = {

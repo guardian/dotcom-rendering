@@ -316,8 +316,15 @@ requests.push(
 	fetch('https://www.theguardian.com/football/live.json?dcr=true')
 		.then((res) => res.json())
 		.then((json) => {
+			// These configs are returning from frontend
+			// but are not necessary for football pages
+			delete json.config.hasLiveBlogTopAd;
+			delete json.config.userAttributesApiUrl;
+			delete json.config.weatherapiurl;
+			delete json.config.isAdFree;
+			delete json.config.userBenefitsApiUrl;
+
 			const footballDataPageData = validateAsFootballDataPageType(json);
-			console.log('validate the football');
 
 			// Write the new frontend fixture data
 			const contents = `${HEADER}

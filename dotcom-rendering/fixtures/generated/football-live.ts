@@ -204,10 +204,6 @@ export const footballData: FEFootballDataPage = {
 						{
 							id: '4475296',
 							date: '2025-02-14T20:00:00Z[Europe/London]',
-							competition: {
-								id: '101',
-								name: 'Sky Bet Championship 24/25',
-							},
 							stage: {
 								stageNumber: '1',
 							},
@@ -216,12 +212,6 @@ export const footballData: FEFootballDataPage = {
 								name: 'League',
 							},
 							leg: '1',
-							liveMatch: false,
-							result: false,
-							previewAvailable: false,
-							reportAvailable: false,
-							lineupsAvailable: false,
-							matchStatus: '-',
 							homeTeam: {
 								id: '16',
 								name: 'QPR',
@@ -234,7 +224,7 @@ export const footballData: FEFootballDataPage = {
 								id: '48',
 								name: 'Loftus Road',
 							},
-							type: 'MatchDay',
+							type: 'Fixture',
 						},
 					],
 				},
@@ -1205,7 +1195,6 @@ export const footballData: FEFootballDataPage = {
 		host: 'https://www.theguardian.com',
 		dfpAccountId: '59666047',
 		plistaPublicApiKey: '462925f4f131001fd974bebe',
-		hasLiveBlogTopAd: false,
 		dcrSentryDsn:
 			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		cardStyle: '',
@@ -1215,12 +1204,9 @@ export const footballData: FEFootballDataPage = {
 		ophanEmbedJsUrl: '//j.ophan.co.uk/ophan.embed',
 		edition: 'UK',
 		brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
-		userAttributesApiUrl:
-			'https://members-data-api.theguardian.com/user-attributes',
 		discussionApiClientHeader: 'nextgen',
 		section: 'football',
 		dfpHost: 'pubads.g.doubleclick.net',
-		weatherapiurl: '/weatherapi/city',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		pillar: '',
 		pageId: 'football/live',
@@ -1229,7 +1215,6 @@ export const footballData: FEFootballDataPage = {
 		ophanJsUrl: '//j.ophan.co.uk/ophan.ng',
 		contentType: '',
 		isDev: false,
-		isAdFree: false,
 		stripePublicToken: 'pk_live_2O6zPMHXNs2AGea4bAmq5R7Z',
 		omnitureAccount: 'guardiangu-network',
 		externalEmbedHost: 'https://embed.theguardian.com',
@@ -1245,8 +1230,6 @@ export const footballData: FEFootballDataPage = {
 		mmaUrl: 'https://manage.theguardian.com',
 		sentryHost: 'app.getsentry.com/35463',
 		buildNumber: 'DEV',
-		userBenefitsApiUrl:
-			'https://user-benefits.guardianapis.com/benefits/me',
 		sharedAdTargeting: {
 			ct: 'section',
 			url: '/football/live',
