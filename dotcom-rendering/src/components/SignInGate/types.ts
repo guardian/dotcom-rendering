@@ -109,17 +109,17 @@ export interface AuxiaAPIResponseDataUserTreatment {
 
 export interface AuxiaProxyGetTreatmentsResponse {
 	status: boolean;
-	data?: SDCAuxiaGetTreatmentsProxyResponseData;
+	data?: AuxiaProxyGetTreatmentsProxyResponseData;
 }
 
-export interface SDCAuxiaGetTreatmentsProxyResponseData {
+export interface AuxiaProxyGetTreatmentsProxyResponseData {
 	responseId: string;
 	userTreatment?: AuxiaAPIResponseDataUserTreatment;
 }
 
 export interface AuxiaGateDisplayData {
 	browserId: string;
-	auxiaData: SDCAuxiaGetTreatmentsProxyResponseData;
+	auxiaData: AuxiaProxyGetTreatmentsProxyResponseData;
 }
 
 export type AuxiaInteractionInteractionType =
