@@ -21,6 +21,7 @@ import type { TagType } from '../types/tag';
 import { Island } from './Island';
 import { LiveBlogRenderer } from './LiveBlogRenderer';
 import { TableOfContents } from './TableOfContents.importable';
+import { Preview } from './Preview.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -195,6 +196,9 @@ export const ArticleBody = ({
 					></TableOfContents>
 				</Island>
 			)}
+			<Island priority="feature" defer={{ until: 'idle' }}>
+				<Preview />
+			</Island>
 			<div
 				id="maincontent"
 				css={[

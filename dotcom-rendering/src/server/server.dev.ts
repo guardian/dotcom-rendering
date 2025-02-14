@@ -18,6 +18,7 @@ import {
 	handleTagPage,
 	handleTagPageJson,
 } from './handler.front.web';
+import { capiPreviewRequest } from './capi';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
 const ARTICLE_URL = /\/\d{4}\/[a-z]{3}\/\d{2}\//;
@@ -76,6 +77,8 @@ export const devServer = (): Handler => {
 				return handleFront(req, res, next);
 			case 'FrontJSON':
 				return handleFrontJson(req, res, next);
+			case 'Preview':
+				return capiPreviewRequest(req, res, next);
 			case 'TagPage':
 				return handleTagPage(req, res, next);
 			case 'TagPageJSON':
