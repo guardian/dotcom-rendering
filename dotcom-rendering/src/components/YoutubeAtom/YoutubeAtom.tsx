@@ -5,10 +5,7 @@ import type { ArticleFormat } from '../../lib/articleFormat';
 import type { AdTargeting } from '../../types/commercial';
 import type { AspectRatio } from '../../types/front';
 import type { RenderingTarget } from '../../types/renderingTarget';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from '../Card/components/ImageWrapper';
+import type { PlayButtonSize } from '../Card/components/PlayIcon';
 import { MaintainAspectRatio } from '../MaintainAspectRatio';
 import { YoutubeAtomOverlay } from './YoutubeAtomOverlay';
 import { YoutubeAtomPlaceholder } from './YoutubeAtomPlaceholder';
@@ -30,8 +27,7 @@ export type Props = {
 	atomId: string;
 	videoId: string;
 	uniqueId: string;
-	overrideImage?: string | undefined;
-	posterImage?: string | undefined;
+	image?: string;
 	adTargeting?: AdTargeting;
 	consentState?: ConsentState;
 	height?: number;
@@ -47,19 +43,33 @@ export type Props = {
 	abTestParticipations: Participations;
 	kicker?: string;
 	shouldPauseOutOfView?: boolean;
-	showTextOverlay?: boolean;
-	imageSize: ImageSizeType;
-	imagePositionOnMobile: ImagePositionType;
+	showTextOverlay: boolean;
+	iconSizeOnDesktop: PlayButtonSize;
+	iconSizeOnMobile: PlayButtonSize;
+	hidePillOnMobile: boolean;
 	renderingTarget: RenderingTarget;
 	aspectRatio?: AspectRatio;
 };
 
+/**
+ * The loading sequence of the YoutubeAtom is as follows:
+ *
+ * Overlay -> Placeholder -> Player
+ *
+ * In detail:
+ *
+ * 1. Initially show the overlay if it exists
+ * 2. When the overlay is clicked
+ *     2.1 Remove the overlay
+ *     2.2 Show the placeholder until the player is ready
+ * 3. When consent and ad targeting is available render the player to initiate loading of the YouTube player
+ * 4. When the player is ready the placeholder is removed and the YouTube player is shown
+ */
 export const YoutubeAtom = ({
 	atomId,
 	videoId,
 	uniqueId,
-	overrideImage,
-	posterImage,
+	image,
 	adTargeting,
 	consentState,
 	height = 259,
@@ -75,9 +85,10 @@ export const YoutubeAtom = ({
 	kicker,
 	format,
 	shouldPauseOutOfView = false,
-	showTextOverlay = false,
-	imageSize,
-	imagePositionOnMobile,
+	showTextOverlay,
+	iconSizeOnDesktop,
+	iconSizeOnMobile,
+	hidePillOnMobile,
 	renderingTarget,
 	aspectRatio,
 }: Props): JSX.Element => {
@@ -122,44 +133,10 @@ export const YoutubeAtom = ({
 	 * Combine the videoState and tracking event emitters
 	 */
 	const compositeEventEmitters = [playerState, ...eventEmitters];
+	const hasOverlay = !!image;
 
-	/**
-	 * The loading sequence of the YoutubeAtom is as follows:
-	 *
-	 * Overlay -> Placeholder -> Player
-	 *
-	 * In detail:
-	 *
-	 * 1. Initially show the overlay if it exists
-	 * 2. When the overlay is clicked
-	 *     2.1 Remove the overlay
-	 *     2.2 Show the placeholder until the player is ready
-	 * 3. When consent and ad targeting is available render the player to initiate loading of the YouTube player
-	 * 4. When the player is ready the placeholder is removed and the YouTube player is shown
-	 */
-
-	const hasOverlay = !!(overrideImage ?? posterImage);
-
-	/**
-	 * Show an overlay if:
-	 *
-	 * - It exists
-	 *
-	 * AND
-	 *
-	 * - It hasn't been clicked
-	 */
 	const showOverlay = hasOverlay && !overlayClicked;
 
-	/**
-	 * Show a placeholder if:
-	 *
-	 * - We don't have an overlay OR the user has clicked the overlay
-	 *
-	 * AND
-	 *
-	 * - The player is not ready
-	 */
 	const showPlaceholder = (!hasOverlay || overlayClicked) && !playerReady;
 
 	let loadPlayer;
@@ -237,8 +214,7 @@ export const YoutubeAtom = ({
 					{showOverlay && (
 						<YoutubeAtomOverlay
 							uniqueId={uniqueId}
-							overrideImage={overrideImage}
-							posterImage={posterImage}
+							image={image}
 							height={height}
 							width={width}
 							alt={alt}
@@ -248,8 +224,9 @@ export const YoutubeAtom = ({
 							kicker={kicker}
 							format={format}
 							showTextOverlay={showTextOverlay}
-							imageSize={imageSize}
-							imagePositionOnMobile={imagePositionOnMobile}
+							iconSizeOnDesktop={iconSizeOnDesktop}
+							iconSizeOnMobile={iconSizeOnMobile}
+							hidePillOnMobile={hidePillOnMobile}
 							aspectRatio={aspectRatio}
 						/>
 					)}
