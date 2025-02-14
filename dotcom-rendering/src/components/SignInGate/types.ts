@@ -114,12 +114,18 @@ export interface SDCAuxiaGetTreatmentsProxyResponseData {
 	userTreatment?: AuxiaAPIResponseDataUserTreatment;
 }
 
+export interface AuxiaGateDisplayData {
+	browserId: string;
+	auxiaData: SDCAuxiaGetTreatmentsProxyResponseData;
+}
+
 export type AuxiaInteractionInteractionType =
 	| 'VIEWED'
 	| 'CLICKED'
 	| 'DISMISSED';
 
 export type AuxiaInteractionActionName =
+	| 'PRIVACY-BUTTON'
 	| 'REGISTER-LINK'
 	| 'SIGN-IN-LINK'
 	| 'HOW-TO-LINK'
