@@ -1,6 +1,5 @@
 import { palette } from '@guardian/source/foundations';
 import { initialDays, nations } from '../../fixtures/manual/footballData';
-import { AdSlot } from '../components/AdSlot.web';
 import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.importable';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -69,8 +68,6 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 					pageId={footballData.config.pageId}
 				/>
 			</div>
-
-			{renderAds && <AdSlot position="right" />}
 
 			<main id="maincontent" data-layout="FootballDataPageLayout">
 				<Section fullWidth={true}>
