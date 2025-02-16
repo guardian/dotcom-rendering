@@ -5,11 +5,10 @@ import type { ArticleFormat } from '../../lib/articleFormat';
 import type { AdTargeting } from '../../types/commercial';
 import type { AspectRatio } from '../../types/front';
 import type { RenderingTarget } from '../../types/renderingTarget';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from '../Card/components/ImageWrapper';
+import type { PlayButtonSize } from '../Card/components/PlayIcon';
+import type { ResponsiveFontSize } from '../CardHeadline';
 import { MaintainAspectRatio } from '../MaintainAspectRatio';
+import { YoutubeAtomFeatureCardOverlay } from './YoutubeAtomFeatureCardOverlay';
 import { YoutubeAtomOverlay } from './YoutubeAtomOverlay';
 import { YoutubeAtomPlaceholder } from './YoutubeAtomPlaceholder';
 import { YoutubeAtomPlayer } from './YoutubeAtomPlayer';
@@ -30,8 +29,7 @@ export type Props = {
 	atomId: string;
 	videoId: string;
 	uniqueId: string;
-	overrideImage?: string | undefined;
-	posterImage?: string | undefined;
+	image?: string;
 	adTargeting?: AdTargeting;
 	consentState?: ConsentState;
 	height?: number;
@@ -47,19 +45,43 @@ export type Props = {
 	abTestParticipations: Participations;
 	kicker?: string;
 	shouldPauseOutOfView?: boolean;
-	showTextOverlay?: boolean;
-	imageSize: ImageSizeType;
-	imagePositionOnMobile: ImagePositionType;
+	showTextOverlay: boolean;
+	iconSizeOnDesktop: PlayButtonSize;
+	iconSizeOnMobile: PlayButtonSize;
+	hidePillOnMobile: boolean;
 	renderingTarget: RenderingTarget;
 	aspectRatio?: AspectRatio;
+	trailText?: string;
+	headlineSizes?: ResponsiveFontSize;
+	isVideoArticle?: boolean;
+	webPublicationDate?: string;
+	showClock?: boolean;
+	absoluteServerTimes?: boolean;
+	linkTo?: string;
+	discussionApiUrl?: string;
+	discussionId?: string;
+	isFeatureCard?: boolean;
 };
 
+/**
+ * The loading sequence of the YoutubeAtom is as follows:
+ *
+ * Overlay -> Placeholder -> Player
+ *
+ * In detail:
+ *
+ * 1. Initially show the overlay if it exists
+ * 2. When the overlay is clicked
+ *     2.1 Remove the overlay
+ *     2.2 Show the placeholder until the player is ready
+ * 3. When consent and ad targeting is available render the player to initiate loading of the YouTube player
+ * 4. When the player is ready the placeholder is removed and the YouTube player is shown
+ */
 export const YoutubeAtom = ({
 	atomId,
 	videoId,
 	uniqueId,
-	overrideImage,
-	posterImage,
+	image,
 	adTargeting,
 	consentState,
 	height = 259,
@@ -75,11 +97,22 @@ export const YoutubeAtom = ({
 	kicker,
 	format,
 	shouldPauseOutOfView = false,
-	showTextOverlay = false,
-	imageSize,
-	imagePositionOnMobile,
+	showTextOverlay,
+	iconSizeOnDesktop,
+	iconSizeOnMobile,
+	hidePillOnMobile,
 	renderingTarget,
 	aspectRatio,
+	trailText,
+	headlineSizes,
+	isVideoArticle,
+	webPublicationDate,
+	showClock,
+	absoluteServerTimes,
+	linkTo,
+	discussionApiUrl,
+	discussionId,
+	isFeatureCard,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -122,44 +155,10 @@ export const YoutubeAtom = ({
 	 * Combine the videoState and tracking event emitters
 	 */
 	const compositeEventEmitters = [playerState, ...eventEmitters];
+	const hasOverlay = !!image;
 
-	/**
-	 * The loading sequence of the YoutubeAtom is as follows:
-	 *
-	 * Overlay -> Placeholder -> Player
-	 *
-	 * In detail:
-	 *
-	 * 1. Initially show the overlay if it exists
-	 * 2. When the overlay is clicked
-	 *     2.1 Remove the overlay
-	 *     2.2 Show the placeholder until the player is ready
-	 * 3. When consent and ad targeting is available render the player to initiate loading of the YouTube player
-	 * 4. When the player is ready the placeholder is removed and the YouTube player is shown
-	 */
-
-	const hasOverlay = !!(overrideImage ?? posterImage);
-
-	/**
-	 * Show an overlay if:
-	 *
-	 * - It exists
-	 *
-	 * AND
-	 *
-	 * - It hasn't been clicked
-	 */
 	const showOverlay = hasOverlay && !overlayClicked;
 
-	/**
-	 * Show a placeholder if:
-	 *
-	 * - We don't have an overlay OR the user has clicked the overlay
-	 *
-	 * AND
-	 *
-	 * - The player is not ready
-	 */
 	const showPlaceholder = (!hasOverlay || overlayClicked) && !playerReady;
 
 	let loadPlayer;
@@ -234,25 +233,49 @@ export const YoutubeAtom = ({
 							/>
 						)
 					}
-					{showOverlay && (
-						<YoutubeAtomOverlay
-							uniqueId={uniqueId}
-							overrideImage={overrideImage}
-							posterImage={posterImage}
-							height={height}
-							width={width}
-							alt={alt}
-							duration={duration}
-							title={title}
-							onClick={() => setOverlayClicked(true)}
-							kicker={kicker}
-							format={format}
-							showTextOverlay={showTextOverlay}
-							imageSize={imageSize}
-							imagePositionOnMobile={imagePositionOnMobile}
-							aspectRatio={aspectRatio}
-						/>
-					)}
+					{showOverlay &&
+						(isFeatureCard ? (
+							<YoutubeAtomFeatureCardOverlay
+								uniqueId={uniqueId}
+								height={height}
+								width={width}
+								alt={alt}
+								format={format}
+								title={title}
+								onClick={() => setOverlayClicked(true)}
+								headlineSizes={headlineSizes}
+								image={image}
+								duration={duration}
+								kicker={kicker}
+								aspectRatio={aspectRatio}
+								trailText={trailText}
+								isVideoArticle={isVideoArticle}
+								webPublicationDate={webPublicationDate}
+								showClock={!!showClock}
+								absoluteServerTimes={absoluteServerTimes}
+								linkTo={linkTo}
+								discussionId={discussionId}
+								discussionApiUrl={discussionApiUrl}
+							/>
+						) : (
+							<YoutubeAtomOverlay
+								uniqueId={uniqueId}
+								image={image}
+								height={height}
+								width={width}
+								alt={alt}
+								duration={duration}
+								title={title}
+								onClick={() => setOverlayClicked(true)}
+								kicker={kicker}
+								format={format}
+								showTextOverlay={showTextOverlay}
+								iconSizeOnDesktop={iconSizeOnDesktop}
+								iconSizeOnMobile={iconSizeOnMobile}
+								hidePillOnMobile={hidePillOnMobile}
+								aspectRatio={aspectRatio}
+							/>
+						))}
 					{showPlaceholder && (
 						<YoutubeAtomPlaceholder uniqueId={uniqueId} />
 					)}

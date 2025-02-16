@@ -12,6 +12,17 @@ export const getLargest = (images: Image[]): Image | undefined => {
 	return images.slice().sort(descendingByWidthComparator)[0];
 };
 
+/**
+ * Finds the largest image by width in an array of images
+ */
+export const getLargestImageSize = (
+	images: {
+		url: string;
+		width: number;
+	}[],
+): { url: string; width: number } | undefined =>
+	[...images].sort((a, b) => a.width - b.width).pop();
+
 const getServiceFromUrl = (url: URL): string => {
 	const serviceName = url.hostname.split('.')[0] ?? '';
 	switch (serviceName) {

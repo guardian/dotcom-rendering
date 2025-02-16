@@ -55,10 +55,10 @@ type Props = {
 
 export const CardFooter = ({
 	format,
+	showLivePlayable,
 	age,
 	commentCount,
 	cardBranding,
-	showLivePlayable,
 	isVideo,
 	videoDuration,
 	isAudio,
@@ -105,6 +105,10 @@ export const CardFooter = ({
 				/>
 			</footer>
 		);
+	}
+
+	if (age === undefined && commentCount === undefined) {
+		return null;
 	}
 
 	return (

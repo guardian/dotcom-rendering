@@ -855,6 +855,10 @@ export const renderElement = ({
 						origin={host}
 						stickyVideos={!!(isBlog && switches.stickyVideos)}
 						enableAds={true}
+						iconSizeOnDesktop="large"
+						iconSizeOnMobile="large"
+						showTextOverlay={false}
+						hidePillOnMobile={false}
 					/>
 				</Island>
 			);
