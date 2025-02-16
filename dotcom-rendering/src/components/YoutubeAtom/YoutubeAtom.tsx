@@ -1,12 +1,15 @@
 import type { Participations } from '@guardian/ab-core';
 import type { ConsentState } from '@guardian/libs';
+import type { ReactElement } from 'react';
 import { useCallback, useState } from 'react';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import type { AdTargeting } from '../../types/commercial';
 import type { AspectRatio } from '../../types/front';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { PlayButtonSize } from '../Card/components/PlayIcon';
+import type { ResponsiveFontSize } from '../CardHeadline';
 import { MaintainAspectRatio } from '../MaintainAspectRatio';
+import { YoutubeAtomFeatureCardOverlay } from './YoutubeAtomFeatureCardOverlay';
 import { YoutubeAtomOverlay } from './YoutubeAtomOverlay';
 import { YoutubeAtomPlaceholder } from './YoutubeAtomPlaceholder';
 import { YoutubeAtomPlayer } from './YoutubeAtomPlayer';
@@ -49,6 +52,12 @@ export type Props = {
 	hidePillOnMobile: boolean;
 	renderingTarget: RenderingTarget;
 	aspectRatio?: AspectRatio;
+	trailText?: string;
+	headlineSizes?: ResponsiveFontSize;
+	isVideoArticle?: boolean;
+	Age?: ReactElement;
+	CommentCount?: ReactElement;
+	isFeatureCard?: boolean;
 };
 
 /**
@@ -91,6 +100,12 @@ export const YoutubeAtom = ({
 	hidePillOnMobile,
 	renderingTarget,
 	aspectRatio,
+	trailText,
+	headlineSizes,
+	isVideoArticle,
+	Age,
+	CommentCount,
+	isFeatureCard,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -211,25 +226,45 @@ export const YoutubeAtom = ({
 							/>
 						)
 					}
-					{showOverlay && (
-						<YoutubeAtomOverlay
-							uniqueId={uniqueId}
-							image={image}
-							height={height}
-							width={width}
-							alt={alt}
-							duration={duration}
-							title={title}
-							onClick={() => setOverlayClicked(true)}
-							kicker={kicker}
-							format={format}
-							showTextOverlay={showTextOverlay}
-							iconSizeOnDesktop={iconSizeOnDesktop}
-							iconSizeOnMobile={iconSizeOnMobile}
-							hidePillOnMobile={hidePillOnMobile}
-							aspectRatio={aspectRatio}
-						/>
-					)}
+					{showOverlay &&
+						(isFeatureCard ? (
+							<YoutubeAtomFeatureCardOverlay
+								uniqueId={uniqueId}
+								height={height}
+								width={width}
+								alt={alt}
+								format={format}
+								title={title}
+								onClick={() => setOverlayClicked(true)}
+								headlineSizes={headlineSizes}
+								image={image}
+								duration={duration}
+								kicker={kicker}
+								aspectRatio={aspectRatio}
+								trailText={trailText}
+								isVideoArticle={isVideoArticle}
+								Age={Age}
+								CommentCount={CommentCount}
+							/>
+						) : (
+							<YoutubeAtomOverlay
+								uniqueId={uniqueId}
+								image={image}
+								height={height}
+								width={width}
+								alt={alt}
+								duration={duration}
+								title={title}
+								onClick={() => setOverlayClicked(true)}
+								kicker={kicker}
+								format={format}
+								showTextOverlay={showTextOverlay}
+								iconSizeOnDesktop={iconSizeOnDesktop}
+								iconSizeOnMobile={iconSizeOnMobile}
+								hidePillOnMobile={hidePillOnMobile}
+								aspectRatio={aspectRatio}
+							/>
+						))}
 					{showPlaceholder && (
 						<YoutubeAtomPlaceholder uniqueId={uniqueId} />
 					)}

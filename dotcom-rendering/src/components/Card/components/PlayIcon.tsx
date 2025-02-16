@@ -1,7 +1,9 @@
 import { css } from '@emotion/react';
-import { from, palette } from '@guardian/source/foundations';
+import { from, palette as sourcePalette } from '@guardian/source/foundations';
 import type { ThemeIcon } from '@guardian/source/react-components';
-import { SvgMediaControlsPlay } from '@guardian/source/react-components';
+import { SvgMediaControlsPlay as WidePlayIcon } from '@guardian/source/react-components';
+import { SvgMediaControlsPlay as NarrowPlayIcon } from '../../../components/SvgMediaControlsPlay';
+import { palette } from '../../../palette';
 
 export type PlayButtonSize = keyof typeof sizes;
 
@@ -10,7 +12,7 @@ const sizes = {
 	large: { button: 80, icon: 72 },
 } as const satisfies Record<string, { button: number; icon: number }>;
 
-const iconStyles = (
+const wideIconStyles = (
 	size: PlayButtonSize,
 	sizeOnMobile: Extract<PlayButtonSize, 'small' | 'large'>,
 ) => css`
@@ -41,22 +43,53 @@ const iconStyles = (
 	}
 `;
 
+const narrowPlayIconWidth = 56;
+const narrowStyles = css`
+	position: absolute;
+	/**
+	 * Subject to change. We will wait to see how fronts editors use the
+	 * headlines and standfirsts before we decide on a final position.
+	 */
+	top: 35%;
+	left: calc(50% - ${narrowPlayIconWidth / 2}px);
+	width: ${narrowPlayIconWidth}px;
+	height: ${narrowPlayIconWidth}px;
+	background-color: ${palette('--feature-card-play-icon-background')};
+	opacity: 0.7;
+	border-radius: 50%;
+	border: 1px solid ${palette('--feature-card-play-icon-border')};
+	fill: ${palette('--feature-card-play-icon-fill')};
+`;
+
 const theme = {
-	fill: palette.neutral[100],
+	fill: sourcePalette.neutral[100],
 } satisfies Partial<ThemeIcon>;
 
 type Props = {
 	iconSizeOnDesktop: PlayButtonSize;
 	iconSizeOnMobile: PlayButtonSize;
+	iconWidth: 'narrow' | 'wide';
 };
 
-export const PlayIcon = ({ iconSizeOnDesktop, iconSizeOnMobile }: Props) => {
+export const PlayIcon = ({
+	iconSizeOnDesktop,
+	iconSizeOnMobile,
+	iconWidth,
+}: Props) => {
 	return (
 		<div
 			className="play-icon"
-			css={[iconStyles(iconSizeOnDesktop, iconSizeOnMobile)]}
+			css={[
+				iconWidth === 'narrow' && narrowStyles,
+				iconWidth === 'wide' &&
+					wideIconStyles(iconSizeOnDesktop, iconSizeOnMobile),
+			]}
 		>
-			<SvgMediaControlsPlay theme={theme} />
+			{iconWidth === 'narrow' ? (
+				<NarrowPlayIcon theme={theme} />
+			) : (
+				<WidePlayIcon theme={theme} />
+			)}
 		</div>
 	);
 };

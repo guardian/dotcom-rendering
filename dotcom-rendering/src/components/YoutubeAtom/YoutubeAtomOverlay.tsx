@@ -184,6 +184,7 @@ export const YoutubeAtomOverlay = ({
 				<PlayIcon
 					iconSizeOnDesktop={iconSizeOnDesktop}
 					iconSizeOnMobile={iconSizeOnMobile}
+					iconWidth="wide"
 				/>
 				{showTextOverlay && (
 					<div css={textOverlayStyles}>

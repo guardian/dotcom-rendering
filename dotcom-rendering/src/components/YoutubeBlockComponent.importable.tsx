@@ -1,4 +1,5 @@
 import type { ConsentState } from '@guardian/libs';
+import type { ReactElement } from 'react';
 import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { getLargestImageSize } from '../lib/image';
@@ -8,10 +9,13 @@ import type { AdTargeting } from '../types/commercial';
 import type { AspectRatio } from '../types/front';
 import { Caption } from './Caption';
 import type { PlayButtonSize } from './Card/components/PlayIcon';
+import type { ResponsiveFontSize } from './CardHeadline';
 import { useConfig } from './ConfigContext';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
 import { YoutubeAtomExpiredOverlay } from './YoutubeAtom/YoutubeAtomExpiredOverlay';
+
+const adTargetingDisabled: AdTargeting = { disableAds: true };
 
 type Props = {
 	id: string;
@@ -41,9 +45,13 @@ type Props = {
 	hidePillOnMobile: boolean;
 	enableAds: boolean;
 	aspectRatio?: AspectRatio;
+	trailText?: string;
+	headlineSizes?: ResponsiveFontSize;
+	isVideoArticle?: boolean;
+	Age?: ReactElement;
+	CommentCount?: ReactElement;
+	isFeatureCard?: boolean;
 };
-
-const adTargetingDisabled: AdTargeting = { disableAds: true };
 
 export const YoutubeBlockComponent = ({
 	id,
@@ -70,6 +78,12 @@ export const YoutubeBlockComponent = ({
 	hidePillOnMobile,
 	enableAds,
 	aspectRatio,
+	trailText,
+	headlineSizes,
+	isVideoArticle,
+	Age,
+	CommentCount,
+	isFeatureCard,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -169,6 +183,12 @@ export const YoutubeBlockComponent = ({
 				hidePillOnMobile={hidePillOnMobile}
 				renderingTarget={renderingTarget}
 				aspectRatio={aspectRatio}
+				trailText={trailText}
+				headlineSizes={headlineSizes}
+				isVideoArticle={isVideoArticle}
+				Age={Age}
+				CommentCount={CommentCount}
+				isFeatureCard={isFeatureCard}
 			/>
 			{!hideCaption && (
 				<Caption

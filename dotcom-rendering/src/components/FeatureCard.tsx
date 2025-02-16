@@ -34,52 +34,9 @@ import { MediaDuration } from './MediaDuration';
 import { Pill } from './Pill';
 import { StarRating } from './StarRating/StarRating';
 import { SupportingContent } from './SupportingContent';
+import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
 
 export type Position = 'inner' | 'outer' | 'none';
-
-export type Props = {
-	linkTo: string;
-	format: ArticleFormat;
-	absoluteServerTimes: boolean;
-	headlineText: string;
-	headlineSizes?: ResponsiveFontSize;
-	byline?: string;
-	showByline?: boolean;
-	webPublicationDate?: string;
-	image?: DCRFrontImage;
-	imagePositionOnDesktop?: ImagePositionType /** TODO Remove this prop  */;
-	imagePositionOnMobile?: ImagePositionType /** TODO Remove this prop  */;
-	/** Size is ignored when position = 'top' because in that case the image flows based on width */
-	imageSize?: ImageSizeType;
-	imageLoading: Loading;
-	showClock?: boolean;
-	mainMedia?: MainMedia;
-	trailText?: string;
-	/** Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size
-	 * At 300px or below, the player will begin to lose functionality e.g. volume controls being omitted.
-	 * Youtube requires a minimum width 200px.
-	 */
-	canPlayInline?: boolean;
-	kickerText?: string;
-	showPulsingDot?: boolean;
-	starRating?: Rating;
-	/** Used for Ophan tracking */
-	dataLinkName?: string;
-	/** Only used on Labs cards */
-	// branding?: Branding;
-	/** Supporting content refers to sublinks */
-	supportingContent?: DCRSupportingContent[];
-	containerPalette?: DCRContainerPalette;
-	discussionApiUrl: string;
-	discussionId?: string;
-	isExternalLink: boolean;
-	/** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
-	aspectRatio?: AspectRatio;
-	showQuotes?: boolean;
-	galleryCount?: number;
-	podcastImage?: PodcastSeriesImage;
-	audioDuration?: string;
-};
 
 const baseCardStyles = css`
 	display: flex;
@@ -123,10 +80,11 @@ const hoverStyles = css`
 `;
 
 const contentStyles = css`
-	position: absolute;
-	bottom: 0;
-	left: 0;
+	display: flex;
+	flex-basis: 100%;
 	width: 100%;
+	gap: ${space[2]}px;
+	flex-direction: column;
 `;
 
 /**
@@ -138,9 +96,12 @@ const contentStyles = css`
  * https://css-tricks.com/easing-linear-gradients/
  */
 const overlayStyles = css`
+	width: 100%;
+	position: absolute;
+	bottom: 0;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
+	text-align: start;
 	gap: ${space[1]}px;
 	padding: 64px ${space[2]}px ${space[2]}px;
 	mask-image: linear-gradient(
@@ -218,19 +179,21 @@ const getMedia = ({
 	return undefined;
 };
 
+type CardAgeProps = {
+	showClock: boolean;
+	absoluteServerTimes: boolean;
+	webPublicationDate?: string;
+};
 const CardAge = ({
 	showClock,
 	absoluteServerTimes,
 	webPublicationDate,
-}: {
-	showClock: boolean;
-	absoluteServerTimes: boolean;
-	webPublicationDate?: string;
-}) => {
+}: CardAgeProps) => {
 	if (!webPublicationDate) return undefined;
-	const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
 
-	if (withinTwelveHours) {
+	const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
+	if (!withinTwelveHours) {
+		// TODO - flip
 		return (
 			<AgeStamp
 				webPublication={{
@@ -244,20 +207,21 @@ const CardAge = ({
 			/>
 		);
 	}
-	return <></>;
+
+	return null;
 };
 
-const CommentCount = ({
-	discussionId,
-	linkTo,
-	discussionApiUrl,
-}: {
+type CommentCountProps = {
 	linkTo: string;
-	discussionApiUrl?: string;
 	discussionId?: string;
-}) => {
-	if (!discussionId) return null;
-	if (!discussionApiUrl) return null;
+	discussionApiUrl?: string;
+};
+const CommentCount = ({
+	linkTo,
+	discussionId,
+	discussionApiUrl,
+}: CommentCountProps) => {
+	if (!discussionId || !discussionApiUrl) return null;
 
 	return (
 		<Link
@@ -289,6 +253,57 @@ const CommentCount = ({
 			</Island>
 		</Link>
 	);
+};
+
+export type Props = {
+	linkTo: string;
+	format: ArticleFormat;
+	absoluteServerTimes: boolean;
+	headlineText: string;
+	headlineSizes?: ResponsiveFontSize;
+	byline?: string;
+	showByline?: boolean;
+	webPublicationDate?: string;
+	image?: DCRFrontImage;
+	imagePositionOnDesktop?: ImagePositionType /** TODO Remove this prop  */;
+	imagePositionOnMobile?: ImagePositionType /** TODO Remove this prop  */;
+	/** Size is ignored when position = 'top' because in that case the image flows based on width */
+	imageSize?: ImageSizeType;
+	imageLoading: Loading;
+	showClock?: boolean;
+	mainMedia?: MainMedia;
+	trailText?: string;
+	/**
+	 * Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size
+	 * At 300px or below, the player will begin to lose functionality e.g. volume controls being omitted.
+	 * Youtube requires a minimum width 200px.
+	 */
+	canPlayInline?: boolean;
+	kickerText?: string;
+	showPulsingDot?: boolean;
+	starRating?: Rating;
+	/** Used for Ophan tracking */
+	dataLinkName?: string;
+	/** Only used on Labs cards */
+	// branding?: Branding;
+	/** Supporting content refers to sublinks */
+	supportingContent?: DCRSupportingContent[];
+	containerPalette?: DCRContainerPalette;
+	discussionApiUrl: string;
+	discussionId?: string;
+	isExternalLink: boolean;
+	/** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
+	aspectRatio?: AspectRatio;
+	showQuotes?: boolean;
+	galleryCount?: number;
+	podcastImage?: PodcastSeriesImage;
+	audioDuration?: string;
+	/**
+	 * Youtube video requires a unique ID. We append the collectionId to the youtube asset ID, to allow
+	 * same video to be on the page multiple times, as long as they are in different collections.
+	 * The highlights container above the header is 0, the first container below the header is 1, etc.
+	 */
+	collectionId: number;
 };
 
 export const FeatureCard = ({
@@ -324,6 +339,7 @@ export const FeatureCard = ({
 	galleryCount,
 	podcastImage,
 	audioDuration,
+	collectionId,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -342,28 +358,91 @@ export const FeatureCard = ({
 		canPlayInline,
 	});
 
+	const showYoutubeVideo = canPlayInline && mainMedia?.type === 'Video';
+
 	return (
 		<FormatBoundary format={format}>
 			<ContainerOverrides containerPalette={containerPalette}>
 				<div css={[baseCardStyles, hoverStyles]}>
-					<CardLink
-						linkTo={linkTo}
-						headlineText={headlineText}
-						dataLinkName={dataLinkName}
-						isExternalLink={isExternalLink}
-					/>
-					<div
-						css={[
-							css`
-								display: flex;
-								flex-basis: 100%;
-								width: 100%;
-								gap: ${space[2]}px;
-								flex-direction: column;
-							`,
-						]}
-					>
-						{media && (
+					{!showYoutubeVideo && (
+						<CardLink
+							linkTo={linkTo}
+							headlineText={headlineText}
+							dataLinkName={dataLinkName}
+							isExternalLink={isExternalLink}
+						/>
+					)}
+					<div css={contentStyles}>
+						{showYoutubeVideo && (
+							<div
+								data-chromatic="ignore"
+								data-component="youtube-atom"
+								css={css`
+									display: block;
+									position: relative;
+									z-index: ${getZIndex('card-nested-link')};
+								`}
+							>
+								<Island
+									priority="critical"
+									defer={{ until: 'visible' }}
+								>
+									<YoutubeBlockComponent
+										id={mainMedia.id}
+										assetId={mainMedia.videoId}
+										index={collectionId}
+										expired={mainMedia.expired}
+										format={format}
+										stickyVideos={false}
+										enableAds={false}
+										duration={mainMedia.duration}
+										posterImage={mainMedia.images}
+										overrideImage={media?.imageUrl}
+										width={300}
+										height={375}
+										origin="The Guardian"
+										mediaTitle={headlineText}
+										isMainMedia={true}
+										hideCaption={true}
+										pauseOffscreenVideo={true}
+										aspectRatio={aspectRatio}
+										altText={headlineText}
+										kickerText={kickerText}
+										trailText={
+											showByline ? trailText : undefined
+										}
+										isVideoArticle={isVideoArticle}
+										showTextOverlay={false}
+										hidePillOnMobile={false}
+										iconSizeOnDesktop="large"
+										iconSizeOnMobile="large"
+										headlineSizes={headlineSizes}
+										Age={
+											<CardAge
+												webPublicationDate={
+													webPublicationDate
+												}
+												showClock={!!showClock}
+												absoluteServerTimes={
+													absoluteServerTimes
+												}
+											/>
+										}
+										CommentCount={
+											<CommentCount
+												linkTo={linkTo}
+												discussionId={discussionId}
+												discussionApiUrl={
+													discussionApiUrl
+												}
+											/>
+										}
+										isFeatureCard={true}
+									/>
+								</Island>
+							</div>
+						)}
+						{!showYoutubeVideo && media && (
 							<div
 								css={css`
 									position: relative;
@@ -425,136 +504,129 @@ export const FeatureCard = ({
 								{/* This image overlay is styled when the CardLink is hovered */}
 								<div className="image-overlay" />
 
-								<div css={contentStyles}>
-									{mainMedia?.type === 'Audio' &&
-										!!podcastImage?.src && (
-											<div
-												css={
-													podcastImageContainerStyles
-												}
-											>
-												<div css={podcastImageStyles}>
-													<CardPicture
-														mainImage={
-															podcastImage.src
-														}
-														imageSize="podcast"
-														alt={
-															podcastImage.altText ??
-															''
-														}
-														loading="lazy"
-														roundedCorners={false}
-														aspectRatio="1:1"
-													/>
-												</div>
+								{mainMedia?.type === 'Audio' &&
+									!!podcastImage?.src && (
+										<div css={podcastImageContainerStyles}>
+											<div css={podcastImageStyles}>
+												<CardPicture
+													mainImage={podcastImage.src}
+													imageSize="podcast"
+													alt={
+														podcastImage.altText ??
+														''
+													}
+													loading="lazy"
+													roundedCorners={false}
+													aspectRatio="1:1"
+												/>
 											</div>
-										)}
-									<div css={overlayStyles}>
-										{/**
-										 * Without the wrapping div the headline and
-										 * byline would have space inserted between
-										 * them due to being direct children of the
-										 * flex container
-										 */}
-										<div>
-											<CardHeadline
-												headlineText={headlineText}
-												format={format}
-												fontSizes={headlineSizes}
-												showQuotes={showQuotes}
-												kickerText={
-													format.design ===
-														ArticleDesign.LiveBlog &&
-													!kickerText
-														? 'Live'
-														: kickerText
-												}
-												showPulsingDot={
-													format.design ===
-														ArticleDesign.LiveBlog ||
-													showPulsingDot
-												}
-												byline={byline}
-												showByline={showByline}
-												isExternalLink={isExternalLink}
-												headlineColour={palette(
-													'--feature-card-headline',
-												)}
-												kickerColour={palette(
-													'--feature-card-kicker-text',
-												)}
-												isBetaContainer={true}
-											/>
 										</div>
-
-										{starRating !== undefined ? (
-											<div css={starRatingWrapper}>
-												<StarRating
-													rating={starRating}
-													size="small"
-												/>
-											</div>
-										) : null}
-
-										{!!trailText && (
-											<div css={trailTextWrapper}>
-												<TrailText
-													trailText={trailText}
-													trailTextColour={palette(
-														'--feature-card-trail-text',
-													)}
-													trailTextSize={'regular'}
-													padBottom={false}
-												/>
-											</div>
-										)}
-										<CardFooter
+									)}
+								<div css={overlayStyles}>
+									{/**
+									 * Without the wrapping div the headline and
+									 * byline would have space inserted between
+									 * them due to being direct children of the
+									 * flex container
+									 */}
+									<div>
+										<CardHeadline
+											headlineText={headlineText}
 											format={format}
-											age={
-												<CardAge
-													webPublicationDate={
-														webPublicationDate
-													}
-													showClock={!!showClock}
-													absoluteServerTimes={
-														absoluteServerTimes
-													}
-												/>
+											fontSizes={headlineSizes}
+											showQuotes={showQuotes}
+											kickerText={
+												format.design ===
+													ArticleDesign.LiveBlog &&
+												!kickerText
+													? 'Live'
+													: kickerText
 											}
-											commentCount={
-												<CommentCount
-													linkTo={linkTo}
-													discussionId={discussionId}
-													discussionApiUrl={
-														discussionApiUrl
-													}
-												/>
+											showPulsingDot={
+												format.design ===
+													ArticleDesign.LiveBlog ||
+												showPulsingDot
 											}
-											/**TODO: Determine if this is needed */
-											// cardBranding={
-											// 	branding ? (
-											// 		<CardBranding
-											// 			branding={branding}
-											// 			format={format}
-											// 			onwardsSource={
-											// 				onwardsSource
-											// 			}
-											// 			containerPalette={
-											// 				containerPalette
-											// 			}
-											// 		/>
-											// 	) : undefined
-											// }
-											showLivePlayable={false}
-											isVideo={isVideoArticle}
-											isAudio={isAudioArticle}
-											isGallery={isGalleryArticle}
-											videoDuration={videoDuration}
-											audioDuration={audioDuration}
-											galleryCount={galleryCount}
+											byline={byline}
+											showByline={showByline}
+											isExternalLink={isExternalLink}
+											headlineColour={palette(
+												'--feature-card-headline',
+											)}
+											kickerColour={palette(
+												'--feature-card-kicker-text',
+											)}
+											isBetaContainer={true}
 										/>
 									</div>
+
+									{starRating !== undefined ? (
+										<div css={starRatingWrapper}>
+											<StarRating
+												rating={starRating}
+												size="small"
+											/>
+										</div>
+									) : null}
+
+									{!!trailText && (
+										<div css={trailTextWrapper}>
+											<TrailText
+												trailText={trailText}
+												trailTextColour={palette(
+													'--feature-card-trail-text',
+												)}
+												trailTextSize={'regular'}
+												padBottom={false}
+											/>
+										</div>
+									)}
+
+									<CardFooter
+										format={format}
+										age={
+											<CardAge
+												webPublicationDate={
+													webPublicationDate
+												}
+												showClock={!!showClock}
+												absoluteServerTimes={
+													absoluteServerTimes
+												}
+											/>
+										}
+										commentCount={
+											<CommentCount
+												linkTo={linkTo}
+												discussionId={discussionId}
+												discussionApiUrl={
+													discussionApiUrl
+												}
+											/>
+										}
+										/**TODO: Determine if this is needed */
+										// cardBranding={
+										// 	branding ? (
+										// 		<CardBranding
+										// 			branding={branding}
+										// 			format={format}
+										// 			onwardsSource={
+										// 				onwardsSource
+										// 			}
+										// 			containerPalette={
+										// 				containerPalette
+										// 			}
+										// 		/>
+										// 	) : undefined
+										// }
+										showLivePlayable={false}
+										isVideo={isVideoArticle}
+										isAudio={isAudioArticle}
+										isGallery={isGalleryArticle}
+										videoDuration={videoDuration}
+										audioDuration={audioDuration}
+										galleryCount={galleryCount}
+									/>
 								</div>
 								{/* On video article cards, the duration is displayed in the footer */}
 								{!isVideoArticle &&
