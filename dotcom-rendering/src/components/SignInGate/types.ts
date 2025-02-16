@@ -113,6 +113,7 @@ export interface AuxiaProxyGetTreatmentsPayload {
 	isSupporter: boolean;
 	dailyArticleCount: number;
 	articleIdentifier: string;
+	languageLocale: string;
 }
 
 export interface AuxiaProxyGetTreatmentsResponse {

@@ -6,6 +6,7 @@ import { Island } from '../components/Island';
 import { SignInGateSelector } from '../components/SignInGateSelector.importable';
 import type { Switches } from '../types/config';
 import type { TagType } from '../types/tag';
+import type { EditionId } from './edition';
 
 type Props = {
 	renderedElements: (JSX.Element | null | undefined)[];
@@ -21,6 +22,7 @@ type Props = {
 	isSensitive?: boolean;
 	isDev?: boolean;
 	contributionsServiceUrl: string;
+	editionId: EditionId;
 };
 
 export const withSignInGateSlot = ({
@@ -35,6 +37,7 @@ export const withSignInGateSlot = ({
 	idUrl,
 	switches,
 	contributionsServiceUrl,
+	editionId,
 }: Props): React.ReactNode => {
 	return renderedElements.map((element, i) => {
 		return (
@@ -57,6 +60,7 @@ export const withSignInGateSlot = ({
 								contributionsServiceUrl={
 									contributionsServiceUrl
 								}
+								editionId={editionId}
 							/>
 						</Island>
 					</div>
