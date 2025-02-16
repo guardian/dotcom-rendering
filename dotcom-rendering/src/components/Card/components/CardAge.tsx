@@ -19,9 +19,7 @@ type Props = {
 const ageStyles = (colour: string) => {
 	return css`
 		${textSansBold12};
-
 		color: ${colour};
-
 		margin-top: -4px;
 
 		svg {

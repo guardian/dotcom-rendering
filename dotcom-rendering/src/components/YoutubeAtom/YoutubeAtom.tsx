@@ -1,6 +1,5 @@
 import type { Participations } from '@guardian/ab-core';
 import type { ConsentState } from '@guardian/libs';
-import type { ReactElement } from 'react';
 import { useCallback, useState } from 'react';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import type { AdTargeting } from '../../types/commercial';
@@ -55,8 +54,12 @@ export type Props = {
 	trailText?: string;
 	headlineSizes?: ResponsiveFontSize;
 	isVideoArticle?: boolean;
-	Age?: ReactElement;
-	CommentCount?: ReactElement;
+	webPublicationDate?: string;
+	showClock?: boolean;
+	absoluteServerTimes?: boolean;
+	linkTo?: string;
+	discussionApiUrl?: string;
+	discussionId?: string;
 	isFeatureCard?: boolean;
 };
 
@@ -103,8 +106,12 @@ export const YoutubeAtom = ({
 	trailText,
 	headlineSizes,
 	isVideoArticle,
-	Age,
-	CommentCount,
+	webPublicationDate,
+	showClock,
+	absoluteServerTimes,
+	linkTo,
+	discussionApiUrl,
+	discussionId,
 	isFeatureCard,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
@@ -243,8 +250,12 @@ export const YoutubeAtom = ({
 								aspectRatio={aspectRatio}
 								trailText={trailText}
 								isVideoArticle={isVideoArticle}
-								Age={Age}
-								CommentCount={CommentCount}
+								webPublicationDate={webPublicationDate}
+								showClock={!!showClock}
+								absoluteServerTimes={absoluteServerTimes}
+								linkTo={linkTo}
+								discussionId={discussionId}
+								discussionApiUrl={discussionApiUrl}
 							/>
 						) : (
 							<YoutubeAtomOverlay

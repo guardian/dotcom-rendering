@@ -1,10 +1,9 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import { Link, SvgMediaControlsPlay } from '@guardian/source/react-components';
+import { SvgMediaControlsPlay } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
-import { isWithinTwelveHours, secondsToDuration } from '../lib/formatTime';
+import { secondsToDuration } from '../lib/formatTime';
 import { getZIndex } from '../lib/getZIndex';
-import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../lib/useCommentCount';
 import { palette } from '../palette';
 import type { StarRating as Rating } from '../types/content';
 import type {
@@ -15,7 +14,6 @@ import type {
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
 import type { PodcastSeriesImage } from '../types/tag';
-import { CardAge as AgeStamp } from './Card/components/CardAge';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
 import type {
@@ -23,11 +21,12 @@ import type {
 	ImageSizeType,
 } from './Card/components/ImageWrapper';
 import { TrailText } from './Card/components/TrailText';
-import { CardCommentCount } from './CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { CardPicture } from './CardPicture';
 import { ContainerOverrides } from './ContainerOverrides';
+import { FeatureCardCardAge } from './FeatureCardCardAge';
+import { FeatureCardCommentCount } from './FeatureCardCommentCount';
 import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
 import { MediaDuration } from './MediaDuration';
@@ -96,9 +95,6 @@ const contentStyles = css`
  * https://css-tricks.com/easing-linear-gradients/
  */
 const overlayStyles = css`
-	width: 100%;
-	position: absolute;
-	bottom: 0;
 	display: flex;
 	flex-direction: column;
 	text-align: start;
@@ -177,82 +173,6 @@ const getMedia = ({
 		return { type: 'picture', imageUrl, imageAltText } as const;
 	}
 	return undefined;
-};
-
-type CardAgeProps = {
-	showClock: boolean;
-	absoluteServerTimes: boolean;
-	webPublicationDate?: string;
-};
-const CardAge = ({
-	showClock,
-	absoluteServerTimes,
-	webPublicationDate,
-}: CardAgeProps) => {
-	if (!webPublicationDate) return undefined;
-
-	const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
-	if (!withinTwelveHours) {
-		// TODO - flip
-		return (
-			<AgeStamp
-				webPublication={{
-					date: webPublicationDate,
-					isWithinTwelveHours: true,
-				}}
-				showClock={showClock}
-				absoluteServerTimes={absoluteServerTimes}
-				isTagPage={false}
-				colour={palette('--feature-card-footer-text')}
-			/>
-		);
-	}
-
-	return null;
-};
-
-type CommentCountProps = {
-	linkTo: string;
-	discussionId?: string;
-	discussionApiUrl?: string;
-};
-const CommentCount = ({
-	linkTo,
-	discussionId,
-	discussionApiUrl,
-}: CommentCountProps) => {
-	if (!discussionId || !discussionApiUrl) return null;
-
-	return (
-		<Link
-			{...{
-				[DISCUSSION_ID_DATA_ATTRIBUTE]: discussionId,
-			}}
-			data-ignore="global-link-styling"
-			data-link-name="Comment count"
-			href={`${linkTo}#comments`}
-			cssOverrides={css`
-				/* See: https://css-tricks.com/nested-links/ */
-				z-index: ${getZIndex('card-nested-link')};
-				/* The following styles turn off those provided by Link */
-				color: inherit;
-				/* stylelint-disable-next-line property-disallowed-list */
-				font-family: inherit;
-				font-size: inherit;
-				line-height: inherit;
-				text-decoration: none;
-				min-height: 10px;
-			`}
-		>
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<CardCommentCount
-					discussionApiUrl={discussionApiUrl}
-					discussionId={discussionId}
-					colour={palette('--feature-card-footer-text')}
-				/>
-			</Island>
-		</Link>
-	);
 };
 
 export type Props = {
@@ -360,6 +280,11 @@ export const FeatureCard = ({
 
 	const showYoutubeVideo = canPlayInline && mainMedia?.type === 'Video';
 
+	const showCardAge =
+		webPublicationDate !== undefined && showClock !== undefined;
+
+	const showCommentCount = discussionId !== undefined;
+
 	return (
 		<FormatBoundary format={format}>
 			<ContainerOverrides containerPalette={containerPalette}>
@@ -417,26 +342,14 @@ export const FeatureCard = ({
 										iconSizeOnDesktop="large"
 										iconSizeOnMobile="large"
 										headlineSizes={headlineSizes}
-										Age={
-											<CardAge
-												webPublicationDate={
-													webPublicationDate
-												}
-												showClock={!!showClock}
-												absoluteServerTimes={
-													absoluteServerTimes
-												}
-											/>
+										webPublicationDate={webPublicationDate}
+										showClock={!!showClock}
+										absoluteServerTimes={
+											absoluteServerTimes
 										}
-										CommentCount={
-											<CommentCount
-												linkTo={linkTo}
-												discussionId={discussionId}
-												discussionApiUrl={
-													discussionApiUrl
-												}
-											/>
-										}
+										linkTo={linkTo}
+										discussionId={discussionId}
+										discussionApiUrl={discussionApiUrl}
 										isFeatureCard={true}
 									/>
 								</Island>
@@ -504,147 +417,166 @@ export const FeatureCard = ({
 								{/* This image overlay is styled when the CardLink is hovered */}
 								<div className="image-overlay" />
 
-								{mainMedia?.type === 'Audio' &&
-									!!podcastImage?.src && (
-										<div css={podcastImageContainerStyles}>
-											<div css={podcastImageStyles}>
-												<CardPicture
-													mainImage={podcastImage.src}
-													imageSize="podcast"
-													alt={
-														podcastImage.altText ??
-														''
-													}
-													loading="lazy"
-													roundedCorners={false}
-													aspectRatio="1:1"
+								<div
+									css={css`
+										position: absolute;
+										bottom: 0;
+										left: 0;
+										width: 100%;
+									`}
+								>
+									{mainMedia?.type === 'Audio' &&
+										!!podcastImage?.src && (
+											<div
+												css={
+													podcastImageContainerStyles
+												}
+											>
+												<div css={podcastImageStyles}>
+													<CardPicture
+														mainImage={
+															podcastImage.src
+														}
+														imageSize="podcast"
+														alt={
+															podcastImage.altText ??
+															''
+														}
+														loading="lazy"
+														roundedCorners={false}
+														aspectRatio="1:1"
+													/>
+												</div>
+											</div>
+										)}
+									<div css={overlayStyles}>
+										{/**
+										 * Without the wrapping div the headline and byline would have space
+										 * inserted between them due to being direct children of the flex container
+										 */}
+										<div>
+											<CardHeadline
+												headlineText={headlineText}
+												format={format}
+												fontSizes={headlineSizes}
+												showQuotes={showQuotes}
+												kickerText={
+													format.design ===
+														ArticleDesign.LiveBlog &&
+													!kickerText
+														? 'Live'
+														: kickerText
+												}
+												showPulsingDot={
+													format.design ===
+														ArticleDesign.LiveBlog ||
+													showPulsingDot
+												}
+												byline={byline}
+												showByline={showByline}
+												isExternalLink={isExternalLink}
+												headlineColour={palette(
+													'--feature-card-headline',
+												)}
+												kickerColour={palette(
+													'--feature-card-kicker-text',
+												)}
+												isBetaContainer={true}
+											/>
+										</div>
+
+										{starRating !== undefined ? (
+											<div css={starRatingWrapper}>
+												<StarRating
+													rating={starRating}
+													size="small"
 												/>
 											</div>
-										</div>
-									)}
-								<div css={overlayStyles}>
-									{/**
-									 * Without the wrapping div the headline and
-									 * byline would have space inserted between
-									 * them due to being direct children of the
-									 * flex container
-									 */}
-									<div>
-										<CardHeadline
-											headlineText={headlineText}
+										) : null}
+
+										{!!trailText && (
+											<div css={trailTextWrapper}>
+												<TrailText
+													trailText={trailText}
+													trailTextColour={palette(
+														'--feature-card-trail-text',
+													)}
+													trailTextSize="regular"
+													padBottom={false}
+												/>
+											</div>
+										)}
+
+										<CardFooter
 											format={format}
-											fontSizes={headlineSizes}
-											showQuotes={showQuotes}
-											kickerText={
-												format.design ===
-													ArticleDesign.LiveBlog &&
-												!kickerText
-													? 'Live'
-													: kickerText
+											age={
+												showCardAge ? (
+													<FeatureCardCardAge
+														webPublicationDate={
+															webPublicationDate
+														}
+														showClock={!!showClock}
+														absoluteServerTimes={
+															absoluteServerTimes
+														}
+													/>
+												) : undefined
 											}
-											showPulsingDot={
-												format.design ===
-													ArticleDesign.LiveBlog ||
-												showPulsingDot
+											commentCount={
+												showCommentCount ? (
+													<FeatureCardCommentCount
+														linkTo={linkTo}
+														discussionId={
+															discussionId
+														}
+														discussionApiUrl={
+															discussionApiUrl
+														}
+													/>
+												) : undefined
 											}
-											byline={byline}
-											showByline={showByline}
-											isExternalLink={isExternalLink}
-											headlineColour={palette(
-												'--feature-card-headline',
-											)}
-											kickerColour={palette(
-												'--feature-card-kicker-text',
-											)}
-											isBetaContainer={true}
+											/**TODO: Determine if this is needed */
+											// cardBranding={
+											// 	branding ? (
+											// 		<CardBranding
+											// 			branding={branding}
+											// 			format={format}
+											// 			onwardsSource={
+											// 				onwardsSource
+											// 			}
+											// 			containerPalette={
+											// 				containerPalette
+											// 			}
+											// 		/>
+											// 	) : undefined
+											// }
+											showLivePlayable={false}
+											isVideo={isVideoArticle}
+											isAudio={isAudioArticle}
+											isGallery={isGalleryArticle}
+											videoDuration={videoDuration}
+											audioDuration={audioDuration}
+											galleryCount={galleryCount}
 										/>
 									</div>
-
-									{starRating !== undefined ? (
-										<div css={starRatingWrapper}>
-											<StarRating
-												rating={starRating}
-												size="small"
+									{/* On video article cards, the duration is displayed in the footer */}
+									{!isVideoArticle &&
+									isVideoMainMedia &&
+									videoDuration !== undefined ? (
+										<div css={videoPillStyles}>
+											<Pill
+												content={
+													<time>
+														{secondsToDuration(
+															videoDuration,
+														)}
+													</time>
+												}
+												icon={<SvgMediaControlsPlay />}
 											/>
 										</div>
 									) : null}
-
-									{!!trailText && (
-										<div css={trailTextWrapper}>
-											<TrailText
-												trailText={trailText}
-												trailTextColour={palette(
-													'--feature-card-trail-text',
-												)}
-												trailTextSize={'regular'}
-												padBottom={false}
-											/>
-										</div>
-									)}
-
-									<CardFooter
-										format={format}
-										age={
-											<CardAge
-												webPublicationDate={
-													webPublicationDate
-												}
-												showClock={!!showClock}
-												absoluteServerTimes={
-													absoluteServerTimes
-												}
-											/>
-										}
-										commentCount={
-											<CommentCount
-												linkTo={linkTo}
-												discussionId={discussionId}
-												discussionApiUrl={
-													discussionApiUrl
-												}
-											/>
-										}
-										/**TODO: Determine if this is needed */
-										// cardBranding={
-										// 	branding ? (
-										// 		<CardBranding
-										// 			branding={branding}
-										// 			format={format}
-										// 			onwardsSource={
-										// 				onwardsSource
-										// 			}
-										// 			containerPalette={
-										// 				containerPalette
-										// 			}
-										// 		/>
-										// 	) : undefined
-										// }
-										showLivePlayable={false}
-										isVideo={isVideoArticle}
-										isAudio={isAudioArticle}
-										isGallery={isGalleryArticle}
-										videoDuration={videoDuration}
-										audioDuration={audioDuration}
-										galleryCount={galleryCount}
-									/>
 								</div>
-								{/* On video article cards, the duration is displayed in the footer */}
-								{!isVideoArticle &&
-								isVideoMainMedia &&
-								videoDuration !== undefined ? (
-									<div css={videoPillStyles}>
-										<Pill
-											content={
-												<time>
-													{secondsToDuration(
-														videoDuration,
-													)}
-												</time>
-											}
-											icon={<SvgMediaControlsPlay />}
-										/>
-									</div>
-								) : null}
 							</div>
 						)}
 					</div>
