@@ -5,6 +5,8 @@ import {
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
 import { getDailyArticleCount, getToday } from '../lib/dailyArticleCount';
+import type { EditionId } from '../lib/edition';
+import { getEditionFromId } from '../lib/edition';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { constructQuery } from '../lib/querystring';
 import { useAB } from '../lib/useAB';
@@ -57,6 +59,19 @@ type Props = {
 	idUrl?: string;
 	switches: Switches;
 	contributionsServiceUrl: string;
+	editionId: EditionId;
+};
+
+type PropsDefault = {
+	contentType: string;
+	sectionId?: string;
+	tags: TagType[];
+	isPaidContent: boolean;
+	isPreview: boolean;
+	host?: string;
+	pageId: string;
+	idUrl?: string;
+	switches: Switches;
 };
 
 // interface for the component which shows the sign in gate
@@ -214,14 +229,7 @@ const SignInGateSelectorDefault = ({
 	pageId,
 	idUrl = 'https://profile.theguardian.com',
 	switches,
-	contributionsServiceUrl,
-}: Props) => {
-	// comment group: auxia-prototype-e55a86ef
-	// The following (useless) instruction only exists to avoid linting error
-	// so that SignInGateSelectorDefault, SignInGateSelectorAuxia and SignInGateSelector
-	// all have the same signature, while we give shape to the Auxia prototype.
-	contributionsServiceUrl;
-
+}: PropsDefault) => {
 	const authStatus = useAuthStatus();
 	const isSignedIn =
 		authStatus.kind === 'SignedInWithOkta' ||
@@ -372,6 +380,7 @@ export const SignInGateSelector = ({
 	idUrl = 'https://profile.theguardian.com',
 	switches,
 	contributionsServiceUrl,
+	editionId,
 }: Props) => {
 	const abTestAPI = useAB()?.api;
 	const userIsInAuxiaExperiment = !!abTestAPI?.isUserInVariant(
@@ -391,7 +400,6 @@ export const SignInGateSelector = ({
 				pageId={pageId}
 				idUrl={idUrl}
 				switches={switches}
-				contributionsServiceUrl={contributionsServiceUrl}
 			/>
 		);
 	} else {
@@ -401,6 +409,7 @@ export const SignInGateSelector = ({
 				pageId={pageId}
 				idUrl={idUrl}
 				contributionsServiceUrl={contributionsServiceUrl}
+				editionId={editionId}
 			/>
 		);
 	}
@@ -434,6 +443,7 @@ type PropsAuxia = {
 	pageId: string;
 	idUrl: string;
 	contributionsServiceUrl: string;
+	editionId: EditionId;
 };
 
 interface ShowSignInGateAuxiaProps {
@@ -476,6 +486,11 @@ const decideDailyArticleCount = (): number => {
 
 const decideAuxiaProxyReaderPersonalData =
 	async (): Promise<AuxiaGateReaderPersonalData> => {
+		return Promise.resolve({
+			browserId: undefined,
+			dailyArticleCount: 12,
+			isSupporter: true,
+		});
 		const browserId =
 			getCookie({ name: 'bwid', shouldMemoize: true }) ?? '';
 		const dailyArticleCount = decideDailyArticleCount();
@@ -495,6 +510,7 @@ const fetchProxyGetTreatments = async (
 	browserId: string | undefined,
 	isSupporter: boolean,
 	dailyArticleCount: number,
+	languageLocale: string,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const articleIdentifier = `www.theguardian.com/${pageId}`;
@@ -508,6 +524,7 @@ const fetchProxyGetTreatments = async (
 		isSupporter,
 		dailyArticleCount,
 		articleIdentifier,
+		languageLocale,
 	};
 	const params = {
 		method: 'POST',
@@ -525,14 +542,17 @@ const fetchProxyGetTreatments = async (
 const buildAuxiaGateDisplayData = async (
 	contributionsServiceUrl: string,
 	pageId: string,
+	editionId: EditionId,
 ): Promise<AuxiaGateDisplayData | undefined> => {
 	const readerPersonalData = await decideAuxiaProxyReaderPersonalData();
+	const edition = getEditionFromId(editionId);
 	const response = await fetchProxyGetTreatments(
 		contributionsServiceUrl,
 		pageId,
 		readerPersonalData.browserId,
 		readerPersonalData.isSupporter,
 		readerPersonalData.dailyArticleCount,
+		edition.langLocale,
 	);
 	if (response.status && response.data) {
 		const answer = {
@@ -581,6 +601,7 @@ const SignInGateSelectorAuxia = ({
 	pageId,
 	idUrl,
 	contributionsServiceUrl,
+	editionId,
 }: PropsAuxia) => {
 	/*
 		comment group: auxia-prototype-e55a86ef
@@ -643,6 +664,7 @@ const SignInGateSelectorAuxia = ({
 			const data = await buildAuxiaGateDisplayData(
 				contributionsServiceUrl,
 				pageId,
+				editionId,
 			);
 			if (data !== undefined) {
 				setAuxiaGateDisplayData(data);
