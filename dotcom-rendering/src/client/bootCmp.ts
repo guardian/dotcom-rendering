@@ -63,7 +63,7 @@ const initialiseCmp = async () => {
 	const { pageViewId } = window.guardian.config.ophan;
 	const isUserSignedIn = await isUserLoggedInOktaRefactor();
 	// If user has the "reject all" benefit then show the reduced, "non-advertised" list
-	const useNonAdvertisedList = allowRejectAll();
+	const useNonAdvertisedList = allowRejectAll(isUserSignedIn);
 
 	const country = code ?? undefined;
 	cmp.init({
