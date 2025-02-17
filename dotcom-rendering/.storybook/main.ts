@@ -51,6 +51,7 @@ const config: StorybookConfig = {
 		// clean-css will try to import these packages
 		config.resolve.fallback['http'] = false;
 		config.resolve.fallback['https'] = false;
+		config.resolve.fallback['os'] = false;
 
 		// Required as otherwise 'process' will not be defined when included on its own (without .env)
 		// e.g process?.env?.SOME_VAR
@@ -103,12 +104,13 @@ const webpackConfig = (config: Configuration) => {
 
 	// log4js tries to call "fs" in storybook -- we can ignore it
 	config.resolve.alias[
-		path.resolve(__dirname, '../src/server/lib/logging.ts')
+		`${path.resolve(__dirname, '../src/server/lib/logging')}$`
 	] = path.resolve(__dirname, './mocks/log4js.ts');
 
 	// Mock BridgetApi for storybook
-	config.resolve.alias[path.resolve(__dirname, '../src/lib/bridgetApi.ts')] =
-		path.resolve(__dirname, './mocks/bridgetApi.ts');
+	config.resolve.alias[
+		`${path.resolve(__dirname, '../src/lib/bridgetApi')}$`
+	] = path.resolve(__dirname, './mocks/bridgetApi.ts');
 
 	const webpackLoaders = getLoaders('client.web');
 

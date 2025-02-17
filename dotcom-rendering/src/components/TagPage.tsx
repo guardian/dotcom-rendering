@@ -6,7 +6,7 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
-import type { DCRTagPageType } from '../types/tagPage';
+import type { TagPage as TagPageModel } from '../types/tagPage';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
@@ -18,7 +18,7 @@ import { SetAdTargeting } from './SetAdTargeting.importable';
 import { SkipTo } from './SkipTo';
 
 type Props = {
-	tagPage: DCRTagPageType;
+	tagPage: TagPageModel;
 	NAV: NavType;
 };
 
