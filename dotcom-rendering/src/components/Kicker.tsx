@@ -46,7 +46,7 @@ const liveTextStyles = css`
 `;
 
 const inlineKickerStyles = css`
-	display: inline-block;
+	display: inline;
 	margin-right: ${space[1]}px;
 	/** Unset the padding-bottom from standard kicker */
 	padding-bottom: 0;
@@ -115,7 +115,6 @@ export const Kicker = ({
 					<PulsingDot colour={palette('--kicker-pulsing-dot-live')} />
 				</Island>
 			)}
-
 			{text}
 		</div>
 	);
