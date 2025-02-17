@@ -15,7 +15,12 @@ import {
 	textSansBold17,
 	until,
 } from '@guardian/source/foundations';
-import { Button, SvgGuardianLogo } from '@guardian/source/react-components';
+import {
+	Button,
+	LinkButton,
+	SvgArrowRightStraight,
+	SvgGuardianLogo,
+} from '@guardian/source/react-components';
 import { Ticker } from '@guardian/source-development-kitchen/react-components';
 import {
 	hexColourToString,
@@ -27,15 +32,23 @@ import type {
 	ConfigurableDesign,
 	Image,
 } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import {
 	removeMediaRulePrefix,
 	useMatchMedia,
 } from '../../../../lib/useMatchMedia';
+import { ThreeTierChoiceCards } from '../../epics/ThreeTierChoiceCards';
+import type { SupportTier } from '../../epics/utils/threeTierChoiceCardAmounts';
 import { useChoiceCards } from '../../hooks/useChoiceCards';
 import { useReminder } from '../../hooks/useReminder';
 import type { ReactComponent } from '../../lib/ReactComponent';
+import {
+	addChoiceCardsProductParams,
+	addRegionIdAndTrackingParamsToSupportUrl,
+} from '../../lib/tracking';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
+import { PaymentCards } from '../common/PaymentCards';
 import type {
 	BannerEnrichedReminderCta,
 	BannerRenderProps,
@@ -118,6 +131,27 @@ const buildChoiceCardSettings = (
 	return undefined;
 };
 
+const buildUrlForV2ChoiceCards = (
+	tracking: Tracking,
+	selectedProduct: SupportTier,
+	countryCode?: string,
+) => {
+	const baseUrl = 'https://support.theguardian.com/contribute';
+	const urlWithProduct =
+		selectedProduct === 'OneOff'
+			? baseUrl
+			: addChoiceCardsProductParams(baseUrl, selectedProduct, 'Monthly');
+
+	return addRegionIdAndTrackingParamsToSupportUrl(
+		urlWithProduct,
+		tracking,
+		undefined,
+		countryCode,
+		undefined,
+		undefined,
+	);
+};
+
 const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	content,
 	onCloseClick,
@@ -132,6 +166,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	countryCode,
 	submitComponentEvent,
 	design,
+	tracking,
 }: BannerRenderProps): JSX.Element => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 	const { isReminderActive, onReminderCtaClick, mobileReminderRef } =
@@ -160,6 +195,9 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		}
 	}, [iosAppBannerPresent, submitComponentEvent]);
 
+	/**
+	 * V1 choice cards state
+	 */
 	const {
 		choiceCardSelection,
 		setChoiceCardSelection,
@@ -172,6 +210,16 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		content.mainContent.primaryCta,
 		content.mobileContent.primaryCta,
 	);
+
+	/**
+	 * V2 choice cards state
+	 */
+	const [
+		threeTierChoiceCardSelectedProduct,
+		setThreeTierChoiceCardSelectedProduct,
+	] = useState<SupportTier>('SupporterPlus');
+
+	const choiceCardsV2 = true; // TODO - set based on the variant name
 
 	// We can't render anything without a design
 	if (!design) {
@@ -408,7 +456,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						styleOverides={styles.closeButtonOverrides(true)}
 					/>
 				)}
-				{showChoiceCards && (
+				{showChoiceCards && !choiceCardsV2 && (
 					<div
 						css={styles.choiceCardsContainer(
 							templateSettings.containerSettings.backgroundColour,
@@ -428,6 +476,18 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								templateSettings.primaryCtaSettings,
 							)}
 							onCtaClick={onCtaClick}
+						/>
+					</div>
+				)}
+				{showChoiceCards && choiceCardsV2 && (
+					<div css={styles.choiceCardsContainerV2}>
+						<ThreeTierChoiceCards
+							countryCode={countryCode}
+							selectedProduct={threeTierChoiceCardSelectedProduct}
+							setSelectedProduct={
+								setThreeTierChoiceCardSelectedProduct
+							}
+							variantOfChoiceCard={'THREE_TIER_CHOICE_CARDS'}
 						/>
 					</div>
 				)}
@@ -475,6 +535,30 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 					</div>
 				</div>
 			)}
+
+			{showChoiceCards && choiceCardsV2 && (
+				<div css={styles.ctaAndPaymentCardsContainer}>
+					<LinkButton
+						href={buildUrlForV2ChoiceCards(
+							tracking,
+							threeTierChoiceCardSelectedProduct,
+							countryCode,
+						)}
+						// onClick={onCtaClick}
+						priority="tertiary"
+						// cssOverrides={[buttonOverrides, cssOverrides ?? css``]}
+						icon={<SvgArrowRightStraight />}
+						iconSide="right"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Continue
+					</LinkButton>
+					<PaymentCards
+						cssOverrides={styles.paymentCardsSvgOverrides}
+					/>
+				</div>
+			)}
 		</div>
 	);
 };
@@ -505,6 +589,10 @@ const styles = {
 		flex-direction: column;
 		position: relative;
 		padding: 0 10px;
+
+		max-height: calc(80vh) !important;
+		overflow-y: scroll;
+
 		${from.tablet} {
 			display: grid;
 			grid-template-columns: 1fr 280px;
@@ -602,6 +690,9 @@ const styles = {
 			justify-content: flex-end;
 		}
 	`,
+	choiceCardsContainerV2: css`
+		order: 3;
+	`,
 	guardianLogoContainer: css`
 		display: none;
 		${from.tablet} {
@@ -644,6 +735,34 @@ const styles = {
 	reminderFormContainer: css`
 		border-top: 2px solid ${neutral[0]};
 		margin-top: ${space[3]}px;
+	`,
+	ctaAndPaymentCardsContainer: css`
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		gap: ${space[4]}px;
+		margin-top: ${space[2]}px;
+		margin-bottom: ${space[2]}px;
+
+		> span {
+			width: 100%;
+		}
+
+		${from.desktop} {
+			flex-direction: row;
+			gap: 0;
+			margin-bottom: 0;
+			margin-top: ${space[3]}px;
+
+			> span {
+				width: auto;
+			}
+		}
+	`,
+	paymentCardsSvgOverrides: css`
+		${from.desktop} {
+			margin-top: -10px;
+		}
 	`,
 };
 
