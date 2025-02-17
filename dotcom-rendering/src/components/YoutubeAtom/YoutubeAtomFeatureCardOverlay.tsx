@@ -6,6 +6,7 @@ import { secondsToDuration } from '../../lib/formatTime';
 import { palette } from '../../palette';
 import type { AspectRatio } from '../../types/front';
 import { CardFooter } from '../Card/components/CardFooter';
+import { PlayIcon } from '../Card/components/PlayIcon';
 import { TrailText } from '../Card/components/TrailText';
 import type { ResponsiveFontSize } from '../CardHeadline';
 import { CardHeadline } from '../CardHeadline';
@@ -76,24 +77,6 @@ const videoPillStyles = css`
 	position: absolute;
 	top: ${space[2]}px;
 	right: ${space[2]}px;
-`;
-
-const playIconWidth = 56;
-const playIconStyles = css`
-	position: absolute;
-	/**
-	 * Subject to change. We will wait to see how fronts editors use the
-	 * headlines and standfirsts before we decide on a final position.
-	 */
-	top: 35%;
-	left: calc(50% - ${playIconWidth / 2}px);
-	width: ${playIconWidth}px;
-	height: ${playIconWidth}px;
-	background-color: ${palette('--feature-card-play-icon-background')};
-	opacity: 0.7;
-	border-radius: 50%;
-	border: 1px solid ${palette('--feature-card-play-icon-border')};
-	fill: ${palette('--feature-card-play-icon-fill')};
 `;
 
 type Props = {
@@ -181,9 +164,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 					</div>
 				) : null}
 				<div className="image-overlay" />
-				<div className="play-icon" css={[playIconStyles]}>
-					<SvgMediaControlsPlay />
-				</div>
+				<PlayIcon iconWidth="narrow" />
 				<div css={[textOverlayStyles]}>
 					{!!kicker && (
 						<Kicker

@@ -65,16 +65,22 @@ const theme = {
 	fill: sourcePalette.neutral[100],
 } satisfies Partial<ThemeIcon>;
 
-type Props = {
-	iconSizeOnDesktop: PlayButtonSize;
-	iconSizeOnMobile: PlayButtonSize;
-	iconWidth: 'narrow' | 'wide';
-};
+type Props =
+	| {
+			iconWidth: 'wide';
+			iconSizeOnDesktop: PlayButtonSize;
+			iconSizeOnMobile: PlayButtonSize;
+	  }
+	| {
+			iconWidth: 'narrow';
+			iconSizeOnDesktop?: never;
+			iconSizeOnMobile?: never;
+	  };
 
 export const PlayIcon = ({
+	iconWidth,
 	iconSizeOnDesktop,
 	iconSizeOnMobile,
-	iconWidth,
 }: Props) => {
 	return (
 		<div
