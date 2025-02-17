@@ -1,5 +1,6 @@
 import type { CountryCode } from '@guardian/libs';
 import { isObject, isOneOf, isString } from '@guardian/libs';
+import type { EditionId } from '../../lib/edition';
 import type { TagType } from '../../types/tag';
 
 export type CanShowGateProps = {
@@ -84,14 +85,18 @@ export type SignInGateTestMap = { [name: string]: SignInGateComponent };
 	comment group: auxia-prototype-e55a86ef
 */
 
-export interface treatmentContentDecoded {
+// Convention: In the naming of these types, we maintain the distinction between "AuxiaAPI", "AuxiaProxy" and "AuxiaGate".
+
+// Get Treatments
+
+export interface TreatmentContentDecoded {
 	title: string;
+	subtitle: string;
 	body: string;
+	privacy_button_name: string;
 	first_cta_name: string;
 	first_cta_link: string;
 	second_cta_name: string;
-	second_cta_link: string;
-	subtitle: string;
 }
 
 export interface AuxiaAPIResponseDataUserTreatment {
@@ -104,18 +109,74 @@ export interface AuxiaAPIResponseDataUserTreatment {
 	surface: string;
 }
 
-export interface SDCAuxiaProxyResponseData {
+export interface AuxiaProxyGetTreatmentsPayload {
+	browserId: string | undefined;
+	isSupporter: boolean;
+	dailyArticleCount: number;
+	articleIdentifier: string;
+	editionId: EditionId;
+}
+
+export interface AuxiaProxyGetTreatmentsResponse {
+	status: boolean;
+	data?: AuxiaProxyGetTreatmentsProxyResponseData;
+}
+
+export interface AuxiaProxyGetTreatmentsProxyResponseData {
 	responseId: string;
 	userTreatment?: AuxiaAPIResponseDataUserTreatment;
 }
 
+// Log Treatment Interaction
+
+export type AuxiaInteractionInteractionType =
+	| 'VIEWED'
+	| 'CLICKED'
+	| 'DISMISSED';
+
+export type AuxiaInteractionActionName =
+	| 'PRIVACY-BUTTON'
+	| 'REGISTER-LINK'
+	| 'SIGN-IN-LINK'
+	| 'HOW-TO-LINK'
+	| 'WHY-LINK'
+	| 'HELP-LINK'
+	| ''; // used for 'VIEWED' and 'DISMISSED' interactions
+
+export interface AuxiaProxyLogTreatmentInteractionPayload {
+	browserId: string | undefined;
+	treatmentTrackingId: string;
+	treatmentId: string;
+	surface: string;
+	interactionType: AuxiaInteractionInteractionType;
+	interactionTimeMicros: number;
+	actionName: AuxiaInteractionActionName;
+}
+
+// DCR Types
+
+export interface AuxiaGateReaderPersonalData {
+	browserId: string | undefined;
+	dailyArticleCount: number;
+	isSupporter: boolean;
+}
+
+export interface AuxiaGateDisplayData {
+	browserId: string | undefined;
+	auxiaData: AuxiaProxyGetTreatmentsProxyResponseData;
+}
+
 export type SignInGatePropsAuxia = {
 	guUrl: string;
+	signInUrl: string;
 	dismissGate: () => void;
 	ophanComponentId: string;
 	abTest?: CurrentSignInGateABTest;
-	isMandatory?: boolean;
 	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
 	personaliseSignInGateAfterCheckoutSwitch?: boolean;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
+	logTreatmentInteractionCall: (
+		interactionType: AuxiaInteractionInteractionType,
+		actionName: AuxiaInteractionActionName,
+	) => Promise<void>;
 };

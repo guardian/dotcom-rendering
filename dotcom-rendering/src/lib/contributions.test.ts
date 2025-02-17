@@ -1,9 +1,11 @@
 import { setCookie, storage } from '@guardian/libs';
 import MockDate from 'mockdate';
+import { createOrRenewCookie } from '../client/userFeatures/cookies/cookieHelpers';
+import { HIDE_SUPPORT_MESSAGING_COOKIE } from '../client/userFeatures/cookies/hideSupportMessaging';
+import { USER_BENEFITS_EXPIRY_COOKIE } from '../client/userFeatures/cookies/userBenefitsExpiry';
 import {
 	getLastOneOffContributionTimestamp,
-	hasSupporterCookie,
-	HIDE_SUPPORT_MESSAGING_COOKIE,
+	hasHideSupportMessagingCookie,
 	isRecentOneOffContributor,
 	NO_RR_BANNER_KEY,
 	recentlyClosedBanner,
@@ -179,27 +181,21 @@ describe('withinLocalNoBannerCachePeriod', () => {
 describe('hasSupporterCookie', () => {
 	beforeEach(clearAllCookies);
 
-	it('returns false if cookie exists and is set to false', () => {
-		setCookie({
-			name: HIDE_SUPPORT_MESSAGING_COOKIE,
-			value: 'false',
-		});
-		expect(hasSupporterCookie(true)).toEqual(false);
+	it('returns false if user features expiry cookie exists but hide support messaging does not', () => {
+		createOrRenewCookie(USER_BENEFITS_EXPIRY_COOKIE);
+		expect(hasHideSupportMessagingCookie(true)).toEqual(false);
 	});
 
-	it('returns true if cookie exists and is set to true', () => {
-		setCookie({
-			name: HIDE_SUPPORT_MESSAGING_COOKIE,
-			value: 'true',
-		});
-		expect(hasSupporterCookie(true)).toEqual(true);
+	it('returns true if cookie exists and is non-expired', () => {
+		createOrRenewCookie(HIDE_SUPPORT_MESSAGING_COOKIE);
+		expect(hasHideSupportMessagingCookie(true)).toEqual(true);
 	});
 
 	it('returns false if cookie does not exist and user is signed out', () => {
-		expect(hasSupporterCookie(false)).toEqual(false);
+		expect(hasHideSupportMessagingCookie(false)).toEqual(false);
 	});
 
-	it('returns Pending if cookie does not exist and user is signed in', () => {
-		expect(hasSupporterCookie(true)).toEqual('Pending');
+	it('returns Pending if user is signed in and the user features expiry cookie does not exist', () => {
+		expect(hasHideSupportMessagingCookie(true)).toEqual('Pending');
 	});
 });

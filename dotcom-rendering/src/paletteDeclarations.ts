@@ -7,6 +7,7 @@ import { palette as sourcePalette } from '@guardian/source/foundations';
 import {
 	buttonThemeBrand,
 	buttonThemeDefault,
+	themeButton,
 } from '@guardian/source/react-components';
 import {
 	expandingWrapperDarkTheme,
@@ -3031,6 +3032,12 @@ const articleSectionTitleLight: PaletteFunction = () =>
 const articleSectionTitleDark: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 
+const articleSectionSecondaryTitleLight: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
+const articleSectionSecondaryTitleDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
 const articleLinkTextLight: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.Audio) {
 		return sourcePalette.neutral[86];
@@ -5753,6 +5760,12 @@ const pillBackground: PaletteFunction = () =>
 const pillDivider: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[100], 0.5);
 const pillLiveBullet: PaletteFunction = () => sourcePalette.news[500];
+
+const crosswordCluesHeaderBorderTop: PaletteFunction = () =>
+	sourcePalette.lifestyle[400];
+const crosswordCluesHeaderBorderBottom: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
 // ----- Palette ----- //
 
 /**
@@ -5914,6 +5927,10 @@ const paletteColours = {
 		light: articleSectionBackgroundLight,
 		dark: articleSectionBackgroundDark,
 	},
+	'--article-section-secondary-title': {
+		light: articleSectionSecondaryTitleLight,
+		dark: articleSectionSecondaryTitleDark,
+	},
 	'--article-section-title': {
 		light: articleSectionTitleLight,
 		dark: articleSectionTitleDark,
@@ -5981,6 +5998,18 @@ const paletteColours = {
 	'--bullet-fill': {
 		light: bulletFillLight,
 		dark: bulletFillDark,
+	},
+	'--button-background-primary': {
+		light: () => themeButton.backgroundPrimary,
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--button-background-primary-hover': {
+		light: () => themeButton.backgroundPrimaryHover,
+		dark: () => '#CACACA',
+	},
+	'--button-text-primary': {
+		light: () => themeButton.textPrimary,
+		dark: () => sourcePalette.brand[400],
 	},
 	'--byline': {
 		light: bylineLight,
@@ -6209,6 +6238,14 @@ const paletteColours = {
 	'--cricket-scoreboard-link-text': {
 		light: cricketScoreboardLinkText,
 		dark: cricketScoreboardLinkText,
+	},
+	'--crossword-clues-header-border-bottom': {
+		light: crosswordCluesHeaderBorderBottom,
+		dark: crosswordCluesHeaderBorderBottom,
+	},
+	'--crossword-clues-header-border-top': {
+		light: crosswordCluesHeaderBorderTop,
+		dark: crosswordCluesHeaderBorderTop,
 	},
 	'--dateline': {
 		light: datelineLight,
@@ -6482,6 +6519,14 @@ const paletteColours = {
 		light: followTextLight,
 		dark: followTextDark,
 	},
+	'--football-competition-select-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--football-match-hover': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[38],
+	},
 	'--football-match-list-background': {
 		light: () => sourcePalette.neutral[97],
 		dark: () => sourcePalette.neutral[20],
@@ -6497,6 +6542,14 @@ const paletteColours = {
 	'--football-match-list-error': {
 		light: () => sourcePalette.error[400],
 		dark: () => sourcePalette.error[500],
+	},
+	'--football-match-list-live-status': {
+		light: () => sourcePalette.sport[500],
+		dark: () => sourcePalette.sport[500],
+	},
+	'--football-match-list-sub-text': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[73],
 	},
 	'--football-match-list-top-border': {
 		light: () => sourcePalette.sport[500],

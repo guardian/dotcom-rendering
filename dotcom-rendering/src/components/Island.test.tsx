@@ -259,6 +259,7 @@ describe('Island: server-side rendering', () => {
 					contributionsServiceUrl={''}
 					pageId={''}
 					keywordIds={''}
+					renderingTarget={'Web'}
 				/>,
 			),
 		).not.toThrow();
@@ -381,6 +382,7 @@ describe('Island: server-side rendering', () => {
 						pageId={''}
 						switches={{}}
 						contributionsServiceUrl={''}
+						editionId="UK"
 					/>
 				</WithConfig>,
 			),
@@ -400,7 +402,6 @@ describe('Island: server-side rendering', () => {
 						tags={[]}
 						contributionsServiceUrl={''}
 						idApiUrl={''}
-						stage={''}
 						pageId={''}
 						renderAds={true}
 						isLabs={false}

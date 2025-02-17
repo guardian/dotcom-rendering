@@ -34,6 +34,7 @@ export const StaticFeatureTwo = ({
 						percentage={'50%'}
 						key={card.url}
 						padSides={true}
+						showDivider={true}
 					>
 						<FeatureCard
 							linkTo={card.url}
@@ -58,7 +59,7 @@ export const StaticFeatureTwo = ({
 							isExternalLink={card.isExternalLink}
 							// branding={card.branding}
 							containerPalette={containerPalette}
-							trailText={card.trailText}
+							trailText={undefined}
 							absoluteServerTimes={absoluteServerTimes}
 							imageLoading={imageLoading}
 							aspectRatio={aspectRatio}

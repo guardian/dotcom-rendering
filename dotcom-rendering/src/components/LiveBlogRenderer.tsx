@@ -150,6 +150,7 @@ export const LiveBlogRenderer = ({
 						contributionsServiceUrl={contributionsServiceUrl}
 						pageId={pageId}
 						keywordIds={keywordIds}
+						renderingTarget={renderingTarget}
 					/>
 				</Island>
 			)}

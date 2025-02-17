@@ -26,7 +26,7 @@ describe('Enhance lists', () => {
 					elements: [],
 					bio: 'bio 1',
 					endNote: 'endNote 1',
-					imageOverrideUrl: '',
+					contributorImageOverrideUrl: '',
 					contributorIds: ['profile/richard-hillgrove'],
 					byline: 'byline 1',
 					bylineHtml: 'bylineHtml 1',
@@ -36,7 +36,7 @@ describe('Enhance lists', () => {
 					elements: [],
 					bio: 'bio 2',
 					endNote: 'endNote 2',
-					imageOverrideUrl: '',
+					contributorImageOverrideUrl: '',
 					contributorIds: [],
 					byline: 'byline 2',
 					bylineHtml: 'bylineHtml 2',
@@ -46,7 +46,7 @@ describe('Enhance lists', () => {
 					elements: [],
 					bio: 'bio 3',
 					endNote: 'endNote 3',
-					imageOverrideUrl:
+					contributorImageOverrideUrl:
 						'https://i.guim.co.uk/image-override-url.jpg',
 					contributorIds: [],
 					byline: 'byline 3',

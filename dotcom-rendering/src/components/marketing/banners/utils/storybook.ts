@@ -15,7 +15,6 @@ export const tracking: Tracking = {
 	ophanPageId: 'kbluzw2csbf83eabedel',
 	componentType: 'ACQUISITIONS_ENGAGEMENT_BANNER',
 	platformId: 'GUARDIAN_WEB',
-	clientName: 'dcr',
 	referrerUrl: 'http://localhost:3030/Article',
 	abTestName: 'UsEoyAppealBannerSupporters',
 	abTestVariant: 'control',

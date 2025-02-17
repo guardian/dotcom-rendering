@@ -11,6 +11,10 @@ import type {
 	ModuleData,
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/types';
+import type {
+	HeaderProps,
+	Tracking,
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import {
@@ -25,6 +29,7 @@ import { useConfig } from './ConfigContext';
 
 type Props = {
 	contributionsServiceUrl: string;
+	pageUrl: string;
 };
 
 const headerStyles = css`
@@ -38,17 +43,19 @@ type ReaderRevenueLinksRemoteProps = {
 	countryCode: string;
 	pageViewId: string;
 	contributionsServiceUrl: string;
+	pageUrl: string;
 };
 
 const ReaderRevenueLinksRemote = ({
 	countryCode,
 	pageViewId,
 	contributionsServiceUrl,
+	pageUrl,
 }: ReaderRevenueLinksRemoteProps) => {
 	const [supportHeaderResponse, setSupportHeaderResponse] =
-		useState<ModuleData | null>(null);
+		useState<ModuleData<HeaderProps> | null>(null);
 	const [SupportHeader, setSupportHeader] =
-		useState<React.ElementType | null>(null);
+		useState<React.ElementType<HeaderProps> | null>(null);
 	const isSignedIn = useIsSignedIn();
 
 	const { renderingTarget } = useConfig();
@@ -68,12 +75,6 @@ const ReaderRevenueLinksRemote = ({
 		setAutomat();
 
 		const requestData: HeaderPayload = {
-			tracking: {
-				ophanPageId: pageViewId,
-				platformId: 'GUARDIAN_WEB',
-				referrerUrl: window.location.origin + window.location.pathname,
-				clientName: 'dcr',
-			},
 			targeting: {
 				showSupportMessaging: !hideSupportMessagingForUser,
 				countryCode,
@@ -86,7 +87,7 @@ const ReaderRevenueLinksRemote = ({
 		};
 
 		getHeader(contributionsServiceUrl, requestData)
-			.then((response: ModuleDataResponse) => {
+			.then((response: ModuleDataResponse<HeaderProps>) => {
 				if (!response.data) {
 					return null;
 				}
@@ -100,9 +101,15 @@ const ReaderRevenueLinksRemote = ({
 						  import(`./marketing/header/SignInPromptHeader`)
 						: /* webpackChunkName: "header" */
 						  import(`./marketing/header/Header`)
-				).then((headerModule: { [key: string]: React.ElementType }) => {
-					setSupportHeader(() => headerModule[module.name] ?? null);
-				});
+				).then(
+					(headerModule: {
+						[key: string]: React.ElementType<HeaderProps>;
+					}) => {
+						setSupportHeader(
+							() => headerModule[module.name] ?? null,
+						);
+					},
+				);
 			})
 			.catch((error) => {
 				const msg = `Error importing RR header links: ${String(error)}`;
@@ -113,23 +120,27 @@ const ReaderRevenueLinksRemote = ({
 					'rr-header-links',
 				);
 			});
-	}, [countryCode, isSignedIn, contributionsServiceUrl, pageViewId]);
+	}, [countryCode, isSignedIn, contributionsServiceUrl, pageViewId, pageUrl]);
 
 	if (SupportHeader !== null && supportHeaderResponse) {
+		const { props } = supportHeaderResponse;
+		const tracking: Tracking = {
+			...props.tracking,
+			ophanPageId: pageViewId,
+			platformId: 'GUARDIAN_WEB',
+			referrerUrl: pageUrl,
+		};
+		const enrichedProps: HeaderProps = {
+			...props,
+			tracking,
+			submitComponentEvent: (componentEvent: OphanComponentEvent) =>
+				submitComponentEvent(componentEvent, renderingTarget),
+		};
+
 		return (
 			<div css={headerStyles}>
 				{}
-				<SupportHeader
-					submitComponentEvent={(
-						componentEvent: OphanComponentEvent,
-					) =>
-						void submitComponentEvent(
-							componentEvent,
-							renderingTarget,
-						)
-					}
-					{...supportHeaderResponse.props}
-				/>
+				<SupportHeader {...enrichedProps} />
 			</div>
 		);
 	}
@@ -151,7 +162,7 @@ const ReaderRevenueLinksRemote = ({
  *
  * (No visual story exists)
  */
-export const TopBarSupport = ({ contributionsServiceUrl }: Props) => {
+export const TopBarSupport = ({ contributionsServiceUrl, pageUrl }: Props) => {
 	const { renderingTarget } = useConfig();
 	const countryCode = useCountryCode('support-the-Guardian');
 	const pageViewId = usePageViewId(renderingTarget);
@@ -163,6 +174,7 @@ export const TopBarSupport = ({ contributionsServiceUrl }: Props) => {
 			countryCode={countryCode}
 			pageViewId={pageViewId}
 			contributionsServiceUrl={contributionsServiceUrl}
+			pageUrl={pageUrl}
 		/>
 	);
 };

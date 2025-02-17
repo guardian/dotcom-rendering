@@ -7,7 +7,7 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
-import { submitComponentEvent } from '../client/ophan/ophan';
+import { getZIndex } from '../lib/getZIndex';
 import { ophanComponentId } from '../lib/ophan-helpers';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
@@ -101,7 +101,7 @@ const verticalLineStyles = css`
 `;
 
 const buttonStyles = css`
-	z-index: 1;
+	z-index: ${getZIndex('highlights-carousel-buttons')};
 `;
 
 const buttonOverlayStyles = css`
@@ -231,22 +231,6 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 			);
 		};
 	}, []);
-	useEffect(() => {
-		void submitComponentEvent(
-			{
-				abTest: {
-					name: 'masthead-with-highlights',
-					variant: 'inTest',
-				},
-				component: {
-					componentType: 'CAROUSEL',
-					id: 'home-highlights',
-				},
-				action: 'INSERT',
-			},
-			'Web',
-		);
-	}, []);
 
 	const { ophanComponentLink, ophanComponentName, ophanFrontName } =
 		getOphanInfo(frontId);
@@ -293,7 +277,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 				})}
 			</ol>
 
-			<Hide until={'tablet'}>
+			<Hide until="tablet">
 				{showPreviousButton && (
 					<div css={[buttonOverlayStyles, previousButtonFadeStyles]}>
 						<Button

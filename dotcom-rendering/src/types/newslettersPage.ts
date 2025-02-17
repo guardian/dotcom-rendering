@@ -1,6 +1,6 @@
 import type { EditionId } from '../lib/edition';
 import type { ServerSideTests, StageType, Switches } from './config';
-import type { Newsletter } from './content';
+import type { Newsletter, NewsletterLayout } from './content';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
 
@@ -48,6 +48,7 @@ type FENewslettersConfigType = {
 export interface FENewslettersPageType {
 	id: string;
 	newsletters: Newsletter[];
+	layout?: NewsletterLayout;
 	editionId: EditionId;
 	subscribeUrl: string;
 	contributionsServiceUrl: string;

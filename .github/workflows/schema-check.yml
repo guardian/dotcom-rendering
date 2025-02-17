@@ -16,6 +16,6 @@ jobs:
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
 
-      - name: Run check-schema script
-        run: make check-schema
+      - name: Run check-schemas script
+        run: make check-schemas
         working-directory: dotcom-rendering

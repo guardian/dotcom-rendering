@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import type { ConsentState, CountryCode } from '@guardian/libs';
+import type {
+	ConsentState,
+	CountryCode,
+	OphanComponentEvent,
+} from '@guardian/libs';
 import { getCookie, onConsent } from '@guardian/libs';
 import {
 	abandonedBasketSchema,
@@ -10,8 +14,11 @@ import type {
 	ModuleData,
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/types';
-import type { AbandonedBasket } from '@guardian/support-dotcom-components/dist/shared/types';
-import type { TestTracking } from '@guardian/support-dotcom-components/dist/shared/types/abTests/shared';
+import type {
+	AbandonedBasket,
+	BannerProps,
+	Tracking,
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import type { ArticleCounts } from '../../lib/articleCount';
@@ -29,6 +36,7 @@ import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import { getZIndex } from '../../lib/getZIndex';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
 
 type BaseProps = {
@@ -62,11 +70,9 @@ type CanShowProps = BaseProps & {
 	idApiUrl: string;
 	signInGateWillShow: boolean;
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
+	renderingTarget: RenderingTarget;
+	ophanPageViewId: string;
 };
-
-type ReaderRevenueComponentType =
-	| 'ACQUISITIONS_SUBSCRIPTIONS_BANNER'
-	| 'ACQUISITIONS_OTHER';
 
 export type CanShowFunctionType<T> = (
 	props: CanShowProps,
@@ -134,12 +140,6 @@ const buildPayload = async ({
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 
 	return {
-		tracking: {
-			ophanPageId: window.guardian.config.ophan.pageViewId,
-			platformId: 'GUARDIAN_WEB',
-			clientName: 'dcr',
-			referrerUrl: window.location.origin + window.location.pathname,
-		},
 		targeting: {
 			shouldHideReaderRevenue,
 			isPaidContent,
@@ -171,7 +171,9 @@ const buildPayload = async ({
 	};
 };
 
-export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
+export const canShowRRBanner: CanShowFunctionType<
+	ModuleData<BannerProps>
+> = async ({
 	remoteBannerConfig,
 	isSignedIn,
 	countryCode,
@@ -189,8 +191,10 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	abandonedBasketBannerLastClosedAt,
 	isPreview,
 	idApiUrl,
+	renderingTarget,
 	signInGateWillShow,
 	asyncArticleCounts,
+	ophanPageViewId,
 }) => {
 	if (!remoteBannerConfig) return { show: false };
 
@@ -259,7 +263,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		hideSupportMessagingForUser,
 	});
 
-	const response: ModuleDataResponse = await getBanner(
+	const response: ModuleDataResponse<BannerProps> = await getBanner(
 		contributionsServiceUrl,
 		bannerPayload,
 	);
@@ -270,41 +274,54 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		return { show: false };
 	}
 
-	const { module, meta } = response.data;
+	const { module } = response.data;
+
+	const { props, name } = module;
 
 	const fetchEmail = isSignedIn
 		? lazyFetchEmailWithTimeout(idApiUrl)
 		: undefined;
 
-	return { show: true, meta: { module, meta, fetchEmail } };
+	const tracking: Tracking = {
+		...props.tracking,
+		ophanPageId: ophanPageViewId,
+		platformId: 'GUARDIAN_WEB',
+		referrerUrl: window.location.origin + window.location.pathname,
+	};
+	const enrichedProps: BannerProps = {
+		...props,
+		tracking,
+		fetchEmail,
+		submitComponentEvent: (componentEvent: OphanComponentEvent) =>
+			void submitComponentEvent(componentEvent, renderingTarget),
+	};
+
+	return {
+		show: true,
+		meta: {
+			props: enrichedProps,
+			name,
+		},
+	};
 };
 
-export type BannerProps = {
-	meta: TestTracking;
-	module: ModuleData;
-
-	fetchEmail?: () => Promise<string | null>;
-};
-
-type RemoteBannerProps = BannerProps & {
-	componentTypeName: ReaderRevenueComponentType;
-	displayEvent: string;
-};
-
-const RemoteBanner = ({ module, fetchEmail }: RemoteBannerProps) => {
+export const ReaderRevenueBanner = ({
+	name,
+	props,
+}: ModuleData<BannerProps>) => {
 	const [Banner, setBanner] = useState<React.ElementType | null>(null);
 
 	useEffect(() => {
 		setAutomat();
 
-		(module.name === 'SignInPromptBanner'
+		(name === 'SignInPromptBanner'
 			? /* webpackChunkName: "sign-in-prompt-banner" */
 			  import(`../marketing/banners/signInPrompt/SignInPromptBanner`)
 			: /* webpackChunkName: "designable-banner" */
 			  import(`../marketing/banners/designableBanner/DesignableBanner`)
 		)
 			.then((bannerModule: { [key: string]: React.ElementType }) => {
-				setBanner(() => bannerModule[module.name] ?? null);
+				setBanner(() => bannerModule[name] ?? null);
 			})
 			.catch((error) => {
 				const msg = `Error importing RR banner: ${String(error)}`;
@@ -313,7 +330,7 @@ const RemoteBanner = ({ module, fetchEmail }: RemoteBannerProps) => {
 					'rr-banner',
 				);
 			});
-	}, [module]);
+	}, [name]);
 
 	if (Banner !== null) {
 		return (
@@ -325,28 +342,10 @@ const RemoteBanner = ({ module, fetchEmail }: RemoteBannerProps) => {
 				`}
 			>
 				{}
-				<Banner
-					{...module.props}
-					submitComponentEvent={submitComponentEvent}
-					fetchEmail={fetchEmail}
-				/>
+				<Banner {...props} />
 			</div>
 		);
 	}
 
 	return null;
 };
-
-export const ReaderRevenueBanner = ({
-	meta,
-	module,
-	fetchEmail,
-}: BannerProps) => (
-	<RemoteBanner
-		componentTypeName="ACQUISITIONS_SUBSCRIPTIONS_BANNER"
-		displayEvent="subscription-banner : display"
-		meta={meta}
-		module={module}
-		fetchEmail={fetchEmail}
-	/>
-);

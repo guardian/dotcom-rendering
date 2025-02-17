@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	headlineBold17,
@@ -13,7 +14,11 @@ import {
 	SvgPlus,
 } from '@guardian/source/react-components';
 import { Fragment, type ReactNode, useState } from 'react';
-import type { FootballMatch, FootballMatches } from '../footballMatches';
+import type {
+	FootballMatch,
+	FootballMatches,
+	FootballMatchKind,
+} from '../footballMatches';
 import { grid } from '../grid';
 import {
 	type EditionId,
@@ -26,7 +31,14 @@ import { palette } from '../palette';
 type Props = {
 	initialDays: FootballMatches;
 	edition: EditionId;
-	getMoreDays: () => Promise<Result<'failed', FootballMatches>>;
+	guardianBaseUrl: string;
+	getMoreDays?: () => Promise<Result<'failed', FootballMatches>>;
+};
+
+const REMOVE_TRAILING_DOTS_REGEX = /\.+$/;
+
+const removeTrailingDots = (str: string): string => {
+	return str.replace(REMOVE_TRAILING_DOTS_REGEX, '');
 };
 
 const getDateFormatter = (edition: EditionId): Intl.DateTimeFormat =>
@@ -103,41 +115,125 @@ const Matches = (props: { children: ReactNode }) => (
 	/>
 );
 
-const Match = ({
+const matchStatusStyles = css`
+	width: 5rem;
+	color: ${palette('--football-match-list-sub-text')};
+
+	${until.mobileMedium} {
+		flex-basis: 100%;
+	}
+`;
+
+const MatchStatus = ({
 	match,
 	timeFormatter,
 }: {
 	match: FootballMatch;
 	timeFormatter: Intl.DateTimeFormat;
+}) => {
+	switch (match.kind) {
+		case 'Result':
+			return <span css={matchStatusStyles}>FT</span>;
+		case 'Live':
+			return (
+				<span
+					css={[
+						matchStatusStyles,
+						css`
+							color: ${palette(
+								'--football-match-list-live-status',
+							)};
+						`,
+					]}
+				>
+					{match.status}
+				</span>
+			);
+		case 'Fixture':
+			return (
+				<time
+					css={matchStatusStyles}
+					dateTime={match.dateTime.toISOString()}
+				>
+					{timeFormatter.format(match.dateTime)}
+				</time>
+			);
+	}
+};
+
+export const shouldRenderMatchLink = (matchDateTime: Date, now: Date) =>
+	matchDateTime.getTime() - now.getTime() <= 72 * 60 * 60 * 1000;
+
+const matchListItemStyles = css`
+	background-color: ${palette('--football-match-list-background')};
+	border: 1px solid ${palette('--football-match-list-border')};
+
+	${from.leftCol} {
+		&:first-of-type {
+			border-top-color: ${palette('--football-match-list-top-border')};
+		}
+	}
+`;
+
+const matchStyles = (matchKind: FootballMatchKind) => css`
+	${textSans14}
+
+	${matchKind === 'Live' ? 'font-weight: bold;' : undefined}
+
+	display: flex;
+	flex-wrap: wrap;
+	padding: ${space[2]}px;
+`;
+
+const MatchWrapper = ({
+	match,
+	now,
+	children,
+}: {
+	match: FootballMatch;
+	now: Date;
+	children: ReactNode;
+}) => {
+	if (shouldRenderMatchLink(match.dateTime, now)) {
+		return (
+			<li css={matchListItemStyles}>
+				<a
+					href={`https://football.theguardian.com/match-redirect/${match.paId}`}
+					css={[
+						matchStyles(match.kind),
+						css`
+							text-decoration: none;
+							color: inherit;
+							:hover {
+								background-color: ${palette(
+									'--football-match-hover',
+								)};
+							}
+						`,
+					]}
+				>
+					{children}
+				</a>
+			</li>
+		);
+	}
+
+	return (
+		<li css={[matchListItemStyles, matchStyles(match.kind)]}>{children}</li>
+	);
+};
+
+const Match = ({
+	match,
+	timeFormatter,
+	now,
+}: {
+	match: FootballMatch;
+	timeFormatter: Intl.DateTimeFormat;
+	now: Date;
 }) => (
-	<li
-		css={css`
-			${textSans14}
-			background-color: ${palette('--football-match-list-background')};
-			padding: ${space[2]}px;
-			display: flex;
-			border: 1px solid ${palette('--football-match-list-border')};
-
-			${until.mobileMedium} {
-				flex-wrap: wrap;
-			}
-
-			${from.leftCol} {
-				&:first-of-type {
-					border-top-color: ${palette(
-						'--football-match-list-top-border',
-					)};
-				}
-			}
-		`}
-	>
-		{match.kind === 'Result' ? (
-			<span css={matchLeftStyle}>FT</span>
-		) : (
-			<MatchTime dateTime={match.dateTime.toISOString()}>
-				{timeFormatter.format(match.dateTime)}
-			</MatchTime>
-		)}
+	<MatchWrapper match={match} now={now}>
+		<MatchStatus match={match} timeFormatter={timeFormatter} />
 		{match.kind === 'Fixture' ? (
 			<>
 				<HomeTeam>{match.homeTeam}</HomeTeam>
@@ -154,21 +250,24 @@ const Match = ({
 					awayScore={match.awayTeam.score}
 				/>
 				<AwayTeam>{match.awayTeam.name}</AwayTeam>
+				{isUndefined(match.comment) ? null : (
+					<small
+						css={css`
+							color: ${palette('--football-match-list-sub-text')};
+							flex-basis: 100%;
+							text-align: center;
+							padding-top: ${space[2]}px;
+							${from.mobileMedium} {
+								padding-left: 5rem;
+							}
+						`}
+					>
+						{removeTrailingDots(match.comment)}
+					</small>
+				)}
 			</>
 		)}
-	</li>
-);
-
-const matchLeftStyle = css`
-	width: 5rem;
-
-	${until.mobileMedium} {
-		flex-basis: 100%;
-	}
-`;
-
-const MatchTime = (props: { children: ReactNode; dateTime: string }) => (
-	<time {...props} css={matchLeftStyle} />
+	</MatchWrapper>
 );
 
 const HomeTeam = (props: { children: ReactNode }) => (
@@ -208,6 +307,7 @@ const Battleline = () => (
 const Versus = () => (
 	<span
 		css={css`
+			color: ${palette('--football-match-list-sub-text')};
 			width: 3rem;
 			display: block;
 			padding: 0 4px;
@@ -229,6 +329,7 @@ const Scores = ({
 		css={css`
 			width: 3rem;
 			display: flex;
+			color: ${palette('--football-match-list-sub-text')};
 		`}
 	>
 		<span
@@ -253,6 +354,7 @@ const Scores = ({
 
 export const FootballMatchList = ({
 	edition,
+	guardianBaseUrl,
 	initialDays,
 	getMoreDays,
 }: Props) => {
@@ -261,6 +363,7 @@ export const FootballMatchList = ({
 
 	const [days, setDays] = useState(initialDays);
 	const [isError, setIsError] = useState<boolean>(false);
+	const now = new Date();
 
 	return (
 		<>
@@ -270,7 +373,18 @@ export const FootballMatchList = ({
 					{day.competitions.map((competition) => (
 						<Fragment key={competition.competitionId}>
 							<CompetitionName>
-								{competition.name}
+								<a
+									href={`${guardianBaseUrl}/${competition.tag}`}
+									css={css`
+										text-decoration: none;
+										color: inherit;
+										:hover {
+											text-decoration: underline;
+										}
+									`}
+								>
+									{competition.name}
+								</a>
 							</CompetitionName>
 							<Matches>
 								{competition.matches.map((match) => (
@@ -278,6 +392,7 @@ export const FootballMatchList = ({
 										key={match.paId}
 										match={match}
 										timeFormatter={timeFormatter}
+										now={now}
 									/>
 								))}
 							</Matches>
@@ -286,43 +401,55 @@ export const FootballMatchList = ({
 				</section>
 			))}
 
-			<div css={css(grid.container)}>
-				<div
-					css={css`
-						${grid.column.centre}
-						padding-top: ${space[10]}px;
-					`}
-				>
-					<Button
-						icon={<SvgPlus />}
-						size="xsmall"
-						onClick={() => {
-							void getMoreDays().then((moreDays) => {
-								if (moreDays.kind === 'ok') {
-									setIsError(false);
-									setDays(days.concat(moreDays.value));
-								} else {
-									setIsError(true);
-								}
-							});
-						}}
+			{getMoreDays === undefined ? null : (
+				<div css={css(grid.container)}>
+					<div
+						css={css`
+							${grid.column.centre}
+							padding-top: ${space[10]}px;
+						`}
 					>
-						More
-					</Button>
-					{isError ? (
-						<InlineError
-							cssOverrides={css`
-								padding-top: ${space[4]}px;
-								color: ${palette(
-									'--football-match-list-error',
-								)};
-							`}
+						<Button
+							theme={{
+								textPrimary: palette('--button-text-primary'),
+								backgroundPrimary: palette(
+									'--button-background-primary',
+								),
+								backgroundPrimaryHover: palette(
+									'--button-background-primary-hover',
+								),
+							}}
+							icon={<SvgPlus />}
+							size="xsmall"
+							onClick={() => {
+								void getMoreDays().then((moreDays) => {
+									if (moreDays.kind === 'ok') {
+										setIsError(false);
+										setDays(days.concat(moreDays.value));
+									} else {
+										setIsError(true);
+									}
+								});
+							}}
 						>
-							Could not get more matches. Please try again later!
-						</InlineError>
-					) : null}
+							More
+						</Button>
+						{isError ? (
+							<InlineError
+								cssOverrides={css`
+									padding-top: ${space[4]}px;
+									color: ${palette(
+										'--football-match-list-error',
+									)};
+								`}
+							>
+								Could not get more matches. Please try again
+								later!
+							</InlineError>
+						) : null}
+					</div>
 				</div>
-			</div>
+			)}
 		</>
 	);
 };

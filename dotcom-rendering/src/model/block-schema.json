@@ -2034,7 +2034,7 @@
                 "endNote": {
                     "type": "string"
                 },
-                "imageOverrideUrl": {
+                "contributorImageOverrideUrl": {
                     "type": "string"
                 },
                 "contributorIds": {

@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
+import type { OphanComponentEvent } from '@guardian/libs';
 import {
 	cmp,
 	getCookie,
 	startPerformanceMeasure,
 	storage,
 } from '@guardian/libs';
-import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
 import type {
 	EpicPayload,
@@ -13,6 +13,10 @@ import type {
 	ModuleDataResponse,
 	WeeklyArticleHistory,
 } from '@guardian/support-dotcom-components/dist/dotcom/types';
+import type {
+	EpicProps,
+	Tracking,
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import {
@@ -24,15 +28,8 @@ import {
 import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
-import { useConfig } from '../ConfigContext';
-
-export type EpicConfig = {
-	module: ModuleData;
-	fetchEmail?: () => Promise<string | null>;
-	hasConsentForArticleCount: boolean;
-	stage: string;
-};
 
 const wrapperMargins = css`
 	margin: 18px 0;
@@ -50,20 +47,15 @@ export type CanShowData = {
 	tags: TagType[];
 	contributionsServiceUrl: string;
 	idApiUrl: string;
-	stage: string;
 	asyncArticleCount: Promise<WeeklyArticleHistory | undefined>;
 	browserId?: string;
+	renderingTarget: RenderingTarget;
+	ophanPageViewId: string;
 };
 
 const buildPayload = async (
 	data: CanShowData & { hideSupportMessagingForUser: boolean },
 ): Promise<EpicPayload> => ({
-	tracking: {
-		ophanPageId: window.guardian.config.ophan.pageViewId,
-		platformId: 'GUARDIAN_WEB',
-		clientName: 'dcr',
-		referrerUrl: window.location.origin + window.location.pathname,
-	},
 	targeting: {
 		contentType: data.contentType,
 		sectionId: data.sectionId,
@@ -88,26 +80,27 @@ const buildPayload = async (
 
 export const canShowReaderRevenueEpic = async (
 	data: CanShowData,
-): Promise<CanShowResult<EpicConfig>> => {
+): Promise<CanShowResult<ModuleData<EpicProps>>> => {
 	const {
 		isSignedIn,
 		shouldHideReaderRevenue,
 		isPaidContent,
 		contributionsServiceUrl,
 		idApiUrl,
-		stage,
+		renderingTarget,
+		ophanPageViewId,
 	} = data;
 
 	const hideSupportMessagingForUser = shouldHideSupportMessaging(isSignedIn);
 
 	if (hideSupportMessagingForUser === 'Pending') {
 		// We don't yet know the user's supporter status
-		return Promise.resolve({ show: false });
+		return { show: false };
 	}
 
 	if (shouldHideReaderRevenue || isPaidContent) {
 		// We never serve Reader Revenue epics in this case
-		return Promise.resolve({ show: false });
+		return { show: false };
 	}
 	const { endPerformanceMeasure } = startPerformanceMeasure(
 		'supporterRevenue',
@@ -119,11 +112,11 @@ export const canShowReaderRevenueEpic = async (
 		hideSupportMessagingForUser,
 	});
 
-	const response: ModuleDataResponse = await getEpic(
+	const response: ModuleDataResponse<EpicProps> = await getEpic(
 		contributionsServiceUrl,
 		contributionsPayload,
 	);
-	const module: ModuleData | undefined = response.data?.module;
+	const module: ModuleData<EpicProps> | undefined = response.data?.module;
 
 	endPerformanceMeasure();
 
@@ -138,29 +131,38 @@ export const canShowReaderRevenueEpic = async (
 	const hasConsentForArticleCount =
 		await hasCmpConsentForWeeklyArticleCount();
 
+	const openCmp = () => {
+		cmp.showPrivacyManager();
+	};
+
+	const { props, name } = module;
+	const tracking: Tracking = {
+		...props.tracking,
+		ophanPageId: ophanPageViewId,
+		platformId: 'GUARDIAN_WEB',
+		referrerUrl: window.location.origin + window.location.pathname,
+	};
+	const enrichedProps: EpicProps = {
+		...props,
+		tracking,
+		hasConsentForArticleCount,
+		fetchEmail,
+		submitComponentEvent: (componentEvent: OphanComponentEvent) =>
+			void submitComponentEvent(componentEvent, renderingTarget),
+		openCmp,
+	};
+
 	return {
 		show: true,
 		meta: {
-			module,
-			fetchEmail,
-			hasConsentForArticleCount,
-			stage,
+			name,
+			props: enrichedProps,
 		},
 	};
 };
 
-export const ReaderRevenueEpic = ({
-	module,
-	fetchEmail,
-	hasConsentForArticleCount,
-	stage,
-}: EpicConfig) => {
+export const ReaderRevenueEpic = ({ props }: ModuleData<EpicProps>) => {
 	const [Epic, setEpic] = useState<React.ElementType | null>(null);
-	const { renderingTarget } = useConfig();
-
-	const openCmp = () => {
-		cmp.showPrivacyManager();
-	};
 
 	useEffect(() => {
 		setAutomat();
@@ -196,16 +198,7 @@ export const ReaderRevenueEpic = ({
 		return (
 			<div css={wrapperMargins}>
 				{}
-				<Epic
-					{...module.props}
-					fetchEmail={fetchEmail}
-					submitComponentEvent={(event: ComponentEvent) =>
-						void submitComponentEvent(event, renderingTarget)
-					}
-					openCmp={openCmp}
-					hasConsentForArticleCount={hasConsentForArticleCount}
-					stage={stage}
-				/>
+				<Epic {...props} />
 			</div>
 		);
 	}

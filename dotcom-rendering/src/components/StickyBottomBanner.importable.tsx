@@ -4,6 +4,8 @@ import type {
 } from '@guardian/braze-components/logic';
 import type { CountryCode } from '@guardian/libs';
 import { cmp, isString, isUndefined, storage } from '@guardian/libs';
+import type { ModuleData } from '@guardian/support-dotcom-components/dist/dotcom/types';
+import type { BannerProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
 import type { ArticleCounts } from '../lib/articleCount';
@@ -16,7 +18,9 @@ import { pickMessage } from '../lib/messagePicker';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
+import { usePageViewId } from '../lib/usePageViewId';
 import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
 import {
@@ -27,10 +31,7 @@ import {
 	canShowRRBanner,
 	ReaderRevenueBanner,
 } from './StickyBottomBanner/ReaderRevenueBanner';
-import type {
-	BannerProps,
-	CanShowFunctionType,
-} from './StickyBottomBanner/ReaderRevenueBanner';
+import type { CanShowFunctionType } from './StickyBottomBanner/ReaderRevenueBanner';
 
 type Props = {
 	contentType: string;
@@ -50,7 +51,7 @@ type Props = {
 type RRBannerConfig = {
 	id: string;
 	BannerComponent: typeof ReaderRevenueBanner;
-	canShowFn: CanShowFunctionType<BannerProps>;
+	canShowFn: CanShowFunctionType<ModuleData<BannerProps>>;
 	isEnabled: boolean;
 };
 
@@ -100,6 +101,8 @@ const buildRRBannerConfigWith = ({
 		tags,
 		contributionsServiceUrl,
 		idApiUrl,
+		renderingTarget,
+		ophanPageViewId,
 	}: {
 		isSignedIn: boolean;
 		countryCode: CountryCode;
@@ -115,7 +118,9 @@ const buildRRBannerConfigWith = ({
 		tags: TagType[];
 		contributionsServiceUrl: string;
 		idApiUrl: string;
-	}): CandidateConfig<BannerProps> => {
+		renderingTarget: RenderingTarget;
+		ophanPageViewId: string;
+	}): CandidateConfig<ModuleData<BannerProps>> => {
 		return {
 			candidate: {
 				id,
@@ -147,18 +152,14 @@ const buildRRBannerConfigWith = ({
 							),
 						isPreview,
 						idApiUrl,
+						renderingTarget,
 						signInGateWillShow,
 						asyncArticleCounts,
+						ophanPageViewId,
 					}),
 				show:
-					({ meta, module, fetchEmail }: BannerProps) =>
-					() => (
-						<BannerComponent
-							meta={meta}
-							module={module}
-							fetchEmail={fetchEmail}
-						/>
-					),
+					({ name, props }: ModuleData<BannerProps>) =>
+					() => <BannerComponent name={name} props={props} />,
 			},
 			timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 		};
@@ -229,6 +230,7 @@ export const StickyBottomBanner = ({
 
 	const countryCode = useCountryCode('sticky-bottom-banner');
 	const isSignedIn = useIsSignedIn();
+	const ophanPageViewId = usePageViewId(renderingTarget);
 
 	const [SelectedBanner, setSelectedBanner] = useState<MaybeFC | null>(null);
 	const [asyncArticleCounts, setAsyncArticleCounts] =
@@ -255,6 +257,7 @@ export const StickyBottomBanner = ({
 			isUndefined(brazeMessages) ||
 			isUndefined(asyncArticleCounts) ||
 			isUndefined(signInGateWillShow) ||
+			isUndefined(ophanPageViewId) ||
 			isSignedIn === 'Pending'
 		) {
 			return;
@@ -278,6 +281,8 @@ export const StickyBottomBanner = ({
 			tags,
 			contributionsServiceUrl,
 			idApiUrl,
+			renderingTarget,
+			ophanPageViewId,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
@@ -321,6 +326,7 @@ export const StickyBottomBanner = ({
 		shouldHideReaderRevenue,
 		signInGateWillShow,
 		tags,
+		ophanPageViewId,
 	]);
 
 	if (SelectedBanner) {
