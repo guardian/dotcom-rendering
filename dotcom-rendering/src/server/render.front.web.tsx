@@ -17,7 +17,7 @@ import { extractNAV } from '../model/extract-nav';
 import { createGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
 import type { DCRFrontType } from '../types/front';
-import type { DCRTagPageType } from '../types/tagPage';
+import type { TagPage as TagPageModel } from '../types/tagPage';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 interface Props {
@@ -179,7 +179,7 @@ export const renderFront = ({
 export const renderTagPage = ({
 	tagPage,
 }: {
-	tagPage: DCRTagPageType;
+	tagPage: TagPageModel;
 }): { html: string; prefetchScripts: string[] } => {
 	const title = tagPage.webTitle;
 	const NAV = extractNAV(tagPage.nav);
