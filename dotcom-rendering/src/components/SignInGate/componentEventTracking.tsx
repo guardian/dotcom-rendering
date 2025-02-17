@@ -14,7 +14,7 @@ export type ComponentEventParams = {
 };
 
 // ophan helper methods
-const submitComponentEventTracking = async (
+export const submitComponentEventTracking = async (
 	componentEvent: ComponentEvent,
 	renderingTarget: RenderingTarget,
 ) => {

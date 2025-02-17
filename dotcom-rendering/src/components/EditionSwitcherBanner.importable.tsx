@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { from, palette, space, textSans14 } from '@guardian/source/foundations';
-import { LinkButton } from '@guardian/source/react-components';
+import { from, palette, space, textSans20 } from '@guardian/source/foundations';
+import { Link, SvgInfoRound } from '@guardian/source/react-components';
 import { center } from '../lib/center';
 import {
 	type Edition,
@@ -27,7 +27,7 @@ const content = css`
 	justify-content: space-between;
 	padding: 10px;
 	align-items: flex-start;
-	${center}
+	${center};
 
 	${from.mobileLandscape} {
 		padding: 10px ${space[5]}px;
@@ -40,21 +40,14 @@ const content = css`
 
 const textAndLink = css`
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: flex-start;
-	gap: 10px;
-	${textSans14};
+	gap: ${space[3]}px;
+	${textSans20};
 
-	${from.phablet} {
-		flex-direction: row;
-		align-items: center;
-		gap: ${space[5]}px;
-	}
-`;
-
-const linkButton = css`
-	${from.phablet} {
-		padding: 18px ${space[4]}px;
+	/* Override Source Link font styles */
+	a {
+		${textSans20};
 	}
 `;
 
@@ -100,16 +93,22 @@ export const EditionSwitcherBanner = ({ pageId, edition }: Props) => {
 		<aside data-component="edition-switcher-banner" css={container}>
 			<div css={content}>
 				<div css={textAndLink}>
-					<p>You are viewing the {defaultEditionName} homepage</p>
-					<LinkButton
-						href={`/${suggestedPageId}`}
-						priority="primary"
-						size="xsmall"
-						cssOverrides={linkButton}
-						data-link-name="edition-switcher-banner switch-edition"
-					>
-						View the {suggestedEdition} homepage
-					</LinkButton>
+					<div>
+						<SvgInfoRound
+							size="small"
+							theme={{ fill: palette.brand[400] }}
+						/>
+					</div>
+					<p>
+						You are viewing the {defaultEditionName} homepage&nbsp;
+						<Link
+							href={`/${suggestedPageId}`}
+							priority="secondary"
+							data-link-name="edition-switcher-banner switch-edition"
+						>
+							View the {suggestedEdition} homepage
+						</Link>
+					</p>
 				</div>
 				<button
 					type="button"
