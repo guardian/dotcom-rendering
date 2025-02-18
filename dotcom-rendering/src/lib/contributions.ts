@@ -11,7 +11,7 @@ import { userBenefitsDataIsUpToDate } from '../client/userFeatures/cookies/userB
 import type { ArticleDeprecated } from '../types/article';
 import type { DCRFrontType } from '../types/front';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
-import type { DCRTagPageType } from '../types/tagPage';
+import type { TagPage } from '../types/tagPage';
 
 // User Attributes API cookies (created on sign-in)
 export const RECURRING_CONTRIBUTOR_COOKIE = 'gu_recurring_contributor';
@@ -195,11 +195,7 @@ export const recentlyClosedBanner = (
 };
 
 export const getContributionsServiceUrl = (
-	config:
-		| ArticleDeprecated
-		| DCRFrontType
-		| DCRTagPageType
-		| DCRNewslettersPageType,
+	config: ArticleDeprecated | DCRFrontType | TagPage | DCRNewslettersPageType,
 ): string => process.env.SDC_URL ?? config.contributionsServiceUrl;
 
 type PurchaseInfo = HeaderPayload['targeting']['purchaseInfo'];

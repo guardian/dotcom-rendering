@@ -151,6 +151,7 @@ export type Props = {
 	showKickerImage?: boolean;
 	galleryCount?: number;
 	audioDuration?: string;
+	isInLoopVideoTest?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -408,6 +409,7 @@ export const Card = ({
 	showKickerImage = false,
 	galleryCount,
 	audioDuration,
+	isInLoopVideoTest = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -816,6 +818,7 @@ export const Card = ({
 							media.type === 'slideshow' && isFlexibleContainer
 						}
 						padImage={isMediaCard && isBetaContainer}
+						isInLoopVideoTest={isInLoopVideoTest}
 					>
 						{media.type === 'slideshow' &&
 							(isFlexibleContainer ? (
@@ -914,12 +917,9 @@ export const Card = ({
 													containerType ===
 													'fixed/video'
 												}
-												imagePositionOnMobile={
-													imagePositionOnMobile
-												}
 												//** TODO: IMPROVE THIS MAPPING */
 												// image size defaults to small if not provided. However, if the headline size is large or greater, we want to assume the image is also large so that the play icon is correctly sized.
-												imageSize={
+												iconSizeOnDesktop={
 													[
 														'small',
 														'medium',
@@ -929,9 +929,23 @@ export const Card = ({
 													].includes(
 														headlineSizes?.desktop ??
 															'',
-													)
+													) || imageSize !== 'small'
 														? 'large'
-														: imageSize
+														: 'small'
+												}
+												iconSizeOnMobile={
+													imagePositionOnMobile ===
+														'left' ||
+													imagePositionOnMobile ===
+														'right'
+														? 'small'
+														: 'large'
+												}
+												hidePillOnMobile={
+													imagePositionOnMobile ===
+														'left' ||
+													imagePositionOnMobile ===
+														'right'
 												}
 												enableAds={false}
 												aspectRatio={aspectRatio}
@@ -971,6 +985,7 @@ export const Card = ({
 									loading={imageLoading}
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
+									isInLoopVideoTest={isInLoopVideoTest}
 								/>
 								{(isVideoMainMedia ||
 									(isVideoArticle && !isBetaContainer)) &&

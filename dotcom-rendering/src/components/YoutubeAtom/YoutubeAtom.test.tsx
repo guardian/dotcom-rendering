@@ -49,8 +49,10 @@ describe('YoutubeAtom', () => {
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					imagePositionOnMobile="none"
-					imageSize="large"
+					iconSizeOnDesktop="large"
+					iconSizeOnMobile="large"
+					hidePillOnMobile={false}
+					showTextOverlay={false}
 					renderingTarget="Web"
 				/>
 			</ConfigProvider>
@@ -84,12 +86,14 @@ describe('YoutubeAtom', () => {
 						display: ArticleDisplay.Standard,
 					}}
 					consentState={consentStateCanTarget}
-					overrideImage={overlayImage}
+					image={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					imagePositionOnMobile="none"
-					imageSize="large"
+					iconSizeOnDesktop="large"
+					iconSizeOnMobile="large"
+					hidePillOnMobile={false}
+					showTextOverlay={false}
 					renderingTarget="Web"
 				/>
 			</ConfigProvider>
@@ -134,8 +138,10 @@ describe('YoutubeAtom', () => {
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					imagePositionOnMobile="none"
-					imageSize="large"
+					iconSizeOnDesktop="large"
+					iconSizeOnMobile="large"
+					hidePillOnMobile={false}
+					showTextOverlay={false}
 					renderingTarget="Web"
 				/>
 			</ConfigProvider>
@@ -147,6 +153,7 @@ describe('YoutubeAtom', () => {
 
 	it('overlay has correct aria-label', () => {
 		const title = 'My Youtube video!';
+
 		const atom = (
 			<ConfigProvider
 				value={{
@@ -170,12 +177,14 @@ describe('YoutubeAtom', () => {
 						display: ArticleDisplay.Standard,
 					}}
 					consentState={consentStateCanTarget}
-					overrideImage={overlayImage}
+					image={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					imagePositionOnMobile="none"
-					imageSize="large"
+					iconSizeOnDesktop="large"
+					iconSizeOnMobile="large"
+					hidePillOnMobile={false}
+					showTextOverlay={false}
 					renderingTarget="Web"
 				/>
 			</ConfigProvider>
@@ -213,8 +222,10 @@ describe('YoutubeAtom', () => {
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					imagePositionOnMobile="none"
-					imageSize="large"
+					iconSizeOnDesktop="large"
+					iconSizeOnMobile="large"
+					hidePillOnMobile={false}
+					showTextOverlay={false}
 					renderingTarget="Web"
 				/>
 			</ConfigProvider>
@@ -249,12 +260,14 @@ describe('YoutubeAtom', () => {
 						design: ArticleDesign.Standard,
 						display: ArticleDisplay.Standard,
 					}}
-					overrideImage={overlayImage}
+					image={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					imagePositionOnMobile="none"
-					imageSize="large"
+					iconSizeOnDesktop="large"
+					iconSizeOnMobile="large"
+					hidePillOnMobile={false}
+					showTextOverlay={false}
 					renderingTarget="Web"
 				/>
 			</ConfigProvider>
@@ -287,12 +300,14 @@ describe('YoutubeAtom', () => {
 						design: ArticleDesign.Standard,
 						display: ArticleDisplay.Standard,
 					}}
-					overrideImage={overlayImage}
+					image={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					imagePositionOnMobile="none"
-					imageSize="large"
+					iconSizeOnDesktop="large"
+					iconSizeOnMobile="large"
+					hidePillOnMobile={false}
+					showTextOverlay={false}
 					renderingTarget="Web"
 				/>
 			</ConfigProvider>
@@ -329,12 +344,14 @@ describe('YoutubeAtom', () => {
 							design: ArticleDesign.Standard,
 							display: ArticleDisplay.Standard,
 						}}
-						overrideImage={overlayImage}
+						image={overlayImage}
 						shouldStick={false}
 						isMainMedia={false}
 						abTestParticipations={{}}
-						imagePositionOnMobile="left"
-						imageSize="small"
+						iconSizeOnDesktop="small"
+						iconSizeOnMobile="small"
+						hidePillOnMobile={false}
+						showTextOverlay={false}
 						renderingTarget="Web"
 					/>
 					<YoutubeAtom
@@ -350,12 +367,14 @@ describe('YoutubeAtom', () => {
 							design: ArticleDesign.Standard,
 							display: ArticleDisplay.Standard,
 						}}
-						overrideImage={overlayImage}
+						image={overlayImage}
 						shouldStick={false}
 						isMainMedia={false}
 						abTestParticipations={{}}
-						imagePositionOnMobile="left"
-						imageSize="small"
+						iconSizeOnDesktop="small"
+						iconSizeOnMobile="small"
+						hidePillOnMobile={false}
+						showTextOverlay={false}
 						renderingTarget="Web"
 					/>
 				</ConfigProvider>
