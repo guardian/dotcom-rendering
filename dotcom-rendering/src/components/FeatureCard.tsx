@@ -425,6 +425,9 @@ export const FeatureCard = ({
 											loading={imageLoading}
 											roundedCorners={false}
 											aspectRatio={aspectRatio}
+											mobileAspectRatio={
+												isImmersive ? '4:5' : undefined
+											}
 										/>
 									</div>
 								)}
@@ -438,6 +441,9 @@ export const FeatureCard = ({
 											loading={imageLoading}
 											roundedCorners={false}
 											aspectRatio={aspectRatio}
+											mobileAspectRatio={
+												isImmersive ? '4:5' : undefined
+											}
 										/>
 										{isVideoMainMedia &&
 											mainMedia.duration > 0 && (
