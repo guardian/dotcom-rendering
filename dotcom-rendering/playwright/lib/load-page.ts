@@ -6,11 +6,7 @@ import type { FEArticleType } from '../../src/types/frontend';
 const BASE_URL = `http://localhost:${PORT}`;
 
 /**
- * Loads a page and centralises setup:
- * - default the base url and port
- * - default the geo region to GB
- * - prevent the support banner from showing
- * - pass an adtest param to ensure we get a fixed test ad
+ * Loads a page in Playwright and centralises setup
  */
 const loadPage = async ({
 	page,
@@ -33,11 +29,12 @@ const loadPage = async ({
 }): Promise<void> => {
 	await page.addInitScript(
 		(args) => {
-			// force geo region
+			// Set the geo region, defaults to GB
 			window.localStorage.setItem(
 				'gu.geo.override',
 				JSON.stringify({ value: args.region }),
 			);
+			// Prevent the support banner from showing
 			if (args.preventSupportBanner) {
 				window.localStorage.setItem(
 					'gu.prefs.engagementBannerLastClosedAt',
@@ -50,6 +47,7 @@ const loadPage = async ({
 			preventSupportBanner,
 		},
 	);
+	// Add an adtest query param to ensure we get a fixed test ad
 	const paramsString = queryParamsOn
 		? `?${new URLSearchParams({
 				adtest: 'fixed-puppies-ci',
