@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import { Link, SvgMediaControlsPlay } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { isWithinTwelveHours, secondsToDuration } from '../lib/formatTime';
@@ -79,6 +79,7 @@ export type Props = {
 	galleryCount?: number;
 	podcastImage?: PodcastSeriesImage;
 	audioDuration?: string;
+	isImmersive?: boolean;
 };
 
 const baseCardStyles = css`
@@ -129,6 +130,19 @@ const contentStyles = css`
 	width: 100%;
 `;
 
+const immersiveContentStyles = css`
+	${until.tablet} {
+		width: 100%;
+		bottom: 0;
+	}
+
+	${from.tablet} {
+		height: 100%;
+		top: 0;
+		width: 33%;
+	}
+`;
+
 /**
  * Image mask gradient has additional colour stops to emulate a non-linear
  * ease in / ease out curve to make the transition smoother. Values were
@@ -156,6 +170,25 @@ const overlayStyles = css`
 		rgb(0, 0, 0) 64px
 	);
 	backdrop-filter: blur(12px) brightness(0.5);
+`;
+
+const immersiveOverlayStyles = css`
+	${from.tablet} {
+		height: 100%;
+		padding-top: ${space[2]}px;
+		mask-image: linear-gradient(
+			270deg,
+			transparent 0px,
+			rgba(0, 0, 0, 0.0381) 8px,
+			rgba(0, 0, 0, 0.1464) 16px,
+			rgba(0, 0, 0, 0.3087) 24px,
+			rgba(0, 0, 0, 0.5) 32px,
+			rgba(0, 0, 0, 0.6913) 40px,
+			rgba(0, 0, 0, 0.8536) 48px,
+			rgba(0, 0, 0, 0.9619) 56px,
+			rgb(0, 0, 0) 64px
+		);
+	}
 `;
 
 const podcastImageContainerStyles = css`
@@ -324,6 +357,7 @@ export const FeatureCard = ({
 	galleryCount,
 	podcastImage,
 	audioDuration,
+	isImmersive = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -425,7 +459,12 @@ export const FeatureCard = ({
 								{/* This image overlay is styled when the CardLink is hovered */}
 								<div className="image-overlay" />
 
-								<div css={contentStyles}>
+								<div
+									css={[
+										contentStyles,
+										isImmersive && immersiveContentStyles,
+									]}
+								>
 									{mainMedia?.type === 'Audio' &&
 										!!podcastImage?.src && (
 											<div
@@ -450,7 +489,13 @@ export const FeatureCard = ({
 												</div>
 											</div>
 										)}
-									<div css={overlayStyles}>
+									<div
+										css={[
+											overlayStyles,
+											isImmersive &&
+												immersiveOverlayStyles,
+										]}
+									>
 										{/**
 										 * Without the wrapping div the headline and
 										 * byline would have space inserted between
