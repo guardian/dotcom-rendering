@@ -1,7 +1,6 @@
 import { isUndefined } from '@guardian/libs';
 import type { Loading } from '../components/CardPicture';
 import { FrontCard } from '../components/FrontCard';
-import { palette } from '../palette';
 import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 
 type TrailProps = {

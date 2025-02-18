@@ -1,5 +1,4 @@
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
-import { palette } from '../palette';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
@@ -18,7 +17,7 @@ type Props = {
 	absoluteServerTimes: boolean;
 };
 
-/*
+/*ø
  * Note:
  * dynamic/package does not use cardWrappers as
  * most of the card configurations are custom and not used

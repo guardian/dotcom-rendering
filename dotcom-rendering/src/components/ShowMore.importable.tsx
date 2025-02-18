@@ -18,7 +18,6 @@ import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import type { EditionId } from '../lib/edition';
 import { useApi } from '../lib/useApi';
 import { enhanceCards } from '../model/enhanceCards';
-import { palette } from '../palette';
 import type { DCRContainerPalette, FEFrontCard } from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
