@@ -14,12 +14,15 @@ const BASE_URL = `http://localhost:${PORT}`;
 const loadPage = async ({
 	page,
 	path,
+	queryParams: searchParams = {},
+	fragment,
 	waitUntil = 'domcontentloaded',
 	region = 'GB',
 	preventSupportBanner = true,
 }: {
 	page: Page;
 	path: string;
+	queryParams?: Record<string, string>;
 	waitUntil?: 'domcontentloaded' | 'load';
 	region?: 'GB' | 'US' | 'AU' | 'INT';
 	preventSupportBanner?: boolean;
@@ -43,9 +46,16 @@ const loadPage = async ({
 			preventSupportBanner,
 		},
 	);
+	const params = new URLSearchParams({
+		adtest: 'fixed-puppies-ci',
+		...searchParams,
+	});
+	const paramsString = `?${params.toString()}`;
 	// The default Playwright waitUntil: 'load' ensures all requests have completed
 	// Use 'domcontentloaded' to speed up tests and prevent hanging requests from timing out tests
-	await page.goto(`${BASE_URL}${path}`, { waitUntil });
+	await page.goto(`${BASE_URL}${path}${paramsString}`, {
+		waitUntil,
+	});
 };
 
 /**
