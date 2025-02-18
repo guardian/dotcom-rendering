@@ -20,7 +20,6 @@ import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
-import { GutterAskWrapper } from './marketing/gutters/GutterAskWrapper';
 
 interface LiveblogGutterAskBuilderProps {
 	sectionId: string | undefined;
@@ -41,6 +40,7 @@ const LiveblogGutterAskBuilder = ({
 }: LiveblogGutterAskBuilderProps) => {
 	const [supportGutterResponse, setSupportGutterResponse] =
 		useState<ModuleData<GutterProps> | null>(null);
+	const [Gutter, setGutter] = useState<React.ElementType<GutterProps>>();
 
 	const { renderingTarget } = useConfig();
 	const isSignedIn = useIsSignedIn();
@@ -78,6 +78,20 @@ const LiveblogGutterAskBuilder = ({
 				if (response.data) {
 					const { module } = response.data;
 					setSupportGutterResponse(module);
+
+					import(`./marketing/gutters/GutterAskWrapper`)
+						.then((gutterModule) => {
+							setGutter(() => gutterModule.GutterAskWrapper);
+						})
+						.catch((err) => {
+							const msg = `Error importing GutterLiveBlog: ${String(
+								err,
+							)}`;
+							window.guardian.modules.sentry.reportError(
+								new Error(msg),
+								'rr-gutter-liveblog-dynamic-import',
+							);
+						});
 				}
 			})
 			.catch((error) => {
@@ -99,7 +113,7 @@ const LiveblogGutterAskBuilder = ({
 		tags,
 	]);
 
-	if (supportGutterResponse) {
+	if (supportGutterResponse && !isUndefined(Gutter)) {
 		const { props } = supportGutterResponse;
 
 		const tracking: Tracking = {
@@ -120,7 +134,7 @@ const LiveblogGutterAskBuilder = ({
 		return (
 			<>
 				<div css={stickyLeft}>
-					<GutterAskWrapper {...enrichedProps} />
+					<Gutter {...enrichedProps} />
 				</div>
 			</>
 		);
