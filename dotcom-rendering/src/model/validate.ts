@@ -3,6 +3,7 @@ import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import type { FEFrontType } from '../../src/types/front';
+import type { FEFootballDataPage } from '../feFootballDataPage';
 import type { FETagPage } from '../frontend/feTagPage';
 import tagPageSchema from '../frontend/schemas/feTagPage.json';
 import type { Block } from '../types/blocks';
@@ -12,6 +13,7 @@ import type { FENewslettersPageType } from '../types/newslettersPage';
 import articleSchema from './article-schema.json';
 import blockSchema from './block-schema.json';
 import editionsCrosswordSchema from './editions-crossword-schema.json';
+import footballDataPageSchema from './fe-football-data-page-schema.json';
 import frontSchema from './front-schema.json';
 import newslettersPageSchema from './newsletter-page-schema.json';
 
@@ -34,6 +36,9 @@ const validateAllEditorialNewslettersPage = ajv.compile<FENewslettersPageType>(
 const validateBlock = ajv.compile<Block[]>(blockSchema);
 const validateEditionsCrossword = ajv.compile<FEEditionsCrosswords>(
 	editionsCrosswordSchema,
+);
+const validateFootballDataPage = ajv.compile<FEFootballDataPage>(
+	footballDataPageSchema,
 );
 
 export const validateAsArticleType = (data: unknown): FEArticleType => {
@@ -99,5 +104,21 @@ export const validateAsBlock = (data: unknown): Block[] => {
 	throw new TypeError(
 		`Unable to validate request body for block.\n
             ${JSON.stringify(validateBlock.errors, null, 2)}`,
+	);
+};
+
+export const validateAsFootballDataPageType = (
+	data: unknown,
+): FEFootballDataPage => {
+	if (validateFootballDataPage(data)) return data;
+
+	const url =
+		isObject(data) && isObject(data.config) && isString(data.config.pageId)
+			? data.config.pageId
+			: 'unknown url';
+
+	throw new TypeError(
+		`Unable to validate request body for url ${url}.\n
+            ${JSON.stringify(validateFootballDataPage.errors, null, 2)}`,
 	);
 };
