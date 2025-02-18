@@ -70,18 +70,16 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 			</div>
 
 			<main id="maincontent" data-layout="FootballDataPageLayout">
-				<Section fullWidth={true}>
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<FootballMatchesPageWrapper
-							nations={nationsHardcoded}
-							guardianBaseUrl={footballData.guardianBaseURL}
-							// ToDo: determine based on URL
-							kind={'Fixture'}
-							initialDays={initialDaysHardcoded}
-							edition={footballData.editionId}
-						/>
-					</Island>
-				</Section>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<FootballMatchesPageWrapper
+						nations={nationsHardcoded}
+						guardianBaseUrl={footballData.guardianBaseURL}
+						// ToDo: determine based on URL
+						kind={'Fixture'}
+						initialDays={initialDaysHardcoded}
+						edition={footballData.editionId}
+					/>
+				</Island>
 			</main>
 
 			{NAV.subNavSections && (
