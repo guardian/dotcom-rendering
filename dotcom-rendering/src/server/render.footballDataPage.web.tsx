@@ -72,7 +72,7 @@ export const renderFootballDataPage = (footballData: FEFootballDataPage) => {
 			revisionNumber: footballData.config.revisionNumber,
 			sentryPublicApiKey: footballData.config.sentryPublicApiKey,
 			sentryHost: footballData.config.sentryHost,
-			keywordIds: footballData.config.keywordIds,
+			keywordIds: '', // TODO: we need to make this field optional in createGuardian
 			dfpAccountId: footballData.config.dfpAccountId,
 			adUnit: footballData.config.adUnit,
 			ajaxUrl: footballData.config.ajaxUrl,
@@ -84,7 +84,7 @@ export const renderFootballDataPage = (footballData: FEFootballDataPage) => {
 			contentType: footballData.config.contentType,
 			googleRecaptchaSiteKey: footballData.config.googleRecaptchaSiteKey,
 		}),
-		keywords: footballData.config.keywords,
+		keywords: '', // TODO: we need to make this field optional in createGuardian
 		renderingTarget: 'Web',
 		weAreHiring: !!footballData.config.switches.weAreHiring,
 		config,
