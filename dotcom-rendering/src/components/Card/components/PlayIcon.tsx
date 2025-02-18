@@ -1,17 +1,18 @@
 import { css } from '@emotion/react';
-import { from, palette } from '@guardian/source/foundations';
+import { from, palette as sourcePalette } from '@guardian/source/foundations';
 import type { ThemeIcon } from '@guardian/source/react-components';
-import { SvgMediaControlsPlay } from '@guardian/source/react-components';
-import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
+import { SvgMediaControlsPlay as WidePlayIcon } from '@guardian/source/react-components';
+import { SvgMediaControlsPlay as NarrowPlayIcon } from '../../../components/SvgMediaControlsPlay';
+import { palette } from '../../../palette';
 
-type PlayButtonSize = keyof typeof sizes;
+export type PlayButtonSize = keyof typeof sizes;
 
 const sizes = {
 	small: { button: 40, icon: 32 },
 	large: { button: 80, icon: 72 },
 } as const satisfies Record<string, { button: number; icon: number }>;
 
-const iconStyles = (
+const wideIconStyles = (
 	size: PlayButtonSize,
 	sizeOnMobile: Extract<PlayButtonSize, 'small' | 'large'>,
 ) => css`
@@ -42,48 +43,59 @@ const iconStyles = (
 	}
 `;
 
+const narrowPlayIconWidth = 56;
+const narrowStyles = css`
+	position: absolute;
+	/**
+	 * Subject to change. We will wait to see how fronts editors use the
+	 * headlines and standfirsts before we decide on a final position.
+	 */
+	top: 35%;
+	left: calc(50% - ${narrowPlayIconWidth / 2}px);
+	width: ${narrowPlayIconWidth}px;
+	height: ${narrowPlayIconWidth}px;
+	background-color: ${palette('--feature-card-play-icon-background')};
+	opacity: 0.7;
+	border-radius: 50%;
+	border: 1px solid ${palette('--feature-card-play-icon-border')};
+	fill: ${palette('--feature-card-play-icon-fill')};
+`;
+
 const theme = {
-	fill: palette.neutral[100],
+	fill: sourcePalette.neutral[100],
 } satisfies Partial<ThemeIcon>;
 
-const getIconSizeOnDesktop = (imageSize: ImageSizeType) => {
-	switch (imageSize) {
-		case 'jumbo':
-		case 'large':
-		case 'podcast':
-		case 'carousel':
-		case 'medium':
-		case 'feature':
-		case 'feature-large':
-			return 'large';
-		case 'small':
-			return 'small';
-	}
-};
-
-const getIconSizeOnMobile = (imagePositionOnMobile: ImagePositionType) =>
-	imagePositionOnMobile === 'left' || imagePositionOnMobile === 'right'
-		? 'small'
-		: 'large';
+type Props =
+	| {
+			iconWidth: 'wide';
+			iconSizeOnDesktop: PlayButtonSize;
+			iconSizeOnMobile: PlayButtonSize;
+	  }
+	| {
+			iconWidth: 'narrow';
+			iconSizeOnDesktop?: never;
+			iconSizeOnMobile?: never;
+	  };
 
 export const PlayIcon = ({
-	imageSize,
-	imagePositionOnMobile,
-}: {
-	imageSize: ImageSizeType;
-	imagePositionOnMobile: ImagePositionType;
-}) => {
+	iconWidth,
+	iconSizeOnDesktop,
+	iconSizeOnMobile,
+}: Props) => {
 	return (
 		<div
 			className="play-icon"
 			css={[
-				iconStyles(
-					getIconSizeOnDesktop(imageSize),
-					getIconSizeOnMobile(imagePositionOnMobile),
-				),
+				iconWidth === 'narrow' && narrowStyles,
+				iconWidth === 'wide' &&
+					wideIconStyles(iconSizeOnDesktop, iconSizeOnMobile),
 			]}
 		>
-			<SvgMediaControlsPlay theme={theme} />
+			{iconWidth === 'narrow' ? (
+				<NarrowPlayIcon theme={theme} />
+			) : (
+				<WidePlayIcon theme={theme} />
+			)}
 		</div>
 	);
 };

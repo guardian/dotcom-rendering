@@ -486,7 +486,7 @@ const decideDailyArticleCount = (): number => {
 const decideAuxiaProxyReaderPersonalData =
 	async (): Promise<AuxiaGateReaderPersonalData> => {
 		const browserId =
-			getCookie({ name: 'bwid', shouldMemoize: true }) ?? '';
+			getCookie({ name: 'bwid', shouldMemoize: true }) ?? undefined;
 		const dailyArticleCount = decideDailyArticleCount();
 		const hasConsent = await hasCmpConsentForBrowserId();
 		const isSupporter = decideIsSupporter();

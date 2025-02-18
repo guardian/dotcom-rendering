@@ -4,10 +4,6 @@ import type { Decorator, Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import type { AdTargeting } from '../../types/commercial';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from '../Card/components/ImageWrapper';
 import type { Props } from './YoutubeAtom';
 import { YoutubeAtom } from './YoutubeAtom';
 
@@ -129,9 +125,6 @@ const adTargetingAndConsentGiven = {
 	...consentGiven,
 } satisfies AdTargeting & ConsentState;
 
-const imagePositionOnMobile: ImagePositionType = 'none';
-const imageSize: ImageSizeType = 'large';
-
 const baseConfiguration = {
 	atomId: 'a2502abd-1373-45a2-b508-3e5a2ec050be',
 	videoId: '-ZCvZmYlQD8',
@@ -153,8 +146,10 @@ const baseConfiguration = {
 	isMainMedia: false,
 	abTestParticipations: {},
 	adTargeting: disableAds,
-	imagePositionOnMobile,
-	imageSize,
+	iconSizeOnDesktop: 'large',
+	iconSizeOnMobile: 'large',
+	hidePillOnMobile: false,
+	showTextOverlay: false,
 	consentState: consentGiven,
 	renderingTarget: 'Web',
 } satisfies Partial<Props>;
@@ -178,26 +173,7 @@ export const NoOverlay = {
 	},
 } satisfies Story;
 
-export const WithOverrideImage = {
-	args: {
-		...baseConfiguration,
-		videoId: '3jpXAMwRSu4',
-		alt: 'Microscopic image of COVID',
-		format: {
-			theme: Pillar.News,
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-		},
-		overrideImage:
-			'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=aff4b8255693eb449f13070df88e9cac',
-		height: undefined,
-		width: undefined,
-		title: 'How to stop the spread of coronavirus',
-	},
-	decorators: [OverlayAutoplayExplainer, Container],
-} satisfies Story;
-
-export const WithPosterImage = {
+export const WithImage = {
 	args: {
 		...baseConfiguration,
 		videoId: 'N9Cgy-ke5-s',
@@ -206,28 +182,8 @@ export const WithPosterImage = {
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 		},
-		posterImage:
-			'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/1920.jpg',
+		image: 'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/1920.jpg',
 		title: 'How Donald Trump’s broken promises failed Ohio | Anywhere but Washington',
-	},
-	decorators: [OverlayAutoplayExplainer, Container],
-} satisfies Story;
-
-export const WithOverlayAndPosterImage = {
-	args: {
-		...baseConfiguration,
-		videoId: WithPosterImage.args.videoId,
-		format: {
-			theme: Pillar.Opinion,
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-		},
-		posterImage: WithPosterImage.args.posterImage,
-		overrideImage:
-			'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg',
-		title: 'How Donald Trump’s broken promises failed Ohio',
-		kicker: 'Breaking News',
-		showTextOverlay: true,
 	},
 	decorators: [OverlayAutoplayExplainer, Container],
 } satisfies Story;
@@ -236,11 +192,11 @@ export const GiveConsent = {
 	args: {
 		...baseConfiguration,
 		...consentNotGiven,
-		videoId: WithOverrideImage.args.videoId,
-		alt: WithOverrideImage.args.alt,
-		format: WithOverrideImage.args.format,
-		title: WithOverrideImage.args.title,
-		overrideImage: WithOverlayAndPosterImage.args.overrideImage,
+		videoId: WithImage.args.videoId,
+		alt: WithImage.args.alt,
+		format: WithImage.args.format,
+		title: WithImage.args.title,
+		image: WithImage.args.image,
 	},
 	render: function Render(args) {
 		const [consented, setConsented] = useState(false);
@@ -385,7 +341,6 @@ export const PausesOffscreen = {
  * The ad enabled tests are a convenience for manual testing.
  *
  */
-
 export const NoConsentWithAds = {
 	args: {
 		...NoConsent.args,
@@ -407,35 +362,10 @@ export const NoOverlayWithAds = {
 	},
 } satisfies Story;
 
-export const WithOverrideImageWithAds = {
+export const WithimageWithAds = {
 	args: {
-		...WithOverrideImage.args,
+		...WithImage.args,
 		...adTargetingAndConsentGiven,
-		overrideImage: WithOverlayAndPosterImage.args.overrideImage,
-	},
-	decorators: [Container],
-	parameters: {
-		chromatic: { disableSnapshot: true },
-	},
-} satisfies Story;
-
-export const WithPosterImageWithAds = {
-	args: {
-		...WithPosterImage.args,
-		...adTargetingAndConsentGiven,
-	},
-	decorators: [Container],
-	parameters: {
-		chromatic: { disableSnapshot: true },
-	},
-} satisfies Story;
-
-export const WithOverlayAndPosterImageWithAds = {
-	args: {
-		...WithOverlayAndPosterImage.args,
-		...adTargetingAndConsentGiven,
-		kicker: undefined,
-		showTextOverlay: undefined,
 	},
 	decorators: [Container],
 	parameters: {
@@ -510,8 +440,7 @@ export const LiveStream = {
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 		},
-		overrideImage:
-			'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=aff4b8255693eb449f13070df88e9cac',
+		image: 'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=aff4b8255693eb449f13070df88e9cac',
 		height: undefined,
 		width: undefined,
 		title: 'How to stop the spread of coronavirus',

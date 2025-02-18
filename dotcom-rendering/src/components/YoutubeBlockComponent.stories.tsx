@@ -39,7 +39,7 @@ export const Default = () => {
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
-				nisi ut aliquip ex ea commodo consequat.{' '}
+				nisi ut aliquip ex ea commodo consequat.
 			</p>
 			<YoutubeBlockComponent
 				format={{
@@ -54,12 +54,16 @@ export const Default = () => {
 				expired={false}
 				stickyVideos={false}
 				enableAds={false}
+				showTextOverlay={false}
+				iconSizeOnDesktop="large"
+				iconSizeOnMobile="large"
+				hidePillOnMobile={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
-				nisi ut aliquip ex ea commodo consequat.{' '}
+				nisi ut aliquip ex ea commodo consequat.
 			</p>
 		</Wrapper>
 	);
@@ -73,7 +77,7 @@ export const Vertical = () => {
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
-				nisi ut aliquip ex ea commodo consequat.{' '}
+				nisi ut aliquip ex ea commodo consequat.
 			</p>
 			<YoutubeBlockComponent
 				format={{
@@ -90,12 +94,16 @@ export const Vertical = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
+				showTextOverlay={false}
+				iconSizeOnDesktop="large"
+				iconSizeOnMobile="large"
+				hidePillOnMobile={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
-				nisi ut aliquip ex ea commodo consequat.{' '}
+				nisi ut aliquip ex ea commodo consequat.
 			</p>
 		</Wrapper>
 	);
@@ -109,7 +117,7 @@ export const Expired = () => {
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
-				nisi ut aliquip ex ea commodo consequat.{' '}
+				nisi ut aliquip ex ea commodo consequat.
 			</p>
 			<YoutubeBlockComponent
 				format={{
@@ -127,12 +135,16 @@ export const Expired = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
+				showTextOverlay={false}
+				iconSizeOnDesktop="large"
+				iconSizeOnMobile="large"
+				hidePillOnMobile={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
-				nisi ut aliquip ex ea commodo consequat.{' '}
+				nisi ut aliquip ex ea commodo consequat.
 			</p>
 		</Wrapper>
 	);
@@ -146,7 +158,7 @@ export const WithOverlayImage = () => {
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
-				nisi ut aliquip ex ea commodo consequat.{' '}
+				nisi ut aliquip ex ea commodo consequat.
 			</p>
 			<YoutubeBlockComponent
 				format={{
@@ -165,26 +177,30 @@ export const WithOverlayImage = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
+				showTextOverlay={false}
+				iconSizeOnDesktop="large"
+				iconSizeOnMobile="large"
+				hidePillOnMobile={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
-				nisi ut aliquip ex ea commodo consequat.{' '}
+				nisi ut aliquip ex ea commodo consequat.
 			</p>
 		</Wrapper>
 	);
 };
 WithOverlayImage.storyName = 'with overlay image';
 
-export const WithPosterImage = () => {
+export const Withimage = () => {
 	return (
 		<Wrapper>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
-				nisi ut aliquip ex ea commodo consequat.{' '}
+				nisi ut aliquip ex ea commodo consequat.
 			</p>
 			<YoutubeBlockComponent
 				format={{
@@ -224,26 +240,32 @@ export const WithPosterImage = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
+				showTextOverlay={false}
+				iconSizeOnDesktop="large"
+				iconSizeOnMobile="large"
+				hidePillOnMobile={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
-				nisi ut aliquip ex ea commodo consequat.{' '}
+				nisi ut aliquip ex ea commodo consequat.
 			</p>
 		</Wrapper>
 	);
 };
-WithPosterImage.storyName = 'with poster image';
+Withimage.storyName = 'with poster image';
 
 export const WithPosterAndOverlayImage = () => {
+	const title =
+		"Prince Harry and Meghan's 'bombshell' plans explained – video";
 	return (
 		<Wrapper>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
-				nisi ut aliquip ex ea commodo consequat.{' '}
+				nisi ut aliquip ex ea commodo consequat.
 			</p>
 			<YoutubeBlockComponent
 				format={{
@@ -252,7 +274,7 @@ export const WithPosterAndOverlayImage = () => {
 					theme: Pillar.News,
 				}}
 				assetId="d2Q5bXvEgMg"
-				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
+				mediaTitle={title}
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
 				index={0}
 				expired={false}
@@ -284,12 +306,16 @@ export const WithPosterAndOverlayImage = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
+				showTextOverlay={false}
+				iconSizeOnDesktop="large"
+				iconSizeOnMobile="large"
+				hidePillOnMobile={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
-				nisi ut aliquip ex ea commodo consequat.{' '}
+				nisi ut aliquip ex ea commodo consequat.
 			</p>
 		</Wrapper>
 	);
@@ -297,13 +323,16 @@ export const WithPosterAndOverlayImage = () => {
 WithPosterAndOverlayImage.storyName = 'with poster and overlay image';
 
 export const WithShowMainVideoFlagOff = () => {
+	const title =
+		"Prince Harry and Meghan's 'bombshell' plans explained – video";
+
 	return (
 		<Wrapper>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
-				nisi ut aliquip ex ea commodo consequat.{' '}
+				nisi ut aliquip ex ea commodo consequat.
 			</p>
 			<YoutubeBlockComponent
 				format={{
@@ -312,7 +341,7 @@ export const WithShowMainVideoFlagOff = () => {
 					theme: Pillar.News,
 				}}
 				assetId="d2Q5bXvEgMg"
-				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
+				mediaTitle={title}
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
 				index={0}
 				expired={false}
@@ -344,12 +373,16 @@ export const WithShowMainVideoFlagOff = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
+				showTextOverlay={false}
+				iconSizeOnDesktop="large"
+				iconSizeOnMobile="large"
+				hidePillOnMobile={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
-				nisi ut aliquip ex ea commodo consequat.{' '}
+				nisi ut aliquip ex ea commodo consequat.
 			</p>
 		</Wrapper>
 	);
