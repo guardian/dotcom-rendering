@@ -38,9 +38,10 @@ const LiveblogGutterAskBuilder = ({
 	pageViewId,
 	pageUrl,
 }: LiveblogGutterAskBuilderProps) => {
-	const [supportGutterResponse, setSupportGutterResponse] =
+	const [GutterVariantResponse, setGutterVariantResponse] =
 		useState<ModuleData<GutterProps> | null>(null);
-	const [Gutter, setGutter] = useState<React.ElementType<GutterProps>>();
+	const [GutterWrapperComponent, setGutterWrapperComponent] =
+		useState<React.ElementType<GutterProps>>();
 
 	const { renderingTarget } = useConfig();
 	const isSignedIn = useIsSignedIn();
@@ -77,11 +78,13 @@ const LiveblogGutterAskBuilder = ({
 			.then((response: ModuleDataResponse<GutterProps>) => {
 				if (response.data) {
 					const { module } = response.data;
-					setSupportGutterResponse(module);
+					setGutterVariantResponse(module);
 
 					import(`./marketing/gutters/GutterAskWrapper`)
 						.then((gutterModule) => {
-							setGutter(() => gutterModule.GutterAskWrapper);
+							setGutterWrapperComponent(
+								() => gutterModule.GutterAskWrapper,
+							);
 						})
 						.catch((err) => {
 							const msg = `Error importing GutterLiveBlog: ${String(
@@ -113,8 +116,8 @@ const LiveblogGutterAskBuilder = ({
 		tags,
 	]);
 
-	if (supportGutterResponse && !isUndefined(Gutter)) {
-		const { props } = supportGutterResponse;
+	if (GutterVariantResponse && !isUndefined(GutterWrapperComponent)) {
+		const { props } = GutterVariantResponse;
 
 		const tracking: Tracking = {
 			...props.tracking,
@@ -134,7 +137,7 @@ const LiveblogGutterAskBuilder = ({
 		return (
 			<>
 				<div css={stickyLeft}>
-					<Gutter {...enrichedProps} />
+					<GutterWrapperComponent {...enrichedProps} />
 				</div>
 			</>
 		);
