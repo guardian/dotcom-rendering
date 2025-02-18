@@ -13,6 +13,7 @@ type Props = {
 	absoluteServerTimes: boolean;
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
+	collectionId: number;
 };
 
 /**
@@ -28,6 +29,7 @@ export const ScrollableFeature = ({
 	absoluteServerTimes,
 	imageLoading,
 	aspectRatio,
+	collectionId,
 }: Props) => {
 	return (
 		<ScrollableCarousel
@@ -74,6 +76,7 @@ export const ScrollableFeature = ({
 							podcastImage={card.podcastImage}
 							audioDuration={card.audioDuration}
 							trailText={undefined}
+							collectionId={collectionId}
 						/>
 					</ScrollableCarousel.Item>
 				);
