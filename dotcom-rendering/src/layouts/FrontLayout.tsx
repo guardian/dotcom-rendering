@@ -43,7 +43,6 @@ import {
 	getMobileAdPositions,
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
-import { testVideoCollection } from '../lib/loop-video-ab-test-data';
 import { ophanComponentId } from '../lib/ophan-helpers';
 import type { NavType } from '../model/extract-nav';
 import { palette as schemePalette } from '../palette';
@@ -109,13 +108,7 @@ const decideLeftContent = (
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
-		config: {
-			abTests,
-			hasPageSkin: hasPageSkinConfig,
-			isPaidContent,
-			isPreview,
-			pageId,
-		},
+		config: { isPaidContent, hasPageSkin: hasPageSkinConfig, pageId },
 		editionId,
 	} = front;
 
@@ -125,18 +118,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const hasPageSkin = renderAds && hasPageSkinConfig;
 
-	const isInLoopVideoTest = abTests.loopVideoTestVariant === 'variant';
-
-	const filteredCollections = isInLoopVideoTest
-		? [
-				testVideoCollection,
-				...front.pressedPage.collections.filter(
-					(collection) => !isHighlights(collection),
-				),
-		  ]
-		: front.pressedPage.collections.filter(
-				(collection) => !isHighlights(collection),
-		  );
+	const filteredCollections = front.pressedPage.collections.filter(
+		(collection) => !isHighlights(collection),
+	);
 
 	const merchHighAdPosition = getMerchHighPosition(filteredCollections);
 
@@ -152,6 +136,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		front.isNetworkFront && front.deeplyRead && front.deeplyRead.length > 0;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
+
+	const { abTests, isPreview } = front.config;
 
 	const { absoluteServerTimes = false } = front.config.switches;
 
@@ -286,13 +272,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				)}
 				{filteredCollections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
-					const trails = collection.curated
-						.concat(collection.backfill)
-						.map((tr) => ({
-							...tr,
-							isInLoopVideoTest: isInLoopVideoTest && index === 0,
-						}));
-
+					const trails = collection.curated.concat(
+						collection.backfill,
+					);
 					const [trail] = trails;
 
 					// There are some containers that have zero trails. We don't want to render these
