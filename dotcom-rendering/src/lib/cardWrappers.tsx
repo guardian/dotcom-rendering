@@ -79,7 +79,6 @@ export const Card100Media50 = ({
 					? 'horizontal'
 					: 'vertical'
 			}
-			trailTextColour={palette('--card-headline')}
 		/>
 	);
 };
@@ -132,7 +131,6 @@ export const Card100Media75 = ({
 					? 'horizontal'
 					: 'vertical'
 			}
-			trailTextColour={palette('--card-headline')}
 		/>
 	);
 };
@@ -174,7 +172,6 @@ export const Card100Media100 = ({
 			isTagPage={isTagPage}
 			supportingContent={trail.supportingContent?.slice(0, 4)}
 			supportingContentAlignment="horizontal"
-			trailTextColour={palette('--card-headline')}
 		/>
 	);
 };
@@ -218,7 +215,6 @@ export const Card100Media100Tall = ({
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			supportingContentAlignment="vertical"
 			trailText={trail.trailText}
-			trailTextColour={palette('--card-headline')}
 		/>
 	);
 };
@@ -263,7 +259,6 @@ export const Card75Media50Right = ({
 			imagePositionOnMobile="top"
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
-			trailTextColour={palette('--card-headline')}
 			headlineSizes={{ desktop: 'small', tablet: 'xsmall' }}
 		/>
 	);
@@ -310,7 +305,6 @@ export const Card75Media50Left = ({
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'small', tablet: 'xsmall' }}
-			trailTextColour={palette('--card-headline')}
 		/>
 	);
 };
@@ -352,7 +346,6 @@ export const Card25Media25 = ({
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
 			canPlayInline={false}
-			trailTextColour={palette('--card-headline')}
 		/>
 	);
 };
@@ -394,7 +387,6 @@ export const Card25Media25SmallHeadline = ({
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'xxsmall', tablet: 'xxsmall' }}
 			canPlayInline={false}
-			trailTextColour={palette('--card-headline')}
 		/>
 	);
 };
@@ -443,7 +435,6 @@ export const Card25Media25Tall = ({
 			}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			canPlayInline={false}
-			trailTextColour={palette('--card-headline')}
 		/>
 	);
 };
@@ -484,7 +475,6 @@ export const Card25Media25TallNoTrail = ({
 			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			canPlayInline={false}
-			trailTextColour={palette('--card-headline')}
 		/>
 	);
 };
@@ -525,7 +515,6 @@ export const Card25Media25TallSmallHeadline = ({
 			headlineSizes={{ desktop: 'xxsmall', tablet: 'xxsmall' }}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			canPlayInline={false}
-			trailTextColour={palette('--card-headline')}
 		/>
 	);
 };
@@ -566,7 +555,6 @@ export const Card50Media50 = ({
 			absoluteServerTimes={absoluteServerTimes}
 			supportingContent={trail.supportingContent?.slice(0, 3)}
 			supportingContentAlignment="horizontal"
-			trailTextColour={palette('--card-headline')}
 		/>
 	);
 };
@@ -609,7 +597,6 @@ export const Card50Media50Tall = ({
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'small', tablet: 'xsmall' }}
-			trailTextColour={palette('--card-headline')}
 		/>
 	);
 };
@@ -649,7 +636,6 @@ export const Card66Media66 = ({
 			imageSize="large"
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
-			trailTextColour={palette('--card-headline')}
 		/>
 	);
 };
@@ -688,7 +674,6 @@ export const Card33Media33 = ({
 			imagePositionOnMobile="left"
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
-			trailTextColour={palette('--card-headline')}
 			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
 		/>
 	);
@@ -729,7 +714,6 @@ export const Card33Media33Tall = ({
 			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			supportingContentAlignment="vertical"
-			trailTextColour={palette('--card-headline')}
 		/>
 	);
 };
@@ -771,7 +755,6 @@ export const Card33Media33MobileTopTall = ({
 			headlineSizes={{ desktop: 'xsmall', tablet: 'xsmall' }}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			supportingContentAlignment="vertical"
-			trailTextColour={palette('--card-headline')}
 		/>
 	);
 };
@@ -807,7 +790,6 @@ export const CardDefault = ({
 			headlineSizes={{ desktop: 'xxsmall' }}
 			canPlayInline={false}
 			isTagPage={isTagPage}
-			trailTextColour={palette('--card-headline')}
 		/>
 	);
 };
@@ -845,7 +827,6 @@ export const CardDefaultMedia = ({
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'xxsmall' }}
 			canPlayInline={false}
-			trailTextColour={palette('--card-headline')}
 		/>
 	);
 };
@@ -883,7 +864,6 @@ export const CardDefaultMediaMobile = ({
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'xxsmall' }}
 			canPlayInline={false}
-			trailTextColour={palette('--card-headline')}
 		/>
 	);
 };

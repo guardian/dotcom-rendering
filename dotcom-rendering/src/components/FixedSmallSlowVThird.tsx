@@ -59,7 +59,6 @@ export const FixedSmallSlowVThird = ({
 									imagePositionOnMobile="none"
 									imageSize="small"
 									imageLoading={imageLoading}
-									trailTextColour={palette('--card-headline')}
 								/>
 							</LI>
 						);

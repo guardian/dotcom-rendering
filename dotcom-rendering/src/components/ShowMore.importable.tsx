@@ -181,9 +181,6 @@ export const ShowMore = ({
 											}}
 											imageLoading="eager"
 											absoluteServerTimes={false}
-											trailTextColour={palette(
-												'--card-headline',
-											)}
 										/>
 									</LI>
 								);

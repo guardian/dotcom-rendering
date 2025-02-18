@@ -143,8 +143,6 @@ export type Props = {
 	showTopBarDesktop?: boolean;
 	showTopBarMobile?: boolean;
 	trailTextSize?: TrailTextSize;
-	/** If specified, overrides trail text colour */
-	trailTextColour?: string;
 	/** The square podcast series image, if it exists for a card */
 	podcastImage?: PodcastSeriesImage;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
@@ -404,7 +402,6 @@ export const Card = ({
 	showTopBarDesktop = true,
 	showTopBarMobile = false,
 	trailTextSize,
-	trailTextColour,
 	podcastImage,
 	showKickerImage = false,
 	galleryCount,
@@ -1111,7 +1108,6 @@ export const Card = ({
 							{!!trailText && media?.type !== 'podcast' && (
 								<TrailText
 									trailText={trailText}
-									trailTextColour={trailTextColour}
 									trailTextSize={trailTextSize}
 									padTop={headlinePosition === 'inner'}
 									hideUntil={hideTrailTextUntil()}
