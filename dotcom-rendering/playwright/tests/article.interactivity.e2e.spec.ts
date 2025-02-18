@@ -61,7 +61,8 @@ test.describe('Interactivity', () => {
 			await disableCMP(context);
 			await loadPage({
 				page,
-				path: `/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comments`,
+				path: `/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster`,
+				fragment: '#comments',
 			});
 			await expectToExist(page, '[data-testid=discussion]');
 		});
@@ -73,7 +74,8 @@ test.describe('Interactivity', () => {
 			await disableCMP(context);
 			await loadPage({
 				page,
-				path: `/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comment-154433663`,
+				path: `/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster`,
+				fragment: '#comment-154433663',
 			});
 			await waitForIsland(page, 'DiscussionWeb', {});
 			await expectToBeVisible(page, '[id=comment-154433663]');

@@ -10,11 +10,12 @@ const BASE_URL = `http://localhost:${PORT}`;
  * - default the base url and port
  * - default the geo region to GB
  * - prevent the support banner from showing
+ * - pass an adtest param to ensure we get a fixed test ad
  */
 const loadPage = async ({
 	page,
 	path,
-	queryParams: searchParams = {},
+	queryParams = {},
 	fragment,
 	waitUntil = 'domcontentloaded',
 	region = 'GB',
@@ -49,7 +50,7 @@ const loadPage = async ({
 	);
 	const params = new URLSearchParams({
 		adtest: 'fixed-puppies-ci',
-		...searchParams,
+		...queryParams,
 	});
 	const paramsString = `?${params.toString()}`;
 	// The default Playwright waitUntil: 'load' ensures all requests have completed

@@ -15,7 +15,11 @@ test.describe('Epics', () => {
 		await disableCMP(context);
 		await loadPage({
 			page,
-			path: `/Article/${blogUrl}?live=true&force-liveblog-epic=true`,
+			path: `/Article/${blogUrl}`,
+			queryParams: {
+				live: 'true',
+				'force-liveblog-epic': 'true',
+			},
 		});
 
 		// Wait for hydration of the Epic
