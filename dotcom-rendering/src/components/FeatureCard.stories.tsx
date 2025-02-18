@@ -31,6 +31,7 @@ const cardProps: CardProps = {
 	showPulsingDot: false,
 	showClock: false,
 	imageSize: 'feature',
+	collectionId: 1,
 };
 
 const aBasicLink = {

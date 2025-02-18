@@ -188,6 +188,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						highlightsCollection.displayName,
 					)}
 					frontId={front.pressedPage.id}
+					collectionId={0}
 				/>
 			)
 		);
@@ -521,6 +522,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											)
 										}
 										sectionId={ophanName}
+										collectionId={index + 1}
 									/>
 								</LabsSection>
 								{mobileAdPositions.includes(index) && (
@@ -736,6 +738,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)
 									}
 									sectionId={ophanName}
+									collectionId={index + 1}
 								/>
 							</FrontSection>
 							{mobileAdPositions.includes(index) && (
