@@ -11,13 +11,19 @@ const BASE_URL = `http://localhost:${PORT}`;
  * - default the geo region to GB
  * - prevent the support banner from showing
  */
-const loadPage = async (
-	page: Page,
-	path: string,
-	waitUntil: 'load' | 'domcontentloaded' = 'domcontentloaded',
+const loadPage = async ({
+	page,
+	path,
+	waitUntil = 'domcontentloaded',
 	region = 'GB',
 	preventSupportBanner = true,
-): Promise<void> => {
+}: {
+	page: Page;
+	path: string;
+	waitUntil?: 'domcontentloaded' | 'load';
+	region?: 'GB' | 'US' | 'AU' | 'INT';
+	preventSupportBanner?: boolean;
+}): Promise<void> => {
 	await page.addInitScript(
 		(args) => {
 			// force geo region
@@ -32,7 +38,10 @@ const loadPage = async (
 				);
 			}
 		},
-		{ region, preventSupportBanner },
+		{
+			region,
+			preventSupportBanner,
+		},
 	);
 	// The default Playwright waitUntil: 'load' ensures all requests have completed
 	// Use 'domcontentloaded' to speed up tests and prevent hanging requests from timing out tests
@@ -72,7 +81,7 @@ const loadPageWithOverrides = async (
 			postData,
 		});
 	});
-	await loadPage(page, path);
+	await loadPage({ page, path });
 };
 
 /**
