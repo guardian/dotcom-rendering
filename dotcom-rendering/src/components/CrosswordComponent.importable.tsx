@@ -55,11 +55,6 @@ const Layout: CrosswordProps['Layout'] = ({
 			<div
 				css={css`
 					flex-basis: ${gridWidth}px;
-
-					${from.phablet} {
-						top: ${space[4]}px;
-						align-self: flex-start;
-					}
 				`}
 			>
 				<FocusedClue
