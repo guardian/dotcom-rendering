@@ -104,8 +104,15 @@ const Layout: CrosswordProps['Layout'] = ({
 					gap: ${space[4]}px;
 					align-items: flex-start;
 					min-width: 200px;
-					max-height: ${gridWidth + 100}px;
-					overflow: auto;
+					${from.phablet} {
+						max-height: ${gridWidth + 100}px;
+						overflow: auto;
+					}
+					${from.desktop} {
+						// set back to default
+						max-height: none;
+						overflow: visible;
+					}
 					> * {
 						flex: 1;
 					}
