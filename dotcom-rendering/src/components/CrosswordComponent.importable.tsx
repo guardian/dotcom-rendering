@@ -46,8 +46,7 @@ const Layout: CrosswordProps['Layout'] = ({
 				display: flex;
 				flex-direction: column;
 				gap: ${space[4]}px;
-
-				${from.leftCol} {
+				${from.phablet} {
 					flex-direction: row;
 				}
 			`}
@@ -57,8 +56,7 @@ const Layout: CrosswordProps['Layout'] = ({
 				css={css`
 					flex-basis: ${gridWidth}px;
 
-					${from.leftCol} {
-						position: sticky;
+					${from.phablet} {
 						top: ${space[4]}px;
 						align-self: flex-start;
 					}
@@ -66,16 +64,22 @@ const Layout: CrosswordProps['Layout'] = ({
 			>
 				<FocusedClue
 					additionalCss={css`
-						${from.leftCol} {
+						max-width: ${gridWidth}px;
+						${from.phablet} {
 							display: none;
 						}
 					`}
 				/>
 				<Grid />
-				<div data-print-layout="hide">
+				<div
+					data-print-layout="hide"
+					css={css`
+						max-width: ${gridWidth}px;
+					`}
+				>
 					<FocusedClue
 						additionalCss={css`
-							${from.leftCol} {
+							${from.phablet} {
 								display: none;
 							}
 						`}
@@ -99,7 +103,9 @@ const Layout: CrosswordProps['Layout'] = ({
 					flex-direction: column;
 					gap: ${space[4]}px;
 					align-items: flex-start;
-
+					min-width: 200px;
+					max-height: ${gridWidth + 100}px;
+					overflow: auto;
 					> * {
 						flex: 1;
 					}
