@@ -1,7 +1,7 @@
 import type { StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import { FootballMatchesPage } from './FootballMatchesPage.importable';
-import { Default as MatchListDefault } from './FootballMatchList.stories';
+import { initialDays, nations } from '../../fixtures/manual/footballData';
+import { FootballMatchesPage } from './FootballMatchesPage';
 
 const meta = {
 	title: 'Components/Football Matches Page',
@@ -13,18 +13,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Results = {
 	args: {
-		nations: [
-			{
-				name: 'England',
-				competitions: [
-					{ tag: 'football/premierleague', name: 'Premier League' },
-					{ tag: 'football/championship', name: 'Championship' },
-				],
-			},
-		],
+		nations,
 		guardianBaseUrl: 'https://www.theguardian.com',
 		kind: 'Result',
-		initialDays: MatchListDefault.args.initialDays,
+		initialDays,
 		edition: 'UK',
 		goToCompetitionSpecificPage: fn(),
 	},

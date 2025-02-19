@@ -760,17 +760,21 @@ const ShowSignInGateAuxia = ({
 		});
 	}, [componentId]);
 
-	return SignInGateAuxia({
-		guUrl: host,
-		signInUrl,
-		dismissGate: () => {
-			setShowGate(false);
-		},
-		abTest,
-		ophanComponentId: componentId,
-		checkoutCompleteCookieData,
-		personaliseSignInGateAfterCheckoutSwitch,
-		userTreatment,
-		logTreatmentInteractionCall,
-	});
+	return (
+		<SignInGateAuxia
+			guUrl={host}
+			signInUrl={signInUrl}
+			dismissGate={() => {
+				setShowGate(false);
+			}}
+			abTest={abTest}
+			ophanComponentId={componentId}
+			checkoutCompleteCookieData={checkoutCompleteCookieData}
+			personaliseSignInGateAfterCheckoutSwitch={
+				personaliseSignInGateAfterCheckoutSwitch
+			}
+			userTreatment={userTreatment}
+			logTreatmentInteractionCall={logTreatmentInteractionCall}
+		/>
+	);
 };

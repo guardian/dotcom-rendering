@@ -12,7 +12,7 @@ test.describe('Embeds', () => {
 		}) => {
 			await loadPage(
 				page,
-				'/Article/https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
+				'/Article/https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries?adtest=fixed-puppies-ci',
 			);
 			await cmpAcceptAll(page);
 
@@ -37,7 +37,7 @@ test.describe('Embeds', () => {
 		test('should render the interactive 1', async ({ page }) => {
 			await loadPage(
 				page,
-				'/Article/https://www.theguardian.com/sport/2019/nov/15/forget-a-super-bowl-slump-the-la-rams-have-a-jared-goff-problem',
+				'/Article/https://www.theguardian.com/sport/2019/nov/15/forget-a-super-bowl-slump-the-la-rams-have-a-jared-goff-problem?adtest=fixed-puppies-ci',
 			);
 			await cmpAcceptAll(page);
 
@@ -53,7 +53,7 @@ test.describe('Embeds', () => {
 		test('should render the interactive 2', async ({ page }) => {
 			await loadPage(
 				page,
-				'/Article/https://www.theguardian.com/us-news/2017/jan/17/donald-trump-america-great-again-northampton-county-pennsylvania',
+				'/Article/https://www.theguardian.com/us-news/2017/jan/17/donald-trump-america-great-again-northampton-county-pennsylvania?adtest=fixed-puppies-ci',
 			);
 			await cmpAcceptAll(page);
 
@@ -69,7 +69,7 @@ test.describe('Embeds', () => {
 		test('should render the soundcloud embed', async ({ page }) => {
 			await loadPage(
 				page,
-				'/Article/https://www.theguardian.com/music/2020/jan/31/elon-musk-edm-artist-first-track-dont-doubt-ur-vibe',
+				'/Article/https://www.theguardian.com/music/2020/jan/31/elon-musk-edm-artist-first-track-dont-doubt-ur-vibe?adtest=fixed-puppies-ci',
 			);
 			await cmpAcceptAll(page);
 
@@ -85,7 +85,7 @@ test.describe('Embeds', () => {
 		test('should render the football embed', async ({ page }) => {
 			await loadPage(
 				page,
-				'/Article/https://www.theguardian.com/football/2020/jun/10/premier-league-restart-preview-no-5-burnley',
+				'/Article/https://www.theguardian.com/football/2020/jun/10/premier-league-restart-preview-no-5-burnley?adtest=fixed-puppies-ci',
 			);
 			await cmpAcceptAll(page);
 
@@ -103,7 +103,7 @@ test.describe('Embeds', () => {
 		}) => {
 			await loadPage(
 				page,
-				'/Article/https://www.theguardian.com/music/2020/jun/15/pet-shop-boys-where-to-start-in-their-back-catalogue',
+				'/Article/https://www.theguardian.com/music/2020/jun/15/pet-shop-boys-where-to-start-in-their-back-catalogue?adtest=fixed-puppies-ci',
 			);
 			await cmpAcceptAll(page);
 
