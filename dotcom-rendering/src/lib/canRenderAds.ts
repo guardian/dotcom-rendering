@@ -1,14 +1,14 @@
 import type { ArticleDeprecated } from '../types/article';
 import type { DCRFrontType } from '../types/front';
 import type { RenderingTarget } from '../types/renderingTarget';
-import type { DCRTagPageType } from '../types/tagPage';
+import type { TagPage } from '../types/tagPage';
 
 /**
  * Checks the page for a number of conditions that should
  * prevent ads from being displayed.
  */
 export const canRenderAds = (
-	pageData: ArticleDeprecated | DCRFrontType | DCRTagPageType,
+	pageData: ArticleDeprecated | DCRFrontType | TagPage,
 	renderingTarget?: RenderingTarget,
 ): boolean => {
 	if (renderingTarget === 'Apps') {

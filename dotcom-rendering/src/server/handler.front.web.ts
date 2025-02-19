@@ -1,5 +1,6 @@
 import { isUndefined } from '@guardian/libs';
 import type { RequestHandler } from 'express';
+import type { FETagPage } from '../frontend/feTagPage';
 import { decideTagPageBranding, pickBrandingForEdition } from '../lib/branding';
 import { decideTrail } from '../lib/decideTrail';
 import { enhanceCards } from '../model/enhanceCards';
@@ -10,10 +11,10 @@ import {
 } from '../model/extractTrendingTopics';
 import { groupTrailsByDates } from '../model/groupTrailsByDates';
 import { getSpeedFromTrails } from '../model/slowOrFastByTrails';
-import { validateAsFrontType, validateAsTagPageType } from '../model/validate';
+import { validateAsFETagPage, validateAsFrontType } from '../model/validate';
 import type { DCRFrontType, FEFrontType } from '../types/front';
 import type { FETagType } from '../types/tag';
-import type { DCRTagPageType, FETagPageType } from '../types/tagPage';
+import type { TagPage } from '../types/tagPage';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderFront, renderTagPage } from './render.front.web';
@@ -53,7 +54,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 	};
 };
 
-const tagPageWebTitle = (tagPage: FETagPageType) => {
+const tagPageWebTitle = (tagPage: FETagPage) => {
 	const { pagination } = tagPage;
 	if (!isUndefined(pagination) && pagination.currentPage > 1) {
 		return `${tagPage.webTitle} | Page ${pagination.currentPage} of ${pagination.lastPage} | The Guardian`;
@@ -76,8 +77,8 @@ export const getBadgeUrl = (tag: FETagType): string | undefined => {
 	return `https://sport.guim.co.uk/football/crests/120/${teamId}.png`;
 };
 
-const enhanceTagPage = (body: unknown): DCRTagPageType => {
-	const data: FETagPageType = validateAsTagPageType(body);
+const enhanceTagPage = (body: unknown): TagPage => {
+	const data: FETagPage = validateAsFETagPage(body);
 
 	const enhancedCards = enhanceCards(data.contents, {
 		cardInTagPage: true,

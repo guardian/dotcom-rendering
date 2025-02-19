@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { cmp } from '@guardian/libs';
 import {
 	from,
 	headlineBold28,
@@ -21,7 +20,6 @@ import {
 	firstParagraphOverlay,
 	hideElementsCss,
 	laterButton,
-	privacyLink,
 	registerButton,
 	signInGateContainer,
 	signInLink,
@@ -310,25 +308,6 @@ export const SignInGateFakeSocial = ({
 				registering and providing us with insight into your preferences,
 				you’re helping us to engage with you more deeply, and that allow
 				us to keep our journalism free for all.
-			</p>
-			<p css={[bodyText, bodyPadding]}>
-				You’ll always be able to control your own&nbsp;
-				<button
-					data-testid="sign-in-gate-fake-social_privacy"
-					css={privacyLink}
-					onClick={() => {
-						cmp.showPrivacyManager();
-						trackLink(
-							ophanComponentId,
-							'privacy',
-							renderingTarget,
-							abTest,
-						);
-					}}
-				>
-					privacy settings
-				</button>{' '}
-				and every article will remain free.
 			</p>
 			<div css={[actionButtons, buttonMargin, bodyPadding]}>
 				<LinkButton

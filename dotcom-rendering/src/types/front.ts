@@ -352,6 +352,7 @@ export type DCRFrontCard = {
 	galleryCount?: number;
 	podcastImage?: PodcastSeriesImage;
 	audioDuration?: string;
+	isInLoopVideoTest?: boolean;
 };
 
 export type DCRSlideshowImage = {

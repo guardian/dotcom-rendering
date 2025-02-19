@@ -1,5 +1,6 @@
 import type { CountryCode } from '@guardian/libs';
 import { isObject, isOneOf, isString } from '@guardian/libs';
+import type { EditionId } from '../../lib/edition';
 import type { TagType } from '../../types/tag';
 
 export type CanShowGateProps = {
@@ -92,7 +93,6 @@ export interface TreatmentContentDecoded {
 	title: string;
 	subtitle: string;
 	body: string;
-	privacy_button_name: string;
 	first_cta_name: string;
 	first_cta_link: string;
 	second_cta_name: string;
@@ -113,6 +113,7 @@ export interface AuxiaProxyGetTreatmentsPayload {
 	isSupporter: boolean;
 	dailyArticleCount: number;
 	articleIdentifier: string;
+	editionId: EditionId;
 }
 
 export interface AuxiaProxyGetTreatmentsResponse {

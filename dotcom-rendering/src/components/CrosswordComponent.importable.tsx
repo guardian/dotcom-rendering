@@ -37,7 +37,7 @@ const Layout: CrosswordProps['Layout'] = ({
 	Controls,
 	SavedMessage,
 	AnagramHelper,
-	StickyClue,
+	FocusedClue,
 	gridWidth,
 }) => {
 	return (
@@ -64,7 +64,7 @@ const Layout: CrosswordProps['Layout'] = ({
 					}
 				`}
 			>
-				<StickyClue
+				<FocusedClue
 					additionalCss={css`
 						${from.leftCol} {
 							display: none;
@@ -73,6 +73,13 @@ const Layout: CrosswordProps['Layout'] = ({
 				/>
 				<Grid />
 				<div data-print-layout="hide">
+					<FocusedClue
+						additionalCss={css`
+							${from.leftCol} {
+								display: none;
+							}
+						`}
+					/>
 					<Controls />
 					<div
 						css={css`

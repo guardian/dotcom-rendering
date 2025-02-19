@@ -1,4 +1,3 @@
-import { cmp } from '@guardian/libs';
 import { Button, Link, LinkButton } from '@guardian/source/react-components';
 import { useConfig } from '../../ConfigContext';
 import { trackLink } from '../componentEventTracking';
@@ -13,7 +12,6 @@ import {
 	headingStyles,
 	hideElementsCss,
 	laterButton,
-	privacyLink,
 	registerButton,
 	signInGateContainer,
 	signInHeader,
@@ -43,24 +41,7 @@ export const SignInGateMain = ({
 				We’re committed to keeping our quality reporting open. By
 				registering and providing us with insight into your preferences,
 				you’re helping us to engage with you more deeply, and that
-				allows us to keep our journalism free for all. You’ll always be
-				able to control your own{' '}
-				<button
-					data-testid="sign-in-gate-main_privacy"
-					css={privacyLink}
-					onClick={() => {
-						cmp.showPrivacyManager();
-						trackLink(
-							ophanComponentId,
-							'privacy',
-							renderingTarget,
-							abTest,
-						);
-					}}
-				>
-					privacy settings
-				</button>
-				.
+				allows us to keep our journalism free for all.
 			</p>
 			<div css={actionButtons}>
 				<LinkButton

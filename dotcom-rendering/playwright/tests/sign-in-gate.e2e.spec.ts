@@ -8,9 +8,8 @@ import {
 	SIGN_IN_PROMPT,
 	SUBSCRIPTION_HEADER,
 } from '../../src/lib/signInAfterCheckOutText';
-import { CMP_LAYER1_IFRAME, cmpAcceptAll, disableCMP } from '../lib/cmp';
-import { addCookie, clearCookie } from '../lib/cookies';
-import { getIframeBody } from '../lib/iframe';
+import { disableCMP } from '../lib/cmp';
+import { addCookie } from '../lib/cookies';
 import { loadPageWithOverrides } from '../lib/load-page';
 import { expectToBeVisible, expectToNotExist } from '../lib/locators';
 
@@ -224,35 +223,6 @@ test.describe('Sign In Gate Tests', () => {
 				.getAttribute('href');
 
 			expect(signInHref).toContain('profile.theguardian.com/signin');
-		});
-
-		test('show cmp ui when privacy settings link is clicked', async ({
-			context,
-			page,
-		}) => {
-			// For this test remove the gu-cmp-disabled cookie to ensure cmp is shown
-			await clearCookie(context, 'gu-cmp-disabled');
-
-			await loadPageWithOverrides(page, standardArticle);
-
-			await cmpAcceptAll(page);
-
-			// set article count to be min number to view gate
-			await setArticleCount(page, 3);
-
-			await scrollToGateForLazyLoading(page);
-
-			await expectToBeVisible(page, SIGN_IN_GATE_MAIN_SELECTOR);
-
-			await page
-				.locator('[data-testid=sign-in-gate-main_privacy]')
-				.click();
-
-			await expectToBeVisible(page, CMP_LAYER1_IFRAME);
-
-			await expect(
-				await getIframeBody(page, CMP_LAYER1_IFRAME),
-			).toContainText('Privacy settings');
 		});
 	});
 

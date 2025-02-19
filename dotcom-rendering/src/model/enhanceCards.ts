@@ -87,14 +87,13 @@ const decideUrl = (trail: FESupportingContent | FEFrontCard) => {
 };
 
 const decideImage = (trail: FEFrontCard) => {
+	if (trail.display.imageHide) return undefined;
 	if (
 		trail.type === 'LinkSnap' ||
 		trail.properties.image?.type === 'Replace'
 	) {
 		return trail.properties.image?.item.imageSrc;
 	}
-
-	if (trail.display.imageHide) return undefined;
 
 	if (trail.properties.isCrossword && trail.properties.maybeContentId) {
 		return `https://api.nextgen.guardianapps.co.uk/${trail.properties.maybeContentId}.svg`;
