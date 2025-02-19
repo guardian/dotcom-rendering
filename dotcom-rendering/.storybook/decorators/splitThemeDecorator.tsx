@@ -153,6 +153,14 @@ const ThemeHeading = ({ colourScheme }: { colourScheme: ColourScheme }) => (
 			{
 				textAlign: 'center',
 				padding: space[2],
+				color:
+					colourScheme === 'light'
+						? sourcePalette.neutral[0]
+						: sourcePalette.neutral[100],
+				backgroundColor:
+					colourScheme === 'light'
+						? sourcePalette.neutral[100]
+						: sourcePalette.neutral[0],
 			},
 		]}
 	>
@@ -160,17 +168,29 @@ const ThemeHeading = ({ colourScheme }: { colourScheme: ColourScheme }) => (
 	</h2>
 );
 
+type FormatHeadingProps = {
+	colourScheme: ColourScheme;
+	format: ArticleFormat;
+};
+
 /**
  * Describes the {@linkcode ArticleFormat} being used to render the story.
  */
-const FormatHeading = ({ format }: { format: ArticleFormat }) => (
+const FormatHeading = ({ format, colourScheme }: FormatHeadingProps) => (
 	<h3
 		css={[
 			textSans17,
 			{
 				textAlign: 'center',
 				padding: space[1],
-				opacity: 0.75,
+				color:
+					colourScheme === 'light'
+						? sourcePalette.neutral[0]
+						: sourcePalette.neutral[100],
+				backgroundColor:
+					colourScheme === 'light'
+						? sourcePalette.neutral[100]
+						: sourcePalette.neutral[0],
 			},
 		]}
 	>
@@ -236,7 +256,7 @@ const Theme = ({ formats, Story, context, colourScheme }: ThemeProps) => (
 		<ThemeHeading colourScheme={colourScheme} />
 		{formats.map((format) => (
 			<>
-				<FormatHeading format={format} />
+				<FormatHeading format={format} colourScheme={colourScheme} />
 				<Palette
 					colourScheme={colourScheme}
 					context={context}
