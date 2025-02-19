@@ -417,7 +417,7 @@ export const FeatureCard = ({
 									`}
 								>
 									{mainMedia?.type === 'Audio' &&
-										mainMedia.podcastImage?.src && (
+										!!mainMedia.podcastImage?.src && (
 											<div
 												css={
 													podcastImageContainerStyles

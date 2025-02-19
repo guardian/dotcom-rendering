@@ -1,4 +1,4 @@
-import { PodcastSeriesImage } from './tag';
+import type { PodcastSeriesImage } from './tag';
 
 type Media = {
 	type: 'Video' | 'Audio' | 'Gallery';
