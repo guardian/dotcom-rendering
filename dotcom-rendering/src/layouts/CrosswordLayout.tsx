@@ -13,7 +13,6 @@ import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { Carousel } from '../components/Carousel.importable';
 import { CrosswordInstructions } from '../components/CrosswordInstructions';
 import { CrosswordLinks } from '../components/CrosswordLinks';
 import { DecideLines } from '../components/DecideLines';
@@ -23,9 +22,6 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
-import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
-import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
@@ -36,11 +32,9 @@ import { SubNav } from '../components/SubNav.importable';
 import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decideTrail } from '../lib/decideTrail';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const CrosswordGrid = ({ children }: { children: React.ReactNode }) => (
@@ -100,19 +94,14 @@ const stretchLines = css`
 	}
 `;
 
-interface CommonProps {
+interface Props {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
-	renderingTarget: RenderingTarget;
-}
-
-interface WebProps extends CommonProps {
 	NAV: NavType;
-	renderingTarget: 'Web';
 }
 
-export const CrosswordLayout = (props: WebProps) => {
-	const { article, format, renderingTarget } = props;
+export const CrosswordLayout = (props: Props) => {
+	const { article, format } = props;
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
 	} = article;
@@ -122,8 +111,6 @@ export const CrosswordLayout = (props: WebProps) => {
 	const { branding } = article.commercialProperties[article.editionId];
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
-
-	const { absoluteServerTimes = false } = article.config.switches;
 
 	/**
 	 * This property currently only applies to the header and merchandising slots
@@ -428,56 +415,6 @@ export const CrosswordLayout = (props: WebProps) => {
 					</Section>
 				)}
 
-				{article.storyPackage && (
-					<Section
-						fullWidth={true}
-						showTopBorder={false}
-						backgroundColour={themePalette(
-							'--article-section-background',
-						)}
-						borderColour={themePalette('--article-border')}
-					>
-						<Island priority="feature" defer={{ until: 'visible' }}>
-							<Carousel
-								heading={article.storyPackage.heading}
-								trails={article.storyPackage.trails.map(
-									decideTrail,
-								)}
-								onwardsSource="more-on-this-story"
-								format={format}
-								leftColSize={'compact'}
-								discussionApiUrl={
-									article.config.discussionApiUrl
-								}
-								absoluteServerTimes={absoluteServerTimes}
-								renderingTarget={renderingTarget}
-							/>
-						</Island>
-					</Section>
-				)}
-
-				<Island priority="feature" defer={{ until: 'visible' }}>
-					<OnwardsUpper
-						ajaxUrl={article.config.ajaxUrl}
-						hasRelated={article.hasRelated}
-						hasStoryPackage={article.hasStoryPackage}
-						isAdFreeUser={article.isAdFreeUser}
-						pageId={article.pageId}
-						isPaidContent={!!article.config.isPaidContent}
-						showRelatedContent={article.config.showRelatedContent}
-						keywordIds={article.config.keywordIds}
-						contentType={article.contentType}
-						tags={article.tags}
-						format={format}
-						pillar={format.theme}
-						editionId={article.editionId}
-						shortUrlId={article.config.shortUrlId}
-						discussionApiUrl={article.config.discussionApiUrl}
-						absoluteServerTimes={absoluteServerTimes}
-						renderingTarget={renderingTarget}
-					/>
-				</Island>
-
 				{showComments && (
 					<Section
 						fullWidth={true}
@@ -505,36 +442,6 @@ export const CrosswordLayout = (props: WebProps) => {
 							shouldHideAds={article.shouldHideAds}
 							idApiUrl={article.config.idApiUrl}
 						/>
-					</Section>
-				)}
-
-				{!isPaidContent && (
-					<Section
-						title="Most viewed"
-						padContent={false}
-						verticalMargins={false}
-						element="aside"
-						data-print-layout="hide"
-						data-link-name="most-popular"
-						data-component="most-popular"
-						backgroundColour={themePalette(
-							'--article-section-background',
-						)}
-						borderColour={themePalette('--article-border')}
-						fontColour={themePalette('--article-section-title')}
-					>
-						<MostViewedFooterLayout renderAds={renderAds}>
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<MostViewedFooterData
-									sectionId={article.config.section}
-									ajaxUrl={article.config.ajaxUrl}
-									edition={article.editionId}
-								/>
-							</Island>
-						</MostViewedFooterLayout>
 					</Section>
 				)}
 
