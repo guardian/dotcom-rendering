@@ -109,7 +109,6 @@ const Layout: CrosswordProps['Layout'] = ({
 						overflow: auto;
 					}
 					${from.desktop} {
-						// set back to default
 						max-height: none;
 						overflow: visible;
 					}
