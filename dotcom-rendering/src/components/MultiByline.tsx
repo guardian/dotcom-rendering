@@ -203,7 +203,7 @@ const Byline = ({
 		allowedAttributes: {
 			...defaults.allowedAttributes,
 			span: ['data-contributor-rel'],
-			a: ['data-ignore'],
+			a: ['data-ignore', 'data-contributor-rel', 'href'],
 		},
 	});
 
