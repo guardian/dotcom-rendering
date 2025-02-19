@@ -98,21 +98,11 @@ const Layout: CrosswordProps['Layout'] = ({
 					flex-direction: column;
 					gap: ${space[4]}px;
 					align-items: flex-start;
-					min-width: 200px;
-					${from.phablet} {
-						max-height: ${gridWidth + 100}px;
-						overflow: auto;
-					}
 					${from.desktop} {
-						max-height: none;
-						overflow: visible;
+						flex-direction: row;
 					}
 					> * {
 						flex: 1;
-					}
-
-					${from.wide} {
-						flex-direction: row;
 					}
 				`}
 			>

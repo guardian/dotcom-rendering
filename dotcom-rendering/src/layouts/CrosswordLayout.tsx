@@ -46,93 +46,36 @@ import { BannerWrapper, Stuck } from './lib/stickiness';
 const CrosswordGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
-			/* IE Fallback */
-			display: flex;
-			flex-direction: column;
-			${until.leftCol} {
-				margin-left: 0px;
-			}
+			display: grid;
+			width: 100%;
+			margin-left: 0;
+			grid-column-gap: 0px;
+			grid-template-columns: minmax(0, 1fr);
+			grid-template-areas:
+				'title'
+				'headline'
+				'standfirst'
+				'meta'
+				'instructions'
+				'body';
+
 			${from.leftCol} {
-				margin-left: 151px;
-			}
-			${from.wide} {
-				margin-left: 230px;
-			}
-
-			@supports (display: grid) {
-				display: grid;
-				width: 100%;
-				margin-left: 0;
 				grid-column-gap: 20px;
+				grid-template-columns: 140px 1fr;
+				grid-template-areas:
+					'title  headline    '
+					'meta   standfirst  '
+					'meta   instructions'
+					'body   body        ';
+			}
 
-				/*
-					Explanation of each unit of grid-template-columns
-
-					Left Column
-					Main content
-					Right Column
-				*/
-				${from.wide} {
-					grid-template-columns: 220px 1fr 300px;
-
-					grid-template-areas:
-						'title  headline      right-column'
-						'meta   standfirst    right-column'
-						'meta   instructions  right-column'
-						'body   body          right-column';
-				}
-
-				/*
-					Explanation of each unit of grid-template-columns
-
-					Left Column
-					Main content
-					Right Column
-				*/
-				${until.wide} {
-					grid-template-columns: 140px 1fr 300px;
-
-					grid-template-areas:
-						'title  headline      right-column'
-						'meta   standfirst    right-column'
-						'meta   instructions  right-column'
-						'body   body          right-column';
-				}
-
-				${until.leftCol} {
-					grid-template-columns: 1fr 300px;
-					grid-template-areas:
-						'title         right-column'
-						'headline      right-column'
-						'standfirst    right-column'
-						'meta          right-column'
-						'instructions  right-column'
-						'body          right-column';
-				}
-
-				${until.desktop} {
-					grid-column-gap: 0px;
-					grid-template-columns: minmax(0, 1fr); /* Main content */
-					grid-template-areas:
-						'title'
-						'headline'
-						'standfirst'
-						'meta'
-						'instructions'
-						'body';
-				}
-
-				${until.tablet} {
-					grid-column-gap: 0px;
-					grid-template-columns: minmax(0, 1fr); /* Main content */
-					grid-template-areas:
-						'title'
-						'headline'
-						'standfirst'
-						'meta'
-						'instructions'
-						'body';
-				}
+			${from.wide} {
+				grid-template-columns: 220px 1fr 300px;
+				grid-template-areas:
+					'title  headline      right-column'
+					'meta   standfirst    right-column'
+					'meta   instructions  right-column'
+					'body   body          right-column';
 			}
 		`}
 	>
@@ -378,7 +321,7 @@ export const CrosswordLayout = (props: WebProps) => {
 								</ArticleContainer>
 							</GridItem>
 							<GridItem area="right-column">
-								<RightColumn>
+								<RightColumn showFrom="wide">
 									{renderAds ? (
 										<AdSlot
 											position="right"
