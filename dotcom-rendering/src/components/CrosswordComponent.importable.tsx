@@ -8,9 +8,11 @@ import {
 	textSans14,
 	textSansItalic12,
 } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import type { ReactNode } from 'react';
 import { memo } from 'react';
 import { palette } from '../palette';
+import { AdSlot } from './AdSlot.web';
 
 const CluesHeader = memo(({ children }: { children: ReactNode }) => {
 	return (
@@ -79,6 +81,9 @@ const Layout: CrosswordProps['Layout'] = ({
 							}
 						`}
 					/>
+					<Hide from="phablet">
+						<AdSlot position="crossword-banner-mobile" />
+					</Hide>
 					<Controls />
 					<div
 						css={css`
