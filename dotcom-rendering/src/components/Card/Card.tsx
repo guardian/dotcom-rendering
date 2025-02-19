@@ -29,7 +29,6 @@ import type {
 } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
-import type { PodcastSeriesImage } from '../../types/tag';
 import { Avatar } from '../Avatar';
 import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
@@ -143,12 +142,8 @@ export type Props = {
 	showTopBarDesktop?: boolean;
 	showTopBarMobile?: boolean;
 	trailTextSize?: TrailTextSize;
-	/** The square podcast series image, if it exists for a card */
-	podcastImage?: PodcastSeriesImage;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
-	galleryCount?: number;
-	audioDuration?: string;
 	isInLoopVideoTest?: boolean;
 };
 
@@ -252,7 +247,6 @@ const getMedia = ({
 	slideshowImages,
 	mainMedia,
 	canPlayInline,
-	podcastImage,
 	isBetaContainer,
 }: {
 	imageUrl?: string;
@@ -262,10 +256,9 @@ const getMedia = ({
 	slideshowImages?: DCRSlideshowImage[];
 	mainMedia?: MainMedia;
 	canPlayInline?: boolean;
-	podcastImage?: PodcastSeriesImage;
 	isBetaContainer: boolean;
 }) => {
-	if (mainMedia && mainMedia.type === 'Video' && canPlayInline) {
+	if (mainMedia?.type === 'Video' && canPlayInline) {
 		return {
 			type: 'video',
 			mainMedia,
@@ -274,10 +267,14 @@ const getMedia = ({
 	}
 	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
 	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
-	if (podcastImage && isBetaContainer) {
+	if (
+		mainMedia?.type === 'Audio' &&
+		mainMedia.podcastImage &&
+		isBetaContainer
+	) {
 		return {
+			...mainMedia,
 			type: 'podcast',
-			podcastImage,
 			trailImage: { src: imageUrl, altText: imageAltText },
 		} as const;
 	}
@@ -402,10 +399,7 @@ export const Card = ({
 	showTopBarDesktop = true,
 	showTopBarMobile = false,
 	trailTextSize,
-	podcastImage,
 	showKickerImage = false,
-	galleryCount,
-	audioDuration,
 	isInLoopVideoTest = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
@@ -518,7 +512,7 @@ export const Card = ({
 
 			{mainMedia?.type === 'Audio' && (
 				<Pill
-					content={audioDuration ?? ''}
+					content={mainMedia.duration ?? ''}
 					icon={<SvgMediaControlsPlay />}
 					iconSize={'small'}
 				/>
@@ -526,7 +520,7 @@ export const Card = ({
 			{mainMedia?.type === 'Gallery' && (
 				<Pill
 					prefix="Gallery"
-					content={galleryCount?.toString() ?? ''}
+					content={mainMedia.count}
 					icon={<SvgCamera />}
 					iconSide="right"
 				/>
@@ -556,7 +550,6 @@ export const Card = ({
 		slideshowImages,
 		mainMedia,
 		canPlayInline,
-		podcastImage,
 		isBetaContainer,
 	});
 
@@ -1011,7 +1004,7 @@ export const Card = ({
 
 						{media.type === 'podcast' && (
 							<>
-								{media.podcastImage.src && !showKickerImage ? (
+								{media.podcastImage?.src && !showKickerImage ? (
 									<div css={[podcastImageStyles(imageSize)]}>
 										<CardPicture
 											mainImage={media.podcastImage.src}

@@ -26,7 +26,11 @@ const exampleCard: DCRFrontCard = {
 	showLivePlayable: false,
 	mainMedia: {
 		type: 'Audio',
-		duration: 0,
+		duration: '18:03',
+		podcastImage: {
+			src: 'https://uploads.guim.co.uk/2021/11/17/ScienceWeekly_FINAL_3000.jpeg',
+			altText: 'Science Weekly',
+		},
 	},
 	isExternalLink: false,
 	showMainVideo: false,
@@ -35,11 +39,6 @@ const exampleCard: DCRFrontCard = {
 		altText:
 			'Inauguration of the first IBM Quantum Data Center in Europe, in Ehningen, Germany<br>epa11635230 A model of the IBM Quantum System Two quantum computer is seen at the inauguration of the first IBM Quantum Data Center in Europe, in Ehningen, Germany, 01 October 2024. The Europe-based quantum data center will facilitate access to cutting-edge quantum computing for companies, research institutions and government agencies.  EPA/ANNA SZILAGYI',
 	},
-	podcastImage: {
-		src: 'https://uploads.guim.co.uk/2021/11/17/ScienceWeekly_FINAL_3000.jpeg',
-		altText: 'Science Weekly',
-	},
-	audioDuration: '18:03',
 };
 
 export const testVideoCollection: DCRCollectionType = {

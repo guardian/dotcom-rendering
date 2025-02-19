@@ -39,18 +39,18 @@ const labStyles = css`
 	margin-top: ${space[1]}px;
 `;
 
+type MainMedia =
+	| { type: 'Video'; duration: number }
+	| { type: 'Audio'; duration: string }
+	| { type: 'Gallery'; count: string };
+
 type Props = {
 	format: ArticleFormat;
 	showLivePlayable: boolean;
 	age?: JSX.Element;
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
-	isVideo?: boolean;
-	videoDuration?: number;
-	isAudio?: boolean;
-	audioDuration?: string;
-	isGallery?: boolean;
-	galleryCount?: number;
+	mainMedia?: MainMedia;
 };
 
 export const CardFooter = ({
@@ -59,12 +59,7 @@ export const CardFooter = ({
 	age,
 	commentCount,
 	cardBranding,
-	isVideo,
-	videoDuration,
-	isAudio,
-	audioDuration,
-	isGallery,
-	galleryCount,
+	mainMedia,
 }: Props) => {
 	if (showLivePlayable) return null;
 
@@ -72,33 +67,35 @@ export const CardFooter = ({
 		return <footer css={labStyles}>{cardBranding}</footer>;
 	}
 
-	if (isVideo && videoDuration !== undefined) {
+	if (mainMedia?.type === 'Video' && mainMedia.duration !== undefined) {
 		return (
 			<footer css={contentStyles}>
 				<Pill
-					content={<time>{secondsToDuration(videoDuration)}</time>}
+					content={
+						<time>{secondsToDuration(mainMedia.duration)}</time>
+					}
 					icon={<SvgMediaControlsPlay />}
 				/>
 			</footer>
 		);
 	}
 
-	if (isAudio && audioDuration !== undefined) {
+	if (mainMedia?.type === 'Audio' && mainMedia.duration !== undefined) {
 		return (
 			<footer css={contentStyles}>
 				<Pill
-					content={<time>{audioDuration}</time>}
+					content={<time>{mainMedia.duration}</time>}
 					icon={<SvgMediaControlsPlay />}
 				/>
 			</footer>
 		);
 	}
 
-	if (isGallery && galleryCount !== undefined) {
+	if (mainMedia?.type === 'Gallery') {
 		return (
 			<footer css={contentStyles}>
 				<Pill
-					content={galleryCount.toString()}
+					content={mainMedia.count}
 					prefix="Gallery"
 					icon={<SvgCamera />}
 					iconSide="right"
