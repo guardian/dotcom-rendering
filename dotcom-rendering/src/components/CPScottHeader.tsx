@@ -62,7 +62,7 @@ const textWrapStyle = css`
 export const CPScottHeader = () => {
 	const sources = generateSources(
 		'https://uploads.guim.co.uk/2023/04/12/CPScottcutout.png',
-		[{ breakpoint: 320, width: 82 }],
+		[{ breakpoint: 320, width: 82, aspectRatio: '5:4' }],
 	);
 	const fallbackSource = getFallbackSource(sources);
 	return (

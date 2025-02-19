@@ -55,6 +55,7 @@ const getIconSizeOnDesktop = (imageSize: ImageSizeType) => {
 		case 'medium':
 		case 'feature':
 		case 'feature-large':
+		case 'feature-immersive':
 			return 'large';
 		case 'small':
 			return 'small';

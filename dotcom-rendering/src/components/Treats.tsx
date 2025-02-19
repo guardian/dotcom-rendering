@@ -62,7 +62,7 @@ const ImageTreat = ({
 	altText?: string;
 }) => {
 	const sources = generateSources(imageUrl, [
-		{ breakpoint: 320, width: 130 },
+		{ breakpoint: 320, width: 130, aspectRatio: '5:4' },
 	]);
 	const fallbackSource = getFallbackSource(sources);
 

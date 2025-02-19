@@ -33,7 +33,7 @@ const MiniCardPicture = ({ image, alt }: MiniCardPictureProps) => {
 	// Since this image will always be in a 120px wide container theres also not much reason to have sizes larger than 120px
 	// The different DPI sources generated are still useful to us however.
 	const [source] = generateSources(image, [
-		{ breakpoint: breakpoints.desktop, width: 120 },
+		{ breakpoint: breakpoints.desktop, width: 120, aspectRatio: '5:4' },
 	]);
 
 	if (!source) throw new Error('Missing source');

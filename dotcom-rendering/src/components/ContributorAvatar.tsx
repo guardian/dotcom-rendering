@@ -7,9 +7,13 @@ import { generateSources, getFallbackSource, Sources } from './Picture';
 const ratio = 6 / 5;
 
 const widths = [
-	{ breakpoint: breakpoints.mobile, width: 180 },
-	{ breakpoint: breakpoints.mobileLandscape, width: 216 },
-] as const satisfies ReadonlyArray<{ breakpoint: number; width: number }>;
+	{ breakpoint: breakpoints.mobile, width: 180, aspectRatio: '5:4' },
+	{ breakpoint: breakpoints.mobileLandscape, width: 216, aspectRatio: '5:4' },
+] as const satisfies ReadonlyArray<{
+	breakpoint: number;
+	width: number;
+	aspectRatio: string;
+}>;
 
 const imageStyles = css`
 	width: ${widths[0].width}px;

@@ -62,36 +62,37 @@ type Props = {
 const decideImageWidths = (
 	imageSize: ImageSizeType,
 ): [ImageWidthType, ...ImageWidthType[]] => {
+	const aspectRatio = '5:4';
 	switch (imageSize) {
 		case 'small':
-			return [{ breakpoint: breakpoints.mobile, width: 80 }];
+			return [{ breakpoint: breakpoints.mobile, width: 80, aspectRatio }];
 
 		case 'medium':
 		default:
 			return [
-				{ breakpoint: breakpoints.mobile, width: 80 },
-				{ breakpoint: breakpoints.desktop, width: 90 },
+				{ breakpoint: breakpoints.mobile, width: 80, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 90, aspectRatio },
 			];
 
 		case 'large':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 150 },
-				{ breakpoint: breakpoints.tablet, width: 130 },
-				{ breakpoint: breakpoints.desktop, width: 150 },
+				{ breakpoint: breakpoints.mobile, width: 150, aspectRatio },
+				{ breakpoint: breakpoints.tablet, width: 130, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 150, aspectRatio },
 			];
 
 		case 'jumbo':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 180 },
-				{ breakpoint: breakpoints.tablet, width: 160 },
-				{ breakpoint: breakpoints.desktop, width: 190 },
+				{ breakpoint: breakpoints.mobile, width: 180, aspectRatio },
+				{ breakpoint: breakpoints.tablet, width: 160, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 190, aspectRatio },
 			];
 	}
 };
 
 const defaultImageSizes: [ImageWidthType, ...ImageWidthType[]] = [
-	{ breakpoint: breakpoints.mobile, width: 75 },
-	{ breakpoint: breakpoints.tablet, width: 140 },
+	{ breakpoint: breakpoints.mobile, width: 75, aspectRatio: '5:4' },
+	{ breakpoint: breakpoints.tablet, width: 140, aspectRatio: '5:4' },
 ];
 
 export const Avatar = ({ src, alt, shape = 'round', imageSize }: Props) => {

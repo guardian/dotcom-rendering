@@ -255,8 +255,8 @@ const crestStyle = css`
 
 const Picture = ({ image }: { image: string }) => {
 	const sources = generateSources(image, [
-		{ breakpoint: breakpoints.mobile, width: 80 },
-		{ breakpoint: breakpoints.desktop, width: 100 },
+		{ breakpoint: breakpoints.mobile, width: 80, aspectRatio: '5:4' },
+		{ breakpoint: breakpoints.desktop, width: 100, aspectRatio: '5:4' },
 	]);
 
 	const fallback = sources[0]?.lowResUrl;
