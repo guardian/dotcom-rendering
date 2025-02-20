@@ -220,7 +220,7 @@ export const HighlightsCard = ({
 			{mainMedia?.type === 'Gallery' && (
 				<Pill
 					prefix="Gallery"
-					content={mainMedia.count?.toString() ?? ''}
+					content={mainMedia.count}
 					icon={<SvgCamera />}
 					iconSide="right"
 				/>
