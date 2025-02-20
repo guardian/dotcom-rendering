@@ -8,6 +8,7 @@ import {
 } from '../lib/articleFormat';
 import { generateImageURL } from '../lib/image';
 import type { RoleType } from '../types/content';
+import { AspectRatio } from '../types/front';
 import type { Loading } from './CardPicture';
 
 /**
@@ -36,7 +37,11 @@ type Props = {
 	aspectRatio?: string;
 };
 
-export type ImageWidthType = { breakpoint: number; width: number };
+export type ImageWidthType = {
+	breakpoint: number;
+	width: number;
+	aspectRatio?: AspectRatio;
+};
 
 /**
  * All business logic for image sizing is contained in this one function. This
@@ -267,12 +272,11 @@ type ImageSource = {
 export const generateSources = (
 	mainImage: string,
 	imageWidths: readonly [ImageWidthType, ...ImageWidthType[]],
-	aspectRatio?: string,
 ): ImageSource[] =>
 	imageWidths
 		.slice()
 		.sort(descendingByBreakpoint)
-		.map(({ width: imageWidth, breakpoint }) => {
+		.map(({ width: imageWidth, breakpoint, aspectRatio }) => {
 			return {
 				breakpoint,
 				width: imageWidth,
@@ -340,7 +344,6 @@ export const Picture = ({
 	isLightbox = false,
 	orientation = 'landscape',
 	onLoad,
-	aspectRatio,
 }: Props) => {
 	const [loaded, setLoaded] = useState(false);
 	const ref = useCallback((node: HTMLImageElement | null) => {
@@ -365,7 +368,6 @@ export const Picture = ({
 			isLightbox,
 			orientation,
 		}),
-		aspectRatio,
 	);
 
 	/** portrait if higher than 1 or landscape if lower than 1 */
