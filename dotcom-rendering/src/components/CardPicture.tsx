@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { breakpoints, space } from '@guardian/source/foundations';
+import { breakpoints, space, until } from '@guardian/source/foundations';
 import type { ImgHTMLAttributes } from 'react';
 import React from 'react';
 import type { AspectRatio } from '../types/front';
@@ -18,6 +18,7 @@ type Props = {
 	roundedCorners?: boolean;
 	isCircular?: boolean;
 	aspectRatio?: AspectRatio;
+	mobileAspectRatio?: AspectRatio;
 	isInLoopVideoTest?: boolean;
 };
 
@@ -32,7 +33,9 @@ type Props = {
 const decideImageWidths = (
 	imageSize: ImageSizeType,
 	aspectRatio?: AspectRatio,
+	mobileAspectRatio?: AspectRatio,
 ): [ImageWidthType, ...ImageWidthType[]] => {
+	const aspectRatioMobile = mobileAspectRatio ?? aspectRatio;
 	switch (imageSize) {
 		// @TODO missing image size option
 		// case 'tiny':
@@ -100,7 +103,11 @@ const decideImageWidths = (
 			];
 		case 'feature-large':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 325, aspectRatio },
+				{
+					breakpoint: breakpoints.mobile,
+					width: 325,
+					aspectRatio: aspectRatioMobile,
+				},
 				{ breakpoint: breakpoints.tablet, width: 337, aspectRatio },
 				{ breakpoint: breakpoints.desktop, width: 460, aspectRatio },
 			];
@@ -151,6 +158,15 @@ const decideAspectRatioStyles = (aspectRatio?: AspectRatio) => {
 	`;
 };
 
+const decideMobileAspectRatioStyles = (aspectRatio?: AspectRatio) => {
+	const paddingRatio = getAspectRatioPadding(aspectRatio);
+	return css`
+		${until.tablet} {
+			padding-top: ${paddingRatio};
+		}
+	`;
+};
+
 const borderRadius = css`
 	& > * {
 		border-radius: ${space[2]}px;
@@ -172,11 +188,12 @@ export const CardPicture = ({
 	roundedCorners,
 	isCircular,
 	aspectRatio,
+	mobileAspectRatio,
 	isInLoopVideoTest = false,
 }: Props) => {
 	const sources = generateSources(
 		mainImage,
-		decideImageWidths(imageSize, aspectRatio),
+		decideImageWidths(imageSize, aspectRatio, mobileAspectRatio),
 	);
 
 	const fallbackSource = getFallbackSource(sources);
@@ -191,6 +208,8 @@ export const CardPicture = ({
 			css={[
 				block,
 				decideAspectRatioStyles(aspectRatio),
+				mobileAspectRatio &&
+					decideMobileAspectRatioStyles(mobileAspectRatio),
 				roundedCorners && borderRadius,
 				isCircular && circularStyles,
 			]}
