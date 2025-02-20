@@ -40,7 +40,7 @@ export const StaticFeatureTwo = ({
 				return (
 					<LI
 						stretch={false}
-						percentage={'50%'}
+						percentage="50%"
 						key={card.url}
 						padSides={true}
 						showDivider={true}
