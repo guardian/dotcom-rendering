@@ -41,7 +41,6 @@ export type SignedInWithOkta = {
 };
 
 export type AuthStatus =
-	| { kind: 'Pending' }
 	| SignedOutWithCookies
 	| SignedInWithCookies
 	| SignedOutWithOkta

@@ -14,11 +14,7 @@ import {
 import { useEffect, useState } from 'react';
 import type { UserProfile } from '../lib/discussion';
 import { getZIndex } from '../lib/getZIndex';
-import type {
-	AuthStatus,
-	SignedInWithCookies,
-	SignedInWithOkta,
-} from '../lib/identity';
+import type { SignedInWithCookies, SignedInWithOkta } from '../lib/identity';
 import { createAuthenticationEventParams } from '../lib/identity-component-event';
 import {
 	addNotificationsToDropdownLinks,
@@ -27,6 +23,7 @@ import {
 import type { Notification } from '../lib/notification';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useApi } from '../lib/useApi';
+import type { AuthStatusOrPending } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { palette as themePalette } from '../palette';
 import ProfileIcon from '../static/icons/profile.svg';
@@ -40,7 +37,7 @@ interface MyAccountProps {
 	idUrl: string;
 	discussionApiUrl: string;
 	idApiUrl: string;
-	authStatus: AuthStatus;
+	authStatus: AuthStatusOrPending;
 }
 
 // when SignedIn, authStatus can only be one of the two SignedIn states
