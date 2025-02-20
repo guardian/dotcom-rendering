@@ -125,6 +125,10 @@ const block = css`
 	display: block;
 `;
 
+/**
+ * Determines the padding-top percentage based on the provided aspect ratio.
+ * This helps maintain the correct aspect ratio for images.
+ */
 const getAspectRatioPadding = (aspectRatio?: AspectRatio): string => {
 	switch (aspectRatio) {
 		case '5:4':
@@ -138,11 +142,7 @@ const getAspectRatioPadding = (aspectRatio?: AspectRatio): string => {
 			return '60%';
 	}
 };
-/**
- * On fronts, Fairground cards have an image ration of 5:4.
- * This is due to replace the existing card ratio of 5:3
- * For now, we are keeping both ratios.
- */
+
 const decideAspectRatioStyles = (aspectRatio?: AspectRatio) => {
 	const paddingRatio = getAspectRatioPadding(aspectRatio);
 	return css`
