@@ -2,8 +2,10 @@ import type { ConsentState } from '@guardian/libs';
 import { cmp, onConsent } from '@guardian/libs';
 import { getCookie, log } from '@guardian/libs';
 import { getLocaleCode } from '../lib/getCountryCode';
+import { isUserLoggedInOktaRefactor } from '../lib/identity';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { getOphan } from './ophan/ophan';
+import { allowRejectAll } from './userFeatures/cookies/allowRejectAll';
 
 const submitConsentToOphan = async (renderingTarget: RenderingTarget) => {
 	const consentState: ConsentState = await onConsent();
@@ -59,6 +61,9 @@ const initialiseCmp = async () => {
 	const code = await getLocaleCode();
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const { pageViewId } = window.guardian.config.ophan;
+	const isUserSignedIn = await isUserLoggedInOktaRefactor();
+	// If user has the "reject all" benefit then show the reduced, "non-advertised" list
+	const useNonAdvertisedList = allowRejectAll(isUserSignedIn);
 
 	const country = code ?? undefined;
 	cmp.init({
@@ -69,6 +74,8 @@ const initialiseCmp = async () => {
 			pageViewId,
 		},
 		country,
+		useNonAdvertisedList,
+		isUserSignedIn,
 	});
 	log('dotcom', 'CMP initialised');
 };
