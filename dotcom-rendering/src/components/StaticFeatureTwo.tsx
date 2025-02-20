@@ -75,9 +75,6 @@ export const StaticFeatureTwo = ({
 							imageSize="feature-large"
 							headlineSizes={{ desktop: 'small' }}
 							supportingContent={card.supportingContent}
-							galleryCount={card.galleryCount}
-							podcastImage={card.podcastImage}
-							audioDuration={card.audioDuration}
 							collectionId={collectionId}
 						/>
 					</LI>
