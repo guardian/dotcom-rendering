@@ -2513,7 +2513,7 @@ const cardHeadlineTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 
 const cardTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
-const cardTrailTextLight: PaletteFunction = () => sourcePalette.neutral[38];
+const cardTrailTextLight: PaletteFunction = () => sourcePalette.neutral[46];
 const cardTrailTextDark: PaletteFunction = () => sourcePalette.neutral[73];
 
 const liveKickerBackgroundLight: PaletteFunction = (format) => {
@@ -6498,6 +6498,18 @@ const paletteColours = {
 	'--feature-card-kicker-text': {
 		light: featureCardKickerTextLight,
 		dark: () => sourcePalette.neutral[20],
+	},
+	'--feature-card-play-icon-background': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--feature-card-play-icon-border': {
+		light: () => sourcePalette.neutral[60],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--feature-card-play-icon-fill': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
 	},
 	'--feature-card-trail-text': {
 		light: () => sourcePalette.neutral[86],

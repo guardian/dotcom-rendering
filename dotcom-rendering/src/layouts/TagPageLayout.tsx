@@ -26,11 +26,11 @@ import {
 } from '../lib/getTagPageAdPositions';
 import { enhanceTags } from '../model/enhanceTags';
 import type { NavType } from '../model/extract-nav';
-import type { DCRTagPageType } from '../types/tagPage';
+import type { TagPage as TagPageModel } from '../types/tagPage';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
-	tagPage: DCRTagPageType;
+	tagPage: TagPageModel;
 	NAV: NavType;
 }
 
