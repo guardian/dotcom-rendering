@@ -221,7 +221,11 @@ export const YoutubeAtomFeatureCardOverlay = ({
 							) : undefined
 						}
 						showLivePlayable={false}
-						mainMedia={{ type: 'Video', duration: duration ?? 0 }}
+						mainMedia={
+							isVideoArticle
+								? { type: 'Video', duration: duration ?? 0 }
+								: undefined
+						}
 					/>
 				</div>
 			</button>
