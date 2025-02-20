@@ -103,7 +103,7 @@ const block = css`
 	display: block;
 `;
 
-const getAspectRatioPadding = (aspectRatio?: AspectRatio): string => {
+export const getAspectRatioPadding = (aspectRatio?: AspectRatio): string => {
 	switch (aspectRatio) {
 		case '5:4':
 			return '80%';
