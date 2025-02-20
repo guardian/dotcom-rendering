@@ -212,7 +212,7 @@ export const HighlightsCard = ({
 			)}
 			{mainMedia?.type === 'Audio' && (
 				<Pill
-					content={mainMedia.duration ?? ''}
+					content={mainMedia.duration}
 					icon={<SvgMediaControlsPlay />}
 					iconSize={'small'}
 				/>
