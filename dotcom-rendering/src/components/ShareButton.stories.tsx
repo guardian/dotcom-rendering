@@ -3,6 +3,7 @@ import {
 	defaultFormats,
 	splitTheme,
 } from '../../.storybook/decorators/splitThemeDecorator';
+import { allModes } from '../../.storybook/modes';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { palette as themePalette } from '../palette';
 import {
@@ -75,12 +76,6 @@ export const LiveBlogMobileMeta = () => {
 	);
 };
 LiveBlogMobileMeta.storyName = 'LiveBlogMobileMeta';
-LiveBlogMobileMeta.story = {
-	parameters: {
-		viewport: { defaultViewport: 'mobileMedium' },
-		chromatic: { viewports: [375] },
-	},
-};
 LiveBlogMobileMeta.parameters = {
 	colourSchemeBackground: {
 		light: themePalette('--share-button-liveblog-mobile-meta'),
@@ -89,6 +84,12 @@ LiveBlogMobileMeta.parameters = {
 	formats: [...defaultFormats].filter(
 		(format) => format.design !== ArticleDesign.Gallery,
 	),
+	viewport: { defaultViewport: 'mobileMedium' },
+	chromatic: {
+		modes: {
+			'vertical mobileMedium': allModes['vertical mobileMedium'],
+		},
+	},
 };
 
 export const EmailLinkStory = () => {
