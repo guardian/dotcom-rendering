@@ -185,7 +185,7 @@ const FormatHeading = ({ format, colourScheme }: FormatHeadingProps) => (
 				padding: space[1],
 				color:
 					colourScheme === 'light'
-						? sourcePalette.neutral[38]
+						? sourcePalette.neutral[20]
 						: sourcePalette.neutral[73],
 				backgroundColor:
 					colourScheme === 'light'
