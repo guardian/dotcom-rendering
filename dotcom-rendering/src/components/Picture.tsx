@@ -265,8 +265,7 @@ type ImageSource = {
  * Generate image sources for an image.
  *
  * @param mainImage source image URL
- * @param imageWidths list of image widths
- * @param aspectRatio - Aspect ratio that the image should be cropped to (e.g., 5:4). Optional.
+ * @param imageWidths list of image widths. Each "width" includes the breakpoint, width, and optional aspectratio
  */
 export const generateSources = (
 	mainImage: string,
