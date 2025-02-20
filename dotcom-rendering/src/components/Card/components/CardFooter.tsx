@@ -67,7 +67,7 @@ export const CardFooter = ({
 		return <footer css={labStyles}>{cardBranding}</footer>;
 	}
 
-	if (mainMedia?.type === 'Video' && mainMedia.duration !== undefined) {
+	if (mainMedia?.type === 'Video') {
 		return (
 			<footer css={contentStyles}>
 				<Pill
