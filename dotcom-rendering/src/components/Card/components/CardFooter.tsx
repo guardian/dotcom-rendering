@@ -80,7 +80,7 @@ export const CardFooter = ({
 		);
 	}
 
-	if (mainMedia?.type === 'Audio' && mainMedia.duration !== undefined) {
+	if (mainMedia?.type === 'Audio') {
 		return (
 			<footer css={contentStyles}>
 				<Pill
