@@ -1,5 +1,4 @@
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
-import { palette } from '../palette';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
@@ -18,7 +17,7 @@ type Props = {
 	absoluteServerTimes: boolean;
 };
 
-/*
+/*ø
  * Note:
  * dynamic/package does not use cardWrappers as
  * most of the card configurations are custom and not used
@@ -62,7 +61,6 @@ const Snap100 = ({
 					trailText={snaps[0].trailText}
 					supportingContentAlignment="horizontal"
 					imageLoading={imageLoading}
-					trailTextColour={palette('--card-headline')}
 				/>
 			</LI>
 		</UL>
@@ -109,7 +107,6 @@ const Card100 = ({
 					supportingContent={limitSupportingContent(cards[0])}
 					supportingContentAlignment="horizontal"
 					imageLoading={imageLoading}
-					trailTextColour={palette('--card-headline')}
 				/>
 			</LI>
 		</UL>
@@ -149,7 +146,6 @@ const Card75_Card25 = ({
 						imageSize="medium"
 						trailText={card.trailText}
 						imageLoading={imageLoading}
-						trailTextColour={palette('--card-headline')}
 					/>
 				</LI>
 			))}
@@ -167,7 +163,6 @@ const Card75_Card25 = ({
 						showAge={showAge}
 						absoluteServerTimes={absoluteServerTimes}
 						imageLoading={imageLoading}
-						trailTextColour={palette('--card-headline')}
 					/>
 				</LI>
 			))}
@@ -210,7 +205,6 @@ const Card25_Card25_Card25_Card25 = ({
 							supportingContent={limitSupportingContent(card)}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
-							trailTextColour={palette('--card-headline')}
 						/>
 					</LI>
 				);
@@ -253,7 +247,6 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 							absoluteServerTimes={absoluteServerTimes}
 							supportingContent={limitSupportingContent(card)}
 							imageLoading={imageLoading}
-							trailTextColour={palette('--card-headline')}
 						/>
 					</LI>
 				);
@@ -278,7 +271,6 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 									)}
 									image={undefined}
 									imageLoading={imageLoading}
-									trailTextColour={palette('--card-headline')}
 								/>
 							</LI>
 						);
@@ -323,7 +315,6 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 							absoluteServerTimes={absoluteServerTimes}
 							supportingContent={limitSupportingContent(card)}
 							imageLoading={imageLoading}
-							trailTextColour={palette('--card-headline')}
 						/>
 					</LI>
 				);
@@ -354,7 +345,6 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 									)}
 									image={undefined}
 									imageLoading={imageLoading}
-									trailTextColour={palette('--card-headline')}
 								/>
 							</LI>
 						);
@@ -394,7 +384,6 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 							absoluteServerTimes={absoluteServerTimes}
 							supportingContent={limitSupportingContent(card)}
 							imageLoading={imageLoading}
-							trailTextColour={palette('--card-headline')}
 						/>
 					</LI>
 				);
@@ -425,7 +414,6 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 									)}
 									image={undefined}
 									imageLoading={imageLoading}
-									trailTextColour={palette('--card-headline')}
 								/>
 							</LI>
 						);
@@ -469,7 +457,6 @@ const Card75_ColumnOfCards25 = ({
 						supportingContent={limitSupportingContent(card)}
 						isDynamo={true}
 						imageLoading={imageLoading}
-						trailTextColour={palette('--card-headline')}
 					/>
 				</LI>
 			))}
@@ -511,7 +498,6 @@ const Card75_ColumnOfCards25 = ({
 										card,
 									)}
 									imageLoading={imageLoading}
-									trailTextColour={palette('--card-headline')}
 								/>
 							</LI>
 						);
