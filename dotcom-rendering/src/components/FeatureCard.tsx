@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import { SvgMediaControlsPlay } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
@@ -85,6 +85,26 @@ const contentStyles = css`
 	flex-direction: column;
 `;
 
+const immersiveOverlayStyles = css`
+	${from.tablet} {
+		height: 100%;
+		top: 0;
+		width: 260px;
+		padding-top: ${space[2]}px;
+		mask-image: linear-gradient(
+			270deg,
+			transparent 0px,
+			rgba(0, 0, 0, 0.0381) 8px,
+			rgba(0, 0, 0, 0.1464) 16px,
+			rgba(0, 0, 0, 0.3087) 24px,
+			rgba(0, 0, 0, 0.5) 32px,
+			rgba(0, 0, 0, 0.6913) 40px,
+			rgba(0, 0, 0, 0.8536) 48px,
+			rgba(0, 0, 0, 0.9619) 56px,
+			rgb(0, 0, 0) 64px
+		);
+	}
+`;
 /**
  * Image mask gradient has additional colour stops to emulate a non-linear
  * ease in / ease out curve to make the transition smoother. Values were
@@ -220,6 +240,8 @@ export type Props = {
 	 * The highlights container above the header is 0, the first container below the header is 1, etc.
 	 */
 	collectionId: number;
+	/** Immersive cards have a seperate aspect ratio for mobile and tablet/desktop */
+	isImmersive?: boolean;
 };
 
 export const FeatureCard = ({
@@ -253,6 +275,7 @@ export const FeatureCard = ({
 	starRating,
 	showQuotes,
 	collectionId,
+	isImmersive = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -342,6 +365,7 @@ export const FeatureCard = ({
 										discussionId={discussionId}
 										discussionApiUrl={discussionApiUrl}
 										isFeatureCard={true}
+										isImmersive={isImmersive}
 									/>
 								</Island>
 							</div>
@@ -373,7 +397,14 @@ export const FeatureCard = ({
 											alt={headlineText}
 											loading={imageLoading}
 											roundedCorners={false}
-											aspectRatio={aspectRatio}
+											aspectRatio={
+												isImmersive
+													? '5:3'
+													: aspectRatio
+											}
+											mobileAspectRatio={
+												isImmersive ? '4:5' : undefined
+											}
 										/>
 									</div>
 								)}
@@ -386,7 +417,14 @@ export const FeatureCard = ({
 											alt={media.imageAltText}
 											loading={imageLoading}
 											roundedCorners={false}
-											aspectRatio={aspectRatio}
+											aspectRatio={
+												isImmersive
+													? '5:3'
+													: aspectRatio
+											}
+											mobileAspectRatio={
+												isImmersive ? '4:5' : undefined
+											}
 										/>
 										{isVideoMainMedia &&
 											mainMedia.duration > 0 && (
@@ -443,7 +481,13 @@ export const FeatureCard = ({
 												</div>
 											</div>
 										)}
-									<div css={overlayStyles}>
+									<div
+										css={[
+											overlayStyles,
+											isImmersive &&
+												immersiveOverlayStyles,
+										]}
+									>
 										{/**
 										 * Without the wrapping div the headline and byline would have space
 										 * inserted between them due to being direct children of the flex container

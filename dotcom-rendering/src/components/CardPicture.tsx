@@ -168,7 +168,7 @@ const decideAspectRatioStyles = (aspectRatio?: AspectRatio) => {
 	`;
 };
 
-const decideMobileAspectRatioStyles = (aspectRatio?: AspectRatio) => {
+export const decideMobileAspectRatioStyles = (aspectRatio?: AspectRatio) => {
 	const paddingRatio = getAspectRatioPadding(aspectRatio);
 	return css`
 		${until.tablet} {

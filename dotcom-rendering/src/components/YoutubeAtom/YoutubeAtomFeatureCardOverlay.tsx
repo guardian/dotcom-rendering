@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { space } from '@guardian/source/foundations';
+import { from, space } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import { secondsToDuration } from '../../lib/formatTime';
 import { palette } from '../../palette';
@@ -46,6 +46,26 @@ const hoverStyles = css`
 	/* Only underline the headline element we want to target (not kickers/sublink headlines) */
 	:hover .card-headline .show-underline {
 		text-decoration: underline;
+	}
+`;
+const immersiveOverlayStyles = css`
+	${from.tablet} {
+		height: 100%;
+		top: 0;
+		width: 260px;
+		padding-top: ${space[2]}px;
+		mask-image: linear-gradient(
+			270deg,
+			transparent 0px,
+			rgba(0, 0, 0, 0.0381) 8px,
+			rgba(0, 0, 0, 0.1464) 16px,
+			rgba(0, 0, 0, 0.3087) 24px,
+			rgba(0, 0, 0, 0.5) 32px,
+			rgba(0, 0, 0, 0.6913) 40px,
+			rgba(0, 0, 0, 0.8536) 48px,
+			rgba(0, 0, 0, 0.9619) 56px,
+			rgb(0, 0, 0) 64px
+		);
 	}
 `;
 
@@ -100,6 +120,7 @@ type Props = {
 	linkTo?: string;
 	discussionApiUrl?: string;
 	discussionId?: string;
+	isImmersive?: boolean;
 };
 
 export const YoutubeAtomFeatureCardOverlay = ({
@@ -123,6 +144,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	linkTo,
 	discussionId,
 	discussionApiUrl,
+	isImmersive,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
@@ -152,7 +174,8 @@ export const YoutubeAtomFeatureCardOverlay = ({
 						alt={alt}
 						height={height}
 						width={width}
-						aspectRatio={aspectRatio}
+						aspectRatio={isImmersive ? '5:3' : aspectRatio}
+						mobileAspectRatio={isImmersive ? '4:5' : undefined}
 					/>
 				)}
 				{hasDuration && !isVideoArticle ? (
@@ -165,7 +188,12 @@ export const YoutubeAtomFeatureCardOverlay = ({
 				) : null}
 				<div className="image-overlay" />
 				<PlayIcon iconWidth="narrow" />
-				<div css={[textOverlayStyles]}>
+				<div
+					css={[
+						textOverlayStyles,
+						isImmersive && immersiveOverlayStyles,
+					]}
+				>
 					{!!kicker && (
 						<Kicker
 							text={kicker}
