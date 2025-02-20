@@ -185,8 +185,8 @@ const FormatHeading = ({ format, colourScheme }: FormatHeadingProps) => (
 				padding: space[1],
 				color:
 					colourScheme === 'light'
-						? sourcePalette.neutral[0]
-						: sourcePalette.neutral[100],
+						? sourcePalette.neutral[38]
+						: sourcePalette.neutral[73],
 				backgroundColor:
 					colourScheme === 'light'
 						? sourcePalette.neutral[100]
@@ -207,28 +207,20 @@ const FormatHeading = ({ format, colourScheme }: FormatHeadingProps) => (
 type PaletteProps = {
 	format: ArticleFormat;
 	colourScheme: ColourScheme;
-	context: Context;
 	children: ReactNode;
 };
 
 /**
  * Generates the palette colours using the given {@linkcode ArticleFormat} and
- * {@linkcode ColourScheme} and makes them available to the Story. Also sets
- * default background and text colours supplied via the `colourSchemeBackground`
- * and `colourSchemeTextColour` parameters from the story, or provides defaults
- * when these are not supplied.
+ * {@linkcode ColourScheme} and makes them available to the Story.
  *
  * For more information on how the palette works see
  * {@linkcode paletteDeclarations}.
  */
-const Palette = ({ format, colourScheme, context, children }: PaletteProps) => (
+const Palette = ({ format, colourScheme, children }: PaletteProps) => (
 	<div
 		data-color-scheme={colourScheme}
 		css={css(paletteDeclarations(format, colourScheme))}
-		style={{
-			backgroundColor: backgroundColour(colourScheme, context),
-			color: textColour(colourScheme, context),
-		}}
 	>
 		{children}
 	</div>
@@ -250,18 +242,23 @@ type ThemeProps = {
  * it will render the story once in light mode. If three formats are passed and
  * the colours scheme is 'dark', it will render the story three times, once for
  * each format, and all three will be in dark mode.
+ *
+ * Also sets default background and text colours supplied via the
+ * `colourSchemeBackground` and `colourSchemeTextColour` parameters from the
+ * story, or provides defaults when these are not supplied.
  */
 const Theme = ({ formats, Story, context, colourScheme }: ThemeProps) => (
-	<div>
+	<div
+		css={{
+			backgroundColor: backgroundColour(colourScheme, context),
+			color: textColour(colourScheme, context),
+		}}
+	>
 		<ThemeHeading colourScheme={colourScheme} />
 		{formats.map((format) => (
 			<>
 				<FormatHeading format={format} colourScheme={colourScheme} />
-				<Palette
-					colourScheme={colourScheme}
-					context={context}
-					format={format}
-				>
+				<Palette colourScheme={colourScheme} format={format}>
 					<Story
 						args={{
 							...context.args,
