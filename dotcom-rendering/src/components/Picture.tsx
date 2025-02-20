@@ -8,7 +8,7 @@ import {
 } from '../lib/articleFormat';
 import { generateImageURL } from '../lib/image';
 import type { RoleType } from '../types/content';
-import { AspectRatio } from '../types/front';
+import type { AspectRatio } from '../types/front';
 import type { Loading } from './CardPicture';
 
 /**
@@ -34,7 +34,6 @@ type Props = {
 	isLightbox?: boolean;
 	orientation?: Orientation;
 	onLoad?: () => void;
-	aspectRatio?: string;
 };
 
 export type ImageWidthType = {
