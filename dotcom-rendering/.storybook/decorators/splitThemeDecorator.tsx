@@ -153,14 +153,6 @@ const ThemeHeading = ({ colourScheme }: { colourScheme: ColourScheme }) => (
 			{
 				textAlign: 'center',
 				padding: space[2],
-				color:
-					colourScheme === 'light'
-						? sourcePalette.neutral[0]
-						: sourcePalette.neutral[100],
-				backgroundColor:
-					colourScheme === 'light'
-						? sourcePalette.neutral[100]
-						: sourcePalette.neutral[0],
 			},
 		]}
 	>
@@ -187,10 +179,6 @@ const FormatHeading = ({ format, colourScheme }: FormatHeadingProps) => (
 					colourScheme === 'light'
 						? sourcePalette.neutral[20]
 						: sourcePalette.neutral[73],
-				backgroundColor:
-					colourScheme === 'light'
-						? sourcePalette.neutral[100]
-						: sourcePalette.neutral[0],
 			},
 		]}
 	>
@@ -207,6 +195,7 @@ const FormatHeading = ({ format, colourScheme }: FormatHeadingProps) => (
 type PaletteProps = {
 	format: ArticleFormat;
 	colourScheme: ColourScheme;
+	context: Context;
 	children: ReactNode;
 };
 
@@ -217,10 +206,16 @@ type PaletteProps = {
  * For more information on how the palette works see
  * {@linkcode paletteDeclarations}.
  */
-const Palette = ({ format, colourScheme, children }: PaletteProps) => (
+const Palette = ({ format, colourScheme, context, children }: PaletteProps) => (
 	<div
 		data-color-scheme={colourScheme}
-		css={css(paletteDeclarations(format, colourScheme))}
+		css={[
+			css(paletteDeclarations(format, colourScheme)),
+			{
+				backgroundColor: backgroundColour(colourScheme, context),
+				color: textColour(colourScheme, context),
+			},
+		]}
 	>
 		{children}
 	</div>
@@ -250,15 +245,25 @@ type ThemeProps = {
 const Theme = ({ formats, Story, context, colourScheme }: ThemeProps) => (
 	<div
 		css={{
-			backgroundColor: backgroundColour(colourScheme, context),
-			color: textColour(colourScheme, context),
+			color:
+				colourScheme === 'light'
+					? sourcePalette.neutral[0]
+					: sourcePalette.neutral[100],
+			backgroundColor:
+				colourScheme === 'light'
+					? sourcePalette.neutral[100]
+					: sourcePalette.neutral[0],
 		}}
 	>
 		<ThemeHeading colourScheme={colourScheme} />
 		{formats.map((format) => (
 			<>
 				<FormatHeading format={format} colourScheme={colourScheme} />
-				<Palette colourScheme={colourScheme} format={format}>
+				<Palette
+					colourScheme={colourScheme}
+					context={context}
+					format={format}
+				>
 					<Story
 						args={{
 							...context.args,
