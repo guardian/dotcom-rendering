@@ -51,7 +51,11 @@ import { AvatarContainer } from './components/AvatarContainer';
 import { CardAge } from './components/CardAge';
 import { CardBranding } from './components/CardBranding';
 import { CardFooter } from './components/CardFooter';
-import { CardLayout, type GapSizes } from './components/CardLayout';
+import {
+	CardLayout,
+	decideAvatarPosition,
+	type GapSizes,
+} from './components/CardLayout';
 import { CardLink } from './components/CardLink';
 import { CardWrapper } from './components/CardWrapper';
 import { ContentWrapper } from './components/ContentWrapper';
@@ -553,10 +557,21 @@ export const Card = ({
 		isBetaContainer,
 	});
 
-	// For opinion type cards with avatars (which aren't onwards content)
-	// we render the footer in a different location
-	const showCommentFooter =
+	/**
+	 * For opinion type cards with avatars (which aren't onwards content)
+	 * we render the footer in a different location
+	 */
+	const isOpinionCardWithAvatar =
 		isOpinion && !isOnwardContent && media?.type === 'avatar';
+
+	/**
+	 * The avatar position is not always the same as the image position.
+	 */
+	const avatarPosition = decideAvatarPosition(
+		imagePositionOnMobile,
+		imagePositionOnDesktop,
+		isBetaContainer,
+	);
 
 	/**
 -	 * Media cards have contrasting background colours. We add additional
@@ -1107,7 +1122,7 @@ export const Card = ({
 								/>
 							)}
 
-							{!showCommentFooter && (
+							{!isOpinionCardWithAvatar && (
 								<>
 									{showPill ? (
 										<>
@@ -1231,7 +1246,7 @@ export const Card = ({
 				)}
 				{decideOuterSublinks()}
 
-				{showCommentFooter && (
+				{isOpinionCardWithAvatar && (
 					<CardFooter
 						format={format}
 						age={decideAge()}
@@ -1245,6 +1260,10 @@ export const Card = ({
 							) : undefined
 						}
 						showLivePlayable={showLivePlayable}
+						shouldReserveSpace={{
+							mobile: avatarPosition.mobile === 'bottom',
+							desktop: avatarPosition.desktop === 'bottom',
+						}}
 					/>
 				)}
 			</div>
