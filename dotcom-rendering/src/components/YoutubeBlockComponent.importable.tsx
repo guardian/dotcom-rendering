@@ -47,12 +47,6 @@ type Props = {
 	trailText?: string;
 	headlineSizes?: ResponsiveFontSize;
 	isVideoArticle?: boolean;
-	webPublicationDate?: string;
-	showClock?: boolean;
-	absoluteServerTimes?: boolean;
-	linkTo?: string;
-	discussionApiUrl?: string;
-	discussionId?: string;
 	isFeatureCard?: boolean;
 };
 
@@ -84,12 +78,6 @@ export const YoutubeBlockComponent = ({
 	trailText,
 	headlineSizes,
 	isVideoArticle,
-	webPublicationDate,
-	showClock,
-	absoluteServerTimes,
-	linkTo,
-	discussionApiUrl,
-	discussionId,
 	isFeatureCard,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
@@ -193,12 +181,6 @@ export const YoutubeBlockComponent = ({
 				trailText={trailText}
 				headlineSizes={headlineSizes}
 				isVideoArticle={isVideoArticle}
-				webPublicationDate={webPublicationDate}
-				showClock={!!showClock}
-				absoluteServerTimes={absoluteServerTimes}
-				linkTo={linkTo}
-				discussionId={discussionId}
-				discussionApiUrl={discussionApiUrl}
 				isFeatureCard={isFeatureCard}
 			/>
 			{!hideCaption && (

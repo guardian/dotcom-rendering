@@ -54,12 +54,6 @@ export type Props = {
 	trailText?: string;
 	headlineSizes?: ResponsiveFontSize;
 	isVideoArticle?: boolean;
-	webPublicationDate?: string;
-	showClock?: boolean;
-	absoluteServerTimes?: boolean;
-	linkTo?: string;
-	discussionApiUrl?: string;
-	discussionId?: string;
 	isFeatureCard?: boolean;
 };
 
@@ -106,12 +100,6 @@ export const YoutubeAtom = ({
 	trailText,
 	headlineSizes,
 	isVideoArticle,
-	webPublicationDate,
-	showClock,
-	absoluteServerTimes,
-	linkTo,
-	discussionApiUrl,
-	discussionId,
 	isFeatureCard,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
@@ -250,12 +238,6 @@ export const YoutubeAtom = ({
 								aspectRatio={aspectRatio}
 								trailText={trailText}
 								isVideoArticle={isVideoArticle}
-								webPublicationDate={webPublicationDate}
-								showClock={!!showClock}
-								absoluteServerTimes={absoluteServerTimes}
-								linkTo={linkTo}
-								discussionId={discussionId}
-								discussionApiUrl={discussionApiUrl}
 							/>
 						) : (
 							<YoutubeAtomOverlay

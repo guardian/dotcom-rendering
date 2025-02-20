@@ -10,8 +10,6 @@ import { PlayIcon } from '../Card/components/PlayIcon';
 import { TrailText } from '../Card/components/TrailText';
 import type { ResponsiveFontSize } from '../CardHeadline';
 import { CardHeadline } from '../CardHeadline';
-import { FeatureCardCardAge } from '../FeatureCardCardAge';
-import { FeatureCardCommentCount } from '../FeatureCardCommentCount';
 import { FormatBoundary } from '../FormatBoundary';
 import { Kicker } from '../Kicker';
 import { Pill } from '../Pill';
@@ -94,12 +92,6 @@ type Props = {
 	aspectRatio?: AspectRatio;
 	trailText?: string;
 	isVideoArticle?: boolean;
-	webPublicationDate?: string;
-	showClock?: boolean;
-	absoluteServerTimes?: boolean;
-	linkTo?: string;
-	discussionApiUrl?: string;
-	discussionId?: string;
 };
 
 export const YoutubeAtomFeatureCardOverlay = ({
@@ -117,25 +109,9 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	aspectRatio,
 	trailText,
 	isVideoArticle,
-	webPublicationDate,
-	showClock,
-	absoluteServerTimes,
-	linkTo,
-	discussionId,
-	discussionApiUrl,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
-
-	const showCardAge =
-		webPublicationDate !== undefined &&
-		showClock !== undefined &&
-		absoluteServerTimes !== undefined;
-
-	const showCommentCount =
-		linkTo !== undefined &&
-		discussionId !== undefined &&
-		discussionApiUrl !== undefined;
 
 	return (
 		<FormatBoundary format={format}>
@@ -202,24 +178,6 @@ export const YoutubeAtomFeatureCardOverlay = ({
 					)}
 					<CardFooter
 						format={format}
-						age={
-							showCardAge ? (
-								<FeatureCardCardAge
-									webPublicationDate={webPublicationDate}
-									showClock={!!showClock}
-									absoluteServerTimes={absoluteServerTimes}
-								/>
-							) : undefined
-						}
-						commentCount={
-							showCommentCount ? (
-								<FeatureCardCommentCount
-									linkTo={linkTo}
-									discussionId={discussionId}
-									discussionApiUrl={discussionApiUrl}
-								/>
-							) : undefined
-						}
 						showLivePlayable={false}
 						mainMedia={{ type: 'Video', duration: duration ?? 0 }}
 					/>

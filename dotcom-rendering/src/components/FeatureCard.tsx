@@ -333,14 +333,6 @@ export const FeatureCard = ({
 										iconSizeOnDesktop="large"
 										iconSizeOnMobile="large"
 										headlineSizes={headlineSizes}
-										webPublicationDate={webPublicationDate}
-										showClock={!!showClock}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
-										linkTo={linkTo}
-										discussionId={discussionId}
-										discussionApiUrl={discussionApiUrl}
 										isFeatureCard={true}
 									/>
 								</Island>
