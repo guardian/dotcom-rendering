@@ -8,9 +8,9 @@ const exampleCard: DCRFrontCard = {
 	},
 	dataLinkName: 'media | group-0 | card-@1',
 	url: '/science/audio/2024/dec/12/does-googles-mindboggling-new-chip-bring-quantum-computers-any-closer-podcast',
-	headline: ' Google’s ‘mindboggling’ new quantum chip',
+	headline: 'Loop video test. This is what a looping video might look like',
 	trailText:
-		'Ian Sample speaks to Winfried Hensinger, professor of quantum technologies at the University of Sussex to find out how quantum computers work, and whether Google’s new chip is an important milestone in their development.',
+		'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.',
 	webPublicationDate: '2024-12-12T05:00:09.000Z',
 	kickerText: 'Podcast',
 	supportingContent: [],
@@ -44,7 +44,7 @@ const exampleCard: DCRFrontCard = {
 export const testVideoCollection: DCRCollectionType = {
 	id: '2e10eba3-7836-4381-bfc0-07d71a3295f6',
 	displayName: 'video test',
-	collectionType: 'fixed/small/slow-V-third',
+	collectionType: 'fixed/small/slow-I',
 	grouped: {
 		snap: [],
 		huge: [],
@@ -53,7 +53,7 @@ export const testVideoCollection: DCRCollectionType = {
 		standard: [],
 		splash: [],
 	},
-	curated: [exampleCard, exampleCard, exampleCard, exampleCard, exampleCard],
+	curated: [exampleCard],
 	backfill: [],
 	treats: [],
 	config: {
