@@ -106,10 +106,20 @@ const decideImageWidths = (
 				{
 					breakpoint: breakpoints.mobile,
 					width: 325,
-					aspectRatio: aspectRatioMobile,
+					aspectRatio: aspectRatio,
 				},
 				{ breakpoint: breakpoints.tablet, width: 337, aspectRatio },
 				{ breakpoint: breakpoints.desktop, width: 460, aspectRatio },
+			];
+		case 'feature-immersive':
+			return [
+				{
+					breakpoint: breakpoints.mobile,
+					width: 340,
+					aspectRatio: aspectRatioMobile,
+				},
+				{ breakpoint: breakpoints.tablet, width: 700, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 940, aspectRatio },
 			];
 	}
 };
@@ -129,7 +139,7 @@ const block = css`
  * Determines the padding-top percentage based on the provided aspect ratio.
  * This helps maintain the correct aspect ratio for images.
  */
-const getAspectRatioPadding = (aspectRatio?: AspectRatio): string => {
+export const getAspectRatioPadding = (aspectRatio?: AspectRatio): string => {
 	switch (aspectRatio) {
 		case '5:4':
 			return '80%';
