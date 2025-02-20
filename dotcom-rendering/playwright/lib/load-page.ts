@@ -6,25 +6,35 @@ import type { FEArticleType } from '../../src/types/frontend';
 const BASE_URL = `http://localhost:${PORT}`;
 
 /**
- * Loads a page and centralises setup:
- * - default the base url and port
- * - default the geo region to GB
- * - prevent the support banner from showing
+ * Loads a page in Playwright and centralises setup
  */
-const loadPage = async (
-	page: Page,
-	path: string,
-	waitUntil: 'load' | 'domcontentloaded' = 'domcontentloaded',
+const loadPage = async ({
+	page,
+	path,
+	queryParams = {},
+	queryParamsOn = true,
+	fragment,
+	waitUntil = 'domcontentloaded',
 	region = 'GB',
 	preventSupportBanner = true,
-): Promise<void> => {
+}: {
+	page: Page;
+	path: string;
+	queryParams?: Record<string, string>;
+	queryParamsOn?: boolean;
+	fragment?: `#${string}`;
+	waitUntil?: 'domcontentloaded' | 'load';
+	region?: 'GB' | 'US' | 'AU' | 'INT';
+	preventSupportBanner?: boolean;
+}): Promise<void> => {
 	await page.addInitScript(
 		(args) => {
-			// force geo region
+			// Set the geo region, defaults to GB
 			window.localStorage.setItem(
 				'gu.geo.override',
 				JSON.stringify({ value: args.region }),
 			);
+			// Prevent the support banner from showing
 			if (args.preventSupportBanner) {
 				window.localStorage.setItem(
 					'gu.prefs.engagementBannerLastClosedAt',
@@ -32,11 +42,24 @@ const loadPage = async (
 				);
 			}
 		},
-		{ region, preventSupportBanner },
+		{
+			region,
+			preventSupportBanner,
+		},
 	);
+	// Add an adtest query param to ensure we get a fixed test ad
+	const paramsString = queryParamsOn
+		? `?${new URLSearchParams({
+				adtest: 'fixed-puppies-ci',
+				...queryParams,
+		  }).toString()}`
+		: '';
+
 	// The default Playwright waitUntil: 'load' ensures all requests have completed
 	// Use 'domcontentloaded' to speed up tests and prevent hanging requests from timing out tests
-	await page.goto(`${BASE_URL}${path}`, { waitUntil });
+	await page.goto(`${BASE_URL}${path}${paramsString}${fragment ?? ''}`, {
+		waitUntil,
+	});
 };
 
 /**
@@ -72,7 +95,7 @@ const loadPageWithOverrides = async (
 			postData,
 		});
 	});
-	await loadPage(page, path);
+	await loadPage({ page, path, queryParamsOn: false });
 };
 
 /**

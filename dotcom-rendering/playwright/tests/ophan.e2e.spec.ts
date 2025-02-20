@@ -38,7 +38,7 @@ test.describe('Ophan requests', () => {
 				);
 			},
 		});
-		await loadPage(page, `/Article/${articleUrl}`);
+		await loadPage({ page, path: `/Article/${articleUrl}` });
 		await cmpRejectAll(page);
 		await ophanImpressionRequestPromise;
 	});
@@ -60,7 +60,7 @@ test.describe('Ophan requests', () => {
 				);
 			},
 		});
-		await loadPage(page, `/Article/${articleUrl}`);
+		await loadPage({ page, path: `/Article/${articleUrl}` });
 		await cmpAcceptAll(page);
 		await ophanImpressionRequestPromise;
 	});
@@ -78,7 +78,7 @@ test.describe('Ophan requests', () => {
 				return experiences === 'dotcom-rendering';
 			},
 		});
-		await loadPage(page, `/Article/${articleUrl}`);
+		await loadPage({ page, path: `/Article/${articleUrl}` });
 		await ophanExperienceRequestPromise;
 	});
 
@@ -101,7 +101,7 @@ test.describe('Ophan requests', () => {
 				);
 			},
 		});
-		await loadPage(page, `/Front/${frontUrl}`);
+		await loadPage({ page, path: `/Front/${frontUrl}` });
 		await ophanImpressionRequestPromise;
 	});
 
@@ -118,7 +118,7 @@ test.describe('Ophan requests', () => {
 				return experiences === 'dotcom-rendering';
 			},
 		});
-		await loadPage(page, `/Front/${frontUrl}`);
+		await loadPage({ page, path: `/Front/${frontUrl}` });
 		await ophanExperienceRequestPromise;
 	});
 });

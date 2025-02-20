@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	remSpace,
 	palette as sourcePalette,
 	until,
 } from '@guardian/source/foundations';
@@ -66,9 +67,9 @@ const CrosswordGrid = ({ children }: { children: React.ReactNode }) => (
 			${from.wide} {
 				grid-template-columns: 220px 1fr 300px;
 				grid-template-areas:
-					'title  headline      right-column'
-					'meta   standfirst    right-column'
-					'meta   instructions  right-column'
+					'title  headline      .'
+					'meta   standfirst    .'
+					'meta   instructions  .'
 					'body   body          right-column';
 			}
 		`}
@@ -309,16 +310,22 @@ export const CrosswordLayout = (props: Props) => {
 							</GridItem>
 							<GridItem area="right-column">
 								<RightColumn showFrom="wide">
-									{renderAds ? (
-										<AdSlot
-											position="right"
-											display={format.display}
-											isPaidContent={isPaidContent}
-											shouldHideReaderRevenue={
-												article.shouldHideReaderRevenue
-											}
-										/>
-									) : null}
+									<div
+										css={css`
+											margin-top: ${remSpace[3]};
+										`}
+									>
+										{renderAds ? (
+											<AdSlot
+												position="right"
+												display={format.display}
+												isPaidContent={isPaidContent}
+												shouldHideReaderRevenue={
+													article.shouldHideReaderRevenue
+												}
+											/>
+										) : null}
+									</div>
 								</RightColumn>
 							</GridItem>
 						</CrosswordGrid>

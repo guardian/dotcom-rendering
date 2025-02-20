@@ -24,7 +24,11 @@ test.describe('Liveblogs', () => {
 	test('should show the toast, incrementing the count as new updates are sent', async ({
 		page,
 	}) => {
-		await loadPage(page, `/Article/${blogUrl}?live=true`);
+		await loadPage({
+			page,
+			path: `/Article/${blogUrl}`,
+			queryParams: { live: 'true' },
+		});
 		await waitForIsland(page, 'Liveness', { waitFor: 'attached' });
 
 		await expectToNotExist(page, `[data-testid="toast"]`);
@@ -63,7 +67,11 @@ test.describe('Liveblogs', () => {
 	});
 
 	test('should insert the html from the update call', async ({ page }) => {
-		await loadPage(page, `/Article/${blogUrl}?live=true`);
+		await loadPage({
+			page,
+			path: `/Article/${blogUrl}`,
+			queryParams: { live: 'true' },
+		});
 		await waitForIsland(page, 'Liveness', { waitFor: 'attached' });
 
 		await page.evaluate(() => {
@@ -82,7 +90,12 @@ test.describe('Liveblogs', () => {
 	test('should scroll the page to the top and reveal content when the toast is clicked', async ({
 		page,
 	}) => {
-		await loadPage(page, `/Article/${blogUrl}?live=true`);
+		await loadPage({
+			page,
+			path: `/Article/${blogUrl}`,
+			queryParams: { live: 'true' },
+		});
+
 		await waitForIsland(page, 'Liveness', { waitFor: 'attached' });
 
 		await expectToNotExist(page, `[data-testid="toast"]`);
@@ -110,7 +123,11 @@ test.describe('Liveblogs', () => {
 	test('should enhance tweets after they have been inserted', async ({
 		page,
 	}) => {
-		await loadPage(page, `/Article/${blogUrl}?live=true`);
+		await loadPage({
+			page,
+			path: `/Article/${blogUrl}`,
+			queryParams: { live: 'true' },
+		});
 		await waitForIsland(page, 'Liveness', { waitFor: 'attached' });
 
 		await page.evaluate((block) => {
@@ -162,16 +179,16 @@ test.describe('Liveblogs', () => {
 			return matchLastUpdate;
 		});
 
-		const searchParams = new URLSearchParams([
-			['live', 'true'],
-			['page', 'with:block-6214732b8f08f86d89ef68d6'],
-			['filterKeyEvents', 'false'],
-		]);
-
-		await loadPage(
+		await loadPage({
 			page,
-			`/Article/${blogUrl}?${searchParams.toString()}#liveblog-navigation`,
-		);
+			path: `/Article/${blogUrl}`,
+			queryParams: {
+				live: 'true',
+				page: 'with:block-6214732b8f08f86d89ef68d6',
+				filterKeyEvents: 'false',
+			},
+			fragment: '#liveblog-navigation',
+		});
 
 		await lastUpdateRequestPromise;
 	});
@@ -179,16 +196,16 @@ test.describe('Liveblogs', () => {
 	test('should handle when the toast is clicked from the second page', async ({
 		page,
 	}) => {
-		const searchParams = new URLSearchParams([
-			['live', 'true'],
-			['page', 'with:block-6214732b8f08f86d89ef68d6'],
-			['filterKeyEvents', 'false'],
-		]);
-
-		await loadPage(
+		await loadPage({
 			page,
-			`/Article/${blogUrl}?${searchParams.toString()}#liveblog-navigation`,
-		);
+			path: `/Article/${blogUrl}`,
+			queryParams: {
+				live: 'true',
+				page: 'with:block-6214732b8f08f86d89ef68d6',
+				filterKeyEvents: 'false',
+			},
+			fragment: '#liveblog-navigation',
+		});
 
 		await waitForIsland(page, 'Liveness', { waitFor: 'attached' });
 
@@ -233,7 +250,13 @@ test.describe('Liveblogs', () => {
 	test('should initially hide new blocks, only revealing them when the top of blog is in view', async ({
 		page,
 	}) => {
-		await loadPage(page, `/Article/${blogUrl}?live=true`);
+		await loadPage({
+			page,
+			path: `/Article/${blogUrl}`,
+			queryParams: {
+				live: 'true',
+			},
+		});
 		await waitForIsland(page, 'Liveness', { waitFor: 'attached' });
 
 		await page.evaluate(() =>
@@ -284,10 +307,13 @@ test.describe('Liveblogs', () => {
 			},
 		);
 
-		await loadPage(
+		await loadPage({
 			page,
-			`/Article/https://theguardian.com/sport/live/2022/mar/27/west-indies-v-england-third-test-day-four-live?live=true`,
-		);
+			path: `/Article/https://theguardian.com/sport/live/2022/mar/27/west-indies-v-england-third-test-day-four-live`,
+			queryParams: {
+				live: 'true',
+			},
+		});
 		await waitForIsland(page, 'Liveness', { waitFor: 'attached' });
 
 		await update1ResponsePromise;
