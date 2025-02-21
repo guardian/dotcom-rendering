@@ -131,13 +131,12 @@ export const Podcast: Story = {
 		},
 		mainMedia: {
 			type: 'Audio',
-			duration: 120,
+			podcastImage: {
+				src: 'https://media.guim.co.uk/be8830289638b0948b1ba4ade906e540554ada88/0_0_5000_3000/master/5000.jpg',
+				altText: 'Football Weekly',
+			},
+			duration: '55:09',
 		},
-		podcastImage: {
-			src: 'https://media.guim.co.uk/be8830289638b0948b1ba4ade906e540554ada88/0_0_5000_3000/master/5000.jpg',
-			altText: 'Football Weekly',
-		},
-		audioDuration: '55:09',
 	},
 };
 
@@ -153,8 +152,8 @@ export const Gallery: Story = {
 		},
 		mainMedia: {
 			type: 'Gallery',
+			count: '12',
 		},
-		galleryCount: 12,
 	},
 };
 

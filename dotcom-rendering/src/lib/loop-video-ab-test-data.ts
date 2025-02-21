@@ -8,9 +8,9 @@ const exampleCard: DCRFrontCard = {
 	},
 	dataLinkName: 'media | group-0 | card-@1',
 	url: '/science/audio/2024/dec/12/does-googles-mindboggling-new-chip-bring-quantum-computers-any-closer-podcast',
-	headline: ' Google’s ‘mindboggling’ new quantum chip',
+	headline: 'Loop video test. This is what a looping video might look like',
 	trailText:
-		'Ian Sample speaks to Winfried Hensinger, professor of quantum technologies at the University of Sussex to find out how quantum computers work, and whether Google’s new chip is an important milestone in their development.',
+		'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.',
 	webPublicationDate: '2024-12-12T05:00:09.000Z',
 	kickerText: 'Podcast',
 	supportingContent: [],
@@ -26,7 +26,11 @@ const exampleCard: DCRFrontCard = {
 	showLivePlayable: false,
 	mainMedia: {
 		type: 'Audio',
-		duration: 0,
+		duration: '18:03',
+		podcastImage: {
+			src: 'https://uploads.guim.co.uk/2021/11/17/ScienceWeekly_FINAL_3000.jpeg',
+			altText: 'Science Weekly',
+		},
 	},
 	isExternalLink: false,
 	showMainVideo: false,
@@ -35,17 +39,12 @@ const exampleCard: DCRFrontCard = {
 		altText:
 			'Inauguration of the first IBM Quantum Data Center in Europe, in Ehningen, Germany<br>epa11635230 A model of the IBM Quantum System Two quantum computer is seen at the inauguration of the first IBM Quantum Data Center in Europe, in Ehningen, Germany, 01 October 2024. The Europe-based quantum data center will facilitate access to cutting-edge quantum computing for companies, research institutions and government agencies.  EPA/ANNA SZILAGYI',
 	},
-	podcastImage: {
-		src: 'https://uploads.guim.co.uk/2021/11/17/ScienceWeekly_FINAL_3000.jpeg',
-		altText: 'Science Weekly',
-	},
-	audioDuration: '18:03',
 };
 
 export const testVideoCollection: DCRCollectionType = {
 	id: '2e10eba3-7836-4381-bfc0-07d71a3295f6',
 	displayName: 'video test',
-	collectionType: 'fixed/small/slow-V-third',
+	collectionType: 'fixed/small/slow-I',
 	grouped: {
 		snap: [],
 		huge: [],
@@ -54,7 +53,7 @@ export const testVideoCollection: DCRCollectionType = {
 		standard: [],
 		splash: [],
 	},
-	curated: [exampleCard, exampleCard, exampleCard, exampleCard, exampleCard],
+	curated: [exampleCard],
 	backfill: [],
 	treats: [],
 	config: {

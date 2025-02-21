@@ -40,7 +40,7 @@ export const StaticFeatureTwo = ({
 				return (
 					<LI
 						stretch={false}
-						percentage={'50%'}
+						percentage="50%"
 						key={card.url}
 						padSides={true}
 						showDivider={true}
@@ -75,7 +75,6 @@ export const StaticFeatureTwo = ({
 							imageSize="feature-large"
 							headlineSizes={{ desktop: 'small' }}
 							supportingContent={card.supportingContent}
-							galleryCount={card.galleryCount}
 							collectionId={collectionId}
 						/>
 					</LI>

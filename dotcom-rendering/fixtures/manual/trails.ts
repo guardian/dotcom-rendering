@@ -560,3 +560,215 @@ export const trails: [
 		showMainVideo: true,
 	},
 ];
+
+export const audioTrails: [DCRFrontCard, DCRFrontCard] = [
+	{
+		format: { design: 3, display: 0, theme: 0 },
+		url: '/news/audio/2025/feb/19/from-the-archive-was-it-inevitable-a-short-history-of-russias-war-on-ukraine-podcast',
+		headline:
+			'Was it inevitable? A short history of Russia’s war on Ukraine',
+		showQuotedHeadline: false,
+		dataLinkName: 'media | group-0 | card-@1',
+		discussionApiUrl: '',
+		isExternalLink: false,
+		showLivePlayable: false,
+		trailText:
+			'This week, from 2022: To understand the tragedy of this war, it is worth going back beyond the last few weeks and months, and even beyond Vladimir Putin. By Keith Gessen. Read by Andrew McGregor',
+		webPublicationDate: '2025-02-19T05:00:25.000Z',
+		kickerText: 'The Audio Long Read',
+		mainMedia: {
+			type: 'Audio',
+			duration: '46:12',
+			podcastImage: {
+				src: 'https://uploads.guim.co.uk/2021/01/22/AudioLongReadJan2021.jpg',
+				altText: 'The Audio Long Read',
+			},
+		},
+		image: {
+			src: 'https://media.guim.co.uk/3c630f4309d8063a5b849bdcd5e57665f837fe13/0_147_4405_2643/master/4405.jpg',
+			altText:
+				'A military facility destroyed by shelling near Kyiv, 1 March 2022. Photograph: Genya Savilov/AFP/Getty Images',
+		},
+	},
+	{
+		format: { design: 3, display: 0, theme: 2 },
+		url: '/football/audio/2025/feb/19/celtic-bayern-munich-champions-league-chaos-football-weekly-podcast',
+		headline: 'Celtic’s heartbreak and Champions League playoff chaos ',
+		showQuotedHeadline: false,
+		dataLinkName: 'media | group-0 | card-@1',
+		discussionApiUrl: '',
+		isExternalLink: false,
+		showLivePlayable: false,
+		trailText:
+			'Max Rushden is joined by Barry Glendenning, Paul Watson, Nick Ames, Ewan Murray and Jim Burke to discuss the latest Champions League playoff games, Everton’s new ground and much more',
+		webPublicationDate: '2025-02-19T14:11:54.000Z',
+		kickerText: 'Football Weekly',
+		mainMedia: {
+			type: 'Audio',
+			duration: '54:52',
+			podcastImage: {
+				src: 'https://uploads.guim.co.uk/2024/08/01/FootballWeekly_FINAL_3000_(1).jpg',
+				altText: 'Football Weekly',
+			},
+		},
+		image: {
+			src: 'https://media.guim.co.uk/01ded462d3dd730467bdfd652decda4117d925da/0_0_2074_1244/master/2074.jpg',
+			altText:
+				"TOPSHOT-FBL-EUR-C1-MILAN-FEYENOORD<br>TOPSHOT - Polish referee Szymon Marciniak gives a red card to AC Milan's French defender #19 Theo Hernandez (R) during the UEFA Champions League knockout round play-off second leg football match between AC Milan and Feyenoord at San Siro stadium in Milan, on February 18, 2025. (Photo by Piero CRUCIATTI / AFP) (Photo by PIERO CRUCIATTI/AFP via Getty Images)",
+		},
+	},
+];
+
+export const galleryTrails: [DCRFrontCard, DCRFrontCard] = [
+	{
+		format: { design: 2, display: 1, theme: 4 },
+		dataLinkName: 'media | group-0 | card-@5',
+		url: '/fashion/gallery/2025/feb/01/we-love-fashion-fixes-for-the-week-ahead-in-pictures',
+		headline: 'On trend hoods and eye-catching tights',
+		trailText:
+			'On trend hoods, eye-catching tights and David Beckham models for Boss',
+		webPublicationDate: '2025-02-01T23:45:55.000Z',
+		kickerText: 'Fashion fixes',
+		supportingContent: [],
+		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
+		mainMedia: { type: 'Gallery', count: '6' },
+		image: {
+			src: 'https://media.guim.co.uk/003d9dbe35c7a64a1e109a38450f3704deaeac24/2_240_3598_2159/master/3598.jpg',
+			altText:
+				'Barbour X Erdem Dhalia Wax Jacket RRP £519.00 Available at Barbour.com (1)',
+		},
+		showQuotedHeadline: false,
+		isExternalLink: false,
+		showLivePlayable: false,
+	},
+	{
+		format: { design: 2, display: 1, theme: 0 },
+		dataLinkName: 'media | group-0 | card-@2',
+		url: '/global-development/gallery/2025/feb/07/goma-congolese-photographer-arlette-bashizi-home-city-rwandan-backed-m23-rebels',
+		headline: 'The fall of Goma: 16 days of chaos and fear – in pictures',
+		trailText:
+			'Congolese photographer Arlette Bashizi documented for Reuters the lead-up to and aftermath of the seizure of her home city by Rwandan-backed M23 rebels',
+		webPublicationDate: '2025-02-07T05:00:36.000Z',
+		kickerText: 'Democratic Republic of the Congo',
+		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
+		mainMedia: { type: 'Gallery', count: '27' },
+		showMainVideo: false,
+		image: {
+			src: 'https://media.guim.co.uk/69ac2383ea611126b54373865dac3e7e77981d7e/0_39_5500_3302/master/5500.jpg',
+			altText: 'A group of people in the street, some looking worried',
+		},
+		showQuotedHeadline: false,
+		isExternalLink: false,
+		showLivePlayable: false,
+	},
+];
+
+export const videoTrails: [DCRFrontCard, DCRFrontCard] = [
+	{
+		format: { design: 4, display: 0, theme: 2 },
+		dataLinkName: 'media | group-0 | card-@3',
+		url: '/football/video/2024/dec/16/rashford-and-garnacho-omission-from-team-to-push-them-harder-says-amorim-video',
+		headline:
+			"Rashford and Garnacho omission from team to 'push them harder' says Amorim – video ",
+		trailText:
+			"Amorim said the team proved by the victory against City that they 'can leave anyone outside the squad and manage to win'",
+		webPublicationDate: '2024-12-16T15:21:02.000Z',
+		discussionApiUrl:
+			'https://discussion.code.dev-theguardian.com/discussion-api',
+		mainMedia: {
+			type: 'Video',
+			id: 'fa2ee832-c5e7-4305-8387-f0277d2d9e27',
+			videoId: '9kIN--VV2LQ',
+			duration: 117,
+			title: "Rashford and Garnacho omission from team to 'push them harder' says Amorim – video ",
+			width: 500,
+			height: 300,
+			origin: 'SNTV',
+			expired: false,
+			images: [
+				{
+					url: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_56_3000_1688/2000.jpg',
+					width: 2000,
+				},
+				{
+					url: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_56_3000_1688/1000.jpg',
+					width: 1000,
+				},
+				{
+					url: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_56_3000_1688/500.jpg',
+					width: 500,
+				},
+				{
+					url: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_56_3000_1688/140.jpg',
+					width: 140,
+				},
+				{
+					url: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_56_3000_1688/3000.jpg',
+					width: 3000,
+				},
+			],
+		},
+		showMainVideo: true,
+		image: {
+			src: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_47_3000_1800/master/3000.jpg',
+			altText:
+				"Amorim said the team proved by the victory against City that they 'can leave anyone outside the squad and manage to win'",
+		},
+		showQuotedHeadline: false,
+		isExternalLink: false,
+		showLivePlayable: false,
+	},
+	{
+		format: { design: 0, display: 0, theme: 0 },
+		dataLinkName: 'news | group-0 | card-@2',
+		url: '/uk-news/2025/jan/22/prince-harry-says-sun-publisher-made-historic-admission-as-he-settles-case',
+		headline:
+			'Prince Harry says Sun publisher made ‘historic admission’ as he settles case',
+		trailText:
+			'News Group Newspapers offered Harry ‘full and unequivocal apology’ for ‘serious intrusion’ by the paper',
+		webPublicationDate: '2025-01-22T18:51:14.000Z',
+		discussionApiUrl:
+			'https://discussion.code.dev-theguardian.com/discussion-api',
+		mainMedia: {
+			type: 'Video',
+			id: '03ac0c90-3a66-448c-8562-b66a9ca9360e',
+			videoId: '_2wsSKq6yAk',
+			duration: 71,
+			title: "Prince Harry's lawyer says settlement is 'monumental victory' – video ",
+			width: 500,
+			height: 300,
+			origin: 'Reuters',
+			expired: false,
+			images: [
+				{
+					url: 'https://media.guim.co.uk/908aa315f66a09bc6ea607b6049cd72decd2dfa6/0_0_5358_3014/2000.jpg',
+					width: 2000,
+				},
+				{
+					url: 'https://media.guim.co.uk/908aa315f66a09bc6ea607b6049cd72decd2dfa6/0_0_5358_3014/1000.jpg',
+					width: 1000,
+				},
+				{
+					url: 'https://media.guim.co.uk/908aa315f66a09bc6ea607b6049cd72decd2dfa6/0_0_5358_3014/500.jpg',
+					width: 500,
+				},
+				{
+					url: 'https://media.guim.co.uk/908aa315f66a09bc6ea607b6049cd72decd2dfa6/0_0_5358_3014/140.jpg',
+					width: 140,
+				},
+				{
+					url: 'https://media.guim.co.uk/908aa315f66a09bc6ea607b6049cd72decd2dfa6/0_0_5358_3014/5358.jpg',
+					width: 5358,
+				},
+			],
+		},
+		showMainVideo: true,
+		image: {
+			src: 'https://media.guim.co.uk/4612af5f4667888fa697139cf570b6373d93a710/2446_345_3218_1931/master/3218.jpg',
+			altText: 'Prince Harry leaves the high court in June 2023',
+		},
+		showQuotedHeadline: false,
+		isExternalLink: false,
+		showLivePlayable: false,
+	},
+];

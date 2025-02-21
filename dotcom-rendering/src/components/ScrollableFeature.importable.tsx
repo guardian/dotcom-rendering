@@ -72,9 +72,6 @@ export const ScrollableFeature = ({
 								tablet: 'xxsmall',
 								mobile: 'xsmall',
 							}}
-							galleryCount={card.galleryCount}
-							podcastImage={card.podcastImage}
-							audioDuration={card.audioDuration}
 							trailText={undefined}
 							collectionId={collectionId}
 						/>

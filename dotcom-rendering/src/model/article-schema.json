@@ -5262,8 +5262,19 @@
                             "type": "string",
                             "const": "Audio"
                         },
+                        "podcastImage": {
+                            "type": "object",
+                            "properties": {
+                                "src": {
+                                    "type": "string"
+                                },
+                                "altText": {
+                                    "type": "string"
+                                }
+                            }
+                        },
                         "duration": {
-                            "type": "number"
+                            "type": "string"
                         }
                     },
                     "required": [
@@ -5297,9 +5308,13 @@
                         "type": {
                             "type": "string",
                             "const": "Gallery"
+                        },
+                        "count": {
+                            "type": "string"
                         }
                     },
                     "required": [
+                        "count",
                         "type"
                     ]
                 }
