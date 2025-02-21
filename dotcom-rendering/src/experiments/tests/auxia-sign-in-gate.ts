@@ -7,7 +7,7 @@ export const auxiaSignInGate: ABTest = {
 	author: 'Pascal (Growth Team)',
 	description:
 		'R&D Experiment: using Auxia API to drive the behavior of the SignIn gate',
-	audience: 0.2,
+	audience: 0.35,
 	audienceOffset: 0,
 	successMeasure: '',
 	audienceCriteria: '',
