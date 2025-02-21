@@ -3194,6 +3194,9 @@
                         "width": {
                             "type": "string"
                         },
+                        "aspectRatio": {
+                            "type": "string"
+                        },
                         "isMaster": {
                             "type": "string"
                         },
