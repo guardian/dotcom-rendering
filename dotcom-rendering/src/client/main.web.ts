@@ -1,6 +1,7 @@
 import './webpackPublicPath';
 import { adaptSite, shouldAdapt } from './adaptiveSite';
 import { startup } from './startup';
+import { maybeSIndicatorCapiKey } from './userFeatures/cookies/sIndicatorCapiKey';
 
 void (async () => {
 	if (await shouldAdapt()) {
@@ -142,4 +143,16 @@ void (async () => {
 			).then(({ discussion }) => discussion()),
 		{ priority: 'feature' },
 	);
+
+	if (maybeSIndicatorCapiKey) {
+		void startup(
+			'sIndicator',
+			() =>
+				import(
+					/* webpackMode: 'lazy' */
+					'./sIndicator'
+				).then(({ sIndicator }) => sIndicator()),
+			{ priority: 'feature' },
+		);
+	}
 })();
