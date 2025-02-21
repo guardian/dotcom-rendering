@@ -13,7 +13,6 @@ import type {
 	DCRSupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
-import type { PodcastSeriesImage } from '../types/tag';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
 import type {
@@ -215,9 +214,6 @@ export type Props = {
 	/** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
 	aspectRatio?: AspectRatio;
 	showQuotes?: boolean;
-	galleryCount?: number;
-	podcastImage?: PodcastSeriesImage;
-	audioDuration?: string;
 	/**
 	 * Youtube video requires a unique ID. We append the collectionId to the youtube asset ID, to allow
 	 * same video to be on the page multiple times, as long as they are in different collections.
@@ -256,17 +252,12 @@ export const FeatureCard = ({
 	aspectRatio,
 	starRating,
 	showQuotes,
-	galleryCount,
-	podcastImage,
-	audioDuration,
 	collectionId,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
 	const isVideoMainMedia = mainMedia?.type === 'Video';
 	const isVideoArticle = format.design === ArticleDesign.Video;
-	const isAudioArticle = format.design === ArticleDesign.Audio;
-	const isGalleryArticle = format.design === ArticleDesign.Gallery;
 
 	const videoDuration =
 		mainMedia?.type === 'Video' ? mainMedia.duration : undefined;
@@ -426,7 +417,7 @@ export const FeatureCard = ({
 									`}
 								>
 									{mainMedia?.type === 'Audio' &&
-										!!podcastImage?.src && (
+										!!mainMedia.podcastImage?.src && (
 											<div
 												css={
 													podcastImageContainerStyles
@@ -435,12 +426,15 @@ export const FeatureCard = ({
 												<div css={podcastImageStyles}>
 													<CardPicture
 														mainImage={
-															podcastImage.src
+															mainMedia
+																.podcastImage
+																.src
 														}
 														imageSize="podcast"
 														alt={
-															podcastImage.altText ??
-															''
+															mainMedia
+																.podcastImage
+																.altText ?? ''
 														}
 														loading="lazy"
 														roundedCorners={false}
@@ -551,12 +545,7 @@ export const FeatureCard = ({
 											// 	) : undefined
 											// }
 											showLivePlayable={false}
-											isVideo={isVideoArticle}
-											isAudio={isAudioArticle}
-											isGallery={isGalleryArticle}
-											videoDuration={videoDuration}
-											audioDuration={audioDuration}
-											galleryCount={galleryCount}
+											mainMedia={mainMedia}
 										/>
 									</div>
 									{/* On video article cards, the duration is displayed in the footer */}

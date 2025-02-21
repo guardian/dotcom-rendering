@@ -1,7 +1,12 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
-import { trails } from '../../fixtures/manual/trails';
+import {
+	audioTrails,
+	galleryTrails,
+	trails,
+	videoTrails,
+} from '../../fixtures/manual/trails';
 import type { DCRContainerPalette } from '../types/front';
 import { FrontSection } from './FrontSection';
 import { StaticFeatureTwo } from './StaticFeatureTwo';
@@ -58,6 +63,30 @@ const containerPalettes = [
 	DCRContainerPalette,
 	'MediaPalette' | 'PodcastPalette'
 >[];
+
+const audioCards = audioTrails.slice(0, 2);
+export const Audio = {
+	args: {
+		...Default,
+		trails: audioCards,
+	},
+} satisfies Story;
+
+const galleryCards = galleryTrails.slice(0, 2);
+export const Gallery = {
+	args: {
+		...Default,
+		trails: galleryCards,
+	},
+} satisfies Story;
+
+const videoCards = videoTrails.slice(0, 2);
+export const Video = {
+	args: {
+		...Default,
+		trails: videoCards,
+	},
+} satisfies Story;
 
 export const WithSpecialPaletteVariations = {
 	parameters: {

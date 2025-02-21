@@ -1,7 +1,7 @@
 import { isUndefined } from '@guardian/libs';
 import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
-import { cmpAcceptAll, cmpRejectAll } from '../lib/cmp';
+import { allowRejectAll, cmpAcceptAll, cmpRejectAll } from '../lib/cmp';
 import { waitForIsland } from '../lib/islands';
 import { fetchAndloadPageWithOverrides } from '../lib/load-page';
 import { expectToBeVisible, expectToNotExist } from '../lib/locators';
@@ -383,7 +383,10 @@ test.describe.skip('YouTube Atom', () => {
 
 	test.skip('plays the video if the reader rejects consent', async ({
 		page,
+		context,
 	}) => {
+		await allowRejectAll(context);
+
 		await fetchAndloadPageWithOverrides(
 			page,
 			'https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',

@@ -9,7 +9,6 @@ import { palette } from '../../palette';
 import type { StarRating as Rating } from '../../types/content';
 import type { DCRFrontImage } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
-import type { PodcastSeriesImage } from '../../types/tag';
 import { Avatar } from '../Avatar';
 import { CardLink } from '../Card/components/CardLink';
 import { CardHeadline } from '../CardHeadline';
@@ -34,10 +33,6 @@ export type HighlightsCardProps = {
 	byline?: string;
 	isExternalLink: boolean;
 	starRating?: Rating;
-	galleryCount?: number;
-	audioDuration?: string;
-	/** The square podcast series image, if it exists for a card */
-	podcastImage?: PodcastSeriesImage;
 };
 
 const gridContainer = css`
@@ -139,11 +134,10 @@ const starWrapper = css`
 
 const decideImage = (
 	imageLoading: Loading,
-	format: ArticleFormat,
 	image?: DCRFrontImage,
-	podcastImage?: PodcastSeriesImage,
 	avatarUrl?: string,
 	byline?: string,
+	mainMedia?: MainMedia,
 ) => {
 	if (!image && !avatarUrl) {
 		return null;
@@ -158,13 +152,13 @@ const decideImage = (
 			/>
 		);
 	}
-	if (format.design === ArticleDesign.Audio && podcastImage?.src) {
+	if (mainMedia?.type === 'Audio' && mainMedia.podcastImage?.src) {
 		return (
 			<>
 				<CardPicture
 					imageSize="medium"
-					mainImage={podcastImage.src}
-					alt={podcastImage.altText}
+					mainImage={mainMedia.podcastImage.src}
+					alt={mainMedia.podcastImage.altText}
 					loading={imageLoading}
 					isCircular={false}
 					aspectRatio={'1:1'}
@@ -205,9 +199,6 @@ export const HighlightsCard = ({
 	byline,
 	isExternalLink,
 	starRating,
-	galleryCount,
-	audioDuration,
-	podcastImage,
 }: HighlightsCardProps) => {
 	const isMediaCard = isMedia(format);
 	const MediaPill = () => (
@@ -221,7 +212,7 @@ export const HighlightsCard = ({
 			)}
 			{mainMedia?.type === 'Audio' && (
 				<Pill
-					content={audioDuration ?? ''}
+					content={mainMedia.duration}
 					icon={<SvgMediaControlsPlay />}
 					iconSize={'small'}
 				/>
@@ -229,7 +220,7 @@ export const HighlightsCard = ({
 			{mainMedia?.type === 'Gallery' && (
 				<Pill
 					prefix="Gallery"
-					content={galleryCount?.toString() ?? ''}
+					content={mainMedia.count}
 					icon={<SvgCamera />}
 					iconSide="right"
 				/>
@@ -279,11 +270,10 @@ export const HighlightsCard = ({
 				<div css={[imageArea, avatarUrl && avatarAlignmentStyles]}>
 					{decideImage(
 						imageLoading,
-						format,
 						image,
-						podcastImage,
 						avatarUrl,
 						byline,
+						mainMedia,
 					)}
 				</div>
 			</div>
