@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { breakpoints, space } from '@guardian/source/foundations';
+import { breakpoints, space, until } from '@guardian/source/foundations';
 import type { ImgHTMLAttributes } from 'react';
 import React from 'react';
 import type { AspectRatio } from '../types/front';
@@ -18,6 +18,7 @@ type Props = {
 	roundedCorners?: boolean;
 	isCircular?: boolean;
 	aspectRatio?: AspectRatio;
+	mobileAspectRatio?: AspectRatio;
 	isInLoopVideoTest?: boolean;
 };
 
@@ -31,7 +32,10 @@ type Props = {
  */
 const decideImageWidths = (
 	imageSize: ImageSizeType,
+	aspectRatio?: AspectRatio,
+	mobileAspectRatio?: AspectRatio,
 ): [ImageWidthType, ...ImageWidthType[]] => {
+	const aspectRatioMobile = mobileAspectRatio ?? aspectRatio;
 	switch (imageSize) {
 		// @TODO missing image size option
 		// case 'tiny':
@@ -42,52 +46,80 @@ const decideImageWidths = (
 		// 	];
 
 		case 'podcast':
-			return [{ breakpoint: breakpoints.mobile, width: 80 }];
+			return [{ breakpoint: breakpoints.mobile, width: 80, aspectRatio }];
 
 		case 'carousel':
-			return [{ breakpoint: breakpoints.mobile, width: 220 }];
+			return [
+				{
+					breakpoint: breakpoints.mobile,
+					width: 220,
+					aspectRatio,
+				},
+			];
 
 		case 'small':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 120 },
-				{ breakpoint: breakpoints.tablet, width: 160 },
-				{ breakpoint: breakpoints.desktop, width: 220 },
+				{ breakpoint: breakpoints.mobile, width: 120, aspectRatio },
+				{ breakpoint: breakpoints.tablet, width: 160, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 220, aspectRatio },
 			];
 
 		case 'medium':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 240 },
-				{ breakpoint: breakpoints.tablet, width: 330 },
-				{ breakpoint: breakpoints.desktop, width: 460 },
+				{ breakpoint: breakpoints.mobile, width: 240, aspectRatio },
+				{ breakpoint: breakpoints.tablet, width: 330, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 460, aspectRatio },
 			];
 
 		case 'large':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 360 },
-				{ breakpoint: breakpoints.mobileLandscape, width: 480 },
-				{ breakpoint: breakpoints.tablet, width: 500 },
-				{ breakpoint: breakpoints.desktop, width: 700 },
+				{ breakpoint: breakpoints.mobile, width: 360, aspectRatio },
+				{
+					breakpoint: breakpoints.mobileLandscape,
+					width: 480,
+					aspectRatio,
+				},
+				{ breakpoint: breakpoints.tablet, width: 500, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 700, aspectRatio },
 			];
 
 		case 'jumbo':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 360 },
-				{ breakpoint: breakpoints.mobileLandscape, width: 480 },
-				{ breakpoint: breakpoints.tablet, width: 680 },
-				{ breakpoint: breakpoints.desktop, width: 940 },
+				{ breakpoint: breakpoints.mobile, width: 360, aspectRatio },
+				{
+					breakpoint: breakpoints.mobileLandscape,
+					width: 480,
+					aspectRatio,
+				},
+				{ breakpoint: breakpoints.tablet, width: 680, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 940, aspectRatio },
 			];
 
 		case 'feature':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 325 },
-				{ breakpoint: breakpoints.tablet, width: 220 },
-				{ breakpoint: breakpoints.desktop, width: 300 },
+				{ breakpoint: breakpoints.mobile, width: 325, aspectRatio },
+				{ breakpoint: breakpoints.tablet, width: 220, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 300, aspectRatio },
 			];
 		case 'feature-large':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 325 },
-				{ breakpoint: breakpoints.tablet, width: 337 },
-				{ breakpoint: breakpoints.desktop, width: 460 },
+				{
+					breakpoint: breakpoints.mobile,
+					width: 325,
+					aspectRatio: aspectRatio,
+				},
+				{ breakpoint: breakpoints.tablet, width: 337, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 460, aspectRatio },
+			];
+		case 'feature-immersive':
+			return [
+				{
+					breakpoint: breakpoints.mobile,
+					width: 340,
+					aspectRatio: aspectRatioMobile,
+				},
+				{ breakpoint: breakpoints.tablet, width: 700, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 940, aspectRatio },
 			];
 	}
 };
@@ -103,7 +135,11 @@ const block = css`
 	display: block;
 `;
 
-const getAspectRatioPadding = (aspectRatio?: AspectRatio): string => {
+/**
+ * Determines the padding-top percentage based on the provided aspect ratio.
+ * This helps maintain the correct aspect ratio for images.
+ */
+export const getAspectRatioPadding = (aspectRatio?: AspectRatio): string => {
 	switch (aspectRatio) {
 		case '5:4':
 			return '80%';
@@ -116,11 +152,7 @@ const getAspectRatioPadding = (aspectRatio?: AspectRatio): string => {
 			return '60%';
 	}
 };
-/**
- * On fronts, Fairground cards have an image ration of 5:4.
- * This is due to replace the existing card ratio of 5:3
- * For now, we are keeping both ratios.
- */
+
 const decideAspectRatioStyles = (aspectRatio?: AspectRatio) => {
 	const paddingRatio = getAspectRatioPadding(aspectRatio);
 	return css`
@@ -132,6 +164,15 @@ const decideAspectRatioStyles = (aspectRatio?: AspectRatio) => {
 			left: 0;
 			width: 100%;
 			height: 100%;
+		}
+	`;
+};
+
+export const decideMobileAspectRatioStyles = (aspectRatio?: AspectRatio) => {
+	const paddingRatio = getAspectRatioPadding(aspectRatio);
+	return css`
+		${until.tablet} {
+			padding-top: ${paddingRatio};
 		}
 	`;
 };
@@ -157,12 +198,12 @@ export const CardPicture = ({
 	roundedCorners,
 	isCircular,
 	aspectRatio,
+	mobileAspectRatio,
 	isInLoopVideoTest = false,
 }: Props) => {
 	const sources = generateSources(
 		mainImage,
-		decideImageWidths(imageSize),
-		aspectRatio,
+		decideImageWidths(imageSize, aspectRatio, mobileAspectRatio),
 	);
 
 	const fallbackSource = getFallbackSource(sources);
@@ -177,6 +218,8 @@ export const CardPicture = ({
 			css={[
 				block,
 				decideAspectRatioStyles(aspectRatio),
+				mobileAspectRatio &&
+					decideMobileAspectRatioStyles(mobileAspectRatio),
 				roundedCorners && borderRadius,
 				isCircular && circularStyles,
 			]}

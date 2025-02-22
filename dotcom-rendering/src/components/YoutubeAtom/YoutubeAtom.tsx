@@ -61,6 +61,7 @@ export type Props = {
 	discussionApiUrl?: string;
 	discussionId?: string;
 	isFeatureCard?: boolean;
+	isImmersive?: boolean;
 };
 
 /**
@@ -113,6 +114,7 @@ export const YoutubeAtom = ({
 	discussionApiUrl,
 	discussionId,
 	isFeatureCard,
+	isImmersive,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -199,7 +201,8 @@ export const YoutubeAtom = ({
 				<MaintainAspectRatio
 					height={height}
 					width={width}
-					aspectRatio={aspectRatio}
+					aspectRatio={isImmersive ? '5:3' : aspectRatio}
+					mobileAspectRatio={isImmersive ? '4:5' : undefined}
 				>
 					{
 						/**
@@ -256,6 +259,7 @@ export const YoutubeAtom = ({
 								linkTo={linkTo}
 								discussionId={discussionId}
 								discussionApiUrl={discussionApiUrl}
+								isImmersive={isImmersive}
 							/>
 						) : (
 							<YoutubeAtomOverlay

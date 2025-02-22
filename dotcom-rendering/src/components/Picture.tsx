@@ -8,6 +8,7 @@ import {
 } from '../lib/articleFormat';
 import { generateImageURL } from '../lib/image';
 import type { RoleType } from '../types/content';
+import type { AspectRatio } from '../types/front';
 import type { Loading } from './CardPicture';
 
 /**
@@ -33,10 +34,13 @@ type Props = {
 	isLightbox?: boolean;
 	orientation?: Orientation;
 	onLoad?: () => void;
-	aspectRatio?: string;
 };
 
-export type ImageWidthType = { breakpoint: number; width: number };
+export type ImageWidthType = {
+	breakpoint: number;
+	width: number;
+	aspectRatio?: AspectRatio;
+};
 
 /**
  * All business logic for image sizing is contained in this one function. This
@@ -261,18 +265,16 @@ type ImageSource = {
  * Generate image sources for an image.
  *
  * @param mainImage source image URL
- * @param imageWidths list of image widths
- * @param aspectRatio - Aspect ratio that the image should be cropped to (e.g., 5:4). Optional.
+ * @param imageWidths list of image widths. Each "width" includes the breakpoint, width, and optional aspectratio
  */
 export const generateSources = (
 	mainImage: string,
 	imageWidths: readonly [ImageWidthType, ...ImageWidthType[]],
-	aspectRatio?: string,
 ): ImageSource[] =>
 	imageWidths
 		.slice()
 		.sort(descendingByBreakpoint)
-		.map(({ width: imageWidth, breakpoint }) => {
+		.map(({ width: imageWidth, breakpoint, aspectRatio }) => {
 			return {
 				breakpoint,
 				width: imageWidth,
@@ -340,7 +342,6 @@ export const Picture = ({
 	isLightbox = false,
 	orientation = 'landscape',
 	onLoad,
-	aspectRatio,
 }: Props) => {
 	const [loaded, setLoaded] = useState(false);
 	const ref = useCallback((node: HTMLImageElement | null) => {
@@ -365,7 +366,6 @@ export const Picture = ({
 			isLightbox,
 			orientation,
 		}),
-		aspectRatio,
 	);
 
 	/** portrait if higher than 1 or landscape if lower than 1 */
