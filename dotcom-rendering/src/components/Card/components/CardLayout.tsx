@@ -13,7 +13,6 @@ export type GapSizes = { row: GapSize; column: GapSize };
 
 type Props = {
 	children: React.ReactNode;
-	cardBackgroundColour: string;
 	imageType: CardImageType | undefined;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
@@ -25,7 +24,18 @@ type Props = {
 
 const containerStyles = css`
 	display: flex;
-	flex-basis: 100%;
+`;
+
+const desktopFlexBasis = css`
+	${from.tablet} {
+		flex-basis: 100%;
+	}
+`;
+
+const mobileFlexBasis = css`
+	${until.tablet} {
+		flex-basis: 100%;
+	}
 `;
 
 // Until mobile landscape, show 1 card on small screens
@@ -156,9 +166,12 @@ const decideGap = (gapSize: GapSize) => {
 	}
 };
 
+const isVerticalLayout = (imagePosition: ImagePositionType) => {
+	return imagePosition === 'top' || imagePosition === 'bottom';
+};
+
 export const CardLayout = ({
 	children,
-	cardBackgroundColour,
 	imagePositionOnDesktop,
 	imagePositionOnMobile,
 	minWidthInPixels,
@@ -180,9 +193,10 @@ export const CardLayout = ({
 					isBetaContainer,
 					imageType === 'avatar',
 				),
+				isVerticalLayout(imagePositionOnMobile) && mobileFlexBasis,
+				isVerticalLayout(imagePositionOnDesktop) && desktopFlexBasis,
 			]}
 			style={{
-				backgroundColor: cardBackgroundColour,
 				rowGap: decideGap(gapSizes.row),
 				columnGap: decideGap(gapSizes.column),
 			}}
