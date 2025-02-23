@@ -12,9 +12,13 @@ import { recordExperiences } from './ophan/ophan';
  */
 export const shouldAdapt = async (): Promise<boolean> => {
 	if (isServer) return false;
+	console.log(window.document.referrer);
 	if (window.location.hash === '#adapt') return true;
 	if (!window.guardian.config.switches.adaptiveSite) return false;
 	if (window.location.host !== 'www.theguardian.com') return false;
+	if (window.document.referrer === 'https://profile.theguardian.com/') {
+		return false;
+	}
 
 	/**
 	 * The europe beta front is being served to a 0% audience. This means it's rarely in cache and so it gets adapted more often.
