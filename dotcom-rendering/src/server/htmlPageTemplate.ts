@@ -363,6 +363,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 					renderingTarget === 'Web'
 						? `
                 <noscript>
+					<!-- Comscore Identifier: comscorekw=${props.keywords.replace(/ /g, '_')} -->
                     <img src="https://sb.scorecardresearch.com/p?${new URLSearchParams(
 						{
 							c1: '2',
@@ -370,7 +371,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 							cv: '2.0',
 							cj: '1',
 							cs_ucfr: '0',
-							comscorekw: props.keywords,
+							comscorekw: props.keywords.replace(/ /g, '_'),
 						},
 					).toString()}" />
                 </noscript>
