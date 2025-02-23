@@ -156,6 +156,14 @@ const decideGap = (gapSize: GapSize) => {
 	}
 };
 
+const decideColumnGap = (gapSize: GapSize) => css`
+	column-gap: ${decideGap(gapSize)};
+
+	${until.tablet} {
+		column-gap: ${gapSize === 'large' ? '10px' : decideGap(gapSize)};
+	}
+`;
+
 export const CardLayout = ({
 	children,
 	cardBackgroundColour,
@@ -180,11 +188,11 @@ export const CardLayout = ({
 					isBetaContainer,
 					imageType === 'avatar',
 				),
+				decideColumnGap(gapSizes.column),
 			]}
 			style={{
 				backgroundColor: cardBackgroundColour,
 				rowGap: decideGap(gapSizes.row),
-				columnGap: decideGap(gapSizes.column),
 			}}
 		>
 			{children}
