@@ -26,6 +26,7 @@ import { Footer } from '../components/Footer';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
+import { GoogleOneTap } from '../components/GoogleOneTap.importable';
 import { GridItem } from '../components/GridItem';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -450,6 +451,12 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 			{renderAds && hasSurveyAd && (
 				<AdSlot position="survey" display={format.display} />
+			)}
+
+			{isWeb && (
+				<Island priority="enhancement" defer={{ until: 'idle' }}>
+					<GoogleOneTap />
+				</Island>
 			)}
 
 			<main data-layout="StandardLayout">

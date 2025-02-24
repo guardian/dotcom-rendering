@@ -67,7 +67,22 @@ declare global {
 			) => boolean;
 		};
 		mockLiveUpdate: (data: LiveUpdateType) => void;
-		google?: typeof google;
+		google?: typeof google & {
+			// Google One Tap
+			accounts: {
+				id: {
+					initialize: (config: {
+						client_id: string;
+						login_uri: string;
+						callback: (response: { credential: string }) => void;
+						auto_select: boolean;
+						cancel_on_tap_outside: boolean;
+						use_fedcm_for_prompt: boolean;
+					}) => void;
+					prompt: () => void;
+				};
+			};
+		};
 		YT?: typeof YT;
 		onYouTubeIframeAPIReady?: () => void;
 	}
