@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { remSpace, textSans14, until } from '@guardian/source/foundations';
+import {
+	from,
+	remSpace,
+	textSans12,
+	textSans14,
+	until,
+} from '@guardian/source/foundations';
 import { forwardRef } from 'react';
 import { palette } from '../palette';
 
@@ -8,7 +14,7 @@ export interface Props {
 	isFirstAdSlot: boolean;
 }
 
-const adHeightPx = 258;
+const adHeightPx = 250;
 
 const styles = css`
 	clear: both;
@@ -25,8 +31,8 @@ const styles = css`
 `;
 
 const adLabelsStyles = css`
-	${textSans14}
-	padding: ${remSpace[3]};
+	${textSans12}
+	padding: ${remSpace[0]} ${remSpace[3]};
 	float: left;
 	display: flex;
 	justify-content: center;
@@ -40,6 +46,11 @@ const adLabelsStyles = css`
 		font-size: 16px;
 		font-weight: 400;
 		color: ${palette('--ad-labels-text')};
+	}
+
+	${from.phablet} {
+		${textSans14}
+		padding: ${remSpace[1]} ${remSpace[3]};
 	}
 `;
 
