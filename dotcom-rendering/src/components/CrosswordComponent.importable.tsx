@@ -8,11 +8,9 @@ import {
 	textSans14,
 	textSansItalic12,
 } from '@guardian/source/foundations';
-import { Hide } from '@guardian/source/react-components';
-import type { ReactNode } from 'react';
+import type { ComponentType, ReactNode } from 'react';
 import { memo } from 'react';
 import { palette } from '../palette';
-import { AdSlot } from './AdSlot.web';
 
 const CluesHeader = memo(({ children }: { children: ReactNode }) => {
 	return (
@@ -41,6 +39,7 @@ const Layout: CrosswordProps['Layout'] = ({
 	AnagramHelper,
 	FocusedClue,
 	gridWidth,
+	MobileBannerAd,
 }) => {
 	return (
 		<div
@@ -81,9 +80,9 @@ const Layout: CrosswordProps['Layout'] = ({
 							}
 						`}
 					/>
-					<Hide from="phablet">
-						<AdSlot position="crossword-banner-mobile" />
-					</Hide>
+					{typeof MobileBannerAd !== 'undefined' && (
+						<MobileBannerAd />
+					)}
 					<Controls />
 					<div
 						css={css`
@@ -120,6 +119,14 @@ const Layout: CrosswordProps['Layout'] = ({
 
 export const CrosswordComponent = ({
 	data,
+	MobileBannerAd,
 }: {
 	data: CrosswordProps['data'];
-}) => <ReactCrossword data={data} Layout={Layout} />;
+	MobileBannerAd?: ComponentType | undefined;
+}) => (
+	<ReactCrossword
+		data={data}
+		Layout={Layout}
+		MobileBannerAd={MobileBannerAd}
+	/>
+);
