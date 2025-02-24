@@ -1,4 +1,5 @@
 import type { ArticleFormat } from '../lib/articleFormat';
+import { sanitiseHTML } from '../model/sanitise';
 import { Caption } from './Caption';
 import { MaintainAspectRatio } from './MaintainAspectRatio';
 
@@ -27,6 +28,7 @@ export const VideoAtom = ({
 	width = 460,
 }: Props) => {
 	if (assets.length === 0) return null; // Handle empty assets array
+	const santisedUrl = sanitiseHTML(assets[0]?.url ?? '');
 	return (
 		<>
 			<MaintainAspectRatio
@@ -45,13 +47,13 @@ export const VideoAtom = ({
 					{assets.map((asset, index) => (
 						<source
 							key={index}
-							src={asset.url}
+							src={santisedUrl}
 							type={asset.mimeType}
 						/>
 					))}
 					<p>
 						{`Your browser doesn't support HTML5 video. Here is a `}
-						<a href={assets[0]?.url}>link to the video</a> instead.
+						<a href={santisedUrl}>link to the video</a> instead.
 					</p>
 				</video>
 			</MaintainAspectRatio>
