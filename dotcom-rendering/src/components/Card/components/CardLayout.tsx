@@ -65,70 +65,86 @@ const minWidth = (minWidthInPixels?: number) => {
  * position for desktop and mobile are both set to `bottom` to avoid affecting
  * existing layouts where the default position values are relied upon.
  */
-const decideDirection = (
+export const decideAvatarPosition = (
+	imagePositionOnMobile: ImagePositionType,
+	imagePositionOnDesktop: ImagePositionType,
+	isBetaContainer: boolean,
+): { mobile: ImagePositionType; desktop: ImagePositionType } => {
+	if (
+		imagePositionOnMobile === 'bottom' &&
+		imagePositionOnDesktop === 'bottom'
+	) {
+		return {
+			mobile: 'bottom',
+			desktop: 'bottom',
+		};
+	}
+
+	if (
+		imagePositionOnDesktop === 'left' ||
+		imagePositionOnDesktop === 'right'
+	) {
+		if (isBetaContainer && imagePositionOnMobile === 'bottom') {
+			return {
+				mobile: 'bottom',
+				desktop: 'right',
+			};
+		}
+		return {
+			mobile: 'right',
+			desktop: 'right',
+		};
+	}
+
+	return {
+		mobile: 'right',
+		desktop: 'bottom',
+	};
+};
+
+const imagePositionMap = {
+	top: 'column',
+	bottom: 'column-reverse',
+	left: 'row',
+	right: 'row-reverse',
+	none: 'column',
+};
+
+const decideFlexDirection = (
 	imagePositionOnMobile: ImagePositionType,
 	imagePositionOnDesktop: ImagePositionType,
 	isBetaContainer: boolean,
 	hasAvatar?: boolean,
 ) => {
-	const imagePosition = {
-		top: 'column',
-		bottom: 'column-reverse',
-		left: 'row',
-		right: 'row-reverse',
-		none: 'column',
-	};
-	if (hasAvatar) {
-		if (
-			imagePositionOnMobile === 'bottom' &&
-			imagePositionOnDesktop === 'bottom'
-		) {
-			return {
-				mobile: imagePosition['bottom'],
-				desktop: imagePosition['bottom'],
-			};
-		}
-
-		if (
-			imagePositionOnDesktop === 'left' ||
-			imagePositionOnDesktop === 'right'
-		) {
-			if (isBetaContainer && imagePositionOnMobile === 'bottom') {
-				return {
-					mobile: imagePosition['bottom'],
-					desktop: imagePosition['right'],
-				};
-			}
-			return {
-				mobile: imagePosition['right'],
-				desktop: imagePosition['right'],
-			};
-		}
-
-		// Default case for avatar: Mobile right, Desktop bottom
+	if (!hasAvatar) {
 		return {
-			mobile: imagePosition['right'],
-			desktop: imagePosition['bottom'],
+			mobile: imagePositionMap[imagePositionOnMobile],
+			desktop: imagePositionMap[imagePositionOnDesktop],
 		};
 	}
 
-	// Handle cases without an avatar
+	const { mobile, desktop } = decideAvatarPosition(
+		imagePositionOnMobile,
+		imagePositionOnDesktop,
+		isBetaContainer,
+	);
+
 	return {
-		mobile: imagePosition[imagePositionOnMobile],
-		desktop: imagePosition[imagePositionOnDesktop],
+		mobile: imagePositionMap[mobile],
+		desktop: imagePositionMap[desktop],
 	};
 };
 
 const decidePosition = (
 	imagePositionOnMobile: ImagePositionType,
 	imagePositionOnDesktop: ImagePositionType,
-	isFairgroundContainer: boolean,
+	isBetaContainer: boolean,
 	hasAvatar?: boolean,
 ) => {
-	const { mobile, desktop } = decideDirection(
+	const { mobile, desktop } = decideFlexDirection(
 		imagePositionOnMobile,
 		imagePositionOnDesktop,
-		isFairgroundContainer,
+		isBetaContainer,
 		hasAvatar,
 	);
 

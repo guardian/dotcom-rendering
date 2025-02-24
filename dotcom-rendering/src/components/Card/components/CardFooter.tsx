@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { palette, space, textSansBold12 } from '@guardian/source/foundations';
+import {
+	from,
+	palette,
+	space,
+	textSansBold12,
+} from '@guardian/source/foundations';
 import { SvgCamera } from '@guardian/source/react-components';
 import { Pill } from '../../../components/Pill';
 import { SvgMediaControlsPlay } from '../../../components/SvgMediaControlsPlay';
@@ -35,6 +40,14 @@ const contentStyles = css`
 	}
 `;
 
+const reserveSpaceStyles = (mobile: boolean, desktop: boolean) => css`
+	min-height: ${mobile ? '14px' : 0};
+
+	${from.tablet} {
+		min-height: ${desktop ? '14px' : 0};
+	}
+`;
+
 const labStyles = css`
 	margin-top: ${space[1]}px;
 `;
@@ -51,6 +64,7 @@ type Props = {
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
 	mainMedia?: MainMedia;
+	shouldReserveSpace?: { mobile: boolean; desktop: boolean };
 };
 
 export const CardFooter = ({
@@ -60,6 +74,7 @@ export const CardFooter = ({
 	commentCount,
 	cardBranding,
 	mainMedia,
+	shouldReserveSpace,
 }: Props) => {
 	if (showLivePlayable) return null;
 
@@ -104,12 +119,17 @@ export const CardFooter = ({
 		);
 	}
 
-	if (age === undefined && commentCount === undefined) {
-		return null;
-	}
-
 	return (
-		<footer css={contentStyles}>
+		<footer
+			css={[
+				contentStyles,
+				shouldReserveSpace &&
+					reserveSpaceStyles(
+						shouldReserveSpace.mobile,
+						shouldReserveSpace.desktop,
+					),
+			]}
+		>
 			{age}
 			{commentCount}
 		</footer>
