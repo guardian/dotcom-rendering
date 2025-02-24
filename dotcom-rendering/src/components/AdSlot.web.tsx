@@ -60,7 +60,7 @@ type IndexedSlotProps = {
 };
 
 type RightProps = {
-	position: 'right';
+	position: 'right' | 'football-data-page';
 	colourScheme?: ColourScheme;
 	index?: never;
 	shouldHideReaderRevenue: boolean;
@@ -492,6 +492,47 @@ export const AdSlot = ({
 				default:
 					return null;
 			}
+		case 'football-data-page': {
+			const slotId = 'dfp-ad--right'; // TODO: check if this is what we want for slot id
+			return (
+				<div
+					id="top-right-ad-slot" // TODO: not sure what this should be
+					className="ad-slot-container"
+					css={[
+						css`
+							position: static;
+							height: 100%;
+							max-height: 100%;
+						`,
+						labelStyles,
+						// rightAdLabelStyles,
+					]}
+				>
+					<div
+						id={slotId}
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--football-data-page', // TODO: check if this class needs to be added in commercial
+							'ad-slot--mpu-banner-ad',
+							'ad-slot--rendered',
+							'js-sticky-mpu',
+						].join(' ')}
+						css={[
+							rightAdStyles,
+							css`
+								position: sticky;
+							`,
+							labelStyles,
+						]}
+						data-link-name="ad slot football-data-page" // TODO: check if this needs to be added in commercial
+						data-name="football-data-page" // TODO: check if this needs to be added in commercial
+						data-testid="slot"
+						aria-hidden="true"
+					/>
+				</div>
+			);
+		}
 		case 'comments': {
 			return (
 				<div className="ad-slot-container">
