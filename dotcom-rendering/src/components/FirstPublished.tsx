@@ -7,6 +7,8 @@ import {
 } from '@guardian/source/foundations';
 import { SvgPinned } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
+import type { RenderingTarget } from '../types/renderingTarget';
+import { useConfig } from './ConfigContext';
 import { DateTime } from './DateTime';
 
 const fallbackDate = (date: Date) =>
@@ -23,6 +25,18 @@ type Props = {
 	absoluteServerTimes: boolean;
 };
 
+const href = (blockId: string, renderingTarget: RenderingTarget): string => {
+	const params = new URLSearchParams({
+		page: `with:block-${blockId}`,
+	});
+
+	if (renderingTarget === 'Apps') {
+		params.append('dcr', 'apps');
+	}
+
+	return `?${params.toString()}#block-${blockId}`;
+};
+
 const FirstPublished = ({
 	firstPublished,
 	firstPublishedDisplay,
@@ -32,6 +46,8 @@ const FirstPublished = ({
 	absoluteServerTimes,
 }: Props) => {
 	const publishedDate = new Date(firstPublished);
+	const { renderingTarget } = useConfig();
+
 	return (
 		<div
 			css={css`
@@ -39,7 +55,7 @@ const FirstPublished = ({
 			`}
 		>
 			<a
-				href={`?page=with:block-${blockId}#block-${blockId}`}
+				href={href(blockId, renderingTarget)}
 				data-ignore="global-link-styling"
 				css={css`
 					${textSansBold12}
