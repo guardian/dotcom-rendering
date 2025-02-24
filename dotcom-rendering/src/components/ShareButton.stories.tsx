@@ -1,9 +1,9 @@
-import { css } from '@emotion/react';
-import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
+import { neutral } from '@guardian/source/foundations';
 import {
 	defaultFormats,
 	splitTheme,
 } from '../../.storybook/decorators/splitThemeDecorator';
+import { allModes } from '../../.storybook/modes';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { palette as themePalette } from '../palette';
 import {
@@ -16,10 +16,6 @@ export default {
 	component: ShareButton,
 	title: 'Components/ShareButton',
 };
-
-interface StoryArgs extends StoryProps {
-	theme: string;
-}
 
 export const ShareButtonStory = () => {
 	return (
@@ -69,36 +65,30 @@ export const LinkCopied = () => {
 LinkCopied.storyName = 'LinkCopied';
 LinkCopied.decorators = [splitTheme()];
 
-export const LiveBlogMobileMeta = ({ theme }: StoryArgs) => {
+export const LiveBlogMobileMeta = () => {
 	return (
-		<div
-			css={css`
-				background-color: ${theme === 'light'
-					? themePalette('--share-button-liveblog-mobile-meta')
-					: 'inherit'};
-			`}
-		>
-			<CopyNativeShareButton
-				onShare={() => {}}
-				isCopied={false}
-				isLiveBlogMeta={true}
-				size="small"
-			/>
-		</div>
+		<CopyNativeShareButton
+			onShare={() => {}}
+			isCopied={false}
+			isLiveBlogMeta={true}
+			size="small"
+		/>
 	);
 };
 LiveBlogMobileMeta.storyName = 'LiveBlogMobileMeta';
-LiveBlogMobileMeta.decorators = [
-	splitTheme(
-		[...defaultFormats].filter(
-			(format) => format.design !== ArticleDesign.Gallery,
-		),
+LiveBlogMobileMeta.parameters = {
+	colourSchemeBackground: {
+		light: themePalette('--share-button-liveblog-mobile-meta'),
+		dark: neutral[0],
+	},
+	formats: [...defaultFormats].filter(
+		(format) => format.design !== ArticleDesign.Gallery,
 	),
-];
-LiveBlogMobileMeta.story = {
-	parameters: {
-		viewport: { defaultViewport: 'mobileMedium' },
-		chromatic: { viewports: [375] },
+	viewport: { defaultViewport: 'mobileMedium' },
+	chromatic: {
+		modes: {
+			'vertical mobileMedium': allModes['vertical mobileMedium'],
+		},
 	},
 };
 

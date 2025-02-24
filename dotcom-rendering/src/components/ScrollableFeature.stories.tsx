@@ -1,6 +1,11 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
+import {
+	audioTrails,
+	galleryTrails,
+	videoTrails,
+} from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { FrontSection } from './FrontSection';
@@ -53,8 +58,8 @@ const trails = new Array(6)
 	}));
 
 const meta = {
-	title: 'Components/ScrollableFeature',
 	component: ScrollableFeature,
+	title: 'Components/ScrollableFeature',
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -70,6 +75,7 @@ const meta = {
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
 		aspectRatio: '4:5',
+		collectionId: 1,
 	},
 	render: (args) => (
 		<FrontSection
@@ -85,9 +91,21 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof ScrollableFeature>;
+type Story = StoryObj<typeof meta>;
 
 export const Default = {};
+
+export const Media = {
+	args: {
+		trails: [galleryTrails[0], galleryTrails[1], audioTrails[0]],
+	},
+} satisfies Story;
+
+export const MoreMedia = {
+	args: {
+		trails: [audioTrails[1], videoTrails[0], videoTrails[1]],
+	},
+} satisfies Story;
 
 export const WithPrimaryContainer = {
 	render: (args) => (

@@ -60,12 +60,27 @@ For ease of development you may want to install:
 
 -   [React Developer Tools](https://github.com/facebook/react-devtools)
 
-### Running alongside identity
+### Running alongside identity/sign in
 
-You may want local identity cookies to be available in `dotcom-rendering`. To enable this:
+You may want to develop against signed in behaviour in `dotcom-rendering`.
+In order for this to work you have to run `dotcom-rendering` on a local domain with `https`.
 
-1. run `./scripts/nginx/setup.sh`
-1. access `dotcom-rendering` through https://r.thegulocal.com
+To set this up this:
+
+1. Run `./scripts/nginx/setup.sh`
+
+    - This will create a local domain `r.thegulocal.com` and set up a reverse proxy to `localhost:3030` with a valid SSL certificate.
+
+2. `dotcom-rendering` can now be accessed through https://r.thegulocal.com when running the development server
+3. Sign in to https://profile.code.dev-theguardian.com/ on a separate tab/window
+
+    - Third party cookies must be enabled in your browser for this to work
+
+4. Back on `dotcom-rendering` under https://r.thegulocal.com set a cookie with the name `GU_U` with any value on the `r.thegulocal.com` domain and refresh the page
+5. You should now be signed in!
+
+    - You should see the header change to show `My Account` instead of `Sign in`
+    - In local storage you should see a key `gu.access_token` and `gu.id_token` with the values of the tokens you are signed in with
 
 ## Production
 

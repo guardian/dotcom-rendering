@@ -45,8 +45,6 @@ const basicCardProps: CardProps = {
 	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api/',
 	showMainVideo: true,
 	absoluteServerTimes: true,
-	galleryCount: 8,
-	audioDuration: '20:25',
 };
 
 const aBasicLink = {
@@ -77,11 +75,12 @@ const mainVideo: MainMedia = {
 
 const mainAudio: MainMedia = {
 	type: 'Audio',
-	duration: 24,
+	duration: '30:24',
 };
 
 const mainGallery: MainMedia = {
 	type: 'Gallery',
+	count: '5',
 };
 
 const CardWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -356,7 +355,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 						design: ArticleDesign.Audio,
 						theme: ArticleSpecial.SpecialReportAlt,
 					}}
-					mainMedia={{ ...mainAudio, duration: 90 }}
+					mainMedia={mainAudio}
 					headlineText="Audio"
 				/>
 			</CardWrapper>
@@ -1305,7 +1304,7 @@ export const WithSpecialPaletteVariations = () => {
 					imagePositionOnDesktop="top"
 					imagePositionOnMobile="left"
 					imageSize="medium"
-					mainMedia={{ ...mainAudio, duration: 90 }}
+					mainMedia={mainAudio}
 					containerPalette={containerPalette}
 				/>
 			</LI>

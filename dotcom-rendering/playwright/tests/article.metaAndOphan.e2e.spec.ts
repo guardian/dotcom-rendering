@@ -15,10 +15,10 @@ const expectMetaContentValue = async (
 
 test.describe('The web document renders with the correct meta and analytics elements and attributes', () => {
 	test(`The page is structured as expected`, async ({ page }) => {
-		await loadPage(
+		await loadPage({
 			page,
-			'/Article/https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked',
-		);
+			path: '/Article/https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked',
+		});
 
 		await expect(page.locator('head')).toHaveCount(1);
 
@@ -51,10 +51,10 @@ test.describe('The web document renders with the correct meta and analytics elem
 	});
 
 	test('Subnav links exists with correct values', async ({ page }) => {
-		await loadPage(
+		await loadPage({
 			page,
-			`/Article/https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
-		);
+			path: `/Article/https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
+		});
 
 		// Pillar ophan data-link-name exists with correct value
 		await expectToExist(
@@ -72,10 +72,10 @@ test.describe('The web document renders with the correct meta and analytics elem
 	test('Meta ophan data-attributes exist, content and attributes are correct', async ({
 		page,
 	}) => {
-		await loadPage(
+		await loadPage({
 			page,
-			`/Article/https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
-		);
+			path: `/Article/https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
+		});
 
 		await expectToExist(page, `address[data-component="meta-byline"]`);
 		await expectToExist(page, `address[data-link-name="byline"]`);
@@ -92,10 +92,10 @@ test.describe('The web document renders with the correct meta and analytics elem
 	test('Section, Footer and Series ophan data-attributes exist', async ({
 		page,
 	}) => {
-		await loadPage(
+		await loadPage({
 			page,
-			`/Article/https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
-		);
+			path: `/Article/https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
+		});
 		await expectToExist(page, `[data-component="section"]`);
 		await expectToExist(page, `[data-link-name="article section"]`);
 		await expectToExist(page, `a[data-component="series"]`);

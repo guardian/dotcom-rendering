@@ -5,7 +5,12 @@ import {
 	IMPRESSION_REQUEST_PATH,
 	interceptOphanRequest,
 } from 'playwright/lib/ophan';
-import { cmpAcceptAll, cmpRejectAll, disableCMP } from '../lib/cmp';
+import {
+	allowRejectAll,
+	cmpAcceptAll,
+	cmpRejectAll,
+	disableCMP,
+} from '../lib/cmp';
 import { loadPage } from '../lib/load-page';
 
 const articleUrl =
@@ -16,7 +21,9 @@ const frontUrl = 'https://www.theguardian.com/uk';
 test.describe('Ophan requests', () => {
 	test('should make an IMPRESSION request on an article when consent is rejected', async ({
 		page,
+		context,
 	}) => {
+		await allowRejectAll(context);
 		const ophanImpressionRequestPromise = interceptOphanRequest({
 			page,
 			path: IMPRESSION_REQUEST_PATH,
@@ -31,7 +38,7 @@ test.describe('Ophan requests', () => {
 				);
 			},
 		});
-		await loadPage(page, `/Article/${articleUrl}`);
+		await loadPage({ page, path: `/Article/${articleUrl}` });
 		await cmpRejectAll(page);
 		await ophanImpressionRequestPromise;
 	});
@@ -53,7 +60,7 @@ test.describe('Ophan requests', () => {
 				);
 			},
 		});
-		await loadPage(page, `/Article/${articleUrl}`);
+		await loadPage({ page, path: `/Article/${articleUrl}` });
 		await cmpAcceptAll(page);
 		await ophanImpressionRequestPromise;
 	});
@@ -71,7 +78,7 @@ test.describe('Ophan requests', () => {
 				return experiences === 'dotcom-rendering';
 			},
 		});
-		await loadPage(page, `/Article/${articleUrl}`);
+		await loadPage({ page, path: `/Article/${articleUrl}` });
 		await ophanExperienceRequestPromise;
 	});
 
@@ -94,7 +101,7 @@ test.describe('Ophan requests', () => {
 				);
 			},
 		});
-		await loadPage(page, `/Front/${frontUrl}`);
+		await loadPage({ page, path: `/Front/${frontUrl}` });
 		await ophanImpressionRequestPromise;
 	});
 
@@ -111,7 +118,7 @@ test.describe('Ophan requests', () => {
 				return experiences === 'dotcom-rendering';
 			},
 		});
-		await loadPage(page, `/Front/${frontUrl}`);
+		await loadPage({ page, path: `/Front/${frontUrl}` });
 		await ophanExperienceRequestPromise;
 	});
 });

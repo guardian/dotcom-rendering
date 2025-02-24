@@ -866,6 +866,7 @@ export interface Image {
 	fields: {
 		height: string;
 		width: string;
+		aspectRatio?: string;
 		isMaster?: string;
 		source?: string;
 		caption?: string;

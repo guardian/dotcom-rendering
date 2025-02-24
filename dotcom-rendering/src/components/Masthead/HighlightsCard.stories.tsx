@@ -7,6 +7,7 @@ import { HighlightsCard } from './HighlightsCard';
 
 const mainGallery: MainMedia = {
 	type: 'Gallery',
+	count: '10',
 };
 
 const meta = {
@@ -113,11 +114,14 @@ export const WithPodcastSeriesImage: Story = {
 			design: ArticleDesign.Audio,
 			theme: Pillar.Sport,
 		},
-		podcastImage: {
-			src: 'https://uploads.guim.co.uk/2024/08/01/FootballWeekly_FINAL_3000_(1).jpg',
-			altText: 'Football Weekly',
+		mainMedia: {
+			type: 'Audio',
+			duration: '31.76',
+			podcastImage: {
+				src: 'https://uploads.guim.co.uk/2024/08/01/FootballWeekly_FINAL_3000_(1).jpg',
+				altText: 'Football Weekly',
+			},
 		},
-		mainMedia: { type: 'Audio', duration: 31.76 },
 	},
 
 	parameters: {},

@@ -36,7 +36,7 @@ test.describe('Paid content tests', () => {
 	test('should send Ophan component event on click of sponsor logo in article meta and related content section', async ({
 		page,
 	}) => {
-		await loadPage(page, `/Article/${paidContentPage}`);
+		await loadPage({ page, path: `/Article/${paidContentPage}` });
 		await cmpAcceptAll(page);
 
 		// meta logo

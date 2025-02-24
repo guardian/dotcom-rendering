@@ -15,41 +15,22 @@ import {
 } from '@guardian/source/foundations';
 import { Decorator } from '@storybook/react';
 import { storybookPaletteDeclarations as paletteDeclarations } from '../mocks/paletteDeclarations';
+import type { ReactNode } from 'react';
 
 interface Orientation {
 	orientation?: 'horizontal' | 'vertical';
 }
 
-const headerCss = css`
-	${textSansBold20};
-	text-align: center;
-	padding: ${space[2]}px;
-`;
+/**
+ * The `splitTheme` decorator displays a story simultaneously in both light and
+ * dark mode.
+ */
+type ColourScheme = 'light' | 'dark';
 
-const styles = css`
-	display: grid;
-	max-width: 100%;
-`;
-
-const FormatHeading = ({ format }: { format: ArticleFormat }) => (
-	<h3
-		css={css`
-			${textSans17};
-			text-align: center;
-			padding: ${space[1]}px;
-			opacity: 0.75;
-		`}
-	>
-		{[
-			`Display: ${ArticleDisplay[format.display]}`,
-			`Design: ${ArticleDesign[format.design]}`,
-			`Theme: ${Pillar[format.theme] || ArticleSpecial[format.theme]}`,
-		]
-			.map((line) => line.replaceAll(' ', ' ')) // non-breaking spaces
-			.join(', ')}
-	</h3>
-);
-// ----- Decorators ----- //
+/**
+ * The second argument to a Storybook decorator is the story's context.
+ */
+type Context = Parameters<Decorator>[1];
 
 /** A list of the most typical formats */
 export const defaultFormats = [
@@ -126,9 +107,197 @@ export const defaultFormats = [
 ] as const satisfies readonly ArticleFormat[];
 
 /**
- * Creates storybook decorator used to render a component twice
- * Once in light mode, once in dark mode
- * Using a split screen
+ * Derives the background colour for a story based on the colour scheme set by
+ * the `splitTheme` decorator and the parameters passed to the story. If
+ * background colours are set via the `colourSchemeBackground` parameter, these
+ * are used, otherwise defaults from {@linkcode sourcePalette} are used.
+ *
+ * @param colourScheme Light or dark mode.
+ * @param context A story's context, containing the story parameters.
+ * @returns A CSS `color` value.
+ */
+const backgroundColour = (
+	colourScheme: ColourScheme,
+	context: Context,
+): string =>
+	colourScheme === 'light'
+		? context.parameters.colourSchemeBackground?.light ??
+		  sourcePalette.neutral[100]
+		: context.parameters.colourSchemeBackground?.dark ??
+		  sourcePalette.neutral[0];
+
+/**
+ * Derives the text colour for a story based on the colour scheme set by the
+ * `splitTheme` decorator and the parameters passed to the story. If text
+ * colours are set via the `colourSchemeTextColour` parameter, these are used,
+ * otherwise defaults from {@linkcode sourcePalette} are used.
+ *
+ * @param colourScheme Light or dark mode.
+ * @param context A story's context, containing the story parameters.
+ * @returns A CSS `color` value.
+ */
+const textColour = (colourScheme: ColourScheme, context: Context): string =>
+	colourScheme === 'light'
+		? context.parameters.colourSchemeTextColour?.light ??
+		  sourcePalette.neutral[0]
+		: context.parameters.colourSchemeTextColour?.dark ??
+		  sourcePalette.neutral[100];
+
+/**
+ * Describes the theme being used to render the Story, 'light' or 'dark'.
+ */
+const ThemeHeading = ({ colourScheme }: { colourScheme: ColourScheme }) => (
+	<h2
+		css={[
+			textSansBold20,
+			{
+				textAlign: 'center',
+				padding: space[2],
+			},
+		]}
+	>
+		{colourScheme === 'light' ? 'Light Theme ☀️' : 'Dark Theme 🌙'}
+	</h2>
+);
+
+type FormatHeadingProps = {
+	colourScheme: ColourScheme;
+	format: ArticleFormat;
+};
+
+/**
+ * Describes the {@linkcode ArticleFormat} being used to render the story.
+ */
+const FormatHeading = ({ format, colourScheme }: FormatHeadingProps) => (
+	<h3
+		css={[
+			textSans17,
+			{
+				textAlign: 'center',
+				padding: space[1],
+				color:
+					colourScheme === 'light'
+						? sourcePalette.neutral[20]
+						: sourcePalette.neutral[73],
+			},
+		]}
+	>
+		{[
+			`Display: ${ArticleDisplay[format.display]}`,
+			`Design: ${ArticleDesign[format.design]}`,
+			`Theme: ${Pillar[format.theme] || ArticleSpecial[format.theme]}`,
+		]
+			.map((line) => line.replaceAll(' ', ' ')) // non-breaking spaces
+			.join(', ')}
+	</h3>
+);
+
+type PaletteProps = {
+	format: ArticleFormat;
+	colourScheme: ColourScheme;
+	context: Context;
+	children: ReactNode;
+};
+
+/**
+ * Generates the palette colours using the given {@linkcode ArticleFormat} and
+ * {@linkcode ColourScheme} and makes them available to the Story.
+ *
+ * For more information on how the palette works see
+ * {@linkcode paletteDeclarations}.
+ */
+const Palette = ({ format, colourScheme, context, children }: PaletteProps) => (
+	<div
+		data-color-scheme={colourScheme}
+		css={[
+			css(paletteDeclarations(format, colourScheme)),
+			{
+				backgroundColor: backgroundColour(colourScheme, context),
+				color: textColour(colourScheme, context),
+			},
+		]}
+	>
+		{children}
+	</div>
+);
+
+type ThemeProps = {
+	formats: ArticleFormat[];
+	Story: Parameters<Decorator>[0];
+	context: Context;
+	colourScheme: ColourScheme;
+};
+
+/**
+ * Renders a story one or more times, based on the list of
+ * {@linkcode ArticleFormat}s passed, and in a particular
+ * {@linkcode ColourScheme}.
+ *
+ * For example, if a single format is passed and the colour scheme is 'light',
+ * it will render the story once in light mode. If three formats are passed and
+ * the colours scheme is 'dark', it will render the story three times, once for
+ * each format, and all three will be in dark mode.
+ *
+ * Also sets default background and text colours supplied via the
+ * `colourSchemeBackground` and `colourSchemeTextColour` parameters from the
+ * story, or provides defaults when these are not supplied.
+ */
+const Theme = ({ formats, Story, context, colourScheme }: ThemeProps) => (
+	<div
+		css={{
+			color:
+				colourScheme === 'light'
+					? sourcePalette.neutral[0]
+					: sourcePalette.neutral[100],
+			backgroundColor:
+				colourScheme === 'light'
+					? sourcePalette.neutral[100]
+					: sourcePalette.neutral[0],
+		}}
+	>
+		<ThemeHeading colourScheme={colourScheme} />
+		{formats.map((format) => (
+			<>
+				<FormatHeading format={format} colourScheme={colourScheme} />
+				<Palette
+					colourScheme={colourScheme}
+					context={context}
+					format={format}
+				>
+					<Story
+						args={{
+							...context.args,
+							format,
+						}}
+					/>
+				</Palette>
+			</>
+		))}
+	</div>
+);
+
+/**
+ * Creates a Storybook decorator used to render a story in both light and dark
+ * mode simultaneously; either vertically, light above dark, or horizontally,
+ * light on the left and dark on the right.
+ *
+ * If multiple {@linkcode ArticleFormat}s are passed, it will render the story
+ * in both light and dark mode for each of these. For example, if three formats
+ * are passed then it will render the story six times, three times in light
+ * mode, once for each format, and three times in dark mode, once for each
+ * format.
+ *
+ * The returned "splitTheme" decorator was historically used directly in story
+ * files. This approach is now deprecated in favour of the "global colour
+ * scheme" decorator and toolbar item, which use the "splitTheme" decorator in
+ * turn. The "global colour scheme" can be set in Storybook via the toolbar, and
+ * in Chromatic via "modes".
+ *
+ * @param formats A list of formats to render the story in. If none are passed
+ * then the {@linkcode defaultFormats} are used.
+ * @param orientation Whether to render light and dark mode side-by-side
+ * vertically or horizontally. The default is `horizontal`.
+ * @returns A decorator that can be used with Storybook.
  */
 export const splitTheme =
 	(
@@ -137,64 +306,25 @@ export const splitTheme =
 	): Decorator =>
 	(Story, context) => (
 		<div
-			css={styles}
-			style={{
+			css={{
+				display: 'grid',
+				maxWidth: '100%',
 				gridTemplateColumns:
 					orientation === 'horizontal' ? '1fr 1fr' : '1fr',
 			}}
 		>
-			<div
-				data-color-scheme="light"
-				style={{
-					backgroundColor:
-						context.parameters.colourSchemeBackground?.light ??
-						sourcePalette.neutral[100],
-					color:
-						context.parameters.colourSchemeTextColour?.light ??
-						sourcePalette.neutral[0],
-				}}
-				css={css(paletteDeclarations(defaultFormats[0], 'light'))}
-			>
-				<h2 css={headerCss}>Light Theme ☀️</h2>
-				{formats.map((format) => (
-					<div css={css(paletteDeclarations(format, 'light'))}>
-						<FormatHeading format={format} />
-						<Story
-							args={{
-								...context.args,
-								format,
-								theme: 'light',
-							}}
-						/>
-					</div>
-				))}
-			</div>
-			<div
-				data-color-scheme="dark"
-				style={{
-					backgroundColor:
-						context.parameters.colourSchemeBackground?.dark ??
-						sourcePalette.neutral[0],
-					color:
-						context.parameters.colourSchemeTextColour?.dark ??
-						sourcePalette.neutral[100],
-				}}
-				css={css(paletteDeclarations(defaultFormats[0], 'dark'))}
-			>
-				<h2 css={headerCss}>Dark Theme 🌙</h2>
-				{formats.map((format) => (
-					<div css={css(paletteDeclarations(format, 'dark'))}>
-						<FormatHeading format={format} />
-						<Story
-							args={{
-								...context.args,
-								format,
-								theme: 'dark',
-							}}
-						/>
-					</div>
-				))}
-			</div>
+			<Theme
+				colourScheme="light"
+				formats={formats}
+				Story={Story}
+				context={context}
+			/>
+			<Theme
+				colourScheme="dark"
+				formats={formats}
+				Story={Story}
+				context={context}
+			/>
 		</div>
 	);
 

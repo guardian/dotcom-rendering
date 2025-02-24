@@ -25,10 +25,10 @@ test.describe('Edition Switcher Banner', () => {
 				});
 
 				await disableCMP(context);
-				await loadPage(
+				await loadPage({
 					page,
-					`/Front/https://www.theguardian.com/${pageId}`,
-				);
+					path: `/Front/https://www.theguardian.com/${pageId}`,
+				});
 
 				await expect(
 					page.locator('[data-component="edition-switcher-banner"]'),
@@ -51,10 +51,10 @@ test.describe('Edition Switcher Banner', () => {
 				});
 
 				await disableCMP(context);
-				await loadPage(
+				await loadPage({
 					page,
-					`/Front/https://www.theguardian.com/${pageId}`,
-				);
+					path: `/Front/https://www.theguardian.com/${pageId}`,
+				});
 
 				await expect(
 					page.locator('[data-component="edition-switcher-banner"]'),
@@ -74,7 +74,10 @@ test.describe('Edition Switcher Banner', () => {
 			});
 
 			await disableCMP(context);
-			await loadPage(page, `/Front/https://www.theguardian.com/uk/sport`);
+			await loadPage({
+				page,
+				path: `/Front/https://www.theguardian.com/uk/sport`,
+			});
 
 			await expect(
 				page.locator('[data-component="edition-switcher-banner"]'),
@@ -91,10 +94,10 @@ test.describe('Edition Switcher Banner', () => {
 			});
 
 			await disableCMP(context);
-			await loadPage(
+			await loadPage({
 				page,
-				`/Article/https://www.theguardian.com/environment/2020/oct/13/maverick-rewilders-endangered-species-extinction-conservation-uk-wildlife`,
-			);
+				path: `/Article/https://www.theguardian.com/environment/2020/oct/13/maverick-rewilders-endangered-species-extinction-conservation-uk-wildlife`,
+			});
 
 			await expect(
 				page.locator('[data-component="edition-switcher-banner"]'),

@@ -55,10 +55,10 @@ test.describe('E2E Page rendering', () => {
 					),
 			);
 
-			await loadPage(
+			await loadPage({
 				page,
-				`/Article/https://www.theguardian.com/commentisfree/2019/oct/16/impostor-syndrome-class-unfairness`,
-			);
+				path: `/Article/https://www.theguardian.com/commentisfree/2019/oct/16/impostor-syndrome-class-unfairness`,
+			});
 
 			await expect(page.locator('[data-gu-name="title"]')).toContainText(
 				'Opinion',

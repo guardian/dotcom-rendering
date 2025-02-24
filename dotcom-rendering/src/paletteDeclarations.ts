@@ -2513,7 +2513,7 @@ const cardHeadlineTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 
 const cardTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
-const cardTrailTextLight: PaletteFunction = () => sourcePalette.neutral[38];
+const cardTrailTextLight: PaletteFunction = () => sourcePalette.neutral[46];
 const cardTrailTextDark: PaletteFunction = () => sourcePalette.neutral[73];
 
 const liveKickerBackgroundLight: PaletteFunction = (format) => {
