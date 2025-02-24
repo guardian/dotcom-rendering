@@ -1,4 +1,6 @@
+import { Hide } from '@guardian/source/react-components';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
+import { AdSlot } from '../components/AdSlot.web';
 import { AffiliateDisclaimerInline } from '../components/AffiliateDisclaimer';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
@@ -124,6 +126,14 @@ const updateRole = (el: FEElement, format: ArticleFormat): FEElement => {
 
 			return el;
 	}
+};
+
+const MobileBannerAd = () => {
+	return (
+		<Hide from="phablet">
+			<AdSlot position="crossword-banner-mobile" />
+		</Hide>
+	);
 };
 
 // renderElement converts a Frontend element to JSX. A boolean 'ok' flag is returned
@@ -868,7 +878,10 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.CrosswordElement':
 			return (
 				<Island priority="critical" defer={{ until: 'visible' }}>
-					<CrosswordComponent data={element.crossword} />
+					<CrosswordComponent
+						data={element.crossword}
+						MobileBannerAd={MobileBannerAd}
+					/>
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
