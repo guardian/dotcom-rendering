@@ -2,12 +2,12 @@ import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
-import { GutterAsk } from './gutterAsk';
+import { GutterAsk } from './GutterAsk';
 import { props } from './utils/storybook';
 
 const { variant, enrichedUrl, onCtaClick } = props;
 
-const Wrapper = ({ children }: { children: React.ReactNode }) => (
+const VisualWrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			margin-left: ${space[5]}px;
@@ -23,7 +23,7 @@ type Props = WithJsonProps<React.ComponentProps<typeof GutterAsk>>;
 
 const meta: Meta<Props> = {
 	component: GutterAsk,
-	title: 'Components/Marketing/StickyLiveblogAsk',
+	title: 'Components/Marketing/GutterAsk',
 	args: {
 		variant,
 		enrichedUrl,
@@ -35,9 +35,9 @@ const meta: Meta<Props> = {
 			? JSON.parse(lzstring.decompressFromEncodedURIComponent(json))
 			: {};
 		return (
-			<Wrapper>
+			<VisualWrapper>
 				<GutterAsk {...args} {...jsonProps} />
-			</Wrapper>
+			</VisualWrapper>
 		);
 	},
 };
