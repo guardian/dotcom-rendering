@@ -1,5 +1,6 @@
 import { ArticleDesign } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
+import { isNonEmptyArray } from '../lib/tuple';
 import type { BoostLevel } from '../types/content';
 import type {
 	AspectRatio,
@@ -308,7 +309,7 @@ export const FlexibleSpecial = ({
 				imageLoading={imageLoading}
 				aspectRatio={aspectRatio}
 				isLastRow={cards.length === 0}
-				isFirstRow={!snaps}
+				isFirstRow={!isNonEmptyArray(snaps)}
 				containerLevel={containerLevel}
 			/>
 			<TwoCardOrFourCardLayout
@@ -318,7 +319,7 @@ export const FlexibleSpecial = ({
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
 				aspectRatio={aspectRatio}
-				isFirstRow={!snaps && !splash}
+				isFirstRow={!isNonEmptyArray(snaps) && !isNonEmptyArray(splash)}
 				containerLevel={containerLevel}
 			/>
 		</>
