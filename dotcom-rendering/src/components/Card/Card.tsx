@@ -148,7 +148,6 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
-	isInLoopVideoTest?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -404,7 +403,6 @@ export const Card = ({
 	showTopBarMobile = false,
 	trailTextSize,
 	showKickerImage = false,
-	isInLoopVideoTest = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -823,7 +821,6 @@ export const Card = ({
 							media.type === 'slideshow' && isFlexibleContainer
 						}
 						padImage={isMediaCard && isBetaContainer}
-						isInLoopVideoTest={isInLoopVideoTest}
 					>
 						{media.type === 'slideshow' &&
 							(isFlexibleContainer ? (
@@ -990,7 +987,6 @@ export const Card = ({
 									loading={imageLoading}
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
-									isInLoopVideoTest={isInLoopVideoTest}
 								/>
 								{(isVideoMainMedia ||
 									(isVideoArticle && !isBetaContainer)) &&

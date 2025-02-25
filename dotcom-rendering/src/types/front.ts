@@ -349,7 +349,6 @@ export type DCRFrontCard = {
 	branding?: Branding;
 	slideshowImages?: DCRSlideshowImage[];
 	showMainVideo?: boolean;
-	isInLoopVideoTest?: boolean;
 };
 
 export type DCRSlideshowImage = {

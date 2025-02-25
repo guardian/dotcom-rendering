@@ -42,7 +42,6 @@ type Props = {
 	 */
 	hideImageOverlay?: boolean;
 	padImage?: boolean;
-	isInLoopVideoTest?: boolean;
 };
 
 /**
@@ -129,13 +128,11 @@ export const ImageWrapper = ({
 	imagePositionOnMobile,
 	hideImageOverlay,
 	padImage,
-	isInLoopVideoTest = false,
 }: Props) => {
 	const isHorizontalOnDesktop =
 		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
 	const isHorizontalOnMobile =
 		imagePositionOnMobile === 'left' || imagePositionOnMobile === 'right';
-
 	return (
 		<div
 			css={[
@@ -182,8 +179,7 @@ export const ImageWrapper = ({
 				{children}
 				{/* This image overlay is styled when the CardLink is hovered */}
 				{(imageType === 'picture' || imageType === 'slideshow') &&
-					!hideImageOverlay &&
-					!isInLoopVideoTest && <div className="image-overlay" />}
+					!hideImageOverlay && <div className="image-overlay" />}
 			</>
 		</div>
 	);
