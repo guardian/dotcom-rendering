@@ -37,7 +37,7 @@ const Layout: CrosswordProps['Layout'] = ({
 	Controls,
 	SavedMessage,
 	AnagramHelper,
-	StickyClue,
+	FocusedClue,
 	gridWidth,
 }) => {
 	return (
@@ -46,8 +46,7 @@ const Layout: CrosswordProps['Layout'] = ({
 				display: flex;
 				flex-direction: column;
 				gap: ${space[4]}px;
-
-				${from.leftCol} {
+				${from.phablet} {
 					flex-direction: row;
 				}
 			`}
@@ -56,23 +55,30 @@ const Layout: CrosswordProps['Layout'] = ({
 			<div
 				css={css`
 					flex-basis: ${gridWidth}px;
-
-					${from.leftCol} {
-						position: sticky;
-						top: ${space[4]}px;
-						align-self: flex-start;
-					}
 				`}
 			>
-				<StickyClue
+				<FocusedClue
 					additionalCss={css`
-						${from.leftCol} {
+						max-width: ${gridWidth}px;
+						${from.phablet} {
 							display: none;
 						}
 					`}
 				/>
 				<Grid />
-				<div data-print-layout="hide">
+				<div
+					data-print-layout="hide"
+					css={css`
+						max-width: ${gridWidth}px;
+					`}
+				>
+					<FocusedClue
+						additionalCss={css`
+							${from.phablet} {
+								display: none;
+							}
+						`}
+					/>
 					<Controls />
 					<div
 						css={css`
@@ -92,13 +98,11 @@ const Layout: CrosswordProps['Layout'] = ({
 					flex-direction: column;
 					gap: ${space[4]}px;
 					align-items: flex-start;
-
+					${from.desktop} {
+						flex-direction: row;
+					}
 					> * {
 						flex: 1;
-					}
-
-					${from.wide} {
-						flex-direction: row;
 					}
 				`}
 			>

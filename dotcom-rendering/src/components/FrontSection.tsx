@@ -11,7 +11,7 @@ import type {
 	DCRContainerPalette,
 	TreatType,
 } from '../types/front';
-import type { DCRFrontPagination } from '../types/tagPage';
+import type { TagPagePagination } from '../types/tagPage';
 import { isAustralianTerritory, type Territory } from '../types/territory';
 import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
 import { ContainerOverrides } from './ContainerOverrides';
@@ -74,7 +74,7 @@ type Props = {
 	ajaxUrl?: string;
 	/** Puts pagination at the bottom of the container allowing the user to navigate to other pages,
 	 * usually used on the last container on a page */
-	pagination?: DCRFrontPagination;
+	pagination?: TagPagePagination;
 	/** Does this front section reside on a "paid for" content front */
 	isOnPaidContentFront?: boolean;
 	/** Indicates if the container is targetted to a specific territory */

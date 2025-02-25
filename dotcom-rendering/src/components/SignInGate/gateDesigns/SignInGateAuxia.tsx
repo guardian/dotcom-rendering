@@ -1,4 +1,3 @@
-import { cmp } from '@guardian/libs';
 import { Button, Link, LinkButton } from '@guardian/source/react-components';
 import { useConfig } from '../../ConfigContext';
 import { trackLink } from '../componentEventTracking';
@@ -13,7 +12,6 @@ import {
 	headingStyles,
 	hideElementsCss,
 	laterButton,
-	privacyLink,
 	registerButton,
 	signInGateContainer,
 	signInHeader,
@@ -39,13 +37,11 @@ export const SignInGateAuxia = ({
 	The component must be written to gracefully handle empty values for the following field:
 		- subtitle
 		- body
-		- privacy_button_name
 	*/
 
 	const title = treatmentContent.title;
 	const subtitle = treatmentContent.subtitle;
 	const body = treatmentContent.body;
-	const privacy_button_name = treatmentContent.privacy_button_name;
 	const firstCtaName = treatmentContent.first_cta_name;
 	const firstCtaLink = treatmentContent.first_cta_link;
 	const secondCtaName = treatmentContent.second_cta_name;
@@ -60,32 +56,7 @@ export const SignInGateAuxia = ({
 			<div css={firstParagraphOverlay} />
 			<h1 css={headingStyles}>{title}</h1>
 			{hasContent(subtitle) && <p css={bodyBold}>{subtitle}</p>}
-			{hasContent(body) && (
-				<p css={bodyText}>
-					{body}{' '}
-					{hasContent(privacy_button_name) && (
-						<button
-							data-testid="sign-in-gate-main_privacy"
-							css={privacyLink}
-							onClick={async () => {
-								cmp.showPrivacyManager();
-								trackLink(
-									ophanComponentId,
-									'privacy',
-									renderingTarget,
-									abTest,
-								);
-								await logTreatmentInteractionCall(
-									'CLICKED',
-									'PRIVACY-BUTTON',
-								);
-							}}
-						>
-							privacy settings
-						</button>
-					)}
-				</p>
-			)}
+			{hasContent(body) && <p css={bodyText}>{body}</p>}
 			<div css={actionButtons}>
 				<LinkButton
 					data-testid="sign-in-gate-main_register"

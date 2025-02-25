@@ -29,7 +29,6 @@ import type {
 } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
-import type { PodcastSeriesImage } from '../../types/tag';
 import { Avatar } from '../Avatar';
 import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
@@ -52,7 +51,11 @@ import { AvatarContainer } from './components/AvatarContainer';
 import { CardAge } from './components/CardAge';
 import { CardBranding } from './components/CardBranding';
 import { CardFooter } from './components/CardFooter';
-import { CardLayout, type GapSizes } from './components/CardLayout';
+import {
+	CardLayout,
+	decideAvatarPosition,
+	type GapSizes,
+} from './components/CardLayout';
 import { CardLink } from './components/CardLink';
 import { CardWrapper } from './components/CardWrapper';
 import { ContentWrapper } from './components/ContentWrapper';
@@ -143,14 +146,9 @@ export type Props = {
 	showTopBarDesktop?: boolean;
 	showTopBarMobile?: boolean;
 	trailTextSize?: TrailTextSize;
-	/** If specified, overrides trail text colour */
-	trailTextColour?: string;
-	/** The square podcast series image, if it exists for a card */
-	podcastImage?: PodcastSeriesImage;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
-	galleryCount?: number;
-	audioDuration?: string;
+	isInLoopVideoTest?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -253,7 +251,6 @@ const getMedia = ({
 	slideshowImages,
 	mainMedia,
 	canPlayInline,
-	podcastImage,
 	isBetaContainer,
 }: {
 	imageUrl?: string;
@@ -263,10 +260,9 @@ const getMedia = ({
 	slideshowImages?: DCRSlideshowImage[];
 	mainMedia?: MainMedia;
 	canPlayInline?: boolean;
-	podcastImage?: PodcastSeriesImage;
 	isBetaContainer: boolean;
 }) => {
-	if (mainMedia && mainMedia.type === 'Video' && canPlayInline) {
+	if (mainMedia?.type === 'Video' && canPlayInline) {
 		return {
 			type: 'video',
 			mainMedia,
@@ -275,10 +271,14 @@ const getMedia = ({
 	}
 	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
 	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
-	if (podcastImage && isBetaContainer) {
+	if (
+		mainMedia?.type === 'Audio' &&
+		mainMedia.podcastImage &&
+		isBetaContainer
+	) {
 		return {
+			...mainMedia,
 			type: 'podcast',
-			podcastImage,
 			trailImage: { src: imageUrl, altText: imageAltText },
 		} as const;
 	}
@@ -403,11 +403,8 @@ export const Card = ({
 	showTopBarDesktop = true,
 	showTopBarMobile = false,
 	trailTextSize,
-	trailTextColour,
-	podcastImage,
 	showKickerImage = false,
-	galleryCount,
-	audioDuration,
+	isInLoopVideoTest = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -519,7 +516,7 @@ export const Card = ({
 
 			{mainMedia?.type === 'Audio' && (
 				<Pill
-					content={audioDuration ?? ''}
+					content={mainMedia.duration}
 					icon={<SvgMediaControlsPlay />}
 					iconSize={'small'}
 				/>
@@ -527,7 +524,7 @@ export const Card = ({
 			{mainMedia?.type === 'Gallery' && (
 				<Pill
 					prefix="Gallery"
-					content={galleryCount?.toString() ?? ''}
+					content={mainMedia.count}
 					icon={<SvgCamera />}
 					iconSide="right"
 				/>
@@ -557,14 +554,24 @@ export const Card = ({
 		slideshowImages,
 		mainMedia,
 		canPlayInline,
-		podcastImage,
 		isBetaContainer,
 	});
 
-	// For opinion type cards with avatars (which aren't onwards content)
-	// we render the footer in a different location
-	const showCommentFooter =
+	/**
+	 * For opinion type cards with avatars (which aren't onwards content)
+	 * we render the footer in a different location
+	 */
+	const isOpinionCardWithAvatar =
 		isOpinion && !isOnwardContent && media?.type === 'avatar';
+
+	/**
+	 * The avatar position is not always the same as the image position.
+	 */
+	const avatarPosition = decideAvatarPosition(
+		imagePositionOnMobile,
+		imagePositionOnDesktop,
+		isBetaContainer,
+	);
 
 	/**
 -	 * Media cards have contrasting background colours. We add additional
@@ -816,6 +823,7 @@ export const Card = ({
 							media.type === 'slideshow' && isFlexibleContainer
 						}
 						padImage={isMediaCard && isBetaContainer}
+						isInLoopVideoTest={isInLoopVideoTest}
 					>
 						{media.type === 'slideshow' &&
 							(isFlexibleContainer ? (
@@ -914,12 +922,9 @@ export const Card = ({
 													containerType ===
 													'fixed/video'
 												}
-												imagePositionOnMobile={
-													imagePositionOnMobile
-												}
 												//** TODO: IMPROVE THIS MAPPING */
 												// image size defaults to small if not provided. However, if the headline size is large or greater, we want to assume the image is also large so that the play icon is correctly sized.
-												imageSize={
+												iconSizeOnDesktop={
 													[
 														'small',
 														'medium',
@@ -929,9 +934,23 @@ export const Card = ({
 													].includes(
 														headlineSizes?.desktop ??
 															'',
-													)
+													) || imageSize !== 'small'
 														? 'large'
-														: imageSize
+														: 'small'
+												}
+												iconSizeOnMobile={
+													imagePositionOnMobile ===
+														'left' ||
+													imagePositionOnMobile ===
+														'right'
+														? 'small'
+														: 'large'
+												}
+												hidePillOnMobile={
+													imagePositionOnMobile ===
+														'left' ||
+													imagePositionOnMobile ===
+														'right'
 												}
 												enableAds={false}
 												aspectRatio={aspectRatio}
@@ -971,6 +990,7 @@ export const Card = ({
 									loading={imageLoading}
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
+									isInLoopVideoTest={isInLoopVideoTest}
 								/>
 								{(isVideoMainMedia ||
 									(isVideoArticle && !isBetaContainer)) &&
@@ -999,7 +1019,7 @@ export const Card = ({
 
 						{media.type === 'podcast' && (
 							<>
-								{media.podcastImage.src && !showKickerImage ? (
+								{media.podcastImage?.src && !showKickerImage ? (
 									<div css={[podcastImageStyles(imageSize)]}>
 										<CardPicture
 											mainImage={media.podcastImage.src}
@@ -1096,14 +1116,13 @@ export const Card = ({
 							{!!trailText && media?.type !== 'podcast' && (
 								<TrailText
 									trailText={trailText}
-									trailTextColour={trailTextColour}
 									trailTextSize={trailTextSize}
 									padTop={headlinePosition === 'inner'}
 									hideUntil={hideTrailTextUntil()}
 								/>
 							)}
 
-							{!showCommentFooter && (
+							{!isOpinionCardWithAvatar && (
 								<>
 									{showPill ? (
 										<>
@@ -1227,7 +1246,7 @@ export const Card = ({
 				)}
 				{decideOuterSublinks()}
 
-				{showCommentFooter && (
+				{isOpinionCardWithAvatar && (
 					<CardFooter
 						format={format}
 						age={decideAge()}
@@ -1241,6 +1260,10 @@ export const Card = ({
 							) : undefined
 						}
 						showLivePlayable={showLivePlayable}
+						shouldReserveSpace={{
+							mobile: avatarPosition.mobile === 'bottom',
+							desktop: avatarPosition.desktop === 'bottom',
+						}}
 					/>
 				)}
 			</div>

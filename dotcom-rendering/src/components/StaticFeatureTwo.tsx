@@ -15,13 +15,22 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
+	collectionId: number;
 };
+
+/**
+ * Displays two feature cards. Also known as a "stacked" feature container.
+ *
+ * On small screens the cards are displayed at full-width, one after the other.
+ * This is opposed to other types of containers that display feature cards in carousels.
+ */
 export const StaticFeatureTwo = ({
 	trails,
 	containerPalette,
 	absoluteServerTimes,
 	imageLoading,
 	aspectRatio,
+	collectionId,
 }: Props) => {
 	const cards = trails.slice(0, 2);
 
@@ -31,7 +40,7 @@ export const StaticFeatureTwo = ({
 				return (
 					<LI
 						stretch={false}
-						percentage={'50%'}
+						percentage="50%"
 						key={card.url}
 						padSides={true}
 						showDivider={true}
@@ -66,7 +75,7 @@ export const StaticFeatureTwo = ({
 							imageSize="feature-large"
 							headlineSizes={{ desktop: 'small' }}
 							supportingContent={card.supportingContent}
-							galleryCount={card.galleryCount}
+							collectionId={collectionId}
 						/>
 					</LI>
 				);

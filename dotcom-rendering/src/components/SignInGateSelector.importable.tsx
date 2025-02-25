@@ -486,7 +486,7 @@ const decideDailyArticleCount = (): number => {
 const decideAuxiaProxyReaderPersonalData =
 	async (): Promise<AuxiaGateReaderPersonalData> => {
 		const browserId =
-			getCookie({ name: 'bwid', shouldMemoize: true }) ?? '';
+			getCookie({ name: 'bwid', shouldMemoize: true }) ?? undefined;
 		const dailyArticleCount = decideDailyArticleCount();
 		const hasConsent = await hasCmpConsentForBrowserId();
 		const isSupporter = decideIsSupporter();
@@ -760,17 +760,21 @@ const ShowSignInGateAuxia = ({
 		});
 	}, [componentId]);
 
-	return SignInGateAuxia({
-		guUrl: host,
-		signInUrl,
-		dismissGate: () => {
-			setShowGate(false);
-		},
-		abTest,
-		ophanComponentId: componentId,
-		checkoutCompleteCookieData,
-		personaliseSignInGateAfterCheckoutSwitch,
-		userTreatment,
-		logTreatmentInteractionCall,
-	});
+	return (
+		<SignInGateAuxia
+			guUrl={host}
+			signInUrl={signInUrl}
+			dismissGate={() => {
+				setShowGate(false);
+			}}
+			abTest={abTest}
+			ophanComponentId={componentId}
+			checkoutCompleteCookieData={checkoutCompleteCookieData}
+			personaliseSignInGateAfterCheckoutSwitch={
+				personaliseSignInGateAfterCheckoutSwitch
+			}
+			userTreatment={userTreatment}
+			logTreatmentInteractionCall={logTreatmentInteractionCall}
+		/>
+	);
 };

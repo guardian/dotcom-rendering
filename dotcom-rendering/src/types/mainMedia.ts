@@ -1,3 +1,5 @@
+import type { PodcastSeriesImage } from './tag';
+
 type Media = {
 	type: 'Video' | 'Audio' | 'Gallery';
 };
@@ -19,11 +21,13 @@ type Video = Media & {
 
 type Audio = Media & {
 	type: 'Audio';
-	duration: number;
+	podcastImage?: PodcastSeriesImage;
+	duration: string;
 };
 
 type Gallery = Media & {
 	type: 'Gallery';
+	count: string;
 };
 
 export type MainMedia = Video | Audio | Gallery;

@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { palette, space, textSansBold12 } from '@guardian/source/foundations';
+import {
+	from,
+	palette,
+	space,
+	textSansBold12,
+} from '@guardian/source/foundations';
 import { SvgCamera } from '@guardian/source/react-components';
 import { Pill } from '../../../components/Pill';
 import { SvgMediaControlsPlay } from '../../../components/SvgMediaControlsPlay';
@@ -35,9 +40,22 @@ const contentStyles = css`
 	}
 `;
 
+const reserveSpaceStyles = (mobile: boolean, desktop: boolean) => css`
+	min-height: ${mobile ? '14px' : 0};
+
+	${from.tablet} {
+		min-height: ${desktop ? '14px' : 0};
+	}
+`;
+
 const labStyles = css`
 	margin-top: ${space[1]}px;
 `;
+
+type MainMedia =
+	| { type: 'Video'; duration: number }
+	| { type: 'Audio'; duration: string }
+	| { type: 'Gallery'; count: string };
 
 type Props = {
 	format: ArticleFormat;
@@ -45,26 +63,18 @@ type Props = {
 	age?: JSX.Element;
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
-	isVideo?: boolean;
-	videoDuration?: number;
-	isAudio?: boolean;
-	audioDuration?: string;
-	isGallery?: boolean;
-	galleryCount?: number;
+	mainMedia?: MainMedia;
+	shouldReserveSpace?: { mobile: boolean; desktop: boolean };
 };
 
 export const CardFooter = ({
 	format,
+	showLivePlayable,
 	age,
 	commentCount,
 	cardBranding,
-	showLivePlayable,
-	isVideo,
-	videoDuration,
-	isAudio,
-	audioDuration,
-	isGallery,
-	galleryCount,
+	mainMedia,
+	shouldReserveSpace,
 }: Props) => {
 	if (showLivePlayable) return null;
 
@@ -72,33 +82,35 @@ export const CardFooter = ({
 		return <footer css={labStyles}>{cardBranding}</footer>;
 	}
 
-	if (isVideo && videoDuration !== undefined) {
+	if (mainMedia?.type === 'Video') {
 		return (
 			<footer css={contentStyles}>
 				<Pill
-					content={<time>{secondsToDuration(videoDuration)}</time>}
+					content={
+						<time>{secondsToDuration(mainMedia.duration)}</time>
+					}
 					icon={<SvgMediaControlsPlay />}
 				/>
 			</footer>
 		);
 	}
 
-	if (isAudio && audioDuration !== undefined) {
+	if (mainMedia?.type === 'Audio') {
 		return (
 			<footer css={contentStyles}>
 				<Pill
-					content={<time>{audioDuration}</time>}
+					content={<time>{mainMedia.duration}</time>}
 					icon={<SvgMediaControlsPlay />}
 				/>
 			</footer>
 		);
 	}
 
-	if (isGallery && galleryCount !== undefined) {
+	if (mainMedia?.type === 'Gallery') {
 		return (
 			<footer css={contentStyles}>
 				<Pill
-					content={galleryCount.toString()}
+					content={mainMedia.count}
 					prefix="Gallery"
 					icon={<SvgCamera />}
 					iconSide="right"
@@ -108,7 +120,16 @@ export const CardFooter = ({
 	}
 
 	return (
-		<footer css={contentStyles}>
+		<footer
+			css={[
+				contentStyles,
+				shouldReserveSpace &&
+					reserveSpaceStyles(
+						shouldReserveSpace.mobile,
+						shouldReserveSpace.desktop,
+					),
+			]}
+		>
 			{age}
 			{commentCount}
 		</footer>

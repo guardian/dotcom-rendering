@@ -3,6 +3,7 @@ import { abTestTest } from './tests/ab-test-test';
 import { adBlockAsk } from './tests/ad-block-ask';
 import { auxiaSignInGate } from './tests/auxia-sign-in-gate';
 import { consentlessAds } from './tests/consentless-ads';
+import { fiveFourImages } from './tests/five-four-images';
 import { integrateIma } from './tests/integrate-ima';
 import { mpuWhenNoEpic } from './tests/mpu-when-no-epic';
 import { optimiseSpacefinderInline } from './tests/optimise-spacefinder-inline';
@@ -23,4 +24,5 @@ export const tests: ABTest[] = [
 	optimiseSpacefinderInline,
 	userBenefitsApi,
 	auxiaSignInGate,
+	fiveFourImages,
 ];

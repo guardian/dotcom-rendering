@@ -55,9 +55,7 @@ export const FrontCard = (props: Props) => {
 		slideshowImages: trail.slideshowImages,
 		showLivePlayable: trail.showLivePlayable,
 		showMainVideo: trail.showMainVideo,
-		galleryCount: trail.galleryCount,
-		podcastImage: trail.podcastImage,
-		audioDuration: trail.audioDuration,
+		isInLoopVideoTest: trail.isInLoopVideoTest,
 	};
 
 	return Card({ ...defaultProps, ...cardProps });
