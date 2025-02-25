@@ -44,7 +44,10 @@ type Story = StoryObj<typeof meta>;
 export const Four = {
 	name: 'With four cards',
 	args: {
-		trails: trails.slice(0, 4),
+		trails: trails.slice(0, 4).map((trail, index) => ({
+			...trail,
+			isNewsletter: index === 3, // Check that we see the Newsletter pill on a card.
+		})),
 	},
 };
 
