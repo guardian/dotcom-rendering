@@ -135,7 +135,9 @@ export const ArticleBody = ({
 	isRightToLeftLang = false,
 	editionId,
 }: Props) => {
-	const isInteractive = format.design === ArticleDesign.Interactive;
+	const isInteractiveContent =
+		format.design === ArticleDesign.Interactive ||
+		format.design === ArticleDesign.Crossword;
 	const language = decideLanguage(lang);
 	const languageDirection = decideLanguageDirection(isRightToLeftLang);
 
@@ -200,7 +202,7 @@ export const ArticleBody = ({
 				id="maincontent"
 				css={[
 					`margin-top: ${remSpace[3]}`,
-					isInteractive ? null : bodyPadding,
+					isInteractiveContent ? null : bodyPadding,
 					globalH3Styles(format.display),
 					globalOlStyles(),
 					globalStrongStyles,
