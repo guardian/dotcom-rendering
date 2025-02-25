@@ -220,6 +220,7 @@ export type Props = {
 	 * The highlights container above the header is 0, the first container below the header is 1, etc.
 	 */
 	collectionId: number;
+	isNewsletter?: boolean;
 };
 
 export const FeatureCard = ({
@@ -253,6 +254,7 @@ export const FeatureCard = ({
 	starRating,
 	showQuotes,
 	collectionId,
+	isNewsletter = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -546,6 +548,7 @@ export const FeatureCard = ({
 											// }
 											showLivePlayable={false}
 											mainMedia={mainMedia}
+											isNewsletter={isNewsletter}
 										/>
 									</div>
 									{/* On video article cards, the duration is displayed in the footer */}

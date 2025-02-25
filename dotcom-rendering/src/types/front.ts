@@ -340,6 +340,7 @@ export type DCRFrontCard = {
 	isBoosted?: boolean;
 	boostLevel?: BoostLevel;
 	isCrossword?: boolean;
+	isNewsletter?: boolean;
 	discussionId?: string;
 	byline?: string;
 	showByline?: boolean;
