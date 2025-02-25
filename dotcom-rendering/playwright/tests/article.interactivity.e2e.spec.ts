@@ -19,7 +19,7 @@ test.describe('Interactivity', () => {
 			page,
 		}) => {
 			await disableCMP(context);
-			await loadPage(page, `/Article/${articleUrl}`);
+			await loadPage({ page, path: `/Article/${articleUrl}` });
 
 			// Open it
 			await page.locator('[data-testid=dropdown-button]').click();
@@ -40,10 +40,10 @@ test.describe('Interactivity', () => {
 			page,
 		}) => {
 			await disableCMP(context);
-			await loadPage(
+			await loadPage({
 				page,
-				`/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster`,
-			);
+				path: `/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster`,
+			});
 
 			await expectToBeVisible(page, '[data-testid=comment-counts]');
 			// The discusion is not yet loaded
@@ -59,10 +59,11 @@ test.describe('Interactivity', () => {
 			page,
 		}) => {
 			await disableCMP(context);
-			await loadPage(
+			await loadPage({
 				page,
-				`/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comments`,
-			);
+				path: `/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster`,
+				fragment: '#comments',
+			});
 			await expectToExist(page, '[data-testid=discussion]');
 		});
 
@@ -71,10 +72,11 @@ test.describe('Interactivity', () => {
 			page,
 		}) => {
 			await disableCMP(context);
-			await loadPage(
+			await loadPage({
 				page,
-				`/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comment-154433663`,
-			);
+				path: `/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster`,
+				fragment: '#comment-154433663',
+			});
 			await waitForIsland(page, 'DiscussionWeb', {});
 			await expectToBeVisible(page, '[id=comment-154433663]');
 		});
@@ -84,7 +86,7 @@ test.describe('Interactivity', () => {
 			page,
 		}) => {
 			await disableCMP(context);
-			await loadPage(page, `/Article/${articleUrl}`);
+			await loadPage({ page, path: `/Article/${articleUrl}` });
 			await expectToNotExist(page, '[data-component=geo-most-popular]');
 			await waitForIsland(page, 'MostViewedRightWithAd', {});
 			await expectToExist(page, '[data-component=geo-most-popular]');
@@ -95,7 +97,7 @@ test.describe('Interactivity', () => {
 			page,
 		}) => {
 			await disableCMP(context);
-			await loadPage(page, `/Article/${articleUrl}`);
+			await loadPage({ page, path: `/Article/${articleUrl}` });
 			// Verify two rich links were server rendered
 			await expect(
 				page.locator('[data-component=rich-link]'),
@@ -118,7 +120,7 @@ test.describe('Interactivity', () => {
 			page,
 		}) => {
 			await disableCMP(context);
-			await loadPage(page, `/Article/${articleUrl}`);
+			await loadPage({ page, path: `/Article/${articleUrl}` });
 			await waitForIsland(page, 'TopBar');
 			await expect(
 				page.locator('header').filter({ hasText: 'Support' }),
@@ -132,7 +134,7 @@ test.describe('Interactivity', () => {
 			page,
 		}) => {
 			await disableCMP(context);
-			await loadPage(page, `/Article/${articleUrl}`);
+			await loadPage({ page, path: `/Article/${articleUrl}` });
 
 			// Make sure most viewed footer isn't in the dom yet
 			await expect(
@@ -168,7 +170,7 @@ test.describe('Interactivity', () => {
 			page,
 		}) => {
 			await disableCMP(context);
-			await loadPage(page, `/Article/${articleUrl}`);
+			await loadPage({ page, path: `/Article/${articleUrl}` });
 
 			// Open pillar menu
 			await page.locator('[data-testid=veggie-burger]').click();
@@ -196,7 +198,7 @@ test.describe('Interactivity', () => {
 			}) => {
 				await page.setViewportSize(devices['iPhone X'].viewport);
 				await disableCMP(context);
-				await loadPage(page, `/Article/${articleUrl}`);
+				await loadPage({ page, path: `/Article/${articleUrl}` });
 
 				await page.locator('[data-testid=veggie-burger]').click();
 				await expect(
@@ -222,7 +224,7 @@ test.describe('Interactivity', () => {
 			}) => {
 				await page.setViewportSize(devices['iPhone X'].viewport);
 				await disableCMP(context);
-				await loadPage(page, `/Article/${articleUrl}`);
+				await loadPage({ page, path: `/Article/${articleUrl}` });
 
 				await page.locator('[data-testid=veggie-burger]').focus();
 				await page.locator('[data-testid=veggie-burger]').press('Tab');
@@ -237,7 +239,7 @@ test.describe('Interactivity', () => {
 			}) => {
 				await page.setViewportSize(devices['iPhone X'].viewport);
 				await disableCMP(context);
-				await loadPage(page, `/Article/${articleUrl}`);
+				await loadPage({ page, path: `/Article/${articleUrl}` });
 
 				await page.locator('[data-testid=veggie-burger]').click();
 				await expect(
@@ -251,7 +253,7 @@ test.describe('Interactivity', () => {
 			}) => {
 				await page.setViewportSize(devices['iPhone X'].viewport);
 				await disableCMP(context);
-				await loadPage(page, `/Article/${articleUrl}`);
+				await loadPage({ page, path: `/Article/${articleUrl}` });
 
 				// tab to the first sub menu item
 				await page.locator('[data-testid=veggie-burger]').click();
@@ -272,7 +274,7 @@ test.describe('Interactivity', () => {
 			}) => {
 				await page.setViewportSize(devices['iPhone X'].viewport);
 				await disableCMP(context);
-				await loadPage(page, `/Article/${articleUrl}`);
+				await loadPage({ page, path: `/Article/${articleUrl}` });
 
 				await page
 					.locator('[data-testid=veggie-burger]')

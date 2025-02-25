@@ -6,6 +6,8 @@ import {
 	getSignedInStatusWithOkta,
 } from './identity';
 
+export type AuthStatusOrPending = AuthStatus | { kind: 'Pending' };
+
 /**
  * A hook to find out if a user is signed in.
  * Returns `'Pending'` until status is known.
@@ -25,8 +27,8 @@ export const useIsSignedIn = (): boolean | 'Pending' => {
 	}
 };
 
-export const useAuthStatus = (): AuthStatus => {
-	const [authStatus, setAuthStatus] = useState<AuthStatus>({
+export const useAuthStatus = (): AuthStatusOrPending => {
+	const [authStatus, setAuthStatus] = useState<AuthStatusOrPending>({
 		kind: 'Pending',
 	});
 

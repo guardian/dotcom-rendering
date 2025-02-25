@@ -72,29 +72,29 @@ const cardTrailTextLight: ContainerFunction = (
 ) => {
 	switch (containerPalette) {
 		case 'InvestigationPalette':
-			return sourcePalette.neutral[93];
+			return sourcePalette.neutral[100];
 		case 'LongRunningPalette':
-			return sourcePalette.neutral[10];
+			return sourcePalette.neutral[7];
 		case 'SombrePalette':
-			return sourcePalette.neutral[93];
+			return sourcePalette.neutral[100];
 		case 'BreakingPalette':
-			return sourcePalette.neutral[93];
+			return sourcePalette.neutral[100];
 		case 'EventPalette':
 			return sourcePalette.brand[300];
 		case 'EventAltPalette':
 			return sourcePalette.brand[300];
 		case 'LongRunningAltPalette':
-			return sourcePalette.neutral[10];
+			return sourcePalette.neutral[7];
 		case 'SombreAltPalette':
-			return sourcePalette.neutral[86];
+			return sourcePalette.neutral[93];
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[100];
 		case 'PodcastPalette':
-			return sourcePalette.neutral[93];
+			return sourcePalette.neutral[100];
 		case 'Branded':
-			return sourcePalette.neutral[38];
+			return sourcePalette.neutral[20];
 		case 'MediaPalette':
-			return sourcePalette.neutral[93];
+			return sourcePalette.neutral[100];
 	}
 };
 const cardTrailTextDark: ContainerFunction = (

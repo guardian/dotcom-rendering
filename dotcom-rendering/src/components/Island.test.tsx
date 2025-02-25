@@ -382,6 +382,7 @@ describe('Island: server-side rendering', () => {
 						pageId={''}
 						switches={{}}
 						contributionsServiceUrl={''}
+						editionId="UK"
 					/>
 				</WithConfig>,
 			),

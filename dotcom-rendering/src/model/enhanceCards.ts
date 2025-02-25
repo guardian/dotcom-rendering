@@ -87,14 +87,13 @@ const decideUrl = (trail: FESupportingContent | FEFrontCard) => {
 };
 
 const decideImage = (trail: FEFrontCard) => {
+	if (trail.display.imageHide) return undefined;
 	if (
 		trail.type === 'LinkSnap' ||
 		trail.properties.image?.type === 'Replace'
 	) {
 		return trail.properties.image?.item.imageSrc;
 	}
-
-	if (trail.display.imageHide) return undefined;
 
 	if (trail.properties.isCrossword && trail.properties.maybeContentId) {
 		return `https://api.nextgen.guardianapps.co.uk/${trail.properties.maybeContentId}.svg`;
@@ -193,6 +192,9 @@ const decideMedia = (
 	format: ArticleFormat,
 	showMainVideo?: boolean,
 	mediaAtom?: FEMediaAtom,
+	galleryCount: number = 0,
+	audioDuration: string = '',
+	podcastImage?: PodcastSeriesImage,
 ): MainMedia | undefined => {
 	// If the showVideo toggle is enabled in the fronts tool,
 	// we should return the active mediaAtom regardless of the design
@@ -202,12 +204,13 @@ const decideMedia = (
 
 	switch (format.design) {
 		case ArticleDesign.Gallery:
-			return { type: 'Gallery' };
+			return { type: 'Gallery', count: galleryCount.toString() };
 
 		case ArticleDesign.Audio:
 			return {
 				type: 'Audio',
-				duration: mediaAtom?.duration ?? 0,
+				podcastImage,
+				duration: audioDuration,
 			};
 
 		case ArticleDesign.Video: {
@@ -269,6 +272,17 @@ export const enhanceCards = (
 		const podcastImage = getPodcastSeriesImage(faciaCard);
 
 		const isContributorTagPage = !!pageId && pageId.startsWith('profile/');
+
+		const mainMedia = decideMedia(
+			format,
+			faciaCard.properties.showMainVideo,
+			faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
+				faciaCard.properties.maybeContent?.elements.mediaAtoms[0],
+			faciaCard.card.galleryCount,
+			faciaCard.card.audioDuration,
+			podcastImage,
+		);
+
 		return {
 			format,
 			dataLinkName,
@@ -308,12 +322,7 @@ export const enhanceCards = (
 							faciaCard.properties.maybeContent.trail.byline,
 					  )
 					: undefined,
-			mainMedia: decideMedia(
-				format,
-				faciaCard.properties.showMainVideo,
-				faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
-					faciaCard.properties.maybeContent?.elements.mediaAtoms[0],
-			),
+			mainMedia,
 			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
 			embedUri: faciaCard.properties.embedUri ?? undefined,
 			branding,
@@ -327,8 +336,5 @@ export const enhanceCards = (
 							?.allImages[0]?.fields.altText ?? '',
 				},
 			}),
-			podcastImage,
-			galleryCount: faciaCard.card.galleryCount,
-			audioDuration: faciaCard.card.audioDuration,
 		};
 	});

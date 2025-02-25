@@ -7,7 +7,10 @@ const execa = require('execa');
 const { config } = require('../../fixtures/config');
 const { configOverrides } = require('../../fixtures/config-overrides');
 const { switchOverrides } = require('../../fixtures/switch-overrides');
-const { validateAsArticleType } = require('../../src/model/validate');
+const {
+	validateAsArticleType,
+	validateAsFootballDataPageType,
+} = require('../../src/model/validate');
 
 const root = resolve(__dirname, '..', '..');
 
@@ -304,6 +307,45 @@ requests.push(
 		.then(() => 'story-package.ts')
 		.catch((err) => {
 			throw new Error('Failed to create story-package.ts', {
+				cause: err,
+			});
+		}),
+);
+
+requests.push(
+	fetch('https://www.theguardian.com/football/live.json?dcr=true')
+		.then((res) => res.json())
+		.then((json) => {
+			// These configs are returning from frontend
+			// but are not necessary for football pages
+			delete json.config.hasLiveBlogTopAd;
+			delete json.config.userAttributesApiUrl;
+			delete json.config.weatherapiurl;
+			delete json.config.isAdFree;
+			delete json.config.userBenefitsApiUrl;
+
+			const footballDataPageData = validateAsFootballDataPageType(json);
+
+			// Write the new frontend fixture data
+			const contents = `${HEADER}
+			import type { FEFootballDataPage } from '../../src/feFootballDataPage';
+
+			export const footballData: FEFootballDataPage = ${JSON.stringify(
+				footballDataPageData,
+				null,
+				4,
+			)}
+		`;
+
+			return fs.writeFile(
+				`${root}/fixtures/generated/football-live.ts`,
+				contents,
+				'utf8',
+			);
+		})
+		.then(() => 'football-live.ts')
+		.catch((err) => {
+			throw new Error('Failed to create football-live.ts', {
 				cause: err,
 			});
 		}),
