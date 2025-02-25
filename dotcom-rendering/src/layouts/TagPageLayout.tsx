@@ -65,6 +65,12 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const isAccessibilityPage =
 		tagPage.config.pageId === 'help/accessibility-help';
 
+	const isInfoPage = tagPage.config.pageId === 'info/privacy';
+	console.log('TagPage', tagPage);
+	console.log('isInfoPage1', tagPage.config.pageId);
+	console.log('isInfoPage2', isInfoPage);
+	console.log('enhanceTags(tags)', enhanceTags(tags));
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -240,6 +246,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					pillars={NAV.pillars}
 					urls={tagPage.nav.readerRevenueLinks.footer}
 					editionId={tagPage.editionId}
+					isInfoPage={isInfoPage}
 				/>
 			</Section>
 			<BannerWrapper data-print-layout="hide">

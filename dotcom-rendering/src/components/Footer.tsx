@@ -237,9 +237,11 @@ const bttPosition = css`
 const FooterLinks = ({
 	pageFooter,
 	urls,
+	isInfoPage,
 }: {
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;
+	isInfoPage?: boolean;
 }) => {
 	const linkGroups = pageFooter.footerLinks.map((linkGroup) => {
 		const linkList = linkGroup.flatMap(
@@ -273,7 +275,9 @@ const FooterLinks = ({
 		return <ul key={key}>{linkList}</ul>;
 	});
 
-	const rrLinks = (
+	const rrLinks = isInfoPage ? (
+		''
+	) : (
 		<div css={readerRevenueLinks}>
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<FooterReaderRevenueLinks
@@ -329,6 +333,7 @@ export const Footer = ({
 	urls,
 	editionId,
 	hasPageSkin,
+	isInfoPage,
 }: {
 	pillars: PillarLinkType[];
 	selectedPillar?: Pillar;
@@ -336,6 +341,7 @@ export const Footer = ({
 	urls: ReaderRevenueCategories;
 	editionId: EditionId;
 	hasPageSkin?: boolean;
+	isInfoPage?: boolean;
 }) => (
 	<div
 		data-print-layout="hide"
@@ -373,7 +379,11 @@ export const Footer = ({
 				</LinkButton>
 			</div>
 
-			<FooterLinks pageFooter={pageFooter} urls={urls} />
+			<FooterLinks
+				pageFooter={pageFooter}
+				urls={urls}
+				isInfoPage={isInfoPage}
+			/>
 
 			{editionId === 'AU' && (
 				<div css={acknowledgments}>
