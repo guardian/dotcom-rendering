@@ -1,6 +1,7 @@
 import { isMediaCard } from '../lib/cardHelpers';
 import type {
 	AspectRatio,
+	DCRContainerLevel,
 	DCRContainerPalette,
 	DCRFrontCard,
 } from '../types/front';
@@ -17,6 +18,7 @@ type Props = {
 	absoluteServerTimes: boolean;
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
+	containerLevel?: DCRContainerLevel;
 };
 
 export const StaticMediumFour = ({
@@ -27,6 +29,7 @@ export const StaticMediumFour = ({
 	imageLoading,
 	showImage = true,
 	aspectRatio,
+	containerLevel = 'Primary',
 }: Props) => {
 	const cards = trails.slice(0, 4);
 
@@ -59,7 +62,11 @@ export const StaticMediumFour = ({
 							kickerText={card.kickerText}
 							showLivePlayable={false}
 							showTopBarDesktop={false}
-							showTopBarMobile={true}
+							showTopBarMobile={
+								cardIndex != 0 ||
+								(containerLevel === 'Primary' &&
+									!isMediaCard(card.format))
+							}
 							canPlayInline={false}
 						/>
 					</LI>

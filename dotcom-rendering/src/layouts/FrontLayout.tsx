@@ -541,6 +541,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										}
 										sectionId={ophanName}
 										collectionId={index + 1}
+										containerLevel={
+											collection.containerLevel
+										}
 									/>
 								</LabsSection>
 								{mobileAdPositions.includes(index) && (
@@ -757,6 +760,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									sectionId={ophanName}
 									collectionId={index + 1}
+									containerLevel={collection.containerLevel}
 								/>
 							</FrontSection>
 							{mobileAdPositions.includes(index) && (
