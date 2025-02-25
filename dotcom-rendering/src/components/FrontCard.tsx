@@ -42,6 +42,7 @@ export const FrontCard = (props: Props) => {
 		showClock: false,
 		image: trail.image,
 		isCrossword: trail.isCrossword,
+		isCartoon: trail.isCartoon,
 		canPlayInline: true,
 		starRating: trail.starRating,
 		dataLinkName: trail.dataLinkName,

@@ -263,6 +263,10 @@ export const enhanceCards = (
 			? enhanceTags(faciaCard.properties.maybeContent.tags.tags)
 			: [];
 
+		const isCartoon = tags.some(
+			({ id, type }) => type === 'Tone' && id === 'tone/cartoons',
+		);
+
 		const branding = faciaCard.properties.editionBrandings.find(
 			(editionBranding) => editionBranding.edition.id === editionId,
 		)?.branding;
@@ -311,6 +315,7 @@ export const enhanceCards = (
 			isBoosted: faciaCard.display.isBoosted,
 			boostLevel: faciaCard.display.boostLevel,
 			isCrossword: faciaCard.properties.isCrossword,
+			isCartoon,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
 			showLivePlayable: faciaCard.display.showLivePlayable,
 			avatarUrl:

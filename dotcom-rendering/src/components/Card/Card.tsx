@@ -99,6 +99,7 @@ export type Props = {
 	imageLoading: Loading;
 	isCrossword?: boolean;
 	isOnwardContent?: boolean;
+	isCartoon?: boolean;
 	trailText?: string;
 	avatarUrl?: string;
 	showClock?: boolean;
@@ -387,6 +388,7 @@ export const Card = ({
 	isDynamo,
 	isCrossword,
 	isOnwardContent = false,
+	isCartoon = false,
 	isExternalLink,
 	slideshowImages,
 	showLivePlayable = false,
@@ -1089,6 +1091,7 @@ export const Card = ({
 										showByline={showByline}
 										isExternalLink={isExternalLink}
 										isBetaContainer={isBetaContainer}
+										isCartoon={isCartoon}
 										kickerImage={
 											showKickerImage &&
 											media?.type === 'podcast'
