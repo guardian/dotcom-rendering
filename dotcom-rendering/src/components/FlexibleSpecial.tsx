@@ -190,10 +190,12 @@ export const OneCardLayout = ({
 
 const getImagePosition = (
 	hasTwoOrFewerCards: boolean,
-	isAMediaCard: boolean,
+	isMediaCardOrNewsletter: boolean,
 ) => {
-	if (isAMediaCard && !hasTwoOrFewerCards) return 'top';
 	if (hasTwoOrFewerCards) return 'left';
+
+	if (isMediaCardOrNewsletter) return 'top';
+
 	return 'bottom';
 };
 
@@ -237,7 +239,7 @@ const TwoCardOrFourCardLayout = ({
 							imageLoading={imageLoading}
 							imagePositionOnDesktop={getImagePosition(
 								hasTwoOrFewerCards,
-								isMediaCard(card.format),
+								isMediaCard(card.format) || !!card.isNewsletter,
 							)}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
