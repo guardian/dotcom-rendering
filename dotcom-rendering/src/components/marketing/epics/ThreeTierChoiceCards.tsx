@@ -13,6 +13,7 @@ import {
 	RadioGroup,
 	Stack,
 	SvgTickRound,
+	type ThemeRadio,
 } from '@guardian/source/react-components';
 import type { CountryGroupId } from '@guardian/support-dotcom-components';
 import {
@@ -117,6 +118,13 @@ const discountedPillStyles = css`
 	}
 	right: ${space[5]}px;
 `;
+
+const customRadioTheme: ThemeRadio = {
+	borderSelected: palette.brandAlt[400],
+	borderUnselected: palette.neutral[46],
+	borderHover: palette.brandAlt[400],
+	fillSelected: palette.brand[400],
+};
 
 export type ChoiceInfo = {
 	supportTier: SupportTier;
@@ -280,6 +288,7 @@ export const ThreeTierChoiceCards = ({
 										onChange={() => {
 											setSelectedProduct(supportTier);
 										}}
+										theme={customRadioTheme}
 									/>
 								</label>
 							</div>
