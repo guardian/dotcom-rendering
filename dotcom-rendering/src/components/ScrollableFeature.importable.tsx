@@ -75,6 +75,7 @@ export const ScrollableFeature = ({
 							trailText={undefined}
 							collectionId={collectionId}
 							isNewsletter={card.isNewsletter}
+							showQuotes={card.showQuotedHeadline}
 						/>
 					</ScrollableCarousel.Item>
 				);
