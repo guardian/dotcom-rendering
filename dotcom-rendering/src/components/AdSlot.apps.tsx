@@ -1,11 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	from,
-	remSpace,
-	textSans12,
-	textSans14,
-	until,
-} from '@guardian/source/foundations';
+import { remSpace, textSans12, until } from '@guardian/source/foundations';
 import { forwardRef } from 'react';
 import { palette } from '../palette';
 
@@ -32,26 +26,14 @@ const styles = css`
 
 const adLabelsStyles = css`
 	${textSans12}
-	padding: ${remSpace[0]} ${remSpace[3]};
+	padding: ${remSpace[1]} ${remSpace[3]};
 	float: left;
 	display: flex;
 	justify-content: center;
+	color: ${palette('--ad-labels-text')};
 
 	/* We need to account for padding on both sides */
 	width: calc(100% - 2 * ${remSpace[3]});
-
-	p {
-		margin: 0;
-		float: left;
-		font-size: 16px;
-		font-weight: 400;
-		color: ${palette('--ad-labels-text')};
-	}
-
-	${from.phablet} {
-		${textSans14}
-		padding: ${remSpace[1]} ${remSpace[3]};
-	}
 `;
 
 const adSlotStyles = css`
