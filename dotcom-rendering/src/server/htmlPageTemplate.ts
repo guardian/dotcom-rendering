@@ -364,8 +364,8 @@ https://workforus.theguardian.com/careers/product-engineering/
 						? `
                 <noscript>
 					<!-- Comscore Identifier: comscorekw=${props.keywords
-						.replace(/ /g, '_')
-						.replace(/&/g, 'and')} -->
+						.replaceAll(' ', '_')
+						.replaceAll('&', 'and')} -->
                     <img src="https://sb.scorecardresearch.com/p?${new URLSearchParams(
 						{
 							c1: '2',
@@ -374,8 +374,8 @@ https://workforus.theguardian.com/careers/product-engineering/
 							cj: '1',
 							cs_ucfr: '0',
 							comscorekw: props.keywords
-								.replace(/ /g, '_')
-								.replace(/&/g, 'and'),
+								.replaceAll(' ', '_')
+								.replaceAll('&', 'and'),
 						},
 					).toString()}" />
                 </noscript>
