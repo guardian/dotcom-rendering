@@ -371,7 +371,9 @@ https://workforus.theguardian.com/careers/product-engineering/
 							cv: '2.0',
 							cj: '1',
 							cs_ucfr: '0',
-							comscorekw: props.keywords.replace(/ /g, '_'),
+							comscorekw: props.keywords
+								.replace(/ /g, '_')
+								.replace(/&/g, 'and'),
 						},
 					).toString()}" />
                 </noscript>
