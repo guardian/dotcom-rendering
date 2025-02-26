@@ -37,7 +37,7 @@ const supportTierChoiceCardStyles = (selected: boolean) => css`
 	border: ${selected
 		? `2px solid ${palette.brand['500']}`
 		: `1px solid ${palette.neutral[46]}`};
-	background-color: ${selected ? palette.sport[800] : palette.neutral[100]};
+	background-color: ${palette.neutral[100]};
 	border-radius: 10px;
 	padding: ${selected
 		? `6px ${space[5]}px 10px ${space[5]}px`
@@ -77,9 +77,9 @@ const benefitsLabelStyles = css`
 	}
 `;
 
-const labelOverrideStyles = css`
+const labelOverrideStyles = (isSelected: boolean) => css`
 	+ label div {
-		font-weight: bold;
+		${isSelected ? 'font-weight: bold;' : ''}
 		s {
 			font-weight: normal;
 		}
@@ -93,9 +93,9 @@ const supportingTextStyles = css`
 const recommendedPillStyles = css`
 	border-radius: 4px;
 	padding: ${space[1]}px ${space[2]}px;
-	background-color: ${palette.brand[400]};
+	background-color: ${palette.brandAlt[400]};
 	${textSansBold14};
-	color: ${palette.neutral[100]};
+	color: ${palette.neutral[7]};
 	position: absolute;
 	top: -${space[2]}px;
 	${until.phablet} {
@@ -261,7 +261,9 @@ export const ThreeTierChoiceCards = ({
 										)}
 										id={radioId}
 										value={supportTier}
-										cssOverrides={labelOverrideStyles}
+										cssOverrides={labelOverrideStyles(
+											selected,
+										)}
 										supporting={
 											selected ? (
 												<SupportingBenefits
