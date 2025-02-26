@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { remSpace, textSans12, until } from '@guardian/source/foundations';
+import { remSpace, textSans14, until } from '@guardian/source/foundations';
 import { forwardRef } from 'react';
 import { palette } from '../palette';
 
@@ -25,7 +25,7 @@ const styles = css`
 `;
 
 const adLabelsStyles = css`
-	${textSans12}
+	${textSans14}
 	padding: ${remSpace[1]} ${remSpace[3]};
 	float: left;
 	display: flex;
