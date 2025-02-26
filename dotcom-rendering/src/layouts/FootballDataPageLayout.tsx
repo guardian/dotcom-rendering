@@ -11,6 +11,8 @@ import { SubNav } from '../components/SubNav.importable';
 import type { FEFootballDataPage } from '../feFootballDataPage';
 import { extractNAV } from '../model/extract-nav';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { canRenderAds } from '../lib/canRenderAds';
+import { AdSlot } from '../components/AdSlot.web';
 
 interface Props {
 	footballData: FEFootballDataPage;
@@ -25,8 +27,8 @@ const initialDaysHardcoded = initialDays;
 export const FootballDataPageLayout = ({ footballData }: Props) => {
 	const NAV = extractNAV(footballData.nav);
 	const pageFooter = footballData.pageFooter;
-	// ToDo: call canRenderAds with matching type
-	const renderAds = true;
+	// TODO: Ask commercial, do we need to use the config shouldHideAdverts?
+	const renderAds = canRenderAds(footballData);
 
 	// ToDo: use getContributionsServiceUrl
 	//const contributionsServiceUrl = getContributionsServiceUrl(footballData);
@@ -68,6 +70,8 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 					pageId={footballData.config.pageId}
 				/>
 			</div>
+
+			{renderAds && <AdSlot position="right-football" />}
 
 			<main id="maincontent" data-layout="FootballDataPageLayout">
 				<Island priority="feature" defer={{ until: 'visible' }}>
