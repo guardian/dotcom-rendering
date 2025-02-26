@@ -63,7 +63,7 @@ export const StaticMediumFour = ({
 							showLivePlayable={false}
 							showTopBarDesktop={false}
 							showTopBarMobile={
-								cardIndex != 0 ||
+								cardIndex !== 0 ||
 								(containerLevel === 'Primary' &&
 									!isMediaCard(card.format))
 							}
