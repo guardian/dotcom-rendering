@@ -62,3 +62,11 @@ export const NoPoster = {
 		poster: undefined,
 	},
 } satisfies Story;
+
+export const WithCaption = {
+	...Default,
+	args: {
+		...Default.args,
+		caption: 'An example caption to display beneath the content',
+	},
+} satisfies Story;
