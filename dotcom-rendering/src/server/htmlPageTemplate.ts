@@ -363,7 +363,9 @@ https://workforus.theguardian.com/careers/product-engineering/
 					renderingTarget === 'Web'
 						? `
                 <noscript>
-					<!-- Comscore Identifier: comscorekw=${props.keywords.replace(/ /g, '_')} -->
+					<!-- Comscore Identifier: comscorekw=${props.keywords
+						.replace(/ /g, '_')
+						.replace(/&/g, 'and')} -->
                     <img src="https://sb.scorecardresearch.com/p?${new URLSearchParams(
 						{
 							c1: '2',
