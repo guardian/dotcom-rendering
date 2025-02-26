@@ -32,8 +32,6 @@ type ServerRenderedSlot = Exclude<
 	SlotNamesWithPageSkin,
 	| 'carrot'
 	| 'comments-expanded'
-	| 'crossword-banner'
-	| 'crossword-banner-mobile'
 	| 'exclusion'
 	| 'external'
 	| 'inline'
@@ -251,6 +249,18 @@ const articleEndAdStyles = css`
 	&.ad-slot--fluid {
 		min-height: 450px;
 	}
+`;
+
+const mobileBannerCrosswordStyles = css`
+	width: 320px;
+	height: 74px;
+	background-color: #ffffff;
+`;
+
+const crosswordBannerStyles = css`
+	width: 728px;
+	height: 90px;
+	background-color: #ffffff;
 `;
 
 const mostPopAdStyles = css`
@@ -799,6 +809,50 @@ export const AdSlot = ({
 						aria-hidden="true"
 					/>
 				</div>
+			);
+		}
+		case 'crossword-banner-mobile': {
+			return (
+				<Hide from="tablet">
+					<div className="ad-slot-container">
+						<div
+							id="dfp-ad--crossword-banner-mobile"
+							className={[
+								'js-ad-slot',
+								'ad-slot',
+								'ad-slot--crossword-banner-mobile',
+								'ad-slot--rendered',
+							].join(' ')}
+							css={[mobileBannerCrosswordStyles]}
+							data-link-name="ad slot crossword-banner-mobile"
+							data-name="crossword-banner-mobile"
+							data-testid="slot"
+							aria-hidden="true"
+						/>
+					</div>
+				</Hide>
+			);
+		}
+		case 'crossword-banner': {
+			return (
+				<Hide from="mobile" until="tablet">
+					<div className="ad-slot-container">
+						<div
+							id="dfp-ad--crossword-banner"
+							className={[
+								'js-ad-slot',
+								'ad-slot',
+								'ad-slot--crossword-banner',
+								'ad-slot--rendered',
+							].join(' ')}
+							css={[crosswordBannerStyles]}
+							data-link-name="ad slot crossword-banner"
+							data-name="crossword-banner"
+							data-testid="slot"
+							aria-hidden="true"
+						/>
+					</div>
+				</Hide>
 			);
 		}
 	}
