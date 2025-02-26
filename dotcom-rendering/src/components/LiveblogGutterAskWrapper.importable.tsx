@@ -36,7 +36,7 @@ const LiveblogGutterAskBuilder = ({
 	pageViewId,
 	pageUrl,
 }: LiveblogGutterAskBuilderProps) => {
-	const [GutterVariantResponse, setGutterVariantResponse] =
+	const [gutterVariantResponse, setGutterVariantResponse] =
 		useState<ModuleData<GutterProps> | null>(null);
 	const [GutterWrapperComponent, setGutterWrapperComponent] =
 		useState<React.ElementType<GutterProps>>();
@@ -114,8 +114,8 @@ const LiveblogGutterAskBuilder = ({
 		tags,
 	]);
 
-	if (GutterVariantResponse && !isUndefined(GutterWrapperComponent)) {
-		const { props } = GutterVariantResponse;
+	if (gutterVariantResponse && !isUndefined(GutterWrapperComponent)) {
+		const { props } = gutterVariantResponse;
 
 		const tracking: Tracking = {
 			...props.tracking,
