@@ -14,6 +14,7 @@ import {
 	Stack,
 	SvgTickRound,
 	type ThemeRadio,
+	themeRadio,
 } from '@guardian/source/react-components';
 import type { CountryGroupId } from '@guardian/support-dotcom-components';
 import {
@@ -120,6 +121,7 @@ const discountedPillStyles = css`
 `;
 
 const customRadioTheme: ThemeRadio = {
+	...themeRadio,
 	borderSelected: palette.brandAlt[400],
 	borderUnselected: palette.neutral[46],
 	borderHover: palette.brandAlt[400],
