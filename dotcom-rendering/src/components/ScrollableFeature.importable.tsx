@@ -74,6 +74,7 @@ export const ScrollableFeature = ({
 							}}
 							trailText={undefined}
 							collectionId={collectionId}
+							isNewsletter={card.isNewsletter}
 						/>
 					</ScrollableCarousel.Item>
 				);
