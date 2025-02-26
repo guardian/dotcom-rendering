@@ -4,6 +4,8 @@ import type { FootballMatches, FootballMatchKind } from '../footballMatches';
 import { grid } from '../grid';
 import type { EditionId } from '../lib/edition';
 import type { Result } from '../lib/result';
+import { palette } from '../palette';
+import { AdSlot } from './AdSlot.web';
 import type { Nations } from './FootballCompetitionSelect';
 import { FootballCompetitionSelect } from './FootballCompetitionSelect';
 import { FootballMatchList } from './FootballMatchList';
@@ -16,6 +18,7 @@ type Props = {
 	edition: EditionId;
 	goToCompetitionSpecificPage: (tag: string) => void;
 	getMoreDays?: () => Promise<Result<'failed', FootballMatches>>;
+	renderAds: boolean;
 };
 
 const createTitle = (kind: FootballMatchKind, edition: EditionId) => {
@@ -41,9 +44,29 @@ export const FootballMatchesPage = ({
 	edition,
 	goToCompetitionSpecificPage,
 	getMoreDays,
+	renderAds,
 }: Props) => (
-	<>
-		<section css={css(grid.container)}>
+	<main id="maincontent" data-layout="FootballDataPageLayout">
+		<div
+			css={css`
+				${grid.paddedContainer}
+				position: relative;
+				${from.tablet} {
+					&::before,
+					&::after {
+						content: '';
+						position: absolute;
+						border-left: 1px solid ${palette('--article-border')};
+						top: 0;
+						bottom: 0;
+					}
+
+					&::after {
+						right: 0;
+					}
+				}
+			`}
+		>
 			<h1
 				css={css`
 					${headlineBold20}
@@ -74,12 +97,13 @@ export const FootballMatchesPage = ({
 					/>
 				</div>
 			)}
-		</section>
+			{renderAds && <AdSlot position="right-football" />}
+		</div>
 		<FootballMatchList
 			initialDays={initialDays}
 			edition={edition}
 			getMoreDays={getMoreDays}
 			guardianBaseUrl={guardianBaseUrl}
 		/>
-	</>
+	</main>
 );

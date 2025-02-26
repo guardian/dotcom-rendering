@@ -6,9 +6,11 @@ import {
 	breakpoints,
 	from,
 	palette,
+	space,
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
+import { grid } from '../grid';
 import { labelBoxStyles, labelHeight, labelStyles } from '../lib/adStyles';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
@@ -510,6 +512,13 @@ export const AdSlot = ({
 							position: static;
 							height: 100%;
 							max-height: 100%;
+							${grid.column.right}
+							grid-row: 1;
+							position: relative;
+							padding-top: ${space[2]}px;
+							${until.desktop} {
+								display: none;
+							}
 						`,
 						labelStyles,
 						rightAdLabelStyles,
@@ -528,7 +537,7 @@ export const AdSlot = ({
 						css={[
 							rightAdStyles,
 							css`
-								position: sticky;
+								position: absolute;
 							`,
 							labelStyles,
 						]}

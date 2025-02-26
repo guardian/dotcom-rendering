@@ -1,4 +1,4 @@
-import { FEFootballDataPage } from '../feFootballDataPage';
+import type { FEFootballDataPage } from '../feFootballDataPage';
 import type { ArticleDeprecated } from '../types/article';
 import type { DCRFrontType } from '../types/front';
 import type { RenderingTarget } from '../types/renderingTarget';

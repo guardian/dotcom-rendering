@@ -9,10 +9,9 @@ import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
 import type { FEFootballDataPage } from '../feFootballDataPage';
+import { canRenderAds } from '../lib/canRenderAds';
 import { extractNAV } from '../model/extract-nav';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { canRenderAds } from '../lib/canRenderAds';
-import { AdSlot } from '../components/AdSlot.web';
 
 interface Props {
 	footballData: FEFootballDataPage;
@@ -71,20 +70,17 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 				/>
 			</div>
 
-			{renderAds && <AdSlot position="right-football" />}
-
-			<main id="maincontent" data-layout="FootballDataPageLayout">
-				<Island priority="feature" defer={{ until: 'visible' }}>
-					<FootballMatchesPageWrapper
-						nations={nationsHardcoded}
-						guardianBaseUrl={footballData.guardianBaseURL}
-						// ToDo: determine based on URL
-						kind={'Fixture'}
-						initialDays={initialDaysHardcoded}
-						edition={footballData.editionId}
-					/>
-				</Island>
-			</main>
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<FootballMatchesPageWrapper
+					nations={nationsHardcoded}
+					guardianBaseUrl={footballData.guardianBaseURL}
+					// ToDo: determine based on URL
+					kind={'Fixture'}
+					initialDays={initialDaysHardcoded}
+					edition={footballData.editionId}
+					renderAds={renderAds}
+				/>
+			</Island>
 
 			{NAV.subNavSections && (
 				<Section

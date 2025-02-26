@@ -1,6 +1,9 @@
 // ----- Imports ----- //
 
-import { from as fromBreakpoint } from '@guardian/source/foundations';
+import {
+	breakpoints,
+	from as fromBreakpoint,
+} from '@guardian/source/foundations';
 
 // ----- Columns & Lines ----- //
 
@@ -9,25 +12,25 @@ import { from as fromBreakpoint } from '@guardian/source/foundations';
  * layouts.
  */
 type Line =
-	| 'viewport-start'
+	| 'grid-start'
 	| 'left-column-start'
 	| 'left-column-end'
 	| 'centre-column-start'
 	| 'centre-column-end'
 	| 'right-column-start'
 	| 'right-column-end'
-	| 'viewport-end';
+	| 'grid-end';
 
 const mobileColumns =
-	'[viewport-start] 0px [centre-column-start] repeat(4, 1fr) [centre-column-end] 0px [viewport-end]';
+	'[grid-start] 0px [centre-column-start] repeat(4, 1fr) [centre-column-end] 0px [grid-end]';
 const tabletColumns =
-	'[viewport-start] 1fr [centre-column-start] repeat(12, 40px) [centre-column-end] 1fr [viewport-end]';
+	'[grid-start] 1fr [centre-column-start] repeat(12, 40px) [centre-column-end] 1fr [grid-end]';
 const desktopColumns =
-	'[viewport-start] 1fr [centre-column-start] repeat(8, 60px) [centre-column-end right-column-start] repeat(4, 60px) [right-column-end] 1fr [viewport-end]';
+	'[grid-start] 1fr [centre-column-start] repeat(8, 60px) [centre-column-end right-column-start] repeat(4, 60px) [right-column-end] 1fr [grid-end]';
 const leftColColumns =
-	'[viewport-start] 1fr [left-column-start] repeat(2, 60px) [left-column-end centre-column-start] repeat(8, 60px) [centre-column-end right-column-start] repeat(4, 60px) [right-column-end] 1fr [viewport-end]';
+	'[grid-start] 1fr [left-column-start] repeat(2, 60px) [left-column-end centre-column-start] repeat(8, 60px) [centre-column-end right-column-start] repeat(4, 60px) [right-column-end] 1fr [grid-end]';
 const wideColumns =
-	'[viewport-start] 1fr [left-column-start] repeat(3, 60px) [left-column-end centre-column-start] repeat(8, 60px) [centre-column-end] 60px [right-column-start] repeat(4, 60px) [right-column-end] 1fr [viewport-end]';
+	'[grid-start] 1fr [left-column-start] repeat(3, 60px) [left-column-end centre-column-start] repeat(8, 60px) [centre-column-end] 60px [right-column-start] repeat(4, 60px) [right-column-end] 1fr [grid-end]';
 const mobileColumnGap = '10px';
 const columnGap = '20px';
 
@@ -56,6 +59,27 @@ const container = `
 
     ${fromBreakpoint.wide} {
         grid-template-columns: ${wideColumns};
+    }
+`;
+
+const paddedContainer = `
+	${container}
+
+	${fromBreakpoint.tablet} {
+		width: ${breakpoints.tablet}px;
+		margin: 0 auto;
+	}
+
+	${fromBreakpoint.desktop} {
+		width: ${breakpoints.desktop}px;
+    }
+
+    ${fromBreakpoint.leftCol} {
+		width: ${breakpoints.leftCol}px;
+    }
+
+    ${fromBreakpoint.wide} {
+		width: ${breakpoints.wide}px;
     }
 `;
 
@@ -114,6 +138,7 @@ const grid = {
 	 *   </div>
 	 */
 	container,
+	paddedContainer,
 	/**
 	 * Place the element into one of the common Guardian layout columns. The
 	 * breakpoints at which they're available are as follows:
@@ -141,10 +166,10 @@ const grid = {
 		 */
 		right: between('right-column-start', 'right-column-end'),
 		/**
-		 * Ask the element to take up the entire width of the viewport.
+		 * Ask the element to take up the entire width of the grid.
 		 * Available for all breakpoints.
 		 */
-		all: between('viewport-start', 'viewport-end'),
+		all: between('grid-start', 'grid-end'),
 	},
 	between,
 	span,
