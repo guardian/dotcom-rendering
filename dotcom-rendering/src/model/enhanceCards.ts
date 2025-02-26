@@ -263,6 +263,12 @@ export const enhanceCards = (
 			? enhanceTags(faciaCard.properties.maybeContent.tags.tags)
 			: [];
 
+		const isNewsletter = tags.some(
+			({ id, type }) =>
+				(type === 'Keyword' && id === 'info/newsletter-sign-up') ||
+				(type === 'Tone' && id === 'tone/newsletter-tone'),
+		);
+
 		const branding = faciaCard.properties.editionBrandings.find(
 			(editionBranding) => editionBranding.edition.id === editionId,
 		)?.branding;
@@ -311,6 +317,7 @@ export const enhanceCards = (
 			isBoosted: faciaCard.display.isBoosted,
 			boostLevel: faciaCard.display.boostLevel,
 			isCrossword: faciaCard.properties.isCrossword,
+			isNewsletter,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
 			showLivePlayable: faciaCard.display.showLivePlayable,
 			avatarUrl:
