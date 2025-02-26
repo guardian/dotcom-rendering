@@ -4,13 +4,11 @@ import { getCookie, isUndefined } from '@guardian/libs';
 import { palette, space } from '@guardian/source/foundations';
 import { getGutterLiveblog } from '@guardian/support-dotcom-components';
 import type {
+	GutterPayload,
 	ModuleData,
 	ModuleDataResponse,
-} from '@guardian/support-dotcom-components/dist/dotcom';
-import type {
-	GutterPayload,
-	GutterProps,
-} from '@guardian/support-dotcom-components/dist/shared/types';
+} from '@guardian/support-dotcom-components/dist/dotcom/types';
+import type { GutterProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/types/props/shared';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
