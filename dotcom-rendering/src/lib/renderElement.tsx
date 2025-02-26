@@ -474,6 +474,9 @@ export const renderElement = ({
 				<VideoAtom
 					assets={element.assets}
 					poster={element.posterImage?.[0]?.url}
+					caption={element.title}
+					format={format}
+					isMainMedia={isMainMedia}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MiniProfilesBlockElement':
