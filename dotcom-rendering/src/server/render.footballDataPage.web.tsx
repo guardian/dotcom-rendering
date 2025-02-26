@@ -83,6 +83,7 @@ export const renderFootballDataPage = (footballData: FEFootballDataPage) => {
 			isPaidContent: footballData.config.isPaidContent,
 			contentType: footballData.config.contentType,
 			googleRecaptchaSiteKey: footballData.config.googleRecaptchaSiteKey,
+			unknownConfig: footballData.config,
 		}),
 		keywords: '', // TODO: we need to make this field optional in createGuardian
 		renderingTarget: 'Web',

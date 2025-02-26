@@ -60,10 +60,17 @@ type IndexedSlotProps = {
 };
 
 type RightProps = {
-	position: 'right' | 'football-data-page';
+	position: 'right';
 	colourScheme?: ColourScheme;
 	index?: never;
 	shouldHideReaderRevenue: boolean;
+};
+
+type RightFootballProps = {
+	position: 'right-football';
+	colourScheme?: ColourScheme;
+	index?: never;
+	shouldHideReaderRevenue?: never;
 };
 
 type RemainingProps = {
@@ -80,7 +87,8 @@ type RemainingProps = {
  * - If `position` is `right` then we expect the `shouldHideReaderRevenue` prop
  * - If not, then we explicitly refuse these properties
  */
-type Props = DefaultProps & (RightProps | IndexedSlotProps | RemainingProps);
+type Props = DefaultProps &
+	(RightProps | IndexedSlotProps | RemainingProps | RightFootballProps);
 
 const halfPageAdHeight = adSizes.halfPage.height;
 
@@ -492,11 +500,10 @@ export const AdSlot = ({
 				default:
 					return null;
 			}
-		case 'football-data-page': {
-			const slotId = 'dfp-ad--right'; // TODO: check if this is what we want for slot id
+		case 'right-football': {
+			const slotId = 'dfp-ad--right';
 			return (
 				<div
-					id="top-right-ad-slot" // TODO: not sure what this should be
 					className="ad-slot-container"
 					css={[
 						css`
@@ -505,7 +512,7 @@ export const AdSlot = ({
 							max-height: 100%;
 						`,
 						labelStyles,
-						// rightAdLabelStyles,
+						rightAdLabelStyles,
 					]}
 				>
 					<div
@@ -513,7 +520,7 @@ export const AdSlot = ({
 						className={[
 							'js-ad-slot',
 							'ad-slot',
-							'ad-slot--football-data-page', // TODO: check if this class needs to be added in commercial
+							'ad-slot--right',
 							'ad-slot--mpu-banner-ad',
 							'ad-slot--rendered',
 							'js-sticky-mpu',
@@ -525,8 +532,8 @@ export const AdSlot = ({
 							`,
 							labelStyles,
 						]}
-						data-link-name="ad slot football-data-page" // TODO: check if this needs to be added in commercial
-						data-name="football-data-page" // TODO: check if this needs to be added in commercial
+						data-link-name="ad slot right"
+						data-name="right"
 						data-testid="slot"
 						aria-hidden="true"
 					/>
