@@ -742,6 +742,7 @@ export const Card = ({
 			showTopBarMobile={showTopBarMobile}
 			containerPalette={containerPalette}
 			isOnwardContent={isOnwardContent}
+			cardBackgroundColour={backgroundColour}
 		>
 			<CardLink
 				linkTo={linkTo}
@@ -792,7 +793,6 @@ export const Card = ({
 			)}
 
 			<CardLayout
-				cardBackgroundColour={backgroundColour}
 				imagePositionOnDesktop={imagePositionOnDesktop}
 				imagePositionOnMobile={imagePositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
@@ -996,7 +996,8 @@ export const Card = ({
 									isInLoopVideoTest={isInLoopVideoTest}
 								/>
 								{(isVideoMainMedia ||
-									(isVideoArticle && !isBetaContainer)) &&
+									(isVideoArticle &&
+										containerType === 'fixed/video')) &&
 									mainMedia.duration > 0 && (
 										<div
 											css={css`
