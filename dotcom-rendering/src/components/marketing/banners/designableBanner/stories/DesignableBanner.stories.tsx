@@ -405,3 +405,23 @@ export const WithTicker: Story = {
 		tickerSettings,
 	},
 };
+
+export const WithThreeTierChoiceCards: Story = {
+	name: 'DesignableBanner with three tier choice cards',
+	args: {
+		...meta.args,
+		design: {
+			...design,
+			visual: {
+				kind: 'ChoiceCards',
+				buttonColour: stringToHexColour('E5E5E5'),
+			},
+		},
+		tracking: {
+			abTestName: 'THREE_TIER_CHOICE_CARDS',
+		},
+		choiceCardAmounts: regularChoiceCardAmounts,
+		showChoiceCards: true,
+		showThreeTierChoiceCards: true,
+	},
+};
