@@ -40,8 +40,8 @@ const decideImageId = ({
 		case 'media.guim.co.uk': {
 			// E.g.
 			// https://media.guim.co.uk/be634f340e477a975c7352f289c4353105ba9e67/288_121_3702_2221/140.jpg
-			// This bit                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-			return url.pathname.split('/').at(1);
+			// This bit                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+			return url.pathname.split('/').slice(1, 3).join('');
 		}
 		case 'i.guim.co.uk':
 		case 'uploads.guim.co.uk':
