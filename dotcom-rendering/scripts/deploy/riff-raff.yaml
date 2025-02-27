@@ -96,6 +96,8 @@ deployments:
       cloudFormationStackByTags: false
       cloudFormationStackName: interactive-rendering
       amiParameter: AMIInteractiverendering
+      templateParameters:
+        interactiverenderingPrivateSubnets: /account/vpc/primary/subnets/private
   # interactive-rendering autoscaling
   interactive-rendering:
     type: autoscaling
