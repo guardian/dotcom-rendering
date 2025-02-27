@@ -4,11 +4,13 @@ import { getCookie, isUndefined } from '@guardian/libs';
 import { palette, space } from '@guardian/source/foundations';
 import { getGutterLiveblog } from '@guardian/support-dotcom-components';
 import type {
-	GutterPayload,
 	ModuleData,
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/types';
-import type { GutterProps } from '@guardian/support-dotcom-components/dist/shared/types';
+import type {
+	GutterPayload,
+	GutterProps,
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/types/props/shared';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
@@ -26,6 +28,7 @@ interface LiveblogGutterAskBuilderProps {
 	countryCode: string;
 	pageViewId: string;
 	pageUrl: string;
+	pageId?: string;
 }
 
 const LiveblogGutterAskBuilder = ({
@@ -35,6 +38,7 @@ const LiveblogGutterAskBuilder = ({
 	countryCode,
 	pageViewId,
 	pageUrl,
+	pageId,
 }: LiveblogGutterAskBuilderProps) => {
 	const [gutterVariantResponse, setGutterVariantResponse] =
 		useState<ModuleData<GutterProps> | null>(null);
@@ -69,6 +73,7 @@ const LiveblogGutterAskBuilder = ({
 				isSignedIn,
 				tagIds,
 				sectionId,
+				pageId,
 			},
 		};
 
@@ -112,6 +117,7 @@ const LiveblogGutterAskBuilder = ({
 		pageUrl,
 		sectionId,
 		tags,
+		pageId,
 	]);
 
 	if (gutterVariantResponse && !isUndefined(GutterWrapperComponent)) {
@@ -162,6 +168,7 @@ interface LiveblogGutterAskWrapperProps {
 	tags: TagType[];
 	contributionsServiceUrl: string;
 	pageUrl: string;
+	pageId?: string;
 }
 
 export const LiveblogGutterAskWrapper = ({
@@ -170,6 +177,7 @@ export const LiveblogGutterAskWrapper = ({
 	tags,
 	contributionsServiceUrl,
 	pageUrl,
+	pageId,
 }: LiveblogGutterAskWrapperProps) => {
 	const { renderingTarget } = useConfig();
 	const countryCode = useCountryCode('liveblog-gutter-ask');
@@ -191,6 +199,7 @@ export const LiveblogGutterAskWrapper = ({
 			countryCode={countryCode}
 			pageViewId={pageViewId}
 			pageUrl={pageUrl}
+			pageId={pageId}
 		/>
 	);
 };

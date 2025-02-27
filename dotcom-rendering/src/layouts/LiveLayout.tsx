@@ -733,6 +733,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													contributionsServiceUrl
 												}
 												pageUrl={article.webURL}
+												pageId={article.pageId}
 											/>
 										</Island>
 									</Hide>

@@ -103,6 +103,7 @@ const buildRRBannerConfigWith = ({
 		idApiUrl,
 		renderingTarget,
 		ophanPageViewId,
+		pageId,
 	}: {
 		isSignedIn: boolean;
 		countryCode: CountryCode;
@@ -120,6 +121,7 @@ const buildRRBannerConfigWith = ({
 		idApiUrl: string;
 		renderingTarget: RenderingTarget;
 		ophanPageViewId: string;
+		pageId?: string;
 	}): CandidateConfig<ModuleData<BannerProps>> => {
 		return {
 			candidate: {
@@ -156,6 +158,7 @@ const buildRRBannerConfigWith = ({
 						signInGateWillShow,
 						asyncArticleCounts,
 						ophanPageViewId,
+						pageId,
 					}),
 				show:
 					({ name, props }: ModuleData<BannerProps>) =>
@@ -283,6 +286,7 @@ export const StickyBottomBanner = ({
 			idApiUrl,
 			renderingTarget,
 			ophanPageViewId,
+			pageId,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
@@ -327,6 +331,7 @@ export const StickyBottomBanner = ({
 		signInGateWillShow,
 		tags,
 		ophanPageViewId,
+		pageId,
 	]);
 
 	if (SelectedBanner) {

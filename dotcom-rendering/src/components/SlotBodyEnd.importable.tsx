@@ -190,6 +190,7 @@ export const SlotBodyEnd = ({
 			browserId,
 			renderingTarget,
 			ophanPageViewId,
+			pageId,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
@@ -228,6 +229,7 @@ export const SlotBodyEnd = ({
 		shouldHideReaderRevenue,
 		tags,
 		ophanPageViewId,
+		pageId,
 	]);
 
 	useEffect(() => {
