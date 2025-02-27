@@ -4,11 +4,10 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
+import type { GutterContent } from '@guardian/support-dotcom-components/dist/shared/types/props/gutter';
 import type { ReactComponent } from '../lib/ReactComponent';
-import type { GutterAskRenderProps } from './utils/types';
 
-// CSS Styling
-// -------------------------------------------
+// Component styling --------------------------------------
 
 const container = css`
 	background: ${palette.neutral[100]};
@@ -67,38 +66,70 @@ const contributionsTheme = {
 	link: buttonStyles,
 };
 
+// Displayed components -----------------------------------
+
+type CopyProps = {
+	paragraphs: string[];
+};
+
+const Copy: ReactComponent<CopyProps> = ({ paragraphs }: CopyProps) => {
+	return (
+		<>
+			{paragraphs.map((paragraph, idx) => (
+				<p key={idx}>{paragraph}</p>
+			))}
+		</>
+	);
+};
+
+export interface GutterAskRenderProps {
+	variant?: GutterContent;
+	enrichedUrl: string;
+	onCtaClick: () => void;
+}
+
 export const GutterAsk: ReactComponent<GutterAskRenderProps> = ({
 	variant,
 	enrichedUrl,
 	onCtaClick,
-}: GutterAskRenderProps) => (
-	<div css={container}>
-		<div css={imageHeader}>
-			<img
-				src={variant.content.image.mainUrl}
-				alt={variant.content.image.altText}
-				width="150"
-				height="100"
-			/>
-		</div>
-		<div css={textBlock}>
-			<div css={bodySection}>{variant.content.bodyCopy}</div>
-			<div css={ctaSection}>
-				<ThemeProvider theme={contributionsTheme}>
-					<LinkButton
-						href={enrichedUrl}
-						icon={<SvgArrowRightStraight />}
-						iconSide="right"
-						onClick={onCtaClick}
-						target="_blank"
-						rel="noopener noreferrer"
-						priority={'primary'}
-						cssOverrides={cta}
-					>
-						{variant.content.cta.text}
-					</LinkButton>
-				</ThemeProvider>
-			</div>
-		</div>
-	</div>
-);
+}: GutterAskRenderProps) => {
+	return (
+		<>
+			{variant && (
+				<div css={container}>
+					<div css={imageHeader}>
+						<img
+							src={variant.image.mainUrl}
+							alt={variant.image.altText}
+							width="150"
+							height="100"
+						/>
+					</div>
+					<div css={textBlock}>
+						<div css={bodySection}>
+							<Copy paragraphs={variant.bodyCopy} />
+						</div>
+						{variant.cta && (
+							<div css={ctaSection}>
+								<ThemeProvider theme={contributionsTheme}>
+									<LinkButton
+										href={enrichedUrl}
+										icon={<SvgArrowRightStraight />}
+										iconSide="right"
+										onClick={onCtaClick}
+										target="_blank"
+										rel="noopener noreferrer"
+										priority={'primary'}
+										cssOverrides={cta}
+									>
+										{variant.cta.text}
+									</LinkButton>
+								</ThemeProvider>
+							</div>
+						)}
+					</div>
+				</div>
+			)}
+		</>
+	);
+};
