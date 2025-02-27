@@ -371,7 +371,7 @@ export const FootballMatchList = ({
 				<section css={css(grid.container)} key={day.date.toISOString()}>
 					<Day>{dateFormatter.format(day.date)}</Day>
 					{day.competitions.map((competition) => (
-						<Fragment key={competition.competitionId}>
+						<Fragment key={competition.id}>
 							<CompetitionName>
 								<a
 									href={`${guardianBaseUrl}/${competition.tag}`}
