@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { SlotName } from '@guardian/commercial';
-import { adSizes } from '@guardian/commercial';
+import { adSizes, constants } from '@guardian/commercial';
 import {
 	between,
 	breakpoints,
@@ -33,7 +33,6 @@ type ServerRenderedSlot = Exclude<
 	| 'carrot'
 	| 'comments-expanded'
 	| 'crossword-banner'
-	| 'crossword-banner-mobile'
 	| 'exclusion'
 	| 'external'
 	| 'inline'
@@ -368,6 +367,10 @@ const mobileStickyAdStylesFullWidth = css`
 		padding-left: calc((100% - ${adSizes.mobilesticky.width}px) / 2);
 		padding-right: calc((100% - ${adSizes.mobilesticky.width}px) / 2);
 	}
+`;
+
+const crosswordBannerMobileAdStyles = css`
+	min-height: ${adSizes.mobilesticky.height + constants.AD_LABEL_HEIGHT}px;
 `;
 
 export const AdSlot = ({
@@ -795,6 +798,26 @@ export const AdSlot = ({
 						css={[articleEndAdStyles]}
 						data-link-name="ad slot article-end"
 						data-name="article-end"
+						data-testid="slot"
+						aria-hidden="true"
+					/>
+				</div>
+			);
+		}
+		case 'crossword-banner-mobile': {
+			return (
+				<div className="ad-slot-container">
+					<div
+						id="dfp-ad--crossword-banner-mobile"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--crossword-banner-mobile',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={[crosswordBannerMobileAdStyles]}
+						data-link-name="ad slot crossword-banner-mobile"
+						data-name="crossword-banner-mobile"
 						data-testid="slot"
 						aria-hidden="true"
 					/>
