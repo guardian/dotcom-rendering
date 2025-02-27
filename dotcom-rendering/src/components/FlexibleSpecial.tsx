@@ -1,8 +1,10 @@
 import { ArticleDesign } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
+import { isNonEmptyArray } from '../lib/tuple';
 import type { BoostLevel } from '../types/content';
 import type {
 	AspectRatio,
+	DCRContainerLevel,
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
@@ -26,6 +28,7 @@ type Props = {
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
+	containerLevel?: DCRContainerLevel;
 };
 
 type BoostProperties = {
@@ -128,6 +131,8 @@ export const OneCardLayout = ({
 	imageLoading,
 	aspectRatio,
 	isLastRow,
+	isFirstRow,
+	containerLevel,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -136,6 +141,8 @@ export const OneCardLayout = ({
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
+	isFirstRow: boolean;
+	containerLevel: DCRContainerLevel;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -177,8 +184,12 @@ export const OneCardLayout = ({
 					showLivePlayable={card.showLivePlayable}
 					liveUpdatesAlignment={liveUpdatesAlignment}
 					isFlexSplash={true}
-					showTopBarDesktop={false}
-					showTopBarMobile={true}
+					showTopBarDesktop={!isFirstRow}
+					showTopBarMobile={
+						!isFirstRow ||
+						(containerLevel === 'Primary' &&
+							!isMediaCard(card.format))
+					}
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
@@ -207,6 +218,8 @@ const TwoCardOrFourCardLayout = ({
 	showImage = true,
 	imageLoading,
 	aspectRatio,
+	isFirstRow,
+	containerLevel,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -215,6 +228,8 @@ const TwoCardOrFourCardLayout = ({
 	absoluteServerTimes: boolean;
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
+	isFirstRow: boolean;
+	containerLevel: DCRContainerLevel;
 }) => {
 	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
@@ -248,7 +263,11 @@ const TwoCardOrFourCardLayout = ({
 							kickerText={card.kickerText}
 							showLivePlayable={false}
 							showTopBarDesktop={false}
-							showTopBarMobile={true}
+							showTopBarMobile={
+								!isFirstRow ||
+								(containerLevel === 'Primary' &&
+									!isMediaCard(card.format))
+							}
 							canPlayInline={false}
 						/>
 					</LI>
@@ -265,6 +284,7 @@ export const FlexibleSpecial = ({
 	absoluteServerTimes,
 	imageLoading,
 	aspectRatio,
+	containerLevel = 'Primary',
 }: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1);
 	const splash = [...groupedTrails.standard].slice(0, 1);
@@ -279,7 +299,9 @@ export const FlexibleSpecial = ({
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
 				aspectRatio={aspectRatio}
+				isFirstRow={true}
 				isLastRow={splash.length === 0 && cards.length === 0}
+				containerLevel={containerLevel}
 			/>
 			<OneCardLayout
 				cards={splash}
@@ -289,6 +311,8 @@ export const FlexibleSpecial = ({
 				imageLoading={imageLoading}
 				aspectRatio={aspectRatio}
 				isLastRow={cards.length === 0}
+				isFirstRow={!isNonEmptyArray(snaps)}
+				containerLevel={containerLevel}
 			/>
 			<TwoCardOrFourCardLayout
 				cards={cards}
@@ -297,6 +321,8 @@ export const FlexibleSpecial = ({
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
 				aspectRatio={aspectRatio}
+				isFirstRow={!isNonEmptyArray(snaps) && !isNonEmptyArray(splash)}
+				containerLevel={containerLevel}
 			/>
 		</>
 	);

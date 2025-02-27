@@ -4,6 +4,7 @@ import { palette } from '../palette';
 import type { BoostLevel } from '../types/content';
 import type {
 	AspectRatio,
+	DCRContainerLevel,
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
@@ -28,6 +29,7 @@ type Props = {
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
+	containerLevel?: DCRContainerLevel;
 };
 
 type RowLayout = 'oneCard' | 'oneCardBoosted' | 'twoCard';
@@ -174,6 +176,7 @@ export const SplashCardLayout = ({
 	imageLoading,
 	aspectRatio,
 	isLastRow,
+	containerLevel,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -182,6 +185,7 @@ export const SplashCardLayout = ({
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
+	containerLevel: DCRContainerLevel;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -237,7 +241,10 @@ export const SplashCardLayout = ({
 					liveUpdatesAlignment={liveUpdatesAlignment}
 					isFlexSplash={true}
 					showTopBarDesktop={false}
-					showTopBarMobile={true}
+					showTopBarMobile={
+						containerLevel === 'Primary' &&
+						!isMediaCard(card.format)
+					}
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
@@ -300,6 +307,7 @@ export const BoostedCardLayout = ({
 	aspectRatio,
 	isFirstRow,
 	isLastRow,
+	containerLevel,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -309,6 +317,7 @@ export const BoostedCardLayout = ({
 	aspectRatio: AspectRatio;
 	isFirstRow: boolean;
 	isLastRow: boolean;
+	containerLevel: DCRContainerLevel;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -358,7 +367,11 @@ export const BoostedCardLayout = ({
 					showLivePlayable={card.showLivePlayable}
 					liveUpdatesAlignment="horizontal"
 					showTopBarDesktop={false}
-					showTopBarMobile={true}
+					showTopBarMobile={
+						!isFirstRow ||
+						(containerLevel === 'Primary' &&
+							!isMediaCard(card.format))
+					}
 					liveUpdatesPosition={liveUpdatesPosition}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
@@ -379,6 +392,7 @@ export const StandardCardLayout = ({
 	isFirstStandardRow,
 	aspectRatio,
 	isLastRow,
+	containerLevel,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -390,6 +404,7 @@ export const StandardCardLayout = ({
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
+	containerLevel: DCRContainerLevel;
 }) => {
 	if (cards.length === 0) return null;
 
@@ -438,7 +453,11 @@ export const StandardCardLayout = ({
 							kickerText={card.kickerText}
 							showLivePlayable={false}
 							showTopBarDesktop={false}
-							showTopBarMobile={true}
+							showTopBarMobile={
+								!isFirstRow ||
+								(containerLevel === 'Primary' &&
+									!isMediaCard(card.format))
+							}
 							trailText={undefined}
 							// On standard cards, we increase the headline size if the trail image has been hidden
 							headlineSizes={
@@ -465,6 +484,7 @@ export const FlexibleGeneral = ({
 	absoluteServerTimes,
 	imageLoading,
 	aspectRatio,
+	containerLevel = 'Primary',
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1);
 	const cards = [...groupedTrails.standard].slice(0, 19);
@@ -481,6 +501,7 @@ export const FlexibleGeneral = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					isLastRow={cards.length === 0}
+					containerLevel={containerLevel}
 				/>
 			)}
 
@@ -497,6 +518,7 @@ export const FlexibleGeneral = ({
 								aspectRatio={aspectRatio}
 								isFirstRow={!splash.length && i === 0}
 								isLastRow={i === groupedCards.length - 1}
+								containerLevel={containerLevel}
 							/>
 						);
 
@@ -514,6 +536,7 @@ export const FlexibleGeneral = ({
 								isFirstStandardRow={i === 0}
 								aspectRatio={aspectRatio}
 								isLastRow={i === groupedCards.length - 1}
+								containerLevel={containerLevel}
 							/>
 						);
 				}
