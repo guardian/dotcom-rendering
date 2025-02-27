@@ -64,7 +64,7 @@ const Day = (props: { children: ReactNode }) => (
 		css={css`
 			${textSansBold14}
 			${grid.column.centre}
-				border-top: 1px solid ${palette('--football-match-list-border')};
+			border-top: 1px solid ${palette('--football-match-list-border')};
 			padding-top: ${space[2]}px;
 
 			${from.leftCol} {
@@ -368,7 +368,28 @@ export const FootballMatchList = ({
 	return (
 		<>
 			{days.map((day) => (
-				<section css={css(grid.container)} key={day.date.toISOString()}>
+				<section
+					css={css`
+						${grid.paddedContainer}
+						position: relative;
+						${from.tablet} {
+							&::before,
+							&::after {
+								content: '';
+								position: absolute;
+								border-left: 1px solid
+									${palette('--article-border')};
+								top: 0;
+								bottom: 0;
+							}
+
+							&::after {
+								right: 0;
+							}
+						}
+					`}
+					key={day.date.toISOString()}
+				>
 					<Day>{dateFormatter.format(day.date)}</Day>
 					{day.competitions.map((competition) => (
 						<Fragment key={competition.competitionId}>
@@ -402,7 +423,7 @@ export const FootballMatchList = ({
 			))}
 
 			{getMoreDays === undefined ? null : (
-				<div css={css(grid.container)}>
+				<div css={css(grid.paddedContainer)}>
 					<div
 						css={css`
 							${grid.column.centre}

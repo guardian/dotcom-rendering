@@ -19,6 +19,7 @@ export const Results = {
 		initialDays,
 		edition: 'UK',
 		goToCompetitionSpecificPage: fn(),
+		renderAds: true,
 	},
 } satisfies Story;
 
