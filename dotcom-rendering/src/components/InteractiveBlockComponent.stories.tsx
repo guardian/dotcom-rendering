@@ -15,7 +15,7 @@ export default {
 	title: 'Components/InteractiveBlockComponent',
 	parameters: {
 		chromatic: {
-			disable: true,
+			disableSnapshot: true,
 		},
 	},
 };
