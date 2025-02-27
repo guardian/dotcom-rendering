@@ -684,26 +684,24 @@ export const Card = ({
 	const decideOuterSublinks = () => {
 		if (!hasSublinks) return null;
 		if (sublinkPosition === 'none') return null;
+
+		const OuterSublinks = () => (
+			<SupportingContent
+				supportingContent={supportingContent}
+				containerPalette={containerPalette}
+				alignment={supportingContentAlignment}
+				isDynamo={isDynamo}
+				fillBackgroundOnMobile={isFlexSplash}
+			/>
+		);
+
 		if (sublinkPosition === 'outer') {
-			return (
-				<SupportingContent
-					supportingContent={supportingContent}
-					containerPalette={containerPalette}
-					alignment={supportingContentAlignment}
-					isDynamo={isDynamo}
-					fillBackgroundOnMobile={isFlexSplash}
-				/>
-			);
+			return <OuterSublinks />;
 		}
+
 		return (
 			<Hide from={isFlexSplash ? 'desktop' : 'tablet'}>
-				<SupportingContent
-					supportingContent={supportingContent}
-					containerPalette={containerPalette}
-					alignment={supportingContentAlignment}
-					isDynamo={isDynamo}
-					fillBackgroundOnMobile={isFlexSplash}
-				/>
+				<OuterSublinks />
 			</Hide>
 		);
 	};
