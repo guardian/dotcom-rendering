@@ -64,6 +64,7 @@ type Props = {
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
 	mainMedia?: MainMedia;
+	isNewsletter?: boolean;
 	shouldReserveSpace?: { mobile: boolean; desktop: boolean };
 };
 
@@ -74,6 +75,7 @@ export const CardFooter = ({
 	commentCount,
 	cardBranding,
 	mainMedia,
+	isNewsletter = false,
 	shouldReserveSpace,
 }: Props) => {
 	if (showLivePlayable) return null;
@@ -115,6 +117,14 @@ export const CardFooter = ({
 					icon={<SvgCamera />}
 					iconSide="right"
 				/>
+			</footer>
+		);
+	}
+
+	if (isNewsletter) {
+		return (
+			<footer css={contentStyles}>
+				<Pill content="Newsletter" />
 			</footer>
 		);
 	}

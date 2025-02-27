@@ -76,6 +76,8 @@ export const StaticFeatureTwo = ({
 							headlineSizes={{ desktop: 'small' }}
 							supportingContent={card.supportingContent}
 							collectionId={collectionId}
+							isNewsletter={card.isNewsletter}
+							showQuotes={card.showQuotedHeadline}
 						/>
 					</LI>
 				);

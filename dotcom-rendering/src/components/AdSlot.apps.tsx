@@ -8,7 +8,7 @@ export interface Props {
 	isFirstAdSlot: boolean;
 }
 
-const adHeightPx = 258;
+const adHeightPx = 250;
 
 const styles = css`
 	clear: both;
@@ -26,21 +26,14 @@ const styles = css`
 
 const adLabelsStyles = css`
 	${textSans14}
-	padding: ${remSpace[3]};
+	padding: ${remSpace[1]} ${remSpace[3]};
 	float: left;
 	display: flex;
 	justify-content: center;
+	color: ${palette('--ad-labels-text')};
 
 	/* We need to account for padding on both sides */
 	width: calc(100% - 2 * ${remSpace[3]});
-
-	p {
-		margin: 0;
-		float: left;
-		font-size: 16px;
-		font-weight: 400;
-		color: ${palette('--ad-labels-text')};
-	}
 `;
 
 const adSlotStyles = css`
