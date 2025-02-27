@@ -51,6 +51,7 @@ export type CanShowData = {
 	browserId?: string;
 	renderingTarget: RenderingTarget;
 	ophanPageViewId: string;
+	pageId?: string;
 };
 
 const buildPayload = async (
@@ -75,6 +76,7 @@ const buildPayload = async (
 			? data.browserId
 			: undefined,
 		isSignedIn: data.isSignedIn,
+		pageId: data.pageId,
 	},
 });
 
