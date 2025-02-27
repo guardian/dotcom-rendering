@@ -14,6 +14,41 @@ import { createGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
+const decideDescription = (canonicalUrl: string | undefined) => {
+	const fromTheGuardian =
+		'from the Guardian, the world&#x27;s leading liberal voice';
+
+	if (canonicalUrl?.includes('live')) {
+		return `Live football scores ${fromTheGuardian}`;
+	}
+
+	if (canonicalUrl?.includes('results')) {
+		return `Latest football results ${fromTheGuardian}`;
+	}
+
+	if (canonicalUrl?.includes('fixtures')) {
+		return `Football fixtures ${fromTheGuardian}`;
+	}
+
+	return;
+};
+
+const decideTitle = (canonicalUrl: string | undefined) => {
+	if (canonicalUrl?.includes('live')) {
+		return 'Live matches | Football | The Guardian';
+	}
+
+	if (canonicalUrl?.includes('results')) {
+		return 'All results | Football | The Guardian';
+	}
+
+	if (canonicalUrl?.includes('fixtures')) {
+		return 'All fixtures | Football | The Guardian';
+	}
+
+	return;
+};
+
 export const renderFootballDataPage = (footballData: FEFootballDataPage) => {
 	const config: Config = {
 		renderingTarget: 'Web',
@@ -61,9 +96,8 @@ export const renderFootballDataPage = (footballData: FEFootballDataPage) => {
 		scriptTags,
 		css: extractedCss,
 		html,
-		// ToDo:
-		//title,
-		//description,
+		title: decideTitle(footballData.canonicalUrl),
+		description: decideDescription(footballData.canonicalUrl),
 		canonicalUrl: footballData.canonicalUrl,
 		guardian: createGuardian({
 			editionId: footballData.editionId,
