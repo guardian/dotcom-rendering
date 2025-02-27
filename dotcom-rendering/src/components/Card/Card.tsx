@@ -691,7 +691,10 @@ export const Card = ({
 				containerPalette={containerPalette}
 				alignment={supportingContentAlignment}
 				isDynamo={isDynamo}
-				fillBackgroundOnMobile={isFlexSplash}
+				fillBackgroundOnMobile={
+					!!isFlexSplash ||
+					(isBetaContainer && imagePositionOnMobile === 'bottom')
+				}
 			/>
 		);
 
