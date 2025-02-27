@@ -33,6 +33,7 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
+import { LiveblogGutterAskWrapper } from '../components/LiveblogGutterAskWrapper.importable';
 import { Liveness } from '../components/Liveness.importable';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
@@ -45,7 +46,6 @@ import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
-import { StickyLiveblogAskWrapper } from '../components/StickyLiveblogAskWrapper.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
@@ -723,11 +723,16 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											priority="feature"
 											defer={{ until: 'visible' }}
 										>
-											<StickyLiveblogAskWrapper
-												referrerUrl={article.webURL}
+											<LiveblogGutterAskWrapper
 												shouldHideReaderRevenueOnArticle={
 													article.shouldHideReaderRevenue
 												}
+												sectionId={article.sectionName}
+												tags={article.tags}
+												contributionsServiceUrl={
+													contributionsServiceUrl
+												}
+												pageUrl={article.webURL}
 											/>
 										</Island>
 									</Hide>
