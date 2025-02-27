@@ -8,6 +8,7 @@ import {
 	between,
 	from,
 	neutral,
+	palette,
 	space,
 	specialReport,
 	textEgyptian15,
@@ -15,7 +16,12 @@ import {
 	textSansBold17,
 	until,
 } from '@guardian/source/foundations';
-import { Button, SvgGuardianLogo } from '@guardian/source/react-components';
+import {
+	Button,
+	LinkButton,
+	SvgArrowRightStraight,
+	SvgGuardianLogo,
+} from '@guardian/source/react-components';
 import { Ticker } from '@guardian/source-development-kitchen/react-components';
 import {
 	hexColourToString,
@@ -536,7 +542,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 				</div>
 			)}
 
-			{/*{showChoiceCards && threeTierChoiceCards && (
+			{showChoiceCards && threeTierChoiceCards && (
 				<div css={styles.ctaAndPaymentCardsContainer}>
 					<LinkButton
 						href={buildUrlForThreeTierChoiceCards(
@@ -546,7 +552,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						)}
 						// onClick={onCtaClick}
 						priority="tertiary"
-						// cssOverrides={[buttonOverrides, cssOverrides ?? css``]}
+						cssOverrides={styles.linkButtonStyles}
 						icon={<SvgArrowRightStraight />}
 						iconSide="right"
 						target="_blank"
@@ -558,7 +564,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						cssOverrides={styles.paymentCardsSvgOverrides}
 					/>
 				</div>
-			)}*/}
+			)}
 		</div>
 	);
 };
@@ -756,6 +762,10 @@ const styles = {
 		${from.desktop} {
 			margin-top: -10px;
 		}
+	`,
+	linkButtonStyles: css`
+		background-color: ${palette.brandAlt[400]};
+		border-color: ${palette.brandAlt[400]};
 	`,
 };
 
