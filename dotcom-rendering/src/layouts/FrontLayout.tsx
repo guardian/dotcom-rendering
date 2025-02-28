@@ -853,7 +853,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						isPaidContent={!!front.config.isPaidContent}
 						isPreview={front.config.isPreview}
 						isSensitive={front.config.isSensitive}
-						pageId={front.config.pageId ?? front.pressedPage.id}
+						pageId={front.pressedPage.id}
 						sectionId={front.config.section}
 						shouldHideReaderRevenue={false} // never defined for fronts
 						remoteBannerSwitch={
