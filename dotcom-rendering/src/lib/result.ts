@@ -18,6 +18,22 @@ const error = <Err, Value>(err: Err): Result<Err, Value> => ({
 	error: err,
 });
 
+const okOrThrow = <E, A>(result: Result<E, A>, throwMessage: string): A => {
+	if (result.kind === 'error') {
+		throw new Error(throwMessage);
+	}
+
+	return result.value;
+};
+
+const errorOrThrow = <E, A>(result: Result<E, A>, throwMessage: string): E => {
+	if (result.kind === 'ok') {
+		throw new Error(throwMessage);
+	}
+
+	return result.error;
+};
+
 export type { Result };
 
-export { ok, error };
+export { ok, error, okOrThrow, errorOrThrow };
