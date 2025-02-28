@@ -696,6 +696,9 @@ const styles = {
 	`,
 	threeTierChoiceCardsContainer: css`
 		order: 3;
+		${until.tablet} {
+			padding-bottom: 100px;
+		}
 	`,
 	guardianLogoContainer: css`
 		display: none;
@@ -755,6 +758,15 @@ const styles = {
 			a {
 				width: 100%;
 			}
+		}
+		${until.tablet} {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			width: 100%;
+			background: #f1f8fc; //this might not be the correct colour
+			padding: ${space[2]}px;
 		}
 		${from.desktop} {
 			flex-direction: row;
