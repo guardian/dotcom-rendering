@@ -751,6 +751,11 @@ const styles = {
 		> span {
 			width: 100%;
 		}
+		${until.desktop} {
+			a {
+				width: 100%;
+			}
+		}
 		${from.desktop} {
 			flex-direction: row;
 			gap: 0;
