@@ -24,6 +24,7 @@ import {
 	mobileContentWithHeading,
 	props,
 	stringToHexColour,
+	tracking,
 } from '../../utils/storybook';
 
 type WithJsonProps<T> = T & { json?: string };
@@ -418,6 +419,7 @@ export const WithThreeTierChoiceCards: Story = {
 			},
 		},
 		tracking: {
+			...tracking,
 			abTestName: 'THREE_TIER_CHOICE_CARDS',
 		},
 		choiceCardAmounts: regularChoiceCardAmounts,
