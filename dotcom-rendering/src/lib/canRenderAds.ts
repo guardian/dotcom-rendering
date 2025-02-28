@@ -1,5 +1,5 @@
 import type { ArticleDeprecated } from '../types/article';
-import type { DCRFrontType } from '../types/front';
+import type { Front } from '../types/front';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagPage } from '../types/tagPage';
 
@@ -8,7 +8,7 @@ import type { TagPage } from '../types/tagPage';
  * prevent ads from being displayed.
  */
 export const canRenderAds = (
-	pageData: ArticleDeprecated | DCRFrontType | TagPage,
+	pageData: ArticleDeprecated | Front | TagPage,
 	renderingTarget?: RenderingTarget,
 ): boolean => {
 	if (renderingTarget === 'Apps') {

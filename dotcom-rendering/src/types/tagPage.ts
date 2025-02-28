@@ -1,9 +1,10 @@
+import type { FEFrontConfig } from '../frontend/feFront';
 import type { EditionId } from '../lib/edition';
 import type { Tuple } from '../lib/tuple';
 import type { CollectionBranding } from './branding';
 import type { CommercialProperties } from './commercial';
 import type { FooterType } from './footer';
-import type { DCRFrontCard, FEFrontConfigType } from './front';
+import type { DCRFrontCard } from './front';
 import type { FENavType } from './frontend';
 import type { FETagType } from './tag';
 
@@ -45,7 +46,7 @@ export interface TagPage {
 	pageId: string;
 	webTitle: string;
 	webURL: string;
-	config: FEFrontConfigType;
+	config: FEFrontConfig;
 	commercialProperties: CommercialProperties;
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;

@@ -918,7 +918,7 @@
         "FEFootballPageConfig": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/Omit<FEFrontConfigType,\"keywordIds\"|\"keywords\"|\"isFront\">"
+                    "$ref": "#/definitions/Omit<FEFrontConfig,\"keywordIds\"|\"keywords\"|\"isFront\">"
                 },
                 {
                     "type": "object",
@@ -937,7 +937,7 @@
                 }
             ]
         },
-        "Omit<FEFrontConfigType,\"keywordIds\"|\"keywords\"|\"isFront\">": {
+        "Omit<FEFrontConfig,\"keywordIds\"|\"keywords\"|\"isFront\">": {
             "type": "object",
             "properties": {
                 "isSensitive": {

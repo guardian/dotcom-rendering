@@ -1,6 +1,6 @@
+import type { FEFrontConfig } from './frontend/feFront';
 import type { EditionId } from './lib/edition';
 import type { FooterType } from './types/footer';
-import type { FEFrontConfigType } from './types/front';
 import type { FENavType } from './types/frontend';
 
 type FECompetitionSummary = {
@@ -95,7 +95,7 @@ type FEMatchByDateAndCompetition = {
 };
 
 type FEFootballPageConfig = Omit<
-	FEFrontConfigType,
+	FEFrontConfig,
 	'keywordIds' | 'keywords' | 'isFront'
 > & {
 	isFront: boolean;

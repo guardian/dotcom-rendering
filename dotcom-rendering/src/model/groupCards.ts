@@ -1,9 +1,6 @@
+import type { FEFrontCard } from '../frontend/feFront';
 import type { EditionId } from '../lib/edition';
-import type {
-	DCRContainerType,
-	DCRGroupedTrails,
-	FEFrontCard,
-} from '../types/front';
+import type { DCRContainerType, DCRGroupedTrails } from '../types/front';
 import { enhanceCards } from './enhanceCards';
 
 /**
