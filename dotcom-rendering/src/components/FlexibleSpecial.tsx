@@ -42,7 +42,8 @@ type BoostProperties = {
 };
 
 /**
- * Boosting a card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
+ * Boosting a card will affect the layout and style of the card. This function
+ * will determine the properties of the card based on the boost level.
  */
 const determineCardProperties = (
 	boostLevel: BoostLevel,
@@ -71,7 +72,6 @@ const determineCardProperties = (
 				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
 			};
-
 		case 'boost':
 			return {
 				headlineSizes: {
@@ -123,6 +123,7 @@ const determineCardProperties = (
 			};
 	}
 };
+
 export const OneCardLayout = ({
 	cards,
 	containerPalette,
@@ -233,6 +234,7 @@ const TwoCardOrFourCardLayout = ({
 }) => {
 	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
+
 	return (
 		<UL direction="row" showTopBar={true}>
 			{cards.map((card, cardIndex) => {
@@ -258,7 +260,7 @@ const TwoCardOrFourCardLayout = ({
 							)}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
-							imageSize={'medium'}
+							imageSize="medium"
 							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}
