@@ -497,11 +497,37 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 					</div>
 				)}
 
-				<div css={styles.guardianLogoContainer}>
-					<SvgGuardianLogo
-						textColor={hexColourToString(basic.logo)}
-					/>
-				</div>
+				{showChoiceCards && threeTierChoiceCards && (
+					<div css={styles.ctaAndPaymentCardsContainer}>
+						<LinkButton
+							href={buildUrlForThreeTierChoiceCards(
+								tracking,
+								threeTierChoiceCardSelectedProduct,
+								countryCode,
+							)}
+							// onClick={onCtaClick}
+							priority="tertiary"
+							cssOverrides={styles.linkButtonStyles}
+							icon={<SvgArrowRightStraight />}
+							iconSide="right"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Continue
+						</LinkButton>
+						<PaymentCards
+							cssOverrides={styles.paymentCardsSvgOverrides}
+						/>
+					</div>
+				)}
+
+				{!threeTierChoiceCards && (
+					<div css={styles.guardianLogoContainer}>
+						<SvgGuardianLogo
+							textColor={hexColourToString(basic.logo)}
+						/>
+					</div>
+				)}
 
 				{showReminder && (
 					<div css={styles.reminderContainer}>
@@ -539,30 +565,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 							}
 						/>
 					</div>
-				</div>
-			)}
-
-			{showChoiceCards && threeTierChoiceCards && (
-				<div css={styles.ctaAndPaymentCardsContainer}>
-					<LinkButton
-						href={buildUrlForThreeTierChoiceCards(
-							tracking,
-							threeTierChoiceCardSelectedProduct,
-							countryCode,
-						)}
-						// onClick={onCtaClick}
-						priority="tertiary"
-						cssOverrides={styles.linkButtonStyles}
-						icon={<SvgArrowRightStraight />}
-						iconSide="right"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Continue
-					</LinkButton>
-					<PaymentCards
-						cssOverrides={styles.paymentCardsSvgOverrides}
-					/>
 				</div>
 			)}
 		</div>
@@ -739,6 +741,7 @@ const styles = {
 		margin-top: ${space[3]}px;
 	`,
 	ctaAndPaymentCardsContainer: css`
+		order: 4;
 		display: flex;
 		align-items: center;
 		flex-direction: column;
