@@ -24,7 +24,6 @@ import {
 import type { Dispatch, SetStateAction } from 'react';
 import {
 	ChoiceCardTestData_REGULAR,
-	ChoiceCardTestData_TwoTier_REGULAR,
 	ChoiceCardTestData_US,
 	ChoiceCardTestData_US_SIMPLIFIED,
 } from './ThreeTierChoiceCardData';
@@ -197,8 +196,6 @@ const getChoiceCardData = (choiceCardVariant: string): ChoiceInfo[] => {
 			return ChoiceCardTestData_US;
 		case 'US_SIMPLIFY_THIRD_CHOICE_CARD':
 			return ChoiceCardTestData_US_SIMPLIFIED;
-		case 'TWO_TIER_CHOICE_CARDS':
-			return ChoiceCardTestData_TwoTier_REGULAR;
 		default:
 			return ChoiceCardTestData_REGULAR;
 	}
