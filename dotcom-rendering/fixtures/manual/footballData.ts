@@ -1,7 +1,7 @@
 import type { Nations } from '../../src/components/FootballCompetitionSelect';
 import type { FootballMatches } from '../../src/footballMatches';
 
-export const nations: Nations = [
+export const regions: Nations = [
 	{
 		name: 'England',
 		competitions: [

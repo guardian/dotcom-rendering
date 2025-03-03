@@ -30,7 +30,7 @@ export const FootballMatchesPageWrapper = ({
 	renderAds,
 }: Props) => (
 	<FootballMatchesPage
-		nations={nations}
+		regions={nations}
 		guardianBaseUrl={guardianBaseUrl}
 		kind={kind}
 		initialDays={initialDays}

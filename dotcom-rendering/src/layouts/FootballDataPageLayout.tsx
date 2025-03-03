@@ -1,5 +1,4 @@
 import { palette } from '@guardian/source/foundations';
-import { nations } from '../../fixtures/manual/footballData';
 import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.importable';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
