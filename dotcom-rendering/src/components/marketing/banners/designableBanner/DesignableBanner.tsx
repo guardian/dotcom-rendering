@@ -751,28 +751,34 @@ const styles = {
 		gap: ${space[4]}px;
 		margin-top: ${space[2]}px;
 		margin-bottom: ${space[2]}px;
+
 		> span {
 			width: 100%;
 		}
+
 		${until.desktop} {
 			a {
 				width: 100%;
 			}
 		}
+
 		${until.tablet} {
 			position: fixed;
 			bottom: 0;
 			left: 0;
 			right: 0;
 			width: 100%;
-			background: #f1f8fc; //check colour
+			background: ${neutral[100]};
 			padding: ${space[2]}px;
+			margin-bottom: 0;
 		}
+
 		${from.desktop} {
 			flex-direction: row;
 			gap: 0;
 			margin-bottom: 0;
 			margin-top: ${space[3]}px;
+
 			> span {
 				width: auto;
 			}
