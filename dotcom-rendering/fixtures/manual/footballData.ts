@@ -1,19 +1,18 @@
-import type { Nations } from '../../src/components/FootballCompetitionSelect';
-import type { FootballMatches } from '../../src/footballMatches';
+import type { FootballMatches, Regions } from '../../src/footballMatches';
 
-export const nations: Nations = [
+export const regions: Regions = [
 	{
 		name: 'England',
 		competitions: [
-			{ tag: 'football/premierleague', name: 'Premier League' },
-			{ tag: 'football/championship', name: 'Championship' },
+			{ url: '/football/premierleague/live', name: 'Premier League' },
+			{ url: 'football/championship/live', name: 'Championship' },
 		],
 	},
 	{
 		name: 'Scotland',
 		competitions: [
 			{
-				tag: 'football/scottish-premiership',
+				url: 'football/scottish-premiership/live',
 				name: 'Scottish Premiership',
 			},
 		],
@@ -25,7 +24,7 @@ export const initialDays: FootballMatches = [
 		date: new Date('2022-01-01T00:00:00Z'),
 		competitions: [
 			{
-				competitionId: '635',
+				id: '635',
 				tag: 'football/serieafootball',
 				name: 'Serie A',
 				nation: 'European',
@@ -54,7 +53,7 @@ export const initialDays: FootballMatches = [
 				],
 			},
 			{
-				competitionId: '650',
+				id: '650',
 				tag: 'football/laligafootball',
 				name: 'La Liga',
 				nation: 'European',
@@ -76,7 +75,7 @@ export const initialDays: FootballMatches = [
 				],
 			},
 			{
-				competitionId: '651',
+				id: '651',
 				tag: 'football/fa-cup',
 				name: 'FA Cup',
 				nation: 'European',
@@ -107,7 +106,7 @@ export const moreDays: FootballMatches = [
 		date: new Date('2022-01-05T00:00:00Z'),
 		competitions: [
 			{
-				competitionId: '635',
+				id: '635',
 				tag: 'football/serieafootball',
 				name: 'Serie A',
 				nation: 'European',

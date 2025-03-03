@@ -63,6 +63,9 @@
         "previousPage": {
             "type": "string"
         },
+        "filters": {
+            "$ref": "#/definitions/Record<string,FEFootballCompetition[]>"
+        },
         "nav": {
             "$ref": "#/definitions/FENavType"
         },
@@ -92,6 +95,7 @@
         "config",
         "contributionsServiceUrl",
         "editionId",
+        "filters",
         "guardianBaseURL",
         "isAdFreeUser",
         "matchesList",
@@ -738,6 +742,9 @@
                     ]
                 }
             ]
+        },
+        "Record<string,FEFootballCompetition[]>": {
+            "type": "object"
         },
         "FENavType": {
             "type": "object",
