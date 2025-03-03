@@ -3,12 +3,16 @@ import type {
 	FECompetitionMatch,
 	FEFixture,
 	FEFootballMatch,
+	FEFootballPageConfig,
 	FEMatchByDateAndCompetition,
 	FEMatchDay,
 	FEMatchDayTeam,
 	FEResult,
 } from './feFootballDataPage';
+import type { EditionId } from './lib/edition';
 import { error, ok, type Result } from './lib/result';
+import type { NavType } from './model/extract-nav';
+import type { FooterType } from './types/footer';
 
 type TeamScore = {
 	name: string;
@@ -397,3 +401,18 @@ const parseFootballDay = (
 export const parse: (
 	frontendData: FEMatchByDateAndCompetition[],
 ) => Result<ParserError, FootballMatches> = listParse(parseFootballDay);
+
+export type DCRFootballDataPage = {
+	matchesList: FootballMatches;
+	kind: FootballMatchKind;
+	nextPage?: string;
+	previousPage?: string;
+	nav: NavType;
+	editionId: EditionId;
+	guardianBaseURL: string;
+	config: FEFootballPageConfig;
+	pageFooter: FooterType;
+	isAdFreeUser: boolean;
+	canonicalUrl?: string;
+	contributionsServiceUrl: string;
+};
