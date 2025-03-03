@@ -1,5 +1,4 @@
 import { palette } from '@guardian/source/foundations';
-import { nations } from '../../fixtures/manual/footballData';
 import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.importable';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -16,11 +15,6 @@ import { BannerWrapper, Stuck } from './lib/stickiness';
 interface Props {
 	footballData: DCRFootballDataPage;
 }
-
-/*
-	Hardcoded data to test layout
-*/
-const nationsHardcoded = nations;
 
 export const FootballDataPageLayout = ({ footballData }: Props) => {
 	const { nav } = footballData;
@@ -69,7 +63,7 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<FootballMatchesPageWrapper
-					nations={nationsHardcoded}
+					nations={footballData.regions}
 					guardianBaseUrl={footballData.guardianBaseURL}
 					kind={footballData.kind}
 					initialDays={footballData.matchesList}

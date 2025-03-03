@@ -102,10 +102,16 @@ export type FEFootballPageConfig = Omit<
 	hasSurveyAd: boolean;
 };
 
+export type FEFootballCompetition = {
+	name: string;
+	url: string;
+};
+
 export type FEFootballDataPage = {
 	matchesList: FEMatchByDateAndCompetition[];
 	nextPage?: string;
 	previousPage?: string;
+	filters: Record<string, FEFootballCompetition[]>;
 	nav: FENavType;
 	editionId: EditionId;
 	guardianBaseURL: string;

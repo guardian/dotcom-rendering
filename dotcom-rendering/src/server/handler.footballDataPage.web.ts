@@ -1,9 +1,13 @@
 import type { RequestHandler } from 'express';
-import type { FEFootballDataPage } from '../feFootballDataPage';
+import type {
+	FEFootballCompetition,
+	FEFootballDataPage,
+} from '../feFootballDataPage';
 import type {
 	DCRFootballDataPage,
 	FootballMatchKind,
 	ParserError,
+	Regions,
 } from '../footballMatches';
 import { parse } from '../footballMatches';
 import { extractNAV } from '../model/extract-nav';
@@ -39,6 +43,20 @@ const getParserErrorMessage = (error: ParserError): string => {
 	}
 };
 
+const parseFEFootballCompetitionRegions = (
+	competitionRegions: Record<string, FEFootballCompetition[]>,
+): Regions => {
+	return Object.entries(competitionRegions).map(([key, competition]) => {
+		return {
+			name: key,
+			competitions: competition.map((comp) => ({
+				url: comp.url,
+				name: comp.name,
+			})),
+		};
+	});
+};
+
 const parseFEFootballData = (data: FEFootballDataPage): DCRFootballDataPage => {
 	const parsedMatchesResult = parse(data.matchesList);
 
@@ -55,6 +73,7 @@ const parseFEFootballData = (data: FEFootballDataPage): DCRFootballDataPage => {
 		kind: decidePageKind(data.canonicalUrl),
 		nextPage: data.nextPage,
 		previousPage: data.previousPage,
+		regions: parseFEFootballCompetitionRegions(data.filters),
 		nav: extractNAV(data.nav),
 		editionId: data.editionId,
 		guardianBaseURL: data.guardianBaseURL,
