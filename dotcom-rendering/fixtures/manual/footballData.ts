@@ -1,19 +1,18 @@
-import type { Nations } from '../../src/components/FootballCompetitionSelect';
-import type { FootballMatches } from '../../src/footballMatches';
+import type { FootballMatches, Regions } from '../../src/footballMatches';
 
-export const regions: Nations = [
+export const regions: Regions = [
 	{
 		name: 'England',
 		competitions: [
-			{ tag: 'football/premierleague', name: 'Premier League' },
-			{ tag: 'football/championship', name: 'Championship' },
+			{ url: '/football/premierleague/live', name: 'Premier League' },
+			{ url: 'football/championship/live', name: 'Championship' },
 		],
 	},
 	{
 		name: 'Scotland',
 		competitions: [
 			{
-				tag: 'football/scottish-premiership',
+				url: 'football/scottish-premiership/live',
 				name: 'Scottish Premiership',
 			},
 		],
