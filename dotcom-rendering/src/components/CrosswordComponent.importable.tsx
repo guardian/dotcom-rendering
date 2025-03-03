@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { Crossword as ReactCrossword } from '@guardian/react-crossword-next';
 import type { CrosswordProps } from '@guardian/react-crossword-next';
 import {
+	between,
 	from,
 	headlineBold17,
 	space,
@@ -11,6 +12,7 @@ import {
 import { Hide } from '@guardian/source/react-components';
 import type { ReactNode } from 'react';
 import { memo } from 'react';
+import { removeMediaRulePrefix, useMatchMedia } from '../lib/useMatchMedia';
 import { palette } from '../palette';
 import { AdSlot } from './AdSlot.web';
 
@@ -51,13 +53,17 @@ const Layout: CrosswordProps['Layout'] = ({
 	gridWidth,
 	MobileBannerAd,
 }) => {
+	const betweenTabletAndDesktop = useMatchMedia(
+		removeMediaRulePrefix(between.tablet.and.desktop),
+	);
+
 	return (
 		<div
 			css={css`
 				display: flex;
 				flex-direction: column;
 				gap: ${space[4]}px;
-				${from.phablet} {
+				${from.tablet} {
 					flex-direction: row;
 				}
 			`}
@@ -71,7 +77,7 @@ const Layout: CrosswordProps['Layout'] = ({
 				<FocusedClue
 					additionalCss={css`
 						max-width: ${gridWidth}px;
-						${from.phablet} {
+						${from.tablet} {
 							display: none;
 						}
 					`}
@@ -85,7 +91,7 @@ const Layout: CrosswordProps['Layout'] = ({
 				>
 					<FocusedClue
 						additionalCss={css`
-							${from.phablet} {
+							${from.tablet} {
 								display: none;
 							}
 						`}
@@ -112,7 +118,13 @@ const Layout: CrosswordProps['Layout'] = ({
 					flex-direction: column;
 					gap: ${space[4]}px;
 					align-items: flex-start;
+					${from.tablet} {
+						max-height: ${gridWidth}px;
+						overflow-y: scroll;
+					}
 					${from.desktop} {
+						max-height: none;
+						overflow: visible;
 						flex-direction: row;
 					}
 					> * {
@@ -120,8 +132,16 @@ const Layout: CrosswordProps['Layout'] = ({
 					}
 				`}
 			>
-				<Clues direction="across" Header={CluesHeader} />
-				<Clues direction="down" Header={CluesHeader} />
+				<Clues
+					direction="across"
+					Header={CluesHeader}
+					scrollToSelected={betweenTabletAndDesktop}
+				/>
+				<Clues
+					direction="down"
+					Header={CluesHeader}
+					scrollToSelected={betweenTabletAndDesktop}
+				/>
 			</div>
 		</div>
 	);
