@@ -420,10 +420,8 @@ export const WithThreeTierChoiceCards: Story = {
 		},
 		tracking: {
 			...tracking,
-			abTestName: 'THREE_TIER_CHOICE_CARDS',
+			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
 		},
 		choiceCardAmounts: regularChoiceCardAmounts,
-		showChoiceCards: true,
-		showThreeTierChoiceCards: true,
 	},
 };
