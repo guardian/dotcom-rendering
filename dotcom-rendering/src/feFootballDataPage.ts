@@ -94,7 +94,7 @@ export type FEMatchByDateAndCompetition = {
 	competitionMatches: FECompetitionMatch[];
 };
 
-type FEFootballPageConfig = Omit<
+export type FEFootballPageConfig = Omit<
 	FEFrontConfigType,
 	'keywordIds' | 'keywords' | 'isFront'
 > & {

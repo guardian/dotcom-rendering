@@ -1,7 +1,10 @@
 import { isString } from '@guardian/libs';
 import { ConfigProvider } from '../components/ConfigContext';
 import { FootballDataPage } from '../components/FootballDataPage';
-import type { FEFootballDataPage } from '../feFootballDataPage';
+import type {
+	DCRFootballDataPage,
+	FootballMatchKind,
+} from '../footballMatches';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -14,42 +17,32 @@ import { createGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
-const decideDescription = (canonicalUrl: string | undefined) => {
-	const fromTheGuardian =
-		'from the Guardian, the world&#x27;s leading liberal voice';
+const fromTheGuardian =
+	'from the Guardian, the world&#x27;s leading liberal voice';
 
-	if (canonicalUrl?.includes('live')) {
-		return `Live football scores ${fromTheGuardian}`;
+const decideDescription = (kind: FootballMatchKind) => {
+	switch (kind) {
+		case 'Live':
+			return `Live football scores ${fromTheGuardian}`;
+		case 'Result':
+			return `Latest football results ${fromTheGuardian}`;
+		case 'Fixture':
+			return `Football fixtures ${fromTheGuardian}`;
 	}
-
-	if (canonicalUrl?.includes('results')) {
-		return `Latest football results ${fromTheGuardian}`;
-	}
-
-	if (canonicalUrl?.includes('fixtures')) {
-		return `Football fixtures ${fromTheGuardian}`;
-	}
-
-	return;
 };
 
-const decideTitle = (canonicalUrl: string | undefined) => {
-	if (canonicalUrl?.includes('live')) {
-		return 'Live matches | Football | The Guardian';
+const decideTitle = (kind: FootballMatchKind) => {
+	switch (kind) {
+		case 'Live':
+			return 'Live matches | Football | The Guardian';
+		case 'Result':
+			return 'All results | Football | The Guardian';
+		case 'Fixture':
+			return 'All fixtures | Football | The Guardian';
 	}
-
-	if (canonicalUrl?.includes('results')) {
-		return 'All results | Football | The Guardian';
-	}
-
-	if (canonicalUrl?.includes('fixtures')) {
-		return 'All fixtures | Football | The Guardian';
-	}
-
-	return;
 };
 
-export const renderFootballDataPage = (footballData: FEFootballDataPage) => {
+export const renderFootballDataPage = (footballData: DCRFootballDataPage) => {
 	const config: Config = {
 		renderingTarget: 'Web',
 		darkModeAvailable:
@@ -96,8 +89,8 @@ export const renderFootballDataPage = (footballData: FEFootballDataPage) => {
 		scriptTags,
 		css: extractedCss,
 		html,
-		title: decideTitle(footballData.canonicalUrl),
-		description: decideDescription(footballData.canonicalUrl),
+		title: decideTitle(footballData.kind),
+		description: decideDescription(footballData.kind),
 		canonicalUrl: footballData.canonicalUrl,
 		guardian: createGuardian({
 			editionId: footballData.editionId,
@@ -106,7 +99,6 @@ export const renderFootballDataPage = (footballData: FEFootballDataPage) => {
 			revisionNumber: footballData.config.revisionNumber,
 			sentryPublicApiKey: footballData.config.sentryPublicApiKey,
 			sentryHost: footballData.config.sentryHost,
-			keywordIds: '', // TODO: we need to make this field optional in createGuardian
 			dfpAccountId: footballData.config.dfpAccountId,
 			adUnit: footballData.config.adUnit,
 			ajaxUrl: footballData.config.ajaxUrl,
@@ -119,7 +111,7 @@ export const renderFootballDataPage = (footballData: FEFootballDataPage) => {
 			googleRecaptchaSiteKey: footballData.config.googleRecaptchaSiteKey,
 			unknownConfig: footballData.config,
 		}),
-		keywords: '', // TODO: we need to make this field optional in createGuardian
+		keywords: '',
 		renderingTarget: 'Web',
 		weAreHiring: !!footballData.config.switches.weAreHiring,
 		config,
