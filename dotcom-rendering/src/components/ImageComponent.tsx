@@ -273,7 +273,7 @@ export const ImageComponent = ({
 	editionId,
 }: Props) => {
 	const isInFiveFourImagesAbTestVariant =
-		abTests.abFiveFourImagesVariant === 'variant';
+		abTests?.abFiveFourImagesVariant === 'variant';
 
 	const { renderingTarget } = useConfig();
 	// Its possible the tools wont send us any images urls
