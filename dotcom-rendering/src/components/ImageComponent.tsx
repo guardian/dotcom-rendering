@@ -14,9 +14,10 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 } from '../lib/articleFormat';
+import type { EditionId } from '../lib/edition';
 import { getLargest, getMaster } from '../lib/image';
-import { useAB } from '../lib/useAB';
 import { palette as themePalette } from '../palette';
+import type { ServerSideTests } from '../types/config';
 import type {
 	ImageBlockElement,
 	StarRating as Rating,
@@ -41,6 +42,8 @@ type Props = {
 	title?: string;
 	isAvatar?: boolean;
 	isTimeline?: boolean;
+	abTests?: ServerSideTests;
+	editionId?: EditionId;
 };
 
 const timelineBulletStyles = css`
@@ -266,12 +269,11 @@ export const ImageComponent = ({
 	title,
 	isAvatar,
 	isTimeline = false,
+	abTests,
+	editionId,
 }: Props) => {
-	const abTestAPI = useAB()?.api;
-	const isInFiveFourImagesAbTestVariant = abTestAPI?.isUserInVariant(
-		'FiveFourImages',
-		'variant',
-	);
+	const isInFiveFourImagesAbTestVariant =
+		abTests.abFiveFourImagesVariant === 'variant';
 
 	const { renderingTarget } = useConfig();
 	// Its possible the tools wont send us any images urls
@@ -314,8 +316,8 @@ export const ImageComponent = ({
 	const loading = isMainMedia ? 'eager' : 'lazy';
 
 	const aspectOverride =
+		(editionId === 'INT' || editionId === 'EUR') &&
 		isInFiveFourImagesAbTestVariant &&
-		isMainMedia &&
 		image.fields.aspectRatio === '5:3'
 			? { aspectRatio: '5:4' }
 			: {};
