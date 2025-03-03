@@ -221,7 +221,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		setThreeTierChoiceCardSelectedProduct,
 	] = useState<SupportTier>('SupporterPlus');
 
-	const threeTierChoiceCards = tracking.abTestName.includes(
+	const threeTierChoiceCards = tracking.abTestVariant.includes(
 		'THREE_TIER_CHOICE_CARDS',
 	);
 
@@ -765,7 +765,7 @@ const styles = {
 			left: 0;
 			right: 0;
 			width: 100%;
-			background: #f1f8fc; //this might not be the correct colour
+			background: #f1f8fc; //check colour
 			padding: ${space[2]}px;
 		}
 		${from.desktop} {
