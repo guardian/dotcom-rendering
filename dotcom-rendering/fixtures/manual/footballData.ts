@@ -25,7 +25,7 @@ export const initialDays: FootballMatches = [
 		date: new Date('2022-01-01T00:00:00Z'),
 		competitions: [
 			{
-				competitionId: '635',
+				id: '635',
 				tag: 'football/serieafootball',
 				name: 'Serie A',
 				nation: 'European',
@@ -54,7 +54,7 @@ export const initialDays: FootballMatches = [
 				],
 			},
 			{
-				competitionId: '650',
+				id: '650',
 				tag: 'football/laligafootball',
 				name: 'La Liga',
 				nation: 'European',
@@ -76,7 +76,7 @@ export const initialDays: FootballMatches = [
 				],
 			},
 			{
-				competitionId: '651',
+				id: '651',
 				tag: 'football/fa-cup',
 				name: 'FA Cup',
 				nation: 'European',
@@ -107,7 +107,7 @@ export const moreDays: FootballMatches = [
 		date: new Date('2022-01-05T00:00:00Z'),
 		competitions: [
 			{
-				competitionId: '635',
+				id: '635',
 				tag: 'football/serieafootball',
 				name: 'Serie A',
 				nation: 'European',
