@@ -82,21 +82,19 @@ export const FootballMatchesPage = ({
 			>
 				{createTitle(kind, edition)}
 			</h1>
-			{kind !== 'Live' && (
-				<div
-					css={css`
-						margin-top: ${space[3]}px;
-						margin-bottom: ${space[6]}px;
-						${grid.column.centre}
-					`}
-				>
-					<FootballCompetitionSelect
-						nations={nations}
-						kind={kind}
-						onChange={goToCompetitionSpecificPage}
-					/>
-				</div>
-			)}
+			<div
+				css={css`
+					margin-top: ${space[3]}px;
+					margin-bottom: ${space[6]}px;
+					${grid.column.centre}
+				`}
+			>
+				<FootballCompetitionSelect
+					nations={nations}
+					kind={kind}
+					onChange={goToCompetitionSpecificPage}
+				/>
+			</div>
 			{renderAds && <AdSlot position="right-football" />}
 		</div>
 		<FootballMatchList

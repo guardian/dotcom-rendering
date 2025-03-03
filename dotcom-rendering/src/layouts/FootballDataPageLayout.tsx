@@ -17,11 +17,6 @@ interface Props {
 	footballData: DCRFootballDataPage;
 }
 
-/*
-	Hardcoded data to test layout
-*/
-const nationsHardcoded = nations;
-
 export const FootballDataPageLayout = ({ footballData }: Props) => {
 	const { nav } = footballData;
 	const pageFooter = footballData.pageFooter;
@@ -69,7 +64,7 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<FootballMatchesPageWrapper
-					nations={nationsHardcoded}
+					nations={footballData.regions}
 					guardianBaseUrl={footballData.guardianBaseURL}
 					kind={footballData.kind}
 					initialDays={footballData.matchesList}
