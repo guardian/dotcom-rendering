@@ -31,10 +31,13 @@ export const FootballCompetitionSelect = {
 		const selects = canvas.getAllByLabelText('Choose league:');
 
 		for (const select of selects) {
-			await userEvent.selectOptions(select, 'football/premierleague');
+			await userEvent.selectOptions(
+				select,
+				'/football/premierleague/live',
+			);
 			await waitFor(() =>
 				expect(args.onChange).toHaveBeenLastCalledWith(
-					'football/premierleague',
+					'/football/premierleague/live',
 				),
 			);
 		}
