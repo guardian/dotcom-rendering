@@ -99,7 +99,6 @@ export const renderFootballDataPage = (footballData: DCRFootballDataPage) => {
 			revisionNumber: footballData.config.revisionNumber,
 			sentryPublicApiKey: footballData.config.sentryPublicApiKey,
 			sentryHost: footballData.config.sentryHost,
-			keywordIds: '', // TODO: we need to make this field optional in createGuardian
 			dfpAccountId: footballData.config.dfpAccountId,
 			adUnit: footballData.config.adUnit,
 			ajaxUrl: footballData.config.ajaxUrl,
@@ -112,7 +111,7 @@ export const renderFootballDataPage = (footballData: DCRFootballDataPage) => {
 			googleRecaptchaSiteKey: footballData.config.googleRecaptchaSiteKey,
 			unknownConfig: footballData.config,
 		}),
-		keywords: '', // TODO: we need to make this field optional in createGuardian
+		keywords: '',
 		renderingTarget: 'Web',
 		weAreHiring: !!footballData.config.switches.weAreHiring,
 		config,

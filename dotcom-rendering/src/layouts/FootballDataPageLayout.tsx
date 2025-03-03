@@ -10,6 +10,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubNav } from '../components/SubNav.importable';
 import type { DCRFootballDataPage } from '../footballMatches';
 import { canRenderAds } from '../lib/canRenderAds';
+import { getContributionsServiceUrl } from '../lib/contributions';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
@@ -27,9 +28,7 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 	// TODO: Ask commercial, do we need to use the config shouldHideAdverts?
 	const renderAds = canRenderAds(footballData);
 
-	// ToDo: use getContributionsServiceUrl
-	//const contributionsServiceUrl = getContributionsServiceUrl(footballData);
-	const contributionsServiceUrl = footballData.contributionsServiceUrl;
+	const contributionsServiceUrl = getContributionsServiceUrl(footballData);
 
 	return (
 		<>
