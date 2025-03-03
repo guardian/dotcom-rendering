@@ -217,10 +217,9 @@ export const AdPortals = ({
 		return () => resizeObserver?.disconnect();
 	}, [adPlaceholders, rightAdPlaceholder, tryRightAligned]);
 
-	const renderAdSlot = (id: string, index: number) => (
+	const renderAdSlot = (id: string) => (
 		<AdSlot
 			key={id}
-			isFirstAdSlot={index === 0}
 			ref={(node) => {
 				if (node !== null) {
 					adSlots.current = [...adSlots.current, node];
@@ -231,18 +230,12 @@ export const AdPortals = ({
 
 	if (tryRightAligned && rightAdPlaceholder) {
 		return createPortal(
-			<>
-				{adPlaceholders.map((ad, index) => renderAdSlot(ad.id, index))}
-			</>,
+			<>{adPlaceholders.map((ad) => renderAdSlot(ad.id))}</>,
 			rightAdPlaceholder,
 		);
 	}
 
 	return (
-		<>
-			{adPlaceholders.map((ad, index) =>
-				createPortal(renderAdSlot(ad.id, index), ad),
-			)}
-		</>
+		<>{adPlaceholders.map((ad) => createPortal(renderAdSlot(ad.id), ad))}</>
 	);
 };
