@@ -29,6 +29,7 @@ type Props = {
 	kind: FootballMatchKind;
 	initialDays: FootballMatches;
 	edition: EditionId;
+	renderAds: boolean;
 };
 
 export const FootballMatchesPageWrapper = ({
@@ -37,6 +38,7 @@ export const FootballMatchesPageWrapper = ({
 	kind,
 	initialDays,
 	edition,
+	renderAds,
 }: Props) => (
 	<FootballMatchesPage
 		nations={nations}
@@ -48,5 +50,6 @@ export const FootballMatchesPageWrapper = ({
 			guardianBaseUrl,
 			kind,
 		)}
+		renderAds={renderAds}
 	/>
 );

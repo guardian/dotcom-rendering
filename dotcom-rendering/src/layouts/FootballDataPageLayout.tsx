@@ -9,6 +9,7 @@ import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
 import type { FEFootballDataPage } from '../feFootballDataPage';
+import { canRenderAds } from '../lib/canRenderAds';
 import { extractNAV } from '../model/extract-nav';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -25,8 +26,8 @@ const initialDaysHardcoded = initialDays;
 export const FootballDataPageLayout = ({ footballData }: Props) => {
 	const NAV = extractNAV(footballData.nav);
 	const pageFooter = footballData.pageFooter;
-	// ToDo: call canRenderAds with matching type
-	const renderAds = true;
+	// TODO: Ask commercial, do we need to use the config shouldHideAdverts?
+	const renderAds = canRenderAds(footballData);
 
 	// ToDo: use getContributionsServiceUrl
 	//const contributionsServiceUrl = getContributionsServiceUrl(footballData);
@@ -69,18 +70,17 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 				/>
 			</div>
 
-			<main id="maincontent" data-layout="FootballDataPageLayout">
-				<Island priority="feature" defer={{ until: 'visible' }}>
-					<FootballMatchesPageWrapper
-						nations={nationsHardcoded}
-						guardianBaseUrl={footballData.guardianBaseURL}
-						// ToDo: determine based on URL
-						kind={'Fixture'}
-						initialDays={initialDaysHardcoded}
-						edition={footballData.editionId}
-					/>
-				</Island>
-			</main>
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<FootballMatchesPageWrapper
+					nations={nationsHardcoded}
+					guardianBaseUrl={footballData.guardianBaseURL}
+					// ToDo: determine based on URL
+					kind={'Fixture'}
+					initialDays={initialDaysHardcoded}
+					edition={footballData.editionId}
+					renderAds={renderAds}
+				/>
+			</Island>
 
 			{NAV.subNavSections && (
 				<Section
