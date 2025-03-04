@@ -106,52 +106,35 @@ export const groupCards = (
 			};
 		}
 		case 'flexible/general': {
-			const hasv2Grouping = curated.some(
-				({ card }) => card.group === '3',
-			);
-			const splashGroup = hasv2Grouping ? '3' : '1';
-			const splash = curated.filter(
-				({ card }) => card.group === splashGroup,
-			);
-
-			// Backfilled cards will always be treated as 'standard' cards
-			const standard = [
-				...curated.filter(({ card }) => card.group !== splashGroup),
-				...backfill,
-			];
-
-			const enhanceOptions = (offset = 0) => ({
-				cardInTagPage: false,
-				editionId,
-				discussionApiUrl,
-				offset,
-			});
+			const splash = curated.filter(({ card }) => card.group === '1');
 
 			return {
 				snap: [],
 				huge: [],
 				veryBig: [],
 				big: [],
-				splash: enhanceCards(splash, enhanceOptions()),
-				standard: enhanceCards(standard, enhanceOptions(splash.length)),
+				splash: enhanceCards(splash, {
+					cardInTagPage: false,
+					editionId,
+					discussionApiUrl,
+				}),
+				standard: enhanceCards(
+					// Backfilled cards will always be treated as 'standard' cards
+					curated
+						.filter(({ card }) => card.group === '0')
+						.concat(backfill),
+					{
+						cardInTagPage: false,
+						offset: splash.length,
+						editionId,
+						discussionApiUrl,
+					},
+				),
 			};
 		}
 		case 'flexible/special':
 		case 'dynamic/package': {
 			const snap = curated.filter(({ card }) => card.group === '1');
-
-			// Backfilled cards will always be treated as 'standard' cards
-			const standard = [
-				...curated.filter(({ card }) => card.group === '0'),
-				...backfill,
-			];
-			const enhanceOptions = (offset = 0) => ({
-				cardInTagPage: false,
-				editionId,
-				discussionApiUrl,
-				offset,
-			});
-
 			return {
 				// Splash is not supported on these container types
 				splash: [],
@@ -159,8 +142,23 @@ export const groupCards = (
 				veryBig: [],
 				big: [],
 				// Only 'snap' and 'standard' are supported by dynamic/package
-				snap: enhanceCards(snap, enhanceOptions()),
-				standard: enhanceCards(standard, enhanceOptions(snap.length)),
+				snap: enhanceCards(snap, {
+					cardInTagPage: false,
+					editionId,
+					discussionApiUrl,
+				}),
+				standard: enhanceCards(
+					// Backfilled cards will always be treated as 'standard' cards
+					curated
+						.filter(({ card }) => card.group === '0')
+						.concat(backfill),
+					{
+						cardInTagPage: false,
+						offset: snap.length,
+						editionId,
+						discussionApiUrl,
+					},
+				),
 			};
 		}
 		default:
