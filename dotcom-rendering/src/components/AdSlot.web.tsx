@@ -516,7 +516,8 @@ export const AdSlot = ({
 							height: 100%;
 							max-height: 100%;
 							${grid.column.right}
-							grid-row: 1;
+							// TODO: this grid row solution is hacky
+							grid-row: 1 / 500;
 							padding-top: ${space[2]}px;
 							${until.desktop} {
 								display: none;
@@ -539,7 +540,8 @@ export const AdSlot = ({
 						css={[
 							rightAdStyles,
 							css`
-								position: absolute;
+								position: sticky;
+								top: 0;
 							`,
 							labelStyles,
 						]}

@@ -368,28 +368,7 @@ export const FootballMatchList = ({
 	return (
 		<>
 			{days.map((day) => (
-				<section
-					css={css`
-						${grid.paddedContainer}
-						position: relative;
-						${from.tablet} {
-							&::before,
-							&::after {
-								content: '';
-								position: absolute;
-								border-left: 1px solid
-									${palette('--article-border')};
-								top: 0;
-								bottom: 0;
-							}
-
-							&::after {
-								right: 0;
-							}
-						}
-					`}
-					key={day.date.toISOString()}
-				>
+				<Fragment key={day.date.toISOString()}>
 					<Day>{dateFormatter.format(day.date)}</Day>
 					{day.competitions.map((competition) => (
 						<Fragment key={competition.id}>
@@ -419,11 +398,11 @@ export const FootballMatchList = ({
 							</Matches>
 						</Fragment>
 					))}
-				</section>
+				</Fragment>
 			))}
 
 			{getMoreDays === undefined ? null : (
-				<div css={css(grid.paddedContainer)}>
+				<div>
 					<div
 						css={css`
 							${grid.column.centre}
