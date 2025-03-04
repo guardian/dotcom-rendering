@@ -53,8 +53,8 @@ const Layout: CrosswordProps['Layout'] = ({
 	gridWidth,
 	MobileBannerAd,
 }) => {
-	const betweenTabletAndDesktop = useMatchMedia(
-		removeMediaRulePrefix(between.tablet.and.desktop),
+	const betweenTabletAndLeftCol = useMatchMedia(
+		removeMediaRulePrefix(between.tablet.and.leftCol),
 	);
 
 	return (
@@ -117,15 +117,16 @@ const Layout: CrosswordProps['Layout'] = ({
 					display: flex;
 					flex-direction: column;
 					gap: ${space[4]}px;
-					align-items: flex-start;
 					${from.tablet} {
 						max-height: ${gridWidth}px;
 						overflow-y: scroll;
 					}
 					${from.desktop} {
+						flex-direction: row;
+					}
+					${from.leftCol} {
 						max-height: none;
 						overflow: visible;
-						flex-direction: row;
 					}
 					> * {
 						flex: 1;
@@ -135,12 +136,12 @@ const Layout: CrosswordProps['Layout'] = ({
 				<Clues
 					direction="across"
 					Header={CluesHeader}
-					scrollToSelected={betweenTabletAndDesktop}
+					scrollToSelected={betweenTabletAndLeftCol}
 				/>
 				<Clues
 					direction="down"
 					Header={CluesHeader}
-					scrollToSelected={betweenTabletAndDesktop}
+					scrollToSelected={betweenTabletAndLeftCol}
 				/>
 			</div>
 		</div>
