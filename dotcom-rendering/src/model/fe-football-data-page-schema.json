@@ -255,7 +255,19 @@
                             "type": "string"
                         },
                         "referee": {
-                            "type": "string"
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "name"
+                            ]
                         }
                     },
                     "required": [
@@ -567,7 +579,19 @@
                             "type": "string"
                         },
                         "referee": {
-                            "type": "string"
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "name"
+                            ]
                         },
                         "competition": {
                             "type": "object",
@@ -733,7 +757,19 @@
                             "type": "string"
                         },
                         "referee": {
-                            "type": "string"
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "name"
+                            ]
                         }
                     },
                     "required": [

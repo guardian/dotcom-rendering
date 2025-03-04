@@ -43,8 +43,9 @@ const decideTitle = (kind: FootballMatchKind) => {
 };
 
 export const renderFootballDataPage = (footballData: DCRFootballDataPage) => {
+	const renderingTarget = 'Web';
 	const config: Config = {
-		renderingTarget: 'Web',
+		renderingTarget,
 		darkModeAvailable:
 			footballData.config.abTests.darkModeWebVariant === 'variant',
 		assetOrigin: ASSET_ORIGIN,
@@ -112,7 +113,7 @@ export const renderFootballDataPage = (footballData: DCRFootballDataPage) => {
 			unknownConfig: footballData.config,
 		}),
 		keywords: '',
-		renderingTarget: 'Web',
+		renderingTarget,
 		weAreHiring: !!footballData.config.switches.weAreHiring,
 		config,
 	});

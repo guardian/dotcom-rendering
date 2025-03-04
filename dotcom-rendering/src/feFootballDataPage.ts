@@ -38,6 +38,11 @@ export type FEMatchDayTeam = {
 	scorers?: string;
 };
 
+type Official = {
+	id: string;
+	name: string;
+};
+
 type FEFootballMatchData = {
 	id: string;
 	date: string;
@@ -54,7 +59,7 @@ export type FELive = FEFootballMatchData & {
 	type: 'LiveMatch';
 	status: string;
 	attendance?: string;
-	referee?: string;
+	referee?: Official;
 };
 
 export type FEFixture = FEFootballMatchData & {
@@ -71,7 +76,7 @@ export type FEMatchDay = FEFootballMatchData & {
 	lineupsAvailable: boolean;
 	matchStatus: string;
 	attendance?: string;
-	referee?: string;
+	referee?: Official;
 	competition?: FEMatchCompetition;
 };
 
@@ -79,7 +84,7 @@ export type FEResult = FEFootballMatchData & {
 	type: 'Result';
 	reportAvailable: boolean;
 	attendance?: string;
-	referee?: string;
+	referee?: Official;
 };
 
 export type FEFootballMatch = FEFixture | FEMatchDay | FEResult | FELive;

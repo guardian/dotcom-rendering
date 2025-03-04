@@ -222,14 +222,14 @@ const parseFixture = (
 
 	return ok({
 		kind: 'Fixture',
-		homeTeam: feFixture.homeTeam.name,
-		awayTeam: feFixture.awayTeam.name,
+		homeTeam: cleanTeamName(feFixture.homeTeam.name),
+		awayTeam: cleanTeamName(feFixture.awayTeam.name),
 		dateTime: date.value,
 		paId: feFixture.id,
 	});
 };
 
-const parseMatchResult = (
+export const parseMatchResult = (
 	feResult: FEResult | FEMatchDay,
 ): Result<ParserError, MatchResult> => {
 	if (feResult.type === 'MatchDay' && !feResult.result) {
@@ -260,11 +260,11 @@ const parseMatchResult = (
 	return ok({
 		kind: 'Result',
 		homeTeam: {
-			name: feResult.homeTeam.name,
+			name: cleanTeamName(feResult.homeTeam.name),
 			score: homeScore.value,
 		},
 		awayTeam: {
-			name: feResult.awayTeam.name,
+			name: cleanTeamName(feResult.awayTeam.name),
 			score: awayScore.value,
 		},
 		dateTime: date.value,
@@ -304,11 +304,11 @@ const parseLiveMatch = (
 	return ok({
 		kind: 'Live',
 		homeTeam: {
-			name: feMatchDay.homeTeam.name,
+			name: cleanTeamName(feMatchDay.homeTeam.name),
 			score: homeScore.value,
 		},
 		awayTeam: {
-			name: feMatchDay.awayTeam.name,
+			name: cleanTeamName(feMatchDay.awayTeam.name),
 			score: awayScore.value,
 		},
 		dateTime: date.value,
@@ -421,4 +421,11 @@ export type DCRFootballDataPage = {
 	isAdFreeUser: boolean;
 	canonicalUrl?: string;
 	contributionsServiceUrl: string;
+};
+
+const cleanTeamName = (teamName: string): string => {
+	return teamName
+		.replace('Ladies', '')
+		.replace('Holland', 'The Netherlands')
+		.replace('Union Saint Gilloise', 'Union Saint-Gilloise');
 };
