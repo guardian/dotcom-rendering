@@ -21,6 +21,7 @@ import {
 	handleInteractive,
 } from './handler.article.web';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
+import { handleFootballDataPage } from './handler.footballDataPage.web';
 import {
 	handleFront,
 	handleFrontJson,
@@ -32,7 +33,6 @@ import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
-import { handleFootballDataPage } from './handler.footballDataPage.web';
 
 // Middleware to track route performance using 'response-time' lib
 // Usage: app.post('/Article', logRenderTime, renderArticle);
