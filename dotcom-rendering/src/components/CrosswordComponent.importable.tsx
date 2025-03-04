@@ -10,8 +10,9 @@ import {
 	textSansItalic12,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
+import libDebounce from 'lodash.debounce';
 import type { ReactNode } from 'react';
-import { memo } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { removeMediaRulePrefix, useMatchMedia } from '../lib/useMatchMedia';
 import { palette } from '../palette';
 import { AdSlot } from './AdSlot.web';
@@ -53,9 +54,37 @@ const Layout: CrosswordProps['Layout'] = ({
 	gridWidth,
 	MobileBannerAd,
 }) => {
+	const cluesRef = useRef<HTMLDivElement>(null);
+	const [showGradient, setShowGradient] = useState(true);
+
 	const betweenTabletAndLeftCol = useMatchMedia(
 		removeMediaRulePrefix(between.tablet.and.leftCol),
 	);
+
+	const updateGradientVisibilityOnScroll = () => {
+		const clueList = cluesRef.current;
+		if (!clueList) return;
+		const scrollPos = clueList.scrollTop;
+		const maxScroll = clueList.scrollHeight - clueList.clientHeight;
+		setShowGradient(scrollPos < maxScroll - 16);
+	};
+
+	useEffect(() => {
+		const clueList = cluesRef.current;
+		if (!clueList) return;
+
+		clueList.addEventListener(
+			'scroll',
+			libDebounce(updateGradientVisibilityOnScroll, 100),
+		);
+
+		return () => {
+			clueList.removeEventListener(
+				'scroll',
+				libDebounce(updateGradientVisibilityOnScroll, 100),
+			);
+		};
+	}, []);
 
 	return (
 		<div
@@ -91,6 +120,7 @@ const Layout: CrosswordProps['Layout'] = ({
 				>
 					<FocusedClue
 						additionalCss={css`
+							max-width: ${gridWidth}px;
 							${from.tablet} {
 								display: none;
 							}
@@ -112,37 +142,67 @@ const Layout: CrosswordProps['Layout'] = ({
 
 			<div
 				css={css`
-					${textSans14};
+					position: relative;
 					flex: 1;
 					display: flex;
-					flex-direction: column;
-					gap: ${space[4]}px;
 					${from.tablet} {
 						max-height: ${gridWidth}px;
-						overflow-y: scroll;
-					}
-					${from.desktop} {
-						flex-direction: row;
+						::after {
+							display: ${showGradient ? 'block' : 'none'};
+							position: absolute;
+							content: '';
+							bottom: 0;
+							left: 0;
+							width: 100%;
+							height: 64px;
+							background-image: linear-gradient(
+								180deg,
+								transparent,
+								${palette('--article-background')}
+							);
+						}
 					}
 					${from.leftCol} {
 						max-height: none;
-						overflow: visible;
-					}
-					> * {
-						flex: 1;
+						::after {
+							background-image: none;
+						}
 					}
 				`}
 			>
-				<Clues
-					direction="across"
-					Header={CluesHeader}
-					scrollToSelected={betweenTabletAndLeftCol}
-				/>
-				<Clues
-					direction="down"
-					Header={CluesHeader}
-					scrollToSelected={betweenTabletAndLeftCol}
-				/>
+				<div
+					ref={cluesRef}
+					css={css`
+						${textSans14};
+						flex: 1;
+						display: flex;
+						flex-direction: column;
+						gap: ${space[4]}px;
+						${from.tablet} {
+							overflow-y: scroll;
+						}
+						${from.desktop} {
+							flex-direction: row;
+						}
+						${from.leftCol} {
+							overflow: visible;
+						}
+						> * {
+							flex: 1;
+						}
+					`}
+				>
+					<Clues
+						direction="across"
+						Header={CluesHeader}
+						scrollToSelected={betweenTabletAndLeftCol}
+					/>
+					<Clues
+						direction="down"
+						Header={CluesHeader}
+						scrollToSelected={betweenTabletAndLeftCol}
+					/>
+				</div>
 			</div>
 		</div>
 	);
