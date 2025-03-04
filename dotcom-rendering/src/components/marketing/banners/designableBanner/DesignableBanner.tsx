@@ -8,6 +8,7 @@ import {
 	between,
 	from,
 	neutral,
+	palette,
 	space,
 	specialReport,
 	textEgyptian15,
@@ -15,7 +16,12 @@ import {
 	textSansBold17,
 	until,
 } from '@guardian/source/foundations';
-import { Button, SvgGuardianLogo } from '@guardian/source/react-components';
+import {
+	Button,
+	LinkButton,
+	SvgArrowRightStraight,
+	SvgGuardianLogo,
+} from '@guardian/source/react-components';
 import { Ticker } from '@guardian/source-development-kitchen/react-components';
 import {
 	hexColourToString,
@@ -26,16 +32,24 @@ import type {
 	BannerDesignImage,
 	ConfigurableDesign,
 	Image,
+	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import {
 	removeMediaRulePrefix,
 	useMatchMedia,
 } from '../../../../lib/useMatchMedia';
+import { ThreeTierChoiceCards } from '../../epics/ThreeTierChoiceCards';
+import type { SupportTier } from '../../epics/utils/threeTierChoiceCardAmounts';
 import { useChoiceCards } from '../../hooks/useChoiceCards';
 import { useReminder } from '../../hooks/useReminder';
 import type { ReactComponent } from '../../lib/ReactComponent';
+import {
+	addChoiceCardsProductParams,
+	addRegionIdAndTrackingParamsToSupportUrl,
+} from '../../lib/tracking';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
+import { PaymentCards } from '../common/PaymentCards';
 import type {
 	BannerEnrichedReminderCta,
 	BannerRenderProps,
@@ -118,6 +132,27 @@ const buildChoiceCardSettings = (
 	return undefined;
 };
 
+const buildUrlForThreeTierChoiceCards = (
+	tracking: Tracking,
+	selectedProduct: SupportTier,
+	countryCode?: string,
+) => {
+	const baseUrl = 'https://support.theguardian.com/contribute';
+	const urlWithProduct =
+		selectedProduct === 'OneOff'
+			? baseUrl
+			: addChoiceCardsProductParams(baseUrl, selectedProduct, 'Monthly');
+
+	return addRegionIdAndTrackingParamsToSupportUrl(
+		urlWithProduct,
+		tracking,
+		undefined,
+		countryCode,
+		tracking.abTestName,
+		tracking.abTestVariant,
+	);
+};
+
 const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	content,
 	onCloseClick,
@@ -132,6 +167,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	countryCode,
 	submitComponentEvent,
 	design,
+	tracking,
 }: BannerRenderProps): JSX.Element => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 	const { isReminderActive, onReminderCtaClick, mobileReminderRef } =
@@ -160,6 +196,10 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		}
 	}, [iosAppBannerPresent, submitComponentEvent]);
 
+	/**
+	 * V1 choice cards state
+	 */
+
 	const {
 		choiceCardSelection,
 		setChoiceCardSelection,
@@ -171,6 +211,18 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		countryCode,
 		content.mainContent.primaryCta,
 		content.mobileContent.primaryCta,
+	);
+
+	/**
+	 * V2 choice cards state
+	 */
+	const [
+		threeTierChoiceCardSelectedProduct,
+		setThreeTierChoiceCardSelectedProduct,
+	] = useState<SupportTier>('SupporterPlus');
+
+	const threeTierChoiceCards = tracking.abTestVariant.includes(
+		'THREE_TIER_CHOICE_CARDS',
 	);
 
 	// We can't render anything without a design
@@ -291,7 +343,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	);
 
 	const getHeaderContainerCss = () => {
-		if (templateSettings?.headerSettings?.headerImage) {
+		if (templateSettings.headerSettings?.headerImage) {
 			return styles.headerWithImageContainer(
 				templateSettings.containerSettings.backgroundColour,
 			);
@@ -408,7 +460,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						styleOverides={styles.closeButtonOverrides(true)}
 					/>
 				)}
-				{showChoiceCards && (
+				{showChoiceCards && !threeTierChoiceCards && (
 					<div
 						css={styles.choiceCardsContainer(
 							templateSettings.containerSettings.backgroundColour,
@@ -431,11 +483,51 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						/>
 					</div>
 				)}
-				<div css={styles.guardianLogoContainer}>
-					<SvgGuardianLogo
-						textColor={hexColourToString(basic.logo)}
-					/>
-				</div>
+
+				{showChoiceCards && threeTierChoiceCards && (
+					<div css={styles.threeTierChoiceCardsContainer}>
+						<ThreeTierChoiceCards
+							countryCode={countryCode}
+							selectedProduct={threeTierChoiceCardSelectedProduct}
+							setSelectedProduct={
+								setThreeTierChoiceCardSelectedProduct
+							}
+							variantOfChoiceCard={'THREE_TIER_CHOICE_CARDS'}
+						/>
+					</div>
+				)}
+
+				{showChoiceCards && threeTierChoiceCards && (
+					<div css={styles.ctaAndPaymentCardsContainer}>
+						<LinkButton
+							href={buildUrlForThreeTierChoiceCards(
+								tracking,
+								threeTierChoiceCardSelectedProduct,
+								countryCode,
+							)}
+							// onClick={onCtaClick}
+							priority="tertiary"
+							cssOverrides={styles.linkButtonStyles}
+							icon={<SvgArrowRightStraight />}
+							iconSide="right"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Continue
+						</LinkButton>
+						<PaymentCards
+							cssOverrides={styles.paymentCardsSvgOverrides}
+						/>
+					</div>
+				)}
+
+				{!threeTierChoiceCards && (
+					<div css={styles.guardianLogoContainer}>
+						<SvgGuardianLogo
+							textColor={hexColourToString(basic.logo)}
+						/>
+					</div>
+				)}
 
 				{showReminder && (
 					<div css={styles.reminderContainer}>
@@ -602,6 +694,12 @@ const styles = {
 			justify-content: flex-end;
 		}
 	`,
+	threeTierChoiceCardsContainer: css`
+		order: 3;
+		${until.tablet} {
+			padding-bottom: 100px;
+		}
+	`,
 	guardianLogoContainer: css`
 		display: none;
 		${from.tablet} {
@@ -644,6 +742,56 @@ const styles = {
 	reminderFormContainer: css`
 		border-top: 2px solid ${neutral[0]};
 		margin-top: ${space[3]}px;
+	`,
+	ctaAndPaymentCardsContainer: css`
+		order: 4;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		gap: ${space[4]}px;
+		margin-top: ${space[2]}px;
+		margin-bottom: ${space[2]}px;
+
+		> span {
+			width: 100%;
+		}
+
+		${until.desktop} {
+			a {
+				width: 100%;
+			}
+		}
+
+		${until.tablet} {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			width: 100%;
+			background: ${neutral[100]};
+			padding: ${space[2]}px;
+			margin-bottom: 0;
+		}
+
+		${from.desktop} {
+			flex-direction: row;
+			gap: 0;
+			margin-bottom: 0;
+			margin-top: ${space[3]}px;
+
+			> span {
+				width: auto;
+			}
+		}
+	`,
+	paymentCardsSvgOverrides: css`
+		${from.desktop} {
+			margin-top: -10px;
+		}
+	`,
+	linkButtonStyles: css`
+		background-color: ${palette.brandAlt[400]};
+		border-color: ${palette.brandAlt[400]};
 	`,
 };
 

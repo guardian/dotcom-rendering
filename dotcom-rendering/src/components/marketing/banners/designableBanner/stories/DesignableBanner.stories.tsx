@@ -24,6 +24,7 @@ import {
 	mobileContentWithHeading,
 	props,
 	stringToHexColour,
+	tracking,
 } from '../../utils/storybook';
 
 type WithJsonProps<T> = T & { json?: string };
@@ -403,5 +404,24 @@ export const WithTicker: Story = {
 	args: {
 		...meta.args,
 		tickerSettings,
+	},
+};
+
+export const WithThreeTierChoiceCards: Story = {
+	name: 'DesignableBanner with three tier choice cards',
+	args: {
+		...meta.args,
+		design: {
+			...design,
+			visual: {
+				kind: 'ChoiceCards',
+				buttonColour: stringToHexColour('E5E5E5'),
+			},
+		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
+		},
+		choiceCardAmounts: regularChoiceCardAmounts,
 	},
 };
