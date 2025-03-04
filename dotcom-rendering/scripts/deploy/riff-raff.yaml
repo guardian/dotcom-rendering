@@ -56,6 +56,8 @@ deployments:
       cloudFormationStackByTags: false
       cloudFormationStackName: facia-rendering
       amiParameter: AMIFaciarendering
+      templateParameters:
+        faciarenderingPrivateSubnets: /account/vpc/primary/subnets/private
   # facia-rendering autoscaling
   facia-rendering:
     type: autoscaling
