@@ -10,6 +10,7 @@ import type {
 	Regions,
 } from '../footballMatches';
 import { parse } from '../footballMatches';
+import { Pillar } from '../lib/articleFormat';
 import { extractNAV } from '../model/extract-nav';
 import { validateAsFootballDataPageType } from '../model/validate';
 import { makePrefetchHeader } from './lib/header';
@@ -74,7 +75,10 @@ const parseFEFootballData = (data: FEFootballDataPage): DCRFootballDataPage => {
 		nextPage: data.nextPage,
 		previousPage: data.previousPage,
 		regions: parseFEFootballCompetitionRegions(data.filters),
-		nav: extractNAV(data.nav),
+		nav: {
+			...extractNAV(data.nav),
+			selectedPillar: Pillar.Sport,
+		},
 		editionId: data.editionId,
 		guardianBaseURL: data.guardianBaseURL,
 		config: data.config,
