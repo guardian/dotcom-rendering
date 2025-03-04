@@ -58,18 +58,18 @@ const parseFEFootballCompetitionRegions = (
 };
 
 const parseFEFootballData = (data: FEFootballDataPage): DCRFootballDataPage => {
-	const parsedMatchesResult = parse(data.matchesList);
+	const parsedMatchesList = parse(data.matchesList);
 
-	if (parsedMatchesResult.kind === 'error') {
+	if (parsedMatchesList.kind === 'error') {
 		throw new Error(
 			`Failed to parse matches: ${getParserErrorMessage(
-				parsedMatchesResult.error,
+				parsedMatchesList.error,
 			)}`,
 		);
 	}
 
 	return {
-		matchesList: parsedMatchesResult.value,
+		matchesList: parsedMatchesList.value,
 		kind: decidePageKind(data.canonicalUrl),
 		nextPage: data.nextPage,
 		previousPage: data.previousPage,

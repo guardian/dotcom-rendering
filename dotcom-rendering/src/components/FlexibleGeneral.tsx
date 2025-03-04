@@ -67,7 +67,8 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 		// We change the row layout to 'twoCard' to indicate that it is now full
 		if (row && row.layout === 'oneCard') {
 			return [...acc.slice(0, acc.length - 1), addCardToRow(row, card)];
-		} // Otherwise we consider the row to be 'full' and start a new row
+		}
+		// Otherwise we consider the row to be 'full' and start a new row
 		else {
 			return [...acc, createNewRow('oneCard', card)];
 		}
@@ -86,7 +87,8 @@ type BoostedSplashProperties = {
 };
 
 /**
- * Boosting a splash card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
+ * Boosting a splash card will affect the layout and style of the card.
+ * This function will determine the properties of the card based on the boost level.
  */
 const decideSplashCardProperties = (
 	boostLevel: BoostLevel,
@@ -262,11 +264,12 @@ type BoostedCardProperties = {
 };
 
 /**
- * Boosting a standard card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
+ * Boosting a standard card will affect the layout and style of the card.
+ * This function will determine the properties of the card based on the boost level.
  */
 const decideCardProperties = (
-	boostLevel: Omit<BoostLevel, 'default' | 'gigaboost'> = 'boost',
 	supportingContentLength: number,
+	boostLevel: Omit<BoostLevel, 'default' | 'gigaboost'> = 'boost',
 	avatarUrl?: string,
 ): BoostedCardProperties => {
 	switch (boostLevel) {
@@ -328,10 +331,11 @@ export const BoostedCardLayout = ({
 		supportingContentAlignment,
 		liveUpdatesPosition,
 	} = decideCardProperties(
-		card.boostLevel,
 		card.supportingContent?.length ?? 0,
+		card.boostLevel,
 		card.avatarUrl,
 	);
+
 	return (
 		<UL
 			showTopBar={!isFirstRow}
@@ -421,7 +425,7 @@ export const StandardCardLayout = ({
 				return (
 					<LI
 						stretch={false}
-						percentage={'50%'}
+						percentage="50%"
 						key={card.url}
 						padSides={true}
 						showDivider={cardIndex > 0}
@@ -437,7 +441,7 @@ export const StandardCardLayout = ({
 							absoluteServerTimes={absoluteServerTimes}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
-							imagePositionOnDesktop={'left'}
+							imagePositionOnDesktop="left"
 							supportingContent={card.supportingContent?.slice(
 								0,
 								2,
