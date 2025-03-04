@@ -76,6 +76,8 @@ deployments:
       cloudFormationStackByTags: false
       cloudFormationStackName: tag-page-rendering
       amiParameter: AMITagpagerendering
+      templateParameters:
+        tagpagerenderingPrivateSubnets: /devx/bigger/private/subnets
   # tag-page-rendering autoscaling
   tag-page-rendering:
     type: autoscaling
