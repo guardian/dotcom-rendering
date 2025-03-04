@@ -187,12 +187,14 @@ describe('footballMatches', () => {
 			'Union Saint Gilloise': 'Union Saint-Gilloise',
 		};
 
-		Object.entries(uncleanToCleanNames).map(([uncleanName, cleanName]) => {
+		for (const [uncleanName, cleanName] of Object.entries(
+			uncleanToCleanNames,
+		)) {
 			const match = okOrThrow(
 				parseMatchResult(matchesListWithTeamName(uncleanName)),
 				'Expected football match parsing to succeed',
 			);
 			expect(match.homeTeam.name).toBe(cleanName);
-		});
+		}
 	});
 });
