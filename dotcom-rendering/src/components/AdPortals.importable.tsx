@@ -44,10 +44,10 @@ const positionsEqual = (a: BridgetRect, b: BridgetRect): boolean =>
 
 const calculateAdPositions = (adSlots: HTMLDivElement[]): BridgetAdSlot[] =>
 	adSlots.map(
-		(slot, index) =>
+		(slot) =>
 			new BridgetAdSlot({
 				rect: calculateAdPosition(slot),
-				isSquare: index === 0,
+				isSquare: false,
 			}),
 	);
 
