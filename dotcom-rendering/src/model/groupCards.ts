@@ -106,11 +106,17 @@ export const groupCards = (
 			};
 		}
 		case 'flexible/general': {
-			const splash = curated.filter(({ card }) => card.group === '3');
+			const hasv2Grouping = curated.some(
+				({ card }) => card.group === '3',
+			);
+			const splashGroup = hasv2Grouping ? '3' : '1';
+			const splash = curated.filter(
+				({ card }) => card.group === splashGroup,
+			);
 
 			// Backfilled cards will always be treated as 'standard' cards
 			const standard = [
-				...curated.filter(({ card }) => card.group !== '3'),
+				...curated.filter(({ card }) => card.group !== splashGroup),
 				...backfill,
 			];
 
