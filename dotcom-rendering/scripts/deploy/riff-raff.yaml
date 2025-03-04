@@ -36,6 +36,8 @@ deployments:
       cloudFormationStackByTags: false
       cloudFormationStackName: article-rendering
       amiParameter: AMIArticlerendering
+      templateParameters:
+        articlerenderingPrivateSubnets: /account/vpc/primary/subnets/private
   # article-rendering autoscaling
   article-rendering:
     type: autoscaling
