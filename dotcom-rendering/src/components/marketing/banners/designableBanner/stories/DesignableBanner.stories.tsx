@@ -446,3 +446,19 @@ export const ThreeTierChoiceCardsWithHeaderImageAndCopy: Story = {
 		choiceCardAmounts: regularChoiceCardAmounts,
 	},
 };
+
+export const ThreeTierChoiceCardsWithImage: Story = {
+	name: 'Three tier choice cards layout with image ',
+	args: {
+		...meta.args,
+		design: {
+			...design,
+			visual: regularImage,
+		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
+		},
+		choiceCardAmounts: regularChoiceCardAmounts,
+	},
+};

@@ -614,6 +614,11 @@ const styles = {
 			margin: 0 auto;
 			padding: 0 ${space[5]}px;
 		}
+
+		${showThreeTierChoiceCards && from.desktop} {
+			grid-template-columns: 1fr 280px 1fr;
+		}
+
 		${from.desktop} {
 			column-gap: 60px;
 			grid-template-columns: 1fr 460px;
@@ -645,6 +650,7 @@ const styles = {
 						margin-bottom: ${space[3]}px;
 						display: flex;
 						justify-content: flex-end;
+						grid-column: 3;
 				  `}
 		}
 	`,
@@ -708,6 +714,11 @@ const styles = {
 		order: 3;
 		${until.tablet} {
 			padding-bottom: 100px;
+		}
+		${from.desktop} {
+			grid-column: 2;
+			grid-row: 1;
+			grid-row-end: 3;
 		}
 	`,
 	guardianLogoContainer: css`
@@ -784,6 +795,7 @@ const styles = {
 		}
 
 		${from.desktop} {
+			grid-column: 2;
 			flex-direction: row;
 			gap: 0;
 			margin-bottom: 0;
