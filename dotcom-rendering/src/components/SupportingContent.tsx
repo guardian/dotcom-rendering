@@ -92,9 +92,7 @@ const sublinkBaseStyles = css`
 `;
 
 const verticalSublinkStyles = css`
-	:not(:first-child) {
-		${horizontalLineStyle}
-	}
+	${horizontalLineStyle}
 
 	${from.tablet} {
 		:first-child {
@@ -106,9 +104,7 @@ const verticalSublinkStyles = css`
 const horizontalSublinkStyles = (totalColumns: number) => css`
 	grid-column: span ${totalColumns};
 	${until.tablet} {
-		:not(:first-child) {
-			${horizontalLineStyle}
-		}
+		${horizontalLineStyle}
 	}
 
 	${from.tablet} {
