@@ -8,6 +8,7 @@ import {
 } from '../lib/articleFormat';
 import { generateImageURL } from '../lib/image';
 import type { RoleType } from '../types/content';
+import { AspectRatio } from '../types/front';
 import type { Loading } from './CardPicture';
 
 /**
@@ -36,7 +37,11 @@ type Props = {
 	aspectRatio?: string;
 };
 
-export type ImageWidthType = { breakpoint: number; width: number };
+export type ImageWidthType = {
+	breakpoint: number;
+	width: number;
+	aspectRatio?: AspectRatio;
+};
 
 /**
  * All business logic for image sizing is contained in this one function. This
