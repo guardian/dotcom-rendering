@@ -425,3 +425,24 @@ export const WithThreeTierChoiceCards: Story = {
 		choiceCardAmounts: regularChoiceCardAmounts,
 	},
 };
+
+export const ThreeTierChoiceCardsWithHeaderImageAndCopy: Story = {
+	name: 'Three tier choice cards with header image and header copy',
+	args: {
+		...meta.args,
+		design: {
+			...design,
+			headerImage,
+			visual: {
+				kind: 'ChoiceCards',
+				buttonColour: stringToHexColour('E5E5E5'),
+			},
+		},
+
+		tracking: {
+			...tracking,
+			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
+		},
+		choiceCardAmounts: regularChoiceCardAmounts,
+	},
+};

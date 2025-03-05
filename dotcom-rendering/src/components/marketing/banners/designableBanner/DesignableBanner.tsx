@@ -779,7 +779,7 @@ const styles = {
 			right: 0;
 			width: 100%;
 			background: ${neutral[100]};
-			padding: ${space[2]}px;
+			padding-bottom: ${space[2]}px;
 			margin-bottom: 0;
 		}
 
