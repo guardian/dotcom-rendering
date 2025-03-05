@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
 import { getSourceImageUrl } from '../../lib/getSourceImageUrl_temp_fix';
-import { AspectRatio } from '../../types/front';
+import type { AspectRatio } from '../../types/front';
 import { generateSources, getFallbackSource, Sources } from '../Picture';
 
 type Props = {

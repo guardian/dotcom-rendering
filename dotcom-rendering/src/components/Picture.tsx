@@ -8,7 +8,7 @@ import {
 } from '../lib/articleFormat';
 import { generateImageURL } from '../lib/image';
 import type { RoleType } from '../types/content';
-import { AspectRatio } from '../types/front';
+import type { AspectRatio } from '../types/front';
 import type { Loading } from './CardPicture';
 
 /**
@@ -62,14 +62,12 @@ const decideImageWidths = ({
 	format,
 	isLightbox,
 	orientation,
-	aspectRatio,
 }: {
 	role: PictureRoleType;
 	isMainMedia?: boolean;
 	format: ArticleFormat;
 	isLightbox: boolean;
 	orientation: Orientation;
-	aspectRatio?: AspectRatio;
 }): [ImageWidthType, ...ImageWidthType[]] => {
 	if (isLightbox) {
 		switch (orientation) {
