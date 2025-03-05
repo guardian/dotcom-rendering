@@ -656,13 +656,15 @@ const SignInGateSelectorAuxia = ({
 
 	useOnce(() => {
 		void (async () => {
-			const data = await buildAuxiaGateDisplayData(
-				contributionsServiceUrl,
-				pageId,
-				editionId,
-			);
-			if (data !== undefined) {
-				setAuxiaGateDisplayData(data);
+			if (!isSignedIn) {
+				const data = await buildAuxiaGateDisplayData(
+					contributionsServiceUrl,
+					pageId,
+					editionId,
+				);
+				if (data !== undefined) {
+					setAuxiaGateDisplayData(data);
+				}
 			}
 		})().catch((error) => {
 			console.error('Error fetching Auxia display data:', error);
