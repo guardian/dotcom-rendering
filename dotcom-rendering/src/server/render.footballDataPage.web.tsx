@@ -4,6 +4,7 @@ import { FootballDataPage } from '../components/FootballDataPage';
 import type {
 	DCRFootballDataPage,
 	FootballMatchKind,
+	Regions,
 } from '../footballMatches';
 import {
 	ASSET_ORIGIN,
@@ -31,14 +32,31 @@ const decideDescription = (kind: FootballMatchKind) => {
 	}
 };
 
-const decideTitle = (kind: FootballMatchKind) => {
+const decideTitle = (
+	kind: FootballMatchKind,
+	pageId: string,
+	regions: Regions,
+) => {
+	const pagePath = pageId.startsWith('/') ? pageId.slice(1) : pageId;
+	const competitionName = regions
+		.flatMap((region) => region.competitions) // Flatten all competitions into a single array
+		.find((competition) => competition.url === `/${pagePath}`)?.name;
+
+	const footballTitle = '| Football | The Guardian';
+
 	switch (kind) {
 		case 'Live':
-			return 'Live matches | Football | The Guardian';
+			return `${
+				competitionName ? `Today's ${competitionName} ` : 'Live '
+			}matches ${footballTitle}`;
 		case 'Result':
-			return 'All results | Football | The Guardian';
+			return `${
+				competitionName ? `${competitionName} ` : 'All '
+			}results ${footballTitle}`;
 		case 'Fixture':
-			return 'All fixtures | Football | The Guardian';
+			return `${
+				competitionName ? `${competitionName} ` : 'All '
+			}fixtures ${footballTitle}`;
 	}
 };
 
@@ -90,7 +108,11 @@ export const renderFootballDataPage = (footballData: DCRFootballDataPage) => {
 		scriptTags,
 		css: extractedCss,
 		html,
-		title: decideTitle(footballData.kind),
+		title: decideTitle(
+			footballData.kind,
+			footballData.config.pageId,
+			footballData.regions,
+		),
 		description: decideDescription(footballData.kind),
 		canonicalUrl: footballData.canonicalUrl,
 		guardian: createGuardian({
