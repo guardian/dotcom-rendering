@@ -371,7 +371,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 				templateSettings.containerSettings.textColor,
 			)}
 		>
-			<div css={styles.containerOverrides}>
+			<div css={styles.containerOverrides(threeTierChoiceCards)}>
 				<div css={getHeaderContainerCss()}>
 					<DesignableBannerHeader
 						heading={content.mainContent.heading}
@@ -441,7 +441,10 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						<DesignableBannerCloseButton
 							onCloseClick={onCloseClick}
 							settings={templateSettings.closeButtonSettings}
-							styleOverides={styles.closeButtonOverrides(false)}
+							styleOverides={styles.closeButtonOverrides(
+								false,
+								threeTierChoiceCards,
+							)}
 						/>
 						<DesignableBannerVisual
 							settings={templateSettings.imageSettings}
@@ -457,7 +460,10 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 					<DesignableBannerCloseButton
 						onCloseClick={onCloseClick}
 						settings={templateSettings.closeButtonSettings}
-						styleOverides={styles.closeButtonOverrides(true)}
+						styleOverides={styles.closeButtonOverrides(
+							true,
+							threeTierChoiceCards,
+						)}
 					/>
 				)}
 				{showChoiceCards && !threeTierChoiceCards && (
@@ -549,7 +555,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 
 			{isReminderActive && (
 				<div css={styles.reminderFormContainer}>
-					<div css={styles.containerOverrides}>
+					<div css={styles.containerOverrides(threeTierChoiceCards)}>
 						<DesignableBannerReminder
 							reminderCta={
 								mainOrMobileContent.secondaryCta as BannerEnrichedReminderCta
@@ -592,12 +598,13 @@ const styles = {
 			font-weight: bold;
 		}
 	`,
-	containerOverrides: css`
+	containerOverrides: (showThreeTierChoiceCards: boolean) => css`
 		display: flex;
 		flex-direction: column;
 		position: relative;
 		padding: 0 10px;
-		${from.tablet} {
+
+		${showThreeTierChoiceCards ? from.desktop : from.tablet} {
 			display: grid;
 			grid-template-columns: 1fr 280px;
 			grid-template-rows: auto 1fr auto;
@@ -616,7 +623,10 @@ const styles = {
 		}
 		${templateSpacing.bannerContainer};
 	`,
-	closeButtonOverrides: (isGridCell: boolean) => css`
+	closeButtonOverrides: (
+		isGridCell: boolean,
+		showThreeTierChoiceCards: boolean,
+	) => css`
 		${until.tablet} {
 			position: fixed;
 			margin-top: ${space[3]}px;
@@ -626,7 +636,7 @@ const styles = {
 		${from.tablet} {
 			margin-top: ${space[3]}px;
 
-			${isGridCell
+			${isGridCell && !showThreeTierChoiceCards
 				? css`
 						grid-column: 2;
 						grid-row: 1;
