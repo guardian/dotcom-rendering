@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { breakpoints, space } from '@guardian/source/foundations';
+import { breakpoints, space, until } from '@guardian/source/foundations';
 import type { ImgHTMLAttributes } from 'react';
 import React from 'react';
 import type { AspectRatio } from '../types/front';
@@ -18,6 +18,7 @@ type Props = {
 	roundedCorners?: boolean;
 	isCircular?: boolean;
 	aspectRatio?: AspectRatio;
+	mobileAspectRatio?: AspectRatio;
 	isInLoopVideoTest?: boolean;
 };
 
@@ -31,7 +32,7 @@ type Props = {
  */
 const decideImageWidths = (
 	imageSize: ImageSizeType,
-	aspectRatio: AspectRatio = '5:3',
+	aspectRatio: AspectRatio,
 ): [ImageWidthType, ...ImageWidthType[]] => {
 	switch (imageSize) {
 		// @TODO missing image size option
@@ -178,6 +179,15 @@ const circularStyles = css`
 	width: 100%;
 `;
 
+const decideMobileAspectRatioStyles = (aspectRatio?: AspectRatio) => {
+	const paddingRatio = getAspectRatioPadding(aspectRatio);
+	return css`
+		${until.tablet} {
+			padding-top: ${paddingRatio};
+		}
+	`;
+};
+
 export const CardPicture = ({
 	mainImage,
 	alt,
@@ -185,7 +195,8 @@ export const CardPicture = ({
 	loading,
 	roundedCorners,
 	isCircular,
-	aspectRatio,
+	aspectRatio = '5:3',
+	mobileAspectRatio,
 	isInLoopVideoTest = false,
 }: Props) => {
 	const sources = generateSources(
@@ -205,6 +216,8 @@ export const CardPicture = ({
 			css={[
 				block,
 				decideAspectRatioStyles(aspectRatio),
+				mobileAspectRatio &&
+					decideMobileAspectRatioStyles(mobileAspectRatio),
 				roundedCorners && borderRadius,
 				isCircular && circularStyles,
 			]}
