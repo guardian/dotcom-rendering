@@ -1,6 +1,5 @@
 import { incrementDailyArticleCount } from '../../lib/dailyArticleCount';
 import {
-	isIOS9,
 	isNPageOrHigherPageView,
 	isValidContentType,
 	isValidSection,
@@ -58,61 +57,6 @@ describe('SignInGate - displayRule methods', () => {
 			const output = isNPageOrHigherPageView(5);
 
 			expect(output).toBe(false);
-		});
-	});
-
-	describe('isIOS9', () => {
-		// spy on user agent to mock return value
-		const userAgentGetter = jest.spyOn(
-			window.navigator,
-			'userAgent',
-			'get',
-		);
-
-		test('iphone ios9 is true', () => {
-			userAgentGetter.mockReturnValueOnce(
-				'Mozilla/5.0 (iPhone; CPU OS 9_0 like Mac OS X) AppleWebKit/601.1.17 (KHTML, like Gecko) Version/8.0 Mobile/13A175 Safari/600.1.4',
-			);
-			expect(isIOS9()).toBe(true);
-		});
-
-		test('ipad ios9 is true', () => {
-			userAgentGetter.mockReturnValueOnce(
-				'Mozilla/5.0 (iPad; CPU OS 9_0 like Mac OS X) AppleWebKit/601.1.17 (KHTML, like Gecko) Version/8.0 Mobile/13A175 Safari/600.1.4',
-			);
-			expect(isIOS9()).toBe(true);
-		});
-
-		test('ipod ios9 is true', () => {
-			userAgentGetter.mockReturnValueOnce(
-				'Mozilla/5.0 (iPod; CPU OS 9_0 like Mac OS X) AppleWebKit/601.1.17 (KHTML, like Gecko) Version/8.0 Mobile/13A175 Safari/600.1.4',
-			);
-			expect(isIOS9()).toBe(true);
-		});
-
-		test('iphone not ios9 is false', () => {
-			userAgentGetter.mockReturnValueOnce(
-				'Mozilla/5.0 (iPhone; CPU OS 10_3 like Mac OS X) AppleWebKit/601.1.17 (KHTML, like Gecko) Version/8.0 Mobile/13A175 Safari/600.1.4',
-			);
-			expect(isIOS9()).toBe(false);
-		});
-
-		test('ipad not ios9 is false', () => {
-			userAgentGetter.mockReturnValueOnce(
-				'Mozilla/5.0 (iPad; CPU OS 8_1 like Mac OS X) AppleWebKit/601.1.17 (KHTML, like Gecko) Version/8.0 Mobile/13A175 Safari/600.1.4',
-			);
-			expect(isIOS9()).toBe(false);
-		});
-
-		test('ipod not ios9 is false', () => {
-			userAgentGetter.mockReturnValueOnce(
-				'Mozilla/5.0 (iPod; CPU OS 7_0 like Mac OS X) AppleWebKit/601.1.17 (KHTML, like Gecko) Version/8.0 Mobile/13A175 Safari/600.1.4',
-			);
-			expect(isIOS9()).toBe(false);
-		});
-
-		test('not ios device is false', () => {
-			expect(isIOS9()).toBe(false);
 		});
 	});
 
