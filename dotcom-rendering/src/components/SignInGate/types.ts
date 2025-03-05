@@ -114,6 +114,10 @@ export interface AuxiaProxyGetTreatmentsPayload {
 	dailyArticleCount: number;
 	articleIdentifier: string;
 	editionId: EditionId;
+	contentType: string;
+	sectionId: string;
+	tagIds: string[];
+	gateDismissCount: number;
 }
 
 export interface AuxiaProxyGetTreatmentsResponse {

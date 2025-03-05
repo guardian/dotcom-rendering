@@ -26,6 +26,7 @@ import {
 } from './SignInGate/componentEventTracking';
 import {
 	incrementUserDismissedGateCount,
+	retrieveDismissedCount,
 	setUserDismissedGate,
 } from './SignInGate/dismissGate';
 import { SignInGateAuxia } from './SignInGate/gateDesigns/SignInGateAuxia';
@@ -410,6 +411,11 @@ export const SignInGateSelector = ({
 				idUrl={idUrl}
 				contributionsServiceUrl={contributionsServiceUrl}
 				editionId={editionId}
+				isPreview={isPreview}
+				isPaidContent={isPaidContent}
+				contentType={contentType}
+				sectionId={sectionId}
+				tags={tags}
 			/>
 		);
 	}
@@ -444,6 +450,11 @@ type PropsAuxia = {
 	idUrl: string;
 	contributionsServiceUrl: string;
 	editionId: EditionId;
+	isPreview: boolean;
+	isPaidContent: boolean;
+	contentType: string;
+	sectionId: string;
+	tags: TagType[];
 };
 
 interface ShowSignInGateAuxiaProps {
@@ -508,6 +519,10 @@ const fetchProxyGetTreatments = async (
 	isSupporter: boolean,
 	dailyArticleCount: number,
 	editionId: EditionId,
+	contentType: string,
+	sectionId: string,
+	tagIds: string[],
+	gateDismissCount: number,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const articleIdentifier = `www.theguardian.com/${pageId}`;
@@ -521,6 +536,10 @@ const fetchProxyGetTreatments = async (
 		dailyArticleCount,
 		articleIdentifier,
 		editionId,
+		contentType,
+		sectionId,
+		tagIds,
+		gateDismissCount,
 	};
 	const params = {
 		method: 'POST',
@@ -539,8 +558,13 @@ const buildAuxiaGateDisplayData = async (
 	contributionsServiceUrl: string,
 	pageId: string,
 	editionId: EditionId,
+	contentType: string,
+	sectionId: string,
+	tags: TagType[],
+	gateDismissCount: number,
 ): Promise<AuxiaGateDisplayData | undefined> => {
 	const readerPersonalData = await decideAuxiaProxyReaderPersonalData();
+	const tagIds = tags.map((tag) => tag.id);
 	const response = await fetchProxyGetTreatments(
 		contributionsServiceUrl,
 		pageId,
@@ -548,6 +572,10 @@ const buildAuxiaGateDisplayData = async (
 		readerPersonalData.isSupporter,
 		readerPersonalData.dailyArticleCount,
 		editionId,
+		contentType,
+		sectionId,
+		tagIds,
+		gateDismissCount,
 	);
 	if (response.status && response.data) {
 		const answer = {
@@ -611,6 +639,11 @@ const SignInGateSelectorAuxia = ({
 	idUrl,
 	contributionsServiceUrl,
 	editionId,
+	isPreview,
+	isPaidContent,
+	contentType,
+	sectionId,
+	tags,
 }: PropsAuxia) => {
 	/*
 		comment group: auxia-prototype-e55a86ef
@@ -656,11 +689,20 @@ const SignInGateSelectorAuxia = ({
 
 	useOnce(() => {
 		void (async () => {
-			if (!isSignedIn) {
+			// Although the component is returning null if we are in preview or it's a paid content
+			// We need to guard against the API possibly being called before the component returns.
+			// That is because it would count as a content delivery for them, above all if they return a treatment
+			//  without the subsequent Log Treatment notification, which would cause confusion.
+
+			if (!isSignedIn && !isPreview && !isPaidContent) {
 				const data = await buildAuxiaGateDisplayData(
 					contributionsServiceUrl,
 					pageId,
 					editionId,
+					contentType,
+					sectionId,
+					tags,
+					retrieveDismissedCount(abTest.variant, abTest.name),
 				);
 				if (data !== undefined) {
 					setAuxiaGateDisplayData(data);
@@ -671,7 +713,13 @@ const SignInGateSelectorAuxia = ({
 		});
 	}, [abTest]);
 
-	if (isSignedIn || isUndefined(pageViewId)) {
+	// We are not showing the gate if we are in preview, it's a paid contents
+	// or the user is signed in or if for some reasons we could not determine the
+	// pageViewId
+
+	// According to the reacts rules we can only put this check after all the hooks.
+
+	if (isPreview || isPaidContent || isSignedIn || isUndefined(pageViewId)) {
 		return null;
 	}
 
