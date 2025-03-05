@@ -40,7 +40,7 @@ export const FootballCompetitionSelect = ({
 	<Select
 		label="Choose league:"
 		onChange={(e) => onChange(e.target.value)}
-		value={`/${pageId}`}
+		value={pageId.startsWith('/') ? pageId : `/${pageId}`}
 		theme={{
 			textLabel: palette('--football-competition-select-text'),
 			textUserInput: palette('--football-competition-select-text'),
