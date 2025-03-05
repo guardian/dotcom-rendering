@@ -34,7 +34,7 @@ type Props = {
 	isLightbox?: boolean;
 	orientation?: Orientation;
 	onLoad?: () => void;
-	aspectRatio?: string;
+	aspectRatio?: AspectRatio;
 };
 
 export type ImageWidthType = {
@@ -63,36 +63,70 @@ const decideImageWidths = ({
 	format,
 	isLightbox,
 	orientation,
+	aspectRatio,
 }: {
 	role: PictureRoleType;
 	isMainMedia?: boolean;
 	format: ArticleFormat;
 	isLightbox: boolean;
 	orientation: Orientation;
+	aspectRatio?: AspectRatio;
 }): [ImageWidthType, ...ImageWidthType[]] => {
 	if (isLightbox) {
 		switch (orientation) {
 			case 'portrait':
 				return [
-					{ breakpoint: breakpoints.mobile, width: 480 },
-					{ breakpoint: breakpoints.mobileLandscape, width: 480 },
-					{ breakpoint: breakpoints.phablet, width: 480 },
-					{ breakpoint: breakpoints.tablet, width: 660 },
-					{ breakpoint: breakpoints.desktop, width: 740 },
-					{ breakpoint: breakpoints.leftCol, width: 980 },
-					{ breakpoint: breakpoints.wide, width: 1140 },
+					{ breakpoint: breakpoints.mobile, width: 480, aspectRatio },
+					{
+						breakpoint: breakpoints.mobileLandscape,
+						width: 480,
+						aspectRatio,
+					},
+					{
+						breakpoint: breakpoints.phablet,
+						width: 480,
+						aspectRatio,
+					},
+					{ breakpoint: breakpoints.tablet, width: 660, aspectRatio },
+					{
+						breakpoint: breakpoints.desktop,
+						width: 740,
+						aspectRatio,
+					},
+					{
+						breakpoint: breakpoints.leftCol,
+						width: 980,
+						aspectRatio,
+					},
+					{ breakpoint: breakpoints.wide, width: 1140, aspectRatio },
 				];
 
 			case 'landscape':
 			default:
 				return [
-					{ breakpoint: breakpoints.mobile, width: 480 },
-					{ breakpoint: breakpoints.mobileLandscape, width: 660 },
-					{ breakpoint: breakpoints.phablet, width: 740 },
-					{ breakpoint: breakpoints.tablet, width: 980 },
-					{ breakpoint: breakpoints.desktop, width: 1140 },
-					{ breakpoint: breakpoints.leftCol, width: 1300 },
-					{ breakpoint: breakpoints.wide, width: 1900 },
+					{ breakpoint: breakpoints.mobile, width: 480, aspectRatio },
+					{
+						breakpoint: breakpoints.mobileLandscape,
+						width: 660,
+						aspectRatio,
+					},
+					{
+						breakpoint: breakpoints.phablet,
+						width: 740,
+						aspectRatio,
+					},
+					{ breakpoint: breakpoints.tablet, width: 980, aspectRatio },
+					{
+						breakpoint: breakpoints.desktop,
+						width: 1140,
+						aspectRatio,
+					},
+					{
+						breakpoint: breakpoints.leftCol,
+						width: 1300,
+						aspectRatio,
+					},
+					{ breakpoint: breakpoints.wide, width: 1900, aspectRatio },
 				];
 		}
 	}
@@ -100,13 +134,17 @@ const decideImageWidths = ({
 		// the order is important here. Picture content type images come through as main media, so needs to appear
 		// above `isMainMedia`, so the images do not appear low quality.
 		return [
-			{ breakpoint: breakpoints.mobile, width: 480 },
-			{ breakpoint: breakpoints.mobileLandscape, width: 660 },
-			{ breakpoint: breakpoints.phablet, width: 740 },
-			{ breakpoint: breakpoints.tablet, width: 980 },
-			{ breakpoint: breakpoints.desktop, width: 1140 },
-			{ breakpoint: breakpoints.leftCol, width: 1300 },
-			{ breakpoint: breakpoints.wide, width: 1900 },
+			{ breakpoint: breakpoints.mobile, width: 480, aspectRatio },
+			{
+				breakpoint: breakpoints.mobileLandscape,
+				width: 660,
+				aspectRatio,
+			},
+			{ breakpoint: breakpoints.phablet, width: 740, aspectRatio },
+			{ breakpoint: breakpoints.tablet, width: 980, aspectRatio },
+			{ breakpoint: breakpoints.desktop, width: 1140, aspectRatio },
+			{ breakpoint: breakpoints.leftCol, width: 1300, aspectRatio },
+			{ breakpoint: breakpoints.wide, width: 1900, aspectRatio },
 		];
 	}
 	if (isMainMedia) {
@@ -115,13 +153,29 @@ const decideImageWidths = ({
 				// If display is Immersive then main media should *always*
 				// use these larger image sources
 				return [
-					{ breakpoint: breakpoints.mobile, width: 480 },
-					{ breakpoint: breakpoints.mobileLandscape, width: 660 },
-					{ breakpoint: breakpoints.phablet, width: 740 },
-					{ breakpoint: breakpoints.tablet, width: 980 },
-					{ breakpoint: breakpoints.desktop, width: 1140 },
-					{ breakpoint: breakpoints.leftCol, width: 1300 },
-					{ breakpoint: breakpoints.wide, width: 1900 },
+					{ breakpoint: breakpoints.mobile, width: 480, aspectRatio },
+					{
+						breakpoint: breakpoints.mobileLandscape,
+						width: 660,
+						aspectRatio,
+					},
+					{
+						breakpoint: breakpoints.phablet,
+						width: 740,
+						aspectRatio,
+					},
+					{ breakpoint: breakpoints.tablet, width: 980, aspectRatio },
+					{
+						breakpoint: breakpoints.desktop,
+						width: 1140,
+						aspectRatio,
+					},
+					{
+						breakpoint: breakpoints.leftCol,
+						width: 1300,
+						aspectRatio,
+					},
+					{ breakpoint: breakpoints.wide, width: 1900, aspectRatio },
 				];
 			}
 			case ArticleDisplay.Showcase:
@@ -130,32 +184,96 @@ const decideImageWidths = ({
 					// The main image on feature articles gets larger sources when showcase
 					// e.g.: http://www.theguardian.com/politics/2015/may/02/nicola-sturgeon-im-the-boss-now
 					return [
-						{ breakpoint: breakpoints.mobile, width: 465 },
-						{ breakpoint: breakpoints.mobileLandscape, width: 645 },
-						{ breakpoint: breakpoints.phablet, width: 725 },
-						{ breakpoint: breakpoints.tablet, width: 965 },
-						{ breakpoint: breakpoints.desktop, width: 1125 },
-						{ breakpoint: breakpoints.leftCol, width: 1140 },
-						{ breakpoint: breakpoints.wide, width: 1300 },
+						{
+							breakpoint: breakpoints.mobile,
+							width: 465,
+							aspectRatio,
+						},
+						{
+							breakpoint: breakpoints.mobileLandscape,
+							width: 645,
+							aspectRatio,
+						},
+						{
+							breakpoint: breakpoints.phablet,
+							width: 725,
+							aspectRatio,
+						},
+						{
+							breakpoint: breakpoints.tablet,
+							width: 965,
+							aspectRatio,
+						},
+						{
+							breakpoint: breakpoints.desktop,
+							width: 1125,
+							aspectRatio,
+						},
+						{
+							breakpoint: breakpoints.leftCol,
+							width: 1140,
+							aspectRatio,
+						},
+						{
+							breakpoint: breakpoints.wide,
+							width: 1300,
+							aspectRatio,
+						},
 					];
 				} else {
 					return [
-						{ breakpoint: breakpoints.mobile, width: 465 },
-						{ breakpoint: breakpoints.mobileLandscape, width: 645 },
-						{ breakpoint: breakpoints.phablet, width: 660 },
-						{ breakpoint: breakpoints.tablet, width: 700 }, // desktop is also 700px
-						{ breakpoint: breakpoints.leftCol, width: 940 },
-						{ breakpoint: breakpoints.wide, width: 1020 },
+						{
+							breakpoint: breakpoints.mobile,
+							width: 465,
+							aspectRatio,
+						},
+						{
+							breakpoint: breakpoints.mobileLandscape,
+							width: 645,
+							aspectRatio,
+						},
+						{
+							breakpoint: breakpoints.phablet,
+							width: 660,
+							aspectRatio,
+						},
+						{
+							breakpoint: breakpoints.tablet,
+							width: 700,
+							aspectRatio,
+						}, // desktop is also 700px
+						{
+							breakpoint: breakpoints.leftCol,
+							width: 940,
+							aspectRatio,
+						},
+						{
+							breakpoint: breakpoints.wide,
+							width: 1020,
+							aspectRatio,
+						},
 					];
 				}
 			}
 			default:
 				return [
-					{ breakpoint: breakpoints.mobile, width: 465 },
-					{ breakpoint: breakpoints.mobileLandscape, width: 645 },
-					{ breakpoint: breakpoints.phablet, width: 620 },
-					{ breakpoint: breakpoints.tablet, width: 700 },
-					{ breakpoint: breakpoints.desktop, width: 620 },
+					{ breakpoint: breakpoints.mobile, width: 465, aspectRatio },
+					{
+						breakpoint: breakpoints.mobileLandscape,
+						width: 645,
+						aspectRatio,
+					},
+					{
+						breakpoint: breakpoints.phablet,
+						width: 620,
+						aspectRatio,
+					},
+					{ breakpoint: breakpoints.tablet, width: 700, aspectRatio },
+					{
+						breakpoint: breakpoints.desktop,
+						width: 620,
+						aspectRatio,
+					},
 				];
 		}
 	} else if (
@@ -165,68 +283,128 @@ const decideImageWidths = ({
 		switch (role) {
 			case 'thumbnail':
 				return [
-					{ breakpoint: breakpoints.mobile, width: 120 }, // mobileLandscape and tablet are also 120px
-					{ breakpoint: breakpoints.tablet, width: 140 }, // desktop, leftCol and wide are also 140px
+					{ breakpoint: breakpoints.mobile, width: 120, aspectRatio }, // mobileLandscape and tablet are also 120px
+					{ breakpoint: breakpoints.tablet, width: 140, aspectRatio }, // desktop, leftCol and wide are also 140px
 				];
 			case 'showcase':
 			case 'immersive':
 			case 'supporting':
 			case 'halfWidth':
-				return [{ breakpoint: breakpoints.mobile, width: 445 }];
+				return [
+					{ breakpoint: breakpoints.mobile, width: 445, aspectRatio },
+				];
 			case 'podcastCover':
 				return [
-					{ breakpoint: breakpoints.mobile, width: 140 },
-					{ breakpoint: breakpoints.wide, width: 219 },
+					{ breakpoint: breakpoints.mobile, width: 140, aspectRatio },
+					{ breakpoint: breakpoints.wide, width: 219, aspectRatio },
 				];
 			case 'inline':
 			default:
 				return [
-					{ breakpoint: breakpoints.mobile, width: 465 },
-					{ breakpoint: breakpoints.phablet, width: 700 },
+					{ breakpoint: breakpoints.mobile, width: 465, aspectRatio },
+					{
+						breakpoint: breakpoints.phablet,
+						width: 700,
+						aspectRatio,
+					},
 				];
 		}
 	} else {
 		switch (role) {
 			case 'showcase':
 				return [
-					{ breakpoint: breakpoints.mobile, width: 445 },
-					{ breakpoint: breakpoints.mobileLandscape, width: 605 },
-					{ breakpoint: breakpoints.phablet, width: 620 }, // tablet is also 620px
-					{ breakpoint: breakpoints.desktop, width: 640 },
-					{ breakpoint: breakpoints.leftCol, width: 800 },
-					{ breakpoint: breakpoints.wide, width: 880 },
+					{ breakpoint: breakpoints.mobile, width: 445, aspectRatio },
+					{
+						breakpoint: breakpoints.mobileLandscape,
+						width: 605,
+						aspectRatio,
+					},
+					{
+						breakpoint: breakpoints.phablet,
+						width: 620,
+						aspectRatio,
+					}, // tablet is also 620px
+					{
+						breakpoint: breakpoints.desktop,
+						width: 640,
+						aspectRatio,
+					},
+					{
+						breakpoint: breakpoints.leftCol,
+						width: 800,
+						aspectRatio,
+					},
+					{ breakpoint: breakpoints.wide, width: 880, aspectRatio },
 				];
 			case 'supporting':
 				return [
-					{ breakpoint: breakpoints.mobile, width: 445 },
-					{ breakpoint: breakpoints.mobileLandscape, width: 605 },
-					{ breakpoint: breakpoints.phablet, width: 620 }, // tablet is also 620px
-					{ breakpoint: breakpoints.desktop, width: 300 }, // leftCol is also 300px
-					{ breakpoint: breakpoints.wide, width: 380 },
+					{ breakpoint: breakpoints.mobile, width: 445, aspectRatio },
+					{
+						breakpoint: breakpoints.mobileLandscape,
+						width: 605,
+						aspectRatio,
+					},
+					{
+						breakpoint: breakpoints.phablet,
+						width: 620,
+						aspectRatio,
+					}, // tablet is also 620px
+					{
+						breakpoint: breakpoints.desktop,
+						width: 300,
+						aspectRatio,
+					}, // leftCol is also 300px
+					{ breakpoint: breakpoints.wide, width: 380, aspectRatio },
 				];
 			case 'thumbnail':
 				return [
-					{ breakpoint: breakpoints.mobile, width: 120 }, // mobileLandscape and tablet are also 120px
-					{ breakpoint: breakpoints.tablet, width: 140 }, // desktop, leftCol and wide are also 140px
+					{ breakpoint: breakpoints.mobile, width: 120, aspectRatio }, // mobileLandscape and tablet are also 120px
+					{ breakpoint: breakpoints.tablet, width: 140, aspectRatio }, // desktop, leftCol and wide are also 140px
 				];
 			case 'immersive':
 				return [
-					{ breakpoint: breakpoints.mobile, width: 465 },
-					{ breakpoint: breakpoints.mobileLandscape, width: 645 },
-					{ breakpoint: breakpoints.phablet, width: 725 },
-					{ breakpoint: breakpoints.tablet, width: 965 },
-					{ breakpoint: breakpoints.desktop, width: 1125 },
-					{ breakpoint: breakpoints.leftCol, width: 1140 },
-					{ breakpoint: breakpoints.wide, width: 1300 },
+					{ breakpoint: breakpoints.mobile, width: 465, aspectRatio },
+					{
+						breakpoint: breakpoints.mobileLandscape,
+						width: 645,
+						aspectRatio,
+					},
+					{
+						breakpoint: breakpoints.phablet,
+						width: 725,
+						aspectRatio,
+					},
+					{ breakpoint: breakpoints.tablet, width: 965, aspectRatio },
+					{
+						breakpoint: breakpoints.desktop,
+						width: 1125,
+						aspectRatio,
+					},
+					{
+						breakpoint: breakpoints.leftCol,
+						width: 1140,
+						aspectRatio,
+					},
+					{ breakpoint: breakpoints.wide, width: 1300, aspectRatio },
 				];
 			case 'halfWidth':
-				return [{ breakpoint: breakpoints.mobile, width: 445 }];
+				return [
+					{ breakpoint: breakpoints.mobile, width: 445, aspectRatio },
+				];
 			case 'inline':
 			default:
 				return [
-					{ breakpoint: breakpoints.mobile, width: 445 },
-					{ breakpoint: breakpoints.mobileLandscape, width: 605 },
-					{ breakpoint: breakpoints.phablet, width: 620 },
+					{ breakpoint: breakpoints.mobile, width: 445, aspectRatio },
+					{
+						breakpoint: breakpoints.mobileLandscape,
+						width: 605,
+						aspectRatio,
+					},
+					{
+						breakpoint: breakpoints.phablet,
+						width: 620,
+						aspectRatio,
+					},
 				];
 		}
 	}
@@ -272,12 +450,11 @@ type ImageSource = {
 export const generateSources = (
 	mainImage: string,
 	imageWidths: readonly [ImageWidthType, ...ImageWidthType[]],
-	aspectRatio?: string,
 ): ImageSource[] =>
 	imageWidths
 		.slice()
 		.sort(descendingByBreakpoint)
-		.map(({ width: imageWidth, breakpoint }) => {
+		.map(({ width: imageWidth, breakpoint, aspectRatio }) => {
 			return {
 				breakpoint,
 				width: imageWidth,
@@ -369,8 +546,8 @@ export const Picture = ({
 			isMainMedia,
 			isLightbox,
 			orientation,
+			aspectRatio,
 		}),
-		aspectRatio,
 	);
 
 	/** portrait if higher than 1 or landscape if lower than 1 */
