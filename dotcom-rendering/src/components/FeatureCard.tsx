@@ -211,8 +211,10 @@ export type Props = {
 	discussionApiUrl: string;
 	discussionId?: string;
 	isExternalLink: boolean;
-	/** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
+	/** Alows the consumer to set an aspect ratio on the image */
 	aspectRatio?: AspectRatio;
+	/** Alows the consumer to set an aspect ratio on the image specifically on mobile breakpoints */
+	mobileAspectRatio?: AspectRatio;
 	showQuotes?: boolean;
 	/**
 	 * Youtube video requires a unique ID. We append the collectionId to the youtube asset ID, to allow
@@ -256,6 +258,7 @@ export const FeatureCard = ({
 	isExternalLink,
 	absoluteServerTimes,
 	aspectRatio,
+	mobileAspectRatio,
 	starRating,
 	showQuotes,
 	collectionId,
@@ -382,6 +385,9 @@ export const FeatureCard = ({
 											loading={imageLoading}
 											roundedCorners={false}
 											aspectRatio={aspectRatio}
+											mobileAspectRatio={
+												mobileAspectRatio
+											}
 										/>
 									</div>
 								)}
