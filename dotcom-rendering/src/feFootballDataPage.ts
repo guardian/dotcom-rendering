@@ -38,6 +38,11 @@ export type FEMatchDayTeam = {
 	scorers?: string;
 };
 
+type Official = {
+	id: string;
+	name: string;
+};
+
 type FEFootballMatchData = {
 	id: string;
 	date: string;
@@ -54,7 +59,7 @@ export type FELive = FEFootballMatchData & {
 	type: 'LiveMatch';
 	status: string;
 	attendance?: string;
-	referee?: string;
+	referee?: Official;
 };
 
 export type FEFixture = FEFootballMatchData & {
@@ -71,7 +76,7 @@ export type FEMatchDay = FEFootballMatchData & {
 	lineupsAvailable: boolean;
 	matchStatus: string;
 	attendance?: string;
-	referee?: string;
+	referee?: Official;
 	competition?: FEMatchCompetition;
 };
 
@@ -79,7 +84,7 @@ export type FEResult = FEFootballMatchData & {
 	type: 'Result';
 	reportAvailable: boolean;
 	attendance?: string;
-	referee?: string;
+	referee?: Official;
 };
 
 export type FEFootballMatch = FEFixture | FEMatchDay | FEResult | FELive;
@@ -94,7 +99,7 @@ export type FEMatchByDateAndCompetition = {
 	competitionMatches: FECompetitionMatch[];
 };
 
-type FEFootballPageConfig = Omit<
+export type FEFootballPageConfig = Omit<
 	FEFrontConfigType,
 	'keywordIds' | 'keywords' | 'isFront'
 > & {
@@ -102,10 +107,16 @@ type FEFootballPageConfig = Omit<
 	hasSurveyAd: boolean;
 };
 
+export type FEFootballCompetition = {
+	name: string;
+	url: string;
+};
+
 export type FEFootballDataPage = {
 	matchesList: FEMatchByDateAndCompetition[];
 	nextPage?: string;
 	previousPage?: string;
+	filters: Record<string, FEFootballCompetition[]>;
 	nav: FENavType;
 	editionId: EditionId;
 	guardianBaseURL: string;

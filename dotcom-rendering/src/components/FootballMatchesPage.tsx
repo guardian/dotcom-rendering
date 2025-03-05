@@ -1,17 +1,20 @@
 import { css } from '@emotion/react';
 import { from, headlineBold20, space } from '@guardian/source/foundations';
-import type { FootballMatches, FootballMatchKind } from '../footballMatches';
+import type {
+	FootballMatches,
+	FootballMatchKind,
+	Regions,
+} from '../footballMatches';
 import { grid } from '../grid';
 import type { EditionId } from '../lib/edition';
 import type { Result } from '../lib/result';
 import { palette } from '../palette';
 import { AdSlot } from './AdSlot.web';
-import type { Nations } from './FootballCompetitionSelect';
 import { FootballCompetitionSelect } from './FootballCompetitionSelect';
 import { FootballMatchList } from './FootballMatchList';
 
 type Props = {
-	nations: Nations;
+	regions: Regions;
 	guardianBaseUrl: string;
 	kind: FootballMatchKind;
 	initialDays: FootballMatches;
@@ -37,7 +40,7 @@ const createTitle = (kind: FootballMatchKind, edition: EditionId) => {
 };
 
 export const FootballMatchesPage = ({
-	nations,
+	regions: nations,
 	guardianBaseUrl,
 	kind,
 	initialDays,
@@ -82,21 +85,19 @@ export const FootballMatchesPage = ({
 			>
 				{createTitle(kind, edition)}
 			</h1>
-			{kind !== 'Live' && (
-				<div
-					css={css`
-						margin-top: ${space[3]}px;
-						margin-bottom: ${space[6]}px;
-						${grid.column.centre}
-					`}
-				>
-					<FootballCompetitionSelect
-						nations={nations}
-						kind={kind}
-						onChange={goToCompetitionSpecificPage}
-					/>
-				</div>
-			)}
+			<div
+				css={css`
+					margin-top: ${space[3]}px;
+					margin-bottom: ${space[6]}px;
+					${grid.column.centre}
+				`}
+			>
+				<FootballCompetitionSelect
+					nations={nations}
+					kind={kind}
+					onChange={goToCompetitionSpecificPage}
+				/>
+			</div>
 			{renderAds && <AdSlot position="right-football" />}
 		</div>
 		<FootballMatchList

@@ -12,7 +12,7 @@ import type {
 	FEMatchDay,
 	FEResult,
 } from './feFootballDataPage';
-import { parse } from './footballMatches';
+import { parse, parseMatchResult } from './footballMatches';
 import { errorOrThrow, okOrThrow } from './lib/result';
 
 const withMatches = (
@@ -36,13 +36,13 @@ describe('footballMatches', () => {
 		expect(result.length).toBe(1);
 
 		const day = result[0];
-		expect(day?.date.toISOString()).toBe('2025-02-14T00:00:00.000Z');
-		expect(day?.competitions.length).toBe(6);
+		expect(day?.date.toISOString()).toBe('2025-03-03T00:00:00.000Z');
+		expect(day?.competitions.length).toBe(3);
 
 		const competition = day?.competitions[0];
-		expect(competition?.name).toBe('Premier League');
+		expect(competition?.name).toBe('Serie A');
 		expect(competition?.matches[0]?.kind).toBe('Fixture');
-		expect(competition?.tag).toBe('football/premierleague');
+		expect(competition?.tag).toBe('football/serieafootball');
 	});
 
 	it('should return an error when football days have invalid dates', () => {
@@ -169,5 +169,32 @@ describe('footballMatches', () => {
 		);
 
 		expect(result.kind).toBe('UnexpectedLiveMatch');
+	});
+	it('should return a clean team name', () => {
+		const matchesListWithTeamName = (teamName: string): FEResult => {
+			return {
+				...matchResult,
+				homeTeam: {
+					...matchResult.homeTeam,
+					name: teamName,
+				},
+			};
+		};
+
+		const uncleanToCleanNames: Record<string, string> = {
+			Ladies: '',
+			Holland: 'The Netherlands',
+			'Union Saint Gilloise': 'Union Saint-Gilloise',
+		};
+
+		for (const [uncleanName, cleanName] of Object.entries(
+			uncleanToCleanNames,
+		)) {
+			const match = okOrThrow(
+				parseMatchResult(matchesListWithTeamName(uncleanName)),
+				'Expected football match parsing to succeed',
+			);
+			expect(match.homeTeam.name).toBe(cleanName);
+		}
 	});
 });

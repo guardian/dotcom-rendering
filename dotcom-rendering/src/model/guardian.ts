@@ -92,7 +92,7 @@ export const createGuardian = ({
 	revisionNumber: string;
 	sentryPublicApiKey: string;
 	sentryHost: string;
-	keywordIds: string;
+	keywordIds?: string;
 	dfpAccountId: string;
 	adUnit: string;
 	ajaxUrl: string;
@@ -132,7 +132,7 @@ export const createGuardian = ({
 					'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 				sentryPublicApiKey,
 				sentryHost,
-				keywordIds,
+				keywordIds: keywordIds ?? '',
 				dfpAccountId,
 				adUnit,
 				showRelatedContent: true,

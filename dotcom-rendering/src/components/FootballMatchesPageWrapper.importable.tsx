@@ -1,30 +1,19 @@
-import type { FootballMatches, FootballMatchKind } from '../footballMatches';
+import type {
+	FootballMatches,
+	FootballMatchKind,
+	Regions,
+} from '../footballMatches';
 import type { EditionId } from '../lib/edition';
-import type { Nations } from './FootballCompetitionSelect';
 import { FootballMatchesPage } from './FootballMatchesPage';
 
-const getPagePath = (kind: FootballMatchKind) => {
-	switch (kind) {
-		case 'Fixture':
-			return 'fixtures';
-		case 'Live':
-			return 'live';
-		case 'Result':
-			return 'results';
-	}
-};
-
 const goToCompetitionSpecificPage =
-	(guardianBaseUrl: string, kind: FootballMatchKind) => (tag: string) => {
-		const url =
-			tag === 'All'
-				? `${guardianBaseUrl}/football/${getPagePath(kind)}`
-				: `${guardianBaseUrl}/${tag}/${getPagePath(kind)}`;
+	(guardianBaseUrl: string) => (path: string) => {
+		const url = `${guardianBaseUrl}/${path}`;
 		window.location.assign(url);
 	};
 
 type Props = {
-	nations: Nations;
+	nations: Regions;
 	guardianBaseUrl: string;
 	kind: FootballMatchKind;
 	initialDays: FootballMatches;
@@ -41,14 +30,13 @@ export const FootballMatchesPageWrapper = ({
 	renderAds,
 }: Props) => (
 	<FootballMatchesPage
-		nations={nations}
+		regions={nations}
 		guardianBaseUrl={guardianBaseUrl}
 		kind={kind}
 		initialDays={initialDays}
 		edition={edition}
 		goToCompetitionSpecificPage={goToCompetitionSpecificPage(
 			guardianBaseUrl,
-			kind,
 		)}
 		renderAds={renderAds}
 	/>
