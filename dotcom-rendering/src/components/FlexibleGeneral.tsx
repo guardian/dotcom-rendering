@@ -231,7 +231,6 @@ export const SplashCardLayout = ({
 						imageSize="feature-immersive"
 						headlineSizes={{ desktop: 'small' }}
 						supportingContent={card.supportingContent}
-						isImmersive={true}
 					/>
 				</LI>
 			</UL>
