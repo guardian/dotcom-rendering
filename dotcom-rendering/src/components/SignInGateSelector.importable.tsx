@@ -15,6 +15,7 @@ import { useOnce } from '../lib/useOnce';
 import { usePageViewId } from '../lib/usePageViewId';
 import { useSignInGateSelector } from '../lib/useSignInGateSelector';
 import type { Switches } from '../types/config';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';
@@ -453,6 +454,8 @@ interface ShowSignInGateAuxiaProps {
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
 	contributionsServiceUrl: string;
 	browserId: string | undefined;
+	treatmentId: string;
+	renderingTarget: RenderingTarget;
 	logTreatmentInteractionCall: (
 		interactionType: AuxiaInteractionInteractionType,
 		actionName: AuxiaInteractionActionName,
@@ -588,6 +591,20 @@ const auxiaLogTreatmentInteraction = async (
 	await fetch(url, params);
 };
 
+const buildAbTestTrackingAuxiaVariant = (
+	treatmentId: string,
+): {
+	name: string;
+	variant: string;
+	id: string;
+} => {
+	return {
+		name: 'AuxiaSignInGate',
+		variant: treatmentId,
+		id: treatmentId,
+	};
+};
+
 const SignInGateSelectorAuxia = ({
 	host = 'https://theguardian.com/',
 	pageId,
@@ -599,20 +616,6 @@ const SignInGateSelectorAuxia = ({
 		comment group: auxia-prototype-e55a86ef
 		This function if the Auxia prototype for the SignInGateSelector component.
 	*/
-
-	const buildAbTestTrackingAuxiaVariant = (
-		treatmentId: string,
-	): {
-		name: string;
-		variant: string;
-		id: string;
-	} => {
-		return {
-			name: 'AuxiaSignInGate',
-			variant: treatmentId,
-			id: treatmentId,
-		};
-	};
 
 	const authStatus = useAuthStatus();
 
@@ -653,27 +656,14 @@ const SignInGateSelectorAuxia = ({
 
 	useOnce(() => {
 		void (async () => {
-			const data = await buildAuxiaGateDisplayData(
-				contributionsServiceUrl,
-				pageId,
-				editionId,
-			);
-			if (data !== undefined) {
-				setAuxiaGateDisplayData(data);
-				if (data.auxiaData.userTreatment !== undefined) {
-					await submitComponentEventTracking(
-						{
-							component: {
-								componentType: 'SIGN_IN_GATE',
-								id: data.auxiaData.userTreatment.treatmentId,
-							},
-							action: 'VIEW',
-							abTest: buildAbTestTrackingAuxiaVariant(
-								data.auxiaData.userTreatment.treatmentId,
-							),
-						},
-						renderingTarget,
-					);
+			if (!isSignedIn) {
+				const data = await buildAuxiaGateDisplayData(
+					contributionsServiceUrl,
+					pageId,
+					editionId,
+				);
+				if (data !== undefined) {
+					setAuxiaGateDisplayData(data);
 				}
 			}
 		})().catch((error) => {
@@ -714,6 +704,11 @@ const SignInGateSelectorAuxia = ({
 						}
 						contributionsServiceUrl={contributionsServiceUrl}
 						browserId={auxiaGateDisplayData.browserId}
+						treatmentId={
+							auxiaGateDisplayData.auxiaData.userTreatment
+								.treatmentId
+						}
+						renderingTarget={renderingTarget}
 						logTreatmentInteractionCall={async (
 							interactionType: AuxiaInteractionInteractionType,
 							actionName: AuxiaInteractionActionName,
@@ -740,6 +735,8 @@ const ShowSignInGateAuxia = ({
 	userTreatment,
 	contributionsServiceUrl,
 	browserId,
+	treatmentId,
+	renderingTarget,
 	logTreatmentInteractionCall,
 }: ShowSignInGateAuxiaProps) => {
 	const componentId = 'main_variant_5';
@@ -754,6 +751,17 @@ const ShowSignInGateAuxia = ({
 				'VIEWED',
 				'',
 				browserId,
+			);
+			await submitComponentEventTracking(
+				{
+					component: {
+						componentType: 'SIGN_IN_GATE',
+						id: treatmentId,
+					},
+					action: 'VIEW',
+					abTest: buildAbTestTrackingAuxiaVariant(treatmentId),
+				},
+				renderingTarget,
 			);
 		})().catch((error) => {
 			console.error('Failed to log treatment interaction:', error);
