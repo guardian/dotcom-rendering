@@ -10,7 +10,7 @@ import {
 	reportAbuse,
 	unPickComment,
 } from '../lib/discussionApi';
-import type { SignedInWithCookies, SignedInWithOkta } from '../lib/identity';
+import type { SignedInWithOkta } from '../lib/identity';
 import { getOptionsHeadersWithOkta } from '../lib/identity';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useHydrated } from '../lib/useHydrated';
@@ -23,7 +23,7 @@ const getUser = async ({
 	authStatus,
 }: {
 	discussionApiUrl: string;
-	authStatus: SignedInWithCookies | SignedInWithOkta;
+	authStatus: SignedInWithOkta;
 }): Promise<SignedInUser | undefined> => {
 	const data: unknown = await fetch(
 		joinUrl(discussionApiUrl, 'profile/me?strict_sanctions_check=false'),
@@ -94,7 +94,6 @@ export const DiscussionWeb = (
 
 	useEffect(() => {
 		if (authStatus.kind === 'Pending') return;
-		if (authStatus.kind === 'SignedOutWithCookies') return;
 		if (authStatus.kind === 'SignedOutWithOkta') return;
 
 		getUser({ discussionApiUrl: props.discussionApiUrl, authStatus })

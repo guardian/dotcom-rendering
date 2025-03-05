@@ -134,10 +134,7 @@ const BrazeBannerWithSatisfiedDependencies = ({
 	if (!componentName) return null;
 
 	const subscribeToNewsletter = async (newsletterId: string) => {
-		if (
-			authStatus.kind == 'SignedInWithCookies' ||
-			authStatus.kind == 'SignedInWithOkta'
-		) {
+		if (authStatus.kind == 'SignedInWithOkta') {
 			const options = getOptionsHeadersWithOkta(authStatus);
 
 			await fetch(`${idApiUrl}/users/me/newsletters`, {
@@ -152,7 +149,7 @@ const BrazeBannerWithSatisfiedDependencies = ({
 	};
 
 	const fetchEmail: () => Promise<string | null> =
-		lazyFetchEmailWithTimeout(idApiUrl);
+		lazyFetchEmailWithTimeout();
 
 	return (
 		<div css={containerStyles}>

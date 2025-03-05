@@ -32,10 +32,7 @@ const refresh = async (): Promise<void> => {
 
 const requestNewData = async () => {
 	const authStatus = await getAuthStatus();
-	if (
-		authStatus.kind !== 'SignedInWithCookies' &&
-		authStatus.kind !== 'SignedInWithOkta'
-	) {
+	if (authStatus.kind !== 'SignedInWithOkta') {
 		return Promise.reject('The user is not signed in');
 	}
 	return syncDataFromUserBenefitsApi(authStatus).then(persistResponse);

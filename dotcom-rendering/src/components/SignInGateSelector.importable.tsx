@@ -231,9 +231,7 @@ const SignInGateSelectorDefault = ({
 	switches,
 }: PropsDefault) => {
 	const authStatus = useAuthStatus();
-	const isSignedIn =
-		authStatus.kind === 'SignedInWithOkta' ||
-		authStatus.kind === 'SignedInWithCookies';
+	const isSignedIn = authStatus.kind === 'SignedInWithOkta';
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
 	);
@@ -619,9 +617,7 @@ const SignInGateSelectorAuxia = ({
 
 	const authStatus = useAuthStatus();
 
-	const isSignedIn =
-		authStatus.kind === 'SignedInWithOkta' ||
-		authStatus.kind === 'SignedInWithCookies';
+	const isSignedIn = authStatus.kind === 'SignedInWithOkta';
 
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,

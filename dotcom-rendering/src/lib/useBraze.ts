@@ -28,9 +28,7 @@ export const useBraze = (
 	brazeCards: BrazeCardsInterface | undefined;
 } => {
 	const authStatus = useAuthStatus();
-	const isSignedIn =
-		authStatus.kind === 'SignedInWithOkta' ||
-		authStatus.kind === 'SignedInWithCookies';
+	const isSignedIn = authStatus.kind === 'SignedInWithOkta';
 
 	const { data, error } = useSWRImmutable(
 		authStatus.kind !== 'Pending' ? 'braze-message' : null,
