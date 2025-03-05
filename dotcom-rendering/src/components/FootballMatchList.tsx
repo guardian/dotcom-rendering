@@ -192,7 +192,8 @@ const MatchStatus = ({
 };
 
 export const shouldRenderMatchLink = (matchDateTime: Date, now: Date) =>
-	matchDateTime.getTime() - now.getTime() <= 72 * 60 * 60 * 1000;
+	maybeDeserializeDateString(matchDateTime).getTime() - now.getTime() <=
+	72 * 60 * 60 * 1000;
 
 const matchListItemStyles = css`
 	background-color: ${palette('--football-match-list-background')};
@@ -381,6 +382,19 @@ const Scores = ({
 		</span>
 	</span>
 );
+
+/*
+	This component is used in an Island - and because part of the props are Date objects
+	they will be serialized into strings. This converts them back into a Date before using
+	Date functions
+*/
+const maybeDeserializeDateString = (date: Date): Date => {
+	if (typeof date === 'string') {
+		return new Date(date);
+	}
+
+	return date;
+};
 
 export const FootballMatchList = ({
 	edition,
