@@ -78,23 +78,45 @@ const decideImageWidths = (
 
 		case 'jumbo':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 360 },
-				{ breakpoint: breakpoints.mobileLandscape, width: 480 },
-				{ breakpoint: breakpoints.tablet, width: 680 },
-				{ breakpoint: breakpoints.desktop, width: 940 },
+				{ breakpoint: breakpoints.mobile, width: 360, aspectRatio },
+				{
+					breakpoint: breakpoints.mobileLandscape,
+					width: 480,
+					aspectRatio,
+				},
+				{ breakpoint: breakpoints.tablet, width: 680, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 940, aspectRatio },
 			];
 
 		case 'feature':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 325 },
-				{ breakpoint: breakpoints.tablet, width: 220 },
-				{ breakpoint: breakpoints.desktop, width: 300 },
+				{ breakpoint: breakpoints.mobile, width: 325, aspectRatio },
+				{ breakpoint: breakpoints.tablet, width: 220, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 300, aspectRatio },
 			];
 		case 'feature-large':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 325 },
-				{ breakpoint: breakpoints.tablet, width: 337 },
-				{ breakpoint: breakpoints.desktop, width: 460 },
+				{ breakpoint: breakpoints.mobile, width: 325, aspectRatio },
+				{ breakpoint: breakpoints.tablet, width: 337, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 460, aspectRatio },
+			];
+		case 'feature-immersive':
+			return [
+				{
+					breakpoint: breakpoints.mobile,
+					width: 340,
+					aspectRatio: '4:5',
+				},
+				{
+					breakpoint: breakpoints.tablet,
+					width: 700,
+					aspectRatio: '5:3',
+				},
+				{
+					breakpoint: breakpoints.desktop,
+					width: 940,
+					aspectRatio: '5:3',
+				},
 			];
 	}
 };
