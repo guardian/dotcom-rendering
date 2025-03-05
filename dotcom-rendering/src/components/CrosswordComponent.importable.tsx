@@ -55,13 +55,13 @@ const Layout: CrosswordProps['Layout'] = ({
 	MobileBannerAd,
 }) => {
 	const cluesRef = useRef<HTMLDivElement>(null);
-	const [showGradient, setShowGradient] = useState(true);
+	const [showGradient, setShowGradient] = useState(false);
 
 	const betweenTabletAndLeftCol = useMatchMedia(
 		removeMediaRulePrefix(between.tablet.and.leftCol),
 	);
 
-	const updateGradientVisibilityOnScroll = () => {
+	const updateGradientVisibility = () => {
 		const clueList = cluesRef.current;
 		if (!clueList) return;
 		const scrollPos = clueList.scrollTop;
@@ -73,15 +73,25 @@ const Layout: CrosswordProps['Layout'] = ({
 		const clueList = cluesRef.current;
 		if (!clueList) return;
 
+		updateGradientVisibility();
+
 		clueList.addEventListener(
 			'scroll',
-			libDebounce(updateGradientVisibilityOnScroll, 100),
+			libDebounce(updateGradientVisibility, 100),
+		);
+		window.addEventListener(
+			'resize',
+			libDebounce(updateGradientVisibility, 100),
 		);
 
 		return () => {
 			clueList.removeEventListener(
 				'scroll',
-				libDebounce(updateGradientVisibilityOnScroll, 100),
+				libDebounce(updateGradientVisibility, 100),
+			);
+			window.removeEventListener(
+				'resize',
+				libDebounce(updateGradientVisibility, 100),
 			);
 		};
 	}, []);
