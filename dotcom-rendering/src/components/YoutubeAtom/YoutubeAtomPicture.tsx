@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
 import { getSourceImageUrl } from '../../lib/getSourceImageUrl_temp_fix';
+import { AspectRatio } from '../../types/front';
 import { generateSources, getFallbackSource, Sources } from '../Picture';
 
 type Props = {
@@ -8,7 +9,7 @@ type Props = {
 	alt: string;
 	height: number;
 	width: number;
-	aspectRatio?: string;
+	aspectRatio?: AspectRatio;
 };
 
 export const YoutubeAtomPicture = ({
@@ -18,17 +19,13 @@ export const YoutubeAtomPicture = ({
 	width,
 	aspectRatio,
 }: Props) => {
-	const sources = generateSources(
-		getSourceImageUrl(image),
-		[
-			{ breakpoint: breakpoints.mobile, width: 465 },
-			{ breakpoint: breakpoints.mobileLandscape, width: 645 },
-			{ breakpoint: breakpoints.phablet, width: 620 },
-			{ breakpoint: breakpoints.tablet, width: 700 },
-			{ breakpoint: breakpoints.desktop, width: 620 },
-		],
-		aspectRatio,
-	);
+	const sources = generateSources(getSourceImageUrl(image), [
+		{ breakpoint: breakpoints.mobile, width: 465, aspectRatio },
+		{ breakpoint: breakpoints.mobileLandscape, width: 645, aspectRatio },
+		{ breakpoint: breakpoints.phablet, width: 620, aspectRatio },
+		{ breakpoint: breakpoints.tablet, width: 700, aspectRatio },
+		{ breakpoint: breakpoints.desktop, width: 620, aspectRatio },
+	]);
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
