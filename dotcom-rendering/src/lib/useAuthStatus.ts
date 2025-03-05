@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { AuthStatus } from './identity';
-import {
-	eitherInOktaTestOrElse,
-	getSignedInStatusWithCookies,
-	getSignedInStatusWithOkta,
-} from './identity';
+import { getAuthState, getSignedInStatusWithOkta } from './identity';
 
 export type AuthStatusOrPending = AuthStatus | { kind: 'Pending' };
 
@@ -18,10 +14,8 @@ export const useIsSignedIn = (): boolean | 'Pending' => {
 	switch (authStatus.kind) {
 		case 'Pending':
 			return 'Pending';
-		case 'SignedInWithCookies':
 		case 'SignedInWithOkta':
 			return true;
-		case 'SignedOutWithCookies':
 		case 'SignedOutWithOkta':
 			return false;
 	}
@@ -33,15 +27,13 @@ export const useAuthStatus = (): AuthStatusOrPending => {
 	});
 
 	useEffect(() => {
-		eitherInOktaTestOrElse(
-			(oktaAuthState) => {
+		void getAuthState()
+			.then((oktaAuthState) => {
 				setAuthStatus(getSignedInStatusWithOkta(oktaAuthState));
-			},
-			() => setAuthStatus(getSignedInStatusWithCookies()),
-		).catch((error) => {
-			console.error(error);
-		});
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 	}, []);
-
 	return authStatus;
 };
