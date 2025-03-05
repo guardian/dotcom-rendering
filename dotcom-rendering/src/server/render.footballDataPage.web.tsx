@@ -44,9 +44,6 @@ const decideTitle = (
 
 	const footballTitle = '| Football | The Guardian';
 
-	console.log('competitionName:', competitionName);
-	console.log(pageId);
-
 	switch (kind) {
 		case 'Live':
 			return `${
