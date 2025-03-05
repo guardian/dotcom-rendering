@@ -679,11 +679,16 @@ export const Card = ({
 	 * - Returns `null` if `supportingContent` is unavailable or `sublinkPosition` is `none`.
 	 * - Renders `SupportingContent` for all breakpoints if `sublinkPosition` is `outer`.
 	 * - If `sublinkPosition` is `inner`, hides `SupportingContent` from tablet but displays it on smaller breakpoints.
-	 *
 	 */
 	const decideOuterSublinks = () => {
 		if (!hasSublinks) return null;
 		if (sublinkPosition === 'none') return null;
+
+		const fillBackgroundOnMobile =
+			!!isFlexSplash ||
+			(isBetaContainer &&
+				imagePositionOnMobile === 'bottom' &&
+				media?.type !== 'avatar');
 
 		const OuterSublinks = () => (
 			<SupportingContent
@@ -691,10 +696,7 @@ export const Card = ({
 				containerPalette={containerPalette}
 				alignment={supportingContentAlignment}
 				isDynamo={isDynamo}
-				fillBackgroundOnMobile={
-					!!isFlexSplash ||
-					(isBetaContainer && imagePositionOnMobile === 'bottom')
-				}
+				fillBackgroundOnMobile={fillBackgroundOnMobile}
 			/>
 		);
 
