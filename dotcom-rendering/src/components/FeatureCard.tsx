@@ -401,6 +401,9 @@ export const FeatureCard = ({
 											loading={imageLoading}
 											roundedCorners={false}
 											aspectRatio={aspectRatio}
+											mobileAspectRatio={
+												mobileAspectRatio
+											}
 										/>
 										{isVideoMainMedia &&
 											mainMedia.duration > 0 && (
