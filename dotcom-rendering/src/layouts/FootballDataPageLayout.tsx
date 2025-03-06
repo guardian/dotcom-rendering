@@ -66,6 +66,7 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 					guardianBaseUrl={footballData.guardianBaseURL}
 					kind={footballData.kind}
 					initialDays={footballData.matchesList}
+					secondPage={footballData.nextPage}
 					edition={footballData.editionId}
 					renderAds={renderAds}
 					pageId={footballData.config.pageId}
