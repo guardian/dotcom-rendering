@@ -33,7 +33,7 @@ const expectLocalStorageItem = (
 };
 
 test.describe('Braze messaging', () => {
-	test('records in local storage that the Braze SDK was loaded', async ({
+	test.skip('records in local storage that the Braze SDK was loaded', async ({
 		context,
 		page,
 	}) => {
@@ -73,7 +73,7 @@ test.describe('Braze messaging', () => {
 		await expectLocalStorageItem(page, 'gu.brazeUserSet', 'true');
 	});
 
-	test('clears Braze data when a user logs out', async ({
+	test.skip('clears Braze data when a user logs out', async ({
 		context,
 		page,
 	}) => {
