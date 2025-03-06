@@ -51,13 +51,7 @@ export const FootballMatchesPage = ({
 	renderAds,
 	pageId,
 }: Props) => (
-	<main
-		id="maincontent"
-		data-layout="FootballDataPageLayout"
-		css={css`
-			margin-bottom: ${space[9]}px;
-		`}
-	>
+	<main id="maincontent" data-layout="FootballDataPageLayout">
 		<div
 			css={css`
 				${grid.paddedContainer}
