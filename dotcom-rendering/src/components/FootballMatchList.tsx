@@ -153,21 +153,16 @@ const MatchStatus = ({
 			return (
 				<time
 					css={matchStatusStyles}
-					dateTime={maybeDeserializeDateString(
-						match.dateTime,
-					).toISOString()}
+					dateTime={epochToDate(match.dateTime).toISOString()}
 				>
-					{timeFormatter.format(
-						maybeDeserializeDateString(match.dateTime),
-					)}
+					{timeFormatter.format(epochToDate(match.dateTime))}
 				</time>
 			);
 	}
 };
 
 export const shouldRenderMatchLink = (matchDateTime: Date, now: Date) =>
-	maybeDeserializeDateString(matchDateTime).getTime() - now.getTime() <=
-	72 * 60 * 60 * 1000;
+	matchDateTime.getTime() - now.getTime() <= 72 * 60 * 60 * 1000;
 
 const matchListItemStyles = css`
 	background-color: ${palette('--football-match-list-background')};
@@ -199,7 +194,7 @@ const MatchWrapper = ({
 	now: Date;
 	children: ReactNode;
 }) => {
-	if (shouldRenderMatchLink(match.dateTime, now)) {
+	if (shouldRenderMatchLink(epochToDate(match.dateTime), now)) {
 		return (
 			<li css={matchListItemStyles}>
 				<a
@@ -358,16 +353,11 @@ const Scores = ({
 );
 
 /*
-	This component is used in an Island - and because part of the props are Date objects
-	they will be serialized into strings. This converts them back into a Date before using
-	Date functions
+	This component is used in an Island - we cannot use a Date object, since props are serialized.
+	We use the time since epoch and convert back to Date on the client.
 */
-const maybeDeserializeDateString = (date: Date): Date => {
-	if (typeof date === 'string') {
-		return new Date(date);
-	}
-
-	return date;
+const epochToDate = (dateEpoch: number): Date => {
+	return new Date(dateEpoch);
 };
 
 export const FootballMatchList = ({
@@ -406,13 +396,9 @@ export const FootballMatchList = ({
 							}
 						}
 					`}
-					key={maybeDeserializeDateString(day.date).toISOString()}
+					key={epochToDate(day.date).toISOString()}
 				>
-					<Day>
-						{dateFormatter.format(
-							maybeDeserializeDateString(day.date),
-						)}
-					</Day>
+					<Day>{dateFormatter.format(epochToDate(day.date))}</Day>
 					{day.competitions.map((competition) => (
 						<Fragment key={competition.id}>
 							<CompetitionName>
