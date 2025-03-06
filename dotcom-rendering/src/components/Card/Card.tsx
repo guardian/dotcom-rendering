@@ -100,6 +100,7 @@ export type Props = {
 	isCrossword?: boolean;
 	isNewsletter?: boolean;
 	isOnwardContent?: boolean;
+	isCartoon?: boolean;
 	trailText?: string;
 	avatarUrl?: string;
 	showClock?: boolean;
@@ -392,6 +393,7 @@ export const Card = ({
 	isCrossword,
 	isNewsletter = false,
 	isOnwardContent = false,
+	isCartoon = false,
 	isExternalLink,
 	slideshowImages,
 	showLivePlayable = false,
@@ -684,26 +686,27 @@ export const Card = ({
 	const decideOuterSublinks = () => {
 		if (!hasSublinks) return null;
 		if (sublinkPosition === 'none') return null;
+
+		const OuterSublinks = () => (
+			<SupportingContent
+				supportingContent={supportingContent}
+				containerPalette={containerPalette}
+				alignment={supportingContentAlignment}
+				isDynamo={isDynamo}
+				fillBackgroundOnMobile={
+					!!isFlexSplash ||
+					(isBetaContainer && imagePositionOnMobile === 'bottom')
+				}
+			/>
+		);
+
 		if (sublinkPosition === 'outer') {
-			return (
-				<SupportingContent
-					supportingContent={supportingContent}
-					containerPalette={containerPalette}
-					alignment={supportingContentAlignment}
-					isDynamo={isDynamo}
-					fillBackgroundOnMobile={isFlexSplash}
-				/>
-			);
+			return <OuterSublinks />;
 		}
+
 		return (
 			<Hide from={isFlexSplash ? 'desktop' : 'tablet'}>
-				<SupportingContent
-					supportingContent={supportingContent}
-					containerPalette={containerPalette}
-					alignment={supportingContentAlignment}
-					isDynamo={isDynamo}
-					fillBackgroundOnMobile={isFlexSplash}
-				/>
+				<OuterSublinks />
 			</Hide>
 		);
 	};
@@ -1092,6 +1095,7 @@ export const Card = ({
 										showByline={showByline}
 										isExternalLink={isExternalLink}
 										isBetaContainer={isBetaContainer}
+										isCartoon={isCartoon}
 										kickerImage={
 											showKickerImage &&
 											media?.type === 'podcast'

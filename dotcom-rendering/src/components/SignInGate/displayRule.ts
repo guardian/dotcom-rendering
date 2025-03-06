@@ -17,19 +17,6 @@ export const isNPageOrHigherPageView = (n = 2): boolean => {
 	return count >= n;
 };
 
-// determine if the useragent is running iOS 9 (known to be buggy for sign in flow)
-export const isIOS9 = (): boolean => {
-	// get the browser user agent
-	const ua = navigator.userAgent;
-	// check useragent if the device is an iOS device
-	const appleDevice = /(iPhone|iPod|iPad)/i.test(ua);
-	// check useragent if the os is version 9
-	const os = /(CPU OS 9_)/i.test(ua);
-
-	// if both true, then it's an apple ios 9 device
-	return appleDevice && os;
-};
-
 // hide the sign in gate on article types that are not supported
 export const isValidContentType = (contentType: string): boolean => {
 	// It's safer to definitively *include* types as we
@@ -95,8 +82,7 @@ export const canShowSignInGate = ({
 			// hide the sign in gate on isPaidContent
 			!isPaidContent &&
 			// hide the sign in gate on internal tools preview &&
-			!isPreview &&
-			!isIOS9(),
+			!isPreview,
 	);
 
 export const canShowSignInGateMandatory: ({
@@ -164,7 +150,6 @@ export const canShowSignInGateWithOffers = ({
 			!isPaidContent &&
 			// hide the sign in gate on internal tools preview &&
 			!isPreview &&
-			!isIOS9() &&
 			// hide the sign in gate for AU and US readers
 			!['AU', ...US_REGION_CODES].includes(currentLocaleCode),
 	);

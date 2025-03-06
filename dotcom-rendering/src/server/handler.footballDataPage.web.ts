@@ -10,24 +10,23 @@ import type {
 	Regions,
 } from '../footballMatches';
 import { parse } from '../footballMatches';
+import { Pillar } from '../lib/articleFormat';
 import { extractNAV } from '../model/extract-nav';
 import { validateAsFootballDataPageType } from '../model/validate';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderFootballDataPage } from './render.footballDataPage.web';
 
-const decidePageKind = (
-	canonicalUrl: string | undefined,
-): FootballMatchKind => {
-	if (canonicalUrl?.includes('live')) {
+const decidePageKind = (pageId: string): FootballMatchKind => {
+	if (pageId?.includes('live')) {
 		return 'Live';
 	}
 
-	if (canonicalUrl?.includes('results')) {
+	if (pageId?.includes('results')) {
 		return 'Result';
 	}
 
-	if (canonicalUrl?.includes('fixtures')) {
+	if (pageId?.includes('fixtures')) {
 		return 'Fixture';
 	}
 
@@ -58,23 +57,26 @@ const parseFEFootballCompetitionRegions = (
 };
 
 const parseFEFootballData = (data: FEFootballDataPage): DCRFootballDataPage => {
-	const parsedMatchesResult = parse(data.matchesList);
+	const parsedMatchesList = parse(data.matchesList);
 
-	if (parsedMatchesResult.kind === 'error') {
+	if (parsedMatchesList.kind === 'error') {
 		throw new Error(
 			`Failed to parse matches: ${getParserErrorMessage(
-				parsedMatchesResult.error,
+				parsedMatchesList.error,
 			)}`,
 		);
 	}
 
 	return {
-		matchesList: parsedMatchesResult.value,
-		kind: decidePageKind(data.canonicalUrl),
+		matchesList: parsedMatchesList.value,
+		kind: decidePageKind(data.config.pageId),
 		nextPage: data.nextPage,
 		previousPage: data.previousPage,
 		regions: parseFEFootballCompetitionRegions(data.filters),
-		nav: extractNAV(data.nav),
+		nav: {
+			...extractNAV(data.nav),
+			selectedPillar: Pillar.Sport,
+		},
 		editionId: data.editionId,
 		guardianBaseURL: data.guardianBaseURL,
 		config: data.config,

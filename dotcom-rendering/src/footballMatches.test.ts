@@ -12,7 +12,7 @@ import type {
 	FEMatchDay,
 	FEResult,
 } from './feFootballDataPage';
-import { parse } from './footballMatches';
+import { parse, parseMatchResult } from './footballMatches';
 import { errorOrThrow, okOrThrow } from './lib/result';
 
 const withMatches = (
@@ -169,5 +169,32 @@ describe('footballMatches', () => {
 		);
 
 		expect(result.kind).toBe('UnexpectedLiveMatch');
+	});
+	it('should return a clean team name', () => {
+		const matchesListWithTeamName = (teamName: string): FEResult => {
+			return {
+				...matchResult,
+				homeTeam: {
+					...matchResult.homeTeam,
+					name: teamName,
+				},
+			};
+		};
+
+		const uncleanToCleanNames: Record<string, string> = {
+			Ladies: '',
+			Holland: 'The Netherlands',
+			'Union Saint Gilloise': 'Union Saint-Gilloise',
+		};
+
+		for (const [uncleanName, cleanName] of Object.entries(
+			uncleanToCleanNames,
+		)) {
+			const match = okOrThrow(
+				parseMatchResult(matchesListWithTeamName(uncleanName)),
+				'Expected football match parsing to succeed',
+			);
+			expect(match.homeTeam.name).toBe(cleanName);
+		}
 	});
 });

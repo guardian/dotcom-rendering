@@ -19,7 +19,6 @@ interface Props {
 export const FootballDataPageLayout = ({ footballData }: Props) => {
 	const { nav } = footballData;
 	const pageFooter = footballData.pageFooter;
-	// TODO: Ask commercial, do we need to use the config shouldHideAdverts?
 	const renderAds = canRenderAds(footballData);
 
 	const contributionsServiceUrl = getContributionsServiceUrl(footballData);
@@ -69,6 +68,7 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 					initialDays={footballData.matchesList}
 					edition={footballData.editionId}
 					renderAds={renderAds}
+					pageId={footballData.config.pageId}
 				/>
 			</Island>
 

@@ -100,7 +100,10 @@ export const hasUserDismissedGate = (
 	return !(pref == null);
 };
 
-const retrieveDismissedCount = (variant: string, name: string): number => {
+export const retrieveDismissedCount = (
+	variant: string,
+	name: string,
+): number => {
 	const prefs = getSigninGatePrefsSafely();
 	const dismissed = prefs[localStorageDismissedCountKey(variant, name)];
 
