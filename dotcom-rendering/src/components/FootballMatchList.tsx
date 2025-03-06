@@ -429,6 +429,7 @@ export const FootballMatchList = ({
 						css={css`
 							${grid.column.centre}
 							padding-top: ${space[10]}px;
+							padding-bottom: ${space[9]}px;
 						`}
 					>
 						<Button
