@@ -153,21 +153,16 @@ const MatchStatus = ({
 			return (
 				<time
 					css={matchStatusStyles}
-					dateTime={maybeDeserializeDateString(
-						match.dateTime,
-					).toISOString()}
+					dateTime={match.dateTime.toISOString()}
 				>
-					{timeFormatter.format(
-						maybeDeserializeDateString(match.dateTime),
-					)}
+					{timeFormatter.format(match.dateTime)}
 				</time>
 			);
 	}
 };
 
 export const shouldRenderMatchLink = (matchDateTime: Date, now: Date) =>
-	maybeDeserializeDateString(matchDateTime).getTime() - now.getTime() <=
-	72 * 60 * 60 * 1000;
+	matchDateTime.getTime() - now.getTime() <= 72 * 60 * 60 * 1000;
 
 const matchListItemStyles = css`
 	background-color: ${palette('--football-match-list-background')};
@@ -357,19 +352,6 @@ const Scores = ({
 	</span>
 );
 
-/*
-	This component is used in an Island - and because part of the props are Date objects
-	they will be serialized into strings. This converts them back into a Date before using
-	Date functions
-*/
-const maybeDeserializeDateString = (date: Date): Date => {
-	if (typeof date === 'string') {
-		return new Date(date);
-	}
-
-	return date;
-};
-
 const paddedGridContainerWithBorderStyles = css`
 	${grid.paddedContainer}
 	position: relative;
@@ -407,13 +389,9 @@ export const FootballMatchList = ({
 			{days.map((day) => (
 				<section
 					css={paddedGridContainerWithBorderStyles}
-					key={maybeDeserializeDateString(day.date).toISOString()}
+					key={day.date.toISOString()}
 				>
-					<Day>
-						{dateFormatter.format(
-							maybeDeserializeDateString(day.date),
-						)}
-					</Day>
+					<Day>{dateFormatter.format(day.date)}</Day>
 					{day.competitions.map((competition) => (
 						<Fragment key={competition.id}>
 							<CompetitionName>
