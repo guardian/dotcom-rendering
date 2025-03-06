@@ -23,6 +23,7 @@ export const FootballCompetitionSelect = {
 	args: {
 		nations: regions,
 		kind: 'Result',
+		pageId: 'football/live',
 		onChange: fn(),
 	},
 	play: async ({ args, canvasElement }) => {
