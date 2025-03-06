@@ -8,6 +8,7 @@ import {
 	space,
 	textEgyptian17,
 	textSansBold17,
+	textSansBold24,
 	until,
 } from '@guardian/source/foundations';
 import { type EditionId, getEditionFromId } from '../lib/edition';
@@ -24,6 +25,7 @@ type Props = {
 	editionId?: EditionId;
 	lightweightHeader?: boolean;
 	containerLevel?: DCRContainerLevel;
+	isLabsContainer?: boolean;
 };
 
 const linkStyles = css`
@@ -42,6 +44,10 @@ const primaryTitleStyles = css`
 `;
 const secondaryTitleStyles = css`
 	${textSansBold17};
+`;
+
+const labsTitleOverrides = css`
+	${textSansBold24}
 `;
 
 const headerStylesWithUrl = css`
@@ -106,6 +112,7 @@ export const ContainerTitle = ({
 	editionId,
 	fontColour = schemePalette('--article-section-title'),
 	containerLevel,
+	isLabsContainer,
 }: Props) => {
 	if (!title) return null;
 
@@ -130,6 +137,7 @@ export const ContainerTitle = ({
 							containerLevel === 'Primary' && primaryTitleStyles,
 							containerLevel === 'Secondary' &&
 								secondaryTitleStyles,
+							isLabsContainer && labsTitleOverrides,
 						]}
 					>
 						{localisedTitle(title, editionId)}

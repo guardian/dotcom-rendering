@@ -92,6 +92,7 @@ type Props = {
 	isTagPage?: boolean;
 	hasNavigationButtons?: boolean;
 	isBetaContainer?: boolean;
+	isLabsContainer?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -257,6 +258,10 @@ const sectionHeadlineUntilLeftCol = (isOpinion: boolean) => css`
 		${flexRowStyles}
 	}
 `;
+
+const labsSectionHeadline = css``;
+
+const labsSectionHeadlineFromLeftCol = css``;
 
 const sectionHeadlineFromLeftCol = (borderColour: string) => css`
 	${from.leftCol} {
@@ -532,6 +537,7 @@ export const FrontSection = ({
 	isTagPage = false,
 	hasNavigationButtons = false,
 	isBetaContainer,
+	isLabsContainer,
 }: Props) => {
 	const isToggleable = toggleable && !!sectionId;
 	const showMore =
@@ -597,11 +603,15 @@ export const FrontSection = ({
 							// only ever having <CPScott> as the leftContent
 							title?.toLowerCase() === 'opinion',
 						),
+						isLabsContainer && labsSectionHeadline,
 						showVerticalRule &&
 							!containerLevel &&
 							sectionHeadlineFromLeftCol(
 								schemePalette('--section-border'),
 							),
+						showVerticalRule &&
+							!containerLevel &&
+							labsSectionHeadlineFromLeftCol,
 					]}
 				>
 					<FrontSectionTitle
@@ -624,6 +634,7 @@ export const FrontSection = ({
 								showDateHeader={showDateHeader}
 								editionId={editionId}
 								containerLevel={containerLevel}
+								isLabsContainer={containerPalette === 'Branded'}
 							/>
 						}
 						collectionBranding={collectionBranding}

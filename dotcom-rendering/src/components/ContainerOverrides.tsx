@@ -729,6 +729,44 @@ const sectionBackgroundLeftDark: ContainerFunction = (containerPalette) => {
 	}
 };
 
+const sectionBorderPrimaryLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'Branded':
+			return sourcePalette.labs[200];
+		case 'InvestigationPalette':
+		case 'LongRunningPalette':
+		case 'SombrePalette':
+		case 'BreakingPalette':
+		case 'EventPalette':
+		case 'EventAltPalette':
+		case 'LongRunningAltPalette':
+		case 'SombreAltPalette':
+		case 'SpecialReportAltPalette':
+		case 'MediaPalette':
+		case 'PodcastPalette':
+			return palette('--section-border-primary');
+	}
+};
+
+const sectionBorderPrimaryDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'Branded':
+			return sourcePalette.labs[400];
+		case 'InvestigationPalette':
+		case 'LongRunningPalette':
+		case 'SombrePalette':
+		case 'BreakingPalette':
+		case 'EventPalette':
+		case 'EventAltPalette':
+		case 'LongRunningAltPalette':
+		case 'SombreAltPalette':
+		case 'SpecialReportAltPalette':
+		case 'MediaPalette':
+		case 'PodcastPalette':
+			return palette('--section-border-primary');
+	}
+};
+
 const cardBorderSupportingLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
@@ -909,7 +947,7 @@ const sectionTitleLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[100];
 		// Branded is expected to be used with LabsSection
 		case 'Branded':
-			return sourcePalette.neutral[100];
+			return sourcePalette.labs[300];
 		case 'MediaPalette':
 			return sourcePalette.neutral[100];
 		case 'PodcastPalette':
@@ -1170,6 +1208,10 @@ const containerColours = {
 	'--section-background-left': {
 		light: sectionBackgroundLeftLight,
 		dark: sectionBackgroundLeftDark,
+	},
+	'--section-border-primary': {
+		light: sectionBorderPrimaryLight,
+		dark: sectionBorderPrimaryDark,
 	},
 	'--card-border-supporting': {
 		light: cardBorderSupportingLight,

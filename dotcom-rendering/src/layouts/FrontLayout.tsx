@@ -24,7 +24,6 @@ import { FrontSection } from '../components/FrontSection';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
-import { LabsSection } from '../components/LabsSection';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
@@ -33,7 +32,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { ArticleDisplay } from '../lib/articleFormat';
-import { badgeFromBranding, isPaidContentSameBranding } from '../lib/branding';
+import { isPaidContentSameBranding } from '../lib/branding';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { editionList } from '../lib/edition';
@@ -86,7 +85,11 @@ const isToggleable = (
 		);
 	}
 
-	return index != 0 && !isNavList(collection);
+	return (
+		index != 0 &&
+		!isNavList(collection) &&
+		collection.containerPalette !== 'Branded'
+	);
 };
 
 const decideLeftContent = (
@@ -496,80 +499,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
-					if (collection.containerPalette === 'Branded') {
-						return (
-							<div key={ophanName}>
-								<LabsSection
-									title={collection.displayName}
-									collectionId={collection.id}
-									pageId={front.pressedPage.id}
-									ajaxUrl={front.config.ajaxUrl}
-									sectionId={`container-${ophanName}`}
-									ophanComponentName={ophanName}
-									ophanComponentLink={ophanComponentLink}
-									containerName={collection.collectionType}
-									canShowMore={collection.canShowMore}
-									url={collection.href}
-									badge={badgeFromBranding(
-										collection.collectionBranding,
-									)}
-									data-print-layout="hide"
-									hasPageSkin={hasPageSkin}
-									discussionApiUrl={
-										front.config.discussionApiUrl
-									}
-									editionId={editionId}
-								>
-									<DecideContainer
-										trails={trailsWithoutBranding}
-										groupedTrails={collection.grouped}
-										containerType={
-											collection.collectionType
-										}
-										containerPalette={
-											collection.containerPalette
-										}
-										imageLoading={imageLoading}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
-										aspectRatio={
-											collection.aspectRatio ??
-											fallbackAspectRatio(
-												collection.collectionType,
-											)
-										}
-										sectionId={ophanName}
-										collectionId={index + 1}
-										containerLevel={
-											collection.containerLevel
-										}
-									/>
-								</LabsSection>
-								{mobileAdPositions.includes(index) && (
-									<MobileAdSlot
-										renderAds={renderAds}
-										adSlotIndex={mobileAdPositions.indexOf(
-											index,
-										)}
-									/>
-								)}
-								{index === merchHighAdPosition && (
-									<MerchHighAdSlot
-										renderAds={renderAds}
-										collectionCount={
-											filteredCollections.length
-										}
-										isPaidContent={
-											!!front.pressedPage.frontProperties
-												.isPaidContent
-										}
-									/>
-								)}
-							</div>
-						);
-					}
-
 					if (
 						collection.collectionType === 'fixed/video' ||
 						collection.containerPalette === 'PodcastPalette'
@@ -737,6 +666,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								isBetaContainer={BETA_CONTAINERS.includes(
 									collection.collectionType,
 								)}
+								isLabsContainer={
+									collection.containerPalette === 'Branded'
+								}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
