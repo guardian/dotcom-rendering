@@ -1,4 +1,4 @@
-import type { RequestHandler } from 'express';
+import type { Request, RequestHandler, Response } from 'express';
 import type {
 	FEFootballCompetition,
 	FEFootballDataPage,
@@ -6,10 +6,9 @@ import type {
 import type {
 	DCRFootballDataPage,
 	FootballMatchKind,
-	ParserError,
 	Regions,
 } from '../footballMatches';
-import { parse } from '../footballMatches';
+import { getParserErrorMessage, parse } from '../footballMatches';
 import { Pillar } from '../lib/articleFormat';
 import { extractNAV } from '../model/extract-nav';
 import { validateAsFootballDataPageType } from '../model/validate';
@@ -31,15 +30,6 @@ const decidePageKind = (pageId: string): FootballMatchKind => {
 	}
 
 	throw new Error('Could not determine football page kind');
-};
-
-const getParserErrorMessage = (error: ParserError): string => {
-	switch (error.kind) {
-		case 'InvalidMatchDay':
-			return error.errors.map((e) => getParserErrorMessage(e)).join(', ');
-		default:
-			return `${error.kind}: ${error.message}`;
-	}
 };
 
 const parseFEFootballCompetitionRegions = (
@@ -96,4 +86,21 @@ export const handleFootballDataPage: RequestHandler = ({ body }, res) => {
 	const { html, prefetchScripts } =
 		renderFootballDataPage(parsedFootballData);
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
+};
+
+export const handleGetMoreFootballData: RequestHandler = (
+	req: Request,
+	res: Response,
+): void => {
+	const nextPagePath = new URLSearchParams(
+		req.url.split('/MoreFootballData')[1],
+	).get('nextPage');
+	const url = `https://www.theguardian.com/${nextPagePath}.json?dcr=true`;
+
+	fetch(url)
+		.then((response) => response.json())
+		.then((json) => {
+			res.status(200).send(json);
+		})
+		.catch((err) => res.status(500).send(err));
 };
