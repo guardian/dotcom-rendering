@@ -632,7 +632,7 @@ const styles = {
 		isGridCell: boolean,
 		showThreeTierChoiceCards: boolean,
 	) => css`
-		${until.tablet} {
+		${until.desktop} {
 			position: fixed;
 			margin-top: ${space[3]}px;
 			padding-right: 10px;
@@ -715,6 +715,9 @@ const styles = {
 		${until.tablet} {
 			padding-bottom: 100px;
 		}
+		${until.desktop} {
+			padding-bottom: 120px;
+		}
 		${from.desktop} {
 			grid-column: 2;
 			grid-row: 1;
@@ -770,12 +773,7 @@ const styles = {
 		align-items: center;
 		flex-direction: column;
 		gap: ${space[4]}px;
-		margin-top: ${space[2]}px;
 		margin-bottom: ${space[2]}px;
-
-		> span {
-			width: 100%;
-		}
 
 		${until.desktop} {
 			a {
@@ -787,11 +785,21 @@ const styles = {
 			position: fixed;
 			bottom: 0;
 			left: 0;
-			right: 0;
 			width: 100%;
 			background: ${neutral[100]};
-			padding-bottom: ${space[2]}px;
+			padding-bottom: 24px;
+			padding-top: 12px;
 			margin-bottom: 0;
+		}
+
+		${until.desktop} {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			background: ${neutral[100]};
+			padding-bottom: 24px;
+			padding-top: 12px;
 		}
 
 		${from.desktop} {
