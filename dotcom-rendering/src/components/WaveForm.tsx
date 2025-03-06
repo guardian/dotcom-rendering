@@ -35,8 +35,7 @@ const getSeededRandomNumberGenerator = (seedString: string) => {
 };
 
 /**
- * Compresses an of values to a range between the threshold and the existing
- * maximum.
+ * Compresses an array of values to a range between the threshold and the existing maximum.
  */
 const compress = (array: number[], threshold: number) => {
 	const minValue = Math.min(...array);
@@ -51,17 +50,20 @@ const compress = (array: number[], threshold: number) => {
 };
 
 // Generate an array of fake audio peaks based on the URL
-function generateWaveform(url: string, bars: number) {
+function generateWaveform(url: string, bars: number, height: number) {
 	const getSeededRandomNumber = getSeededRandomNumberGenerator(url);
 
 	// Generate an array of fake peaks, pseudo random numbers seeded by the URL
 	const peaks = Array.from(
 		{ length: bars },
-		() => getSeededRandomNumber() * 100,
+		() => getSeededRandomNumber() * height,
 	);
 
+	// To ensure a good looking waveform, we set a fairly high minimum bar height
+	const minimumBarHeight = 0.6;
+
 	// Return the compressed fake audio data (like a podcast would be)
-	return compress(peaks, 60);
+	return compress(peaks, height * minimumBarHeight);
 }
 
 type Theme = {
@@ -77,27 +79,36 @@ const defaultTheme: Theme = {
 };
 
 type Props = {
-	src: string;
-	progress: number;
-	buffer: number;
+	/**
+	 * The same seed will generate the same waveform. For example, passing the url
+	 * as the seed will ensure the waveform is the same for the same audio file.
+	 */
+	seed: string;
+	height: number;
+	bars: number;
+	progress?: number;
+	buffer?: number;
 	theme?: Theme;
 	gap?: number;
-	bars?: number;
 	barWidth?: number;
 } & React.SVGProps<SVGSVGElement>;
 
 export const WaveForm = ({
-	src,
-	progress,
-	buffer,
+	seed,
+	height,
+	bars,
+	progress = 0,
+	buffer = 0,
 	theme: userTheme,
 	gap = 1,
-	bars = 150,
 	barWidth = 4,
 	...props
 }: Props) => {
 	// memoise the waveform data so they aren't recalculated on every render
-	const barHeights = useMemo(() => generateWaveform(src, bars), [src, bars]);
+	const barHeights = useMemo(
+		() => generateWaveform(seed, bars, height),
+		[seed, bars, height],
+	);
 	const totalWidth = useMemo(
 		() => bars * (barWidth + gap) - gap,
 		[bars, barWidth, gap],
@@ -112,10 +123,10 @@ export const WaveForm = ({
 
 	return (
 		<svg
-			viewBox={`0 0 ${totalWidth} 100`}
+			viewBox={`0 0 ${totalWidth} ${height}`}
 			preserveAspectRatio="none"
 			width={totalWidth}
-			height={100}
+			height={height}
 			xmlns="http://www.w3.org/2000/svg"
 			{...props}
 		>
@@ -128,7 +139,7 @@ export const WaveForm = ({
 							<rect
 								key={x}
 								x={x}
-								y={100 - barHeight} // place it on the bottom
+								y={height - barHeight} // place it on the bottom
 								width={barWidth}
 								height={barHeight}
 							/>
@@ -137,11 +148,14 @@ export const WaveForm = ({
 				</g>
 
 				<clipPath id={`buffer-clip-path-${id}`}>
-					<rect height="100" width={(buffer / 100) * totalWidth} />
+					<rect height={height} width={(buffer / 100) * totalWidth} />
 				</clipPath>
 
 				<clipPath id={`progress-clip-path-${id}`}>
-					<rect height="100" width={(progress / 100) * totalWidth} />
+					<rect
+						height={height}
+						width={(progress / 100) * totalWidth}
+					/>
 				</clipPath>
 			</defs>
 
