@@ -13,6 +13,9 @@ const idapiIdentifiersResponse = {
 	googleTagId: 'aaaaaaaaaaaa',
 };
 
+const userBenefitsApiUrl =
+	'https://user-benefits.code.dev-guardianapis.com/benefits/me';
+
 const expectLocalStorageItem = (
 	page: Page,
 	key: string,
@@ -33,7 +36,7 @@ const expectLocalStorageItem = (
 };
 
 test.describe('Braze messaging', () => {
-	test.skip('records in local storage that the Braze SDK was loaded', async ({
+	test('records in local storage that the Braze SDK was loaded', async ({
 		context,
 		page,
 	}) => {
@@ -60,7 +63,11 @@ test.describe('Braze messaging', () => {
 		const choiceGdprRequestPromise =
 			page.waitForRequest('**/choice/gdpr/**');
 
-		await loadPageNoOkta(page, standardArticle);
+		await loadPageNoOkta(page, standardArticle, {
+			configOverrides: {
+				userBenefitsApiUrl,
+			},
+		});
 
 		await cmpAcceptAll(page);
 
@@ -73,7 +80,7 @@ test.describe('Braze messaging', () => {
 		await expectLocalStorageItem(page, 'gu.brazeUserSet', 'true');
 	});
 
-	test.skip('clears Braze data when a user logs out', async ({
+	test('clears Braze data when a user logs out', async ({
 		context,
 		page,
 	}) => {
@@ -100,7 +107,11 @@ test.describe('Braze messaging', () => {
 		const choiceGdprRequestPromise =
 			page.waitForRequest('**/choice/gdpr/**');
 
-		await loadPageNoOkta(page, standardArticle);
+		await loadPageNoOkta(page, standardArticle, {
+			configOverrides: {
+				userBenefitsApiUrl,
+			},
+		});
 
 		await cmpAcceptAll(page);
 
