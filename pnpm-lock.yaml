@@ -365,8 +365,8 @@ importers:
         specifier: 2.0.2
         version: 2.0.2
       '@guardian/react-crossword-next':
-        specifier: npm:@guardian/react-crossword@0.0.0-canary-20250306122933
-        version: /@guardian/react-crossword@0.0.0-canary-20250306122933(@emotion/react@11.11.3)(@guardian/libs@22.0.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+        specifier: npm:@guardian/react-crossword@0.0.0-canary-20250307143039
+        version: /@guardian/react-crossword@0.0.0-canary-20250307143039(@emotion/react@11.11.3)(@guardian/libs@22.0.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -4336,8 +4336,8 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@guardian/react-crossword@0.0.0-canary-20250306122933(@emotion/react@11.11.3)(@guardian/libs@22.0.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
-    resolution: {integrity: sha512-8NeK3kL0frdELmUIRxcwMUWCEz87CI4wADXV2nI29Vg9RLlsdFvstwMIXTAFFSEej1VuHtoiWbdgmuEDqOPPMA==}
+  /@guardian/react-crossword@0.0.0-canary-20250307143039(@emotion/react@11.11.3)(@guardian/libs@22.0.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
+    resolution: {integrity: sha512-rhPJZaGrNJ8qolDukLiABkU1DQqp8rEJnh56Lok8LDEtUJG2lQwbex2A4TPrpAzLReJFH1lExPlWEURCYswn9A==}
     peerDependencies:
       '@emotion/react': ^11.11.3
       '@guardian/libs': ^22.0.0
