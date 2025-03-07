@@ -1,7 +1,7 @@
 import { useId, useMemo } from 'react';
 
 /**
- * Pseudo random number generator generator ([linear congruential
+ * Pseudo random number generator ([linear congruential
  * generator](https://en.wikipedia.org/wiki/Linear_congruential_generator)).
  *
  * I'll be honest, I don't fully understand it, but it creates a pseudo random
@@ -49,11 +49,13 @@ const compress = (array: number[], threshold: number) => {
 	);
 };
 
-// Generate an array of fake audio peaks based on the URL
-function generateWaveform(url: string, bars: number, height: number) {
-	const getSeededRandomNumber = getSeededRandomNumberGenerator(url);
+/**
+ * Generate an array of fake audio peaks based on a seed.
+ */
+function generateWaveform(seed: string, bars: number, height: number) {
+	const getSeededRandomNumber = getSeededRandomNumberGenerator(seed);
 
-	// Generate an array of fake peaks, pseudo random numbers seeded by the URL
+	// Generate an array of fake peaks from pseudo random numbers based on the seed.
 	const peaks = Array.from(
 		{ length: bars },
 		() => getSeededRandomNumber() * height,
