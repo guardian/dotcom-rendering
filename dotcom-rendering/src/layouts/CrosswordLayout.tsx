@@ -25,7 +25,6 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
-import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
@@ -329,47 +328,6 @@ export const CrosswordLayout = (props: Props) => {
 								</RightColumn>
 							</GridItem>
 						</CrosswordGrid>
-					</div>
-				</Section>
-
-				<Section
-					stretchRight={false}
-					showTopBorder={false}
-					backgroundColour={themePalette('--article-background')}
-					borderColour={themePalette('--article-border')}
-					fontColour={themePalette('--article-section-title')}
-					padContent={false}
-					verticalMargins={false}
-				>
-					<div
-						css={css`
-							max-width: 620px;
-						`}
-					>
-						<Island priority="feature" defer={{ until: 'visible' }}>
-							<SlotBodyEnd
-								contentType={article.contentType}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								idApiUrl={article.config.idApiUrl}
-								isMinuteArticle={
-									article.pageType.isMinuteArticle
-								}
-								isPaidContent={article.pageType.isPaidContent}
-								pageId={article.pageId}
-								sectionId={article.config.section}
-								shouldHideReaderRevenue={
-									article.shouldHideReaderRevenue
-								}
-								tags={article.tags}
-								renderAds={renderAds}
-								isLabs={false}
-								articleEndSlot={
-									!!article.config.switches.articleEndSlot
-								}
-							/>
-						</Island>
 					</div>
 				</Section>
 
