@@ -352,6 +352,25 @@ const Scores = ({
 	</span>
 );
 
+const paddedGridContainerWithBorderStyles = css`
+	${grid.paddedContainer}
+	position: relative;
+	${from.tablet} {
+		&::before,
+		&::after {
+			content: '';
+			position: absolute;
+			border-left: 1px solid ${palette('--article-border')};
+			top: 0;
+			bottom: 0;
+		}
+
+		&::after {
+			right: 0;
+		}
+	}
+`;
+
 export const FootballMatchList = ({
 	edition,
 	guardianBaseUrl,
@@ -369,25 +388,7 @@ export const FootballMatchList = ({
 		<>
 			{days.map((day) => (
 				<section
-					css={css`
-						${grid.paddedContainer}
-						position: relative;
-						${from.tablet} {
-							&::before,
-							&::after {
-								content: '';
-								position: absolute;
-								border-left: 1px solid
-									${palette('--article-border')};
-								top: 0;
-								bottom: 0;
-							}
-
-							&::after {
-								right: 0;
-							}
-						}
-					`}
+					css={paddedGridContainerWithBorderStyles}
 					key={day.date.toISOString()}
 				>
 					<Day>{dateFormatter.format(day.date)}</Day>
@@ -423,11 +424,12 @@ export const FootballMatchList = ({
 			))}
 
 			{getMoreDays === undefined ? null : (
-				<div css={css(grid.paddedContainer)}>
+				<div css={paddedGridContainerWithBorderStyles}>
 					<div
 						css={css`
 							${grid.column.centre}
 							padding-top: ${space[10]}px;
+							padding-bottom: ${space[9]}px;
 						`}
 					>
 						<Button
