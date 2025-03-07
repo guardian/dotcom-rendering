@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { from, headlineBold20, space } from '@guardian/source/foundations';
+import {
+	from,
+	headlineBold20,
+	space,
+	until,
+} from '@guardian/source/foundations';
 import type {
 	FootballMatches,
 	FootballMatchKind,
@@ -111,20 +116,6 @@ export const FootballMatchesPage = ({
 					${grid.between('left-column-start', 'centre-column-end')}
 				}
 				position: relative;
-				${from.tablet} {
-					&::before,
-					&::after {
-						content: '';
-						position: absolute;
-						border-left: 1px solid ${palette('--article-border')};
-						top: 0;
-						bottom: 0;
-					}
-
-					&::after {
-						right: 0;
-					}
-				}
 			`}
 		>
 			<FootballMatchList
@@ -140,7 +131,10 @@ export const FootballMatchesPage = ({
 				css={css`
 					${grid.column.right}
 					/** This allows the ad to grow beyond the third row content (up to line 5) */
-					grid-row: 2 / 5;
+					grid-row: 1 / 5;
+					${until.desktop} {
+						display: none;
+					}
 				`}
 			>
 				<AdSlot position="right-football" />

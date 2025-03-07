@@ -368,7 +368,12 @@ export const FootballMatchList = ({
 	return (
 		<>
 			{days.map((day) => (
-				<div key={day.date.toISOString()}>
+				<div
+					css={css`
+						${grid.centreContainer}
+					`}
+					key={day.date.toISOString()}
+				>
 					<Day>{dateFormatter.format(day.date)}</Day>
 					{day.competitions.map((competition) => (
 						<Fragment key={competition.id}>
@@ -402,7 +407,7 @@ export const FootballMatchList = ({
 			))}
 
 			{getMoreDays === undefined ? null : (
-				<div css={css(grid.paddedContainer)}>
+				<div css={css(grid.centreContainer)}>
 					<div
 						css={css`
 							${grid.column.centre}
