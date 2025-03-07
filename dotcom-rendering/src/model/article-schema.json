@@ -5265,6 +5265,9 @@
                             "type": "string",
                             "const": "Audio"
                         },
+                        "duration": {
+                            "type": "string"
+                        },
                         "podcastImage": {
                             "type": "object",
                             "properties": {
@@ -5275,9 +5278,6 @@
                                     "type": "string"
                                 }
                             }
-                        },
-                        "duration": {
-                            "type": "string"
                         }
                     },
                     "required": [
