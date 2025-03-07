@@ -368,25 +368,9 @@ export const FootballMatchList = ({
 	return (
 		<>
 			{days.map((day) => (
-				<section
+				<div
 					css={css`
-						${grid.paddedContainer}
-						position: relative;
-						${from.tablet} {
-							&::before,
-							&::after {
-								content: '';
-								position: absolute;
-								border-left: 1px solid
-									${palette('--article-border')};
-								top: 0;
-								bottom: 0;
-							}
-
-							&::after {
-								right: 0;
-							}
-						}
+						${grid.centreContainer}
 					`}
 					key={day.date.toISOString()}
 				>
@@ -419,11 +403,11 @@ export const FootballMatchList = ({
 							</Matches>
 						</Fragment>
 					))}
-				</section>
+				</div>
 			))}
 
 			{getMoreDays === undefined ? null : (
-				<div css={css(grid.paddedContainer)}>
+				<div css={css(grid.centreContainer)}>
 					<div
 						css={css`
 							${grid.column.centre}
