@@ -105,6 +105,9 @@ const Layout: CrosswordProps['Layout'] = ({
 				${from.tablet} {
 					flex-direction: row;
 				}
+				@media print {
+					flex-direction: column;
+				}
 			`}
 		>
 			<AnagramHelper />
@@ -199,6 +202,9 @@ const Layout: CrosswordProps['Layout'] = ({
 						}
 						> * {
 							flex: 1;
+						}
+						@media print {
+							flex-direction: row;
 						}
 					`}
 				>
