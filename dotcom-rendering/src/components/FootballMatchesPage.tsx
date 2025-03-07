@@ -139,7 +139,8 @@ export const FootballMatchesPage = ({
 			<div
 				css={css`
 					${grid.column.right}
-					grid-row: 2 / 4;
+					/** This allows the ad to grow beyond the third row content (up to line 5) */
+					grid-row: 2 / 5;
 				`}
 			>
 				<AdSlot position="right-football" />
