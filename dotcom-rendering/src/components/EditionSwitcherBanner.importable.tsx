@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, palette, space, textSans20 } from '@guardian/source/foundations';
+import { from, palette, space, textSans14 } from '@guardian/source/foundations';
 import { Link, SvgInfoRound } from '@guardian/source/react-components';
 import { center } from '../lib/center';
 import {
@@ -43,11 +43,11 @@ const textAndLink = css`
 	flex-direction: row;
 	align-items: flex-start;
 	gap: ${space[3]}px;
-	${textSans20};
+	${textSans14};
 
 	/* Override Source Link font styles */
 	a {
-		${textSans20};
+		${textSans14};
 	}
 `;
 
