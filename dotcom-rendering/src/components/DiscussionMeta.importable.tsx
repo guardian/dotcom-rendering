@@ -30,16 +30,14 @@ export const DiscussionMeta = ({
 	);
 
 	const { data: userData } = useApi<{ userProfile: UserProfile }>(
-		authStatus.kind === 'SignedInWithOkta' ||
-			authStatus.kind === 'SignedInWithCookies'
+		authStatus.kind === 'SignedInWithOkta'
 			? joinUrl(
 					discussionApiUrl,
 					'profile/me?strict_sanctions_check=false',
 			  )
 			: undefined,
 		{},
-		authStatus.kind === 'SignedInWithOkta' ||
-			authStatus.kind === 'SignedInWithCookies'
+		authStatus.kind === 'SignedInWithOkta'
 			? getOptionsHeadersWithOkta(authStatus)
 			: undefined,
 	);

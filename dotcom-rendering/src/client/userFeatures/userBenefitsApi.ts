@@ -1,7 +1,6 @@
 import { isObject } from '@guardian/libs';
 import {
 	getOptionsHeadersWithOkta,
-	type SignedInWithCookies,
 	type SignedInWithOkta,
 } from '../../lib/identity';
 import { fetchJson } from './fetchJson';
@@ -11,7 +10,7 @@ type UserBenefitsResponse = {
 	benefits: string[];
 };
 export const syncDataFromUserBenefitsApi = async (
-	signedInAuthStatus: SignedInWithOkta | SignedInWithCookies,
+	signedInAuthStatus: SignedInWithOkta,
 ): Promise<UserBenefits> => {
 	const url = window.guardian.config.page.userBenefitsApiUrl;
 	if (!url) {
