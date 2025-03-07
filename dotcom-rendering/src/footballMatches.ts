@@ -21,7 +21,7 @@ type TeamScore = {
 
 type MatchData = {
 	paId: string;
-	dateTime: Date;
+	dateTime: number;
 };
 
 export type MatchResult = MatchData & {
@@ -57,7 +57,7 @@ type Competition = {
 };
 
 type FootballDay = {
-	date: Date;
+	date: number;
 	competitions: Competition[];
 };
 
@@ -162,14 +162,14 @@ const listParse =
 		return f(input, []);
 	};
 
-const parseDate = (a: string): Result<string, Date> => {
+const parseDate = (a: string): Result<string, number> => {
 	const d = new Date(a);
 
 	if (d.toString() === 'Invalid Date') {
 		return error(`${String(a)} isn't a valid Date`);
 	}
 
-	return ok(d);
+	return ok(d.getTime());
 };
 
 const parseScore = (
@@ -188,7 +188,7 @@ const parseScore = (
 	return ok(team.score);
 };
 
-const parseMatchDate = (date: string): Result<string, Date> => {
+const parseMatchDate = (date: string): Result<string, number> => {
 	// Frontend appends a timezone in square brackets
 	const isoDate = date.split('[')[0];
 

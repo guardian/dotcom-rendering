@@ -153,9 +153,9 @@ const MatchStatus = ({
 			return (
 				<time
 					css={matchStatusStyles}
-					dateTime={match.dateTime.toISOString()}
+					dateTime={epochToDate(match.dateTime).toISOString()}
 				>
-					{timeFormatter.format(match.dateTime)}
+					{timeFormatter.format(epochToDate(match.dateTime))}
 				</time>
 			);
 	}
@@ -194,7 +194,7 @@ const MatchWrapper = ({
 	now: Date;
 	children: ReactNode;
 }) => {
-	if (shouldRenderMatchLink(match.dateTime, now)) {
+	if (shouldRenderMatchLink(epochToDate(match.dateTime), now)) {
 		return (
 			<li css={matchListItemStyles}>
 				<a
@@ -352,6 +352,14 @@ const Scores = ({
 	</span>
 );
 
+/*
+	This component is used in an Island - we cannot use a Date object, since props are serialized.
+	We use the time since epoch and convert back to Date on the client.
+*/
+const epochToDate = (dateEpoch: number): Date => {
+	return new Date(dateEpoch);
+};
+
 export const FootballMatchList = ({
 	edition,
 	guardianBaseUrl,
@@ -388,9 +396,9 @@ export const FootballMatchList = ({
 							}
 						}
 					`}
-					key={day.date.toISOString()}
+					key={epochToDate(day.date).toISOString()}
 				>
-					<Day>{dateFormatter.format(day.date)}</Day>
+					<Day>{dateFormatter.format(epochToDate(day.date))}</Day>
 					{day.competitions.map((competition) => (
 						<Fragment key={competition.id}>
 							<CompetitionName>
