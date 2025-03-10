@@ -50,7 +50,7 @@
 		"@guardian/libs": "22.0.0",
 		"@guardian/ophan-tracker-js": "2.2.5",
 		"@guardian/react-crossword": "2.0.2",
-		"@guardian/react-crossword-next": "npm:@guardian/react-crossword@0.0.0-canary-20250307143039",
+		"@guardian/react-crossword-next": "npm:@guardian/react-crossword@0.0.0-canary-20250310141657",
 		"@guardian/shimport": "1.0.2",
 		"@guardian/source": "8.0.0",
 		"@guardian/source-development-kitchen": "12.0.0",
