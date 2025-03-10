@@ -21,29 +21,24 @@ type Line =
 	| 'right-column-end'
 	| 'grid-end';
 
-const mobileCentreColumns =
-	'[centre-column-start] repeat(4, 1fr) [centre-column-end] 0px [grid-end]';
-const tabletCentreColumns =
-	'[centre-column-start] repeat(12, 40px) [centre-column-end] 1fr [grid-end]';
-const desktopCentreColumns =
-	'[centre-column-start] repeat(8, 60px) [centre-column-end right-column-start]';
-const leftColCentreColumns =
-	'[left-column-start] repeat(2, 60px) [left-column-end centre-column-start] repeat(8, 60px) [centre-column-end right-column-start]';
-const wideCentreColumns =
-	'[left-column-start] repeat(3, 60px) [left-column-end centre-column-start] repeat(8, 60px) [centre-column-end]';
-
-const mobileColumns = `[grid-start] 0px ${mobileCentreColumns}`;
-const tabletColumns = `[grid-start] 1fr ${tabletCentreColumns}`;
-const desktopColumns = `[grid-start] 1fr ${desktopCentreColumns} repeat(4, 60px) [right-column-end] 1fr [grid-end]`;
-const leftColColumns = `[grid-start] 1fr ${leftColCentreColumns} repeat(4, 60px) [right-column-end] 1fr [grid-end]`;
-const wideColumns = `[grid-start] 1fr ${wideCentreColumns} 60px [right-column-start] repeat(4, 60px) [right-column-end] 1fr [grid-end]`;
+const mobileColumns =
+	'[grid-start] 0px [centre-column-start] repeat(4, 1fr) [centre-column-end] 0px [grid-end]';
+const tabletColumns =
+	'[grid-start] 1fr [centre-column-start] repeat(12, 40px) [centre-column-end] 1fr [grid-end]';
+const desktopColumns =
+	'[grid-start] 1fr [centre-column-start] repeat(8, 60px) [centre-column-end right-column-start] repeat(4, 60px) [right-column-end] 1fr [grid-end]';
+const leftColColumns =
+	'[grid-start] 1fr [left-column-start] repeat(2, 60px) [left-column-end centre-column-start] repeat(8, 60px) [centre-column-end right-column-start] repeat(4, 60px) [right-column-end] 1fr [grid-end]';
+const wideColumns =
+	'[grid-start] 1fr [left-column-start] repeat(3, 60px) [left-column-end centre-column-start] repeat(8, 60px) [centre-column-end] 60px [right-column-start] repeat(4, 60px) [right-column-end] 1fr [grid-end]';
 const mobileColumnGap = '10px';
 const columnGap = '20px';
 
 // ----- Grid Styles ----- //
-const getContainer = (isCentre: boolean) => `
+
+const container = `
     display: grid;
-    grid-template-columns: ${isCentre ? mobileCentreColumns : mobileColumns};
+    grid-template-columns: ${mobileColumns};
     column-gap: ${mobileColumnGap};
 
     ${fromBreakpoint.mobileLandscape} {
@@ -51,30 +46,24 @@ const getContainer = (isCentre: boolean) => `
     }
 
     ${fromBreakpoint.tablet} {
-        grid-template-columns: ${
-			isCentre ? tabletCentreColumns : tabletColumns
-		};
+        grid-template-columns: ${tabletColumns};
     }
 
     ${fromBreakpoint.desktop} {
-        grid-template-columns: ${
-			isCentre ? desktopCentreColumns : desktopColumns
-		};
+        grid-template-columns: ${desktopColumns};
     }
 
     ${fromBreakpoint.leftCol} {
-        grid-template-columns: ${
-			isCentre ? leftColCentreColumns : leftColColumns
-		};
+        grid-template-columns: ${leftColColumns};
     }
 
     ${fromBreakpoint.wide} {
-        grid-template-columns: ${isCentre ? wideCentreColumns : wideColumns};
+        grid-template-columns: ${wideColumns};
     }
 `;
 
 const paddedContainer = `
-	${getContainer(false)}
+	${container}
 
 	${fromBreakpoint.tablet} {
 		width: ${breakpoints.tablet}px;
@@ -148,9 +137,8 @@ const grid = {
 	 *     <p css={css`grid-row: 2;`}>Standfirst</p>
 	 *   </div>
 	 */
-	container: getContainer(false),
+	container,
 	paddedContainer,
-	centreContainer: getContainer(true),
 	/**
 	 * Place the element into one of the common Guardian layout columns. The
 	 * breakpoints at which they're available are as follows:

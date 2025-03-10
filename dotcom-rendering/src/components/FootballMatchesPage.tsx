@@ -108,7 +108,7 @@ export const FootballMatchesPage = ({
 			/>
 		</div>
 
-		<section
+		<div
 			css={css`
 				${grid.column.centre}
 				grid-row: 3;
@@ -124,7 +124,7 @@ export const FootballMatchesPage = ({
 				getMoreDays={getMoreDays}
 				guardianBaseUrl={guardianBaseUrl}
 			/>
-		</section>
+		</div>
 
 		{renderAds && (
 			<div

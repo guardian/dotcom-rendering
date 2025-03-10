@@ -511,7 +511,6 @@ export const AdSlot = ({
 					className="ad-slot-container"
 					css={[
 						css`
-							position: static;
 							height: 100%;
 							max-height: 100%;
 							padding-top: ${space[2]}px;
