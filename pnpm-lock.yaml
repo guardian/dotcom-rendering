@@ -365,8 +365,8 @@ importers:
         specifier: 2.0.2
         version: 2.0.2
       '@guardian/react-crossword-next':
-        specifier: npm:@guardian/react-crossword@0.0.0-canary-20250307143039
-        version: /@guardian/react-crossword@0.0.0-canary-20250307143039(@emotion/react@11.11.3)(@guardian/libs@22.0.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+        specifier: npm:@guardian/react-crossword@3.0.0
+        version: /@guardian/react-crossword@3.0.0(@emotion/react@11.11.3)(@guardian/libs@22.0.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -4336,8 +4336,22 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@guardian/react-crossword@0.0.0-canary-20250307143039(@emotion/react@11.11.3)(@guardian/libs@22.0.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
-    resolution: {integrity: sha512-rhPJZaGrNJ8qolDukLiABkU1DQqp8rEJnh56Lok8LDEtUJG2lQwbex2A4TPrpAzLReJFH1lExPlWEURCYswn9A==}
+  /@guardian/react-crossword@2.0.2:
+    resolution: {integrity: sha512-pFvCpuUH+GKz12uUzW4+Lck/ZhDWvqLodr1UwXIE7qjJCz8V4NEfuiGZkkIpVoPh+dEHTkiDQ6Ks4653KdH01g==}
+    dependencies:
+      bonzo: 2.0.0
+      fastdom: 1.0.12
+      lodash: 4.17.21
+      qwery: 4.0.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      wolfy87-eventemitter: 5.2.9
+    optionalDependencies:
+      fsevents: 2.3.3
+    dev: false
+
+  /@guardian/react-crossword@3.0.0(@emotion/react@11.11.3)(@guardian/libs@22.0.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
+    resolution: {integrity: sha512-hrAgboJoDCjW2f9vcJ6xaqESWw4PYBCtuq4tbr8hLk1WaQjS9GHve/caRFOaolif3MxxvQRVw/7nm3/XphT18Q==}
     peerDependencies:
       '@emotion/react': ^11.11.3
       '@guardian/libs': ^22.0.0
@@ -4361,20 +4375,6 @@ packages:
       use-local-storage-state: 19.5.0(react-dom@18.3.1)(react@18.3.1)
     transitivePeerDependencies:
       - react-dom
-    dev: false
-
-  /@guardian/react-crossword@2.0.2:
-    resolution: {integrity: sha512-pFvCpuUH+GKz12uUzW4+Lck/ZhDWvqLodr1UwXIE7qjJCz8V4NEfuiGZkkIpVoPh+dEHTkiDQ6Ks4653KdH01g==}
-    dependencies:
-      bonzo: 2.0.0
-      fastdom: 1.0.12
-      lodash: 4.17.21
-      qwery: 4.0.0
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      wolfy87-eventemitter: 5.2.9
-    optionalDependencies:
-      fsevents: 2.3.3
     dev: false
 
   /@guardian/renditions@0.2.0:

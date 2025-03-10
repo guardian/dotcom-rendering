@@ -12,9 +12,7 @@ if (pkg.devDependencies) {
  * We don't check packages that are not semver-compatible
  * @type {RegExp[]}
  */
-const exceptions = /** @type {const} */ ([
-	/npm:@guardian\/react-crossword@0.0.0-canary/,
-]);
+const exceptions = /** @type {const} */ ([/npm:@guardian\/react-crossword@/]);
 
 const mismatches = Object.entries(pkg.dependencies)
 	.filter(
