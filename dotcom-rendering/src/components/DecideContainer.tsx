@@ -267,6 +267,7 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
+					collectionId={collectionId}
 				/>
 			);
 		case 'scrollable/small':

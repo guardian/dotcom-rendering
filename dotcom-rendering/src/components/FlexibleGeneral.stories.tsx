@@ -146,6 +146,7 @@ const meta = {
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
+		collectionId: 1,
 	},
 	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
