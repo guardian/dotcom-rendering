@@ -711,7 +711,7 @@ const SignInGateSelectorAuxia = ({
 		})().catch((error) => {
 			console.error('Error fetching Auxia display data:', error);
 		});
-	}, [abTest]);
+	}, [abTest, isSignedIn, isPaidContent, isPreview]);
 
 	// We are not showing the gate if we are in preview, it's a paid contents
 	// or the user is signed in or if for some reasons we could not determine the
