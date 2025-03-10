@@ -6,10 +6,9 @@ import type {
 import type {
 	DCRFootballDataPage,
 	FootballMatchKind,
-	ParserError,
 	Regions,
 } from '../footballMatches';
-import { parse } from '../footballMatches';
+import { getParserErrorMessage, parse } from '../footballMatches';
 import { Pillar } from '../lib/articleFormat';
 import { extractNAV } from '../model/extract-nav';
 import { validateAsFootballDataPageType } from '../model/validate';
@@ -18,28 +17,19 @@ import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderFootballDataPage } from './render.footballDataPage.web';
 
 const decidePageKind = (pageId: string): FootballMatchKind => {
-	if (pageId?.includes('live')) {
+	if (pageId.includes('live')) {
 		return 'Live';
 	}
 
-	if (pageId?.includes('results')) {
+	if (pageId.includes('results')) {
 		return 'Result';
 	}
 
-	if (pageId?.includes('fixtures')) {
+	if (pageId.includes('fixtures')) {
 		return 'Fixture';
 	}
 
 	throw new Error('Could not determine football page kind');
-};
-
-const getParserErrorMessage = (error: ParserError): string => {
-	switch (error.kind) {
-		case 'InvalidMatchDay':
-			return error.errors.map((e) => getParserErrorMessage(e)).join(', ');
-		default:
-			return `${error.kind}: ${error.message}`;
-	}
 };
 
 const parseFEFootballCompetitionRegions = (

@@ -64,8 +64,10 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 				<FootballMatchesPageWrapper
 					nations={footballData.regions}
 					guardianBaseUrl={footballData.guardianBaseURL}
+					ajaxUrl={footballData.config.ajaxUrl}
 					kind={footballData.kind}
 					initialDays={footballData.matchesList}
+					secondPage={footballData.nextPage}
 					edition={footballData.editionId}
 					renderAds={renderAds}
 					pageId={footballData.config.pageId}
