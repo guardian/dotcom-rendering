@@ -1,4 +1,4 @@
-import type { Request, RequestHandler, Response } from 'express';
+import type { RequestHandler } from 'express';
 import type {
 	FEFootballCompetition,
 	FEFootballDataPage,
@@ -17,15 +17,15 @@ import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderFootballDataPage } from './render.footballDataPage.web';
 
 const decidePageKind = (pageId: string): FootballMatchKind => {
-	if (pageId?.includes('live')) {
+	if (pageId.includes('live')) {
 		return 'Live';
 	}
 
-	if (pageId?.includes('results')) {
+	if (pageId.includes('results')) {
 		return 'Result';
 	}
 
-	if (pageId?.includes('fixtures')) {
+	if (pageId.includes('fixtures')) {
 		return 'Fixture';
 	}
 
@@ -86,21 +86,4 @@ export const handleFootballDataPage: RequestHandler = ({ body }, res) => {
 	const { html, prefetchScripts } =
 		renderFootballDataPage(parsedFootballData);
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
-};
-
-export const handleGetMoreFootballData: RequestHandler = (
-	req: Request,
-	res: Response,
-): void => {
-	const nextPagePath = new URLSearchParams(
-		req.url.split('/MoreFootballData')[1],
-	).get('nextPage');
-	const url = `https://www.theguardian.com/${nextPagePath}.json?dcr=true`;
-
-	fetch(url)
-		.then((response) => response.json())
-		.then((json) => {
-			res.status(200).send(json);
-		})
-		.catch((err) => res.status(500).send(err));
 };
