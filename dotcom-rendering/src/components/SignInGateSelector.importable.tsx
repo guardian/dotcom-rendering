@@ -711,7 +711,7 @@ const SignInGateSelectorAuxia = ({
 						data.auxiaData.userTreatment?.treatmentId;
 					if (treatmentId) {
 						// Record the fact that Auxia has returned a treatment. This is not a VIEW event, so we use the RETURN action here
-						await submitComponentEventTracking(
+						void submitComponentEventTracking(
 							{
 								component: {
 									componentType: 'SIGN_IN_GATE',
@@ -811,28 +811,27 @@ const ShowSignInGateAuxia = ({
 	const personaliseSignInGateAfterCheckoutSwitch = undefined;
 
 	useOnce(() => {
-		void (async () => {
-			await auxiaLogTreatmentInteraction(
-				contributionsServiceUrl,
-				userTreatment,
-				'VIEWED',
-				'',
-				browserId,
-			);
-			await submitComponentEventTracking(
-				{
-					component: {
-						componentType: 'SIGN_IN_GATE',
-						id: treatmentId,
-					},
-					action: 'VIEW',
-					abTest: buildAbTestTrackingAuxiaVariant(treatmentId),
-				},
-				renderingTarget,
-			);
-		})().catch((error) => {
+		void auxiaLogTreatmentInteraction(
+			contributionsServiceUrl,
+			userTreatment,
+			'VIEWED',
+			'',
+			browserId,
+		).catch((error) => {
 			console.error('Failed to log treatment interaction:', error);
 		});
+
+		void submitComponentEventTracking(
+			{
+				component: {
+					componentType: 'SIGN_IN_GATE',
+					id: treatmentId,
+				},
+				action: 'VIEW',
+				abTest: buildAbTestTrackingAuxiaVariant(treatmentId),
+			},
+			renderingTarget,
+		);
 	}, [componentId]);
 
 	return (
