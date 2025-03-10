@@ -22,7 +22,7 @@ export const getMoreDays =
 	async (): Promise<Result<'failed', FootballMatches>> => {
 		try {
 			const fetchResponse = await fetch(
-				'/MoreFootballData?nextPage=' + nextPage,
+				`https://api.nextgen.guardianapps.co.uk${nextPage}.json?dcr`,
 			);
 
 			const responseJson: unknown = await fetchResponse.json();

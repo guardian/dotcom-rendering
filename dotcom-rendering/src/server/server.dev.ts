@@ -13,10 +13,7 @@ import {
 	handleInteractive,
 } from './handler.article.web';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
-import {
-	handleFootballDataPage,
-	handleGetMoreFootballData,
-} from './handler.footballDataPage.web';
+import { handleFootballDataPage } from './handler.footballDataPage.web';
 import {
 	handleFront,
 	handleFrontJson,
@@ -97,8 +94,6 @@ export const devServer = (): Handler => {
 				return handleEditionsCrossword(req, res, next);
 			case 'FootballDataPage':
 				return handleFootballDataPage(req, res, next);
-			case 'MoreFootballData':
-				return handleGetMoreFootballData(req, res, next);
 			default: {
 				// Do not redirect assets urls
 				if (req.url.match(ASSETS_URL)) return next();
