@@ -16,14 +16,13 @@ import { FootballMatchesPage } from './FootballMatchesPage';
 
 export const getMoreDays =
 	(
+		ajaxUrl: string,
 		nextPage: string,
 		setNextPage: Dispatch<SetStateAction<string | undefined>>,
 	) =>
 	async (): Promise<Result<'failed', FootballMatches>> => {
 		try {
-			const fetchResponse = await fetch(
-				`https://api.nextgen.guardianapps.co.uk${nextPage}.json?dcr`,
-			);
+			const fetchResponse = await fetch(`${ajaxUrl}${nextPage}.json?dcr`);
 
 			const responseJson: unknown = await fetchResponse.json();
 
@@ -67,6 +66,7 @@ const goToCompetitionSpecificPage =
 type Props = {
 	nations: Regions;
 	guardianBaseUrl: string;
+	ajaxUrl: string;
 	kind: FootballMatchKind;
 	initialDays: FootballMatches;
 	secondPage?: string;
@@ -78,6 +78,7 @@ type Props = {
 export const FootballMatchesPageWrapper = ({
 	nations,
 	guardianBaseUrl,
+	ajaxUrl,
 	kind,
 	initialDays,
 	secondPage,
@@ -100,7 +101,7 @@ export const FootballMatchesPageWrapper = ({
 			getMoreDays={
 				isUndefined(nextPage)
 					? undefined
-					: getMoreDays(nextPage, setNextPage)
+					: getMoreDays(ajaxUrl, nextPage, setNextPage)
 			}
 			renderAds={renderAds}
 			pageId={pageId}
