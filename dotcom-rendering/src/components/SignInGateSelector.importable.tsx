@@ -706,6 +706,25 @@ const SignInGateSelectorAuxia = ({
 				);
 				if (data !== undefined) {
 					setAuxiaGateDisplayData(data);
+
+					const treatmentId =
+						data.auxiaData.userTreatment?.treatmentId;
+					if (treatmentId) {
+						// Record the fact that Auxia has returned a treatment. This is not a VIEW event, so we use the RETURN action here
+						await submitComponentEventTracking(
+							{
+								component: {
+									componentType: 'SIGN_IN_GATE',
+									id: treatmentId,
+								},
+								action: 'RETURN',
+								abTest: buildAbTestTrackingAuxiaVariant(
+									treatmentId,
+								),
+							},
+							renderingTarget,
+						);
+					}
 				}
 			}
 		})().catch((error) => {
