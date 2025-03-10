@@ -148,7 +148,7 @@ const buildFormData = (
 const resolveEmailIfSignedIn = async (): Promise<string | undefined> => {
 	const { idApiUrl } = window.guardian.config.page;
 	if (!idApiUrl) return;
-	const fetchedEmail = await lazyFetchEmailWithTimeout(idApiUrl)();
+	const fetchedEmail = await lazyFetchEmailWithTimeout()();
 	if (!fetchedEmail) return;
 	return fetchedEmail;
 };

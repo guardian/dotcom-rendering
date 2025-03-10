@@ -88,7 +88,6 @@ export const canShowReaderRevenueEpic = async (
 		shouldHideReaderRevenue,
 		isPaidContent,
 		contributionsServiceUrl,
-		idApiUrl,
 		renderingTarget,
 		ophanPageViewId,
 	} = data;
@@ -127,7 +126,7 @@ export const canShowReaderRevenueEpic = async (
 	}
 
 	const fetchEmail: (() => Promise<string | null>) | undefined = isSignedIn
-		? lazyFetchEmailWithTimeout(idApiUrl)
+		? lazyFetchEmailWithTimeout()
 		: undefined;
 
 	const hasConsentForArticleCount =

@@ -193,7 +193,6 @@ export const canShowRRBanner: CanShowFunctionType<
 	signInBannerLastClosedAt,
 	abandonedBasketBannerLastClosedAt,
 	isPreview,
-	idApiUrl,
 	renderingTarget,
 	signInGateWillShow,
 	asyncArticleCounts,
@@ -283,9 +282,7 @@ export const canShowRRBanner: CanShowFunctionType<
 
 	const { props, name } = module;
 
-	const fetchEmail = isSignedIn
-		? lazyFetchEmailWithTimeout(idApiUrl)
-		: undefined;
+	const fetchEmail = isSignedIn ? lazyFetchEmailWithTimeout() : undefined;
 
 	const tracking: Tracking = {
 		...props.tracking,
