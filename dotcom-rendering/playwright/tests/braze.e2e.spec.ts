@@ -33,7 +33,7 @@ const expectLocalStorageItem = (
 };
 
 test.describe('Braze messaging', () => {
-	test.skip('records in local storage that the Braze SDK was loaded', async ({
+	test('records in local storage that the Braze SDK was loaded', async ({
 		context,
 		page,
 	}) => {
@@ -73,16 +73,16 @@ test.describe('Braze messaging', () => {
 		await expectLocalStorageItem(page, 'gu.brazeUserSet', 'true');
 	});
 
-	test.skip('clears Braze data when a user logs out', async ({
+	test('clears Braze data when a user logs out', async ({
 		context,
 		page,
 	}) => {
 		// Become logged in
 		await addCookie(context, { name: 'GU_U', value: 'true' });
-
+		const sevenDaysLater = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 		await addCookie(context, {
 			name: 'gu_hide_support_messaging',
-			value: 'true',
+			value: sevenDaysLater.toUTCString(),
 		});
 
 		// Mock call to '/user/me/identifiers'
