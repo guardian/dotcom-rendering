@@ -512,11 +512,10 @@ export const AdSlot = ({
 					className="ad-slot-container"
 					css={[
 						css`
-							position: relative;
 							height: 100%;
 							max-height: 100%;
 							${grid.column.right}
-							grid-row: 1;
+							grid-row: 1 / 20;
 							padding-top: ${space[2]}px;
 							${until.desktop} {
 								display: none;
@@ -539,7 +538,8 @@ export const AdSlot = ({
 						css={[
 							rightAdStyles,
 							css`
-								position: absolute;
+								position: sticky;
+								top: 0;
 							`,
 							labelStyles,
 						]}

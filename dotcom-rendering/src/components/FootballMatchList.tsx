@@ -367,26 +367,11 @@ export const FootballMatchList = ({
 
 	return (
 		<>
-			{days.map((day) => (
+			{days.map((day, index) => (
 				<section
 					css={css`
-						${grid.paddedContainer}
-						position: relative;
-						${from.tablet} {
-							&::before,
-							&::after {
-								content: '';
-								position: absolute;
-								border-left: 1px solid
-									${palette('--article-border')};
-								top: 0;
-								bottom: 0;
-							}
-
-							&::after {
-								right: 0;
-							}
-						}
+						${grid.subgrid}
+						grid-row: ${index + 3};
 					`}
 					key={day.dateISOString}
 				>

@@ -182,6 +182,14 @@ const grid = {
 	 * breakpoint.
 	 */
 	mobileColumnGap,
+	subgrid: `
+		display: contents;
+		@supports (grid-template-columns: subgrid) {
+			display: grid;
+			grid-template-columns: subgrid;
+			${between('grid-start', 'grid-end')}
+		}
+	`,
 } as const;
 
 // ----- Exports ----- //
