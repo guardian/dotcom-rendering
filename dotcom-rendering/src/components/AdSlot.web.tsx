@@ -10,7 +10,6 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import { grid } from '../grid';
 import { labelBoxStyles, labelHeight, labelStyles } from '../lib/adStyles';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
@@ -512,11 +511,8 @@ export const AdSlot = ({
 					className="ad-slot-container"
 					css={[
 						css`
-							position: relative;
 							height: 100%;
 							max-height: 100%;
-							${grid.column.right}
-							grid-row: 1;
 							padding-top: ${space[2]}px;
 							${until.desktop} {
 								display: none;
@@ -539,7 +535,8 @@ export const AdSlot = ({
 						css={[
 							rightAdStyles,
 							css`
-								position: absolute;
+								position: sticky;
+								top: 0;
 							`,
 							labelStyles,
 						]}
