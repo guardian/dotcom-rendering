@@ -452,30 +452,28 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 							}
 							variantOfChoiceCard={'THREE_TIER_CHOICE_CARDS'}
 						/>
-					</div>
-				)}
 
-				{showChoiceCards && threeTierChoiceCards && (
-					<div css={styles.ctaAndPaymentCardsContainer}>
-						<LinkButton
-							href={buildUrlForThreeTierChoiceCards(
-								tracking,
-								threeTierChoiceCardSelectedProduct,
-								countryCode,
-							)}
-							onClick={onCtaClick}
-							priority="tertiary"
-							cssOverrides={styles.linkButtonStyles}
-							icon={<SvgArrowRightStraight />}
-							iconSide="right"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							Continue
-						</LinkButton>
-						<PaymentCards
-							cssOverrides={styles.paymentCardsSvgOverrides}
-						/>
+						<div css={styles.ctaAndPaymentCardsContainer}>
+							<LinkButton
+								href={buildUrlForThreeTierChoiceCards(
+									tracking,
+									threeTierChoiceCardSelectedProduct,
+									countryCode,
+								)}
+								onClick={onCtaClick}
+								priority="tertiary"
+								cssOverrides={styles.linkButtonStyles}
+								icon={<SvgArrowRightStraight />}
+								iconSide="right"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Continue
+							</LinkButton>
+							<PaymentCards
+								cssOverrides={styles.paymentCardsSvgOverrides}
+							/>
+						</div>
 					</div>
 				)}
 
@@ -484,7 +482,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 						textColor={hexColourToString(basic.logo)}
 					/>
 				</div>
-
 				{showReminder && (
 					<div css={styles.reminderContainer}>
 						<span css={styles.reminderText}>
@@ -565,9 +562,6 @@ const styles = {
 			column-gap: 32px;
 		}
 
-		${from.wide} {
-			column-gap: 100px;
-		}
 		${templateSpacing.bannerContainer};
 	`,
 	closeButtonOverrides: () => css`
@@ -737,6 +731,9 @@ const styles = {
 	paymentCardsSvgOverrides: css`
 		${from.desktop} {
 			margin-top: -10px;
+		}
+		${until.desktop} {
+			margin-top: 10px;
 		}
 	`,
 	linkButtonStyles: css`
