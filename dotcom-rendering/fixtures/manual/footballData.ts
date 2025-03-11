@@ -21,7 +21,7 @@ export const regions: Regions = [
 
 export const initialDays: FootballMatches = [
 	{
-		date: new Date('2022-01-01T00:00:00Z'),
+		dateISOString: new Date('2022-01-01T00:00:00Z').toISOString(),
 		competitions: [
 			{
 				id: '635',
@@ -31,7 +31,9 @@ export const initialDays: FootballMatches = [
 				matches: [
 					{
 						kind: 'Live',
-						dateTime: new Date('2022-01-01T11:11:00Z'),
+						dateTimeISOString: new Date(
+							'2022-01-01T11:11:00Z',
+						).toISOString(),
 						paId: '4482093',
 						homeTeam: {
 							name: 'Torino',
@@ -45,7 +47,9 @@ export const initialDays: FootballMatches = [
 					},
 					{
 						kind: 'Fixture',
-						dateTime: new Date('2022-01-01T19:45:00Z'),
+						dateTimeISOString: new Date(
+							'2022-01-01T19:45:00Z',
+						).toISOString(),
 						paId: '4482890',
 						homeTeam: 'Auxerre',
 						awayTeam: 'St Etienne',
@@ -60,7 +64,9 @@ export const initialDays: FootballMatches = [
 				matches: [
 					{
 						kind: 'Result',
-						dateTime: new Date('2022-01-01T20:00:00Z'),
+						dateTimeISOString: new Date(
+							'2022-01-01T20:00:00Z',
+						).toISOString(),
 						paId: '4482835',
 						homeTeam: {
 							name: 'Las Palmas',
@@ -82,7 +88,9 @@ export const initialDays: FootballMatches = [
 				matches: [
 					{
 						kind: 'Result',
-						dateTime: new Date('2022-01-01T20:00:00Z'),
+						dateTimeISOString: new Date(
+							'2022-01-01T20:00:00Z',
+						).toISOString(),
 						paId: '4482836',
 						homeTeam: {
 							name: 'Brighton & Hove Albion Women',
@@ -103,7 +111,7 @@ export const initialDays: FootballMatches = [
 
 export const moreDays: FootballMatches = [
 	{
-		date: new Date('2022-01-05T00:00:00Z'),
+		dateISOString: new Date('2022-01-05T00:00:00Z').toISOString(),
 		competitions: [
 			{
 				id: '635',
@@ -113,7 +121,9 @@ export const moreDays: FootballMatches = [
 				matches: [
 					{
 						kind: 'Fixture',
-						dateTime: new Date('2022-01-05T19:45:00Z'),
+						dateTimeISOString: new Date(
+							'2022-01-05T19:45:00Z',
+						).toISOString(),
 						paId: '4482890',
 						homeTeam: 'Juventus',
 						awayTeam: 'Roma',

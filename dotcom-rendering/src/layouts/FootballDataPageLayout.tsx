@@ -68,6 +68,7 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 					initialDays={footballData.matchesList}
 					edition={footballData.editionId}
 					renderAds={renderAds}
+					pageId={footballData.config.pageId}
 				/>
 			</Island>
 

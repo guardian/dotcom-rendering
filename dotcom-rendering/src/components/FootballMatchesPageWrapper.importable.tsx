@@ -8,7 +8,7 @@ import { FootballMatchesPage } from './FootballMatchesPage';
 
 const goToCompetitionSpecificPage =
 	(guardianBaseUrl: string) => (path: string) => {
-		const url = `${guardianBaseUrl}/${path}`;
+		const url = `${guardianBaseUrl}${path}`;
 		window.location.assign(url);
 	};
 
@@ -19,6 +19,7 @@ type Props = {
 	initialDays: FootballMatches;
 	edition: EditionId;
 	renderAds: boolean;
+	pageId: string;
 };
 
 export const FootballMatchesPageWrapper = ({
@@ -28,6 +29,7 @@ export const FootballMatchesPageWrapper = ({
 	initialDays,
 	edition,
 	renderAds,
+	pageId,
 }: Props) => (
 	<FootballMatchesPage
 		regions={nations}
@@ -39,5 +41,6 @@ export const FootballMatchesPageWrapper = ({
 			guardianBaseUrl,
 		)}
 		renderAds={renderAds}
+		pageId={pageId}
 	/>
 );

@@ -17,18 +17,16 @@ import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderFootballDataPage } from './render.footballDataPage.web';
 
-const decidePageKind = (
-	canonicalUrl: string | undefined,
-): FootballMatchKind => {
-	if (canonicalUrl?.includes('live')) {
+const decidePageKind = (pageId: string): FootballMatchKind => {
+	if (pageId?.includes('live')) {
 		return 'Live';
 	}
 
-	if (canonicalUrl?.includes('results')) {
+	if (pageId?.includes('results')) {
 		return 'Result';
 	}
 
-	if (canonicalUrl?.includes('fixtures')) {
+	if (pageId?.includes('fixtures')) {
 		return 'Fixture';
 	}
 
@@ -71,7 +69,7 @@ const parseFEFootballData = (data: FEFootballDataPage): DCRFootballDataPage => {
 
 	return {
 		matchesList: parsedMatchesList.value,
-		kind: decidePageKind(data.canonicalUrl),
+		kind: decidePageKind(data.config.pageId),
 		nextPage: data.nextPage,
 		previousPage: data.previousPage,
 		regions: parseFEFootballCompetitionRegions(data.filters),

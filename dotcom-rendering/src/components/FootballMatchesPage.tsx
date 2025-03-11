@@ -22,6 +22,7 @@ type Props = {
 	goToCompetitionSpecificPage: (tag: string) => void;
 	getMoreDays?: () => Promise<Result<'failed', FootballMatches>>;
 	renderAds: boolean;
+	pageId: string;
 };
 
 const createTitle = (kind: FootballMatchKind, edition: EditionId) => {
@@ -48,6 +49,7 @@ export const FootballMatchesPage = ({
 	goToCompetitionSpecificPage,
 	getMoreDays,
 	renderAds,
+	pageId,
 }: Props) => (
 	<main id="maincontent" data-layout="FootballDataPageLayout">
 		<div
@@ -95,6 +97,7 @@ export const FootballMatchesPage = ({
 				<FootballCompetitionSelect
 					nations={nations}
 					kind={kind}
+					pageId={pageId}
 					onChange={goToCompetitionSpecificPage}
 				/>
 			</div>

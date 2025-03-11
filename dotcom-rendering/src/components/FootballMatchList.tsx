@@ -153,9 +153,9 @@ const MatchStatus = ({
 			return (
 				<time
 					css={matchStatusStyles}
-					dateTime={match.dateTime.toISOString()}
+					dateTime={match.dateTimeISOString}
 				>
-					{timeFormatter.format(match.dateTime)}
+					{timeFormatter.format(new Date(match.dateTimeISOString))}
 				</time>
 			);
 	}
@@ -194,7 +194,7 @@ const MatchWrapper = ({
 	now: Date;
 	children: ReactNode;
 }) => {
-	if (shouldRenderMatchLink(match.dateTime, now)) {
+	if (shouldRenderMatchLink(new Date(match.dateTimeISOString), now)) {
 		return (
 			<li css={matchListItemStyles}>
 				<a
@@ -388,9 +388,11 @@ export const FootballMatchList = ({
 							}
 						}
 					`}
-					key={day.date.toISOString()}
+					key={day.dateISOString}
 				>
-					<Day>{dateFormatter.format(day.date)}</Day>
+					<Day>
+						{dateFormatter.format(new Date(day.dateISOString))}
+					</Day>
 					{day.competitions.map((competition) => (
 						<Fragment key={competition.id}>
 							<CompetitionName>

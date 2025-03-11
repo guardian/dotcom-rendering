@@ -21,7 +21,7 @@ type TeamScore = {
 
 type MatchData = {
 	paId: string;
-	dateTime: Date;
+	dateTimeISOString: string;
 };
 
 export type MatchResult = MatchData & {
@@ -57,7 +57,7 @@ type Competition = {
 };
 
 type FootballDay = {
-	date: Date;
+	dateISOString: string;
 	competitions: Competition[];
 };
 
@@ -162,14 +162,14 @@ const listParse =
 		return f(input, []);
 	};
 
-const parseDate = (a: string): Result<string, Date> => {
+const parseDate = (a: string): Result<string, string> => {
 	const d = new Date(a);
 
 	if (d.toString() === 'Invalid Date') {
 		return error(`${String(a)} isn't a valid Date`);
 	}
 
-	return ok(d);
+	return ok(d.toISOString());
 };
 
 const parseScore = (
@@ -188,7 +188,7 @@ const parseScore = (
 	return ok(team.score);
 };
 
-const parseMatchDate = (date: string): Result<string, Date> => {
+const parseMatchDate = (date: string): Result<string, string> => {
 	// Frontend appends a timezone in square brackets
 	const isoDate = date.split('[')[0];
 
@@ -224,7 +224,7 @@ const parseFixture = (
 		kind: 'Fixture',
 		homeTeam: cleanTeamName(feFixture.homeTeam.name),
 		awayTeam: cleanTeamName(feFixture.awayTeam.name),
-		dateTime: date.value,
+		dateTimeISOString: date.value,
 		paId: feFixture.id,
 	});
 };
@@ -267,7 +267,7 @@ export const parseMatchResult = (
 			name: cleanTeamName(feResult.awayTeam.name),
 			score: awayScore.value,
 		},
-		dateTime: date.value,
+		dateTimeISOString: date.value,
 		paId: feResult.id,
 		comment: feResult.comments,
 	});
@@ -311,7 +311,7 @@ const parseLiveMatch = (
 			name: cleanTeamName(feMatchDay.awayTeam.name),
 			score: awayScore.value,
 		},
-		dateTime: date.value,
+		dateTimeISOString: date.value,
 		paId: feMatchDay.id,
 		comment: feMatchDay.comments,
 		status: feMatchDay.matchStatus,
@@ -393,7 +393,7 @@ const parseFootballDay = (
 	}
 
 	return ok({
-		date: date.value,
+		dateISOString: date.value,
 		competitions: competitions.value,
 	});
 };
@@ -427,5 +427,6 @@ const cleanTeamName = (teamName: string): string => {
 	return teamName
 		.replace('Ladies', '')
 		.replace('Holland', 'The Netherlands')
+		.replace('Bialystock', 'Białystok')
 		.replace('Union Saint Gilloise', 'Union Saint-Gilloise');
 };
