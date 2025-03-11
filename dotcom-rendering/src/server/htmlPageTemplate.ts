@@ -30,7 +30,6 @@ type BaseProps = {
 
 interface WebProps extends BaseProps {
 	renderingTarget: 'Web';
-	keywords: string;
 	section: string;
 	config: Config & { renderingTarget: 'Web' };
 }
