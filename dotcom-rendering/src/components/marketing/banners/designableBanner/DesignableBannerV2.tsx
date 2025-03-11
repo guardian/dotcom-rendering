@@ -556,13 +556,13 @@ const styles = {
 
 		${from.desktop} {
 			display: grid;
-			grid-template-columns: 1fr 280px 1fr auto;
+			grid-template-columns: auto 280px auto auto;
 			grid-template-rows: auto 1fr auto;
-			column-gap: 60px;
 			width: 100%;
 			max-width: 1300px;
 			margin: 0 auto;
 			padding: 0 ${space[5]}px;
+			column-gap: 32px;
 		}
 
 		${from.wide} {
@@ -645,14 +645,16 @@ const styles = {
 	guardianLogoContainer: css`
 		display: none;
 		${from.desktop} {
-			display: block;
-			width: 100px;
-			grid-column: 1;
-			grid-row: 1;
-			justify-self: start;
-			align-self: start;
+			display: flex;
+			width: 128px;
+			height: 41px;
+			justify-content: center;
+			align-items: center;
+			flex-shrink: 0;
+			padding-top: 24px;
 		}
 	`,
+
 	reminderContainer: css`
 		${textEgyptian15};
 		grid-column: 1;
