@@ -1,4 +1,4 @@
-import { isObject, isString, isUndefined } from '@guardian/libs';
+import { isObject, isUndefined } from '@guardian/libs';
 import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 import type { FEFootballDataPage } from '../feFootballDataPage';
@@ -26,7 +26,7 @@ export const getMoreDays =
 
 			const responseJson: unknown = await fetchResponse.json();
 
-			if (isObject(responseJson) && isString(responseJson.nextPage)) {
+			if (isObject(responseJson)) {
 				const feFootballData = responseJson as FEFootballDataPage;
 				const parsedFootballMatches = parse(feFootballData.matchesList);
 
@@ -39,12 +39,10 @@ export const getMoreDays =
 				}
 
 				setNextPage(feFootballData.nextPage);
+
 				return ok(parsedFootballMatches.value);
 			}
-
-			throw new Error(
-				'Failed to parse response JSON as an object with `nextPage`',
-			);
+			throw new Error('Failed to parse response JSON as an object');
 		} catch (e) {
 			if (e instanceof Error) {
 				window.guardian.modules.sentry.reportError(
