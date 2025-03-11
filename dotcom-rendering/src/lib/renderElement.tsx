@@ -362,6 +362,8 @@ export const renderElement = ({
 					title={element.title}
 					isAvatar={element.isAvatar}
 					isTimeline={isTimeline}
+					abTests={abTests}
+					editionId={editionId}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -868,7 +870,10 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.CrosswordElement':
 			return (
 				<Island priority="critical" defer={{ until: 'visible' }}>
-					<CrosswordComponent data={element.crossword} />
+					<CrosswordComponent
+						data={element.crossword}
+						canRenderAds={!isAdFreeUser && !isSensitive}
+					/>
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':

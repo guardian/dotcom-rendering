@@ -64,7 +64,7 @@ const Day = (props: { children: ReactNode }) => (
 		css={css`
 			${textSansBold14}
 			${grid.column.centre}
-				border-top: 1px solid ${palette('--football-match-list-border')};
+			border-top: 1px solid ${palette('--football-match-list-border')};
 			padding-top: ${space[2]}px;
 
 			${from.leftCol} {
@@ -153,9 +153,9 @@ const MatchStatus = ({
 			return (
 				<time
 					css={matchStatusStyles}
-					dateTime={match.dateTime.toISOString()}
+					dateTime={match.dateTimeISOString}
 				>
-					{timeFormatter.format(match.dateTime)}
+					{timeFormatter.format(new Date(match.dateTimeISOString))}
 				</time>
 			);
 	}
@@ -194,7 +194,7 @@ const MatchWrapper = ({
 	now: Date;
 	children: ReactNode;
 }) => {
-	if (shouldRenderMatchLink(match.dateTime, now)) {
+	if (shouldRenderMatchLink(new Date(match.dateTimeISOString), now)) {
 		return (
 			<li css={matchListItemStyles}>
 				<a
@@ -368,10 +368,33 @@ export const FootballMatchList = ({
 	return (
 		<>
 			{days.map((day) => (
-				<section css={css(grid.container)} key={day.date.toISOString()}>
-					<Day>{dateFormatter.format(day.date)}</Day>
+				<section
+					css={css`
+						${grid.paddedContainer}
+						position: relative;
+						${from.tablet} {
+							&::before,
+							&::after {
+								content: '';
+								position: absolute;
+								border-left: 1px solid
+									${palette('--article-border')};
+								top: 0;
+								bottom: 0;
+							}
+
+							&::after {
+								right: 0;
+							}
+						}
+					`}
+					key={day.dateISOString}
+				>
+					<Day>
+						{dateFormatter.format(new Date(day.dateISOString))}
+					</Day>
 					{day.competitions.map((competition) => (
-						<Fragment key={competition.competitionId}>
+						<Fragment key={competition.id}>
 							<CompetitionName>
 								<a
 									href={`${guardianBaseUrl}/${competition.tag}`}
@@ -402,7 +425,7 @@ export const FootballMatchList = ({
 			))}
 
 			{getMoreDays === undefined ? null : (
-				<div css={css(grid.container)}>
+				<div css={css(grid.paddedContainer)}>
 					<div
 						css={css`
 							${grid.column.centre}

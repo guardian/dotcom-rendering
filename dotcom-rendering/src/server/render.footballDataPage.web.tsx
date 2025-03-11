@@ -1,7 +1,11 @@
 import { isString } from '@guardian/libs';
 import { ConfigProvider } from '../components/ConfigContext';
 import { FootballDataPage } from '../components/FootballDataPage';
-import type { FEFootballDataPage } from '../feFootballDataPage';
+import type {
+	DCRFootballDataPage,
+	FootballMatchKind,
+	Regions,
+} from '../footballMatches';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -14,9 +18,52 @@ import { createGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
-export const renderFootballDataPage = (footballData: FEFootballDataPage) => {
+const fromTheGuardian =
+	'from the Guardian, the world&#x27;s leading liberal voice';
+
+const decideDescription = (kind: FootballMatchKind) => {
+	switch (kind) {
+		case 'Live':
+			return `Live football scores ${fromTheGuardian}`;
+		case 'Result':
+			return `Latest football results ${fromTheGuardian}`;
+		case 'Fixture':
+			return `Football fixtures ${fromTheGuardian}`;
+	}
+};
+
+const decideTitle = (
+	kind: FootballMatchKind,
+	pageId: string,
+	regions: Regions,
+) => {
+	const pagePath = pageId.startsWith('/') ? pageId.slice(1) : pageId;
+	const competitionName = regions
+		.flatMap((region) => region.competitions) // Flatten all competitions into a single array
+		.find((competition) => competition.url === `/${pagePath}`)?.name;
+
+	const footballTitle = '| Football | The Guardian';
+
+	switch (kind) {
+		case 'Live':
+			return `${
+				competitionName ? `Today's ${competitionName} ` : 'Live '
+			}matches ${footballTitle}`;
+		case 'Result':
+			return `${
+				competitionName ? `${competitionName} ` : 'All '
+			}results ${footballTitle}`;
+		case 'Fixture':
+			return `${
+				competitionName ? `${competitionName} ` : 'All '
+			}fixtures ${footballTitle}`;
+	}
+};
+
+export const renderFootballDataPage = (footballData: DCRFootballDataPage) => {
+	const renderingTarget = 'Web';
 	const config: Config = {
-		renderingTarget: 'Web',
+		renderingTarget,
 		darkModeAvailable:
 			footballData.config.abTests.darkModeWebVariant === 'variant',
 		assetOrigin: ASSET_ORIGIN,
@@ -61,9 +108,12 @@ export const renderFootballDataPage = (footballData: FEFootballDataPage) => {
 		scriptTags,
 		css: extractedCss,
 		html,
-		// ToDo:
-		//title,
-		//description,
+		title: decideTitle(
+			footballData.kind,
+			footballData.config.pageId,
+			footballData.regions,
+		),
+		description: decideDescription(footballData.kind),
 		canonicalUrl: footballData.canonicalUrl,
 		guardian: createGuardian({
 			editionId: footballData.editionId,
@@ -72,7 +122,6 @@ export const renderFootballDataPage = (footballData: FEFootballDataPage) => {
 			revisionNumber: footballData.config.revisionNumber,
 			sentryPublicApiKey: footballData.config.sentryPublicApiKey,
 			sentryHost: footballData.config.sentryHost,
-			keywordIds: '', // TODO: we need to make this field optional in createGuardian
 			dfpAccountId: footballData.config.dfpAccountId,
 			adUnit: footballData.config.adUnit,
 			ajaxUrl: footballData.config.ajaxUrl,
@@ -83,9 +132,10 @@ export const renderFootballDataPage = (footballData: FEFootballDataPage) => {
 			isPaidContent: footballData.config.isPaidContent,
 			contentType: footballData.config.contentType,
 			googleRecaptchaSiteKey: footballData.config.googleRecaptchaSiteKey,
+			unknownConfig: footballData.config,
 		}),
-		keywords: '', // TODO: we need to make this field optional in createGuardian
-		renderingTarget: 'Web',
+		keywords: '',
+		renderingTarget,
 		weAreHiring: !!footballData.config.switches.weAreHiring,
 		config,
 	});

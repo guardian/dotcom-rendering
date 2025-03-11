@@ -13,6 +13,11 @@ import { TextBlockComponent } from './TextBlockComponent';
 export default {
 	component: InteractiveBlockComponent,
 	title: 'Components/InteractiveBlockComponent',
+	parameters: {
+		chromatic: {
+			disableSnapshot: true,
+		},
+	},
 };
 const textHtml =
 	'<p>US and British intelligence agencies have successfully cracked much of the online encryption relied upon by hundreds of millions of people to protect the privacy of their personal data, online transactions and emails, according to top-secret documents revealed by former contractor Edward Snowden.</p>';

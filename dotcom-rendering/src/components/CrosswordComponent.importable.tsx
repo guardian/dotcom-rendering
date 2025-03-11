@@ -2,15 +2,20 @@ import { css } from '@emotion/react';
 import { Crossword as ReactCrossword } from '@guardian/react-crossword-next';
 import type { CrosswordProps } from '@guardian/react-crossword-next';
 import {
+	between,
 	from,
 	headlineBold17,
 	space,
 	textSans14,
 	textSansItalic12,
 } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
+import libDebounce from 'lodash.debounce';
 import type { ReactNode } from 'react';
-import { memo } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
+import { removeMediaRulePrefix, useMatchMedia } from '../lib/useMatchMedia';
 import { palette } from '../palette';
+import { AdSlot } from './AdSlot.web';
 
 const CluesHeader = memo(({ children }: { children: ReactNode }) => {
 	return (
@@ -31,6 +36,14 @@ const CluesHeader = memo(({ children }: { children: ReactNode }) => {
 	);
 });
 
+const MobileBannerAdComponent = () => {
+	return (
+		<Hide from="phablet">
+			<AdSlot position="crossword-banner-mobile" />
+		</Hide>
+	);
+};
+
 const Layout: CrosswordProps['Layout'] = ({
 	Grid,
 	Clues,
@@ -39,15 +52,61 @@ const Layout: CrosswordProps['Layout'] = ({
 	AnagramHelper,
 	FocusedClue,
 	gridWidth,
+	MobileBannerAd,
 }) => {
+	const cluesRef = useRef<HTMLDivElement>(null);
+	const [showGradient, setShowGradient] = useState(false);
+
+	const betweenTabletAndLeftCol = useMatchMedia(
+		removeMediaRulePrefix(between.tablet.and.leftCol),
+	);
+
+	const updateGradientVisibility = () => {
+		const clueList = cluesRef.current;
+		if (!clueList) return;
+		const scrollPos = clueList.scrollTop;
+		const maxScroll = clueList.scrollHeight - clueList.clientHeight;
+		setShowGradient(scrollPos < maxScroll - 16);
+	};
+
+	useEffect(() => {
+		const clueList = cluesRef.current;
+		if (!clueList) return;
+
+		updateGradientVisibility();
+
+		clueList.addEventListener(
+			'scroll',
+			libDebounce(updateGradientVisibility, 100),
+		);
+		window.addEventListener(
+			'resize',
+			libDebounce(updateGradientVisibility, 100),
+		);
+
+		return () => {
+			clueList.removeEventListener(
+				'scroll',
+				libDebounce(updateGradientVisibility, 100),
+			);
+			window.removeEventListener(
+				'resize',
+				libDebounce(updateGradientVisibility, 100),
+			);
+		};
+	}, []);
+
 	return (
 		<div
 			css={css`
 				display: flex;
 				flex-direction: column;
 				gap: ${space[4]}px;
-				${from.phablet} {
+				${from.tablet} {
 					flex-direction: row;
+				}
+				@media print {
+					flex-direction: column;
 				}
 			`}
 		>
@@ -60,7 +119,7 @@ const Layout: CrosswordProps['Layout'] = ({
 				<FocusedClue
 					additionalCss={css`
 						max-width: ${gridWidth}px;
-						${from.phablet} {
+						${from.tablet} {
 							display: none;
 						}
 					`}
@@ -74,11 +133,15 @@ const Layout: CrosswordProps['Layout'] = ({
 				>
 					<FocusedClue
 						additionalCss={css`
-							${from.phablet} {
+							max-width: ${gridWidth}px;
+							${from.tablet} {
 								display: none;
 							}
 						`}
 					/>
+					{typeof MobileBannerAd !== 'undefined' && (
+						<MobileBannerAd />
+					)}
 					<Controls />
 					<div
 						css={css`
@@ -92,22 +155,70 @@ const Layout: CrosswordProps['Layout'] = ({
 
 			<div
 				css={css`
-					${textSans14};
+					position: relative;
 					flex: 1;
 					display: flex;
-					flex-direction: column;
-					gap: ${space[4]}px;
-					align-items: flex-start;
-					${from.desktop} {
-						flex-direction: row;
+					${from.tablet} {
+						max-height: ${gridWidth}px;
+						::after {
+							display: ${showGradient ? 'block' : 'none'};
+							position: absolute;
+							content: '';
+							bottom: 0;
+							left: 0;
+							width: 100%;
+							height: 64px;
+							background-image: linear-gradient(
+								180deg,
+								transparent,
+								${palette('--article-background')}
+							);
+						}
 					}
-					> * {
-						flex: 1;
+					${from.leftCol} {
+						max-height: none;
+						::after {
+							background-image: none;
+						}
 					}
 				`}
 			>
-				<Clues direction="across" Header={CluesHeader} />
-				<Clues direction="down" Header={CluesHeader} />
+				<div
+					ref={cluesRef}
+					css={css`
+						${textSans14};
+						flex: 1;
+						display: flex;
+						flex-direction: column;
+						gap: ${space[4]}px;
+						${from.tablet} {
+							overflow-y: scroll;
+						}
+						${from.desktop} {
+							flex-direction: row;
+						}
+						${from.leftCol} {
+							overflow: visible;
+						}
+						> * {
+							flex: 1;
+						}
+						@media print {
+							flex-direction: row;
+						}
+					`}
+				>
+					<Clues
+						direction="across"
+						Header={CluesHeader}
+						scrollToSelected={betweenTabletAndLeftCol}
+					/>
+					<Clues
+						direction="down"
+						Header={CluesHeader}
+						scrollToSelected={betweenTabletAndLeftCol}
+					/>
+				</div>
 			</div>
 		</div>
 	);
@@ -115,6 +226,14 @@ const Layout: CrosswordProps['Layout'] = ({
 
 export const CrosswordComponent = ({
 	data,
+	canRenderAds,
 }: {
 	data: CrosswordProps['data'];
-}) => <ReactCrossword data={data} Layout={Layout} />;
+	canRenderAds?: boolean;
+}) => (
+	<ReactCrossword
+		data={data}
+		Layout={Layout}
+		MobileBannerAd={canRenderAds ? MobileBannerAdComponent : undefined}
+	/>
+);

@@ -128,6 +128,7 @@ const usePayload = ({
 			hasOptedOutOfArticleCount,
 			url: window.location.origin + window.location.pathname,
 			isSignedIn,
+			pageId,
 		},
 	};
 };

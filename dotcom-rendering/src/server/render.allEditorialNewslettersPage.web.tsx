@@ -78,7 +78,6 @@ export const renderEditorialNewslettersPage = ({
 		revisionNumber: newslettersPage.config.revisionNumber,
 		sentryPublicApiKey: newslettersPage.config.sentryPublicApiKey,
 		sentryHost: newslettersPage.config.sentryHost,
-		keywordIds: '',
 		dfpAccountId: newslettersPage.config.dfpAccountId,
 		adUnit: newslettersPage.config.adUnit,
 		ajaxUrl: newslettersPage.config.ajaxUrl,

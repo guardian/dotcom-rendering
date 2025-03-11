@@ -11,7 +11,7 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../../lib/articleFormat';
-import { isMediaCard as isAMediaCard } from '../../lib/cardHelpers';
+import { isMediaCard } from '../../lib/cardHelpers';
 import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
@@ -98,7 +98,9 @@ export type Props = {
 	imageSize?: ImageSizeType;
 	imageLoading: Loading;
 	isCrossword?: boolean;
+	isNewsletter?: boolean;
 	isOnwardContent?: boolean;
+	isCartoon?: boolean;
 	trailText?: string;
 	avatarUrl?: string;
 	showClock?: boolean;
@@ -319,14 +321,17 @@ const getHeadlinePosition = ({
 	isFlexSplash,
 	containerType,
 	showLivePlayable,
-	isMediaCard,
+	isMediaCardOrNewsletter,
 }: {
 	containerType?: DCRContainerType;
 	isFlexSplash?: boolean;
 	showLivePlayable: boolean;
-	isMediaCard: boolean;
+	isMediaCardOrNewsletter: boolean;
 }) => {
-	if (isMediaCard) return 'inner';
+	if (isMediaCardOrNewsletter) {
+		return 'inner';
+	}
+
 	if (containerType === 'flexible/special' && isFlexSplash) {
 		return 'outer';
 	}
@@ -386,7 +391,9 @@ export const Card = ({
 	discussionId,
 	isDynamo,
 	isCrossword,
+	isNewsletter = false,
 	isOnwardContent = false,
+	isCartoon = false,
 	isExternalLink,
 	slideshowImages,
 	showLivePlayable = false,
@@ -490,7 +497,7 @@ export const Card = ({
 			</Link>
 		);
 
-	const MediaPill = () => (
+	const MediaOrNewsletterPill = () => (
 		<div
 			css={css`
 				margin-top: auto;
@@ -502,13 +509,13 @@ export const Card = ({
 						<Pill
 							content={'Live'}
 							icon={<div css={liveBulletStyles} />}
-							iconSize={'small'}
+							iconSize="small"
 						/>
 					) : (
 						<Pill
 							content={secondsToDuration(mainMedia.duration)}
 							icon={<SvgMediaControlsPlay />}
-							iconSize={'small'}
+							iconSize="small"
 						/>
 					)}
 				</>
@@ -518,7 +525,7 @@ export const Card = ({
 				<Pill
 					content={mainMedia.duration}
 					icon={<SvgMediaControlsPlay />}
-					iconSize={'small'}
+					iconSize="small"
 				/>
 			)}
 			{mainMedia?.type === 'Gallery' && (
@@ -529,6 +536,7 @@ export const Card = ({
 					iconSide="right"
 				/>
 			)}
+			{isNewsletter && <Pill content="Newsletter" />}
 		</div>
 	);
 
@@ -541,10 +549,13 @@ export const Card = ({
 	}
 
 	/**
-	 * Check media type to determine if pill, or article metadata & icon shown.
-	 * Currently pills are only shown within beta containers.
-	 */
-	const showPill = isBetaContainer && !!mainMedia;
+-	 * Media cards have contrasting background colours. We add additional
+	 * padding to these cards to keep the text readable.
+-	 */
+	const isMediaCardOrNewsletter = isMediaCard(format) || isNewsletter;
+
+	// Currently pills are only shown within beta containers.
+	const showPill = isBetaContainer && isMediaCardOrNewsletter;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -573,13 +584,7 @@ export const Card = ({
 		isBetaContainer,
 	);
 
-	/**
--	 * Media cards have contrasting background colours. We add additional
-	 * padding to these cards to keep the text readable.
--	 */
-	const isMediaCard = isAMediaCard(format);
-
-	const backgroundColour = isMediaCard
+	const backgroundColour = isMediaCardOrNewsletter
 		? palette('--card-media-background')
 		: palette('--card-background');
 
@@ -606,7 +611,7 @@ export const Card = ({
 		containerType,
 		isFlexSplash,
 		showLivePlayable,
-		isMediaCard,
+		isMediaCardOrNewsletter,
 	});
 
 	const hideTrailTextUntil = () => {
@@ -631,7 +636,7 @@ export const Card = ({
 				column: 'none',
 			};
 		}
-		if (isMediaCard && !isFlexibleContainer) {
+		if (isMediaCardOrNewsletter && !isFlexibleContainer) {
 			return {
 				row: 'tiny',
 				column: 'tiny',
@@ -681,26 +686,27 @@ export const Card = ({
 	const decideOuterSublinks = () => {
 		if (!hasSublinks) return null;
 		if (sublinkPosition === 'none') return null;
+
+		const OuterSublinks = () => (
+			<SupportingContent
+				supportingContent={supportingContent}
+				containerPalette={containerPalette}
+				alignment={supportingContentAlignment}
+				isDynamo={isDynamo}
+				fillBackgroundOnMobile={
+					!!isFlexSplash ||
+					(isBetaContainer && imagePositionOnMobile === 'bottom')
+				}
+			/>
+		);
+
 		if (sublinkPosition === 'outer') {
-			return (
-				<SupportingContent
-					supportingContent={supportingContent}
-					containerPalette={containerPalette}
-					alignment={supportingContentAlignment}
-					isDynamo={isDynamo}
-					fillBackgroundOnMobile={isFlexSplash}
-				/>
-			);
+			return <OuterSublinks />;
 		}
+
 		return (
 			<Hide from={isFlexSplash ? 'desktop' : 'tablet'}>
-				<SupportingContent
-					supportingContent={supportingContent}
-					containerPalette={containerPalette}
-					alignment={supportingContentAlignment}
-					isDynamo={isDynamo}
-					fillBackgroundOnMobile={isFlexSplash}
-				/>
+				<OuterSublinks />
 			</Hide>
 		);
 	};
@@ -822,7 +828,7 @@ export const Card = ({
 						hideImageOverlay={
 							media.type === 'slideshow' && isFlexibleContainer
 						}
-						padImage={isMediaCard && isBetaContainer}
+						padImage={isMediaCardOrNewsletter && isBetaContainer}
 						isInLoopVideoTest={isInLoopVideoTest}
 					>
 						{media.type === 'slideshow' &&
@@ -1044,13 +1050,13 @@ export const Card = ({
 					</ImageWrapper>
 				)}
 
-				{containerType != 'fixed/video' && (
+				{containerType !== 'fixed/video' && (
 					<ContentWrapper
 						imageType={media?.type}
 						imageSize={imageSize}
 						imagePositionOnDesktop={imagePositionOnDesktop}
 						padContent={determinePadContent(
-							isMediaCard,
+							isMediaCardOrNewsletter,
 							isBetaContainer,
 							isOnwardContent,
 						)}
@@ -1089,6 +1095,7 @@ export const Card = ({
 										showByline={showByline}
 										isExternalLink={isExternalLink}
 										isBetaContainer={isBetaContainer}
+										isCartoon={isCartoon}
 										kickerImage={
 											showKickerImage &&
 											media?.type === 'podcast'
@@ -1126,7 +1133,7 @@ export const Card = ({
 								<>
 									{showPill ? (
 										<>
-											<MediaPill />
+											<MediaOrNewsletterPill />
 											{format.theme ===
 												ArticleSpecial.Labs &&
 												branding && (
@@ -1224,7 +1231,9 @@ export const Card = ({
 				}
 				style={{
 					padding:
-						isMediaCard || isOnwardContent ? `0 ${space[2]}px` : 0,
+						isMediaCardOrNewsletter || isOnwardContent
+							? `0 ${space[2]}px`
+							: 0,
 				}}
 			>
 				{showLivePlayable && liveUpdatesPosition === 'outer' && (

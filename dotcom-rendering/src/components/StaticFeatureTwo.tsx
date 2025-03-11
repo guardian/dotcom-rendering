@@ -66,6 +66,7 @@ export const StaticFeatureTwo = ({
 							discussionId={card.discussionId}
 							mainMedia={card.mainMedia}
 							isExternalLink={card.isExternalLink}
+							isCartoon={card.isCartoon}
 							// branding={card.branding}
 							containerPalette={containerPalette}
 							trailText={undefined}
@@ -76,6 +77,8 @@ export const StaticFeatureTwo = ({
 							headlineSizes={{ desktop: 'small' }}
 							supportingContent={card.supportingContent}
 							collectionId={collectionId}
+							isNewsletter={card.isNewsletter}
+							showQuotes={card.showQuotedHeadline}
 						/>
 					</LI>
 				);

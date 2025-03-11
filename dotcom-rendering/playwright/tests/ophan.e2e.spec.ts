@@ -19,7 +19,13 @@ const articleUrl =
 const frontUrl = 'https://www.theguardian.com/uk';
 
 test.describe('Ophan requests', () => {
-	test('should make an IMPRESSION request on an article when consent is rejected', async ({
+	/**
+	 * Why is this test skipped?
+	 *
+	 * Since the launch of Guardian Ad Lite, rejecting all cookies takes the user to the "Consent or Pay" page,
+	 * instead of removing the cookie banner. This new behaviour is causing the below test to fail.
+	 */
+	test.skip('should make an IMPRESSION request on an article when consent is rejected', async ({
 		page,
 		context,
 	}) => {

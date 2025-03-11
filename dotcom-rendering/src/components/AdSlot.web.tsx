@@ -1,14 +1,16 @@
 import { css } from '@emotion/react';
 import type { SlotName } from '@guardian/commercial';
-import { adSizes } from '@guardian/commercial';
+import { adSizes, constants } from '@guardian/commercial';
 import {
 	between,
 	breakpoints,
 	from,
 	palette,
+	space,
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
+import { grid } from '../grid';
 import { labelBoxStyles, labelHeight, labelStyles } from '../lib/adStyles';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
@@ -33,7 +35,6 @@ type ServerRenderedSlot = Exclude<
 	| 'carrot'
 	| 'comments-expanded'
 	| 'crossword-banner'
-	| 'crossword-banner-mobile'
 	| 'exclusion'
 	| 'external'
 	| 'inline'
@@ -66,6 +67,13 @@ type RightProps = {
 	shouldHideReaderRevenue: boolean;
 };
 
+type RightFootballProps = {
+	position: 'right-football';
+	colourScheme?: ColourScheme;
+	index?: never;
+	shouldHideReaderRevenue?: never;
+};
+
 type RemainingProps = {
 	position: Exclude<ServerRenderedSlot, IndexedSlot>;
 	colourScheme?: ColourScheme;
@@ -80,7 +88,8 @@ type RemainingProps = {
  * - If `position` is `right` then we expect the `shouldHideReaderRevenue` prop
  * - If not, then we explicitly refuse these properties
  */
-type Props = DefaultProps & (RightProps | IndexedSlotProps | RemainingProps);
+type Props = DefaultProps &
+	(RightProps | IndexedSlotProps | RemainingProps | RightFootballProps);
 
 const halfPageAdHeight = adSizes.halfPage.height;
 
@@ -370,6 +379,10 @@ const mobileStickyAdStylesFullWidth = css`
 	}
 `;
 
+const crosswordBannerMobileAdStyles = css`
+	min-height: ${adSizes.mobilesticky.height + constants.AD_LABEL_HEIGHT}px;
+`;
+
 export const AdSlot = ({
 	position,
 	display,
@@ -492,6 +505,52 @@ export const AdSlot = ({
 				default:
 					return null;
 			}
+		case 'right-football': {
+			const slotId = 'dfp-ad--right';
+			return (
+				<div
+					className="ad-slot-container"
+					css={[
+						css`
+							position: relative;
+							height: 100%;
+							max-height: 100%;
+							${grid.column.right}
+							grid-row: 1;
+							padding-top: ${space[2]}px;
+							${until.desktop} {
+								display: none;
+							}
+						`,
+						labelStyles,
+						rightAdLabelStyles,
+					]}
+				>
+					<div
+						id={slotId}
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--right',
+							'ad-slot--mpu-banner-ad',
+							'ad-slot--rendered',
+							'js-sticky-mpu',
+						].join(' ')}
+						css={[
+							rightAdStyles,
+							css`
+								position: absolute;
+							`,
+							labelStyles,
+						]}
+						data-link-name="ad slot right"
+						data-name="right"
+						data-testid="slot"
+						aria-hidden="true"
+					/>
+				</div>
+			);
+		}
 		case 'comments': {
 			return (
 				<div className="ad-slot-container">
@@ -795,6 +854,26 @@ export const AdSlot = ({
 						css={[articleEndAdStyles]}
 						data-link-name="ad slot article-end"
 						data-name="article-end"
+						data-testid="slot"
+						aria-hidden="true"
+					/>
+				</div>
+			);
+		}
+		case 'crossword-banner-mobile': {
+			return (
+				<div className="ad-slot-container">
+					<div
+						id="dfp-ad--crossword-banner-mobile"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--crossword-banner-mobile',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={[crosswordBannerMobileAdStyles]}
+						data-link-name="ad slot crossword-banner-mobile"
+						data-name="crossword-banner-mobile"
 						data-testid="slot"
 						aria-hidden="true"
 					/>

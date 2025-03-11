@@ -2513,7 +2513,16 @@ const cardHeadlineTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 
 const cardTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
-const cardTrailTextLight: PaletteFunction = () => sourcePalette.neutral[46];
+const cardTrailTextLight: PaletteFunction = (format) => {
+	switch (format.design) {
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[38];
+		default:
+			return sourcePalette.neutral[46];
+	}
+};
 const cardTrailTextDark: PaletteFunction = () => sourcePalette.neutral[73];
 
 const liveKickerBackgroundLight: PaletteFunction = (format) => {

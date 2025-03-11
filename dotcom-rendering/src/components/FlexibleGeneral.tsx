@@ -4,6 +4,7 @@ import { palette } from '../palette';
 import type { BoostLevel } from '../types/content';
 import type {
 	AspectRatio,
+	DCRContainerLevel,
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
@@ -28,6 +29,7 @@ type Props = {
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
+	containerLevel?: DCRContainerLevel;
 };
 
 type RowLayout = 'oneCard' | 'oneCardBoosted' | 'twoCard';
@@ -65,7 +67,8 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 		// We change the row layout to 'twoCard' to indicate that it is now full
 		if (row && row.layout === 'oneCard') {
 			return [...acc.slice(0, acc.length - 1), addCardToRow(row, card)];
-		} // Otherwise we consider the row to be 'full' and start a new row
+		}
+		// Otherwise we consider the row to be 'full' and start a new row
 		else {
 			return [...acc, createNewRow('oneCard', card)];
 		}
@@ -84,7 +87,8 @@ type BoostedSplashProperties = {
 };
 
 /**
- * Boosting a splash card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
+ * Boosting a splash card will affect the layout and style of the card.
+ * This function will determine the properties of the card based on the boost level.
  */
 const decideSplashCardProperties = (
 	boostLevel: BoostLevel,
@@ -174,6 +178,7 @@ export const SplashCardLayout = ({
 	imageLoading,
 	aspectRatio,
 	isLastRow,
+	containerLevel,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -182,6 +187,7 @@ export const SplashCardLayout = ({
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
+	containerLevel: DCRContainerLevel;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -237,7 +243,10 @@ export const SplashCardLayout = ({
 					liveUpdatesAlignment={liveUpdatesAlignment}
 					isFlexSplash={true}
 					showTopBarDesktop={false}
-					showTopBarMobile={true}
+					showTopBarMobile={
+						containerLevel === 'Primary' &&
+						!isMediaCard(card.format)
+					}
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
@@ -255,11 +264,12 @@ type BoostedCardProperties = {
 };
 
 /**
- * Boosting a standard card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
+ * Boosting a standard card will affect the layout and style of the card.
+ * This function will determine the properties of the card based on the boost level.
  */
 const decideCardProperties = (
-	boostLevel: Omit<BoostLevel, 'default' | 'gigaboost'> = 'boost',
 	supportingContentLength: number,
+	boostLevel: Omit<BoostLevel, 'default' | 'gigaboost'> = 'boost',
 	avatarUrl?: string,
 ): BoostedCardProperties => {
 	switch (boostLevel) {
@@ -300,6 +310,7 @@ export const BoostedCardLayout = ({
 	aspectRatio,
 	isFirstRow,
 	isLastRow,
+	containerLevel,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -309,6 +320,7 @@ export const BoostedCardLayout = ({
 	aspectRatio: AspectRatio;
 	isFirstRow: boolean;
 	isLastRow: boolean;
+	containerLevel: DCRContainerLevel;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -319,10 +331,11 @@ export const BoostedCardLayout = ({
 		supportingContentAlignment,
 		liveUpdatesPosition,
 	} = decideCardProperties(
-		card.boostLevel,
 		card.supportingContent?.length ?? 0,
+		card.boostLevel,
 		card.avatarUrl,
 	);
+
 	return (
 		<UL
 			showTopBar={!isFirstRow}
@@ -358,7 +371,11 @@ export const BoostedCardLayout = ({
 					showLivePlayable={card.showLivePlayable}
 					liveUpdatesAlignment="horizontal"
 					showTopBarDesktop={false}
-					showTopBarMobile={true}
+					showTopBarMobile={
+						!isFirstRow ||
+						(containerLevel === 'Primary' &&
+							!isMediaCard(card.format))
+					}
 					liveUpdatesPosition={liveUpdatesPosition}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
@@ -379,6 +396,7 @@ export const StandardCardLayout = ({
 	isFirstStandardRow,
 	aspectRatio,
 	isLastRow,
+	containerLevel,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -390,6 +408,7 @@ export const StandardCardLayout = ({
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
+	containerLevel: DCRContainerLevel;
 }) => {
 	if (cards.length === 0) return null;
 
@@ -406,7 +425,7 @@ export const StandardCardLayout = ({
 				return (
 					<LI
 						stretch={false}
-						percentage={'50%'}
+						percentage="50%"
 						key={card.url}
 						padSides={true}
 						showDivider={cardIndex > 0}
@@ -422,7 +441,7 @@ export const StandardCardLayout = ({
 							absoluteServerTimes={absoluteServerTimes}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
-							imagePositionOnDesktop={'left'}
+							imagePositionOnDesktop="left"
 							supportingContent={card.supportingContent?.slice(
 								0,
 								2,
@@ -438,7 +457,11 @@ export const StandardCardLayout = ({
 							kickerText={card.kickerText}
 							showLivePlayable={false}
 							showTopBarDesktop={false}
-							showTopBarMobile={true}
+							showTopBarMobile={
+								!isFirstRow ||
+								(containerLevel === 'Primary' &&
+									!isMediaCard(card.format))
+							}
 							trailText={undefined}
 							// On standard cards, we increase the headline size if the trail image has been hidden
 							headlineSizes={
@@ -465,6 +488,7 @@ export const FlexibleGeneral = ({
 	absoluteServerTimes,
 	imageLoading,
 	aspectRatio,
+	containerLevel = 'Primary',
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1);
 	const cards = [...groupedTrails.standard].slice(0, 19);
@@ -481,6 +505,7 @@ export const FlexibleGeneral = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					isLastRow={cards.length === 0}
+					containerLevel={containerLevel}
 				/>
 			)}
 
@@ -497,6 +522,7 @@ export const FlexibleGeneral = ({
 								aspectRatio={aspectRatio}
 								isFirstRow={!splash.length && i === 0}
 								isLastRow={i === groupedCards.length - 1}
+								containerLevel={containerLevel}
 							/>
 						);
 
@@ -514,6 +540,7 @@ export const FlexibleGeneral = ({
 								isFirstStandardRow={i === 0}
 								aspectRatio={aspectRatio}
 								isLastRow={i === groupedCards.length - 1}
+								containerLevel={containerLevel}
 							/>
 						);
 				}
