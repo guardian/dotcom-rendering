@@ -36,7 +36,6 @@ import {
 } from '../../../../lib/useMatchMedia';
 import { ThreeTierChoiceCards } from '../../epics/ThreeTierChoiceCards';
 import type { SupportTier } from '../../epics/utils/threeTierChoiceCardAmounts';
-import { useChoiceCards } from '../../hooks/useChoiceCards';
 import { useReminder } from '../../hooks/useReminder';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import {
@@ -50,7 +49,6 @@ import type {
 	BannerRenderProps,
 } from '../common/types';
 import type { ChoiceCardSettings } from './components/choiceCards/ChoiceCards';
-import { ChoiceCards } from './components/choiceCards/ChoiceCards';
 import { DesignableBannerArticleCount } from './components/DesignableBannerArticleCount';
 import { DesignableBannerBody } from './components/DesignableBannerBody';
 import { DesignableBannerCloseButton } from './components/DesignableBannerCloseButton';
@@ -59,7 +57,6 @@ import { DesignableBannerHeader } from './components/DesignableBannerHeader';
 import { DesignableBannerReminder } from './components/DesignableBannerReminder';
 import { DesignableBannerVisual } from './components/DesignableBannerVisual';
 import type { BannerTemplateSettings, CtaSettings } from './settings';
-import { buttonStyles } from './styles/buttonStyles';
 import { templateSpacing } from './styles/templateStyles';
 
 const buildImageSettings = (
@@ -190,23 +187,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 			}
 		}
 	}, [iosAppBannerPresent, submitComponentEvent]);
-
-	/**
-	 * V1 choice cards state
-	 */
-
-	const {
-		choiceCardSelection,
-		setChoiceCardSelection,
-		getCtaText,
-		getCtaUrl,
-		currencySymbol,
-	} = useChoiceCards(
-		choiceCardAmounts,
-		countryCode,
-		content.mainContent.primaryCta,
-		content.mobileContent.primaryCta,
-	);
 
 	/**
 	 * V2 choice cards state
@@ -366,7 +346,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 				templateSettings.containerSettings.textColor,
 			)}
 		>
-			<div css={styles.containerOverrides(threeTierChoiceCards)}>
+			<div css={styles.containerOverrides}>
 				<div css={getHeaderContainerCss()}>
 					<DesignableBannerHeader
 						heading={content.mainContent.heading}
@@ -461,29 +441,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 						)}
 					/>
 				)}
-				{showChoiceCards && !threeTierChoiceCards && (
-					<div
-						css={styles.choiceCardsContainer(
-							templateSettings.containerSettings.backgroundColour,
-						)}
-					>
-						<ChoiceCards
-							setSelectionsCallback={setChoiceCardSelection}
-							selection={choiceCardSelection}
-							submitComponentEvent={submitComponentEvent}
-							currencySymbol={currencySymbol}
-							componentId={'contributions-banner-choice-cards'}
-							amountsTest={choiceCardAmounts}
-							design={templateSettings.choiceCardSettings}
-							getCtaText={getCtaText}
-							getCtaUrl={getCtaUrl}
-							cssCtaOverides={buttonStyles(
-								templateSettings.primaryCtaSettings,
-							)}
-							onCtaClick={onCtaClick}
-						/>
-					</div>
-				)}
 
 				{showChoiceCards && threeTierChoiceCards && (
 					<div css={styles.threeTierChoiceCardsContainer}>
@@ -506,7 +463,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 								threeTierChoiceCardSelectedProduct,
 								countryCode,
 							)}
-							// onClick={onCtaClick}
+							onClick={onCtaClick}
 							priority="tertiary"
 							cssOverrides={styles.linkButtonStyles}
 							icon={<SvgArrowRightStraight />}
@@ -522,13 +479,11 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					</div>
 				)}
 
-				{!threeTierChoiceCards && (
-					<div css={styles.guardianLogoContainer}>
-						<SvgGuardianLogo
-							textColor={hexColourToString(basic.logo)}
-						/>
-					</div>
-				)}
+				<div css={styles.guardianLogoContainer}>
+					<SvgGuardianLogo
+						textColor={hexColourToString(basic.logo)}
+					/>
+				</div>
 
 				{showReminder && (
 					<div css={styles.reminderContainer}>
@@ -550,7 +505,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 
 			{isReminderActive && (
 				<div css={styles.reminderFormContainer}>
-					<div css={styles.containerOverrides(threeTierChoiceCards)}>
+					<div css={styles.containerOverrides}>
 						<DesignableBannerReminder
 							reminderCta={
 								mainOrMobileContent.secondaryCta as BannerEnrichedReminderCta
@@ -593,40 +548,29 @@ const styles = {
 			font-weight: bold;
 		}
 	`,
-	containerOverrides: (showThreeTierChoiceCards: boolean) => css`
+	containerOverrides: css`
 		display: flex;
 		flex-direction: column;
 		position: relative;
 		padding: 0 10px;
 
-		${showThreeTierChoiceCards ? from.desktop : from.tablet} {
+		${from.desktop} {
 			display: grid;
-			grid-template-columns: 1fr 280px;
+			grid-template-columns: 1fr 280px 1fr auto;
 			grid-template-rows: auto 1fr auto;
-			column-gap: ${space[5]}px;
+			column-gap: 60px;
 			width: 100%;
 			max-width: 1300px;
 			margin: 0 auto;
 			padding: 0 ${space[5]}px;
 		}
 
-		${showThreeTierChoiceCards && from.desktop} {
-			grid-template-columns: 1fr 280px 1fr;
-		}
-
-		${from.desktop} {
-			column-gap: 60px;
-			grid-template-columns: 1fr 460px;
-		}
 		${from.wide} {
 			column-gap: 100px;
 		}
 		${templateSpacing.bannerContainer};
 	`,
-	closeButtonOverrides: (
-		isGridCell: boolean,
-		showThreeTierChoiceCards: boolean,
-	) => css`
+	closeButtonOverrides: () => css`
 		${until.desktop} {
 			position: fixed;
 			margin-top: ${space[3]}px;
@@ -635,18 +579,8 @@ const styles = {
 		}
 		${from.tablet} {
 			margin-top: ${space[3]}px;
-
-			${isGridCell && !showThreeTierChoiceCards
-				? css`
-						grid-column: 2;
-						grid-row: 1;
-				  `
-				: css`
-						margin-bottom: ${space[3]}px;
-						display: flex;
-						justify-content: flex-end;
-						grid-column: 3;
-				  `}
+			grid-column: 4;
+			grid-row: 1;
 		}
 	`,
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
@@ -658,7 +592,7 @@ const styles = {
 		}
 
 		${from.tablet} {
-			grid-column: 1;
+			grid-column: 2;
 			grid-row: 1;
 			background: ${background};
 		}
@@ -672,7 +606,7 @@ const styles = {
 			order: '2';
 		}
 		${from.tablet} {
-			grid-column: 1;
+			grid-column: 2;
 			grid-row: 1;
 			background: ${background};
 		}
@@ -681,7 +615,7 @@ const styles = {
 	contentContainer: (showRemindMeLater: boolean) => css`
 		order: 2;
 		${from.tablet} {
-			grid-column: 1;
+			grid-column: 2;
 			grid-row: ${showRemindMeLater ? '2' : '2 / span 2'};
 		}
 	`,
@@ -694,17 +628,6 @@ const styles = {
 			align-self: flex-start;
 		}
 	`,
-	choiceCardsContainer: (background: string) => css`
-		order: 3;
-		background: ${background};
-		${from.tablet} {
-			grid-column: 2;
-			grid-row: 2;
-			align-self: flex-start;
-			display: flex;
-			justify-content: flex-end;
-		}
-	`,
 	threeTierChoiceCardsContainer: css`
 		order: 3;
 		${until.tablet} {
@@ -714,21 +637,21 @@ const styles = {
 			padding-bottom: 120px;
 		}
 		${from.desktop} {
-			grid-column: 2;
+			grid-column: 3;
 			grid-row: 1;
 			grid-row-end: 3;
 		}
 	`,
 	guardianLogoContainer: css`
 		display: none;
-		${from.tablet} {
+		${from.desktop} {
 			display: block;
 			width: 100px;
+			grid-column: 1;
+			grid-row: 1;
+			justify-self: start;
+			align-self: start;
 		}
-		grid-column: 2;
-		grid-row: 3;
-		justify-self: end;
-		padding-top: ${space[3]}px;
 	`,
 	reminderContainer: css`
 		${textEgyptian15};
@@ -798,7 +721,7 @@ const styles = {
 		}
 
 		${from.desktop} {
-			grid-column: 2;
+			grid-column: 3;
 			flex-direction: row;
 			gap: 0;
 			margin-bottom: 0;

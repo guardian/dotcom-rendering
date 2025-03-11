@@ -65,34 +65,6 @@ const regularChoiceCardAmounts: SelectedAmountsVariant = {
 	},
 };
 
-const edgeCaseChoiceCardAmounts: SelectedAmountsVariant = {
-	testName: 'Storybook_test',
-	variantName: 'CONTROL',
-	defaultContributionType: 'ANNUAL',
-	displayContributionType: ['ONE_OFF', 'ANNUAL'],
-	amountsCardData: {
-		// Card should show only the "other" button (overrides hidden requirement)
-		ONE_OFF: {
-			amounts: [],
-			defaultAmount: 1,
-			hideChooseYourAmount: true,
-		},
-		// Card should not include a monthly tab or monthly amounts
-		MONTHLY: {
-			amounts: [3, 6, 10],
-			defaultAmount: 10,
-			hideChooseYourAmount: true,
-		},
-		// Card should initially display showing Annual amounts
-		// Card should show £100 (default), £200 and £300 buttons
-		ANNUAL: {
-			amounts: [100, 200, 300],
-			defaultAmount: 100,
-			hideChooseYourAmount: true,
-		},
-	},
-};
-
 const headerImage: BannerDesignImage = {
 	kind: 'Image',
 	mobileUrl:
