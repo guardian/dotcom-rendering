@@ -492,13 +492,7 @@
                 },
                 "entries": {
                     "type": "array",
-                    "items": [
-                        {
-                            "$ref": "#/definitions/CAPIEntry"
-                        }
-                    ],
-                    "minItems": 1,
-                    "additionalItems": {
+                    "items": {
                         "$ref": "#/definitions/CAPIEntry"
                     }
                 },
@@ -4220,13 +4214,7 @@
                         },
                         "entries": {
                             "type": "array",
-                            "items": [
-                                {
-                                    "$ref": "#/definitions/CAPIEntry"
-                                }
-                            ],
-                            "minItems": 1,
-                            "additionalItems": {
+                            "items": {
                                 "$ref": "#/definitions/CAPIEntry"
                             }
                         },
@@ -5265,6 +5253,9 @@
                             "type": "string",
                             "const": "Audio"
                         },
+                        "duration": {
+                            "type": "string"
+                        },
                         "podcastImage": {
                             "type": "object",
                             "properties": {
@@ -5275,9 +5266,6 @@
                                     "type": "string"
                                 }
                             }
-                        },
-                        "duration": {
-                            "type": "string"
                         }
                     },
                     "required": [

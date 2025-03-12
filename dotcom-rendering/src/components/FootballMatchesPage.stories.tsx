@@ -20,6 +20,7 @@ export const Results = {
 		edition: 'UK',
 		goToCompetitionSpecificPage: fn(),
 		renderAds: true,
+		pageId: 'football/results',
 	},
 } satisfies Story;
 

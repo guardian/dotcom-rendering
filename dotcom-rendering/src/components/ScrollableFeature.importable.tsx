@@ -61,6 +61,7 @@ export const ScrollableFeature = ({
 							discussionId={card.discussionId}
 							mainMedia={card.mainMedia}
 							isExternalLink={card.isExternalLink}
+							isCartoon={card.isCartoon}
 							// branding={card.branding}
 							containerPalette={containerPalette}
 							absoluteServerTimes={absoluteServerTimes}
