@@ -347,7 +347,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		>
 			<div css={styles.containerOverrides}>
 				<div css={styles.verticalLine} />
-
 				<div css={getHeaderContainerCss()}>
 					<DesignableBannerHeader
 						heading={content.mainContent.heading}
@@ -710,9 +709,7 @@ const styles = {
 
 		${until.desktop} {
 			a {
-				width: calc(100% - 40px);
-				margin-left: 20px;
-				margin-right: 20px;
+				width: calc(100% - 24px);
 			}
 		}
 
@@ -723,6 +720,8 @@ const styles = {
 			padding-top: 12px;
 			padding-bottom: 12px;
 			margin-bottom: 0;
+			background-color: ${neutral[100]};
+			box-shadow: 0 -4px 12px 0 rgba(0, 0, 0, 0.25);
 		}
 
 		${until.desktop} {
