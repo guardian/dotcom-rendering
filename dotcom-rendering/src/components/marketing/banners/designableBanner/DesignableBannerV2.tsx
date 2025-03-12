@@ -565,7 +565,7 @@ const styles = {
 			grid-column: 2;
 			grid-row: 1 / -1;
 			opacity: 0.2;
-			margin-bottom: -16px; //needed as banner container template has 16px margin
+			margin-bottom: -16px;
 			margin-top: 24px;
 			margin-right: 8px;
 		}
