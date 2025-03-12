@@ -362,8 +362,6 @@ export const renderElement = ({
 					title={element.title}
 					isAvatar={element.isAvatar}
 					isTimeline={isTimeline}
-					abTests={abTests}
-					editionId={editionId}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
