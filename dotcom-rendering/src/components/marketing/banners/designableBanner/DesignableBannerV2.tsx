@@ -549,7 +549,7 @@ const styles = {
 			width: 100%;
 			max-width: 1300px;
 			padding: 0 ${space[5]}px;
-			column-gap: 32px;
+			column-gap: ${space[8]}px;
 			margin-bottom: ${space[4]}px;
 		}
 
@@ -564,9 +564,9 @@ const styles = {
 			grid-column: 2;
 			grid-row: 1 / -1;
 			opacity: 0.2;
-			margin-bottom: -16px;
-			margin-top: 24px;
-			margin-right: 8px;
+			margin-bottom: -${space[4]}px;
+			margin-top: ${space[6]}px;
+			margin-right: ${space[2]}px;
 		}
 	`,
 	closeButtonOverrides: css`
@@ -592,8 +592,8 @@ const styles = {
 		}
 
 		${from.desktop} {
-			padding-left: 8px;
-			padding-top: 24px;
+			padding-left: ${space[2]}px;
+			padding-top: ${space[6]}px;
 		}
 
 		${from.tablet} {
@@ -614,8 +614,8 @@ const styles = {
 			background: ${background};
 		}
 		${from.desktop} {
-			padding-left: 8px;
-			padding-top: 24px;
+			padding-left: ${space[2]}px;
+			padding-top: ${space[6]}px;
 		}
 	`,
 	contentContainer: (showRemindMeLater: boolean) => css`
@@ -625,7 +625,7 @@ const styles = {
 			grid-row: ${showRemindMeLater ? '2' : '2 / span 2'};
 		}
 		${from.desktop} {
-			padding-left: 8px;
+			padding-left: ${space[2]}px;
 		}
 	`,
 	bannerVisualContainer: (background: string) => css`
@@ -637,7 +637,7 @@ const styles = {
 			align-self: flex-start;
 		}
 		${from.desktop} {
-			padding-left: 8px;
+			padding-left: ${space[2]}px;
 		}
 	`,
 	threeTierChoiceCardsContainer: css`
@@ -662,8 +662,8 @@ const styles = {
 			height: 41px;
 			justify-content: center;
 			align-items: center;
-			margin-top: 24px;
-			margin-right: -24px;
+			margin-top: ${space[6]}px;
+			margin-right: -${space[6]}px;
 		}
 	`,
 
@@ -717,8 +717,8 @@ const styles = {
 			position: fixed;
 			bottom: 0;
 			left: 0;
-			padding-top: 12px;
-			padding-bottom: 12px;
+			padding-top: ${space[3]}px;
+			padding-bottom: ${space[3]}px;
 			margin-bottom: 0;
 			background-color: ${neutral[100]};
 			box-shadow: 0 -4px 12px 0 rgba(0, 0, 0, 0.25);
@@ -726,7 +726,7 @@ const styles = {
 
 		${until.desktop} {
 			position: fixed;
-			padding-top: 12px;
+			padding-top: ${space[3]}px;
 			left: 0;
 			right: 0;
 		}
