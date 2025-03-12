@@ -5,6 +5,7 @@ import { palette } from '../palette';
 type Props = {
 	nations: Regions;
 	kind: FootballMatchKind;
+	pageId: string;
 	onChange: (competitionTag: string) => void;
 };
 
@@ -22,22 +23,24 @@ const allLabel = (kind: FootballMatchKind): string => {
 const getPagePath = (kind: FootballMatchKind) => {
 	switch (kind) {
 		case 'Fixture':
-			return 'football/fixtures';
+			return '/football/fixtures';
 		case 'Live':
-			return 'football/live';
+			return '/football/live';
 		case 'Result':
-			return 'football/results';
+			return '/football/results';
 	}
 };
 
 export const FootballCompetitionSelect = ({
 	nations,
 	kind,
+	pageId,
 	onChange,
 }: Props) => (
 	<Select
 		label="Choose league:"
 		onChange={(e) => onChange(e.target.value)}
+		value={pageId.startsWith('/') ? pageId : `/${pageId}`}
 		theme={{
 			textLabel: palette('--football-competition-select-text'),
 			textUserInput: palette('--football-competition-select-text'),

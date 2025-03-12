@@ -100,6 +100,7 @@ export type Props = {
 	isCrossword?: boolean;
 	isNewsletter?: boolean;
 	isOnwardContent?: boolean;
+	isCartoon?: boolean;
 	trailText?: string;
 	avatarUrl?: string;
 	showClock?: boolean;
@@ -149,7 +150,6 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
-	isInLoopVideoTest?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -392,6 +392,7 @@ export const Card = ({
 	isCrossword,
 	isNewsletter = false,
 	isOnwardContent = false,
+	isCartoon = false,
 	isExternalLink,
 	slideshowImages,
 	showLivePlayable = false,
@@ -409,7 +410,6 @@ export const Card = ({
 	showTopBarMobile = false,
 	trailTextSize,
 	showKickerImage = false,
-	isInLoopVideoTest = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -827,7 +827,6 @@ export const Card = ({
 							media.type === 'slideshow' && isFlexibleContainer
 						}
 						padImage={isMediaCardOrNewsletter && isBetaContainer}
-						isInLoopVideoTest={isInLoopVideoTest}
 					>
 						{media.type === 'slideshow' &&
 							(isFlexibleContainer ? (
@@ -994,7 +993,6 @@ export const Card = ({
 									loading={imageLoading}
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
-									isInLoopVideoTest={isInLoopVideoTest}
 								/>
 								{(isVideoMainMedia ||
 									(isVideoArticle && !isBetaContainer)) &&
@@ -1093,6 +1091,7 @@ export const Card = ({
 										showByline={showByline}
 										isExternalLink={isExternalLink}
 										isBetaContainer={isBetaContainer}
+										isCartoon={isCartoon}
 										kickerImage={
 											showKickerImage &&
 											media?.type === 'podcast'

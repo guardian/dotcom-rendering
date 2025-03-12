@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, palette, space, textSans20 } from '@guardian/source/foundations';
+import { from, palette, space, textSans14 } from '@guardian/source/foundations';
 import { Link, SvgInfoRound } from '@guardian/source/react-components';
 import { center } from '../lib/center';
 import {
@@ -26,28 +26,24 @@ const content = css`
 	display: flex;
 	justify-content: space-between;
 	padding: 10px;
-	align-items: flex-start;
+	align-items: center;
 	${center};
 
 	${from.mobileLandscape} {
 		padding: 10px ${space[5]}px;
-	}
-
-	${from.phablet} {
-		align-items: center;
 	}
 `;
 
 const textAndLink = css`
 	display: flex;
 	flex-direction: row;
-	align-items: flex-start;
+	align-items: center;
 	gap: ${space[3]}px;
-	${textSans20};
+	${textSans14};
 
 	/* Override Source Link font styles */
 	a {
-		${textSans20};
+		${textSans14};
 	}
 `;
 
@@ -93,12 +89,10 @@ export const EditionSwitcherBanner = ({ pageId, edition }: Props) => {
 		<aside data-component="edition-switcher-banner" css={container}>
 			<div css={content}>
 				<div css={textAndLink}>
-					<div>
-						<SvgInfoRound
-							size="small"
-							theme={{ fill: palette.brand[400] }}
-						/>
-					</div>
+					<SvgInfoRound
+						size="medium"
+						theme={{ fill: palette.brand[400] }}
+					/>
 					<p>
 						You are viewing the {defaultEditionName} homepage&nbsp;
 						<Link
