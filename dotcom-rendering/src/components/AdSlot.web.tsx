@@ -544,6 +544,8 @@ export const AdSlot = ({
 						data-name="right"
 						data-testid="slot"
 						aria-hidden="true"
+						// Football fixtures pages cannot always support longer right column ads, so limit allowed size
+						data-desktop="300,250"
 					/>
 				</div>
 			);
