@@ -43,7 +43,6 @@ import {
 	addRegionIdAndTrackingParamsToSupportUrl,
 } from '../../lib/tracking';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
-import { PaymentCards } from '../common/PaymentCards';
 import type {
 	BannerEnrichedReminderCta,
 	BannerRenderProps,
@@ -347,6 +346,8 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 			)}
 		>
 			<div css={styles.containerOverrides}>
+				<div css={styles.verticalLine} />
+
 				<div css={getHeaderContainerCss()}>
 					<DesignableBannerHeader
 						heading={content.mainContent.heading}
@@ -453,7 +454,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 							variantOfChoiceCard={'THREE_TIER_CHOICE_CARDS'}
 						/>
 
-						<div css={styles.ctaAndPaymentCardsContainer}>
+						<div css={styles.ctaContainer}>
 							<LinkButton
 								href={buildUrlForThreeTierChoiceCards(
 									tracking,
@@ -470,9 +471,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 							>
 								Continue
 							</LinkButton>
-							<PaymentCards
-								cssOverrides={styles.paymentCardsSvgOverrides}
-							/>
 						</div>
 					</div>
 				)}
@@ -553,16 +551,30 @@ const styles = {
 
 		${from.desktop} {
 			display: grid;
-			grid-template-columns: auto 280px auto auto;
+			grid-template-columns: auto auto auto auto;
 			grid-template-rows: auto 1fr auto;
 			width: 100%;
 			max-width: 1300px;
-			margin: 0 auto;
 			padding: 0 ${space[5]}px;
 			column-gap: 32px;
+			margin-bottom: ${space[4]}px;
 		}
 
-		${templateSpacing.bannerContainer};
+		${until.tablet} {
+			margin-bottom: ${space[1]}px;
+		}
+	`,
+	verticalLine: css`
+		${from.desktop} {
+			background-color: ${neutral[0]};
+			width: 1px;
+			grid-column: 2;
+			grid-row: 1 / -1;
+			opacity: 0.2;
+			margin-bottom: -16px; //needed as banner container template has 16px margin
+			margin-top: 24px;
+			margin-right: 8px;
+		}
 	`,
 	closeButtonOverrides: () => css`
 		${until.desktop} {
@@ -585,13 +597,16 @@ const styles = {
 				: `max-width: calc(100% - 40px - ${space[3]}px);`}
 		}
 
+		${from.desktop} {
+			padding-left: 8px;
+			padding-top: 24px;
+		}
+
 		${from.tablet} {
 			grid-column: 2;
 			grid-row: 1;
 			background: ${background};
 		}
-
-		${templateSpacing.bannerHeader}
 	`,
 	headerWithImageContainer: (background: string) => css`
 		order: 1;
@@ -604,13 +619,19 @@ const styles = {
 			grid-row: 1;
 			background: ${background};
 		}
-		${templateSpacing.bannerHeader}
+		${from.desktop} {
+			padding-left: 8px;
+			padding-top: 24px;
+		}
 	`,
 	contentContainer: (showRemindMeLater: boolean) => css`
 		order: 2;
 		${from.tablet} {
 			grid-column: 2;
 			grid-row: ${showRemindMeLater ? '2' : '2 / span 2'};
+		}
+		${from.desktop} {
+			padding-left: 8px;
 		}
 	`,
 	bannerVisualContainer: (background: string) => css`
@@ -621,6 +642,9 @@ const styles = {
 			grid-row: 1 / span 2;
 			align-self: flex-start;
 		}
+		${from.desktop} {
+			padding-left: 8px;
+		}
 	`,
 	threeTierChoiceCardsContainer: css`
 		order: 3;
@@ -628,7 +652,7 @@ const styles = {
 			padding-bottom: 100px;
 		}
 		${until.desktop} {
-			padding-bottom: 120px;
+			padding-bottom: 90px;
 		}
 		${from.desktop} {
 			grid-column: 3;
@@ -644,8 +668,8 @@ const styles = {
 			height: 41px;
 			justify-content: center;
 			align-items: center;
-			flex-shrink: 0;
-			padding-top: 24px;
+			margin-top: 24px;
+			margin-right: -24px;
 		}
 	`,
 
@@ -681,7 +705,7 @@ const styles = {
 		border-top: 2px solid ${neutral[0]};
 		margin-top: ${space[3]}px;
 	`,
-	ctaAndPaymentCardsContainer: css`
+	ctaContainer: css`
 		order: 4;
 		display: flex;
 		align-items: center;
@@ -699,21 +723,18 @@ const styles = {
 			position: fixed;
 			bottom: 0;
 			left: 0;
-			width: 100%;
-			background: ${neutral[100]};
-			padding-bottom: 24px;
 			padding-top: 12px;
+			padding-bottom: 12px;
 			margin-bottom: 0;
 		}
 
 		${until.desktop} {
 			position: fixed;
-			bottom: 0;
-			left: 0;
-			width: 100%;
-			background: ${neutral[100]};
-			padding-bottom: 24px;
 			padding-top: 12px;
+			left: 0;
+			right: 0;
+			margin-right: 12px;
+			margin-left: 12px;
 		}
 
 		${from.desktop} {
@@ -726,14 +747,6 @@ const styles = {
 			> span {
 				width: auto;
 			}
-		}
-	`,
-	paymentCardsSvgOverrides: css`
-		${from.desktop} {
-			margin-top: -10px;
-		}
-		${until.desktop} {
-			margin-top: 10px;
 		}
 	`,
 	linkButtonStyles: css`
