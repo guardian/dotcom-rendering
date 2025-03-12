@@ -442,7 +442,9 @@ export const FootballMatchList = ({
 						css={css`
 							grid-column: centre-column-start / centre-column-end;
 
-							padding-top: ${space[10]}px;
+							${until.leftCol} {
+								padding-top: ${space[10]}px;
+							}
 						`}
 					>
 						<Button

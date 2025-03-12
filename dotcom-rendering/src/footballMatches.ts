@@ -398,6 +398,17 @@ const parseFootballDay = (
 	});
 };
 
+export const getParserErrorMessage = (parserError: ParserError): string => {
+	switch (parserError.kind) {
+		case 'InvalidMatchDay':
+			return parserError.errors
+				.map((e) => getParserErrorMessage(e))
+				.join(', ');
+		default:
+			return `${parserError.kind}: ${parserError.message}`;
+	}
+};
+
 export const parse: (
 	frontendData: FEMatchByDateAndCompetition[],
 ) => Result<ParserError, FootballMatches> = listParse(parseFootballDay);

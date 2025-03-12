@@ -23,11 +23,11 @@ const allLabel = (kind: FootballMatchKind): string => {
 const getPagePath = (kind: FootballMatchKind) => {
 	switch (kind) {
 		case 'Fixture':
-			return 'football/fixtures';
+			return '/football/fixtures';
 		case 'Live':
-			return 'football/live';
+			return '/football/live';
 		case 'Result':
-			return 'football/results';
+			return '/football/results';
 	}
 };
 

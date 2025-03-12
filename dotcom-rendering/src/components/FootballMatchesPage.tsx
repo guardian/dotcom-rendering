@@ -76,6 +76,8 @@ export const FootballMatchesPage = ({
 					right: 0;
 				}
 			}
+
+			padding-bottom: ${space[9]}px;
 		`}
 	>
 		<h1
