@@ -319,7 +319,7 @@ const HomeTeam = ({ team }: { team: Team }) => (
 				vertical-align: bottom;
 			`}
 			src={getFootballCrestImageUrl(team.id)}
-			alt={`${team.name} crest`}
+			alt=""
 		/>
 	</span>
 );
@@ -338,7 +338,7 @@ const AwayTeam = ({ team }: { team: Team }) => (
 				vertical-align: bottom;
 			`}
 			src={getFootballCrestImageUrl(team.id)}
-			alt={`${team.name} crest`}
+			alt=""
 		/>
 		{team.name}
 	</span>
