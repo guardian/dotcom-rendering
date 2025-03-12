@@ -710,11 +710,13 @@ const styles = {
 
 		${until.desktop} {
 			a {
-				width: 100%;
+				width: calc(100% - 40px);
+				margin-left: 20px;
+				margin-right: 20px;
 			}
 		}
 
-		${until.tablet} {
+		${until.phablet} {
 			position: fixed;
 			bottom: 0;
 			left: 0;
@@ -728,8 +730,6 @@ const styles = {
 			padding-top: 12px;
 			left: 0;
 			right: 0;
-			margin-right: 12px;
-			margin-left: 12px;
 		}
 
 		${from.desktop} {
