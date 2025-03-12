@@ -44,10 +44,17 @@ type Props = {
 	padImage?: boolean;
 };
 
+const imageOverlayContainerStyles = css`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+`;
+
 /**
  * This function works in partnership with its sibling in `ContentWrapper`. If you
  * change any values here be sure to update that file as well.
- *
  */
 const flexBasisStyles = ({
 	imageSize,
@@ -179,7 +186,18 @@ export const ImageWrapper = ({
 				{children}
 				{/* This image overlay is styled when the CardLink is hovered */}
 				{(imageType === 'picture' || imageType === 'slideshow') &&
-					!hideImageOverlay && <div className="image-overlay" />}
+					!hideImageOverlay && (
+						<div
+							css={[
+								imageOverlayContainerStyles,
+								padImage && imagePadding,
+							]}
+						>
+							{/* This child div is needed as the hover background colour covers the padded
+							    area around the image when the hover styles are applied to the top-level div */}
+							<div className="image-overlay" />
+						</div>
+					)}
 			</>
 		</div>
 	);
