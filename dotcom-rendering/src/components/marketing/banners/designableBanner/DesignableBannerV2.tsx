@@ -417,10 +417,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 						<DesignableBannerCloseButton
 							onCloseClick={onCloseClick}
 							settings={templateSettings.closeButtonSettings}
-							styleOverides={styles.closeButtonOverrides(
-								false,
-								threeTierChoiceCards,
-							)}
+							styleOverides={styles.closeButtonOverrides}
 						/>
 						<DesignableBannerVisual
 							settings={templateSettings.imageSettings}
@@ -436,10 +433,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					<DesignableBannerCloseButton
 						onCloseClick={onCloseClick}
 						settings={templateSettings.closeButtonSettings}
-						styleOverides={styles.closeButtonOverrides(
-							true,
-							threeTierChoiceCards,
-						)}
+						styleOverides={styles.closeButtonOverrides}
 					/>
 				)}
 
@@ -576,13 +570,14 @@ const styles = {
 			margin-right: 8px;
 		}
 	`,
-	closeButtonOverrides: () => css`
+	closeButtonOverrides: css`
 		${until.desktop} {
 			position: fixed;
 			margin-top: ${space[3]}px;
 			padding-right: 10px;
 			right: 0;
 		}
+
 		${from.tablet} {
 			margin-top: ${space[3]}px;
 			grid-column: 4;
