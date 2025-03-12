@@ -37,10 +37,12 @@ export const initialDays: FootballMatches = [
 						paId: '4482093',
 						homeTeam: {
 							name: 'Torino',
+							id: '27038',
 							score: 10,
 						},
 						awayTeam: {
 							name: 'Cagliari',
+							id: '26474',
 							score: 0,
 						},
 						status: '1st',
@@ -51,8 +53,11 @@ export const initialDays: FootballMatches = [
 							'2022-01-01T19:45:00Z',
 						).toISOString(),
 						paId: '4482890',
-						homeTeam: 'Auxerre',
-						awayTeam: 'St Etienne',
+						homeTeam: {
+							name: 'Auxerre',
+							id: '26348',
+						},
+						awayTeam: { name: 'St Etienne', id: '27408' },
 					},
 				],
 			},
@@ -70,10 +75,12 @@ export const initialDays: FootballMatches = [
 						paId: '4482835',
 						homeTeam: {
 							name: 'Las Palmas',
+							id: '27804',
 							score: 2,
 						},
 						awayTeam: {
 							name: 'Osasuna',
+							id: '27152',
 							score: 3,
 						},
 						comment: 'AET',
@@ -94,10 +101,12 @@ export const initialDays: FootballMatches = [
 						paId: '4482836',
 						homeTeam: {
 							name: 'Brighton & Hove Albion Women',
+							id: '8450',
 							score: 1,
 						},
 						awayTeam: {
 							name: 'Crystal Palace Women',
+							id: '48752',
 							score: 1,
 						},
 						comment:
@@ -125,8 +134,8 @@ export const moreDays: FootballMatches = [
 							'2022-01-05T19:45:00Z',
 						).toISOString(),
 						paId: '4482890',
-						homeTeam: 'Juventus',
-						awayTeam: 'Roma',
+						homeTeam: { name: 'Juventus', id: '26359' },
+						awayTeam: { name: 'Roma', id: '26357' },
 					},
 				],
 			},

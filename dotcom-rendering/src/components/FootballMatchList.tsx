@@ -18,6 +18,7 @@ import type {
 	FootballMatch,
 	FootballMatches,
 	FootballMatchKind,
+	Team,
 } from '../footballMatches';
 import {
 	type EditionId,
@@ -70,6 +71,10 @@ const footballMatchesGridStyles = css`
 			[centre-column-end];
 	}
 `;
+
+function getFootballCrestImageUrl(teamId: string) {
+	return `https://sport.guim.co.uk/football/crests/60/${teamId}.png`;
+}
 
 const getDateFormatter = (edition: EditionId): Intl.DateTimeFormat =>
 	new Intl.DateTimeFormat('en-GB', {
@@ -266,20 +271,18 @@ const Match = ({
 		<MatchStatus match={match} timeFormatter={timeFormatter} />
 		{match.kind === 'Fixture' ? (
 			<>
-				<HomeTeam>{match.homeTeam}</HomeTeam>
-
+				<HomeTeam team={match.homeTeam} />
 				<Versus />
-				<AwayTeam>{match.awayTeam}</AwayTeam>
+				<AwayTeam team={match.awayTeam} />
 			</>
 		) : (
 			<>
-				<HomeTeam>{match.homeTeam.name}</HomeTeam>
-
+				<HomeTeam team={match.homeTeam} />
 				<Scores
 					homeScore={match.homeTeam.score}
 					awayScore={match.awayTeam.score}
 				/>
-				<AwayTeam>{match.awayTeam.name}</AwayTeam>
+				<AwayTeam team={match.awayTeam} />
 				{isUndefined(match.comment) ? null : (
 					<small
 						css={css`
@@ -300,25 +303,45 @@ const Match = ({
 	</MatchWrapper>
 );
 
-const HomeTeam = (props: { children: ReactNode }) => (
+const HomeTeam = ({ team }: { team: Team }) => (
 	<span
-		{...props}
 		css={css`
 			text-align: right;
 			flex: 1 0 0;
 			padding-right: 1rem;
 		`}
-	/>
+	>
+		{team.name}
+		<img
+			css={css`
+				height: 1rem;
+				margin-left: 0.3125rem;
+				vertical-align: bottom;
+			`}
+			src={getFootballCrestImageUrl(team.id)}
+			alt={`${team.name} crest`}
+		/>
+	</span>
 );
 
-const AwayTeam = (props: { children: ReactNode }) => (
+const AwayTeam = ({ team }: { team: Team }) => (
 	<span
-		{...props}
 		css={css`
 			flex: 1 0 0;
 			padding-left: 1rem;
 		`}
-	/>
+	>
+		<img
+			css={css`
+				height: 1rem;
+				margin-right: 0.3125rem;
+				vertical-align: bottom;
+			`}
+			src={getFootballCrestImageUrl(team.id)}
+			alt={`${team.name} crest`}
+		/>
+		{team.name}
+	</span>
 );
 
 const Battleline = () => (
