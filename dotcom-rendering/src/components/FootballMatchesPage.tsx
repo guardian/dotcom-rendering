@@ -76,6 +76,10 @@ export const FootballMatchesPage = ({
 					right: 0;
 				}
 			}
+
+			${until.leftCol} {
+				padding-bottom: ${space[9]}px;
+			}
 		`}
 	>
 		<h1
