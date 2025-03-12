@@ -24,7 +24,6 @@ import {
 	mobileContentWithHeading,
 	props,
 	stringToHexColour,
-	tracking,
 } from '../../utils/storybook';
 
 type WithJsonProps<T> = T & { json?: string };
