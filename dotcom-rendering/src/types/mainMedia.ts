@@ -21,8 +21,8 @@ type Video = Media & {
 
 type Audio = Media & {
 	type: 'Audio';
-	podcastImage?: PodcastSeriesImage;
 	duration: string;
+	podcastImage?: PodcastSeriesImage;
 };
 
 type Gallery = Media & {

@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, type Interpolation } from '@emotion/react';
 import type { SlotName } from '@guardian/commercial';
 import { adSizes, constants } from '@guardian/commercial';
 import {
@@ -10,7 +10,6 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import { grid } from '../grid';
 import { labelBoxStyles, labelHeight, labelStyles } from '../lib/adStyles';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
@@ -383,6 +382,22 @@ const crosswordBannerMobileAdStyles = css`
 	min-height: ${adSizes.mobilesticky.height + constants.AD_LABEL_HEIGHT}px;
 `;
 
+const AdSlotWrapper = ({
+	children,
+	css: additionalCss,
+	className = 'ad-slot-container',
+}: {
+	children: React.ReactNode;
+	css?: Interpolation;
+	className?: string;
+}) => {
+	return (
+		<aside className={className} css={additionalCss}>
+			{children}
+		</aside>
+	);
+};
+
 export const AdSlot = ({
 	position,
 	display,
@@ -396,7 +411,7 @@ export const AdSlot = ({
 			switch (display) {
 				case ArticleDisplay.Immersive: {
 					return (
-						<div className="ad-slot-container">
+						<AdSlotWrapper>
 							<div
 								id="dfp-ad--right"
 								css={rightAdStyles}
@@ -413,16 +428,13 @@ export const AdSlot = ({
 								data-testid="slot"
 								aria-hidden="true"
 							/>
-						</div>
+						</AdSlotWrapper>
 					);
 				}
 				case ArticleDisplay.Showcase:
 				case ArticleDisplay.NumberedList: {
 					return (
-						<div
-							className="ad-slot-container"
-							css={[showcaseRightColumnContainerStyles]}
-						>
+						<AdSlotWrapper css={showcaseRightColumnContainerStyles}>
 							<div
 								id="dfp-ad--right"
 								css={[rightAdStyles, showcaseRightColumnStyles]}
@@ -439,7 +451,7 @@ export const AdSlot = ({
 								data-testid="slot"
 								aria-hidden="true"
 							/>
-						</div>
+						</AdSlotWrapper>
 					);
 				}
 				case ArticleDisplay.Standard: {
@@ -459,9 +471,7 @@ export const AdSlot = ({
 									}
 								/>
 							</Island>
-							<div
-								id="top-right-ad-slot"
-								className="ad-slot-container"
+							<AdSlotWrapper
 								css={[
 									css`
 										position: static;
@@ -498,7 +508,7 @@ export const AdSlot = ({
 									data-testid="slot"
 									aria-hidden="true"
 								/>
-							</div>
+							</AdSlotWrapper>
 						</>
 					);
 				}
@@ -508,15 +518,11 @@ export const AdSlot = ({
 		case 'right-football': {
 			const slotId = 'dfp-ad--right';
 			return (
-				<div
-					className="ad-slot-container"
+				<AdSlotWrapper
 					css={[
 						css`
-							position: relative;
 							height: 100%;
 							max-height: 100%;
-							${grid.column.right}
-							grid-row: 1;
 							padding-top: ${space[2]}px;
 							${until.desktop} {
 								display: none;
@@ -539,7 +545,8 @@ export const AdSlot = ({
 						css={[
 							rightAdStyles,
 							css`
-								position: absolute;
+								position: sticky;
+								top: 0;
 							`,
 							labelStyles,
 						]}
@@ -547,13 +554,15 @@ export const AdSlot = ({
 						data-name="right"
 						data-testid="slot"
 						aria-hidden="true"
+						// Football fixtures pages cannot always support longer right column ads, so limit allowed size
+						data-desktop="300,250"
 					/>
-				</div>
+				</AdSlotWrapper>
 			);
 		}
 		case 'comments': {
 			return (
-				<div className="ad-slot-container">
+				<AdSlotWrapper>
 					<div
 						id="dfp-ad--comments"
 						className={[
@@ -569,15 +578,12 @@ export const AdSlot = ({
 						data-testid="slot"
 						aria-hidden="true"
 					/>
-				</div>
+				</AdSlotWrapper>
 			);
 		}
 		case 'top-above-nav': {
 			return (
-				<div
-					css={[topAboveNavContainerStyles]}
-					className="ad-slot-container"
-				>
+				<AdSlotWrapper css={[topAboveNavContainerStyles]}>
 					<div
 						id="dfp-ad--top-above-nav"
 						className={[
@@ -592,16 +598,13 @@ export const AdSlot = ({
 						data-testid="slot"
 						aria-hidden="true"
 					></div>
-				</div>
+				</AdSlotWrapper>
 			);
 		}
 		case 'mostpop': {
 			return (
 				<Hide until="tablet">
-					<div
-						className="ad-slot-container"
-						css={[mostPopContainerStyles]}
-					>
+					<AdSlotWrapper css={mostPopContainerStyles}>
 						<div
 							id="dfp-ad--mostpop"
 							className={[
@@ -617,16 +620,13 @@ export const AdSlot = ({
 							data-testid="slot"
 							aria-hidden="true"
 						/>
-					</div>
+					</AdSlotWrapper>
 				</Hide>
 			);
 		}
 		case 'merchandising-high': {
 			return (
-				<div
-					className="ad-slot-container"
-					css={[merchandisingAdContainerStyles]}
-				>
+				<AdSlotWrapper css={[merchandisingAdContainerStyles]}>
 					<div
 						id="dfp-ad--merchandising-high"
 						className={[
@@ -641,15 +641,12 @@ export const AdSlot = ({
 						data-testid="slot"
 						aria-hidden="true"
 					/>
-				</div>
+				</AdSlotWrapper>
 			);
 		}
 		case 'merchandising': {
 			return (
-				<div
-					className="ad-slot-container"
-					css={[merchandisingAdContainerStyles]}
-				>
+				<AdSlotWrapper css={merchandisingAdContainerStyles}>
 					<div
 						id="dfp-ad--merchandising"
 						className={[
@@ -663,7 +660,7 @@ export const AdSlot = ({
 						data-testid="slot"
 						aria-hidden="true"
 					/>
-				</div>
+				</AdSlotWrapper>
 			);
 		}
 		case 'fronts-banner': {
@@ -673,8 +670,7 @@ export const AdSlot = ({
 					className="top-fronts-banner-ad-container"
 					css={frontsBannerAdTopContainerStyles}
 				>
-					<div
-						className="ad-slot-container"
+					<AdSlotWrapper
 						css={[
 							frontsBannerAdContainerStyles,
 							hasPageskin && frontsBannerCollapseStyles,
@@ -695,7 +691,7 @@ export const AdSlot = ({
 							data-testid="slot"
 							aria-hidden="true"
 						/>
-					</div>
+					</AdSlotWrapper>
 				</div>
 			);
 		}
@@ -722,7 +718,7 @@ export const AdSlot = ({
 		case 'liveblog-inline': {
 			const advertId = `inline${index + 1}`;
 			return (
-				<div
+				<AdSlotWrapper
 					className="ad-slot-container ad-slot-desktop"
 					css={liveblogInlineContainerStyles}
 				>
@@ -741,16 +737,13 @@ export const AdSlot = ({
 						data-testid={`liveblog-inline--${advertId}`}
 						aria-hidden="true"
 					/>
-				</div>
+				</AdSlotWrapper>
 			);
 		}
 		case 'liveblog-inline-mobile': {
 			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
-				<div
-					className="ad-slot-container ad-slot-mobile"
-					css={liveblogInlineContainerStyles}
-				>
+				<AdSlotWrapper css={liveblogInlineContainerStyles}>
 					<div
 						id={`dfp-ad--${advertId}--mobile`}
 						className={[
@@ -766,15 +759,12 @@ export const AdSlot = ({
 						data-testid={`liveblog-inline-mobile--${advertId}`}
 						aria-hidden="true"
 					/>
-				</div>
+				</AdSlotWrapper>
 			);
 		}
 		case 'liveblog-top': {
 			return (
-				<div
-					className="ad-slot-container"
-					css={[liveBlogTopContainerStyles]}
-				>
+				<AdSlotWrapper css={liveBlogTopContainerStyles}>
 					<div
 						id="dfp-ad--liveblog-top"
 						className={[
@@ -789,13 +779,13 @@ export const AdSlot = ({
 						data-testid="slot"
 						aria-hidden="true"
 					/>
-				</div>
+				</AdSlotWrapper>
 			);
 		}
 		case 'mobile-front': {
 			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
-				<div className="ad-slot-container">
+				<AdSlotWrapper>
 					<div
 						id={`dfp-ad--${advertId}--mobile`}
 						className={[
@@ -813,12 +803,12 @@ export const AdSlot = ({
 						data-testid="slot"
 						aria-hidden="true"
 					/>
-				</div>
+				</AdSlotWrapper>
 			);
 		}
 		case 'pageskin': {
 			return (
-				<div className="ad-slot-container">
+				<AdSlotWrapper>
 					<div
 						id="dfp-ad--pageskin-inread"
 						className={[
@@ -837,12 +827,12 @@ export const AdSlot = ({
 						data-testid="slot"
 						aria-hidden="true"
 					/>
-				</div>
+				</AdSlotWrapper>
 			);
 		}
 		case 'article-end': {
 			return (
-				<div className="ad-slot-container">
+				<AdSlotWrapper>
 					<div
 						id="dfp-ad--article-end"
 						className={[
@@ -857,12 +847,12 @@ export const AdSlot = ({
 						data-testid="slot"
 						aria-hidden="true"
 					/>
-				</div>
+				</AdSlotWrapper>
 			);
 		}
 		case 'crossword-banner-mobile': {
 			return (
-				<div className="ad-slot-container">
+				<AdSlotWrapper>
 					<div
 						id="dfp-ad--crossword-banner-mobile"
 						className={[
@@ -877,7 +867,7 @@ export const AdSlot = ({
 						data-testid="slot"
 						aria-hidden="true"
 					/>
-				</div>
+				</AdSlotWrapper>
 			);
 		}
 	}

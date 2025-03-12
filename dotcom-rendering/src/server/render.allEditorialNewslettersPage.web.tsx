@@ -95,7 +95,7 @@ export const renderEditorialNewslettersPage = ({
 		title,
 		description: newslettersPage.description,
 		guardian,
-		keywords: '',
+		section: '',
 		renderingTarget: 'Web',
 		weAreHiring: !!newslettersPage.config.switches.weAreHiring,
 		config,
