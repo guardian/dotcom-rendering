@@ -134,7 +134,7 @@ export const renderFootballDataPage = (footballData: DCRFootballDataPage) => {
 			googleRecaptchaSiteKey: footballData.config.googleRecaptchaSiteKey,
 			unknownConfig: footballData.config,
 		}),
-		section: footballData.config.section,
+		section: '',
 		renderingTarget,
 		weAreHiring: !!footballData.config.switches.weAreHiring,
 		config,
