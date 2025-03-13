@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { Standard as standardArticle } from '../../fixtures/generated/fe-articles/Standard';
 import { disableCMP } from '../lib/cmp';
 import { waitForIsland } from '../lib/islands';
-import { loadPageNoOkta } from '../lib/load-page';
+import { loadPageWithOverrides } from '../lib/load-page';
 
 test.describe('Signed in readers', () => {
 	test('should not display signed in texts when users are not signed in', async ({
@@ -10,7 +10,7 @@ test.describe('Signed in readers', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPageNoOkta(page, standardArticle);
+		await loadPageWithOverrides(page, standardArticle);
 
 		await waitForIsland(page, 'DiscussionWeb');
 
