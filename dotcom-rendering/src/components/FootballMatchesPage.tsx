@@ -8,7 +8,7 @@ import {
 import type {
 	FootballMatches,
 	FootballMatchKind,
-	Regions,
+	Region,
 } from '../footballMatches';
 import { grid } from '../grid';
 import type { EditionId } from '../lib/edition';
@@ -19,7 +19,7 @@ import { FootballCompetitionSelect } from './FootballCompetitionSelect';
 import { FootballMatchList } from './FootballMatchList';
 
 type Props = {
-	regions: Regions;
+	regions: Region[];
 	guardianBaseUrl: string;
 	kind: FootballMatchKind;
 	initialDays: FootballMatches;
@@ -46,7 +46,7 @@ const createTitle = (kind: FootballMatchKind, edition: EditionId) => {
 };
 
 export const FootballMatchesPage = ({
-	regions: nations,
+	regions,
 	guardianBaseUrl,
 	kind,
 	initialDays,
@@ -103,7 +103,7 @@ export const FootballMatchesPage = ({
 			`}
 		>
 			<FootballCompetitionSelect
-				nations={nations}
+				regions={regions}
 				kind={kind}
 				pageId={pageId}
 				onChange={goToCompetitionSpecificPage}

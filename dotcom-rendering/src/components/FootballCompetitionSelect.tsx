@@ -3,7 +3,7 @@ import type { FootballMatchKind, Regions } from '../footballMatches';
 import { palette } from '../palette';
 
 type Props = {
-	nations: Regions;
+	regions: Regions;
 	kind: FootballMatchKind;
 	pageId: string;
 	onChange: (competitionTag: string) => void;
@@ -32,7 +32,7 @@ const getPagePath = (kind: FootballMatchKind) => {
 };
 
 export const FootballCompetitionSelect = ({
-	nations,
+	regions,
 	kind,
 	pageId,
 	onChange,
@@ -48,9 +48,9 @@ export const FootballCompetitionSelect = ({
 		}}
 	>
 		<Option value={getPagePath(kind)}>{allLabel(kind)}</Option>
-		{nations.map((nation) => (
-			<optgroup label={nation.name} key={nation.name}>
-				{nation.competitions.map((competition) => (
+		{regions.map((region) => (
+			<optgroup label={region.name} key={region.name}>
+				{region.competitions.map((competition) => (
 					<Option key={competition.name} value={competition.url}>
 						{competition.name}
 					</Option>

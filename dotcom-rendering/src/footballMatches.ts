@@ -413,17 +413,17 @@ export const parse: (
 	frontendData: FEMatchByDateAndCompetition[],
 ) => Result<ParserError, FootballMatches> = listParse(parseFootballDay);
 
-export type Regions = Array<{
+export type Region = {
 	name: string;
 	competitions: Array<{ url: string; name: string }>;
-}>;
+};
 
 export type DCRFootballDataPage = {
 	matchesList: FootballMatches;
 	kind: FootballMatchKind;
 	nextPage?: string;
 	previousPage?: string;
-	regions: Regions;
+	regions: Region[];
 	nav: NavType;
 	editionId: EditionId;
 	guardianBaseURL: string;
