@@ -32,6 +32,7 @@ import { MediaDuration } from './MediaDuration';
 import { Pill } from './Pill';
 import { StarRating } from './StarRating/StarRating';
 import { SupportingContent } from './SupportingContent';
+import { WaveForm } from './WaveForm';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
 
 export type Position = 'inner' | 'outer' | 'none';
@@ -65,9 +66,9 @@ const hoverStyles = css`
 	:hover .image-overlay {
 		position: absolute;
 		top: 0;
+		left: 0;
 		width: 100%;
 		height: 100%;
-		left: 0;
 		background-color: ${palette('--card-background-hover')};
 	}
 
@@ -112,6 +113,11 @@ const overlayStyles = css`
 		rgb(0, 0, 0) 64px
 	);
 	backdrop-filter: blur(12px) brightness(0.5);
+
+	/* Ensure the waveform is behind the other elements, e.g. headline, pill */
+	> * {
+		z-index: 1;
+	}
 `;
 
 const podcastImageContainerStyles = css`
@@ -150,6 +156,17 @@ const videoPillStyles = css`
 	right: ${space[2]}px;
 `;
 
+const waveformStyles = css`
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: 0;
+	height: 64px;
+	max-width: 100%;
+	overflow: hidden;
+	opacity: 0.3;
+`;
+
 const getMedia = ({
 	imageUrl,
 	imageAltText,
@@ -168,9 +185,11 @@ const getMedia = ({
 			...(imageUrl && { imageUrl }),
 		} as const;
 	}
+
 	if (imageUrl) {
 		return { type: 'picture', imageUrl, imageAltText } as const;
 	}
+
 	return undefined;
 };
 
@@ -198,6 +217,7 @@ export type Props = {
 	 * Youtube requires a minimum width 200px.
 	 */
 	canPlayInline?: boolean;
+	isCartoon?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	starRating?: Rating;
@@ -247,6 +267,7 @@ export const FeatureCard = ({
 	showClock,
 	mainMedia,
 	canPlayInline,
+	isCartoon,
 	kickerText,
 	showPulsingDot,
 	dataLinkName,
@@ -492,6 +513,7 @@ export const FeatureCard = ({
 													'--feature-card-kicker-text',
 												)}
 												isBetaContainer={true}
+												isCartoon={isCartoon}
 											/>
 										</div>
 
@@ -513,6 +535,18 @@ export const FeatureCard = ({
 													)}
 													trailTextSize="regular"
 													padBottom={false}
+												/>
+											</div>
+										)}
+
+										{mainMedia?.type === 'Audio' && (
+											<div css={waveformStyles}>
+												<WaveForm
+													seed={mainMedia.duration}
+													height={64}
+													// Just enough to cover the full width of the feature card in it's largest form
+													bars={233}
+													barWidth={2}
 												/>
 											</div>
 										)}

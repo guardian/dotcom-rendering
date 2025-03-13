@@ -4,7 +4,6 @@ import type { ImgHTMLAttributes } from 'react';
 import React from 'react';
 import type { AspectRatio } from '../types/front';
 import type { ImageSizeType } from './Card/components/ImageWrapper';
-import { LoopVideoABTest } from './LoopVideoABTest';
 import type { ImageWidthType } from './Picture';
 import { generateSources, getFallbackSource } from './Picture';
 
@@ -19,7 +18,6 @@ type Props = {
 	isCircular?: boolean;
 	aspectRatio?: AspectRatio;
 	mobileAspectRatio?: AspectRatio;
-	isInLoopVideoTest?: boolean;
 };
 
 /**
@@ -197,7 +195,6 @@ export const CardPicture = ({
 	isCircular,
 	aspectRatio = '5:3',
 	mobileAspectRatio,
-	isInLoopVideoTest = false,
 }: Props) => {
 	const sources = generateSources(
 		mainImage,
@@ -205,10 +202,6 @@ export const CardPicture = ({
 	);
 
 	const fallbackSource = getFallbackSource(sources);
-
-	if (isInLoopVideoTest) {
-		return <LoopVideoABTest />;
-	}
 
 	return (
 		<picture

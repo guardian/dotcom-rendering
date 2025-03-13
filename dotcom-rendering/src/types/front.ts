@@ -341,6 +341,7 @@ export type DCRFrontCard = {
 	boostLevel?: BoostLevel;
 	isCrossword?: boolean;
 	isNewsletter?: boolean;
+	isCartoon?: boolean;
 	discussionId?: string;
 	byline?: string;
 	showByline?: boolean;
@@ -350,7 +351,6 @@ export type DCRFrontCard = {
 	branding?: Branding;
 	slideshowImages?: DCRSlideshowImage[];
 	showMainVideo?: boolean;
-	isInLoopVideoTest?: boolean;
 };
 
 export type DCRSlideshowImage = {

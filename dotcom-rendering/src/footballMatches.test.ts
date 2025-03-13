@@ -36,7 +36,7 @@ describe('footballMatches', () => {
 		expect(result.length).toBe(1);
 
 		const day = result[0];
-		expect(day?.date.toISOString()).toBe('2025-03-03T00:00:00.000Z');
+		expect(day?.dateISOString).toBe('2025-03-03T00:00:00.000Z');
 		expect(day?.competitions.length).toBe(3);
 
 		const competition = day?.competitions[0];
