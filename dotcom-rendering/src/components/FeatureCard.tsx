@@ -66,9 +66,9 @@ const hoverStyles = css`
 	:hover .image-overlay {
 		position: absolute;
 		top: 0;
+		left: 0;
 		width: 100%;
 		height: 100%;
-		left: 0;
 		background-color: ${palette('--card-background-hover')};
 	}
 

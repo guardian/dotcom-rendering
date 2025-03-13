@@ -19,7 +19,6 @@ import type {
 	FootballMatches,
 	FootballMatchKind,
 } from '../footballMatches';
-import { grid } from '../grid';
 import {
 	type EditionId,
 	getLocaleFromEdition,
@@ -40,6 +39,37 @@ const REMOVE_TRAILING_DOTS_REGEX = /\.+$/;
 const removeTrailingDots = (str: string): string => {
 	return str.replace(REMOVE_TRAILING_DOTS_REGEX, '');
 };
+
+const footballMatchesGridStyles = css`
+	display: grid;
+	grid-template-columns: [centre-column-start] repeat(4, 1fr) [centre-column-end];
+	column-gap: 10px;
+	${from.mobileLandscape} {
+		column-gap: 20px;
+	}
+
+	${from.tablet} {
+		grid-template-columns: [centre-column-start] repeat(12, 40px) [centre-column-end];
+	}
+
+	${from.desktop} {
+		grid-template-columns: [centre-column-start] repeat(8, 60px) [centre-column-end];
+	}
+
+	${from.leftCol} {
+		grid-template-columns:
+			[left-column-start] repeat(2, 60px)
+			[left-column-end centre-column-start] repeat(8, 60px)
+			[centre-column-end];
+	}
+
+	${from.wide} {
+		grid-template-columns:
+			[left-column-start] repeat(3, 60px)
+			[left-column-end centre-column-start] repeat(8, 60px)
+			[centre-column-end];
+	}
+`;
 
 const getDateFormatter = (edition: EditionId): Intl.DateTimeFormat =>
 	new Intl.DateTimeFormat('en-GB', {
@@ -63,13 +93,13 @@ const Day = (props: { children: ReactNode }) => (
 	<h2
 		css={css`
 			${textSansBold14}
-			${grid.column.centre}
+			grid-column: centre-column-start / centre-column-end;
 			border-top: 1px solid ${palette('--football-match-list-border')};
 			padding-top: ${space[2]}px;
 
 			${from.leftCol} {
 				padding-bottom: ${space[6]}px;
-				${grid.between('left-column-start', 'centre-column-end')}
+				grid-column: left-column-start / centre-column-end;
 			}
 		`}
 	>
@@ -81,7 +111,7 @@ const CompetitionName = (props: { children: ReactNode }) => (
 	<h3
 		css={css`
 			${textSansBold14}
-			${grid.column.centre}
+			grid-column: centre-column-start / centre-column-end;
 			color: ${palette('--football-match-list-competition-text')};
 			border-top: 1px solid ${palette('--football-match-list-top-border')};
 			padding: ${space[2]}px;
@@ -93,7 +123,7 @@ const CompetitionName = (props: { children: ReactNode }) => (
 				background-color: transparent;
 				margin-top: 0;
 				padding: ${space[1]}px 0 0;
-				${grid.column.left}
+				grid-column: left-column-start / left-column-end;
 				${headlineBold17}
 			}
 		`}
@@ -106,7 +136,7 @@ const Matches = (props: { children: ReactNode }) => (
 	<ul
 		{...props}
 		css={css`
-			${grid.column.centre}
+			grid-column: centre-column-start / centre-column-end;
 
 			${from.leftCol} {
 				padding-bottom: ${space[9]}px;
@@ -369,25 +399,7 @@ export const FootballMatchList = ({
 		<>
 			{days.map((day) => (
 				<section
-					css={css`
-						${grid.paddedContainer}
-						position: relative;
-						${from.tablet} {
-							&::before,
-							&::after {
-								content: '';
-								position: absolute;
-								border-left: 1px solid
-									${palette('--article-border')};
-								top: 0;
-								bottom: 0;
-							}
-
-							&::after {
-								right: 0;
-							}
-						}
-					`}
+					css={footballMatchesGridStyles}
 					key={day.dateISOString}
 				>
 					<Day>
@@ -425,11 +437,14 @@ export const FootballMatchList = ({
 			))}
 
 			{getMoreDays === undefined ? null : (
-				<div css={css(grid.paddedContainer)}>
+				<div css={footballMatchesGridStyles}>
 					<div
 						css={css`
-							${grid.column.centre}
-							padding-top: ${space[10]}px;
+							grid-column: centre-column-start / centre-column-end;
+
+							${until.leftCol} {
+								padding-top: ${space[10]}px;
+							}
 						`}
 					>
 						<Button
