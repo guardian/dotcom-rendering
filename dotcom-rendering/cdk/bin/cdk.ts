@@ -92,7 +92,7 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 			},
 		},
 	},
-	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
+	instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
 });
 
 /** Tag pages */
