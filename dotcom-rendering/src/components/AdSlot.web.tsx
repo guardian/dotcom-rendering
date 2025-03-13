@@ -104,6 +104,13 @@ const topAboveNavContainerStyles = css`
 	display: block;
 `;
 
+const bottomPaddingStyles = css`
+	padding-bottom: ${space[3]}px;
+	${from.desktop} {
+		padding-bottom: ${space[6]}px;
+	}
+`;
+
 /**
  * Both Showcase and NumberedList displays have a showcase main media. Underneath this
  * in the right column, the `right` ad slot and the MostViewed component are loaded on
@@ -122,6 +129,7 @@ const showcaseRightColumnStyles = css`
 const merchandisingAdContainerStyles = css`
 	display: flex;
 	justify-content: center;
+	padding-bottom: ${space[6]}px;
 
 	&.ad-slot-container--centre-slot {
 		width: fit-content;
@@ -138,7 +146,6 @@ const merchandisingAdStyles = css`
 
 	${from.desktop} {
 		margin: 0;
-		padding-bottom: 20px;
 		min-height: ${adSizes.billboard.height + labelHeight + 20}px;
 	}
 	&:not(.ad-slot--fluid).ad-slot--rendered {
@@ -244,7 +251,7 @@ const frontsBannerAdStyles = css`
 	max-width: ${adSizes.leaderboard.width}px;
 	max-height: ${adSizes.leaderboard.height + labelHeight}px;
 	overflow: hidden;
-	padding-bottom: ${frontsBannerPaddingHeight}px;
+
 	${from.desktop} {
 		/* No banner should be taller than 600px */
 		max-height: ${600 + labelHeight}px;
@@ -434,7 +441,9 @@ export const AdSlot = ({
 				case ArticleDisplay.Showcase:
 				case ArticleDisplay.NumberedList: {
 					return (
-						<AdSlotWrapper css={showcaseRightColumnContainerStyles}>
+						<AdSlotWrapper
+							css={[showcaseRightColumnContainerStyles]}
+						>
 							<div
 								id="dfp-ad--right"
 								css={[rightAdStyles, showcaseRightColumnStyles]}
@@ -583,7 +592,7 @@ export const AdSlot = ({
 		}
 		case 'top-above-nav': {
 			return (
-				<AdSlotWrapper css={[topAboveNavContainerStyles]}>
+				<AdSlotWrapper css={topAboveNavContainerStyles}>
 					<div
 						id="dfp-ad--top-above-nav"
 						className={[
@@ -626,7 +635,9 @@ export const AdSlot = ({
 		}
 		case 'merchandising-high': {
 			return (
-				<AdSlotWrapper css={[merchandisingAdContainerStyles]}>
+				<AdSlotWrapper
+					css={[merchandisingAdContainerStyles, bottomPaddingStyles]}
+				>
 					<div
 						id="dfp-ad--merchandising-high"
 						className={[
@@ -634,7 +645,7 @@ export const AdSlot = ({
 							'ad-slot',
 							'ad-slot--merchandising-high',
 						].join(' ')}
-						css={[merchandisingAdStyles]}
+						css={merchandisingAdStyles}
 						data-link-name="ad slot merchandising-high"
 						data-name="merchandising-high"
 						data-refresh="false"
@@ -646,7 +657,9 @@ export const AdSlot = ({
 		}
 		case 'merchandising': {
 			return (
-				<AdSlotWrapper css={merchandisingAdContainerStyles}>
+				<AdSlotWrapper
+					css={[merchandisingAdContainerStyles, bottomPaddingStyles]}
+				>
 					<div
 						id="dfp-ad--merchandising"
 						className={[
@@ -654,7 +667,7 @@ export const AdSlot = ({
 							'ad-slot',
 							'ad-slot--merchandising',
 						].join(' ')}
-						css={[merchandisingAdStyles]}
+						css={merchandisingAdStyles}
 						data-link-name="ad slot merchandising"
 						data-name="merchandising"
 						data-testid="slot"
@@ -674,6 +687,7 @@ export const AdSlot = ({
 						css={[
 							frontsBannerAdContainerStyles,
 							hasPageskin && frontsBannerCollapseStyles,
+							bottomPaddingStyles,
 						]}
 					>
 						<div
@@ -685,7 +699,7 @@ export const AdSlot = ({
 								'ad-slot--rendered',
 								hasPageskin && 'ad-slot--collapse',
 							].join(' ')}
-							css={[frontsBannerAdStyles]}
+							css={frontsBannerAdStyles}
 							data-link-name={`ad slot ${advertId}`}
 							data-name={`${advertId}`}
 							data-testid="slot"
@@ -773,7 +787,7 @@ export const AdSlot = ({
 							'ad-slot--liveblog-top',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[liveBlogTopAdStyles]}
+						css={liveBlogTopAdStyles}
 						data-link-name="ad slot liveblog-top"
 						data-name="liveblog-top"
 						data-testid="slot"
@@ -785,7 +799,7 @@ export const AdSlot = ({
 		case 'mobile-front': {
 			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
-				<AdSlotWrapper>
+				<AdSlotWrapper css={bottomPaddingStyles}>
 					<div
 						id={`dfp-ad--${advertId}--mobile`}
 						className={[
@@ -797,7 +811,7 @@ export const AdSlot = ({
 							'mobile-only',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[mobileFrontAdStyles]}
+						css={mobileFrontAdStyles}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
 						data-testid="slot"
@@ -841,7 +855,7 @@ export const AdSlot = ({
 							'ad-slot--article-end',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[articleEndAdStyles]}
+						css={articleEndAdStyles}
 						data-link-name="ad slot article-end"
 						data-name="article-end"
 						data-testid="slot"
@@ -861,7 +875,7 @@ export const AdSlot = ({
 							'ad-slot--crossword-banner-mobile',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[crosswordBannerMobileAdStyles]}
+						css={crosswordBannerMobileAdStyles}
 						data-link-name="ad slot crossword-banner-mobile"
 						data-name="crossword-banner-mobile"
 						data-testid="slot"
