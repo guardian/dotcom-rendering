@@ -4,6 +4,7 @@ import {
 	brandBorder,
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
+import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { BETA_CONTAINERS } from '../components/Card/Card';
 import { Carousel } from '../components/Carousel.importable';
@@ -197,65 +198,64 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
-				<>
-					{renderAds && (
-						<Stuck>
-							<Section
-								fullWidth={true}
-								showTopBorder={false}
-								showSideBorders={false}
-								padSides={false}
-								shouldCenter={false}
-								backgroundColour={schemePalette(
-									'--article-section-background',
-								)}
-							>
-								<HeaderAdSlot
-									isPaidContent={!!front.config.isPaidContent}
-									shouldHideReaderRevenue={false}
-								/>
-							</Section>
-						</Stuck>
-					)}
-
-					{hasPageSkin && (
-						<AdSlot
-							data-print-layout="hide"
-							position="pageskin"
-							display={ArticleDisplay.Standard}
-							hasPageskin={hasPageSkin}
-						/>
-					)}
-
-					<Masthead
-						nav={NAV}
-						highlights={<Highlights />}
-						editionId={front.editionId}
-						idUrl={front.config.idUrl}
-						mmaUrl={front.config.mmaUrl}
-						discussionApiUrl={front.config.discussionApiUrl}
-						contributionsServiceUrl={contributionsServiceUrl}
-						idApiUrl={front.config.idApiUrl}
-						showSubNav={!isPaidContent}
-						showSlimNav={false}
-						hasPageSkin={hasPageSkin}
-						hasPageSkinContentSelfConstrain={true}
-						pageId={pageId}
-					/>
-
-					{isPaidContent && (
+				{renderAds && (
+					<Stuck>
 						<Section
 							fullWidth={true}
 							showTopBorder={false}
-							backgroundColour={sourcePalette.labs[400]}
-							borderColour={sourcePalette.neutral[60]}
-							sectionId="labs-header"
+							showSideBorders={false}
+							padSides={false}
+							shouldCenter={false}
+							backgroundColour={schemePalette(
+								'--article-section-background',
+							)}
 						>
-							<LabsHeader editionId={editionId} />
+							<HeaderAdSlot
+								isPaidContent={!!front.config.isPaidContent}
+								shouldHideReaderRevenue={false}
+							/>
 						</Section>
-					)}
-				</>
+					</Stuck>
+				)}
+
+				{hasPageSkin && (
+					<AdSlot
+						data-print-layout="hide"
+						position="pageskin"
+						display={ArticleDisplay.Standard}
+						hasPageskin={hasPageSkin}
+					/>
+				)}
+
+				<Masthead
+					nav={NAV}
+					highlights={<Highlights />}
+					editionId={front.editionId}
+					idUrl={front.config.idUrl}
+					mmaUrl={front.config.mmaUrl}
+					discussionApiUrl={front.config.discussionApiUrl}
+					contributionsServiceUrl={contributionsServiceUrl}
+					idApiUrl={front.config.idApiUrl}
+					showSubNav={!isPaidContent}
+					showSlimNav={false}
+					hasPageSkin={hasPageSkin}
+					hasPageSkinContentSelfConstrain={true}
+					pageId={pageId}
+				/>
+
+				{isPaidContent && (
+					<Section
+						fullWidth={true}
+						showTopBorder={false}
+						backgroundColour={sourcePalette.labs[400]}
+						borderColour={sourcePalette.neutral[60]}
+						sectionId="labs-header"
+					>
+						<LabsHeader editionId={editionId} />
+					</Section>
+				)}
 			</div>
+
 			<main
 				data-layout="FrontLayout"
 				data-link-name={`Front | /${front.pressedPage.id}`}
@@ -270,6 +270,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						/>
 					</Island>
 				)}
+
 				{filteredCollections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
@@ -337,7 +338,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
-							<div key={ophanName}>
+							<Fragment key={ophanName}>
 								{desktopAdPositions.includes(index) && (
 									<FrontsBannerAdSlot
 										renderAds={renderAds}
@@ -347,6 +348,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)}
 									/>
 								)}
+
 								{!!trail.embedUri && (
 									<SnapCssSandbox snapData={trail.snapData}>
 										<Section
@@ -375,6 +377,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										</Section>
 									</SnapCssSandbox>
 								)}
+
 								{mobileAdPositions.includes(index) && (
 									<MobileAdSlot
 										renderAds={renderAds}
@@ -383,8 +386,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)}
 									/>
 								)}
+
 								{index === merchHighAdPosition && (
 									<MerchHighAdSlot
+										key={ophanName}
 										renderAds={renderAds}
 										collectionCount={
 											filteredCollections.length
@@ -395,7 +400,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										}
 									/>
 								)}
-							</div>
+							</Fragment>
 						);
 					}
 
@@ -409,7 +414,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							: undefined;
 
 						return (
-							<div key={ophanName}>
+							<Fragment key={ophanName}>
 								{desktopAdPositions.includes(index) && (
 									<FrontsBannerAdSlot
 										renderAds={renderAds}
@@ -419,9 +424,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)}
 									/>
 								)}
+
 								<FrontSection
 									toggleable={true}
-									key={ophanName}
 									title={
 										showMostPopular
 											? mostPopularTitle
@@ -466,6 +471,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										renderAds={renderAds}
 									/>
 								</FrontSection>
+
 								{mobileAdPositions.includes(index) && (
 									<MobileAdSlot
 										renderAds={renderAds}
@@ -474,13 +480,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)}
 									/>
 								)}
-							</div>
+							</Fragment>
 						);
 					}
 
 					if (collection.containerPalette === 'Branded') {
 						return (
-							<div key={ophanName}>
+							<Fragment key={ophanName}>
 								<LabsSection
 									title={collection.displayName}
 									collectionId={collection.id}
@@ -528,6 +534,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										}
 									/>
 								</LabsSection>
+
 								{mobileAdPositions.includes(index) && (
 									<MobileAdSlot
 										renderAds={renderAds}
@@ -536,6 +543,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)}
 									/>
 								)}
+
 								{index === merchHighAdPosition && (
 									<MerchHighAdSlot
 										renderAds={renderAds}
@@ -548,7 +556,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										}
 									/>
 								)}
-							</div>
+							</Fragment>
 						);
 					}
 
@@ -560,7 +568,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							collection.containerPalette ?? 'MediaPalette';
 
 						return (
-							<div key={ophanName}>
+							<Fragment key={ophanName}>
 								{desktopAdPositions.includes(index) && (
 									<FrontsBannerAdSlot
 										renderAds={renderAds}
@@ -570,6 +578,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)}
 									/>
 								)}
+
 								<ContainerOverrides
 									containerPalette={containerPalette}
 								>
@@ -634,6 +643,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										</Island>
 									</Section>
 								</ContainerOverrides>
+
 								{mobileAdPositions.includes(index) && (
 									<MobileAdSlot
 										renderAds={renderAds}
@@ -642,6 +652,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)}
 									/>
 								)}
+
 								{index === merchHighAdPosition && (
 									<MerchHighAdSlot
 										renderAds={renderAds}
@@ -654,12 +665,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										}
 									/>
 								)}
-							</div>
+							</Fragment>
 						);
 					}
 
 					return (
-						<div key={ophanName}>
+						<Fragment key={ophanName}>
 							{desktopAdPositions.includes(index) && (
 								<FrontsBannerAdSlot
 									renderAds={renderAds}
@@ -669,6 +680,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									)}
 								/>
 							)}
+
 							<FrontSection
 								title={collection.displayName}
 								description={collection.description}
@@ -745,6 +757,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									containerLevel={collection.containerLevel}
 								/>
 							</FrontSection>
+
 							{mobileAdPositions.includes(index) && (
 								<MobileAdSlot
 									renderAds={renderAds}
@@ -753,6 +766,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									)}
 								/>
 							)}
+
 							{index === merchHighAdPosition && (
 								<MerchHighAdSlot
 									renderAds={renderAds}
@@ -763,7 +777,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 								/>
 							)}
-						</div>
+						</Fragment>
 					);
 				})}
 			</main>
