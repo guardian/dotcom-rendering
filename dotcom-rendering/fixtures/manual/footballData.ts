@@ -1,6 +1,6 @@
-import type { FootballMatches, Regions } from '../../src/footballMatches';
+import type { FootballMatches, Region } from '../../src/footballMatches';
 
-export const regions: Regions = [
+export const regions: Region[] = [
 	{
 		name: 'England',
 		competitions: [

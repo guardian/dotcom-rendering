@@ -1,9 +1,9 @@
 import { Option, Select } from '@guardian/source/react-components';
-import type { FootballMatchKind, Regions } from '../footballMatches';
+import type { FootballMatchKind, Region } from '../footballMatches';
 import { palette } from '../palette';
 
 type Props = {
-	regions: Regions;
+	regions: Region[];
 	kind: FootballMatchKind;
 	pageId: string;
 	onChange: (competitionTag: string) => void;
