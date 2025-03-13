@@ -62,33 +62,31 @@ const flexBasisStyles = ({
 
 type ImageDirection = 'vertical' | 'horizontal' | 'none';
 
+/**
+ * There is no padding on the side of the image where the text is.
+ */
 const paddingBetaContainerStyles = (
-	imageDirectionMobile: ImageDirection,
-	imageDirectionDesktop: ImageDirection,
-	imagePositionOnDesktop: ImagePositionType,
-	paddingWidth: 1 | 2,
-	isFlexibleContainer: boolean,
+	imagePositionMobile: ImagePositionType,
+	imagePositionDesktop: ImagePositionType,
+	padding: 1 | 2,
 ) => css`
 	${until.tablet} {
-		padding-left: ${imageDirectionMobile !== 'horizontal' &&
-		`${space[paddingWidth]}px`};
-		padding-right: ${imageDirectionMobile !== 'horizontal' &&
-		`${space[paddingWidth]}px`};
-		padding-top: ${imageDirectionMobile !== 'vertical' &&
-		`${space[paddingWidth]}px`};
-		padding-bottom: ${imageDirectionMobile !== 'vertical' &&
-		`${space[paddingWidth]}px`};
+		padding-left: ${imagePositionMobile !== 'left' &&
+		`${space[padding]}px`};
+		padding-right: ${imagePositionMobile !== 'right' &&
+		`${space[padding]}px`};
+		padding-top: ${imagePositionMobile !== 'top' && `${space[padding]}px`};
+		padding-bottom: ${imagePositionMobile !== 'bottom' &&
+		`${space[padding]}px`};
 	}
 	${from.tablet} {
-		padding-left: ${imageDirectionDesktop !== 'horizontal' &&
-		`${space[paddingWidth]}px`};
-		padding-right: ${imageDirectionDesktop !== 'horizontal' &&
-		`${space[paddingWidth]}px`};
-		padding-top: ${imageDirectionDesktop !== 'vertical' &&
-		`${space[paddingWidth]}px`};
-		padding-bottom: ${(imageDirectionDesktop !== 'vertical' ||
-			(!isFlexibleContainer && imagePositionOnDesktop === 'top')) &&
-		`${space[paddingWidth]}px`};
+		padding-left: ${imagePositionDesktop !== 'left' &&
+		`${space[padding]}px`};
+		padding-right: ${imagePositionDesktop !== 'right' &&
+		`${space[padding]}px`};
+		padding-top: ${imagePositionDesktop !== 'top' && `${space[padding]}px`};
+		padding-bottom: ${imagePositionDesktop !== 'bottom' &&
+		`${space[padding]}px`};
 	}
 `;
 
@@ -117,7 +115,6 @@ type Props = {
 	imageType?: CardImageType;
 	imageSize: ImageSizeType;
 	isBetaContainer: boolean;
-	isFlexibleContainer: boolean;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	padContent?: 'small' | 'large';
@@ -129,14 +126,12 @@ export const ContentWrapper = ({
 	imageType,
 	imageSize,
 	isBetaContainer,
-	isFlexibleContainer,
 	imagePositionOnDesktop,
 	imagePositionOnMobile,
 	padContent,
 	padRight = false,
 }: Props) => {
 	const imageDirectionDesktop = getImageDirection(imagePositionOnDesktop);
-	const imageDirectionMobile = getImageDirection(imagePositionOnMobile);
 	const paddingSpace = padContent === 'small' ? 1 : 2;
 
 	return (
@@ -153,11 +148,9 @@ export const ContentWrapper = ({
 				padContent &&
 					isBetaContainer &&
 					paddingBetaContainerStyles(
-						imageDirectionMobile,
-						imageDirectionDesktop,
+						imagePositionOnMobile,
 						imagePositionOnDesktop,
 						paddingSpace,
-						isFlexibleContainer,
 					),
 				padRight && padRightStyles,
 			]}
