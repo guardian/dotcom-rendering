@@ -231,8 +231,10 @@ export type Props = {
 	discussionApiUrl: string;
 	discussionId?: string;
 	isExternalLink: boolean;
-	/** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
+	/** Alows the consumer to set an aspect ratio on the image */
 	aspectRatio?: AspectRatio;
+	/** Alows the consumer to set an aspect ratio on the image specifically on mobile breakpoints */
+	mobileAspectRatio?: AspectRatio;
 	showQuotes?: boolean;
 	/**
 	 * Youtube video requires a unique ID. We append the collectionId to the youtube asset ID, to allow
@@ -241,6 +243,11 @@ export type Props = {
 	 */
 	collectionId: number;
 	isNewsletter?: boolean;
+	/**
+	 * An immersive feature card variant. It dictates that the card has a full width background image on all breakpoints. It also dictates the the card change aspect ratio to 5:3 on desktop and 4:5 on mobile.
+	 *
+	 */
+	// isImmersive?: boolean;
 };
 
 export const FeatureCard = ({
@@ -272,10 +279,11 @@ export const FeatureCard = ({
 	isExternalLink,
 	absoluteServerTimes,
 	aspectRatio,
+	mobileAspectRatio,
 	starRating,
 	showQuotes,
 	collectionId,
-	isNewsletter = false,
+	isNewsletter = false, // isImmersive = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -397,6 +405,9 @@ export const FeatureCard = ({
 											loading={imageLoading}
 											roundedCorners={false}
 											aspectRatio={aspectRatio}
+											mobileAspectRatio={
+												mobileAspectRatio
+											}
 										/>
 									</div>
 								)}
@@ -410,6 +421,9 @@ export const FeatureCard = ({
 											loading={imageLoading}
 											roundedCorners={false}
 											aspectRatio={aspectRatio}
+											mobileAspectRatio={
+												mobileAspectRatio
+											}
 										/>
 										{isVideoMainMedia &&
 											mainMedia.duration > 0 && (
