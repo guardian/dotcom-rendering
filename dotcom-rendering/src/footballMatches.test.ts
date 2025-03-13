@@ -13,7 +13,7 @@ import type {
 	FEMatchDay,
 	FEResult,
 } from './feFootballDataPage';
-import { parse, parseLiveMatch, parseMatchResult } from './footballMatches';
+import { parse } from './footballMatches';
 import { errorOrThrow, okOrThrow } from './lib/result';
 
 const withMatches = (
@@ -191,20 +191,31 @@ describe('footballMatches', () => {
 		for (const [uncleanName, cleanName] of Object.entries(
 			uncleanToCleanNames,
 		)) {
-			const match = okOrThrow(
-				parseMatchResult(matchesListWithTeamName(uncleanName)),
+			const matchDay = okOrThrow(
+				parse(withMatches([matchesListWithTeamName(uncleanName)])),
 				'Expected football match parsing to succeed',
 			);
+
+			const match = matchDay[0]!.competitions[0]!.matches[0];
+			if (match?.kind !== 'Result') {
+				throw new Error('Expected Result');
+			}
+
 			expect(match.homeTeam.name).toBe(cleanName);
 		}
 	});
 	it('should replace known live match status with our status', () => {
 		const matchDay = okOrThrow(
-			parseLiveMatch(matchDayLiveSecondHalf),
+			parse(withMatches([matchDayLiveSecondHalf])),
 			'Expected football live match parsing to succeed',
 		);
 
-		expect(matchDay.status).toBe('2nd');
+		const match = matchDay[0]!.competitions[0]!.matches[0];
+		if (match?.kind !== 'Live') {
+			throw new Error('Expected live match');
+		}
+
+		expect(match.status).toBe('2nd');
 	});
 	it('should replace unknown live match status with first two characters', () => {
 		const matchDayLiveUnknownStatus = {
@@ -213,10 +224,15 @@ describe('footballMatches', () => {
 		};
 
 		const matchDay = okOrThrow(
-			parseLiveMatch(matchDayLiveUnknownStatus),
+			parse(withMatches([matchDayLiveUnknownStatus])),
 			'Expected football live match parsing to succeed',
 		);
 
-		expect(matchDay.status).toBe('So');
+		const match = matchDay[0]!.competitions[0]!.matches[0];
+		if (match?.kind !== 'Live') {
+			throw new Error('Expected live match');
+		}
+
+		expect(match.status).toBe('So');
 	});
 });

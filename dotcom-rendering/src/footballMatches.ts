@@ -229,7 +229,7 @@ const parseFixture = (
 	});
 };
 
-export const parseMatchResult = (
+const parseMatchResult = (
 	feResult: FEResult | FEMatchDay,
 ): Result<ParserError, MatchResult> => {
 	if (feResult.type === 'MatchDay' && !feResult.result) {
@@ -273,7 +273,7 @@ export const parseMatchResult = (
 	});
 };
 
-export const parseLiveMatch = (
+const parseLiveMatch = (
 	feMatchDay: FEMatchDay,
 ): Result<ParserError, LiveMatch> => {
 	if (!feMatchDay.liveMatch) {
