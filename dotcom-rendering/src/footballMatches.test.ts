@@ -3,6 +3,7 @@ import {
 	emptyMatches,
 	liveMatch,
 	matchDayLive,
+	matchDayLiveSecondHalf,
 	matchFixture,
 	matchResult,
 } from '../fixtures/manual/footballMatches';
@@ -12,7 +13,7 @@ import type {
 	FEMatchDay,
 	FEResult,
 } from './feFootballDataPage';
-import { parse, parseMatchResult } from './footballMatches';
+import { parse, parseLiveMatch, parseMatchResult } from './footballMatches';
 import { errorOrThrow, okOrThrow } from './lib/result';
 
 const withMatches = (
@@ -196,5 +197,26 @@ describe('footballMatches', () => {
 			);
 			expect(match.homeTeam.name).toBe(cleanName);
 		}
+	});
+	it('should replace known live match status with our status', () => {
+		const matchDay = okOrThrow(
+			parseLiveMatch(matchDayLiveSecondHalf),
+			'Expected football live match parsing to succeed',
+		);
+
+		expect(matchDay.status).toBe('2nd');
+	});
+	it('should replace unknown live match status with first two characters', () => {
+		const matchDayLiveUnknownStatus = {
+			...matchDayLiveSecondHalf,
+			matchStatus: 'Something odd',
+		};
+
+		const matchDay = okOrThrow(
+			parseLiveMatch(matchDayLiveUnknownStatus),
+			'Expected football live match parsing to succeed',
+		);
+
+		expect(matchDay.status).toBe('So');
 	});
 });
