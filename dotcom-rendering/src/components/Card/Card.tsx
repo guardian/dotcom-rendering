@@ -499,6 +499,7 @@ export const Card = ({
 		<div
 			css={css`
 				margin-top: auto;
+				display: flex;
 			`}
 		>
 			{isVideoArticle && (
@@ -626,7 +627,10 @@ export const Card = ({
 		}
 	};
 
-	/** Determines the gap of between card components based on card properties */
+	/**
+	 * Determines the gap of between card components based on card properties
+	 * Order matters here as the logic is based on the card properties
+	 */
 	const getGapSizes = (): GapSizes => {
 		if (isOnwardContent) {
 			return {
@@ -634,43 +638,50 @@ export const Card = ({
 				column: 'none',
 			};
 		}
-		if (isMediaCardOrNewsletter && !isFlexibleContainer) {
-			return {
-				row: 'tiny',
-				column: 'tiny',
-			};
-		}
-		if (!!isFlexSplash || (isFlexibleContainer && imageSize === 'jumbo')) {
+
+		if (isFlexSplash) {
 			return {
 				row: 'small',
-				column: 'small',
+				column: 'none',
 			};
 		}
+
+		if (!isBetaContainer) {
+			/**
+			 * Media cards have 4px padding around the content so we have a
+			 * tiny (4px) gap to account for this and make it 8px total
+			 */
+			if (isMediaCardOrNewsletter) {
+				return {
+					row: 'tiny',
+					column: 'tiny',
+				};
+			}
+
+			// Current cards have small padding for everything
+			return { row: 'small', column: 'small' };
+		}
+
 		if (isSmallCard) {
 			return {
 				row: 'medium',
 				column: 'medium',
 			};
 		}
-		if (isBetaContainer && media?.type === 'avatar') {
-			return {
-				row: 'small',
-				column: 'small',
-			};
-		}
+
 		if (
-			isFlexibleContainer &&
-			(imagePositionOnDesktop === 'left' ||
-				imagePositionOnDesktop === 'right')
+			imagePositionOnDesktop === 'bottom' ||
+			imagePositionOnMobile === 'bottom'
 		) {
 			return {
-				row: 'large',
+				row: 'tiny',
 				column: 'large',
 			};
 		}
+
 		return {
-			row: isBetaContainer ? 'tiny' : 'small',
-			column: 'small',
+			row: 'small',
+			column: 'large',
 		};
 	};
 
@@ -1052,13 +1063,19 @@ export const Card = ({
 					<ContentWrapper
 						imageType={media?.type}
 						imageSize={imageSize}
+						isBetaContainer={isBetaContainer}
 						imagePositionOnDesktop={imagePositionOnDesktop}
+						imagePositionOnMobile={imagePositionOnMobile}
 						padContent={determinePadContent(
 							isMediaCardOrNewsletter,
 							isBetaContainer,
 							isOnwardContent,
 						)}
-						isFlexibleContainer={isFlexibleContainer}
+						padRight={
+							!!isFlexSplash &&
+							image &&
+							imagePositionOnDesktop === 'right'
+						}
 					>
 						{/* This div is needed to keep the headline and trail text justified at the start */}
 						<div

@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { between, from, space } from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import type { CardImageType } from '../../../types/layout';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
@@ -14,7 +14,6 @@ const sizingStyles = css`
 /**
  * This function works in partnership with its sibling in `ImageWrapper`. If you
  * change any values here be sure to update that file as well.
- *
  */
 const flexBasisStyles = ({
 	imageSize,
@@ -61,67 +60,99 @@ const flexBasisStyles = ({
 	}
 };
 
-const paddingStyles = (
+type ImageDirection = 'vertical' | 'horizontal' | 'none';
+
+/**
+ * There is no padding on the side of the image where the text is.
+ */
+const paddingBetaContainerStyles = (
+	imagePositionMobile: ImagePositionType,
+	imagePositionDesktop: ImagePositionType,
+	padding: 1 | 2,
+) => css`
+	${until.tablet} {
+		padding-left: ${imagePositionMobile !== 'left' &&
+		`${space[padding]}px`};
+		padding-right: ${imagePositionMobile !== 'right' &&
+		`${space[padding]}px`};
+		padding-top: ${imagePositionMobile !== 'top' && `${space[padding]}px`};
+		padding-bottom: ${imagePositionMobile !== 'bottom' &&
+		`${space[padding]}px`};
+	}
+	${from.tablet} {
+		padding-left: ${imagePositionDesktop !== 'left' &&
+		`${space[padding]}px`};
+		padding-right: ${imagePositionDesktop !== 'right' &&
+		`${space[padding]}px`};
+		padding-top: ${imagePositionDesktop !== 'top' && `${space[padding]}px`};
+		padding-bottom: ${imagePositionDesktop !== 'bottom' &&
+		`${space[padding]}px`};
+	}
+`;
+
+const padRightStyles = css`
+	${from.tablet} {
+		padding-right: ${space[5]}px;
+	}
+`;
+
+const getImageDirection = (
 	imagePosition: ImagePositionType,
-	isFlexibleContainer: boolean,
-	paddingWidth: 1 | 2,
-) => {
-	/**
-	 * If we're in a flexible container there is a 20px gap between the image
-	 * and content. We don't apply padding to the content on the same edge as
-	 * the image so the content is aligned with the grid.
-	 */
-	if (isFlexibleContainer && imagePosition === 'left') {
-		return css`
-			padding: ${space[paddingWidth]}px ${space[paddingWidth]}px
-				${space[paddingWidth]}px 0;
-		`;
+): ImageDirection => {
+	if (imagePosition === 'top' || imagePosition === 'bottom') {
+		return 'vertical';
 	}
 
-	if (isFlexibleContainer && imagePosition === 'right') {
-		return css`
-			padding: ${space[paddingWidth]}px 0 ${space[paddingWidth]}px
-				${space[paddingWidth]}px;
-		`;
+	if (imagePosition === 'left' || imagePosition === 'right') {
+		return 'horizontal';
 	}
 
-	return css`
-		padding: ${space[paddingWidth]}px;
-	`;
+	return 'none';
 };
 
 type Props = {
 	children: React.ReactNode;
 	imageType?: CardImageType;
 	imageSize: ImageSizeType;
+	isBetaContainer: boolean;
 	imagePositionOnDesktop: ImagePositionType;
+	imagePositionOnMobile: ImagePositionType;
 	padContent?: 'small' | 'large';
-	isFlexibleContainer?: boolean;
+	padRight?: boolean;
 };
 
 export const ContentWrapper = ({
 	children,
 	imageType,
 	imageSize,
+	isBetaContainer,
 	imagePositionOnDesktop,
+	imagePositionOnMobile,
 	padContent,
-	isFlexibleContainer = false,
+	padRight = false,
 }: Props) => {
-	const isHorizontalOnDesktop =
-		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
+	const imageDirectionDesktop = getImageDirection(imagePositionOnDesktop);
+	const paddingSpace = padContent === 'small' ? 1 : 2;
 
 	return (
 		<div
 			css={[
 				sizingStyles,
-				isHorizontalOnDesktop &&
+				imageDirectionDesktop === 'horizontal' &&
 					flexBasisStyles({ imageSize, imageType }),
 				padContent &&
-					paddingStyles(
+					!isBetaContainer &&
+					css`
+						padding: ${space[paddingSpace]}px;
+					`,
+				padContent &&
+					isBetaContainer &&
+					paddingBetaContainerStyles(
+						imagePositionOnMobile,
 						imagePositionOnDesktop,
-						isFlexibleContainer,
-						padContent === 'small' ? 1 : 2,
+						paddingSpace,
 					),
+				padRight && padRightStyles,
 			]}
 		>
 			{children}
