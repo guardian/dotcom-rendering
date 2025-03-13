@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/source/foundations';
+import { breakpoints, from } from '@guardian/source/foundations';
 import React from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import {
@@ -208,6 +208,11 @@ export default {
 	decorators: [
 		splitTheme([basicCardProps.format], { orientation: 'vertical' }),
 	],
+	parameters: {
+		chromatic: {
+			viewports: [breakpoints.mobile, breakpoints.wide],
+		},
+	},
 };
 
 /** TODO : Update stories once initial chromatic check has passed on new font size scale */
