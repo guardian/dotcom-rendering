@@ -104,13 +104,6 @@ const topAboveNavContainerStyles = css`
 	display: block;
 `;
 
-const bottomPaddingStyles = css`
-	padding-bottom: ${space[3]}px;
-	${from.desktop} {
-		padding-bottom: ${space[6]}px;
-	}
-`;
-
 /**
  * Both Showcase and NumberedList displays have a showcase main media. Underneath this
  * in the right column, the `right` ad slot and the MostViewed component are loaded on
@@ -129,7 +122,6 @@ const showcaseRightColumnStyles = css`
 const merchandisingAdContainerStyles = css`
 	display: flex;
 	justify-content: center;
-	padding-bottom: ${space[6]}px;
 
 	&.ad-slot-container--centre-slot {
 		width: fit-content;
@@ -146,7 +138,8 @@ const merchandisingAdStyles = css`
 
 	${from.desktop} {
 		margin: 0;
-		min-height: ${adSizes.billboard.height + labelHeight + 20}px;
+		padding-bottom: ${space[6]}px;
+		min-height: ${adSizes.billboard.height + labelHeight + space[6]}px;
 	}
 	&:not(.ad-slot--fluid).ad-slot--rendered {
 		${between.phablet.and.desktop} {
@@ -197,17 +190,18 @@ const liveblogInlineMobileAdStyles = css`
 
 const mobileFrontAdStyles = css`
 	position: relative;
-	min-height: ${adSizes.mpu.height + labelHeight}px;
+	min-height: ${adSizes.mpu.height + labelHeight + space[6]}px;
 	min-width: 300px;
 	width: 300px;
 	margin: 12px auto;
+	padding-bottom: ${space[6]}px;
 
 	${from.tablet} {
 		display: none;
 	}
 `;
 
-const frontsBannerPaddingHeight = 20;
+const frontsBannerPaddingHeight = space[6];
 const frontsBannerMinHeightTablet =
 	adSizes.leaderboard.height + labelHeight + frontsBannerPaddingHeight;
 const frontsBannerMinHeight =
@@ -251,6 +245,7 @@ const frontsBannerAdStyles = css`
 	max-width: ${adSizes.leaderboard.width}px;
 	max-height: ${adSizes.leaderboard.height + labelHeight}px;
 	overflow: hidden;
+	padding-bottom: ${frontsBannerPaddingHeight}px;
 
 	${from.desktop} {
 		/* No banner should be taller than 600px */
@@ -441,9 +436,7 @@ export const AdSlot = ({
 				case ArticleDisplay.Showcase:
 				case ArticleDisplay.NumberedList: {
 					return (
-						<AdSlotWrapper
-							css={[showcaseRightColumnContainerStyles]}
-						>
+						<AdSlotWrapper css={showcaseRightColumnContainerStyles}>
 							<div
 								id="dfp-ad--right"
 								css={[rightAdStyles, showcaseRightColumnStyles]}
@@ -635,9 +628,7 @@ export const AdSlot = ({
 		}
 		case 'merchandising-high': {
 			return (
-				<AdSlotWrapper
-					css={[merchandisingAdContainerStyles, bottomPaddingStyles]}
-				>
+				<AdSlotWrapper css={merchandisingAdContainerStyles}>
 					<div
 						id="dfp-ad--merchandising-high"
 						className={[
@@ -657,9 +648,7 @@ export const AdSlot = ({
 		}
 		case 'merchandising': {
 			return (
-				<AdSlotWrapper
-					css={[merchandisingAdContainerStyles, bottomPaddingStyles]}
-				>
+				<AdSlotWrapper css={merchandisingAdContainerStyles}>
 					<div
 						id="dfp-ad--merchandising"
 						className={[
@@ -687,7 +676,6 @@ export const AdSlot = ({
 						css={[
 							frontsBannerAdContainerStyles,
 							hasPageskin && frontsBannerCollapseStyles,
-							bottomPaddingStyles,
 						]}
 					>
 						<div
@@ -799,7 +787,7 @@ export const AdSlot = ({
 		case 'mobile-front': {
 			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
-				<AdSlotWrapper css={bottomPaddingStyles}>
+				<AdSlotWrapper>
 					<div
 						id={`dfp-ad--${advertId}--mobile`}
 						className={[
