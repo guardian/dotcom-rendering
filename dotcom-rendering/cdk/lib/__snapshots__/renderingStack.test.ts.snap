@@ -282,24 +282,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "MetricName": "CPUUtilization",
         "Namespace": "AWS/EC2",
         "Period": 30,
-        "Tags": [
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "PROD",
-          },
-        ],
         "Threshold": 70,
         "Unit": "Percent",
       },
@@ -670,24 +652,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
             "ReturnData": false,
           },
         ],
-        "Tags": [
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "PROD",
-          },
-        ],
         "Threshold": 0.5,
         "TreatMissingData": "notBreaching",
       },
@@ -863,24 +827,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Namespace": "AWS/ApplicationELB",
         "Period": 30,
         "Statistic": "Average",
-        "Tags": [
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "PROD",
-          },
-        ],
         "Threshold": 0.15,
       },
       "Type": "AWS::CloudWatch::Alarm",
@@ -939,24 +885,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Namespace": "AWS/ApplicationELB",
         "Period": 30,
         "Statistic": "Average",
-        "Tags": [
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "PROD",
-          },
-        ],
         "Threshold": 0.2,
       },
       "Type": "AWS::CloudWatch::Alarm",
@@ -1408,24 +1336,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Namespace": "AWS/ApplicationELB",
         "Period": 60,
         "Statistic": "Maximum",
-        "Tags": [
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "PROD",
-          },
-        ],
         "Threshold": 1,
         "TreatMissingData": "notBreaching",
       },
