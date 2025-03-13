@@ -131,16 +131,18 @@ const merchandisingAdContainerStyles = css`
 
 const merchandisingAdStyles = css`
 	position: relative;
-	min-height: ${adSizes.billboard.height + labelHeight}px;
-	margin: 12px auto;
+	min-height: ${adSizes.billboard.height + labelHeight + space[3]}px;
+	margin: ${space[3]}px auto;
 	max-width: ${breakpoints['wide']}px;
 	overflow: hidden;
+	padding-bottom: ${space[3]}px;
 
 	${from.desktop} {
 		margin: 0;
-		padding-bottom: ${space[6]}px;
-		min-height: ${adSizes.billboard.height + labelHeight + space[6]}px;
+		padding-bottom: ${space[4]}px;
+		min-height: ${adSizes.billboard.height + labelHeight + space[4]}px;
 	}
+
 	&:not(.ad-slot--fluid).ad-slot--rendered {
 		${between.phablet.and.desktop} {
 			display: none;
@@ -190,11 +192,11 @@ const liveblogInlineMobileAdStyles = css`
 
 const mobileFrontAdStyles = css`
 	position: relative;
-	min-height: ${adSizes.mpu.height + labelHeight + space[6]}px;
+	min-height: ${adSizes.mpu.height + labelHeight + space[3]}px;
 	min-width: 300px;
 	width: 300px;
-	margin: 12px auto;
-	padding-bottom: ${space[6]}px;
+	margin: ${space[3]}px auto;
+	padding-bottom: ${space[3]}px;
 
 	${from.tablet} {
 		display: none;
