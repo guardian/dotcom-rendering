@@ -693,7 +693,9 @@ export const Card = ({
 				isDynamo={isDynamo}
 				fillBackgroundOnMobile={
 					!!isFlexSplash ||
-					(isBetaContainer && imagePositionOnMobile === 'bottom')
+					(isBetaContainer &&
+						!!image &&
+						imagePositionOnMobile === 'bottom')
 				}
 			/>
 		);

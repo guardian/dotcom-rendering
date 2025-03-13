@@ -1714,3 +1714,51 @@ export const WithAVerticalGapWhenScrollableSmallContainer = () => {
 		</>
 	);
 };
+
+export const WithBetaContainerAndSublinks = () => {
+	return (
+		<CardGroup>
+			{/* With an image */}
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					image={undefined}
+					containerType="flexible/general"
+					imagePositionOnMobile="bottom"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline: 'Headline 1',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline: 'Headline 2',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
+			{/* Without an image */}
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					containerType="flexible/general"
+					imagePositionOnMobile="bottom"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline: 'Headline 1',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline: 'Headline 2',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
+		</CardGroup>
+	);
+};
