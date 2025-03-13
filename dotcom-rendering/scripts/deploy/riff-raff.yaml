@@ -36,6 +36,8 @@ deployments:
       cloudFormationStackByTags: false
       cloudFormationStackName: article-rendering
       amiParameter: AMIArticlerendering
+      templateParameters:
+        articlerenderingPrivateSubnets: /devx/bigger/private/subnets
   # article-rendering autoscaling
   article-rendering:
     type: autoscaling
