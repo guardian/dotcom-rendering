@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { between, from, space } from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import type { CardImageType } from '../../../types/layout';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
@@ -14,7 +14,6 @@ const sizingStyles = css`
 /**
  * This function works in partnership with its sibling in `ImageWrapper`. If you
  * change any values here be sure to update that file as well.
- *
  */
 const flexBasisStyles = ({
 	imageSize,
@@ -61,67 +60,106 @@ const flexBasisStyles = ({
 	}
 };
 
-const paddingStyles = (
-	imagePosition: ImagePositionType,
-	isFlexibleContainer: boolean,
+type ImageDirection = 'vertical' | 'horizontal' | 'none';
+
+const paddingBetaContainerStyles = (
+	imageDirectionMobile: ImageDirection,
+	imageDirectionDesktop: ImageDirection,
+	imagePositionOnDesktop: ImagePositionType,
 	paddingWidth: 1 | 2,
-) => {
-	/**
-	 * If we're in a flexible container there is a 20px gap between the image
-	 * and content. We don't apply padding to the content on the same edge as
-	 * the image so the content is aligned with the grid.
-	 */
-	if (isFlexibleContainer && imagePosition === 'left') {
-		return css`
-			padding: ${space[paddingWidth]}px ${space[paddingWidth]}px
-				${space[paddingWidth]}px 0;
-		`;
+	isFlexibleContainer: boolean,
+) => css`
+	${until.tablet} {
+		padding-left: ${imageDirectionMobile !== 'horizontal' &&
+		`${space[paddingWidth]}px`};
+		padding-right: ${imageDirectionMobile !== 'horizontal' &&
+		`${space[paddingWidth]}px`};
+		padding-top: ${imageDirectionMobile !== 'vertical' &&
+		`${space[paddingWidth]}px`};
+		padding-bottom: ${imageDirectionMobile !== 'vertical' &&
+		`${space[paddingWidth]}px`};
+	}
+	${from.tablet} {
+		padding-left: ${imageDirectionDesktop !== 'horizontal' &&
+		`${space[paddingWidth]}px`};
+		padding-right: ${imageDirectionDesktop !== 'horizontal' &&
+		`${space[paddingWidth]}px`};
+		padding-top: ${imageDirectionDesktop !== 'vertical' &&
+		`${space[paddingWidth]}px`};
+		padding-bottom: ${(imageDirectionDesktop !== 'vertical' ||
+			(!isFlexibleContainer && imagePositionOnDesktop === 'top')) &&
+		`${space[paddingWidth]}px`};
+	}
+`;
+
+const padRightStyles = css`
+	${from.tablet} {
+		padding-right: ${space[5]}px;
+	}
+`;
+
+const getImageDirection = (
+	imagePosition: ImagePositionType,
+): ImageDirection => {
+	if (imagePosition === 'top' || imagePosition === 'bottom') {
+		return 'vertical';
 	}
 
-	if (isFlexibleContainer && imagePosition === 'right') {
-		return css`
-			padding: ${space[paddingWidth]}px 0 ${space[paddingWidth]}px
-				${space[paddingWidth]}px;
-		`;
+	if (imagePosition === 'left' || imagePosition === 'right') {
+		return 'horizontal';
 	}
 
-	return css`
-		padding: ${space[paddingWidth]}px;
-	`;
+	return 'none';
 };
 
 type Props = {
 	children: React.ReactNode;
 	imageType?: CardImageType;
 	imageSize: ImageSizeType;
+	isBetaContainer: boolean;
+	isFlexibleContainer: boolean;
 	imagePositionOnDesktop: ImagePositionType;
+	imagePositionOnMobile: ImagePositionType;
 	padContent?: 'small' | 'large';
-	isFlexibleContainer?: boolean;
+	padRight?: boolean;
 };
 
 export const ContentWrapper = ({
 	children,
 	imageType,
 	imageSize,
+	isBetaContainer,
+	isFlexibleContainer,
 	imagePositionOnDesktop,
+	imagePositionOnMobile,
 	padContent,
-	isFlexibleContainer = false,
+	padRight = false,
 }: Props) => {
-	const isHorizontalOnDesktop =
-		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
+	const imageDirectionDesktop = getImageDirection(imagePositionOnDesktop);
+	const imageDirectionMobile = getImageDirection(imagePositionOnMobile);
+	const paddingSpace = padContent === 'small' ? 1 : 2;
 
 	return (
 		<div
 			css={[
 				sizingStyles,
-				isHorizontalOnDesktop &&
+				imageDirectionDesktop === 'horizontal' &&
 					flexBasisStyles({ imageSize, imageType }),
 				padContent &&
-					paddingStyles(
+					!isBetaContainer &&
+					css`
+						padding: ${space[paddingSpace]}px;
+					`,
+				padContent &&
+					isBetaContainer &&
+					paddingBetaContainerStyles(
+						imageDirectionMobile,
+						imageDirectionDesktop,
 						imagePositionOnDesktop,
+						paddingSpace,
 						isFlexibleContainer,
-						padContent === 'small' ? 1 : 2,
 					),
+				padRight && padRightStyles,
 			]}
 		>
 			{children}

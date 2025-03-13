@@ -53,6 +53,27 @@ const imageOverlayContainerStyles = css`
 `;
 
 /**
+ * There is no padding on the side of the image where the text is.
+ */
+const imagePaddingStyles = (
+	imagePositionOnDesktop: ImagePositionType,
+	imagePositionOnMobile: ImagePositionType,
+) => css`
+	${until.tablet} {
+		padding-left: ${imagePositionOnMobile !== 'right' && `${space[2]}px`};
+		padding-right: ${imagePositionOnMobile !== 'left' && `${space[2]}px`};
+		padding-top: ${imagePositionOnMobile !== 'bottom' && `${space[2]}px`};
+		padding-bottom: ${imagePositionOnMobile !== 'top' && `${space[2]}px`};
+	}
+	${from.tablet} {
+		padding-left: ${imagePositionOnDesktop !== 'right' && `${space[2]}px`};
+		padding-right: ${imagePositionOnDesktop !== 'left' && `${space[2]}px`};
+		padding-top: ${imagePositionOnDesktop !== 'bottom' && `${space[2]}px`};
+		padding-bottom: ${imagePositionOnDesktop !== 'top' && `${space[2]}px`};
+	}
+`;
+
+/**
  * This function works in partnership with its sibling in `ContentWrapper`. If you
  * change any values here be sure to update that file as well.
  */
@@ -122,10 +143,6 @@ const fixImageWidth = ({
 	`}
 `;
 
-const imagePadding = css`
-	padding: ${space[2]}px;
-`;
-
 export const ImageWrapper = ({
 	children,
 	imageSize,
@@ -179,7 +196,11 @@ export const ImageWrapper = ({
 						display: block;
 					}
 				`,
-				padImage && imagePadding,
+				padImage &&
+					imagePaddingStyles(
+						imagePositionOnDesktop,
+						imagePositionOnMobile,
+					),
 			]}
 		>
 			<>
@@ -190,7 +211,11 @@ export const ImageWrapper = ({
 						<div
 							css={[
 								imageOverlayContainerStyles,
-								padImage && imagePadding,
+								padImage &&
+									imagePaddingStyles(
+										imagePositionOnDesktop,
+										imagePositionOnMobile,
+									),
 							]}
 						>
 							{/* This child div is needed as the hover background colour covers the padded
