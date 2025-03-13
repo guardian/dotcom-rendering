@@ -6,7 +6,7 @@ import type {
 import type {
 	DCRFootballDataPage,
 	FootballMatchKind,
-	Regions,
+	Region,
 } from '../footballMatches';
 import { getParserErrorMessage, parse } from '../footballMatches';
 import { Pillar } from '../lib/articleFormat';
@@ -32,18 +32,32 @@ const decidePageKind = (pageId: string): FootballMatchKind => {
 	throw new Error('Could not determine football page kind');
 };
 
+const regionsPriority = [
+	'Internationals',
+	'English',
+	'European',
+	'Scottish',
+	'Rest of world',
+];
+
+export const sortRegionsFunction = (a: Region, b: Region): number => {
+	return regionsPriority.indexOf(a.name) - regionsPriority.indexOf(b.name);
+};
+
 const parseFEFootballCompetitionRegions = (
 	competitionRegions: Record<string, FEFootballCompetition[]>,
-): Regions => {
-	return Object.entries(competitionRegions).map(([key, competition]) => {
-		return {
-			name: key,
-			competitions: competition.map((comp) => ({
-				url: comp.url,
-				name: comp.name,
-			})),
-		};
-	});
+): Region[] => {
+	return Object.entries(competitionRegions)
+		.map(([key, competition]) => {
+			return {
+				name: key,
+				competitions: competition.map((comp) => ({
+					url: comp.url,
+					name: comp.name,
+				})),
+			};
+		})
+		.sort(sortRegionsFunction);
 };
 
 const parseFEFootballData = (data: FEFootballDataPage): DCRFootballDataPage => {
