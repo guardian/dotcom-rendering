@@ -269,7 +269,7 @@ const parseMatchResult = (
 		},
 		dateTimeISOString: date.value,
 		paId: feResult.id,
-		comment: feResult.comments,
+		comment: cleanTeamName(feResult.comments ?? ''),
 	});
 };
 
@@ -313,7 +313,7 @@ const parseLiveMatch = (
 		},
 		dateTimeISOString: date.value,
 		paId: feMatchDay.id,
-		comment: feMatchDay.comments,
+		comment: cleanTeamName(feMatchDay.comments ?? ''),
 		status: replaceLiveMatchStatus(feMatchDay.matchStatus),
 	});
 };
