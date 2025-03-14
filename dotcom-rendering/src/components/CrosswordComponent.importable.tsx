@@ -235,5 +235,9 @@ export const CrosswordComponent = ({
 		data={data}
 		Layout={Layout}
 		MobileBannerAd={canRenderAds ? MobileBannerAdComponent : undefined}
+		textColor={palette('--crossword-text')}
+		anagramHelperBackgroundColor={palette(
+			'--crossword-anagram-helper-background',
+		)}
 	/>
 );
