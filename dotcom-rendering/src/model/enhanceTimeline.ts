@@ -94,11 +94,11 @@ const enhanceTimelineBlockElement = (
 		return [];
 	}
 
-	/* A timeline with one section is "flat", it's not considered to be split
+	/* A timeline with one unnamed section is "flat", it's not considered to be split
 	 * into sections. It's just represented as having one section for CAPI
 	 * modelling reasons, but we can model it more specifically here.
 	 */
-	if (otherSections.length === 0) {
+	if (otherSections.length === 0 && firstSection.title === '') {
 		return [
 			{
 				_type: 'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
