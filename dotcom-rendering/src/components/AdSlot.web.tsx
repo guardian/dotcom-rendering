@@ -385,14 +385,14 @@ const crosswordBannerMobileAdStyles = css`
 const AdSlotWrapper = ({
 	children,
 	css: additionalCss,
-	className = 'ad-slot-container',
+	className,
 }: {
 	children: React.ReactNode;
 	css?: Interpolation;
 	className?: string;
 }) => {
 	return (
-		<aside className={className} css={additionalCss}>
+		<aside className={`ad-slot-container ${className}`} css={additionalCss}>
 			{children}
 		</aside>
 	);
@@ -719,7 +719,7 @@ export const AdSlot = ({
 			const advertId = `inline${index + 1}`;
 			return (
 				<AdSlotWrapper
-					className="ad-slot-container ad-slot-desktop"
+					className="ad-slot-desktop"
 					css={liveblogInlineContainerStyles}
 				>
 					<div
