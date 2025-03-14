@@ -49,14 +49,14 @@ import { palette as schemePalette } from '../palette';
 import type {
 	DCRCollectionType,
 	DCRContainerType,
-	DCRFrontType,
 	DCRGroupedTrails,
+	Front,
 } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
-	front: DCRFrontType;
+	front: Front;
 	NAV: NavType;
 }
 
@@ -88,10 +88,7 @@ const isToggleable = (
 	return index != 0 && !isNavList(collection);
 };
 
-const decideLeftContent = (
-	front: DCRFrontType,
-	collection: DCRCollectionType,
-) => {
+const decideLeftContent = (front: Front, collection: DCRCollectionType) => {
 	// show CPScott?
 	if (
 		['uk/commentisfree', 'au/commentisfree'].includes(

@@ -1,5 +1,6 @@
 import { isUndefined } from '@guardian/libs';
 import type { RequestHandler } from 'express';
+import type { FEFront } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
 import { decideTagPageBranding, pickBrandingForEdition } from '../lib/branding';
 import { decideTrail } from '../lib/decideTrail';
@@ -11,16 +12,16 @@ import {
 } from '../model/extractTrendingTopics';
 import { groupTrailsByDates } from '../model/groupTrailsByDates';
 import { getSpeedFromTrails } from '../model/slowOrFastByTrails';
-import { validateAsFETagPage, validateAsFrontType } from '../model/validate';
-import type { DCRFrontType, FEFrontType } from '../types/front';
+import { validateAsFEFront, validateAsFETagPage } from '../model/validate';
+import type { Front } from '../types/front';
 import type { FETagType } from '../types/tag';
 import type { TagPage } from '../types/tagPage';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderFront, renderTagPage } from './render.front.web';
 
-const enhanceFront = (body: unknown): DCRFrontType => {
-	const data: FEFrontType = validateAsFrontType(body);
+const enhanceFront = (body: unknown): Front => {
+	const data: FEFront = validateAsFEFront(body);
 
 	return {
 		...data,

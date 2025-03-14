@@ -2,9 +2,10 @@ import { isObject, isString } from '@guardian/libs';
 import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
-import type { FEFrontType } from '../../src/types/front';
 import type { FEFootballDataPage } from '../feFootballDataPage';
+import type { FEFront } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
+import frontSchema from '../frontend/schemas/feFront.json';
 import tagPageSchema from '../frontend/schemas/feTagPage.json';
 import type { Block } from '../types/blocks';
 import type { FEEditionsCrosswords } from '../types/editionsCrossword';
@@ -14,7 +15,6 @@ import articleSchema from './article-schema.json';
 import blockSchema from './block-schema.json';
 import editionsCrosswordSchema from './editions-crossword-schema.json';
 import footballDataPageSchema from './fe-football-data-page-schema.json';
-import frontSchema from './front-schema.json';
 import newslettersPageSchema from './newsletter-page-schema.json';
 
 const options: Options = {
@@ -28,7 +28,7 @@ const ajv = new Ajv(options);
 addFormats(ajv);
 
 const validateArticle = ajv.compile<FEArticleType>(articleSchema);
-const validateFront = ajv.compile<FEFrontType>(frontSchema);
+const validateFront = ajv.compile<FEFront>(frontSchema);
 const validateTagPage = ajv.compile<FETagPage>(tagPageSchema);
 const validateAllEditorialNewslettersPage = ajv.compile<FENewslettersPageType>(
 	newslettersPageSchema,
@@ -65,7 +65,7 @@ export const validateAsEditionsCrosswordType = (
 	);
 };
 
-export const validateAsFrontType = (data: unknown): FEFrontType => {
+export const validateAsFEFront = (data: unknown): FEFront => {
 	if (validateFront(data)) return data;
 
 	const url =

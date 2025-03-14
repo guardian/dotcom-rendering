@@ -1,4 +1,5 @@
-import type { DCRSnapType, FESnapType } from '../types/front';
+import type { FESnap } from '../frontend/feFront';
+import type { DCRSnapType } from '../types/front';
 
 /**
  *
@@ -8,7 +9,7 @@ import type { DCRSnapType, FESnapType } from '../types/front';
  * @returns the DCR snap with its properties mutated
  */
 export const enhanceSnaps = (
-	snap: FESnapType | undefined,
+	snap: FESnap | undefined,
 ): DCRSnapType | undefined => {
 	const dcrSnap = snap;
 

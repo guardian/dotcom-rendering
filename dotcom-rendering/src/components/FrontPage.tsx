@@ -6,7 +6,7 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
-import type { DCRFrontType } from '../types/front';
+import type { Front } from '../types/front';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
 import { useConfig } from './ConfigContext';
@@ -21,7 +21,7 @@ import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SkipTo } from './SkipTo';
 
 type Props = {
-	front: DCRFrontType;
+	front: Front;
 	NAV: NavType;
 };
 
@@ -30,7 +30,7 @@ type Props = {
  * FrontPage is a high level wrapper for front pages on Dotcom. Sets strict mode and some globals
  *
  * @param {Props} props
- * @param {DCRFrontType} props.front - The article JSON data
+ * @param {Front} props.front - The article JSON data
  * @param {NAVType} props.NAV - The article JSON data
  * */
 export const FrontPage = ({ front, NAV }: Props) => {

@@ -16,12 +16,12 @@ import type { NavType } from '../model/extract-nav';
 import { extractNAV } from '../model/extract-nav';
 import { createGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
-import type { DCRFrontType } from '../types/front';
+import type { Front } from '../types/front';
 import type { TagPage as TagPageModel } from '../types/tagPage';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 interface Props {
-	front: DCRFrontType;
+	front: Front;
 }
 
 /**
