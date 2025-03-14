@@ -62,6 +62,59 @@ export const initialDays: FootballMatches = [
 				],
 			},
 			{
+				id: '1',
+				tag: 'football/bundesligafootball',
+				name: 'Bundesliga',
+				nation: 'European',
+				matches: [
+					{
+						kind: 'Live',
+						dateTimeISOString: new Date(
+							'2022-01-01T11:11:00Z',
+						).toISOString(),
+						paId: '123',
+						homeTeam: {
+							name: 'Eintracht Frankfurt',
+							id: '26460',
+							score: 1,
+						},
+						awayTeam: {
+							name: 'Bayern Munich',
+							id: '26247',
+							score: 0,
+						},
+						status: '1st',
+					},
+				],
+			},
+
+			{
+				id: '2',
+				tag: 'football/uefa-europa-league',
+				name: 'Europa League',
+				nation: 'European',
+				matches: [
+					{
+						kind: 'Live',
+						dateTimeISOString: new Date(
+							'2022-01-01T11:11:00Z',
+						).toISOString(),
+						paId: '123',
+						homeTeam: {
+							name: 'AZ',
+							id: '26464',
+							score: 1,
+						},
+						awayTeam: {
+							name: 'Sevilla',
+							id: '27821',
+							score: 2,
+						},
+						status: 'HT',
+					},
+				],
+			},
+			{
 				id: '650',
 				tag: 'football/laligafootball',
 				name: 'La Liga',
