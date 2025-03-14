@@ -1,49 +1,26 @@
-import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import { CardCommentCount } from './CardCommentCount.importable';
-import { Island } from './Island';
+import type { Meta, StoryObj } from '@storybook/react';
+import { CardCommentCount as CardCommentCountComponent } from './CardCommentCount.importable';
 
-export default {
-	component: CardCommentCount,
-	title: 'Components/CardCommentCount',
-};
+const meta = {
+	component: CardCommentCountComponent,
+	title: 'Components/Card Comment Count',
+} satisfies Meta<typeof CardCommentCountComponent>;
 
-const Wrapper = ({ children }: { children: React.ReactNode }) => {
-	return (
-		<div
-			css={css`
-				padding: ${space[6]}px;
-			`}
-		>
-			{children}
-		</div>
-	);
-};
+export default meta;
 
-export const CommentCountStory = () => {
-	return (
-		<Wrapper>
-			<Island priority="critical">
-				<CardCommentCount
-					discussionApiUrl="https://discussion.theguardian.com/discussion-api"
-					discussionId="/p/zemg8"
-				/>
-			</Island>
-		</Wrapper>
-	);
-};
-CommentCountStory.storyName = 'default';
+type Story = StoryObj<typeof meta>;
 
-export const GalleryStory = () => {
-	return (
-		<Wrapper>
-			<Island priority="critical">
-				<CardCommentCount
-					discussionApiUrl="https://discussion.theguardian.com/discussion-api"
-					discussionId="/p/zemg8"
-				/>
-			</Island>
-		</Wrapper>
-	);
-};
-GalleryStory.storyName = 'Gallery';
+export const CardCommentCount = {
+	args: {
+		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
+		discussionId: '/p/zemg8',
+	},
+	decorators: [
+		(Story) => (
+			<div css={{ padding: space[6] }}>
+				<Story />
+			</div>
+		),
+	],
+} satisfies Story;
