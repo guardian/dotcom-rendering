@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { from, palette } from '@guardian/source/foundations';
-import { WaveForm } from './WaveForm';
+import { WaveForm } from '../../WaveForm';
 
 const cursorWidth = '4px';
 
@@ -85,8 +85,9 @@ export const ProgressBar = ({
 			{...props}
 		>
 			<WaveForm
+				seed={src}
+				height={100}
 				bars={175}
-				src={src}
 				progress={progress}
 				buffer={buffer}
 				theme={{

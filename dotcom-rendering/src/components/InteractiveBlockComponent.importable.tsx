@@ -343,6 +343,11 @@ export const InteractiveBlockComponent = ({
 				iframe.src = url;
 			}
 
+			// Datawrapper-specific fix to suppress scrollbars appearing
+			if (url.includes('datawrapper')) {
+				iframe.scrolling = 'no';
+			}
+
 			setupWindowListeners(iframe);
 
 			wrapperRef.current?.prepend(iframe);

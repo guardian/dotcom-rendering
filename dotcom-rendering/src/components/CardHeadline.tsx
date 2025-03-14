@@ -64,6 +64,7 @@ type Props = {
 	kickerColour?: string;
 	isBetaContainer?: boolean;
 	kickerImage?: PodcastSeriesImage;
+	isCartoon?: boolean;
 };
 
 const sublinkStyles = css`
@@ -182,6 +183,7 @@ const getFonts = (
 	format: ArticleFormat,
 	fontSizes: ResponsiveFontSize,
 	isBetaContainer: boolean,
+	isCartoon: boolean,
 ) => {
 	if (format.theme === ArticleSpecial.Labs) {
 		return getFontSize(fontSizes, FontFamily.TextSans);
@@ -189,8 +191,9 @@ const getFonts = (
 
 	if (
 		isBetaContainer &&
-		/** Any of these designs are considered an "opinion" */
-		(format.design === ArticleDesign.Comment ||
+		(isCartoon ||
+			/** Any of these designs are considered an "opinion" */
+			format.design === ArticleDesign.Comment ||
 			format.design === ArticleDesign.Editorial ||
 			format.design === ArticleDesign.Letter)
 	) {
@@ -234,11 +237,12 @@ export const CardHeadline = ({
 	kickerColour = palette('--card-kicker-text'),
 	isBetaContainer = false,
 	kickerImage,
+	isCartoon = false,
 }: Props) => {
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
 
-	const fontStyles = getFonts(format, fontSizes, isBetaContainer);
+	const fontStyles = getFonts(format, fontSizes, isBetaContainer, isCartoon);
 
 	return (
 		<WithLink linkTo={linkTo}>

@@ -24,7 +24,7 @@
 	},
 	"dependencies": {
 		"@guardian/prettier": "5.0.0",
-		"chromatic": "11.5.5",
+		"chromatic": "11.27.0",
 		"husky": "8.0.3",
 		"lint-staged": "15.2.0",
 		"prettier": "3.0.3",

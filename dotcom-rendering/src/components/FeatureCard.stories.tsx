@@ -44,11 +44,17 @@ const aBasicLink = {
 	},
 };
 
-const CardWrapper = ({ children }: { children: React.ReactNode }) => {
+const CardWrapper = ({
+	maxWidth,
+	children,
+}: {
+	maxWidth: string;
+	children: React.ReactNode;
+}) => {
 	return (
 		<div
 			css={css`
-				max-width: 460px;
+				max-width: ${maxWidth}px;
 				flex-basis: 100%;
 				${from.tablet} {
 					flex-basis: 1;
@@ -61,16 +67,20 @@ const CardWrapper = ({ children }: { children: React.ReactNode }) => {
 	);
 };
 
+type FeatureCardArgsAndCustomArgs = React.ComponentProps<typeof FeatureCard> & {
+	maxWidth: string;
+};
+
 const meta = {
 	component: FeatureCard,
 	title: 'Components/FeatureCard',
-	args: cardProps,
-	render: (args) => (
-		<CardWrapper>
+	args: { ...cardProps, maxWidth: '460' },
+	render: ({ maxWidth, ...args }) => (
+		<CardWrapper maxWidth={maxWidth}>
 			<FeatureCard {...args} />
 		</CardWrapper>
 	),
-} satisfies Meta<typeof FeatureCard>;
+} satisfies Meta<FeatureCardArgsAndCustomArgs>;
 
 export default meta;
 
@@ -242,5 +252,14 @@ export const WithSublinks: Story = {
 				kickerText: 'Kicker',
 			},
 		],
+	},
+};
+
+export const StandardImmersive: Story = {
+	args: {
+		aspectRatio: '5:3',
+		mobileAspectRatio: '4:5',
+		imageSize: 'feature-immersive',
+		maxWidth: '940',
 	},
 };

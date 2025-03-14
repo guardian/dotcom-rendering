@@ -3,11 +3,6 @@ import { remSpace, textSans14, until } from '@guardian/source/foundations';
 import { forwardRef } from 'react';
 import { palette } from '../palette';
 
-// Exported for Storybook use
-export interface Props {
-	isFirstAdSlot: boolean;
-}
-
 const adHeightPx = 250;
 
 const styles = css`
@@ -42,19 +37,6 @@ const adSlotStyles = css`
 	width: 100%;
 `;
 
-const adSlotSquareStyles = css`
-	${adSlotStyles}
-	${until.phablet} {
-		width: 320px;
-		margin-left: 10px;
-		margin-right: 10px;
-	}
-
-	height: 344px;
-	width: 300px;
-	padding-bottom: 0;
-`;
-
 /**
  * AdSlot component for in-article ads **on apps only**
  *
@@ -63,16 +45,11 @@ const adSlotSquareStyles = css`
  * The ref is important so that we can provide the location of the slot to
  * the native layer, for it to "paint" an advert over the top of it.
  */
-export const AdSlot = forwardRef<HTMLDivElement, Props>(
-	({ isFirstAdSlot }, ref) => (
-		<aside css={styles}>
-			<div css={adLabelsStyles}>
-				<p>Advertisement</p>
-			</div>
-			<div
-				css={isFirstAdSlot ? adSlotSquareStyles : adSlotStyles}
-				ref={ref}
-			></div>
-		</aside>
-	),
-);
+export const AdSlot = forwardRef<HTMLDivElement>((_, ref) => (
+	<aside css={styles}>
+		<div css={adLabelsStyles}>
+			<p>Advertisement</p>
+		</div>
+		<div css={adSlotStyles} ref={ref}></div>
+	</aside>
+));

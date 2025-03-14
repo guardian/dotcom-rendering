@@ -52,7 +52,7 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 			},
 		},
 	},
-	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
+	instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
 });
 
 /** Facia */
@@ -68,7 +68,7 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 	stage: 'PROD',
 	domainName: 'facia-rendering.guardianapis.com',
 	scaling: {
-		minimumInstances: 18,
+		minimumInstances: 30,
 		maximumInstances: 180,
 		policies: {
 			step: {
@@ -92,7 +92,7 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 			},
 		},
 	},
-	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
+	instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
 });
 
 /** Tag pages */
@@ -132,7 +132,7 @@ new RenderingCDKStack(cdkApp, 'TagPageRendering-PROD', {
 			},
 		},
 	},
-	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
+	instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
 });
 
 /** Interactive */

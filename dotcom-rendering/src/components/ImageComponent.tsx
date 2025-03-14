@@ -15,7 +15,6 @@ import {
 	type ArticleFormat,
 } from '../lib/articleFormat';
 import { getLargest, getMaster } from '../lib/image';
-import { useAB } from '../lib/useAB';
 import { palette as themePalette } from '../palette';
 import type {
 	ImageBlockElement,
@@ -267,12 +266,6 @@ export const ImageComponent = ({
 	isAvatar,
 	isTimeline = false,
 }: Props) => {
-	const abTestAPI = useAB()?.api;
-	const isInFiveFourImagesAbTestVariant = abTestAPI?.isUserInVariant(
-		'FiveFourImages',
-		'variant',
-	);
-
 	const { renderingTarget } = useConfig();
 	// Its possible the tools wont send us any images urls
 	// if so, don't try to render
@@ -312,13 +305,6 @@ export const ImageComponent = ({
 	const imageHeight = parseInt(image.fields.height, 10);
 
 	const loading = isMainMedia ? 'eager' : 'lazy';
-
-	const aspectOverride =
-		isInFiveFourImagesAbTestVariant &&
-		isMainMedia &&
-		image.fields.aspectRatio === '5:3'
-			? { aspectRatio: '5:4' }
-			: {};
 
 	if (
 		isMainMedia &&
@@ -377,7 +363,6 @@ export const ImageComponent = ({
 						height={imageHeight}
 						loading={loading}
 						isMainMedia={isMainMedia}
-						{...aspectOverride}
 					/>
 				)}
 
@@ -438,7 +423,6 @@ export const ImageComponent = ({
 						height={imageHeight}
 						loading={loading}
 						isMainMedia={isMainMedia}
-						{...aspectOverride}
 					/>
 				)}
 
@@ -505,7 +489,6 @@ export const ImageComponent = ({
 						height={imageHeight}
 						loading={loading}
 						isMainMedia={isMainMedia}
-						{...aspectOverride}
 					/>
 				)}
 				{isTimeline && isMainMedia && role === 'showcase' && (

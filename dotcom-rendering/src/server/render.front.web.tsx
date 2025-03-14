@@ -146,7 +146,7 @@ export const renderFront = ({
 		unknownConfig: front.config,
 	});
 
-	const keywords = front.config.keywords;
+	const section = front.config.section;
 
 	const canonicalUrl =
 		front.isNetworkFront &&
@@ -162,7 +162,7 @@ export const renderFront = ({
 		title,
 		description: front.pressedPage.seoData.description,
 		guardian,
-		keywords,
+		section,
 		renderingTarget: 'Web',
 		hasPageSkin: front.config.hasPageSkin,
 		weAreHiring: !!front.config.switches.weAreHiring,
@@ -248,7 +248,7 @@ export const renderTagPage = ({
 		unknownConfig: tagPage.config,
 	});
 
-	const keywords = tagPage.config.keywords;
+	const section = tagPage.config.section;
 
 	const pageHtml = htmlPageTemplate({
 		scriptTags,
@@ -257,7 +257,7 @@ export const renderTagPage = ({
 		title,
 		description: tagPage.header.description,
 		guardian,
-		keywords,
+		section,
 		renderingTarget: 'Web',
 		weAreHiring: !!tagPage.config.switches.weAreHiring,
 		canonicalUrl: tagPage.canonicalUrl,
