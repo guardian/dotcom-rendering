@@ -14,6 +14,7 @@ import {
 } from '@guardian/source/foundations';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import type { NestedArticleElement } from '../lib/renderElement';
+import { slugify } from '../model/enhance-H2s';
 import { palette } from '../palette';
 import type {
 	DCRSectionedTimelineBlockElement,
@@ -294,7 +295,11 @@ export const Timeline = ({
 				<>
 					{timeline.sections.map((section) => (
 						<section key={section.title}>
-							<Subheading format={format} topPadding={false}>
+							<Subheading
+								format={format}
+								topPadding={false}
+								id={slugify(section.title)}
+							>
 								{section.title}
 							</Subheading>
 							{section.events.map((event) => (
