@@ -151,7 +151,6 @@ const Matches = (props: { children: ReactNode }) => (
 );
 
 const matchStatusStyles = css`
-	width: 5rem;
 	color: ${palette('--football-match-list-sub-text')};
 
 	${until.mobileMedium} {
