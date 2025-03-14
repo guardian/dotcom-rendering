@@ -216,6 +216,7 @@ const matchStyles = (matchKind: FootballMatchKind) => css`
 	${matchKind === 'Live' ? 'font-weight: bold;' : undefined}
 
 	display: flex;
+	align-items: center;
 	flex-wrap: wrap;
 	padding: ${space[2]}px;
 `;
@@ -303,45 +304,61 @@ const Match = ({
 	</MatchWrapper>
 );
 
-const HomeTeam = ({ team }: { team: Team }) => (
-	<span
+const FootballCrest = ({ teamId }: { teamId: string }) => (
+	<div
 		css={css`
-			text-align: right;
-			flex: 1 0 0;
-			padding-right: 1rem;
+			width: 1.25rem;
+			height: 1.25rem;
+			flex-shrink: 0;
 		`}
 	>
-		{team.name}
 		<img
 			css={css`
-				height: 1rem;
-				margin-left: 0.3125rem;
-				vertical-align: bottom;
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
 			`}
-			src={getFootballCrestImageUrl(team.id)}
+			src={getFootballCrestImageUrl(teamId)}
 			alt=""
 		/>
-	</span>
+	</div>
+);
+
+const HomeTeam = ({ team }: { team: Team }) => (
+	<div
+		css={css`
+			justify-content: flex-end;
+			flex: 1 0 0;
+			padding-right: 1rem;
+			display: flex;
+			align-items: center;
+			gap: 0.325rem;
+		`}
+	>
+		<span
+			css={css`
+				text-align: right;
+			`}
+		>
+			{team.name}
+		</span>
+		<FootballCrest teamId={team.id} />
+	</div>
 );
 
 const AwayTeam = ({ team }: { team: Team }) => (
-	<span
+	<div
 		css={css`
 			flex: 1 0 0;
 			padding-left: 1rem;
+			display: flex;
+			align-items: center;
+			gap: 0.325rem;
 		`}
 	>
-		<img
-			css={css`
-				height: 1rem;
-				margin-right: 0.3125rem;
-				vertical-align: bottom;
-			`}
-			src={getFootballCrestImageUrl(team.id)}
-			alt=""
-		/>
+		<FootballCrest teamId={team.id} />
 		{team.name}
-	</span>
+	</div>
 );
 
 const Battleline = () => (
