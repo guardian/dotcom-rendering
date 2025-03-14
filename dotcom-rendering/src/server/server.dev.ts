@@ -22,7 +22,7 @@ import {
 } from './handler.front.web';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
-const ARTICLE_URL = /\/\d{4}\/[a-z]{3}\/\d{2}\//;
+const ARTICLE_URL = /(\/\d{4}\/[a-z]{3}\/\d{2}\/|\/[a-z-]+\/\d+$)/;
 /** fronts are a series of lowercase strings, dashes and forward slashes */
 const FRONT_URL = /^\/[a-z-/]+(?<!\.css)$/;
 /** This is imperfect, but covers *some* cases of tag pages, consider expanding in the future */
