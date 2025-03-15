@@ -24,7 +24,6 @@ import { submitComponentEvent } from '../../client/ophan/ophan';
 import type { ArticleCounts } from '../../lib/articleCount';
 import {
 	getPurchaseInfo,
-	hasCmpConsentForBrowserId,
 	hasOptedOutOfArticleCount,
 	recentlyClosedBanner,
 	setLocalNoBannerCachePeriod,
@@ -139,8 +138,6 @@ const buildPayload = async ({
 	const weeklyArticleHistory = articleCounts?.weeklyArticleHistory;
 	const articleCountToday = getArticleCountToday(articleCounts);
 
-	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
-
 	return {
 		targeting: {
 			shouldHideReaderRevenue,
@@ -160,9 +157,6 @@ const buildPayload = async ({
 			sectionId,
 			tagIds: tags.map((tag) => tag.id),
 			contentType,
-			browserId: (await hasCmpConsentForBrowserId())
-				? browserId ?? undefined
-				: undefined,
 			purchaseInfo: getPurchaseInfo(),
 			isSignedIn,
 			hasConsented: userConsent,
