@@ -37,7 +37,7 @@ deployments:
       cloudFormationStackName: article-rendering
       amiParameter: AMIArticlerendering
       templateParameters:
-        articlerenderingPrivateSubnets: /devx/bigger/private/subnets
+        articlerenderingPrivateSubnets: /account/vpc/primary/subnets/private
   # article-rendering autoscaling
   article-rendering:
     type: autoscaling
@@ -59,7 +59,7 @@ deployments:
       cloudFormationStackName: facia-rendering
       amiParameter: AMIFaciarendering
       templateParameters:
-        faciarenderingPrivateSubnets: /devx/bigger/private/subnets
+        faciarenderingPrivateSubnets: /account/vpc/primary/subnets/private
   # facia-rendering autoscaling
   facia-rendering:
     type: autoscaling
@@ -81,7 +81,7 @@ deployments:
       cloudFormationStackName: tag-page-rendering
       amiParameter: AMITagpagerendering
       templateParameters:
-        tagpagerenderingPrivateSubnets: /devx/bigger/private/subnets
+        tagpagerenderingPrivateSubnets: /account/vpc/primary/subnets/private
   # tag-page-rendering autoscaling
   tag-page-rendering:
     type: autoscaling
@@ -103,7 +103,7 @@ deployments:
       cloudFormationStackName: interactive-rendering
       amiParameter: AMIInteractiverendering
       templateParameters:
-        interactiverenderingPrivateSubnets: /devx/bigger/private/subnets
+        interactiverenderingPrivateSubnets: /account/vpc/primary/subnets/private
   # interactive-rendering autoscaling
   interactive-rendering:
     type: autoscaling
