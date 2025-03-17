@@ -165,7 +165,6 @@ export const CrosswordLayout = (props: Props) => {
 			<main data-layout="InteractiveLayout">
 				<Section
 					fullWidth={true}
-					data-print-layout="hide"
 					showTopBorder={false}
 					backgroundColour={themePalette('--article-background')}
 					borderColour={themePalette('--article-border')}
@@ -359,6 +358,7 @@ export const CrosswordLayout = (props: Props) => {
 					showTopBorder={false}
 					padSides={false}
 					backgroundColour={themePalette('--article-background')}
+					hideFromPrintLayout={true}
 				>
 					<StraightLines
 						count={4}
@@ -407,13 +407,13 @@ export const CrosswordLayout = (props: Props) => {
 					<Section
 						fullWidth={true}
 						sectionId="comments"
-						data-print-layout="hide"
 						element="section"
 						backgroundColour={themePalette(
 							'--discussion-section-background',
 						)}
 						borderColour={themePalette('--article-border')}
 						fontColour={themePalette('--discussion-text')}
+						hideFromPrintLayout={true}
 					>
 						<DiscussionLayout
 							discussionApiUrl={article.config.discussionApiUrl}
@@ -436,7 +436,6 @@ export const CrosswordLayout = (props: Props) => {
 				{renderAds && (
 					<Section
 						fullWidth={true}
-						data-print-layout="hide"
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
@@ -452,12 +451,7 @@ export const CrosswordLayout = (props: Props) => {
 			</main>
 
 			{props.NAV.subNavSections && (
-				<Section
-					fullWidth={true}
-					data-print-layout="hide"
-					padSides={false}
-					element="aside"
-				>
+				<Section fullWidth={true} padSides={false} element="aside">
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
@@ -470,7 +464,6 @@ export const CrosswordLayout = (props: Props) => {
 
 			<Section
 				fullWidth={true}
-				data-print-layout="hide"
 				padSides={false}
 				backgroundColour={sourcePalette.brand[400]}
 				borderColour={sourcePalette.brand[600]}
