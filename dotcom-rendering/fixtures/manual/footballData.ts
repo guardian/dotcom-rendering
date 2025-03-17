@@ -112,6 +112,24 @@ export const initialDays: FootballMatches = [
 						},
 						status: 'HT',
 					},
+					{
+						kind: 'Live',
+						dateTimeISOString: new Date(
+							'2022-01-01T11:11:00Z',
+						).toISOString(),
+						paId: '1234',
+						homeTeam: {
+							name: 'Jagiellonia Białystok',
+							id: '9999999',
+							score: 3,
+						},
+						awayTeam: {
+							name: 'Shakhtar Donetsk',
+							id: '38299',
+							score: 2,
+						},
+						status: 'HT',
+					},
 				],
 			},
 			{

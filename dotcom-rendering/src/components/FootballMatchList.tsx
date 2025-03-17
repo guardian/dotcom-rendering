@@ -310,12 +310,14 @@ const FootballCrest = ({ teamId }: { teamId: string }) => (
 			width: 1.25rem;
 			height: 1.25rem;
 			flex-shrink: 0;
+			display: flex;
+			justify-content: center;
 		`}
 	>
 		<img
 			css={css`
-				width: 100%;
-				height: 100%;
+				max-width: 100%;
+				max-height: 100%;
 				object-fit: contain;
 			`}
 			src={getFootballCrestImageUrl(teamId)}
