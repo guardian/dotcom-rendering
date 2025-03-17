@@ -7,6 +7,7 @@ import {
 	space,
 	specialReport,
 	textEgyptian15,
+	textSans15,
 	textSans17,
 	textSansBold17,
 	until,
@@ -388,13 +389,15 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 							</div>
 						)}
 					<div css={templateSpacing.bannerBodyCopy}>
-						<DesignableBannerBody
-							mainContent={content.mainContent}
-							mobileContent={content.mobileContent}
-							highlightedTextSettings={
-								templateSettings.highlightedTextSettings
-							}
-						/>
+						<div css={styles.bodyCopyOverrides}>
+							<DesignableBannerBody
+								mainContent={content.mainContent}
+								mobileContent={content.mobileContent}
+								highlightedTextSettings={
+									templateSettings.highlightedTextSettings
+								}
+							/>
+						</div>
 					</div>
 
 					{!showChoiceCards && (
@@ -653,6 +656,11 @@ const styles = {
 		}
 		${from.desktop} {
 			padding-left: ${space[2]}px;
+		}
+	`,
+	bodyCopyOverrides: css`
+		p {
+			${textSans15}
 		}
 	`,
 	bannerVisualContainer: (background: string) => css`
