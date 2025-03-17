@@ -6572,7 +6572,7 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[46],
 		dark: () => sourcePalette.neutral[73],
 	},
-	'--football-match-list-top-border': {
+	'--football-top-border': {
 		light: () => sourcePalette.sport[500],
 		dark: () => sourcePalette.neutral[60],
 	},

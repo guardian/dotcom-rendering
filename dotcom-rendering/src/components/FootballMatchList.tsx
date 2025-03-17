@@ -113,7 +113,7 @@ const CompetitionName = (props: { children: ReactNode }) => (
 			${textSansBold14}
 			grid-column: centre-column-start / centre-column-end;
 			color: ${palette('--football-match-list-competition-text')};
-			border-top: 1px solid ${palette('--football-match-list-top-border')};
+			border-top: 1px solid ${palette('--football-top-border')};
 			padding: ${space[2]}px;
 			background-color: ${palette('--football-match-list-background')};
 			margin-top: ${space[9]}px;
@@ -200,7 +200,7 @@ const matchListItemStyles = css`
 
 	${from.leftCol} {
 		&:first-of-type {
-			border-top-color: ${palette('--football-match-list-top-border')};
+			border-top-color: ${palette('--football-top-border')};
 		}
 	}
 `;
