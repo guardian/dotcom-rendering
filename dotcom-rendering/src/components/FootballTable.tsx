@@ -57,7 +57,7 @@ type Props = {
 	dividers: number[];
 	data: {
 		position: number;
-		team: string;
+		team: { name: string; id: string; url: string };
 		gamesPlayed: number;
 		won: number;
 		drawn: number;
@@ -69,6 +69,62 @@ type Props = {
 	}[];
 	linkToFullTable: boolean;
 };
+
+function getFootballCrestImageUrl(teamId: string) {
+	// todo: use fastly resizer
+	return `https://sport.guim.co.uk/football/crests/60/${teamId}.png`;
+}
+
+const FootballCrest = ({ teamId }: { teamId: string }) => (
+	<div
+		css={css`
+			width: 1.25rem;
+			height: 1.25rem;
+			flex-shrink: 0;
+			display: flex;
+			justify-content: center;
+		`}
+	>
+		<img
+			css={css`
+				max-width: 100%;
+				max-height: 100%;
+				object-fit: contain;
+			`}
+			src={getFootballCrestImageUrl(teamId)}
+			alt=""
+		/>
+	</div>
+);
+
+const TeamWithCrest = ({
+	team,
+	id,
+	url,
+}: {
+	team: string;
+	id: string;
+	url: string;
+}) => (
+	<div
+		css={css`
+			display: flex;
+			align-items: center;
+			gap: 0.325rem;
+		`}
+	>
+		<FootballCrest teamId={id} />
+		<a
+			css={css`
+				color: inherit;
+				text-decoration: none;
+			`}
+			href={url}
+		>
+			{team}
+		</a>
+	</div>
+);
 
 export const FootballTable = ({
 	competition,
@@ -103,7 +159,13 @@ export const FootballTable = ({
 						]}
 					>
 						<td>{row.position}</td>
-						<td>{row.team}</td>
+						<td>
+							<TeamWithCrest
+								team={row.team.name}
+								id={row.team.id}
+								url={row.team.url}
+							/>
+						</td>
 						<td>{row.gamesPlayed}</td>
 						<td>{row.won}</td>
 						<td>{row.drawn}</td>

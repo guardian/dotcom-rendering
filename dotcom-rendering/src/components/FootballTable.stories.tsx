@@ -30,7 +30,11 @@ export const Default = {
 		data: [
 			{
 				position: 1,
-				team: 'Liverpool',
+				team: {
+					name: 'Liverpool',
+					id: '9',
+					url: 'https://www.theguardian.com/football/arsenal',
+				},
 				gamesPlayed: 29,
 				won: 21,
 				drawn: 7,
@@ -42,7 +46,11 @@ export const Default = {
 			},
 			{
 				position: 2,
-				team: 'Arsenal',
+				team: {
+					name: 'Arsenal',
+					id: '1006',
+					url: 'https://www.theguardian.com/football/arsenal',
+				},
 				gamesPlayed: 29,
 				won: 21,
 				drawn: 10,
@@ -54,7 +62,11 @@ export const Default = {
 			},
 			{
 				position: 3,
-				team: 'Nottm Forest',
+				team: {
+					name: 'Nottm Forest',
+					id: '15',
+					url: 'https://www.theguardian.com/football/nottinghamforest',
+				},
 				gamesPlayed: 29,
 				won: 16,
 				drawn: 6,
