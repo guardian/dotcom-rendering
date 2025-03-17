@@ -4,7 +4,7 @@
  * https://github.com/guardian/commercial/blob/1a429d6be05657f20df4ca909df7d01a5c3d7402/src/lib/user-features.ts
  */
 
-import { getAuthStatus, isUserLoggedInOktaRefactor } from '../../lib/identity';
+import { getAuthStatus, isUserLoggedIn } from '../../lib/identity';
 import { AD_FREE_USER_COOKIE } from './cookies/adFree';
 import { ALLOW_REJECT_ALL_COOKIE } from './cookies/allowRejectAll';
 import { createOrRenewCookie } from './cookies/cookieHelpers';
@@ -22,17 +22,14 @@ export type UserBenefits = {
 };
 
 const refresh = async (): Promise<void> => {
-	if (
-		(await isUserLoggedInOktaRefactor()) &&
-		userBenefitsDataNeedsRefreshing()
-	) {
+	if ((await isUserLoggedIn()) && userBenefitsDataNeedsRefreshing()) {
 		await requestNewData();
 	}
 };
 
 const requestNewData = async () => {
 	const authStatus = await getAuthStatus();
-	if (authStatus.kind !== 'SignedInWithOkta') {
+	if (authStatus.kind !== 'SignedIn') {
 		return Promise.reject('The user is not signed in');
 	}
 	return syncDataFromUserBenefitsApi(authStatus).then(persistResponse);

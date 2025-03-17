@@ -1,6 +1,6 @@
 import { joinUrl } from '@guardian/libs';
 import type { GetDiscussionSuccess, UserProfile } from '../lib/discussion';
-import { getOptionsHeadersWithOkta } from '../lib/identity';
+import { getOptionsHeaders } from '../lib/identity';
 import { useApi } from '../lib/useApi';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useCommentCount } from '../lib/useCommentCount';
@@ -30,15 +30,15 @@ export const DiscussionMeta = ({
 	);
 
 	const { data: userData } = useApi<{ userProfile: UserProfile }>(
-		authStatus.kind === 'SignedInWithOkta'
+		authStatus.kind === 'SignedIn'
 			? joinUrl(
 					discussionApiUrl,
 					'profile/me?strict_sanctions_check=false',
 			  )
 			: undefined,
 		{},
-		authStatus.kind === 'SignedInWithOkta'
-			? getOptionsHeadersWithOkta(authStatus)
+		authStatus.kind === 'SignedIn'
+			? getOptionsHeaders(authStatus)
 			: undefined,
 	);
 

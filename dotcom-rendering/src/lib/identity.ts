@@ -11,7 +11,7 @@ export type CustomIdTokenClaims = CustomClaims & {
 	braze_uuid: string;
 };
 
-export async function isSignedInWithOktaAuthState(): Promise<
+export async function isSignedInAuthState(): Promise<
 	IdentityAuthState<never, CustomIdTokenClaims>
 > {
 	return getIdentityAuth()
@@ -28,20 +28,18 @@ export async function isSignedInWithOktaAuthState(): Promise<
 		});
 }
 
-type OktaAuthState = IdentityAuthState<never, CustomIdTokenClaims>;
+type AuthState = IdentityAuthState<never, CustomIdTokenClaims>;
 
-type SignedOutWithOkta = { kind: 'SignedOutWithOkta' };
-export type SignedInWithOkta = {
-	kind: 'SignedInWithOkta';
+type SignedOut = { kind: 'SignedOut' };
+export type SignedIn = {
+	kind: 'SignedIn';
 	accessToken: AccessToken<never>;
 	idToken: IDToken<CustomIdTokenClaims>;
 };
 
-export type AuthStatus = SignedOutWithOkta | SignedInWithOkta;
+export type AuthStatus = SignedOut | SignedIn;
 
-export const getOptionsHeadersWithOkta = (
-	authStatus: SignedInWithOkta,
-): RequestInit => {
+export const getOptionsHeaders = (authStatus: SignedIn): RequestInit => {
 	return {
 		headers: {
 			Authorization: `Bearer ${authStatus.accessToken.accessToken}`,
@@ -50,31 +48,29 @@ export const getOptionsHeadersWithOkta = (
 	};
 };
 
-export async function getAuthState(): Promise<OktaAuthState> {
-	const authState = await isSignedInWithOktaAuthState();
+export async function getAuthState(): Promise<AuthState> {
+	const authState = await isSignedInAuthState();
 	return authState;
 }
 
-export function getSignedInStatusWithOkta(
-	authState: OktaAuthState,
-): SignedOutWithOkta | SignedInWithOkta {
+export function getSignedInStatus(authState: AuthState): SignedOut | SignedIn {
 	if (authState.isAuthenticated) {
 		return {
-			kind: 'SignedInWithOkta',
+			kind: 'SignedIn',
 			accessToken: authState.accessToken,
 			idToken: authState.idToken,
 		};
 	}
 
-	return { kind: 'SignedOutWithOkta' };
+	return { kind: 'SignedOut' };
 }
 
-export const isUserLoggedInOktaRefactor = (): Promise<boolean> =>
+export const isUserLoggedIn = (): Promise<boolean> =>
 	getAuthStatus().then((authStatus) =>
-		authStatus.kind === 'SignedInWithOkta' ? true : false,
+		authStatus.kind === 'SignedIn' ? true : false,
 	);
 
 export const getAuthStatus = async (): Promise<AuthStatus> => {
 	const authState = await getAuthState();
-	return getSignedInStatusWithOkta(authState);
+	return getSignedInStatus(authState);
 };

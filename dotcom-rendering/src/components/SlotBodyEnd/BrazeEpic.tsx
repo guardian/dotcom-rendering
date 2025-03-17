@@ -9,7 +9,7 @@ import { submitComponentEvent } from '../../client/ophan/ophan';
 import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
 import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
-import { getOptionsHeadersWithOkta } from '../../lib/identity';
+import { getOptionsHeaders } from '../../lib/identity';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { useAuthStatus } from '../../lib/useAuthStatus';
 import { useIsInView } from '../../lib/useIsInView';
@@ -146,8 +146,8 @@ const BrazeEpicWithSatisfiedDependencies = ({
 	if (!componentName) return null;
 
 	const subscribeToNewsletter = async (newsletterId: string) => {
-		if (authStatus.kind == 'SignedInWithOkta') {
-			const options = getOptionsHeadersWithOkta(authStatus);
+		if (authStatus.kind == 'SignedIn') {
+			const options = getOptionsHeaders(authStatus);
 
 			await fetch(`${idApiUrl}/users/me/newsletters`, {
 				method: 'PATCH',

@@ -19,8 +19,8 @@ import {
 	postUsernameResponseSchema,
 } from './discussion';
 import type { CommentContextType } from './discussionFilters';
-import type { SignedInWithOkta } from './identity';
-import { getOptionsHeadersWithOkta } from './identity';
+import type { SignedIn } from './identity';
+import { getOptionsHeaders } from './identity';
 import { fetchJSON } from './json';
 import { error, ok, type Result } from './result';
 
@@ -174,7 +174,7 @@ export type CommentResponse = Result<
 >;
 
 export const comment =
-	(authStatus: SignedInWithOkta) =>
+	(authStatus: SignedIn) =>
 	async (shortUrl: string, body: string): Promise<CommentResponse> => {
 		const url =
 			joinUrl(options.baseUrl, 'discussion', shortUrl, 'comment') +
@@ -182,7 +182,7 @@ export const comment =
 		const data = new URLSearchParams();
 		data.append('body', body);
 
-		const authOptions = getOptionsHeadersWithOkta(authStatus);
+		const authOptions = getOptionsHeaders(authStatus);
 
 		const jsonResult = await fetchJSON(url, {
 			method: 'POST',
@@ -201,7 +201,7 @@ export const comment =
 	};
 
 export const reply =
-	(authStatus: SignedInWithOkta) =>
+	(authStatus: SignedIn) =>
 	async (
 		shortUrl: string,
 		body: string,
@@ -218,7 +218,7 @@ export const reply =
 			) + objAsParams(defaultParams);
 		const data = new URLSearchParams();
 		data.append('body', body);
-		const authOptions = getOptionsHeadersWithOkta(authStatus);
+		const authOptions = getOptionsHeaders(authStatus);
 
 		const jsonResult = await fetchJSON(url, {
 			method: 'POST',
@@ -264,7 +264,7 @@ export const getPicks = async (
 };
 
 export const reportAbuse =
-	(authStatus?: SignedInWithOkta) =>
+	(authStatus?: SignedIn) =>
 	async ({
 		commentId,
 		categoryId,
@@ -286,7 +286,7 @@ export const reportAbuse =
 		reason && data.append('reason', reason);
 
 		const authOptions = authStatus
-			? getOptionsHeadersWithOkta(authStatus)
+			? getOptionsHeaders(authStatus)
 			: undefined;
 
 		const jsonResult = await fetchJSON(url, {
@@ -308,13 +308,13 @@ export const reportAbuse =
 	};
 
 export const recommend =
-	(authStatus: SignedInWithOkta) =>
+	(authStatus: SignedIn) =>
 	async (commentId: string): Promise<boolean> => {
 		const url =
 			joinUrl(options.baseUrl, 'comment', commentId, 'recommend') +
 			objAsParams(defaultParams);
 
-		const authOptions = getOptionsHeadersWithOkta(authStatus);
+		const authOptions = getOptionsHeaders(authStatus);
 
 		const jsonResult = await fetchJSON(url, {
 			method: 'POST',
@@ -330,10 +330,10 @@ export const recommend =
 	};
 
 export const addUserName =
-	(authStatus: SignedInWithOkta) =>
+	(authStatus: SignedIn) =>
 	async (userName: string): Promise<Result<string, true>> => {
 		const url = options.idApiUrl + `/user/me/username`;
-		const authOptions = getOptionsHeadersWithOkta(authStatus);
+		const authOptions = getOptionsHeaders(authStatus);
 
 		const jsonResult = await fetchJSON(url, {
 			method: 'POST',
@@ -369,13 +369,13 @@ export const addUserName =
 	};
 
 export const pickComment =
-	(authStatus: SignedInWithOkta) =>
+	(authStatus: SignedIn) =>
 	async (commentId: string): Promise<Result<GetDiscussionError, true>> => {
 		const url =
 			joinUrl(options.baseUrl, 'comment', commentId, 'highlight') +
 			objAsParams(defaultParams);
 
-		const authOptions = getOptionsHeadersWithOkta(authStatus);
+		const authOptions = getOptionsHeaders(authStatus);
 		const jsonResult = await fetchJSON(url, {
 			method: 'POST',
 			headers: {
@@ -396,13 +396,13 @@ export const pickComment =
 	};
 
 export const unPickComment =
-	(authStatus: SignedInWithOkta) =>
+	(authStatus: SignedIn) =>
 	async (commentId: string): Promise<Result<GetDiscussionError, false>> => {
 		const url =
 			joinUrl(options.baseUrl, 'comment', commentId, 'unhighlight') +
 			objAsParams(defaultParams);
 
-		const authOptions = getOptionsHeadersWithOkta(authStatus);
+		const authOptions = getOptionsHeaders(authStatus);
 		const jsonResult = await fetchJSON(url, {
 			method: 'POST',
 			headers: {

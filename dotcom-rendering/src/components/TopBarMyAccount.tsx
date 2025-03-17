@@ -12,7 +12,7 @@ import {
 } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
-import type { SignedInWithOkta } from '../lib/identity';
+import type { SignedIn } from '../lib/identity';
 import { createAuthenticationEventParams } from '../lib/identity-component-event';
 import {
 	addNotificationsToDropdownLinks,
@@ -38,8 +38,8 @@ interface MyAccountProps {
 }
 
 // when SignedIn, authStatus can only be one of the two SignedIn states
-type SignedInProps = MyAccountProps & {
-	authStatus: SignedInWithOkta;
+type SignedInBrazeProps = MyAccountProps & {
+	authStatus: SignedIn;
 	renderingTarget: RenderingTarget;
 };
 
@@ -185,7 +185,7 @@ interface SignedInWithNotificationsProps {
 	mmaUrl: string;
 	idUrl: string;
 	notifications: Notification[];
-	authStatus: SignedInWithOkta;
+	authStatus: SignedIn;
 }
 
 const SignedInWithNotifications = ({
@@ -194,11 +194,7 @@ const SignedInWithNotifications = ({
 	notifications,
 	authStatus,
 }: SignedInWithNotificationsProps) => {
-	let userId: string | undefined;
-
-	if (authStatus.kind === 'SignedInWithOkta') {
-		userId = authStatus.idToken.claims.legacy_identity_id;
-	}
+	const userId = authStatus.idToken.claims.legacy_identity_id;
 
 	if (!userId) return <SignIn idUrl={idUrl} />;
 
@@ -227,12 +223,12 @@ const SignedInWithNotifications = ({
 	);
 };
 
-const SignedIn = ({
+const SignedInBraze = ({
 	idApiUrl,
 	authStatus,
 	renderingTarget,
 	...props
-}: SignedInProps) => {
+}: SignedInBrazeProps) => {
 	const { brazeCards } = useBraze(idApiUrl, renderingTarget);
 	const [brazeNotifications, setBrazeNotifications] = useState<
 		Notification[]
@@ -268,8 +264,8 @@ export const TopBarMyAccount = ({
 
 	return (
 		<>
-			{authStatus.kind === 'SignedInWithOkta' ? (
-				<SignedIn
+			{authStatus.kind === 'SignedIn' ? (
+				<SignedInBraze
 					mmaUrl={mmaUrl}
 					idUrl={idUrl}
 					discussionApiUrl={discussionApiUrl}
