@@ -336,7 +336,7 @@ importers:
         version: 6.1.0(browserslist@4.23.0)(tslib@2.6.2)
       '@guardian/cdk':
         specifier: 50.13.0
-        version: 50.13.0(@swc/core@1.9.2)(@types/node@20.14.10)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.5.3)
+        version: 50.13.0(@swc/core@1.9.2)(@types/node@20.14.10)(aws-cdk-lib@2.179.0)(aws-cdk@2.179.0)(constructs@10.3.0)(typescript@5.5.3)
       '@guardian/commercial':
         specifier: 25.1.0
         version: 25.1.0(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@8.1.0)(@guardian/identity-auth@6.0.1)(@guardian/libs@22.0.0)(@guardian/source@8.0.0)(react-dom@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
@@ -365,8 +365,8 @@ importers:
         specifier: 2.0.2
         version: 2.0.2
       '@guardian/react-crossword-next':
-        specifier: npm:@guardian/react-crossword@3.0.0
-        version: /@guardian/react-crossword@3.0.0(@emotion/react@11.11.3)(@guardian/libs@22.0.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+        specifier: npm:@guardian/react-crossword@4.1.0
+        version: /@guardian/react-crossword@4.1.0(@emotion/react@11.11.3)(@guardian/libs@22.0.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -554,11 +554,11 @@ importers:
         specifier: 1.0.35
         version: 1.0.35
       aws-cdk:
-        specifier: 2.100.0
-        version: 2.100.0
+        specifier: 2.179.0
+        version: 2.179.0
       aws-cdk-lib:
-        specifier: 2.100.0
-        version: 2.100.0(constructs@10.3.0)
+        specifier: 2.179.0
+        version: 2.179.0(constructs@10.3.0)
       babel-loader:
         specifier: 9.2.1
         version: 9.2.1(@babel/core@7.26.8)(webpack@5.97.1)
@@ -856,6 +856,10 @@ packages:
     resolution: {integrity: sha512-INZqcwDinNaIdb5CtW3ez5s943nX5stGBQS6VOP2JDlOFP81hM3fds/9NDknipqfUkZM43dx+HgVvkXYXXARCQ==}
     dev: false
 
+  /@aws-cdk/asset-awscli-v1@2.2.227:
+    resolution: {integrity: sha512-BAZwZGtX166K9KRYnRBbRj/fU0FY00LOnki11OsDQMfZ9H6tno+LIhv/ZY5U4LGIaI8yP881pAhbrVxpKQnYLg==}
+    dev: false
+
   /@aws-cdk/asset-kubectl-v20@2.1.2:
     resolution: {integrity: sha512-3M2tELJOxQv0apCIiuKQ4pAbncz9GuLwnKFqxifWfe77wuMxyTRPmxssYHs42ePqzap1LT6GDcPygGs+hHstLg==}
     dev: false
@@ -863,6 +867,17 @@ packages:
   /@aws-cdk/asset-node-proxy-agent-v6@2.0.1:
     resolution: {integrity: sha512-DDt4SLdLOwWCjGtltH4VCST7hpOI5DzieuhGZsBpZ+AgJdSI2GCjklCXm0GCTwJG/SolkL5dtQXyUKgg9luBDg==}
     dev: false
+
+  /@aws-cdk/asset-node-proxy-agent-v6@2.1.0:
+    resolution: {integrity: sha512-7bY3J8GCVxLupn/kNmpPc5VJz8grx+4RKfnnJiO1LG+uxkZfANZG3RMHhE+qQxxwkyQ9/MfPtTpf748UhR425A==}
+    dev: false
+
+  /@aws-cdk/cloud-assembly-schema@39.2.20:
+    resolution: {integrity: sha512-RI7S8jphGA8mak154ElnEJQPNTTV4PZmA7jgqnBBHQGyOPJIXxtACubNQ5m4YgjpkK3UJHsWT+/cOAfM/Au/Wg==}
+    dev: false
+    bundledDependencies:
+      - jsonschema
+      - semver
 
   /@aws-crypto/sha256-browser@5.2.0:
     resolution: {integrity: sha512-AXfN/lGotSQwu6HNcEsIASo7kWXZ5HYWvfOmSNKDsEqC4OashTp8alTmaz+F7TC2L083SFv5RdB+qU3Vs1kZqw==}
@@ -3871,7 +3886,7 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@guardian/cdk@50.13.0(@swc/core@1.9.2)(@types/node@20.14.10)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.5.3):
+  /@guardian/cdk@50.13.0(@swc/core@1.9.2)(@types/node@20.14.10)(aws-cdk-lib@2.179.0)(aws-cdk@2.179.0)(constructs@10.3.0)(typescript@5.5.3):
     resolution: {integrity: sha512-Yv/FUTN7GGydGwYC9cf/ZmOWXTK4c7Xe28WG+jmB1kJWG6L3JoXRnI9J9Z5V0Fz7eqkjkay7wiuU99gYzCCDEw==}
     hasBin: true
     peerDependencies:
@@ -3880,8 +3895,8 @@ packages:
       constructs: 10.3.0
     dependencies:
       '@oclif/core': 2.15.0(@swc/core@1.9.2)(@types/node@20.14.10)(typescript@5.5.3)
-      aws-cdk: 2.100.0
-      aws-cdk-lib: 2.100.0(constructs@10.3.0)
+      aws-cdk: 2.179.0
+      aws-cdk-lib: 2.179.0(constructs@10.3.0)
       aws-sdk: 2.1519.0
       chalk: 4.1.2
       codemaker: 1.93.0
@@ -4348,8 +4363,8 @@ packages:
       fsevents: 2.3.3
     dev: false
 
-  /@guardian/react-crossword@3.0.0(@emotion/react@11.11.3)(@guardian/libs@22.0.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
-    resolution: {integrity: sha512-hrAgboJoDCjW2f9vcJ6xaqESWw4PYBCtuq4tbr8hLk1WaQjS9GHve/caRFOaolif3MxxvQRVw/7nm3/XphT18Q==}
+  /@guardian/react-crossword@4.1.0(@emotion/react@11.11.3)(@guardian/libs@22.0.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
+    resolution: {integrity: sha512-gwOAxBeH2z/2AHT/zi5peqZ57cJGO84rckGUrdZo4KYckgrb1LqxDdcCttR9V3mVfOmAhrgBTCVJBMV6b34Abw==}
     peerDependencies:
       '@emotion/react': ^11.11.3
       '@guardian/libs': ^22.0.0
@@ -8478,8 +8493,40 @@ packages:
       - table
       - yaml
 
+  /aws-cdk-lib@2.179.0(constructs@10.3.0):
+    resolution: {integrity: sha512-fwkoEzvh3TXYj+GPkyq/GSQt63JJV1dBgDKwr3xRdb8lQaPntSclmisa+ARO8tjPfkru1NqxAFQTtiqtAE83cA==}
+    engines: {node: '>= 14.15.0'}
+    peerDependencies:
+      constructs: ^10.0.0
+    dependencies:
+      '@aws-cdk/asset-awscli-v1': 2.2.227
+      '@aws-cdk/asset-node-proxy-agent-v6': 2.1.0
+      '@aws-cdk/cloud-assembly-schema': 39.2.20
+      constructs: 10.3.0
+    dev: false
+    bundledDependencies:
+      - '@balena/dockerignore'
+      - case
+      - fs-extra
+      - ignore
+      - jsonschema
+      - minimatch
+      - punycode
+      - semver
+      - table
+      - yaml
+      - mime-types
+
   /aws-cdk@2.100.0:
     resolution: {integrity: sha512-Gt/4wPuEiBYw2tl0+cN0EbLxxJEvltcJxSQAcVHgNbqvDj49KUJ/oCbZ335dF0gK/hrVVb70xfNiYbBSPOsmvg==}
+    engines: {node: '>= 14.15.0'}
+    hasBin: true
+    optionalDependencies:
+      fsevents: 2.3.2
+    dev: false
+
+  /aws-cdk@2.179.0:
+    resolution: {integrity: sha512-aA2+8S2g4UBQHkUEt0mYd16VLt/ucR+QfyUJi34LDKRAhOCNDjPCZ4z9z/JEDyuni0BdzsYA55pnpDN9tMULpA==}
     engines: {node: '>= 14.15.0'}
     hasBin: true
     optionalDependencies:

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { breakpoints, space } from '@guardian/source/foundations';
+import { breakpoints, space, until } from '@guardian/source/foundations';
 import type { ImgHTMLAttributes } from 'react';
 import React from 'react';
 import type { AspectRatio } from '../types/front';
@@ -17,6 +17,7 @@ type Props = {
 	roundedCorners?: boolean;
 	isCircular?: boolean;
 	aspectRatio?: AspectRatio;
+	mobileAspectRatio?: AspectRatio;
 };
 
 /**
@@ -29,6 +30,7 @@ type Props = {
  */
 const decideImageWidths = (
 	imageSize: ImageSizeType,
+	aspectRatio: AspectRatio,
 ): [ImageWidthType, ...ImageWidthType[]] => {
 	switch (imageSize) {
 		// @TODO missing image size option
@@ -40,52 +42,80 @@ const decideImageWidths = (
 		// 	];
 
 		case 'podcast':
-			return [{ breakpoint: breakpoints.mobile, width: 80 }];
+			return [{ breakpoint: breakpoints.mobile, width: 80, aspectRatio }];
 
 		case 'carousel':
-			return [{ breakpoint: breakpoints.mobile, width: 220 }];
+			return [
+				{ breakpoint: breakpoints.mobile, width: 220, aspectRatio },
+			];
 
 		case 'small':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 120 },
-				{ breakpoint: breakpoints.tablet, width: 160 },
-				{ breakpoint: breakpoints.desktop, width: 220 },
+				{ breakpoint: breakpoints.mobile, width: 120, aspectRatio },
+				{ breakpoint: breakpoints.tablet, width: 160, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 220, aspectRatio },
 			];
 
 		case 'medium':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 240 },
-				{ breakpoint: breakpoints.tablet, width: 330 },
-				{ breakpoint: breakpoints.desktop, width: 460 },
+				{ breakpoint: breakpoints.mobile, width: 240, aspectRatio },
+				{ breakpoint: breakpoints.tablet, width: 330, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 460, aspectRatio },
 			];
 
 		case 'large':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 360 },
-				{ breakpoint: breakpoints.mobileLandscape, width: 480 },
-				{ breakpoint: breakpoints.tablet, width: 500 },
-				{ breakpoint: breakpoints.desktop, width: 700 },
+				{ breakpoint: breakpoints.mobile, width: 360, aspectRatio },
+				{
+					breakpoint: breakpoints.mobileLandscape,
+					width: 480,
+					aspectRatio,
+				},
+				{ breakpoint: breakpoints.tablet, width: 500, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 700, aspectRatio },
 			];
 
 		case 'jumbo':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 360 },
-				{ breakpoint: breakpoints.mobileLandscape, width: 480 },
-				{ breakpoint: breakpoints.tablet, width: 680 },
-				{ breakpoint: breakpoints.desktop, width: 940 },
+				{ breakpoint: breakpoints.mobile, width: 360, aspectRatio },
+				{
+					breakpoint: breakpoints.mobileLandscape,
+					width: 480,
+					aspectRatio,
+				},
+				{ breakpoint: breakpoints.tablet, width: 680, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 940, aspectRatio },
 			];
 
 		case 'feature':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 325 },
-				{ breakpoint: breakpoints.tablet, width: 220 },
-				{ breakpoint: breakpoints.desktop, width: 300 },
+				{ breakpoint: breakpoints.mobile, width: 325, aspectRatio },
+				{ breakpoint: breakpoints.tablet, width: 220, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 300, aspectRatio },
 			];
 		case 'feature-large':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 325 },
-				{ breakpoint: breakpoints.tablet, width: 337 },
-				{ breakpoint: breakpoints.desktop, width: 460 },
+				{ breakpoint: breakpoints.mobile, width: 325, aspectRatio },
+				{ breakpoint: breakpoints.tablet, width: 337, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 460, aspectRatio },
+			];
+		case 'feature-immersive':
+			return [
+				{
+					breakpoint: breakpoints.mobile,
+					width: 340,
+					aspectRatio: '4:5',
+				},
+				{
+					breakpoint: breakpoints.tablet,
+					width: 700,
+					aspectRatio: '5:3',
+				},
+				{
+					breakpoint: breakpoints.desktop,
+					width: 940,
+					aspectRatio: '5:3',
+				},
 			];
 	}
 };
@@ -147,6 +177,15 @@ const circularStyles = css`
 	width: 100%;
 `;
 
+const decideMobileAspectRatioStyles = (aspectRatio?: AspectRatio) => {
+	const paddingRatio = getAspectRatioPadding(aspectRatio);
+	return css`
+		${until.tablet} {
+			padding-top: ${paddingRatio};
+		}
+	`;
+};
+
 export const CardPicture = ({
 	mainImage,
 	alt,
@@ -154,12 +193,12 @@ export const CardPicture = ({
 	loading,
 	roundedCorners,
 	isCircular,
-	aspectRatio,
+	aspectRatio = '5:3',
+	mobileAspectRatio,
 }: Props) => {
 	const sources = generateSources(
 		mainImage,
-		decideImageWidths(imageSize),
-		aspectRatio,
+		decideImageWidths(imageSize, aspectRatio),
 	);
 
 	const fallbackSource = getFallbackSource(sources);
@@ -170,6 +209,8 @@ export const CardPicture = ({
 			css={[
 				block,
 				decideAspectRatioStyles(aspectRatio),
+				mobileAspectRatio &&
+					decideMobileAspectRatioStyles(mobileAspectRatio),
 				roundedCorners && borderRadius,
 				isCircular && circularStyles,
 			]}

@@ -4,7 +4,7 @@ import { FootballDataPage } from '../components/FootballDataPage';
 import type {
 	DCRFootballDataPage,
 	FootballMatchKind,
-	Regions,
+	Region,
 } from '../footballMatches';
 import {
 	ASSET_ORIGIN,
@@ -35,7 +35,7 @@ const decideDescription = (kind: FootballMatchKind) => {
 const decideTitle = (
 	kind: FootballMatchKind,
 	pageId: string,
-	regions: Regions,
+	regions: Region[],
 ) => {
 	const pagePath = pageId.startsWith('/') ? pageId.slice(1) : pageId;
 	const competitionName = regions

@@ -7,7 +7,7 @@ import {
 	type FootballMatchKind,
 	getParserErrorMessage,
 	parse,
-	type Regions,
+	type Region,
 } from '../footballMatches';
 import type { EditionId } from '../lib/edition';
 import type { Result } from '../lib/result';
@@ -62,7 +62,7 @@ const goToCompetitionSpecificPage =
 	};
 
 type Props = {
-	nations: Regions;
+	regions: Region[];
 	guardianBaseUrl: string;
 	ajaxUrl: string;
 	kind: FootballMatchKind;
@@ -74,7 +74,7 @@ type Props = {
 };
 
 export const FootballMatchesPageWrapper = ({
-	nations,
+	regions,
 	guardianBaseUrl,
 	ajaxUrl,
 	kind,
@@ -88,7 +88,7 @@ export const FootballMatchesPageWrapper = ({
 
 	return (
 		<FootballMatchesPage
-			regions={nations}
+			regions={regions}
 			guardianBaseUrl={guardianBaseUrl}
 			kind={kind}
 			initialDays={initialDays}
