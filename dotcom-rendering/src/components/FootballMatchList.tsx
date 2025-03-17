@@ -112,7 +112,7 @@ const CompetitionName = (props: { children: ReactNode }) => (
 		css={css`
 			${textSansBold14}
 			grid-column: centre-column-start / centre-column-end;
-			color: ${palette('--football-match-list-competition-text')};
+			color: ${palette('--football-competition-text')};
 			border-top: 1px solid ${palette('--football-top-border')};
 			padding: ${space[2]}px;
 			background-color: ${palette('--football-match-list-background')};

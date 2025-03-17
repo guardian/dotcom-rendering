@@ -6544,6 +6544,10 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],
 	},
+	'--football-competition-text': {
+		light: () => sourcePalette.sport[300],
+		dark: () => sourcePalette.neutral[86],
+	},
 	'--football-match-hover': {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[38],
@@ -6555,10 +6559,6 @@ const paletteColours = {
 	'--football-match-list-border': {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[38],
-	},
-	'--football-match-list-competition-text': {
-		light: () => sourcePalette.sport[300],
-		dark: () => sourcePalette.neutral[86],
 	},
 	'--football-match-list-error': {
 		light: () => sourcePalette.error[400],

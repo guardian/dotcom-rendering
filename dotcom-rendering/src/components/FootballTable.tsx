@@ -50,6 +50,10 @@ const headingAbbreviations: Record<string, string | undefined> = {
 };
 
 type Props = {
+	competition: {
+		url: string;
+		name: string;
+	};
 	dividers: number[];
 	data: {
 		position: number;
@@ -63,9 +67,15 @@ type Props = {
 		goalDifference: number;
 		points: number;
 	}[];
+	linkToFullTable: boolean;
 };
 
-export const FootballTable = ({ data, dividers }: Props) => {
+export const FootballTable = ({
+	competition,
+	data,
+	dividers,
+	linkToFullTable,
+}: Props) => {
 	return (
 		<table css={tableStyles}>
 			<thead css={headStyles}>
@@ -113,6 +123,28 @@ export const FootballTable = ({ data, dividers }: Props) => {
 					</tr>
 				))}
 			</tbody>
+			{linkToFullTable && (
+				<tfoot>
+					<tr css={rowStyles}>
+						<td colSpan={11}>
+							<a
+								href={competition.url}
+								css={css`
+									text-decoration: none;
+									color: ${palette(
+										'--football-competition-text',
+									)};
+									:hover {
+										text-decoration: underline;
+									}
+								`}
+							>
+								View full {competition.name} table
+							</a>
+						</td>
+					</tr>
+				</tfoot>
+			)}
 		</table>
 	);
 };

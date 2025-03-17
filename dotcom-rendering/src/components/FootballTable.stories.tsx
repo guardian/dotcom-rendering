@@ -21,6 +21,11 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
 	args: {
+		competition: {
+			name: 'Premier League',
+			url: 'https://www.theguardian.com/football/premierleague/table',
+		},
+		linkToFullTable: true,
 		dividers: [1],
 		data: [
 			{
