@@ -348,12 +348,16 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 			<div css={styles.containerOverrides}>
 				<div css={styles.verticalLine} />
 				<div css={getHeaderContainerCss()}>
-					<DesignableBannerHeader
-						heading={content.mainContent.heading}
-						mobileHeading={content.mobileContent.heading}
-						headerSettings={templateSettings.headerSettings}
-						headlineSize={design.fonts?.heading.size ?? 'medium'}
-					/>
+					<div css={styles.headerOverrides}>
+						<DesignableBannerHeader
+							heading={content.mainContent.heading}
+							mobileHeading={content.mobileContent.heading}
+							headerSettings={templateSettings.headerSettings}
+							headlineSize={
+								design.fonts?.heading.size ?? 'medium'
+							}
+						/>
+					</div>
 				</div>
 				<div css={styles.contentContainer(showReminder)}>
 					{showAboveArticleCount && (
@@ -583,6 +587,29 @@ const styles = {
 			grid-row: 1;
 		}
 	`,
+	// hacky change until we can rework the designable banner header with the correct styles
+	headerOverrides: css`
+		h2 {
+			${until.phablet} {
+				font-size: 28px !important;
+				font-style: normal !important;
+				font-weight: 500 !important;
+			}
+
+			${until.leftCol} {
+				font-size: 34px !important;
+				font-style: normal !important;
+				font-weight: 500 !important;
+			}
+
+			${from.leftCol} {
+				font-size: 42px !important;
+				font-style: normal !important;
+				font-weight: 500 !important;
+			}
+		}
+	`,
+
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
 		order: ${bannerHasImage ? '2' : '1'};
 		${until.tablet} {
