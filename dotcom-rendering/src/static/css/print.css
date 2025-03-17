@@ -2,3 +2,7 @@
 	display: none !important;
 	color: #000000;
 }
+
+.scroll-depth-marker {
+	display: none;
+}
