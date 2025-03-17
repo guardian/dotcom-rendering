@@ -30,6 +30,12 @@ const rowStyles = css`
 	}
 `;
 
+const dividerStyle = css`
+	td {
+		border-top: 0.0625rem dashed ${palette('--football-table-divider')};
+	}
+`;
+
 const headingAbbreviations: Record<string, string | undefined> = {
 	P: 'Position',
 	Team: undefined,
@@ -44,6 +50,7 @@ const headingAbbreviations: Record<string, string | undefined> = {
 };
 
 type Props = {
+	dividers: number[];
 	data: {
 		position: number;
 		team: string;
@@ -58,7 +65,7 @@ type Props = {
 	}[];
 };
 
-export const FootballTable = ({ data }: Props) => {
+export const FootballTable = ({ data, dividers }: Props) => {
 	return (
 		<table css={tableStyles}>
 			<thead css={headStyles}>
@@ -78,7 +85,13 @@ export const FootballTable = ({ data }: Props) => {
 			</thead>
 			<tbody>
 				{data.map((row) => (
-					<tr key={row.position} css={rowStyles}>
+					<tr
+						key={row.position}
+						css={[
+							rowStyles,
+							dividers.includes(row.position - 1) && dividerStyle,
+						]}
+					>
 						<td>{row.position}</td>
 						<td>{row.team}</td>
 						<td>{row.gamesPlayed}</td>

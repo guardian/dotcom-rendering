@@ -21,6 +21,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
 	args: {
+		dividers: [1],
 		data: [
 			{
 				position: 1,
@@ -33,6 +34,30 @@ export const Default = {
 				goalsAgainst: 27,
 				goalDifference: 42,
 				points: 70,
+			},
+			{
+				position: 2,
+				team: 'Arsenal',
+				gamesPlayed: 29,
+				won: 21,
+				drawn: 10,
+				lost: 3,
+				goalsFor: 53,
+				goalsAgainst: 24,
+				goalDifference: 29,
+				points: 58,
+			},
+			{
+				position: 3,
+				team: 'Nottm Forest',
+				gamesPlayed: 29,
+				won: 16,
+				drawn: 6,
+				lost: 7,
+				goalsFor: 49,
+				goalsAgainst: 35,
+				goalDifference: 14,
+				points: 54,
 			},
 		],
 	},

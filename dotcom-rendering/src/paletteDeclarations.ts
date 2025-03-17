@@ -6572,6 +6572,10 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[46],
 		dark: () => sourcePalette.neutral[73],
 	},
+	'--football-table-divider': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
+	},
 	'--football-top-border': {
 		light: () => sourcePalette.sport[500],
 		dark: () => sourcePalette.neutral[60],
