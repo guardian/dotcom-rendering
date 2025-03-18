@@ -30,7 +30,7 @@ const drawStyles = css`
 	background-color: #707070;
 	height: 0.25rem;
 `;
-const loseStyles = css`
+const lossStyles = css`
 	background-color: #c70000;
 	margin-top: 0.375rem;
 `;
@@ -49,21 +49,22 @@ export const FootballTableForm = ({
 			`}
 		>
 			{teamResults.map(({ self, foe }) => {
-				let title = '';
-				const wdlStyles = [];
-				if (self.score < foe.score) {
-					wdlStyles.push(loseStyles);
-					title = `Lost ${self.score}-${foe.score} to ${foe.name}`;
-				} else if (self.score === foe.score) {
-					wdlStyles.push(drawStyles);
-					title = `Drew ${self.score}-${foe.score} with ${foe.name}`;
-				} else if (self.score > foe.score) {
-					wdlStyles.push(winStyles);
-					title = `Won ${self.score}-${foe.score} against ${foe.name}`;
-				}
+				const isWin = self.score > foe.score;
+				const isLoss = self.score < foe.score;
+				const styles = isWin
+					? winStyles
+					: isLoss
+					? lossStyles
+					: drawStyles;
+				const title = isWin
+					? `Won ${self.score}-${foe.score} against ${foe.name}`
+					: isLoss
+					? `Lost ${self.score}-${foe.score} to ${foe.name}`
+					: `Drew ${self.score}-${foe.score} with ${foe.name}`;
+
 				return (
 					<span
-						css={[formBlockStyles, ...wdlStyles]}
+						css={[formBlockStyles, styles]}
 						key={`${self.name}-${foe.name}`}
 						data-foe={foe.name}
 						data-score={self.score}
