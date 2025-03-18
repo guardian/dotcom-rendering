@@ -181,6 +181,12 @@ const Layout: CrosswordProps['Layout'] = ({
 							background-image: none;
 						}
 					}
+					@media print {
+						max-height: none;
+						::after {
+							background-image: none;
+						}
+					}
 				`}
 			>
 				<div
