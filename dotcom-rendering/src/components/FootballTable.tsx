@@ -2,6 +2,8 @@ import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import { textSans14 } from '@guardian/source/foundations';
 import { palette } from '../palette';
+import type { TeamResult } from './FootballTableForm';
+import { FootballTableForm } from './FootballTableForm';
 
 const tableStyles = css`
 	width: 100%;
@@ -41,6 +43,7 @@ const headingAbbreviations: Record<string, string | undefined> = {
 	A: 'Goals against',
 	GD: 'Goal difference',
 	Pts: 'Points',
+	Form: 'Form',
 };
 
 type Props = {
@@ -55,6 +58,7 @@ type Props = {
 		goalsAgainst: number;
 		goalDifference: number;
 		points: number;
+		form: TeamResult[];
 	}[];
 };
 
@@ -91,11 +95,14 @@ export const FootballTable = ({ data }: Props) => {
 						<td>
 							<b
 								css={css`
-									font-weight: 800;
+									font-weight: 700;
 								`}
 							>
 								{row.points}
 							</b>
+						</td>
+						<td>
+							<FootballTableForm teamResults={row.form} />
 						</td>
 					</tr>
 				))}

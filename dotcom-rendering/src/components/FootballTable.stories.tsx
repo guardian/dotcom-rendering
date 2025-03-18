@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react/*';
+import { formTorino } from '../../fixtures/manual/footballData';
 import { FootballTable } from './FootballTable';
 
 const meta = {
@@ -24,7 +25,7 @@ export const Default = {
 		data: [
 			{
 				position: 1,
-				team: 'Liverpool',
+				team: 'Torino',
 				gamesPlayed: 29,
 				won: 21,
 				drawn: 7,
@@ -33,6 +34,7 @@ export const Default = {
 				goalsAgainst: 27,
 				goalDifference: 42,
 				points: 70,
+				form: formTorino,
 			},
 		],
 	},

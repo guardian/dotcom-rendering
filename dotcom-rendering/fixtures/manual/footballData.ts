@@ -133,3 +133,56 @@ export const moreDays: FootballMatches = [
 		],
 	},
 ];
+
+export const formTorino = [
+	{
+		self: {
+			name: 'Torino',
+			score: 10,
+		},
+		foe: {
+			name: 'Cagliari',
+			score: 0,
+		},
+	},
+	{
+		self: {
+			name: 'Torino',
+			score: 4,
+		},
+		foe: {
+			name: 'Inter',
+			score: 3,
+		},
+	},
+	{
+		self: {
+			name: 'Torino',
+			score: 1,
+		},
+		foe: {
+			name: 'Lazio',
+			score: 3,
+		},
+	},
+	{
+		self: {
+			name: 'Torino',
+			score: 0,
+		},
+		foe: {
+			name: 'Bologna',
+			score: 0,
+		},
+	},
+	{
+		self: {
+			name: 'Torino',
+			score: 1,
+		},
+		foe: {
+			name: 'Inter',
+			score: 4,
+		},
+	},
+];
