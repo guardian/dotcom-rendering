@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { visuallyHidden } from '@guardian/source/foundations';
 import type { TeamScore } from '../footballMatches';
+import { palette } from '../palette';
 
 export type TeamResult = {
 	self: TeamScore;
@@ -22,16 +23,16 @@ const formBlockStyles = css`
 `;
 
 const winStyles = css`
-	background-color: #3db540;
+	background-color: ${palette('--football-form-win')};
 	margin-top: -0.375rem;
 `;
 
 const drawStyles = css`
-	background-color: #707070;
+	background-color: ${palette('--football-form-draw')};
 	height: 0.25rem;
 `;
 const lossStyles = css`
-	background-color: #c70000;
+	background-color: ${palette('--football-form-loss')};
 	margin-top: 0.375rem;
 `;
 
