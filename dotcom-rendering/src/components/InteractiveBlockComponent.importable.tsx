@@ -346,6 +346,16 @@ export const InteractiveBlockComponent = ({
 			// Datawrapper-specific fix to suppress scrollbars appearing
 			if (url.includes('datawrapper')) {
 				iframe.scrolling = 'no';
+				iframe.scrolling = 'no';
+				// Turn off dark mode for Datawrapper embeds on web
+				// This should be removed if/when dark mode is implements on the website
+				if (
+					!document.querySelector('.ios') ||
+					!document.querySelector('.android')
+				) {
+					iframe.src +=
+						(iframe.src.includes('?') ? '&' : '?') + 'dark=false';
+				}
 			}
 
 			setupWindowListeners(iframe);
