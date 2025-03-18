@@ -6548,6 +6548,18 @@ const paletteColours = {
 		light: () => sourcePalette.sport[300],
 		dark: () => sourcePalette.neutral[86],
 	},
+	'--football-form-draw': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[73],
+	},
+	'--football-form-loss': {
+		light: () => '#C70000',
+		dark: () => '#C70000',
+	},
+	'--football-form-win': {
+		light: () => '#3DB540',
+		dark: () => '#3DB540',
+	},
 	'--football-match-hover': {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[38],

@@ -45,6 +45,32 @@ export const Default = {
 				goalsAgainst: 27,
 				goalDifference: 42,
 				points: 70,
+				results: [
+					{
+						self: { name: 'Liverpool', score: 1 },
+						foe: { name: 'Chelsea', score: 0 },
+					},
+					{
+						self: { name: 'Liverpool', score: 3 },
+						foe: { name: 'Arsenal', score: 5 },
+					},
+					{
+						self: { name: 'Liverpool', score: 0 },
+						foe: { name: 'West Ham', score: 0 },
+					},
+					{
+						self: { name: 'Liverpool', score: 8 },
+						foe: { name: 'Tottenham', score: 10 },
+					},
+					{
+						self: { name: 'Liverpool', score: 0 },
+						foe: { name: 'Brighton', score: 0 },
+					},
+					{
+						self: { name: 'Liverpool', score: 0 },
+						foe: { name: 'Blackburn', score: 0 },
+					},
+				],
 			},
 			{
 				position: 2,
@@ -61,6 +87,32 @@ export const Default = {
 				goalsAgainst: 24,
 				goalDifference: 29,
 				points: 58,
+				results: [
+					{
+						self: { name: 'Arsenal', score: 4 },
+						foe: { name: 'Brighton', score: 0 },
+					},
+					{
+						self: { name: 'Arsenal', score: 3 },
+						foe: { name: 'Manchester United', score: 0 },
+					},
+					{
+						self: { name: 'Arsenal', score: 5 },
+						foe: { name: 'West Ham', score: 0 },
+					},
+					{
+						self: { name: 'Arsenal', score: 9 },
+						foe: { name: 'Manchester City', score: 0 },
+					},
+					{
+						self: { name: 'Arsenal', score: 0 },
+						foe: { name: 'Tottenham', score: 0 },
+					},
+					{
+						self: { name: 'Arsenal', score: 0 },
+						foe: { name: 'Blackburn', score: 0 },
+					},
+				],
 			},
 			{
 				position: 3,
@@ -77,6 +129,32 @@ export const Default = {
 				goalsAgainst: 35,
 				goalDifference: 14,
 				points: 54,
+				results: [
+					{
+						self: { name: 'Nottm Forest', score: 4 },
+						foe: { name: 'Brighton', score: 4 },
+					},
+					{
+						self: { name: 'Nottm Forest', score: 0 },
+						foe: { name: 'Manchester United', score: 0 },
+					},
+					{
+						self: { name: 'Nottm Forest', score: 0 },
+						foe: { name: 'West Ham', score: 7 },
+					},
+					{
+						self: { name: 'Nottm Forest', score: 9 },
+						foe: { name: 'Manchester City', score: 0 },
+					},
+					{
+						self: { name: 'Nottm Forest', score: 10 },
+						foe: { name: 'Tottenham', score: 0 },
+					},
+					{
+						self: { name: 'Nottm Forest', score: 0 },
+						foe: { name: 'Blackburn', score: 0 },
+					},
+				],
 			},
 		],
 	},
