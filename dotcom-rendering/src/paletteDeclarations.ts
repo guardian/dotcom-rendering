@@ -6568,7 +6568,7 @@ const paletteColours = {
 		light: () => sourcePalette.sport[500],
 		dark: () => sourcePalette.sport[500],
 	},
-	'--football-match-list-sub-text': {
+	'--football-sub-text': {
 		light: () => sourcePalette.neutral[46],
 		dark: () => sourcePalette.neutral[73],
 	},

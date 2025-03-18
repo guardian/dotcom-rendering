@@ -164,7 +164,11 @@ export const FootballTable = ({
 			</caption>
 			<thead css={headStyles}>
 				<tr css={rowStyles}>
-					<th>
+					<th
+						css={css`
+							color: ${palette('--football-sub-text')};
+						`}
+					>
 						<abbr title="Position">P</abbr>
 					</th>
 					<th>Team</th>
@@ -203,7 +207,13 @@ export const FootballTable = ({
 							dividers.includes(row.position - 1) && dividerStyle,
 						]}
 					>
-						<td>{row.position}</td>
+						<td
+							css={css`
+								color: ${palette('--football-sub-text')};
+							`}
+						>
+							{row.position}
+						</td>
 						<td>
 							<TeamWithCrest
 								team={row.team.name}
