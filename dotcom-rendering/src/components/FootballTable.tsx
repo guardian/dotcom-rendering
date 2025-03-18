@@ -201,7 +201,7 @@ export const FootballTable = ({
 						<abbr title="Points">Pts</abbr>
 					</th>
 					<th>
-						<abbr title="Form">Form</abbr>
+						<abbr title="Results of previous games">Form</abbr>
 					</th>
 				</tr>
 			</thead>
