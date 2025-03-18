@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
-import { textSans14 } from '@guardian/source/foundations';
+import { textSans14, until } from '@guardian/source/foundations';
 import { palette } from '../palette';
 
 const tableStyles = css`
@@ -36,18 +35,11 @@ const dividerStyle = css`
 	}
 `;
 
-const headingAbbreviations: Record<string, string | undefined> = {
-	P: 'Position',
-	Team: undefined,
-	GP: 'Games played',
-	W: 'Won',
-	D: 'Drawn',
-	L: 'Lost',
-	F: 'Goals for',
-	A: 'Goals against',
-	GD: 'Goal difference',
-	Pts: 'Points',
-};
+const hideUntilTabletStyle = css`
+	${until.tablet} {
+		display: none;
+	}
+`;
 
 type Props = {
 	competition: {
@@ -136,17 +128,34 @@ export const FootballTable = ({
 		<table css={tableStyles}>
 			<thead css={headStyles}>
 				<tr css={rowStyles}>
-					{Object.entries(headingAbbreviations).map(
-						([key, value]) => (
-							<th key={key}>
-								{isUndefined(value) ? (
-									<>{key}</>
-								) : (
-									<abbr title={value}>{key}</abbr>
-								)}
-							</th>
-						),
-					)}
+					<th>
+						<abbr title="Position">P</abbr>
+					</th>
+					<th>Team</th>
+					<th>
+						<abbr title="Games played">GP</abbr>
+					</th>
+					<th css={hideUntilTabletStyle}>
+						<abbr title="Won">W</abbr>
+					</th>
+					<th css={hideUntilTabletStyle}>
+						<abbr title="Drawn">D</abbr>
+					</th>
+					<th css={hideUntilTabletStyle}>
+						<abbr title="Lost">L</abbr>
+					</th>
+					<th css={hideUntilTabletStyle}>
+						<abbr title="Goals for">F</abbr>
+					</th>
+					<th css={hideUntilTabletStyle}>
+						<abbr title="Goals against">A</abbr>
+					</th>
+					<th>
+						<abbr title="Goal difference">GD</abbr>
+					</th>
+					<th>
+						<abbr title="Points">Pts</abbr>
+					</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -167,11 +176,11 @@ export const FootballTable = ({
 							/>
 						</td>
 						<td>{row.gamesPlayed}</td>
-						<td>{row.won}</td>
-						<td>{row.drawn}</td>
-						<td>{row.lost}</td>
-						<td>{row.goalsFor}</td>
-						<td>{row.goalsAgainst}</td>
+						<td css={hideUntilTabletStyle}>{row.won}</td>
+						<td css={hideUntilTabletStyle}>{row.drawn}</td>
+						<td css={hideUntilTabletStyle}>{row.lost}</td>
+						<td css={hideUntilTabletStyle}>{row.goalsFor}</td>
+						<td css={hideUntilTabletStyle}>{row.goalsAgainst}</td>
 						<td>{row.goalDifference}</td>
 						<td>
 							<b
