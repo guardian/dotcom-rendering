@@ -94,7 +94,7 @@ const Day = (props: { children: ReactNode }) => (
 		css={css`
 			${textSansBold14}
 			grid-column: centre-column-start / centre-column-end;
-			border-top: 1px solid ${palette('--football-match-list-border')};
+			border-top: 1px solid ${palette('--football-list-border')};
 			padding-top: ${space[2]}px;
 
 			${from.leftCol} {
@@ -119,7 +119,7 @@ const CompetitionName = (props: { children: ReactNode }) => (
 			margin-top: ${space[9]}px;
 
 			${from.leftCol} {
-				border-top-color: ${palette('--football-match-list-border')};
+				border-top-color: ${palette('--football-list-border')};
 				background-color: transparent;
 				margin-top: 0;
 				padding: ${space[1]}px 0 0;
@@ -196,7 +196,7 @@ export const shouldRenderMatchLink = (matchDateTime: Date, now: Date) =>
 
 const matchListItemStyles = css`
 	background-color: ${palette('--football-match-list-background')};
-	border: 1px solid ${palette('--football-match-list-border')};
+	border: 1px solid ${palette('--football-list-border')};
 
 	${from.leftCol} {
 		&:first-of-type {
