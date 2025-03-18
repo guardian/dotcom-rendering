@@ -307,7 +307,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		},
 	};
 
-	// const isTabletOrAbove = useMediaQuery(from.tablet);
 	const mainOrMobileContent = isTabletOrAbove
 		? content.mainContent
 		: content.mobileContent;
@@ -531,7 +530,7 @@ const styles = {
 		background: ${background};
 		color: ${textColor};
 		${limitHeight ? 'max-height: 70vh;' : ''}
-		overflow: auto;
+		overflow: hidden;
 		* {
 			box-sizing: border-box;
 		}
@@ -586,6 +585,7 @@ const styles = {
 	`,
 	// hacky change until we can rework the designable banner header with the correct styles
 	headerOverrides: css`
+		/* stylelint-disable declaration-no-important */
 		h2 {
 			${until.phablet} {
 				font-size: 28px !important;
