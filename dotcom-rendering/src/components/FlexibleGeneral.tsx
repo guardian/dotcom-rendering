@@ -19,6 +19,7 @@ import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
 import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
+import { FeatureCard } from './FeatureCard';
 import { FrontCard } from './FrontCard';
 import type { Alignment } from './SupportingContent';
 
@@ -30,6 +31,7 @@ type Props = {
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
+	collectionId: number;
 };
 
 type RowLayout = 'oneCard' | 'oneCardBoosted' | 'twoCard';
@@ -67,7 +69,8 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 		// We change the row layout to 'twoCard' to indicate that it is now full
 		if (row && row.layout === 'oneCard') {
 			return [...acc.slice(0, acc.length - 1), addCardToRow(row, card)];
-		} // Otherwise we consider the row to be 'full' and start a new row
+		}
+		// Otherwise we consider the row to be 'full' and start a new row
 		else {
 			return [...acc, createNewRow('oneCard', card)];
 		}
@@ -86,7 +89,8 @@ type BoostedSplashProperties = {
 };
 
 /**
- * Boosting a splash card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
+ * Boosting a splash card will affect the layout and style of the card.
+ * This function will determine the properties of the card based on the boost level.
  */
 const decideSplashCardProperties = (
 	boostLevel: BoostLevel,
@@ -177,6 +181,7 @@ export const SplashCardLayout = ({
 	aspectRatio,
 	isLastRow,
 	containerLevel,
+	collectionId,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -186,9 +191,52 @@ export const SplashCardLayout = ({
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
+	collectionId: number;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
+
+	const isImmersive = false; // TODO: replace with live data from fronts tool - used for testing
+	const shouldShowImmersive = isImmersive && !isMediaCard(card.format);
+
+	if (shouldShowImmersive) {
+		return (
+			<UL>
+				<LI key={card.url} padSides={true}>
+					<FeatureCard
+						collectionId={collectionId}
+						linkTo={card.url}
+						format={card.format}
+						headlineText={card.headline}
+						byline={card.byline}
+						showByline={card.showByline}
+						webPublicationDate={card.webPublicationDate}
+						kickerText={card.kickerText}
+						showClock={false}
+						image={card.image}
+						canPlayInline={true}
+						starRating={card.starRating}
+						dataLinkName={card.dataLinkName}
+						discussionApiUrl={card.discussionApiUrl}
+						discussionId={card.discussionId}
+						mainMedia={card.mainMedia}
+						isExternalLink={card.isExternalLink}
+						// branding={card.branding}
+						containerPalette={containerPalette}
+						trailText={card.trailText}
+						absoluteServerTimes={absoluteServerTimes}
+						imageLoading={imageLoading}
+						aspectRatio={'5:3'}
+						mobileAspectRatio={'4:5'}
+						imageSize="feature-immersive"
+						headlineSizes={{ desktop: 'small' }}
+						supportingContent={card.supportingContent}
+						isImmersive={true}
+					/>
+				</LI>
+			</UL>
+		);
+	}
 
 	const {
 		headlineSizes,
@@ -262,11 +310,12 @@ type BoostedCardProperties = {
 };
 
 /**
- * Boosting a standard card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
+ * Boosting a standard card will affect the layout and style of the card.
+ * This function will determine the properties of the card based on the boost level.
  */
 const decideCardProperties = (
-	boostLevel: Omit<BoostLevel, 'default' | 'gigaboost'> = 'boost',
 	supportingContentLength: number,
+	boostLevel: Omit<BoostLevel, 'default' | 'gigaboost'> = 'boost',
 	avatarUrl?: string,
 ): BoostedCardProperties => {
 	switch (boostLevel) {
@@ -328,10 +377,11 @@ export const BoostedCardLayout = ({
 		supportingContentAlignment,
 		liveUpdatesPosition,
 	} = decideCardProperties(
-		card.boostLevel,
 		card.supportingContent?.length ?? 0,
+		card.boostLevel,
 		card.avatarUrl,
 	);
+
 	return (
 		<UL
 			showTopBar={!isFirstRow}
@@ -421,7 +471,7 @@ export const StandardCardLayout = ({
 				return (
 					<LI
 						stretch={false}
-						percentage={'50%'}
+						percentage="50%"
 						key={card.url}
 						padSides={true}
 						showDivider={cardIndex > 0}
@@ -437,7 +487,7 @@ export const StandardCardLayout = ({
 							absoluteServerTimes={absoluteServerTimes}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
-							imagePositionOnDesktop={'left'}
+							imagePositionOnDesktop="left"
 							supportingContent={card.supportingContent?.slice(
 								0,
 								2,
@@ -485,6 +535,7 @@ export const FlexibleGeneral = ({
 	imageLoading,
 	aspectRatio,
 	containerLevel = 'Primary',
+	collectionId,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1);
 	const cards = [...groupedTrails.standard].slice(0, 19);
@@ -502,6 +553,7 @@ export const FlexibleGeneral = ({
 					aspectRatio={aspectRatio}
 					isLastRow={cards.length === 0}
 					containerLevel={containerLevel}
+					collectionId={collectionId}
 				/>
 			)}
 

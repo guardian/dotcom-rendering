@@ -1,6 +1,6 @@
+import type { FEFrontConfig } from './frontend/feFront';
 import type { EditionId } from './lib/edition';
 import type { FooterType } from './types/footer';
-import type { FEFrontConfigType } from './types/front';
 import type { FENavType } from './types/frontend';
 
 type FECompetitionSummary = {
@@ -29,13 +29,18 @@ type FEMatchCompetition = {
 	name: string;
 };
 
-type FEMatchDayTeam = {
+export type FEMatchDayTeam = {
 	id: string;
 	name: string;
 	score?: number;
 	htScore?: number;
 	aggregateScore?: number;
 	scorers?: string;
+};
+
+type Official = {
+	id: string;
+	name: string;
 };
 
 type FEFootballMatchData = {
@@ -50,19 +55,19 @@ type FEFootballMatchData = {
 	comments?: string;
 };
 
-type FELive = FEFootballMatchData & {
+export type FELive = FEFootballMatchData & {
 	type: 'LiveMatch';
 	status: string;
 	attendance?: string;
-	referee?: string;
+	referee?: Official;
 };
 
-type FEFixture = FEFootballMatchData & {
+export type FEFixture = FEFootballMatchData & {
 	type: 'Fixture';
 	competition?: FEMatchCompetition;
 };
 
-type FEMatchDay = FEFootballMatchData & {
+export type FEMatchDay = FEFootballMatchData & {
 	type: 'MatchDay';
 	liveMatch: boolean;
 	result: boolean;
@@ -71,41 +76,47 @@ type FEMatchDay = FEFootballMatchData & {
 	lineupsAvailable: boolean;
 	matchStatus: string;
 	attendance?: string;
-	referee?: string;
+	referee?: Official;
 	competition?: FEMatchCompetition;
 };
 
-type FEResult = FEFootballMatchData & {
+export type FEResult = FEFootballMatchData & {
 	type: 'Result';
 	reportAvailable: boolean;
 	attendance?: string;
-	referee?: string;
+	referee?: Official;
 };
 
-type FEFootballMatch = FEFixture | FEMatchDay | FEResult | FELive;
+export type FEFootballMatch = FEFixture | FEMatchDay | FEResult | FELive;
 
-type FECompetitionMatch = {
+export type FECompetitionMatch = {
 	competitionSummary: FECompetitionSummary;
 	matches: FEFootballMatch[];
 };
 
-type FEMatchByDateAndCompetition = {
+export type FEMatchByDateAndCompetition = {
 	date: string;
 	competitionMatches: FECompetitionMatch[];
 };
 
-type FEFootballPageConfig = Omit<
-	FEFrontConfigType,
+export type FEFootballPageConfig = Omit<
+	FEFrontConfig,
 	'keywordIds' | 'keywords' | 'isFront'
 > & {
 	isFront: boolean;
 	hasSurveyAd: boolean;
 };
 
+export type FEFootballCompetition = {
+	name: string;
+	url: string;
+};
+
 export type FEFootballDataPage = {
 	matchesList: FEMatchByDateAndCompetition[];
 	nextPage?: string;
 	previousPage?: string;
+	filters: Record<string, FEFootballCompetition[]>;
 	nav: FENavType;
 	editionId: EditionId;
 	guardianBaseURL: string;

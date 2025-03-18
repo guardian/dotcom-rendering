@@ -63,6 +63,9 @@
         "previousPage": {
             "type": "string"
         },
+        "filters": {
+            "$ref": "#/definitions/Record<string,FEFootballCompetition[]>"
+        },
         "nav": {
             "$ref": "#/definitions/FENavType"
         },
@@ -92,6 +95,7 @@
         "config",
         "contributionsServiceUrl",
         "editionId",
+        "filters",
         "guardianBaseURL",
         "isAdFreeUser",
         "matchesList",
@@ -251,7 +255,19 @@
                             "type": "string"
                         },
                         "referee": {
-                            "type": "string"
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "name"
+                            ]
                         }
                     },
                     "required": [
@@ -563,7 +579,19 @@
                             "type": "string"
                         },
                         "referee": {
-                            "type": "string"
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "name"
+                            ]
                         },
                         "competition": {
                             "type": "object",
@@ -729,7 +757,19 @@
                             "type": "string"
                         },
                         "referee": {
-                            "type": "string"
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "name"
+                            ]
                         }
                     },
                     "required": [
@@ -738,6 +778,9 @@
                     ]
                 }
             ]
+        },
+        "Record<string,FEFootballCompetition[]>": {
+            "type": "object"
         },
         "FENavType": {
             "type": "object",
@@ -918,7 +961,7 @@
         "FEFootballPageConfig": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/Omit<FEFrontConfigType,\"keywordIds\"|\"keywords\"|\"isFront\">"
+                    "$ref": "#/definitions/Omit<FEFrontConfig,\"keywordIds\"|\"keywords\"|\"isFront\">"
                 },
                 {
                     "type": "object",
@@ -937,7 +980,7 @@
                 }
             ]
         },
-        "Omit<FEFrontConfigType,\"keywordIds\"|\"keywords\"|\"isFront\">": {
+        "Omit<FEFrontConfig,\"keywordIds\"|\"keywords\"|\"isFront\">": {
             "type": "object",
             "properties": {
                 "isSensitive": {

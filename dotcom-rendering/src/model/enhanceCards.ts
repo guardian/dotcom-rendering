@@ -1,4 +1,9 @@
 import { isUndefined } from '@guardian/libs';
+import type {
+	FEFrontCard,
+	FEMediaAtom,
+	FESupportingContent,
+} from '../frontend/feFront';
 import {
 	ArticleDesign,
 	type ArticleFormat,
@@ -12,9 +17,6 @@ import type {
 	DCRFrontCard,
 	DCRSlideshowImage,
 	DCRSupportingContent,
-	FEFrontCard,
-	FEMediaAtom,
-	FESupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
 import type { PodcastSeriesImage, TagType } from '../types/tag';
@@ -269,6 +271,10 @@ export const enhanceCards = (
 				(type === 'Tone' && id === 'tone/newsletter-tone'),
 		);
 
+		const isCartoon = tags.some(
+			({ id, type }) => type === 'Tone' && id === 'tone/cartoons',
+		);
+
 		const branding = faciaCard.properties.editionBrandings.find(
 			(editionBranding) => editionBranding.edition.id === editionId,
 		)?.branding;
@@ -318,6 +324,7 @@ export const enhanceCards = (
 			boostLevel: faciaCard.display.boostLevel,
 			isCrossword: faciaCard.properties.isCrossword,
 			isNewsletter,
+			isCartoon,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
 			showLivePlayable: faciaCard.display.showLivePlayable,
 			avatarUrl:

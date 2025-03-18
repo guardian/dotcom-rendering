@@ -1,5 +1,4 @@
 import { palette } from '@guardian/source/foundations';
-import { initialDays, nations } from '../../fixtures/manual/footballData';
 import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.importable';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -8,29 +7,21 @@ import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
-import type { FEFootballDataPage } from '../feFootballDataPage';
-import { extractNAV } from '../model/extract-nav';
+import type { DCRFootballDataPage } from '../footballMatches';
+import { canRenderAds } from '../lib/canRenderAds';
+import { getContributionsServiceUrl } from '../lib/contributions';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
-	footballData: FEFootballDataPage;
+	footballData: DCRFootballDataPage;
 }
 
-/*
-	Hardcoded data to test layout
-*/
-const nationsHardcoded = nations;
-const initialDaysHardcoded = initialDays;
-
 export const FootballDataPageLayout = ({ footballData }: Props) => {
-	const NAV = extractNAV(footballData.nav);
+	const { nav } = footballData;
 	const pageFooter = footballData.pageFooter;
-	// ToDo: call canRenderAds with matching type
-	const renderAds = true;
+	const renderAds = canRenderAds(footballData);
 
-	// ToDo: use getContributionsServiceUrl
-	//const contributionsServiceUrl = getContributionsServiceUrl(footballData);
-	const contributionsServiceUrl = footballData.contributionsServiceUrl;
+	const contributionsServiceUrl = getContributionsServiceUrl(footballData);
 
 	return (
 		<>
@@ -55,7 +46,7 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 				)}
 
 				<Masthead
-					nav={NAV}
+					nav={nav}
 					editionId={footballData.editionId}
 					idUrl={footballData.config.idUrl}
 					mmaUrl={footballData.config.mmaUrl}
@@ -69,20 +60,21 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 				/>
 			</div>
 
-			<main id="maincontent" data-layout="FootballDataPageLayout">
-				<Island priority="feature" defer={{ until: 'visible' }}>
-					<FootballMatchesPageWrapper
-						nations={nationsHardcoded}
-						guardianBaseUrl={footballData.guardianBaseURL}
-						// ToDo: determine based on URL
-						kind={'Fixture'}
-						initialDays={initialDaysHardcoded}
-						edition={footballData.editionId}
-					/>
-				</Island>
-			</main>
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<FootballMatchesPageWrapper
+					regions={footballData.regions}
+					guardianBaseUrl={footballData.guardianBaseURL}
+					ajaxUrl={footballData.config.ajaxUrl}
+					kind={footballData.kind}
+					initialDays={footballData.matchesList}
+					secondPage={footballData.nextPage}
+					edition={footballData.editionId}
+					renderAds={renderAds}
+					pageId={footballData.config.pageId}
+				/>
+			</Island>
 
-			{NAV.subNavSections && (
+			{nav.subNavSections && (
 				<Section
 					fullWidth={true}
 					showTopBorder={true}
@@ -92,8 +84,8 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 				>
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
+							subNavSections={nav.subNavSections}
+							currentNavLink={nav.currentNavLink}
 							position="footer"
 						/>
 					</Island>
@@ -112,9 +104,9 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 			>
 				<Footer
 					pageFooter={pageFooter}
-					selectedPillar={NAV.selectedPillar}
-					pillars={NAV.pillars}
-					urls={NAV.readerRevenueLinks.footer}
+					selectedPillar={nav.selectedPillar}
+					pillars={nav.pillars}
+					urls={nav.readerRevenueLinks.footer}
 					editionId={footballData.editionId}
 				/>
 			</Section>

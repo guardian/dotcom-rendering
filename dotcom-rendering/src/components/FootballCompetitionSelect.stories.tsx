@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, fn, userEvent, waitFor, within } from '@storybook/test';
 import { allModes } from '../../.storybook/modes';
-import { nations } from '../../fixtures/manual/footballData';
+import { regions } from '../../fixtures/manual/footballData';
 import { FootballCompetitionSelect as FootballCompetitionSelectComponent } from './FootballCompetitionSelect';
 
 const meta = {
@@ -21,8 +21,9 @@ type Story = StoryObj<typeof meta>;
 
 export const FootballCompetitionSelect = {
 	args: {
-		nations,
+		regions,
 		kind: 'Result',
+		pageId: 'football/live',
 		onChange: fn(),
 	},
 	play: async ({ args, canvasElement }) => {
@@ -31,10 +32,13 @@ export const FootballCompetitionSelect = {
 		const selects = canvas.getAllByLabelText('Choose league:');
 
 		for (const select of selects) {
-			await userEvent.selectOptions(select, 'football/premierleague');
+			await userEvent.selectOptions(
+				select,
+				'/football/premierleague/live',
+			);
 			await waitFor(() =>
 				expect(args.onChange).toHaveBeenLastCalledWith(
-					'football/premierleague',
+					'/football/premierleague/live',
 				),
 			);
 		}

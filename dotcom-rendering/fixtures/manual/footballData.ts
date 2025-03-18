@@ -1,19 +1,18 @@
-import type { Nations } from '../../src/components/FootballCompetitionSelect';
-import type { FootballMatches } from '../../src/footballMatches';
+import type { FootballMatches, Region } from '../../src/footballMatches';
 
-export const nations: Nations = [
+export const regions: Region[] = [
 	{
 		name: 'England',
 		competitions: [
-			{ tag: 'football/premierleague', name: 'Premier League' },
-			{ tag: 'football/championship', name: 'Championship' },
+			{ url: '/football/premierleague/live', name: 'Premier League' },
+			{ url: 'football/championship/live', name: 'Championship' },
 		],
 	},
 	{
 		name: 'Scotland',
 		competitions: [
 			{
-				tag: 'football/scottish-premiership',
+				url: 'football/scottish-premiership/live',
 				name: 'Scottish Premiership',
 			},
 		],
@@ -22,17 +21,19 @@ export const nations: Nations = [
 
 export const initialDays: FootballMatches = [
 	{
-		date: new Date('2022-01-01T00:00:00Z'),
+		dateISOString: new Date('2022-01-01T00:00:00Z').toISOString(),
 		competitions: [
 			{
-				competitionId: '635',
+				id: '635',
 				tag: 'football/serieafootball',
 				name: 'Serie A',
 				nation: 'European',
 				matches: [
 					{
 						kind: 'Live',
-						dateTime: new Date('2022-01-01T11:11:00Z'),
+						dateTimeISOString: new Date(
+							'2022-01-01T11:11:00Z',
+						).toISOString(),
 						paId: '4482093',
 						homeTeam: {
 							name: 'Torino',
@@ -45,8 +46,25 @@ export const initialDays: FootballMatches = [
 						status: '1st',
 					},
 					{
+						kind: 'Live',
+						dateTimeISOString: new Date(
+							'2022-01-01T11:11:00Z',
+						).toISOString(),
+						paId: '12345',
+						homeTeam: {
+							name: 'Fiorentina',
+						},
+						awayTeam: {
+							name: 'Bologna',
+						},
+						status: 'S',
+						comment: 'Awaiting officials decision',
+					},
+					{
 						kind: 'Fixture',
-						dateTime: new Date('2022-01-01T19:45:00Z'),
+						dateTimeISOString: new Date(
+							'2022-01-01T19:45:00Z',
+						).toISOString(),
 						paId: '4482890',
 						homeTeam: 'Auxerre',
 						awayTeam: 'St Etienne',
@@ -54,14 +72,16 @@ export const initialDays: FootballMatches = [
 				],
 			},
 			{
-				competitionId: '650',
+				id: '650',
 				tag: 'football/laligafootball',
 				name: 'La Liga',
 				nation: 'European',
 				matches: [
 					{
 						kind: 'Result',
-						dateTime: new Date('2022-01-01T20:00:00Z'),
+						dateTimeISOString: new Date(
+							'2022-01-01T20:00:00Z',
+						).toISOString(),
 						paId: '4482835',
 						homeTeam: {
 							name: 'Las Palmas',
@@ -76,14 +96,16 @@ export const initialDays: FootballMatches = [
 				],
 			},
 			{
-				competitionId: '651',
+				id: '651',
 				tag: 'football/fa-cup',
 				name: 'FA Cup',
 				nation: 'European',
 				matches: [
 					{
 						kind: 'Result',
-						dateTime: new Date('2022-01-01T20:00:00Z'),
+						dateTimeISOString: new Date(
+							'2022-01-01T20:00:00Z',
+						).toISOString(),
 						paId: '4482836',
 						homeTeam: {
 							name: 'Brighton & Hove Albion Women',
@@ -104,17 +126,19 @@ export const initialDays: FootballMatches = [
 
 export const moreDays: FootballMatches = [
 	{
-		date: new Date('2022-01-05T00:00:00Z'),
+		dateISOString: new Date('2022-01-05T00:00:00Z').toISOString(),
 		competitions: [
 			{
-				competitionId: '635',
+				id: '635',
 				tag: 'football/serieafootball',
 				name: 'Serie A',
 				nation: 'European',
 				matches: [
 					{
 						kind: 'Fixture',
-						dateTime: new Date('2022-01-05T19:45:00Z'),
+						dateTimeISOString: new Date(
+							'2022-01-05T19:45:00Z',
+						).toISOString(),
 						paId: '4482890',
 						homeTeam: 'Juventus',
 						awayTeam: 'Roma',
