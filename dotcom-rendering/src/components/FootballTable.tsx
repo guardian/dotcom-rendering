@@ -1,11 +1,21 @@
 import { css } from '@emotion/react';
-import { textSans14, until } from '@guardian/source/foundations';
+import {
+	from,
+	textSans14,
+	textSansBold14,
+	until,
+} from '@guardian/source/foundations';
 import { palette } from '../palette';
 
 const tableStyles = css`
 	width: 100%;
 	background: ${palette('--table-block-background')};
-	border-top: 0.0625rem solid ${palette('--football-top-border')};
+	${until.leftCol} {
+		border-top: 0.0625rem solid ${palette('--table-block-stripe')};
+	}
+	${from.leftCol} {
+		border-top: 0.0625rem solid ${palette('--football-top-border')};
+	}
 	color: ${palette('--table-block-text')};
 	border-collapse: inherit;
 `;
@@ -41,9 +51,18 @@ const hideUntilTabletStyle = css`
 	}
 `;
 
+const linkStyles = css`
+	text-decoration: none;
+	color: ${palette('--football-competition-text')};
+	:hover {
+		text-decoration: underline;
+	}
+`;
+
 type Props = {
 	competition: {
 		url: string;
+		tableUrl: string;
 		name: string;
 	};
 	dividers: number[];
@@ -126,6 +145,23 @@ export const FootballTable = ({
 }: Props) => {
 	return (
 		<table css={tableStyles}>
+			<caption
+				css={css`
+					${from.leftCol} {
+						display: none;
+					}
+					text-align: left;
+					border-top: 0.0625rem solid
+						${palette('--football-top-border')};
+					padding: 0.5rem;
+					${textSansBold14};
+					background: ${palette('--table-block-background')};
+				`}
+			>
+				<a css={linkStyles} href={competition.url}>
+					{competition.name}
+				</a>
+			</caption>
 			<thead css={headStyles}>
 				<tr css={rowStyles}>
 					<th>
@@ -198,18 +234,7 @@ export const FootballTable = ({
 				<tfoot>
 					<tr css={rowStyles}>
 						<td colSpan={11}>
-							<a
-								href={competition.url}
-								css={css`
-									text-decoration: none;
-									color: ${palette(
-										'--football-competition-text',
-									)};
-									:hover {
-										text-decoration: underline;
-									}
-								`}
-							>
+							<a href={competition.tableUrl} css={linkStyles}>
 								View full {competition.name} table
 							</a>
 						</td>

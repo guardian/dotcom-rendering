@@ -23,7 +23,9 @@ export const Default = {
 	args: {
 		competition: {
 			name: 'Premier League',
-			url: 'https://www.theguardian.com/football/premierleague/table',
+			url: 'https://www.theguardian.com/football/premierleague',
+			tableUrl:
+				'https://www.theguardian.com/football/premierleague/table',
 		},
 		linkToFullTable: true,
 		dividers: [1],
