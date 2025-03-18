@@ -224,6 +224,7 @@ export class RenderingCDKStack extends CDKStack {
 			healthcheck: { path: '/_healthcheck' },
 			instanceType,
 			monitoringConfiguration,
+			enabledDetailedInstanceMonitoring: true,
 			roleConfiguration: {
 				additionalPolicies: [
 					new GuAllowPolicy(this, 'AllowPolicyCloudwatchLogs', {
