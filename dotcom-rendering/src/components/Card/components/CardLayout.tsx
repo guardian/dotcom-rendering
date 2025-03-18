@@ -156,7 +156,7 @@ const decidePosition = (
 	`;
 };
 
-/** Detemines the gap size between components in card layout */
+/** Determines the gap size between components in card layout */
 const decideGap = (gapSize: GapSize) => {
 	switch (gapSize) {
 		case 'none':
@@ -171,6 +171,14 @@ const decideGap = (gapSize: GapSize) => {
 			return `${space[5]}px`;
 	}
 };
+
+const decideColumnGap = (gapSize: GapSize) => css`
+	column-gap: ${gapSize === 'large' ? '10px' : decideGap(gapSize)};
+
+	${from.tablet} {
+		column-gap: ${decideGap(gapSize)};
+	}
+`;
 
 export const CardLayout = ({
 	children,
@@ -196,11 +204,11 @@ export const CardLayout = ({
 					isBetaContainer,
 					imageType === 'avatar',
 				),
+				decideColumnGap(gapSizes.column),
 			]}
 			style={{
 				backgroundColor: cardBackgroundColour,
 				rowGap: decideGap(gapSizes.row),
-				columnGap: decideGap(gapSizes.column),
 			}}
 		>
 			{children}

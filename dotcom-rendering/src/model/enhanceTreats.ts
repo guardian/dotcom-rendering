@@ -1,6 +1,7 @@
+import type { FEFrontCard } from '../frontend/feFront';
 import { Pillar } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
-import type { FEFrontCard, TreatType } from '../types/front';
+import type { TreatType } from '../types/front';
 
 const SOCCER_TREAT: TreatType = {
 	links: [

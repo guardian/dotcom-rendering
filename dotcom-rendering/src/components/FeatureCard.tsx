@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space } from '@guardian/source/foundations';
+import { from, space } from '@guardian/source/foundations';
 import { SvgMediaControlsPlay } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
@@ -66,9 +66,9 @@ const hoverStyles = css`
 	:hover .image-overlay {
 		position: absolute;
 		top: 0;
+		left: 0;
 		width: 100%;
 		height: 100%;
-		left: 0;
 		background-color: ${palette('--card-background-hover')};
 	}
 
@@ -86,6 +86,21 @@ const contentStyles = css`
 	flex-direction: column;
 `;
 
+const overlayContainerStyles = css`
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+`;
+
+const immersiveOverlayContainerStyles = css`
+	${from.tablet} {
+		height: 100%;
+		top: 0;
+		width: 25%;
+	}
+`;
+
 /**
  * Image mask gradient has additional colour stops to emulate a non-linear
  * ease in / ease out curve to make the transition smoother. Values were
@@ -94,14 +109,10 @@ const contentStyles = css`
  * reduced.) The following article has more detail on non-linear gradients:
  * https://css-tricks.com/easing-linear-gradients/
  */
-const overlayStyles = css`
-	display: flex;
-	flex-direction: column;
-	text-align: start;
-	gap: ${space[1]}px;
-	padding: 64px ${space[2]}px ${space[2]}px;
+
+const overlayMaskGradientStyles = (angle: string) => css`
 	mask-image: linear-gradient(
-		180deg,
+		${angle},
 		transparent 0px,
 		rgba(0, 0, 0, 0.0381) 8px,
 		rgba(0, 0, 0, 0.1464) 16px,
@@ -112,11 +123,28 @@ const overlayStyles = css`
 		rgba(0, 0, 0, 0.9619) 56px,
 		rgb(0, 0, 0) 64px
 	);
+`;
+const overlayStyles = css`
+	display: flex;
+	flex-direction: column;
+	text-align: start;
+	gap: ${space[1]}px;
+	padding: 64px ${space[2]}px ${space[2]}px;
 	backdrop-filter: blur(12px) brightness(0.5);
+	${overlayMaskGradientStyles('180deg')};
 
 	/* Ensure the waveform is behind the other elements, e.g. headline, pill */
 	> * {
 		z-index: 1;
+	}
+`;
+
+const immersiveOverlayStyles = css`
+	${from.tablet} {
+		height: 100%;
+		padding: ${space[2]}px 64px ${space[2]}px ${space[2]}px;
+		backdrop-filter: blur(12px) brightness(0.5);
+		${overlayMaskGradientStyles('270deg')}
 	}
 `;
 
@@ -231,8 +259,10 @@ export type Props = {
 	discussionApiUrl: string;
 	discussionId?: string;
 	isExternalLink: boolean;
-	/** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
+	/** Alows the consumer to set an aspect ratio on the image */
 	aspectRatio?: AspectRatio;
+	/** Alows the consumer to set an aspect ratio on the image specifically on mobile breakpoints */
+	mobileAspectRatio?: AspectRatio;
 	showQuotes?: boolean;
 	/**
 	 * Youtube video requires a unique ID. We append the collectionId to the youtube asset ID, to allow
@@ -241,6 +271,11 @@ export type Props = {
 	 */
 	collectionId: number;
 	isNewsletter?: boolean;
+	/**
+	 * An immersive feature card variant. It dictates that the card has a full width background image on all breakpoints. It also dictates the the card change aspect ratio to 5:3 on desktop and 4:5 on mobile.
+	 *
+	 */
+	isImmersive?: boolean;
 };
 
 export const FeatureCard = ({
@@ -272,10 +307,12 @@ export const FeatureCard = ({
 	isExternalLink,
 	absoluteServerTimes,
 	aspectRatio,
+	mobileAspectRatio,
 	starRating,
 	showQuotes,
 	collectionId,
 	isNewsletter = false,
+	isImmersive = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -311,7 +348,7 @@ export const FeatureCard = ({
 							isExternalLink={isExternalLink}
 						/>
 					)}
-					<div css={contentStyles}>
+					<div css={[contentStyles]}>
 						{showYoutubeVideo && (
 							<div
 								data-chromatic="ignore"
@@ -397,6 +434,9 @@ export const FeatureCard = ({
 											loading={imageLoading}
 											roundedCorners={false}
 											aspectRatio={aspectRatio}
+											mobileAspectRatio={
+												mobileAspectRatio
+											}
 										/>
 									</div>
 								)}
@@ -410,6 +450,9 @@ export const FeatureCard = ({
 											loading={imageLoading}
 											roundedCorners={false}
 											aspectRatio={aspectRatio}
+											mobileAspectRatio={
+												mobileAspectRatio
+											}
 										/>
 										{isVideoMainMedia &&
 											mainMedia.duration > 0 && (
@@ -432,12 +475,11 @@ export const FeatureCard = ({
 								<div className="image-overlay" />
 
 								<div
-									css={css`
-										position: absolute;
-										bottom: 0;
-										left: 0;
-										width: 100%;
-									`}
+									css={[
+										overlayContainerStyles,
+										isImmersive &&
+											immersiveOverlayContainerStyles,
+									]}
 								>
 									{mainMedia?.type === 'Audio' &&
 										!!mainMedia.podcastImage?.src && (
@@ -466,7 +508,13 @@ export const FeatureCard = ({
 												</div>
 											</div>
 										)}
-									<div css={overlayStyles}>
+									<div
+										css={[
+											overlayStyles,
+											isImmersive &&
+												immersiveOverlayStyles,
+										]}
+									>
 										{/**
 										 * Without the wrapping div the headline and byline would have space
 										 * inserted between them due to being direct children of the flex container

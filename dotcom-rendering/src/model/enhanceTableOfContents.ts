@@ -90,6 +90,16 @@ export const enhanceTableOfContents = (
 				}
 			} else if (
 				element._type ===
+				'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement'
+			) {
+				for (const section of element.sections) {
+					tocItems.push({
+						id: slugify(section.title),
+						title: section.title,
+					});
+				}
+			} else if (
+				element._type ===
 					'model.dotcomrendering.pageElements.SubheadingBlockElement' ||
 				element._type ===
 					'model.dotcomrendering.pageElements.NumberedTitleBlockElement'

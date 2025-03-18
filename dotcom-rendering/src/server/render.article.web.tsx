@@ -178,12 +178,7 @@ export const renderHtml = ({
 	const ampLink = getAmpLink(frontendData.tags);
 
 	const { openGraphData, twitterData } = frontendData;
-	const keywords =
-		typeof frontendData.config.keywords === 'undefined' ||
-		frontendData.config.keywords === 'Network Front'
-			? ''
-			: frontendData.config.keywords;
-
+	const section = frontendData.config.section;
 	const initTwitter = `
 <script>
 // https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/set-up-twitter-for-websites
@@ -218,7 +213,7 @@ window.twttr = (function(d, s, id) {
 		ampLink,
 		openGraphData,
 		twitterData,
-		keywords,
+		section,
 		initTwitter:
 			pageHasTweetElements || format.design === ArticleDesign.LiveBlog
 				? initTwitter

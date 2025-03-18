@@ -492,13 +492,7 @@
                 },
                 "entries": {
                     "type": "array",
-                    "items": [
-                        {
-                            "$ref": "#/definitions/CAPIEntry"
-                        }
-                    ],
-                    "minItems": 1,
-                    "additionalItems": {
+                    "items": {
                         "$ref": "#/definitions/CAPIEntry"
                     }
                 },
@@ -4220,13 +4214,7 @@
                         },
                         "entries": {
                             "type": "array",
-                            "items": [
-                                {
-                                    "$ref": "#/definitions/CAPIEntry"
-                                }
-                            ],
-                            "minItems": 1,
-                            "additionalItems": {
+                            "items": {
                                 "$ref": "#/definitions/CAPIEntry"
                             }
                         },

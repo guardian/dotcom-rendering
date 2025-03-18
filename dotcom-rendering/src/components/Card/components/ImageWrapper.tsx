@@ -26,7 +26,8 @@ export type ImageSizeType =
 	| 'carousel'
 	| 'podcast'
 	| 'feature'
-	| 'feature-large';
+	| 'feature-large'
+	| 'feature-immersive';
 
 type Props = {
 	children: React.ReactNode;
@@ -42,13 +43,40 @@ type Props = {
 	 */
 	hideImageOverlay?: boolean;
 	padImage?: boolean;
-	isInLoopVideoTest?: boolean;
 };
+
+const imageOverlayContainerStyles = css`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+`;
+
+/**
+ * There is no padding on the side of the image where the text is.
+ */
+const imagePaddingStyles = (
+	imagePositionOnDesktop: ImagePositionType,
+	imagePositionOnMobile: ImagePositionType,
+) => css`
+	${until.tablet} {
+		padding-left: ${imagePositionOnMobile !== 'right' && `${space[2]}px`};
+		padding-right: ${imagePositionOnMobile !== 'left' && `${space[2]}px`};
+		padding-top: ${imagePositionOnMobile !== 'bottom' && `${space[2]}px`};
+		padding-bottom: ${imagePositionOnMobile !== 'top' && `${space[2]}px`};
+	}
+	${from.tablet} {
+		padding-left: ${imagePositionOnDesktop !== 'right' && `${space[2]}px`};
+		padding-right: ${imagePositionOnDesktop !== 'left' && `${space[2]}px`};
+		padding-top: ${imagePositionOnDesktop !== 'bottom' && `${space[2]}px`};
+		padding-bottom: ${imagePositionOnDesktop !== 'top' && `${space[2]}px`};
+	}
+`;
 
 /**
  * This function works in partnership with its sibling in `ContentWrapper`. If you
  * change any values here be sure to update that file as well.
- *
  */
 const flexBasisStyles = ({
 	imageSize,
@@ -116,10 +144,6 @@ const fixImageWidth = ({
 	`}
 `;
 
-const imagePadding = css`
-	padding: ${space[2]}px;
-`;
-
 export const ImageWrapper = ({
 	children,
 	imageSize,
@@ -129,13 +153,11 @@ export const ImageWrapper = ({
 	imagePositionOnMobile,
 	hideImageOverlay,
 	padImage,
-	isInLoopVideoTest = false,
 }: Props) => {
 	const isHorizontalOnDesktop =
 		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
 	const isHorizontalOnMobile =
 		imagePositionOnMobile === 'left' || imagePositionOnMobile === 'right';
-
 	return (
 		<div
 			css={[
@@ -175,15 +197,33 @@ export const ImageWrapper = ({
 						display: block;
 					}
 				`,
-				padImage && imagePadding,
+				padImage &&
+					imagePaddingStyles(
+						imagePositionOnDesktop,
+						imagePositionOnMobile,
+					),
 			]}
 		>
 			<>
 				{children}
 				{/* This image overlay is styled when the CardLink is hovered */}
 				{(imageType === 'picture' || imageType === 'slideshow') &&
-					!hideImageOverlay &&
-					!isInLoopVideoTest && <div className="image-overlay" />}
+					!hideImageOverlay && (
+						<div
+							css={[
+								imageOverlayContainerStyles,
+								padImage &&
+									imagePaddingStyles(
+										imagePositionOnDesktop,
+										imagePositionOnMobile,
+									),
+							]}
+						>
+							{/* This child div is needed as the hover background colour covers the padded
+							    area around the image when the hover styles are applied to the top-level div */}
+							<div className="image-overlay" />
+						</div>
+					)}
 			</>
 		</div>
 	);

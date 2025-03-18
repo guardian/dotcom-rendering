@@ -11,6 +11,7 @@ const program = TJS.getProgramFromFiles(
 	[
 		path.resolve(`${root}/index.d.ts`),
 		path.resolve(`${root}/src/types/frontend.ts`),
+		path.resolve(`${root}/src/frontend/feFront.ts`),
 		path.resolve(`${root}/src/frontend/feTagPage.ts`),
 		path.resolve(`${root}/src/types/newslettersPage.ts`),
 		path.resolve(`${root}/src/types/editionsCrossword.ts`),
@@ -38,8 +39,8 @@ const schemas = [
 		file: `${root}/src/model/article-schema.json`,
 	},
 	{
-		typeName: 'FEFrontType',
-		file: `${root}/src/model/front-schema.json`,
+		typeName: 'FEFront',
+		file: `${root}/src/frontend/schemas/feFront.json`,
 	},
 	{
 		typeName: 'FETagPage',

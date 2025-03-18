@@ -267,66 +267,89 @@ export const CrosswordLayout = (props: Props) => {
 									/>
 								</GridItem>
 							)}
-							<GridItem area="body" element="article">
-								<ArticleContainer format={format}>
-									<ArticleBody
-										format={format}
-										blocks={article.blocks}
-										host={host}
-										pageId={article.pageId}
-										webTitle={article.webTitle}
-										ajaxUrl={article.config.ajaxUrl}
-										abTests={article.config.abTests}
-										switches={article.config.switches}
-										isSensitive={article.config.isSensitive}
-										isAdFreeUser={article.isAdFreeUser}
-										sectionId={article.config.section}
-										shouldHideReaderRevenue={
-											article.shouldHideReaderRevenue
-										}
-										tags={article.tags}
-										isPaidContent={
-											!!article.config.isPaidContent
-										}
-										contributionsServiceUrl={
-											contributionsServiceUrl
-										}
-										contentType={article.contentType}
-										isPreview={article.config.isPreview}
-										idUrl={article.config.idUrl ?? ''}
-										isDev={!!article.config.isDev}
-										keywordIds={article.config.keywordIds}
-										tableOfContents={
-											article.tableOfContents
-										}
-										lang={article.lang}
-										isRightToLeftLang={
-											article.isRightToLeftLang
-										}
-										editionId={article.editionId}
-									/>
-								</ArticleContainer>
-							</GridItem>
-							<GridItem area="right-column">
-								<RightColumn showFrom="wide">
-									<div
-										css={css`
-											margin-top: ${remSpace[3]};
-										`}
-									>
-										{renderAds ? (
-											<AdSlot
-												position="right"
-												display={format.display}
-												isPaidContent={isPaidContent}
+							{Boolean(article.crossword?.entries.length) && (
+								<>
+									<GridItem area="body" element="article">
+										<ArticleContainer format={format}>
+											<ArticleBody
+												format={format}
+												blocks={article.blocks}
+												host={host}
+												pageId={article.pageId}
+												webTitle={article.webTitle}
+												ajaxUrl={article.config.ajaxUrl}
+												abTests={article.config.abTests}
+												switches={
+													article.config.switches
+												}
+												isSensitive={
+													article.config.isSensitive
+												}
+												isAdFreeUser={
+													article.isAdFreeUser
+												}
+												sectionId={
+													article.config.section
+												}
 												shouldHideReaderRevenue={
 													article.shouldHideReaderRevenue
 												}
+												tags={article.tags}
+												isPaidContent={
+													!!article.config
+														.isPaidContent
+												}
+												contributionsServiceUrl={
+													contributionsServiceUrl
+												}
+												contentType={
+													article.contentType
+												}
+												isPreview={
+													article.config.isPreview
+												}
+												idUrl={
+													article.config.idUrl ?? ''
+												}
+												isDev={!!article.config.isDev}
+												keywordIds={
+													article.config.keywordIds
+												}
+												tableOfContents={
+													article.tableOfContents
+												}
+												lang={article.lang}
+												isRightToLeftLang={
+													article.isRightToLeftLang
+												}
+												editionId={article.editionId}
 											/>
-										) : null}
-									</div>
-								</RightColumn>
-							</GridItem>
+										</ArticleContainer>
+									</GridItem>
+									<GridItem area="right-column">
+										<RightColumn showFrom="wide">
+											<div
+												css={css`
+													margin-top: ${remSpace[3]};
+												`}
+											>
+												{renderAds ? (
+													<AdSlot
+														position="right"
+														display={format.display}
+														isPaidContent={
+															isPaidContent
+														}
+														shouldHideReaderRevenue={
+															article.shouldHideReaderRevenue
+														}
+													/>
+												) : null}
+											</div>
+										</RightColumn>
+									</GridItem>
+								</>
+							)}
 						</CrosswordGrid>
 					</div>
 				</Section>

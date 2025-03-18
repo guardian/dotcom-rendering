@@ -6,10 +6,9 @@ import type {
 import type {
 	DCRFootballDataPage,
 	FootballMatchKind,
-	ParserError,
-	Regions,
+	Region,
 } from '../footballMatches';
-import { parse } from '../footballMatches';
+import { getParserErrorMessage, parse } from '../footballMatches';
 import { Pillar } from '../lib/articleFormat';
 import { extractNAV } from '../model/extract-nav';
 import { validateAsFootballDataPageType } from '../model/validate';
@@ -18,42 +17,47 @@ import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderFootballDataPage } from './render.footballDataPage.web';
 
 const decidePageKind = (pageId: string): FootballMatchKind => {
-	if (pageId?.includes('live')) {
+	if (pageId.includes('live')) {
 		return 'Live';
 	}
 
-	if (pageId?.includes('results')) {
+	if (pageId.includes('results')) {
 		return 'Result';
 	}
 
-	if (pageId?.includes('fixtures')) {
+	if (pageId.includes('fixtures')) {
 		return 'Fixture';
 	}
 
 	throw new Error('Could not determine football page kind');
 };
 
-const getParserErrorMessage = (error: ParserError): string => {
-	switch (error.kind) {
-		case 'InvalidMatchDay':
-			return error.errors.map((e) => getParserErrorMessage(e)).join(', ');
-		default:
-			return `${error.kind}: ${error.message}`;
-	}
+const regionsPriority = [
+	'Internationals',
+	'English',
+	'European',
+	'Scottish',
+	'Rest of world',
+];
+
+export const sortRegionsFunction = (a: Region, b: Region): number => {
+	return regionsPriority.indexOf(a.name) - regionsPriority.indexOf(b.name);
 };
 
 const parseFEFootballCompetitionRegions = (
 	competitionRegions: Record<string, FEFootballCompetition[]>,
-): Regions => {
-	return Object.entries(competitionRegions).map(([key, competition]) => {
-		return {
-			name: key,
-			competitions: competition.map((comp) => ({
-				url: comp.url,
-				name: comp.name,
-			})),
-		};
-	});
+): Region[] => {
+	return Object.entries(competitionRegions)
+		.map(([key, competition]) => {
+			return {
+				name: key,
+				competitions: competition.map((comp) => ({
+					url: comp.url,
+					name: comp.name,
+				})),
+			};
+		})
+		.sort(sortRegionsFunction);
 };
 
 const parseFEFootballData = (data: FEFootballDataPage): DCRFootballDataPage => {
