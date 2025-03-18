@@ -647,9 +647,9 @@
 			const getPageType = (url) => {
 				// All interactive pages include this in the URL
 				if (url.includes('/ng-interactive/')) return 'Interactive';
-				// We're looking for the date string, e.g /2022/jul/30
 				else if (
-					url.match(/(\/\d{4}\/[a-z]{3}\/\d{2}\/|\/[a-z-]+\/\d+$)/)
+					url.match(/\/\d{4}\/[a-z]{3}\/\d{2}\//) || // Standard article date format e.g /2022/jul/30
+					url.match(/\/[a-z-]+\/\d+$/) // Crossword format e.g /crosswords/quick/17117
 				)
 					return 'Article';
 				// This is imperfect, but covers some cases of tag pages, consider expanding in the future
