@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react/*';
+import { allModes } from '../../.storybook/modes';
 import { FootballTable } from './FootballTable';
 
 const meta = {
@@ -13,6 +14,15 @@ const meta = {
 			</>
 		),
 	],
+	parameters: {
+		chromatic: {
+			modes: {
+				'vertical mobile': allModes['vertical mobile'],
+				'vertical desktop': allModes['vertical desktop'],
+				'vertical wide': allModes['splitVertical'],
+			},
+		},
+	},
 } satisfies Meta<typeof FootballTable>;
 
 export default meta;
