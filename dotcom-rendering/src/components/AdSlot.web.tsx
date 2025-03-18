@@ -67,7 +67,7 @@ type RightProps = {
 };
 
 type RightFootballProps = {
-	position: 'right-football';
+	position: 'football-right';
 	colourScheme?: ColourScheme;
 	index?: never;
 	shouldHideReaderRevenue?: never;
@@ -515,7 +515,7 @@ export const AdSlot = ({
 				default:
 					return null;
 			}
-		case 'right-football': {
+		case 'football-right': {
 			const slotId = 'dfp-ad--right';
 			return (
 				<AdSlotWrapper
