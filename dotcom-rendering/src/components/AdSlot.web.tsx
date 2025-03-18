@@ -139,8 +139,8 @@ const merchandisingAdStyles = css`
 
 	${from.desktop} {
 		margin: 0;
-		padding-bottom: ${space[4]}px;
-		min-height: ${adSizes.billboard.height + labelHeight + space[4]}px;
+		padding-bottom: ${space[5]}px;
+		min-height: ${adSizes.billboard.height + labelHeight + space[5]}px;
 	}
 
 	&:not(.ad-slot--fluid).ad-slot--rendered {
