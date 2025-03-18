@@ -1,6 +1,6 @@
 import { css, type Interpolation } from '@emotion/react';
 import type { SlotName } from '@guardian/commercial';
-import { adSizes, constants } from '@guardian/commercial';
+import { adSizes } from '@guardian/commercial';
 import {
 	between,
 	breakpoints,
@@ -92,6 +92,10 @@ type Props = DefaultProps &
 
 const halfPageAdHeight = adSizes.halfPage.height;
 
+/** Calculates the minimum height for an ad slot. Used to avoid CLS */
+const getMinHeight = (adHeight: number, padding?: number): number =>
+	adHeight + labelHeight + (padding ?? 0);
+
 const outOfPageStyles = css`
 	height: 0;
 `;
@@ -111,7 +115,7 @@ const topAboveNavContainerStyles = css`
  * render first, we need to reserve space for the ad to avoid CLS.
  */
 const showcaseRightColumnContainerStyles = css`
-	min-height: ${halfPageAdHeight + labelHeight}px;
+	min-height: ${getMinHeight(halfPageAdHeight)}px;
 `;
 
 const showcaseRightColumnStyles = css`
@@ -131,7 +135,7 @@ const merchandisingAdContainerStyles = css`
 
 const merchandisingAdStyles = css`
 	position: relative;
-	min-height: ${adSizes.billboard.height + labelHeight + space[3]}px;
+	min-height: ${getMinHeight(adSizes.billboard.height, space[3])}px;
 	margin: ${space[3]}px auto;
 	max-width: ${breakpoints['wide']}px;
 	overflow: hidden;
@@ -140,7 +144,7 @@ const merchandisingAdStyles = css`
 	${from.desktop} {
 		margin: 0;
 		padding-bottom: ${space[5]}px;
-		min-height: ${adSizes.billboard.height + labelHeight + space[5]}px;
+		min-height: ${getMinHeight(adSizes.billboard.height, space[5])}px;
 	}
 
 	&:not(.ad-slot--fluid).ad-slot--rendered {
@@ -173,7 +177,7 @@ const liveblogInlineContainerStyles = css`
 
 const liveblogInlineAdStyles = css`
 	position: relative;
-	min-height: ${adSizes.mpu.height + labelHeight}px;
+	min-height: ${getMinHeight(adSizes.mpu.height)}px;
 	background-color: ${schemedPalette('--ad-background-article-inner')};
 
 	${until.tablet} {
@@ -183,7 +187,7 @@ const liveblogInlineAdStyles = css`
 
 const liveblogInlineMobileAdStyles = css`
 	position: relative;
-	min-height: ${adSizes.outstreamMobile.height + labelHeight}px;
+	min-height: ${getMinHeight(adSizes.outstreamMobile.height)}px;
 
 	${from.tablet} {
 		display: none;
@@ -192,7 +196,7 @@ const liveblogInlineMobileAdStyles = css`
 
 const mobileFrontAdStyles = css`
 	position: relative;
-	min-height: ${adSizes.mpu.height + labelHeight + space[3]}px;
+	min-height: ${getMinHeight(adSizes.mpu.height, space[3])}px;
 	min-width: 300px;
 	width: 300px;
 	margin: ${space[3]}px auto;
@@ -203,22 +207,16 @@ const mobileFrontAdStyles = css`
 	}
 `;
 
-const frontsBannerPaddingHeight = space[6];
-const frontsBannerMinHeightTablet =
-	adSizes.leaderboard.height + labelHeight + frontsBannerPaddingHeight;
-const frontsBannerMinHeight =
-	adSizes.billboard.height + labelHeight + frontsBannerPaddingHeight;
-
 const frontsBannerAdTopContainerStyles = css`
 	display: none;
 	${from.tablet} {
 		display: flex;
 		justify-content: center;
-		min-height: ${frontsBannerMinHeightTablet}px;
+		min-height: ${getMinHeight(adSizes.leaderboard.height, space[6])}px;
 		background-color: ${schemedPalette('--ad-background')};
 	}
 	${from.desktop} {
-		min-height: ${frontsBannerMinHeight}px;
+		min-height: ${getMinHeight(adSizes.billboard.height, space[6])}px;
 	}
 `;
 
@@ -243,11 +241,10 @@ const frontsBannerCollapseStyles = css`
 
 const frontsBannerAdStyles = css`
 	position: relative;
-	min-height: ${frontsBannerMinHeightTablet}px;
+	min-height: ${getMinHeight(adSizes.leaderboard.height, space[6])}px;
 	max-width: ${adSizes.leaderboard.width}px;
-	max-height: ${adSizes.leaderboard.height + labelHeight}px;
 	overflow: hidden;
-	padding-bottom: ${frontsBannerPaddingHeight}px;
+	padding-bottom: ${space[6]}px;
 
 	${from.desktop} {
 		/* No banner should be taller than 600px */
@@ -258,7 +255,7 @@ const frontsBannerAdStyles = css`
 
 const articleEndAdStyles = css`
 	position: relative;
-	min-height: ${adSizes.outstreamDesktop.height + labelHeight}px;
+	min-height: ${getMinHeight(adSizes.outstreamDesktop.height)}px;
 
 	&.ad-slot--fluid {
 		min-height: 450px;
@@ -267,7 +264,7 @@ const articleEndAdStyles = css`
 
 const mostPopAdStyles = css`
 	position: relative;
-	min-height: ${adSizes.mpu.height + labelHeight}px;
+	min-height: ${getMinHeight(adSizes.mpu.height)}px;
 	min-width: ${adSizes.mpu.width}px;
 	max-width: ${adSizes.mpu.width}px;
 	text-align: center;
@@ -281,7 +278,7 @@ const mostPopAdStyles = css`
 `;
 
 const mostPopContainerStyles = css`
-	min-height: ${adSizes.mpu.height + labelHeight}px;
+	min-height: ${getMinHeight(adSizes.mpu.height)}px;
 	min-width: ${adSizes.mpu.width}px;
 	width: fit-content;
 	max-width: ${adSizes.mpu.width}px;
@@ -295,7 +292,7 @@ const mostPopContainerStyles = css`
 `;
 
 const liveBlogTopAdStyles = css`
-	min-height: ${adSizes.mpu.height + labelHeight}px;
+	min-height: ${getMinHeight(adSizes.mpu.height)}px;
 	min-width: ${adSizes.mpu.width}px;
 	width: fit-content;
 	max-width: ${adSizes.mpu.width}px;
@@ -383,7 +380,7 @@ const mobileStickyAdStylesFullWidth = css`
 `;
 
 const crosswordBannerMobileAdStyles = css`
-	min-height: ${adSizes.mobilesticky.height + constants.AD_LABEL_HEIGHT}px;
+	min-height: ${getMinHeight(adSizes.mobilesticky.height)}px;
 `;
 
 const AdSlotWrapper = ({
