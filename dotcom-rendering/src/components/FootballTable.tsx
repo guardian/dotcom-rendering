@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import { textSans14, until } from '@guardian/source/foundations';
 import { palette } from '../palette';
+import type { TeamResult } from './FootballTableForm';
+import { FootballTableForm } from './FootballTableForm';
 
 const tableStyles = css`
 	width: 100%;
@@ -25,6 +27,7 @@ const rowStyles = css`
 
 	td,
 	th {
+		vertical-align: middle;
 		padding: 0.5rem;
 	}
 `;
@@ -58,6 +61,7 @@ type Props = {
 		goalsAgainst: number;
 		goalDifference: number;
 		points: number;
+		results: TeamResult[];
 	}[];
 	linkToFullTable: boolean;
 };
@@ -156,6 +160,9 @@ export const FootballTable = ({
 					<th>
 						<abbr title="Points">Pts</abbr>
 					</th>
+					<th>
+						<abbr title="Form">Form</abbr>
+					</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -190,6 +197,11 @@ export const FootballTable = ({
 							>
 								{row.points}
 							</b>
+						</td>
+						<td>
+							<FootballTableForm
+								teamResults={row.results.slice(0, 5)}
+							/>
 						</td>
 					</tr>
 				))}
