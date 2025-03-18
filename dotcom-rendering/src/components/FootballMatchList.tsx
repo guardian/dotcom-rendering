@@ -352,8 +352,8 @@ const Scores = ({
 	homeScore,
 	awayScore,
 }: {
-	homeScore: number;
-	awayScore: number;
+	homeScore?: number;
+	awayScore?: number;
 }) => (
 	<span
 		css={css`
