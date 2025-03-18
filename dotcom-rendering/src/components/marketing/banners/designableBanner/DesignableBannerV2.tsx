@@ -547,7 +547,7 @@ const styles = {
 		display: flex;
 		flex-direction: column;
 		position: relative;
-		padding: 0 10px;
+		padding: 0 10px 10px 10px;
 
 		${from.desktop} {
 			display: grid;
@@ -555,13 +555,7 @@ const styles = {
 			grid-template-rows: auto 1fr auto;
 			width: 100%;
 			max-width: 1300px;
-			padding: 0 ${space[5]}px;
 			column-gap: ${space[8]}px;
-			margin-bottom: ${space[4]}px;
-		}
-
-		${until.tablet} {
-			margin-bottom: ${space[1]}px;
 		}
 	`,
 	verticalLine: css`
@@ -697,7 +691,7 @@ const styles = {
 			height: 41px;
 			justify-content: center;
 			align-items: center;
-			margin-top: ${space[6]}px;
+			margin-top: ${space[9]}px;
 			margin-right: -${space[6]}px;
 		}
 	`,
