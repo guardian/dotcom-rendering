@@ -65,9 +65,10 @@ const CompetitionName = ({ children }: { children: ReactNode }) => (
 
 type Props = {
 	tables: FootballTableData[];
+	guardianBaseUrl: string;
 };
 
-export const FootballTableList = ({ tables }: Props) => (
+export const FootballTableList = ({ tables, guardianBaseUrl }: Props) => (
 	<Stack space={9}>
 		{tables.map((table) => (
 			<section
@@ -76,7 +77,7 @@ export const FootballTableList = ({ tables }: Props) => (
 			>
 				<CompetitionName>
 					<a
-						href={table.competition.url}
+						href={`${guardianBaseUrl}${table.competition.url}`}
 						css={css`
 							text-decoration: none;
 							color: inherit;
@@ -93,7 +94,10 @@ export const FootballTableList = ({ tables }: Props) => (
 						grid-column: centre-column-start / centre-column-end;
 					`}
 				>
-					<FootballTable table={table} />
+					<FootballTable
+						table={table}
+						guardianBaseUrl={guardianBaseUrl}
+					/>
 				</div>
 			</section>
 		))}

@@ -31,6 +31,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
 	args: {
+		guardianBaseUrl: 'https://www.theguardian.com',
 		table: {
 			competition: {
 				name: 'Premier League',

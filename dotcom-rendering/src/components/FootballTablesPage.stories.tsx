@@ -23,5 +23,6 @@ export const Default = {
 			{ ...TableDefault.args.table },
 		],
 		renderAds: true,
+		guardianBaseUrl: 'https://www.theguardian.com',
 	},
 } satisfies Story;

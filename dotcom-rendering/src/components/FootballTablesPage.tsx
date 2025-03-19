@@ -19,6 +19,7 @@ type Props = {
 	goToCompetitionSpecificPage: (tag: string) => void;
 	tables: FootballTableData[];
 	renderAds: boolean;
+	guardianBaseUrl: string;
 };
 
 export const FootballTablesPage = ({
@@ -27,6 +28,7 @@ export const FootballTablesPage = ({
 	goToCompetitionSpecificPage,
 	tables,
 	renderAds,
+	guardianBaseUrl,
 }: Props) => (
 	<main
 		id="maincontent"
@@ -90,13 +92,16 @@ export const FootballTablesPage = ({
 				position: relative;
 			`}
 		>
-			<FootballTableList tables={tables} />
+			<FootballTableList
+				tables={tables}
+				guardianBaseUrl={guardianBaseUrl}
+			/>
 		</div>
 		{renderAds && (
 			<div
 				css={css`
 					${grid.column.right}
-					// ToDo: review what line to grow the ad to
+					/**  ToDo: review what line to grow the ad to */
 					/** This allows the ad to grow beyond the third row content (up to line 5) */
 					grid-row: 1 / 5;
 					${until.desktop} {
