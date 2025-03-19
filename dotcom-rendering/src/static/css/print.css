@@ -2,12 +2,3 @@
 	display: none !important;
 	color: #000000;
 }
-
-/**
- * Hide scroll depth markers when printing as these are absolutely positioned
- * based on the initial content height and are still present when content has
- * been hidden in the print layout, causing blank pages to be printed.
- */
-.scroll-depth-marker {
-	display: none;
-}
