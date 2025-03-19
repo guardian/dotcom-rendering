@@ -4,7 +4,7 @@ import {
 	textSans14,
 	textSansBold14,
 } from '@guardian/source/foundations';
-import { SvgClock } from '@guardian/source/react-components';
+import { SvgClockFilled } from '@guardian/source/react-components';
 
 type Props = {
 	frequency: string;
@@ -29,7 +29,7 @@ export const NewsletterFrequency = ({ frequency }: Props) => {
 
 	return (
 		<div css={mainStyles}>
-			<SvgClock size="xsmall" />
+			<SvgClockFilled size="xsmall" />
 
 			<span css={spanStyles}>
 				You'll receive this newsletter <strong>{freq}</strong>
