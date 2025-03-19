@@ -1,7 +1,14 @@
 import type { RequestHandler } from 'express';
-import type { FEFootballCompetition } from '../feFootballDataPage';
+import type {
+	FootballMatchListPage,
+	FootballTablesPage,
+	Region,
+} from '../footballDataPage';
 import type { FootballMatchKind } from '../footballMatches';
 import { getParserErrorMessage, parse } from '../footballMatches';
+import type { FEFootballCompetition } from '../frontend/feFootballDataPage';
+import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
+import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import { Pillar } from '../lib/articleFormat';
 import { extractNAV } from '../model/extract-nav';
 import {
@@ -11,13 +18,6 @@ import {
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderFootballDataPage } from './render.footballDataPage.web';
-import { FEFootballMatchListPage } from '../feFootballMatchListPage';
-import { FEFootballTablesPage } from '../feFootballTablesPage';
-import {
-	FootballMatchListPage,
-	FootballTablesPage,
-	Region,
-} from '../footballDataPage';
 
 const decidePageKind = (pageId: string): FootballMatchKind => {
 	if (pageId.includes('live')) {

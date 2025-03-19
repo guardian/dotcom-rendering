@@ -9,7 +9,7 @@ const { configOverrides } = require('../../fixtures/config-overrides');
 const { switchOverrides } = require('../../fixtures/switch-overrides');
 const {
 	validateAsArticleType,
-	validateAsFootballDataPageType,
+	validateAsFootballMatchListPage,
 } = require('../../src/model/validate');
 
 const root = resolve(__dirname, '..', '..');
@@ -324,14 +324,14 @@ requests.push(
 			delete json.config.isAdFree;
 			delete json.config.userBenefitsApiUrl;
 
-			const footballDataPageData = validateAsFootballDataPageType(json);
+			const footballMatchListPage = validateAsFootballMatchListPage(json);
 
 			// Write the new frontend fixture data
 			const contents = `${HEADER}
-			import type { FEFootballDataPage } from '../../src/feFootballDataPage';
+			import type { FEFootballMatchListPage } from '../../src/frontend/FEFootballMatchListPage';
 
-			export const footballData: FEFootballDataPage = ${JSON.stringify(
-				footballDataPageData,
+			export const footballData: FEFootballMatchListPage = ${JSON.stringify(
+				footballMatchListPage,
 				null,
 				4,
 			)}

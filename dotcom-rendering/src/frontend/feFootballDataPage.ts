@@ -1,7 +1,7 @@
-import { FEFrontConfig } from './frontend/feFront';
-import { EditionId } from './lib/edition';
-import { FooterType } from './types/footer';
-import { FENavType } from './types/frontend';
+import type { EditionId } from '../lib/edition';
+import type { FooterType } from '../types/footer';
+import type { FENavType } from '../types/frontend';
+import type { FEFrontConfig } from './feFront';
 
 export type FERound = {
 	roundNumber: string;

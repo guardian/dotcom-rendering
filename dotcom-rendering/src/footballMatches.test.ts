@@ -7,12 +7,12 @@ import {
 	matchFixture,
 	matchResult,
 } from '../fixtures/manual/footballMatches';
+import { parse } from './footballMatches';
 import type {
 	FEFootballMatch,
 	FEMatchByDateAndCompetition,
 	FEResult,
-} from './feFootballDataPage';
-import { parse } from './footballMatches';
+} from './frontend/feFootballMatchListPage';
 import { errorOrThrow, okOrThrow } from './lib/result';
 
 const withMatches = (

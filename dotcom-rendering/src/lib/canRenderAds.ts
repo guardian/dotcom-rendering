@@ -1,4 +1,4 @@
-import type { FootballMatchListPage } from '../footballMatches';
+import type { FootballMatchListPage } from '../footballDataPage';
 import type { ArticleDeprecated } from '../types/article';
 import type { Front } from '../types/front';
 import type { RenderingTarget } from '../types/renderingTarget';

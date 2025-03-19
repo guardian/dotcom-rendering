@@ -1,4 +1,4 @@
-import { FEFootballDataPage, FERound } from './feFootballDataPage';
+import type { FEFootballDataPage, FERound } from './feFootballDataPage';
 
 export type FECompetitionSummary = {
 	id: string;

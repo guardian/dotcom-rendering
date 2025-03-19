@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEFootballDataPage } from '../../src/feFootballDataPage';
+import type { FEFootballMatchListPage } from '../../src/frontend/feFootballMatchListPage';
 
-export const footballData: FEFootballDataPage = {
+export const footballData: FEFootballMatchListPage = {
 	matchesList: [
 		{
 			date: '2025-03-03',
@@ -24,6 +24,7 @@ export const footballData: FEFootballDataPage = {
 						url: '/football/serieafootball',
 						fullName: 'Serie A',
 						nation: 'European',
+						dividers: [],
 					},
 					matches: [
 						{
@@ -59,6 +60,7 @@ export const footballData: FEFootballDataPage = {
 						url: '/football/laligafootball',
 						fullName: 'La Liga',
 						nation: 'European',
+						dividers: [],
 					},
 					matches: [
 						{
@@ -94,6 +96,7 @@ export const footballData: FEFootballDataPage = {
 						url: '/football/fa-cup',
 						fullName: 'FA Cup',
 						nation: 'English',
+						dividers: [],
 					},
 					matches: [
 						{
