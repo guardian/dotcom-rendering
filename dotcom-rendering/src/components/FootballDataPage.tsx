@@ -1,6 +1,6 @@
 import { Global } from '@emotion/react';
 import { StrictMode } from 'react';
-import type { FootballMatchListPage } from '../footballMatches';
+import type { FootballMatchListPage } from '../footballDataPage';
 import { FootballDataPageLayout } from '../layouts/FootballDataPageLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';

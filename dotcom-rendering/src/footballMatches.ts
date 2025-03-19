@@ -6,12 +6,8 @@ import type {
 	FEMatchByDateAndCompetition,
 	FEMatchDay,
 	FEResult,
-} from './feFootballMatchListPage';
-import type { EditionId } from './lib/edition';
+} from './frontend/feFootballMatchListPage';
 import { error, ok, type Result } from './lib/result';
-import type { NavType } from './model/extract-nav';
-import type { FooterType } from './types/footer';
-import { FEFootballPageConfig } from './feFootballDataPage';
 
 export type TeamScore = {
 	name: string;

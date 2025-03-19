@@ -15,7 +15,8 @@ const program = TJS.getProgramFromFiles(
 		path.resolve(`${root}/src/frontend/feTagPage.ts`),
 		path.resolve(`${root}/src/types/newslettersPage.ts`),
 		path.resolve(`${root}/src/types/editionsCrossword.ts`),
-		path.resolve(`${root}/src/feFootballDataPage.ts`),
+		path.resolve(`${root}/src/frontend/feFootballMatchListPage.ts`),
+		path.resolve(`${root}/src/frontend/feFootballTablesPage.ts`),
 	],
 	{
 		skipLibCheck: true,
@@ -59,12 +60,12 @@ const schemas = [
 		file: `${root}/src/model/editions-crossword-schema.json`,
 	},
 	{
-		typeName: 'FEFootballDataPage',
-		file: `${root}/src/model/fe-football-data-page-schema.json`,
+		typeName: 'FEFootballMatchListPage',
+		file: `${root}/src/frontend/schemas/feFootballMatchListPage.json`,
 	},
 	{
 		typeName: 'FEFootballTablesPage',
-		file: `${root}/src/model/fe-football-tabes-page-schema.json`,
+		file: `${root}/src/frontend/schemas/feFootballTablesPage.json`,
 	},
 ];
 

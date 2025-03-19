@@ -2,8 +2,12 @@ import { isObject, isString } from '@guardian/libs';
 import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
+import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
+import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import type { FEFront } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
+import footballMatchListPageSchema from '../frontend/schemas/feFootballMatchListPage.json';
+import footballTablesPageSchema from '../frontend/schemas/feFootballTablesPage.json';
 import frontSchema from '../frontend/schemas/feFront.json';
 import tagPageSchema from '../frontend/schemas/feTagPage.json';
 import type { Block } from '../types/blocks';
@@ -13,11 +17,7 @@ import type { FENewslettersPageType } from '../types/newslettersPage';
 import articleSchema from './article-schema.json';
 import blockSchema from './block-schema.json';
 import editionsCrosswordSchema from './editions-crossword-schema.json';
-import footballMatchListPageSchema from './fe-football-data-page-schema.json';
-import footballTablesPageSchema from './fe-football-tabes-page-schema.json';
 import newslettersPageSchema from './newsletter-page-schema.json';
-import { FEFootballMatchListPage } from 'src/feFootballMatchListPage';
-import { FEFootballTablesPage } from 'src/feFootballTablesPage';
 
 const options: Options = {
 	verbose: false,

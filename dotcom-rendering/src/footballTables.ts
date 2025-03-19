@@ -1,4 +1,6 @@
 import { listParse, type ParserError, type TeamScore } from './footballMatches';
+import { FECompetitionSummary } from './frontend/feFootballMatchListPage';
+import { FEFootballTable } from './frontend/feFootballTablesPage';
 import { error, ok, Result } from './lib/result';
 
 type Competition = {
@@ -50,26 +52,8 @@ const parseCompetition = (
 	});
 };
 
-const parseEntry = (
-	tableEntry: FELeagueTableEntry,
-): Result<ParserError, Entry> => {
-	return ok({
-		position: tableEntry.team.rank,
-		team: { name: tableEntry.team.name, id: tableEntry.team.id, url: '' }, // TODO: @Configuration.staticSport.path/football/crests/60/@{entry.team.id}.png
-		gamesPlayed: tableEntry.team.total.played,
-		won: tableEntry.team.total.won,
-		drawn: tableEntry.team.total.drawn,
-		lost: tableEntry.team.total.lost,
-		goalsFor: tableEntry.team.total.goalsFor,
-		goalsAgainst: tableEntry.team.total.goalsAgainst,
-		goalDifference: tableEntry.team.goalDifference,
-		points: tableEntry.team.points,
-		results: [], // TODO: calculate team results
-	});
-};
-
 const parseFootballTables = (
-	table: EFFootballTable,
+	table: FEFootballTable,
 ): Result<string, FootballTable> => {
 	const competitions = parseCompetition(table.competition);
 	if (competitions.kind === 'error') {
@@ -84,5 +68,5 @@ const parseFootballTables = (
 };
 
 export const parse: (
-	frontendData: EFFootballTable[],
+	frontendData: FEFootballTable[],
 ) => Result<string, FootballTables> = listParse(parseFootballTables);
