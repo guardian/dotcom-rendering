@@ -7,13 +7,13 @@ import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
-import type { DCRFootballDataPage } from '../footballMatches';
+import type { FootballMatchListPage } from '../footballMatches';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
-	footballData: DCRFootballDataPage;
+	footballData: FootballMatchListPage;
 }
 
 export const FootballDataPageLayout = ({ footballData }: Props) => {

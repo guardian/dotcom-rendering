@@ -1,11 +1,7 @@
 import { isString } from '@guardian/libs';
 import { ConfigProvider } from '../components/ConfigContext';
 import { FootballDataPage } from '../components/FootballDataPage';
-import type {
-	DCRFootballDataPage,
-	FootballMatchKind,
-	Region,
-} from '../footballMatches';
+import type { FootballMatchKind } from '../footballMatches';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -17,6 +13,7 @@ import { polyfillIO } from '../lib/polyfill.io';
 import { createGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
 import { htmlPageTemplate } from './htmlPageTemplate';
+import { FootballMatchListPage, Region } from '../footballDataPage';
 
 const fromTheGuardian =
 	'from the Guardian, the world&#x27;s leading liberal voice';
@@ -60,7 +57,7 @@ const decideTitle = (
 	}
 };
 
-export const renderFootballDataPage = (footballData: DCRFootballDataPage) => {
+export const renderFootballDataPage = (footballData: FootballMatchListPage) => {
 	const renderingTarget = 'Web';
 	const config: Config = {
 		renderingTarget,
