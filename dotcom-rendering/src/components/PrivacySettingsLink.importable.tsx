@@ -62,7 +62,7 @@ export const PrivacySettingsLink = ({ extraClasses }: Props) => {
 			}}
 		>
 			{framework === 'usnat'
-				? 'California resident – Do Not Sell'
+				? 'California resident – Do Not Sell or Share'
 				: 'Privacy settings'}
 		</ButtonLink>
 	);
