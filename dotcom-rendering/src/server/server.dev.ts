@@ -14,7 +14,7 @@ import {
 } from './handler.article.web';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import {
-	handleFootballDataPage,
+	handleFootballMatchListPage,
 	handleFootballTablesPage,
 } from './handler.footballDataPage.web';
 import {
@@ -98,7 +98,7 @@ export const devServer = (): Handler => {
 			case 'EditionsCrossword':
 				return handleEditionsCrossword(req, res, next);
 			case 'FootballDataPage':
-				return handleFootballDataPage(req, res, next);
+				return handleFootballMatchListPage(req, res, next);
 			case 'FootballTablesPage':
 				return handleFootballTablesPage(req, res, next);
 			default: {

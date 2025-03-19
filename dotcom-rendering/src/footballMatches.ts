@@ -3,15 +3,15 @@ import type {
 	FECompetitionMatch,
 	FEFixture,
 	FEFootballMatch,
-	FEFootballPageConfig,
 	FEMatchByDateAndCompetition,
 	FEMatchDay,
 	FEResult,
-} from './feFootballDataPage';
+} from './feFootballMatchListPage';
 import type { EditionId } from './lib/edition';
 import { error, ok, type Result } from './lib/result';
 import type { NavType } from './model/extract-nav';
 import type { FooterType } from './types/footer';
+import { FEFootballPageConfig } from './feFootballDataPage';
 
 export type TeamScore = {
 	name: string;
@@ -139,7 +139,7 @@ const oneOf =
 		return f(parsers, []);
 	};
 
-const listParse =
+export const listParse =
 	<E, A, B>(parser: (a: A) => Result<E, B>) =>
 	(input: A[]): Result<E, B[]> => {
 		const f = (toParse: A[], parsed: B[]): Result<E, B[]> => {
@@ -371,28 +371,6 @@ export const getParserErrorMessage = (parserError: ParserError): string => {
 export const parse: (
 	frontendData: FEMatchByDateAndCompetition[],
 ) => Result<ParserError, FootballMatches> = listParse(parseFootballDay);
-
-export type Region = {
-	name: string;
-	competitions: Array<{ url: string; name: string }>;
-};
-
-export type DCRFootballDataPage = {
-	matchesList: FootballMatches;
-	now: string;
-	kind: FootballMatchKind;
-	nextPage?: string;
-	previousPage?: string;
-	regions: Region[];
-	nav: NavType;
-	editionId: EditionId;
-	guardianBaseURL: string;
-	config: FEFootballPageConfig;
-	pageFooter: FooterType;
-	isAdFreeUser: boolean;
-	canonicalUrl?: string;
-	contributionsServiceUrl: string;
-};
 
 const cleanTeamName = (teamName: string): string => {
 	return teamName

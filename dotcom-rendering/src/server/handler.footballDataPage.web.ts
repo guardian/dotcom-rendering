@@ -1,25 +1,23 @@
 import type { RequestHandler } from 'express';
-import type {
-	FEFootballCompetition,
-	FEFootballDataPage,
-	FEFootballTablesPage,
-} from '../feFootballDataPage';
-import type {
-	DCRFootballDataPage,
-	FootballMatchKind,
-	Region,
-} from '../footballMatches';
+import type { FEFootballCompetition } from '../feFootballDataPage';
+import type { FootballMatchKind } from '../footballMatches';
 import { getParserErrorMessage, parse } from '../footballMatches';
-import type { DCRFootballTablesPage } from '../footballTables';
 import { Pillar } from '../lib/articleFormat';
 import { extractNAV } from '../model/extract-nav';
 import {
-	validateAsFootballDataPageType,
-	validateAsFootballTableDataPageType,
+	validateAsFootballMatchListPage,
+	validateAsFootballTablesPage,
 } from '../model/validate';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderFootballDataPage } from './render.footballDataPage.web';
+import { FEFootballMatchListPage } from '../feFootballMatchListPage';
+import { FEFootballTablesPage } from '../feFootballTablesPage';
+import {
+	FootballMatchListPage,
+	FootballTablesPage,
+	Region,
+} from '../footballDataPage';
 
 const decidePageKind = (pageId: string): FootballMatchKind => {
 	if (pageId.includes('live')) {
@@ -65,7 +63,9 @@ const parseFEFootballCompetitionRegions = (
 		.sort(sortRegionsFunction);
 };
 
-const parseFEFootballData = (data: FEFootballDataPage): DCRFootballDataPage => {
+const parseFEFootballMatchList = (
+	data: FEFootballMatchListPage,
+): FootballMatchListPage => {
 	const parsedMatchesList = parse(data.matchesList);
 
 	if (parsedMatchesList.kind === 'error') {
@@ -97,12 +97,12 @@ const parseFEFootballData = (data: FEFootballDataPage): DCRFootballDataPage => {
 	};
 };
 
-export const handleFootballDataPage: RequestHandler = ({ body }, res) => {
-	recordTypeAndPlatform('footballDataPage', 'web');
-	const footballDataValidated: FEFootballDataPage =
-		validateAsFootballDataPageType(body);
+export const handleFootballMatchListPage: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('footballMatchListPage', 'web');
+	const footballDataValidated: FEFootballMatchListPage =
+		validateAsFootballMatchListPage(body);
 
-	const parsedFootballData = parseFEFootballData(footballDataValidated);
+	const parsedFootballData = parseFEFootballMatchList(footballDataValidated);
 	const { html, prefetchScripts } =
 		renderFootballDataPage(parsedFootballData);
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
@@ -110,9 +110,10 @@ export const handleFootballDataPage: RequestHandler = ({ body }, res) => {
 
 const parseFEFootballTables = (
 	data: FEFootballTablesPage,
-): DCRFootballTablesPage => {
+): FootballTablesPage => {
 	return {
-		tables: [],
+		tables: [], // TODO: implement the parser for this
+		kind: 'Tables',
 		nextPage: data.nextPage,
 		previousPage: data.previousPage,
 		regions: parseFEFootballCompetitionRegions(data.filters),
@@ -132,11 +133,11 @@ const parseFEFootballTables = (
 
 export const handleFootballTablesPage: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('FootballTablesPage', 'web');
-	const footballDataValidated: FEFootballTablesPage =
-		validateAsFootballTableDataPageType(body);
+	const footballTablesPageValidated: FEFootballTablesPage =
+		validateAsFootballTablesPage(body);
 
 	// TODO: Implement this function
-	parseFEFootballTables(footballDataValidated);
+	parseFEFootballTables(footballTablesPageValidated);
 	const { html, prefetchScripts } = { html: '', prefetchScripts: [] };
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };

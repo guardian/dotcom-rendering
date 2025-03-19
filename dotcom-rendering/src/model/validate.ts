@@ -2,10 +2,6 @@ import { isObject, isString } from '@guardian/libs';
 import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
-import type {
-	FEFootballDataPage,
-	FEFootballTablesPage,
-} from '../feFootballDataPage';
 import type { FEFront } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
 import frontSchema from '../frontend/schemas/feFront.json';
@@ -17,9 +13,11 @@ import type { FENewslettersPageType } from '../types/newslettersPage';
 import articleSchema from './article-schema.json';
 import blockSchema from './block-schema.json';
 import editionsCrosswordSchema from './editions-crossword-schema.json';
-import footballDataPageSchema from './fe-football-data-page-schema.json';
+import footballMatchListPageSchema from './fe-football-data-page-schema.json';
 import footballTablesPageSchema from './fe-football-tabes-page-schema.json';
 import newslettersPageSchema from './newsletter-page-schema.json';
+import { FEFootballMatchListPage } from 'src/feFootballMatchListPage';
+import { FEFootballTablesPage } from 'src/feFootballTablesPage';
 
 const options: Options = {
 	verbose: false,
@@ -41,11 +39,11 @@ const validateBlock = ajv.compile<Block[]>(blockSchema);
 const validateEditionsCrossword = ajv.compile<FEEditionsCrosswords>(
 	editionsCrosswordSchema,
 );
-const validateFootballDataPage = ajv.compile<FEFootballDataPage>(
-	footballDataPageSchema,
+const validateFootballMatchListPage = ajv.compile<FEFootballMatchListPage>(
+	footballMatchListPageSchema,
 );
 
-const validateFootballTableDataPage = ajv.compile<FEFootballTablesPage>(
+const validateFootballTablesPage = ajv.compile<FEFootballTablesPage>(
 	footballTablesPageSchema,
 );
 
@@ -115,10 +113,10 @@ export const validateAsBlock = (data: unknown): Block[] => {
 	);
 };
 
-export const validateAsFootballDataPageType = (
+export const validateAsFootballMatchListPage = (
 	data: unknown,
-): FEFootballDataPage => {
-	if (validateFootballDataPage(data)) return data;
+): FEFootballMatchListPage => {
+	if (validateFootballMatchListPage(data)) return data;
 
 	const url =
 		isObject(data) && isObject(data.config) && isString(data.config.pageId)
@@ -127,14 +125,14 @@ export const validateAsFootballDataPageType = (
 
 	throw new TypeError(
 		`Unable to validate request body for url ${url}.\n
-            ${JSON.stringify(validateFootballDataPage.errors, null, 2)}`,
+            ${JSON.stringify(validateFootballMatchListPage.errors, null, 2)}`,
 	);
 };
 
-export const validateAsFootballTableDataPageType = (
+export const validateAsFootballTablesPage = (
 	data: unknown,
 ): FEFootballTablesPage => {
-	if (validateFootballTableDataPage(data)) return data;
+	if (validateFootballTablesPage(data)) return data;
 
 	const url =
 		isObject(data) && isObject(data.config) && isString(data.config.pageId)
@@ -143,6 +141,6 @@ export const validateAsFootballTableDataPageType = (
 
 	throw new TypeError(
 		`Unable to validate request body for url ${url}.\n
-            ${JSON.stringify(validateFootballDataPage.errors, null, 2)}`,
+            ${JSON.stringify(validateFootballMatchListPage.errors, null, 2)}`,
 	);
 };
