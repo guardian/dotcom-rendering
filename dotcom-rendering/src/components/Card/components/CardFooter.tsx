@@ -75,7 +75,7 @@ export const CardFooter = ({
 	commentCount,
 	cardBranding,
 	mainMedia,
-	isNewsletter = false,
+	isNewsletter,
 	shouldReserveSpace,
 }: Props) => {
 	if (showLivePlayable) return null;
@@ -91,7 +91,8 @@ export const CardFooter = ({
 					content={
 						<time>{secondsToDuration(mainMedia.duration)}</time>
 					}
-					icon={<SvgMediaControlsPlay />}
+					prefix="Video"
+					icon={<SvgMediaControlsPlay width={18} />}
 				/>
 			</footer>
 		);
@@ -102,7 +103,8 @@ export const CardFooter = ({
 			<footer css={contentStyles}>
 				<Pill
 					content={<time>{mainMedia.duration}</time>}
-					icon={<SvgMediaControlsPlay />}
+					prefix="Podcast"
+					icon={<SvgMediaControlsPlay width={18} />}
 				/>
 			</footer>
 		);
@@ -115,7 +117,6 @@ export const CardFooter = ({
 					content={mainMedia.count}
 					prefix="Gallery"
 					icon={<SvgCamera />}
-					iconSide="right"
 				/>
 			</footer>
 		);
