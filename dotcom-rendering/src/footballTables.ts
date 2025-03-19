@@ -1,4 +1,8 @@
-import { TeamScore } from './footballMatches';
+import type { FEFootballPageConfig } from './feFootballDataPage';
+import type { Region, TeamScore } from './footballMatches';
+import type { EditionId } from './lib/edition';
+import type { NavType } from './model/extract-nav';
+import type { FooterType } from './types/footer';
 
 type Competition = {
 	url: string;
@@ -33,3 +37,18 @@ type FootballTable = {
 };
 
 export type FootballTables = FootballTable[];
+
+export type DCRFootballTablesPage = {
+	tables: FootballTables;
+	nextPage?: string;
+	previousPage?: string;
+	regions: Region[];
+	nav: NavType;
+	editionId: EditionId;
+	guardianBaseURL: string;
+	config: FEFootballPageConfig;
+	pageFooter: FooterType;
+	isAdFreeUser: boolean;
+	canonicalUrl?: string;
+	contributionsServiceUrl: string;
+};
