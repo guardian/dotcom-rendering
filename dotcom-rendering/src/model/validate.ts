@@ -2,7 +2,10 @@ import { isObject, isString } from '@guardian/libs';
 import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
-import type { FEFootballDataPage } from '../feFootballDataPage';
+import type {
+	FEFootballDataPage,
+	FEFootballTablesPage,
+} from '../feFootballDataPage';
 import type { FEFront } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
 import frontSchema from '../frontend/schemas/feFront.json';
@@ -15,6 +18,7 @@ import articleSchema from './article-schema.json';
 import blockSchema from './block-schema.json';
 import editionsCrosswordSchema from './editions-crossword-schema.json';
 import footballDataPageSchema from './fe-football-data-page-schema.json';
+import footballTablesPageSchema from './fe-football-tabes-page-schema.json';
 import newslettersPageSchema from './newsletter-page-schema.json';
 
 const options: Options = {
@@ -39,6 +43,10 @@ const validateEditionsCrossword = ajv.compile<FEEditionsCrosswords>(
 );
 const validateFootballDataPage = ajv.compile<FEFootballDataPage>(
 	footballDataPageSchema,
+);
+
+const validateFootballTableDataPage = ajv.compile<FEFootballTablesPage>(
+	footballTablesPageSchema,
 );
 
 export const validateAsArticleType = (data: unknown): FEArticleType => {
@@ -111,6 +119,22 @@ export const validateAsFootballDataPageType = (
 	data: unknown,
 ): FEFootballDataPage => {
 	if (validateFootballDataPage(data)) return data;
+
+	const url =
+		isObject(data) && isObject(data.config) && isString(data.config.pageId)
+			? data.config.pageId
+			: 'unknown url';
+
+	throw new TypeError(
+		`Unable to validate request body for url ${url}.\n
+            ${JSON.stringify(validateFootballDataPage.errors, null, 2)}`,
+	);
+};
+
+export const validateAsFootballTableDataPageType = (
+	data: unknown,
+): FEFootballTablesPage => {
+	if (validateFootballTableDataPage(data)) return data;
 
 	const url =
 		isObject(data) && isObject(data.config) && isString(data.config.pageId)

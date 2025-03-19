@@ -62,6 +62,10 @@ const schemas = [
 		typeName: 'FEFootballDataPage',
 		file: `${root}/src/model/fe-football-data-page-schema.json`,
 	},
+	{
+		typeName: 'FEFootballTablesPage',
+		file: `${root}/src/model/fe-football-tabes-page-schema.json`,
+	},
 ];
 
 /**

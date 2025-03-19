@@ -2,6 +2,7 @@ import type { RequestHandler } from 'express';
 import type {
 	FEFootballCompetition,
 	FEFootballDataPage,
+	FEFootballTablesPage,
 } from '../feFootballDataPage';
 import type {
 	DCRFootballDataPage,
@@ -11,7 +12,10 @@ import type {
 import { getParserErrorMessage, parse } from '../footballMatches';
 import { Pillar } from '../lib/articleFormat';
 import { extractNAV } from '../model/extract-nav';
-import { validateAsFootballDataPageType } from '../model/validate';
+import {
+	validateAsFootballDataPageType,
+	validateAsFootballTableDataPageType,
+} from '../model/validate';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderFootballDataPage } from './render.footballDataPage.web';
@@ -100,5 +104,18 @@ export const handleFootballDataPage: RequestHandler = ({ body }, res) => {
 	const parsedFootballData = parseFEFootballData(footballDataValidated);
 	const { html, prefetchScripts } =
 		renderFootballDataPage(parsedFootballData);
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
+};
+
+const parseFEFootballTables = (data: FEFootballTablesPage) => {};
+
+export const handleFootballTablesPage: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('FootballTablesPage', 'web');
+	const footballDataValidated: FEFootballTablesPage =
+		validateAsFootballTableDataPageType(body);
+
+	// TODO: Implement this function
+	parseFEFootballTables(footballDataValidated);
+	const { html, prefetchScripts } = { html: '', prefetchScripts: [] };
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
