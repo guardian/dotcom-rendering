@@ -10,6 +10,7 @@ import type {
 	Region,
 } from '../footballMatches';
 import { getParserErrorMessage, parse } from '../footballMatches';
+import type { DCRFootballTablesPage } from '../footballTables';
 import { Pillar } from '../lib/articleFormat';
 import { extractNAV } from '../model/extract-nav';
 import {
@@ -19,7 +20,6 @@ import {
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderFootballDataPage } from './render.footballDataPage.web';
-import { FootballTables } from 'src/footballTables';
 
 const decidePageKind = (pageId: string): FootballMatchKind => {
 	if (pageId.includes('live')) {
@@ -108,8 +108,26 @@ export const handleFootballDataPage: RequestHandler = ({ body }, res) => {
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
-const parseFEFootballTables = (data: FEFootballTablesPage): FootballTables => {
-	return [];
+const parseFEFootballTables = (
+	data: FEFootballTablesPage,
+): DCRFootballTablesPage => {
+	return {
+		tables: [],
+		nextPage: data.nextPage,
+		previousPage: data.previousPage,
+		regions: parseFEFootballCompetitionRegions(data.filters),
+		nav: {
+			...extractNAV(data.nav),
+			selectedPillar: Pillar.Sport,
+		},
+		editionId: data.editionId,
+		guardianBaseURL: data.guardianBaseURL,
+		config: data.config,
+		pageFooter: data.pageFooter,
+		isAdFreeUser: data.isAdFreeUser,
+		canonicalUrl: data.canonicalUrl,
+		contributionsServiceUrl: data.contributionsServiceUrl,
+	};
 };
 
 export const handleFootballTablesPage: RequestHandler = ({ body }, res) => {
