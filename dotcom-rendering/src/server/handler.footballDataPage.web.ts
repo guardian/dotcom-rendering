@@ -19,6 +19,7 @@ import {
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderFootballDataPage } from './render.footballDataPage.web';
+import { FootballTables } from 'src/footballTables';
 
 const decidePageKind = (pageId: string): FootballMatchKind => {
 	if (pageId.includes('live')) {
@@ -107,7 +108,9 @@ export const handleFootballDataPage: RequestHandler = ({ body }, res) => {
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
-const parseFEFootballTables = (data: FEFootballTablesPage) => {};
+const parseFEFootballTables = (data: FEFootballTablesPage): FootballTables => {
+	return [];
+};
 
 export const handleFootballTablesPage: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('FootballTablesPage', 'web');
