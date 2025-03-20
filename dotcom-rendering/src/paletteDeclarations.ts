@@ -6254,6 +6254,10 @@ const paletteColours = {
 		light: cricketScoreboardLinkText,
 		dark: cricketScoreboardLinkText,
 	},
+	'--cricket-scorecard-divider': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
+	},
 	'--crossword-anagram-helper-background': {
 		light: crosswordAnagramHelperBackgroundLight,
 		dark: crosswordAnagramHelperBackgroundDark,

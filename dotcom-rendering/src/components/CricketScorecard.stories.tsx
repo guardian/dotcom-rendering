@@ -27,6 +27,19 @@ type Story = StoryObj<typeof CricketScorecard>;
 export const defaultStory: Story = {
 	name: 'Cricket Scorecard',
 	args: {
+		inningsTotals: {
+			runs: 254,
+			overs: '49.0',
+			extras: 8,
+			wickets: 7,
+		},
+		extras: {
+			byes: 1,
+			legByes: 2,
+			wides: 5,
+			noBalls: 0,
+			penalties: 0,
+		},
 		batters: [
 			{
 				name: 'Rohit Sharma',

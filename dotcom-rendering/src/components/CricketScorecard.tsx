@@ -4,6 +4,7 @@ import {
 	textSans14,
 	textSansBold14,
 } from '@guardian/source/foundations';
+import type { ReactNode } from 'react';
 import { palette } from '../palette';
 
 const tableStyles = css`
@@ -18,6 +19,7 @@ const tableStyles = css`
 		background: ${palette('--table-block-background')};
 	}
 
+	strong,
 	th {
 		${textSansBold14}
 	}
@@ -33,6 +35,23 @@ const tableStyles = css`
 		border-top: 0.0625rem solid ${palette('--football-match-list-border')};
 	}
 `;
+
+const getExtrasDescription = ({
+	byes,
+	legByes,
+	wides,
+	noBalls,
+	penalties,
+}: Extras): ReactNode => (
+	// Return HTML because we might be able to give these more accessible descriptions
+	<>
+		{byes > 0 && `${byes}b `}
+		{legByes > 0 && `${legByes}lb `}
+		{wides > 0 && `${wides}w `}
+		{noBalls > 0 && `${noBalls}nb `}
+		{penalties > 0 && `${penalties}p`}
+	</>
+);
 
 type BowlerData = {
 	name: string;
@@ -50,6 +69,21 @@ type BatterData = {
 	fours: number;
 	sixes: number;
 	howOut: string;
+};
+
+type Extras = {
+	byes: number;
+	legByes: number;
+	noBalls: number;
+	penalties: number;
+	wides: number;
+};
+
+type InningsTotals = {
+	runs: number;
+	overs: string;
+	wickets: number;
+	extras: number;
 };
 
 type FallOfWicketData = {
@@ -85,7 +119,15 @@ const Bowling = ({ bowlers }: { bowlers: BowlerData[] }) => (
 	</table>
 );
 
-const Batting = ({ batters }: { batters: BatterData[] }) => (
+const Batting = ({
+	batters,
+	extras,
+	inningsTotals,
+}: {
+	batters: BatterData[];
+	extras: Extras;
+	inningsTotals: InningsTotals;
+}) => (
 	<table css={tableStyles}>
 		<thead>
 			<tr>
@@ -99,7 +141,9 @@ const Batting = ({ batters }: { batters: BatterData[] }) => (
 		<tbody>
 			{batters.map((batter) => (
 				<tr key={batter.name}>
-					<td>{batter.name}</td>
+					<td>
+						<strong>{batter.name}</strong>
+					</td>
 					<td>{batter.howOut}</td>
 					<td>{batter.runs}</td>
 					<td>{batter.ballsFaced}</td>
@@ -107,6 +151,34 @@ const Batting = ({ batters }: { batters: BatterData[] }) => (
 					<td>{batter.sixes}</td>
 				</tr>
 			))}
+			<tr
+				css={css`
+					td {
+						border-top: 0.0625rem dashed
+							${palette('--cricket-scorecard-divider')};
+					}
+				`}
+			>
+				<td>
+					<strong>Extras</strong>
+				</td>
+				<td>{getExtrasDescription(extras)}</td>
+				<td colSpan={4}>{inningsTotals.extras}</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>Total</strong>
+				</td>
+				<td>
+					<strong>for {inningsTotals.wickets}</strong>
+				</td>
+				<td>
+					<strong>{inningsTotals.runs}</strong>
+				</td>
+				<td colSpan={3}>
+					<strong>{inningsTotals.overs} overs</strong>
+				</td>
+			</tr>
 		</tbody>
 	</table>
 );
@@ -137,16 +209,24 @@ const FallOfWickets = ({
 type Props = {
 	bowlers: BowlerData[];
 	batters: BatterData[];
+	extras: Extras;
+	inningsTotals: InningsTotals;
 	fallOfWickets: FallOfWicketData[];
 };
 
 export const CricketScorecard = ({
 	bowlers,
 	batters,
+	extras,
+	inningsTotals,
 	fallOfWickets,
 }: Props) => (
 	<>
-		<Batting batters={batters} />
+		<Batting
+			batters={batters}
+			extras={extras}
+			inningsTotals={inningsTotals}
+		/>
 		<Bowling bowlers={bowlers} />
 		<FallOfWickets fallOfWickets={fallOfWickets} />
 	</>
