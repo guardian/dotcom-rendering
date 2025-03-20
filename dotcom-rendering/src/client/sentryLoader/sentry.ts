@@ -56,7 +56,7 @@ if (
 	Sentry.setTag('dcr.bundle', dcrJavascriptBundle('Variant'));
 }
 
-export const reportError: ReportError = (error, feature, tags, context) => {
+export const reportError: ReportError = (error, feature, tags, extra) => {
 	Sentry.withScope(() => {
 		Sentry.setTag('feature', feature);
 		if (tags) {
@@ -64,11 +64,10 @@ export const reportError: ReportError = (error, feature, tags, context) => {
 				Sentry.setTag(key, value);
 			}
 		}
-		if (context) {
-			for (const [key, value] of Object.entries(context)) {
-				Sentry.setContext(key, value);
-			}
+		if (extra) {
+			Sentry.setContext('extra', extra);
 		}
+
 		Sentry.captureException(error);
 	});
 };

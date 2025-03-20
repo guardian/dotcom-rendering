@@ -34,9 +34,14 @@ const isSentryEnabled = ({
 
 /** When stubbed errors are only sent to the console */
 const stubSentry = (): void => {
-	window.guardian.modules.sentry.reportError = (error, feature, tags) => {
+	window.guardian.modules.sentry.reportError = (
+		error,
+		feature,
+		tags,
+		extra,
+	) => {
 		// eslint-disable-next-line no-console -- fallback to console.error
-		console.error(error, feature, tags);
+		console.error(error, feature, tags, extra);
 	};
 };
 
