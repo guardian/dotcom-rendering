@@ -43,6 +43,15 @@ type BowlerData = {
 	balls: number;
 };
 
+type BatterData = {
+	name: string;
+	ballsFaced: number;
+	runs: number;
+	fours: number;
+	sixes: number;
+	howOut: string;
+};
+
 const Bowling = ({ bowlers }: { bowlers: BowlerData[] }) => (
 	<table css={tableStyles}>
 		<thead>
@@ -70,12 +79,40 @@ const Bowling = ({ bowlers }: { bowlers: BowlerData[] }) => (
 	</table>
 );
 
+const Batting = ({ batters }: { batters: BatterData[] }) => (
+	<table css={tableStyles}>
+		<thead>
+			<tr>
+				<th colSpan={2}>Batter</th>
+				<th>Runs</th>
+				<th>Balls</th>
+				<th>4s</th>
+				<th>6s</th>
+			</tr>
+		</thead>
+		<tbody>
+			{batters.map((batter) => (
+				<tr key={batter.name}>
+					<td>{batter.name}</td>
+					<td>{batter.howOut}</td>
+					<td>{batter.runs}</td>
+					<td>{batter.ballsFaced}</td>
+					<td>{batter.fours}</td>
+					<td>{batter.sixes}</td>
+				</tr>
+			))}
+		</tbody>
+	</table>
+);
+
 type Props = {
 	bowlers: BowlerData[];
+	batters: BatterData[];
 };
 
-export const CricketScorecard = ({ bowlers }: Props) => (
+export const CricketScorecard = ({ bowlers, batters }: Props) => (
 	<>
 		<Bowling bowlers={bowlers} />
+		<Batting batters={batters} />
 	</>
 );

@@ -27,6 +27,40 @@ type Story = StoryObj<typeof CricketScorecard>;
 export const defaultStory: Story = {
 	name: 'Cricket Scorecard',
 	args: {
+		batters: [
+			{
+				name: 'Rohit Sharma',
+				ballsFaced: 83,
+				runs: 76,
+				fours: 7,
+				sixes: 3,
+				howOut: 'st Latham b Ravindra',
+			},
+			{
+				name: 'Shubman Gill',
+				ballsFaced: 50,
+				runs: 31,
+				fours: 0,
+				sixes: 1,
+				howOut: 'c Phillips b Santner',
+			},
+			{
+				name: 'Virat Kohli',
+				ballsFaced: 2,
+				runs: 1,
+				fours: 0,
+				sixes: 0,
+				howOut: 'lbw b Bracewell',
+			},
+			{
+				name: 'Shreyas Iyer',
+				ballsFaced: 62,
+				runs: 48,
+				fours: 2,
+				sixes: 2,
+				howOut: 'c Ravindra b Santner',
+			},
+		],
 		bowlers: [
 			{
 				name: 'Mohammed Shami',
