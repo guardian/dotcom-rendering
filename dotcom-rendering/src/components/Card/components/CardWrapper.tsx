@@ -62,7 +62,7 @@ const sublinkHoverStyles = css`
 	}
 `;
 
-const desktopTopBarStyles = css`
+const topBarStyles = css`
 	:before {
 		border-top: 1px solid ${palette('--card-border-top')};
 		content: '';
@@ -72,11 +72,13 @@ const desktopTopBarStyles = css`
 		background-color: unset;
 	}
 `;
-
 const mobileTopBarStyles = css`
 	${until.tablet} {
-		${desktopTopBarStyles}
+		${topBarStyles}
 	}
+`;
+const desktopTopBarStyles = css`
+	${topBarStyles}
 `;
 
 const onwardContentStyles = css`

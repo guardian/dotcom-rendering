@@ -502,3 +502,15 @@ export const WithSpecialPaletteVariations = {
 		</>
 	),
 } satisfies Story;
+
+export const SecondaryContainerStandardCards: Story = {
+	name: 'Secondary container with standard cards',
+	args: {
+		frontSectionTitle: 'Secondary container standard cards',
+		containerLevel: 'Secondary',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			standard: standardCards.slice(0, 4),
+		},
+	},
+};
