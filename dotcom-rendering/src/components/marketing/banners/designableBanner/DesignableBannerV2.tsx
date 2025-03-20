@@ -529,7 +529,7 @@ const styles = {
 	) => css`
 		background: ${background};
 		color: ${textColor};
-		${limitHeight ? 'max-height: 70vh;' : ''}
+		${limitHeight ? 'max-height: 70vh;' : 'auto'}
 		overflow: hidden;
 		* {
 			box-sizing: border-box;
@@ -546,10 +546,11 @@ const styles = {
 		display: flex;
 		flex-direction: column;
 		position: relative;
-		padding: 0 10px 10px 10px;
+		padding: 12px 12px 24px 12px;
 
 		${from.desktop} {
 			display: grid;
+			padding: 12px 12px 24px 12px;
 			grid-template-columns: auto auto auto auto;
 			grid-template-rows: auto 1fr auto;
 			width: 100%;
@@ -564,7 +565,7 @@ const styles = {
 			grid-column: 2;
 			grid-row: 1 / -1;
 			opacity: 0.2;
-			margin-bottom: -${space[4]}px;
+			margin-bottom: -${space[6]}px;
 			margin-top: ${space[6]}px;
 			margin-right: ${space[2]}px;
 		}
@@ -617,7 +618,7 @@ const styles = {
 
 		${from.desktop} {
 			padding-left: ${space[2]}px;
-			padding-top: ${space[6]}px;
+			padding-top: ${space[3]}px;
 		}
 
 		${from.tablet} {
@@ -639,7 +640,7 @@ const styles = {
 		}
 		${from.desktop} {
 			padding-left: ${space[2]}px;
-			padding-top: ${space[6]}px;
+			padding-top: ${space[3]}px;
 		}
 	`,
 	contentContainer: (showRemindMeLater: boolean) => css`
@@ -671,12 +672,6 @@ const styles = {
 	`,
 	threeTierChoiceCardsContainer: css`
 		order: 3;
-		${until.tablet} {
-			padding-bottom: 100px;
-		}
-		${until.desktop} {
-			padding-bottom: 90px;
-		}
 		${from.desktop} {
 			grid-column: 3;
 			grid-row: 1;
@@ -692,7 +687,7 @@ const styles = {
 			justify-content: center;
 			align-items: center;
 			margin-top: ${space[9]}px;
-			margin-right: -${space[6]}px;
+			margin-right: -${space[3]}px;
 		}
 	`,
 
