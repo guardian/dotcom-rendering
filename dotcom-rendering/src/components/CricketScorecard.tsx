@@ -6,6 +6,7 @@ import {
 	textSansBold14,
 	until,
 } from '@guardian/source/foundations';
+import { Stack } from '@guardian/source/react-components';
 import type { ReactNode } from 'react';
 import { palette } from '../palette';
 
@@ -104,6 +105,15 @@ type FallOfWicketData = {
 	order: number;
 	name: string;
 	runs: number;
+};
+
+type InningsData = {
+	description: string;
+	bowlers: BowlerData[];
+	batters: BatterData[];
+	extras: Extras;
+	inningsTotals: InningsTotals;
+	fallOfWickets: FallOfWicketData[];
 };
 
 const Bowling = ({ bowlers }: { bowlers: BowlerData[] }) => (
@@ -226,27 +236,21 @@ const FallOfWickets = ({
 );
 
 type Props = {
-	bowlers: BowlerData[];
-	batters: BatterData[];
-	extras: Extras;
-	inningsTotals: InningsTotals;
-	fallOfWickets: FallOfWicketData[];
+	innings: InningsData[];
 };
 
-export const CricketScorecard = ({
-	bowlers,
-	batters,
-	extras,
-	inningsTotals,
-	fallOfWickets,
-}: Props) => (
-	<>
-		<Batting
-			batters={batters}
-			extras={extras}
-			inningsTotals={inningsTotals}
-		/>
-		<Bowling bowlers={bowlers} />
-		<FallOfWickets fallOfWickets={fallOfWickets} />
-	</>
+export const CricketScorecard = ({ innings }: Props) => (
+	<Stack space={9}>
+		{innings.map((teamInnings) => (
+			<Stack space={9} key={teamInnings.description}>
+				<Batting
+					batters={teamInnings.batters}
+					extras={teamInnings.extras}
+					inningsTotals={teamInnings.inningsTotals}
+				/>
+				<Bowling bowlers={teamInnings.bowlers} />
+				<FallOfWickets fallOfWickets={teamInnings.fallOfWickets} />
+			</Stack>
+		))}
+	</Stack>
 );
