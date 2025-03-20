@@ -38,10 +38,10 @@ const stubSentry = (): void => {
 		error,
 		feature,
 		tags,
-		extra,
+		extras,
 	) => {
 		// eslint-disable-next-line no-console -- fallback to console.error
-		console.error(error, feature, tags, extra);
+		console.error(error, feature, tags, extras);
 	};
 };
 

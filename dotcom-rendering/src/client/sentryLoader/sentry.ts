@@ -64,6 +64,7 @@ export const reportError: ReportError = (error, feature, tags, extras) => {
 				Sentry.setTag(key, value);
 			}
 		}
+
 		if (extras) {
 			Sentry.setExtras(extras);
 		}
