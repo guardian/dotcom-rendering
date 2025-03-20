@@ -52,6 +52,12 @@ type BatterData = {
 	howOut: string;
 };
 
+type FallOfWicketData = {
+	order: number;
+	name: string;
+	runs: number;
+};
+
 const Bowling = ({ bowlers }: { bowlers: BowlerData[] }) => (
 	<table css={tableStyles}>
 		<thead>
@@ -105,14 +111,43 @@ const Batting = ({ batters }: { batters: BatterData[] }) => (
 	</table>
 );
 
+const FallOfWickets = ({
+	fallOfWickets,
+}: {
+	fallOfWickets: FallOfWicketData[];
+}) => (
+	<table css={tableStyles}>
+		<thead>
+			<tr>
+				<th colSpan={3}>Fall of wickets</th>
+			</tr>
+		</thead>
+		<tbody>
+			{fallOfWickets.map((fallOfWicket) => (
+				<tr key={fallOfWicket.order}>
+					<td>{fallOfWicket.order}</td>
+					<td>{fallOfWicket.name}</td>
+					<td>{fallOfWicket.runs}</td>
+				</tr>
+			))}
+		</tbody>
+	</table>
+);
+
 type Props = {
 	bowlers: BowlerData[];
 	batters: BatterData[];
+	fallOfWickets: FallOfWicketData[];
 };
 
-export const CricketScorecard = ({ bowlers, batters }: Props) => (
+export const CricketScorecard = ({
+	bowlers,
+	batters,
+	fallOfWickets,
+}: Props) => (
 	<>
-		<Bowling bowlers={bowlers} />
 		<Batting batters={batters} />
+		<Bowling bowlers={bowlers} />
+		<FallOfWickets fallOfWickets={fallOfWickets} />
 	</>
 );

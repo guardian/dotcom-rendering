@@ -111,6 +111,23 @@ export const defaultStory: Story = {
 				balls: 60,
 			},
 		],
+		fallOfWickets: [
+			{
+				order: 1,
+				name: 'Shubman Gill',
+				runs: 105,
+			},
+			{
+				order: 2,
+				name: 'Virat Kohli',
+				runs: 106,
+			},
+			{
+				order: 3,
+				name: 'Rohit Sharma',
+				runs: 122,
+			},
+		],
 	},
 };
 
