@@ -1,8 +1,10 @@
 import { css } from '@emotion/react';
 import {
+	from,
 	space,
 	textSans14,
 	textSansBold14,
+	until,
 } from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
 import { palette } from '../palette';
@@ -33,6 +35,18 @@ const tableStyles = css`
 
 	td {
 		border-top: 0.0625rem solid ${palette('--football-match-list-border')};
+	}
+`;
+
+const hideUntilTabletStyle = css`
+	${until.tablet} {
+		display: none;
+	}
+`;
+
+const hideFromTabletStyle = css`
+	${from.tablet} {
+		display: none;
 	}
 `;
 
@@ -131,11 +145,12 @@ const Batting = ({
 	<table css={tableStyles}>
 		<thead>
 			<tr>
-				<th colSpan={2}>Batter</th>
+				<th>Batter</th>
+				<th css={hideUntilTabletStyle}></th>
 				<th>Runs</th>
 				<th>Balls</th>
-				<th>4s</th>
-				<th>6s</th>
+				<th css={hideUntilTabletStyle}>4s</th>
+				<th css={hideUntilTabletStyle}>6s</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -143,12 +158,13 @@ const Batting = ({
 				<tr key={batter.name}>
 					<td>
 						<strong>{batter.name}</strong>
+						<div css={hideFromTabletStyle}>{batter.howOut}</div>
 					</td>
-					<td>{batter.howOut}</td>
+					<td css={hideUntilTabletStyle}>{batter.howOut}</td>
 					<td>{batter.runs}</td>
 					<td>{batter.ballsFaced}</td>
-					<td>{batter.fours}</td>
-					<td>{batter.sixes}</td>
+					<td css={hideUntilTabletStyle}>{batter.fours}</td>
+					<td css={hideUntilTabletStyle}>{batter.sixes}</td>
 				</tr>
 			))}
 			<tr
@@ -162,22 +178,25 @@ const Batting = ({
 				<td>
 					<strong>Extras</strong>
 				</td>
-				<td>{getExtrasDescription(extras)}</td>
+				<td css={hideUntilTabletStyle}>
+					{getExtrasDescription(extras)}
+				</td>
 				<td colSpan={4}>{inningsTotals.extras}</td>
 			</tr>
 			<tr>
 				<td>
 					<strong>Total</strong>
 				</td>
-				<td>
+				<td css={hideUntilTabletStyle}>
 					<strong>for {inningsTotals.wickets}</strong>
 				</td>
 				<td>
 					<strong>{inningsTotals.runs}</strong>
 				</td>
-				<td colSpan={3}>
+				<td colSpan={3} css={hideUntilTabletStyle}>
 					<strong>{inningsTotals.overs} overs</strong>
 				</td>
+				<td css={hideFromTabletStyle}></td>
 			</tr>
 		</tbody>
 	</table>
