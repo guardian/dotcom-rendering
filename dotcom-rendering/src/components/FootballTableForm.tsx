@@ -1,12 +1,7 @@
 import { css } from '@emotion/react';
 import { visuallyHidden } from '@guardian/source/foundations';
-import type { TeamScore } from '../footballMatches';
+import type { TeamResult } from '../footballTables';
 import { palette } from '../palette';
-
-export type TeamResult = {
-	self: TeamScore;
-	foe: TeamScore;
-};
 
 const formBlockStyles = css`
 	display: inline-block;

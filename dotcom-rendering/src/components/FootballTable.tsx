@@ -5,8 +5,8 @@ import {
 	textSansBold14,
 	until,
 } from '@guardian/source/foundations';
+import type { FootballTableData } from '../footballTables';
 import { palette } from '../palette';
-import type { TeamResult } from './FootballTableForm';
 import { FootballTableForm } from './FootballTableForm';
 
 const tableStyles = css`
@@ -63,26 +63,8 @@ const linkStyles = css`
 `;
 
 type Props = {
-	competition: {
-		url: string;
-		tableUrl: string;
-		name: string;
-	};
-	dividers: number[];
-	data: {
-		position: number;
-		team: { name: string; id: string; url: string };
-		gamesPlayed: number;
-		won: number;
-		drawn: number;
-		lost: number;
-		goalsFor: number;
-		goalsAgainst: number;
-		goalDifference: number;
-		points: number;
-		results: TeamResult[];
-	}[];
-	linkToFullTable: boolean;
+	table: FootballTableData;
+	guardianBaseUrl: string;
 };
 
 function getFootballCrestImageUrl(teamId: string) {
@@ -141,128 +123,127 @@ const TeamWithCrest = ({
 	</div>
 );
 
-export const FootballTable = ({
-	competition,
-	data,
-	dividers,
-	linkToFullTable,
-}: Props) => {
-	return (
-		<table css={tableStyles}>
-			<caption
-				css={css`
-					${from.leftCol} {
-						display: none;
-					}
-					text-align: left;
-					border-top: 0.0625rem solid
-						${palette('--football-top-border')};
-					padding: 0.5rem;
-					${textSansBold14};
-					background: ${palette('--table-block-background')};
-				`}
+export const FootballTable = ({ table, guardianBaseUrl }: Props) => (
+	<table css={tableStyles}>
+		<caption
+			css={css`
+				${from.leftCol} {
+					display: none;
+				}
+				text-align: left;
+				border-top: 0.0625rem solid ${palette('--football-top-border')};
+				padding: 0.5rem;
+				${textSansBold14};
+				background: ${palette('--table-block-background')};
+			`}
+		>
+			<a
+				css={linkStyles}
+				href={`${guardianBaseUrl}${table.competition.url}`}
 			>
-				<a css={linkStyles} href={competition.url}>
-					{competition.name}
-				</a>
-			</caption>
-			<thead css={headStyles}>
-				<tr css={rowStyles}>
-					<th
+				{table.competition.name}
+			</a>
+		</caption>
+		<thead css={headStyles}>
+			<tr css={rowStyles}>
+				<th
+					css={css`
+						color: ${palette('--football-sub-text')};
+					`}
+				>
+					<abbr title="Position">P</abbr>
+				</th>
+				<th>Team</th>
+				<th>
+					<abbr title="Games played">GP</abbr>
+				</th>
+				<th css={hideUntilTabletStyle}>
+					<abbr title="Won">W</abbr>
+				</th>
+				<th css={hideUntilTabletStyle}>
+					<abbr title="Drawn">D</abbr>
+				</th>
+				<th css={hideUntilTabletStyle}>
+					<abbr title="Lost">L</abbr>
+				</th>
+				<th css={hideUntilTabletStyle}>
+					<abbr title="Goals for">F</abbr>
+				</th>
+				<th css={hideUntilTabletStyle}>
+					<abbr title="Goals against">A</abbr>
+				</th>
+				<th>
+					<abbr title="Goal difference">GD</abbr>
+				</th>
+				<th>
+					<abbr title="Points">Pts</abbr>
+				</th>
+				<th>
+					<abbr title="Results of previous games">Form</abbr>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{table.entries.map((row) => (
+				<tr
+					key={row.position}
+					css={[
+						rowStyles,
+						table.dividers.includes(row.position - 1) &&
+							dividerStyle,
+					]}
+				>
+					<td
 						css={css`
 							color: ${palette('--football-sub-text')};
 						`}
 					>
-						<abbr title="Position">P</abbr>
-					</th>
-					<th>Team</th>
-					<th>
-						<abbr title="Games played">GP</abbr>
-					</th>
-					<th css={hideUntilTabletStyle}>
-						<abbr title="Won">W</abbr>
-					</th>
-					<th css={hideUntilTabletStyle}>
-						<abbr title="Drawn">D</abbr>
-					</th>
-					<th css={hideUntilTabletStyle}>
-						<abbr title="Lost">L</abbr>
-					</th>
-					<th css={hideUntilTabletStyle}>
-						<abbr title="Goals for">F</abbr>
-					</th>
-					<th css={hideUntilTabletStyle}>
-						<abbr title="Goals against">A</abbr>
-					</th>
-					<th>
-						<abbr title="Goal difference">GD</abbr>
-					</th>
-					<th>
-						<abbr title="Points">Pts</abbr>
-					</th>
-					<th>
-						<abbr title="Results of previous games">Form</abbr>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				{data.map((row) => (
-					<tr
-						key={row.position}
-						css={[
-							rowStyles,
-							dividers.includes(row.position - 1) && dividerStyle,
-						]}
-					>
-						<td
+						{row.position}
+					</td>
+					<td>
+						<TeamWithCrest
+							team={row.team.name}
+							id={row.team.id}
+							url={row.team.url}
+						/>
+					</td>
+					<td>{row.gamesPlayed}</td>
+					<td css={hideUntilTabletStyle}>{row.won}</td>
+					<td css={hideUntilTabletStyle}>{row.drawn}</td>
+					<td css={hideUntilTabletStyle}>{row.lost}</td>
+					<td css={hideUntilTabletStyle}>{row.goalsFor}</td>
+					<td css={hideUntilTabletStyle}>{row.goalsAgainst}</td>
+					<td>{row.goalDifference}</td>
+					<td>
+						<b
 							css={css`
-								color: ${palette('--football-sub-text')};
+								font-weight: 800;
 							`}
 						>
-							{row.position}
-						</td>
-						<td>
-							<TeamWithCrest
-								team={row.team.name}
-								id={row.team.id}
-								url={row.team.url}
-							/>
-						</td>
-						<td>{row.gamesPlayed}</td>
-						<td css={hideUntilTabletStyle}>{row.won}</td>
-						<td css={hideUntilTabletStyle}>{row.drawn}</td>
-						<td css={hideUntilTabletStyle}>{row.lost}</td>
-						<td css={hideUntilTabletStyle}>{row.goalsFor}</td>
-						<td css={hideUntilTabletStyle}>{row.goalsAgainst}</td>
-						<td>{row.goalDifference}</td>
-						<td>
-							<b
-								css={css`
-									font-weight: 800;
-								`}
-							>
-								{row.points}
-							</b>
-						</td>
-						<td>
-							<FootballTableForm
-								teamResults={row.results.slice(0, 5)}
-							/>
-						</td>
-					</tr>
-				))}
-			</tbody>
-			{linkToFullTable && (
-				<tfoot>
-					<tr css={rowStyles}>
-						<td colSpan={11}>
-							<a href={competition.tableUrl} css={linkStyles}>
-								View full {competition.name} table
-							</a>
-						</td>
-					</tr>
-				</tfoot>
-			)}
-		</table>
-	);
-};
+							{row.points}
+						</b>
+					</td>
+					<td>
+						<FootballTableForm
+							teamResults={row.results.slice(0, 5)}
+						/>
+					</td>
+				</tr>
+			))}
+		</tbody>
+		{table.linkToFullTable && (
+			<tfoot>
+				<tr css={rowStyles}>
+					<td colSpan={11}>
+						<a
+							href={`${guardianBaseUrl}${table.competition.url}/table`}
+							css={linkStyles}
+						>
+							View full {table.competition.name} table
+						</a>
+					</td>
+				</tr>
+			</tfoot>
+		)}
+	</table>
+);
