@@ -236,7 +236,7 @@ export const FootballTable = ({ table, guardianBaseUrl }: Props) => (
 				<tr css={rowStyles}>
 					<td colSpan={11}>
 						<a
-							href={`${guardianBaseUrl}${table.competition.tableUrl}`}
+							href={`${guardianBaseUrl}${table.competition.url}/table`}
 							css={linkStyles}
 						>
 							View full {table.competition.name} table

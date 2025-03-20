@@ -8,7 +8,6 @@ export type TeamResult = {
 export type FootballTableData = {
 	competition: {
 		url: string;
-		tableUrl: string;
 		name: string;
 	};
 	dividers: number[];
