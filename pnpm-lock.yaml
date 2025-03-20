@@ -83,17 +83,17 @@ importers:
         specifier: 9.0.1
         version: 9.0.1(eslint@8.56.0)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/libs':
-        specifier: 16.1.0
-        version: 16.1.0(tslib@2.6.2)(typescript@5.5.3)
+        specifier: 22.0.0
+        version: 22.0.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/renditions':
         specifier: 0.2.0
         version: 0.2.0
       '@guardian/source':
-        specifier: 8.0.0
-        version: 8.0.0(@emotion/react@11.11.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
+        specifier: 9.0.0
+        version: 9.0.0(@emotion/react@11.11.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source-development-kitchen':
-        specifier: 8.0.0
-        version: 8.0.0(@emotion/react@11.11.3)(@guardian/libs@16.1.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
+        specifier: 17.0.0
+        version: 17.0.0(@emotion/react@11.11.3)(@guardian/libs@22.0.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@smithy/property-provider':
         specifier: 2.0.16
         version: 2.0.16
@@ -4198,19 +4198,6 @@ packages:
       typescript: 5.5.3
     dev: false
 
-  /@guardian/libs@16.1.0(tslib@2.6.2)(typescript@5.5.3):
-    resolution: {integrity: sha512-nb7r0C+UO4P6f0wH8sATtGYnGrfqCzOX4M1Pp2G+uj9c3tehMRSum4mgnqxSAVXN50LtkL2bwd4u3Ichk6670Q==}
-    peerDependencies:
-      tslib: ^2.6.2
-      typescript: ~5.3.3
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      tslib: 2.6.2
-      typescript: 5.5.3
-    dev: false
-
   /@guardian/libs@22.0.0(tslib@2.6.2)(typescript@5.5.3):
     resolution: {integrity: sha512-qAQ8hQcRaL0H3h5vR6QXv6wtHu+XCfK6jM28QNz0d94EyHfiS01i4AMv8JlX1a3efehfoh00WVg/LzjsGRoJJw==}
     peerDependencies:
@@ -4318,61 +4305,6 @@ packages:
       '@guardian/libs': 22.0.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source': 9.0.0(@emotion/react@11.11.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@types/react': 18.3.1
-      react: 18.3.1
-      tslib: 2.6.2
-      typescript: 5.5.3
-    dev: false
-
-  /@guardian/source-development-kitchen@8.0.0(@emotion/react@11.11.3)(@guardian/libs@16.1.0)(@guardian/source@8.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3):
-    resolution: {integrity: sha512-97Qcm9laquXen7GMOkQ2syvKlvY6VaAN3zalXnxEDHZiSgUhthWrVFJp2G5CsqP9c5lpl4RkUcF2PkYek8J2Jw==}
-    peerDependencies:
-      '@emotion/react': ^11.11.3
-      '@guardian/libs': ^18.0.0
-      '@guardian/source': ^8.0.0
-      '@types/react': ^18.2.11
-      react: ^18.2.0
-      tslib: ^2.6.2
-      typescript: ~5.5.2
-    peerDependenciesMeta:
-      '@emotion/react':
-        optional: true
-      '@types/react':
-        optional: true
-      react:
-        optional: true
-      typescript:
-        optional: true
-    dependencies:
-      '@emotion/react': 11.11.3(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/libs': 16.1.0(tslib@2.6.2)(typescript@5.5.3)
-      '@guardian/source': 8.0.0(@emotion/react@11.11.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
-      '@types/react': 18.3.1
-      react: 18.3.1
-      tslib: 2.6.2
-      typescript: 5.5.3
-    dev: false
-
-  /@guardian/source@8.0.0(@emotion/react@11.11.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3):
-    resolution: {integrity: sha512-P6OTmCWsSWkT20M5uRAPoKonsz3nikOj308mUEiFDO2vpx1oyG2V6KP0YBlDxoSzw7EW6KbM9Ptat6VNd55cEw==}
-    peerDependencies:
-      '@emotion/react': ^11.11.3
-      '@types/react': ^18.2.11
-      react: ^18.2.0
-      tslib: ^2.6.2
-      typescript: ~5.5.2
-    peerDependenciesMeta:
-      '@emotion/react':
-        optional: true
-      '@types/react':
-        optional: true
-      react:
-        optional: true
-      typescript:
-        optional: true
-    dependencies:
-      '@emotion/react': 11.11.3(@types/react@18.3.1)(react@18.3.1)
-      '@types/react': 18.3.1
-      mini-svg-data-uri: 1.4.4
       react: 18.3.1
       tslib: 2.6.2
       typescript: 5.5.3
