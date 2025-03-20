@@ -350,11 +350,13 @@ export const InteractiveBlockComponent = ({
 
 			// Bespoke dark mode logic for Datawrapper and ai2html embeds on web
 			// This should be removed if/when dark mode is implements on the website
+			const isai2html = url.includes(
+				'interactive.guim.co.uk/uploader/embed/',
+			);
 			if (
 				!document.querySelector('.ios') &&
 				!document.querySelector('.android') &&
-				(url.includes('datawrapper') ||
-					url.includes('interactive.guim.co.uk/uploader/embed/'))
+				(url.includes('datawrapper') || isai2html)
 			) {
 				const prefersDarkScheme = window.matchMedia(
 					'(prefers-color-scheme: dark)',
@@ -362,7 +364,9 @@ export const InteractiveBlockComponent = ({
 				const darkMode = darkModeAvailable && prefersDarkScheme;
 				if (!darkMode) {
 					iframe.src +=
-						(iframe.src.includes('?') ? '&' : '?') + 'dark=false';
+						(isai2html ? '/' : '') +
+						(iframe.src.includes('?') ? '&' : '?') +
+						'dark=false';
 				}
 			}
 
