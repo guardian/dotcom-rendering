@@ -436,7 +436,6 @@ export const StandardCardLayout = ({
 	containerPalette,
 	showAge,
 	absoluteServerTimes,
-	showImage = true,
 	imageLoading,
 	isFirstRow,
 	isFirstStandardRow,
@@ -451,7 +450,6 @@ export const StandardCardLayout = ({
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
-	showImage?: boolean;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
@@ -485,7 +483,7 @@ export const StandardCardLayout = ({
 							containerType="flexible/general"
 							showAge={showAge}
 							absoluteServerTimes={absoluteServerTimes}
-							image={showImage ? card.image : undefined}
+							image={card.image}
 							imageLoading={imageLoading}
 							imagePositionOnDesktop="left"
 							supportingContent={card.supportingContent?.slice(
