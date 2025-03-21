@@ -95,14 +95,8 @@ export const renderFootballDataPage = (footballData: DCRFootballDataPage) => {
 		process.env.COMMERCIAL_BUNDLE_URL ??
 			footballData.config.commercialBundleUrl,
 	].filter(isString);
-	const legacyScripts = [
-		getPathFromManifest('client.web.legacy', 'frameworks.js'),
-		getPathFromManifest('client.web.legacy', 'index.js'),
-	];
-	const scriptTags = generateScriptTags([
-		...prefetchScripts,
-		...legacyScripts,
-	]);
+
+	const scriptTags = generateScriptTags(prefetchScripts);
 
 	const pageHtml = htmlPageTemplate({
 		scriptTags,

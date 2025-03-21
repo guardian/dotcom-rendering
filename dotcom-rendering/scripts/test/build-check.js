@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 // This file contains some checks that the building and bundling
-// is working correctly between modern and legacy scripts.
+// is working correctly
 // It checks the following:
 // 1. That the manifest files are output
 // 2. That the manifest files contain at least the entry points under the expected property
@@ -28,14 +28,10 @@ const fileExists = async (glob) => {
 (async () => {
 	// Check that the manifest files exist
 	await fileExists('manifest.client.web.json');
-	await fileExists('manifest.client.web.legacy.json');
 	if (BUILD_VARIANT) await fileExists('manifest.client.web.variant.json');
 
 	// Check that the manifest files return values for all the chunks
-	const manifests = [
-		await loadJsonFile('./dist/manifest.client.web.json'),
-		await loadJsonFile('./dist/manifest.client.web.legacy.json'),
-	];
+	const manifests = [await loadJsonFile('./dist/manifest.client.web.json')];
 	if (BUILD_VARIANT) {
 		manifests.push(
 			await loadJsonFile('./dist/manifest.client.web.variant.json'),
