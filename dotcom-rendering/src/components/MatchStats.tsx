@@ -22,7 +22,7 @@ type Props = {
 	home: TeamType;
 	away: TeamType;
 	competition: string;
-	format: ArticleFormat;
+	format?: ArticleFormat;
 };
 
 //For these three tournaments, we only get data for live goals, bookings and substitutions, and no other type of match stats
@@ -38,9 +38,9 @@ const StatsGrid = ({
 	format,
 }: {
 	children: React.ReactNode;
-	format: ArticleFormat;
+	format?: ArticleFormat;
 }) => {
-	switch (format.design) {
+	switch (format?.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog: {
 			return (
@@ -206,9 +206,9 @@ const ShiftLeft = ({
 	format,
 }: {
 	children: React.ReactNode;
-	format: ArticleFormat;
+	format?: ArticleFormat;
 }) => {
-	switch (format.design) {
+	switch (format?.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog: {
 			return <div>{children}</div>;
@@ -291,7 +291,7 @@ const DecideDoughnut = ({
 }: {
 	home: TeamType;
 	away: TeamType;
-	format: ArticleFormat;
+	format?: ArticleFormat;
 }) => {
 	const sections = [
 		{
@@ -305,7 +305,7 @@ const DecideDoughnut = ({
 			color: away.colours,
 		},
 	].reverse();
-	switch (format.design) {
+	switch (format?.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog: {
 			return (
