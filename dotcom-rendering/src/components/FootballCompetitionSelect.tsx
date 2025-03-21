@@ -2,14 +2,16 @@ import { Option, Select } from '@guardian/source/react-components';
 import type { FootballMatchKind, Region } from '../footballMatches';
 import { palette } from '../palette';
 
+type FootballSelectKind = FootballMatchKind | 'Tables';
+
 type Props = {
 	regions: Region[];
-	kind: FootballMatchKind;
+	kind: FootballSelectKind;
 	pageId: string;
 	onChange: (competitionTag: string) => void;
 };
 
-const allLabel = (kind: FootballMatchKind): string => {
+const allLabel = (kind: FootballSelectKind): string => {
 	switch (kind) {
 		case 'Fixture':
 			return 'All fixtures';
@@ -17,10 +19,12 @@ const allLabel = (kind: FootballMatchKind): string => {
 			return 'All results';
 		case 'Live':
 			return 'All live';
+		case 'Tables':
+			return 'All tables';
 	}
 };
 
-const getPagePath = (kind: FootballMatchKind) => {
+const getPagePath = (kind: FootballSelectKind) => {
 	switch (kind) {
 		case 'Fixture':
 			return '/football/fixtures';
@@ -28,6 +32,8 @@ const getPagePath = (kind: FootballMatchKind) => {
 			return '/football/live';
 		case 'Result':
 			return '/football/results';
+		case 'Tables':
+			return '/football/tables';
 	}
 };
 
