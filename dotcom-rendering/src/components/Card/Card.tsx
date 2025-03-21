@@ -407,7 +407,7 @@ export const Card = ({
 	index = 0,
 	isFlexSplash,
 	showTopBarDesktop = true,
-	showTopBarMobile = false,
+	showTopBarMobile = true,
 	trailTextSize,
 	showKickerImage = false,
 }: Props) => {
@@ -752,10 +752,10 @@ export const Card = ({
 	return (
 		<CardWrapper
 			format={format}
-			showTopBarDesktop={!isOnwardContent && showTopBarDesktop}
+			showTopBarDesktop={showTopBarDesktop}
 			showTopBarMobile={showTopBarMobile}
-			containerPalette={containerPalette}
 			isOnwardContent={isOnwardContent}
+			containerPalette={containerPalette}
 		>
 			<CardLink
 				linkTo={linkTo}
