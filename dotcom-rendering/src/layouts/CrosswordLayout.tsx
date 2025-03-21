@@ -71,6 +71,17 @@ const CrosswordGrid = ({ children }: { children: React.ReactNode }) => (
 					'meta   instructions  .'
 					'body   body          right-column';
 			}
+
+			@media print {
+				grid-template-columns: 1fr;
+				grid-template-areas:
+					'title'
+					'headline'
+					'standfirst'
+					'meta'
+					'instructions'
+					'body';
+			}
 		`}
 	>
 		{children}
