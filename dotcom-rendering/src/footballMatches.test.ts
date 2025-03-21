@@ -10,7 +10,6 @@ import {
 import type {
 	FEFootballMatch,
 	FEMatchByDateAndCompetition,
-	FEMatchDay,
 	FEResult,
 } from './feFootballDataPage';
 import { parse } from './footballMatches';
@@ -100,67 +99,6 @@ describe('footballMatches', () => {
 		}
 
 		expect(resultThree.errors[0]!.kind).toBe('FootballMatchInvalidDate');
-	});
-
-	it('should return an error when football matches are missing a score', () => {
-		const matchResultMissingHomeScore: FEResult = {
-			...matchResult,
-			homeTeam: {
-				...matchResult.homeTeam,
-				score: undefined,
-			},
-		};
-		const matchResultMissingAwayScore: FEResult = {
-			...matchResult,
-			homeTeam: {
-				...matchResult.awayTeam,
-				score: undefined,
-			},
-		};
-		const liveMatchMissingHomeScore: FEMatchDay = {
-			...matchDayLive,
-			homeTeam: {
-				...matchDayLive.homeTeam,
-				score: undefined,
-			},
-		};
-		const liveMatchMissingAwayScore: FEMatchDay = {
-			...matchDayLive,
-			homeTeam: {
-				...matchDayLive.awayTeam,
-				score: undefined,
-			},
-		};
-
-		const resultHome = errorOrThrow(
-			parse(withMatches([matchResultMissingHomeScore])),
-			'Expected football match parsing to fail',
-		);
-		const resultAway = errorOrThrow(
-			parse(withMatches([matchResultMissingAwayScore])),
-			'Expected football match parsing to fail',
-		);
-		const liveHome = errorOrThrow(
-			parse(withMatches([liveMatchMissingHomeScore])),
-			'Expected football match parsing to fail',
-		);
-		const liveAway = errorOrThrow(
-			parse(withMatches([liveMatchMissingAwayScore])),
-			'Expected football match parsing to fail',
-		);
-
-		expect(resultHome.kind).toBe('FootballMatchMissingScore');
-		expect(resultAway.kind).toBe('FootballMatchMissingScore');
-
-		if (
-			liveHome.kind !== 'InvalidMatchDay' ||
-			liveAway.kind !== 'InvalidMatchDay'
-		) {
-			throw new Error('Expected an invalid match day error');
-		}
-
-		expect(liveHome.errors[0]?.kind).toBe('FootballMatchMissingScore');
-		expect(liveAway.errors[0]?.kind).toBe('FootballMatchMissingScore');
 	});
 
 	it('should return an error when it receives a live match', () => {

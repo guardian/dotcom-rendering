@@ -6,11 +6,13 @@ import type { ReportError } from '../../types/sentry';
 type ReportErrorError = Parameters<ReportError>[0];
 type ReportErrorFeature = Parameters<ReportError>[1];
 type ReportErrorTags = Parameters<ReportError>[2];
+type ReportErrorExtras = Parameters<ReportError>[3];
 
 type ErrorQueue = Array<{
 	error: ReportErrorError;
 	feature: ReportErrorFeature;
 	tags?: ReportErrorTags;
+	extras?: ReportErrorExtras;
 }>;
 
 const loadSentryCreator = () => {
@@ -29,6 +31,7 @@ const loadSentryCreator = () => {
 		error: ReportErrorError | undefined,
 		feature: ReportErrorFeature = 'unknown',
 		tags?: ReportErrorTags,
+		extras?: ReportErrorExtras,
 	) => {
 		const { endPerformanceMeasure } = startPerformanceMeasure(
 			'dotcom',
@@ -38,7 +41,7 @@ const loadSentryCreator = () => {
 		/**
 		 * Queue this error for later
 		 */
-		if (error) errorQueue.push({ error, feature, tags });
+		if (error) errorQueue.push({ error, feature, tags, extras });
 
 		/**
 		 * Only initialise once
@@ -87,6 +90,7 @@ const loadSentryCreator = () => {
 					queuedError.error,
 					queuedError.feature,
 					queuedError.tags,
+					queuedError.extras,
 				);
 			}
 		}
@@ -117,8 +121,13 @@ const loadSentryOnError = (): void => {
 		window.onunhandledrejection = (
 			event: undefined | { reason?: unknown },
 		) => event?.reason instanceof Error && loadSentry(event.reason);
-		window.guardian.modules.sentry.reportError = (error, feature, tags) => {
-			loadSentry(error, feature, tags).catch((e) =>
+		window.guardian.modules.sentry.reportError = (
+			error,
+			feature,
+			tags,
+			extras,
+		) => {
+			loadSentry(error, feature, tags, extras).catch((e) =>
 				// eslint-disable-next-line no-console -- fallback to console.error
 				console.error(`loadSentryOnError error: ${String(e)}`),
 			);

@@ -181,6 +181,12 @@ const Layout: CrosswordProps['Layout'] = ({
 							background-image: none;
 						}
 					}
+					@media print {
+						max-height: none;
+						::after {
+							background-image: none;
+						}
+					}
 				`}
 			>
 				<div
@@ -235,5 +241,9 @@ export const CrosswordComponent = ({
 		data={data}
 		Layout={Layout}
 		MobileBannerAd={canRenderAds ? MobileBannerAdComponent : undefined}
+		textColor={palette('--crossword-text')}
+		anagramHelperBackgroundColor={palette(
+			'--crossword-anagram-helper-background',
+		)}
 	/>
 );

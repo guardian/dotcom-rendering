@@ -142,6 +142,7 @@ const decideImage = (
 	if (!image && !avatarUrl) {
 		return null;
 	}
+
 	if (avatarUrl) {
 		return (
 			<Avatar
@@ -152,6 +153,7 @@ const decideImage = (
 			/>
 		);
 	}
+
 	if (mainMedia?.type === 'Audio' && mainMedia.podcastImage?.src) {
 		return (
 			<>
@@ -161,15 +163,17 @@ const decideImage = (
 					alt={mainMedia.podcastImage.altText}
 					loading={imageLoading}
 					isCircular={false}
-					aspectRatio={'1:1'}
+					aspectRatio="1:1"
 				/>
 				<div className="image-overlay"> </div>
 			</>
 		);
 	}
+
 	if (!image) {
 		return null;
 	}
+
 	return (
 		<>
 			<CardPicture
@@ -178,12 +182,40 @@ const decideImage = (
 				alt={image.altText}
 				loading={imageLoading}
 				isCircular={true}
+				aspectRatio="1:1"
 			/>
 			{/* This image overlay is styled when the CardLink is hovered */}
 			<div className="image-overlay circular"> </div>
 		</>
 	);
 };
+
+const MediaPill = ({ mainMedia }: { mainMedia: MainMedia }) => (
+	<div css={mediaIcon}>
+		{mainMedia.type === 'Video' && (
+			<Pill
+				content={secondsToDuration(mainMedia.duration)}
+				icon={<SvgMediaControlsPlay />}
+				iconSize="small"
+			/>
+		)}
+		{mainMedia.type === 'Audio' && (
+			<Pill
+				content={mainMedia.duration}
+				icon={<SvgMediaControlsPlay />}
+				iconSize="small"
+			/>
+		)}
+		{mainMedia.type === 'Gallery' && (
+			<Pill
+				prefix="Gallery"
+				content={mainMedia.count}
+				icon={<SvgCamera />}
+				iconSide="right"
+			/>
+		)}
+	</div>
+);
 
 export const HighlightsCard = ({
 	linkTo,
@@ -201,32 +233,7 @@ export const HighlightsCard = ({
 	starRating,
 }: HighlightsCardProps) => {
 	const isMediaCard = isMedia(format);
-	const MediaPill = () => (
-		<div css={mediaIcon}>
-			{mainMedia?.type === 'Video' && (
-				<Pill
-					content={secondsToDuration(mainMedia.duration)}
-					icon={<SvgMediaControlsPlay />}
-					iconSize={'small'}
-				/>
-			)}
-			{mainMedia?.type === 'Audio' && (
-				<Pill
-					content={mainMedia.duration}
-					icon={<SvgMediaControlsPlay />}
-					iconSize={'small'}
-				/>
-			)}
-			{mainMedia?.type === 'Gallery' && (
-				<Pill
-					prefix="Gallery"
-					content={mainMedia.count}
-					icon={<SvgCamera />}
-					iconSide="right"
-				/>
-			)}
-		</div>
-	);
+
 	return (
 		<FormatBoundary format={format}>
 			<div css={[gridContainer, hoverStyles]}>
@@ -265,7 +272,9 @@ export const HighlightsCard = ({
 					</div>
 				) : null}
 
-				{!!mainMedia && isMediaCard && MediaPill()}
+				{!!mainMedia && isMediaCard && (
+					<MediaPill mainMedia={mainMedia} />
+				)}
 
 				<div css={[imageArea, avatarUrl && avatarAlignmentStyles]}>
 					{decideImage(

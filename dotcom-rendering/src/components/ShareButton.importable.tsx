@@ -210,6 +210,7 @@ export const ShareButton = ({
 		if (
 			!isLiveBlogBlockDesktop &&
 			'share' in navigator &&
+			'canShare' in navigator &&
 			navigator.canShare(shareData)
 		) {
 			setButtonKind('native');

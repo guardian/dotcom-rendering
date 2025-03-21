@@ -1,7 +1,6 @@
 export type ReportError = (
 	error: Error,
 	feature: string,
-	tags?: {
-		[key: string]: string;
-	},
+	tags?: Record<string, string>,
+	extras?: Record<string, unknown>,
 ) => void;

@@ -5,13 +5,13 @@ import { enhanceTimeline } from './enhanceTimeline';
 
 const identity = <A>(a: A): A => a;
 
-const elements: FEElement[] = [
+const elementsWithNoSections: FEElement[] = [
 	{
 		_type: 'model.dotcomrendering.pageElements.TimelineBlockElement',
 		elementId: 'mock-id',
 		sections: [
 			{
-				title: 'mock section title',
+				title: '',
 				events: [
 					{
 						title: 'mock event title',
@@ -73,9 +73,76 @@ const elements: FEElement[] = [
 	},
 ];
 
+const elementsWithOneSection: FEElement[] = [
+	{
+		_type: 'model.dotcomrendering.pageElements.TimelineBlockElement',
+		elementId: 'mock-id',
+		sections: [
+			{
+				title: 'Section 1',
+				events: [
+					{
+						title: 'mock event title',
+						date: '1st January 2024',
+						body: [],
+						// Showcase image
+						main: images[0],
+					},
+					{
+						title: 'mock event title',
+						date: '5th January 2024',
+						body: [],
+						// Half width image
+						main: images[3],
+					},
+				],
+			},
+		],
+	},
+];
+
+const elementsWithMultipleSections: FEElement[] = [
+	{
+		_type: 'model.dotcomrendering.pageElements.TimelineBlockElement',
+		elementId: 'mock-id',
+		sections: [
+			{
+				title: 'Section 1',
+				events: [
+					{
+						title: 'Event 1 title',
+						date: '1st January 2024',
+						body: [],
+					},
+					{
+						title: 'Event 2 title',
+						date: '5th January 2024',
+						body: [],
+					},
+				],
+			},
+			{
+				title: 'Section 2',
+				events: [
+					{
+						title: 'Event 3 title',
+						date: '1st March 2024',
+						body: [],
+					},
+					{
+						title: 'Event 4 title',
+						date: '5th March 2024',
+						body: [],
+					},
+				],
+			},
+		],
+	},
+];
+
 describe('enhanceTimeline', () => {
 	it('keeps a main media with a role that is valid', () => {
-		const enhanced = enhanceTimeline(identity)(elements);
+		const enhanced = enhanceTimeline(identity)(elementsWithNoSections);
 		assert.equal(
 			enhanced[0]?._type,
 			'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
@@ -87,7 +154,7 @@ describe('enhanceTimeline', () => {
 	});
 
 	it('drops a main media with a role that is not valid', () => {
-		const enhanced = enhanceTimeline(identity)(elements);
+		const enhanced = enhanceTimeline(identity)(elementsWithNoSections);
 		assert.equal(
 			enhanced[0]?._type,
 			'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
@@ -99,7 +166,7 @@ describe('enhanceTimeline', () => {
 	});
 
 	it('keeps a main media without a role', () => {
-		const enhanced = enhanceTimeline(identity)(elements);
+		const enhanced = enhanceTimeline(identity)(elementsWithNoSections);
 		assert.equal(
 			enhanced[0]?._type,
 			'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
@@ -110,7 +177,7 @@ describe('enhanceTimeline', () => {
 		expect(timelineEvent?.main).toBeDefined();
 	});
 	it('keeps a body element with a role that is valid', () => {
-		const enhanced = enhanceTimeline(identity)(elements);
+		const enhanced = enhanceTimeline(identity)(elementsWithNoSections);
 		assert.equal(
 			enhanced[0]?._type,
 			'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
@@ -122,7 +189,7 @@ describe('enhanceTimeline', () => {
 	});
 
 	it('drops a body element with a role that is not valid', () => {
-		const enhanced = enhanceTimeline(identity)(elements);
+		const enhanced = enhanceTimeline(identity)(elementsWithNoSections);
 		assert.equal(
 			enhanced[0]?._type,
 			'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
@@ -134,7 +201,7 @@ describe('enhanceTimeline', () => {
 	});
 
 	it('keeps a body element without a role', () => {
-		const enhanced = enhanceTimeline(identity)(elements);
+		const enhanced = enhanceTimeline(identity)(elementsWithNoSections);
 		assert.equal(
 			enhanced[0]?._type,
 			'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
@@ -150,5 +217,30 @@ describe('enhanceTimeline', () => {
 				assets: [],
 			},
 		]);
+	});
+
+	it('enhances a timeline with one section appropriately', () => {
+		const enhanced = enhanceTimeline(identity)(elementsWithOneSection);
+		assert.equal(
+			enhanced[0]?._type,
+			'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement',
+		);
+
+		const timelineSection = enhanced[0].sections[0];
+		assert.notEqual(timelineSection, undefined);
+		expect(timelineSection?.title).toEqual('Section 1');
+	});
+
+	it('enhances a timeline with multiple sections appropriately', () => {
+		const enhanced = enhanceTimeline(identity)(
+			elementsWithMultipleSections,
+		);
+		assert.equal(
+			enhanced[0]?._type,
+			'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement',
+		);
+
+		const timelineSections = enhanced[0].sections;
+		expect(timelineSections).toHaveLength(2);
 	});
 });
