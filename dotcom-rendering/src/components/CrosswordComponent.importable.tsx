@@ -4,8 +4,10 @@ import type { CrosswordProps } from '@guardian/react-crossword-next';
 import {
 	between,
 	from,
+	headlineBold14,
 	headlineBold17,
 	space,
+	textSans12,
 	textSans14,
 	textSansItalic12,
 } from '@guardian/source/foundations';
@@ -29,6 +31,12 @@ const CluesHeader = memo(({ children }: { children: ReactNode }) => {
 				height: 2em;
 				margin-bottom: 0.5em;
 				text-transform: capitalize;
+				@media print {
+					${headlineBold14};
+					border: none;
+					height: auto;
+					margin-bottom: 0.25em;
+				}
 			`}
 		>
 			{children}
@@ -114,6 +122,10 @@ const Layout: CrosswordProps['Layout'] = ({
 			<div
 				css={css`
 					flex-basis: ${gridWidth}px;
+					@media print {
+						flex-basis: auto;
+						max-width: 90mm;
+					}
 				`}
 			>
 				<FocusedClue
@@ -211,6 +223,7 @@ const Layout: CrosswordProps['Layout'] = ({
 						}
 						@media print {
 							flex-direction: row;
+							${textSans12};
 						}
 					`}
 				>
