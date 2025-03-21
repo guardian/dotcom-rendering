@@ -346,23 +346,27 @@ export const InteractiveBlockComponent = ({
 			}
 
 			// Datawrapper-specific fix to suppress scrollbars appearing
-			if (url.includes('datawrapper')) {
-				iframe.scrolling = 'no';
-				// Turn off dark mode for Datawrapper embeds on web
-				// This should be removed if/when dark mode is implements on the website
-				if (
-					!document.querySelector('.ios') &&
-					!document.querySelector('.android')
-				) {
-					const prefersDarkScheme = window.matchMedia(
-						'(prefers-color-scheme: dark)',
-					).matches;
-					const darkMode = darkModeAvailable && prefersDarkScheme;
-					if (!darkMode) {
-						iframe.src +=
-							(iframe.src.includes('?') ? '&' : '?') +
-							'dark=false';
-					}
+			if (url.includes('datawrapper')) iframe.scrolling = 'no';
+
+			// Bespoke dark mode logic for Datawrapper and ai2html embeds on web
+			// This should be removed if/when dark mode is implements on the website
+			const isai2html = url.includes(
+				'interactive.guim.co.uk/uploader/embed/',
+			);
+			if (
+				!document.querySelector('.ios') &&
+				!document.querySelector('.android') &&
+				(url.includes('datawrapper') || isai2html)
+			) {
+				const prefersDarkScheme = window.matchMedia(
+					'(prefers-color-scheme: dark)',
+				).matches;
+				const darkMode = darkModeAvailable && prefersDarkScheme;
+				if (!darkMode) {
+					iframe.src +=
+						(isai2html ? '/' : '') +
+						(iframe.src.includes('?') ? '&' : '?') +
+						'dark=false';
 				}
 			}
 
