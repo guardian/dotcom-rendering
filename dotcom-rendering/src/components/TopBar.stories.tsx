@@ -142,7 +142,7 @@ export const SignedInText = () => {
 				discussionApiUrl={''}
 				idApiUrl={''}
 				authStatus={{
-					kind: 'SignedInWithOkta',
+					kind: 'SignedIn',
 					accessToken: mockAccessToken as AccessToken<never>,
 					idToken: mockIdToken,
 				}}

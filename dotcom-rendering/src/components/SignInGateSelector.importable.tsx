@@ -6,7 +6,7 @@ import {
 } from '../lib/contributions';
 import { getDailyArticleCount, getToday } from '../lib/dailyArticleCount';
 import type { EditionId } from '../lib/edition';
-import { isUserLoggedInOktaRefactor } from '../lib/identity';
+import { isUserLoggedIn } from '../lib/identity';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { constructQuery } from '../lib/querystring';
 import { useAB } from '../lib/useAB';
@@ -233,9 +233,7 @@ const SignInGateSelectorDefault = ({
 	switches,
 }: PropsDefault) => {
 	const authStatus = useAuthStatus();
-	const isSignedIn =
-		authStatus.kind === 'SignedInWithOkta' ||
-		authStatus.kind === 'SignedInWithCookies';
+	const isSignedIn = authStatus.kind === 'SignedIn';
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
 	);
@@ -685,7 +683,7 @@ const SignInGateSelectorAuxia = ({
 	useOnce(() => {
 		void (async () => {
 			// Only make a request to Auxia if user is signed out. This means signed-in users will never receive an Auxia treatment, and therefore never see a sign-in gate
-			const isSignedIn = await isUserLoggedInOktaRefactor();
+			const isSignedIn = await isUserLoggedIn();
 
 			// Although the component is returning null if we are in preview or it's a paid content
 			// We need to guard against the API possibly being called before the component returns.

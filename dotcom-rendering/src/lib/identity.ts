@@ -5,14 +5,13 @@ import type {
 	IDToken,
 } from '@guardian/identity-auth';
 import { getIdentityAuth } from '@guardian/identity-auth-frontend';
-import { getCookie } from '@guardian/libs';
 
 export type CustomIdTokenClaims = CustomClaims & {
 	email: string;
 	braze_uuid: string;
 };
 
-export async function isSignedInWithOktaAuthState(): Promise<
+export async function isSignedInAuthState(): Promise<
 	IdentityAuthState<never, CustomIdTokenClaims>
 > {
 	return getIdentityAuth()
@@ -29,99 +28,18 @@ export async function isSignedInWithOktaAuthState(): Promise<
 		});
 }
 
-type OktaAuthState = IdentityAuthState<never, CustomIdTokenClaims>;
+type AuthState = IdentityAuthState<never, CustomIdTokenClaims>;
 
-type SignedOutWithCookies = { kind: 'SignedOutWithCookies' };
-export type SignedInWithCookies = { kind: 'SignedInWithCookies' };
-type SignedOutWithOkta = { kind: 'SignedOutWithOkta' };
-export type SignedInWithOkta = {
-	kind: 'SignedInWithOkta';
+type SignedOut = { kind: 'SignedOut' };
+export type SignedIn = {
+	kind: 'SignedIn';
 	accessToken: AccessToken<never>;
 	idToken: IDToken<CustomIdTokenClaims>;
 };
 
-export type AuthStatus =
-	| SignedOutWithCookies
-	| SignedInWithCookies
-	| SignedOutWithOkta
-	| SignedInWithOkta;
+export type AuthStatus = SignedOut | SignedIn;
 
-// relates to getUserFromCookie() below but not used in user-features - however may be useful for other purposes
-type IdentityUserFromCache = {
-	dates: { accountCreatedDate: string };
-	publicFields: {
-		displayName: string;
-	};
-	statusFields: {
-		userEmailValidated: boolean;
-	};
-	id: number;
-	rawResponse: string;
-} | null;
-
-let userFromCookieCache: IdentityUserFromCache = null;
-const cookieName = 'GU_U';
-const getUserCookie = (): string | null =>
-	getCookie({ name: cookieName, shouldMemoize: true });
-
-const decodeBase64 = (str: string): string =>
-	decodeURIComponent(
-		escape(
-			window.atob(
-				str.replace(/-/g, '+').replace(/_/g, '/').replace(/,/g, '='),
-			),
-		),
-	);
-
-const getUserFromCookie = (): IdentityUserFromCache => {
-	if (userFromCookieCache === null) {
-		const cookieData = getUserCookie();
-
-		if (cookieData) {
-			try {
-				const userData = JSON.parse(
-					decodeBase64(cookieData.split('.')[0] ?? ''),
-				) as string[];
-
-				const id = parseInt(userData[0] ?? '', 10);
-				const displayName = decodeURIComponent(userData[2] ?? '');
-				const accountCreatedDate = userData[6];
-				const userEmailValidated = Boolean(userData[7]);
-
-				if (id && accountCreatedDate) {
-					userFromCookieCache = {
-						id,
-						publicFields: {
-							displayName,
-						},
-						dates: { accountCreatedDate },
-						statusFields: {
-							userEmailValidated,
-						},
-						rawResponse: cookieData,
-					};
-				}
-			} catch (e) {
-				// eslint-disable-next-line no-console -- we want to log the error to console, not Sentry
-				console.error('Cookie value is malformed', e);
-			}
-		}
-	}
-
-	return userFromCookieCache;
-};
-
-export const isUserLoggedIn = (): boolean => getUserFromCookie() !== null;
-
-export const getOptionsHeadersWithOkta = (
-	authStatus: SignedInWithCookies | SignedInWithOkta,
-): RequestInit => {
-	if (authStatus.kind === 'SignedInWithCookies') {
-		return {
-			credentials: 'include',
-		};
-	}
-
+export const getOptionsHeaders = (authStatus: SignedIn): RequestInit => {
 	return {
 		headers: {
 			Authorization: `Bearer ${authStatus.accessToken.accessToken}`,
@@ -130,63 +48,29 @@ export const getOptionsHeadersWithOkta = (
 	};
 };
 
-export async function getAuthState(): Promise<OktaAuthState> {
-	const authState = await isSignedInWithOktaAuthState();
+export async function getAuthState(): Promise<AuthState> {
+	const authState = await isSignedInAuthState();
 	return authState;
 }
 
-export async function eitherInOktaTestOrElse<A, B>(
-	inOktaTestFunction: (authState: OktaAuthState) => A,
-	notInOktaTestFunction: () => B,
-): Promise<A | B> {
-	const useOkta = !!window.guardian.config.switches.okta;
-
-	if (useOkta) {
-		const authState = await getAuthState();
-		return inOktaTestFunction(authState);
-	} else {
-		return notInOktaTestFunction();
-	}
-}
-
-export function getSignedInStatusWithOkta(
-	authState: OktaAuthState,
-): SignedOutWithOkta | SignedInWithOkta {
+export function getSignedInStatus(authState: AuthState): SignedOut | SignedIn {
 	if (authState.isAuthenticated) {
 		return {
-			kind: 'SignedInWithOkta',
+			kind: 'SignedIn',
 			accessToken: authState.accessToken,
 			idToken: authState.idToken,
 		};
 	}
 
-	return { kind: 'SignedOutWithOkta' };
+	return { kind: 'SignedOut' };
 }
 
-export const isUserLoggedInOktaRefactor = (): Promise<boolean> =>
+export const isUserLoggedIn = (): Promise<boolean> =>
 	getAuthStatus().then((authStatus) =>
-		authStatus.kind === 'SignedInWithCookies' ||
-		authStatus.kind === 'SignedInWithOkta'
-			? true
-			: false,
+		authStatus.kind === 'SignedIn' ? true : false,
 	);
 
-export function getSignedInStatusWithCookies():
-	| SignedOutWithCookies
-	| SignedInWithCookies {
-	const GU_UCookie = getUserCookie();
-	return GU_UCookie === null || GU_UCookie === ''
-		? { kind: 'SignedOutWithCookies' }
-		: { kind: 'SignedInWithCookies' };
-}
-
 export const getAuthStatus = async (): Promise<AuthStatus> => {
-	const useOkta = !!window.guardian.config.switches.okta;
-
-	if (useOkta) {
-		const authState = await getAuthState();
-		return getSignedInStatusWithOkta(authState);
-	} else {
-		return getSignedInStatusWithCookies();
-	}
+	const authState = await getAuthState();
+	return getSignedInStatus(authState);
 };

@@ -1008,7 +1008,6 @@ export const footballData: FEFootballDataPage = {
 			extendedMostPopular: true,
 			ampContentAbTesting: false,
 			prebidCriteo: true,
-			okta: true,
 			imrWorldwide: true,
 			acast: true,
 			twitterUwt: true,
