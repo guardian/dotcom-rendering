@@ -1,4 +1,4 @@
-.PHONY: install dev dev-legacy build clean-dist clear
+.PHONY: install dev build clean-dist clear
 
 # these means you can run the binaries in node_modules
 # like with npm scripts
@@ -54,10 +54,6 @@ dev: clear clean-dist install
 dev-variant: clear clean-dist install
 	$(call log, "starting DEV server")
 	@NODE_ENV=development BUILD_VARIANT=true webpack serve --config ./webpack/webpack.config.js
-
-dev-legacy: clear clean-dist install
-	$(call log, "starting DEV server")
-	@NODE_ENV=development BUILD_LEGACY=true webpack serve --config ./webpack/webpack.config.js
 
 dev-debug: clear clean-dist install
 	$(call log, "starting DEV server and debugger")
