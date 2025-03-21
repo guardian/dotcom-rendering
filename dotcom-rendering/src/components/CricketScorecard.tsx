@@ -20,6 +20,7 @@ const tableStyles = css`
 
 	caption {
 		background: ${palette('--table-block-background')};
+		${textSansBold14}
 	}
 
 	strong,
@@ -144,15 +145,41 @@ const Bowling = ({ bowlers }: { bowlers: BowlerData[] }) => (
 );
 
 const Batting = ({
+	inningsDescription,
 	batters,
 	extras,
 	inningsTotals,
 }: {
+	inningsDescription: string;
 	batters: BatterData[];
 	extras: Extras;
 	inningsTotals: InningsTotals;
 }) => (
-	<table css={tableStyles}>
+	<table
+		css={[
+			tableStyles,
+			css`
+				${until.tablet} {
+					border-top: 0.0625rem solid
+						${palette('--football-match-list-border')};
+				}
+			`,
+		]}
+	>
+		<caption
+			css={css`
+				${from.leftCol} {
+					display: none;
+				}
+				text-align: left;
+				border-top: 0.0625rem solid
+					${palette('--football-match-list-top-border')};
+				padding: 0.5rem;
+				background: ${palette('--table-block-background')};
+			`}
+		>
+			{inningsDescription}
+		</caption>
 		<thead>
 			<tr>
 				<th>Batter</th>
@@ -244,6 +271,7 @@ export const CricketScorecard = ({ innings }: Props) => (
 		{innings.map((teamInnings) => (
 			<Stack space={9} key={teamInnings.description}>
 				<Batting
+					inningsDescription={teamInnings.description}
 					batters={teamInnings.batters}
 					extras={teamInnings.extras}
 					inningsTotals={teamInnings.inningsTotals}
