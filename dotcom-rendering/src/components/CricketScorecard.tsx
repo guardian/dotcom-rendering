@@ -3,6 +3,8 @@ import {
 	from,
 	headlineBold17,
 	space,
+	textEgyptian15,
+	textEgyptianBold15,
 	textSans14,
 	textSansBold14,
 	until,
@@ -138,6 +140,11 @@ type FallOfWicketData = {
 	order: number;
 	name: string;
 	runs: number;
+};
+
+type CricketTeam = {
+	name: string;
+	lineup: string[];
 };
 
 type InningsData = {
@@ -280,13 +287,21 @@ const FallOfWickets = ({
 
 type Props = {
 	allInnings: InningsData[];
+	officials: string[];
+	homeTeam: CricketTeam;
+	awayTeam: CricketTeam;
 };
 
-export const CricketScorecard = ({ allInnings }: Props) => (
+export const CricketScorecard = ({
+	allInnings,
+	officials,
+	homeTeam,
+	awayTeam,
+}: Props) => (
 	<Stack space={9}>
 		{allInnings.map((innings) => (
-			<span css={cricketScorecardGridStyles} key={innings.description}>
-				<h3
+			<div css={cricketScorecardGridStyles} key={innings.description}>
+				<h2
 					css={css`
 						${textSansBold14}
 						grid-column: centre-column-start / centre-column-end;
@@ -310,7 +325,7 @@ export const CricketScorecard = ({ allInnings }: Props) => (
 					`}
 				>
 					{innings.description}
-				</h3>
+				</h2>
 				<Stack
 					space={9}
 					cssOverrides={css`
@@ -325,7 +340,34 @@ export const CricketScorecard = ({ allInnings }: Props) => (
 					<Bowling bowlers={innings.bowlers} />
 					<FallOfWickets fallOfWickets={innings.fallOfWickets} />{' '}
 				</Stack>
-			</span>
+			</div>
 		))}
+		<div css={cricketScorecardGridStyles}>
+			<dl
+				css={css`
+					grid-column: centre-column-start / centre-column-end;
+
+					dt {
+						${textEgyptianBold15}
+						line-height: 1.5;
+					}
+
+					dd {
+						${textEgyptian15}
+						margin-inline-start: ${space[10]}px;
+						line-height: 1.5;
+					}
+				`}
+			>
+				<dt>Umpires</dt>
+				<dd>{officials.join(', ')}</dd>
+
+				<dt>{homeTeam.name}</dt>
+				<dd>{homeTeam.lineup.join(', ')}</dd>
+
+				<dt>{awayTeam.name}</dt>
+				<dd>{awayTeam.lineup.join(', ')}</dd>
+			</dl>
+		</div>
 	</Stack>
 );
