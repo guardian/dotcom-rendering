@@ -27,7 +27,7 @@ type Story = StoryObj<typeof CricketScorecard>;
 export const defaultStory: Story = {
 	name: 'Cricket Scorecard',
 	args: {
-		innings: [
+		allInnings: [
 			{
 				description: 'India first innings',
 				inningsTotals: {

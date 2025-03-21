@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	headlineBold17,
 	space,
 	textSans14,
 	textSansBold14,
@@ -49,6 +50,37 @@ const hideUntilTabletStyle = css`
 const hideFromTabletStyle = css`
 	${from.tablet} {
 		display: none;
+	}
+`;
+
+const cricketScorecardGridStyles = css`
+	display: grid;
+	grid-template-columns: [centre-column-start] repeat(4, 1fr) [centre-column-end];
+	column-gap: 10px;
+	${from.mobileLandscape} {
+		column-gap: 20px;
+	}
+
+	${from.tablet} {
+		grid-template-columns: [centre-column-start] repeat(12, 40px) [centre-column-end];
+	}
+
+	${from.desktop} {
+		grid-template-columns: [centre-column-start] repeat(8, 60px) [centre-column-end];
+	}
+
+	${from.leftCol} {
+		grid-template-columns:
+			[left-column-start] repeat(2, 60px)
+			[left-column-end centre-column-start] repeat(8, 60px)
+			[centre-column-end];
+	}
+
+	${from.wide} {
+		grid-template-columns:
+			[left-column-start] repeat(3, 60px)
+			[left-column-end centre-column-start] repeat(8, 60px)
+			[centre-column-end];
 	}
 `;
 
@@ -145,12 +177,10 @@ const Bowling = ({ bowlers }: { bowlers: BowlerData[] }) => (
 );
 
 const Batting = ({
-	inningsDescription,
 	batters,
 	extras,
 	inningsTotals,
 }: {
-	inningsDescription: string;
 	batters: BatterData[];
 	extras: Extras;
 	inningsTotals: InningsTotals;
@@ -159,27 +189,13 @@ const Batting = ({
 		css={[
 			tableStyles,
 			css`
-				${until.tablet} {
+				${until.leftCol} {
 					border-top: 0.0625rem solid
 						${palette('--football-match-list-border')};
 				}
 			`,
 		]}
 	>
-		<caption
-			css={css`
-				${from.leftCol} {
-					display: none;
-				}
-				text-align: left;
-				border-top: 0.0625rem solid
-					${palette('--football-match-list-top-border')};
-				padding: 0.5rem;
-				background: ${palette('--table-block-background')};
-			`}
-		>
-			{inningsDescription}
-		</caption>
 		<thead>
 			<tr>
 				<th>Batter</th>
@@ -263,22 +279,53 @@ const FallOfWickets = ({
 );
 
 type Props = {
-	innings: InningsData[];
+	allInnings: InningsData[];
 };
 
-export const CricketScorecard = ({ innings }: Props) => (
+export const CricketScorecard = ({ allInnings }: Props) => (
 	<Stack space={9}>
-		{innings.map((teamInnings) => (
-			<Stack space={9} key={teamInnings.description}>
-				<Batting
-					inningsDescription={teamInnings.description}
-					batters={teamInnings.batters}
-					extras={teamInnings.extras}
-					inningsTotals={teamInnings.inningsTotals}
-				/>
-				<Bowling bowlers={teamInnings.bowlers} />
-				<FallOfWickets fallOfWickets={teamInnings.fallOfWickets} />
-			</Stack>
+		{allInnings.map((innings) => (
+			<span css={cricketScorecardGridStyles} key={innings.description}>
+				<h3
+					css={css`
+						${textSansBold14}
+						grid-column: centre-column-start / centre-column-end;
+						border-top: 1px solid
+							${palette('--football-match-list-top-border')};
+						padding: ${space[2]}px;
+						background-color: ${palette(
+							'--football-match-list-background',
+						)};
+
+						${from.leftCol} {
+							border-top-color: ${palette(
+								'--football-match-list-border',
+							)};
+							background-color: transparent;
+							margin-top: 0;
+							padding: ${space[1]}px 0 0;
+							grid-column: left-column-start / left-column-end;
+							${headlineBold17}
+						}
+					`}
+				>
+					{innings.description}
+				</h3>
+				<Stack
+					space={9}
+					cssOverrides={css`
+						grid-column: centre-column-start / centre-column-end;
+					`}
+				>
+					<Batting
+						batters={innings.batters}
+						extras={innings.extras}
+						inningsTotals={innings.inningsTotals}
+					/>
+					<Bowling bowlers={innings.bowlers} />
+					<FallOfWickets fallOfWickets={innings.fallOfWickets} />{' '}
+				</Stack>
+			</span>
 		))}
 	</Stack>
 );
