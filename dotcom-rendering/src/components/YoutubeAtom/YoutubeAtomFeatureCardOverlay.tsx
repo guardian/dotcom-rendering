@@ -159,7 +159,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 					<div css={videoPillStyles}>
 						<Pill
 							content={secondsToDuration(duration)}
-							icon={<SvgMediaControlsPlay />}
+							icon={<SvgMediaControlsPlay width={18} />}
 						/>
 					</div>
 				) : null}

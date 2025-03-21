@@ -5,17 +5,6 @@ import { palette } from '../../../palette';
 import ClockIcon from '../../../static/icons/clock.svg';
 import { DateTime } from '../../DateTime';
 
-type Props = {
-	absoluteServerTimes: boolean;
-	webPublication: {
-		date: string;
-		isWithinTwelveHours: boolean;
-	};
-	showClock?: boolean;
-	isTagPage: boolean;
-	colour?: string;
-};
-
 const ageStyles = (colour: string) => {
 	return css`
 		${textSansBold12};
@@ -32,11 +21,22 @@ const ageStyles = (colour: string) => {
 	`;
 };
 
+type Props = {
+	absoluteServerTimes: boolean;
+	webPublication: {
+		date: string;
+		isWithinTwelveHours: boolean;
+	};
+	isTagPage: boolean;
+	showClock?: boolean;
+	colour?: string;
+};
+
 export const CardAge = ({
-	webPublication,
-	showClock,
 	absoluteServerTimes,
+	webPublication,
 	isTagPage,
+	showClock,
 	colour = palette('--card-footer-text'),
 }: Props) => {
 	if (timeAgo(new Date(webPublication.date).getTime()) === false) {

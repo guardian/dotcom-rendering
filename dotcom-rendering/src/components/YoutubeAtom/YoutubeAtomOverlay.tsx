@@ -161,7 +161,6 @@ export const YoutubeAtomOverlay = ({
 						<Pill
 							content="Live"
 							icon={<div css={[liveBulletStyles]} />}
-							iconSize="small"
 						/>
 					</div>
 				) : hasDuration ? (
@@ -176,8 +175,7 @@ export const YoutubeAtomOverlay = ({
 					>
 						<Pill
 							content={secondsToDuration(duration)}
-							icon={<SvgMediaControlsPlay />}
-							iconSize="small"
+							icon={<SvgMediaControlsPlay width={18} />}
 						/>
 					</div>
 				) : null}
