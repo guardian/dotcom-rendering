@@ -26,13 +26,6 @@ jobs:
           path: dotcom-rendering/dist/stats/client.web-bundles.html
           if-no-files-found: error
 
-      - name: Archive code coverage results for web legacy bundle
-        uses: actions/upload-artifact@v4
-        with:
-          name: bundle-analyser-report-web-legacy
-          path: dotcom-rendering/dist/stats/client.web.legacy-bundles.html
-          if-no-files-found: error
-
       - name: Archive code coverage results for web variant bundle
         uses: actions/upload-artifact@v4
         with:
