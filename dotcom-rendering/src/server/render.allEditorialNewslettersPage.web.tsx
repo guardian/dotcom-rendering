@@ -61,15 +61,7 @@ export const renderEditorialNewslettersPage = ({
 			newslettersPage.config.commercialBundleUrl,
 	];
 
-	const legacyScripts = [
-		getPathFromManifest('client.web.legacy', 'frameworks.js'),
-		getPathFromManifest('client.web.legacy', 'index.js'),
-	];
-
-	const scriptTags = generateScriptTags([
-		...prefetchScripts,
-		...legacyScripts,
-	]);
+	const scriptTags = generateScriptTags(prefetchScripts);
 
 	const guardian = createGuardian({
 		editionId: newslettersPage.editionId,
