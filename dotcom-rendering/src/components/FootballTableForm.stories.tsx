@@ -14,7 +14,7 @@ const meta = {
 			</>
 		),
 	],
-} satisfies Meta<typeof FootballTableFormComponent >;
+} satisfies Meta<typeof FootballTableFormComponent>;
 
 export default meta;
 
