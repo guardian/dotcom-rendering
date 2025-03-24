@@ -26,7 +26,8 @@ const headStyles = css`
 
 const rowStyles = css`
 	${textSans14};
-	:nth-child(odd) > td {
+	:nth-child(odd) > td,
+	:nth-child(odd) > th {
 		background-color: ${palette('--table-block-stripe')};
 	}
 
@@ -38,7 +39,8 @@ const rowStyles = css`
 `;
 
 const dividerStyle = css`
-	td {
+	td,
+	th {
 		border-top: 0.0625rem dashed ${palette('--football-table-divider')};
 	}
 `;
@@ -176,13 +178,13 @@ export const FootballTable = ({ table, guardianBaseUrl }: Props) => (
 					>
 						{row.position}
 					</td>
-					<td>
+					<th scope="row">
 						<TeamWithCrest
 							team={row.team.name}
 							id={row.team.id}
 							url={row.team.url}
 						/>
-					</td>
+					</th>
 					<td>{row.gamesPlayed}</td>
 					<td css={hideUntilTabletStyle}>{row.won}</td>
 					<td css={hideUntilTabletStyle}>{row.drawn}</td>
