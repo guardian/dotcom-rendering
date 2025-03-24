@@ -76,10 +76,6 @@ export const FootballTable = {
 							self: { name: 'Liverpool', score: 0 },
 							foe: { name: 'Brighton', score: 0 },
 						},
-						{
-							self: { name: 'Liverpool', score: 0 },
-							foe: { name: 'Blackburn', score: 0 },
-						},
 					],
 				},
 				{
@@ -118,10 +114,6 @@ export const FootballTable = {
 							self: { name: 'Arsenal', score: 0 },
 							foe: { name: 'Tottenham', score: 0 },
 						},
-						{
-							self: { name: 'Arsenal', score: 0 },
-							foe: { name: 'Blackburn', score: 0 },
-						},
 					],
 				},
 				{
@@ -159,10 +151,6 @@ export const FootballTable = {
 						{
 							self: { name: 'Nottm Forest', score: 10 },
 							foe: { name: 'Tottenham', score: 0 },
-						},
-						{
-							self: { name: 'Nottm Forest', score: 0 },
-							foe: { name: 'Blackburn', score: 0 },
 						},
 					],
 				},

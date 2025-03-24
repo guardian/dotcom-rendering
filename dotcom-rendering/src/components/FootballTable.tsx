@@ -214,9 +214,7 @@ export const FootballTable = ({ table, guardianBaseUrl }: Props) => (
 						</b>
 					</td>
 					<td>
-						<FootballTableForm
-							teamResults={row.results.slice(0, 5)}
-						/>
+						<FootballTableForm teamResults={row.results} />
 					</td>
 				</tr>
 			))}
