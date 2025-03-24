@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	from,
-	headlineBold17,
-	space,
-	until,
-} from '@guardian/source/foundations';
+import { from, headlineBold17, space } from '@guardian/source/foundations';
 import { Stack } from '@guardian/source/react-components';
 import type { ReactNode } from 'react';
 import type { FootballTableData } from '../footballTables';

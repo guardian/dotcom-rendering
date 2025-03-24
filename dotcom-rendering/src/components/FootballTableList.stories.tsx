@@ -22,10 +22,7 @@ type Story = StoryObj<typeof meta>;
 
 export const FootballTableList = {
 	args: {
-		tables: [
-			{ ...TableDefault.args.table },
-			{ ...TableDefault.args.table },
-		],
+		tables: [TableDefault.args.table, TableDefault.args.table],
 		guardianBaseUrl: 'https://www.theguardian.com',
 	},
 } satisfies Story;

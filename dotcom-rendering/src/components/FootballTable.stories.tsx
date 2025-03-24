@@ -23,7 +23,7 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta<typeof FootballTableComponent >;
+} satisfies Meta<typeof FootballTableComponent>;
 
 export default meta;
 
@@ -35,7 +35,7 @@ export const FootballTable = {
 		table: {
 			competition: {
 				name: 'Premier League',
-				url: 'https://www.theguardian.com/football/premierleague',
+				url: '/football/premierleague',
 			},
 			linkToFullTable: true,
 			dividers: [1],
@@ -45,7 +45,7 @@ export const FootballTable = {
 					team: {
 						name: 'Liverpool',
 						id: '9',
-						url: 'https://www.theguardian.com/football/arsenal',
+						url: '/football/liverpool',
 					},
 					gamesPlayed: 29,
 					won: 21,
@@ -87,7 +87,7 @@ export const FootballTable = {
 					team: {
 						name: 'Arsenal',
 						id: '1006',
-						url: 'https://www.theguardian.com/football/arsenal',
+						url: '/football/arsenal',
 					},
 					gamesPlayed: 29,
 					won: 21,
@@ -129,7 +129,7 @@ export const FootballTable = {
 					team: {
 						name: 'Nottm Forest',
 						id: '15',
-						url: 'https://www.theguardian.com/football/nottinghamforest',
+						url: '/football/nottinghamforest',
 					},
 					gamesPlayed: 29,
 					won: 16,
