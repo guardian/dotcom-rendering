@@ -172,7 +172,7 @@ const decideSplashCardProperties = (
 	}
 };
 
-export const SplashCardLayout = ({
+const SplashCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
@@ -347,7 +347,7 @@ const decideCardProperties = (
 	}
 };
 
-export const BoostedCardLayout = ({
+const BoostedCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
@@ -431,7 +431,7 @@ export const BoostedCardLayout = ({
 	);
 };
 
-export const StandardCardLayout = ({
+const StandardCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,

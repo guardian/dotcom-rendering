@@ -20,7 +20,7 @@ export const Default = {} satisfies Story;
 export const WithVideoIcon = {
 	args: {
 		content: <time>3:35</time>,
-		icon: <SvgMediaControlsPlay />,
+		icon: <SvgMediaControlsPlay width={18} />,
 	},
 } satisfies Story;
 
@@ -32,9 +32,17 @@ export const WithGalleryIcon = {
 	},
 } satisfies Story;
 
+export const WithVideoIconAndPrefix = {
+	args: {
+		...WithVideoIcon.args,
+		prefix: 'Video',
+	},
+} satisfies Story;
+
 export const WithGalleryIconAndPrefix = {
 	args: {
 		...WithGalleryIcon.args,
 		prefix: 'Gallery',
+		iconSide: 'left',
 	},
 } satisfies Story;
