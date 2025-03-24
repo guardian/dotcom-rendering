@@ -1,7 +1,6 @@
 import { isUndefined } from '@guardian/libs';
 import { resets, palette as sourcePalette } from '@guardian/source/foundations';
 import he from 'he';
-import { isDev } from '../../configs/webpack/utils/env.mjs';
 import { ASSET_ORIGIN } from '../lib/assets';
 import { escapeData } from '../lib/escapeData';
 import { fontsCss } from '../lib/fonts-css';
@@ -78,7 +77,7 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 	} = props;
 
 	const doNotIndex = (): boolean => {
-		const isDevelopment = isDev;
+		const isDevelopment = process.env.NODE_ENV !== 'production';
 
 		const hasNoIndexPattern = Boolean(
 			canonicalUrl?.includes('tracking/commissioningdesk'),
