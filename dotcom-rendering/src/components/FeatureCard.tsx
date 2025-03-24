@@ -157,13 +157,6 @@ const podcastImageContainerStyles = css`
 const podcastImageStyles = css`
 	height: 80px;
 	width: 80px;
-	position: absolute;
-	/**
-	 * Displays 8px above the text.
-	 * desired space above text (8px) - padding-top of text container (64px) = -56px
-	 */
-	bottom: -${space[14]}px;
-	left: ${space[2]}px;
 `;
 
 const starRatingWrapper = css`
@@ -483,33 +476,6 @@ export const FeatureCard = ({
 											immersiveOverlayContainerStyles,
 									]}
 								>
-									{mainMedia?.type === 'Audio' &&
-										!!mainMedia.podcastImage?.src && (
-											<div
-												css={
-													podcastImageContainerStyles
-												}
-											>
-												<div css={podcastImageStyles}>
-													<CardPicture
-														mainImage={
-															mainMedia
-																.podcastImage
-																.src
-														}
-														imageSize="podcast"
-														alt={
-															mainMedia
-																.podcastImage
-																.altText ?? ''
-														}
-														loading="lazy"
-														roundedCorners={false}
-														aspectRatio="1:1"
-													/>
-												</div>
-											</div>
-										)}
 									<div
 										css={[
 											overlayStyles,
@@ -517,6 +483,38 @@ export const FeatureCard = ({
 												immersiveOverlayStyles,
 										]}
 									>
+										{mainMedia?.type === 'Audio' &&
+											!!mainMedia.podcastImage?.src && (
+												<div
+													css={
+														podcastImageContainerStyles
+													}
+												>
+													<div
+														css={podcastImageStyles}
+													>
+														<CardPicture
+															mainImage={
+																mainMedia
+																	.podcastImage
+																	.src
+															}
+															imageSize="podcast"
+															alt={
+																mainMedia
+																	.podcastImage
+																	.altText ??
+																''
+															}
+															loading="lazy"
+															roundedCorners={
+																false
+															}
+															aspectRatio="1:1"
+														/>
+													</div>
+												</div>
+											)}
 										{/**
 										 * Without the wrapping div the headline and byline would have space
 										 * inserted between them due to being direct children of the flex container
