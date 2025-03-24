@@ -69,6 +69,18 @@ function getFootballCrestImageUrl(teamId: string) {
 	return `https://sport.guim.co.uk/football/crests/60/${teamId}.png`;
 }
 
+const FullTableLink = ({
+	competition,
+	guardianBaseUrl,
+}: {
+	competition: FootballTableData['competition'];
+	guardianBaseUrl: string;
+}) => (
+	<a href={`${guardianBaseUrl}${competition.url}/table`} css={linkStyles}>
+		View full {competition.name} table
+	</a>
+);
+
 const FootballCrest = ({ teamId }: { teamId: string }) => (
 	<div
 		css={css`
@@ -212,13 +224,24 @@ export const FootballTable = ({ table, guardianBaseUrl }: Props) => (
 		{table.linkToFullTable && (
 			<tfoot>
 				<tr css={rowStyles}>
-					<td colSpan={11}>
-						<a
-							href={`${guardianBaseUrl}${table.competition.url}/table`}
-							css={linkStyles}
-						>
-							View full {table.competition.name} table
-						</a>
+					<td colSpan={11} css={hideUntilTabletStyle}>
+						<FullTableLink
+							competition={table.competition}
+							guardianBaseUrl={guardianBaseUrl}
+						/>
+					</td>
+					<td
+						colSpan={6}
+						css={css`
+							${from.tablet} {
+								display: none;
+							}
+						`}
+					>
+						<FullTableLink
+							competition={table.competition}
+							guardianBaseUrl={guardianBaseUrl}
+						/>
 					</td>
 				</tr>
 			</tfoot>
