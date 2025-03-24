@@ -90,6 +90,7 @@ const meta = {
 	args: {
 		images,
 		imageSize: 'medium',
+		hasNavigationBackgroundColour: false,
 	},
 	render: (args) => (
 		<Wrapper>
