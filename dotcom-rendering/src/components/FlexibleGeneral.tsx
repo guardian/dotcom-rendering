@@ -196,8 +196,8 @@ export const SplashCardLayout = ({
 	const card = cards[0];
 	if (!card) return null;
 
-	const isImmersive = false; // TODO: replace with live data from fronts tool - used for testing
-	const shouldShowImmersive = isImmersive;
+	// TODO: replace with live data from fronts tool - used for testing
+	const shouldShowImmersive = false;
 
 	if (shouldShowImmersive) {
 		return (
