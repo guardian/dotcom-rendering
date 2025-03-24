@@ -77,7 +77,7 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 	} = props;
 
 	const doNotIndex = (): boolean => {
-		const isDevelopment = process.env.NODE_ENV !== 'production';
+		const isDevelopment = process.env.GU_STAGE !== 'PROD';
 
 		const hasNoIndexPattern = Boolean(
 			canonicalUrl?.includes('tracking/commissioningdesk'),
