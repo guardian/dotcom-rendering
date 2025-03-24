@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { space } from '@guardian/source/foundations';
+import { from, space } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import { secondsToDuration } from '../../lib/formatTime';
 import { palette } from '../../palette';
@@ -49,17 +49,9 @@ const hoverStyles = css`
 	}
 `;
 
-const textOverlayStyles = css`
-	width: 100%;
-	position: absolute;
-	bottom: 0;
-	display: flex;
-	flex-direction: column;
-	text-align: start;
-	gap: ${space[1]}px;
-	padding: 64px ${space[2]}px ${space[2]}px;
+const overlayMaskGradientStyles = (angle: string) => css`
 	mask-image: linear-gradient(
-		180deg,
+		${angle},
 		transparent 0px,
 		rgba(0, 0, 0, 0.0381) 8px,
 		rgba(0, 0, 0, 0.1464) 16px,
@@ -70,7 +62,29 @@ const textOverlayStyles = css`
 		rgba(0, 0, 0, 0.9619) 56px,
 		rgb(0, 0, 0) 64px
 	);
+`;
+const textOverlayStyles = css`
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	text-align: start;
+	gap: ${space[1]}px;
+	padding: 64px ${space[2]}px ${space[2]}px;
+	${overlayMaskGradientStyles('180deg')};
+
 	backdrop-filter: blur(12px) brightness(0.5);
+`;
+
+const immersiveOverlayStyles = css`
+	${from.tablet} {
+		height: 100%;
+		width: 25%;
+		padding: ${space[2]}px 64px ${space[2]}px ${space[2]}px;
+		backdrop-filter: blur(12px) brightness(0.5);
+		${overlayMaskGradientStyles('270deg')}
+	}
 `;
 
 const videoPillStyles = css`
@@ -92,6 +106,7 @@ type Props = {
 	duration?: number; // in seconds
 	kicker?: string;
 	aspectRatio?: AspectRatio;
+	mobileAspectRatio?: AspectRatio;
 	trailText?: string;
 	isVideoArticle?: boolean;
 	webPublicationDate?: string;
@@ -100,6 +115,7 @@ type Props = {
 	linkTo?: string;
 	discussionApiUrl?: string;
 	discussionId?: string;
+	isImmersive?: boolean;
 };
 
 export const YoutubeAtomFeatureCardOverlay = ({
@@ -115,6 +131,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	kicker,
 	format,
 	aspectRatio,
+	mobileAspectRatio,
 	trailText,
 	isVideoArticle,
 	webPublicationDate,
@@ -123,6 +140,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	linkTo,
 	discussionId,
 	discussionApiUrl,
+	isImmersive,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
@@ -153,6 +171,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 						height={height}
 						width={width}
 						aspectRatio={aspectRatio}
+						mobileAspectRatio={mobileAspectRatio}
 					/>
 				)}
 				{hasDuration && !isVideoArticle ? (
@@ -165,7 +184,12 @@ export const YoutubeAtomFeatureCardOverlay = ({
 				) : null}
 				<div className="image-overlay" />
 				<PlayIcon iconWidth="narrow" />
-				<div css={[textOverlayStyles]}>
+				<div
+					css={[
+						textOverlayStyles,
+						isImmersive && immersiveOverlayStyles,
+					]}
+				>
 					{!!kicker && (
 						<Kicker
 							text={kicker}

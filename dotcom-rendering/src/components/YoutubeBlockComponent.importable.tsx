@@ -55,6 +55,7 @@ type Props = {
 	discussionId?: string;
 	isFeatureCard?: boolean;
 	mobileAspectRatio?: AspectRatio;
+	isImmersive?: boolean;
 };
 
 export const YoutubeBlockComponent = ({
@@ -93,6 +94,7 @@ export const YoutubeBlockComponent = ({
 	discussionId,
 	isFeatureCard,
 	mobileAspectRatio,
+	isImmersive,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -203,6 +205,7 @@ export const YoutubeBlockComponent = ({
 				discussionId={discussionId}
 				discussionApiUrl={discussionApiUrl}
 				isFeatureCard={isFeatureCard}
+				isImmersive={isImmersive}
 			/>
 			{!hideCaption && (
 				<Caption

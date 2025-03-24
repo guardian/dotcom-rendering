@@ -24,12 +24,10 @@ const getAspectRatioPadding = (aspectRatio?: AspectRatio): string => {
 	}
 };
 
-const decideMobileAspectRatioStyles = (aspectRatio?: AspectRatio) => {
-	const paddingRatio = getAspectRatioPadding(aspectRatio);
-	console.log(aspectRatio, paddingRatio);
+const mobileAspectRatioStyles = (aspectRatio?: AspectRatio) => {
 	return css`
 		${until.tablet} {
-			padding-bottom: ${paddingRatio};
+			padding-bottom: ${getAspectRatioPadding(aspectRatio)};
 		}
 	`;
 };
@@ -45,7 +43,6 @@ export const MaintainAspectRatio = ({
 	const paddingBottom = aspectRatio
 		? getAspectRatioPadding(aspectRatio)
 		: `${(height / width) * 100}%`;
-	console.log({ mobileAspectRatio });
 	return (
 		<div
 			css={[
@@ -62,8 +59,7 @@ export const MaintainAspectRatio = ({
 						left: 0;
 					}
 				`,
-				mobileAspectRatio &&
-					decideMobileAspectRatioStyles(mobileAspectRatio),
+				mobileAspectRatio && mobileAspectRatioStyles(mobileAspectRatio),
 			]}
 		>
 			{children}
