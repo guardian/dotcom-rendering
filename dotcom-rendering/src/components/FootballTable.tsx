@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	from,
-	textSans14,
-	textSansBold14,
-	until,
-} from '@guardian/source/foundations';
+import { from, textSans14, until } from '@guardian/source/foundations';
 import type { FootballTableData } from '../footballTables';
 import { palette } from '../palette';
 import { FootballTableForm } from './FootballTableForm';
@@ -125,25 +120,6 @@ const TeamWithCrest = ({
 
 export const FootballTable = ({ table, guardianBaseUrl }: Props) => (
 	<table css={tableStyles}>
-		<caption
-			css={css`
-				${from.leftCol} {
-					display: none;
-				}
-				text-align: left;
-				border-top: 0.0625rem solid ${palette('--football-top-border')};
-				padding: 0.5rem;
-				${textSansBold14};
-				background: ${palette('--table-block-background')};
-			`}
-		>
-			<a
-				css={linkStyles}
-				href={`${guardianBaseUrl}${table.competition.url}`}
-			>
-				{table.competition.name}
-			</a>
-		</caption>
 		<thead css={headStyles}>
 			<tr css={rowStyles}>
 				<th

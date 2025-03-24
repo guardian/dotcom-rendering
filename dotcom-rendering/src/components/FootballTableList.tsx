@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { from, headlineBold17, space } from '@guardian/source/foundations';
+import {
+	from,
+	headlineBold17,
+	space,
+	textSansBold14,
+} from '@guardian/source/foundations';
 import { Stack } from '@guardian/source/react-components';
 import type { ReactNode } from 'react';
 import type { FootballTableData } from '../footballTables';
@@ -40,7 +45,12 @@ const footballTablesGridStyles = css`
 const CompetitionName = ({ children }: { children: ReactNode }) => (
 	<h3
 		css={css`
-			display: none;
+			${textSansBold14}
+			grid-column: centre-column-start / centre-column-end;
+			color: ${palette('--football-competition-text')};
+			border-top: 1px solid ${palette('--football-top-border')};
+			padding: ${space[2]}px;
+			background-color: ${palette('--football-match-list-background')};
 
 			${from.leftCol} {
 				display: block;
@@ -84,6 +94,7 @@ export const FootballTableList = ({ tables, guardianBaseUrl }: Props) => (
 						{table.competition.name}
 					</a>
 				</CompetitionName>
+				{/* ToDo: h4 for group name */}
 				<div
 					css={css`
 						grid-column: centre-column-start / centre-column-end;
