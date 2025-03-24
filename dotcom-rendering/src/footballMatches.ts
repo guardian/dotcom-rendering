@@ -379,6 +379,7 @@ export type Region = {
 
 export type DCRFootballDataPage = {
 	matchesList: FootballMatches;
+	now: string;
 	kind: FootballMatchKind;
 	nextPage?: string;
 	previousPage?: string;
