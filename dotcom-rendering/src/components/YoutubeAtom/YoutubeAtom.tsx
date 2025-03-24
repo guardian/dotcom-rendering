@@ -51,6 +51,7 @@ export type Props = {
 	hidePillOnMobile: boolean;
 	renderingTarget: RenderingTarget;
 	aspectRatio?: AspectRatio;
+	mobileAspectRatio?: AspectRatio;
 	trailText?: string;
 	headlineSizes?: ResponsiveFontSize;
 	isVideoArticle?: boolean;
@@ -103,6 +104,7 @@ export const YoutubeAtom = ({
 	hidePillOnMobile,
 	renderingTarget,
 	aspectRatio,
+	mobileAspectRatio,
 	trailText,
 	headlineSizes,
 	isVideoArticle,
@@ -200,6 +202,7 @@ export const YoutubeAtom = ({
 					height={height}
 					width={width}
 					aspectRatio={aspectRatio}
+					mobileAspectRatio={mobileAspectRatio}
 				>
 					{
 						/**

@@ -54,6 +54,7 @@ type Props = {
 	discussionApiUrl?: string;
 	discussionId?: string;
 	isFeatureCard?: boolean;
+	mobileAspectRatio?: AspectRatio;
 };
 
 export const YoutubeBlockComponent = ({
@@ -91,6 +92,7 @@ export const YoutubeBlockComponent = ({
 	discussionApiUrl,
 	discussionId,
 	isFeatureCard,
+	mobileAspectRatio,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -190,6 +192,7 @@ export const YoutubeBlockComponent = ({
 				hidePillOnMobile={hidePillOnMobile}
 				renderingTarget={renderingTarget}
 				aspectRatio={aspectRatio}
+				mobileAspectRatio={mobileAspectRatio}
 				trailText={trailText}
 				headlineSizes={headlineSizes}
 				isVideoArticle={isVideoArticle}
