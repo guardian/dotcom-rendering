@@ -3,6 +3,7 @@ import {
 	from,
 	space,
 	textSansBold12,
+	until,
 	width,
 } from '@guardian/source/foundations';
 import type { ThemeButton } from '@guardian/source/react-components';
@@ -73,9 +74,12 @@ const navigationStyles = (hasBackgroundColour: boolean) => css`
 	display: flex;
 	align-items: center;
 	padding-top: ${space[2]}px;
-	background-color: ${hasBackgroundColour
-		? palette('--slideshow-navigation-background')
-		: 'transparent'};
+
+	${until.tablet} {
+		background-color: ${hasBackgroundColour
+			? palette('--slideshow-navigation-background')
+			: 'transparent'};
+	}
 `;
 
 const buttonStyles = css`
@@ -218,7 +222,7 @@ export const SlideshowCarousel = ({
 			</ul>
 
 			{slideshowImageCount > 1 && (
-				<div css={[navigationStyles(hasNavigationBackgroundColour)]}>
+				<div css={navigationStyles(hasNavigationBackgroundColour)}>
 					<div css={scrollingDotStyles}>
 						<SlideshowCarouselScrollingDots
 							total={slideshowImageCount}
