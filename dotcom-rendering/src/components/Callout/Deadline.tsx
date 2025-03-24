@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import { space, textSans12 } from '@guardian/source/foundations';
-import { SvgClock } from '@guardian/source/react-components';
+import { SvgClockFilled } from '@guardian/source/react-components';
 import { palette } from '../../palette';
 
 type Props = {
@@ -50,7 +50,7 @@ export const Deadline = ({ until }: Props) => {
 
 	return (
 		<span css={deadlineStyles}>
-			<SvgClock size="xsmall" />
+			<SvgClockFilled size="xsmall" />
 			{deadlineText}
 		</span>
 	);

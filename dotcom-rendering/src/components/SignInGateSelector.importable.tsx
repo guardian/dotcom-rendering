@@ -6,6 +6,7 @@ import {
 } from '../lib/contributions';
 import { getDailyArticleCount, getToday } from '../lib/dailyArticleCount';
 import type { EditionId } from '../lib/edition';
+import { isUserLoggedIn } from '../lib/identity';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { constructQuery } from '../lib/querystring';
 import { useAB } from '../lib/useAB';
@@ -232,9 +233,7 @@ const SignInGateSelectorDefault = ({
 	switches,
 }: PropsDefault) => {
 	const authStatus = useAuthStatus();
-	const isSignedIn =
-		authStatus.kind === 'SignedInWithOkta' ||
-		authStatus.kind === 'SignedInWithCookies';
+	const isSignedIn = authStatus.kind === 'SignedIn';
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
 	);
@@ -650,12 +649,6 @@ const SignInGateSelectorAuxia = ({
 		This function if the Auxia prototype for the SignInGateSelector component.
 	*/
 
-	const authStatus = useAuthStatus();
-
-	const isSignedIn =
-		authStatus.kind === 'SignedInWithOkta' ||
-		authStatus.kind === 'SignedInWithCookies';
-
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
 	);
@@ -689,11 +682,13 @@ const SignInGateSelectorAuxia = ({
 
 	useOnce(() => {
 		void (async () => {
+			// Only make a request to Auxia if user is signed out. This means signed-in users will never receive an Auxia treatment, and therefore never see a sign-in gate
+			const isSignedIn = await isUserLoggedIn();
+
 			// Although the component is returning null if we are in preview or it's a paid content
 			// We need to guard against the API possibly being called before the component returns.
 			// That is because it would count as a content delivery for them, above all if they return a treatment
 			//  without the subsequent Log Treatment notification, which would cause confusion.
-
 			if (!isSignedIn && !isPreview && !isPaidContent) {
 				const data = await buildAuxiaGateDisplayData(
 					contributionsServiceUrl,
@@ -706,12 +701,31 @@ const SignInGateSelectorAuxia = ({
 				);
 				if (data !== undefined) {
 					setAuxiaGateDisplayData(data);
+
+					const treatmentId =
+						data.auxiaData.userTreatment?.treatmentId;
+					if (treatmentId) {
+						// Record the fact that Auxia has returned a treatment. This is not a VIEW event, so we use the RETURN action here
+						void submitComponentEventTracking(
+							{
+								component: {
+									componentType: 'SIGN_IN_GATE',
+									id: treatmentId,
+								},
+								action: 'RETURN',
+								abTest: buildAbTestTrackingAuxiaVariant(
+									treatmentId,
+								),
+							},
+							renderingTarget,
+						);
+					}
 				}
 			}
 		})().catch((error) => {
 			console.error('Error fetching Auxia display data:', error);
 		});
-	}, [abTest]);
+	}, [abTest, isPaidContent, isPreview]);
 
 	// We are not showing the gate if we are in preview, it's a paid contents
 	// or the user is signed in or if for some reasons we could not determine the
@@ -719,7 +733,7 @@ const SignInGateSelectorAuxia = ({
 
 	// According to the reacts rules we can only put this check after all the hooks.
 
-	if (isPreview || isPaidContent || isSignedIn || isUndefined(pageViewId)) {
+	if (isPreview || isPaidContent || isUndefined(pageViewId)) {
 		return null;
 	}
 
@@ -792,28 +806,27 @@ const ShowSignInGateAuxia = ({
 	const personaliseSignInGateAfterCheckoutSwitch = undefined;
 
 	useOnce(() => {
-		void (async () => {
-			await auxiaLogTreatmentInteraction(
-				contributionsServiceUrl,
-				userTreatment,
-				'VIEWED',
-				'',
-				browserId,
-			);
-			await submitComponentEventTracking(
-				{
-					component: {
-						componentType: 'SIGN_IN_GATE',
-						id: treatmentId,
-					},
-					action: 'VIEW',
-					abTest: buildAbTestTrackingAuxiaVariant(treatmentId),
-				},
-				renderingTarget,
-			);
-		})().catch((error) => {
+		void auxiaLogTreatmentInteraction(
+			contributionsServiceUrl,
+			userTreatment,
+			'VIEWED',
+			'',
+			browserId,
+		).catch((error) => {
 			console.error('Failed to log treatment interaction:', error);
 		});
+
+		void submitComponentEventTracking(
+			{
+				component: {
+					componentType: 'SIGN_IN_GATE',
+					id: treatmentId,
+				},
+				action: 'VIEW',
+				abTest: buildAbTestTrackingAuxiaVariant(treatmentId),
+			},
+			renderingTarget,
+		);
 	}, [componentId]);
 
 	return (

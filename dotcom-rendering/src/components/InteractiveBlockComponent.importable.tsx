@@ -15,6 +15,7 @@ import { useOnce } from '../lib/useOnce';
 import { palette as themePalette } from '../palette';
 import type { RoleType } from '../types/content';
 import { Caption } from './Caption';
+import { useConfig } from './ConfigContext';
 import { defaultRoleStyles } from './Figure';
 import { Placeholder } from './Placeholder';
 
@@ -324,6 +325,7 @@ export const InteractiveBlockComponent = ({
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const placeholderLinkRef = useRef<HTMLAnchorElement>(null);
 	const [loaded, setLoaded] = useState(false);
+	const { darkModeAvailable } = useConfig();
 	useOnce(() => {
 		// We've brought the behavior from boot.js into this file to avoid loading 2 extra scripts
 		if (
@@ -341,6 +343,27 @@ export const InteractiveBlockComponent = ({
 				iframe.src = url.replace('http:', 'https:');
 			} else {
 				iframe.src = url;
+			}
+
+			// Datawrapper-specific fix to suppress scrollbars appearing
+			if (url.includes('datawrapper')) {
+				iframe.scrolling = 'no';
+				// Turn off dark mode for Datawrapper embeds on web
+				// This should be removed if/when dark mode is implements on the website
+				if (
+					!document.querySelector('.ios') &&
+					!document.querySelector('.android')
+				) {
+					const prefersDarkScheme = window.matchMedia(
+						'(prefers-color-scheme: dark)',
+					).matches;
+					const darkMode = darkModeAvailable && prefersDarkScheme;
+					if (!darkMode) {
+						iframe.src +=
+							(iframe.src.includes('?') ? '&' : '?') +
+							'dark=false';
+					}
+				}
 			}
 
 			setupWindowListeners(iframe);

@@ -105,6 +105,9 @@ const Layout: CrosswordProps['Layout'] = ({
 				${from.tablet} {
 					flex-direction: row;
 				}
+				@media print {
+					flex-direction: column;
+				}
 			`}
 		>
 			<AnagramHelper />
@@ -178,6 +181,12 @@ const Layout: CrosswordProps['Layout'] = ({
 							background-image: none;
 						}
 					}
+					@media print {
+						max-height: none;
+						::after {
+							background-image: none;
+						}
+					}
 				`}
 			>
 				<div
@@ -199,6 +208,9 @@ const Layout: CrosswordProps['Layout'] = ({
 						}
 						> * {
 							flex: 1;
+						}
+						@media print {
+							flex-direction: row;
 						}
 					`}
 				>
@@ -229,5 +241,9 @@ export const CrosswordComponent = ({
 		data={data}
 		Layout={Layout}
 		MobileBannerAd={canRenderAds ? MobileBannerAdComponent : undefined}
+		textColor={palette('--crossword-text')}
+		anagramHelperBackgroundColor={palette(
+			'--crossword-anagram-helper-background',
+		)}
 	/>
 );

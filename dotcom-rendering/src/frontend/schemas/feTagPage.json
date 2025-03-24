@@ -1339,7 +1339,7 @@
                 "assets": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/MediaAsset"
+                        "$ref": "#/definitions/FEMediaAsset"
                     }
                 },
                 "title": {
@@ -1378,7 +1378,7 @@
                 "title"
             ]
         },
-        "MediaAsset": {
+        "FEMediaAsset": {
             "type": "object",
             "properties": {
                 "id": {

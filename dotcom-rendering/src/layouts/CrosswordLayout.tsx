@@ -25,7 +25,6 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
-import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
@@ -166,7 +165,6 @@ export const CrosswordLayout = (props: Props) => {
 			<main data-layout="InteractiveLayout">
 				<Section
 					fullWidth={true}
-					data-print-layout="hide"
 					showTopBorder={false}
 					backgroundColour={themePalette('--article-background')}
 					borderColour={themePalette('--article-border')}
@@ -268,108 +266,90 @@ export const CrosswordLayout = (props: Props) => {
 									/>
 								</GridItem>
 							)}
-							<GridItem area="body" element="article">
-								<ArticleContainer format={format}>
-									<ArticleBody
-										format={format}
-										blocks={article.blocks}
-										host={host}
-										pageId={article.pageId}
-										webTitle={article.webTitle}
-										ajaxUrl={article.config.ajaxUrl}
-										abTests={article.config.abTests}
-										switches={article.config.switches}
-										isSensitive={article.config.isSensitive}
-										isAdFreeUser={article.isAdFreeUser}
-										sectionId={article.config.section}
-										shouldHideReaderRevenue={
-											article.shouldHideReaderRevenue
-										}
-										tags={article.tags}
-										isPaidContent={
-											!!article.config.isPaidContent
-										}
-										contributionsServiceUrl={
-											contributionsServiceUrl
-										}
-										contentType={article.contentType}
-										isPreview={article.config.isPreview}
-										idUrl={article.config.idUrl ?? ''}
-										isDev={!!article.config.isDev}
-										keywordIds={article.config.keywordIds}
-										tableOfContents={
-											article.tableOfContents
-										}
-										lang={article.lang}
-										isRightToLeftLang={
-											article.isRightToLeftLang
-										}
-										editionId={article.editionId}
-									/>
-								</ArticleContainer>
-							</GridItem>
-							<GridItem area="right-column">
-								<RightColumn showFrom="wide">
-									<div
-										css={css`
-											margin-top: ${remSpace[3]};
-										`}
-									>
-										{renderAds ? (
-											<AdSlot
-												position="right"
-												display={format.display}
-												isPaidContent={isPaidContent}
+							{Boolean(article.crossword?.entries.length) && (
+								<>
+									<GridItem area="body" element="article">
+										<ArticleContainer format={format}>
+											<ArticleBody
+												format={format}
+												blocks={article.blocks}
+												host={host}
+												pageId={article.pageId}
+												webTitle={article.webTitle}
+												ajaxUrl={article.config.ajaxUrl}
+												abTests={article.config.abTests}
+												switches={
+													article.config.switches
+												}
+												isSensitive={
+													article.config.isSensitive
+												}
+												isAdFreeUser={
+													article.isAdFreeUser
+												}
+												sectionId={
+													article.config.section
+												}
 												shouldHideReaderRevenue={
 													article.shouldHideReaderRevenue
 												}
+												tags={article.tags}
+												isPaidContent={
+													!!article.config
+														.isPaidContent
+												}
+												contributionsServiceUrl={
+													contributionsServiceUrl
+												}
+												contentType={
+													article.contentType
+												}
+												isPreview={
+													article.config.isPreview
+												}
+												idUrl={
+													article.config.idUrl ?? ''
+												}
+												isDev={!!article.config.isDev}
+												keywordIds={
+													article.config.keywordIds
+												}
+												tableOfContents={
+													article.tableOfContents
+												}
+												lang={article.lang}
+												isRightToLeftLang={
+													article.isRightToLeftLang
+												}
+												editionId={article.editionId}
 											/>
-										) : null}
-									</div>
-								</RightColumn>
-							</GridItem>
+										</ArticleContainer>
+									</GridItem>
+									<GridItem area="right-column">
+										<RightColumn showFrom="wide">
+											<div
+												css={css`
+													margin-top: ${remSpace[3]};
+												`}
+											>
+												{renderAds ? (
+													<AdSlot
+														position="right"
+														display={format.display}
+														isPaidContent={
+															isPaidContent
+														}
+														shouldHideReaderRevenue={
+															article.shouldHideReaderRevenue
+														}
+													/>
+												) : null}
+											</div>
+										</RightColumn>
+									</GridItem>
+								</>
+							)}
 						</CrosswordGrid>
-					</div>
-				</Section>
-
-				<Section
-					stretchRight={false}
-					showTopBorder={false}
-					backgroundColour={themePalette('--article-background')}
-					borderColour={themePalette('--article-border')}
-					fontColour={themePalette('--article-section-title')}
-					padContent={false}
-					verticalMargins={false}
-				>
-					<div
-						css={css`
-							max-width: 620px;
-						`}
-					>
-						<Island priority="feature" defer={{ until: 'visible' }}>
-							<SlotBodyEnd
-								contentType={article.contentType}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								idApiUrl={article.config.idApiUrl}
-								isMinuteArticle={
-									article.pageType.isMinuteArticle
-								}
-								isPaidContent={article.pageType.isPaidContent}
-								pageId={article.pageId}
-								sectionId={article.config.section}
-								shouldHideReaderRevenue={
-									article.shouldHideReaderRevenue
-								}
-								tags={article.tags}
-								renderAds={renderAds}
-								isLabs={false}
-								articleEndSlot={
-									!!article.config.switches.articleEndSlot
-								}
-							/>
-						</Island>
 					</div>
 				</Section>
 
@@ -378,6 +358,7 @@ export const CrosswordLayout = (props: Props) => {
 					showTopBorder={false}
 					padSides={false}
 					backgroundColour={themePalette('--article-background')}
+					hideFromPrintLayout={true}
 				>
 					<StraightLines
 						count={4}
@@ -426,13 +407,13 @@ export const CrosswordLayout = (props: Props) => {
 					<Section
 						fullWidth={true}
 						sectionId="comments"
-						data-print-layout="hide"
 						element="section"
 						backgroundColour={themePalette(
 							'--discussion-section-background',
 						)}
 						borderColour={themePalette('--article-border')}
 						fontColour={themePalette('--discussion-text')}
+						hideFromPrintLayout={true}
 					>
 						<DiscussionLayout
 							discussionApiUrl={article.config.discussionApiUrl}
@@ -455,7 +436,6 @@ export const CrosswordLayout = (props: Props) => {
 				{renderAds && (
 					<Section
 						fullWidth={true}
-						data-print-layout="hide"
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
@@ -471,12 +451,7 @@ export const CrosswordLayout = (props: Props) => {
 			</main>
 
 			{props.NAV.subNavSections && (
-				<Section
-					fullWidth={true}
-					data-print-layout="hide"
-					padSides={false}
-					element="aside"
-				>
+				<Section fullWidth={true} padSides={false} element="aside">
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
@@ -489,7 +464,6 @@ export const CrosswordLayout = (props: Props) => {
 
 			<Section
 				fullWidth={true}
-				data-print-layout="hide"
 				padSides={false}
 				backgroundColour={sourcePalette.brand[400]}
 				borderColour={sourcePalette.brand[600]}

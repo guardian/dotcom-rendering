@@ -3,16 +3,16 @@ import {
 	emptyMatches,
 	liveMatch,
 	matchDayLive,
+	matchDayLiveSecondHalf,
 	matchFixture,
 	matchResult,
 } from '../fixtures/manual/footballMatches';
 import type {
 	FEFootballMatch,
 	FEMatchByDateAndCompetition,
-	FEMatchDay,
 	FEResult,
 } from './feFootballDataPage';
-import { parse, parseMatchResult } from './footballMatches';
+import { parse } from './footballMatches';
 import { errorOrThrow, okOrThrow } from './lib/result';
 
 const withMatches = (
@@ -36,7 +36,7 @@ describe('footballMatches', () => {
 		expect(result.length).toBe(1);
 
 		const day = result[0];
-		expect(day?.date.toISOString()).toBe('2025-03-03T00:00:00.000Z');
+		expect(day?.dateISOString).toBe('2025-03-03T00:00:00.000Z');
 		expect(day?.competitions.length).toBe(3);
 
 		const competition = day?.competitions[0];
@@ -101,67 +101,6 @@ describe('footballMatches', () => {
 		expect(resultThree.errors[0]!.kind).toBe('FootballMatchInvalidDate');
 	});
 
-	it('should return an error when football matches are missing a score', () => {
-		const matchResultMissingHomeScore: FEResult = {
-			...matchResult,
-			homeTeam: {
-				...matchResult.homeTeam,
-				score: undefined,
-			},
-		};
-		const matchResultMissingAwayScore: FEResult = {
-			...matchResult,
-			homeTeam: {
-				...matchResult.awayTeam,
-				score: undefined,
-			},
-		};
-		const liveMatchMissingHomeScore: FEMatchDay = {
-			...matchDayLive,
-			homeTeam: {
-				...matchDayLive.homeTeam,
-				score: undefined,
-			},
-		};
-		const liveMatchMissingAwayScore: FEMatchDay = {
-			...matchDayLive,
-			homeTeam: {
-				...matchDayLive.awayTeam,
-				score: undefined,
-			},
-		};
-
-		const resultHome = errorOrThrow(
-			parse(withMatches([matchResultMissingHomeScore])),
-			'Expected football match parsing to fail',
-		);
-		const resultAway = errorOrThrow(
-			parse(withMatches([matchResultMissingAwayScore])),
-			'Expected football match parsing to fail',
-		);
-		const liveHome = errorOrThrow(
-			parse(withMatches([liveMatchMissingHomeScore])),
-			'Expected football match parsing to fail',
-		);
-		const liveAway = errorOrThrow(
-			parse(withMatches([liveMatchMissingAwayScore])),
-			'Expected football match parsing to fail',
-		);
-
-		expect(resultHome.kind).toBe('FootballMatchMissingScore');
-		expect(resultAway.kind).toBe('FootballMatchMissingScore');
-
-		if (
-			liveHome.kind !== 'InvalidMatchDay' ||
-			liveAway.kind !== 'InvalidMatchDay'
-		) {
-			throw new Error('Expected an invalid match day error');
-		}
-
-		expect(liveHome.errors[0]?.kind).toBe('FootballMatchMissingScore');
-		expect(liveAway.errors[0]?.kind).toBe('FootballMatchMissingScore');
-	});
-
 	it('should return an error when it receives a live match', () => {
 		const result = errorOrThrow(
 			parse(withMatches([liveMatch])),
@@ -190,11 +129,48 @@ describe('footballMatches', () => {
 		for (const [uncleanName, cleanName] of Object.entries(
 			uncleanToCleanNames,
 		)) {
-			const match = okOrThrow(
-				parseMatchResult(matchesListWithTeamName(uncleanName)),
+			const matchDay = okOrThrow(
+				parse(withMatches([matchesListWithTeamName(uncleanName)])),
 				'Expected football match parsing to succeed',
 			);
+
+			const match = matchDay[0]!.competitions[0]!.matches[0];
+			if (match?.kind !== 'Result') {
+				throw new Error('Expected Result');
+			}
+
 			expect(match.homeTeam.name).toBe(cleanName);
 		}
+	});
+	it('should replace known live match status with our status', () => {
+		const matchDay = okOrThrow(
+			parse(withMatches([matchDayLiveSecondHalf])),
+			'Expected football live match parsing to succeed',
+		);
+
+		const match = matchDay[0]!.competitions[0]!.matches[0];
+		if (match?.kind !== 'Live') {
+			throw new Error('Expected live match');
+		}
+
+		expect(match.status).toBe('2nd');
+	});
+	it('should replace unknown live match status with first two characters', () => {
+		const matchDayLiveUnknownStatus = {
+			...matchDayLiveSecondHalf,
+			matchStatus: 'Something odd',
+		};
+
+		const matchDay = okOrThrow(
+			parse(withMatches([matchDayLiveUnknownStatus])),
+			'Expected football live match parsing to succeed',
+		);
+
+		const match = matchDay[0]!.competitions[0]!.matches[0];
+		if (match?.kind !== 'Live') {
+			throw new Error('Expected live match');
+		}
+
+		expect(match.status).toBe('So');
 	});
 });

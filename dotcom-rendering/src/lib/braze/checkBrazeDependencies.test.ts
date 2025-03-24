@@ -54,8 +54,7 @@ describe('checkBrazeDependecies', () => {
 		mockConsentsPromise = Promise.resolve(true);
 
 		const isSignedIn = true;
-		const idApiUrl = 'https://idapi.example.com';
-		const got = await checkBrazeDependencies(isSignedIn, idApiUrl);
+		const got = await checkBrazeDependencies(isSignedIn);
 
 		expect(got.isSuccessful).toEqual(true);
 		expect(got.data).toEqual({
@@ -85,8 +84,7 @@ describe('checkBrazeDependecies', () => {
 		mockConsentsPromise = Promise.resolve(true);
 
 		const isSignedIn = true;
-		const idApiUrl = 'https://idapi.example.com';
-		const got = await checkBrazeDependencies(isSignedIn, idApiUrl);
+		const got = await checkBrazeDependencies(isSignedIn);
 
 		expect(got.isSuccessful).toEqual(false);
 		// Condition to keep TypeScript happy
@@ -114,8 +112,7 @@ describe('checkBrazeDependecies', () => {
 		mockConsentsPromise = Promise.resolve(true);
 
 		const isSignedIn = true;
-		const idApiUrl = 'https://idapi.example.com';
-		const got = await checkBrazeDependencies(isSignedIn, idApiUrl);
+		const got = await checkBrazeDependencies(isSignedIn);
 
 		expect(got.isSuccessful).toEqual(false);
 		expect(got.data).toEqual({
@@ -144,8 +141,7 @@ describe('checkBrazeDependecies', () => {
 		mockConsentsPromise = Promise.resolve(true);
 
 		const isSignedIn = true;
-		const idApiUrl = 'https://idapi.example.com';
-		const got = await checkBrazeDependencies(isSignedIn, idApiUrl);
+		const got = await checkBrazeDependencies(isSignedIn);
 
 		expect(got.isSuccessful).toEqual(false);
 		// Condition to keep TypeScript happy
@@ -173,8 +169,7 @@ describe('checkBrazeDependecies', () => {
 		mockConsentsPromise = Promise.resolve(true);
 
 		const isSignedIn = true;
-		const idApiUrl = 'https://idapi.example.com';
-		const got = await checkBrazeDependencies(isSignedIn, idApiUrl);
+		const got = await checkBrazeDependencies(isSignedIn);
 
 		expect(got.isSuccessful).toEqual(false);
 		expect(got.data).toEqual({
@@ -205,8 +200,7 @@ describe('checkBrazeDependecies', () => {
 		mockConsentsPromise = Promise.resolve(true);
 
 		const isSignedIn = false;
-		const idApiUrl = 'https://idapi.example.com';
-		const got = await checkBrazeDependencies(isSignedIn, idApiUrl);
+		const got = await checkBrazeDependencies(isSignedIn);
 
 		expect(got.isSuccessful).toEqual(false);
 		expect(got.data).toEqual({
@@ -238,8 +232,7 @@ describe('checkBrazeDependecies', () => {
 		mockConsentsPromise = Promise.resolve(false);
 
 		const isSignedIn = true;
-		const idApiUrl = 'https://idapi.example.com';
-		const got = await checkBrazeDependencies(isSignedIn, idApiUrl);
+		const got = await checkBrazeDependencies(isSignedIn);
 
 		expect(got.isSuccessful).toEqual(false);
 		expect(got.data).toEqual({
@@ -272,8 +265,7 @@ describe('checkBrazeDependecies', () => {
 		mockConsentsPromise = Promise.resolve(true);
 
 		const isSignedIn = true;
-		const idApiUrl = 'https://idapi.example.com';
-		const got = await checkBrazeDependencies(isSignedIn, idApiUrl);
+		const got = await checkBrazeDependencies(isSignedIn);
 
 		expect(got.isSuccessful).toEqual(false);
 		expect(got.data).toEqual({
@@ -307,8 +299,7 @@ describe('checkBrazeDependecies', () => {
 		mockConsentsPromise = Promise.reject(new Error('something went wrong'));
 
 		const isSignedIn = true;
-		const idApiUrl = 'https://idapi.example.com';
-		const got = await checkBrazeDependencies(isSignedIn, idApiUrl);
+		const got = await checkBrazeDependencies(isSignedIn);
 
 		expect(got.isSuccessful).toEqual(false);
 		expect(got.data).toEqual({

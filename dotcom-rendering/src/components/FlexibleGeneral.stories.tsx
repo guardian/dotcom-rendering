@@ -146,6 +146,7 @@ const meta = {
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
+		collectionId: 1,
 	},
 	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
@@ -182,7 +183,6 @@ export const TwoSublinkSplash: Story = {
 		groupedTrails: {
 			...defaultGroupedTrails,
 			splash: [{ ...splashCard, supportingContent: getSublinks(2) }],
-			standard: standardCards,
 		},
 	},
 };
@@ -198,7 +198,6 @@ export const FourSublinkSplash: Story = {
 		groupedTrails: {
 			...defaultGroupedTrails,
 			splash: [splashWithFourSublinks],
-			standard: standardCards,
 		},
 	},
 };
@@ -273,7 +272,6 @@ export const FourSublinkSplashWithLiveUpdates: Story = {
 		groupedTrails: {
 			...defaultGroupedTrails,
 			splash: [liveUpdatesCard],
-			standard: standardCards,
 		},
 	},
 	render: ({ frontSectionTitle, ...args }) => {
@@ -303,7 +301,6 @@ export const BoostedSplash: Story = {
 					boostLevel: 'boost',
 				},
 			],
-			standard: standardCards,
 		},
 	},
 };
@@ -320,7 +317,6 @@ export const MegaBoostedSplash: Story = {
 					boostLevel: 'megaboost',
 				},
 			],
-			standard: standardCards,
 		},
 	},
 };
@@ -337,7 +333,6 @@ export const GigaBoostedSplash: Story = {
 					boostLevel: 'gigaboost',
 				},
 			],
-			standard: standardCards,
 		},
 	},
 };

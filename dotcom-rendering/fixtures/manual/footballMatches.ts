@@ -70,6 +70,11 @@ export const matchDayLive: FEMatchDay = {
 	},
 };
 
+export const matchDayLiveSecondHalf: FEMatchDay = {
+	...matchDayLive,
+	matchStatus: 'SHS',
+};
+
 export const liveMatch: FELive = {
 	...matchData,
 	type: 'LiveMatch',

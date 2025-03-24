@@ -4,7 +4,6 @@
  * For more Git history, please refer to the original file
  */
 import { css } from '@emotion/react';
-import { joinUrl } from '@guardian/libs';
 import {
 	from,
 	space,
@@ -12,9 +11,8 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
-import type { UserProfile } from '../lib/discussion';
 import { getZIndex } from '../lib/getZIndex';
-import type { SignedInWithCookies, SignedInWithOkta } from '../lib/identity';
+import type { SignedIn } from '../lib/identity';
 import { createAuthenticationEventParams } from '../lib/identity-component-event';
 import {
 	addNotificationsToDropdownLinks,
@@ -22,7 +20,6 @@ import {
 } from '../lib/notification';
 import type { Notification } from '../lib/notification';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
-import { useApi } from '../lib/useApi';
 import type { AuthStatusOrPending } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { palette as themePalette } from '../palette';
@@ -41,8 +38,8 @@ interface MyAccountProps {
 }
 
 // when SignedIn, authStatus can only be one of the two SignedIn states
-type SignedInProps = MyAccountProps & {
-	authStatus: SignedInWithCookies | SignedInWithOkta;
+type SignedInBrazeProps = MyAccountProps & {
+	authStatus: SignedIn;
 	renderingTarget: RenderingTarget;
 };
 
@@ -187,45 +184,19 @@ export const dropDownOverrides = css`
 interface SignedInWithNotificationsProps {
 	mmaUrl: string;
 	idUrl: string;
-	discussionApiUrl: string;
 	notifications: Notification[];
-	authStatus: SignedInWithCookies | SignedInWithOkta;
+	authStatus: SignedIn;
 }
 
 const SignedInWithNotifications = ({
 	mmaUrl,
 	idUrl,
-	discussionApiUrl,
 	notifications,
 	authStatus,
 }: SignedInWithNotificationsProps) => {
-	let userId: string | undefined;
+	const userId = authStatus.idToken.claims.legacy_identity_id;
 
-	// TODO Okta: Remove the useApi and status === 'NotInTest' when at 100% in Okta oktaVariant
-	// If we encounter an error or don't have user data display sign in to the user.
-	// SWR will retry in the background if the request failed
-	const { data, error } = useApi<{ userProfile: UserProfile }>(
-		authStatus.kind === 'SignedInWithCookies'
-			? joinUrl(
-					discussionApiUrl,
-					'profile/me?strict_sanctions_check=false',
-			  )
-			: undefined,
-
-		{},
-		{
-			credentials: 'include',
-		},
-	);
-	if (authStatus.kind === 'SignedInWithCookies' && data) {
-		userId = data.userProfile.userId;
-	}
-
-	if (authStatus.kind === 'SignedInWithOkta') {
-		userId = authStatus.idToken.claims.legacy_identity_id;
-	}
-
-	if (!userId || error) return <SignIn idUrl={idUrl} />;
+	if (!userId) return <SignIn idUrl={idUrl} />;
 
 	const identityLinks = buildIdentityLinks(mmaUrl, idUrl, userId);
 
@@ -252,12 +223,12 @@ const SignedInWithNotifications = ({
 	);
 };
 
-const SignedIn = ({
+const SignedInBraze = ({
 	idApiUrl,
 	authStatus,
 	renderingTarget,
 	...props
-}: SignedInProps) => {
+}: SignedInBrazeProps) => {
 	const { brazeCards } = useBraze(idApiUrl, renderingTarget);
 	const [brazeNotifications, setBrazeNotifications] = useState<
 		Notification[]
@@ -293,9 +264,8 @@ export const TopBarMyAccount = ({
 
 	return (
 		<>
-			{authStatus.kind === 'SignedInWithOkta' ||
-			authStatus.kind === 'SignedInWithCookies' ? (
-				<SignedIn
+			{authStatus.kind === 'SignedIn' ? (
+				<SignedInBraze
 					mmaUrl={mmaUrl}
 					idUrl={idUrl}
 					discussionApiUrl={discussionApiUrl}

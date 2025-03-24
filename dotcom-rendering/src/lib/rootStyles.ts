@@ -50,5 +50,17 @@ export const rootStyles = (
 		color: ${sourcePalette.neutral[7]};
 	}
 
+	/**
+	* Hide scroll depth markers when printing as these are absolutely positioned
+	* based on the initial content height. These will still be present in the
+	* document at their original location when printing, even if other page
+	* elements have been hidden, leading to blank pages being produced.
+	*/
+	@media print {
+		.scroll-depth-marker {
+			display: none;
+		}
+	}
+
 	${rootAdStyles}
 `;
