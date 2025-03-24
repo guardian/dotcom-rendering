@@ -504,7 +504,8 @@ const StandardCardLayout = ({
 							showTopBarMobile={
 								!isFirstRow ||
 								(containerLevel === 'Primary' &&
-									!isMediaCard(card.format))
+									!isMediaCard(card.format)) ||
+								(containerLevel !== 'Primary' && cardIndex > 0)
 							}
 							trailText={undefined}
 							// On standard cards, we increase the headline size if the trail image has been hidden
