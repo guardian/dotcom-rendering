@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { FootballTableForm } from './FootballTableForm';
+import { FootballTableForm as FootballTableFormComponent } from './FootballTableForm';
 
 const meta = {
 	title: 'Components/Football Table Form',
-	component: FootballTableForm,
+	component: FootballTableFormComponent,
 	decorators: [
 		// To make the story not shoved in the corner.
 		(Story) => (
@@ -14,13 +14,13 @@ const meta = {
 			</>
 		),
 	],
-} satisfies Meta<typeof FootballTableForm>;
+} satisfies Meta<typeof FootballTableFormComponent >;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const FootballTableForm: Story = {
 	args: {
 		teamResults: [
 			{
