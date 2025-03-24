@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import type { AspectRatio } from '../types/front';
 import { until } from '@guardian/source/foundations';
+import type { AspectRatio } from '../types/front';
 
 type Props = {
 	height: number;
