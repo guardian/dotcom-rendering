@@ -530,7 +530,7 @@ const styles = {
 		background: ${background};
 		color: ${textColor};
 		${limitHeight ? 'max-height: 70vh;' : 'auto'}
-		overflow: scroll;
+		overflow: auto;
 		* {
 			box-sizing: border-box;
 		}
@@ -736,14 +736,15 @@ const styles = {
 		margin-bottom: ${space[2]}px;
 
 		${until.phablet} {
-			width: 100%;
+			width: 100vw;
 			position: sticky;
 			bottom: 0;
 			padding-top: ${space[3]}px;
 			padding-bottom: ${space[3]}px;
-			padding-left: auto;
 			background-color: ${neutral[100]};
 			box-shadow: 0 -4px 12px 0 rgba(0, 0, 0, 0.25);
+			margin-right: -12px;
+			margin-left: -12px;
 		}
 
 		${until.desktop} {
@@ -751,7 +752,6 @@ const styles = {
 				width: calc(100% - 24px);
 			}
 			padding-top: 12px;
-			width: 100%;
 		}
 
 		${from.desktop} {
