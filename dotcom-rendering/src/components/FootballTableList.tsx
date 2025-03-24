@@ -45,10 +45,10 @@ const footballTablesGridStyles = css`
 const CompetitionName = ({ children }: { children: ReactNode }) => (
 	<h3
 		css={css`
-			${until.leftCol} {
-				display: none;
-			}
+			display: none;
+
 			${from.leftCol} {
+				display: block;
 				color: ${palette('--football-competition-text')};
 				border-top: 1px solid ${palette('--football-list-border')};
 				background-color: transparent;
