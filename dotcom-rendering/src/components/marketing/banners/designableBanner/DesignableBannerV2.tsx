@@ -530,7 +530,7 @@ const styles = {
 		background: ${background};
 		color: ${textColor};
 		${limitHeight ? 'max-height: 70vh;' : 'auto'}
-		overflow: hidden;
+		overflow: scroll;
 		* {
 			box-sizing: border-box;
 		}
@@ -672,8 +672,8 @@ const styles = {
 	`,
 	threeTierChoiceCardsContainer: css`
 		order: 3;
-		${until.desktop} {
-			padding-bottom: 44px;
+		${until.phablet} {
+			padding-bottom: 12px;
 		}
 		${from.desktop} {
 			grid-column: 3;
@@ -732,30 +732,26 @@ const styles = {
 		align-items: center;
 		flex-direction: column;
 		gap: ${space[4]}px;
+		margin-top: 12px;
 		margin-bottom: ${space[2]}px;
 
-		${until.desktop} {
-			a {
-				width: calc(100% - 24px);
-			}
-		}
-
 		${until.phablet} {
-			position: fixed;
+			width: 100%;
+			position: sticky;
 			bottom: 0;
-			left: 0;
 			padding-top: ${space[3]}px;
 			padding-bottom: ${space[3]}px;
-			margin-bottom: 0;
+			padding-left: auto;
 			background-color: ${neutral[100]};
 			box-shadow: 0 -4px 12px 0 rgba(0, 0, 0, 0.25);
 		}
 
 		${until.desktop} {
-			position: fixed;
-			padding-top: ${space[3]}px;
-			left: 0;
-			right: 0;
+			a {
+				width: calc(100% - 24px);
+			}
+			padding-top: 12px;
+			width: 100%;
 		}
 
 		${from.desktop} {
