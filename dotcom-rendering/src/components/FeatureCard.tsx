@@ -324,13 +324,6 @@ export const FeatureCard = ({
 
 	const showYoutubeVideo = canPlayInline && mainMedia?.type === 'Video';
 
-	console.log({
-		isVideoMainMedia,
-		isVideoArticle,
-		showYoutubeVideo,
-		mobileAspectRatio,
-		aspectRatio,
-	});
 	const showCardAge =
 		webPublicationDate !== undefined && showClock !== undefined;
 
