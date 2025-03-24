@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react/*';
 import { allModes } from '../../.storybook/modes';
-import { FootballTable } from './FootballTable';
+import { FootballTable as FootballTableComponent } from './FootballTable';
 
 const meta = {
 	title: 'Components/Football Table',
-	component: FootballTable,
+	component: FootballTableComponent,
 	decorators: [
 		// To make it easier to see the top border above the table
 		(Story) => (
@@ -23,13 +23,13 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta<typeof FootballTable>;
+} satisfies Meta<typeof FootballTableComponent >;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default = {
+export const FootballTable = {
 	args: {
 		guardianBaseUrl: 'https://www.theguardian.com',
 		table: {
