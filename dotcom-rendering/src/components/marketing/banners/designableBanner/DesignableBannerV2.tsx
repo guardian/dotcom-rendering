@@ -550,7 +550,7 @@ const styles = {
 
 		${from.desktop} {
 			display: grid;
-			padding: 12px 12px 24px 12px;
+			padding: ${space[3]}px ${space[4]}px ${space[6]}px ${space[3]}px;
 			grid-template-columns: auto auto auto auto;
 			grid-template-rows: auto 1fr auto;
 			width: 100%;
@@ -673,7 +673,7 @@ const styles = {
 	threeTierChoiceCardsContainer: css`
 		order: 3;
 		${until.phablet} {
-			padding-bottom: 12px;
+			padding-bottom: ${space[3]}px;
 		}
 		${from.desktop} {
 			grid-column: 3;
@@ -732,7 +732,7 @@ const styles = {
 		align-items: center;
 		flex-direction: column;
 		gap: ${space[4]}px;
-		margin-top: 12px;
+		margin-top: ${space[3]}px;
 		margin-bottom: ${space[2]}px;
 
 		${until.phablet} {
@@ -742,16 +742,16 @@ const styles = {
 			padding-top: ${space[3]}px;
 			padding-bottom: ${space[3]}px;
 			background-color: ${neutral[100]};
-			box-shadow: 0 -4px 12px 0 rgba(0, 0, 0, 0.25);
-			margin-right: -12px;
-			margin-left: -12px;
+			box-shadow: 0 -${space[1]}px ${space[3]}px 0 rgba(0, 0, 0, 0.25);
+			margin-right: -${space[3]}px;
+			margin-left: -${space[3]}px;
 		}
 
 		${until.desktop} {
 			a {
 				width: calc(100% - 24px);
 			}
-			padding-top: 12px;
+			padding-top: ${space[3]}px;
 		}
 
 		${from.desktop} {
