@@ -6553,8 +6553,8 @@ const paletteColours = {
 		dark: () => sourcePalette.neutral[73],
 	},
 	'--football-form-loss': {
-		light: () => '#C70000',
-		dark: () => '#C70000',
+		light: () => sourcePalette.news[400],
+		dark: () => sourcePalette.news[400],
 	},
 	'--football-form-win': {
 		light: () => '#3DB540',
