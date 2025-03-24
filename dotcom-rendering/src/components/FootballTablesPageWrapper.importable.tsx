@@ -26,7 +26,7 @@ export const FootballTablesPageWrapper = ({
 	<FootballTablesPage
 		regions={regions}
 		pageId={pageId}
-		tables={tables}
+		competitions={tables}
 		renderAds={renderAds}
 		goToCompetitionSpecificPage={goToCompetitionSpecificPage(
 			guardianBaseUrl,

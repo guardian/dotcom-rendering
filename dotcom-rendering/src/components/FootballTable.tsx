@@ -60,7 +60,9 @@ const linkStyles = css`
 `;
 
 type Props = {
-	table: FootballTableData;
+	competitionName: string;
+	competitionUrl: string;
+	table: Omit<FootballTableData, 'groupName'>;
 	guardianBaseUrl: string;
 };
 
@@ -70,14 +72,16 @@ function getFootballCrestImageUrl(teamId: string) {
 }
 
 const FullTableLink = ({
-	competition,
+	competitionName,
+	competitionUrl,
 	guardianBaseUrl,
 }: {
-	competition: FootballTableData['competition'];
+	competitionName: string;
+	competitionUrl: string;
 	guardianBaseUrl: string;
 }) => (
-	<a href={`${guardianBaseUrl}${competition.url}/table`} css={linkStyles}>
-		View full {competition.name} table
+	<a href={`${guardianBaseUrl}${competitionUrl}/table`} css={linkStyles}>
+		View full {competitionName} table
 	</a>
 );
 
@@ -132,7 +136,12 @@ const TeamWithCrest = ({
 	</div>
 );
 
-export const FootballTable = ({ table, guardianBaseUrl }: Props) => (
+export const FootballTable = ({
+	competitionName,
+	competitionUrl,
+	table,
+	guardianBaseUrl,
+}: Props) => (
 	<table css={tableStyles}>
 		<thead css={headStyles}>
 			<tr css={rowStyles}>
@@ -224,7 +233,8 @@ export const FootballTable = ({ table, guardianBaseUrl }: Props) => (
 				<tr css={rowStyles}>
 					<td colSpan={11} css={hideUntilTabletStyle}>
 						<FullTableLink
-							competition={table.competition}
+							competitionName={competitionName}
+							competitionUrl={competitionUrl}
 							guardianBaseUrl={guardianBaseUrl}
 						/>
 					</td>
@@ -237,7 +247,8 @@ export const FootballTable = ({ table, guardianBaseUrl }: Props) => (
 						`}
 					>
 						<FullTableLink
-							competition={table.competition}
+							competitionName={competitionName}
+							competitionUrl={competitionUrl}
 							guardianBaseUrl={guardianBaseUrl}
 						/>
 					</td>

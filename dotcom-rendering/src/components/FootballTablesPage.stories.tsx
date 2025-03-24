@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react/*';
 import { fn } from '@storybook/test';
 import { regions } from '../../fixtures/manual/footballData';
-import { FootballTable as TableDefault } from './FootballTable.stories';
+import { FootballTableList as TableListDefault } from './FootballTableList.stories';
 import { FootballTablesPage as FootballTablesPageComponent } from './FootballTablesPage';
 
 const meta = {
@@ -18,7 +18,7 @@ export const FootballTablesPage = {
 		regions,
 		goToCompetitionSpecificPage: fn(),
 		pageId: 'football/tables',
-		tables: [TableDefault.args.table, TableDefault.args.table],
+		competitions: TableListDefault.args.competitions,
 		renderAds: true,
 		guardianBaseUrl: 'https://www.theguardian.com',
 	},

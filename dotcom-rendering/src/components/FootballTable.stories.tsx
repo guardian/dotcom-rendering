@@ -31,12 +31,10 @@ type Story = StoryObj<typeof meta>;
 
 export const FootballTable = {
 	args: {
+		competitionName: 'Premier League',
+		competitionUrl: '/football/premierleague',
 		guardianBaseUrl: 'https://www.theguardian.com',
 		table: {
-			competition: {
-				name: 'Premier League',
-				url: '/football/premierleague',
-			},
 			linkToFullTable: true,
 			dividers: [1],
 			entries: [

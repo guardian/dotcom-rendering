@@ -22,7 +22,23 @@ type Story = StoryObj<typeof meta>;
 
 export const FootballTableList = {
 	args: {
-		tables: [TableDefault.args.table, TableDefault.args.table],
+		competitions: [
+			{
+				name: 'Premier League',
+				url: '/football/premierleague',
+				tables: [{ ...TableDefault.args.table, groupName: 'League' }],
+				hasGroups: false,
+			},
+			{
+				name: 'Champions League',
+				url: '/football/championsleague',
+				tables: [
+					{ ...TableDefault.args.table, groupName: 'Group A' },
+					{ ...TableDefault.args.table, groupName: 'Group B' },
+				],
+				hasGroups: true,
+			},
+		],
 		guardianBaseUrl: 'https://www.theguardian.com',
 	},
 } satisfies Story;

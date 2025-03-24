@@ -5,11 +5,15 @@ export type TeamResult = {
 	foe: TeamScore;
 };
 
+export type FootballTableCompetition = {
+	url: string;
+	name: string;
+	hasGroups: boolean;
+	tables: FootballTableData[];
+};
+
 export type FootballTableData = {
-	competition: {
-		url: string;
-		name: string;
-	};
+	groupName: string;
 	dividers: number[];
 	entries: {
 		position: number;

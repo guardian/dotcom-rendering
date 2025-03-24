@@ -7,7 +7,7 @@ import {
 } from '@guardian/source/foundations';
 import { Stack } from '@guardian/source/react-components';
 import type { ReactNode } from 'react';
-import type { FootballTableData } from '../footballTables';
+import type { FootballTableCompetition } from '../footballTables';
 import { palette } from '../palette';
 import { FootballTable } from './FootballTable';
 
@@ -68,21 +68,31 @@ const CompetitionName = ({ children }: { children: ReactNode }) => (
 	</h3>
 );
 
+const GroupName = ({ children }: { children: ReactNode }) => (
+	<h4
+		css={css`
+			grid-column: centre-column-start / centre-column-end;
+			padding-top: ${space[1]}px;
+			padding-bottom: ${space[3]}px;
+			${headlineBold17}
+		`}
+	>
+		{children}
+	</h4>
+);
+
 type Props = {
-	tables: FootballTableData[];
+	competitions: FootballTableCompetition[];
 	guardianBaseUrl: string;
 };
 
-export const FootballTableList = ({ tables, guardianBaseUrl }: Props) => (
+export const FootballTableList = ({ competitions, guardianBaseUrl }: Props) => (
 	<Stack space={9}>
-		{tables.map((table) => (
-			<section
-				key={table.competition.name}
-				css={footballTablesGridStyles}
-			>
+		{competitions.map((competition) => (
+			<section key={competition.name} css={footballTablesGridStyles}>
 				<CompetitionName>
 					<a
-						href={`${guardianBaseUrl}${table.competition.url}`}
+						href={`${guardianBaseUrl}${competition.url}`}
 						css={css`
 							text-decoration: none;
 							color: inherit;
@@ -91,20 +101,30 @@ export const FootballTableList = ({ tables, guardianBaseUrl }: Props) => (
 							}
 						`}
 					>
-						{table.competition.name}
+						{competition.name}
 					</a>
 				</CompetitionName>
-				{/* ToDo: h4 for group name */}
-				<div
-					css={css`
-						grid-column: centre-column-start / centre-column-end;
-					`}
-				>
-					<FootballTable
-						table={table}
-						guardianBaseUrl={guardianBaseUrl}
-					/>
-				</div>
+				{competition.tables.map((table) => (
+					<>
+						{competition.hasGroups && (
+							<GroupName>{table.groupName}</GroupName>
+						)}
+						<div
+							css={css`
+								grid-column: centre-column-start /
+									centre-column-end;
+							`}
+							key={table.groupName}
+						>
+							<FootballTable
+								competitionName={competition.name}
+								competitionUrl={competition.url}
+								table={table}
+								guardianBaseUrl={guardianBaseUrl}
+							/>
+						</div>
+					</>
+				))}
 			</section>
 		))}
 	</Stack>
