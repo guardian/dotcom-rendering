@@ -1,5 +1,5 @@
 import type { Region } from '../footballMatches';
-import type { FootballTableData } from '../footballTables';
+import type { FootballTableCompetition } from '../footballTables';
 import { FootballTablesPage } from './FootballTablesPage';
 
 const goToCompetitionSpecificPage =
@@ -11,7 +11,7 @@ const goToCompetitionSpecificPage =
 type Props = {
 	regions: Region[];
 	pageId: string;
-	tables: FootballTableData[];
+	competitions: FootballTableCompetition[];
 	renderAds: boolean;
 	guardianBaseUrl: string;
 };
@@ -19,14 +19,14 @@ type Props = {
 export const FootballTablesPageWrapper = ({
 	regions,
 	pageId,
-	tables,
+	competitions,
 	renderAds,
 	guardianBaseUrl,
 }: Props) => (
 	<FootballTablesPage
 		regions={regions}
 		pageId={pageId}
-		competitions={tables}
+		competitions={competitions}
 		renderAds={renderAds}
 		goToCompetitionSpecificPage={goToCompetitionSpecificPage(
 			guardianBaseUrl,
