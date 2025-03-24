@@ -672,6 +672,9 @@ const styles = {
 	`,
 	threeTierChoiceCardsContainer: css`
 		order: 3;
+		${until.desktop} {
+			padding-bottom: 44px;
+		}
 		${from.desktop} {
 			grid-column: 3;
 			grid-row: 1;
