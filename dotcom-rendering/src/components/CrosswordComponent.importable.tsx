@@ -124,7 +124,8 @@ const Layout: CrosswordProps['Layout'] = ({
 					flex-basis: ${gridWidth}px;
 					@media print {
 						flex-basis: auto;
-						max-width: 90mm;
+						max-width: 400px;
+						max-height: 400px;
 					}
 				`}
 			>
