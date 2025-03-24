@@ -53,6 +53,7 @@ const CompetitionName = ({ children }: { children: ReactNode }) => (
 			background-color: ${palette('--football-match-list-background')};
 
 			${from.leftCol} {
+				grid-row: 1;
 				display: block;
 				color: ${palette('--football-competition-text')};
 				border-top: 1px solid ${palette('--football-list-border')};
@@ -68,13 +69,22 @@ const CompetitionName = ({ children }: { children: ReactNode }) => (
 	</h3>
 );
 
-const GroupName = ({ children }: { children: ReactNode }) => (
+const GroupName = ({
+	children,
+	index,
+}: {
+	children: ReactNode;
+	index: number;
+}) => (
 	<h4
 		css={css`
 			grid-column: centre-column-start / centre-column-end;
 			padding-top: ${space[1]}px;
 			padding-bottom: ${space[3]}px;
+			border-top: 1px solid ${palette('--football-list-border')};
 			${headlineBold17}
+
+			${index !== 0 ? `margin-top: ${space[6]}px` : ''}
 		`}
 	>
 		{children}
@@ -90,25 +100,32 @@ export const FootballTableList = ({ competitions, guardianBaseUrl }: Props) => (
 	<Stack space={9}>
 		{competitions.map((competition) => (
 			<section key={competition.name} css={footballTablesGridStyles}>
-				<CompetitionName>
-					<a
-						href={`${guardianBaseUrl}${competition.url}`}
-						css={css`
-							text-decoration: none;
-							color: inherit;
-							:hover {
-								text-decoration: underline;
-							}
-						`}
-					>
-						{competition.name}
-					</a>
-				</CompetitionName>
-				{competition.tables.map((table) => (
+				{competition.tables.map((table, groupIndex) => (
 					<>
 						{competition.hasGroups && (
-							<GroupName>{table.groupName}</GroupName>
+							<GroupName index={groupIndex}>
+								{table.groupName}
+							</GroupName>
 						)}
+						{
+							// Only show the competition name above/beside the first group
+							groupIndex === 0 && (
+								<CompetitionName>
+									<a
+										href={`${guardianBaseUrl}${competition.url}`}
+										css={css`
+											text-decoration: none;
+											color: inherit;
+											:hover {
+												text-decoration: underline;
+											}
+										`}
+									>
+										{competition.name}
+									</a>
+								</CompetitionName>
+							)
+						}
 						<div
 							css={css`
 								grid-column: centre-column-start /
