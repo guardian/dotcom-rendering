@@ -15,6 +15,7 @@ const isSecurityError = (error: unknown) =>
 	or if none of those exists, it will call the geo endpoint to fetch it and set it in `GU_geo_country`
  */
 export const getLocaleCode = async (): Promise<CountryCode | null> => {
+	return 'US';
 	return getLocale().catch((error) => {
 		if (isSecurityError(error)) return null;
 
