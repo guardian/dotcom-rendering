@@ -48,6 +48,7 @@ export const FootballMatchSummary = ({
 			<div
 				css={css`
 					${grid.column.centre};
+					position: relative;
 
 					${from.tablet} {
 						:before {
@@ -56,7 +57,7 @@ export const FootballMatchSummary = ({
 							top: 0;
 							bottom: 10px;
 							width: 100vw;
-							left: -50vw;
+							left: -100vw;
 							background-color: var(--match-nav-background);
 						}
 					}
