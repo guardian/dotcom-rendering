@@ -856,6 +856,9 @@ export const Card = ({
 										<SlideshowCarousel
 											images={media.slideshowImages}
 											imageSize={imageSize}
+											hasNavigationBackgroundColour={
+												!!hasSublinks
+											}
 										/>
 									</Island>
 								</div>
