@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	between,
+	brand,
 	from,
 	neutral,
 	palette,
@@ -546,7 +547,11 @@ const styles = {
 		display: flex;
 		flex-direction: column;
 		position: relative;
-		padding: 12px 12px 24px 12px;
+		padding: ${space[3]}px ${space[3]}px ${space[3]}px ${space[3]}px;
+
+		${from.phablet} {
+			padding: ${space[3]}px ${space[3]}px ${space[6]}px ${space[3]}px;
+		}
 
 		${from.desktop} {
 			display: grid;
@@ -573,13 +578,11 @@ const styles = {
 	closeButtonOverrides: css`
 		${until.desktop} {
 			position: fixed;
-			margin-top: ${space[3]}px;
 			padding-right: 10px;
 			right: 0;
 		}
 
 		${from.tablet} {
-			margin-top: ${space[3]}px;
 			grid-column: 4;
 			grid-row: 1;
 		}
@@ -588,6 +591,9 @@ const styles = {
 	headerOverrides: css`
 		/* stylelint-disable declaration-no-important */
 		h2 {
+			color: ${brand[400]} !important;
+			margin-top: ${space[1]}px !important;
+			margin-bottom: ${space[2]}px !important;
 			${until.phablet} {
 				font-size: 28px !important;
 				font-style: normal !important;
@@ -652,6 +658,7 @@ const styles = {
 		${from.desktop} {
 			padding-left: ${space[2]}px;
 		}
+		margin-bottom: 12px;
 	`,
 	bodyCopyOverrides: css`
 		p {
@@ -672,9 +679,6 @@ const styles = {
 	`,
 	threeTierChoiceCardsContainer: css`
 		order: 3;
-		${until.phablet} {
-			padding-bottom: ${space[3]}px;
-		}
 		${from.desktop} {
 			grid-column: 3;
 			grid-row: 1;
