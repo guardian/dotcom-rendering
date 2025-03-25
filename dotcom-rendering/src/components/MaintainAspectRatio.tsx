@@ -10,7 +10,7 @@ type Props = {
 	children: React.ReactNode;
 };
 
-const getAspectRatioPadding = (aspectRatio?: AspectRatio): string => {
+const getAspectRatioPadding = (aspectRatio: AspectRatio): string => {
 	switch (aspectRatio) {
 		case '5:4':
 			return '80%';
@@ -19,12 +19,11 @@ const getAspectRatioPadding = (aspectRatio?: AspectRatio): string => {
 		case '1:1':
 			return '100%';
 		case '5:3':
-		default:
 			return '60%';
 	}
 };
 
-const mobileAspectRatioStyles = (aspectRatio?: AspectRatio) => {
+const mobileAspectRatioStyles = (aspectRatio: AspectRatio) => {
 	return css`
 		${until.tablet} {
 			padding-bottom: ${getAspectRatioPadding(aspectRatio)};
