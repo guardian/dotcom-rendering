@@ -560,7 +560,7 @@ const styles = {
 			grid-template-rows: auto 1fr auto;
 			width: 100%;
 			max-width: 1300px;
-			column-gap: ${space[8]}px;
+			column-gap: ${space[5]}px;
 		}
 	`,
 	verticalLine: css`
@@ -658,7 +658,7 @@ const styles = {
 		${from.desktop} {
 			padding-left: ${space[2]}px;
 		}
-		margin-bottom: 12px;
+		margin-bottom: 8px;
 	`,
 	bodyCopyOverrides: css`
 		p {
