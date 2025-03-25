@@ -4,14 +4,14 @@
  * icon library has been updated and published.
  */
 import { css } from '@emotion/react';
-import { iconSize, visuallyHidden } from '@guardian/source/foundations';
+import { visuallyHidden } from '@guardian/source/foundations';
 import { type IconProps } from '@guardian/source/react-components';
 
-const Svg = ({ size, theme }: IconProps) => (
+const Svg = ({ width, theme }: Props) => (
 	<svg
-		width={size ? iconSize[size] : undefined}
-		height={undefined}
-		viewBox="-3 -3 30 30"
+		width={width}
+		height={width}
+		viewBox="0 0 18 18"
 		xmlns="http://www.w3.org/2000/svg"
 		focusable={false}
 		aria-hidden={true}
@@ -19,19 +19,23 @@ const Svg = ({ size, theme }: IconProps) => (
 		<path
 			fillRule="evenodd"
 			clipRule="evenodd"
-			d="M19.2 12.39v-.72L8.59 5 8 5.36v13.23l.59.41z"
+			d="M14.4 9.2925V8.7525L6.4425 3.75L6 4.02V13.9425L6.4425 14.25L14.4 9.2925Z"
 			fill={theme?.fill}
 		/>
 	</svg>
 );
 
+type Props = {
+	width: 18 | 40;
+} & IconProps;
+
 export const SvgMediaControlsPlay = ({
-	size,
+	width,
 	theme,
 	isAnnouncedByScreenReader = false,
-}: IconProps) => (
+}: Props) => (
 	<>
-		<Svg size={size} theme={theme} />
+		<Svg width={width} theme={theme} />
 		{isAnnouncedByScreenReader ? (
 			<span
 				css={css`

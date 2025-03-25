@@ -1,4 +1,4 @@
-import { SvgClock } from '@guardian/source/react-components';
+import { SvgClockFilled } from '@guardian/source/react-components';
 import { isValidDate } from 'date';
 import React from 'react';
 import { highlight } from './styles';
@@ -50,7 +50,7 @@ const DeadlineDate = ({ until }: { until?: number }) => {
 	if (!deadlineText) return null;
 	return (
 		<Highlight>
-			<SvgClock size="xsmall" />
+			<SvgClockFilled size="xsmall" />
 			{deadlineText}
 		</Highlight>
 	);

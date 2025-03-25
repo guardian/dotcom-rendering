@@ -116,7 +116,7 @@ export const WithPodcastSeriesImage: Story = {
 		},
 		mainMedia: {
 			type: 'Audio',
-			duration: '31.76',
+			duration: '31:16',
 			podcastImage: {
 				src: 'https://uploads.guim.co.uk/2024/08/01/FootballWeekly_FINAL_3000_(1).jpg',
 				altText: 'Football Weekly',

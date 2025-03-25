@@ -195,23 +195,22 @@ const MediaPill = ({ mainMedia }: { mainMedia: MainMedia }) => (
 		{mainMedia.type === 'Video' && (
 			<Pill
 				content={secondsToDuration(mainMedia.duration)}
-				icon={<SvgMediaControlsPlay />}
-				iconSize="small"
+				prefix="Video"
+				icon={<SvgMediaControlsPlay width={18} />}
 			/>
 		)}
 		{mainMedia.type === 'Audio' && (
 			<Pill
 				content={mainMedia.duration}
-				icon={<SvgMediaControlsPlay />}
-				iconSize="small"
+				prefix="Podcast"
+				icon={<SvgMediaControlsPlay width={18} />}
 			/>
 		)}
 		{mainMedia.type === 'Gallery' && (
 			<Pill
-				prefix="Gallery"
 				content={mainMedia.count}
+				prefix="Gallery"
 				icon={<SvgCamera />}
-				iconSide="right"
 			/>
 		)}
 	</div>

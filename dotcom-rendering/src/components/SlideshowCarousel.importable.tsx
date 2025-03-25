@@ -3,6 +3,7 @@ import {
 	from,
 	space,
 	textSansBold12,
+	until,
 	width,
 } from '@guardian/source/foundations';
 import type { ThemeButton } from '@guardian/source/react-components';
@@ -69,10 +70,16 @@ const captionStyles = css`
 	padding: ${space[10]}px ${space[2]}px ${space[2]}px;
 `;
 
-const navigationStyles = css`
+const navigationStyles = (hasBackgroundColour: boolean) => css`
 	display: flex;
 	align-items: center;
-	margin-top: ${space[2]}px;
+	padding-top: ${space[2]}px;
+
+	${until.tablet} {
+		background-color: ${hasBackgroundColour
+			? palette('--slideshow-navigation-background')
+			: 'transparent'};
+	}
 `;
 
 const buttonStyles = css`
@@ -97,13 +104,17 @@ const scrollingDotStyles = css`
 	}
 `;
 
+type Props = {
+	images: readonly DCRSlideshowImage[];
+	imageSize: ImageSizeType;
+	hasNavigationBackgroundColour: boolean;
+};
+
 export const SlideshowCarousel = ({
 	images,
 	imageSize,
-}: {
-	images: readonly DCRSlideshowImage[];
-	imageSize: ImageSizeType;
-}) => {
+	hasNavigationBackgroundColour,
+}: Props) => {
 	const carouselRef = useRef<HTMLUListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
 	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
@@ -211,7 +222,7 @@ export const SlideshowCarousel = ({
 			</ul>
 
 			{slideshowImageCount > 1 && (
-				<div css={navigationStyles}>
+				<div css={navigationStyles(hasNavigationBackgroundColour)}>
 					<div css={scrollingDotStyles}>
 						<SlideshowCarouselScrollingDots
 							total={slideshowImageCount}

@@ -4,7 +4,7 @@ import {
 	space,
 	textSansBold14,
 } from '@guardian/source/foundations';
-import { SvgNewsletter } from '@guardian/source/react-components';
+import { SvgNewsletterFilled } from '@guardian/source/react-components';
 
 type Props = {
 	text: string;
@@ -41,7 +41,7 @@ const spanStyle = css`
 export const NewsletterDetail = ({ text, iconSize = 'normal' }: Props) => (
 	<div css={containerStyle}>
 		<div css={svgStyle(iconSize)}>
-			<SvgNewsletter />
+			<SvgNewsletterFilled />
 		</div>
 		<span css={spanStyle}>{text}</span>
 	</div>

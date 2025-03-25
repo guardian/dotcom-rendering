@@ -95,7 +95,7 @@ export interface TreatmentContentDecoded {
 	body: string;
 	first_cta_name: string;
 	first_cta_link: string;
-	second_cta_name: string;
+	second_cta_name?: string;
 }
 
 export interface AuxiaAPIResponseDataUserTreatment {

@@ -10,6 +10,7 @@ type Props = {
 	height: number;
 	width: number;
 	aspectRatio?: AspectRatio;
+	mobileAspectRatio?: AspectRatio;
 };
 
 export const YoutubeAtomPicture = ({
@@ -18,11 +19,25 @@ export const YoutubeAtomPicture = ({
 	height,
 	width,
 	aspectRatio,
+	mobileAspectRatio,
 }: Props) => {
+	const mobileAspect = mobileAspectRatio ?? aspectRatio;
 	const sources = generateSources(getSourceImageUrl(image), [
-		{ breakpoint: breakpoints.mobile, width: 465, aspectRatio },
-		{ breakpoint: breakpoints.mobileLandscape, width: 645, aspectRatio },
-		{ breakpoint: breakpoints.phablet, width: 620, aspectRatio },
+		{
+			breakpoint: breakpoints.mobile,
+			width: 465,
+			aspectRatio: mobileAspect,
+		},
+		{
+			breakpoint: breakpoints.mobileLandscape,
+			width: 645,
+			aspectRatio: mobileAspect,
+		},
+		{
+			breakpoint: breakpoints.phablet,
+			width: 620,
+			aspectRatio: mobileAspect,
+		},
 		{ breakpoint: breakpoints.tablet, width: 700, aspectRatio },
 		{ breakpoint: breakpoints.desktop, width: 620, aspectRatio },
 	]);

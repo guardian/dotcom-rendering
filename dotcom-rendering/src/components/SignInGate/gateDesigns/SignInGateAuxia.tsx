@@ -80,25 +80,27 @@ export const SignInGateAuxia = ({
 				>
 					{firstCtaName}
 				</LinkButton>
-				<Button
-					data-testid="sign-in-gate-main_dismiss"
-					data-ignore="global-link-styling"
-					cssOverrides={laterButton}
-					priority="subdued"
-					size="small"
-					onClick={async () => {
-						dismissGate();
-						trackLink(
-							ophanComponentId,
-							'not-now',
-							renderingTarget,
-							abTest,
-						);
-						await logTreatmentInteractionCall('DISMISSED', '');
-					}}
-				>
-					{secondCtaName}
-				</Button>
+				{!!secondCtaName && (
+					<Button
+						data-testid="sign-in-gate-main_dismiss"
+						data-ignore="global-link-styling"
+						cssOverrides={laterButton}
+						priority="subdued"
+						size="small"
+						onClick={async () => {
+							dismissGate();
+							trackLink(
+								ophanComponentId,
+								'not-now',
+								renderingTarget,
+								abTest,
+							);
+							await logTreatmentInteractionCall('DISMISSED', '');
+						}}
+					>
+						{secondCtaName}
+					</Button>
+				)}
 			</div>
 
 			<p css={[bodySeparator, bodyBold, signInHeader]}>
