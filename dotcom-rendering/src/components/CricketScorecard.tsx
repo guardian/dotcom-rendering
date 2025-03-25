@@ -27,7 +27,7 @@ const tableStyles = css`
 	}
 
 	strong,
-	th {
+	thead > tr > th {
 		${textSansBold14}
 	}
 
@@ -170,7 +170,7 @@ const Bowling = ({ bowlers }: { bowlers: BowlerData[] }) => (
 		<tbody>
 			{bowlers.map((bowler) => (
 				<tr key={bowler.name}>
-					<td>{bowler.name}</td>
+					<th scope="row">{bowler.name}</th>
 					<td>
 						{bowler.overs}.{bowler.balls % 6}
 					</td>
@@ -216,10 +216,10 @@ const Batting = ({
 		<tbody>
 			{batters.map((batter) => (
 				<tr key={batter.name}>
-					<td>
+					<th scope="row">
 						<strong>{batter.name}</strong>
 						<div css={hideFromTabletStyle}>{batter.howOut}</div>
-					</td>
+					</th>
 					<td css={hideUntilTabletStyle}>{batter.howOut}</td>
 					<td>{batter.runs}</td>
 					<td>{batter.ballsFaced}</td>
@@ -229,24 +229,25 @@ const Batting = ({
 			))}
 			<tr
 				css={css`
+					th,
 					td {
 						border-top: 0.0625rem dashed
 							${palette('--cricket-scorecard-divider')};
 					}
 				`}
 			>
-				<td>
+				<th scope="row">
 					<strong>Extras</strong>
-				</td>
+				</th>
 				<td css={hideUntilTabletStyle}>
 					{getExtrasDescription(extras)}
 				</td>
 				<td colSpan={4}>{inningsTotals.extras}</td>
 			</tr>
 			<tr>
-				<td>
+				<th scope="row">
 					<strong>Total</strong>
-				</td>
+				</th>
 				<td css={hideUntilTabletStyle}>
 					<strong>for {inningsTotals.wickets}</strong>
 				</td>
@@ -277,7 +278,7 @@ const FallOfWickets = ({
 			{fallOfWickets.map((fallOfWicket) => (
 				<tr key={fallOfWicket.order}>
 					<td>{fallOfWicket.order}</td>
-					<td>{fallOfWicket.name}</td>
+					<th scope="row">{fallOfWicket.name}</th>
 					<td>{fallOfWicket.runs}</td>
 				</tr>
 			))}
