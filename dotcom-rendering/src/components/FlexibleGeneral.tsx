@@ -172,7 +172,61 @@ const decideSplashCardProperties = (
 	}
 };
 
-const SplashCardLayout = ({
+const ImmersiveCardLayout = ({
+	cards,
+	containerPalette,
+	absoluteServerTimes,
+	imageLoading,
+	collectionId,
+}: {
+	cards: DCRFrontCard[];
+	containerPalette?: DCRContainerPalette;
+	absoluteServerTimes: boolean;
+	imageLoading: Loading;
+	collectionId: number;
+}) => {
+	const card = cards[0];
+	if (!card) return null;
+
+	return (
+		<UL padBottom={true}>
+			<LI key={card.url} padSides={true}>
+				<FeatureCard
+					collectionId={collectionId}
+					linkTo={card.url}
+					format={card.format}
+					headlineText={card.headline}
+					byline={card.byline}
+					showByline={card.showByline}
+					webPublicationDate={card.webPublicationDate}
+					kickerText={card.kickerText}
+					showClock={false}
+					image={card.image}
+					canPlayInline={true}
+					starRating={card.starRating}
+					dataLinkName={card.dataLinkName}
+					discussionApiUrl={card.discussionApiUrl}
+					discussionId={card.discussionId}
+					mainMedia={card.mainMedia}
+					isExternalLink={card.isExternalLink}
+					// branding={card.branding}
+					containerPalette={containerPalette}
+					trailText={card.trailText}
+					absoluteServerTimes={absoluteServerTimes}
+					imageLoading={imageLoading}
+					aspectRatio={'5:3'}
+					mobileAspectRatio={'4:5'}
+					imageSize="feature-immersive"
+					headlineSizes={{ desktop: 'small' }}
+					supportingContent={card.supportingContent}
+					isImmersive={true}
+				/>
+			</LI>
+		</UL>
+	);
+};
+
+export const SplashCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
@@ -199,40 +253,13 @@ const SplashCardLayout = ({
 	const shouldShowImmersive = card.isImmersive;
 	if (shouldShowImmersive) {
 		return (
-			<UL>
-				<LI key={card.url} padSides={true}>
-					<FeatureCard
-						collectionId={collectionId}
-						linkTo={card.url}
-						format={card.format}
-						headlineText={card.headline}
-						byline={card.byline}
-						showByline={card.showByline}
-						webPublicationDate={card.webPublicationDate}
-						kickerText={card.kickerText}
-						showClock={false}
-						image={card.image}
-						canPlayInline={true}
-						starRating={card.starRating}
-						dataLinkName={card.dataLinkName}
-						discussionApiUrl={card.discussionApiUrl}
-						discussionId={card.discussionId}
-						mainMedia={card.mainMedia}
-						isExternalLink={card.isExternalLink}
-						// branding={card.branding}
-						containerPalette={containerPalette}
-						trailText={card.trailText}
-						absoluteServerTimes={absoluteServerTimes}
-						imageLoading={imageLoading}
-						aspectRatio={'5:3'}
-						mobileAspectRatio={'4:5'}
-						imageSize="feature-immersive"
-						headlineSizes={{ desktop: 'small' }}
-						supportingContent={card.supportingContent}
-						isImmersive={true}
-					/>
-				</LI>
-			</UL>
+			<ImmersiveCardLayout
+				cards={cards}
+				containerPalette={containerPalette}
+				absoluteServerTimes={absoluteServerTimes}
+				imageLoading={imageLoading}
+				collectionId={collectionId}
+			/>
 		);
 	}
 
@@ -355,6 +382,7 @@ const BoostedCardLayout = ({
 	isFirstRow,
 	isLastRow,
 	containerLevel,
+	collectionId,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -365,6 +393,7 @@ const BoostedCardLayout = ({
 	isFirstRow: boolean;
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
+	collectionId: number;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -379,6 +408,21 @@ const BoostedCardLayout = ({
 		card.boostLevel,
 		card.avatarUrl,
 	);
+
+	// TODO: replace with live data from fronts tool - used for testing
+	const shouldShowImmersive = false;
+
+	if (shouldShowImmersive) {
+		return (
+			<ImmersiveCardLayout
+				cards={cards}
+				containerPalette={containerPalette}
+				absoluteServerTimes={absoluteServerTimes}
+				imageLoading={imageLoading}
+				collectionId={collectionId}
+			/>
+		);
+	}
 
 	return (
 		<UL
@@ -568,6 +612,7 @@ export const FlexibleGeneral = ({
 								isFirstRow={!splash.length && i === 0}
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
+								collectionId={collectionId}
 							/>
 						);
 
