@@ -48,7 +48,7 @@
 		"@guardian/identity-auth": "6.0.1",
 		"@guardian/identity-auth-frontend": "8.1.0",
 		"@guardian/libs": "0.0.0-canary-20250324132708",
-		"@guardian/ophan-tracker-js": "2.2.5",
+		"@guardian/ophan-tracker-js": "2.2.9",
 		"@guardian/react-crossword": "2.0.2",
 		"@guardian/react-crossword-next": "npm:@guardian/react-crossword@6.0.0",
 		"@guardian/shimport": "1.0.2",

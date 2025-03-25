@@ -359,8 +359,8 @@ importers:
         specifier: 0.0.0-canary-20250324132708
         version: 0.0.0-canary-20250324132708(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/ophan-tracker-js':
-        specifier: 2.2.5
-        version: 2.2.5
+        specifier: 2.2.9
+        version: 2.2.9
       '@guardian/react-crossword':
         specifier: 2.0.2
         version: 2.0.2
@@ -4224,8 +4224,8 @@ packages:
       typescript: 5.5.3
     dev: false
 
-  /@guardian/ophan-tracker-js@2.2.5:
-    resolution: {integrity: sha512-chfaV3hkFEVy7YYKRpGFmryH7ngWhgeMIu8vnC4UH7kkQCTGcF1pgLgbREdYArdgQezCnSO3o9/15nRX0VDolA==}
+  /@guardian/ophan-tracker-js@2.2.9:
+    resolution: {integrity: sha512-P7rmc1RnRq8zKe9rpjsiGKBzlopcVz7XM/1gYOlsIfPudYTYL2F7YgY9lIU1sitUNWAMmqw4+oY5mO9WXBYi4Q==}
     engines: {node: '>=16'}
     dependencies:
       '@guardian/tsconfig': 1.0.0
