@@ -242,7 +242,12 @@ const Batting = ({
 				<td css={hideUntilTabletStyle}>
 					{getExtrasDescription(extras)}
 				</td>
-				<td colSpan={4}>{inningsTotals.extras}</td>
+				<td css={hideUntilTabletStyle} colSpan={4}>
+					{inningsTotals.extras}
+				</td>
+				<td css={hideFromTabletStyle} colSpan={2}>
+					{inningsTotals.extras}
+				</td>
 			</tr>
 			<tr>
 				<th scope="row">
