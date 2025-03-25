@@ -1,9 +1,9 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
-import { CricketScorecard } from './CricketScorecard';
+import { CricketScorecard as CricketScorecardComponent } from './CricketScorecard';
 
 const meta: Meta = {
-	component: CricketScorecard,
+	component: CricketScorecardComponent,
 	title: 'Components/CricketScorecard',
 	decorators: [
 		// To make the story not shoved in the corner.
@@ -22,9 +22,11 @@ const meta: Meta = {
 	},
 };
 
-type Story = StoryObj<typeof CricketScorecard>;
+export default meta;
 
-export const defaultStory: Story = {
+type Story = StoryObj<typeof CricketScorecardComponent>;
+
+export const CricketScorecard: Story = {
 	name: 'Cricket Scorecard',
 	args: {
 		allInnings: [
@@ -283,5 +285,3 @@ export const defaultStory: Story = {
 		},
 	},
 };
-
-export default meta;
