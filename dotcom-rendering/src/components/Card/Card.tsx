@@ -506,15 +506,14 @@ export const Card = ({
 				<>
 					{mainMedia.duration === 0 ? (
 						<Pill
-							content={'Live'}
+							content="Live"
 							icon={<div css={liveBulletStyles} />}
-							iconSize="small"
 						/>
 					) : (
 						<Pill
 							content={secondsToDuration(mainMedia.duration)}
-							icon={<SvgMediaControlsPlay />}
-							iconSize="small"
+							icon={<SvgMediaControlsPlay width={18} />}
+							prefix="Video"
 						/>
 					)}
 				</>
@@ -523,16 +522,15 @@ export const Card = ({
 			{mainMedia?.type === 'Audio' && (
 				<Pill
 					content={mainMedia.duration}
-					icon={<SvgMediaControlsPlay />}
-					iconSize="small"
+					icon={<SvgMediaControlsPlay width={18} />}
+					prefix="Podcast"
 				/>
 			)}
 			{mainMedia?.type === 'Gallery' && (
 				<Pill
-					prefix="Gallery"
 					content={mainMedia.count}
 					icon={<SvgCamera />}
-					iconSide="right"
+					prefix="Gallery"
 				/>
 			)}
 			{isNewsletter && <Pill content="Newsletter" />}
@@ -1021,8 +1019,11 @@ export const Card = ({
 												content={secondsToDuration(
 													mainMedia.duration,
 												)}
-												icon={<SvgMediaControlsPlay />}
-												iconSize={'small'}
+												icon={
+													<SvgMediaControlsPlay
+														width={18}
+													/>
+												}
 											/>
 										</div>
 									)}
