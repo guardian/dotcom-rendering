@@ -329,21 +329,22 @@ export const InteractiveBlockComponent = ({
 
 	// Define some one-time flags
 	const isDatawrapperGraphic =
-		url &&
-		url.substring &&
-		url.includes('interactive.guim.co.uk/datawrapper');
+		url && url.includes('interactive.guim.co.uk/datawrapper')
+			? true
+			: false;
 
 	const isUploaderEmbedPath =
-		url &&
-		url.substring &&
-		url.includes('interactive.guim.co.uk/uploader/embed/');
+		url && url.includes('interactive.guim.co.uk/uploader/embed/')
+			? true
+			: false;
 
 	const scriptUrlIsBoot =
 		scriptUrl &&
-		scriptUrl.substring &&
 		scriptUrl.includes(
 			'interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js',
-		);
+		)
+			? true
+			: false;
 
 	useOnce(() => {
 		// We've brought the behavior from boot.js into this file to avoid loading 2 extra scripts
@@ -351,12 +352,15 @@ export const InteractiveBlockComponent = ({
 		// Define additional one-time flags - these depend on window/document objects
 		const isRunningInWebEnvironment =
 			!document.querySelector('.ios') &&
-			!document.querySelector('.android');
+			!document.querySelector('.android')
+				? true
+				: false;
 
 		const prefersDarkScheme = window.matchMedia(
 			'(prefers-color-scheme: dark)',
 		).matches;
-		const requiresDarkMode = darkModeAvailable && prefersDarkScheme;
+		const requiresDarkMode =
+			darkModeAvailable && prefersDarkScheme ? true : false;
 
 		if (url && scriptUrlIsBoot && placeholderLinkRef.current) {
 			// Prepare for graphic url dynamic updates
