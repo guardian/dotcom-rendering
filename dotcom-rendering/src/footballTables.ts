@@ -1,6 +1,7 @@
 import type { TeamScore } from './footballMatches';
 
 export type TeamResult = {
+	id: string;
 	self: TeamScore;
 	foe: TeamScore;
 };
