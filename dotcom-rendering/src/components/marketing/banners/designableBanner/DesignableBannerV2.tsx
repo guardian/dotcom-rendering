@@ -658,7 +658,7 @@ const styles = {
 		${from.desktop} {
 			padding-left: ${space[2]}px;
 		}
-		margin-bottom: 8px;
+		margin-bottom: ${space[2]}px;
 	`,
 	bodyCopyOverrides: css`
 		p {
@@ -683,6 +683,7 @@ const styles = {
 			grid-column: 3;
 			grid-row: 1;
 			grid-row-end: 3;
+			padding-right: ${space[3]}px;
 		}
 	`,
 	guardianLogoContainer: css`
