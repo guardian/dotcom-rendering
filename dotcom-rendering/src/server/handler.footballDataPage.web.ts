@@ -5,7 +5,11 @@ import type {
 	Region,
 } from '../footballDataPage';
 import type { FootballMatchKind } from '../footballMatches';
-import { getParserErrorMessage, parse } from '../footballMatches';
+import {
+	getParserErrorMessage,
+	parse as parseFootballMatches,
+} from '../footballMatches';
+import { parse as parseFootballTables } from '../footballTables';
 import type { FEFootballCompetition } from '../frontend/feFootballDataPage';
 import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
 import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
@@ -66,7 +70,7 @@ const parseFEFootballCompetitionRegions = (
 const parseFEFootballMatchList = (
 	data: FEFootballMatchListPage,
 ): FootballMatchListPage => {
-	const parsedMatchesList = parse(data.matchesList);
+	const parsedMatchesList = parseFootballMatches(data.matchesList);
 
 	if (parsedMatchesList.kind === 'error') {
 		throw new Error(
@@ -111,8 +115,18 @@ export const handleFootballMatchListPage: RequestHandler = ({ body }, res) => {
 const parseFEFootballTables = (
 	data: FEFootballTablesPage,
 ): FootballTablesPage => {
+	const parsedFootballTables = parseFootballTables(data.tables);
+
+	if (parsedFootballTables.kind === 'error') {
+		throw new Error(
+			`Failed to parse tables:  ${getParserErrorMessage(
+				parsedFootballTables.error,
+			)}`,
+		);
+	}
+
 	return {
-		tables: [], // TODO: implement the parser for this
+		tables: [],
 		kind: 'Tables',
 		nextPage: data.nextPage,
 		previousPage: data.previousPage,
@@ -136,7 +150,6 @@ export const handleFootballTablesPage: RequestHandler = ({ body }, res) => {
 	const footballTablesPageValidated: FEFootballTablesPage =
 		validateAsFootballTablesPage(body);
 
-	// TODO: Implement this function
 	parseFEFootballTables(footballTablesPageValidated);
 	const { html, prefetchScripts } = { html: '', prefetchScripts: [] };
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
