@@ -87,7 +87,6 @@
                                                 }
                                             },
                                             "required": [
-                                                "dividers",
                                                 "fullName",
                                                 "id",
                                                 "nation",

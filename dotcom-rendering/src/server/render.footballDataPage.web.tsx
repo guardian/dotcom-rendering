@@ -1,7 +1,11 @@
 import { isString } from '@guardian/libs';
 import { ConfigProvider } from '../components/ConfigContext';
 import { FootballDataPage } from '../components/FootballDataPage';
-import type { FootballMatchListPage, Region } from '../footballDataPage';
+import type {
+	FootballMatchListPage,
+	FootballTablesPage,
+	Region,
+} from '../footballDataPage';
 import type { FootballMatchKind } from '../footballMatches';
 import {
 	ASSET_ORIGIN,
@@ -57,7 +61,24 @@ const decideTitle = (
 	}
 };
 
-export const renderFootballDataPage = (footballData: FootballMatchListPage) => {
+export const renderFootballMatchesPage = (
+	footballData: FootballMatchListPage,
+) =>
+	renderFootballDataPage(
+		footballData,
+		decideTitle(
+			footballData.kind,
+			footballData.config.pageId,
+			footballData.regions,
+		),
+		decideDescription(footballData.kind),
+	);
+
+const renderFootballDataPage = (
+	footballData: FootballMatchListPage | FootballTablesPage,
+	title: string,
+	description: string,
+) => {
 	const renderingTarget = 'Web';
 	const config: Config = {
 		renderingTarget,
@@ -105,12 +126,8 @@ export const renderFootballDataPage = (footballData: FootballMatchListPage) => {
 		scriptTags,
 		css: extractedCss,
 		html,
-		title: decideTitle(
-			footballData.kind,
-			footballData.config.pageId,
-			footballData.regions,
-		),
-		description: decideDescription(footballData.kind),
+		title,
+		description,
 		canonicalUrl: footballData.canonicalUrl,
 		guardian: createGuardian({
 			editionId: footballData.editionId,
