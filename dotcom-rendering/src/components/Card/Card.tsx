@@ -688,13 +688,12 @@ export const Card = ({
 	 * - Returns `null` if `supportingContent` is unavailable or `sublinkPosition` is `none`.
 	 * - Renders `SupportingContent` for all breakpoints if `sublinkPosition` is `outer`.
 	 * - If `sublinkPosition` is `inner`, hides `SupportingContent` from tablet but displays it on smaller breakpoints.
-	 *
 	 */
-	const decideOuterSublinks = () => {
+	const decideSublinks = () => {
 		if (!hasSublinks) return null;
 		if (sublinkPosition === 'none') return null;
 
-		const OuterSublinks = () => (
+		const Sublinks = () => (
 			<SupportingContent
 				supportingContent={supportingContent}
 				containerPalette={containerPalette}
@@ -704,18 +703,22 @@ export const Card = ({
 					!!isFlexSplash ||
 					(isBetaContainer &&
 						!!image &&
-						imagePositionOnMobile === 'bottom')
+						(imagePositionOnMobile === 'bottom' ||
+							isMediaCard(format)))
+				}
+				fillBackgroundOnDesktop={
+					isMediaCard(format) && imagePositionOnDesktop === 'top'
 				}
 			/>
 		);
 
 		if (sublinkPosition === 'outer') {
-			return <OuterSublinks />;
+			return <Sublinks />;
 		}
 
 		return (
 			<Hide from={isFlexSplash ? 'desktop' : 'tablet'}>
-				<OuterSublinks />
+				<Sublinks />
 			</Hide>
 		);
 	};
@@ -1241,7 +1244,8 @@ export const Card = ({
 
 			<div
 				css={
-					/** We allow this area to take up more space so that cards without sublinks next to cards with sublinks have the same meta alignment */
+					/** We allow this area to take up more space so that cards without
+					 * sublinks next to cards with sublinks have the same meta alignment */
 					isBetaContainer &&
 					(imagePositionOnDesktop === 'left' ||
 						imagePositionOnDesktop === 'right') &&
@@ -1253,10 +1257,7 @@ export const Card = ({
 					`
 				}
 				style={{
-					padding:
-						isMediaCardOrNewsletter || isOnwardContent
-							? `0 ${space[2]}px`
-							: 0,
+					padding: isOnwardContent ? `0 ${space[2]}px` : 0,
 				}}
 			>
 				{showLivePlayable && liveUpdatesPosition === 'outer' && (
@@ -1276,7 +1277,8 @@ export const Card = ({
 						></LatestLinks>
 					</Island>
 				)}
-				{decideOuterSublinks()}
+
+				{decideSublinks()}
 
 				{isOpinionCardWithAvatar && (
 					<CardFooter

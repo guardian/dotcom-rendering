@@ -61,7 +61,6 @@ const standardCards = standards.map((card, index) => {
 				boostLevel: 'megaboost',
 				supportingContent: getSublinks(2),
 			});
-
 		default:
 			return enhanceCardFields({});
 	}
