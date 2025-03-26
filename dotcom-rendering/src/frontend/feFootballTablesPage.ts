@@ -27,7 +27,7 @@ export type FELeagueTableEntry = {
 	team: FELeagueTeam;
 };
 
-type FEGroup = {
+export type FEGroup = {
 	round: FERound;
 	entries: FELeagueTableEntry[];
 };
