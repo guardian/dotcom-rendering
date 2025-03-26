@@ -197,10 +197,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		setThreeTierChoiceCardSelectedProduct,
 	] = useState<SupportTier>('SupporterPlus');
 
-	const threeTierChoiceCards = tracking.abTestVariant.includes(
-		'THREE_TIER_CHOICE_CARDS',
-	);
-
 	// We can't render anything without a design
 	if (!design) {
 		return <></>;
@@ -443,7 +439,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					/>
 				)}
 
-				{showChoiceCards && threeTierChoiceCards && (
+				{showChoiceCards && (
 					<div css={styles.threeTierChoiceCardsContainer}>
 						<ThreeTierChoiceCards
 							countryCode={countryCode}
