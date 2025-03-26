@@ -365,7 +365,6 @@ export const InteractiveBlockComponent = ({
 		if (url && scriptUrlIsBoot && placeholderLinkRef.current) {
 			// Prepare for graphic url dynamic updates
 			const graphicUrl = new URL(url);
-			const graphicUrlParams = new URLSearchParams(graphicUrl.search);
 
 			// Begin creating new iframe element
 			const iframe = document.createElement('iframe');
@@ -383,19 +382,22 @@ export const InteractiveBlockComponent = ({
 			if (isRunningInWebEnvironment && !requiresDarkMode) {
 				if (isDatawrapperGraphic || isUploaderEmbedPath) {
 					// Add the 'dark=false' search param
-					graphicUrlParams.set('dark', 'false');
+					if (graphicUrl.search.length) {
+						graphicUrl.search += '&dark=false';
+					} else {
+						graphicUrl.search += '?dark=false';
+					}
 				}
 			}
 
 			// Always serve graphic over https, not http
 			graphicUrl.protocol = 'https:';
 
-			graphicUrl.search = graphicUrlParams.toString();
-
 			// Finalise new iframe element
 			iframe.src = graphicUrl.href;
 
 			setupWindowListeners(iframe);
+
 			wrapperRef.current?.prepend(iframe);
 
 			setLoaded(true);
@@ -420,6 +422,7 @@ export const InteractiveBlockComponent = ({
 					}
 				},
 			);
+
 			setLoaded(true);
 		}
 	}, [loaded]);

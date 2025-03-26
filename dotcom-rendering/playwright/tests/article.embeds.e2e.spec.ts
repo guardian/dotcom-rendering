@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { cmpAcceptAll } from '../lib/cmp';
-import { getIframeBody } from '../lib/iframe';
+import { getIframeBody, getIframePart } from '../lib/iframe';
 import { waitForIsland } from '../lib/islands';
 import { loadPage } from '../lib/load-page';
 import { expectToBeVisible } from '../lib/locators';
@@ -43,9 +43,10 @@ test.describe('Embeds', () => {
 
 			await waitForIsland(page, 'InteractiveBlockComponent');
 			await expect(
-				await getIframeBody(
+				await getIframePart(
 					page,
 					'[data-testid="interactive-element-LA%20Rams%20dead%20cap%20numbers"] > iframe',
+					'.title',
 				),
 			).toContainText('The Rams’ dead cap numbers for 2020');
 		});
