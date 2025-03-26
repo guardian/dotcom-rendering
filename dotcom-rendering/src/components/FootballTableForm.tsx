@@ -61,7 +61,7 @@ export const FootballTableForm = ({
 				return (
 					<span
 						css={[formBlockStyles, styles]}
-						key={`${id}`}
+						key={id}
 						title={title}
 					>
 						<span
