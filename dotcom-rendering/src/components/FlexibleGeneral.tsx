@@ -196,8 +196,8 @@ const SplashCardLayout = ({
 	const card = cards[0];
 	if (!card) return null;
 
-	const isImmersive = false; // TODO: replace with live data from fronts tool - used for testing
-	const shouldShowImmersive = isImmersive && !isMediaCard(card.format);
+	// TODO: replace with live data from fronts tool - used for testing
+	const shouldShowImmersive = false;
 
 	if (shouldShowImmersive) {
 		return (
@@ -504,7 +504,8 @@ const StandardCardLayout = ({
 							showTopBarMobile={
 								!isFirstRow ||
 								(containerLevel === 'Primary' &&
-									!isMediaCard(card.format))
+									!isMediaCard(card.format)) ||
+								(containerLevel !== 'Primary' && cardIndex > 0)
 							}
 							trailText={undefined}
 							// On standard cards, we increase the headline size if the trail image has been hidden

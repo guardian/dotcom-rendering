@@ -7143,6 +7143,14 @@ const paletteColours = {
 		light: slideshowCaptionLight,
 		dark: slideshowCaptionDark,
 	},
+	/**
+	 * The background colour should match the background colour of the
+	 * sublinks when there is at least one sublink present.
+	 */
+	'--slideshow-navigation-background': {
+		light: cardSublinksBackgroundLight,
+		dark: cardSublinksBackgroundDark,
+	},
 	'--slideshow-pagination-dot': {
 		light: slideshowPaginationDotLight,
 		dark: slideshowPaginationDotDark,
