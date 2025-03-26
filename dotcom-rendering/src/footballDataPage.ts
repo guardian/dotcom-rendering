@@ -1,5 +1,5 @@
 import type { FootballMatches, FootballMatchKind } from './footballMatches';
-import { FootballTables } from './footballTables';
+import type { FootballTables } from './footballTables';
 import type { FEFootballPageConfig } from './frontend/feFootballDataPage';
 import type { EditionId } from './lib/edition';
 import type { NavType } from './model/extract-nav';
@@ -10,7 +10,7 @@ export type Region = {
 	competitions: Array<{ url: string; name: string }>;
 };
 
-type FootballData = {
+export type FootballData = {
 	nextPage?: string;
 	previousPage?: string;
 	regions: Region[];

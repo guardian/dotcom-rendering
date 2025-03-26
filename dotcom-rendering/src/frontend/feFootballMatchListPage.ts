@@ -5,7 +5,7 @@ export type FECompetitionSummary = {
 	url: string;
 	fullName: string;
 	nation: string;
-	dividers: number[];
+	dividers?: number[];
 };
 
 type FEStage = {

@@ -7,14 +7,49 @@ import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
-import type { FootballMatchListPage } from '../footballDataPage';
+import type {
+	FootballMatchListPage,
+	FootballTablesPage,
+} from '../footballDataPage';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
-	footballData: FootballMatchListPage;
+	footballData: FootballMatchListPage | FootballTablesPage;
 }
+
+const SportsPage = ({
+	footballData,
+	renderAds,
+}: {
+	footballData: FootballMatchListPage | FootballTablesPage;
+	renderAds: boolean;
+}) => {
+	switch (footballData.kind) {
+		case 'Fixture':
+		case 'Live':
+		case 'Result':
+			return (
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<FootballMatchesPageWrapper
+						regions={footballData.regions}
+						guardianBaseUrl={footballData.guardianBaseURL}
+						ajaxUrl={footballData.config.ajaxUrl}
+						kind={footballData.kind}
+						initialDays={footballData.matchesList}
+						secondPage={footballData.nextPage}
+						edition={footballData.editionId}
+						renderAds={renderAds}
+						pageId={footballData.config.pageId}
+					/>
+				</Island>
+			);
+
+		case 'Tables':
+			return <></>;
+	}
+};
 
 export const FootballDataPageLayout = ({ footballData }: Props) => {
 	const { nav } = footballData;
@@ -60,20 +95,7 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 				/>
 			</div>
 
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<FootballMatchesPageWrapper
-					regions={footballData.regions}
-					now={footballData.now}
-					guardianBaseUrl={footballData.guardianBaseURL}
-					ajaxUrl={footballData.config.ajaxUrl}
-					kind={footballData.kind}
-					initialDays={footballData.matchesList}
-					secondPage={footballData.nextPage}
-					edition={footballData.editionId}
-					renderAds={renderAds}
-					pageId={footballData.config.pageId}
-				/>
-			</Island>
+			<SportsPage footballData={footballData} renderAds={renderAds} />
 
 			{nav.subNavSections && (
 				<Section

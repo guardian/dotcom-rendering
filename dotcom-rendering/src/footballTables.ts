@@ -102,7 +102,7 @@ const parseFootballTables = (
 	const competition = {
 		url: table.competition.url,
 		name: table.competition.fullName,
-		dividers: table.competition.dividers,
+		dividers: table.competition.dividers ?? [], // TODO: parse competition
 	};
 	const parsedGroups = parseGroups(table.groups);
 
