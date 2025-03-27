@@ -21,7 +21,10 @@ import {
 } from '../model/validate';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
-import { renderFootballMatchesPage } from './render.footballDataPage.web';
+import {
+	renderFootballMatchesPage,
+	renderFootballTablesPage,
+} from './render.footballDataPage.web';
 
 const decidePageKind = (pageId: string): FootballMatchKind => {
 	if (pageId.includes('live')) {
@@ -150,7 +153,11 @@ export const handleFootballTablesPage: RequestHandler = ({ body }, res) => {
 	const footballTablesPageValidated: FEFootballTablesPage =
 		validateAsFootballTablesPage(body);
 
-	parseFEFootballTables(footballTablesPageValidated);
-	const { html, prefetchScripts } = { html: '', prefetchScripts: [] };
+	const parsedFootballTableData = parseFEFootballTables(
+		footballTablesPageValidated,
+	);
+	const { html, prefetchScripts } = renderFootballTablesPage(
+		parsedFootballTableData,
+	);
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
