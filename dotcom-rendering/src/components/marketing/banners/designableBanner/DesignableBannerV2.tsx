@@ -551,7 +551,7 @@ const styles = {
 
 		${from.desktop} {
 			display: grid;
-			padding: ${space[3]}px ${space[4]}px ${space[6]}px ${space[3]}px;
+			padding: ${space[3]}px ${space[8]}px ${space[6]}px ${space[8]}px;
 			grid-template-columns: auto auto auto auto;
 			grid-template-rows: auto 1fr auto;
 			width: 100%;
@@ -559,7 +559,6 @@ const styles = {
 			margin: 0 auto;
 			column-gap: ${space[5]}px;
 		}
-		${templateSpacing.bannerContainer};
 	`,
 	verticalLine: css`
 		${from.desktop} {
