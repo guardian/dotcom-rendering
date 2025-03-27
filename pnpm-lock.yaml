@@ -365,8 +365,8 @@ importers:
         specifier: 2.0.2
         version: 2.0.2
       '@guardian/react-crossword-next':
-        specifier: npm:@guardian/react-crossword@6.0.0
-        version: /@guardian/react-crossword@6.0.0(@emotion/react@11.11.3)(@guardian/libs@22.0.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+        specifier: npm:@guardian/react-crossword@6.1.0
+        version: /@guardian/react-crossword@6.1.0(@emotion/react@11.11.3)(@guardian/libs@22.0.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -4228,8 +4228,8 @@ packages:
       fsevents: 2.3.3
     dev: false
 
-  /@guardian/react-crossword@6.0.0(@emotion/react@11.11.3)(@guardian/libs@22.0.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
-    resolution: {integrity: sha512-QIwEc62KoHNu1fygKxsTpGYWkDcLP9VDz89ZQihxKX4ec3qiZZcKI34NYX/hgL/oQUF08Tml2ms2jn0cdiQp4A==}
+  /@guardian/react-crossword@6.1.0(@emotion/react@11.11.3)(@guardian/libs@22.0.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
+    resolution: {integrity: sha512-PaG8ygkEHP965NcC+Kyc3ulRzP1EXe4ElwufIQBldCdY+8Lr/6KtrPfCXYefRIzEZQOa/RdL3X2lR71EH32KGw==}
     peerDependencies:
       '@emotion/react': ^11.11.3
       '@guardian/libs': ^22.0.0
