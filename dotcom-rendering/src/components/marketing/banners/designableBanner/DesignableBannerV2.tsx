@@ -556,8 +556,10 @@ const styles = {
 			grid-template-rows: auto 1fr auto;
 			width: 100%;
 			max-width: 1300px;
+			margin: 0 auto;
 			column-gap: ${space[5]}px;
 		}
+		${templateSpacing.bannerContainer};
 	`,
 	verticalLine: css`
 		${from.desktop} {
