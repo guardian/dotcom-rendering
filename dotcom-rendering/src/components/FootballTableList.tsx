@@ -140,7 +140,7 @@ export const FootballTableList = ({ competitions, guardianBaseUrl }: Props) => (
 							css={css`
 								grid-row: ${competition.hasGroups
 									? 3 + 3 * groupIndex
-									: 2};
+									: 1};
 								grid-column: centre-column-start /
 									centre-column-end;
 							`}
