@@ -689,7 +689,7 @@ export const Card = ({
 	 * - Renders `SupportingContent` for all breakpoints if `sublinkPosition` is `outer`.
 	 * - If `sublinkPosition` is `inner`, hides `SupportingContent` from tablet but displays it on smaller breakpoints.
 	 */
-	const decideSublinks = () => {
+	const decideOuterSublinks = () => {
 		if (!hasSublinks) return null;
 		if (sublinkPosition === 'none') return null;
 
@@ -699,6 +699,7 @@ export const Card = ({
 				containerPalette={containerPalette}
 				alignment={supportingContentAlignment}
 				isDynamo={isDynamo}
+				isMedia={isMediaCard(format)}
 				fillBackgroundOnMobile={
 					!!isFlexSplash ||
 					(isBetaContainer &&
@@ -726,6 +727,7 @@ export const Card = ({
 	const decideInnerSublinks = () => {
 		if (!hasSublinks) return null;
 		if (sublinkPosition !== 'inner') return null;
+
 		return (
 			<Hide until={isFlexSplash ? 'desktop' : 'tablet'}>
 				<SupportingContent
@@ -1278,7 +1280,7 @@ export const Card = ({
 					</Island>
 				)}
 
-				{decideSublinks()}
+				{decideOuterSublinks()}
 
 				{isOpinionCardWithAvatar && (
 					<CardFooter
