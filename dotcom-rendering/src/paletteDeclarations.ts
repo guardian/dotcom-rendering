@@ -5663,6 +5663,11 @@ const cardSublinksBackgroundLight: PaletteFunction = () =>
 const cardSublinksBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
 
+const cardMediaSublinksBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const cardMediaSublinksBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
 const latestLinksDottedLineLight: PaletteFunction = () =>
 	sourcePalette.neutral[60];
 const latestLinksDottedLineDark: PaletteFunction = () =>
@@ -6121,6 +6126,10 @@ const paletteColours = {
 	'--card-media-icon': {
 		light: cardMediaIconLight,
 		dark: cardMediaIconDark,
+	},
+	'--card-media-sublinks-background': {
+		light: cardMediaSublinksBackgroundLight,
+		dark: cardMediaSublinksBackgroundDark,
 	},
 	'--card-media-waveform': {
 		light: cardMediaWaveformLight,
