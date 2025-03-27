@@ -13,7 +13,7 @@ import { error, ok, type Result } from './lib/result';
 import type { NavType } from './model/extract-nav';
 import type { FooterType } from './types/footer';
 
-type TeamScore = {
+export type TeamScore = {
 	name: string;
 	score?: number;
 };
