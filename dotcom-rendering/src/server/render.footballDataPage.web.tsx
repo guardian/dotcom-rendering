@@ -61,6 +61,13 @@ const decideTitle = (
 	}
 };
 
+export const renderFootballTablesPage = (footballData: FootballTablesPage) =>
+	renderFootballDataPage(
+		footballData,
+		'Tables', //ToDo: decide tables title
+		'Description',
+	); // ToDo: decide tables description
+
 export const renderFootballMatchesPage = (
 	footballData: FootballMatchListPage,
 ) =>
