@@ -2,7 +2,7 @@
     "type": "object",
     "properties": {
         "pressedPage": {
-            "$ref": "#/definitions/FEPressedPageType"
+            "$ref": "#/definitions/FEPressedPage"
         },
         "nav": {
             "$ref": "#/definitions/FENavType"
@@ -391,7 +391,7 @@
         "webURL"
     ],
     "definitions": {
-        "FEPressedPageType": {
+        "FEPressedPage": {
             "type": "object",
             "properties": {
                 "id": {
@@ -2756,7 +2756,7 @@
                                 }
                             },
                             "collectionType": {
-                                "$ref": "#/definitions/FEContainerType"
+                                "$ref": "#/definitions/FEContainer"
                             },
                             "uneditable": {
                                 "type": "boolean"
@@ -2797,7 +2797,7 @@
                                         }
                                     },
                                     "collectionType": {
-                                        "$ref": "#/definitions/FEContainerType"
+                                        "$ref": "#/definitions/FEContainer"
                                     },
                                     "collectionLevel": {
                                         "$ref": "#/definitions/FEContainerLevel"
@@ -2842,7 +2842,7 @@
                                         "type": "string"
                                     },
                                     "aspectRatio": {
-                                        "$ref": "#/definitions/AspectRatio"
+                                        "$ref": "#/definitions/FEAspectRatio"
                                     }
                                 },
                                 "required": [
@@ -3118,7 +3118,7 @@
                 "assets": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/MediaAsset"
+                        "$ref": "#/definitions/FEMediaAsset"
                     }
                 },
                 "title": {
@@ -3157,7 +3157,7 @@
                 "title"
             ]
         },
-        "MediaAsset": {
+        "FEMediaAsset": {
             "type": "object",
             "properties": {
                 "id": {
@@ -3267,7 +3267,7 @@
             ],
             "type": "string"
         },
-        "FEContainerType": {
+        "FEContainer": {
             "enum": [
                 "dynamic/fast",
                 "dynamic/package",
@@ -3332,7 +3332,7 @@
             ],
             "type": "string"
         },
-        "AspectRatio": {
+        "FEAspectRatio": {
             "enum": [
                 "1:1",
                 "4:5",

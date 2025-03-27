@@ -10,7 +10,10 @@ import {
 	textSansBold14,
 	until,
 } from '@guardian/source/foundations';
-import { SvgClock, SvgNewsletter } from '@guardian/source/react-components';
+import {
+	SvgClockFilled,
+	SvgNewsletterFilled,
+} from '@guardian/source/react-components';
 import { OptionKind } from '../../../vendor/@guardian/types/index';
 import ArticleBody from 'components/ArticleBody';
 import Footer from 'components/Footer';
@@ -112,7 +115,7 @@ const NewsletterSignUpLayout = ({ item }: Props) => {
 						<>
 							{newsletter.regionFocus && (
 								<div css={detailBlockStyles}>
-									<SvgNewsletter size="small" />
+									<SvgNewsletterFilled size="small" />
 									<b>{newsletter.regionFocus} Focused</b>
 								</div>
 							)}
@@ -125,7 +128,7 @@ const NewsletterSignUpLayout = ({ item }: Props) => {
 					{maybeRender(item.promotedNewsletter, (newsletter) => (
 						<>
 							<div css={frequencyBlockStyles}>
-								<SvgClock size="xsmall" />
+								<SvgClockFilled size="xsmall" />
 
 								<span>
 									You&apos;ll receive this newsletter

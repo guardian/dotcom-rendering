@@ -10,7 +10,7 @@ import { hideSupportMessaging } from '../client/userFeatures/cookies/hideSupport
 import { userBenefitsDataIsUpToDate } from '../client/userFeatures/cookies/userBenefitsExpiry';
 import type { DCRFootballDataPage } from '../footballMatches';
 import type { ArticleDeprecated } from '../types/article';
-import type { DCRFrontType } from '../types/front';
+import type { Front } from '../types/front';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import type { TagPage } from '../types/tagPage';
 
@@ -198,7 +198,7 @@ export const recentlyClosedBanner = (
 export const getContributionsServiceUrl = (
 	config:
 		| ArticleDeprecated
-		| DCRFrontType
+		| Front
 		| TagPage
 		| DCRNewslettersPageType
 		| DCRFootballDataPage,

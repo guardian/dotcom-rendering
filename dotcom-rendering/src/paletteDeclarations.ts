@@ -5770,10 +5770,16 @@ const pillDivider: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[100], 0.5);
 const pillLiveBullet: PaletteFunction = () => sourcePalette.news[500];
 
+const crosswordAnagramHelperBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const crosswordAnagramHelperBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
 const crosswordCluesHeaderBorderTop: PaletteFunction = () =>
 	sourcePalette.lifestyle[400];
 const crosswordCluesHeaderBorderBottom: PaletteFunction = () =>
 	sourcePalette.neutral[86];
+const crosswordTextLight: PaletteFunction = () => sourcePalette.neutral[7];
+const crosswordTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
 // ----- Palette ----- //
 
@@ -6248,6 +6254,10 @@ const paletteColours = {
 		light: cricketScoreboardLinkText,
 		dark: cricketScoreboardLinkText,
 	},
+	'--crossword-anagram-helper-background': {
+		light: crosswordAnagramHelperBackgroundLight,
+		dark: crosswordAnagramHelperBackgroundDark,
+	},
 	'--crossword-clues-header-border-bottom': {
 		light: crosswordCluesHeaderBorderBottom,
 		dark: crosswordCluesHeaderBorderBottom,
@@ -6255,6 +6265,10 @@ const paletteColours = {
 	'--crossword-clues-header-border-top': {
 		light: crosswordCluesHeaderBorderTop,
 		dark: crosswordCluesHeaderBorderTop,
+	},
+	'--crossword-text': {
+		light: crosswordTextLight,
+		dark: crosswordTextDark,
 	},
 	'--dateline': {
 		light: datelineLight,
@@ -7144,6 +7158,14 @@ const paletteColours = {
 	'--slideshow-caption': {
 		light: slideshowCaptionLight,
 		dark: slideshowCaptionDark,
+	},
+	/**
+	 * The background colour should match the background colour of the
+	 * sublinks when there is at least one sublink present.
+	 */
+	'--slideshow-navigation-background': {
+		light: cardSublinksBackgroundLight,
+		dark: cardSublinksBackgroundDark,
 	},
 	'--slideshow-pagination-dot': {
 		light: slideshowPaginationDotLight,
