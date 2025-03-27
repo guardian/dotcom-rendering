@@ -78,6 +78,18 @@ const hoverStyles = css`
 	}
 `;
 
+/** When we hover on sublinks, we want to prevent the general hover styles applying */
+const sublinkHoverStyles = css`
+	:has(ul.sublinks:hover) {
+		.card-headline .show-underline {
+			text-decoration: none;
+		}
+		.image-overlay {
+			background-color: transparent;
+		}
+	}
+`;
+
 const contentStyles = css`
 	display: flex;
 	flex-basis: 100%;
@@ -332,7 +344,7 @@ export const FeatureCard = ({
 	return (
 		<FormatBoundary format={format}>
 			<ContainerOverrides containerPalette={containerPalette}>
-				<div css={[baseCardStyles, hoverStyles]}>
+				<div css={[baseCardStyles, hoverStyles, sublinkHoverStyles]}>
 					{!showYoutubeVideo && (
 						<CardLink
 							linkTo={linkTo}
