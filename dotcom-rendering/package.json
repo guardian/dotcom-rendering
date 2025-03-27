@@ -34,7 +34,7 @@
 		"@creditkarma/thrift-server-core": "1.0.4",
 		"@emotion/babel-plugin": "11.13.5",
 		"@emotion/cache": "11.11.0",
-		"@emotion/react": "11.11.3",
+		"@emotion/react": "11.14.0",
 		"@emotion/server": "11.11.0",
 		"@guardian/ab-core": "8.0.0",
 		"@guardian/braze-components": "22.0.0",
