@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticle } from '../../../src/frontend/feArticle';
 
-export const Quiz: FEArticleType = {
+export const Quiz: FEArticle = {
 	version: 3,
 	headline: 'Sports quiz: football in the 1980s',
 	standfirst:

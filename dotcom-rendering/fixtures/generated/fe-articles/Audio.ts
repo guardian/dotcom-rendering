@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticle } from '../../../src/frontend/feArticle';
 
-export const Audio: FEArticleType = {
+export const Audio: FEArticle = {
 	version: 3,
 	headline:
 		'NSA collecting phone records of millions of Verizon customers daily',

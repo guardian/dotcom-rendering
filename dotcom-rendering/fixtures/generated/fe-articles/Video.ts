@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticle } from '../../../src/frontend/feArticle';
 
-export const Video: FEArticleType = {
+export const Video: FEArticle = {
 	version: 3,
 	headline:
 		'ATP Finals: Djokovic beats Sinner to claim record seventh title – video',

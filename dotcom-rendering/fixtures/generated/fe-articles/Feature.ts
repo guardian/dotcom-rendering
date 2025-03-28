@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticle } from '../../../src/frontend/feArticle';
 
-export const Feature: FEArticleType = {
+export const Feature: FEArticle = {
 	version: 3,
 	headline: "'I've been a scoundrel all my life': quotes of the Oscars 2020",
 	standfirst:
