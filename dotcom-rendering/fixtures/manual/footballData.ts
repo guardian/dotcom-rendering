@@ -55,9 +55,11 @@ export const initialDays: FootballMatches = [
 						paId: '12345',
 						homeTeam: {
 							name: 'Fiorentina',
+							id: '26366',
 						},
 						awayTeam: {
 							name: 'Bologna',
+							id: '26371',
 						},
 						status: 'S',
 						comment: 'Awaiting officials decision',
