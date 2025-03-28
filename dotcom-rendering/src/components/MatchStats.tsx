@@ -18,12 +18,22 @@ import { GridItem } from './GridItem';
 import { Hide } from './Hide';
 import { Lineup } from './Lineup';
 
-type Props = {
+type MatchStatsData = {
 	home: TeamType;
 	away: TeamType;
 	competition: string;
-	format?: ArticleFormat;
 };
+
+type MatchSummaryProps = MatchStatsData & {
+	usage: 'MatchSummary';
+};
+
+type ArticleProps = MatchStatsData & {
+	usage: 'Article';
+	format: ArticleFormat;
+};
+
+type Props = ArticleProps | MatchSummaryProps;
 
 //For these three tournaments, we only get data for live goals, bookings and substitutions, and no other type of match stats
 const omitStatsTeams = [
@@ -348,8 +358,11 @@ const DecideDoughnut = ({
 	}
 };
 
-export const MatchStats = ({ home, away, competition, format }: Props) => {
+export const MatchStats = (props: Props) => {
+	const { home, away, competition, usage } = props;
 	const showStats = !omitStatsTeams.includes(competition);
+	const format = usage === 'Article' ? props.format : undefined;
+
 	return (
 		<StretchBackground showStats={showStats}>
 			<StatsGrid format={format}>

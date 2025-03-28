@@ -78,6 +78,7 @@ export const FootballMatchSummary = ({
 				home={homeTeam}
 				away={awayTeam}
 				competition={competition}
+				usage="MatchSummary"
 			/>
 		</div>
 	</main>
