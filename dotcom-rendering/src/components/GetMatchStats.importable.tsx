@@ -101,6 +101,7 @@ export const GetMatchStats = ({ matchUrl, format }: Props) => {
 				away={cleanTeamData(data.awayTeam)}
 				competition={data.competition.fullName}
 				format={format}
+				usage="Article"
 			/>
 		);
 	}

@@ -18,12 +18,22 @@ import { GridItem } from './GridItem';
 import { Hide } from './Hide';
 import { Lineup } from './Lineup';
 
-type Props = {
+type MatchStatsData = {
 	home: TeamType;
 	away: TeamType;
 	competition: string;
+};
+
+type MatchSummaryProps = MatchStatsData & {
+	usage: 'MatchSummary';
+};
+
+type ArticleProps = MatchStatsData & {
+	usage: 'Article';
 	format: ArticleFormat;
 };
+
+type Props = ArticleProps | MatchSummaryProps;
 
 //For these three tournaments, we only get data for live goals, bookings and substitutions, and no other type of match stats
 const omitStatsTeams = [
@@ -38,9 +48,9 @@ const StatsGrid = ({
 	format,
 }: {
 	children: React.ReactNode;
-	format: ArticleFormat;
+	format?: ArticleFormat;
 }) => {
-	switch (format.design) {
+	switch (format?.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog: {
 			return (
@@ -206,9 +216,9 @@ const ShiftLeft = ({
 	format,
 }: {
 	children: React.ReactNode;
-	format: ArticleFormat;
+	format?: ArticleFormat;
 }) => {
-	switch (format.design) {
+	switch (format?.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog: {
 			return <div>{children}</div>;
@@ -291,7 +301,7 @@ const DecideDoughnut = ({
 }: {
 	home: TeamType;
 	away: TeamType;
-	format: ArticleFormat;
+	format?: ArticleFormat;
 }) => {
 	const sections = [
 		{
@@ -305,7 +315,7 @@ const DecideDoughnut = ({
 			color: away.colours,
 		},
 	].reverse();
-	switch (format.design) {
+	switch (format?.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog: {
 			return (
@@ -348,8 +358,11 @@ const DecideDoughnut = ({
 	}
 };
 
-export const MatchStats = ({ home, away, competition, format }: Props) => {
+export const MatchStats = (props: Props) => {
+	const { home, away, competition, usage } = props;
 	const showStats = !omitStatsTeams.includes(competition);
+	const format = usage === 'Article' ? props.format : undefined;
+
 	return (
 		<StretchBackground showStats={showStats}>
 			<StatsGrid format={format}>

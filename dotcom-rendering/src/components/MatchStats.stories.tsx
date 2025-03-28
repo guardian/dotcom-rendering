@@ -23,6 +23,7 @@ export const Default = () => {
 				design: ArticleDesign.Standard,
 				theme: Pillar.News,
 			}}
+			usage="Article"
 		/>
 	);
 };
@@ -51,6 +52,7 @@ export const InContext = () => {
 							design: ArticleDesign.Standard,
 							theme: Pillar.News,
 						}}
+						usage="Article"
 					/>
 				</ArticleContainer>
 				<RightColumn>
@@ -73,6 +75,7 @@ const DefaultInLiveblog = () => {
 				design: ArticleDesign.DeadBlog,
 				theme: Pillar.Sport,
 			}}
+			usage="Article"
 		/>
 	);
 };
@@ -89,6 +92,7 @@ export const NoStats = () => {
 				design: ArticleDesign.Standard,
 				theme: Pillar.News,
 			}}
+			usage="Article"
 		/>
 	);
 };
