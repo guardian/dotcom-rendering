@@ -10,4 +10,16 @@ const getIframeBody = async (
 	return iframeBodyLocator;
 };
 
-export { getIframeBody };
+const getIframePart = async (
+	page: Page,
+	iframeSelector: string,
+	partSelector: string,
+): Promise<Locator> => {
+	const iframePartLocator = page
+		.frameLocator(iframeSelector)
+		.locator(partSelector);
+	await expect(iframePartLocator).toBeAttached({ timeout: 10_000 });
+	return iframePartLocator;
+};
+
+export { getIframeBody, getIframePart };

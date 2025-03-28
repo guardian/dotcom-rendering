@@ -326,45 +326,75 @@ export const InteractiveBlockComponent = ({
 	const placeholderLinkRef = useRef<HTMLAnchorElement>(null);
 	const [loaded, setLoaded] = useState(false);
 	const { darkModeAvailable } = useConfig();
+
+	// Define some one-time flags
+	const isDatawrapperGraphic =
+		url && url.includes('interactive.guim.co.uk/datawrapper')
+			? true
+			: false;
+
+	const isUploaderEmbedPath =
+		url && url.includes('interactive.guim.co.uk/uploader/embed/')
+			? true
+			: false;
+
+	const scriptUrlIsBoot =
+		scriptUrl &&
+		scriptUrl.includes(
+			'interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js',
+		)
+			? true
+			: false;
+
 	useOnce(() => {
 		// We've brought the behavior from boot.js into this file to avoid loading 2 extra scripts
-		if (
-			scriptUrl ===
-				'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js' &&
-			url &&
-			placeholderLinkRef.current
-		) {
+
+		// Define additional one-time flags - these depend on window/document objects
+		const isRunningInWebEnvironment =
+			!document.querySelector('.ios') &&
+			!document.querySelector('.android')
+				? true
+				: false;
+
+		const prefersDarkScheme = window.matchMedia(
+			'(prefers-color-scheme: dark)',
+		).matches;
+		const requiresDarkMode =
+			darkModeAvailable && prefersDarkScheme ? true : false;
+
+		if (url && scriptUrlIsBoot && placeholderLinkRef.current) {
+			// Prepare for graphic url dynamic updates
+			const graphicUrl = new URL(url);
+
+			// Begin creating new iframe element
 			const iframe = document.createElement('iframe');
 			iframe.style.width = '100%';
 			iframe.style.border = 'none';
 			iframe.height = decideHeight(role).toString();
 			iframe.title = caption ?? alt ?? 'Interactive Content';
-			if (url.startsWith('http:')) {
-				iframe.src = url.replace('http:', 'https:');
-			} else {
-				iframe.src = url;
+
+			// Fix for Datawrapper graphic
+			if (isDatawrapperGraphic) {
+				iframe.scrolling = 'no';
 			}
 
-			// Datawrapper-specific fix to suppress scrollbars appearing
-			if (url.includes('datawrapper')) {
-				iframe.scrolling = 'no';
-				// Turn off dark mode for Datawrapper embeds on web
-				// This should be removed if/when dark mode is implements on the website
-				if (
-					!document.querySelector('.ios') &&
-					!document.querySelector('.android')
-				) {
-					const prefersDarkScheme = window.matchMedia(
-						'(prefers-color-scheme: dark)',
-					).matches;
-					const darkMode = darkModeAvailable && prefersDarkScheme;
-					if (!darkMode) {
-						iframe.src +=
-							(iframe.src.includes('?') ? '&' : '?') +
-							'dark=false';
+			// Fix darkmode for web environment
+			if (isRunningInWebEnvironment && !requiresDarkMode) {
+				if (isDatawrapperGraphic || isUploaderEmbedPath) {
+					// Add the 'dark=false' search param
+					if (graphicUrl.search.length) {
+						graphicUrl.search += '&dark=false';
+					} else {
+						graphicUrl.search += '?dark=false';
 					}
 				}
 			}
+
+			// Always serve graphic over https, not http
+			graphicUrl.protocol = 'https:';
+
+			// Finalise new iframe element
+			iframe.src = graphicUrl.href;
 
 			setupWindowListeners(iframe);
 
@@ -396,13 +426,6 @@ export const InteractiveBlockComponent = ({
 			setLoaded(true);
 		}
 	}, [loaded]);
-
-	const isDatawrapperGraphic =
-		url == undefined
-			? false
-			: /^https?:\/\/interactive\.guim\.co\.uk\/datawrapper(-test)?\/embed/.test(
-					url,
-			  );
 
 	return (
 		<>
