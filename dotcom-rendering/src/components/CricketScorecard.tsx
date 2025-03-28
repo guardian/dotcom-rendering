@@ -14,13 +14,13 @@ import type { ReactNode } from 'react';
 import { palette } from '../palette';
 
 const borderStyle = css`
-	border-top: 0.0625rem solid ${palette('--football-match-list-border')};
+	border-top: 0.0625rem solid ${palette('--sport-list-border')};
 `;
 
 const tableStyles = css`
 	width: 100%;
 	background: ${palette('--table-block-background')};
-	border-top: 0.0625rem solid ${palette('--football-match-list-top-border')};
+	border-top: 0.0625rem solid ${palette('--sport-top-border')};
 	color: ${palette('--table-block-text')};
 	border-collapse: inherit;
 	${textSans14};
@@ -326,17 +326,12 @@ export const CricketScorecard = ({
 					css={css`
 						${textSansBold14}
 						grid-column: centre-column-start / centre-column-end;
-						border-top: 1px solid
-							${palette('--football-match-list-top-border')};
+						border-top: 1px solid ${palette('--sport-top-border')};
 						padding: ${space[2]}px;
-						background-color: ${palette(
-							'--football-match-list-background',
-						)};
+						background-color: ${palette('--sport-list-background')};
 
 						${from.leftCol} {
-							border-top-color: ${palette(
-								'--football-match-list-border',
-							)};
+							border-top-color: ${palette('--sport-list-border')};
 							background-color: transparent;
 							margin-top: 0;
 							padding: ${space[1]}px 0 0;
