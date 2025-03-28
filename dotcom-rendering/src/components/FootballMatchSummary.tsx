@@ -43,46 +43,42 @@ export const FootballMatchSummary = ({
 	comments,
 	competition,
 }: Props) => (
-	<main>
-		<div css={gridStyles}>
-			<div
-				css={css`
-					${grid.column.centre};
-					position: relative;
+	<main id="maincontent" css={gridStyles}>
+		<div
+			css={css`
+				${grid.column.centre};
+				position: relative;
 
-					${from.tablet} {
-						:before {
-							content: '';
-							position: absolute;
-							top: 0;
-							bottom: 10px;
-							width: 100vw;
-							left: -100vw;
-							background-color: var(--match-nav-background);
-						}
+				${from.tablet} {
+					:before {
+						content: '';
+						position: absolute;
+						top: 0;
+						bottom: 10px;
+						width: 100vw;
+						left: -100vw;
+						background-color: var(--match-nav-background);
 					}
-				`}
-			>
-				<MatchNav
-					homeTeam={homeTeam}
-					awayTeam={awayTeam}
-					comments={comments}
-				/>
-			</div>
+				}
+			`}
+		>
+			<MatchNav
+				homeTeam={homeTeam}
+				awayTeam={awayTeam}
+				comments={comments}
+			/>
 		</div>
-		<div css={gridStyles}>
-			<div
-				css={css`
-					${grid.column.centre}
-					${backgroundColour}: initial;
-				`}
-			>
-				<MatchStats
-					home={homeTeam}
-					away={awayTeam}
-					competition={competition}
-				/>
-			</div>
+		<div
+			css={css`
+				${grid.column.centre}
+				${backgroundColour}: initial;
+			`}
+		>
+			<MatchStats
+				home={homeTeam}
+				away={awayTeam}
+				competition={competition}
+			/>
 		</div>
 	</main>
 );
