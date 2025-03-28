@@ -222,14 +222,14 @@ const Batting = ({
 		<tbody>
 			{batters.map((batter) => (
 				<tr key={batter.name}>
-					<th
-						scope="row"
-						css={css`
-							${borderStyle}
-							${textSansBold14}
-						`}
-					>
-						{batter.name}
+					<th scope="row" css={borderStyle}>
+						<span
+							css={css`
+								${textSansBold14}
+							`}
+						>
+							{batter.name}
+						</span>
 						<div css={hideFromTabletStyle}>{batter.howOut}</div>
 					</th>
 					<td css={hideUntilTabletStyle}>{batter.howOut}</td>
