@@ -46,6 +46,21 @@ export const initialDays: FootballMatches = [
 						status: '1st',
 					},
 					{
+						kind: 'Live',
+						dateTimeISOString: new Date(
+							'2022-01-01T11:11:00Z',
+						).toISOString(),
+						paId: '12345',
+						homeTeam: {
+							name: 'Fiorentina',
+						},
+						awayTeam: {
+							name: 'Bologna',
+						},
+						status: 'S',
+						comment: 'Awaiting officials decision',
+					},
+					{
 						kind: 'Fixture',
 						dateTimeISOString: new Date(
 							'2022-01-01T19:45:00Z',

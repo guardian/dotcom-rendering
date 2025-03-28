@@ -32,6 +32,7 @@ type Props = {
 	edition: EditionId;
 	guardianBaseUrl: string;
 	getMoreDays?: () => Promise<Result<'failed', FootballMatches>>;
+	now: string;
 };
 
 const REMOVE_TRAILING_DOTS_REGEX = /\.+$/;
@@ -221,10 +222,12 @@ const MatchWrapper = ({
 	children,
 }: {
 	match: FootballMatch;
-	now: Date;
+	now: string;
 	children: ReactNode;
 }) => {
-	if (shouldRenderMatchLink(new Date(match.dateTimeISOString), now)) {
+	if (
+		shouldRenderMatchLink(new Date(match.dateTimeISOString), new Date(now))
+	) {
 		return (
 			<li css={matchListItemStyles}>
 				<a
@@ -260,7 +263,7 @@ const Match = ({
 }: {
 	match: FootballMatch;
 	timeFormatter: Intl.DateTimeFormat;
-	now: Date;
+	now: string;
 }) => (
 	<MatchWrapper match={match} now={now}>
 		<MatchStatus match={match} timeFormatter={timeFormatter} />
@@ -352,8 +355,8 @@ const Scores = ({
 	homeScore,
 	awayScore,
 }: {
-	homeScore: number;
-	awayScore: number;
+	homeScore?: number;
+	awayScore?: number;
 }) => (
 	<span
 		css={css`
@@ -387,14 +390,13 @@ export const FootballMatchList = ({
 	guardianBaseUrl,
 	initialDays,
 	getMoreDays,
+	now,
 }: Props) => {
 	const dateFormatter = getDateFormatter(edition);
 	const timeFormatter = getTimeFormatter(edition);
 
 	const [days, setDays] = useState(initialDays);
 	const [isError, setIsError] = useState<boolean>(false);
-	const now = new Date();
-
 	return (
 		<>
 			{days.map((day) => (

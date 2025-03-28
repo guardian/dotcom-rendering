@@ -44,7 +44,7 @@ export const FootballTableForm = ({
 				white-space: nowrap;
 			`}
 		>
-			{teamResults.map(({ self, foe }) => {
+			{teamResults.map(({ self, foe, id }) => {
 				const isWin = self.score > foe.score;
 				const isLoss = self.score < foe.score;
 				const styles = isWin
@@ -61,10 +61,7 @@ export const FootballTableForm = ({
 				return (
 					<span
 						css={[formBlockStyles, styles]}
-						key={`${self.name}-${foe.name}`}
-						data-foe={foe.name}
-						data-score={self.score}
-						data-score-foe={foe.score}
+						key={id}
 						title={title}
 					>
 						<span

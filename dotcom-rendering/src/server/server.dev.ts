@@ -22,7 +22,9 @@ import {
 } from './handler.front.web';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
-const ARTICLE_URL = /\/\d{4}\/[a-z]{3}\/\d{2}\//;
+const ARTICLE_URL = /(\/\d{4}\/[a-z]{3}\/\d{2}\/)/;
+/** Crossword URLs end with e.g /crosswords/quick/17117 */
+const CROSSWORD_URL = /(\/[a-z-]+\/\d+$)/;
 /** fronts are a series of lowercase strings, dashes and forward slashes */
 const FRONT_URL = /^\/[a-z-/]+(?<!\.css)$/;
 /** This is imperfect, but covers *some* cases of tag pages, consider expanding in the future */
@@ -98,7 +100,10 @@ export const devServer = (): Handler => {
 				// Do not redirect assets urls
 				if (req.url.match(ASSETS_URL)) return next();
 
-				if (req.url.match(ARTICLE_URL)) {
+				if (
+					req.url.match(ARTICLE_URL) ??
+					req.url.match(CROSSWORD_URL)
+				) {
 					const url = new URL(
 						req.url,
 						'https://www.theguardian.com/',

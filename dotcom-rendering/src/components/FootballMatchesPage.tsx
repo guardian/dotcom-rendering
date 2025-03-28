@@ -28,6 +28,7 @@ type Props = {
 	getMoreDays?: () => Promise<Result<'failed', FootballMatches>>;
 	renderAds: boolean;
 	pageId: string;
+	now: string;
 };
 
 const createTitle = (kind: FootballMatchKind, edition: EditionId) => {
@@ -47,6 +48,7 @@ const createTitle = (kind: FootballMatchKind, edition: EditionId) => {
 
 export const FootballMatchesPage = ({
 	regions,
+	now,
 	guardianBaseUrl,
 	kind,
 	initialDays,
@@ -121,6 +123,7 @@ export const FootballMatchesPage = ({
 			`}
 		>
 			<FootballMatchList
+				now={now}
 				initialDays={initialDays}
 				edition={edition}
 				getMoreDays={getMoreDays}
@@ -139,7 +142,7 @@ export const FootballMatchesPage = ({
 					}
 				`}
 			>
-				<AdSlot position="right-football" />
+				<AdSlot position="football-right" />
 			</div>
 		)}
 	</main>

@@ -109,7 +109,7 @@ export const FootballTablesPage = ({
 					}
 				`}
 			>
-				<AdSlot position="right-football" />
+				<AdSlot position="football-right" />
 			</div>
 		)}
 	</main>

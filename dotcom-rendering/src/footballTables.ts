@@ -1,8 +1,12 @@
-import type { TeamScore } from './footballMatches';
+export type TeamResultScore = {
+	name: string;
+	score: number;
+};
 
 export type TeamResult = {
-	self: TeamScore;
-	foe: TeamScore;
+	id: string;
+	self: TeamResultScore;
+	foe: TeamResultScore;
 };
 
 export type FootballTableCompetition = {

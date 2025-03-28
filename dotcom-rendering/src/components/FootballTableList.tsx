@@ -43,7 +43,7 @@ const footballTablesGridStyles = css`
 `;
 
 const CompetitionName = ({ children }: { children: ReactNode }) => (
-	<h3
+	<h2
 		css={css`
 			${textSansBold14}
 			grid-column: centre-column-start / centre-column-end;
@@ -66,7 +66,7 @@ const CompetitionName = ({ children }: { children: ReactNode }) => (
 		`}
 	>
 		{children}
-	</h3>
+	</h2>
 );
 
 const GroupName = ({
@@ -76,7 +76,7 @@ const GroupName = ({
 	children: ReactNode;
 	index: number;
 }) => (
-	<h4
+	<h3
 		css={css`
 			grid-column: centre-column-start / centre-column-end;
 			padding-top: ${space[1]}px;
@@ -88,7 +88,7 @@ const GroupName = ({
 		`}
 	>
 		{children}
-	</h4>
+	</h3>
 );
 
 type Props = {

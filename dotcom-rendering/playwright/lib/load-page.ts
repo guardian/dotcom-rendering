@@ -99,30 +99,6 @@ const loadPageWithOverrides = async (
 };
 
 /**
- * Allows us to continue using cookies for signed in features
- * until we figure out how to use Okta in e2e testing.
- * See https://github.com/guardian/dotcom-rendering/issues/8758
- */
-const loadPageNoOkta = async (
-	page: Page,
-	article: FEArticleType,
-	overrides?: {
-		configOverrides?: Record<string, unknown>;
-		switchOverrides?: Record<string, unknown>;
-	},
-): Promise<void> => {
-	await loadPageWithOverrides(page, article, {
-		configOverrides: overrides?.configOverrides,
-		switchOverrides: {
-			...overrides?.switchOverrides,
-			okta: false,
-			idCookieRefresh: false,
-			userFeaturesDcr: true,
-		},
-	});
-};
-
-/**
  * Fetch the page json from PROD then load it as a POST with overrides
  */
 const fetchAndloadPageWithOverrides = async (
@@ -148,6 +124,5 @@ export {
 	BASE_URL,
 	fetchAndloadPageWithOverrides,
 	loadPage,
-	loadPageNoOkta,
 	loadPageWithOverrides,
 };

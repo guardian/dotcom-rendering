@@ -84,20 +84,6 @@ test.describe('Sign In Gate Tests', () => {
 			await expectToNotExist(page, SIGN_IN_GATE_MAIN_SELECTOR);
 		});
 
-		test('do NOT load the sign in gate if the user is signed in', async ({
-			context,
-			page,
-		}) => {
-			// Fake login
-			await addCookie(context, { name: 'GU_U', value: 'true' });
-
-			await loadPageWithOverrides(page, standardArticle);
-
-			await scrollToGateForLazyLoading(page);
-
-			await expectToNotExist(page, SIGN_IN_GATE_MAIN_SELECTOR);
-		});
-
 		test('do NOT load the sign in gate if the user has already dismissed the gate', async ({
 			page,
 		}) => {

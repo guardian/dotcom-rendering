@@ -55,22 +55,27 @@ export const FootballTable = {
 					points: 70,
 					results: [
 						{
+							id: '1',
 							self: { name: 'Liverpool', score: 1 },
 							foe: { name: 'Chelsea', score: 0 },
 						},
 						{
+							id: '2',
 							self: { name: 'Liverpool', score: 3 },
 							foe: { name: 'Arsenal', score: 5 },
 						},
 						{
+							id: '3',
 							self: { name: 'Liverpool', score: 0 },
 							foe: { name: 'West Ham', score: 0 },
 						},
 						{
+							id: '4',
 							self: { name: 'Liverpool', score: 8 },
 							foe: { name: 'Tottenham', score: 10 },
 						},
 						{
+							id: '5',
 							self: { name: 'Liverpool', score: 0 },
 							foe: { name: 'Brighton', score: 0 },
 						},
@@ -93,22 +98,27 @@ export const FootballTable = {
 					points: 58,
 					results: [
 						{
+							id: '1',
 							self: { name: 'Arsenal', score: 4 },
 							foe: { name: 'Brighton', score: 0 },
 						},
 						{
+							id: '2',
 							self: { name: 'Arsenal', score: 3 },
 							foe: { name: 'Manchester United', score: 0 },
 						},
 						{
+							id: '3',
 							self: { name: 'Arsenal', score: 5 },
 							foe: { name: 'West Ham', score: 0 },
 						},
 						{
+							id: '4',
 							self: { name: 'Arsenal', score: 9 },
 							foe: { name: 'Manchester City', score: 0 },
 						},
 						{
+							id: '5',
 							self: { name: 'Arsenal', score: 0 },
 							foe: { name: 'Tottenham', score: 0 },
 						},
@@ -131,22 +141,27 @@ export const FootballTable = {
 					points: 54,
 					results: [
 						{
+							id: '1',
 							self: { name: 'Nottm Forest', score: 4 },
 							foe: { name: 'Brighton', score: 4 },
 						},
 						{
+							id: '2',
 							self: { name: 'Nottm Forest', score: 0 },
 							foe: { name: 'Manchester United', score: 0 },
 						},
 						{
+							id: '3',
 							self: { name: 'Nottm Forest', score: 0 },
 							foe: { name: 'West Ham', score: 7 },
 						},
 						{
+							id: '4',
 							self: { name: 'Nottm Forest', score: 9 },
 							foe: { name: 'Manchester City', score: 0 },
 						},
 						{
+							id: '5',
 							self: { name: 'Nottm Forest', score: 10 },
 							foe: { name: 'Tottenham', score: 0 },
 						},
