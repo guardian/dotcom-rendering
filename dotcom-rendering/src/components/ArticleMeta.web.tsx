@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import type { FEArticle } from '../frontend/feArticle';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -13,7 +14,6 @@ import { getSoleContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
 import type { FEElement } from '../types/content';
-import type { FEArticleType } from '../types/frontend';
 import type { Podcast, TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.importable';
@@ -40,7 +40,7 @@ type Props = {
 	shortUrlId: string;
 	isCommentable: boolean;
 	mainMediaElements?: FEElement[];
-	crossword?: FEArticleType['crossword'];
+	crossword?: FEArticle['crossword'];
 };
 
 const meta = (format: ArticleFormat) => {

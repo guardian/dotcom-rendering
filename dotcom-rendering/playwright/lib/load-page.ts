@@ -1,7 +1,7 @@
 import type { Page } from '@playwright/test';
 import { PORT } from 'playwright.config';
-import { validateAsArticleType } from '../../src/model/validate';
-import type { FEArticleType } from '../../src/types/frontend';
+import type { FEArticle } from '../../src/frontend/feArticle';
+import { validateAsFEArticle } from '../../src/model/validate';
 
 const BASE_URL = `http://localhost:${PORT}`;
 
@@ -68,7 +68,7 @@ const loadPage = async ({
  */
 const loadPageWithOverrides = async (
 	page: Page,
-	article: FEArticleType,
+	article: FEArticle,
 	overrides?: {
 		configOverrides?: Record<string, unknown>;
 		switchOverrides?: Record<string, unknown>;
@@ -109,7 +109,7 @@ const fetchAndloadPageWithOverrides = async (
 		switchOverrides?: Record<string, unknown>;
 	},
 ): Promise<void> => {
-	const article = validateAsArticleType(
+	const article = validateAsFEArticle(
 		await fetch(`${url}.json?dcr`).then((res) => res.json()),
 	);
 	await loadPageWithOverrides(page, article, {

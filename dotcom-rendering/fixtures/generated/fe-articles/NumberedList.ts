@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticle } from '../../../src/frontend/feArticle';
 
-export const NumberedList: FEArticleType = {
+export const NumberedList: FEArticle = {
 	version: 3,
 	headline:
 		'Best smartphone 2019: iPhone, OnePlus, Samsung and Huawei compared and ranked',

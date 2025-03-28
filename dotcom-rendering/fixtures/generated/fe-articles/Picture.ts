@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticle } from '../../../src/frontend/feArticle';
 
-export const Picture: FEArticleType = {
+export const Picture: FEArticle = {
 	version: 3,
 	headline: 'Nicola Jennings on the No 10 sleaze scandal – cartoon',
 	standfirst: '',

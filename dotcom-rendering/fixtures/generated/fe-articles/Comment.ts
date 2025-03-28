@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticle } from '../../../src/frontend/feArticle';
 
-export const Comment: FEArticleType = {
+export const Comment: FEArticle = {
 	version: 3,
 	headline: 'Austerity is grinding on – it has cut too deep to ‘level up’',
 	standfirst:

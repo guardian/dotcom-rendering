@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 
-import { validateAsArticleType } from './validate';
+import { validateAsFEArticle } from './validate';
 
 // TODO avoid fetch, write script to fetch new version in gen-schema.js and store as fixture files
 const urlsToTest = [
@@ -17,7 +17,7 @@ const urlsToTest = [
 describe('validate', () => {
 	it('throws on invalid data', () => {
 		const data = { foo: 'bar' };
-		expect(() => validateAsArticleType(data)).toThrowError(TypeError);
+		expect(() => validateAsFEArticle(data)).toThrowError(TypeError);
 	});
 
 	for (const url of urlsToTest) {
@@ -25,7 +25,7 @@ describe('validate', () => {
 			return fetch(`${url}&purge=${Date.now()}`)
 				.then((response) => response.json())
 				.then((myJson) => {
-					expect(validateAsArticleType(myJson)).toBe(myJson);
+					expect(validateAsFEArticle(myJson)).toBe(myJson);
 				});
 		});
 	}

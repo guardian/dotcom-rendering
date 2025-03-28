@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticle } from '../../../src/frontend/feArticle';
 
-export const Recipe: FEArticleType = {
+export const Recipe: FEArticle = {
 	version: 3,
 	headline: 'Meera Sodha’s vegan recipe for spring onion pancakes',
 	standfirst:

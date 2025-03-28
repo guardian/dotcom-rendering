@@ -2,7 +2,7 @@ import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
 import { decideFormat } from '../lib/articleFormat';
 import { enhanceBlocks } from '../model/enhanceBlocks';
-import { validateAsArticleType, validateAsBlock } from '../model/validate';
+import { validateAsBlock, validateAsFEArticle } from '../model/validate';
 import { enhanceArticleType } from '../types/article';
 import type { FEBlocksRequest } from '../types/frontend';
 import { makePrefetchHeader } from './lib/header';
@@ -12,7 +12,7 @@ import { renderBlocks, renderHtml } from './render.article.web';
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'web');
 
-	const frontendData = validateAsArticleType(body);
+	const frontendData = validateAsFEArticle(body);
 	const article = enhanceArticleType(frontendData, 'Web');
 	const { html, prefetchScripts } = renderHtml({
 		article,
@@ -24,7 +24,7 @@ export const handleArticle: RequestHandler = ({ body }, res) => {
 export const handleArticleJson: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'json');
 
-	const frontendData = validateAsArticleType(body);
+	const frontendData = validateAsFEArticle(body);
 	const article = enhanceArticleType(frontendData, 'Web');
 	const resp = {
 		data: {
@@ -45,7 +45,7 @@ export const handleArticlePerfTest: RequestHandler = (req, res, next) => {
 export const handleInteractive: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('interactive', 'web');
 
-	const frontendData = validateAsArticleType(body);
+	const frontendData = validateAsFEArticle(body);
 	const article = enhanceArticleType(frontendData, 'Web');
 	const { html, prefetchScripts } = renderHtml({
 		article,

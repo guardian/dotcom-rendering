@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticle } from '../../../src/frontend/feArticle';
 
-export const Labs: FEArticleType = {
+export const Labs: FEArticle = {
 	version: 3,
 	headline: 'Are you descended from royalty? Six things to consider',
 	standfirst: '',
