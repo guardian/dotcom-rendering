@@ -13,6 +13,10 @@ import { Stack } from '@guardian/source/react-components';
 import type { ReactNode } from 'react';
 import { palette } from '../palette';
 
+const borderStyle = css`
+	border-top: 0.0625rem solid ${palette('--football-match-list-border')};
+`;
+
 const tableStyles = css`
 	width: 100%;
 	background: ${palette('--table-block-background')};
@@ -26,7 +30,7 @@ const tableStyles = css`
 		${textSansBold14}
 	}
 
-	strong,
+	tfoot,
 	thead > tr > th {
 		${textSansBold14}
 	}
@@ -38,8 +42,9 @@ const tableStyles = css`
 		text-align: left;
 	}
 
+	tfoot > tr > *,
 	td {
-		border-top: 0.0625rem solid ${palette('--football-match-list-border')};
+		${borderStyle}
 	}
 `;
 
@@ -170,7 +175,9 @@ const Bowling = ({ bowlers }: { bowlers: BowlerData[] }) => (
 		<tbody>
 			{bowlers.map((bowler) => (
 				<tr key={bowler.name}>
-					<th scope="row">{bowler.name}</th>
+					<th scope="row" css={borderStyle}>
+						{bowler.name}
+					</th>
 					<td>
 						{bowler.overs}.{bowler.balls % 6}
 					</td>
@@ -197,8 +204,7 @@ const Batting = ({
 			tableStyles,
 			css`
 				${until.leftCol} {
-					border-top: 0.0625rem solid
-						${palette('--football-match-list-border')};
+					${borderStyle}
 				}
 			`,
 		]}
@@ -216,8 +222,14 @@ const Batting = ({
 		<tbody>
 			{batters.map((batter) => (
 				<tr key={batter.name}>
-					<th scope="row">
-						<strong>{batter.name}</strong>
+					<th
+						scope="row"
+						css={css`
+							${borderStyle}
+							${textSansBold14}
+						`}
+					>
+						{batter.name}
 						<div css={hideFromTabletStyle}>{batter.howOut}</div>
 					</th>
 					<td css={hideUntilTabletStyle}>{batter.howOut}</td>
@@ -236,8 +248,13 @@ const Batting = ({
 					}
 				`}
 			>
-				<th scope="row">
-					<strong>Extras</strong>
+				<th
+					scope="row"
+					css={css`
+						${textSansBold14}
+					`}
+				>
+					Extras
 				</th>
 				<td css={hideUntilTabletStyle}>
 					{getExtrasDescription(extras)}
@@ -249,22 +266,18 @@ const Batting = ({
 					{inningsTotals.extras}
 				</td>
 			</tr>
+		</tbody>
+		<tfoot>
 			<tr>
-				<th scope="row">
-					<strong>Total</strong>
-				</th>
-				<td css={hideUntilTabletStyle}>
-					<strong>for {inningsTotals.wickets}</strong>
-				</td>
-				<td>
-					<strong>{inningsTotals.runs}</strong>
-				</td>
+				<th scope="row">Total</th>
+				<td css={hideUntilTabletStyle}>for {inningsTotals.wickets}</td>
+				<td>{inningsTotals.runs}</td>
 				<td colSpan={3} css={hideUntilTabletStyle}>
-					<strong>{inningsTotals.overs} overs</strong>
+					{inningsTotals.overs} overs
 				</td>
 				<td css={hideFromTabletStyle}></td>
 			</tr>
-		</tbody>
+		</tfoot>
 	</table>
 );
 
@@ -283,7 +296,9 @@ const FallOfWickets = ({
 			{fallOfWickets.map((fallOfWicket) => (
 				<tr key={fallOfWicket.order}>
 					<td>{fallOfWicket.order}</td>
-					<th scope="row">{fallOfWicket.name}</th>
+					<th css={borderStyle} scope="row">
+						{fallOfWicket.name}
+					</th>
 					<td>{fallOfWicket.runs}</td>
 				</tr>
 			))}
@@ -306,7 +321,7 @@ export const CricketScorecard = ({
 }: Props) => (
 	<Stack space={9}>
 		{allInnings.map((innings) => (
-			<div css={cricketScorecardGridStyles} key={innings.description}>
+			<section css={cricketScorecardGridStyles} key={innings.description}>
 				<h2
 					css={css`
 						${textSansBold14}
@@ -346,7 +361,7 @@ export const CricketScorecard = ({
 					<Bowling bowlers={innings.bowlers} />
 					<FallOfWickets fallOfWickets={innings.fallOfWickets} />{' '}
 				</Stack>
-			</div>
+			</section>
 		))}
 		<div css={cricketScorecardGridStyles}>
 			<dl
