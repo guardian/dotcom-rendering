@@ -73,6 +73,7 @@ const parseFEFootballData = (data: FEFootballDataPage): DCRFootballDataPage => {
 
 	return {
 		matchesList: parsedMatchesList.value,
+		now: new Date().toISOString(),
 		kind: decidePageKind(data.config.pageId),
 		nextPage: data.nextPage,
 		previousPage: data.previousPage,

@@ -34,6 +34,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
 	args: {
+		now: '2025-03-24T15:53:12.604Z',
 		edition: 'UK',
 		guardianBaseUrl: 'https://www.theguardian.com',
 		initialDays,

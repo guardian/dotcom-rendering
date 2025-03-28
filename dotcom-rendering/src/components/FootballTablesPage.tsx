@@ -5,58 +5,30 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
-import type {
-	FootballMatches,
-	FootballMatchKind,
-	Region,
-} from '../footballMatches';
+import type { Region } from '../footballMatches';
+import type { FootballTableCompetition } from '../footballTables';
 import { grid } from '../grid';
-import type { EditionId } from '../lib/edition';
-import type { Result } from '../lib/result';
 import { palette } from '../palette';
 import { AdSlot } from './AdSlot.web';
 import { FootballCompetitionSelect } from './FootballCompetitionSelect';
-import { FootballMatchList } from './FootballMatchList';
+import { FootballTableList } from './FootballTableList';
 
 type Props = {
 	regions: Region[];
-	guardianBaseUrl: string;
-	kind: FootballMatchKind;
-	initialDays: FootballMatches;
-	edition: EditionId;
-	goToCompetitionSpecificPage: (tag: string) => void;
-	getMoreDays?: () => Promise<Result<'failed', FootballMatches>>;
-	renderAds: boolean;
 	pageId: string;
-	now: string;
+	goToCompetitionSpecificPage: (tag: string) => void;
+	competitions: FootballTableCompetition[];
+	renderAds: boolean;
+	guardianBaseUrl: string;
 };
 
-const createTitle = (kind: FootballMatchKind, edition: EditionId) => {
-	if (edition === 'US' && kind === 'Fixture') {
-		return 'Soccer schedules';
-	}
-
-	switch (kind) {
-		case 'Fixture':
-			return 'Football fixtures';
-		case 'Live':
-			return 'Live football scores';
-		case 'Result':
-			return 'Football results';
-	}
-};
-
-export const FootballMatchesPage = ({
+export const FootballTablesPage = ({
 	regions,
-	now,
-	guardianBaseUrl,
-	kind,
-	initialDays,
-	edition,
-	goToCompetitionSpecificPage,
-	getMoreDays,
-	renderAds,
 	pageId,
+	goToCompetitionSpecificPage,
+	competitions,
+	renderAds,
+	guardianBaseUrl,
 }: Props) => (
 	<main
 		id="maincontent"
@@ -93,9 +65,8 @@ export const FootballMatchesPage = ({
 				}
 			`}
 		>
-			{createTitle(kind, edition)}
+			Football tables
 		</h1>
-
 		<div
 			css={css`
 				margin-top: ${space[3]}px;
@@ -106,12 +77,11 @@ export const FootballMatchesPage = ({
 		>
 			<FootballCompetitionSelect
 				regions={regions}
-				kind={kind}
+				kind="Tables"
 				pageId={pageId}
 				onChange={goToCompetitionSpecificPage}
 			/>
 		</div>
-
 		<div
 			css={css`
 				${grid.column.centre}
@@ -122,19 +92,16 @@ export const FootballMatchesPage = ({
 				position: relative;
 			`}
 		>
-			<FootballMatchList
-				now={now}
-				initialDays={initialDays}
-				edition={edition}
-				getMoreDays={getMoreDays}
+			<FootballTableList
+				competitions={competitions}
 				guardianBaseUrl={guardianBaseUrl}
 			/>
 		</div>
-
 		{renderAds && (
 			<div
 				css={css`
 					${grid.column.right}
+					/**  ToDo: review what line to grow the ad to */
 					/** This allows the ad to grow beyond the third row content (up to line 5) */
 					grid-row: 1 / 5;
 					${until.desktop} {

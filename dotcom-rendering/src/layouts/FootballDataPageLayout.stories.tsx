@@ -15,6 +15,7 @@ type Story = StoryObj<typeof meta>;
 export const Results = {
 	args: {
 		footballData: {
+			now: '2025-03-24T15:53:12.604Z',
 			matchesList: initialDays,
 			regions,
 			kind: 'Result',
