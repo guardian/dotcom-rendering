@@ -11,7 +11,7 @@ const tableStyles = css`
 		border-top: 0.0625rem solid ${palette('--table-block-stripe')};
 	}
 	${from.leftCol} {
-		border-top: 0.0625rem solid ${palette('--football-top-border')};
+		border-top: 0.0625rem solid ${palette('--sport-top-border')};
 	}
 	color: ${palette('--table-block-text')};
 	border-collapse: inherit;
