@@ -13,6 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Results = {
 	args: {
+		now: '2025-03-24T15:53:12.604Z',
 		regions,
 		guardianBaseUrl: 'https://www.theguardian.com',
 		kind: 'Result',
