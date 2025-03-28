@@ -74,7 +74,7 @@
 		"@types/react-test-renderer": "18.3.0",
 		"@types/thrift": "0.10.17",
 		"aws-cdk": "2.100.0",
-		"aws-cdk-lib": "2.100.0",
+		"aws-cdk-lib": "2.184.0",
 		"babel-loader": "9.2.1",
 		"buffer": "6.0.3",
 		"clean-css": "5.3.3",
