@@ -5133,37 +5133,7 @@
         "MainMedia": {
             "anyOf": [
                 {
-                    "$ref": "#/definitions/Video",
-                    "description": "For displaying embedded, playable videos directly in cards"
-                },
-                {
-                    "$ref": "#/definitions/Audio"
-                },
-                {
-                    "$ref": "#/definitions/Gallery"
-                }
-            ]
-        },
-        "Video": {
-            "description": "For displaying embedded, playable videos directly in cards",
-            "allOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "enum": [
-                                "Audio",
-                                "Gallery",
-                                "Video"
-                            ],
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "type"
-                    ]
-                },
-                {
+                    "description": "For displaying embedded, playable videos directly in cards",
                     "type": "object",
                     "properties": {
                         "type": {
@@ -5225,26 +5195,6 @@
                         "videoId",
                         "width"
                     ]
-                }
-            ]
-        },
-        "Audio": {
-            "allOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "enum": [
-                                "Audio",
-                                "Gallery",
-                                "Video"
-                            ],
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "type"
-                    ]
                 },
                 {
                     "type": "object",
@@ -5270,26 +5220,6 @@
                     },
                     "required": [
                         "duration",
-                        "type"
-                    ]
-                }
-            ]
-        },
-        "Gallery": {
-            "allOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "enum": [
-                                "Audio",
-                                "Gallery",
-                                "Video"
-                            ],
-                            "type": "string"
-                        }
-                    },
-                    "required": [
                         "type"
                     ]
                 },

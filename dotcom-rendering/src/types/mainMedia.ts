@@ -1,11 +1,7 @@
 import type { PodcastSeriesImage } from './tag';
 
-type Media = {
-	type: 'Video' | 'Audio' | 'Gallery';
-};
-
 /** For displaying embedded, playable videos directly in cards */
-type Video = Media & {
+type Video = {
 	type: 'Video';
 	/** @see https://github.com/guardian/frontend/blob/8e7e4d0e/common/app/model/content/Atom.scala#L159 */
 	id: string;
@@ -19,13 +15,13 @@ type Video = Media & {
 	images: Array<{ url: string; width: number }>;
 };
 
-type Audio = Media & {
+type Audio = {
 	type: 'Audio';
 	duration: string;
 	podcastImage?: PodcastSeriesImage;
 };
 
-type Gallery = Media & {
+type Gallery = {
 	type: 'Gallery';
 	count: string;
 };
