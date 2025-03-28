@@ -1,4 +1,9 @@
 import { isUndefined } from '@guardian/libs';
+import type {
+	FEFrontCard,
+	FEMediaAtom,
+	FESupportingContent,
+} from '../frontend/feFront';
 import {
 	ArticleDesign,
 	type ArticleFormat,
@@ -12,9 +17,6 @@ import type {
 	DCRFrontCard,
 	DCRSlideshowImage,
 	DCRSupportingContent,
-	FEFrontCard,
-	FEMediaAtom,
-	FESupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
 import type { PodcastSeriesImage, TagType } from '../types/tag';
@@ -195,6 +197,7 @@ const decideMedia = (
 	galleryCount: number = 0,
 	audioDuration: string = '',
 	podcastImage?: PodcastSeriesImage,
+	imageHide?: boolean,
 ): MainMedia | undefined => {
 	// If the showVideo toggle is enabled in the fronts tool,
 	// we should return the active mediaAtom regardless of the design
@@ -209,7 +212,7 @@ const decideMedia = (
 		case ArticleDesign.Audio:
 			return {
 				type: 'Audio',
-				podcastImage,
+				podcastImage: !imageHide ? podcastImage : undefined,
 				duration: audioDuration,
 			};
 
@@ -291,6 +294,7 @@ export const enhanceCards = (
 			faciaCard.card.galleryCount,
 			faciaCard.card.audioDuration,
 			podcastImage,
+			faciaCard.display.imageHide,
 		);
 
 		return {

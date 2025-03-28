@@ -4,7 +4,7 @@
  * Exporting this 'as' FEFrontCard because we know it should be of the right shape.
  */
 
-import type { FEFrontCard } from '../../src/types/front';
+import type { FEFrontCard } from '../../src/frontend/feFront';
 
 export const trails: [
 	FEFrontCard,

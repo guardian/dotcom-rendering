@@ -42,11 +42,8 @@ const baseCardStyles = css`
 
 const hoverStyles = css`
 	:hover .image-overlay {
-		position: absolute;
-		top: 0;
 		width: 100%;
 		height: 100%;
-		left: 0;
 		background-color: ${palette('--card-background-hover')};
 	}
 
@@ -65,7 +62,7 @@ const sublinkHoverStyles = css`
 	}
 `;
 
-const desktopTopBarStyles = css`
+const topBarStyles = css`
 	:before {
 		border-top: 1px solid ${palette('--card-border-top')};
 		content: '';
@@ -75,11 +72,13 @@ const desktopTopBarStyles = css`
 		background-color: unset;
 	}
 `;
-
 const mobileTopBarStyles = css`
 	${until.tablet} {
-		${desktopTopBarStyles}
+		${topBarStyles}
 	}
+`;
+const desktopTopBarStyles = css`
+	${topBarStyles}
 `;
 
 const onwardContentStyles = css`

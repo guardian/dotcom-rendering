@@ -31,11 +31,13 @@ const useMatchMedia = (query: string): boolean => {
 	/** @see https://react.dev/reference/react/useSyncExternalStore */
 	return useSyncExternalStore(
 		(callback) => {
-			mediaQuery?.addEventListener('change', callback);
-
-			return () => {
-				mediaQuery?.removeEventListener('change', callback);
-			};
+			if (mediaQuery && 'onchange' in mediaQuery) {
+				mediaQuery.addEventListener('change', callback);
+				return () => {
+					mediaQuery.removeEventListener('change', callback);
+				};
+			}
+			return () => undefined;
 		},
 		() => !!mediaQuery?.matches,
 		() => false, // we cannot have media queries on the server

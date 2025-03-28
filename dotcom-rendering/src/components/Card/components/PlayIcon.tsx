@@ -54,6 +54,9 @@ const narrowStyles = css`
 	left: calc(50% - ${narrowPlayIconWidth / 2}px);
 	width: ${narrowPlayIconWidth}px;
 	height: ${narrowPlayIconWidth}px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	background-color: ${palette('--feature-card-play-icon-background')};
 	opacity: 0.7;
 	border-radius: 50%;
@@ -92,7 +95,7 @@ export const PlayIcon = ({
 			]}
 		>
 			{iconWidth === 'narrow' ? (
-				<NarrowPlayIcon theme={theme} />
+				<NarrowPlayIcon width={40} theme={theme} />
 			) : (
 				<WidePlayIcon theme={theme} />
 			)}

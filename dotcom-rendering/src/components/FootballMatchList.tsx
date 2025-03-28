@@ -33,6 +33,7 @@ type Props = {
 	edition: EditionId;
 	guardianBaseUrl: string;
 	getMoreDays?: () => Promise<Result<'failed', FootballMatches>>;
+	now: string;
 };
 
 const REMOVE_TRAILING_DOTS_REGEX = /\.+$/;
@@ -99,7 +100,7 @@ const Day = (props: { children: ReactNode }) => (
 		css={css`
 			${textSansBold14}
 			grid-column: centre-column-start / centre-column-end;
-			border-top: 1px solid ${palette('--football-match-list-border')};
+			border-top: 1px solid ${palette('--football-list-border')};
 			padding-top: ${space[2]}px;
 
 			${from.leftCol} {
@@ -117,14 +118,14 @@ const CompetitionName = (props: { children: ReactNode }) => (
 		css={css`
 			${textSansBold14}
 			grid-column: centre-column-start / centre-column-end;
-			color: ${palette('--football-match-list-competition-text')};
-			border-top: 1px solid ${palette('--football-match-list-top-border')};
+			color: ${palette('--football-competition-text')};
+			border-top: 1px solid ${palette('--football-top-border')};
 			padding: ${space[2]}px;
 			background-color: ${palette('--football-match-list-background')};
 			margin-top: ${space[9]}px;
 
 			${from.leftCol} {
-				border-top-color: ${palette('--football-match-list-border')};
+				border-top-color: ${palette('--football-list-border')};
 				background-color: transparent;
 				margin-top: 0;
 				padding: ${space[1]}px 0 0;
@@ -152,7 +153,7 @@ const Matches = (props: { children: ReactNode }) => (
 
 const matchStatusStyles = css`
 	width: 5rem;
-	color: ${palette('--football-match-list-sub-text')};
+	color: ${palette('--football-sub-text')};
 
 	${until.mobileMedium} {
 		flex-basis: 100%;
@@ -201,11 +202,11 @@ export const shouldRenderMatchLink = (matchDateTime: Date, now: Date) =>
 
 const matchListItemStyles = css`
 	background-color: ${palette('--football-match-list-background')};
-	border: 1px solid ${palette('--football-match-list-border')};
+	border: 1px solid ${palette('--football-list-border')};
 
 	${from.leftCol} {
 		&:first-of-type {
-			border-top-color: ${palette('--football-match-list-top-border')};
+			border-top-color: ${palette('--football-top-border')};
 		}
 	}
 `;
@@ -227,10 +228,12 @@ const MatchWrapper = ({
 	children,
 }: {
 	match: FootballMatch;
-	now: Date;
+	now: string;
 	children: ReactNode;
 }) => {
-	if (shouldRenderMatchLink(new Date(match.dateTimeISOString), now)) {
+	if (
+		shouldRenderMatchLink(new Date(match.dateTimeISOString), new Date(now))
+	) {
 		return (
 			<li css={matchListItemStyles}>
 				<a
@@ -266,7 +269,7 @@ const Match = ({
 }: {
 	match: FootballMatch;
 	timeFormatter: Intl.DateTimeFormat;
-	now: Date;
+	now: string;
 }) => (
 	<MatchWrapper match={match} now={now}>
 		<MatchStatus match={match} timeFormatter={timeFormatter} />
@@ -287,7 +290,7 @@ const Match = ({
 				{isUndefined(match.comment) ? null : (
 					<small
 						css={css`
-							color: ${palette('--football-match-list-sub-text')};
+							color: ${palette('--football-sub-text')};
 							flex-basis: 100%;
 							text-align: center;
 							padding-top: ${space[2]}px;
@@ -379,7 +382,7 @@ const Battleline = () => (
 const Versus = () => (
 	<span
 		css={css`
-			color: ${palette('--football-match-list-sub-text')};
+			color: ${palette('--football-sub-text')};
 			width: 3rem;
 			display: block;
 			padding: 0 4px;
@@ -394,14 +397,14 @@ const Scores = ({
 	homeScore,
 	awayScore,
 }: {
-	homeScore: number;
-	awayScore: number;
+	homeScore?: number;
+	awayScore?: number;
 }) => (
 	<span
 		css={css`
 			width: 3rem;
 			display: flex;
-			color: ${palette('--football-match-list-sub-text')};
+			color: ${palette('--football-sub-text')};
 		`}
 	>
 		<span
@@ -429,14 +432,13 @@ export const FootballMatchList = ({
 	guardianBaseUrl,
 	initialDays,
 	getMoreDays,
+	now,
 }: Props) => {
 	const dateFormatter = getDateFormatter(edition);
 	const timeFormatter = getTimeFormatter(edition);
 
 	const [days, setDays] = useState(initialDays);
 	const [isError, setIsError] = useState<boolean>(false);
-	const now = new Date();
-
 	return (
 		<>
 			{days.map((day) => (
@@ -484,7 +486,9 @@ export const FootballMatchList = ({
 						css={css`
 							grid-column: centre-column-start / centre-column-end;
 
-							padding-top: ${space[10]}px;
+							${until.leftCol} {
+								padding-top: ${space[10]}px;
+							}
 						`}
 					>
 						<Button

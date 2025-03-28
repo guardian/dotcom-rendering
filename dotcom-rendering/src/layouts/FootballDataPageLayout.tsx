@@ -62,10 +62,13 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<FootballMatchesPageWrapper
-					nations={footballData.regions}
+					regions={footballData.regions}
+					now={footballData.now}
 					guardianBaseUrl={footballData.guardianBaseURL}
+					ajaxUrl={footballData.config.ajaxUrl}
 					kind={footballData.kind}
 					initialDays={footballData.matchesList}
+					secondPage={footballData.nextPage}
 					edition={footballData.editionId}
 					renderAds={renderAds}
 					pageId={footballData.config.pageId}

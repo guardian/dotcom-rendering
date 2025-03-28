@@ -107,6 +107,8 @@ type Props = {
 	/** When there is a page skin in some special cases we still want the container to take full
 	 * width but the content to constrain itself e.g. Header */
 	hasPageSkinContentSelfConstrain?: boolean;
+	/** Defaults to `false`. Indicates section should be hidden when printed */
+	hideFromPrintLayout?: boolean;
 	/**
 	 * @deprecated Do not use
 	 *
@@ -254,6 +256,7 @@ export const Section = ({
 	shouldCenter,
 	hasPageSkin = false,
 	hasPageSkinContentSelfConstrain = false,
+	hideFromPrintLayout = false,
 	className,
 }: Props) => {
 	if (fullWidth) {
@@ -279,6 +282,7 @@ export const Section = ({
 				hasPageSkinContentSelfConstrain={
 					hasPageSkinContentSelfConstrain
 				}
+				hideFromPrintLayout={hideFromPrintLayout}
 			>
 				{children}
 			</ElementContainer>
@@ -302,6 +306,7 @@ export const Section = ({
 			innerBackgroundColour={innerBackgroundColour}
 			hasPageSkin={hasPageSkin}
 			hasPageSkinContentSelfConstrain={hasPageSkinContentSelfConstrain}
+			hideFromPrintLayout={hideFromPrintLayout}
 		>
 			<Flex>
 				<LeftColumn

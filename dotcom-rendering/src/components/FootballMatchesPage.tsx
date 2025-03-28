@@ -8,7 +8,7 @@ import {
 import type {
 	FootballMatches,
 	FootballMatchKind,
-	Regions,
+	Region,
 } from '../footballMatches';
 import { grid } from '../grid';
 import type { EditionId } from '../lib/edition';
@@ -19,7 +19,7 @@ import { FootballCompetitionSelect } from './FootballCompetitionSelect';
 import { FootballMatchList } from './FootballMatchList';
 
 type Props = {
-	regions: Regions;
+	regions: Region[];
 	guardianBaseUrl: string;
 	kind: FootballMatchKind;
 	initialDays: FootballMatches;
@@ -28,6 +28,7 @@ type Props = {
 	getMoreDays?: () => Promise<Result<'failed', FootballMatches>>;
 	renderAds: boolean;
 	pageId: string;
+	now: string;
 };
 
 const createTitle = (kind: FootballMatchKind, edition: EditionId) => {
@@ -46,7 +47,8 @@ const createTitle = (kind: FootballMatchKind, edition: EditionId) => {
 };
 
 export const FootballMatchesPage = ({
-	regions: nations,
+	regions,
+	now,
 	guardianBaseUrl,
 	kind,
 	initialDays,
@@ -76,6 +78,8 @@ export const FootballMatchesPage = ({
 					right: 0;
 				}
 			}
+
+			padding-bottom: ${space[9]}px;
 		`}
 	>
 		<h1
@@ -101,7 +105,7 @@ export const FootballMatchesPage = ({
 			`}
 		>
 			<FootballCompetitionSelect
-				nations={nations}
+				regions={regions}
 				kind={kind}
 				pageId={pageId}
 				onChange={goToCompetitionSpecificPage}
@@ -119,6 +123,7 @@ export const FootballMatchesPage = ({
 			`}
 		>
 			<FootballMatchList
+				now={now}
 				initialDays={initialDays}
 				edition={edition}
 				getMoreDays={getMoreDays}
@@ -137,7 +142,7 @@ export const FootballMatchesPage = ({
 					}
 				`}
 			>
-				<AdSlot position="right-football" />
+				<AdSlot position="football-right" />
 			</div>
 		)}
 	</main>

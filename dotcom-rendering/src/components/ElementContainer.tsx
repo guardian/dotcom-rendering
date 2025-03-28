@@ -57,6 +57,7 @@ type Props = {
 	containerName?: string;
 	hasPageSkin?: boolean;
 	hasPageSkinContentSelfConstrain?: boolean;
+	hideFromPrintLayout?: boolean;
 };
 
 /**
@@ -83,12 +84,14 @@ export const ElementContainer = ({
 	containerName,
 	hasPageSkin = false,
 	hasPageSkinContentSelfConstrain = false,
+	hideFromPrintLayout = false,
 }: Props) =>
 	jsx(element, {
 		id: ophanComponentName,
 		'data-link-name': ophanComponentLink,
 		'data-component': ophanComponentName,
 		'data-container-name': containerName,
+		'data-print-layout': hideFromPrintLayout ? 'hide' : undefined,
 		style: {
 			backgroundColor: backgroundColour,
 		},

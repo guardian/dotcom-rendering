@@ -1,6 +1,6 @@
-import type { FootballMatches, Regions } from '../../src/footballMatches';
+import type { FootballMatches, Region } from '../../src/footballMatches';
 
-export const regions: Regions = [
+export const regions: Region[] = [
 	{
 		name: 'England',
 		competitions: [
@@ -46,6 +46,21 @@ export const initialDays: FootballMatches = [
 							score: 0,
 						},
 						status: '1st',
+					},
+					{
+						kind: 'Live',
+						dateTimeISOString: new Date(
+							'2022-01-01T11:11:00Z',
+						).toISOString(),
+						paId: '12345',
+						homeTeam: {
+							name: 'Fiorentina',
+						},
+						awayTeam: {
+							name: 'Bologna',
+						},
+						status: 'S',
+						comment: 'Awaiting officials decision',
 					},
 					{
 						kind: 'Fixture',

@@ -6,7 +6,6 @@ import type {
 	FEFootballPageConfig,
 	FEMatchByDateAndCompetition,
 	FEMatchDay,
-	FEMatchDayTeam,
 	FEResult,
 } from './feFootballDataPage';
 import type { EditionId } from './lib/edition';
@@ -19,8 +18,8 @@ export type Team = {
 	id: string;
 };
 
-type TeamScore = Team & {
-	score: number;
+export type TeamScore = Team & {
+	score?: number;
 };
 
 type MatchData = {
@@ -176,22 +175,6 @@ const parseDate = (a: string): Result<string, string> => {
 	return ok(d.toISOString());
 };
 
-const parseScore = (
-	team: FEMatchDayTeam,
-	matchKind: 'Result' | 'Live',
-): Result<ParserError, number> => {
-	if (team.score === undefined) {
-		const prefix = matchKind === 'Result' ? 'Results' : 'Live matches';
-
-		return error({
-			kind: 'FootballMatchMissingScore',
-			message: `${prefix} must have scores, but the score for ${team.name} is missing`,
-		});
-	}
-
-	return ok(team.score);
-};
-
 const parseMatchDate = (date: string): Result<string, string> => {
 	// Frontend appends a timezone in square brackets
 	const isoDate = date.split('[')[0];
@@ -239,7 +222,7 @@ const parseFixture = (
 	});
 };
 
-export const parseMatchResult = (
+const parseMatchResult = (
 	feResult: FEResult | FEMatchDay,
 ): Result<ParserError, MatchResult> => {
 	if (feResult.type === 'MatchDay' && !feResult.result) {
@@ -255,33 +238,21 @@ export const parseMatchResult = (
 		return error({ kind: 'FootballMatchInvalidDate', message: date.error });
 	}
 
-	const homeScore = parseScore(feResult.homeTeam, 'Result');
-
-	if (homeScore.kind === 'error') {
-		return homeScore;
-	}
-
-	const awayScore = parseScore(feResult.awayTeam, 'Result');
-
-	if (awayScore.kind === 'error') {
-		return awayScore;
-	}
-
 	return ok({
 		kind: 'Result',
 		homeTeam: {
 			name: cleanTeamName(feResult.homeTeam.name),
-			score: homeScore.value,
+			score: feResult.homeTeam.score,
 			id: feResult.homeTeam.id,
 		},
 		awayTeam: {
 			name: cleanTeamName(feResult.awayTeam.name),
-			score: awayScore.value,
+			score: feResult.awayTeam.score,
 			id: feResult.awayTeam.id,
 		},
 		dateTimeISOString: date.value,
 		paId: feResult.id,
-		comment: feResult.comments,
+		comment: cleanTeamName(feResult.comments ?? ''),
 	});
 };
 
@@ -301,34 +272,22 @@ const parseLiveMatch = (
 		return error({ kind: 'FootballMatchInvalidDate', message: date.error });
 	}
 
-	const homeScore = parseScore(feMatchDay.homeTeam, 'Live');
-
-	if (homeScore.kind === 'error') {
-		return homeScore;
-	}
-
-	const awayScore = parseScore(feMatchDay.awayTeam, 'Live');
-
-	if (awayScore.kind === 'error') {
-		return awayScore;
-	}
-
 	return ok({
 		kind: 'Live',
 		homeTeam: {
 			name: cleanTeamName(feMatchDay.homeTeam.name),
-			score: homeScore.value,
+			score: feMatchDay.homeTeam.score,
 			id: feMatchDay.homeTeam.id,
 		},
 		awayTeam: {
 			name: cleanTeamName(feMatchDay.awayTeam.name),
-			score: awayScore.value,
+			score: feMatchDay.awayTeam.score,
 			id: feMatchDay.awayTeam.id,
 		},
 		dateTimeISOString: date.value,
 		paId: feMatchDay.id,
-		comment: feMatchDay.comments,
-		status: feMatchDay.matchStatus,
+		comment: cleanTeamName(feMatchDay.comments ?? ''),
+		status: replaceLiveMatchStatus(feMatchDay.matchStatus),
 	});
 };
 
@@ -412,21 +371,33 @@ const parseFootballDay = (
 	});
 };
 
+export const getParserErrorMessage = (parserError: ParserError): string => {
+	switch (parserError.kind) {
+		case 'InvalidMatchDay':
+			return parserError.errors
+				.map((e) => getParserErrorMessage(e))
+				.join(', ');
+		default:
+			return `${parserError.kind}: ${parserError.message}`;
+	}
+};
+
 export const parse: (
 	frontendData: FEMatchByDateAndCompetition[],
 ) => Result<ParserError, FootballMatches> = listParse(parseFootballDay);
 
-export type Regions = Array<{
+export type Region = {
 	name: string;
 	competitions: Array<{ url: string; name: string }>;
-}>;
+};
 
 export type DCRFootballDataPage = {
 	matchesList: FootballMatches;
+	now: string;
 	kind: FootballMatchKind;
 	nextPage?: string;
 	previousPage?: string;
-	regions: Regions;
+	regions: Region[];
 	nav: NavType;
 	editionId: EditionId;
 	guardianBaseURL: string;
@@ -443,4 +414,36 @@ const cleanTeamName = (teamName: string): string => {
 		.replace('Holland', 'The Netherlands')
 		.replace('Bialystock', 'Białystok')
 		.replace('Union Saint Gilloise', 'Union Saint-Gilloise');
+};
+
+// This comes from Frontend
+const paStatusToMatchStatus: Record<string, string> = {
+	KO: '1st', // The Match has started Kicked Off.
+	HT: 'HT', // The Referee has blown the whistle for Half Time.
+	SHS: '2nd', // The Second Half of the Match has Started.
+	FT: 'FT', // The Referee has blown the whistle for Full Time.
+	PTFT: 'FT', // Penalty Shootout Full Time.
+	Result: 'FT', // The Result is official.
+	ETFT: 'FT', // Extra Time, Full Time has been blown.
+	MC: 'FT', // Match has been Completed.
+	FTET: 'ET', // Full Time, Extra Time it to be played.
+	ETS: 'ET', // Extra Time has Started.
+	ETHT: 'ET', // Extra Time Half Time has been called.
+	ETSHS: 'ET', // Extra Time, Second Half has Started.
+	FTPT: 'PT', // Full Time, Penalties are To be played.
+	PT: 'PT', // Penalty Shootout has started.
+	ETFTPT: 'PT', // Extra Time, Full Time, Penalties are To be played.
+	Suspended: 'S', // Match has been Suspended.
+
+	// We don't really expect to see these the way we handle data in frontend
+	Resumed: 'R', // Match has been Resumed.
+	Abandoned: 'A', // Match has been Abandoned.
+	Fixture: 'F', // Created Fixture is available and had been Created by us.
+	'-': 'F', // this sneaky one is not in the docs
+	New: 'N', // Match A New Match has been added to our data.
+	Cancelled: 'C', // A Match has been Cancelled.
+};
+
+const replaceLiveMatchStatus = (status: string): string => {
+	return paStatusToMatchStatus[status] ?? status.slice(0, 2);
 };

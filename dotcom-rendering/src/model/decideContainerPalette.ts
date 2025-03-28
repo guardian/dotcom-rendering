@@ -1,7 +1,8 @@
 /**
  * Utility function to extract container palette information from the frontend container metadata field
  */
-import type { DCRContainerPalette, FEContainerMetadata } from '../types/front';
+import type { FEContainerMetadata } from '../frontend/feFront';
+import type { DCRContainerPalette } from '../types/front';
 
 export const decideContainerPalette = (
 	metadata?: FEContainerMetadata[],

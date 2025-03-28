@@ -1,15 +1,17 @@
 import { Option, Select } from '@guardian/source/react-components';
-import type { FootballMatchKind, Regions } from '../footballMatches';
+import type { FootballMatchKind, Region } from '../footballMatches';
 import { palette } from '../palette';
 
+type FootballSelectKind = FootballMatchKind | 'Tables';
+
 type Props = {
-	nations: Regions;
-	kind: FootballMatchKind;
+	regions: Region[];
+	kind: FootballSelectKind;
 	pageId: string;
 	onChange: (competitionTag: string) => void;
 };
 
-const allLabel = (kind: FootballMatchKind): string => {
+const allLabel = (kind: FootballSelectKind): string => {
 	switch (kind) {
 		case 'Fixture':
 			return 'All fixtures';
@@ -17,22 +19,26 @@ const allLabel = (kind: FootballMatchKind): string => {
 			return 'All results';
 		case 'Live':
 			return 'All live';
+		case 'Tables':
+			return 'All tables';
 	}
 };
 
-const getPagePath = (kind: FootballMatchKind) => {
+const getPagePath = (kind: FootballSelectKind) => {
 	switch (kind) {
 		case 'Fixture':
-			return 'football/fixtures';
+			return '/football/fixtures';
 		case 'Live':
-			return 'football/live';
+			return '/football/live';
 		case 'Result':
-			return 'football/results';
+			return '/football/results';
+		case 'Tables':
+			return '/football/tables';
 	}
 };
 
 export const FootballCompetitionSelect = ({
-	nations,
+	regions,
 	kind,
 	pageId,
 	onChange,
@@ -48,9 +54,9 @@ export const FootballCompetitionSelect = ({
 		}}
 	>
 		<Option value={getPagePath(kind)}>{allLabel(kind)}</Option>
-		{nations.map((nation) => (
-			<optgroup label={nation.name} key={nation.name}>
-				{nation.competitions.map((competition) => (
+		{regions.map((region) => (
+			<optgroup label={region.name} key={region.name}>
+				{region.competitions.map((competition) => (
 					<Option key={competition.name} value={competition.url}>
 						{competition.name}
 					</Option>

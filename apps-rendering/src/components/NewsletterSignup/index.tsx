@@ -16,7 +16,7 @@ import {
 	textSans14,
 	textSansBold14,
 } from '@guardian/source/foundations';
-import { SvgNewsletter } from '@guardian/source/react-components';
+import { SvgNewsletterFilled } from '@guardian/source/react-components';
 import type { NewsletterSignUp } from 'bodyElement';
 import { background, border, text } from 'palette';
 import { darkModeCss } from 'styles';
@@ -151,7 +151,7 @@ const NewsletterSignup = ({
 
 						<div css={noHeightFromTabletStyles}>
 							<div css={iconHolderStyles}>
-								<SvgNewsletter size="small" />
+								<SvgNewsletterFilled size="small" />
 								<b>{frequency}</b>
 							</div>
 						</div>
