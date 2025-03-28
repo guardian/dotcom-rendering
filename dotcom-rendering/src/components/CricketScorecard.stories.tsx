@@ -284,4 +284,4 @@ export const CricketScorecard = {
 			],
 		},
 	},
-};
+} satisfies Story;
