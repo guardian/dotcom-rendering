@@ -1,5 +1,5 @@
 import type { FootballMatches, FootballMatchKind } from './footballMatches';
-import type { FootballTables } from './footballTables';
+import { FootballTableCompetitions } from './footballTables';
 import type { FEFootballPageConfig } from './frontend/feFootballDataPage';
 import type { EditionId } from './lib/edition';
 import type { NavType } from './model/extract-nav';
@@ -31,7 +31,7 @@ export type FootballMatchListPage = FootballData & {
 };
 
 export type FootballTablesPage = FootballData & {
-	tables: FootballTables;
+	tables: FootballTableCompetitions;
 	kind: 'Tables';
 };
 

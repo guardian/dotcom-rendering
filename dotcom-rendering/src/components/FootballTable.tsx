@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { from, textSans14, until } from '@guardian/source/foundations';
-import type { FootballTableData } from '../footballTables';
 import { palette } from '../palette';
 import { FootballTableForm } from './FootballTableForm';
+import { FootballTableData } from '../footballTables';
 
 const tableStyles = css`
 	width: 100%;
@@ -62,7 +62,8 @@ const linkStyles = css`
 type Props = {
 	competitionName: string;
 	competitionUrl: string;
-	table: Omit<FootballTableData, 'groupName'>;
+	table: Omit<FootballTableData, 'groupName'>; // TODO: why do we need to omit groupName?
+	dividers: number[];
 	guardianBaseUrl: string;
 };
 
@@ -140,6 +141,7 @@ export const FootballTable = ({
 	competitionName,
 	competitionUrl,
 	table,
+	dividers,
 	guardianBaseUrl,
 }: Props) => (
 	<table css={tableStyles}>
@@ -188,8 +190,7 @@ export const FootballTable = ({
 					key={row.position}
 					css={[
 						rowStyles,
-						table.dividers.includes(row.position - 1) &&
-							dividerStyle,
+						dividers.includes(row.position - 1) && dividerStyle,
 					]}
 				>
 					<td
@@ -228,7 +229,7 @@ export const FootballTable = ({
 				</tr>
 			))}
 		</tbody>
-		{table.linkToFullTable && (
+		{table.hasLinkToFullTable && (
 			<tfoot>
 				<tr css={rowStyles}>
 					<td colSpan={11} css={hideUntilTabletStyle}>

@@ -149,6 +149,7 @@ export const FootballTableList = ({ competitions, guardianBaseUrl }: Props) => (
 							<FootballTable
 								competitionName={competition.name}
 								competitionUrl={competition.url}
+								dividers={competition.dividers}
 								table={table}
 								guardianBaseUrl={guardianBaseUrl}
 							/>

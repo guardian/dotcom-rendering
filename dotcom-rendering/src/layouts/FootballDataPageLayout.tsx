@@ -9,21 +9,22 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubNav } from '../components/SubNav.importable';
 import type {
 	FootballMatchListPage,
-	FootballTablesPage,
+	FootballTablesPage as FootballTablesPageData,
 } from '../footballDataPage';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { FootballTablesPage } from '../components/FootballTablesPage';
 
 interface Props {
-	footballData: FootballMatchListPage | FootballTablesPage;
+	footballData: FootballMatchListPage | FootballTablesPageData;
 }
 
 const SportsPage = ({
 	footballData,
 	renderAds,
 }: {
-	footballData: FootballMatchListPage | FootballTablesPage;
+	footballData: FootballMatchListPage | FootballTablesPageData;
 	renderAds: boolean;
 }) => {
 	switch (footballData.kind) {
@@ -48,7 +49,15 @@ const SportsPage = ({
 			);
 
 		case 'Tables':
-			return <></>;
+			return (
+				<FootballTablesPage
+					regions={footballData.regions}
+					pageId={footballData.config.pageId}
+					tableCompetitions={footballData.tables}
+					renderAds={renderAds}
+					guardianBaseUrl={footballData.guardianBaseURL}
+				/>
+			);
 	}
 };
 

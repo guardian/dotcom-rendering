@@ -5,7 +5,6 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
-import type { Region } from '../footballMatches';
 import type { FootballTableCompetition } from '../footballTables';
 import { grid } from '../grid';
 import { palette } from '../palette';
@@ -13,11 +12,12 @@ import { AdSlot } from './AdSlot.web';
 import { FootballTableList } from './FootballTableList';
 import { FootballTablesCompetitionSelect } from './FootballTablesCompetitionSelect.importable';
 import { Island } from './Island';
+import { Region } from '../footballDataPage';
 
 type Props = {
 	regions: Region[];
 	pageId: string;
-	competitions: FootballTableCompetition[];
+	tableCompetitions: FootballTableCompetition[];
 	renderAds: boolean;
 	guardianBaseUrl: string;
 };
@@ -25,7 +25,7 @@ type Props = {
 export const FootballTablesPage = ({
 	regions,
 	pageId,
-	competitions,
+	tableCompetitions: competitions,
 	renderAds,
 	guardianBaseUrl,
 }: Props) => (

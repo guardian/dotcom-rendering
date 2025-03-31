@@ -7,26 +7,16 @@ import type {
 import type { Result } from './lib/result';
 import { ok } from './lib/result';
 
-type Competition = {
-	url: string;
-	name: string;
-	dividers: number[];
-};
-
-type TeamResult = {
+export type TeamResult = {
+	matchId: string;
 	self: TeamScore;
 	foe: TeamScore;
 };
 
 type TeamInfo = {
 	name: string;
-	id: string;
+	id: string; // TODO: why do we need to have id in 2 places? TeamInfo & TeamResult
 	url: string;
-};
-
-type Group = {
-	entries: Entry[];
-	name?: string;
 };
 
 type Entry = {
@@ -43,22 +33,32 @@ type Entry = {
 	results: TeamResult[];
 };
 
-type FootballTable = {
-	competition: Competition;
-	groups: Group[];
+export type FootballTableCompetition = {
+	url: string;
+	name: string;
+	hasGroups: boolean;
+	dividers: number[];
+	tables: FootballTableData[];
+};
+
+export type FootballTableData = {
+	groupName?: string;
+	entries: Entry[];
 	hasLinkToFullTable: boolean;
 };
 
-export type FootballTables = FootballTable[];
+export type FootballTableCompetitions = FootballTableCompetition[];
 
-const parseGroups = (
+const parseTables = (
 	feGroups: FEFootballTable['groups'],
-): Result<ParserError, Group[]> => {
-	const groupsParser = listParse(parseGroup);
+): Result<ParserError, FootballTableData[]> => {
+	const groupsParser = listParse(parseTable);
 	return groupsParser(feGroups);
 };
 
-const parseGroup = (feGroup: FEGroup): Result<ParserError, Group> => {
+const parseTable = (
+	feGroup: FEGroup,
+): Result<ParserError, FootballTableData> => {
 	const entriesParser = listParse(parseEntry);
 	const parsedEntries = entriesParser(feGroup.entries);
 
@@ -67,8 +67,9 @@ const parseGroup = (feGroup: FEGroup): Result<ParserError, Group> => {
 	}
 
 	return ok({
-		name: feGroup.round.name,
+		groupName: feGroup.round.name,
 		entries: parsedEntries.value,
+		hasLinkToFullTable: false, // TODO: calculate linkToFullTable
 	});
 };
 
@@ -98,25 +99,23 @@ const parseEntry = (
 
 const parseFootballTables = (
 	table: FEFootballTable,
-): Result<ParserError, FootballTable> => {
-	const competition = {
-		url: table.competition.url,
-		name: table.competition.fullName,
-		dividers: table.competition.dividers ?? [], // TODO: parse competition
-	};
-	const parsedGroups = parseGroups(table.groups);
+): Result<ParserError, FootballTableCompetition> => {
+	const parsedTables = parseTables(table.groups);
 
-	if (parsedGroups.kind === 'error') {
-		return parsedGroups;
+	if (parsedTables.kind === 'error') {
+		return parsedTables;
 	}
 
 	return ok({
-		competition,
-		groups: parsedGroups.value,
-		hasLinkToFullTable: false, // TODO: calculate linkToFullTable
+		url: table.competition.url,
+		name: table.competition.fullName,
+		hasGroups: table.hasGroups,
+		dividers: table.competition.dividers ?? [],
+		tables: parsedTables.value,
 	});
 };
 
 export const parse: (
 	frontendData: FEFootballTable[],
-) => Result<ParserError, FootballTables> = listParse(parseFootballTables);
+) => Result<ParserError, FootballTableCompetitions> =
+	listParse(parseFootballTables);

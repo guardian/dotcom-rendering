@@ -44,35 +44,40 @@ export const FootballTableForm = ({
 				white-space: nowrap;
 			`}
 		>
-			{teamResults.map(({ self, foe, id }) => {
-				const isWin = self.score > foe.score;
-				const isLoss = self.score < foe.score;
-				const styles = isWin
-					? winStyles
-					: isLoss
-					? lossStyles
-					: drawStyles;
-				const title = isWin
-					? `Won ${self.score}-${foe.score} against ${foe.name}`
-					: isLoss
-					? `Lost ${self.score}-${foe.score} to ${foe.name}`
-					: `Drew ${self.score}-${foe.score} with ${foe.name}`;
+			{teamResults.map(({ self, foe, matchId }) => {
+				if (self.score && foe.score) {
+					// TODO: what should happen if there's no score?
+					const isWin = self.score > foe.score;
+					const isLoss = self.score < foe.score;
+					const styles = isWin
+						? winStyles
+						: isLoss
+						? lossStyles
+						: drawStyles;
+					const title = isWin
+						? `Won ${self.score}-${foe.score} against ${foe.name}`
+						: isLoss
+						? `Lost ${self.score}-${foe.score} to ${foe.name}`
+						: `Drew ${self.score}-${foe.score} with ${foe.name}`;
 
-				return (
-					<span
-						css={[formBlockStyles, styles]}
-						key={id}
-						title={title}
-					>
+					return (
 						<span
-							css={css`
-								${visuallyHidden}
-							`}
+							css={[formBlockStyles, styles]}
+							key={matchId}
+							title={title}
 						>
-							{title}
+							<span
+								css={css`
+									${visuallyHidden}
+								`}
+							>
+								{title}
+							</span>
 						</span>
-					</span>
-				);
+					);
+				}
+
+				return null;
 			})}
 		</div>
 	);
