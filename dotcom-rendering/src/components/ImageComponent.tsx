@@ -160,7 +160,7 @@ const titleWrapper = css`
 	color: ${srcPalette.neutral[100]};
 	background: linear-gradient(transparent, ${srcPalette.neutral[0]});
 
-	:before {
+	::before {
 		background-color: ${themePalette('--image-title-background')};
 		display: block;
 		content: '';

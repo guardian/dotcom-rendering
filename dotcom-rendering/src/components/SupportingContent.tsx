@@ -56,7 +56,7 @@ const horizontalGrid = css`
 
 const horizontalLineStyle = css`
 	margin-top: ${space[3]}px;
-	:before {
+	::before {
 		position: absolute;
 		top: -${space[2]}px;
 		left: 0;
@@ -75,7 +75,7 @@ const horizontalLineStyle = css`
 
 const verticalLineStyle = css`
 	/* The last child doesn't need a dividing right line */
-	:not(:last-child):after {
+	:not(:last-child)::after {
 		content: '';
 		position: absolute;
 		top: 0;

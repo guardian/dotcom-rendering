@@ -22,7 +22,7 @@ const highlight = css`
 `;
 
 const eventIconStyle = css`
-	:before {
+	::before {
 		content: '';
 		width: 16px;
 		height: 16px;

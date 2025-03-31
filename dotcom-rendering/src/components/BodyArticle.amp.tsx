@@ -39,7 +39,7 @@ const bulletStyle = (pillar: ArticleTheme) => css`
 		font-size: 1px;
 	}
 
-	.bullet:before {
+	.bullet::before {
 		display: inline-block;
 		content: '';
 		border-radius: 6px;
@@ -79,7 +79,7 @@ const adStyle = css`
 	text-align: center;
 	margin: 4px 0 12px 20px;
 
-	:before {
+	::before {
 		content: 'Advertisement';
 		display: block;
 		${textSans12};

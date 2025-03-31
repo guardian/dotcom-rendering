@@ -52,7 +52,7 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 				margin: 0 -10px 10px;
 			}
 
-			:before {
+			::before {
 				content: '';
 				position: absolute;
 				top: 0;

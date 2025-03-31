@@ -193,7 +193,7 @@ const styles = (format: ArticleFormat) => css`
 		}
 	}
 
-	&:is(ul) > li:before {
+	&:is(ul) > li::before {
 		display: inline-block;
 		content: '';
 		border-radius: 50%;
