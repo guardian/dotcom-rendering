@@ -10,13 +10,13 @@ import type { FootballTableCompetition } from '../footballTables';
 import { grid } from '../grid';
 import { palette } from '../palette';
 import { AdSlot } from './AdSlot.web';
-import { FootballCompetitionSelect } from './FootballCompetitionSelect';
 import { FootballTableList } from './FootballTableList';
+import { FootballTablesCompetitionSelect } from './FootballTablesCompetitionSelect.importable';
+import { Island } from './Island';
 
 type Props = {
 	regions: Region[];
 	pageId: string;
-	goToCompetitionSpecificPage: (tag: string) => void;
 	competitions: FootballTableCompetition[];
 	renderAds: boolean;
 	guardianBaseUrl: string;
@@ -25,7 +25,6 @@ type Props = {
 export const FootballTablesPage = ({
 	regions,
 	pageId,
-	goToCompetitionSpecificPage,
 	competitions,
 	renderAds,
 	guardianBaseUrl,
@@ -75,12 +74,13 @@ export const FootballTablesPage = ({
 				grid-row: 2;
 			`}
 		>
-			<FootballCompetitionSelect
-				regions={regions}
-				kind="Tables"
-				pageId={pageId}
-				onChange={goToCompetitionSpecificPage}
-			/>
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<FootballTablesCompetitionSelect
+					regions={regions}
+					pageId={pageId}
+					guardianBaseUrl={guardianBaseUrl}
+				/>
+			</Island>
 		</div>
 		<div
 			css={css`
