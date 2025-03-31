@@ -79,14 +79,12 @@ const canInsertMobileAd =
 		 * - Is NOT the slot used for the merch high position
 		 * - Is NOT a thrasher if it is the first container
 		 * - Is NOT before a thrasher
-		 * - Is NOT before a branded container
 		 * - Is NOT the most viewed container
 		 */
 		const rules = [
 			!isMerchHighPosition(index, merchHighPosition),
 			!isFirstContainerAndThrasher(collection.collectionType, index),
 			!isBeforeThrasher(index, collections),
-			!isBeforeBrandedContainer(index, collections),
 			!isMostViewedContainer(collection),
 		];
 
@@ -95,6 +93,8 @@ const canInsertMobileAd =
 			// Allow insertion after first container at any time but for all other situations,
 			// prevent insertion before a secondary level container
 			index === 0 || !isBeforeSecondaryLevelContainer(index, collections),
+			// Prevent insertion before a branded container
+			!isBeforeBrandedContainer(index, collections),
 		];
 
 		// Ad insertion is possible if every condition is met
