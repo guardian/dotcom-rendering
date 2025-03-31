@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import { visuallyHidden } from '@guardian/source/foundations';
 import type { TeamResult } from '../footballTables';
 import { palette } from '../palette';
@@ -45,8 +46,7 @@ export const FootballTableForm = ({
 			`}
 		>
 			{teamResults.map(({ self, foe, matchId }) => {
-				if (self.score && foe.score) {
-					// TODO: what should happen if there's no score?
+				if (!isUndefined(self.score) && !isUndefined(foe.score)) {
 					const isWin = self.score > foe.score;
 					const isLoss = self.score < foe.score;
 					const styles = isWin
