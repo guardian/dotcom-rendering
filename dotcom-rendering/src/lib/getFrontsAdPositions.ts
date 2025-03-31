@@ -17,7 +17,7 @@ type GroupedCounts = {
 
 export type AdCandidateMobile = Pick<
 	DCRCollectionType,
-	'collectionType' | 'containerLevel'
+	'collectionType' | 'containerLevel' | 'containerPalette'
 >;
 
 /** The Merch high slot is directly before the most viewed container  */
@@ -40,6 +40,11 @@ const isMerchHighPosition = (
 
 const isBeforeThrasher = (index: number, collections: AdCandidateMobile[]) =>
 	collections[index + 1]?.collectionType === 'fixed/thrasher';
+
+const isBeforeBrandedContainer = (
+	index: number,
+	collections: AdCandidateMobile[],
+) => collections[index + 1]?.containerPalette === 'Branded';
 
 const isMostViewedContainer = (collection: AdCandidateMobile) =>
 	collection.collectionType === 'news/most-popular';
@@ -74,12 +79,14 @@ const canInsertMobileAd =
 		 * - Is NOT the slot used for the merch high position
 		 * - Is NOT a thrasher if it is the first container
 		 * - Is NOT before a thrasher
+		 * - Is NOT before a branded container
 		 * - Is NOT the most viewed container
 		 */
 		const rules = [
 			!isMerchHighPosition(index, merchHighPosition),
 			!isFirstContainerAndThrasher(collection.collectionType, index),
 			!isBeforeThrasher(index, collections),
+			!isBeforeBrandedContainer(index, collections),
 			!isMostViewedContainer(collection),
 		];
 
