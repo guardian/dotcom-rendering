@@ -531,7 +531,7 @@ const styles = {
 		* {
 			box-sizing: border-box;
 		}
-		${from.tablet} {
+		${from.phablet} {
 			border-top: 1px solid ${neutral[0]};
 		}
 		b,
@@ -549,7 +549,7 @@ const styles = {
 			width: 100%;
 			max-width: 490px;
 			margin: 0 auto;
-			grid-template-columns: auto auto auto;
+			grid-template-columns: auto auto auto auto;
 		}
 
 		${from.desktop} {
@@ -617,7 +617,7 @@ const styles = {
 
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
 		order: ${bannerHasImage ? '2' : '1'};
-		${until.tablet} {
+		${until.phablet} {
 			${bannerHasImage
 				? ''
 				: `max-width: calc(100% - 40px - ${space[3]}px);`}
@@ -628,7 +628,7 @@ const styles = {
 			padding-top: ${space[3]}px;
 		}
 
-		${from.tablet} {
+		${from.phablet} {
 			grid-column: 2;
 			grid-row: 1;
 			background: ${background};
@@ -640,7 +640,7 @@ const styles = {
 		${between.mobileMedium.and.tablet} {
 			order: '2';
 		}
-		${from.tablet} {
+		${from.phablet} {
 			grid-column: 2;
 			grid-row: 1;
 			background: ${background};
@@ -669,7 +669,7 @@ const styles = {
 	bannerVisualContainer: (background: string) => css`
 		order: 1;
 		background: ${background};
-		${from.tablet} {
+		${from.phablet} {
 			grid-column: 2;
 			grid-row: 1 / span 2;
 			align-self: flex-start;
@@ -711,7 +711,7 @@ const styles = {
 		align-self: center;
 		margin-top: ${space[2]}px;
 
-		${from.tablet} {
+		${from.phablet} {
 			align-self: end;
 		}
 	`,
@@ -719,7 +719,7 @@ const styles = {
 		${textSans17};
 		display: none;
 
-		${from.tablet} {
+		${from.phablet} {
 			display: inline;
 		}
 	`,
@@ -744,7 +744,7 @@ const styles = {
 		margin-top: ${space[3]}px;
 		margin-bottom: ${space[2]}px;
 
-		${until.phablet} {
+		${until.mobileMedium} {
 			width: 100vw;
 			position: sticky;
 			bottom: 0;
@@ -763,7 +763,7 @@ const styles = {
 			padding-top: ${space[3]}px;
 		}
 
-		${from.desktop} {
+		${from.phablet} {
 			grid-column: 3;
 			flex-direction: row;
 			gap: 0;
