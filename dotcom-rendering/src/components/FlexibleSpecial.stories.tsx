@@ -80,6 +80,7 @@ const liveUpdatesCard = {
 	isExternalLink: false,
 	discussionApiUrl,
 	showLivePlayable: true,
+	isImmersive: false,
 } satisfies DCRFrontCard;
 
 const meta = {
