@@ -26,6 +26,7 @@ export type FootballData = {
 
 export type FootballMatchListPage = FootballData & {
 	matchesList: FootballMatches;
+	now: string;
 	kind: FootballMatchKind;
 };
 

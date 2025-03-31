@@ -34,6 +34,7 @@ const SportsPage = ({
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<FootballMatchesPageWrapper
 						regions={footballData.regions}
+						now={footballData.now}
 						guardianBaseUrl={footballData.guardianBaseURL}
 						ajaxUrl={footballData.config.ajaxUrl}
 						kind={footballData.kind}
