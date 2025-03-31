@@ -548,7 +548,7 @@ const CarouselCard = ({
 				starRating={starRating}
 				index={index}
 				showTopBarDesktop={!isOnwardContent}
-				showTopBarMobile={false}
+				showTopBarMobile={!isOnwardContent}
 			/>
 		</LI>
 	);
