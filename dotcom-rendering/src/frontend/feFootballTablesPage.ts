@@ -26,7 +26,7 @@ type FETeamScore = {
 	score?: number;
 };
 
-type FETeamResult = {
+export type FETeamResult = {
 	matchId: string;
 	self: FETeamScore;
 	foe: FETeamScore;
@@ -41,6 +41,7 @@ export type FELeagueTableEntry = {
 	stageNumber: string;
 	round: FERound;
 	team: FELeagueTeam;
+	results: FETeamResult[];
 };
 
 export type FEGroup = {
@@ -52,7 +53,6 @@ export type FEFootballTable = {
 	competition: FECompetitionSummary;
 	groups: FEGroup[];
 	hasGroups: boolean;
-	recentResultsPerTeam: FERecentResultsPerTeam[];
 };
 
 export type FEFootballTablesPage = FEFootballDataPage & {

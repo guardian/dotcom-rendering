@@ -1,13 +1,12 @@
-import { isUndefined } from '@guardian/libs';
 import { listParse, type ParserError, type TeamScore } from './footballMatches';
 import type {
 	FEFootballTable,
 	FEGroup,
 	FELeagueTableEntry,
-	FERecentResultsPerTeam,
+	FETeamResult,
 } from './frontend/feFootballTablesPage';
 import type { Result } from './lib/result';
-import { error, ok } from './lib/result';
+import { ok } from './lib/result';
 
 export type TeamResult = {
 	matchId: string;
@@ -53,95 +52,83 @@ export type FootballTableCompetitions = FootballTableCompetition[];
 
 const parseTables = (
 	feGroups: FEFootballTable['groups'],
-	recentResultsPerTeam: FERecentResultsPerTeam[],
 ): Result<ParserError, FootballTableData[]> => {
-	const groupsParser = listParse(parseTable(recentResultsPerTeam));
+	const groupsParser = listParse(parseTable);
 	return groupsParser(feGroups);
 };
 
-const parseTable =
-	(recentResultsPerTeam: FERecentResultsPerTeam[]) =>
-	(feGroup: FEGroup): Result<ParserError, FootballTableData> => {
-		const entriesParser = listParse(parseEntry(recentResultsPerTeam));
-		const parsedEntries = entriesParser(feGroup.entries);
+const parseTable = (
+	feGroup: FEGroup,
+): Result<ParserError, FootballTableData> => {
+	const entriesParser = listParse(parseEntry);
+	const parsedEntries = entriesParser(feGroup.entries);
 
-		if (parsedEntries.kind === 'error') {
-			return parsedEntries;
-		}
-
-		return ok({
-			groupName: feGroup.round.name,
-			entries: parsedEntries.value,
-			hasLinkToFullTable: false, // TODO: calculate linkToFullTable
-		});
-	};
-
-const parseResults = (
-	teamId: string,
-	recentResultsPerTeam: FERecentResultsPerTeam[],
-): Result<ParserError, TeamResult[]> => {
-	const teamsResults = recentResultsPerTeam.find(
-		(team) => team.teamId === teamId,
-	);
-
-	if (isUndefined(teamsResults)) {
-		return error({
-			kind: 'UnexpectedLiveMatch', // todo make new kind
-			message: `No results for team ID ${teamId}`,
-		});
+	if (parsedEntries.kind === 'error') {
+		return parsedEntries;
 	}
 
-	return ok(
-		teamsResults.results.map((result) => {
-			return {
-				matchId: result.matchId,
-				self: {
-					name: result.self.name,
-					score: result.self.score,
-				},
-				foe: {
-					name: result.foe.name,
-					score: result.foe.score,
-				},
-			};
-		}),
-	);
+	return ok({
+		groupName: feGroup.round.name,
+		entries: parsedEntries.value,
+		hasLinkToFullTable: false, // TODO: calculate linkToFullTable
+	});
 };
 
-const parseEntry =
-	(recentResultsPerTeam: FERecentResultsPerTeam[]) =>
-	(feEntry: FELeagueTableEntry): Result<ParserError, Entry> => {
-		const { team } = feEntry;
+const parseResult = (result: FETeamResult): Result<ParserError, TeamResult> => {
+	return ok({
+		matchId: result.matchId,
+		self: {
+			name: result.self.name,
+			score: result.self.score,
+		},
+		foe: {
+			name: result.foe.name,
+			score: result.foe.score,
+		},
+	});
+};
 
-		const parsedResults = parseResults(team.id, recentResultsPerTeam);
+const parseResults = (
+	teamResults: FETeamResult[],
+): Result<ParserError, TeamResult[]> => {
+	const groupsParser = listParse(parseResult);
+	return groupsParser(teamResults);
+};
 
-		if (parsedResults.kind === 'error') {
-			return parsedResults;
-		}
+const parseEntry = (
+	feEntry: FELeagueTableEntry,
+): Result<ParserError, Entry> => {
+	const { team } = feEntry;
 
-		return ok({
-			position: team.rank,
-			team: {
-				name: team.name,
-				id: team.id,
-				url: 'url', //TODO - get this from FE
-			},
-			gamesPlayed: team.total.played,
-			won: team.total.won,
-			drawn: team.total.drawn,
-			lost: team.total.lost,
-			goalsFor: team.total.goalsFor,
-			goalsAgainst: team.total.goalsAgainst,
-			goalDifference: team.goalDifference,
-			points: team.points,
-			results: parsedResults.value,
-		});
-	};
+	const parsedResults = parseResults(feEntry.results);
+
+	if (parsedResults.kind === 'error') {
+		return parsedResults;
+	}
+
+	return ok({
+		position: team.rank,
+		team: {
+			name: team.name,
+			id: team.id,
+			url: 'url', //TODO - get this from FE
+		},
+		gamesPlayed: team.total.played,
+		won: team.total.won,
+		drawn: team.total.drawn,
+		lost: team.total.lost,
+		goalsFor: team.total.goalsFor,
+		goalsAgainst: team.total.goalsAgainst,
+		goalDifference: team.goalDifference,
+		points: team.points,
+		results: parsedResults.value,
+	});
+};
 
 const parseFootballTables = (
 	table: FEFootballTable,
 ): Result<ParserError, FootballTableCompetition> => {
-	const parsedTables = parseTables(table.groups, table.recentResultsPerTeam);
+	const parsedTables = parseTables(table.groups);
 
 	if (parsedTables.kind === 'error') {
 		return parsedTables;
