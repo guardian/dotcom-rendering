@@ -540,17 +540,19 @@ const styles = {
 		}
 	`,
 	containerOverrides: css`
-		display: flex;
-		flex-direction: column;
+		display: grid;
 		position: relative;
 		padding: ${space[3]}px ${space[3]}px ${space[3]}px ${space[3]}px;
 
 		${from.phablet} {
 			padding: ${space[3]}px ${space[3]}px ${space[6]}px ${space[3]}px;
+			width: 100%;
+			max-width: 490px;
+			margin: 0 auto;
+			grid-template-columns: auto auto auto;
 		}
 
 		${from.desktop} {
-			display: grid;
 			padding: ${space[3]}px ${space[8]}px ${space[6]}px ${space[8]}px;
 			grid-template-columns: auto auto auto auto;
 			grid-template-rows: auto 1fr auto;
@@ -573,13 +575,15 @@ const styles = {
 		}
 	`,
 	closeButtonOverrides: css`
-		${until.desktop} {
-			position: fixed;
-			padding-right: 10px;
-			right: 0;
+		${until.phablet} {
+			grid-column: 1 / -1;
+			grid-row: 1;
+			justify-self: end;
+			position: sticky;
+			top: 10px;
 		}
 
-		${from.tablet} {
+		${from.phablet} {
 			grid-column: 4;
 			grid-row: 1;
 		}
@@ -648,7 +652,7 @@ const styles = {
 	`,
 	contentContainer: (showRemindMeLater: boolean) => css`
 		order: 2;
-		${from.tablet} {
+		${from.phablet} {
 			grid-column: 2;
 			grid-row: ${showRemindMeLater ? '2' : '2 / span 2'};
 		}
@@ -676,6 +680,9 @@ const styles = {
 	`,
 	threeTierChoiceCardsContainer: css`
 		order: 3;
+		${from.phablet} {
+			grid-column: 2;
+		}
 		${from.desktop} {
 			grid-column: 3;
 			grid-row: 1;
