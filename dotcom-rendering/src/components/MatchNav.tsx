@@ -6,6 +6,7 @@ import {
 	textSans15,
 	until,
 } from '@guardian/source/foundations';
+import { palette } from '../palette';
 import type { TeamType } from '../types/sport';
 import { Score } from './Score';
 
@@ -139,7 +140,7 @@ const TeamNav = ({
 			display: flex;
 			flex-grow: 1;
 			flex-basis: 50%;
-			color: var(--match-nav-text);
+			color: ${palette('--match-nav-text')};
 		`}
 	>
 		<Column>
@@ -209,7 +210,7 @@ export const MatchNav = ({ homeTeam, awayTeam, comments }: Props) => (
 			justify-content: space-between;
 			position: relative;
 			padding: ${space[2]}px;
-			background-color: var(--match-nav-background);
+			background-color: ${palette('--match-nav-background')};
 			margin-bottom: 10px;
 			${until.tablet} {
 				margin: 0 -10px 10px;

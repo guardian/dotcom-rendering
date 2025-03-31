@@ -57,7 +57,7 @@ export const FootballMatchSummary = ({
 						bottom: 10px;
 						width: 100vw;
 						left: -100vw;
-						background-color: var(--match-nav-background);
+						background-color: ${palette('--match-nav-background')};
 					}
 				}
 			`}
