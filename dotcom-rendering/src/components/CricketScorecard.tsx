@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import {
+	article15,
+	articleBold15,
 	from,
 	headlineBold17,
 	space,
-	textEgyptian15,
-	textEgyptianBold15,
 	textSans14,
 	textSansBold14,
 	until,
@@ -364,14 +364,12 @@ export const CricketScorecard = ({
 					grid-column: centre-column-start / centre-column-end;
 
 					dt {
-						${textEgyptianBold15}
-						line-height: 1.5;
+						${articleBold15}
 					}
 
 					dd {
-						${textEgyptian15}
+						${article15}
 						margin-inline-start: ${space[10]}px;
-						line-height: 1.5;
 					}
 				`}
 			>
