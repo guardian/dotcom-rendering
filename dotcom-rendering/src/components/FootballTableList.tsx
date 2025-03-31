@@ -42,10 +42,17 @@ const footballTablesGridStyles = css`
 	}
 `;
 
-const CompetitionName = ({ children }: { children: ReactNode }) => (
+const CompetitionName = ({
+	children,
+	hasGroups,
+}: {
+	children: ReactNode;
+	hasGroups: boolean;
+}) => (
 	<h2
 		css={css`
 			${textSansBold14}
+			grid-row: ${hasGroups ? 2 : 1};
 			grid-column: centre-column-start / centre-column-end;
 			color: ${palette('--football-competition-text')};
 			border-top: 1px solid ${palette('--football-top-border')};
@@ -79,6 +86,7 @@ const GroupName = ({
 	<h3
 		css={css`
 			grid-column: centre-column-start / centre-column-end;
+			grid-row: ${1 + 3 * index};
 			padding-top: ${space[1]}px;
 			padding-bottom: ${space[3]}px;
 			border-top: 1px solid ${palette('--football-list-border')};
@@ -102,15 +110,12 @@ export const FootballTableList = ({ competitions, guardianBaseUrl }: Props) => (
 			<section key={competition.name} css={footballTablesGridStyles}>
 				{competition.tables.map((table, groupIndex) => (
 					<>
-						{competition.hasGroups && (
-							<GroupName index={groupIndex}>
-								{table.groupName}
-							</GroupName>
-						)}
 						{
 							// Only show the competition name above/beside the first group
 							groupIndex === 0 && (
-								<CompetitionName>
+								<CompetitionName
+									hasGroups={competition.hasGroups}
+								>
 									<a
 										href={`${guardianBaseUrl}${competition.url}`}
 										css={css`
@@ -126,8 +131,16 @@ export const FootballTableList = ({ competitions, guardianBaseUrl }: Props) => (
 								</CompetitionName>
 							)
 						}
+						{competition.hasGroups && (
+							<GroupName index={groupIndex}>
+								{table.groupName}
+							</GroupName>
+						)}
 						<div
 							css={css`
+								grid-row: ${competition.hasGroups
+									? 3 + 3 * groupIndex
+									: 1};
 								grid-column: centre-column-start /
 									centre-column-end;
 							`}

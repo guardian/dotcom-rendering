@@ -77,15 +77,6 @@ function getFootballCrestImageUrl(teamId: string) {
 	return `https://sport.guim.co.uk/football/crests/60/${teamId}.png`;
 }
 
-const getDateFormatter = (edition: EditionId): Intl.DateTimeFormat =>
-	new Intl.DateTimeFormat('en-GB', {
-		weekday: 'long',
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric',
-		timeZone: getTimeZoneFromEdition(edition),
-	});
-
 const getTimeFormatter = (edition: EditionId): Intl.DateTimeFormat =>
 	new Intl.DateTimeFormat(getLocaleFromEdition(edition), {
 		hour: '2-digit',
@@ -434,7 +425,13 @@ export const FootballMatchList = ({
 	getMoreDays,
 	now,
 }: Props) => {
-	const dateFormatter = getDateFormatter(edition);
+	const dateFormatter = new Intl.DateTimeFormat('en-GB', {
+		weekday: 'long',
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+		timeZone: 'UTC',
+	});
 	const timeFormatter = getTimeFormatter(edition);
 
 	const [days, setDays] = useState(initialDays);
