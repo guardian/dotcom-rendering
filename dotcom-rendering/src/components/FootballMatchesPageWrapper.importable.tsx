@@ -63,6 +63,7 @@ const goToCompetitionSpecificPage =
 
 type Props = {
 	regions: Region[];
+	now: string;
 	guardianBaseUrl: string;
 	ajaxUrl: string;
 	kind: FootballMatchKind;
@@ -75,6 +76,7 @@ type Props = {
 
 export const FootballMatchesPageWrapper = ({
 	regions,
+	now,
 	guardianBaseUrl,
 	ajaxUrl,
 	kind,
@@ -92,6 +94,7 @@ export const FootballMatchesPageWrapper = ({
 			guardianBaseUrl={guardianBaseUrl}
 			kind={kind}
 			initialDays={initialDays}
+			now={now}
 			edition={edition}
 			goToCompetitionSpecificPage={goToCompetitionSpecificPage(
 				guardianBaseUrl,
