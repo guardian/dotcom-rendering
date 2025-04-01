@@ -13,7 +13,6 @@ import {
 	InlineError,
 	SvgPlus,
 } from '@guardian/source/react-components';
-import DOMPurify from 'dompurify';
 import { Fragment, type ReactNode, useState } from 'react';
 import type {
 	FootballMatch,
@@ -410,9 +409,7 @@ export const FootballMatchList = ({
 						<Fragment key={competition.id}>
 							<CompetitionName>
 								<a
-									href={`${guardianBaseUrl}/${encodeURIComponent(
-										competition.tag,
-									)}`}
+									href={`${guardianBaseUrl}/${competition.tag}`}
 									css={css`
 										text-decoration: none;
 										color: inherit;
