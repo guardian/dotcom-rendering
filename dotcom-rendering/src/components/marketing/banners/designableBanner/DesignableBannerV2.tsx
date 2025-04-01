@@ -553,13 +553,15 @@ const styles = {
 		}
 
 		${from.desktop} {
-			padding: ${space[3]}px ${space[8]}px ${space[6]}px ${space[8]}px;
-			grid-template-columns: auto auto auto auto;
+			padding: ${space[3]}px ${space[8]}px ${space[6]}px ${space[3]}px;
+			grid-template-columns: auto 380px 300px auto;
 			grid-template-rows: auto 1fr auto;
 			width: 100%;
 			max-width: 1300px;
 			margin: 0 auto;
-			column-gap: ${space[5]}px;
+		}
+		${from.leftCol} {
+			grid-template-columns: auto 460px 485px auto;
 		}
 	`,
 	verticalLine: css`
@@ -687,7 +689,7 @@ const styles = {
 			grid-column: 3;
 			grid-row: 1;
 			grid-row-end: 3;
-			padding-right: ${space[3]}px;
+			padding-right: ${space[5]}px;
 		}
 	`,
 	guardianLogoContainer: css`
@@ -744,7 +746,7 @@ const styles = {
 		margin-top: ${space[3]}px;
 		margin-bottom: ${space[2]}px;
 
-		${until.mobileMedium} {
+		${until.phablet} {
 			width: 100vw;
 			position: sticky;
 			bottom: 0;
