@@ -1,5 +1,6 @@
 import { palette } from '@guardian/source/foundations';
 import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.importable';
+import { FootballTablesPage } from '../components/FootballTablesPage';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -14,7 +15,6 @@ import type {
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { FootballTablesPage } from '../components/FootballTablesPage';
 
 interface Props {
 	footballData: FootballMatchListPage | FootballTablesPageData;

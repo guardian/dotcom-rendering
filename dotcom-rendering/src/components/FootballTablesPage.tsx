@@ -5,6 +5,7 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
+import type { Region } from '../footballDataPage';
 import type { FootballTableCompetition } from '../footballTables';
 import { grid } from '../grid';
 import { palette } from '../palette';
@@ -12,7 +13,6 @@ import { AdSlot } from './AdSlot.web';
 import { FootballTableList } from './FootballTableList';
 import { FootballTablesCompetitionSelect } from './FootballTablesCompetitionSelect.importable';
 import { Island } from './Island';
-import { Region } from '../footballDataPage';
 
 type Props = {
 	regions: Region[];

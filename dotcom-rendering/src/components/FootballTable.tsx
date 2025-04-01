@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { from, textSans14, until } from '@guardian/source/foundations';
+import type { FootballTableData } from '../footballTables';
 import { palette } from '../palette';
 import { FootballTableForm } from './FootballTableForm';
-import { FootballTableData } from '../footballTables';
 
 const tableStyles = css`
 	width: 100%;
