@@ -22,7 +22,7 @@ import { htmlPageTemplate } from './htmlPageTemplate';
 const fromTheGuardian =
 	'from the Guardian, the world&#x27;s leading liberal voice';
 
-const decideDescription = (kind: FootballMatchKind) => {
+const decideDescription = (kind: FootballMatchKind | 'Tables') => {
 	switch (kind) {
 		case 'Live':
 			return `Live football scores ${fromTheGuardian}`;
@@ -30,11 +30,13 @@ const decideDescription = (kind: FootballMatchKind) => {
 			return `Latest football results ${fromTheGuardian}`;
 		case 'Fixture':
 			return `Football fixtures ${fromTheGuardian}`;
+		case 'Tables':
+			return `Football tables ${fromTheGuardian}`;
 	}
 };
 
 const decideTitle = (
-	kind: FootballMatchKind,
+	kind: FootballMatchKind | 'Tables',
 	pageId: string,
 	regions: Region[],
 ) => {
@@ -58,15 +60,23 @@ const decideTitle = (
 			return `${
 				competitionName ? `${competitionName} ` : 'All '
 			}fixtures ${footballTitle}`;
+		case 'Tables':
+			return `${
+				competitionName ? `${competitionName} ` : 'All '
+			}tables ${footballTitle}`;
 	}
 };
 
 export const renderFootballTablesPage = (footballData: FootballTablesPage) =>
 	renderFootballDataPage(
 		footballData,
-		'Tables', //ToDo: decide tables title
-		'Description',
-	); // ToDo: decide tables description
+		decideTitle(
+			footballData.kind,
+			footballData.config.pageId,
+			footballData.regions,
+		),
+		decideDescription(footballData.kind),
+	);
 
 export const renderFootballMatchesPage = (
 	footballData: FootballMatchListPage,
