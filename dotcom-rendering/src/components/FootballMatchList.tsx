@@ -146,7 +146,7 @@ const matchStatusStyles = css`
 	width: 5rem;
 	color: ${palette('--football-sub-text')};
 
-	${until.mobileMedium} {
+	${until.mobileLandscape} {
 		flex-basis: 100%;
 	}
 `;
@@ -285,7 +285,7 @@ const Match = ({
 							flex-basis: 100%;
 							text-align: center;
 							padding-top: ${space[2]}px;
-							${from.mobileMedium} {
+							${from.mobileLandscape} {
 								padding-left: 5rem;
 							}
 						`}
