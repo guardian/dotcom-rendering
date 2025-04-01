@@ -28,18 +28,6 @@ const rawTargets = getTargetsFromBrowsersList({ browsers });
  *
  * https://github.com/guardian/csnx/tree/main/libs/%40guardian/browserslist-config
  *
- * This currently returns:
- *
- * {
- *	chrome: '67.0.0',
- *	edge: '99.0.0',
- *	firefox: '78.0.0',
- *	ios: '10.3.0',
- *	opera: '91.0.0',
- *	safari: '10.1.0',
- *	samsung: '11.1.0'
- * }
- *
  * SWC however will not transpile dynamic imports when there are browser targets
  * that do not support them.
  *
