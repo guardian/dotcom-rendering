@@ -554,14 +554,18 @@ const styles = {
 
 		${from.desktop} {
 			padding: ${space[3]}px ${space[8]}px ${space[6]}px ${space[3]}px;
-			grid-template-columns: auto 380px 300px auto;
+			grid-template-columns: auto 380px 300px 1fr;
 			grid-template-rows: auto 1fr auto;
 			width: 100%;
-			max-width: 1300px;
+			max-width: 980px;
 			margin: 0 auto;
 		}
 		${from.leftCol} {
-			grid-template-columns: auto 460px 485px auto;
+			grid-template-columns: auto 460px 380px 1fr;
+			max-width: 1140px;
+		}
+		${from.wide} {
+			grid-template-columns: auto 460px 380px 1fr;
 		}
 	`,
 	verticalLine: css`
@@ -588,6 +592,10 @@ const styles = {
 		${from.phablet} {
 			grid-column: 4;
 			grid-row: 1;
+			justify-self: start;
+			position: sticky;
+			top: 10px;
+			padding-left: 32px;
 		}
 	`,
 	// hacky change until we can rework the designable banner header with the correct styles
@@ -691,7 +699,6 @@ const styles = {
 			grid-column: 3;
 			grid-row: 1;
 			grid-row-end: 3;
-			padding-right: ${space[8]}px;
 		}
 	`,
 	guardianLogoContainer: css`
@@ -703,8 +710,8 @@ const styles = {
 			justify-content: center;
 			align-items: center;
 			margin-top: ${space[9]}px;
-			margin-right: -${space[3]}px;
-			margin-left: 8px; // Add this line to ensure the logo is always 8px away from the line
+			margin-right: ${space[2]}px;
+			margin-left: 22px;
 		}
 	`,
 
