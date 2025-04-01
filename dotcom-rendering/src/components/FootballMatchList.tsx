@@ -321,7 +321,7 @@ const Battleline = () => (
 			display: block;
 			padding: 0 4px;
 
-			&:before {
+			&::before {
 				content: '-';
 			}
 		`}

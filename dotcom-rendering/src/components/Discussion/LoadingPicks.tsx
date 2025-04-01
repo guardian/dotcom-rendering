@@ -50,7 +50,7 @@ const pickBoxStyles = css`
 	position: relative;
 	height: 150px;
 
-	:before {
+	::before {
 		content: '';
 		margin-left: ${space[6]}px;
 		position: absolute;

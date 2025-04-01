@@ -35,7 +35,7 @@ const linkStyle = (pillar: ArticleTheme) => css`
 	text-decoration: none;
 	color: ${pillarPalette_DO_NOT_USE[pillar].main};
 	${textSans15};
-	:after {
+	::after {
 		content: '/';
 		${textSans15};
 		position: absolute;
@@ -71,7 +71,7 @@ const sectionLinkStyle = (pillar: ArticleTheme) => css`
 	color: ${pillarPalette_DO_NOT_USE[pillar].main};
 	${article17};
 
-	:after {
+	::after {
 		content: '/';
 		${article17};
 		position: absolute;

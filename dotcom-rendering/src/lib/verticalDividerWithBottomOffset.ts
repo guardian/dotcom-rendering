@@ -8,7 +8,7 @@ export function verticalDividerWithBottomOffset(
 ): SerializedStyles {
 	return css`
 		${from.tablet} {
-			:before {
+			::before {
 				content: '';
 				display: block;
 				position: absolute;

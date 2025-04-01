@@ -181,7 +181,7 @@ const StretchBackground = ({
 			background-color: ${themePalette('--match-stats-background')};
 
 			${from.leftCol} {
-				:before {
+				::before {
 					content: '';
 					position: absolute;
 					top: 0;

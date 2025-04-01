@@ -131,7 +131,7 @@ const footerList = css`
 	position: relative;
 	padding-top: 12px;
 
-	:before {
+	::before {
 		content: '';
 		position: absolute;
 		top: 0;
@@ -175,7 +175,7 @@ const iconContainer = css`
 `;
 
 const icon = css`
-	:before {
+	::before {
 		position: absolute;
 		top: 6px;
 		bottom: 0;

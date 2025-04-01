@@ -34,7 +34,7 @@ const link = css`
 `;
 
 const icon = css`
-	:before {
+	::before {
 		position: absolute;
 		top: 6px;
 		bottom: 0;

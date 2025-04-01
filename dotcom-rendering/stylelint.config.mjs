@@ -31,5 +31,6 @@ export default {
 					'Please use the source-foundations palette variables instead of rgba values',
 			},
 		],
+		'selector-pseudo-element-colon-notation': 'double',
 	},
 };

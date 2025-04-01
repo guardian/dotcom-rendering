@@ -272,7 +272,7 @@ const subNavWrapper = css`
 	}
 
 	${from.tablet} {
-		:before {
+		::before {
 			content: '';
 			border-left: 1px solid ${themePalette('--masthead-nav-lines')};
 			position: absolute;
@@ -281,7 +281,7 @@ const subNavWrapper = css`
 			bottom: 0;
 		}
 
-		:after {
+		::after {
 			content: '';
 			border-left: 1px solid ${themePalette('--masthead-nav-lines')};
 			position: absolute;
