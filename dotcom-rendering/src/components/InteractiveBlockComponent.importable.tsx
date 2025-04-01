@@ -385,6 +385,14 @@ export const InteractiveBlockComponent = ({
 					if (graphicUrl.search.length) {
 						graphicUrl.search += '&dark=false';
 					} else {
+						// Embed URLs without a trailing slash are redirected and the
+						// search param is lost so we need to add it to the pathname
+						const hasTrailingSlash = graphicUrl.pathname.endsWith(
+							'/',
+						)
+							? true
+							: false;
+						graphicUrl.pathname += hasTrailingSlash ? '' : '/';
 						graphicUrl.search += '?dark=false';
 					}
 				}
