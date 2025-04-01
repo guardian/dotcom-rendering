@@ -50,9 +50,10 @@ const displaySIndicatorRoundel = (
 		'href',
 		window.location.hostname === 'localhost'
 			? 'http://localhost:4200/sIndicator'
-			: `https://syndication.${window.location.hostname
-					.replace('m.', '')
-					.replace('www.', '')}/sIndicator`,
+			: `https://syndication.${window.location.hostname.replace(
+					/^(m\.|www\.)/i,
+					'',
+			  )}/sIndicator`,
 	);
 
 	switch (status) {
