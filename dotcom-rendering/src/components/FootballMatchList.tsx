@@ -13,6 +13,7 @@ import {
 	InlineError,
 	SvgPlus,
 } from '@guardian/source/react-components';
+import DOMPurify from 'dompurify';
 import { Fragment, type ReactNode, useState } from 'react';
 import type {
 	FootballMatch,
@@ -394,6 +395,7 @@ export const FootballMatchList = ({
 
 	const [days, setDays] = useState(initialDays);
 	const [isError, setIsError] = useState<boolean>(false);
+
 	return (
 		<>
 			{days.map((day) => (
@@ -408,7 +410,9 @@ export const FootballMatchList = ({
 						<Fragment key={competition.id}>
 							<CompetitionName>
 								<a
-									href={`${guardianBaseUrl}/${competition.tag}`}
+									href={`${guardianBaseUrl}/${encodeURIComponent(
+										competition.tag,
+									)}`}
 									css={css`
 										text-decoration: none;
 										color: inherit;
