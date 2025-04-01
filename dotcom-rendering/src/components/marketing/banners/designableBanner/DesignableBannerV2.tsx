@@ -547,9 +547,8 @@ const styles = {
 		${from.phablet} {
 			padding: ${space[3]}px ${space[3]}px ${space[6]}px ${space[3]}px;
 			width: 100%;
-			max-width: 490px;
 			margin: 0 auto;
-			grid-template-columns: auto auto auto auto;
+			grid-template-columns: 1fr auto 1fr;
 		}
 
 		${from.desktop} {
@@ -643,6 +642,7 @@ const styles = {
 			grid-column: 2;
 			grid-row: 1;
 			background: ${background};
+			max-width: 492px;
 		}
 	`,
 	headerWithImageContainer: (background: string) => css`
@@ -655,6 +655,7 @@ const styles = {
 			grid-column: 2;
 			grid-row: 1;
 			background: ${background};
+			max-width: 492px;
 		}
 		${from.desktop} {
 			padding-left: ${space[2]}px;
@@ -665,6 +666,7 @@ const styles = {
 		order: 2;
 		${from.phablet} {
 			grid-column: 2;
+			max-width: 492px;
 			grid-row: ${showRemindMeLater ? '2' : '2 / span 2'};
 		}
 		${from.desktop} {
@@ -697,6 +699,7 @@ const styles = {
 		}
 		${from.phablet} {
 			grid-column: 2;
+			max-width: 492px;
 		}
 		${from.desktop} {
 			grid-column: 3;
