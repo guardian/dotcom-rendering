@@ -670,8 +670,8 @@ const styles = {
 		${from.desktop} {
 			padding-left: ${space[2]}px;
 			padding-right: ${space[5]}px;
+			margin-bottom: ${space[2]}px;
 		}
-		margin-bottom: ${space[2]}px;
 	`,
 	bodyCopyOverrides: css`
 		p {
@@ -692,6 +692,9 @@ const styles = {
 	`,
 	threeTierChoiceCardsContainer: css`
 		order: 3;
+		${until.desktop} {
+			margin-top: -24px;
+		}
 		${from.phablet} {
 			grid-column: 2;
 		}
@@ -768,7 +771,7 @@ const styles = {
 			margin-left: -${space[3]}px;
 		}
 
-		${until.desktop} {
+		${until.phablet} {
 			a {
 				width: calc(100% - 24px);
 			}
@@ -781,6 +784,10 @@ const styles = {
 			gap: 0;
 			margin-bottom: 0;
 			margin-top: ${space[3]}px;
+
+			a {
+				width: 100%;
+			}
 
 			> span {
 				width: auto;
