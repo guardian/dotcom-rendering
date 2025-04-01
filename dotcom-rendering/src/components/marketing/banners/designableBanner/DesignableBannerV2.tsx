@@ -595,7 +595,7 @@ const styles = {
 			justify-self: start;
 			position: sticky;
 			top: 10px;
-			padding-left: 32px;
+			padding-left: ${space[8]}px;
 		}
 	`,
 	// hacky change until we can rework the designable banner header with the correct styles
@@ -693,7 +693,7 @@ const styles = {
 	threeTierChoiceCardsContainer: css`
 		order: 3;
 		${until.desktop} {
-			margin-top: -24px;
+			margin-top: -${space[6]}px;
 		}
 		${from.phablet} {
 			grid-column: 2;
