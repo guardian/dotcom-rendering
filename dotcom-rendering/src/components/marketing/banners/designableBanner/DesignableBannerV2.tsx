@@ -628,6 +628,7 @@ const styles = {
 		${from.desktop} {
 			padding-left: ${space[2]}px;
 			padding-top: ${space[3]}px;
+			padding-right: ${space[5]}px;
 		}
 
 		${from.phablet} {
@@ -660,6 +661,7 @@ const styles = {
 		}
 		${from.desktop} {
 			padding-left: ${space[2]}px;
+			padding-right: ${space[5]}px;
 		}
 		margin-bottom: ${space[2]}px;
 	`,
@@ -689,7 +691,7 @@ const styles = {
 			grid-column: 3;
 			grid-row: 1;
 			grid-row-end: 3;
-			padding-right: ${space[5]}px;
+			padding-right: ${space[8]}px;
 		}
 	`,
 	guardianLogoContainer: css`
@@ -702,6 +704,7 @@ const styles = {
 			align-items: center;
 			margin-top: ${space[9]}px;
 			margin-right: -${space[3]}px;
+			margin-left: 8px; // Add this line to ensure the logo is always 8px away from the line
 		}
 	`,
 
