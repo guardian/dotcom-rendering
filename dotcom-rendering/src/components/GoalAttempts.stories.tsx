@@ -34,6 +34,7 @@ export const Default = () => {
 					offTarget: 4,
 					color: '#e3f45a',
 				}}
+				backgroundColour={'--match-stats-background'}
 			/>
 		</Wrapper>
 	);

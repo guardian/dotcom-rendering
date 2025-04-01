@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import { grid } from '../grid';
 import { palette } from '../palette';
-import type { ColourName } from '../paletteDeclarations';
 import type { TeamType } from '../types/sport';
 import { MatchNav } from './MatchNav';
 import { MatchStats } from './MatchStats';
@@ -33,9 +32,6 @@ type Props = {
 	comments?: string;
 	competition: string;
 };
-
-/* ToDo: change the background colour without resorting to this */
-const backgroundColour: ColourName = '--match-stats-background';
 
 export const FootballMatchSummary = ({
 	homeTeam,
@@ -71,7 +67,6 @@ export const FootballMatchSummary = ({
 		<div
 			css={css`
 				${grid.column.centre}
-				${backgroundColour}: initial;
 			`}
 		>
 			<MatchStats
