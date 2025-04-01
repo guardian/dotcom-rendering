@@ -45,7 +45,6 @@ export type FootballTableCompetition = {
 export type FootballTableData = {
 	groupName?: string;
 	entries: Entry[];
-	hasLinkToFullTable: boolean;
 };
 
 export type FootballTableCompetitions = FootballTableCompetition[];
@@ -91,8 +90,8 @@ const parseResult = (result: FETeamResult): Result<ParserError, TeamResult> => {
 const parseResults = (
 	teamResults: FETeamResult[],
 ): Result<ParserError, TeamResult[]> => {
-	const groupsParser = listParse(parseResult);
-	return groupsParser(teamResults);
+	const resultsParser = listParse(parseResult);
+	return resultsParser(teamResults);
 };
 
 const parseEntry = (
@@ -143,6 +142,7 @@ const parseFootballTables = (
 	});
 };
 
+// ToDo: if we don't return any errors can we remove the Result type?
 export const parse: (
 	frontendData: FEFootballTable[],
 ) => Result<ParserError, FootballTableCompetitions> =

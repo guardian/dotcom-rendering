@@ -62,8 +62,9 @@ const linkStyles = css`
 type Props = {
 	competitionName: string;
 	competitionUrl: string;
-	table: Omit<FootballTableData, 'groupName'>; // TODO: why do we need to omit groupName?
+	table: FootballTableData;
 	dividers: number[];
+	hasLinkToFullTable: boolean;
 	guardianBaseUrl: string;
 };
 
@@ -142,6 +143,7 @@ export const FootballTable = ({
 	competitionUrl,
 	table,
 	dividers,
+	hasLinkToFullTable,
 	guardianBaseUrl,
 }: Props) => (
 	<table css={tableStyles}>
@@ -229,7 +231,7 @@ export const FootballTable = ({
 				</tr>
 			))}
 		</tbody>
-		{table.hasLinkToFullTable && (
+		{hasLinkToFullTable && (
 			<tfoot>
 				<tr css={rowStyles}>
 					<td colSpan={11} css={hideUntilTabletStyle}>

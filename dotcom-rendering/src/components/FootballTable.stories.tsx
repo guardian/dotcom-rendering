@@ -35,8 +35,8 @@ export const FootballTable = {
 		competitionUrl: '/football/premierleague',
 		guardianBaseUrl: 'https://www.theguardian.com',
 		dividers: [1],
+		hasLinkToFullTable: true,
 		table: {
-			hasLinkToFullTable: true,
 			entries: [
 				{
 					position: 1,

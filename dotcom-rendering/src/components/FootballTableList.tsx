@@ -42,6 +42,22 @@ const footballTablesGridStyles = css`
 	}
 `;
 
+const getHasLinkToFullTable = (
+	numberOfCompetitions: number,
+	groupIndex: number,
+	numberOfGroups: number,
+) => {
+	if (numberOfCompetitions === 1) {
+		return false;
+	}
+
+	if (groupIndex + 1 === numberOfGroups) {
+		return true;
+	}
+
+	return false;
+};
+
 const CompetitionName = ({
 	children,
 	hasGroups,
@@ -152,6 +168,11 @@ export const FootballTableList = ({ competitions, guardianBaseUrl }: Props) => (
 								dividers={competition.dividers}
 								table={table}
 								guardianBaseUrl={guardianBaseUrl}
+								hasLinkToFullTable={getHasLinkToFullTable(
+									competitions.length,
+									groupIndex,
+									competition.tables.length,
+								)}
 							/>
 						</div>
 					</>
