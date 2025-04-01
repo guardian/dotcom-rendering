@@ -248,9 +248,54 @@
                                                             "rank",
                                                             "total"
                                                         ]
+                                                    },
+                                                    "results": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "matchId": {
+                                                                    "type": "string"
+                                                                },
+                                                                "self": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "name": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "score": {
+                                                                            "type": "number"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "foe": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "name": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "score": {
+                                                                            "type": "number"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "name"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "foe",
+                                                                "matchId",
+                                                                "self"
+                                                            ]
+                                                        }
                                                     }
                                                 },
                                                 "required": [
+                                                    "results",
                                                     "round",
                                                     "stageNumber",
                                                     "team"
