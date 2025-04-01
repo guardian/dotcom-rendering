@@ -39,7 +39,7 @@ const nestedStyles = (format: ArticleFormat) => {
 			}
 		}
 
-		li:before {
+		li::before {
 			display: inline-block;
 			content: '';
 			border-radius: 50%;
@@ -258,7 +258,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 							max-width: 460px;
 						}
 						color: ${palette('--standfirst-text')};
-						li:before {
+						li::before {
 							height: 17px;
 							width: 17px;
 						}
@@ -288,7 +288,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					return css`
 						max-width: 540px;
 						color: ${palette('--standfirst-text')};
-						li:before {
+						li::before {
 							height: 15px;
 							width: 15px;
 						}

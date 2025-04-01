@@ -320,7 +320,7 @@ const sectionContentPadded = css`
 const sectionContentBorderFromLeftCol = css`
 	position: relative;
 	${from.leftCol} {
-		:before {
+		::before {
 			content: '';
 			position: absolute;
 			top: ${space[2]}px;

@@ -64,7 +64,7 @@ const positionRelative = css`
 `;
 
 const partialRightBorder = (colour: string) => css`
-	:before {
+	::before {
 		content: '';
 		position: absolute;
 		top: 0;

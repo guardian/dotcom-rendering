@@ -22,7 +22,7 @@ const showMore = css`
 		padding-right: 4px;
 	}
 
-	:after {
+	::after {
 		content: '';
 		background-color: ${palette.neutral[86]};
 		border-radius: 18px;

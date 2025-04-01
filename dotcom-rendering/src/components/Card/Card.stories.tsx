@@ -1492,6 +1492,7 @@ export const WithAFiveFourAspectRatio = () => {
 		</>
 	);
 };
+
 export const WithNoGap = () => {
 	return (
 		<>
@@ -1505,6 +1506,8 @@ export const WithNoGap = () => {
 						{...basicCardProps}
 						imagePositionOnDesktop="left"
 						isOnwardContent={true}
+						showTopBarDesktop={false}
+						showTopBarMobile={false}
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -1629,6 +1632,8 @@ export const WithNoVerticalGap = () => {
 					<Card
 						{...basicCardProps}
 						isOnwardContent={true}
+						showTopBarDesktop={false}
+						showTopBarMobile={false}
 						imagePositionOnDesktop="bottom"
 						format={{
 							display: ArticleDisplay.Standard,

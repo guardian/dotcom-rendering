@@ -18,6 +18,7 @@ import type {
 	FootballMatch,
 	FootballMatches,
 	FootballMatchKind,
+	Team,
 } from '../footballMatches';
 import {
 	type EditionId,
@@ -72,14 +73,9 @@ const footballMatchesGridStyles = css`
 	}
 `;
 
-const getDateFormatter = (edition: EditionId): Intl.DateTimeFormat =>
-	new Intl.DateTimeFormat('en-GB', {
-		weekday: 'long',
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric',
-		timeZone: getTimeZoneFromEdition(edition),
-	});
+function getFootballCrestImageUrl(teamId: string) {
+	return `https://sport.guim.co.uk/football/crests/60/${teamId}.png`;
+}
 
 const getTimeFormatter = (edition: EditionId): Intl.DateTimeFormat =>
 	new Intl.DateTimeFormat(getLocaleFromEdition(edition), {
@@ -150,7 +146,7 @@ const matchStatusStyles = css`
 	width: 5rem;
 	color: ${palette('--football-sub-text')};
 
-	${until.mobileMedium} {
+	${until.mobileLandscape} {
 		flex-basis: 100%;
 	}
 `;
@@ -212,6 +208,7 @@ const matchStyles = (matchKind: FootballMatchKind) => css`
 	${matchKind === 'Live' ? 'font-weight: bold;' : undefined}
 
 	display: flex;
+	align-items: center;
 	flex-wrap: wrap;
 	padding: ${space[2]}px;
 `;
@@ -269,20 +266,18 @@ const Match = ({
 		<MatchStatus match={match} timeFormatter={timeFormatter} />
 		{match.kind === 'Fixture' ? (
 			<>
-				<HomeTeam>{match.homeTeam}</HomeTeam>
-
+				<HomeTeam team={match.homeTeam} />
 				<Versus />
-				<AwayTeam>{match.awayTeam}</AwayTeam>
+				<AwayTeam team={match.awayTeam} />
 			</>
 		) : (
 			<>
-				<HomeTeam>{match.homeTeam.name}</HomeTeam>
-
+				<HomeTeam team={match.homeTeam} />
 				<Scores
 					homeScore={match.homeTeam.score}
 					awayScore={match.awayTeam.score}
 				/>
-				<AwayTeam>{match.awayTeam.name}</AwayTeam>
+				<AwayTeam team={match.awayTeam} />
 				{isUndefined(match.comment) ? null : (
 					<small
 						css={css`
@@ -290,7 +285,7 @@ const Match = ({
 							flex-basis: 100%;
 							text-align: center;
 							padding-top: ${space[2]}px;
-							${from.mobileMedium} {
+							${from.mobileLandscape} {
 								padding-left: 5rem;
 							}
 						`}
@@ -303,25 +298,63 @@ const Match = ({
 	</MatchWrapper>
 );
 
-const HomeTeam = (props: { children: ReactNode }) => (
-	<span
-		{...props}
+const FootballCrest = ({ teamId }: { teamId: string }) => (
+	<div
 		css={css`
-			text-align: right;
-			flex: 1 0 0;
-			padding-right: 1rem;
+			width: 1.25rem;
+			height: 1.25rem;
+			flex-shrink: 0;
+			display: flex;
+			justify-content: center;
 		`}
-	/>
+	>
+		<img
+			css={css`
+				max-width: 100%;
+				max-height: 100%;
+				object-fit: contain;
+			`}
+			src={getFootballCrestImageUrl(teamId)}
+			alt=""
+		/>
+	</div>
 );
 
-const AwayTeam = (props: { children: ReactNode }) => (
-	<span
-		{...props}
+const HomeTeam = ({ team }: { team: Team }) => (
+	<div
+		css={css`
+			justify-content: flex-end;
+			flex: 1 0 0;
+			padding-right: 1rem;
+			display: flex;
+			align-items: center;
+			gap: 0.325rem;
+		`}
+	>
+		<span
+			css={css`
+				text-align: right;
+			`}
+		>
+			{team.name}
+		</span>
+		<FootballCrest teamId={team.id} />
+	</div>
+);
+
+const AwayTeam = ({ team }: { team: Team }) => (
+	<div
 		css={css`
 			flex: 1 0 0;
 			padding-left: 1rem;
+			display: flex;
+			align-items: center;
+			gap: 0.325rem;
 		`}
-	/>
+	>
+		<FootballCrest teamId={team.id} />
+		{team.name}
+	</div>
 );
 
 const Battleline = () => (
@@ -330,7 +363,7 @@ const Battleline = () => (
 			display: block;
 			padding: 0 4px;
 
-			&:before {
+			&::before {
 				content: '-';
 			}
 		`}
@@ -392,7 +425,13 @@ export const FootballMatchList = ({
 	getMoreDays,
 	now,
 }: Props) => {
-	const dateFormatter = getDateFormatter(edition);
+	const dateFormatter = new Intl.DateTimeFormat('en-GB', {
+		weekday: 'long',
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+		timeZone: 'UTC',
+	});
 	const timeFormatter = getTimeFormatter(edition);
 
 	const [days, setDays] = useState(initialDays);

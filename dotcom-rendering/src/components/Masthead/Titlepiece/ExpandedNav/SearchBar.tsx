@@ -76,12 +76,12 @@ const searchSubmit = css`
 		opacity: 0;
 		pointer-events: all;
 	}
-	&:before {
+	&::before {
 		height: 12px;
 		top: ${space[3]}px;
 		width: 12px;
 	}
-	&:after {
+	&::after {
 		border-right: 0;
 		top: 17px;
 		width: 20px;
