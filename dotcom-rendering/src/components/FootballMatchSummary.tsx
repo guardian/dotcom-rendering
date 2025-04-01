@@ -46,7 +46,7 @@ export const FootballMatchSummary = ({
 				position: relative;
 
 				${from.tablet} {
-					:before {
+					::before {
 						content: '';
 						position: absolute;
 						top: 0;
