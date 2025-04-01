@@ -62,8 +62,8 @@ const decideTitle = (
 			}fixtures ${footballTitle}`;
 		case 'Tables':
 			return `${
-				competitionName ? `${competitionName} ` : 'All '
-			}tables ${footballTitle}`;
+				competitionName ? `${competitionName} table` : 'All tables'
+			} ${footballTitle}`;
 	}
 };
 
