@@ -772,16 +772,25 @@ const styles = {
 			box-shadow: 0 -${space[1]}px ${space[3]}px 0 rgba(0, 0, 0, 0.25);
 			margin-right: -${space[3]}px;
 			margin-left: -${space[3]}px;
-		}
 
-		${until.phablet} {
 			a {
 				width: calc(100% - 24px);
 			}
-			padding-top: ${space[3]}px;
 		}
 
-		${from.phablet} {
+		${between.phablet.and.desktop} {
+			position: sticky;
+			bottom: 0;
+			padding-top: ${space[3]}px;
+			padding-bottom: ${space[3]}px;
+			margin-right: -${space[3]}px;
+			margin-left: -${space[3]}px;
+			a {
+				width: 100%;
+			}
+		}
+
+		${from.desktop} {
 			grid-column: 3;
 			flex-direction: row;
 			gap: 0;
