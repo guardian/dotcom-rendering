@@ -351,6 +351,7 @@ export const SpecialReportWithoutPalette: Story = {
 					snapData: {},
 					isCrossword: false,
 					discussionApiUrl,
+					isImmersive: false,
 				},
 			],
 		},

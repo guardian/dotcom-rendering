@@ -250,6 +250,7 @@ export type FEFrontCard = {
 	display: {
 		isBoosted: boolean;
 		boostLevel?: BoostLevel;
+		isImmersive?: boolean;
 		showBoostedHeadline: boolean;
 		showQuotedHeadline: boolean;
 		imageHide: boolean;

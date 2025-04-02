@@ -263,6 +263,7 @@ const liveUpdatesCard = {
 		design: ArticleDesign.Standard,
 		display: ArticleDisplay.Standard,
 	}),
+	isImmersive: false,
 } satisfies DCRFrontCard;
 
 export const FourSublinkSplashWithLiveUpdates: Story = {
