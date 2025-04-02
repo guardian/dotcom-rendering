@@ -326,8 +326,8 @@ importers:
         specifier: 8.0.0
         version: 8.0.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/braze-components':
-        specifier: 22.0.0
-        version: 22.0.0(@emotion/react@11.14.0)(@guardian/libs@22.0.0)(@guardian/source@9.0.0)(react@18.3.1)
+        specifier: 22.2.0
+        version: 22.2.0(@emotion/react@11.14.0)(@guardian/libs@22.0.0)(@guardian/source@9.0.0)(react@18.3.1)
       '@guardian/bridget':
         specifier: 8.1.0
         version: 8.1.0
@@ -3781,8 +3781,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/braze-components@22.0.0(@emotion/react@11.14.0)(@guardian/libs@22.0.0)(@guardian/source@9.0.0)(react@18.3.1):
-    resolution: {integrity: sha512-sHA3jVRxKg4vhe01UFPukHfrIiwAd+59Zqt1nooU0Hrlj4ahNF93hSsyhZJxSQCJ5rPyj834EFr3fjJOFuurMg==}
+  /@guardian/braze-components@22.2.0(@emotion/react@11.14.0)(@guardian/libs@22.0.0)(@guardian/source@9.0.0)(react@18.3.1):
+    resolution: {integrity: sha512-uSkHd6mBVTAD+BrvJZNt+oSipYHQXBdVt9Pu/VTvkliXHzT8OUsep7ObIWM1lkf3znWbqLDhoXtwS5apX2AEWQ==}
     engines: {node: ^18.15 || ^20.8}
     peerDependencies:
       '@emotion/react': ^11.1.2
