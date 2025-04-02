@@ -304,9 +304,9 @@ importers:
       '@babel/runtime':
         specifier: 7.27.0
         version: 7.27.0
-      '@braze/web-sdk-core':
-        specifier: 3.5.1
-        version: 3.5.1
+      '@braze/web-sdk':
+        specifier: ^5.8.1
+        version: 5.8.1
       '@creditkarma/thrift-server-core':
         specifier: 1.0.4
         version: 1.0.4
@@ -3305,8 +3305,8 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: false
 
-  /@braze/web-sdk-core@3.5.1:
-    resolution: {integrity: sha512-pHnlKaHz8UCrlGkAF6aoBptFUTzeZeL7OpHqKGx7uZC67ZfVvk1L11SJkxOw2CLxUQm9YxigSQXqtpUiImXDng==}
+  /@braze/web-sdk@5.8.1:
+    resolution: {integrity: sha512-J7op9y15tGwAKBXYT2rVryV59+YvRekWHk3lq1Z+oqsNa+BdrboiHTa3r7eBPww8TVcRtWDoreG2Sb3ELAb37w==}
     dev: false
 
   /@colors/colors@1.6.0:

@@ -30,7 +30,7 @@
 		"@babel/preset-react": "7.26.3",
 		"@babel/preset-typescript": "7.27.0",
 		"@babel/runtime": "7.27.0",
-		"@braze/web-sdk-core": "3.5.1",
+		"@braze/web-sdk": "^5.8.1",
 		"@creditkarma/thrift-server-core": "1.0.4",
 		"@emotion/babel-plugin": "11.13.5",
 		"@emotion/cache": "11.14.0",
