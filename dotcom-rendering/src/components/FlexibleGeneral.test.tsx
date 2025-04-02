@@ -13,17 +13,27 @@ const boostedCard = {
 } satisfies DCRFrontCard;
 
 describe('FlexibleGeneral', () => {
-	it('Should return a one card row layout if one standard card is provided', () => {
+	it('Should return a one card half width row layout if one standard card is provided', () => {
 		expect(decideCardPositions([standardCard])).toEqual([
 			{
-				layout: 'oneCard',
+				layout: 'oneCardHalfWidth',
 				cards: [standardCard],
 			},
 		]);
 	});
-	it('Should return a one card boosted row layout if one boosted card is provided', () => {
+	it('Should return a one card full width row layout if one boosted card is provided', () => {
 		expect(decideCardPositions([boostedCard])).toEqual([
-			{ layout: 'oneCardBoosted', cards: [boostedCard] },
+			{ layout: 'oneCardFullWidth', cards: [boostedCard] },
+		]);
+	});
+	it('Should return a one card full width row layout if one immersive card is provided', () => {
+		expect(
+			decideCardPositions([{ ...standardCard, isImmersive: true }]),
+		).toEqual([
+			{
+				layout: 'oneCardFullWidth',
+				cards: [{ ...standardCard, isImmersive: true }],
+			},
 		]);
 	});
 	it('Should return a two card row layout if two standard cards are provided', () => {
@@ -32,14 +42,14 @@ describe('FlexibleGeneral', () => {
 		]);
 	});
 
-	it('Should return a one card row layout if one card without boost level is provided', () => {
+	it('Should return a one card half width row layout if one card without boost level is provided', () => {
 		const cardWithoutBoostLevel = {
 			...standardCard,
 			boostLevel: undefined,
 		};
 		expect(decideCardPositions([cardWithoutBoostLevel])).toEqual([
 			{
-				layout: 'oneCard',
+				layout: 'oneCardHalfWidth',
 				cards: [cardWithoutBoostLevel],
 			},
 		]);
@@ -68,9 +78,9 @@ describe('FlexibleGeneral', () => {
 				standardCard,
 			]),
 		).toEqual([
-			{ layout: 'oneCardBoosted', cards: [boostedCard] },
+			{ layout: 'oneCardFullWidth', cards: [boostedCard] },
 			{ layout: 'twoCard', cards: [standardCard, standardCard] },
-			{ layout: 'oneCard', cards: [standardCard] },
+			{ layout: 'oneCardHalfWidth', cards: [standardCard] },
 		]);
 	});
 
@@ -83,8 +93,8 @@ describe('FlexibleGeneral', () => {
 				standardCard,
 			]),
 		).toEqual([
-			{ layout: 'oneCard', cards: [standardCard] },
-			{ layout: 'oneCardBoosted', cards: [boostedCard] },
+			{ layout: 'oneCardHalfWidth', cards: [standardCard] },
+			{ layout: 'oneCardFullWidth', cards: [boostedCard] },
 			{ layout: 'twoCard', cards: [standardCard, standardCard] },
 		]);
 	});

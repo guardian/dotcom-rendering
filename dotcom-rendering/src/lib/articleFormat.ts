@@ -1,5 +1,5 @@
 import { isString } from '@guardian/libs';
-import type { FEFormat } from '../types/frontend';
+import type { FEFormat } from '../frontend/feArticle';
 
 export enum ArticleDesign {
 	Standard,

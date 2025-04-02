@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticle } from '../../../src/frontend/feArticle';
 
-export const Analysis: FEArticleType = {
+export const Analysis: FEArticle = {
 	version: 3,
 	headline: 'Irish general election: who won and what happens now?',
 	standfirst:

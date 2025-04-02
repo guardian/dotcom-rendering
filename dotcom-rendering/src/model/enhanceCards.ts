@@ -324,6 +324,7 @@ export const enhanceCards = (
 			snapData: enhanceSnaps(faciaCard.enriched),
 			isBoosted: faciaCard.display.isBoosted,
 			boostLevel: faciaCard.display.boostLevel,
+			isImmersive: !!faciaCard.display.isImmersive,
 			isCrossword: faciaCard.properties.isCrossword,
 			isNewsletter,
 			isCartoon,

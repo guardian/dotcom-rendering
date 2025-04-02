@@ -10,7 +10,7 @@ const root = path.resolve(__dirname, '..', '..');
 const program = TJS.getProgramFromFiles(
 	[
 		path.resolve(`${root}/index.d.ts`),
-		path.resolve(`${root}/src/types/frontend.ts`),
+		path.resolve(`${root}/src/frontend/feArticle.ts`),
 		path.resolve(`${root}/src/frontend/feFront.ts`),
 		path.resolve(`${root}/src/frontend/feTagPage.ts`),
 		path.resolve(`${root}/src/types/newslettersPage.ts`),
@@ -35,8 +35,8 @@ const settings = { rejectDateType: true, required: true };
  */
 const schemas = [
 	{
-		typeName: 'FEArticleType',
-		file: `${root}/src/model/article-schema.json`,
+		typeName: 'FEArticle',
+		file: `${root}/src/frontend/schemas/feArticle.json`,
 	},
 	{
 		typeName: 'FEFront',

@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticle } from '../../../src/frontend/feArticle';
 
-export const NewsletterSignup: FEArticleType = {
+export const NewsletterSignup: FEArticle = {
 	version: 3,
 	headline:
 		'Sign up for the Moving the Goalposts newsletter: our free women’s football email',

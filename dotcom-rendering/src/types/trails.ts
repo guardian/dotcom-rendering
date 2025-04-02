@@ -1,8 +1,8 @@
+import type { FEFormat } from '../frontend/feArticle';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { Branding } from './branding';
 import type { BoostLevel, StarRating } from './content';
 import type { DCRFrontImage, DCRSnapType, DCRSupportingContent } from './front';
-import type { FEFormat } from './frontend';
 import type { MainMedia } from './mainMedia';
 
 interface BaseTrailType {

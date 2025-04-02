@@ -55,15 +55,15 @@ const CompetitionName = ({
 			grid-row: ${hasGroups ? 2 : 1};
 			grid-column: centre-column-start / centre-column-end;
 			color: ${palette('--football-competition-text')};
-			border-top: 1px solid ${palette('--football-top-border')};
+			border-top: 1px solid ${palette('--sport-top-border')};
 			padding: ${space[2]}px;
-			background-color: ${palette('--football-match-list-background')};
+			background-color: ${palette('--sport-list-background')};
 
 			${from.leftCol} {
 				grid-row: 1;
 				display: block;
 				color: ${palette('--football-competition-text')};
-				border-top: 1px solid ${palette('--football-list-border')};
+				border-top: 1px solid ${palette('--sport-list-border')};
 				background-color: transparent;
 				margin-top: 0;
 				padding: ${space[1]}px 0 0;
@@ -89,7 +89,7 @@ const GroupName = ({
 			grid-row: ${1 + 3 * index};
 			padding-top: ${space[1]}px;
 			padding-bottom: ${space[3]}px;
-			border-top: 1px solid ${palette('--football-list-border')};
+			border-top: 1px solid ${palette('--sport-list-border')};
 			${headlineBold17}
 
 			${index !== 0 ? `margin-top: ${space[6]}px` : ''}

@@ -10,12 +10,12 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
+import type { FEArticle } from '../frontend/feArticle';
 import { labelBoxStyles, labelHeight, labelStyles } from '../lib/adStyles';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { palette as schemedPalette } from '../palette';
-import type { FEArticleType } from '../types/frontend';
 import { AdBlockAsk } from './AdBlockAsk.importable';
 import { Island } from './Island';
 
@@ -874,7 +874,7 @@ export const AdSlot = ({
 	}
 };
 
-type MobileStickyContainerProps = Pick<FEArticleType, 'contentType' | 'pageId'>;
+type MobileStickyContainerProps = Pick<FEArticle, 'contentType' | 'pageId'>;
 
 export const MobileStickyContainer = ({
 	contentType,

@@ -1,14 +1,14 @@
 import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
+import type { FEArticle } from '../frontend/feArticle';
 import {
 	ArticleDesign,
 	type ArticleFormat,
 	decideFormat,
 } from '../lib/articleFormat';
 import type { FEElement } from '../types/content';
-import type { FEArticleType } from '../types/frontend';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 
-const example: FEArticleType = ExampleArticle;
+const example: FEArticle = ExampleArticle;
 const exampleFormat: ArticleFormat = decideFormat(example.format);
 
 const formatIsPhotoEssay: ArticleFormat = {

@@ -34,7 +34,7 @@ type Props = {
 	collectionId: number;
 };
 
-type RowLayout = 'oneCard' | 'oneCardBoosted' | 'twoCard';
+type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
 
 type GroupedRow = {
 	layout: RowLayout;
@@ -57,9 +57,12 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 	});
 
 	return cards.reduce<GroupedCards>((acc, card) => {
-		// Early return if the card is boosted since it takes up a whole row
-		if (card.boostLevel && card.boostLevel !== 'default') {
-			return [...acc, createNewRow('oneCardBoosted', card)];
+		// Early return if the card is boosted or immersive since it takes up a whole row
+		if (
+			card.isImmersive ||
+			(card.boostLevel && card.boostLevel !== 'default')
+		) {
+			return [...acc, createNewRow('oneCardFullWidth', card)];
 		}
 
 		// Otherwise we need to check the status of the current row
@@ -67,14 +70,71 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 
 		// If the current row has one card, we can add one more standard card to it
 		// We change the row layout to 'twoCard' to indicate that it is now full
-		if (row && row.layout === 'oneCard') {
+		if (row && row.layout === 'oneCardHalfWidth') {
 			return [...acc.slice(0, acc.length - 1), addCardToRow(row, card)];
 		}
 		// Otherwise we consider the row to be 'full' and start a new row
 		else {
-			return [...acc, createNewRow('oneCard', card)];
+			return [...acc, createNewRow('oneCardHalfWidth', card)];
 		}
 	}, []);
+};
+
+/**
+ * ImmersiveCardLayout is a special case of the card layout that is used for cards with the isImmersive property.
+ * It is a single feature card that takes up the full width of the container on all breakpoints.
+ * It is used in the FlexibleGeneral only.
+ * It can be used in any slot within the container.
+ */
+const ImmersiveCardLayout = ({
+	card,
+	containerPalette,
+	absoluteServerTimes,
+	imageLoading,
+	collectionId,
+}: {
+	card: DCRFrontCard;
+	containerPalette?: DCRContainerPalette;
+	absoluteServerTimes: boolean;
+	imageLoading: Loading;
+	collectionId: number;
+}) => {
+	return (
+		<UL padBottom={true}>
+			<LI key={card.url} padSides={true}>
+				<FeatureCard
+					collectionId={collectionId}
+					linkTo={card.url}
+					format={card.format}
+					headlineText={card.headline}
+					byline={card.byline}
+					showByline={card.showByline}
+					webPublicationDate={card.webPublicationDate}
+					kickerText={card.kickerText}
+					showClock={false}
+					image={card.image}
+					canPlayInline={true}
+					starRating={card.starRating}
+					dataLinkName={card.dataLinkName}
+					discussionApiUrl={card.discussionApiUrl}
+					discussionId={card.discussionId}
+					mainMedia={card.mainMedia}
+					isExternalLink={card.isExternalLink}
+					// branding={card.branding}
+					containerPalette={containerPalette}
+					trailText={card.trailText}
+					absoluteServerTimes={absoluteServerTimes}
+					imageLoading={imageLoading}
+					aspectRatio={'5:3'}
+					mobileAspectRatio={'4:5'}
+					imageSize="feature-immersive"
+					headlineSizes={{ desktop: 'small' }}
+					supportingContent={card.supportingContent}
+					isImmersive={true}
+				/>
+			</LI>
+		</UL>
+	);
 };
 
 type BoostedSplashProperties = {
@@ -172,7 +232,7 @@ const decideSplashCardProperties = (
 	}
 };
 
-const SplashCardLayout = ({
+export const SplashCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
@@ -196,45 +256,16 @@ const SplashCardLayout = ({
 	const card = cards[0];
 	if (!card) return null;
 
-	// TODO: replace with live data from fronts tool - used for testing
-	const shouldShowImmersive = false;
-
+	const shouldShowImmersive = card.isImmersive;
 	if (shouldShowImmersive) {
 		return (
-			<UL>
-				<LI key={card.url} padSides={true}>
-					<FeatureCard
-						collectionId={collectionId}
-						linkTo={card.url}
-						format={card.format}
-						headlineText={card.headline}
-						byline={card.byline}
-						showByline={card.showByline}
-						webPublicationDate={card.webPublicationDate}
-						kickerText={card.kickerText}
-						showClock={false}
-						image={card.image}
-						canPlayInline={true}
-						starRating={card.starRating}
-						dataLinkName={card.dataLinkName}
-						discussionApiUrl={card.discussionApiUrl}
-						discussionId={card.discussionId}
-						mainMedia={card.mainMedia}
-						isExternalLink={card.isExternalLink}
-						// branding={card.branding}
-						containerPalette={containerPalette}
-						trailText={card.trailText}
-						absoluteServerTimes={absoluteServerTimes}
-						imageLoading={imageLoading}
-						aspectRatio={'5:3'}
-						mobileAspectRatio={'4:5'}
-						imageSize="feature-immersive"
-						headlineSizes={{ desktop: 'small' }}
-						supportingContent={card.supportingContent}
-						isImmersive={true}
-					/>
-				</LI>
-			</UL>
+			<ImmersiveCardLayout
+				card={card}
+				containerPalette={containerPalette}
+				absoluteServerTimes={absoluteServerTimes}
+				imageLoading={imageLoading}
+				collectionId={collectionId}
+			/>
 		);
 	}
 
@@ -347,7 +378,7 @@ const decideCardProperties = (
 	}
 };
 
-const BoostedCardLayout = ({
+const FullWidthCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
@@ -357,6 +388,7 @@ const BoostedCardLayout = ({
 	isFirstRow,
 	isLastRow,
 	containerLevel,
+	collectionId,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -367,6 +399,7 @@ const BoostedCardLayout = ({
 	isFirstRow: boolean;
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
+	collectionId: number;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -381,6 +414,20 @@ const BoostedCardLayout = ({
 		card.boostLevel,
 		card.avatarUrl,
 	);
+
+	const shouldShowImmersive = card.isImmersive;
+
+	if (shouldShowImmersive) {
+		return (
+			<ImmersiveCardLayout
+				card={card}
+				containerPalette={containerPalette}
+				absoluteServerTimes={absoluteServerTimes}
+				imageLoading={imageLoading}
+				collectionId={collectionId}
+			/>
+		);
+	}
 
 	return (
 		<UL
@@ -431,7 +478,7 @@ const BoostedCardLayout = ({
 	);
 };
 
-const StandardCardLayout = ({
+const HalfWidthCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
@@ -558,9 +605,9 @@ export const FlexibleGeneral = ({
 
 			{groupedCards.map((row, i) => {
 				switch (row.layout) {
-					case 'oneCardBoosted':
+					case 'oneCardFullWidth':
 						return (
-							<BoostedCardLayout
+							<FullWidthCardLayout
 								cards={row.cards}
 								containerPalette={containerPalette}
 								showAge={showAge}
@@ -570,14 +617,15 @@ export const FlexibleGeneral = ({
 								isFirstRow={!splash.length && i === 0}
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
+								collectionId={collectionId}
 							/>
 						);
 
-					case 'oneCard':
+					case 'oneCardHalfWidth':
 					case 'twoCard':
 					default:
 						return (
-							<StandardCardLayout
+							<HalfWidthCardLayout
 								cards={row.cards}
 								containerPalette={containerPalette}
 								showAge={showAge}

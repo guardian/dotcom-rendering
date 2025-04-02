@@ -1,3 +1,4 @@
+import type { FEArticle } from '../frontend/feArticle';
 import { type ArticleFormat, decideFormat } from '../lib/articleFormat';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import { appsLightboxImages } from '../model/appsLightboxImages';
@@ -12,7 +13,6 @@ import {
 } from '../model/enhanceTableOfContents';
 import { enhancePinnedPost } from '../model/pinnedPost';
 import type { ImageForLightbox } from './content';
-import type { FEArticleType } from './frontend';
 import { type RenderingTarget } from './renderingTarget';
 
 /**
@@ -20,7 +20,7 @@ import { type RenderingTarget } from './renderingTarget';
  *
  * @deprecated Replaced by {@linkcode Article}.
  */
-export type ArticleDeprecated = FEArticleType & {
+export type ArticleDeprecated = FEArticle & {
 	imagesForLightbox: ImageForLightbox[];
 	imagesForAppsLightbox: ImageForAppsLightbox[];
 	tableOfContents?: TableOfContentsItem[];
@@ -32,7 +32,7 @@ export type Article = {
 };
 
 export const enhanceArticleType = (
-	data: FEArticleType,
+	data: FEArticle,
 	renderingTarget: RenderingTarget,
 ): Article => {
 	const format = decideFormat(data.format);

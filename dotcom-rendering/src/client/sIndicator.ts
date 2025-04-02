@@ -21,7 +21,7 @@ const displaySIndicatorRoundel = (
 	const roundelElement =
 		document.getElementById(overallRoundelElementId) ??
 		(() => {
-			const newElem = document.createElement('div');
+			const newElem = document.createElement('a');
 			newElem.id = overallRoundelElementId;
 			document.body.appendChild(newElem);
 			return newElem;
@@ -45,6 +45,17 @@ const displaySIndicatorRoundel = (
 	roundelElement.style.width = '40px';
 	roundelElement.style.height = '40px';
 
+	roundelElement.style.cursor = 'pointer';
+	roundelElement.setAttribute(
+		'href',
+		window.location.hostname === 'localhost'
+			? 'http://localhost:4200/sIndicator'
+			: `https://syndication.${window.location.hostname.replace(
+					/^(m\.|www\.)/i,
+					'',
+			  )}/sIndicator`,
+	);
+
 	switch (status) {
 		case 'loading':
 			roundelElement.title = 'Checking syndication status...';
@@ -66,15 +77,6 @@ const displaySIndicatorRoundel = (
 				'There was an error checking syndication status. Click to check your CAPI key...';
 			roundelElement.style.backgroundColor = 'yellow';
 			roundelElement.textContent = '⚠️';
-			roundelElement.style.cursor = 'pointer';
-			roundelElement.addEventListener(
-				'click',
-				() =>
-					(window.location.href =
-						window.location.hostname === 'localhost'
-							? 'http://localhost:4200/sIndicator'
-							: `https://syndication.${window.location.hostname}/sIndicator`),
-			);
 			break;
 	}
 };

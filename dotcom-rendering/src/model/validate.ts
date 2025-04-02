@@ -3,15 +3,15 @@ import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import type { FEFootballDataPage } from '../feFootballDataPage';
+import type { FEArticle } from '../frontend/feArticle';
 import type { FEFront } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
+import articleSchema from '../frontend/schemas/feArticle.json';
 import frontSchema from '../frontend/schemas/feFront.json';
 import tagPageSchema from '../frontend/schemas/feTagPage.json';
 import type { Block } from '../types/blocks';
 import type { FEEditionsCrosswords } from '../types/editionsCrossword';
-import type { FEArticleType } from '../types/frontend';
 import type { FENewslettersPageType } from '../types/newslettersPage';
-import articleSchema from './article-schema.json';
 import blockSchema from './block-schema.json';
 import editionsCrosswordSchema from './editions-crossword-schema.json';
 import footballDataPageSchema from './fe-football-data-page-schema.json';
@@ -27,7 +27,7 @@ const options: Options = {
 const ajv = new Ajv(options);
 addFormats(ajv);
 
-const validateArticle = ajv.compile<FEArticleType>(articleSchema);
+const validateArticle = ajv.compile<FEArticle>(articleSchema);
 const validateFront = ajv.compile<FEFront>(frontSchema);
 const validateTagPage = ajv.compile<FETagPage>(tagPageSchema);
 const validateAllEditorialNewslettersPage = ajv.compile<FENewslettersPageType>(
@@ -41,7 +41,7 @@ const validateFootballDataPage = ajv.compile<FEFootballDataPage>(
 	footballDataPageSchema,
 );
 
-export const validateAsArticleType = (data: unknown): FEArticleType => {
+export const validateAsFEArticle = (data: unknown): FEArticle => {
 	if (validateArticle(data)) return data;
 
 	const url =
