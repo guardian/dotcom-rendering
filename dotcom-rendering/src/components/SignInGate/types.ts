@@ -118,6 +118,7 @@ export interface AuxiaProxyGetTreatmentsPayload {
 	sectionId: string;
 	tagIds: string[];
 	gateDismissCount: number;
+	countryCode: string;
 }
 
 export interface AuxiaProxyGetTreatmentsResponse {
@@ -162,6 +163,7 @@ export interface AuxiaGateReaderPersonalData {
 	browserId: string | undefined;
 	dailyArticleCount: number;
 	isSupporter: boolean;
+	countryCode: string;
 }
 
 export interface AuxiaGateDisplayData {
