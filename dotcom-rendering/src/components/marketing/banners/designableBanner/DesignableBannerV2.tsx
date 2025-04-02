@@ -715,7 +715,7 @@ const styles = {
 			height: 41px;
 			justify-content: center;
 			align-items: center;
-			margin-top: ${space[9]}px;
+			margin-top: ${space[5]}px;
 			margin-right: ${space[2]}px;
 			margin-left: 22px;
 		}
