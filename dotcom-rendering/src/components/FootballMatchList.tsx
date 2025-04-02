@@ -91,7 +91,7 @@ const Day = (props: { children: ReactNode }) => (
 		css={css`
 			${textSansBold14}
 			grid-column: centre-column-start / centre-column-end;
-			border-top: 1px solid ${palette('--football-list-border')};
+			border-top: 1px solid ${palette('--sport-list-border')};
 			padding-top: ${space[2]}px;
 
 			${from.leftCol} {
@@ -110,13 +110,13 @@ const CompetitionName = (props: { children: ReactNode }) => (
 			${textSansBold14}
 			grid-column: centre-column-start / centre-column-end;
 			color: ${palette('--football-competition-text')};
-			border-top: 1px solid ${palette('--football-top-border')};
+			border-top: 1px solid ${palette('--sport-top-border')};
 			padding: ${space[2]}px;
-			background-color: ${palette('--football-match-list-background')};
+			background-color: ${palette('--sport-list-background')};
 			margin-top: ${space[9]}px;
 
 			${from.leftCol} {
-				border-top-color: ${palette('--football-list-border')};
+				border-top-color: ${palette('--sport-list-border')};
 				background-color: transparent;
 				margin-top: 0;
 				padding: ${space[1]}px 0 0;
@@ -192,12 +192,12 @@ export const shouldRenderMatchLink = (matchDateTime: Date, now: Date) =>
 	matchDateTime.getTime() - now.getTime() <= 72 * 60 * 60 * 1000;
 
 const matchListItemStyles = css`
-	background-color: ${palette('--football-match-list-background')};
-	border: 1px solid ${palette('--football-list-border')};
+	background-color: ${palette('--sport-list-background')};
+	border: 1px solid ${palette('--sport-list-border')};
 
 	${from.leftCol} {
 		&:first-of-type {
-			border-top-color: ${palette('--football-top-border')};
+			border-top-color: ${palette('--sport-top-border')};
 		}
 	}
 `;

@@ -6263,6 +6263,10 @@ const paletteColours = {
 		light: cricketScoreboardLinkText,
 		dark: cricketScoreboardLinkText,
 	},
+	'--cricket-scorecard-divider': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
+	},
 	'--crossword-anagram-helper-background': {
 		light: crosswordAnagramHelperBackgroundLight,
 		dark: crosswordAnagramHelperBackgroundDark,
@@ -6583,17 +6587,9 @@ const paletteColours = {
 		light: () => '#3DB540',
 		dark: () => '#3DB540',
 	},
-	'--football-list-border': {
-		light: () => sourcePalette.neutral[93],
-		dark: () => sourcePalette.neutral[38],
-	},
 	'--football-match-hover': {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[38],
-	},
-	'--football-match-list-background': {
-		light: () => sourcePalette.neutral[97],
-		dark: () => sourcePalette.neutral[20],
 	},
 	'--football-match-list-error': {
 		light: () => sourcePalette.error[400],
@@ -6610,10 +6606,6 @@ const paletteColours = {
 	'--football-table-divider': {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],
-	},
-	'--football-top-border': {
-		light: () => sourcePalette.sport[500],
-		dark: () => sourcePalette.neutral[60],
 	},
 	'--front-container-background': {
 		light: () => sourcePalette.neutral[100],
@@ -7187,6 +7179,18 @@ const paletteColours = {
 	'--speech-bubble-background': {
 		light: speechBubbleBackgroundLight,
 		dark: speechBubbleBackgroundLight,
+	},
+	'--sport-list-background': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--sport-list-border': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[38],
+	},
+	'--sport-top-border': {
+		light: () => sourcePalette.sport[500],
+		dark: () => sourcePalette.neutral[60],
 	},
 	'--stacked-progress-background': {
 		light: () => sourcePalette.neutral[86],
