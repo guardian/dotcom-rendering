@@ -564,7 +564,7 @@ const styles = {
 			max-width: 1140px;
 		}
 		${from.wide} {
-			grid-template-columns: auto 460px 380px 1fr;
+			grid-template-columns: auto 460px 485px auto;
 		}
 	`,
 	verticalLine: css`
@@ -595,6 +595,10 @@ const styles = {
 			position: sticky;
 			top: 10px;
 			padding-left: ${space[8]}px;
+		}
+
+		${from.wide} {
+			justify-self: end;
 		}
 	`,
 	// hacky change until we can rework the designable banner header with the correct styles
@@ -705,6 +709,14 @@ const styles = {
 			grid-column: 3;
 			grid-row: 1;
 			grid-row-end: 3;
+		}
+
+		${until.wide} {
+			max-width: 380px;
+		}
+
+		${from.wide} {
+			max-width: 485px;
 		}
 	`,
 	guardianLogoContainer: css`
