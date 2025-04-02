@@ -27,7 +27,9 @@ describe('FlexibleGeneral', () => {
 		]);
 	});
 	it('Should return a one card full width row layout if one immersive card is provided', () => {
-		expect(decideCardPositions([boostedCard])).toEqual([
+		expect(
+			decideCardPositions([{ ...standardCard, isImmersive: true }]),
+		).toEqual([
 			{
 				layout: 'oneCardFullWidth',
 				cards: [{ ...standardCard, isImmersive: true }],
