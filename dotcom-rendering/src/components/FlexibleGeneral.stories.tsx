@@ -554,3 +554,18 @@ export const SecondaryContainerStandardCards: Story = {
 		},
 	},
 };
+
+export const ContainerWithImmersiveCardInSplashAndNonSplash: Story = {
+	name: 'Secondary container with standard cards',
+	args: {
+		frontSectionTitle: 'Secondary container standard cards',
+		containerLevel: 'Secondary',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			splash: [
+				{ ...splashCard, isImmersive: true, supportingContent: [] },
+			],
+			standard: [{ ...trails[0], isImmersive: true }],
+		},
+	},
+};
