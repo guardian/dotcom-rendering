@@ -35,8 +35,8 @@ const maybeWipeUserData = async (
 	if (userHasLoggedOut || userHasRemovedConsent || brazeHasBeenDisabled) {
 		try {
 			if (apiKey) {
-				const appboy = await getInitialisedBraze(apiKey);
-				appboy.wipeData();
+				const braze = await getInitialisedBraze(apiKey);
+				braze.wipeData();
 			}
 			LocalMessageCache.clear();
 			clearHasCurrentBrazeUser();
@@ -98,7 +98,7 @@ export const buildBrazeMessaging = async (
 			'braze-sdk-load',
 		);
 
-		const appboy = await getInitialisedBraze(
+		const braze = await getInitialisedBraze(
 			dependenciesResult.data.apiKey as string,
 		);
 
@@ -116,14 +116,14 @@ export const buildBrazeMessaging = async (
 		};
 
 		setHasCurrentBrazeUser();
-		appboy.changeUser(dependenciesResult.data.brazeUuid as string);
-		appboy.openSession();
+		braze.changeUser(dependenciesResult.data.brazeUuid as string);
+		braze.openSession();
 
 		const brazeCards = window.guardian.config.switches.brazeContentCards
-			? new BrazeCards(appboy, errorHandler)
+			? new BrazeCards(braze, errorHandler)
 			: new NullBrazeCards();
 		const brazeMessages = new BrazeMessages(
-			appboy,
+			braze,
 			LocalMessageCache,
 			errorHandler,
 			canRenderBrazeMsg,
