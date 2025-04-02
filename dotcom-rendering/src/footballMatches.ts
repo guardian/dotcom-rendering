@@ -13,8 +13,12 @@ import { error, ok, type Result } from './lib/result';
 import type { NavType } from './model/extract-nav';
 import type { FooterType } from './types/footer';
 
-export type TeamScore = {
+export type Team = {
 	name: string;
+	id: string;
+};
+
+export type TeamScore = Team & {
 	score?: number;
 };
 
@@ -32,8 +36,8 @@ export type MatchResult = MatchData & {
 
 export type MatchFixture = MatchData & {
 	kind: 'Fixture';
-	homeTeam: string;
-	awayTeam: string;
+	homeTeam: Team;
+	awayTeam: Team;
 };
 
 export type LiveMatch = MatchData & {
@@ -205,8 +209,14 @@ const parseFixture = (
 
 	return ok({
 		kind: 'Fixture',
-		homeTeam: cleanTeamName(feFixture.homeTeam.name),
-		awayTeam: cleanTeamName(feFixture.awayTeam.name),
+		homeTeam: {
+			name: cleanTeamName(feFixture.homeTeam.name),
+			id: feFixture.homeTeam.id,
+		},
+		awayTeam: {
+			name: cleanTeamName(feFixture.awayTeam.name),
+			id: feFixture.awayTeam.id,
+		},
 		dateTimeISOString: date.value,
 		paId: feFixture.id,
 	});
@@ -233,10 +243,12 @@ const parseMatchResult = (
 		homeTeam: {
 			name: cleanTeamName(feResult.homeTeam.name),
 			score: feResult.homeTeam.score,
+			id: feResult.homeTeam.id,
 		},
 		awayTeam: {
 			name: cleanTeamName(feResult.awayTeam.name),
 			score: feResult.awayTeam.score,
+			id: feResult.awayTeam.id,
 		},
 		dateTimeISOString: date.value,
 		paId: feResult.id,
@@ -265,10 +277,12 @@ const parseLiveMatch = (
 		homeTeam: {
 			name: cleanTeamName(feMatchDay.homeTeam.name),
 			score: feMatchDay.homeTeam.score,
+			id: feMatchDay.homeTeam.id,
 		},
 		awayTeam: {
 			name: cleanTeamName(feMatchDay.awayTeam.name),
 			score: feMatchDay.awayTeam.score,
+			id: feMatchDay.awayTeam.id,
 		},
 		dateTimeISOString: date.value,
 		paId: feMatchDay.id,
