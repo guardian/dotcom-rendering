@@ -305,7 +305,7 @@ importers:
         specifier: 7.27.0
         version: 7.27.0
       '@braze/web-sdk':
-        specifier: ^5.8.1
+        specifier: 5.8.1
         version: 5.8.1
       '@creditkarma/thrift-server-core':
         specifier: 1.0.4
