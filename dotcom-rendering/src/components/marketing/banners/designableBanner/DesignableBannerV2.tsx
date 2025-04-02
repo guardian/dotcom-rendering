@@ -553,7 +553,7 @@ const styles = {
 
 		${from.desktop} {
 			padding: ${space[3]}px ${space[8]}px ${space[6]}px ${space[3]}px;
-			grid-template-columns: auto 380px 300px 1fr;
+			grid-template-columns: auto 380px auto auto;
 			grid-template-rows: auto 1fr auto;
 			width: 100%;
 			max-width: 980px;
@@ -568,7 +568,7 @@ const styles = {
 		}
 	`,
 	verticalLine: css`
-		${from.desktop} {
+		${from.leftCol} {
 			background-color: ${neutral[0]};
 			width: 1px;
 			grid-column: 2;
@@ -709,7 +709,7 @@ const styles = {
 	`,
 	guardianLogoContainer: css`
 		display: none;
-		${from.desktop} {
+		${from.leftCol} {
 			display: flex;
 			width: 128px;
 			height: 41px;
