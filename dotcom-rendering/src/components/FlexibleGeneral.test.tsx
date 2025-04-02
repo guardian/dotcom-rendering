@@ -26,6 +26,14 @@ describe('FlexibleGeneral', () => {
 			{ layout: 'oneCardBoosted', cards: [boostedCard] },
 		]);
 	});
+	it('Should return a one card boosted row layout if one immersive card is provided', () => {
+		expect(decideCardPositions([boostedCard])).toEqual([
+			{
+				layout: 'oneCardBoosted',
+				cards: [{ ...standardCard, isImmersive: true }],
+			},
+		]);
+	});
 	it('Should return a two card row layout if two standard cards are provided', () => {
 		expect(decideCardPositions([standardCard, standardCard])).toEqual([
 			{ layout: 'twoCard', cards: [standardCard, standardCard] },
