@@ -34,7 +34,7 @@ type Props = {
 	collectionId: number;
 };
 
-type RowLayout = 'oneCard' | 'oneCardBoosted' | 'twoCard';
+type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
 
 type GroupedRow = {
 	layout: RowLayout;
@@ -62,7 +62,7 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 			card.isImmersive ||
 			(card.boostLevel && card.boostLevel !== 'default')
 		) {
-			return [...acc, createNewRow('oneCardBoosted', card)];
+			return [...acc, createNewRow('oneCardFullWidth', card)];
 		}
 
 		// Otherwise we need to check the status of the current row
@@ -70,12 +70,12 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 
 		// If the current row has one card, we can add one more standard card to it
 		// We change the row layout to 'twoCard' to indicate that it is now full
-		if (row && row.layout === 'oneCard') {
+		if (row && row.layout === 'oneCardHalfWidth') {
 			return [...acc.slice(0, acc.length - 1), addCardToRow(row, card)];
 		}
 		// Otherwise we consider the row to be 'full' and start a new row
 		else {
-			return [...acc, createNewRow('oneCard', card)];
+			return [...acc, createNewRow('oneCardHalfWidth', card)];
 		}
 	}, []);
 };
@@ -375,7 +375,7 @@ const decideCardProperties = (
 	}
 };
 
-const BoostedCardLayout = ({
+const FullWidthCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
@@ -475,7 +475,7 @@ const BoostedCardLayout = ({
 	);
 };
 
-const StandardCardLayout = ({
+const HalfWidthCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
