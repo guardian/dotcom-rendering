@@ -46,22 +46,18 @@ const standardCards = standards.map((card, index) => {
 		}) satisfies DCRFrontCard;
 
 	switch (index + 1) {
-		// The second card has two sublinks
 		case 2:
 			return enhanceCardFields({ supportingContent: getSublinks(2) });
-		// The third card is boosted and has one sublink
 		case 3:
 			return enhanceCardFields({
 				boostLevel: 'boost',
 				supportingContent: getSublinks(1),
 			});
-		// The fifth card is megaboosted and has two sublinks
 		case 5:
 			return enhanceCardFields({
 				boostLevel: 'megaboost',
 				supportingContent: getSublinks(2),
 			});
-
 		default:
 			return enhanceCardFields({});
 	}

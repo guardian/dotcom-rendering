@@ -439,29 +439,71 @@ export const trails: [
 		isImmersive: false,
 	},
 	{
-		url: 'https://www.theguardian.com/uk-news/2021/feb/16/qcovid-how-improved-algorithm-can-identify-more-higher-risk-adults',
+		url: 'https://www.theguardian.com/world/video/2025/mar/06/how-nanoplastics-are-invading-our-bodies-video-report',
 		showByline: false,
-		byline: 'Sarah Boseley Health editor',
+		byline: ' Neelam Tailor, Alex Healey, Ali Assaf, Steve Glew, Ryan Baxter',
 		image: {
-			src: 'https://media.guim.co.uk/6d152e60fdb37dbbc063a68e2cffccf97cdab183/0_40_5458_3275/master/5458.jpg',
-			altText: 'A covid vaccine',
+			src: 'https://media.guim.co.uk/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/91_0_1800_1080/master/1800.jpg',
+			altText:
+				'Plastics are everywhere, but their smallest fragments – nanoplastics – are making their way into the deepest parts of our bodies, including our brains and breast milk',
 		},
 		format: {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.News,
-			design: ArticleDesign.Analysis,
+			design: ArticleDesign.Video,
 		},
-		webPublicationDate: '2021-02-16T18:42:44.000Z',
-		headline:
-			'QCovid: how improved algorithm can identify more higher-risk adults',
-		dataLinkName: 'news | group-0 | card-@1',
+		webPublicationDate: '2025-03-06T10:14:00.000Z',
+		headline: 'How plastics are invading our brain cells – video',
+		dataLinkName: 'media | group-0 | card-@11',
 		showQuotedHeadline: false,
-		mainMedia: undefined,
+		mainMedia: {
+			type: 'Video',
+			id: '966acc06-a238-4d5f-b477-816eec0476f3',
+			videoId: '4JUvvbpx2So',
+			duration: 322,
+			title: 'How plastics are invading our brain cells – video',
+			width: 500,
+			height: 300,
+			origin: 'The Guardian',
+			images: [
+				{
+					url: 'https://media.guim.co.uk/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/0_0_1920_1080/1000.jpg',
+					width: 1000,
+				},
+				{
+					url: 'https://media.guim.co.uk/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/0_0_1920_1080/500.jpg',
+					width: 500,
+				},
+				{
+					url: 'https://media.guim.co.uk/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/0_0_1920_1080/140.jpg',
+					width: 140,
+				},
+				{
+					url: 'https://media.guim.co.uk/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/0_0_1920_1080/1920.jpg',
+					width: 1920,
+				},
+			],
+			expired: false,
+		},
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
 		showMainVideo: true,
 		isImmersive: false,
+		trailText:
+			'Plastics are everywhere, but their smallest fragments – nanoplastics – are making their way into the deepest parts of our bodies, including our brains and breast milk',
+		supportingContent: [
+			{
+				format: {
+					display: ArticleDisplay.Standard,
+					theme: Pillar.News,
+					design: ArticleDesign.Standard,
+				},
+				headline:
+					'Edwyn Collins: ‘Could an Orange Juice reunion ever be on the cards? No!’',
+				url: '/culture/2025/mar/06/edwyn-collins-could-an-orange-juice-reunion-ever-be-on-the-cards-no',
+			},
+		],
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/28/eu-parliament-declares-climate-emergency',

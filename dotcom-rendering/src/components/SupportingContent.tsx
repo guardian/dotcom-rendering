@@ -16,6 +16,7 @@ type Props = {
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
 	isDynamo?: boolean;
+	isMedia?: boolean;
 	/** Allows sublinks container to have a background colour on mobile screen sizes */
 	fillBackgroundOnMobile?: boolean;
 	/** Allows sublinks container to have a background colour on desktop screen sizes */
@@ -120,19 +121,23 @@ const wrapperStyles = css`
 	}
 `;
 
-const backgroundFillMobile = css`
+const backgroundFillMobile = (isMedia: boolean) => css`
 	${until.tablet} {
 		padding: ${space[2]}px;
 		padding-bottom: ${space[3]}px;
-		background-color: ${palette('--card-sublinks-background')};
+		background-color: ${isMedia
+			? palette('--card-media-sublinks-background')
+			: palette('--card-sublinks-background')};
 	}
 `;
 
-const backgroundFillDesktop = css`
+const backgroundFillDesktop = (isMedia: boolean) => css`
 	${from.tablet} {
 		padding: ${space[2]}px;
 		padding-bottom: ${space[3]}px;
-		background-color: ${palette('--card-sublinks-background')};
+		background-color: ${isMedia
+			? palette('--card-media-sublinks-background')
+			: palette('--card-sublinks-background')};
 	}
 `;
 
@@ -141,6 +146,7 @@ export const SupportingContent = ({
 	alignment,
 	containerPalette,
 	isDynamo,
+	isMedia = false,
 	fillBackgroundOnMobile = false,
 	fillBackgroundOnDesktop = false,
 }: Props) => {
@@ -153,8 +159,8 @@ export const SupportingContent = ({
 				wrapperStyles,
 				baseGrid,
 				(isDynamo ?? alignment === 'horizontal') && horizontalGrid,
-				fillBackgroundOnMobile && backgroundFillMobile,
-				fillBackgroundOnDesktop && backgroundFillDesktop,
+				fillBackgroundOnMobile && backgroundFillMobile(isMedia),
+				fillBackgroundOnDesktop && backgroundFillDesktop(isMedia),
 			]}
 		>
 			{supportingContent.map((subLink, index) => {
