@@ -19,7 +19,7 @@ import {
 	setHasCurrentBrazeUser,
 } from '../hasCurrentBrazeUser';
 import { checkBrazeDependencies } from './checkBrazeDependencies';
-import { getInitialisedAppboy } from './initialiseAppboy';
+import { getInitialisedBraze } from './initialiseBraze';
 
 const maybeWipeUserData = async (
 	apiKey?: string,
@@ -35,7 +35,7 @@ const maybeWipeUserData = async (
 	if (userHasLoggedOut || userHasRemovedConsent || brazeHasBeenDisabled) {
 		try {
 			if (apiKey) {
-				const appboy = await getInitialisedAppboy(apiKey);
+				const appboy = await getInitialisedBraze(apiKey);
 				appboy.wipeData();
 			}
 			LocalMessageCache.clear();
@@ -98,7 +98,7 @@ export const buildBrazeMessaging = async (
 			'braze-sdk-load',
 		);
 
-		const appboy = await getInitialisedAppboy(
+		const appboy = await getInitialisedBraze(
 			dependenciesResult.data.apiKey as string,
 		);
 
