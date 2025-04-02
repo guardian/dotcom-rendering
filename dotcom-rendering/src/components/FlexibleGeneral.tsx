@@ -87,21 +87,18 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
  * It can be used in any slot within the container.
  */
 const ImmersiveCardLayout = ({
-	cards,
+	card,
 	containerPalette,
 	absoluteServerTimes,
 	imageLoading,
 	collectionId,
 }: {
-	cards: DCRFrontCard[];
+	card: DCRFrontCard;
 	containerPalette?: DCRContainerPalette;
 	absoluteServerTimes: boolean;
 	imageLoading: Loading;
 	collectionId: number;
 }) => {
-	const card = cards[0];
-	if (!card) return null;
-
 	return (
 		<UL padBottom={true}>
 			<LI key={card.url} padSides={true}>
@@ -263,7 +260,7 @@ export const SplashCardLayout = ({
 	if (shouldShowImmersive) {
 		return (
 			<ImmersiveCardLayout
-				cards={cards}
+				card={card}
 				containerPalette={containerPalette}
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
@@ -423,7 +420,7 @@ const FullWidthCardLayout = ({
 	if (shouldShowImmersive) {
 		return (
 			<ImmersiveCardLayout
-				cards={cards}
+				card={card}
 				containerPalette={containerPalette}
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
