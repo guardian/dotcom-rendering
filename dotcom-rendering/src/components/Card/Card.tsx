@@ -693,6 +693,13 @@ export const Card = ({
 		if (!hasSublinks) return null;
 		if (sublinkPosition === 'none') return null;
 
+		const fillBackgroundOnMobile =
+			!!isFlexSplash ||
+			(isBetaContainer &&
+				!!image &&
+				(imagePositionOnMobile === 'bottom' || isMediaCard(format)) &&
+				media?.type !== 'avatar');
+
 		const Sublinks = () => (
 			<SupportingContent
 				supportingContent={supportingContent}
@@ -700,13 +707,7 @@ export const Card = ({
 				alignment={supportingContentAlignment}
 				isDynamo={isDynamo}
 				isMedia={isMediaCard(format)}
-				fillBackgroundOnMobile={
-					!!isFlexSplash ||
-					(isBetaContainer &&
-						!!image &&
-						(imagePositionOnMobile === 'bottom' ||
-							isMediaCard(format)))
-				}
+				fillBackgroundOnMobile={fillBackgroundOnMobile}
 				fillBackgroundOnDesktop={isBetaContainer && isMediaCard(format)}
 			/>
 		);
