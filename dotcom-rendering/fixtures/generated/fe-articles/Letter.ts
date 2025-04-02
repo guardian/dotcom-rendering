@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticle } from '../../../src/frontend/feArticle';
 
-export const Letter: FEArticleType = {
+export const Letter: FEArticle = {
 	version: 3,
 	headline: 'Why is a woman’s work never done?',
 	standfirst:

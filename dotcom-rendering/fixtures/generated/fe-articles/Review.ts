@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticle } from '../../../src/frontend/feArticle';
 
-export const Review: FEArticleType = {
+export const Review: FEArticle = {
 	version: 3,
 	headline:
 		'Sex Education season two review – fast, funny and still not for the faint-hearted',

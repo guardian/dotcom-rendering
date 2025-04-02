@@ -179,9 +179,9 @@ const requests = articles.map((article) => {
 
 			// Write the new frontend fixture data
 			const frontendContents = `${HEADER}
-				import type { FEArticleType } from '../../../src/types/frontend';
+				import type { FEArticle } from '../../../src/frontend/feArticle';
 
-				export const ${article.name}: FEArticleType = ${JSON.stringify(
+				export const ${article.name}: FEArticle = ${JSON.stringify(
 					frontendData,
 					null,
 					4,
