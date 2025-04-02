@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticle } from '../../../src/frontend/feArticle';
 
-export const MatchReport: FEArticleType = {
+export const MatchReport: FEArticle = {
 	version: 3,
 	headline:
 		'André Ayew sparks Swansea victory over Norwich to close gap at top',

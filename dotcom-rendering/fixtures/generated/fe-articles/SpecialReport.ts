@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticle } from '../../../src/frontend/feArticle';
 
-export const SpecialReport: FEArticleType = {
+export const SpecialReport: FEArticle = {
 	version: 3,
 	headline:
 		'How do we rein in the fossil fuel industry? Here are eight ideas',

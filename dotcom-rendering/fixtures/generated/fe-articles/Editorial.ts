@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticle } from '../../../src/frontend/feArticle';
 
-export const Editorial: FEArticleType = {
+export const Editorial: FEArticle = {
 	version: 3,
 	headline:
 		'The Guardian view on quarantine: an old method and a vital one   ',

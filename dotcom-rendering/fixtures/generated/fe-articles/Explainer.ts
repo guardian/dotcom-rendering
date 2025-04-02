@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticle } from '../../../src/frontend/feArticle';
 
-export const Explainer: FEArticleType = {
+export const Explainer: FEArticle = {
 	version: 3,
 	headline:
 		'What is an Indigenous treaty and how would it work in Australia?',
