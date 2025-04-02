@@ -1,4 +1,4 @@
-import * as braze from '@braze/web-sdk';
+import type * as braze from '@braze/web-sdk';
 import { isUndefined, log } from '@guardian/libs';
 
 const SDK_OPTIONS: braze.InitializationOptions = {
