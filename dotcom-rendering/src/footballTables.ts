@@ -69,7 +69,6 @@ const parseTable = (
 	return ok({
 		groupName: feGroup.round.name,
 		entries: parsedEntries.value,
-		hasLinkToFullTable: false, // TODO: calculate linkToFullTable
 	});
 };
 
