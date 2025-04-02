@@ -57,8 +57,11 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 	});
 
 	return cards.reduce<GroupedCards>((acc, card) => {
-		// Early return if the card is boosted since it takes up a whole row
-		if (card.boostLevel && card.boostLevel !== 'default') {
+		// Early return if the card is boosted or immersive since it takes up a whole row
+		if (
+			card.isImmersive ||
+			(card.boostLevel && card.boostLevel !== 'default')
+		) {
 			return [...acc, createNewRow('oneCardBoosted', card)];
 		}
 
@@ -409,8 +412,7 @@ const BoostedCardLayout = ({
 		card.avatarUrl,
 	);
 
-	// TODO: replace with live data from fronts tool - used for testing
-	const shouldShowImmersive = false;
+	const shouldShowImmersive = card.isImmersive;
 
 	if (shouldShowImmersive) {
 		return (
