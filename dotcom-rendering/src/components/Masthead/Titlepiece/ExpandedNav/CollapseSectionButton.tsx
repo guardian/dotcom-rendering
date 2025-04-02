@@ -27,7 +27,7 @@ const showColumnLinksStyle = (columnInputId: string) => css`
     */
 	/* stylelint-disable-next-line selector-type-no-unknown */
 	${`#${columnInputId}`}:checked ~ & {
-		:before {
+		::before {
 			margin-top: ${space[2]}px;
 			transform: rotate(-135deg);
 		}
@@ -45,7 +45,7 @@ const collapseColumnButton = css`
 	user-select: none;
 	text-transform: capitalize;
 
-	:before {
+	::before {
 		margin-top: ${space[1]}px;
 		left: ${space[6]}px;
 		position: absolute;

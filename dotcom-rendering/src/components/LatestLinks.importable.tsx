@@ -55,7 +55,7 @@ const dividerStyles = css`
 const bold = css`
 	${textSansBold14};
 
-	:before {
+	::before {
 		content: '';
 		height: 0.75em;
 		width: 0.75em;

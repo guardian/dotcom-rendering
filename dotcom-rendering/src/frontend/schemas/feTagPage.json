@@ -596,6 +596,9 @@
                             "boostLevel": {
                                 "$ref": "#/definitions/BoostLevel"
                             },
+                            "isImmersive": {
+                                "type": "boolean"
+                            },
                             "showBoostedHeadline": {
                                 "type": "boolean"
                             },

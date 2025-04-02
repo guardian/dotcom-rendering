@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, until } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../../../lib/articleFormat';
 import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
@@ -9,10 +9,10 @@ import { FormatBoundary } from '../../FormatBoundary';
 type Props = {
 	children: React.ReactNode;
 	format: ArticleFormat;
+	showTopBarDesktop: boolean;
+	showTopBarMobile: boolean;
+	isOnwardContent: boolean;
 	containerPalette?: DCRContainerPalette;
-	showTopBarDesktop?: boolean;
-	showTopBarMobile?: boolean;
-	isOnwardContent?: boolean;
 };
 
 const baseCardStyles = css`
@@ -62,8 +62,8 @@ const sublinkHoverStyles = css`
 	}
 `;
 
-const desktopTopBarStyles = css`
-	:before {
+const topBarStyles = css`
+	::before {
 		border-top: 1px solid ${palette('--card-border-top')};
 		content: '';
 		z-index: 2;
@@ -72,10 +72,14 @@ const desktopTopBarStyles = css`
 		background-color: unset;
 	}
 `;
-
 const mobileTopBarStyles = css`
 	${until.tablet} {
-		${desktopTopBarStyles}
+		${topBarStyles}
+	}
+`;
+const desktopTopBarStyles = css`
+	${from.tablet} {
+		${topBarStyles}
 	}
 `;
 
@@ -91,10 +95,10 @@ const onwardContentStyles = css`
 export const CardWrapper = ({
 	children,
 	format,
+	showTopBarDesktop,
+	showTopBarMobile,
+	isOnwardContent,
 	containerPalette,
-	showTopBarDesktop = true,
-	showTopBarMobile = false,
-	isOnwardContent = false,
 }: Props) => {
 	return (
 		<FormatBoundary format={format}>

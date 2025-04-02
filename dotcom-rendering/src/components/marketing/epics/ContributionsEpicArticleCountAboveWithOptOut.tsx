@@ -453,7 +453,7 @@ const privacySettingsLinkStyles = css`
 `;
 
 const caretStyles = css`
-	&:before {
+	&::before {
 		content: '';
 		display: block;
 		position: absolute;
@@ -475,7 +475,7 @@ const caretStyles = css`
 		}
 	}
 
-	&:after {
+	&::after {
 		content: '';
 		display: block;
 		position: absolute;

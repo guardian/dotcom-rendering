@@ -147,8 +147,8 @@ const separator = css`
 	text-align: center;
 	margin-top: ${space[4]}px;
 
-	:before,
-	:after {
+	::before,
+	::after {
 		content: '';
 		flex: 1;
 		border-bottom: 1px solid ${line.primary};

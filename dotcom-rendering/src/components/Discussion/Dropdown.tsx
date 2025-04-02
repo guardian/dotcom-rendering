@@ -85,7 +85,7 @@ const firstStyles = css`
 const activeStyles = css`
 	font-weight: bold;
 
-	:after {
+	::after {
 		content: '';
 		border: 2px solid ${schemedPalette('--discussion-accent-text')};
 		border-top: 0px;
@@ -120,12 +120,12 @@ const buttonStyles = css`
 	text-decoration: none;
 
 	:hover {
-		:after {
+		::after {
 			transform: translateY(0) rotate(45deg);
 		}
 	}
 
-	:after {
+	::after {
 		content: '';
 		display: inline-block;
 		width: 5px;
@@ -141,10 +141,10 @@ const buttonStyles = css`
 `;
 
 const expandedStyles = css`
-	:hover:after {
+	:hover::after {
 		transform: translateY(-1px) rotate(-135deg);
 	}
-	:after {
+	::after {
 		transform: translateY(1px) rotate(-135deg);
 	}
 `;

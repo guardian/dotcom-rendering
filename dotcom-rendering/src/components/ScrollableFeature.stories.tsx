@@ -41,6 +41,7 @@ const frontCard = {
 	byline: 'Byline text',
 	showByline: true,
 	dataLinkName: 'data-link-name',
+	isImmersive: false,
 } satisfies DCRFrontCard;
 
 const trails = new Array(6)

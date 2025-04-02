@@ -172,7 +172,7 @@ const decideSplashCardProperties = (
 	}
 };
 
-export const SplashCardLayout = ({
+const SplashCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
@@ -196,9 +196,7 @@ export const SplashCardLayout = ({
 	const card = cards[0];
 	if (!card) return null;
 
-	const isImmersive = false; // TODO: replace with live data from fronts tool - used for testing
-	const shouldShowImmersive = isImmersive && !isMediaCard(card.format);
-
+	const shouldShowImmersive = card.isImmersive;
 	if (shouldShowImmersive) {
 		return (
 			<UL>
@@ -347,7 +345,7 @@ const decideCardProperties = (
 	}
 };
 
-export const BoostedCardLayout = ({
+const BoostedCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
@@ -431,12 +429,11 @@ export const BoostedCardLayout = ({
 	);
 };
 
-export const StandardCardLayout = ({
+const StandardCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
 	absoluteServerTimes,
-	showImage = true,
 	imageLoading,
 	isFirstRow,
 	isFirstStandardRow,
@@ -451,7 +448,6 @@ export const StandardCardLayout = ({
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
-	showImage?: boolean;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
@@ -485,7 +481,7 @@ export const StandardCardLayout = ({
 							containerType="flexible/general"
 							showAge={showAge}
 							absoluteServerTimes={absoluteServerTimes}
-							image={showImage ? card.image : undefined}
+							image={card.image}
 							imageLoading={imageLoading}
 							imagePositionOnDesktop="left"
 							supportingContent={card.supportingContent?.slice(
@@ -506,7 +502,8 @@ export const StandardCardLayout = ({
 							showTopBarMobile={
 								!isFirstRow ||
 								(containerLevel === 'Primary' &&
-									!isMediaCard(card.format))
+									!isMediaCard(card.format)) ||
+								(containerLevel !== 'Primary' && cardIndex > 0)
 							}
 							trailText={undefined}
 							// On standard cards, we increase the headline size if the trail image has been hidden

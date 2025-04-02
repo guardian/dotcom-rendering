@@ -67,10 +67,7 @@ export const buildBrazeMessaging = async (
 		};
 	}
 
-	const dependenciesResult = await checkBrazeDependencies(
-		isSignedIn,
-		idApiUrl,
-	);
+	const dependenciesResult = await checkBrazeDependencies(isSignedIn);
 
 	if (!dependenciesResult.isSuccessful) {
 		const { failure, data } = dependenciesResult;

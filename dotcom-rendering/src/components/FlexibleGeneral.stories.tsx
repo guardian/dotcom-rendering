@@ -263,6 +263,7 @@ const liveUpdatesCard = {
 		design: ArticleDesign.Standard,
 		display: ArticleDisplay.Standard,
 	}),
+	isImmersive: false,
 } satisfies DCRFrontCard;
 
 export const FourSublinkSplashWithLiveUpdates: Story = {
@@ -409,6 +410,45 @@ export const DefaultSplashWithLiveUpdates: Story = {
 	},
 };
 
+const slideshowCard = {
+	...liveUpdatesCard,
+	mainMedia: undefined,
+	slideshowImages: [
+		{
+			imageSrc:
+				'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/1000.jpg',
+		},
+		{
+			imageSrc:
+				'https://media.guim.co.uk/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg',
+		},
+		{
+			imageSrc:
+				'https://media.guim.co.uk/df5aea6391e21b5a5d2d25fd9aad81d497f99d42/0_45_3062_1837/master/3062.jpg',
+		},
+		{
+			imageSrc:
+				'https://media.guim.co.uk/5ebec1a8d662f0da39887dae16e4b2720379246e/0_0_5000_3000/master/5000.jpg',
+		},
+		{
+			imageSrc:
+				'https://media.guim.co.uk/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg',
+		},
+	],
+} satisfies DCRFrontCard;
+
+export const DefaultSplashWithLiveUpdatesAndSlideshow: Story = {
+	name: 'Standard splash with live updates and slideshow',
+	args: {
+		frontSectionTitle: 'Standard splash with live updates and slideshow',
+		groupedTrails: {
+			...defaultGroupedTrails,
+
+			splash: [{ ...slideshowCard }],
+		},
+	},
+};
+
 export const BoostedSplashWithLiveUpdates: Story = {
 	name: 'Boosted splash with live updates',
 	args: {
@@ -502,3 +542,15 @@ export const WithSpecialPaletteVariations = {
 		</>
 	),
 } satisfies Story;
+
+export const SecondaryContainerStandardCards: Story = {
+	name: 'Secondary container with standard cards',
+	args: {
+		frontSectionTitle: 'Secondary container standard cards',
+		containerLevel: 'Secondary',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			standard: standardCards.slice(0, 4),
+		},
+	},
+};

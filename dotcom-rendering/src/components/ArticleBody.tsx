@@ -58,7 +58,7 @@ const globalOlStyles = () => css`
 	ol:not([data-ignore='global-ol-styling']) {
 		counter-reset: li;
 
-		> li:before {
+		> li::before {
 			${textEgyptian17};
 			line-height: 1.15;
 			content: counter(li);

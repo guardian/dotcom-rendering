@@ -210,7 +210,7 @@ const Box = ({ children }: { children: React.ReactNode }) => (
 			*/
 			${from.mobileLandscape} {
 				position: relative;
-				:after {
+				::after {
 					content: '';
 					display: block;
 					position: absolute;

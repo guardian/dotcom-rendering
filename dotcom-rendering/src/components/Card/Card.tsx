@@ -407,7 +407,7 @@ export const Card = ({
 	index = 0,
 	isFlexSplash,
 	showTopBarDesktop = true,
-	showTopBarMobile = false,
+	showTopBarMobile = true,
 	trailTextSize,
 	showKickerImage = false,
 }: Props) => {
@@ -506,15 +506,14 @@ export const Card = ({
 				<>
 					{mainMedia.duration === 0 ? (
 						<Pill
-							content={'Live'}
+							content="Live"
 							icon={<div css={liveBulletStyles} />}
-							iconSize="small"
 						/>
 					) : (
 						<Pill
 							content={secondsToDuration(mainMedia.duration)}
-							icon={<SvgMediaControlsPlay />}
-							iconSize="small"
+							icon={<SvgMediaControlsPlay width={18} />}
+							prefix="Video"
 						/>
 					)}
 				</>
@@ -523,16 +522,15 @@ export const Card = ({
 			{mainMedia?.type === 'Audio' && (
 				<Pill
 					content={mainMedia.duration}
-					icon={<SvgMediaControlsPlay />}
-					iconSize="small"
+					icon={<SvgMediaControlsPlay width={18} />}
+					prefix="Podcast"
 				/>
 			)}
 			{mainMedia?.type === 'Gallery' && (
 				<Pill
-					prefix="Gallery"
 					content={mainMedia.count}
 					icon={<SvgCamera />}
-					iconSide="right"
+					prefix="Gallery"
 				/>
 			)}
 			{isNewsletter && <Pill content="Newsletter" />}
@@ -752,10 +750,10 @@ export const Card = ({
 	return (
 		<CardWrapper
 			format={format}
-			showTopBarDesktop={!isOnwardContent && showTopBarDesktop}
+			showTopBarDesktop={showTopBarDesktop}
 			showTopBarMobile={showTopBarMobile}
-			containerPalette={containerPalette}
 			isOnwardContent={isOnwardContent}
+			containerPalette={containerPalette}
 		>
 			<CardLink
 				linkTo={linkTo}
@@ -858,6 +856,9 @@ export const Card = ({
 										<SlideshowCarousel
 											images={media.slideshowImages}
 											imageSize={imageSize}
+											hasNavigationBackgroundColour={
+												!!hasSublinks
+											}
 										/>
 									</Island>
 								</div>
@@ -1021,8 +1022,11 @@ export const Card = ({
 												content={secondsToDuration(
 													mainMedia.duration,
 												)}
-												icon={<SvgMediaControlsPlay />}
-												iconSize={'small'}
+												icon={
+													<SvgMediaControlsPlay
+														width={18}
+													/>
+												}
 											/>
 										</div>
 									)}
@@ -1064,8 +1068,12 @@ export const Card = ({
 						imageType={media?.type}
 						imageSize={imageSize}
 						isBetaContainer={isBetaContainer}
-						imagePositionOnDesktop={imagePositionOnDesktop}
-						imagePositionOnMobile={imagePositionOnMobile}
+						imagePositionOnDesktop={
+							image ? imagePositionOnDesktop : 'none'
+						}
+						imagePositionOnMobile={
+							image ? imagePositionOnMobile : 'none'
+						}
 						padContent={determinePadContent(
 							isMediaCardOrNewsletter,
 							isBetaContainer,

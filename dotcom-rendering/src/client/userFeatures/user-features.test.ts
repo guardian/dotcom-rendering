@@ -2,7 +2,7 @@ import { getCookie } from '@guardian/libs';
 import type { AuthStatus } from '../../lib/identity';
 import {
 	getAuthStatus as getAuthStatus_,
-	isUserLoggedInOktaRefactor as isUserLoggedInOktaRefactor_,
+	isUserLoggedIn as isUserLoggedIn_,
 } from '../../lib/identity';
 import { AD_FREE_USER_COOKIE, getAdFreeCookie } from './cookies/adFree';
 import {
@@ -42,17 +42,16 @@ jest.mock('./fetchJson', () => {
 });
 
 jest.mock('../../lib/identity', () => ({
-	isUserLoggedInOktaRefactor: jest.fn(),
+	isUserLoggedIn: jest.fn(),
 	getAuthStatus: jest.fn(),
-	getOptionsHeadersWithOkta: jest.fn(),
+	getOptionsHeaders: jest.fn(),
 }));
 
 const fetchJsonSpy = fetchJson as jest.MockedFunction<typeof fetchJson>;
 
-const isUserLoggedInOktaRefactor =
-	isUserLoggedInOktaRefactor_ as jest.MockedFunction<
-		typeof isUserLoggedInOktaRefactor_
-	>;
+const isUserLoggedIn = isUserLoggedIn_ as jest.MockedFunction<
+	typeof isUserLoggedIn_
+>;
 
 const getAuthStatus = getAuthStatus_ as jest.MockedFunction<
 	typeof getAuthStatus_
@@ -99,9 +98,9 @@ describe('Refreshing the benefits data', () => {
 	describe('If user signed in', () => {
 		beforeEach(() => {
 			jest.resetAllMocks();
-			isUserLoggedInOktaRefactor.mockResolvedValue(true);
+			isUserLoggedIn.mockResolvedValue(true);
 			getAuthStatus.mockResolvedValue({
-				kind: 'SignedInWithOkta',
+				kind: 'SignedIn',
 			} as AuthStatus);
 			fetchJsonSpy.mockReturnValue(Promise.resolve(fakeUserBenefits));
 		});
@@ -148,7 +147,7 @@ describe('Refreshing the benefits data', () => {
 describe('If user signed out', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
-		isUserLoggedInOktaRefactor.mockResolvedValue(false);
+		isUserLoggedIn.mockResolvedValue(false);
 		fetchJsonSpy.mockReturnValue(Promise.resolve(noBenefits));
 	});
 
@@ -192,9 +191,9 @@ describe('Benefit to cookie mapping', () => {
 	) => {
 		jest.resetAllMocks();
 		deleteAllCookies();
-		isUserLoggedInOktaRefactor.mockResolvedValue(true);
+		isUserLoggedIn.mockResolvedValue(true);
 		getAuthStatus.mockResolvedValue({
-			kind: 'SignedInWithOkta',
+			kind: 'SignedIn',
 		} as AuthStatus);
 
 		// Mock the fetchJson function to return the current benefit only

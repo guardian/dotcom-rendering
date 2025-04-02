@@ -6558,6 +6558,26 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],
 	},
+	'--football-competition-text': {
+		light: () => sourcePalette.sport[300],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--football-form-draw': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[73],
+	},
+	'--football-form-loss': {
+		light: () => sourcePalette.news[400],
+		dark: () => sourcePalette.news[400],
+	},
+	'--football-form-win': {
+		light: () => '#3DB540',
+		dark: () => '#3DB540',
+	},
+	'--football-list-border': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[38],
+	},
 	'--football-match-hover': {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[38],
@@ -6565,14 +6585,6 @@ const paletteColours = {
 	'--football-match-list-background': {
 		light: () => sourcePalette.neutral[97],
 		dark: () => sourcePalette.neutral[20],
-	},
-	'--football-match-list-border': {
-		light: () => sourcePalette.neutral[93],
-		dark: () => sourcePalette.neutral[38],
-	},
-	'--football-match-list-competition-text': {
-		light: () => sourcePalette.sport[300],
-		dark: () => sourcePalette.neutral[86],
 	},
 	'--football-match-list-error': {
 		light: () => sourcePalette.error[400],
@@ -6582,11 +6594,15 @@ const paletteColours = {
 		light: () => sourcePalette.sport[500],
 		dark: () => sourcePalette.sport[500],
 	},
-	'--football-match-list-sub-text': {
+	'--football-sub-text': {
 		light: () => sourcePalette.neutral[46],
 		dark: () => sourcePalette.neutral[73],
 	},
-	'--football-match-list-top-border': {
+	'--football-table-divider': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--football-top-border': {
 		light: () => sourcePalette.sport[500],
 		dark: () => sourcePalette.neutral[60],
 	},
@@ -7142,6 +7158,14 @@ const paletteColours = {
 	'--slideshow-caption': {
 		light: slideshowCaptionLight,
 		dark: slideshowCaptionDark,
+	},
+	/**
+	 * The background colour should match the background colour of the
+	 * sublinks when there is at least one sublink present.
+	 */
+	'--slideshow-navigation-background': {
+		light: cardSublinksBackgroundLight,
+		dark: cardSublinksBackgroundDark,
 	},
 	'--slideshow-pagination-dot': {
 		light: slideshowPaginationDotLight,

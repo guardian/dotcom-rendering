@@ -90,6 +90,7 @@ export type DCRFrontCard = {
 	snapData?: DCRSnapType;
 	isBoosted?: boolean;
 	boostLevel?: BoostLevel;
+	isImmersive: boolean;
 	isCrossword?: boolean;
 	isNewsletter?: boolean;
 	isCartoon?: boolean;

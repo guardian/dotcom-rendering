@@ -107,7 +107,7 @@ const linkStyles = css`
 		text-decoration: underline;
 	}
 
-	:before {
+	::before {
 		content: '';
 		border-top: 1px solid ${sourcePalette.neutral[86]};
 		display: block;
@@ -121,7 +121,7 @@ const linkStyles = css`
 const linkActive = css`
 	font-weight: bold;
 
-	:after {
+	::after {
 		content: '';
 		border: 2px solid ${sourcePalette.news[400]};
 		border-top: 0px;
@@ -136,7 +136,7 @@ const linkActive = css`
 `;
 
 const linkFirst = css`
-	:before {
+	::before {
 		content: none;
 	}
 `;
@@ -159,12 +159,12 @@ const buttonStyles = css`
 	:hover {
 		color: ${sourcePalette.brandAlt[400]};
 
-		:after {
+		::after {
 			transform: translateY(0) rotate(45deg);
 		}
 	}
 
-	:after {
+	::after {
 		content: '';
 		display: inline-block;
 		width: 5px;
@@ -180,10 +180,10 @@ const buttonStyles = css`
 `;
 
 const buttonExpanded = css`
-	:hover:after {
+	:hover::after {
 		transform: translateY(-1px) rotate(-135deg);
 	}
-	:after {
+	::after {
 		transform: translateY(1px) rotate(-135deg);
 	}
 `;

@@ -28,7 +28,7 @@ const filterBar = css`
 const dividerStyles = css`
 	position: relative;
 	margin-left: ${space[2]}px;
-	:after {
+	::after {
 		content: '';
 		display: block;
 		width: 1px;
