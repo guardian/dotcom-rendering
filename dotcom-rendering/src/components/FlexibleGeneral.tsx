@@ -80,6 +80,66 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 	}, []);
 };
 
+/**
+ * ImmersiveCardLayout is a special case of the card layout that is used for cards with the isImmersive property.
+ * It is a single feature card that takes up the full width of the container on all breakpoints.
+ * It is used in the FlexibleGeneral only.
+ * It can be used in any slot within the container.
+ */
+const ImmersiveCardLayout = ({
+	cards,
+	containerPalette,
+	absoluteServerTimes,
+	imageLoading,
+	collectionId,
+}: {
+	cards: DCRFrontCard[];
+	containerPalette?: DCRContainerPalette;
+	absoluteServerTimes: boolean;
+	imageLoading: Loading;
+	collectionId: number;
+}) => {
+	const card = cards[0];
+	if (!card) return null;
+
+	return (
+		<UL padBottom={true}>
+			<LI key={card.url} padSides={true}>
+				<FeatureCard
+					collectionId={collectionId}
+					linkTo={card.url}
+					format={card.format}
+					headlineText={card.headline}
+					byline={card.byline}
+					showByline={card.showByline}
+					webPublicationDate={card.webPublicationDate}
+					kickerText={card.kickerText}
+					showClock={false}
+					image={card.image}
+					canPlayInline={true}
+					starRating={card.starRating}
+					dataLinkName={card.dataLinkName}
+					discussionApiUrl={card.discussionApiUrl}
+					discussionId={card.discussionId}
+					mainMedia={card.mainMedia}
+					isExternalLink={card.isExternalLink}
+					// branding={card.branding}
+					containerPalette={containerPalette}
+					trailText={card.trailText}
+					absoluteServerTimes={absoluteServerTimes}
+					imageLoading={imageLoading}
+					aspectRatio={'5:3'}
+					mobileAspectRatio={'4:5'}
+					imageSize="feature-immersive"
+					headlineSizes={{ desktop: 'small' }}
+					supportingContent={card.supportingContent}
+					isImmersive={true}
+				/>
+			</LI>
+		</UL>
+	);
+};
+
 type BoostedSplashProperties = {
 	headlineSizes: ResponsiveFontSize;
 	imagePositionOnDesktop: ImagePositionType;
@@ -173,60 +233,6 @@ const decideSplashCardProperties = (
 				trailTextSize: 'large',
 			};
 	}
-};
-
-const ImmersiveCardLayout = ({
-	cards,
-	containerPalette,
-	absoluteServerTimes,
-	imageLoading,
-	collectionId,
-}: {
-	cards: DCRFrontCard[];
-	containerPalette?: DCRContainerPalette;
-	absoluteServerTimes: boolean;
-	imageLoading: Loading;
-	collectionId: number;
-}) => {
-	const card = cards[0];
-	if (!card) return null;
-
-	return (
-		<UL padBottom={true}>
-			<LI key={card.url} padSides={true}>
-				<FeatureCard
-					collectionId={collectionId}
-					linkTo={card.url}
-					format={card.format}
-					headlineText={card.headline}
-					byline={card.byline}
-					showByline={card.showByline}
-					webPublicationDate={card.webPublicationDate}
-					kickerText={card.kickerText}
-					showClock={false}
-					image={card.image}
-					canPlayInline={true}
-					starRating={card.starRating}
-					dataLinkName={card.dataLinkName}
-					discussionApiUrl={card.discussionApiUrl}
-					discussionId={card.discussionId}
-					mainMedia={card.mainMedia}
-					isExternalLink={card.isExternalLink}
-					// branding={card.branding}
-					containerPalette={containerPalette}
-					trailText={card.trailText}
-					absoluteServerTimes={absoluteServerTimes}
-					imageLoading={imageLoading}
-					aspectRatio={'5:3'}
-					mobileAspectRatio={'4:5'}
-					imageSize="feature-immersive"
-					headlineSizes={{ desktop: 'small' }}
-					supportingContent={card.supportingContent}
-					isImmersive={true}
-				/>
-			</LI>
-		</UL>
-	);
 };
 
 export const SplashCardLayout = ({
@@ -602,9 +608,9 @@ export const FlexibleGeneral = ({
 
 			{groupedCards.map((row, i) => {
 				switch (row.layout) {
-					case 'oneCardBoosted':
+					case 'oneCardFullWidth':
 						return (
-							<BoostedCardLayout
+							<FullWidthCardLayout
 								cards={row.cards}
 								containerPalette={containerPalette}
 								showAge={showAge}
@@ -618,11 +624,11 @@ export const FlexibleGeneral = ({
 							/>
 						);
 
-					case 'oneCard':
+					case 'oneCardHalfWidth':
 					case 'twoCard':
 					default:
 						return (
-							<StandardCardLayout
+							<HalfWidthCardLayout
 								cards={row.cards}
 								containerPalette={containerPalette}
 								showAge={showAge}
