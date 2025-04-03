@@ -249,6 +249,9 @@
                                                             "total"
                                                         ]
                                                     },
+                                                    "teamUrl": {
+                                                        "type": "string"
+                                                    },
                                                     "results": {
                                                         "type": "array",
                                                         "items": {
@@ -298,7 +301,8 @@
                                                     "results",
                                                     "round",
                                                     "stageNumber",
-                                                    "team"
+                                                    "team",
+                                                    "teamUrl"
                                                 ]
                                             }
                                         }

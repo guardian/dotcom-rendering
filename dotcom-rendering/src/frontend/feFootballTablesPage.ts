@@ -41,6 +41,7 @@ export type FELeagueTableEntry = {
 	stageNumber: string;
 	round: FERound;
 	team: FELeagueTeam;
+	teamUrl: string;
 	results: FETeamResult[];
 };
 

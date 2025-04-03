@@ -96,7 +96,7 @@ const parseResults = (
 const parseEntry = (
 	feEntry: FELeagueTableEntry,
 ): Result<ParserError, Entry> => {
-	const { team } = feEntry;
+	const { team, teamUrl } = feEntry;
 
 	const parsedResults = parseResults(feEntry.results);
 
@@ -109,7 +109,7 @@ const parseEntry = (
 		team: {
 			name: team.name,
 			id: team.id,
-			url: 'url', //TODO - get this from FE
+			url: teamUrl,
 		},
 		gamesPlayed: team.total.played,
 		won: team.total.won,
