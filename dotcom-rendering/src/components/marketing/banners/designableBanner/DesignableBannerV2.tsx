@@ -711,7 +711,7 @@ const styles = {
 			grid-row-end: 3;
 		}
 
-		${until.wide} {
+		${between.desktop.and.wide} {
 			max-width: 380px;
 		}
 
@@ -791,14 +791,16 @@ const styles = {
 		}
 
 		${between.phablet.and.desktop} {
+			width: 100%;
 			position: sticky;
 			bottom: 0;
 			padding-top: ${space[3]}px;
 			padding-bottom: ${space[3]}px;
-			margin-right: -${space[3]}px;
-			margin-left: -${space[3]}px;
+			background-color: ${neutral[100]};
+			box-shadow: 0 -${space[1]}px ${space[3]}px 0 rgba(0, 0, 0, 0.25);
+			border-radius: 10px;
 			a {
-				width: 100%;
+				width: calc(100% - 24px);
 			}
 		}
 
