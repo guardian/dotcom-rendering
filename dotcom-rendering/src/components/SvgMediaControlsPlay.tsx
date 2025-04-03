@@ -1,8 +1,3 @@
-/**
- * TODO: This is a local copy of the updated `SvgMediaControlsPlay` icon which
- * is required by the new media card designs and can be removed once the Source
- * icon library has been updated and published.
- */
 import { css } from '@emotion/react';
 import { visuallyHidden } from '@guardian/source/foundations';
 import { type IconProps } from '@guardian/source/react-components';
