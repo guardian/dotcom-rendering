@@ -41,7 +41,7 @@ const containerStyles = css`
 // - We're not on a Glabs paid content page
 // - We've got a Braze UUID from the API, given a user's ID Creds
 // - The user has given Consent via CCPA or TCFV2
-// - The Braze websdk appboy initialisation does not throw an error
+// - The Braze websdk initialisation does not throw an error
 // - The Braze app Boy subscription to in app message returns meta info
 // OR
 // - The force-braze-message query string arg is passed
