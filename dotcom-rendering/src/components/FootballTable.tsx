@@ -116,7 +116,7 @@ const TeamWithCrest = ({
 }: {
 	team: string;
 	id: string;
-	url: string;
+	url?: string;
 }) => (
 	<div
 		css={css`

@@ -301,8 +301,7 @@
                                                     "results",
                                                     "round",
                                                     "stageNumber",
-                                                    "team",
-                                                    "teamUrl"
+                                                    "team"
                                                 ]
                                             }
                                         }

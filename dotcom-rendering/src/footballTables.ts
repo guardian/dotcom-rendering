@@ -17,7 +17,7 @@ export type TeamResult = {
 type TeamInfo = {
 	name: string;
 	id: string;
-	url: string;
+	url?: string;
 };
 
 type Entry = {
