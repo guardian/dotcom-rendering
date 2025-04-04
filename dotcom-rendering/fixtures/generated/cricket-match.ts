@@ -1434,8 +1434,6 @@ export const cricketMatchData: FECricketMatchPage = {
 		isSensitive: false,
 		ophanEmbedJsUrl: '//j.ophan.co.uk/ophan.embed',
 		edition: 'UK',
-		frontendSentryDsn:
-			'https://344003a8d11c41d8800fbad8383fdc50@o14302.ingest.us.sentry.io/35463',
 		brazeApiKey: '9d722c47-c889-49e7-b5d6-17e0a5956185',
 		discussionApiClientHeader: 'nextgen-dev',
 		section: 'cricket',
