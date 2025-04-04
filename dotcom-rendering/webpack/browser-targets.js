@@ -28,35 +28,22 @@ const rawTargets = getTargetsFromBrowsersList({ browsers });
  *
  * https://github.com/guardian/csnx/tree/main/libs/%40guardian/browserslist-config
  *
- * This currently returns:
- *
- * {
- *	chrome: '67.0.0',
- *	edge: '99.0.0',
- *	firefox: '78.0.0',
- *	ios: '10.3.0',
- *	opera: '91.0.0',
- *	safari: '10.1.0',
- *	samsung: '11.1.0'
- * }
- *
  * SWC however will not transpile dynamic imports when there are browser targets
  * that do not support them.
  *
- * ios 10.3.0 and safari 10.1.0 do not support dynamic imports:
+ * iOS 10.3.0 does not support dynamic imports:
  *
  * https://caniuse.com/es6-module-dynamic-import
  *
- * So if unsuported versions are encountered we upgrade to the next versions that
- * do support dynamic imports i.e.:
+ * So if an unsupported version is encountered we upgrade to the next version
+ * that does support dynamic imports i.e.:
  *
- * ios 11 and safari 11.1.0
+ * iOS 11
  *
  * This is safe as browsers without dynamic import support should be
  * covered by the dynamic import polyfill.
  *
- * This logic can be removed once ios 10.3 and safari 10.1 no longer
- * appear in browserslist.
+ * This logic can be removed once iOS 10.3 no longer appears in browserslist.
  *
  * @typedef {Object.<string, string>} Targets
  * @param {Targets} targets
@@ -67,14 +54,8 @@ const upgradeTargets = (targets) => {
 		([browser, version]) => {
 			const versions = version.split('.').map(Number);
 			const major = versions[0] ?? 0;
-			const minor = versions[1] ?? 0;
 			if (browser === 'ios' && major < 11) {
 				return ['ios', '11'];
-			} else if (
-				browser === 'safari' &&
-				(major < 11 || (major === 11 && minor === 0))
-			) {
-				return ['safari', '11.1.0'];
 			}
 			return [browser, version];
 		},

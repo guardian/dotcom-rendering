@@ -149,7 +149,7 @@ const listItemStyle = (currentPillarTitle?: string) => {
 		? frontSubNavBorder(currentPillarTitle)
 		: palette('--sub-nav-border');
 	return css`
-		:after {
+		::after {
 			content: '';
 			display: inline-block;
 			width: 0;

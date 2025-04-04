@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticle } from '../../../src/frontend/feArticle';
 
-export const LiveBlogSingleContributor: FEArticleType = {
+export const LiveBlogSingleContributor: FEArticle = {
 	version: 3,
 	headline:
 		'Rishi Sunak and Keir Starmer clash over homelessness and the UK economy at PMQs – as it happened',

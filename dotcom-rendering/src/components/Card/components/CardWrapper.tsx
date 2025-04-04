@@ -59,11 +59,14 @@ const sublinkHoverStyles = css`
 		.card-headline .show-underline {
 			text-decoration: none;
 		}
+		.image-overlay {
+			background-color: transparent;
+		}
 	}
 `;
 
 const topBarStyles = css`
-	:before {
+	::before {
 		border-top: 1px solid ${palette('--card-border-top')};
 		content: '';
 		z-index: 2;

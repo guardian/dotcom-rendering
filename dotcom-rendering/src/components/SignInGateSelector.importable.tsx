@@ -6,6 +6,7 @@ import {
 } from '../lib/contributions';
 import { getDailyArticleCount, getToday } from '../lib/dailyArticleCount';
 import type { EditionId } from '../lib/edition';
+import { getLocaleCode } from '../lib/getCountryCode';
 import { isUserLoggedIn } from '../lib/identity';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { constructQuery } from '../lib/querystring';
@@ -503,10 +504,12 @@ const decideAuxiaProxyReaderPersonalData =
 		const dailyArticleCount = decideDailyArticleCount();
 		const hasConsent = await hasCmpConsentForBrowserId();
 		const isSupporter = decideIsSupporter();
+		const countryCode = (await getLocaleCode()) ?? ''; // default to empty string
 		const data = {
 			browserId: hasConsent ? browserId : undefined,
 			dailyArticleCount,
 			isSupporter,
+			countryCode,
 		};
 		return Promise.resolve(data);
 	};
@@ -522,6 +525,7 @@ const fetchProxyGetTreatments = async (
 	sectionId: string,
 	tagIds: string[],
 	gateDismissCount: number,
+	countryCode: string,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const articleIdentifier = `www.theguardian.com/${pageId}`;
@@ -539,6 +543,7 @@ const fetchProxyGetTreatments = async (
 		sectionId,
 		tagIds,
 		gateDismissCount,
+		countryCode,
 	};
 	const params = {
 		method: 'POST',
@@ -575,6 +580,7 @@ const buildAuxiaGateDisplayData = async (
 		sectionId,
 		tagIds,
 		gateDismissCount,
+		readerPersonalData.countryCode,
 	);
 	if (response.status && response.data) {
 		const answer = {

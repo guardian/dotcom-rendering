@@ -4,10 +4,11 @@ import type { EditionBranding } from '../types/branding';
 import type { ServerSideTests, StageType, Switches } from '../types/config';
 import type { BoostLevel, Image, StarRating } from '../types/content';
 import type { FooterType } from '../types/footer';
-import type { FEFormat, FENavType } from '../types/frontend';
+import type { FENavType } from '../types/frontend';
 import type { FETagType } from '../types/tag';
 import type { Territory } from '../types/territory';
 import type { FETrailType } from '../types/trails';
+import type { FEFormat } from './feArticle';
 
 export interface FEFront {
 	pressedPage: FEPressedPage;
@@ -250,6 +251,7 @@ export type FEFrontCard = {
 	display: {
 		isBoosted: boolean;
 		boostLevel?: BoostLevel;
+		isImmersive?: boolean;
 		showBoostedHeadline: boolean;
 		showQuotedHeadline: boolean;
 		imageHide: boolean;

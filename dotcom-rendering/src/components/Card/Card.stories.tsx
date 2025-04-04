@@ -337,6 +337,40 @@ export const WithMediaType = () => {
 	);
 };
 
+export const WithMediaTypeAndSublinks = () => {
+	return (
+		<CardGroup>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Video,
+						theme: Pillar.Sport,
+					}}
+					containerType="flexible/general"
+					mainMedia={{ ...mainVideo, duration: 30 }}
+					headlineText="Video"
+					imagePositionOnDesktop="top"
+					imagePositionOnMobile="left"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline: 'Headline 1',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline: 'Headline 2',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
+		</CardGroup>
+	);
+};
+
 export const WithMediaTypeSpecialReportAlt = () => {
 	return (
 		<CardGroup>
@@ -1728,11 +1762,9 @@ export const WithAVerticalGapWhenScrollableSmallContainer = () => {
 export const WithBetaContainerAndSublinks = () => {
 	return (
 		<CardGroup>
-			{/* With an image */}
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					image={undefined}
 					containerType="flexible/general"
 					imagePositionOnMobile="bottom"
 					supportingContent={[
@@ -1749,10 +1781,17 @@ export const WithBetaContainerAndSublinks = () => {
 					]}
 				/>
 			</CardWrapper>
-			{/* Without an image */}
+		</CardGroup>
+	);
+};
+
+export const WithBetaContainerAndSublinksNoImage = () => {
+	return (
+		<CardGroup>
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
+					image={undefined}
 					containerType="flexible/general"
 					imagePositionOnMobile="bottom"
 					supportingContent={[

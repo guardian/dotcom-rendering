@@ -26,7 +26,7 @@ import { CollapseSectionButton } from './CollapseSectionButton';
 
 const pillarDivider = css`
 	${from.desktop} {
-		:before {
+		::before {
 			content: '';
 			display: block;
 			position: absolute;

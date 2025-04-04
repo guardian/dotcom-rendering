@@ -120,7 +120,7 @@ const PickBubble = ({ children }: { children: React.ReactNode }) => (
 				min-height: 150px;
 			}
 
-			:before {
+			::before {
 				content: '';
 				margin-left: ${space[6]}px;
 				position: absolute;

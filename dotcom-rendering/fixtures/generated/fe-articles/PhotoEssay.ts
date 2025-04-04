@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticle } from '../../../src/frontend/feArticle';
 
-export const PhotoEssay: FEArticleType = {
+export const PhotoEssay: FEArticle = {
 	version: 3,
 	headline: 'My year of roaming free in Cornwall',
 	standfirst:

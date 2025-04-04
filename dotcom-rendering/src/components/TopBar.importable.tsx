@@ -57,7 +57,7 @@ const alignLeftStyles = css`
 
 const verticalDividerStyles = css`
 	${from.desktop} {
-		:before {
+		::before {
 			content: '';
 			border-left: 1px solid
 				${themePalette('--masthead-top-bar-vertical-divider')};

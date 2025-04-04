@@ -1,4 +1,5 @@
 import { isUndefined } from '@guardian/libs';
+import type { FEFormat } from '../frontend/feArticle';
 import { getLargest, getMaster } from '../lib/image';
 import type { Block } from '../types/blocks';
 import type {
@@ -7,7 +8,6 @@ import type {
 	ImageBlockElement,
 	ImageForLightbox,
 } from '../types/content';
-import type { FEFormat } from '../types/frontend';
 import {
 	getCartoonImageForLightbox,
 	isCartoon,

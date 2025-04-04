@@ -43,6 +43,7 @@ export const trails: Array<DCRFrontCard> = [
 			altText:
 				'From left: Nottingham Forest’s Murillo, Tottenham’s Micky van de Ven and Manchester City’s Erling Haaland.',
 		},
+		isImmersive: false,
 	},
 	{
 		format: {
@@ -81,6 +82,7 @@ export const trails: Array<DCRFrontCard> = [
 			altText:
 				'Olly Alexander and four dancers on stage during his performace.',
 		},
+		isImmersive: false,
 	},
 	{
 		format: {
@@ -119,6 +121,7 @@ export const trails: Array<DCRFrontCard> = [
 			src: 'https://media.guim.co.uk/dc9dcb8a8d29815e132f798b1d3e7acd528a9df3/0_295_5256_3153/master/5256.jpg',
 			altText: 'A row of terraced houses with many To Let signs',
 		},
+		isImmersive: false,
 	},
 	{
 		format: {
@@ -157,6 +160,7 @@ export const trails: Array<DCRFrontCard> = [
 			altText:
 				'Baby Reindeer writer and actor Richard Gadd (Donny Dunn) and Jessica Gunning, who plays Martha, in a still from the series.',
 		},
+		isImmersive: false,
 	},
 	{
 		format: {
@@ -195,6 +199,7 @@ export const trails: Array<DCRFrontCard> = [
 			altText:
 				'From left: Nottingham Forest’s Murillo, Tottenham’s Micky van de Ven and Manchester City’s Erling Haaland.',
 		},
+		isImmersive: false,
 	},
 	{
 		format: {
@@ -233,6 +238,7 @@ export const trails: Array<DCRFrontCard> = [
 			altText:
 				'Olly Alexander and four dancers on stage during his performace.',
 		},
+		isImmersive: false,
 	},
 	{
 		format: {
@@ -271,6 +277,7 @@ export const trails: Array<DCRFrontCard> = [
 			src: 'https://media.guim.co.uk/dc9dcb8a8d29815e132f798b1d3e7acd528a9df3/0_295_5256_3153/master/5256.jpg',
 			altText: 'A row of terraced houses with many To Let signs',
 		},
+		isImmersive: false,
 	},
 	{
 		format: {
@@ -309,6 +316,7 @@ export const trails: Array<DCRFrontCard> = [
 			altText:
 				'Baby Reindeer writer and actor Richard Gadd (Donny Dunn) and Jessica Gunning, who plays Martha, in a still from the series.',
 		},
+		isImmersive: false,
 	},
 ];
 
@@ -349,4 +357,5 @@ export const defaultCard: DCRFrontCard = {
 		src: 'https://media.guim.co.uk/dc9dcb8a8d29815e132f798b1d3e7acd528a9df3/0_295_5256_3153/master/5256.jpg',
 		altText: 'A row of terraced houses with many To Let signs',
 	},
+	isImmersive: false,
 };

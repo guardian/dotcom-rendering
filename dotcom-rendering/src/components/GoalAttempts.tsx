@@ -7,10 +7,12 @@ import {
 import { isLight } from '../lib/isLight';
 import { transparentColour } from '../lib/transparentColour';
 import { palette as themePalette } from '../palette';
+import type { ColourName } from '../paletteDeclarations';
 
 type Props = {
 	left: SectionType;
 	right: SectionType;
+	backgroundColour: ColourName;
 };
 
 type SectionType = {
@@ -75,11 +77,13 @@ const Side = ({
 	onTarget,
 	teamColours,
 	position,
+	backgroundColour,
 }: {
 	offTarget: number;
 	onTarget: number;
 	teamColours: string;
 	position: 'left' | 'right';
+	backgroundColour: ColourName;
 }) => {
 	return (
 		<div
@@ -114,12 +118,11 @@ const Side = ({
 					height: 70px;
 					width: 92px;
 
-					border-top: 8px solid
-						${themePalette('--match-stats-background')};
+					border-top: 8px solid ${themePalette(backgroundColour)};
 					border-left: ${position === 'left' &&
-					`8px solid ${themePalette('--match-stats-background')}`};
+					`8px solid ${themePalette(backgroundColour)}`};
 					border-right: ${position === 'right' &&
-					`8px solid ${themePalette('--match-stats-background')}`};
+					`8px solid ${themePalette(backgroundColour)}`};
 				`}
 			>
 				{onTarget}
@@ -136,7 +139,7 @@ const Side = ({
 	);
 };
 
-export const GoalAttempts = ({ left, right }: Props) => {
+export const GoalAttempts = ({ left, right, backgroundColour }: Props) => {
 	return (
 		<Row>
 			<Side
@@ -144,12 +147,14 @@ export const GoalAttempts = ({ left, right }: Props) => {
 				offTarget={left.offTarget}
 				onTarget={left.onTarget}
 				teamColours={left.color}
+				backgroundColour={backgroundColour}
 			/>
 			<Side
 				position="right"
 				offTarget={right.offTarget}
 				onTarget={right.onTarget}
 				teamColours={right.color}
+				backgroundColour={backgroundColour}
 			/>
 		</Row>
 	);

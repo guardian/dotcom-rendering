@@ -10,6 +10,7 @@ import {
 } from '@guardian/source/foundations';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { palette as themePalette } from '../palette';
+import type { ColourName } from '../paletteDeclarations';
 import type { TeamType } from '../types/sport';
 import { Distribution } from './Distribution';
 import { Doughnut } from './Doughnut';
@@ -18,12 +19,22 @@ import { GridItem } from './GridItem';
 import { Hide } from './Hide';
 import { Lineup } from './Lineup';
 
-type Props = {
+type MatchStatsData = {
 	home: TeamType;
 	away: TeamType;
 	competition: string;
+};
+
+type MatchSummaryProps = MatchStatsData & {
+	usage: 'MatchSummary';
+};
+
+type ArticleProps = MatchStatsData & {
+	usage: 'Article';
 	format: ArticleFormat;
 };
+
+type Props = ArticleProps | MatchSummaryProps;
 
 //For these three tournaments, we only get data for live goals, bookings and substitutions, and no other type of match stats
 const omitStatsTeams = [
@@ -36,11 +47,13 @@ const omitStatsTeams = [
 const StatsGrid = ({
 	children,
 	format,
+	backgroundColour,
 }: {
 	children: React.ReactNode;
-	format: ArticleFormat;
+	format?: ArticleFormat;
+	backgroundColour: ColourName;
 }) => {
-	switch (format.design) {
+	switch (format?.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog: {
 			return (
@@ -50,9 +63,7 @@ const StatsGrid = ({
 						display: flex;
 						flex-direction: column;
 
-						background-color: ${themePalette(
-							'--match-stats-background',
-						)};
+						background-color: ${themePalette(backgroundColour)};
 						@supports (display: grid) {
 							display: grid;
 
@@ -108,9 +119,7 @@ const StatsGrid = ({
 						display: flex;
 						flex-direction: column;
 
-						background-color: ${themePalette(
-							'--match-stats-background',
-						)};
+						background-color: ${themePalette(backgroundColour)};
 						@supports (display: grid) {
 							display: grid;
 
@@ -163,9 +172,11 @@ const StatsGrid = ({
 const StretchBackground = ({
 	showStats,
 	children,
+	backgroundColour,
 }: {
 	showStats: boolean;
 	children: React.ReactNode;
+	backgroundColour: ColourName;
 }) => (
 	<div
 		css={css`
@@ -178,10 +189,10 @@ const StretchBackground = ({
 			}
 			/* We use min-height to help reduce our CLS value */
 			min-height: ${showStats ? '800px' : '570px'};
-			background-color: ${themePalette('--match-stats-background')};
+			background-color: ${themePalette(backgroundColour)};
 
 			${from.leftCol} {
-				:before {
+				::before {
 					content: '';
 					position: absolute;
 					top: 0;
@@ -189,9 +200,7 @@ const StretchBackground = ({
 					/* stretch left */
 					left: -100vw;
 					right: 0;
-					background-color: ${themePalette(
-						'--match-stats-background',
-					)};
+					background-color: ${themePalette(backgroundColour)};
 					z-index: -1;
 				}
 			}
@@ -206,9 +215,9 @@ const ShiftLeft = ({
 	format,
 }: {
 	children: React.ReactNode;
-	format: ArticleFormat;
+	format?: ArticleFormat;
 }) => {
-	switch (format.design) {
+	switch (format?.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog: {
 			return <div>{children}</div>;
@@ -291,7 +300,7 @@ const DecideDoughnut = ({
 }: {
 	home: TeamType;
 	away: TeamType;
-	format: ArticleFormat;
+	format?: ArticleFormat;
 }) => {
 	const sections = [
 		{
@@ -305,7 +314,7 @@ const DecideDoughnut = ({
 			color: away.colours,
 		},
 	].reverse();
-	switch (format.design) {
+	switch (format?.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog: {
 			return (
@@ -348,11 +357,21 @@ const DecideDoughnut = ({
 	}
 };
 
-export const MatchStats = ({ home, away, competition, format }: Props) => {
+export const MatchStats = (props: Props) => {
+	const { home, away, competition, usage } = props;
 	const showStats = !omitStatsTeams.includes(competition);
+	const format = usage === 'Article' ? props.format : undefined;
+	const backgroundColour =
+		usage === 'Article'
+			? '--match-stats-background'
+			: '--article-background';
+
 	return (
-		<StretchBackground showStats={showStats}>
-			<StatsGrid format={format}>
+		<StretchBackground
+			showStats={showStats}
+			backgroundColour={backgroundColour}
+		>
+			<StatsGrid format={format} backgroundColour={backgroundColour}>
 				{showStats && (
 					<>
 						<GridItem area="title" element="aside">
@@ -396,6 +415,7 @@ export const MatchStats = ({ home, away, competition, format }: Props) => {
 									offTarget: away.shotsOff,
 									color: away.colours,
 								}}
+								backgroundColour={backgroundColour}
 							/>
 						</GridItem>
 						<GridItem area="corners">
