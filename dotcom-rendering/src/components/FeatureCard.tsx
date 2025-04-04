@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, space } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import { SvgMediaControlsPlay } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
@@ -107,9 +107,10 @@ const overlayContainerStyles = css`
 
 const immersiveOverlayContainerStyles = css`
 	${from.tablet} {
-		height: 100%;
 		top: 0;
-		width: 25%;
+		height: 100%;
+		width: 220px;
+		z-index: 1;
 	}
 `;
 
@@ -146,7 +147,7 @@ const overlayStyles = css`
 	${overlayMaskGradientStyles('180deg')};
 
 	/* Ensure the waveform is behind the other elements, e.g. headline, pill */
-	> * {
+	> :not(.waveform) {
 		z-index: 1;
 	}
 `;
@@ -169,6 +170,20 @@ const podcastImageContainerStyles = css`
 const podcastImageStyles = css`
 	height: 80px;
 	width: 80px;
+`;
+
+const nonImmersivePodcastImageStyles = css`
+	position: absolute;
+	/**
+	* Displays 8px above the text.
+	* desired space above text (8px) - padding-top of text container (64px) = -56px
+	*/
+	bottom: -${space[14]}px;
+	left: ${space[2]}px;
+
+	${from.tablet} {
+		display: none;
+	}
 `;
 
 const starRatingWrapper = css`
@@ -353,7 +368,7 @@ export const FeatureCard = ({
 							isExternalLink={isExternalLink}
 						/>
 					)}
-					<div css={[contentStyles]}>
+					<div css={contentStyles}>
 						{showYoutubeVideo && (
 							<div
 								data-chromatic="ignore"
@@ -488,6 +503,38 @@ export const FeatureCard = ({
 											immersiveOverlayContainerStyles,
 									]}
 								>
+									{mainMedia?.type === 'Audio' &&
+										!!mainMedia.podcastImage?.src && (
+											<div
+												css={
+													podcastImageContainerStyles
+												}
+											>
+												<div
+													css={[
+														podcastImageStyles,
+														nonImmersivePodcastImageStyles,
+													]}
+												>
+													<CardPicture
+														mainImage={
+															mainMedia
+																.podcastImage
+																.src
+														}
+														imageSize="podcast"
+														alt={
+															mainMedia
+																.podcastImage
+																.altText ?? ''
+														}
+														loading="lazy"
+														roundedCorners={false}
+														aspectRatio="1:1"
+													/>
+												</div>
+											</div>
+										)}
 									<div
 										css={[
 											overlayStyles,
@@ -495,38 +542,6 @@ export const FeatureCard = ({
 												immersiveOverlayStyles,
 										]}
 									>
-										{mainMedia?.type === 'Audio' &&
-											!!mainMedia.podcastImage?.src && (
-												<div
-													css={
-														podcastImageContainerStyles
-													}
-												>
-													<div
-														css={podcastImageStyles}
-													>
-														<CardPicture
-															mainImage={
-																mainMedia
-																	.podcastImage
-																	.src
-															}
-															imageSize="podcast"
-															alt={
-																mainMedia
-																	.podcastImage
-																	.altText ??
-																''
-															}
-															loading="lazy"
-															roundedCorners={
-																false
-															}
-															aspectRatio="1:1"
-														/>
-													</div>
-												</div>
-											)}
 										{/**
 										 * Without the wrapping div the headline and byline would have space
 										 * inserted between them due to being direct children of the flex container
@@ -585,17 +600,46 @@ export const FeatureCard = ({
 											</div>
 										)}
 
-										{mainMedia?.type === 'Audio' && (
-											<div css={waveformStyles}>
-												<WaveForm
-													seed={mainMedia.duration}
-													height={64}
-													// Just enough to cover the full width of the feature card in it's largest form
-													bars={233}
-													barWidth={2}
-												/>
-											</div>
-										)}
+										{isImmersive &&
+											mainMedia?.type === 'Audio' &&
+											!!mainMedia.podcastImage?.src && (
+												<div
+													css={
+														podcastImageContainerStyles
+													}
+												>
+													<div
+														css={[
+															podcastImageStyles,
+															css`
+																${until.tablet} {
+																	display: none;
+																}
+															`,
+														]}
+													>
+														<CardPicture
+															mainImage={
+																mainMedia
+																	.podcastImage
+																	.src
+															}
+															imageSize="podcast"
+															alt={
+																mainMedia
+																	.podcastImage
+																	.altText ??
+																''
+															}
+															loading="lazy"
+															roundedCorners={
+																false
+															}
+															aspectRatio="1:1"
+														/>
+													</div>
+												</div>
+											)}
 
 										<CardFooter
 											format={format}
@@ -644,6 +688,24 @@ export const FeatureCard = ({
 											mainMedia={mainMedia}
 											isNewsletter={isNewsletter}
 										/>
+
+										{!isImmersive &&
+											mainMedia?.type === 'Audio' && (
+												<div
+													css={waveformStyles}
+													className="waveform"
+												>
+													<WaveForm
+														seed={
+															mainMedia.duration
+														}
+														height={64}
+														// Just enough to cover the full width of the feature card in it's largest form
+														bars={233}
+														barWidth={2}
+													/>
+												</div>
+											)}
 									</div>
 									{/* On video article cards, the duration is displayed in the footer */}
 									{!isVideoArticle &&
@@ -663,6 +725,21 @@ export const FeatureCard = ({
 										</div>
 									) : null}
 								</div>
+
+								{isImmersive && mainMedia?.type === 'Audio' && (
+									<div
+										css={waveformStyles}
+										className="waveform"
+									>
+										<WaveForm
+											seed={mainMedia.duration}
+											height={64}
+											// Just enough to cover the full width of the feature card in it's largest form
+											bars={314}
+											barWidth={2}
+										/>
+									</div>
+								)}
 							</div>
 						)}
 					</div>
