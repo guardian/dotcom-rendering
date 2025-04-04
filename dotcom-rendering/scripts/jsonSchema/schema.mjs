@@ -1,8 +1,8 @@
 // @ts-check
-import path from 'node:path';
 import fs from 'node:fs';
-import TJS from 'typescript-json-schema';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import TJS from 'typescript-json-schema';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..', '..');
@@ -16,6 +16,7 @@ const program = TJS.getProgramFromFiles(
 		path.resolve(`${root}/src/types/newslettersPage.ts`),
 		path.resolve(`${root}/src/types/editionsCrossword.ts`),
 		path.resolve(`${root}/src/feFootballDataPage.ts`),
+		path.resolve(`${root}/src/feCricketMatch.ts`),
 	],
 	{
 		skipLibCheck: true,
@@ -61,6 +62,10 @@ const schemas = [
 	{
 		typeName: 'FEFootballDataPage',
 		file: `${root}/src/model/fe-football-data-page-schema.json`,
+	},
+	{
+		typeName: 'FECricketMatchPage',
+		file: `${root}/src/model/fe-cricket-match-page-schema.json`,
 	},
 ];
 
