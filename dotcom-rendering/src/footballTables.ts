@@ -68,7 +68,7 @@ const parseTable = (
 
 	return ok({
 		groupName: feGroup.round.name,
-		entries: parsedEntries.value,
+		entries: parsedEntries.value.sort((a, b) => a.position - b.position),
 	});
 };
 
