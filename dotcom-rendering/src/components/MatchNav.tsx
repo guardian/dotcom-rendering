@@ -6,6 +6,7 @@ import {
 	textSans15,
 	until,
 } from '@guardian/source/foundations';
+import { palette } from '../palette';
 import type { TeamType } from '../types/sport';
 import { Score } from './Score';
 
@@ -32,36 +33,6 @@ const CrestRow = ({ children }: { children: React.ReactNode }) => (
 			display: flex;
 			flex-direction: row;
 			align-items: flex-end;
-		`}
-	>
-		{children}
-	</div>
-);
-
-const StretchBackground = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			position: relative;
-			padding: ${space[2]}px;
-			background-color: var(--match-nav-background);
-			margin-bottom: 10px;
-			${until.tablet} {
-				margin: 0 -10px 10px;
-			}
-
-			::before {
-				content: '';
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				width: 100vw;
-				left: -100vw;
-				background-color: var(--match-nav-background);
-				z-index: -1;
-			}
 		`}
 	>
 		{children}
@@ -169,7 +140,7 @@ const TeamNav = ({
 			display: flex;
 			flex-grow: 1;
 			flex-basis: 50%;
-			color: var(--match-nav-text);
+			color: ${palette('--match-nav-text')};
 		`}
 	>
 		<Column>
@@ -232,24 +203,35 @@ const YellowBorder = () => (
 );
 
 export const MatchNav = ({ homeTeam, awayTeam, comments }: Props) => (
-	<div>
-		<StretchBackground>
-			<Row>
-				<TeamNav
-					name={homeTeam.name}
-					score={homeTeam.score}
-					crest={homeTeam.crest}
-					scorers={homeTeam.scorers}
-				/>
-				<YellowBorder />
-				<TeamNav
-					name={awayTeam.name}
-					score={awayTeam.score}
-					crest={awayTeam.crest}
-					scorers={awayTeam.scorers}
-				/>
-			</Row>
-			{!!comments && <Comments comments={comments} />}
-		</StretchBackground>
+	<div
+		css={css`
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			position: relative;
+			padding: ${space[2]}px;
+			background-color: ${palette('--match-nav-background')};
+			margin-bottom: 10px;
+			${until.tablet} {
+				margin: 0 -10px 10px;
+			}
+		`}
+	>
+		<Row>
+			<TeamNav
+				name={homeTeam.name}
+				score={homeTeam.score}
+				crest={homeTeam.crest}
+				scorers={homeTeam.scorers}
+			/>
+			<YellowBorder />
+			<TeamNav
+				name={awayTeam.name}
+				score={awayTeam.score}
+				crest={awayTeam.crest}
+				scorers={awayTeam.scorers}
+			/>
+		</Row>
+		{!!comments && <Comments comments={comments} />}
 	</div>
 );
