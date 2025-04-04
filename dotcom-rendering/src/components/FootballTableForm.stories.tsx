@@ -25,28 +25,28 @@ export const FootballTableForm: Story = {
 		teamResults: [
 			{
 				matchId: '1',
-				self: { name: 'Torino', score: 10 },
-				foe: { name: 'Cagliari', score: 0 },
+				self: { id: '9', name: 'Torino', score: 10 },
+				foe: { id: '26474', name: 'Cagliari', score: 0 },
 			},
 			{
 				matchId: '2',
-				self: { name: 'Torino', score: 4 },
-				foe: { name: 'Inter', score: 3 },
+				self: { id: '9', name: 'Torino', score: 4 },
+				foe: { id: '6136', name: 'Inter', score: 3 },
 			},
 			{
 				matchId: '3',
-				self: { name: 'Torino', score: 1 },
-				foe: { name: 'Lazio', score: 3 },
+				self: { id: '9', name: 'Torino', score: 1 },
+				foe: { id: '26362', name: 'Lazio', score: 3 },
 			},
 			{
 				matchId: '4',
-				self: { name: 'Torino', score: 0 },
-				foe: { name: 'Bologna', score: 0 },
+				self: { id: '9', name: 'Torino', score: 0 },
+				foe: { id: '26371', name: 'Bologna', score: 0 },
 			},
 			{
 				matchId: '5',
-				self: { name: 'Torino', score: 1 },
-				foe: { name: 'Inter', score: 4 },
+				self: { id: '9', name: 'Torino', score: 1 },
+				foe: { id: '6136', name: 'Inter', score: 4 },
 			},
 		],
 	},

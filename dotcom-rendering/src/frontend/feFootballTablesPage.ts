@@ -22,6 +22,7 @@ type FELeagueTeam = {
 };
 
 type FETeamScore = {
+	id: string;
 	name: string;
 	score?: number;
 };

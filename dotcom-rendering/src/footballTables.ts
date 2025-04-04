@@ -76,10 +76,12 @@ const parseResult = (result: FETeamResult): Result<ParserError, TeamResult> => {
 	return ok({
 		matchId: result.matchId,
 		self: {
+			id: result.self.id,
 			name: result.self.name,
 			score: result.self.score,
 		},
 		foe: {
+			id: result.foe.id,
 			name: result.foe.name,
 			score: result.foe.score,
 		},
