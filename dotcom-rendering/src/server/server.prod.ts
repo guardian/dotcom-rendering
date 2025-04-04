@@ -21,7 +21,7 @@ import {
 	handleInteractive,
 } from './handler.article.web';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
-import { handleFootballDataPage } from './handler.footballDataPage.web';
+import { handleFootballMatchListPage } from './handler.footballDataPage.web';
 import {
 	handleFront,
 	handleFrontJson,
@@ -73,7 +73,7 @@ export const prodServer = (): void => {
 	app.post('/FrontJSON', logRenderTime, handleFrontJson);
 	app.post('/TagPage', logRenderTime, handleTagPage);
 	app.post('/TagPageJSON', logRenderTime, handleTagPageJson);
-	app.post('/FootballDataPage', logRenderTime, handleFootballDataPage);
+	app.post('/FootballDataPage', logRenderTime, handleFootballMatchListPage);
 
 	app.post(
 		'/EmailNewsletters',

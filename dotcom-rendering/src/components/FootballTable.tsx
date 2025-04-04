@@ -62,7 +62,9 @@ const linkStyles = css`
 type Props = {
 	competitionName: string;
 	competitionUrl: string;
-	table: Omit<FootballTableData, 'groupName'>;
+	table: FootballTableData;
+	dividers: number[];
+	hasLinkToFullTable: boolean;
 	guardianBaseUrl: string;
 };
 
@@ -114,7 +116,7 @@ const TeamWithCrest = ({
 }: {
 	team: string;
 	id: string;
-	url: string;
+	url?: string;
 }) => (
 	<div
 		css={css`
@@ -140,6 +142,8 @@ export const FootballTable = ({
 	competitionName,
 	competitionUrl,
 	table,
+	dividers,
+	hasLinkToFullTable,
 	guardianBaseUrl,
 }: Props) => (
 	<table css={tableStyles}>
@@ -188,8 +192,7 @@ export const FootballTable = ({
 					key={row.position}
 					css={[
 						rowStyles,
-						table.dividers.includes(row.position - 1) &&
-							dividerStyle,
+						dividers.includes(row.position - 1) && dividerStyle,
 					]}
 				>
 					<td
@@ -228,7 +231,7 @@ export const FootballTable = ({
 				</tr>
 			))}
 		</tbody>
-		{table.linkToFullTable && (
+		{hasLinkToFullTable && (
 			<tfoot>
 				<tr css={rowStyles}>
 					<td colSpan={11} css={hideUntilTabletStyle}>

@@ -16,7 +16,7 @@ export const FootballTablesPage = {
 	args: {
 		regions,
 		pageId: 'football/tables',
-		competitions: TableListDefault.args.competitions,
+		tableCompetitions: TableListDefault.args.competitions,
 		renderAds: true,
 		guardianBaseUrl: 'https://www.theguardian.com',
 	},

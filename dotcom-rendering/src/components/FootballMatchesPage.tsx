@@ -5,11 +5,8 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
-import type {
-	FootballMatches,
-	FootballMatchKind,
-	Region,
-} from '../footballMatches';
+import type { Region } from '../footballDataPage';
+import type { FootballMatches, FootballMatchKind } from '../footballMatches';
 import { grid } from '../grid';
 import type { EditionId } from '../lib/edition';
 import type { Result } from '../lib/result';

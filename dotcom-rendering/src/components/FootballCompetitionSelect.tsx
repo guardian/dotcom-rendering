@@ -1,5 +1,6 @@
 import { Option, Select } from '@guardian/source/react-components';
-import type { FootballMatchKind, Region } from '../footballMatches';
+import type { Region } from '../footballDataPage';
+import type { FootballMatchKind } from '../footballMatches';
 import { palette } from '../palette';
 
 type FootballSelectKind = FootballMatchKind | 'Tables';
