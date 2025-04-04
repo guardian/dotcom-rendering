@@ -1,8 +1,24 @@
 # This file is matched from top down; subsequent matches override previous matches.
 # https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-# By default all files are owned by these teams:
-* 												@guardian/dotcom-platform
+# Files at the root of the project
+/*                                              @guardian/dotcom-platform
 
-/dotcom-rendering/src/components/marketing/ 	@guardian/growth
+/.github/ 										@guardian/dotcom-platform
+/.husky/ 										@guardian/dotcom-platform
+/.vscode/ 										@guardian/dotcom-platform
+/apps-rendering/ 								@guardian/dotcom-platform
+
+# Files at the root of `/dotcom-rendering`
+/dotcom-rendering/*								@guardian/dotcom-platform
+
+/dotcom-rendering/.storybook/					@guardian/dotcom-platform
+/dotcom-rendering/cdk/				        	@guardian/dotcom-platform
+/dotcom-rendering/configs/				       	@guardian/dotcom-platform
+/dotcom-rendering/scripts/				       	@guardian/dotcom-platform
+/dotcom-rendering/src/client/islands/		    @guardian/dotcom-platform
 /dotcom-rendering/src/client/userFeatures/ 		@guardian/supporter-revenue-stream
+/dotcom-rendering/src/components/marketing/ 	@guardian/growth
+/dotcom-rendering/src/server/       		    @guardian/dotcom-platform
+/dotcom-rendering/webpack/				       	@guardian/dotcom-platform
+/scripts/               				       	@guardian/dotcom-platform
