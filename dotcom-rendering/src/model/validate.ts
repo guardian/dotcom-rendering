@@ -2,6 +2,7 @@ import { isObject, isString } from '@guardian/libs';
 import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
+import type { FECricketMatchPage } from '../feCricketMatch';
 import type { FEFootballDataPage } from '../feFootballDataPage';
 import type { FEArticle } from '../frontend/feArticle';
 import type { FEFront } from '../frontend/feFront';
@@ -14,6 +15,7 @@ import type { FEEditionsCrosswords } from '../types/editionsCrossword';
 import type { FENewslettersPageType } from '../types/newslettersPage';
 import blockSchema from './block-schema.json';
 import editionsCrosswordSchema from './editions-crossword-schema.json';
+import cricketMatchPageSchema from './fe-cricket-match-page-schema.json';
 import footballDataPageSchema from './fe-football-data-page-schema.json';
 import newslettersPageSchema from './newsletter-page-schema.json';
 
@@ -39,6 +41,9 @@ const validateEditionsCrossword = ajv.compile<FEEditionsCrosswords>(
 );
 const validateFootballDataPage = ajv.compile<FEFootballDataPage>(
 	footballDataPageSchema,
+);
+const validateCricketMatchPage = ajv.compile<FECricketMatchPage>(
+	cricketMatchPageSchema,
 );
 
 export const validateAsFEArticle = (data: unknown): FEArticle => {
@@ -120,5 +125,21 @@ export const validateAsFootballDataPageType = (
 	throw new TypeError(
 		`Unable to validate request body for url ${url}.\n
             ${JSON.stringify(validateFootballDataPage.errors, null, 2)}`,
+	);
+};
+
+export const validateAsCricketMatchPageType = (
+	data: unknown,
+): FECricketMatchPage => {
+	if (validateCricketMatchPage(data)) return data;
+
+	const url =
+		isObject(data) && isObject(data.config) && isString(data.config.pageId)
+			? data.config.pageId
+			: 'unknown url';
+
+	throw new TypeError(
+		`Unable to validate request body for url ${url}.\n
+            ${JSON.stringify(validateCricketMatchPage.errors, null, 2)}`,
 	);
 };
