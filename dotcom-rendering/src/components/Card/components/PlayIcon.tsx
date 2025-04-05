@@ -43,15 +43,8 @@ const wideIconStyles = (
 	}
 `;
 
-const narrowPlayIconWidth = 56;
+export const narrowPlayIconWidth = 56;
 const narrowStyles = css`
-	position: absolute;
-	/**
-	 * Subject to change. We will wait to see how fronts editors use the
-	 * headlines and standfirsts before we decide on a final position.
-	 */
-	top: 35%;
-	left: calc(50% - ${narrowPlayIconWidth / 2}px);
 	width: ${narrowPlayIconWidth}px;
 	height: ${narrowPlayIconWidth}px;
 	display: flex;
