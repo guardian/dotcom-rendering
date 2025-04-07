@@ -34,8 +34,8 @@ export const contributionType: ContributionType = {
 };
 
 export const getChoiceCardData = (
-	countryCode: string,
 	shorterBenefits: boolean,
+	countryCode?: string,
 ): ChoiceInfo[] => {
 	return countryCode === 'US'
 		? ChoiceCardTestData_US(shorterBenefits)

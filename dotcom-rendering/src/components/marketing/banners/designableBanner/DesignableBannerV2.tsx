@@ -449,8 +449,8 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 								setThreeTierChoiceCardSelectedProduct
 							}
 							choices={getChoiceCardData(
-								countryCode,
 								isTabletOrAbove,
+								countryCode,
 							)}
 						/>
 
