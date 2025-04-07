@@ -39,7 +39,7 @@ export const handleArticleJson: RequestHandler = ({ body }, res) => {
 
 export const handleArticlePerfTest: RequestHandler = (req, res, next) => {
 	req.body = ExampleArticle;
-	handleArticle(req, res, next);
+	void handleArticle(req, res, next);
 };
 
 export const handleInteractive: RequestHandler = ({ body }, res) => {
