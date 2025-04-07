@@ -131,8 +131,8 @@ importers:
         specifier: 1.7.5
         version: 1.7.5
       '@types/express':
-        specifier: 4.17.21
-        version: 4.17.21
+        specifier: 5.0.1
+        version: 5.0.1
       '@types/html-webpack-plugin':
         specifier: 3.2.9
         version: 3.2.9
@@ -194,8 +194,8 @@ importers:
         specifier: 7.33.2
         version: 7.33.2(eslint@8.56.0)
       express:
-        specifier: 4.21.2
-        version: 4.21.2
+        specifier: 5.1.0
+        version: 5.1.0
       html-webpack-plugin:
         specifier: 5.6.3
         version: 5.6.3(webpack@5.97.1)
@@ -6743,7 +6743,7 @@ packages:
   /@types/connect-history-api-fallback@1.5.4:
     resolution: {integrity: sha512-n6Cr2xS1h4uAulPRdlw6Jl6s1oG8KrVilPN2yUITEs+K48EzMJJ3W1xy8K5eWuFvjp3R74AOIGSmp2UfBJ8HFw==}
     dependencies:
-      '@types/express-serve-static-core': 4.17.41
+      '@types/express-serve-static-core': 5.0.6
       '@types/node': 20.14.10
     dev: false
 
@@ -18391,7 +18391,7 @@ packages:
     resolution: {integrity: sha512-6hxOLGfZASQK/cijlZnZJTq8OXAkt/3YGfQX45vvMYXpZoo8NdWZcY73K108Jf759lS1Bv/8wXnHDTSz17dSRw==}
     dependencies:
       punycode: 1.4.1
-      qs: 6.13.0
+      qs: 6.14.0
     dev: false
 
   /use-local-storage-state@19.5.0(react-dom@18.3.1)(react@18.3.1):
