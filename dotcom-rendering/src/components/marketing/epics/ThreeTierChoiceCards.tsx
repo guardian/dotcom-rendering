@@ -22,11 +22,6 @@ import {
 	getLocalCurrencySymbol,
 } from '@guardian/support-dotcom-components';
 import type { Dispatch, SetStateAction } from 'react';
-import {
-	ChoiceCardTestData_REGULAR,
-	ChoiceCardTestData_US,
-	ChoiceCardTestData_US_SIMPLIFIED,
-} from './ThreeTierChoiceCardData';
 import type {
 	SupportRatePlan,
 	SupportTier,
@@ -186,32 +181,19 @@ type ThreeTierChoiceCardsProps = {
 	selectedProduct: SupportTier;
 	setSelectedProduct: Dispatch<SetStateAction<SupportTier>>;
 	countryCode?: string;
-	variantOfChoiceCard: string;
+	choices: ChoiceInfo[];
 	supporterPlusDiscount?: number;
-};
-
-const getChoiceCardData = (choiceCardVariant: string): ChoiceInfo[] => {
-	switch (choiceCardVariant) {
-		case 'US_THREE_TIER_CHOICE_CARDS':
-			return ChoiceCardTestData_US;
-		case 'US_SIMPLIFY_THIRD_CHOICE_CARD':
-			return ChoiceCardTestData_US_SIMPLIFIED;
-		default:
-			return ChoiceCardTestData_REGULAR;
-	}
 };
 
 export const ThreeTierChoiceCards = ({
 	countryCode,
 	selectedProduct,
 	setSelectedProduct,
-	variantOfChoiceCard,
+	choices,
 	supporterPlusDiscount,
 }: ThreeTierChoiceCardsProps) => {
 	const currencySymbol = getLocalCurrencySymbol(countryCode);
 	const countryGroupId = countryCodeToCountryGroupId(countryCode);
-
-	const Choices = getChoiceCardData(variantOfChoiceCard);
 
 	return (
 		<RadioGroup
@@ -220,7 +202,7 @@ export const ThreeTierChoiceCards = ({
 			`}
 		>
 			<Stack space={3}>
-				{Choices.map(
+				{choices.map(
 					({
 						supportTier,
 						label,

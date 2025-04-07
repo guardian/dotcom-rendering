@@ -1,5 +1,6 @@
 import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types/props/epic';
 import { useState } from 'react';
+import { getChoiceCardData } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import { ThreeTierChoiceCards } from '../ThreeTierChoiceCards';
 import type { SupportTier } from '../utils/threeTierChoiceCardAmounts';
@@ -13,7 +14,6 @@ interface OnReminderOpen {
 type Props = EpicProps & {
 	amountsTestName?: string;
 	amountsVariantName?: string;
-	isSimpleThirdChoiceCardInTestVariant?: boolean;
 };
 
 export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
@@ -26,7 +26,6 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 	fetchEmail,
 	amountsTestName,
 	amountsVariantName,
-	isSimpleThirdChoiceCardInTestVariant,
 }: Props): JSX.Element => {
 	// reminders
 	const [fetchedEmail, setFetchedEmail] = useState<string | undefined>(
@@ -57,13 +56,6 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 	const hasSupporterPlusPromoCode =
 		variant.cta?.baseUrl.includes('BLACK_FRIDAY_DISCOUNT_2024') ?? false;
 
-	const variantOfChoiceCard =
-		countryCode === 'US' && isSimpleThirdChoiceCardInTestVariant
-			? 'US_SIMPLIFY_THIRD_CHOICE_CARD'
-			: countryCode === 'US'
-			? 'US_THREE_TIER_CHOICE_CARDS'
-			: 'THREE_TIER_CHOICE_CARDS';
-
 	return (
 		<>
 			{showChoiceCards && (
@@ -71,7 +63,7 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 					countryCode={countryCode}
 					selectedProduct={threeTierChoiceCardSelectedProduct}
 					setSelectedProduct={setThreeTierChoiceCardSelectedProduct}
-					variantOfChoiceCard={variantOfChoiceCard}
+					choices={getChoiceCardData(countryCode, false)}
 					supporterPlusDiscount={
 						hasSupporterPlusPromoCode ? 0.5 : undefined
 					}
@@ -115,7 +107,6 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 				amountsTestName={amountsTestName}
 				amountsVariantName={amountsVariantName}
 				numArticles={articleCounts.for52Weeks}
-				variantOfChoiceCard={variantOfChoiceCard}
 			/>
 			{isReminderActive && showReminderFields && (
 				<ContributionsEpicReminder
