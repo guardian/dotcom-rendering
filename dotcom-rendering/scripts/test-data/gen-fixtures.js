@@ -360,7 +360,7 @@ requests.push(
 		.then((res) => res.json())
 		.then((json) => {
 			// These configs are returning from frontend
-			// but are not necessary for football pages
+			// but are not necessary for cricket pages
 			delete json.config.hasLiveBlogTopAd;
 			delete json.config.userAttributesApiUrl;
 			delete json.config.weatherapiurl;
