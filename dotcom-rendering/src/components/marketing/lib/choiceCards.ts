@@ -34,10 +34,10 @@ export const contributionType: ContributionType = {
 };
 
 export const getChoiceCardData = (
-	shorterBenefits: boolean,
+	longerBenefits: boolean,
 	countryCode?: string,
 ): ChoiceInfo[] => {
 	return countryCode === 'US'
-		? ChoiceCardTestData_US(shorterBenefits)
-		: ChoiceCardTestData_REGULAR(shorterBenefits);
+		? ChoiceCardTestData_US(longerBenefits)
+		: ChoiceCardTestData_REGULAR(longerBenefits);
 };

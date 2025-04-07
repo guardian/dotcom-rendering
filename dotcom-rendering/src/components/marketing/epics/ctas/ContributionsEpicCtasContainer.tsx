@@ -63,7 +63,7 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 					countryCode={countryCode}
 					selectedProduct={threeTierChoiceCardSelectedProduct}
 					setSelectedProduct={setThreeTierChoiceCardSelectedProduct}
-					choices={getChoiceCardData(false, countryCode)}
+					choices={getChoiceCardData(true, countryCode)}
 					supporterPlusDiscount={
 						hasSupporterPlusPromoCode ? 0.5 : undefined
 					}
