@@ -79,7 +79,7 @@
 		"buffer": "6.0.3",
 		"clean-css": "5.3.3",
 		"compare-versions": "6.1.0",
-		"compression": "1.7.4",
+		"compression": "1.8.0",
 		"constructs": "10.3.0",
 		"core-js": "3.33.3",
 		"eslint": "8.56.0",
