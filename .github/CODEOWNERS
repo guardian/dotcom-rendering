@@ -18,6 +18,9 @@
 /dotcom-rendering/scripts/                      @guardian/dotcom-platform
 /dotcom-rendering/src/client/islands/           @guardian/dotcom-platform
 /dotcom-rendering/src/client/userFeatures/      @guardian/supporter-revenue-stream
+/dotcom-rendering/src/components/AdBlock*       @guardian/commercial-dev
+/dotcom-rendering/src/components/AdSlot*        @guardian/commercial-dev
+/dotcom-rendering/src/components/AdP*           @guardian/commercial-dev
 /dotcom-rendering/src/components/marketing/     @guardian/growth
 /dotcom-rendering/src/server/                   @guardian/dotcom-platform
 /dotcom-rendering/webpack/                      @guardian/dotcom-platform
