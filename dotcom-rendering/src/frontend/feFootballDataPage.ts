@@ -8,6 +8,14 @@ export type FERound = {
 	name?: string;
 };
 
+export type FECompetitionSummary = {
+	id: string;
+	url: string;
+	fullName: string;
+	nation: string;
+	dividers?: number[];
+};
+
 export type FEFootballCompetition = {
 	name: string;
 	url: string;

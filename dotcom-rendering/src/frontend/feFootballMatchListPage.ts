@@ -1,12 +1,8 @@
-import type { FEFootballDataPage, FERound } from './feFootballDataPage';
-
-export type FECompetitionSummary = {
-	id: string;
-	url: string;
-	fullName: string;
-	nation: string;
-	dividers?: number[];
-};
+import type {
+	FECompetitionSummary,
+	FEFootballDataPage,
+	FERound,
+} from './feFootballDataPage';
 
 type FEStage = {
 	stageNumber: string;

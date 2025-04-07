@@ -1,5 +1,8 @@
-import type { FEFootballDataPage, FERound } from './feFootballDataPage';
-import type { FECompetitionSummary } from './feFootballMatchListPage';
+import type {
+	FECompetitionSummary,
+	FEFootballDataPage,
+	FERound,
+} from './feFootballDataPage';
 
 type FELeagueStats = {
 	played: number;
