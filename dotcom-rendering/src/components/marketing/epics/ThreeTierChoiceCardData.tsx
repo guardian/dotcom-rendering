@@ -40,8 +40,8 @@ export const ChoiceCardTestData_REGULAR = (
 		benefitsLabel: 'All-access digital',
 		benefits: () =>
 			shorterBenefits
-				? fullSupporterPlusBenefits
-				: shorterSupporterPlusBenefits,
+				? shorterSupporterPlusBenefits
+				: fullSupporterPlusBenefits,
 		recommended: true,
 	},
 	{
@@ -73,8 +73,8 @@ export const ChoiceCardTestData_US = (
 		benefitsLabel: 'All-access digital',
 		benefits: () =>
 			shorterBenefits
-				? fullSupporterPlusBenefits
-				: shorterSupporterPlusBenefits,
+				? shorterSupporterPlusBenefits
+				: fullSupporterPlusBenefits,
 		recommended: true,
 	},
 	{
