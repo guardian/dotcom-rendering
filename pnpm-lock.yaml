@@ -131,8 +131,8 @@ importers:
         specifier: 1.8.1
         version: 1.8.1
       '@types/express':
-        specifier: 4.17.21
-        version: 4.17.21
+        specifier: 5.0.1
+        version: 5.0.1
       '@types/html-webpack-plugin':
         specifier: 3.2.9
         version: 3.2.9
@@ -194,8 +194,8 @@ importers:
         specifier: 7.33.2
         version: 7.33.2(eslint@8.56.0)
       express:
-        specifier: 4.21.2
-        version: 4.21.2
+        specifier: 5.1.0
+        version: 5.1.0
       html-webpack-plugin:
         specifier: 5.6.3
         version: 5.6.3(webpack@5.99.7)
