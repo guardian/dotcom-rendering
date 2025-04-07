@@ -1,7 +1,7 @@
-import type { FEFootballPageConfig } from './feFootballDataPage';
-import type { EditionId } from './lib/edition';
-import type { FooterType } from './types/footer';
-import type { FENavType } from './types/frontend';
+import type { FEFootballPageConfig } from '../feFootballDataPage';
+import type { EditionId } from '../lib/edition';
+import type { FooterType } from '../types/footer';
+import type { FENavType } from '../types/frontend';
 
 type FECricketTeam = {
 	name: string;

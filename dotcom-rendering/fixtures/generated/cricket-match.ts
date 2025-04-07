@@ -11,7 +11,7 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FECricketMatchPage } from '../../src/feCricketMatch';
+import type { FECricketMatchPage } from '../../src/frontend/feCricketMatch';
 
 export const cricketMatchData: FECricketMatchPage = {
 	cricketMatch: {

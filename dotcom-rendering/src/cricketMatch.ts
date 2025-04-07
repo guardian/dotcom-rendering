@@ -1,12 +1,15 @@
 import { isUndefined } from '@guardian/libs';
-import type { FECricketInnings, FECricketMatch } from './feCricketMatch';
 import type { FEFootballPageConfig } from './feFootballDataPage';
+import type {
+	FECricketInnings,
+	FECricketMatch,
+} from './frontend/feCricketMatch';
 import type { EditionId } from './lib/edition';
 import { error, ok, type Result } from './lib/result';
 import type { NavType } from './model/extract-nav';
 import type { FooterType } from './types/footer';
 
-export type BowlerData = {
+export type Bowler = {
 	name: string;
 	overs: number;
 	maidens: number;
@@ -15,7 +18,7 @@ export type BowlerData = {
 	balls: number;
 };
 
-export type BatterData = {
+export type Batter = {
 	name: string;
 	ballsFaced: number;
 	runs: number;
@@ -39,7 +42,7 @@ export type InningsTotals = {
 	extras: number;
 };
 
-export type FallOfWicketData = {
+export type FallOfWicket = {
 	order: number;
 	name: string;
 	runs: number;
@@ -50,23 +53,23 @@ export type CricketTeam = {
 	lineup: string[];
 };
 
-export type InningsData = {
+export type Innings = {
 	description: string;
-	bowlers: BowlerData[];
-	batters: BatterData[];
+	bowlers: Bowler[];
+	batters: Batter[];
 	extras: Extras;
 	inningsTotals: InningsTotals;
-	fallOfWickets: FallOfWicketData[];
+	fallOfWickets: FallOfWicket[];
 };
 
 type CricketMatch = {
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
 	officials: string[];
-	innings: InningsData[];
+	innings: Innings[];
 };
 
-const feInningsToDCRInnings = (feInnings: FECricketInnings): InningsData => {
+const feInningsToDCARInnings = (feInnings: FECricketInnings): Innings => {
 	const inningsTotals = {
 		runs: feInnings.runsScored,
 		overs: feInnings.overs,
@@ -102,7 +105,9 @@ export const parse = (
 		return error('Could not determine home and away cricket teams');
 	}
 
-	const innings = feCricketMatch.innings.map(feInningsToDCRInnings).reverse();
+	const innings = feCricketMatch.innings
+		.map(feInningsToDCARInnings)
+		.reverse();
 
 	return ok({
 		homeTeam,
@@ -112,7 +117,7 @@ export const parse = (
 	});
 };
 
-export type DCRCricketMatchPage = {
+export type CricketMatchPage = {
 	match: CricketMatch;
 	nav: NavType;
 	editionId: EditionId;

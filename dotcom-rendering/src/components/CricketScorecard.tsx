@@ -12,12 +12,12 @@ import {
 import { Stack } from '@guardian/source/react-components';
 import type { ReactNode } from 'react';
 import type {
-	BatterData,
-	BowlerData,
+	Batter,
+	Bowler,
 	CricketTeam,
 	Extras,
-	FallOfWicketData,
-	InningsData,
+	FallOfWicket,
+	Innings,
 	InningsTotals,
 } from '../cricketMatch';
 import { palette } from '../palette';
@@ -117,7 +117,7 @@ const getExtrasDescription = ({
 	</>
 );
 
-const Bowling = ({ bowlers }: { bowlers: BowlerData[] }) => (
+const Bowling = ({ bowlers }: { bowlers: Bowler[] }) => (
 	<table css={tableStyles}>
 		<thead>
 			<tr>
@@ -151,7 +151,7 @@ const Batting = ({
 	extras,
 	inningsTotals,
 }: {
-	batters: BatterData[];
+	batters: Batter[];
 	extras: Extras;
 	inningsTotals: InningsTotals;
 }) => (
@@ -240,7 +240,7 @@ const Batting = ({
 const FallOfWickets = ({
 	fallOfWickets,
 }: {
-	fallOfWickets: FallOfWicketData[];
+	fallOfWickets: FallOfWicket[];
 }) => (
 	<table css={tableStyles}>
 		<thead>
@@ -263,7 +263,7 @@ const FallOfWickets = ({
 );
 
 type Props = {
-	allInnings: InningsData[];
+	allInnings: Innings[];
 	officials: string[];
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
