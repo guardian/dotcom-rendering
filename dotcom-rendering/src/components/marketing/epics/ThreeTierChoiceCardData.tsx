@@ -2,7 +2,7 @@ import { isUndefined } from '@guardian/libs';
 import type { ChoiceInfo } from './ThreeTierChoiceCards';
 
 export const ChoiceCardTestData_REGULAR = (
-	shorterBenefits: boolean,
+	longerBenefits: boolean,
 ): ChoiceInfo[] => [
 	{
 		supportTier: 'Contribution',
@@ -39,9 +39,9 @@ export const ChoiceCardTestData_REGULAR = (
 		},
 		benefitsLabel: 'All-access digital',
 		benefits: () =>
-			shorterBenefits
-				? shorterSupporterPlusBenefits
-				: fullSupporterPlusBenefits,
+			longerBenefits
+				? fullSupporterPlusBenefits
+				: shorterSupporterPlusBenefits,
 		recommended: true,
 	},
 	{
@@ -54,7 +54,7 @@ export const ChoiceCardTestData_REGULAR = (
 ];
 
 export const ChoiceCardTestData_US = (
-	shorterBenefits: boolean,
+	longerBenefits: boolean,
 ): ChoiceInfo[] => [
 	{
 		supportTier: 'Contribution',
@@ -72,9 +72,9 @@ export const ChoiceCardTestData_US = (
 			`Support ${currencySymbol}${amount}/month`,
 		benefitsLabel: 'All-access digital',
 		benefits: () =>
-			shorterBenefits
-				? shorterSupporterPlusBenefits
-				: fullSupporterPlusBenefits,
+			longerBenefits
+				? fullSupporterPlusBenefits
+				: shorterSupporterPlusBenefits,
 		recommended: true,
 	},
 	{
