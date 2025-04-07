@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { from, space, until } from '@guardian/source/foundations';
-import { SvgMediaControlsPlay } from '@guardian/source/react-components';
+import { from, space } from '@guardian/source/foundations';
+import { Hide, SvgMediaControlsPlay } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
 import { getZIndex } from '../lib/getZIndex';
@@ -180,10 +180,6 @@ const nonImmersivePodcastImageStyles = css`
 	*/
 	bottom: -${space[14]}px;
 	left: ${space[2]}px;
-
-	${from.tablet} {
-		display: none;
-	}
 `;
 
 const starRatingWrapper = css`
@@ -240,6 +236,35 @@ const getMedia = ({
 
 	return undefined;
 };
+
+const renderWaveform = (duration: string, bars: number) => (
+	<div css={waveformStyles} className="waveform">
+		<WaveForm seed={duration} height={64} bars={bars} barWidth={2} />
+	</div>
+);
+
+const renderPodcastImage = (
+	image: string,
+	alt: string,
+	isImmersive: boolean,
+) => (
+	<div css={podcastImageContainerStyles}>
+		<div
+			css={[
+				podcastImageStyles,
+				!isImmersive && nonImmersivePodcastImageStyles,
+			]}
+		>
+			<CardPicture
+				mainImage={image}
+				imageSize="podcast"
+				alt={alt}
+				loading="lazy"
+				aspectRatio="1:1"
+			/>
+		</div>
+	</div>
+);
 
 export type Props = {
 	linkTo: string;
@@ -454,7 +479,6 @@ export const FeatureCard = ({
 											imageSize={imageSize}
 											alt={headlineText}
 											loading={imageLoading}
-											roundedCorners={false}
 											aspectRatio={aspectRatio}
 											mobileAspectRatio={
 												mobileAspectRatio
@@ -470,7 +494,6 @@ export const FeatureCard = ({
 											imageSize={imageSize}
 											alt={media.imageAltText}
 											loading={imageLoading}
-											roundedCorners={false}
 											aspectRatio={aspectRatio}
 											mobileAspectRatio={
 												mobileAspectRatio
@@ -504,37 +527,24 @@ export const FeatureCard = ({
 									]}
 								>
 									{mainMedia?.type === 'Audio' &&
-										!!mainMedia.podcastImage?.src && (
-											<div
-												css={
-													podcastImageContainerStyles
-												}
-											>
-												<div
-													css={[
-														podcastImageStyles,
-														nonImmersivePodcastImageStyles,
-													]}
-												>
-													<CardPicture
-														mainImage={
-															mainMedia
-																.podcastImage
-																.src
-														}
-														imageSize="podcast"
-														alt={
-															mainMedia
-																.podcastImage
-																.altText ?? ''
-														}
-														loading="lazy"
-														roundedCorners={false}
-														aspectRatio="1:1"
-													/>
-												</div>
-											</div>
-										)}
+										!!mainMedia.podcastImage?.src &&
+										(isImmersive ? (
+											<Hide from="tablet">
+												{renderPodcastImage(
+													mainMedia.podcastImage.src,
+													mainMedia.podcastImage
+														.altText ?? '',
+													false, // Immersive cards are styled as feature cards below the tablet viewport
+												)}
+											</Hide>
+										) : (
+											renderPodcastImage(
+												mainMedia.podcastImage.src,
+												mainMedia.podcastImage
+													.altText ?? '',
+												false,
+											)
+										))}
 									<div
 										css={[
 											overlayStyles,
@@ -542,6 +552,28 @@ export const FeatureCard = ({
 												immersiveOverlayStyles,
 										]}
 									>
+										{isImmersive &&
+											mainMedia?.type === 'Audio' &&
+											!!mainMedia.podcastImage?.src && (
+												<div
+													css={
+														podcastImageContainerStyles
+													}
+												>
+													<Hide until="tablet">
+														{renderPodcastImage(
+															mainMedia
+																.podcastImage
+																.src,
+															mainMedia
+																.podcastImage
+																.altText ?? '',
+															true,
+														)}
+													</Hide>
+												</div>
+											)}
+
 										{/**
 										 * Without the wrapping div the headline and byline would have space
 										 * inserted between them due to being direct children of the flex container
@@ -600,47 +632,6 @@ export const FeatureCard = ({
 											</div>
 										)}
 
-										{isImmersive &&
-											mainMedia?.type === 'Audio' &&
-											!!mainMedia.podcastImage?.src && (
-												<div
-													css={
-														podcastImageContainerStyles
-													}
-												>
-													<div
-														css={[
-															podcastImageStyles,
-															css`
-																${until.tablet} {
-																	display: none;
-																}
-															`,
-														]}
-													>
-														<CardPicture
-															mainImage={
-																mainMedia
-																	.podcastImage
-																	.src
-															}
-															imageSize="podcast"
-															alt={
-																mainMedia
-																	.podcastImage
-																	.altText ??
-																''
-															}
-															loading="lazy"
-															roundedCorners={
-																false
-															}
-															aspectRatio="1:1"
-														/>
-													</div>
-												</div>
-											)}
-
 										<CardFooter
 											format={format}
 											age={
@@ -690,21 +681,10 @@ export const FeatureCard = ({
 										/>
 
 										{!isImmersive &&
-											mainMedia?.type === 'Audio' && (
-												<div
-													css={waveformStyles}
-													className="waveform"
-												>
-													<WaveForm
-														seed={
-															mainMedia.duration
-														}
-														height={64}
-														// Just enough to cover the full width of the feature card in it's largest form
-														bars={233}
-														barWidth={2}
-													/>
-												</div>
+											mainMedia?.type === 'Audio' &&
+											renderWaveform(
+												mainMedia.duration,
+												233,
 											)}
 									</div>
 									{/* On video article cards, the duration is displayed in the footer */}
@@ -726,20 +706,9 @@ export const FeatureCard = ({
 									) : null}
 								</div>
 
-								{isImmersive && mainMedia?.type === 'Audio' && (
-									<div
-										css={waveformStyles}
-										className="waveform"
-									>
-										<WaveForm
-											seed={mainMedia.duration}
-											height={64}
-											// Just enough to cover the full width of the feature card in it's largest form
-											bars={314}
-											barWidth={2}
-										/>
-									</div>
-								)}
+								{isImmersive &&
+									mainMedia?.type === 'Audio' &&
+									renderWaveform(mainMedia.duration, 313)}
 							</div>
 						)}
 					</div>
