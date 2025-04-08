@@ -334,7 +334,10 @@ export const InteractiveBlockComponent = ({
 			: false;
 
 	const isUploaderEmbedPath =
-		url && url.includes('interactive.guim.co.uk/uploader/embed/')
+		url &&
+		(url.includes('interactive.guim.co.uk/uploader/embed/') ||
+			url.includes('superyacht') ||
+			url.includes('choropleth_map_maker'))
 			? true
 			: false;
 
