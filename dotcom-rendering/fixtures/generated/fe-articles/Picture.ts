@@ -28,6 +28,7 @@ export const Picture: FEArticle = {
 					{
 						index: 0,
 						fields: {
+							aspectRatio: '5:3',
 							height: '1200',
 							width: '2000',
 						},
@@ -38,6 +39,7 @@ export const Picture: FEArticle = {
 					{
 						index: 1,
 						fields: {
+							aspectRatio: '5:3',
 							height: '600',
 							width: '1000',
 						},
@@ -48,6 +50,7 @@ export const Picture: FEArticle = {
 					{
 						index: 2,
 						fields: {
+							aspectRatio: '5:3',
 							height: '300',
 							width: '500',
 						},
@@ -58,6 +61,7 @@ export const Picture: FEArticle = {
 					{
 						index: 3,
 						fields: {
+							aspectRatio: '5:3',
 							height: '84',
 							width: '140',
 						},
@@ -68,6 +72,7 @@ export const Picture: FEArticle = {
 					{
 						index: 4,
 						fields: {
+							aspectRatio: '5:3',
 							height: '1819',
 							width: '3031',
 						},
@@ -78,6 +83,7 @@ export const Picture: FEArticle = {
 					{
 						index: 5,
 						fields: {
+							aspectRatio: '5:3',
 							isMaster: 'true',
 							height: '1819',
 							width: '3031',
@@ -88,7 +94,7 @@ export const Picture: FEArticle = {
 					},
 				],
 			},
-			elementId: '217323a6-ddcc-4e7e-b06f-e1ed27e6f344',
+			elementId: 'cbf7cd4b-c4db-4546-b942-21685b1bf1b7',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -559,7 +565,6 @@ export const Picture: FEArticle = {
 			brazeSwitch: true,
 			consentManagement: true,
 			commercial: true,
-			redplanetForAus: true,
 			prebidSonobi: true,
 			idProfileNavigation: true,
 			confiantAdVerification: true,
@@ -1024,6 +1029,10 @@ export const Picture: FEArticle = {
 						],
 					},
 					{
+						title: 'US politics',
+						url: '/us-news/us-politics',
+					},
+					{
 						title: 'World',
 						url: '/world',
 						longTitle: 'World news',
@@ -1071,6 +1080,10 @@ export const Picture: FEArticle = {
 					{
 						title: 'Climate crisis',
 						url: '/environment/climate-crisis',
+					},
+					{
+						title: 'Middle East',
+						url: '/world/middleeast',
 					},
 					{
 						title: 'Ukraine',
@@ -1197,32 +1210,6 @@ export const Picture: FEArticle = {
 					{
 						title: 'UK politics',
 						url: '/politics',
-					},
-					{
-						title: 'Education',
-						url: '/education',
-						children: [
-							{
-								title: 'Schools',
-								url: '/education/schools',
-							},
-							{
-								title: 'Teachers',
-								url: '/teacher-network',
-							},
-							{
-								title: 'Universities',
-								url: '/education/universities',
-							},
-							{
-								title: 'Students',
-								url: '/education/students',
-							},
-						],
-					},
-					{
-						title: 'Society',
-						url: '/society',
 					},
 					{
 						title: 'Science',
@@ -1401,6 +1388,10 @@ export const Picture: FEArticle = {
 				iconName: 'home',
 				children: [
 					{
+						title: 'The Filter',
+						url: '/uk/thefilter',
+					},
+					{
 						title: 'Fashion',
 						url: '/fashion',
 					},
@@ -1532,7 +1523,7 @@ export const Picture: FEArticle = {
 			},
 			{
 				title: 'Inside the Guardian',
-				url: 'https://www.theguardian.com/membership',
+				url: 'https://www.theguardian.com/insidetheguardian',
 			},
 			{
 				title: 'The Observer',
@@ -1573,6 +1564,22 @@ export const Picture: FEArticle = {
 						url: '/crosswords/series/quick',
 					},
 					{
+						title: 'Speedy',
+						url: '/crosswords/series/speedy',
+					},
+					{
+						title: 'Quick cryptic',
+						url: '/crosswords/series/quick-cryptic',
+					},
+					{
+						title: 'Everyman',
+						url: '/crosswords/series/everyman',
+					},
+					{
+						title: 'Quiptic',
+						url: '/crosswords/series/quiptic',
+					},
+					{
 						title: 'Cryptic',
 						url: '/crosswords/series/cryptic',
 					},
@@ -1581,28 +1588,20 @@ export const Picture: FEArticle = {
 						url: '/crosswords/series/prize',
 					},
 					{
-						title: 'Weekend',
-						url: '/crosswords/series/weekend-crossword',
-					},
-					{
-						title: 'Quiptic',
-						url: '/crosswords/series/quiptic',
+						title: 'Azed',
+						url: '/crosswords/series/azed',
 					},
 					{
 						title: 'Genius',
 						url: '/crosswords/series/genius',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
+						title: 'Weekend',
+						url: '/crosswords/series/weekend-crossword',
 					},
 					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
+						title: 'Special',
+						url: '/crosswords/series/special',
 					},
 				],
 			},
@@ -1744,7 +1743,7 @@ export const Picture: FEArticle = {
 				},
 				{
 					text: 'Help',
-					url: '/help',
+					url: 'https://manage.theguardian.com/help-centre',
 					dataLinkName: 'uk : footer : tech feedback',
 					extraClasses: 'js-tech-feedback-report',
 				},
@@ -1806,8 +1805,14 @@ export const Picture: FEArticle = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
+					url: 'https://uploads.guim.co.uk/2024/09/04/Modern_Slavery_Statement_2024_.pdf',
 					dataLinkName: 'uk : footer : modern slavery act statement',
+					extraClasses: '',
+				},
+				{
+					text: 'Tax strategy',
+					url: 'https://uploads.guim.co.uk/2024/08/27/TAX_STRATEGY_FOR_THE_YEAR_ENDED_31_MARCH_2025.pdf',
+					dataLinkName: 'uk : footer : tax strategy',
 					extraClasses: '',
 				},
 				{
@@ -1838,12 +1843,6 @@ export const Picture: FEArticle = {
 					text: 'LinkedIn',
 					url: 'https://www.linkedin.com/company/theguardian',
 					dataLinkName: 'uk : footer : linkedin',
-					extraClasses: '',
-				},
-				{
-					text: 'Twitter',
-					url: 'https://twitter.com/guardian',
-					dataLinkName: 'uk: footer : twitter',
 					extraClasses: '',
 				},
 				{
