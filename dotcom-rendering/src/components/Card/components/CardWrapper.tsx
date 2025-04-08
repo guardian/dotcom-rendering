@@ -55,7 +55,7 @@ const hoverStyles = css`
 
 /** When we hover on sublinks, we want to prevent the general hover styles applying */
 const sublinkHoverStyles = css`
-	:has(ul.sublinks:hover) {
+	:has(ul.sublinks:hover, .video-container:hover) {
 		.card-headline .show-underline {
 			text-decoration: none;
 		}

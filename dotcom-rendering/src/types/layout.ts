@@ -27,6 +27,7 @@ export type CardImageType =
 	| 'crossword'
 	| 'slideshow'
 	| 'video'
+	| 'loop-video'
 	| 'podcast';
 
 export type SmallHeadlineSize =
@@ -36,7 +37,5 @@ export type SmallHeadlineSize =
 	| 'large'
 	| 'huge'
 	| 'ginormous';
-
-export type MediaType = 'Video' | 'Audio' | 'Gallery';
 
 export type LeftColSize = 'compact' | 'wide';

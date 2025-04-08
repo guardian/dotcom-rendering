@@ -36,6 +36,7 @@ import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
+import { LoopVideo } from '../LoopVideo.importable';
 import { MediaMeta } from '../MediaMeta';
 import { Pill } from '../Pill';
 import { Slideshow } from '../Slideshow';
@@ -56,7 +57,7 @@ import {
 	decideAvatarPosition,
 	type GapSizes,
 } from './components/CardLayout';
-import { CardLink } from './components/CardLink';
+// import { CardLink } from './components/CardLink';
 import { CardWrapper } from './components/CardWrapper';
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
@@ -263,6 +264,13 @@ const getMedia = ({
 	canPlayInline?: boolean;
 	isBetaContainer: boolean;
 }) => {
+	if (mainMedia?.type === 'LoopVideo') {
+		return {
+			type: 'loop-video',
+			mainMedia,
+			...(imageUrl && { imageUrl }),
+		} as const;
+	}
 	if (mainMedia?.type === 'Video' && canPlayInline) {
 		return {
 			type: 'video',
@@ -441,6 +449,14 @@ export const Card = ({
 	 */
 	const isVideoMainMedia =
 		mainMedia?.type === 'Video' && format.design !== ArticleDesign.Video;
+
+	/**
+	 * A loop video...
+	 */
+	const isLoopVideo =
+		mainMedia?.type === 'Video' ||
+		headlineText ===
+			'Leave those kids alone! Teaching through play – in pictures';
 
 	const decideAge = () => {
 		if (!webPublicationDate) return undefined;
@@ -758,12 +774,12 @@ export const Card = ({
 			isOnwardContent={isOnwardContent}
 			containerPalette={containerPalette}
 		>
-			<CardLink
+			{/* <CardLink
 				linkTo={linkTo}
 				headlineText={headlineText}
 				dataLinkName={dataLinkName}
 				isExternalLink={isExternalLink}
-			/>
+			/> */}
 			{headlinePosition === 'outer' && (
 				<div
 					css={css`
@@ -797,12 +813,15 @@ export const Card = ({
 							cardHasImage={!!image}
 						/>
 					) : null}
-					{!showPill && !!mainMedia && mainMedia.type !== 'Video' && (
-						<MediaMeta
-							mediaType={mainMedia.type}
-							hasKicker={!!kickerText}
-						/>
-					)}
+					{!showPill &&
+						!!mainMedia &&
+						mainMedia.type !== 'Video' &&
+						mainMedia.type !== 'LoopVideo' && (
+							<MediaMeta
+								mediaType={mainMedia.type}
+								hasKicker={!!kickerText}
+							/>
+						)}
 				</div>
 			)}
 
@@ -888,7 +907,23 @@ export const Card = ({
 								/>
 							</AvatarContainer>
 						)}
-						{media.type === 'video' && (
+						{isLoopVideo && (
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<LoopVideo
+									// src="https://uploads.guim.co.uk/2024/10/01/241001HeleneLoop_2.mp4"
+									src="https://uploads.guim.co.uk/2024/58/19/Deepfake%20clip%20shows%20Nigel%20Farage%20destroying%20Rishi%20Sunak%E2%80%99s%20house%20in%20Minecraft%20--007473ac-3147-41f5-9cf3-d454c28037cf-3.mp4"
+									posterImage={media.imageUrl ?? ''}
+									altText={media.imageAltText ?? ''}
+									imageSize={imageSize}
+									imageLoading={imageLoading}
+									aspectRatio={aspectRatio}
+								/>
+							</Island>
+						)}
+						{media.type === 'video' && !isLoopVideo && (
 							<>
 								{showMainVideo ? (
 									<div
@@ -1038,7 +1073,6 @@ export const Card = ({
 						{media.type === 'crossword' && (
 							<img src={media.imageUrl} alt="" />
 						)}
-
 						{media.type === 'podcast' && (
 							<>
 								{media.podcastImage?.src && !showKickerImage ? (
