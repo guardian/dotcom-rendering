@@ -353,7 +353,7 @@ requests.push(
 );
 
 requests.push(
-	// ToDo: run vs production (currently generated vs localhost)
+	// This match data will expire after two months, find a new match if this needs updating
 	fetch(
 		'https://www.theguardian.com/sport/cricket/match/2025-03-26/australia-women-s-cricket-team.json?dcr',
 	)
@@ -371,7 +371,7 @@ requests.push(
 
 			// Write the new frontend fixture data
 			const contents = `${HEADER}
-			import type { FECricketMatchPage } from '../../src/feCricketMatch';
+			import type { FECricketMatchPage } from '../../src/frontend/feCricketMatch';
 
 			export const cricketMatchData: FECricketMatchPage = ${JSON.stringify(
 				cricketMatchData,
