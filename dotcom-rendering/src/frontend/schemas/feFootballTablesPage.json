@@ -3,12 +3,6 @@
         {
             "type": "object",
             "properties": {
-                "nextPage": {
-                    "type": "string"
-                },
-                "previousPage": {
-                    "type": "string"
-                },
                 "filters": {
                     "$ref": "#/definitions/Record<string,FEFootballCompetition[]>"
                 },
@@ -71,7 +65,7 @@
                                     "nation": {
                                         "type": "string"
                                     },
-                                    "dividers": {
+                                    "tableDividers": {
                                         "type": "array",
                                         "items": {
                                             "type": "number"
@@ -82,6 +76,7 @@
                                     "fullName",
                                     "id",
                                     "nation",
+                                    "tableDividers",
                                     "url"
                                 ]
                             },

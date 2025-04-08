@@ -13,7 +13,7 @@ export type FECompetitionSummary = {
 	url: string;
 	fullName: string;
 	nation: string;
-	dividers?: number[];
+	tableDividers: number[];
 };
 
 export type FEFootballCompetition = {
@@ -30,8 +30,6 @@ export type FEFootballPageConfig = Omit<
 };
 
 export type FEFootballDataPage = {
-	nextPage?: string;
-	previousPage?: string;
 	filters: Record<string, FEFootballCompetition[]>;
 	nav: FENavType;
 	editionId: EditionId;

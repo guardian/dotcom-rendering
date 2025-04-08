@@ -14,7 +14,7 @@ export type TeamResult = {
 	foe: TeamScore;
 };
 
-type TeamInfo = {
+type Team = {
 	name: string;
 	id: string;
 	url?: string;
@@ -22,7 +22,7 @@ type TeamInfo = {
 
 type Entry = {
 	position: number;
-	team: TeamInfo;
+	team: Team;
 	gamesPlayed: number;
 	won: number;
 	drawn: number;
@@ -39,28 +39,18 @@ export type FootballTableCompetition = {
 	name: string;
 	hasGroups: boolean;
 	dividers: number[];
-	tables: FootballTableData[];
+	tables: FootballTable[];
 };
 
-export type FootballTableData = {
+export type FootballTable = {
 	groupName?: string;
 	entries: Entry[];
 };
 
 export type FootballTableCompetitions = FootballTableCompetition[];
 
-const parseTables = (
-	feGroups: FEFootballTable['groups'],
-): Result<ParserError, FootballTableData[]> => {
-	const groupsParser = listParse(parseTable);
-	return groupsParser(feGroups);
-};
-
-const parseTable = (
-	feGroup: FEGroup,
-): Result<ParserError, FootballTableData> => {
-	const entriesParser = listParse(parseEntry);
-	const parsedEntries = entriesParser(feGroup.entries);
+const parseTable = (feGroup: FEGroup): Result<ParserError, FootballTable> => {
+	const parsedEntries = parseEntries(feGroup.entries);
 
 	if (parsedEntries.kind === 'error') {
 		return parsedEntries;
@@ -72,8 +62,10 @@ const parseTable = (
 	});
 };
 
-const parseResult = (result: FETeamResult): Result<ParserError, TeamResult> => {
-	return ok({
+const parseTables = listParse(parseTable);
+
+const parseResult = (result: FETeamResult): Result<ParserError, TeamResult> =>
+	ok({
 		matchId: result.matchId,
 		self: {
 			id: result.self.id,
@@ -86,14 +78,8 @@ const parseResult = (result: FETeamResult): Result<ParserError, TeamResult> => {
 			score: result.foe.score,
 		},
 	});
-};
 
-const parseResults = (
-	teamResults: FETeamResult[],
-): Result<ParserError, TeamResult[]> => {
-	const resultsParser = listParse(parseResult);
-	return resultsParser(teamResults);
-};
+const parseResults = listParse(parseResult);
 
 const parseEntry = (
 	feEntry: FELeagueTableEntry,
@@ -125,7 +111,9 @@ const parseEntry = (
 	});
 };
 
-const parseFootballTables = (
+const parseEntries = listParse(parseEntry);
+
+const parseFootballTableCompetition = (
 	table: FEFootballTable,
 ): Result<ParserError, FootballTableCompetition> => {
 	const parsedTables = parseTables(table.groups);
@@ -138,13 +126,10 @@ const parseFootballTables = (
 		url: table.competition.url,
 		name: table.competition.fullName,
 		hasGroups: table.hasGroups,
-		dividers: table.competition.dividers ?? [],
+		dividers: table.competition.tableDividers,
 		tables: parsedTables.value,
 	});
 };
 
 // ToDo: if we don't return any errors can we remove the Result type?
-export const parse: (
-	frontendData: FEFootballTable[],
-) => Result<ParserError, FootballTableCompetitions> =
-	listParse(parseFootballTables);
+export const parse = listParse(parseFootballTableCompetition);

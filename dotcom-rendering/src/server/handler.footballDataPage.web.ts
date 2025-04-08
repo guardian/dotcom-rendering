@@ -21,10 +21,7 @@ import {
 } from '../model/validate';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
-import {
-	renderFootballMatchesPage,
-	renderFootballTablesPage,
-} from './render.footballDataPage.web';
+import { renderFootballPage } from './render.footballDataPage.web';
 
 const decidePageKind = (pageId: string): FootballMatchKind => {
 	if (pageId.includes('live')) {
@@ -110,8 +107,7 @@ export const handleFootballMatchListPage: RequestHandler = ({ body }, res) => {
 		validateAsFootballMatchListPage(body);
 
 	const parsedFootballData = parseFEFootballMatchList(footballDataValidated);
-	const { html, prefetchScripts } =
-		renderFootballMatchesPage(parsedFootballData);
+	const { html, prefetchScripts } = renderFootballPage(parsedFootballData);
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
@@ -131,8 +127,6 @@ const parseFEFootballTables = (
 	return {
 		tables: parsedFootballTables.value,
 		kind: 'Tables',
-		nextPage: data.nextPage,
-		previousPage: data.previousPage,
 		regions: parseFEFootballCompetitionRegions(data.filters),
 		nav: {
 			...extractNAV(data.nav),
@@ -156,7 +150,7 @@ export const handleFootballTablesPage: RequestHandler = ({ body }, res) => {
 	const parsedFootballTableData = parseFEFootballTables(
 		footballTablesPageValidated,
 	);
-	const { html, prefetchScripts } = renderFootballTablesPage(
+	const { html, prefetchScripts } = renderFootballPage(
 		parsedFootballTableData,
 	);
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);

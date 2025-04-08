@@ -11,8 +11,6 @@ export type Region = {
 };
 
 export type FootballData = {
-	nextPage?: string;
-	previousPage?: string;
 	regions: Region[];
 	nav: NavType;
 	editionId: EditionId;
@@ -25,6 +23,8 @@ export type FootballData = {
 };
 
 export type FootballMatchListPage = FootballData & {
+	nextPage?: string;
+	previousPage?: string;
 	matchesList: FootballMatches;
 	now: string;
 	kind: FootballMatchKind;

@@ -67,19 +67,8 @@ const decideTitle = (
 	}
 };
 
-export const renderFootballTablesPage = (footballData: FootballTablesPage) =>
-	renderFootballDataPage(
-		footballData,
-		decideTitle(
-			footballData.kind,
-			footballData.config.pageId,
-			footballData.regions,
-		),
-		decideDescription(footballData.kind),
-	);
-
-export const renderFootballMatchesPage = (
-	footballData: FootballMatchListPage,
+export const renderFootballPage = (
+	footballData: FootballMatchListPage | FootballTablesPage,
 ) =>
 	renderFootballDataPage(
 		footballData,

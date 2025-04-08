@@ -90,4 +90,6 @@ export type FEMatchByDateAndCompetition = {
 
 export type FEFootballMatchListPage = FEFootballDataPage & {
 	matchesList: FEMatchByDateAndCompetition[];
+	nextPage?: string;
+	previousPage?: string;
 };

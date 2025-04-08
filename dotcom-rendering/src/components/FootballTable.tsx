@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { from, textSans14, until } from '@guardian/source/foundations';
-import type { FootballTableData } from '../footballTables';
+import type { FootballTable as FootballTableData } from '../footballTables';
 import { palette } from '../palette';
 import { FootballTableForm } from './FootballTableForm';
 
@@ -126,15 +126,19 @@ const TeamWithCrest = ({
 		`}
 	>
 		<FootballCrest teamId={id} />
-		<a
-			css={css`
-				color: inherit;
-				text-decoration: none;
-			`}
-			href={url}
-		>
-			{team}
-		</a>
+		{url ? (
+			<a
+				css={css`
+					color: inherit;
+					text-decoration: none;
+				`}
+				href={url}
+			>
+				{team}
+			</a>
+		) : (
+			team
+		)}
 	</div>
 );
 

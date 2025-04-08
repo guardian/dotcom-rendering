@@ -46,38 +46,37 @@ export const FootballTableForm = ({
 			`}
 		>
 			{teamResults.map(({ self, foe, matchId }) => {
-				if (!isUndefined(self.score) && !isUndefined(foe.score)) {
-					const isWin = self.score > foe.score;
-					const isLoss = self.score < foe.score;
-					const styles = isWin
-						? winStyles
-						: isLoss
-						? lossStyles
-						: drawStyles;
-					const title = isWin
-						? `Won ${self.score}-${foe.score} against ${foe.name}`
-						: isLoss
-						? `Lost ${self.score}-${foe.score} to ${foe.name}`
-						: `Drew ${self.score}-${foe.score} with ${foe.name}`;
-
-					return (
-						<span
-							css={[formBlockStyles, styles]}
-							key={matchId}
-							title={title}
-						>
-							<span
-								css={css`
-									${visuallyHidden}
-								`}
-							>
-								{title}
-							</span>
-						</span>
-					);
+				if (isUndefined(self.score) || isUndefined(foe.score)) {
+					return null;
 				}
+				const isWin = self.score > foe.score;
+				const isLoss = self.score < foe.score;
+				const styles = isWin
+					? winStyles
+					: isLoss
+					? lossStyles
+					: drawStyles;
+				const title = isWin
+					? `Won ${self.score}-${foe.score} against ${foe.name}`
+					: isLoss
+					? `Lost ${self.score}-${foe.score} to ${foe.name}`
+					: `Drew ${self.score}-${foe.score} with ${foe.name}`;
 
-				return null;
+				return (
+					<span
+						css={[formBlockStyles, styles]}
+						key={matchId}
+						title={title}
+					>
+						<span
+							css={css`
+								${visuallyHidden}
+							`}
+						>
+							{title}
+						</span>
+					</span>
+				);
 			})}
 		</div>
 	);
