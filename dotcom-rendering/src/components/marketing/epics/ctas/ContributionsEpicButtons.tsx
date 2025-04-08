@@ -21,7 +21,6 @@ import { useIsInView } from '../../../../lib/useIsInView';
 import { hasSetReminder } from '../../lib/reminders';
 import {
 	addChoiceCardsOneTimeParams,
-	addChoiceCardsParams,
 	addChoiceCardsProductParams,
 	addRegionIdAndTrackingParamsToSupportUrl,
 	isSupportUrl,
@@ -151,7 +150,6 @@ interface ContributionsEpicButtonsProps {
 	amountsTestName?: string;
 	amountsVariantName?: string;
 	numArticles: number;
-	variantOfChoiceCard?: string;
 }
 
 export const ContributionsEpicButtons = ({
@@ -167,7 +165,6 @@ export const ContributionsEpicButtons = ({
 	amountsTestName,
 	amountsVariantName,
 	numArticles,
-	variantOfChoiceCard,
 }: ContributionsEpicButtonsProps): JSX.Element | null => {
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
@@ -190,22 +187,8 @@ export const ContributionsEpicButtons = ({
 	}
 
 	const getChoiceCardCta = (cta: Cta): Cta => {
-		/** In the US - direct 50 % traffic to the checkout page and 50 % traffic to the landing page for the AB test  */
-
-		if (showChoiceCards && countryCode === 'US') {
+		if (showChoiceCards) {
 			if (threeTierChoiceCardSelectedProduct === 'OneOff') {
-				if (
-					variantOfChoiceCard ===
-					'US_CHECKOUT_THREE_TIER_CHOICE_CARDS'
-				) {
-					return {
-						text: cta.text,
-						baseUrl: addChoiceCardsParams(
-							'https://support.theguardian.com/contribute/checkout',
-							'ONE_OFF',
-						),
-					};
-				}
 				return {
 					text: cta.text,
 					baseUrl: addChoiceCardsOneTimeParams(cta.baseUrl),
@@ -219,38 +202,6 @@ export const ContributionsEpicButtons = ({
 					? threeTierChoiceCardAmounts['Monthly'][countryGroupId]
 							.Contribution
 					: undefined;
-			const url =
-				variantOfChoiceCard === 'US_CHECKOUT_THREE_TIER_CHOICE_CARDS'
-					? 'https://support.theguardian.com/checkout'
-					: cta.baseUrl;
-
-			return {
-				text: cta.text,
-				baseUrl: addChoiceCardsProductParams(
-					url,
-					threeTierChoiceCardSelectedProduct,
-					'Monthly',
-					contributionAmount,
-				),
-			};
-		}
-
-		/** Not in the US - direct taffic to the landing page */
-		if (
-			showChoiceCards &&
-			variantOfChoiceCard === 'THREE_TIER_CHOICE_CARDS'
-		) {
-			if (threeTierChoiceCardSelectedProduct === 'OneOff') {
-				/**
-				 * OneOff payments are not supported by the generic checkout yet.
-				 * We also have no way of highlighting to a contributor that "OneOff"
-				 * was selected, so we just send them to the homepage.
-				 */
-				return {
-					text: cta.text,
-					baseUrl: 'https://support.theguardian.com/contribute',
-				};
-			}
 
 			return {
 				text: cta.text,
@@ -258,6 +209,7 @@ export const ContributionsEpicButtons = ({
 					cta.baseUrl,
 					threeTierChoiceCardSelectedProduct,
 					'Monthly',
+					contributionAmount,
 				),
 			};
 		}

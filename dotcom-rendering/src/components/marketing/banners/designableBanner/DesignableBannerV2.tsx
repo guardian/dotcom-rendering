@@ -39,6 +39,7 @@ import {
 import { ThreeTierChoiceCards } from '../../epics/ThreeTierChoiceCards';
 import type { SupportTier } from '../../epics/utils/threeTierChoiceCardAmounts';
 import { useReminder } from '../../hooks/useReminder';
+import { getChoiceCardData } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import {
 	addChoiceCardsProductParams,
@@ -447,7 +448,10 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 							setSelectedProduct={
 								setThreeTierChoiceCardSelectedProduct
 							}
-							variantOfChoiceCard={'THREE_TIER_CHOICE_CARDS'}
+							choices={getChoiceCardData(
+								isTabletOrAbove,
+								countryCode,
+							)}
 						/>
 
 						<div css={styles.ctaContainer}>
