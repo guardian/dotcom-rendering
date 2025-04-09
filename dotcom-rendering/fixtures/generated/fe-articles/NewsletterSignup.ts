@@ -18,12 +18,12 @@ export const NewsletterSignup: FEArticle = {
 	headline:
 		'Sign up for the Moving the Goalposts newsletter: our free women’s football email',
 	standfirst:
-		'<p>Get our roundup of women’s football for free twice a week, featuring the insights of experts such as Ada Hegerberg and Anita Asante</p>',
+		'<p>Get our roundup of women’s football for free once a week, featuring the insights of experts such as Ada Hegerberg and Magdalena Eriksson</p>',
 	webTitle:
 		'Sign up for the Moving the Goalposts newsletter: our free women’s football email',
 	mainMediaElements: [
 		{
-			displayCredit: false,
+			displayCredit: true,
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 			role: 'inline',
 			media: {
@@ -31,99 +31,115 @@ export const NewsletterSignup: FEArticle = {
 					{
 						index: 0,
 						fields: {
-							height: '600',
-							width: '1000',
+							aspectRatio: '5:3',
+							height: '1200',
+							width: '2000',
 						},
 						mediaType: 'Image',
-						mimeType: 'image/png',
-						url: 'https://media.guim.co.uk/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/1000.png',
+						mimeType: 'image/jpeg',
+						url: 'https://media.guim.co.uk/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/2000.jpg',
 					},
 					{
 						index: 1,
 						fields: {
-							height: '300',
-							width: '500',
+							aspectRatio: '5:3',
+							height: '600',
+							width: '1000',
 						},
 						mediaType: 'Image',
-						mimeType: 'image/png',
-						url: 'https://media.guim.co.uk/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/500.png',
+						mimeType: 'image/jpeg',
+						url: 'https://media.guim.co.uk/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/1000.jpg',
 					},
 					{
 						index: 2,
 						fields: {
-							height: '84',
-							width: '140',
+							aspectRatio: '5:3',
+							height: '300',
+							width: '500',
 						},
 						mediaType: 'Image',
-						mimeType: 'image/png',
-						url: 'https://media.guim.co.uk/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/140.png',
+						mimeType: 'image/jpeg',
+						url: 'https://media.guim.co.uk/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/500.jpg',
 					},
 					{
 						index: 3,
 						fields: {
-							height: '905',
-							width: '1508',
+							aspectRatio: '5:3',
+							height: '84',
+							width: '140',
 						},
 						mediaType: 'Image',
-						mimeType: 'image/png',
-						url: 'https://media.guim.co.uk/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/1508.png',
+						mimeType: 'image/jpeg',
+						url: 'https://media.guim.co.uk/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/140.jpg',
 					},
 					{
 						index: 4,
 						fields: {
-							isMaster: 'true',
-							height: '905',
-							width: '1508',
+							aspectRatio: '5:3',
+							height: '3000',
+							width: '5000',
 						},
 						mediaType: 'Image',
-						mimeType: 'image/png',
-						url: 'https://media.guim.co.uk/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png',
+						mimeType: 'image/jpeg',
+						url: 'https://media.guim.co.uk/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/5000.jpg',
+					},
+					{
+						index: 5,
+						fields: {
+							aspectRatio: '5:3',
+							isMaster: 'true',
+							height: '3000',
+							width: '5000',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url: 'https://media.guim.co.uk/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg',
 					},
 				],
 			},
-			elementId: 'f1a5aae5-6039-4a2a-a6f6-37421fb8e386',
+			elementId: '0a470d6f-8498-4b20-b522-84f54be93e60',
 			imageSources: [
 				{
 					weighting: 'inline',
 					srcSet: [
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=620&quality=85&auto=format&fit=max&s=d38c6aec80523e6a17f75c996db60c29',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=620&quality=85&auto=format&fit=max&s=7cf3d134293f1c86b0efa921b99d8bef',
 							width: 620,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=620&quality=45&auto=format&fit=max&dpr=2&s=a00d2419801e8532190c56019d5480b7',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=9b4f55e7394b20d4cc4002446992b72a',
 							width: 1240,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=700&quality=85&auto=format&fit=max&s=185a32bb513e139e439478e9f483bc74',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=700&quality=85&auto=format&fit=max&s=de04af61dd3dfbccfc353a1dee794dea',
 							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=700&quality=45&auto=format&fit=max&dpr=2&s=2fc6469c913136cae2ae6c1854d3b45a',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=749d6eee1409e6d31850f8246e682e14',
 							width: 1400,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=620&quality=85&auto=format&fit=max&s=d38c6aec80523e6a17f75c996db60c29',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=620&quality=85&auto=format&fit=max&s=7cf3d134293f1c86b0efa921b99d8bef',
 							width: 620,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=620&quality=45&auto=format&fit=max&dpr=2&s=a00d2419801e8532190c56019d5480b7',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=9b4f55e7394b20d4cc4002446992b72a',
 							width: 1240,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=645&quality=85&auto=format&fit=max&s=8a2ebf790aed32f9f22f0f79f52855f5',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=645&quality=85&auto=format&fit=max&s=176bf032b5aaabdaa3a3b582f9febc1b',
 							width: 645,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=645&quality=45&auto=format&fit=max&dpr=2&s=7ba16c3b9506e508e165d20daaa227e7',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=72f82898321e65778850e647828a3058',
 							width: 1290,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=465&quality=85&auto=format&fit=max&s=07eef779b9e65e66f70508ac9abf65ff',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=465&quality=85&auto=format&fit=max&s=0e08ea5d40f454a0cd321134b365c5f5',
 							width: 465,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=465&quality=45&auto=format&fit=max&dpr=2&s=2c30fe0ab3f42853666edf8a5702f9be',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=9444e1511753a6787fb86669a7cac795',
 							width: 930,
 						},
 					],
@@ -140,59 +156,59 @@ export const NewsletterSignup: FEArticle = {
 					weighting: 'showcase',
 					srcSet: [
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=1020&quality=85&auto=format&fit=max&s=0df4b4891c7059e99ec1970c6a19f81e',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1020&quality=85&auto=format&fit=max&s=ec2ebf914944157dffc1e46478ba4ba2',
 							width: 1020,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=1020&quality=45&auto=format&fit=max&dpr=2&s=d0db436d89486a00edcb2ed2be5ce7c9',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=f52c5bb0d509e5a342b457d6c6f1a279',
 							width: 2040,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=940&quality=85&auto=format&fit=max&s=ea162b84a95f8973569ce35f178137c2',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=940&quality=85&auto=format&fit=max&s=8c9c43d4f72a3c6473c775141f3a25af',
 							width: 940,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=940&quality=45&auto=format&fit=max&dpr=2&s=3d4cd811b0ecfa3d77e2712567ee6ba1',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=3d358a69b84786f374f66af09283107b',
 							width: 1880,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=700&quality=85&auto=format&fit=max&s=185a32bb513e139e439478e9f483bc74',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=700&quality=85&auto=format&fit=max&s=de04af61dd3dfbccfc353a1dee794dea',
 							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=700&quality=45&auto=format&fit=max&dpr=2&s=2fc6469c913136cae2ae6c1854d3b45a',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=749d6eee1409e6d31850f8246e682e14',
 							width: 1400,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=700&quality=85&auto=format&fit=max&s=185a32bb513e139e439478e9f483bc74',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=700&quality=85&auto=format&fit=max&s=de04af61dd3dfbccfc353a1dee794dea',
 							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=700&quality=45&auto=format&fit=max&dpr=2&s=2fc6469c913136cae2ae6c1854d3b45a',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=749d6eee1409e6d31850f8246e682e14',
 							width: 1400,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=660&quality=85&auto=format&fit=max&s=7c7daf16f633a525bcec283bb900b1aa',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=660&quality=85&auto=format&fit=max&s=68801286a75b108c0faeff890550ef56',
 							width: 660,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=660&quality=45&auto=format&fit=max&dpr=2&s=00b73595f462a25853986afa9b29f296',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=0f67d5e8c2cbf4bd7af781a39c6d9b5a',
 							width: 1320,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=645&quality=85&auto=format&fit=max&s=8a2ebf790aed32f9f22f0f79f52855f5',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=645&quality=85&auto=format&fit=max&s=176bf032b5aaabdaa3a3b582f9febc1b',
 							width: 645,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=645&quality=45&auto=format&fit=max&dpr=2&s=7ba16c3b9506e508e165d20daaa227e7',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=72f82898321e65778850e647828a3058',
 							width: 1290,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=465&quality=85&auto=format&fit=max&s=07eef779b9e65e66f70508ac9abf65ff',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=465&quality=85&auto=format&fit=max&s=0e08ea5d40f454a0cd321134b365c5f5',
 							width: 465,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=465&quality=45&auto=format&fit=max&dpr=2&s=2c30fe0ab3f42853666edf8a5702f9be',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=9444e1511753a6787fb86669a7cac795',
 							width: 930,
 						},
 					],
@@ -205,73 +221,72 @@ export const NewsletterSignup: FEArticle = {
 					weighting: 'immersive',
 					srcSet: [
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=1900&quality=85&auto=format&fit=max&s=4d5a1ec7f4e6e252452625c20845a680',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1900&quality=85&auto=format&fit=max&s=83ee6486edf214ad04df5f90667a0c89',
 							width: 1900,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=1900&quality=45&auto=format&fit=max&dpr=2&s=3b4158c87cad913d914073a24279437d',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=63775b693c8bd1afcc5488d70b9ee7d9',
 							width: 3800,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=1300&quality=85&auto=format&fit=max&s=85576039ead1700c967dd57fde56f712',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1300&quality=85&auto=format&fit=max&s=0e077174f24e11bc961043ceb95cddb4',
 							width: 1300,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=1300&quality=45&auto=format&fit=max&dpr=2&s=24c3a29c1ae71fb90be1c17efac1cd3f',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=70952e706d3670491d09cb8990ae4a55',
 							width: 2600,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=1140&quality=85&auto=format&fit=max&s=cee9d868d3909b6e22bb6ef3284d0d21',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1140&quality=85&auto=format&fit=max&s=022d518e5d0bf538ee0852b1a9d213b9',
 							width: 1140,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=1140&quality=45&auto=format&fit=max&dpr=2&s=55b18ac80efd45a57932eb968efeba7f',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=87897711794d8af8f86f76e79e9408b1',
 							width: 2280,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=980&quality=85&auto=format&fit=max&s=5703712def9c6636c80d59c5a262b452',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=980&quality=85&auto=format&fit=max&s=8788cdf98b5a432ef5efbb4cb2f70260',
 							width: 980,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=980&quality=45&auto=format&fit=max&dpr=2&s=f995a83b9e394e7292900629f7849b2d',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=fe27826f73b5f160bb6086b6fa69dc0e',
 							width: 1960,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=740&quality=85&auto=format&fit=max&s=9e3b772ebe934c4fedcef40f60d36086',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=740&quality=85&auto=format&fit=max&s=a42b4ce894d2a1086bbe53dfad0e8d9a',
 							width: 740,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=740&quality=45&auto=format&fit=max&dpr=2&s=ca86f37793f6acf06464530066b53ef7',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=5fd4b6d2c65b84fcabece184e5c1cac9',
 							width: 1480,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=660&quality=85&auto=format&fit=max&s=7c7daf16f633a525bcec283bb900b1aa',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=660&quality=85&auto=format&fit=max&s=68801286a75b108c0faeff890550ef56',
 							width: 660,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=660&quality=45&auto=format&fit=max&dpr=2&s=00b73595f462a25853986afa9b29f296',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=0f67d5e8c2cbf4bd7af781a39c6d9b5a',
 							width: 1320,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=480&quality=85&auto=format&fit=max&s=a9273fc086943dd3161bab6d49fe8e1f',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=480&quality=85&auto=format&fit=max&s=290b11d9cb6ffa6bab2c97d16f8a9164',
 							width: 480,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png?width=480&quality=45&auto=format&fit=max&dpr=2&s=860e2cb491959de0e9774431b394586b',
+							src: 'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=5b6f382f22270ab48b0bbc635d826692',
 							width: 960,
 						},
 					],
 				},
 			],
 			data: {
-				alt: 'Our new women’s football newsletter will arrive in your inbox every Wednesday.',
-				caption:
-					'Our new women’s football newsletter will arrive in your inbox every Wednesday.',
+				alt: 'Sign up for Moving the Goalposts.',
+				caption: 'Sign up for Moving the Goalposts.',
 				credit: 'Illustration: Guardian Design',
 			},
 		},
 	],
-	main: '<figure class="element element-image" data-media-id="6c3d4ac41a205fed233624415dd05e684ee661b2"> <img src="https://media.guim.co.uk/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/1000.png" alt="Our new women’s football newsletter will arrive in your inbox every Wednesday." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">Our new women’s football newsletter will arrive in your inbox every Wednesday.</span> <span class="element-image__credit">Illustration: Guardian Design</span> </figcaption> </figure>',
+	main: '<figure class="element element-image" data-media-id="f05addc1c6b98dc15f73f332ba340b8f5b5afb9f"> <img src="https://media.guim.co.uk/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/1000.jpg" alt="Sign up for Moving the Goalposts." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">Sign up for Moving the Goalposts.</span> <span class="element-image__credit">Illustration: Guardian Design</span> </figcaption> </figure>',
 	filterKeyEvents: false,
 	keyEvents: [],
 	blocks: [
@@ -281,7 +296,7 @@ export const NewsletterSignup: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Join us as we delve deeper into the wonderful world of women’s football in our weekly newsletter. It is informative, entertaining, global, critical – when needed – and, above all, passionate. Written mainly by <a href="https://www.theguardian.com/profile/julia-belas-trindade">Júlia Belas Trindade</a> and <a href="https://www.theguardian.com/profile/sophie-downey">Sophie Downey</a>, expect guest appearances from stars such as Anita Asante, Ada Hegerberg and many more.</p>',
-					elementId: 'f4c498ae-361f-4e15-8c0a-72d9025bd74d',
+					elementId: '7b2714d8-4dbf-44b7-bddf-7c4281c8083f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -290,24 +305,24 @@ export const NewsletterSignup: FEArticle = {
 					sourceDomain: 'theguardian.com',
 					safe: true,
 					alt: 'Sign up to Moving the Goalposts',
-					elementId: 'd7054f76-4981-4a16-89ae-b7b9d99bce73',
+					elementId: 'e39bc6c8-cc5a-4ae2-aa6c-f49adeda56d6',
 					isThirdPartyTracking: false,
 					html: '<iframe id="moving-the-goalposts" name="moving-the-goalposts" src="https://www.theguardian.com/email/form/plaintone/moving-the-goalposts" scrolling="no" seamless="" class="iframed--overflow-hidden email-sub__iframe" height="52px" frameborder="0" data-component="email-embed--moving-the-goalposts"></iframe>',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<ul>\n <li><p>Try our other sports emails: as well as the occasionally funny football email <a href="https://www.theguardian.com/info/2016/jan/05/the-fiver-email-sign-up">The Fiver </a>from Monday to Friday, there are weekly catch-ups for cricket in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-spin">The Spin</a> and rugby union in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-breakdown">The Breakdown</a>, and our seven-day roundup of the best of our sports journalism in <a href="https://www.theguardian.com/sport/2017/may/15/the-recap-sign-up-for-the-best-of-the-guardians-sport-coverage">The Recap</a>.</p></li>\n <li><p>Living in Australia? Try the <a href="https://www.theguardian.com/info/2015/jun/05/guardian-australia-sport-newsletter-subscribe-by-email">Guardian Australia’s daily sports newsletter</a></p></li>\n</ul>',
-					elementId: '1285ee04-b927-4ab8-aaab-468370de8732',
+					html: '<ul>\n <li>\n  <p>Try our other sports emails: as well as the occasionally funny football email <a href="https://www.theguardian.com/info/2016/jan/05/the-fiver-email-sign-up">The Fiver </a>from Monday to Friday, there are weekly catch-ups for cricket in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-spin">The Spin</a> and rugby union in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-breakdown">The Breakdown</a>, and our seven-day roundup of the best of our sports journalism in <a href="https://www.theguardian.com/sport/2017/may/15/the-recap-sign-up-for-the-best-of-the-guardians-sport-coverage">The Recap</a>.</p></li>\n <li>\n  <p>Living in Australia? Try the <a href="https://www.theguardian.com/info/2015/jun/05/guardian-australia-sport-newsletter-subscribe-by-email">Guardian Australia’s daily sports newsletter</a></p></li>\n</ul>',
+					elementId: 'b44d54ff-25b5-4f9e-b312-f26214f3984a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>***</p>',
-					elementId: 'a34d65e4-e794-45e7-a762-34df4f7c1609',
+					elementId: 'cda57e77-c5ff-40ce-b98d-66fbd6bc931a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong><a href="https://www.theguardian.com/email-newsletters">Explore all our newsletters:</a></strong><a href="https://www.theguardian.com/email-newsletters"> whether you love film, football, fashion or food, we’ve got something for you</a></p>',
-					elementId: '9969aeff-2168-4ad9-8fcc-e255d1b884c0',
+					elementId: '07512485-a812-481b-aabd-17853661b35e',
 				},
 			],
 			attributes: {
@@ -324,7 +339,7 @@ export const NewsletterSignup: FEArticle = {
 			blockFirstPublishedDisplayNoTimezone: '16.57',
 			contributors: [],
 			primaryDateLine: 'Tue 22 Mar 2022 16.57 GMT',
-			secondaryDateLine: 'Last modified on Tue 16 Jan 2024 11.19 GMT',
+			secondaryDateLine: 'Last modified on Thu 13 Jun 2024 13.56 BST',
 		},
 	],
 	author: {
@@ -336,7 +351,7 @@ export const NewsletterSignup: FEArticle = {
 	webPublicationDateDeprecated: '2022-03-22T16:57:35.000Z',
 	webPublicationDateDisplay: 'Tue 22 Mar 2022 16.57 GMT',
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Tue 16 Jan 2024 11.19 GMT',
+		'Last modified on Thu 13 Jun 2024 13.56 BST',
 	editionLongForm: 'UK edition',
 	editionId: 'UK',
 	pageId: 'football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
@@ -459,10 +474,10 @@ export const NewsletterSignup: FEArticle = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/dcc3a0fee6e616c65a9bd264dffe540a587f3dd2/0_0_4468_2681/master/4468.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=00797936e851cd7d3946e09e22d91d87',
-				'https://i.guim.co.uk/img/media/dcc3a0fee6e616c65a9bd264dffe540a587f3dd2/0_0_4468_2681/master/4468.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=2d0530369fee7d0a3e6b1288d98cbb9d',
-				'https://i.guim.co.uk/img/media/dcc3a0fee6e616c65a9bd264dffe540a587f3dd2/0_0_4468_2681/master/4468.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c1c9efd41473935b6070ac9b39f85636',
-				'https://i.guim.co.uk/img/media/dcc3a0fee6e616c65a9bd264dffe540a587f3dd2/0_0_4468_2681/master/4468.jpg?width=1200&quality=85&auto=format&fit=max&s=dec78bd08313f490322d399e13782c65',
+				'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=9debf69dfe57ad669aedd1d4cc993714',
+				'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=4777618c39d2b365792b479ed8f70f69',
+				'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=dd8ddc550f2df030773f8476fdcb0d45',
+				'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1200&quality=85&auto=format&fit=max&s=33b57bbce1a66a264a36748049f549e4',
 			],
 			author: [
 				{
@@ -474,7 +489,7 @@ export const NewsletterSignup: FEArticle = {
 			datePublished: '2022-03-22T16:57:35.000Z',
 			headline:
 				'Sign up for the Moving the Goalposts newsletter: our free women’s football email',
-			dateModified: '2024-01-16T11:19:45.000Z',
+			dateModified: '2024-06-13T12:56:56.000Z',
 			mainEntityOfPage:
 				'https://www.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 		},
@@ -494,17 +509,17 @@ export const NewsletterSignup: FEArticle = {
 		'article:author': 'https://www.theguardian.com/profile/suzanne-wrack',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/dcc3a0fee6e616c65a9bd264dffe540a587f3dd2/0_0_4468_2681/master/4468.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=00797936e851cd7d3946e09e22d91d87',
+			'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=9debf69dfe57ad669aedd1d4cc993714',
 		'al:ios:url':
 			'gnmguardian://football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
 		'og:title':
 			'Sign up for the Moving the Goalposts newsletter: our free women’s football email',
 		'fb:app_id': '180444840287',
-		'article:modified_time': '2024-01-16T11:19:45.000Z',
+		'article:modified_time': '2024-06-13T12:56:56.000Z',
 		'og:image:height': '720',
 		'og:description':
-			'Get our roundup of women’s football for free twice a week, featuring the insights of experts such as Ada Hegerberg and Anita Asante',
+			'Get our roundup of women’s football for free once a week, featuring the insights of experts such as Ada Hegerberg and Magdalena Eriksson',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
 		'article:section': 'Football',
@@ -527,7 +542,7 @@ export const NewsletterSignup: FEArticle = {
 		'twitter:app:url:iphone':
 			'gnmguardian://football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts?contenttype=Article&source=twitter',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/dcc3a0fee6e616c65a9bd264dffe540a587f3dd2/0_0_4468_2681/master/4468.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=7197bd370667ff51486825711d084475',
+			'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=dfea9183cf579898db41462193a0cedc',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
 			'gnmguardian://football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts?contenttype=Article&source=twitter',
@@ -589,7 +604,6 @@ export const NewsletterSignup: FEArticle = {
 			brazeSwitch: true,
 			consentManagement: true,
 			commercial: true,
-			redplanetForAus: true,
 			prebidSonobi: true,
 			idProfileNavigation: true,
 			confiantAdVerification: true,
@@ -796,32 +810,6 @@ export const NewsletterSignup: FEArticle = {
 			],
 		},
 		UK: {
-			branding: {
-				brandingType: {
-					name: 'sponsored',
-				},
-				sponsorName: 'Google Pixel',
-				logo: {
-					src: 'https://static.theguardian.com/commercial/sponsor/04/Oct/2023/a7b5b031-6123-4553-8f49-532ceeb775a3-de73b4b2-0a99-4f41-9ad2-aaeb21a95eb0-Google_Pixel_Logo_Grey.png',
-					dimensions: {
-						width: 124,
-						height: 45,
-					},
-					link: 'https://store.google.com/gb/product/pixel_8_pro?dclid=CMW9482t7oEDFQwz0wodz04MpA&hl=en-GB',
-					label: 'Supported by',
-				},
-				logoForDarkBackground: {
-					src: 'https://static.theguardian.com/commercial/sponsor/04/Oct/2023/c935dfbd-3ddf-472a-b0b0-79bf1657f4f9-3a3e9b21-48cc-4000-9940-71663bcd08dd-Google_Pixel_Logo_Invert.png',
-					dimensions: {
-						width: 124,
-						height: 45,
-					},
-					link: 'https://store.google.com/gb/product/pixel_8_pro?dclid=CMW9482t7oEDFQwz0wodz04MpA&hl=en-GB',
-					label: 'Supported by',
-				},
-				aboutThisLink:
-					'https://www.theguardian.com/info/2016/jan/25/content-funding',
-			},
 			adTargeting: [
 				{
 					name: 'co',
@@ -851,10 +839,6 @@ export const NewsletterSignup: FEArticle = {
 						'football',
 						'womensfootball',
 					],
-				},
-				{
-					name: 'br',
-					value: 's',
 				},
 				{
 					name: 'p',
@@ -971,7 +955,7 @@ export const NewsletterSignup: FEArticle = {
 		isSensitive: false,
 	},
 	trailText:
-		'Get our roundup of women’s football for free twice a week, featuring the insights of experts such as Ada Hegerberg and Anita Asante',
+		'Get our roundup of women’s football for free once a week, featuring the insights of experts such as Ada Hegerberg and Magdalena Eriksson',
 	nav: {
 		currentUrl: '/football',
 		pillars: [
@@ -1039,6 +1023,10 @@ export const NewsletterSignup: FEArticle = {
 						],
 					},
 					{
+						title: 'US politics',
+						url: '/us-news/us-politics',
+					},
+					{
 						title: 'World',
 						url: '/world',
 						longTitle: 'World news',
@@ -1086,6 +1074,10 @@ export const NewsletterSignup: FEArticle = {
 					{
 						title: 'Climate crisis',
 						url: '/environment/climate-crisis',
+					},
+					{
+						title: 'Middle East',
+						url: '/world/middleeast',
 					},
 					{
 						title: 'Ukraine',
@@ -1212,32 +1204,6 @@ export const NewsletterSignup: FEArticle = {
 					{
 						title: 'UK politics',
 						url: '/politics',
-					},
-					{
-						title: 'Education',
-						url: '/education',
-						children: [
-							{
-								title: 'Schools',
-								url: '/education/schools',
-							},
-							{
-								title: 'Teachers',
-								url: '/teacher-network',
-							},
-							{
-								title: 'Universities',
-								url: '/education/universities',
-							},
-							{
-								title: 'Students',
-								url: '/education/students',
-							},
-						],
-					},
-					{
-						title: 'Society',
-						url: '/society',
 					},
 					{
 						title: 'Science',
@@ -1416,6 +1382,10 @@ export const NewsletterSignup: FEArticle = {
 				iconName: 'home',
 				children: [
 					{
+						title: 'The Filter',
+						url: '/uk/thefilter',
+					},
+					{
 						title: 'Fashion',
 						url: '/fashion',
 					},
@@ -1547,7 +1517,7 @@ export const NewsletterSignup: FEArticle = {
 			},
 			{
 				title: 'Inside the Guardian',
-				url: 'https://www.theguardian.com/membership',
+				url: 'https://www.theguardian.com/insidetheguardian',
 			},
 			{
 				title: 'The Observer',
@@ -1588,6 +1558,22 @@ export const NewsletterSignup: FEArticle = {
 						url: '/crosswords/series/quick',
 					},
 					{
+						title: 'Speedy',
+						url: '/crosswords/series/speedy',
+					},
+					{
+						title: 'Quick cryptic',
+						url: '/crosswords/series/quick-cryptic',
+					},
+					{
+						title: 'Everyman',
+						url: '/crosswords/series/everyman',
+					},
+					{
+						title: 'Quiptic',
+						url: '/crosswords/series/quiptic',
+					},
+					{
 						title: 'Cryptic',
 						url: '/crosswords/series/cryptic',
 					},
@@ -1596,28 +1582,20 @@ export const NewsletterSignup: FEArticle = {
 						url: '/crosswords/series/prize',
 					},
 					{
-						title: 'Weekend',
-						url: '/crosswords/series/weekend-crossword',
-					},
-					{
-						title: 'Quiptic',
-						url: '/crosswords/series/quiptic',
+						title: 'Azed',
+						url: '/crosswords/series/azed',
 					},
 					{
 						title: 'Genius',
 						url: '/crosswords/series/genius',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
+						title: 'Weekend',
+						url: '/crosswords/series/weekend-crossword',
 					},
 					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
+						title: 'Special',
+						url: '/crosswords/series/special',
 					},
 				],
 			},
@@ -1805,7 +1783,7 @@ export const NewsletterSignup: FEArticle = {
 				},
 				{
 					text: 'Help',
-					url: '/help',
+					url: 'https://manage.theguardian.com/help-centre',
 					dataLinkName: 'uk : footer : tech feedback',
 					extraClasses: 'js-tech-feedback-report',
 				},
@@ -1867,8 +1845,14 @@ export const NewsletterSignup: FEArticle = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
+					url: 'https://uploads.guim.co.uk/2024/09/04/Modern_Slavery_Statement_2024_.pdf',
 					dataLinkName: 'uk : footer : modern slavery act statement',
+					extraClasses: '',
+				},
+				{
+					text: 'Tax strategy',
+					url: 'https://uploads.guim.co.uk/2024/08/27/TAX_STRATEGY_FOR_THE_YEAR_ENDED_31_MARCH_2025.pdf',
+					dataLinkName: 'uk : footer : tax strategy',
 					extraClasses: '',
 				},
 				{
@@ -1899,12 +1883,6 @@ export const NewsletterSignup: FEArticle = {
 					text: 'LinkedIn',
 					url: 'https://www.linkedin.com/company/theguardian',
 					dataLinkName: 'uk : footer : linkedin',
-					extraClasses: '',
-				},
-				{
-					text: 'Twitter',
-					url: 'https://twitter.com/guardian',
-					dataLinkName: 'uk: footer : twitter',
 					extraClasses: '',
 				},
 				{
@@ -1953,7 +1931,7 @@ export const NewsletterSignup: FEArticle = {
 		theme: 'sport',
 		description:
 			'No topic is too small or too big for us to cover as we deliver a twice-weekly roundup of the wonderful world of women’s football',
-		frequency: 'Twice weekly',
+		frequency: 'Weekly',
 		listId: 6020,
 		group: 'Sport',
 		successDescription:
