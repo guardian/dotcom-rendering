@@ -44,7 +44,7 @@ const { QueryExecutionId } = await client.send(
   WHERE year = ${date.year}
 	  AND month = ${String(date.month).padStart(2, "0")}
 	  AND day = ${String(date.day).padStart(2, "0")}
-	  AND request_user_agent NOT LIKE 'Guardian/% CFNetwork%' 
+	  AND request_user_agent NOT LIKE 'Guardian/%Darwin%' 
 	  AND request_user_agent NOT LIKE 'GuardianNews/%'
 	  AND request_user_agent NOT LIKE 'Guardian\%20Editions/%'
 	  AND response_status=200
