@@ -1,6 +1,6 @@
 import { cricketMatchData } from '../fixtures/generated/cricket-match';
 import { parse } from './cricketMatch';
-import type { FECricketMatch } from './frontend/feCricketMatch';
+import type { FECricketMatch } from './frontend/feCricketMatchPage';
 import { okOrThrow } from './lib/result';
 
 describe('parse', () => {

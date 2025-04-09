@@ -16,7 +16,7 @@ const program = TJS.getProgramFromFiles(
 		path.resolve(`${root}/src/types/newslettersPage.ts`),
 		path.resolve(`${root}/src/types/editionsCrossword.ts`),
 		path.resolve(`${root}/src/feFootballDataPage.ts`),
-		path.resolve(`${root}/src/frontend/feCricketMatch.ts`),
+		path.resolve(`${root}/src/frontend/feCricketMatchPage.ts`),
 	],
 	{
 		skipLibCheck: true,

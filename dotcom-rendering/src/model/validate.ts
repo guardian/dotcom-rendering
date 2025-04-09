@@ -4,7 +4,7 @@ import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import type { FEFootballDataPage } from '../feFootballDataPage';
 import type { FEArticle } from '../frontend/feArticle';
-import type { FECricketMatchPage } from '../frontend/feCricketMatch';
+import type { FECricketMatchPage } from '../frontend/feCricketMatchPage';
 import type { FEFront } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
 import articleSchema from '../frontend/schemas/feArticle.json';
