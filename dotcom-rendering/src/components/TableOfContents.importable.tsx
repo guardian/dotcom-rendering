@@ -9,7 +9,7 @@ import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source/react-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import type { TableOfContentsItem } from '../model/enhanceTableOfContents';
@@ -75,7 +75,7 @@ const detailsStyles = css`
 `;
 const stickyStyles = css`
 	position: sticky;
-	top: 0;
+	top: -1px;
 	background: ${palette('--article-background')};
 	z-index: ${getZIndex('tableOfContents')};
 	summary {
@@ -137,6 +137,23 @@ const verticalStyle = css`
 
 export const TableOfContents = ({ tableOfContents, format }: Props) => {
 	const [open, setOpen] = useState(tableOfContents.length < 5);
+
+	useEffect(() => {
+		const tocElement = document.querySelector(
+			'[data-component="table-of-contents"]',
+		) as HTMLElement;
+
+		const observer = new IntersectionObserver(
+			([e]) => {
+				if (e && e.intersectionRatio < 1) {
+					setOpen(false);
+				}
+			},
+			{ threshold: [1] },
+		);
+
+		observer.observe(tocElement);
+	}, []);
 
 	return (
 		<details
