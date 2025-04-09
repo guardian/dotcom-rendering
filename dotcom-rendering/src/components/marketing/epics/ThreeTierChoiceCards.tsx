@@ -183,6 +183,7 @@ type ThreeTierChoiceCardsProps = {
 	countryCode?: string;
 	choices: ChoiceInfo[];
 	supporterPlusDiscount?: number;
+	id: string; // uniquely identify this choice cards component to avoid conflicting with others
 };
 
 export const ThreeTierChoiceCards = ({
@@ -191,6 +192,7 @@ export const ThreeTierChoiceCards = ({
 	setSelectedProduct,
 	choices,
 	supporterPlusDiscount,
+	id,
 }: ThreeTierChoiceCardsProps) => {
 	const currencySymbol = getLocalCurrencySymbol(countryCode);
 	const countryGroupId = countryCodeToCountryGroupId(countryCode);
@@ -221,7 +223,7 @@ export const ThreeTierChoiceCards = ({
 							!isUndefined(supporterPlusDiscount) &&
 							supportTier === 'SupporterPlus';
 
-						const radioId = `choicecard-${supportTier}`;
+						const radioId = `choicecard-${id}-${supportTier}`;
 
 						return (
 							<div
