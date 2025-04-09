@@ -44,7 +44,11 @@ const { QueryExecutionId } = await client.send(
   WHERE year = ${date.year}
 	  AND month = ${String(date.month).padStart(2, "0")}
 	  AND day = ${String(date.day).padStart(2, "0")}
-      AND request_user_agent NOT LIKE 'Guardian%'
+	  AND request_user_agent NOT LIKE 'Guardian/%Darwin%' 
+	  AND request_user_agent NOT LIKE 'GuardianNews/%'
+	  AND request_user_agent NOT LIKE 'Guardian\%20Editions/%'
+	  AND response_status=200
+	  AND url != '/robots.txt'
   GROUP BY request_user_agent
   ORDER BY request_count desc
   LIMIT ${100_000}`,
