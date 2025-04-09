@@ -409,10 +409,17 @@ app.all('*', (request, response, next) => {
 	next();
 });
 
-app.get('/healthcheck', (_req, res) => res.send('Ok'));
+app.get('/healthcheck', (_req, res) => {
+	res.status(200).send('Ok');
+});
 
-app.get('/favicon.ico', (_, res) => res.status(404).end());
-app.get('/fontSize.css', (_, res) => res.status(404).end());
+app.get('/favicon.ico', (_, res) => {
+	res.sendStatus(404);
+});
+
+app.get('/fontSize.css', (_, res) => {
+	res.sendStatus(404);
+});
 
 /**
 To enable testing in the mobile device emulators,
