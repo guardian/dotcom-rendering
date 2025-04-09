@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import { listParse, type ParserError, type TeamScore } from './footballMatches';
 import type {
 	FEFootballTable,
@@ -79,7 +80,20 @@ const parseResult = (result: FETeamResult): Result<ParserError, TeamResult> =>
 		},
 	});
 
-const parseResults = listParse(parseResult);
+const parseResults = (
+	teamResults: FETeamResult[],
+): Result<ParserError, TeamResult[]> => {
+	const parsedResults = listParse(parseResult)(teamResults);
+
+	if (parsedResults.kind == 'error') {
+		return parsedResults;
+	}
+	return ok(
+		parsedResults.value.filter(
+			(r) => isUndefined(r.foe.score) || isUndefined(r.self.score),
+		),
+	);
+};
 
 const parseEntry = (
 	feEntry: FELeagueTableEntry,
