@@ -452,6 +452,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 								isTabletOrAbove,
 								countryCode,
 							)}
+							id={'banner'}
 						/>
 
 						<div css={styles.ctaContainer}>
