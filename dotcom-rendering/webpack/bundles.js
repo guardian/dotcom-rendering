@@ -23,7 +23,11 @@ const BUILD_VARIANT = false;
  */
 const dcrJavascriptBundle = (variant) => `dcrJavascriptBundle${variant}`;
 
+/** @type {(variant: 'Variant' | 'Control') => import("../src/types/config").ServerSideTestNames} */
+const reactBundle = (variant) => `reactBundle${variant}`;
+
 module.exports = {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
+	reactBundle,
 };
