@@ -67,6 +67,7 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 					supporterPlusDiscount={
 						hasSupporterPlusPromoCode ? 0.5 : undefined
 					}
+					id={'epic'}
 				/>
 			)}
 			<ContributionsEpicButtons
