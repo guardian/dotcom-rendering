@@ -141,10 +141,7 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 	return (
 		<details
 			open={open}
-			css={[
-				detailsStyles,
-				tableOfContents.length > 5 ? stickyStyles : undefined,
-			]}
+			css={[detailsStyles, stickyStyles]}
 			data-component="table-of-contents"
 		>
 			<summary
