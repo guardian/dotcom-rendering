@@ -56,28 +56,28 @@ export const FootballTable = {
 					results: [
 						{
 							matchId: '1',
-							self: { id: '9', name: 'Liverpool', score: 1 },
-							foe: { id: '4', name: 'Chelsea', score: 0 },
+							self: { name: 'Liverpool', score: 1 },
+							foe: { name: 'Chelsea', score: 0 },
 						},
 						{
 							matchId: '2',
-							self: { id: '9', name: 'Liverpool', score: 3 },
-							foe: { id: '1006', name: 'Arsenal', score: 5 },
+							self: { name: 'Liverpool', score: 3 },
+							foe: { name: 'Arsenal', score: 5 },
 						},
 						{
 							matchId: '3',
-							self: { id: '9', name: 'Liverpool', score: 0 },
-							foe: { id: '19741', name: 'West Ham', score: 0 },
+							self: { name: 'Liverpool', score: 0 },
+							foe: { name: 'West Ham', score: 0 },
 						},
 						{
 							matchId: '4',
-							self: { id: '9', name: 'Liverpool', score: 8 },
-							foe: { id: '14247', name: 'Tottenham', score: 10 },
+							self: { name: 'Liverpool', score: 8 },
+							foe: { name: 'Tottenham', score: 10 },
 						},
 						{
 							matchId: '5',
-							self: { id: '9', name: 'Liverpool', score: 0 },
-							foe: { id: '8450', name: 'Brighton', score: 0 },
+							self: { name: 'Liverpool', score: 0 },
+							foe: { name: 'Brighton', score: 0 },
 						},
 					],
 				},
@@ -99,36 +99,34 @@ export const FootballTable = {
 					results: [
 						{
 							matchId: '1',
-							self: { id: '1006', name: 'Arsenal', score: 4 },
-							foe: { id: '8450', name: 'Brighton', score: 0 },
+							self: { name: 'Arsenal', score: 4 },
+							foe: { name: 'Brighton', score: 0 },
 						},
 						{
 							matchId: '2',
-							self: { id: '1006', name: 'Arsenal', score: 3 },
+							self: { name: 'Arsenal', score: 3 },
 							foe: {
-								id: '12',
 								name: 'Manchester United',
 								score: 0,
 							},
 						},
 						{
 							matchId: '3',
-							self: { id: '1006', name: 'Arsenal', score: 5 },
-							foe: { id: '43', name: 'West Ham', score: 0 },
+							self: { name: 'Arsenal', score: 5 },
+							foe: { name: 'West Ham', score: 0 },
 						},
 						{
 							matchId: '4',
-							self: { id: '1006', name: 'Arsenal', score: 9 },
+							self: { name: 'Arsenal', score: 9 },
 							foe: {
-								id: '43153',
 								name: 'Manchester City',
 								score: 0,
 							},
 						},
 						{
 							matchId: '5',
-							self: { id: '1006', name: 'Arsenal', score: 0 },
-							foe: { id: '14247', name: 'Tottenham', score: 0 },
+							self: { name: 'Arsenal', score: 0 },
+							foe: { name: 'Tottenham', score: 0 },
 						},
 					],
 				},
@@ -150,36 +148,34 @@ export const FootballTable = {
 					results: [
 						{
 							matchId: '1',
-							self: { id: '15', name: 'Nottm Forest', score: 4 },
-							foe: { id: '8450', name: 'Brighton', score: 4 },
+							self: { name: 'Nottm Forest', score: 4 },
+							foe: { name: 'Brighton', score: 4 },
 						},
 						{
 							matchId: '2',
-							self: { id: '15', name: 'Nottm Forest', score: 0 },
+							self: { name: 'Nottm Forest', score: 0 },
 							foe: {
-								id: '12',
 								name: 'Manchester United',
 								score: 0,
 							},
 						},
 						{
 							matchId: '3',
-							self: { id: '15', name: 'Nottm Forest', score: 0 },
-							foe: { id: '19741', name: 'West Ham', score: 7 },
+							self: { name: 'Nottm Forest', score: 0 },
+							foe: { name: 'West Ham', score: 7 },
 						},
 						{
 							matchId: '4',
-							self: { id: '15', name: 'Nottm Forest', score: 9 },
+							self: { name: 'Nottm Forest', score: 9 },
 							foe: {
-								id: '43153',
 								name: 'Manchester City',
 								score: 0,
 							},
 						},
 						{
 							matchId: '5',
-							self: { id: '15', name: 'Nottm Forest', score: 10 },
-							foe: { id: '14247', name: 'Tottenham', score: 0 },
+							self: { name: 'Nottm Forest', score: 10 },
+							foe: { name: 'Tottenham', score: 0 },
 						},
 					],
 				},

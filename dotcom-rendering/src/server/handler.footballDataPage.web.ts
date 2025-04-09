@@ -118,9 +118,7 @@ const parseFEFootballTables = (
 
 	if (parsedFootballTables.kind === 'error') {
 		throw new Error(
-			`Failed to parse tables:  ${getParserErrorMessage(
-				parsedFootballTables.error,
-			)}`,
+			`Failed to parse tables: ${parsedFootballTables.error.kind}: ${parsedFootballTables.error.message}`,
 		);
 	}
 

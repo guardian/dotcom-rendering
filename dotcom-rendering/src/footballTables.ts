@@ -1,13 +1,17 @@
 import { isUndefined } from '@guardian/libs';
-import { listParse, type ParserError, type TeamScore } from './footballMatches';
+import { listParse } from './footballMatches';
 import type {
 	FEFootballTable,
 	FEGroup,
 	FELeagueTableEntry,
 	FETeamResult,
 } from './frontend/feFootballTablesPage';
-import type { Result } from './lib/result';
-import { ok } from './lib/result';
+import { error, ok, type Result } from './lib/result';
+
+type TeamScore = {
+	name: string;
+	score: number;
+};
 
 export type TeamResult = {
 	matchId: string;
@@ -50,6 +54,13 @@ export type FootballTable = {
 
 export type FootballTableCompetitions = FootballTableCompetition[];
 
+type MissingScore = {
+	kind: 'MissingScore';
+	message: string;
+};
+
+type ParserError = MissingScore;
+
 const parseTable = (feGroup: FEGroup): Result<ParserError, FootballTable> => {
 	const parsedEntries = parseEntries(feGroup.entries);
 
@@ -65,8 +76,22 @@ const parseTable = (feGroup: FEGroup): Result<ParserError, FootballTable> => {
 
 const parseTables = listParse(parseTable);
 
-const parseResult = (result: FETeamResult): Result<ParserError, TeamResult> =>
-	ok({
+const parseResult = (result: FETeamResult): Result<ParserError, TeamResult> => {
+	if (isUndefined(result.foe.score)) {
+		return error({
+			kind: 'MissingScore',
+			message: `Expected team '${result.foe.name}' result to have score in match ${result.matchId}`,
+		});
+	}
+
+	if (isUndefined(result.self.score)) {
+		return error({
+			kind: 'MissingScore',
+			message: `Expected team '${result.self.name}' result to have score in match ${result.matchId}`,
+		});
+	}
+
+	return ok({
 		matchId: result.matchId,
 		self: {
 			id: result.self.id,
@@ -79,21 +104,9 @@ const parseResult = (result: FETeamResult): Result<ParserError, TeamResult> =>
 			score: result.foe.score,
 		},
 	});
-
-const parseResults = (
-	teamResults: FETeamResult[],
-): Result<ParserError, TeamResult[]> => {
-	const parsedResults = listParse(parseResult)(teamResults);
-
-	if (parsedResults.kind == 'error') {
-		return parsedResults;
-	}
-	return ok(
-		parsedResults.value.filter(
-			(r) => isUndefined(r.foe.score) || isUndefined(r.self.score),
-		),
-	);
 };
+
+const parseResults = listParse(parseResult);
 
 const parseEntry = (
 	feEntry: FELeagueTableEntry,
@@ -145,5 +158,4 @@ const parseFootballTableCompetition = (
 	});
 };
 
-// ToDo: if we don't return any errors can we remove the Result type?
 export const parse = listParse(parseFootballTableCompetition);

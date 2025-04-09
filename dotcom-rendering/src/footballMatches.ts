@@ -102,7 +102,7 @@ type InvalidMatchDay = {
 	errors: Array<ParserError>;
 };
 
-export type ParserError =
+type ParserError =
 	| FootballDayInvalidDate
 	| FootballMatchMissingScore
 	| FootballMatchInvalidDate
