@@ -112,5 +112,5 @@ export const enhanceTableOfContents = (
 		}
 	}
 
-	return tocItems.length >= 3 ? tocItems : undefined;
+	return tocItems.length >= 1 ? tocItems : undefined;
 };

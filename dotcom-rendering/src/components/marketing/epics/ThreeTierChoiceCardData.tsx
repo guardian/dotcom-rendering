@@ -1,7 +1,9 @@
 import { isUndefined } from '@guardian/libs';
 import type { ChoiceInfo } from './ThreeTierChoiceCards';
 
-export const ChoiceCardTestData_REGULAR: ChoiceInfo[] = [
+export const ChoiceCardTestData_REGULAR = (
+	longerBenefits: boolean,
+): ChoiceInfo[] => [
 	{
 		supportTier: 'Contribution',
 		label: (amount: number, currencySymbol: string): string =>
@@ -36,13 +38,10 @@ export const ChoiceCardTestData_REGULAR: ChoiceInfo[] = [
 			}
 		},
 		benefitsLabel: 'All-access digital',
-		benefits: () => [
-			'Unlimited access to the Guardian app',
-			'Unlimited access to our new Feast App',
-			'Ad-free reading on all your devices',
-			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
-			'Far fewer asks for support',
-		],
+		benefits: () =>
+			longerBenefits
+				? fullSupporterPlusBenefits
+				: shorterSupporterPlusBenefits,
 		recommended: true,
 	},
 	{
@@ -54,7 +53,9 @@ export const ChoiceCardTestData_REGULAR: ChoiceInfo[] = [
 	},
 ];
 
-export const ChoiceCardTestData_US: ChoiceInfo[] = [
+export const ChoiceCardTestData_US = (
+	longerBenefits: boolean,
+): ChoiceInfo[] => [
 	{
 		supportTier: 'Contribution',
 		label: (amount: number, currencySymbol: string): string =>
@@ -70,13 +71,10 @@ export const ChoiceCardTestData_US: ChoiceInfo[] = [
 		label: (amount: number, currencySymbol: string): string =>
 			`Support ${currencySymbol}${amount}/month`,
 		benefitsLabel: 'All-access digital',
-		benefits: () => [
-			'Unlimited access to the Guardian app',
-			'Unlimited access to our new Feast App',
-			'Ad-free reading on all your devices',
-			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
-			'Far fewer asks for support',
-		],
+		benefits: () =>
+			longerBenefits
+				? fullSupporterPlusBenefits
+				: shorterSupporterPlusBenefits,
 		recommended: true,
 	},
 	{
@@ -91,38 +89,16 @@ export const ChoiceCardTestData_US: ChoiceInfo[] = [
 	},
 ];
 
-export const ChoiceCardTestData_US_SIMPLIFIED: ChoiceInfo[] = [
-	{
-		supportTier: 'Contribution',
-		label: (amount: number, currencySymbol: string): string =>
-			`Support ${currencySymbol}${amount}/month`,
-		benefitsLabel: 'Support',
-		benefits: () => [
-			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
-		],
-		recommended: false,
-	},
-	{
-		supportTier: 'SupporterPlus',
-		label: (amount: number, currencySymbol: string): string =>
-			`Support ${currencySymbol}${amount}/month`,
-		benefitsLabel: 'All-access digital',
-		benefits: () => [
-			'Unlimited access to the Guardian app',
-			'Unlimited access to our new Feast App',
-			'Ad-free reading on all your devices',
-			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
-			'Far fewer asks for support',
-		],
-		recommended: true,
-	},
-	{
-		supportTier: 'OneOff',
-		label: (): string => `Support with another amount`,
-		benefitsLabel: undefined,
-		benefits: () => [
-			`We welcome all support, whether big or small, one-time or recurring`,
-		],
-		recommended: false,
-	},
+const fullSupporterPlusBenefits = [
+	'Unlimited access to the Guardian app',
+	'Unlimited access to our new Feast App',
+	'Ad-free reading on all your devices',
+	'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
+	'Far fewer asks for support',
+];
+
+const shorterSupporterPlusBenefits = [
+	'Unlimited access to the Guardian app and Feast app',
+	'Ad-free reading on all your devices',
+	'Exclusive supporter newsletter',
 ];

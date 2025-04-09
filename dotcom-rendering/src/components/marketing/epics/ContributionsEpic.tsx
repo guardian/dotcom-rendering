@@ -269,18 +269,8 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	openCmp,
 	hasConsentForArticleCount,
 }: EpicProps) => {
-	const {
-		image,
-		showChoiceCards,
-		tickerSettings,
-		choiceCardAmounts,
-		newsletterSignup,
-	} = variant;
-
-	const isSimpleThirdChoiceCardInTestVariant: boolean =
-		(showChoiceCards &&
-			variant.name.includes('EPIC_SIMPLIFIED_THIRD_CHOICE_CARD')) ??
-		false;
+	const { image, tickerSettings, choiceCardAmounts, newsletterSignup } =
+		variant;
 
 	const { hasOptedOut, onArticleCountOptIn, onArticleCountOptOut } =
 		useArticleCountOptOut();
@@ -434,9 +424,6 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					submitComponentEvent={submitComponentEvent}
 					amountsTestName={choiceCardAmounts?.testName}
 					amountsVariantName={choiceCardAmounts?.variantName}
-					isSimpleThirdChoiceCardInTestVariant={
-						isSimpleThirdChoiceCardInTestVariant
-					}
 				/>
 			)}
 
