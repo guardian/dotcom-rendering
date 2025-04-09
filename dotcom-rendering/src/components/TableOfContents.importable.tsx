@@ -9,7 +9,7 @@ import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source/react-components';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import type { TableOfContentsItem } from '../model/enhanceTableOfContents';
@@ -75,7 +75,7 @@ const detailsStyles = css`
 `;
 const stickyStyles = css`
 	position: sticky;
-	top: 0;
+	top: -1px;
 	background: ${palette('--article-background')};
 	z-index: ${getZIndex('tableOfContents')};
 	summary {
@@ -137,9 +137,37 @@ const verticalStyle = css`
 
 export const TableOfContents = ({ tableOfContents, format }: Props) => {
 	const [open, setOpen] = useState(tableOfContents.length < 5);
+	const tocRef = useRef<HTMLDetailsElement>(null);
+
+	// Automatically collapse the ToC when it becomes sticky (i.e. when it reaches the top of the viewport). This
+	// approach is inspired by:
+	// https://css-tricks.com/how-to-detect-when-a-sticky-element-gets-pinned/
+	useEffect(() => {
+		const tocElement = tocRef.current;
+
+		if (!tocElement) return;
+
+		const observer = new IntersectionObserver(
+			([e]) => {
+				// Verify whether the ToC is at the top of the viewport or the bottom. It should only collapse when it
+				// reaches the top.
+				if (e && e.boundingClientRect.top < 0) {
+					setOpen(false);
+				}
+			},
+			{ threshold: [1] },
+		);
+
+		observer.observe(tocElement);
+
+		return () => {
+			observer.disconnect();
+		};
+	}, []);
 
 	return (
 		<details
+			ref={tocRef}
 			open={open}
 			css={[detailsStyles, stickyStyles]}
 			data-component="table-of-contents"
