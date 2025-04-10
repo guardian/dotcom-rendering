@@ -281,7 +281,6 @@ export const DecideContainer = ({
 						showAge={showAge}
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
-						sectionId={sectionId}
 					/>
 				</Island>
 			);
