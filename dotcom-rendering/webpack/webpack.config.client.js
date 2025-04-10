@@ -139,13 +139,20 @@ module.exports = ({ build }) => ({
 			svgr,
 		],
 	},
-	resolve: {
-		alias: {
-			react: 'preact/compat',
-			'react-dom/test-utils': 'preact/test-utils',
-			'react-dom': 'preact/compat',
-		},
-	},
+	/**
+	 * Do not alias React modules in the web build variant so React is bundled
+	 * instead of Preact
+	 */
+	resolve:
+		build === 'client.web.variant'
+			? undefined
+			: {
+					alias: {
+						react: 'preact/compat',
+						'react-dom/test-utils': 'preact/test-utils',
+						'react-dom': 'preact/compat',
+					},
+			  },
 });
 
 module.exports.transpileExclude = {
