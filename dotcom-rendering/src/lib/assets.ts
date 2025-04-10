@@ -1,11 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { isObject, isString } from '@guardian/libs';
-import {
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-	reactBundle,
-} from '../../webpack/bundles';
+import { BUILD_VARIANT, dcrJavascriptBundle } from '../../webpack/bundles';
 import type { ServerSideTests, Switches } from '../types/config';
 import { makeMemoizedFunction } from './memoize';
 
@@ -76,7 +72,6 @@ export type Build =
 	| 'client.apps'
 	| 'client.web'
 	| 'client.web.variant'
-	| 'client.web.react'
 	| 'client.web.legacy'
 	| 'client.editionsCrossword';
 
@@ -156,9 +151,6 @@ export const getModulesBuild = ({
 }): Exclude<Extract<Build, `client.web${string}`>, 'client.web.legacy'> => {
 	if (BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant') {
 		return 'client.web.variant';
-	}
-	if (tests[reactBundle('Variant')] === 'variant') {
-		return 'client.web.react';
 	}
 	return 'client.web';
 };
