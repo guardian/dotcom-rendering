@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
@@ -35,39 +36,85 @@ export const ScrollableSmall = ({
 	aspectRatio,
 	sectionId,
 }: Props) => {
+	const stackedTrails = trails.reduce<DCRFrontCard[][]>((acc, trail) => {
+		if (acc.length === 0 || acc[acc.length - 1]?.length === 2) {
+			acc.push([trail]);
+		} else {
+			acc[acc.length - 1]?.push(trail);
+		}
+		return acc;
+	}, []);
+
 	return (
 		<ScrollableCarousel
-			carouselLength={trails.length}
+			carouselLength={stackedTrails.length}
 			visibleCardsOnMobile={1}
 			visibleCardsOnTablet={2}
 			sectionId={sectionId}
 		>
-			{trails.map((trail) => {
+			{stackedTrails.map((trails) => {
+				if (trails.length === 0 || trails[0] === undefined) {
+					return null;
+				}
 				return (
-					<ScrollableCarousel.Item key={trail.url}>
-						<FrontCard
-							trail={trail}
-							imageLoading={imageLoading}
-							absoluteServerTimes={!!absoluteServerTimes}
-							containerPalette={containerPalette}
-							containerType={containerType}
-							showAge={!!showAge}
-							headlineSizes={{
-								desktop: 'xxsmall',
-								mobile: 'xxxsmall',
-							}}
-							imagePositionOnDesktop="left"
-							imagePositionOnMobile="left"
-							imageSize="small"
-							trailText={undefined} // unsupported
-							supportingContent={undefined} // unsupported
-							aspectRatio={aspectRatio}
-							kickerText={trail.kickerText}
-							showLivePlayable={trail.showLivePlayable}
-							showTopBarDesktop={false}
-							showTopBarMobile={false}
-							canPlayInline={false}
-						/>
+					<ScrollableCarousel.Item key={'TODO_ADD_KEY'}>
+						<div
+							css={css`
+								display: flex;
+								flex-direction: column;
+							`}
+						>
+							<FrontCard
+								trail={trails[0]}
+								imageLoading={imageLoading}
+								absoluteServerTimes={!!absoluteServerTimes}
+								containerPalette={containerPalette}
+								containerType={containerType}
+								showAge={!!showAge}
+								headlineSizes={{
+									desktop: 'xxsmall',
+									mobile: 'xxxsmall',
+								}}
+								imagePositionOnDesktop="left"
+								imagePositionOnMobile="left"
+								imageSize="small"
+								trailText={undefined} // unsupported
+								supportingContent={undefined} // unsupported
+								aspectRatio={aspectRatio}
+								kickerText={trails[0].kickerText}
+								showLivePlayable={trails[0].showLivePlayable}
+								showTopBarDesktop={false}
+								showTopBarMobile={false}
+								canPlayInline={false}
+							/>
+							{trails[1] && (
+								<FrontCard
+									trail={trails[1]}
+									imageLoading={imageLoading}
+									absoluteServerTimes={!!absoluteServerTimes}
+									containerPalette={containerPalette}
+									containerType={containerType}
+									showAge={!!showAge}
+									headlineSizes={{
+										desktop: 'xxsmall',
+										mobile: 'xxxsmall',
+									}}
+									imagePositionOnDesktop="left"
+									imagePositionOnMobile="left"
+									imageSize="small"
+									trailText={undefined} // unsupported
+									supportingContent={undefined} // unsupported
+									aspectRatio={aspectRatio}
+									kickerText={trails[1].kickerText}
+									showLivePlayable={
+										trails[1].showLivePlayable
+									}
+									showTopBarDesktop={false}
+									showTopBarMobile={false}
+									canPlayInline={false}
+								/>
+							)}
+						</div>
 					</ScrollableCarousel.Item>
 				);
 			})}
