@@ -105,14 +105,6 @@ describe('getModulesBuild', () => {
 		expect(build).toBe('client.web');
 	});
 
-	it('should support React build when in test', () => {
-		const build = getModulesBuild({
-			tests: { reactBundleVariant: 'variant' },
-			switches: {},
-		});
-		expect(build).toBe('client.web.react');
-	});
-
 	it('should support variant build when in test, if enabled', () => {
 		const build = getModulesBuild({
 			tests: { dcrJavascriptBundleVariant: 'variant' },
