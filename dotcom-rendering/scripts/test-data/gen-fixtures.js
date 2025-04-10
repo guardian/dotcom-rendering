@@ -8,6 +8,7 @@ const { config } = require('../../fixtures/config');
 const { configOverrides } = require('../../fixtures/config-overrides');
 const { switchOverrides } = require('../../fixtures/switch-overrides');
 const {
+	validateAsCricketMatchPageType,
 	validateAsFEArticle,
 	validateAsFootballMatchListPage,
 } = require('../../src/model/validate');
@@ -351,6 +352,48 @@ requests.push(
 		.then(() => 'football-live.ts')
 		.catch((err) => {
 			throw new Error('Failed to create football-live.ts', {
+				cause: err,
+			});
+		}),
+);
+
+requests.push(
+	// This match data will expire after two months, find a new match if this needs updating
+	fetch(
+		'https://www.theguardian.com/sport/cricket/match/2025-03-26/australia-women-s-cricket-team.json?dcr',
+	)
+		.then((res) => res.json())
+		.then((json) => {
+			// These configs are returning from frontend
+			// but are not necessary for cricket pages
+			delete json.config.hasLiveBlogTopAd;
+			delete json.config.userAttributesApiUrl;
+			delete json.config.weatherapiurl;
+			delete json.config.isAdFree;
+			delete json.config.userBenefitsApiUrl;
+
+			const cricketMatchData = validateAsCricketMatchPageType(json);
+
+			// Write the new frontend fixture data
+			const contents = `${HEADER}
+			import type { FECricketMatchPage } from '../../src/frontend/feCricketMatch';
+
+			export const cricketMatchData: FECricketMatchPage = ${JSON.stringify(
+				cricketMatchData,
+				null,
+				4,
+			)}
+		`;
+
+			return fs.writeFile(
+				`${root}/fixtures/generated/cricket-match.ts`,
+				contents,
+				'utf8',
+			);
+		})
+		.then(() => 'cricket-match.ts')
+		.catch((err) => {
+			throw new Error('Failed to create cricket-match.ts', {
 				cause: err,
 			});
 		}),

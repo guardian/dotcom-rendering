@@ -11,6 +11,15 @@ import {
 } from '@guardian/source/foundations';
 import { Stack } from '@guardian/source/react-components';
 import type { ReactNode } from 'react';
+import type {
+	Batter,
+	Bowler,
+	CricketTeam,
+	Extras,
+	FallOfWicket,
+	Innings,
+	InningsTotals,
+} from '../cricketMatch';
 import { palette } from '../palette';
 
 const borderStyle = css`
@@ -108,60 +117,7 @@ const getExtrasDescription = ({
 	</>
 );
 
-type BowlerData = {
-	name: string;
-	overs: number;
-	maidens: number;
-	runs: number;
-	wickets: number;
-	balls: number;
-};
-
-type BatterData = {
-	name: string;
-	ballsFaced: number;
-	runs: number;
-	fours: number;
-	sixes: number;
-	howOut: string;
-};
-
-type Extras = {
-	byes: number;
-	legByes: number;
-	noBalls: number;
-	penalties: number;
-	wides: number;
-};
-
-type InningsTotals = {
-	runs: number;
-	overs: string;
-	wickets: number;
-	extras: number;
-};
-
-type FallOfWicketData = {
-	order: number;
-	name: string;
-	runs: number;
-};
-
-type CricketTeam = {
-	name: string;
-	lineup: string[];
-};
-
-type InningsData = {
-	description: string;
-	bowlers: BowlerData[];
-	batters: BatterData[];
-	extras: Extras;
-	inningsTotals: InningsTotals;
-	fallOfWickets: FallOfWicketData[];
-};
-
-const Bowling = ({ bowlers }: { bowlers: BowlerData[] }) => (
+const Bowling = ({ bowlers }: { bowlers: Bowler[] }) => (
 	<table css={tableStyles}>
 		<thead>
 			<tr>
@@ -195,7 +151,7 @@ const Batting = ({
 	extras,
 	inningsTotals,
 }: {
-	batters: BatterData[];
+	batters: Batter[];
 	extras: Extras;
 	inningsTotals: InningsTotals;
 }) => (
@@ -284,7 +240,7 @@ const Batting = ({
 const FallOfWickets = ({
 	fallOfWickets,
 }: {
-	fallOfWickets: FallOfWicketData[];
+	fallOfWickets: FallOfWicket[];
 }) => (
 	<table css={tableStyles}>
 		<thead>
@@ -307,7 +263,7 @@ const FallOfWickets = ({
 );
 
 type Props = {
-	allInnings: InningsData[];
+	allInnings: Innings[];
 	officials: string[];
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;

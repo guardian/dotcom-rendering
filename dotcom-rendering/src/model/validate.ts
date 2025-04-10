@@ -3,11 +3,13 @@ import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import type { FEArticle } from '../frontend/feArticle';
+import type { FECricketMatchPage } from '../frontend/feCricketMatchPage';
 import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
 import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import type { FEFront } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
 import articleSchema from '../frontend/schemas/feArticle.json';
+import cricketMatchPageSchema from '../frontend/schemas/feCricketMatchPage.json';
 import footballMatchListPageSchema from '../frontend/schemas/feFootballMatchListPage.json';
 import footballTablesPageSchema from '../frontend/schemas/feFootballTablesPage.json';
 import frontSchema from '../frontend/schemas/feFront.json';
@@ -45,6 +47,9 @@ const validateFootballMatchListPage = ajv.compile<FEFootballMatchListPage>(
 
 const validateFootballTablesPage = ajv.compile<FEFootballTablesPage>(
 	footballTablesPageSchema,
+);
+const validateCricketMatchPage = ajv.compile<FECricketMatchPage>(
+	cricketMatchPageSchema,
 );
 
 export const validateAsFEArticle = (data: unknown): FEArticle => {
@@ -142,5 +147,21 @@ export const validateAsFootballTablesPage = (
 	throw new TypeError(
 		`Unable to validate request body for url ${url}.\n
             ${JSON.stringify(validateFootballMatchListPage.errors, null, 2)}`,
+	);
+};
+
+export const validateAsCricketMatchPageType = (
+	data: unknown,
+): FECricketMatchPage => {
+	if (validateCricketMatchPage(data)) return data;
+
+	const url =
+		isObject(data) && isObject(data.config) && isString(data.config.pageId)
+			? data.config.pageId
+			: 'unknown url';
+
+	throw new TypeError(
+		`Unable to validate request body for url ${url}.\n
+            ${JSON.stringify(validateCricketMatchPage.errors, null, 2)}`,
 	);
 };
