@@ -86,11 +86,13 @@ const carouselStyles = css`
 	}
 `;
 
-const itemStyles = css`
-	display: flex;
+const itemStyles = (splitLeftBorder: boolean, stackRows: boolean) => css`
+	display: grid;
+	grid-template-rows: ${stackRows ? `1fr 1fr` : `1fr`};
 	scroll-snap-align: start;
 	grid-area: span 1;
 	position: relative;
+	height: 100%;
 	:not(:first-child)::before {
 		content: '';
 		position: absolute;
@@ -98,8 +100,18 @@ const itemStyles = css`
 		bottom: 0;
 		left: -10px;
 		width: 1px;
-		background-color: ${palette('--card-border-top')};
 		transform: translateX(-50%);
+		${splitLeftBorder
+			? `background-image: linear-gradient(
+				to bottom,
+				${palette('--card-border-top')},
+				${palette('--card-border-top')} calc(50% - 10px),
+				rgba(0, 0, 0, 0) calc(50% - 10px),
+				rgba(0, 0, 0, 0) calc(50% + 10px),
+				${palette('--card-border-top')} calc(50% + 10px),
+				${palette('--card-border-top')}
+			)`
+			: `background-color: ${palette('--card-border-top')};`}
 	}
 `;
 
@@ -280,6 +292,12 @@ export const ScrollableCarousel = ({
 	);
 };
 
-ScrollableCarousel.Item = ({ children }: { children: React.ReactNode }) => (
-	<li css={itemStyles}>{children}</li>
-);
+ScrollableCarousel.Item = ({
+	splitLeftBorder = false,
+	stackRows = false,
+	children,
+}: {
+	splitLeftBorder?: boolean;
+	stackRows?: boolean;
+	children: React.ReactNode;
+}) => <li css={itemStyles(splitLeftBorder, stackRows)}>{children}</li>;
