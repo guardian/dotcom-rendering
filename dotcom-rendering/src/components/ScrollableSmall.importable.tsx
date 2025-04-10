@@ -51,8 +51,8 @@ export const ScrollableSmall = ({
 			visibleCardsOnTablet={2}
 			sectionId={sectionId}
 		>
-			{stackedTrails.map((trails, index) => {
-				if (trails.length === 0 || trails[0] === undefined) {
+			{stackedTrails.map((column, index) => {
+				if (column.length === 0 || column[0] === undefined) {
 					return null;
 				}
 				return (
@@ -63,7 +63,7 @@ export const ScrollableSmall = ({
 					>
 						<>
 							<FrontCard
-								trail={trails[0]}
+								trail={column[0]}
 								imageLoading={imageLoading}
 								absoluteServerTimes={!!absoluteServerTimes}
 								containerPalette={containerPalette}
@@ -79,15 +79,15 @@ export const ScrollableSmall = ({
 								trailText={undefined} // unsupported
 								supportingContent={undefined} // unsupported
 								aspectRatio={aspectRatio}
-								kickerText={trails[0].kickerText}
-								showLivePlayable={trails[0].showLivePlayable}
+								kickerText={column[0].kickerText}
+								showLivePlayable={column[0].showLivePlayable}
 								showTopBarDesktop={false}
 								showTopBarMobile={false}
 								canPlayInline={false}
 							/>
-							{trails[1] && (
+							{column[1] && (
 								<FrontCard
-									trail={trails[1]}
+									trail={column[1]}
 									imageLoading={imageLoading}
 									absoluteServerTimes={!!absoluteServerTimes}
 									containerPalette={containerPalette}
@@ -103,9 +103,9 @@ export const ScrollableSmall = ({
 									trailText={undefined} // unsupported
 									supportingContent={undefined} // unsupported
 									aspectRatio={aspectRatio}
-									kickerText={trails[1].kickerText}
+									kickerText={column[1].kickerText}
 									showLivePlayable={
-										trails[1].showLivePlayable
+										column[1].showLivePlayable
 									}
 									showTopBarDesktop={true}
 									showTopBarMobile={true}
