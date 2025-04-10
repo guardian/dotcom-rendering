@@ -1,11 +1,7 @@
 import * as Sentry from '@sentry/browser';
 import type { BrowserOptions } from '@sentry/browser';
 import { CaptureConsole } from '@sentry/integrations';
-import {
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-	reactBundle,
-} from '../../../webpack/bundles';
+import { BUILD_VARIANT, dcrJavascriptBundle } from '../../../webpack/bundles';
 import type { ReportError } from '../../types/sentry';
 
 const allowUrls: BrowserOptions['allowUrls'] = [
@@ -58,10 +54,6 @@ if (
 	window.guardian.config.tests[dcrJavascriptBundle('Variant')] === 'variant'
 ) {
 	Sentry.setTag('dcr.bundle', dcrJavascriptBundle('Variant'));
-}
-
-if (window.guardian.config.tests[reactBundle('Variant')] === 'variant') {
-	Sentry.setTag('dcr.bundle', 'react');
 }
 
 export const reportError: ReportError = (error, feature, tags, extras) => {

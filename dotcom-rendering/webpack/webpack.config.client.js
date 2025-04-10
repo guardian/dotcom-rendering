@@ -84,7 +84,6 @@ const getLoaders = (build) => {
 		case 'client.apps':
 			return swcLoader(['android >= 5', 'ios >= 12']);
 		case 'client.web.variant':
-		case 'client.web.react':
 		case 'client.web':
 			return swcLoader(getBrowserTargets());
 	}

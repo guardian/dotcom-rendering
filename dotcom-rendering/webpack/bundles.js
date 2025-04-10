@@ -9,7 +9,7 @@
  *
  * @type {boolean} prevent TS from narrowing this to its current value
  */
-const BUILD_VARIANT = false;
+const BUILD_VARIANT = true;
 
 /**
  * Server-side test names for running variant test.
@@ -23,11 +23,7 @@ const BUILD_VARIANT = false;
  */
 const dcrJavascriptBundle = (variant) => `dcrJavascriptBundle${variant}`;
 
-/** @type {(variant: 'Variant' | 'Control') => import("../src/types/config").ServerSideTestNames} */
-const reactBundle = (variant) => `reactBundle${variant}`;
-
 module.exports = {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
-	reactBundle,
 };
