@@ -57,7 +57,7 @@ export const getMoreDays =
 
 const goToCompetitionSpecificPage =
 	(guardianBaseUrl: string) => (path: string) => {
-		const url = `${guardianBaseUrl}${encodeURIComponent(path)}`;
+		const url = `${guardianBaseUrl}${path}`;
 		window.location.assign(url);
 	};
 
