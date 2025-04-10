@@ -110,8 +110,8 @@ export const ScrollableSmall = ({
 									showLivePlayable={
 										trails[1].showLivePlayable
 									}
-									showTopBarDesktop={false}
-									showTopBarMobile={false}
+									showTopBarDesktop={true}
+									showTopBarMobile={true}
 									canPlayInline={false}
 								/>
 							)}
