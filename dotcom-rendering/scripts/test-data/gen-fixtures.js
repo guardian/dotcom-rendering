@@ -8,9 +8,9 @@ const { config } = require('../../fixtures/config');
 const { configOverrides } = require('../../fixtures/config-overrides');
 const { switchOverrides } = require('../../fixtures/switch-overrides');
 const {
-	validateAsArticleType,
-	validateAsFootballDataPageType,
 	validateAsCricketMatchPageType,
+	validateAsFEArticle,
+	validateAsFootballMatchListPage,
 } = require('../../src/model/validate');
 
 const root = resolve(__dirname, '..', '..');
@@ -176,7 +176,7 @@ const requests = articles.map((article) => {
 				frontendJson.format.design = 'LiveBlogDesign';
 			}
 
-			const frontendData = validateAsArticleType(frontendJson);
+			const frontendData = validateAsFEArticle(frontendJson);
 
 			// Write the new frontend fixture data
 			const frontendContents = `${HEADER}
@@ -239,8 +239,12 @@ requests.push(
 
 // MatchReport fixtures
 requests.push(
+	// this URL may expire in the future; you can get a fresh one by finding a recent match
+	// from https://www.theguardian.com/tone/matchreports, then opening your network tab in
+	// your browser's devtools, and find a similar looking `api.nextgen` request, and copy
+	// that URL in here.
 	fetch(
-		'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2022/07/11/8184/7514.json?dcr=true&page=football%2F2022%2Fjul%2F11%2Fengland-norway-womens-euro-2022-group-a-match-report',
+		'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2025/04/07/29/31.json?dcr=true&page=football%2F2025%2Fapr%2F07%2Fjacob-murphys-lightning-double-helps-newcastle-blow-away-flimsy-leicester',
 	)
 		.then((res) => res.json())
 		.then((json) => {
@@ -324,15 +328,16 @@ requests.push(
 			delete json.config.weatherapiurl;
 			delete json.config.isAdFree;
 			delete json.config.userBenefitsApiUrl;
+			delete json.config.frontendSentryDsn;
 
-			const footballDataPageData = validateAsFootballDataPageType(json);
+			const footballMatchListPage = validateAsFootballMatchListPage(json);
 
 			// Write the new frontend fixture data
 			const contents = `${HEADER}
-			import type { FEFootballDataPage } from '../../src/feFootballDataPage';
+			import type { FEFootballMatchListPage } from '../../src/frontend/feFootballMatchListPage';
 
-			export const footballData: FEFootballDataPage = ${JSON.stringify(
-				footballDataPageData,
+			export const footballData: FEFootballMatchListPage = ${JSON.stringify(
+				footballMatchListPage,
 				null,
 				4,
 			)}

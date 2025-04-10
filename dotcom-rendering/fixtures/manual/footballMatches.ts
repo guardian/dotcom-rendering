@@ -4,7 +4,7 @@ import type {
 	FEMatchByDateAndCompetition,
 	FEMatchDay,
 	FEResult,
-} from '../../src/feFootballDataPage';
+} from '../../src/frontend/feFootballMatchListPage';
 
 const matchData = {
 	id: '1',
@@ -91,6 +91,7 @@ export const emptyMatches: FEMatchByDateAndCompetition[] = [
 					url: '/football/premierleague',
 					fullName: 'Premier League',
 					nation: 'English',
+					tableDividers: [],
 				},
 				matches: [],
 			},

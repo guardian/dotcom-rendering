@@ -7,6 +7,11 @@ import type {
 	ContributionFrequency,
 	ContributionType,
 } from '@guardian/support-dotcom-components/dist/shared/types';
+import {
+	ChoiceCardTestData_REGULAR,
+	ChoiceCardTestData_US,
+} from '../epics/ThreeTierChoiceCardData';
+import type { ChoiceInfo } from '../epics/ThreeTierChoiceCards';
 
 export interface ChoiceCardSelection {
 	frequency: ContributionFrequency;
@@ -26,4 +31,13 @@ export const contributionType: ContributionType = {
 		label: 'Annual',
 		suffix: 'per year',
 	},
+};
+
+export const getChoiceCardData = (
+	longerBenefits: boolean,
+	countryCode?: string,
+): ChoiceInfo[] => {
+	return countryCode === 'US'
+		? ChoiceCardTestData_US(longerBenefits)
+		: ChoiceCardTestData_REGULAR(longerBenefits);
 };

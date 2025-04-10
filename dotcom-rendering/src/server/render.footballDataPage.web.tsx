@@ -2,10 +2,11 @@ import { isString } from '@guardian/libs';
 import { ConfigProvider } from '../components/ConfigContext';
 import { FootballDataPage } from '../components/FootballDataPage';
 import type {
-	DCRFootballDataPage,
-	FootballMatchKind,
+	FootballMatchListPage,
+	FootballTablesPage,
 	Region,
-} from '../footballMatches';
+} from '../footballDataPage';
+import type { FootballMatchKind } from '../footballMatches';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -21,7 +22,7 @@ import { htmlPageTemplate } from './htmlPageTemplate';
 const fromTheGuardian =
 	'from the Guardian, the world&#x27;s leading liberal voice';
 
-const decideDescription = (kind: FootballMatchKind) => {
+const decideDescription = (kind: FootballMatchKind | 'Tables') => {
 	switch (kind) {
 		case 'Live':
 			return `Live football scores ${fromTheGuardian}`;
@@ -29,11 +30,13 @@ const decideDescription = (kind: FootballMatchKind) => {
 			return `Latest football results ${fromTheGuardian}`;
 		case 'Fixture':
 			return `Football fixtures ${fromTheGuardian}`;
+		case 'Tables':
+			return `Football tables ${fromTheGuardian}`;
 	}
 };
 
 const decideTitle = (
-	kind: FootballMatchKind,
+	kind: FootballMatchKind | 'Tables',
 	pageId: string,
 	regions: Region[],
 ) => {
@@ -57,10 +60,31 @@ const decideTitle = (
 			return `${
 				competitionName ? `${competitionName} ` : 'All '
 			}fixtures ${footballTitle}`;
+		case 'Tables':
+			return `${
+				competitionName ? `${competitionName} table` : 'All tables'
+			} ${footballTitle}`;
 	}
 };
 
-export const renderFootballDataPage = (footballData: DCRFootballDataPage) => {
+export const renderFootballPage = (
+	footballData: FootballMatchListPage | FootballTablesPage,
+) =>
+	renderFootballDataPage(
+		footballData,
+		decideTitle(
+			footballData.kind,
+			footballData.config.pageId,
+			footballData.regions,
+		),
+		decideDescription(footballData.kind),
+	);
+
+const renderFootballDataPage = (
+	footballData: FootballMatchListPage | FootballTablesPage,
+	title: string,
+	description: string,
+) => {
 	const renderingTarget = 'Web';
 	const config: Config = {
 		renderingTarget,
@@ -108,12 +132,8 @@ export const renderFootballDataPage = (footballData: DCRFootballDataPage) => {
 		scriptTags,
 		css: extractedCss,
 		html,
-		title: decideTitle(
-			footballData.kind,
-			footballData.config.pageId,
-			footballData.regions,
-		),
-		description: decideDescription(footballData.kind),
+		title,
+		description,
 		canonicalUrl: footballData.canonicalUrl,
 		guardian: createGuardian({
 			editionId: footballData.editionId,

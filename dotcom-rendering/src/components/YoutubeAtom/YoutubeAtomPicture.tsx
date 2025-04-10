@@ -55,6 +55,7 @@ export const YoutubeAtomPicture = ({
 				// https://stackoverflow.com/questions/10844205/html-5-strange-img-always-adds-3px-margin-at-bottom
 				// why did we add the css `vertical-align: middle;` to the img tag
 				css={css`
+					object-fit: cover;
 					vertical-align: middle;
 				`}
 			/>

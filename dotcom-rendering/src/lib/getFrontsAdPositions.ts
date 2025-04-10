@@ -236,7 +236,8 @@ const getCollectionHeight = (
 				return 6;
 			} else if (
 				grouped.splash[0]?.boostLevel === 'megaboost' ||
-				grouped.splash[0]?.boostLevel === 'gigaboost'
+				grouped.splash[0]?.boostLevel === 'gigaboost' ||
+				grouped.splash[0]?.isImmersive
 			) {
 				return 6;
 			} else {

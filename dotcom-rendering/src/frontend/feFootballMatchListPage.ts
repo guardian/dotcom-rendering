@@ -1,22 +1,11 @@
-import type { FEFrontConfig } from './frontend/feFront';
-import type { EditionId } from './lib/edition';
-import type { FooterType } from './types/footer';
-import type { FENavType } from './types/frontend';
-
-type FECompetitionSummary = {
-	id: string;
-	url: string;
-	fullName: string;
-	nation: string;
-};
+import type {
+	FECompetitionSummary,
+	FEFootballDataPage,
+	FERound,
+} from './feFootballDataPage';
 
 type FEStage = {
 	stageNumber: string;
-};
-
-type FERound = {
-	roundNumber: string;
-	name?: string;
 };
 
 type FEVenue = {
@@ -99,30 +88,8 @@ export type FEMatchByDateAndCompetition = {
 	competitionMatches: FECompetitionMatch[];
 };
 
-export type FEFootballPageConfig = Omit<
-	FEFrontConfig,
-	'keywordIds' | 'keywords' | 'isFront'
-> & {
-	isFront: boolean;
-	hasSurveyAd: boolean;
-};
-
-export type FEFootballCompetition = {
-	name: string;
-	url: string;
-};
-
-export type FEFootballDataPage = {
+export type FEFootballMatchListPage = FEFootballDataPage & {
 	matchesList: FEMatchByDateAndCompetition[];
 	nextPage?: string;
 	previousPage?: string;
-	filters: Record<string, FEFootballCompetition[]>;
-	nav: FENavType;
-	editionId: EditionId;
-	guardianBaseURL: string;
-	config: FEFootballPageConfig;
-	pageFooter: FooterType;
-	isAdFreeUser: boolean;
-	canonicalUrl?: string;
-	contributionsServiceUrl: string;
 };

@@ -1,9 +1,9 @@
 import { isUndefined } from '@guardian/libs';
-import type { FEFootballPageConfig } from './feFootballDataPage';
 import type {
 	FECricketInnings,
 	FECricketMatch,
 } from './frontend/feCricketMatchPage';
+import type { FEFootballPageConfig } from './frontend/feFootballDataPage';
 import type { EditionId } from './lib/edition';
 import { error, ok, type Result } from './lib/result';
 import type { NavType } from './model/extract-nav';

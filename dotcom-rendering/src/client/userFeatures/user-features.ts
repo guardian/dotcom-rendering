@@ -35,6 +35,16 @@ const requestNewData = async () => {
 	return syncDataFromUserBenefitsApi(authStatus).then(persistResponse);
 };
 
+/**
+ * Persist the user benefits response to cookies
+ *
+ * If new cookies are added/removed/edited, update the persistUserBenefitsCookie function in Gateway
+ * https://github.com/guardian/gateway/blob/252b2b2f24be826da42c6e7c1b1e202594184023/src/server/lib/user-features.ts#L88
+ *
+ * In gateway, the cookies are set after authentication.
+ *
+ * @param {UserBenefits} userBenefitsResponse
+ */
 const persistResponse = (userBenefitsResponse: UserBenefits) => {
 	createOrRenewCookie(USER_BENEFITS_EXPIRY_COOKIE);
 	if (userBenefitsResponse.hideSupportMessaging) {

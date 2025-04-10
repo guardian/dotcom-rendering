@@ -22,12 +22,6 @@ import {
 	getLocalCurrencySymbol,
 } from '@guardian/support-dotcom-components';
 import type { Dispatch, SetStateAction } from 'react';
-import {
-	ChoiceCardTestData_REGULAR,
-	ChoiceCardTestData_TwoTier_REGULAR,
-	ChoiceCardTestData_US,
-	ChoiceCardTestData_US_SIMPLIFIED,
-} from './ThreeTierChoiceCardData';
 import type {
 	SupportRatePlan,
 	SupportTier,
@@ -187,34 +181,21 @@ type ThreeTierChoiceCardsProps = {
 	selectedProduct: SupportTier;
 	setSelectedProduct: Dispatch<SetStateAction<SupportTier>>;
 	countryCode?: string;
-	variantOfChoiceCard: string;
+	choices: ChoiceInfo[];
 	supporterPlusDiscount?: number;
-};
-
-const getChoiceCardData = (choiceCardVariant: string): ChoiceInfo[] => {
-	switch (choiceCardVariant) {
-		case 'US_THREE_TIER_CHOICE_CARDS':
-			return ChoiceCardTestData_US;
-		case 'US_SIMPLIFY_THIRD_CHOICE_CARD':
-			return ChoiceCardTestData_US_SIMPLIFIED;
-		case 'TWO_TIER_CHOICE_CARDS':
-			return ChoiceCardTestData_TwoTier_REGULAR;
-		default:
-			return ChoiceCardTestData_REGULAR;
-	}
+	id: string; // uniquely identify this choice cards component to avoid conflicting with others
 };
 
 export const ThreeTierChoiceCards = ({
 	countryCode,
 	selectedProduct,
 	setSelectedProduct,
-	variantOfChoiceCard,
+	choices,
 	supporterPlusDiscount,
+	id,
 }: ThreeTierChoiceCardsProps) => {
 	const currencySymbol = getLocalCurrencySymbol(countryCode);
 	const countryGroupId = countryCodeToCountryGroupId(countryCode);
-
-	const Choices = getChoiceCardData(variantOfChoiceCard);
 
 	return (
 		<RadioGroup
@@ -223,7 +204,7 @@ export const ThreeTierChoiceCards = ({
 			`}
 		>
 			<Stack space={3}>
-				{Choices.map(
+				{choices.map(
 					({
 						supportTier,
 						label,
@@ -242,7 +223,7 @@ export const ThreeTierChoiceCards = ({
 							!isUndefined(supporterPlusDiscount) &&
 							supportTier === 'SupporterPlus';
 
-						const radioId = `choicecard-${supportTier}`;
+						const radioId = `choicecard-${id}-${supportTier}`;
 
 						return (
 							<div

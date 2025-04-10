@@ -18,7 +18,7 @@ export const Video: FEArticle = {
 	headline:
 		'ATP Finals: Djokovic beats Sinner to claim record seventh title – video',
 	standfirst:
-		'<p><a href="https://www.theguardian.com/sport/novak-djokovic">Novak Djokovic</a> defeated Jannik Sinner 6-3, 6-3 to claim his seventh ATP Finals title. Five days after Sinner played some of his best tennis to <a href="https://www.theguardian.com/sport/2023/nov/14/stefanos-tsitsipas-retire-injury-holger-rune-atp-finals-novak-djokovic-jannik-sinner-tennis">edge past Djokovic</a> after three exhausting hours in their round-robin battle, Djokovic simply elevated his level to heights that Sinner could not match.</p>\n<p></p>\n<ul>\n <li><p><a href="https://www.theguardian.com/sport/2023/nov/19/novak-djokovic-claims-seventh-atp-finals-title-with-demolition-of-sinner"><strong>Novak Djokovic claims seventh ATP Finals title with demolition of Sinner</strong></a></p></li>\n</ul>',
+		'<p><a href="https://www.theguardian.com/sport/novak-djokovic">Novak Djokovic</a> defeated Jannik Sinner 6-3, 6-3 to claim his seventh ATP Finals title. Five days after Sinner played some of his best tennis to <a href="https://www.theguardian.com/sport/2023/nov/14/stefanos-tsitsipas-retire-injury-holger-rune-atp-finals-novak-djokovic-jannik-sinner-tennis">edge past Djokovic</a> after three exhausting hours in their round-robin battle, Djokovic simply elevated his level to heights that Sinner could not match.</p>\n<p></p>\n<ul>\n <li>\n  <p><a href="https://www.theguardian.com/sport/2023/nov/19/novak-djokovic-claims-seventh-atp-finals-title-with-demolition-of-sinner"><strong>Novak Djokovic claims seventh ATP Finals title with demolition of Sinner</strong></a></p></li>\n</ul>',
 	webTitle:
 		'ATP Finals: Djokovic beats Sinner to claim record seventh title – video',
 	mainMediaElements: [
@@ -50,7 +50,7 @@ export const Video: FEArticle = {
 				},
 			],
 			id: 'b71e095c-8863-4a13-a44d-47a090333c51',
-			elementId: 'cac1c8ed-e9c8-494e-b994-f857922be084',
+			elementId: '20fbeb90-3150-4e4d-a550-648858214bc4',
 			overrideImage:
 				'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=700&quality=85&auto=format&fit=max&s=aeafe0f7fe0353c290fceb3b73effa98',
 			duration: 106,
@@ -173,7 +173,7 @@ export const Video: FEArticle = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=068fb79aa05a766277421fbe8d2319d7',
+				'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjMucG5n&enable=upscale&s=3f457853763e7ac48f233c92ac039544',
 				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
 				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
 				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
@@ -206,7 +206,7 @@ export const Video: FEArticle = {
 			'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=068fb79aa05a766277421fbe8d2319d7',
+			'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjMucG5n&enable=upscale&s=3f457853763e7ac48f233c92ac039544',
 		'al:ios:url':
 			'gnmguardian://sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video?contenttype=Article&source=applinks',
 		'og:title':
@@ -241,7 +241,7 @@ export const Video: FEArticle = {
 		'twitter:app:url:iphone':
 			'gnmguardian://sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video?contenttype=Article&source=twitter',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=cc616ca345f75ebcf90d7da7c1d97390',
+			'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjMucG5n&s=9fb9bb07a4e465ac3ae3a410f3eb2969',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
 			'gnmguardian://sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video?contenttype=Article&source=twitter',
@@ -303,7 +303,6 @@ export const Video: FEArticle = {
 			brazeSwitch: true,
 			consentManagement: true,
 			commercial: true,
-			redplanetForAus: true,
 			prebidSonobi: true,
 			idProfileNavigation: true,
 			confiantAdVerification: true,
@@ -411,7 +410,6 @@ export const Video: FEArticle = {
 		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
 		webPublicationDate: 1581314427000,
 		discussionD2Uid: 'zHoBy6HNKsk',
-		source: 'TMN',
 	},
 	guardianBaseURL: 'https://www.theguardian.com',
 	contentType: 'Video',
@@ -704,6 +702,10 @@ export const Video: FEArticle = {
 						],
 					},
 					{
+						title: 'US politics',
+						url: '/us-news/us-politics',
+					},
+					{
 						title: 'World',
 						url: '/world',
 						longTitle: 'World news',
@@ -751,6 +753,10 @@ export const Video: FEArticle = {
 					{
 						title: 'Climate crisis',
 						url: '/environment/climate-crisis',
+					},
+					{
+						title: 'Middle East',
+						url: '/world/middleeast',
 					},
 					{
 						title: 'Ukraine',
@@ -877,32 +883,6 @@ export const Video: FEArticle = {
 					{
 						title: 'UK politics',
 						url: '/politics',
-					},
-					{
-						title: 'Education',
-						url: '/education',
-						children: [
-							{
-								title: 'Schools',
-								url: '/education/schools',
-							},
-							{
-								title: 'Teachers',
-								url: '/teacher-network',
-							},
-							{
-								title: 'Universities',
-								url: '/education/universities',
-							},
-							{
-								title: 'Students',
-								url: '/education/students',
-							},
-						],
-					},
-					{
-						title: 'Society',
-						url: '/society',
 					},
 					{
 						title: 'Science',
@@ -1081,6 +1061,10 @@ export const Video: FEArticle = {
 				iconName: 'home',
 				children: [
 					{
+						title: 'The Filter',
+						url: '/uk/thefilter',
+					},
+					{
 						title: 'Fashion',
 						url: '/fashion',
 					},
@@ -1212,7 +1196,7 @@ export const Video: FEArticle = {
 			},
 			{
 				title: 'Inside the Guardian',
-				url: 'https://www.theguardian.com/membership',
+				url: 'https://www.theguardian.com/insidetheguardian',
 			},
 			{
 				title: 'The Observer',
@@ -1287,6 +1271,10 @@ export const Video: FEArticle = {
 					{
 						title: 'Weekend',
 						url: '/crosswords/series/weekend-crossword',
+					},
+					{
+						title: 'Special',
+						url: '/crosswords/series/special',
 					},
 				],
 			},
@@ -1484,7 +1472,7 @@ export const Video: FEArticle = {
 				},
 				{
 					text: 'Help',
-					url: '/help',
+					url: 'https://manage.theguardian.com/help-centre',
 					dataLinkName: 'uk : footer : tech feedback',
 					extraClasses: 'js-tech-feedback-report',
 				},
@@ -1546,8 +1534,14 @@ export const Video: FEArticle = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
+					url: 'https://uploads.guim.co.uk/2024/09/04/Modern_Slavery_Statement_2024_.pdf',
 					dataLinkName: 'uk : footer : modern slavery act statement',
+					extraClasses: '',
+				},
+				{
+					text: 'Tax strategy',
+					url: 'https://uploads.guim.co.uk/2024/08/27/TAX_STRATEGY_FOR_THE_YEAR_ENDED_31_MARCH_2025.pdf',
+					dataLinkName: 'uk : footer : tax strategy',
 					extraClasses: '',
 				},
 				{
@@ -1578,12 +1572,6 @@ export const Video: FEArticle = {
 					text: 'LinkedIn',
 					url: 'https://www.linkedin.com/company/theguardian',
 					dataLinkName: 'uk : footer : linkedin',
-					extraClasses: '',
-				},
-				{
-					text: 'Twitter',
-					url: 'https://twitter.com/guardian',
-					dataLinkName: 'uk: footer : twitter',
 					extraClasses: '',
 				},
 				{

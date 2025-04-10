@@ -1,5 +1,6 @@
 import { palette } from '@guardian/source/foundations';
 import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.importable';
+import { FootballTablesPage } from '../components/FootballTablesPage';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -7,14 +8,58 @@ import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
-import type { DCRFootballDataPage } from '../footballMatches';
+import type {
+	FootballMatchListPage,
+	FootballTablesPage as FootballTablesPageData,
+} from '../footballDataPage';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
-	footballData: DCRFootballDataPage;
+	footballData: FootballMatchListPage | FootballTablesPageData;
 }
+
+const SportsPage = ({
+	footballData,
+	renderAds,
+}: {
+	footballData: FootballMatchListPage | FootballTablesPageData;
+	renderAds: boolean;
+}) => {
+	switch (footballData.kind) {
+		case 'Fixture':
+		case 'Live':
+		case 'Result':
+			return (
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<FootballMatchesPageWrapper
+						regions={footballData.regions}
+						now={footballData.now}
+						guardianBaseUrl={footballData.guardianBaseURL}
+						ajaxUrl={footballData.config.ajaxUrl}
+						kind={footballData.kind}
+						initialDays={footballData.matchesList}
+						secondPage={footballData.nextPage}
+						edition={footballData.editionId}
+						renderAds={renderAds}
+						pageId={footballData.config.pageId}
+					/>
+				</Island>
+			);
+
+		case 'Tables':
+			return (
+				<FootballTablesPage
+					regions={footballData.regions}
+					pageId={footballData.config.pageId}
+					tableCompetitions={footballData.tables}
+					renderAds={renderAds}
+					guardianBaseUrl={footballData.guardianBaseURL}
+				/>
+			);
+	}
+};
 
 export const FootballDataPageLayout = ({ footballData }: Props) => {
 	const { nav } = footballData;
@@ -60,20 +105,7 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 				/>
 			</div>
 
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<FootballMatchesPageWrapper
-					regions={footballData.regions}
-					now={footballData.now}
-					guardianBaseUrl={footballData.guardianBaseURL}
-					ajaxUrl={footballData.config.ajaxUrl}
-					kind={footballData.kind}
-					initialDays={footballData.matchesList}
-					secondPage={footballData.nextPage}
-					edition={footballData.editionId}
-					renderAds={renderAds}
-					pageId={footballData.config.pageId}
-				/>
-			</Island>
+			<SportsPage footballData={footballData} renderAds={renderAds} />
 
 			{nav.subNavSections && (
 				<Section
