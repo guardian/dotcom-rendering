@@ -1,6 +1,7 @@
+import type { CricketMatch } from './cricketMatch';
 import type { FootballMatches, FootballMatchKind } from './footballMatches';
 import type { FootballTableCompetitions } from './footballTables';
-import type { FEFootballPageConfig } from './frontend/feFootballDataPage';
+import type { FESportPageConfig } from './frontend/feFootballDataPage';
 import type { EditionId } from './lib/edition';
 import type { NavType } from './model/extract-nav';
 import type { FooterType } from './types/footer';
@@ -10,12 +11,15 @@ export type Region = {
 	competitions: Array<{ url: string; name: string }>;
 };
 
-export type FootballData = {
+export type FootballData = SportPageConfig & {
 	regions: Region[];
+};
+
+export type SportPageConfig = {
 	nav: NavType;
 	editionId: EditionId;
 	guardianBaseURL: string;
-	config: FEFootballPageConfig;
+	config: FESportPageConfig;
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
 	canonicalUrl?: string;
@@ -32,7 +36,21 @@ export type FootballMatchListPage = FootballData & {
 
 export type FootballTablesPage = FootballData & {
 	tables: FootballTableCompetitions;
-	kind: 'Tables';
+	kind: 'FootballTables';
 };
 
-export type FootballDataPage = FootballMatchListPage | FootballTablesPage;
+export type CricketMatchPage = SportPageConfig & {
+	match: CricketMatch;
+	kind: 'CricketMatch';
+};
+
+export type FootballPageKind = FootballTablesPage['kind'] | FootballMatchKind;
+
+export type SportPageKind = FootballPageKind | CricketMatchPage['kind'];
+
+export type SportDataPage =
+	| CricketMatchPage
+	| FootballMatchListPage
+	| FootballTablesPage;
+
+const foo;

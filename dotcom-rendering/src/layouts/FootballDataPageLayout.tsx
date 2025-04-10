@@ -11,7 +11,7 @@ import { SubNav } from '../components/SubNav.importable';
 import type {
 	FootballMatchListPage,
 	FootballTablesPage as FootballTablesPageData,
-} from '../footballDataPage';
+} from '../sportDataPage';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { BannerWrapper, Stuck } from './lib/stickiness';
@@ -28,9 +28,9 @@ const SportsPage = ({
 	renderAds: boolean;
 }) => {
 	switch (footballData.kind) {
-		case 'Fixture':
-		case 'Live':
-		case 'Result':
+		case 'FootballFixture':
+		case 'FootballLive':
+		case 'FootballResult':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<FootballMatchesPageWrapper
@@ -48,7 +48,7 @@ const SportsPage = ({
 				</Island>
 			);
 
-		case 'Tables':
+		case 'FootballTables':
 			return (
 				<FootballTablesPage
 					regions={footballData.regions}

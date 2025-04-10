@@ -5,7 +5,7 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
-import type { Region } from '../footballDataPage';
+import type { Region } from '../sportDataPage';
 import type { FootballTableCompetition } from '../footballTables';
 import { grid } from '../grid';
 import { palette } from '../palette';

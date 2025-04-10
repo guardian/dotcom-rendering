@@ -1,7 +1,7 @@
 import type { EditionId } from '../lib/edition';
 import type { FooterType } from '../types/footer';
 import type { FENavType } from '../types/frontend';
-import type { FEFootballPageConfig } from './feFootballDataPage';
+import type { FESportPageConfig } from './feFootballDataPage';
 
 type FECricketTeam = {
 	name: string;
@@ -75,7 +75,7 @@ export type FECricketMatchPage = {
 	editionId: EditionId;
 	guardianBaseURL: string;
 	// ToDo: rename to generic sport config
-	config: FEFootballPageConfig;
+	config: FESportPageConfig;
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
 	canonicalUrl?: string;

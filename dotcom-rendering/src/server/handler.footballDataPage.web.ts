@@ -3,7 +3,7 @@ import type {
 	FootballMatchListPage,
 	FootballTablesPage,
 	Region,
-} from '../footballDataPage';
+} from '../sportDataPage';
 import type { FootballMatchKind } from '../footballMatches';
 import {
 	getParserErrorMessage,
@@ -21,19 +21,19 @@ import {
 } from '../model/validate';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
-import { renderFootballPage } from './render.footballDataPage.web';
+import { renderSportPage } from './render.footballDataPage.web';
 
 const decidePageKind = (pageId: string): FootballMatchKind => {
 	if (pageId.includes('live')) {
-		return 'Live';
+		return 'FootballLive';
 	}
 
 	if (pageId.includes('results')) {
-		return 'Result';
+		return 'FootballResult';
 	}
 
 	if (pageId.includes('fixtures')) {
-		return 'Fixture';
+		return 'FootballFixture';
 	}
 
 	throw new Error('Could not determine football page kind');
@@ -107,7 +107,7 @@ export const handleFootballMatchListPage: RequestHandler = ({ body }, res) => {
 		validateAsFootballMatchListPage(body);
 
 	const parsedFootballData = parseFEFootballMatchList(footballDataValidated);
-	const { html, prefetchScripts } = renderFootballPage(parsedFootballData);
+	const { html, prefetchScripts } = renderSportPage(parsedFootballData);
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
@@ -124,7 +124,7 @@ const parseFEFootballTables = (
 
 	return {
 		tables: parsedFootballTables.value,
-		kind: 'Tables',
+		kind: 'FootballTables',
 		regions: parseFEFootballCompetitionRegions(data.filters),
 		nav: {
 			...extractNAV(data.nav),
@@ -148,8 +148,6 @@ export const handleFootballTablesPage: RequestHandler = ({ body }, res) => {
 	const parsedFootballTableData = parseFEFootballTables(
 		footballTablesPageValidated,
 	);
-	const { html, prefetchScripts } = renderFootballPage(
-		parsedFootballTableData,
-	);
+	const { html, prefetchScripts } = renderSportPage(parsedFootballTableData);
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };

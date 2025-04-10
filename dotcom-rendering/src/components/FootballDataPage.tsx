@@ -3,7 +3,7 @@ import { StrictMode } from 'react';
 import type {
 	FootballMatchListPage,
 	FootballTablesPage,
-} from '../footballDataPage';
+} from '../sportDataPage';
 import { FootballDataPageLayout } from '../layouts/FootballDataPageLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';

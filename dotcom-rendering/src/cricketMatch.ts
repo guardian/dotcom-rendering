@@ -3,11 +3,8 @@ import type {
 	FECricketInnings,
 	FECricketMatch,
 } from './frontend/feCricketMatchPage';
-import type { FEFootballPageConfig } from './frontend/feFootballDataPage';
-import type { EditionId } from './lib/edition';
 import { error, ok, type Result } from './lib/result';
-import type { NavType } from './model/extract-nav';
-import type { FooterType } from './types/footer';
+
 
 export type Bowler = {
 	name: string;
@@ -62,7 +59,7 @@ export type Innings = {
 	fallOfWickets: FallOfWicket[];
 };
 
-type CricketMatch = {
+export type CricketMatch = {
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
 	officials: string[];
@@ -117,14 +114,4 @@ export const parse = (
 	});
 };
 
-export type CricketMatchPage = {
-	match: CricketMatch;
-	nav: NavType;
-	editionId: EditionId;
-	guardianBaseURL: string;
-	config: FEFootballPageConfig;
-	pageFooter: FooterType;
-	isAdFreeUser: boolean;
-	canonicalUrl?: string;
-	contributionsServiceUrl: string;
-};
+

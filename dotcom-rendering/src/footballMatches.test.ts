@@ -135,7 +135,7 @@ describe('footballMatches', () => {
 			);
 
 			const match = matchDay[0]!.competitions[0]!.matches[0];
-			if (match?.kind !== 'Result') {
+			if (match?.kind !== 'FootballResult') {
 				throw new Error('Expected Result');
 			}
 
@@ -149,7 +149,7 @@ describe('footballMatches', () => {
 		);
 
 		const match = matchDay[0]!.competitions[0]!.matches[0];
-		if (match?.kind !== 'Live') {
+		if (match?.kind !== 'FootballLive') {
 			throw new Error('Expected live match');
 		}
 
@@ -167,7 +167,7 @@ describe('footballMatches', () => {
 		);
 
 		const match = matchDay[0]!.competitions[0]!.matches[0];
-		if (match?.kind !== 'Live') {
+		if (match?.kind !== 'FootballLive') {
 			throw new Error('Expected live match');
 		}
 

@@ -5,7 +5,7 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
-import type { Region } from '../footballDataPage';
+import type { Region } from '../sportDataPage';
 import type { FootballMatches, FootballMatchKind } from '../footballMatches';
 import { grid } from '../grid';
 import type { EditionId } from '../lib/edition';
@@ -29,16 +29,16 @@ type Props = {
 };
 
 const createTitle = (kind: FootballMatchKind, edition: EditionId) => {
-	if (edition === 'US' && kind === 'Fixture') {
+	if (edition === 'US' && kind === 'FootballFixture') {
 		return 'Soccer schedules';
 	}
 
 	switch (kind) {
-		case 'Fixture':
+		case 'FootballFixture':
 			return 'Football fixtures';
-		case 'Live':
+		case 'FootballLive':
 			return 'Live football scores';
-		case 'Result':
+		case 'FootballResult':
 			return 'Football results';
 	}
 };

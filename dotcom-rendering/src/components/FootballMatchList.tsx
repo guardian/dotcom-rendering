@@ -159,9 +159,9 @@ const MatchStatus = ({
 	timeFormatter: Intl.DateTimeFormat;
 }) => {
 	switch (match.kind) {
-		case 'Result':
+		case 'FootballResult':
 			return <span css={matchStatusStyles}>FT</span>;
-		case 'Live':
+		case 'FootballLive':
 			return (
 				<span
 					css={[
@@ -176,7 +176,7 @@ const MatchStatus = ({
 					{match.status}
 				</span>
 			);
-		case 'Fixture':
+		case 'FootballFixture':
 			return (
 				<time
 					css={matchStatusStyles}
@@ -264,7 +264,7 @@ const Match = ({
 }) => (
 	<MatchWrapper match={match} now={now}>
 		<MatchStatus match={match} timeFormatter={timeFormatter} />
-		{match.kind === 'Fixture' ? (
+		{match.kind === 'FootballFixture' ? (
 			<>
 				<HomeTeam team={match.homeTeam} />
 				<Versus />

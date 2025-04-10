@@ -1,4 +1,4 @@
-import type { Region } from '../footballDataPage';
+import type { Region } from '../sportDataPage';
 import { FootballCompetitionSelect } from './FootballCompetitionSelect';
 
 const goToCompetitionSpecificPage =

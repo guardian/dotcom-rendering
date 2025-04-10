@@ -2,10 +2,11 @@ import { isString } from '@guardian/libs';
 import { ConfigProvider } from '../components/ConfigContext';
 import { FootballDataPage } from '../components/FootballDataPage';
 import type {
+	CricketMatchPage,
 	FootballMatchListPage,
 	FootballTablesPage,
-	Region,
-} from '../footballDataPage';
+	SportDataPage,
+} from '../sportDataPage';
 import type { FootballMatchKind } from '../footballMatches';
 import {
 	ASSET_ORIGIN,
@@ -24,60 +25,56 @@ const fromTheGuardian =
 
 const decideDescription = (kind: FootballMatchKind | 'Tables') => {
 	switch (kind) {
-		case 'Live':
+		case 'FootballLive':
 			return `Live football scores ${fromTheGuardian}`;
-		case 'Result':
+		case 'FootballResult':
 			return `Latest football results ${fromTheGuardian}`;
-		case 'Fixture':
+		case 'FootballFixture':
 			return `Football fixtures ${fromTheGuardian}`;
 		case 'Tables':
 			return `Football tables ${fromTheGuardian}`;
 	}
 };
 
-const decideTitle = (
-	kind: FootballMatchKind | 'Tables',
-	pageId: string,
-	regions: Region[],
-) => {
-	const pagePath = pageId.startsWith('/') ? pageId.slice(1) : pageId;
-	const competitionName = regions
-		.flatMap((region) => region.competitions) // Flatten all competitions into a single array
-		.find((competition) => competition.url === `/${pagePath}`)?.name;
+const decideTitle = (sportPage: SportDataPage) => {
+	const { config, kind } = sportPage;
+	const pagePath = config.pageId.startsWith('/') ? config.pageId.slice(1) : config.pageId;
+
+	if (sportPage.kind) {
+		const competitionName = sportPage.
+			.flatMap((region) => region.competitions) // Flatten all competitions into a single array
+			.find((competition) => competition.url === `/${pagePath}`)?.name;
+	}
 
 	const footballTitle = '| Football | The Guardian';
 
 	switch (kind) {
-		case 'Live':
+		case 'FootballLive':
 			return `${
 				competitionName ? `Today's ${competitionName} ` : 'Live '
 			}matches ${footballTitle}`;
-		case 'Result':
+		case 'FootballResult':
 			return `${
 				competitionName ? `${competitionName} ` : 'All '
 			}results ${footballTitle}`;
-		case 'Fixture':
+		case 'FootballFixture':
 			return `${
 				competitionName ? `${competitionName} ` : 'All '
 			}fixtures ${footballTitle}`;
-		case 'Tables':
+		case 'FootballTables':
 			return `${
 				competitionName ? `${competitionName} table` : 'All tables'
 			} ${footballTitle}`;
 	}
 };
 
-export const renderFootballPage = (
-	footballData: FootballMatchListPage | FootballTablesPage,
+export const renderSportPage = (
+	sportPage: FootballMatchListPage | FootballTablesPage | CricketMatchPage,
 ) =>
 	renderFootballDataPage(
-		footballData,
-		decideTitle(
-			footballData.kind,
-			footballData.config.pageId,
-			footballData.regions,
-		),
-		decideDescription(footballData.kind),
+		sportPage,
+		decideTitle(sportPage),
+		decideDescription(sportData.kind),
 	);
 
 const renderFootballDataPage = (

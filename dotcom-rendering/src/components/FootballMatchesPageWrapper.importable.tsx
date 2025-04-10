@@ -1,7 +1,7 @@
 import { isObject, isUndefined } from '@guardian/libs';
 import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
-import type { Region } from '../footballDataPage';
+import type { Region } from '../sportDataPage';
 import {
 	type FootballMatches,
 	type FootballMatchKind,
