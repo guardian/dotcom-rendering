@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
@@ -52,19 +51,17 @@ export const ScrollableSmall = ({
 			visibleCardsOnTablet={2}
 			sectionId={sectionId}
 		>
-			{stackedTrails.map((trails) => {
+			{stackedTrails.map((trails, index) => {
 				if (trails.length === 0 || trails[0] === undefined) {
 					return null;
 				}
 				return (
-					<ScrollableCarousel.Item key={'TODO_ADD_KEY'}>
-						<div
-							css={css`
-								display: flex;
-								flex-direction: column;
-								justify-content: space-between;
-							`}
-						>
+					<ScrollableCarousel.Item
+						splitLeftBorder={true}
+						stackRows={true}
+						key={`carousel-item-${index}`}
+					>
+						<>
 							<FrontCard
 								trail={trails[0]}
 								imageLoading={imageLoading}
@@ -115,7 +112,7 @@ export const ScrollableSmall = ({
 									canPlayInline={false}
 								/>
 							)}
-						</div>
+						</>
 					</ScrollableCarousel.Item>
 				);
 			})}
