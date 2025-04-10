@@ -1,6 +1,9 @@
 import { Global } from '@emotion/react';
 import { StrictMode } from 'react';
-import type { DCRFootballDataPage } from '../footballMatches';
+import type {
+	FootballMatchListPage,
+	FootballTablesPage,
+} from '../footballDataPage';
 import { FootballDataPageLayout } from '../layouts/FootballDataPageLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
@@ -17,7 +20,7 @@ import { SetAdTargeting } from './SetAdTargeting.importable';
 import { SkipTo } from './SkipTo';
 
 type Props = {
-	footballData: DCRFootballDataPage;
+	footballData: FootballMatchListPage | FootballTablesPage;
 };
 
 /**

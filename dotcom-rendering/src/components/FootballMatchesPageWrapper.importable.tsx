@@ -1,14 +1,14 @@
 import { isObject, isUndefined } from '@guardian/libs';
 import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
-import type { FEFootballDataPage } from '../feFootballDataPage';
+import type { Region } from '../footballDataPage';
 import {
 	type FootballMatches,
 	type FootballMatchKind,
 	getParserErrorMessage,
 	parse,
-	type Region,
 } from '../footballMatches';
+import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
 import type { EditionId } from '../lib/edition';
 import type { Result } from '../lib/result';
 import { error, ok } from '../lib/result';
@@ -27,7 +27,7 @@ export const getMoreDays =
 			const responseJson: unknown = await fetchResponse.json();
 
 			if (isObject(responseJson)) {
-				const feFootballData = responseJson as FEFootballDataPage;
+				const feFootballData = responseJson as FEFootballMatchListPage;
 				const parsedFootballMatches = parse(feFootballData.matchesList);
 
 				if (parsedFootballMatches.kind === 'error') {
