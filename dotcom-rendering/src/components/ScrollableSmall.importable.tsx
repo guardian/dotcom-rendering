@@ -62,6 +62,7 @@ export const ScrollableSmall = ({
 							css={css`
 								display: flex;
 								flex-direction: column;
+								justify-content: space-between;
 							`}
 						>
 							<FrontCard
