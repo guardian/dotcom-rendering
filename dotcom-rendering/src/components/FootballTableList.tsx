@@ -70,7 +70,7 @@ const CompetitionName = ({
 			${textSansBold14}
 			grid-row: ${hasGroups ? 2 : 1};
 			grid-column: centre-column-start / centre-column-end;
-			color: ${palette('--football-competition-text')};
+			color: ${palette('--sport-competition-text')};
 			border-top: 1px solid ${palette('--sport-top-border')};
 			padding: ${space[2]}px;
 			background-color: ${palette('--sport-list-background')};
@@ -78,7 +78,7 @@ const CompetitionName = ({
 			${from.leftCol} {
 				grid-row: 1;
 				display: block;
-				color: ${palette('--football-competition-text')};
+				color: ${palette('--sport-competition-text')};
 				border-top: 1px solid ${palette('--sport-list-border')};
 				background-color: transparent;
 				margin-top: 0;

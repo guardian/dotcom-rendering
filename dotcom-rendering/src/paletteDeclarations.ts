@@ -6571,10 +6571,6 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],
 	},
-	'--football-competition-text': {
-		light: () => sourcePalette.sport[300],
-		dark: () => sourcePalette.neutral[86],
-	},
 	'--football-form-draw': {
 		light: () => sourcePalette.neutral[46],
 		dark: () => sourcePalette.neutral[73],
@@ -7179,6 +7175,10 @@ const paletteColours = {
 	'--speech-bubble-background': {
 		light: speechBubbleBackgroundLight,
 		dark: speechBubbleBackgroundLight,
+	},
+	'--sport-competition-text': {
+		light: () => sourcePalette.sport[300],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--sport-list-background': {
 		light: () => sourcePalette.neutral[97],

@@ -1,5 +1,5 @@
-import type { Region } from '../../src/footballDataPage';
 import type { FootballMatches } from '../../src/footballMatches';
+import type { Region } from '../../src/sportDataPage';
 
 export const regions: Region[] = [
 	{

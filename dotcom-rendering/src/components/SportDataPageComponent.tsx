@@ -1,14 +1,11 @@
 import { Global } from '@emotion/react';
 import { StrictMode } from 'react';
-import type {
-	FootballMatchListPage,
-	FootballTablesPage,
-} from '../footballDataPage';
-import { FootballDataPageLayout } from '../layouts/FootballDataPageLayout';
+import { SportDataPageLayout } from '../layouts/SportDataPageLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
 import { filterABTestSwitches } from '../model/enhance-switches';
+import type { SportDataPage } from '../sportDataPage';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
@@ -20,23 +17,23 @@ import { SetAdTargeting } from './SetAdTargeting.importable';
 import { SkipTo } from './SkipTo';
 
 type Props = {
-	footballData: FootballMatchListPage | FootballTablesPage;
+	sportData: SportDataPage;
 };
 
 /**
  * @description
- * FootballDataPage is a high level wrapper for football pages on Dotcom. Sets strict mode and some globals
+ * SportDataPageComponent is a high level wrapper for sport data pages on Dotcom. Sets strict mode and some globals
  *
  * @param {Props} props
  * */
-export const FootballDataPage = ({ footballData }: Props) => {
+export const SportDataPageComponent = ({ sportData }: Props) => {
 	const adTargeting = buildAdTargeting({
-		isAdFreeUser: footballData.isAdFreeUser,
-		isSensitive: footballData.config.isSensitive,
-		edition: footballData.config.edition,
-		section: footballData.config.section,
-		sharedAdTargeting: footballData.config.sharedAdTargeting,
-		adUnit: footballData.config.adUnit,
+		isAdFreeUser: sportData.isAdFreeUser,
+		isSensitive: sportData.config.isSensitive,
+		edition: sportData.config.edition,
+		section: sportData.config.section,
+		sharedAdTargeting: sportData.config.sharedAdTargeting,
+		adUnit: sportData.config.adUnit,
 	});
 
 	/* We use this as our "base" or default format */
@@ -62,19 +59,19 @@ export const FootballDataPage = ({ footballData }: Props) => {
 			<Island priority="critical">
 				<Metrics
 					commercialMetricsEnabled={
-						!!footballData.config.switches.commercialMetrics
+						!!sportData.config.switches.commercialMetrics
 					}
-					tests={footballData.config.abTests}
+					tests={sportData.config.abTests}
 				/>
 			</Island>
 			<Island priority="critical">
 				<SetABTests
 					abTestSwitches={filterABTestSwitches(
-						footballData.config.switches,
+						sportData.config.switches,
 					)}
-					pageIsSensitive={footballData.config.isSensitive}
-					isDev={!!footballData.config.isDev}
-					serverSideTests={footballData.config.abTests}
+					pageIsSensitive={sportData.config.isSensitive}
+					isDev={!!sportData.config.isDev}
+					serverSideTests={sportData.config.abTests}
 				/>
 			</Island>
 			<Island priority="critical">
@@ -94,7 +91,7 @@ export const FootballDataPage = ({ footballData }: Props) => {
 					if anything is unreadable or odd.
 				</DarkModeMessage>
 			)}
-			<FootballDataPageLayout footballData={footballData} />,
+			<SportDataPageLayout sportData={sportData} />,
 		</StrictMode>
 	);
 };

@@ -1,10 +1,8 @@
 import { isObject, isUndefined } from '@guardian/libs';
 import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
-import type { Region } from '../footballDataPage';
 import {
 	type FootballMatches,
-	type FootballMatchKind,
 	getParserErrorMessage,
 	parse,
 } from '../footballMatches';
@@ -12,6 +10,7 @@ import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPag
 import type { EditionId } from '../lib/edition';
 import type { Result } from '../lib/result';
 import { error, ok } from '../lib/result';
+import type { FootballMatchListPageKind, Region } from '../sportDataPage';
 import { FootballMatchesPage } from './FootballMatchesPage';
 
 export const getMoreDays =
@@ -66,7 +65,7 @@ type Props = {
 	now: string;
 	guardianBaseUrl: string;
 	ajaxUrl: string;
-	kind: FootballMatchKind;
+	kind: FootballMatchListPageKind;
 	initialDays: FootballMatches;
 	secondPage?: string;
 	edition: EditionId;

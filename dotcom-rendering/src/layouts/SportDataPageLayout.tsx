@@ -1,4 +1,5 @@
 import { palette } from '@guardian/source/foundations';
+import { CricketScorecardPage } from '../components/CricketScorecardPage';
 import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.importable';
 import { FootballTablesPage } from '../components/FootballTablesPage';
 import { Footer } from '../components/Footer';
@@ -8,65 +9,69 @@ import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
-import type {
-	FootballMatchListPage,
-	FootballTablesPage as FootballTablesPageData,
-} from '../footballDataPage';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
+import type { SportDataPage } from '../sportDataPage';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
-	footballData: FootballMatchListPage | FootballTablesPageData;
+	sportData: SportDataPage;
 }
 
 const SportsPage = ({
-	footballData,
+	sportData,
 	renderAds,
 }: {
-	footballData: FootballMatchListPage | FootballTablesPageData;
+	sportData: SportDataPage;
 	renderAds: boolean;
 }) => {
-	switch (footballData.kind) {
-		case 'Fixture':
-		case 'Live':
-		case 'Result':
+	switch (sportData.kind) {
+		case 'FootballFixtures':
+		case 'FootballLiveScores':
+		case 'FootballResults':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<FootballMatchesPageWrapper
-						regions={footballData.regions}
-						now={footballData.now}
-						guardianBaseUrl={footballData.guardianBaseURL}
-						ajaxUrl={footballData.config.ajaxUrl}
-						kind={footballData.kind}
-						initialDays={footballData.matchesList}
-						secondPage={footballData.nextPage}
-						edition={footballData.editionId}
+						regions={sportData.regions}
+						now={sportData.now}
+						guardianBaseUrl={sportData.guardianBaseURL}
+						ajaxUrl={sportData.config.ajaxUrl}
+						kind={sportData.kind}
+						initialDays={sportData.matchesList}
+						secondPage={sportData.nextPage}
+						edition={sportData.editionId}
 						renderAds={renderAds}
-						pageId={footballData.config.pageId}
+						pageId={sportData.config.pageId}
 					/>
 				</Island>
 			);
 
-		case 'Tables':
+		case 'FootballTables':
 			return (
 				<FootballTablesPage
-					regions={footballData.regions}
-					pageId={footballData.config.pageId}
-					tableCompetitions={footballData.tables}
+					regions={sportData.regions}
+					pageId={sportData.config.pageId}
+					tableCompetitions={sportData.tables}
 					renderAds={renderAds}
-					guardianBaseUrl={footballData.guardianBaseURL}
+					guardianBaseUrl={sportData.guardianBaseURL}
+				/>
+			);
+		case 'CricketMatch':
+			return (
+				<CricketScorecardPage
+					match={sportData.match}
+					guardianBaseUrl={sportData.guardianBaseURL}
 				/>
 			);
 	}
 };
 
-export const FootballDataPageLayout = ({ footballData }: Props) => {
-	const { nav } = footballData;
-	const pageFooter = footballData.pageFooter;
-	const renderAds = canRenderAds(footballData);
+export const SportDataPageLayout = ({ sportData }: Props) => {
+	const { nav } = sportData;
+	const pageFooter = sportData.pageFooter;
+	const renderAds = canRenderAds(sportData);
 
-	const contributionsServiceUrl = getContributionsServiceUrl(footballData);
+	const contributionsServiceUrl = getContributionsServiceUrl(sportData);
 
 	return (
 		<>
@@ -81,9 +86,7 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 							shouldCenter={false}
 						>
 							<HeaderAdSlot
-								isPaidContent={
-									!!footballData.config.isPaidContent
-								}
+								isPaidContent={!!sportData.config.isPaidContent}
 								shouldHideReaderRevenue={false}
 							/>
 						</Section>
@@ -92,20 +95,20 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 
 				<Masthead
 					nav={nav}
-					editionId={footballData.editionId}
-					idUrl={footballData.config.idUrl}
-					mmaUrl={footballData.config.mmaUrl}
-					discussionApiUrl={footballData.config.discussionApiUrl}
-					idApiUrl={footballData.config.idApiUrl}
+					editionId={sportData.editionId}
+					idUrl={sportData.config.idUrl}
+					mmaUrl={sportData.config.mmaUrl}
+					discussionApiUrl={sportData.config.discussionApiUrl}
+					idApiUrl={sportData.config.idApiUrl}
 					contributionsServiceUrl={contributionsServiceUrl}
 					showSubNav={true}
 					showSlimNav={false}
-					hasPageSkin={footballData.config.hasPageSkin}
-					pageId={footballData.config.pageId}
+					hasPageSkin={sportData.config.hasPageSkin}
+					pageId={sportData.config.pageId}
 				/>
 			</div>
 
-			<SportsPage footballData={footballData} renderAds={renderAds} />
+			<SportsPage sportData={sportData} renderAds={renderAds} />
 
 			{nav.subNavSections && (
 				<Section
@@ -140,24 +143,24 @@ export const FootballDataPageLayout = ({ footballData }: Props) => {
 					selectedPillar={nav.selectedPillar}
 					pillars={nav.pillars}
 					urls={nav.readerRevenueLinks.footer}
-					editionId={footballData.editionId}
+					editionId={sportData.editionId}
 				/>
 			</Section>
 			<BannerWrapper data-print-layout="hide">
 				<Island priority="feature" defer={{ until: 'idle' }}>
 					<StickyBottomBanner
-						contentType={footballData.config.contentType}
+						contentType={sportData.config.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}
-						idApiUrl={footballData.config.idApiUrl}
+						idApiUrl={sportData.config.idApiUrl}
 						isMinuteArticle={false}
-						isPaidContent={!!footballData.config.isPaidContent}
-						isPreview={footballData.config.isPreview}
-						isSensitive={footballData.config.isSensitive}
-						pageId={footballData.config.pageId}
-						sectionId={footballData.config.section}
+						isPaidContent={!!sportData.config.isPaidContent}
+						isPreview={sportData.config.isPreview}
+						isSensitive={sportData.config.isSensitive}
+						pageId={sportData.config.pageId}
+						sectionId={sportData.config.section}
 						shouldHideReaderRevenue={false}
 						remoteBannerSwitch={
-							!!footballData.config.switches.remoteBanner
+							!!sportData.config.switches.remoteBanner
 						}
 						tags={[]}
 					/>

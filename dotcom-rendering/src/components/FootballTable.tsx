@@ -53,7 +53,7 @@ const hideUntilTabletStyle = css`
 
 const linkStyles = css`
 	text-decoration: none;
-	color: ${palette('--football-competition-text')};
+	color: ${palette('--sport-competition-text')};
 	:hover {
 		text-decoration: underline;
 	}

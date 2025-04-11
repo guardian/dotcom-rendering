@@ -251,7 +251,7 @@
             "type": "string"
         },
         "config": {
-            "$ref": "#/definitions/FEFootballPageConfig"
+            "$ref": "#/definitions/FESportPageConfig"
         },
         "pageFooter": {
             "$ref": "#/definitions/FooterType"
@@ -453,7 +453,7 @@
             ],
             "type": "string"
         },
-        "FEFootballPageConfig": {
+        "FESportPageConfig": {
             "allOf": [
                 {
                     "$ref": "#/definitions/Omit<FEFrontConfig,\"keywordIds\"|\"keywords\"|\"isFront\">"

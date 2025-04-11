@@ -21,13 +21,13 @@ import {
 	handleInteractive,
 } from './handler.article.web';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
-import { handleFootballMatchListPage } from './handler.footballDataPage.web';
 import {
 	handleFront,
 	handleFrontJson,
 	handleTagPage,
 	handleTagPageJson,
 } from './handler.front.web';
+import { handleFootballMatchListPage } from './handler.sportDataPage.web';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';

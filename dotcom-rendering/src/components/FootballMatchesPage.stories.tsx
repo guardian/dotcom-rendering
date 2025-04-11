@@ -16,7 +16,7 @@ export const Results = {
 		now: '2025-03-24T15:53:12.604Z',
 		regions,
 		guardianBaseUrl: 'https://www.theguardian.com',
-		kind: 'Result',
+		kind: 'FootballResults',
 		initialDays,
 		edition: 'UK',
 		goToCompetitionSpecificPage: fn(),
@@ -28,13 +28,13 @@ export const Results = {
 export const LiveScores = {
 	args: {
 		...Results.args,
-		kind: 'Live',
+		kind: 'FootballLiveScores',
 	},
 } satisfies Story;
 
 export const Fixtures = {
 	args: {
 		...Results.args,
-		kind: 'Fixture',
+		kind: 'FootballFixtures',
 	},
 } satisfies Story;
