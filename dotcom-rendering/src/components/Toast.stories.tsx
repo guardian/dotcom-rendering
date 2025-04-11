@@ -1,6 +1,4 @@
-import { css } from '@emotion/react';
-import { space } from '@guardian/source/foundations';
-import type { Meta, StoryFn, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import {
 	ArticleDesign,
@@ -9,7 +7,6 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import { Toast } from './Toast';
-import type { ToastProps } from './Toast';
 
 const meta: Meta<typeof Toast> = {
 	title: 'Components/Toast',
@@ -20,18 +17,19 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const Template: StoryFn<typeof Toast> = (args: ToastProps) => {
-	return (
-		<div
-			css={css`
-				position: relative;
-				height: ${space[9]}px;
-			`}
-		>
-			<Toast {...args} />
-		</div>
-	);
-};
+// ToDo: make this a decorator instead
+// const Template: StoryFn<typeof Toast> = (args: ToastProps) => {
+// 	return (
+// 		<div
+// 			css={css`
+// 				position: relative;
+// 				height: ${space[9]}px;
+// 			`}
+// 		>
+// 			<Toast {...args} />
+// 		</div>
+// 	);
+// };
 
 const pillars = [
 	Pillar.News,
@@ -54,7 +52,7 @@ export const Default = {
 		count: 3,
 	},
 	decorators: [lightDecorator(allThemeStandardVariations)],
-	render: Template,
+	//render: Template,
 } satisfies Story;
 
 // *****************************************************************************
@@ -64,7 +62,7 @@ export const Lots = {
 		count: 239,
 	},
 	decorators: [lightDecorator(allThemeStandardVariations)],
-	render: Template,
+	//render: Template,
 } satisfies Story;
 
 // *****************************************************************************
