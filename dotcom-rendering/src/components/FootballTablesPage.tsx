@@ -5,10 +5,10 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
-import type { Region } from '../sportDataPage';
 import type { FootballTableCompetition } from '../footballTables';
 import { grid } from '../grid';
 import { palette } from '../palette';
+import type { Region } from '../sportDataPage';
 import { AdSlot } from './AdSlot.web';
 import { FootballTableList } from './FootballTableList';
 import { FootballTablesCompetitionSelect } from './FootballTablesCompetitionSelect.importable';

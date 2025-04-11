@@ -2,11 +2,11 @@ import type { StoryObj } from '@storybook/react';
 import { footballData } from '../../fixtures/generated/football-live';
 import { initialDays, regions } from '../../fixtures/manual/footballData';
 import { extractNAV } from '../model/extract-nav';
-import { FootballDataPageLayout } from './FootballDataPageLayout';
+import { SportDataPageLayout } from './SportDataPageLayout';
 
 const meta = {
-	title: 'Components/Football Data Page Layout',
-	component: FootballDataPageLayout,
+	title: 'Components/Sport Data Page Layout',
+	component: SportDataPageLayout,
 };
 
 export default meta;
@@ -14,11 +14,11 @@ type Story = StoryObj<typeof meta>;
 
 export const Results = {
 	args: {
-		footballData: {
+		sportData: {
 			now: '2025-03-24T15:53:12.604Z',
 			matchesList: initialDays,
 			regions,
-			kind: 'Result',
+			kind: 'FootballResult',
 			guardianBaseURL: 'https://www.theguardian.com',
 			editionId: 'UK',
 			config: footballData.config,
@@ -32,18 +32,18 @@ export const Results = {
 
 export const Live = {
 	args: {
-		footballData: {
-			...Results.args.footballData,
-			kind: 'Live',
+		sportData: {
+			...Results.args.sportData,
+			kind: 'FootballLive',
 		},
 	},
 } satisfies Story;
 
 export const Fixtures = {
 	args: {
-		footballData: {
-			...Results.args.footballData,
-			kind: 'Fixture',
+		sportData: {
+			...Results.args.sportData,
+			kind: 'FootballFixture',
 		},
 	},
 } satisfies Story;

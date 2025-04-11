@@ -14,6 +14,7 @@ import {
 } from './handler.article.web';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import {
+	handleCricketMatchPage,
 	handleFootballMatchListPage,
 	handleFootballTablesPage,
 } from './handler.footballDataPage.web';
@@ -101,6 +102,8 @@ export const devServer = (): Handler => {
 				return handleFootballMatchListPage(req, res, next);
 			case 'FootballTablesPage':
 				return handleFootballTablesPage(req, res, next);
+			case 'CricketMatchPage':
+				return handleCricketMatchPage(req, res, next);
 			default: {
 				// Do not redirect assets urls
 				if (req.url.match(ASSETS_URL)) return next();

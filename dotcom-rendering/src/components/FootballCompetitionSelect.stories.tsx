@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>;
 export const FootballCompetitionSelect = {
 	args: {
 		regions,
-		kind: 'Result',
+		kind: 'FootballResult',
 		pageId: 'football/live',
 		onChange: fn(),
 	},

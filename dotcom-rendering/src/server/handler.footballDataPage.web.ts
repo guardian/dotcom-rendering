@@ -1,24 +1,28 @@
 import type { RequestHandler } from 'express';
-import type {
-	FootballMatchListPage,
-	FootballTablesPage,
-	Region,
-} from '../sportDataPage';
+import { parse as parseCricketMatch } from '../cricketMatch';
 import type { FootballMatchKind } from '../footballMatches';
 import {
 	getParserErrorMessage,
 	parse as parseFootballMatches,
 } from '../footballMatches';
 import { parse as parseFootballTables } from '../footballTables';
+import type { FECricketMatchPage } from '../frontend/feCricketMatchPage';
 import type { FEFootballCompetition } from '../frontend/feFootballDataPage';
 import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
 import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import { Pillar } from '../lib/articleFormat';
 import { extractNAV } from '../model/extract-nav';
 import {
+	validateAsCricketMatchPageType,
 	validateAsFootballMatchListPage,
 	validateAsFootballTablesPage,
 } from '../model/validate';
+import type {
+	CricketMatchPage,
+	FootballMatchListPage,
+	FootballTablesPage,
+	Region,
+} from '../sportDataPage';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderSportPage } from './render.footballDataPage.web';
@@ -149,5 +153,45 @@ export const handleFootballTablesPage: RequestHandler = ({ body }, res) => {
 		footballTablesPageValidated,
 	);
 	const { html, prefetchScripts } = renderSportPage(parsedFootballTableData);
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
+};
+
+const parseFECricketMatch = (data: FECricketMatchPage): CricketMatchPage => {
+	const parsedCricketMatch = parseCricketMatch(data.cricketMatch);
+
+	if (parsedCricketMatch.kind === 'error') {
+		throw new Error(
+			`Failed to parse cricket match: ${parsedCricketMatch.error.kind} ${parsedCricketMatch.error.message}`,
+		);
+	}
+
+	return {
+		match: parsedCricketMatch.value,
+		kind: 'CricketMatch',
+		nav: {
+			...extractNAV(data.nav),
+			selectedPillar: Pillar.Sport,
+		},
+		editionId: data.editionId,
+		guardianBaseURL: data.guardianBaseURL,
+		config: data.config,
+		pageFooter: data.pageFooter,
+		isAdFreeUser: data.isAdFreeUser,
+		canonicalUrl: data.canonicalUrl,
+		contributionsServiceUrl: data.contributionsServiceUrl,
+	};
+};
+
+export const handleCricketMatchPage: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('CricketMatchPage', 'web');
+
+	const cricketMatchPageValidated: FECricketMatchPage =
+		validateAsCricketMatchPageType(body);
+
+	const parsedCricketMatchData = parseFECricketMatch(
+		cricketMatchPageValidated,
+	);
+
+	const { html, prefetchScripts } = renderSportPage(parsedCricketMatchData);
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };

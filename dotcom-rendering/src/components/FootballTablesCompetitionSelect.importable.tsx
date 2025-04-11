@@ -22,6 +22,6 @@ export const FootballTablesCompetitionSelect = ({
 		regions={regions}
 		pageId={pageId}
 		onChange={goToCompetitionSpecificPage(guardianBaseUrl)}
-		kind="Tables"
+		kind="FootballTables"
 	/>
 );

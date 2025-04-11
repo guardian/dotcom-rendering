@@ -5,7 +5,6 @@ import type {
 } from './frontend/feCricketMatchPage';
 import { error, ok, type Result } from './lib/result';
 
-
 export type Bowler = {
 	name: string;
 	overs: number;
@@ -64,6 +63,8 @@ export type CricketMatch = {
 	awayTeam: CricketTeam;
 	officials: string[];
 	innings: Innings[];
+	competitionName: string;
+	venueName: string;
 };
 
 const feInningsToDCARInnings = (feInnings: FECricketInnings): Innings => {
@@ -92,14 +93,24 @@ const feInningsToDCARInnings = (feInnings: FECricketInnings): Innings => {
 	};
 };
 
+type HomeAndAwayUndefined = {
+	kind: 'HomeAndAwayUndefined';
+	message: string;
+};
+
+type ParserError = HomeAndAwayUndefined;
+
 export const parse = (
 	feCricketMatch: FECricketMatch,
-): Result<string, CricketMatch> => {
+): Result<ParserError, CricketMatch> => {
 	const homeTeam = feCricketMatch.teams.find((team) => team.home);
 	const awayTeam = feCricketMatch.teams.find((team) => !team.home);
 
 	if (isUndefined(homeTeam) || isUndefined(awayTeam)) {
-		return error('Could not determine home and away cricket teams');
+		return error({
+			kind: 'HomeAndAwayUndefined',
+			message: 'Could not determine home and away cricket teams',
+		});
 	}
 
 	const innings = feCricketMatch.innings
@@ -111,7 +122,7 @@ export const parse = (
 		awayTeam,
 		officials: feCricketMatch.officials,
 		innings,
+		competitionName: feCricketMatch.competitionName,
+		venueName: feCricketMatch.venueName,
 	});
 };
-
-

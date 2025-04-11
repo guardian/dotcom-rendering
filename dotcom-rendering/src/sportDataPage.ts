@@ -48,9 +48,6 @@ export type FootballPageKind = FootballTablesPage['kind'] | FootballMatchKind;
 
 export type SportPageKind = FootballPageKind | CricketMatchPage['kind'];
 
-export type SportDataPage =
-	| CricketMatchPage
-	| FootballMatchListPage
-	| FootballTablesPage;
+export type FootballDataPage = FootballMatchListPage | FootballTablesPage;
 
-const foo;
+export type SportDataPage = FootballDataPage | CricketMatchPage;

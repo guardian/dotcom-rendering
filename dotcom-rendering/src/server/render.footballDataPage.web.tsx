@@ -1,13 +1,6 @@
 import { isString } from '@guardian/libs';
 import { ConfigProvider } from '../components/ConfigContext';
-import { FootballDataPage } from '../components/FootballDataPage';
-import type {
-	CricketMatchPage,
-	FootballMatchListPage,
-	FootballTablesPage,
-	SportDataPage,
-} from '../sportDataPage';
-import type { FootballMatchKind } from '../footballMatches';
+import { SportDataPageComponent } from '../components/SportDataPageComponent';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -17,13 +10,19 @@ import {
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { polyfillIO } from '../lib/polyfill.io';
 import { createGuardian } from '../model/guardian';
+import type {
+	CricketMatchPage,
+	FootballDataPage,
+	SportDataPage,
+	SportPageKind,
+} from '../sportDataPage';
 import type { Config } from '../types/configContext';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 const fromTheGuardian =
 	'from the Guardian, the world&#x27;s leading liberal voice';
 
-const decideDescription = (kind: FootballMatchKind | 'Tables') => {
+const decideDescription = (kind: SportPageKind) => {
 	switch (kind) {
 		case 'FootballLive':
 			return `Live football scores ${fromTheGuardian}`;
@@ -31,22 +30,35 @@ const decideDescription = (kind: FootballMatchKind | 'Tables') => {
 			return `Latest football results ${fromTheGuardian}`;
 		case 'FootballFixture':
 			return `Football fixtures ${fromTheGuardian}`;
-		case 'Tables':
+		case 'FootballTables':
 			return `Football tables ${fromTheGuardian}`;
+		case 'CricketMatch':
+			return `Cricket scores ${fromTheGuardian}`;
 	}
 };
 
 const decideTitle = (sportPage: SportDataPage) => {
-	const { config, kind } = sportPage;
-	const pagePath = config.pageId.startsWith('/') ? config.pageId.slice(1) : config.pageId;
-
-	if (sportPage.kind) {
-		const competitionName = sportPage.
-			.flatMap((region) => region.competitions) // Flatten all competitions into a single array
-			.find((competition) => competition.url === `/${pagePath}`)?.name;
+	switch (sportPage.kind) {
+		case 'FootballLive':
+		case 'FootballResult':
+		case 'FootballFixture':
+		case 'FootballTables':
+			return decideFootballTitle(sportPage);
+		case 'CricketMatch':
+			return decideCricketTitle(sportPage);
 	}
+};
+
+const decideFootballTitle = (sportPage: FootballDataPage) => {
+	const { config, kind, regions } = sportPage;
+	const pagePath = config.pageId.startsWith('/')
+		? config.pageId.slice(1)
+		: config.pageId;
 
 	const footballTitle = '| Football | The Guardian';
+	const competitionName = regions
+		.flatMap((region) => region.competitions) // Flatten all competitions into a single array
+		.find((competition) => competition.url === `/${pagePath}`)?.name;
 
 	switch (kind) {
 		case 'FootballLive':
@@ -68,38 +80,32 @@ const decideTitle = (sportPage: SportDataPage) => {
 	}
 };
 
-export const renderSportPage = (
-	sportPage: FootballMatchListPage | FootballTablesPage | CricketMatchPage,
-) =>
-	renderFootballDataPage(
-		sportPage,
-		decideTitle(sportPage),
-		decideDescription(sportData.kind),
-	);
+const decideCricketTitle = (sportPage: CricketMatchPage) => {
+	return `${sportPage.match.competitionName}, ${sportPage.match.venueName} | Cricket | The Guardian`;
+};
 
-const renderFootballDataPage = (
-	footballData: FootballMatchListPage | FootballTablesPage,
-	title: string,
-	description: string,
-) => {
+export const renderSportPage = (sportData: SportDataPage) => {
 	const renderingTarget = 'Web';
 	const config: Config = {
 		renderingTarget,
 		darkModeAvailable:
-			footballData.config.abTests.darkModeWebVariant === 'variant',
+			sportData.config.abTests.darkModeWebVariant === 'variant',
 		assetOrigin: ASSET_ORIGIN,
-		editionId: footballData.editionId,
+		editionId: sportData.editionId,
 	};
+
+	const title = decideTitle(sportData);
+	const description = decideDescription(sportData.kind);
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
-			<FootballDataPage footballData={footballData} />
+			<SportDataPageComponent sportData={sportData} />
 		</ConfigProvider>,
 	);
 
 	const build = getModulesBuild({
-		switches: footballData.config.switches,
-		tests: footballData.config.abTests,
+		switches: sportData.config.switches,
+		tests: sportData.config.abTests,
 	});
 
 	/**
@@ -114,7 +120,7 @@ const renderFootballDataPage = (
 		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
 		process.env.COMMERCIAL_BUNDLE_URL ??
-			footballData.config.commercialBundleUrl,
+			sportData.config.commercialBundleUrl,
 	].filter(isString);
 	const legacyScripts = [
 		getPathFromManifest('client.web.legacy', 'frameworks.js'),
@@ -131,29 +137,29 @@ const renderFootballDataPage = (
 		html,
 		title,
 		description,
-		canonicalUrl: footballData.canonicalUrl,
+		canonicalUrl: sportData.canonicalUrl,
 		guardian: createGuardian({
-			editionId: footballData.editionId,
-			stage: footballData.config.stage,
-			frontendAssetsFullURL: footballData.config.frontendAssetsFullURL,
-			revisionNumber: footballData.config.revisionNumber,
-			sentryPublicApiKey: footballData.config.sentryPublicApiKey,
-			sentryHost: footballData.config.sentryHost,
-			dfpAccountId: footballData.config.dfpAccountId,
-			adUnit: footballData.config.adUnit,
-			ajaxUrl: footballData.config.ajaxUrl,
-			googletagUrl: footballData.config.googletagUrl,
-			switches: footballData.config.switches,
-			abTests: footballData.config.abTests,
-			brazeApiKey: footballData.config.brazeApiKey,
-			isPaidContent: footballData.config.isPaidContent,
-			contentType: footballData.config.contentType,
-			googleRecaptchaSiteKey: footballData.config.googleRecaptchaSiteKey,
-			unknownConfig: footballData.config,
+			editionId: sportData.editionId,
+			stage: sportData.config.stage,
+			frontendAssetsFullURL: sportData.config.frontendAssetsFullURL,
+			revisionNumber: sportData.config.revisionNumber,
+			sentryPublicApiKey: sportData.config.sentryPublicApiKey,
+			sentryHost: sportData.config.sentryHost,
+			dfpAccountId: sportData.config.dfpAccountId,
+			adUnit: sportData.config.adUnit,
+			ajaxUrl: sportData.config.ajaxUrl,
+			googletagUrl: sportData.config.googletagUrl,
+			switches: sportData.config.switches,
+			abTests: sportData.config.abTests,
+			brazeApiKey: sportData.config.brazeApiKey,
+			isPaidContent: sportData.config.isPaidContent,
+			contentType: sportData.config.contentType,
+			googleRecaptchaSiteKey: sportData.config.googleRecaptchaSiteKey,
+			unknownConfig: sportData.config,
 		}),
 		section: '',
 		renderingTarget,
-		weAreHiring: !!footballData.config.switches.weAreHiring,
+		weAreHiring: !!sportData.config.switches.weAreHiring,
 		config,
 	});
 

@@ -109,7 +109,7 @@ const CompetitionName = (props: { children: ReactNode }) => (
 		css={css`
 			${textSansBold14}
 			grid-column: centre-column-start / centre-column-end;
-			color: ${palette('--football-competition-text')};
+			color: ${palette('--sport-competition-text')};
 			border-top: 1px solid ${palette('--sport-top-border')};
 			padding: ${space[2]}px;
 			background-color: ${palette('--sport-list-background')};
@@ -205,7 +205,7 @@ const matchListItemStyles = css`
 const matchStyles = (matchKind: FootballMatchKind) => css`
 	${textSans14}
 
-	${matchKind === 'Live' ? 'font-weight: bold;' : undefined}
+	${matchKind === 'FootballLive' ? 'font-weight: bold;' : undefined}
 
 	display: flex;
 	align-items: center;

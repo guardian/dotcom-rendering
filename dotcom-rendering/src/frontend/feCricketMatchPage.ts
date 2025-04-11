@@ -74,7 +74,6 @@ export type FECricketMatchPage = {
 	nav: FENavType;
 	editionId: EditionId;
 	guardianBaseURL: string;
-	// ToDo: rename to generic sport config
 	config: FESportPageConfig;
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;

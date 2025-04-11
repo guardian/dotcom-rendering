@@ -1,4 +1,4 @@
-import type { FootballData } from '../sportDataPage';
+import type { SportDataPage } from '../sportDataPage';
 import type { ArticleDeprecated } from '../types/article';
 import type { Front } from '../types/front';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -9,7 +9,7 @@ import type { TagPage } from '../types/tagPage';
  * prevent ads from being displayed.
  */
 export const canRenderAds = (
-	pageData: ArticleDeprecated | Front | TagPage | FootballData,
+	pageData: ArticleDeprecated | Front | TagPage | SportDataPage,
 	renderingTarget?: RenderingTarget,
 ): boolean => {
 	if (renderingTarget === 'Apps') {
