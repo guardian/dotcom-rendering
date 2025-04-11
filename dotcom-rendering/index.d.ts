@@ -82,7 +82,12 @@ interface PerformanceEntry {
 	renderTime: number;
 }
 
-declare module 'react/jsx-runtime' {
+declare namespace React {
+	interface CSSProperties {
+		// Allow custom properties to be passed to the style prop
+		[key: `--${string}`]: string | undefined;
+	}
+
 	namespace JSX {
 		interface IntrinsicElements {
 			// ------------------------------------- //
@@ -193,12 +198,5 @@ declare module 'react/jsx-runtime' {
 			 */
 			'data-spacefinder-type'?: import('./src/types/content').FEElement['_type'];
 		}
-	}
-}
-
-declare namespace React {
-	interface CSSProperties {
-		// Allow custom properties to be passed to the style prop
-		[key: `--${string}`]: string | undefined;
 	}
 }
