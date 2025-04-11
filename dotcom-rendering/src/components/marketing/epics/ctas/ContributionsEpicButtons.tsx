@@ -31,7 +31,6 @@ import {
 	OPHAN_COMPONENT_EVENT_REMINDER_OPEN,
 } from '../utils/ophan';
 import {
-	SupportRatePlan,
 	type SupportTier,
 	threeTierChoiceCardAmounts,
 } from '../utils/threeTierChoiceCardAmounts';
