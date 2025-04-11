@@ -233,11 +233,9 @@ export const ThreeTierChoiceCards = ({
 
 						const radioId = `choicecard-${id}-${supportTier}`;
 
-						const finalChoiceAmount =
-							isDiscountActive && hasDiscount
-								? choiceAmountYearly
-								: choiceAmount;
-						console.log('finalChoiceAmount', finalChoiceAmount);
+						const finalChoiceAmount = isDiscountActive
+							? choiceAmountYearly
+							: choiceAmount;
 
 						return (
 							<div

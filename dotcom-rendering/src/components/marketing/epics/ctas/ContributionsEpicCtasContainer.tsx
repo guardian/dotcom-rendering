@@ -55,15 +55,16 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 		setThreeTierChoiceCardSelectedProduct,
 	] = useState<SupportTier>('SupporterPlus');
 
-	//Check the dates
+	const hasPromoCodeInUrl =
+		variant.cta?.baseUrl.includes('30OFF3APRIL') ?? false;
+
+	// Check the dates
 	const isDiscountActive =
-		(now >= new Date('2025-04-10T00:00:01') &&
-			now < new Date('2025-04-21T23:59:59') &&
-			countryCode !== 'US') ??
+		(hasPromoCodeInUrl &&
+			now >= new Date('2025-04-11T00:00:01') &&
+			now < new Date('2025-04-21T23:59:59')) ??
 		false;
-	// const isDiscountActive = (true && countryCode !=='US') ?? false;
-	console.log('currentDate', now);
-	console.log('activeDate', isDiscountActive);
+
 	return (
 		<>
 			{showChoiceCards && (

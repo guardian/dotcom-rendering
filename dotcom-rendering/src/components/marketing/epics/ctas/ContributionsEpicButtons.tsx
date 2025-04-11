@@ -31,6 +31,7 @@ import {
 	OPHAN_COMPONENT_EVENT_REMINDER_OPEN,
 } from '../utils/ophan';
 import {
+	SupportRatePlan,
 	type SupportTier,
 	threeTierChoiceCardAmounts,
 } from '../utils/threeTierChoiceCardAmounts';
@@ -189,6 +190,7 @@ export const ContributionsEpicButtons = ({
 	}
 
 	const getChoiceCardCta = (cta: Cta): Cta => {
+		const countryGroupId = countryCodeToCountryGroupId(countryCode);
 		if (showChoiceCards) {
 			if (threeTierChoiceCardSelectedProduct === 'OneOff') {
 				return {
@@ -196,12 +198,7 @@ export const ContributionsEpicButtons = ({
 					baseUrl: addChoiceCardsOneTimeParams(cta.baseUrl),
 				};
 			}
-			if (
-				threeTierChoiceCardSelectedProduct === 'SupporterPlus' &&
-				isDiscountActive &&
-				countryCode !== 'US'
-			) {
-				const countryGroupId = countryCodeToCountryGroupId(countryCode);
+			if (isDiscountActive) {
 				const contributionAmount =
 					threeTierChoiceCardSelectedProduct === 'SupporterPlus'
 						? threeTierChoiceCardAmounts['Annual'][countryGroupId]
@@ -220,7 +217,6 @@ export const ContributionsEpicButtons = ({
 			}
 
 			/** Contribution amount is variable, unlike the SupporterPlus amount which is fixed */
-			const countryGroupId = countryCodeToCountryGroupId(countryCode);
 			const contributionAmount =
 				threeTierChoiceCardSelectedProduct === 'Contribution'
 					? threeTierChoiceCardAmounts['Monthly'][countryGroupId]
