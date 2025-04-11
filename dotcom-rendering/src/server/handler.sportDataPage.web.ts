@@ -25,7 +25,7 @@ import type {
 } from '../sportDataPage';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
-import { renderSportPage } from './render.footballDataPage.web';
+import { renderSportPage } from './render.sportDataPage.web';
 
 const decidePageKind = (pageId: string): FootballMatchListPageKind => {
 	if (pageId.includes('live')) {
