@@ -32,7 +32,9 @@ export const formatContactType = (s: string): string =>
 		? 'WhatsApp'
 		: s.charAt(0).toUpperCase() + s.slice(1);
 
-export const conditionallyRenderContactIcon = (name: string): ReactElement => {
+export const conditionallyRenderContactIcon = (
+	name: string,
+): ReactElement<any> => {
 	switch (name.toLowerCase()) {
 		case 'whatsapp':
 			return <SvgWhatsAppBrand size="small" />;

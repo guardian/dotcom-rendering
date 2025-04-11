@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import { useIsInView } from '../lib/useIsInView';
 
+import type { JSX } from 'react';
+
 type Props = {
 	children: JSX.Element;
 	margin: number;

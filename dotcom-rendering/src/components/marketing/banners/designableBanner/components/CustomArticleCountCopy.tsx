@@ -13,6 +13,8 @@ import {
 import type { BannerTemplateSettings } from '../settings';
 import { DesignableBannerArticleCountOptOut } from './DesignableBannerArticleCountOptOut';
 
+import type { JSX } from 'react';
+
 const styles = {
 	container: css`
 		${headlineBold15}

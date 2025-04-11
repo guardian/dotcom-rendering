@@ -13,6 +13,8 @@ import {
 } from '@guardian/source/react-components';
 import type { ContentType } from '../../../../hooks/useChoiceCards';
 
+import type { JSX } from 'react';
+
 // Always override the LinkButton border
 const buttonOverrides = css`
 	margin-right: ${space[3]}px;

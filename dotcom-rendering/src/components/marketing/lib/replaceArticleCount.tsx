@@ -9,6 +9,8 @@ import type {
 } from '../shared/ArticleCountOptOutPopup';
 import { ArticleCountOptOutPopup } from '../shared/ArticleCountOptOutPopup';
 
+import type { JSX } from 'react';
+
 export const replaceArticleCountWithLink = (
 	text: string,
 	numArticles: number,

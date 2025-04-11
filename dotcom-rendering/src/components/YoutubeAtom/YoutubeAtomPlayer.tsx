@@ -9,6 +9,7 @@ import {
 	useLayoutEffect,
 	useRef,
 	useState,
+	type JSX,
 } from 'react';
 import { getVideoClient } from '../../lib/bridgetApi';
 import { getZIndex } from '../../lib/getZIndex';
@@ -434,7 +435,7 @@ export const YoutubeAtomPlayer = ({
 	 * Provides mutable persistent state for the player across renders
 	 * Does not cause re-renders on update
 	 */
-	const player = useRef<YouTubePlayer>();
+	const player = useRef<YouTubePlayer>(undefined);
 	const progressEvents = useRef<ProgressEvents>({
 		hasSentPlayEvent: false,
 		hasSent25Event: false,
@@ -456,7 +457,7 @@ export const YoutubeAtomPlayer = ({
 		Record<string, (event: CustomEventInit<CustomPlayEventDetail>) => void>
 	>({});
 
-	const adsManager = useRef<google.ima.AdsManager>();
+	const adsManager = useRef<google.ima.AdsManager>(undefined);
 
 	const id = `youtube-player-${uniqueId}`;
 

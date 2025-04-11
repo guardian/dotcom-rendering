@@ -19,7 +19,7 @@ import { PodcastCoverImage } from './PodcastCoverImage';
 type PodcastButtonProps = {
 	label: string;
 	url: string;
-	icon?: ReactElement;
+	icon?: ReactElement<any>;
 };
 
 const SvgSpotify = () => (

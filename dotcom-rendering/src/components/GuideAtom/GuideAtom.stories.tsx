@@ -13,6 +13,8 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import { palette } from '../../palette';
 import { GuideAtom } from './GuideAtom';
 
+import type { JSX } from 'react';
+
 const format = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,

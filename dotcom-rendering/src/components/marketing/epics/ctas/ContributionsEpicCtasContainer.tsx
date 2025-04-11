@@ -1,5 +1,5 @@
 import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types/props/epic';
-import { useState } from 'react';
+import { useState, type JSX } from 'react';
 import { getChoiceCardData } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import { ThreeTierChoiceCards } from '../ThreeTierChoiceCards';

@@ -11,6 +11,8 @@ import { SvgMediaControlsPlay } from '../../../components/SvgMediaControlsPlay';
 import { type ArticleFormat, ArticleSpecial } from '../../../lib/articleFormat';
 import { secondsToDuration } from '../../../lib/formatTime';
 
+import type { JSX } from 'react';
+
 const contentStyles = css`
 	margin-top: auto;
 	padding-top: ${space[1]}px;

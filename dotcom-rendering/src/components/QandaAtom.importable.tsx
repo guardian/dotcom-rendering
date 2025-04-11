@@ -4,6 +4,8 @@ import { Body } from './ExpandableAtom/Body';
 import { Container } from './ExpandableAtom/Container';
 import { Footer } from './ExpandableAtom/Footer';
 
+import type { JSX } from 'react';
+
 export type QandaAtomProps = {
 	id: string;
 	title: string;

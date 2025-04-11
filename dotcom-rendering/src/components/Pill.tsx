@@ -8,11 +8,11 @@ type Props = {
 	 * Main content of pill. This can be a string or an element. eg.
 	 * <time>2:35</time>
 	 */
-	content: string | ReactElement;
+	content: string | ReactElement<any>;
 	/** Optional prefix displayed before main content with a dividing line */
 	prefix?: string;
 	/** Optional icon displayed before or after content */
-	icon?: ReactElement;
+	icon?: ReactElement<any>;
 	/** Optional icon position (icon is on the left by default) */
 	iconSide?: 'left' | 'right';
 };

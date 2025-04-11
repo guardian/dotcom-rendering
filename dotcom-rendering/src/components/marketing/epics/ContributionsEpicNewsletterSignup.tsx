@@ -4,6 +4,8 @@ import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/t
 import { NewsletterPrivacyMessage } from '../../NewsletterPrivacyMessage';
 import { SecureSignup } from '../../SecureSignup.importable';
 
+import type { JSX } from 'react';
+
 const containerStyles = css`
 	margin: ${space[6]}px ${space[2]}px ${space[1]}px 0;
 `;

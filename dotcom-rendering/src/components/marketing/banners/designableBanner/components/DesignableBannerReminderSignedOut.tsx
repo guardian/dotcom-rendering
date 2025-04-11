@@ -20,6 +20,8 @@ import type { BannerEnrichedReminderCta } from '../../common/types';
 import type { CtaSettings } from '../settings';
 import { buttonStyles } from '../styles/buttonStyles';
 
+import type { JSX } from 'react';
+
 // ---- Thank you component ---- //
 
 const dfltTextColor = neutral[0];

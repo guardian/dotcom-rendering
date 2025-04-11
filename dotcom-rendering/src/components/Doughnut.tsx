@@ -7,6 +7,8 @@ import {
 } from '@guardian/source/foundations';
 import { isLight } from '../lib/isLight';
 
+import type { JSX } from 'react';
+
 type Props = {
 	sections: SectionType[];
 	percentCutout?: number;

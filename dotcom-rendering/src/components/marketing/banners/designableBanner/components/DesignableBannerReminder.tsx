@@ -5,7 +5,7 @@
  */
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import React from 'react';
+import React, { type JSX } from 'react';
 import { useContributionsReminderSignup } from '../../../hooks/useContributionsReminderSignup';
 import type { BannerEnrichedReminderCta } from '../../common/types';
 import type { CtaSettings } from '../settings';
@@ -15,7 +15,7 @@ export interface DesignableBannerReminderProps {
 	reminderCta: BannerEnrichedReminderCta;
 	trackReminderSetClick: () => void;
 	setReminderCtaSettings?: CtaSettings;
-	mobileReminderRef: React.RefObject<HTMLDivElement> | null;
+	mobileReminderRef: React.RefObject<HTMLDivElement | null> | null;
 }
 
 const styles = {

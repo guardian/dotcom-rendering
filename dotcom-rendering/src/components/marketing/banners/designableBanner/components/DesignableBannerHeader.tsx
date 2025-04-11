@@ -21,6 +21,8 @@ import {
 import type { HeaderSettings } from '../settings';
 import { DesignableBannerVisual } from './DesignableBannerVisual';
 
+import type { JSX } from 'react';
+
 interface DesignableBannerHeaderProps {
 	heading: JSX.Element | JSX.Element[] | null;
 	mobileHeading: JSX.Element | JSX.Element[] | null;

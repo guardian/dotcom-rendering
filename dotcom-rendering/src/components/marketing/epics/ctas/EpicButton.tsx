@@ -46,12 +46,12 @@ type Props = {
 	// eslint-disable-next-line @typescript-eslint/ban-types
 	onClickAction: Function | Url;
 	submitComponentEvent?: (event: OphanComponentEvent) => void;
-	children: React.ReactElement | string;
+	children: React.ReactElement<any> | string;
 	priority?: 'primary' | 'secondary';
 	showArrow?: boolean;
 	isTertiary?: boolean;
 	cssOverrides?: SerializedStyles;
-	icon?: React.ReactElement;
+	icon?: React.ReactElement<any>;
 };
 
 // Overrides for tertiary button

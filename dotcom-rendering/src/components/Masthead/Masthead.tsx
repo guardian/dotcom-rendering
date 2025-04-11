@@ -9,7 +9,7 @@ import { TopBar } from '../TopBar.importable';
 
 type Props = {
 	nav: NavType;
-	highlights?: ReactElement;
+	highlights?: ReactElement<any>;
 	editionId: EditionId;
 	idUrl?: string;
 	mmaUrl?: string;

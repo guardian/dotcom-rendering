@@ -13,6 +13,8 @@ import type { BannerRenderedContent } from '../../common/types';
 import type { CtaSettings } from '../settings';
 import { buttonStyles } from '../styles/buttonStyles';
 
+import type { JSX } from 'react';
+
 interface DesignableBannerCtasProps {
 	mainOrMobileContent: BannerRenderedContent;
 	onPrimaryCtaClick: () => void;

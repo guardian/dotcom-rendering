@@ -10,6 +10,8 @@ import type { ImageAttrs } from '../../../shared/ResponsiveImage';
 import { ResponsiveImage } from '../../../shared/ResponsiveImage';
 import type { BannerId } from '../../common/types';
 
+import type { JSX } from 'react';
+
 // ---- Component ---- //
 
 interface DesignableBannerVisualProps {

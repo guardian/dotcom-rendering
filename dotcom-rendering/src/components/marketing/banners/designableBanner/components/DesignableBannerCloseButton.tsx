@@ -9,6 +9,8 @@ import { Button, SvgCross } from '@guardian/source/react-components';
 import type { CtaSettings } from '../settings';
 import { buttonStyles } from '../styles/buttonStyles';
 
+import type { JSX } from 'react';
+
 interface DesignableBannerCloseButtonProps {
 	onCloseClick: () => void;
 	settings: CtaSettings;

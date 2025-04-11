@@ -11,7 +11,7 @@ const useReminder = (
 ): {
 	isReminderActive: boolean;
 	onReminderCtaClick: () => void;
-	mobileReminderRef: React.RefObject<HTMLDivElement>;
+	mobileReminderRef: React.RefObject<HTMLDivElement | null>;
 } => {
 	const [isReminderActive, setIsReminderActive] = useState(false);
 

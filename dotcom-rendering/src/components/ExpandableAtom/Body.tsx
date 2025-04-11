@@ -7,6 +7,8 @@ import {
 import { SvgInfoRound } from '@guardian/source/react-components';
 import { palette as themePalette } from '../../palette';
 
+import type { JSX } from 'react';
+
 const imageStyling = css`
 	float: left;
 	margin-right: 16px;

@@ -31,7 +31,7 @@ export const renderArticle = ({
 }: {
 	linkedData: { [key: string]: any }[];
 	title: string;
-	body: React.ReactElement;
+	body: React.ReactElement<any>;
 	scripts: string[];
 	metadata: Metadata;
 }) => {

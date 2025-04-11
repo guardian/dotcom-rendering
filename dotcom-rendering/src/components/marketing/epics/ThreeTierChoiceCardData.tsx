@@ -1,6 +1,8 @@
 import { isUndefined } from '@guardian/libs';
 import type { ChoiceInfo } from './ThreeTierChoiceCards';
 
+import type { JSX } from 'react';
+
 export const ChoiceCardTestData_REGULAR = (
 	longerBenefits: boolean,
 ): ChoiceInfo[] => [

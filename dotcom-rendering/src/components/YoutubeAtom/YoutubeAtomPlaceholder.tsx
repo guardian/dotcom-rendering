@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 
+import type { JSX } from 'react';
+
 /**
  * The placeholder component is used to render a black rectangle
  * until the player is ready

@@ -21,7 +21,7 @@ type ResponsiveImageProps = {
 	cssOverrides?: SerializedStyles;
 };
 
-function createSource(image: ImageAttrs): ReactElement {
+function createSource(image: ImageAttrs): ReactElement<any> {
 	return <source media={image.media} srcSet={image.url} key={image.url} />;
 }
 

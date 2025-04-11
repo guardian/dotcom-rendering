@@ -27,7 +27,7 @@ import type {
 	ConfigurableDesign,
 	Image,
 } from '@guardian/support-dotcom-components/dist/shared/types';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type JSX } from 'react';
 import {
 	removeMediaRulePrefix,
 	useMatchMedia,

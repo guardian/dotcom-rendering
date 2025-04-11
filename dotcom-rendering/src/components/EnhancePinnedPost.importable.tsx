@@ -120,7 +120,7 @@ export const EnhancePinnedPost = () => {
 	const { renderingTarget } = useConfig();
 
 	const pinnedPostTiming =
-		useRef<ReturnType<typeof startPerformanceMeasure>>();
+		useRef<ReturnType<typeof startPerformanceMeasure>>(undefined);
 
 	const checkContentHeight = useCallback(() => {
 		if (!pinnedPostContent) return;

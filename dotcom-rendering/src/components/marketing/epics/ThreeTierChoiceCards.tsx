@@ -21,7 +21,7 @@ import {
 	countryCodeToCountryGroupId,
 	getLocalCurrencySymbol,
 } from '@guardian/support-dotcom-components';
-import type { Dispatch, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction, JSX } from 'react';
 import type {
 	SupportRatePlan,
 	SupportTier,

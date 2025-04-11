@@ -12,6 +12,8 @@ import { extractNAV } from '../model/extract-nav';
 import { Footer } from './Footer';
 import { Section } from './Section';
 
+import type { JSX } from 'react';
+
 const Wrapper = ({ children }: { children: JSX.Element }) => (
 	<Section
 		fullWidth={true}

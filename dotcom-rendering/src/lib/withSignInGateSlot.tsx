@@ -1,7 +1,7 @@
 // This placeholder div is used by the SignInGate component to insert the sign in gate into the appropriate location within body of an article,
 // if the SignInGateSelector determines a gate should be rendered.
 
-import React from 'react';
+import React, { type JSX } from 'react';
 import { Island } from '../components/Island';
 import { SignInGateSelector } from '../components/SignInGateSelector.importable';
 import type { Switches } from '../types/config';

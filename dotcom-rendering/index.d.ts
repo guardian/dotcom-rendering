@@ -82,115 +82,117 @@ interface PerformanceEntry {
 	renderTime: number;
 }
 
-declare namespace JSX {
-	interface IntrinsicElements {
-		// ------------------------------------- //
-		// AMP types                             //
-		// ------------------------------------- //
-		'amp-accordion': any;
-		'amp-ad': any;
-		'amp-analytics': any;
-		'amp-audio': any;
-		'amp-consent': any;
-		'amp-embed': any;
-		'amp-experiment': any;
-		'amp-facebook': any;
-		'amp-form': any;
-		'amp-geo': any;
-		'amp-iframe': any;
-		'amp-img': any;
-		'amp-instagram': any;
-		'amp-list': any;
-		'amp-live-list': any;
-		'amp-pixel': any;
-		'amp-script': any;
-		'amp-sidebar': any;
-		'amp-soundcloud': any;
-		'amp-state': any;
-		'amp-sticky-ad': any;
-		'amp-twitter': any;
-		'amp-video': any;
-		'amp-vimeo': any;
-		'amp-youtube': any;
+declare module 'react/jsx-runtime' {
+	namespace JSX {
+		interface IntrinsicElements {
+			// ------------------------------------- //
+			// AMP types                             //
+			// ------------------------------------- //
+			'amp-accordion': any;
+			'amp-ad': any;
+			'amp-analytics': any;
+			'amp-audio': any;
+			'amp-consent': any;
+			'amp-embed': any;
+			'amp-experiment': any;
+			'amp-facebook': any;
+			'amp-form': any;
+			'amp-geo': any;
+			'amp-iframe': any;
+			'amp-img': any;
+			'amp-instagram': any;
+			'amp-list': any;
+			'amp-live-list': any;
+			'amp-pixel': any;
+			'amp-script': any;
+			'amp-sidebar': any;
+			'amp-soundcloud': any;
+			'amp-state': any;
+			'amp-sticky-ad': any;
+			'amp-twitter': any;
+			'amp-video': any;
+			'amp-vimeo': any;
+			'amp-youtube': any;
 
-		/** Island {@link ./src/components/Island.tsx} */
-		'gu-island': import('./src/components/Island.tsx').GuIsland;
-	}
+			/** Island {@link ./src/components/Island.tsx} */
+			'gu-island': import('./src/components/Island.tsx').GuIsland;
+		}
 
-	interface IntrinsicAttributes {
-		/**
-		 * **Rendered Components – Ophan**
-		 *
-		 * The Ophan client automatically tracks components on the page
-		 * that have the `data-component` attribute.
-		 * To avoid race conditions, it is best to add this attribute only
-		 * to server-rendered HTML.
-		 *
-		 * Add `data-component="component-name"` to the element you want
-		 * to track.
-		 *
-		 * The page views table will then contain `component-name` when the
-		 * element is present on the page.
-		 */
-		'data-component'?: string;
-		/**
-		 * **Component Clicks – Ophan**
-		 *
-		 * The Ophan client automatically tracks click interactions
-		 * on components that have the `data-link-name` attribute.
-		 * To avoid race conditions, it is best to add this attribute only
-		 * to server-rendered HTML.
-		 *
-		 * Some elements are not trackable, e.g. `div`, `span`.
-		 * Refer to the Ophan documentation for more information.
-		 * https://github.com/guardian/ophan/blob/0f365862682cd97cc50cf381299e0f4875e2996c/tracker-js/src/click-path-capture.js
-		 *
-		 * Add `data-component="component-name"` to the element you want
-		 * to track. Then `add data-link-name="link-name"` to the anchor for which
-		 * clicks will be tracked.
-		 *
-		 * The page views table will then contain `link-name` when the
-		 * link is clicked.
-		 */
-		'data-link-name'?: string;
-		/**
-		 * Ignore a DOM element in Chromatic builds with `data-chromatic="ignore"`.
-		 *
-		 * https://www.chromatic.com/docs/ignoring-elements/#ignore-dom-elements
-		 *
-		 * Note that if the dimensions of the ignored element
-		 * change, Chromatic will still capture the incoming changes.
-		 */
-		'data-chromatic'?: 'ignore';
+		interface IntrinsicAttributes {
+			/**
+			 * **Rendered Components – Ophan**
+			 *
+			 * The Ophan client automatically tracks components on the page
+			 * that have the `data-component` attribute.
+			 * To avoid race conditions, it is best to add this attribute only
+			 * to server-rendered HTML.
+			 *
+			 * Add `data-component="component-name"` to the element you want
+			 * to track.
+			 *
+			 * The page views table will then contain `component-name` when the
+			 * element is present on the page.
+			 */
+			'data-component'?: string;
+			/**
+			 * **Component Clicks – Ophan**
+			 *
+			 * The Ophan client automatically tracks click interactions
+			 * on components that have the `data-link-name` attribute.
+			 * To avoid race conditions, it is best to add this attribute only
+			 * to server-rendered HTML.
+			 *
+			 * Some elements are not trackable, e.g. `div`, `span`.
+			 * Refer to the Ophan documentation for more information.
+			 * https://github.com/guardian/ophan/blob/0f365862682cd97cc50cf381299e0f4875e2996c/tracker-js/src/click-path-capture.js
+			 *
+			 * Add `data-component="component-name"` to the element you want
+			 * to track. Then `add data-link-name="link-name"` to the anchor for which
+			 * clicks will be tracked.
+			 *
+			 * The page views table will then contain `link-name` when the
+			 * link is clicked.
+			 */
+			'data-link-name'?: string;
+			/**
+			 * Ignore a DOM element in Chromatic builds with `data-chromatic="ignore"`.
+			 *
+			 * https://www.chromatic.com/docs/ignoring-elements/#ignore-dom-elements
+			 *
+			 * Note that if the dimensions of the ignored element
+			 * change, Chromatic will still capture the incoming changes.
+			 */
+			'data-chromatic'?: 'ignore';
 
-		/**
-		 * **Spacefinder Role**
-		 *
-		 * [Spacefinder](https://github.com/guardian/commercial/blob/main/src/insert/spacefinder/article.ts)
-		 * is a part of the commercial bundle that is used to find positions
-		 * for ad slots within articles.
-		 *
-		 * Spacefinder has rules specified for elements with this data attribute
-		 * that it will use to find positions for ads.
-		 */
-		'data-spacefinder-role'?:
-			| 'nested'
-			| 'immersive'
-			| 'inline'
-			| 'richLink'
-			| 'thumbnail';
+			/**
+			 * **Spacefinder Role**
+			 *
+			 * [Spacefinder](https://github.com/guardian/commercial/blob/main/src/insert/spacefinder/article.ts)
+			 * is a part of the commercial bundle that is used to find positions
+			 * for ad slots within articles.
+			 *
+			 * Spacefinder has rules specified for elements with this data attribute
+			 * that it will use to find positions for ads.
+			 */
+			'data-spacefinder-role'?:
+				| 'nested'
+				| 'immersive'
+				| 'inline'
+				| 'richLink'
+				| 'thumbnail';
 
-		/**
-		 * **Spacefinder Type**
-		 *
-		 * [Spacefinder](https://github.com/guardian/commercial/blob/main/src/insert/spacefinder/article.ts)
-		 * is a part of the commercial bundle that is used to find positions
-		 * for ad slots within articles.
-		 *
-		 * Spacefinder has rules specified for elements with this data attribute
-		 * that it will use to find positions for ads.
-		 */
-		'data-spacefinder-type'?: import('./src/types/content').FEElement['_type'];
+			/**
+			 * **Spacefinder Type**
+			 *
+			 * [Spacefinder](https://github.com/guardian/commercial/blob/main/src/insert/spacefinder/article.ts)
+			 * is a part of the commercial bundle that is used to find positions
+			 * for ad slots within articles.
+			 *
+			 * Spacefinder has rules specified for elements with this data attribute
+			 * that it will use to find positions for ads.
+			 */
+			'data-spacefinder-type'?: import('./src/types/content').FEElement['_type'];
+		}
 	}
 }
 

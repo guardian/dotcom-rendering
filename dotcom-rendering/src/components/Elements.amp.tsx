@@ -30,6 +30,8 @@ import { VideoVimeoBlockComponent } from './VideoVimeoBlockComponent.amp';
 import { VideoYoutubeBlockComponent } from './VideoYoutubeBlockComponent.amp';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.amp';
 
+import type { JSX } from 'react';
+
 /**
  * Elements we support on AMP -
  *

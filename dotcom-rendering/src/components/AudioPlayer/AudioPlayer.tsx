@@ -143,7 +143,7 @@ export const AudioPlayer = ({
 
 	// ********************* interactions *********************
 
-	const boundingClientRect = useRef<DOMRect>();
+	const boundingClientRect = useRef<DOMRect>(undefined);
 
 	const playPause = useCallback(() => {
 		if (audioRef.current) {
