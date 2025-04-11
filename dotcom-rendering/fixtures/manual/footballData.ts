@@ -31,7 +31,7 @@ export const initialDays: FootballMatches = [
 				nation: 'European',
 				matches: [
 					{
-						kind: 'FootballLive',
+						kind: 'Live',
 						dateTimeISOString: new Date(
 							'2022-01-01T11:11:00Z',
 						).toISOString(),
@@ -49,7 +49,7 @@ export const initialDays: FootballMatches = [
 						status: '1st',
 					},
 					{
-						kind: 'FootballLive',
+						kind: 'Live',
 						dateTimeISOString: new Date(
 							'2022-01-01T11:11:00Z',
 						).toISOString(),
@@ -66,7 +66,7 @@ export const initialDays: FootballMatches = [
 						comment: 'Awaiting officials decision',
 					},
 					{
-						kind: 'FootballFixture',
+						kind: 'Fixture',
 						dateTimeISOString: new Date(
 							'2022-01-01T19:45:00Z',
 						).toISOString(),
@@ -86,7 +86,7 @@ export const initialDays: FootballMatches = [
 				nation: 'European',
 				matches: [
 					{
-						kind: 'FootballLive',
+						kind: 'Live',
 						dateTimeISOString: new Date(
 							'2022-01-01T11:11:00Z',
 						).toISOString(),
@@ -113,7 +113,7 @@ export const initialDays: FootballMatches = [
 				nation: 'European',
 				matches: [
 					{
-						kind: 'FootballLive',
+						kind: 'Live',
 						dateTimeISOString: new Date(
 							'2022-01-01T11:11:00Z',
 						).toISOString(),
@@ -131,7 +131,7 @@ export const initialDays: FootballMatches = [
 						status: 'HT',
 					},
 					{
-						kind: 'FootballLive',
+						kind: 'Live',
 						dateTimeISOString: new Date(
 							'2022-01-01T11:11:00Z',
 						).toISOString(),
@@ -157,7 +157,7 @@ export const initialDays: FootballMatches = [
 				nation: 'European',
 				matches: [
 					{
-						kind: 'FootballResult',
+						kind: 'Result',
 						dateTimeISOString: new Date(
 							'2022-01-01T20:00:00Z',
 						).toISOString(),
@@ -183,7 +183,7 @@ export const initialDays: FootballMatches = [
 				nation: 'European',
 				matches: [
 					{
-						kind: 'FootballResult',
+						kind: 'Result',
 						dateTimeISOString: new Date(
 							'2022-01-01T20:00:00Z',
 						).toISOString(),
@@ -218,7 +218,7 @@ export const moreDays: FootballMatches = [
 				nation: 'European',
 				matches: [
 					{
-						kind: 'FootballFixture',
+						kind: 'Fixture',
 						dateTimeISOString: new Date(
 							'2022-01-05T19:45:00Z',
 						).toISOString(),

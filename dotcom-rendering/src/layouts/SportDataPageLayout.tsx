@@ -26,9 +26,9 @@ const SportsPage = ({
 	renderAds: boolean;
 }) => {
 	switch (sportData.kind) {
-		case 'FootballFixture':
-		case 'FootballLive':
-		case 'FootballResult':
+		case 'FootballFixtures':
+		case 'FootballLiveScores':
+		case 'FootballResults':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<FootballMatchesPageWrapper

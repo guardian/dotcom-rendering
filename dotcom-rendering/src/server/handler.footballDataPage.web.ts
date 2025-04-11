@@ -1,6 +1,5 @@
 import type { RequestHandler } from 'express';
 import { parse as parseCricketMatch } from '../cricketMatch';
-import type { FootballMatchKind } from '../footballMatches';
 import {
 	getParserErrorMessage,
 	parse as parseFootballMatches,
@@ -20,6 +19,7 @@ import {
 import type {
 	CricketMatchPage,
 	FootballMatchListPage,
+	FootballMatchListPageKind,
 	FootballTablesPage,
 	Region,
 } from '../sportDataPage';
@@ -27,17 +27,17 @@ import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderSportPage } from './render.footballDataPage.web';
 
-const decidePageKind = (pageId: string): FootballMatchKind => {
+const decidePageKind = (pageId: string): FootballMatchListPageKind => {
 	if (pageId.includes('live')) {
-		return 'FootballLive';
+		return 'FootballLiveScores';
 	}
 
 	if (pageId.includes('results')) {
-		return 'FootballResult';
+		return 'FootballResults';
 	}
 
 	if (pageId.includes('fixtures')) {
-		return 'FootballFixture';
+		return 'FootballFixtures';
 	}
 
 	throw new Error('Could not determine football page kind');

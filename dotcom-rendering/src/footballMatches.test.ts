@@ -41,7 +41,7 @@ describe('footballMatches', () => {
 
 		const competition = day?.competitions[0];
 		expect(competition?.name).toBe('Champions League');
-		expect(competition?.matches[0]?.kind).toBe('FootballFixture');
+		expect(competition?.matches[0]?.kind).toBe('Fixture');
 		expect(competition?.tag).toBe('football/championsleague');
 	});
 
@@ -135,7 +135,7 @@ describe('footballMatches', () => {
 			);
 
 			const match = matchDay[0]!.competitions[0]!.matches[0];
-			if (match?.kind !== 'FootballResult') {
+			if (match?.kind !== 'Result') {
 				throw new Error('Expected Result');
 			}
 
@@ -149,7 +149,7 @@ describe('footballMatches', () => {
 		);
 
 		const match = matchDay[0]!.competitions[0]!.matches[0];
-		if (match?.kind !== 'FootballLive') {
+		if (match?.kind !== 'Live') {
 			throw new Error('Expected live match');
 		}
 
@@ -167,7 +167,7 @@ describe('footballMatches', () => {
 		);
 
 		const match = matchDay[0]!.competitions[0]!.matches[0];
-		if (match?.kind !== 'FootballLive') {
+		if (match?.kind !== 'Live') {
 			throw new Error('Expected live match');
 		}
 

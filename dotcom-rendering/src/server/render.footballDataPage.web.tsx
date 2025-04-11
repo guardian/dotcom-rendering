@@ -24,11 +24,11 @@ const fromTheGuardian =
 
 const decideDescription = (kind: SportPageKind) => {
 	switch (kind) {
-		case 'FootballLive':
+		case 'FootballLiveScores':
 			return `Live football scores ${fromTheGuardian}`;
-		case 'FootballResult':
+		case 'FootballResults':
 			return `Latest football results ${fromTheGuardian}`;
-		case 'FootballFixture':
+		case 'FootballFixtures':
 			return `Football fixtures ${fromTheGuardian}`;
 		case 'FootballTables':
 			return `Football tables ${fromTheGuardian}`;
@@ -39,9 +39,9 @@ const decideDescription = (kind: SportPageKind) => {
 
 const decideTitle = (sportPage: SportDataPage) => {
 	switch (sportPage.kind) {
-		case 'FootballLive':
-		case 'FootballResult':
-		case 'FootballFixture':
+		case 'FootballLiveScores':
+		case 'FootballResults':
+		case 'FootballFixtures':
 		case 'FootballTables':
 			return decideFootballTitle(sportPage);
 		case 'CricketMatch':
@@ -61,15 +61,15 @@ const decideFootballTitle = (sportPage: FootballDataPage) => {
 		.find((competition) => competition.url === `/${pagePath}`)?.name;
 
 	switch (kind) {
-		case 'FootballLive':
+		case 'FootballLiveScores':
 			return `${
 				competitionName ? `Today's ${competitionName} ` : 'Live '
 			}matches ${footballTitle}`;
-		case 'FootballResult':
+		case 'FootballResults':
 			return `${
 				competitionName ? `${competitionName} ` : 'All '
 			}results ${footballTitle}`;
-		case 'FootballFixture':
+		case 'FootballFixtures':
 			return `${
 				competitionName ? `${competitionName} ` : 'All '
 			}fixtures ${footballTitle}`;

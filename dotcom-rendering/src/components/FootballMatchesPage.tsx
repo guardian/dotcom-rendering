@@ -5,12 +5,12 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
-import type { FootballMatches, FootballMatchKind } from '../footballMatches';
+import type { FootballMatches } from '../footballMatches';
 import { grid } from '../grid';
 import type { EditionId } from '../lib/edition';
 import type { Result } from '../lib/result';
 import { palette } from '../palette';
-import type { Region } from '../sportDataPage';
+import type { FootballMatchListPageKind, Region } from '../sportDataPage';
 import { AdSlot } from './AdSlot.web';
 import { FootballCompetitionSelect } from './FootballCompetitionSelect';
 import { FootballMatchList } from './FootballMatchList';
@@ -18,7 +18,7 @@ import { FootballMatchList } from './FootballMatchList';
 type Props = {
 	regions: Region[];
 	guardianBaseUrl: string;
-	kind: FootballMatchKind;
+	kind: FootballMatchListPageKind;
 	initialDays: FootballMatches;
 	edition: EditionId;
 	goToCompetitionSpecificPage: (tag: string) => void;
@@ -28,17 +28,17 @@ type Props = {
 	now: string;
 };
 
-const createTitle = (kind: FootballMatchKind, edition: EditionId) => {
-	if (edition === 'US' && kind === 'FootballFixture') {
+const createTitle = (kind: FootballMatchListPageKind, edition: EditionId) => {
+	if (edition === 'US' && kind === 'FootballFixtures') {
 		return 'Soccer schedules';
 	}
 
 	switch (kind) {
-		case 'FootballFixture':
+		case 'FootballFixtures':
 			return 'Football fixtures';
-		case 'FootballLive':
+		case 'FootballLiveScores':
 			return 'Live football scores';
-		case 'FootballResult':
+		case 'FootballResults':
 			return 'Football results';
 	}
 };

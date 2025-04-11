@@ -24,20 +24,20 @@ type MatchData = {
 };
 
 export type MatchResult = MatchData & {
-	kind: 'FootballResult';
+	kind: 'Result';
 	homeTeam: TeamScore;
 	awayTeam: TeamScore;
 	comment?: string;
 };
 
 export type MatchFixture = MatchData & {
-	kind: 'FootballFixture';
+	kind: 'Fixture';
 	homeTeam: Team;
 	awayTeam: Team;
 };
 
 export type LiveMatch = MatchData & {
-	kind: 'FootballLive';
+	kind: 'Live';
 	homeTeam: TeamScore;
 	awayTeam: TeamScore;
 	status: string;
@@ -204,7 +204,7 @@ const parseFixture = (
 	}
 
 	return ok({
-		kind: 'FootballFixture',
+		kind: 'Fixture',
 		homeTeam: {
 			name: cleanTeamName(feFixture.homeTeam.name),
 			id: feFixture.homeTeam.id,
@@ -235,7 +235,7 @@ const parseMatchResult = (
 	}
 
 	return ok({
-		kind: 'FootballResult',
+		kind: 'Result',
 		homeTeam: {
 			name: cleanTeamName(feResult.homeTeam.name),
 			score: feResult.homeTeam.score,
@@ -269,7 +269,7 @@ const parseLiveMatch = (
 	}
 
 	return ok({
-		kind: 'FootballLive',
+		kind: 'Live',
 		homeTeam: {
 			name: cleanTeamName(feMatchDay.homeTeam.name),
 			score: feMatchDay.homeTeam.score,

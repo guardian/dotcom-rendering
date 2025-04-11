@@ -159,9 +159,9 @@ const MatchStatus = ({
 	timeFormatter: Intl.DateTimeFormat;
 }) => {
 	switch (match.kind) {
-		case 'FootballResult':
+		case 'Result':
 			return <span css={matchStatusStyles}>FT</span>;
-		case 'FootballLive':
+		case 'Live':
 			return (
 				<span
 					css={[
@@ -176,7 +176,7 @@ const MatchStatus = ({
 					{match.status}
 				</span>
 			);
-		case 'FootballFixture':
+		case 'Fixture':
 			return (
 				<time
 					css={matchStatusStyles}
@@ -205,7 +205,7 @@ const matchListItemStyles = css`
 const matchStyles = (matchKind: FootballMatchKind) => css`
 	${textSans14}
 
-	${matchKind === 'FootballLive' ? 'font-weight: bold;' : undefined}
+	${matchKind === 'Live' ? 'font-weight: bold;' : undefined}
 
 	display: flex;
 	align-items: center;
@@ -264,7 +264,7 @@ const Match = ({
 }) => (
 	<MatchWrapper match={match} now={now}>
 		<MatchStatus match={match} timeFormatter={timeFormatter} />
-		{match.kind === 'FootballFixture' ? (
+		{match.kind === 'Fixture' ? (
 			<>
 				<HomeTeam team={match.homeTeam} />
 				<Versus />

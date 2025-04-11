@@ -11,11 +11,11 @@ type Props = {
 
 const allLabel = (kind: FootballPageKind): string => {
 	switch (kind) {
-		case 'FootballFixture':
+		case 'FootballFixtures':
 			return 'All fixtures';
-		case 'FootballResult':
+		case 'FootballResults':
 			return 'All results';
-		case 'FootballLive':
+		case 'FootballLiveScores':
 			return 'All live';
 		case 'FootballTables':
 			return 'All tables';
@@ -24,11 +24,11 @@ const allLabel = (kind: FootballPageKind): string => {
 
 const getPagePath = (kind: FootballPageKind) => {
 	switch (kind) {
-		case 'FootballFixture':
+		case 'FootballFixtures':
 			return '/football/fixtures';
-		case 'FootballLive':
+		case 'FootballLiveScores':
 			return '/football/live';
-		case 'FootballResult':
+		case 'FootballResults':
 			return '/football/results';
 		case 'FootballTables':
 			return '/football/tables';

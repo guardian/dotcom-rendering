@@ -1,5 +1,5 @@
 import type { CricketMatch } from './cricketMatch';
-import type { FootballMatches, FootballMatchKind } from './footballMatches';
+import type { FootballMatches } from './footballMatches';
 import type { FootballTableCompetitions } from './footballTables';
 import type { FESportPageConfig } from './frontend/feFootballDataPage';
 import type { EditionId } from './lib/edition';
@@ -31,7 +31,7 @@ export type FootballMatchListPage = FootballData & {
 	previousPage?: string;
 	matchesList: FootballMatches;
 	now: string;
-	kind: FootballMatchKind;
+	kind: 'FootballLiveScores' | 'FootballFixtures' | 'FootballResults';
 };
 
 export type FootballTablesPage = FootballData & {
@@ -44,7 +44,10 @@ export type CricketMatchPage = SportPageConfig & {
 	kind: 'CricketMatch';
 };
 
-export type FootballPageKind = FootballTablesPage['kind'] | FootballMatchKind;
+export type FootballMatchListPageKind = FootballMatchListPage['kind'];
+export type FootballPageKind =
+	| FootballTablesPage['kind']
+	| FootballMatchListPageKind;
 
 export type SportPageKind = FootballPageKind | CricketMatchPage['kind'];
 
