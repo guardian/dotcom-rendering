@@ -150,6 +150,7 @@ interface ContributionsEpicButtonsProps {
 	amountsTestName?: string;
 	amountsVariantName?: string;
 	numArticles: number;
+	isDiscountActive?: boolean;
 }
 
 export const ContributionsEpicButtons = ({
@@ -165,6 +166,7 @@ export const ContributionsEpicButtons = ({
 	amountsTestName,
 	amountsVariantName,
 	numArticles,
+	isDiscountActive,
 }: ContributionsEpicButtonsProps): JSX.Element | null => {
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
@@ -192,6 +194,28 @@ export const ContributionsEpicButtons = ({
 				return {
 					text: cta.text,
 					baseUrl: addChoiceCardsOneTimeParams(cta.baseUrl),
+				};
+			}
+			if (
+				threeTierChoiceCardSelectedProduct === 'SupporterPlus' &&
+				isDiscountActive &&
+				countryCode !== 'US'
+			) {
+				const countryGroupId = countryCodeToCountryGroupId(countryCode);
+				const contributionAmount =
+					threeTierChoiceCardSelectedProduct === 'SupporterPlus'
+						? threeTierChoiceCardAmounts['Annual'][countryGroupId]
+								.SupporterPlus
+						: undefined;
+
+				return {
+					text: cta.text,
+					baseUrl: addChoiceCardsProductParams(
+						cta.baseUrl,
+						threeTierChoiceCardSelectedProduct,
+						'Annual',
+						contributionAmount,
+					),
 				};
 			}
 

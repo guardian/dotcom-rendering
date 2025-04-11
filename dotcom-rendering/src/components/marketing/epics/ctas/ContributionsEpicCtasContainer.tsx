@@ -14,6 +14,7 @@ interface OnReminderOpen {
 type Props = EpicProps & {
 	amountsTestName?: string;
 	amountsVariantName?: string;
+	now?: Date;
 };
 
 export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
@@ -26,6 +27,7 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 	fetchEmail,
 	amountsTestName,
 	amountsVariantName,
+	now = new Date(),
 }: Props): JSX.Element => {
 	// reminders
 	const [fetchedEmail, setFetchedEmail] = useState<string | undefined>(
@@ -53,9 +55,15 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 		setThreeTierChoiceCardSelectedProduct,
 	] = useState<SupportTier>('SupporterPlus');
 
-	const hasSupporterPlusPromoCode =
-		variant.cta?.baseUrl.includes('BLACK_FRIDAY_DISCOUNT_2024') ?? false;
-
+	//Check the dates
+	const isDiscountActive =
+		(now >= new Date('2025-04-10T00:00:01') &&
+			now < new Date('2025-04-21T23:59:59') &&
+			countryCode !== 'US') ??
+		false;
+	// const isDiscountActive = (true && countryCode !=='US') ?? false;
+	console.log('currentDate', now);
+	console.log('activeDate', isDiscountActive);
 	return (
 		<>
 			{showChoiceCards && (
@@ -63,11 +71,14 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 					countryCode={countryCode}
 					selectedProduct={threeTierChoiceCardSelectedProduct}
 					setSelectedProduct={setThreeTierChoiceCardSelectedProduct}
-					choices={getChoiceCardData(true, countryCode)}
-					supporterPlusDiscount={
-						hasSupporterPlusPromoCode ? 0.5 : undefined
-					}
+					choices={getChoiceCardData(
+						true,
+						isDiscountActive,
+						countryCode,
+					)}
+					supporterPlusDiscount={isDiscountActive ? 0.3 : undefined}
 					id={'epic'}
+					isDiscountActive={isDiscountActive}
 				/>
 			)}
 			<ContributionsEpicButtons
@@ -108,6 +119,7 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 				amountsTestName={amountsTestName}
 				amountsVariantName={amountsVariantName}
 				numArticles={articleCounts.for52Weeks}
+				isDiscountActive={isDiscountActive}
 			/>
 			{isReminderActive && showReminderFields && (
 				<ContributionsEpicReminder
