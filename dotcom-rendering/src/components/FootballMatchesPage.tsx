@@ -5,12 +5,12 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
-import type { Region } from '../sportDataPage';
 import type { FootballMatches, FootballMatchKind } from '../footballMatches';
 import { grid } from '../grid';
 import type { EditionId } from '../lib/edition';
 import type { Result } from '../lib/result';
 import { palette } from '../palette';
+import type { Region } from '../sportDataPage';
 import { AdSlot } from './AdSlot.web';
 import { FootballCompetitionSelect } from './FootballCompetitionSelect';
 import { FootballMatchList } from './FootballMatchList';

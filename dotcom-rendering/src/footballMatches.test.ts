@@ -41,7 +41,7 @@ describe('footballMatches', () => {
 
 		const competition = day?.competitions[0];
 		expect(competition?.name).toBe('Champions League');
-		expect(competition?.matches[0]?.kind).toBe('Fixture');
+		expect(competition?.matches[0]?.kind).toBe('FootballFixture');
 		expect(competition?.tag).toBe('football/championsleague');
 	});
 

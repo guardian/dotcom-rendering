@@ -1,7 +1,6 @@
 import { isObject, isUndefined } from '@guardian/libs';
 import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
-import type { Region } from '../sportDataPage';
 import {
 	type FootballMatches,
 	type FootballMatchKind,
@@ -12,6 +11,7 @@ import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPag
 import type { EditionId } from '../lib/edition';
 import type { Result } from '../lib/result';
 import { error, ok } from '../lib/result';
+import type { Region } from '../sportDataPage';
 import { FootballMatchesPage } from './FootballMatchesPage';
 
 export const getMoreDays =

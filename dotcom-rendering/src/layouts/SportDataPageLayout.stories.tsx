@@ -1,6 +1,8 @@
 import type { StoryObj } from '@storybook/react';
 import { footballData } from '../../fixtures/generated/football-live';
 import { initialDays, regions } from '../../fixtures/manual/footballData';
+import { CricketScorecard } from '../components/CricketScorecard.stories';
+import { FootballTableList as TableListDefault } from '../components/FootballTableList.stories';
 import { extractNAV } from '../model/extract-nav';
 import { SportDataPageLayout } from './SportDataPageLayout';
 
@@ -44,6 +46,31 @@ export const Fixtures = {
 		sportData: {
 			...Results.args.sportData,
 			kind: 'FootballFixture',
+		},
+	},
+} satisfies Story;
+
+export const Tables = {
+	args: {
+		sportData: {
+			...Results.args.sportData,
+			kind: 'FootballTables',
+			tables: TableListDefault.args.competitions,
+		},
+	},
+} satisfies Story;
+
+export const CricketMatch = {
+	args: {
+		sportData: {
+			...Results.args.sportData,
+			kind: 'CricketMatch',
+			match: {
+				...CricketScorecard.args,
+				innings: CricketScorecard.args.allInnings,
+				venueName: 'The Oval',
+				competitionName: 'World Cup',
+			},
 		},
 	},
 } satisfies Story;
