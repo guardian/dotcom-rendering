@@ -7,7 +7,7 @@ import {
 } from '@guardian/source/foundations';
 import { SvgCross } from '@guardian/source/react-components';
 import detectMobile from 'is-mobile';
-import { useEffect, useState, type JSX } from 'react';
+import { type JSX, useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import { useIsInView } from '../../lib/useIsInView';
 import { useConfig } from '../ConfigContext';

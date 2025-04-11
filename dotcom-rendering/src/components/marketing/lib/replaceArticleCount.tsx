@@ -3,13 +3,12 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/9c3eae7cb0b159db4a1c40679d6b37710b0bb937/packages/modules/src/lib/replaceArticleCount.tsx
  */
+import type { JSX } from 'react';
 import type {
 	ArticleCountOptOutType,
 	OphanTracking,
 } from '../shared/ArticleCountOptOutPopup';
 import { ArticleCountOptOutPopup } from '../shared/ArticleCountOptOutPopup';
-
-import type { JSX } from 'react';
 
 export const replaceArticleCountWithLink = (
 	text: string,

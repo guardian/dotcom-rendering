@@ -11,9 +11,8 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
-import type { ContentType } from '../../../../hooks/useChoiceCards';
-
 import type { JSX } from 'react';
+import type { ContentType } from '../../../../hooks/useChoiceCards';
 
 // Always override the LinkButton border
 const buttonOverrides = css`

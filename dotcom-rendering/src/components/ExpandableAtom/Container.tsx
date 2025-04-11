@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
 import { palette as sourcePalette } from '@guardian/source/foundations';
+import type { JSX } from 'react';
 import { palette as themePalette } from '../../palette';
 import { Summary } from './Summary';
-
-import type { JSX } from 'react';
 
 const containerStyling = css`
 	display: block;

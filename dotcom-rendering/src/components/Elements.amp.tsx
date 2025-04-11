@@ -1,4 +1,5 @@
 import { isNonNullable } from '@guardian/libs';
+import type { JSX } from 'react';
 import {
 	ArticleDesign,
 	type ArticleFormat,
@@ -29,8 +30,6 @@ import { TwitterBlockComponent } from './TwitterBlockComponent.amp';
 import { VideoVimeoBlockComponent } from './VideoVimeoBlockComponent.amp';
 import { VideoYoutubeBlockComponent } from './VideoYoutubeBlockComponent.amp';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.amp';
-
-import type { JSX } from 'react';
 
 /**
  * Elements we support on AMP -

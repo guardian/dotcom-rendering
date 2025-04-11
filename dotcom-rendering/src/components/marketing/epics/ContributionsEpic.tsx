@@ -20,7 +20,7 @@ import {
 	replaceNonArticleCountPlaceholders,
 } from '@guardian/support-dotcom-components';
 import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types';
-import { useEffect, type JSX } from 'react';
+import { type JSX, useEffect } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import { useArticleCountOptOut } from '../hooks/useArticleCountOptOut';
 import type { ReactComponent } from '../lib/ReactComponent';

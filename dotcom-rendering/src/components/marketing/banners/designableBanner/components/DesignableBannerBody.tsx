@@ -11,6 +11,7 @@ import {
 	textEgyptianBold15,
 	textEgyptianBold17,
 } from '@guardian/source/foundations';
+import type { JSX } from 'react';
 import {
 	removeMediaRulePrefix,
 	useMatchMedia,
@@ -18,8 +19,6 @@ import {
 import type { BannerRenderedContent } from '../../common/types';
 import type { HighlightedTextSettings } from '../settings';
 import { createBannerBodyCopy } from './BannerText';
-
-import type { JSX } from 'react';
 
 interface DesignableBannerBodyProps {
 	mainContent: BannerRenderedContent;

@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
 import { textSansBold15 } from '@guardian/source/foundations';
 import { Button } from '@guardian/source/react-components';
-import { palette as themePalette } from '../../palette';
-
 import type { JSX } from 'react';
+import { palette as themePalette } from '../../palette';
 
 type Props = {
 	onClick?: () => void | Promise<void>;

@@ -6,7 +6,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
-
 import type { JSX } from 'react';
 
 const paymentMethods = css`

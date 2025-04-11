@@ -16,7 +16,7 @@ import type {
 	Cta,
 	SecondaryCta,
 } from '@guardian/support-dotcom-components/dist/shared/types';
-import { useEffect, type JSX } from 'react';
+import { type JSX, useEffect } from 'react';
 import { useIsInView } from '../../../../lib/useIsInView';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import { replaceArticleCount } from '../../lib/replaceArticleCount';

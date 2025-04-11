@@ -6,12 +6,11 @@ import {
 	textSansBold12,
 } from '@guardian/source/foundations';
 import { SvgCamera } from '@guardian/source/react-components';
+import type { JSX } from 'react';
 import { Pill } from '../../../components/Pill';
 import { SvgMediaControlsPlay } from '../../../components/SvgMediaControlsPlay';
 import { type ArticleFormat, ArticleSpecial } from '../../../lib/articleFormat';
 import { secondsToDuration } from '../../../lib/formatTime';
-
-import type { JSX } from 'react';
 
 const contentStyles = css`
 	margin-top: auto;

@@ -5,9 +5,8 @@ import {
 	text,
 	textSans15,
 } from '@guardian/source/foundations';
-import { isLight } from '../lib/isLight';
-
 import type { JSX } from 'react';
+import { isLight } from '../lib/isLight';
 
 type Props = {
 	sections: SectionType[];

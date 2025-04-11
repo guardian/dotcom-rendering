@@ -14,14 +14,13 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import type { Image } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { JSX } from 'react';
 import {
 	removeMediaRulePrefix,
 	useMatchMedia,
 } from '../../../../../lib/useMatchMedia';
 import type { HeaderSettings } from '../settings';
 import { DesignableBannerVisual } from './DesignableBannerVisual';
-
-import type { JSX } from 'react';
 
 interface DesignableBannerHeaderProps {
 	heading: JSX.Element | JSX.Element[] | null;

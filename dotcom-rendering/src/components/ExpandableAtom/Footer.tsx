@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { textSans14 } from '@guardian/source/foundations';
-import { useState, type JSX } from 'react';
+import { type JSX, useState } from 'react';
 import { palette as themePalette } from '../../palette';
 
 /// LIKE/DISLIKE FEEDBACK FOOTER

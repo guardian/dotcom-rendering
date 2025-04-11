@@ -5,7 +5,7 @@ import {
 	headlineMedium17,
 	textSans15,
 } from '@guardian/source/foundations';
-import type { MouseEvent, JSX } from 'react';
+import type { JSX, MouseEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { formatTime } from '../../lib/formatTime';
 import { palette } from '../../palette';

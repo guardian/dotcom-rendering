@@ -4,12 +4,12 @@ import { buildImaAdTagUrl } from '@guardian/commercial';
 import type { ConsentState } from '@guardian/libs';
 import { log } from '@guardian/libs';
 import {
+	type JSX,
 	useCallback,
 	useEffect,
 	useLayoutEffect,
 	useRef,
 	useState,
-	type JSX,
 } from 'react';
 import { getVideoClient } from '../../lib/bridgetApi';
 import { getZIndex } from '../../lib/getZIndex';

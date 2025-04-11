@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-
 import type { JSX } from 'react';
 
 /**

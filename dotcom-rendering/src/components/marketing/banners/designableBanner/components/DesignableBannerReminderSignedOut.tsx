@@ -14,13 +14,12 @@ import {
 	textSansBold17,
 } from '@guardian/source/foundations';
 import { Button, TextInput } from '@guardian/source/react-components';
+import type { JSX } from 'react';
 import { useContributionsReminderEmailForm } from '../../../hooks/useContributionsReminderEmailForm';
 import { ensureHasPreposition, ReminderStatus } from '../../../lib/reminders';
 import type { BannerEnrichedReminderCta } from '../../common/types';
 import type { CtaSettings } from '../settings';
 import { buttonStyles } from '../styles/buttonStyles';
-
-import type { JSX } from 'react';
 
 // ---- Thank you component ---- //
 

@@ -15,7 +15,6 @@ import type {
 	TickerSettings,
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/types/props/shared';
-
 import type { JSX } from 'react';
 
 export type BannerId = 'designable-banner' | 'sign-in-prompt-banner';

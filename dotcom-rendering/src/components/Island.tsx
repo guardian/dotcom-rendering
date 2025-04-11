@@ -1,6 +1,5 @@
-import type { ScheduleOptions, SchedulePriority } from '../lib/scheduler';
-
 import type { JSX } from 'react';
+import type { ScheduleOptions, SchedulePriority } from '../lib/scheduler';
 
 type DeferredProps = {
 	visible: {

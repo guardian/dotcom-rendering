@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css, jsx } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
-import type { CSSProperties, PropsWithChildren, JSX } from 'react';
+import type { CSSProperties, JSX, PropsWithChildren } from 'react';
 
 const grid = css`
 	display: grid;

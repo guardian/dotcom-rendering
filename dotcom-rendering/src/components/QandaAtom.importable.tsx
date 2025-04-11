@@ -1,10 +1,9 @@
+import type { JSX } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { useConfig } from './ConfigContext';
 import { Body } from './ExpandableAtom/Body';
 import { Container } from './ExpandableAtom/Container';
 import { Footer } from './ExpandableAtom/Footer';
-
-import type { JSX } from 'react';
 
 export type QandaAtomProps = {
 	id: string;

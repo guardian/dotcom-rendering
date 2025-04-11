@@ -9,11 +9,10 @@ import {
 	headlineBold15,
 	headlineBold17,
 } from '@guardian/source/foundations';
+import type { JSX } from 'react';
 import type { BannerTemplateSettings } from '../settings';
 import { CustomArticleCountCopy } from './CustomArticleCountCopy';
 import { DesignableBannerArticleCountOptOut } from './DesignableBannerArticleCountOptOut';
-
-import type { JSX } from 'react';
 
 export const containsArticleCountTemplate = (copy: string): boolean =>
 	copy.includes('%%ARTICLE_COUNT%%');

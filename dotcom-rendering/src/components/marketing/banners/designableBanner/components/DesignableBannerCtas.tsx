@@ -7,13 +7,12 @@ import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
+import type { JSX } from 'react';
 import { isSupportUrl } from '../../../lib/tracking';
 import { PaymentCards } from '../../common/PaymentCards';
 import type { BannerRenderedContent } from '../../common/types';
 import type { CtaSettings } from '../settings';
 import { buttonStyles } from '../styles/buttonStyles';
-
-import type { JSX } from 'react';
 
 interface DesignableBannerCtasProps {
 	mainOrMobileContent: BannerRenderedContent;
