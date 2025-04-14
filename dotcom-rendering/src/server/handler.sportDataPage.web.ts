@@ -27,7 +27,7 @@ import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderSportPage } from './render.sportDataPage.web';
 
-const decidePageKind = (pageId: string): FootballMatchListPageKind => {
+const decideMatchListPageKind = (pageId: string): FootballMatchListPageKind => {
 	if (pageId.includes('live')) {
 		return 'FootballLiveScores';
 	}
