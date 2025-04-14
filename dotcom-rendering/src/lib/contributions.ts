@@ -8,7 +8,7 @@ import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dot
 import { useEffect, useState } from 'react';
 import { hideSupportMessaging } from '../client/userFeatures/cookies/hideSupportMessaging';
 import { userBenefitsDataIsUpToDate } from '../client/userFeatures/cookies/userBenefitsExpiry';
-import type { FootballData } from '../footballDataPage';
+import type { SportDataPage } from '../sportDataPage';
 import type { ArticleDeprecated } from '../types/article';
 import type { Front } from '../types/front';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
@@ -201,7 +201,7 @@ export const getContributionsServiceUrl = (
 		| Front
 		| TagPage
 		| DCRNewslettersPageType
-		| FootballData,
+		| SportDataPage,
 ): string => process.env.SDC_URL ?? config.contributionsServiceUrl;
 
 type PurchaseInfo = HeaderPayload['targeting']['purchaseInfo'];

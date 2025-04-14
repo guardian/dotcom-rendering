@@ -21,7 +21,7 @@ export type FEFootballCompetition = {
 	url: string;
 };
 
-export type FEFootballPageConfig = Omit<
+export type FESportPageConfig = Omit<
 	FEFrontConfig,
 	'keywordIds' | 'keywords' | 'isFront'
 > & {
@@ -34,7 +34,7 @@ export type FEFootballDataPage = {
 	nav: FENavType;
 	editionId: EditionId;
 	guardianBaseURL: string;
-	config: FEFootballPageConfig;
+	config: FESportPageConfig;
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
 	canonicalUrl?: string;
