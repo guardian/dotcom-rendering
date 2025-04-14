@@ -58,7 +58,7 @@ export const ScrollableSmall = ({
 				return (
 					<ScrollableCarousel.Item
 						splitLeftBorder={true}
-						stackRows={true}
+						shouldStackRows={true}
 						key={`carousel-item-${index}`}
 					>
 						<>

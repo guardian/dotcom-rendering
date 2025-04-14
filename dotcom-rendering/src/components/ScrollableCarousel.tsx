@@ -86,9 +86,9 @@ const carouselStyles = css`
 	}
 `;
 
-const itemStyles = (splitLeftBorder: boolean, stackRows: boolean) => css`
+const itemStyles = (splitLeftBorder: boolean, shouldStackRows: boolean) => css`
 	display: grid;
-	grid-template-rows: ${stackRows ? `1fr 1fr` : `1fr`};
+	grid-template-rows: ${shouldStackRows ? `1fr 1fr` : `1fr`};
 	scroll-snap-align: start;
 	grid-area: span 1;
 	position: relative;
@@ -294,10 +294,10 @@ export const ScrollableCarousel = ({
 
 ScrollableCarousel.Item = ({
 	splitLeftBorder = false,
-	stackRows = false,
+	shouldStackRows = false,
 	children,
 }: {
 	splitLeftBorder?: boolean;
-	stackRows?: boolean;
+	shouldStackRows?: boolean;
 	children: React.ReactNode;
-}) => <li css={itemStyles(splitLeftBorder, stackRows)}>{children}</li>;
+}) => <li css={itemStyles(splitLeftBorder, shouldStackRows)}>{children}</li>;
