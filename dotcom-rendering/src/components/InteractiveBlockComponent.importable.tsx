@@ -484,6 +484,7 @@ export const InteractiveBlockComponent = ({
 						captionText={caption}
 						format={format}
 						isMainMedia={isMainMedia}
+						isImmersive={role === 'immersive'}
 					/>
 				)}
 			</figure>
