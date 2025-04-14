@@ -87,7 +87,7 @@ const determineCardProperties = (
 				imageSize: 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
-				liveUpdatesAlignment: 'horizontal',
+				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
 			};
 		case 'megaboost':
@@ -104,7 +104,7 @@ const determineCardProperties = (
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
-				liveUpdatesAlignment: 'horizontal',
+				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'large',
 			};
 		case 'gigaboost':
