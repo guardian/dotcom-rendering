@@ -116,14 +116,8 @@ export const renderFront = ({
 		getPathFromManifest(build, 'index.js'),
 		process.env.COMMERCIAL_BUNDLE_URL ?? front.config.commercialBundleUrl,
 	].filter(isString);
-	const legacyScripts = [
-		getPathFromManifest('client.web.legacy', 'frameworks.js'),
-		getPathFromManifest('client.web.legacy', 'index.js'),
-	];
-	const scriptTags = generateScriptTags([
-		...prefetchScripts,
-		...legacyScripts,
-	]);
+
+	const scriptTags = generateScriptTags(prefetchScripts);
 
 	const guardian = createGuardian({
 		editionId: front.editionId,
@@ -218,14 +212,8 @@ export const renderTagPage = ({
 		getPathFromManifest(build, 'index.js'),
 		process.env.COMMERCIAL_BUNDLE_URL ?? tagPage.config.commercialBundleUrl,
 	].filter(isString);
-	const legacyScripts = [
-		getPathFromManifest('client.web.legacy', 'frameworks.js'),
-		getPathFromManifest('client.web.legacy', 'index.js'),
-	];
-	const scriptTags = generateScriptTags([
-		...prefetchScripts,
-		...legacyScripts,
-	]);
+
+	const scriptTags = generateScriptTags(prefetchScripts);
 
 	const guardian = createGuardian({
 		editionId: tagPage.editionId,
