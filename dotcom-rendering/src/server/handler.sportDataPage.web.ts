@@ -87,7 +87,7 @@ const parseFEFootballMatchList = (
 	return {
 		matchesList: parsedMatchesList.value,
 		now: new Date().toISOString(),
-		kind: decidePageKind(data.config.pageId),
+		kind: decideMatchListPageKind(data.config.pageId),
 		nextPage: data.nextPage,
 		previousPage: data.previousPage,
 		regions: parseFEFootballCompetitionRegions(data.filters),
