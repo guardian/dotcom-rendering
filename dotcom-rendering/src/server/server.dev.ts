@@ -14,15 +14,16 @@ import {
 } from './handler.article.web';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import {
-	handleFootballMatchListPage,
-	handleFootballTablesPage,
-} from './handler.footballDataPage.web';
-import {
 	handleFront,
 	handleFrontJson,
 	handleTagPage,
 	handleTagPageJson,
 } from './handler.front.web';
+import {
+	handleCricketMatchPage,
+	handleFootballMatchListPage,
+	handleFootballTablesPage,
+} from './handler.sportDataPage.web';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
 const ARTICLE_URL = /(\/\d{4}\/[a-z]{3}\/\d{2}\/)/;
@@ -101,6 +102,8 @@ export const devServer = (): Handler => {
 				return handleFootballMatchListPage(req, res, next);
 			case 'FootballTablesPage':
 				return handleFootballTablesPage(req, res, next);
+			case 'CricketMatchPage':
+				return handleCricketMatchPage(req, res, next);
 			default: {
 				// Do not redirect assets urls
 				if (req.url.match(ASSETS_URL)) return next();

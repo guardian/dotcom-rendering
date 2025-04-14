@@ -1,39 +1,43 @@
 import type { RequestHandler } from 'express';
-import type {
-	FootballMatchListPage,
-	FootballTablesPage,
-	Region,
-} from '../footballDataPage';
-import type { FootballMatchKind } from '../footballMatches';
+import { parse as parseCricketMatch } from '../cricketMatch';
 import {
 	getParserErrorMessage,
 	parse as parseFootballMatches,
 } from '../footballMatches';
 import { parse as parseFootballTables } from '../footballTables';
+import type { FECricketMatchPage } from '../frontend/feCricketMatchPage';
 import type { FEFootballCompetition } from '../frontend/feFootballDataPage';
 import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
 import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import { Pillar } from '../lib/articleFormat';
 import { extractNAV } from '../model/extract-nav';
 import {
+	validateAsCricketMatchPageType,
 	validateAsFootballMatchListPage,
 	validateAsFootballTablesPage,
 } from '../model/validate';
+import type {
+	CricketMatchPage,
+	FootballMatchListPage,
+	FootballMatchListPageKind,
+	FootballTablesPage,
+	Region,
+} from '../sportDataPage';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
-import { renderFootballPage } from './render.footballDataPage.web';
+import { renderSportPage } from './render.sportDataPage.web';
 
-const decidePageKind = (pageId: string): FootballMatchKind => {
+const decideMatchListPageKind = (pageId: string): FootballMatchListPageKind => {
 	if (pageId.includes('live')) {
-		return 'Live';
+		return 'FootballLiveScores';
 	}
 
 	if (pageId.includes('results')) {
-		return 'Result';
+		return 'FootballResults';
 	}
 
 	if (pageId.includes('fixtures')) {
-		return 'Fixture';
+		return 'FootballFixtures';
 	}
 
 	throw new Error('Could not determine football page kind');
@@ -83,7 +87,7 @@ const parseFEFootballMatchList = (
 	return {
 		matchesList: parsedMatchesList.value,
 		now: new Date().toISOString(),
-		kind: decidePageKind(data.config.pageId),
+		kind: decideMatchListPageKind(data.config.pageId),
 		nextPage: data.nextPage,
 		previousPage: data.previousPage,
 		regions: parseFEFootballCompetitionRegions(data.filters),
@@ -107,7 +111,7 @@ export const handleFootballMatchListPage: RequestHandler = ({ body }, res) => {
 		validateAsFootballMatchListPage(body);
 
 	const parsedFootballData = parseFEFootballMatchList(footballDataValidated);
-	const { html, prefetchScripts } = renderFootballPage(parsedFootballData);
+	const { html, prefetchScripts } = renderSportPage(parsedFootballData);
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
@@ -124,7 +128,7 @@ const parseFEFootballTables = (
 
 	return {
 		tables: parsedFootballTables.value,
-		kind: 'Tables',
+		kind: 'FootballTables',
 		regions: parseFEFootballCompetitionRegions(data.filters),
 		nav: {
 			...extractNAV(data.nav),
@@ -148,8 +152,46 @@ export const handleFootballTablesPage: RequestHandler = ({ body }, res) => {
 	const parsedFootballTableData = parseFEFootballTables(
 		footballTablesPageValidated,
 	);
-	const { html, prefetchScripts } = renderFootballPage(
-		parsedFootballTableData,
+	const { html, prefetchScripts } = renderSportPage(parsedFootballTableData);
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
+};
+
+const parseFECricketMatch = (data: FECricketMatchPage): CricketMatchPage => {
+	const parsedCricketMatch = parseCricketMatch(data.cricketMatch);
+
+	if (parsedCricketMatch.kind === 'error') {
+		throw new Error(
+			`Failed to parse cricket match: ${parsedCricketMatch.error.kind} ${parsedCricketMatch.error.message}`,
+		);
+	}
+
+	return {
+		match: parsedCricketMatch.value,
+		kind: 'CricketMatch',
+		nav: {
+			...extractNAV(data.nav),
+			selectedPillar: Pillar.Sport,
+		},
+		editionId: data.editionId,
+		guardianBaseURL: data.guardianBaseURL,
+		config: data.config,
+		pageFooter: data.pageFooter,
+		isAdFreeUser: data.isAdFreeUser,
+		canonicalUrl: data.canonicalUrl,
+		contributionsServiceUrl: data.contributionsServiceUrl,
+	};
+};
+
+export const handleCricketMatchPage: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('CricketMatchPage', 'web');
+
+	const cricketMatchPageValidated: FECricketMatchPage =
+		validateAsCricketMatchPageType(body);
+
+	const parsedCricketMatchData = parseFECricketMatch(
+		cricketMatchPageValidated,
 	);
+
+	const { html, prefetchScripts } = renderSportPage(parsedCricketMatchData);
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
