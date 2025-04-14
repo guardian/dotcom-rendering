@@ -63,7 +63,7 @@ export const CricketScorecardPage = ({ match, guardianBaseUrl }: Props) => (
 		<div
 			css={css`
 				${grid.column.centre}
-				grid-row: 3;
+				grid-row: 2;
 				${from.leftCol} {
 					${grid.between('left-column-start', 'centre-column-end')}
 				}
