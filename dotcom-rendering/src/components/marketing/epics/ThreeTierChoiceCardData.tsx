@@ -25,7 +25,7 @@ export const ChoiceCardTestData_REGULAR = (
 			discount?: number,
 		): JSX.Element | string => {
 			if (!isUndefined(discount)) {
-				return isDiscountActive ? (
+				return (
 					<>
 						Support{' '}
 						<s>
@@ -34,16 +34,6 @@ export const ChoiceCardTestData_REGULAR = (
 						</s>{' '}
 						{currencySymbol}
 						{amount * (1 - discount)}/year{' '}
-					</>
-				) : (
-					<>
-						Support{' '}
-						<s>
-							{currencySymbol}
-							{amount}
-						</s>{' '}
-						{currencySymbol}
-						{amount * (1 - discount)}/month{' '}
 					</>
 				);
 			} else {

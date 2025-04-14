@@ -244,7 +244,7 @@ export const ThreeTierChoiceCards = ({
 									position: relative;
 								`}
 							>
-								{hasDiscount && countryCode !== 'US' && (
+								{hasDiscount && (
 									<DiscountedPill
 										discount={supporterPlusDiscount * 100}
 									/>
