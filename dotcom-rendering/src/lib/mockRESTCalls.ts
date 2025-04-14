@@ -214,6 +214,35 @@ export const mockFetch: typeof global.fetch = (
 		case /.*ophan\.theguardian\.com\/img\/.*/.test(url):
 			return createMockResponse(200);
 
+		// LatestLinks mock (for e.g., /live-blog/test.json?rendered=false)
+		case /.*api\.nextgen\.guardianapps\.co\.uk\/.*\.json\?rendered=false/.test(
+			url,
+		):
+			return createMockResponse(200, {
+				blocks: [
+					{
+						id: 'block-1',
+						title: '',
+						publishedDateTime: Date.now(),
+						lastUpdatedDateTime: Date.now(),
+						body: 'This is the first mocked live update.',
+					},
+					{
+						id: 'block-2',
+						title: '',
+						publishedDateTime: Date.now(),
+						lastUpdatedDateTime: Date.now(),
+						body: 'Another mocked update just in.',
+					},
+					{
+						id: 'block-3',
+						title: '',
+						publishedDateTime: Date.now(),
+						lastUpdatedDateTime: Date.now(),
+						body: 'A third update to test spacing.',
+					},
+				],
+			});
 		// Return an error response if the request body includes the
 		// phrase 'example.com', otherwise, return a success response.
 		// For use on stories and tests involving posts to the '/email/many'
