@@ -48,7 +48,7 @@ export const ScrollableSmall = ({
 		<ScrollableCarousel
 			carouselLength={stackedTrails.length}
 			visibleCardsOnMobile={1}
-			visibleCardsOnTablet={2}
+			visibleCardsOnTablet={stackedTrails.length > 1 ? 2 : 1}
 			sectionId={sectionId}
 		>
 			{stackedTrails.map((column, index) => {
