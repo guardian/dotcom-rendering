@@ -41,7 +41,6 @@
 		}
 	],
 	"name": "The Guardian",
-	"scope": "https://www.theguardian.com/",
-	"start_url": "https://www.theguardian.com/",
+	"scope": "/",
 	"theme_color": "#052962"
 }
