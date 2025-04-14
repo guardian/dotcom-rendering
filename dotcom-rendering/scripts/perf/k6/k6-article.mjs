@@ -2,7 +2,8 @@ import { check } from 'k6';
 import { SharedArray } from 'k6/data';
 import http from 'k6/http';
 
-const PORT = 3030;
+// assumes the prod server is running on localhost:9000
+const PORT = 9000;
 
 /** @type {import('k6/data').SharedArray} */
 const jsonPayload = new SharedArray('jsonPayload', function () {
