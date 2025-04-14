@@ -36,14 +36,6 @@ type ArticleProps = MatchStatsData & {
 
 type Props = ArticleProps | MatchSummaryProps;
 
-//For these three tournaments, we only get data for live goals, bookings and substitutions, and no other type of match stats
-const omitStatsTeams = [
-	"Women's Nations League",
-	'Europa Conference League',
-	"Women's FA Cup",
-	'Copa America',
-];
-
 const StatsGrid = ({
 	children,
 	format,
@@ -357,9 +349,18 @@ const DecideDoughnut = ({
 	}
 };
 
+/*
+	Some leagues do not return match stats - see
+	https://github.com/guardian/frontend/blob/e046d4144d0001059156f402fd5cf1af29ee9f0c/sport/app/football/controllers/MatchController.scala#L23
+*/
+function teamHasStats({ shotsOff, shotsOn, fouls, corners }: TeamType) {
+	return !(shotsOff === 0 && shotsOn === 0 && fouls === 0 && corners === 0);
+}
+
 export const MatchStats = (props: Props) => {
-	const { home, away, competition, usage } = props;
-	const showStats = !omitStatsTeams.includes(competition);
+	const { home, away, usage } = props;
+	const showStats = teamHasStats(home) && teamHasStats(away);
+
 	const format = usage === 'Article' ? props.format : undefined;
 	const backgroundColour =
 		usage === 'Article'
