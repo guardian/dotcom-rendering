@@ -61,7 +61,7 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 	// Check the dates
 	const isDiscountActive =
 		(hasPromoCodeInUrl &&
-			now >= new Date('2025-04-11T00:00:01') &&
+			now >= new Date('2025-04-15T00:00:01') &&
 			now < new Date('2025-04-21T23:59:59')) ??
 		false;
 
