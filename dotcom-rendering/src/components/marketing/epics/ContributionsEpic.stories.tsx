@@ -349,6 +349,25 @@ export const WithThreeTierDiscountChoiceCards: Story = {
 	},
 };
 
+export const WithThreeTierDiscountChoiceCardsNonUS: Story = {
+	name: 'ContributionsEpic with discounted three tier choice cards For Non US',
+	args: {
+		...meta.args,
+		countryCode: 'GB',
+		variant: {
+			...props.variant,
+			name: 'THREE_TIER_CHOICE_CARDS',
+			secondaryCta: undefined,
+			showChoiceCards: true,
+			cta: {
+				text: 'Support the Guardian',
+				baseUrl:
+					'https://support.theguardian.com/uk/contribute?promoCode=30OFFAPRIL',
+			},
+		},
+	},
+};
+
 export const WithChoiceCardsAndSignInLink: Story = {
 	name: 'ContributionsEpic with choice cards and sign-in link',
 	args: {

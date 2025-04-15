@@ -150,6 +150,7 @@ interface ContributionsEpicButtonsProps {
 	amountsTestName?: string;
 	amountsVariantName?: string;
 	numArticles: number;
+	isDiscountActive?: boolean;
 }
 
 export const ContributionsEpicButtons = ({
@@ -165,6 +166,7 @@ export const ContributionsEpicButtons = ({
 	amountsTestName,
 	amountsVariantName,
 	numArticles,
+	isDiscountActive,
 }: ContributionsEpicButtonsProps): JSX.Element | null => {
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
@@ -187,6 +189,7 @@ export const ContributionsEpicButtons = ({
 	}
 
 	const getChoiceCardCta = (cta: Cta): Cta => {
+		const countryGroupId = countryCodeToCountryGroupId(countryCode);
 		if (showChoiceCards) {
 			if (threeTierChoiceCardSelectedProduct === 'OneOff') {
 				return {
@@ -194,9 +197,25 @@ export const ContributionsEpicButtons = ({
 					baseUrl: addChoiceCardsOneTimeParams(cta.baseUrl),
 				};
 			}
+			if (isDiscountActive) {
+				const contributionAmount =
+					threeTierChoiceCardSelectedProduct === 'SupporterPlus'
+						? threeTierChoiceCardAmounts['Annual'][countryGroupId]
+								.SupporterPlus
+						: undefined;
+
+				return {
+					text: cta.text,
+					baseUrl: addChoiceCardsProductParams(
+						cta.baseUrl,
+						threeTierChoiceCardSelectedProduct,
+						'Annual',
+						contributionAmount,
+					),
+				};
+			}
 
 			/** Contribution amount is variable, unlike the SupporterPlus amount which is fixed */
-			const countryGroupId = countryCodeToCountryGroupId(countryCode);
 			const contributionAmount =
 				threeTierChoiceCardSelectedProduct === 'Contribution'
 					? threeTierChoiceCardAmounts['Monthly'][countryGroupId]

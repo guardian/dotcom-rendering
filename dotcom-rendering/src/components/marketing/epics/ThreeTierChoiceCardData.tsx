@@ -3,11 +3,14 @@ import type { ChoiceInfo } from './ThreeTierChoiceCards';
 
 export const ChoiceCardTestData_REGULAR = (
 	longerBenefits: boolean,
+	isDiscountActive: boolean,
 ): ChoiceInfo[] => [
 	{
 		supportTier: 'Contribution',
 		label: (amount: number, currencySymbol: string): string =>
-			`Support ${currencySymbol}${amount}/month`,
+			isDiscountActive
+				? `Support ${currencySymbol}${amount}/year`
+				: `Support ${currencySymbol}${amount}/month`,
 		benefitsLabel: 'Support',
 		benefits: () => [
 			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
@@ -30,7 +33,7 @@ export const ChoiceCardTestData_REGULAR = (
 							{amount}
 						</s>{' '}
 						{currencySymbol}
-						{amount * discount}/month{' '}
+						{amount * (1 - discount)}/year{' '}
 					</>
 				);
 			} else {
