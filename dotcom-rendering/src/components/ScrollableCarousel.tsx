@@ -11,6 +11,7 @@ type Props = {
 	visibleCardsOnMobile: number;
 	visibleCardsOnTablet: number;
 	sectionId?: string;
+	shouldStackCards?: { desktop: boolean; mobile: boolean };
 };
 
 /**
@@ -103,6 +104,20 @@ const itemStyles = css`
 	}
 `;
 
+const stackedCardRowsStyles = ({
+	mobile,
+	desktop,
+}: {
+	mobile: boolean;
+	desktop: boolean;
+}) => css`
+	grid-template-rows: ${mobile ? `1fr 1fr` : `1fr`};
+	${from.tablet} {
+		grid-auto-flow: row;
+		grid-template-rows: ${desktop ? `1fr 1fr` : `1fr`};
+	}
+`;
+
 /**
  * Generates CSS styles for a grid layout used in a carousel.
  *
@@ -168,6 +183,7 @@ export const ScrollableCarousel = ({
 	visibleCardsOnMobile,
 	visibleCardsOnTablet,
 	sectionId,
+	shouldStackCards = { desktop: false, mobile: false },
 }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
@@ -253,6 +269,7 @@ export const ScrollableCarousel = ({
 						visibleCardsOnMobile,
 						visibleCardsOnTablet,
 					),
+					stackedCardRowsStyles(shouldStackCards),
 				]}
 				data-heatphan-type="carousel"
 			>
