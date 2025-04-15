@@ -1,39 +1,36 @@
 import { Option, Select } from '@guardian/source/react-components';
-import type { Region } from '../footballDataPage';
-import type { FootballMatchKind } from '../footballMatches';
 import { palette } from '../palette';
-
-type FootballSelectKind = FootballMatchKind | 'Tables';
+import type { FootballPageKind, Region } from '../sportDataPage';
 
 type Props = {
 	regions: Region[];
-	kind: FootballSelectKind;
+	kind: FootballPageKind;
 	pageId: string;
 	onChange: (competitionTag: string) => void;
 };
 
-const allLabel = (kind: FootballSelectKind): string => {
+const allLabel = (kind: FootballPageKind): string => {
 	switch (kind) {
-		case 'Fixture':
+		case 'FootballFixtures':
 			return 'All fixtures';
-		case 'Result':
+		case 'FootballResults':
 			return 'All results';
-		case 'Live':
+		case 'FootballLiveScores':
 			return 'All live';
-		case 'Tables':
+		case 'FootballTables':
 			return 'All tables';
 	}
 };
 
-const getPagePath = (kind: FootballSelectKind) => {
+const getPagePath = (kind: FootballPageKind) => {
 	switch (kind) {
-		case 'Fixture':
+		case 'FootballFixtures':
 			return '/football/fixtures';
-		case 'Live':
+		case 'FootballLiveScores':
 			return '/football/live';
-		case 'Result':
+		case 'FootballResults':
 			return '/football/results';
-		case 'Tables':
+		case 'FootballTables':
 			return '/football/tables';
 	}
 };

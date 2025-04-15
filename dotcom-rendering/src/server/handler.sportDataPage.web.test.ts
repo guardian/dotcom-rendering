@@ -1,4 +1,4 @@
-import { sortRegionsFunction } from './handler.footballDataPage.web';
+import { sortRegionsFunction } from './handler.sportDataPage.web';
 
 describe('sortRegionsFunction', () => {
 	it('should return Regions in expected order', () => {
