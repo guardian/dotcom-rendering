@@ -41,6 +41,7 @@ export const ScrollableSmall = ({
 			visibleCardsOnMobile={1}
 			visibleCardsOnTablet={2}
 			sectionId={sectionId}
+			shouldStackCards={{ desktop: trails.length > 2, mobile: true }}
 		>
 			{trails.map((trail) => {
 				return (
