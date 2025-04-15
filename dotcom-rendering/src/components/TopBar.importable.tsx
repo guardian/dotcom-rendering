@@ -7,7 +7,7 @@
 import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, version } from 'react';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
 import type { EditionId } from '../lib/edition';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
@@ -137,6 +137,14 @@ export const TopBar = ({
 	return (
 		<Grid type="div" hasPageSkin={hasPageSkin}>
 			<div css={topBarStyles}>
+				<code
+					css={css`
+						color: hotpink;
+					`}
+				>
+					{version}
+				</code>
+
 				<TopBarLinkContainer
 					showVerticalDivider={false}
 					alignLeft={true}
