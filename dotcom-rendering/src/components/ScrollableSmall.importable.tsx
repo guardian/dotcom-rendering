@@ -35,15 +35,17 @@ export const ScrollableSmall = ({
 	aspectRatio,
 	sectionId,
 }: Props) => {
+	const mobileBottomCards = [1, 3];
+	const desktopBottomCards = [2, 3];
 	return (
 		<ScrollableCarousel
-			carouselLength={trails.length}
+			carouselLength={trails.length % 2}
 			visibleCardsOnMobile={1}
 			visibleCardsOnTablet={2}
 			sectionId={sectionId}
 			shouldStackCards={{ desktop: trails.length > 2, mobile: true }}
 		>
-			{trails.map((trail) => {
+			{trails.map((trail, index) => {
 				return (
 					<ScrollableCarousel.Item key={trail.url}>
 						<FrontCard
@@ -65,8 +67,10 @@ export const ScrollableSmall = ({
 							aspectRatio={aspectRatio}
 							kickerText={trail.kickerText}
 							showLivePlayable={trail.showLivePlayable}
-							showTopBarDesktop={false}
-							showTopBarMobile={false}
+							showTopBarDesktop={desktopBottomCards.includes(
+								index,
+							)}
+							showTopBarMobile={mobileBottomCards.includes(index)}
 							canPlayInline={false}
 						/>
 					</ScrollableCarousel.Item>
