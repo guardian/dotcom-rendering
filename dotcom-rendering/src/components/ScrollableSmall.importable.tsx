@@ -39,7 +39,7 @@ export const ScrollableSmall = ({
 	const desktopBottomCards = [2, 3];
 	return (
 		<ScrollableCarousel
-			carouselLength={trails.length % 2}
+			carouselLength={Math.ceil(trails.length / 2)}
 			visibleCardsOnMobile={1}
 			visibleCardsOnTablet={2}
 			sectionId={sectionId}
