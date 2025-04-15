@@ -269,6 +269,7 @@ export const PullQuoteBlockComponent = ({
 				alignmentCss(role, format),
 			]}
 			data-spacefinder-role={role}
+			data-gu-name="pullquote"
 		>
 			<QuoteIcon colour={palette('--pullquote-icon')} />
 			<blockquote

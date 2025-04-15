@@ -51,7 +51,7 @@ export const CalloutBlockComponent = ({
 	const id = formId.toString();
 
 	return (
-		<>
+		<div data-gu-name="callout">
 			{!isNonCollapsible ? (
 				<aside>
 					<ExpandingWrapper
@@ -116,6 +116,6 @@ export const CalloutBlockComponent = ({
 					pageId={pageId}
 				/>
 			)}
-		</>
+		</div>
 	);
 };
