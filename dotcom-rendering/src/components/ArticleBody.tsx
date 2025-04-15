@@ -142,7 +142,8 @@ export const ArticleBody = ({
 	const language = decideLanguage(lang);
 	const languageDirection = decideLanguageDirection(isRightToLeftLang);
 	const hasObserverPublicationTag = tags.find(
-		(tag) => tag.type === 'Publication' && tag.title === 'The Observer',
+		(tag) =>
+			tag.type === 'Publication' && tag.id === 'publication/theobserver',
 	);
 	const ObserverFooter = () => {
 		return (
