@@ -22,6 +22,7 @@ import type { TagType } from '../types/tag';
 import { Island } from './Island';
 import { LiveBlogRenderer } from './LiveBlogRenderer';
 import { TableOfContents } from './TableOfContents.importable';
+import { textBlockStyles } from './TextBlockComponent';
 
 type Props = {
 	format: ArticleFormat;
@@ -140,6 +141,24 @@ export const ArticleBody = ({
 		format.design === ArticleDesign.Crossword;
 	const language = decideLanguage(lang);
 	const languageDirection = decideLanguageDirection(isRightToLeftLang);
+	const hasObserverPublicationTag = tags.find(
+		(tag) => tag.type === 'Publication' && tag.title === 'The Observer',
+	);
+	const { removeObserver = false } = switches;
+
+	const ObserverFooter = () => {
+		return (
+			<ul css={textBlockStyles(format)}>
+				<li>
+					<p>
+						This is the archive of The Observer up until 21/04/2025.
+						The Observer is now owned and operated by Tortoise
+						Media.
+					</p>
+				</li>
+			</ul>
+		);
+	};
 
 	if (
 		format.design === ArticleDesign.LiveBlog ||
@@ -233,6 +252,7 @@ export const ArticleBody = ({
 					contributionsServiceUrl={contributionsServiceUrl}
 				/>
 			</div>
+			{hasObserverPublicationTag && removeObserver && <ObserverFooter />}
 		</>
 	);
 };
