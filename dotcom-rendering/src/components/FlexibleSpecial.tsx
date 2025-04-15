@@ -104,7 +104,7 @@ const determineCardProperties = (
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
-				liveUpdatesAlignment: 'vertical',
+				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
 			};
 		case 'gigaboost':
