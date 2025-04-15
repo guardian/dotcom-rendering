@@ -56,7 +56,7 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 	] = useState<SupportTier>('SupporterPlus');
 
 	const hasPromoCodeInUrl =
-		variant.cta?.baseUrl.includes('30OFF3APRIL') ?? false;
+		variant.cta?.baseUrl.includes('30OFFAPRIL') ?? false;
 
 	// Check the dates
 	const isDiscountActive =
