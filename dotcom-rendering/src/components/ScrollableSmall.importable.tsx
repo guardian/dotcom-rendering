@@ -5,7 +5,7 @@ import type {
 	DCRFrontCard,
 } from '../types/front';
 import { FrontCard } from './FrontCard';
-import { ScrollableCarousel } from './ScrollableCarousel';
+import { ScrollableCarouselStacked } from './ScrollableCarouselStacked';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -15,7 +15,6 @@ type Props = {
 	imageLoading: 'lazy' | 'eager';
 	containerType: DCRContainerType;
 	aspectRatio: AspectRatio;
-	sectionId: string;
 };
 
 /**
@@ -33,18 +32,16 @@ export const ScrollableSmall = ({
 	imageLoading,
 	showAge,
 	aspectRatio,
-	sectionId,
 }: Props) => {
 	return (
-		<ScrollableCarousel
+		<ScrollableCarouselStacked
 			carouselLength={trails.length}
 			visibleCardsOnMobile={1}
 			visibleCardsOnTablet={2}
-			sectionId={sectionId}
 		>
 			{trails.map((trail) => {
 				return (
-					<ScrollableCarousel.Item key={trail.url}>
+					<ScrollableCarouselStacked.Item key={trail.url}>
 						<FrontCard
 							trail={trail}
 							imageLoading={imageLoading}
@@ -68,9 +65,9 @@ export const ScrollableSmall = ({
 							showTopBarMobile={false}
 							canPlayInline={false}
 						/>
-					</ScrollableCarousel.Item>
+					</ScrollableCarouselStacked.Item>
 				);
 			})}
-		</ScrollableCarousel>
+		</ScrollableCarouselStacked>
 	);
 };
