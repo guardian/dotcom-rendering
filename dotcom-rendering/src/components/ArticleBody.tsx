@@ -144,8 +144,6 @@ export const ArticleBody = ({
 	const hasObserverPublicationTag = tags.find(
 		(tag) => tag.type === 'Publication' && tag.title === 'The Observer',
 	);
-	const { removeObserver = false } = switches;
-
 	const ObserverFooter = () => {
 		return (
 			<ul css={textBlockStyles(format)}>
@@ -252,7 +250,7 @@ export const ArticleBody = ({
 					contributionsServiceUrl={contributionsServiceUrl}
 				/>
 			</div>
-			{hasObserverPublicationTag && removeObserver && <ObserverFooter />}
+			{hasObserverPublicationTag && <ObserverFooter />}
 		</>
 	);
 };
