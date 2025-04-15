@@ -113,7 +113,7 @@ const stackedCardRowsStyles = ({
 }) => css`
 	grid-template-rows: ${mobile ? `1fr 1fr` : `1fr`};
 	${from.tablet} {
-		grid-auto-flow: row;
+		grid-auto-flow: ${desktop ? `row` : `column`};
 		grid-template-rows: ${desktop ? `1fr 1fr` : `1fr`};
 	}
 `;
