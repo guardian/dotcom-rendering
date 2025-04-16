@@ -55,7 +55,7 @@ export const FollowTagStatus = ({ isFollowing, contributorName }: Props) => {
 			)}
 
 			<span>
-				{isFollowing ? 'Following' : 'Follow'} {contributorName}
+				{isFollowing ? 'Following' : 'Follow'} {contributorName} in MyGuardian
 			</span>
 		</>
 	);
