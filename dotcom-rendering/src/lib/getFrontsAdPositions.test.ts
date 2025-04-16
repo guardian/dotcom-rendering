@@ -60,14 +60,14 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'fixed/medium/slow-VI' },
 			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (8)
 			{ collectionType: 'fixed/small/slow-III' },
-			{ collectionType: 'fixed/medium/fast-XII' }, // Ad position (10)
+			{ collectionType: 'fixed/medium/fast-XII' }, // Ignored - is before merch high position
 			{ collectionType: 'fixed/small/fast-VIII' }, // Ignored - is merch high position
 			{ collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 2, 4, 6, 8, 10]);
+		expect(mobileAdPositions).toEqual([0, 2, 4, 6, 8]);
 	});
 
 	// We used https://www.theguardian.com/uk as a blueprint
@@ -79,7 +79,7 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'dynamic/slow' },
 			{ collectionType: 'fixed/small/slow-V-mpu' }, // Ad position (4)
 			{ collectionType: 'dynamic/slow' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (6)
+			{ collectionType: 'fixed/thrasher' },
 			{ collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
 			{ collectionType: 'fixed/thrasher' }, // Ad position (8)
 			{ collectionType: 'dynamic/fast' },
@@ -89,19 +89,19 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
 			{ collectionType: 'fixed/thrasher' }, // Ad position (14)
 			{ collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (16)
-			{ collectionType: 'fixed/video' },
-			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (18)
+			{ collectionType: 'fixed/thrasher' },
+			{ collectionType: 'fixed/video' }, // Ad position (17)
 			{ collectionType: 'fixed/small/slow-IV' },
-			{ collectionType: 'dynamic/slow-mpu' }, // Ad position (20)
-			{ collectionType: 'fixed/small/slow-IV' },
+			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (19)
+			{ collectionType: 'dynamic/slow-mpu' },
+			{ collectionType: 'fixed/small/slow-IV' }, // Ignored - is before merch high position
 			{ collectionType: 'fixed/medium/slow-VI' }, // Ignored - is merch high position
 			{ collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 2, 4, 6, 8, 11, 14, 16, 18, 20]);
+		expect(mobileAdPositions).toEqual([0, 2, 4, 8, 11, 14, 17, 19]);
 	});
 
 	// We used https://www.theguardian.com/international as a blueprint
@@ -116,22 +116,22 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'fixed/small/slow-IV' },
 			{ collectionType: 'dynamic/fast' }, // Ad position (7)
 			{ collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (9)
+			{ collectionType: 'fixed/thrasher' },
 			{ collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
 			{ collectionType: 'fixed/thrasher' }, // Ad position (11)
 			{ collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (13)
-			{ collectionType: 'dynamic/slow-mpu' },
-			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (15)
+			{ collectionType: 'fixed/thrasher' },
+			{ collectionType: 'dynamic/slow-mpu' }, // Ad position (14)
 			{ collectionType: 'fixed/small/slow-IV' },
-			{ collectionType: 'fixed/video' }, // Ad position (17)
+			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (16)
+			{ collectionType: 'fixed/video' },
 			{ collectionType: 'fixed/medium/slow-VI' }, // Ignored - is merch high position
 			{ collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 2, 5, 7, 9, 11, 13, 15, 17]);
+		expect(mobileAdPositions).toEqual([0, 2, 5, 7, 11, 14, 16]);
 	});
 
 	// We used https://www.theguardian.com/us as a blueprint
@@ -141,10 +141,10 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'fixed/small/slow-IV' },
 			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (2)
 			{ collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (4)
-			{ collectionType: 'dynamic/slow' },
+			{ collectionType: 'fixed/thrasher' },
+			{ collectionType: 'dynamic/slow' }, // Ad position (5)
 			{ collectionType: 'dynamic/slow' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (7)
+			{ collectionType: 'fixed/thrasher' },
 			{ collectionType: 'fixed/small/slow-III' }, // Ignored - before thrasher
 			{ collectionType: 'fixed/thrasher' }, // Ad position (9)
 			{ collectionType: 'fixed/small/slow-IV' },
@@ -162,7 +162,7 @@ describe('Mobile Ads', () => {
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 2, 4, 7, 9, 12, 14, 16]);
+		expect(mobileAdPositions).toEqual([0, 2, 5, 9, 12, 14, 16]);
 	});
 
 	// We used https://www.theguardian.com/uk/lifeandstyle as a blueprint
@@ -170,15 +170,15 @@ describe('Mobile Ads', () => {
 		const testCollections: AdCandidateMobile[] = [
 			{ collectionType: 'dynamic/slow' }, // Ad position (0)
 			{ collectionType: 'fixed/medium/slow-VI' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (2)
-			{ collectionType: 'fixed/medium/slow-VI' },
-			{ collectionType: 'fixed/small/slow-V-third' }, // Ad position (4)
+			{ collectionType: 'fixed/thrasher' },
+			{ collectionType: 'fixed/medium/slow-VI' }, // Ad position (3)
+			{ collectionType: 'fixed/small/slow-V-third' },
 			{ collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
 			{ collectionType: 'fixed/thrasher' }, // Ad position (6)
 			{ collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (8)
-			{ collectionType: 'fixed/medium/slow-VI' },
-			{ collectionType: 'fixed/medium/slow-XII-mpu' }, // Ad position (10)
+			{ collectionType: 'fixed/thrasher' },
+			{ collectionType: 'fixed/medium/slow-VI' }, // Ad position (9)
+			{ collectionType: 'fixed/medium/slow-XII-mpu' },
 			{ collectionType: 'fixed/small/fast-VIII' }, // Ignored - before thrasher
 			{ collectionType: 'fixed/thrasher' }, // Ad position (12)
 			{ collectionType: 'fixed/small/slow-III' },
@@ -188,7 +188,7 @@ describe('Mobile Ads', () => {
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 2, 4, 6, 8, 10, 12]);
+		expect(mobileAdPositions).toEqual([0, 3, 6, 9, 12]);
 	});
 
 	// We used https://www.theguardian.com/tone/recipes as a blueprint
@@ -205,14 +205,14 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'fixed/small/slow-III' },
 			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (9)
 			{ collectionType: 'fixed/small/slow-V-half' },
-			{ collectionType: 'fixed/small/slow-V-third' }, // Ad position (11)
+			{ collectionType: 'fixed/small/slow-V-third' }, // Ignored - is before merch high position
 			{ collectionType: 'fixed/small/fast-VIII' }, // Ignored - is merch high position
 			{ collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([1, 3, 5, 7, 9, 11]);
+		expect(mobileAdPositions).toEqual([1, 3, 5, 7, 9]);
 	});
 
 	it('Europe Network Front, with beta containers and more than 4 collections, with thrashers in various places', () => {

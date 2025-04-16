@@ -33,10 +33,12 @@ const getMerchHighPosition = (collections: AdCandidateMobile[]): number => {
 const isFirstContainerAndThrasher = (collectionType: string, index: number) =>
 	index === 0 && collectionType === 'fixed/thrasher';
 
-const isMerchHighPosition = (
+const isMerchHighPositionOrBefore = (
 	collectionIndex: number,
 	merchHighPosition: number,
-): boolean => collectionIndex === merchHighPosition;
+): boolean =>
+	collectionIndex === merchHighPosition ||
+	collectionIndex === merchHighPosition - 1;
 
 const isBeforeThrasher = (index: number, collections: AdCandidateMobile[]) =>
 	collections[index + 1]?.collectionType === 'fixed/thrasher';
@@ -64,7 +66,7 @@ export const removeConsecutiveAdSlotsReducer = (
 	const prevSlot = acc.at(-1);
 	if (isUndefined(prevSlot)) {
 		// Insert first slot
-		return [...acc, slotNum];
+		return [slotNum];
 	} else if (prevSlot < slotNum - 1) {
 		// If previous slot is more than 1 index away from current slot, we're happy
 		return [...acc, slotNum];
@@ -92,13 +94,13 @@ const canInsertMobileAd =
 	) => {
 		/**
 		 * Ad slots can only be inserted after positions that satisfy the following rules:
-		 * - Is NOT the slot used for the merch high position
+		 * - Is NOT the slot used for the merch high position or the slot before that
 		 * - Is NOT a thrasher if it is the first container
 		 * - Is NOT before a thrasher
 		 * - Is NOT the most viewed container
 		 */
 		const rules = [
-			!isMerchHighPosition(index, merchHighPosition), // TODO - don't allow BEFORE merch high either
+			!isMerchHighPositionOrBefore(index, merchHighPosition),
 			!isFirstContainerAndThrasher(collection.collectionType, index),
 			!isBeforeThrasher(index, collections),
 			!isMostViewedContainer(collection),
@@ -119,6 +121,9 @@ const canInsertMobileAd =
 			: rules.every(Boolean);
 	};
 
+const isEvenIndex = (_collection: unknown, index: number): boolean =>
+	index % 2 === 0;
+
 /**
  * Filters out unsuitable positions then takes every other position for possible ad insertion,
  * up to a maximum of `MAX_FRONTS_MOBILE_ADS`
@@ -127,12 +132,26 @@ const getMobileAdPositions = (collections: AdCandidateMobile[]): number[] => {
 	const merchHighPosition = getMerchHighPosition(collections);
 	const hasSecondaryContainers = hasSecondaryLevelContainers(collections);
 
-	return collections
-		.filter(canInsertMobileAd(merchHighPosition, hasSecondaryContainers))
-		.map((collection) => collections.indexOf(collection))
-		.filter((adPosition: number) => adPosition !== -1)
-		.reduce(removeConsecutiveAdSlotsReducer, [])
-		.slice(0, MAX_FRONTS_MOBILE_ADS);
+	return (
+		collections
+			.filter(
+				canInsertMobileAd(merchHighPosition, hasSecondaryContainers),
+			)
+			// Use every other ad position if the front has no secondary containers
+			.filter((c, i) =>
+				hasSecondaryContainers ? true : isEvenIndex(c, i),
+			)
+			.map((collection) => collections.indexOf(collection))
+			.filter((adPosition: number) => adPosition !== -1)
+			// Avoid consecutive ad slots if the front does have secondary containers
+			.reduce(
+				hasSecondaryContainers
+					? removeConsecutiveAdSlotsReducer
+					: (acc: number[], el: number) => [...acc, el], // returns the original array
+				[],
+			)
+			.slice(0, MAX_FRONTS_MOBILE_ADS)
+	);
 };
 
 /**
@@ -347,7 +366,7 @@ const getFrontsBannerAdPositions = (
 	).adPositions;
 
 export {
-	isMerchHighPosition,
+	isEvenIndex,
 	getMerchHighPosition,
 	getMobileAdPositions,
 	getFrontsBannerAdPositions,
