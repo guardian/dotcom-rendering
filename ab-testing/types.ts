@@ -4,7 +4,8 @@ type TestName = `${Team}-${string}`;
 
 type TestGroup = {
 	id: String;
-	size: number; // Percentage?
+	/** Percentage of users in this group */
+	size: number;
 };
 
 export type ABTest = {
@@ -28,9 +29,6 @@ export type ABTest = {
 	controlGroup: TestGroup;
 	/** Variants group definition */
 	variantGroups: Array<TestGroup>;
-	/**
-	 * We either need to specify an offset for our test, or we would
-	 * specify the test buckets used for the whole test.
-	 */
-	offset: number;
+	/** Can this test overlap other tests? Required for 100% tests */
+	allowOverlap?: boolean;
 };
