@@ -95,5 +95,5 @@ export const handleAMPArticle: RequestHandler = ({ body }, res, next) => {
 
 export const handlePerfTest: RequestHandler = (req, res, next) => {
 	req.body = ExampleArticle;
-	handleAMPArticle(req, res, next);
+	void handleAMPArticle(req, res, next);
 };
