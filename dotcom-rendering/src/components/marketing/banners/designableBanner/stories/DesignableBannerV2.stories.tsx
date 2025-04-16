@@ -1,12 +1,19 @@
+import {
+	TickerCountType,
+	TickerEndType,
+} from '@guardian/support-dotcom-components';
 import type {
 	BannerDesignImage,
 	SelectedAmountsVariant,
+	TickerSettings,
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
 import { DesignableBannerUnvalidatedV2 as DesignableBannerV2 } from '../../../banners/designableBanner/DesignableBannerV2';
 import {
+	contentNoHeading,
 	design,
+	mobileContentNoHeading,
 	props,
 	stringToHexColour,
 	tracking,
@@ -76,8 +83,35 @@ const headerImage: BannerDesignImage = {
 	altText: "Guardian: Our Planet can't Speak for itself",
 };
 
+const regularImage: BannerDesignImage = {
+	kind: 'Image',
+	mobileUrl:
+		'https://i.guim.co.uk/img/media/630a3735c02e195be89ab06fd1b8192959e282ab/0_0_1172_560/500.png?width=500&quality=75&s=937595b3f471d6591475955335c7c023',
+	tabletUrl:
+		'https://i.guim.co.uk/img/media/20cc6e0fa146574bb9c4ed410ac1a089fab02ce0/0_0_1428_1344/500.png?width=500&quality=75&s=fe64f647f74a3cb671f8035a473b895f',
+	desktopUrl:
+		'https://i.guim.co.uk/img/media/6c933a058d1ce37a5ad17f79895906150812dfee/0_0_1768_1420/500.png?width=500&quality=75&s=9277532ddf184a308e14218e3576543b',
+	altText: 'Example alt text',
+};
+
+const tickerSettings: TickerSettings = {
+	endType: TickerEndType.unlimited,
+	countType: TickerCountType.money,
+	currencySymbol: '£',
+	copy: {
+		countLabel: '',
+		goalReachedPrimary: '',
+		goalReachedSecondary: '',
+	},
+	tickerData: {
+		total: 500000,
+		goal: 1000000,
+	},
+	name: 'US',
+};
+
 export const WithThreeTierChoiceCards: Story = {
-	name: 'DesignableBanner with three tier choice cards',
+	name: 'With three tier choice cards',
 	args: {
 		...meta.args,
 		design: {
@@ -113,5 +147,103 @@ export const ThreeTierChoiceCardsWithHeaderImageAndCopy: Story = {
 			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
 		},
 		choiceCardAmounts: regularChoiceCardAmounts,
+	},
+};
+
+export const HeaderImageOnly: Story = {
+	name: 'Header image and no header copy',
+	args: {
+		...meta.args,
+		content: contentNoHeading,
+		mobileContent: mobileContentNoHeading,
+		design: {
+			...design,
+			headerImage,
+			visual: {
+				kind: 'ChoiceCards',
+				buttonColour: stringToHexColour('E5E5E5'),
+			},
+			tracking: {
+				...tracking,
+				abTestVariant: 'THREE_TIER_CHOICE_CARDS',
+			},
+			colours: {
+				...design.colours,
+				basic: {
+					...design.colours.basic,
+					background: stringToHexColour('FFFFFF'),
+				},
+			},
+		},
+		choiceCardAmounts: regularChoiceCardAmounts,
+	},
+};
+
+export const MainImage: Story = {
+	name: 'Main image',
+	args: {
+		...meta.args,
+		design: {
+			...design,
+			visual: regularImage,
+		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
+		},
+		choiceCardAmounts: regularChoiceCardAmounts,
+	},
+};
+
+export const WithTickerAndThreeTierChoiceCards: Story = {
+	name: 'Ticker and three tier choice cards',
+	args: {
+		...meta.args,
+		tickerSettings,
+		design: {
+			...design,
+			visual: {
+				kind: 'ChoiceCards',
+				buttonColour: stringToHexColour('E5E5E5'),
+			},
+		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
+		},
+		choiceCardAmounts: regularChoiceCardAmounts,
+	},
+};
+
+export const WithThreeTierChoiceCardsAndArticleCount: Story = {
+	name: 'Article count and three tier choice cards',
+	args: {
+		...meta.args,
+		separateArticleCountSettings: {
+			type: 'above',
+		},
+		design: {
+			...design,
+			visual: {
+				kind: 'ChoiceCards',
+				buttonColour: stringToHexColour('E5E5E5'),
+			},
+		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
+		},
+		choiceCardAmounts: regularChoiceCardAmounts,
+	},
+};
+
+export const NoChoiceCardOrImage: Story = {
+	name: 'No choice cards or image',
+	args: {
+		...meta.args,
+		design: {
+			...design,
+			visual: undefined,
+		},
 	},
 };
