@@ -4,14 +4,11 @@ import {
 	EventTimer,
 	initCommercialMetrics,
 } from '@guardian/commercial';
-import {
-	bypassCoreWebVitalsSampling,
-	initCoreWebVitals,
-} from '@guardian/core-web-vitals';
 import { getCookie, isString, isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
 import { adBlockAsk } from '../experiments/tests/ad-block-ask';
 import { integrateIma } from '../experiments/tests/integrate-ima';
+import { bypassCoreWebVitalsSampling, initCoreWebVitals } from '../lib/cwv/cwv';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useDetectAdBlock } from '../lib/useDetectAdBlock';
