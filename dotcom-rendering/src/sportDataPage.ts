@@ -1,4 +1,5 @@
 import type { CricketMatch } from './cricketMatch';
+import type { FootballMatch } from './footballMatch';
 import type { FootballMatches } from './footballMatches';
 import type { FootballTableCompetitions } from './footballTables';
 import type { FESportPageConfig } from './frontend/feFootballDataPage';
@@ -42,6 +43,11 @@ export type FootballTablesPage = FootballData & {
 export type CricketMatchPage = SportPageConfig & {
 	match: CricketMatch;
 	kind: 'CricketMatch';
+};
+
+export type FootballMatchSummaryPage = SportPageConfig & {
+	match: FootballMatch;
+	kind: 'MatchSummary';
 };
 
 export type FootballMatchListPageKind = FootballMatchListPage['kind'];

@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
+import type { FootballTeam } from '../footballMatch';
 import { grid } from '../grid';
 import { palette } from '../palette';
-import type { TeamType } from '../types/sport';
 import { MatchNav } from './MatchNav';
 import { MatchStats } from './MatchStats';
 
@@ -27,8 +27,8 @@ const gridStyles = css`
 `;
 
 type Props = {
-	homeTeam: TeamType;
-	awayTeam: TeamType;
+	homeTeam: FootballTeam;
+	awayTeam: FootballTeam;
 	comments?: string;
 	competition: string;
 };
