@@ -58,11 +58,14 @@ export const ChoiceCardTestData_REGULAR = (
 
 export const ChoiceCardTestData_US = (
 	longerBenefits: boolean,
+	isDiscountActive: boolean,
 ): ChoiceInfo[] => [
 	{
 		supportTier: 'Contribution',
 		label: (amount: number, currencySymbol: string): string =>
-			`Support ${currencySymbol}${amount}/month`,
+			isDiscountActive
+				? `Support ${currencySymbol}${amount}/year`
+				: `Support ${currencySymbol}${amount}/month`,
 		benefitsLabel: 'Support',
 		benefits: () => [
 			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
@@ -71,8 +74,27 @@ export const ChoiceCardTestData_US = (
 	},
 	{
 		supportTier: 'SupporterPlus',
-		label: (amount: number, currencySymbol: string): string =>
-			`Support ${currencySymbol}${amount}/month`,
+		label: (
+			amount: number,
+			currencySymbol: string,
+			discount?: number,
+		): JSX.Element | string => {
+			if (!isUndefined(discount)) {
+				return (
+					<>
+						Support{' '}
+						<s>
+							{currencySymbol}
+							{amount}
+						</s>{' '}
+						{currencySymbol}
+						{amount * (1 - discount)}/year{' '}
+					</>
+				);
+			} else {
+				return `Support ${currencySymbol}${amount}/month`;
+			}
+		},
 		benefitsLabel: 'All-access digital',
 		benefits: () =>
 			longerBenefits
