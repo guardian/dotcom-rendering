@@ -28,6 +28,7 @@ export type FootballTeam = {
 	corners: number;
 	fouls: number;
 	colours: string;
+	// ToDo: this needs to be optional
 	score: number;
 	crest: string;
 	scorers: string[];
@@ -47,7 +48,7 @@ export type FootballPlayer = {
 export type FootballMatch = {
 	homeTeam: FootballTeam;
 	awayTeam: FootballTeam;
-	comment: string;
+	comments: string;
 };
 
 type UnknownEventType = {
@@ -141,6 +142,6 @@ export const parse = (
 	return ok({
 		homeTeam: parsedHomeTeam.value,
 		awayTeam: parsedAwayTeam.value,
-		comment: feFootballMatch.comment,
+		comments: feFootballMatch.comment,
 	});
 };

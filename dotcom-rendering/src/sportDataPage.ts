@@ -47,16 +47,24 @@ export type CricketMatchPage = SportPageConfig & {
 
 export type FootballMatchSummaryPage = SportPageConfig & {
 	match: FootballMatch;
-	kind: 'MatchSummary';
+	kind: 'FootballMatchSummary';
 };
 
 export type FootballMatchListPageKind = FootballMatchListPage['kind'];
-export type FootballPageKind =
+export type FootballPageWithRegionsKind =
 	| FootballTablesPage['kind']
 	| FootballMatchListPageKind;
 
-export type SportPageKind = FootballPageKind | CricketMatchPage['kind'];
+export type SportPageKind =
+	| FootballPageWithRegionsKind
+	| CricketMatchPage['kind']
+	| FootballMatchSummaryPage['kind'];
 
-export type FootballDataPage = FootballMatchListPage | FootballTablesPage;
+export type FootballDataWithRegionsPage =
+	| FootballMatchListPage
+	| FootballTablesPage;
 
-export type SportDataPage = FootballDataPage | CricketMatchPage;
+export type SportDataPage =
+	| FootballDataWithRegionsPage
+	| CricketMatchPage
+	| FootballMatchSummaryPage;
