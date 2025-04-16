@@ -22,6 +22,7 @@ import {
 import {
 	handleCricketMatchPage,
 	handleFootballMatchListPage,
+	handleFootballMatchPage,
 	handleFootballTablesPage,
 } from './handler.sportDataPage.web';
 
@@ -104,6 +105,8 @@ export const devServer = (): Handler => {
 				return handleFootballTablesPage(req, res, next);
 			case 'CricketMatchPage':
 				return handleCricketMatchPage(req, res, next);
+			case 'FootballMatchSummaryPage':
+				return handleFootballMatchPage(req, res, next);
 			default: {
 				// Do not redirect assets urls
 				if (req.url.match(ASSETS_URL)) return next();
