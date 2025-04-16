@@ -11,9 +11,8 @@ const ABTests: ABTest[] = [
 		expirationDate: new Date('2025-05-31'),
 		type: 'client',
 		highImpact: false,
-		controlGroup: { id: 'control-1', size: 0.9 },
-		variantGroups: [{ id: 'variant-1', size: 0.1 }],
-		offset: 0.1,
+		controlGroup: { id: 'control', size: 5 / 100 },
+		variantGroups: [{ id: 'variant', size: 5 / 100 }],
 	},
 	// Example server side AB test definition
 	{
@@ -28,8 +27,8 @@ const ABTests: ABTest[] = [
 		expirationDate: new Date('2025-04-02'),
 		type: 'server',
 		highImpact: false,
-		controlGroup: { id: 'control', size: 0.5 },
-		variantGroups: [{ id: 'variant', size: 0.5 }],
-		offset: 0,
+		controlGroup: { id: 'control', size: 50 / 100 },
+		variantGroups: [{ id: 'variant', size: 50 / 100 }],
+		allowOverlap: true,
 	},
 ];
