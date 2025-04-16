@@ -72,6 +72,7 @@ This config:
 		highImpact: false,
 		controlGroup: { id: 'control', size: 50 / 100 },
 		variantGroups: [{ id: 'variant', size: 50 / 100 }],
+		allowOverlap: true,
 	},
 	// Example server side AB test definition
 	{
@@ -96,34 +97,33 @@ Could result in the following key-values to be stored in the dictionary:
 | key | value |
 | -------- | ------- |
 | client-bucket-0 | commercial-ad-block-ask:control,commercial-some-100-perc-test:control |
-| client-bucket-1 | commercial-ad-block-ask:variant,commercial-some-100-perc-test:control |
+| client-bucket-1 | commercial-ad-block-ask:variant,commercial-some-100-perc-test:variant |
 | client-bucket-2 | commercial-ad-block-ask:control,commercial-some-100-perc-test:control |
-| client-bucket-3 | commercial-ad-block-ask:variant,commercial-some-100-perc-test:control |
+| client-bucket-3 | commercial-ad-block-ask:variant,commercial-some-100-perc-test:variant |
 | client-bucket-4 | commercial-ad-block-ask:control,commercial-some-100-perc-test:control |
-| client-bucket-5 | commercial-ad-block-ask:variant,commercial-some-100-perc-test:control |
+| client-bucket-5 | commercial-ad-block-ask:variant,commercial-some-100-perc-test:variant |
 | client-bucket-6 | commercial-ad-block-ask:control,commercial-some-100-perc-test:control |
-| client-bucket-7 | commercial-ad-block-ask:variant,commercial-some-100-perc-test:control |
+| client-bucket-7 | commercial-ad-block-ask:variant,commercial-some-100-perc-test:variant |
 | client-bucket-8 | commercial-ad-block-ask:control,commercial-some-100-perc-test:control |
-| client-bucket-9 | commercial-ad-block-ask:variant,commercial-some-100-perc-test:control |
+| client-bucket-9 | commercial-ad-block-ask:variant,commercial-some-100-perc-test:variant |
 | client-bucket-10 | commercial-some-other-test:control,commercial-some-100-perc-test:control |
-| client-bucket-11 | commercial-some-other-test:variant,commercial-some-100-perc-test:control |
+| client-bucket-11 | commercial-some-other-test:variant,commercial-some-100-perc-test:variant |
 | client-bucket-12 | commercial-some-other-test:control,commercial-some-100-perc-test:control |
-| client-bucket-13 | commercial-some-other-test:variant,commercial-some-100-perc-test:control |
+| client-bucket-13 | commercial-some-other-test:variant,commercial-some-100-perc-test:variant |
 | client-bucket-14 | commercial-some-other-test:control,commercial-some-100-perc-test:control |
-| client-bucket-15 | commercial-some-other-test:variant,commercial-some-100-perc-test:control |
+| client-bucket-15 | commercial-some-other-test:variant,commercial-some-100-perc-test:variant |
 | client-bucket-16 | commercial-some-other-test:control,commercial-some-100-perc-test:control |
-| client-bucket-17 | commercial-some-other-test:variant,commercial-some-100-perc-test:control |
+| client-bucket-17 | commercial-some-other-test:variant,commercial-some-100-perc-test:variant |
 | client-bucket-18 | commercial-some-other-test:control,commercial-some-100-perc-test:control |
-| client-bucket-19 | commercial-some-other-test:variant,commercial-some-100-perc-test:control |
+| client-bucket-19 | commercial-some-other-test:variant,commercial-some-100-perc-test:variant |
 | client-bucket-20 | commercial-some-100-perc-test:control |
-| client-bucket-21 | commercial-some-100-perc-test:control |
+| client-bucket-21 | commercial-some-100-perc-test:variant |
 | client-bucket-22 | commercial-some-100-perc-test:control |
-| client-bucket-23 | commercial-some-100-perc-test:control |
+| client-bucket-23 | commercial-some-100-perc-test:variant |
 | ... | |
-| client-bucket-95 | commercial-some-100-perc-test:variant |
-| client-bucket-96 | commercial-some-100-perc-test:variant |
+| client-bucket-96 | commercial-some-100-perc-test:control |
 | client-bucket-97 | commercial-some-100-perc-test:variant |
-| client-bucket-98 | commercial-some-100-perc-test:variant |
+| client-bucket-98 | commercial-some-100-perc-test:control |
 | client-bucket-99 | commercial-some-100-perc-test:variant |
 | server-bucket-0 | webex-europe-beta-front:control |
 | server-bucket-1 | webex-europe-beta-front:variant |
