@@ -163,10 +163,6 @@ export const HeaderImageOnly: Story = {
 				kind: 'ChoiceCards',
 				buttonColour: stringToHexColour('E5E5E5'),
 			},
-			tracking: {
-				...tracking,
-				abTestVariant: 'THREE_TIER_CHOICE_CARDS',
-			},
 			colours: {
 				...design.colours,
 				basic: {
@@ -174,6 +170,10 @@ export const HeaderImageOnly: Story = {
 					background: stringToHexColour('FFFFFF'),
 				},
 			},
+		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
 		},
 		choiceCardAmounts: regularChoiceCardAmounts,
 	},
