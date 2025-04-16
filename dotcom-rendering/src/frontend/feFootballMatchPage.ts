@@ -1,3 +1,5 @@
+import type { FEFootballDataPage } from './feFootballDataPage';
+
 export type FEFootballPlayerEvent = {
 	eventTime: string;
 	eventType: string;
@@ -35,4 +37,8 @@ export type FEFootballMatch = {
 	homeTeam: FEFootballTeam;
 	awayTeam: FEFootballTeam;
 	comment: string;
+};
+
+export type FEFootballMatchPage = FEFootballDataPage & {
+	match: FEFootballMatch[];
 };
