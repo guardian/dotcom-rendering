@@ -8,6 +8,7 @@ import {
 	type AdCandidateMobile,
 	getFrontsBannerAdPositions,
 	getMobileAdPositions,
+	removeConsecutiveAdSlotsReducer,
 } from './getFrontsAdPositions';
 
 const defaultTestCollections: AdCandidateMobile[] = [...Array<number>(12)].map(
@@ -78,7 +79,7 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'dynamic/slow' },
 			{ collectionType: 'fixed/small/slow-V-mpu' }, // Ad position (4)
 			{ collectionType: 'dynamic/slow' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' },
+			{ collectionType: 'fixed/thrasher' }, // Ad position (6)
 			{ collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
 			{ collectionType: 'fixed/thrasher' }, // Ad position (8)
 			{ collectionType: 'dynamic/fast' },
@@ -88,19 +89,19 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
 			{ collectionType: 'fixed/thrasher' }, // Ad position (14)
 			{ collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' },
-			{ collectionType: 'fixed/video' }, // Ad position (17)
+			{ collectionType: 'fixed/thrasher' }, // Ad position (16)
+			{ collectionType: 'fixed/video' },
+			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (18)
 			{ collectionType: 'fixed/small/slow-IV' },
-			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (19)
-			{ collectionType: 'dynamic/slow-mpu' },
-			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (21)
+			{ collectionType: 'dynamic/slow-mpu' }, // Ad position (20)
+			{ collectionType: 'fixed/small/slow-IV' },
 			{ collectionType: 'fixed/medium/slow-VI' }, // Ignored - is merch high position
 			{ collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 2, 4, 8, 11, 14, 17, 19, 21]);
+		expect(mobileAdPositions).toEqual([0, 2, 4, 6, 8, 11, 14, 16, 18, 20]);
 	});
 
 	// We used https://www.theguardian.com/international as a blueprint
@@ -115,22 +116,22 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'fixed/small/slow-IV' },
 			{ collectionType: 'dynamic/fast' }, // Ad position (7)
 			{ collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' },
+			{ collectionType: 'fixed/thrasher' }, // Ad position (9)
 			{ collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
 			{ collectionType: 'fixed/thrasher' }, // Ad position (11)
 			{ collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' },
-			{ collectionType: 'dynamic/slow-mpu' }, // Ad position (14)
+			{ collectionType: 'fixed/thrasher' }, // Ad position (13)
+			{ collectionType: 'dynamic/slow-mpu' },
+			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (15)
 			{ collectionType: 'fixed/small/slow-IV' },
-			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (16)
-			{ collectionType: 'fixed/video' },
+			{ collectionType: 'fixed/video' }, // Ad position (17)
 			{ collectionType: 'fixed/medium/slow-VI' }, // Ignored - is merch high position
 			{ collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 2, 5, 7, 11, 14, 16]);
+		expect(mobileAdPositions).toEqual([0, 2, 5, 7, 9, 11, 13, 15, 17]);
 	});
 
 	// We used https://www.theguardian.com/us as a blueprint
@@ -140,10 +141,10 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'fixed/small/slow-IV' },
 			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (2)
 			{ collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' },
-			{ collectionType: 'dynamic/slow' }, // Ad position (5)
+			{ collectionType: 'fixed/thrasher' }, // Ad position (4)
+			{ collectionType: 'dynamic/slow' },
 			{ collectionType: 'dynamic/slow' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' },
+			{ collectionType: 'fixed/thrasher' }, // Ad position (7)
 			{ collectionType: 'fixed/small/slow-III' }, // Ignored - before thrasher
 			{ collectionType: 'fixed/thrasher' }, // Ad position (9)
 			{ collectionType: 'fixed/small/slow-IV' },
@@ -161,7 +162,7 @@ describe('Mobile Ads', () => {
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 2, 5, 9, 12, 14, 16]);
+		expect(mobileAdPositions).toEqual([0, 2, 4, 7, 9, 12, 14, 16]);
 	});
 
 	// We used https://www.theguardian.com/uk/lifeandstyle as a blueprint
@@ -169,15 +170,15 @@ describe('Mobile Ads', () => {
 		const testCollections: AdCandidateMobile[] = [
 			{ collectionType: 'dynamic/slow' }, // Ad position (0)
 			{ collectionType: 'fixed/medium/slow-VI' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' },
-			{ collectionType: 'fixed/medium/slow-VI' }, // Ad position (3)
-			{ collectionType: 'fixed/small/slow-V-third' },
+			{ collectionType: 'fixed/thrasher' }, // Ad position (2)
+			{ collectionType: 'fixed/medium/slow-VI' },
+			{ collectionType: 'fixed/small/slow-V-third' }, // Ad position (4)
 			{ collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
 			{ collectionType: 'fixed/thrasher' }, // Ad position (6)
 			{ collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' },
-			{ collectionType: 'fixed/medium/slow-VI' }, // Ad position (9)
-			{ collectionType: 'fixed/medium/slow-XII-mpu' },
+			{ collectionType: 'fixed/thrasher' }, // Ad position (8)
+			{ collectionType: 'fixed/medium/slow-VI' },
+			{ collectionType: 'fixed/medium/slow-XII-mpu' }, // Ad position (10)
 			{ collectionType: 'fixed/small/fast-VIII' }, // Ignored - before thrasher
 			{ collectionType: 'fixed/thrasher' }, // Ad position (12)
 			{ collectionType: 'fixed/small/slow-III' },
@@ -187,7 +188,7 @@ describe('Mobile Ads', () => {
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 3, 6, 9, 12]);
+		expect(mobileAdPositions).toEqual([0, 2, 4, 6, 8, 10, 12]);
 	});
 
 	// We used https://www.theguardian.com/tone/recipes as a blueprint
@@ -234,12 +235,11 @@ describe('Mobile Ads', () => {
 			}, // Ad position (6)
 			{ collectionType: 'flexible/special', containerLevel: 'Primary' }, // Ignored - is before thrasher
 			{ collectionType: 'fixed/thrasher' }, // Ad position (8)
-			{ collectionType: 'flexible/general', containerLevel: 'Primary' }, // Ignored - is before secondary container
-			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ad position (10)
+			{ collectionType: 'flexible/general', containerLevel: 'Primary' }, // Ignored is consecutive ad after position 8
 			{ collectionType: 'static/feature/2', containerLevel: 'Primary' }, // Ignored - is before secondary container
 			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ignored - is before secondary container
 			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ignored - is before secondary container
-			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ad position (14)
+			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ad position (13)
 			{ collectionType: 'static/feature/2', containerLevel: 'Primary' }, // Ignored - is before secondary container
 			{
 				collectionType: 'scrollable/medium',
@@ -250,7 +250,7 @@ describe('Mobile Ads', () => {
 				containerLevel: 'Secondary',
 			}, // Ignored - is before secondary container
 			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ignored - is before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (19)
+			{ collectionType: 'fixed/thrasher' }, // Ad position (18)
 			{ collectionType: 'flexible/general', containerLevel: 'Primary' }, // Ignored - is before secondary container
 			{
 				collectionType: 'scrollable/feature',
@@ -261,7 +261,7 @@ describe('Mobile Ads', () => {
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 4, 6, 8, 10, 14, 19]);
+		expect(mobileAdPositions).toEqual([0, 4, 6, 8, 13, 18]);
 	});
 });
 
@@ -294,5 +294,25 @@ describe('Standard fronts fronts-banner ad slots', () => {
 		);
 
 		expect(adPositions).toEqual([]);
+	});
+});
+
+describe('removeConsecutiveAdSlotsReducer', () => {
+	it('removes consecutive slots from array of all consecutive numbers', () => {
+		const arr = [0, 1, 2, 3, 4, 5];
+		const result = arr.reduce(removeConsecutiveAdSlotsReducer, []);
+		expect(result).toEqual([0, 2, 4]);
+	});
+
+	it('removes consecutive slots from array of some consecutive numbers', () => {
+		const arr = [0, 3, 7, 11, 12, 13, 19, 20];
+		const result = arr.reduce(removeConsecutiveAdSlotsReducer, []);
+		expect(result).toEqual([0, 3, 7, 11, 13, 19]);
+	});
+
+	it('handles empty array', () => {
+		const arr: number[] = [];
+		const result = arr.reduce(removeConsecutiveAdSlotsReducer, []);
+		expect(result).toEqual([]);
 	});
 });

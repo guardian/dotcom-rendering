@@ -3,7 +3,7 @@ import {
 	MAX_FRONTS_BANNER_ADS,
 	MAX_FRONTS_MOBILE_ADS,
 } from './commercial-constants';
-import { isEvenIndex } from './getFrontsAdPositions';
+import { removeConsecutiveAdSlotsReducer } from './getFrontsAdPositions';
 
 /**
  * Uses a very similar approach to pressed fronts, except we
@@ -17,7 +17,6 @@ const getTagPageMobileAdPositions = (
 	collections: Array<GroupedTrailsBase>,
 ): number[] => {
 	return collections
-		.filter(isEvenIndex)
 		.map((collection) =>
 			collections.findIndex(
 				({ day, month, year }) =>
@@ -27,6 +26,7 @@ const getTagPageMobileAdPositions = (
 			),
 		)
 		.filter((adPosition: number) => adPosition !== -1)
+		.reduce(removeConsecutiveAdSlotsReducer, [])
 		.slice(0, MAX_FRONTS_MOBILE_ADS);
 };
 
