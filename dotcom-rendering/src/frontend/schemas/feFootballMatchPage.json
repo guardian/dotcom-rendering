@@ -46,253 +46,256 @@
             "type": "object",
             "properties": {
                 "match": {
-                    "type": "object",
-                    "properties": {
-                        "id": {
-                            "type": "string"
-                        },
-                        "homeTeam": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                },
-                                "codename": {
-                                    "type": "string"
-                                },
-                                "players": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "id": {
-                                                "type": "string"
-                                            },
-                                            "name": {
-                                                "type": "string"
-                                            },
-                                            "position": {
-                                                "type": "string"
-                                            },
-                                            "lastName": {
-                                                "type": "string"
-                                            },
-                                            "substitute": {
-                                                "type": "boolean"
-                                            },
-                                            "timeOnPitch": {
-                                                "type": "string"
-                                            },
-                                            "shirtNumber": {
-                                                "type": "string"
-                                            },
-                                            "events": {
-                                                "type": "array",
-                                                "items": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "eventTime": {
-                                                            "type": "string"
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "homeTeam": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "codename": {
+                                        "type": "string"
+                                    },
+                                    "players": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "position": {
+                                                    "type": "string"
+                                                },
+                                                "lastName": {
+                                                    "type": "string"
+                                                },
+                                                "substitute": {
+                                                    "type": "boolean"
+                                                },
+                                                "timeOnPitch": {
+                                                    "type": "string"
+                                                },
+                                                "shirtNumber": {
+                                                    "type": "string"
+                                                },
+                                                "events": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "eventTime": {
+                                                                "type": "string"
+                                                            },
+                                                            "eventType": {
+                                                                "type": "string"
+                                                            }
                                                         },
-                                                        "eventType": {
-                                                            "type": "string"
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "eventTime",
-                                                        "eventType"
-                                                    ]
+                                                        "required": [
+                                                            "eventTime",
+                                                            "eventType"
+                                                        ]
+                                                    }
                                                 }
-                                            }
-                                        },
-                                        "required": [
-                                            "events",
-                                            "id",
-                                            "lastName",
-                                            "name",
-                                            "position",
-                                            "shirtNumber",
-                                            "substitute",
-                                            "timeOnPitch"
-                                        ]
-                                    }
-                                },
-                                "score": {
-                                    "type": "number"
-                                },
-                                "scorers": {
-                                    "type": "array",
-                                    "items": {
+                                            },
+                                            "required": [
+                                                "events",
+                                                "id",
+                                                "lastName",
+                                                "name",
+                                                "position",
+                                                "shirtNumber",
+                                                "substitute",
+                                                "timeOnPitch"
+                                            ]
+                                        }
+                                    },
+                                    "score": {
+                                        "type": "number"
+                                    },
+                                    "scorers": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "possession": {
+                                        "type": "number"
+                                    },
+                                    "shotsOn": {
+                                        "type": "number"
+                                    },
+                                    "shotsOff": {
+                                        "type": "number"
+                                    },
+                                    "corners": {
+                                        "type": "number"
+                                    },
+                                    "fouls": {
+                                        "type": "number"
+                                    },
+                                    "colours": {
+                                        "type": "string"
+                                    },
+                                    "crest": {
                                         "type": "string"
                                     }
                                 },
-                                "possession": {
-                                    "type": "number"
-                                },
-                                "shotsOn": {
-                                    "type": "number"
-                                },
-                                "shotsOff": {
-                                    "type": "number"
-                                },
-                                "corners": {
-                                    "type": "number"
-                                },
-                                "fouls": {
-                                    "type": "number"
-                                },
-                                "colours": {
-                                    "type": "string"
-                                },
-                                "crest": {
-                                    "type": "string"
-                                }
+                                "required": [
+                                    "codename",
+                                    "colours",
+                                    "corners",
+                                    "crest",
+                                    "fouls",
+                                    "id",
+                                    "name",
+                                    "players",
+                                    "possession",
+                                    "score",
+                                    "scorers",
+                                    "shotsOff",
+                                    "shotsOn"
+                                ]
                             },
-                            "required": [
-                                "codename",
-                                "colours",
-                                "corners",
-                                "crest",
-                                "fouls",
-                                "id",
-                                "name",
-                                "players",
-                                "possession",
-                                "score",
-                                "scorers",
-                                "shotsOff",
-                                "shotsOn"
-                            ]
-                        },
-                        "awayTeam": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                },
-                                "codename": {
-                                    "type": "string"
-                                },
-                                "players": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "id": {
-                                                "type": "string"
-                                            },
-                                            "name": {
-                                                "type": "string"
-                                            },
-                                            "position": {
-                                                "type": "string"
-                                            },
-                                            "lastName": {
-                                                "type": "string"
-                                            },
-                                            "substitute": {
-                                                "type": "boolean"
-                                            },
-                                            "timeOnPitch": {
-                                                "type": "string"
-                                            },
-                                            "shirtNumber": {
-                                                "type": "string"
-                                            },
-                                            "events": {
-                                                "type": "array",
-                                                "items": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "eventTime": {
-                                                            "type": "string"
+                            "awayTeam": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "codename": {
+                                        "type": "string"
+                                    },
+                                    "players": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "position": {
+                                                    "type": "string"
+                                                },
+                                                "lastName": {
+                                                    "type": "string"
+                                                },
+                                                "substitute": {
+                                                    "type": "boolean"
+                                                },
+                                                "timeOnPitch": {
+                                                    "type": "string"
+                                                },
+                                                "shirtNumber": {
+                                                    "type": "string"
+                                                },
+                                                "events": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "eventTime": {
+                                                                "type": "string"
+                                                            },
+                                                            "eventType": {
+                                                                "type": "string"
+                                                            }
                                                         },
-                                                        "eventType": {
-                                                            "type": "string"
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "eventTime",
-                                                        "eventType"
-                                                    ]
+                                                        "required": [
+                                                            "eventTime",
+                                                            "eventType"
+                                                        ]
+                                                    }
                                                 }
-                                            }
-                                        },
-                                        "required": [
-                                            "events",
-                                            "id",
-                                            "lastName",
-                                            "name",
-                                            "position",
-                                            "shirtNumber",
-                                            "substitute",
-                                            "timeOnPitch"
-                                        ]
-                                    }
-                                },
-                                "score": {
-                                    "type": "number"
-                                },
-                                "scorers": {
-                                    "type": "array",
-                                    "items": {
+                                            },
+                                            "required": [
+                                                "events",
+                                                "id",
+                                                "lastName",
+                                                "name",
+                                                "position",
+                                                "shirtNumber",
+                                                "substitute",
+                                                "timeOnPitch"
+                                            ]
+                                        }
+                                    },
+                                    "score": {
+                                        "type": "number"
+                                    },
+                                    "scorers": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "possession": {
+                                        "type": "number"
+                                    },
+                                    "shotsOn": {
+                                        "type": "number"
+                                    },
+                                    "shotsOff": {
+                                        "type": "number"
+                                    },
+                                    "corners": {
+                                        "type": "number"
+                                    },
+                                    "fouls": {
+                                        "type": "number"
+                                    },
+                                    "colours": {
+                                        "type": "string"
+                                    },
+                                    "crest": {
                                         "type": "string"
                                     }
                                 },
-                                "possession": {
-                                    "type": "number"
-                                },
-                                "shotsOn": {
-                                    "type": "number"
-                                },
-                                "shotsOff": {
-                                    "type": "number"
-                                },
-                                "corners": {
-                                    "type": "number"
-                                },
-                                "fouls": {
-                                    "type": "number"
-                                },
-                                "colours": {
-                                    "type": "string"
-                                },
-                                "crest": {
-                                    "type": "string"
-                                }
+                                "required": [
+                                    "codename",
+                                    "colours",
+                                    "corners",
+                                    "crest",
+                                    "fouls",
+                                    "id",
+                                    "name",
+                                    "players",
+                                    "possession",
+                                    "score",
+                                    "scorers",
+                                    "shotsOff",
+                                    "shotsOn"
+                                ]
                             },
-                            "required": [
-                                "codename",
-                                "colours",
-                                "corners",
-                                "crest",
-                                "fouls",
-                                "id",
-                                "name",
-                                "players",
-                                "possession",
-                                "score",
-                                "scorers",
-                                "shotsOff",
-                                "shotsOn"
-                            ]
+                            "comment": {
+                                "type": "string"
+                            }
                         },
-                        "comment": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "awayTeam",
-                        "comment",
-                        "homeTeam",
-                        "id"
-                    ]
+                        "required": [
+                            "awayTeam",
+                            "comment",
+                            "homeTeam",
+                            "id"
+                        ]
+                    }
                 }
             },
             "required": [
