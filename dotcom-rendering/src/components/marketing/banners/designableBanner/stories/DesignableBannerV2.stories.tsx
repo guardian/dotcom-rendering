@@ -130,7 +130,7 @@ export const WithThreeTierChoiceCards: Story = {
 };
 
 export const ThreeTierChoiceCardsWithHeaderImageAndCopy: Story = {
-	name: 'Three tier choice cards with header image and header copy',
+	name: 'With three tier choice cards + header image + header copy',
 	args: {
 		...meta.args,
 		design: {
@@ -151,7 +151,7 @@ export const ThreeTierChoiceCardsWithHeaderImageAndCopy: Story = {
 };
 
 export const HeaderImageOnly: Story = {
-	name: 'Header image and no header copy',
+	name: 'With header image and no header copy',
 	args: {
 		...meta.args,
 		content: contentNoHeading,
@@ -180,7 +180,7 @@ export const HeaderImageOnly: Story = {
 };
 
 export const MainImage: Story = {
-	name: 'Main image',
+	name: 'With main image',
 	args: {
 		...meta.args,
 		design: {
@@ -196,7 +196,7 @@ export const MainImage: Story = {
 };
 
 export const WithTickerAndThreeTierChoiceCards: Story = {
-	name: 'Ticker and three tier choice cards',
+	name: 'With ticker + three tier choice cards',
 	args: {
 		...meta.args,
 		tickerSettings,
@@ -216,7 +216,7 @@ export const WithTickerAndThreeTierChoiceCards: Story = {
 };
 
 export const WithThreeTierChoiceCardsAndArticleCount: Story = {
-	name: 'Article count and three tier choice cards',
+	name: 'With article count + three tier choice cards',
 	args: {
 		...meta.args,
 		separateArticleCountSettings: {
@@ -238,7 +238,7 @@ export const WithThreeTierChoiceCardsAndArticleCount: Story = {
 };
 
 export const NoChoiceCardOrImage: Story = {
-	name: 'No choice cards or image',
+	name: 'With no choice cards or image',
 	args: {
 		...meta.args,
 		design: {

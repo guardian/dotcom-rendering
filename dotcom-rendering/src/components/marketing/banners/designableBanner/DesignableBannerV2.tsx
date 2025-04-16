@@ -659,10 +659,10 @@ const styles = {
 	headerWithImageContainer: (background: string) => css`
 		order: 1;
 		max-width: '100%';
-		${between.mobileMedium.and.tablet} {
+		${between.mobile.and.desktop} {
 			order: '2';
 		}
-		${from.phablet} {
+		${from.desktop} {
 			grid-column: 2;
 			grid-row: 1;
 			background: ${background};
