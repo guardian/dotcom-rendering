@@ -43,8 +43,6 @@ export default meta;
 
 type Story = StoryObj<typeof ScrollableSmall>;
 
-export const WithMultipleCards = {};
-
 export const WithFourCards = {
 	args: {
 		trails: trails.slice(0, 4),
@@ -57,15 +55,15 @@ export const WithThreeCards = {
 	},
 };
 
-export const WithOneCard = {
-	args: {
-		trails: trails.slice(0, 1),
-	},
-};
-
 export const WithTwoCards = {
 	args: {
 		trails: trails.slice(0, 2),
+	},
+};
+
+export const WithOneCard = {
+	args: {
+		trails: trails.slice(0, 1),
 	},
 };
 

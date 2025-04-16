@@ -87,7 +87,7 @@ const determineCardProperties = (
 				imageSize: 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
-				liveUpdatesAlignment: 'horizontal',
+				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
 			};
 		case 'megaboost':

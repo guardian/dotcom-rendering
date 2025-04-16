@@ -450,9 +450,11 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 							}
 							choices={getChoiceCardData(
 								isTabletOrAbove,
+								false,
 								countryCode,
 							)}
 							id={'banner'}
+							isDiscountActive={false}
 						/>
 
 						<div css={styles.ctaContainer}>

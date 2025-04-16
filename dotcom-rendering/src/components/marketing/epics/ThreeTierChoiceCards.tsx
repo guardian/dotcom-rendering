@@ -184,6 +184,7 @@ type ThreeTierChoiceCardsProps = {
 	choices: ChoiceInfo[];
 	supporterPlusDiscount?: number;
 	id: string; // uniquely identify this choice cards component to avoid conflicting with others
+	isDiscountActive: boolean;
 };
 
 export const ThreeTierChoiceCards = ({
@@ -193,6 +194,7 @@ export const ThreeTierChoiceCards = ({
 	choices,
 	supporterPlusDiscount,
 	id,
+	isDiscountActive = false,
 }: ThreeTierChoiceCardsProps) => {
 	const currencySymbol = getLocalCurrencySymbol(countryCode);
 	const countryGroupId = countryCodeToCountryGroupId(countryCode);
@@ -217,6 +219,12 @@ export const ThreeTierChoiceCards = ({
 							'Monthly',
 							countryGroupId,
 						);
+						const choiceAmountYearly = getChoiceAmount(
+							supportTier,
+							'Annual',
+							countryGroupId,
+						);
+
 						const selected = selectedProduct === supportTier;
 
 						const hasDiscount =
@@ -224,6 +232,10 @@ export const ThreeTierChoiceCards = ({
 							supportTier === 'SupporterPlus';
 
 						const radioId = `choicecard-${id}-${supportTier}`;
+
+						const finalChoiceAmount = isDiscountActive
+							? choiceAmountYearly
+							: choiceAmount;
 
 						return (
 							<div
@@ -246,7 +258,7 @@ export const ThreeTierChoiceCards = ({
 								>
 									<Radio
 										label={label(
-											choiceAmount,
+											finalChoiceAmount,
 											currencySymbol,
 											supporterPlusDiscount,
 										)}
