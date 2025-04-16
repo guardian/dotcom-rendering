@@ -84,8 +84,20 @@ DefaultInLiveblog.storyName = 'when placed in a liveblog';
 export const NoStats = () => {
 	return (
 		<MatchStats
-			home={matchReport.homeTeam}
-			away={matchReport.awayTeam}
+			home={{
+				...matchReport.homeTeam,
+				shotsOn: 0,
+				shotsOff: 0,
+				corners: 0,
+				fouls: 0,
+			}}
+			away={{
+				...matchReport.awayTeam,
+				shotsOn: 0,
+				shotsOff: 0,
+				corners: 0,
+				fouls: 0,
+			}}
 			competition="Women's Nations League"
 			format={{
 				display: ArticleDisplay.Standard,
