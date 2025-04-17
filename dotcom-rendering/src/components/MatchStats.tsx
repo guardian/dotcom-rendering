@@ -8,10 +8,10 @@ import {
 	textSans15,
 	until,
 } from '@guardian/source/foundations';
+import type { FootballTeam } from '../footballMatch';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { palette as themePalette } from '../palette';
 import type { ColourName } from '../paletteDeclarations';
-import type { TeamType } from '../types/sport';
 import { Distribution } from './Distribution';
 import { Doughnut } from './Doughnut';
 import { GoalAttempts } from './GoalAttempts';
@@ -20,8 +20,8 @@ import { Hide } from './Hide';
 import { Lineup } from './Lineup';
 
 type MatchStatsData = {
-	home: TeamType;
-	away: TeamType;
+	home: FootballTeam;
+	away: FootballTeam;
 };
 
 type MatchSummaryProps = MatchStatsData & {
@@ -289,8 +289,8 @@ const DecideDoughnut = ({
 	away,
 	format,
 }: {
-	home: TeamType;
-	away: TeamType;
+	home: FootballTeam;
+	away: FootballTeam;
 	format?: ArticleFormat;
 }) => {
 	const sections = [
@@ -352,7 +352,7 @@ const DecideDoughnut = ({
 	Some leagues do not return match stats - see
 	https://github.com/guardian/frontend/blob/e046d4144d0001059156f402fd5cf1af29ee9f0c/sport/app/football/controllers/MatchController.scala#L23
 */
-function teamHasStats({ shotsOff, shotsOn, fouls, corners }: TeamType) {
+function teamHasStats({ shotsOff, shotsOn, fouls, corners }: FootballTeam) {
 	return !(shotsOff === 0 && shotsOn === 0 && fouls === 0 && corners === 0);
 }
 
