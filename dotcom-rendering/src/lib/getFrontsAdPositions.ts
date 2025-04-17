@@ -2,6 +2,7 @@ import { isUndefined } from '@guardian/libs';
 import type { DCRCollectionType } from '../types/front';
 import {
 	MAX_FRONTS_BANNER_ADS,
+	MAX_FRONTS_BANNER_ADS_BETA,
 	MAX_FRONTS_MOBILE_ADS,
 } from './commercial-constants';
 import { frontsBannerExcludedCollections } from './frontsBannerExclusions';
@@ -296,13 +297,17 @@ const canInsertDesktopAd = (
 const getFrontsBannerAdPositions = (
 	collections: DCRCollectionType[],
 	pageId: string,
-): number[] =>
-	collections.reduce<{ heightSinceAd: number; adPositions: number[] }>(
+): number[] => {
+	const maxAdsAllowed = hasSecondaryLevelContainers(collections)
+		? MAX_FRONTS_BANNER_ADS_BETA
+		: MAX_FRONTS_BANNER_ADS;
+
+	return collections.reduce<{ heightSinceAd: number; adPositions: number[] }>(
 		(accumulator, collection, index) => {
 			const { heightSinceAd, adPositions } = accumulator;
 
 			const isFinalCollection = index === collections.length - 1;
-			const isMaxAdsReached = adPositions.length >= MAX_FRONTS_BANNER_ADS;
+			const isMaxAdsReached = adPositions.length >= maxAdsAllowed;
 
 			if (isFinalCollection || isMaxAdsReached) {
 				// Stop inserting adverts all together
@@ -339,6 +344,7 @@ const getFrontsBannerAdPositions = (
 		},
 		{ heightSinceAd: 0, adPositions: [] },
 	).adPositions;
+};
 
 export {
 	isEvenIndex,

@@ -4,6 +4,7 @@ import {
 	testCollectionsUs,
 	testCollectionsWithSecondaryLevel,
 } from '../../fixtures/manual/frontCollections';
+import type { DCRCollectionType } from '../types/front';
 import {
 	type AdCandidateMobile,
 	getFrontsBannerAdPositions,
@@ -294,5 +295,27 @@ describe('Standard fronts fronts-banner ad slots', () => {
 		);
 
 		expect(adPositions).toEqual([]);
+	});
+
+	it('inserts a maximum of 6 ads for standard fronts', () => {
+		const adPositions = getFrontsBannerAdPositions(
+			// Double number of UK collections in fixture to reach maximum
+			[...testCollectionsUk, ...testCollectionsUk],
+			'europe',
+		);
+
+		expect(adPositions.length).toEqual(6);
+	});
+
+	it('inserts a maximum of 8 ads for fronts with beta collections', () => {
+		const adPositions = getFrontsBannerAdPositions(
+			// 10x number of test collections in fixture to reach maximum level
+			new Array<DCRCollectionType[]>(10)
+				.fill(testCollectionsWithSecondaryLevel)
+				.flat(),
+			'europe',
+		);
+
+		expect(adPositions.length).toEqual(8);
 	});
 });
