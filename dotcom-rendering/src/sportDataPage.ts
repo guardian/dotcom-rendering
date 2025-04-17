@@ -51,20 +51,16 @@ export type FootballMatchSummaryPage = SportPageConfig & {
 };
 
 export type FootballMatchListPageKind = FootballMatchListPage['kind'];
-export type FootballPageWithRegionsKind =
-	| FootballTablesPage['kind']
-	| FootballMatchListPageKind;
-
-export type SportPageKind =
-	| FootballPageWithRegionsKind
-	| CricketMatchPage['kind']
-	| FootballMatchSummaryPage['kind'];
 
 export type FootballDataWithRegionsPage =
 	| FootballMatchListPage
 	| FootballTablesPage;
 
+export type FootballPageWithRegionsKind = FootballDataWithRegionsPage['kind'];
+
 export type SportDataPage =
 	| FootballDataWithRegionsPage
 	| CricketMatchPage
 	| FootballMatchSummaryPage;
+
+export type SportPageKind = SportDataPage['kind'];
