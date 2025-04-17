@@ -128,7 +128,7 @@ const ImmersiveCardLayout = ({
 					aspectRatio={'5:3'}
 					mobileAspectRatio={'4:5'}
 					imageSize="feature-immersive"
-					headlineSizes={{ desktop: 'small' }}
+					headlineSizes={{ desktop: 'medium', tablet: 'small' }}
 					supportingContent={card.supportingContent}
 					isImmersive={true}
 				/>
