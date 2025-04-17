@@ -64,8 +64,8 @@ const ScoreNumber = ({ score }: Props) => {
 		default:
 			return (
 				<>
-					<ScoreNumber score={Number(score.toString()[0])} />
-					<ScoreNumber score={Number(score.toString().slice(1))} />
+					<ScoreNumber score={Math.trunc(score / 10)} />
+					<ScoreNumber score={score % 10} />
 				</>
 			);
 	}
