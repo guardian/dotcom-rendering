@@ -1,6 +1,7 @@
 import { palette } from '@guardian/source/foundations';
 import { CricketScorecardPage } from '../components/CricketScorecardPage';
 import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.importable';
+import { FootballMatchSummary } from '../components/FootballMatchSummary';
 import { FootballTablesPage } from '../components/FootballTablesPage';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -63,6 +64,8 @@ const SportsPage = ({
 					guardianBaseUrl={sportData.guardianBaseURL}
 				/>
 			);
+		case 'FootballMatchSummary':
+			return <FootballMatchSummary match={sportData.match} />;
 	}
 };
 

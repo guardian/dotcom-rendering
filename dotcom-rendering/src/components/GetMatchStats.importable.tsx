@@ -99,7 +99,6 @@ export const GetMatchStats = ({ matchUrl, format }: Props) => {
 			<MatchStats
 				home={cleanTeamData(data.homeTeam)}
 				away={cleanTeamData(data.awayTeam)}
-				competition={data.competition.fullName}
 				format={format}
 				usage="Article"
 			/>

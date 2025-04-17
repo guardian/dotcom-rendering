@@ -22,7 +22,6 @@ import { Lineup } from './Lineup';
 type MatchStatsData = {
 	home: TeamType;
 	away: TeamType;
-	competition: string;
 };
 
 type MatchSummaryProps = MatchStatsData & {

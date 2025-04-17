@@ -283,13 +283,13 @@
                                 "shotsOn"
                             ]
                         },
-                        "comment": {
+                        "comments": {
                             "type": "string"
                         }
                     },
                     "required": [
                         "awayTeam",
-                        "comment",
+                        "comments",
                         "homeTeam",
                         "id"
                     ]

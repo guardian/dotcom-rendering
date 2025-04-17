@@ -5,12 +5,14 @@ import addFormats from 'ajv-formats';
 import type { FEArticle } from '../frontend/feArticle';
 import type { FECricketMatchPage } from '../frontend/feCricketMatchPage';
 import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
+import type { FEFootballMatchPage } from '../frontend/feFootballMatchPage';
 import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import type { FEFront } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
 import articleSchema from '../frontend/schemas/feArticle.json';
 import cricketMatchPageSchema from '../frontend/schemas/feCricketMatchPage.json';
 import footballMatchListPageSchema from '../frontend/schemas/feFootballMatchListPage.json';
+import footballMatchPageSchema from '../frontend/schemas/feFootballMatchPage.json';
 import footballTablesPageSchema from '../frontend/schemas/feFootballTablesPage.json';
 import frontSchema from '../frontend/schemas/feFront.json';
 import tagPageSchema from '../frontend/schemas/feTagPage.json';
@@ -50,6 +52,9 @@ const validateFootballTablesPage = ajv.compile<FEFootballTablesPage>(
 );
 const validateCricketMatchPage = ajv.compile<FECricketMatchPage>(
 	cricketMatchPageSchema,
+);
+const validateFootballMatchPage = ajv.compile<FEFootballMatchPage>(
+	footballMatchPageSchema,
 );
 
 export const validateAsFEArticle = (data: unknown): FEArticle => {
@@ -163,5 +168,21 @@ export const validateAsCricketMatchPageType = (
 	throw new TypeError(
 		`Unable to validate request body for url ${url}.\n
             ${JSON.stringify(validateCricketMatchPage.errors, null, 2)}`,
+	);
+};
+
+export const validateAsFootballMatchPageType = (
+	data: unknown,
+): FEFootballMatchPage => {
+	if (validateFootballMatchPage(data)) return data;
+
+	const url =
+		isObject(data) && isObject(data.config) && isString(data.config.pageId)
+			? data.config.pageId
+			: 'unknown url';
+
+	throw new TypeError(
+		`Unable to validate request body for url ${url}.\n
+            ${JSON.stringify(validateFootballMatchPage.errors, null, 2)}`,
 	);
 };

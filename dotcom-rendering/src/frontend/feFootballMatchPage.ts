@@ -36,7 +36,7 @@ export type FEFootballMatch = {
 	id: string;
 	homeTeam: FEFootballTeam;
 	awayTeam: FEFootballTeam;
-	comment: string;
+	comments: string;
 };
 
 export type FEFootballMatchPage = FEFootballDataPage & {
