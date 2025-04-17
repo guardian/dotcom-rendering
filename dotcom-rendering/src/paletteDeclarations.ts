@@ -6595,6 +6595,10 @@ const paletteColours = {
 		light: () => sourcePalette.sport[500],
 		dark: () => sourcePalette.sport[500],
 	},
+	'--football-score-border': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[7],
+	},
 	'--football-sub-text': {
 		light: () => sourcePalette.neutral[46],
 		dark: () => sourcePalette.neutral[73],
