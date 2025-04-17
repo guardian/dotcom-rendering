@@ -142,6 +142,6 @@ export const parse = (
 	return ok({
 		homeTeam: parsedHomeTeam.value,
 		awayTeam: parsedAwayTeam.value,
-		comments: feFootballMatch.comment,
+		comments: feFootballMatch.comments,
 	});
 };
