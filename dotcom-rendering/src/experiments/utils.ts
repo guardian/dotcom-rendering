@@ -1,5 +1,5 @@
 import { bypassCommercialMetricsSampling } from '@guardian/commercial';
-import { bypassCoreWebVitalsSampling } from '@guardian/core-web-vitals';
+import { bypassCoreWebVitalsSampling } from '../lib/cwv/cwv';
 
 export const bypassMetricsSampling = (): void => {
 	void bypassCommercialMetricsSampling();
