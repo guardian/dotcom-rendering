@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, space } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import { useEffect, useRef, useState } from 'react';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { palette } from '../palette';
@@ -92,15 +92,35 @@ const itemStyles = css`
 	scroll-snap-align: start;
 	grid-area: span 1;
 	position: relative;
+`;
+
+const leftBorderStyles = css`
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: -10px;
+	width: 1px;
+	background-color: ${palette('--card-border-top')};
+	transform: translateX(-50%);
+`;
+
+const singleRowLeftBorderStyles = css`
 	:not(:first-child)::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: -10px;
-		width: 1px;
-		background-color: ${palette('--card-border-top')};
-		transform: translateX(-50%);
+		${leftBorderStyles}
+	}
+`;
+
+const stackedRowLeftBorderStyles = css`
+	${from.tablet} {
+		:not(:first-child)::before {
+			${leftBorderStyles}
+		}
+	}
+	${until.tablet} {
+		:not(:first-child):not(:nth-child(2))::before {
+			${leftBorderStyles}
+		}
 	}
 `;
 
@@ -297,6 +317,21 @@ export const ScrollableCarousel = ({
 	);
 };
 
-ScrollableCarousel.Item = ({ children }: { children: React.ReactNode }) => (
-	<li css={itemStyles}>{children}</li>
+ScrollableCarousel.Item = ({
+	isStackingCarousel = false,
+	children,
+}: {
+	isStackingCarousel?: boolean;
+	children: React.ReactNode;
+}) => (
+	<li
+		css={[
+			itemStyles,
+			isStackingCarousel
+				? stackedRowLeftBorderStyles
+				: singleRowLeftBorderStyles,
+		]}
+	>
+		{children}
+	</li>
 );

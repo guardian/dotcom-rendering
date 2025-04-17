@@ -19,6 +19,32 @@ type Props = {
 };
 
 /**
+ * The scrollable small container displays in the following ways:
+ * It is limited to 4 cards maximum and displays in a 2x2 grid.
+ * It is scrollable on mobile and static on tablet and desktop.
+ * On mobile, each column is scrollable
+ *
+ * The layout of cards within the 2x2 grid differs between breakpoints:
+ *
+ * On mobile, the layout is:
+ *
+ * +--------+--------+
+ * | Card 0 | Card 2 |
+ * +--------+--------+
+ * | Card 1 | Card 3 |
+ * +--------+--------+
+ *
+ * On tablet and above, the layout is:
+ *
+ * +--------+--------+
+ * | Card 0 | Card 1 |
+ * +--------+--------+
+ * | Card 2 | Card 3 |
+ * +--------+--------+
+ *
+ */
+
+/**
  * A container used on fronts to display a carousel of small cards
  *
  * ## Why does this need to be an Island?
@@ -47,7 +73,10 @@ export const ScrollableSmall = ({
 		>
 			{trails.map((trail, index) => {
 				return (
-					<ScrollableCarousel.Item key={trail.url}>
+					<ScrollableCarousel.Item
+						key={trail.url}
+						isStackingCarousel={true}
+					>
 						<FrontCard
 							trail={trail}
 							imageLoading={imageLoading}
