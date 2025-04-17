@@ -411,9 +411,6 @@ const secondaryLevelTopBorder = css`
 `;
 
 const carouselNavigationPlaceholder = css`
-	${between.tablet.and.leftCol} {
-		min-height: 44px;
-	}
 	.hidden & {
 		display: none;
 	}
