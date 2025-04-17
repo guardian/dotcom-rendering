@@ -127,6 +127,18 @@ const getCoreWebVitals = async (): Promise<void> => {
 	onFID(onReport);
 	onTTFB(onReport);
 
+	// A quick remediation only for the test europe-beta-front-test-2
+	// We discovered we are currently collecting ~0% of CWV for fronts related tests. We have observed
+	// in-flight requests by sendBeacon or even fetch with keep-alive being cancelled on unload events.
+	// We understand the tradeoffs of this approach, but we prefer to have _some_ CWV for the test.
+	// https://developer.chrome.com/docs/web-platform/page-lifecycle-api#legacy_lifecycle_apis_to_avoid
+	if (
+		window.guardian.config.tests.europeBetaFrontTest2Control ??
+		window.guardian.config.tests.europeBetaFrontTest2Variant
+	) {
+		addEventListener('beforeunload', listener);
+	}
+
 	// Report all available metrics when the page is unloaded or in background.
 	addEventListener('visibilitychange', listener);
 
