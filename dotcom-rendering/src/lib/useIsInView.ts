@@ -29,7 +29,9 @@ type Options = {
 	 * If `true`, trigger the hook on all intersections.
 	 */
 	repeat?: true;
-	/** Set the initial HTML Element, if known. */
+	/**
+	 * Set the initial HTML Element, if known.
+	 */
 	node?: HTMLElement;
 };
 
@@ -70,6 +72,7 @@ const useIsInView = (
 
 	useEffect(() => {
 		if (!node) return;
+
 		// Check for browser support https://caniuse.com/intersectionobserver
 		if (!('IntersectionObserver' in window)) return;
 
