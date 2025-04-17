@@ -604,7 +604,7 @@ const styles = {
 			padding-left: ${space[8]}px;
 		}
 
-		${from.wide} {
+		${from.desktop} {
 			justify-self: end;
 		}
 	`,
@@ -659,10 +659,10 @@ const styles = {
 	headerWithImageContainer: (background: string) => css`
 		order: 1;
 		max-width: '100%';
-		${between.mobileMedium.and.tablet} {
+		${between.mobile.and.desktop} {
 			order: '2';
 		}
-		${from.phablet} {
+		${from.desktop} {
 			grid-column: 2;
 			grid-row: 1;
 			background: ${background};
@@ -694,13 +694,11 @@ const styles = {
 	bannerVisualContainer: (background: string) => css`
 		order: 1;
 		background: ${background};
-		${from.phablet} {
-			grid-column: 2;
-			grid-row: 1 / span 2;
-			align-self: flex-start;
-		}
+
 		${from.desktop} {
 			padding-left: ${space[2]}px;
+			grid-column: 3;
+			grid-row: 1 / span 2;
 		}
 	`,
 	threeTierChoiceCardsContainer: css`
