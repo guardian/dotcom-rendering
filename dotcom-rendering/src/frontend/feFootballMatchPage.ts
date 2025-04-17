@@ -21,7 +21,7 @@ export type FEFootballTeam = {
 	name: string;
 	codename: string;
 	players: FEFootballPlayer[];
-	score: number;
+	score?: number;
 	scorers: string[];
 	possession: number;
 	shotsOn: number;

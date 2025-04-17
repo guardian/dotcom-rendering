@@ -103,3 +103,13 @@ export const InContext = () => {
 	);
 };
 InContext.storyName = 'when placed in article context';
+
+export const NoScore = () => {
+	return (
+		<MatchNav
+			homeTeam={{ ...homeTeam, score: undefined, scorers: [] }}
+			awayTeam={{ ...awayTeam, score: undefined, scorers: [] }}
+		/>
+	);
+};
+NoScore.storyName = 'with no scores';

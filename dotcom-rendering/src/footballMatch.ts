@@ -28,8 +28,7 @@ export type FootballTeam = {
 	corners: number;
 	fouls: number;
 	colours: string;
-	// ToDo: this needs to be optional
-	score: number;
+	score?: number;
 	crest: string;
 	scorers: string[];
 };

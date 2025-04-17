@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import {
 	background,
 	headlineBold20,
@@ -6,13 +7,15 @@ import {
 	textSans15,
 	until,
 } from '@guardian/source/foundations';
+import type { FootballTeam } from '../footballMatch';
 import { palette } from '../palette';
-import type { TeamType } from '../types/sport';
 import { Score } from './Score';
 
+type Team = Pick<FootballTeam, 'name' | 'score' | 'scorers' | 'crest'>;
+
 type Props = {
-	homeTeam: Pick<TeamType, 'name' | 'score' | 'scorers' | 'crest'>;
-	awayTeam: Pick<TeamType, 'name' | 'score' | 'scorers' | 'crest'>;
+	homeTeam: Team;
+	awayTeam: Team;
 	comments?: string;
 };
 
@@ -131,7 +134,7 @@ const TeamNav = ({
 	scorers,
 }: {
 	name: string;
-	score: number;
+	score?: number;
 	crest: string;
 	scorers: string[];
 }) => (
@@ -164,13 +167,15 @@ const TeamNav = ({
 			</div>
 			<CrestRow>
 				<Crest crest={crest} />
-				<div
-					css={css`
-						margin-left: -${space[2]}px;
-					`}
-				>
-					<Score score={score} />
-				</div>
+				{!isUndefined(score) && (
+					<div
+						css={css`
+							margin-left: -${space[2]}px;
+						`}
+					>
+						<Score score={score} />
+					</div>
+				)}
 			</CrestRow>
 		</Column>
 	</div>

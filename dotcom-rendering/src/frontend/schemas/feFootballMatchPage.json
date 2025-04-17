@@ -161,7 +161,6 @@
                                 "name",
                                 "players",
                                 "possession",
-                                "score",
                                 "scorers",
                                 "shotsOff",
                                 "shotsOn"
@@ -277,7 +276,6 @@
                                 "name",
                                 "players",
                                 "possession",
-                                "score",
                                 "scorers",
                                 "shotsOff",
                                 "shotsOn"
