@@ -4,7 +4,7 @@
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/designableBanner/components/DesignableBannerVisual.tsx
  */
 import { css } from '@emotion/react';
-import { from } from '@guardian/source/foundations';
+import { between, from } from '@guardian/source/foundations';
 import type { Image } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ImageAttrs } from '../../../shared/ResponsiveImage';
 import { ResponsiveImage } from '../../../shared/ResponsiveImage';
@@ -71,6 +71,9 @@ const getStyles = (isHeaderImage = false) => {
 					object-fit: contain;
 					display: block;
 					width: 100%;
+					${between.phablet.and.desktop} {
+						width: 492px;
+					}
 				}
 			`,
 		};
