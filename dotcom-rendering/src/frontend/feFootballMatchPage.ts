@@ -40,5 +40,5 @@ export type FEFootballMatch = {
 };
 
 export type FEFootballMatchPage = FEFootballDataPage & {
-	match: FEFootballMatch[];
+	match: FEFootballMatch;
 };
