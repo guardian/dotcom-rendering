@@ -9,6 +9,7 @@ import {
 	type AdCandidateMobile,
 	getFrontsBannerAdPositions,
 	getMobileAdPositions,
+	removeConsecutiveAdSlotsReducer,
 } from './getFrontsAdPositions';
 
 const defaultTestCollections: AdCandidateMobile[] = [...Array<number>(12)].map(
@@ -60,14 +61,14 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'fixed/medium/slow-VI' },
 			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (8)
 			{ collectionType: 'fixed/small/slow-III' },
-			{ collectionType: 'fixed/medium/fast-XII' }, // Ad position (10)
+			{ collectionType: 'fixed/medium/fast-XII' }, // Ignored - is before merch high position
 			{ collectionType: 'fixed/small/fast-VIII' }, // Ignored - is merch high position
 			{ collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 2, 4, 6, 8, 10]);
+		expect(mobileAdPositions).toEqual([0, 2, 4, 6, 8]);
 	});
 
 	// We used https://www.theguardian.com/uk as a blueprint
@@ -94,14 +95,14 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'fixed/small/slow-IV' },
 			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (19)
 			{ collectionType: 'dynamic/slow-mpu' },
-			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (21)
+			{ collectionType: 'fixed/small/slow-IV' }, // Ignored - is before merch high position
 			{ collectionType: 'fixed/medium/slow-VI' }, // Ignored - is merch high position
 			{ collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 2, 4, 8, 11, 14, 17, 19, 21]);
+		expect(mobileAdPositions).toEqual([0, 2, 4, 8, 11, 14, 17, 19]);
 	});
 
 	// We used https://www.theguardian.com/international as a blueprint
@@ -205,14 +206,14 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'fixed/small/slow-III' },
 			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (9)
 			{ collectionType: 'fixed/small/slow-V-half' },
-			{ collectionType: 'fixed/small/slow-V-third' }, // Ad position (11)
+			{ collectionType: 'fixed/small/slow-V-third' }, // Ignored - is before merch high position
 			{ collectionType: 'fixed/small/fast-VIII' }, // Ignored - is merch high position
 			{ collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([1, 3, 5, 7, 9, 11]);
+		expect(mobileAdPositions).toEqual([1, 3, 5, 7, 9]);
 	});
 
 	it('Europe Network Front, with beta containers and more than 4 collections, with thrashers in various places', () => {
@@ -235,12 +236,11 @@ describe('Mobile Ads', () => {
 			}, // Ad position (6)
 			{ collectionType: 'flexible/special', containerLevel: 'Primary' }, // Ignored - is before thrasher
 			{ collectionType: 'fixed/thrasher' }, // Ad position (8)
-			{ collectionType: 'flexible/general', containerLevel: 'Primary' }, // Ignored - is before secondary container
-			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ad position (10)
+			{ collectionType: 'flexible/general', containerLevel: 'Primary' }, // Ignored is consecutive ad after position 8
 			{ collectionType: 'static/feature/2', containerLevel: 'Primary' }, // Ignored - is before secondary container
 			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ignored - is before secondary container
 			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ignored - is before secondary container
-			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ad position (14)
+			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ad position (13)
 			{ collectionType: 'static/feature/2', containerLevel: 'Primary' }, // Ignored - is before secondary container
 			{
 				collectionType: 'scrollable/medium',
@@ -251,7 +251,7 @@ describe('Mobile Ads', () => {
 				containerLevel: 'Secondary',
 			}, // Ignored - is before secondary container
 			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ignored - is before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (19)
+			{ collectionType: 'fixed/thrasher' }, // Ad position (18)
 			{ collectionType: 'flexible/general', containerLevel: 'Primary' }, // Ignored - is before secondary container
 			{
 				collectionType: 'scrollable/feature',
@@ -262,7 +262,7 @@ describe('Mobile Ads', () => {
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 4, 6, 8, 10, 14, 19]);
+		expect(mobileAdPositions).toEqual([0, 4, 6, 8, 13, 18]);
 	});
 });
 
@@ -317,5 +317,25 @@ describe('Standard fronts fronts-banner ad slots', () => {
 		);
 
 		expect(adPositions.length).toEqual(8);
+	});
+});
+
+describe('removeConsecutiveAdSlotsReducer', () => {
+	it('removes consecutive slots from array of all consecutive numbers', () => {
+		const arr = [0, 1, 2, 3, 4, 5];
+		const result = arr.reduce(removeConsecutiveAdSlotsReducer, []);
+		expect(result).toEqual([0, 2, 4]);
+	});
+
+	it('removes consecutive slots from array of some consecutive numbers', () => {
+		const arr = [0, 3, 7, 11, 12, 13, 19, 20];
+		const result = arr.reduce(removeConsecutiveAdSlotsReducer, []);
+		expect(result).toEqual([0, 3, 7, 11, 13, 19]);
+	});
+
+	it('handles empty array', () => {
+		const arr: number[] = [];
+		const result = arr.reduce(removeConsecutiveAdSlotsReducer, []);
+		expect(result).toEqual([]);
 	});
 });
