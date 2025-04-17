@@ -31,11 +31,18 @@ const commonConfigs = ({ platform }) => ({
 			? 'source-map'
 			: 'eval-cheap-module-source-map',
 	resolve: {
-		alias: {
-			react: 'preact/compat',
-			'react-dom/test-utils': 'preact/test-utils',
-			'react-dom': 'preact/compat',
-		},
+		/**
+		 * Do not alias React modules in the build variant so React is bundled
+		 * instead of Preact
+		 */
+		alias:
+			platform === 'client.web.variant'
+				? {}
+				: {
+						react: 'preact/compat',
+						'react-dom/test-utils': 'preact/test-utils',
+						'react-dom': 'preact/compat',
+				  },
 		extensions: ['.js', '.ts', '.tsx', '.jsx'],
 	},
 	ignoreWarnings: [
