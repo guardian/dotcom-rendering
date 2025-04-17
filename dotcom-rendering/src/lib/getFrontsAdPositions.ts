@@ -185,13 +185,13 @@ const getCollectionHeight = (
 		// Some thrashers are very small. Since we'd prefer to have ads above content rather than thrashers,
 		// err on the side of inserting fewer ads, by setting the number on the small side for thrashers
 		case 'fixed/thrasher':
-		case 'scrollable/small':
 			return 0.5;
 
 		case 'fixed/small/slow-IV':
 		case 'fixed/small/slow-V-mpu':
 		case 'nav/list':
 		case 'nav/media-list':
+		case 'scrollable/small':
 		case 'scrollable/medium':
 		case 'static/medium/4':
 			return 1;
