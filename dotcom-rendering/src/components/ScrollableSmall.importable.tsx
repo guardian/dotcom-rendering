@@ -44,6 +44,7 @@ export const ScrollableSmall = ({
 			visibleCardsOnTablet={2}
 			sectionId={sectionId}
 			shouldStackCards={{ desktop: trails.length > 2, mobile: true }}
+			gapSizes={{ column: 'large', row: 'medium' }}
 		>
 			{trails.map((trail, index) => {
 				return (
