@@ -198,10 +198,9 @@ const decideMedia = (
 	audioDuration: string = '',
 	podcastImage?: PodcastSeriesImage,
 	imageHide?: boolean,
+	videoReplace?: boolean,
 ): MainMedia | undefined => {
-	// If the showVideo toggle is enabled in the fronts tool,
-	// we should return the active mediaAtom regardless of the design
-	if (showMainVideo) {
+	if (showMainVideo === true || videoReplace === true) {
 		return getActiveMediaAtom(mediaAtom);
 	}
 
@@ -286,15 +285,18 @@ export const enhanceCards = (
 
 		const isContributorTagPage = !!pageId && pageId.startsWith('profile/');
 
+		// const mainMediaAtom = faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
+		// 	faciaCard.properties.maybeContent?.elements.mediaAtoms[0];
+
 		const mainMedia = decideMedia(
 			format,
 			faciaCard.properties.showMainVideo,
-			faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
-				faciaCard.properties.maybeContent?.elements.mediaAtoms[0],
+			faciaCard.properties.mediaAtom,
 			faciaCard.card.galleryCount,
 			faciaCard.card.audioDuration,
 			podcastImage,
 			faciaCard.display.imageHide,
+			faciaCard.properties.videoReplace,
 		);
 
 		return {
