@@ -134,6 +134,8 @@ export type FEFrontCard = {
 	properties: {
 		isBreaking: boolean;
 		showMainVideo: boolean;
+		videoReplace: boolean;
+		replacementVideoAtomId?: string;
 		showKickerTag: boolean;
 		showByline: boolean;
 		imageSlideshowReplace: boolean;
@@ -201,6 +203,7 @@ export type FEFrontCard = {
 		editionBrandings: EditionBranding[];
 		href?: string;
 		embedUri?: string;
+		mediaAtom?: FEMediaAtom;
 	};
 	header: {
 		isVideo: boolean;
@@ -259,6 +262,7 @@ export type FEFrontCard = {
 	};
 	format?: FEFormat;
 	enriched?: FESnap;
+	mediaAtom?: FEMediaAtom;
 	supportingContent?: FESupportingContent[];
 	cardStyle?: {
 		type: FEFrontCardStyle;

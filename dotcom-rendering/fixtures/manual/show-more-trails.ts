@@ -18,6 +18,7 @@ export const trails: [
 		properties: {
 			isBreaking: false,
 			showMainVideo: false,
+			videoReplace: false,
 			showKickerTag: false,
 			showByline: false,
 			imageSlideshowReplace: false,
@@ -307,6 +308,7 @@ export const trails: [
 		properties: {
 			isBreaking: false,
 			showMainVideo: false,
+			videoReplace: false,
 			showKickerTag: false,
 			showByline: true,
 			imageSlideshowReplace: false,
@@ -620,6 +622,7 @@ export const trails: [
 		properties: {
 			isBreaking: false,
 			showMainVideo: false,
+			videoReplace: false,
 			showKickerTag: false,
 			showByline: false,
 			imageSlideshowReplace: false,
@@ -954,6 +957,7 @@ export const trails: [
 		properties: {
 			isBreaking: false,
 			showMainVideo: false,
+			videoReplace: false,
 			showKickerTag: false,
 			showByline: false,
 			imageSlideshowReplace: false,
@@ -1253,6 +1257,7 @@ export const trails: [
 		properties: {
 			isBreaking: false,
 			showMainVideo: false,
+			videoReplace: false,
 			showKickerTag: false,
 			showByline: false,
 			imageSlideshowReplace: false,
@@ -1482,6 +1487,7 @@ export const trails: [
 		properties: {
 			isBreaking: false,
 			showMainVideo: false,
+			videoReplace: false,
 			showKickerTag: false,
 			showByline: false,
 			imageSlideshowReplace: false,
