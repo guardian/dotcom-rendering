@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION=v0.47.0
+VERSION=v0.58.0
 
 download () {
 	printf "Downloading $1 ...\n\n"
