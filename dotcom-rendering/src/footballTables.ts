@@ -96,12 +96,12 @@ const parseResult = (result: FETeamResult): Result<ParserError, TeamResult> => {
 		matchId: result.matchId,
 		self: {
 			id: result.self.id,
-			name: result.self.name,
+			name: cleanTeamName(result.self.name),
 			score: result.self.score,
 		},
 		foe: {
 			id: result.foe.id,
-			name: result.foe.name,
+			name: cleanTeamName(result.foe.name),
 			score: result.foe.score,
 		},
 	});
