@@ -47,19 +47,23 @@ export type CricketMatchPage = SportPageConfig & {
 
 export type FootballMatchSummaryPage = SportPageConfig & {
 	match: FootballMatch;
-	kind: 'MatchSummary';
+	kind: 'FootballMatchSummary';
 };
 
 export type FootballMatchListPageKind = FootballMatchListPage['kind'];
-export type FootballPageKind =
-	| FootballTablesPage['kind']
-	| FootballMatchListPageKind;
 
-export type SportPageKind = FootballPageKind | CricketMatchPage['kind'];
+export type FootballDataWithRegionsPage =
+	| FootballMatchListPage
+	| FootballTablesPage;
 
-export type FootballDataPage = FootballMatchListPage | FootballTablesPage;
+export type FootballPageWithRegionsKind = FootballDataWithRegionsPage['kind'];
 
-export type SportDataPage = FootballDataPage | CricketMatchPage;
+export type SportDataPage =
+	| FootballDataWithRegionsPage
+	| CricketMatchPage
+	| FootballMatchSummaryPage;
+
+export type SportPageKind = SportDataPage['kind'];
 
 export const cleanTeamName = (teamName: string): string => {
 	return teamName

@@ -20,9 +20,10 @@ type Story = StoryObj<typeof meta>;
 
 export const FootballMatchSummary = {
 	args: {
-		homeTeam: matchReport.homeTeam,
-		awayTeam: matchReport.awayTeam,
-		competition: matchReport.competition.fullName,
-		comments: matchReport.comments,
+		match: {
+			homeTeam: matchReport.homeTeam,
+			awayTeam: matchReport.awayTeam,
+			comments: matchReport.comments,
+		},
 	},
 } satisfies Story;
