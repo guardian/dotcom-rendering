@@ -28,6 +28,7 @@ export const Default = () => {
 			<Score score={17} />
 			<Score score={18} />
 			<Score score={31} />
+			<Score score={0.5} />
 			<Score score={NaN} />
 		</>
 	);
