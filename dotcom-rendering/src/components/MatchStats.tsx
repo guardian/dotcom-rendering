@@ -359,6 +359,7 @@ function teamHasStats({ shotsOff, shotsOn, fouls, corners }: FootballTeam) {
 export const MatchStats = (props: Props) => {
 	const { home, away, usage } = props;
 	const showStats = teamHasStats(home) && teamHasStats(away);
+	const showLineups = home.players.length > 0 && away.players.length > 0;
 
 	const format = usage === 'Article' ? props.format : undefined;
 	const backgroundColour =
@@ -447,54 +448,58 @@ export const MatchStats = (props: Props) => {
 						</GridItem>
 					</>
 				)}
-				<GridItem area="subtitle">
-					<ShiftLeft format={format}>
-						{/* Don't show the right border if this text was
+				{showLineups && (
+					<>
+						<GridItem area="subtitle">
+							<ShiftLeft format={format}>
+								{/* Don't show the right border if this text was
                         shifted into the left column */}
-						<Hide when="above" breakpoint="desktop">
+								<Hide when="above" breakpoint="desktop">
+									<RightBorder>
+										<H3>Lineups</H3>
+									</RightBorder>
+								</Hide>
+								<Hide when="below" breakpoint="desktop">
+									<H3>Lineups</H3>
+								</Hide>
+							</ShiftLeft>
+						</GridItem>
+						<GridItem area="home">
 							<RightBorder>
-								<H3>Lineups</H3>
+								<H4>{home.name}</H4>
+								<Lineup
+									players={home.players.filter(
+										(player) => !player.substitute,
+									)}
+								/>
+								<br />
+								<H4>Substitutes</H4>
+								<Lineup
+									players={home.players.filter(
+										(player) => player.substitute,
+									)}
+								/>
+								<br />
 							</RightBorder>
-						</Hide>
-						<Hide when="below" breakpoint="desktop">
-							<H3>Lineups</H3>
-						</Hide>
-					</ShiftLeft>
-				</GridItem>
-				<GridItem area="home">
-					<RightBorder>
-						<H4>{home.name}</H4>
-						<Lineup
-							players={home.players.filter(
-								(player) => !player.substitute,
-							)}
-						/>
-						<br />
-						<H4>Substitutes</H4>
-						<Lineup
-							players={home.players.filter(
-								(player) => player.substitute,
-							)}
-						/>
-						<br />
-					</RightBorder>
-				</GridItem>
-				<GridItem area="away">
-					<H4>{away.name}</H4>
-					<Lineup
-						players={away.players.filter(
-							(player) => !player.substitute,
-						)}
-					/>
-					<br />
-					<H4>Substitutes</H4>
-					<Lineup
-						players={away.players.filter(
-							(player) => player.substitute,
-						)}
-					/>
-					<br />
-				</GridItem>
+						</GridItem>
+						<GridItem area="away">
+							<H4>{away.name}</H4>
+							<Lineup
+								players={away.players.filter(
+									(player) => !player.substitute,
+								)}
+							/>
+							<br />
+							<H4>Substitutes</H4>
+							<Lineup
+								players={away.players.filter(
+									(player) => player.substitute,
+								)}
+							/>
+							<br />
+						</GridItem>
+					</>
+				)}
 			</StatsGrid>
 		</StretchBackground>
 	);
