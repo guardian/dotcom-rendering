@@ -1,0 +1,152 @@
+import { css } from '@emotion/react';
+import { space } from '@guardian/source/foundations';
+import type { IconProps } from '@guardian/source/react-components';
+import type { Dispatch, SetStateAction, SyntheticEvent } from 'react';
+import { forwardRef } from 'react';
+import { palette } from '../palette';
+import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
+import { LoopVideoProgressBar } from './LoopVideoProgressBar';
+
+const videoStyles = css`
+	position: relative;
+	width: 100%;
+	height: auto;
+	/* Find out why this is needed to align the video with its container. */
+	margin-bottom: -3px;
+	cursor: pointer;
+`;
+
+const playIconStyles = css`
+	position: absolute;
+	top: calc(50% - ${narrowPlayIconWidth / 2}px);
+	left: calc(50% - ${narrowPlayIconWidth / 2}px);
+	cursor: pointer;
+	border: none;
+	background: none;
+	padding: 0;
+`;
+
+const audioButtonStyles = css`
+	border: none;
+	background: none;
+	padding: 0;
+	position: absolute;
+	bottom: ${space[8]}px;
+	right: ${space[8]}px;
+	cursor: pointer;
+`;
+
+type Props = {
+	src: string;
+	videoId: string;
+	width: number;
+	height: number;
+	hasAudio: boolean;
+	fallbackImage: JSX.Element;
+	isPlayable: boolean;
+	setIsPlayable: Dispatch<SetStateAction<boolean>>;
+	isPlaying: boolean;
+	setIsPlaying: Dispatch<SetStateAction<boolean>>;
+	isMuted: boolean;
+	setIsMuted: Dispatch<SetStateAction<boolean>>;
+	handleClick: (event: SyntheticEvent) => void;
+	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
+	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
+	elapsedTime: number;
+	AudioIcon: (iconProps: IconProps) => JSX.Element;
+};
+
+/**
+ * Note that in React 19, forwardRef is no longer necessary:
+ * https://react.dev/reference/react/forwardRef
+ */
+export const LoopVideoPlayer = forwardRef(
+	(
+		{
+			src,
+			videoId,
+			width,
+			height,
+			hasAudio,
+			fallbackImage,
+			isPlayable,
+			setIsPlayable,
+			isPlaying,
+			setIsPlaying,
+			isMuted,
+			setIsMuted,
+			handleClick,
+			handleKeyDown,
+			onError,
+			elapsedTime,
+			AudioIcon,
+		}: Props,
+		ref: React.ForwardedRef<HTMLVideoElement>,
+	) => {
+		return (
+			<>
+				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Captions will be considered later. */}
+				<video
+					id={`loop-video-${videoId}`}
+					ref={ref}
+					preload="none"
+					loop={true}
+					muted={isMuted}
+					playsInline={true}
+					height={height}
+					width={width}
+					onPlaying={() => {
+						setIsPlaying(true);
+					}}
+					onCanPlay={() => {
+						setIsPlayable(true);
+					}}
+					onClick={handleClick}
+					onKeyDown={handleKeyDown}
+					role="button"
+					tabIndex={0}
+					onError={onError}
+					css={videoStyles}
+				>
+					{/* Ensure webm source is provided. Encoding the video to a webm file will improve
+					performance on supported browsers. https://web.dev/articles/video-and-source-tags */}
+					{/* <source src={webmSrc} type="video/webm"> */}
+					<source src={src} type="video/mp4" />
+					{fallbackImage}
+				</video>
+				{ref && 'current' in ref && ref.current && (
+					<>
+						{isPlayable && !isPlaying && (
+							<div css={playIconStyles}>
+								<PlayIcon iconWidth="narrow" />
+							</div>
+						)}
+						<LoopVideoProgressBar
+							currentTime={elapsedTime}
+							duration={ref.current.duration}
+						/>
+						{hasAudio && (
+							<button
+								type="button"
+								onClick={(event) => {
+									event.stopPropagation(); // Don't pause the video
+									setIsMuted(!isMuted);
+								}}
+								css={audioButtonStyles}
+							>
+								<AudioIcon
+									size="small"
+									theme={{
+										fill: palette(
+											'--loop-video-audio-icon',
+										),
+									}}
+								/>
+							</button>
+						)}
+					</>
+				)}
+			</>
+		);
+	},
+);

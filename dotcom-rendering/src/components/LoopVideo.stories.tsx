@@ -1,3 +1,4 @@
+import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { CardPicture } from './CardPicture';
@@ -8,6 +9,11 @@ export default {
 	title: 'Components/LoopVideo',
 	decorators: [centreColumnDecorator],
 	render: (args) => <LoopVideo {...args} />,
+	parameters: {
+		chromatic: {
+			viewports: [breakpoints.mobile, breakpoints.wide],
+		},
+	},
 } satisfies Meta<typeof LoopVideo>;
 
 export const Default = {

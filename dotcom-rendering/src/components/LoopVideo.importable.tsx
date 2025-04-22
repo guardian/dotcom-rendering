@@ -1,48 +1,16 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
-import { space } from '@guardian/source/foundations';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { useIsInView } from '../lib/useIsInView';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
-import { palette } from '../palette';
-import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
 import { useConfig } from './ConfigContext';
-import { LoopVideoProgressBar } from './LoopVideoProgressBar';
+import { LoopVideoPlayer } from './LoopVideoPlayer';
 
 const videoContainerStyles = css`
 	z-index: ${getZIndex('loop-video-container')};
-	cursor: pointer;
 	position: relative;
-`;
-
-const videoStyles = css`
-	position: relative;
-	width: 100%;
-	height: auto;
-	/* Find out why this is needed to align the video with its container. */
-	margin-bottom: -3px;
-`;
-
-const playIconStyles = css`
-	position: absolute;
-	top: calc(50% - ${narrowPlayIconWidth / 2}px);
-	left: calc(50% - ${narrowPlayIconWidth / 2}px);
-	cursor: pointer;
-	border: none;
-	background: none;
-	padding: 0;
-`;
-
-const audioButtonStyles = css`
-	border: none;
-	background: none;
-	padding: 0;
-	position: absolute;
-	bottom: ${space[8]}px;
-	right: ${space[8]}px;
-	cursor: pointer;
 `;
 
 type Props = {
@@ -78,8 +46,6 @@ export const LoopVideo = ({
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
 		threshold: 0.5,
-		node: vidRef.current ?? undefined,
-		debounce: true,
 	});
 
 	/**
@@ -167,7 +133,7 @@ export const LoopVideo = ({
 	};
 
 	const handleKeyDown = (
-		event: React.KeyboardEvent<HTMLDivElement>,
+		event: React.KeyboardEvent<HTMLVideoElement>,
 	): void => {
 		switch (event.key) {
 			case 'Enter':
@@ -189,66 +155,28 @@ export const LoopVideo = ({
 		<div
 			className="loop-video-container"
 			ref={setNode}
-			onClick={handleClick}
-			onKeyDown={handleKeyDown}
-			role="button"
-			tabIndex={0}
 			css={videoContainerStyles}
 		>
-			{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Captions will be considered later. */}
-			<video
-				id={`loop-video-${videoId}`}
-				ref={vidRef}
-				preload="none"
-				loop={true}
-				muted={isMuted}
-				playsInline={true}
-				height={height}
+			<LoopVideoPlayer
+				src={src}
+				videoId={videoId}
 				width={width}
-				onPlaying={() => {
-					setIsPlaying(true);
-				}}
-				onCanPlay={() => {
-					setIsPlayable(true);
-				}}
+				height={height}
+				hasAudio={hasAudio}
+				fallbackImage={fallbackImage}
+				ref={vidRef}
+				isPlayable={isPlayable}
+				setIsPlayable={setIsPlayable}
+				isPlaying={isPlaying}
+				setIsPlaying={setIsPlaying}
+				isMuted={isMuted}
+				setIsMuted={setIsMuted}
+				handleClick={handleClick}
+				handleKeyDown={handleKeyDown}
 				onError={onError}
-				css={videoStyles}
-			>
-				{/* Ensure webm source is provided */}
-				{/* <source src={webmSrc} type="video/webm"> */}
-				<source src={src} type="video/mp4" />
-				{fallbackImage}
-			</video>
-			{vidRef.current && (
-				<>
-					{isPlayable && !isPlaying && (
-						<div css={playIconStyles}>
-							<PlayIcon iconWidth="narrow" />
-						</div>
-					)}
-					<LoopVideoProgressBar
-						currentTime={elapsedTime}
-						duration={vidRef.current.duration}
-					/>
-					{hasAudio && (
-						<button
-							type="button"
-							onClick={(event) => {
-								event.stopPropagation(); // Don't pause the video
-								setIsMuted(!isMuted);
-							}}
-							css={audioButtonStyles}
-						>
-							<AudioIcon
-								size="small"
-								theme={{
-									fill: palette('--loop-video-audio-icon'),
-								}}
-							/>
-						</button>
-					)}
-				</>
-			)}
+				elapsedTime={elapsedTime}
+				AudioIcon={AudioIcon}
+			/>
 		</div>
 	);
 };
