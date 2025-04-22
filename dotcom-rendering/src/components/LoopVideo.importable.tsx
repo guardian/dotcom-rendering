@@ -3,15 +3,11 @@ import { log } from '@guardian/libs';
 import { space } from '@guardian/source/foundations';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
-import type { FEAspectRatio } from '../frontend/feFront';
 import { getZIndex } from '../lib/getZIndex';
 import { useIsInView } from '../lib/useIsInView';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { palette } from '../palette';
-import type { ImageSizeType } from './Card/components/ImageWrapper';
 import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
-import type { Loading } from './CardPicture';
-import { CardPicture } from './CardPicture';
 import { useConfig } from './ConfigContext';
 import { LoopVideoProgressBar } from './LoopVideoProgressBar';
 
@@ -49,33 +45,22 @@ const audioButtonStyles = css`
 	cursor: pointer;
 `;
 
-type ImageProps = {
-	posterImage: string;
-	imageSize: ImageSizeType;
-	imageLoading: Loading;
-	altText?: string;
-	aspectRatio?: FEAspectRatio;
-};
-
-type Props = ImageProps & {
+type Props = {
 	src: string;
 	videoId?: string;
 	width?: number;
 	height?: number;
 	hasAudio?: boolean;
+	fallbackImage: JSX.Element;
 };
 
 export const LoopVideo = ({
 	src,
 	videoId,
-	posterImage,
-	imageSize,
-	imageLoading,
-	altText,
-	aspectRatio,
 	width = 600,
 	height = 360,
 	hasAudio = true,
+	fallbackImage,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -132,15 +117,7 @@ export const LoopVideo = ({
 	if (renderingTarget !== 'Web') return null;
 
 	if (adapted) {
-		return (
-			<CardPicture
-				mainImage={posterImage}
-				imageSize={imageSize}
-				alt={altText}
-				loading={imageLoading}
-				aspectRatio={aspectRatio}
-			/>
-		);
+		return fallbackImage;
 	}
 
 	const handleClick = (event: React.SyntheticEvent) => {
@@ -226,7 +203,6 @@ export const LoopVideo = ({
 				loop={true}
 				muted={isMuted}
 				playsInline={true}
-				poster={posterImage}
 				height={height}
 				width={width}
 				onPlaying={() => {
@@ -241,13 +217,7 @@ export const LoopVideo = ({
 				{/* Ensure webm source is provided */}
 				{/* <source src={webmSrc} type="video/webm"> */}
 				<source src={src} type="video/mp4" />
-				<CardPicture
-					mainImage={posterImage}
-					imageSize={imageSize}
-					alt={altText}
-					loading={imageLoading}
-					aspectRatio={aspectRatio}
-				/>
+				{fallbackImage}
 			</video>
 			{vidRef.current && (
 				<>
