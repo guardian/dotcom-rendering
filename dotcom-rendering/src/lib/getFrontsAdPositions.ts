@@ -109,9 +109,8 @@ const canInsertMobileAd =
 
 		/** Additional rules exist for "beta" fronts which have primary and secondary level containers */
 		const betaFrontRules = [
-			// Allow insertion after first container at any time but for all other situations,
-			// prevent insertion before a secondary level container
-			index === 0 || !isBeforeSecondaryLevelContainer(index, collections),
+			// Prevent insertion before a secondary level container
+			!isBeforeSecondaryLevelContainer(index, collections),
 			// Prevent insertion before a branded container
 			!isBeforeBrandedContainer(index, collections),
 		];

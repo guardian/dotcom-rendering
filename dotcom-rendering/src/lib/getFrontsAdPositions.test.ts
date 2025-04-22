@@ -218,7 +218,7 @@ describe('Mobile Ads', () => {
 
 	it('Europe Network Front, with beta containers and more than 4 collections, with thrashers in various places', () => {
 		const testCollections: AdCandidateMobile[] = [
-			{ collectionType: 'flexible/general', containerLevel: 'Primary' }, // Ad position (0)
+			{ collectionType: 'flexible/general', containerLevel: 'Primary' }, // Ignored - is before secondary container
 			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ignored - is before secondary container
 			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ignored - is before secondary container
 			{
@@ -262,7 +262,7 @@ describe('Mobile Ads', () => {
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 4, 6, 8, 13, 18]);
+		expect(mobileAdPositions).toEqual([4, 6, 8, 13, 18]);
 	});
 });
 
