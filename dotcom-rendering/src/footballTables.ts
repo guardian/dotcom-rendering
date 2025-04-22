@@ -7,6 +7,7 @@ import type {
 	FETeamResult,
 } from './frontend/feFootballTablesPage';
 import { error, ok, type Result } from './lib/result';
+import { cleanTeamName } from './sportDataPage';
 
 type TeamScore = {
 	name: string;
@@ -122,7 +123,7 @@ const parseEntry = (
 	return ok({
 		position: team.rank,
 		team: {
-			name: team.name,
+			name: cleanTeamName(team.name),
 			id: team.id,
 			url: teamUrl,
 		},
