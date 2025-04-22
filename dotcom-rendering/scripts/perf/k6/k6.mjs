@@ -15,6 +15,7 @@ const jsonPayload = new SharedArray('jsonPayload', function () {
 export const options = {
 	vus: 10,
 	duration: '60s',
+	insecureSkipTLSVerify: true,
 };
 
 // eslint-disable-next-line import/no-default-export -- k6 requires a default export
