@@ -14,6 +14,7 @@ export const Default = {
 	name: 'Default',
 	args: {
 		src: 'https://uploads.guim.co.uk/2024/10/01/241001HeleneLoop_2.mp4',
+		videoId: 'test-video-1',
 		fallbackImage: (
 			<CardPicture
 				mainImage="https://i.guim.co.uk/img/media/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/91_0_1800_1080/master/1800.jpg?width=465&dpr=1&s=none&crop=5%3A4"
@@ -24,7 +25,7 @@ export const Default = {
 	},
 } satisfies StoryObj<typeof LoopVideo>;
 
-export const WithouAudio = {
+export const WithoutAudio = {
 	name: 'Without Audio',
 	args: {
 		...Default.args,

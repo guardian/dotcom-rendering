@@ -47,7 +47,7 @@ const audioButtonStyles = css`
 
 type Props = {
 	src: string;
-	videoId?: string;
+	videoId: string;
 	width?: number;
 	height?: number;
 	hasAudio?: boolean;
