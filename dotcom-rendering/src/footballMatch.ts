@@ -8,6 +8,7 @@ import type {
 } from './frontend/feFootballMatchPage';
 import type { Result } from './lib/result';
 import { error, ok } from './lib/result';
+import { cleanTeamName } from './sportDataPage';
 
 const eventTypes = ['substitution', 'dismissal', 'booking'] as const;
 const isEventType = isOneOf(eventTypes);
@@ -109,7 +110,7 @@ const parseTeam = (
 
 	return ok({
 		id: feFootballMatchTeam.id,
-		name: feFootballMatchTeam.name,
+		name: cleanTeamName(feFootballMatchTeam.name),
 		codename: feFootballMatchTeam.codename,
 		score: feFootballMatchTeam.score,
 		scorers: feFootballMatchTeam.scorers,
