@@ -110,11 +110,13 @@ const decideImageWidths = (
 					breakpoint: breakpoints.tablet,
 					width: 700,
 					aspectRatio: '5:3',
+					cropOffset: { x: 50, y: 0 },
 				},
 				{
 					breakpoint: breakpoints.desktop,
 					width: 940,
 					aspectRatio: '5:3',
+					cropOffset: { x: 50, y: 0 },
 				},
 			];
 	}

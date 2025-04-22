@@ -48,13 +48,13 @@ const decideTitle = (sportPage: SportDataPage) => {
 		case 'FootballTables':
 			return decideFootballTitleWithCompetition(sportPage);
 		case 'CricketMatch':
-			return decideCricketTitle(sportPage);
+			return createCricketTitle(sportPage);
 		case 'FootballMatchSummary':
-			return decideMatchSummaryTitle(sportPage.match);
+			return createMatchSummaryTitle(sportPage.match);
 	}
 };
 
-function decideMatchSummaryTitle(match: FootballMatch) {
+function createMatchSummaryTitle(match: FootballMatch) {
 	return `${match.homeTeam.name} ${match.homeTeam.score ?? ''} - ${
 		match.awayTeam.score ?? ''
 	} ${match.awayTeam.name} | Football | The Guardian`;
@@ -93,7 +93,7 @@ const decideFootballTitleWithCompetition = (
 	}
 };
 
-const decideCricketTitle = (sportPage: CricketMatchPage) => {
+const createCricketTitle = (sportPage: CricketMatchPage) => {
 	return `${sportPage.match.competitionName}, ${sportPage.match.venueName} | Cricket | The Guardian`;
 };
 

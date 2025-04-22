@@ -8,6 +8,7 @@ import type {
 } from './frontend/feFootballMatchPage';
 import type { Result } from './lib/result';
 import { error, ok } from './lib/result';
+import { cleanTeamName } from './sportDataPage';
 
 const eventTypes = ['substitution', 'dismissal', 'booking'] as const;
 const isEventType = isOneOf(eventTypes);
@@ -47,7 +48,7 @@ export type FootballPlayer = {
 export type FootballMatch = {
 	homeTeam: FootballTeam;
 	awayTeam: FootballTeam;
-	comments: string;
+	comments?: string;
 };
 
 type UnknownEventType = {
@@ -109,7 +110,7 @@ const parseTeam = (
 
 	return ok({
 		id: feFootballMatchTeam.id,
-		name: feFootballMatchTeam.name,
+		name: cleanTeamName(feFootballMatchTeam.name),
 		codename: feFootballMatchTeam.codename,
 		score: feFootballMatchTeam.score,
 		scorers: feFootballMatchTeam.scorers,
@@ -141,6 +142,6 @@ export const parse = (
 	return ok({
 		homeTeam: parsedHomeTeam.value,
 		awayTeam: parsedAwayTeam.value,
-		comments: feFootballMatch.comments ?? '',
+		comments: feFootballMatch.comments,
 	});
 };
