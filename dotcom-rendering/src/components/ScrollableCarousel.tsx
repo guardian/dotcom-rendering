@@ -317,7 +317,9 @@ export const ScrollableCarousel = ({
 					),
 					stackedCardRowsStyles(shouldStackCards),
 				]}
-				data-heatphan-type="carousel"
+				// HOTFIX: We have disabled the heatphan carousel attribute as it was causing rendering issues in heatphan as these carousels are no longer scrollable on tablet and desktop.
+				// TODO: create a breakpoint option for heatphan
+				// data-heatphan-type="carousel"
 			>
 				{children}
 			</ol>
