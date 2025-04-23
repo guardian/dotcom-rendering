@@ -30,6 +30,8 @@ import {
 import {
 	handleCricketMatchPage,
 	handleFootballMatchListPage,
+	handleFootballMatchPage,
+	handleFootballTablesPage,
 } from './handler.sportDataPage.web';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
@@ -78,6 +80,12 @@ export const prodServer = (): void => {
 	app.post('/TagPageJSON', logRenderTime, handleTagPageJson);
 	app.post('/FootballDataPage', logRenderTime, handleFootballMatchListPage);
 	app.post('/CricketMatchPage', logRenderTime, handleCricketMatchPage);
+	app.post('/FootballTablesPage', logRenderTime, handleFootballTablesPage);
+	app.post(
+		'/FootballMatchSummaryPage',
+		logRenderTime,
+		handleFootballMatchPage,
+	);
 
 	app.post(
 		'/EmailNewsletters',
