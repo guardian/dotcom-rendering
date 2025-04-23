@@ -165,7 +165,7 @@ const decideImage = (
 					isCircular={false}
 					aspectRatio="1:1"
 				/>
-				<div className="image-overlay"> </div>
+				<div className="image-overlay" />
 			</>
 		);
 	}
@@ -177,7 +177,7 @@ const decideImage = (
 	return (
 		<>
 			<CardPicture
-				imageSize="medium"
+				imageSize="highlights-card"
 				mainImage={image.src}
 				alt={image.altText}
 				loading={imageLoading}
@@ -185,7 +185,7 @@ const decideImage = (
 				aspectRatio="1:1"
 			/>
 			{/* This image overlay is styled when the CardLink is hovered */}
-			<div className="image-overlay circular"> </div>
+			<div className="image-overlay circular" />
 		</>
 	);
 };
