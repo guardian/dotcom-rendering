@@ -21,7 +21,7 @@ export type FEFootballTeam = {
 	name: string;
 	codename: string;
 	players: FEFootballPlayer[];
-	score: number;
+	score?: number;
 	scorers: string[];
 	possession: number;
 	shotsOn: number;
@@ -36,9 +36,9 @@ export type FEFootballMatch = {
 	id: string;
 	homeTeam: FEFootballTeam;
 	awayTeam: FEFootballTeam;
-	comments: string;
+	comments?: string;
 };
 
 export type FEFootballMatchPage = FEFootballDataPage & {
-	match: FEFootballMatch;
+	footballMatch: FEFootballMatch;
 };

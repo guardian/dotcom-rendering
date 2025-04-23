@@ -30,7 +30,6 @@ export type FESportPageConfig = Omit<
 };
 
 export type FEFootballDataPage = {
-	filters: Record<string, FEFootballCompetition[]>;
 	nav: FENavType;
 	editionId: EditionId;
 	guardianBaseURL: string;
