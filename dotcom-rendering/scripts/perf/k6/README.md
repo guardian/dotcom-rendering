@@ -20,11 +20,13 @@ From the k6 directory run (for example with v0.58.0)
 ./k6-v0.58.0-macos-arm64/k6 run k6.mjs
 ```
 
-The current script `k6.mjs` loads a locally saved JSON payload which will then POST to the DCR `/Article` endpoint. The local payload file removes the fetching of the JSON payload from the test scenario.
+The current script `k6.mjs` loads a locally saved JSON payload which will then POST to the DCR `/Article` endpoint. Using a local payload file and the PROD POST endpoint mimics production and also removes the step of a network fetch of the JSON payload from Frontend from the test scenario.
 
 You can of course configure this to be any payload and endpoint you wish.
 
 ## Testing Advice
+
+Test against a PROD build and endpoints.
 
 Run the script 2-3 times to warm the app and instance if working from a cold start.
 
