@@ -1,3 +1,4 @@
+import { UserData } from 'aws-cdk-lib/aws-ec2';
 import type { RenderingCDKStackProps } from './renderingStack';
 
 interface UserDataProps extends Pick<RenderingCDKStackProps, 'stage'> {
@@ -15,25 +16,23 @@ export const getUserData = ({
 	guStack,
 	stage,
 	artifactsBucket,
-}: UserDataProps): string => {
-	const userData = [
+}: UserDataProps): UserData => {
+	const userData = UserData.forLinux();
+	// create groups, download artifact, unzip and set permissions
+	userData.addCommands(
 		`#!/bin/bash -ev`,
-
 		`groupadd frontend`,
 		`useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering`,
 		`cd /home/dotcom-rendering`,
-
 		`aws --region eu-west-1 s3 cp s3://${artifactsBucket}/frontend/${stage}/${guApp}/${guApp}.tar.gz ./`,
 		`tar -zxf ${guApp}.tar.gz ${guApp}`,
-
 		`chown -R dotcom-rendering:frontend ${guApp}`,
-
 		`cd ${guApp}`,
-
 		`mkdir /var/log/dotcom-rendering`,
 		`chown -R dotcom-rendering:frontend /var/log/dotcom-rendering`,
-
-		// write out systemd file
+	);
+	// write out systemd service file
+	userData.addCommands(
 		`cat > /etc/systemd/system/${guApp}.service << EOF`,
 		`[Unit]`,
 		`Description=${guApp}`,
@@ -55,10 +54,11 @@ export const getUserData = ({
 		`[Install]`,
 		`WantedBy=multi-user.target`,
 		`EOF`,
-
+	);
+	// enable and start the service
+	userData.addCommands(
 		`systemctl enable ${guApp}`, // enable the service
 		`systemctl start ${guApp}`, // start the service
-	].join('\n');
-
+	);
 	return userData;
 };
