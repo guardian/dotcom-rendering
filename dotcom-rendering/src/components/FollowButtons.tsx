@@ -79,7 +79,7 @@ const tagTextSpan = ({
 	displayName?: string;
 }) => (
 	<span>
-		{isFollowing ? 'Following' : 'Follow'} {displayName}
+		{isFollowing ? 'Following' : 'Follow'} {displayName} in MyGuardian
 	</span>
 );
 

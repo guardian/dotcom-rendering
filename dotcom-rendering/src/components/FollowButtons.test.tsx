@@ -31,7 +31,7 @@ it('should show a follow contributor button for a single contributor when render
 			displayName="Jon Doe"
 		/>,
 	);
-	expect(getByText('Follow Jon Doe')).toBeInTheDocument();
+	expect(getByText('Follow Jon Doe in MyGuardian')).toBeInTheDocument();
 });
 
 it('should show a follow contributor button for a single contributor when rendering for apps', async () => {
@@ -43,6 +43,8 @@ it('should show a follow contributor button for a single contributor when render
 		/>,
 	);
 	await waitFor(() =>
-		expect(getByText('Following Jon Doe')).toBeInTheDocument(),
+		expect(
+			getByText('Following Jon Doe in MyGuardian'),
+		).toBeInTheDocument(),
 	);
 });
