@@ -20,7 +20,16 @@ export const Default = () => {
 			<Score score={9} />
 			<Score score={10} />
 			<Score score={11} />
-			<p>^ We only go up to 10 at the moment 🤷‍♀</p>
+			<Score score={12} />
+			<Score score={13} />
+			<Score score={14} />
+			<Score score={15} />
+			<Score score={16} />
+			<Score score={17} />
+			<Score score={18} />
+			<Score score={31} />
+			<Score score={0.5} />
+			<Score score={NaN} />
 		</>
 	);
 };
