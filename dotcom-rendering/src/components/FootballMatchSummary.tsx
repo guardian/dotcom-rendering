@@ -54,6 +54,7 @@ export const FootballMatchSummary = ({ match }: Props) => (
 				homeTeam={match.homeTeam}
 				awayTeam={match.awayTeam}
 				comments={match.comments}
+				usage="MatchSummary"
 			/>
 		</div>
 		<div

@@ -54,24 +54,26 @@ export const Default = () => {
 			homeTeam={homeTeam}
 			awayTeam={awayTeam}
 			comments="Here is a comments string"
+			usage="Article"
 		/>
 	);
 };
 Default.storyName = 'default';
 
-export const ZeroZero = () => {
+export const NilNil = () => {
 	return (
 		<MatchNav
 			homeTeam={{ ...homeTeam, score: 0, scorers: [] }}
 			awayTeam={{ ...awayTeam, score: 0, scorers: [] }}
 			comments="Neither team scored any goals"
+			usage="Article"
 		/>
 	);
 };
-ZeroZero.storyName = 'zero - zero';
+NilNil.storyName = 'nil - nil';
 
 export const NoComments = () => {
-	return <MatchNav homeTeam={homeTeam} awayTeam={awayTeam} />;
+	return <MatchNav homeTeam={homeTeam} awayTeam={awayTeam} usage="Article" />;
 };
 NoComments.storyName = 'with no comments';
 
@@ -93,6 +95,7 @@ export const InContext = () => {
 						homeTeam={homeTeam}
 						awayTeam={awayTeam}
 						comments="Here is a comments string"
+						usage="Article"
 					/>
 				</ArticleContainer>
 				<RightColumn>
@@ -109,7 +112,19 @@ export const NoScore = () => {
 		<MatchNav
 			homeTeam={{ ...homeTeam, score: undefined, scorers: [] }}
 			awayTeam={{ ...awayTeam, score: undefined, scorers: [] }}
+			usage="Article"
 		/>
 	);
 };
 NoScore.storyName = 'with no scores';
+
+export const NilNilInMatchSummary = () => {
+	return (
+		<MatchNav
+			homeTeam={{ ...homeTeam, score: 0, scorers: [] }}
+			awayTeam={{ ...awayTeam, score: 0, scorers: [] }}
+			usage="MatchSummary"
+		/>
+	);
+};
+NilNilInMatchSummary.storyName = 'nil - nil in match summary';
