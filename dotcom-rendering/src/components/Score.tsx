@@ -34,7 +34,7 @@ type Props = {
 };
 
 const ScoreNumber = ({ score }: Props) => {
-	if (Number.isNaN(score) || !Number.isInteger(score)) {
+	if (!Number.isInteger(score) || score < 0) {
 		return null;
 	}
 
