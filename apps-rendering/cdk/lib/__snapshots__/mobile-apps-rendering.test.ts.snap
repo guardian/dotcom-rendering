@@ -1035,7 +1035,7 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
                 "",
                 [
                   "#!/bin/bash
-#!/bin/bash -ev
+set -ev
 groupadd mapi
 useradd -r -m -s /usr/bin/nologin -g mapi mobile-apps-rendering
 export App=mobile-apps-rendering
@@ -2151,7 +2151,7 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
                 "",
                 [
                   "#!/bin/bash
-#!/bin/bash -ev
+set -ev
 groupadd mapi
 useradd -r -m -s /usr/bin/nologin -g mapi mobile-apps-rendering
 export App=mobile-apps-rendering

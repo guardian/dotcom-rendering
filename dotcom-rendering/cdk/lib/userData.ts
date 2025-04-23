@@ -20,7 +20,7 @@ export const getUserData = ({
 	const userData = UserData.forLinux();
 	// create groups, download artifact, unzip and set permissions
 	userData.addCommands(
-		`#!/bin/bash -ev`,
+		`set -ev`,
 		`groupadd frontend`,
 		`useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering`,
 		`cd /home/dotcom-rendering`,

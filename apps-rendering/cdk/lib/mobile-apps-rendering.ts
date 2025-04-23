@@ -53,7 +53,7 @@ export class MobileAppsRendering extends GuStack {
 
 		const userData = UserData.forLinux();
 		userData.addCommands(
-			`#!/bin/bash -ev`,
+			`set -ev`,
 			`groupadd mapi`,
 			`useradd -r -m -s /usr/bin/nologin -g mapi ${appName}`,
 

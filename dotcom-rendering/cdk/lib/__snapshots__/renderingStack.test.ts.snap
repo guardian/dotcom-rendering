@@ -1655,7 +1655,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                 "",
                 [
                   "#!/bin/bash
-#!/bin/bash -ev
+set -ev
 groupadd frontend
 useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
 cd /home/dotcom-rendering
