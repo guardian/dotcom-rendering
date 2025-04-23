@@ -4,11 +4,42 @@
 
 This will be a central location for all AB tests running on the theguardian.com. The goal is to have a single source of truth for both client and server side tests.
 
-The build and release CI steps will ensure that the tests are validated and serialized correctly before being uploaded to the Fastly dictionary.
+The build and release CI steps will ensure that the tests are validated and serialized correctly before being uploaded to the Fastly dictionary API.
 
-Having both client and server side tests managed here will allow us to use the same logic (within fastly) to determine which test a user is in regardless of if it is client or server side.
+Example dictionary setup:
 
-Our fastly vcl code will set a cookie that can be used by client or server code to determine which test a user is in. For server side tests it will additionally add to a header that the cache will be split on. [Example implementation here](https://fiddle.fastly.dev/fiddle/96e30123)
+```
+# our mvt space and which test groups are occupying it
+table mvt_ab_test_groups {
+  "mvt0": "0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control",
+  "mvt1": "0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant",
+}
+
+# This table contains the active A/B test groups and their parameters
+table active_ab_test_groups {
+  "commercial-ad-block-ask:control": "exp=1745971200,type=client",
+  "commercial-ad-block-ask:variant": "exp=1745971200,type=client",
+  "commercial-some-100-perc-test:control": "exp=1745971200,type=server",
+  "commercial-some-100-perc-test:variant": "exp=1745971200,type=server"
+}
+```
+
+The `mvt_ab_test_groups` table will be used to determine which test a user is in, and the `active_ab_test_groups` table will be used to determine if a test is active and what type it is.
+
+Having both client and server side tests managed here will allow us to use the same logic (within fastly) to determine which test a user is in regardless of if it is client or server side. [See the fiddle for more details](https://fiddle.fastly.dev/fiddle/47149485).
+
+Our fastly vcl code will set a cookie that can be used by client or server code to determine which test a user is in. For server side tests it will additionally add to a header that the cache will be split on.
+
+Opting in to a test will be done similarly to how we do it for server side tests now, by setting a cookie.
+
+Test expirations are stored in the dictionary, and checked by fastly to determine if a test is still active, if a test is expired it won't be served to users.
+
+0% tests are in the `active_ab_test_groups` table so we can still force ourselves into them, but they are not in the `mvt_ab_test_groups` table as they don't take up any mvt id space.
+
+## Limitations
+
+-   The dictionary API has a limit of 1000 items per dictionary, we won't get anywhere near this limit, but it's worth noting.
+-   This setups reduces our mvt id space from 0-999999 to 0-99, this should be fine as we have rarely used decimal precision test sizes. This would only came up for example with a multi-variant test that doesn't divide evenly into the total test size, with the current config we sent the variant/group size explicitly so this won't be an issue.
 
 ## How build/CI step will work
 
@@ -46,8 +77,10 @@ This config:
 		expirationDate: new Date('2025-05-31'),
 		type: 'client',
 		highImpact: false,
-		controlGroup: { id: 'control', size: 5 / 100 },
-		variantGroups: [{ id: 'variant', size: 5 / 100 }],
+		groups: [
+			{ id: 'control', size: 5 / 100 },
+			{ id: 'variant', size: 5 / 100 }
+		],
 	},
 	{
 		name: 'commercial-some-other-test',
@@ -58,8 +91,10 @@ This config:
 		expirationDate: new Date('2025-05-31'),
 		type: 'client',
 		highImpact: false,
-		controlGroup: { id: 'control', size: 5 / 100 },
-		variantGroups: [{ id: 'variant', size: 5 / 100 }],
+		groups: [
+			{ id: 'control', size: 5 / 100 },
+			{ id: 'variant', size: 5 / 100 }
+		],
 	},
 	{
 		name: 'commercial-some-100-perc-test',
@@ -70,13 +105,15 @@ This config:
 		expirationDate: new Date('2025-05-31'),
 		type: 'client',
 		highImpact: false,
-		controlGroup: { id: 'control', size: 50 / 100 },
-		variantGroups: [{ id: 'variant', size: 50 / 100 }],
+		groups: [
+			{ id: 'control', size: 50 / 100 },
+			{ id: 'variant', size: 50 / 100 }
+		],
 		allowOverlap: true,
 	},
 	// Example server side AB test definition
 	{
-		name: 'webex-europe-beta-front',
+		name: 'fronts-curation-europe-beta-front',
 		description:
 			'Allows viewing the beta version of the Europe network front',
 		owners: [
@@ -87,8 +124,10 @@ This config:
 		expirationDate: new Date('2025-04-02'),
 		type: 'server',
 		highImpact: false,
-		controlGroup: { id: 'control', size: 50 / 100 },
-		variantGroups: [{ id: 'variant', size: 50 / 100 }],
+		groups: [
+			{ id: 'control', size: 50 / 100 },
+			{ id: 'variant', size: 50 / 100 }
+		],
 		allowOverlap: true,
 	},
 ```
@@ -96,43 +135,32 @@ This config:
 Could result in the following key-values to be stored in the dictionary:
 | key | value |
 | -------- | ------- |
-| client-bucket-0 | commercial-ad-block-ask:control,commercial-some-100-perc-test:control |
-| client-bucket-1 | commercial-ad-block-ask:variant,commercial-some-100-perc-test:variant |
-| client-bucket-2 | commercial-ad-block-ask:control,commercial-some-100-perc-test:control |
-| client-bucket-3 | commercial-ad-block-ask:variant,commercial-some-100-perc-test:variant |
-| client-bucket-4 | commercial-ad-block-ask:control,commercial-some-100-perc-test:control |
-| client-bucket-5 | commercial-ad-block-ask:variant,commercial-some-100-perc-test:variant |
-| client-bucket-6 | commercial-ad-block-ask:control,commercial-some-100-perc-test:control |
-| client-bucket-7 | commercial-ad-block-ask:variant,commercial-some-100-perc-test:variant |
-| client-bucket-8 | commercial-ad-block-ask:control,commercial-some-100-perc-test:control |
-| client-bucket-9 | commercial-ad-block-ask:variant,commercial-some-100-perc-test:variant |
-| client-bucket-10 | commercial-some-other-test:control,commercial-some-100-perc-test:control |
-| client-bucket-11 | commercial-some-other-test:variant,commercial-some-100-perc-test:variant |
-| client-bucket-12 | commercial-some-other-test:control,commercial-some-100-perc-test:control |
-| client-bucket-13 | commercial-some-other-test:variant,commercial-some-100-perc-test:variant |
-| client-bucket-14 | commercial-some-other-test:control,commercial-some-100-perc-test:control |
-| client-bucket-15 | commercial-some-other-test:variant,commercial-some-100-perc-test:variant |
-| client-bucket-16 | commercial-some-other-test:control,commercial-some-100-perc-test:control |
-| client-bucket-17 | commercial-some-other-test:variant,commercial-some-100-perc-test:variant |
-| client-bucket-18 | commercial-some-other-test:control,commercial-some-100-perc-test:control |
-| client-bucket-19 | commercial-some-other-test:variant,commercial-some-100-perc-test:variant |
-| client-bucket-20 | commercial-some-100-perc-test:control |
-| client-bucket-21 | commercial-some-100-perc-test:variant |
-| client-bucket-22 | commercial-some-100-perc-test:control |
-| client-bucket-23 | commercial-some-100-perc-test:variant |
+| mvt0 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt1 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt2 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt3 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt4 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt5 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt6 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt7 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt8 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt9 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt10 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt11 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt12 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt13 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt14 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt15 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt16 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt17 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt18 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt19 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt20 | 0=commercial-some-100-perc-test:control,1=fronts-curation-europe-beta-front:control |
+| mvt21 | 0=commercial-some-100-perc-test:variant,1=fronts-curation-europe-beta-front:variant |
+| mvt22 | 0=commercial-some-100-perc-test:control,1=fronts-curation-europe-beta-front:control |
+| mvt23 | 0=commercial-some-100-perc-test:variant,1=fronts-curation-europe-beta-front:variant |
 | ... | |
-| client-bucket-96 | commercial-some-100-perc-test:control |
-| client-bucket-97 | commercial-some-100-perc-test:variant |
-| client-bucket-98 | commercial-some-100-perc-test:control |
-| client-bucket-99 | commercial-some-100-perc-test:variant |
-| server-bucket-0 | webex-europe-beta-front:control |
-| server-bucket-1 | webex-europe-beta-front:variant |
-| server-bucket-2 | webex-europe-beta-front:control |
-| server-bucket-3 | webex-europe-beta-front:variant |
-| server-bucket-4 | webex-europe-beta-front:control |
-| server-bucket-5 | webex-europe-beta-front:variant |
-| server-bucket-6 | webex-europe-beta-front:control |
-| server-bucket-7 | webex-europe-beta-front:variant |
-| ... | |
-| server-bucket-98 | webex-europe-beta-front:control |
-| server-bucket-99 | webex-europe-beta-front:variant |
+| mvt96 | 0=commercial-some-100-perc-test:control,1=fronts-curation-europe-beta-front:control |
+| mvt97 | 0=commercial-some-100-perc-test:variant,1=fronts-curation-europe-beta-front:variant |
+| mvt98 | 0=commercial-some-100-perc-test:control,1=fronts-curation-europe-beta-front:control |
+| mvt99 | 0=commercial-some-100-perc-test:variant,1=fronts-curation-europe-beta-front:variant |

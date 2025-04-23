@@ -25,10 +25,8 @@ export type ABTest = {
 	 * Would be nice to know who changed the status last and when
 	 */
 	status: 'ON' | 'OFF';
-	/** Control group definition */
-	controlGroup: TestGroup;
-	/** Variants group definition */
-	variantGroups: Array<TestGroup>;
+	/** Test group definition */
+	groups: Array<TestGroup>;
 	/** Can this test overlap other tests? Required for 100% tests */
 	allowOverlap?: boolean;
 };
