@@ -1,6 +1,6 @@
-import { ABTest } from './types';
+import { ABTest } from './types.ts';
 
-const ABTests: ABTest[] = [
+export const ABTests: ABTest[] = [
 	// Example client side AB test definition
 	{
 		name: 'commercial-ad-block-ask',
