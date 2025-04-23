@@ -9,12 +9,13 @@ The build and release CI steps will ensure that the tests are validated and seri
 Example dictionary setup:
 
 ```
+# our mvt space and which test groups are occupying it
 table mvt_ab_test_groups {
-  // compound key of mvt id and test number
   "mvt0": "0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control",
   "mvt1": "0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant",
 }
 
+# This table contains the active A/B test groups and their parameters
 table active_ab_test_groups {
   "commercial-ad-block-ask:control": "exp=1745971200,type=client",
   "commercial-ad-block-ask:variant": "exp=1745971200,type=client",
@@ -112,7 +113,7 @@ This config:
 	},
 	// Example server side AB test definition
 	{
-		name: 'webex-europe-beta-front',
+		name: 'fronts-curation-europe-beta-front',
 		description:
 			'Allows viewing the beta version of the Europe network front',
 		owners: [
@@ -134,32 +135,32 @@ This config:
 Could result in the following key-values to be stored in the dictionary:
 | key | value |
 | -------- | ------- |
-| mvt0 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=webex-europe-beta-front:control |
-| mvt1 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=webex-europe-beta-front:variant |
-| mvt2 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=webex-europe-beta-front:control |
-| mvt3 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=webex-europe-beta-front:variant |
-| mvt4 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=webex-europe-beta-front:control |
-| mvt5 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=webex-europe-beta-front:variant |
-| mvt6 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=webex-europe-beta-front:control |
-| mvt7 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=webex-europe-beta-front:variant |
-| mvt8 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=webex-europe-beta-front:control |
-| mvt9 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=webex-europe-beta-front:variant |
-| mvt10 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=webex-europe-beta-front:control |
-| mvt11 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=webex-europe-beta-front:variant |
-| mvt12 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=webex-europe-beta-front:control |
-| mvt13 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=webex-europe-beta-front:variant |
-| mvt14 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=webex-europe-beta-front:control |
-| mvt15 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=webex-europe-beta-front:variant |
-| mvt16 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=webex-europe-beta-front:control |
-| mvt17 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=webex-europe-beta-front:variant |
-| mvt18 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=webex-europe-beta-front:control |
-| mvt19 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=webex-europe-beta-front:variant |
-| mvt20 | 0=commercial-some-100-perc-test:control,1=webex-europe-beta-front:control |
-| mvt21 | 0=commercial-some-100-perc-test:variant,1=webex-europe-beta-front:variant |
-| mvt22 | 0=commercial-some-100-perc-test:control,1=webex-europe-beta-front:control |
-| mvt23 | 0=commercial-some-100-perc-test:variant,1=webex-europe-beta-front:variant |
+| mvt0 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt1 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt2 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt3 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt4 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt5 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt6 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt7 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt8 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt9 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt10 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt11 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt12 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt13 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt14 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt15 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt16 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt17 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt18 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
+| mvt19 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
+| mvt20 | 0=commercial-some-100-perc-test:control,1=fronts-curation-europe-beta-front:control |
+| mvt21 | 0=commercial-some-100-perc-test:variant,1=fronts-curation-europe-beta-front:variant |
+| mvt22 | 0=commercial-some-100-perc-test:control,1=fronts-curation-europe-beta-front:control |
+| mvt23 | 0=commercial-some-100-perc-test:variant,1=fronts-curation-europe-beta-front:variant |
 | ... | |
-| mvt96 | 0=commercial-some-100-perc-test:control,1=webex-europe-beta-front:control |
-| mvt97 | 0=commercial-some-100-perc-test:variant,1=webex-europe-beta-front:variant |
-| mvt98 | 0=commercial-some-100-perc-test:control,1=webex-europe-beta-front:control |
-| mvt99 | 0=commercial-some-100-perc-test:variant,1=webex-europe-beta-front:variant |
+| mvt96 | 0=commercial-some-100-perc-test:control,1=fronts-curation-europe-beta-front:control |
+| mvt97 | 0=commercial-some-100-perc-test:variant,1=fronts-curation-europe-beta-front:variant |
+| mvt98 | 0=commercial-some-100-perc-test:control,1=fronts-curation-europe-beta-front:control |
+| mvt99 | 0=commercial-some-100-perc-test:variant,1=fronts-curation-europe-beta-front:variant |

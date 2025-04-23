@@ -2,7 +2,7 @@
 # See it in action https://fiddle.fastly.dev/fiddle/47149485
 # This VCL code is an example of how to implement dynamic client and server A/B testing using Fastly's Varnish Configuration Language (VCL).
 
-  # our mvt space and which test groups are occupying it
+# our mvt space and which test groups are occupying it
 table mvt_ab_test_groups {
   "mvt0": "0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control",
   "mvt1": "0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant",
