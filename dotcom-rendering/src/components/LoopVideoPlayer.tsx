@@ -56,8 +56,9 @@ type Props = {
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	AudioIcon: (iconProps: IconProps) => JSX.Element;
 	/**
-	 * We show a thumbnail image when the user has indicated that they do
-	 * not want videos to play automatically, e.g. prefers reduced motion.
+	 * We ONLY show a thumbnail image when the user has indicated that they do
+	 * not want videos to play automatically, e.g. prefers reduced motion. Otherwise,
+	 * we do not bother downloading the image, as the video will be autoplayed.
 	 */
 	thumbnailImage?: string;
 };
