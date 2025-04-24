@@ -59,7 +59,7 @@ Deno.test(
 Deno.test(
 	'allExpirationsValid - throws when the expiration is in the future and on a weekend',
 	() => {
-		const futureWeekdayTest: ABTest = {
+		const futureWeekendTes: ABTest = {
 			name: 'commercial-future',
 			description: 'End on a weekend',
 			owners: ['commercial.dev@guardian.co.uk'],
@@ -73,14 +73,14 @@ Deno.test(
 			],
 		};
 
-		assertThrows(() => allExpirationsValid([futureWeekdayTest]));
+		assertThrows(() => allExpirationsValid([futureWeekendTes]));
 	},
 );
 
 Deno.test(
-	'allExpirationsValid - throws when the expiration is in the future and on a weekend',
+	'allExpirationsValid - throws when the expiration is in the past',
 	() => {
-		const futureWeekdayTest: ABTest = {
+		const pastTest: ABTest = {
 			name: 'commercial-past',
 			description: 'End in the past',
 			owners: ['commercial.dev@guardian.co.uk'],
@@ -94,6 +94,6 @@ Deno.test(
 			],
 		};
 
-		assertThrows(() => allExpirationsValid([futureWeekdayTest]));
+		assertThrows(() => allExpirationsValid([pastTest]));
 	},
 );

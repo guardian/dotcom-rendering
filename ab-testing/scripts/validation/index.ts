@@ -21,5 +21,6 @@ try {
 	console.log('AB test validations passed');
 } catch (err) {
 	const error = err as Error;
-	console.error(`Validation failed: ${error.message}`);
+	console.error(`AB test validation failed: ${error.message}`);
+	throw error;
 }
