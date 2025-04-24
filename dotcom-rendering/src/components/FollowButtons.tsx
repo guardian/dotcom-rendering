@@ -80,7 +80,7 @@ const tagTextSpan = ({
 }) => (
 	<span>
 		{isFollowing ? 'Following' : 'Follow'} {displayName}{' '}
-		{displayName && displayName.length < 24 ? 'in My Guardian' : ''}
+		{displayName && displayName.length < 21 ? 'in My Guardian' : ''}
 	</span>
 );
 
