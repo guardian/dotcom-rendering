@@ -17,8 +17,8 @@ Deno.test(
 			type: 'server',
 			highImpact: false,
 			groups: [
-				{ id: 'control', size: 50 / 100 },
-				{ id: 'variant', size: 50 / 100 },
+				{ id: 'control', size: 5 / 100 },
+				{ id: 'variant', size: 5 / 100 },
 			],
 		};
 		assertThrows(() => {
@@ -42,10 +42,9 @@ Deno.test(
 			expirationDate: new Date(),
 			type: 'server',
 			highImpact: false,
-
 			groups: [
-				{ id: 'control', size: 50 / 100 },
-				{ id: 'variant', size: 50 / 100 },
+				{ id: 'control', size: 5 / 100 },
+				{ id: 'variant', size: 5 / 100 },
 			],
 		};
 		assertEquals(

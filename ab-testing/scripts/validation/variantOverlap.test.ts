@@ -12,12 +12,12 @@ Deno.test('noVariantOverlap - disallows variant overlap', () => {
 		type: 'client',
 		highImpact: false,
 		groups: [
-			{ id: 'control', size: 70 / 100 },
+			{ id: 'control', size: 50 / 100 },
 			{ id: 'variant', size: 50 / 100 },
 		],
 	};
 
-	assertThrows(() => noVariantOverlap([overlapTest]));
+	assertThrows(() => noVariantOverlap([overlapTest, overlapTest]));
 });
 
 Deno.test(
@@ -32,13 +32,13 @@ Deno.test(
 			type: 'client',
 			highImpact: false,
 			groups: [
-				{ id: 'control', size: 70 / 100 },
+				{ id: 'control', size: 50 / 100 },
 				{ id: 'variant', size: 50 / 100 },
 			],
 			allowOverlap: true,
 		};
 
-		assertEquals(noVariantOverlap([overlapTest]), true);
+		assertEquals(noVariantOverlap([overlapTest, overlapTest]), true);
 	},
 );
 
@@ -52,10 +52,10 @@ Deno.test('noVariantOverlap - allows tests with no variant overlap', () => {
 		type: 'client',
 		highImpact: false,
 		groups: [
-			{ id: 'control', size: 50 / 100 },
-			{ id: 'variant', size: 50 / 100 },
+			{ id: 'control', size: 5 / 100 },
+			{ id: 'variant', size: 5 / 100 },
 		],
 	};
 
-	assertEquals(noVariantOverlap([overlapTest]), true);
+	assertEquals(noVariantOverlap([overlapTest, overlapTest]), true);
 });

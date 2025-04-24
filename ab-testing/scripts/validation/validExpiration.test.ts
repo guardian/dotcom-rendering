@@ -47,8 +47,8 @@ Deno.test(
 			type: 'client',
 			highImpact: false,
 			groups: [
-				{ id: 'control', size: 50 / 100 },
-				{ id: 'variant', size: 50 / 100 },
+				{ id: 'control', size: 5 / 100 },
+				{ id: 'variant', size: 5 / 100 },
 			],
 		};
 
@@ -68,8 +68,8 @@ Deno.test(
 			type: 'client',
 			highImpact: false,
 			groups: [
-				{ id: 'control', size: 50 / 100 },
-				{ id: 'variant', size: 50 / 100 },
+				{ id: 'control', size: 5 / 100 },
+				{ id: 'variant', size: 5 / 100 },
 			],
 		};
 
@@ -89,8 +89,8 @@ Deno.test(
 			type: 'client',
 			highImpact: false,
 			groups: [
-				{ id: 'control', size: 50 / 100 },
-				{ id: 'variant', size: 50 / 100 },
+				{ id: 'control', size: 5 / 100 },
+				{ id: 'variant', size: 5 / 100 },
 			],
 		};
 
