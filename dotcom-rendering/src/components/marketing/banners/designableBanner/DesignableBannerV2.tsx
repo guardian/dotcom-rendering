@@ -645,10 +645,9 @@ const styles = {
 				: `max-width: calc(100% - 40px - ${space[3]}px);`}
 		}
 
-		${from.desktop} {
-			padding-left: ${space[2]}px;
-			padding-top: ${space[3]}px;
-			padding-right: ${space[5]}px;
+		${from.mobile} {
+			grid-row: 1;
+			grid-column: 1;
 		}
 
 		${from.phablet} {
@@ -656,6 +655,12 @@ const styles = {
 			grid-row: 1;
 			background: ${background};
 			max-width: 492px;
+		}
+
+		${from.desktop} {
+			padding-left: ${space[2]}px;
+			padding-top: ${space[3]}px;
+			padding-right: ${space[5]}px;
 		}
 	`,
 	headerWithImageContainer: (background: string) => css`
@@ -676,7 +681,9 @@ const styles = {
 		}
 	`,
 	contentContainer: css`
-		order: 2;
+		${from.mobile} {
+			grid-row: 2;
+		}
 		${from.phablet} {
 			grid-column: 2;
 			max-width: 492px;
@@ -691,6 +698,10 @@ const styles = {
 
 	ctaContentContainer: css`
 		order: 4;
+		${from.phablet} {
+			grid-row: 5;
+			max-width: 492px;
+		}
 		${from.phablet} {
 			grid-column: 2;
 			grid-row: 5;
@@ -708,8 +719,9 @@ const styles = {
 		}
 	`,
 	bannerVisualContainer: (background: string) => css`
-		order: 1;
-		background: ${background};
+		${from.mobile} {
+			grid-row: 3;
+		}
 		${from.phablet} {
 			grid-column: 2;
 			grid-row: 3;
