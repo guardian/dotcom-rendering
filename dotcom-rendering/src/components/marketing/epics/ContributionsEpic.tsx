@@ -263,7 +263,6 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	tracking,
 	countryCode,
 	articleCounts,
-	onReminderOpen,
 	fetchEmail,
 	submitComponentEvent,
 	openCmp,
@@ -419,7 +418,6 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					tracking={tracking}
 					countryCode={countryCode}
 					articleCounts={articleCounts}
-					onReminderOpen={onReminderOpen}
 					fetchEmail={fetchEmail}
 					submitComponentEvent={submitComponentEvent}
 					amountsTestName={choiceCardAmounts?.testName}
