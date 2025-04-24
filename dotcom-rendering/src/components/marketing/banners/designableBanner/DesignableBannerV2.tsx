@@ -357,7 +357,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 						/>
 					</div>
 				</div>
-				<div css={styles.contentContainer(showReminder)}>
+				<div css={styles.contentContainer}>
 					{showAboveArticleCount && (
 						<DesignableBannerArticleCount
 							numArticles={articleCounts.forTargetedWeeks}
@@ -396,8 +396,10 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 							/>
 						</div>
 					</div>
+				</div>
 
-					{!showChoiceCards && (
+				{!showChoiceCards && (
+					<div css={styles.ctaContentContainer}>
 						<DesignableBannerCtas
 							mainOrMobileContent={mainOrMobileContent}
 							onPrimaryCtaClick={onCtaClick}
@@ -409,29 +411,29 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 								templateSettings.secondaryCtaSettings
 							}
 						/>
-					)}
-				</div>
+					</div>
+				)}
+
 				{templateSettings.imageSettings ? (
-					<div
-						css={styles.bannerVisualContainer(
-							templateSettings.containerSettings.backgroundColour,
-						)}
-					>
+					<>
 						<DesignableBannerCloseButton
 							onCloseClick={onCloseClick}
 							settings={templateSettings.closeButtonSettings}
 							styleOverides={styles.closeButtonOverrides}
 						/>
-						<DesignableBannerVisual
-							settings={templateSettings.imageSettings}
-							bannerId={templateSettings.bannerId}
-						/>
-
-						{/*
-                        I think `alternativeVisual` was for using SVG as the image, which is currently beyond the scope of the design tool. Suggest we remove?
-                    */}
-						{templateSettings.alternativeVisual}
-					</div>
+						<div
+							css={styles.bannerVisualContainer(
+								templateSettings.containerSettings
+									.backgroundColour,
+							)}
+						>
+							<DesignableBannerVisual
+								settings={templateSettings.imageSettings}
+								bannerId={templateSettings.bannerId}
+							/>
+							{templateSettings.alternativeVisual}
+						</div>
+					</>
 				) : (
 					<DesignableBannerCloseButton
 						onCloseClick={onCloseClick}
@@ -673,12 +675,26 @@ const styles = {
 			padding-top: ${space[3]}px;
 		}
 	`,
-	contentContainer: (showRemindMeLater: boolean) => css`
+	contentContainer: css`
 		order: 2;
 		${from.phablet} {
 			grid-column: 2;
 			max-width: 492px;
-			grid-row: ${showRemindMeLater ? '2' : '2 / span 2'};
+			grid-row: 2;
+		}
+		${from.desktop} {
+			padding-left: ${space[2]}px;
+			padding-right: ${space[5]}px;
+			margin-bottom: ${space[2]}px;
+		}
+	`,
+
+	ctaContentContainer: css`
+		order: 4;
+		${from.phablet} {
+			grid-column: 2;
+			grid-row: 5;
+			max-width: 492px;
 		}
 		${from.desktop} {
 			padding-left: ${space[2]}px;
@@ -694,6 +710,10 @@ const styles = {
 	bannerVisualContainer: (background: string) => css`
 		order: 1;
 		background: ${background};
+		${from.phablet} {
+			grid-column: 2;
+			grid-row: 3;
+		}
 
 		${from.desktop} {
 			padding-left: ${space[2]}px;
