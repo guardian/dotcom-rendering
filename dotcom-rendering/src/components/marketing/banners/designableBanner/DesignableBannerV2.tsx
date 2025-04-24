@@ -7,23 +7,16 @@ import {
 	palette,
 	space,
 	specialReport,
-	textEgyptian15,
 	textSans15,
-	textSans17,
-	textSansBold17,
 	until,
 } from '@guardian/source/foundations';
 import {
-	Button,
 	LinkButton,
 	SvgArrowRightStraight,
 	SvgGuardianLogo,
 } from '@guardian/source/react-components';
 import { Ticker } from '@guardian/source-development-kitchen/react-components';
-import {
-	hexColourToString,
-	SecondaryCtaType,
-} from '@guardian/support-dotcom-components';
+import { hexColourToString } from '@guardian/support-dotcom-components';
 import type {
 	BannerDesignHeaderImage,
 	BannerDesignImage,
@@ -38,7 +31,6 @@ import {
 } from '../../../../lib/useMatchMedia';
 import { ThreeTierChoiceCards } from '../../epics/ThreeTierChoiceCards';
 import type { SupportTier } from '../../epics/utils/threeTierChoiceCardAmounts';
-import { useReminder } from '../../hooks/useReminder';
 import { getChoiceCardData } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import {
@@ -46,19 +38,15 @@ import {
 	addRegionIdAndTrackingParamsToSupportUrl,
 } from '../../lib/tracking';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
-import type {
-	BannerEnrichedReminderCta,
-	BannerRenderProps,
-} from '../common/types';
+import type { BannerRenderProps } from '../common/types';
 import type { ChoiceCardSettings } from './components/choiceCards/ChoiceCards';
 import { DesignableBannerArticleCount } from './components/DesignableBannerArticleCount';
 import { DesignableBannerBody } from './components/DesignableBannerBody';
 import { DesignableBannerCloseButton } from './components/DesignableBannerCloseButton';
 import { DesignableBannerCtas } from './components/DesignableBannerCtas';
 import { DesignableBannerHeader } from './components/DesignableBannerHeader';
-import { DesignableBannerReminder } from './components/DesignableBannerReminder';
 import { DesignableBannerVisual } from './components/DesignableBannerVisual';
-import type { BannerTemplateSettings, CtaSettings } from './settings';
+import type { BannerTemplateSettings } from './settings';
 import { templateSpacing } from './styles/templateStyles';
 
 const buildImageSettings = (
@@ -153,7 +141,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	articleCounts,
 	onCtaClick,
 	onSecondaryCtaClick,
-	reminderTracking,
 	separateArticleCount, // legacy field
 	separateArticleCountSettings,
 	tickerSettings,
@@ -164,8 +151,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	tracking,
 }: BannerRenderProps): JSX.Element => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
-	const { isReminderActive, onReminderCtaClick, mobileReminderRef } =
-		useReminder(reminderTracking);
 
 	// We can use this to shorten the banner if the "open in app" banner is present
 	const [iosAppBannerPresent, setIosAppBannerPresent] = useState(false);
@@ -326,10 +311,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		);
 	};
 
-	const showReminder =
-		mainOrMobileContent.secondaryCta?.type ===
-		SecondaryCtaType.ContributionsReminder;
-
 	const showAboveArticleCount =
 		(separateArticleCountSettings?.type === 'above' ||
 			separateArticleCount) &&
@@ -421,12 +402,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 							settings={templateSettings.closeButtonSettings}
 							styleOverides={styles.closeButtonOverrides}
 						/>
-						<div
-							css={styles.bannerVisualContainer(
-								templateSettings.containerSettings
-									.backgroundColour,
-							)}
-						>
+						<div css={styles.bannerVisualContainer}>
 							<DesignableBannerVisual
 								settings={templateSettings.imageSettings}
 								bannerId={templateSettings.bannerId}
@@ -485,44 +461,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 						textColor={hexColourToString(basic.logo)}
 					/>
 				</div>
-				{showReminder && (
-					<div css={styles.reminderContainer}>
-						<span css={styles.reminderText}>
-							Not ready to support today?{' '}
-						</span>
-						<Button
-							priority="subdued"
-							onClick={onReminderCtaClick}
-							cssOverrides={styles.reminderCta(
-								templateSettings.secondaryCtaSettings,
-							)}
-						>
-							Remind me later
-						</Button>
-					</div>
-				)}
 			</div>
-
-			{isReminderActive && (
-				<div css={styles.reminderFormContainer}>
-					<div css={styles.containerOverrides}>
-						<DesignableBannerReminder
-							reminderCta={
-								mainOrMobileContent.secondaryCta as BannerEnrichedReminderCta
-							}
-							trackReminderSetClick={
-								reminderTracking.onReminderSetClick
-							}
-							setReminderCtaSettings={
-								templateSettings.secondaryCtaSettings
-							}
-							mobileReminderRef={
-								isTabletOrAbove ? null : mobileReminderRef
-							}
-						/>
-					</div>
-				</div>
-			)}
 		</div>
 	);
 };
@@ -718,7 +657,7 @@ const styles = {
 			${textSans15}
 		}
 	`,
-	bannerVisualContainer: (background: string) => css`
+	bannerVisualContainer: css`
 		${from.mobile} {
 			grid-row: 3;
 		}
@@ -770,38 +709,6 @@ const styles = {
 		}
 	`,
 
-	reminderContainer: css`
-		${textEgyptian15};
-		grid-column: 1;
-		grid-row: 3;
-		order: 4;
-		align-self: center;
-		margin-top: ${space[2]}px;
-
-		${from.phablet} {
-			align-self: end;
-		}
-	`,
-	reminderText: css`
-		${textSans17};
-		display: none;
-
-		${from.phablet} {
-			display: inline;
-		}
-	`,
-	reminderCta: ({ default: defaultSettings }: CtaSettings) => css`
-		${textSansBold17};
-		color: ${defaultSettings.backgroundColour};
-		display: inline;
-		height: auto;
-		min-height: auto;
-	`,
-
-	reminderFormContainer: css`
-		border-top: 2px solid ${neutral[0]};
-		margin-top: ${space[3]}px;
-	`,
 	ctaContainer: css`
 		order: 4;
 		display: flex;
