@@ -58,7 +58,7 @@ export const LoopVideo = ({
 		if (!vidRef.current) return;
 
 		if (isInView) {
-			// We only want to autoplay the first time the video comes into view.
+			// We only autoplay the first time the video comes into view.
 			if (hasBeenInView) return;
 
 			if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -82,17 +82,29 @@ export const LoopVideo = ({
 
 	if (adapted) return fallbackImageComponent;
 
+	const playVideo = () => {
+		if (!vidRef.current) return;
+		setIsPlaying(true);
+		void vidRef.current.play();
+	};
+
+	const pauseVideo = () => {
+		if (!vidRef.current) return;
+		setIsPlaying(false);
+		void vidRef.current.pause();
+	};
+
+	const playPauseVideo = () => {
+		if (isPlaying) {
+			pauseVideo();
+		} else {
+			playVideo();
+		}
+	};
+
 	const handleClick = (event: React.SyntheticEvent) => {
 		event.preventDefault();
-		if (!vidRef.current) return;
-
-		if (isPlaying) {
-			setIsPlaying(false);
-			void vidRef.current.pause();
-		} else {
-			setIsPlaying(true);
-			void vidRef.current.play();
-		}
+		playPauseVideo();
 	};
 
 	const onError = () => {
@@ -134,13 +146,19 @@ export const LoopVideo = ({
 		switch (event.key) {
 			case 'Enter':
 			case ' ':
-				handleClick(event);
+				playPauseVideo();
+				break;
+			case 'Escape':
+				pauseVideo();
 				break;
 			case 'ArrowRight':
 				seekForward();
 				break;
 			case 'ArrowLeft':
 				seekBackward();
+				break;
+			case 'm':
+				setIsMuted(!isMuted);
 				break;
 		}
 	};
