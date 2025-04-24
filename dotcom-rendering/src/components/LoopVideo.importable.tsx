@@ -22,6 +22,7 @@ type Props = {
 	height?: number;
 	hasAudio?: boolean;
 	fallbackImage: JSX.Element;
+	posterImage?: string;
 };
 
 export const LoopVideo = ({
@@ -31,6 +32,7 @@ export const LoopVideo = ({
 	height = 360,
 	hasAudio = true,
 	fallbackImage,
+	posterImage,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -39,6 +41,7 @@ export const LoopVideo = ({
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [isMuted, setIsMuted] = useState(true);
 	const [currentTime, setCurrentTime] = useState(0);
+	const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 	/**
 	 * Keep a track of whether the video has been in view. We only want to
 	 * pause the video if it has been in view.
@@ -58,6 +61,13 @@ export const LoopVideo = ({
 
 		if (isInView) {
 			if (!hasBeenInView) {
+				if (
+					window.matchMedia('(prefers-reduced-motion: reduce)')
+						.matches
+				) {
+					setPrefersReducedMotion(true);
+					return;
+				}
 				// When the video first comes into view, it should autoplay
 				setIsPlaying(true);
 				void vidRef.current.play();
@@ -166,6 +176,7 @@ export const LoopVideo = ({
 				handleKeyDown={handleKeyDown}
 				onError={onError}
 				AudioIcon={AudioIcon}
+				posterImage={prefersReducedMotion ? posterImage : undefined}
 			/>
 		</div>
 	);

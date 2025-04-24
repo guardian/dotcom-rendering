@@ -55,6 +55,11 @@ type Props = {
 	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	AudioIcon: (iconProps: IconProps) => JSX.Element;
+	/**
+	 * We show a poster image when the user has indicated that
+	 * they do not want videos to play automatically
+	 */
+	posterImage?: string;
 };
 
 /**
@@ -70,6 +75,7 @@ export const LoopVideoPlayer = forwardRef(
 			height,
 			hasAudio,
 			fallbackImage,
+			posterImage,
 			isPlayable,
 			setIsPlayable,
 			isPlaying,
@@ -93,12 +99,13 @@ export const LoopVideoPlayer = forwardRef(
 				<video
 					id={loopVideoId}
 					ref={ref}
-					preload="none"
+					preload={posterImage ? 'metadata' : 'none'}
 					loop={true}
 					muted={isMuted}
 					playsInline={true}
 					height={height}
 					width={width}
+					poster={posterImage ?? undefined}
 					onPlaying={() => {
 						setIsPlaying(true);
 					}}
