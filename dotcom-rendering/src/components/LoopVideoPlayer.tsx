@@ -42,7 +42,7 @@ type Props = {
 	width: number;
 	height: number;
 	hasAudio: boolean;
-	fallbackImage: JSX.Element;
+	fallbackImageComponent: JSX.Element;
 	isPlayable: boolean;
 	setIsPlayable: Dispatch<SetStateAction<boolean>>;
 	isPlaying: boolean;
@@ -56,8 +56,8 @@ type Props = {
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	AudioIcon: (iconProps: IconProps) => JSX.Element;
 	/**
-	 * We show a poster image when the user has indicated that
-	 * they do not want videos to play automatically
+	 * We show a poster image when the user has indicated that they do
+	 * not want videos to play automatically, e.g. prefers reduced motion.
 	 */
 	posterImage?: string;
 };
@@ -74,7 +74,7 @@ export const LoopVideoPlayer = forwardRef(
 			width,
 			height,
 			hasAudio,
-			fallbackImage,
+			fallbackImageComponent,
 			posterImage,
 			isPlayable,
 			setIsPlayable,
@@ -133,7 +133,7 @@ export const LoopVideoPlayer = forwardRef(
 					performance on supported browsers. https://web.dev/articles/video-and-source-tags */}
 					{/* <source src={webmSrc} type="video/webm"> */}
 					<source src={src} type="video/mp4" />
-					{fallbackImage}
+					{fallbackImageComponent}
 				</video>
 				{ref && 'current' in ref && ref.current && (
 					<>

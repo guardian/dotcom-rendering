@@ -20,9 +20,9 @@ type Props = {
 	videoId: string;
 	width?: number;
 	height?: number;
+	posterImage: string;
+	fallbackImageComponent: JSX.Element;
 	hasAudio?: boolean;
-	fallbackImage: JSX.Element;
-	posterImage?: string;
 };
 
 export const LoopVideo = ({
@@ -30,9 +30,9 @@ export const LoopVideo = ({
 	videoId,
 	width = 600,
 	height = 360,
-	hasAudio = true,
-	fallbackImage,
 	posterImage,
+	fallbackImageComponent,
+	hasAudio = true,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -60,18 +60,17 @@ export const LoopVideo = ({
 		if (!vidRef.current) return;
 
 		if (isInView) {
-			if (!hasBeenInView) {
-				if (
-					window.matchMedia('(prefers-reduced-motion: reduce)')
-						.matches
-				) {
-					setPrefersReducedMotion(true);
-					return;
-				}
-				// When the video first comes into view, it should autoplay
-				setIsPlaying(true);
-				void vidRef.current.play();
+			// We only want to autoplay the first time the video comes into view.
+			if (hasBeenInView) return;
+
+			if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+				setPrefersReducedMotion(true);
+				return;
 			}
+
+			setIsPlaying(true);
+			void vidRef.current.play();
+
 			setHasBeenInView(true);
 		}
 
@@ -83,7 +82,7 @@ export const LoopVideo = ({
 
 	if (renderingTarget !== 'Web') return null;
 
-	if (adapted) return fallbackImage;
+	if (adapted) return fallbackImageComponent;
 
 	const handleClick = (event: React.SyntheticEvent) => {
 		event.preventDefault();
@@ -162,7 +161,7 @@ export const LoopVideo = ({
 				width={width}
 				height={height}
 				hasAudio={hasAudio}
-				fallbackImage={fallbackImage}
+				fallbackImageComponent={fallbackImageComponent}
 				currentTime={currentTime}
 				setCurrentTime={setCurrentTime}
 				ref={vidRef}
