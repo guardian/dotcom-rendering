@@ -203,7 +203,7 @@ export const handleCricketMatchPage: RequestHandler = ({ body }, res) => {
 const parseFEFootballMatch = (
 	data: FEFootballMatchPage,
 ): FootballMatchSummaryPage => {
-	const parsedFootballMatch = parseFootballMatch(data.match);
+	const parsedFootballMatch = parseFootballMatch(data.footballMatch);
 
 	if (parsedFootballMatch.kind === 'error') {
 		throw new Error(
@@ -233,7 +233,6 @@ export const handleFootballMatchPage: RequestHandler = ({ body }, res) => {
 
 	const footballMatchPageValidated: FEFootballMatchPage =
 		validateAsFootballMatchPageType(body);
-
 	const parsedFootballMatchData = parseFEFootballMatch(
 		footballMatchPageValidated,
 	);

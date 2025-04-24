@@ -140,7 +140,6 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 	articleCounts,
 	tracking,
 	submitComponentEvent,
-	onReminderOpen,
 	fetchEmail,
 }: EpicProps): JSX.Element => {
 	const { newsletterSignup, tickerSettings } = variant;
@@ -221,7 +220,6 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 						tracking={tracking}
 						countryCode={countryCode}
 						articleCounts={articleCounts}
-						onReminderOpen={onReminderOpen}
 						fetchEmail={fetchEmail}
 						submitComponentEvent={submitComponentEvent}
 					/>

@@ -3,9 +3,6 @@
         {
             "type": "object",
             "properties": {
-                "filters": {
-                    "$ref": "#/definitions/Record<string,FEFootballCompetition[]>"
-                },
                 "nav": {
                     "$ref": "#/definitions/FENavType"
                 },
@@ -35,7 +32,6 @@
                 "config",
                 "contributionsServiceUrl",
                 "editionId",
-                "filters",
                 "guardianBaseURL",
                 "isAdFreeUser",
                 "nav",
@@ -45,7 +41,7 @@
         {
             "type": "object",
             "properties": {
-                "match": {
+                "footballMatch": {
                     "type": "object",
                     "properties": {
                         "id": {
@@ -161,7 +157,6 @@
                                 "name",
                                 "players",
                                 "possession",
-                                "score",
                                 "scorers",
                                 "shotsOff",
                                 "shotsOn"
@@ -277,7 +272,6 @@
                                 "name",
                                 "players",
                                 "possession",
-                                "score",
                                 "scorers",
                                 "shotsOff",
                                 "shotsOn"
@@ -289,21 +283,17 @@
                     },
                     "required": [
                         "awayTeam",
-                        "comments",
                         "homeTeam",
                         "id"
                     ]
                 }
             },
             "required": [
-                "match"
+                "footballMatch"
             ]
         }
     ],
     "definitions": {
-        "Record<string,FEFootballCompetition[]>": {
-            "type": "object"
-        },
         "FENavType": {
             "type": "object",
             "properties": {

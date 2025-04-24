@@ -29,8 +29,7 @@ export type FootballTeam = {
 	corners: number;
 	fouls: number;
 	colours: string;
-	// ToDo: this needs to be optional
-	score: number;
+	score?: number;
 	crest: string;
 	scorers: string[];
 };
@@ -49,7 +48,7 @@ export type FootballPlayer = {
 export type FootballMatch = {
 	homeTeam: FootballTeam;
 	awayTeam: FootballTeam;
-	comments: string;
+	comments?: string;
 };
 
 type UnknownEventType = {
