@@ -79,7 +79,8 @@ const tagTextSpan = ({
 	displayName?: string;
 }) => (
 	<span>
-		{isFollowing ? 'Following' : 'Follow'} {displayName} in MyGuardian
+		{isFollowing ? 'Following' : 'Follow'} {displayName}{' '}
+		{displayName && displayName.length < 24 ? 'in My Guardian' : ''}
 	</span>
 );
 
