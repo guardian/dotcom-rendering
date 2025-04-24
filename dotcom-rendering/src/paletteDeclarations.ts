@@ -6772,6 +6772,14 @@ const paletteColours = {
 		light: liveBlockContainerBackgroundLight,
 		dark: liveBlockContainerBackgroundDark,
 	},
+	'--loop-video-audio-icon': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--loop-video-progress-bar-value': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[86],
+	},
 	'--masthead-nav-background': {
 		light: mastheadNavBackground,
 		dark: mastheadNavBackground,

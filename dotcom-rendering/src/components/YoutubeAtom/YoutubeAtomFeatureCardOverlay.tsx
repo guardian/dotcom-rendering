@@ -6,7 +6,7 @@ import { secondsToDuration } from '../../lib/formatTime';
 import { palette } from '../../palette';
 import type { AspectRatio } from '../../types/front';
 import { CardFooter } from '../Card/components/CardFooter';
-import { PlayIcon } from '../Card/components/PlayIcon';
+import { narrowPlayIconWidth, PlayIcon } from '../Card/components/PlayIcon';
 import { TrailText } from '../Card/components/TrailText';
 import type { ResponsiveFontSize } from '../CardHeadline';
 import { CardHeadline } from '../CardHeadline';
@@ -85,6 +85,16 @@ const immersiveOverlayStyles = css`
 		backdrop-filter: blur(12px) brightness(0.5);
 		${overlayMaskGradientStyles('270deg')}
 	}
+`;
+
+const playIconStyles = css`
+	position: absolute;
+	/**
+      * Subject to change. We will wait to see how fronts editors use the
+	  * headlines and standfirsts before we decide on a final position.
+	  */
+	top: 35%;
+	left: calc(50% - ${narrowPlayIconWidth / 2}px);
 `;
 
 const videoPillStyles = css`
@@ -183,7 +193,9 @@ export const YoutubeAtomFeatureCardOverlay = ({
 					</div>
 				) : null}
 				<div className="image-overlay" />
-				<PlayIcon iconWidth="narrow" />
+				<div css={playIconStyles}>
+					<PlayIcon iconWidth="narrow" />
+				</div>
 				<div
 					css={[
 						textOverlayStyles,
