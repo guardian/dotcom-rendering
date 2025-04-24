@@ -18,7 +18,7 @@ type Props = {
 	videoId: string;
 	width?: number;
 	height?: number;
-	posterImage: string;
+	thumbnailImage: string;
 	fallbackImageComponent: JSX.Element;
 	hasAudio?: boolean;
 };
@@ -28,7 +28,7 @@ export const LoopVideo = ({
 	videoId,
 	width = 600,
 	height = 360,
-	posterImage,
+	thumbnailImage,
 	fallbackImageComponent,
 	hasAudio = true,
 }: Props) => {
@@ -169,7 +169,9 @@ export const LoopVideo = ({
 				handleKeyDown={handleKeyDown}
 				onError={onError}
 				AudioIcon={AudioIcon}
-				posterImage={prefersReducedMotion ? posterImage : undefined}
+				thumbnailImage={
+					prefersReducedMotion ? thumbnailImage : undefined
+				}
 			/>
 		</div>
 	);

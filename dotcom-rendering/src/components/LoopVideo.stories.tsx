@@ -23,7 +23,7 @@ export const Default = {
 		videoId: 'test-video-1',
 		height: 337.5,
 		width: 600,
-		posterImage:
+		thumbnailImage:
 			'https://media.guim.co.uk/9bdb802e6da5d3fd249b5060f367b3a817965f0c/0_0_1800_1080/master/1800.jpg',
 		fallbackImageComponent: (
 			<CardPicture

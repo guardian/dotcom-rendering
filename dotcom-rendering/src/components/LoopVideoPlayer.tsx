@@ -56,10 +56,10 @@ type Props = {
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	AudioIcon: (iconProps: IconProps) => JSX.Element;
 	/**
-	 * We show a poster image when the user has indicated that they do
+	 * We show a thumbnail image when the user has indicated that they do
 	 * not want videos to play automatically, e.g. prefers reduced motion.
 	 */
-	posterImage?: string;
+	thumbnailImage?: string;
 };
 
 /**
@@ -75,7 +75,7 @@ export const LoopVideoPlayer = forwardRef(
 			height,
 			hasAudio,
 			fallbackImageComponent,
-			posterImage,
+			thumbnailImage,
 			isPlayable,
 			setIsPlayable,
 			isPlaying,
@@ -99,13 +99,13 @@ export const LoopVideoPlayer = forwardRef(
 				<video
 					id={loopVideoId}
 					ref={ref}
-					preload={posterImage ? 'metadata' : 'none'}
+					preload={thumbnailImage ? 'metadata' : 'none'}
 					loop={true}
 					muted={isMuted}
 					playsInline={true}
 					height={height}
 					width={width}
-					poster={posterImage ?? undefined}
+					poster={thumbnailImage ?? undefined}
 					onPlaying={() => {
 						setIsPlaying(true);
 					}}
