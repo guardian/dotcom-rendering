@@ -1,4 +1,4 @@
-import type { Handler } from 'express';
+import { type Handler, Router } from 'express';
 import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
 import { handleAMPArticle } from './handler.article.amp';
 import {
@@ -25,6 +25,7 @@ import {
 	handleFootballMatchPage,
 	handleFootballTablesPage,
 } from './handler.sportDataPage.web';
+import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
 const ARTICLE_URL = /(\/\d{4}\/[a-z]{3}\/\d{2}\/)/;
@@ -56,93 +57,67 @@ const editionalisefront = (url: string): string => {
 	return url;
 };
 
+const redirects: Handler = (req, res, next) => {
+	const path = req.path.split('/')[1];
+
+	// handle urls with the ?url=… query param
+	const sourceUrl = req.url.split('?url=')[1];
+	if (path && sourceUrl) {
+		return res.redirect(path + '/' + sourceUrl);
+	}
+
+	// Do not redirect assets urls
+	if (req.url.match(ASSETS_URL)) return next();
+
+	if (req.url.match(ARTICLE_URL) ?? req.url.match(CROSSWORD_URL)) {
+		const url = new URL(req.url, 'https://www.theguardian.com/').toString();
+		console.info('redirecting to Article:', url);
+		return res.redirect(`/Article/${url}`);
+	}
+
+	if (req.url.match(TAG_PAGE_URL)) {
+		const url = new URL(req.url, 'https://www.theguardian.com/').toString();
+		console.info('redirecting to Tag page:', url);
+		return res.redirect(`/TagPage/${url}`);
+	}
+
+	if (req.url.match(FRONT_URL)) {
+		const url = new URL(req.url, 'https://www.theguardian.com/').toString();
+		console.info('redirecting to Front:', url);
+		return res.redirect(`/Front/${editionalisefront(url)}`);
+	}
+
+	next();
+};
+
+const pages = Router();
+// populates req.body with the content data from a production
+// URL if req.params.url is present
+pages.use(getContentFromURLMiddleware);
+pages.get('/Article/*', handleArticle);
+pages.get('/ArticleJson/*', handleArticleJson);
+pages.get('/AMPArticle/*', handleAMPArticle);
+pages.get('/Interactive/*', handleInteractive);
+pages.get('/AMPInteractive/*', handleAMPArticle);
+pages.get('/Blocks/*', handleBlocks);
+pages.get('/Front/*', handleFront);
+pages.get('/FrontJSON/*', handleFrontJson);
+pages.get('/TagPage/*', handleTagPage);
+pages.get('/TagPageJSON/*', handleTagPageJson);
+pages.get('/EmailNewsletters/*', handleAllEditorialNewslettersPage);
+pages.get('/AppsArticle/*', handleAppsArticle);
+pages.get('/AppsInteractive/*', handleAppsInteractive);
+pages.get('/AppsBlocks/*', handleAppsBlocks);
+pages.get('/EditionsCrossword/*', handleEditionsCrossword);
+pages.get('/FootballDataPage/*', handleFootballMatchListPage);
+pages.get('/FootballTablesPage/*', handleFootballTablesPage);
+pages.get('/CricketMatchPage/*', handleCricketMatchPage);
+pages.get('/FootballMatchSummaryPage/*', handleFootballMatchPage);
+
+const router = Router();
+router.use(pages);
+router.use(redirects);
+
 // see https://www.npmjs.com/package/webpack-hot-server-middleware
 // for more info
-export const devServer = (): Handler => {
-	return (req, res, next) => {
-		const path = req.path.split('/')[1];
-
-		// handle urls with the ?url=… query param
-		const sourceUrl = req.url.split('?url=')[1];
-		if (path && sourceUrl) {
-			return res.redirect(path + '/' + sourceUrl);
-		}
-
-		switch (path) {
-			case 'Article':
-				return handleArticle(req, res, next);
-			case 'ArticleJson':
-				return handleArticleJson(req, res, next);
-			case 'AMPArticle':
-				return handleAMPArticle(req, res, next);
-			case 'Interactive':
-				return handleInteractive(req, res, next);
-			case 'AMPInteractive':
-				return handleAMPArticle(req, res, next);
-			case 'Blocks':
-				return handleBlocks(req, res, next);
-			case 'Front':
-				return handleFront(req, res, next);
-			case 'FrontJSON':
-				return handleFrontJson(req, res, next);
-			case 'TagPage':
-				return handleTagPage(req, res, next);
-			case 'TagPageJSON':
-				return handleTagPageJson(req, res, next);
-			case 'EmailNewsletters':
-				return handleAllEditorialNewslettersPage(req, res, next);
-			case 'AppsArticle':
-				return handleAppsArticle(req, res, next);
-			case 'AppsInteractive':
-				return handleAppsInteractive(req, res, next);
-			case 'AppsBlocks':
-				return handleAppsBlocks(req, res, next);
-			case 'EditionsCrossword':
-				return handleEditionsCrossword(req, res, next);
-			case 'FootballDataPage':
-				return handleFootballMatchListPage(req, res, next);
-			case 'FootballTablesPage':
-				return handleFootballTablesPage(req, res, next);
-			case 'CricketMatchPage':
-				return handleCricketMatchPage(req, res, next);
-			case 'FootballMatchSummaryPage':
-				return handleFootballMatchPage(req, res, next);
-			default: {
-				// Do not redirect assets urls
-				if (req.url.match(ASSETS_URL)) return next();
-
-				if (
-					req.url.match(ARTICLE_URL) ??
-					req.url.match(CROSSWORD_URL)
-				) {
-					const url = new URL(
-						req.url,
-						'https://www.theguardian.com/',
-					).toString();
-					console.info('redirecting to Article:', url);
-					return res.redirect(`/Article/${url}`);
-				}
-
-				if (req.url.match(TAG_PAGE_URL)) {
-					const url = new URL(
-						req.url,
-						'https://www.theguardian.com/',
-					).toString();
-					console.info('redirecting to Tag page:', url);
-					return res.redirect(`/TagPage/${url}`);
-				}
-
-				if (req.url.match(FRONT_URL)) {
-					const url = new URL(
-						req.url,
-						'https://www.theguardian.com/',
-					).toString();
-					console.info('redirecting to Front:', url);
-					return res.redirect(`/Front/${editionalisefront(url)}`);
-				}
-
-				next();
-			}
-		}
-	};
-};
+export const devServer = (): Handler => router;
