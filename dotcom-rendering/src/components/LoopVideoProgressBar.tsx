@@ -13,11 +13,22 @@ const styles = (progressPercentage: number) => css`
 `;
 
 type Props = {
+	videoId: string;
 	currentTime: number;
 	duration: number;
 };
 
-export const LoopVideoProgressBar = ({ currentTime, duration }: Props) => {
+/**
+ * A progress bar for the loop video component.
+ *
+ * Why don't we use the <progress /> element?
+ * It was not possible to properly style the native progress element in safari.
+ */
+export const LoopVideoProgressBar = ({
+	videoId,
+	currentTime,
+	duration,
+}: Props) => {
 	if (duration <= 0) return null;
 
 	const progressPercentage = (currentTime * 100) / duration;
@@ -25,5 +36,14 @@ export const LoopVideoProgressBar = ({ currentTime, duration }: Props) => {
 		return null;
 	}
 
-	return <div role="progressbar" css={styles(progressPercentage)} />;
+	return (
+		<div
+			role="progressbar"
+			aria-labelledby={videoId}
+			aria-valuenow={progressPercentage}
+			aria-valuemin={0}
+			aria-valuemax={100}
+			css={styles(progressPercentage)}
+		/>
+	);
 };

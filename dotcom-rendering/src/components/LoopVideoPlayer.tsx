@@ -85,11 +85,13 @@ export const LoopVideoPlayer = forwardRef(
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
+		const loopVideoId = `loop-video-${videoId}`;
+
 		return (
 			<>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Captions will be considered later. */}
 				<video
-					id={`loop-video-${videoId}`}
+					id={loopVideoId}
 					ref={ref}
 					preload="none"
 					loop={true}
@@ -138,6 +140,7 @@ export const LoopVideoPlayer = forwardRef(
 							</button>
 						)}
 						<LoopVideoProgressBar
+							videoId={loopVideoId}
 							currentTime={currentTime}
 							duration={ref.current.duration}
 						/>
