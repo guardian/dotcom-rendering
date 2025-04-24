@@ -1,41 +1,15 @@
 import { css } from '@emotion/react';
 import { palette } from '../palette';
 
-const styles = css`
+const styles = (progressPercentage: number) => css`
 	position: absolute;
 	bottom: 0;
 	left: 0;
 	height: 7px;
 	width: 100%;
-
-	progress {
-		display: block;
-		width: 100%;
-		height: 100%;
-		border: none;
-		-moz-border-radius: 0;
-		-webkit-border-radius: 0;
-		border-radius: 0;
-	}
-
-	/* background: */
-	progress::-webkit-progress-bar {
-		background-color: transparent;
-	}
-	progress {
-		background-color: transparent;
-	}
-
-	/* value: */
-	progress::-webkit-progress-value {
-		background-color: ${palette('--loop-video-progress-bar-value')};
-	}
-	progress::-moz-progress-bar {
-		background-color: ${palette('--loop-video-progress-bar-value')};
-	}
-	progress {
-		color: ${palette('--loop-video-progress-bar-value')};
-	}
+	width: ${progressPercentage}%;
+	transition: width 0.3s linear;
+	background-color: ${palette('--loop-video-progress-bar-value')};
 `;
 
 type Props = {
@@ -46,12 +20,10 @@ type Props = {
 export const LoopVideoProgressBar = ({ currentTime, duration }: Props) => {
 	if (duration <= 0) return null;
 
-	const progressPercentage =
-		duration > 0 ? (currentTime * 100) / duration : 0;
+	const progressPercentage = (currentTime * 100) / duration;
+	if (Number.isNaN(progressPercentage)) {
+		return null;
+	}
 
-	return (
-		<div css={styles} className="progress-bar">
-			<progress value={progressPercentage / 100} />
-		</div>
-	);
+	return <div role="progressbar" css={styles(progressPercentage)} />;
 };

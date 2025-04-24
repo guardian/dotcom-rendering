@@ -47,12 +47,13 @@ type Props = {
 	setIsPlayable: Dispatch<SetStateAction<boolean>>;
 	isPlaying: boolean;
 	setIsPlaying: Dispatch<SetStateAction<boolean>>;
+	currentTime: number;
+	setCurrentTime: Dispatch<SetStateAction<number>>;
 	isMuted: boolean;
 	setIsMuted: Dispatch<SetStateAction<boolean>>;
 	handleClick: (event: SyntheticEvent) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
-	elapsedTime: number;
 	AudioIcon: (iconProps: IconProps) => JSX.Element;
 };
 
@@ -73,12 +74,13 @@ export const LoopVideoPlayer = forwardRef(
 			setIsPlayable,
 			isPlaying,
 			setIsPlaying,
+			currentTime,
+			setCurrentTime,
 			isMuted,
 			setIsMuted,
 			handleClick,
 			handleKeyDown,
 			onError,
-			elapsedTime,
 			AudioIcon,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
@@ -101,6 +103,16 @@ export const LoopVideoPlayer = forwardRef(
 					onCanPlay={() => {
 						setIsPlayable(true);
 					}}
+					onTimeUpdate={() => {
+						if (
+							ref &&
+							'current' in ref &&
+							ref.current &&
+							isPlaying
+						) {
+							setCurrentTime(ref.current.currentTime);
+						}
+					}}
 					onClick={handleClick}
 					onKeyDown={handleKeyDown}
 					role="button"
@@ -117,12 +129,16 @@ export const LoopVideoPlayer = forwardRef(
 				{ref && 'current' in ref && ref.current && (
 					<>
 						{isPlayable && !isPlaying && (
-							<div css={playIconStyles}>
+							<button
+								type="button"
+								onClick={handleClick}
+								css={playIconStyles}
+							>
 								<PlayIcon iconWidth="narrow" />
-							</div>
+							</button>
 						)}
 						<LoopVideoProgressBar
-							currentTime={elapsedTime}
+							currentTime={currentTime}
 							duration={ref.current.duration}
 						/>
 						{hasAudio && (

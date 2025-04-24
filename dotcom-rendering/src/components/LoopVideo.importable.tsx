@@ -8,9 +8,11 @@ import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useConfig } from './ConfigContext';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
 
-const videoContainerStyles = css`
+const videoContainerStyles = (height: number, width: number) => css`
 	z-index: ${getZIndex('loop-video-container')};
 	position: relative;
+	height: ${height}px;
+	width: ${width}px;
 `;
 
 type Props = {
@@ -36,7 +38,7 @@ export const LoopVideo = ({
 	const [isPlayable, setIsPlayable] = useState(false);
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [isMuted, setIsMuted] = useState(true);
-	const [elapsedTime, setElapsedTime] = useState(0);
+	const [currentTime, setCurrentTime] = useState(0);
 	/**
 	 * Keep a track of whether the video has been in view. We only want to
 	 * pause the video if it has been in view.
@@ -69,22 +71,9 @@ export const LoopVideo = ({
 		}
 	}, [isInView, hasBeenInView, isPlayable, isPlaying]);
 
-	/**
-	 * Progress bar updates
-	 */
-	useEffect(() => {
-		const interval = setInterval(() => {
-			setElapsedTime(vidRef.current?.currentTime ?? 0);
-		}, 40);
-
-		return () => clearInterval(interval);
-	}, []);
-
 	if (renderingTarget !== 'Web') return null;
 
-	if (adapted) {
-		return fallbackImage;
-	}
+	if (adapted) return fallbackImage;
 
 	const handleClick = (event: React.SyntheticEvent) => {
 		event.preventDefault();
@@ -115,7 +104,7 @@ export const LoopVideo = ({
 			);
 
 			vidRef.current.currentTime = newTime;
-			setElapsedTime(newTime);
+			setCurrentTime(newTime);
 		}
 	};
 
@@ -128,7 +117,7 @@ export const LoopVideo = ({
 				vidRef.current.duration;
 
 			vidRef.current.currentTime = newTime;
-			setElapsedTime(newTime);
+			setCurrentTime(newTime);
 		}
 	};
 
@@ -155,7 +144,7 @@ export const LoopVideo = ({
 		<div
 			className="loop-video-container"
 			ref={setNode}
-			css={videoContainerStyles}
+			css={videoContainerStyles(height, width)}
 		>
 			<LoopVideoPlayer
 				src={src}
@@ -164,6 +153,8 @@ export const LoopVideo = ({
 				height={height}
 				hasAudio={hasAudio}
 				fallbackImage={fallbackImage}
+				currentTime={currentTime}
+				setCurrentTime={setCurrentTime}
 				ref={vidRef}
 				isPlayable={isPlayable}
 				setIsPlayable={setIsPlayable}
@@ -174,7 +165,6 @@ export const LoopVideo = ({
 				handleClick={handleClick}
 				handleKeyDown={handleKeyDown}
 				onError={onError}
-				elapsedTime={elapsedTime}
 				AudioIcon={AudioIcon}
 			/>
 		</div>
