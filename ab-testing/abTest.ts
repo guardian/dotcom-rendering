@@ -1,6 +1,6 @@
-import { ABTest } from './types';
+import { ABTest } from './types.ts';
 
-const ABTests: ABTest[] = [
+export const ABTests: ABTest[] = [
 	// Example client side AB test definition
 	{
 		name: 'commercial-ad-block-ask',
@@ -8,7 +8,7 @@ const ABTests: ABTest[] = [
 			'Show new ad block ask component in ad slots when we detect ad blocker usage',
 		owners: ['commercial.dev@guardian.co.uk'],
 		status: 'ON',
-		expirationDate: new Date('2025-05-31'),
+		expirationDate: new Date('2025-05-30'),
 		type: 'client',
 		highImpact: false,
 		groups: [
@@ -26,7 +26,7 @@ const ABTests: ABTest[] = [
 			'dotcom.platform@theguardian.com',
 		],
 		status: 'ON',
-		expirationDate: new Date('2025-04-02'),
+		expirationDate: new Date('2025-05-02'),
 		type: 'server',
 		highImpact: false,
 		groups: [

@@ -1,0 +1,23 @@
+name: 🦕 AB testing
+on:
+  pull_request:
+    paths:
+      - 'ab-testing/scripts/**'
+
+jobs:
+  deno:
+    name: 🦕 AB testing
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # https://github.com/denoland/setup-deno#latest-stable-for-a-major
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v2.2
+
+      - name: Test
+        run: deno test ab-testing/scripts
+
+      - name: Validate
+        run: deno run ab-testing/scripts/validation/index.ts
