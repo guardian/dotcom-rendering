@@ -79,6 +79,11 @@ export const prodServer = (): void => {
 	app.post('/TagPage', logRenderTime, handleTagPage);
 	app.post('/TagPageJSON', logRenderTime, handleTagPageJson);
 	app.post('/FootballDataPage', logRenderTime, handleFootballMatchListPage);
+	app.post(
+		'/FootballMatchListPage',
+		logRenderTime,
+		handleFootballMatchListPage,
+	);
 	app.post('/CricketMatchPage', logRenderTime, handleCricketMatchPage);
 	app.post('/FootballTablesPage', logRenderTime, handleFootballTablesPage);
 	app.post(
