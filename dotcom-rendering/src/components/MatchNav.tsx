@@ -17,6 +17,7 @@ type Props = {
 	homeTeam: Team;
 	awayTeam: Team;
 	comments?: string;
+	usage: 'MatchSummary' | 'Article';
 };
 
 const Row = ({ children }: { children: React.ReactNode }) => (
@@ -155,15 +156,7 @@ const TeamNav = ({
 				`}
 			>
 				<TeamName name={name} />
-				<Scorers
-					scorers={[
-						...scorers,
-						// this ensures we reserve space for at least three scorers per team
-						'placeholder-1',
-						'placeholder-2',
-						'placeholder-3',
-					].slice(0, Math.max(3, scorers.length))}
-				/>
+				<Scorers scorers={scorers} />
 			</div>
 			<CrestRow>
 				<Crest crest={crest} />
@@ -207,7 +200,16 @@ const YellowBorder = () => (
 	/>
 );
 
-export const MatchNav = ({ homeTeam, awayTeam, comments }: Props) => (
+const addScorerPlaceholders = (scorers: string[]): string[] =>
+	[
+		...scorers,
+		// this ensures we reserve space for at least three scorers per team
+		'placeholder-1',
+		'placeholder-2',
+		'placeholder-3',
+	].slice(0, Math.max(3, scorers.length));
+
+export const MatchNav = ({ homeTeam, awayTeam, comments, usage }: Props) => (
 	<div
 		css={css`
 			display: flex;
@@ -227,14 +229,22 @@ export const MatchNav = ({ homeTeam, awayTeam, comments }: Props) => (
 				name={homeTeam.name}
 				score={homeTeam.score}
 				crest={homeTeam.crest}
-				scorers={homeTeam.scorers}
+				scorers={
+					usage === 'Article'
+						? addScorerPlaceholders(homeTeam.scorers)
+						: homeTeam.scorers
+				}
 			/>
 			<YellowBorder />
 			<TeamNav
 				name={awayTeam.name}
 				score={awayTeam.score}
 				crest={awayTeam.crest}
-				scorers={awayTeam.scorers}
+				scorers={
+					usage === 'Article'
+						? addScorerPlaceholders(awayTeam.scorers)
+						: awayTeam.scorers
+				}
 			/>
 		</Row>
 		{!!comments && <Comments comments={comments} />}
