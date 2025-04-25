@@ -638,10 +638,6 @@ const styles = {
 	ctaContentContainer: css`
 		order: 4;
 		${from.phablet} {
-			grid-row: 5;
-			max-width: 492px;
-		}
-		${from.phablet} {
 			grid-column: 2;
 			grid-row: 5;
 			max-width: 492px;
@@ -654,6 +650,9 @@ const styles = {
 	`,
 	bodyCopyOverrides: css`
 		p {
+			${textSans15}
+		}
+		span {
 			${textSans15}
 		}
 	`,

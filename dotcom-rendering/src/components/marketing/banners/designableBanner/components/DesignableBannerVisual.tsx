@@ -90,7 +90,11 @@ const getStyles = (isHeaderImage = false) => {
 				object-fit: contain;
 				display: block;
 
-				${from.tablet} {
+				${from.phablet} {
+					max-height: 332px;
+					padding-bottom: 16px;
+				}
+				${from.desktop} {
 					max-height: none;
 				}
 			}
