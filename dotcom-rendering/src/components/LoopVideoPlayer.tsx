@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space } from '@guardian/source/foundations';
+import { from, space } from '@guardian/source/foundations';
 import type { IconProps } from '@guardian/source/react-components';
 import type { Dispatch, SetStateAction, SyntheticEvent } from 'react';
 import { forwardRef } from 'react';
@@ -7,13 +7,15 @@ import { palette } from '../palette';
 import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
 import { LoopVideoProgressBar } from './LoopVideoProgressBar';
 
-const videoStyles = css`
+const videoStyles = (aspectRatio: number) => css`
 	position: relative;
 	width: 100%;
 	height: auto;
 	/* Find out why this is needed to align the video with its container. */
 	margin-bottom: -3px;
 	cursor: pointer;
+	/* Prevents CLS by letting the browser know the space the video will take up. */
+	aspect-ratio: ${aspectRatio};
 `;
 
 const playIconStyles = css`
@@ -31,9 +33,16 @@ const audioButtonStyles = css`
 	background: none;
 	padding: 0;
 	position: absolute;
-	bottom: ${space[8]}px;
-	right: ${space[8]}px;
 	cursor: pointer;
+	height: ${space[6]}px;
+	width: ${space[6]}px;
+
+	bottom: ${space[4]}px;
+	right: ${space[4]}px;
+	${from.tablet} {
+		bottom: ${space[8]}px;
+		right: ${space[8]}px;
+	}
 `;
 
 type Props = {
@@ -93,6 +102,7 @@ export const LoopVideoPlayer = forwardRef(
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
 		const loopVideoId = `loop-video-${videoId}`;
+		const aspectRatio = width / height;
 
 		return (
 			<>
@@ -128,7 +138,7 @@ export const LoopVideoPlayer = forwardRef(
 					role="button"
 					tabIndex={0}
 					onError={onError}
-					css={videoStyles}
+					css={videoStyles(aspectRatio)}
 				>
 					{/* Ensure webm source is provided. Encoding the video to a webm file will improve
 					performance on supported browsers. https://web.dev/articles/video-and-source-tags */}

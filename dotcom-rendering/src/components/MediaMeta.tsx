@@ -45,6 +45,8 @@ export const Icon = ({ mediaType }: { mediaType: Props['mediaType'] }) => {
 			return <SvgCamera />;
 		case 'Video':
 			return <SvgVideo />;
+		case 'LoopVideo':
+			return <SvgVideo />;
 		case 'Audio':
 			return <SvgAudio />;
 	}

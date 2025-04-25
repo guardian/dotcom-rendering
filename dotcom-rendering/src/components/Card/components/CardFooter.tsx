@@ -54,6 +54,7 @@ const labStyles = css`
 
 type MainMedia =
 	| { type: 'Video'; duration: number }
+	| { type: 'LoopVideo'; duration: number }
 	| { type: 'Audio'; duration: string }
 	| { type: 'Gallery'; count: string };
 
