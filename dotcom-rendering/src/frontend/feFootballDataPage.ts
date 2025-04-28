@@ -38,4 +38,5 @@ export type FEFootballDataPage = {
 	isAdFreeUser: boolean;
 	canonicalUrl?: string;
 	contributionsServiceUrl: string;
+	pageId: string;
 };
