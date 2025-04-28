@@ -45,7 +45,8 @@ export const GalleryCaption = ({
 	webTitle,
 }: Props) => {
 	const emptyCaption = captionHtml === undefined || captionHtml.trim() === '';
-	const hideCredit = displayCredit === false || credit === '';
+	const hideCredit =
+		displayCredit === false || credit === undefined || credit === '';
 
 	if (emptyCaption && hideCredit) {
 		return null;
