@@ -78,7 +78,6 @@ export const prodServer = (): void => {
 	app.post('/FrontJSON', logRenderTime, handleFrontJson);
 	app.post('/TagPage', logRenderTime, handleTagPage);
 	app.post('/TagPageJSON', logRenderTime, handleTagPageJson);
-	app.post('/FootballDataPage', logRenderTime, handleFootballMatchListPage);
 	app.post(
 		'/FootballMatchListPage',
 		logRenderTime,
