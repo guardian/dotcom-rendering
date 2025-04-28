@@ -156,18 +156,15 @@ const decideSplashCardProperties = (
 	boostLevel: BoostLevel,
 	supportingContentLength: number,
 	mediaCard: boolean,
-	hasLivePlayable: boolean,
-	imageSuppressed: boolean,
+	useLargerHeadlineSizeDesktop: boolean,
 	avatarUrl: boolean,
 ): BoostedSplashProperties => {
 	switch (boostLevel) {
-		// boostedfont sizing
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
 			return {
 				headlineSizes: {
-					desktop:
-						imageSuppressed || hasLivePlayable ? 'large' : 'medium',
+					desktop: useLargerHeadlineSizeDesktop ? 'large' : 'medium',
 					tablet: 'medium',
 					mobile: 'medium',
 				},
@@ -182,8 +179,7 @@ const decideSplashCardProperties = (
 		case 'boost':
 			return {
 				headlineSizes: {
-					desktop:
-						imageSuppressed || hasLivePlayable ? 'xlarge' : 'large',
+					desktop: useLargerHeadlineSizeDesktop ? 'xlarge' : 'large',
 					tablet: 'large',
 					mobile: 'large',
 				},
@@ -198,10 +194,9 @@ const decideSplashCardProperties = (
 		case 'megaboost':
 			return {
 				headlineSizes: {
-					desktop:
-						imageSuppressed || hasLivePlayable
-							? 'xxlarge'
-							: 'xlarge',
+					desktop: useLargerHeadlineSizeDesktop
+						? 'xxlarge'
+						: 'xlarge',
 					tablet: 'xlarge',
 					mobile: 'xlarge',
 				},
@@ -215,10 +210,9 @@ const decideSplashCardProperties = (
 		case 'gigaboost':
 			return {
 				headlineSizes: {
-					desktop:
-						imageSuppressed || hasLivePlayable
-							? 'xxxlarge'
-							: 'xxlarge',
+					desktop: useLargerHeadlineSizeDesktop
+						? 'xxxlarge'
+						: 'xxlarge',
 					tablet: 'xlarge',
 					mobile: 'xxlarge',
 				},
@@ -269,6 +263,11 @@ export const SplashCardLayout = ({
 		);
 	}
 
+	// We sometimes want to give the headline size on desktop a size bump.
+	const useLargerHeadlineSizeDesktop =
+		(!card.image && card.format.design !== ArticleDesign.Comment) ||
+		card.showLivePlayable;
+
 	const {
 		headlineSizes,
 		imagePositionOnDesktop,
@@ -281,8 +280,7 @@ export const SplashCardLayout = ({
 		card.boostLevel ?? 'default',
 		card.supportingContent?.length ?? 0,
 		isMediaCard(card.format),
-		card.showLivePlayable,
-		!card.image,
+		useLargerHeadlineSizeDesktop,
 		!!card.avatarUrl,
 	);
 
@@ -555,9 +553,9 @@ const HalfWidthCardLayout = ({
 								(containerLevel !== 'Primary' && cardIndex > 0)
 							}
 							trailText={undefined}
-							// On standard cards, we increase the headline size if the trail image has been hidden
 							headlineSizes={
-								!card.image
+								!card.image &&
+								card.format.design !== ArticleDesign.Comment
 									? {
 											desktop: 'small',
 											tablet: 'xsmall',
