@@ -10,6 +10,7 @@ import { AudioLayout } from './AudioLayout';
 import { CommentLayout } from './CommentLayout';
 import { CrosswordLayout } from './CrosswordLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
+import { GalleryLayout } from './GalleryLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
@@ -282,6 +283,15 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+						/>
+					);
+				case ArticleDesign.Gallery:
+					return (
+						<GalleryLayout
+							article={article}
+							format={format}
+							NAV={NAV}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				default:

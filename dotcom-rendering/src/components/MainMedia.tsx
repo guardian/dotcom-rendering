@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { space, until } from '@guardian/source/foundations';
+import { grid } from '../grid';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -52,6 +53,10 @@ const immersiveWrapper = css`
 	overflow: hidden;
 `;
 
+const galleryWrapper = css`
+	${grid.column.all}
+`;
+
 const chooseWrapper = (format: ArticleFormat) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
@@ -64,6 +69,8 @@ const chooseWrapper = (format: ArticleFormat) => {
 				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
 					return padBottom;
+				case ArticleDesign.Gallery:
+					return galleryWrapper;
 				default:
 					return noGutters;
 			}

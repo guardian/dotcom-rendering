@@ -23,6 +23,13 @@ export const getLargestImageSize = (
 ): { url: string; width: number } | undefined =>
 	[...images].sort((a, b) => a.width - b.width).pop();
 
+export const isSupported = (imageUrl: string): boolean => {
+	const supportedImages = ['jpg', 'jpeg', 'png', 'gif'];
+	return supportedImages.some((extension) =>
+		imageUrl.endsWith(`.${extension}`),
+	);
+};
+
 const getServiceFromUrl = (url: URL): string => {
 	const serviceName = url.hostname.split('.')[0] ?? '';
 	switch (serviceName) {

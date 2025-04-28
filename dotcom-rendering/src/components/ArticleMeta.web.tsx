@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { FEArticle } from '../frontend/feArticle';
+import { grid } from '../grid';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -182,6 +183,10 @@ export const metaContainer = (format: ArticleFormat) => {
 				case ArticleDesign.DeadBlog: {
 					return '';
 				}
+				case ArticleDesign.Gallery:
+					return css`
+						${grid.column.centre}
+					`;
 				default:
 					return defaultMargins;
 			}

@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
-import { breakpoints } from '@guardian/source/foundations';
+import { breakpoints, from, space } from '@guardian/source/foundations';
 import { Fragment, useCallback, useEffect, useState } from 'react';
+import { grid } from '../grid';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -245,6 +246,17 @@ const decideImageWidths = ({
 					},
 				];
 		}
+	} else if (format.design === ArticleDesign.Gallery) {
+		return [
+			{ breakpoint: breakpoints.mobile, width: 375 },
+			{ breakpoint: breakpoints.mobileMedium, width: 480 },
+			{ breakpoint: breakpoints.mobileLandscape, width: 660 },
+			{ breakpoint: breakpoints.phablet, width: 740 },
+			{ breakpoint: breakpoints.tablet, width: 700 },
+			{ breakpoint: breakpoints.desktop, width: 620 },
+			{ breakpoint: breakpoints.leftCol, width: 940 },
+			{ breakpoint: breakpoints.wide, width: 1020 },
+		];
 	} else if (
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog
@@ -462,6 +474,34 @@ export const Sources = ({ sources }: { sources: ImageSource[] }) => {
 	);
 };
 
+const styles = ({ design }: ArticleFormat, isLightbox: boolean) => {
+	if (design === ArticleDesign.Gallery) {
+		return css`
+			display: block;
+			${grid.column.all}
+
+			${from.tablet} {
+				${grid.column.centre}
+			}
+
+			${from.desktop} {
+				padding-bottom: ${space[10]}px;
+			}
+
+			${from.leftCol} {
+				${grid.between('centre-column-start', 'right-column-end')}
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
+		`;
+	}
+
+	return isLightbox ? flex : block;
+};
+
 export const Picture = ({
 	role,
 	format,
@@ -523,7 +563,7 @@ export const Picture = ({
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
-		<picture css={isLightbox ? flex : block}>
+		<picture css={styles(format, isLightbox)}>
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
 			{format.display === ArticleDisplay.Immersive && isMainMedia && (
 				<>
