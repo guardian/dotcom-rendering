@@ -212,12 +212,11 @@ const headlineBackgroundLight: PaletteFunction = ({
 		case ArticleDisplay.Standard:
 			switch (design) {
 				case ArticleDesign.Interview:
+				case ArticleDesign.Gallery:
 					return sourcePalette.neutral[7];
 				default:
 					return 'transparent';
 			}
-		default:
-			return 'transparent';
 	}
 };
 
@@ -6386,7 +6385,7 @@ const paletteColours = {
 		light: datelineLight,
 		dark: datelineDark,
 	},
-	'--dateline-mobile': {
+	'--dateline-apps-mobile': {
 		light: datelineAppsMobileLight,
 		dark: datelineAppsMobileDark,
 	},

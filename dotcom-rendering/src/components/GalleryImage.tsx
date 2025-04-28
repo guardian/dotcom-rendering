@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
-import { getLargest, getMaster, isSupported } from '../lib/image';
+import { getImage } from '../lib/image';
 import { palette } from '../palette';
-import type { Image, ImageBlockElement } from '../types/content';
+import type { ImageBlockElement } from '../types/content';
 import { GalleryCaption } from './GalleryCaption';
 import { Picture } from './Picture';
 
@@ -13,16 +13,6 @@ type Props = {
 	image: ImageBlockElement;
 	pageId: string;
 	webTitle: string;
-};
-
-const getImage = (images: Image[]): Image | undefined => {
-	const image = getMaster(images) ?? getLargest(images);
-
-	if (image?.url === undefined || !isSupported(image.url)) {
-		return undefined;
-	}
-
-	return image;
 };
 
 const styles = css`

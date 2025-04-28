@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { space, until } from '@guardian/source/foundations';
-import { grid } from '../grid';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -11,6 +10,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, StarRating } from '../types/content';
+import { GalleryMainMedia } from './GalleryMainMedia';
 
 const mainMedia = css`
 	height: 100%;
@@ -53,13 +53,6 @@ const immersiveWrapper = css`
 	overflow: hidden;
 `;
 
-const galleryWrapper = css`
-	${grid.column.all}
-	${until.tablet} {
-		order: unset;
-	}
-`;
-
 const chooseWrapper = (format: ArticleFormat) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
@@ -72,8 +65,6 @@ const chooseWrapper = (format: ArticleFormat) => {
 				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
 					return padBottom;
-				case ArticleDesign.Gallery:
-					return galleryWrapper;
 				default:
 					return noGutters;
 			}
@@ -114,6 +105,10 @@ export const MainMedia = ({
 	switches,
 	editionId,
 }: Props) => {
+	if (format.design === ArticleDesign.Gallery) {
+		return <GalleryMainMedia format={format} elements={elements} />;
+	}
+
 	return (
 		<div css={[mainMedia, chooseWrapper(format)]}>
 			{elements.map((element, index) => (
