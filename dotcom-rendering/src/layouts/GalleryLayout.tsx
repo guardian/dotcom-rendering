@@ -5,6 +5,7 @@ import { ArticleMeta } from '../components/ArticleMeta.web';
 import { GalleryImage } from '../components/GalleryImage';
 import { GalleryMainMediaCaption } from '../components/GalleryMainMediaCaption';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { LabsHeaderFull } from '../components/LabsHeaderFull';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
@@ -115,6 +116,10 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 			<main>
 				<article css={articleStyles}>
 					<header css={headerStyles}>
+						<LabsHeaderFull
+							editionId={article.editionId}
+							format={format}
+						/>
 						<MainMedia
 							abTests={article.config.abTests}
 							ajaxUrl={article.config.ajaxUrl}

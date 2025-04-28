@@ -5884,6 +5884,11 @@ const crosswordCluesHeaderBorderBottom: PaletteFunction = () =>
 const crosswordTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 const crosswordTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
+const labsHeaderBackgroundLight: PaletteFunction = () =>
+	sourcePalette.labs[400];
+const labsHeaderBackgroundDark: PaletteFunction = () =>
+	sourcePalette.brand[400];
+
 // ----- Palette ----- //
 
 /**
@@ -6841,6 +6846,10 @@ const paletteColours = {
 	'--kicker-text-live': {
 		light: liveKickerTextLight,
 		dark: liveKickerTextDark,
+	},
+	'--labs-header-background': {
+		light: labsHeaderBackgroundLight,
+		dark: labsHeaderBackgroundDark,
 	},
 	'--last-updated-text': {
 		light: lastUpdatedTextLight,
