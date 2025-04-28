@@ -99,7 +99,7 @@ export const devServer = (): Handler => {
 				return handleAppsBlocks(req, res, next);
 			case 'EditionsCrossword':
 				return handleEditionsCrossword(req, res, next);
-			case 'FootballDataPage':
+			case 'FootballMatchListPage':
 				return handleFootballMatchListPage(req, res, next);
 			case 'FootballTablesPage':
 				return handleFootballTablesPage(req, res, next);
