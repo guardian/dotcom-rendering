@@ -265,7 +265,7 @@ export const SplashCardLayout = ({
 
 	const useLargerHeadlineSizeDesktop =
 		// When there's no image, we want the text to take up more space. The exception is Opinion
-		// cards, as avatars are more common and command less visual weight that a standard image.
+		// cards, as avatars are more common and command less visual weight than a standard image.
 		(!card.image && card.format.design !== ArticleDesign.Comment) ||
 		card.showLivePlayable;
 
