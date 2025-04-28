@@ -149,7 +149,7 @@ const SupportingBenefits = ({
 	benefitsLabel: string | undefined;
 	benefits: string[];
 }) => {
-	const isBenefit = !!benefitsLabel;
+	const showTicks = benefits.length > 1;
 	return (
 		<div css={supportingTextStyles}>
 			{!!benefitsLabel && (
@@ -160,7 +160,7 @@ const SupportingBenefits = ({
 			<ul css={benefitsStyles}>
 				{benefits.map((benefit) => (
 					<li key={benefit}>
-						{isBenefit && <SvgTickRound size="xsmall" />}
+						{showTicks && <SvgTickRound size="xsmall" />}
 						{benefit}
 					</li>
 				))}
