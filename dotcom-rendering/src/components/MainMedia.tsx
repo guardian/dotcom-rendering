@@ -55,6 +55,9 @@ const immersiveWrapper = css`
 
 const galleryWrapper = css`
 	${grid.column.all}
+	${until.tablet} {
+		order: unset;
+	}
 `;
 
 const chooseWrapper = (format: ArticleFormat) => {

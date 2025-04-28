@@ -58,6 +58,10 @@ const meta = (format: ArticleFormat) => {
 		`;
 	}
 
+	if (format.design === ArticleDesign.Gallery) {
+		return undefined;
+	}
+
 	return css`
 		${between.tablet.and.leftCol} {
 			order: 3;
@@ -108,24 +112,34 @@ const borderColourWhenBackgroundDark = css`
 	}
 `;
 
-const metaExtras = (isPictureContent: boolean) => css`
+const metaExtras = css`
 	border-top: 1px solid ${themePalette('--article-border')};
 	flex-grow: 1;
 	padding-top: 6px;
-
-	${!isPictureContent && until.phablet} {
-		margin-left: -10px;
-		margin-right: -10px;
-		padding-left: 10px;
-		padding-right: 10px;
-	}
 
 	${between.leftCol.and.wide} {
 		padding-bottom: 6px;
 	}
 `;
 
-const metaNumbers = (isPictureContent: boolean) => css`
+const negativeMargin = ({ design }: ArticleFormat) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Picture:
+			return undefined;
+		default:
+			return css`
+				${until.phablet} {
+					margin-left: -10px;
+					margin-right: -10px;
+					padding-left: 10px;
+					padding-right: 10px;
+				}
+			`;
+	}
+};
+
+const metaNumbers = css`
 	border-top: 1px solid ${themePalette('--article-border')};
 	display: flex;
 	flex-grow: 1;
@@ -133,13 +147,6 @@ const metaNumbers = (isPictureContent: boolean) => css`
 	justify-content: flex-end;
 	${between.leftCol.and.wide} {
 		justify-content: flex-start;
-	}
-
-	${!isPictureContent && until.phablet} {
-		margin-left: -10px;
-		margin-right: -10px;
-		padding-left: 10px;
-		padding-right: 10px;
 	}
 `;
 
@@ -332,8 +339,6 @@ export const ArticleMeta = ({
 		: undefined;
 	const isInteractive = format.design === ArticleDesign.Interactive;
 
-	const isPictureContent = format.design === ArticleDesign.Picture;
-
 	const isAudio = format.design === ArticleDesign.Audio;
 
 	const { renderingTarget } = useConfig();
@@ -413,7 +418,6 @@ export const ArticleMeta = ({
 							<Dateline
 								primaryDateline={primaryDateline}
 								secondaryDateline={secondaryDateline}
-								format={format}
 							/>
 						</div>
 					</>
@@ -428,7 +432,8 @@ export const ArticleMeta = ({
 									: ''
 							}
 							css={[
-								metaExtras(isPictureContent),
+								metaExtras,
+								negativeMargin(format),
 								format.design === ArticleDesign.LiveBlog &&
 									css(
 										borderColourWhenBackgroundDark,
@@ -456,7 +461,8 @@ export const ArticleMeta = ({
 								: ''
 						}
 						css={[
-							metaNumbers(isPictureContent),
+							metaNumbers,
+							negativeMargin(format),
 							format.design === ArticleDesign.LiveBlog &&
 								css(
 									borderColourWhenBackgroundDark,

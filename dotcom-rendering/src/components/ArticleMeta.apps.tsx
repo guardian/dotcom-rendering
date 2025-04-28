@@ -331,7 +331,6 @@ export const ArticleMetaApps = ({
 					<Dateline
 						primaryDateline={primaryDateline}
 						secondaryDateline={secondaryDateline}
-						format={format}
 					/>
 				</MetaGridDateline>
 				{branding && (
