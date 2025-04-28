@@ -263,8 +263,9 @@ export const SplashCardLayout = ({
 		);
 	}
 
-	// We sometimes want to give the headline size on desktop a size bump.
 	const useLargerHeadlineSizeDesktop =
+		// When there's no image, we want the text to take up more space. The exception is Opinion
+		// cards, as avatars are more common and command less visual weight that a standard image.
 		(!card.image && card.format.design !== ArticleDesign.Comment) ||
 		card.showLivePlayable;
 
