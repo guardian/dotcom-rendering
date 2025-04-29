@@ -31,7 +31,7 @@ import {
 	retrieveDismissedCount,
 	setUserDismissedGate,
 } from './SignInGate/dismissGate';
-import { pageIdIsAllowedForGating } from './SignInGate/displayRule';
+import { pageIdIsAllowedForGating } from './SignInGate/displayRules';
 import { SignInGateAuxia } from './SignInGate/gateDesigns/SignInGateAuxia';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGateMappings';
 import type {
