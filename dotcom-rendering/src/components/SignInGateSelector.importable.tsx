@@ -31,6 +31,7 @@ import {
 	retrieveDismissedCount,
 	setUserDismissedGate,
 } from './SignInGate/dismissGate';
+import { pageIdIsAllowedForGating } from './SignInGate/displayRule';
 import { SignInGateAuxia } from './SignInGate/gateDesigns/SignInGateAuxia';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGateMappings';
 import type {
@@ -369,38 +370,6 @@ const SignInGateSelectorDefault = ({
 // -------------------------------
 // Auxia Integration Experiment //
 // -------------------------------
-
-/*
-	Date: 29th April 2025
-
-	We have a request to prevent sign-in gate for a specific URL. This feels like an
-	adhoc request and not a new general feature to implement.
-
-	We have a check in SDC: https://github.com/guardian/support-dotcom-components/pull/1345 ,
-	to prevent the Auxia gate from showing, but we also need to prevent the legacy gate from
-	showing. For a cleaner implementation. we are simply going to prevent any of the two
-	gates components from rendering.
-
-	To keep things simple, we are going to add a check in SignInGateSelector, which seems
-	like a good place.
-*/
-
-export const pageIdIsAllowedForGating = (pageId: string): boolean => {
-	// This function was introduced to handle the specific request of not showing a gate for
-	// this url: https://www.theguardian.com/tips
-
-	// pageId is the path without the starting slash
-	// example:
-	// - full url: https://www.theguardian.com/world/2025/apr/29/canada-election-result-liberal-win-mark-carney-anti-trump
-	// - pageId: world/2025/apr/29/canada-election-result-liberal-win-mark-carney-anti-trump
-
-	const denyPaths = [
-		'tips',
-		'help/ng-interactive/2017/mar/17/contact-the-guardian-securely',
-	];
-
-	return !denyPaths.some((denyPath) => pageId.startsWith(denyPath));
-};
 
 export const SignInGateSelector = ({
 	contentType,
