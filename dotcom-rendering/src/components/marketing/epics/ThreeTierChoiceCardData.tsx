@@ -11,7 +11,7 @@ export const ChoiceCardTestData_REGULAR = (
 			isDiscountActive
 				? `Support ${currencySymbol}${amount}/year`
 				: `Support ${currencySymbol}${amount}/month`,
-		benefitsLabel: 'Support',
+		benefitsLabel: longerBenefits ? 'Support' : undefined,
 		benefits: () => [
 			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
 		],
@@ -40,7 +40,7 @@ export const ChoiceCardTestData_REGULAR = (
 				return `Support ${currencySymbol}${amount}/month`;
 			}
 		},
-		benefitsLabel: 'All-access digital',
+		benefitsLabel: longerBenefits ? 'All-access digital' : undefined,
 		benefits: () =>
 			longerBenefits
 				? fullSupporterPlusBenefits
@@ -66,7 +66,7 @@ export const ChoiceCardTestData_US = (
 			isDiscountActive
 				? `Support ${currencySymbol}${amount}/year`
 				: `Support ${currencySymbol}${amount}/month`,
-		benefitsLabel: 'Support',
+		benefitsLabel: longerBenefits ? 'Support' : undefined,
 		benefits: () => [
 			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
 		],
@@ -95,7 +95,7 @@ export const ChoiceCardTestData_US = (
 				return `Support ${currencySymbol}${amount}/month`;
 			}
 		},
-		benefitsLabel: 'All-access digital',
+		benefitsLabel: longerBenefits ? 'All-access digital' : undefined,
 		benefits: () =>
 			longerBenefits
 				? fullSupporterPlusBenefits
@@ -125,5 +125,4 @@ const fullSupporterPlusBenefits = [
 const shorterSupporterPlusBenefits = [
 	'Unlimited access to the Guardian app and Feast app',
 	'Ad-free reading on all your devices',
-	'Exclusive supporter newsletter',
 ];
