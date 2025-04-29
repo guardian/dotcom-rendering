@@ -1,18 +1,23 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
+import { AdSlot } from '../components/AdSlot.web';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { GalleryImage } from '../components/GalleryImage';
 import { GalleryMainMediaCaption } from '../components/GalleryMainMediaCaption';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { Island } from '../components/Island';
 import { LabsHeaderFull } from '../components/LabsHeaderFull';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
+import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
+import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { SubMeta } from '../components/SubMeta';
 import { grid } from '../grid';
-import { type ArticleFormat } from '../lib/articleFormat';
+import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import type { NavType } from '../model/extract-nav';
@@ -70,9 +75,13 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 
 	const isWeb = renderingTarget === 'Web';
 
+	const isLabs = format.theme === ArticleSpecial.Labs;
+
 	const renderAds = isWeb && canRenderAds(article);
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
+
+	const { absoluteServerTimes = false } = article.config.switches;
 
 	return (
 		<>
@@ -190,6 +199,91 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					subMetaKeywordLinks={article.subMetaKeywordLinks}
 					subMetaSectionLinks={article.subMetaSectionLinks}
 				/>
+				{renderAds && !isLabs && (
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={palette('--ad-background')}
+						element="aside"
+					>
+						<AdSlot
+							data-print-layout="hide"
+							position="merchandising-high"
+							display={format.display}
+						/>
+					</Section>
+				)}
+
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<OnwardsUpper
+						ajaxUrl={article.config.ajaxUrl}
+						hasRelated={article.hasRelated}
+						hasStoryPackage={article.hasStoryPackage}
+						isAdFreeUser={article.isAdFreeUser}
+						pageId={article.pageId}
+						isPaidContent={!!article.config.isPaidContent}
+						showRelatedContent={article.config.showRelatedContent}
+						keywordIds={article.config.keywordIds}
+						contentType={article.contentType}
+						tags={article.tags}
+						format={format}
+						pillar={format.theme}
+						editionId={article.editionId}
+						shortUrlId={article.config.shortUrlId}
+						discussionApiUrl={article.config.discussionApiUrl}
+						absoluteServerTimes={absoluteServerTimes}
+						renderingTarget={renderingTarget}
+					/>
+				</Island>
+
+				{!article.config.isPaidContent && (
+					<Section
+						title="Most viewed"
+						padContent={false}
+						verticalMargins={false}
+						element="aside"
+						data-print-layout="hide"
+						data-link-name="most-popular"
+						data-component="most-popular"
+						backgroundColour={palette(
+							'--article-section-background',
+						)}
+						borderColour={palette('--article-border')}
+					>
+						<MostViewedFooterLayout renderAds={renderAds}>
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<MostViewedFooterData
+									sectionId={article.config.section}
+									ajaxUrl={article.config.ajaxUrl}
+									edition={article.editionId}
+								/>
+							</Island>
+						</MostViewedFooterLayout>
+					</Section>
+				)}
+
+				{renderAds && !isLabs && (
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={palette('--ad-background')}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising"
+							display={format.display}
+						/>
+					</Section>
+				)}
 			</main>
 		</>
 	);
