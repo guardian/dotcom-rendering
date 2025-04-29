@@ -206,11 +206,11 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 
 	return (
 		<>
+			{article.isLegacyInteractive && (
+				<Global styles={interactiveGlobalStyles} />
+			)}
 			{isWeb && (
 				<>
-					{article.isLegacyInteractive && (
-						<Global styles={interactiveGlobalStyles} />
-					)}
 					<header
 						css={css`
 							background-color: ${themePalette(
