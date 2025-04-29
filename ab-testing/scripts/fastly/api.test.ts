@@ -1,4 +1,8 @@
-import { assertEquals, assertRejects, assertThrows } from 'jsr:@std/assert';
+import {
+	assertEquals,
+	assertRejects,
+	assertStringIncludes,
+} from 'jsr:@std/assert';
 import { stub, Stub } from 'jsr:@std/testing/mock';
 
 // Mock environment variables
@@ -15,8 +19,6 @@ stub(Deno.env, 'get', (key: string) => {
 	}
 });
 
-// Create a fetch stub before importing the module that uses it
-const originalFetch = globalThis.fetch;
 let fetchStub: Stub<typeof globalThis>;
 
 function mockFetch(response: unknown, status = 200, statusText = 'OK') {
@@ -233,10 +235,7 @@ Deno.test('getMVTGroupsFromDictionary - calls the right endpoint', async () => {
 	await getMVTGroupsFromDictionary();
 
 	assertEquals(fetchStub.calls.length, 1);
-	assertEquals(
-		fetchStub.calls[0].args[0].includes('/dictionary/test/items'),
-		true,
-	);
+	assertStringIncludes(fetchStub.calls[0].args[0], '/dictionary/test/items');
 });
 
 Deno.test(
@@ -248,9 +247,9 @@ Deno.test(
 		await getABTestGroupsFromDictionary();
 
 		assertEquals(fetchStub.calls.length, 1);
-		assertEquals(
-			fetchStub.calls[0].args[0].includes('/dictionary/test/items'),
-			true,
+		assertStringIncludes(
+			fetchStub.calls[0].args[0],
+			'/dictionary/test/items',
 		);
 	},
 );
