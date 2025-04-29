@@ -20,4 +20,10 @@ jobs:
         run: deno test ab-testing/scripts
 
       - name: Validate
-        run: deno run ab-testing/scripts/validation/index.ts
+        run: deno run validate
+
+      # - name: Build
+      #   run: deno run build
+
+      # - name: Deploy
+      #   run: deno run deploy
