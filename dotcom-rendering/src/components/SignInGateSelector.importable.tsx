@@ -394,7 +394,10 @@ export const pageIdIsAllowedForGating = (pageId: string): boolean => {
 	// - full url: https://www.theguardian.com/world/2025/apr/29/canada-election-result-liberal-win-mark-carney-anti-trump
 	// - pageId: world/2025/apr/29/canada-election-result-liberal-win-mark-carney-anti-trump
 
-	const denyPaths = ['tips'];
+	const denyPaths = [
+		'tips',
+		'help/ng-interactive/2017/mar/17/contact-the-guardian-securely',
+	];
 
 	return !denyPaths.some((denyPath) => pageId.startsWith(denyPath));
 };
