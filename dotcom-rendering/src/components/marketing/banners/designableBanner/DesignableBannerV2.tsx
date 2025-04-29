@@ -605,6 +605,8 @@ const styles = {
 	headerWithImageContainer: (background: string) => css`
 		order: 1;
 		max-width: '100%';
+		text-wrap: balance;
+
 		${between.mobile.and.desktop} {
 			order: '2';
 		}
@@ -620,9 +622,8 @@ const styles = {
 		}
 	`,
 	contentContainer: css`
-		${from.mobile} {
-			grid-row: 2;
-		}
+		grid-row: 4;
+
 		${from.phablet} {
 			grid-column: 2;
 			max-width: 492px;
