@@ -4,17 +4,11 @@ import {
 	calculateBulkUpdates,
 	getABTestGroupsFromDictionary,
 	getMVTGroupsFromDictionary,
-	encodeObject,
 } from './api.ts';
 import { getMVTGroups, getUpdatedABTestGroups } from './json.ts';
 
 // update ab test groups first
-const updatedABTestGroups = Object.entries(await getUpdatedABTestGroups()).map(
-	([key, value]) => ({
-		item_key: key,
-		item_value: encodeObject(value),
-	}),
-);
+const updatedABTestGroups = await getUpdatedABTestGroups();
 const currentABTestGroups = await getABTestGroupsFromDictionary();
 
 const ABTestGroupBulkUpdates = calculateBulkUpdates(
@@ -55,10 +49,7 @@ if (ABTestGroupBulkUpdates.length === 0) {
 }
 
 // update mvt groups
-const mvtGroups = Object.entries(await getMVTGroups()).map(([key, value]) => ({
-	item_key: key,
-	item_value: encodeObject(value),
-}));
+const mvtGroups = await getMVTGroups();
 const currentMVTGroups = await getMVTGroupsFromDictionary();
 const MVTGroupBulkUpdates = calculateBulkUpdates(mvtGroups, currentMVTGroups);
 
