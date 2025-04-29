@@ -8,11 +8,9 @@ import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useConfig } from './ConfigContext';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
 
-const videoContainerStyles = (height: number, width: number) => css`
+const videoContainerStyles = css`
 	z-index: ${getZIndex('loop-video-container')};
 	position: relative;
-	height: ${height}px;
-	width: ${width}px;
 `;
 
 type Props = {
@@ -20,8 +18,9 @@ type Props = {
 	videoId: string;
 	width?: number;
 	height?: number;
+	thumbnailImage: string;
+	fallbackImageComponent: JSX.Element;
 	hasAudio?: boolean;
-	fallbackImage: JSX.Element;
 };
 
 export const LoopVideo = ({
@@ -29,8 +28,9 @@ export const LoopVideo = ({
 	videoId,
 	width = 600,
 	height = 360,
+	thumbnailImage,
+	fallbackImageComponent,
 	hasAudio = true,
-	fallbackImage,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -39,6 +39,7 @@ export const LoopVideo = ({
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [isMuted, setIsMuted] = useState(true);
 	const [currentTime, setCurrentTime] = useState(0);
+	const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 	/**
 	 * Keep a track of whether the video has been in view. We only want to
 	 * pause the video if it has been in view.
@@ -57,11 +58,17 @@ export const LoopVideo = ({
 		if (!vidRef.current) return;
 
 		if (isInView) {
-			if (!hasBeenInView) {
-				// When the video first comes into view, it should autoplay
-				setIsPlaying(true);
-				void vidRef.current.play();
+			// We only autoplay the first time the video comes into view.
+			if (hasBeenInView) return;
+
+			if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+				setPrefersReducedMotion(true);
+				return;
 			}
+
+			setIsPlaying(true);
+			void vidRef.current.play();
+
 			setHasBeenInView(true);
 		}
 
@@ -73,19 +80,31 @@ export const LoopVideo = ({
 
 	if (renderingTarget !== 'Web') return null;
 
-	if (adapted) return fallbackImage;
+	if (adapted) return fallbackImageComponent;
+
+	const playVideo = () => {
+		if (!vidRef.current) return;
+		setIsPlaying(true);
+		void vidRef.current.play();
+	};
+
+	const pauseVideo = () => {
+		if (!vidRef.current) return;
+		setIsPlaying(false);
+		void vidRef.current.pause();
+	};
+
+	const playPauseVideo = () => {
+		if (isPlaying) {
+			pauseVideo();
+		} else {
+			playVideo();
+		}
+	};
 
 	const handleClick = (event: React.SyntheticEvent) => {
 		event.preventDefault();
-		if (!vidRef.current) return;
-
-		if (isPlaying) {
-			setIsPlaying(false);
-			void vidRef.current.pause();
-		} else {
-			setIsPlaying(true);
-			void vidRef.current.play();
-		}
+		playPauseVideo();
 	};
 
 	const onError = () => {
@@ -127,7 +146,10 @@ export const LoopVideo = ({
 		switch (event.key) {
 			case 'Enter':
 			case ' ':
-				handleClick(event);
+				playPauseVideo();
+				break;
+			case 'Escape':
+				pauseVideo();
 				break;
 			case 'ArrowRight':
 				seekForward();
@@ -135,24 +157,23 @@ export const LoopVideo = ({
 			case 'ArrowLeft':
 				seekBackward();
 				break;
+			case 'm':
+				setIsMuted(!isMuted);
+				break;
 		}
 	};
 
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
 	return (
-		<div
-			className="loop-video-container"
-			ref={setNode}
-			css={videoContainerStyles(height, width)}
-		>
+		<div ref={setNode} css={videoContainerStyles}>
 			<LoopVideoPlayer
 				src={src}
 				videoId={videoId}
 				width={width}
 				height={height}
 				hasAudio={hasAudio}
-				fallbackImage={fallbackImage}
+				fallbackImageComponent={fallbackImageComponent}
 				currentTime={currentTime}
 				setCurrentTime={setCurrentTime}
 				ref={vidRef}
@@ -166,6 +187,9 @@ export const LoopVideo = ({
 				handleKeyDown={handleKeyDown}
 				onError={onError}
 				AudioIcon={AudioIcon}
+				thumbnailImage={
+					prefersReducedMotion ? thumbnailImage : undefined
+				}
 			/>
 		</div>
 	);

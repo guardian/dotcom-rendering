@@ -109,7 +109,7 @@ pages.get('/AppsArticle/*', handleAppsArticle);
 pages.get('/AppsInteractive/*', handleAppsInteractive);
 pages.get('/AppsBlocks/*', handleAppsBlocks);
 pages.get('/EditionsCrossword/*', handleEditionsCrossword);
-pages.get('/FootballDataPage/*', handleFootballMatchListPage);
+pages.get('/FootballMatchListPage/*', handleFootballMatchListPage);
 pages.get('/FootballTablesPage/*', handleFootballTablesPage);
 pages.get('/CricketMatchPage/*', handleCricketMatchPage);
 pages.get('/FootballMatchSummaryPage/*', handleFootballMatchPage);

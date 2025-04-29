@@ -683,6 +683,49 @@ export const audioTrails: [DCRFrontCard, DCRFrontCard] = [
 	},
 ];
 
+export const opinionTrails: [DCRFrontCard, DCRFrontCard] = [
+	{
+		format: { design: 8, display: 0, theme: 1 },
+		dataLinkName: 'comment | group-0 | card-@6',
+		url: '/commentisfree/2025/apr/28/populists-nigel-farage-reform-chaos-brexit',
+		headline:
+			'Populists like Farage promise voters a simpler life. In fact, they produce ever more hassle and chaos',
+		trailText:
+			'Centrists won’t beat Reform UK by echoing its messages. They should emphasise the true unworkability of policies like Brexit, says Guardian columnist Andy Beckett',
+		webPublicationDate: '2025-04-28T05:00:53.000Z',
+		discussionApiUrl:
+			'https://discussion.code.dev-theguardian.com/discussion-api',
+		discussionId: '/p/x253na',
+		isImmersive: false,
+		showQuotedHeadline: true,
+		isExternalLink: false,
+		showLivePlayable: false,
+		avatarUrl: 'https://uploads.guim.co.uk/2022/09/20/Andy_Beckett_v2.png',
+		image: {
+			src: 'https://media.guim.co.uk/f55906c2b9116946c778cd1fca808a6dae764d01/0_0_9528_5715/master/9528.jpg',
+			altText:
+				'Nigel Farage on the campaign trail in Ramsgate, Kent, on 24 April.',
+		},
+	},
+	{
+		format: { design: 8, display: 0, theme: 1 },
+		dataLinkName: 'comment | group-0 | card-@5',
+		url: '/commentisfree/2025/apr/28/duttons-comments-show-we-are-back-to-punching-down-on-indigenous-australians-for-attention-and-votes',
+		headline:
+			'Dutton’s comments show we are back to punching down on Indigenous Australians for attention – and votes',
+		trailText:
+			'It is disingenuous for politicians to be shocked when people decide to turn words into action, even in the predawn hush of Anzac Day',
+		webPublicationDate: '2025-04-28T05:19:42.000Z',
+		discussionApiUrl:
+			'https://discussion.code.dev-theguardian.com/discussion-api',
+		byline: 'Lorena Allam',
+		isImmersive: false,
+		showQuotedHeadline: true,
+		showLivePlayable: false,
+		isExternalLink: false,
+	},
+];
+
 export const galleryTrails: [DCRFrontCard, DCRFrontCard] = [
 	{
 		format: { design: 2, display: 1, theme: 4 },
