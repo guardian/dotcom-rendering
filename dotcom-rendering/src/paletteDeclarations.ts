@@ -3322,27 +3322,20 @@ const articleLinkBorderHoverDark: PaletteFunction = (f) =>
 	articleLinkTextDark(f);
 
 const articleBorderLight: PaletteFunction = ({ design, theme }) => {
-	switch (design) {
-		case ArticleDesign.Gallery:
-			return sourcePalette.neutral[20];
+	switch (theme) {
+		case ArticleSpecial.SpecialReportAlt:
+			return transparentColour(sourcePalette.neutral[60], 0.3);
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[60];
 		default:
-			switch (theme) {
-				case ArticleSpecial.SpecialReportAlt:
-					return transparentColour(sourcePalette.neutral[60], 0.3);
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[60];
+			switch (design) {
+				case ArticleDesign.Picture:
+				case ArticleDesign.Video:
+				case ArticleDesign.Audio:
+				case ArticleDesign.Gallery:
+					return transparentColour(sourcePalette.neutral[60], 0.5);
 				default:
-					switch (design) {
-						case ArticleDesign.Picture:
-						case ArticleDesign.Video:
-						case ArticleDesign.Audio:
-							return transparentColour(
-								sourcePalette.neutral[60],
-								0.5,
-							);
-						default:
-							return sourcePalette.neutral[86];
-					}
+					return sourcePalette.neutral[86];
 			}
 	}
 };
@@ -3848,6 +3841,7 @@ const subMetaBackgroundLight: PaletteFunction = ({
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
+		case ArticleDesign.Gallery:
 			switch (theme) {
 				case ArticleSpecial.Labs:
 					return sourcePalette.neutral[86];
