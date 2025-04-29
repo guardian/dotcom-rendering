@@ -1,7 +1,7 @@
 import { isUndefined, startPerformanceMeasure } from '@guardian/libs';
 import React, { Suspense } from 'react';
 import { Lazy } from '../../Lazy';
-import { canShowSignInGate } from '../displayRule';
+import { canShowSignInGate } from '../displayRules';
 import type { SignInGateComponent } from '../types';
 
 const SignInGateMain = React.lazy(() => {
