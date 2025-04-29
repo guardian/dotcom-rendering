@@ -203,6 +203,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 		editionId,
 	} = article;
 	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
 
 	return (
 		<>
@@ -240,6 +241,20 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 						)}
 					</header>
 				</>
+			)}
+			{isApps && format.theme === ArticleSpecial.Labs && (
+				<Stuck>
+					<Section
+						fullWidth={true}
+						showTopBorder={false}
+						padSides={true}
+						backgroundColour={sourcePalette.labs[400]}
+						borderColour={sourcePalette.neutral[60]}
+						sectionId="labs-header"
+					>
+						<LabsHeader editionId={editionId} />
+					</Section>
+				</Stuck>
 			)}
 
 			<Section
