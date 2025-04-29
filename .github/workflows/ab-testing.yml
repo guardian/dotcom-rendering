@@ -8,6 +8,9 @@ jobs:
   deno:
     name: 🦕 AB testing
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ab-testing/scripts
     steps:
       - uses: actions/checkout@v4
 
@@ -17,7 +20,7 @@ jobs:
           deno-version: v2.2
 
       - name: Test
-        run: deno test ab-testing/scripts
+        run: deno test
 
       - name: Validate
         run: deno run validate
