@@ -16,7 +16,7 @@ console.log(
 );
 
 module.exports = {
-	/** @type {import('webpack-dev-server').Configuration} */
+	/** @type {import('@rspack/dev-server').Configuration} */
 	devServer: {
 		compress: false,
 		hot: false,
@@ -24,7 +24,9 @@ module.exports = {
 		client: {
 			logging: 'warn',
 			overlay: true,
+			progress: true,
 		},
+		open: true,
 		port,
 		static: {
 			directory: path.join(__dirname, '..', 'src', 'static'),
@@ -48,21 +50,21 @@ module.exports = {
 			},
 		},
 		setupMiddlewares: (middlewares, devServer) => {
-			if (!devServer.app) {
-				throw new Error('webpack-dev-server is not defined');
+			if (!devServer) {
+				throw new Error('@rspack/dev-server is not defined');
 			}
 
 			// it turns out webpack dev server is just an express server
 			// with webpack-dev-middleware, so here we add some other middlewares
 			// of our own
 
-			devServer.app.use(bodyParser.json({ limit: '10mb' }));
+			// devServer.app.use(bodyParser.json({ limit: '10mb' }));
 
 			// populates req.body with the content data from a production
 			// URL if req.params.url is present
-			devServer.app.use(getContentFromURLMiddleware);
 
-			devServer.app.get('/', (req, res) => {
+			devServer.app?.get('/', (req, res) => {
+				console.log('setupMiddlewares 1');
 				res.sendFile(
 					path.join(
 						__dirname,
@@ -74,14 +76,16 @@ module.exports = {
 				);
 			});
 
+			// devServer.app?.use(getContentFromURLMiddleware);
+			middlewares.push(getContentFromURLMiddleware);
 			// webpack-hot-server-middleware needs to run after webpack-dev-middleware
-			middlewares.push({
-				name: 'server',
-				// @ts-expect-error -- it’s a MultiCompiler
-				middleware: webpackHotServerMiddleware(devServer.compiler, {
-					chunkName: 'server',
-				}),
-			});
+			// middlewares.push({
+			// 	name: 'server',
+			// 	// @ts-expect-error -- it’s a MultiCompiler
+			// 	middleware: webpackHotServerMiddleware(devServer.compiler, {
+			// 		chunkName: 'server',
+			// 	}),
+			// });
 
 			return middlewares;
 		},

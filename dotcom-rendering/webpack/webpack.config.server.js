@@ -21,7 +21,7 @@ const swcLoader = [
 	},
 ];
 
-/** @type {import('webpack').Configuration} */
+/** @type {import('@rspack/cli').Configuration} */
 module.exports = {
 	entry: {
 		server: './src/server/server.ts',
@@ -61,22 +61,22 @@ module.exports = {
 			: []),
 		// @aws-sdk modules are only used in CODE/PROD, so we don't need to
 		// include them in the development bundle
-		({ request }, callback) => {
-			return process.env.NODE_ENV === 'development' &&
-				request?.startsWith('@aws-sdk')
-				? callback(undefined, `commonjs ${request}`)
-				: callback();
-		},
-		({ request }, callback) => {
-			return request?.endsWith('manifest.json')
-				? callback(undefined, `commonjs ${request}`)
-				: callback();
-		},
-		({ request }, callback) => {
-			return request?.endsWith('manifest.legacy.json')
-				? callback(undefined, `commonjs ${request}`)
-				: callback();
-		},
+		// ({ request }, callback) => {
+		// 	return process.env.NODE_ENV === 'development' &&
+		// 		request?.startsWith('@aws-sdk')
+		// 		? callback(undefined, `commonjs ${request}`)
+		// 		: callback();
+		// },
+		// ({ request }, callback) => {
+		// 	return request?.endsWith('manifest.json')
+		// 		? callback(undefined, `commonjs ${request}`)
+		// 		: callback();
+		// },
+		// ({ request }, callback) => {
+		// 	return request?.endsWith('manifest.legacy.json')
+		// 		? callback(undefined, `commonjs ${request}`)
+		// 		: callback();
+		// },
 	],
 	module: {
 		rules: [

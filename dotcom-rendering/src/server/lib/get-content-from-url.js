@@ -1,3 +1,5 @@
+const { json } = require('body-parser');
+
 /** @type {(_: [string, unknown]) => _ is [string, string]} */
 const isStringTuple = (_) => typeof _[1] === 'string';
 
@@ -9,11 +11,16 @@ const isStringTuple = (_) => typeof _[1] === 'string';
  * @param {import('http').IncomingHttpHeaders} _headers
  */
 async function getContentFromURL(url, _headers) {
+	console.log('getContentFromURL 1', url, _headers);
 	// searchParams will only work for the first set of query params because 'url' is already a query param itself
 	const searchparams = url.searchParams.toString();
 
+	console.log('getContentFromURL 2 ', searchparams);
+
 	// Reconstruct the parsed url adding .json?dcr which we need to force dcr to return json
 	const jsonUrl = `${url.origin}${url.pathname}.json?dcr=true&${searchparams}`;
+
+	console.log('getContentFromURL 3 ', jsonUrl);
 
 	// Explicitly pass through GU headers - this enables us to override properties such as region in CI
 	/** @type {HeadersInit} */
@@ -28,7 +35,7 @@ async function getContentFromURL(url, _headers) {
 	);
 
 	// pick all the keys from the JSON except `html`
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- we don't want `html` in the config
+
 	const { html, ...config } = await fetch(jsonUrl, { headers })
 		.then((response) => response.json())
 		.catch((error) => {
@@ -37,8 +44,11 @@ async function getContentFromURL(url, _headers) {
 					'Did not receive JSON response - are you sure this URL supports .json?dcr requests?',
 				);
 			}
+			console.log('getContentFromURL 4 ', error);
 			throw error;
 		});
+
+	console.log('getContentFromURL 5 ', !!html, !!config);
 
 	return config;
 }
@@ -55,6 +65,7 @@ const parseURL = (requestUrl) => {
 			decodeURIComponent(requestUrl.split('/').slice(2).join('/')),
 		);
 	} catch (error) {
+		console.log('parseURL 1', error);
 		return undefined;
 	}
 };
@@ -63,7 +74,9 @@ exports.parseURL = parseURL;
 
 /** @type {import('webpack-dev-server').ExpressRequestHandler} */
 exports.getContentFromURLMiddleware = async (req, res, next) => {
+	console.log('getContentFromURLMiddleware 1');
 	const sourceURL = parseURL(req.originalUrl);
+	console.log('getContentFromURLMiddleware 2', sourceURL);
 
 	if (sourceURL) {
 		if (
@@ -78,6 +91,7 @@ exports.getContentFromURLMiddleware = async (req, res, next) => {
 		try {
 			req.body = await getContentFromURL(sourceURL, req.headers);
 		} catch (error) {
+			console.log('getContentFromURLMiddleware 4', error);
 			console.error(error);
 			next(error);
 		}

@@ -1,4 +1,4 @@
-const webpack = require('webpack');
+const rspack = require('@rspack/core');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const swcConfig = require('./.swcrc.json');
 const { getBrowserTargets } = require('./browser-targets');
@@ -88,7 +88,7 @@ const getLoaders = (build) => {
 
 /**
  * @param {{ build: Build }} options
- * @returns {import('webpack').Configuration}
+ * @returns {import('@rspack/cli').Configuration}
  */
 module.exports = ({ build }) => ({
 	entry: {
@@ -140,10 +140,10 @@ module.exports = ({ build }) => ({
 		}),
 		...(build === 'client.apps'
 			? [
-					new webpack.optimize.LimitChunkCountPlugin({
+					new rspack.optimize.LimitChunkCountPlugin({
 						maxChunks: 1,
 					}),
-					new webpack.ProvidePlugin({
+					new rspack.ProvidePlugin({
 						Buffer: ['buffer', 'Buffer'],
 					}),
 			  ]

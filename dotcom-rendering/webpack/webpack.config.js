@@ -1,6 +1,6 @@
 // @ts-check
 const path = require('node:path');
-const webpack = require('webpack');
+const rspack = require('@rspack/core');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { merge } = require('webpack-merge');
 const WebpackMessages = require('webpack-messages');
@@ -17,7 +17,7 @@ const BUILD_VARIANT = process.env.BUILD_VARIANT === 'true';
 
 /**
  * @param {{ platform: 'server' | Build}} options
- * @returns {import('webpack').Configuration}
+ * @returns {import('@rspack/cli').Configuration}
  */
 const commonConfigs = ({ platform }) => ({
 	name: platform,
@@ -43,29 +43,17 @@ const commonConfigs = ({ platform }) => ({
 		 * Express uses dynamic imports to load template engines. As we're not currently using a template engine in DCR
 		 * we can ignore this error.
 		 */
-		{
-			module: /..\/node_modules\/express\/lib\/view.js/,
-			message:
-				/Critical dependency: the request of a dependency is an expression/,
-		},
-		/**
-		 * Log4js uses dynamic imports to load non-core appenders. We're only using 'console' and 'file' appenders in DCR
-		 * which are specifically imported by log4js without using dynamic imports.
-		 */
-		{
-			module: /..\/node_modules\/log4js\/lib\/appenders\/index.js/,
-			message:
-				/Critical dependency: the request of a dependency is an expression/,
-		},
+		/..\/node_modules\/express\/lib\/view.js/,
+		/..\/node_modules\/log4js\/lib\/appenders\/index.js/,
 	],
 	plugins: [
-		new webpack.DefinePlugin({
+		new rspack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			'process.env.HOSTNAME': JSON.stringify(process.env.HOSTNAME),
 		}),
 		// Matching modules specified in this regex will not be imported during the webpack build
 		// We use this if there are optional dependencies (e.g in jsdom, ws) to remove uneccesary warnings in our builds / console outpouts.
-		new webpack.IgnorePlugin({
+		new rspack.IgnorePlugin({
 			resourceRegExp: /^(canvas|bufferutil|utf-8-validate)$/,
 		}),
 		...(DEV
