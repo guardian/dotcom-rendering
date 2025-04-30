@@ -1,8 +1,8 @@
 import type { CAPICrossword } from '@guardian/react-crossword/dist/@types/CAPI';
 
 export const quickCrossword: CAPICrossword = {
-	date: Date.parse('2024-11-01T23:00:00Z'),
-	dateSolutionAvailable: Date.parse('2024-11-01T23:00:00Z'),
+	date: 1730598000000,
+	dateSolutionAvailable: 1730598000000,
 	dimensions: {
 		cols: 13,
 		rows: 13,
@@ -33,8 +33,8 @@ export const quickCrossword: CAPICrossword = {
 };
 
 export const crypticCrossword: CAPICrossword = {
-	date: Date.parse('2024-11-01T23:00:00Z'),
-	dateSolutionAvailable: Date.parse('2024-11-01T23:00:00Z'),
+	date: 1730598000000,
+	dateSolutionAvailable: 1730598000000,
 	dimensions: {
 		cols: 15,
 		rows: 15,

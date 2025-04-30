@@ -22,8 +22,8 @@ export const UKTimezone = {
 			crypticCrossword,
 			{
 				...quickCrossword,
-				date: '2024-11-02T23:00:00Z',
-				dateSolutionAvailable: '2024-11-02T23:00:00Z',
+				date: 1730598000000,
+				dateSolutionAvailable: 1730598000000,
 				entries: quickCrossword.entries.map((entry) => ({
 					...entry,
 					clue: 'Another quick crossword clue',
@@ -31,8 +31,8 @@ export const UKTimezone = {
 			},
 			{
 				...crypticCrossword,
-				date: '2024-11-02T23:00:00Z',
-				dateSolutionAvailable: '2024-11-02T23:00:00Z',
+				date: 1730598000000,
+				dateSolutionAvailable: 1730598000000,
 				entries: crypticCrossword.entries.map((entry) => ({
 					...entry,
 					clue: 'Another cryptic crossword clue',
