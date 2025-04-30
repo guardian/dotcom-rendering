@@ -1,47 +1,10 @@
-export type FEEditionsCrosswords = {
-	crosswords: FEEditionsCrossword[];
+import type { CAPICrossword } from '@guardian/react-crossword/dist/@types/CAPI';
+
+export type CAPICrosswords = {
+	crosswords: CAPICrossword[];
 };
 
-type FECrosswordEntry = {
-	id: string;
-	number: number;
-	humanNumber: string;
-	direction: 'across' | 'down';
-	position: { x: number; y: number };
-	separatorLocations: {
-		','?: number[];
-		'-'?: number[];
-	};
-	length: number;
-	clue: string;
-	group: string[];
-	solution?: string;
-	format?: string;
-};
-
-type FECrosswordDimensions = {
-	cols: number;
-	rows: number;
-};
-
-export type FEEditionsCrossword = {
-	name: string;
-	type: string;
-	number: number;
-	date: string;
-	dimensions: FECrosswordDimensions;
-	entries: FECrosswordEntry[];
-	solutionAvailable: boolean;
-	hasNumbers: boolean;
-	randomCluesOrdering: boolean;
-	instructions?: string;
-	creator?: { name: string; webUrl: string };
-	pdf?: string;
-	annotatedSolution?: string;
-	dateSolutionAvailable: string;
-};
-
-export type CrosswordsByDate = Record<string, FEEditionsCrossword[]>;
+export type CrosswordsByDate = Record<string, CAPICrossword[]>;
 
 /**
  * Groups crosswords by their date, and drops any crosswords that have an
@@ -68,7 +31,7 @@ export type CrosswordsByDate = Record<string, FEEditionsCrossword[]>;
  */
 export const groupByDate =
 	(formatter: Intl.DateTimeFormat) =>
-	(crosswords: FEEditionsCrossword[]): CrosswordsByDate =>
+	(crosswords: CAPICrossword[]): CrosswordsByDate =>
 		crosswords.reduce<CrosswordsByDate>((crosswordsByDate, crossword) => {
 			const date = new Date(crossword.date);
 

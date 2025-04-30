@@ -1,8 +1,8 @@
 import { StrictMode } from 'react';
-import type { FEEditionsCrosswords } from '../types/editionsCrossword';
+import type { CAPICrosswords } from '../types/editionsCrossword';
 
 interface Props {
-	editionsCrosswords: FEEditionsCrosswords;
+	editionsCrosswords: CAPICrosswords;
 }
 
 export const EditionsCrosswordPage = ({ editionsCrosswords }: Props) => {

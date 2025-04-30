@@ -17,7 +17,7 @@ import footballTablesPageSchema from '../frontend/schemas/feFootballTablesPage.j
 import frontSchema from '../frontend/schemas/feFront.json';
 import tagPageSchema from '../frontend/schemas/feTagPage.json';
 import type { Block } from '../types/blocks';
-import type { FEEditionsCrosswords } from '../types/editionsCrossword';
+import type { CAPICrosswords } from '../types/editionsCrossword';
 import type { FENewslettersPageType } from '../types/newslettersPage';
 import blockSchema from './block-schema.json';
 import editionsCrosswordSchema from './editions-crossword-schema.json';
@@ -40,7 +40,7 @@ const validateAllEditorialNewslettersPage = ajv.compile<FENewslettersPageType>(
 	newslettersPageSchema,
 );
 const validateBlock = ajv.compile<Block[]>(blockSchema);
-const validateEditionsCrossword = ajv.compile<FEEditionsCrosswords>(
+const validateEditionsCrossword = ajv.compile<CAPICrosswords>(
 	editionsCrosswordSchema,
 );
 const validateFootballMatchListPage = ajv.compile<FEFootballMatchListPage>(
@@ -71,7 +71,7 @@ export const validateAsFEArticle = (data: unknown): FEArticle => {
 
 export const validateAsEditionsCrosswordType = (
 	data: unknown,
-): FEEditionsCrosswords => {
+): CAPICrosswords => {
 	if (validateEditionsCrossword(data)) {
 		return data;
 	}
