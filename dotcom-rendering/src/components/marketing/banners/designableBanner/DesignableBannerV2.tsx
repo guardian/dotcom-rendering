@@ -376,6 +376,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 									copy={{
 										headline:
 											tickerSettings.copy.countLabel,
+										goalCopy: tickerSettings.copy.goalCopy,
 									}}
 									tickerData={tickerSettings.tickerData}
 									tickerStylingSettings={
