@@ -6,130 +6,6 @@
             "items": {
                 "type": "object",
                 "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "type": {
-                        "type": "string"
-                    },
-                    "number": {
-                        "type": "number"
-                    },
-                    "date": {
-                        "type": "string"
-                    },
-                    "dimensions": {
-                        "type": "object",
-                        "properties": {
-                            "cols": {
-                                "type": "number"
-                            },
-                            "rows": {
-                                "type": "number"
-                            }
-                        },
-                        "required": [
-                            "cols",
-                            "rows"
-                        ]
-                    },
-                    "entries": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "number": {
-                                    "type": "number"
-                                },
-                                "humanNumber": {
-                                    "type": "string"
-                                },
-                                "direction": {
-                                    "enum": [
-                                        "across",
-                                        "down"
-                                    ],
-                                    "type": "string"
-                                },
-                                "position": {
-                                    "type": "object",
-                                    "properties": {
-                                        "x": {
-                                            "type": "number"
-                                        },
-                                        "y": {
-                                            "type": "number"
-                                        }
-                                    },
-                                    "required": [
-                                        "x",
-                                        "y"
-                                    ]
-                                },
-                                "separatorLocations": {
-                                    "type": "object",
-                                    "properties": {
-                                        ",": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "number"
-                                            }
-                                        },
-                                        "-": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "number"
-                                            }
-                                        }
-                                    }
-                                },
-                                "length": {
-                                    "type": "number"
-                                },
-                                "clue": {
-                                    "type": "string"
-                                },
-                                "group": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
-                                "solution": {
-                                    "type": "string"
-                                },
-                                "format": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "clue",
-                                "direction",
-                                "group",
-                                "humanNumber",
-                                "id",
-                                "length",
-                                "number",
-                                "position",
-                                "separatorLocations"
-                            ]
-                        }
-                    },
-                    "solutionAvailable": {
-                        "type": "boolean"
-                    },
-                    "hasNumbers": {
-                        "type": "boolean"
-                    },
-                    "randomCluesOrdering": {
-                        "type": "boolean"
-                    },
-                    "instructions": {
-                        "type": "string"
-                    },
                     "creator": {
                         "type": "object",
                         "properties": {
@@ -145,27 +21,79 @@
                             "webUrl"
                         ]
                     },
+                    "crosswordType": {
+                        "enum": [
+                            "cryptic",
+                            "everyman",
+                            "prize",
+                            "quick",
+                            "quick-cryptic",
+                            "quiptic",
+                            "special",
+                            "speedy",
+                            "sunday-quick",
+                            "weekend"
+                        ],
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "number"
+                    },
+                    "dateSolutionAvailable": {
+                        "type": "number"
+                    },
+                    "dimensions": {
+                        "type": "object",
+                        "properties": {
+                            "rows": {
+                                "type": "number"
+                            },
+                            "cols": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "cols",
+                            "rows"
+                        ]
+                    },
+                    "entries": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/CAPIEntry"
+                        }
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "number": {
+                        "type": "number"
+                    },
                     "pdf": {
                         "type": "string"
                     },
-                    "annotatedSolution": {
-                        "type": "string"
+                    "solutionAvailable": {
+                        "type": "boolean"
                     },
-                    "dateSolutionAvailable": {
+                    "webPublicationDate": {
+                        "type": "number"
+                    },
+                    "instructions": {
                         "type": "string"
                     }
                 },
                 "required": [
+                    "crosswordType",
                     "date",
-                    "dateSolutionAvailable",
                     "dimensions",
                     "entries",
-                    "hasNumbers",
+                    "id",
                     "name",
                     "number",
-                    "randomCluesOrdering",
-                    "solutionAvailable",
-                    "type"
+                    "solutionAvailable"
                 ]
             }
         }
@@ -173,5 +101,131 @@
     "required": [
         "crosswords"
     ],
+    "definitions": {
+        "CAPIEntry": {
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "anyOf": [
+                                {
+                                    "type": "string",
+                                    "pattern": "^[0-9]*-across$"
+                                },
+                                {
+                                    "type": "string",
+                                    "pattern": "^[0-9]*-down$"
+                                }
+                            ]
+                        },
+                        "group": {
+                            "type": "array",
+                            "items": [
+                                {
+                                    "anyOf": [
+                                        {
+                                            "type": "string",
+                                            "pattern": "^[0-9]*-across$"
+                                        },
+                                        {
+                                            "type": "string",
+                                            "pattern": "^[0-9]*-down$"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "minItems": 1,
+                            "additionalItems": {
+                                "anyOf": [
+                                    {
+                                        "type": "string",
+                                        "pattern": "^[0-9]*-across$"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "pattern": "^[0-9]*-down$"
+                                    }
+                                ]
+                            }
+                        },
+                        "number": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "group",
+                        "id",
+                        "number"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "direction": {
+                            "$ref": "#/definitions/Direction"
+                        },
+                        "position": {
+                            "$ref": "#/definitions/Coords",
+                            "description": "Coords of first cell"
+                        },
+                        "clue": {
+                            "description": "The clue for the current entry",
+                            "type": "string"
+                        },
+                        "humanNumber": {
+                            "description": "The number for the clue",
+                            "type": "string"
+                        },
+                        "solution": {
+                            "description": "The solution to the entry's clue",
+                            "type": "string"
+                        },
+                        "length": {
+                            "description": "The length of the solution (we don't always have a solution)",
+                            "type": "number"
+                        },
+                        "separatorLocations": {
+                            "$ref": "#/definitions/Record<string,number[]>",
+                            "description": "Separators for multi-part solutions e.g.\n- ready,steady,go\n- tofu-eating"
+                        }
+                    },
+                    "required": [
+                        "clue",
+                        "direction",
+                        "humanNumber",
+                        "length",
+                        "position",
+                        "separatorLocations"
+                    ]
+                }
+            ]
+        },
+        "Direction": {
+            "enum": [
+                "across",
+                "down"
+            ],
+            "type": "string"
+        },
+        "Coords": {
+            "type": "object",
+            "properties": {
+                "x": {
+                    "type": "number"
+                },
+                "y": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "x",
+                "y"
+            ]
+        },
+        "Record<string,number[]>": {
+            "type": "object"
+        }
+    },
     "$schema": "http://json-schema.org/draft-07/schema#"
 }
