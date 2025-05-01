@@ -3,9 +3,6 @@ const path = require('node:path');
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
-const {
-	getContentFromURLMiddleware,
-} = require('../src/server/lib/get-content-from-url');
 
 const port = 3030;
 
@@ -58,10 +55,6 @@ module.exports = {
 			// of our own
 
 			devServer.app.use(bodyParser.json({ limit: '10mb' }));
-
-			// populates req.body with the content data from a production
-			// URL if req.params.url is present
-			devServer.app.use(getContentFromURLMiddleware);
 
 			devServer.app.get('/', (req, res) => {
 				res.sendFile(
