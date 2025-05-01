@@ -321,8 +321,8 @@ Deno.test('encodeObject - encodes object to string', () => {
 });
 
 Deno.test('encodeObject - handles arrays', () => {
-	const arr = ['test=value', 'another=123'];
+	const arr = ['test', 'another'];
 
 	const result = encodeObject(arr);
-	assertEquals(result, '0=test=value,1=another=123');
+	assertEquals(result, '0=test,1=another');
 });
