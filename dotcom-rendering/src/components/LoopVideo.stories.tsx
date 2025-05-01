@@ -23,13 +23,23 @@ export const Default = {
 		videoId: 'test-video-1',
 		height: 337.5,
 		width: 600,
-		fallbackImage: (
+		thumbnailImage:
+			'https://media.guim.co.uk/9bdb802e6da5d3fd249b5060f367b3a817965f0c/0_0_1800_1080/master/1800.jpg',
+		fallbackImageComponent: (
 			<CardPicture
-				mainImage="https://i.guim.co.uk/img/media/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/91_0_1800_1080/master/1800.jpg?width=465&dpr=1&s=none&crop=5%3A4"
+				mainImage="https://media.guim.co.uk/9bdb802e6da5d3fd249b5060f367b3a817965f0c/0_0_1800_1080/master/1800.jpg"
 				imageSize="large"
 				loading="eager"
 			/>
 		),
+	},
+} satisfies StoryObj<typeof LoopVideo>;
+
+export const WithWebmFile = {
+	name: 'Without Audio',
+	args: {
+		...Default.args,
+		src: 'https://interactive.guim.co.uk/atoms/2023/01/2025-trump-100-days/assets/v/1746020259/videos/header-video.webm',
 	},
 } satisfies StoryObj<typeof LoopVideo>;
 

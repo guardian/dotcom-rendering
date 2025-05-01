@@ -24,14 +24,30 @@ import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
-interface Props {
+interface CommonProps {
+	article: ArticleDeprecated;
+	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
+}
+
+interface WebProps extends CommonProps {
+	NAV: NavType;
+	renderingTarget: 'Web';
+}
+
+interface AppsProps extends CommonProps {
+	renderingTarget: 'Apps';
+}
+
+type HeaderProps = {
 	article: ArticleDeprecated;
 	NAV: NavType;
 	format: ArticleFormat;
-}
+};
 
 type RendererProps = {
 	format: ArticleFormat;
@@ -120,7 +136,7 @@ const Renderer = ({
 	return <div css={adStyles}>{output}</div>;
 };
 
-const NavHeader = ({ article, NAV, format }: Props) => {
+const NavHeader = ({ article, NAV, format }: HeaderProps) => {
 	// Typically immersives use the slim nav, but this switch is used to force
 	// the full nav - typically during special events such as Project 200, or
 	// the Euros. The motivation is to better onboard new visitors; interactives
@@ -180,25 +196,54 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 	);
 };
 
-export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
+export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
+	const { article, format, renderingTarget } = props;
 	const {
 		config: { host },
 		editionId,
 	} = article;
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
 
 	return (
 		<>
 			{article.isLegacyInteractive && (
 				<Global styles={interactiveGlobalStyles} />
 			)}
-			<header
-				css={css`
-					background-color: ${themePalette('--article-background')};
-				`}
-			>
-				<NavHeader article={article} NAV={NAV} format={format} />
+			{isWeb && (
+				<>
+					<header
+						css={css`
+							background-color: ${themePalette(
+								'--article-background',
+							)};
+						`}
+					>
+						<NavHeader
+							article={article}
+							NAV={props.NAV}
+							format={format}
+						/>
 
-				{format.theme === ArticleSpecial.Labs && (
+						{format.theme === ArticleSpecial.Labs && (
+							<Stuck>
+								<Section
+									fullWidth={true}
+									showTopBorder={false}
+									padSides={true}
+									backgroundColour={sourcePalette.labs[400]}
+									borderColour={sourcePalette.neutral[60]}
+									sectionId="labs-header"
+								>
+									<LabsHeader editionId={editionId} />
+								</Section>
+							</Stuck>
+						)}
+					</header>
+				</>
+			)}
+			{isApps && format.theme === ArticleSpecial.Labs && (
+				<header>
 					<Stuck>
 						<Section
 							fullWidth={true}
@@ -211,8 +256,8 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 							<LabsHeader editionId={editionId} />
 						</Section>
 					</Stuck>
-				)}
-			</header>
+				</header>
+			)}
 
 			<Section
 				fullWidth={true}
@@ -246,7 +291,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 				</article>
 			</Section>
 
-			{NAV.subNavSections && (
+			{isWeb && props.NAV.subNavSections && (
 				<Section
 					fullWidth={true}
 					padSides={false}
@@ -255,8 +300,8 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 				>
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
+							subNavSections={props.NAV.subNavSections}
+							currentNavLink={props.NAV.currentNavLink}
 							position="footer"
 							isInteractive={true}
 						/>
@@ -264,51 +309,57 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 				</Section>
 			)}
 
-			<Section
-				fullWidth={true}
-				padSides={false}
-				backgroundColour={sourcePalette.brand[400]}
-				borderColour={sourcePalette.brand[600]}
-				showSideBorders={false}
-				element="footer"
-			>
-				<Footer
-					pageFooter={article.pageFooter}
-					selectedPillar={NAV.selectedPillar}
-					pillars={NAV.pillars}
-					urls={article.nav.readerRevenueLinks.footer}
-					editionId={article.editionId}
-				/>
-			</Section>
+			{isWeb && (
+				<>
+					<Section
+						fullWidth={true}
+						padSides={false}
+						backgroundColour={sourcePalette.brand[400]}
+						borderColour={sourcePalette.brand[600]}
+						showSideBorders={false}
+						element="footer"
+					>
+						<Footer
+							pageFooter={article.pageFooter}
+							selectedPillar={props.NAV.selectedPillar}
+							pillars={props.NAV.pillars}
+							urls={article.nav.readerRevenueLinks.header}
+							editionId={article.editionId}
+						/>
+					</Section>
 
-			<BannerWrapper>
-				<Island priority="feature" defer={{ until: 'idle' }}>
-					<StickyBottomBanner
+					<BannerWrapper>
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<StickyBottomBanner
+								contentType={article.contentType}
+								contributionsServiceUrl={
+									article.contributionsServiceUrl
+								}
+								idApiUrl={article.config.idApiUrl}
+								isMinuteArticle={
+									article.pageType.isMinuteArticle
+								}
+								isPaidContent={article.pageType.isPaidContent}
+								isPreview={!!article.config.isPreview}
+								isSensitive={article.config.isSensitive}
+								pageId={article.pageId}
+								sectionId={article.config.section}
+								shouldHideReaderRevenue={
+									article.shouldHideReaderRevenue
+								}
+								remoteBannerSwitch={
+									!!article.config.switches.remoteBanner
+								}
+								tags={article.tags}
+							/>
+						</Island>
+					</BannerWrapper>
+					<MobileStickyContainer
 						contentType={article.contentType}
-						contributionsServiceUrl={
-							article.contributionsServiceUrl
-						}
-						idApiUrl={article.config.idApiUrl}
-						isMinuteArticle={article.pageType.isMinuteArticle}
-						isPaidContent={article.pageType.isPaidContent}
-						isPreview={!!article.config.isPreview}
-						isSensitive={article.config.isSensitive}
 						pageId={article.pageId}
-						sectionId={article.config.section}
-						shouldHideReaderRevenue={
-							article.shouldHideReaderRevenue
-						}
-						remoteBannerSwitch={
-							!!article.config.switches.remoteBanner
-						}
-						tags={article.tags}
 					/>
-				</Island>
-			</BannerWrapper>
-			<MobileStickyContainer
-				contentType={article.contentType}
-				pageId={article.pageId}
-			/>
+				</>
+			)}
 		</>
 	);
 };

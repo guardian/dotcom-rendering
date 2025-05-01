@@ -111,7 +111,7 @@ renderer.get('/AppsArticle/*', handleAppsArticle);
 renderer.get('/AppsInteractive/*', handleAppsInteractive);
 renderer.get('/AppsBlocks/*', handleAppsBlocks);
 renderer.get('/EditionsCrossword/*', handleEditionsCrossword);
-renderer.get('/FootballDataPage/*', handleFootballMatchListPage);
+renderer.get('/FootballMatchListPage/*', handleFootballMatchListPage);
 renderer.get('/FootballTablesPage/*', handleFootballTablesPage);
 renderer.get('/CricketMatchPage/*', handleCricketMatchPage);
 renderer.get('/FootballMatchSummaryPage/*', handleFootballMatchPage);
