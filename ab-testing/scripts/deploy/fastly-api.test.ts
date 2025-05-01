@@ -53,7 +53,7 @@ const {
 	bulkUpdateMVTGroups,
 	bulkUpdateABTestGroups,
 	encodeObject,
-} = await import('./api.ts');
+} = await import('./fastly-api.ts');
 
 Deno.test('calculateBulkUpdates - creates new items', () => {
 	const currentDictionary: Array<{ item_key: string; item_value: string }> =
