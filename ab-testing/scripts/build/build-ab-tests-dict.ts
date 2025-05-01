@@ -1,7 +1,7 @@
 import { ABTest } from '../../types.ts';
 import { stringify } from '../lib.ts';
 
-const createABTestDict = (tests: ABTest[]) =>
+const buildABTestDict = (tests: ABTest[]) =>
 	tests.map((test) => ({
 		item_key: test.name,
 		item_value: stringify({
@@ -10,4 +10,4 @@ const createABTestDict = (tests: ABTest[]) =>
 		}),
 	}));
 
-export { createABTestDict };
+export { buildABTestDict };

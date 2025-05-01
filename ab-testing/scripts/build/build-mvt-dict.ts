@@ -65,7 +65,7 @@ const abTestsToMVTs = (
 	return mvtKVs;
 };
 
-const createMVTDict = (tests: ABTest[]) => {
+const buildMVTDict = (tests: ABTest[]) => {
 	const mvtKVs = abTestsToMVTs(tests);
 	Object.entries(mvtKVs).map(([key, value]) => ({
 		item_key: key,
@@ -73,4 +73,4 @@ const createMVTDict = (tests: ABTest[]) => {
 	}));
 };
 
-export { createMVTDict, testsToArray, abTestsToMVTs };
+export { buildMVTDict, testsToArray, abTestsToMVTs };
