@@ -4,11 +4,26 @@ import {
 	calculateBulkUpdates,
 	getABTestGroupsFromDictionary,
 	getMVTGroupsFromDictionary,
-} from './api.ts';
-import { getMVTGroups, getUpdatedABTestGroups } from './json.ts';
+} from './fastly-api.ts';
+import {
+	getMVTGroups,
+	getUpdatedABTestGroups,
+} from './read-built-dictionaries.ts';
+import { parseArgs } from 'jsr:@std/cli/parse-args';
+
+const flags = parseArgs(Deno.args, {
+	string: ['mvts', 'ab-tests'],
+});
+
+if (!flags['mvts'] || !flags['ab-tests']) {
+	console.error(
+		'Please provide the path to the mvt and ab test groups dictionaries',
+	);
+	Deno.exit(1);
+}
 
 // update ab test groups first
-const updatedABTestGroups = await getUpdatedABTestGroups();
+const updatedABTestGroups = await getUpdatedABTestGroups(flags['ab-tests']);
 const currentABTestGroups = await getABTestGroupsFromDictionary();
 
 const ABTestGroupBulkUpdates = calculateBulkUpdates(
@@ -49,7 +64,7 @@ if (ABTestGroupBulkUpdates.length === 0) {
 }
 
 // update mvt groups
-const mvtGroups = await getMVTGroups();
+const mvtGroups = await getMVTGroups(flags['mvts']);
 const currentMVTGroups = await getMVTGroupsFromDictionary();
 const MVTGroupBulkUpdates = calculateBulkUpdates(mvtGroups, currentMVTGroups);
 

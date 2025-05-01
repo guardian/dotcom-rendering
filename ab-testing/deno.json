@@ -1,7 +1,7 @@
 {
 	"tasks": {
 		"validate": "deno run scripts/validation/index.ts",
-		"upload": "deno run --allow-read=dist --allow-env=FASTLY_API_TOKEN,SERVICE_ID,MVT_DICTIONARY_ID,AB_TESTS_DICTIONARY_ID --allow-net=api.fastly.com:443 scripts/deploy/index.ts"
+		"upload": "deno run --allow-read=dist --allow-env=FASTLY_API_TOKEN,SERVICE_ID,MVT_DICTIONARY_ID,AB_TESTS_DICTIONARY_ID --allow-net=api.fastly.com:443 scripts/deploy/index.ts --mvts=dist/bvts.json --ab-tests=dist/ab-tests.json"
 	},
 	"imports": {
 		"@std/assert": "jsr:@std/assert@^1.0.13",

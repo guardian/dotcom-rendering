@@ -1,5 +1,4 @@
 import { readTextFile } from 'jsr:@std/fs/unstable-read-text-file';
-import { join } from 'jsr:@std/path/join';
 import { object, string, assert, array } from 'jsr:@superstruct/core';
 
 const fastlyKVStruct = object({
@@ -7,29 +6,16 @@ const fastlyKVStruct = object({
 	item_value: string(),
 });
 
-const getUpdatedABTestGroups = async () => {
-	const updatedABTestGroups = JSON.parse(
-		await readTextFile(
-			join(
-				import.meta.dirname,
-				'../..',
-				'dist',
-				'active_ab_test_groups.json',
-			),
-		),
-	);
+const getUpdatedABTestGroups = async (file: string) => {
+	const updatedABTestGroups = JSON.parse(await readTextFile(file));
 
 	assert(updatedABTestGroups, array(fastlyKVStruct));
 
 	return updatedABTestGroups;
 };
 
-const getMVTGroups = async () => {
-	const mvtGroups = JSON.parse(
-		await readTextFile(
-			join(import.meta.dirname, '../..', 'dist', 'mvt_dict.json'),
-		),
-	);
+const getMVTGroups = async (file: string) => {
+	const mvtGroups = JSON.parse(await readTextFile(file));
 
 	assert(mvtGroups, array(fastlyKVStruct));
 	return mvtGroups;
