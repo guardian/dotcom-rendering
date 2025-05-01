@@ -478,6 +478,7 @@ const styles = {
 		overflow: auto;
 		* {
 			box-sizing: border-box;
+			// outline: 1px solid red; // DEBUGGING
 		}
 		${from.phablet} {
 			border-top: 1px solid ${neutral[0]};
@@ -736,15 +737,15 @@ const styles = {
 
 		${between.phablet.and.desktop} {
 			width: 100%;
-			position: sticky;
 			bottom: 0;
-			padding-top: ${space[3]}px;
-			padding-bottom: ${space[3]}px;
-			background-color: ${neutral[100]};
-			box-shadow: 0 -${space[1]}px ${space[3]}px 0 rgba(0, 0, 0, 0.25);
-			border-radius: 10px;
+			margin-top: ${space[3]}px;
+			margin-bottom: 0;
+			border-radius: 50px;
 			a {
-				width: calc(100% - 24px);
+				width: 100%;
+			}
+			> span {
+				width: auto;
 			}
 		}
 
@@ -767,6 +768,7 @@ const styles = {
 	linkButtonStyles: css`
 		background-color: ${palette.brandAlt[400]};
 		border-color: ${palette.brandAlt[400]};
+		width: 100%;
 	`,
 };
 
