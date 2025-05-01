@@ -11,6 +11,7 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
       "GuEc2App",
       "GuCertificate",
       "GuInstanceRole",
+      "GuSsmSshPolicy",
       "GuDescribeEC2Policy",
       "GuLoggingStreamNameParameter",
       "GuLogShippingPolicy",
@@ -91,6 +92,11 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
           },
         },
         "MaxSize": "2",
+        "MetricsCollection": [
+          {
+            "Granularity": "1Minute",
+          },
+        ],
         "MinSize": "1",
         "Tags": [
           {
@@ -427,20 +433,6 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/AmazonSSMManagedInstanceCore",
-              ],
-            ],
-          },
-        ],
         "Path": "/",
         "Tags": [
           {
@@ -571,6 +563,7 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
         },
         "Port": 443,
         "Protocol": "HTTPS",
+        "SslPolicy": "ELBSecurityPolicy-TLS13-1-2-2021-06",
       },
       "Type": "AWS::ElasticLoadBalancingV2::Listener",
     },
@@ -579,6 +572,14 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
         "LoadBalancerAttributes": [
           {
             "Key": "deletion_protection.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "routing.http.x_amzn_tls_version_and_cipher_suite.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "routing.http.drop_invalid_header_fields.enabled",
             "Value": "true",
           },
           {
@@ -762,6 +763,42 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
+    "SsmSshPolicy4CFC977E": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ec2messages:AcknowledgeMessage",
+                "ec2messages:DeleteMessage",
+                "ec2messages:FailMessage",
+                "ec2messages:GetEndpoint",
+                "ec2messages:GetMessages",
+                "ec2messages:SendReply",
+                "ssm:UpdateInstanceInformation",
+                "ssm:ListInstanceAssociations",
+                "ssm:DescribeInstanceProperties",
+                "ssm:DescribeDocumentParameters",
+                "ssmmessages:CreateControlChannel",
+                "ssmmessages:CreateDataChannel",
+                "ssmmessages:OpenControlChannel",
+                "ssmmessages:OpenDataChannel",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ssm-ssh-policy",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleMobileappsrenderingEC64402A",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
     "TargetGroupMobileappsrendering29320E35": {
       "Properties": {
         "HealthCheckIntervalSeconds": 10,
@@ -916,6 +953,7 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
           "InstanceType": "t4g.small",
           "MetadataOptions": {
             "HttpTokens": "required",
+            "InstanceMetadataTags": "enabled",
           },
           "SecurityGroupIds": [
             {
@@ -935,6 +973,10 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
             {
               "ResourceType": "instance",
               "Tags": [
+                {
+                  "Key": "App",
+                  "Value": "mobile-apps-rendering",
+                },
                 {
                   "Key": "gu:cdk:version",
                   "Value": "TEST",
@@ -960,6 +1002,10 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
             {
               "ResourceType": "volume",
               "Tags": [
+                {
+                  "Key": "App",
+                  "Value": "mobile-apps-rendering",
+                },
                 {
                   "Key": "gu:cdk:version",
                   "Value": "TEST",
@@ -988,15 +1034,14 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
               "Fn::Join": [
                 "",
                 [
-                  "#!/bin/bash -ev
+                  "#!/bin/bash
+set -ev
 groupadd mapi
 useradd -r -m -s /usr/bin/nologin -g mapi mobile-apps-rendering
-
 export App=mobile-apps-rendering
 export Stack=mobile
 export Stage=TEST
 export NODE_ENV=production
-
 aws s3 cp s3://",
                   {
                     "Ref": "SsmParameterValueaccountservicesartifactbucketC96584B6F00A464EAD1953AFF4B05118Parameter",
@@ -1005,15 +1050,12 @@ aws s3 cp s3://",
 mkdir -p /opt/mobile-apps-rendering
 unzip /tmp/mobile-apps-rendering.zip -d /opt/mobile-apps-rendering
 chown -R mobile-apps-rendering:mapi /opt/mobile-apps-rendering
-
 mkdir -p /usr/share/mobile-apps-rendering/logs
 chown -R mobile-apps-rendering:mapi /usr/share/mobile-apps-rendering
 ln -s /usr/share/mobile-apps-rendering/logs /var/log/mobile-apps-rendering
 chown -R mobile-apps-rendering:mapi /var/log/mobile-apps-rendering
-
 export PM2_HOME="/usr/share/mobile-apps-rendering"
 export ASSETS_MANIFEST="/opt/mobile-apps-rendering/manifest.json"
-
 /usr/local/node/pm2 start --name mobile-apps-rendering --uid mobile-apps-rendering --gid mapi /opt/mobile-apps-rendering/server.js
 /opt/aws-kinesis-agent/configure-aws-kinesis-agent ",
                   {
@@ -1030,6 +1072,10 @@ export ASSETS_MANIFEST="/opt/mobile-apps-rendering/manifest.json"
           {
             "ResourceType": "launch-template",
             "Tags": [
+              {
+                "Key": "App",
+                "Value": "mobile-apps-rendering",
+              },
               {
                 "Key": "gu:cdk:version",
                 "Value": "TEST",
@@ -1081,6 +1127,7 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
       "GuEc2App",
       "GuCertificate",
       "GuInstanceRole",
+      "GuSsmSshPolicy",
       "GuDescribeEC2Policy",
       "GuLoggingStreamNameParameter",
       "GuLogShippingPolicy",
@@ -1161,6 +1208,11 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
           },
         },
         "MaxSize": "2",
+        "MetricsCollection": [
+          {
+            "Granularity": "1Minute",
+          },
+        ],
         "MinSize": "1",
         "Tags": [
           {
@@ -1497,20 +1549,6 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/AmazonSSMManagedInstanceCore",
-              ],
-            ],
-          },
-        ],
         "Path": "/",
         "Tags": [
           {
@@ -1641,6 +1679,7 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
         },
         "Port": 443,
         "Protocol": "HTTPS",
+        "SslPolicy": "ELBSecurityPolicy-TLS13-1-2-2021-06",
       },
       "Type": "AWS::ElasticLoadBalancingV2::Listener",
     },
@@ -1649,6 +1688,14 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
         "LoadBalancerAttributes": [
           {
             "Key": "deletion_protection.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "routing.http.x_amzn_tls_version_and_cipher_suite.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "routing.http.drop_invalid_header_fields.enabled",
             "Value": "true",
           },
           {
@@ -1832,6 +1879,42 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
+    "SsmSshPolicy4CFC977E": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ec2messages:AcknowledgeMessage",
+                "ec2messages:DeleteMessage",
+                "ec2messages:FailMessage",
+                "ec2messages:GetEndpoint",
+                "ec2messages:GetMessages",
+                "ec2messages:SendReply",
+                "ssm:UpdateInstanceInformation",
+                "ssm:ListInstanceAssociations",
+                "ssm:DescribeInstanceProperties",
+                "ssm:DescribeDocumentParameters",
+                "ssmmessages:CreateControlChannel",
+                "ssmmessages:CreateDataChannel",
+                "ssmmessages:OpenControlChannel",
+                "ssmmessages:OpenDataChannel",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ssm-ssh-policy",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleMobileappsrenderingEC64402A",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
     "TargetGroupMobileappsrendering29320E35": {
       "Properties": {
         "HealthCheckIntervalSeconds": 10,
@@ -1986,6 +2069,7 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
           "InstanceType": "t4g.micro",
           "MetadataOptions": {
             "HttpTokens": "required",
+            "InstanceMetadataTags": "enabled",
           },
           "SecurityGroupIds": [
             {
@@ -2005,6 +2089,10 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
             {
               "ResourceType": "instance",
               "Tags": [
+                {
+                  "Key": "App",
+                  "Value": "mobile-apps-rendering",
+                },
                 {
                   "Key": "gu:cdk:version",
                   "Value": "TEST",
@@ -2030,6 +2118,10 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
             {
               "ResourceType": "volume",
               "Tags": [
+                {
+                  "Key": "App",
+                  "Value": "mobile-apps-rendering",
+                },
                 {
                   "Key": "gu:cdk:version",
                   "Value": "TEST",
@@ -2058,15 +2150,14 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
               "Fn::Join": [
                 "",
                 [
-                  "#!/bin/bash -ev
+                  "#!/bin/bash
+set -ev
 groupadd mapi
 useradd -r -m -s /usr/bin/nologin -g mapi mobile-apps-rendering
-
 export App=mobile-apps-rendering
 export Stack=mobile-preview
 export Stage=TEST
 export NODE_ENV=production
-
 aws s3 cp s3://",
                   {
                     "Ref": "SsmParameterValueaccountservicesartifactbucketC96584B6F00A464EAD1953AFF4B05118Parameter",
@@ -2075,15 +2166,12 @@ aws s3 cp s3://",
 mkdir -p /opt/mobile-apps-rendering
 unzip /tmp/mobile-apps-rendering.zip -d /opt/mobile-apps-rendering
 chown -R mobile-apps-rendering:mapi /opt/mobile-apps-rendering
-
 mkdir -p /usr/share/mobile-apps-rendering/logs
 chown -R mobile-apps-rendering:mapi /usr/share/mobile-apps-rendering
 ln -s /usr/share/mobile-apps-rendering/logs /var/log/mobile-apps-rendering
 chown -R mobile-apps-rendering:mapi /var/log/mobile-apps-rendering
-
 export PM2_HOME="/usr/share/mobile-apps-rendering"
 export ASSETS_MANIFEST="/opt/mobile-apps-rendering/manifest.json"
-
 /usr/local/node/pm2 start --name mobile-apps-rendering --uid mobile-apps-rendering --gid mapi /opt/mobile-apps-rendering/server.js
 /opt/aws-kinesis-agent/configure-aws-kinesis-agent ",
                   {
@@ -2100,6 +2188,10 @@ export ASSETS_MANIFEST="/opt/mobile-apps-rendering/manifest.json"
           {
             "ResourceType": "launch-template",
             "Tags": [
+              {
+                "Key": "App",
+                "Value": "mobile-apps-rendering",
+              },
               {
                 "Key": "gu:cdk:version",
                 "Value": "TEST",
