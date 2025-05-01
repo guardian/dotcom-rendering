@@ -534,7 +534,7 @@ const styles = {
 	) => css`
 		background: ${background};
 		color: ${textColor};
-		${limitHeight ? 'max-height: 70vh;' : 'auto'}
+		${limitHeight ? 'max-height: 60vh;' : ''}
 		overflow: auto;
 		* {
 			box-sizing: border-box;
