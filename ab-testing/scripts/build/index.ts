@@ -1,19 +1,28 @@
 import { ABTests } from '../../abTest.ts';
-import { createABTestDict } from './ab-tests.ts';
-import { createMVTDict } from './mvts.ts';
+import { buildABTestDict } from './build-ab-tests-dict.ts';
+import { buildMVTDict } from './build-mvt-dict.ts';
+import { parseArgs } from 'jsr:@std/cli/parse-args';
 
-const abTestDict = createABTestDict(ABTests);
+const flags = parseArgs(Deno.args, {
+	string: ['mvts', 'ab-tests'],
+});
 
-const mvtDict = createMVTDict(ABTests);
+if (!flags['mvts'] || !flags['ab-tests']) {
+	console.error(
+		'Please provide the path to the mvt and ab test groups dictionaries',
+	);
+	Deno.exit(1);
+}
+
+const abTestDict = buildABTestDict(ABTests);
+
+const mvtDict = buildMVTDict(ABTests);
 
 // write the abTestDictArray to a file
 await Deno.writeTextFile(
-	'./abTestDictArray.json',
+	flags['ab-tests'],
 	JSON.stringify(abTestDict, null, 2),
 );
 
 // write the mvtKVsArray to a file
-await Deno.writeTextFile(
-	'./mvtKVsArray.json',
-	JSON.stringify(mvtDict, null, 2),
-);
+await Deno.writeTextFile(flags['mvts'], JSON.stringify(mvtDict, null, 2));
