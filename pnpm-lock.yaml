@@ -338,8 +338,8 @@ importers:
         specifier: 61.4.0
         version: 61.4.0(aws-cdk-lib@2.189.0)(aws-cdk@2.1007.0)(constructs@10.4.2)
       '@guardian/commercial':
-        specifier: 0.0.0-beta-20250327185853
-        version: 0.0.0-beta-20250327185853(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@8.1.0)(@guardian/identity-auth@6.0.1)(@guardian/libs@0.0.0-canary-20250501133245)(@guardian/source@9.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+        specifier: 0.0.0-beta-20250501134159
+        version: 0.0.0-beta-20250501134159(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@8.1.0)(@guardian/identity-auth@6.0.1)(@guardian/libs@0.0.0-canary-20250501133245)(@guardian/source@9.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
       '@guardian/core-web-vitals':
         specifier: 7.0.0
         version: 7.0.0(@guardian/libs@0.0.0-canary-20250501133245)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3)
@@ -3901,14 +3901,14 @@ packages:
       yargs: 17.7.2
     dev: false
 
-  /@guardian/commercial@0.0.0-beta-20250327185853(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@8.1.0)(@guardian/identity-auth@6.0.1)(@guardian/libs@0.0.0-canary-20250501133245)(@guardian/source@9.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
-    resolution: {integrity: sha512-VPP315ORzsTzIh8OQVIzlBToYFncaD1LqQ2gWfGQHyuWpg7lh+e7l3oHoaOgntUx7PtT9xlQYNdrtaHxWOYp3g==}
+  /@guardian/commercial@0.0.0-beta-20250501134159(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@8.1.0)(@guardian/identity-auth@6.0.1)(@guardian/libs@0.0.0-canary-20250501133245)(@guardian/source@9.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
+    resolution: {integrity: sha512-pmWHkHecS/Co7Xvu49vZLNBSDlpPyRp5c61YgYUmrvzeCmKz+UHzgwGmMDZtjhjVZn7Ia+wnMVTDKzkPinHGeg==}
     peerDependencies:
       '@guardian/ab-core': ^8.0.0
       '@guardian/core-web-vitals': ^11.0.0
       '@guardian/identity-auth': ^7.0.0
       '@guardian/identity-auth-frontend': ^9.0.0
-      '@guardian/libs': 0.0.0-canary-20250327183710
+      '@guardian/libs': 0.0.0-canary-20250501133245
       '@guardian/source': ^8.0.2
       typescript: ~5.5.4
     dependencies:
