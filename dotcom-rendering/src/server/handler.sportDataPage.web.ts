@@ -1,5 +1,6 @@
 import type { RequestHandler } from 'express';
 import { parse as parseCricketMatch } from '../cricketMatch';
+import { parse as parseFootballMatch } from '../footballMatch';
 import {
 	getParserErrorMessage,
 	parse as parseFootballMatches,
@@ -8,18 +9,21 @@ import { parse as parseFootballTables } from '../footballTables';
 import type { FECricketMatchPage } from '../frontend/feCricketMatchPage';
 import type { FEFootballCompetition } from '../frontend/feFootballDataPage';
 import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
+import type { FEFootballMatchPage } from '../frontend/feFootballMatchPage';
 import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import { Pillar } from '../lib/articleFormat';
 import { extractNAV } from '../model/extract-nav';
 import {
 	validateAsCricketMatchPageType,
 	validateAsFootballMatchListPage,
+	validateAsFootballMatchPageType,
 	validateAsFootballTablesPage,
 } from '../model/validate';
 import type {
 	CricketMatchPage,
 	FootballMatchListPage,
 	FootballMatchListPageKind,
+	FootballMatchSummaryPage,
 	FootballTablesPage,
 	Region,
 } from '../sportDataPage';
@@ -193,5 +197,46 @@ export const handleCricketMatchPage: RequestHandler = ({ body }, res) => {
 	);
 
 	const { html, prefetchScripts } = renderSportPage(parsedCricketMatchData);
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
+};
+
+const parseFEFootballMatch = (
+	data: FEFootballMatchPage,
+): FootballMatchSummaryPage => {
+	const parsedFootballMatch = parseFootballMatch(data.footballMatch);
+
+	if (parsedFootballMatch.kind === 'error') {
+		throw new Error(
+			`Failed to parse football match: ${parsedFootballMatch.error.kind} ${parsedFootballMatch.error.message}`,
+		);
+	}
+
+	return {
+		match: parsedFootballMatch.value,
+		kind: 'FootballMatchSummary',
+		nav: {
+			...extractNAV(data.nav),
+			selectedPillar: Pillar.Sport,
+		},
+		editionId: data.editionId,
+		guardianBaseURL: data.guardianBaseURL,
+		config: data.config,
+		pageFooter: data.pageFooter,
+		isAdFreeUser: data.isAdFreeUser,
+		canonicalUrl: data.canonicalUrl,
+		contributionsServiceUrl: data.contributionsServiceUrl,
+	};
+};
+
+export const handleFootballMatchPage: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('FootballMatchPage', 'web');
+
+	const footballMatchPageValidated: FEFootballMatchPage =
+		validateAsFootballMatchPageType(body);
+	const parsedFootballMatchData = parseFEFootballMatch(
+		footballMatchPageValidated,
+	);
+
+	const { html, prefetchScripts } = renderSportPage(parsedFootballMatchData);
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };

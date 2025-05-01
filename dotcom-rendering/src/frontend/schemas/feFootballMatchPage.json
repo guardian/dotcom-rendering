@@ -1,0 +1,857 @@
+{
+    "allOf": [
+        {
+            "type": "object",
+            "properties": {
+                "nav": {
+                    "$ref": "#/definitions/FENavType"
+                },
+                "editionId": {
+                    "$ref": "#/definitions/EditionId"
+                },
+                "guardianBaseURL": {
+                    "type": "string"
+                },
+                "config": {
+                    "$ref": "#/definitions/FESportPageConfig"
+                },
+                "pageFooter": {
+                    "$ref": "#/definitions/FooterType"
+                },
+                "isAdFreeUser": {
+                    "type": "boolean"
+                },
+                "canonicalUrl": {
+                    "type": "string"
+                },
+                "contributionsServiceUrl": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "config",
+                "contributionsServiceUrl",
+                "editionId",
+                "guardianBaseURL",
+                "isAdFreeUser",
+                "nav",
+                "pageFooter"
+            ]
+        },
+        {
+            "type": "object",
+            "properties": {
+                "footballMatch": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "homeTeam": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "codename": {
+                                    "type": "string"
+                                },
+                                "players": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "position": {
+                                                "type": "string"
+                                            },
+                                            "lastName": {
+                                                "type": "string"
+                                            },
+                                            "substitute": {
+                                                "type": "boolean"
+                                            },
+                                            "timeOnPitch": {
+                                                "type": "string"
+                                            },
+                                            "shirtNumber": {
+                                                "type": "string"
+                                            },
+                                            "events": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "eventTime": {
+                                                            "type": "string"
+                                                        },
+                                                        "eventType": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "eventTime",
+                                                        "eventType"
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        "required": [
+                                            "events",
+                                            "id",
+                                            "lastName",
+                                            "name",
+                                            "position",
+                                            "shirtNumber",
+                                            "substitute",
+                                            "timeOnPitch"
+                                        ]
+                                    }
+                                },
+                                "score": {
+                                    "type": "number"
+                                },
+                                "scorers": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "possession": {
+                                    "type": "number"
+                                },
+                                "shotsOn": {
+                                    "type": "number"
+                                },
+                                "shotsOff": {
+                                    "type": "number"
+                                },
+                                "corners": {
+                                    "type": "number"
+                                },
+                                "fouls": {
+                                    "type": "number"
+                                },
+                                "colours": {
+                                    "type": "string"
+                                },
+                                "crest": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "codename",
+                                "colours",
+                                "corners",
+                                "crest",
+                                "fouls",
+                                "id",
+                                "name",
+                                "players",
+                                "possession",
+                                "scorers",
+                                "shotsOff",
+                                "shotsOn"
+                            ]
+                        },
+                        "awayTeam": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "codename": {
+                                    "type": "string"
+                                },
+                                "players": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "position": {
+                                                "type": "string"
+                                            },
+                                            "lastName": {
+                                                "type": "string"
+                                            },
+                                            "substitute": {
+                                                "type": "boolean"
+                                            },
+                                            "timeOnPitch": {
+                                                "type": "string"
+                                            },
+                                            "shirtNumber": {
+                                                "type": "string"
+                                            },
+                                            "events": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "eventTime": {
+                                                            "type": "string"
+                                                        },
+                                                        "eventType": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "eventTime",
+                                                        "eventType"
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        "required": [
+                                            "events",
+                                            "id",
+                                            "lastName",
+                                            "name",
+                                            "position",
+                                            "shirtNumber",
+                                            "substitute",
+                                            "timeOnPitch"
+                                        ]
+                                    }
+                                },
+                                "score": {
+                                    "type": "number"
+                                },
+                                "scorers": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "possession": {
+                                    "type": "number"
+                                },
+                                "shotsOn": {
+                                    "type": "number"
+                                },
+                                "shotsOff": {
+                                    "type": "number"
+                                },
+                                "corners": {
+                                    "type": "number"
+                                },
+                                "fouls": {
+                                    "type": "number"
+                                },
+                                "colours": {
+                                    "type": "string"
+                                },
+                                "crest": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "codename",
+                                "colours",
+                                "corners",
+                                "crest",
+                                "fouls",
+                                "id",
+                                "name",
+                                "players",
+                                "possession",
+                                "scorers",
+                                "shotsOff",
+                                "shotsOn"
+                            ]
+                        },
+                        "comments": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "awayTeam",
+                        "homeTeam",
+                        "id"
+                    ]
+                }
+            },
+            "required": [
+                "footballMatch"
+            ]
+        }
+    ],
+    "definitions": {
+        "FENavType": {
+            "type": "object",
+            "properties": {
+                "currentUrl": {
+                    "type": "string"
+                },
+                "pillars": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FELinkType"
+                    }
+                },
+                "otherLinks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FELinkType"
+                    }
+                },
+                "brandExtensions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FELinkType"
+                    }
+                },
+                "currentNavLink": {
+                    "$ref": "#/definitions/FELinkType"
+                },
+                "currentNavLinkTitle": {
+                    "type": "string"
+                },
+                "currentPillarTitle": {
+                    "type": "string"
+                },
+                "subNavSections": {
+                    "type": "object",
+                    "properties": {
+                        "parent": {
+                            "$ref": "#/definitions/FELinkType"
+                        },
+                        "links": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/FELinkType"
+                            }
+                        }
+                    },
+                    "required": [
+                        "links"
+                    ]
+                },
+                "readerRevenueLinks": {
+                    "$ref": "#/definitions/ReaderRevenuePositions"
+                }
+            },
+            "required": [
+                "brandExtensions",
+                "currentUrl",
+                "otherLinks",
+                "pillars",
+                "readerRevenueLinks"
+            ]
+        },
+        "FELinkType": {
+            "description": "Data types for the API request bodies from clients that require transformation before internal use.\nWhere data types are coming from Frontend we try to use the 'FE' prefix.\nPrior to this we used 'CAPI' as a prefix which wasn't entirely accurate, and some data structures never received the prefix, meaning some are still missing it.",
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "longTitle": {
+                    "type": "string"
+                },
+                "iconName": {
+                    "type": "string"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FELinkType"
+                    }
+                },
+                "pillar": {
+                    "$ref": "#/definitions/LegacyPillar"
+                },
+                "more": {
+                    "type": "boolean"
+                },
+                "classList": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "title",
+                "url"
+            ]
+        },
+        "LegacyPillar": {
+            "enum": [
+                "culture",
+                "labs",
+                "lifestyle",
+                "news",
+                "opinion",
+                "sport"
+            ],
+            "type": "string"
+        },
+        "ReaderRevenuePositions": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "footer": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "sideMenu": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "ampHeader": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "ampFooter": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                }
+            },
+            "required": [
+                "ampFooter",
+                "ampHeader",
+                "footer",
+                "header",
+                "sideMenu"
+            ]
+        },
+        "ReaderRevenueCategories": {
+            "type": "object",
+            "properties": {
+                "contribute": {
+                    "type": "string"
+                },
+                "subscribe": {
+                    "type": "string"
+                },
+                "support": {
+                    "type": "string"
+                },
+                "supporter": {
+                    "type": "string"
+                },
+                "gifting": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "contribute",
+                "subscribe",
+                "support",
+                "supporter"
+            ]
+        },
+        "EditionId": {
+            "enum": [
+                "AU",
+                "EUR",
+                "INT",
+                "UK",
+                "US"
+            ],
+            "type": "string"
+        },
+        "FESportPageConfig": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Omit<FEFrontConfig,\"keywordIds\"|\"keywords\"|\"isFront\">"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "isFront": {
+                            "type": "boolean"
+                        },
+                        "hasSurveyAd": {
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "hasSurveyAd",
+                        "isFront"
+                    ]
+                }
+            ]
+        },
+        "Omit<FEFrontConfig,\"keywordIds\"|\"keywords\"|\"isFront\">": {
+            "type": "object",
+            "properties": {
+                "isSensitive": {
+                    "type": "boolean"
+                },
+                "edition": {
+                    "type": "string"
+                },
+                "section": {
+                    "type": "string"
+                },
+                "sharedAdTargeting": {
+                    "$ref": "#/definitions/SharedAdTargeting"
+                },
+                "adUnit": {
+                    "type": "string"
+                },
+                "avatarApiUrl": {
+                    "type": "string"
+                },
+                "externalEmbedHost": {
+                    "type": "string"
+                },
+                "ajaxUrl": {
+                    "type": "string"
+                },
+                "revisionNumber": {
+                    "type": "string"
+                },
+                "isProd": {
+                    "type": "boolean"
+                },
+                "switches": {
+                    "$ref": "#/definitions/Switches"
+                },
+                "locationapiurl": {
+                    "type": "string"
+                },
+                "buildNumber": {
+                    "type": "string"
+                },
+                "abTests": {
+                    "description": "Narrowest representation of the server-side tests\nobject shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).\n\n**Note:** This type is not support by JSON-schema, it evaluates as `object`",
+                    "type": "object"
+                },
+                "pbIndexSites": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": {}
+                    }
+                },
+                "ampIframeUrl": {
+                    "type": "string"
+                },
+                "beaconUrl": {
+                    "type": "string"
+                },
+                "host": {
+                    "type": "string"
+                },
+                "brazeApiKey": {
+                    "type": "string"
+                },
+                "calloutsUrl": {
+                    "type": "string"
+                },
+                "requiresMembershipAccess": {
+                    "type": "boolean"
+                },
+                "onwardWebSocket": {
+                    "type": "string"
+                },
+                "a9PublisherId": {
+                    "type": "string"
+                },
+                "contentType": {
+                    "type": "string"
+                },
+                "facebookIaAdUnitRoot": {
+                    "type": "string"
+                },
+                "ophanEmbedJsUrl": {
+                    "type": "string"
+                },
+                "idUrl": {
+                    "type": "string"
+                },
+                "dcrSentryDsn": {
+                    "type": "string"
+                },
+                "idWebAppUrl": {
+                    "type": "string"
+                },
+                "discussionApiUrl": {
+                    "type": "string"
+                },
+                "sentryPublicApiKey": {
+                    "type": "string"
+                },
+                "omnitureAccount": {
+                    "type": "string"
+                },
+                "dfpAccountId": {
+                    "type": "string"
+                },
+                "pageId": {
+                    "type": "string"
+                },
+                "forecastsapiurl": {
+                    "type": "string"
+                },
+                "assetsPath": {
+                    "type": "string"
+                },
+                "pillar": {
+                    "type": "string"
+                },
+                "commercialBundleUrl": {
+                    "type": "string"
+                },
+                "discussionApiClientHeader": {
+                    "type": "string"
+                },
+                "membershipUrl": {
+                    "type": "string"
+                },
+                "dfpHost": {
+                    "type": "string"
+                },
+                "cardStyle": {
+                    "type": "string"
+                },
+                "googletagUrl": {
+                    "type": "string"
+                },
+                "sentryHost": {
+                    "type": "string"
+                },
+                "shouldHideAdverts": {
+                    "type": "boolean"
+                },
+                "mmaUrl": {
+                    "type": "string"
+                },
+                "membershipAccess": {
+                    "type": "string"
+                },
+                "isPreview": {
+                    "type": "boolean"
+                },
+                "googletagJsUrl": {
+                    "type": "string"
+                },
+                "supportUrl": {
+                    "type": "string"
+                },
+                "ipsosTag": {
+                    "type": "string"
+                },
+                "ophanJsUrl": {
+                    "type": "string"
+                },
+                "isPaidContent": {
+                    "type": "boolean"
+                },
+                "mobileAppsAdUnitRoot": {
+                    "type": "string"
+                },
+                "plistaPublicApiKey": {
+                    "type": "string"
+                },
+                "frontendAssetsFullURL": {
+                    "type": "string"
+                },
+                "googleSearchId": {
+                    "type": "string"
+                },
+                "allowUserGeneratedContent": {
+                    "type": "boolean"
+                },
+                "dfpAdUnitRoot": {
+                    "type": "string"
+                },
+                "idApiUrl": {
+                    "type": "string"
+                },
+                "omnitureAmpAccount": {
+                    "type": "string"
+                },
+                "hasPageSkin": {
+                    "type": "boolean"
+                },
+                "webTitle": {
+                    "type": "string"
+                },
+                "stripePublicToken": {
+                    "type": "string"
+                },
+                "googleRecaptchaSiteKey": {
+                    "type": "string"
+                },
+                "discussionD2Uid": {
+                    "type": "string"
+                },
+                "googleSearchUrl": {
+                    "type": "string"
+                },
+                "optimizeEpicUrl": {
+                    "type": "string"
+                },
+                "stage": {
+                    "$ref": "#/definitions/StageType"
+                },
+                "idOAuthUrl": {
+                    "type": "string"
+                },
+                "isDev": {
+                    "type": "boolean"
+                },
+                "thirdPartyAppsAccount": {
+                    "type": "string"
+                },
+                "avatarImagesUrl": {
+                    "type": "string"
+                },
+                "fbAppId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "a9PublisherId",
+                "abTests",
+                "adUnit",
+                "ajaxUrl",
+                "allowUserGeneratedContent",
+                "ampIframeUrl",
+                "assetsPath",
+                "avatarApiUrl",
+                "avatarImagesUrl",
+                "beaconUrl",
+                "buildNumber",
+                "calloutsUrl",
+                "commercialBundleUrl",
+                "contentType",
+                "dcrSentryDsn",
+                "dfpAccountId",
+                "dfpAdUnitRoot",
+                "dfpHost",
+                "discussionApiClientHeader",
+                "discussionApiUrl",
+                "discussionD2Uid",
+                "edition",
+                "externalEmbedHost",
+                "facebookIaAdUnitRoot",
+                "fbAppId",
+                "forecastsapiurl",
+                "frontendAssetsFullURL",
+                "googleRecaptchaSiteKey",
+                "googleSearchId",
+                "googleSearchUrl",
+                "googletagJsUrl",
+                "googletagUrl",
+                "hasPageSkin",
+                "host",
+                "idApiUrl",
+                "idOAuthUrl",
+                "idUrl",
+                "idWebAppUrl",
+                "ipsosTag",
+                "isDev",
+                "isPreview",
+                "isProd",
+                "isSensitive",
+                "locationapiurl",
+                "membershipAccess",
+                "membershipUrl",
+                "mmaUrl",
+                "mobileAppsAdUnitRoot",
+                "omnitureAccount",
+                "omnitureAmpAccount",
+                "onwardWebSocket",
+                "ophanEmbedJsUrl",
+                "ophanJsUrl",
+                "optimizeEpicUrl",
+                "pageId",
+                "pbIndexSites",
+                "pillar",
+                "plistaPublicApiKey",
+                "requiresMembershipAccess",
+                "revisionNumber",
+                "section",
+                "sentryHost",
+                "sentryPublicApiKey",
+                "sharedAdTargeting",
+                "shouldHideAdverts",
+                "stage",
+                "stripePublicToken",
+                "supportUrl",
+                "switches",
+                "webTitle"
+            ]
+        },
+        "SharedAdTargeting": {
+            "type": "object"
+        },
+        "Switches": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "boolean"
+            }
+        },
+        "StageType": {
+            "enum": [
+                "CODE",
+                "DEV",
+                "PROD"
+            ],
+            "type": "string"
+        },
+        "FooterType": {
+            "type": "object",
+            "properties": {
+                "footerLinks": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/FooterLink"
+                        }
+                    }
+                }
+            },
+            "required": [
+                "footerLinks"
+            ]
+        },
+        "FooterLink": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "dataLinkName": {
+                    "type": "string"
+                },
+                "extraClasses": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dataLinkName",
+                "text",
+                "url"
+            ]
+        }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+}

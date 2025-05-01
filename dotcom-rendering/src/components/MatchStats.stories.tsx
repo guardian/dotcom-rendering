@@ -17,7 +17,6 @@ export const Default = () => {
 		<MatchStats
 			home={matchReport.homeTeam}
 			away={matchReport.awayTeam}
-			competition="FA Cup"
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
@@ -46,7 +45,6 @@ export const InContext = () => {
 					<MatchStats
 						home={matchReport.homeTeam}
 						away={matchReport.awayTeam}
-						competition="FA Cup"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -69,7 +67,6 @@ const DefaultInLiveblog = () => {
 		<MatchStats
 			home={matchReport.homeTeam}
 			away={matchReport.awayTeam}
-			competition="FA Cup"
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
@@ -84,9 +81,20 @@ DefaultInLiveblog.storyName = 'when placed in a liveblog';
 export const NoStats = () => {
 	return (
 		<MatchStats
-			home={matchReport.homeTeam}
-			away={matchReport.awayTeam}
-			competition="Women's Nations League"
+			home={{
+				...matchReport.homeTeam,
+				shotsOn: 0,
+				shotsOff: 0,
+				corners: 0,
+				fouls: 0,
+			}}
+			away={{
+				...matchReport.awayTeam,
+				shotsOn: 0,
+				shotsOff: 0,
+				corners: 0,
+				fouls: 0,
+			}}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,

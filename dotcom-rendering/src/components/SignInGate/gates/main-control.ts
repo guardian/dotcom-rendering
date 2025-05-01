@@ -4,7 +4,7 @@ import {
 	isValidContentType,
 	isValidSection,
 	isValidTag,
-} from '../displayRule';
+} from '../displayRules';
 import type { CanShowGateProps, SignInGateComponent } from '../types';
 
 const canShow = ({

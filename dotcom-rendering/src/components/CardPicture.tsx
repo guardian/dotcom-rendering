@@ -44,6 +44,11 @@ const decideImageWidths = (
 		case 'podcast':
 			return [{ breakpoint: breakpoints.mobile, width: 80, aspectRatio }];
 
+		case 'highlights-card':
+			return [
+				{ breakpoint: breakpoints.mobile, width: 112, aspectRatio },
+			];
+
 		case 'carousel':
 			return [
 				{ breakpoint: breakpoints.mobile, width: 220, aspectRatio },
@@ -110,11 +115,13 @@ const decideImageWidths = (
 					breakpoint: breakpoints.tablet,
 					width: 700,
 					aspectRatio: '5:3',
+					cropOffset: { x: 50, y: 0 },
 				},
 				{
 					breakpoint: breakpoints.desktop,
 					width: 940,
 					aspectRatio: '5:3',
+					cropOffset: { x: 50, y: 0 },
 				},
 			];
 	}

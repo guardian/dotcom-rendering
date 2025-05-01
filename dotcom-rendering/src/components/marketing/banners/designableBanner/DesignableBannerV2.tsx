@@ -357,6 +357,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 									copy={{
 										headline:
 											tickerSettings.copy.countLabel,
+										goalCopy: tickerSettings.copy.goalCopy,
 									}}
 									tickerData={tickerSettings.tickerData}
 									tickerStylingSettings={
@@ -427,7 +428,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 								setThreeTierChoiceCardSelectedProduct
 							}
 							choices={getChoiceCardData(
-								isTabletOrAbove,
+								false,
 								false,
 								countryCode,
 							)}

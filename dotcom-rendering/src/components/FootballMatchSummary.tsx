@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
+import type { FootballMatch } from '../footballMatch';
 import { grid } from '../grid';
 import { palette } from '../palette';
-import type { TeamType } from '../types/sport';
 import { MatchNav } from './MatchNav';
 import { MatchStats } from './MatchStats';
 
@@ -27,18 +27,10 @@ const gridStyles = css`
 `;
 
 type Props = {
-	homeTeam: TeamType;
-	awayTeam: TeamType;
-	comments?: string;
-	competition: string;
+	match: FootballMatch;
 };
 
-export const FootballMatchSummary = ({
-	homeTeam,
-	awayTeam,
-	comments,
-	competition,
-}: Props) => (
+export const FootballMatchSummary = ({ match }: Props) => (
 	<main id="maincontent" css={gridStyles}>
 		<div
 			css={css`
@@ -59,9 +51,10 @@ export const FootballMatchSummary = ({
 			`}
 		>
 			<MatchNav
-				homeTeam={homeTeam}
-				awayTeam={awayTeam}
-				comments={comments}
+				homeTeam={match.homeTeam}
+				awayTeam={match.awayTeam}
+				comments={match.comments}
+				usage="MatchSummary"
 			/>
 		</div>
 		<div
@@ -70,9 +63,8 @@ export const FootballMatchSummary = ({
 			`}
 		>
 			<MatchStats
-				home={homeTeam}
-				away={awayTeam}
-				competition={competition}
+				home={match.homeTeam}
+				away={match.awayTeam}
 				usage="MatchSummary"
 			/>
 		</div>

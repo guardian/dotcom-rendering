@@ -31,6 +31,7 @@ import {
 	retrieveDismissedCount,
 	setUserDismissedGate,
 } from './SignInGate/dismissGate';
+import { pageIdIsAllowedForGating } from './SignInGate/displayRules';
 import { SignInGateAuxia } from './SignInGate/gateDesigns/SignInGateAuxia';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGateMappings';
 import type {
@@ -377,7 +378,7 @@ export const SignInGateSelector = ({
 	isPaidContent,
 	isPreview,
 	host = 'https://theguardian.com/',
-	pageId,
+	pageId, // pageId is the path without starting slash
 	idUrl = 'https://profile.theguardian.com',
 	switches,
 	contributionsServiceUrl,
@@ -388,6 +389,10 @@ export const SignInGateSelector = ({
 		'AuxiaSignInGate',
 		'auxia-signin-gate',
 	);
+
+	if (!pageIdIsAllowedForGating(pageId)) {
+		return <></>;
+	}
 
 	if (!userIsInAuxiaExperiment) {
 		return (
@@ -529,6 +534,7 @@ const fetchProxyGetTreatments = async (
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const articleIdentifier = `www.theguardian.com/${pageId}`;
+	// articleIdentifier example: 'www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const url = `${contributionsServiceUrl}/auxia/get-treatments`;
 	const headers = {
 		'Content-Type': 'application/json',

@@ -1,4 +1,5 @@
 import type { CricketMatch } from './cricketMatch';
+import type { FootballMatch } from './footballMatch';
 import type { FootballMatches } from './footballMatches';
 import type { FootballTableCompetitions } from './footballTables';
 import type { FESportPageConfig } from './frontend/feFootballDataPage';
@@ -44,13 +45,30 @@ export type CricketMatchPage = SportPageConfig & {
 	kind: 'CricketMatch';
 };
 
+export type FootballMatchSummaryPage = SportPageConfig & {
+	match: FootballMatch;
+	kind: 'FootballMatchSummary';
+};
+
 export type FootballMatchListPageKind = FootballMatchListPage['kind'];
-export type FootballPageKind =
-	| FootballTablesPage['kind']
-	| FootballMatchListPageKind;
 
-export type SportPageKind = FootballPageKind | CricketMatchPage['kind'];
+export type FootballDataWithRegionsPage =
+	| FootballMatchListPage
+	| FootballTablesPage;
 
-export type FootballDataPage = FootballMatchListPage | FootballTablesPage;
+export type FootballPageWithRegionsKind = FootballDataWithRegionsPage['kind'];
 
-export type SportDataPage = FootballDataPage | CricketMatchPage;
+export type SportDataPage =
+	| FootballDataWithRegionsPage
+	| CricketMatchPage
+	| FootballMatchSummaryPage;
+
+export type SportPageKind = SportDataPage['kind'];
+
+export const cleanTeamName = (teamName: string): string => {
+	return teamName
+		.replace('Ladies', '')
+		.replace('Holland', 'The Netherlands')
+		.replace('Bialystock', 'Białystok')
+		.replace('Union Saint Gilloise', 'Union Saint-Gilloise');
+};

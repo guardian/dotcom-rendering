@@ -8,6 +8,7 @@ import type {
 	FEResult,
 } from './frontend/feFootballMatchListPage';
 import { error, ok, type Result } from './lib/result';
+import { cleanTeamName } from './sportDataPage';
 
 export type Team = {
 	name: string;
@@ -381,14 +382,6 @@ export const getParserErrorMessage = (parserError: ParserError): string => {
 export const parse: (
 	frontendData: FEMatchByDateAndCompetition[],
 ) => Result<ParserError, FootballMatches> = listParse(parseFootballDay);
-
-const cleanTeamName = (teamName: string): string => {
-	return teamName
-		.replace('Ladies', '')
-		.replace('Holland', 'The Netherlands')
-		.replace('Bialystock', 'Białystok')
-		.replace('Union Saint Gilloise', 'Union Saint-Gilloise');
-};
 
 // This comes from Frontend
 const paStatusToMatchStatus: Record<string, string> = {

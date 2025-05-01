@@ -14,6 +14,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       "GuEc2App",
       "GuCertificate",
       "GuInstanceRole",
+      "GuSsmSshPolicy",
       "GuDescribeEC2Policy",
       "GuLoggingStreamNameParameter",
       "GuLogShippingPolicy",
@@ -24,7 +25,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       "GuWazuhAccess",
       "GuAutoScalingGroup",
       "GuApplicationLoadBalancer",
-      "GuStringParameter",
+      "GuAccessLoggingBucketParameter",
       "GuApplicationTargetGroup",
       "GuHttpsApplicationListener",
       "GuSecurityGroup",
@@ -206,6 +207,11 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
         },
         "MaxSize": "4",
+        "MetricsCollection": [
+          {
+            "Granularity": "1Minute",
+          },
+        ],
         "MinSize": "1",
         "Tags": [
           {
@@ -707,20 +713,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/AmazonSSMManagedInstanceCore",
-              ],
-            ],
-          },
-        ],
         "Path": "/",
         "Tags": [
           {
@@ -1038,6 +1030,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         },
         "Port": 443,
         "Protocol": "HTTPS",
+        "SslPolicy": "ELBSecurityPolicy-TLS13-1-2-2021-06",
       },
       "Type": "AWS::ElasticLoadBalancingV2::Listener",
     },
@@ -1046,6 +1039,14 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "LoadBalancerAttributes": [
           {
             "Key": "deletion_protection.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "routing.http.x_amzn_tls_version_and_cipher_suite.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "routing.http.drop_invalid_header_fields.enabled",
             "Value": "true",
           },
           {
@@ -1266,6 +1267,42 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Value": "https://article-rendering.test.dev-guardianapis.com",
       },
       "Type": "AWS::SSM::Parameter",
+    },
+    "SsmSshPolicy4CFC977E": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ec2messages:AcknowledgeMessage",
+                "ec2messages:DeleteMessage",
+                "ec2messages:FailMessage",
+                "ec2messages:GetEndpoint",
+                "ec2messages:GetMessages",
+                "ec2messages:SendReply",
+                "ssm:UpdateInstanceInformation",
+                "ssm:ListInstanceAssociations",
+                "ssm:DescribeInstanceProperties",
+                "ssm:DescribeDocumentParameters",
+                "ssmmessages:CreateControlChannel",
+                "ssmmessages:CreateDataChannel",
+                "ssmmessages:OpenControlChannel",
+                "ssmmessages:OpenDataChannel",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ssm-ssh-policy",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleArticlerendering0D4717E8",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
     },
     "TargetGroupArticlerendering3605E498": {
       "Properties": {
@@ -1536,6 +1573,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           "InstanceType": "t4g.micro",
           "MetadataOptions": {
             "HttpTokens": "required",
+            "InstanceMetadataTags": "enabled",
           },
           "SecurityGroupIds": [
             {
@@ -1555,6 +1593,10 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
             {
               "ResourceType": "instance",
               "Tags": [
+                {
+                  "Key": "App",
+                  "Value": "article-rendering",
+                },
                 {
                   "Key": "gu:cdk:version",
                   "Value": "TEST",
@@ -1580,6 +1622,10 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
             {
               "ResourceType": "volume",
               "Tags": [
+                {
+                  "Key": "App",
+                  "Value": "article-rendering",
+                },
                 {
                   "Key": "gu:cdk:version",
                   "Value": "TEST",
@@ -1608,7 +1654,8 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
               "Fn::Join": [
                 "",
                 [
-                  "#!/bin/bash -ev
+                  "#!/bin/bash
+set -ev
 groupadd frontend
 useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
 cd /home/dotcom-rendering
@@ -1654,6 +1701,10 @@ systemctl start article-rendering",
           {
             "ResourceType": "launch-template",
             "Tags": [
+              {
+                "Key": "App",
+                "Value": "article-rendering",
+              },
               {
                 "Key": "gu:cdk:version",
                 "Value": "TEST",
