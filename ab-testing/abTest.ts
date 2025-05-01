@@ -35,4 +35,22 @@ export const ABTests: ABTest[] = [
 		],
 		allowOverlap: true,
 	},
+	{
+		name: 'commercial-some-test',
+		description:
+			'Allows viewing the beta version of the Europe network front',
+		owners: [
+			'project.fairground@theguardian.com',
+			'dotcom.platform@theguardian.com',
+		],
+		status: 'ON',
+		expirationDate: new Date('2025-05-02'),
+		type: 'server',
+		highImpact: false,
+		groups: [
+			{ id: 'control', size: 20 / 100 },
+			{ id: 'variant', size: 20 / 100 },
+		],
+		allowOverlap: true,
+	},
 ];
