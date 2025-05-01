@@ -1,7 +1,3 @@
-import {
-	TickerCountType,
-	TickerEndType,
-} from '@guardian/support-dotcom-components';
 import type {
 	BannerDesignImage,
 	SelectedAmountsVariant,
@@ -95,13 +91,10 @@ const regularImage: BannerDesignImage = {
 };
 
 const tickerSettings: TickerSettings = {
-	endType: TickerEndType.unlimited,
-	countType: TickerCountType.money,
 	currencySymbol: '£',
 	copy: {
 		countLabel: '',
-		goalReachedPrimary: '',
-		goalReachedSecondary: '',
+		goalCopy: 'Goal',
 	},
 	tickerData: {
 		total: 500000,
