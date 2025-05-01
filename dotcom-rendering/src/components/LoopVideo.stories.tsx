@@ -35,6 +35,14 @@ export const Default = {
 	},
 } satisfies StoryObj<typeof LoopVideo>;
 
+export const WithWebmFile = {
+	name: 'Without Audio',
+	args: {
+		...Default.args,
+		src: 'https://interactive.guim.co.uk/atoms/2023/01/2025-trump-100-days/assets/v/1746020259/videos/header-video.webm',
+	},
+} satisfies StoryObj<typeof LoopVideo>;
+
 export const WithoutAudio = {
 	name: 'Without Audio',
 	args: {
