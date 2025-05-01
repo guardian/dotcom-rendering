@@ -136,9 +136,7 @@ export const renderSportPage = (sportData: SportDataPage) => {
 			sportData.config.commercialBundleUrl,
 	].filter(isString);
 
-	const scriptTags = generateScriptTags(
-		prefetchScripts
-	);
+	const scriptTags = generateScriptTags(prefetchScripts);
 
 	const pageHtml = htmlPageTemplate({
 		scriptTags,
