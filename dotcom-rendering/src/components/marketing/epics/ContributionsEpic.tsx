@@ -263,7 +263,6 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	tracking,
 	countryCode,
 	articleCounts,
-	onReminderOpen,
 	fetchEmail,
 	submitComponentEvent,
 	openCmp,
@@ -368,6 +367,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 						currencySymbol={tickerSettings.currencySymbol}
 						copy={{
 							headline: tickerSettings.copy.countLabel,
+							goalCopy: tickerSettings.copy.goalCopy,
 						}}
 						tickerData={tickerSettings.tickerData}
 						tickerStylingSettings={defaultTickerStylingSettings}
@@ -419,7 +419,6 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					tracking={tracking}
 					countryCode={countryCode}
 					articleCounts={articleCounts}
-					onReminderOpen={onReminderOpen}
 					fetchEmail={fetchEmail}
 					submitComponentEvent={submitComponentEvent}
 					amountsTestName={choiceCardAmounts?.testName}

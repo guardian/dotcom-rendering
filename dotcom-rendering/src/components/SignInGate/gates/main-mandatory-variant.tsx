@@ -1,7 +1,7 @@
 import { startPerformanceMeasure } from '@guardian/libs';
 import React, { Suspense } from 'react';
 import { Lazy } from '../../Lazy';
-import { canShowSignInGateMandatory } from '../displayRule';
+import { canShowSignInGateMandatory } from '../displayRules';
 import type { SignInGateComponent } from '../types';
 
 const SignInGateMain = React.lazy(() => {

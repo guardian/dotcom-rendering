@@ -1,15 +1,15 @@
 import { Option, Select } from '@guardian/source/react-components';
 import { palette } from '../palette';
-import type { FootballPageKind, Region } from '../sportDataPage';
+import type { FootballPageWithRegionsKind, Region } from '../sportDataPage';
 
 type Props = {
 	regions: Region[];
-	kind: FootballPageKind;
+	kind: FootballPageWithRegionsKind;
 	pageId: string;
 	onChange: (competitionTag: string) => void;
 };
 
-const allLabel = (kind: FootballPageKind): string => {
+const allLabel = (kind: FootballPageWithRegionsKind): string => {
 	switch (kind) {
 		case 'FootballFixtures':
 			return 'All fixtures';
@@ -22,7 +22,7 @@ const allLabel = (kind: FootballPageKind): string => {
 	}
 };
 
-const getPagePath = (kind: FootballPageKind) => {
+const getPagePath = (kind: FootballPageWithRegionsKind) => {
 	switch (kind) {
 		case 'FootballFixtures':
 			return '/football/fixtures';

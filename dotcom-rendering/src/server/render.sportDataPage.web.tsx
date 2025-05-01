@@ -1,6 +1,7 @@
 import { isString } from '@guardian/libs';
 import { ConfigProvider } from '../components/ConfigContext';
 import { SportDataPageComponent } from '../components/SportDataPageComponent';
+import type { FootballMatch } from '../footballMatch';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -12,7 +13,7 @@ import { polyfillIO } from '../lib/polyfill.io';
 import { createGuardian } from '../model/guardian';
 import type {
 	CricketMatchPage,
-	FootballDataPage,
+	FootballDataWithRegionsPage,
 	SportDataPage,
 	SportPageKind,
 } from '../sportDataPage';
@@ -34,6 +35,8 @@ const decideDescription = (kind: SportPageKind) => {
 			return `Football tables ${fromTheGuardian}`;
 		case 'CricketMatch':
 			return `Cricket scores ${fromTheGuardian}`;
+		case 'FootballMatchSummary':
+			return `Football matches ${fromTheGuardian}`;
 	}
 };
 
@@ -43,13 +46,23 @@ const decideTitle = (sportPage: SportDataPage) => {
 		case 'FootballResults':
 		case 'FootballFixtures':
 		case 'FootballTables':
-			return decideFootballTitle(sportPage);
+			return decideFootballTitleWithCompetition(sportPage);
 		case 'CricketMatch':
-			return decideCricketTitle(sportPage);
+			return createCricketTitle(sportPage);
+		case 'FootballMatchSummary':
+			return createMatchSummaryTitle(sportPage.match);
 	}
 };
 
-const decideFootballTitle = (sportPage: FootballDataPage) => {
+function createMatchSummaryTitle(match: FootballMatch) {
+	return `${match.homeTeam.name} ${match.homeTeam.score ?? ''} - ${
+		match.awayTeam.score ?? ''
+	} ${match.awayTeam.name} | Football | The Guardian`;
+}
+
+const decideFootballTitleWithCompetition = (
+	sportPage: FootballDataWithRegionsPage,
+) => {
 	const { config, kind, regions } = sportPage;
 	const pagePath = config.pageId.startsWith('/')
 		? config.pageId.slice(1)
@@ -80,7 +93,7 @@ const decideFootballTitle = (sportPage: FootballDataPage) => {
 	}
 };
 
-const decideCricketTitle = (sportPage: CricketMatchPage) => {
+const createCricketTitle = (sportPage: CricketMatchPage) => {
 	return `${sportPage.match.competitionName}, ${sportPage.match.venueName} | Cricket | The Guardian`;
 };
 

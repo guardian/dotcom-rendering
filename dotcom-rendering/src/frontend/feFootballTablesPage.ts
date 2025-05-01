@@ -1,5 +1,6 @@
 import type {
 	FECompetitionSummary,
+	FEFootballCompetition,
 	FEFootballDataPage,
 	FERound,
 } from './feFootballDataPage';
@@ -61,5 +62,6 @@ export type FEFootballTable = {
 };
 
 export type FEFootballTablesPage = FEFootballDataPage & {
+	filters: Record<string, FEFootballCompetition[]>;
 	tables: FEFootballTable[];
 };
