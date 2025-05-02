@@ -1,4 +1,4 @@
-import { type CrosswordProps } from '@guardian/react-crossword-next';
+import { type CrosswordProps } from '@guardian/react-crossword';
 import type { EditionId } from '../lib/edition';
 import type { FEArticleBadgeType } from '../types/badge';
 import type { Block } from '../types/blocks';

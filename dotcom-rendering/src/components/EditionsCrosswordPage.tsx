@@ -1,8 +1,8 @@
 import { StrictMode } from 'react';
-import type { FEEditionsCrosswords } from '../types/editionsCrossword';
+import type { CAPICrosswords } from '../types/editionsCrossword';
 
 interface Props {
-	editionsCrosswords: FEEditionsCrosswords;
+	editionsCrosswords: CAPICrosswords;
 }
 
 export const EditionsCrosswordPage = ({ editionsCrosswords }: Props) => {
@@ -10,7 +10,9 @@ export const EditionsCrosswordPage = ({ editionsCrosswords }: Props) => {
 		<StrictMode>
 			<main
 				id="editions-crossword-player"
-				data-crosswords={JSON.stringify(editionsCrosswords.crosswords)}
+				data-crosswords={JSON.stringify(
+					editionsCrosswords.newCrosswords,
+				)}
 			></main>
 		</StrictMode>
 	);
