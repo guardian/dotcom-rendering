@@ -1,7 +1,7 @@
 {
     "type": "object",
     "properties": {
-        "crosswords": {
+        "newCrosswords": {
             "type": "array",
             "items": {
                 "type": "object",
@@ -99,7 +99,7 @@
         }
     },
     "required": [
-        "crosswords"
+        "newCrosswords"
     ],
     "definitions": {
         "CAPIEntry": {

@@ -1,7 +1,7 @@
 import type { CAPICrossword } from '@guardian/react-crossword/dist/@types/CAPI';
 
 export type CAPICrosswords = {
-	crosswords: CAPICrossword[];
+	newCrosswords: CAPICrossword[];
 };
 
 export type CrosswordsByDate = Record<string, CAPICrossword[]>;
