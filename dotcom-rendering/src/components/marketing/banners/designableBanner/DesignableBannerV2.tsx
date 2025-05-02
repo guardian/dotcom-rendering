@@ -479,7 +479,6 @@ const styles = {
 		overflow: auto;
 		* {
 			box-sizing: border-box;
-			// outline: 1px solid red; // DEBUGGING
 		}
 		${from.phablet} {
 			border-top: 1px solid ${neutral[0]};
@@ -612,13 +611,16 @@ const styles = {
 		${between.mobile.and.desktop} {
 			order: '2';
 		}
+
+		${from.tablet} {
+			max-width: 492px;
+		}
+
 		${from.desktop} {
 			grid-column: 2;
 			grid-row: 1;
 			background: ${background};
 			max-width: 492px;
-		}
-		${from.desktop} {
 			padding-left: ${space[2]}px;
 			padding-top: ${space[3]}px;
 		}
@@ -687,6 +689,7 @@ const styles = {
 			grid-column: 3;
 			grid-row: 1;
 			grid-row-end: 3;
+			margin-left: ${space[5]}px;
 		}
 
 		${between.desktop.and.wide} {
