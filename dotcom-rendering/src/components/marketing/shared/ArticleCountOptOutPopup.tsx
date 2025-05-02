@@ -5,7 +5,10 @@
  */
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { OphanComponentEvent, OphanComponentType } from '@guardian/libs';
+import type {
+	ComponentEvent,
+	TComponentType,
+} from '@guardian/ophan-tracker-js';
 import { from, space } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
@@ -22,8 +25,8 @@ const OPHAN_COMPONENT_ID_OPT_OUT_CLOSE = 'article-count-opt-out-close';
 const OPHAN_COMPONENT_ID_OPT_OUT_CONFIRM = 'article-count-opt-out-confirm';
 
 export const ophanComponentEventOptOutView = (
-	componentType: OphanComponentType,
-): OphanComponentEvent => ({
+	componentType: TComponentType,
+): ComponentEvent => ({
 	component: {
 		componentType: 'ACQUISITIONS_OTHER',
 		id: OPHAN_COMPONENT_ID_OPT_OUT_VIEW,
@@ -33,8 +36,8 @@ export const ophanComponentEventOptOutView = (
 });
 
 export const ophanComponentEventOptOutOpen = (
-	componentType: OphanComponentType,
-): OphanComponentEvent => ({
+	componentType: TComponentType,
+): ComponentEvent => ({
 	component: {
 		componentType: 'ACQUISITIONS_OTHER',
 		id: OPHAN_COMPONENT_ID_OPT_OUT_OPEN,
@@ -44,8 +47,8 @@ export const ophanComponentEventOptOutOpen = (
 });
 
 export const ophanComponentEventOptOutClose = (
-	componentType: OphanComponentType,
-): OphanComponentEvent => ({
+	componentType: TComponentType,
+): ComponentEvent => ({
 	component: {
 		componentType: 'ACQUISITIONS_OTHER',
 		id: OPHAN_COMPONENT_ID_OPT_OUT_CLOSE,
@@ -55,8 +58,8 @@ export const ophanComponentEventOptOutClose = (
 });
 
 export const ophanComponentEventOptOutConfirm = (
-	componentType: OphanComponentType,
-): OphanComponentEvent => ({
+	componentType: TComponentType,
+): ComponentEvent => ({
 	component: {
 		componentType: 'ACQUISITIONS_OTHER',
 		id: OPHAN_COMPONENT_ID_OPT_OUT_CONFIRM,
@@ -137,8 +140,8 @@ const overlayContainer = (
 `;
 
 export interface OphanTracking {
-	componentType: OphanComponentType;
-	submitComponentEvent: (componentEvent: OphanComponentEvent) => void;
+	componentType: TComponentType;
+	submitComponentEvent: (componentEvent: ComponentEvent) => void;
 }
 
 export interface ArticleCountOptOutProps {

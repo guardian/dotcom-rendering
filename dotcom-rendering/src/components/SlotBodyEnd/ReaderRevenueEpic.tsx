@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import type { OphanComponentEvent } from '@guardian/libs';
 import {
 	cmp,
 	getCookie,
 	startPerformanceMeasure,
 	storage,
 } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
 import type {
 	EpicPayload,
@@ -143,7 +143,7 @@ export const canShowReaderRevenueEpic = async (
 		tracking,
 		hasConsentForArticleCount,
 		fetchEmail,
-		submitComponentEvent: (componentEvent: OphanComponentEvent) =>
+		submitComponentEvent: (componentEvent: ComponentEvent) =>
 			void submitComponentEvent(componentEvent, renderingTarget),
 		openCmp,
 	};

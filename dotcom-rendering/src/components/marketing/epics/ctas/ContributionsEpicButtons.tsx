@@ -5,7 +5,7 @@
  */
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { OphanComponentEvent } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { space } from '@guardian/source/foundations';
 import {
 	countryCodeToCountryGroupId,
@@ -73,7 +73,7 @@ const PrimaryCtaButton = ({
 	amountsTestName?: string;
 	amountsVariantName?: string;
 	numArticles: number;
-	submitComponentEvent?: (event: OphanComponentEvent) => void;
+	submitComponentEvent?: (event: ComponentEvent) => void;
 }): JSX.Element | null => {
 	if (!cta) {
 		return null;
@@ -115,7 +115,7 @@ const SecondaryCtaButton = ({
 	tracking: Tracking;
 	countryCode?: string;
 	numArticles: number;
-	submitComponentEvent?: (event: OphanComponentEvent) => void;
+	submitComponentEvent?: (event: ComponentEvent) => void;
 }): JSX.Element | null => {
 	const url = addRegionIdAndTrackingParamsToSupportUrl(
 		cta.baseUrl,
@@ -142,7 +142,7 @@ interface ContributionsEpicButtonsProps {
 	tracking: Tracking;
 	countryCode?: string;
 	onOpenReminderClick: () => void;
-	submitComponentEvent?: (event: OphanComponentEvent) => void;
+	submitComponentEvent?: (event: ComponentEvent) => void;
 	isReminderActive: boolean;
 	isSignedIn: boolean;
 	threeTierChoiceCardSelectedProduct: SupportTier;
