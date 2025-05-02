@@ -12,6 +12,7 @@ import {
 import { useEffect, useState } from 'react';
 import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
+import { useIsInView } from '../lib/useIsInView';
 import type { TableOfContentsItem } from '../model/enhanceTableOfContents';
 import { palette } from '../palette';
 
@@ -136,30 +137,21 @@ const verticalStyle = css`
  */
 
 export const TableOfContents = ({ tableOfContents, format }: Props) => {
+	const [isInView, setNode] = useIsInView({ threshold: [1] });
 	const [open, setOpen] = useState(tableOfContents.length < 5);
 
 	useEffect(() => {
-		const tocElement = document.querySelector(
-			'[data-component="table-of-contents"]',
-		) as HTMLElement;
-
-		const observer = new IntersectionObserver(
-			([e]) => {
-				if (e && e.intersectionRatio < 1) {
-					setOpen(false);
-				}
-			},
-			{ threshold: [1] },
-		);
-
-		observer.observe(tocElement);
-	}, []);
+		if (!isInView) {
+			setOpen(false);
+		}
+	}, [isInView]);
 
 	return (
 		<details
 			open={open}
 			css={[detailsStyles, stickyStyles]}
 			data-component="table-of-contents"
+			ref={setNode}
 		>
 			<summary
 				onClick={(e): void => {
