@@ -93,6 +93,7 @@ const parseFEFootballMatchList = (
 		now: new Date().toISOString(),
 		kind: decideMatchListPageKind(data.config.pageId),
 		nextPage: data.nextPage,
+		nextPageNoJsUrl: `${data.config.ajaxUrl}${data.nextPageNoJs}`,
 		previousPage: data.previousPage,
 		regions: parseFEFootballCompetitionRegions(data.filters),
 		nav: {

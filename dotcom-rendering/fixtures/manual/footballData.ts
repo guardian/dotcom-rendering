@@ -231,3 +231,6 @@ export const moreDays: FootballMatches = [
 		],
 	},
 ];
+
+export const nextPageNoJsUrl =
+	'https://www.theguardian.com/football/fixtures/more/2025/May/05';
