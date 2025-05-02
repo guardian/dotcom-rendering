@@ -93,5 +93,6 @@ export type FEFootballMatchListPage = FEFootballDataPage & {
 	filters: Record<string, FEFootballCompetition[]>;
 	matchesList: FEMatchByDateAndCompetition[];
 	nextPage?: string;
+	nextPageNoJs?: string;
 	previousPage?: string;
 };

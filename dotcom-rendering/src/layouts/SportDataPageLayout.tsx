@@ -40,6 +40,7 @@ const SportsPage = ({
 						kind={sportData.kind}
 						initialDays={sportData.matchesList}
 						secondPage={sportData.nextPage}
+						nextPageNoJsUrl={sportData.nextPageNoJsUrl}
 						edition={sportData.editionId}
 						renderAds={renderAds}
 						pageId={sportData.config.pageId}
