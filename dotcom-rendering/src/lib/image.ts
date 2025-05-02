@@ -72,7 +72,7 @@ export const generateImageURL = ({
 		crop,
 	});
 
-	return `https://i.guim.co.uk/img/${getServiceFromUrl(url)}${
+	return `https://i.guimcode.co.uk/img/${getServiceFromUrl(url)}${
 		url.pathname
 	}?${params.toString()}`;
 };
