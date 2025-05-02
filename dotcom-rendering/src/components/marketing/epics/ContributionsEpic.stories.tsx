@@ -197,6 +197,7 @@ export const WithTicker: Story = {
 				currencySymbol: '£',
 				copy: {
 					countLabel: 'Help us reach our end-of-year goal',
+					goalCopy: 'goal',
 				},
 				tickerData: {
 					total: 10000,
@@ -221,6 +222,7 @@ export const WithTickerAndWithAboveTopReaderArticleCount: Story = {
 				currencySymbol: '£',
 				copy: {
 					countLabel: 'Help us reach our end-of-year goal',
+					goalCopy: 'goal',
 				},
 				tickerData: {
 					total: 10000,

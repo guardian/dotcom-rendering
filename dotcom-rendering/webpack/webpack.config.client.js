@@ -52,34 +52,6 @@ const getEntryIndex = (build) => {
  */
 const getLoaders = (build) => {
 	switch (build) {
-		case 'client.web.legacy':
-			return [
-				{
-					loader: 'babel-loader',
-					options: {
-						presets: [
-							'@babel/preset-react',
-							[
-								'@babel/preset-env',
-								{
-									targets: {
-										ie: '11',
-									},
-									modules: false,
-								},
-							],
-						],
-						compact: true,
-					},
-				},
-				{
-					loader: 'ts-loader',
-					options: {
-						configFile: 'tsconfig.build.json',
-						transpileOnly: true,
-					},
-				},
-			];
 		case 'client.editionsCrossword':
 		case 'client.apps':
 			return swcLoader(['android >= 5', 'ios >= 12']);
@@ -166,6 +138,13 @@ module.exports = ({ build }) => ({
 			},
 			svgr,
 		],
+	},
+	resolve: {
+		alias: {
+			react: 'preact/compat',
+			'react-dom/test-utils': 'preact/test-utils',
+			'react-dom': 'preact/compat',
+		},
 	},
 });
 

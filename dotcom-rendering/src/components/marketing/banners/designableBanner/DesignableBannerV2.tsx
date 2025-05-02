@@ -376,6 +376,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 									copy={{
 										headline:
 											tickerSettings.copy.countLabel,
+										goalCopy: tickerSettings.copy.goalCopy,
 									}}
 									tickerData={tickerSettings.tickerData}
 									tickerStylingSettings={
@@ -449,7 +450,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 								setThreeTierChoiceCardSelectedProduct
 							}
 							choices={getChoiceCardData(
-								isTabletOrAbove,
+								false,
 								false,
 								countryCode,
 							)}
@@ -533,7 +534,7 @@ const styles = {
 	) => css`
 		background: ${background};
 		color: ${textColor};
-		${limitHeight ? 'max-height: 70vh;' : 'auto'}
+		${limitHeight ? 'max-height: 60vh;' : ''}
 		overflow: auto;
 		* {
 			box-sizing: border-box;

@@ -371,12 +371,13 @@ requests.push(
 			delete json.config.weatherapiurl;
 			delete json.config.isAdFree;
 			delete json.config.userBenefitsApiUrl;
+			delete json.config.frontendSentryDsn;
 
 			const cricketMatchData = validateAsCricketMatchPageType(json);
 
 			// Write the new frontend fixture data
 			const contents = `${HEADER}
-			import type { FECricketMatchPage } from '../../src/frontend/feCricketMatch';
+			import type { FECricketMatchPage } from '../../src/frontend/feCricketMatchPage';
 
 			export const cricketMatchData: FECricketMatchPage = ${JSON.stringify(
 				cricketMatchData,
