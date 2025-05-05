@@ -63,7 +63,7 @@ export const generateImageURL = ({
 		: ``;
 	const crop = `${aspectRatio}${offset}`;
 	// In CODE, we do not generate optimised replacement images
-	if (url.hostname === 's3-eu-west-1.amazonaws.com') return url.href;
+	if (url.hostname === 'media.guimcode.co.uk') return url.href;
 
 	const params = new URLSearchParams({
 		width: imageWidth.toString(),
