@@ -11,19 +11,17 @@ Deno.test('noVariantOverlap - disallows variant overlap', () => {
 		expirationDate: new Date(),
 		type: 'client',
 		highImpact: false,
-		groups: [
-			{ id: 'control', size: 50 / 100 },
-			{ id: 'variant', size: 50 / 100 },
-		],
+		size: 100 / 100,
+		groups: ['control', 'variant'],
 	};
 
 	assertThrows(() => noVariantOverlap([overlapTest, overlapTest]));
 });
 
 Deno.test(
-	'noVariantOverlap - allows variant overlap with the allowOverlap setting',
+	'noVariantOverlap - allows variant overlap with secondary test space',
 	() => {
-		const overlapTest: ABTest = {
+		const primaryTest: ABTest = {
 			name: 'commercial-big-overlap',
 			description: 'Overlap the variants',
 			owners: ['commercial.dev@guardian.co.uk'],
@@ -31,14 +29,25 @@ Deno.test(
 			expirationDate: new Date(),
 			type: 'client',
 			highImpact: false,
-			groups: [
-				{ id: 'control', size: 50 / 100 },
-				{ id: 'variant', size: 50 / 100 },
-			],
-			allowOverlap: true,
+			size: 100 / 100,
+			groups: ['control', 'variant'],
+			testSpace: 'secondary',
 		};
 
-		assertEquals(noVariantOverlap([overlapTest, overlapTest]), true);
+		const secondaryTest: ABTest = {
+			name: 'commercial-big-overlap',
+			description: 'Overlap the variants',
+			owners: ['commercial.dev@guardian.co.uk'],
+			status: 'ON',
+			expirationDate: new Date(),
+			type: 'client',
+			highImpact: false,
+			size: 100 / 100,
+			groups: ['control', 'variant'],
+			testSpace: 'primary',
+		};
+
+		assertEquals(noVariantOverlap([primaryTest, secondaryTest]), true);
 	},
 );
 
@@ -51,10 +60,8 @@ Deno.test('noVariantOverlap - allows tests with no variant overlap', () => {
 		expirationDate: new Date(),
 		type: 'client',
 		highImpact: false,
-		groups: [
-			{ id: 'control', size: 5 / 100 },
-			{ id: 'variant', size: 5 / 100 },
-		],
+		size: 10 / 100,
+		groups: ['control', 'variant'],
 	};
 
 	assertEquals(noVariantOverlap([overlapTest, overlapTest]), true);
