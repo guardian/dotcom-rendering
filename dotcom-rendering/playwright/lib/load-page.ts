@@ -1,9 +1,7 @@
 import type { Page } from '@playwright/test';
-import { PORT } from 'playwright.config';
+import { BASE_URL } from 'playwright.config';
 import type { FEArticle } from '../../src/frontend/feArticle';
 import { validateAsFEArticle } from '../../src/model/validate';
-
-const BASE_URL = `http://localhost:${PORT}`;
 
 /**
  * Loads a page in Playwright and centralises setup
