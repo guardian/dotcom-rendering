@@ -1,10 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const isDev = process.env.NODE_ENV !== 'production';
-/**
- * The server port for local development or CI
- */
+const isDev = !process.env.CI;
 export const PORT = isDev ? 3030 : 9000;
+export const BASE_URL = `http://localhost:${PORT}`;
+export const BASE_URL_SECURE = `https://r.thegulocal.com`;
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -41,7 +40,7 @@ export default defineConfig({
 	webServer: {
 		// On CI the server is already started so a no-op
 		command: isDev ? 'make dev' : ':',
-		url: `http://localhost:${PORT}`,
+		url: BASE_URL,
 		reuseExistingServer: true,
 		stdout: 'pipe',
 		stderr: 'pipe',
