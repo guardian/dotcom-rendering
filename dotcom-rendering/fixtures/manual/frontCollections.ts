@@ -317,3 +317,34 @@ export const brandedTestCollections = [
 		displayName: 'Headlines',
 	},
 ] satisfies DCRCollectionType[];
+
+export const largeFlexibleGeneralCollection = [
+	{
+		...defaultValues,
+		grouped: {
+			...defaultGrouped,
+			splash: [trails[0]],
+			veryBig: [trails[1]],
+			big: [trails[2]],
+			standard: [trails[3], trails[4], trails[5], trails[6]],
+		},
+		collectionType: 'flexible/general',
+		containerLevel: 'Primary',
+	},
+] satisfies DCRCollectionType[];
+
+export const flexibleSpecialCollection = [
+	{
+		...defaultValues,
+		collectionType: 'flexible/special',
+		containerLevel: 'Primary',
+	},
+] satisfies DCRCollectionType[];
+
+export const secondaryScrollableSmallCollection = [
+	{
+		...defaultValues,
+		collectionType: 'scrollable/small',
+		containerLevel: 'Secondary',
+	},
+] satisfies DCRCollectionType[];

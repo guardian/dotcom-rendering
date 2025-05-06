@@ -1,27 +1,45 @@
 import {
 	brandedTestCollections,
+	flexibleSpecialCollection,
+	largeFlexibleGeneralCollection,
+	secondaryScrollableSmallCollection,
 	testCollectionsUk,
 	testCollectionsUs,
 	testCollectionsWithSecondaryLevel,
 } from '../../fixtures/manual/frontCollections';
 import type { DCRCollectionType } from '../types/front';
 import {
-	type AdCandidateMobile,
-	getFrontsBannerAdPositions,
+	type AdCandidate,
+	getDesktopAdPositions,
 	getMobileAdPositions,
 	removeConsecutiveAdSlotsReducer,
 } from './getFrontsAdPositions';
 
-const defaultTestCollections: AdCandidateMobile[] = [...Array<number>(12)].map(
-	() => ({ collectionType: 'fixed/large/slow-XIV' }),
+const testCollection: AdCandidate = {
+	collectionType: 'fixed/large/slow-XIV',
+	displayName: 'Test Collection',
+	containerLevel: 'Primary',
+	containerPalette: 'EventPalette',
+	grouped: {
+		snap: [],
+		splash: [],
+		huge: [],
+		veryBig: [],
+		big: [],
+		standard: [],
+	},
+};
+
+const defaultTestCollections: AdCandidate[] = [...Array<number>(12)].map(
+	() => ({ ...testCollection }),
 );
 
 describe('Mobile Ads', () => {
 	it(`Should not insert ad after container if it's the first one and it's a thrasher`, () => {
 		const testCollections = [
-			{ collectionType: 'fixed/thrasher' },
+			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			...defaultTestCollections,
-		] satisfies AdCandidateMobile[];
+		] satisfies AdCandidate[];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
@@ -31,16 +49,22 @@ describe('Mobile Ads', () => {
 	it(`should not insert an ad in the merchandising-high position`, () => {
 		const testCollections = [
 			...defaultTestCollections.slice(0, 3),
-			{ collectionType: 'news/most-popular' },
-		] satisfies AdCandidateMobile[];
+			{ ...testCollection, collectionType: 'news/most-popular' },
+		] satisfies AdCandidate[];
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 		expect(mobileAdPositions).not.toContain(3);
 	});
 
 	it('Should not insert ad before a thrasher container', () => {
 		const testCollections = [...defaultTestCollections];
-		testCollections.splice(6, 0, { collectionType: 'fixed/thrasher' });
-		testCollections.splice(9, 0, { collectionType: 'fixed/thrasher' });
+		testCollections.splice(6, 0, {
+			...testCollection,
+			collectionType: 'fixed/thrasher',
+		});
+		testCollections.splice(9, 0, {
+			...testCollection,
+			collectionType: 'fixed/thrasher',
+		});
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
 
@@ -50,20 +74,20 @@ describe('Mobile Ads', () => {
 
 	// We used https://www.theguardian.com/uk/commentisfree as a blueprint
 	it('Non-network front, with more than 4 collections, without thrashers', () => {
-		const testCollections: AdCandidateMobile[] = [
-			{ collectionType: 'fixed/large/slow-XIV' }, // Ad position (0)
-			{ collectionType: 'fixed/medium/slow-VI' },
-			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (2)
-			{ collectionType: 'fixed/small/slow-IV' },
-			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (4)
-			{ collectionType: 'dynamic/slow-mpu' },
-			{ collectionType: 'fixed/small/slow-I' }, // Ad position (6)
-			{ collectionType: 'fixed/medium/slow-VI' },
-			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (8)
-			{ collectionType: 'fixed/small/slow-III' },
-			{ collectionType: 'fixed/medium/fast-XII' }, // Ignored - is before merch high position
-			{ collectionType: 'fixed/small/fast-VIII' }, // Ignored - is merch high position
-			{ collectionType: 'news/most-popular' }, // Ignored - is most viewed container
+		const testCollections: AdCandidate[] = [
+			{ ...testCollection, collectionType: 'fixed/large/slow-XIV' }, // Ad position (0)
+			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' },
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (2)
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (4)
+			{ ...testCollection, collectionType: 'dynamic/slow-mpu' },
+			{ ...testCollection, collectionType: 'fixed/small/slow-I' }, // Ad position (6)
+			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' },
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (8)
+			{ ...testCollection, collectionType: 'fixed/small/slow-III' },
+			{ ...testCollection, collectionType: 'fixed/medium/fast-XII' }, // Ignored - is before merch high position
+			{ ...testCollection, collectionType: 'fixed/small/fast-VIII' }, // Ignored - is merch high position
+			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
@@ -73,31 +97,31 @@ describe('Mobile Ads', () => {
 
 	// We used https://www.theguardian.com/uk as a blueprint
 	it('UK Network Front, with more than 4 collections, with thrashers at various places', () => {
-		const testCollections: AdCandidateMobile[] = [
-			{ collectionType: 'dynamic/fast' }, // Ad position (0)
-			{ collectionType: 'fixed/small/slow-IV' },
-			{ collectionType: 'dynamic/slow' }, // Ad position (2)
-			{ collectionType: 'dynamic/slow' },
-			{ collectionType: 'fixed/small/slow-V-mpu' }, // Ad position (4)
-			{ collectionType: 'dynamic/slow' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' },
-			{ collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (8)
-			{ collectionType: 'dynamic/fast' },
-			{ collectionType: 'dynamic/fast' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (11)
-			{ collectionType: 'dynamic/slow-mpu' },
-			{ collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (14)
-			{ collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' },
-			{ collectionType: 'fixed/video' }, // Ad position (17)
-			{ collectionType: 'fixed/small/slow-IV' },
-			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (19)
-			{ collectionType: 'dynamic/slow-mpu' },
-			{ collectionType: 'fixed/small/slow-IV' }, // Ignored - is before merch high position
-			{ collectionType: 'fixed/medium/slow-VI' }, // Ignored - is merch high position
-			{ collectionType: 'news/most-popular' }, // Ignored - is most viewed container
+		const testCollections: AdCandidate[] = [
+			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ad position (0)
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
+			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ad position (2)
+			{ ...testCollection, collectionType: 'dynamic/slow' },
+			{ ...testCollection, collectionType: 'fixed/small/slow-V-mpu' }, // Ad position (4)
+			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' },
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (8)
+			{ ...testCollection, collectionType: 'dynamic/fast' },
+			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (11)
+			{ ...testCollection, collectionType: 'dynamic/slow-mpu' },
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (14)
+			{ ...testCollection, collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' },
+			{ ...testCollection, collectionType: 'fixed/video' }, // Ad position (17)
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (19)
+			{ ...testCollection, collectionType: 'dynamic/slow-mpu' },
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - is before merch high position
+			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ignored - is merch high position
+			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
@@ -107,27 +131,27 @@ describe('Mobile Ads', () => {
 
 	// We used https://www.theguardian.com/international as a blueprint
 	it('International Network Front, with more than 4 collections, with thrashers at various places', () => {
-		const testCollections: AdCandidateMobile[] = [
-			{ collectionType: 'dynamic/fast' }, // Ad position (0)
-			{ collectionType: 'fixed/small/slow-IV' },
-			{ collectionType: 'dynamic/slow' }, // Ad position (2)
-			{ collectionType: 'dynamic/slow-mpu' },
-			{ collectionType: 'dynamic/slow' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (5)
-			{ collectionType: 'fixed/small/slow-IV' },
-			{ collectionType: 'dynamic/fast' }, // Ad position (7)
-			{ collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' },
-			{ collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (11)
-			{ collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' },
-			{ collectionType: 'dynamic/slow-mpu' }, // Ad position (14)
-			{ collectionType: 'fixed/small/slow-IV' },
-			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (16)
-			{ collectionType: 'fixed/video' },
-			{ collectionType: 'fixed/medium/slow-VI' }, // Ignored - is merch high position
-			{ collectionType: 'news/most-popular' }, // Ignored - is most viewed container
+		const testCollections: AdCandidate[] = [
+			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ad position (0)
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
+			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ad position (2)
+			{ ...testCollection, collectionType: 'dynamic/slow-mpu' },
+			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (5)
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
+			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ad position (7)
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' },
+			{ ...testCollection, collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (11)
+			{ ...testCollection, collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' },
+			{ ...testCollection, collectionType: 'dynamic/slow-mpu' }, // Ad position (14)
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (16)
+			{ ...testCollection, collectionType: 'fixed/video' },
+			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ignored - is merch high position
+			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
@@ -137,28 +161,28 @@ describe('Mobile Ads', () => {
 
 	// We used https://www.theguardian.com/us as a blueprint
 	it('US Network Front, with more than 4 collections, with thrashers at various places', () => {
-		const testCollections: AdCandidateMobile[] = [
-			{ collectionType: 'dynamic/fast' }, // Ad position (0)
-			{ collectionType: 'fixed/small/slow-IV' },
-			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (2)
-			{ collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' },
-			{ collectionType: 'dynamic/slow' }, // Ad position (5)
-			{ collectionType: 'dynamic/slow' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' },
-			{ collectionType: 'fixed/small/slow-III' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (9)
-			{ collectionType: 'fixed/small/slow-IV' },
-			{ collectionType: 'dynamic/fast' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (12)
-			{ collectionType: 'fixed/medium/slow-VI' },
-			{ collectionType: 'dynamic/fast' }, // Ad position (14)
-			{ collectionType: 'dynamic/fast' },
-			{ collectionType: 'fixed/small/slow-V-mpu' }, // Ad position (16)
-			{ collectionType: 'fixed/video' },
-			{ collectionType: 'fixed/small/slow-III' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ignored - is merch high position
-			{ collectionType: 'news/most-popular' }, // Ignored - is most viewed container
+		const testCollections: AdCandidate[] = [
+			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ad position (0)
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (2)
+			{ ...testCollection, collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' },
+			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ad position (5)
+			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' },
+			{ ...testCollection, collectionType: 'fixed/small/slow-III' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (9)
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
+			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (12)
+			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' },
+			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ad position (14)
+			{ ...testCollection, collectionType: 'dynamic/fast' },
+			{ ...testCollection, collectionType: 'fixed/small/slow-V-mpu' }, // Ad position (16)
+			{ ...testCollection, collectionType: 'fixed/video' },
+			{ ...testCollection, collectionType: 'fixed/small/slow-III' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ignored - is merch high position
+			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
@@ -168,23 +192,23 @@ describe('Mobile Ads', () => {
 
 	// We used https://www.theguardian.com/uk/lifeandstyle as a blueprint
 	it('Lifeandstyle front, with more than 4 collections, with thrashers at various places', () => {
-		const testCollections: AdCandidateMobile[] = [
-			{ collectionType: 'dynamic/slow' }, // Ad position (0)
-			{ collectionType: 'fixed/medium/slow-VI' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' },
-			{ collectionType: 'fixed/medium/slow-VI' }, // Ad position (3)
-			{ collectionType: 'fixed/small/slow-V-third' },
-			{ collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (6)
-			{ collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' },
-			{ collectionType: 'fixed/medium/slow-VI' }, // Ad position (9)
-			{ collectionType: 'fixed/medium/slow-XII-mpu' },
-			{ collectionType: 'fixed/small/fast-VIII' }, // Ignored - before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (12)
-			{ collectionType: 'fixed/small/slow-III' },
-			{ collectionType: 'fixed/small/slow-I' }, // Ignored - is merch high position
-			{ collectionType: 'news/most-popular' }, // Ignored - is most viewed container
+		const testCollections: AdCandidate[] = [
+			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ad position (0)
+			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' },
+			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ad position (3)
+			{ ...testCollection, collectionType: 'fixed/small/slow-V-third' },
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (6)
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' },
+			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ad position (9)
+			{ ...testCollection, collectionType: 'fixed/medium/slow-XII-mpu' },
+			{ ...testCollection, collectionType: 'fixed/small/fast-VIII' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (12)
+			{ ...testCollection, collectionType: 'fixed/small/slow-III' },
+			{ ...testCollection, collectionType: 'fixed/small/slow-I' }, // Ignored - is merch high position
+			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
@@ -194,21 +218,21 @@ describe('Mobile Ads', () => {
 
 	// We used https://www.theguardian.com/tone/recipes as a blueprint
 	it('Recipes front, with more than 4 collections, with thrasher at the first position', () => {
-		const testCollections: AdCandidateMobile[] = [
-			{ collectionType: 'fixed/thrasher' }, // Ignored - is first container and thrasher
-			{ collectionType: 'fixed/medium/slow-VI' }, // Ad position (1)
-			{ collectionType: 'fixed/small/slow-V-third' },
-			{ collectionType: 'fixed/medium/slow-XII-mpu' }, // Ad position (3)
-			{ collectionType: 'fixed/medium/fast-XII' },
-			{ collectionType: 'fixed/small/slow-V-third' }, // Ad position (5)
-			{ collectionType: 'fixed/small/fast-VIII' },
-			{ collectionType: 'fixed/medium/fast-XI' }, // Ad position (7)
-			{ collectionType: 'fixed/small/slow-III' },
-			{ collectionType: 'fixed/small/slow-IV' }, // Ad position (9)
-			{ collectionType: 'fixed/small/slow-V-half' },
-			{ collectionType: 'fixed/small/slow-V-third' }, // Ignored - is before merch high position
-			{ collectionType: 'fixed/small/fast-VIII' }, // Ignored - is merch high position
-			{ collectionType: 'news/most-popular' }, // Ignored - is most viewed container
+		const testCollections: AdCandidate[] = [
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ignored - is first container and thrasher
+			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ad position (1)
+			{ ...testCollection, collectionType: 'fixed/small/slow-V-third' },
+			{ ...testCollection, collectionType: 'fixed/medium/slow-XII-mpu' }, // Ad position (3)
+			{ ...testCollection, collectionType: 'fixed/medium/fast-XII' },
+			{ ...testCollection, collectionType: 'fixed/small/slow-V-third' }, // Ad position (5)
+			{ ...testCollection, collectionType: 'fixed/small/fast-VIII' },
+			{ ...testCollection, collectionType: 'fixed/medium/fast-XI' }, // Ad position (7)
+			{ ...testCollection, collectionType: 'fixed/small/slow-III' },
+			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (9)
+			{ ...testCollection, collectionType: 'fixed/small/slow-V-half' },
+			{ ...testCollection, collectionType: 'fixed/small/slow-V-third' }, // Ignored - is before merch high position
+			{ ...testCollection, collectionType: 'fixed/small/fast-VIII' }, // Ignored - is merch high position
+			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
@@ -217,47 +241,105 @@ describe('Mobile Ads', () => {
 	});
 
 	it('Europe Network Front, with beta containers and more than 4 collections, with thrashers in various places', () => {
-		const testCollections: AdCandidateMobile[] = [
-			{ collectionType: 'flexible/general', containerLevel: 'Primary' }, // Ignored - is before secondary container
-			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ignored - is before secondary container
-			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ignored - is before secondary container
+		const testCollections: AdCandidate[] = [
 			{
+				...testCollection,
+				collectionType: 'flexible/general',
+				containerLevel: 'Primary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
+				collectionType: 'scrollable/small',
+				containerLevel: 'Secondary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
+				collectionType: 'scrollable/small',
+				containerLevel: 'Secondary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
 				collectionType: 'scrollable/medium',
 				containerLevel: 'Secondary',
 			}, // Ignored - is before secondary container
 			{
+				...testCollection,
 				collectionType: 'scrollable/feature',
 				containerLevel: 'Secondary',
 			}, // Ad position (4)
-			{ collectionType: 'static/feature/2', containerLevel: 'Primary' }, // Ignored - is before secondary container
 			{
+				...testCollection,
+				collectionType: 'static/feature/2',
+				containerLevel: 'Primary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
 				collectionType: 'scrollable/medium',
 				containerLevel: 'Secondary',
 			}, // Ad position (6)
-			{ collectionType: 'flexible/special', containerLevel: 'Primary' }, // Ignored - is before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (8)
-			{ collectionType: 'flexible/general', containerLevel: 'Primary' }, // Ignored is consecutive ad after position 8
-			{ collectionType: 'static/feature/2', containerLevel: 'Primary' }, // Ignored - is before secondary container
-			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ignored - is before secondary container
-			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ignored - is before secondary container
-			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ad position (13)
-			{ collectionType: 'static/feature/2', containerLevel: 'Primary' }, // Ignored - is before secondary container
 			{
+				...testCollection,
+				collectionType: 'flexible/special',
+				containerLevel: 'Primary',
+			}, // Ignored - is before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (8)
+			{
+				...testCollection,
+				collectionType: 'flexible/general',
+				containerLevel: 'Primary',
+			}, // Ignored is consecutive ad after position 8
+			{
+				...testCollection,
+				collectionType: 'static/feature/2',
+				containerLevel: 'Primary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
+				collectionType: 'scrollable/small',
+				containerLevel: 'Secondary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
+				collectionType: 'scrollable/small',
+				containerLevel: 'Secondary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
+				collectionType: 'scrollable/small',
+				containerLevel: 'Secondary',
+			}, // Ad position (13)
+			{
+				...testCollection,
+				collectionType: 'static/feature/2',
+				containerLevel: 'Primary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
 				collectionType: 'scrollable/medium',
 				containerLevel: 'Secondary',
 			}, // Ignored - is before secondary container
 			{
+				...testCollection,
 				collectionType: 'scrollable/medium',
 				containerLevel: 'Secondary',
 			}, // Ignored - is before secondary container
-			{ collectionType: 'scrollable/small', containerLevel: 'Secondary' }, // Ignored - is before thrasher
-			{ collectionType: 'fixed/thrasher' }, // Ad position (18)
-			{ collectionType: 'flexible/general', containerLevel: 'Primary' }, // Ignored - is before secondary container
 			{
+				...testCollection,
+				collectionType: 'scrollable/small',
+				containerLevel: 'Secondary',
+			}, // Ignored - is before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (18)
+			{
+				...testCollection,
+				collectionType: 'flexible/general',
+				containerLevel: 'Primary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
 				collectionType: 'scrollable/feature',
 				containerLevel: 'Secondary',
 			}, // Ignored - is merch high position
-			{ collectionType: 'news/most-popular' }, // Ignored - is most viewed container
+			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
 		const mobileAdPositions = getMobileAdPositions(testCollections);
@@ -266,30 +348,27 @@ describe('Mobile Ads', () => {
 	});
 });
 
-describe('Standard fronts fronts-banner ad slots', () => {
+describe('Desktop Ads', () => {
 	it('calculates ad positions correctly for an example of the UK network front', () => {
-		const adPositions = getFrontsBannerAdPositions(testCollectionsUk, 'uk');
+		const adPositions = getDesktopAdPositions(testCollectionsUk, 'uk');
 
 		expect(adPositions).toEqual([3, 6, 8, 11, 14, 17]);
 	});
 
 	it('calculates ad positions correctly for an example of the US network front', () => {
-		const adPositions = getFrontsBannerAdPositions(testCollectionsUs, 'us');
+		const adPositions = getDesktopAdPositions(testCollectionsUs, 'us');
 
 		expect(adPositions).toEqual([3, 6, 8, 11, 13, 18]);
 	});
 
 	it('does NOT insert ads above or below branded content', () => {
-		const adPositions = getFrontsBannerAdPositions(
-			brandedTestCollections,
-			'uk',
-		);
+		const adPositions = getDesktopAdPositions(brandedTestCollections, 'uk');
 
 		expect(adPositions).toEqual([]);
 	});
 
 	it('does NOT insert ads above secondary level containers', () => {
-		const adPositions = getFrontsBannerAdPositions(
+		const adPositions = getDesktopAdPositions(
 			testCollectionsWithSecondaryLevel,
 			'europe',
 		);
@@ -298,7 +377,7 @@ describe('Standard fronts fronts-banner ad slots', () => {
 	});
 
 	it('inserts a maximum of 6 ads for standard fronts', () => {
-		const adPositions = getFrontsBannerAdPositions(
+		const adPositions = getDesktopAdPositions(
 			// Double number of UK collections in fixture to reach maximum
 			[...testCollectionsUk, ...testCollectionsUk],
 			'europe',
@@ -308,7 +387,7 @@ describe('Standard fronts fronts-banner ad slots', () => {
 	});
 
 	it('inserts a maximum of 8 ads for fronts with beta collections', () => {
-		const adPositions = getFrontsBannerAdPositions(
+		const adPositions = getDesktopAdPositions(
 			// 10x number of test collections in fixture to reach maximum level
 			new Array<DCRCollectionType[]>(10)
 				.fill(testCollectionsWithSecondaryLevel)
@@ -317,6 +396,49 @@ describe('Standard fronts fronts-banner ad slots', () => {
 		);
 
 		expect(adPositions.length).toEqual(8);
+	});
+});
+
+describe('inserting an extra ad after the first collection', () => {
+	describe('on desktop', () => {
+		it('inserts an ad after the first collection if it is a large flexible general container and is followed by two secondary containers', () => {
+			const adPositions = getDesktopAdPositions(
+				[
+					...largeFlexibleGeneralCollection,
+					...secondaryScrollableSmallCollection,
+					...secondaryScrollableSmallCollection,
+				],
+				'uk',
+			);
+
+			expect(adPositions).toEqual([1]);
+		});
+
+		it('does NOT insert an ad after the first collection if it is not followed by at least two secondary containers', () => {
+			const adPositions = getDesktopAdPositions(
+				[
+					...largeFlexibleGeneralCollection,
+					...secondaryScrollableSmallCollection,
+					...largeFlexibleGeneralCollection, // We do not insert an ad above the final collection on desktop
+				],
+				'uk',
+			);
+
+			expect(adPositions).toEqual([]);
+		});
+
+		it('does NOT insert an ad after the first collection if it is a flexible special container', () => {
+			const adPositions = getDesktopAdPositions(
+				[
+					...flexibleSpecialCollection,
+					...secondaryScrollableSmallCollection,
+					...secondaryScrollableSmallCollection,
+				],
+				'uk',
+			);
+
+			expect(adPositions).toEqual([]);
+		});
 	});
 });
 
