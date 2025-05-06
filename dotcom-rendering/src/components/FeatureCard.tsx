@@ -447,6 +447,8 @@ export const FeatureCard = ({
 										discussionApiUrl={discussionApiUrl}
 										isFeatureCard={true}
 										isImmersive={isImmersive}
+										byline={byline}
+										showByline={showByline}
 									/>
 								</Island>
 							</div>

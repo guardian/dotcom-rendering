@@ -126,6 +126,8 @@ type Props = {
 	discussionApiUrl?: string;
 	discussionId?: string;
 	isImmersive?: boolean;
+	byline?: string;
+	showByline?: boolean;
 };
 
 export const YoutubeAtomFeatureCardOverlay = ({
@@ -151,6 +153,8 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	discussionId,
 	discussionApiUrl,
 	isImmersive,
+	byline,
+	showByline,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
@@ -217,6 +221,8 @@ export const YoutubeAtomFeatureCardOverlay = ({
 							headlineColour={palette('--feature-card-headline')}
 							kickerColour={palette('--feature-card-kicker-text')}
 							isBetaContainer={true}
+							byline={byline}
+							showByline={showByline}
 						/>
 					)}
 					{!!trailText && (
