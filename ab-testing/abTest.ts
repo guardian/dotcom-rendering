@@ -11,10 +11,20 @@ export const ABTests: ABTest[] = [
 		expirationDate: new Date('2025-05-30'),
 		type: 'client',
 		highImpact: false,
-		groups: [
-			{ id: 'control', size: 5 / 100 },
-			{ id: 'variant', size: 5 / 100 },
-		],
+		size: 10 / 100,
+		groups: ['control', 'variant'],
+	},
+	{
+		name: 'commercial-ad-block-ask-4',
+		description:
+			'Show new ad block ask component in ad slots when we detect ad blocker usage',
+		owners: ['commercial.dev@guardian.co.uk'],
+		status: 'ON',
+		expirationDate: new Date('2025-05-30'),
+		type: 'client',
+		highImpact: false,
+		size: 20 / 100,
+		groups: ['control', 'variant'],
 	},
 	// Example server side AB test definition
 	{
@@ -29,11 +39,24 @@ export const ABTests: ABTest[] = [
 		expirationDate: new Date('2025-05-30'),
 		type: 'server',
 		highImpact: false,
-		groups: [
-			{ id: 'control', size: 50 / 100 },
-			{ id: 'variant', size: 50 / 100 },
+		size: 100 / 100,
+		groups: ['control', 'variant'],
+		testSpace: 'secondary',
+	},
+	{
+		name: 'commercial-some-test-2',
+		description:
+			'Allows viewing the beta version of the Europe network front',
+		owners: [
+			'project.fairground@theguardian.com',
+			'dotcom.platform@theguardian.com',
 		],
-		allowOverlap: true,
+		status: 'ON',
+		expirationDate: new Date('2025-05-02'),
+		type: 'server',
+		highImpact: false,
+		size: 10 / 100,
+		groups: ['control', 'variant'],
 	},
 	{
 		name: 'commercial-some-test',
@@ -47,10 +70,7 @@ export const ABTests: ABTest[] = [
 		expirationDate: new Date('2025-05-02'),
 		type: 'server',
 		highImpact: false,
-		groups: [
-			{ id: 'control', size: 20 / 100 },
-			{ id: 'variant', size: 20 / 100 },
-		],
-		allowOverlap: true,
+		size: 10 / 100,
+		groups: ['control', 'variant'],
 	},
 ];
