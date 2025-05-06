@@ -36,6 +36,17 @@ const abTestsToMVTs = (
 	const primaryMVTGroups = testsToArray(primaryTests);
 	const secondaryMVTGroups = testsToArray(secondaryTests);
 
+	if (primaryMVTGroups.length > MAX_MVT_GROUPS) {
+		throw new Error(
+			`The the primary test space test sizes add up to > 100%.`,
+		);
+	}
+	if (secondaryMVTGroups.length > MAX_MVT_GROUPS) {
+		throw new Error(
+			`The the secondary test space test sizes add up to > 100%.`,
+		);
+	}
+
 	const mvtKVs: Record<`mvt:${number}`, string[]> = {};
 
 	for (let i = 0; i < MAX_MVT_GROUPS; i++) {
