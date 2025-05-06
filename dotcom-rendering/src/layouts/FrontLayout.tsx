@@ -39,7 +39,7 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { editionList } from '../lib/edition';
 import {
-	getFrontsBannerAdPositions,
+	getDesktopAdPositions,
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getFrontsAdPositions';
@@ -127,7 +127,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		: [];
 
 	const desktopAdPositions = renderAds
-		? getFrontsBannerAdPositions(filteredCollections, pageId)
+		? getDesktopAdPositions(filteredCollections, pageId)
 		: [];
 
 	const showMostPopular =
