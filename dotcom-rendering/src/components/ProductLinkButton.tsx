@@ -14,8 +14,6 @@ export const ProductLinkButton = ({ label, link }: ProductLinkButtonProps) => {
 			onClick={() => {
 				window.open(link, '_blank');
 			}}
-			size="default"
-			priority="primary"
 			iconSide="right"
 			icon={<SvgArrowRightStraight />}
 		>
