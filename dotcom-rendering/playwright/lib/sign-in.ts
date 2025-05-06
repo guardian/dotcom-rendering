@@ -103,7 +103,7 @@ const signIn = async (page: Page, context: BrowserContext): Promise<void> => {
 	const { email, password } = await createTestUser();
 
 	await page.fill('input[name=email]', email);
-	await page.click('button:text("Sign in with a password instead")');
+	await page.click('a:text("Sign in with a password instead")');
 
 	await page.waitForLoadState('load');
 	await expectToExist(page, '[data-cy="main-form-submit-button"]');
