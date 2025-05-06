@@ -2,7 +2,7 @@ import {
 	brandedTestCollections,
 	flexibleSpecialCollection,
 	largeFlexibleGeneralCollection,
-	secondaryScrollableSmallCollection,
+	smallFlexibleGeneralCollection,
 	testCollectionsUk,
 	testCollectionsUs,
 	testCollectionsWithSecondaryLevel,
@@ -400,44 +400,141 @@ describe('Desktop Ads', () => {
 });
 
 describe('inserting an extra ad after the first collection', () => {
-	describe('on desktop', () => {
+	describe('on mobile', () => {
 		it('inserts an ad after the first collection if it is a large flexible general container and is followed by two secondary containers', () => {
+			const adPositions = getMobileAdPositions([
+				...largeFlexibleGeneralCollection,
+				{
+					...testCollection,
+					collectionType: 'scrollable/small',
+					containerLevel: 'Secondary',
+				},
+				{
+					...testCollection,
+					collectionType: 'scrollable/medium',
+					containerLevel: 'Secondary',
+				},
+			]);
+
+			expect(adPositions).toContain(0);
+		});
+
+		it('does NOT insert an ad after the first collection if it is not followed by at least two secondary containers', () => {
+			const adPositions = getMobileAdPositions([
+				...largeFlexibleGeneralCollection,
+				{
+					...testCollection,
+					collectionType: 'scrollable/small',
+					containerLevel: 'Secondary',
+				},
+				{
+					...testCollection,
+					collectionType: 'flexible/general',
+					containerLevel: 'Primary',
+				},
+			]);
+
+			expect(adPositions).not.toContain(0);
+		});
+
+		it('does NOT insert an ad after the first collection if it is a flexible special container', () => {
+			const adPositions = getMobileAdPositions([
+				...flexibleSpecialCollection,
+				{
+					...testCollection,
+					collectionType: 'scrollable/small',
+					containerLevel: 'Secondary',
+				},
+				{
+					...testCollection,
+					collectionType: 'scrollable/medium',
+					containerLevel: 'Secondary',
+				},
+			]);
+
+			expect(adPositions).not.toContain(0);
+		});
+	});
+
+	describe('on desktop', () => {
+		it('inserts an ad before the second collection if it is a secondary container, preceded by a large flexible general container and followed by a secondary container', () => {
 			const adPositions = getDesktopAdPositions(
 				[
 					...largeFlexibleGeneralCollection,
-					...secondaryScrollableSmallCollection,
-					...secondaryScrollableSmallCollection,
+					{
+						...testCollection,
+						collectionType: 'scrollable/small',
+						containerLevel: 'Secondary',
+					},
+					{
+						...testCollection,
+						collectionType: 'scrollable/medium',
+						containerLevel: 'Secondary',
+					},
 				],
 				'uk',
 			);
 
-			expect(adPositions).toEqual([1]);
+			expect(adPositions).toContain(1);
 		});
 
-		it('does NOT insert an ad after the first collection if it is not followed by at least two secondary containers', () => {
+		it('does NOT insert an ad before the second collection if it is by a small flexible general container', () => {
+			const adPositions = getDesktopAdPositions(
+				[
+					...smallFlexibleGeneralCollection,
+					{
+						...testCollection,
+						collectionType: 'scrollable/small',
+						containerLevel: 'Secondary',
+					},
+					{
+						...testCollection,
+						collectionType: 'scrollable/medium',
+						containerLevel: 'Secondary',
+					},
+				],
+				'uk',
+			);
+
+			expect(adPositions).not.toContain(1);
+		});
+
+		it('does NOT insert an ad before the second collection if it is not preceded by a flexible general container', () => {
+			const adPositions = getDesktopAdPositions(
+				[
+					...flexibleSpecialCollection,
+					{
+						...testCollection,
+						collectionType: 'scrollable/small',
+						containerLevel: 'Secondary',
+					},
+					{
+						...testCollection,
+						collectionType: 'scrollable/medium',
+						containerLevel: 'Secondary',
+					},
+				],
+				'uk',
+			);
+
+			expect(adPositions).not.toContain(1);
+		});
+
+		it('does NOT insert an ad before the second collection if it is not followed by a secondary container', () => {
 			const adPositions = getDesktopAdPositions(
 				[
 					...largeFlexibleGeneralCollection,
-					...secondaryScrollableSmallCollection,
+					{
+						...testCollection,
+						collectionType: 'scrollable/small',
+						containerLevel: 'Secondary',
+					},
 					...largeFlexibleGeneralCollection, // We do not insert an ad above the final collection on desktop
 				],
 				'uk',
 			);
 
-			expect(adPositions).toEqual([]);
-		});
-
-		it('does NOT insert an ad after the first collection if it is a flexible special container', () => {
-			const adPositions = getDesktopAdPositions(
-				[
-					...flexibleSpecialCollection,
-					...secondaryScrollableSmallCollection,
-					...secondaryScrollableSmallCollection,
-				],
-				'uk',
-			);
-
-			expect(adPositions).toEqual([]);
+			expect(adPositions).not.toContain(1);
 		});
 	});
 });

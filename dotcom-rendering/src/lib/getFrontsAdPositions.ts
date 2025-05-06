@@ -123,11 +123,13 @@ const canInsertMobileAd =
 			!isMostViewedContainer(collection),
 		];
 
-		/** Additional rules exist for "beta" fronts which have primary and secondary level containers */
+		/**
+		 * Additional rules exist for "beta" fronts which have primary and secondary level containers
+		 * - Is NOT before a secondary level container
+		 * - Is NOT before a branded container
+		 */
 		const betaFrontRules = [
-			// Prevent insertion before a secondary level container
 			!isBeforeSecondaryLevelContainer(index, collections),
-			// Prevent insertion before a branded container
 			!isBeforeBrandedContainer(index, collections),
 		];
 
@@ -141,33 +143,61 @@ const isEvenIndex = (_collection: unknown, index: number): boolean =>
 	index % 2 === 0;
 
 /**
- * Filters out unsuitable positions then takes every other position for possible ad insertion,
- * up to a maximum of `MAX_FRONTS_MOBILE_ADS`
+ * On network fronts, we often start with a large primary flexible general collection followed
+ * by multiple secondary collections. When this happens, there is usually space to insert an ad
+ * between the Primary and Secondary collections without two ads being in the same viewport.
+ */
+const shouldInsertExtraAdAfterFirstContainer = (collections: AdCandidate[]) => {
+	if (collections.length < 3) {
+		return false;
+	}
+
+	const firstContainer = collections[0];
+
+	return (
+		firstContainer?.collectionType === 'flexible/general' &&
+		firstContainer.containerLevel === 'Primary' &&
+		getFlexibleGeneralHeight(firstContainer.grouped) >= 3 &&
+		collections[1]?.containerLevel === 'Secondary' &&
+		collections[2]?.containerLevel === 'Secondary'
+	);
+};
+
+/**
+ * Filters out unsuitable positions then takes every other position for
+ * possible ad insertion, up to a maximum of `MAX_FRONTS_MOBILE_ADS`.
  */
 const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
 	const merchHighPosition = getMerchHighPosition(collections);
 	const hasSecondaryContainers = hasSecondaryLevelContainers(collections);
 
-	return (
-		collections
-			.filter(
-				canInsertMobileAd(merchHighPosition, hasSecondaryContainers),
-			)
-			// Use every other ad position if the front has no secondary containers
-			.filter((c, i) =>
-				hasSecondaryContainers ? true : isEvenIndex(c, i),
-			)
-			.map((collection) => collections.indexOf(collection))
-			.filter((adPosition: number) => adPosition !== -1)
-			// Avoid consecutive ad slots if the front does have secondary containers
-			.reduce(
-				hasSecondaryContainers
-					? removeConsecutiveAdSlotsReducer
-					: (acc: number[], el: number) => [...acc, el], // returns the original array
-				[],
-			)
-			.slice(0, MAX_FRONTS_MOBILE_ADS)
-	);
+	const adPositions = collections
+		.filter(canInsertMobileAd(merchHighPosition, hasSecondaryContainers))
+		// Use every other ad position if the front has no secondary containers
+		.filter((c, i) => (hasSecondaryContainers ? true : isEvenIndex(c, i)))
+		.map((collection) => collections.indexOf(collection))
+		.filter((adPosition: number) => adPosition !== -1)
+		// Avoid consecutive ad slots if the front does have secondary containers
+		.reduce(
+			hasSecondaryContainers
+				? removeConsecutiveAdSlotsReducer
+				: (acc: number[], el: number) => [...acc, el], // returns the original array
+			[],
+		)
+		.slice(0, MAX_FRONTS_MOBILE_ADS);
+
+	/**
+	 * Special case: insert an extra ad after the first container if there is space for it.
+	 */
+	if (
+		!adPositions.includes(0) &&
+		!adPositions.includes(1) &&
+		shouldInsertExtraAdAfterFirstContainer(collections.slice(0, 3))
+	) {
+		adPositions.unshift(0);
+	}
+
+	return adPositions;
 };
 
 /**
@@ -362,24 +392,6 @@ const getCollectionHeight = (collection: AdCandidate): number => {
 };
 
 /**
- * On network fronts, we often start with a large primary flexible general collection followed
- * by multiple secondary collections. When this happens, there is usually space to insert an ad
- * between the Primary and Secondary collections without two ads being in the same viewport.
- */
-const shouldInsertExtraAdInAfterFirstContainer = (
-	collections: AdCandidate[],
-) => {
-	const firstContainer = collections[0];
-	return (
-		firstContainer?.collectionType === 'flexible/general' &&
-		firstContainer.containerLevel === 'Primary' &&
-		getFlexibleGeneralHeight(firstContainer.grouped) >= 3 &&
-		collections[1]?.containerLevel === 'Secondary' &&
-		collections[2]?.containerLevel === 'Secondary'
-	);
-};
-
-/**
  * Checks if destkop ad insertion is possible immediately before the
  * position of the current collection
  *
@@ -427,6 +439,12 @@ const canInsertDesktopAd = (
  *
  * Doesn't insert an ad above the final collection. We serve a merchandising slot below the
  * last collection and we don't want to sandwich the last collection between two full-width ads.
+ *
+ * | ------------------ |
+ * | Next collection    |
+ * . ------------------ | <-- Maybe ad position
+ * | Current collection |
+ * | ------------------ |
  */
 const getDesktopAdPositions = (
 	collections: AdCandidate[],
@@ -483,11 +501,11 @@ const getDesktopAdPositions = (
 	).adPositions;
 
 	/**
-	 * Insert an extra ad after the first container if there is space for it.
+	 * Special case: insert an extra ad after the first container if there is space for it.
 	 */
 	if (
 		!adPositionsFromReducer.includes(1) &&
-		shouldInsertExtraAdInAfterFirstContainer(collections.slice(0, 3))
+		shouldInsertExtraAdAfterFirstContainer(collections.slice(0, 3))
 	) {
 		adPositionsFromReducer.unshift(1);
 	}

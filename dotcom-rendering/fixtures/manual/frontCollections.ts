@@ -333,18 +333,22 @@ export const largeFlexibleGeneralCollection = [
 	},
 ] satisfies DCRCollectionType[];
 
+export const smallFlexibleGeneralCollection = [
+	{
+		...defaultValues,
+		grouped: {
+			...defaultGrouped,
+			standard: [trails[0]],
+		},
+		collectionType: 'flexible/general',
+		containerLevel: 'Primary',
+	},
+] satisfies DCRCollectionType[];
+
 export const flexibleSpecialCollection = [
 	{
 		...defaultValues,
 		collectionType: 'flexible/special',
 		containerLevel: 'Primary',
-	},
-] satisfies DCRCollectionType[];
-
-export const secondaryScrollableSmallCollection = [
-	{
-		...defaultValues,
-		collectionType: 'scrollable/small',
-		containerLevel: 'Secondary',
 	},
 ] satisfies DCRCollectionType[];
