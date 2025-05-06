@@ -43,9 +43,14 @@ type IDAPITestUser = {
 };
 
 const createTestUser = async (): Promise<IDAPITestUser> => {
-	const email = `dcr-e2e-${randomUUID()}@theguardian.com`;
-	const password = randomUUID();
 	try {
+		if (!process.env.IDAPI_CLIENT_ACCESS_TOKEN) {
+			throw new Error(
+				'IDAPI_CLIENT_ACCESS_TOKEN environment variable is not set',
+			);
+		}
+		const email = `dcr-e2e-${randomUUID()}@theguardian.com`;
+		const password = randomUUID();
 		const response = await fetch(
 			'https://idapi.code.dev-theguardian.com/user/test',
 			{
@@ -93,7 +98,7 @@ const signIn = async (page: Page, context: BrowserContext): Promise<void> => {
 	await page.click('text="Sign in"');
 
 	await page.waitForLoadState('load');
-	await expectToExist(page, 'button:text("Sign in with a password instead")');
+	await expectToExist(page, 'a:text("Sign in with a password instead")');
 
 	const { email, password } = await createTestUser();
 
@@ -107,6 +112,7 @@ const signIn = async (page: Page, context: BrowserContext): Promise<void> => {
 	await page.click('[data-cy="main-form-submit-button"]');
 
 	await page.waitForURL(startPage);
+	await page.waitForLoadState('load');
 };
 
 export { createTestUser, signIn };
