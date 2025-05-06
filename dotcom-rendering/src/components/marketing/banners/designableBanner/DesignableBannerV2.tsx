@@ -309,9 +309,13 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		? content.mainContent
 		: content.mobileContent;
 
+	const isVatCompliantCountry =
+		choiceCardAmounts?.testName !== 'VAT_COMPLIANCE';
+
 	const showChoiceCards = !!(
 		templateSettings.choiceCardSettings &&
-		choiceCardAmounts?.amountsCardData
+		choiceCardAmounts?.amountsCardData &&
+		isVatCompliantCountry
 	);
 
 	const getHeaderContainerCss = () => {
