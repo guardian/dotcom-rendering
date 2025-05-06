@@ -430,9 +430,7 @@ export const FeatureCard = ({
 										mobileAspectRatio={mobileAspectRatio}
 										altText={headlineText}
 										kickerText={kickerText}
-										trailText={
-											showByline ? trailText : undefined
-										}
+										trailText={trailText}
 										isVideoArticle={isVideoArticle}
 										showTextOverlay={false}
 										hidePillOnMobile={false}
