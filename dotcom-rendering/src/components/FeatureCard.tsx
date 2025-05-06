@@ -321,6 +321,7 @@ export type Props = {
 	 *
 	 */
 	isImmersive?: boolean;
+	showMainVideo?: boolean;
 };
 
 export const FeatureCard = ({
@@ -358,6 +359,7 @@ export const FeatureCard = ({
 	collectionId,
 	isNewsletter = false,
 	isImmersive = false,
+	showMainVideo = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -374,7 +376,8 @@ export const FeatureCard = ({
 		canPlayInline,
 	});
 
-	const showYoutubeVideo = canPlayInline && mainMedia?.type === 'Video';
+	const showYoutubeVideo =
+		canPlayInline && showMainVideo && mainMedia?.type === 'Video';
 
 	const showCardAge =
 		webPublicationDate !== undefined && showClock !== undefined;
