@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const isDev = !process.env.CI;
+export const isCI = !!process.env.CI;
+export const isDev = !isCI;
 export const PORT = isDev ? 3030 : 9000;
 export const BASE_URL = `http://localhost:${PORT}`;
 export const BASE_URL_SECURE = `https://r.thegulocal.com`;
