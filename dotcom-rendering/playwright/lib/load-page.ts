@@ -1,5 +1,5 @@
 import type { Page } from '@playwright/test';
-import { BASE_URL } from 'playwright.config';
+import { BASE_URL, BASE_URL_SECURE } from '../../playwright.config';
 import type { FEArticle } from '../../src/frontend/feArticle';
 import { validateAsFEArticle } from '../../src/model/validate';
 
@@ -15,6 +15,7 @@ const loadPage = async ({
 	waitUntil = 'domcontentloaded',
 	region = 'GB',
 	preventSupportBanner = true,
+	useSecure = false,
 }: {
 	page: Page;
 	path: string;
@@ -24,6 +25,7 @@ const loadPage = async ({
 	waitUntil?: 'domcontentloaded' | 'load';
 	region?: 'GB' | 'US' | 'AU' | 'INT';
 	preventSupportBanner?: boolean;
+	useSecure?: boolean;
 }): Promise<void> => {
 	await page.addInitScript(
 		(args) => {
@@ -55,9 +57,14 @@ const loadPage = async ({
 
 	// The default Playwright waitUntil: 'load' ensures all requests have completed
 	// Use 'domcontentloaded' to speed up tests and prevent hanging requests from timing out tests
-	await page.goto(`${BASE_URL}${path}${paramsString}${fragment ?? ''}`, {
-		waitUntil,
-	});
+	await page.goto(
+		`${useSecure ? BASE_URL_SECURE : BASE_URL}${path}${paramsString}${
+			fragment ?? ''
+		}`,
+		{
+			waitUntil,
+		},
+	);
 };
 
 /**
@@ -118,9 +125,4 @@ const fetchAndloadPageWithOverrides = async (
 	});
 };
 
-export {
-	BASE_URL,
-	fetchAndloadPageWithOverrides,
-	loadPage,
-	loadPageWithOverrides,
-};
+export { fetchAndloadPageWithOverrides, loadPage, loadPageWithOverrides };
