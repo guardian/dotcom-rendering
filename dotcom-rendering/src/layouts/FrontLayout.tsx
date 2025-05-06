@@ -156,6 +156,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				return '5:3';
 		}
 	};
+
 	const Highlights = () => {
 		const showHighlights =
 			// Must be opted into the Europe beta test or in preview

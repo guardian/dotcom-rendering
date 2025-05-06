@@ -131,6 +131,7 @@ const ImmersiveCardLayout = ({
 					headlineSizes={{ desktop: 'small' }}
 					supportingContent={card.supportingContent}
 					isImmersive={true}
+					showMainVideo={card.showMainVideo}
 				/>
 			</LI>
 		</UL>
