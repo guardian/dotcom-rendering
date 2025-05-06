@@ -182,6 +182,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 						width={width}
 						aspectRatio={aspectRatio}
 						mobileAspectRatio={mobileAspectRatio}
+						isImmersive={isImmersive}
 					/>
 				)}
 				{hasDuration && !isVideoArticle ? (
