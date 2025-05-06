@@ -1,8 +1,10 @@
 import { Crossword } from '@guardian/react-crossword';
-import type { CAPICrossword } from '@guardian/react-crossword/dist/@types/CAPI';
+import type { CrosswordProps } from '@guardian/react-crossword';
 import { useEffect, useState } from 'react';
 import { type CrosswordsByDate, groupByDate } from '../types/editionsCrossword';
 import { CrosswordSelect } from './CrosswordSelect.editions';
+
+type CAPICrossword = CrosswordProps['data'];
 
 type Props = {
 	crosswords: CAPICrossword[];

@@ -1,4 +1,6 @@
-import type { CAPICrossword } from '@guardian/react-crossword/dist/@types/CAPI';
+import type { CrosswordProps } from '@guardian/react-crossword';
+
+type CAPICrossword = CrosswordProps['data'];
 
 export const quickCrossword: CAPICrossword = {
 	date: 1730598000000,

@@ -2,11 +2,11 @@ import { isString } from '@guardian/libs';
 import { EditionsCrosswordPage } from '../components/EditionsCrosswordPage';
 import { generateScriptTags, getPathFromManifest } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
-import type { CAPICrosswords } from '../types/editionsCrossword';
+import type { FEEditionsCrosswords } from '../types/editionsCrossword';
 import { htmlCrosswordPageTemplate } from './htmlCrosswordPageTemplate';
 
 interface Props {
-	editionsCrosswords: CAPICrosswords;
+	editionsCrosswords: FEEditionsCrosswords;
 }
 
 export const renderCrosswordHtml = ({
