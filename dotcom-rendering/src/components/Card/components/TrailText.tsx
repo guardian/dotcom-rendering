@@ -73,6 +73,7 @@ export const TrailText = ({
 			/>
 		</div>
 	);
+
 	return hideUntil ? (
 		<Hide until={hideUntil}>{trailText}</Hide>
 	) : (
