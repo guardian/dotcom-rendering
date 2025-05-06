@@ -1,11 +1,13 @@
 import { expect, test } from '@playwright/test';
-import { signIn } from 'playwright/lib/sign-in';
 import { Standard as standardArticle } from '../../fixtures/generated/fe-articles/Standard';
+import { isCI } from '../../playwright.config';
 import { disableCMP } from '../lib/cmp';
 import { waitForIsland } from '../lib/islands';
 import { loadPage, loadPageWithOverrides } from '../lib/load-page';
+import { isSecureServerAvailable } from '../lib/secure';
+import { signIn } from '../lib/sign-in';
 
-test.describe('Signed in readers', () => {
+test.describe('Signed out readers', () => {
 	test('should not display signed in texts when users are not signed in', async ({
 		context,
 		page,
@@ -24,16 +26,23 @@ test.describe('Signed in readers', () => {
 			'Sign in or create your Guardian account to join the discussion',
 		);
 	});
+});
 
-	test.only('should sign in a user and display account details', async ({
+test.describe('Signed in readers', () => {
+	test('should sign in a user and display account details', async ({
 		context,
 		page,
 	}) => {
-		await disableCMP(context);
-		await loadPage({
-			page,
-			path: `/Article/https://www.theguardian.com/politics/2019/oct/29/tories-restore-party-whip-to-10-mps-who-sought-to-block-no-deal-brexit`,
-		});
-		await signIn(page, context);
+		// on CI the secure server should be available
+		const secureServerAvailable = await isSecureServerAvailable();
+		if (isCI || secureServerAvailable) {
+			await disableCMP(context);
+			await loadPage({
+				page,
+				path: `/Article/https://www.theguardian.com/politics/2019/oct/29/tories-restore-party-whip-to-10-mps-who-sought-to-block-no-deal-brexit`,
+				useSecure: true,
+			});
+			await signIn(page, context);
+		}
 	});
 });
