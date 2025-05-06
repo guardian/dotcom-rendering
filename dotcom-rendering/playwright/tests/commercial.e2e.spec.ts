@@ -4,9 +4,7 @@ import { loadPage } from '../lib/load-page';
 import { expectToExist } from '../lib/locators';
 
 test.describe('Commercial E2E tests', () => {
-	test.skip(`It should load the expected number of ad slots`, async ({
-		page,
-	}) => {
+	test(`It should load the expected number of ad slots`, async ({ page }) => {
 		await loadPage({
 			page,
 			path: `/Article/https://www.theguardian.com/environment/2020/oct/13/maverick-rewilders-endangered-species-extinction-conservation-uk-wildlife`,
@@ -14,14 +12,22 @@ test.describe('Commercial E2E tests', () => {
 
 		await cmpAcceptAll(page);
 
-		const totalSlots = 15;
-		const fixedSlots = 4;
-		const inlineSlots = totalSlots - fixedSlots;
+		const fixedSlots = [
+			'carrot', // Not used often, likely to be unfilled
+			'right',
+			'merchandising-high',
+			'mostpop',
+			'merchandising',
+		];
+
+		const totalSlotsExpected = 16; // All slots, even if unfilled ie. `display: none`
+		const inlineSlots = totalSlotsExpected - fixedSlots.length;
+
 		// We are excluding survey slot as they can be switched off
 		await expectToExist(
 			page,
 			'.js-ad-slot:not([data-name="survey"])',
-			totalSlots,
+			totalSlotsExpected,
 		);
 
 		// Check all inline slots are present
@@ -31,9 +37,8 @@ test.describe('Commercial E2E tests', () => {
 		}
 
 		// Check all other fixed slots
-		await expectToExist(page, '[data-name="right"]');
-		await expectToExist(page, '[data-name="merchandising-high"]');
-		await expectToExist(page, '[data-name="mostpop"]');
-		await expectToExist(page, '[data-name="merchandising"]');
+		for (const slotName of fixedSlots) {
+			await expectToExist(page, `[data-name="${slotName}"]`);
+		}
 	});
 });
