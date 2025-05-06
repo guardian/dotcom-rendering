@@ -194,7 +194,7 @@ const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
 		!adPositions.includes(1) &&
 		shouldInsertExtraAdAfterFirstContainer(collections.slice(0, 3))
 	) {
-		adPositions.unshift(0);
+		return [0, ...adPositions];
 	}
 
 	return adPositions;
@@ -440,11 +440,11 @@ const canInsertDesktopAd = (
  * Doesn't insert an ad above the final collection. We serve a merchandising slot below the
  * last collection and we don't want to sandwich the last collection between two full-width ads.
  *
- * | ------------------ |
- * | Next collection    |
- * . ------------------ | <-- Maybe ad position
- * | Current collection |
- * | ------------------ |
+ * | ------------------- |
+ * | Previous collection |
+ * . ------------------- | <-- Maybe ad position
+ * | Current collection  |
+ * | ------------------- |
  */
 const getDesktopAdPositions = (
 	collections: AdCandidate[],
@@ -507,7 +507,7 @@ const getDesktopAdPositions = (
 		!adPositionsFromReducer.includes(1) &&
 		shouldInsertExtraAdAfterFirstContainer(collections.slice(0, 3))
 	) {
-		adPositionsFromReducer.unshift(1);
+		return [1, ...adPositionsFromReducer];
 	}
 
 	return adPositionsFromReducer;
