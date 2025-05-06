@@ -144,7 +144,7 @@ export const canShowReaderRevenueEpic = async (
 		hasConsentForArticleCount,
 		fetchEmail,
 		submitComponentEvent: (componentEvent: ComponentEvent) =>
-			void submitComponentEvent(componentEvent, renderingTarget),
+			submitComponentEvent(componentEvent, renderingTarget),
 		openCmp,
 	};
 

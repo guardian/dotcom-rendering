@@ -286,7 +286,7 @@ export const canShowRRBanner: CanShowFunctionType<
 		tracking,
 		fetchEmail,
 		submitComponentEvent: (componentEvent: ComponentEvent) =>
-			void submitComponentEvent(componentEvent, renderingTarget),
+			submitComponentEvent(componentEvent, renderingTarget),
 	};
 
 	return {
