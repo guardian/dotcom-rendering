@@ -447,6 +447,10 @@ export interface AdPlaceholderBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
 }
 
+export interface FilterCarouselElement {
+	_type: 'model.dotcomrendering.pageElements.FilterCarouselElement';
+}
+
 export interface NumberedTitleBlockElement {
 	_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement';
 	elementId: string;
@@ -836,7 +840,8 @@ export type FEElement =
 	| WitnessTypeBlockElement
 	| CrosswordElement
 	| FilterProductDetails
-	| FilterAtAGlance;
+	| FilterAtAGlance
+	| FilterCarouselElement;
 
 // -------------------------------------
 // Misc

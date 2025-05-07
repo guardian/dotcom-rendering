@@ -869,6 +869,9 @@
                 },
                 {
                     "$ref": "#/definitions/FilterAtAGlance"
+                },
+                {
+                    "$ref": "#/definitions/FilterCarouselElement"
                 }
             ]
         },
@@ -4419,6 +4422,18 @@
             "required": [
                 "_type",
                 "html"
+            ]
+        },
+        "FilterCarouselElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.FilterCarouselElement"
+                }
+            },
+            "required": [
+                "_type"
             ]
         },
         "Block": {

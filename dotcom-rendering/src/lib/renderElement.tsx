@@ -16,6 +16,7 @@ import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importabl
 import { ExplainerAtom } from '../components/ExplainerAtom';
 import { Figure } from '../components/Figure';
 import { FilterAtAGlanceComponent } from '../components/FilterAtAGlanceComponent';
+import { FilterCarouselComponent } from '../components/FilterCarouselComponent';
 import { FilterProductDetailsComponent } from '../components/FilterProductDetailsComponent';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
@@ -876,6 +877,8 @@ export const renderElement = ({
 			return <FilterProductDetailsComponent html={element.html} />;
 		case 'model.dotcomrendering.pageElements.FilterAtAGlance':
 			return <FilterAtAGlanceComponent html={element.html} />;
+		case 'model.dotcomrendering.pageElements.FilterCarouselElement':
+			return <FilterCarouselComponent />;
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
