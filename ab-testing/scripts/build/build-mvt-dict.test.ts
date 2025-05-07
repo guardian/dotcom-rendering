@@ -5,18 +5,16 @@ import { ABTest } from '../../types.ts';
 // Mock ABTest objects for testing
 const createTest = (
 	name: string,
-	allowOverlap = false,
 	size: number,
 	groups = ['control'],
-	testSpace = 'primary',
+	testSpace: 0 | 1 = 0,
 ) =>
 	({
 		name,
-		allowOverlap,
 		size,
 		groups,
 		testSpace,
-	}) as unknown as ABTest;
+	}) as ABTest;
 
 Deno.test('testsToArray - empty array', () => {
 	const result = testsToArray([]);
@@ -24,7 +22,7 @@ Deno.test('testsToArray - empty array', () => {
 });
 
 Deno.test('testsToArray - single test with one group', () => {
-	const test = createTest('Test1', false, 0.1, ['variant']);
+	const test = createTest('Test1', 0.1, ['variant']);
 	const result = testsToArray([test]);
 
 	// Size 0.1 should create 100 entries (0.1 * 1000)
@@ -34,7 +32,7 @@ Deno.test('testsToArray - single test with one group', () => {
 });
 
 Deno.test('testsToArray - single test with multiple groups', () => {
-	const test = createTest('Test1', false, 0.5, ['control', 'variant']); // 2 groups
+	const test = createTest('Test1', 0.5, ['control', 'variant']); // 2 groups
 	const result = testsToArray([test]);
 
 	// Should have 500 entries
@@ -46,8 +44,8 @@ Deno.test('testsToArray - single test with multiple groups', () => {
 });
 
 Deno.test('testsToArray - multiple tests', () => {
-	const test1 = createTest('Test1', false, 0.2, ['control', 'variant']);
-	const test2 = createTest('Test2', true, 0.2, ['control', 'variant']);
+	const test1 = createTest('Test1', 0.2, ['control', 'variant']);
+	const test2 = createTest('Test2', 0.2, ['control', 'variant'], 1);
 
 	const result = testsToArray([test1, test2]);
 
@@ -69,7 +67,7 @@ Deno.test('abTestsToMVTs - empty array', () => {
 });
 
 Deno.test('abTestsToMVTs - only normal tests', () => {
-	const test = createTest('Test1', false, 0.001, ['control']); // 1 entry
+	const test = createTest('Test1', 0.001, ['control']); // 1 entry
 
 	const result = abTestsToMVTs([test]);
 
@@ -79,16 +77,10 @@ Deno.test('abTestsToMVTs - only normal tests', () => {
 
 Deno.test('abTestsToMVTs - overlapping tests added to existing slots', () => {
 	// Create 1000 normal test entries to fill all slots
-	const normalTest = createTest('Normal', false, 1, ['control']); // 1000 entries
+	const normalTest = createTest('Normal', 1, ['control']); // 1000 entries
 
 	// Create 2 overlapping test entries, these should be added to the first slots
-	const overlapTest = createTest(
-		'Overlap',
-		true,
-		1,
-		['variant'],
-		'secondary',
-	); // 1000 entries
+	const overlapTest = createTest('Overlap', 1, ['variant'], 1); // 1000 entries
 
 	const result = abTestsToMVTs([normalTest, overlapTest]);
 
@@ -109,23 +101,11 @@ Deno.test('abTestsToMVTs - overlapping tests added to existing slots', () => {
 
 Deno.test('abTestsToMVTs - throw error when exceeding capacity', () => {
 	// Create 1000 normal test entries
-	const normalTest = createTest('Normal', false, 1, ['control']); // 1000 entries
+	const normalTest = createTest('Normal', 1, ['control']); // 1000 entries
 
 	// Create 1001 secondary test entries (exceeds 1000)
-	const overlapTest1 = createTest(
-		'Overlap1',
-		true,
-		1,
-		['variant1'],
-		'secondary',
-	);
-	const overlapTest2 = createTest(
-		'Overlap2',
-		true,
-		0.001,
-		['variant2'],
-		'secondary',
-	);
+	const overlapTest1 = createTest('Overlap1', 1, ['variant1'], 1);
+	const overlapTest2 = createTest('Overlap2', 0.001, ['variant2'], 1);
 
 	// We expect an error when all mvt slots have 2 groups
 	assertThrows(
