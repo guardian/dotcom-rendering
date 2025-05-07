@@ -1,8 +1,9 @@
 import {
 	brandedTestCollections,
-	flexibleSpecialCollection,
 	largeFlexibleGeneralCollection,
+	largeFlexibleSpecialCollection,
 	smallFlexibleGeneralCollection,
+	smallFlexibleSpecialCollection,
 	testCollectionsUk,
 	testCollectionsUs,
 	testCollectionsWithSecondaryLevel,
@@ -246,7 +247,7 @@ describe('Mobile Ads', () => {
 				...testCollection,
 				collectionType: 'flexible/general',
 				containerLevel: 'Primary',
-			}, // Ignored - is before secondary container
+			}, // Ignored - is before secondary container and is not large enough
 			{
 				...testCollection,
 				collectionType: 'scrollable/small',
@@ -399,9 +400,9 @@ describe('Desktop Ads', () => {
 	});
 });
 
-describe('inserting an extra ad after the first collection', () => {
+describe('inserting an ad after the first collection', () => {
 	describe('on mobile', () => {
-		it('inserts an ad after the first collection if it is a large flexible general container and is followed by two secondary containers', () => {
+		it('inserts an ad after the first collection if it is a LARGE flexible general container', () => {
 			const adPositions = getMobileAdPositions([
 				...largeFlexibleGeneralCollection,
 				{
@@ -417,29 +418,12 @@ describe('inserting an extra ad after the first collection', () => {
 			]);
 
 			expect(adPositions).toContain(0);
+			expect(adPositions).not.toContain(1);
 		});
 
-		it('does NOT insert an ad after the first collection if it is not followed by at least two secondary containers', () => {
+		it('inserts an ad after the first collection if it is a LARGE flexible special container', () => {
 			const adPositions = getMobileAdPositions([
-				...largeFlexibleGeneralCollection,
-				{
-					...testCollection,
-					collectionType: 'scrollable/small',
-					containerLevel: 'Secondary',
-				},
-				{
-					...testCollection,
-					collectionType: 'flexible/general',
-					containerLevel: 'Primary',
-				},
-			]);
-
-			expect(adPositions).not.toContain(0);
-		});
-
-		it('does NOT insert an ad after the first collection if it is a flexible special container', () => {
-			const adPositions = getMobileAdPositions([
-				...flexibleSpecialCollection,
+				...largeFlexibleSpecialCollection,
 				{
 					...testCollection,
 					collectionType: 'scrollable/small',
@@ -452,12 +436,39 @@ describe('inserting an extra ad after the first collection', () => {
 				},
 			]);
 
+			expect(adPositions).toContain(0);
+			expect(adPositions).not.toContain(1);
+		});
+
+		it('does NOT insert an ad after the first collection if it is a SMALL flexible general container', () => {
+			const adPositions = getMobileAdPositions([
+				...smallFlexibleGeneralCollection,
+				{
+					...testCollection,
+					collectionType: 'scrollable/small',
+					containerLevel: 'Secondary',
+				},
+			]);
+
+			expect(adPositions).not.toContain(0);
+		});
+
+		it('does NOT insert an ad after the first collection if it is a SMALL flexible special container', () => {
+			const adPositions = getMobileAdPositions([
+				...smallFlexibleSpecialCollection,
+				{
+					...testCollection,
+					collectionType: 'scrollable/small',
+					containerLevel: 'Secondary',
+				},
+			]);
+
 			expect(adPositions).not.toContain(0);
 		});
 	});
 
 	describe('on desktop', () => {
-		it('inserts an ad before the second collection if it is a secondary container, preceded by a large flexible general container and followed by a secondary container', () => {
+		it('inserts an ad before the second collection if it is preceded by a LARGE flexible general container', () => {
 			const adPositions = getDesktopAdPositions(
 				[
 					...largeFlexibleGeneralCollection,
@@ -476,9 +487,32 @@ describe('inserting an extra ad after the first collection', () => {
 			);
 
 			expect(adPositions).toContain(1);
+			expect(adPositions).not.toContain(2);
 		});
 
-		it('does NOT insert an ad before the second collection if it is by a small flexible general container', () => {
+		it('inserts an ad before the second collection if it is preceded by a LARGE flexible special container', () => {
+			const adPositions = getDesktopAdPositions(
+				[
+					...largeFlexibleSpecialCollection,
+					{
+						...testCollection,
+						collectionType: 'scrollable/small',
+						containerLevel: 'Secondary',
+					},
+					{
+						...testCollection,
+						collectionType: 'scrollable/medium',
+						containerLevel: 'Secondary',
+					},
+				],
+				'uk',
+			);
+
+			expect(adPositions).toContain(1);
+			expect(adPositions).not.toContain(2);
+		});
+
+		it('does NOT insert an ad before the second collection if it is preceded by a SMALL flexible general container', () => {
 			const adPositions = getDesktopAdPositions(
 				[
 					...smallFlexibleGeneralCollection,
@@ -499,10 +533,10 @@ describe('inserting an extra ad after the first collection', () => {
 			expect(adPositions).not.toContain(1);
 		});
 
-		it('does NOT insert an ad before the second collection if it is not preceded by a flexible general container', () => {
+		it('does NOT insert an ad before the second collection if it is preceded by a SMALL flexible special container', () => {
 			const adPositions = getDesktopAdPositions(
 				[
-					...flexibleSpecialCollection,
+					...smallFlexibleSpecialCollection,
 					{
 						...testCollection,
 						collectionType: 'scrollable/small',
@@ -513,23 +547,6 @@ describe('inserting an extra ad after the first collection', () => {
 						collectionType: 'scrollable/medium',
 						containerLevel: 'Secondary',
 					},
-				],
-				'uk',
-			);
-
-			expect(adPositions).not.toContain(1);
-		});
-
-		it('does NOT insert an ad before the second collection if it is not followed by a secondary container', () => {
-			const adPositions = getDesktopAdPositions(
-				[
-					...largeFlexibleGeneralCollection,
-					{
-						...testCollection,
-						collectionType: 'scrollable/small',
-						containerLevel: 'Secondary',
-					},
-					...largeFlexibleGeneralCollection, // We do not insert an ad above the final collection on desktop
 				],
 				'uk',
 			);

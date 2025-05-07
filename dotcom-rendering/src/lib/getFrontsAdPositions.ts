@@ -125,11 +125,12 @@ const canInsertMobileAd =
 
 		/**
 		 * Additional rules exist for "beta" fronts which have primary and secondary level containers
-		 * - Is NOT before a secondary level container
+		 * - Is NOT before a secondary level container OR is the top container and is large.
 		 * - Is NOT before a branded container
 		 */
 		const betaFrontRules = [
-			!isBeforeSecondaryLevelContainer(index, collections),
+			!isBeforeSecondaryLevelContainer(index, collections) ||
+				(index === 0 && getCollectionHeight(collection) >= 3),
 			!isBeforeBrandedContainer(index, collections),
 		];
 
@@ -141,27 +142,6 @@ const canInsertMobileAd =
 
 const isEvenIndex = (_collection: unknown, index: number): boolean =>
 	index % 2 === 0;
-
-/**
- * On network fronts, we often start with a large primary flexible general collection followed
- * by multiple secondary collections. When this happens, there is usually space to insert an ad
- * between the Primary and Secondary collections without two ads being in the same viewport.
- */
-const shouldInsertExtraAdAfterFirstContainer = (collections: AdCandidate[]) => {
-	if (collections.length < 3) {
-		return false;
-	}
-
-	const firstContainer = collections[0];
-
-	return (
-		firstContainer?.collectionType === 'flexible/general' &&
-		firstContainer.containerLevel === 'Primary' &&
-		getFlexibleGeneralHeight(firstContainer.grouped) >= 3 &&
-		collections[1]?.containerLevel === 'Secondary' &&
-		collections[2]?.containerLevel === 'Secondary'
-	);
-};
 
 /**
  * Filters out unsuitable positions then takes every other position for
@@ -185,17 +165,6 @@ const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
 			[],
 		)
 		.slice(0, MAX_FRONTS_MOBILE_ADS);
-
-	/**
-	 * Special case: insert an extra ad after the first container if there is space for it.
-	 */
-	if (
-		!adPositions.includes(0) &&
-		!adPositions.includes(1) &&
-		shouldInsertExtraAdAfterFirstContainer(collections.slice(0, 3))
-	) {
-		return [0, ...adPositions];
-	}
 
 	return adPositions;
 };
@@ -264,28 +233,32 @@ const getFlexibleGeneralHeight = (grouped: DCRGroupedTrails) => {
 };
 
 /**
+ * Predicted relative heights of the cards that can be found in a flexible/special container.
+ */
+const flexibleSpecialCardHeights = {
+	snap: 1.5,
+	splash: 2,
+	standard: 0.5,
+};
+
+/**
  * Estimates the height of a flexible/special container.
  */
 const getFlexibleSpecialHeight = (grouped: DCRGroupedTrails) => {
-	const flexibleSpecialGroupedCounts = {
+	const groupedCounts = {
 		snap: grouped.snap.length,
-		splash: grouped.snap.length,
-		standard: grouped.standard.length,
+		// The first standard card in a fleixible/special collection is always a splash card.
+		splash: grouped.standard.length ? 1 : 0,
+		standard: Math.max(grouped.standard.length - 1, 0),
 	} satisfies FlexibleSpecialGroupedCounts;
 
-	if (
-		flexibleSpecialGroupedCounts.snap &&
-		!flexibleSpecialGroupedCounts.splash
-	) {
-		return 1.5;
-	} else if (
-		flexibleSpecialGroupedCounts.splash &&
-		!flexibleSpecialGroupedCounts.standard
-	) {
-		return 2.5;
-	} else {
-		return 3;
-	}
+	return Object.entries(groupedCounts).reduce((acc, [key, value]) => {
+		const cardHeight =
+			flexibleSpecialCardHeights[
+				key as keyof typeof flexibleSpecialCardHeights
+			];
+		return acc + value * cardHeight;
+	}, 0);
 };
 
 /**
@@ -406,6 +379,7 @@ const canInsertDesktopAd = (
 	pageId: string,
 	collection: AdCandidate,
 	previousCollection: AdCandidate,
+	index: number,
 ) => {
 	if (
 		collection.containerPalette === 'Branded' ||
@@ -422,9 +396,10 @@ const canInsertDesktopAd = (
 	/**
 	 * We don't want to insert ads above secondary level collections as its
 	 * content is often related to the content in the above container. We prefer
-	 * to place ads between distinct pieces of content.
+	 * to place ads between distinct pieces of content. An exception is made
+	 * for a prime ad position high up on the page.
 	 */
-	if (collection.containerLevel === 'Secondary') {
+	if (collection.containerLevel === 'Secondary' && index !== 1) {
 		return false;
 	}
 
@@ -479,6 +454,7 @@ const getDesktopAdPositions = (
 					pageId,
 					collection,
 					prevCollection,
+					index,
 				)
 			) {
 				// Inserting advert, resetting the height since ad
@@ -499,16 +475,6 @@ const getDesktopAdPositions = (
 		},
 		{ heightSinceAd: 0, adPositions: [] },
 	).adPositions;
-
-	/**
-	 * Special case: insert an extra ad after the first container if there is space for it.
-	 */
-	if (
-		!adPositionsFromReducer.includes(1) &&
-		shouldInsertExtraAdAfterFirstContainer(collections.slice(0, 3))
-	) {
-		return [1, ...adPositionsFromReducer];
-	}
 
 	return adPositionsFromReducer;
 };
