@@ -1,5 +1,4 @@
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
-import { AffiliateDisclaimerInline } from '../components/AffiliateDisclaimer';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
@@ -862,9 +861,6 @@ export const renderElement = ({
 					/>
 				</Island>
 			);
-		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement': {
-			return <AffiliateDisclaimerInline />;
-		}
 		case 'model.dotcomrendering.pageElements.CrosswordElement':
 			return (
 				<Island priority="critical" defer={{ until: 'visible' }}>

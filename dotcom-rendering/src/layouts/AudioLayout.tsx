@@ -7,7 +7,10 @@ import {
 } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
-import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
+import {
+	AffiliateDisclaimer,
+	AffiliateDisclaimerStandfirst,
+} from '../components/AffiliateDisclaimer';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -315,6 +318,9 @@ export const AudioLayout = (props: WebProps) => {
 								format={format}
 								standfirst={article.standfirst}
 							/>
+							{!!article.affiliateLinksDisclaimer && (
+								<AffiliateDisclaimerStandfirst />
+							)}
 						</GridItem>
 						<GridItem area="body">
 							<ArticleContainer format={format}>
