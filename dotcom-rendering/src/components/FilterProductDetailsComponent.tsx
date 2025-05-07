@@ -44,7 +44,7 @@ export const textBlockStyles = () => css`
 	max-width: 100%;
 	width: fit-content;
 
-	background-color: #ededed;
+	background-color: #f1f1f1;
 	padding: 10px;
 	border-radius: 10px;
 
@@ -54,7 +54,7 @@ export const textBlockStyles = () => css`
 	}
 
 	strong:not(:first-child):before {
-		border-bottom: 1px solid black;
+		border-bottom: 1px solid #bababa;
 		content: '';
 		display: block;
 		margin-top: 5px;
