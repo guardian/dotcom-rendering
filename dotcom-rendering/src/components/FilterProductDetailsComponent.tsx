@@ -1,5 +1,5 @@
 import { css, jsx } from '@emotion/react';
-import { textSans17 } from '@guardian/source/foundations';
+import { brand, neutral, textSans17 } from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
 import type { IOptions } from 'sanitize-html';
@@ -44,17 +44,17 @@ export const textBlockStyles = () => css`
 	max-width: 100%;
 	width: fit-content;
 
-	background-color: #f1f1f1;
+	background-color: ${neutral[97]};
 	padding: 10px;
 	border-radius: 10px;
 
 	strong {
 		font-weight: bold;
-		color: #052962;
+		color: ${brand[400]};
 	}
 
-	strong:not(:first-child):before {
-		border-bottom: 1px solid #bababa;
+	strong:not(:first-child)::before {
+		border-bottom: 1px solid ${neutral[73]};
 		content: '';
 		display: block;
 		margin-top: 5px;
