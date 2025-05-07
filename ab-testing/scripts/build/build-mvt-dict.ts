@@ -39,6 +39,7 @@ const abTestsToMVTs = (
 			`The the primary test space test sizes add up to > 100%.`,
 		);
 	}
+
 	if (secondaryMVTGroups.length > MAX_MVT_GROUPS) {
 		throw new Error(
 			`The the secondary test space test sizes add up to > 100%.`,
@@ -53,9 +54,7 @@ const abTestsToMVTs = (
 		}
 	}
 
-	// Add secondary tests to the mvtKVs backwards from the end
-	// will avoid overlapping with primary tests to an extent
-	for (let i = MAX_MVT_GROUPS; i > 0; i--) {
+	for (let i = 0; i < MAX_MVT_GROUPS; i++) {
 		if (secondaryMVTGroups[i]) {
 			if (mvtKVs[`mvt:${i}`]) {
 				mvtKVs[`mvt:${i}`].push(secondaryMVTGroups[i]);
