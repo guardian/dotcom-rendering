@@ -101,9 +101,8 @@ export const FootballTablesPage = ({
 			<div
 				css={css`
 					${grid.column.right}
-					/**  ToDo: review what line to grow the ad to */
 					/** This allows the ad to grow beyond the third row content (up to line 5) */
-					grid-row: 1 / 5;
+					grid-row: 1 / 4;
 					${until.desktop} {
 						display: none;
 					}

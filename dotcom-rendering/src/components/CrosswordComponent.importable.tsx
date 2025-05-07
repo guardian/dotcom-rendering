@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { Crossword as ReactCrossword } from '@guardian/react-crossword-next';
-import type { CrosswordProps } from '@guardian/react-crossword-next';
+import { Crossword as ReactCrossword } from '@guardian/react-crossword';
+import type { CrosswordProps } from '@guardian/react-crossword';
 import {
 	between,
 	from,

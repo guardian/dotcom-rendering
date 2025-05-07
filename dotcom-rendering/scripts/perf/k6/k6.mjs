@@ -2,7 +2,8 @@ import { check } from 'k6';
 import { SharedArray } from 'k6/data';
 import http from 'k6/http';
 
-const PORT = 3030;
+// assume prod server
+const PORT = 9000;
 
 /** @type {import('k6/data').SharedArray} */
 const jsonPayload = new SharedArray('jsonPayload', function () {
@@ -14,6 +15,7 @@ const jsonPayload = new SharedArray('jsonPayload', function () {
 export const options = {
 	vus: 10,
 	duration: '60s',
+	insecureSkipTLSVerify: true,
 };
 
 // eslint-disable-next-line import/no-default-export -- k6 requires a default export

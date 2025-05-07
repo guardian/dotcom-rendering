@@ -39,6 +39,6 @@ export const getChoiceCardData = (
 	countryCode?: string,
 ): ChoiceInfo[] => {
 	return countryCode === 'US'
-		? ChoiceCardTestData_US(longerBenefits)
+		? ChoiceCardTestData_US(longerBenefits, isDiscountActive)
 		: ChoiceCardTestData_REGULAR(longerBenefits, isDiscountActive);
 };

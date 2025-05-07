@@ -79,4 +79,5 @@ export type FECricketMatchPage = {
 	isAdFreeUser: boolean;
 	canonicalUrl?: string;
 	contributionsServiceUrl: string;
+	pageId: string;
 };

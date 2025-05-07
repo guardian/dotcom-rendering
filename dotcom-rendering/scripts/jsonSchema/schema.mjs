@@ -18,6 +18,7 @@ const program = TJS.getProgramFromFiles(
 		path.resolve(`${root}/src/frontend/feCricketMatchPage.ts`),
 		path.resolve(`${root}/src/frontend/feFootballMatchListPage.ts`),
 		path.resolve(`${root}/src/frontend/feFootballTablesPage.ts`),
+		path.resolve(`${root}/src/frontend/feFootballMatchPage.ts`),
 	],
 	{
 		skipLibCheck: true,
@@ -57,7 +58,7 @@ const schemas = [
 		file: `${root}/src/model/block-schema.json`,
 	},
 	{
-		typeName: 'FEEditionsCrosswords',
+		typeName: 'CAPICrosswords',
 		file: `${root}/src/model/editions-crossword-schema.json`,
 	},
 	{
@@ -71,6 +72,10 @@ const schemas = [
 	{
 		typeName: 'FECricketMatchPage',
 		file: `${root}/src/frontend/schemas/feCricketMatchPage.json`,
+	},
+	{
+		typeName: 'FEFootballMatchPage',
+		file: `${root}/src/frontend/schemas/feFootballMatchPage.json`,
 	},
 ];
 

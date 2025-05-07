@@ -16,600 +16,89 @@ import type { FEFootballMatchListPage } from '../../src/frontend/feFootballMatch
 export const footballData: FEFootballMatchListPage = {
 	matchesList: [
 		{
-			date: '2025-04-08',
+			date: '2025-04-28',
 			competitionMatches: [
 				{
 					competitionSummary: {
-						id: '500',
-						url: '/football/championsleague',
-						fullName: 'Champions League',
+						id: '635',
+						url: '/football/serieafootball',
+						fullName: 'Serie A',
 						nation: 'European',
-						tableDividers: [8, 24],
+						tableDividers: [4, 6, 17],
 					},
 					matches: [
 						{
-							id: '4492025',
-							date: '2025-04-08T20:00:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '2',
-							},
-							round: {
-								roundNumber: '2',
-								name: 'Quarter Final',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '1006',
-								name: 'Arsenal',
-							},
-							awayTeam: {
-								id: '26303',
-								name: 'Real Madrid',
-							},
-							venue: {
-								id: '69',
-								name: 'Emirates Stadium',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4491942',
-							date: '2025-04-08T20:00:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '2',
-							},
-							round: {
-								roundNumber: '2',
-								name: 'Quarter Final',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '26247',
-								name: 'Bayern',
-							},
-							awayTeam: {
-								id: '6136',
-								name: 'Inter',
-							},
-							venue: {
-								id: '105',
-								name: 'Allianz Arena',
-							},
-							type: 'Fixture',
-						},
-					],
-				},
-				{
-					competitionSummary: {
-						id: '995',
-						url: '/football/women-s-nations-league',
-						fullName: "Women's Nations League",
-						nation: 'European',
-						tableDividers: [2],
-					},
-					matches: [
-						{
-							id: '4484091',
-							date: '2025-04-08T12:00:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '13',
-								name: 'Group C5',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '56832',
-								name: 'Israel',
-							},
-							awayTeam: {
-								id: '65428',
-								name: 'Bulgaria',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484093',
-							date: '2025-04-08T13:00:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '14',
-								name: 'Group C6',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '65427',
-								name: 'Kosovo',
-							},
-							awayTeam: {
-								id: '63712',
-								name: 'North Macedonia',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484092',
-							date: '2025-04-08T14:00:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '11',
-								name: 'Group C3',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '63710',
-								name: 'Kazakhstan',
-							},
-							awayTeam: {
-								id: '65426',
-								name: 'Armenia',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484082',
-							date: '2025-04-08T14:30:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '5',
-								name: 'Group B1',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '63150',
-								name: 'Bosnia-Herzegovina',
-							},
-							awayTeam: {
-								id: '7922',
-								name: 'Poland',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484083',
-							date: '2025-04-08T15:00:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '8',
-								name: 'Group B4',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '61356',
-								name: 'Croatia',
-							},
-							awayTeam: {
-								id: '63708',
-								name: 'Albania',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484096',
-							date: '2025-04-08T15:00:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '9',
-								name: 'Group C1',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '36622',
-								name: 'Moldova',
-							},
-							awayTeam: {
-								id: '56831',
-								name: 'Slovakia',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484084',
-							date: '2025-04-08T16:30:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '8',
-								name: 'Group B4',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '8185',
-								name: 'Czech Rep',
-							},
-							awayTeam: {
-								id: '39904',
-								name: 'Ukraine',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484085',
-							date: '2025-04-08T16:30:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '7',
-								name: 'Group B3',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '39903',
-								name: 'Finland',
-							},
-							awayTeam: {
-								id: '53244',
-								name: 'Hungary',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484094',
-							date: '2025-04-08T16:30:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '11',
-								name: 'Group C3',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '65589',
-								name: 'Liechtenstein',
-							},
-							awayTeam: {
-								id: '65069',
-								name: 'Luxembourg',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484077',
-							date: '2025-04-08T16:45:00+01:00[Europe/London]',
+							id: '4496403',
+							date: '2025-04-28T17:30:00+01:00[Europe/London]',
 							stage: {
 								stageNumber: '1',
 							},
 							round: {
 								roundNumber: '1',
-								name: 'Group A1',
+								name: 'League',
 							},
 							leg: '1',
 							homeTeam: {
-								id: '7699',
-								name: 'Germany',
+								id: '26360',
+								name: 'Udinese',
 							},
 							awayTeam: {
-								id: '7687',
-								name: 'Scotland',
+								id: '26371',
+								name: 'Bologna',
+							},
+							venue: {
+								id: '503',
+								name: 'Stadio Friuli',
 							},
 							type: 'Fixture',
 						},
 						{
-							id: '4484076',
-							date: '2025-04-08T17:00:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '4',
-								name: 'Group A4',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '35854',
-								name: 'Denmark',
-							},
-							awayTeam: {
-								id: '7720',
-								name: 'Italy',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484090',
-							date: '2025-04-08T17:00:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '9',
-								name: 'Group C1',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '63151',
-								name: 'Faroe Islands',
-							},
-							awayTeam: {
-								id: '65588',
-								name: 'Gibraltar',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484097',
-							date: '2025-04-08T17:00:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '12',
-								name: 'Group C4',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '63144',
-								name: 'Montenegro',
-							},
-							awayTeam: {
-								id: '65424',
-								name: 'Azerbaijan',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484088',
-							date: '2025-04-08T17:00:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '6',
-								name: 'Group B2',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '59992',
-								name: 'Turkey',
-							},
-							awayTeam: {
-								id: '56828',
-								name: 'Slovenia',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484075',
-							date: '2025-04-08T17:15:00+01:00[Europe/London]',
+							id: '4496764',
+							date: '2025-04-28T19:45:00+01:00[Europe/London]',
 							stage: {
 								stageNumber: '1',
 							},
 							round: {
 								roundNumber: '1',
-								name: 'Group A1',
+								name: 'League',
 							},
 							leg: '1',
 							homeTeam: {
-								id: '53230',
-								name: 'Austria',
+								id: '26362',
+								name: 'Lazio',
 							},
 							awayTeam: {
-								id: '7920',
-								name: 'Netherlands',
+								id: '26358',
+								name: 'Parma',
+							},
+							venue: {
+								id: '7617',
+								name: 'Stadio Olimpico',
 							},
 							type: 'Fixture',
 						},
 						{
-							id: '4484078',
-							date: '2025-04-08T17:45:00+01:00[Europe/London]',
+							id: '4496404',
+							date: '2025-04-28T19:45:00+01:00[Europe/London]',
 							stage: {
 								stageNumber: '1',
 							},
 							round: {
-								roundNumber: '2',
-								name: 'Group A2',
+								roundNumber: '1',
+								name: 'League',
 							},
 							leg: '1',
 							homeTeam: {
-								id: '46272',
-								name: 'Iceland',
+								id: '27648',
+								name: 'Verona',
 							},
 							awayTeam: {
-								id: '36601',
-								name: 'Switzerland',
+								id: '26474',
+								name: 'Cagliari',
 							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484095',
-							date: '2025-04-08T18:00:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '10',
-								name: 'Group C2',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '59526',
-								name: 'Malta',
-							},
-							awayTeam: {
-								id: '63709',
-								name: 'Georgia',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484079',
-							date: '2025-04-08T18:00:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '2',
-								name: 'Group A2',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '8184',
-								name: 'Norway',
-							},
-							awayTeam: {
-								id: '35853',
-								name: 'France',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4477990',
-							date: '2025-04-08T18:00:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '3',
-								name: 'Group A3',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '42111',
-								name: 'Spain',
-							},
-							awayTeam: {
-								id: '37610',
-								name: 'Portugal',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484080',
-							date: '2025-04-08T18:00:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '4',
-								name: 'Group A4',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '8319',
-								name: 'Sweden',
-							},
-							awayTeam: {
-								id: '7721',
-								name: 'Wales',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484089',
-							date: '2025-04-08T19:00:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '10',
-								name: 'Group C2',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '65422',
-								name: 'Andorra',
-							},
-							awayTeam: {
-								id: '65425',
-								name: 'Cyprus',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484087',
-							date: '2025-04-08T19:00:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '5',
-								name: 'Group B1',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '64790',
-								name: 'Northern Ireland',
-							},
-							awayTeam: {
-								id: '8445',
-								name: 'Romania',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4477991',
-							date: '2025-04-08T19:30:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '3',
-								name: 'Group A3',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '56830',
-								name: 'Belgium',
-							},
-							awayTeam: {
-								id: '7514',
-								name: 'England',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484086',
-							date: '2025-04-08T19:30:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '6',
-								name: 'Group B2',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '36642',
-								name: 'Rep of Ireland',
-							},
-							awayTeam: {
-								id: '7722',
-								name: 'Greece',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4484081',
-							date: '2025-04-08T20:00:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '7',
-								name: 'Group B3',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '8187',
-								name: 'Belarus',
-							},
-							awayTeam: {
-								id: '56829',
-								name: 'Serbia',
+							venue: {
+								id: '963',
+								name: 'Marcantonio Bentegodi',
 							},
 							type: 'Fixture',
 						},
@@ -625,8 +114,8 @@ export const footballData: FEFootballMatchListPage = {
 					},
 					matches: [
 						{
-							id: '4446381',
-							date: '2025-04-08T19:45:00+01:00[Europe/London]',
+							id: '4494466',
+							date: '2025-04-28T20:00:00+01:00[Europe/London]',
 							stage: {
 								stageNumber: '1',
 							},
@@ -636,413 +125,16 @@ export const footballData: FEFootballMatchListPage = {
 							},
 							leg: '1',
 							homeTeam: {
-								id: '22',
-								name: 'Blackburn',
-							},
-							awayTeam: {
-								id: '17',
-								name: 'Sheff Wed',
-							},
-							venue: {
-								id: '59',
-								name: 'Ewood Park',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4446382',
-							date: '2025-04-08T19:45:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '1',
-								name: 'League',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '49',
-								name: 'Bristol City',
-							},
-							awayTeam: {
-								id: '42',
-								name: 'West Brom',
-							},
-							venue: {
-								id: '73',
-								name: 'Ashton Gate',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4492051',
-							date: '2025-04-08T19:45:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '1',
-								name: 'League',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '7',
-								name: 'Derby',
-							},
-							awayTeam: {
-								id: '70',
-								name: 'Burnley',
-							},
-							venue: {
-								id: '9',
-								name: 'Pride Park Stadium',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4446384',
-							date: '2025-04-08T19:45:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '1',
-								name: 'League',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '14',
-								name: 'Norwich',
-							},
-							awayTeam: {
-								id: '39',
-								name: 'Sunderland',
-							},
-							venue: {
-								id: '75',
-								name: 'Carrow Road',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4446385',
-							date: '2025-04-08T19:45:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '1',
-								name: 'League',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '61',
-								name: 'Preston North End',
-							},
-							awayTeam: {
-								id: '52',
-								name: 'Cardiff',
-							},
-							venue: {
-								id: '76',
-								name: 'Deepdale',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4446386',
-							date: '2025-04-08T19:45:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '1',
-								name: 'League',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '37',
-								name: 'Sheff Utd',
-							},
-							awayTeam: {
-								id: '13',
-								name: 'Millwall',
-							},
-							venue: {
-								id: '77',
-								name: 'Bramall Lane',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4446387',
-							date: '2025-04-08T19:45:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '1',
-								name: 'League',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '38',
-								name: 'Stoke',
-							},
-							awayTeam: {
-								id: '10',
-								name: 'Luton',
-							},
-							venue: {
-								id: '51',
-								name: 'bet365 Stadium',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4446388',
-							date: '2025-04-08T19:45:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '1',
-								name: 'League',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '41',
-								name: 'Watford',
-							},
-							awayTeam: {
-								id: '26',
-								name: 'Hull',
-							},
-							venue: {
-								id: '80',
-								name: 'Vicarage Road Stadium',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4446383',
-							date: '2025-04-08T20:00:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '1',
-								name: 'League',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '30',
-								name: 'Middlesbrough',
-							},
-							awayTeam: {
 								id: '28',
 								name: 'Leeds',
 							},
-							venue: {
-								id: '390',
-								name: 'Riverside Stadium',
-							},
-							type: 'Fixture',
-						},
-					],
-				},
-				{
-					competitionSummary: {
-						id: '102',
-						url: '/football/leagueonefootball',
-						fullName: 'League One',
-						nation: 'English',
-						tableDividers: [2, 6, 20],
-					},
-					matches: [
-						{
-							id: '4491085',
-							date: '2025-04-08T19:45:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '1',
-								name: 'League',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '47',
-								name: 'Bolton',
-							},
 							awayTeam: {
-								id: '63',
-								name: 'Rotherham',
+								id: '49',
+								name: 'Bristol City',
 							},
 							venue: {
-								id: '389',
-								name: 'The Toughsheet Community Stadium',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4486263',
-							date: '2025-04-08T19:45:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '1',
-								name: 'League',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '76',
-								name: 'Exeter',
-							},
-							awayTeam: {
-								id: '68',
-								name: 'Wigan',
-							},
-							venue: {
-								id: '7671',
-								name: 'St James Park',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4491565',
-							date: '2025-04-08T19:45:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '1',
-								name: 'League',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '56',
-								name: 'Huddersfield',
-							},
-							awayTeam: {
-								id: '153',
-								name: 'Wycombe',
-							},
-							venue: {
-								id: '17',
-								name: "John Smith's Stadium",
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4492778',
-							date: '2025-04-08T19:45:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '1',
-								name: 'League',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '58',
-								name: 'Mansfield',
-							},
-							awayTeam: {
-								id: '57',
-								name: 'Leyton Orient',
-							},
-							venue: {
-								id: '2025',
-								name: 'One Call Stadium',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4488000',
-							date: '2025-04-08T19:45:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '1',
-								name: 'League',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '84',
-								name: 'Peterborough',
-							},
-							awayTeam: {
-								id: '45',
-								name: 'Birmingham',
-							},
-							venue: {
-								id: '89',
-								name: 'Weston Homes Stadium',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4492024',
-							date: '2025-04-08T19:45:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '1',
-								name: 'League',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '64',
-								name: 'Shrewsbury',
-							},
-							awayTeam: {
-								id: '62',
-								name: 'Reading',
-							},
-							venue: {
-								id: '1637',
-								name: 'The Croud Meadow',
-							},
-							type: 'Fixture',
-						},
-					],
-				},
-				{
-					competitionSummary: {
-						id: '103',
-						url: '/football/leaguetwofootball',
-						fullName: 'League Two',
-						nation: 'English',
-						tableDividers: [3, 7, 22],
-					},
-					matches: [
-						{
-							id: '4486262',
-							date: '2025-04-08T19:45:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '1',
-								name: 'League',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '73',
-								name: 'Chesterfield',
-							},
-							awayTeam: {
-								id: '77',
-								name: 'Gillingham',
-							},
-							venue: {
-								id: '3355',
-								name: 'SMH Group Stadium',
+								id: '86',
+								name: 'Elland Road',
 							},
 							type: 'Fixture',
 						},
@@ -1054,18 +146,14 @@ export const footballData: FEFootballMatchListPage = {
 	filters: {
 		English: [
 			{
-				name: 'Premier League',
-				url: '/football/premierleague/live',
+				name: 'Championship',
+				url: '/football/championship/live',
 			},
 		],
 		European: [
 			{
 				name: 'Serie A',
 				url: '/football/serieafootball/live',
-			},
-			{
-				name: 'La Liga',
-				url: '/football/laligafootball/live',
 			},
 		],
 	},
@@ -1633,28 +721,6 @@ export const footballData: FEFootballMatchListPage = {
 				url: 'https://www.theguardian.com/insidetheguardian',
 			},
 			{
-				title: 'The Observer',
-				url: '/observer',
-				children: [
-					{
-						title: 'Comment',
-						url: '/theobserver/news/comment',
-					},
-					{
-						title: 'The New Review',
-						url: '/theobserver/new-review',
-					},
-					{
-						title: 'Observer Magazine',
-						url: '/theobserver/magazine',
-					},
-					{
-						title: 'Observer Food Monthly',
-						url: '/theobserver/foodmonthly',
-					},
-				],
-			},
-			{
 				title: 'Guardian Weekly',
 				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
 			},
@@ -1671,16 +737,12 @@ export const footballData: FEFootballMatchListPage = {
 						url: '/crosswords/series/quick',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
+						title: 'Sunday quick',
+						url: '/crosswords/series/sunday-quick',
 					},
 					{
 						title: 'Quick cryptic',
 						url: '/crosswords/series/quick-cryptic',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
 					},
 					{
 						title: 'Quiptic',
@@ -1693,10 +755,6 @@ export const footballData: FEFootballMatchListPage = {
 					{
 						title: 'Prize',
 						url: '/crosswords/series/prize',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
 					},
 					{
 						title: 'Genius',
@@ -1889,7 +947,6 @@ export const footballData: FEFootballMatchListPage = {
 	config: {
 		switches: {
 			lightbox: true,
-			prebidCriteo: true,
 			externalVideoEmbeds: true,
 			personaliseSignInGateAfterCheckout: true,
 			abSignInGateMainVariant: true,
@@ -1919,15 +976,17 @@ export const footballData: FEFootballMatchListPage = {
 			prebidAnalytics: true,
 			extendedMostPopular: true,
 			ampContentAbTesting: false,
+			prebidCriteo: true,
+			abPrebidMultibid: true,
 			imrWorldwide: true,
 			acast: true,
 			twitterUwt: true,
 			abAuxiaSignInGate: true,
-			abDeferPermutiveLoad: true,
 			prebidAppnexusInvcode: true,
 			ampPrebidPubmatic: false,
 			a9HeaderBidding: true,
 			prebidAppnexus: true,
+			europeBetaFrontTest2: true,
 			enableDiscussionSwitch: true,
 			prebidXaxis: true,
 			stickyVideos: true,
@@ -1947,6 +1006,7 @@ export const footballData: FEFootballMatchListPage = {
 			ampAmazon: false,
 			prebidAdYouLike: true,
 			mostViewedFronts: true,
+			abA9BidResponseWinner: true,
 			optOutAdvertising: true,
 			abSignInGateMainControl: true,
 			googleSearch: true,
@@ -1965,6 +1025,7 @@ export const footballData: FEFootballMatchListPage = {
 			youtubeIma: true,
 			webFonts: true,
 			liveBlogTopSponsorship: true,
+			lineItemJobs: true,
 			ophan: true,
 			crosswordSvgThumbnails: true,
 			prebidTriplelift: true,
@@ -1988,7 +1049,9 @@ export const footballData: FEFootballMatchListPage = {
 			europeBetaFront: true,
 			prebidBidCache: true,
 		},
-		abTests: {},
+		abTests: {
+			europeBetaFrontTest2Variant: 'variant',
+		},
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		stage: 'PROD',
 		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
@@ -2008,7 +1071,7 @@ export const footballData: FEFootballMatchListPage = {
 		forecastsapiurl: '/weatherapi/forecast',
 		supportUrl: 'https://support.theguardian.com',
 		commercialBundleUrl:
-			'https://assets.guim.co.uk/commercial/0d2d686d2b768ef23e70/graun.standalone.commercial.js',
+			'https://assets.guim.co.uk/commercial/3047aee80994211e1b89/graun.standalone.commercial.js',
 		idOAuthUrl: 'https://oauth.theguardian.com',
 		webTitle: 'Live matches',
 		isFront: false,
@@ -2239,4 +1302,5 @@ export const footballData: FEFootballMatchListPage = {
 	isAdFreeUser: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	canonicalUrl: 'https://www.theguardian.com/football/live',
+	pageId: 'football/live',
 };

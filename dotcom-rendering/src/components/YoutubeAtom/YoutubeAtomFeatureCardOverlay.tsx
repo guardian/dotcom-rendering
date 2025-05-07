@@ -6,7 +6,7 @@ import { secondsToDuration } from '../../lib/formatTime';
 import { palette } from '../../palette';
 import type { AspectRatio } from '../../types/front';
 import { CardFooter } from '../Card/components/CardFooter';
-import { PlayIcon } from '../Card/components/PlayIcon';
+import { narrowPlayIconWidth, PlayIcon } from '../Card/components/PlayIcon';
 import { TrailText } from '../Card/components/TrailText';
 import type { ResponsiveFontSize } from '../CardHeadline';
 import { CardHeadline } from '../CardHeadline';
@@ -87,6 +87,16 @@ const immersiveOverlayStyles = css`
 	}
 `;
 
+const playIconStyles = css`
+	position: absolute;
+	/**
+      * Subject to change. We will wait to see how fronts editors use the
+	  * headlines and standfirsts before we decide on a final position.
+	  */
+	top: 35%;
+	left: calc(50% - ${narrowPlayIconWidth / 2}px);
+`;
+
 const videoPillStyles = css`
 	position: absolute;
 	top: ${space[2]}px;
@@ -116,6 +126,8 @@ type Props = {
 	discussionApiUrl?: string;
 	discussionId?: string;
 	isImmersive?: boolean;
+	byline?: string;
+	showByline?: boolean;
 };
 
 export const YoutubeAtomFeatureCardOverlay = ({
@@ -141,6 +153,8 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	discussionId,
 	discussionApiUrl,
 	isImmersive,
+	byline,
+	showByline,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
@@ -172,6 +186,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 						width={width}
 						aspectRatio={aspectRatio}
 						mobileAspectRatio={mobileAspectRatio}
+						isImmersive={isImmersive}
 					/>
 				)}
 				{hasDuration && !isVideoArticle ? (
@@ -183,7 +198,9 @@ export const YoutubeAtomFeatureCardOverlay = ({
 					</div>
 				) : null}
 				<div className="image-overlay" />
-				<PlayIcon iconWidth="narrow" />
+				<div css={playIconStyles}>
+					<PlayIcon iconWidth="narrow" />
+				</div>
 				<div
 					css={[
 						textOverlayStyles,
@@ -205,6 +222,8 @@ export const YoutubeAtomFeatureCardOverlay = ({
 							headlineColour={palette('--feature-card-headline')}
 							kickerColour={palette('--feature-card-kicker-text')}
 							isBetaContainer={true}
+							byline={byline}
+							showByline={showByline}
 						/>
 					)}
 					{!!trailText && (

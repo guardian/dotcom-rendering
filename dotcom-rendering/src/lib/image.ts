@@ -49,14 +49,19 @@ export const generateImageURL = ({
 	imageWidth,
 	resolution,
 	aspectRatio = 'none',
+	cropOffset,
 }: {
 	mainImage: string;
 	imageWidth: number;
 	resolution: 'low' | 'high';
 	aspectRatio?: string;
+	cropOffset?: { x: number; y: number };
 }): string => {
 	const url = new URL(mainImage);
-
+	const offset = cropOffset
+		? `,offset-x${cropOffset.x},offset-y${cropOffset.y}`
+		: ``;
+	const crop = `${aspectRatio}${offset}`;
 	// In CODE, we do not generate optimised replacement images
 	if (url.hostname === 's3-eu-west-1.amazonaws.com') return url.href;
 
@@ -64,7 +69,7 @@ export const generateImageURL = ({
 		width: imageWidth.toString(),
 		dpr: String(resolution === 'high' ? 2 : 1),
 		s: 'none',
-		crop: aspectRatio,
+		crop,
 	});
 
 	return `https://i.guim.co.uk/img/${getServiceFromUrl(url)}${

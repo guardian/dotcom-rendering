@@ -6,11 +6,18 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 
 This guide will help you get the `dotcom-rendering` application running on your development machine.
 
+To download the repository
+
+```
+$ git clone git@github.com:guardian/dotcom-rendering.git
+$ cd dotcom-rendering
+```
+
 ### Install Node.js
 
-The only thing you need to make sure you have installed before you get going is [Node.js](https://nodejs.org).
+Make sure you have [Node.js](https://nodejs.org) installed.
 
-We recommend using [fnm](https://github.com/Schniz/fnm) to help manage multiple versions of Node.js on on machine.
+We recommend using [fnm](https://github.com/Schniz/fnm) to help manage multiple versions of Node.js on one machine.
 
 Once Node is installed, make sure you're using the correct package manager by [enabling corepack](https://github.com/nodejs/corepack?tab=readme-ov-file#utility-commands):
 
@@ -18,15 +25,25 @@ Once Node is installed, make sure you're using the correct package manager by [e
 $ corepack enable
 ```
 
-> [!NOTE]
->
-> If you're using `asdf`, you'll need to run `asdf reshim nodejs` after running `corepack enable`.
+If you're using `asdf`, you'll need to run `asdf reshim nodejs` after running `corepack enable`.
 
-### Running instructions
+### Install Dependencies
+
+run
+
+```
+$ make install
+```
+
+If it complains that you do not have the right version of node, then run (or replace with the correct version manager or the correct version):
+
+```
+$ fnm install 22.14.0
+```
+
+### Running on local
 
 ```sh
-$ git clone git@github.com:guardian/dotcom-rendering.git
-$ cd dotcom-rendering
 $ make dev
 ```
 
@@ -44,7 +61,7 @@ http://localhost:3030/ArticleJson?url=https://www.theguardian.com/sport/2019/jul
 
 If you're new to TypeScript projects, if you're trying to integrate with other applications or if you prefer to take things slow, we also have a more [detailed setup guide](docs/contributing/detailed-setup-guide.md).
 
-### Technologies
+## Technologies
 
 | Technology                                                                                                                 | Description                                                                                                                                                                                                                                                                                                                                       |
 | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

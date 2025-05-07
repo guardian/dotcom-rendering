@@ -1,4 +1,4 @@
-import { type CrosswordProps } from '@guardian/react-crossword-next';
+import { type CrosswordProps } from '@guardian/react-crossword';
 import type { ArticleFormat } from '../lib/articleFormat';
 
 export type StarRating = 0 | 1 | 2 | 3 | 4 | 5;

@@ -85,7 +85,7 @@ else
 	# not in a terminal, so v possible we're running a husky script in a git gui
 	echo "Could not find Node v$nvmrc_version."
 	echo "You may need to load your Node version manager in a ~/.huskyrc file."
-	echo "See https://typicode.github.io/husky/troubleshooting.html#command-not-found."
+	echo "See https://typicode.github.io/husky/how-to.html#node-version-managers-and-guis."
 fi
 
 # exit with failure

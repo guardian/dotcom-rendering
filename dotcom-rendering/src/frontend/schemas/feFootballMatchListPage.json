@@ -3,9 +3,6 @@
         {
             "type": "object",
             "properties": {
-                "filters": {
-                    "$ref": "#/definitions/Record<string,FEFootballCompetition[]>"
-                },
                 "nav": {
                     "$ref": "#/definitions/FENavType"
                 },
@@ -29,22 +26,28 @@
                 },
                 "contributionsServiceUrl": {
                     "type": "string"
+                },
+                "pageId": {
+                    "type": "string"
                 }
             },
             "required": [
                 "config",
                 "contributionsServiceUrl",
                 "editionId",
-                "filters",
                 "guardianBaseURL",
                 "isAdFreeUser",
                 "nav",
-                "pageFooter"
+                "pageFooter",
+                "pageId"
             ]
         },
         {
             "type": "object",
             "properties": {
+                "filters": {
+                    "$ref": "#/definitions/Record<string,FEFootballCompetition[]>"
+                },
                 "matchesList": {
                     "type": "array",
                     "items": {
@@ -116,14 +119,12 @@
                 }
             },
             "required": [
+                "filters",
                 "matchesList"
             ]
         }
     ],
     "definitions": {
-        "Record<string,FEFootballCompetition[]>": {
-            "type": "object"
-        },
         "FENavType": {
             "type": "object",
             "properties": {
@@ -681,6 +682,9 @@
                 "text",
                 "url"
             ]
+        },
+        "Record<string,FEFootballCompetition[]>": {
+            "type": "object"
         },
         "FEFootballMatch": {
             "anyOf": [

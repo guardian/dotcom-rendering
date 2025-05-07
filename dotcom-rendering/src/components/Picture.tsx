@@ -40,6 +40,7 @@ export type ImageWidthType = {
 	breakpoint: number;
 	width: number;
 	aspectRatio?: AspectRatio;
+	cropOffset?: { x: number; y: number };
 };
 
 /**
@@ -403,7 +404,7 @@ export const generateSources = (
 	imageWidths
 		.slice()
 		.sort(descendingByBreakpoint)
-		.map(({ width: imageWidth, breakpoint, aspectRatio }) => {
+		.map(({ width: imageWidth, breakpoint, aspectRatio, cropOffset }) => {
 			return {
 				breakpoint,
 				width: imageWidth,
@@ -412,12 +413,14 @@ export const generateSources = (
 					imageWidth,
 					resolution: 'high',
 					aspectRatio,
+					cropOffset,
 				}),
 				lowResUrl: generateImageURL({
 					mainImage,
 					imageWidth,
 					resolution: 'low',
 					aspectRatio,
+					cropOffset,
 				}),
 			};
 		});

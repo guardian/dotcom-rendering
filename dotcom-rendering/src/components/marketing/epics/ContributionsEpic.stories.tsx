@@ -4,11 +4,7 @@
  * https://github.com/guardian/support-dotcom-components/blob/a482b35a25ca59f66501c4de02de817046206298/packages/modules/src/modules/epics/ContributionsEpic.stories.tsx
  */
 import { css } from '@emotion/react';
-import {
-	SecondaryCtaType,
-	TickerCountType,
-	TickerEndType,
-} from '@guardian/support-dotcom-components';
+import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
 import React from 'react';
@@ -198,13 +194,10 @@ export const WithTicker: Story = {
 		variant: {
 			...props.variant,
 			tickerSettings: {
-				endType: TickerEndType.unlimited,
-				countType: TickerCountType.money,
 				currencySymbol: '£',
 				copy: {
 					countLabel: 'Help us reach our end-of-year goal',
-					goalReachedPrimary: '',
-					goalReachedSecondary: '',
+					goalCopy: 'goal',
 				},
 				tickerData: {
 					total: 10000,
@@ -226,13 +219,10 @@ export const WithTickerAndWithAboveTopReaderArticleCount: Story = {
 				type: 'above',
 			},
 			tickerSettings: {
-				endType: TickerEndType.unlimited,
-				countType: TickerCountType.money,
 				currencySymbol: '£',
 				copy: {
 					countLabel: 'Help us reach our end-of-year goal',
-					goalReachedPrimary: '',
-					goalReachedSecondary: '',
+					goalCopy: 'goal',
 				},
 				tickerData: {
 					total: 10000,

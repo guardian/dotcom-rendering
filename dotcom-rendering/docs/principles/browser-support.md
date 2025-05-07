@@ -14,7 +14,7 @@ such as supporting TLS (IE<6, Firefox 1). These browsers will not be able to see
 These are [browsers that we publicly recommend](https://www.theguardian.com/help/recommended-browsers) our
 audience use. They will receive the modern experience.
 
-If a browser version has more than 0.01% of traffic, it is considered to be a candidate for recommendation.
+If a browser supports [ES6 module script tags](https://caniuse.com/es6-module) **and** has more than 0.01% of traffic, it is considered to be a candidate for recommendation.
 
 All browser versions above and including the minimum candidate version are considered recommended browsers.
 

@@ -3,11 +3,7 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/designableBanner/stories/DesignableBanner.stories.tsx
  */
-import {
-	SecondaryCtaType,
-	TickerCountType,
-	TickerEndType,
-} from '@guardian/support-dotcom-components';
+import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type {
 	BannerDesignImage,
 	SelectedAmountsVariant,
@@ -55,13 +51,10 @@ export const Default: Story = {
 };
 
 const tickerSettings: TickerSettings = {
-	endType: TickerEndType.unlimited,
-	countType: TickerCountType.money,
 	currencySymbol: '£',
 	copy: {
 		countLabel: '',
-		goalReachedPrimary: '',
-		goalReachedSecondary: '',
+		goalCopy: 'goal',
 	},
 	tickerData: {
 		total: 500000,

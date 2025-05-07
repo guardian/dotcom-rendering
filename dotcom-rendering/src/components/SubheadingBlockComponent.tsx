@@ -40,6 +40,10 @@ export const buildElementTree =
 						</Subheading>
 					);
 
+				case 'BR':
+					// <br> is a void element and cannot have children
+					return jsx('br');
+
 				default:
 					return jsx(node.tagName.toLowerCase(), {
 						children: Array.from(node.childNodes).map(

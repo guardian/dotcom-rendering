@@ -3,9 +3,6 @@
         {
             "type": "object",
             "properties": {
-                "filters": {
-                    "$ref": "#/definitions/Record<string,FEFootballCompetition[]>"
-                },
                 "nav": {
                     "$ref": "#/definitions/FENavType"
                 },
@@ -29,22 +26,28 @@
                 },
                 "contributionsServiceUrl": {
                     "type": "string"
+                },
+                "pageId": {
+                    "type": "string"
                 }
             },
             "required": [
                 "config",
                 "contributionsServiceUrl",
                 "editionId",
-                "filters",
                 "guardianBaseURL",
                 "isAdFreeUser",
                 "nav",
-                "pageFooter"
+                "pageFooter",
+                "pageId"
             ]
         },
         {
             "type": "object",
             "properties": {
+                "filters": {
+                    "$ref": "#/definitions/Record<string,FEFootballCompetition[]>"
+                },
                 "tables": {
                     "type": "array",
                     "items": {
@@ -328,14 +331,12 @@
                 }
             },
             "required": [
+                "filters",
                 "tables"
             ]
         }
     ],
     "definitions": {
-        "Record<string,FEFootballCompetition[]>": {
-            "type": "object"
-        },
         "FENavType": {
             "type": "object",
             "properties": {
@@ -893,6 +894,9 @@
                 "text",
                 "url"
             ]
+        },
+        "Record<string,FEFootballCompetition[]>": {
+            "type": "object"
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"

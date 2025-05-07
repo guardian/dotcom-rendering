@@ -1,14 +1,11 @@
-import Crossword from '@guardian/react-crossword';
+import { Crossword } from '@guardian/react-crossword';
+import type { CAPICrossword } from '@guardian/react-crossword/dist/@types/CAPI';
 import { useEffect, useState } from 'react';
-import {
-	type CrosswordsByDate,
-	type FEEditionsCrossword,
-	groupByDate,
-} from '../types/editionsCrossword';
+import { type CrosswordsByDate, groupByDate } from '../types/editionsCrossword';
 import { CrosswordSelect } from './CrosswordSelect.editions';
 
 type Props = {
-	crosswords: FEEditionsCrossword[];
+	crosswords: CAPICrossword[];
 	/**
 	 * Used to derive the dates by which to group the crosswords. If `undefined`
 	 * it will use a side-effect to determine the local timezone.
@@ -84,11 +81,7 @@ const CrosswordsWithInitialDate = ({
 				onCrosswordIndexChange={setCrosswordIndex}
 			/>
 			{crossword === undefined ? null : (
-				<Crossword
-					data={crossword}
-					id={crossword.name}
-					key={crossword.name}
-				/>
+				<Crossword data={crossword} key={crossword.name} />
 			)}
 		</>
 	);

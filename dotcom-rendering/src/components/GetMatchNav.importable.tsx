@@ -141,6 +141,7 @@ export const GetMatchNav = ({
 				homeTeam={data.homeTeam}
 				awayTeam={data.awayTeam}
 				comments={data.comments}
+				usage="Article"
 			/>
 		);
 	}

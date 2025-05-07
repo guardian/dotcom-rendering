@@ -1,9 +1,12 @@
 import { css } from '@emotion/react';
-import { from, space } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import { useEffect, useRef, useState } from 'react';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { palette } from '../palette';
 import { CarouselNavigationButtons } from './CarouselNavigationButtons';
+
+type GapSize = 'small' | 'medium' | 'large';
+type GapSizes = { row: GapSize; column: GapSize };
 
 type Props = {
 	children: React.ReactNode;
@@ -12,6 +15,7 @@ type Props = {
 	visibleCardsOnTablet: number;
 	sectionId?: string;
 	shouldStackCards?: { desktop: boolean; mobile: boolean };
+	gapSizes?: GapSizes;
 };
 
 /**
@@ -53,7 +57,6 @@ const carouselStyles = css`
 	width: 100%;
 	grid-auto-columns: 1fr;
 	grid-auto-flow: column;
-	gap: 20px;
 	overflow-x: auto;
 	overflow-y: hidden;
 	scroll-snap-type: x mandatory;
@@ -87,20 +90,47 @@ const carouselStyles = css`
 	}
 `;
 
+const carouselGapStyles = (column: number, row: number) => {
+	return css`
+		column-gap: ${column}px;
+		row-gap: ${row}px;
+	`;
+};
+
 const itemStyles = css`
 	display: flex;
 	scroll-snap-align: start;
 	grid-area: span 1;
 	position: relative;
+`;
+
+const leftBorderStyles = css`
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: -10px;
+	width: 1px;
+	background-color: ${palette('--card-border-top')};
+	transform: translateX(-50%);
+`;
+
+const singleRowLeftBorderStyles = css`
 	:not(:first-child)::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: -10px;
-		width: 1px;
-		background-color: ${palette('--card-border-top')};
-		transform: translateX(-50%);
+		${leftBorderStyles}
+	}
+`;
+
+const stackedRowLeftBorderStyles = css`
+	${from.tablet} {
+		:not(:first-child)::before {
+			${leftBorderStyles}
+		}
+	}
+	${until.tablet} {
+		:not(:first-child):not(:nth-child(2))::before {
+			${leftBorderStyles}
+		}
 	}
 `;
 
@@ -174,6 +204,17 @@ const generateCarouselColumnStyles = (
 	`;
 };
 
+const getGapSize = (gap: GapSize) => {
+	switch (gap) {
+		case 'small':
+			return space[3];
+		case 'medium':
+			return space[4];
+		case 'large':
+			return space[5];
+	}
+};
+
 /**
  * A component used in the carousel fronts containers (e.g. small/medium/feature)
  */
@@ -184,6 +225,7 @@ export const ScrollableCarousel = ({
 	visibleCardsOnTablet,
 	sectionId,
 	shouldStackCards = { desktop: false, mobile: false },
+	gapSizes = { column: 'large', row: 'large' },
 }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
@@ -202,6 +244,9 @@ export const ScrollableCarousel = ({
 			behavior: 'smooth',
 		});
 	};
+
+	const rowGap = getGapSize(gapSizes.row);
+	const columnGap = getGapSize(gapSizes.column);
 
 	/**
 	 * Updates state of navigation buttons based on carousel's scroll position.
@@ -264,6 +309,7 @@ export const ScrollableCarousel = ({
 				ref={carouselRef}
 				css={[
 					carouselStyles,
+					carouselGapStyles(columnGap, rowGap),
 					generateCarouselColumnStyles(
 						carouselLength,
 						visibleCardsOnMobile,
@@ -297,6 +343,21 @@ export const ScrollableCarousel = ({
 	);
 };
 
-ScrollableCarousel.Item = ({ children }: { children: React.ReactNode }) => (
-	<li css={itemStyles}>{children}</li>
+ScrollableCarousel.Item = ({
+	isStackingCarousel = false,
+	children,
+}: {
+	isStackingCarousel?: boolean;
+	children: React.ReactNode;
+}) => (
+	<li
+		css={[
+			itemStyles,
+			isStackingCarousel
+				? stackedRowLeftBorderStyles
+				: singleRowLeftBorderStyles,
+		]}
+	>
+		{children}
+	</li>
 );

@@ -85,6 +85,9 @@ const indices = [
 	'bodyArea',
 	'rightColumnArea',
 
+	// Loop video container
+	'loop-video-container',
+
 	// Main media
 	'mainMedia',
 

@@ -25,6 +25,7 @@ export type ImageSizeType =
 	| 'jumbo'
 	| 'carousel'
 	| 'podcast'
+	| 'highlights-card'
 	| 'feature'
 	| 'feature-large'
 	| 'feature-immersive';

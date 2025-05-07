@@ -7,10 +7,6 @@ import type { SupportTier } from '../utils/threeTierChoiceCardAmounts';
 import { ContributionsEpicButtons } from './ContributionsEpicButtons';
 import { ContributionsEpicReminder } from './ContributionsEpicReminder';
 
-interface OnReminderOpen {
-	buttonCopyAsString: string;
-}
-
 type Props = EpicProps & {
 	amountsTestName?: string;
 	amountsVariantName?: string;
@@ -23,7 +19,6 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 	articleCounts,
 	tracking,
 	submitComponentEvent,
-	onReminderOpen,
 	fetchEmail,
 	amountsTestName,
 	amountsVariantName,
@@ -87,18 +82,6 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 				tracking={tracking}
 				countryCode={countryCode}
 				onOpenReminderClick={(): void => {
-					const buttonCopyAsString = showReminderFields?.reminderCta
-						.toLowerCase()
-						.replace(/\s/g, '-');
-
-					// This callback lets the platform react to the user interaction with the
-					// 'Remind me' button
-					if (onReminderOpen) {
-						onReminderOpen({
-							buttonCopyAsString,
-						} as OnReminderOpen);
-					}
-
 					if (fetchEmail) {
 						void fetchEmail().then((resolvedEmail) => {
 							if (resolvedEmail) {

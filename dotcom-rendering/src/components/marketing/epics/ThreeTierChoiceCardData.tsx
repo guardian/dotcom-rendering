@@ -11,7 +11,7 @@ export const ChoiceCardTestData_REGULAR = (
 			isDiscountActive
 				? `Support ${currencySymbol}${amount}/year`
 				: `Support ${currencySymbol}${amount}/month`,
-		benefitsLabel: 'Support',
+		benefitsLabel: longerBenefits ? 'Support' : undefined,
 		benefits: () => [
 			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
 		],
@@ -40,7 +40,7 @@ export const ChoiceCardTestData_REGULAR = (
 				return `Support ${currencySymbol}${amount}/month`;
 			}
 		},
-		benefitsLabel: 'All-access digital',
+		benefitsLabel: longerBenefits ? 'All-access digital' : undefined,
 		benefits: () =>
 			longerBenefits
 				? fullSupporterPlusBenefits
@@ -58,12 +58,15 @@ export const ChoiceCardTestData_REGULAR = (
 
 export const ChoiceCardTestData_US = (
 	longerBenefits: boolean,
+	isDiscountActive: boolean,
 ): ChoiceInfo[] => [
 	{
 		supportTier: 'Contribution',
 		label: (amount: number, currencySymbol: string): string =>
-			`Support ${currencySymbol}${amount}/month`,
-		benefitsLabel: 'Support',
+			isDiscountActive
+				? `Support ${currencySymbol}${amount}/year`
+				: `Support ${currencySymbol}${amount}/month`,
+		benefitsLabel: longerBenefits ? 'Support' : undefined,
 		benefits: () => [
 			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
 		],
@@ -71,9 +74,28 @@ export const ChoiceCardTestData_US = (
 	},
 	{
 		supportTier: 'SupporterPlus',
-		label: (amount: number, currencySymbol: string): string =>
-			`Support ${currencySymbol}${amount}/month`,
-		benefitsLabel: 'All-access digital',
+		label: (
+			amount: number,
+			currencySymbol: string,
+			discount?: number,
+		): JSX.Element | string => {
+			if (!isUndefined(discount)) {
+				return (
+					<>
+						Support{' '}
+						<s>
+							{currencySymbol}
+							{amount}
+						</s>{' '}
+						{currencySymbol}
+						{amount * (1 - discount)}/year{' '}
+					</>
+				);
+			} else {
+				return `Support ${currencySymbol}${amount}/month`;
+			}
+		},
+		benefitsLabel: longerBenefits ? 'All-access digital' : undefined,
 		benefits: () =>
 			longerBenefits
 				? fullSupporterPlusBenefits
@@ -103,5 +125,4 @@ const fullSupporterPlusBenefits = [
 const shorterSupporterPlusBenefits = [
 	'Unlimited access to the Guardian app and Feast app',
 	'Ad-free reading on all your devices',
-	'Exclusive supporter newsletter',
 ];

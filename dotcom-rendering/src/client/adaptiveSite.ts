@@ -21,7 +21,9 @@ export const shouldAdapt = async (): Promise<boolean> => {
 	 * This is a temporary measure to ensure that the front is not adapted during testing.
 	 */
 	if (
-		window.guardian.config.tests.europeBetaFrontVariant === 'variant' &&
+		(window.guardian.config.tests.europeBetaFrontVariant === 'variant' ||
+			window.guardian.config.tests.europeBetaFrontTest2Variant ===
+				'variant') &&
 		window.location.pathname === '/europe'
 	) {
 		return false;

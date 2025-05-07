@@ -72,7 +72,6 @@ export type Build =
 	| 'client.apps'
 	| 'client.web'
 	| 'client.web.variant'
-	| 'client.web.legacy'
 	| 'client.editionsCrossword';
 
 type ManifestPath = `./manifest.${Build}.json`;
@@ -117,7 +116,6 @@ const getScriptRegex = (build: Build) =>
 
 export const WEB = getScriptRegex('client.web');
 export const WEB_VARIANT_SCRIPT = getScriptRegex('client.web.variant');
-export const WEB_LEGACY_SCRIPT = getScriptRegex('client.web.legacy');
 export const APPS_SCRIPT = getScriptRegex('client.apps');
 export const EDITIONS_CROSSWORD_SCRIPT = getScriptRegex(
 	'client.editionsCrossword',
@@ -125,9 +123,6 @@ export const EDITIONS_CROSSWORD_SCRIPT = getScriptRegex(
 
 export const generateScriptTags = (scripts: string[]): string[] =>
 	scripts.filter(isString).map((script) => {
-		if (script.match(WEB_LEGACY_SCRIPT)) {
-			return `<script defer nomodule src="${script}"></script>`;
-		}
 		if (
 			script.match(WEB) ??
 			script.match(WEB_VARIANT_SCRIPT) ??
@@ -148,7 +143,7 @@ export const getModulesBuild = ({
 }: {
 	tests: ServerSideTests;
 	switches: Switches;
-}): Exclude<Extract<Build, `client.web${string}`>, 'client.web.legacy'> => {
+}): Extract<Build, `client.web${string}`> => {
 	if (BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant') {
 		return 'client.web.variant';
 	}

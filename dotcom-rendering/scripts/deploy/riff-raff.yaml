@@ -10,7 +10,7 @@ templates:
       amiEncrypted: true
       amiTags:
         # Keep the Node version in sync with `.nvmrc`
-        Recipe: dotcom-rendering-ARM-jammy-node-20.15.1
+        Recipe: dotcom-rendering-ARM-jammy-node-22.14.0
         AmigoStage: PROD
 deployments:
   frontend-static:
