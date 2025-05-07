@@ -355,6 +355,9 @@
                 },
                 {
                     "$ref": "#/definitions/CrosswordElement"
+                },
+                {
+                    "$ref": "#/definitions/FilterProductDetails"
                 }
             ]
         },
@@ -3874,6 +3877,22 @@
         },
         "Record<string,number[]>": {
             "type": "object"
+        },
+        "FilterProductDetails": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.FilterProductDetails"
+                },
+                "html": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "html"
+            ]
         },
         "Attributes": {
             "type": "object",
