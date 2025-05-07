@@ -34,6 +34,8 @@ import { ContainerOverrides } from './ContainerOverrides';
 import { FormatBoundary } from './FormatBoundary';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
+import type { Product } from './ProductCard';
+import { ProductCard } from './ProductCard';
 
 type Props = {
 	heading: string;
@@ -271,8 +273,10 @@ const buttonContainerStyleWithPageSkin = css`
 	display: none;
 `;
 
-const prevButtonContainerStyle = (leftColSize: LeftColSize) => {
+const prevButtonContainerStyle = (leftColSize: LeftColSize | 'none') => {
 	switch (leftColSize) {
+		case 'none':
+			return css``;
 		case 'wide':
 			return css`
 				${from.leftCol} {
@@ -713,13 +717,13 @@ const InlineChevrons = ({
 	leftColSize,
 	hasPageSkin,
 }: {
-	trails: TrailType[];
+	trails: TrailType[] | Product[];
 	index: number;
 	prev: () => void;
 	next: () => void;
 	arrowName: string;
 	isVideoContainer: boolean;
-	leftColSize: LeftColSize;
+	leftColSize: LeftColSize | 'none';
 	hasPageSkin: boolean;
 }) => (
 	<>
@@ -1049,5 +1053,145 @@ export const Carousel = ({
 				</div>
 			</div>
 		</CarouselColours>
+	);
+};
+
+export const ProductCarousel = ({ products }: { products: Product[] }) => {
+	const carouselRef = useRef<HTMLUListElement>(null);
+
+	const [index, setIndex] = useState(0);
+	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
+
+	const arrowName = 'carousel-small-arrow';
+
+	const notPresentation = (el: HTMLElement): boolean =>
+		el.getAttribute('role') !== 'presentation';
+
+	const getItems = (): HTMLElement[] => {
+		const { current } = carouselRef;
+		if (current === null) return [];
+
+		return Array.from(current.children) as HTMLElement[];
+	};
+
+	const getIndex = (): number => {
+		const { current } = carouselRef;
+		const offsets = getItems()
+			.filter(notPresentation)
+			.map((el) => el.offsetLeft);
+		const [offset] = offsets;
+		if (current === null || isUndefined(offset)) return 0;
+
+		const scrolled = current.scrollLeft + offset;
+		const active = offsets.findIndex((el) => el >= scrolled);
+
+		return Math.max(0, active);
+	};
+
+	const getSetIndex = () => {
+		setIndex(getIndex());
+	};
+
+	const prev = () => {
+		const { current } = carouselRef;
+		const offsets = getItems()
+			.filter(notPresentation)
+			.map(({ offsetLeft }) => offsetLeft);
+		const [offset] = offsets;
+
+		if (current === null || isUndefined(offset)) return;
+
+		const scrolled = current.scrollLeft + offset;
+
+		const nextOffset = offsets.reverse().find((o) => o < scrolled);
+
+		if (!isUndefined(nextOffset) && nextOffset !== 0) {
+			current.scrollTo({ left: nextOffset });
+		} else {
+			current.scrollTo({ left: 0 });
+		}
+		getSetIndex();
+	};
+
+	const next = () => {
+		const { current } = carouselRef;
+		const offsets = getItems()
+			.filter(notPresentation)
+			.map(({ offsetLeft }) => offsetLeft);
+		const [offset] = offsets;
+
+		if (current === null || isUndefined(offset)) return;
+
+		const scrolled = current.scrollLeft + offset;
+		const nextOffset = offsets.find((currOffset) => currOffset > scrolled);
+
+		if (!isUndefined(nextOffset) && nextOffset !== 0) {
+			current.scrollTo({ left: nextOffset });
+		}
+
+		getSetIndex();
+	};
+
+	useEffect(() => {
+		const carousel = carouselRef.current;
+		if (carousel) {
+			carousel.addEventListener('scroll', libDebounce(getSetIndex, 100));
+			return carousel.removeEventListener(
+				'scroll',
+				libDebounce(getSetIndex, 100),
+			);
+		}
+	});
+
+	if (!isHorizontalScrollingSupported) {
+		return null;
+	}
+
+	return (
+		<div css={wrapperStyle(products.length)}>
+			<InlineChevrons
+				trails={products}
+				index={index}
+				prev={prev}
+				next={next}
+				arrowName={arrowName}
+				isVideoContainer={false}
+				leftColSize={'none'}
+				hasPageSkin={false}
+			/>
+			<div css={[containerStyles, containerMargins]}>
+				<ul
+					css={[carouselStyle]}
+					ref={carouselRef}
+					data-heatphan-type="carousel"
+				>
+					{products.map((product, i) => {
+						const { image, title, price, description, stars } =
+							product;
+						return (
+							<LI
+								key={i}
+								percentage="25%"
+								showDivider={i !== 0}
+								padSides={true}
+								padSidesOnMobile={true}
+								snapAlignStart={true}
+								verticalDividerColour={themePalette(
+									'--carousel-border',
+								)}
+							>
+								<ProductCard
+									stars={stars}
+									image={image}
+									title={title}
+									price={price}
+									description={description}
+								/>
+							</LI>
+						);
+					})}
+				</ul>
+			</div>
+		</div>
 	);
 };
