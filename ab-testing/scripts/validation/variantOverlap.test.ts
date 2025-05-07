@@ -31,7 +31,7 @@ Deno.test(
 			highImpact: false,
 			size: 100 / 100,
 			groups: ['control', 'variant'],
-			testSpace: 'secondary',
+			testSpace: 1,
 		};
 
 		const secondaryTest: ABTest = {
@@ -44,7 +44,6 @@ Deno.test(
 			highImpact: false,
 			size: 100 / 100,
 			groups: ['control', 'variant'],
-			testSpace: 'primary',
 		};
 
 		assertEquals(noVariantOverlap([primaryTest, secondaryTest]), true);
