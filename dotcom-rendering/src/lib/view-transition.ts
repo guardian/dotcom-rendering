@@ -9,6 +9,11 @@ function sha256Hash(message: string) {
 export const viewTransitionStyles = (
 	prefix: string,
 	stringToHash: string | undefined,
-): SerializedStyles => css`
-	view-transition-name: ${prefix}-${sha256Hash(stringToHash ?? global.crypto.randomUUID())};
-`;
+): SerializedStyles => {
+	const name = `${prefix}-${sha256Hash(
+		stringToHash ?? global.crypto.randomUUID(),
+	)}`;
+	return css`
+		view-transition-name: ${name};
+	`;
+};

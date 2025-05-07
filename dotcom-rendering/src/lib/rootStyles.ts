@@ -66,5 +66,52 @@ export const rootStyles = (
 		navigation: auto;
 	}
 
+	::view-transition-old(roots) {
+		animation: 0.2s ease-in both slide-in;
+	}
+
+	::view-transition-new(roots) {
+		animation: 0.2s ease-in both slide-in;
+	}
+
+	/* Create a custom animation */
+	@keyframes slide-out {
+		from {
+			transform: translateX(0%);
+		}
+
+		to {
+			transform: translateX(-100%);
+		}
+	}
+
+	@keyframes slide-in {
+		from {
+			transform: translateX(100%);
+		}
+
+		to {
+			transform: translateX(0%);
+		}
+	}
+
+	@keyframes spin {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	@keyframes zoom {
+		from {
+			transform: scale(0.95);
+		}
+		to {
+			transform: scale(1);
+		}
+	}
+
 	${rootAdStyles}
 `;
