@@ -225,10 +225,9 @@ export const CardPicture = ({
 					decideMobileAspectRatioStyles(mobileAspectRatio),
 				roundedCorners && borderRadius,
 				isCircular && circularStyles,
-				alt &&
-					css`
-						view-transition-name: hero-image-${sha256Hash(alt)};
-					`,
+				css`
+					view-transition-name: hero-image-${sha256Hash(alt ?? global.crypto.randomUUID())};
+				`,
 			]}
 		>
 			{sources.map((source) => {

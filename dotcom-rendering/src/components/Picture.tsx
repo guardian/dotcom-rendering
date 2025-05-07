@@ -531,10 +531,9 @@ export const Picture = ({
 		<picture
 			css={[
 				isLightbox ? flex : block,
-				alt &&
-					css`
-						view-transition-name: hero-image-${sha256Hash(alt)};
-					`,
+				css`
+					view-transition-name: hero-image-${sha256Hash(alt ?? global.crypto.randomUUID())};
+				`,
 			]}
 		>
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
