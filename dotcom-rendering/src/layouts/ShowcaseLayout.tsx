@@ -18,7 +18,7 @@ import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
-import { Carousel } from '../components/Carousel.importable';
+import { Carousel, ProductCarousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
@@ -52,8 +52,10 @@ import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
+import type { FEElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { Product } from '../components/ProductCard';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -227,7 +229,43 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	} = article;
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
+	const elements: FEElement[] = article.blocks[0]?.elements ?? [];
 
+	const getProductsFromArticle = (): Partial<Product>[] => {
+		const products: Partial<Product>[] = [];
+		let productNumber = 0;
+		for (const element of elements) {
+			const currentProduct = products[productNumber];
+			if (
+				element._type ===
+				'model.dotcomrendering.pageElements.SubheadingBlockElement'
+			) {
+				productNumber++;
+				products[productNumber] = {
+					title: element.html,
+					stars: '★★★★★',
+				};
+			}
+			if (
+				element._type ===
+					'model.dotcomrendering.pageElements.ImageBlockElement' &&
+				!isUndefined(currentProduct)
+			) {
+				currentProduct.image =
+					element.media.allImages[element.media.allImages.length - 2]
+						?.url ?? '';
+			}
+			if (
+				element._type ===
+					'model.dotcomrendering.pageElements.TextBlockElement' &&
+				!isUndefined(currentProduct)
+			) {
+				currentProduct.description += element.html;
+			}
+		}
+		return products;
+	};
+	const products = getProductsFromArticle();
 	const showBodyEndSlot =
 		isWeb &&
 		(parse(article.slotMachineFlags ?? '').showBodyEnd ||
@@ -382,28 +420,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				>
 					<ShowcaseGrid>
 						<GridItem area="media">
-							<div css={mainMediaWrapper}>
-								<MainMedia
-									format={format}
-									elements={article.mainMediaElements}
-									starRating={
-										format.design ===
-											ArticleDesign.Review &&
-										!isUndefined(article.starRating)
-											? article.starRating
-											: undefined
-									}
-									host={host}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									ajaxUrl={article.config.ajaxUrl}
-									abTests={article.config.abTests}
-									switches={article.config.switches}
-									isAdFreeUser={article.isAdFreeUser}
-									isSensitive={article.config.isSensitive}
-									editionId={article.editionId}
-								/>
-							</div>
+							{products && (
+								<ProductCarousel products={products} />
+							)}
 						</GridItem>
 						<GridItem area="title" element="aside">
 							<ArticleTitle
