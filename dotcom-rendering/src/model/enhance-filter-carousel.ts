@@ -5,7 +5,7 @@ import { generateId } from './enhance-H2s';
 const isWhyYouShouldTrustMe = (element: FEElement) =>
 	element._type ===
 		'model.dotcomrendering.pageElements.SubheadingBlockElement' &&
-	generateId(element, []) === 'why-you-should-trust-me';
+	generateId(element, []) === 'at-a-glance';
 
 export const enhanceFilterCarousel = (elements: FEElement[]): FEElement[] => {
 	const placeholder: FilterCarouselElement = {
@@ -13,7 +13,7 @@ export const enhanceFilterCarousel = (elements: FEElement[]): FEElement[] => {
 	};
 
 	const elementsWithCarousel = elements.flatMap((element) =>
-		isWhyYouShouldTrustMe(element) ? [placeholder, element] : element,
+		isWhyYouShouldTrustMe(element) ? [element, placeholder] : element,
 	);
 
 	return elementsWithCarousel;
