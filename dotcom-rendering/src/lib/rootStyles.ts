@@ -66,11 +66,5 @@ export const rootStyles = (
 		navigation: auto;
 	}
 
-	::view-transition-old(hero-image),
-	::view-transition-new(hero-image) {
-		animation-timing-function: ease-in-out;
-		animation-duration: 2s;
-	}
-
 	${rootAdStyles}
 `;
