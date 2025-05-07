@@ -13,7 +13,6 @@ import {
 import { findAdSlots } from '../lib/find-adslots.amp';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import { getSharingUrls } from '../lib/sharing-urls';
-import { insertDisclaimerElement } from '../model/enhance-disclaimer';
 import type { AMPArticleModel } from '../types/article.amp';
 import type { AdTargeting } from '../types/commercial';
 import type { ConfigType } from '../types/config';
@@ -105,9 +104,6 @@ type Props = {
 
 export const Body = ({ data, config }: Props) => {
 	const bodyElements = data.blocks[0] ? data.blocks[0].elements : [];
-	const bodyElementsWithDisclaimer = data.affiliateLinksDisclaimer
-		? insertDisclaimerElement(bodyElements)
-		: bodyElements;
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: data.isAdFreeUser,
 		isSensitive: config.isSensitive,
@@ -120,12 +116,12 @@ export const Body = ({ data, config }: Props) => {
 	const design = decideDesign(data.format);
 	const pillar = decideTheme(data.format);
 	const elementsWithoutAds = Elements(
-		bodyElementsWithDisclaimer,
+		bodyElements,
 		pillar,
 		data.isImmersive,
 		adTargeting,
 	);
-	const insertSlotsAfter = findAdSlots(bodyElementsWithDisclaimer);
+	const insertSlotsAfter = findAdSlots(bodyElements);
 	const adInfo = {
 		adUnit: config.adUnit,
 		section: data.sectionName,

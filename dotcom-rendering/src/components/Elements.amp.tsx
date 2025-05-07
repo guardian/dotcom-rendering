@@ -9,7 +9,6 @@ import type { AdTargeting } from '../types/commercial';
 import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';
-import { AffiliateDisclaimerInline } from './AffiliateDisclaimer';
 import { AudioAtomBlockComponent } from './AudioAtomBlockComponent.amp';
 import { CommentBlockComponent } from './CommentBlockComponent.amp';
 import { ContentAtomBlockComponent } from './ContentAtomBlockComponent.amp';
@@ -42,7 +41,6 @@ const AMP_SUPPORTED_ELEMENTS = [
 	'model.dotcomrendering.pageElements.ChartAtomBlockElement',
 	'model.dotcomrendering.pageElements.CommentBlockElement',
 	'model.dotcomrendering.pageElements.ContentAtomBlockElement',
-	'model.dotcomrendering.pageElements.DisclaimerBlockElement',
 	// We do not support EmbedBlockElement's when they are mandatory
 	// 'model.dotcomrendering.pageElements.EmbedBlockElement',
 	'model.dotcomrendering.pageElements.GenericAtomBlockElement',
@@ -392,8 +390,6 @@ export const Elements = (
 						adTargeting={adTargeting}
 					/>
 				);
-			case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
-				return <AffiliateDisclaimerInline isAmp={true} />;
 			default:
 				console.log('Unsupported Element', JSON.stringify(element));
 				if ((element as { isMandatory?: boolean }).isMandatory) {
