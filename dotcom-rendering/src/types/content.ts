@@ -768,6 +768,11 @@ export interface FilterProductDetails {
 	html: string;
 }
 
+export interface FilterAtAGlance {
+	_type: 'model.dotcomrendering.pageElements.FilterAtAGlance';
+	html: string;
+}
+
 export type FEElement =
 	| AdPlaceholderBlockElement
 	| AudioAtomBlockElement
@@ -830,7 +835,8 @@ export type FEElement =
 	| YoutubeBlockElement
 	| WitnessTypeBlockElement
 	| CrosswordElement
-	| FilterProductDetails;
+	| FilterProductDetails
+	| FilterAtAGlance;
 
 // -------------------------------------
 // Misc

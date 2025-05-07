@@ -358,6 +358,9 @@
                 },
                 {
                     "$ref": "#/definitions/FilterProductDetails"
+                },
+                {
+                    "$ref": "#/definitions/FilterAtAGlance"
                 }
             ]
         },
@@ -3884,6 +3887,22 @@
                 "_type": {
                     "type": "string",
                     "const": "model.dotcomrendering.pageElements.FilterProductDetails"
+                },
+                "html": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "html"
+            ]
+        },
+        "FilterAtAGlance": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.FilterAtAGlance"
                 },
                 "html": {
                     "type": "string"

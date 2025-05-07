@@ -14,6 +14,7 @@ import { enhanceBlockquotes } from './enhance-blockquotes';
 import { enhanceDividers } from './enhance-dividers';
 import { enhanceDots } from './enhance-dots';
 import { enhanceEmbeds } from './enhance-embeds';
+import { enhanceFilterAtAGlance } from './enhance-filter-at-a-glance';
 import { enhanceFilterProductDetails } from './enhance-filter-product-details';
 import { enhanceH2s } from './enhance-H2s';
 import { enhanceElementsImages, enhanceImages } from './enhance-images';
@@ -78,6 +79,7 @@ export const enhanceElements =
 			),
 			enhanceAdPlaceholders(format, options.renderingTarget),
 			enhanceFilterProductDetails,
+			enhanceFilterAtAGlance,
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
 			elements,
