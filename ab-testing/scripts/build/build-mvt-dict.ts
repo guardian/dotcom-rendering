@@ -27,11 +27,9 @@ const abTestsToMVTs = (
 	abTests: ABTest[],
 ): Record<`mvt:${number}`, string[]> => {
 	const primaryTests = abTests.filter(
-		(test) => test.testSpace !== 'secondary',
+		(test) => test.testSpace === undefined || test.testSpace === 0,
 	);
-	const secondaryTests = abTests.filter(
-		(test) => test.testSpace === 'secondary',
-	);
+	const secondaryTests = abTests.filter((test) => test.testSpace === 1);
 
 	const primaryMVTGroups = testsToArray(primaryTests);
 	const secondaryMVTGroups = testsToArray(secondaryTests);
@@ -50,14 +48,19 @@ const abTestsToMVTs = (
 	const mvtKVs: Record<`mvt:${number}`, string[]> = {};
 
 	for (let i = 0; i < MAX_MVT_GROUPS; i++) {
-		if (primaryMVTGroups[i] || secondaryMVTGroups[i]) {
-			mvtKVs[`mvt:${i}`] = [];
+		if (primaryMVTGroups[i]) {
+			mvtKVs[`mvt:${i}`] = [primaryMVTGroups[i]];
+		}
+	}
 
-			if (primaryMVTGroups[i]) {
-				mvtKVs[`mvt:${i}`].push(primaryMVTGroups[i]);
-			}
-			if (secondaryMVTGroups[i]) {
+	// Add secondary tests to the mvtKVs backwards from the end
+	// will avoid overlapping with primary tests to an extent
+	for (let i = MAX_MVT_GROUPS; i > 0; i--) {
+		if (secondaryMVTGroups[i]) {
+			if (mvtKVs[`mvt:${i}`]) {
 				mvtKVs[`mvt:${i}`].push(secondaryMVTGroups[i]);
+			} else {
+				mvtKVs[`mvt:${i}`] = [secondaryMVTGroups[i]];
 			}
 		}
 	}

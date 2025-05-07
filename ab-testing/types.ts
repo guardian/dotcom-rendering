@@ -2,12 +2,6 @@ type Team = 'commercial' | 'webex';
 
 type TestName = `${Team}-${string}`;
 
-type TestGroup = {
-	id: String;
-	/** Percentage of users in this group */
-	size: number;
-};
-
 export type ABTest = {
 	/** Name of the AB test */
 	name: TestName;
@@ -30,8 +24,7 @@ export type ABTest = {
 	/** Test group definition */
 	groups: string[];
 	/**
-	 * Defaults to primary, all the tests in a test space must add up to 100%
-	 * Be aware that putting a test in the secondary space may mean it will overlap other tests
+	 * Defaults to 0, all the tests in a test space must add up to 100%
 	 **/
-	testSpace?: 'primary' | 'secondary';
+	testSpace?: 0 | 1;
 };

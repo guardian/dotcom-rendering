@@ -2,7 +2,7 @@ import { ABTest } from '../../types.ts';
 
 export function noVariantOverlap(tests: ABTest[]) {
 	const allPrimaryTestPercentages = tests
-		.filter((test) => !test.testSpace || test.testSpace === 'primary')
+		.filter((test) => test.testSpace === undefined || test.testSpace === 0)
 		.map((test) => test.size)
 		.reduce((acc, size) => acc + size, 0);
 
@@ -11,7 +11,7 @@ export function noVariantOverlap(tests: ABTest[]) {
 	}
 
 	const allSecordaryTestPercentages = tests
-		.filter((test) => test.testSpace === 'secondary')
+		.filter((test) => test.testSpace === 1)
 		.map((test) => test.size)
 		.reduce((acc, size) => acc + size, 0);
 
