@@ -523,7 +523,14 @@ export const Picture = ({
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
-		<picture css={isLightbox ? flex : block}>
+		<picture
+			css={[
+				isLightbox ? flex : block,
+				css`
+					view-transition-name: hero-image;
+				`,
+			]}
+		>
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
 			{format.display === ArticleDisplay.Immersive && isMainMedia && (
 				<>

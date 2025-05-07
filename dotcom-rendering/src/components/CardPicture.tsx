@@ -220,6 +220,9 @@ export const CardPicture = ({
 					decideMobileAspectRatioStyles(mobileAspectRatio),
 				roundedCorners && borderRadius,
 				isCircular && circularStyles,
+				css`
+					view-transition-name: hero-image;
+				`,
 			]}
 		>
 			{sources.map((source) => {
