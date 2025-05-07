@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
+import SHA256 from 'crypto-js/sha256';
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import {
 	ArticleDesign,
@@ -462,6 +463,10 @@ export const Sources = ({ sources }: { sources: ImageSource[] }) => {
 	);
 };
 
+function sha256Hash(message: string) {
+	return SHA256(message).toString();
+}
+
 export const Picture = ({
 	role,
 	format,
@@ -526,9 +531,10 @@ export const Picture = ({
 		<picture
 			css={[
 				isLightbox ? flex : block,
-				css`
-					view-transition-name: hero-image;
-				`,
+				alt &&
+					css`
+						view-transition-name: hero-image-${sha256Hash(alt)};
+					`,
 			]}
 		>
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
