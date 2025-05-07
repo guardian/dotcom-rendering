@@ -16,6 +16,7 @@ import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { ExplainerAtom } from '../components/ExplainerAtom';
 import { Figure } from '../components/Figure';
+import { FilterProductDetailsComponent } from '../components/FilterProductDetailsComponent';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
@@ -874,6 +875,8 @@ export const renderElement = ({
 					/>
 				</Island>
 			);
+		case 'model.dotcomrendering.pageElements.FilterProductDetails':
+			return <FilterProductDetailsComponent html={element.html} />;
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':

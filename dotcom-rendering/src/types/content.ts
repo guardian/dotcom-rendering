@@ -763,6 +763,11 @@ export interface CrosswordElement {
 	crossword: CrosswordProps['data'];
 }
 
+export interface FilterProductDetails {
+	_type: 'model.dotcomrendering.pageElements.FilterProductDetails';
+	html: string;
+}
+
 export type FEElement =
 	| AdPlaceholderBlockElement
 	| AudioAtomBlockElement
@@ -824,7 +829,8 @@ export type FEElement =
 	| VineBlockElement
 	| YoutubeBlockElement
 	| WitnessTypeBlockElement
-	| CrosswordElement;
+	| CrosswordElement
+	| FilterProductDetails;
 
 // -------------------------------------
 // Misc

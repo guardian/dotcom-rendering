@@ -15,6 +15,7 @@ import { enhanceDisclaimer } from './enhance-disclaimer';
 import { enhanceDividers } from './enhance-dividers';
 import { enhanceDots } from './enhance-dots';
 import { enhanceEmbeds } from './enhance-embeds';
+import { enhanceFilterProductDetails } from './enhance-filter-product-details';
 import { enhanceH2s } from './enhance-H2s';
 import { enhanceElementsImages, enhanceImages } from './enhance-images';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
@@ -78,6 +79,7 @@ export const enhanceElements =
 			),
 			enhanceAdPlaceholders(format, options.renderingTarget),
 			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer),
+			enhanceFilterProductDetails,
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
 			elements,
