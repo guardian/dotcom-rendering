@@ -60,7 +60,7 @@ export const ProductCard = ({
 
 	const starRating = css`
 		${textSansBold17};
-		colour: ${palette.neutral['46']};
+		color: ${palette.neutral['46']};
 	`;
 
 	return (
