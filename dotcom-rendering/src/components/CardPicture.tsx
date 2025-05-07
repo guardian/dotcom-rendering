@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { breakpoints, space, until } from '@guardian/source/foundations';
-import SHA256 from 'crypto-js/sha256';
 import type { ImgHTMLAttributes } from 'react';
 import React from 'react';
+import { viewTransitionStyles } from '../lib/view-transition';
 import type { AspectRatio } from '../types/front';
 import type { ImageSizeType } from './Card/components/ImageWrapper';
 import type { ImageWidthType } from './Picture';
@@ -194,10 +194,6 @@ const decideMobileAspectRatioStyles = (aspectRatio?: AspectRatio) => {
 	`;
 };
 
-function sha256Hash(message: string) {
-	return SHA256(message).toString();
-}
-
 export const CardPicture = ({
 	mainImage,
 	alt,
@@ -225,9 +221,7 @@ export const CardPicture = ({
 					decideMobileAspectRatioStyles(mobileAspectRatio),
 				roundedCorners && borderRadius,
 				isCircular && circularStyles,
-				css`
-					view-transition-name: hero-image-${sha256Hash(alt ?? global.crypto.randomUUID())};
-				`,
+				viewTransitionStyles('hero-image', alt),
 			]}
 		>
 			{sources.map((source) => {
