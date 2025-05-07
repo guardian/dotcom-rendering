@@ -62,5 +62,9 @@ export const rootStyles = (
 		}
 	}
 
+	@view-transition {
+		navigation: auto;
+	}
+
 	${rootAdStyles}
 `;
