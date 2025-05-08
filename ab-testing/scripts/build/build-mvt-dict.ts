@@ -36,14 +36,12 @@ const abTestsToMVTs = (
 
 	if (primaryMVTGroups.length > MAX_MVT_GROUPS) {
 		throw new Error(
-			`The the primary test space test sizes add up to > 100%.`,
+			`Test space 0 test sizes add up to > 100%, try moving the test to another space.`,
 		);
 	}
 
 	if (secondaryMVTGroups.length > MAX_MVT_GROUPS) {
-		throw new Error(
-			`The the secondary test space test sizes add up to > 100%.`,
-		);
+		throw new Error(`Test space 1 test sizes add up to > 100%.`);
 	}
 
 	const mvtKVs: Record<`mvt:${number}`, string[]> = {};
