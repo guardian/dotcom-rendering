@@ -65,14 +65,14 @@ export const rootStyles = (
 	@view-transition {
 		navigation: auto;
 	}
-
-	::view-transition-old(roots) {
+	/*
+	::view-transition-old(root) {
 		animation: 0.2s ease-in both slide-in;
 	}
 
-	::view-transition-new(roots) {
+	::view-transition-new(root) {
 		animation: 0.2s ease-in both slide-in;
-	}
+	} */
 
 	/* Create a custom animation */
 	@keyframes slide-out {
