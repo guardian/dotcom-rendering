@@ -2,12 +2,6 @@ type Team = 'commercial' | 'webex';
 
 type TestName = `${Team}-${string}`;
 
-type TestGroup = {
-	id: String;
-	/** Percentage of users in this group */
-	size: number;
-};
-
 export type ABTest = {
 	/** Name of the AB test */
 	name: TestName;
@@ -25,8 +19,12 @@ export type ABTest = {
 	 * Would be nice to know who changed the status last and when
 	 */
 	status: 'ON' | 'OFF';
+	/** The size of the test, all variants will be divided equally to fit */
+	size: number;
 	/** Test group definition */
-	groups: Array<TestGroup>;
-	/** Can this test overlap other tests? Required for 100% tests */
-	allowOverlap?: boolean;
+	groups: string[];
+	/**
+	 * Defaults to 0, all the tests in a test space must add up to 100%
+	 **/
+	testSpace?: 0 | 1;
 };
