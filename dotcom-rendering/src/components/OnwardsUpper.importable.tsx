@@ -295,9 +295,9 @@ export const OnwardsUpper = ({
 		onwardsSource = 'related-stories';
 	}
 
-	const curatedDataUrl = showRelatedContent
-		? getContainerDataUrl(pillar, editionId, ajaxUrl)
-		: undefined;
+	// const curatedDataUrl = showRelatedContent
+	// 	? getContainerDataUrl(pillar, editionId, ajaxUrl)
+	// 	: undefined;
 
 	return (
 		<div css={onwardsWrapper}>
@@ -317,7 +317,7 @@ export const OnwardsUpper = ({
 					/>
 				</Section>
 			)}
-			{!!curatedDataUrl && !isPaidContent && (
+			{/* {!!curatedDataUrl && !isPaidContent && (
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-border')}
@@ -332,7 +332,7 @@ export const OnwardsUpper = ({
 						renderingTarget={renderingTarget}
 					/>
 				</Section>
-			)}
+			)} */}
 		</div>
 	);
 };

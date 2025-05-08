@@ -72,11 +72,19 @@ export const FetchOnwardsData = ({
 			.filter(isNonNullable),
 	);
 
+	const trails = data.trails.map((trail) => ({
+		...trail,
+		url: trail.url.replace(
+			'https://www.theguardian.com',
+			'http://localhost:3030/Article/https://www.theguardian.com',
+		),
+	}));
+
 	return (
 		<div css={minHeight}>
 			<Carousel
 				heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
-				trails={buildTrails(data.trails, limit)}
+				trails={buildTrails(trails, limit)}
 				description={data.description}
 				onwardsSource={onwardsSource}
 				format={format}

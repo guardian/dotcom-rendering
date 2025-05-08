@@ -80,19 +80,25 @@ type Props = {
 export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 	const [hoverRef, isHovered] = useHover<HTMLAnchorElement>();
 
+	const url = trail.url.replace(
+		'https://www.theguardian.com',
+		'http://localhost:3030/Article/https://www.theguardian.com',
+	);
+
 	return (
 		<li
 			css={listItemStyles}
 			data-link-name={`trail | ${mostViewedItemIndex + 1}`}
 		>
 			<FormatBoundary format={trail.format}>
-				<a css={linkTagStyles} href={trail.url} ref={hoverRef}>
+				<a css={linkTagStyles} href={url} ref={hoverRef}>
 					<div css={lineWrapperStyles}>
 						{!!trail.image && (
 							<div css={imageWrapperStyles}>
 								<Avatar
 									src={trail.image.src}
 									alt={trail.image.altText}
+									useViewTransitions={true}
 								/>
 							</div>
 						)}

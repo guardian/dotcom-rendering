@@ -523,11 +523,15 @@ export const Picture = ({
 
 	const fallbackSource = getFallbackSource(sources);
 
+	const imageIdentifier = fallbackSource.lowResUrl
+		.replace('https://i.guim.co.uk/img/media/', '')
+		.split('/')[0];
+
 	return (
 		<picture
 			css={[
 				isLightbox ? flex : block,
-				viewTransitionStyles('hero-image', alt),
+				viewTransitionStyles('hero-image', imageIdentifier),
 			]}
 		>
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}

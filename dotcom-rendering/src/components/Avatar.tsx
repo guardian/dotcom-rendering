@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
+import { viewTransitionStyles } from '../lib/view-transition';
 import { palette } from '../palette';
 import type { ImageSizeType } from './Card/components/ImageWrapper';
 import {
@@ -57,6 +58,7 @@ type Props = {
 	alt: string;
 	shape?: AvatarShape;
 	imageSize?: ImageSizeType;
+	useViewTransitions?: boolean;
 };
 
 const decideImageWidths = (
@@ -94,7 +96,13 @@ const defaultImageSizes: [ImageWidthType, ...ImageWidthType[]] = [
 	{ breakpoint: breakpoints.tablet, width: 140 },
 ];
 
-export const Avatar = ({ src, alt, shape = 'round', imageSize }: Props) => {
+export const Avatar = ({
+	src,
+	alt,
+	shape = 'round',
+	imageSize,
+	useViewTransitions,
+}: Props) => {
 	const imageWidths = imageSize
 		? decideImageWidths(imageSize)
 		: defaultImageSizes;
@@ -111,10 +119,20 @@ export const Avatar = ({ src, alt, shape = 'round', imageSize }: Props) => {
 	 */
 	const fallbackSource = getFallbackSource(sources);
 
+	const imageIdentifier = fallbackSource.lowResUrl
+		.replace('https://i.guim.co.uk/img/media/', '')
+		.split('/')[0];
+
 	return (
 		<picture
 			// data-size={imageSize}
-			css={[block, picture, shape === 'round' && round]}
+			css={[
+				block,
+				picture,
+				shape === 'round' && round,
+				useViewTransitions &&
+					viewTransitionStyles('hero-image', imageIdentifier),
+			]}
 		>
 			{sources.map((source) => {
 				return (

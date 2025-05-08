@@ -211,6 +211,11 @@ export const CardPicture = ({
 
 	const fallbackSource = getFallbackSource(sources);
 
+	const imageIdentifier = fallbackSource.lowResUrl
+		.replace('https://i.guim.co.uk/img/media/', '')
+		.split('/')[0];
+	console.log('viewTrasitionIdentifier', imageIdentifier);
+
 	return (
 		<picture
 			data-size={imageSize}
@@ -221,7 +226,7 @@ export const CardPicture = ({
 					decideMobileAspectRatioStyles(mobileAspectRatio),
 				roundedCorners && borderRadius,
 				isCircular && circularStyles,
-				viewTransitionStyles('hero-image', alt),
+				viewTransitionStyles('hero-image', imageIdentifier),
 			]}
 		>
 			{sources.map((source) => {
