@@ -49,7 +49,7 @@ Deno.test('testsToArray - multiple tests', () => {
 
 	const result = testsToArray([test1, test2]);
 
-	// Should have 300 + 200 = 500 entries
+	// Should have 200 + 200 = 400 entries
 	assertEquals(result.length, 400);
 	assertEquals(result[0], 'Test1:control');
 	assertEquals(result[99], 'Test1:control');
@@ -113,6 +113,6 @@ Deno.test('abTestsToMVTs - throw error when exceeding capacity', () => {
 			abTestsToMVTs([normalTest, overlapTest1, overlapTest2]);
 		},
 		Error,
-		'The the secondary test space test sizes add up to > 100%.',
+		'Test space 1 test sizes add up to > 100%.',
 	);
 });
