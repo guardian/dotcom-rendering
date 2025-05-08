@@ -121,6 +121,7 @@ const CarouselColours = ({
 
 const wrapperStyle = (length: number) => css`
 	display: flex;
+	position: relative;
 	/* Remove space-between where there is a single item, so that it is left-aligned */
 	${length > 1 && 'justify-content: space-between'}
 	overflow: hidden;
