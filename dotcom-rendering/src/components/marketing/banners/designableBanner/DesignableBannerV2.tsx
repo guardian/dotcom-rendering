@@ -311,6 +311,13 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		);
 	};
 
+	const getCopyContainerCss = () => {
+		if (templateSettings.imageSettings?.mobileUrl) {
+			return styles.contentContainer(true);
+		}
+		return styles.contentContainer(false);
+	};
+
 	const showAboveArticleCount =
 		(separateArticleCountSettings?.type === 'above' ||
 			separateArticleCount) &&
@@ -338,7 +345,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 						/>
 					</div>
 				</div>
-				<div css={styles.contentContainer}>
+				<div css={getCopyContainerCss()}>
 					{showAboveArticleCount && (
 						<DesignableBannerArticleCount
 							numArticles={articleCounts.forTargetedWeeks}
@@ -475,7 +482,7 @@ const styles = {
 	) => css`
 		background: ${background};
 		color: ${textColor};
-		${limitHeight ? 'max-height: 70vh;' : 'auto'}
+		${limitHeight ? 'max-height: 70svh;' : 'auto'}
 		overflow: auto;
 		* {
 			box-sizing: border-box;
@@ -578,15 +585,13 @@ const styles = {
 	`,
 
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
-		order: ${bannerHasImage ? '2' : '1'};
+		grid-column: 1;
+		grid-row: ${bannerHasImage ? '1' : '2'};
+
 		${until.phablet} {
 			${bannerHasImage
 				? ''
 				: `max-width: calc(100% - 40px - ${space[3]}px);`}
-		}
-
-		${from.mobile} {
-			grid-column: 1;
 		}
 
 		${from.phablet} {
@@ -604,11 +609,11 @@ const styles = {
 	`,
 	headerWithImageContainer: (background: string) => css`
 		order: 1;
-		max-width: '100%';
+		max-width: 100%;
 		text-wrap: balance;
 
 		${between.mobile.and.desktop} {
-			order: '2';
+			order: 2;
 		}
 
 		${from.tablet} {
@@ -624,8 +629,8 @@ const styles = {
 			padding-top: ${space[3]}px;
 		}
 	`,
-	contentContainer: css`
-		grid-row: 4;
+	contentContainer: (bannerHasImage: boolean) => css`
+		grid-row: ${bannerHasImage ? '2' : '4'};
 
 		${from.phablet} {
 			grid-column: 2;
@@ -661,9 +666,8 @@ const styles = {
 		}
 	`,
 	bannerVisualContainer: css`
-		${from.mobile} {
-			grid-row: 3;
-		}
+		grid-row: 3;
+
 		${from.phablet} {
 			grid-column: 2;
 			grid-row: 3;
