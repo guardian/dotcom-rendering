@@ -95,6 +95,7 @@ type Props = {
 	totalElements?: number;
 	isListElement?: boolean;
 	isSectionedMiniProfilesArticle?: boolean;
+	elements?: FEElement[];
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -155,6 +156,7 @@ export const renderElement = ({
 	totalElements = 0,
 	isListElement = false,
 	isSectionedMiniProfilesArticle = false,
+	elements = [],
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -878,7 +880,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.FilterAtAGlance':
 			return <FilterAtAGlanceComponent html={element.html} />;
 		case 'model.dotcomrendering.pageElements.FilterCarouselElement':
-			return <FilterCarouselComponent />;
+			return <FilterCarouselComponent elements={elements} />;
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
@@ -930,6 +932,7 @@ export const RenderArticleElement = ({
 	totalElements,
 	isListElement,
 	isSectionedMiniProfilesArticle,
+	elements,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -955,6 +958,7 @@ export const RenderArticleElement = ({
 		totalElements,
 		isListElement,
 		isSectionedMiniProfilesArticle,
+		elements,
 	});
 
 	const needsFigure = !bareElements.has(element._type);

@@ -85,6 +85,7 @@ export const ArticleRenderer = ({
 				editionId={editionId}
 				totalElements={length}
 				isSectionedMiniProfilesArticle={isSectionedMiniProfilesArticle}
+				elements={elements}
 			/>
 		);
 	});

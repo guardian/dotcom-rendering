@@ -96,6 +96,7 @@ const Renderer = ({
 			abTests,
 			switches,
 			editionId,
+			elements,
 		});
 
 		switch (element._type) {

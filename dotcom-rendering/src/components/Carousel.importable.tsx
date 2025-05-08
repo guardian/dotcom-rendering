@@ -1167,8 +1167,7 @@ export const ProductCarousel = ({ products }: { products: Product[] }) => {
 					data-heatphan-type="carousel"
 				>
 					{products.map((product, i) => {
-						const { image, title, price, description, stars } =
-							product;
+						const { image, title, price, link, stars } = product;
 						return (
 							<LI
 								key={i}
@@ -1186,7 +1185,7 @@ export const ProductCarousel = ({ products }: { products: Product[] }) => {
 									image={image}
 									title={title}
 									price={price}
-									description={description}
+									link={link}
 								/>
 							</LI>
 						);
