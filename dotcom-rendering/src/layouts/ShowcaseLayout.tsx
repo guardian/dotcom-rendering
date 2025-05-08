@@ -26,7 +26,6 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
-import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
@@ -56,6 +55,7 @@ import type { FEElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 import { Product } from '../components/ProductCard';
+import { stripHTML } from '../model/sanitise';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -221,6 +221,16 @@ interface AppsProps extends CommonProps {
 	renderingTarget: 'Apps';
 }
 
+function isFullProduct(product: Partial<Product>): product is Product {
+	return (
+		!isUndefined(product) &&
+		!isUndefined(product.title) &&
+		!isUndefined(product.image) &&
+		!isUndefined(product.description) &&
+		!isUndefined(product.price)
+	);
+}
+
 export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
@@ -231,7 +241,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	const isApps = renderingTarget === 'Apps';
 	const elements: FEElement[] = article.blocks[0]?.elements ?? [];
 
-	const getProductsFromArticle = (): Partial<Product>[] => {
+	const getProductsFromArticle = (): Product[] => {
 		const products: Partial<Product>[] = [];
 		let productNumber = 0;
 		for (const element of elements) {
@@ -242,7 +252,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 			) {
 				productNumber++;
 				products[productNumber] = {
-					title: element.html,
+					title: stripHTML(element.html),
 					stars: '★★★★★',
 				};
 			}
@@ -258,12 +268,28 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 			if (
 				element._type ===
 					'model.dotcomrendering.pageElements.TextBlockElement' &&
-				!isUndefined(currentProduct)
+				!isUndefined(currentProduct) &&
+				isUndefined(currentProduct.description)
 			) {
-				currentProduct.description += element.html;
+				currentProduct.description = stripHTML(element.html);
+			}
+			if (
+				element._type ===
+				'model.dotcomrendering.pageElements.TextBlockElement'
+			) {
+				const priceMatch = element.html.match(/£\d+/);
+				if (
+					priceMatch &&
+					!isUndefined(currentProduct) &&
+					isUndefined(currentProduct.price)
+				) {
+					currentProduct.price = priceMatch[0];
+				}
 			}
 		}
-		return products;
+		return products.filter((product) => {
+			return isFullProduct(product);
+		});
 	};
 	const products = getProductsFromArticle();
 	const showBodyEndSlot =
