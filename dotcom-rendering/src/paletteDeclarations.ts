@@ -6207,6 +6207,18 @@ const paletteColours = {
 		light: carouselTitleHighlightLight,
 		dark: carouselTitleHighlightDark,
 	},
+	'--change-bars-axis': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--change-bars-border': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => '#606060',
+	},
+	'--change-bars-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
 	'--click-to-view-background': {
 		light: clickToViewBackgroundLight,
 		dark: clickToViewBackgroundDark,
