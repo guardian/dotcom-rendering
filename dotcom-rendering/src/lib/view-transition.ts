@@ -14,6 +14,6 @@ export const viewTransitionStyles = (
 		stringToHash ?? global.crypto.randomUUID(),
 	)}`;
 	return css`
-		view-transition-name: ${name};
+		view-transitions-name: ${name};
 	`;
 };
