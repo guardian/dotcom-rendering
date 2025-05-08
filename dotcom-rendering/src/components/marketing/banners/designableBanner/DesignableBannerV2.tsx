@@ -456,7 +456,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 						</div>
 					</div>
 				)}
-
+				{/* TODO: investigate if there is a reason why this is logically at the end of the grid rather than the beginning */}
 				<div css={styles.guardianLogoContainer}>
 					<SvgGuardianLogo
 						textColor={hexColourToString(basic.logo)}
@@ -586,7 +586,6 @@ const styles = {
 		}
 
 		${from.mobile} {
-			grid-row: 1;
 			grid-column: 1;
 		}
 
