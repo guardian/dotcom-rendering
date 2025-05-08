@@ -65,13 +65,29 @@ export const rootStyles = (
 	@view-transition {
 		navigation: auto;
 	}
-	/*
-	::view-transition-old(root) {
+
+	/* ::view-transition-old(root) {
 		animation: 0.2s ease-in both slide-in;
 	}
 
 	::view-transition-new(root) {
 		animation: 0.2s ease-in both slide-in;
+	} */
+
+	/* ::view-transition-old(root) {
+		animation: 0.5s ease-in both spin;
+	}
+
+	::view-transition-new(root) {
+		animation: 0.5s ease-in both spin;
+	} */
+
+	/* ::view-transition-old(root) {
+		animation: 10.5s ease-in both spin;
+	}
+
+	::view-transition-new(root) {
+		animation: 10.5s ease-in both spin;
 	} */
 
 	/* Create a custom animation */
