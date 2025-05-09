@@ -539,7 +539,7 @@ const styles = {
 		background: ${background};
 		color: ${textColor};
 		${limitHeight ? 'max-height: 60vh;' : ''}
-		overflow: auto;
+
 		* {
 			box-sizing: border-box;
 		}
