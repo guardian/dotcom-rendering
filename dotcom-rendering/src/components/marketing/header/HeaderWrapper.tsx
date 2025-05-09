@@ -110,7 +110,7 @@ export const headerWrapper = (
 					`${componentId} : cta`,
 				);
 				if (submitComponentEvent) {
-					submitComponentEvent(componentClickEvent);
+					void submitComponentEvent(componentClickEvent);
 				}
 			};
 		};
@@ -118,7 +118,7 @@ export const headerWrapper = (
 		const sendOphanEvent = useCallback(
 			(action: TAction): void => {
 				if (submitComponentEvent) {
-					submitComponentEvent({
+					void submitComponentEvent({
 						component: {
 							componentType,
 							id: campaignCode,

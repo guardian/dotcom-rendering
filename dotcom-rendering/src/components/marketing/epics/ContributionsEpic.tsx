@@ -286,7 +286,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 
 			// For ophan
 			if (submitComponentEvent) {
-				submitComponentEvent(
+				void submitComponentEvent(
 					createViewEventFromTracking(
 						tracking,
 						tracking.campaignCode,
@@ -298,7 +298,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 
 	useEffect(() => {
 		if (submitComponentEvent) {
-			submitComponentEvent(
+			void submitComponentEvent(
 				createInsertEventFromTracking(tracking, tracking.campaignCode),
 			);
 		}

@@ -32,7 +32,7 @@ export const GutterAskWrapper: ReactComponent<GutterProps> = (
 				`${componentId} : cta`,
 			);
 			if (submitComponentEvent) {
-				submitComponentEvent(componentClickEvent);
+				void submitComponentEvent(componentClickEvent);
 			}
 		};
 	};
@@ -40,7 +40,7 @@ export const GutterAskWrapper: ReactComponent<GutterProps> = (
 	const sendOphanEvent = useCallback(
 		(action: TAction): void => {
 			if (submitComponentEvent) {
-				submitComponentEvent({
+				void submitComponentEvent({
 					component: {
 						componentType,
 						id: campaignCode,
