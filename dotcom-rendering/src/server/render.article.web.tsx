@@ -111,15 +111,8 @@ export const renderHtml = ({
 		pageHasNonBootInteractiveElements &&
 			`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 	].filter(isString);
-	const legacyScripts = [
-		getPathFromManifest('client.web.legacy', 'frameworks.js'),
-		getPathFromManifest('client.web.legacy', 'index.js'),
-	];
 
-	const scriptTags = generateScriptTags([
-		...prefetchScripts,
-		...legacyScripts,
-	]);
+	const scriptTags = generateScriptTags(prefetchScripts);
 
 	/**
 	 * We escape windowGuardian here to prevent errors when the data

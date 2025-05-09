@@ -103,12 +103,15 @@ export const groupCards = (
 			};
 		}
 		case 'flexible/general': {
-			const splash = curated.filter(({ card }) => card.group === '3');
+			const splash = [
+				...curated.filter(({ card }) => card.group === '3'),
+				...backfill.filter(({ card }) => card.group === '3'),
+			];
 
-			// Backfilled cards will always be treated as 'standard' cards
+			// Backfilled cards have been allocated to groups based on the max items in each group
 			const standard = [
 				...curated.filter(({ card }) => card.group !== '3'),
-				...backfill,
+				...backfill.filter(({ card }) => card.group !== '3'),
 			];
 
 			const enhanceOptions = (offset = 0) => ({

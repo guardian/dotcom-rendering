@@ -45,8 +45,6 @@ $ make dev
 
 This will start the development server on port 3030: [http://localhost:3030](http://localhost:3030).
 
-Note: To run the development server with support for legacy browsers, use `make dev-legacy`
-
 ### Previewing article on local
 
 You can preview an article from `theguardian.com` by appending the full URL to the path of your localhost article page. For example:

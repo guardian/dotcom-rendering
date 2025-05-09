@@ -317,3 +317,55 @@ export const brandedTestCollections = [
 		displayName: 'Headlines',
 	},
 ] satisfies DCRCollectionType[];
+
+export const largeFlexibleGeneralCollection = [
+	{
+		...defaultValues,
+		grouped: {
+			...defaultGrouped,
+			splash: [trails[0]],
+			veryBig: [trails[1]],
+			big: [trails[2]],
+			standard: [trails[3], trails[4], trails[5], trails[6]],
+		},
+		collectionType: 'flexible/general',
+		containerLevel: 'Primary',
+	},
+] satisfies DCRCollectionType[];
+
+export const smallFlexibleGeneralCollection = [
+	{
+		...defaultValues,
+		grouped: {
+			...defaultGrouped,
+			standard: [trails[0]],
+		},
+		collectionType: 'flexible/general',
+		containerLevel: 'Primary',
+	},
+] satisfies DCRCollectionType[];
+
+export const smallFlexibleSpecialCollection = [
+	{
+		...defaultValues,
+		collectionType: 'flexible/special',
+		containerLevel: 'Primary',
+		grouped: {
+			...defaultGrouped,
+			standard: [trails[0]],
+		},
+	},
+] satisfies DCRCollectionType[];
+
+export const largeFlexibleSpecialCollection = [
+	{
+		...defaultValues,
+		collectionType: 'flexible/special',
+		containerLevel: 'Primary',
+		grouped: {
+			...defaultGrouped,
+			snap: [trails[0]],
+			standard: [trails[1], trails[2], trails[3], trails[4]],
+		},
+	},
+] satisfies DCRCollectionType[];

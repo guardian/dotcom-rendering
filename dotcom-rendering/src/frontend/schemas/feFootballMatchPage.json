@@ -26,6 +26,9 @@
                 },
                 "contributionsServiceUrl": {
                     "type": "string"
+                },
+                "pageId": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -35,7 +38,8 @@
                 "guardianBaseURL",
                 "isAdFreeUser",
                 "nav",
-                "pageFooter"
+                "pageFooter",
+                "pageId"
             ]
         },
         {

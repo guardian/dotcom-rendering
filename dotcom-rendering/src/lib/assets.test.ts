@@ -7,7 +7,6 @@ import {
 	getModulesBuild,
 	getPathFromManifest,
 	WEB,
-	WEB_LEGACY_SCRIPT,
 	WEB_VARIANT_SCRIPT,
 } from './assets';
 
@@ -52,9 +51,6 @@ describe('regular expression to match files', () => {
 		expect(
 			'https://assets.guim.co.uk/assets/ophan.client.web.variant.abcdefghijklmnopqrst.js',
 		).toMatch(WEB_VARIANT_SCRIPT);
-		expect(
-			'https://assets.guim.co.uk/assets/ophan.client.web.legacy.eb74205c979f58659ed7.js',
-		).toMatch(WEB_LEGACY_SCRIPT);
 		expect(
 			'https://assets.guim.co.uk/assets/ophan.client.apps.eb74205c979f58659ed7.js',
 		).toMatch(APPS_SCRIPT);

@@ -39,7 +39,7 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { editionList } from '../lib/edition';
 import {
-	getFrontsBannerAdPositions,
+	getDesktopAdPositions,
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getFrontsAdPositions';
@@ -127,15 +127,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		: [];
 
 	const desktopAdPositions = renderAds
-		? getFrontsBannerAdPositions(filteredCollections, pageId)
+		? getDesktopAdPositions(filteredCollections, pageId)
 		: [];
 
 	const showMostPopular =
 		front.isNetworkFront && front.deeplyRead && front.deeplyRead.length > 0;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
-
-	const { abTests, isPreview } = front.config;
 
 	const { absoluteServerTimes = false } = front.config.switches;
 
@@ -156,18 +154,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				return '5:3';
 		}
 	};
-	const Highlights = () => {
-		const showHighlights =
-			// Must be opted into the Europe beta test or in preview
-			abTests.europeBetaFrontVariant === 'variant' ||
-			abTests.europeBetaFrontTest2Variant === 'variant' ||
-			isPreview;
 
+	const Highlights = () => {
 		const highlightsCollection =
 			front.pressedPage.collections.find(isHighlights);
 
 		return (
-			showHighlights &&
 			!!highlightsCollection && (
 				<DecideContainer
 					containerType={highlightsCollection.collectionType}
