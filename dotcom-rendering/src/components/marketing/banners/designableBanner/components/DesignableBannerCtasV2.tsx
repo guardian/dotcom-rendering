@@ -67,11 +67,6 @@ const styles = {
 			flex: 1 0 100%;
 			justify-content: center;
 
-			// ${from.tablet} {
-			// 	flex: 0 1 auto;
-			// }
-		}
-
 		${from.tablet} {
 			justify-content: start;
 		}
