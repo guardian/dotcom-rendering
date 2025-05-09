@@ -34,6 +34,7 @@ type Props = {
 	guardianBaseUrl: string;
 	getMoreDays?: () => Promise<Result<'failed', FootballMatches>>;
 	now: string;
+	nextPageNoJsUrl?: string;
 };
 
 const REMOVE_TRAILING_DOTS_REGEX = /\.+$/;
@@ -423,6 +424,7 @@ export const FootballMatchList = ({
 	guardianBaseUrl,
 	initialDays,
 	getMoreDays,
+	nextPageNoJsUrl,
 	now,
 }: Props) => {
 	const dateFormatter = new Intl.DateTimeFormat('en-GB', {
@@ -478,9 +480,10 @@ export const FootballMatchList = ({
 				</section>
 			))}
 
-			{getMoreDays === undefined ? null : (
+			{getMoreDays === undefined ||
+			nextPageNoJsUrl === undefined ? null : (
 				<div css={footballMatchesGridStyles}>
-					<div
+					<a
 						css={css`
 							grid-column: centre-column-start / centre-column-end;
 
@@ -488,6 +491,7 @@ export const FootballMatchList = ({
 								padding-top: ${space[10]}px;
 							}
 						`}
+						href={nextPageNoJsUrl}
 					>
 						<Button
 							theme={{
@@ -501,7 +505,8 @@ export const FootballMatchList = ({
 							}}
 							icon={<SvgPlus />}
 							size="xsmall"
-							onClick={() => {
+							onClick={(e) => {
+								e.preventDefault(); // prevent navigation when JS is enabled
 								void getMoreDays().then((moreDays) => {
 									if (moreDays.kind === 'ok') {
 										setIsError(false);
@@ -527,7 +532,7 @@ export const FootballMatchList = ({
 								later!
 							</InlineError>
 						) : null}
-					</div>
+					</a>
 				</div>
 			)}
 		</>

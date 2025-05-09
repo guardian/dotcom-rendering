@@ -114,6 +114,9 @@
                 "nextPage": {
                     "type": "string"
                 },
+                "nextPageNoJs": {
+                    "type": "string"
+                },
                 "previousPage": {
                     "type": "string"
                 }

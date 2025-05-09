@@ -1,7 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { userEvent, within } from '@storybook/test';
+import { expect, userEvent, within } from '@storybook/test';
 import { allModes } from '../../.storybook/modes';
-import { initialDays, moreDays } from '../../fixtures/manual/footballData';
+import {
+	initialDays,
+	moreDays,
+	nextPageNoJsUrl,
+} from '../../fixtures/manual/footballData';
 import { error, ok } from '../lib/result';
 import { FootballMatchList } from './FootballMatchList';
 
@@ -39,13 +43,23 @@ export const Default = {
 		guardianBaseUrl: 'https://www.theguardian.com',
 		initialDays,
 		getMoreDays: () => Promise.resolve(ok(moreDays)),
+		nextPageNoJsUrl,
 	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
-		const moreButtons = canvas.getAllByRole('button');
-		for (const moreButton of moreButtons) {
-			await userEvent.click(moreButton);
-		}
+
+		// Get element with area role link (anchor tag) with the visible text content "More"
+		const moreLink = canvas.getByRole('link', { name: /more/i });
+		// Assert the href exists
+		void expect(moreLink).toHaveAttribute('href', nextPageNoJsUrl);
+
+		// Get the button element with the visible text content "More" and click it
+		const moreButton = await canvas.findByRole('button', { name: /more/i });
+		await userEvent.click(moreButton);
+
+		const newDays = canvasElement.querySelectorAll('section');
+		// Assert that the number of sections has increased
+		void expect(newDays.length).toBeGreaterThan(initialDays.length);
 	},
 } satisfies Story;
 
