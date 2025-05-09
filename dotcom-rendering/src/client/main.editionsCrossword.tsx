@@ -1,7 +1,9 @@
 /* eslint-disable ssr-friendly/no-dom-globals-in-module-scope */
-import type { CAPICrossword } from '@guardian/react-crossword/dist/@types/CAPI';
+import type { CrosswordProps } from '@guardian/react-crossword';
 import { createRoot } from 'react-dom/client';
 import { Crosswords } from '../components/Crosswords.editions';
+
+type CAPICrossword = CrosswordProps['data'];
 
 const element = document.getElementById('editions-crossword-player');
 if (!element) {
