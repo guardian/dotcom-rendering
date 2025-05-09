@@ -43,7 +43,7 @@ import type { ChoiceCardSettings } from './components/choiceCards/ChoiceCards';
 import { DesignableBannerArticleCount } from './components/DesignableBannerArticleCount';
 import { DesignableBannerBody } from './components/DesignableBannerBody';
 import { DesignableBannerCloseButton } from './components/DesignableBannerCloseButton';
-import { DesignableBannerCtas } from './components/DesignableBannerCtas';
+import { DesignableBannerCtas } from './components/DesignableBannerCtasV2';
 import { DesignableBannerHeader } from './components/DesignableBannerHeader';
 import { DesignableBannerVisual } from './components/DesignableBannerVisual';
 import type { BannerTemplateSettings } from './settings';
@@ -650,6 +650,22 @@ const styles = {
 
 	ctaContentContainer: css`
 		order: 4;
+
+		${until.phablet} {
+			width: 100vw;
+			position: sticky;
+			bottom: 0;
+			padding-top: ${space[3]}px;
+			padding-bottom: ${space[3]}px;
+			background-color: ${neutral[100]};
+			box-shadow: 0 -${space[1]}px ${space[3]}px 0 rgba(0, 0, 0, 0.25);
+			margin-right: -${space[3]}px;
+			margin-left: -${space[3]}px;
+
+			a {
+				width: calc(100% - 24px);
+			}
+		}
 		${from.phablet} {
 			grid-column: 2;
 			grid-row: 5;
