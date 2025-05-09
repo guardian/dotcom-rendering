@@ -1,4 +1,4 @@
-import type { OphanAction } from '@guardian/libs';
+import type { TAction } from '@guardian/ophan-tracker-js';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
 
@@ -103,7 +103,7 @@ type TrackingEventDescription =
 
 const trackingEventDescriptionToOphanAction = (
 	description: TrackingEventDescription,
-): OphanAction => {
+): TAction => {
 	switch (description) {
 		case 'captcha-success':
 		case 'captcha-failure':

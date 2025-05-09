@@ -1,6 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { isUndefined, type OphanComponent } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import {
 	from,
 	palette,
@@ -216,7 +217,7 @@ const notificationTextStyles = css`
 
 const buildOphanComponentWithNotifications = (
 	link: DropdownLinkType,
-): OphanComponent | undefined => {
+): ComponentEvent['component'] | undefined => {
 	// Only track if it has notifications
 	if (link.notifications && link.notifications.length > 0) {
 		return {
@@ -232,7 +233,7 @@ const buildOphanComponentWithNotifications = (
 
 const addTrackingToUrl = (
 	url: string,
-	ophanComponent: OphanComponent,
+	ophanComponent: ComponentEvent['component'],
 ): string => {
 	// Use the acquisitionData query param to send tracking to the destination
 	const acquisitionData = encodeURIComponent(

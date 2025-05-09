@@ -1,4 +1,4 @@
-import type { OphanAction } from '@guardian/libs';
+import type { TAction } from '@guardian/ophan-tracker-js';
 import type { GutterProps } from '@guardian/support-dotcom-components/dist/shared/types/props/gutter';
 import { useCallback, useEffect } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
@@ -32,15 +32,15 @@ export const GutterAskWrapper: ReactComponent<GutterProps> = (
 				`${componentId} : cta`,
 			);
 			if (submitComponentEvent) {
-				submitComponentEvent(componentClickEvent);
+				void submitComponentEvent(componentClickEvent);
 			}
 		};
 	};
 
 	const sendOphanEvent = useCallback(
-		(action: OphanAction): void => {
+		(action: TAction): void => {
 			if (submitComponentEvent) {
-				submitComponentEvent({
+				void submitComponentEvent({
 					component: {
 						componentType,
 						id: campaignCode,

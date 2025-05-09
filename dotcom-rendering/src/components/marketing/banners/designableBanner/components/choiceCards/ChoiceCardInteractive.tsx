@@ -4,8 +4,8 @@
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/common/choiceCard/ChoiceCardInteractive.tsx
  */
 import { css } from '@emotion/react';
-import type { OphanComponentEvent } from '@guardian/libs';
 import { isUndefined } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { from, space, until } from '@guardian/source/foundations';
 import { ChoiceCard, ChoiceCardGroup } from '@guardian/source/react-components';
 import type {
@@ -20,7 +20,7 @@ import type { ChoiceCardSettings } from './ChoiceCards';
 interface ChoiceCardInteractiveProps {
 	selection?: ChoiceCardSelection;
 	setSelectionsCallback: (choiceCardSelection: ChoiceCardSelection) => void;
-	submitComponentEvent?: (event: OphanComponentEvent) => void;
+	submitComponentEvent?: (event: ComponentEvent) => void;
 	currencySymbol: string;
 	amountsTest?: SelectedAmountsVariant;
 	componentId: string;

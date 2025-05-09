@@ -99,7 +99,7 @@ const withBannerData =
 
 		useEffect(() => {
 			if (hasBeenSeen && submitComponentEvent) {
-				submitComponentEvent(
+				void submitComponentEvent(
 					createViewEventFromTracking(
 						tracking,
 						tracking.campaignCode,
@@ -110,7 +110,7 @@ const withBannerData =
 
 		useEffect(() => {
 			if (submitComponentEvent) {
-				submitComponentEvent(
+				void submitComponentEvent(
 					createInsertEventFromTracking(
 						tracking,
 						tracking.campaignCode,
@@ -268,7 +268,7 @@ const withBannerData =
 					componentId,
 				);
 				if (submitComponentEvent) {
-					submitComponentEvent(componentClickEvent);
+					void submitComponentEvent(componentClickEvent);
 				}
 				if (close) {
 					onClose();

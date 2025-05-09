@@ -4,7 +4,7 @@
  * https://github.com/guardian/support-dotcom-components/blob/a482b35a25ca59f66501c4de02de817046206298/packages/modules/src/modules/epics/ContributionsEpicArticleCountAboveWithOptOut.tsx
  */
 import { css } from '@emotion/react';
-import type { OphanComponentEvent } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import {
 	articleBoldItalic15,
 	articleBoldItalic17,
@@ -37,7 +37,7 @@ export interface ContributionsEpicArticleCountAboveWithOptOutProps {
 	onArticleCountOptOut: () => void;
 	onArticleCountOptIn: () => void;
 	openCmp?: () => void;
-	submitComponentEvent?: (componentEvent: OphanComponentEvent) => void;
+	submitComponentEvent?: (componentEvent: ComponentEvent) => void;
 }
 
 export const ContributionsEpicArticleCountAboveWithOptOut: ReactComponent<

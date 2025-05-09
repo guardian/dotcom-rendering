@@ -359,8 +359,8 @@ importers:
         specifier: 22.0.1
         version: 22.0.1(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/ophan-tracker-js':
-        specifier: 2.2.9
-        version: 2.2.9
+        specifier: 2.2.10
+        version: 2.2.10
       '@guardian/react-crossword':
         specifier: 6.3.0
         version: 6.3.0(@emotion/react@11.14.0)(@guardian/libs@22.0.1)(@guardian/source@9.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
@@ -374,8 +374,8 @@ importers:
         specifier: 18.1.0
         version: 18.1.0(@emotion/react@11.14.0)(@guardian/libs@22.0.1)(@guardian/source@9.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/support-dotcom-components':
-        specifier: 6.3.0
-        version: 6.3.0(@guardian/libs@22.0.1)(zod@3.22.4)
+        specifier: 7.0.1
+        version: 7.0.1(@guardian/libs@22.0.1)(zod@3.22.4)
       '@guardian/tsconfig':
         specifier: 0.2.0
         version: 0.2.0
@@ -4074,7 +4074,7 @@ packages:
       '@typescript-eslint/parser': 6.18.0(eslint@8.56.0)(typescript@5.5.3)
       eslint: 8.56.0
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@6.18.0)(eslint-plugin-import@2.29.1)(eslint@8.56.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint@8.56.0)
       tslib: 2.6.2
       typescript: 5.5.3
     transitivePeerDependencies:
@@ -4195,8 +4195,8 @@ packages:
       typescript: 5.5.3
     dev: false
 
-  /@guardian/ophan-tracker-js@2.2.9:
-    resolution: {integrity: sha512-P7rmc1RnRq8zKe9rpjsiGKBzlopcVz7XM/1gYOlsIfPudYTYL2F7YgY9lIU1sitUNWAMmqw4+oY5mO9WXBYi4Q==}
+  /@guardian/ophan-tracker-js@2.2.10:
+    resolution: {integrity: sha512-WqE5bPagZ7AYUc2Fb0xDgNfhmdS9wK1IJcUjTD6CrlPim67SiRragw4fy+CP2OwShkfiWFmb9l/TgQLbuvUlIQ==}
     engines: {node: '>=16'}
     dependencies:
       '@guardian/tsconfig': 1.0.0
@@ -4347,14 +4347,15 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/support-dotcom-components@6.3.0(@guardian/libs@22.0.1)(zod@3.22.4):
-    resolution: {integrity: sha512-is7Adw64Xkhe4Bf862cY3mKhHc1rqXrhE/O70MuH4o1i7nZba9QwpWEKk7KnenNi8IshZYHn/vr1TYGjorgjcg==}
+  /@guardian/support-dotcom-components@7.0.1(@guardian/libs@22.0.1)(zod@3.22.4):
+    resolution: {integrity: sha512-adPhnw6oJy9l8VumAxSGRKkY07wKG2tSuE3y7jk/JsUFxg/HceVczBTEgovUHebAH5PyoLdNaz1P2UnrKB6EGg==}
     peerDependencies:
       '@guardian/libs': ^22.0.0
       zod: ^3.22.4
     dependencies:
       '@guardian/libs': 22.0.1(tslib@2.6.2)(typescript@5.5.3)
-      aws-sdk: 2.1519.0
+      '@guardian/ophan-tracker-js': 2.2.10
+      aws-sdk: 2.1692.0
       compression: 1.7.4
       cors: 2.8.5
       date-fns: 2.30.0
@@ -6122,7 +6123,7 @@ packages:
       react-docgen-typescript: 2.2.2(typescript@5.5.3)
       tslib: 2.6.2
       typescript: 5.5.3
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -7691,8 +7692,8 @@ packages:
       webpack: ^5.82.0
       webpack-cli: 6.x.x
     dependencies:
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
-      webpack-cli: 6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.1)(webpack@5.99.7)
+      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack-cli: 6.0.1(webpack-dev-server@5.2.1)(webpack@5.99.7)
     dev: false
 
   /@webpack-cli/info@3.0.1(webpack-cli@6.0.1)(webpack@5.99.7):
@@ -7702,8 +7703,8 @@ packages:
       webpack: ^5.82.0
       webpack-cli: 6.x.x
     dependencies:
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
-      webpack-cli: 6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.1)(webpack@5.99.7)
+      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack-cli: 6.0.1(webpack-dev-server@5.2.1)(webpack@5.99.7)
     dev: false
 
   /@webpack-cli/serve@3.0.1(webpack-cli@6.0.1)(webpack-dev-server@5.2.1)(webpack@5.99.7):
@@ -7717,8 +7718,8 @@ packages:
       webpack-dev-server:
         optional: true
     dependencies:
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
-      webpack-cli: 6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.1)(webpack@5.99.7)
+      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack-cli: 6.0.1(webpack-dev-server@5.2.1)(webpack@5.99.7)
       webpack-dev-server: 5.2.1(webpack-cli@6.0.1)(webpack@5.99.7)
     dev: false
 
@@ -8317,22 +8318,6 @@ packages:
       fsevents: 2.3.2
     dev: false
 
-  /aws-sdk@2.1519.0:
-    resolution: {integrity: sha512-eBU0I7dIKM2b0OKT0tDOT+Bb+Z7T3saatt1TQ7C6xz0jET7WQ7zSZ+oizLLrNC0n0/Hzu873l+eU/ZwwdoyrDQ==}
-    engines: {node: '>= 10.0.0'}
-    dependencies:
-      buffer: 4.9.2
-      events: 1.1.1
-      ieee754: 1.1.13
-      jmespath: 0.16.0
-      querystring: 0.2.0
-      sax: 1.2.1
-      url: 0.10.3
-      util: 0.12.5
-      uuid: 8.0.0
-      xml2js: 0.5.0
-    dev: false
-
   /aws-sdk@2.1692.0:
     resolution: {integrity: sha512-x511uiJ/57FIsbgUe5csJ13k3uzu25uWQE+XqfBis/sB0SFoiElJWXRkgEAUh0U6n40eT3ay5Ue4oPkRMu1LYw==}
     engines: {node: '>= 10.0.0'}
@@ -8392,7 +8377,7 @@ packages:
     dependencies:
       '@babel/core': 7.27.1
       find-up: 5.0.0
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
     dev: false
 
   /babel-loader@9.2.1(@babel/core@7.27.1)(webpack@5.99.7):
@@ -9584,7 +9569,7 @@ packages:
       postcss-modules-values: 4.0.0(postcss@8.4.47)
       postcss-value-parser: 4.2.0
       semver: 7.5.4
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
     dev: false
 
   /css-loader@7.1.2(webpack@5.99.7):
@@ -10631,7 +10616,7 @@ packages:
       enhanced-resolve: 5.18.1
       eslint: 8.56.0
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint@8.56.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.2
       is-core-module: 2.16.1
@@ -11589,7 +11574,7 @@ packages:
       semver: 7.5.4
       tapable: 2.2.1
       typescript: 5.5.3
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
     dev: false
 
   /form-data-encoder@2.1.4:
@@ -17156,7 +17141,7 @@ packages:
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
     dev: false
 
   /stylelint-config-recommended@14.0.0(stylelint@16.5.0):
@@ -17649,7 +17634,7 @@ packages:
       semver: 7.5.4
       source-map: 0.7.4
       typescript: 5.5.3
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
     dev: false
 
   /ts-node@10.9.2(@swc/core@1.11.13)(@types/node@16.18.68)(typescript@5.1.6):
@@ -18402,7 +18387,7 @@ packages:
       mime-types: 2.1.35
       range-parser: 1.2.1
       schema-utils: 4.3.2
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
     dev: false
 
   /webpack-dev-middleware@7.4.2(webpack@5.99.7):
@@ -18462,8 +18447,8 @@ packages:
       serve-index: 1.9.1
       sockjs: 0.3.24
       spdy: 4.0.2
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
-      webpack-cli: 6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.1)(webpack@5.99.7)
+      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack-cli: 6.0.1(webpack-dev-server@5.2.1)(webpack@5.99.7)
       webpack-dev-middleware: 7.4.2(webpack@5.99.7)
       ws: 8.18.1
     transitivePeerDependencies:
@@ -18508,7 +18493,7 @@ packages:
       webpack: ^5.47.0
     dependencies:
       tapable: 2.2.1
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
       webpack-sources: 2.3.1
     dev: false
     patched: true
@@ -18977,14 +18962,6 @@ packages:
   /xml-name-validator@4.0.0:
     resolution: {integrity: sha512-ICP2e+jsHvAj2E2lIHxa5tjXRlKDJo4IdvPvCXbXQGdzSfmSpNVyIKMvoZHjDY9DP0zV17iI85o90vRFXNccRw==}
     engines: {node: '>=12'}
-    dev: false
-
-  /xml2js@0.5.0:
-    resolution: {integrity: sha512-drPFnkQJik/O+uPKpqSgr22mpuFHqKdbS835iAQrUC73L2F5WkboIRd63ai/2Yg6I1jzifPFKH2NTK+cfglkIA==}
-    engines: {node: '>=4.0.0'}
-    dependencies:
-      sax: 1.2.1
-      xmlbuilder: 11.0.1
     dev: false
 
   /xml2js@0.6.2:

@@ -5,7 +5,7 @@
  */
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { OphanComponentEvent } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { from, space } from '@guardian/source/foundations';
 import type { SelectedAmountsVariant } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect } from 'react';
@@ -29,7 +29,7 @@ export interface ChoiceCardSettings {
 interface ChoiceCardProps {
 	selection?: ChoiceCardSelection;
 	setSelectionsCallback: (choiceCardSelection: ChoiceCardSelection) => void;
-	submitComponentEvent?: (event: OphanComponentEvent) => void;
+	submitComponentEvent?: (event: ComponentEvent) => void;
 	currencySymbol: string;
 	componentId: string;
 	getCtaText: (contentType: ContentType) => string;

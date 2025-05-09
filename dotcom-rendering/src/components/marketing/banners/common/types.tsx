@@ -3,7 +3,7 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/common/types.tsx
  */
-import type { OphanComponentEvent } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import type { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { ReminderFields } from '@guardian/support-dotcom-components/dist/shared/lib';
 import type {
@@ -74,6 +74,6 @@ export interface BannerRenderProps {
 	separateArticleCountSettings?: SeparateArticleCount;
 	choiceCardAmounts?: SelectedAmountsVariant;
 	tracking: Tracking;
-	submitComponentEvent?: (componentEvent: OphanComponentEvent) => void;
+	submitComponentEvent?: (componentEvent: ComponentEvent) => void;
 	design?: ConfigurableDesign;
 }

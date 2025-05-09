@@ -1,10 +1,7 @@
 import { css } from '@emotion/react';
-import type {
-	ConsentState,
-	CountryCode,
-	OphanComponentEvent,
-} from '@guardian/libs';
+import type { ConsentState, CountryCode } from '@guardian/libs';
 import { getCookie, onConsent } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import {
 	abandonedBasketSchema,
 	getBanner,
@@ -288,8 +285,8 @@ export const canShowRRBanner: CanShowFunctionType<
 		...props,
 		tracking,
 		fetchEmail,
-		submitComponentEvent: (componentEvent: OphanComponentEvent) =>
-			void submitComponentEvent(componentEvent, renderingTarget),
+		submitComponentEvent: (componentEvent: ComponentEvent) =>
+			submitComponentEvent(componentEvent, renderingTarget),
 	};
 
 	return {
