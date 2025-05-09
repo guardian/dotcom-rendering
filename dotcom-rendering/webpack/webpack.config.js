@@ -30,11 +30,6 @@ const commonConfigs = ({ platform }) => ({
 			? 'source-map'
 			: 'eval-cheap-module-source-map',
 	resolve: {
-		alias: {
-			react: 'preact/compat',
-			'react-dom/test-utils': 'preact/test-utils',
-			'react-dom': 'preact/compat',
-		},
 		extensions: ['.js', '.ts', '.tsx', '.jsx'],
 	},
 	ignoreWarnings: [

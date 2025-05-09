@@ -9,7 +9,7 @@
  *
  * @type {boolean} prevent TS from narrowing this to its current value
  */
-const BUILD_VARIANT = false;
+const BUILD_VARIANT = true;
 
 /**
  * Server-side test names for running variant test.
