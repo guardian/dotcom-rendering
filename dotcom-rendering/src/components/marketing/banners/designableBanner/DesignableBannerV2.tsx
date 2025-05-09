@@ -311,6 +311,13 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		);
 	};
 
+	const getCopyContainerCss = () => {
+		if (templateSettings.imageSettings?.mobileUrl) {
+			return styles.contentContainer(true);
+		}
+		return styles.contentContainer(false);
+	};
+
 	const showAboveArticleCount =
 		(separateArticleCountSettings?.type === 'above' ||
 			separateArticleCount) &&
@@ -338,7 +345,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 						/>
 					</div>
 				</div>
-				<div css={styles.contentContainer}>
+				<div css={getCopyContainerCss()}>
 					{showAboveArticleCount && (
 						<DesignableBannerArticleCount
 							numArticles={articleCounts.forTargetedWeeks}
@@ -456,7 +463,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 						</div>
 					</div>
 				)}
-
+				{/* TODO: investigate if there is a reason why this is logically at the end of the grid rather than the beginning */}
 				<div css={styles.guardianLogoContainer}>
 					<SvgGuardianLogo
 						textColor={hexColourToString(basic.logo)}
@@ -475,7 +482,7 @@ const styles = {
 	) => css`
 		background: ${background};
 		color: ${textColor};
-		${limitHeight ? 'max-height: 70vh;' : 'auto'}
+		${limitHeight ? 'max-height: 70svh;' : 'auto'}
 		overflow: auto;
 		* {
 			box-sizing: border-box;
@@ -578,16 +585,13 @@ const styles = {
 	`,
 
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
-		order: ${bannerHasImage ? '2' : '1'};
+		grid-column: 1;
+		grid-row: ${bannerHasImage ? '1' : '2'};
+
 		${until.phablet} {
 			${bannerHasImage
 				? ''
 				: `max-width: calc(100% - 40px - ${space[3]}px);`}
-		}
-
-		${from.mobile} {
-			grid-row: 1;
-			grid-column: 1;
 		}
 
 		${from.phablet} {
@@ -605,25 +609,29 @@ const styles = {
 	`,
 	headerWithImageContainer: (background: string) => css`
 		order: 1;
-		max-width: '100%';
+		max-width: 100%;
+		text-wrap: balance;
+
 		${between.mobile.and.desktop} {
-			order: '2';
+			order: 2;
 		}
+
+		${from.tablet} {
+			max-width: 492px;
+		}
+
 		${from.desktop} {
 			grid-column: 2;
 			grid-row: 1;
 			background: ${background};
 			max-width: 492px;
-		}
-		${from.desktop} {
 			padding-left: ${space[2]}px;
 			padding-top: ${space[3]}px;
 		}
 	`,
-	contentContainer: css`
-		${from.mobile} {
-			grid-row: 2;
-		}
+	contentContainer: (bannerHasImage: boolean) => css`
+		grid-row: ${bannerHasImage ? '2' : '4'};
+
 		${from.phablet} {
 			grid-column: 2;
 			max-width: 492px;
@@ -658,9 +666,8 @@ const styles = {
 		}
 	`,
 	bannerVisualContainer: css`
-		${from.mobile} {
-			grid-row: 3;
-		}
+		grid-row: 3;
+
 		${from.phablet} {
 			grid-column: 2;
 			grid-row: 3;
@@ -685,6 +692,7 @@ const styles = {
 			grid-column: 3;
 			grid-row: 1;
 			grid-row-end: 3;
+			margin-left: ${space[5]}px;
 		}
 
 		${between.desktop.and.wide} {
@@ -736,15 +744,15 @@ const styles = {
 
 		${between.phablet.and.desktop} {
 			width: 100%;
-			position: sticky;
 			bottom: 0;
-			padding-top: ${space[3]}px;
-			padding-bottom: ${space[3]}px;
-			background-color: ${neutral[100]};
-			box-shadow: 0 -${space[1]}px ${space[3]}px 0 rgba(0, 0, 0, 0.25);
-			border-radius: 10px;
+			margin-top: ${space[3]}px;
+			margin-bottom: 0;
+			border-radius: 50px;
 			a {
-				width: calc(100% - 24px);
+				width: 100%;
+			}
+			> span {
+				width: auto;
 			}
 		}
 
@@ -767,6 +775,7 @@ const styles = {
 	linkButtonStyles: css`
 		background-color: ${palette.brandAlt[400]};
 		border-color: ${palette.brandAlt[400]};
+		width: 100%;
 	`,
 };
 
