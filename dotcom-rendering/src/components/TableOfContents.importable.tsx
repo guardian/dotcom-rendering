@@ -9,9 +9,10 @@ import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source/react-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
+import { useIsInView } from '../lib/useIsInView';
 import type { TableOfContentsItem } from '../model/enhanceTableOfContents';
 import { palette } from '../palette';
 
@@ -75,7 +76,7 @@ const detailsStyles = css`
 `;
 const stickyStyles = css`
 	position: sticky;
-	top: 0;
+	top: -1px;
 	background: ${palette('--article-background')};
 	z-index: ${getZIndex('tableOfContents')};
 	summary {
@@ -136,16 +137,21 @@ const verticalStyle = css`
  */
 
 export const TableOfContents = ({ tableOfContents, format }: Props) => {
+	const [isInView, setNode] = useIsInView({ threshold: [1] });
 	const [open, setOpen] = useState(tableOfContents.length < 5);
+
+	useEffect(() => {
+		if (!isInView) {
+			setOpen(false);
+		}
+	}, [isInView]);
 
 	return (
 		<details
 			open={open}
-			css={[
-				detailsStyles,
-				tableOfContents.length > 5 ? stickyStyles : undefined,
-			]}
+			css={[detailsStyles, stickyStyles]}
 			data-component="table-of-contents"
+			ref={setNode}
 		>
 			<summary
 				onClick={(e): void => {
