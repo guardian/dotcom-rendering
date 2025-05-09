@@ -66,6 +66,7 @@ const styles = {
 		> a {
 			flex: 1 0 100%;
 			justify-content: center;
+		}
 
 		${from.tablet} {
 			justify-content: start;
