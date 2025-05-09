@@ -238,12 +238,11 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	const renderAds = isWeb && canRenderAds(article);
 	return (
 		<>
+			{article.isLegacyInteractive && (
+				<Global styles={interactiveGlobalStyles} />
+			)}
 			{isWeb && (
 				<>
-					{article.isLegacyInteractive && (
-						<Global styles={interactiveGlobalStyles} />
-					)}
-
 					<div>
 						{renderAds && (
 							<Stuck>
