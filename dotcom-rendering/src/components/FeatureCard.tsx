@@ -279,7 +279,7 @@ export type Props = {
 	imagePositionOnDesktop?: ImagePositionType /** TODO Remove this prop  */;
 	imagePositionOnMobile?: ImagePositionType /** TODO Remove this prop  */;
 	/** Size is ignored when position = 'top' because in that case the image flows based on width */
-	imageSize?: ImageSizeType;
+	imageSize: ImageSizeType;
 	imageLoading: Loading;
 	showClock?: boolean;
 	mainMedia?: MainMedia;
@@ -335,7 +335,7 @@ export const FeatureCard = ({
 	image,
 	imagePositionOnDesktop = 'top',
 	imagePositionOnMobile = 'left',
-	imageSize = 'small',
+	imageSize,
 	trailText,
 	imageLoading,
 	showClock,
