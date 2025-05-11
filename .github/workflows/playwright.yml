@@ -26,7 +26,7 @@ jobs:
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
 
-      - name: Set up nginx secure server https://r.thegulocal.com
+      - name: Set up nginx secure server
         run: |
           sudo apt-get update -y
           sudo apt-get install -y libnss3-tools
@@ -38,7 +38,7 @@ jobs:
           sudo mkdir -p /usr/local/bin/dev-nginx
           sudo tar -xzf dev-nginx.tar.gz -C /usr/local
           sudo chmod +x /usr/local/bin/dev-nginx
-          sudo ./dotcom-rendering/scripts/nginx/setup-nginx.sh
+          sudo ./dotcom-rendering/scripts/nginx/setup-ci.sh
           sudo dev-nginx restart-nginx
 
       - name: Install Playwright Browsers
@@ -50,6 +50,7 @@ jobs:
         working-directory: ./dotcom-rendering
         env:
           NODE_ENV: production
+          NODE_TLS_REJECT_UNAUTHORIZED: 0
           IDAPI_CLIENT_ACCESS_TOKEN: ${{ secrets.IDAPI_CLIENT_ACCESS_TOKEN }}
 
       - uses: actions/upload-artifact@v4
