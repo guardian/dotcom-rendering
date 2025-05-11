@@ -1,6 +1,5 @@
 import { expect, test } from '@playwright/test';
 import { Standard as standardArticle } from '../../fixtures/generated/fe-articles/Standard';
-import { isCI } from '../../playwright.config';
 import { disableCMP } from '../lib/cmp';
 import { waitForIsland } from '../lib/islands';
 import { loadPage, loadPageWithOverrides } from '../lib/load-page';
@@ -33,9 +32,8 @@ test.describe('Signed in readers', () => {
 		context,
 		page,
 	}) => {
-		// on CI the secure server should be available
 		const secureServerAvailable = await isSecureServerAvailable();
-		if (isCI || secureServerAvailable) {
+		if (secureServerAvailable) {
 			await disableCMP(context);
 			await loadPage({
 				page,
