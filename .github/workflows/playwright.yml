@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # keep aligned with the number of shards used by `playwright test`
+        # keep aligned with --shard parameter used by `playwright test` below
         group: [1, 2, 3, 4, 5, 6, 7, 8]
     services:
       DCR:
@@ -25,6 +25,21 @@ jobs:
 
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
+
+      - name: Set up nginx secure server https://r.thegulocal.com
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y libnss3-tools
+          sudo service nginx restart
+          wget -q https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64
+          wget -q https://github.com/guardian/dev-nginx/releases/latest/download/dev-nginx.tar.gz
+          sudo cp mkcert-v1.4.3-linux-amd64 /usr/local/bin/mkcert
+          sudo chmod +x /usr/local/bin/mkcert
+          sudo mkdir -p /usr/local/bin/dev-nginx
+          sudo tar -xzf dev-nginx.tar.gz -C /usr/local
+          sudo chmod +x /usr/local/bin/dev-nginx
+          sudo ./dotcom-rendering/scripts/nginx/setup-nginx.sh
+          sudo dev-nginx restart-nginx
 
       - name: Install Playwright Browsers
         run: pnpm playwright install --with-deps chromium
