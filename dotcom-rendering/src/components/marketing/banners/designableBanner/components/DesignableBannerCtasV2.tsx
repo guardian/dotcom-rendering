@@ -62,6 +62,8 @@ const styles = {
 		flex-wrap: wrap;
 		gap: ${space[4]}px;
 		justify-content: center;
+		margin-left: ${space[2]}px;
+		margin-right: ${space[2]}px;
 
 		> a {
 			flex: 1 0 100%;
@@ -70,6 +72,16 @@ const styles = {
 
 		${from.tablet} {
 			justify-content: start;
+		}
+
+		${from.desktop} {
+			> a {
+				flex-direction: row;
+				flex: 0 0 auto;
+				justify-content: flex-start;
+			}
+			justify-content: flex-start;
+			padding-left: ${space[1]}px;
 		}
 	`,
 };

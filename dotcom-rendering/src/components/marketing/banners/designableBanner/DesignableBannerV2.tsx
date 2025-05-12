@@ -513,10 +513,9 @@ const styles = {
 
 		${from.desktop} {
 			padding: ${space[3]}px ${space[8]}px ${space[6]}px ${space[3]}px;
-			grid-template-columns: auto 380px auto auto;
+			grid-template-columns: auto auto 380px auto;
 			grid-template-rows: auto 1fr auto;
 			width: 100%;
-			max-width: 980px;
 			margin: 0 auto;
 		}
 		${from.leftCol} {
@@ -672,6 +671,7 @@ const styles = {
 			max-width: 492px;
 		}
 		${from.desktop} {
+			width: 100%
 			padding-left: ${space[2]}px;
 			padding-right: ${space[5]}px;
 			margin-bottom: ${space[2]}px;
@@ -687,6 +687,8 @@ const styles = {
 	`,
 	bannerVisualContainer: css`
 		grid-row: 3;
+		margin-left: ${space[2]}px;
+		margin-right: ${space[2]}px;
 
 		${from.phablet} {
 			grid-column: 2;
@@ -737,6 +739,7 @@ const styles = {
 		}
 	`,
 
+	// choice card CTA container
 	ctaContainer: css`
 		order: 4;
 		display: flex;
@@ -747,7 +750,6 @@ const styles = {
 		margin-bottom: ${space[2]}px;
 
 		${until.phablet} {
-			width: 100vw;
 			position: sticky;
 			bottom: 0;
 			padding-top: ${space[3]}px;
@@ -763,7 +765,6 @@ const styles = {
 		}
 
 		${between.phablet.and.desktop} {
-			width: 100%;
 			bottom: 0;
 			margin-top: ${space[3]}px;
 			margin-bottom: 0;
