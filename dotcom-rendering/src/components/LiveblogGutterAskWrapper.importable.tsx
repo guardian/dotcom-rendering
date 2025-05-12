@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import type { OphanComponentEvent } from '@guardian/libs';
 import { getCookie, isUndefined } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { palette, space } from '@guardian/source/foundations';
 import { getGutterLiveblog } from '@guardian/support-dotcom-components';
 import type {
@@ -134,7 +134,7 @@ const LiveblogGutterAskBuilder = ({
 			...props,
 			tracking,
 			countryCode,
-			submitComponentEvent: (componentEvent: OphanComponentEvent) =>
+			submitComponentEvent: (componentEvent: ComponentEvent) =>
 				submitComponentEvent(componentEvent, renderingTarget),
 		};
 

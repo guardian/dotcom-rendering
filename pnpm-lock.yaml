@@ -329,8 +329,8 @@ importers:
         specifier: 22.0.1
         version: 22.0.1(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/ophan-tracker-js':
-        specifier: 2.2.9
-        version: 2.2.9
+        specifier: 2.2.10
+        version: 2.2.10
       '@guardian/react-crossword':
         specifier: 6.3.0
         version: 6.3.0(@emotion/react@11.14.0)(@guardian/libs@22.0.1)(@guardian/source@9.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
@@ -344,8 +344,8 @@ importers:
         specifier: 18.1.0
         version: 18.1.0(@emotion/react@11.14.0)(@guardian/libs@22.0.1)(@guardian/source@9.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/support-dotcom-components':
-        specifier: 6.3.0
-        version: 6.3.0(@guardian/libs@22.0.1)(zod@3.22.4)
+        specifier: 7.0.1
+        version: 7.0.1(@guardian/libs@22.0.1)(zod@3.22.4)
       '@guardian/tsconfig':
         specifier: 0.2.0
         version: 0.2.0
@@ -4142,8 +4142,8 @@ packages:
       typescript: 5.5.3
     dev: false
 
-  /@guardian/ophan-tracker-js@2.2.9:
-    resolution: {integrity: sha512-P7rmc1RnRq8zKe9rpjsiGKBzlopcVz7XM/1gYOlsIfPudYTYL2F7YgY9lIU1sitUNWAMmqw4+oY5mO9WXBYi4Q==}
+  /@guardian/ophan-tracker-js@2.2.10:
+    resolution: {integrity: sha512-WqE5bPagZ7AYUc2Fb0xDgNfhmdS9wK1IJcUjTD6CrlPim67SiRragw4fy+CP2OwShkfiWFmb9l/TgQLbuvUlIQ==}
     engines: {node: '>=16'}
     dependencies:
       '@guardian/tsconfig': 1.0.0
@@ -4294,14 +4294,15 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/support-dotcom-components@6.3.0(@guardian/libs@22.0.1)(zod@3.22.4):
-    resolution: {integrity: sha512-is7Adw64Xkhe4Bf862cY3mKhHc1rqXrhE/O70MuH4o1i7nZba9QwpWEKk7KnenNi8IshZYHn/vr1TYGjorgjcg==}
+  /@guardian/support-dotcom-components@7.0.1(@guardian/libs@22.0.1)(zod@3.22.4):
+    resolution: {integrity: sha512-adPhnw6oJy9l8VumAxSGRKkY07wKG2tSuE3y7jk/JsUFxg/HceVczBTEgovUHebAH5PyoLdNaz1P2UnrKB6EGg==}
     peerDependencies:
       '@guardian/libs': ^22.0.0
       zod: ^3.22.4
     dependencies:
       '@guardian/libs': 22.0.1(tslib@2.6.2)(typescript@5.5.3)
-      aws-sdk: 2.1519.0
+      '@guardian/ophan-tracker-js': 2.2.10
+      aws-sdk: 2.1692.0
       compression: 1.7.4
       cors: 2.8.5
       date-fns: 2.30.0
@@ -8262,22 +8263,6 @@ packages:
     hasBin: true
     optionalDependencies:
       fsevents: 2.3.2
-    dev: false
-
-  /aws-sdk@2.1519.0:
-    resolution: {integrity: sha512-eBU0I7dIKM2b0OKT0tDOT+Bb+Z7T3saatt1TQ7C6xz0jET7WQ7zSZ+oizLLrNC0n0/Hzu873l+eU/ZwwdoyrDQ==}
-    engines: {node: '>= 10.0.0'}
-    dependencies:
-      buffer: 4.9.2
-      events: 1.1.1
-      ieee754: 1.1.13
-      jmespath: 0.16.0
-      querystring: 0.2.0
-      sax: 1.2.1
-      url: 0.10.3
-      util: 0.12.5
-      uuid: 8.0.0
-      xml2js: 0.5.0
     dev: false
 
   /aws-sdk@2.1692.0:
@@ -18889,14 +18874,6 @@ packages:
   /xml-name-validator@4.0.0:
     resolution: {integrity: sha512-ICP2e+jsHvAj2E2lIHxa5tjXRlKDJo4IdvPvCXbXQGdzSfmSpNVyIKMvoZHjDY9DP0zV17iI85o90vRFXNccRw==}
     engines: {node: '>=12'}
-    dev: false
-
-  /xml2js@0.5.0:
-    resolution: {integrity: sha512-drPFnkQJik/O+uPKpqSgr22mpuFHqKdbS835iAQrUC73L2F5WkboIRd63ai/2Yg6I1jzifPFKH2NTK+cfglkIA==}
-    engines: {node: '>=4.0.0'}
-    dependencies:
-      sax: 1.2.1
-      xmlbuilder: 11.0.1
     dev: false
 
   /xml2js@0.6.2:
