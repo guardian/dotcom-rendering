@@ -44,7 +44,48 @@ jobs:
           sudo tar -xzf dev-nginx.tar.gz -C /usr/local
           sudo chmod +x /usr/local/bin/dev-nginx
           sudo ./dotcom-rendering/scripts/nginx/setup-ci.sh
+          sudo cp /etc/nginx/servers/dotcom-rendering.conf /etc/nginx/conf.d/dotcom-rendering.conf
           sudo dev-nginx restart-nginx
+
+      - name: Print nginx config location
+        run: |
+          nginx -V 2>&1 | grep "configure arguments:" | sed 's/[^*]*conf-path=\([^ ]*\)\/nginx\.conf.*/\1/g'
+
+      - name: Print nginx config files
+        run: |
+          ls -al /etc/nginx
+          ls -al /etc/nginx/servers
+
+      - name: Print thegulocal nginx config file
+        run: |
+          cat /etc/nginx/servers/dotcom-rendering.conf
+
+      - name: Print nginx config
+        run: |
+          echo "NGINX Config:"
+          sudo nginx -T
+
+      - name: Check URL with curl
+        run: |
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" -k http://localhost:9000)
+          echo "HTTP Status: $STATUS"
+          if [ "$STATUS" -eq 200 ]; then
+            echo "URL is reachable with status 200"
+          else
+            echo "URL is not reachable. Status: $STATUS"
+            exit 1
+          fi
+
+      - name: Check secure URL with curl
+        run: |
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" -k https://r.thegulocal.com)
+          echo "HTTPS Status: $STATUS"
+          if [ "$STATUS" -eq 200 ]; then
+            echo "URL is reachable with status 200"
+          else
+            echo "URL is not reachable. Status: $STATUS"
+            exit 1
+          fi
 
       - name: Install Playwright Browsers
         run: pnpm playwright install --with-deps chromium
