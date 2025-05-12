@@ -114,11 +114,31 @@ export const ProductCard = ({ image, title, price, link, stars }: Product) => {
 			<div css={productRowDetails}>
 				<p css={starRating}>{stars}</p>
 				<p> Reviewed at {price}</p>
-				<p>
-					<a href={link} target="_blank" rel="noopener noreferrer">
-						Buy Buy Buy!!
+				<div
+					css={css`
+						display: inline;
+					`}
+				>
+					<a
+						href={link}
+						css={css`
+							display: inline-block;
+							text-decoration: none;
+						`}
+					>
+						<img
+							src="/static/frontend/logos/clippy_bouncing.gif"
+							width="200"
+							height="200"
+							alt="a paper clip with big eyes and eyebrows on a white background"
+							fetchPriority="high"
+							css={css`
+								max-width: 200px;
+								background-color: unset;
+							`}
+						/>
 					</a>
-				</p>
+				</div>
 			</div>
 		</div>
 	);

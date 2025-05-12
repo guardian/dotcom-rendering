@@ -81,6 +81,5 @@ export const FilterCarouselComponent = ({
 		return null;
 	}
 	const products = getProductsFromArticle(elements);
-	console.log(products);
 	return <ProductCarousel products={products} />;
 };
