@@ -1,6 +1,8 @@
 import { randomUUID } from 'node:crypto';
 import type { BrowserContext, Page } from '@playwright/test';
+import { BASE_URL_SECURE } from 'playwright.config';
 import { disableCMP } from './cmp';
+import { loadPage } from './load-page';
 import { expectToExist } from './locators';
 
 type Networks = 'facebook' | 'apple' | 'google';
@@ -111,8 +113,13 @@ const signIn = async (page: Page, context: BrowserContext): Promise<void> => {
 	await page.fill('input[name=password]', password);
 	await page.click('[data-cy="main-form-submit-button"]');
 
-	await page.waitForURL(startPage);
+	await page.waitForURL(BASE_URL_SECURE);
 	await page.waitForLoadState('load');
+	await loadPage({
+		page,
+		path: startPage.substring(startPage.indexOf('/Article')),
+		useSecure: true,
+	});
 };
 
 export { createTestUser, signIn };
