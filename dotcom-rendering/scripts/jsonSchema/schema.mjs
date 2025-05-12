@@ -58,7 +58,7 @@ const schemas = [
 		file: `${root}/src/model/block-schema.json`,
 	},
 	{
-		typeName: 'CAPICrosswords',
+		typeName: 'FEEditionsCrosswords',
 		file: `${root}/src/model/editions-crossword-schema.json`,
 	},
 	{
