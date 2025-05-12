@@ -63,6 +63,8 @@ export type Props = {
 	discussionId?: string;
 	isFeatureCard?: boolean;
 	isImmersive?: boolean;
+	byline?: string;
+	showByline?: boolean;
 };
 
 /**
@@ -117,6 +119,8 @@ export const YoutubeAtom = ({
 	discussionId,
 	isFeatureCard,
 	isImmersive,
+	byline,
+	showByline,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -263,6 +267,8 @@ export const YoutubeAtom = ({
 								discussionId={discussionId}
 								discussionApiUrl={discussionApiUrl}
 								isImmersive={isImmersive}
+								byline={byline}
+								showByline={showByline}
 							/>
 						) : (
 							<YoutubeAtomOverlay

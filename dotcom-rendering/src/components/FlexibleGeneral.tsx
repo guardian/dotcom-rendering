@@ -125,12 +125,13 @@ const ImmersiveCardLayout = ({
 					trailText={card.trailText}
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
-					aspectRatio={'5:3'}
-					mobileAspectRatio={'4:5'}
+					aspectRatio="5:3"
+					mobileAspectRatio="4:5"
 					imageSize="feature-immersive"
 					headlineSizes={{ desktop: 'small' }}
 					supportingContent={card.supportingContent}
 					isImmersive={true}
+					showMainVideo={card.showMainVideo}
 				/>
 			</LI>
 		</UL>
