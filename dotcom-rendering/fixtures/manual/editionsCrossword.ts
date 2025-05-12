@@ -1,8 +1,10 @@
-import type { FEEditionsCrossword } from '../../src/types/editionsCrossword';
+import type { CrosswordProps } from '@guardian/react-crossword';
 
-export const quickCrossword: FEEditionsCrossword = {
-	date: '2024-11-01T23:00:00Z',
-	dateSolutionAvailable: '2024-11-01T23:00:00Z',
+type CAPICrossword = CrosswordProps['data'];
+
+export const quickCrossword: CAPICrossword = {
+	date: 1730598000000,
+	dateSolutionAvailable: 1730598000000,
 	dimensions: {
 		cols: 13,
 		rows: 13,
@@ -22,20 +24,19 @@ export const quickCrossword: FEEditionsCrossword = {
 			},
 			separatorLocations: {},
 			solution: 'AAAAAA',
-			format: '6',
 		},
 	],
-	hasNumbers: true,
 	name: 'Quick crossword No 1',
 	number: 1,
-	randomCluesOrdering: false,
+
 	solutionAvailable: true,
-	type: 'quick',
+	crosswordType: 'cryptic',
+	id: '',
 };
 
-export const crypticCrossword: FEEditionsCrossword = {
-	date: '2024-11-01T23:00:00Z',
-	dateSolutionAvailable: '2024-11-01T23:00:00Z',
+export const crypticCrossword: CAPICrossword = {
+	date: 1730598000000,
+	dateSolutionAvailable: 1730598000000,
 	dimensions: {
 		cols: 15,
 		rows: 15,
@@ -55,13 +56,11 @@ export const crypticCrossword: FEEditionsCrossword = {
 			},
 			separatorLocations: {},
 			solution: 'BBBBBBBB',
-			format: '8',
 		},
 	],
-	hasNumbers: true,
 	name: 'Cryptic crossword No 2',
 	number: 2,
-	randomCluesOrdering: false,
 	solutionAvailable: true,
-	type: 'cryptic',
+	crosswordType: 'cryptic',
+	id: '',
 };

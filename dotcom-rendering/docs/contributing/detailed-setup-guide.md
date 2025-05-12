@@ -8,25 +8,42 @@ This high level diagram shows the difference between the data flow when DCR is u
 
 ## Developing
 
-### Setup
+## Getting started
 
-The only thing you need to make sure you have installed before you get going is Node.
+To download the repository
 
-#### Node.js
+```
+$ git clone git@github.com:guardian/dotcom-rendering.git
+$ cd dotcom-rendering
+```
+
+### Node.js
+
+Make sure you have [Node.js](https://nodejs.org) installed.
 
 We recommend using [fnm](https://github.com/Schniz/fnm) to help manage multiple versions of Node.js on on machine.
 
-### Start
+### Install Dependencies
 
-Start the development server:
+run
+
+```
+$ make install
+```
+
+If it complains that you do not have the right version of node, then run (or replace with the correct version manager or the correct version):
+
+```
+$ fnm install 22.14.0
+```
+
+### Running on local
 
 ```sh
-make dev
+$ make dev
 ```
 
 This will start the development server on port 3030: [http://localhost:3030](http://localhost:3030).
-
-> Note: To run the development server with support for legacy browsers, use `make dev-legacy`
 
 ### Previewing article on local
 

@@ -10,7 +10,9 @@ export const EditionsCrosswordPage = ({ editionsCrosswords }: Props) => {
 		<StrictMode>
 			<main
 				id="editions-crossword-player"
-				data-crosswords={JSON.stringify(editionsCrosswords.crosswords)}
+				data-crosswords={JSON.stringify(
+					editionsCrosswords.newCrosswords,
+				)}
 			></main>
 		</StrictMode>
 	);

@@ -1106,28 +1106,6 @@ export const cricketMatchData: FECricketMatchPage = {
 				url: 'https://www.theguardian.com/insidetheguardian',
 			},
 			{
-				title: 'The Observer',
-				url: '/observer',
-				children: [
-					{
-						title: 'Comment',
-						url: '/theobserver/news/comment',
-					},
-					{
-						title: 'The New Review',
-						url: '/theobserver/new-review',
-					},
-					{
-						title: 'Observer Magazine',
-						url: '/theobserver/magazine',
-					},
-					{
-						title: 'Observer Food Monthly',
-						url: '/theobserver/foodmonthly',
-					},
-				],
-			},
-			{
 				title: 'Guardian Weekly',
 				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
 			},
@@ -1144,16 +1122,12 @@ export const cricketMatchData: FECricketMatchPage = {
 						url: '/crosswords/series/quick',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
+						title: 'Sunday quick',
+						url: '/crosswords/series/sunday-quick',
 					},
 					{
 						title: 'Quick cryptic',
 						url: '/crosswords/series/quick-cryptic',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
 					},
 					{
 						title: 'Quiptic',
@@ -1166,10 +1140,6 @@ export const cricketMatchData: FECricketMatchPage = {
 					{
 						title: 'Prize',
 						url: '/crosswords/series/prize',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
 					},
 					{
 						title: 'Genius',
@@ -1290,7 +1260,6 @@ export const cricketMatchData: FECricketMatchPage = {
 	config: {
 		switches: {
 			lightbox: true,
-			prebidCriteo: true,
 			externalVideoEmbeds: true,
 			personaliseSignInGateAfterCheckout: true,
 			abSignInGateMainVariant: true,
@@ -1320,15 +1289,17 @@ export const cricketMatchData: FECricketMatchPage = {
 			prebidAnalytics: true,
 			extendedMostPopular: true,
 			ampContentAbTesting: false,
+			prebidCriteo: true,
+			abPrebidMultibid: true,
 			imrWorldwide: true,
 			acast: true,
 			twitterUwt: true,
 			abAuxiaSignInGate: true,
-			abDeferPermutiveLoad: true,
 			prebidAppnexusInvcode: true,
 			ampPrebidPubmatic: false,
 			a9HeaderBidding: true,
 			prebidAppnexus: true,
+			europeBetaFrontTest2: true,
 			enableDiscussionSwitch: true,
 			prebidXaxis: true,
 			stickyVideos: true,
@@ -1348,6 +1319,7 @@ export const cricketMatchData: FECricketMatchPage = {
 			ampAmazon: false,
 			prebidAdYouLike: true,
 			mostViewedFronts: true,
+			abA9BidResponseWinner: true,
 			optOutAdvertising: true,
 			abSignInGateMainControl: true,
 			googleSearch: true,
@@ -1366,6 +1338,7 @@ export const cricketMatchData: FECricketMatchPage = {
 			youtubeIma: true,
 			webFonts: true,
 			liveBlogTopSponsorship: true,
+			lineItemJobs: true,
 			ophan: true,
 			crosswordSvgThumbnails: true,
 			prebidTriplelift: true,
@@ -1389,7 +1362,9 @@ export const cricketMatchData: FECricketMatchPage = {
 			europeBetaFront: true,
 			prebidBidCache: true,
 		},
-		abTests: {},
+		abTests: {
+			europeBetaFrontTest2Control: 'control',
+		},
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		stage: 'PROD',
 		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
@@ -1409,7 +1384,7 @@ export const cricketMatchData: FECricketMatchPage = {
 		forecastsapiurl: '/weatherapi/forecast',
 		supportUrl: 'https://support.theguardian.com',
 		commercialBundleUrl:
-			'https://assets.guim.co.uk/commercial/67d7b3bdbd4e28a5f1b2/graun.standalone.commercial.js',
+			'https://assets.guim.co.uk/commercial/3047aee80994211e1b89/graun.standalone.commercial.js',
 		idOAuthUrl: 'https://oauth.theguardian.com',
 		webTitle: "Third Women's Twenty20 International, Sky Stadium",
 		isFront: false,
@@ -1622,4 +1597,5 @@ export const cricketMatchData: FECricketMatchPage = {
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	canonicalUrl:
 		'https://www.theguardian.com//sport/cricket/match/2025-03-26/australia-women-s-cricket-team',
+	pageId: '/sport/cricket/match/2025-03-26/australia-women-s-cricket-team',
 };

@@ -309,9 +309,13 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		? content.mainContent
 		: content.mobileContent;
 
+	const isVatCompliantCountry =
+		choiceCardAmounts?.testName !== 'VAT_COMPLIANCE';
+
 	const showChoiceCards = !!(
 		templateSettings.choiceCardSettings &&
-		choiceCardAmounts?.amountsCardData
+		choiceCardAmounts?.amountsCardData &&
+		isVatCompliantCountry
 	);
 
 	const getHeaderContainerCss = () => {
@@ -376,6 +380,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 									copy={{
 										headline:
 											tickerSettings.copy.countLabel,
+										goalCopy: tickerSettings.copy.goalCopy,
 									}}
 									tickerData={tickerSettings.tickerData}
 									tickerStylingSettings={
@@ -449,7 +454,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 								setThreeTierChoiceCardSelectedProduct
 							}
 							choices={getChoiceCardData(
-								isTabletOrAbove,
+								false,
 								false,
 								countryCode,
 							)}
@@ -533,8 +538,8 @@ const styles = {
 	) => css`
 		background: ${background};
 		color: ${textColor};
-		${limitHeight ? 'max-height: 70vh;' : 'auto'}
-		overflow: auto;
+		${limitHeight ? 'max-height: 60vh;' : ''}
+
 		* {
 			box-sizing: border-box;
 		}

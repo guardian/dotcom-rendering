@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { type CrosswordProps } from '@guardian/react-crossword-next';
+import { type CrosswordProps } from '@guardian/react-crossword';
 import { palette, space } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';

@@ -54,6 +54,7 @@ const tickerSettings: TickerSettings = {
 	currencySymbol: '£',
 	copy: {
 		countLabel: '',
+		goalCopy: 'goal',
 	},
 	tickerData: {
 		total: 500000,

@@ -42,7 +42,7 @@ type Props = {
 	width: number;
 	height: number;
 	hasAudio: boolean;
-	fallbackImage: JSX.Element;
+	fallbackImageComponent: JSX.Element;
 	isPlayable: boolean;
 	setIsPlayable: Dispatch<SetStateAction<boolean>>;
 	isPlaying: boolean;
@@ -55,6 +55,12 @@ type Props = {
 	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	AudioIcon: (iconProps: IconProps) => JSX.Element;
+	/**
+	 * We ONLY show a thumbnail image when the user has indicated that they do
+	 * not want videos to play automatically, e.g. prefers reduced motion. Otherwise,
+	 * we do not bother downloading the image, as the video will be autoplayed.
+	 */
+	thumbnailImage?: string;
 };
 
 /**
@@ -69,7 +75,8 @@ export const LoopVideoPlayer = forwardRef(
 			width,
 			height,
 			hasAudio,
-			fallbackImage,
+			fallbackImageComponent,
+			thumbnailImage,
 			isPlayable,
 			setIsPlayable,
 			isPlaying,
@@ -93,12 +100,13 @@ export const LoopVideoPlayer = forwardRef(
 				<video
 					id={loopVideoId}
 					ref={ref}
-					preload="none"
+					preload={thumbnailImage ? 'metadata' : 'none'}
 					loop={true}
 					muted={isMuted}
 					playsInline={true}
 					height={height}
 					width={width}
+					poster={thumbnailImage ?? undefined}
 					onPlaying={() => {
 						setIsPlaying(true);
 					}}
@@ -126,7 +134,7 @@ export const LoopVideoPlayer = forwardRef(
 					performance on supported browsers. https://web.dev/articles/video-and-source-tags */}
 					{/* <source src={webmSrc} type="video/webm"> */}
 					<source src={src} type="video/mp4" />
-					{fallbackImage}
+					{fallbackImageComponent}
 				</video>
 				{ref && 'current' in ref && ref.current && (
 					<>

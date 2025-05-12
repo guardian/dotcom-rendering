@@ -74,43 +74,47 @@ const onwardsWrapper = css`
 	background: ${palette('--article-section-background')};
 `;
 
-// TODO: EUR edition urls are currently pointing to INT edition
-// containers, once the europe edition is live, we may want to change this
+/**
+ * The hard coded list of container URLs for the different pillars and editions.
+ * For headlines and sport, we use the container IDs from the Network front for that section.
+ * For opinion, culture and lifestyle, we use the container IDs from the editionalised front, where available.
+ * Where we do not have editionalised pillars (Europe and International) we default to UK.
+ */
 const containerUrls = {
 	headlines: {
-		UK: 'uk-alpha/news/regular-stories',
-		US: 'c5cad9ee-584d-4e85-85cd-bf8ee481b026',
-		AU: '36b9cf13-bf8b-4cf0-b882-5c5d4feac0a2',
-		INT: '10f21d96-18f6-426f-821b-19df55dfb831',
-		EUR: '10f21d96-18f6-426f-821b-19df55dfb831',
+		UK: 'e394b4df-85b2-4e94-aa9d-7ecf3baddee4',
+		US: '52a630d9-751f-4db2-810e-f6753a6d8103',
+		AU: '7ff637c4-f97e-4c11-b6e2-4194cd918ecc',
+		INT: 'a8a0658c-7c83-4a54-b371-199f54d5412e',
+		EUR: 'e38d1229-cd4a-47a8-a9a5-e3ba5f8fbf56',
 	},
 	sport: {
-		UK: '754c-8e8c-fad9-a927',
-		US: 'f6dd-d7b1-0e85-4650',
-		AU: 'c45d-318f-896c-3a85',
-		INT: 'd1ad8ec3-5ee2-4673-94c8-cc3f8d261e52',
-		EUR: 'd1ad8ec3-5ee2-4673-94c8-cc3f8d261e52',
+		UK: 'd6f18891-8199-4fe1-921c-25de032a8e8e',
+		US: '940f2f34-6a46-4391-bf39-9c88b04939e9',
+		AU: '84c9dd19-ecbd-4dde-b4e1-265a55f3c41b',
+		INT: '8fa5c98d-cb94-4cf0-bb82-47f2df23f6ad',
+		EUR: '380bce4e-d23e-48b8-847b-5ccda0c7a38b',
 	},
 	opinion: {
-		UK: '3ff78b30-52f5-4d30-ace8-c887113cbe0d',
-		US: '98df412d-b0e7-4d9a-98c2-062642823e94',
-		AU: 'au-alpha/contributors/feature-stories',
-		INT: 'ee3386bb-9430-4a6d-8bca-b99d65790f3b',
-		EUR: 'ee3386bb-9430-4a6d-8bca-b99d65790f3b',
+		UK: 'uk/commentisfree/regular-stories',
+		US: 'us-alpha/contributors/feature-stories',
+		AU: 'au/commentisfree/regular-stories',
+		INT: 'uk/commentisfree/regular-stories',
+		EUR: 'uk/commentisfree/regular-stories',
 	},
 	culture: {
-		UK: 'ae511a89-ef38-4ec9-aab1-3a5ebc96d118',
-		US: 'fb59c1f8-72a7-41d5-8365-a4d574809bed',
-		AU: '22262088-4bce-4290-9810-cb50bbead8db',
-		INT: 'c7154e22-7292-4d93-a14d-22fd4b6b693d',
-		EUR: 'c7154e22-7292-4d93-a14d-22fd4b6b693d',
+		UK: 'uk/culture/regular-stories',
+		US: 'us/culture/regular-stories',
+		AU: 'au/culture/regular-stories',
+		INT: 'uk/culture/regular-stories',
+		EUR: 'uk/culture/regular-stories',
 	},
 	lifestyle: {
-		UK: 'uk-alpha/features/feature-stories',
-		US: 'us-alpha/features/feature-stories',
-		AU: '13636104-51ce-4264-bb6b-556c80227331',
-		INT: '7b297ef5-a3f9-45e5-b915-b54951d7f6ec',
-		EUR: '7b297ef5-a3f9-45e5-b915-b54951d7f6ec',
+		UK: '5011-3940-8793-33a9',
+		US: '93981db4-a44c-4ac1-aef1-914df6363a92',
+		AU: '971c8921-ffc5-4b37-b561-305a27c4d01d',
+		INT: '5011-3940-8793-33a9',
+		EUR: '5011-3940-8793-33a9',
 	},
 };
 

@@ -11,6 +11,7 @@ type Props = {
 	width: number;
 	aspectRatio?: AspectRatio;
 	mobileAspectRatio?: AspectRatio;
+	isImmersive?: boolean;
 };
 
 export const YoutubeAtomPicture = ({
@@ -20,6 +21,7 @@ export const YoutubeAtomPicture = ({
 	width,
 	aspectRatio,
 	mobileAspectRatio,
+	isImmersive = false,
 }: Props) => {
 	const mobileAspect = mobileAspectRatio ?? aspectRatio;
 	const sources = generateSources(getSourceImageUrl(image), [
@@ -38,8 +40,18 @@ export const YoutubeAtomPicture = ({
 			width: 620,
 			aspectRatio: mobileAspect,
 		},
-		{ breakpoint: breakpoints.tablet, width: 700, aspectRatio },
-		{ breakpoint: breakpoints.desktop, width: 620, aspectRatio },
+		{
+			breakpoint: breakpoints.tablet,
+			width: 700,
+			aspectRatio,
+			cropOffset: isImmersive ? { x: 50, y: 0 } : undefined,
+		},
+		{
+			breakpoint: breakpoints.desktop,
+			width: 620,
+			aspectRatio,
+			cropOffset: isImmersive ? { x: 50, y: 0 } : undefined,
+		},
 	]);
 	const fallbackSource = getFallbackSource(sources);
 
