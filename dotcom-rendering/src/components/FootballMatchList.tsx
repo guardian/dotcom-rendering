@@ -14,7 +14,7 @@ import {
 	LinkButton,
 	SvgPlus,
 } from '@guardian/source/react-components';
-import { Fragment, type ReactNode, useEffect, useState } from 'react';
+import { Fragment, type ReactNode, useState } from 'react';
 import type {
 	FootballMatch,
 	FootballMatches,
@@ -27,6 +27,7 @@ import {
 	getTimeZoneFromEdition,
 } from '../lib/edition';
 import type { Result } from '../lib/result';
+import { useHydrated } from '../lib/useHydrated';
 import { palette } from '../palette';
 
 type Props = {
@@ -440,12 +441,7 @@ export const FootballMatchList = ({
 	const [days, setDays] = useState(initialDays);
 	const [isError, setIsError] = useState<boolean>(false);
 
-	const [jsLoaded, setJsLoaded] = useState(false);
-
-	useEffect(() => {
-		// This will only run after JS has loaded on the client
-		setJsLoaded(true);
-	}, []);
+	const hydrated = useHydrated();
 
 	return (
 		<>
@@ -502,7 +498,7 @@ export const FootballMatchList = ({
 						`,
 					]}
 				>
-					{jsLoaded ? (
+					{hydrated ? (
 						<>
 							<Button
 								theme={{
