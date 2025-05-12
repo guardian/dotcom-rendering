@@ -49,17 +49,25 @@ export const Default = {
 		const canvas = within(canvasElement);
 
 		// Get element with area role link (anchor tag) with the visible text content "More"
-		const moreLink = canvas.getByRole('link', { name: /more/i });
+		const moreLinks = canvas.getAllByRole('link', { name: /more/i });
 		// Assert the href exists
-		void expect(moreLink).toHaveAttribute('href', nextPageNoJsUrl);
+		for (const moreLink of moreLinks) {
+			void expect(moreLink).toHaveAttribute('href', nextPageNoJsUrl);
+		}
 
-		// Get the button element with the visible text content "More" and click it
-		const moreButton = await canvas.findByRole('button', { name: /more/i });
-		await userEvent.click(moreButton);
+		const moreButtons = await canvas.findAllByRole('button', {
+			name: /more/i,
+		});
+		for (const moreButton of moreButtons) {
+			await userEvent.click(moreButton);
+		}
 
-		const newDays = canvasElement.querySelectorAll('section');
-		// Assert that the number of sections has increased
-		void expect(newDays.length).toBeGreaterThan(initialDays.length);
+		const rootDivs = canvasElement.querySelectorAll('[data-color-scheme]');
+		for (const rootDiv of rootDivs) {
+			const newDays = rootDiv.querySelectorAll('section');
+			// Assert that the number of sections has increased
+			void expect(newDays.length).toBeGreaterThan(initialDays.length);
+		}
 	},
 } satisfies Story;
 
@@ -68,7 +76,25 @@ export const ErrorGettingMore = {
 		...Default.args,
 		getMoreDays: () => Promise.resolve(error('failed')),
 	},
-	play: Default.play,
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement);
+
+		// Get the button element with the visible text content "More" and click it
+		const moreButtons = await canvas.findAllByRole('button', {
+			name: /more/i,
+		});
+		for (const moreButton of moreButtons) {
+			await userEvent.click(moreButton);
+		}
+
+		const rootDivs = canvasElement.querySelectorAll('[data-color-scheme]');
+		for (const rootDiv of rootDivs) {
+			// Assert that the error message appears
+			await within(rootDiv as HTMLElement).findByText(
+				/Could not get more matches\. Please try again later!/i,
+			);
+		}
+	},
 } satisfies Story;
 
 export const NoMoreDays = {
