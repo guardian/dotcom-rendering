@@ -671,7 +671,7 @@ const styles = {
 			max-width: 492px;
 		}
 		${from.desktop} {
-			width: 100%
+			width: 100%;
 			padding-left: ${space[2]}px;
 			padding-right: ${space[5]}px;
 			margin-bottom: ${space[2]}px;
