@@ -1,6 +1,6 @@
 import path from 'node:path';
 import webpack from 'webpack';
-import { babelExclude, getLoaders } from '../webpack/webpack.config.client';
+import { transpileExclude, getLoaders } from '../webpack/webpack.config.client';
 import { saveStories } from '../scripts/gen-stories/get-stories.mjs';
 import type { StorybookConfig } from '@storybook/react-webpack5';
 import { svgr } from '../webpack/svg.cjs';
@@ -124,7 +124,7 @@ const webpackConfig = (config: Configuration) => {
 	rules.push({
 		test: /\.[jt]sx?|mjs$/,
 		include: [path.resolve(__dirname, '../')],
-		exclude: babelExclude,
+		exclude: transpileExclude,
 		use: webpackLoaders,
 	});
 

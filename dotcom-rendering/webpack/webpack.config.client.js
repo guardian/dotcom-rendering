@@ -129,7 +129,7 @@ module.exports = ({ build }) => ({
 		rules: [
 			{
 				test: /\.[jt]sx?|mjs$/,
-				exclude: module.exports.babelExclude,
+				exclude: module.exports.transpileExclude,
 				use: getLoaders(build),
 			},
 			{
@@ -141,7 +141,7 @@ module.exports = ({ build }) => ({
 	},
 });
 
-module.exports.babelExclude = {
+module.exports.transpileExclude = {
 	and: [/node_modules/],
 	not: [
 		// Include all @guardian modules, except automat-modules
