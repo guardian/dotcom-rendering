@@ -139,17 +139,23 @@ export const buildIdentityLinks = (
 	}));
 };
 
-const SignIn = ({ idUrl }: { idUrl: string }) => (
-	<a
-		css={myAccountLinkStyles}
-		href={`${idUrl}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
-			'guardian_signin_header',
-		)}`}
-		data-link-name={nestedOphanComponents('header', 'topbar', 'signin')}
-	>
-		<ProfileIcon /> Sign in
-	</a>
-);
+const SignIn = ({ idUrl }: { idUrl: string }) => {
+	const isDev = process.env.NODE_ENV !== 'production';
+	const idUrlForEnv = isDev
+		? 'https://profile.code.dev-theguardian.com'
+		: idUrl;
+	return (
+		<a
+			css={myAccountLinkStyles}
+			href={`${idUrlForEnv}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
+				'guardian_signin_header',
+			)}`}
+			data-link-name={nestedOphanComponents('header', 'topbar', 'signin')}
+		>
+			<ProfileIcon /> Sign in
+		</a>
+	);
+};
 
 export const dropDownOverrides = css`
 	color: ${themePalette('--masthead-top-bar-link-text')};
