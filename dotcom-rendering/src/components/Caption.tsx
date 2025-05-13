@@ -15,7 +15,7 @@ import {
 import { palette } from '../palette';
 import CameraSvg from '../static/icons/camera.svg';
 import VideoSvg from '../static/icons/video-icon.svg';
-import type { MediaType } from '../types/layout';
+import type { MainMedia } from '../types/mainMedia';
 
 type Props = {
 	captionText?: string;
@@ -26,7 +26,7 @@ type Props = {
 	shouldLimitWidth?: boolean;
 	isOverlaid?: boolean;
 	isLeftCol?: boolean;
-	mediaType?: MediaType;
+	mediaType?: MainMedia['type'];
 	isMainMedia?: boolean;
 	isImmersive?: boolean;
 };
