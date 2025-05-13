@@ -44,7 +44,6 @@ const audioIconContainerStyles = css`
 	justify-content: center;
 	align-items: center;
 	background-color: ${palette('--loop-video-audio-icon-background')};
-	opacity: 0.7;
 	border-radius: 50%;
 	border: 1px solid ${palette('--loop-video-audio-icon-border')};
 `;
