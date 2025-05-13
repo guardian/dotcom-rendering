@@ -13,6 +13,7 @@ import { getSoleContributor } from '../lib/byline';
 import type { EditionId } from '../lib/edition';
 import type { Group } from '../lib/getDataLinkName';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
+import { getLargestImageSize } from '../lib/image';
 import type {
 	DCRFrontCard,
 	DCRSlideshowImage,
@@ -165,7 +166,8 @@ const getActiveMediaAtom = (mediaAtom?: FEMediaAtom): MainMedia | undefined => {
 		const asset = mediaAtom.assets.find(
 			({ version }) => version === mediaAtom.activeVersion,
 		);
-		if (asset?.platform === 'Youtube') {
+		console.log('asset?.platform', asset?.platform, asset);
+		if (asset?.platform !== 'Youtube') {
 			return {
 				type: 'Video',
 				id: mediaAtom.id,
@@ -186,7 +188,27 @@ const getActiveMediaAtom = (mediaAtom?: FEMediaAtom): MainMedia | undefined => {
 					) ?? [],
 			};
 		}
+
+		if (asset.platform !== 'our loop videos TODO - placeholder') {
+			return {
+				type: 'LoopVideo',
+				videoId: asset.id,
+				duration: mediaAtom.duration ?? 0,
+				// Size fixed to a 5:4 ratio
+				width: 500,
+				height: 400,
+				thumbnailImage: getLargestImageSize(
+					mediaAtom.posterImage?.allImages.map(
+						({ url, fields: { width } }) => ({
+							url,
+							width: Number(width),
+						}),
+					) ?? [],
+				)?.url,
+			};
+		}
 	}
+
 	return undefined;
 };
 
@@ -201,8 +223,13 @@ const decideMedia = (
 	videoReplace?: boolean,
 ): MainMedia | undefined => {
 	if (showMainVideo === true || videoReplace === true) {
+		// If the showVideo toggle is enabled in the fronts tool,
+		// we should return the active mediaAtom regardless of the design
 		return getActiveMediaAtom(mediaAtom);
 	}
+
+	console.log('showMainVideo', showMainVideo);
+	console.log('mediaAtom', mediaAtom);
 
 	switch (format.design) {
 		case ArticleDesign.Gallery:
@@ -287,11 +314,33 @@ export const enhanceCards = (
 
 		// const mainMediaAtom = faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
 		// 	faciaCard.properties.maybeContent?.elements.mediaAtoms[0];
+		const mainMediaAtom =
+			faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
+			faciaCard.properties.maybeContent?.elements.mediaAtoms[0];
+
+		console.log(
+			'faciaCard.properties.maybeContent?.elements.mainMediaAtom',
+			faciaCard.properties.maybeContent?.elements.mainMediaAtom,
+		);
+		console.log(
+			'faciaCard.properties.maybeContent?.elements.mediaAtoms[0]',
+			faciaCard.properties.maybeContent?.elements.mediaAtoms[0],
+		);
+		console.log('mainMediaAtom', mainMediaAtom);
+		console.log(
+			'faciaCard.properties.mediaAtom',
+			faciaCard.properties.mediaAtom,
+		);
+		// console.log(
+		// 	'faciaCard.properties.enrichedMediaAtom',
+		// 	faciaCard.properties.enrichedMediaAtom,
+		// );
 
 		const mainMedia = decideMedia(
 			format,
 			faciaCard.properties.showMainVideo,
-			faciaCard.properties.mediaAtom,
+			// faciaCard.properties.mediaAtom,
+			mainMediaAtom,
 			faciaCard.card.galleryCount,
 			faciaCard.card.audioDuration,
 			podcastImage,

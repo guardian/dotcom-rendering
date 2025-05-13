@@ -39,24 +39,20 @@ const wrapperStyles = css`
 	margin-top: 4px;
 `;
 
-export const Icon = ({ mediaType }: { mediaType: MainMedia['type'] }) => {
+export const Icon = ({ mediaType }: { mediaType: Props['mediaType'] }) => {
 	switch (mediaType) {
 		case 'Gallery':
 			return <SvgCamera />;
 		case 'Video':
+			return <SvgVideo />;
+		case 'LoopVideo':
 			return <SvgVideo />;
 		case 'Audio':
 			return <SvgAudio />;
 	}
 };
 
-const MediaIcon = ({
-	mediaType,
-	hasKicker,
-}: {
-	mediaType: MainMedia['type'];
-	hasKicker: boolean;
-}) => {
+const MediaIcon = ({ mediaType, hasKicker }: Props) => {
 	return (
 		<span css={iconWrapperStyles(hasKicker)}>
 			<Icon mediaType={mediaType} />

@@ -7,13 +7,15 @@ import { palette } from '../palette';
 import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
 import { LoopVideoProgressBar } from './LoopVideoProgressBar';
 
-const videoStyles = css`
+const videoStyles = (aspectRatio: number) => css`
 	position: relative;
 	width: 100%;
 	height: auto;
 	/* Find out why this is needed to align the video with its container. */
 	margin-bottom: -3px;
 	cursor: pointer;
+	/* Prevents CLS by letting the browser know the space the video will take up. */
+	aspect-ratio: ${aspectRatio};
 `;
 
 const playIconStyles = css`
@@ -105,6 +107,7 @@ export const LoopVideoPlayer = forwardRef(
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
 		const loopVideoId = `loop-video-${videoId}`;
+		const aspectRatio = width / height;
 
 		return (
 			<>
@@ -140,7 +143,7 @@ export const LoopVideoPlayer = forwardRef(
 					role="button"
 					tabIndex={0}
 					onError={onError}
-					css={videoStyles}
+					css={videoStyles(aspectRatio)}
 				>
 					{/* Ensure webm source is provided. Encoding the video to a webm file will improve
 					performance on supported browsers. https://web.dev/articles/video-and-source-tags */}
