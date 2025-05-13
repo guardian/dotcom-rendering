@@ -102,12 +102,11 @@ const customRadioTheme: ThemeRadio = {
 const SupportingBenefits = ({
 	benefitsLabel,
 	benefits,
-	showTicks,
 }: {
 	benefitsLabel?: string;
 	benefits: ChoiceCard['benefits'];
-	showTicks: boolean;
 }) => {
+	const showTicks = benefits.length > 1;
 	return (
 		<div css={supportingTextStyles}>
 			{!!benefitsLabel && (
@@ -203,9 +202,6 @@ export const ThreeTierChoiceCards = ({
 															| undefined
 													}
 													benefits={benefits}
-													showTicks={
-														supportTier !== 'OneOff'
-													}
 												/>
 											) : undefined
 										}
