@@ -37,6 +37,4 @@ export type SmallHeadlineSize =
 	| 'huge'
 	| 'ginormous';
 
-export type MediaType = 'Video' | 'Audio' | 'Gallery';
-
 export type LeftColSize = 'compact' | 'wide';
