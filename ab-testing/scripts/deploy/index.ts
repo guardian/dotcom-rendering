@@ -1,7 +1,7 @@
 import {
-	bulkUpdateABTestGroups,
-	bulkUpdateMVTGroups,
-	calculateBulkUpdates,
+	updateABTestGroups,
+	updateMVTGroups,
+	calculateUpdates,
 	getABTestGroupsFromDictionary,
 	getMVTGroupsFromDictionary,
 } from './fastly-api.ts';
@@ -26,39 +26,36 @@ if (!flags['mvts'] || !flags['ab-tests']) {
 const updatedABTestGroups = await getUpdatedABTestGroups(flags['ab-tests']);
 const currentABTestGroups = await getABTestGroupsFromDictionary();
 
-const ABTestGroupBulkUpdates = calculateBulkUpdates(
+const abTestGroupUpdates = calculateUpdates(
 	updatedABTestGroups,
 	currentABTestGroups,
 );
 
-if (ABTestGroupBulkUpdates.length === 0) {
+if (abTestGroupUpdates.length === 0) {
 	console.log('No ab test groups to update');
 } else {
-	Map.groupBy(ABTestGroupBulkUpdates, (item) => item.op).forEach(
-		(items, op) => {
-			if (op === 'delete') {
-				console.log(
-					`Deleting ${items.length} ab test groups from dictionary`,
-				);
-			}
-			if (op === 'update') {
-				console.log(
-					`Updating ${items.length} ab test groups in dictionary`,
-				);
-			}
-			if (op === 'create') {
-				console.log(
-					`Creating ${items.length} ab test groups in dictionary`,
-				);
-			}
-		},
-	);
+	Map.groupBy(abTestGroupUpdates, (item) => item.op).forEach((items, op) => {
+		if (op === 'delete') {
+			console.log(
+				`Deleting ${items.length} ab test groups from dictionary`,
+			);
+		}
+		if (op === 'update') {
+			console.log(
+				`Updating ${items.length} ab test groups in dictionary`,
+			);
+		}
+		if (op === 'create') {
+			console.log(
+				`Creating ${items.length} ab test groups in dictionary`,
+			);
+		}
+	});
 
-	const bulkUpdateABTestGroupsResponse = await bulkUpdateABTestGroups(
-		ABTestGroupBulkUpdates,
-	);
+	const updateABTestGroupsResponse =
+		await updateABTestGroups(abTestGroupUpdates);
 
-	if (bulkUpdateABTestGroupsResponse.status !== 'ok') {
+	if (updateABTestGroupsResponse.status !== 'ok') {
 		throw new Error(`Failed to update ab test groups dictionary`);
 	}
 }
@@ -66,12 +63,12 @@ if (ABTestGroupBulkUpdates.length === 0) {
 // update mvt groups
 const mvtGroups = await getMVTGroups(flags['mvts']);
 const currentMVTGroups = await getMVTGroupsFromDictionary();
-const MVTGroupBulkUpdates = calculateBulkUpdates(mvtGroups, currentMVTGroups);
+const mvtGroupUpdates = calculateUpdates(mvtGroups, currentMVTGroups);
 
-if (MVTGroupBulkUpdates.length === 0) {
+if (mvtGroupUpdates.length === 0) {
 	console.log('No mvt groups to update');
 } else {
-	Map.groupBy(MVTGroupBulkUpdates, (item) => item.op).forEach((items, op) => {
+	Map.groupBy(mvtGroupUpdates, (item) => item.op).forEach((items, op) => {
 		if (op === 'delete') {
 			console.log(`Deleting ${items.length} mvt groups from dictionary`);
 		}
@@ -84,13 +81,12 @@ if (MVTGroupBulkUpdates.length === 0) {
 	});
 
 	console.log(
-		`Performing ${MVTGroupBulkUpdates.length} mvt groups dictionary operations`,
+		`Performing ${mvtGroupUpdates.length} mvt groups dictionary operations`,
 	);
 
-	const bulkUpdateMVTGroupsResponse =
-		await bulkUpdateMVTGroups(MVTGroupBulkUpdates);
+	const updateMVTGroupsResponse = await updateMVTGroups(mvtGroupUpdates);
 
-	if (bulkUpdateMVTGroupsResponse.status !== 'ok') {
+	if (updateMVTGroupsResponse.status !== 'ok') {
 		throw new Error(`Failed to update mvt groups dictionary`);
 	}
 }

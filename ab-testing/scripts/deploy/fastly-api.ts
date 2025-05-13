@@ -11,7 +11,7 @@ const dictionaryItemStruct = object({
 	deleted_at: nullable(string()),
 });
 
-type BulkUpdateDictionaryItemRequest =
+type UpdateDictionaryItemRequest =
 	| {
 			item_key: string;
 			item_value: string;
@@ -71,14 +71,14 @@ const getDictionaryItems = async ({
 	return dictionary;
 };
 
-const bulkUpdateDictionaryItem = async ({
+const updateDictionaryItems = async ({
 	serviceId,
 	dictionaryId,
 	items,
 }: {
 	serviceId: string;
 	dictionaryId: string;
-	items: BulkUpdateDictionaryItemRequest[];
+	items: UpdateDictionaryItemRequest[];
 }) => {
 	const dictionary = await fetchFromFastly(
 		`https://api.fastly.com/service/${serviceId}/dictionary/${dictionaryId}/items`,
@@ -110,7 +110,7 @@ const bulkUpdateDictionaryItem = async ({
  * @param currentDictionary
  * @returns
  */
-const calculateBulkUpdates = (
+const calculateUpdates = (
 	updatedDictionary: Array<{
 		item_key: string;
 		item_value: string;
@@ -119,13 +119,13 @@ const calculateBulkUpdates = (
 		item_key: string;
 		item_value: string;
 	}>,
-): BulkUpdateDictionaryItemRequest[] => {
+): UpdateDictionaryItemRequest[] => {
 	const currentDictionaryKeys = new Set(
 		currentDictionary.map((group) => group.item_key),
 	);
 
 	const updateDeleteOps = currentDictionary
-		.map((group) => {
+		.map((group): UpdateDictionaryItemRequest | null => {
 			const updatedGroup = updatedDictionary.find(
 				(newGroup) => newGroup.item_key === group.item_key,
 			);
@@ -134,7 +134,7 @@ const calculateBulkUpdates = (
 				return {
 					item_key: group.item_key,
 					op: 'delete',
-				} as const;
+				};
 			}
 
 			if (group.item_value !== updatedGroup.item_value) {
@@ -142,23 +142,20 @@ const calculateBulkUpdates = (
 					item_key: group.item_key,
 					item_value: updatedGroup.item_value,
 					op: 'update',
-				} as const;
+				};
 			}
 
 			return null;
 		})
 		.filter((update) => update !== null);
 
-	const createOpts = updatedDictionary
+	const createOpts: UpdateDictionaryItemRequest[] = updatedDictionary
 		.filter(({ item_key }) => !currentDictionaryKeys.has(item_key))
-		.map(
-			({ item_key, item_value }) =>
-				({
-					item_key,
-					item_value,
-					op: 'create',
-				}) as const,
-		);
+		.map(({ item_key, item_value }) => ({
+			item_key,
+			item_value,
+			op: 'create',
+		}));
 
 	const bulkUpdates = [...updateDeleteOps, ...createOpts];
 
@@ -177,14 +174,14 @@ const getABTestGroupsFromDictionary = () =>
 		dictionaryId: env.AB_TESTS_DICTIONARY_ID,
 	});
 
-const bulkUpdateMVTGroups = (items: BulkUpdateDictionaryItemRequest[]) =>
-	bulkUpdateDictionaryItem({
+const updateMVTGroups = (items: UpdateDictionaryItemRequest[]) =>
+	updateDictionaryItems({
 		serviceId: env.SERVICE_ID,
 		dictionaryId: env.MVT_DICTIONARY_ID,
 		items,
 	});
-const bulkUpdateABTestGroups = (items: BulkUpdateDictionaryItemRequest[]) =>
-	bulkUpdateDictionaryItem({
+const updateABTestGroups = (items: UpdateDictionaryItemRequest[]) =>
+	updateDictionaryItems({
 		serviceId: env.SERVICE_ID,
 		dictionaryId: env.AB_TESTS_DICTIONARY_ID,
 		items,
@@ -199,8 +196,8 @@ export {
 	getMVTGroupsFromDictionary,
 	getABTestGroupsFromDictionary,
 	getDictionaryItems,
-	bulkUpdateMVTGroups,
-	bulkUpdateABTestGroups,
-	calculateBulkUpdates,
+	updateMVTGroups,
+	updateABTestGroups,
+	calculateUpdates,
 	encodeObject,
 };

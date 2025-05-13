@@ -46,16 +46,16 @@ function mockFetch(response: unknown, status = 200, statusText = 'OK') {
 
 // Import after mocking
 const {
-	calculateBulkUpdates,
+	calculateUpdates,
 	getDictionaryItems,
 	getMVTGroupsFromDictionary,
 	getABTestGroupsFromDictionary,
-	bulkUpdateMVTGroups,
-	bulkUpdateABTestGroups,
+	updateMVTGroups,
+	updateABTestGroups,
 	encodeObject,
 } = await import('./fastly-api.ts');
 
-Deno.test('calculateBulkUpdates - creates new items', () => {
+Deno.test('calculateUpdates - creates new items', () => {
 	const currentDictionary: Array<{ item_key: string; item_value: string }> =
 		[];
 	const newDictionary = [
@@ -63,7 +63,7 @@ Deno.test('calculateBulkUpdates - creates new items', () => {
 		{ item_key: 'test2', item_value: 'value2' },
 	];
 
-	const result = calculateBulkUpdates(newDictionary, currentDictionary);
+	const result = calculateUpdates(newDictionary, currentDictionary);
 
 	assertEquals(result.length, 2);
 	assertEquals(result[0], {
@@ -78,7 +78,7 @@ Deno.test('calculateBulkUpdates - creates new items', () => {
 	});
 });
 
-Deno.test('calculateBulkUpdates - updates existing items', () => {
+Deno.test('calculateUpdates - updates existing items', () => {
 	const currentDictionary = [
 		{ item_key: 'test1', item_value: 'old_value1' },
 		{ item_key: 'test2', item_value: 'value2' },
@@ -88,7 +88,7 @@ Deno.test('calculateBulkUpdates - updates existing items', () => {
 		{ item_key: 'test2', item_value: 'value2' },
 	];
 
-	const result = calculateBulkUpdates(newDictionary, currentDictionary);
+	const result = calculateUpdates(newDictionary, currentDictionary);
 
 	assertEquals(result.length, 1);
 	assertEquals(result[0], {
@@ -98,14 +98,14 @@ Deno.test('calculateBulkUpdates - updates existing items', () => {
 	});
 });
 
-Deno.test('calculateBulkUpdates - deletes removed items', () => {
+Deno.test('calculateUpdates - deletes removed items', () => {
 	const currentDictionary = [
 		{ item_key: 'test1', item_value: 'value1' },
 		{ item_key: 'test2', item_value: 'value2' },
 	];
 	const newDictionary = [{ item_key: 'test1', item_value: 'value1' }];
 
-	const result = calculateBulkUpdates(newDictionary, currentDictionary);
+	const result = calculateUpdates(newDictionary, currentDictionary);
 
 	assertEquals(result.length, 1);
 	assertEquals(result[0], {
@@ -114,7 +114,7 @@ Deno.test('calculateBulkUpdates - deletes removed items', () => {
 	});
 });
 
-Deno.test('calculateBulkUpdates - no changes needed', () => {
+Deno.test('calculateUpdates - no changes needed', () => {
 	const currentDictionary = [
 		{ item_key: 'test1', item_value: 'value1' },
 		{ item_key: 'test2', item_value: 'value2' },
@@ -124,12 +124,12 @@ Deno.test('calculateBulkUpdates - no changes needed', () => {
 		{ item_key: 'test2', item_value: 'value2' },
 	];
 
-	const result = calculateBulkUpdates(newDictionary, currentDictionary);
+	const result = calculateUpdates(newDictionary, currentDictionary);
 
 	assertEquals(result.length, 0);
 });
 
-Deno.test('calculateBulkUpdates - combination of operations', () => {
+Deno.test('calculateUpdates - combination of operations', () => {
 	const currentDictionary = [
 		{ item_key: 'keep', item_value: 'same_value' },
 		{ item_key: 'update', item_value: 'old_value' },
@@ -141,7 +141,7 @@ Deno.test('calculateBulkUpdates - combination of operations', () => {
 		{ item_key: 'create', item_value: 'new_item' },
 	];
 
-	const result = calculateBulkUpdates(newDictionary, currentDictionary);
+	const result = calculateUpdates(newDictionary, currentDictionary);
 
 	assertEquals(result.length, 3);
 
@@ -255,14 +255,14 @@ Deno.test(
 );
 
 Deno.test(
-	'bulkUpdateMVTGroups - makes PATCH request with correct data',
+	'updateMVTGroups - makes PATCH request with correct data',
 	async () => {
 		mockFetch({ status: 'ok' });
 
 		const items = [
 			{ item_key: 'key1', item_value: 'value1', op: 'create' as const },
 		];
-		await bulkUpdateMVTGroups(items);
+		await updateMVTGroups(items);
 
 		assertEquals(fetchStub.calls.length, 1);
 		assertEquals(fetchStub.calls[0].args[1].method, 'PATCH');
@@ -273,14 +273,14 @@ Deno.test(
 );
 
 Deno.test(
-	'bulkUpdateABTestGroups - makes PATCH request with correct data',
+	'updateABTestGroups - makes PATCH request with correct data',
 	async () => {
 		mockFetch({ status: 'ok' });
 
 		const items = [
 			{ item_key: 'key1', item_value: 'value1', op: 'update' as const },
 		];
-		await bulkUpdateABTestGroups(items);
+		await updateABTestGroups(items);
 
 		assertEquals(fetchStub.calls.length, 1);
 		assertEquals(fetchStub.calls[0].args[1].method, 'PATCH');
@@ -290,24 +290,21 @@ Deno.test(
 	},
 );
 
-Deno.test(
-	'bulkUpdateABTestGroups - throws error on non-ok status',
-	async () => {
-		mockFetch({ status: 'error' });
+Deno.test('updateABTestGroups - throws error on non-ok status', async () => {
+	mockFetch({ status: 'error' });
 
-		const items = [
-			{ item_key: 'key1', item_value: 'value1', op: 'create' as const },
-		];
+	const items = [
+		{ item_key: 'key1', item_value: 'value1', op: 'create' as const },
+	];
 
-		await assertRejects(
-			async () => {
-				await bulkUpdateABTestGroups(items);
-			},
-			Error,
-			'Failed to update dictionary: error',
-		);
-	},
-);
+	await assertRejects(
+		async () => {
+			await updateABTestGroups(items);
+		},
+		Error,
+		'Failed to update dictionary: error',
+	);
+});
 
 Deno.test('encodeObject - encodes object to string', () => {
 	const obj = {
