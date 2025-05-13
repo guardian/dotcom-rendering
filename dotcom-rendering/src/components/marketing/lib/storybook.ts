@@ -9,7 +9,7 @@ export const choiceCardsSettings: ChoiceCardsSettings = {
 			},
 			label: 'Support £5/month',
 			isDefault: false,
-			benefitsLabel: 'Unlock Support benefits:',
+			benefitsLabel: 'Unlock <strong>Support</strong> benefits:',
 			benefits: [
 				{
 					copy: 'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
@@ -23,9 +23,12 @@ export const choiceCardsSettings: ChoiceCardsSettings = {
 			},
 			label: 'Support £12/month',
 			isDefault: true,
-			benefitsLabel: 'Unlock All-access digital benefits:',
+			benefitsLabel:
+				'Unlock <strong>All-access digital</strong> benefits:',
 			benefits: [
-				{ copy: 'Unlimited access to the Guardian app' },
+				{
+					copy: '<strong>Unlimited</strong> access to the Guardian app',
+				},
 				{ copy: 'Unlimited access to our new Feast App' },
 				{ copy: 'Ad-free reading on all your devices' },
 				{

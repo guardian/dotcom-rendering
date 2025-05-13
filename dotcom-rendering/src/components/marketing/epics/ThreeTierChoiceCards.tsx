@@ -17,6 +17,7 @@ import {
 } from '@guardian/source/react-components';
 import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type { Dispatch, SetStateAction } from 'react';
+import sanitise from 'sanitize-html';
 
 const supportTierChoiceCardStyles = (selected: boolean) => css`
 	display: block;
@@ -110,15 +111,22 @@ const SupportingBenefits = ({
 	return (
 		<div css={supportingTextStyles}>
 			{!!benefitsLabel && (
-				<span css={benefitsLabelStyles}>
-					Unlock <strong>{benefitsLabel}</strong> benefits:
-				</span>
+				<span
+					css={benefitsLabelStyles}
+					dangerouslySetInnerHTML={{
+						__html: sanitise(benefitsLabel),
+					}}
+				/>
 			)}
 			<ul css={benefitsStyles}>
 				{benefits.map((benefit) => (
 					<li key={benefit.copy}>
 						{showTicks && <SvgTickRound size="xsmall" />}
-						{benefit.copy}
+						<span
+							dangerouslySetInnerHTML={{
+								__html: sanitise(benefit.copy),
+							}}
+						/>
 					</li>
 				))}
 			</ul>
@@ -174,7 +182,13 @@ export const ThreeTierChoiceCards = ({
 									htmlFor={radioId}
 								>
 									<Radio
-										label={label}
+										label={
+											<span
+												dangerouslySetInnerHTML={{
+													__html: sanitise(label),
+												}}
+											/>
+										}
 										id={radioId}
 										value={supportTier}
 										cssOverrides={labelOverrideStyles(
