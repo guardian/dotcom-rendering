@@ -119,6 +119,7 @@ export interface AuxiaProxyGetTreatmentsPayload {
 	tagIds: string[];
 	gateDismissCount: number;
 	countryCode: string;
+	mvtId: number;
 }
 
 export interface AuxiaProxyGetTreatmentsResponse {
