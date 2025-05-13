@@ -145,12 +145,11 @@ function getChoiceAmount(
 const SupportingBenefits = ({
 	benefitsLabel,
 	benefits,
-	showTicks,
 }: {
 	benefitsLabel: string | undefined;
 	benefits: string[];
-	showTicks: boolean;
 }) => {
+	const showTicks = benefits.length > 1;
 	return (
 		<div css={supportingTextStyles}>
 			{!!benefitsLabel && (
@@ -277,9 +276,6 @@ export const ThreeTierChoiceCards = ({
 													benefits={benefits(
 														currencySymbol,
 													)}
-													showTicks={
-														supportTier !== 'OneOff'
-													}
 												/>
 											) : undefined
 										}
