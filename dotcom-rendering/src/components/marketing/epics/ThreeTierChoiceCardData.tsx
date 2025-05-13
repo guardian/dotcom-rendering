@@ -12,9 +12,7 @@ export const ChoiceCardTestData_REGULAR = (
 				? `Support ${currencySymbol}${amount}/year`
 				: `Support ${currencySymbol}${amount}/month`,
 		benefitsLabel: longerBenefits ? 'Support' : undefined,
-		benefits: () => [
-			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
-		],
+		benefits: () => ['Give to the Guardian every month with Support'],
 		recommended: false,
 	},
 	{
@@ -67,9 +65,7 @@ export const ChoiceCardTestData_US = (
 				? `Support ${currencySymbol}${amount}/year`
 				: `Support ${currencySymbol}${amount}/month`,
 		benefitsLabel: longerBenefits ? 'Support' : undefined,
-		benefits: () => [
-			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
-		],
+		benefits: () => ['Give to the Guardian every month with Support'],
 		recommended: false,
 	},
 	{
