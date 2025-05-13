@@ -512,8 +512,7 @@ export const FootballMatchList = ({
 									}}
 									icon={<SvgPlus />}
 									size="xsmall"
-									onClick={(e) => {
-										e.preventDefault(); // prevent navigation when JS is enabled
+									onClick={() => {
 										void getMoreDays().then((moreDays) => {
 											if (moreDays.kind === 'ok') {
 												setIsError(false);
