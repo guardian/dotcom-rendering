@@ -11,7 +11,6 @@ export const ChoiceCardTestData_REGULAR = (
 			isDiscountActive
 				? `Support ${currencySymbol}${amount}/year`
 				: `Support ${currencySymbol}${amount}/month`,
-		benefitsLabel: longerBenefits ? 'Support' : undefined,
 		benefits: () => ['Give to the Guardian every month with Support'],
 		recommended: false,
 	},
@@ -64,7 +63,6 @@ export const ChoiceCardTestData_US = (
 			isDiscountActive
 				? `Support ${currencySymbol}${amount}/year`
 				: `Support ${currencySymbol}${amount}/month`,
-		benefitsLabel: longerBenefits ? 'Support' : undefined,
 		benefits: () => ['Give to the Guardian every month with Support'],
 		recommended: false,
 	},
