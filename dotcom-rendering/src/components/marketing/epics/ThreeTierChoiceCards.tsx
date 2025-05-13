@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
 import {
 	palette,
 	space,
@@ -16,17 +15,9 @@ import {
 	type ThemeRadio,
 	themeRadio,
 } from '@guardian/source/react-components';
-import type { CountryGroupId } from '@guardian/support-dotcom-components';
-import {
-	countryCodeToCountryGroupId,
-	getLocalCurrencySymbol,
-} from '@guardian/support-dotcom-components';
+import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type { Dispatch, SetStateAction } from 'react';
-import type {
-	SupportRatePlan,
-	SupportTier,
-} from './utils/threeTierChoiceCardAmounts';
-import { threeTierChoiceCardAmounts } from './utils/threeTierChoiceCardAmounts';
+import type { SupportTier } from './utils/threeTierChoiceCardAmounts';
 
 const supportTierChoiceCardStyles = (selected: boolean) => css`
 	display: block;
@@ -100,20 +91,6 @@ const recommendedPillStyles = css`
 	right: ${space[5]}px;
 `;
 
-const discountedPillStyles = css`
-	border-radius: 4px;
-	padding: ${space[1]}px ${space[2]}px;
-	background-color: ${palette.error[400]};
-	${textSansBold14};
-	color: ${palette.neutral[100]};
-	position: absolute;
-	top: -${space[2]}px;
-	${until.phablet} {
-		right: ${space[3]}px;
-	}
-	right: ${space[5]}px;
-`;
-
 const customRadioTheme: ThemeRadio = {
 	...themeRadio,
 	borderSelected: palette.brandAlt[400],
@@ -134,21 +111,13 @@ export type ChoiceInfo = {
 	recommended: boolean;
 };
 
-function getChoiceAmount(
-	supportTier: SupportTier,
-	ratePlan: SupportRatePlan,
-	countryGroupId: CountryGroupId,
-): number {
-	return threeTierChoiceCardAmounts[ratePlan][countryGroupId][supportTier];
-}
-
 const SupportingBenefits = ({
 	benefitsLabel,
 	benefits,
 	showTicks,
 }: {
-	benefitsLabel: string | undefined;
-	benefits: string[];
+	benefitsLabel?: string;
+	benefits: ChoiceCard['benefits'];
 	showTicks: boolean;
 }) => {
 	return (
@@ -159,10 +128,10 @@ const SupportingBenefits = ({
 				</span>
 			)}
 			<ul css={benefitsStyles}>
-				{benefits.map((benefit) => (
-					<li key={benefit}>
+				{benefits.map((benefit, idx) => (
+					<li key={`${benefit}-${idx}`}>
 						{showTicks && <SvgTickRound size="xsmall" />}
-						{benefit}
+						{benefit.copy}
 					</li>
 				))}
 			</ul>
@@ -170,36 +139,25 @@ const SupportingBenefits = ({
 	);
 };
 
-const RecommendedPill = () => {
-	return <div css={recommendedPillStyles}>Recommended</div>;
-};
-
-const DiscountedPill = ({ discount }: { discount: number }) => {
-	return <div css={discountedPillStyles}>{discount}% off</div>;
+const ChoiceCardPill = ({ copy }: { copy: string }) => {
+	return <div css={recommendedPillStyles}>{copy}</div>;
 };
 
 type ThreeTierChoiceCardsProps = {
-	selectedProduct: SupportTier;
-	setSelectedProduct: Dispatch<SetStateAction<SupportTier>>;
-	countryCode?: string;
-	choices: ChoiceInfo[];
-	supporterPlusDiscount?: number;
+	selectedProduct: ChoiceCard['product'];
+	setSelectedProduct: Dispatch<
+		SetStateAction<ChoiceCard['product'] | undefined>
+	>;
+	choices: ChoiceCard[];
 	id: string; // uniquely identify this choice cards component to avoid conflicting with others
-	isDiscountActive: boolean;
 };
 
 export const ThreeTierChoiceCards = ({
-	countryCode,
 	selectedProduct,
 	setSelectedProduct,
 	choices,
-	supporterPlusDiscount,
 	id,
-	isDiscountActive = false,
 }: ThreeTierChoiceCardsProps) => {
-	const currencySymbol = getLocalCurrencySymbol(countryCode);
-	const countryGroupId = countryCodeToCountryGroupId(countryCode);
-
 	return (
 		<RadioGroup
 			cssOverrides={css`
@@ -208,35 +166,13 @@ export const ThreeTierChoiceCards = ({
 		>
 			<Stack space={3}>
 				{choices.map(
-					({
-						supportTier,
-						label,
-						benefitsLabel,
-						benefits,
-						recommended,
-					}) => {
-						const choiceAmount = getChoiceAmount(
-							supportTier,
-							'Monthly',
-							countryGroupId,
-						);
-						const choiceAmountYearly = getChoiceAmount(
-							supportTier,
-							'Annual',
-							countryGroupId,
-						);
+					({ product, label, benefitsLabel, benefits, pill }) => {
+						const { supportTier } = product;
 
-						const selected = selectedProduct === supportTier;
-
-						const hasDiscount =
-							!isUndefined(supporterPlusDiscount) &&
-							supportTier === 'SupporterPlus';
+						const selected =
+							selectedProduct.supportTier === supportTier;
 
 						const radioId = `choicecard-${id}-${supportTier}`;
-
-						const finalChoiceAmount = isDiscountActive
-							? choiceAmountYearly
-							: choiceAmount;
 
 						return (
 							<div
@@ -245,24 +181,13 @@ export const ThreeTierChoiceCards = ({
 									position: relative;
 								`}
 							>
-								{hasDiscount && (
-									<DiscountedPill
-										discount={supporterPlusDiscount * 100}
-									/>
-								)}
-								{recommended && !hasDiscount && (
-									<RecommendedPill />
-								)}
+								{pill && <ChoiceCardPill copy={pill.copy} />}
 								<label
 									css={supportTierChoiceCardStyles(selected)}
 									htmlFor={radioId}
 								>
 									<Radio
-										label={label(
-											finalChoiceAmount,
-											currencySymbol,
-											supporterPlusDiscount,
-										)}
+										label={label}
 										id={radioId}
 										value={supportTier}
 										cssOverrides={labelOverrideStyles(
@@ -272,11 +197,11 @@ export const ThreeTierChoiceCards = ({
 											selected ? (
 												<SupportingBenefits
 													benefitsLabel={
-														benefitsLabel
+														benefitsLabel as
+															| string
+															| undefined
 													}
-													benefits={benefits(
-														currencySymbol,
-													)}
+													benefits={benefits}
 													showTicks={
 														supportTier !== 'OneOff'
 													}
@@ -285,7 +210,7 @@ export const ThreeTierChoiceCards = ({
 										}
 										checked={selected}
 										onChange={() => {
-											setSelectedProduct(supportTier);
+											setSelectedProduct(product);
 										}}
 										theme={customRadioTheme}
 									/>
