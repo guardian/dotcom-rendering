@@ -9,7 +9,6 @@ export const choiceCardsSettings: ChoiceCardsSettings = {
 			},
 			label: 'Support £5/month',
 			isDefault: false,
-			benefitsLabel: 'Unlock <strong>Support</strong> benefits:',
 			benefits: [
 				{
 					copy: 'Give to the Guardian every month with Support',
@@ -61,7 +60,6 @@ export const choiceCardsSettings: ChoiceCardsSettings = {
 			},
 			label: 'Support £5/month',
 			isDefault: false,
-			benefitsLabel: 'Unlock Support benefits:',
 			benefits: [
 				{
 					copy: 'Give to the Guardian every month with Support',
