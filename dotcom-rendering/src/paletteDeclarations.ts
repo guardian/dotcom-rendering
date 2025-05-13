@@ -6776,6 +6776,18 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[100],
 	},
+	'--loop-video-audio-icon-background': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--loop-video-audio-icon-border': {
+		light: () => sourcePalette.neutral[60],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--loop-video-progress-bar-background': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[7],
+	},
 	'--loop-video-progress-bar-value': {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[86],

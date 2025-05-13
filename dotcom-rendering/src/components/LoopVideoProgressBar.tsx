@@ -1,15 +1,32 @@
 import { css } from '@emotion/react';
+import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
 
-const styles = (progressPercentage: number) => css`
+const styles = css`
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	height: 7px;
+	height: 4px;
+	background-color: transparent;
 	width: 100%;
+`;
+
+const foregroundStyles = (progressPercentage: number) => css`
+	position: absolute;
+	height: 100%;
 	width: ${progressPercentage}%;
-	transition: width 0.3s linear;
+	z-index: ${getZIndex('loop-video-progress-bar-foreground')};
 	background-color: ${palette('--loop-video-progress-bar-value')};
+	transition: width 0.3s linear;
+`;
+
+const backgroundStyles = css`
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	z-index: ${getZIndex('loop-video-progress-bar-background')};
+	background-color: ${palette('--loop-video-progress-bar-background')};
+	opacity: 0.7;
 `;
 
 type Props = {
@@ -43,7 +60,10 @@ export const LoopVideoProgressBar = ({
 			aria-valuenow={progressPercentage}
 			aria-valuemin={0}
 			aria-valuemax={100}
-			css={styles(progressPercentage)}
-		/>
+			css={styles}
+		>
+			<span css={foregroundStyles(progressPercentage)} />
+			<span css={backgroundStyles} />
+		</div>
 	);
 };
