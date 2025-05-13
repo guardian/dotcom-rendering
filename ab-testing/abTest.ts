@@ -26,7 +26,7 @@ export const ABTests: ABTest[] = [
 			'dotcom.platform@theguardian.com',
 		],
 		status: 'ON',
-		expirationDate: new Date('2025-05-02'),
+		expirationDate: new Date('2025-05-30'),
 		type: 'server',
 		highImpact: false,
 		groups: [
