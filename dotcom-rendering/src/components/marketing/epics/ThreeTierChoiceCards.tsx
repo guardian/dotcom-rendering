@@ -128,8 +128,8 @@ const SupportingBenefits = ({
 				</span>
 			)}
 			<ul css={benefitsStyles}>
-				{benefits.map((benefit, idx) => (
-					<li key={`${benefit}-${idx}`}>
+				{benefits.map((benefit) => (
+					<li key={benefit.copy}>
 						{showTicks && <SvgTickRound size="xsmall" />}
 						{benefit.copy}
 					</li>

@@ -31,15 +31,14 @@ import type {
 	Image,
 	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import { useEffect, useState } from 'react';
 import {
 	removeMediaRulePrefix,
 	useMatchMedia,
 } from '../../../../lib/useMatchMedia';
 import { ThreeTierChoiceCards } from '../../epics/ThreeTierChoiceCards';
-import type { SupportTier } from '../../epics/utils/threeTierChoiceCardAmounts';
 import { useReminder } from '../../hooks/useReminder';
-import { getChoiceCardData } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import {
 	addChoiceCardsProductParams,
@@ -128,14 +127,18 @@ const buildChoiceCardSettings = (
 
 const buildUrlForThreeTierChoiceCards = (
 	tracking: Tracking,
-	selectedProduct: SupportTier,
+	selectedProduct: ChoiceCard['product'],
 	countryCode?: string,
 ) => {
 	const baseUrl = 'https://support.theguardian.com/contribute';
 	const urlWithProduct =
-		selectedProduct === 'OneOff'
+		selectedProduct.supportTier === 'OneOff'
 			? baseUrl
-			: addChoiceCardsProductParams(baseUrl, selectedProduct, 'Monthly');
+			: addChoiceCardsProductParams(
+					baseUrl,
+					selectedProduct.supportTier,
+					selectedProduct.ratePlan,
+			  );
 
 	return addRegionIdAndTrackingParamsToSupportUrl(
 		urlWithProduct,
@@ -157,7 +160,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	separateArticleCount, // legacy field
 	separateArticleCountSettings,
 	tickerSettings,
-	choiceCardAmounts,
+	choiceCardsSettings,
 	countryCode,
 	submitComponentEvent,
 	design,
@@ -190,13 +193,15 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		}
 	}, [iosAppBannerPresent, submitComponentEvent]);
 
-	/**
-	 * V2 choice cards state
-	 */
+	const defaultProduct = choiceCardsSettings?.choiceCards.find(
+		(cc) => cc.isDefault,
+	)?.product;
 	const [
 		threeTierChoiceCardSelectedProduct,
 		setThreeTierChoiceCardSelectedProduct,
-	] = useState<SupportTier>('SupporterPlus');
+	] = useState<ChoiceCard['product'] | undefined>(defaultProduct);
+
+	const showChoiceCards = !!threeTierChoiceCardSelectedProduct;
 
 	// We can't render anything without a design
 	if (!design) {
@@ -308,15 +313,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	const mainOrMobileContent = isTabletOrAbove
 		? content.mainContent
 		: content.mobileContent;
-
-	const isVatCompliantCountry =
-		choiceCardAmounts?.testName !== 'VAT_COMPLIANCE';
-
-	const showChoiceCards = !!(
-		templateSettings.choiceCardSettings &&
-		choiceCardAmounts?.amountsCardData &&
-		isVatCompliantCountry
-	);
 
 	const getHeaderContainerCss = () => {
 		if (templateSettings.headerSettings?.headerImage) {
@@ -445,21 +441,15 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					/>
 				)}
 
-				{showChoiceCards && (
+				{showChoiceCards && choiceCardsSettings && (
 					<div css={styles.threeTierChoiceCardsContainer}>
 						<ThreeTierChoiceCards
-							countryCode={countryCode}
 							selectedProduct={threeTierChoiceCardSelectedProduct}
 							setSelectedProduct={
 								setThreeTierChoiceCardSelectedProduct
 							}
-							choices={getChoiceCardData(
-								false,
-								false,
-								countryCode,
-							)}
+							choices={choiceCardsSettings.choiceCards}
 							id={'banner'}
-							isDiscountActive={false}
 						/>
 
 						<div css={styles.ctaContainer}>

@@ -2,6 +2,7 @@ import type {
 	BannerDesignImage,
 	SelectedAmountsVariant,
 } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { ChoiceCardsSettings } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
 import { DesignableBannerUnvalidatedV2 as DesignableBannerV2 } from '../../../banners/designableBanner/DesignableBannerV2';
@@ -65,6 +66,51 @@ const regularChoiceCardAmounts: SelectedAmountsVariant = {
 	},
 };
 
+export const choiceCardsSettings: ChoiceCardsSettings = {
+	choiceCards: [
+		{
+			product: {
+				supportTier: 'Contribution',
+				ratePlan: 'Monthly',
+			},
+			label: 'Support £5/month',
+			isDefault: false,
+			benefits: [
+				{
+					copy: 'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
+				},
+			],
+		},
+		{
+			product: {
+				supportTier: 'SupporterPlus',
+				ratePlan: 'Monthly',
+			},
+			label: 'Support £12/month',
+			isDefault: true,
+			benefits: [
+				{ copy: 'Unlimited access to the Guardian app and Feast app' },
+				{ copy: 'Ad-free reading on all your devices' },
+			],
+			pill: {
+				copy: 'Recommended',
+			},
+		},
+		{
+			product: {
+				supportTier: 'OneOff',
+			},
+			label: `Support with another amount`,
+			isDefault: false,
+			benefits: [
+				{
+					copy: 'We welcome support of any size, any time',
+				},
+			],
+		},
+	],
+};
+
 const headerImage: BannerDesignImage = {
 	kind: 'Image',
 	mobileUrl:
@@ -92,6 +138,7 @@ export const WithThreeTierChoiceCards: Story = {
 			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
 		},
 		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
 	},
 };
 
@@ -113,5 +160,6 @@ export const ThreeTierChoiceCardsWithHeaderImageAndCopy: Story = {
 			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
 		},
 		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
 	},
 };

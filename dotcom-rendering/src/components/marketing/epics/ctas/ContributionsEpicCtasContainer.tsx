@@ -9,7 +9,6 @@ import { ContributionsEpicReminder } from './ContributionsEpicReminder';
 type Props = EpicProps & {
 	amountsTestName?: string;
 	amountsVariantName?: string;
-	now?: Date;
 };
 
 export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
