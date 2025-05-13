@@ -35,7 +35,6 @@ export const withSignInGateSlot = ({
 	host,
 	pageId,
 	idUrl,
-	switches,
 	contributionsServiceUrl,
 	editionId,
 }: Props): React.ReactNode => {
@@ -56,7 +55,6 @@ export const withSignInGateSlot = ({
 								host={host}
 								pageId={pageId}
 								idUrl={idUrl}
-								switches={switches}
 								contributionsServiceUrl={
 									contributionsServiceUrl
 								}
