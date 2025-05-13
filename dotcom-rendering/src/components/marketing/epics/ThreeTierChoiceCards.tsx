@@ -17,7 +17,6 @@ import {
 } from '@guardian/source/react-components';
 import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type { Dispatch, SetStateAction } from 'react';
-import type { SupportTier } from './utils/threeTierChoiceCardAmounts';
 
 const supportTierChoiceCardStyles = (selected: boolean) => css`
 	display: block;
@@ -97,18 +96,6 @@ const customRadioTheme: ThemeRadio = {
 	borderUnselected: palette.neutral[46],
 	borderHover: palette.brandAlt[400],
 	fillSelected: palette.brand[400],
-};
-
-export type ChoiceInfo = {
-	supportTier: SupportTier;
-	label: (
-		amount: number,
-		currencySymbol: string,
-		discount?: number,
-	) => JSX.Element | string;
-	benefitsLabel?: string;
-	benefits: (currencySymbol: string) => string[];
-	recommended: boolean;
 };
 
 const SupportingBenefits = ({
