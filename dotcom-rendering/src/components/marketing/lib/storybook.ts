@@ -12,7 +12,7 @@ export const choiceCardsSettings: ChoiceCardsSettings = {
 			benefitsLabel: 'Unlock <strong>Support</strong> benefits:',
 			benefits: [
 				{
-					copy: 'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
+					copy: 'Give to the Guardian every month with Support',
 				},
 			],
 		},
@@ -64,7 +64,7 @@ export const choiceCardsSettings: ChoiceCardsSettings = {
 			benefitsLabel: 'Unlock Support benefits:',
 			benefits: [
 				{
-					copy: 'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
+					copy: 'Give to the Guardian every month with Support',
 				},
 			],
 		},
