@@ -39,6 +39,7 @@ import {
 } from '../../../../lib/useMatchMedia';
 import { ThreeTierChoiceCards } from '../../epics/ThreeTierChoiceCards';
 import { useReminder } from '../../hooks/useReminder';
+import { getChoiceCards } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import {
 	addChoiceCardsProductParams,
@@ -193,15 +194,12 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		}
 	}, [iosAppBannerPresent, submitComponentEvent]);
 
-	const defaultProduct = choiceCardsSettings?.choiceCards.find(
-		(cc) => cc.isDefault,
-	)?.product;
+	const choiceCards = getChoiceCards(isTabletOrAbove, choiceCardsSettings);
+	const defaultProduct = choiceCards?.find((cc) => cc.isDefault)?.product;
 	const [
 		threeTierChoiceCardSelectedProduct,
 		setThreeTierChoiceCardSelectedProduct,
 	] = useState<ChoiceCard['product'] | undefined>(defaultProduct);
-
-	const showChoiceCards = !!threeTierChoiceCardSelectedProduct;
 
 	// We can't render anything without a design
 	if (!design) {
@@ -398,7 +396,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 						</div>
 					</div>
 
-					{!showChoiceCards && (
+					{!threeTierChoiceCardSelectedProduct && (
 						<DesignableBannerCtas
 							mainOrMobileContent={mainOrMobileContent}
 							onPrimaryCtaClick={onCtaClick}
@@ -441,14 +439,14 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					/>
 				)}
 
-				{showChoiceCards && choiceCardsSettings && (
+				{choiceCards && threeTierChoiceCardSelectedProduct && (
 					<div css={styles.threeTierChoiceCardsContainer}>
 						<ThreeTierChoiceCards
 							selectedProduct={threeTierChoiceCardSelectedProduct}
 							setSelectedProduct={
 								setThreeTierChoiceCardSelectedProduct
 							}
-							choices={choiceCardsSettings.choiceCards}
+							choices={choiceCards}
 							id={'banner'}
 						/>
 

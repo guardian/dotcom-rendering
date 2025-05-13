@@ -1,6 +1,12 @@
+import { from } from '@guardian/source/foundations';
 import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types/props/epic';
 import { useState } from 'react';
+import {
+	removeMediaRulePrefix,
+	useMatchMedia,
+} from '../../../../lib/useMatchMedia';
+import { getChoiceCards } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import { ThreeTierChoiceCards } from '../ThreeTierChoiceCards';
 import { ContributionsEpicButtons } from './ContributionsEpicButtons';
@@ -30,10 +36,13 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 	const onCloseReminderClick = () => {
 		setIsReminderActive(false);
 	};
+	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 
-	const defaultProduct = variant.choiceCardsSettings?.choiceCards.find(
-		(cc) => cc.isDefault,
-	)?.product;
+	const choiceCards = getChoiceCards(
+		isTabletOrAbove,
+		variant.choiceCardsSettings,
+	);
+	const defaultProduct = choiceCards?.find((cc) => cc.isDefault)?.product;
 	const [
 		threeTierChoiceCardSelectedProduct,
 		setThreeTierChoiceCardSelectedProduct,
@@ -41,17 +50,14 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 
 	return (
 		<>
-			{variant.choiceCardsSettings &&
-				threeTierChoiceCardSelectedProduct && (
-					<ThreeTierChoiceCards
-						selectedProduct={threeTierChoiceCardSelectedProduct}
-						setSelectedProduct={
-							setThreeTierChoiceCardSelectedProduct
-						}
-						choices={variant.choiceCardsSettings.choiceCards}
-						id={'epic'}
-					/>
-				)}
+			{choiceCards && threeTierChoiceCardSelectedProduct && (
+				<ThreeTierChoiceCards
+					selectedProduct={threeTierChoiceCardSelectedProduct}
+					setSelectedProduct={setThreeTierChoiceCardSelectedProduct}
+					choices={choiceCards}
+					id={'epic'}
+				/>
+			)}
 			<ContributionsEpicButtons
 				variant={variant}
 				tracking={tracking}

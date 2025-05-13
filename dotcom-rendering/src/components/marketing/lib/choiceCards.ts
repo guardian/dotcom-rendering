@@ -7,6 +7,10 @@ import type {
 	ContributionFrequency,
 	ContributionType,
 } from '@guardian/support-dotcom-components/dist/shared/types';
+import type {
+	ChoiceCard,
+	ChoiceCardsSettings,
+} from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 
 export interface ChoiceCardSelection {
 	frequency: ContributionFrequency;
@@ -26,4 +30,17 @@ export const contributionType: ContributionType = {
 		label: 'Annual',
 		suffix: 'per year',
 	},
+};
+
+export const getChoiceCards = (
+	isTabletOrAbove: boolean,
+	choiceCardsSettings?: ChoiceCardsSettings | null,
+): ChoiceCard[] | undefined => {
+	if (choiceCardsSettings) {
+		if (!isTabletOrAbove && choiceCardsSettings.mobileChoiceCards) {
+			return choiceCardsSettings.mobileChoiceCards;
+		}
+		return choiceCardsSettings.choiceCards;
+	}
+	return;
 };

@@ -8,8 +8,9 @@ import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
 import React from 'react';
+import { choiceCardsSettings } from '../lib/storybook';
 import { ContributionsEpicUnvalidated as ContributionsEpic } from './ContributionsEpic';
-import { choiceCardsSettings, props } from './utils/storybook';
+import { props } from './utils/storybook';
 
 const style = css`
 	max-width: 620px;
