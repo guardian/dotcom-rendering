@@ -510,15 +510,15 @@ const decideAuxiaProxyReaderPersonalData =
 		const hasConsent = await hasCmpConsentForBrowserId();
 		const isSupporter = decideIsSupporter();
 		const countryCode = (await getLocaleCode()) ?? ''; // default to empty string
-		const gumvtid_str: string =
+		const mvtId_str: string =
 			getCookie({ name: 'GU_mvt_id', shouldMemoize: true }) ?? '0';
-		const gumvtid_num: number = parseInt(gumvtid_str);
+		const mvtId: number = parseInt(mvtId_str);
 		const data = {
 			browserId: hasConsent ? browserId : undefined,
 			dailyArticleCount,
 			isSupporter,
 			countryCode,
-			gumvtid: gumvtid_num,
+			mvtId,
 		};
 		return Promise.resolve(data);
 	};
