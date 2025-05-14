@@ -6552,18 +6552,6 @@ const paletteColours = {
 		light: featureCardKickerText,
 		dark: featureCardKickerText,
 	},
-	'--feature-card-play-icon-background': {
-		light: () => sourcePalette.neutral[7],
-		dark: () => sourcePalette.neutral[7],
-	},
-	'--feature-card-play-icon-border': {
-		light: () => sourcePalette.neutral[60],
-		dark: () => sourcePalette.neutral[60],
-	},
-	'--feature-card-play-icon-fill': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[100],
-	},
 	'--feature-card-trail-text': {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
@@ -6793,6 +6781,18 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[100],
 	},
+	'--loop-video-audio-icon-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
+	'--loop-video-audio-icon-border': {
+		light: () => sourcePalette.neutral[60],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--loop-video-progress-bar-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
 	'--loop-video-progress-bar-value': {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[86],
@@ -6884,6 +6884,18 @@ const paletteColours = {
 	'--multi-byline-non-linked-text': {
 		light: multiBylineNonLinkedTextLight,
 		dark: multiBylineNonLinkedTextDark,
+	},
+	'--narrow-play-icon-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
+	'--narrow-play-icon-border': {
+		light: () => sourcePalette.neutral[60],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--narrow-play-icon-fill': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
 	},
 	'--nav-reader-revenue-link-text': {
 		light: navReaderRevenueLinkText,
