@@ -46,7 +46,7 @@ export const createBannerBodyCopy = (
 				{highlightedText && (
 					<p>
 						<span
-							className="highlight"
+							className="rr_banner_highlight"
 							css={renderStyles.highlightedText}
 						>
 							{highlightedText}
@@ -68,7 +68,7 @@ export const createBannerBodyCopy = (
 						{p}{' '}
 						{highlightedText && (
 							<span
-								className="highlight"
+								className="rr_banner_highlight"
 								css={renderStyles.highlightedText}
 							>
 								{highlightedText}

@@ -683,7 +683,7 @@ const styles = {
 		span {
 			${textSans15}
 		}
-		.highlight > span {
+		.rr_banner_highlight > span {
 			font-weight: 700;
 		}
 	`,
