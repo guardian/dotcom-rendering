@@ -510,11 +510,15 @@ const decideAuxiaProxyReaderPersonalData =
 		const hasConsent = await hasCmpConsentForBrowserId();
 		const isSupporter = decideIsSupporter();
 		const countryCode = (await getLocaleCode()) ?? ''; // default to empty string
+		const mvtId_str: string =
+			getCookie({ name: 'GU_mvt_id', shouldMemoize: true }) ?? '0';
+		const mvtId: number = parseInt(mvtId_str);
 		const data = {
 			browserId: hasConsent ? browserId : undefined,
 			dailyArticleCount,
 			isSupporter,
 			countryCode,
+			mvtId,
 		};
 		return Promise.resolve(data);
 	};
@@ -531,6 +535,7 @@ const fetchProxyGetTreatments = async (
 	tagIds: string[],
 	gateDismissCount: number,
 	countryCode: string,
+	mvtId: number,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const articleIdentifier = `www.theguardian.com/${pageId}`;
@@ -550,6 +555,7 @@ const fetchProxyGetTreatments = async (
 		tagIds,
 		gateDismissCount,
 		countryCode,
+		mvtId,
 	};
 	const params = {
 		method: 'POST',
@@ -587,6 +593,7 @@ const buildAuxiaGateDisplayData = async (
 		tagIds,
 		gateDismissCount,
 		readerPersonalData.countryCode,
+		readerPersonalData.mvtId,
 	);
 	if (response.status && response.data) {
 		const answer = {

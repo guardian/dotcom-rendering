@@ -119,6 +119,7 @@ export interface AuxiaProxyGetTreatmentsPayload {
 	tagIds: string[];
 	gateDismissCount: number;
 	countryCode: string;
+	mvtId: number;
 }
 
 export interface AuxiaProxyGetTreatmentsResponse {
@@ -164,7 +165,10 @@ export interface AuxiaGateReaderPersonalData {
 	dailyArticleCount: number;
 	isSupporter: boolean;
 	countryCode: string;
+	mvtId: number; // [1]
 }
+// [1] value of the GU_mvt_id cookie (as number), to be able to maintain
+// existing (auxia and non auxia) cohorts in the SDC logic.
 
 export interface AuxiaGateDisplayData {
 	browserId: string | undefined;
