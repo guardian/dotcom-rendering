@@ -171,6 +171,7 @@ export const HeaderImageOnly: Story = {
 			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
 		},
 		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
 	},
 };
 
@@ -207,6 +208,7 @@ export const WithTickerAndThreeTierChoiceCards: Story = {
 			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
 		},
 		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
 	},
 };
 
@@ -229,6 +231,7 @@ export const WithThreeTierChoiceCardsAndArticleCount: Story = {
 			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
 		},
 		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
 	},
 };
 
