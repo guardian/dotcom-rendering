@@ -148,9 +148,9 @@ export const LoopVideoPlayer = forwardRef(
 					<source src={src} type="video/mp4" />
 					{fallbackImageComponent}
 				</video>
-				{ref && 'current' in ref && ref.current && (
+				{ref && 'current' in ref && ref.current && isPlayable && (
 					<>
-						{isPlayable && !isPlaying && (
+						{!isPlaying && (
 							<button
 								type="button"
 								onClick={handleClick}
