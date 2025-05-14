@@ -7,23 +7,16 @@ import {
 	palette,
 	space,
 	specialReport,
-	textEgyptian15,
 	textSans15,
-	textSans17,
-	textSansBold17,
 	until,
 } from '@guardian/source/foundations';
 import {
-	Button,
 	LinkButton,
 	SvgArrowRightStraight,
 	SvgGuardianLogo,
 } from '@guardian/source/react-components';
 import { Ticker } from '@guardian/source-development-kitchen/react-components';
-import {
-	hexColourToString,
-	SecondaryCtaType,
-} from '@guardian/support-dotcom-components';
+import { hexColourToString } from '@guardian/support-dotcom-components';
 import type {
 	BannerDesignHeaderImage,
 	BannerDesignImage,
@@ -38,7 +31,6 @@ import {
 	useMatchMedia,
 } from '../../../../lib/useMatchMedia';
 import { ThreeTierChoiceCards } from '../../epics/ThreeTierChoiceCards';
-import { useReminder } from '../../hooks/useReminder';
 import { getChoiceCards } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import {
@@ -46,19 +38,15 @@ import {
 	addRegionIdAndTrackingParamsToSupportUrl,
 } from '../../lib/tracking';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
-import type {
-	BannerEnrichedReminderCta,
-	BannerRenderProps,
-} from '../common/types';
+import type { BannerRenderProps } from '../common/types';
 import type { ChoiceCardSettings } from './components/choiceCards/ChoiceCards';
 import { DesignableBannerArticleCount } from './components/DesignableBannerArticleCount';
 import { DesignableBannerBody } from './components/DesignableBannerBody';
 import { DesignableBannerCloseButton } from './components/DesignableBannerCloseButton';
-import { DesignableBannerCtas } from './components/DesignableBannerCtas';
+import { DesignableBannerCtas } from './components/DesignableBannerCtasV2';
 import { DesignableBannerHeader } from './components/DesignableBannerHeader';
-import { DesignableBannerReminder } from './components/DesignableBannerReminder';
 import { DesignableBannerVisual } from './components/DesignableBannerVisual';
-import type { BannerTemplateSettings, CtaSettings } from './settings';
+import type { BannerTemplateSettings } from './settings';
 import { templateSpacing } from './styles/templateStyles';
 
 const buildImageSettings = (
@@ -157,7 +145,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	articleCounts,
 	onCtaClick,
 	onSecondaryCtaClick,
-	reminderTracking,
 	separateArticleCount, // legacy field
 	separateArticleCountSettings,
 	tickerSettings,
@@ -168,8 +155,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	tracking,
 }: BannerRenderProps): JSX.Element => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
-	const { isReminderActive, onReminderCtaClick, mobileReminderRef } =
-		useReminder(reminderTracking);
 
 	// We can use this to shorten the banner if the "open in app" banner is present
 	const [iosAppBannerPresent, setIosAppBannerPresent] = useState(false);
@@ -324,9 +309,12 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		);
 	};
 
-	const showReminder =
-		mainOrMobileContent.secondaryCta?.type ===
-		SecondaryCtaType.ContributionsReminder;
+	const getCopyContainerCss = () => {
+		if (templateSettings.imageSettings?.mobileUrl) {
+			return styles.contentContainer(true);
+		}
+		return styles.contentContainer(false);
+	};
 
 	const showAboveArticleCount =
 		(separateArticleCountSettings?.type === 'above' ||
@@ -342,6 +330,11 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 			)}
 		>
 			<div css={styles.containerOverrides}>
+				<div css={styles.guardianLogoContainer}>
+					<SvgGuardianLogo
+						textColor={hexColourToString(basic.logo)}
+					/>
+				</div>
 				<div css={styles.verticalLine} />
 				<div css={getHeaderContainerCss()}>
 					<div css={styles.headerOverrides}>
@@ -355,7 +348,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 						/>
 					</div>
 				</div>
-				<div css={styles.contentContainer(showReminder)}>
+				<div css={getCopyContainerCss()}>
 					{showAboveArticleCount && (
 						<DesignableBannerArticleCount
 							numArticles={articleCounts.forTargetedWeeks}
@@ -395,8 +388,10 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 							/>
 						</div>
 					</div>
+				</div>
 
-					{!threeTierChoiceCardSelectedProduct && (
+				{!threeTierChoiceCardSelectedProduct && (
+					<div css={styles.ctaContentContainer}>
 						<DesignableBannerCtas
 							mainOrMobileContent={mainOrMobileContent}
 							onPrimaryCtaClick={onCtaClick}
@@ -408,29 +403,24 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 								templateSettings.secondaryCtaSettings
 							}
 						/>
-					)}
-				</div>
+					</div>
+				)}
+
 				{templateSettings.imageSettings ? (
-					<div
-						css={styles.bannerVisualContainer(
-							templateSettings.containerSettings.backgroundColour,
-						)}
-					>
+					<>
 						<DesignableBannerCloseButton
 							onCloseClick={onCloseClick}
 							settings={templateSettings.closeButtonSettings}
 							styleOverides={styles.closeButtonOverrides}
 						/>
-						<DesignableBannerVisual
-							settings={templateSettings.imageSettings}
-							bannerId={templateSettings.bannerId}
-						/>
-
-						{/*
-                        I think `alternativeVisual` was for using SVG as the image, which is currently beyond the scope of the design tool. Suggest we remove?
-                    */}
-						{templateSettings.alternativeVisual}
-					</div>
+						<div css={styles.bannerVisualContainer}>
+							<DesignableBannerVisual
+								settings={templateSettings.imageSettings}
+								bannerId={templateSettings.bannerId}
+							/>
+							{templateSettings.alternativeVisual}
+						</div>
+					</>
 				) : (
 					<DesignableBannerCloseButton
 						onCloseClick={onCloseClick}
@@ -470,50 +460,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 						</div>
 					</div>
 				)}
-
-				<div css={styles.guardianLogoContainer}>
-					<SvgGuardianLogo
-						textColor={hexColourToString(basic.logo)}
-					/>
-				</div>
-				{showReminder && (
-					<div css={styles.reminderContainer}>
-						<span css={styles.reminderText}>
-							Not ready to support today?{' '}
-						</span>
-						<Button
-							priority="subdued"
-							onClick={onReminderCtaClick}
-							cssOverrides={styles.reminderCta(
-								templateSettings.secondaryCtaSettings,
-							)}
-						>
-							Remind me later
-						</Button>
-					</div>
-				)}
 			</div>
-
-			{isReminderActive && (
-				<div css={styles.reminderFormContainer}>
-					<div css={styles.containerOverrides}>
-						<DesignableBannerReminder
-							reminderCta={
-								mainOrMobileContent.secondaryCta as BannerEnrichedReminderCta
-							}
-							trackReminderSetClick={
-								reminderTracking.onReminderSetClick
-							}
-							setReminderCtaSettings={
-								templateSettings.secondaryCtaSettings
-							}
-							mobileReminderRef={
-								isTabletOrAbove ? null : mobileReminderRef
-							}
-						/>
-					</div>
-				</div>
-			)}
 		</div>
 	);
 };
@@ -553,10 +500,9 @@ const styles = {
 
 		${from.desktop} {
 			padding: ${space[3]}px ${space[8]}px ${space[6]}px ${space[3]}px;
-			grid-template-columns: auto 380px auto auto;
+			grid-template-columns: auto auto 380px auto;
 			grid-template-rows: auto 1fr auto;
 			width: 100%;
-			max-width: 980px;
 			margin: 0 auto;
 		}
 		${from.leftCol} {
@@ -597,7 +543,7 @@ const styles = {
 			padding-left: ${space[8]}px;
 		}
 
-		${from.wide} {
+		${from.desktop} {
 			justify-self: end;
 		}
 	`,
@@ -629,11 +575,20 @@ const styles = {
 	`,
 
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
-		order: ${bannerHasImage ? '2' : '1'};
+		grid-column: 1;
+		grid-row: ${bannerHasImage ? '1' : '2'};
+
 		${until.phablet} {
 			${bannerHasImage
 				? ''
 				: `max-width: calc(100% - 40px - ${space[3]}px);`}
+		}
+
+		${from.phablet} {
+			grid-column: 2;
+			grid-row: 1;
+			background: ${background};
+			max-width: 492px;
 		}
 
 		${from.desktop} {
@@ -641,39 +596,69 @@ const styles = {
 			padding-top: ${space[3]}px;
 			padding-right: ${space[5]}px;
 		}
-
-		${from.phablet} {
-			grid-column: 2;
-			grid-row: 1;
-			background: ${background};
-			max-width: 492px;
-		}
 	`,
 	headerWithImageContainer: (background: string) => css`
 		order: 1;
-		max-width: '100%';
-		${between.mobileMedium.and.tablet} {
-			order: '2';
+		max-width: 100%;
+		text-wrap: balance;
+
+		${between.mobile.and.desktop} {
+			order: 2;
 		}
-		${from.phablet} {
+
+		${from.tablet} {
+			max-width: 492px;
+		}
+
+		${from.desktop} {
 			grid-column: 2;
 			grid-row: 1;
 			background: ${background};
 			max-width: 492px;
-		}
-		${from.desktop} {
 			padding-left: ${space[2]}px;
 			padding-top: ${space[3]}px;
 		}
 	`,
-	contentContainer: (showRemindMeLater: boolean) => css`
-		order: 2;
+	contentContainer: (bannerHasImage: boolean) => css`
+		grid-row: ${bannerHasImage ? '2' : '4'};
+
 		${from.phablet} {
 			grid-column: 2;
 			max-width: 492px;
-			grid-row: ${showRemindMeLater ? '2' : '2 / span 2'};
+			grid-row: 2;
 		}
 		${from.desktop} {
+			padding-left: ${space[2]}px;
+			padding-right: ${space[5]}px;
+			margin-bottom: ${space[2]}px;
+		}
+	`,
+
+	ctaContentContainer: css`
+		order: 4;
+
+		${until.phablet} {
+			width: 100vw;
+			position: sticky;
+			bottom: 0;
+			padding-top: ${space[3]}px;
+			padding-bottom: ${space[3]}px;
+			background-color: ${neutral[100]};
+			box-shadow: 0 -${space[1]}px ${space[3]}px 0 rgba(0, 0, 0, 0.25);
+			margin-right: -${space[3]}px;
+			margin-left: -${space[3]}px;
+
+			a {
+				width: calc(100% - 24px);
+			}
+		}
+		${from.phablet} {
+			grid-column: 2;
+			grid-row: 5;
+			max-width: 492px;
+		}
+		${from.desktop} {
+			width: 100%;
 			padding-left: ${space[2]}px;
 			padding-right: ${space[5]}px;
 			margin-bottom: ${space[2]}px;
@@ -683,17 +668,27 @@ const styles = {
 		p {
 			${textSans15}
 		}
+		span {
+			${textSans15}
+		}
+		.rr_banner_highlight > span {
+			font-weight: 700;
+		}
 	`,
-	bannerVisualContainer: (background: string) => css`
-		order: 1;
-		background: ${background};
+	bannerVisualContainer: css`
+		grid-row: 3;
+		margin-left: ${space[2]}px;
+		margin-right: ${space[2]}px;
+
 		${from.phablet} {
 			grid-column: 2;
-			grid-row: 1 / span 2;
-			align-self: flex-start;
+			grid-row: 3;
 		}
+
 		${from.desktop} {
 			padding-left: ${space[2]}px;
+			grid-column: 3;
+			grid-row: 1 / span 2;
 		}
 	`,
 	threeTierChoiceCardsContainer: css`
@@ -709,6 +704,7 @@ const styles = {
 			grid-column: 3;
 			grid-row: 1;
 			grid-row-end: 3;
+			margin-left: ${space[5]}px;
 		}
 
 		${between.desktop.and.wide} {
@@ -733,38 +729,7 @@ const styles = {
 		}
 	`,
 
-	reminderContainer: css`
-		${textEgyptian15};
-		grid-column: 1;
-		grid-row: 3;
-		order: 4;
-		align-self: center;
-		margin-top: ${space[2]}px;
-
-		${from.phablet} {
-			align-self: end;
-		}
-	`,
-	reminderText: css`
-		${textSans17};
-		display: none;
-
-		${from.phablet} {
-			display: inline;
-		}
-	`,
-	reminderCta: ({ default: defaultSettings }: CtaSettings) => css`
-		${textSansBold17};
-		color: ${defaultSettings.backgroundColour};
-		display: inline;
-		height: auto;
-		min-height: auto;
-	`,
-
-	reminderFormContainer: css`
-		border-top: 2px solid ${neutral[0]};
-		margin-top: ${space[3]}px;
-	`,
+	// choice card CTA container
 	ctaContainer: css`
 		order: 4;
 		display: flex;
@@ -775,7 +740,6 @@ const styles = {
 		margin-bottom: ${space[2]}px;
 
 		${until.phablet} {
-			width: 100vw;
 			position: sticky;
 			bottom: 0;
 			padding-top: ${space[3]}px;
@@ -791,16 +755,15 @@ const styles = {
 		}
 
 		${between.phablet.and.desktop} {
-			width: 100%;
-			position: sticky;
 			bottom: 0;
-			padding-top: ${space[3]}px;
-			padding-bottom: ${space[3]}px;
-			background-color: ${neutral[100]};
-			box-shadow: 0 -${space[1]}px ${space[3]}px 0 rgba(0, 0, 0, 0.25);
-			border-radius: 10px;
+			margin-top: ${space[3]}px;
+			margin-bottom: 0;
+			border-radius: 50px;
 			a {
-				width: calc(100% - 24px);
+				width: 100%;
+			}
+			> span {
+				width: auto;
 			}
 		}
 
@@ -823,6 +786,7 @@ const styles = {
 	linkButtonStyles: css`
 		background-color: ${palette.brandAlt[400]};
 		border-color: ${palette.brandAlt[400]};
+		width: 100%;
 	`,
 };
 
