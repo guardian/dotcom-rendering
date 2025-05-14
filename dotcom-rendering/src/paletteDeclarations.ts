@@ -5534,10 +5534,10 @@ const highlightsCardKickerText: PaletteFunction = (format) => {
 	}
 };
 
-const highlightContainerStartLight: PaletteFunction = () => {
+const highlightContainerStartFadeLight: PaletteFunction = () => {
 	return sourcePalette.neutral[97];
 };
-const highlightContainerStartDark: PaletteFunction = () => {
+const highlightContainerStartFadeDark: PaletteFunction = () => {
 	return sourcePalette.neutral[10];
 };
 const highlightContainerMidFadeLight: PaletteFunction = () => {
@@ -6674,8 +6674,8 @@ const paletteColours = {
 		dark: highlightContainerMidFadeDark,
 	},
 	'--highlights-container-start-fade': {
-		light: highlightContainerStartLight,
-		dark: highlightContainerStartDark,
+		light: highlightContainerStartFadeLight,
+		dark: highlightContainerStartFadeDark,
 	},
 	'--image-title-background': {
 		light: imageTitleBackground,
