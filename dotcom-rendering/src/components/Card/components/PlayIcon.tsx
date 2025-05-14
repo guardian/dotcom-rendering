@@ -50,11 +50,10 @@ const narrowStyles = css`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: ${palette('--feature-card-play-icon-background')};
-	opacity: 0.7;
+	background-color: ${palette('--narrow-play-icon-background')};
 	border-radius: 50%;
-	border: 1px solid ${palette('--feature-card-play-icon-border')};
-	fill: ${palette('--feature-card-play-icon-fill')};
+	border: 1px solid ${palette('--narrow-play-icon-border')};
+	fill: ${palette('--narrow-play-icon-fill')};
 `;
 
 const theme = {
