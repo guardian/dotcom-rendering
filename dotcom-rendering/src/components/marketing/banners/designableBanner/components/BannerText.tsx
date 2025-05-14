@@ -45,7 +45,10 @@ export const createBannerBodyCopy = (
 			<div css={styles.paragraphs}>
 				{highlightedText && (
 					<p>
-						<span css={renderStyles.highlightedText}>
+						<span
+							className="highlight"
+							css={renderStyles.highlightedText}
+						>
 							{highlightedText}
 						</span>
 					</p>
@@ -64,7 +67,10 @@ export const createBannerBodyCopy = (
 					<p key={index}>
 						{p}{' '}
 						{highlightedText && (
-							<span css={renderStyles.highlightedText}>
+							<span
+								className="highlight"
+								css={renderStyles.highlightedText}
+							>
 								{highlightedText}
 							</span>
 						)}

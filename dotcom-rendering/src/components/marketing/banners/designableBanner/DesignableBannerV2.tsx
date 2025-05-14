@@ -683,6 +683,9 @@ const styles = {
 		span {
 			${textSans15}
 		}
+		.highlight > span {
+			font-weight: 700;
+		}
 	`,
 	bannerVisualContainer: css`
 		grid-row: 3;
