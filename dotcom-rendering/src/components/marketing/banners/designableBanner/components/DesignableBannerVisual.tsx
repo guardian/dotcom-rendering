@@ -96,6 +96,7 @@ const getStyles = (isHeaderImage = false) => {
 				}
 				${from.desktop} {
 					max-height: none;
+					padding-bottom: 0;
 				}
 			}
 
