@@ -360,7 +360,7 @@ const SignInGateSelectorDefault = ({
 // Auxia Integration Experiment //
 // -------------------------------
 
-const decide_should_show_legacy_gate = async (
+const decideShouldShowLegacyGate = async (
 	contentType: string,
 	sectionId: string,
 	tags: TagType[],
@@ -425,7 +425,7 @@ export const SignInGateSelector = ({
 
 	useOnce(() => {
 		void (async () => {
-			const shouldShow = await decide_should_show_legacy_gate(
+			const shouldShow = await decideShouldShowLegacyGate(
 				contentType,
 				sectionId,
 				tags,
