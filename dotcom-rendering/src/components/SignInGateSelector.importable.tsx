@@ -536,6 +536,7 @@ const fetchProxyGetTreatments = async (
 	gateDismissCount: number,
 	countryCode: string,
 	mvtId: number,
+	should_show_legacy_gate_tmp: boolean,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const articleIdentifier = `www.theguardian.com/${pageId}`;
@@ -556,6 +557,7 @@ const fetchProxyGetTreatments = async (
 		gateDismissCount,
 		countryCode,
 		mvtId,
+		should_show_legacy_gate_tmp,
 	};
 	const params = {
 		method: 'POST',
@@ -594,7 +596,18 @@ const buildAuxiaGateDisplayData = async (
 		gateDismissCount,
 		readerPersonalData.countryCode,
 		readerPersonalData.mvtId,
+		false, // [1]
 	);
+	// [1] This is the default value for should_show_legacy_gate_tmp, and irrelevant in the Auxia
+	// audience share.
+
+	// It's going to reflect legacy decision (will be set to true or false)
+	// when we make this call for the legacy gate.
+
+	// And this will last as long as it takes to correctly reproduce the local non auxia logic into SDC.
+
+	// See comment id 5395f64b for context.
+
 	if (response.status && response.data) {
 		const answer = {
 			browserId: readerPersonalData.browserId,
