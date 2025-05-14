@@ -12,18 +12,10 @@ if (pkg.devDependencies) {
  * We don't check packages that are not semver-compatible
  * @type {RegExp[]}
  */
-const exceptions = /** @type {const} */ ([/npm:@guardian\/react-crossword@/]);
-
-const mismatches = Object.entries(pkg.dependencies)
-	.filter(
-		([, version]) =>
-			!exceptions.some((exception) => exception.test(version)),
-	)
-
-	.filter(
-		([, version]) =>
-			!semver.valid(version) && !version.startsWith('workspace:'),
-	);
+const mismatches = Object.entries(pkg.dependencies).filter(
+	([, version]) =>
+		!semver.valid(version) && !version.startsWith('workspace:'),
+);
 
 if (mismatches.length !== 0) {
 	warn('dotcom-rendering dependencies should be pinned.');
