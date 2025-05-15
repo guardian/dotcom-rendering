@@ -199,7 +199,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 
 	const imageSettings = buildMainImageSettings(design);
 	const choiceCardSettings = buildChoiceCardSettings(design);
-	const gridTemplateString = choiceCardSettings
+	const cardsImageOrSpaceTemplateString = choiceCardSettings
 		? 'choice-cards-container'
 		: imageSettings
 		? 'main-image'
@@ -342,11 +342,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		>
 			<div
 				id="rr_designable-banner-inner-container"
-				css={styles.layoutOverrides(
-					imageSettings,
-					choiceCardSettings,
-					gridTemplateString,
-				)}
+				css={styles.layoutOverrides(cardsImageOrSpaceTemplateString)}
 			>
 				<div
 					id="rr_designable-banner-logo"
@@ -527,11 +523,7 @@ const styles = {
 			font-weight: bold;
 		}
 	`,
-	layoutOverrides: (
-		imageSettings: Image | undefined,
-		choiceCardSettings: ChoiceCardSettings | undefined,
-		gridTemplateString: string,
-	) => css`
+	layoutOverrides: (cardsImageOrSpaceTemplateString: string) => css`
 		display: grid;
 		position: relative;
 		padding: ${space[3]}px ${space[3]}px ${space[3]}px ${space[3]}px;
@@ -559,45 +551,45 @@ const styles = {
 			grid-area: choice-cards-container;
 		}
 
-		// mobile
+		/* mobile */
 		grid-template-columns: auto;
 		grid-template-areas:
 			'close-button'
 			'copy-container'
-			'${gridTemplateString}'
+			'${cardsImageOrSpaceTemplateString}'
 			'cta-container';
 
 		${from.phablet} {
 			padding: ${space[3]}px ${space[3]}px ${space[6]}px ${space[3]}px;
 			width: 100%;
 			margin: 0 auto;
-			// grid-template-columns: 1fr auto 1fr;
+			/* grid-template-columns: 1fr auto 1fr; */
 		}
 
 		${from.desktop} {
-			// width: 100vw;
+			/* width: 100vw; */
 			padding: ${space[3]}px ${space[8]}px ${space[6]}px ${space[3]}px;
-			grid-template-columns: 1fr 1fr 0.3fr;
+			grid-template-columns: 1fr auto 0.3fr;
 			grid-template-rows: auto auto;
 
 			grid-template-areas:
-				'copy-container ${gridTemplateString} close-button'
+				'copy-container ${cardsImageOrSpaceTemplateString} close-button'
 				'cta-container . .';
 
-			// margin: 0 auto;
+			/* margin: 0 auto; */
 		}
 		${from.leftCol} {
-			// margin: 0 auto;
+			/* margin: 0 auto; */
 			grid-template-columns: 1fr 1px 460px 380px auto;
 			grid-template-areas:
-				'logo vert-line copy-container ${gridTemplateString} close-button'
+				'logo vert-line copy-container ${cardsImageOrSpaceTemplateString} close-button'
 				'. vert-line cta-container . .';
 			max-width: 1140px;
 		}
 		${from.wide} {
 			grid-template-columns: auto 1px 460px 485px auto;
 			grid-template-areas:
-				'logo vert-line copy-container ${gridTemplateString} close-button'
+				'logo vert-line copy-container ${cardsImageOrSpaceTemplateString} close-button'
 				'. vert-line cta-container . .';
 		}
 	`,
@@ -797,7 +789,7 @@ const styles = {
 			// grid-column: 3;
 			// grid-row: 1;
 			// grid-row-end: 3;
-			margin-left: ${space[5]}px;
+			margin: 0 ${space[5]}px;
 		}
 
 		${between.desktop.and.wide} {
