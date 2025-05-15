@@ -2,7 +2,10 @@ import { expect, test } from '@playwright/test';
 import { Standard as standardArticle } from '../../fixtures/generated/fe-articles/Standard';
 import { disableCMP } from '../lib/cmp';
 import { waitForIsland } from '../lib/islands';
-import { loadPage, loadPageWithOverrides } from '../lib/load-page';
+import {
+	fetchAndloadPageWithOverrides,
+	loadPageWithOverrides,
+} from '../lib/load-page';
 import { isSecureServerAvailable } from '../lib/secure';
 import { signIn } from '../lib/sign-in';
 
@@ -35,11 +38,18 @@ test.describe('Signed in readers', () => {
 		const secureServerAvailable = await isSecureServerAvailable();
 		if (secureServerAvailable) {
 			await disableCMP(context);
-			await loadPage({
+			await fetchAndloadPageWithOverrides(
 				page,
-				path: `/Article/https://www.theguardian.com/politics/2019/oct/29/tories-restore-party-whip-to-10-mps-who-sought-to-block-no-deal-brexit`,
-				useSecure: true,
-			});
+				`/Article/https://www.theguardian.com/politics/2019/oct/29/tories-restore-party-whip-to-10-mps-who-sought-to-block-no-deal-brexit`,
+				{
+					configOverrides: {
+						idUrl: 'https://profile.thegulocal.com',
+					},
+				},
+				{
+					useSecure: true,
+				},
+			);
 			await signIn(page, context);
 		}
 	});
