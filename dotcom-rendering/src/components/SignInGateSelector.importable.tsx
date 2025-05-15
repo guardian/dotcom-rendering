@@ -33,6 +33,7 @@ import {
 } from './SignInGate/dismissGate';
 import { pageIdIsAllowedForGating } from './SignInGate/displayRules';
 import { SignInGateAuxia } from './SignInGate/gateDesigns/SignInGateAuxia';
+import { signInGateComponent as gateLegacyComponent } from './SignInGate/gates/main-control';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGateMappings';
 import type {
 	AuxiaAPIResponseDataUserTreatment,
@@ -43,6 +44,7 @@ import type {
 	AuxiaProxyGetTreatmentsPayload,
 	AuxiaProxyGetTreatmentsResponse,
 	AuxiaProxyLogTreatmentInteractionPayload,
+	CanShowGateProps,
 	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
 	SignInGateComponent,
@@ -210,19 +212,6 @@ const useCheckoutCompleteCookieData = () => {
 	return data;
 };
 
-/**
- * Component with conditional logic which determines if a sign in gate
- * should be shown on the current page.
- *
- * ## Why does this need to be an Island?
- *
- * The sign-in gate logic is entirely client-side
- *
- * ---
- *
- * (No visual story exists)
- */
-
 const SignInGateSelectorDefault = ({
 	contentType,
 	sectionId = '',
@@ -371,6 +360,46 @@ const SignInGateSelectorDefault = ({
 // Auxia Integration Experiment //
 // -------------------------------
 
+const decideShouldShowLegacyGate = async (
+	contentType: string,
+	sectionId: string,
+	tags: TagType[],
+	isPaidContent: boolean,
+	isPreview: boolean,
+): Promise<boolean> => {
+	/*
+		Date: 14th May
+		Author: Pascal
+
+		As part of moving the control of gate display from the client side to SDC (support dotcom components)
+		We introduce this function that is going to compute the value of `should_show_legacy_gate_tmp`, which is
+		then passed to SDC.
+
+		It basically needs to reproduce all the logic in the existing SignInGateSelectorDefault, which has a
+		convoluted set of hooks controlling display, but that the logic of can be reversed engineered.
+	*/
+
+	const isSignedIn: boolean = await isUserLoggedIn();
+	const currentTest: CurrentSignInGateABTest = {
+		name: 'SignInGateMainControl',
+		variant: 'main-control-5',
+		id: 'SignInGateMainControl',
+	};
+	const countryCode = (await getLocaleCode()) ?? undefined;
+
+	const input: CanShowGateProps = {
+		isSignedIn,
+		currentTest,
+		contentType,
+		sectionId,
+		tags,
+		isPaidContent,
+		isPreview,
+		currentLocaleCode: countryCode,
+	};
+	return gateLegacyComponent.canShow(input);
+};
+
 export const SignInGateSelector = ({
 	contentType,
 	sectionId = '',
@@ -390,23 +419,42 @@ export const SignInGateSelector = ({
 		'auxia-signin-gate',
 	);
 
+	const [shouldShowLegacyGate, setShouldShowLegacyGate] = useState<
+		boolean | undefined
+	>(undefined);
+
+	useOnce(() => {
+		void (async () => {
+			const shouldShow = await decideShouldShowLegacyGate(
+				contentType,
+				sectionId,
+				tags,
+				isPaidContent,
+				isPreview,
+			);
+			setShouldShowLegacyGate(shouldShow);
+		})();
+	}, [abTestAPI]);
+
 	if (!pageIdIsAllowedForGating(pageId)) {
 		return <></>;
 	}
 
 	if (!userIsInAuxiaExperiment) {
 		return (
-			<SignInGateSelectorDefault
-				contentType={contentType}
-				sectionId={sectionId}
-				tags={tags}
-				isPaidContent={isPaidContent}
-				isPreview={isPreview}
-				host={host}
-				pageId={pageId}
-				idUrl={idUrl}
-				switches={switches}
-			/>
+			shouldShowLegacyGate && (
+				<SignInGateSelectorDefault
+					contentType={contentType}
+					sectionId={sectionId}
+					tags={tags}
+					isPaidContent={isPaidContent}
+					isPreview={isPreview}
+					host={host}
+					pageId={pageId}
+					idUrl={idUrl}
+					switches={switches}
+				/>
+			)
 		);
 	} else {
 		return (
