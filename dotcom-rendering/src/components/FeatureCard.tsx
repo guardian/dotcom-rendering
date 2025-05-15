@@ -109,7 +109,7 @@ const immersiveOverlayContainerStyles = css`
 	${from.tablet} {
 		top: 0;
 		height: 100%;
-		width: 220px;
+		width: 212px;
 		z-index: 1;
 	}
 `;
@@ -128,13 +128,13 @@ const overlayMaskGradientStyles = (angle: string) => css`
 		${angle},
 		transparent 0px,
 		rgba(0, 0, 0, 0.0381) 8px,
-		rgba(0, 0, 0, 0.1464) 16px,
-		rgba(0, 0, 0, 0.3087) 24px,
-		rgba(0, 0, 0, 0.5) 32px,
-		rgba(0, 0, 0, 0.6913) 40px,
-		rgba(0, 0, 0, 0.8536) 48px,
-		rgba(0, 0, 0, 0.9619) 56px,
-		rgb(0, 0, 0) 64px
+		rgba(0, 0, 0, 0.1464) 22px,
+		rgba(0, 0, 0, 0.3087) 36px,
+		rgba(0, 0, 0, 0.5) 48px,
+		rgba(0, 0, 0, 0.6913) 64px,
+		rgba(0, 0, 0, 0.8536) 96px,
+		rgba(0, 0, 0, 0.9619) 112px,
+		rgb(0, 0, 0) 128px
 	);
 `;
 const overlayStyles = css`
@@ -143,8 +143,6 @@ const overlayStyles = css`
 	text-align: start;
 	gap: ${space[1]}px;
 	padding: 64px ${space[2]}px ${space[2]}px;
-	backdrop-filter: blur(12px) brightness(0.5);
-	${overlayMaskGradientStyles('180deg')};
 
 	/* Ensure the waveform is behind the other elements, e.g. headline, pill */
 	> :not(.waveform) {
@@ -155,9 +153,7 @@ const overlayStyles = css`
 const immersiveOverlayStyles = css`
 	${from.tablet} {
 		height: 100%;
-		padding: ${space[2]}px 64px ${space[2]}px ${space[2]}px;
-		backdrop-filter: blur(12px) brightness(0.5);
-		${overlayMaskGradientStyles('270deg')}
+		padding: ${space[2]}px 0 ${space[2]}px ${space[2]}px;
 	}
 `;
 
@@ -548,6 +544,20 @@ export const FeatureCard = ({
 												false,
 											)
 										))}
+									<div
+										css={css`
+											position: absolute;
+											top: 0;
+											left: 0;
+											height: 100%;
+											width: 212px;
+											backdrop-filter: blur(12px)
+												brightness(0.5);
+											${overlayMaskGradientStyles(
+												'270deg',
+											)};
+										`}
+									></div>
 									<div
 										css={[
 											overlayStyles,

@@ -80,7 +80,7 @@ const textOverlayStyles = css`
 const immersiveOverlayStyles = css`
 	${from.tablet} {
 		height: 100%;
-		width: 25%;
+		width: 284px; // 220px + 64px padding
 		padding: ${space[2]}px 64px ${space[2]}px ${space[2]}px;
 		backdrop-filter: blur(12px) brightness(0.5);
 		${overlayMaskGradientStyles('270deg')}
