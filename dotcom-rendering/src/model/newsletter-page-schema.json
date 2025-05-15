@@ -174,9 +174,6 @@
                 },
                 "googleRecaptchaSiteKey": {
                     "type": "string"
-                },
-                "hasSurveyAd": {
-                    "type": "boolean"
                 }
             },
             "required": [

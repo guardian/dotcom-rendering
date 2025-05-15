@@ -43,7 +43,6 @@ type FENewslettersConfigType = {
 	// isLive?: boolean;
 	// isPreview?: boolean;
 	googleRecaptchaSiteKey?: string;
-	hasSurveyAd?: boolean;
 };
 
 export interface FENewslettersPageType {
