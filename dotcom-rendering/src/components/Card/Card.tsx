@@ -36,6 +36,7 @@ import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
+import { LoopVideo } from '../LoopVideo.importable';
 import { MediaMeta } from '../MediaMeta';
 import { Pill } from '../Pill';
 import { Slideshow } from '../Slideshow';
@@ -56,7 +57,7 @@ import {
 	decideAvatarPosition,
 	type GapSizes,
 } from './components/CardLayout';
-import { CardLink } from './components/CardLink';
+// import { CardLink } from './components/CardLink';
 import { CardWrapper } from './components/CardWrapper';
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
@@ -263,6 +264,13 @@ const getMedia = ({
 	canPlayInline?: boolean;
 	isBetaContainer: boolean;
 }) => {
+	if (mainMedia?.type === 'LoopVideo') {
+		return {
+			type: 'loop-video',
+			mainMedia,
+			...(imageUrl && { imageUrl }),
+		} as const;
+	}
 	if (mainMedia?.type === 'Video' && canPlayInline) {
 		return {
 			type: 'video',
@@ -441,6 +449,8 @@ export const Card = ({
 	 */
 	const isVideoMainMedia =
 		mainMedia?.type === 'Video' && format.design !== ArticleDesign.Video;
+
+	const isLoopVideo = mainMedia?.type === 'LoopVideo';
 
 	const decideAge = () => {
 		if (!webPublicationDate) return undefined;
@@ -758,12 +768,12 @@ export const Card = ({
 			isOnwardContent={isOnwardContent}
 			containerPalette={containerPalette}
 		>
-			<CardLink
+			{/* <CardLink
 				linkTo={linkTo}
 				headlineText={headlineText}
 				dataLinkName={dataLinkName}
 				isExternalLink={isExternalLink}
-			/>
+			/> */}
 			{headlinePosition === 'outer' && (
 				<div
 					css={css`
@@ -797,12 +807,15 @@ export const Card = ({
 							cardHasImage={!!image}
 						/>
 					) : null}
-					{!showPill && !!mainMedia && mainMedia.type !== 'Video' && (
-						<MediaMeta
-							mediaType={mainMedia.type}
-							hasKicker={!!kickerText}
-						/>
-					)}
+					{!showPill &&
+						!!mainMedia &&
+						mainMedia.type !== 'Video' &&
+						mainMedia.type !== 'LoopVideo' && (
+							<MediaMeta
+								mediaType={mainMedia.type}
+								hasKicker={!!kickerText}
+							/>
+						)}
 				</div>
 			)}
 
@@ -888,7 +901,35 @@ export const Card = ({
 								/>
 							</AvatarContainer>
 						)}
-						{media.type === 'video' && (
+						{isLoopVideo && (
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<LoopVideo
+									// src={mainMedia.videoId}
+									src="https://uploads.guim.co.uk/2024/10/01/241001HeleneLoop_2.mp4"
+									// src="https://uploads.guim.co.uk/2024/45/14/TEST+1+FOR+ELLEN--0ee1b132-3a0d-405b-b493-aada74b259b2-2.mp4"
+									// src="https://uploads.guim.co.uk/2024/58/19/Deepfake%20clip%20shows%20Nigel%20Farage%20destroying%20Rishi%20Sunak%E2%80%99s%20house%20in%20Minecraft%20--007473ac-3147-41f5-9cf3-d454c28037cf-3.mp4"
+									height={337.5}
+									width={600}
+									// height={mainMedia.height}
+									// width={mainMedia.width}
+									videoId={mainMedia.videoId}
+									thumbnailImage={mainMedia.thumbnailImage}
+									fallbackImageComponent={
+										<CardPicture
+											mainImage={media.imageUrl ?? ''}
+											imageSize={imageSize}
+											loading={imageLoading}
+											alt={media.imageAltText}
+											aspectRatio={aspectRatio}
+										/>
+									}
+								/>
+							</Island>
+						)}
+						{media.type === 'video' && !isLoopVideo && (
 							<>
 								{showMainVideo ? (
 									<div
@@ -1038,7 +1079,6 @@ export const Card = ({
 						{media.type === 'crossword' && (
 							<img src={media.imageUrl} alt="" />
 						)}
-
 						{media.type === 'podcast' && (
 							<>
 								{media.podcastImage?.src && !showKickerImage ? (

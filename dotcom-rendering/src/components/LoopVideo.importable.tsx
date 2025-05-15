@@ -16,10 +16,10 @@ const videoContainerStyles = css`
 type Props = {
 	src: string;
 	videoId: string;
-	width?: number;
-	height?: number;
-	thumbnailImage: string;
+	width: number;
+	height: number;
 	fallbackImageComponent: JSX.Element;
+	thumbnailImage?: string;
 	hasAudio?: boolean;
 };
 
@@ -146,6 +146,7 @@ export const LoopVideo = ({
 		switch (event.key) {
 			case 'Enter':
 			case ' ':
+				event.preventDefault();
 				playPauseVideo();
 				break;
 			case 'Escape':

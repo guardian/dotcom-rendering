@@ -27,6 +27,7 @@ export type CardImageType =
 	| 'crossword'
 	| 'slideshow'
 	| 'video'
+	| 'loop-video'
 	| 'podcast';
 
 export type SmallHeadlineSize =
