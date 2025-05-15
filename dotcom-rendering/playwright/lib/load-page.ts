@@ -3,6 +3,16 @@ import { BASE_URL, BASE_URL_SECURE } from '../../playwright.config';
 import type { FEArticle } from '../../src/frontend/feArticle';
 import { validateAsFEArticle } from '../../src/model/validate';
 
+type LoadPageOptions = {
+	queryParams?: Record<string, string>;
+	queryParamsOn?: boolean;
+	fragment?: `#${string}`;
+	waitUntil?: 'domcontentloaded' | 'load';
+	region?: 'GB' | 'US' | 'AU' | 'INT';
+	preventSupportBanner?: boolean;
+	useSecure?: boolean;
+};
+
 /**
  * Loads a page in Playwright and centralises setup
  */
@@ -19,14 +29,7 @@ const loadPage = async ({
 }: {
 	page: Page;
 	path: string;
-	queryParams?: Record<string, string>;
-	queryParamsOn?: boolean;
-	fragment?: `#${string}`;
-	waitUntil?: 'domcontentloaded' | 'load';
-	region?: 'GB' | 'US' | 'AU' | 'INT';
-	preventSupportBanner?: boolean;
-	useSecure?: boolean;
-}): Promise<void> => {
+} & LoadPageOptions): Promise<void> => {
 	await page.addInitScript(
 		(args) => {
 			// Set the geo region, defaults to GB
@@ -78,6 +81,7 @@ const loadPageWithOverrides = async (
 		configOverrides?: Record<string, unknown>;
 		switchOverrides?: Record<string, unknown>;
 	},
+	options?: LoadPageOptions,
 ): Promise<void> => {
 	const path = `/Article`;
 	await page.route(`${BASE_URL}${path}`, async (route) => {
@@ -100,7 +104,7 @@ const loadPageWithOverrides = async (
 			postData,
 		});
 	});
-	await loadPage({ page, path, queryParamsOn: false });
+	await loadPage({ page, path, queryParamsOn: false, ...options });
 };
 
 /**
@@ -113,16 +117,22 @@ const fetchAndloadPageWithOverrides = async (
 		configOverrides?: Record<string, unknown>;
 		switchOverrides?: Record<string, unknown>;
 	},
+	options?: LoadPageOptions,
 ): Promise<void> => {
 	const article = validateAsFEArticle(
 		await fetch(`${url}.json?dcr`).then((res) => res.json()),
 	);
-	await loadPageWithOverrides(page, article, {
-		configOverrides: overrides?.configOverrides,
-		switchOverrides: {
-			...overrides?.switchOverrides,
+	await loadPageWithOverrides(
+		page,
+		article,
+		{
+			configOverrides: overrides?.configOverrides,
+			switchOverrides: {
+				...overrides?.switchOverrides,
+			},
 		},
-	});
+		options,
+	);
 };
 
 export { fetchAndloadPageWithOverrides, loadPage, loadPageWithOverrides };
