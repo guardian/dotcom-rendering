@@ -199,6 +199,11 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 
 	const imageSettings = buildMainImageSettings(design);
 	const choiceCardSettings = buildChoiceCardSettings(design);
+	const gridTemplateString = choiceCardSettings
+		? 'choice-cards-container'
+		: imageSettings
+		? 'main-image'
+		: '.';
 
 	const templateSettings: BannerTemplateSettings = {
 		containerSettings: {
@@ -326,35 +331,54 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		(separateArticleCountSettings?.type === 'above' ||
 			separateArticleCount) &&
 		articleCounts.forTargetedWeeks >= 5;
-
 	return (
 		<div
+			id="rr_designable-banner-outer-container"
 			css={styles.outerContainer(
 				templateSettings.containerSettings.backgroundColour,
 				iosAppBannerPresent,
 				templateSettings.containerSettings.textColor,
 			)}
 		>
-			<div css={styles.containerOverrides}>
-				<div css={styles.guardianLogoContainer}>
+			<div
+				id="rr_designable-banner-inner-container"
+				css={styles.layoutOverrides(
+					imageSettings,
+					choiceCardSettings,
+					gridTemplateString,
+				)}
+			>
+				<div
+					id="rr_designable-banner-logo"
+					css={styles.guardianLogoContainer}
+				>
 					<SvgGuardianLogo
 						textColor={hexColourToString(basic.logo)}
 					/>
 				</div>
-				<div css={styles.verticalLine} />
-				<div css={getHeaderContainerCss()}>
-					<div css={styles.headerOverrides}>
-						<DesignableBannerHeader
-							heading={content.mainContent.heading}
-							mobileHeading={content.mobileContent.heading}
-							headerSettings={templateSettings.headerSettings}
-							headlineSize={
-								design.fonts?.heading.size ?? 'medium'
-							}
-						/>
+
+				<div
+					id="rr_designable-banner-vert-line"
+					css={styles.verticalLine}
+				/>
+
+				<div
+					id="rr_designable-banner-copy-container"
+					css={getCopyContainerCss()}
+				>
+					<div css={getHeaderContainerCss()}>
+						<div css={styles.headerOverrides}>
+							<DesignableBannerHeader
+								heading={content.mainContent.heading}
+								mobileHeading={content.mobileContent.heading}
+								headerSettings={templateSettings.headerSettings}
+								headlineSize={
+									design.fonts?.heading.size ?? 'medium'
+								}
+							/>
+						</div>
 					</div>
-				</div>
-				<div css={getCopyContainerCss()}>
+
 					{showAboveArticleCount && (
 						<DesignableBannerArticleCount
 							numArticles={articleCounts.forTargetedWeeks}
@@ -383,6 +407,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 								/>
 							</div>
 						)}
+
 					<div css={templateSpacing.bannerBodyCopy}>
 						<div css={styles.bodyCopyOverrides}>
 							<DesignableBannerBody
@@ -396,8 +421,24 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					</div>
 				</div>
 
+				{templateSettings.imageSettings && (
+					<div
+						id="rr_designable-banner-main-image"
+						css={styles.bannerVisualContainer}
+					>
+						<DesignableBannerVisual
+							settings={templateSettings.imageSettings}
+							bannerId={templateSettings.bannerId}
+						/>
+						{templateSettings.alternativeVisual}
+					</div>
+				)}
+
 				{!showChoiceCards && (
-					<div css={styles.ctaContentContainer}>
+					<div
+						id="rr_designable-banner-cta-container"
+						css={styles.ctaContentContainer}
+					>
 						<DesignableBannerCtas
 							mainOrMobileContent={mainOrMobileContent}
 							onPrimaryCtaClick={onCtaClick}
@@ -412,31 +453,19 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					</div>
 				)}
 
-				{templateSettings.imageSettings ? (
-					<>
-						<DesignableBannerCloseButton
-							onCloseClick={onCloseClick}
-							settings={templateSettings.closeButtonSettings}
-							styleOverides={styles.closeButtonOverrides}
-						/>
-						<div css={styles.bannerVisualContainer}>
-							<DesignableBannerVisual
-								settings={templateSettings.imageSettings}
-								bannerId={templateSettings.bannerId}
-							/>
-							{templateSettings.alternativeVisual}
-						</div>
-					</>
-				) : (
+				<div id="rr_designable-banner-close-button">
 					<DesignableBannerCloseButton
 						onCloseClick={onCloseClick}
 						settings={templateSettings.closeButtonSettings}
 						styleOverides={styles.closeButtonOverrides}
 					/>
-				)}
+				</div>
 
 				{showChoiceCards && (
-					<div css={styles.threeTierChoiceCardsContainer}>
+					<div
+						id="rr_designable-banner-3-tier-choice-cards-container"
+						css={styles.threeTierChoiceCardsContainer}
+					>
 						<ThreeTierChoiceCards
 							countryCode={countryCode}
 							selectedProduct={threeTierChoiceCardSelectedProduct}
@@ -498,31 +527,78 @@ const styles = {
 			font-weight: bold;
 		}
 	`,
-	containerOverrides: css`
+	layoutOverrides: (
+		imageSettings: Image | undefined,
+		choiceCardSettings: ChoiceCardSettings | undefined,
+		gridTemplateString: string,
+	) => css`
 		display: grid;
 		position: relative;
 		padding: ${space[3]}px ${space[3]}px ${space[3]}px ${space[3]}px;
+
+		// Define the grid areas
+		#rr_designable-banner-logo {
+			grid-area: logo;
+		}
+		#rr_designable-banner-vert-line {
+			grid-area: vert-line;
+		}
+		#rr_designable-banner-copy-container {
+			grid-area: copy-container;
+		}
+		#rr_designable-banner-cta-container {
+			grid-area: cta-container;
+		}
+		#rr_designable-banner-close-button {
+			grid-area: close-button;
+		}
+		#rr_designable-banner-main-image {
+			grid-area: main-image;
+		}
+		#rr_designable-banner-3-tier-choice-cards-container {
+			grid-area: choice-cards-container;
+		}
+
+		// mobile
+		grid-template-columns: auto;
+		grid-template-areas:
+			'close-button'
+			'copy-container'
+			'${gridTemplateString}'
+			'cta-container';
 
 		${from.phablet} {
 			padding: ${space[3]}px ${space[3]}px ${space[6]}px ${space[3]}px;
 			width: 100%;
 			margin: 0 auto;
-			grid-template-columns: 1fr auto 1fr;
+			// grid-template-columns: 1fr auto 1fr;
 		}
 
 		${from.desktop} {
+			// width: 100vw;
 			padding: ${space[3]}px ${space[8]}px ${space[6]}px ${space[3]}px;
-			grid-template-columns: auto auto 380px auto;
-			grid-template-rows: auto 1fr auto;
-			width: 100%;
-			margin: 0 auto;
+			grid-template-columns: 1fr 1fr 0.3fr;
+			grid-template-rows: auto auto;
+
+			grid-template-areas:
+				'copy-container ${gridTemplateString} close-button'
+				'cta-container . .';
+
+			// margin: 0 auto;
 		}
 		${from.leftCol} {
-			grid-template-columns: auto 460px 380px 1fr;
+			// margin: 0 auto;
+			grid-template-columns: 1fr 1px 460px 380px auto;
+			grid-template-areas:
+				'logo vert-line copy-container ${gridTemplateString} close-button'
+				'. vert-line cta-container . .';
 			max-width: 1140px;
 		}
 		${from.wide} {
-			grid-template-columns: auto 460px 485px auto;
+			grid-template-columns: auto 1px 460px 485px auto;
+			grid-template-areas:
+				'logo vert-line copy-container ${gridTemplateString} close-button'
+				'. vert-line cta-container . .';
 		}
 	`,
 	verticalLine: css`
@@ -539,24 +615,25 @@ const styles = {
 	`,
 	closeButtonOverrides: css`
 		${until.phablet} {
-			grid-column: 1 / -1;
-			grid-row: 1;
+			// grid-column: 1 / -1;
+			// grid-row: 1;
 			justify-self: end;
 			position: sticky;
 			top: 10px;
 		}
 
 		${from.phablet} {
-			grid-column: 4;
-			grid-row: 1;
-			justify-self: start;
+			// grid-column: 4;
+			// grid-row: 1;
+			// justify-self: start;
 			position: sticky;
 			top: 10px;
 			padding-left: ${space[8]}px;
 		}
 
 		${from.desktop} {
-			justify-self: end;
+			padding-left: ${space[1]}px;
+			justify-self: start;
 		}
 	`,
 	// hacky change until we can rework the designable banner header with the correct styles
@@ -587,8 +664,10 @@ const styles = {
 	`,
 
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
-		grid-column: 1;
-		grid-row: ${bannerHasImage ? '1' : '2'};
+		// grid-column: 1;
+		// grid-row: ${bannerHasImage ? '1' : '2'};
+		align-self: stretch;
+		justify-self: stretch;
 
 		${until.phablet} {
 			${bannerHasImage
@@ -597,8 +676,8 @@ const styles = {
 		}
 
 		${from.phablet} {
-			grid-column: 2;
-			grid-row: 1;
+			// grid-column: 2;
+			// grid-row: 1;
 			background: ${background};
 			max-width: 492px;
 		}
@@ -610,12 +689,12 @@ const styles = {
 		}
 	`,
 	headerWithImageContainer: (background: string) => css`
-		order: 1;
+		// order: 1;
 		max-width: 100%;
 		text-wrap: balance;
 
 		${between.mobile.and.desktop} {
-			order: 2;
+			// order: 2;
 		}
 
 		${from.tablet} {
@@ -623,8 +702,8 @@ const styles = {
 		}
 
 		${from.desktop} {
-			grid-column: 2;
-			grid-row: 1;
+			// grid-column: 2;
+			// grid-row: 1;
 			background: ${background};
 			max-width: 492px;
 			padding-left: ${space[2]}px;
@@ -632,12 +711,13 @@ const styles = {
 		}
 	`,
 	contentContainer: (bannerHasImage: boolean) => css`
-		grid-row: ${bannerHasImage ? '2' : '4'};
+		// grid-row: ${bannerHasImage ? '2' : '4'};
+		align-self: start;
 
 		${from.phablet} {
-			grid-column: 2;
+			// grid-column: 2;
 			max-width: 492px;
-			grid-row: 2;
+			// grid-row: 2;
 		}
 		${from.desktop} {
 			padding-left: ${space[2]}px;
@@ -647,7 +727,7 @@ const styles = {
 	`,
 
 	ctaContentContainer: css`
-		order: 4;
+		// order: 4;
 
 		${until.phablet} {
 			width: 100vw;
@@ -665,14 +745,15 @@ const styles = {
 			}
 		}
 		${from.phablet} {
-			grid-column: 2;
-			grid-row: 5;
-			max-width: 492px;
+			// grid-column: 2;
+			// grid-row: 5;
+			// max-width: 492px;
 		}
 		${from.desktop} {
 			width: 100%;
-			padding-left: ${space[2]}px;
-			padding-right: ${space[5]}px;
+			wrap: nowrap;
+			// padding-left: ${space[2]}px;
+			// padding-right: ${space[5]}px;
 			margin-bottom: ${space[2]}px;
 		}
 	`,
@@ -688,34 +769,34 @@ const styles = {
 		}
 	`,
 	bannerVisualContainer: css`
-		grid-row: 3;
+		// grid-row: 3;
 		margin-left: ${space[2]}px;
 		margin-right: ${space[2]}px;
 
 		${from.phablet} {
-			grid-column: 2;
-			grid-row: 3;
+			// grid-column: 2;
+			// grid-row: 3;
 		}
 
 		${from.desktop} {
 			padding-left: ${space[2]}px;
-			grid-column: 3;
-			grid-row: 1 / span 2;
+			// grid-column: 3;
+			// grid-row: 1 / span 2;
 		}
 	`,
 	threeTierChoiceCardsContainer: css`
-		order: 3;
+		// order: 3;
 		${until.desktop} {
 			margin-top: -${space[6]}px;
 		}
 		${from.phablet} {
-			grid-column: 2;
+			// grid-column: 2;
 			max-width: 492px;
 		}
 		${from.desktop} {
-			grid-column: 3;
-			grid-row: 1;
-			grid-row-end: 3;
+			// grid-column: 3;
+			// grid-row: 1;
+			// grid-row-end: 3;
 			margin-left: ${space[5]}px;
 		}
 
@@ -730,6 +811,7 @@ const styles = {
 	guardianLogoContainer: css`
 		display: none;
 		${from.leftCol} {
+			justify-self: end;
 			display: flex;
 			width: 128px;
 			height: 41px;
@@ -737,7 +819,7 @@ const styles = {
 			align-items: center;
 			margin-top: ${space[5]}px;
 			margin-right: ${space[2]}px;
-			margin-left: 22px;
+			// margin-left: 22px;
 		}
 	`,
 
