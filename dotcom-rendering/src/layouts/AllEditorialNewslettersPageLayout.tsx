@@ -1,4 +1,5 @@
 import { palette as sourcePalette } from '@guardian/source/foundations';
+import { AdSlot } from '../components/AdSlot.web';
 import { Footer } from '../components/Footer';
 import { GroupedNewslettersList } from '../components/GroupedNewsletterList';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -22,6 +23,7 @@ export const AllEditorialNewslettersPageLayout = ({
 	NAV,
 }: Props) => {
 	const { editionId, pageFooter, config, isAdFreeUser } = newslettersPage;
+	const { hasSurveyAd } = config;
 
 	const renderAds = !isAdFreeUser;
 
@@ -71,6 +73,8 @@ export const AllEditorialNewslettersPageLayout = ({
 					/>
 				</>
 			</div>
+
+			{renderAds && hasSurveyAd && <AdSlot position="survey" />}
 
 			<main data-layout="NewsletterPageLayout" id="maincontent">
 				<NewslettersPageHeading
