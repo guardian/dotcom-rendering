@@ -8,10 +8,6 @@ if (pkg.devDependencies) {
 	process.exit(1);
 }
 
-/**
- * We don't check packages that are not semver-compatible
- * @type {RegExp[]}
- */
 const mismatches = Object.entries(pkg.dependencies).filter(
 	([, version]) =>
 		!semver.valid(version) && !version.startsWith('workspace:'),
