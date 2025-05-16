@@ -122,9 +122,7 @@ window.twttr = (function(d, s, id) {
 				? initTwitter
 				: undefined,
 		config,
-		onlyLightColourScheme:
-			design === ArticleDesign.FullPageInteractive ||
-			design === ArticleDesign.Interactive,
+		onlyLightColourScheme: false,
 	});
 
 	return {
