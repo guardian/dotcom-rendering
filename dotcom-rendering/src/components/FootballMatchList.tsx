@@ -11,6 +11,7 @@ import {
 import {
 	Button,
 	InlineError,
+	LinkButton,
 	SvgPlus,
 } from '@guardian/source/react-components';
 import { Fragment, type ReactNode, useState } from 'react';
@@ -26,6 +27,7 @@ import {
 	getTimeZoneFromEdition,
 } from '../lib/edition';
 import type { Result } from '../lib/result';
+import { useHydrated } from '../lib/useHydrated';
 import { palette } from '../palette';
 
 type Props = {
@@ -34,6 +36,7 @@ type Props = {
 	guardianBaseUrl: string;
 	getMoreDays?: () => Promise<Result<'failed', FootballMatches>>;
 	now: string;
+	nextPageNoJsUrl?: string;
 };
 
 const REMOVE_TRAILING_DOTS_REGEX = /\.+$/;
@@ -423,6 +426,7 @@ export const FootballMatchList = ({
 	guardianBaseUrl,
 	initialDays,
 	getMoreDays,
+	nextPageNoJsUrl,
 	now,
 }: Props) => {
 	const dateFormatter = new Intl.DateTimeFormat('en-GB', {
@@ -436,6 +440,8 @@ export const FootballMatchList = ({
 
 	const [days, setDays] = useState(initialDays);
 	const [isError, setIsError] = useState<boolean>(false);
+
+	const hydrated = useHydrated();
 
 	return (
 		<>
@@ -478,7 +484,8 @@ export const FootballMatchList = ({
 				</section>
 			))}
 
-			{getMoreDays === undefined ? null : (
+			{getMoreDays === undefined ||
+			nextPageNoJsUrl === undefined ? null : (
 				<div css={footballMatchesGridStyles}>
 					<div
 						css={css`
@@ -489,44 +496,70 @@ export const FootballMatchList = ({
 							}
 						`}
 					>
-						<Button
-							theme={{
-								textPrimary: palette('--button-text-primary'),
-								backgroundPrimary: palette(
-									'--button-background-primary',
-								),
-								backgroundPrimaryHover: palette(
-									'--button-background-primary-hover',
-								),
-							}}
-							icon={<SvgPlus />}
-							size="xsmall"
-							onClick={() => {
-								void getMoreDays().then((moreDays) => {
-									if (moreDays.kind === 'ok') {
-										setIsError(false);
-										setDays(days.concat(moreDays.value));
-									} else {
-										setIsError(true);
-									}
-								});
-							}}
-						>
-							More
-						</Button>
-						{isError ? (
-							<InlineError
-								cssOverrides={css`
-									padding-top: ${space[4]}px;
-									color: ${palette(
-										'--football-match-list-error',
-									)};
-								`}
+						{hydrated ? (
+							<>
+								<Button
+									theme={{
+										textPrimary: palette(
+											'--button-text-primary',
+										),
+										backgroundPrimary: palette(
+											'--button-background-primary',
+										),
+										backgroundPrimaryHover: palette(
+											'--button-background-primary-hover',
+										),
+									}}
+									icon={<SvgPlus />}
+									size="xsmall"
+									onClick={() => {
+										void getMoreDays().then((moreDays) => {
+											if (moreDays.kind === 'ok') {
+												setIsError(false);
+												setDays(
+													days.concat(moreDays.value),
+												);
+											} else {
+												setIsError(true);
+											}
+										});
+									}}
+								>
+									More
+								</Button>
+								{isError ? (
+									<InlineError
+										cssOverrides={css`
+											padding-top: ${space[4]}px;
+											color: ${palette(
+												'--football-match-list-error',
+											)};
+										`}
+									>
+										Could not get more matches. Please try
+										again later!
+									</InlineError>
+								) : null}
+							</>
+						) : (
+							<LinkButton
+								href={nextPageNoJsUrl}
+								size="xsmall"
+								theme={{
+									textPrimary: palette(
+										'--button-text-primary',
+									),
+									backgroundPrimary: palette(
+										'--button-background-primary',
+									),
+									backgroundPrimaryHover: palette(
+										'--button-background-primary-hover',
+									),
+								}}
 							>
-								Could not get more matches. Please try again
-								later!
-							</InlineError>
-						) : null}
+								More
+							</LinkButton>
+						)}
 					</div>
 				</div>
 			)}

@@ -29,6 +29,7 @@ export type SportPageConfig = {
 
 export type FootballMatchListPage = FootballData & {
 	nextPage?: string;
+	nextPageNoJsUrl?: string;
 	previousPage?: string;
 	matchesList: FootballMatches;
 	now: string;

@@ -1,7 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { userEvent, within } from '@storybook/test';
+import { expect, userEvent, within } from '@storybook/test';
 import { allModes } from '../../.storybook/modes';
-import { initialDays, moreDays } from '../../fixtures/manual/footballData';
+import {
+	initialDays,
+	moreDays,
+	nextPageNoJsUrl,
+} from '../../fixtures/manual/footballData';
 import { error, ok } from '../lib/result';
 import { FootballMatchList } from './FootballMatchList';
 
@@ -39,12 +43,30 @@ export const Default = {
 		guardianBaseUrl: 'https://www.theguardian.com',
 		initialDays,
 		getMoreDays: () => Promise.resolve(ok(moreDays)),
+		nextPageNoJsUrl,
 	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
-		const moreButtons = canvas.getAllByRole('button');
+
+		// Get element with area role link (anchor tag) with the visible text content "More"
+		const moreLinks = canvas.getAllByRole('link', { name: /more/i });
+		// Assert the href exists
+		for (const moreLink of moreLinks) {
+			void expect(moreLink).toHaveAttribute('href', nextPageNoJsUrl);
+		}
+
+		const moreButtons = await canvas.findAllByRole('button', {
+			name: /more/i,
+		});
 		for (const moreButton of moreButtons) {
 			await userEvent.click(moreButton);
+		}
+
+		const rootDivs = canvasElement.querySelectorAll('[data-color-scheme]');
+		for (const rootDiv of rootDivs) {
+			const newDays = rootDiv.querySelectorAll('section');
+			// Assert that the number of sections has increased
+			void expect(newDays.length).toBeGreaterThan(initialDays.length);
 		}
 	},
 } satisfies Story;
@@ -54,7 +76,25 @@ export const ErrorGettingMore = {
 		...Default.args,
 		getMoreDays: () => Promise.resolve(error('failed')),
 	},
-	play: Default.play,
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement);
+
+		// Get the button element with the visible text content "More" and click it
+		const moreButtons = await canvas.findAllByRole('button', {
+			name: /more/i,
+		});
+		for (const moreButton of moreButtons) {
+			await userEvent.click(moreButton);
+		}
+
+		const rootDivs = canvasElement.querySelectorAll('[data-color-scheme]');
+		for (const rootDiv of rootDivs) {
+			// Assert that the error message appears
+			await within(rootDiv as HTMLElement).findByText(
+				/Could not get more matches\. Please try again later!/i,
+			);
+		}
+	},
 } satisfies Story;
 
 export const NoMoreDays = {
