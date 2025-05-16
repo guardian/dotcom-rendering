@@ -522,11 +522,13 @@ const styles = {
 		strong {
 			font-weight: bold;
 		}
+		padding: 0;
 	`,
 	layoutOverrides: (cardsImageOrSpaceTemplateString: string) => css`
 		display: grid;
 		position: relative;
 		padding: ${space[3]}px ${space[3]}px ${space[3]}px ${space[3]}px;
+		margin: 0;
 
 		// Define the grid areas
 		#rr_designable-banner-logo {
@@ -579,12 +581,12 @@ const styles = {
 			/* margin: 0 auto; */
 		}
 		${from.leftCol} {
+			max-width: 1299px;
 			/* margin: 0 auto; */
-			grid-template-columns: 1fr 1px 460px 380px auto;
+			grid-template-columns: auto 1px 460px 380px auto;
 			grid-template-areas:
 				'logo vert-line copy-container ${cardsImageOrSpaceTemplateString} close-button'
 				'. vert-line cta-container . .';
-			max-width: 1140px;
 		}
 		${from.wide} {
 			grid-template-columns: auto 1px 460px 485px auto;
@@ -597,8 +599,8 @@ const styles = {
 		${from.leftCol} {
 			background-color: ${neutral[0]};
 			width: 1px;
-			grid-column: 2;
-			grid-row: 1 / -1;
+			// grid-column: 2;
+			// grid-row: 1 / -1;
 			opacity: 0.2;
 			margin-bottom: -${space[6]}px;
 			margin-top: ${space[6]}px;
@@ -654,7 +656,6 @@ const styles = {
 			}
 		}
 	`,
-
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
 		// grid-column: 1;
 		// grid-row: ${bannerHasImage ? '1' : '2'};
@@ -712,12 +713,12 @@ const styles = {
 			// grid-row: 2;
 		}
 		${from.desktop} {
+			max-width: 492px;
 			padding-left: ${space[2]}px;
 			padding-right: ${space[5]}px;
 			margin-bottom: ${space[2]}px;
 		}
 	`,
-
 	ctaContentContainer: css`
 		// order: 4;
 
@@ -739,7 +740,7 @@ const styles = {
 		${from.phablet} {
 			// grid-column: 2;
 			// grid-row: 5;
-			// max-width: 492px;
+			max-width: 492px;
 		}
 		${from.desktop} {
 			width: 100%;
@@ -814,7 +815,6 @@ const styles = {
 			// margin-left: 22px;
 		}
 	`,
-
 	// choice card CTA container
 	ctaContainer: css`
 		order: 4;
