@@ -8,6 +8,7 @@ import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
 import React from 'react';
+import { choiceCardsSettings } from '../lib/storybook';
 import { ContributionsEpicUnvalidated as ContributionsEpic } from './ContributionsEpic';
 import { props } from './utils/storybook';
 
@@ -302,58 +303,7 @@ export const WithThreeTierChoiceCards: Story = {
 			name: 'THREE_TIER_CHOICE_CARDS',
 			secondaryCta: undefined,
 			showChoiceCards: true,
-		},
-	},
-};
-
-export const WithThreeTierChoiceCardsForUS: Story = {
-	name: 'ContributionsEpic with three tier choice cards for US',
-	args: {
-		...meta.args,
-		countryCode: 'US',
-		variant: {
-			...props.variant,
-			name: 'THREE_TIER_CHOICE_CARDS',
-			secondaryCta: undefined,
-			showChoiceCards: true,
-		},
-	},
-};
-
-export const WithThreeTierDiscountChoiceCards: Story = {
-	name: 'ContributionsEpic with discounted three tier choice cards',
-	args: {
-		...meta.args,
-		countryCode: 'GB',
-		variant: {
-			...props.variant,
-			name: 'THREE_TIER_CHOICE_CARDS',
-			secondaryCta: undefined,
-			showChoiceCards: true,
-			cta: {
-				text: 'Support the Guardian',
-				baseUrl:
-					'https://support.theguardian.com/uk/contribute?promoCode=BLACK_FRIDAY_DISCOUNT_2024',
-			},
-		},
-	},
-};
-
-export const WithThreeTierDiscountChoiceCardsNonUS: Story = {
-	name: 'ContributionsEpic with discounted three tier choice cards For Non US',
-	args: {
-		...meta.args,
-		countryCode: 'GB',
-		variant: {
-			...props.variant,
-			name: 'THREE_TIER_CHOICE_CARDS',
-			secondaryCta: undefined,
-			showChoiceCards: true,
-			cta: {
-				text: 'Support the Guardian',
-				baseUrl:
-					'https://support.theguardian.com/uk/contribute?promoCode=30OFFAPRIL',
-			},
+			choiceCardsSettings,
 		},
 	},
 };
@@ -367,29 +317,7 @@ export const WithChoiceCardsAndSignInLink: Story = {
 			name: 'V1_SIGN_IN',
 			showSignInLink: true,
 			showChoiceCards: true,
-			choiceCardAmounts: {
-				testName: 'Storybook_test',
-				variantName: 'Control',
-				defaultContributionType: 'MONTHLY',
-				displayContributionType: ['ONE_OFF', 'MONTHLY', 'ANNUAL'],
-				amountsCardData: {
-					ONE_OFF: {
-						amounts: [5, 10, 15, 20],
-						defaultAmount: 5,
-						hideChooseYourAmount: false,
-					},
-					MONTHLY: {
-						amounts: [6, 12],
-						defaultAmount: 12,
-						hideChooseYourAmount: true,
-					},
-					ANNUAL: {
-						amounts: [50, 100, 150, 200],
-						defaultAmount: 100,
-						hideChooseYourAmount: true,
-					},
-				},
-			},
+			choiceCardsSettings,
 		},
 	},
 };

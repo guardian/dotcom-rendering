@@ -49,6 +49,11 @@ const container = css`
 		padding-left: 60px;
 		padding-right: 20px;
 	}
+
+	b,
+	strong {
+		font-weight: bold;
+	}
 `;
 
 const textContainer = css`

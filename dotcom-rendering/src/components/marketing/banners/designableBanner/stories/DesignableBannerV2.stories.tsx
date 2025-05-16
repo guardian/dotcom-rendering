@@ -6,6 +6,7 @@ import type {
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
 import { DesignableBannerUnvalidatedV2 as DesignableBannerV2 } from '../../../banners/designableBanner/DesignableBannerV2';
+import { choiceCardsSettings } from '../../../lib/storybook';
 import {
 	contentNoHeading,
 	design,
@@ -67,7 +68,6 @@ const regularChoiceCardAmounts: SelectedAmountsVariant = {
 		},
 	},
 };
-
 const headerImage: BannerDesignImage = {
 	kind: 'Image',
 	mobileUrl:
@@ -119,6 +119,7 @@ export const WithThreeTierChoiceCards: Story = {
 			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
 		},
 		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
 	},
 };
 
@@ -140,6 +141,7 @@ export const ThreeTierChoiceCardsWithHeaderImageAndCopy: Story = {
 			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
 		},
 		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
 	},
 };
 
@@ -169,6 +171,7 @@ export const HeaderImageOnly: Story = {
 			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
 		},
 		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
 	},
 };
 
@@ -205,6 +208,7 @@ export const WithTickerAndThreeTierChoiceCards: Story = {
 			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
 		},
 		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
 	},
 };
 
@@ -227,6 +231,7 @@ export const WithThreeTierChoiceCardsAndArticleCount: Story = {
 			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
 		},
 		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
 	},
 };
 

@@ -14,6 +14,7 @@ import type {
 	SeparateArticleCount,
 	TickerSettings,
 } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { ChoiceCardsSettings } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/types/props/shared';
 
 export type BannerId = 'designable-banner' | 'sign-in-prompt-banner';
@@ -73,6 +74,7 @@ export interface BannerRenderProps {
 	separateArticleCount?: boolean;
 	separateArticleCountSettings?: SeparateArticleCount;
 	choiceCardAmounts?: SelectedAmountsVariant;
+	choiceCardsSettings?: ChoiceCardsSettings;
 	tracking: Tracking;
 	submitComponentEvent?: (componentEvent: ComponentEvent) => void;
 	design?: ConfigurableDesign;
