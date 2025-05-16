@@ -4,7 +4,6 @@
 import React from 'react';
 import { Island } from '../components/Island';
 import { SignInGateSelector } from '../components/SignInGateSelector.importable';
-import type { Switches } from '../types/config';
 import type { TagType } from '../types/tag';
 import type { EditionId } from './edition';
 
@@ -18,7 +17,6 @@ type Props = {
 	host?: string;
 	pageId: string;
 	idUrl: string;
-	switches: Switches;
 	isSensitive?: boolean;
 	isDev?: boolean;
 	contributionsServiceUrl: string;
@@ -35,7 +33,6 @@ export const withSignInGateSlot = ({
 	host,
 	pageId,
 	idUrl,
-	switches,
 	contributionsServiceUrl,
 	editionId,
 }: Props): React.ReactNode => {
@@ -56,7 +53,6 @@ export const withSignInGateSlot = ({
 								host={host}
 								pageId={pageId}
 								idUrl={idUrl}
-								switches={switches}
 								contributionsServiceUrl={
 									contributionsServiceUrl
 								}
