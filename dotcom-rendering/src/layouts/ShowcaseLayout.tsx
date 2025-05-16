@@ -222,7 +222,7 @@ interface AppsProps extends CommonProps {
 export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
-		config: { isPaidContent, host },
+		config: { isPaidContent, host, hasSurveyAd },
 		editionId,
 	} = article;
 	const isWeb = renderingTarget === 'Web';
@@ -360,6 +360,11 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					)}
 				</>
 			)}
+
+			{renderAds && hasSurveyAd && (
+				<AdSlot position="survey" display={format.display} />
+			)}
+
 			<main
 				data-layout="ShowcaseLayout"
 				id="maincontent"

@@ -259,7 +259,7 @@ interface WebProps extends BaseProps {
 export const LiveLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
-		config: { isPaidContent, host, hasLiveBlogTopAd },
+		config: { isPaidContent, host, hasLiveBlogTopAd, hasSurveyAd },
 	} = article;
 
 	// TODO:
@@ -337,6 +337,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					/>
 				</div>
 			)}
+
+			{renderAds && hasSurveyAd && (
+				<AdSlot position="survey" display={format.display} />
+			)}
+
 			<main data-layout="LiveLayout">
 				{renderAds && hasLiveBlogTopAd && (
 					<Hide from="tablet">
