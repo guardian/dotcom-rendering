@@ -106,11 +106,13 @@ const imageStyles = css`
 	object-fit: cover;
 `;
 
+const { brand } = palette;
+
 const defaultTickerStylingSettings: TickerSettings['tickerStylingSettings'] = {
-	filledProgressColour: '#5056F5',
-	progressBarBackgroundColour: 'rgba(80, 86, 245, 0.35)',
+	filledProgressColour: brand[400],
+	progressBarBackgroundColour: 'rgba(5, 41, 98, 0.1)',
 	headlineColour: '#000000',
-	totalColour: '#5056F5',
+	totalColour: brand[400],
 	goalColour: '#000000',
 };
 

@@ -27,7 +27,7 @@ export const renderArticle = (
 	prefetchScripts: string[];
 	html: string;
 } => {
-	const { format, frontendData } = article;
+	const { design, frontendData } = article;
 	const renderingTarget = 'Apps';
 	const config: Config = {
 		renderingTarget,
@@ -118,7 +118,7 @@ window.twttr = (function(d, s, id) {
 		weAreHiring: !!frontendData.config.switches.weAreHiring,
 		canonicalUrl: frontendData.canonicalUrl,
 		initTwitter:
-			pageHasTweetElements || format.design === ArticleDesign.LiveBlog
+			pageHasTweetElements || design === ArticleDesign.LiveBlog
 				? initTwitter
 				: undefined,
 		config,

@@ -380,7 +380,6 @@ describe('Island: server-side rendering', () => {
 						isPaidContent={false}
 						isPreview={false}
 						pageId={''}
-						switches={{}}
 						contributionsServiceUrl={''}
 						editionId="UK"
 					/>
