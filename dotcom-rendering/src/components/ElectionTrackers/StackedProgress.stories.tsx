@@ -47,19 +47,19 @@ export const UKGeneral = {
 			},
 			{
 				name: 'Lib Dem',
-				colour: palette('--uk-elections-lib-dem'),
+				colour: palette('--uk-elections-liberal-democrat'),
 				value: 70,
 				align: 'left',
 			},
 			{
 				name: 'SNP',
-				colour: palette('--uk-elections-snp'),
+				colour: palette('--uk-elections-scottish-national-party'),
 				value: 10,
 				align: 'left',
 			},
 			{
 				name: 'Reform',
-				colour: palette('--uk-elections-reform'),
+				colour: palette('--uk-elections-reform-uk'),
 				value: 5,
 				align: 'right',
 			},
