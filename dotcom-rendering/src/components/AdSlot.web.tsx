@@ -100,6 +100,12 @@ const outOfPageStyles = css`
 	height: 0;
 `;
 
+const hideBelowDesktop = css`
+	${until.desktop} {
+		display: none;
+	}
+`;
+
 const topAboveNavContainerStyles = css`
 	padding-bottom: 18px;
 	position: relative;
@@ -705,7 +711,7 @@ export const AdSlot = ({
 						'ad-slot',
 						'ad-slot--survey',
 					].join(' ')}
-					css={[outOfPageStyles]}
+					css={[outOfPageStyles, hideBelowDesktop]}
 					data-link-name="ad slot survey"
 					data-name="survey"
 					data-label="false"
