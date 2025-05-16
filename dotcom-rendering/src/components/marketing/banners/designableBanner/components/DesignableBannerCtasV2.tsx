@@ -60,6 +60,7 @@ const styles = {
 	container: css`
 		display: flex;
 		flex-wrap: wrap;
+		flex-direction: column;
 		gap: ${space[4]}px;
 		justify-content: center;
 		margin-left: ${space[2]}px;
@@ -77,11 +78,11 @@ const styles = {
 		${from.desktop} {
 			> a {
 				flex-direction: row;
-				flex: 0 0 auto;
-				justify-content: flex-start;
+				flex: 1 0 auto;
+				justify-self: stretch;
 			}
-			justify-content: flex-start;
-			padding-left: ${space[1]}px;
+			flex-direction: row;
+			flex-wrap: nowrap;
 		}
 	`,
 };
