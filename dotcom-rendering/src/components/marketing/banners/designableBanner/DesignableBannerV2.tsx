@@ -486,7 +486,7 @@ const styles = {
 		background: ${background};
 		color: ${textColor};
 		bottom: 0px;
-		${limitHeight ? 'max-height: 60vh;' : ''}
+		${limitHeight ? 'max-height: 60vh;' : '85%'}
 
 		* {
 			box-sizing: border-box;
