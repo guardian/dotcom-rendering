@@ -501,6 +501,7 @@ const styles = {
 	`,
 	containerOverrides: css`
 		display: grid;
+		background: inherit;
 		position: relative;
 		padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
 		bottom: 0px;
