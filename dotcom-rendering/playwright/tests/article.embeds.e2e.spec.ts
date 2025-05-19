@@ -13,6 +13,7 @@ test.describe('Embeds', () => {
 			await loadPage({
 				page,
 				path: '/Article/https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
+				region: 'GB',
 			});
 			await cmpAcceptAll(page);
 
@@ -38,6 +39,7 @@ test.describe('Embeds', () => {
 			await loadPage({
 				page,
 				path: '/Article/https://www.theguardian.com/sport/2019/nov/15/forget-a-super-bowl-slump-the-la-rams-have-a-jared-goff-problem',
+				region: 'GB',
 			});
 			await cmpAcceptAll(page);
 
