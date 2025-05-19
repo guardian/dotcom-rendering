@@ -52,7 +52,8 @@ const hoverStyles = css`
 		text-decoration: underline;
 	}
 
-	/** When we hover on sublinks, we want to prevent the general hover styles applying */
+	/** We want to prevent the general hover styles applying when
+	    a click won't result in navigating to the main article */
 	:has(ul.sublinks:hover, .loop-video-container:hover) {
 		.card-headline .show-underline {
 			text-decoration: none;
