@@ -51,11 +51,9 @@ const hoverStyles = css`
 	:hover .card-headline .show-underline {
 		text-decoration: underline;
 	}
-`;
 
-/** When we hover on sublinks, we want to prevent the general hover styles applying */
-const sublinkHoverStyles = css`
-	:has(ul.sublinks:hover) {
+	/** When we hover on sublinks, we want to prevent the general hover styles applying */
+	:has(ul.sublinks:hover, .loop-video-container:hover) {
 		.card-headline .show-underline {
 			text-decoration: none;
 		}
@@ -110,7 +108,6 @@ export const CardWrapper = ({
 					css={[
 						baseCardStyles,
 						hoverStyles,
-						sublinkHoverStyles,
 						showTopBarDesktop && desktopTopBarStyles,
 						showTopBarMobile && mobileTopBarStyles,
 						isOnwardContent && onwardContentStyles,

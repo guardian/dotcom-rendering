@@ -167,7 +167,11 @@ export const LoopVideo = ({
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
 	return (
-		<div ref={setNode} css={videoContainerStyles}>
+		<div
+			ref={setNode}
+			css={videoContainerStyles}
+			className="loop-video-container"
+		>
 			<LoopVideoPlayer
 				src={src}
 				videoId={videoId}
