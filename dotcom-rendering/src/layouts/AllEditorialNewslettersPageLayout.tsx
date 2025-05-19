@@ -1,7 +1,6 @@
 import { palette as sourcePalette } from '@guardian/source/foundations';
 import { Footer } from '../components/Footer';
 import { GroupedNewslettersList } from '../components/GroupedNewsletterList';
-import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { ManyNewsletterSignUp } from '../components/ManyNewsletterSignUp.importable';
 import { Masthead } from '../components/Masthead/Masthead';
@@ -10,7 +9,6 @@ import { Section } from '../components/Section';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import type { NavType } from '../model/extract-nav';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
-import { Stuck } from './lib/stickiness';
 
 type Props = {
 	newslettersPage: DCRNewslettersPageType;
@@ -21,9 +19,7 @@ export const AllEditorialNewslettersPageLayout = ({
 	newslettersPage,
 	NAV,
 }: Props) => {
-	const { editionId, pageFooter, config, isAdFreeUser } = newslettersPage;
-
-	const renderAds = !isAdFreeUser;
+	const { editionId, pageFooter, config } = newslettersPage;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(newslettersPage);
 
@@ -36,40 +32,19 @@ export const AllEditorialNewslettersPageLayout = ({
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
-				<>
-					{renderAds && (
-						<Stuck>
-							<Section
-								fullWidth={true}
-								showTopBorder={false}
-								showSideBorders={false}
-								padSides={false}
-								shouldCenter={false}
-							>
-								<HeaderAdSlot
-									isPaidContent={false}
-									shouldHideReaderRevenue={false}
-								/>
-							</Section>
-						</Stuck>
-					)}
-
-					<Masthead
-						nav={NAV}
-						editionId={editionId}
-						idUrl={newslettersPage.config.idUrl}
-						mmaUrl={newslettersPage.config.mmaUrl}
-						discussionApiUrl={
-							newslettersPage.config.discussionApiUrl
-						}
-						idApiUrl={config.idApiUrl}
-						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={true}
-						showSlimNav={false}
-						hasPageSkin={false}
-						hasPageSkinContentSelfConstrain={false}
-					/>
-				</>
+				<Masthead
+					nav={NAV}
+					editionId={editionId}
+					idUrl={newslettersPage.config.idUrl}
+					mmaUrl={newslettersPage.config.mmaUrl}
+					discussionApiUrl={newslettersPage.config.discussionApiUrl}
+					idApiUrl={config.idApiUrl}
+					contributionsServiceUrl={contributionsServiceUrl}
+					showSubNav={true}
+					showSlimNav={false}
+					hasPageSkin={false}
+					hasPageSkinContentSelfConstrain={false}
+				/>
 			</div>
 
 			<main data-layout="NewsletterPageLayout" id="maincontent">
