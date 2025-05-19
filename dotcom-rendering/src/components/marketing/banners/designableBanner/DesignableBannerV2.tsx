@@ -750,7 +750,7 @@ const styles = {
 		flex-direction: column;
 		gap: ${space[4]}px;
 		margin-top: ${space[3]}px;
-		// margin-bottom: ${space[2]}px;
+		/* margin-bottom: ${space[2]}px; */
 
 		${until.phablet} {
 			position: sticky;
