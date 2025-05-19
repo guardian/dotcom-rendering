@@ -51,7 +51,7 @@ const loadPage = async ({
 	const paramsString = queryParamsOn
 		? `?${new URLSearchParams({
 				adtest: 'fixed-puppies-ci',
-				_sp_geo_override: region,
+				_sp_geo_override: `${region}-${region}`,
 				...queryParams,
 		  }).toString()}`
 		: '';
