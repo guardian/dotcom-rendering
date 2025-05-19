@@ -5,14 +5,14 @@ import {
 
 type ProductLinkButtonProps = {
 	label: string;
-	link: string;
+	url: string;
 };
 
-export const ProductLinkButton = ({ label, link }: ProductLinkButtonProps) => {
+export const ProductLinkButton = ({ label, url }: ProductLinkButtonProps) => {
 	return (
 		<Button
 			onClick={() => {
-				window.open(link, '_blank');
+				window.open(url, '_blank');
 			}}
 			iconSide="right"
 			aria-label={`Open ${label} in a new tab`}

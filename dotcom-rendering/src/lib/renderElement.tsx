@@ -36,6 +36,7 @@ import { MultiBylines } from '../components/MultiBylines';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
 import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
+import { ProductLinkButton } from '../components/ProductLinkButton';
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { QandaAtom } from '../components/QandaAtom.importable';
@@ -550,6 +551,17 @@ export const renderElement = ({
 						credit={element.credit}
 					/>
 				</Island>
+			);
+		case 'model.dotcomrendering.pageElements.LinkElement':
+			return (
+				<>
+					{element.linkElementType === 'ProductButton' && (
+						<ProductLinkButton
+							label={element.label}
+							url={element.url}
+						/>
+					)}
+				</>
 			);
 		case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
 			return (
