@@ -18,7 +18,7 @@ export const ProductLinkButtonStory = () => {
 	return (
 		<ProductLinkButton
 			label="£6.50 for 350g at Ollie’s Kimchi"
-			link="https://ollieskimchi.co.uk/shop/ols/products/ollies-kimchi"
+			url="https://ollieskimchi.co.uk/shop/ols/products/ollies-kimchi"
 		/>
 	);
 };
