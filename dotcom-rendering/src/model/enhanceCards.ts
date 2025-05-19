@@ -13,6 +13,7 @@ import { getSoleContributor } from '../lib/byline';
 import type { EditionId } from '../lib/edition';
 import type { Group } from '../lib/getDataLinkName';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
+import { getLargestImageSize } from '../lib/image';
 import type {
 	DCRFrontCard,
 	DCRSlideshowImage,
@@ -166,6 +167,30 @@ const getActiveMediaAtom = (mediaAtom?: FEMediaAtom): MainMedia | undefined => {
 		const asset = mediaAtom.assets.find(
 			({ version }) => version === mediaAtom.activeVersion,
 		);
+
+		/** TESTING PURPOSES - START */
+		// Every video is currently a Youtube video, so for now let's
+		// pretend that all videos are self-hosted looping videos.
+		if (asset?.platform === 'Youtube') {
+			return {
+				type: 'LoopVideo',
+				videoId: asset.id,
+				duration: mediaAtom.duration ?? 0,
+				// Size fixed to a 5:4 ratio
+				width: 500,
+				height: 400,
+				thumbnailImage: getLargestImageSize(
+					mediaAtom.posterImage?.allImages.map(
+						({ url, fields: { width } }) => ({
+							url,
+							width: Number(width),
+						}),
+					) ?? [],
+				)?.url,
+			};
+		}
+		/** TESTING PURPOSES - END */
+
 		if (asset?.platform === 'Youtube') {
 			return {
 				type: 'Video',
@@ -187,7 +212,29 @@ const getActiveMediaAtom = (mediaAtom?: FEMediaAtom): MainMedia | undefined => {
 					) ?? [],
 			};
 		}
+
+		// TODO - check it is also a loop video. There will be a flag.
+		// Non-looping videos will be supported in the future.
+		if (asset?.platform === 'URL') {
+			return {
+				type: 'LoopVideo',
+				videoId: asset.id,
+				duration: mediaAtom.duration ?? 0,
+				// Size fixed to a 5:4 ratio. Can these dimensions be passed down instead?
+				width: 500,
+				height: 400,
+				thumbnailImage: getLargestImageSize(
+					mediaAtom.posterImage?.allImages.map(
+						({ url, fields: { width } }) => ({
+							url,
+							width: Number(width),
+						}),
+					) ?? [],
+				)?.url,
+			};
+		}
 	}
+
 	return undefined;
 };
 
