@@ -485,6 +485,7 @@ const styles = {
 	) => css`
 		background: ${background};
 		color: ${textColor};
+		bottom: 0px;
 		${limitHeight ? 'max-height: 60vh;' : ''}
 
 		* {
