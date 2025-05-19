@@ -308,8 +308,8 @@ importers:
         specifier: 61.4.0
         version: 61.4.0(aws-cdk-lib@2.189.0)(aws-cdk@2.1007.0)(constructs@10.4.2)
       '@guardian/commercial':
-        specifier: 26.0.0
-        version: 26.0.0(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@8.1.0)(@guardian/identity-auth@6.0.1)(@guardian/libs@0.0.0-canary-20250519114734)(@guardian/source@9.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+        specifier: 26.1.1
+        version: 26.1.1(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@8.1.0)(@guardian/identity-auth@6.0.1)(@guardian/libs@0.0.0-canary-20250519114734)(@guardian/source@9.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
       '@guardian/core-web-vitals':
         specifier: 7.0.0
         version: 7.0.0(@guardian/libs@0.0.0-canary-20250519114734)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3)
@@ -3848,14 +3848,14 @@ packages:
       yargs: 17.7.2
     dev: false
 
-  /@guardian/commercial@26.0.0(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@8.1.0)(@guardian/identity-auth@6.0.1)(@guardian/libs@0.0.0-canary-20250519114734)(@guardian/source@9.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
-    resolution: {integrity: sha512-2t34cGCAKFp5tT658EcSs3Luw1GVcrZLfVw6BFu2VrptAQtByY98vCDZ4zqAtIGK97iGICqXcI7ESjFif/AKkw==}
+  /@guardian/commercial@26.1.1(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@8.1.0)(@guardian/identity-auth@6.0.1)(@guardian/libs@0.0.0-canary-20250519114734)(@guardian/source@9.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
+    resolution: {integrity: sha512-b8EdkpOC6knUYvXFwcGpzbbaDVSyWb5wzm1tmj5AW9uvnp/yEt7vFCon3gP38UZxSXx2EBPurMJg0PKG79FB4g==}
     peerDependencies:
       '@guardian/ab-core': ^8.0.0
       '@guardian/core-web-vitals': ^11.0.0
       '@guardian/identity-auth': ^7.0.0
-      '@guardian/identity-auth-frontend': ^6.0.2
-      '@guardian/libs': ^22.0.0
+      '@guardian/identity-auth-frontend': ^9.0.0
+      '@guardian/libs': ^22.4.0
       '@guardian/source': ^8.0.2
       typescript: ~5.5.4
     dependencies:
