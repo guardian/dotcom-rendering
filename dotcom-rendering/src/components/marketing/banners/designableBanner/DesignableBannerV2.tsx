@@ -530,7 +530,7 @@ const styles = {
 		padding: ${space[3]}px ${space[3]}px ${space[3]}px ${space[3]}px;
 		margin: 0;
 
-		// Define the grid areas
+		/* Define the grid areas */
 		#rr_designable-banner-logo {
 			grid-area: logo;
 		}
@@ -599,8 +599,8 @@ const styles = {
 		${from.leftCol} {
 			background-color: ${neutral[0]};
 			width: 1px;
-			// grid-column: 2;
-			// grid-row: 1 / -1;
+			/* grid-column: 2; */
+			/* grid-row: 1 / -1; */
 			opacity: 0.2;
 			margin-bottom: -${space[6]}px;
 			margin-top: ${space[6]}px;
@@ -609,17 +609,17 @@ const styles = {
 	`,
 	closeButtonOverrides: css`
 		${until.phablet} {
-			// grid-column: 1 / -1;
-			// grid-row: 1;
+			/* grid-column: 1 / -1; */
+			/* grid-row: 1; */
 			justify-self: end;
 			position: sticky;
 			top: 10px;
 		}
 
 		${from.phablet} {
-			// grid-column: 4;
-			// grid-row: 1;
-			// justify-self: start;
+			/* grid-column: 4; */
+			/* grid-row: 1; */
+			/* justify-self: start; */
 			position: sticky;
 			top: 10px;
 			padding-left: ${space[8]}px;
@@ -630,7 +630,7 @@ const styles = {
 			justify-self: start;
 		}
 	`,
-	// hacky change until we can rework the designable banner header with the correct styles
+	/* hacky change until we can rework the designable banner header with the correct styles */
 	headerOverrides: css`
 		/* stylelint-disable declaration-no-important */
 		h2 {
@@ -657,8 +657,8 @@ const styles = {
 		}
 	`,
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
-		// grid-column: 1;
-		// grid-row: ${bannerHasImage ? '1' : '2'};
+		/* grid-column: 1; */
+		/* grid-row: ${bannerHasImage ? '1' : '2'}; */
 		align-self: stretch;
 		justify-self: stretch;
 
@@ -669,8 +669,8 @@ const styles = {
 		}
 
 		${from.phablet} {
-			// grid-column: 2;
-			// grid-row: 1;
+			/* grid-column: 2; */
+			/* grid-row: 1; */
 			background: ${background};
 			max-width: 492px;
 		}
@@ -682,12 +682,12 @@ const styles = {
 		}
 	`,
 	headerWithImageContainer: (background: string) => css`
-		// order: 1;
+		/* order: 1; */
 		max-width: 100%;
 		text-wrap: balance;
 
 		${between.mobile.and.desktop} {
-			// order: 2;
+			/* order: 2; */
 		}
 
 		${from.tablet} {
@@ -695,8 +695,8 @@ const styles = {
 		}
 
 		${from.desktop} {
-			// grid-column: 2;
-			// grid-row: 1;
+			/* grid-column: 2; */
+			/* grid-row: 1; */
 			background: ${background};
 			max-width: 492px;
 			padding-left: ${space[2]}px;
@@ -704,13 +704,13 @@ const styles = {
 		}
 	`,
 	contentContainer: (bannerHasImage: boolean) => css`
-		// grid-row: ${bannerHasImage ? '2' : '4'};
+		/* grid-row: ${bannerHasImage ? '2' : '4'}; */
 		align-self: start;
 
 		${from.phablet} {
-			// grid-column: 2;
+			/* grid-column: 2; */
 			max-width: 492px;
-			// grid-row: 2;
+			/* grid-row: 2; */
 		}
 		${from.desktop} {
 			max-width: 492px;
@@ -719,8 +719,9 @@ const styles = {
 			margin-bottom: ${space[2]}px;
 		}
 	`,
+	/* ctas for use with main images */
 	ctaContentContainer: css`
-		// order: 4;
+		/* order: 4; */
 
 		${until.phablet} {
 			width: 100vw;
@@ -738,15 +739,15 @@ const styles = {
 			}
 		}
 		${from.phablet} {
-			// grid-column: 2;
-			// grid-row: 5;
+			/* grid-column: 2; */
+			/* grid-row: 5; */
 			max-width: 492px;
 		}
 		${from.desktop} {
 			width: 100%;
-			wrap: nowrap;
-			// padding-left: ${space[2]}px;
-			// padding-right: ${space[5]}px;
+			flex-wrap: nowrap;
+			/* padding-left: ${space[2]}px; */
+			/* padding-right: ${space[5]}px; */
 			margin-bottom: ${space[2]}px;
 		}
 	`,
@@ -762,34 +763,34 @@ const styles = {
 		}
 	`,
 	bannerVisualContainer: css`
-		// grid-row: 3;
+		/* grid-row: 3; */
 		margin-left: ${space[2]}px;
 		margin-right: ${space[2]}px;
 
 		${from.phablet} {
-			// grid-column: 2;
-			// grid-row: 3;
+			/* grid-column: 2; */
+			/* grid-row: 3; */
 		}
 
 		${from.desktop} {
 			padding-left: ${space[2]}px;
-			// grid-column: 3;
-			// grid-row: 1 / span 2;
+			/* grid-column: 3; */
+			/* grid-row: 1 / span 2; */
 		}
 	`,
 	threeTierChoiceCardsContainer: css`
-		// order: 3;
+		/* order: 3; */
 		${until.desktop} {
 			margin-top: -${space[6]}px;
 		}
 		${from.phablet} {
-			// grid-column: 2;
+			/* grid-column: 2; */
 			max-width: 492px;
 		}
 		${from.desktop} {
-			// grid-column: 3;
-			// grid-row: 1;
-			// grid-row-end: 3;
+			/* grid-column: 3; */
+			/* grid-row: 1; */
+			/* grid-row-end: 3; */
 			margin: 0 ${space[5]}px;
 		}
 
@@ -812,10 +813,10 @@ const styles = {
 			align-items: center;
 			margin-top: ${space[5]}px;
 			margin-right: ${space[2]}px;
-			// margin-left: 22px;
+			/* margin-left: 22px; */
 		}
 	`,
-	// choice card CTA container
+	/* choice card CTA container */
 	ctaContainer: css`
 		order: 4;
 		display: flex;
