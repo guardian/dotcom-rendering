@@ -155,10 +155,6 @@ export const DesignOneImageOnly: Story = {
 						background: stringToHexColour('052962'),
 						text: stringToHexColour('FFFFFF'),
 					},
-					hover: {
-						background: stringToHexColour('234B8A'),
-						text: stringToHexColour('FFFFFF'),
-					},
 				},
 			},
 		},
@@ -339,10 +335,6 @@ export const WithRemindMeLater: Story = {
 				secondaryCta: {
 					default: {
 						background: stringToHexColour('052962'),
-						text: stringToHexColour('FFFFFF'),
-					},
-					hover: {
-						background: stringToHexColour('234B8A'),
 						text: stringToHexColour('FFFFFF'),
 					},
 				},

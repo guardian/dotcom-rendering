@@ -12,7 +12,7 @@ export function buttonStyles(
 	settings: CtaSettings,
 	cssOverrides?: SerializedStyles,
 ): SerializedStyles {
-	const { default: defaultSettings, mobile, desktop, hover } = settings;
+	const { default: defaultSettings, mobile, desktop } = settings;
 
 	return css`
 		${toCssString(defaultSettings)};
@@ -23,10 +23,6 @@ export function buttonStyles(
 
 		${from.tablet} {
 			${desktop ? toCssString(desktop) : ''};
-		}
-
-		&:hover {
-			${toCssString(hover)}
 		}
 
 		${cssOverrides};
