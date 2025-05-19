@@ -15,11 +15,7 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
-	"Import neutral": {
-		"prefix": "neutral",
-		"body": ["import { neutral } from '@guardian/source/foundations';"],
-		"description": "Import for neutral"
-	},
+
 	"React wrapper component": {
 		"prefix": "rw",
 		"body": [
@@ -32,5 +28,40 @@
 			");"
 		],
 		"description": "React wrapper component"
+	},
+	"stories": {
+		"prefix": "stories",
+		"body": [
+			"import type { Meta, StoryObj } from \"@storybook/react\";",
+			"import { ${TM_FILENAME_BASE/(.*)\\..+$/$1/} } from \"./${TM_FILENAME_BASE/(.*)\\..+$/$1/}\";",
+			"",
+			"const meta = {",
+			"\ttitle: \"Components/$1\",",
+			"\tcomponent: ${TM_FILENAME_BASE/(.*)\\..+$/$1/},",
+			"} satisfies Meta<typeof ${TM_FILENAME_BASE/(.*)\\..+$/$1/}>;",
+			"",
+			"export default meta;",
+			"",
+			"type Story = StoryObj<typeof meta>;",
+			"",
+			"export const FirstStory = {",
+			"\targs: {",
+			"\t\t$0",
+			"\t},",
+			"} satisfies Story;",
+			""
+		],
+		"description": "Stories file boilerplate"
+	},
+	"story": {
+		"prefix": "story",
+		"body": [
+			"export const $1 = {",
+			"\targs: {",
+			"\t\t$0",
+			"\t},",
+			"} satisfies Story;"
+		],
+		"description": "Story boilerplate"
 	}
 }
