@@ -49,6 +49,11 @@ const container = css`
 		padding-left: 60px;
 		padding-right: 20px;
 	}
+
+	b,
+	strong {
+		font-weight: bold;
+	}
 `;
 
 const textContainer = css`
@@ -155,7 +160,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 
 			// For ophan
 			if (submitComponentEvent) {
-				submitComponentEvent(
+				void submitComponentEvent(
 					createViewEventFromTracking(
 						tracking,
 						tracking.campaignCode,
@@ -167,7 +172,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 
 	useEffect(() => {
 		if (submitComponentEvent) {
-			submitComponentEvent(
+			void submitComponentEvent(
 				createInsertEventFromTracking(tracking, tracking.campaignCode),
 			);
 		}

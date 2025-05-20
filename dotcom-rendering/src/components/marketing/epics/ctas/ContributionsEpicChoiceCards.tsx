@@ -4,8 +4,8 @@
  * https://github.com/guardian/support-dotcom-components/blob/a482b35a25ca59f66501c4de02de817046206298/packages/modules/src/modules/epics/ContributionsEpicChoiceCards.tsx
  */
 import { css } from '@emotion/react';
-import type { OphanComponentEvent } from '@guardian/libs';
 import { isUndefined } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { until, visuallyHidden } from '@guardian/source/foundations';
 import { ChoiceCard, ChoiceCardGroup } from '@guardian/source/react-components';
 import { contributionTabFrequencies } from '@guardian/support-dotcom-components';
@@ -50,7 +50,7 @@ const container = css`
 interface EpicChoiceCardProps {
 	selection?: ChoiceCardSelection;
 	setSelectionsCallback: (choiceCardSelection: ChoiceCardSelection) => void;
-	submitComponentEvent?: (event: OphanComponentEvent) => void;
+	submitComponentEvent?: (event: ComponentEvent) => void;
 	currencySymbol: string;
 	amountsTest: SelectedAmountsVariant;
 }

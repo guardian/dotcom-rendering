@@ -68,6 +68,7 @@ type Props = {
 	kind: FootballMatchListPageKind;
 	initialDays: FootballMatches;
 	secondPage?: string;
+	nextPageNoJsUrl?: string;
 	edition: EditionId;
 	renderAds: boolean;
 	pageId: string;
@@ -81,6 +82,7 @@ export const FootballMatchesPageWrapper = ({
 	kind,
 	initialDays,
 	secondPage,
+	nextPageNoJsUrl,
 	edition,
 	renderAds,
 	pageId,
@@ -95,6 +97,7 @@ export const FootballMatchesPageWrapper = ({
 			initialDays={initialDays}
 			now={now}
 			edition={edition}
+			nextPageNoJsUrl={nextPageNoJsUrl}
 			goToCompetitionSpecificPage={goToCompetitionSpecificPage(
 				guardianBaseUrl,
 			)}

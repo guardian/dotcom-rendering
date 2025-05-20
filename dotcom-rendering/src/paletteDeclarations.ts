@@ -5501,12 +5501,21 @@ const mastheadVeggieBurgerBackground: PaletteFunction = () =>
 const mastheadVeggieBurgerBackgroundHover: PaletteFunction = () =>
 	sourcePalette.brandAlt[300];
 
-const mastheadHighlightsBackground: PaletteFunction = () =>
+const mastheadHighlightsBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
-const mastheadHighlightsBorder: PaletteFunction = () =>
-	sourcePalette.neutral[60];
+const mastheadHighlightsBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
 
-const highlightsCardHeadline: PaletteFunction = () => sourcePalette.neutral[7];
+const mastheadHighlightsBorderLight: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+const mastheadHighlightsBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+
+const highlightsCardHeadlineLight: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+const highlightsCardHeadlineDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
 const highlightsCardKickerText: PaletteFunction = (format) => {
 	switch (format.theme) {
 		case Pillar.Opinion:
@@ -5523,6 +5532,25 @@ const highlightsCardKickerText: PaletteFunction = (format) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[200];
 	}
+};
+
+const highlightContainerStartLight: PaletteFunction = () => {
+	return sourcePalette.neutral[97];
+};
+const highlightContainerStartDark: PaletteFunction = () => {
+	return sourcePalette.neutral[10];
+};
+const highlightContainerMidFadeLight: PaletteFunction = () => {
+	return transparentColour(sourcePalette.neutral[97], 0.6);
+};
+const highlightContainerMidFadeDark: PaletteFunction = () => {
+	return transparentColour(sourcePalette.neutral[10], 0.6);
+};
+const highlightContainerEndFadeLight: PaletteFunction = () => {
+	return 'transparent';
+};
+const highlightContainerEndFadeDark: PaletteFunction = () => {
+	return 'transparent';
 };
 
 const pinnedPostBorderLight: PaletteFunction = ({ theme }) => {
@@ -5577,17 +5605,6 @@ const youtubeOverlayKicker: PaletteFunction = ({ theme }: ArticleFormat) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.news[500];
 	}
-};
-
-const highlightContainerStartFade: PaletteFunction = () => {
-	return sourcePalette.neutral[97];
-};
-const highlightContainerMidFade: PaletteFunction = () => {
-	return 'rgba(250, 250, 250, 0.6)';
-};
-
-const highlightContainerEndFade: PaletteFunction = () => {
-	return 'transparent';
 };
 
 const designTagText: PaletteFunction = ({ theme }) => {
@@ -5753,7 +5770,7 @@ const editorialButtonText: PaletteFunction = (format: ArticleFormat) => {
 	}
 };
 
-const featureCardKickerTextLight: PaletteFunction = ({ theme }) => {
+const featureCardKickerText: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
 		case ArticleSpecial.SpecialReport:
@@ -6521,31 +6538,19 @@ const paletteColours = {
 	},
 	'--feature-card-background': {
 		light: () => sourcePalette.neutral[93],
-		dark: () => sourcePalette.neutral[38],
+		dark: () => sourcePalette.neutral[93],
 	},
 	'--feature-card-footer-text': {
 		light: () => sourcePalette.neutral[86],
-		dark: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--feature-card-headline': {
 		light: () => sourcePalette.neutral[97],
-		dark: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[97],
 	},
 	'--feature-card-kicker-text': {
-		light: featureCardKickerTextLight,
-		dark: () => sourcePalette.neutral[20],
-	},
-	'--feature-card-play-icon-background': {
-		light: () => sourcePalette.neutral[7],
-		dark: () => sourcePalette.neutral[7],
-	},
-	'--feature-card-play-icon-border': {
-		light: () => sourcePalette.neutral[60],
-		dark: () => sourcePalette.neutral[60],
-	},
-	'--feature-card-play-icon-fill': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[100],
+		light: featureCardKickerText,
+		dark: featureCardKickerText,
 	},
 	'--feature-card-trail-text': {
 		light: () => sourcePalette.neutral[86],
@@ -6645,32 +6650,32 @@ const paletteColours = {
 		dark: headlineMatchTextDark,
 	},
 	'--highlights-card-headline': {
-		light: highlightsCardHeadline,
-		dark: highlightsCardHeadline,
+		light: highlightsCardHeadlineLight,
+		dark: highlightsCardHeadlineDark,
 	},
 	'--highlights-card-kicker-text': {
 		light: highlightsCardKickerText,
 		dark: highlightsCardKickerText,
 	},
 	'--highlights-container-background': {
-		light: mastheadHighlightsBackground,
-		dark: mastheadHighlightsBackground,
+		light: mastheadHighlightsBackgroundLight,
+		dark: mastheadHighlightsBackgroundDark,
 	},
 	'--highlights-container-border': {
-		light: mastheadHighlightsBorder,
-		dark: mastheadHighlightsBorder,
+		light: mastheadHighlightsBorderLight,
+		dark: mastheadHighlightsBorderDark,
 	},
 	'--highlights-container-end-fade': {
-		light: highlightContainerEndFade,
-		dark: highlightContainerEndFade,
+		light: highlightContainerEndFadeLight,
+		dark: highlightContainerEndFadeDark,
 	},
 	'--highlights-container-mid-fade': {
-		light: highlightContainerMidFade,
-		dark: highlightContainerMidFade,
+		light: highlightContainerMidFadeLight,
+		dark: highlightContainerMidFadeDark,
 	},
 	'--highlights-container-start-fade': {
-		light: highlightContainerStartFade,
-		dark: highlightContainerStartFade,
+		light: highlightContainerStartLight,
+		dark: highlightContainerStartDark,
 	},
 	'--image-title-background': {
 		light: imageTitleBackground,
@@ -6776,6 +6781,18 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[100],
 	},
+	'--loop-video-audio-icon-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
+	'--loop-video-audio-icon-border': {
+		light: () => sourcePalette.neutral[60],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--loop-video-progress-bar-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
 	'--loop-video-progress-bar-value': {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[86],
@@ -6867,6 +6884,18 @@ const paletteColours = {
 	'--multi-byline-non-linked-text': {
 		light: multiBylineNonLinkedTextLight,
 		dark: multiBylineNonLinkedTextDark,
+	},
+	'--narrow-play-icon-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
+	'--narrow-play-icon-border': {
+		light: () => sourcePalette.neutral[60],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--narrow-play-icon-fill': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
 	},
 	'--nav-reader-revenue-link-text': {
 		light: navReaderRevenueLinkText,
@@ -7416,25 +7445,65 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[20],
 		dark: () => sourcePalette.neutral[73],
 	},
+	'--uk-elections-alba': {
+		light: () => '#2F3192',
+		dark: () => '#3C3EB9',
+	},
+	'--uk-elections-alliance': {
+		light: () => '#C9BB19',
+		dark: () => '#AB9F00',
+	},
 	'--uk-elections-conservative': {
 		light: () => sourcePalette.sport[400],
 		dark: () => '#009AE1',
+	},
+	'--uk-elections-democratic-unionist-party': {
+		light: () => '#8B0000',
+		dark: () => '#B23C2D',
+	},
+	'--uk-elections-green': {
+		light: () => '#39A566',
+		dark: () => '#39A566',
 	},
 	'--uk-elections-labour': {
 		light: () => sourcePalette.news[400],
 		dark: () => '#DC2E1C',
 	},
-	'--uk-elections-lib-dem': {
+	'--uk-elections-liberal-democrat': {
 		light: () => sourcePalette.opinion[450],
 		dark: () => sourcePalette.opinion[500],
 	},
-	'--uk-elections-reform': {
+	'--uk-elections-others': {
+		light: () => '#848484',
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--uk-elections-plaid-cymru': {
+		light: () => '#135E58',
+		dark: () => '#37716B',
+	},
+	'--uk-elections-reform-uk': {
 		light: () => '#3DBBE2',
 		dark: () => '#3DBBE2',
 	},
-	'--uk-elections-snp': {
+	'--uk-elections-scottish-national-party': {
 		light: () => '#F5DC00',
 		dark: () => '#F5DC00',
+	},
+	'--uk-elections-sinn-féin': {
+		light: () => '#22874D',
+		dark: () => '#22874D',
+	},
+	'--uk-elections-social-democratic-and-labour-party': {
+		light: () => '#23B4A9',
+		dark: () => '#28B8AD',
+	},
+	'--uk-elections-ulster-unionist-party': {
+		light: () => '#004975',
+		dark: () => '#346896',
+	},
+	'--uk-elections-workers-party-of-britain': {
+		light: () => '#7D0068',
+		dark: () => '#8C136E',
 	},
 	'--us-elections-democrats': {
 		light: () => '#093CA3',
@@ -7443,6 +7512,18 @@ const paletteColours = {
 	'--us-elections-republicans': {
 		light: () => sourcePalette.news[400],
 		dark: () => '#DC2E1C',
+	},
+	'--values-with-change-border': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--values-with-change-change': {
+		light: () => '#606060',
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--values-with-change-value': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--versus-banner-background': {
 		light: () => sourcePalette.neutral[46],

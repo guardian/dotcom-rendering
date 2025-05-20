@@ -2,12 +2,14 @@ import { css } from '@emotion/react';
 import {
 	article17,
 	between,
+	from,
 	headlineBold17,
 	headlineBold24,
 	headlineBold28,
 	space,
 	textEgyptian17,
 	textSansBold17,
+	textSansBold20,
 	until,
 } from '@guardian/source/foundations';
 import { type EditionId, getEditionFromId } from '../lib/edition';
@@ -42,6 +44,9 @@ const primaryTitleStyles = css`
 `;
 const secondaryTitleStyles = css`
 	${textSansBold17};
+	${from.tablet} {
+		${textSansBold20};
+	}
 `;
 
 const headerStylesWithUrl = css`
