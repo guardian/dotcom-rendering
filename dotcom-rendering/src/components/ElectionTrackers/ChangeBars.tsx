@@ -1,11 +1,10 @@
-import { css } from '@emotion/react';
 import {
 	from,
-	headlineBold17,
-	headlineBold24,
-	headlineBold42,
-	headlineMedium17,
-	headlineMedium20,
+	headlineBold17Object,
+	headlineBold24Object,
+	headlineBold42Object,
+	headlineMedium17Object,
+	headlineMedium20Object,
 } from '@guardian/source/foundations';
 import { palette } from '../../palette';
 
@@ -131,7 +130,7 @@ const Name = ({
 }) => (
 	<div
 		css={{
-			['&']: css(headlineMedium20),
+			...headlineMedium20Object,
 			color: palette('--change-bars-text'),
 			display: 'none',
 			[from.desktop]: {
@@ -150,10 +149,10 @@ const Abbreviation = ({
 }) => (
 	<div
 		css={{
-			['&']: css(headlineMedium17),
+			...headlineMedium17Object,
 			color: palette('--change-bars-text'),
 			flexBasis: 50,
-			[from.mobileMedium]: css(headlineMedium20),
+			[from.mobileMedium]: headlineMedium20Object,
 			[from.phablet]: {
 				flexBasis: 'unset',
 			},
@@ -226,9 +225,9 @@ const ChangeText = ({ change }: { change: Change['change'] }) => (
 	>
 		<div
 			css={{
-				['&']: css(headlineBold17),
-				[from.mobileMedium]: css(headlineBold24),
-				[from.desktop]: css(headlineBold42),
+				...headlineBold17Object,
+				[from.mobileMedium]: headlineBold24Object,
+				[from.desktop]: headlineBold42Object,
 				paddingBottom: '0.2em',
 				color: palette('--change-bars-text'),
 			}}
