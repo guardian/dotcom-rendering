@@ -7445,25 +7445,65 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[20],
 		dark: () => sourcePalette.neutral[73],
 	},
+	'--uk-elections-alba': {
+		light: () => '#2F3192',
+		dark: () => '#3C3EB9',
+	},
+	'--uk-elections-alliance': {
+		light: () => '#C9BB19',
+		dark: () => '#AB9F00',
+	},
 	'--uk-elections-conservative': {
 		light: () => sourcePalette.sport[400],
 		dark: () => '#009AE1',
+	},
+	'--uk-elections-democratic-unionist-party': {
+		light: () => '#8B0000',
+		dark: () => '#B23C2D',
+	},
+	'--uk-elections-green': {
+		light: () => '#39A566',
+		dark: () => '#39A566',
 	},
 	'--uk-elections-labour': {
 		light: () => sourcePalette.news[400],
 		dark: () => '#DC2E1C',
 	},
-	'--uk-elections-lib-dem': {
+	'--uk-elections-liberal-democrat': {
 		light: () => sourcePalette.opinion[450],
 		dark: () => sourcePalette.opinion[500],
 	},
-	'--uk-elections-reform': {
+	'--uk-elections-others': {
+		light: () => '#848484',
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--uk-elections-plaid-cymru': {
+		light: () => '#135E58',
+		dark: () => '#37716B',
+	},
+	'--uk-elections-reform-uk': {
 		light: () => '#3DBBE2',
 		dark: () => '#3DBBE2',
 	},
-	'--uk-elections-snp': {
+	'--uk-elections-scottish-national-party': {
 		light: () => '#F5DC00',
 		dark: () => '#F5DC00',
+	},
+	'--uk-elections-sinn-féin': {
+		light: () => '#22874D',
+		dark: () => '#22874D',
+	},
+	'--uk-elections-social-democratic-and-labour-party': {
+		light: () => '#23B4A9',
+		dark: () => '#28B8AD',
+	},
+	'--uk-elections-ulster-unionist-party': {
+		light: () => '#004975',
+		dark: () => '#346896',
+	},
+	'--uk-elections-workers-party-of-britain': {
+		light: () => '#7D0068',
+		dark: () => '#8C136E',
 	},
 	'--us-elections-democrats': {
 		light: () => '#093CA3',
@@ -7472,6 +7512,18 @@ const paletteColours = {
 	'--us-elections-republicans': {
 		light: () => sourcePalette.news[400],
 		dark: () => '#DC2E1C',
+	},
+	'--values-with-change-border': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--values-with-change-change': {
+		light: () => '#606060',
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--values-with-change-value': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--witness-title-author': {
 		light: witnessTitleAuthor,
