@@ -515,6 +515,7 @@ const styles = {
 
 		* {
 			box-sizing: border-box;
+			/* outline: 1px solid limegreen; */
 		}
 		${from.phablet} {
 			border-top: 1px solid ${neutral[0]};
@@ -523,15 +524,19 @@ const styles = {
 		strong {
 			font-weight: bold;
 		}
-		padding: 0;
+		padding: 0 auto;
 	`,
 	layoutOverrides: (cardsImageOrSpaceTemplateString: string) => css`
+		margin: 0 119px;
+		padding: 0 20px;
+		max-width: 1300px;
 		display: grid;
+		column-gap: 8px;
 		background: inherit;
 		position: relative;
-		padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
+		/* padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px; */
+		padding: 0;
 		bottom: 0px;
-		margin: 0;
 
 		/* Define the grid areas */
 		#rr_designable-banner-logo {
@@ -566,33 +571,54 @@ const styles = {
 
 		${from.phablet} {
 			padding: ${space[3]}px ${space[3]}px ${space[6]}px ${space[3]}px;
-			width: 100%;
+			/* max-width: 660px; */
 			margin: 0 auto;
-			/* grid-template-columns: 1fr auto 1fr; */
+			grid-template-columns: 1fr auto 1fr;
+			grid-template-areas:
+				'. close-button .'
+				'. copy-container .'
+				'. ${cardsImageOrSpaceTemplateString} .'
+				'. cta-container' .;
+		}
+
+		${from.tablet} {
+			/* max-width: 740px; */
+			padding: ${space[3]}px ${space[3]}px ${space[6]}px ${space[3]}px;
+			margin: 0 auto;
+			grid-template-columns: 1fr auto auto auto;
+			grid-template-areas:
+				'. copy-container . close-button'
+				'. ${cardsImageOrSpaceTemplateString} . .'
+				'. cta-container' . .;
 		}
 
 		${from.desktop} {
-			/* width: 100vw; */
+			/* min-width: 980px;	
+			max-width: 1139.9px; */
 			padding: ${space[3]}px ${space[8]}px ${space[6]}px ${space[3]}px;
-			grid-template-columns: 1fr auto 0.3fr;
+			grid-template-columns: 460px 380px auto;
 			grid-template-rows: auto auto;
 
 			grid-template-areas:
 				'copy-container ${cardsImageOrSpaceTemplateString} close-button'
-				'cta-container . .';
-
-			/* margin: 0 auto; */
+				'cta-container ${cardsImageOrSpaceTemplateString} .'; /* should check if image exists *
+			grid-gap: 10px;
 		}
 		${from.leftCol} {
-			max-width: 1299px;
-			/* margin: 0 auto; */
-			grid-template-columns: auto 1px 460px 380px auto;
+			/* min-width: 1140px;
+			 max-width: 1300px; */
+			grid-template-columns: auto 1px max(460px) 380px auto;
+			/* grid-template-columns: auto 1px 460px 380px auto; */
+			grid-gap: 10px;
 			grid-template-areas:
 				'logo vert-line copy-container ${cardsImageOrSpaceTemplateString} close-button'
-				'. vert-line cta-container . .';
+				'.    vert-line cta-container   .                                 .';
+			/* should check if image exists 
+				investigate why logo dropping below just before 1300 */
 		}
 		${from.wide} {
-			grid-template-columns: auto 1px 460px 485px auto;
+			max-width: 1300px;
+			grid-template-columns: auto 1px max(420px) 400px auto;
 			grid-template-areas:
 				'logo vert-line copy-container ${cardsImageOrSpaceTemplateString} close-button'
 				'. vert-line cta-container . .';
@@ -607,7 +633,7 @@ const styles = {
 			opacity: 0.2;
 			margin-bottom: -${space[6]}px;
 			margin-top: ${space[6]}px;
-			margin-right: ${space[2]}px;
+			/* margin-right: ${space[2]}px; */
 		}
 	`,
 	closeButtonOverrides: css`
@@ -629,8 +655,8 @@ const styles = {
 		}
 
 		${from.desktop} {
-			padding-left: ${space[1]}px;
-			justify-self: start;
+			padding-right: 0;
+			justify-self: end;
 		}
 	`,
 	/* hacky change until we can rework the designable banner header with the correct styles */
@@ -717,6 +743,7 @@ const styles = {
 		}
 		${from.desktop} {
 			max-width: 492px;
+			margin-top: ${space[3]}px;
 			padding-left: ${space[2]}px;
 			padding-right: ${space[5]}px;
 			margin-bottom: ${space[2]}px;
@@ -794,7 +821,7 @@ const styles = {
 			/* grid-column: 3; */
 			/* grid-row: 1; */
 			/* grid-row-end: 3; */
-			margin: 0 ${space[5]}px;
+			margin: 0 ${space[3]}px;
 		}
 
 		${between.desktop.and.wide} {
@@ -803,6 +830,7 @@ const styles = {
 
 		${from.wide} {
 			max-width: 485px;
+			align-self: start;
 		}
 	`,
 	guardianLogoContainer: css`
@@ -812,7 +840,7 @@ const styles = {
 			display: flex;
 			width: 128px;
 			height: 41px;
-			justify-content: center;
+			justify-content: end;
 			align-items: center;
 			margin-top: ${space[5]}px;
 			margin-right: ${space[2]}px;
@@ -821,7 +849,7 @@ const styles = {
 	`,
 	/* choice card CTA container */
 	ctaContainer: css`
-		order: 4;
+		/ order: 4; /
 		display: flex;
 		align-items: center;
 		flex-direction: column;
