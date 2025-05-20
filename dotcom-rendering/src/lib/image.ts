@@ -37,6 +37,8 @@ const getServiceFromUrl = (url: URL): string => {
 	}
 };
 
+const isCodeGridUrl = (url: URL) => url.hostname === 'media.guimcode.co.uk';
+
 /**
  * Generates a URL for calling the Fastly Image Optimiser.
  *
@@ -62,8 +64,6 @@ export const generateImageURL = ({
 		? `,offset-x${cropOffset.x},offset-y${cropOffset.y}`
 		: ``;
 	const crop = `${aspectRatio}${offset}`;
-	// In CODE, we do not generate optimised replacement images
-	if (url.hostname === 's3-eu-west-1.amazonaws.com') return url.href;
 
 	const params = new URLSearchParams({
 		width: imageWidth.toString(),
@@ -72,7 +72,9 @@ export const generateImageURL = ({
 		crop,
 	});
 
-	return `https://i.guim.co.uk/img/${getServiceFromUrl(url)}${
+	const domain = isCodeGridUrl(url) ? 'i.guimcode.co.uk' : 'i.guim.co.uk';
+
+	return `https://${domain}/img/${getServiceFromUrl(url)}${
 		url.pathname
 	}?${params.toString()}`;
 };

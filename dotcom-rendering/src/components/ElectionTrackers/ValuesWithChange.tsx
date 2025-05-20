@@ -1,9 +1,8 @@
-import { css } from '@emotion/react';
 import {
 	from,
-	headlineBold17,
-	headlineBold24,
-	headlineMedium20,
+	headlineBold17Object,
+	headlineBold24Object,
+	headlineMedium20Object,
 	space,
 } from '@guardian/source/foundations';
 import { palette } from '../../palette';
@@ -144,7 +143,7 @@ const ValueText = ({
 	<span
 		aria-label={valueDescription}
 		css={{
-			['&']: css(headlineBold24),
+			...headlineBold24Object,
 			lineHeight: 1,
 		}}
 	>
@@ -155,7 +154,7 @@ const ValueText = ({
 const Name = ({ name }: { name: ValueWithChange['name'] }) => (
 	<div
 		css={{
-			['&']: css(headlineMedium20),
+			...headlineMedium20Object,
 			lineHeight: 1.2,
 		}}
 	>
@@ -180,7 +179,7 @@ const Change = ({
 		<span
 			aria-label={changeDescription}
 			css={{
-				['&']: css(headlineBold17),
+				...headlineBold17Object,
 				lineHeight: 1,
 				color: palette('--values-with-change-change'),
 			}}

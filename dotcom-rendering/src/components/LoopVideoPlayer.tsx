@@ -31,9 +31,21 @@ const audioButtonStyles = css`
 	background: none;
 	padding: 0;
 	position: absolute;
-	bottom: ${space[8]}px;
-	right: ${space[8]}px;
+	/* Take into account the progress bar height */
+	bottom: ${space[3]}px;
+	right: ${space[2]}px;
 	cursor: pointer;
+`;
+
+const audioIconContainerStyles = css`
+	width: ${space[8]}px;
+	height: ${space[8]}px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: ${palette('--loop-video-audio-icon-background')};
+	border-radius: 50%;
+	border: 1px solid ${palette('--loop-video-audio-icon-border')};
 `;
 
 type Props = {
@@ -136,9 +148,9 @@ export const LoopVideoPlayer = forwardRef(
 					<source src={src} type="video/mp4" />
 					{fallbackImageComponent}
 				</video>
-				{ref && 'current' in ref && ref.current && (
+				{ref && 'current' in ref && ref.current && isPlayable && (
 					<>
-						{isPlayable && !isPlaying && (
+						{!isPlaying && (
 							<button
 								type="button"
 								onClick={handleClick}
@@ -161,14 +173,16 @@ export const LoopVideoPlayer = forwardRef(
 								}}
 								css={audioButtonStyles}
 							>
-								<AudioIcon
-									size="small"
-									theme={{
-										fill: palette(
-											'--loop-video-audio-icon',
-										),
-									}}
-								/>
+								<div css={audioIconContainerStyles}>
+									<AudioIcon
+										size="xsmall"
+										theme={{
+											fill: palette(
+												'--loop-video-audio-icon',
+											),
+										}}
+									/>
+								</div>
 							</button>
 						)}
 					</>

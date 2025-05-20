@@ -4,7 +4,7 @@
  * https://github.com/guardian/support-dotcom-components/blob/a482b35a25ca59f66501c4de02de817046206298/packages/modules/src/modules/epics/ContributionsEpicSignInCta.tsx
  */
 import { css } from '@emotion/react';
-import type { OphanComponentEvent } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { articleBold17, neutral } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
 import type { ReactComponent } from '../lib/ReactComponent';
@@ -23,7 +23,7 @@ const signInUrl =
 	'https://profile.theguardian.com/signin?utm_source=gdnwb&utm_medium=banner&utm_campaign=SigninEPIC_Existing&CMP_TU=mrtn&CMP_BUNIT=subs';
 
 interface ContributionsEpicSignInProps {
-	submitComponentEvent?: (event: OphanComponentEvent) => void;
+	submitComponentEvent?: (event: ComponentEvent) => void;
 }
 
 export const ContributionsEpicSignInCta: ReactComponent<

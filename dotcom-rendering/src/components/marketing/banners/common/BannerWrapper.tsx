@@ -87,6 +87,7 @@ const withBannerData =
 			separateArticleCount,
 			separateArticleCountSettings,
 			choiceCardAmounts,
+			choiceCardsSettings,
 			design,
 			bannerChannel,
 			abandonedBasket,
@@ -99,7 +100,7 @@ const withBannerData =
 
 		useEffect(() => {
 			if (hasBeenSeen && submitComponentEvent) {
-				submitComponentEvent(
+				void submitComponentEvent(
 					createViewEventFromTracking(
 						tracking,
 						tracking.campaignCode,
@@ -110,7 +111,7 @@ const withBannerData =
 
 		useEffect(() => {
 			if (submitComponentEvent) {
-				submitComponentEvent(
+				void submitComponentEvent(
 					createInsertEventFromTracking(
 						tracking,
 						tracking.campaignCode,
@@ -268,7 +269,7 @@ const withBannerData =
 					componentId,
 				);
 				if (submitComponentEvent) {
-					submitComponentEvent(componentClickEvent);
+					void submitComponentEvent(componentClickEvent);
 				}
 				if (close) {
 					onClose();
@@ -326,6 +327,7 @@ const withBannerData =
 					separateArticleCount,
 					separateArticleCountSettings,
 					choiceCardAmounts,
+					choiceCardsSettings,
 					tracking,
 					submitComponentEvent,
 					design,

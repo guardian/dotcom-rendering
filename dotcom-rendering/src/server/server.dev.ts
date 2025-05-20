@@ -1,4 +1,6 @@
 import { type Handler, Router } from 'express';
+import { pages } from '../devServer/routers/pages';
+import { targets } from '../devServer/routers/targets';
 import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
 import { handleAMPArticle } from './handler.article.amp';
 import {
@@ -90,32 +92,34 @@ const redirects: Handler = (req, res, next) => {
 	next();
 };
 
-const pages = Router();
+const renderer = Router();
 // populates req.body with the content data from a production
 // URL if req.params.url is present
-pages.use(getContentFromURLMiddleware);
-pages.get('/Article/*', handleArticle);
-pages.get('/ArticleJson/*', handleArticleJson);
-pages.get('/AMPArticle/*', handleAMPArticle);
-pages.get('/Interactive/*', handleInteractive);
-pages.get('/AMPInteractive/*', handleAMPArticle);
-pages.get('/Blocks/*', handleBlocks);
-pages.get('/Front/*', handleFront);
-pages.get('/FrontJSON/*', handleFrontJson);
-pages.get('/TagPage/*', handleTagPage);
-pages.get('/TagPageJSON/*', handleTagPageJson);
-pages.get('/EmailNewsletters/*', handleAllEditorialNewslettersPage);
-pages.get('/AppsArticle/*', handleAppsArticle);
-pages.get('/AppsInteractive/*', handleAppsInteractive);
-pages.get('/AppsBlocks/*', handleAppsBlocks);
-pages.get('/EditionsCrossword/*', handleEditionsCrossword);
-pages.get('/FootballMatchListPage/*', handleFootballMatchListPage);
-pages.get('/FootballTablesPage/*', handleFootballTablesPage);
-pages.get('/CricketMatchPage/*', handleCricketMatchPage);
-pages.get('/FootballMatchSummaryPage/*', handleFootballMatchPage);
+renderer.use(getContentFromURLMiddleware);
+renderer.get('/Article/*', handleArticle);
+renderer.get('/ArticleJson/*', handleArticleJson);
+renderer.get('/AMPArticle/*', handleAMPArticle);
+renderer.get('/Interactive/*', handleInteractive);
+renderer.get('/AMPInteractive/*', handleAMPArticle);
+renderer.get('/Blocks/*', handleBlocks);
+renderer.get('/Front/*', handleFront);
+renderer.get('/FrontJSON/*', handleFrontJson);
+renderer.get('/TagPage/*', handleTagPage);
+renderer.get('/TagPageJSON/*', handleTagPageJson);
+renderer.get('/EmailNewsletters/*', handleAllEditorialNewslettersPage);
+renderer.get('/AppsArticle/*', handleAppsArticle);
+renderer.get('/AppsInteractive/*', handleAppsInteractive);
+renderer.get('/AppsBlocks/*', handleAppsBlocks);
+renderer.get('/EditionsCrossword/*', handleEditionsCrossword);
+renderer.get('/FootballMatchListPage/*', handleFootballMatchListPage);
+renderer.get('/FootballTablesPage/*', handleFootballTablesPage);
+renderer.get('/CricketMatchPage/*', handleCricketMatchPage);
+renderer.get('/FootballMatchSummaryPage/*', handleFootballMatchPage);
 
 const router = Router();
-router.use(pages);
+router.use('/pages', pages);
+router.use('/targets', targets);
+router.use(renderer);
 router.use(redirects);
 
 // see https://www.npmjs.com/package/webpack-hot-server-middleware
