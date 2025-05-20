@@ -3,66 +3,95 @@ import { stringify } from '../lib.ts';
 
 const MAX_MVT_GROUPS = 1000;
 
+type MVTGroups = Record<string, string[]>;
+
 /**
- * convert ab tests to array of test groups, repeated for each group size
+ * Convert an ab test space to mvt key values
  *
- * @param tests
- * @returns
+ * example output:
+ * mvt:0 - Test1:control
+ * mvt:1 - Test1:control
+ * mvt:2 - Test1:variant
+ * mvt:3 - Test1:variant
  */
-const testsToArray = (tests: ABTest[]): string[] =>
-	tests.reduce<string[]>((acc, test) => {
-		const groups = test.groups.reduce<string[]>((groupAcc, group) => {
-			const mvtGroups = Array.from(
-				{ length: (test.size / test.groups.length) * 1000 },
-				() => `${test.name}:${group}`,
+const testSpaceToMVTs = (tests: ABTest[]): Record<string, string> =>
+	tests
+		.sort((a, b) => a.audienceOffset ?? 0 - (b.audienceOffset ?? 0))
+		.reduce<Record<string, string>>((acc, test) => {
+			const testOffset = (test.audienceOffset ?? 0) * MAX_MVT_GROUPS;
+			const groups = test.groups.reduce<Record<string, string>>(
+				(groupAcc, group, groupIndex) => {
+					const groupSize = Math.floor(
+						(test.audienceSize / test.groups.length) *
+							MAX_MVT_GROUPS,
+					);
+					const groupOffset = testOffset + groupSize * groupIndex;
+
+					const groupMVTs = Array.from(
+						{
+							length: groupSize,
+						},
+						(_, i) => [
+							`mvt:${i + groupOffset}`,
+							`${test.name}:${group}`,
+						],
+					);
+
+					return {
+						...groupAcc,
+						...Object.fromEntries(groupMVTs),
+					};
+				},
+				{},
 			);
-			groupAcc.push(...mvtGroups);
-			return groupAcc;
-		}, []);
-		acc.push(...groups);
-		return acc;
-	}, []);
 
-const abTestsToMVTs = (
-	abTests: ABTest[],
-): Record<`mvt:${number}`, string[]> => {
+			return {
+				...acc,
+				...groups,
+			};
+		}, {});
+
+/**
+ * Convert an array of ab tests to mvt key values
+ * @param abTests - Array of ABTest objects
+ * @returns MVTGroups - Object with mvt keys and their corresponding test groups
+ */
+const abTestsToMVTs = (abTests: ABTest[]): MVTGroups => {
 	const primaryTests = abTests.filter(
-		(test) => test.testSpace === undefined || test.testSpace === 0,
+		(test) => test.audienceSpace === undefined || test.audienceSpace === 0,
 	);
-	const secondaryTests = abTests.filter((test) => test.testSpace === 1);
+	const secondaryTests = abTests.filter((test) => test.audienceSpace === 1);
 
-	const primaryMVTGroups = testsToArray(primaryTests);
-	const secondaryMVTGroups = testsToArray(secondaryTests);
+	const primaryMVTGroups = testSpaceToMVTs(primaryTests);
+	const secondaryMVTGroups = testSpaceToMVTs(secondaryTests);
 
-	if (primaryMVTGroups.length > MAX_MVT_GROUPS) {
+	if (Object.keys(primaryMVTGroups).length > MAX_MVT_GROUPS) {
 		throw new Error(
 			`Test space 0 test sizes add up to > 100%, try moving the test to another space.`,
 		);
 	}
 
-	if (secondaryMVTGroups.length > MAX_MVT_GROUPS) {
+	if (Object.keys(secondaryMVTGroups).length > MAX_MVT_GROUPS) {
 		throw new Error(`Test space 1 test sizes add up to > 100%.`);
 	}
 
-	const mvtKVs: Record<`mvt:${number}`, string[]> = {};
+	const result: MVTGroups = {};
 
-	for (let i = 0; i < MAX_MVT_GROUPS; i++) {
-		if (primaryMVTGroups[i]) {
-			mvtKVs[`mvt:${i}`] = [primaryMVTGroups[i]];
+	// Process primary tests first
+	Object.entries(primaryMVTGroups).forEach(([mvtKey, testValue]) => {
+		result[mvtKey] = [testValue];
+	});
+
+	// Add secondary tests to existing slots
+	Object.entries(secondaryMVTGroups).forEach(([mvtKey, testValue]) => {
+		if (result[mvtKey]) {
+			result[mvtKey].push(testValue);
+		} else {
+			result[mvtKey] = [testValue];
 		}
-	}
+	});
 
-	for (let i = 0; i < MAX_MVT_GROUPS; i++) {
-		if (secondaryMVTGroups[i]) {
-			if (mvtKVs[`mvt:${i}`]) {
-				mvtKVs[`mvt:${i}`].push(secondaryMVTGroups[i]);
-			} else {
-				mvtKVs[`mvt:${i}`] = [secondaryMVTGroups[i]];
-			}
-		}
-	}
-
-	return mvtKVs;
+	return result;
 };
 
 const buildMVTDict = (tests: ABTest[]) => {
@@ -73,4 +102,4 @@ const buildMVTDict = (tests: ABTest[]) => {
 	}));
 };
 
-export { buildMVTDict, testsToArray, abTestsToMVTs };
+export { buildMVTDict, testSpaceToMVTs, abTestsToMVTs };

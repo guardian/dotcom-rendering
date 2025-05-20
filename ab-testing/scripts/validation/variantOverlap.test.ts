@@ -11,11 +11,39 @@ Deno.test('noVariantOverlap - disallows variant overlap', () => {
 		expirationDate: new Date(),
 		type: 'client',
 		highImpact: false,
-		size: 100 / 100,
+		audienceSize: 100 / 100,
 		groups: ['control', 'variant'],
 	};
 
 	assertThrows(() => noVariantOverlap([overlapTest, overlapTest]));
+});
+
+Deno.test('noVariantOverlap - disallows partial overlap', () => {
+	const overlapTest1: ABTest = {
+		name: 'commercial-big-overlap',
+		description: 'Overlap the variants',
+		owners: ['commercial.dev@guardian.co.uk'],
+		status: 'ON',
+		expirationDate: new Date(),
+		type: 'client',
+		highImpact: false,
+		audienceSize: 50 / 100,
+		groups: ['control', 'variant'],
+	};
+
+	const overlapTest2: ABTest = {
+		name: 'commercial-big-overlap',
+		description: 'Overlap the variants',
+		owners: ['commercial.dev@guardian.co.uk'],
+		status: 'ON',
+		expirationDate: new Date(),
+		type: 'client',
+		highImpact: false,
+		audienceSize: 50 / 100,
+		audienceOffset: 0.25,
+		groups: ['control', 'variant'],
+	};
+	assertThrows(() => noVariantOverlap([overlapTest1, overlapTest2]));
 });
 
 Deno.test(
@@ -29,9 +57,9 @@ Deno.test(
 			expirationDate: new Date(),
 			type: 'client',
 			highImpact: false,
-			size: 100 / 100,
+			audienceSize: 100 / 100,
 			groups: ['control', 'variant'],
-			testSpace: 1,
+			audienceSpace: 1,
 		};
 
 		const secondaryTest: ABTest = {
@@ -42,26 +70,10 @@ Deno.test(
 			expirationDate: new Date(),
 			type: 'client',
 			highImpact: false,
-			size: 100 / 100,
+			audienceSize: 100 / 100,
 			groups: ['control', 'variant'],
 		};
 
 		assertEquals(noVariantOverlap([primaryTest, secondaryTest]), true);
 	},
 );
-
-Deno.test('noVariantOverlap - allows tests with no variant overlap', () => {
-	const overlapTest: ABTest = {
-		name: 'commercial-no-overlap',
-		description: 'Do not overlap the variants',
-		owners: ['commercial.dev@guardian.co.uk'],
-		status: 'ON',
-		expirationDate: new Date(),
-		type: 'client',
-		highImpact: false,
-		size: 10 / 100,
-		groups: ['control', 'variant'],
-	};
-
-	assertEquals(noVariantOverlap([overlapTest, overlapTest]), true);
-});

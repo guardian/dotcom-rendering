@@ -20,11 +20,13 @@ export type ABTest = {
 	 */
 	status: 'ON' | 'OFF';
 	/** The size of the test, all variants will be divided equally to fit */
-	size: number;
-	/** Test group definition */
-	groups: string[];
+	audienceSize: number;
+	/** The offset of the test, adjust to ensure that tests do not overlap */
+	audienceOffset?: number;
 	/**
 	 * Defaults to 0, all the tests in a test space must add up to 100%
 	 **/
-	testSpace?: 0 | 1;
+	audienceSpace?: 0 | 1;
+	/** Test group definition */
+	groups: string[];
 };

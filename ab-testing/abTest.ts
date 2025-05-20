@@ -30,7 +30,7 @@ export const ABTests: ABTest[] = [
 		expirationDate: new Date('2025-06-30'),
 		type: 'client',
 		highImpact: false,
-		size: 10 / 100,
+		audienceSize: 10 / 100,
 		groups: ['control', 'variant'],
 	},
 	{
@@ -42,7 +42,8 @@ export const ABTests: ABTest[] = [
 		expirationDate: new Date('2025-06-30'),
 		type: 'client',
 		highImpact: false,
-		size: 20 / 100,
+		audienceSize: 20 / 100,
+		audienceOffset: 10,
 		groups: ['control', 'variant'],
 	},
 	// Example server side AB test definition
@@ -58,9 +59,9 @@ export const ABTests: ABTest[] = [
 		expirationDate: new Date('2025-06-02'),
 		type: 'server',
 		highImpact: false,
-		size: 100 / 100,
+		audienceSize: 100 / 100,
 		groups: ['control', 'variant'],
-		testSpace: 1,
+		audienceSpace: 1,
 	},
 	{
 		name: 'commercial-some-test-2',
@@ -74,7 +75,8 @@ export const ABTests: ABTest[] = [
 		expirationDate: new Date('2025-06-02'),
 		type: 'server',
 		highImpact: false,
-		size: 10 / 100,
+		audienceSize: 10 / 100,
+		audienceOffset: 30,
 		groups: ['control', 'variant'],
 	},
 	{
@@ -89,7 +91,8 @@ export const ABTests: ABTest[] = [
 		expirationDate: new Date('2025-06-02'),
 		type: 'server',
 		highImpact: false,
-		size: 10 / 100,
+		audienceSize: 10 / 100,
+		audienceOffset: 40,
 		groups: ['control', 'variant'],
 	},
 ];

@@ -16,7 +16,7 @@ Deno.test(
 			expirationDate: new Date(),
 			type: 'server',
 			highImpact: false,
-			size: 10 / 100,
+			audienceSize: 10 / 100,
 			groups: ['control', 'variant'],
 		};
 		assertThrows(() => {
@@ -40,7 +40,7 @@ Deno.test(
 			expirationDate: new Date(),
 			type: 'server',
 			highImpact: false,
-			size: 10 / 100,
+			audienceSize: 10 / 100,
 			groups: ['control', 'variant'],
 		};
 		assertEquals(
