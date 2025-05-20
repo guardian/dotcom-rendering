@@ -259,6 +259,7 @@ export type FEFrontCard = {
 	};
 	format?: FEFormat;
 	enriched?: FESnap;
+	mediaAtom?: FEMediaAtom;
 	supportingContent?: FESupportingContent[];
 	cardStyle?: {
 		type: FEFrontCardStyle;
