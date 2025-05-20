@@ -93,7 +93,6 @@ export type DCRFrontCard = {
 	isImmersive: boolean;
 	isCrossword?: boolean;
 	isNewsletter?: boolean;
-	isCartoon?: boolean;
 	discussionId?: string;
 	byline?: string;
 	showByline?: boolean;

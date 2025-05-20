@@ -66,7 +66,6 @@ export const StaticFeatureTwo = ({
 							discussionId={card.discussionId}
 							mainMedia={card.mainMedia}
 							isExternalLink={card.isExternalLink}
-							isCartoon={card.isCartoon}
 							// branding={card.branding}
 							containerPalette={containerPalette}
 							trailText={undefined}
