@@ -173,6 +173,7 @@ export const ThreeTierChoiceCards = ({
 								key={supportTier}
 								css={css`
 									position: relative;
+									background-color: inherit;
 								`}
 							>
 								{pill && <ChoiceCardPill copy={pill.copy} />}

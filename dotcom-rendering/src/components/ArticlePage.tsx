@@ -42,7 +42,7 @@ interface AppProps extends BaseProps {
  */
 export const ArticlePage = (props: WebProps | AppProps) => {
 	const {
-		article: { format, frontendData },
+		article: { design, display, theme, frontendData },
 		renderingTarget,
 	} = props;
 
@@ -57,6 +57,12 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 
 	const isWeb = renderingTarget === 'Web';
 	const { darkModeAvailable } = useConfig();
+
+	const format = {
+		design,
+		display,
+		theme,
+	};
 
 	return (
 		<StrictMode>

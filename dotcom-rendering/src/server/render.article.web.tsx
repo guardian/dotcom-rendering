@@ -32,8 +32,8 @@ interface Props {
 	article: Article;
 }
 
-const decideTitle = ({ format, frontendData }: Article): string => {
-	if (format.theme === Pillar.Opinion && frontendData.byline) {
+const decideTitle = ({ theme, frontendData }: Article): string => {
+	if (theme === Pillar.Opinion && frontendData.byline) {
 		return `${frontendData.headline} | ${frontendData.byline} | The Guardian`;
 	}
 	return `${frontendData.headline} | ${frontendData.sectionLabel} | The Guardian`;
@@ -42,7 +42,7 @@ const decideTitle = ({ format, frontendData }: Article): string => {
 export const renderHtml = ({
 	article,
 }: Props): { html: string; prefetchScripts: string[] } => {
-	const { format, frontendData } = article;
+	const { design, display, theme, frontendData } = article;
 	const NAV = {
 		...extractNAV(frontendData.nav),
 		selectedPillar: getCurrentPillar(frontendData),
@@ -142,10 +142,16 @@ export const renderHtml = ({
 		unknownConfig: frontendData.config,
 	});
 
+	const format = {
+		design,
+		display,
+		theme,
+	};
+
 	const getAmpLink = (tags: TagType[]) => {
 		if (
-			format.design === ArticleDesign.Interactive ||
-			format.design === ArticleDesign.FullPageInteractive
+			design === ArticleDesign.Interactive ||
+			design === ArticleDesign.FullPageInteractive
 		) {
 			return undefined;
 		}
@@ -208,7 +214,7 @@ window.twttr = (function(d, s, id) {
 		twitterData,
 		section,
 		initTwitter:
-			pageHasTweetElements || format.design === ArticleDesign.LiveBlog
+			pageHasTweetElements || design === ArticleDesign.LiveBlog
 				? initTwitter
 				: undefined,
 		canonicalUrl,
@@ -218,8 +224,8 @@ window.twttr = (function(d, s, id) {
 		hasLiveBlogTopAd: !!frontendData.config.hasLiveBlogTopAd,
 		hasSurveyAd: !!frontendData.config.hasSurveyAd,
 		onlyLightColourScheme:
-			format.design === ArticleDesign.FullPageInteractive ||
-			format.design === ArticleDesign.Interactive,
+			design === ArticleDesign.FullPageInteractive ||
+			design === ArticleDesign.Interactive,
 	});
 
 	return { html: pageHtml, prefetchScripts };

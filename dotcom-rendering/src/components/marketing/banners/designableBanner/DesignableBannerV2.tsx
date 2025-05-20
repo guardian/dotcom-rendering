@@ -473,6 +473,7 @@ const styles = {
 	) => css`
 		background: ${background};
 		color: ${textColor};
+		bottom: 0px;
 		${limitHeight ? 'max-height: 60vh;' : ''}
 
 		* {
@@ -488,8 +489,10 @@ const styles = {
 	`,
 	containerOverrides: css`
 		display: grid;
+		background: inherit;
 		position: relative;
-		padding: ${space[3]}px ${space[3]}px ${space[3]}px ${space[3]}px;
+		padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
+		bottom: 0px;
 
 		${from.phablet} {
 			padding: ${space[3]}px ${space[3]}px ${space[6]}px ${space[3]}px;
@@ -737,7 +740,6 @@ const styles = {
 		flex-direction: column;
 		gap: ${space[4]}px;
 		margin-top: ${space[3]}px;
-		margin-bottom: ${space[2]}px;
 
 		${until.phablet} {
 			position: sticky;
