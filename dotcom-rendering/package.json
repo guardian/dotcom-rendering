@@ -42,7 +42,7 @@
 		"@guardian/react-crossword": "6.3.0",
 		"@guardian/shimport": "1.0.2",
 		"@guardian/source": "9.0.0",
-		"@guardian/source-development-kitchen": "18.1.0",
+		"@guardian/source-development-kitchen": "0.0.0-canary-20250520125512",
 		"@guardian/support-dotcom-components": "7.2.0",
 		"@guardian/tsconfig": "0.2.0",
 		"@playwright/test": "1.45.3",
