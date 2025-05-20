@@ -535,7 +535,6 @@ const styles = {
 		background: inherit;
 		position: relative;
 		/* padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px; */
-		padding: 0;
 		bottom: 0px;
 
 		/* Define the grid areas */
@@ -578,7 +577,7 @@ const styles = {
 				'. close-button .'
 				'. copy-container .'
 				'. ${cardsImageOrSpaceTemplateString} .'
-				'. cta-container' .;
+				'. cta-container .';
 		}
 
 		${from.tablet} {
@@ -589,7 +588,7 @@ const styles = {
 			grid-template-areas:
 				'. copy-container . close-button'
 				'. ${cardsImageOrSpaceTemplateString} . .'
-				'. cta-container' . .;
+				'. cta-container . .';
 		}
 
 		${from.desktop} {
@@ -608,7 +607,7 @@ const styles = {
 			/* min-width: 1140px;
 			 max-width: 1300px; */
 			grid-template-columns: auto 1px max(460px) 380px auto;
-			/* grid-template-columns: auto 1px 460px 380px auto; */
+			grid-template-rows: auto auto;
 			grid-gap: 10px;
 			grid-template-areas:
 				'logo vert-line copy-container ${cardsImageOrSpaceTemplateString} close-button'
@@ -849,7 +848,7 @@ const styles = {
 	`,
 	/* choice card CTA container */
 	ctaContainer: css`
-		/ order: 4; /
+		/* order: 4; */
 		display: flex;
 		align-items: center;
 		flex-direction: column;
