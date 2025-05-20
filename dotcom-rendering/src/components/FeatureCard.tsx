@@ -290,7 +290,6 @@ export type Props = {
 	 * Youtube requires a minimum width 200px.
 	 */
 	canPlayInline?: boolean;
-	isCartoon?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	starRating?: Rating;
@@ -341,7 +340,6 @@ export const FeatureCard = ({
 	showClock,
 	mainMedia,
 	canPlayInline,
-	isCartoon,
 	kickerText,
 	showPulsingDot,
 	dataLinkName,
@@ -608,8 +606,6 @@ export const FeatureCard = ({
 												kickerColour={palette(
 													'--feature-card-kicker-text',
 												)}
-												isBetaContainer={true}
-												isCartoon={isCartoon}
 											/>
 										</div>
 
