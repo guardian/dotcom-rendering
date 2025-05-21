@@ -166,7 +166,12 @@ export const ThreeTierChoiceCards = ({
 						const selected =
 							selectedProduct.supportTier === supportTier;
 
-						const radioId = `choicecard-${id}-${supportTier}`;
+						// Each radioId must be unique to the component and choice, e.g. "choicecard-epic-Contribution-Monthly"
+						const radioId = `choicecard-${id}-${supportTier}${
+							supportTier !== 'OneOff'
+								? `-${product.ratePlan}`
+								: ''
+						}`;
 
 						return (
 							<div
