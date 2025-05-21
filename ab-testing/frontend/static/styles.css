@@ -172,3 +172,8 @@
 body {
 	font-family: 'GuardianTextSans';
 }
+
+a {
+	color: #02124B;
+	text-decoration: none;
+}
