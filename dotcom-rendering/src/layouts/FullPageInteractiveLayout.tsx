@@ -4,7 +4,7 @@ import {
 	palette as sourcePalette,
 	until,
 } from '@guardian/source/foundations';
-import { MobileStickyContainer } from '../components/AdSlot.web';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -47,6 +47,7 @@ type HeaderProps = {
 	article: ArticleDeprecated;
 	NAV: NavType;
 	format: ArticleFormat;
+	renderAds?: boolean;
 };
 
 type RendererProps = {
@@ -136,17 +137,12 @@ const Renderer = ({
 	return <div css={adStyles}>{output}</div>;
 };
 
-const NavHeader = ({ article, NAV, format }: HeaderProps) => {
+const NavHeader = ({ article, NAV, format, renderAds }: HeaderProps) => {
 	// Typically immersives use the slim nav, but this switch is used to force
 	// the full nav - typically during special events such as Project 200, or
 	// the Euros. The motivation is to better onboard new visitors; interactives
 	// often reach readers who are less familiar with the Guardian.
 	const showSlimNav = !article.config.switches.interactiveFullHeaderSwitch;
-
-	/**
-	 * This property currently only applies to the header and merchandising slots
-	 */
-	const renderAds = canRenderAds(article);
 
 	return (
 		<section
@@ -199,11 +195,13 @@ const NavHeader = ({ article, NAV, format }: HeaderProps) => {
 export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
-		config: { host },
+		config: { host, hasSurveyAd },
 		editionId,
 	} = article;
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
+
+	const renderAds = canRenderAds(article);
 
 	return (
 		<>
@@ -223,6 +221,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 							article={article}
 							NAV={props.NAV}
 							format={format}
+							renderAds={renderAds}
 						/>
 
 						{format.theme === ArticleSpecial.Labs && (
@@ -240,8 +239,13 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 							</Stuck>
 						)}
 					</header>
+
+					{renderAds && hasSurveyAd && (
+						<AdSlot position="survey" display={format.display} />
+					)}
 				</>
 			)}
+
 			{isApps && format.theme === ArticleSpecial.Labs && (
 				<header>
 					<Stuck>
