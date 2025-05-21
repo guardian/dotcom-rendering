@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import {
 	between,
-	brand,
 	from,
 	neutral,
 	palette,
