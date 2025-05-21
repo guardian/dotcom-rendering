@@ -313,13 +313,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		);
 	};
 
-	const getCopyContainerCss = () => {
-		if (templateSettings.imageSettings?.mobileUrl) {
-			return styles.contentContainer(true);
-		}
-		return styles.contentContainer(false);
-	};
-
 	const showAboveArticleCount =
 		(separateArticleCountSettings?.type === 'above' ||
 			separateArticleCount) &&
@@ -353,7 +346,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 
 				<div
 					id="rr_designable-banner-copy-container"
-					css={getCopyContainerCss()}
+					css={styles.contentContainer}
 				>
 					<div css={getHeaderContainerCss()}>
 						<div css={styles.headerOverrides}>
@@ -450,7 +443,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					/>
 				</div>
 
-				{choiceCards && threeTierChoiceCardSelectedProduct  && (
+				{choiceCards && threeTierChoiceCardSelectedProduct && (
 					<div
 						id="rr_designable-banner-3-tier-choice-cards-container"
 						css={styles.threeTierChoiceCardsContainer}
@@ -514,14 +507,11 @@ const styles = {
 		padding: 0 auto;
 	`,
 	layoutOverrides: (cardsImageOrSpaceTemplateString: string) => css`
-		margin: 0 auto;
-		padding: 0 20px;
 		max-width: 1300px;
 		display: grid;
 		column-gap: 8px;
 		background: inherit;
 		position: relative;
-		/* padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px; */
 		bottom: 0px;
 
 		/* Define the grid areas */
@@ -543,17 +533,12 @@ const styles = {
 		#rr_designable-banner-close-button {
 			grid-area: close-button;
 			${until.phablet} {
-				/* grid-column: 1 / -1; */
-				/* grid-row: 1; */
 				justify-self: end;
 				position: sticky;
 				top: 10px;
 			}
 
 			${from.phablet} {
-				/* grid-column: 4; */
-				/* grid-row: 1; */
-				/* justify-self: start; */
 				position: sticky;
 				top: 10px;
 				padding-left: ${space[8]}px;
@@ -571,18 +556,19 @@ const styles = {
 			grid-area: choice-cards-container;
 		}
 
-		/* mobile */
-		${from.mobile} {
-			grid-template-columns: auto;
-			grid-template-areas:
-				'close-button'
-				'copy-container'
-				'${cardsImageOrSpaceTemplateString}'
-				'cta-container';
-		}
+		/* mobile first */
+		margin: 0 auto;
+		padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
+		grid-template-columns: auto;
+		grid-template-areas:
+			'close-button'
+			'copy-container'
+			'${cardsImageOrSpaceTemplateString}'
+			'cta-container';
+
 		${from.phablet} {
-			padding: ${space[3]}px ${space[3]}px ${space[6]}px ${space[3]}px;
-			/* max-width: 660px; */
+			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
+			max-width: 660px;
 			margin: 0 auto;
 			grid-template-columns: 1fr auto 1fr;
 			grid-template-areas:
@@ -592,37 +578,44 @@ const styles = {
 				'. 	cta-container 						.';
 		}
 		${from.tablet} {
-			/* max-width: 740px; */
-			padding: ${space[3]}px ${space[3]}px ${space[6]}px ${space[3]}px;
+			max-width: 740px;
+			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
 			margin: 0 auto;
-			grid-template-columns: 1fr auto auto auto;
+			grid-template-columns: auto auto auto;
+			grid-template-rows: auto auto auto;
 			grid-template-areas:
-				'. 	copy-container 						. 	close-button'
-				'. 	${cardsImageOrSpaceTemplateString} 	. 	.'
-				'. 	cta-container 						. 	.';
+				'. 	copy-container 						close-button'
+				'. 	${cardsImageOrSpaceTemplateString} 	.'
+				'. 	cta-container 						.';
 		}
 		${from.desktop} {
-			/* min-width: 980px;	
-			max-width: 1139.9px; */
-			padding: ${space[3]}px ${space[8]}px ${space[6]}px ${space[3]}px;
-			grid-template-columns: 460px 380px auto;
+			max-width: 980px;
+			align-self: stretch;
+			padding: ${space[3]}px ${space[1]}px 0 ${space[3]}px;
+			grid-template-columns: auto 380px auto;
 			grid-template-rows: auto auto;
 
 			grid-template-areas:
 				'copy-container 	${cardsImageOrSpaceTemplateString} 	close-button'
 				'cta-container 		${cardsImageOrSpaceTemplateString} 	.			'; /* should check if image exists *
-			grid-gap: 10px;
+			/* grid-gap: 10px; */
+			::before {
+				content: '';
+				width: auto;
+			}
+			::after {
+				content: '';
+				width: auto;
+			}
 		}
 		${from.leftCol} {
-			/* min-width: 1140px; */
 			max-width: 1140px;
 			grid-template-columns: 140px 1px max(460px) max(380px) 110px;
 			grid-template-rows: auto auto;
 			grid-gap: 10px;
 			grid-template-areas:
 				'logo 	vert-line 	copy-container 	${cardsImageOrSpaceTemplateString} 	close-button'
-				'.    	vert-line 	cta-container   .									.';
-			/* should check if image exists */
+				'.    	vert-line 	cta-container   .									. ';
 			::before {
 				content: '';
 				width: auto;
@@ -645,8 +638,6 @@ const styles = {
 		${from.leftCol} {
 			background-color: ${neutral[0]};
 			width: 1px;
-			/* grid-column: 2; */
-			/* grid-row: 1 / -1; */
 			opacity: 0.2;
 			margin-bottom: -${space[6]}px;
 			margin-top: ${space[6]}px;
@@ -655,18 +646,14 @@ const styles = {
 		}
 	`,
 	closeButtonOverrides: css`
+		/* TODO: WHAT TO DO ABOUT THIS - PASSED INTO THE COMPONENT */
 		/*${until.phablet} {
-			/* grid-column: 1 / -1; */
-			/* grid-row: 1; */
 			justify-self: end;
 			position: sticky;
 			top: 10px;
 		}
 
 		${from.phablet} {
-			/* grid-column: 4; */
-			/* grid-row: 1; */
-			/* justify-self: start; */
 			position: sticky;
 			top: 10px;
 			padding-left: ${space[8]}px;
@@ -703,8 +690,6 @@ const styles = {
 		}
 	`,
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
-		/* grid-column: 1; */
-		/* grid-row: ${bannerHasImage ? '1' : '2'}; */
 		align-self: stretch;
 		justify-self: stretch;
 
@@ -715,61 +700,45 @@ const styles = {
 		}
 
 		${from.phablet} {
-			/* grid-column: 2; */
-			/* grid-row: 1; */
 			background: ${background};
 			max-width: 492px;
 		}
 
 		${from.desktop} {
-			/* padding-left: ${space[2]}px; */
 			padding-top: ${space[3]}px;
 			padding-right: ${space[5]}px;
 		}
 	`,
 	headerWithImageContainer: (background: string) => css`
-		/* order: 1; */
 		max-width: 100%;
 		text-wrap: balance;
-
-		${between.mobile.and.desktop} {
-			/* order: 2; */
-		}
 
 		${from.tablet} {
 			max-width: 492px;
 		}
 
 		${from.desktop} {
-			/* grid-column: 2; */
-			/* grid-row: 1; */
 			background: ${background};
 			max-width: 492px;
 			padding-left: ${space[2]}px;
 			padding-top: ${space[3]}px;
 		}
 	`,
-	contentContainer: (bannerHasImage: boolean) => css`
-		/* grid-row: ${bannerHasImage ? '2' : '4'}; */
+	contentContainer: css`
 		align-self: start;
 
 		${from.phablet} {
-			/* grid-column: 2; */
 			max-width: 492px;
-			/* grid-row: 2; */
 		}
 		${from.desktop} {
 			max-width: 492px;
 			margin-top: ${space[3]}px;
-			/* padding-left: ${space[2]}px; */
 			padding-right: ${space[5]}px;
 			margin-bottom: ${space[2]}px;
 		}
 	`,
 	/* ctas for use with main images */
 	ctaContentContainer: css`
-		/* order: 4; */
-
 		${until.phablet} {
 			width: 100vw;
 			position: sticky;
@@ -786,15 +755,11 @@ const styles = {
 			}
 		}
 		${from.phablet} {
-			/* grid-column: 2; */
-			/* grid-row: 5; */
 			max-width: 492px;
 		}
 		${from.desktop} {
 			width: 100%;
 			flex-wrap: nowrap;
-			/* padding-left: ${space[2]}px; */
-			/* padding-right: ${space[5]}px; */
 			margin-bottom: ${space[2]}px;
 		}
 	`,
@@ -810,34 +775,21 @@ const styles = {
 		}
 	`,
 	bannerVisualContainer: css`
-		/* grid-row: 3; */
 		margin-left: ${space[2]}px;
 		margin-right: ${space[2]}px;
 
-		${from.phablet} {
-			/* grid-column: 2; */
-			/* grid-row: 3; */
-		}
-
 		${from.desktop} {
 			padding-left: ${space[2]}px;
-			/* grid-column: 3; */
-			/* grid-row: 1 / span 2; */
 		}
 	`,
 	threeTierChoiceCardsContainer: css`
-		/* order: 3; */
 		${until.desktop} {
 			margin-top: -${space[6]}px;
 		}
 		${from.phablet} {
-			/* grid-column: 2; */
 			max-width: 492px;
 		}
 		${from.desktop} {
-			/* grid-column: 3; */
-			/* grid-row: 1; */
-			/* grid-row-end: 3; */
 			margin: 0 ${space[3]}px;
 		}
 
@@ -861,12 +813,10 @@ const styles = {
 			align-items: center;
 			margin-top: ${space[5]}px;
 			margin-right: ${space[2]}px;
-			/* margin-left: 22px; */
 		}
 	`,
 	/* choice card CTA container */
 	ctaContainer: css`
-		/* order: 4; */
 		display: flex;
 		align-items: center;
 		flex-direction: column;
@@ -902,7 +852,6 @@ const styles = {
 		}
 
 		${from.desktop} {
-			grid-column: 3;
 			flex-direction: row;
 			gap: 0;
 			margin-bottom: 0;
