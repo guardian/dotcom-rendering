@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ABTest } from '../../../../types.ts';
-	import OphanLink from "$lib/components/OphanLink.svelte";
-	import TestVariants from "$lib/components/TestVariants.svelte";
+	import OphanLink from '$lib/components/OphanLink.svelte';
+	import TestVariants from '$lib/components/TestVariants.svelte';
 
 	interface Props {
 		tests: ABTest[];
@@ -19,40 +19,41 @@
 </script>
 
 <section class="tests">
-			{#each tests as test}
-
-<table>
-	<thead>
-		<tr>
-			<th scope="col">Name</th>
-			<th scope="col">State</th>
-			<th scope="col">Variants</th>
-			<th scope="col">Expires In</th>
-			<th scope="col">Audience</th>
-			<th scope="col">Offset</th>
-			<th scope="col">Ophan</th>
-		</tr>
-	</thead>
-	<tbody>
-			<tr>
-				<th scope="row" class="test-name">{test.name}</th>
-				<td>{test.status}</td>
-				<td>
-					<TestVariants testName={test.name} testGroups={test.groups} />
-				</td>
-				<td>{daysToExpiry(test.expirationDate)} days</td>
-				<td>{test.audienceSize * 100}%</td>
-				<td>{test.audienceOffset ?? 0}</td>
-				<td><OphanLink testName={test.name} /></td>
-			</tr>
-			<tr>
-				<th scope="row">Description</th>
-				<td colspan="6">{test.description}</td>
-			</tr>
-
-	</tbody>
-</table>
-{/each}
+	{#each tests as test}
+		<table>
+			<thead>
+				<tr>
+					<th scope="col">Name</th>
+					<th scope="col">State</th>
+					<th scope="col">Variants</th>
+					<th scope="col">Expires In</th>
+					<th scope="col">Audience</th>
+					<th scope="col">Offset</th>
+					<th scope="col">Ophan</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row" class="test-name">{test.name}</th>
+					<td>{test.status}</td>
+					<td>
+						<TestVariants
+							testName={test.name}
+							testGroups={test.groups}
+						/>
+					</td>
+					<td>{daysToExpiry(test.expirationDate)} days</td>
+					<td>{test.audienceSize * 100}%</td>
+					<td>{test.audienceOffset ?? 0}</td>
+					<td><OphanLink testName={test.name} /></td>
+				</tr>
+				<tr>
+					<th scope="row">Description</th>
+					<td colspan="6">{test.description}</td>
+				</tr>
+			</tbody>
+		</table>
+	{/each}
 </section>
 
 <style>
@@ -65,22 +66,24 @@
 		text-align: left;
 		table-layout: fixed;
 		width: 100%;
-  		border-collapse: collapse;
-  		border: 1px solid #ddd;
+		border-collapse: collapse;
+		border: 1px solid #ddd;
 		margin-bottom: 24px;
 	}
 
-	th, td {
+	th,
+	td {
 		min-width: 24px;
 		border: 1px solid #ddd;
 		padding: 8px;
 	}
 
-	th[scope="col"] {
+	th[scope='col'] {
 		background-color: #f5f5f5;
 	}
 
-	td, .test-name {
+	td,
+	.test-name {
 		font-weight: 100;
 	}
 </style>
