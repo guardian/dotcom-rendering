@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import {
 	between,
-	brand,
 	from,
 	neutral,
 	palette,
@@ -24,14 +23,14 @@ import type {
 	Image,
 	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import { useEffect, useState } from 'react';
 import {
 	removeMediaRulePrefix,
 	useMatchMedia,
 } from '../../../../lib/useMatchMedia';
 import { ThreeTierChoiceCards } from '../../epics/ThreeTierChoiceCards';
-import type { SupportTier } from '../../epics/utils/threeTierChoiceCardAmounts';
-import { getChoiceCardData } from '../../lib/choiceCards';
+import { getChoiceCards } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import {
 	addChoiceCardsProductParams,
@@ -116,14 +115,18 @@ const buildChoiceCardSettings = (
 
 const buildUrlForThreeTierChoiceCards = (
 	tracking: Tracking,
-	selectedProduct: SupportTier,
+	selectedProduct: ChoiceCard['product'],
 	countryCode?: string,
 ) => {
 	const baseUrl = 'https://support.theguardian.com/contribute';
 	const urlWithProduct =
-		selectedProduct === 'OneOff'
+		selectedProduct.supportTier === 'OneOff'
 			? baseUrl
-			: addChoiceCardsProductParams(baseUrl, selectedProduct, 'Monthly');
+			: addChoiceCardsProductParams(
+					baseUrl,
+					selectedProduct.supportTier,
+					selectedProduct.ratePlan,
+			  );
 
 	return addRegionIdAndTrackingParamsToSupportUrl(
 		urlWithProduct,
@@ -144,7 +147,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	separateArticleCount, // legacy field
 	separateArticleCountSettings,
 	tickerSettings,
-	choiceCardAmounts,
+	choiceCardsSettings,
 	countryCode,
 	submitComponentEvent,
 	design,
@@ -175,13 +178,12 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		}
 	}, [iosAppBannerPresent, submitComponentEvent]);
 
-	/**
-	 * V2 choice cards state
-	 */
+	const choiceCards = getChoiceCards(isTabletOrAbove, choiceCardsSettings);
+	const defaultProduct = choiceCards?.find((cc) => cc.isDefault)?.product;
 	const [
 		threeTierChoiceCardSelectedProduct,
 		setThreeTierChoiceCardSelectedProduct,
-	] = useState<SupportTier>('SupporterPlus');
+	] = useState<ChoiceCard['product'] | undefined>(defaultProduct);
 
 	// We can't render anything without a design
 	if (!design) {
@@ -298,15 +300,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	const mainOrMobileContent = isTabletOrAbove
 		? content.mainContent
 		: content.mobileContent;
-
-	const isVatCompliantCountry =
-		choiceCardAmounts?.testName !== 'VAT_COMPLIANCE';
-
-	const showChoiceCards = !!(
-		templateSettings.choiceCardSettings &&
-		choiceCardAmounts?.amountsCardData &&
-		isVatCompliantCountry
-	);
 
 	const getHeaderContainerCss = () => {
 		if (templateSettings.headerSettings?.headerImage) {
@@ -430,7 +423,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					</div>
 				)}
 
-				{!showChoiceCards && (
+				{!threeTierChoiceCardSelectedProduct && (
 					<div
 						id="rr_designable-banner-cta-container"
 						css={styles.ctaContentContainer}
@@ -457,24 +450,18 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					/>
 				</div>
 
-				{showChoiceCards && (
+				{choiceCards && threeTierChoiceCardSelectedProduct  && (
 					<div
 						id="rr_designable-banner-3-tier-choice-cards-container"
 						css={styles.threeTierChoiceCardsContainer}
 					>
 						<ThreeTierChoiceCards
-							countryCode={countryCode}
 							selectedProduct={threeTierChoiceCardSelectedProduct}
 							setSelectedProduct={
 								setThreeTierChoiceCardSelectedProduct
 							}
-							choices={getChoiceCardData(
-								false,
-								false,
-								countryCode,
-							)}
+							choices={choiceCards}
 							id={'banner'}
-							isDiscountActive={false}
 						/>
 
 						<div css={styles.ctaContainer}>
@@ -694,7 +681,6 @@ const styles = {
 	headerOverrides: css`
 		/* stylelint-disable declaration-no-important */
 		h2 {
-			color: ${brand[400]} !important;
 			margin-top: ${space[1]}px !important;
 			margin-bottom: ${space[2]}px !important;
 			${until.phablet} {

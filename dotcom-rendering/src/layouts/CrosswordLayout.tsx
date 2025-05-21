@@ -123,10 +123,8 @@ export const CrosswordLayout = (props: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	/**
-	 * This property currently only applies to the header and merchandising slots
-	 */
 	const renderAds = canRenderAds(article);
+
 	return (
 		<>
 			<div data-print-layout="hide">

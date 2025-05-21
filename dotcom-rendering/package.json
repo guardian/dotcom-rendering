@@ -20,7 +20,7 @@
 	},
 	"dependencies": {
 		"@aws-sdk/client-cloudwatch": "3.621.0",
-		"@babel/helper-compilation-targets": "7.27.1",
+		"@babel/helper-compilation-targets": "7.27.2",
 		"@braze/web-sdk": "5.8.1",
 		"@creditkarma/thrift-server-core": "1.0.4",
 		"@emotion/cache": "11.14.0",
@@ -43,7 +43,7 @@
 		"@guardian/shimport": "1.0.2",
 		"@guardian/source": "9.0.0",
 		"@guardian/source-development-kitchen": "18.1.0",
-		"@guardian/support-dotcom-components": "7.0.1",
+		"@guardian/support-dotcom-components": "7.2.0",
 		"@guardian/tsconfig": "0.2.0",
 		"@playwright/test": "1.45.3",
 		"@sentry/browser": "7.75.1",
