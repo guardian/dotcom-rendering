@@ -561,36 +561,35 @@ const styles = {
 		}
 
 		/* mobile */
-		grid-template-columns: auto;
-		grid-template-areas:
-			'close-button'
-			'copy-container'
-			'${cardsImageOrSpaceTemplateString}'
-			'cta-container';
-
+		${from.mobile} {
+			grid-template-columns: auto;
+			grid-template-areas:
+				'close-button'
+				'copy-container'
+				'${cardsImageOrSpaceTemplateString}'
+				'cta-container';
+		}
 		${from.phablet} {
 			padding: ${space[3]}px ${space[3]}px ${space[6]}px ${space[3]}px;
 			/* max-width: 660px; */
 			margin: 0 auto;
 			grid-template-columns: 1fr auto 1fr;
 			grid-template-areas:
-				'. close-button .'
-				'. copy-container .'
-				'. ${cardsImageOrSpaceTemplateString} .'
-				'. cta-container .';
+				'. 	close-button 						.'
+				'. 	copy-container 						.'
+				'. 	${cardsImageOrSpaceTemplateString} 	.'
+				'. 	cta-container 						.';
 		}
-
 		${from.tablet} {
 			/* max-width: 740px; */
 			padding: ${space[3]}px ${space[3]}px ${space[6]}px ${space[3]}px;
 			margin: 0 auto;
 			grid-template-columns: 1fr auto auto auto;
 			grid-template-areas:
-				'. copy-container . close-button'
-				'. ${cardsImageOrSpaceTemplateString} . .'
-				'. cta-container . .';
+				'. 	copy-container 						. 	close-button'
+				'. 	${cardsImageOrSpaceTemplateString} 	. 	.'
+				'. 	cta-container 						. 	.';
 		}
-
 		${from.desktop} {
 			/* min-width: 980px;	
 			max-width: 1139.9px; */
@@ -599,8 +598,8 @@ const styles = {
 			grid-template-rows: auto auto;
 
 			grid-template-areas:
-				'copy-container ${cardsImageOrSpaceTemplateString} close-button'
-				'cta-container ${cardsImageOrSpaceTemplateString} .'; /* should check if image exists *
+				'copy-container 	${cardsImageOrSpaceTemplateString} 	close-button'
+				'cta-container 		${cardsImageOrSpaceTemplateString} 	.			'; /* should check if image exists *
 			grid-gap: 10px;
 		}
 		${from.leftCol} {
@@ -610,17 +609,17 @@ const styles = {
 			grid-template-rows: auto auto;
 			grid-gap: 10px;
 			grid-template-areas:
-				'logo vert-line copy-container ${cardsImageOrSpaceTemplateString} close-button'
-				'.    vert-line cta-container   .                                 .';
-			/* should check if image exists 
-				investigate why logo dropping below just before 1300 */
+				'logo 	vert-line 	copy-container 	${cardsImageOrSpaceTemplateString} 	close-button'
+				'.    	vert-line 	cta-container   .									.';
+			/* should check if image exists */
 		}
 		${from.wide} {
 			max-width: 1300px;
 			grid-template-columns: auto 1px max(420px) 400px auto;
+			grid-template-rows: auto auto;
 			grid-template-areas:
-				'logo vert-line copy-container ${cardsImageOrSpaceTemplateString} close-button'
-				'. vert-line cta-container . .';
+				'logo 	vert-line 	copy-container 	${cardsImageOrSpaceTemplateString} 	close-button'
+				'. 		vert-line 	cta-container 	. 									.';
 		}
 	`,
 	verticalLine: css`
