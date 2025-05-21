@@ -61,7 +61,7 @@ export const ABTests: ABTest[] = [
 		highImpact: false,
 		audienceSize: 100 / 100,
 		groups: ['control', 'variant'],
-		audienceSpace: 'B',
+		audienceSpace: 1,
 	},
 	{
 		name: 'commercial-some-test-2',
@@ -95,4 +95,4 @@ export const ABTests: ABTest[] = [
 		audienceOffset: 40,
 		groups: ['control', 'variant'],
 	},
-];
+]
