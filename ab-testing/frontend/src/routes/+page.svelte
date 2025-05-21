@@ -2,6 +2,7 @@
 	import { ABTests } from '../../../abTest';
 	import Table from '$lib/components/Table.svelte';
 	import AudienceBreakdown from '$lib/components/AudienceBreakdown.svelte';
+	import AudienceBreakdownSvg from '$lib/components/AudienceBreakdownSVG.svelte';
 
 	const clientSideTests = ABTests.filter((test) => test.type === 'client');
 	const serverSideTests = ABTests.filter((test) => test.type === 'server');
@@ -11,7 +12,7 @@
 	<h1 class="headline">A/B Tests</h1>
 	<section>
 		<h2 class="sub-headline">Client-side Tests</h2>
-		<AudienceBreakdown tests={clientSideTests} />
+		<AudienceBreakdownSvg tests={clientSideTests} />
 		<Table tests={clientSideTests} />
 	</section>
 	<section>
