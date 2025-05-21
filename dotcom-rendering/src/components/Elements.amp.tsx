@@ -111,8 +111,14 @@ export const isAmpSupported = ({
 	}
 
 	if (
-		tags.some(
-			(tag) => tag.id === 'type/article' || tag.id === 'type/picture',
+		tags.some((tag) =>
+			[
+				'type/article',
+				'type/picture',
+				'type/crossword',
+				'type/audio',
+				'type/podcast',
+			].includes(tag.id),
 		)
 	) {
 		const isSwitchedOn = switches.ampArticleSwitch;
