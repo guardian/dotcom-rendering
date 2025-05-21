@@ -218,12 +218,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 				),
 				textColour: hexColourToString(primaryCta.default.text),
 			},
-			hover: {
-				backgroundColour: hexColourToString(
-					primaryCta.hover.background,
-				),
-				textColour: hexColourToString(primaryCta.hover.text),
-			},
 		},
 		secondaryCtaSettings: {
 			default: {
@@ -234,17 +228,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 				border: `1px solid ${
 					secondaryCta.default.border
 						? hexColourToString(secondaryCta.default.border)
-						: undefined
-				}`,
-			},
-			hover: {
-				backgroundColour: hexColourToString(
-					secondaryCta.hover.background,
-				),
-				textColour: hexColourToString(secondaryCta.hover.text),
-				border: `1px solid ${
-					secondaryCta.hover.border
-						? hexColourToString(secondaryCta.hover.border)
 						: undefined
 				}`,
 			},
@@ -259,17 +242,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					closeButton.default.border
 						? hexColourToString(closeButton.default.border)
 						: specialReport[100]
-				}`,
-			},
-			hover: {
-				backgroundColour: hexColourToString(
-					closeButton.hover.background,
-				),
-				textColour: hexColourToString(closeButton.hover.text),
-				border: `1px solid ${
-					closeButton.hover.border
-						? hexColourToString(closeButton.hover.border)
-						: neutral[100]
 				}`,
 			},
 		},

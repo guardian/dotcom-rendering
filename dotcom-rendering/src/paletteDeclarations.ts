@@ -5816,7 +5816,7 @@ type CSSCustomProperty = `--${string}`;
  * Ensures that all palette functions provide the same API, deriving a palette
  * colour from an {@linkcode ArticleFormat}.
  */
-type PaletteFunction = (f: ArticleFormat) => string;
+type PaletteFunction = (f: ArticleFormat) => string | undefined;
 /**
  * Used to validate that the palette object always has the correct shape,
  * without changing its type.
