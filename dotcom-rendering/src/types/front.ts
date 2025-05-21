@@ -102,7 +102,7 @@ export type DCRFrontCard = {
 	embedUri?: string;
 	branding?: Branding;
 	slideshowImages?: DCRSlideshowImage[];
-	showMainVideo?: boolean;
+	showVideo?: boolean;
 };
 
 export type DCRSlideshowImage = {

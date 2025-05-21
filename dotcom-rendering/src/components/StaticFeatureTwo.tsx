@@ -79,7 +79,7 @@ export const StaticFeatureTwo = ({
 							collectionId={collectionId}
 							isNewsletter={card.isNewsletter}
 							showQuotes={card.showQuotedHeadline}
-							showMainVideo={card.showMainVideo}
+							showVideo={card.showVideo}
 						/>
 					</LI>
 				);
