@@ -147,7 +147,7 @@ const decideSlideshowImages = (
 	const assets = trail.properties.image?.item.assets;
 	const shouldShowSlideshow =
 		trail.properties.image?.type === 'ImageSlideshow' &&
-		(trail.properties.mediaSelect?.imageSlideshowReplace ||
+		(trail.properties.mediaSelect?.imageSlideshowReplace ??
 			trail.properties.imageSlideshowReplace);
 	if (shouldShowSlideshow && assets && assets.length > 0) {
 		return assets;
@@ -290,7 +290,7 @@ export const enhanceCards = (
 
 		const mainMedia = decideMedia(
 			format,
-			faciaCard.properties.showMainVideo ||
+			faciaCard.properties.showMainVideo ??
 				faciaCard.properties.mediaSelect?.showMainVideo,
 			faciaCard.mediaAtom ??
 				faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
@@ -350,8 +350,8 @@ export const enhanceCards = (
 			branding,
 			slideshowImages: decideSlideshowImages(faciaCard),
 			showVideo:
-				faciaCard.properties.showMainVideo ||
-				faciaCard.properties.mediaSelect?.showMainVideo ||
+				(faciaCard.properties.showMainVideo ??
+					faciaCard.properties.mediaSelect?.showMainVideo) ||
 				faciaCard.properties.mediaSelect?.videoReplace,
 			...(!!imageSrc && {
 				image: {
