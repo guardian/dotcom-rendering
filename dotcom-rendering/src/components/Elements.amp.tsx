@@ -110,7 +110,11 @@ export const isAmpSupported = ({
 		return false;
 	}
 
-	if (tags.some((tag) => tag.id === 'type/article')) {
+	if (
+		tags.some(
+			(tag) => tag.id === 'type/article' || tag.id === 'type/picture',
+		)
+	) {
 		const isSwitchedOn = switches.ampArticleSwitch;
 		const hasQuizTag = tags.some((tag) => tag.id === 'tone/quizzes');
 		// Some Labs pages have quiz atoms but are not tagged as quizzes
