@@ -94,6 +94,10 @@ export const isAmpSupported = ({
 	switches: Switches;
 	main: string;
 }): boolean => {
+	// Disable AMP if both switches are off
+	if (!(switches.ampArticleSwitch ?? switches.ampLiveblogSwitch)) {
+		return false;
+	}
 	if (format.design === ArticleDesign.Interactive) {
 		const hasAmpInteractiveTag = tags.some(
 			(tag) => tag.id === 'tracking/platformfunctional/ampinteractive',
