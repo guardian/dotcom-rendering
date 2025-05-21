@@ -163,8 +163,7 @@ export const ThreeTierChoiceCards = ({
 					({ product, label, benefitsLabel, benefits, pill }) => {
 						const { supportTier } = product;
 
-						const selected =
-							selectedProduct.supportTier === supportTier;
+						const selected = selectedProduct === product;
 
 						// Each radioId must be unique to the component and choice, e.g. "choicecard-epic-Contribution-Monthly"
 						const radioId = `choicecard-${id}-${supportTier}${
@@ -195,7 +194,7 @@ export const ThreeTierChoiceCards = ({
 											/>
 										}
 										id={radioId}
-										value={supportTier}
+										value={radioId}
 										cssOverrides={labelOverrideStyles(
 											selected,
 										)}
