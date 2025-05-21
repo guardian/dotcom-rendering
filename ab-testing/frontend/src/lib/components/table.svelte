@@ -1,5 +1,7 @@
 <script lang="ts">
-	import type { ABTest } from '../../../../types';
+	import type { ABTest } from '../../../../types.ts';
+	import OphanLink from "$lib/components/OphanLink.svelte";
+	import TestVariants from "$lib/components/TestVariants.svelte";
 
 	interface Props {
 		tests: ABTest[];
@@ -16,6 +18,9 @@
 	}
 </script>
 
+<section class="tests">
+			{#each tests as test}
+
 <table>
 	<thead>
 		<tr>
@@ -29,34 +34,53 @@
 		</tr>
 	</thead>
 	<tbody>
-		{#each tests as test}
 			<tr>
-				<th scope="row">{test.name}</th>
+				<th scope="row" class="test-name">{test.name}</th>
 				<td>{test.status}</td>
 				<td>
-					{#each test.groups as group}
-						<span>{group}{' '}</span>
-					{/each}
+					<TestVariants testName={test.name} testGroups={test.groups} />
 				</td>
 				<td>{daysToExpiry(test.expirationDate)} days</td>
 				<td>{test.audienceSize * 100}%</td>
 				<td>{test.audienceOffset ?? 0}</td>
-				<td></td>
+				<td><OphanLink testName={test.name} /></td>
 			</tr>
-		{/each}
+			<tr>
+				<th scope="row">Description</th>
+				<td colspan="6">{test.description}</td>
+			</tr>
+
 	</tbody>
 </table>
+{/each}
+</section>
 
 <style>
+	.tests {
+		border: 1px solid #ddd;
+		padding: 8px;
+	}
+
 	table {
 		text-align: left;
 		table-layout: fixed;
 		width: 100%;
   		border-collapse: collapse;
   		border: 1px solid #ddd;
+		margin-bottom: 24px;
 	}
 
-	th {
+	th, td {
 		min-width: 24px;
+		border: 1px solid #ddd;
+		padding: 8px;
+	}
+
+	th[scope="col"] {
+		background-color: #f5f5f5;
+	}
+
+	td, .test-name {
+		font-weight: 100;
 	}
 </style>
