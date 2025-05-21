@@ -527,7 +527,7 @@ const styles = {
 		padding: 0 auto;
 	`,
 	layoutOverrides: (cardsImageOrSpaceTemplateString: string) => css`
-		margin: 0 119px;
+		margin: 0 auto;
 		padding: 0 20px;
 		max-width: 1300px;
 		display: grid;
@@ -546,12 +546,36 @@ const styles = {
 		}
 		#rr_designable-banner-copy-container {
 			grid-area: copy-container;
+			${from.leftCol} {
+				padding-left: ${space[3]}px;
+			}
 		}
 		#rr_designable-banner-cta-container {
 			grid-area: cta-container;
 		}
 		#rr_designable-banner-close-button {
 			grid-area: close-button;
+			${until.phablet} {
+				/* grid-column: 1 / -1; */
+				/* grid-row: 1; */
+				justify-self: end;
+				position: sticky;
+				top: 10px;
+			}
+
+			${from.phablet} {
+				/* grid-column: 4; */
+				/* grid-row: 1; */
+				/* justify-self: start; */
+				position: sticky;
+				top: 10px;
+				padding-left: ${space[8]}px;
+			}
+
+			${from.desktop} {
+				padding-right: 0;
+				justify-self: end;
+			}
 		}
 		#rr_designable-banner-main-image {
 			grid-area: main-image;
@@ -603,19 +627,27 @@ const styles = {
 			grid-gap: 10px;
 		}
 		${from.leftCol} {
-			/* min-width: 1140px;
-			 max-width: 1300px; */
-			grid-template-columns: auto 1px max(460px) 380px auto;
+			/* min-width: 1140px; */
+			max-width: 1140px;
+			grid-template-columns: 140px 1px max(460px) max(380px) 110px;
 			grid-template-rows: auto auto;
 			grid-gap: 10px;
 			grid-template-areas:
 				'logo 	vert-line 	copy-container 	${cardsImageOrSpaceTemplateString} 	close-button'
 				'.    	vert-line 	cta-container   .									.';
 			/* should check if image exists */
+			::before {
+				content: '';
+				width: auto;
+			}
+			::after {
+				content: '';
+				width: auto;
+			}
 		}
 		${from.wide} {
 			max-width: 1300px;
-			grid-template-columns: auto 1px max(420px) 400px auto;
+			grid-template-columns: 219px 1px max(420px) 400px auto;
 			grid-template-rows: auto auto;
 			grid-template-areas:
 				'logo 	vert-line 	copy-container 	${cardsImageOrSpaceTemplateString} 	close-button'
@@ -631,11 +663,12 @@ const styles = {
 			opacity: 0.2;
 			margin-bottom: -${space[6]}px;
 			margin-top: ${space[6]}px;
-			/* margin-right: ${space[2]}px; */
+			margin-left: ${space[2]}px;
+			margin-right: ${space[2]}px;
 		}
 	`,
 	closeButtonOverrides: css`
-		${until.phablet} {
+		/*${until.phablet} {
 			/* grid-column: 1 / -1; */
 			/* grid-row: 1; */
 			justify-self: end;
@@ -655,7 +688,7 @@ const styles = {
 		${from.desktop} {
 			padding-right: 0;
 			justify-self: end;
-		}
+		}*/
 	`,
 	/* hacky change until we can rework the designable banner header with the correct styles */
 	headerOverrides: css`
@@ -703,7 +736,7 @@ const styles = {
 		}
 
 		${from.desktop} {
-			padding-left: ${space[2]}px;
+			/* padding-left: ${space[2]}px; */
 			padding-top: ${space[3]}px;
 			padding-right: ${space[5]}px;
 		}
@@ -742,7 +775,7 @@ const styles = {
 		${from.desktop} {
 			max-width: 492px;
 			margin-top: ${space[3]}px;
-			padding-left: ${space[2]}px;
+			/* padding-left: ${space[2]}px; */
 			padding-right: ${space[5]}px;
 			margin-bottom: ${space[2]}px;
 		}
