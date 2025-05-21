@@ -1,6 +1,6 @@
 # AB Testing
 
-## Overview
+## Technical Overview
 
 This will be a central location for all AB tests running on the theguardian.com. The goal is to have a single source of truth for both client and server side tests.
 
@@ -39,7 +39,7 @@ Test expirations are stored in the dictionary, and checked by fastly to determin
 ## Limitations
 
 -   The dictionary API has a limit of 1000 items per dictionary, we won't get anywhere near this limit, but it's worth noting.
--   This setups reduces our mvt id space from 0-999999 to 0-99, this should be fine as we have rarely used decimal precision test sizes. This would only came up for example with a multi-variant test that doesn't divide evenly into the total test size, with the current config we sent the variant/group size explicitly so this won't be an issue.
+-   This setups reduces our mvt id space from 0-999999 to 0-999, this should be fine as we have rarely used decimal precision test sizes. This would only came up for example with a multi-variant test that doesn't divide evenly into the total test size, with the current config we sent the variant/group size explicitly so this won't be an issue.
 
 ## How build/CI step will work
 
@@ -62,105 +62,54 @@ Test expirations are stored in the dictionary, and checked by fastly to determin
 -   Uploads the key-values to the fastly dictionary
     -   Requries some work to interact with the [fastly dictionary API](https://www.fastly.com/documentation/reference/api/dictionaries/dictionary-item/)
 
-## Build output example
+### Build output example
 
-This config:
+See the [config-build-example.md](./docs/config-build-example.md) for a full example of the build output.
 
-```ts
-	// Example client side AB test definition
-	{
-		name: 'commercial-ad-block-ask',
-		description:
-			'Show new ad block ask component in ad slots when we detect ad blocker usage',
-		owners: ['commercial.dev@guardian.co.uk'],
-		status: 'ON',
-		expirationDate: new Date('2025-05-31'),
-		type: 'client',
-		highImpact: false,
-		groups: [
-			{ id: 'control', size: 5 / 100 },
-			{ id: 'variant', size: 5 / 100 }
-		],
-	},
-	{
-		name: 'commercial-some-other-test',
-		description:
-			'',
-		owners: ['commercial.dev@guardian.co.uk'],
-		status: 'ON',
-		expirationDate: new Date('2025-05-31'),
-		type: 'client',
-		highImpact: false,
-		groups: [
-			{ id: 'control', size: 5 / 100 },
-			{ id: 'variant', size: 5 / 100 }
-		],
-	},
-	{
-		name: 'commercial-some-100-perc-test',
-		description:
-			'test all the things',
-		owners: ['commercial.dev@guardian.co.uk'],
-		status: 'ON',
-		expirationDate: new Date('2025-05-31'),
-		type: 'client',
-		highImpact: false,
-		groups: [
-			{ id: 'control', size: 50 / 100 },
-			{ id: 'variant', size: 50 / 100 }
-		],
-		allowOverlap: true,
-	},
-	// Example server side AB test definition
-	{
-		name: 'fronts-curation-europe-beta-front',
-		description:
-			'Allows viewing the beta version of the Europe network front',
-		owners: [
-			'project.fairground@theguardian.com',
-			'dotcom.platform@theguardian.com',
-		],
-		status: 'ON',
-		expirationDate: new Date('2025-04-02'),
-		type: 'server',
-		highImpact: false,
-		groups: [
-			{ id: 'control', size: 50 / 100 },
-			{ id: 'variant', size: 50 / 100 }
-		],
-		allowOverlap: true,
-	},
-```
+## Testing the new AB testing framework
 
-Could result in the following key-values to be stored in the dictionary:
-| key | value |
-| -------- | ------- |
-| mvt0 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
-| mvt1 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
-| mvt2 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
-| mvt3 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
-| mvt4 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
-| mvt5 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
-| mvt6 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
-| mvt7 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
-| mvt8 | 0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
-| mvt9 | 0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
-| mvt10 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
-| mvt11 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
-| mvt12 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
-| mvt13 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
-| mvt14 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
-| mvt15 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
-| mvt16 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
-| mvt17 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
-| mvt18 | 0=commercial-some-other-test:control,1=commercial-some-100-perc-test:control,2=fronts-curation-europe-beta-front:control |
-| mvt19 | 0=commercial-some-other-test:variant,1=commercial-some-100-perc-test:variant,2=fronts-curation-europe-beta-front:variant |
-| mvt20 | 0=commercial-some-100-perc-test:control,1=fronts-curation-europe-beta-front:control |
-| mvt21 | 0=commercial-some-100-perc-test:variant,1=fronts-curation-europe-beta-front:variant |
-| mvt22 | 0=commercial-some-100-perc-test:control,1=fronts-curation-europe-beta-front:control |
-| mvt23 | 0=commercial-some-100-perc-test:variant,1=fronts-curation-europe-beta-front:variant |
-| ... | |
-| mvt96 | 0=commercial-some-100-perc-test:control,1=fronts-curation-europe-beta-front:control |
-| mvt97 | 0=commercial-some-100-perc-test:variant,1=fronts-curation-europe-beta-front:variant |
-| mvt98 | 0=commercial-some-100-perc-test:control,1=fronts-curation-europe-beta-front:control |
-| mvt99 | 0=commercial-some-100-perc-test:variant,1=fronts-curation-europe-beta-front:variant |
+### CI Validation/Build/Deploy Steps
+
+The steps can all be run locally using the `deno run` command, see the [deno.json](./deno.json) file for the commands.
+
+The steps have unit tests that can be run using the `deno test` command.
+
+The `deploy` step requires some environment variables to be set [see env.ts](./scripts/deploy/env.ts), and will upload the dictionary to fastly, and can be run on a test fastly service.
+
+### VCL
+
+The vcl is just here as a reference example. It will live with the rest of our fastly vcl.
+
+It can be tested using the DEV/CODE environment for our fastly service.
+
+## How running AB tests will work
+
+### Creating a test
+
+Open a PR and add a test to the `abTest.ts` file in the `ab-testing/src` directory.
+
+Github actions will run the build and validate the test on the PR.
+
+Once the test is validated and PR merged, the release process will upload the test to Fastly.
+
+If the test state is `ON` and it is not expired it will be served to users as expected.
+
+Page responses in a client side test will have a cookie set that can be used by the client side code to determine which test the user is in.
+
+Page responses in a server side test will get a cookie set that can be used by client or server side code to determine which test the user is in, and a header that will be used by fastly/frontend to split the cache.
+
+### Opting in/out of a test
+
+Using the relevant URL to opt in or out of a test, this will set or remove a cookie that will be used by fastly to force subsequent responses to the correct test. This is the same for both server and client side tests.
+
+e.g. `/ab-tests/opt-in?group=commercial-ad-block-ask:variant` will set the cookie to force the user into the `commercial-ad-block-ask:variant` test variant.
+
+Locally this can be done by setting the relavent cookie in the browser
+
+For server side tests this might look like:
+
+`Set-Cookie Server_AB_Tests=commercial-ad-block-ask:variant; Path=/; Domain=theguardian.com; Secure; SameSite=None`
+
+For client side tests:
+
+`Set-Cookie Client_AB_Tests=commercial-ad-block-ask:variant; Path=/; Domain=theguardian.com; Secure; SameSite=None`
