@@ -126,17 +126,7 @@ export const ProductCard = ({ image, title, price, link, stars }: Product) => {
 							text-decoration: none;
 						`}
 					>
-						<img
-							src="/static/frontend/logos/clippy_bouncing.gif"
-							width="200"
-							height="200"
-							alt="a paper clip with big eyes and eyebrows on a white background"
-							fetchPriority="high"
-							css={css`
-								max-width: 200px;
-								background-color: unset;
-							`}
-						/>
+						Buy Now
 					</a>
 				</div>
 			</div>
