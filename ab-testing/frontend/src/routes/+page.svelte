@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ABTests } from '../../../abTest';
-	import Table from "$lib/components/Table.svelte";
+	import Table from '$lib/components/Table.svelte';
 
 	const clientSideTests = ABTests.filter((test) => test.type === 'client');
 	const serverSideTests = ABTests.filter((test) => test.type === 'server');
