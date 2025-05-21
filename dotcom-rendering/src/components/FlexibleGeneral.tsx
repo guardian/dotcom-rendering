@@ -337,6 +337,7 @@ type BoostedCardProperties = {
 	headlineSizes: ResponsiveFontSize;
 	imageSize: ImageSizeType;
 	liveUpdatesPosition: Position;
+	liveUpdatesAlignment: Alignment;
 	supportingContentAlignment: Alignment;
 };
 
@@ -358,7 +359,8 @@ const decideCardProperties = (
 					mobile: 'medium',
 				},
 				imageSize: 'jumbo',
-				liveUpdatesPosition: 'outer',
+				liveUpdatesPosition: 'inner',
+				liveUpdatesAlignment: 'vertical',
 				supportingContentAlignment:
 					supportingContentLength >= 2 ? 'horizontal' : 'vertical',
 			};
@@ -372,6 +374,7 @@ const decideCardProperties = (
 				},
 				imageSize: avatarUrl ? 'large' : 'medium',
 				liveUpdatesPosition: 'inner',
+				liveUpdatesAlignment: 'vertical',
 				supportingContentAlignment:
 					supportingContentLength >= 2 ? 'horizontal' : 'vertical',
 			};
@@ -409,6 +412,7 @@ const FullWidthCardLayout = ({
 		imageSize,
 		supportingContentAlignment,
 		liveUpdatesPosition,
+		liveUpdatesAlignment,
 	} = decideCardProperties(
 		card.supportingContent?.length ?? 0,
 		card.boostLevel,
@@ -462,14 +466,14 @@ const FullWidthCardLayout = ({
 					aspectRatio={aspectRatio}
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
-					liveUpdatesAlignment="horizontal"
+					liveUpdatesPosition={liveUpdatesPosition}
+					liveUpdatesAlignment={liveUpdatesAlignment}
 					showTopBarDesktop={false}
 					showTopBarMobile={
 						!isFirstRow ||
 						(containerLevel === 'Primary' &&
 							!isMediaCard(card.format))
 					}
-					liveUpdatesPosition={liveUpdatesPosition}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 				/>
