@@ -203,7 +203,7 @@ const decideMedia = (
 ): MainMedia | undefined => {
 	// If the showVideo toggle is enabled in the fronts tool,
 	// we should return the active mediaAtom regardless of the design
-	if (showMainVideo || videoReplace) {
+	if (!!showMainVideo || !!videoReplace) {
 		return getActiveMediaAtom(mediaAtom);
 	}
 
@@ -350,9 +350,10 @@ export const enhanceCards = (
 			branding,
 			slideshowImages: decideSlideshowImages(faciaCard),
 			showVideo:
-				(faciaCard.properties.showMainVideo ??
-					faciaCard.properties.mediaSelect?.showMainVideo) ||
-				faciaCard.properties.mediaSelect?.videoReplace,
+				!!(
+					faciaCard.properties.showMainVideo ??
+					faciaCard.properties.mediaSelect?.showMainVideo
+				) || !!faciaCard.properties.mediaSelect?.videoReplace,
 			...(!!imageSrc && {
 				image: {
 					src: imageSrc,
