@@ -81,7 +81,7 @@ Deno.test('abTestsToMVTs - overlapping tests added to existing slots', () => {
 	// Create 1000 normal test entries to fill all slots
 	const normalTest = createTest('Normal', 1, ['control']); // 1000 entries
 
-	// Create 2 overlapping test entries, these should be added to the first slots
+	// Create overlapping test, the entries should be added to the first slots
 	const overlapTest = createTest('Overlap', 1, ['variant'], 0, 1); // 1000 entries
 
 	const result = abTestsToMVTs([normalTest, overlapTest]);
