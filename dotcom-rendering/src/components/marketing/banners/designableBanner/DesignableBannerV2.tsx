@@ -509,7 +509,7 @@ const styles = {
 	layoutOverrides: (cardsImageOrSpaceTemplateString: string) => css`
 		max-width: 1300px;
 		display: grid;
-		column-gap: 8px;
+		/* column-gap: 8px; */
 		background: inherit;
 		position: relative;
 		bottom: 0px;
@@ -541,10 +541,10 @@ const styles = {
 			${from.phablet} {
 				position: sticky;
 				top: 10px;
-				padding-left: ${space[8]}px;
 			}
 
 			${from.desktop} {
+				margin-top: ${space[6]}px;
 				padding-right: 0;
 				justify-self: end;
 			}
@@ -557,36 +557,36 @@ const styles = {
 		}
 
 		/* mobile first */
-		margin: 0 auto;
-		padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
-		grid-template-columns: auto;
-		grid-template-areas:
-			'close-button'
-			'copy-container'
-			'${cardsImageOrSpaceTemplateString}'
-			'cta-container';
-
+		${from.mobile} {
+			margin: 0 auto;
+			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
+			grid-template-columns: auto;
+			column-gap: 0px;
+			grid-template-areas:
+				'close-button'
+				'copy-container'
+				'${cardsImageOrSpaceTemplateString}'
+				'cta-container';
+		}
 		${from.phablet} {
 			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
-			max-width: 660px;
-			margin: 0 auto;
-			grid-template-columns: 1fr auto 1fr;
-			grid-template-areas:
-				'. 	close-button 						.'
-				'. 	copy-container 						.'
-				'. 	${cardsImageOrSpaceTemplateString} 	.'
-				'. 	cta-container 						.';
-		}
-		${from.tablet} {
 			max-width: 740px;
-			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
 			margin: 0 auto;
-			grid-template-columns: auto auto auto;
+			grid-template-columns: minmax(0, 0.5fr) 492px minmax(0, 0.5fr);
 			grid-template-rows: auto auto auto;
 			grid-template-areas:
 				'. 	copy-container 						close-button'
 				'. 	${cardsImageOrSpaceTemplateString} 	.'
 				'. 	cta-container 						.';
+
+			::before {
+				content: '';
+				width: auto;
+			}
+			::after {
+				content: '';
+				width: auto;
+			}
 		}
 		${from.desktop} {
 			max-width: 980px;
@@ -597,34 +597,18 @@ const styles = {
 
 			grid-template-areas:
 				'copy-container 	${cardsImageOrSpaceTemplateString} 	close-button'
-				'cta-container 		${cardsImageOrSpaceTemplateString} 	.			'; /* should check if image exists *
-			/* grid-gap: 10px; */
-			::before {
-				content: '';
-				width: auto;
-			}
-			::after {
-				content: '';
-				width: auto;
-			}
+				'cta-container 		${cardsImageOrSpaceTemplateString} 	.			';
 		}
 		${from.leftCol} {
 			max-width: 1140px;
+			bottom: 0px;
 			/* the vertical line aligns with that of standard article */
+			grid-column-gap: 10px;
 			grid-template-columns: 140px 1px max(460px) max(380px) 110px;
 			grid-template-rows: auto auto;
-			grid-gap: 10px;
 			grid-template-areas:
-				'logo 	vert-line 	copy-container 	${cardsImageOrSpaceTemplateString} 	close-button'
-				'.    	vert-line 	cta-container   .									. ';
-			::before {
-				content: '';
-				width: auto;
-			}
-			::after {
-				content: '';
-				width: auto;
-			}
+				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button'
+				'.		vert-line	cta-container	${cardsImageOrSpaceTemplateString}	.';
 		}
 		${from.wide} {
 			max-width: 1300px;
@@ -632,39 +616,28 @@ const styles = {
 			grid-template-columns: 219px 1px max(420px) 400px auto;
 			grid-template-rows: auto auto;
 			grid-template-areas:
-				'logo 	vert-line 	copy-container 	${cardsImageOrSpaceTemplateString} 	close-button'
-				'. 		vert-line 	cta-container 	. 									.';
+				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button'
+				'.		vert-line	cta-container	${cardsImageOrSpaceTemplateString}	.';
 		}
 	`,
 	verticalLine: css`
+		${until.leftCol} {
+			display: none;
+		}
 		${from.leftCol} {
 			background-color: ${neutral[0]};
 			width: 1px;
 			opacity: 0.2;
-			margin-bottom: -${space[6]}px;
+			/* margin-bottom: -${space[6]}px; */
 			margin-top: ${space[6]}px;
 			margin-left: ${space[2]}px;
 			margin-right: ${space[2]}px;
 		}
 	`,
 	closeButtonOverrides: css`
-		/* TODO: WHAT TO DO ABOUT THIS - PASSED INTO THE COMPONENT */
-		/*${until.phablet} {
-			justify-self: end;
-			position: sticky;
-			top: 10px;
-		}
-
-		${from.phablet} {
-			position: sticky;
-			top: 10px;
-			padding-left: ${space[8]}px;
-		}
-
-		${from.desktop} {
-			padding-right: 0;
-			justify-self: end;
-		}*/
+		/* Layout changes are to go in the id for the close button
+		above please only add design overrides here.  
+		These are passed into the component and applied at that level. */
 	`,
 	/* hacky change until we can rework the designable banner header with the correct styles */
 	headerOverrides: css`
@@ -730,24 +703,30 @@ const styles = {
 		align-self: start;
 
 		${from.phablet} {
+			align-self: start;
 			max-width: 492px;
 		}
 		${from.desktop} {
 			max-width: 492px;
-			margin-top: ${space[3]}px;
 			padding-right: ${space[5]}px;
 			margin-bottom: ${space[2]}px;
 		}
 	`,
 	/* ctas for use with main images */
 	ctaContentContainer: css`
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		gap: ${space[4]}px;
+		margin-top: ${space[3]}px;
+
 		${until.phablet} {
 			width: 100vw;
 			position: sticky;
 			bottom: 0;
 			padding-top: ${space[3]}px;
 			padding-bottom: ${space[3]}px;
-			background-color: ${neutral[100]};
+			/* background-color: ${neutral[100]}; */
 			box-shadow: 0 -${space[1]}px ${space[3]}px 0 rgba(0, 0, 0, 0.25);
 			margin-right: -${space[3]}px;
 			margin-left: -${space[3]}px;
@@ -757,7 +736,8 @@ const styles = {
 			}
 		}
 		${from.phablet} {
-			max-width: 492px;
+			justify-self: stretch;
+			width: 100%;
 		}
 		${from.desktop} {
 			width: 100%;
@@ -780,8 +760,19 @@ const styles = {
 		margin-left: ${space[2]}px;
 		margin-right: ${space[2]}px;
 
+		${from.phablet} {
+			max-width: 492px; /*?*/
+		}
 		${from.desktop} {
+			margin-top: ${space[6]}px;
 			padding-left: ${space[2]}px;
+		}
+		${between.desktop.and.wide} {
+			max-width: 380px;
+		}
+		${from.wide} {
+			max-width: 485px;
+			align-self: start;
 		}
 	`,
 	threeTierChoiceCardsContainer: css`
@@ -794,18 +785,18 @@ const styles = {
 		${from.desktop} {
 			margin: 0 ${space[3]}px;
 		}
-
 		${between.desktop.and.wide} {
 			max-width: 380px;
 		}
-
 		${from.wide} {
 			max-width: 485px;
 			align-self: start;
 		}
 	`,
 	guardianLogoContainer: css`
-		display: none;
+		${until.leftCol} {
+			display: none;
+		}
 		${from.leftCol} {
 			justify-self: end;
 			display: flex;
@@ -826,6 +817,7 @@ const styles = {
 		margin-top: ${space[3]}px;
 
 		${until.phablet} {
+			width: 100vw;
 			position: sticky;
 			bottom: 0;
 			padding-top: ${space[3]}px;
@@ -834,7 +826,6 @@ const styles = {
 			box-shadow: 0 -${space[1]}px ${space[3]}px 0 rgba(0, 0, 0, 0.25);
 			margin-right: -${space[3]}px;
 			margin-left: -${space[3]}px;
-			width: 100vw;
 
 			a {
 				width: calc(100% - 24px);
@@ -844,7 +835,7 @@ const styles = {
 		${between.phablet.and.desktop} {
 			bottom: 0;
 			margin-top: ${space[3]}px;
-			margin-bottom: 0;
+			margin-bottom: ${space[6]}px;
 			border-radius: 50px;
 			a {
 				width: 100%;
@@ -856,8 +847,8 @@ const styles = {
 
 		${from.desktop} {
 			flex-direction: row;
+			margin-bottom: ${space[6]}px;
 			gap: 0;
-			margin-bottom: 0;
 			margin-top: ${space[3]}px;
 
 			a {
