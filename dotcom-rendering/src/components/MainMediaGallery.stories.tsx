@@ -1,19 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { gridContainerDecorator } from '../../.storybook/decorators/gridDecorators';
 import { images } from '../../fixtures/generated/images';
-import { grid } from '../grid';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { MainMediaGallery } from './MainMediaGallery';
 
 const meta = {
 	title: 'Components/MainMediaGallery',
 	component: MainMediaGallery,
+	decorators: gridContainerDecorator,
 } satisfies Meta<typeof MainMediaGallery>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const FirstStory = {
+export const Default = {
 	args: {
 		mainMedia: images[0],
 		format: {
@@ -22,12 +23,11 @@ export const FirstStory = {
 			theme: Pillar.News,
 		},
 	},
-	decorators: [
-		// To make it easier to see the top border above the date
-		(Story) => (
-			<div css={[grid.container]}>
-				<Story />
-			</div>
-		),
-	],
 } satisfies Story;
+
+export const PortraitImage = {
+	args: {
+		...Default.args,
+		mainMedia: images[7],
+	},
+};
