@@ -171,9 +171,10 @@
 
 body {
 	font-family: 'GuardianTextSans';
+	box-sizing: border-box;
 }
 
 a {
-	color: #02124B;
+	color: #02124b;
 	text-decoration: none;
 }
