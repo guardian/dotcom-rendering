@@ -12,6 +12,7 @@ import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
 import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
+import { EnhanceAffiliateLinks } from './EnhanceAffiliateLinks.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { Lightbox } from './Lightbox';
@@ -129,6 +130,9 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							isDev={!!frontendData.config.isDev}
 							serverSideTests={frontendData.config.abTests}
 						/>
+					</Island>
+					<Island priority="feature" defer={{ until: 'idle' }}>
+						<EnhanceAffiliateLinks />
 					</Island>
 				</>
 			)}
