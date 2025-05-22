@@ -7,11 +7,10 @@ import type {
 	ContributionFrequency,
 	ContributionType,
 } from '@guardian/support-dotcom-components/dist/shared/types';
-import {
-	ChoiceCardTestData_REGULAR,
-	ChoiceCardTestData_US,
-} from '../epics/ThreeTierChoiceCardData';
-import type { ChoiceInfo } from '../epics/ThreeTierChoiceCards';
+import type {
+	ChoiceCard,
+	ChoiceCardsSettings,
+} from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 
 export interface ChoiceCardSelection {
 	frequency: ContributionFrequency;
@@ -33,12 +32,15 @@ export const contributionType: ContributionType = {
 	},
 };
 
-export const getChoiceCardData = (
-	longerBenefits: boolean,
-	isDiscountActive: boolean,
-	countryCode?: string,
-): ChoiceInfo[] => {
-	return countryCode === 'US'
-		? ChoiceCardTestData_US(longerBenefits, isDiscountActive)
-		: ChoiceCardTestData_REGULAR(longerBenefits, isDiscountActive);
+export const getChoiceCards = (
+	isTabletOrAbove: boolean,
+	choiceCardsSettings?: ChoiceCardsSettings | null,
+): ChoiceCard[] | undefined => {
+	if (choiceCardsSettings) {
+		if (!isTabletOrAbove && choiceCardsSettings.mobileChoiceCards) {
+			return choiceCardsSettings.mobileChoiceCards;
+		}
+		return choiceCardsSettings.choiceCards;
+	}
+	return;
 };

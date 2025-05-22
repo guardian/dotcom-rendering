@@ -11,6 +11,11 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { ContributionsEpicUnvalidated as ContributionsEpic } from './ContributionsEpic';
 import { props as baseProps } from './utils/storybook';
 
+jest.mock('../../../lib/useMatchMedia', () => ({
+	useMatchMedia: jest.fn(() => true),
+	removeMediaRulePrefix: jest.fn(() => ''),
+}));
+
 describe('ContributionsEpic', () => {
 	it('renders the epic', () => {
 		const heading = 'Epic';

@@ -24,14 +24,14 @@ import type {
 	Image,
 	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import { useEffect, useState } from 'react';
 import {
 	removeMediaRulePrefix,
 	useMatchMedia,
 } from '../../../../lib/useMatchMedia';
 import { ThreeTierChoiceCards } from '../../epics/ThreeTierChoiceCards';
-import type { SupportTier } from '../../epics/utils/threeTierChoiceCardAmounts';
-import { getChoiceCardData } from '../../lib/choiceCards';
+import { getChoiceCards } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import {
 	addChoiceCardsProductParams,
@@ -116,14 +116,18 @@ const buildChoiceCardSettings = (
 
 const buildUrlForThreeTierChoiceCards = (
 	tracking: Tracking,
-	selectedProduct: SupportTier,
+	selectedProduct: ChoiceCard['product'],
 	countryCode?: string,
 ) => {
 	const baseUrl = 'https://support.theguardian.com/contribute';
 	const urlWithProduct =
-		selectedProduct === 'OneOff'
+		selectedProduct.supportTier === 'OneOff'
 			? baseUrl
-			: addChoiceCardsProductParams(baseUrl, selectedProduct, 'Monthly');
+			: addChoiceCardsProductParams(
+					baseUrl,
+					selectedProduct.supportTier,
+					selectedProduct.ratePlan,
+			  );
 
 	return addRegionIdAndTrackingParamsToSupportUrl(
 		urlWithProduct,
@@ -144,7 +148,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	separateArticleCount, // legacy field
 	separateArticleCountSettings,
 	tickerSettings,
-	choiceCardAmounts,
+	choiceCardsSettings,
 	countryCode,
 	submitComponentEvent,
 	design,
@@ -175,13 +179,12 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		}
 	}, [iosAppBannerPresent, submitComponentEvent]);
 
-	/**
-	 * V2 choice cards state
-	 */
+	const choiceCards = getChoiceCards(isTabletOrAbove, choiceCardsSettings);
+	const defaultProduct = choiceCards?.find((cc) => cc.isDefault)?.product;
 	const [
 		threeTierChoiceCardSelectedProduct,
 		setThreeTierChoiceCardSelectedProduct,
-	] = useState<SupportTier>('SupporterPlus');
+	] = useState<ChoiceCard['product'] | undefined>(defaultProduct);
 
 	// We can't render anything without a design
 	if (!design) {
@@ -294,15 +297,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		? content.mainContent
 		: content.mobileContent;
 
-	const isVatCompliantCountry =
-		choiceCardAmounts?.testName !== 'VAT_COMPLIANCE';
-
-	const showChoiceCards = !!(
-		templateSettings.choiceCardSettings &&
-		choiceCardAmounts?.amountsCardData &&
-		isVatCompliantCountry
-	);
-
 	const getHeaderContainerCss = () => {
 		if (templateSettings.headerSettings?.headerImage) {
 			return styles.headerWithImageContainer(
@@ -396,7 +390,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					</div>
 				</div>
 
-				{!showChoiceCards && (
+				{!threeTierChoiceCardSelectedProduct && (
 					<div css={styles.ctaContentContainer}>
 						<DesignableBannerCtas
 							mainOrMobileContent={mainOrMobileContent}
@@ -435,21 +429,15 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					/>
 				)}
 
-				{showChoiceCards && (
+				{choiceCards && threeTierChoiceCardSelectedProduct && (
 					<div css={styles.threeTierChoiceCardsContainer}>
 						<ThreeTierChoiceCards
-							countryCode={countryCode}
 							selectedProduct={threeTierChoiceCardSelectedProduct}
 							setSelectedProduct={
 								setThreeTierChoiceCardSelectedProduct
 							}
-							choices={getChoiceCardData(
-								false,
-								false,
-								countryCode,
-							)}
+							choices={choiceCards}
 							id={'banner'}
-							isDiscountActive={false}
 						/>
 
 						<div css={styles.ctaContainer}>
@@ -485,6 +473,7 @@ const styles = {
 	) => css`
 		background: ${background};
 		color: ${textColor};
+		bottom: 0px;
 		${limitHeight ? 'max-height: 60vh;' : ''}
 
 		* {
@@ -500,8 +489,10 @@ const styles = {
 	`,
 	containerOverrides: css`
 		display: grid;
+		background: inherit;
 		position: relative;
-		padding: ${space[3]}px ${space[3]}px ${space[3]}px ${space[3]}px;
+		padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
+		bottom: 0px;
 
 		${from.phablet} {
 			padding: ${space[3]}px ${space[3]}px ${space[6]}px ${space[3]}px;
@@ -749,7 +740,6 @@ const styles = {
 		flex-direction: column;
 		gap: ${space[4]}px;
 		margin-top: ${space[3]}px;
-		margin-bottom: ${space[2]}px;
 
 		${until.phablet} {
 			position: sticky;
