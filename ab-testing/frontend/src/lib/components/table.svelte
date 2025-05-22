@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ABTest } from '../../../../types.ts';
+	import type { ABTest } from '../../../../types.js';
 	import OphanLink from '$lib/components/OphanLink.svelte';
 	import TestVariants from '$lib/components/TestVariants.svelte';
 
