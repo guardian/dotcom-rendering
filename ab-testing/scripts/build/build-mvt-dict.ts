@@ -58,9 +58,10 @@ const testSpaceToMVTs = (tests: ABTest[]): Record<string, string> =>
  */
 const abTestsToMVTs = (abTests: ABTest[]): MVTGroups => {
 	const primaryTests = abTests.filter(
-		(test) => test.audienceSpace === undefined || test.audienceSpace === 0,
+		(test) =>
+			test.audienceSpace === undefined || test.audienceSpace === 'A',
 	);
-	const secondaryTests = abTests.filter((test) => test.audienceSpace === 1);
+	const secondaryTests = abTests.filter((test) => test.audienceSpace === 'B');
 
 	const primaryMVTGroups = testSpaceToMVTs(primaryTests);
 	const secondaryMVTGroups = testSpaceToMVTs(secondaryTests);

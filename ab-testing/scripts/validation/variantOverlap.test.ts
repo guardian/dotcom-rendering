@@ -59,7 +59,7 @@ Deno.test(
 			highImpact: false,
 			audienceSize: 100 / 100,
 			groups: ['control', 'variant'],
-			audienceSpace: 1,
+			audienceSpace: 'B',
 		};
 
 		const secondaryTest: ABTest = {

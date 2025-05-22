@@ -24,11 +24,11 @@ export type ABTest = {
 	/** The offset of the test, adjust to ensure that tests do not overlap */
 	audienceOffset?: number;
 	/**
-	 * Each test space represents 100% of the audience 
+	 * Each test space represents 100% of the audience
 	 * Having multiple test spaces allows deliberate overlapping of test audiences
-	 * Defaults to 0
+	 * Defaults to A
 	 */
-	audienceSpace?: 0 | 1;
+	audienceSpace?: 'A' | 'B';
 	/** Test group definition */
 	groups: string[];
 };

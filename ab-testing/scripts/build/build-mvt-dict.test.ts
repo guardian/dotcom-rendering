@@ -8,7 +8,7 @@ const createTest = (
 	audienceSize: number,
 	groups = ['control'],
 	audienceOffset: number = 0,
-	audienceSpace: 0 | 1 = 0,
+	audienceSpace: 'A' | 'B' = 'A',
 ) =>
 	({
 		name,
@@ -82,7 +82,7 @@ Deno.test('abTestsToMVTs - overlapping tests added to existing slots', () => {
 	const normalTest = createTest('Normal', 1, ['control']); // 1000 entries
 
 	// Create overlapping test, the entries should be added to the first slots
-	const overlapTest = createTest('Overlap', 1, ['variant'], 0, 1); // 1000 entries
+	const overlapTest = createTest('Overlap', 1, ['variant'], 0, 'B'); // 1000 entries
 
 	const result = abTestsToMVTs([normalTest, overlapTest]);
 
@@ -106,8 +106,8 @@ Deno.test('abTestsToMVTs - throw error when exceeding capacity', () => {
 	const normalTest = createTest('Normal', 1, ['control']); // 1000 entries
 
 	// Create 1001 secondary test entries (exceeds 1000)
-	const overlapTest1 = createTest('Overlap1', 1, ['variant1'], 0, 1);
-	const overlapTest2 = createTest('Overlap2', 0.001, ['variant2'], 1, 1);
+	const overlapTest1 = createTest('Overlap1', 1, ['variant1'], 0, 'B');
+	const overlapTest2 = createTest('Overlap2', 0.001, ['variant2'], 1, 'B');
 
 	// We expect an error when all mvt slots have 2 groups
 	assertThrows(

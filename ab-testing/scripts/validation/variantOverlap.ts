@@ -27,12 +27,15 @@ export const findOverlappingTests = (tests: ABTest[]) => {
 };
 export function noVariantOverlap(tests: ABTest[]) {
 	const allPrimaryTests = tests.filter(
-		(test) => test.audienceSpace === undefined || test.audienceSpace === 0,
+		(test) =>
+			test.audienceSpace === undefined || test.audienceSpace === 'A',
 	);
 
 	findOverlappingTests(allPrimaryTests);
 
-	const allSecordaryTests = tests.filter((test) => test.audienceSpace === 1);
+	const allSecordaryTests = tests.filter(
+		(test) => test.audienceSpace === 'B',
+	);
 
 	findOverlappingTests(allSecordaryTests);
 
