@@ -317,6 +317,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		(separateArticleCountSettings?.type === 'above' ||
 			separateArticleCount) &&
 		articleCounts.forTargetedWeeks >= 5;
+
 	return (
 		<div
 			id="rr_designable-banner-outer-container"
@@ -360,15 +361,15 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 							/>
 						</div>
 					</div>
-
 					{showAboveArticleCount && (
-						<DesignableBannerArticleCount
-							numArticles={articleCounts.forTargetedWeeks}
-							settings={templateSettings}
-							copy={separateArticleCountSettings?.copy}
-						/>
+						<div css={styles.articleCountContainer}>
+							<DesignableBannerArticleCount
+								numArticles={articleCounts.forTargetedWeeks}
+								settings={templateSettings}
+								copy={separateArticleCountSettings?.copy}
+							/>
+						</div>
 					)}
-
 					{tickerSettings?.tickerData &&
 						templateSettings.tickerStylingSettings && (
 							<div css={templateSpacing.bannerTicker}>
@@ -389,7 +390,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 								/>
 							</div>
 						)}
-
 					<div css={templateSpacing.bannerBodyCopy}>
 						<div css={styles.bodyCopyOverrides}>
 							<DesignableBannerBody
@@ -610,6 +610,7 @@ const styles = {
 		}
 		${from.leftCol} {
 			max-width: 1140px;
+			/* the vertical line aligns with that of standard article */
 			grid-template-columns: 140px 1px max(460px) max(380px) 110px;
 			grid-template-rows: auto auto;
 			grid-gap: 10px;
@@ -627,6 +628,7 @@ const styles = {
 		}
 		${from.wide} {
 			max-width: 1300px;
+			/* the vertical line aligns with that of standard article */
 			grid-template-columns: 219px 1px max(420px) 400px auto;
 			grid-template-rows: auto auto;
 			grid-template-areas:
@@ -832,6 +834,7 @@ const styles = {
 			box-shadow: 0 -${space[1]}px ${space[3]}px 0 rgba(0, 0, 0, 0.25);
 			margin-right: -${space[3]}px;
 			margin-left: -${space[3]}px;
+			width: 100vw;
 
 			a {
 				width: calc(100% - 24px);
@@ -870,6 +873,9 @@ const styles = {
 		background-color: ${palette.brandAlt[400]};
 		border-color: ${palette.brandAlt[400]};
 		width: 100%;
+	`,
+	articleCountContainer: css`
+		margin-bottom: ${space[3]}px;
 	`,
 };
 
