@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { ABTests } from '../../../abTest';
 	import Table from '$lib/components/Table.svelte';
-	import AudienceBreakdownSvg from '$lib/components/AudienceBreakdownSVG.svelte';
+	import AudienceBreakdown from '$lib/components/AudienceBreakdown.svelte';
 
 	const clientSideTests = ABTests.filter((test) => test.type === 'client');
 	const serverSideTests = ABTests.filter((test) => test.type === 'server');
@@ -11,12 +11,12 @@
 	<h1 class="headline">A/B Tests</h1>
 	<section>
 		<h2 class="sub-headline">Client-side Tests</h2>
-		<AudienceBreakdownSvg tests={clientSideTests} />
+		<AudienceBreakdown tests={clientSideTests} />
 		<Table tests={clientSideTests} />
 	</section>
 	<section>
 		<h2 class="sub-headline">Server-side Tests</h2>
-		<AudienceBreakdownSvg tests={serverSideTests} />
+		<AudienceBreakdown tests={serverSideTests} />
 		<Table tests={serverSideTests} />
 	</section>
 </main>
@@ -29,7 +29,7 @@
 			--light-grey: #f5f5f5;
 			--border-grey: #dddddd;
 			--light-blue: #5bc0de;
-			--link-blue: rgb(0, 119, 182);
+			--link-blue: #0077b6;
 			--dark-blue: #02124b;
 		}
 		body {

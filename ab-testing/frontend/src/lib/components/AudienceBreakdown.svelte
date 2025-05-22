@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ABTest } from '../../../../types.ts';
+	import type { ABTest } from '../../../../types.js';
 
 	interface Props {
 		tests: ABTest[];
@@ -90,6 +90,9 @@
 		font-size: 12px;
 		dominant-baseline: central;
 		text-anchor: middle;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 	}
 
 	.segments {
