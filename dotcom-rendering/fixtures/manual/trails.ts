@@ -69,7 +69,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 	},
 	{
@@ -109,7 +109,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 	},
 	{
@@ -134,7 +134,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 	},
 	{
@@ -158,7 +158,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 	},
 	{
@@ -183,7 +183,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 	},
 	{
@@ -208,7 +208,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 	},
 	{
@@ -234,7 +234,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 	},
 	{
@@ -259,7 +259,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 	},
 
@@ -285,7 +285,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 	},
 	{
@@ -310,7 +310,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 	},
 	{
@@ -335,7 +335,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 	},
 	{
@@ -360,7 +360,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 	},
 	{
@@ -385,7 +385,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 	},
 	{
@@ -410,7 +410,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 	},
 	{
@@ -435,7 +435,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 	},
 	{
@@ -488,7 +488,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 		trailText:
 			'Plastics are everywhere, but their smallest fragments – nanoplastics – are making their way into the deepest parts of our bodies, including our brains and breast milk',
@@ -526,7 +526,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 	},
 	{
@@ -551,7 +551,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 	},
 	{
@@ -576,7 +576,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 	},
 	{
@@ -618,7 +618,7 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
 		isImmersive: false,
 	},
 ];
@@ -760,7 +760,7 @@ export const galleryTrails: [DCRFrontCard, DCRFrontCard] = [
 		kickerText: 'Democratic Republic of the Congo',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		mainMedia: { type: 'Gallery', count: '27' },
-		showMainVideo: false,
+		showVideo: false,
 		image: {
 			src: 'https://media.guim.co.uk/69ac2383ea611126b54373865dac3e7e77981d7e/0_39_5500_3302/master/5500.jpg',
 			altText: 'A group of people in the street, some looking worried',
@@ -817,7 +817,7 @@ export const videoTrails: [DCRFrontCard, DCRFrontCard] = [
 				},
 			],
 		},
-		showMainVideo: true,
+		showVideo: true,
 		image: {
 			src: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_47_3000_1800/master/3000.jpg',
 			altText:
@@ -872,7 +872,7 @@ export const videoTrails: [DCRFrontCard, DCRFrontCard] = [
 				},
 			],
 		},
-		showMainVideo: true,
+		showVideo: true,
 		image: {
 			src: 'https://media.guim.co.uk/4612af5f4667888fa697139cf570b6373d93a710/2446_345_3218_1931/master/3218.jpg',
 			altText: 'Prince Harry leaves the high court in June 2023',

@@ -137,7 +137,7 @@ export type Props = {
 	liveUpdatesPosition?: Position;
 	onwardsSource?: OnwardsSource;
 	pauseOffscreenVideo?: boolean;
-	showMainVideo?: boolean;
+	showVideo?: boolean;
 	isTagPage?: boolean;
 	/** Allows the consumer to set an aspect ratio on the image of 5:3, 5:4, 4:5 or 1:1 */
 	aspectRatio?: AspectRatio;
@@ -398,7 +398,7 @@ export const Card = ({
 	liveUpdatesPosition = 'inner',
 	onwardsSource,
 	pauseOffscreenVideo = false,
-	showMainVideo = true,
+	showVideo = true,
 	absoluteServerTimes,
 	isTagPage = false,
 	aspectRatio,
@@ -887,7 +887,7 @@ export const Card = ({
 						)}
 						{media.type === 'video' && (
 							<>
-								{showMainVideo ? (
+								{showVideo ? (
 									<div
 										data-chromatic="ignore"
 										data-component="youtube-atom"

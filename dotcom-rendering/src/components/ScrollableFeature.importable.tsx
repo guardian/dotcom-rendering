@@ -76,7 +76,7 @@ export const ScrollableFeature = ({
 							collectionId={collectionId}
 							isNewsletter={card.isNewsletter}
 							showQuotes={card.showQuotedHeadline}
-							showMainVideo={card.showMainVideo}
+							showVideo={card.showVideo}
 						/>
 					</ScrollableCarousel.Item>
 				);
