@@ -95,4 +95,4 @@ export const ABTests: ABTest[] = [
 		audienceOffset: 40,
 		groups: ['control', 'variant'],
 	},
-]
+];
