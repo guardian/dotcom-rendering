@@ -9,7 +9,8 @@
 
 	const BAR_HEIGHT = 40;
 
-	const CHART_HEIGHT = tests.length * BAR_HEIGHT + BAR_HEIGHT;
+	// Account for legend bar and vertical padding in chart height
+	const chartHeight = tests.length * BAR_HEIGHT + BAR_HEIGHT + 16;
 
 	function getOffset(test: ABTest) {
 		return test.audienceOffset ?? 0;
@@ -28,7 +29,7 @@
 	xmlns="http://www.w3.org/2000/svg"
 	xmlns:xlink="http://www.w3.org/1999/xlink"
 	width="100%"
-	height={CHART_HEIGHT}
+	height={chartHeight}
 	class="chart"
 >
 	<svg x="0" y="0" height={BAR_HEIGHT}>
@@ -47,7 +48,7 @@
 			height={BAR_HEIGHT}
 		>
 			<g class="bar">
-				<rect height={`${BAR_HEIGHT}px`} width="100%" rx="4" />
+				<rect height={BAR_HEIGHT} width="100%" rx="4" />
 				<text class="name" x="50%" y="50%">{test.name}</text>
 				<text class="segments" x="50%" y="50%">{getOffset(test)}% to {testSegmentEnd(test)}%</text>
 			</g>
@@ -57,37 +58,35 @@
 
 <style>
 	.chart {
-		background-color: #f5f5f5;
-		padding: 12px;
+		background-color: var(--light-grey);
+		padding: 8px;
 		margin-bottom: 24px;
 		box-sizing: border-box;
 	}
 
 	.legend {
-		fill: #000;
+		fill: var(--black);
 		height: 40px;
 	}
 
 	.legend text {
-		fill: #000;
-		color: #000;
+		fill: var(--black);
 		font-size: 18px;
 	}
 
 	.bar {
-		fill: #5bc0de;
+		fill: var(--light-blue);
 		transition: fill 0.3s ease;
 		cursor: pointer;
 	}
 
 	.bar:hover,
 	.bar:focus {
-		fill: #02124b;
+		fill: var(--dark-blue);
 	}
 
 	.bar text {
-		fill: #fff;
-		color: #fff;
+		fill: var(--white);
 		font-size: 12px;
 		dominant-baseline: central;
 		text-anchor: middle;

@@ -22,6 +22,31 @@
 </main>
 
 <style lang="css">
+	:global {
+		:root {
+			--white: #ffffff;
+			--black: #000000;
+			--light-grey: #f5f5f5;
+			--border-grey: #dddddd;
+			--light-blue: #5bc0de;
+			--link-blue: rgb(0, 119, 182);
+			--dark-blue: #02124b;
+		}
+		body {
+			font-family: 'GuardianTextSans';
+			box-sizing: border-box;
+			color: var(--black);
+		}
+
+		a {
+			color: var(--link-blue);
+		}
+
+		a:hover {
+			text-decoration-thickness: 2px;
+		}
+	}
+
 	.main {
 		max-width: 88rem;
 		padding: 20px;
