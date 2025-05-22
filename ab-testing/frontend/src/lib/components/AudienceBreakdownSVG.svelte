@@ -9,6 +9,8 @@
 
 	const BAR_HEIGHT = 40;
 
+	const CHART_HEIGHT = tests.length * BAR_HEIGHT + BAR_HEIGHT;
+
 	function getOffset(test: ABTest) {
 		return test.audienceOffset ?? 0;
 	}
@@ -26,7 +28,7 @@
 	xmlns="http://www.w3.org/2000/svg"
 	xmlns:xlink="http://www.w3.org/1999/xlink"
 	width="100%"
-	height={tests.length * BAR_HEIGHT + BAR_HEIGHT}
+	height={CHART_HEIGHT}
 	class="chart"
 >
 	<svg x="0" y="0" height={BAR_HEIGHT}>
@@ -46,7 +48,8 @@
 		>
 			<g class="bar">
 				<rect height={`${BAR_HEIGHT}px`} width="100%" rx="4" />
-				<text x="50%" y="50%">{test.name}</text>
+				<text class="name" x="50%" y="50%">{test.name}</text>
+				<text class="segments" x="50%" y="50%">{getOffset(test)}% to {testSegmentEnd(test)}%</text>
 			</g>
 		</svg>
 	{/each}
@@ -57,6 +60,7 @@
 		background-color: #f5f5f5;
 		padding: 12px;
 		margin-bottom: 24px;
+		box-sizing: border-box;
 	}
 
 	.legend {
@@ -87,5 +91,16 @@
 		font-size: 12px;
 		dominant-baseline: central;
 		text-anchor: middle;
+	}
+
+	.segments {
+		display: none;
+	}
+	.bar:hover .name {
+		display: none;
+	}
+
+	.bar:hover .segments {
+		display: block;
 	}
 </style>
