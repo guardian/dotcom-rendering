@@ -46,10 +46,8 @@ Deno.test(
 			expirationDate: futureWeekday(),
 			type: 'client',
 			highImpact: false,
-			groups: [
-				{ id: 'control', size: 5 / 100 },
-				{ id: 'variant', size: 5 / 100 },
-			],
+			audienceSize: 10 / 100,
+			groups: ['control', 'variant'],
 		};
 
 		assertEquals(allExpirationsValid([futureWeekdayTest]), true);
@@ -67,10 +65,8 @@ Deno.test(
 			expirationDate: futureWeekend(),
 			type: 'client',
 			highImpact: false,
-			groups: [
-				{ id: 'control', size: 5 / 100 },
-				{ id: 'variant', size: 5 / 100 },
-			],
+			audienceSize: 10 / 100,
+			groups: ['control', 'variant'],
 		};
 
 		assertThrows(() => allExpirationsValid([futureWeekendTes]));
@@ -88,10 +84,8 @@ Deno.test(
 			expirationDate: pastDay(),
 			type: 'client',
 			highImpact: false,
-			groups: [
-				{ id: 'control', size: 5 / 100 },
-				{ id: 'variant', size: 5 / 100 },
-			],
+			audienceSize: 10 / 100,
+			groups: ['control', 'variant'],
 		};
 
 		assertThrows(() => allExpirationsValid([pastTest]));

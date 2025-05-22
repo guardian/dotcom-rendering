@@ -1,26 +1,43 @@
 import { ABTest } from '../../types.ts';
 
-export function noVariantOverlap(tests: ABTest[]) {
-	const allTestPercentages = tests.reduce<number>((percentageSum, test) => {
-		// Skip tests with allowed overlap
-		if (test.allowOverlap) {
-			return percentageSum;
-		}
-		const newTotal = test.groups.reduce<number>((total, group) => {
-			return total + group.size;
-		}, percentageSum);
+interface TestRange {
+	name: string;
+	start: number;
+	end: number;
+}
 
-		if (newTotal > 1) {
-			throw new Error(
-				`Test variant space exceeded when checking ${test.name}`,
+export const findOverlappingTests = (tests: ABTest[]) => {
+	return tests.reduce<TestRange[]>(
+		(acc, { name, audienceOffset, audienceSize }) => {
+			const start = audienceOffset ?? 0;
+			const end = (audienceOffset ?? 0) + audienceSize;
+			const overlap = acc.find(
+				({ start: startAcc, end: endAcc }) =>
+					(startAcc <= start && endAcc >= start) ||
+					(startAcc <= end && endAcc >= end) ||
+					(startAcc >= start && endAcc <= end),
 			);
-		}
+			if (overlap) {
+				throw new Error(`Test ${name} overlaps with ${overlap.name}`);
+			}
+			return [...acc, { name, start, end }];
+		},
+		[],
+	);
+};
+export function noVariantOverlap(tests: ABTest[]) {
+	const allPrimaryTests = tests.filter(
+		(test) =>
+			test.audienceSpace === undefined || test.audienceSpace === 'A',
+	);
 
-		return newTotal;
-	}, 0);
+	findOverlappingTests(allPrimaryTests);
 
-	if (allTestPercentages <= 1) {
-		return true;
-	}
-	throw new Error(`Test variants exceed 100%`);
+	const allSecordaryTests = tests.filter(
+		(test) => test.audienceSpace === 'B',
+	);
+
+	findOverlappingTests(allSecordaryTests);
+
+	return true;
 }

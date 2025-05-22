@@ -16,10 +16,8 @@ Deno.test(
 			expirationDate: new Date(),
 			type: 'server',
 			highImpact: false,
-			groups: [
-				{ id: 'control', size: 5 / 100 },
-				{ id: 'variant', size: 5 / 100 },
-			],
+			audienceSize: 10 / 100,
+			groups: ['control', 'variant'],
 		};
 		assertThrows(() => {
 			limitServerSideTests(
@@ -42,10 +40,8 @@ Deno.test(
 			expirationDate: new Date(),
 			type: 'server',
 			highImpact: false,
-			groups: [
-				{ id: 'control', size: 5 / 100 },
-				{ id: 'variant', size: 5 / 100 },
-			],
+			audienceSize: 10 / 100,
+			groups: ['control', 'variant'],
 		};
 		assertEquals(
 			limitServerSideTests(

@@ -17,7 +17,7 @@ jobs:
       # https://github.com/denoland/setup-deno#latest-stable-for-a-major
       - uses: denoland/setup-deno@v1
         with:
-          deno-version: v2.2
+          deno-version: v2.3
 
       - name: Test
         run: deno test
