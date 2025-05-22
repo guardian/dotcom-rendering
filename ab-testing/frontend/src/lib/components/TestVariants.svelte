@@ -13,8 +13,9 @@
 			<li>
 				<a
 					href={`http://www.theguardian.com/uk#ab-${testName}=${group}`}
-					>{group}</a
-				>
+					>
+					{group}
+				</a>
 			</li>
 		{/each}
 	</ul>

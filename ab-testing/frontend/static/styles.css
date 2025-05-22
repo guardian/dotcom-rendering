@@ -168,13 +168,3 @@
 	font-style: normal;
 	font-display: swap;
 }
-
-body {
-	font-family: 'GuardianTextSans';
-	box-sizing: border-box;
-}
-
-a {
-	color: #02124b;
-	text-decoration: none;
-}

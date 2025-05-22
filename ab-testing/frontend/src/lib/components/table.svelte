@@ -58,7 +58,7 @@
 
 <style>
 	.tests {
-		border: 1px solid #ddd;
+		border: 1px solid var(--border-grey);
 		padding: 8px;
 	}
 
@@ -67,19 +67,19 @@
 		table-layout: fixed;
 		width: 100%;
 		border-collapse: collapse;
-		border: 1px solid #ddd;
+		border: 1px solid var(--border-grey);
 		margin-bottom: 24px;
 	}
 
 	th,
 	td {
 		min-width: 24px;
-		border: 1px solid #ddd;
+		border: 1px solid var(--border-grey);
 		padding: 8px;
 	}
 
 	th[scope='col'] {
-		background-color: #f5f5f5;
+		background-color: var(--light-grey);
 	}
 
 	td,
