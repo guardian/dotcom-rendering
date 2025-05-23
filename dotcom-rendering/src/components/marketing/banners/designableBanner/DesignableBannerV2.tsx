@@ -421,17 +421,19 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 						id="rr_designable-banner-cta-container"
 						css={styles.ctaContentContainer}
 					>
-						<DesignableBannerCtas
-							mainOrMobileContent={mainOrMobileContent}
-							onPrimaryCtaClick={onCtaClick}
-							onSecondaryCtaClick={onSecondaryCtaClick}
-							primaryCtaSettings={
-								templateSettings.primaryCtaSettings
-							}
-							secondaryCtaSettings={
-								templateSettings.secondaryCtaSettings
-							}
-						/>
+						<div css={importedStyleForButton.container}>
+							<DesignableBannerCtas
+								mainOrMobileContent={mainOrMobileContent}
+								onPrimaryCtaClick={onCtaClick}
+								onSecondaryCtaClick={onSecondaryCtaClick}
+								primaryCtaSettings={
+									templateSettings.primaryCtaSettings
+								}
+								secondaryCtaSettings={
+									templateSettings.secondaryCtaSettings
+								}
+							/>
+						</div>
 					</div>
 				)}
 
@@ -716,6 +718,7 @@ const styles = {
 	ctaContentContainer: css`
 		display: flex;
 		align-items: center;
+		justify-content: stretch;
 		flex-direction: column;
 		gap: ${space[4]}px;
 		margin-top: ${space[3]}px;
@@ -724,8 +727,8 @@ const styles = {
 			width: 100vw;
 			position: sticky;
 			bottom: 0;
-			padding-top: ${space[1]}px;
-			padding-bottom: ${space[1]}px;
+			padding-top: ${space[2]}px;
+			padding-bottom: ${space[2]}px;
 			/* background-color: ${neutral[100]}; */
 			box-shadow: 0 -${space[1]}px ${space[3]}px 0 rgba(0, 0, 0, 0.25);
 			margin-right: -${space[3]}px;
@@ -736,8 +739,9 @@ const styles = {
 			}
 		}
 		${from.phablet} {
-			justify-self: stretch;
+			/* justify-self: stretch; */
 			width: 100%;
+			margin-top: ${space[2]}px;
 		}
 		${from.desktop} {
 			width: 100%;
@@ -867,6 +871,38 @@ const styles = {
 	`,
 	articleCountContainer: css`
 		margin-bottom: ${space[3]}px;
+	`,
+};
+
+const importedStyleForButton = {
+	container: css`
+		display: flex;
+		width: calc(100% - 24px);
+		flex-wrap: wrap;
+		flex-direction: row;
+		gap: ${space[2]}px;
+		justify-content: stretch;
+		margin-left: ${space[2]}px;
+		margin-right: ${space[2]}px;
+
+		> a {
+			flex: 1 0 100%;
+			justify-content: center;
+		}
+
+		${from.tablet} {
+			justify-content: start;
+		}
+
+		${from.desktop} {
+			> a {
+				flex-direction: column;
+				flex: 1 0 50%;
+				justify-self: stretch;
+			}
+			flex-direction: row;
+			flex-wrap: nowrap;
+		}
 	`,
 };
 
