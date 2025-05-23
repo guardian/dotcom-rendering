@@ -297,7 +297,7 @@ importers:
         version: 8.0.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/braze-components':
         specifier: 22.2.0
-        version: 22.2.0(@emotion/react@11.14.0)(@guardian/libs@22.4.0)(@guardian/source@9.0.0)(react@18.3.1)
+        version: 22.2.0(@emotion/react@11.14.0)(@guardian/libs@22.5.0)(@guardian/source@9.0.0)(react@18.3.1)
       '@guardian/bridget':
         specifier: 8.1.0
         version: 8.1.0
@@ -308,11 +308,11 @@ importers:
         specifier: 61.4.0
         version: 61.4.0(aws-cdk-lib@2.189.0)(aws-cdk@2.1007.0)(constructs@10.4.2)
       '@guardian/commercial':
-        specifier: 26.1.1
-        version: 26.1.1(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@8.1.0)(@guardian/identity-auth@6.0.1)(@guardian/libs@22.4.0)(@guardian/source@9.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+        specifier: 26.1.2
+        version: 26.1.2(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@8.1.0)(@guardian/identity-auth@6.0.1)(@guardian/libs@22.5.0)(@guardian/source@9.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
       '@guardian/core-web-vitals':
         specifier: 7.0.0
-        version: 7.0.0(@guardian/libs@22.4.0)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3)
+        version: 7.0.0(@guardian/libs@22.5.0)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3)
       '@guardian/eslint-config':
         specifier: 7.0.1
         version: 7.0.1(@typescript-eslint/parser@5.62.0)(eslint@8.56.0)(tslib@2.6.2)
@@ -321,19 +321,19 @@ importers:
         version: 9.0.1(eslint@8.56.0)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/identity-auth':
         specifier: 6.0.1
-        version: 6.0.1(@guardian/libs@22.4.0)(tslib@2.6.2)(typescript@5.5.3)
+        version: 6.0.1(@guardian/libs@22.5.0)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/identity-auth-frontend':
         specifier: 8.1.0
-        version: 8.1.0(@guardian/identity-auth@6.0.1)(@guardian/libs@22.4.0)(tslib@2.6.2)(typescript@5.5.3)
+        version: 8.1.0(@guardian/identity-auth@6.0.1)(@guardian/libs@22.5.0)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/libs':
-        specifier: 22.4.0
-        version: 22.4.0(tslib@2.6.2)(typescript@5.5.3)
+        specifier: 22.5.0
+        version: 22.5.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/ophan-tracker-js':
         specifier: 2.2.10
         version: 2.2.10
       '@guardian/react-crossword':
         specifier: 6.3.0
-        version: 6.3.0(@emotion/react@11.14.0)(@guardian/libs@22.4.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+        version: 6.3.0(@emotion/react@11.14.0)(@guardian/libs@22.5.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -342,10 +342,10 @@ importers:
         version: 9.0.0(@emotion/react@11.14.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source-development-kitchen':
         specifier: 18.1.1
-        version: 18.1.1(@emotion/react@11.14.0)(@guardian/libs@22.4.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
+        version: 18.1.1(@emotion/react@11.14.0)(@guardian/libs@22.5.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/support-dotcom-components':
         specifier: 7.2.0
-        version: 7.2.0(@guardian/libs@22.4.0)(zod@3.22.4)
+        version: 7.2.0(@guardian/libs@22.5.0)(zod@3.22.4)
       '@guardian/tsconfig':
         specifier: 0.2.0
         version: 0.2.0
@@ -384,7 +384,7 @@ importers:
         version: 8.4.2(@storybook/test@8.4.2)(react-dom@18.3.1)(react@18.3.1)(storybook@8.4.2)(typescript@5.5.3)
       '@storybook/react-webpack5':
         specifier: 8.4.2
-        version: 8.4.2(@storybook/test@8.4.2)(@swc/core@1.11.13)(esbuild@0.18.20)(react-dom@18.3.1)(react@18.3.1)(storybook@8.4.2)(typescript@5.5.3)(webpack-cli@6.0.1)
+        version: 8.4.2(@storybook/test@8.4.2)(@swc/core@1.11.24)(esbuild@0.18.20)(react-dom@18.3.1)(react@18.3.1)(storybook@8.4.2)(typescript@5.5.3)(webpack-cli@6.0.1)
       '@storybook/test':
         specifier: 8.4.2
         version: 8.4.2(storybook@8.4.2)
@@ -395,14 +395,14 @@ importers:
         specifier: 8.1.0
         version: 8.1.0(typescript@5.5.3)
       '@swc/cli':
-        specifier: 0.6.0
-        version: 0.6.0(@swc/core@1.11.13)
+        specifier: 0.7.7
+        version: 0.7.7(@swc/core@1.11.24)
       '@swc/core':
-        specifier: 1.11.13
-        version: 1.11.13
+        specifier: 1.11.24
+        version: 1.11.24
       '@swc/jest':
-        specifier: 0.2.37
-        version: 0.2.37(@swc/core@1.11.13)
+        specifier: 0.2.38
+        version: 0.2.38(@swc/core@1.11.24)
       '@testing-library/dom':
         specifier: 10.4.0
         version: 10.4.0
@@ -501,13 +501,13 @@ importers:
         version: 0.0.6
       '@types/webpack-bundle-analyzer':
         specifier: 4.7.0
-        version: 4.7.0(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+        version: 4.7.0(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
       '@types/webpack-env':
         specifier: 1.18.8
         version: 1.18.8
       '@types/webpack-node-externals':
         specifier: 3.0.4
-        version: 3.0.4(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+        version: 3.0.4(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
       '@types/youtube':
         specifier: 0.0.50
         version: 0.0.50
@@ -705,7 +705,7 @@ importers:
         version: 14.0.0(stylelint@16.5.0)
       swc-loader:
         specifier: 0.2.6
-        version: 0.2.6(@swc/core@1.11.13)(webpack@5.99.7)
+        version: 0.2.6(@swc/core@1.11.24)(webpack@5.99.7)
       swr:
         specifier: 1.3.0
         version: 1.3.0(react@18.3.1)
@@ -738,7 +738,7 @@ importers:
         version: 5.5.3
       typescript-json-schema:
         specifier: 0.64.0
-        version: 0.64.0(@swc/core@1.11.13)
+        version: 0.64.0(@swc/core@1.11.24)
       unified:
         specifier: 11.0.5
         version: 11.0.5
@@ -750,7 +750,7 @@ importers:
         version: 4.2.3
       webpack:
         specifier: 5.99.7
-        version: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+        version: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
       webpack-assets-manifest:
         specifier: 6.0.2
         version: 6.0.2(webpack@5.99.7)
@@ -3751,7 +3751,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/braze-components@22.2.0(@emotion/react@11.14.0)(@guardian/libs@22.4.0)(@guardian/source@9.0.0)(react@18.3.1):
+  /@guardian/braze-components@22.2.0(@emotion/react@11.14.0)(@guardian/libs@22.5.0)(@guardian/source@9.0.0)(react@18.3.1):
     resolution: {integrity: sha512-uSkHd6mBVTAD+BrvJZNt+oSipYHQXBdVt9Pu/VTvkliXHzT8OUsep7ObIWM1lkf3znWbqLDhoXtwS5apX2AEWQ==}
     engines: {node: ^18.15 || ^20.8}
     peerDependencies:
@@ -3761,7 +3761,7 @@ packages:
       react: 17.0.2 || 18.2.0
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/libs': 22.4.0(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 22.5.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source': 9.0.0(@emotion/react@11.14.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       react: 18.3.1
     dev: false
@@ -3808,22 +3808,22 @@ packages:
       yargs: 17.7.2
     dev: false
 
-  /@guardian/commercial@26.1.1(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@8.1.0)(@guardian/identity-auth@6.0.1)(@guardian/libs@22.4.0)(@guardian/source@9.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
-    resolution: {integrity: sha512-b8EdkpOC6knUYvXFwcGpzbbaDVSyWb5wzm1tmj5AW9uvnp/yEt7vFCon3gP38UZxSXx2EBPurMJg0PKG79FB4g==}
+  /@guardian/commercial@26.1.2(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@8.1.0)(@guardian/identity-auth@6.0.1)(@guardian/libs@22.5.0)(@guardian/source@9.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
+    resolution: {integrity: sha512-7z+fTvNU87XyaYjATOAZcuHRErPQ8psvBBaWa3u+HPdS/IYXQC95QB6V2ITbtOt2v7hwqQjy2RpO6tipMz+qKQ==}
     peerDependencies:
       '@guardian/ab-core': ^8.0.0
       '@guardian/core-web-vitals': ^11.0.0
       '@guardian/identity-auth': ^7.0.0
       '@guardian/identity-auth-frontend': ^9.0.0
-      '@guardian/libs': ^22.4.0
+      '@guardian/libs': ^22.5.0
       '@guardian/source': ^8.0.2
       typescript: ~5.5.4
     dependencies:
       '@guardian/ab-core': 8.0.0(tslib@2.6.2)(typescript@5.5.3)
-      '@guardian/core-web-vitals': 7.0.0(@guardian/libs@22.4.0)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3)
-      '@guardian/identity-auth': 6.0.1(@guardian/libs@22.4.0)(tslib@2.6.2)(typescript@5.5.3)
-      '@guardian/identity-auth-frontend': 8.1.0(@guardian/identity-auth@6.0.1)(@guardian/libs@22.4.0)(tslib@2.6.2)(typescript@5.5.3)
-      '@guardian/libs': 22.4.0(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/core-web-vitals': 7.0.0(@guardian/libs@22.5.0)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3)
+      '@guardian/identity-auth': 6.0.1(@guardian/libs@22.5.0)(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/identity-auth-frontend': 8.1.0(@guardian/identity-auth@6.0.1)(@guardian/libs@22.5.0)(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 22.5.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source': 9.0.0(@emotion/react@11.14.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       fastdom: 1.0.12
       lodash-es: 4.17.21
@@ -3952,7 +3952,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/core-web-vitals@7.0.0(@guardian/libs@22.4.0)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3):
+  /@guardian/core-web-vitals@7.0.0(@guardian/libs@22.5.0)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3):
     resolution: {integrity: sha512-1JLUQjkLY8SXYJqcy0TiE9/9hCcmyIlmMpRoW8Ygn/qGtyNxG+zzwkwsgtJIP+B0ZjtDqfukra2IV9l7wX5A0g==}
     peerDependencies:
       '@guardian/libs': ^18.0.0
@@ -3963,7 +3963,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@guardian/libs': 22.4.0(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 22.5.0(tslib@2.6.2)(typescript@5.5.3)
       tslib: 2.6.2
       typescript: 5.5.3
       web-vitals: 4.2.3
@@ -4044,7 +4044,7 @@ packages:
       - supports-color
     dev: false
 
-  /@guardian/identity-auth-frontend@8.1.0(@guardian/identity-auth@6.0.1)(@guardian/libs@22.4.0)(tslib@2.6.2)(typescript@5.5.3):
+  /@guardian/identity-auth-frontend@8.1.0(@guardian/identity-auth@6.0.1)(@guardian/libs@22.5.0)(tslib@2.6.2)(typescript@5.5.3):
     resolution: {integrity: sha512-2GzIsUBp8uiP+fRsKUpMrqJYSqokUCDo4q9WByi143CN0LRRWj2tVt23Y/+cZxWUuwDfRBxp1qbRnsy4QSMVLQ==}
     peerDependencies:
       '@guardian/identity-auth': ^6.0.0
@@ -4055,13 +4055,13 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@guardian/identity-auth': 6.0.1(@guardian/libs@22.4.0)(tslib@2.6.2)(typescript@5.5.3)
-      '@guardian/libs': 22.4.0(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/identity-auth': 6.0.1(@guardian/libs@22.5.0)(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 22.5.0(tslib@2.6.2)(typescript@5.5.3)
       tslib: 2.6.2
       typescript: 5.5.3
     dev: false
 
-  /@guardian/identity-auth@6.0.1(@guardian/libs@22.4.0)(tslib@2.6.2)(typescript@5.5.3):
+  /@guardian/identity-auth@6.0.1(@guardian/libs@22.5.0)(tslib@2.6.2)(typescript@5.5.3):
     resolution: {integrity: sha512-x6X7/+0w2ZLYZERUbkO69AjHJ7Jq2IDA5UJP8SrQPhJoTlSxKAl+13w77TcVX75IK7L8KldZscHMfOW1tSnq9g==}
     peerDependencies:
       '@guardian/libs': ^21.0.0
@@ -4071,7 +4071,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@guardian/libs': 22.4.0(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 22.5.0(tslib@2.6.2)(typescript@5.5.3)
       tslib: 2.6.2
       typescript: 5.5.3
     dev: false
@@ -4089,8 +4089,8 @@ packages:
       typescript: 5.5.3
     dev: false
 
-  /@guardian/libs@22.4.0(tslib@2.6.2)(typescript@5.5.3):
-    resolution: {integrity: sha512-IvEvXJSmsSAS2XGMhGZGdJUVdsNorhXPsCnDVHc5/2cQ/YtreTl8w2+Psloaqi/AmnqMSfdRuZg2CjOFIzkJLA==}
+  /@guardian/libs@22.5.0(tslib@2.6.2)(typescript@5.5.3):
+    resolution: {integrity: sha512-SOOCZn/BFemMK28Jz7DbQkCiEIZj1h0G4wxy2bV+V7Bk8M/CziV+xznTahEVQ87u3tcCbGRt0YAVBWs4RsW6zg==}
     peerDependencies:
       tslib: ^2.6.2
       typescript: ~5.5.2
@@ -4119,7 +4119,7 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@guardian/react-crossword@6.3.0(@emotion/react@11.14.0)(@guardian/libs@22.4.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
+  /@guardian/react-crossword@6.3.0(@emotion/react@11.14.0)(@guardian/libs@22.5.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
     resolution: {integrity: sha512-6CVNzY+yZrrUYOLpaAu7KSlyU23LBiZTFNJACI935iyjYuWEtyROoOwza82h1XconuqyEd9S8iG8CjtLb+j9Ig==}
     peerDependencies:
       '@emotion/react': ^11.11.3
@@ -4135,7 +4135,7 @@ packages:
         optional: true
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/libs': 22.4.0(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 22.5.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source': 9.0.0(@emotion/react@11.14.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@types/react': 18.3.1
       react: 18.3.1
@@ -4187,7 +4187,7 @@ packages:
       typescript: 5.5.3
     dev: false
 
-  /@guardian/source-development-kitchen@18.1.1(@emotion/react@11.14.0)(@guardian/libs@22.4.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3):
+  /@guardian/source-development-kitchen@18.1.1(@emotion/react@11.14.0)(@guardian/libs@22.5.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3):
     resolution: {integrity: sha512-wuMULnVjValyEz6YjrOPt054tXJkutkAbPdeV/KQHoSCSjAJnd0Cp3SZeoVog77HE/iZ0mnKaiVkK+QXpRVtCQ==}
     peerDependencies:
       '@emotion/react': ^11.11.4
@@ -4208,7 +4208,7 @@ packages:
         optional: true
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/libs': 22.4.0(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 22.5.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source': 9.0.0(@emotion/react@11.14.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@types/react': 18.3.1
       react: 18.3.1
@@ -4254,13 +4254,13 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/support-dotcom-components@7.2.0(@guardian/libs@22.4.0)(zod@3.22.4):
+  /@guardian/support-dotcom-components@7.2.0(@guardian/libs@22.5.0)(zod@3.22.4):
     resolution: {integrity: sha512-/BridQv4d3v2TuklBz6cwsr+7DUmycA/gNSEe14a5f8Bie0JxpyP0dw1vHbgYAZOuXpDVbaj6YBNag1mOtgY/A==}
     peerDependencies:
       '@guardian/libs': ^22.0.0
       zod: ^3.22.4
     dependencies:
-      '@guardian/libs': 22.4.0(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 22.5.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/ophan-tracker-js': 2.2.10
       aws-sdk: 2.1692.0
       compression: 1.7.4
@@ -5720,8 +5720,8 @@ packages:
     resolution: {integrity: sha512-qkQwQEvHlxwPCHz/xakGfXJusEa1gKMw7enELh6QGopblfN3rMiV084boqiIqBReqWTasSwHOqvuElAu0NQ+8w==}
     engines: {node: '>=18'}
     dependencies:
-      '@swc/core': 1.11.13
-      swc-loader: 0.2.6(@swc/core@1.11.13)(webpack@5.99.7)
+      '@swc/core': 1.11.24
+      swc-loader: 0.2.6(@swc/core@1.11.24)(webpack@5.99.7)
     transitivePeerDependencies:
       - '@swc/helpers'
       - webpack
@@ -5747,7 +5747,7 @@ packages:
       ts-dedent: 2.2.0
     dev: false
 
-  /@storybook/builder-webpack5@8.4.2(@swc/core@1.11.13)(esbuild@0.18.20)(storybook@8.4.2)(typescript@5.5.3)(webpack-cli@6.0.1):
+  /@storybook/builder-webpack5@8.4.2(@swc/core@1.11.24)(esbuild@0.18.20)(storybook@8.4.2)(typescript@5.5.3)(webpack-cli@6.0.1):
     resolution: {integrity: sha512-Pqa0/sqqEujzcvs+/Cwf/5qRLC+atmceROCFokMOgpIaorTXlbmiQdJ2dBhMFNugLvXfL7dVQBjBfiuzhsQ57g==}
     peerDependencies:
       storybook: ^8.4.2
@@ -5773,13 +5773,13 @@ packages:
       semver: 7.5.4
       storybook: 8.4.2(prettier@3.0.3)
       style-loader: 3.3.3(webpack@5.99.7)
-      terser-webpack-plugin: 5.3.14(@swc/core@1.11.13)(esbuild@0.18.20)(webpack@5.99.7)
+      terser-webpack-plugin: 5.3.14(@swc/core@1.11.24)(esbuild@0.18.20)(webpack@5.99.7)
       ts-dedent: 2.2.0
       typescript: 5.5.3
       url: 0.11.3
       util: 0.12.5
       util-deprecate: 1.0.2
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
       webpack-dev-middleware: 6.1.3(webpack@5.99.7)
       webpack-hot-middleware: 2.26.1
       webpack-virtual-modules: 0.6.1
@@ -5935,7 +5935,7 @@ packages:
       storybook: 8.4.2(prettier@3.0.3)
     dev: false
 
-  /@storybook/preset-react-webpack@8.4.2(@storybook/test@8.4.2)(@swc/core@1.11.13)(esbuild@0.18.20)(react-dom@18.3.1)(react@18.3.1)(storybook@8.4.2)(typescript@5.5.3)(webpack-cli@6.0.1):
+  /@storybook/preset-react-webpack@8.4.2(@storybook/test@8.4.2)(@swc/core@1.11.24)(esbuild@0.18.20)(react-dom@18.3.1)(react@18.3.1)(storybook@8.4.2)(typescript@5.5.3)(webpack-cli@6.0.1):
     resolution: {integrity: sha512-Gt9hQRo1ythGFzATNV4WgQDlMDzBgiq7ks+YkW2/Xu5ZkrRrM/gK75fhmbICrknZl2pPPfNFXlECPWKAeTmwFA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
@@ -5962,7 +5962,7 @@ packages:
       storybook: 8.4.2(prettier@3.0.3)
       tsconfig-paths: 4.2.0
       typescript: 5.5.3
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
     transitivePeerDependencies:
       - '@storybook/test'
       - '@swc/core'
@@ -6048,7 +6048,7 @@ packages:
       storybook: 8.4.2(prettier@3.0.3)
     dev: false
 
-  /@storybook/react-webpack5@8.4.2(@storybook/test@8.4.2)(@swc/core@1.11.13)(esbuild@0.18.20)(react-dom@18.3.1)(react@18.3.1)(storybook@8.4.2)(typescript@5.5.3)(webpack-cli@6.0.1):
+  /@storybook/react-webpack5@8.4.2(@storybook/test@8.4.2)(@swc/core@1.11.24)(esbuild@0.18.20)(react-dom@18.3.1)(react@18.3.1)(storybook@8.4.2)(typescript@5.5.3)(webpack-cli@6.0.1):
     resolution: {integrity: sha512-d2/kA7X7bFYnf3WI/aVKfg6ICMHiBIheSmgeY43R1E4K3KUjsJIVJDIliT+UKVZkEo0ie+rglZu0la1DO5Kl+Q==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
@@ -6060,8 +6060,8 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@storybook/builder-webpack5': 8.4.2(@swc/core@1.11.13)(esbuild@0.18.20)(storybook@8.4.2)(typescript@5.5.3)(webpack-cli@6.0.1)
-      '@storybook/preset-react-webpack': 8.4.2(@storybook/test@8.4.2)(@swc/core@1.11.13)(esbuild@0.18.20)(react-dom@18.3.1)(react@18.3.1)(storybook@8.4.2)(typescript@5.5.3)(webpack-cli@6.0.1)
+      '@storybook/builder-webpack5': 8.4.2(@swc/core@1.11.24)(esbuild@0.18.20)(storybook@8.4.2)(typescript@5.5.3)(webpack-cli@6.0.1)
+      '@storybook/preset-react-webpack': 8.4.2(@storybook/test@8.4.2)(@swc/core@1.11.24)(esbuild@0.18.20)(react-dom@18.3.1)(react@18.3.1)(storybook@8.4.2)(typescript@5.5.3)(webpack-cli@6.0.1)
       '@storybook/react': 8.4.2(@storybook/test@8.4.2)(react-dom@18.3.1)(react@18.3.1)(storybook@8.4.2)(typescript@5.5.3)
       '@types/node': 22.14.1
       react: 18.3.1
@@ -6317,8 +6317,8 @@ packages:
       - typescript
     dev: false
 
-  /@swc/cli@0.6.0(@swc/core@1.11.13):
-    resolution: {integrity: sha512-Q5FsI3Cw0fGMXhmsg7c08i4EmXCrcl+WnAxb6LYOLHw4JFFC3yzmx9LaXZ7QMbA+JZXbigU2TirI7RAfO0Qlnw==}
+  /@swc/cli@0.7.7(@swc/core@1.11.24):
+    resolution: {integrity: sha512-j4yYm9bx3pxWofaJKX1BFwj/3ngUDynN4UIQ2Xd2h0h/7Gt7zkReBTpDN7g5S13mgAYxacaTHTOUsz18097E8w==}
     engines: {node: '>= 16.14.0'}
     hasBin: true
     peerDependencies:
@@ -6328,7 +6328,7 @@ packages:
       chokidar:
         optional: true
     dependencies:
-      '@swc/core': 1.11.13
+      '@swc/core': 1.11.24
       '@swc/counter': 0.1.3
       '@xhmikosr/bin-wrapper': 13.0.5
       commander: 8.3.0
@@ -6340,8 +6340,8 @@ packages:
       source-map: 0.7.4
     dev: false
 
-  /@swc/core-darwin-arm64@1.11.13:
-    resolution: {integrity: sha512-loSERhLaQ9XDS+5Kdx8cLe2tM1G0HLit8MfehipAcsdctpo79zrRlkW34elOf3tQoVPKUItV0b/rTuhjj8NtHg==}
+  /@swc/core-darwin-arm64@1.11.24:
+    resolution: {integrity: sha512-dhtVj0PC1APOF4fl5qT2neGjRLgHAAYfiVP8poJelhzhB/318bO+QCFWAiimcDoyMgpCXOhTp757gnoJJrheWA==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [darwin]
@@ -6349,8 +6349,8 @@ packages:
     dev: false
     optional: true
 
-  /@swc/core-darwin-x64@1.11.13:
-    resolution: {integrity: sha512-uSA4UwgsDCIysUPfPS8OrQTH2h9spO7IYFd+1NB6dJlVGUuR6jLKuMBOP1IeLeax4cGHayvkcwSJ3OvxHwgcZQ==}
+  /@swc/core-darwin-x64@1.11.24:
+    resolution: {integrity: sha512-H/3cPs8uxcj2Fe3SoLlofN5JG6Ny5bl8DuZ6Yc2wr7gQFBmyBkbZEz+sPVgsID7IXuz7vTP95kMm1VL74SO5AQ==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [darwin]
@@ -6358,8 +6358,8 @@ packages:
     dev: false
     optional: true
 
-  /@swc/core-linux-arm-gnueabihf@1.11.13:
-    resolution: {integrity: sha512-boVtyJzS8g30iQfe8Q46W5QE/cmhKRln/7NMz/5sBP/am2Lce9NL0d05NnFwEWJp1e2AMGHFOdRr3Xg1cDiPKw==}
+  /@swc/core-linux-arm-gnueabihf@1.11.24:
+    resolution: {integrity: sha512-PHJgWEpCsLo/NGj+A2lXZ2mgGjsr96ULNW3+T3Bj2KTc8XtMUkE8tmY2Da20ItZOvPNC/69KroU7edyo1Flfbw==}
     engines: {node: '>=10'}
     cpu: [arm]
     os: [linux]
@@ -6367,8 +6367,8 @@ packages:
     dev: false
     optional: true
 
-  /@swc/core-linux-arm64-gnu@1.11.13:
-    resolution: {integrity: sha512-+IK0jZ84zHUaKtwpV+T+wT0qIUBnK9v2xXD03vARubKF+eUqCsIvcVHXmLpFuap62dClMrhCiwW10X3RbXNlHw==}
+  /@swc/core-linux-arm64-gnu@1.11.24:
+    resolution: {integrity: sha512-C2FJb08+n5SD4CYWCTZx1uR88BN41ZieoHvI8A55hfVf2woT8+6ZiBzt74qW2g+ntZ535Jts5VwXAKdu41HpBg==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
@@ -6376,8 +6376,8 @@ packages:
     dev: false
     optional: true
 
-  /@swc/core-linux-arm64-musl@1.11.13:
-    resolution: {integrity: sha512-+ukuB8RHD5BHPCUjQwuLP98z+VRfu+NkKQVBcLJGgp0/+w7y0IkaxLY/aKmrAS5ofCNEGqKL+AOVyRpX1aw+XA==}
+  /@swc/core-linux-arm64-musl@1.11.24:
+    resolution: {integrity: sha512-ypXLIdszRo0re7PNNaXN0+2lD454G8l9LPK/rbfRXnhLWDBPURxzKlLlU/YGd2zP98wPcVooMmegRSNOKfvErw==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
@@ -6385,8 +6385,8 @@ packages:
     dev: false
     optional: true
 
-  /@swc/core-linux-x64-gnu@1.11.13:
-    resolution: {integrity: sha512-q9H3WI3U3dfJ34tdv60zc8oTuWvSd5fOxytyAO9Pc5M82Hic3jjWaf2xBekUg07ubnMZpyfnv+MlD+EbUI3Llw==}
+  /@swc/core-linux-x64-gnu@1.11.24:
+    resolution: {integrity: sha512-IM7d+STVZD48zxcgo69L0yYptfhaaE9cMZ+9OoMxirNafhKKXwoZuufol1+alEFKc+Wbwp+aUPe/DeWC/Lh3dg==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
@@ -6394,8 +6394,8 @@ packages:
     dev: false
     optional: true
 
-  /@swc/core-linux-x64-musl@1.11.13:
-    resolution: {integrity: sha512-9aaZnnq2pLdTbAzTSzy/q8dr7Woy3aYIcQISmw1+Q2/xHJg5y80ZzbWSWKYca/hKonDMjIbGR6dp299I5J0aeA==}
+  /@swc/core-linux-x64-musl@1.11.24:
+    resolution: {integrity: sha512-DZByJaMVzSfjQKKQn3cqSeqwy6lpMaQDQQ4HPlch9FWtDx/dLcpdIhxssqZXcR2rhaQVIaRQsCqwV6orSDGAGw==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
@@ -6403,8 +6403,8 @@ packages:
     dev: false
     optional: true
 
-  /@swc/core-win32-arm64-msvc@1.11.13:
-    resolution: {integrity: sha512-n3QZmDewkHANcoHvtwvA6yJbmS4XJf0MBMmwLZoKDZ2dOnC9D/jHiXw7JOohEuzYcpLoL5tgbqmjxa3XNo9Oow==}
+  /@swc/core-win32-arm64-msvc@1.11.24:
+    resolution: {integrity: sha512-Q64Ytn23y9aVDKN5iryFi8mRgyHw3/kyjTjT4qFCa8AEb5sGUuSj//AUZ6c0J7hQKMHlg9do5Etvoe61V98/JQ==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [win32]
@@ -6412,8 +6412,8 @@ packages:
     dev: false
     optional: true
 
-  /@swc/core-win32-ia32-msvc@1.11.13:
-    resolution: {integrity: sha512-wM+Nt4lc6YSJFthCx3W2dz0EwFNf++j0/2TQ0Js9QLJuIxUQAgukhNDVCDdq8TNcT0zuA399ALYbvj5lfIqG6g==}
+  /@swc/core-win32-ia32-msvc@1.11.24:
+    resolution: {integrity: sha512-9pKLIisE/Hh2vJhGIPvSoTK4uBSPxNVyXHmOrtdDot4E1FUUI74Vi8tFdlwNbaj8/vusVnb8xPXsxF1uB0VgiQ==}
     engines: {node: '>=10'}
     cpu: [ia32]
     os: [win32]
@@ -6421,8 +6421,8 @@ packages:
     dev: false
     optional: true
 
-  /@swc/core-win32-x64-msvc@1.11.13:
-    resolution: {integrity: sha512-+X5/uW3s1L5gK7wAo0E27YaAoidJDo51dnfKSfU7gF3mlEUuWH8H1bAy5OTt2mU4eXtfsdUMEVXSwhDlLtQkuA==}
+  /@swc/core-win32-x64-msvc@1.11.24:
+    resolution: {integrity: sha512-sybnXtOsdB+XvzVFlBVGgRHLqp3yRpHK7CrmpuDKszhj/QhmsaZzY/GHSeALlMtLup13M0gqbcQvsTNlAHTg3w==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [win32]
@@ -6430,49 +6430,49 @@ packages:
     dev: false
     optional: true
 
-  /@swc/core@1.11.13:
-    resolution: {integrity: sha512-9BXdYz12Wl0zWmZ80PvtjBWeg2ncwJ9L5WJzjhN6yUTZWEV/AwAdVdJnIEp4pro3WyKmAaMxcVOSbhuuOZco5g==}
+  /@swc/core@1.11.24:
+    resolution: {integrity: sha512-MaQEIpfcEMzx3VWWopbofKJvaraqmL6HbLlw2bFZ7qYqYw3rkhM0cQVEgyzbHtTWwCwPMFZSC2DUbhlZgrMfLg==}
     engines: {node: '>=10'}
     requiresBuild: true
     peerDependencies:
-      '@swc/helpers': '*'
+      '@swc/helpers': '>=0.5.17'
     peerDependenciesMeta:
       '@swc/helpers':
         optional: true
     dependencies:
       '@swc/counter': 0.1.3
-      '@swc/types': 0.1.20
+      '@swc/types': 0.1.21
     optionalDependencies:
-      '@swc/core-darwin-arm64': 1.11.13
-      '@swc/core-darwin-x64': 1.11.13
-      '@swc/core-linux-arm-gnueabihf': 1.11.13
-      '@swc/core-linux-arm64-gnu': 1.11.13
-      '@swc/core-linux-arm64-musl': 1.11.13
-      '@swc/core-linux-x64-gnu': 1.11.13
-      '@swc/core-linux-x64-musl': 1.11.13
-      '@swc/core-win32-arm64-msvc': 1.11.13
-      '@swc/core-win32-ia32-msvc': 1.11.13
-      '@swc/core-win32-x64-msvc': 1.11.13
+      '@swc/core-darwin-arm64': 1.11.24
+      '@swc/core-darwin-x64': 1.11.24
+      '@swc/core-linux-arm-gnueabihf': 1.11.24
+      '@swc/core-linux-arm64-gnu': 1.11.24
+      '@swc/core-linux-arm64-musl': 1.11.24
+      '@swc/core-linux-x64-gnu': 1.11.24
+      '@swc/core-linux-x64-musl': 1.11.24
+      '@swc/core-win32-arm64-msvc': 1.11.24
+      '@swc/core-win32-ia32-msvc': 1.11.24
+      '@swc/core-win32-x64-msvc': 1.11.24
     dev: false
 
   /@swc/counter@0.1.3:
     resolution: {integrity: sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ==}
     dev: false
 
-  /@swc/jest@0.2.37(@swc/core@1.11.13):
-    resolution: {integrity: sha512-CR2BHhmXKGxTiFr21DYPRHQunLkX3mNIFGFkxBGji6r9uyIR5zftTOVYj1e0sFNMV2H7mf/+vpaglqaryBtqfQ==}
+  /@swc/jest@0.2.38(@swc/core@1.11.24):
+    resolution: {integrity: sha512-HMoZgXWMqChJwffdDjvplH53g9G2ALQes3HKXDEdliB/b85OQ0CTSbxG8VSeCwiAn7cOaDVEt4mwmZvbHcS52w==}
     engines: {npm: '>= 7.0.0'}
     peerDependencies:
       '@swc/core': '*'
     dependencies:
       '@jest/create-cache-key-function': 29.7.0
-      '@swc/core': 1.11.13
+      '@swc/core': 1.11.24
       '@swc/counter': 0.1.3
       jsonc-parser: 3.2.0
     dev: false
 
-  /@swc/types@0.1.20:
-    resolution: {integrity: sha512-/rlIpxwKrhz4BIplXf6nsEHtqlhzuNN34/k3kMAXH4/lvVoA3cdq+60aqVNnyvw2uITEaCi0WV3pxBe4dQqoXQ==}
+  /@swc/types@0.1.21:
+    resolution: {integrity: sha512-2YEtj5HJVbKivud9N4bpPBAyZhj4S2Ipe5LkUG94alTpr7in/GU/EARgPAd3BwU+YOmFVJC2+kjqhGRi3r0ZpQ==}
     dependencies:
       '@swc/counter': 0.1.3
     dev: false
@@ -7106,12 +7106,12 @@ packages:
     resolution: {integrity: sha512-WUtIVRUZ9i5dYXefDEAI7sh9/O7jGvHg7Df/5O/gtH3Yabe5odI3UWopVR1qbPXQtvOxWu3mM4XxlYeZtMWF4g==}
     dev: false
 
-  /@types/webpack-bundle-analyzer@4.7.0(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1):
+  /@types/webpack-bundle-analyzer@4.7.0(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1):
     resolution: {integrity: sha512-c5i2ThslSNSG8W891BRvOd/RoCjI2zwph8maD22b1adtSns20j+0azDDMCK06DiVrzTgnwiDl5Ntmu1YRJw8Sg==}
     dependencies:
       '@types/node': 22.14.1
       tapable: 2.2.1
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
     transitivePeerDependencies:
       - '@swc/core'
       - esbuild
@@ -7123,11 +7123,11 @@ packages:
     resolution: {integrity: sha512-G9eAoJRMLjcvN4I08wB5I7YofOb/kaJNd5uoCMX+LbKXTPCF+ZIHuqTnFaK9Jz1rgs035f9JUPUhNFtqgucy/A==}
     dev: false
 
-  /@types/webpack-node-externals@3.0.4(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1):
+  /@types/webpack-node-externals@3.0.4(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1):
     resolution: {integrity: sha512-8Z3/edqxE3RRlOJwKSgOFxLZRt/i1qFlv/Bi308ZUKo9jh8oGngd9r8GR0ZNKW5AEJq8QNQE3b17CwghTjQ0Uw==}
     dependencies:
       '@types/node': 22.14.1
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
     transitivePeerDependencies:
       - '@swc/core'
       - esbuild
@@ -9483,7 +9483,7 @@ packages:
       postcss-modules-values: 4.0.0(postcss@8.4.39)
       postcss-value-parser: 4.2.0
       semver: 7.5.4
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
     dev: false
 
   /css-select@4.3.0:
@@ -17173,15 +17173,15 @@ packages:
       picocolors: 1.1.1
     dev: false
 
-  /swc-loader@0.2.6(@swc/core@1.11.13)(webpack@5.99.7):
+  /swc-loader@0.2.6(@swc/core@1.11.24)(webpack@5.99.7):
     resolution: {integrity: sha512-9Zi9UP2YmDpgmQVbyOPJClY0dwf58JDyDMQ7uRc4krmc72twNI2fvlBWHLqVekBpPc7h5NJkGVT1zNDxFrqhvg==}
     peerDependencies:
       '@swc/core': ^1.2.147
       webpack: '>=2'
     dependencies:
-      '@swc/core': 1.11.13
+      '@swc/core': 1.11.24
       '@swc/counter': 0.1.3
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
     dev: false
 
   /swr@1.3.0(react@18.3.1):
@@ -17220,7 +17220,7 @@ packages:
       streamx: 2.21.0
     dev: false
 
-  /terser-webpack-plugin@5.3.14(@swc/core@1.11.13)(esbuild@0.18.20)(webpack@5.99.7):
+  /terser-webpack-plugin@5.3.14(@swc/core@1.11.24)(esbuild@0.18.20)(webpack@5.99.7):
     resolution: {integrity: sha512-vkZjpUjb6OMS7dhV+tILUW6BhpDR7P2L/aQSAv+Uwk+m8KATX9EccViHTJR2qDtACKPIYndLGCyl3FMo+r2LMw==}
     engines: {node: '>= 10.13.0'}
     peerDependencies:
@@ -17237,13 +17237,13 @@ packages:
         optional: true
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
-      '@swc/core': 1.11.13
+      '@swc/core': 1.11.24
       esbuild: 0.18.20
       jest-worker: 27.5.1
       schema-utils: 4.3.2
       serialize-javascript: 6.0.2
       terser: 5.39.0
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
     dev: false
 
   /terser-webpack-plugin@5.3.14(esbuild@0.18.20)(webpack@5.99.7):
@@ -17540,7 +17540,7 @@ packages:
       webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
     dev: false
 
-  /ts-node@10.9.2(@swc/core@1.11.13)(@types/node@16.18.68)(typescript@5.1.6):
+  /ts-node@10.9.2(@swc/core@1.11.24)(@types/node@16.18.68)(typescript@5.1.6):
     resolution: {integrity: sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==}
     hasBin: true
     peerDependencies:
@@ -17555,7 +17555,7 @@ packages:
         optional: true
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
-      '@swc/core': 1.11.13
+      '@swc/core': 1.11.24
       '@tsconfig/node10': 1.0.9
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
@@ -17780,7 +17780,7 @@ packages:
       typescript-logic: 0.0.0
     dev: false
 
-  /typescript-json-schema@0.64.0(@swc/core@1.11.13):
+  /typescript-json-schema@0.64.0(@swc/core@1.11.24):
     resolution: {integrity: sha512-Sew8llkYSzpxaMoGjpjD6NMFCr6DoWFHLs7Bz1LU48pzzi8ok8W+GZs9cG87IMBpC0UI7qwBMUI2um0LGxxLOg==}
     hasBin: true
     dependencies:
@@ -17789,7 +17789,7 @@ packages:
       glob: 7.2.3
       path-equal: 1.2.5
       safe-stable-stringify: 2.4.3
-      ts-node: 10.9.2(@swc/core@1.11.13)(@types/node@16.18.68)(typescript@5.1.6)
+      ts-node: 10.9.2(@swc/core@1.11.24)(@types/node@16.18.68)(typescript@5.1.6)
       typescript: 5.1.6
       yargs: 17.7.2
     transitivePeerDependencies:
@@ -18195,7 +18195,7 @@ packages:
       lockfile: 1.0.4
       schema-utils: 4.3.2
       tapable: 2.2.1
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
     dev: false
 
   /webpack-bundle-analyzer@4.10.2:
@@ -18246,7 +18246,7 @@ packages:
       import-local: 3.2.0
       interpret: 3.1.1
       rechoir: 0.8.0
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
       webpack-bundle-analyzer: 4.10.2
       webpack-dev-server: 5.2.1(webpack-cli@6.0.1)(webpack@5.99.7)
       webpack-merge: 6.0.1
@@ -18315,7 +18315,7 @@ packages:
       on-finished: 2.4.1
       range-parser: 1.2.1
       schema-utils: 4.2.0
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
     dev: false
 
   /webpack-dev-server@5.2.1(webpack-cli@6.0.1)(webpack@5.99.7):
@@ -18391,7 +18391,7 @@ packages:
       debug: 3.2.7
       require-from-string: 2.0.2
       source-map-support: 0.5.21
-      webpack: 5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -18448,7 +18448,7 @@ packages:
     resolution: {integrity: sha512-poXpCylU7ExuvZK8z+On3kX+S8o/2dQ/SVYueKA0D4WEMXROXgY8Ez50/bQEUmvoSMMrWcrJqCHuhAbsiwg7Dg==}
     dev: false
 
-  /webpack@5.99.7(@swc/core@1.11.13)(esbuild@0.18.20)(webpack-cli@6.0.1):
+  /webpack@5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1):
     resolution: {integrity: sha512-CNqKBRMQjwcmKR0idID5va1qlhrqVUKpovi+Ec79ksW8ux7iS1+A6VqzfZXgVYCFRKl7XL5ap3ZoMpwBJxcg0w==}
     engines: {node: '>=10.13.0'}
     hasBin: true
@@ -18479,7 +18479,7 @@ packages:
       neo-async: 2.6.2
       schema-utils: 4.3.2
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.14(@swc/core@1.11.13)(esbuild@0.18.20)(webpack@5.99.7)
+      terser-webpack-plugin: 5.3.14(@swc/core@1.11.24)(esbuild@0.18.20)(webpack@5.99.7)
       watchpack: 2.4.2
       webpack-cli: 6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.1)(webpack@5.99.7)
       webpack-sources: 3.2.3
