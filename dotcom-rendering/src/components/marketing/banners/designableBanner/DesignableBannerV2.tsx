@@ -557,7 +557,7 @@ const styles = {
 		}
 
 		/* mobile first */
-		${from.mobile} {
+		@media (min-width: 50px) {
 			margin: 0 auto;
 			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
 			grid-template-columns: auto;
@@ -724,8 +724,8 @@ const styles = {
 			width: 100vw;
 			position: sticky;
 			bottom: 0;
-			padding-top: ${space[3]}px;
-			padding-bottom: ${space[3]}px;
+			padding-top: ${space[1]}px;
+			padding-bottom: ${space[1]}px;
 			/* background-color: ${neutral[100]}; */
 			box-shadow: 0 -${space[1]}px ${space[3]}px 0 rgba(0, 0, 0, 0.25);
 			margin-right: -${space[3]}px;
