@@ -35,12 +35,14 @@ test.describe('Signed in readers', () => {
 		context,
 		page,
 	}) => {
+		const path =
+			'/commentisfree/2025/jan/14/bradford-radical-culture-city-of-culture-bronte';
 		const secureServerAvailable = await isSecureServerAvailable();
 		if (secureServerAvailable) {
 			await disableCMP(context);
 			await fetchAndloadPageWithOverrides(
 				page,
-				`/Article/https://www.theguardian.com/politics/2019/oct/29/tories-restore-party-whip-to-10-mps-who-sought-to-block-no-deal-brexit`,
+				`https://www.theguardian.com${path}`,
 				{
 					configOverrides: {
 						idUrl: 'https://profile.thegulocal.com',
@@ -50,7 +52,7 @@ test.describe('Signed in readers', () => {
 					useSecure: true,
 				},
 			);
-			await signIn(page, context);
+			await signIn(page, context, path);
 		}
 	});
 });

@@ -1,8 +1,8 @@
 import { randomUUID } from 'node:crypto';
 import type { BrowserContext, Page } from '@playwright/test';
-import { BASE_URL_SECURE } from 'playwright.config';
+import { ORIGIN_SECURE } from 'playwright.config';
 import { disableCMP } from './cmp';
-import { loadPage } from './load-page';
+import { fetchAndloadPageWithOverrides } from './load-page';
 import { expectToExist } from './locators';
 
 type Networks = 'facebook' | 'apple' | 'google';
@@ -93,8 +93,11 @@ const createTestUser = async (): Promise<IDAPITestUser> => {
 	}
 };
 
-const signIn = async (page: Page, context: BrowserContext): Promise<void> => {
-	const startPage = page.url();
+const signIn = async (
+	page: Page,
+	context: BrowserContext,
+	path: string,
+): Promise<void> => {
 	await disableCMP(context);
 
 	await page.click('text="Sign in"');
@@ -113,13 +116,30 @@ const signIn = async (page: Page, context: BrowserContext): Promise<void> => {
 	await page.fill('input[name=password]', password);
 	await page.click('[data-cy="main-form-submit-button"]');
 
-	await page.waitForURL(BASE_URL_SECURE);
-	await page.waitForLoadState('load');
-	await loadPage({
-		page,
-		path: startPage.substring(startPage.indexOf('/Article')),
-		useSecure: true,
+	void context.cookies().then((cookies) => {
+		console.log('!!!! 1', cookies);
 	});
+
+	await page.waitForURL(ORIGIN_SECURE);
+	await page.waitForLoadState('load');
+	await fetchAndloadPageWithOverrides(
+		page,
+		`https://www.theguardian.com${path}`,
+		{
+			configOverrides: {
+				idUrl: 'https://profile.thegulocal.com',
+			},
+		},
+		{
+			useSecure: true,
+		},
+	);
+
+	void context.cookies().then((cookies) => {
+		console.log('!!!! 2', cookies);
+	});
+
+	await page.waitForLoadState('load');
 };
 
 export { createTestUser, signIn };

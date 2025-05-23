@@ -1,8 +1,8 @@
-import { BASE_URL_SECURE } from '../../playwright.config';
+import { ORIGIN_SECURE } from '../../playwright.config';
 
 const isSecureServerAvailable = async (): Promise<boolean> => {
 	try {
-		const response = await fetch(BASE_URL_SECURE, {
+		const response = await fetch(ORIGIN_SECURE, {
 			method: 'HEAD',
 		});
 		return response.status === 200;

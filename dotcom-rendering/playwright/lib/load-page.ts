@@ -1,5 +1,5 @@
 import type { Page } from '@playwright/test';
-import { BASE_URL, BASE_URL_SECURE } from '../../playwright.config';
+import { ORIGIN, ORIGIN_SECURE } from '../../playwright.config';
 import type { FEArticle } from '../../src/frontend/feArticle';
 import { validateAsFEArticle } from '../../src/model/validate';
 
@@ -12,6 +12,9 @@ type LoadPageOptions = {
 	preventSupportBanner?: boolean;
 	useSecure?: boolean;
 };
+
+const getOrigin = (useSecure?: boolean): string =>
+	useSecure ? ORIGIN_SECURE : ORIGIN;
 
 /**
  * Loads a page in Playwright and centralises setup
@@ -61,9 +64,7 @@ const loadPage = async ({
 	// The default Playwright waitUntil: 'load' ensures all requests have completed
 	// Use 'domcontentloaded' to speed up tests and prevent hanging requests from timing out tests
 	await page.goto(
-		`${useSecure ? BASE_URL_SECURE : BASE_URL}${path}${paramsString}${
-			fragment ?? ''
-		}`,
+		`${getOrigin(useSecure)}${path}${paramsString}${fragment ?? ''}`,
 		{
 			waitUntil,
 		},
@@ -84,31 +85,34 @@ const loadPageWithOverrides = async (
 	options?: LoadPageOptions,
 ): Promise<void> => {
 	const path = `/Article`;
-	await page.route(`${BASE_URL}${path}`, async (route) => {
-		const postData = {
-			...article,
-			config: {
-				...article.config,
-				...overrides?.configOverrides,
-				switches: {
-					...article.config.switches,
-					...overrides?.switchOverrides,
+	await page.route(
+		`${getOrigin(options?.useSecure)}${path}`,
+		async (route) => {
+			const postData = {
+				...article,
+				config: {
+					...article.config,
+					...overrides?.configOverrides,
+					switches: {
+						...article.config.switches,
+						...overrides?.switchOverrides,
+					},
 				},
-			},
-		};
-		await route.continue({
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			postData,
-		});
-	});
+			};
+			await route.continue({
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				postData,
+			});
+		},
+	);
 	await loadPage({ page, path, queryParamsOn: false, ...options });
 };
 
 /**
- * Fetch the page json from PROD then load it as a POST with overrides
+ * Fetch the page json from the provided URL then load it locally as a POST with overrides
  */
 const fetchAndloadPageWithOverrides = async (
 	page: Page,
