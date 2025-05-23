@@ -59,6 +59,7 @@ playwright/.cache/
 
 # svelte output
 .svelte-kit
+ab-testing/frontend/build
 
 # vite
 vite.config.js.timestamp-*
