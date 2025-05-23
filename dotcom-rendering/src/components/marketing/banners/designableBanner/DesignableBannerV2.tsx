@@ -419,9 +419,9 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 				{!threeTierChoiceCardSelectedProduct && (
 					<div
 						id="rr_designable-banner-cta-container"
-						css={styles.ctaContentContainer}
+						css={styles.outerOldCtaContainer}
 					>
-						<div css={importedStyleForButton.container}>
+						<div css={styles.innerOldCtaContainer}>
 							<DesignableBannerCtas
 								mainOrMobileContent={mainOrMobileContent}
 								onPrimaryCtaClick={onCtaClick}
@@ -641,31 +641,6 @@ const styles = {
 		above please only add design overrides here.  
 		These are passed into the component and applied at that level. */
 	`,
-	/* hacky change until we can rework the designable banner header with the correct styles */
-	headerOverrides: css`
-		/* stylelint-disable declaration-no-important */
-		h2 {
-			margin-top: ${space[1]}px !important;
-			margin-bottom: ${space[2]}px !important;
-			${until.phablet} {
-				font-size: 28px !important;
-				font-style: normal !important;
-				font-weight: 500 !important;
-			}
-
-			${until.leftCol} {
-				font-size: 34px !important;
-				font-style: normal !important;
-				font-weight: 500 !important;
-			}
-
-			${from.leftCol} {
-				font-size: 42px !important;
-				font-style: normal !important;
-				font-weight: 500 !important;
-			}
-		}
-	`,
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
 		align-self: stretch;
 		justify-self: stretch;
@@ -715,7 +690,7 @@ const styles = {
 		}
 	`,
 	/* ctas for use with main images */
-	ctaContentContainer: css`
+	outerOldCtaContainer: css`
 		display: flex;
 		align-items: center;
 		justify-content: stretch;
@@ -747,6 +722,35 @@ const styles = {
 			width: 100%;
 			flex-wrap: nowrap;
 			margin-bottom: ${space[2]}px;
+		}
+	`,
+	innerOldCtaContainer: css`
+		display: flex;
+		width: calc(100% - 24px);
+		flex-wrap: wrap;
+		flex-direction: row;
+		gap: ${space[2]}px;
+		justify-content: stretch;
+		margin-left: ${space[2]}px;
+		margin-right: ${space[2]}px;
+
+		> a {
+			flex: 1 0 100%;
+			justify-content: center;
+		}
+
+		${from.tablet} {
+			justify-content: start;
+		}
+
+		${from.desktop} {
+			> a {
+				flex-direction: column;
+				flex: 1 0 50%;
+				justify-self: stretch;
+			}
+			flex-direction: row;
+			flex-wrap: nowrap;
 		}
 	`,
 	bodyCopyOverrides: css`
@@ -872,36 +876,29 @@ const styles = {
 	articleCountContainer: css`
 		margin-bottom: ${space[3]}px;
 	`,
-};
-
-const importedStyleForButton = {
-	container: css`
-		display: flex;
-		width: calc(100% - 24px);
-		flex-wrap: wrap;
-		flex-direction: row;
-		gap: ${space[2]}px;
-		justify-content: stretch;
-		margin-left: ${space[2]}px;
-		margin-right: ${space[2]}px;
-
-		> a {
-			flex: 1 0 100%;
-			justify-content: center;
-		}
-
-		${from.tablet} {
-			justify-content: start;
-		}
-
-		${from.desktop} {
-			> a {
-				flex-direction: column;
-				flex: 1 0 50%;
-				justify-self: stretch;
+	/* hacky change until we can rework the designable banner header with the correct styles */
+	headerOverrides: css`
+		/* stylelint-disable declaration-no-important */
+		h2 {
+			margin-top: ${space[1]}px !important;
+			margin-bottom: ${space[2]}px !important;
+			${until.phablet} {
+				font-size: 28px !important;
+				font-style: normal !important;
+				font-weight: 500 !important;
 			}
-			flex-direction: row;
-			flex-wrap: nowrap;
+
+			${until.leftCol} {
+				font-size: 34px !important;
+				font-style: normal !important;
+				font-weight: 500 !important;
+			}
+
+			${from.leftCol} {
+				font-size: 42px !important;
+				font-style: normal !important;
+				font-weight: 500 !important;
+			}
 		}
 	`,
 };
