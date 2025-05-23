@@ -3,8 +3,8 @@ import { defineConfig, devices } from '@playwright/test';
 export const isCI = !!process.env.CI;
 export const isDev = !isCI;
 export const PORT = isDev ? 3030 : 9000;
-export const BASE_URL = `http://localhost:${PORT}`;
-export const BASE_URL_SECURE = `https://r.thegulocal.com`;
+export const ORIGIN = `http://localhost:${PORT}`;
+export const ORIGIN_SECURE = `https://r.thegulocal.com`;
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -41,7 +41,7 @@ export default defineConfig({
 	webServer: {
 		// On CI the server is already started so a no-op
 		command: isDev ? 'make dev' : ':',
-		url: BASE_URL,
+		url: ORIGIN,
 		reuseExistingServer: true,
 		stdout: 'pipe',
 		stderr: 'pipe',
