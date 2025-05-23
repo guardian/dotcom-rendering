@@ -261,7 +261,6 @@ export const HighlightsCard = ({
 						showQuotes={showQuotedHeadline}
 						headlineColour={palette('--highlights-card-headline')}
 						kickerColour={palette('--highlights-card-kicker-text')}
-						isBetaContainer={true}
 					/>
 				</div>
 

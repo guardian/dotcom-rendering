@@ -254,7 +254,7 @@ interface AppsProps extends CommonProps {
 export const PictureLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
-		config: { isPaidContent, host },
+		config: { isPaidContent, host, hasSurveyAd },
 	} = article;
 
 	const isWeb = renderingTarget === 'Web';
@@ -318,6 +318,10 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						pageId={article.pageId}
 					/>
 				</div>
+			)}
+
+			{renderAds && hasSurveyAd && (
+				<AdSlot position="survey" display={format.display} />
 			)}
 
 			<main

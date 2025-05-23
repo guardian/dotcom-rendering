@@ -412,6 +412,16 @@ const auxiaLogTreatmentInteraction = async (
 	actionName: AuxiaInteractionActionName,
 	browserId: string | undefined,
 ): Promise<void> => {
+	// We have two types of gates: the standard Auxia gate and the
+	// gu default gate that is being served from SDC
+	// They are indistinguishable in terms of their structure, but the SDC
+	// gate comes with treatmentId: 'default-treatment-id'
+	// In this case, we should not run LogTreatmentInteraction
+
+	if (userTreatment.treatmentId === 'default-treatment-id') {
+		return;
+	}
+
 	const url = `${contributionsServiceUrl}/auxia/log-treatment-interaction`;
 	const headers = {
 		'Content-Type': 'application/json',
