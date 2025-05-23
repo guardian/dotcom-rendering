@@ -547,7 +547,7 @@ const styles = {
 
 			${from.desktop} {
 				margin-top: ${space[6]}px;
-				padding-right: 0;
+				padding-right: ${space[2]}px;
 				justify-self: end;
 			}
 		}
@@ -671,8 +671,6 @@ const styles = {
 
 		${from.desktop} {
 			background: ${background};
-			max-width: 492px;
-			padding-left: ${space[2]}px;
 			padding-top: ${space[3]}px;
 		}
 	`,
@@ -680,11 +678,9 @@ const styles = {
 		align-self: start;
 
 		${from.phablet} {
-			align-self: start;
 			max-width: 492px;
 		}
 		${from.desktop} {
-			max-width: 492px;
 			padding-right: ${space[5]}px;
 			margin-bottom: ${space[2]}px;
 		}
