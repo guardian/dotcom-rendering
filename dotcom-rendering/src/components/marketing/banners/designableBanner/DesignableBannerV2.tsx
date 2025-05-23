@@ -509,13 +509,6 @@ const styles = {
 		padding: 0 auto;
 	`,
 	layoutOverrides: (cardsImageOrSpaceTemplateString: string) => css`
-		max-width: 1300px;
-		display: grid;
-		/* column-gap: 8px; */
-		background: inherit;
-		position: relative;
-		bottom: 0px;
-
 		/* Define the grid areas */
 		#rr_designable-banner-logo {
 			grid-area: logo;
@@ -535,19 +528,20 @@ const styles = {
 		#rr_designable-banner-close-button {
 			grid-area: close-button;
 			${until.phablet} {
+				padding-right: ${space[2]}px;
 				justify-self: end;
 				position: sticky;
 				top: 10px;
 			}
 
 			${from.phablet} {
+				padding-right: ${space[2]}px;
 				position: sticky;
 				top: 10px;
 			}
 
 			${from.desktop} {
 				margin-top: ${space[6]}px;
-				padding-right: ${space[2]}px;
 				justify-self: end;
 			}
 		}
@@ -558,8 +552,14 @@ const styles = {
 			grid-area: choice-cards-container;
 		}
 
+		display: grid;
+		background: inherit;
+		position: relative;
+		bottom: 0px;
+
 		/* mobile first */
-		@media (min-width: 50px) {
+		${until.phablet} {
+			max-width: 660px;
 			margin: 0 auto;
 			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
 			grid-template-columns: auto;
@@ -571,9 +571,9 @@ const styles = {
 				'cta-container';
 		}
 		${from.phablet} {
-			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
 			max-width: 740px;
 			margin: 0 auto;
+			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
 			grid-template-columns: minmax(0, 0.5fr) 492px minmax(0, 0.5fr);
 			grid-template-rows: auto auto auto;
 			grid-template-areas:
@@ -606,7 +606,7 @@ const styles = {
 			bottom: 0px;
 			/* the vertical line aligns with that of standard article */
 			grid-column-gap: 10px;
-			grid-template-columns: 140px 1px max(460px) max(380px) 110px;
+			grid-template-columns: 140px 1px max(460px) max(380px) auto;
 			grid-template-rows: auto auto;
 			grid-template-areas:
 				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button'
@@ -688,6 +688,7 @@ const styles = {
 	/* ctas for use with main images */
 	outerOldCtaContainer: css`
 		display: flex;
+		background-color: inherit;
 		align-items: center;
 		justify-content: stretch;
 		flex-direction: column;
