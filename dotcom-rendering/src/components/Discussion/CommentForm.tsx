@@ -304,6 +304,9 @@ export const CommentForm = ({
 		const body = textValue;
 		if (!body) return;
 
+		setError('');
+		setPreviewBody('');
+
 		const preview = onPreview ?? defaultPreview;
 		const response = await preview(body);
 
