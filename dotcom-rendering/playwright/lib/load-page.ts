@@ -61,6 +61,22 @@ const loadPage = async ({
 		  }).toString()}`
 		: '';
 
+	// Remove Link prefetch headers from the response headers to prevent Playwright from throwing errors.
+	// For some unknown reason when prefetch links are incorrect (e.g. when run from the secure domain r.thegulocal.com)
+	// they cause the regular requests initiated by the script elements to error and fail to load.
+	void page.route(`**${path}**`, async (route) => {
+		const response = await route.fetch();
+		const body = await response.body();
+		await route.fulfill({
+			response,
+			body,
+			headers: {
+				...response.headers(),
+				Link: '',
+			},
+		});
+	});
+
 	// The default Playwright waitUntil: 'load' ensures all requests have completed
 	// Use 'domcontentloaded' to speed up tests and prevent hanging requests from timing out tests
 	await page.goto(
