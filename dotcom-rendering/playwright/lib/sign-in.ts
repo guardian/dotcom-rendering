@@ -1,8 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import type { BrowserContext, Page } from '@playwright/test';
-import { ORIGIN_SECURE } from 'playwright.config';
-import { disableCMP } from './cmp';
-import { fetchAndloadPageWithOverrides } from './load-page';
+import { loadPage } from './load-page';
 import { expectToExist } from './locators';
 
 type Networks = 'facebook' | 'apple' | 'google';
@@ -98,7 +96,10 @@ const signIn = async (
 	context: BrowserContext,
 	path: string,
 ): Promise<void> => {
-	await disableCMP(context);
+	const PROFILE_URL_CODE = 'https://profile.code.dev-theguardian.com';
+
+	await page.goto(PROFILE_URL_CODE);
+	await page.waitForLoadState('load');
 
 	await page.click('text="Sign in"');
 
@@ -116,29 +117,20 @@ const signIn = async (
 	await page.fill('input[name=password]', password);
 	await page.click('[data-cy="main-form-submit-button"]');
 
-	void context.cookies().then((cookies) => {
-		console.log('!!!! 1', cookies);
-	});
-
-	await page.waitForURL(ORIGIN_SECURE);
+	await page.waitForURL('https://m.code.dev-theguardian.com/uk');
 	await page.waitForLoadState('load');
-	await fetchAndloadPageWithOverrides(
-		page,
-		`https://www.theguardian.com${path}`,
-		{
-			configOverrides: {
-				idUrl: 'https://profile.thegulocal.com',
-			},
-		},
-		{
-			useSecure: true,
-		},
-	);
 
-	void context.cookies().then((cookies) => {
-		console.log('!!!! 2', cookies);
-	});
+	await context.addCookies([
+		{
+			name: 'GU_U',
+			value: 'true',
+			expires: Math.floor(Date.now() / 1000) + 60 * 60 * 24, // unix timestamp 1 year from now
+			domain: 'r.thegulocal.com',
+			path: '/',
+		},
+	]);
 
+	await loadPage({ page, path, useSecure: true });
 	await page.waitForLoadState('load');
 };
 
