@@ -20,7 +20,11 @@ export const EnhanceAffiliateLinks = () => {
 
 		for (const skimlink of allSkimlinksOnPage) {
 			if (!(skimlink instanceof HTMLAnchorElement)) return;
-			const referrerDomain = new URL(document.referrer).hostname;
+
+			const referrerDomain =
+				document.referrer === ''
+					? 'none'
+					: new URL(document.referrer).hostname;
 			// Skimlinks treats xcust as one long string, so we use | to separate values
 			skimlink.href += encodeURIComponent(
 				'xcust=referrer|' + referrerDomain,
