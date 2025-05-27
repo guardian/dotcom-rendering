@@ -4,6 +4,7 @@ import he from 'he';
 import { ASSET_ORIGIN } from '../lib/assets';
 import { escapeData } from '../lib/escapeData';
 import { fontsCss } from '../lib/fonts-css';
+import { useNativePlatform } from '../lib/getNativePlatform';
 import type { Guardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
 import { GIT_COMMIT_HASH } from './prout';
@@ -75,6 +76,8 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		weAreHiring,
 		config,
 	} = props;
+
+	const nativePlatform = useNativePlatform();
 
 	const doNotIndex = (): boolean => {
 		const isDevelopment = process.env.GU_STAGE !== 'PROD';
@@ -404,7 +407,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 
 			</head>
 
-			<body class="${hasPageSkin ? 'has-page-skin' : ''}">
+			<body class="${hasPageSkin ? 'has-page-skin' : ''} ${nativePlatform}">
                 ${html}
             </body>
         </html>`;
