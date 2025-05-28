@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import {
 	between,
-	brand,
 	from,
 	neutral,
 	palette,
@@ -554,7 +553,6 @@ const styles = {
 	headerOverrides: css`
 		/* stylelint-disable declaration-no-important */
 		h2 {
-			color: ${brand[400]} !important;
 			margin-top: ${space[1]}px !important;
 			margin-bottom: ${space[2]}px !important;
 			${until.phablet} {

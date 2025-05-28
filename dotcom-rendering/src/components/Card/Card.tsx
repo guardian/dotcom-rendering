@@ -100,7 +100,6 @@ export type Props = {
 	isCrossword?: boolean;
 	isNewsletter?: boolean;
 	isOnwardContent?: boolean;
-	isCartoon?: boolean;
 	trailText?: string;
 	avatarUrl?: string;
 	showClock?: boolean;
@@ -392,7 +391,6 @@ export const Card = ({
 	isCrossword,
 	isNewsletter = false,
 	isOnwardContent = false,
-	isCartoon = false,
 	isExternalLink,
 	slideshowImages,
 	showLivePlayable = false,
@@ -789,7 +787,6 @@ export const Card = ({
 						byline={byline}
 						showByline={showByline}
 						isExternalLink={isExternalLink}
-						isBetaContainer={isBetaContainer}
 					/>
 					{!isUndefined(starRating) ? (
 						<StarRatingComponent
@@ -1120,8 +1117,6 @@ export const Card = ({
 										byline={byline}
 										showByline={showByline}
 										isExternalLink={isExternalLink}
-										isBetaContainer={isBetaContainer}
-										isCartoon={isCartoon}
 										kickerImage={
 											showKickerImage &&
 											media?.type === 'podcast'
