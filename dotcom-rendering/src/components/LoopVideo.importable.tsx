@@ -8,9 +8,10 @@ import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useConfig } from './ConfigContext';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
 
-const videoContainerStyles = css`
+const videoContainerStyles = (width: number) => css`
 	z-index: ${getZIndex('loop-video-container')};
 	position: relative;
+	width: ${width}px;
 `;
 
 type Props = {
@@ -169,7 +170,7 @@ export const LoopVideo = ({
 	return (
 		<div
 			ref={setNode}
-			css={videoContainerStyles}
+			css={videoContainerStyles(width)}
 			className="loop-video-container"
 		>
 			<LoopVideoPlayer
