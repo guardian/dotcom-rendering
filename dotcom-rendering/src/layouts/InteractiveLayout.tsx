@@ -24,13 +24,13 @@ import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { InteractivesNativePlatformWrapper } from '../components/InteractivesNativePlatformWrapper.importable';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { NativePlatformWrapper } from '../components/NativePlatformWrapper.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
@@ -240,11 +240,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	return (
 		<>
 			{isApps && (
-				<>
-					<Island priority="critical">
-						<NativePlatformWrapper />
-					</Island>
-				</>
+				<Island priority="critical">
+					<InteractivesNativePlatformWrapper />
+				</Island>
 			)}
 			{article.isLegacyInteractive && (
 				<Global styles={interactiveGlobalStyles} />
