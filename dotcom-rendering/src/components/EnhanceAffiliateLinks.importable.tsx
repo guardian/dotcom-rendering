@@ -26,9 +26,9 @@ export const EnhanceAffiliateLinks = () => {
 					? 'none'
 					: new URL(document.referrer).hostname;
 			// Skimlinks treats xcust as one long string, so we use | to separate values
-			skimlink.href += encodeURIComponent(
-				'xcust=referrer|' + referrerDomain,
-			);
+			skimlink.href += `xcust=${encodeURIComponent(
+				'referrer|' + referrerDomain,
+			)}`;
 		}
 	});
 
