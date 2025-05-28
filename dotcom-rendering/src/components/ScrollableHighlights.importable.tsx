@@ -16,7 +16,6 @@ import { HighlightsCard } from './Masthead/HighlightsCard';
 type Props = {
 	trails: DCRFrontCard[];
 	frontId?: string;
-	isInHighlightsAbTestVariant?: boolean;
 };
 
 const containerStyles = css`
@@ -312,11 +311,17 @@ const ScrollableHighlightsCarousel = ({ trails, frontId }: Props) => {
 	);
 };
 
+type WrapperProps = {
+	trails: DCRFrontCard[];
+	frontId?: string;
+	isInHighlightsAbTestVariant?: boolean;
+};
+
 export const ScrollableHighlights = ({
 	trails,
 	frontId,
 	isInHighlightsAbTestVariant,
-}: Props) => {
+}: WrapperProps) => {
 	const isUkFront = frontId === 'uk';
 
 	if (isInHighlightsAbTestVariant && isUkFront) {

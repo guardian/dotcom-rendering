@@ -1,5 +1,5 @@
 import type { ImgHTMLAttributes } from 'react';
-import { ServerSideTests } from '../types/config';
+import type { ServerSideTests } from '../types/config';
 import type {
 	AspectRatio,
 	DCRContainerLevel,
