@@ -26,6 +26,7 @@ type BaseProps = {
 	hasSurveyAd?: boolean;
 	weAreHiring: boolean;
 	onlyLightColourScheme?: boolean;
+	isInteractive?: boolean;
 };
 
 interface WebProps extends BaseProps {
@@ -74,6 +75,7 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		onlyLightColourScheme = false,
 		weAreHiring,
 		config,
+		isInteractive = false,
 	} = props;
 
 	const doNotIndex = (): boolean => {
@@ -206,7 +208,11 @@ https://workforus.theguardian.com/careers/product-engineering/
 	return `<!doctype html>
         <html lang="en" ${
 			onlyLightColourScheme ? 'data-color-scheme="light"' : ''
-		} ${renderingTarget === 'Apps' ? 'data-rendering-target="apps"' : ''}>
+		} ${
+			renderingTarget === 'Apps' && isInteractive
+				? 'data-rendering-target="apps"'
+				: ''
+		}>
             <head>
 			    ${
 					weAreHiring
