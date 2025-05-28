@@ -30,6 +30,7 @@ import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
+import { NativePlatformWrapper } from '../components/NativePlatformWrapper.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
@@ -238,6 +239,13 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	const renderAds = isWeb && canRenderAds(article);
 	return (
 		<>
+			{isApps && (
+				<>
+					<Island priority="critical">
+						<NativePlatformWrapper />
+					</Island>
+				</>
+			)}
 			{article.isLegacyInteractive && (
 				<Global styles={interactiveGlobalStyles} />
 			)}
