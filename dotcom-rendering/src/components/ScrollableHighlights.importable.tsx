@@ -9,12 +9,15 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { ophanComponentId } from '../lib/ophan-helpers';
-import { useAB } from '../lib/useAB';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
 
-type Props = { trails: DCRFrontCard[]; frontId?: string };
+type Props = {
+	trails: DCRFrontCard[];
+	frontId?: string;
+	isInHighlightsAbTestVariant?: boolean;
+};
 
 const containerStyles = css`
 	${from.tablet} {
@@ -309,12 +312,11 @@ const ScrollableHighlightsCarousel = ({ trails, frontId }: Props) => {
 	);
 };
 
-export const ScrollableHighlights = ({ trails, frontId }: Props) => {
-	const abTestAPI = useAB()?.api;
-	const isInHighlightsAbTestVariant = abTestAPI?.isUserInVariant(
-		'HideMobileHighlights',
-		'variant',
-	);
+export const ScrollableHighlights = ({
+	trails,
+	frontId,
+	isInHighlightsAbTestVariant,
+}: Props) => {
 	const isUkFront = frontId === 'uk';
 
 	if (isInHighlightsAbTestVariant && isUkFront) {
