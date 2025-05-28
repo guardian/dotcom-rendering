@@ -9,6 +9,7 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { ophanComponentId } from '../lib/ophan-helpers';
+import { useAB } from '../lib/useAB';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
@@ -176,7 +177,7 @@ const getOphanInfo = (frontId?: string) => {
 	};
 };
 
-export const ScrollableHighlights = ({ trails, frontId }: Props) => {
+const ScrollableHighlightsCarousel = ({ trails, frontId }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
 	const imageLoading = 'eager';
@@ -306,4 +307,26 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 			</Hide>
 		</div>
 	);
+};
+
+export const ScrollableHighlights = ({ trails, frontId }: Props) => {
+	const abTestAPI = useAB()?.api;
+	const isInHighlightsAbTestVariant = abTestAPI?.isUserInVariant(
+		'HideMobileHighlights',
+		'variant',
+	);
+	const isUkFront = frontId === 'uk';
+
+	if (isInHighlightsAbTestVariant && isUkFront) {
+		return (
+			<Hide until="tablet">
+				<ScrollableHighlightsCarousel
+					trails={trails}
+					frontId={frontId}
+				/>
+			</Hide>
+		);
+	}
+	// If the user is not in the variant, render the highlights carousel at all breakpoints
+	return <ScrollableHighlightsCarousel trails={trails} frontId={frontId} />;
 };
