@@ -315,8 +315,9 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 		'HideMobileHighlights',
 		'variant',
 	);
+	const isUkFront = frontId === 'uk';
 
-	if (isInHighlightsAbTestVariant) {
+	if (isInHighlightsAbTestVariant && isUkFront) {
 		return (
 			<Hide until="tablet">
 				<ScrollableHighlightsCarousel
