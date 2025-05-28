@@ -90,6 +90,10 @@ export const getInteractionClient: BridgetApi<
 	'getInteractionClient'
 > = () => ({});
 
+export const getInteractivesClient: BridgetApi<
+	'getInteractivesClient'
+> = () => ({});
+
 export const ensure_all_exports_are_present = {
 	getUserClient,
 	getAcquisitionsClient,
@@ -105,6 +109,7 @@ export const ensure_all_exports_are_present = {
 	getDiscussionClient,
 	getTagClient,
 	getInteractionClient,
+	getInteractivesClient,
 } satisfies {
 	[Method in keyof BridgeModule]: BridgetApi<Method>;
 };

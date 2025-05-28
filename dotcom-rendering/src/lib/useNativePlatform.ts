@@ -1,19 +1,20 @@
+import type { NativePlatform } from '@guardian/bridget';
 import { log } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import { getEnvironmentClient } from './bridgetApi';
+import { getInteractivesClient } from './bridgetApi';
 
-export const useNativePlatform = (): string | undefined => {
-	const [nativePlatform, setNativePlatform] = useState<string | undefined>(
-		undefined,
-	);
+export const useNativePlatform = (): NativePlatform | undefined => {
+	const [nativePlatform, setNativePlatform] = useState<
+		NativePlatform | undefined
+	>(undefined);
 
 	useEffect(() => {
-		void getEnvironmentClient()
-			.nativePlatform()
+		void getInteractivesClient()
+			.getNativePlatform()
 			.then(setNativePlatform)
 			.catch((error) => {
 				setNativePlatform(undefined);
-				log('dotcom', 'nativePlatform check failed:', error);
+				log('dotcom', 'getNativePlatform check failed:', error);
 			});
 	}, []);
 	return nativePlatform;
