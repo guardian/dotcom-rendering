@@ -186,6 +186,7 @@ export interface AuxiaGateReaderPersonalData {
 	isSupporter: boolean;
 	countryCode: string;
 	mvtId: number; // [1]
+	hasConsented: boolean;
 }
 // [1] value of the GU_mvt_id cookie (as number), to be able to maintain
 // existing (auxia and non auxia) cohorts in the SDC logic.

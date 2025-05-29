@@ -283,11 +283,12 @@ const decideAuxiaProxyReaderPersonalData =
 			getCookie({ name: 'GU_mvt_id', shouldMemoize: true }) ?? '0';
 		const mvtId: number = parseInt(mvtId_str);
 		const data = {
-			browserId: hasConsented ? browserId : undefined,
+			browserId,
 			dailyArticleCount,
 			isSupporter,
 			countryCode,
 			mvtId,
+			hasConsented,
 		};
 		return Promise.resolve(data);
 	};
