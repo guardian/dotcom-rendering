@@ -307,6 +307,7 @@ const fetchProxyGetTreatments = async (
 	countryCode: string,
 	mvtId: number,
 	should_show_legacy_gate_tmp: boolean,
+	hasConsented: boolean,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const articleIdentifier = `www.theguardian.com/${pageId}`;
@@ -328,6 +329,7 @@ const fetchProxyGetTreatments = async (
 		countryCode,
 		mvtId,
 		should_show_legacy_gate_tmp,
+		hasConsented,
 	};
 	const params = {
 		method: 'POST',
@@ -393,6 +395,7 @@ const buildAuxiaGateDisplayData = async (
 		readerPersonalData.countryCode,
 		readerPersonalData.mvtId,
 		should_show_legacy_gate_tmp,
+		readerPersonalData.hasConsented,
 	);
 
 	if (response.status && response.data) {

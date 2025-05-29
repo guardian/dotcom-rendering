@@ -121,6 +121,7 @@ export interface AuxiaProxyGetTreatmentsPayload {
 	countryCode: string;
 	mvtId: number;
 	should_show_legacy_gate_tmp: boolean; // [1]
+	hasConsented: boolean;
 }
 
 // [1]
