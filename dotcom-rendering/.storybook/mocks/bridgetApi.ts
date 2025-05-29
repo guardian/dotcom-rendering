@@ -92,7 +92,9 @@ export const getInteractionClient: BridgetApi<
 
 export const getInteractivesClient: BridgetApi<
 	'getInteractivesClient'
-> = () => ({});
+> = () => ({
+	getNativePlatform: async () => 0,
+});
 
 export const ensure_all_exports_are_present = {
 	getUserClient,
