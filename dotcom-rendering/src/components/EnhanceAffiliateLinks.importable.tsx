@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { isSkimlink } from '../lib/affiliateLinksUtils';
 
 /**
  * Add custom parameters to skimlink URLs:
@@ -14,21 +15,19 @@ import { useEffect } from 'react';
  */
 export const EnhanceAffiliateLinks = () => {
 	useEffect(() => {
-		const allSkimlinksOnPage = [
-			...document.querySelectorAll('a[href*="go.skimresources"]'),
-		];
+		const allLinksOnPage = [...document.querySelectorAll('a')];
 
-		for (const skimlink of allSkimlinksOnPage) {
-			if (!(skimlink instanceof HTMLAnchorElement)) return;
-
-			const referrerDomain =
-				document.referrer === ''
-					? 'none'
-					: new URL(document.referrer).hostname;
-			// Skimlinks treats xcust as one long string, so we use | to separate values
-			skimlink.href += `&xcust=${encodeURIComponent(
-				'referrer|' + referrerDomain,
-			)}`;
+		for (const link of allLinksOnPage) {
+			if (isSkimlink(link.href)) {
+				const referrerDomain =
+					document.referrer === ''
+						? 'none'
+						: new URL(document.referrer).hostname;
+				// Skimlinks treats xcust as one long string, so we use | to separate values
+				link.href += `&xcust=${encodeURIComponent(
+					'referrer|' + referrerDomain,
+				)}`;
+			}
 		}
 	});
 
