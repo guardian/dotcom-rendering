@@ -8,9 +8,7 @@ export const InteractivesNativePlatformWrapper = () => {
 		void getInteractivesClient()
 			.getNativePlatform()
 			.then((platform) =>
-				document.body.classList.add(
-					platform === NativePlatform.ios ? 'ios' : 'android',
-				),
+				document.body.classList.add(NativePlatform[platform]),
 			)
 			.catch((error) => {
 				log('dotcom', 'getNativePlatform check failed:', error);
