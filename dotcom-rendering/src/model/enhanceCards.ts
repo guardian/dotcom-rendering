@@ -147,7 +147,8 @@ const decideSlideshowImages = (
 	const assets = trail.properties.image?.item.assets;
 	const shouldShowSlideshow =
 		trail.properties.image?.type === 'ImageSlideshow' &&
-		trail.properties.imageSlideshowReplace;
+		(trail.properties.mediaSelect?.imageSlideshowReplace ??
+			trail.properties.imageSlideshowReplace);
 	if (shouldShowSlideshow && assets && assets.length > 0) {
 		return assets;
 	}
@@ -198,10 +199,11 @@ const decideMedia = (
 	audioDuration: string = '',
 	podcastImage?: PodcastSeriesImage,
 	imageHide?: boolean,
+	videoReplace?: boolean,
 ): MainMedia | undefined => {
 	// If the showVideo toggle is enabled in the fronts tool,
 	// we should return the active mediaAtom regardless of the design
-	if (showMainVideo) {
+	if (!!showMainVideo || !!videoReplace) {
 		return getActiveMediaAtom(mediaAtom);
 	}
 
@@ -284,13 +286,16 @@ export const enhanceCards = (
 
 		const mainMedia = decideMedia(
 			format,
-			faciaCard.properties.showMainVideo,
-			faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
+			faciaCard.properties.showMainVideo ??
+				faciaCard.properties.mediaSelect?.showMainVideo,
+			faciaCard.mediaAtom ??
+				faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
 				faciaCard.properties.maybeContent?.elements.mediaAtoms[0],
 			faciaCard.card.galleryCount,
 			faciaCard.card.audioDuration,
 			podcastImage,
 			faciaCard.display.imageHide,
+			faciaCard.properties.mediaSelect?.videoReplace,
 		);
 
 		return {
@@ -339,7 +344,11 @@ export const enhanceCards = (
 			embedUri: faciaCard.properties.embedUri ?? undefined,
 			branding,
 			slideshowImages: decideSlideshowImages(faciaCard),
-			showMainVideo: faciaCard.properties.showMainVideo,
+			showVideo:
+				!!(
+					faciaCard.properties.showMainVideo ??
+					faciaCard.properties.mediaSelect?.showMainVideo
+				) || !!faciaCard.properties.mediaSelect?.videoReplace,
 			...(!!imageSrc && {
 				image: {
 					src: imageSrc,
