@@ -131,9 +131,11 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							serverSideTests={frontendData.config.abTests}
 						/>
 					</Island>
-					<Island priority="feature" defer={{ until: 'idle' }}>
-						<EnhanceAffiliateLinks />
-					</Island>
+					{!!frontendData.affiliateLinksDisclaimer && (
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<EnhanceAffiliateLinks />
+						</Island>
+					)}
 				</>
 			)}
 			{renderingTarget === 'Web' ? (
