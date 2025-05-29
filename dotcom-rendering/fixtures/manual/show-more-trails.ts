@@ -17,10 +17,13 @@ export const trails: [
 	{
 		properties: {
 			isBreaking: false,
-			showMainVideo: false,
+			mediaSelect: {
+				showMainVideo: false,
+				imageSlideshowReplace: false,
+				videoReplace: false,
+			},
 			showKickerTag: false,
 			showByline: false,
-			imageSlideshowReplace: false,
 			maybeContent: {
 				trail: {
 					trailPicture: {
@@ -306,10 +309,13 @@ export const trails: [
 	{
 		properties: {
 			isBreaking: false,
-			showMainVideo: false,
+			mediaSelect: {
+				showMainVideo: false,
+				imageSlideshowReplace: false,
+				videoReplace: false,
+			},
 			showKickerTag: false,
 			showByline: true,
-			imageSlideshowReplace: false,
 			maybeContent: {
 				trail: {
 					trailPicture: {
@@ -619,10 +625,13 @@ export const trails: [
 	{
 		properties: {
 			isBreaking: false,
-			showMainVideo: false,
+			mediaSelect: {
+				showMainVideo: false,
+				imageSlideshowReplace: false,
+				videoReplace: false,
+			},
 			showKickerTag: false,
 			showByline: false,
-			imageSlideshowReplace: false,
 			maybeContent: {
 				trail: {
 					trailPicture: {
@@ -953,10 +962,13 @@ export const trails: [
 	{
 		properties: {
 			isBreaking: false,
-			showMainVideo: false,
+			mediaSelect: {
+				showMainVideo: false,
+				imageSlideshowReplace: false,
+				videoReplace: false,
+			},
 			showKickerTag: false,
 			showByline: false,
-			imageSlideshowReplace: false,
 			maybeContent: {
 				trail: {
 					trailPicture: {
@@ -1252,10 +1264,13 @@ export const trails: [
 	{
 		properties: {
 			isBreaking: false,
-			showMainVideo: false,
+			mediaSelect: {
+				showMainVideo: false,
+				imageSlideshowReplace: false,
+				videoReplace: false,
+			},
 			showKickerTag: false,
 			showByline: false,
-			imageSlideshowReplace: false,
 			maybeContent: {
 				trail: {
 					trailPicture: {
@@ -1481,10 +1496,13 @@ export const trails: [
 	{
 		properties: {
 			isBreaking: false,
-			showMainVideo: false,
+			mediaSelect: {
+				showMainVideo: false,
+				imageSlideshowReplace: false,
+				videoReplace: false,
+			},
 			showKickerTag: false,
 			showByline: false,
-			imageSlideshowReplace: false,
 			maybeContent: {
 				trail: {
 					trailPicture: {

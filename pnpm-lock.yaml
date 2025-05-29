@@ -299,8 +299,8 @@ importers:
         specifier: 22.2.0
         version: 22.2.0(@emotion/react@11.14.0)(@guardian/libs@22.5.0)(@guardian/source@9.0.0)(react@18.3.1)
       '@guardian/bridget':
-        specifier: 8.1.0
-        version: 8.1.0
+        specifier: 8.4.0
+        version: 8.4.0
       '@guardian/browserslist-config':
         specifier: 6.1.0
         version: 6.1.0(browserslist@4.24.4)(tslib@2.6.2)
@@ -3770,8 +3770,8 @@ packages:
     resolution: {integrity: sha512-S0NmkyYd1hQRyOUj7l9Ddfr6FKEHJFLpS2jSMkGexCSscsZd7e8JBdFmlKSUljt4G6hrxcaaevsV4QfT9LnhUg==}
     dev: false
 
-  /@guardian/bridget@8.1.0:
-    resolution: {integrity: sha512-Sr2bvoUprOwuYVI4K1fpvDlOj5/5AMfTMZ/kx7gc8q/AUggIoejU3uvF00nFq9/AAe1EpLQcNU/mOfih8+oDGg==}
+  /@guardian/bridget@8.4.0:
+    resolution: {integrity: sha512-gMF4HwzCZjKF3prCkNxoCL3JIa8ot/PEX6Cy/NQAp4tGaZYrvPwEaZkGn6vJH2usAQe11WEBZuX5KrkMW3iFLw==}
     dev: false
 
   /@guardian/browserslist-config@6.1.0(browserslist@4.24.4)(tslib@2.6.2):
@@ -3981,7 +3981,7 @@ packages:
       '@typescript-eslint/parser': 6.18.0(eslint@8.56.0)(typescript@5.5.3)
       eslint: 8.56.0
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@6.18.0)(eslint-plugin-import@2.29.1)(eslint@8.56.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint@8.56.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
       tslib: 2.6.2
       typescript: 5.5.3
     transitivePeerDependencies:
@@ -6031,7 +6031,7 @@ packages:
       react-docgen-typescript: 2.2.2(typescript@5.5.3)
       tslib: 2.6.2
       typescript: 5.5.3
-      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -7614,8 +7614,8 @@ packages:
       webpack: ^5.82.0
       webpack-cli: 6.x.x
     dependencies:
-      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
-      webpack-cli: 6.0.1(webpack-dev-server@5.2.1)(webpack@5.99.7)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack-cli: 6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.1)(webpack@5.99.7)
     dev: false
 
   /@webpack-cli/info@3.0.1(webpack-cli@6.0.1)(webpack@5.99.7):
@@ -7625,8 +7625,8 @@ packages:
       webpack: ^5.82.0
       webpack-cli: 6.x.x
     dependencies:
-      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
-      webpack-cli: 6.0.1(webpack-dev-server@5.2.1)(webpack@5.99.7)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack-cli: 6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.1)(webpack@5.99.7)
     dev: false
 
   /@webpack-cli/serve@3.0.1(webpack-cli@6.0.1)(webpack-dev-server@5.2.1)(webpack@5.99.7):
@@ -7640,8 +7640,8 @@ packages:
       webpack-dev-server:
         optional: true
     dependencies:
-      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
-      webpack-cli: 6.0.1(webpack-dev-server@5.2.1)(webpack@5.99.7)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack-cli: 6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.1)(webpack@5.99.7)
       webpack-dev-server: 5.2.1(webpack-cli@6.0.1)(webpack@5.99.7)
     dev: false
 
@@ -9460,7 +9460,7 @@ packages:
       postcss-modules-values: 4.0.0(postcss@8.4.47)
       postcss-value-parser: 4.2.0
       semver: 7.5.4
-      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
     dev: false
 
   /css-loader@7.1.2(webpack@5.99.7):
@@ -11477,7 +11477,7 @@ packages:
       semver: 7.5.4
       tapable: 2.2.1
       typescript: 5.5.3
-      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
     dev: false
 
   /form-data-encoder@2.1.4:
@@ -17044,7 +17044,7 @@ packages:
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
-      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
     dev: false
 
   /stylelint-config-recommended@14.0.0(stylelint@16.5.0):
@@ -17537,7 +17537,7 @@ packages:
       semver: 7.5.4
       source-map: 0.7.4
       typescript: 5.5.3
-      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
     dev: false
 
   /ts-node@10.9.2(@swc/core@1.11.24)(@types/node@16.18.68)(typescript@5.1.6):
@@ -18297,7 +18297,7 @@ packages:
       mime-types: 2.1.35
       range-parser: 1.2.1
       schema-utils: 4.3.2
-      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
     dev: false
 
   /webpack-dev-middleware@7.4.2(webpack@5.99.7):
@@ -18357,8 +18357,8 @@ packages:
       serve-index: 1.9.1
       sockjs: 0.3.24
       spdy: 4.0.2
-      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
-      webpack-cli: 6.0.1(webpack-dev-server@5.2.1)(webpack@5.99.7)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack-cli: 6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.1)(webpack@5.99.7)
       webpack-dev-middleware: 7.4.2(webpack@5.99.7)
       ws: 8.18.1
     transitivePeerDependencies:
@@ -18403,7 +18403,7 @@ packages:
       webpack: ^5.47.0
     dependencies:
       tapable: 2.2.1
-      webpack: 5.99.7(esbuild@0.18.20)(webpack-cli@6.0.1)
+      webpack: 5.99.7(@swc/core@1.11.24)(esbuild@0.18.20)(webpack-cli@6.0.1)
       webpack-sources: 2.3.1
     dev: false
     patched: true
