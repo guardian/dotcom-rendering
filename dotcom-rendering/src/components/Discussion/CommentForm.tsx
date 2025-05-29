@@ -311,7 +311,7 @@ export const CommentForm = ({
 		const response = await preview(body);
 
 		if (response.kind === 'error') {
-			setError('Preview request failed, please try again');
+			handleError(response.error);
 			setPreviewBody('');
 			return;
 		}
