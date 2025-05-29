@@ -330,6 +330,10 @@ export const CommentForm = ({
 				return setError(
 					'Your comment must be fewer than 5000 characters long.',
 				);
+			case 'INVALID_CHARS':
+				return setError(
+					'Your comment contains invalid characters. Please remove them and try again.',
+				);
 			case 'USER_BANNED':
 				return setError(
 					'Commenting has been disabled for this account (<a href="/community-faqs#321a">why?</a>).',
