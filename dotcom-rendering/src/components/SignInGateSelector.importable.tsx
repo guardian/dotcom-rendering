@@ -156,39 +156,21 @@ export const SignInGateSelector = ({
 		return <></>;
 	}
 
-	if (!userIsInAuxiaExperiment) {
-		return (
-			<SignInGateSelectorAuxia
-				host={host}
-				pageId={pageId}
-				idUrl={idUrl}
-				contributionsServiceUrl={contributionsServiceUrl}
-				editionId={editionId}
-				isPreview={isPreview}
-				isPaidContent={isPaidContent}
-				contentType={contentType}
-				sectionId={sectionId}
-				tags={tags}
-				isAuxiaAudience={false}
-			/>
-		);
-	} else {
-		return (
-			<SignInGateSelectorAuxia
-				host={host}
-				pageId={pageId}
-				idUrl={idUrl}
-				contributionsServiceUrl={contributionsServiceUrl}
-				editionId={editionId}
-				isPreview={isPreview}
-				isPaidContent={isPaidContent}
-				contentType={contentType}
-				sectionId={sectionId}
-				tags={tags}
-				isAuxiaAudience={true}
-			/>
-		);
-	}
+	return (
+		<SignInGateSelectorAuxia
+			host={host}
+			pageId={pageId}
+			idUrl={idUrl}
+			contributionsServiceUrl={contributionsServiceUrl}
+			editionId={editionId}
+			isPreview={isPreview}
+			isPaidContent={isPaidContent}
+			contentType={contentType}
+			sectionId={sectionId}
+			tags={tags}
+			isAuxiaAudience={userIsInAuxiaExperiment}
+		/>
+	);
 };
 
 /*
