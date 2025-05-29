@@ -503,6 +503,7 @@ export const CommentForm = ({
 							? 'Join the discussion'
 							: ''
 					}
+					maxLength={5000}
 					cssOverrides={css([
 						commentTextArea,
 						commentBeingRepliedTo && isActive && greyPlaceholder,
