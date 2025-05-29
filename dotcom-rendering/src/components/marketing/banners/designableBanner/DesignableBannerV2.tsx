@@ -563,7 +563,6 @@ const styles = {
 			margin: 0 auto;
 			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
 			grid-template-columns: auto;
-			column-gap: 0px;
 			grid-template-areas:
 				'close-button'
 				'copy-container'
@@ -630,10 +629,7 @@ const styles = {
 			background-color: ${neutral[0]};
 			width: 1px;
 			opacity: 0.2;
-			/* margin-bottom: -${space[6]}px; */
-			margin-top: ${space[6]}px;
-			margin-left: ${space[2]}px;
-			margin-right: ${space[2]}px;
+			margin: ${space[6]}px ${space[2]}px 0 ${space[2]}px;
 		}
 	`,
 	closeButtonOverrides: css`
@@ -675,6 +671,7 @@ const styles = {
 		}
 	`,
 	contentContainer: css`
+		max-width: 100%;
 		align-self: start;
 
 		${from.phablet} {
@@ -781,6 +778,8 @@ const styles = {
 		}
 	`,
 	threeTierChoiceCardsContainer: css`
+		max-width: 100%;
+
 		${until.desktop} {
 			margin-top: -${space[6]}px;
 		}
@@ -804,13 +803,10 @@ const styles = {
 		}
 		${from.leftCol} {
 			justify-self: end;
-			display: flex;
 			width: 128px;
 			height: 41px;
 			justify-content: end;
-			align-items: center;
 			margin-top: ${space[5]}px;
-			margin-right: ${space[2]}px;
 		}
 	`,
 	/* choice card CTA container */
