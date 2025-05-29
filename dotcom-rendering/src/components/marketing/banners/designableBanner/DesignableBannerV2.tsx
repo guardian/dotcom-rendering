@@ -419,9 +419,9 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 				{!threeTierChoiceCardSelectedProduct && (
 					<div
 						id="rr_designable-banner-cta-container"
-						css={styles.outerOldCtaContainer}
+						css={styles.outerImageCtaContainer}
 					>
-						<div css={styles.innerOldCtaContainer}>
+						<div css={styles.innerImageCtaContainer}>
 							<DesignableBannerCtas
 								mainOrMobileContent={mainOrMobileContent}
 								onPrimaryCtaClick={onCtaClick}
@@ -483,6 +483,8 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		</div>
 	);
 };
+
+const phabletContentMaxWidth = '492px';
 
 const styles = {
 	outerContainer: (
@@ -547,9 +549,15 @@ const styles = {
 		}
 		#rr_designable-banner-main-image {
 			grid-area: main-image;
+			${from.desktop} {
+				justify-self: end;
+			}
 		}
 		#rr_designable-banner-3-tier-choice-cards-container {
 			grid-area: choice-cards-container;
+			${from.desktop} {
+				justify-self: end;
+			}
 		}
 
 		display: grid;
@@ -562,18 +570,21 @@ const styles = {
 			max-width: 660px;
 			margin: 0 auto;
 			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
-			grid-template-columns: auto;
+			grid-template-columns: auto max(${phabletContentMaxWidth} auto);
 			grid-template-areas:
-				'close-button'
-				'copy-container'
-				'${cardsImageOrSpaceTemplateString}'
-				'cta-container';
+				'. close-button .'
+				'. copy-container .'
+				'. ${cardsImageOrSpaceTemplateString} .'
+				'. cta-container .';
 		}
 		${from.phablet} {
 			max-width: 740px;
 			margin: 0 auto;
 			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
-			grid-template-columns: minmax(0, 0.5fr) 492px minmax(0, 0.5fr);
+			grid-template-columns: minmax(0, 0.5fr) ${phabletContentMaxWidth} minmax(
+					0,
+					0.5fr
+				);
 			grid-template-rows: auto auto auto;
 			grid-template-areas:
 				'. 	copy-container 						close-button'
@@ -614,7 +625,7 @@ const styles = {
 		${from.wide} {
 			max-width: 1300px;
 			/* the vertical line aligns with that of standard article */
-			grid-template-columns: 219px 1px max(420px) 400px auto;
+			grid-template-columns: 219px 1px max(460px) max(380px) auto;
 			grid-template-rows: auto auto;
 			grid-template-areas:
 				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button'
@@ -649,7 +660,7 @@ const styles = {
 
 		${from.phablet} {
 			background: ${background};
-			max-width: 492px;
+			max-width: ${phabletContentMaxWidth};
 		}
 
 		${from.desktop} {
@@ -662,7 +673,7 @@ const styles = {
 		text-wrap: balance;
 
 		${from.tablet} {
-			max-width: 492px;
+			max-width: ${phabletContentMaxWidth};
 		}
 
 		${from.desktop} {
@@ -675,7 +686,7 @@ const styles = {
 		align-self: start;
 
 		${from.phablet} {
-			max-width: 492px;
+			max-width: ${phabletContentMaxWidth};
 		}
 		${from.desktop} {
 			padding-right: ${space[5]}px;
@@ -683,7 +694,7 @@ const styles = {
 		}
 	`,
 	/* ctas for use with main images */
-	outerOldCtaContainer: css`
+	outerImageCtaContainer: css`
 		display: flex;
 		background-color: inherit;
 		align-items: center;
@@ -698,7 +709,6 @@ const styles = {
 			bottom: 0;
 			padding-top: ${space[2]}px;
 			padding-bottom: ${space[2]}px;
-			/* background-color: ${neutral[100]}; */
 			box-shadow: 0 -${space[1]}px ${space[3]}px 0 rgba(0, 0, 0, 0.25);
 			margin-right: -${space[3]}px;
 			margin-left: -${space[3]}px;
@@ -708,17 +718,23 @@ const styles = {
 			}
 		}
 		${from.phablet} {
-			/* justify-self: stretch; */
+			justify-self: stretch;
+			align-items: start;
 			width: 100%;
 			margin-top: ${space[2]}px;
+			margin-left: 0px;
+			margin-right: 0px;
 		}
 		${from.desktop} {
 			width: 100%;
 			flex-wrap: nowrap;
 			margin-bottom: ${space[2]}px;
 		}
+		${from.leftCol} {
+			align-items: center;
+		}
 	`,
-	innerOldCtaContainer: css`
+	innerImageCtaContainer: css`
 		display: flex;
 		width: calc(100% - 24px);
 		flex-wrap: wrap;
@@ -734,7 +750,10 @@ const styles = {
 		}
 
 		${from.tablet} {
-			justify-content: start;
+			justify-content: center;
+			margin-left: 0px;
+			margin-right: 0px;
+			max-width: 100%;
 		}
 
 		${from.desktop} {
@@ -743,6 +762,7 @@ const styles = {
 				flex: 1 0 50%;
 				justify-self: stretch;
 			}
+			margin-left: 0px;
 			flex-direction: row;
 			flex-wrap: nowrap;
 		}
@@ -763,7 +783,8 @@ const styles = {
 		margin-right: ${space[2]}px;
 
 		${from.phablet} {
-			max-width: 492px; /*?*/
+			max-width: ${phabletContentMaxWidth};
+			justify-self: center;
 		}
 		${from.desktop} {
 			margin-top: ${space[6]}px;
@@ -774,7 +795,7 @@ const styles = {
 		}
 		${from.wide} {
 			max-width: 485px;
-			align-self: start;
+			align-self: start; /*should this be end?*/
 		}
 	`,
 	threeTierChoiceCardsContainer: css`
@@ -784,7 +805,7 @@ const styles = {
 			margin-top: -${space[6]}px;
 		}
 		${from.phablet} {
-			max-width: 492px;
+			max-width: ${phabletContentMaxWidth};
 		}
 		${from.desktop} {
 			margin: 0 ${space[3]}px;
