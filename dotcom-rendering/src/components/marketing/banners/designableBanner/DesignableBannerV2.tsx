@@ -449,9 +449,9 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					threeTierChoiceCardSelectedProduct &&
 					mainOrMobileContent.primaryCta && (
 						<div
-              id="rr_designable-banner-3-tier-choice-cards-container"
-              css={styles.threeTierChoiceCardsContainer}
-            >
+							id="rr_designable-banner-3-tier-choice-cards-container"
+							css={styles.threeTierChoiceCardsContainer}
+						>
 							<ThreeTierChoiceCards
 								selectedProduct={
 									threeTierChoiceCardSelectedProduct
@@ -504,7 +504,6 @@ const styles = {
 
 		* {
 			box-sizing: border-box;
-			/* outline: 1px solid limegreen; */
 		}
 		${from.phablet} {
 			border-top: 1px solid ${neutral[0]};
