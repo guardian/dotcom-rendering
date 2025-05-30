@@ -8,6 +8,7 @@ import { mpuWhenNoEpic } from './tests/mpu-when-no-epic';
 import { optimiseSpacefinderInline } from './tests/optimise-spacefinder-inline';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
+import { stackedCarousels } from './tests/stacked-carousels';
 import { userBenefitsApi } from './tests/user-benefits-api';
 
 // keep in sync with ab-tests in frontend
@@ -23,4 +24,5 @@ export const tests: ABTest[] = [
 	optimiseSpacefinderInline,
 	userBenefitsApi,
 	auxiaSignInGate,
+	stackedCarousels,
 ];
