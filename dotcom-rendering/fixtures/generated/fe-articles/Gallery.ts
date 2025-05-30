@@ -5719,7 +5719,7 @@ export const Gallery: FEArticle = {
 	format: {
 		design: 'GalleryDesign',
 		theme: 'NewsPillar',
-		display: 'ImmersiveDisplay',
+		display: 'StandardDisplay',
 	},
 	designType: 'Media',
 	tags: [

@@ -1,6 +1,9 @@
 import { css } from '@emotion/react';
+import { from } from '@guardian/source/foundations';
+import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Masthead } from '../components/Masthead/Masthead';
 import { grid } from '../grid';
+import type { ArticleFormat } from '../lib/articleFormat';
 import type { NavType } from '../model/extract-nav';
 import type { Gallery } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -8,6 +11,7 @@ import type { RenderingTarget } from '../types/renderingTarget';
 interface Props {
 	gallery: Gallery;
 	renderingTarget: RenderingTarget;
+	format: ArticleFormat;
 }
 
 interface WebProps extends Props {
@@ -56,7 +60,16 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 							grid.between('centre-column-start', 'grid-end'),
 						]}
 					>
-						Headline
+						<ArticleHeadline
+							format={props.format}
+							headlineString={props.gallery.frontendData.headline}
+							tags={props.gallery.frontendData.tags}
+							byline={props.gallery.frontendData.byline}
+							webPublicationDateDeprecated={
+								props.gallery.frontendData
+									.webPublicationDateDeprecated
+							}
+						/>
 					</div>
 					<div
 						css={[
@@ -66,7 +79,17 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					>
 						Standfirst
 					</div>
-					<div css={[border, grid.column.left]}>
+					<div
+						css={[
+							border,
+							css`
+								${grid.column.centre}
+								${from.leftCol} {
+									${grid.column.left}
+								}
+							`,
+						]}
+					>
 						Main media caption
 					</div>
 					<div
