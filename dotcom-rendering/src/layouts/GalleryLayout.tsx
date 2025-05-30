@@ -12,6 +12,7 @@ import type { RenderingTarget } from '../types/renderingTarget';
 interface Props {
 	gallery: Gallery;
 	renderingTarget: RenderingTarget;
+	format: ArticleFormat;
 }
 
 interface WebProps extends Props {
@@ -74,6 +75,23 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 							frontendData.webPublicationDateDeprecated
 						}
 					/>
+					<div
+						css={[
+							border,
+							grid.between('centre-column-start', 'grid-end'),
+						]}
+					>
+						<ArticleHeadline
+							format={props.format}
+							headlineString={props.gallery.frontendData.headline}
+							tags={props.gallery.frontendData.tags}
+							byline={props.gallery.frontendData.byline}
+							webPublicationDateDeprecated={
+								props.gallery.frontendData
+									.webPublicationDateDeprecated
+							}
+						/>
+					</div>
 					<div
 						css={[
 							border,
