@@ -311,6 +311,7 @@ export const CommentForm = ({
 		const response = await preview(body);
 
 		if (response.kind === 'error') {
+			// If the preview fails, we handle the error and reset the preview body
 			handleError(response.error);
 			setPreviewBody('');
 			return;
