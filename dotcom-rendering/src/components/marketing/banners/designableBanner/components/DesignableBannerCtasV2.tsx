@@ -3,8 +3,6 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/designableBanner/components/DesignableBannerCtas.tsx
  */
-import { css } from '@emotion/react';
-import { from, space } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { BannerRenderedContent } from '../../common/types';
@@ -29,7 +27,7 @@ export function DesignableBannerCtas({
 	const { primaryCta, secondaryCta } = mainOrMobileContent;
 
 	return (
-		<div css={styles.container}>
+		<>
 			{primaryCta && (
 				<LinkButton
 					href={primaryCta?.ctaUrl}
@@ -52,36 +50,6 @@ export function DesignableBannerCtas({
 					{secondaryCta.cta.ctaText}
 				</LinkButton>
 			)}
-		</div>
+		</>
 	);
 }
-
-const styles = {
-	container: css`
-		display: flex;
-		flex-wrap: wrap;
-		gap: ${space[4]}px;
-		justify-content: center;
-		margin-left: ${space[2]}px;
-		margin-right: ${space[2]}px;
-
-		> a {
-			flex: 1 0 100%;
-			justify-content: center;
-		}
-
-		${from.tablet} {
-			justify-content: start;
-		}
-
-		${from.desktop} {
-			> a {
-				flex-direction: row;
-				flex: 0 0 auto;
-				justify-content: flex-start;
-			}
-			justify-content: flex-start;
-			padding-left: ${space[1]}px;
-		}
-	`,
-};
