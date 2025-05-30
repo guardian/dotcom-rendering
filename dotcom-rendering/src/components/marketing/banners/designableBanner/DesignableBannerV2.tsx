@@ -114,11 +114,11 @@ const buildChoiceCardSettings = (
 };
 
 const buildUrlForThreeTierChoiceCards = (
+	baseUrl: string,
 	tracking: Tracking,
 	selectedProduct: ChoiceCard['product'],
 	countryCode?: string,
 ) => {
-	const baseUrl = 'https://support.theguardian.com/contribute';
 	const urlWithProduct =
 		selectedProduct.supportTier === 'OneOff'
 			? baseUrl
@@ -428,37 +428,42 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					/>
 				)}
 
-				{choiceCards && threeTierChoiceCardSelectedProduct && (
-					<div css={styles.threeTierChoiceCardsContainer}>
-						<ThreeTierChoiceCards
-							selectedProduct={threeTierChoiceCardSelectedProduct}
-							setSelectedProduct={
-								setThreeTierChoiceCardSelectedProduct
-							}
-							choices={choiceCards}
-							id={'banner'}
-						/>
+				{choiceCards &&
+					threeTierChoiceCardSelectedProduct &&
+					mainOrMobileContent.primaryCta && (
+						<div css={styles.threeTierChoiceCardsContainer}>
+							<ThreeTierChoiceCards
+								selectedProduct={
+									threeTierChoiceCardSelectedProduct
+								}
+								setSelectedProduct={
+									setThreeTierChoiceCardSelectedProduct
+								}
+								choices={choiceCards}
+								id={'banner'}
+							/>
 
-						<div css={styles.ctaContainer}>
-							<LinkButton
-								href={buildUrlForThreeTierChoiceCards(
-									tracking,
-									threeTierChoiceCardSelectedProduct,
-									countryCode,
-								)}
-								onClick={onCtaClick}
-								priority="tertiary"
-								cssOverrides={styles.linkButtonStyles}
-								icon={<SvgArrowRightStraight />}
-								iconSide="right"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								Continue
-							</LinkButton>
+							<div css={styles.ctaContainer}>
+								<LinkButton
+									href={buildUrlForThreeTierChoiceCards(
+										mainOrMobileContent.primaryCta.ctaUrl,
+										tracking,
+										threeTierChoiceCardSelectedProduct,
+										countryCode,
+									)}
+									onClick={onCtaClick}
+									priority="tertiary"
+									cssOverrides={styles.linkButtonStyles}
+									icon={<SvgArrowRightStraight />}
+									iconSide="right"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									Continue
+								</LinkButton>
+							</div>
 						</div>
-					</div>
-				)}
+					)}
 			</div>
 		</div>
 	);
