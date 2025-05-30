@@ -304,11 +304,15 @@ export const CommentForm = ({
 		const body = textValue;
 		if (!body) return;
 
+		setError('');
+		setPreviewBody('');
+
 		const preview = onPreview ?? defaultPreview;
 		const response = await preview(body);
 
 		if (response.kind === 'error') {
-			setError('Preview request failed, please try again');
+			// If the preview fails, we handle the error and reset the preview body
+			handleError(response.error);
 			setPreviewBody('');
 			return;
 		}
@@ -326,6 +330,10 @@ export const CommentForm = ({
 			case 'COMMENT_TOO_LONG':
 				return setError(
 					'Your comment must be fewer than 5000 characters long.',
+				);
+			case 'INVALID_CHARS':
+				return setError(
+					'Your comment contains invalid characters. Please remove them and try again.',
 				);
 			case 'USER_BANNED':
 				return setError(
@@ -496,6 +504,7 @@ export const CommentForm = ({
 							? 'Join the discussion'
 							: ''
 					}
+					maxLength={5000}
 					cssOverrides={css([
 						commentTextArea,
 						commentBeingRepliedTo && isActive && greyPlaceholder,
