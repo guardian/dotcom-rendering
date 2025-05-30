@@ -15,6 +15,8 @@ import {
 	type ThemeRadio,
 	themeRadio,
 } from '@guardian/source/react-components';
+import { hexColourToString } from '@guardian/support-dotcom-components';
+import type { HexColour } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type { Dispatch, SetStateAction } from 'react';
 import sanitise from 'sanitize-html';
@@ -77,12 +79,16 @@ const supportingTextStyles = css`
 	margin-top: ${space[4]}px;
 `;
 
-const recommendedPillStyles = css`
+const pillStyles = (pill: NonNullable<ChoiceCard['pill']>) => css`
 	border-radius: 4px;
 	padding: ${space[1]}px ${space[2]}px;
-	background-color: ${palette.brandAlt[400]};
+	background-color: ${pill.backgroundColour
+		? hexColourToString(pill.backgroundColour as HexColour)
+		: palette.brandAlt[400]};
 	${textSansBold14};
-	color: ${palette.neutral[7]};
+	color: ${pill.textColour
+		? hexColourToString(pill.textColour as HexColour)
+		: palette.neutral[7]};
 	position: absolute;
 	top: -${space[2]}px;
 	${until.phablet} {
@@ -133,8 +139,12 @@ const SupportingBenefits = ({
 	);
 };
 
-const ChoiceCardPill = ({ copy }: { copy: string }) => {
-	return <div css={recommendedPillStyles}>{copy}</div>;
+const ChoiceCardPill = ({
+	pill,
+}: {
+	pill: NonNullable<ChoiceCard['pill']>;
+}) => {
+	return <div css={pillStyles(pill)}>{pill.copy}</div>;
 };
 
 type ThreeTierChoiceCardsProps = {
@@ -176,7 +186,7 @@ export const ThreeTierChoiceCards = ({
 									background-color: inherit;
 								`}
 							>
-								{pill && <ChoiceCardPill copy={pill.copy} />}
+								{pill && <ChoiceCardPill pill={pill} />}
 								<label
 									css={supportTierChoiceCardStyles(selected)}
 									htmlFor={radioId}

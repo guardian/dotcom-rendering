@@ -137,32 +137,35 @@ const decideImageWidths = ({
 		];
 	}
 	if (isMainMedia) {
+		if (
+			format.display === ArticleDisplay.Immersive ||
+			format.design === ArticleDesign.Gallery
+		) {
+			// If display is Immersive then main media should *always*
+			// use these larger image sources
+			return [
+				{ breakpoint: breakpoints.mobile, width: 480 },
+				{
+					breakpoint: breakpoints.mobileLandscape,
+					width: 660,
+				},
+				{
+					breakpoint: breakpoints.phablet,
+					width: 740,
+				},
+				{ breakpoint: breakpoints.tablet, width: 980 },
+				{
+					breakpoint: breakpoints.desktop,
+					width: 1140,
+				},
+				{
+					breakpoint: breakpoints.leftCol,
+					width: 1300,
+				},
+				{ breakpoint: breakpoints.wide, width: 1900 },
+			];
+		}
 		switch (format.display) {
-			case ArticleDisplay.Immersive: {
-				// If display is Immersive then main media should *always*
-				// use these larger image sources
-				return [
-					{ breakpoint: breakpoints.mobile, width: 480 },
-					{
-						breakpoint: breakpoints.mobileLandscape,
-						width: 660,
-					},
-					{
-						breakpoint: breakpoints.phablet,
-						width: 740,
-					},
-					{ breakpoint: breakpoints.tablet, width: 980 },
-					{
-						breakpoint: breakpoints.desktop,
-						width: 1140,
-					},
-					{
-						breakpoint: breakpoints.leftCol,
-						width: 1300,
-					},
-					{ breakpoint: breakpoints.wide, width: 1900 },
-				];
-			}
 			case ArticleDisplay.Showcase:
 			case ArticleDisplay.NumberedList: {
 				if (format.design === ArticleDesign.Feature) {
@@ -462,6 +465,19 @@ export const Sources = ({ sources }: { sources: ImageSource[] }) => {
 	);
 };
 
+const styles = ({ design }: ArticleFormat, isLightbox: boolean) => {
+	if (design === ArticleDesign.Gallery) {
+		return css`
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		`;
+	}
+	return isLightbox ? flex : block;
+};
+
 export const Picture = ({
 	role,
 	format,
@@ -523,7 +539,7 @@ export const Picture = ({
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
-		<picture css={isLightbox ? flex : block}>
+		<picture css={styles(format, isLightbox)}>
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
 			{format.display === ArticleDisplay.Immersive && isMainMedia && (
 				<>
