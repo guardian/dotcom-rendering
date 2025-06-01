@@ -146,6 +146,7 @@ const SignIn = ({ idUrl }: { idUrl: string }) => (
 			'guardian_signin_header',
 		)}`}
 		data-link-name={nestedOphanComponents('header', 'topbar', 'signin')}
+		data-testid="topbar-signin"
 	>
 		<ProfileIcon /> Sign in
 	</a>

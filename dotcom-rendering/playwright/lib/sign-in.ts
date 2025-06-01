@@ -1,19 +1,16 @@
 import { randomUUID } from 'node:crypto';
 import type { BrowserContext, Page } from '@playwright/test';
+import { expect } from '@playwright/test';
 import { loadPage } from './load-page';
 import { expectToExist } from './locators';
-
-type Networks = 'facebook' | 'apple' | 'google';
-
-type SocialLink = {
-	socialId: number;
-	network: Networks;
-};
 
 type IDAPITestUserOptions = {
 	primaryEmailAddress?: `${string}@theguardian.com`;
 	isUserEmailValidated?: boolean;
-	socialLinks?: SocialLink[];
+	socialLinks?: Array<{
+		socialId: number;
+		network: 'facebook' | 'apple' | 'google';
+	}>;
 	password?: string;
 	deleteAfterMinute?: boolean;
 	isGuestUser?: boolean;
@@ -96,9 +93,8 @@ const signIn = async (
 	context: BrowserContext,
 	path: string,
 ): Promise<void> => {
-	const PROFILE_URL_CODE = 'https://profile.code.dev-theguardian.com';
-
-	await page.goto(PROFILE_URL_CODE);
+	// create a test user in the CODE environment
+	await page.goto('https://profile.code.dev-theguardian.com');
 	await page.waitForLoadState('load');
 
 	await page.click('text="Sign in"');
@@ -117,9 +113,11 @@ const signIn = async (
 	await page.fill('input[name=password]', password);
 	await page.click('[data-cy="main-form-submit-button"]');
 
+	// wait for the redirect to CODE domain
 	await page.waitForURL('https://m.code.dev-theguardian.com/uk');
 	await page.waitForLoadState('load');
 
+	// create the GU_U cookie to simulate a signed-in user
 	await context.addCookies([
 		{
 			name: 'GU_U',
@@ -130,8 +128,21 @@ const signIn = async (
 		},
 	]);
 
+	// navigate back to the original path
 	await loadPage({ page, path, useSecure: true });
 	await page.waitForLoadState('load');
+
+	// check that the user is signed in
+	await expectToBeSignedIn(page);
 };
 
-export { createTestUser, signIn };
+const expectToBeSignedIn = async (page: Page): Promise<void> => {
+	await expect(
+		page
+			.locator(`gu-island[name="TopBar"]`)
+			.first()
+			.getByText('My account'),
+	).toBeVisible();
+};
+
+export { createTestUser, expectToBeSignedIn, signIn };

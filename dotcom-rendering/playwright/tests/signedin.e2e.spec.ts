@@ -4,15 +4,23 @@ import { cmpAcceptAll, disableCMP } from '../lib/cmp';
 import { waitForIsland } from '../lib/islands';
 import { loadPage, loadPageWithOverrides } from '../lib/load-page';
 import { isSecureServerAvailable } from '../lib/secure';
-import { signIn } from '../lib/sign-in';
+import { expectToBeSignedIn, signIn } from '../lib/sign-in';
 
 test.describe('Signed out readers', () => {
-	test('should not display signed in texts when users are not signed in', async ({
+	test('should not display signed in text when users are not signed in', async ({
 		context,
 		page,
 	}) => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, standardArticle);
+
+		await waitForIsland(page, 'TopBar');
+		// Check that the top bar is showing the reader as signed out
+		const signInText = await page
+			.locator('[data-testid="topbar-signin"]')
+			.textContent();
+
+		expect(signInText).toContain('Sign in');
 
 		await waitForIsland(page, 'DiscussionWeb');
 
@@ -39,6 +47,12 @@ test.describe('Signed in readers', () => {
 			await loadPage({ page, path, useSecure: true });
 			await cmpAcceptAll(page);
 			await signIn(page, context, path);
+			await expectToBeSignedIn(page);
+		} else {
+			// eslint-disable-next-line no-console -- e2e test
+			console.info(
+				'Secure server is not available, skipping secure sign-in test',
+			);
 		}
 	});
 });
