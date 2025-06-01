@@ -11,10 +11,40 @@ type LoadPageOptions = {
 	region?: 'GB' | 'US' | 'AU' | 'INT';
 	preventSupportBanner?: boolean;
 	useSecure?: boolean;
+	overrides?: {
+		configOverrides?: Record<string, unknown>;
+		switchOverrides?: Record<string, unknown>;
+		article?: FEArticle;
+	};
 };
+
+type LoadPageParams = {
+	page: Page;
+	path: string;
+} & LoadPageOptions;
 
 const getOrigin = (useSecure?: boolean): string =>
 	useSecure ? ORIGIN_SECURE : ORIGIN;
+
+const getUrl = ({
+	path,
+	useSecure,
+	queryParamsOn,
+	queryParams,
+	fragment,
+}: Required<
+	Pick<LoadPageParams, 'path' | 'useSecure' | 'queryParamsOn' | 'queryParams'>
+> &
+	Pick<LoadPageParams, 'fragment'>): string => {
+	const paramsString = queryParamsOn
+		? `?${new URLSearchParams({
+				adtest: 'fixed-puppies-ci',
+				...queryParams,
+		  }).toString()}`
+		: '';
+
+	return `${getOrigin(useSecure)}${path}${paramsString}${fragment ?? ''}`;
+};
 
 /**
  * Loads a page in Playwright and centralises setup
@@ -29,10 +59,8 @@ const loadPage = async ({
 	region = 'GB',
 	preventSupportBanner = true,
 	useSecure = false,
-}: {
-	page: Page;
-	path: string;
-} & LoadPageOptions): Promise<void> => {
+	overrides = {},
+}: LoadPageParams): Promise<void> => {
 	await page.addInitScript(
 		(args) => {
 			// Set the geo region, defaults to GB
@@ -53,38 +81,78 @@ const loadPage = async ({
 			preventSupportBanner,
 		},
 	);
-	// Add an adtest query param to ensure we get a fixed test ad
-	const paramsString = queryParamsOn
-		? `?${new URLSearchParams({
-				adtest: 'fixed-puppies-ci',
-				...queryParams,
-		  }).toString()}`
-		: '';
 
-	// Remove Link prefetch headers from the response headers to prevent Playwright from throwing errors.
-	// For some unknown reason when prefetch links are incorrect (e.g. when run from the secure domain r.thegulocal.com)
-	// they cause the regular requests initiated by the script elements to error and fail to load.
-	void page.route(`**${path}**`, async (route) => {
-		const response = await route.fetch();
-		const body = await response.body();
-		await route.fulfill({
-			response,
-			body,
-			headers: {
-				...response.headers(),
-				Link: '',
-			},
-		});
+	const url = getUrl({
+		path,
+		useSecure,
+		queryParamsOn,
+		queryParams,
+		fragment,
 	});
 
-	// The default Playwright waitUntil: 'load' ensures all requests have completed
-	// Use 'domcontentloaded' to speed up tests and prevent hanging requests from timing out tests
-	await page.goto(
-		`${getOrigin(useSecure)}${path}${paramsString}${fragment ?? ''}`,
-		{
-			waitUntil,
-		},
-	);
+	const hasOverrides =
+		overrides.configOverrides ??
+		overrides.switchOverrides ??
+		overrides.article;
+
+	if (hasOverrides) {
+		// If we have overrides, the overrides.article property is expected to be present.
+		// We apply the overrides to the article config and switches and then send the
+		// modified JSON payload to DCR
+		const postData = {
+			...overrides.article,
+			config: {
+				...overrides.article?.config,
+				...overrides.configOverrides,
+				switches: {
+					...overrides.article?.config.switches,
+					...overrides.switchOverrides,
+				},
+			},
+		};
+
+		void page.route(url, async (route) => {
+			// To override config or switches we need to make a POST request to DCR so
+			// we can apply the overrides
+			const modifiedResponse = await route.fetch({
+				url: `${getOrigin(useSecure)}/Article`,
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				postData,
+			});
+			const body = await modifiedResponse.body();
+			// Remove Link prefetch headers from the response headers to prevent Playwright from throwing errors.
+			// For some unknown reason when prefetch links are incorrect (e.g. when run from the secure domain r.thegulocal.com)
+			// they cause the corresponding requests initiated by the script elements to error and fail to load.
+			await route.fulfill({
+				body,
+				headers: {
+					...modifiedResponse.headers(),
+					Link: '',
+				},
+			});
+		});
+
+		await page.goto(url, { waitUntil });
+	} else {
+		void page.route(url, async (route) => {
+			const modifiedResponse = await route.fetch({ url });
+			const body = await modifiedResponse.body();
+			await route.fulfill({
+				body,
+				headers: {
+					...modifiedResponse.headers(),
+					Link: '',
+				},
+			});
+		});
+
+		// The default Playwright waitUntil: 'load' ensures all requests have completed
+		// Use 'domcontentloaded' to speed up tests and prevent hanging requests from timing out tests
+		await page.goto(url, { waitUntil });
+	}
 };
 
 /**
@@ -100,31 +168,13 @@ const loadPageWithOverrides = async (
 	},
 	options?: LoadPageOptions,
 ): Promise<void> => {
-	const path = `/Article`;
-	await page.route(
-		`${getOrigin(options?.useSecure)}${path}`,
-		async (route) => {
-			const postData = {
-				...article,
-				config: {
-					...article.config,
-					...overrides?.configOverrides,
-					switches: {
-						...article.config.switches,
-						...overrides?.switchOverrides,
-					},
-				},
-			};
-			await route.continue({
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				postData,
-			});
-		},
-	);
-	await loadPage({ page, path, queryParamsOn: false, ...options });
+	await loadPage({
+		page,
+		path: '/Article',
+		queryParamsOn: false,
+		...options,
+		overrides: { ...overrides, article },
+	});
 };
 
 /**
