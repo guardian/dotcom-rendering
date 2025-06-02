@@ -755,11 +755,11 @@ const styles = {
 			justify-self: end;
 		}
 		${between.desktop.and.wide} {
-			max-width: 380px; /* should this be min-width? */
+			max-width: 380px;
 		}
 		${from.wide} {
-			max-width: 485px; /* should this be min-width? */
-			align-self: start; /*should this be end?*/
+			max-width: 485px;
+			align-self: start;
 		}
 	`,
 	threeTierChoiceCardsContainer: css`
