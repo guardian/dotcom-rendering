@@ -331,24 +331,15 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 				id="rr_designable-banner-inner-container"
 				css={styles.layoutOverrides(cardsImageOrSpaceTemplateString)}
 			>
-				<div
-					id="rr_designable-banner-logo"
-					css={styles.guardianLogoContainer}
-				>
+				<div css={styles.guardianLogoContainer}>
 					<SvgGuardianLogo
 						textColor={hexColourToString(basic.logo)}
 					/>
 				</div>
 
-				<div
-					id="rr_designable-banner-vert-line"
-					css={styles.verticalLine}
-				/>
+				<div css={styles.verticalLine} />
 
-				<div
-					id="rr_designable-banner-copy-container"
-					css={styles.contentContainer}
-				>
+				<div css={styles.contentContainer}>
 					<div css={getHeaderContainerCss()}>
 						<div css={styles.headerOverrides}>
 							<DesignableBannerHeader
@@ -404,10 +395,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 				</div>
 
 				{templateSettings.imageSettings && (
-					<div
-						id="rr_designable-banner-main-image"
-						css={styles.bannerVisualContainer}
-					>
+					<div css={styles.bannerVisualContainer}>
 						<DesignableBannerVisual
 							settings={templateSettings.imageSettings}
 							bannerId={templateSettings.bannerId}
@@ -417,10 +405,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 				)}
 
 				{!threeTierChoiceCardSelectedProduct && (
-					<div
-						id="rr_designable-banner-cta-container"
-						css={styles.outerImageCtaContainer}
-					>
+					<div css={styles.outerImageCtaContainer}>
 						<div css={styles.innerImageCtaContainer}>
 							<DesignableBannerCtas
 								mainOrMobileContent={mainOrMobileContent}
@@ -437,7 +422,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					</div>
 				)}
 
-				<div id="rr_designable-banner-close-button">
+				<div css={styles.closeButtonContainer}>
 					<DesignableBannerCloseButton
 						onCloseClick={onCloseClick}
 						settings={templateSettings.closeButtonSettings}
@@ -448,10 +433,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 				{choiceCards &&
 					threeTierChoiceCardSelectedProduct &&
 					mainOrMobileContent.primaryCta && (
-						<div
-							id="rr_designable-banner-3-tier-choice-cards-container"
-							css={styles.threeTierChoiceCardsContainer}
-						>
+						<div css={styles.threeTierChoiceCardsContainer}>
 							<ThreeTierChoiceCards
 								selectedProduct={
 									threeTierChoiceCardSelectedProduct
@@ -515,59 +497,6 @@ const styles = {
 		padding: 0 auto;
 	`,
 	layoutOverrides: (cardsImageOrSpaceTemplateString: string) => css`
-		/* Define the grid areas */
-		#rr_designable-banner-logo {
-			grid-area: logo;
-		}
-		#rr_designable-banner-vert-line {
-			grid-area: vert-line;
-		}
-		#rr_designable-banner-copy-container {
-			grid-area: copy-container;
-			${from.leftCol} {
-				padding-left: ${space[3]}px;
-			}
-		}
-		#rr_designable-banner-cta-container {
-			grid-area: cta-container;
-		}
-		#rr_designable-banner-close-button {
-			grid-area: close-button;
-			${until.phablet} {
-				padding-right: ${space[2]}px;
-				justify-self: end;
-				position: sticky;
-				top: 10px;
-			}
-
-			${from.phablet} {
-				margin-top: ${space[2]}px;
-				padding-right: ${space[2]}px;
-				position: sticky;
-			}
-
-			${from.desktop} {
-				margin-top: ${space[6]}px;
-				justify-self: end;
-			}
-			${from.leftCol} {
-				justify-self: start;
-				padding-left: ${space[8]}px;
-			}
-		}
-		#rr_designable-banner-main-image {
-			grid-area: main-image;
-			${from.desktop} {
-				justify-self: end;
-			}
-		}
-		#rr_designable-banner-3-tier-choice-cards-container {
-			grid-area: choice-cards-container;
-			${from.desktop} {
-				justify-self: end;
-			}
-		}
-
 		display: grid;
 		background: inherit;
 		position: relative;
@@ -598,15 +527,6 @@ const styles = {
 				'. 	copy-container 						close-button'
 				'. 	${cardsImageOrSpaceTemplateString} 	.'
 				'. 	cta-container 						.';
-
-			::before {
-				content: '';
-				width: auto;
-			}
-			::after {
-				content: '';
-				width: auto;
-			}
 		}
 		${from.desktop} {
 			max-width: 980px;
@@ -641,6 +561,8 @@ const styles = {
 		}
 	`,
 	verticalLine: css`
+		grid-area: vert-line;
+
 		${until.leftCol} {
 			display: none;
 		}
@@ -652,9 +574,31 @@ const styles = {
 		}
 	`,
 	closeButtonOverrides: css`
-		/* Layout changes are to go in the id for the close button
-		above please only add design overrides here.  
-		These are passed into the component and applied at that level. */
+		/* Layout changes go in closeButtonContainer below. 
+		changes for styles go in here. */
+	`,
+	closeButtonContainer: css`
+		/* Layout changes only here */
+		grid-area: close-button;
+		${until.phablet} {
+			padding-right: ${space[2]}px;
+			justify-self: end;
+			position: sticky;
+			top: 10px;
+		}
+		${from.phablet} {
+			margin-top: ${space[2]}px;
+			padding-right: ${space[2]}px;
+			position: sticky;
+		}
+		${from.desktop} {
+			margin-top: ${space[6]}px;
+			justify-self: end;
+		}
+		${from.leftCol} {
+			justify-self: start;
+			padding-left: ${space[8]}px;
+		}
 	`,
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
 		align-self: stretch;
@@ -690,6 +634,8 @@ const styles = {
 		}
 	`,
 	contentContainer: css`
+		grid-area: copy-container;
+
 		max-width: 100%;
 		align-self: start;
 
@@ -700,9 +646,14 @@ const styles = {
 			padding-right: ${space[5]}px;
 			margin-bottom: ${space[2]}px;
 		}
+		${from.leftCol} {
+			padding-left: ${space[3]}px;
+		}
 	`,
 	/* ctas for use with main images */
 	outerImageCtaContainer: css`
+		grid-area: cta-container;
+
 		display: flex;
 		background-color: inherit;
 		align-items: center;
@@ -787,6 +738,8 @@ const styles = {
 		}
 	`,
 	bannerVisualContainer: css`
+		grid-area: main-image;
+
 		margin-left: ${space[2]}px;
 		margin-right: ${space[2]}px;
 
@@ -798,15 +751,19 @@ const styles = {
 			margin-top: ${space[6]}px;
 			padding-left: ${space[2]}px;
 		}
+		${from.desktop} {
+			justify-self: end;
+		}
 		${between.desktop.and.wide} {
-			max-width: 380px;
+			max-width: 380px; /* should this be min-width? */
 		}
 		${from.wide} {
-			max-width: 485px;
+			max-width: 485px; /* should this be min-width? */
 			align-self: start; /*should this be end?*/
 		}
 	`,
 	threeTierChoiceCardsContainer: css`
+		grid-area: choice-cards-container;
 		max-width: 100%;
 
 		${until.desktop} {
@@ -817,6 +774,7 @@ const styles = {
 		}
 		${from.desktop} {
 			margin: 0 ${space[3]}px;
+			justify-self: end;
 		}
 		${between.desktop.and.wide} {
 			max-width: 380px;
@@ -827,6 +785,8 @@ const styles = {
 		}
 	`,
 	guardianLogoContainer: css`
+		grid-area: logo;
+
 		${until.leftCol} {
 			display: none;
 		}
