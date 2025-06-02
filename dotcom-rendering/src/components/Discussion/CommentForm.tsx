@@ -304,6 +304,9 @@ export const CommentForm = ({
 		const body = textValue;
 		if (!body) return;
 
+		// Reset the error and preview body before fetching the preview
+		// This ensures that if the preview fails, we don't show stale data
+		// and we can display the new error message if applicable
 		setError('');
 		setPreviewBody('');
 
@@ -312,7 +315,7 @@ export const CommentForm = ({
 
 		if (response.kind === 'error') {
 			// If the preview fails, we handle the error and reset the preview body
-			handleError(response.error);
+			handleError(response.error, false);
 			setPreviewBody('');
 			return;
 		}
@@ -320,7 +323,10 @@ export const CommentForm = ({
 		setPreviewBody(response.value);
 	};
 
-	const handleError = (commentError: string) => {
+	const handleError = (
+		commentError: string,
+		isSubmittingForm: boolean = true,
+	) => {
 		switch (commentError) {
 			// Reader has never posted before and needs to choose a username
 			case 'USERNAME_MISSING':
@@ -333,7 +339,7 @@ export const CommentForm = ({
 				);
 			case 'INVALID_CHARS':
 				return setError(
-					'Your comment contains invalid characters. Please remove them and try again.',
+					'Your comment contains invalid characters or emojis. Please remove them and try again.',
 				);
 			case 'USER_BANNED':
 				return setError(
@@ -383,7 +389,9 @@ export const CommentForm = ({
 					address.`);
 			default:
 				return setError(
-					'Sorry, there was a problem posting your comment.',
+					isSubmittingForm
+						? 'Sorry, there was a problem posting your comment.'
+						: 'Sorry, there was a problem loading the comment preview.',
 				);
 		}
 	};
