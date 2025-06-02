@@ -660,7 +660,6 @@ const styles = {
 		justify-content: stretch;
 		flex-direction: column;
 		gap: ${space[4]}px;
-		margin-top: ${space[3]}px;
 
 		${until.phablet} {
 			width: 100vw;
@@ -680,7 +679,7 @@ const styles = {
 			justify-self: stretch;
 			align-items: start;
 			width: 100%;
-			margin-top: ${space[2]}px;
+			margin-bottom: ${space[2]}px;
 			margin-left: 0px;
 			margin-right: 0px;
 		}
