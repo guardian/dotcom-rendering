@@ -199,6 +199,17 @@ const commentResponseSchema = variant('status', [
 	}),
 ]);
 
+const previewResponseSchema = variant('status', [
+	object({
+		status: literal('error'),
+		errorCode: picklist(errorCodes),
+	}),
+	object({
+		status: literal('ok'),
+		commentBody: string(),
+	}),
+]);
+
 export const parseCommentResponse = (
 	data: unknown,
 ): Result<'ParsingError' | CommentResponseErrorCodes, string> => {
@@ -212,6 +223,27 @@ export const parseCommentResponse = (
 	}
 
 	return ok(output.message);
+};
+
+/**
+ * @summary This function parses the response from the preview endpoint.
+ *
+ * @param {unknown} data
+ * @return {*}  {(Result<'ParsingError' | CommentResponseErrorCodes, string>)}
+ */
+export const parsePreviewResponse = (
+	data: unknown,
+): Result<'ParsingError' | CommentResponseErrorCodes, string> => {
+	const { success, output } = safeParse(previewResponseSchema, data);
+	if (!success) {
+		return error('ParsingError');
+	}
+
+	if (output.status === 'error') {
+		return error(output.errorCode);
+	}
+
+	return ok(output.commentBody);
 };
 
 const abuseResponseSchema = variant('status', [

@@ -13,6 +13,7 @@ import {
 	getCommentContextResponseSchema,
 	parseAbuseResponse,
 	parseCommentResponse,
+	parsePreviewResponse,
 	parseRecommendResponse,
 	parseRepliesResponse,
 	pickResponseSchema,
@@ -159,7 +160,7 @@ export const preview = async (body: string): Promise<CommentResponse> => {
 
 	if (jsonResult.kind === 'error') return jsonResult;
 
-	return parseCommentResponse(jsonResult.value);
+	return parsePreviewResponse(jsonResult.value);
 };
 
 export type CommentResponse = Result<
