@@ -2347,6 +2347,8 @@ const standfirstLinkTextLight: PaletteFunction = ({ design, theme }) => {
 			}
 		case ArticleDesign.Audio:
 			return sourcePalette.neutral[86];
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
 		default:
 			switch (theme) {
 				case ArticleSpecial.SpecialReport:
@@ -2434,6 +2436,8 @@ const standfirstTextLight: PaletteFunction = (format) => {
 				default:
 					return sourcePalette.neutral[86];
 			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
 		default:
 			if (
 				format.theme === ArticleSpecial.SpecialReportAlt &&
@@ -2970,6 +2974,8 @@ const articleBackgroundLight: PaletteFunction = ({
 		case ArticleDesign.Interactive:
 		case ArticleDesign.FullPageInteractive:
 			return 'transparent';
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[7];
 		default:
 			switch (theme) {
 				case ArticleSpecial.SpecialReport:
