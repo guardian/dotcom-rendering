@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
-import { from, until } from '@guardian/source/foundations';
+import { from } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
+import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
@@ -53,29 +54,20 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 			<main>
 				<div css={border}>Labs header</div>
 				<header css={[grid.container]}>
-					<div css={[grid.column.all, border]}>Main media</div>
-					<div
-						css={[
-							border,
-							grid.between('centre-column-start', 'grid-end'),
-							css`
-								${until.tablet} {
-									${grid.column.all}
-								}
-							`,
-						]}
-					>
-						<ArticleHeadline
-							format={props.format}
-							headlineString={props.gallery.frontendData.headline}
-							tags={props.gallery.frontendData.tags}
-							byline={props.gallery.frontendData.byline}
-							webPublicationDateDeprecated={
-								props.gallery.frontendData
-									.webPublicationDateDeprecated
-							}
-						/>
-					</div>
+					<MainMediaGallery
+						mainMedia={props.gallery.mainMedia}
+						format={props.format}
+					/>
+					<ArticleHeadline
+						format={props.format}
+						headlineString={props.gallery.frontendData.headline}
+						tags={props.gallery.frontendData.tags}
+						byline={props.gallery.frontendData.byline}
+						webPublicationDateDeprecated={
+							props.gallery.frontendData
+								.webPublicationDateDeprecated
+						}
+					/>
 					<div
 						css={[
 							border,

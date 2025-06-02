@@ -15,6 +15,7 @@ import {
 	textSansBold34,
 	until,
 } from '@guardian/source/foundations';
+import { grid } from '../../src/grid';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getAgeWarning } from '../lib/age-warning';
 import {
@@ -820,7 +821,18 @@ export const ArticleHeadline = ({
 					);
 				case ArticleDesign.Gallery: {
 					return (
-						<div css={darkBackground}>
+						<div
+							css={[
+								darkBackground,
+								grid.between('centre-column-start', 'grid-end'),
+								css`
+									grid-row: 7/9;
+									${until.tablet} {
+										${grid.column.all}
+									}
+								`,
+							]}
+						>
 							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
