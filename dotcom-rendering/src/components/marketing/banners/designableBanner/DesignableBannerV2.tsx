@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import {
 	between,
-	brand,
 	from,
 	neutral,
 	palette,
@@ -22,7 +21,6 @@ import type {
 	BannerDesignImage,
 	ConfigurableDesign,
 	Image,
-	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import { useEffect, useState } from 'react';
@@ -33,10 +31,7 @@ import {
 import { ThreeTierChoiceCards } from '../../epics/ThreeTierChoiceCards';
 import { getChoiceCards } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
-import {
-	addChoiceCardsProductParams,
-	addRegionIdAndTrackingParamsToSupportUrl,
-} from '../../lib/tracking';
+import { addChoiceCardsProductParams } from '../../lib/tracking';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
 import type { ChoiceCardSettings } from './components/choiceCards/ChoiceCards';
@@ -115,28 +110,16 @@ const buildChoiceCardSettings = (
 };
 
 const buildUrlForThreeTierChoiceCards = (
-	tracking: Tracking,
+	baseUrl: string,
 	selectedProduct: ChoiceCard['product'],
-	countryCode?: string,
 ) => {
-	const baseUrl = 'https://support.theguardian.com/contribute';
-	const urlWithProduct =
-		selectedProduct.supportTier === 'OneOff'
-			? baseUrl
-			: addChoiceCardsProductParams(
-					baseUrl,
-					selectedProduct.supportTier,
-					selectedProduct.ratePlan,
-			  );
-
-	return addRegionIdAndTrackingParamsToSupportUrl(
-		urlWithProduct,
-		tracking,
-		undefined,
-		countryCode,
-		tracking.abTestName,
-		tracking.abTestVariant,
-	);
+	return selectedProduct.supportTier === 'OneOff'
+		? baseUrl
+		: addChoiceCardsProductParams(
+				baseUrl,
+				selectedProduct.supportTier,
+				selectedProduct.ratePlan,
+		  );
 };
 
 const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
@@ -149,10 +132,8 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	separateArticleCountSettings,
 	tickerSettings,
 	choiceCardsSettings,
-	countryCode,
 	submitComponentEvent,
 	design,
-	tracking,
 }: BannerRenderProps): JSX.Element => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 
@@ -429,37 +410,40 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					/>
 				)}
 
-				{choiceCards && threeTierChoiceCardSelectedProduct && (
-					<div css={styles.threeTierChoiceCardsContainer}>
-						<ThreeTierChoiceCards
-							selectedProduct={threeTierChoiceCardSelectedProduct}
-							setSelectedProduct={
-								setThreeTierChoiceCardSelectedProduct
-							}
-							choices={choiceCards}
-							id={'banner'}
-						/>
+				{choiceCards &&
+					threeTierChoiceCardSelectedProduct &&
+					mainOrMobileContent.primaryCta && (
+						<div css={styles.threeTierChoiceCardsContainer}>
+							<ThreeTierChoiceCards
+								selectedProduct={
+									threeTierChoiceCardSelectedProduct
+								}
+								setSelectedProduct={
+									setThreeTierChoiceCardSelectedProduct
+								}
+								choices={choiceCards}
+								id={'banner'}
+							/>
 
-						<div css={styles.ctaContainer}>
-							<LinkButton
-								href={buildUrlForThreeTierChoiceCards(
-									tracking,
-									threeTierChoiceCardSelectedProduct,
-									countryCode,
-								)}
-								onClick={onCtaClick}
-								priority="tertiary"
-								cssOverrides={styles.linkButtonStyles}
-								icon={<SvgArrowRightStraight />}
-								iconSide="right"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								Continue
-							</LinkButton>
+							<div css={styles.ctaContainer}>
+								<LinkButton
+									href={buildUrlForThreeTierChoiceCards(
+										mainOrMobileContent.primaryCta.ctaUrl,
+										threeTierChoiceCardSelectedProduct,
+									)}
+									onClick={onCtaClick}
+									priority="tertiary"
+									cssOverrides={styles.linkButtonStyles}
+									icon={<SvgArrowRightStraight />}
+									iconSide="right"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									Continue
+								</LinkButton>
+							</div>
 						</div>
-					</div>
-				)}
+					)}
 			</div>
 		</div>
 	);
@@ -554,7 +538,6 @@ const styles = {
 	headerOverrides: css`
 		/* stylelint-disable declaration-no-important */
 		h2 {
-			color: ${brand[400]} !important;
 			margin-top: ${space[1]}px !important;
 			margin-bottom: ${space[2]}px !important;
 			${until.phablet} {

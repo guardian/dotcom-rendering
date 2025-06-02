@@ -5,8 +5,6 @@ import type { DCRContainerType } from '../../../types/front';
 import type { CardImageType } from '../../../types/layout';
 import type { ImagePositionType } from './ImageWrapper';
 
-const padding = 20;
-
 export type GapSize = 'none' | 'tiny' | 'small' | 'medium' | 'large';
 
 export type GapSizes = { row: GapSize; column: GapSize };
@@ -30,6 +28,7 @@ const containerStyles = css`
 
 // Until mobile landscape, show 1 card on small screens
 // Above mobile landscape, show 1 full card and min 20vw of second card
+const padding = 20;
 const videoWidth = css`
 	min-width: 300px;
 	max-width: 600px;
