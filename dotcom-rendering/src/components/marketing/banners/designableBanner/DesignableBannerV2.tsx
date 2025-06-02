@@ -552,6 +552,7 @@ const styles = {
 			}
 			${from.leftCol} {
 				justify-self: start;
+				padding-left: ${space[8]}px;
 			}
 		}
 		#rr_designable-banner-main-image {
