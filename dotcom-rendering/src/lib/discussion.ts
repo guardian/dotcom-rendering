@@ -184,6 +184,7 @@ const errorCodes = [
 	'API_CORS_BLOCKED',
 	'API_ERROR',
 	'EMAIL_NOT_VALIDATED',
+	'INVALID_CHARS',
 ] as const;
 
 const commentResponseSchema = variant('status', [
