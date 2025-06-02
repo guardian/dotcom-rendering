@@ -21,7 +21,6 @@ import type {
 	BannerDesignImage,
 	ConfigurableDesign,
 	Image,
-	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import { useEffect, useState } from 'react';
@@ -32,10 +31,7 @@ import {
 import { ThreeTierChoiceCards } from '../../epics/ThreeTierChoiceCards';
 import { getChoiceCards } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
-import {
-	addChoiceCardsProductParams,
-	addRegionIdAndTrackingParamsToSupportUrl,
-} from '../../lib/tracking';
+import { addChoiceCardsProductParams } from '../../lib/tracking';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
 import type { ChoiceCardSettings } from './components/choiceCards/ChoiceCards';
@@ -115,27 +111,15 @@ const buildChoiceCardSettings = (
 
 const buildUrlForThreeTierChoiceCards = (
 	baseUrl: string,
-	tracking: Tracking,
 	selectedProduct: ChoiceCard['product'],
-	countryCode?: string,
 ) => {
-	const urlWithProduct =
-		selectedProduct.supportTier === 'OneOff'
-			? baseUrl
-			: addChoiceCardsProductParams(
-					baseUrl,
-					selectedProduct.supportTier,
-					selectedProduct.ratePlan,
-			  );
-
-	return addRegionIdAndTrackingParamsToSupportUrl(
-		urlWithProduct,
-		tracking,
-		undefined,
-		countryCode,
-		tracking.abTestName,
-		tracking.abTestVariant,
-	);
+	return selectedProduct.supportTier === 'OneOff'
+		? baseUrl
+		: addChoiceCardsProductParams(
+				baseUrl,
+				selectedProduct.supportTier,
+				selectedProduct.ratePlan,
+		  );
 };
 
 const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
@@ -148,10 +132,8 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	separateArticleCountSettings,
 	tickerSettings,
 	choiceCardsSettings,
-	countryCode,
 	submitComponentEvent,
 	design,
-	tracking,
 }: BannerRenderProps): JSX.Element => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 
@@ -447,9 +429,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 								<LinkButton
 									href={buildUrlForThreeTierChoiceCards(
 										mainOrMobileContent.primaryCta.ctaUrl,
-										tracking,
 										threeTierChoiceCardSelectedProduct,
-										countryCode,
 									)}
 									onClick={onCtaClick}
 									priority="tertiary"
