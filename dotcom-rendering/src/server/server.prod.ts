@@ -165,16 +165,7 @@ export const prodServer = (): void => {
 			<!DOCTYPE html>
 			<html>
 			<body>
-				<ul>
-					<li><a href="/Article">Article</a></li>
-					<li><a href="/AMPArticle">⚡️Article</a></li>
-					<li><a href="/ArticlePerfTest">⚡Article (perf test example)</a></li>
-					<li><a href="/AMPArticlePerfTest">⚡️Article (perf test example)</a></li>
-				</ul>
-				<ul>
-					<li><a href="/ArticlePerfTest">⚡Article (perf test example)</a></li>
-					<li><a href="/AMPArticlePerfTest">⚡️Article (perf test example)</a></li>
-				</ul>
+				<h1>👋</h1>
 			</body>
 			</html>
 		`);
