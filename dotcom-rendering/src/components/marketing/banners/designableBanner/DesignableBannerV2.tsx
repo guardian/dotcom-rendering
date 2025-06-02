@@ -541,14 +541,17 @@ const styles = {
 			}
 
 			${from.phablet} {
+				margin-top: ${space[2]}px;
 				padding-right: ${space[2]}px;
 				position: sticky;
-				top: 10px;
 			}
 
 			${from.desktop} {
 				margin-top: ${space[6]}px;
 				justify-self: end;
+			}
+			${from.leftCol} {
+				justify-self: start;
 			}
 		}
 		#rr_designable-banner-main-image {
@@ -620,7 +623,7 @@ const styles = {
 			bottom: 0px;
 			/* the vertical line aligns with that of standard article */
 			grid-column-gap: 10px;
-			grid-template-columns: 140px 1px max(460px) max(380px) auto;
+			grid-template-columns: 140px 1px min(460px) min(380px) auto;
 			grid-template-rows: auto auto;
 			grid-template-areas:
 				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button'
@@ -629,7 +632,7 @@ const styles = {
 		${from.wide} {
 			max-width: 1300px;
 			/* the vertical line aligns with that of standard article */
-			grid-template-columns: 219px 1px max(460px) max(380px) auto;
+			grid-template-columns: 219px 1px min(460px) min(380px) auto;
 			grid-template-rows: auto auto;
 			grid-template-areas:
 				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button'
