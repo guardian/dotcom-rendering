@@ -964,25 +964,6 @@ export const tabs = {
 	};
 };
 
-const datelineMobileLight: PaletteFunction = ({ design, theme }) => {
-	switch (design) {
-		case ArticleDesign.LiveBlog:
-			return sourcePalette.neutral[100];
-		case ArticleDesign.Picture:
-		case ArticleDesign.Video:
-		case ArticleDesign.Audio:
-			return sourcePalette.neutral[46];
-		default:
-			if (
-				theme === ArticleSpecial.SpecialReportAlt &&
-				design !== ArticleDesign.DeadBlog
-			) {
-				return sourcePalette.specialReportAlt[100];
-			}
-			return sourcePalette.neutral[46];
-	}
-};
-
 const datelineLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Comment:
@@ -994,15 +975,8 @@ const datelineLight: PaletteFunction = ({ design, theme }) => {
 				default:
 					return sourcePalette.neutral[20];
 			}
-		case ArticleDesign.Analysis:
-		case ArticleDesign.Explainer:
-		case ArticleDesign.Feature:
 		case ArticleDesign.FullPageInteractive:
 		case ArticleDesign.Interactive:
-		case ArticleDesign.Interview:
-		case ArticleDesign.NewsletterSignup:
-		case ArticleDesign.PhotoEssay:
-		case ArticleDesign.Review:
 			return sourcePalette.neutral[60];
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
@@ -6303,10 +6277,6 @@ const paletteColours = {
 	'--dateline': {
 		light: datelineLight,
 		dark: datelineDark,
-	},
-	'--dateline-mobile': {
-		light: datelineMobileLight,
-		dark: standfirstTextDark,
 	},
 	'--design-tag-background': {
 		light: designTagBackground,

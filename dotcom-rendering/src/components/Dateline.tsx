@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { textSans12, until } from '@guardian/source/foundations';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
-import { useConfig } from './ConfigContext';
 
 const datelineStyles = css`
 	${textSans12};
@@ -11,7 +10,7 @@ const datelineStyles = css`
 	margin-bottom: 6px;
 
 	${until.desktop} {
-		color: var(--mobile-color);
+		color: var(--mobile-colour);
 	}
 `;
 
@@ -43,22 +42,18 @@ export const Dateline = ({
 	secondaryDateline,
 	format,
 }: Props) => {
-	const { renderingTarget } = useConfig();
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
-	const isApps = renderingTarget === 'Apps';
 
 	// for liveblog smaller breakpoints article meta is located in the same
 	// container as standfirst and needs the same styling as standfirst on web
-	const mobileColor = {
-		'--mobile-color': isApps
-			? palette('--dateline-mobile')
-			: isLiveBlog
+	const mobileColour = {
+		'--mobile-colour': isLiveBlog
 			? palette('--standfirst-text')
-			: 'inherit',
+			: palette('--dateline'),
 	};
 	if (secondaryDateline && !secondaryDateline.includes(primaryDateline)) {
 		return (
-			<details css={[datelineStyles]} style={mobileColor}>
+			<details css={datelineStyles} style={mobileColour}>
 				<summary css={primaryStyles}>
 					<span css={hoverUnderline}>{primaryDateline}</span>
 				</summary>
@@ -67,7 +62,7 @@ export const Dateline = ({
 		);
 	}
 	return (
-		<div css={[datelineStyles]} style={mobileColor}>
+		<div css={datelineStyles} style={mobileColour}>
 			{primaryDateline}
 		</div>
 	);
