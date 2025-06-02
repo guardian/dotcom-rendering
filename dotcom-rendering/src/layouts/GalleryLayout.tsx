@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/source/foundations';
+import { from, until } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Masthead } from '../components/Masthead/Masthead';
 import { grid } from '../grid';
@@ -58,6 +58,11 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						css={[
 							border,
 							grid.between('centre-column-start', 'grid-end'),
+							css`
+								${until.tablet} {
+									${grid.column.all}
+								}
+							`,
 						]}
 					>
 						<ArticleHeadline
