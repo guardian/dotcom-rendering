@@ -827,9 +827,6 @@ export const ArticleHeadline = ({
 								grid.between('centre-column-start', 'grid-end'),
 								css`
 									grid-row: 7/9;
-									${until.tablet} {
-										${grid.column.all}
-									}
 								`,
 							]}
 						>
