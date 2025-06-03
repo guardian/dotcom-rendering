@@ -1,3 +1,4 @@
+import { Hide } from '@guardian/source/react-components';
 import type { ImgHTMLAttributes } from 'react';
 import type {
 	AspectRatio,
@@ -275,14 +276,36 @@ export const DecideContainer = ({
 		case 'scrollable/small':
 			if (shouldShowCarouselsAsStacked) {
 				return (
-					<StaticMediumFour
-						trails={trails}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						absoluteServerTimes={absoluteServerTimes}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
+					<>
+						<Hide from="tablet">
+							<StaticMediumFour
+								trails={trails}
+								containerPalette={containerPalette}
+								showAge={showAge}
+								absoluteServerTimes={absoluteServerTimes}
+								imageLoading={imageLoading}
+								aspectRatio={aspectRatio}
+							/>
+						</Hide>
+						{/* scrollable/small is not a carousel above the tablet breakpoint */}
+						<Hide until="tablet">
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<ScrollableSmall
+									trails={trails}
+									imageLoading={imageLoading}
+									containerType={'scrollable/small'}
+									containerPalette={containerPalette}
+									showAge={showAge}
+									absoluteServerTimes={absoluteServerTimes}
+									aspectRatio={aspectRatio}
+									sectionId={sectionId}
+								/>
+							</Island>
+						</Hide>
+					</>
 				);
 			}
 
