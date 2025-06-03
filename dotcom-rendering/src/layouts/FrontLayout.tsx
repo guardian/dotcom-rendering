@@ -750,7 +750,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
-									shouldShowMediumCarouselsAsStacked={
+									shouldShowCarouselsAsStacked={
 										pageId === 'uk' &&
 										abTests.stackedCarouselsVariant ===
 											'variant'

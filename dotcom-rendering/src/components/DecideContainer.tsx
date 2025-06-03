@@ -48,7 +48,7 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
-	shouldShowMediumCarouselsAsStacked?: boolean;
+	shouldShowCarouselsAsStacked?: boolean;
 };
 
 export const DecideContainer = ({
@@ -64,7 +64,7 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
-	shouldShowMediumCarouselsAsStacked,
+	shouldShowCarouselsAsStacked,
 }: Props) => {
 	// If you add a new container type which contains an MPU, you must also add it to
 	switch (containerType) {
@@ -273,6 +273,19 @@ export const DecideContainer = ({
 				/>
 			);
 		case 'scrollable/small':
+			if (shouldShowCarouselsAsStacked) {
+				return (
+					<StaticMediumFour
+						trails={trails}
+						containerPalette={containerPalette}
+						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
+						imageLoading={imageLoading}
+						aspectRatio={aspectRatio}
+					/>
+				);
+			}
+
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<ScrollableSmall
@@ -288,7 +301,7 @@ export const DecideContainer = ({
 				</Island>
 			);
 		case 'scrollable/medium':
-			if (shouldShowMediumCarouselsAsStacked) {
+			if (shouldShowCarouselsAsStacked) {
 				return (
 					<StaticMediumFour
 						trails={trails}
