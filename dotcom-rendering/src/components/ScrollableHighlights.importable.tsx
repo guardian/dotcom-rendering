@@ -179,7 +179,7 @@ const getOphanInfo = (frontId?: string) => {
 	};
 };
 
-const ScrollableHighlightsCarousel = ({ trails, frontId }: Props) => {
+export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
 	const imageLoading = 'eager';
@@ -309,31 +309,4 @@ const ScrollableHighlightsCarousel = ({ trails, frontId }: Props) => {
 			</Hide>
 		</div>
 	);
-};
-
-type WrapperProps = {
-	trails: DCRFrontCard[];
-	frontId?: string;
-	isInHighlightsAbTestVariant?: boolean;
-};
-
-export const ScrollableHighlights = ({
-	trails,
-	frontId,
-	isInHighlightsAbTestVariant,
-}: WrapperProps) => {
-	const isUkFront = frontId === 'uk';
-
-	if (isInHighlightsAbTestVariant && isUkFront) {
-		return (
-			<Hide until="tablet">
-				<ScrollableHighlightsCarousel
-					trails={trails}
-					frontId={frontId}
-				/>
-			</Hide>
-		);
-	}
-	// If the user is not in the variant, render the highlights carousel at all breakpoints
-	return <ScrollableHighlightsCarousel trails={trails} frontId={frontId} />;
 };
