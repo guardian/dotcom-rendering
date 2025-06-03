@@ -77,17 +77,10 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 								.webPublicationDateDeprecated
 						}
 					/>
-					<div
-						css={[
-							border,
-							grid.between('centre-column-start', 'grid-end'),
-						]}
-					>
-						<Standfirst
-							format={props.format}
-							standfirst={props.gallery.frontendData.standfirst}
-						/>
-					</div>
+					<Standfirst
+						format={props.format}
+						standfirst={props.gallery.frontendData.standfirst}
+					/>
 					<div
 						css={[
 							border,

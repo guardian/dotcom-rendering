@@ -14,6 +14,7 @@ import {
 	textSans24,
 } from '@guardian/source/foundations';
 import sanitise from 'sanitize-html';
+import { grid } from '../../src/grid';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -317,6 +318,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					`;
 				case ArticleDesign.Gallery:
 					return css`
+						${grid.between('centre-column-start', 'grid-end')}
 						color: ${palette('--standfirst-text')};
 						background-color: ${palette('--standfirst-background')};
 						max-width: 280px;
