@@ -108,7 +108,7 @@ const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 					}
 				}
 				case ArticleDesign.Gallery:
-					return sourcePalette.neutral[97];
+					return sourcePalette.neutral[100];
 				case ArticleDesign.LiveBlog: {
 					switch (theme) {
 						case ArticleSpecial.SpecialReport:
@@ -179,6 +179,8 @@ const headlineTextDark: PaletteFunction = ({ design, display, theme }) => {
 							return sourcePalette.neutral[97];
 					}
 				}
+				case ArticleDesign.Gallery:
+					return sourcePalette.neutral[86];
 				default:
 					return sourcePalette.neutral[97];
 			}
@@ -248,7 +250,7 @@ const headlineBackgroundDark: PaletteFunction = ({
 					return sourcePalette.neutral[20];
 			}
 		case ArticleDesign.Gallery:
-			return sourcePalette.neutral[7];
+			return sourcePalette.neutral[10];
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
 		case ArticleDesign.Explainer:
