@@ -14,7 +14,7 @@
 		"build-storybook:dcr": "pnpm --filter @guardian/dotcom-rendering build-storybook",
 		"build:dcr": "cd dotcom-rendering && make build",
 		"chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
-		"prepare": "husky install",
+		"prepare": "husky",
 		"lint-staged": "lint-staged",
 		"prettier:check": "prettier --ignore-unknown --check --cache .",
 		"prettier:write": "prettier --ignore-unknown --write --cache ."
