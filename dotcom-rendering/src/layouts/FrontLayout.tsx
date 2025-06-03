@@ -44,7 +44,6 @@ import {
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
 import { ophanComponentId } from '../lib/ophan-helpers';
-import { BETA_CONTAINERS } from '../model/enhanceCollections';
 import type { NavType } from '../model/extract-nav';
 import { palette as schemePalette } from '../palette';
 import type {
@@ -448,9 +447,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									discussionApiUrl={
 										front.config.discussionApiUrl
 									}
-									isBetaContainer={BETA_CONTAINERS.includes(
-										collection.collectionType,
-									)}
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
@@ -721,9 +717,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collection.collectionType ===
 										'scrollable/medium'
 								}
-								isBetaContainer={BETA_CONTAINERS.includes(
-									collection.collectionType,
-								)}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
