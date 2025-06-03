@@ -1,0 +1,13 @@
+regions: [eu-west-1]
+stacks: [frontend]
+allowedStages:
+  - CODE
+  - PROD
+deployments:
+  frontend-store/commercial:
+    type: aws-s3
+    parameters:
+      bucketSsmKey: /account/services/dotcom-store.bucket
+      cacheControl: public, max-age=315360000
+      prefixStack: false
+      publicReadAcl: false
