@@ -15,6 +15,7 @@ import { isMediaCard } from '../../lib/cardHelpers';
 import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
+import { BETA_CONTAINERS } from '../../model/enhanceCollections';
 import { palette } from '../../palette';
 import type { Branding } from '../../types/branding';
 import type { StarRating as Rating } from '../../types/content';
@@ -70,16 +71,6 @@ import { SvgWaveform } from './components/SvgWaveform';
 import { TrailText, type TrailTextSize } from './components/TrailText';
 
 export type Position = 'inner' | 'outer' | 'none';
-export const BETA_CONTAINERS = [
-	'scrollable/highlights',
-	'flexible/special',
-	'flexible/general',
-	'scrollable/small',
-	'scrollable/medium',
-	'scrollable/feature',
-	'static/feature/2',
-	'static/medium/4',
-];
 
 export type Props = {
 	linkTo: string;
@@ -137,7 +128,7 @@ export type Props = {
 	liveUpdatesPosition?: Position;
 	onwardsSource?: OnwardsSource;
 	pauseOffscreenVideo?: boolean;
-	showMainVideo?: boolean;
+	showVideo?: boolean;
 	isTagPage?: boolean;
 	/** Allows the consumer to set an aspect ratio on the image of 5:3, 5:4, 4:5 or 1:1 */
 	aspectRatio?: AspectRatio;
@@ -398,7 +389,7 @@ export const Card = ({
 	liveUpdatesPosition = 'inner',
 	onwardsSource,
 	pauseOffscreenVideo = false,
-	showMainVideo = true,
+	showVideo = true,
 	absoluteServerTimes,
 	isTagPage = false,
 	aspectRatio,
@@ -887,7 +878,7 @@ export const Card = ({
 						)}
 						{media.type === 'video' && (
 							<>
-								{showMainVideo ? (
+								{showVideo ? (
 									<div
 										data-chromatic="ignore"
 										data-component="youtube-atom"

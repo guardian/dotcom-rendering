@@ -259,13 +259,13 @@ export const AudioPlayer = ({
 		<>
 			{/* native audio player and controls */}
 			<audio
-				src={src}
 				ref={audioRef}
 				autoPlay={false}
 				data-media-id={mediaId}
 				preload="none"
 				controls={false}
 			>
+				<source src={src} type="audio/mpeg" />
 				<track kind="captions" />
 			</audio>
 

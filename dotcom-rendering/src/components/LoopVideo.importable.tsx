@@ -8,16 +8,17 @@ import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useConfig } from './ConfigContext';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
 
-const videoContainerStyles = css`
+const videoContainerStyles = (width: number) => css`
 	z-index: ${getZIndex('loop-video-container')};
 	position: relative;
+	width: ${width}px;
 `;
 
 type Props = {
 	src: string;
 	videoId: string;
-	width?: number;
-	height?: number;
+	width: number;
+	height: number;
 	thumbnailImage: string;
 	fallbackImageComponent: JSX.Element;
 	hasAudio?: boolean;
@@ -146,6 +147,7 @@ export const LoopVideo = ({
 		switch (event.key) {
 			case 'Enter':
 			case ' ':
+				event.preventDefault();
 				playPauseVideo();
 				break;
 			case 'Escape':
@@ -166,7 +168,11 @@ export const LoopVideo = ({
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
 	return (
-		<div ref={setNode} css={videoContainerStyles}>
+		<div
+			ref={setNode}
+			css={videoContainerStyles(width)}
+			className="loop-video-container"
+		>
 			<LoopVideoPlayer
 				src={src}
 				videoId={videoId}

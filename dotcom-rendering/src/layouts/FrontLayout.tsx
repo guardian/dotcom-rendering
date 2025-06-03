@@ -6,7 +6,6 @@ import {
 } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
-import { BETA_CONTAINERS } from '../components/Card/Card';
 import { Carousel } from '../components/Carousel.importable';
 import { useConfig } from '../components/ConfigContext';
 import { ContainerOverrides } from '../components/ContainerOverrides';
@@ -45,6 +44,7 @@ import {
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
 import { ophanComponentId } from '../lib/ophan-helpers';
+import { BETA_CONTAINERS } from '../model/enhanceCollections';
 import type { NavType } from '../model/extract-nav';
 import { palette as schemePalette } from '../palette';
 import type {
@@ -137,6 +137,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const { absoluteServerTimes = false } = front.config.switches;
 
+	const { abTests } = front.config;
+
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
 			case 'scrollable/feature':
@@ -180,6 +182,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 					frontId={front.pressedPage.id}
 					collectionId={0}
+					abTests={abTests}
 				/>
 			)
 		);
