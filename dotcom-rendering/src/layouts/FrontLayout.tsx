@@ -744,6 +744,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
 									shouldShowCarouselsAsStacked={
+										renderingTarget === 'Web' &&
 										pageId === 'uk' &&
 										abTests.stackedCarouselsVariant ===
 											'variant'
