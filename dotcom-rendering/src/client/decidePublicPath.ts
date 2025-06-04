@@ -5,9 +5,11 @@
  */
 export const decidePublicPath = (): string => {
 	const isDev = process.env.NODE_ENV === 'development';
-	const isLocalHost = window.location.hostname === 'localhost';
+	const isDevHost = ['localhost', 'r.thegulocal.com'].includes(
+		window.location.hostname,
+	);
 	// Use relative path if running locally or in CI
-	return isDev || isLocalHost
+	return isDev || isDevHost
 		? '/assets/'
 		: `${window.guardian.config.frontendAssetsFullURL}assets/`;
 };
