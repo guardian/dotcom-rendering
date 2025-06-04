@@ -13,14 +13,24 @@ test.describe('Signed in readers', () => {
 			'/Article/https://www.theguardian.com/commentisfree/2025/jan/14/bradford-radical-culture-city-of-culture-bronte';
 		const secureServerAvailable = await isSecureServerAvailable();
 		if (secureServerAvailable) {
-			await loadPage({ page, path, useSecure: true });
+			await loadPage({
+				page,
+				path,
+				useSecure: true,
+				overrides: {
+					configOverrides: {
+						idUrl: 'https://profile.code.dev-theguardian.com',
+						mmaUrl: 'https://membership.code.dev-theguardian.com',
+					},
+				},
+			});
 			await cmpAcceptAll(page);
 			await signIn(page, context, path);
 			await expectToBeSignedIn(page);
 		} else {
 			// eslint-disable-next-line no-console -- e2e test
 			console.info(
-				'Secure server is not available, skipping secure sign-in test',
+				'Secure server is not available, skipping sign-in test',
 			);
 		}
 	});
