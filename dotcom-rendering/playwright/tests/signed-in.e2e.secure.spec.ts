@@ -19,12 +19,18 @@ test.describe('Signed in readers', () => {
 				useSecure: true,
 				overrides: {
 					configOverrides: {
+						stage: 'CODE',
+						isDev: true,
+						idApiUrl: 'https://idapi.code.dev-theguardian.com',
 						idUrl: 'https://profile.code.dev-theguardian.com',
-						mmaUrl: 'https://membership.code.dev-theguardian.com',
+						mmaUrl: 'https://manage.code.dev-theguardian.com',
+						userBenefitsApiUrl:
+							'https://user-benefits.code.dev-guardianapis.com/benefits/me',
 					},
 				},
 			});
 			await cmpAcceptAll(page);
+
 			await signIn(page, context, path);
 			await expectToBeSignedIn(page);
 		} else {

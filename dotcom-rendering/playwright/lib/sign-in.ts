@@ -129,10 +129,25 @@ const signIn = async (
 	]);
 
 	// navigate back to the original path
-	await loadPage({ page, path, useSecure: true });
+	await loadPage({
+		page,
+		path,
+		useSecure: true,
+		overrides: {
+			configOverrides: {
+				stage: 'CODE',
+				isDev: true,
+				idApiUrl: 'https://idapi.code.dev-theguardian.com',
+				idUrl: 'https://profile.code.dev-theguardian.com',
+				mmaUrl: 'https://manage.code.dev-theguardian.com',
+				userBenefitsApiUrl:
+					'https://user-benefits.code.dev-guardianapis.com/benefits/me',
+			},
+		},
+	});
 	await page.waitForLoadState('load');
 
-	// check that the user is signed in
+	// check the user is signed in
 	await expectToBeSignedIn(page);
 };
 
