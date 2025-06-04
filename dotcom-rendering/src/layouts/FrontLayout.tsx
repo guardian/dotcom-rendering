@@ -105,7 +105,12 @@ const decideLeftContent = (front: Front, collection: DCRCollectionType) => {
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
-		config: { isPaidContent, hasPageSkin: hasPageSkinConfig, pageId },
+		config: {
+			abTests,
+			isPaidContent,
+			hasPageSkin: hasPageSkinConfig,
+			pageId,
+		},
 		editionId,
 	} = front;
 
@@ -738,6 +743,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
+									shouldShowCarouselsAsStacked={
+										pageId === 'uk' &&
+										abTests.stackedCarouselsVariant ===
+											'variant'
+									}
 								/>
 							</FrontSection>
 
