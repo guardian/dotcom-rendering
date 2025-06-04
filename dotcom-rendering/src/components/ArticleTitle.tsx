@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
-import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
+import { grid } from '../../src/grid';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+} from '../lib/articleFormat';
 import type { TagType } from '../types/tag';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
@@ -37,6 +42,22 @@ const immersiveMargins = css`
 	}
 `;
 
+const styles = ({ design }: ArticleFormat) => {
+	switch (design) {
+		case ArticleDesign.Gallery: {
+			return css`
+				${grid.between('centre-column-start', 'grid-end')};
+				grid-row: 6/7;
+				max-width: 400px;
+				min-width: 200px;
+			`;
+		}
+		default: {
+			return undefined;
+		}
+	}
+};
+
 export const ArticleTitle = ({
 	format,
 	tags,
@@ -45,7 +66,7 @@ export const ArticleTitle = ({
 	guardianBaseURL,
 	isMatch,
 }: Props) => (
-	<div css={[sectionStyles]}>
+	<div css={[styles(format), sectionStyles]}>
 		<div
 			css={
 				format.display === ArticleDisplay.Immersive
