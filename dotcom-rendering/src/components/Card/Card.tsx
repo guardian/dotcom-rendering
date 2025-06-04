@@ -1030,14 +1030,14 @@ export const Card = ({
 						{media.type === 'podcast' && (
 							<>
 								{media.podcastImage?.src && !showKickerImage ? (
-									<div css={[podcastImageStyles(imageSize)]}>
+									<div css={podcastImageStyles(imageSize)}>
 										<CardPicture
 											mainImage={media.podcastImage.src}
-											imageSize={'small'}
+											imageSize="small"
 											alt={media.imageAltText}
 											loading={imageLoading}
 											roundedCorners={isOnwardContent}
-											aspectRatio={'1:1'}
+											aspectRatio="1:1"
 										/>
 									</div>
 								) : (

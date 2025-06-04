@@ -302,17 +302,13 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 
 	return (
 		<div
-			id="rr_designable-banner-outer-container"
 			css={styles.outerContainer(
 				templateSettings.containerSettings.backgroundColour,
 				iosAppBannerPresent,
 				templateSettings.containerSettings.textColor,
 			)}
 		>
-			<div
-				id="rr_designable-banner-inner-container"
-				css={styles.layoutOverrides(cardsImageOrSpaceTemplateString)}
-			>
+			<div css={styles.layoutOverrides(cardsImageOrSpaceTemplateString)}>
 				<div css={styles.guardianLogoContainer}>
 					<SvgGuardianLogo
 						textColor={hexColourToString(basic.logo)}
@@ -729,8 +725,6 @@ const styles = {
 		${from.desktop} {
 			margin-top: ${space[6]}px;
 			padding-left: ${space[2]}px;
-		}
-		${from.desktop} {
 			justify-self: end;
 		}
 		${between.desktop.and.wide} {
