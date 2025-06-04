@@ -46,6 +46,25 @@ const getUrl = ({
 	return `${getOrigin(useSecure)}${path}${paramsString}${fragment ?? ''}`;
 };
 
+const getArticleJson = async (url: string): Promise<FEArticle> => {
+	const cleanedUrl = url.replace(/\/Article\//, ''); // Remove /Article/ prefix if present
+	try {
+		const response = await fetch(`${cleanedUrl}.json?dcr`);
+		if (!response.ok) {
+			throw new Error(
+				`Failed to fetch article JSON from ${cleanedUrl}: ${response.statusText}`,
+			);
+		}
+		return validateAsFEArticle(await response.json());
+	} catch (error) {
+		throw new Error(
+			`Error fetching or validating article JSON from ${cleanedUrl}: ${
+				error instanceof Error ? error.message : String(error)
+			}`,
+		);
+	}
+};
+
 /**
  * Loads a page in Playwright and centralises setup
  */
@@ -96,16 +115,20 @@ const loadPage = async ({
 		overrides.article;
 
 	if (hasOverrides) {
+		const article = await (overrides.article
+			? Promise.resolve(overrides.article)
+			: getArticleJson(path));
+
 		// If we have overrides, the overrides.article property is expected to be present.
 		// We apply the overrides to the article config and switches and then send the
 		// modified JSON payload to DCR
 		const postData = {
-			...overrides.article,
+			...article,
 			config: {
-				...overrides.article?.config,
+				...article.config,
 				...overrides.configOverrides,
 				switches: {
-					...overrides.article?.config.switches,
+					...article.config.switches,
 					...overrides.switchOverrides,
 				},
 			},
