@@ -45,6 +45,9 @@ jobs:
           sudo cp /etc/nginx/servers/dotcom-rendering.conf /etc/nginx/conf.d/dotcom-rendering.conf
           sudo dev-nginx restart-nginx
 
+      - name: Restart container
+        run: sudo docker restart ${{ inputs.container-image }}
+
       - name: Check local server
         run: |
           STATUS=$(curl -o /dev/null -s -w "%{http_code}" -k http://localhost:9000)
