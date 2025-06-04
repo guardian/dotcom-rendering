@@ -992,10 +992,10 @@ const datelineLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[100];
 				default:
-					return sourcePalette.neutral[46];
+					return sourcePalette.neutral[38];
 			}
 		default:
-			return sourcePalette.neutral[46];
+			return sourcePalette.neutral[38];
 	}
 };
 
@@ -1017,10 +1017,10 @@ const datelineDark: PaletteFunction = ({ design, theme }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.neutral[93];
 				default:
-					return sourcePalette.neutral[60];
+					return sourcePalette.neutral[73];
 			}
 		default:
-			return sourcePalette.neutral[60];
+			return sourcePalette.neutral[73];
 	}
 };
 
