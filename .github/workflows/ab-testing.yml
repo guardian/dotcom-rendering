@@ -30,3 +30,62 @@ jobs:
 
       # - name: Deploy
       #   run: deno run deploy
+
+  build-ui:
+    name: AB testing UI build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ab-testing/fronteend
+    steps:
+      - uses: actions/checkout@v4
+
+      # https://github.com/denoland/setup-deno#latest-stable-for-a-major
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v2.3
+
+      - name: Build
+        run: deno run build
+
+      - name: Save build
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: ui-build
+          path: output/ab-tests.html
+
+  riff-raff:
+    name: Upload Riff Raff Artifacts
+    needs: [deno]
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: ./.github/actions/setup-node-env
+
+      - name: Fetch build
+        uses: actions/download-artifact@v4.3.0
+        with:
+          name: ui-build
+          path: output/ab-tests.html
+
+      - name: Riff-Raff Upload
+        uses: guardian/actions-riff-raff@v4.1.9
+        with:
+          roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          projectName: dotcom::ab-tests
+          configPath: ab-testing/riff-raff.yaml
+          contentDirectories: |
+            frontend-store/commercial:
+              - output/ab-tests.html
