@@ -30,6 +30,9 @@ export default defineConfig({
 		video: {
 			mode: 'retain-on-failure',
 		},
+		launchOptions: {
+			args: ['--ignore-certificate-errors'],
+		},
 	},
 	// Configure projects for major browsers
 	projects: [
