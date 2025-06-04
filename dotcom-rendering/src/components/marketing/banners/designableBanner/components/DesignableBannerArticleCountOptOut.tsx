@@ -21,7 +21,7 @@ import {
 } from '../../../lib/articleCountOptOut';
 import type { ReactComponent } from '../../../lib/ReactComponent';
 import type { BannerTemplateSettings } from '../settings';
-import { buttonStyles } from '../styles/buttonStyles';
+import { buttonStyles, buttonThemes } from '../styles/buttonStyles';
 
 // ---- Component ---- //
 
@@ -128,7 +128,10 @@ const Overlay: ReactComponent<OverlayProps> = ({
 						onClick={onClose}
 						priority="primary"
 						size="xsmall"
-						cssOverrides={buttonStyles(settings.primaryCtaSettings)}
+						theme={buttonThemes(
+							settings.primaryCtaSettings,
+							'primary',
+						)}
 					>
 						Yes, that&apos;s OK
 					</Button>
@@ -137,8 +140,9 @@ const Overlay: ReactComponent<OverlayProps> = ({
 						onClick={onOptOut}
 						priority="tertiary"
 						size="xsmall"
-						cssOverrides={buttonStyles(
+						theme={buttonThemes(
 							settings.secondaryCtaSettings,
+							'secondary',
 						)}
 					>
 						No, opt me out

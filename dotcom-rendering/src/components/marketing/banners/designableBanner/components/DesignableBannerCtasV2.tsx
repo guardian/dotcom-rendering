@@ -9,7 +9,7 @@ import { LinkButton } from '@guardian/source/react-components';
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { BannerRenderedContent } from '../../common/types';
 import type { CtaSettings } from '../settings';
-import { buttonStyles } from '../styles/buttonStyles';
+import { buttonThemes } from '../styles/buttonStyles';
 
 interface DesignableBannerCtasProps {
 	mainOrMobileContent: BannerRenderedContent;
@@ -36,7 +36,7 @@ export function DesignableBannerCtas({
 					onClick={onPrimaryCtaClick}
 					size="small"
 					priority="primary"
-					cssOverrides={buttonStyles(primaryCtaSettings)}
+					theme={buttonThemes(primaryCtaSettings, 'primary')}
 				>
 					{primaryCta?.ctaText}
 				</LinkButton>
@@ -47,7 +47,7 @@ export function DesignableBannerCtas({
 					onClick={onSecondaryCtaClick}
 					size="small"
 					priority="tertiary"
-					cssOverrides={buttonStyles(secondaryCtaSettings)}
+					theme={buttonThemes(secondaryCtaSettings, 'secondary')}
 				>
 					{secondaryCta.cta.ctaText}
 				</LinkButton>
