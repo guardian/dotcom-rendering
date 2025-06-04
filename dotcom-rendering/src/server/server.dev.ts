@@ -115,7 +115,7 @@ renderer.get('/FootballMatchListPage/*', handleFootballMatchListPage);
 renderer.get('/FootballTablesPage/*', handleFootballTablesPage);
 renderer.get('/CricketMatchPage/*', handleCricketMatchPage);
 renderer.get('/FootballMatchSummaryPage/*', handleFootballMatchPage);
-// POST routes for running frontend locally
+// POST routes for running frontend locally and e2e tests
 renderer.post('/Article', handleArticle);
 renderer.post('/ArticleJson', handleArticleJson);
 renderer.post('/AMPArticle', handleAMPArticle);
