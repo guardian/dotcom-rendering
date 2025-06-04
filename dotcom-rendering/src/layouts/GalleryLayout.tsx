@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
+import { ArticleTitle } from '../components/ArticleTitle';
 import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Standfirst } from '../components/Standfirst';
@@ -74,6 +75,16 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						mainMedia={gallery.mainMedia}
 						format={format}
 					/>
+					<ArticleTitle
+						format={props.format}
+						tags={props.gallery.frontendData.tags}
+						sectionLabel={props.gallery.frontendData.sectionLabel}
+						sectionUrl={props.gallery.frontendData.sectionUrl}
+						guardianBaseURL={
+							props.gallery.frontendData.guardianBaseURL
+						}
+					/>
+
 					<ArticleHeadline
 						format={format}
 						headlineString={frontendData.headline}
