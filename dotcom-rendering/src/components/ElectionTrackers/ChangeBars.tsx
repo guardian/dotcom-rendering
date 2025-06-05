@@ -155,7 +155,7 @@ const Abbreviation = ({
 		css={{
 			...headlineMedium17Object,
 			color: palette('--change-bars-text'),
-			flexBasis: 50,
+			flexBasis: ['3.125rem', 'calc(2lh + 4px)'],
 			[from.mobileMedium]: headlineMedium20Object,
 			[from.phablet]: {
 				flexBasis: 'unset',
