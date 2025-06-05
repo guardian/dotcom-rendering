@@ -21,6 +21,11 @@ jobs:
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
 
+      # This needs to run before creating the secure server so the local CA is added to the Chromium trust store
+      - name: Install Playwright Browsers
+        run: pnpm playwright install --with-deps chromium
+        working-directory: ./dotcom-rendering
+
       - name: Set up nginx secure server
         run: |
           # Turn off mandb updates to speed up setup
@@ -45,9 +50,6 @@ jobs:
           sudo cp /etc/nginx/servers/dotcom-rendering.conf /etc/nginx/conf.d/dotcom-rendering.conf
           sudo dev-nginx restart-nginx
 
-      - name: Restart container
-        run: sudo docker restart ${{ inputs.container-image }}
-
       - name: Check local server
         run: |
           STATUS=$(curl -o /dev/null -s -w "%{http_code}" -k http://localhost:9000)
@@ -69,10 +71,6 @@ jobs:
             echo "Secure server is not reachable. Status: $STATUS"
             exit 1
           fi
-
-      - name: Install Playwright Browsers
-        run: pnpm playwright install --with-deps chromium
-        working-directory: ./dotcom-rendering
 
       - name: Run Playwright
         run: pnpm playwright test e2e.secure.spec.ts
