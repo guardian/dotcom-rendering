@@ -7495,6 +7495,30 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],
 	},
+	'--versus-banner-background': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--versus-banner-border': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--versus-banner-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--versus-change': {
+		light: () => '#606060',
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--versus-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--versus-text-faded': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[60],
+	},
 	'--witness-title-author': {
 		light: witnessTitleAuthor,
 		dark: witnessTitleAuthor,
