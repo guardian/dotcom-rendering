@@ -42,24 +42,28 @@ type Change = {
 	colour: string;
 };
 
-export const ChangeBars = ({ changes }: Props) => (
-	<ul
-		css={{
-			display: 'flex',
-			margin: 0,
-			padding: '4px 0',
-			height: 170,
-		}}
-	>
-		{changes.map((change) => (
-			<ChangeBar
-				key={change.name}
-				change={change}
-				maxChange={Math.max(...changes.map((c) => c.change))}
-			/>
-		))}
-	</ul>
-);
+export const ChangeBars = ({ changes }: Props) => {
+	const maxChange = Math.max(...changes.map((c) => c.change));
+
+	return (
+		<ul
+			css={{
+				display: 'flex',
+				margin: 0,
+				padding: '4px 0',
+				height: 170,
+			}}
+		>
+			{changes.map((change) => (
+				<ChangeBar
+					key={change.name}
+					change={change}
+					maxChange={maxChange}
+				/>
+			))}
+		</ul>
+	);
+};
 
 const ChangeBar = ({
 	change,
