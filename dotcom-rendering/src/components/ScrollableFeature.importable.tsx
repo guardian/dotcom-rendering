@@ -61,7 +61,6 @@ export const ScrollableFeature = ({
 							discussionId={card.discussionId}
 							mainMedia={card.mainMedia}
 							isExternalLink={card.isExternalLink}
-							isCartoon={card.isCartoon}
 							// branding={card.branding}
 							containerPalette={containerPalette}
 							absoluteServerTimes={absoluteServerTimes}
@@ -77,7 +76,7 @@ export const ScrollableFeature = ({
 							collectionId={collectionId}
 							isNewsletter={card.isNewsletter}
 							showQuotes={card.showQuotedHeadline}
-							showMainVideo={card.showMainVideo}
+							showVideo={card.showVideo}
 						/>
 					</ScrollableCarousel.Item>
 				);

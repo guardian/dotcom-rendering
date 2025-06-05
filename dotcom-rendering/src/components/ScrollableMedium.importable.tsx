@@ -12,7 +12,7 @@ type Props = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes?: boolean;
+	absoluteServerTimes: boolean;
 	imageLoading: 'lazy' | 'eager';
 	containerType: DCRContainerType;
 	aspectRatio: AspectRatio;
@@ -47,6 +47,7 @@ export const ScrollableMedium = ({
 				const imagePosition = isMediaCard(trail.format)
 					? 'top'
 					: 'bottom';
+
 				return (
 					<ScrollableCarousel.Item key={trail.url}>
 						<FrontCard

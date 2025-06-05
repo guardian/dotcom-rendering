@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import type { FEArticle } from '../frontend/feArticle';
 import {
 	ArticleDesign,
@@ -40,6 +41,7 @@ export type ArticleFields = {
 export type Gallery = ArticleFields & {
 	design: ArticleDesign.Gallery;
 	images: ImageBlockElement[];
+	mainMedia: ImageBlockElement;
 };
 
 export type OtherArticles = ArticleFields & {
@@ -81,6 +83,19 @@ export const enhanceArticleType = (
 
 	if (format.design === ArticleDesign.Gallery) {
 		const design = ArticleDesign.Gallery;
+
+		const mainMedia = mainMediaElements[0];
+		if (isUndefined(mainMedia)) {
+			throw new Error('No main media found');
+		}
+
+		if (
+			mainMedia._type !==
+			'model.dotcomrendering.pageElements.ImageBlockElement'
+		) {
+			throw new Error('Main media is not an image');
+		}
+
 		return {
 			frontendData: {
 				...data,
@@ -110,6 +125,7 @@ export const enhanceArticleType = (
 						'model.dotcomrendering.pageElements.ImageBlockElement',
 				),
 			),
+			mainMedia,
 		};
 	}
 

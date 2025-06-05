@@ -131,7 +131,7 @@ const ImmersiveCardLayout = ({
 					headlineSizes={{ desktop: 'medium', tablet: 'small' }}
 					supportingContent={card.supportingContent}
 					isImmersive={true}
-					showMainVideo={card.showMainVideo}
+					showVideo={card.showVideo}
 				/>
 			</LI>
 		</UL>
@@ -539,11 +539,7 @@ const HalfWidthCardLayout = ({
 							)}
 							supportingContentAlignment="vertical"
 							supportingContentPosition="outer"
-							imageSize={
-								card.format.design === ArticleDesign.Audio
-									? 'small'
-									: 'medium'
-							}
+							imageSize="medium"
 							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}

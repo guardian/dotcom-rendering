@@ -115,6 +115,26 @@ renderer.get('/FootballMatchListPage/*', handleFootballMatchListPage);
 renderer.get('/FootballTablesPage/*', handleFootballTablesPage);
 renderer.get('/CricketMatchPage/*', handleCricketMatchPage);
 renderer.get('/FootballMatchSummaryPage/*', handleFootballMatchPage);
+// POST routes for running frontend locally
+renderer.post('/Article', handleArticle);
+renderer.post('/ArticleJson', handleArticleJson);
+renderer.post('/AMPArticle', handleAMPArticle);
+renderer.post('/Interactive', handleInteractive);
+renderer.post('/AMPInteractive', handleAMPArticle);
+renderer.post('/Blocks', handleBlocks);
+renderer.post('/Front', handleFront);
+renderer.post('/FrontJSON', handleFrontJson);
+renderer.post('/TagPage', handleTagPage);
+renderer.post('/TagPageJSON', handleTagPageJson);
+renderer.post('/EmailNewsletters', handleAllEditorialNewslettersPage);
+renderer.post('/AppsArticle', handleAppsArticle);
+renderer.post('/AppsInteractive', handleAppsInteractive);
+renderer.post('/AppsBlocks', handleAppsBlocks);
+renderer.post('/EditionsCrossword', handleEditionsCrossword);
+renderer.post('/FootballMatchListPage', handleFootballMatchListPage);
+renderer.post('/FootballTablesPage', handleFootballTablesPage);
+renderer.post('/CricketMatchPage', handleCricketMatchPage);
+renderer.post('/FootballMatchSummaryPage', handleFootballMatchPage);
 
 const router = Router();
 router.use('/pages', pages);

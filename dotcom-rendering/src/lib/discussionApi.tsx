@@ -1,4 +1,4 @@
-import { isObject, isString, joinUrl } from '@guardian/libs';
+import { joinUrl } from '@guardian/libs';
 import { safeParse } from 'valibot';
 import type {
 	AdditionalHeadersType,
@@ -13,6 +13,7 @@ import {
 	getCommentContextResponseSchema,
 	parseAbuseResponse,
 	parseCommentResponse,
+	parsePreviewResponse,
 	parseRecommendResponse,
 	parseRepliesResponse,
 	pickResponseSchema,
@@ -141,9 +142,7 @@ export const getDiscussion = async ({
 	return ok(result.output);
 };
 
-export const preview = async (
-	body: string,
-): Promise<Result<GetDiscussionError, string>> => {
+export const preview = async (body: string): Promise<CommentResponse> => {
 	const url =
 		joinUrl(options.baseUrl, 'comment/preview') +
 		objAsParams(defaultParams);
@@ -161,9 +160,7 @@ export const preview = async (
 
 	if (jsonResult.kind === 'error') return jsonResult;
 
-	return isObject(jsonResult.value) && isString(jsonResult.value.commentBody)
-		? ok(jsonResult.value.commentBody)
-		: error('ParsingError');
+	return parsePreviewResponse(jsonResult.value);
 };
 
 export type CommentResponse = Result<
