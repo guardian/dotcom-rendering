@@ -239,6 +239,14 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	const renderAds = isWeb && canRenderAds(article);
 	return (
 		<>
+			<Global
+				styles={css`
+					.content__main-column--interactive p {
+						/* stylelint-disable-next-line declaration-no-important */
+						color: ${themePalette('--article-text')} !important;
+					}
+				`}
+			/>
 			{isApps && (
 				<Island priority="critical">
 					<InteractivesNativePlatformWrapper />
