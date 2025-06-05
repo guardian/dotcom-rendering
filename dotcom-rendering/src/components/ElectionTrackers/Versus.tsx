@@ -1,14 +1,13 @@
-import { css } from '@emotion/react';
 import {
 	from,
-	headlineBold24,
-	headlineBold42,
-	headlineBold50,
-	headlineBold64,
-	headlineMedium20,
-	headlineMedium24,
-	headlineMedium34,
-	textSans12,
+	headlineBold24Object,
+	headlineBold42Object,
+	headlineBold50Object,
+	headlineBold64Object,
+	headlineMedium20Object,
+	headlineMedium24Object,
+	headlineMedium34Object,
+	textSans12Object,
 } from '@guardian/source/foundations';
 import { generateImageURL } from '../../lib/image';
 import { palette } from '../../palette';
@@ -192,7 +191,7 @@ const Name = ({
 			color: colour,
 		}}
 		css={{
-			['&']: css(headlineMedium20),
+			...headlineMedium20Object,
 			lineHeight: 1,
 		}}
 	>
@@ -233,10 +232,16 @@ const Value = ({
 			color: colour,
 		}}
 		css={{
-			['&']: css(headlineBold42),
+			...headlineBold42Object,
 			lineHeight: 1,
-			[from.mobileMedium]: [css(headlineBold50), { lineHeight: 1 }],
-			[from.desktop]: [css(headlineBold64), { lineHeight: 1 }],
+			[from.mobileMedium]: {
+				...headlineBold50Object,
+				lineHeight: 1,
+			},
+			[from.desktop]: {
+				...headlineBold64Object,
+				lineHeight: 1,
+			},
 		}}
 	>
 		{value}
@@ -246,7 +251,7 @@ const Value = ({
 const Change = ({ change }: { change: number }) => (
 	<span
 		css={{
-			['&']: css(headlineBold24),
+			...headlineBold24Object,
 			color: palette('--versus-change'),
 		}}
 	>
@@ -268,9 +273,7 @@ const Description = ({
 			textAlign: align,
 			color: textColour(faded),
 		}}
-		css={{
-			['&']: css(textSans12),
-		}}
+		css={textSans12Object}
 	>
 		{description}
 	</span>
@@ -337,7 +340,7 @@ const Banner = ({ banner }: { banner: string | undefined }) => {
 	return (
 		<p
 			css={{
-				['&']: css(headlineMedium24),
+				...headlineMedium24Object,
 				lineHeight: 1,
 				position: 'absolute',
 				bottom: -15,
@@ -347,7 +350,10 @@ const Banner = ({ banner }: { banner: string | undefined }) => {
 					bottom: 'unset',
 					top: 0,
 				},
-				[from.phablet]: [css(headlineMedium34), { lineHeight: 1 }],
+				[from.phablet]: {
+					...headlineMedium34Object,
+					lineHeight: 1,
+				},
 			}}
 		>
 			<span
