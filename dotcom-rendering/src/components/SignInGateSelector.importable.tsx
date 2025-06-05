@@ -156,39 +156,21 @@ export const SignInGateSelector = ({
 		return <></>;
 	}
 
-	if (!userIsInAuxiaExperiment) {
-		return (
-			<SignInGateSelectorAuxia
-				host={host}
-				pageId={pageId}
-				idUrl={idUrl}
-				contributionsServiceUrl={contributionsServiceUrl}
-				editionId={editionId}
-				isPreview={isPreview}
-				isPaidContent={isPaidContent}
-				contentType={contentType}
-				sectionId={sectionId}
-				tags={tags}
-				isAuxiaAudience={false}
-			/>
-		);
-	} else {
-		return (
-			<SignInGateSelectorAuxia
-				host={host}
-				pageId={pageId}
-				idUrl={idUrl}
-				contributionsServiceUrl={contributionsServiceUrl}
-				editionId={editionId}
-				isPreview={isPreview}
-				isPaidContent={isPaidContent}
-				contentType={contentType}
-				sectionId={sectionId}
-				tags={tags}
-				isAuxiaAudience={true}
-			/>
-		);
-	}
+	return (
+		<SignInGateSelectorAuxia
+			host={host}
+			pageId={pageId}
+			idUrl={idUrl}
+			contributionsServiceUrl={contributionsServiceUrl}
+			editionId={editionId}
+			isPreview={isPreview}
+			isPaidContent={isPaidContent}
+			contentType={contentType}
+			sectionId={sectionId}
+			tags={tags}
+			isAuxiaAudience={userIsInAuxiaExperiment}
+		/>
+	);
 };
 
 /*
@@ -276,18 +258,19 @@ const decideAuxiaProxyReaderPersonalData =
 		const browserId =
 			getCookie({ name: 'bwid', shouldMemoize: true }) ?? undefined;
 		const dailyArticleCount = decideDailyArticleCount();
-		const hasConsent = await hasCmpConsentForBrowserId();
+		const hasConsented = await hasCmpConsentForBrowserId();
 		const isSupporter = decideIsSupporter();
 		const countryCode = (await getLocaleCode()) ?? ''; // default to empty string
 		const mvtId_str: string =
 			getCookie({ name: 'GU_mvt_id', shouldMemoize: true }) ?? '0';
 		const mvtId: number = parseInt(mvtId_str);
 		const data = {
-			browserId: hasConsent ? browserId : undefined,
+			browserId,
 			dailyArticleCount,
 			isSupporter,
 			countryCode,
 			mvtId,
+			hasConsented,
 		};
 		return Promise.resolve(data);
 	};
@@ -306,6 +289,7 @@ const fetchProxyGetTreatments = async (
 	countryCode: string,
 	mvtId: number,
 	should_show_legacy_gate_tmp: boolean,
+	hasConsented: boolean,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const articleIdentifier = `www.theguardian.com/${pageId}`;
@@ -327,6 +311,7 @@ const fetchProxyGetTreatments = async (
 		countryCode,
 		mvtId,
 		should_show_legacy_gate_tmp,
+		hasConsented,
 	};
 	const params = {
 		method: 'POST',
@@ -392,6 +377,7 @@ const buildAuxiaGateDisplayData = async (
 		readerPersonalData.countryCode,
 		readerPersonalData.mvtId,
 		should_show_legacy_gate_tmp,
+		readerPersonalData.hasConsented,
 	);
 
 	if (response.status && response.data) {
@@ -412,6 +398,16 @@ const auxiaLogTreatmentInteraction = async (
 	actionName: AuxiaInteractionActionName,
 	browserId: string | undefined,
 ): Promise<void> => {
+	// We have two types of gates: the standard Auxia gate and the
+	// gu default gate that is being served from SDC
+	// They are indistinguishable in terms of their structure, but the SDC
+	// gate comes with treatmentId: 'default-treatment-id'
+	// In this case, we should not run LogTreatmentInteraction
+
+	if (userTreatment.treatmentId === 'default-treatment-id') {
+		return;
+	}
+
 	const url = `${contributionsServiceUrl}/auxia/log-treatment-interaction`;
 	const headers = {
 		'Content-Type': 'application/json',

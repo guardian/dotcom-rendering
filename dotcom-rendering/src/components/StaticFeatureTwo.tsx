@@ -66,7 +66,6 @@ export const StaticFeatureTwo = ({
 							discussionId={card.discussionId}
 							mainMedia={card.mainMedia}
 							isExternalLink={card.isExternalLink}
-							isCartoon={card.isCartoon}
 							// branding={card.branding}
 							containerPalette={containerPalette}
 							trailText={undefined}
@@ -79,7 +78,7 @@ export const StaticFeatureTwo = ({
 							collectionId={collectionId}
 							isNewsletter={card.isNewsletter}
 							showQuotes={card.showQuotedHeadline}
-							showMainVideo={card.showMainVideo}
+							showVideo={card.showVideo}
 						/>
 					</LI>
 				);

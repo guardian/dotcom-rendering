@@ -13,7 +13,10 @@ import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
 
-type Props = { trails: DCRFrontCard[]; frontId?: string };
+type Props = {
+	trails: DCRFrontCard[];
+	frontId?: string;
+};
 
 const containerStyles = css`
 	${from.tablet} {

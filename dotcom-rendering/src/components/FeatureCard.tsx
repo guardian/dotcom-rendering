@@ -290,7 +290,6 @@ export type Props = {
 	 * Youtube requires a minimum width 200px.
 	 */
 	canPlayInline?: boolean;
-	isCartoon?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	starRating?: Rating;
@@ -321,7 +320,7 @@ export type Props = {
 	 *
 	 */
 	isImmersive?: boolean;
-	showMainVideo?: boolean;
+	showVideo?: boolean;
 };
 
 export const FeatureCard = ({
@@ -341,7 +340,6 @@ export const FeatureCard = ({
 	showClock,
 	mainMedia,
 	canPlayInline,
-	isCartoon,
 	kickerText,
 	showPulsingDot,
 	dataLinkName,
@@ -359,7 +357,7 @@ export const FeatureCard = ({
 	collectionId,
 	isNewsletter = false,
 	isImmersive = false,
-	showMainVideo = false,
+	showVideo = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -377,7 +375,7 @@ export const FeatureCard = ({
 	});
 
 	const showYoutubeVideo =
-		canPlayInline && showMainVideo && mainMedia?.type === 'Video';
+		canPlayInline && showVideo && mainMedia?.type === 'Video';
 
 	const showCardAge =
 		webPublicationDate !== undefined && showClock !== undefined;
@@ -608,8 +606,6 @@ export const FeatureCard = ({
 												kickerColour={palette(
 													'--feature-card-kicker-text',
 												)}
-												isBetaContainer={true}
-												isCartoon={isCartoon}
 											/>
 										</div>
 
