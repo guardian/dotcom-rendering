@@ -4,10 +4,7 @@ import express from 'express';
 import responseTime from 'response-time';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
-import {
-	handleAMPArticle,
-	handlePerfTest as handleAMPArticlePerfTest,
-} from './handler.article.amp';
+import { handleAMPArticle } from './handler.article.amp';
 import {
 	handleAppsArticle,
 	handleAppsBlocks,
@@ -16,7 +13,6 @@ import {
 import {
 	handleArticle,
 	handleArticleJson,
-	handleArticlePerfTest,
 	handleBlocks,
 	handleInteractive,
 } from './handler.article.web';
@@ -164,24 +160,12 @@ export const prodServer = (): void => {
 		handleAppsInteractive,
 	);
 
-	app.use('/ArticlePerfTest/*', handleArticlePerfTest);
-	app.use('/AMPArticlePerfTest/*', handleAMPArticlePerfTest);
-
 	app.get('/', (req, res) => {
 		res.send(`
 			<!DOCTYPE html>
 			<html>
 			<body>
-				<ul>
-					<li><a href="/Article">Article</a></li>
-					<li><a href="/AMPArticle">⚡️Article</a></li>
-					<li><a href="/ArticlePerfTest">⚡Article (perf test example)</a></li>
-					<li><a href="/AMPArticlePerfTest">⚡️Article (perf test example)</a></li>
-				</ul>
-				<ul>
-					<li><a href="/ArticlePerfTest">⚡Article (perf test example)</a></li>
-					<li><a href="/AMPArticlePerfTest">⚡️Article (perf test example)</a></li>
-				</ul>
+				<h1>👋</h1>
 			</body>
 			</html>
 		`);
