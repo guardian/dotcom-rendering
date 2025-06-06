@@ -17,10 +17,10 @@ import { useEffect, useRef, useState } from 'react';
 // that version will compile and render but is non-functional.
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
-import { NewsletterOrMarketingEmail } from 'src/types/content';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
 import { palette } from '../palette';
+import type { NewsletterOrMarketingEmail } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
 

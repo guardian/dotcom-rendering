@@ -5,7 +5,7 @@ import {
 } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
-import { NewsletterOrMarketingEmail } from 'src/types/content';
+import type { NewsletterOrMarketingEmail } from '../types/content';
 
 interface Props {
 	textColor?: 'supporting' | 'regular';

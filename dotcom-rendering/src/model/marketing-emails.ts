@@ -1,5 +1,5 @@
-import { MarketingConsentEmail } from 'src/types/content';
-import { TagType } from 'src/types/tag';
+import type { MarketingConsentEmail } from '../types/content';
+import type { TagType } from '../types/tag';
 
 // consents are hard-coded into the identity codebase:
 // https://github.com/guardian/identity/blob/main/identity-model/src/main/scala/com/gu/identity/model/Consent.scala#L91
@@ -42,7 +42,9 @@ export const marketingEmails: MarketingConsentEmail[] = [
 	},
 ];
 
-export const findPromotedMarketingEmail = (tags?: TagType[]) => {
+export const findPromotedMarketingEmail = (
+	tags?: TagType[],
+): MarketingConsentEmail | undefined => {
 	const tagIds = tags?.map((tag) => tag.id);
 	return (
 		tagIds &&

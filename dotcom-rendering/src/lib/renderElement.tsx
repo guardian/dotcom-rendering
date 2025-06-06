@@ -13,7 +13,6 @@ import { CrosswordComponent } from '../components/CrosswordComponent.importable'
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
 import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper';
-import { MarketingEmailSignUpWrapper } from '../components/MarketingEmailSignUpWrapper';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { ExplainerAtom } from '../components/ExplainerAtom';
 import { Figure } from '../components/Figure';
@@ -32,6 +31,7 @@ import { KeyTakeaways } from '../components/KeyTakeaways';
 import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
+import { MarketingEmailSignUpWrapper } from '../components/MarketingEmailSignUpWrapper';
 import { MiniProfiles } from '../components/MiniProfiles';
 import { MultiBylines } from '../components/MultiBylines';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';

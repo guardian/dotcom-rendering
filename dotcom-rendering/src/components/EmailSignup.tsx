@@ -8,8 +8,8 @@ import {
 } from '@guardian/source/foundations';
 import { buildDetailText } from '../lib/buildNewsletterSignUpText';
 import { palette as themePalette } from '../palette';
+import type { NewsletterOrMarketingEmail } from '../types/content';
 import { NewsletterDetail } from './NewsletterDetail';
-import { NewsletterOrMarketingEmail } from 'src/types/content';
 
 export type EmailSignUpProps = {
 	name: string;
@@ -102,7 +102,7 @@ export const EmailSignup = ({
 				<p css={titleStyles(theme)}>
 					Sign up to <span>{name}</span>
 				</p>
-				{frequency && (
+				{!!frequency && (
 					<div css={noHeightFromTabletStyles}>
 						<NewsletterDetail text={buildDetailText(frequency)} />
 					</div>
