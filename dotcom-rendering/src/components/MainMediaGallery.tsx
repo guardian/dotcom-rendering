@@ -14,7 +14,7 @@ type Props = {
 const styles = css`
 	${grid.column.all}
 	height: calc(80vh - 48px);
-	grid-row: 1/5;
+	grid-row: 1/8;
 	${from.desktop} {
 		height: calc(100vh - 48px);
 	}

@@ -15,6 +15,7 @@ import {
 	textSansBold34,
 	until,
 } from '@guardian/source/foundations';
+import { grid } from '../../src/grid';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getAgeWarning } from '../lib/age-warning';
 import {
@@ -60,20 +61,26 @@ const getFontWeightByDesign = (
 		case ArticleDesign.Review:
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Interview:
+		case ArticleDesign.Gallery:
 			return 'bold';
 		default:
 			return 'medium';
 	}
 };
 
-const isNewsNotCommentOrRecipe = (format: ArticleFormat) =>
+const isNewsNotCommentOrRecipeOrGallery = (format: ArticleFormat) =>
 	format.theme === Pillar.News &&
 	format.design !== ArticleDesign.Comment &&
-	format.design !== ArticleDesign.Recipe;
+	format.design !== ArticleDesign.Recipe &&
+	format.design !== ArticleDesign.Gallery;
 
 const decideHeadlineFont = (format: ArticleFormat) => {
-	const size = format.display === ArticleDisplay.Immersive ? 50 : 34;
-	if (isNewsNotCommentOrRecipe(format)) {
+	const size =
+		format.display === ArticleDisplay.Immersive ||
+		format.design === ArticleDesign.Gallery
+			? 50
+			: 34;
+	if (isNewsNotCommentOrRecipeOrGallery(format)) {
 		return size === 50 ? headlineMedium50 : headlineMedium34;
 	}
 
@@ -89,8 +96,12 @@ const decideHeadlineFont = (format: ArticleFormat) => {
 };
 
 const decideMobileHeadlineFont = (format: ArticleFormat) => {
-	const size = format.display === ArticleDisplay.Immersive ? 34 : 28;
-	if (isNewsNotCommentOrRecipe(format)) {
+	const size =
+		format.display === ArticleDisplay.Immersive ||
+		format.design === ArticleDesign.Gallery
+			? 34
+			: 28;
+	if (isNewsNotCommentOrRecipeOrGallery(format)) {
 		return size === 34 ? headlineMedium34 : headlineMedium28;
 	}
 
@@ -808,6 +819,47 @@ export const ArticleHeadline = ({
 							</h1>
 						</div>
 					);
+				case ArticleDesign.Gallery: {
+					return (
+						<div
+							css={[
+								darkBackground,
+								grid.between('centre-column-start', 'grid-end'),
+								css`
+									grid-row: 7/9;
+								`,
+							]}
+						>
+							<WithAgeWarning
+								tags={tags}
+								webPublicationDateDeprecated={
+									webPublicationDateDeprecated
+								}
+								format={format}
+							>
+								<h1
+									css={[
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: headlineFont(format),
+										css`
+											color: ${themePalette(
+												'--headline-colour',
+											)};
+											padding-bottom: ${space[6]}px;
+											padding-left: ${space[3]}px;
+											padding-right: ${space[3]}px;
+										`,
+									]}
+								>
+									<span css={[displayBlock, maxWidth]}>
+										{headlineString}
+									</span>
+								</h1>
+							</WithAgeWarning>
+						</div>
+					);
+				}
 				default:
 					return (
 						<div

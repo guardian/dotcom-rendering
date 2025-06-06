@@ -26,6 +26,15 @@ export const Apps = {
 		renderingTarget: 'Apps',
 		gallery: appsArticle,
 	},
+	parameters: {
+		formats: [
+			{
+				design: appsArticle.design,
+				display: appsArticle.display,
+				theme: appsArticle.theme,
+			},
+		],
+	},
 } satisfies Story;
 
 const webArticle = enhanceArticleType(GalleryFixture, 'Web');
@@ -42,5 +51,14 @@ export const Web = {
 			selectedPillar: getCurrentPillar(webArticle.frontendData),
 		},
 		gallery: webArticle,
+	},
+	parameters: {
+		formats: [
+			{
+				design: webArticle.design,
+				display: webArticle.display,
+				theme: webArticle.theme,
+			},
+		],
 	},
 } satisfies Story;

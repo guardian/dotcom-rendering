@@ -18,7 +18,7 @@ import {
 	type TableOfContentsItem,
 } from '../model/enhanceTableOfContents';
 import { enhancePinnedPost } from '../model/pinnedPost';
-import type { ImageBlockElement, ImageForLightbox } from './content';
+import type { FEElement, ImageBlockElement, ImageForLightbox } from './content';
 import { type RenderingTarget } from './renderingTarget';
 
 /**
@@ -49,6 +49,29 @@ export type OtherArticles = ArticleFields & {
 };
 
 export type Article = Gallery | OtherArticles;
+
+export const getGalleryMainMedia = (
+	mainMediaElements: FEElement[],
+	trailImage?: ImageBlockElement,
+): ImageBlockElement => {
+	const mainMedia = mainMediaElements[0];
+
+	if (isUndefined(mainMedia)) {
+		if (isUndefined(trailImage)) {
+			throw new Error('No main media or trail picture found');
+		}
+		return trailImage;
+	}
+
+	if (
+		mainMedia._type !==
+		'model.dotcomrendering.pageElements.ImageBlockElement'
+	) {
+		throw new Error('Main media is not an image');
+	}
+
+	return mainMedia;
+};
 
 export const enhanceArticleType = (
 	data: FEArticle,
@@ -84,18 +107,6 @@ export const enhanceArticleType = (
 	if (format.design === ArticleDesign.Gallery) {
 		const design = ArticleDesign.Gallery;
 
-		const mainMedia = mainMediaElements[0];
-		if (isUndefined(mainMedia)) {
-			throw new Error('No main media found');
-		}
-
-		if (
-			mainMedia._type !==
-			'model.dotcomrendering.pageElements.ImageBlockElement'
-		) {
-			throw new Error('Main media is not an image');
-		}
-
 		return {
 			frontendData: {
 				...data,
@@ -125,7 +136,10 @@ export const enhanceArticleType = (
 						'model.dotcomrendering.pageElements.ImageBlockElement',
 				),
 			),
-			mainMedia,
+			mainMedia: getGalleryMainMedia(
+				mainMediaElements,
+				data.trailPicture,
+			),
 		};
 	}
 

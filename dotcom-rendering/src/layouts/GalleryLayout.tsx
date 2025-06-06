@@ -1,6 +1,10 @@
 import { css } from '@emotion/react';
+import { from } from '@guardian/source/foundations';
+import { ArticleHeadline } from '../components/ArticleHeadline';
+import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
 import { grid } from '../grid';
+import type { ArticleFormat } from '../lib/articleFormat';
 import type { NavType } from '../model/extract-nav';
 import type { Gallery } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -25,7 +29,15 @@ const border = css({
 });
 
 export const GalleryLayout = (props: WebProps | AppProps) => {
-	const frontendData = props.gallery.frontendData;
+	const gallery = props.gallery;
+	const frontendData = gallery.frontendData;
+
+	const format: ArticleFormat = {
+		design: gallery.design,
+		display: gallery.display,
+		theme: gallery.theme,
+	};
+
 	return (
 		<>
 			{props.renderingTarget === 'Web' && (
@@ -49,15 +61,19 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 			<main>
 				<div css={border}>Labs header</div>
 				<header css={[grid.container]}>
-					<div css={[grid.column.all, border]}>Main media</div>
-					<div
-						css={[
-							border,
-							grid.between('centre-column-start', 'grid-end'),
-						]}
-					>
-						Headline
-					</div>
+					<MainMediaGallery
+						mainMedia={gallery.mainMedia}
+						format={format}
+					/>
+					<ArticleHeadline
+						format={format}
+						headlineString={frontendData.headline}
+						tags={frontendData.tags}
+						byline={frontendData.byline}
+						webPublicationDateDeprecated={
+							frontendData.webPublicationDateDeprecated
+						}
+					/>
 					<div
 						css={[
 							border,
@@ -66,7 +82,17 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					>
 						Standfirst
 					</div>
-					<div css={[border, grid.column.left]}>
+					<div
+						css={[
+							border,
+							css`
+								${grid.column.centre}
+								${from.leftCol} {
+									${grid.column.left}
+								}
+							`,
+						]}
+					>
 						Main media caption
 					</div>
 					<div
