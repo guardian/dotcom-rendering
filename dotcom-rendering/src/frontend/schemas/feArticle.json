@@ -671,6 +671,9 @@
                     "$ref": "#/definitions/KeyTakeawaysBlockElement"
                 },
                 {
+                    "$ref": "#/definitions/LinkElement"
+                },
+                {
                     "$ref": "#/definitions/ListBlockElement"
                 },
                 {
@@ -2492,6 +2495,31 @@
             "required": [
                 "body",
                 "title"
+            ]
+        },
+        "LinkElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.LinkElement"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "linkElementType": {
+                    "type": "string",
+                    "const": "ProductButton"
+                }
+            },
+            "required": [
+                "_type",
+                "label",
+                "linkElementType",
+                "url"
             ]
         },
         "ListBlockElement": {
