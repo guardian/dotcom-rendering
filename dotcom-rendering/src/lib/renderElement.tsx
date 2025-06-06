@@ -31,6 +31,7 @@ import { KeyTakeaways } from '../components/KeyTakeaways';
 import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
+import { MarketingEmailSignUpWrapper } from '../components/MarketingEmailSignUpWrapper';
 import { MiniProfiles } from '../components/MiniProfiles';
 import { MultiBylines } from '../components/MultiBylines';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
@@ -519,6 +520,7 @@ export const renderElement = ({
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
+			if (isListElement || isTimeline) return null;
 			const emailSignUpProps = {
 				index,
 				identityName: element.newsletter.identityName,
@@ -528,8 +530,29 @@ export const renderElement = ({
 				successDescription: element.newsletter.successDescription,
 				theme: element.newsletter.theme,
 			};
+			return (
+				<EmailSignUpWrapper
+					{...emailSignUpProps}
+					emailType="newsletter"
+				/>
+			);
+
+		case 'model.dotcomrendering.pageElements.MarketingEmailSignupBlockElement':
 			if (isListElement || isTimeline) return null;
-			return <EmailSignUpWrapper {...emailSignUpProps} />;
+			const marketingEmailSignUpWrapperProps = {
+				index,
+				emailId: element.marketingEmail.id,
+				description: element.marketingEmail.description,
+				name: element.marketingEmail.name,
+				theme: 'news',
+			};
+			return (
+				<MarketingEmailSignUpWrapper
+					{...marketingEmailSignUpWrapperProps}
+					emailType="marketingConsent"
+				/>
+			);
+
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
 			return <AdPlaceholder />;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':

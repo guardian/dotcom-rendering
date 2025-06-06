@@ -47,13 +47,15 @@ export const Default = {
 		name: 'The Week in Patriarchy',
 		frequency: 'Weekly',
 		theme: 'opinion',
+		emailType: 'newsletter',
 		children: (
 			<>
 				<SecureSignup
 					newsletterId="patriarchy"
+					emailType="newsletter"
 					successDescription="Reviewing the most important stories on feminism and sexism and those fighting for equality"
 				/>
-				<NewsletterPrivacyMessage />
+				<NewsletterPrivacyMessage emailType="newsletter" />
 			</>
 		),
 	},
@@ -75,13 +77,15 @@ export const NewsTheme = {
 		name: 'First Edition',
 		frequency: 'Every weekday',
 		theme: 'news',
+		emailType: 'newsletter',
 		children: (
 			<>
 				<SecureSignup
 					newsletterId="morning-briefing"
+					emailType="newsletter"
 					successDescription="Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning"
 				/>
-				<NewsletterPrivacyMessage />
+				<NewsletterPrivacyMessage emailType="newsletter" />
 			</>
 		),
 	},
@@ -103,15 +107,38 @@ export const IrregularFrequency = {
 		name: 'Guardian Documentaries',
 		frequency: 'Whenever a new film is available',
 		theme: 'features',
+		emailType: 'newsletter',
 		children: (
 			<>
 				<SecureSignup
 					newsletterId="documentaries"
+					emailType="newsletter"
 					successDescription="Be the first to see our latest thought-provoking films, bringing you bold and original storytelling from around the world"
 				/>
-				<NewsletterPrivacyMessage />
+				<NewsletterPrivacyMessage emailType="newsletter" />
 			</>
 		),
 	},
 	parameters: Default.parameters,
 } satisfies Story;
+
+export const MarketingEmail = {
+	args: {
+		description:
+			'Find your next job with the Guardian Jobs weekly email. Get the latest job listings, as well as tips and advice on taking your next career step.',
+		name: 'Guardian Jobs',
+		theme: 'news',
+		emailType: 'marketingConsent',
+		children: (
+			<>
+				<SecureSignup
+					newsletterId="jobs"
+					emailType="marketingConsent"
+					successDescription="We will send you an email to confirm your subscription to Guardian Jobs - please use the subscribe link to sign up."
+				/>
+				<NewsletterPrivacyMessage emailType="marketingConsent" />
+			</>
+		),
+	},
+	parameters: Default.parameters,
+};

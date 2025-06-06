@@ -6,6 +6,7 @@ import type {
 	ImageBlockElement,
 	ImageForLightbox,
 	Newsletter,
+	NewsletterOrMarketingEmail,
 } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
@@ -24,6 +25,7 @@ import { enhanceGuVideos } from './enhance-videos';
 import { enhanceLists } from './enhanceLists';
 import { enhanceTimeline } from './enhanceTimeline';
 import { insertPromotedNewsletter } from './insertPromotedNewsletter';
+import { findPromotedMarketingEmail } from './marketing-emails';
 
 type Options = {
 	renderingTarget: RenderingTarget;
@@ -39,16 +41,27 @@ const enhanceNewsletterSignup =
 		format: ArticleFormat,
 		promotedNewsletter: Newsletter | undefined,
 		blockId: string,
+		tags?: TagType[],
 	) =>
-	(elements: FEElement[]): FEElement[] =>
-		!isUndefined(promotedNewsletter)
+	(elements: FEElement[]): FEElement[] => {
+		const promotedMarketingEmail = findPromotedMarketingEmail(tags);
+		const newsletterOrMarketingEmail:
+			| NewsletterOrMarketingEmail
+			| undefined = promotedMarketingEmail
+			? { type: 'marketingConsent', data: promotedMarketingEmail }
+			: promotedNewsletter
+			? { type: 'newsletter', data: promotedNewsletter }
+			: undefined;
+
+		return !isUndefined(newsletterOrMarketingEmail)
 			? insertPromotedNewsletter(
 					elements,
 					blockId,
 					format,
-					promotedNewsletter,
+					newsletterOrMarketingEmail,
 			  )
 			: elements;
+	};
 
 // IMPORTANT: the ordering of the enhancer is IMPORTANT to keep in mind
 // example: enhanceInteractiveContentElements needs to be before enhanceNumberedLists
@@ -75,6 +88,7 @@ export const enhanceElements =
 				format,
 				options.promotedNewsletter,
 				blockId,
+				options.tags,
 			),
 			enhanceAdPlaceholders(format, options.renderingTarget),
 			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer),

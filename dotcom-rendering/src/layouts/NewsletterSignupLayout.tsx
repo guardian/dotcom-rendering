@@ -383,9 +383,10 @@ export const NewsletterSignupLayout = ({
 											successDescription={
 												promotedNewsletter.successDescription
 											}
+											emailType="newsletter"
 										/>
 									</Island>
-									<NewsletterPrivacyMessage />
+									<NewsletterPrivacyMessage emailType="newsletter" />
 								</>
 							)}
 						</Column>
