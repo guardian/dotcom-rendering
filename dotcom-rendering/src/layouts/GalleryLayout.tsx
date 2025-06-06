@@ -84,7 +84,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						}
 					/>
 					<Standfirst
-						format={props.format}
+						format={format}
 						standfirst={props.gallery.frontendData.standfirst}
 					/>
 					<div
