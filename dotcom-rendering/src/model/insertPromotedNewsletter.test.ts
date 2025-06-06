@@ -50,7 +50,7 @@ describe('Insert Newsletter Signups', () => {
 			elements,
 			exampleStandard.blocks[0]?.id ?? 'mock id',
 			decideFormat(exampleStandard.format),
-			NEWSLETTER,
+			{ data: NEWSLETTER, type: 'newsletter' },
 		).find(
 			(element) =>
 				element._type ===
@@ -70,7 +70,7 @@ describe('Insert Newsletter Signups', () => {
 				elements,
 				exampleLiveBlog.blocks[0]?.id ?? 'mock id',
 				decideFormat(exampleLiveBlog.format),
-				NEWSLETTER,
+				{ data: NEWSLETTER, type: 'newsletter' },
 			).find(
 				(element) =>
 					element._type ===
@@ -86,7 +86,7 @@ describe('Insert Newsletter Signups', () => {
 				elements,
 				exampleQuiz.blocks[0]?.id ?? 'mock id',
 				decideFormat(exampleQuiz.format),
-				NEWSLETTER,
+				{ data: NEWSLETTER, type: 'newsletter' },
 			).find(
 				(element) =>
 					element._type ===
@@ -104,7 +104,7 @@ describe('Insert Newsletter Signups', () => {
 			elements,
 			exampleStandard.blocks[0]?.id ?? 'mock id',
 			decideFormat(exampleStandard.format),
-			NEWSLETTER,
+			{ data: NEWSLETTER, type: 'newsletter' },
 		);
 		const insertedBlock = elementsWithNewsletter.find(
 			(element) =>

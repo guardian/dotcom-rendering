@@ -2906,6 +2906,7 @@
                         }
                     },
                     "required": [
+                        "description",
                         "id",
                         "name"
                     ]
