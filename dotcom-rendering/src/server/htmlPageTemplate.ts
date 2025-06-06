@@ -77,7 +77,7 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		weAreHiring,
 		config,
 		isInteractive = false,
-        rssFeedUrl,
+		rssFeedUrl,
 	} = props;
 
 	const doNotIndex = (): boolean => {
@@ -412,8 +412,8 @@ https://workforus.theguardian.com/careers/product-engineering/
 
 				${
 					!isUndefined(rssFeedUrl)
-					? `<link rel="alternate" type="application/rss+xml" href="${rssFeedUrl}">`
-					: ''
+						? `<link rel="alternate" type="application/rss+xml" href="${rssFeedUrl}">`
+						: ''
 				}
 
 			</head>
