@@ -5,7 +5,6 @@ import type {
 	FEElement,
 	ImageBlockElement,
 	ImageForLightbox,
-	MarketingConsentEmail,
 	Newsletter,
 	NewsletterOrMarketingEmail,
 } from '../types/content';
@@ -26,6 +25,7 @@ import { enhanceGuVideos } from './enhance-videos';
 import { enhanceLists } from './enhanceLists';
 import { enhanceTimeline } from './enhanceTimeline';
 import { insertPromotedNewsletter } from './insertPromotedNewsletter';
+import { findPromotedMarketingEmail } from './marketing-emails';
 
 type Options = {
 	renderingTarget: RenderingTarget;
@@ -36,24 +36,6 @@ type Options = {
 	tags?: TagType[];
 };
 
-// consents are hard-coded into the identity codebase:
-// https://github.com/guardian/identity/blob/main/identity-model/src/main/scala/com/gu/identity/model/Consent.scala#L91
-// https://github.com/guardian/identity/blob/main/docs/user-model.md
-// https://github.com/guardian/identity/blob/main/docs/consents-model.md
-
-// Mapping to an existing tag id is arbitrary.
-// We could instead create a convention (eg campaign/marketing-email-promotion/{consentId})
-// and have the required tags created
-const marketingEmails: MarketingConsentEmail[] = [
-	{
-		id: 'jobs',
-		name: 'Guardian Jobs',
-		description:
-			'Find your next job with the Guardian Jobs weekly email. Get the latest job listings, as well as tips and advice on taking your next career step.',
-		promotionTagId: 'business/business', // for testing only
-	},
-];
-
 const enhanceNewsletterSignup =
 	(
 		format: ArticleFormat,
@@ -62,15 +44,7 @@ const enhanceNewsletterSignup =
 		tags?: TagType[],
 	) =>
 	(elements: FEElement[]): FEElement[] => {
-		const tagIds = tags?.map((tag) => tag.id);
-		const promotedMarketingEmail =
-			tagIds &&
-			marketingEmails.find(
-				(email) =>
-					email.promotionTagId &&
-					tagIds.includes(email.promotionTagId),
-			);
-
+		const promotedMarketingEmail = findPromotedMarketingEmail(tags);
 		const newsletterOrMarketingEmail:
 			| NewsletterOrMarketingEmail
 			| undefined = promotedMarketingEmail
