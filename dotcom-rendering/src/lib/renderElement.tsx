@@ -530,6 +530,17 @@ export const renderElement = ({
 			};
 			if (isListElement || isTimeline) return null;
 			return <EmailSignUpWrapper {...emailSignUpProps} />;
+
+		case 'model.dotcomrendering.pageElements.MarketingEmailSignupBlockElement':
+			if (isListElement || isTimeline) return null;
+			return (
+				<div style={{ backgroundColor: 'lightcoral' }}>
+					<p>PROMOTION::</p>
+					<p>{element.marketingEmail.name}</p>
+					<p>{element.marketingEmail.description}</p>
+				</div>
+			);
+
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
 			return <AdPlaceholder />;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':

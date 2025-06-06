@@ -443,6 +443,12 @@ export interface NewsletterSignupBlockElement {
 	elementId?: string;
 }
 
+export interface MarketingEmailSignupBlockElement {
+	_type: 'model.dotcomrendering.pageElements.MarketingEmailSignupBlockElement';
+	marketingEmail: MarketingConsentEmail;
+	elementId?: string;
+}
+
 export interface AdPlaceholderBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
 }
@@ -800,6 +806,7 @@ export type FEElement =
 	| MultiImageBlockElement
 	| NumberedTitleBlockElement
 	| NewsletterSignupBlockElement
+	| MarketingEmailSignupBlockElement
 	| ProfileAtomBlockElement
 	| PullquoteBlockElement
 	| QAndAExplainerBlockElement
@@ -1098,3 +1105,24 @@ export type NewsletterLayout = {
 		newsletters: string[];
 	}[];
 };
+
+// -------------------------------------
+// Marketing email
+// -------------------------------------
+
+export type MarketingConsentEmail = {
+	id: string;
+	name: string;
+	description?: string;
+	promotionTagId?: string;
+};
+
+export type NewsletterOrMarketingEmail =
+	| {
+			type: 'newsletter';
+			data: Newsletter;
+	  }
+	| {
+			type: 'marketingConsent';
+			data: MarketingConsentEmail;
+	  };

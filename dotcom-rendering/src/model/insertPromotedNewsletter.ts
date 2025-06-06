@@ -1,7 +1,7 @@
 import { isOneOf } from '@guardian/libs';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { logger } from '../server/lib/logging';
-import type { FEElement, Newsletter } from '../types/content';
+import type { FEElement, NewsletterOrMarketingEmail } from '../types/content';
 
 type PlaceInArticle = {
 	position: number;
@@ -187,15 +187,15 @@ const findInsertPosition = (elements: FEElement[]): number | null => {
 };
 
 /**
- * Attempts to find a place to insert the newsletter embed
+ * Attempts to find a place to insert the newsletter signup block
  *
- * @param promotedNewsletter the embed to insert
+ * @param newsletterOrMarketingEmail the embed to insert
  * @param elements all elements for an article
  * @param blockId we only use this for logging
  * @returns The updated array of elements
  */
 const tryToInsert = (
-	promotedNewsletter: Newsletter,
+	newsletterOrMarketingEmail: NewsletterOrMarketingEmail,
 	elements: FEElement[],
 	blockId: string,
 ): FEElement[] => {
@@ -209,12 +209,20 @@ const tryToInsert = (
 		return elements;
 	}
 
+	const element: FEElement =
+		newsletterOrMarketingEmail.type === 'newsletter'
+			? {
+					_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
+					newsletter: newsletterOrMarketingEmail.data,
+			  }
+			: {
+					_type: 'model.dotcomrendering.pageElements.MarketingEmailSignupBlockElement',
+					marketingEmail: newsletterOrMarketingEmail.data,
+			  };
+
 	return [
 		...elements.slice(0, insertPosition),
-		{
-			_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
-			newsletter: promotedNewsletter,
-		},
+		element,
 		...elements.slice(insertPosition),
 	];
 };
@@ -223,7 +231,7 @@ export const insertPromotedNewsletter = (
 	elements: FEElement[],
 	blockId: string,
 	format: ArticleFormat,
-	promotedNewsletter: Newsletter,
+	newsletterOrMarketingEmail: NewsletterOrMarketingEmail,
 ): FEElement[] => {
 	switch (format.design) {
 		case ArticleDesign.Standard:
@@ -240,7 +248,7 @@ export const insertPromotedNewsletter = (
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Explainer:
-			return tryToInsert(promotedNewsletter, elements, blockId);
+			return tryToInsert(newsletterOrMarketingEmail, elements, blockId);
 		default:
 			return elements;
 	}
