@@ -2111,6 +2111,7 @@ const standfirstBulletDark: PaletteFunction = ({ design, theme }) => {
 				default:
 					return sourcePalette.neutral[86];
 			}
+		case ArticleDesign.Gallery:
 		default:
 			switch (theme) {
 				case Pillar.News:
@@ -2347,6 +2348,8 @@ const standfirstLinkTextLight: PaletteFunction = ({ design, theme }) => {
 			}
 		case ArticleDesign.Audio:
 			return sourcePalette.neutral[86];
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
 		default:
 			switch (theme) {
 				case ArticleSpecial.SpecialReport:
@@ -2373,10 +2376,10 @@ const standfirstLinkTextDark: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			return sourcePalette.neutral[100];
-		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 			return sourcePalette.neutral[86];
+		case ArticleDesign.Gallery:
 		case ArticleDesign.Picture:
 			switch (theme) {
 				case Pillar.News:
@@ -2434,6 +2437,8 @@ const standfirstTextLight: PaletteFunction = (format) => {
 				default:
 					return sourcePalette.neutral[86];
 			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
 		default:
 			if (
 				format.theme === ArticleSpecial.SpecialReportAlt &&
@@ -2970,6 +2975,8 @@ const articleBackgroundLight: PaletteFunction = ({
 		case ArticleDesign.Interactive:
 		case ArticleDesign.FullPageInteractive:
 			return 'transparent';
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[7];
 		default:
 			switch (theme) {
 				case ArticleSpecial.SpecialReport:
