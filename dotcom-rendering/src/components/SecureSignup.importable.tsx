@@ -17,6 +17,7 @@ import { useEffect, useRef, useState } from 'react';
 // that version will compile and render but is non-functional.
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
+import { NewsletterOrMarketingEmail } from 'src/types/content';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
 import { palette } from '../palette';
@@ -37,6 +38,7 @@ type Props = {
 	newsletterId: string;
 	successDescription: string;
 	abTest?: OphanABTest;
+	emailType: NewsletterOrMarketingEmail['type'];
 };
 
 const formStyles = css`
@@ -124,6 +126,7 @@ const buildFormData = (
 	emailAddress: string,
 	newsletterId: string,
 	token: string,
+	emailType: NewsletterOrMarketingEmail['type'],
 ): FormData => {
 	const pageRef = window.location.origin + window.location.pathname;
 	const refViewId = window.guardian.ophan?.pageViewId ?? '';
@@ -131,7 +134,15 @@ const buildFormData = (
 	const formData = new FormData();
 	formData.append('email', emailAddress);
 	formData.append('csrfToken', ''); // TO DO - PR on form handlers in frontend/identity to see how/if this is needed
-	formData.append('listName', newsletterId);
+
+	if (emailType === 'marketingConsent') {
+		// TO DO - frontend's EmailForm class will need to handle a new Optional[String] property
+		// and trigger the "consent-email" request to identity API instead of "consent-signup"
+		formData.append('consentName', newsletterId);
+	} else {
+		formData.append('listName', newsletterId);
+	}
+
 	formData.append('ref', pageRef);
 	formData.append('refViewId', refViewId);
 	formData.append('name', '');
@@ -255,6 +266,7 @@ export const SecureSignup = ({
 	newsletterId,
 	successDescription,
 	abTest,
+	emailType,
 }: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
@@ -284,7 +296,7 @@ export const SecureSignup = ({
 		sendTracking(newsletterId, 'form-submission', renderingTarget, abTest);
 		const response = await postFormData(
 			window.guardian.config.page.ajaxUrl + '/email',
-			buildFormData(emailAddress, newsletterId, token),
+			buildFormData(emailAddress, newsletterId, token, emailType),
 		);
 
 		// The response body could be accessed with await response.text()

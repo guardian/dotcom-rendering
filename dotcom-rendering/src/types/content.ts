@@ -1113,7 +1113,7 @@ export type NewsletterLayout = {
 export type MarketingConsentEmail = {
 	id: string;
 	name: string;
-	description?: string;
+	description: string;
 	promotionTagId?: string;
 };
 

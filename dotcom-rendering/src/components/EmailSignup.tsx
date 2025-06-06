@@ -9,13 +9,15 @@ import {
 import { buildDetailText } from '../lib/buildNewsletterSignUpText';
 import { palette as themePalette } from '../palette';
 import { NewsletterDetail } from './NewsletterDetail';
+import { NewsletterOrMarketingEmail } from 'src/types/content';
 
 export type EmailSignUpProps = {
 	name: string;
 	description: string;
-	frequency: string;
+	frequency?: string;
 	theme: string;
 	children?: React.ReactNode;
+	emailType: NewsletterOrMarketingEmail['type'];
 };
 
 const containerStyles = css`
@@ -77,22 +79,34 @@ const descriptionStyles = css`
 	max-width: ${335 + space[3] + 118}px;
 `;
 
+const ariaLabel = (emailType: NewsletterOrMarketingEmail['type']) => {
+	switch (emailType) {
+		case 'newsletter':
+			return 'newsletter promotion';
+		case 'marketingConsent':
+			return 'marketing newsletter promotion';
+	}
+};
+
 export const EmailSignup = ({
 	name,
 	description,
 	frequency,
 	theme,
 	children,
+	emailType,
 }: EmailSignUpProps) => {
 	return (
-		<aside css={containerStyles} aria-label="newsletter promotion">
+		<aside css={containerStyles} aria-label={ariaLabel(emailType)}>
 			<div css={stackBelowTabletStyles}>
 				<p css={titleStyles(theme)}>
 					Sign up to <span>{name}</span>
 				</p>
-				<div css={noHeightFromTabletStyles}>
-					<NewsletterDetail text={buildDetailText(frequency)} />
-				</div>
+				{frequency && (
+					<div css={noHeightFromTabletStyles}>
+						<NewsletterDetail text={buildDetailText(frequency)} />
+					</div>
+				)}
 			</div>
 			<p css={descriptionStyles}>{description}</p>
 			{children}

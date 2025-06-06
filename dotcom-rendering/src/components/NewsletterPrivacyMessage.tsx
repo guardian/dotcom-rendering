@@ -5,9 +5,11 @@ import {
 } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
+import { NewsletterOrMarketingEmail } from 'src/types/content';
 
 interface Props {
 	textColor?: 'supporting' | 'regular';
+	emailType: NewsletterOrMarketingEmail['type'];
 }
 
 const GUARDIAN_PRIVACY_POLICY =
@@ -75,13 +77,23 @@ const textStyles = (textColor: 'supporting' | 'regular') => {
 	}
 };
 
+const intro = (emailType: NewsletterOrMarketingEmail['type']) => {
+	switch (emailType) {
+		case 'newsletter':
+			return 'Newsletters may contain info about charities, online ads, and content funded by outside parties.';
+		// TO DO - need to get compliance & marketing agreement on this wording
+		case 'marketingConsent':
+			return 'Marketing emails contain advertisments from the Guardian and third parties.';
+	}
+};
+
 export const NewsletterPrivacyMessage = ({
 	textColor = 'supporting',
+	emailType,
 }: Props) => (
 	<span css={[termsStyle, textStyles(textColor)]}>
 		<strong>Privacy Notice: </strong>
-		Newsletters may contain info about charities, online ads, and content
-		funded by outside parties. For more information see our{' '}
+		{intro(emailType)} For more information see our{' '}
 		<LegalLink href={GUARDIAN_PRIVACY_POLICY}>Privacy Policy</LegalLink>. We
 		use Google reCaptcha to protect our website and the Google{' '}
 		<LegalLink href={GOOGLE_PRIVACY_POLICY}>Privacy Policy</LegalLink> and{' '}

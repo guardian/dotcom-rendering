@@ -150,7 +150,10 @@ export const ManyNewslettersForm = ({
 					id={'man-newsletter-form-inline-skip-to-wrapper'}
 					blockDescription="Privacy Notice"
 				>
-					<NewsletterPrivacyMessage textColor="regular" />
+					<NewsletterPrivacyMessage
+						textColor="regular"
+						emailType="newsletter"
+					/>
 				</InlineSkipToWrapper>
 			</aside>
 

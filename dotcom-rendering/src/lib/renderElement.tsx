@@ -13,6 +13,7 @@ import { CrosswordComponent } from '../components/CrosswordComponent.importable'
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
 import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper';
+import { MarketingEmailSignUpWrapper } from '../components/MarketingEmailSignUpWrapper';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { ExplainerAtom } from '../components/ExplainerAtom';
 import { Figure } from '../components/Figure';
@@ -519,6 +520,7 @@ export const renderElement = ({
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
+			if (isListElement || isTimeline) return null;
 			const emailSignUpProps = {
 				index,
 				identityName: element.newsletter.identityName,
@@ -528,17 +530,27 @@ export const renderElement = ({
 				successDescription: element.newsletter.successDescription,
 				theme: element.newsletter.theme,
 			};
-			if (isListElement || isTimeline) return null;
-			return <EmailSignUpWrapper {...emailSignUpProps} />;
+			return (
+				<EmailSignUpWrapper
+					{...emailSignUpProps}
+					emailType="newsletter"
+				/>
+			);
 
 		case 'model.dotcomrendering.pageElements.MarketingEmailSignupBlockElement':
 			if (isListElement || isTimeline) return null;
+			const marketingEmailSignUpWrapperProps = {
+				index,
+				emailId: element.marketingEmail.id,
+				description: element.marketingEmail.description,
+				name: element.marketingEmail.name,
+				theme: 'news',
+			};
 			return (
-				<div style={{ backgroundColor: 'lightcoral' }}>
-					<p>PROMOTION::</p>
-					<p>{element.marketingEmail.name}</p>
-					<p>{element.marketingEmail.description}</p>
-				</div>
+				<MarketingEmailSignUpWrapper
+					{...marketingEmailSignUpWrapperProps}
+					emailType="marketingConsent"
+				/>
 			);
 
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
