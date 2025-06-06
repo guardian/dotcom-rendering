@@ -12,7 +12,6 @@ import type { RenderingTarget } from '../types/renderingTarget';
 interface Props {
 	gallery: Gallery;
 	renderingTarget: RenderingTarget;
-	format: ArticleFormat;
 }
 
 interface WebProps extends Props {
@@ -63,17 +62,16 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				<div css={border}>Labs header</div>
 				<header css={[grid.container]}>
 					<MainMediaGallery
-						mainMedia={props.gallery.mainMedia}
-						format={props.format}
+						mainMedia={gallery.mainMedia}
+						format={format}
 					/>
 					<ArticleHeadline
-						format={props.format}
-						headlineString={props.gallery.frontendData.headline}
-						tags={props.gallery.frontendData.tags}
-						byline={props.gallery.frontendData.byline}
+						format={format}
+						headlineString={frontendData.headline}
+						tags={frontendData.tags}
+						byline={frontendData.byline}
 						webPublicationDateDeprecated={
-							props.gallery.frontendData
-								.webPublicationDateDeprecated
+							frontendData.webPublicationDateDeprecated
 						}
 					/>
 					<div
