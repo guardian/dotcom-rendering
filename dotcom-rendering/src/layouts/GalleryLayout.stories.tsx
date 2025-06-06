@@ -25,11 +25,15 @@ export const Apps = {
 	args: {
 		renderingTarget: 'Apps',
 		gallery: appsArticle,
-		format: {
-			design: appsArticle.design,
-			display: appsArticle.display,
-			theme: appsArticle.theme,
-		},
+	},
+	parameters: {
+		formats: [
+			{
+				design: appsArticle.design,
+				display: appsArticle.display,
+				theme: appsArticle.theme,
+			},
+		],
 	},
 } satisfies Story;
 
@@ -47,10 +51,14 @@ export const Web = {
 			selectedPillar: getCurrentPillar(webArticle.frontendData),
 		},
 		gallery: webArticle,
-		format: {
-			design: webArticle.design,
-			display: webArticle.display,
-			theme: webArticle.theme,
-		},
+	},
+	parameters: {
+		formats: [
+			{
+				design: webArticle.design,
+				display: webArticle.display,
+				theme: webArticle.theme,
+			},
+		],
 	},
 } satisfies Story;
