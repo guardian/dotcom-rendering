@@ -94,28 +94,28 @@ const signIn = async (
 	path: string,
 ): Promise<void> => {
 	// create a test user in the CODE environment
-	await page.goto('https://profile.code.dev-theguardian.com');
-	await page.waitForLoadState('load');
+	await page.goto('https://profile.code.dev-theguardian.com', {
+		waitUntil: 'load',
+	});
 
 	await page.click('text="Sign in"');
-
 	await page.waitForLoadState('load');
 	await expectToExist(page, 'a:text("Sign in with a password instead")');
 
 	const { email, password } = await createTestUser();
-
 	await page.fill('input[name=email]', email);
 	await page.click('a:text("Sign in with a password instead")');
 
 	await page.waitForLoadState('load');
 	await expectToExist(page, '[data-cy="main-form-submit-button"]');
-
 	await page.fill('input[name=password]', password);
 	await page.click('[data-cy="main-form-submit-button"]');
 
 	// wait for the redirect to CODE domain
-	await page.waitForURL('https://m.code.dev-theguardian.com/uk');
-	await page.waitForLoadState('load');
+	// in CI this will redirect to /us so use a glob pattern
+	await page.waitForURL('https://m.code.dev-theguardian.com/**', {
+		waitUntil: 'domcontentloaded',
+	});
 
 	// create the GU_U cookie to simulate a signed-in user
 	await context.addCookies([
@@ -144,8 +144,8 @@ const signIn = async (
 					'https://user-benefits.code.dev-guardianapis.com/benefits/me',
 			},
 		},
+		waitUntil: 'load',
 	});
-	await page.waitForLoadState('load');
 
 	// check the user is signed in
 	await expectToBeSignedIn(page);
