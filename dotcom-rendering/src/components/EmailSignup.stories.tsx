@@ -121,3 +121,24 @@ export const IrregularFrequency = {
 	},
 	parameters: Default.parameters,
 } satisfies Story;
+
+export const MarketingEmail = {
+	args: {
+		description:
+			'Find your next job with the Guardian Jobs weekly email. Get the latest job listings, as well as tips and advice on taking your next career step.',
+		name: 'Guardian Jobs',
+		theme: 'news',
+		emailType: 'marketingConsent',
+		children: (
+			<>
+				<SecureSignup
+					newsletterId="jobs"
+					emailType="marketingConsent"
+					successDescription="We will send you an email to confirm your subscription to Guardian Jobs - please use the subscribe link to sign up."
+				/>
+				<NewsletterPrivacyMessage emailType="marketingConsent" />
+			</>
+		),
+	},
+	parameters: Default.parameters,
+};
