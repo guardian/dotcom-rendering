@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import type { Meta, StoryFn, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import {
 	ArticleDesign,
@@ -9,9 +9,8 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import { Toast } from './Toast';
-import type { ToastProps } from './Toast';
 
-const meta: Meta<typeof Toast> = {
+const meta = {
 	title: 'Components/Toast',
 	component: Toast,
 } satisfies Meta<typeof Toast>;
@@ -19,19 +18,6 @@ const meta: Meta<typeof Toast> = {
 export default meta;
 
 type Story = StoryObj<typeof meta>;
-
-const Template: StoryFn<typeof Toast> = (args: ToastProps) => {
-	return (
-		<div
-			css={css`
-				position: relative;
-				height: ${space[9]}px;
-			`}
-		>
-			<Toast {...args} />
-		</div>
-	);
-};
 
 const pillars = [
 	Pillar.News,
@@ -52,9 +38,19 @@ const allThemeStandardVariations = pillars.map((theme) => ({
 export const Default = {
 	args: {
 		count: 3,
+		onClick: () => {},
 	},
 	decorators: [lightDecorator(allThemeStandardVariations)],
-	render: Template,
+	render: (args) => (
+		<div
+			css={css`
+				position: relative;
+				height: ${space[9]}px;
+			`}
+		>
+			<Toast {...args} />
+		</div>
+	),
 } satisfies Story;
 
 // *****************************************************************************
@@ -62,9 +58,10 @@ export const Default = {
 export const Lots = {
 	args: {
 		count: 239,
+		onClick: () => {},
 	},
 	decorators: [lightDecorator(allThemeStandardVariations)],
-	render: Template,
+	render: Default.render,
 } satisfies Story;
 
 // *****************************************************************************
