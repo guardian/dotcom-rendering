@@ -206,6 +206,14 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 
 	return (
 		<>
+			<Global
+				styles={css`
+					.content__main-column--interactive p {
+						/* stylelint-disable-next-line declaration-no-important */
+						color: ${themePalette('--article-text')} !important;
+					}
+				`}
+			/>
 			{article.isLegacyInteractive && (
 				<Global styles={interactiveGlobalStyles} />
 			)}
