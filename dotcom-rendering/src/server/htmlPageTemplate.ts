@@ -27,6 +27,7 @@ type BaseProps = {
 	weAreHiring: boolean;
 	onlyLightColourScheme?: boolean;
 	isInteractive?: boolean;
+	rssFeedUrl?: string;
 };
 
 interface WebProps extends BaseProps {
@@ -76,6 +77,7 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		weAreHiring,
 		config,
 		isInteractive = false,
+        rssFeedUrl,
 	} = props;
 
 	const doNotIndex = (): boolean => {
@@ -408,11 +410,9 @@ https://workforus.theguardian.com/careers/product-engineering/
 						: ``
 				}
 
-				// a title might be nice, e.g. “The Guardian | Tag: <tag-name>”
-				// also this presumably only works on some pages?
 				${
-					!isUndefined(canonicalUrl)
-					? `<link rel="alternate" type="application/rss+xml" href="${canonicalUrl}/rss">`
+					!isUndefined(rssFeedUrl)
+					? `<link rel="alternate" type="application/rss+xml" href="${rssFeedUrl}">`
 					: ''
 				}
 
