@@ -1,17 +1,15 @@
 on:
   workflow_call:
-    inputs:
-      container-image:
-        description: 'Image used by DCR service'
+    secrets:
+      IDAPI_CLIENT_ACCESS_TOKEN:
         required: true
-        type: string
 
 jobs:
   playwright-secure:
     runs-on: ubuntu-latest
     services:
       DCR:
-        image: ${{ inputs.container-image }}
+        image: ghcr.io/guardian/dotcom-rendering:1e8c5fddc4df5f6e4d9a4d94970e74e3a01c16f8
         ports:
           - 9000:9000
     steps:
@@ -72,12 +70,21 @@ jobs:
             exit 1
           fi
 
+      - name: Is secret set?
+        run: |
+          if [ -z "$IDAPI_CLIENT_ACCESS_TOKEN" ]; then
+            echo "Secret is empty or undefined ❌"
+          else
+            echo "Secret is defined ✅"
+            echo "Length: ${#IDAPI_CLIENT_ACCESS_TOKEN}"
+          fi
+        env:
+          IDAPI_CLIENT_ACCESS_TOKEN: ${{ secrets.IDAPI_CLIENT_ACCESS_TOKEN }}
+
       - name: Run Playwright
         run: pnpm playwright test e2e.secure.spec.ts
         working-directory: ./dotcom-rendering
         env:
-          CI: true
-          NODE_ENV: production
           NODE_TLS_REJECT_UNAUTHORIZED: 0
           IDAPI_CLIENT_ACCESS_TOKEN: ${{ secrets.IDAPI_CLIENT_ACCESS_TOKEN }}
 
