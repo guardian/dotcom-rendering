@@ -408,6 +408,14 @@ https://workforus.theguardian.com/careers/product-engineering/
 						: ``
 				}
 
+				// a title might be nice, e.g. “The Guardian | Tag: <tag-name>”
+				// also this presumably only works on some pages?
+				${
+					!isUndefined(canonicalUrl)
+					? `<link rel="alternate" type="application/rss+xml" href="${canonicalUrl}/rss">`
+					: ''
+				}
+
 			</head>
 
 			<body class="${hasPageSkin ? 'has-page-skin' : ''}">
