@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	headlineBold17,
 	headlineLight17,
 	headlineLight20,
 	headlineLight24,
@@ -13,6 +14,7 @@ import {
 	textSans24,
 } from '@guardian/source/foundations';
 import sanitise from 'sanitize-html';
+import { grid } from '../../src/grid';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -80,6 +82,10 @@ const nestedStyles = (format: ArticleFormat) => {
 const decideFont = ({ display, design, theme }: ArticleFormat) => {
 	const isLabs = theme === ArticleSpecial.Labs;
 	switch (design) {
+		case ArticleDesign.Gallery:
+			return css`
+				${headlineBold17}
+			`;
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Comment:
 		case ArticleDesign.Letter:
@@ -309,6 +315,19 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				case ArticleDesign.Audio:
 					return css`
 						color: ${palette('--standfirst-text')};
+					`;
+				case ArticleDesign.Gallery:
+					return css`
+						${grid.between('centre-column-start', 'grid-end')}
+						color: ${palette('--standfirst-text')};
+						background-color: ${palette('--standfirst-background')};
+						max-width: 280px;
+						${from.tablet} {
+							max-width: 460px;
+						}
+						margin-bottom: ${space[3]}px;
+						margin-left: ${space[3]}px;
+						margin-right: ${space[3]}px;
 					`;
 				default:
 					switch (theme) {
