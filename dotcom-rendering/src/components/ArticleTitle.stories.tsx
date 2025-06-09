@@ -243,3 +243,35 @@ export const MultipleFormatsWithBlogTag = {
 	},
 	name: 'Multiple Formats, with blog tag',
 } satisfies Story;
+
+export const GalleryDesign = {
+	args: {
+		...StandardDesign.args,
+		tags: [
+			{
+				id: '',
+				title: 'Blog title',
+				type: 'Series',
+			},
+		],
+	},
+	parameters: {
+		formats: getAllThemes({
+			design: ArticleDesign.Gallery,
+			display: ArticleDisplay.Standard,
+		}),
+	},
+	name: 'Gallery Design',
+} satisfies Story;
+
+export const GalleryDesignWithLabThemeAndNoTag = {
+	args: {
+		...StandardDesign.args,
+		format: {
+			display: ArticleDisplay.Standard,
+			theme: ArticleSpecial.Labs,
+			design: ArticleDesign.Gallery,
+		},
+	},
+	name: 'Gallery Design with Lab theme and no tag',
+} satisfies Story;

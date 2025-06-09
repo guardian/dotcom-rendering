@@ -7076,16 +7076,9 @@ export const Gallery: FEArticle = {
 				{
 					index: 21,
 					fields: {
-						displayCredit: 'true',
 						isMaster: 'true',
-						altText:
-							'People take cover as smoke erupts and debris flies off a building',
-						mediaId: '2fae2046e4b61e01e958d83ce7512a6aeb9d2e87',
 						width: '5000',
-						source: 'AP',
-						photographer: 'Jehad Alshrafi',
 						height: '4000',
-						credit: 'Composite: Jehad Alshrafi/AP',
 					},
 					mediaType: 'Image',
 					url: 'https://media.guim.co.uk/2fae2046e4b61e01e958d83ce7512a6aeb9d2e87/0_0_5000_4000/master/5000.png',
@@ -7093,15 +7086,8 @@ export const Gallery: FEArticle = {
 				{
 					index: 21,
 					fields: {
-						displayCredit: 'true',
-						altText:
-							'People take cover as smoke erupts and debris flies off a building',
-						mediaId: '2fae2046e4b61e01e958d83ce7512a6aeb9d2e87',
 						width: '5000',
-						source: 'AP',
-						photographer: 'Jehad Alshrafi',
 						height: '4000',
-						credit: 'Composite: Jehad Alshrafi/AP',
 					},
 					mediaType: 'Image',
 					url: 'https://media.guim.co.uk/2fae2046e4b61e01e958d83ce7512a6aeb9d2e87/0_0_5000_4000/5000.png',
@@ -7109,15 +7095,8 @@ export const Gallery: FEArticle = {
 				{
 					index: 21,
 					fields: {
-						displayCredit: 'true',
-						altText:
-							'People take cover as smoke erupts and debris flies off a building',
-						mediaId: '2fae2046e4b61e01e958d83ce7512a6aeb9d2e87',
 						width: '500',
-						source: 'AP',
-						photographer: 'Jehad Alshrafi',
 						height: '400',
-						credit: 'Composite: Jehad Alshrafi/AP',
 					},
 					mediaType: 'Image',
 					url: 'https://media.guim.co.uk/2fae2046e4b61e01e958d83ce7512a6aeb9d2e87/0_0_5000_4000/500.png',
