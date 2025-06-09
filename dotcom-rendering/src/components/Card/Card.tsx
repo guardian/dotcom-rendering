@@ -893,16 +893,9 @@ export const Card = ({
 								defer={{ until: 'visible' }}
 							>
 								<LoopVideo
-									// FOR TESTING PURPOSES - START
-									src="https://uploads.guim.co.uk/2024/10/01/241001HeleneLoop_2.mp4"
-									// src="https://uploads.guim.co.uk/2024/45/14/TEST+1+FOR+ELLEN--0ee1b132-3a0d-405b-b493-aada74b259b2-2.mp4"
-									// src="https://uploads.guim.co.uk/2024/58/19/Deepfake%20clip%20shows%20Nigel%20Farage%20destroying%20Rishi%20Sunak%E2%80%99s%20house%20in%20Minecraft%20--007473ac-3147-41f5-9cf3-d454c28037cf-3.mp4"
-									height={337.5}
-									width={600}
-									// FOR TESTING PURPOSES - END
-									// src={mainMedia.videoId}
-									// height={mainMedia.height}
-									// width={mainMedia.width}
+									src={mainMedia.videoId}
+									height={mainMedia.height}
+									width={mainMedia.width}
 									videoId={mainMedia.videoId}
 									thumbnailImage={
 										mainMedia.thumbnailImage ?? ''

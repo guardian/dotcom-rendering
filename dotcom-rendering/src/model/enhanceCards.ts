@@ -168,10 +168,7 @@ const getActiveMediaAtom = (mediaAtom?: FEMediaAtom): MainMedia | undefined => {
 			({ version }) => version === mediaAtom.activeVersion,
 		);
 
-		/** TESTING PURPOSES - START */
-		// Every video is currently a Youtube video, so for now let's
-		// pretend that all videos are self-hosted looping videos.
-		if (asset?.platform === 'Youtube') {
+		if (asset?.platform === 'Url') {
 			return {
 				type: 'LoopVideo',
 				videoId: asset.id,
@@ -189,7 +186,6 @@ const getActiveMediaAtom = (mediaAtom?: FEMediaAtom): MainMedia | undefined => {
 				)?.url,
 			};
 		}
-		/** TESTING PURPOSES - END */
 
 		if (asset?.platform === 'Youtube') {
 			return {
@@ -210,27 +206,6 @@ const getActiveMediaAtom = (mediaAtom?: FEMediaAtom): MainMedia | undefined => {
 							width: Number(width),
 						}),
 					) ?? [],
-			};
-		}
-
-		// TODO - check it is also a loop video. There will be a flag.
-		// Non-looping videos will be supported in the future.
-		if (asset?.platform === 'URL') {
-			return {
-				type: 'LoopVideo',
-				videoId: asset.id,
-				duration: mediaAtom.duration ?? 0,
-				// Size fixed to a 5:4 ratio. Can these dimensions be passed down instead?
-				width: 500,
-				height: 400,
-				thumbnailImage: getLargestImageSize(
-					mediaAtom.posterImage?.allImages.map(
-						({ url, fields: { width } }) => ({
-							url,
-							width: Number(width),
-						}),
-					) ?? [],
-				)?.url,
 			};
 		}
 	}
