@@ -4593,6 +4593,42 @@ const seriesTitleBackgroundLight: PaletteFunction = ({
 			}
 	}
 };
+
+const seriesTitleBackgroundDark: PaletteFunction = ({
+	theme,
+	display,
+	design,
+}) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[10];
+		default: {
+			if (theme === ArticleSpecial.SpecialReport) {
+				return sourcePalette.brandAlt[400];
+			}
+			switch (display) {
+				case ArticleDisplay.Immersive:
+					switch (theme) {
+						case Pillar.Opinion:
+						case Pillar.News:
+						case Pillar.Sport:
+						case Pillar.Culture:
+						case Pillar.Lifestyle:
+							return pillarPalette(theme, 400);
+						case ArticleSpecial.Labs:
+							return sourcePalette.labs[300];
+						case ArticleSpecial.SpecialReportAlt:
+							return sourcePalette.specialReportAlt[300];
+					}
+				case ArticleDisplay.Showcase:
+				case ArticleDisplay.NumberedList:
+				case ArticleDisplay.Standard:
+				default:
+					return 'transparent';
+			}
+		}
+	}
+};
 const sectionTitleBackgroundLight: PaletteFunction = ({ theme, display }) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
@@ -4638,6 +4674,7 @@ const seriesTitleTextLight: PaletteFunction = ({ theme, display, design }) => {
 	if (design === ArticleDesign.Gallery) {
 		return sourcePalette.neutral[100];
 	}
+
 	switch (display) {
 		case ArticleDisplay.Immersive:
 			return sourcePalette.neutral[100];
@@ -7190,7 +7227,7 @@ const paletteColours = {
 	},
 	'--series-title-background': {
 		light: seriesTitleBackgroundLight,
-		dark: seriesTitleBackgroundLight,
+		dark: seriesTitleBackgroundDark,
 	},
 	'--series-title-match-text': {
 		light: seriesTitleMatchTextLight,
