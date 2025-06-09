@@ -76,7 +76,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						format={format}
 					/>
 					<ArticleTitle
-						format={props.format}
+						format={format}
 						tags={props.gallery.frontendData.tags}
 						sectionLabel={props.gallery.frontendData.sectionLabel}
 						sectionUrl={props.gallery.frontendData.sectionUrl}
