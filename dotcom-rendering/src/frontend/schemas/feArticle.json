@@ -309,6 +309,9 @@
         "audioArticleImage": {
             "$ref": "#/definitions/ImageBlockElement"
         },
+        "trailPicture": {
+            "$ref": "#/definitions/ImageBlockElement"
+        },
         "trailText": {
             "type": "string"
         },
