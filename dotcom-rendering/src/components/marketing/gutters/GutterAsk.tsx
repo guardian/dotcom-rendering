@@ -29,8 +29,6 @@ const imageHeader = (mainUrl: string) => css`
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
-	text-align: center;
-	padding: 15px 0;
 	width: 220px;
 	height: 132px;
 `;
