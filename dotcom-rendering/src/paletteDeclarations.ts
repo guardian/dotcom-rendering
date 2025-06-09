@@ -964,25 +964,6 @@ export const tabs = {
 	};
 };
 
-const datelineMobileLight: PaletteFunction = ({ design, theme }) => {
-	switch (design) {
-		case ArticleDesign.LiveBlog:
-			return sourcePalette.neutral[100];
-		case ArticleDesign.Picture:
-		case ArticleDesign.Video:
-		case ArticleDesign.Audio:
-			return sourcePalette.neutral[46];
-		default:
-			if (
-				theme === ArticleSpecial.SpecialReportAlt &&
-				design !== ArticleDesign.DeadBlog
-			) {
-				return sourcePalette.specialReportAlt[100];
-			}
-			return sourcePalette.neutral[46];
-	}
-};
-
 const datelineLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Comment:
@@ -994,15 +975,8 @@ const datelineLight: PaletteFunction = ({ design, theme }) => {
 				default:
 					return sourcePalette.neutral[20];
 			}
-		case ArticleDesign.Analysis:
-		case ArticleDesign.Explainer:
-		case ArticleDesign.Feature:
 		case ArticleDesign.FullPageInteractive:
 		case ArticleDesign.Interactive:
-		case ArticleDesign.Interview:
-		case ArticleDesign.NewsletterSignup:
-		case ArticleDesign.PhotoEssay:
-		case ArticleDesign.Review:
 			return sourcePalette.neutral[60];
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
@@ -1018,10 +992,10 @@ const datelineLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[100];
 				default:
-					return sourcePalette.neutral[46];
+					return sourcePalette.neutral[38];
 			}
 		default:
-			return sourcePalette.neutral[46];
+			return sourcePalette.neutral[38];
 	}
 };
 
@@ -1043,10 +1017,10 @@ const datelineDark: PaletteFunction = ({ design, theme }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.neutral[93];
 				default:
-					return sourcePalette.neutral[60];
+					return sourcePalette.neutral[73];
 			}
 		default:
-			return sourcePalette.neutral[60];
+			return sourcePalette.neutral[73];
 	}
 };
 
@@ -6224,6 +6198,18 @@ const paletteColours = {
 		light: carouselTitleHighlightLight,
 		dark: carouselTitleHighlightDark,
 	},
+	'--change-bars-axis': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--change-bars-border': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => '#606060',
+	},
+	'--change-bars-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
 	'--click-to-view-background': {
 		light: clickToViewBackgroundLight,
 		dark: clickToViewBackgroundDark,
@@ -6303,10 +6289,6 @@ const paletteColours = {
 	'--dateline': {
 		light: datelineLight,
 		dark: datelineDark,
-	},
-	'--dateline-mobile': {
-		light: datelineMobileLight,
-		dark: standfirstTextDark,
 	},
 	'--design-tag-background': {
 		light: designTagBackground,
@@ -6776,6 +6758,14 @@ const paletteColours = {
 	'--live-block-container-background': {
 		light: liveBlockContainerBackgroundLight,
 		dark: liveBlockContainerBackgroundDark,
+	},
+	'--live-block-datetime-text': {
+		light: () => sourcePalette.neutral[38],
+		dark: () => sourcePalette.neutral[73],
+	},
+	'--live-block-datetime-text-hover': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--loop-video-audio-icon': {
 		light: () => sourcePalette.neutral[100],
@@ -7524,6 +7514,30 @@ const paletteColours = {
 	'--values-with-change-value': {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],
+	},
+	'--versus-banner-background': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--versus-banner-border': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--versus-banner-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--versus-change': {
+		light: () => '#606060',
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--versus-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--versus-text-faded': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[60],
 	},
 	'--witness-title-author': {
 		light: witnessTitleAuthor,

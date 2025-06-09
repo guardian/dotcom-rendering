@@ -7,6 +7,7 @@ import {
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { InteractivesNativePlatformWrapper } from '../components/InteractivesNativePlatformWrapper.importable';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { Masthead } from '../components/Masthead/Masthead';
@@ -207,6 +208,11 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 		<>
 			{article.isLegacyInteractive && (
 				<Global styles={interactiveGlobalStyles} />
+			)}
+			{isApps && (
+				<Island priority="critical">
+					<InteractivesNativePlatformWrapper />
+				</Island>
 			)}
 			{isWeb && (
 				<>

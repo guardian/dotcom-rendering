@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import { palette, textSans12 } from '@guardian/source/foundations';
+import { textSans12 } from '@guardian/source/foundations';
+import { palette } from '../palette';
 import { DateTime } from './DateTime';
 
 const LastUpdated = ({ lastUpdated }: { lastUpdated: number }) => {
@@ -9,7 +10,7 @@ const LastUpdated = ({ lastUpdated }: { lastUpdated: number }) => {
 				display: flex;
 				align-items: flex-end;
 				${textSans12};
-				color: ${palette.neutral[46]};
+				color: ${palette('--live-block-datetime-text')};
 			`}
 		>
 			Updated at&nbsp;

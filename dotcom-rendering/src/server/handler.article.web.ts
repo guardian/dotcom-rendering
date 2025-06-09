@@ -1,5 +1,4 @@
 import type { RequestHandler } from 'express';
-import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
 import { decideFormat } from '../lib/articleFormat';
 import { enhanceBlocks } from '../model/enhanceBlocks';
 import { validateAsBlock, validateAsFEArticle } from '../model/validate';
@@ -35,11 +34,6 @@ export const handleArticleJson: RequestHandler = ({ body }, res) => {
 	};
 
 	res.status(200).send(resp);
-};
-
-export const handleArticlePerfTest: RequestHandler = (req, res, next) => {
-	req.body = ExampleArticle;
-	handleArticle(req, res, next);
 };
 
 export const handleInteractive: RequestHandler = ({ body }, res) => {
