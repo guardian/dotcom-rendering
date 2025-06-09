@@ -83,6 +83,7 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
+	mmaUrl?: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	switches: Switches;
@@ -143,6 +144,7 @@ export const renderElement = ({
 	pageId,
 	webTitle,
 	ajaxUrl,
+	mmaUrl,
 	isAdFreeUser,
 	switches,
 	isSensitive,
@@ -538,13 +540,14 @@ export const renderElement = ({
 			);
 
 		case 'model.dotcomrendering.pageElements.MarketingEmailSignupBlockElement':
-			if (isListElement || isTimeline) return null;
+			if (isListElement || isTimeline || !mmaUrl) return null;
 			const marketingEmailSignUpWrapperProps = {
 				index,
 				emailId: element.marketingEmail.id,
 				description: element.marketingEmail.description,
 				name: element.marketingEmail.name,
 				theme: 'news',
+				mmaUrl,
 			};
 			return (
 				<MarketingEmailSignUpWrapper
@@ -727,6 +730,7 @@ export const renderElement = ({
 					ArticleElementComponent={getNestedArticleElement({
 						abTests,
 						ajaxUrl,
+						mmaUrl,
 						editionId,
 						isAdFreeUser,
 						isSensitive,
@@ -930,6 +934,7 @@ export const RenderArticleElement = ({
 	format,
 	element,
 	ajaxUrl,
+	mmaUrl,
 	host,
 	index,
 	hideCaption,
@@ -955,6 +960,7 @@ export const RenderArticleElement = ({
 		format,
 		element: withUpdatedRole,
 		ajaxUrl,
+		mmaUrl,
 		host,
 		index,
 		isMainMedia,
