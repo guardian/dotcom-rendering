@@ -1,3 +1,4 @@
+import { LinkButton } from '@guardian/source/react-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import { allModes } from '../../.storybook/modes';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
@@ -52,7 +53,6 @@ export const Default = {
 			<>
 				<SecureSignup
 					newsletterId="patriarchy"
-					emailType="newsletter"
 					successDescription="Reviewing the most important stories on feminism and sexism and those fighting for equality"
 				/>
 				<NewsletterPrivacyMessage emailType="newsletter" />
@@ -82,7 +82,6 @@ export const NewsTheme = {
 			<>
 				<SecureSignup
 					newsletterId="morning-briefing"
-					emailType="newsletter"
 					successDescription="Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning"
 				/>
 				<NewsletterPrivacyMessage emailType="newsletter" />
@@ -112,7 +111,6 @@ export const IrregularFrequency = {
 			<>
 				<SecureSignup
 					newsletterId="documentaries"
-					emailType="newsletter"
 					successDescription="Be the first to see our latest thought-provoking films, bringing you bold and original storytelling from around the world"
 				/>
 				<NewsletterPrivacyMessage emailType="newsletter" />
@@ -131,11 +129,11 @@ export const MarketingEmail = {
 		emailType: 'marketingConsent',
 		children: (
 			<>
-				<SecureSignup
-					newsletterId="jobs"
-					emailType="marketingConsent"
-					successDescription="We will send you an email to confirm your subscription to Guardian Jobs - please use the subscribe link to sign up."
-				/>
+				<div>
+					<LinkButton size="small">
+						Sign up from my account
+					</LinkButton>
+				</div>
 				<NewsletterPrivacyMessage emailType="marketingConsent" />
 			</>
 		),

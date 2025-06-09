@@ -383,7 +383,6 @@ export const NewsletterSignupLayout = ({
 											successDescription={
 												promotedNewsletter.successDescription
 											}
-											emailType="newsletter"
 										/>
 									</Island>
 									<NewsletterPrivacyMessage emailType="newsletter" />

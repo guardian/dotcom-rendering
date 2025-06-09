@@ -28,7 +28,6 @@ export const ContributionsEpicNewsletterSignup = ({
 					name: tracking.abTestName,
 					variant: tracking.abTestVariant,
 				}}
-				emailType="newsletter"
 			/>
 			<NewsletterPrivacyMessage emailType="newsletter" />
 		</div>

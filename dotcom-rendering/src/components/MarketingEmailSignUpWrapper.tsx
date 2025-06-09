@@ -1,18 +1,18 @@
+import { LinkButton } from '@guardian/source/react-components';
 import type { EmailSignUpProps } from './EmailSignup';
 import { EmailSignup } from './EmailSignup';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
-import { Island } from './Island';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
-import { SecureSignup } from './SecureSignup.importable';
 
 interface MarketingEmailSignUpWrapperProps extends EmailSignUpProps {
 	index: number;
 	emailId: string;
+	mmaUrl: string;
 }
 
 export const MarketingEmailSignUpWrapper = ({
 	index,
-	emailId,
+	mmaUrl,
 	name,
 	description,
 	emailType,
@@ -29,13 +29,11 @@ export const MarketingEmailSignUpWrapper = ({
 				description={description}
 				theme={theme}
 			>
-				<Island priority="feature" defer={{ until: 'visible' }}>
-					<SecureSignup
-						newsletterId={emailId}
-						emailType={emailType}
-						successDescription={`We will send you an email to confirm your subscription to ${name} - please use the subscribe link to sign up.`}
-					/>
-				</Island>
+				<div>
+					<LinkButton size="small" href={`${mmaUrl}/email-prefs`}>
+						Sign up from my account
+					</LinkButton>
+				</div>
 
 				<NewsletterPrivacyMessage
 					emailType={emailType}
