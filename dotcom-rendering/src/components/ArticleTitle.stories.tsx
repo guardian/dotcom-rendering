@@ -273,5 +273,5 @@ export const GalleryDesignWithLabThemeAndNoTag = {
 			design: ArticleDesign.Gallery,
 		},
 	},
-	name: 'Gallery Design with Lab theme and no tag',
+	name: 'Gallery Design with Lab theme and no series tag',
 } satisfies Story;
