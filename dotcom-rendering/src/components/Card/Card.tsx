@@ -37,6 +37,7 @@ import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
+import { LoopVideo } from '../LoopVideo.importable';
 import { MediaMeta } from '../MediaMeta';
 import { Pill } from '../Pill';
 import { Slideshow } from '../Slideshow';
@@ -253,6 +254,13 @@ const getMedia = ({
 	canPlayInline?: boolean;
 	isBetaContainer: boolean;
 }) => {
+	if (mainMedia?.type === 'LoopVideo') {
+		return {
+			type: 'loop-video',
+			mainMedia,
+			...(imageUrl && { imageUrl }),
+		} as const;
+	}
 	if (mainMedia?.type === 'Video' && canPlayInline) {
 		return {
 			type: 'video',
@@ -785,12 +793,15 @@ export const Card = ({
 							cardHasImage={!!image}
 						/>
 					) : null}
-					{!showPill && !!mainMedia && mainMedia.type !== 'Video' && (
-						<MediaMeta
-							mediaType={mainMedia.type}
-							hasKicker={!!kickerText}
-						/>
-					)}
+					{!showPill &&
+						!!mainMedia &&
+						mainMedia.type !== 'Video' &&
+						mainMedia.type !== 'LoopVideo' && (
+							<MediaMeta
+								mediaType={mainMedia.type}
+								hasKicker={!!kickerText}
+							/>
+						)}
 				</div>
 			)}
 
@@ -875,6 +886,31 @@ export const Card = ({
 									}
 								/>
 							</AvatarContainer>
+						)}
+						{mainMedia?.type === 'LoopVideo' && (
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<LoopVideo
+									src={mainMedia.videoId}
+									height={mainMedia.height}
+									width={mainMedia.width}
+									videoId={mainMedia.videoId}
+									thumbnailImage={
+										mainMedia.thumbnailImage ?? ''
+									}
+									fallbackImageComponent={
+										<CardPicture
+											mainImage={media.imageUrl ?? ''}
+											imageSize={imageSize}
+											loading={imageLoading}
+											alt={media.imageAltText}
+											aspectRatio={aspectRatio}
+										/>
+									}
+								/>
+							</Island>
 						)}
 						{media.type === 'video' && (
 							<>
@@ -1026,7 +1062,6 @@ export const Card = ({
 						{media.type === 'crossword' && (
 							<img src={media.imageUrl} alt="" />
 						)}
-
 						{media.type === 'podcast' && (
 							<>
 								{media.podcastImage?.src && !showKickerImage ? (

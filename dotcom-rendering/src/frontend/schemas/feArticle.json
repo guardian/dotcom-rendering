@@ -5142,6 +5142,9 @@
                     "description": "For displaying embedded, playable videos directly in cards"
                 },
                 {
+                    "$ref": "#/definitions/LoopVideo"
+                },
+                {
                     "$ref": "#/definitions/Audio"
                 },
                 {
@@ -5159,6 +5162,7 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
+                                "LoopVideo",
                                 "Video"
                             ],
                             "type": "string"
@@ -5233,6 +5237,58 @@
                 }
             ]
         },
+        "LoopVideo": {
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Audio",
+                                "Gallery",
+                                "LoopVideo",
+                                "Video"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "LoopVideo"
+                        },
+                        "videoId": {
+                            "type": "string"
+                        },
+                        "height": {
+                            "type": "number"
+                        },
+                        "width": {
+                            "type": "number"
+                        },
+                        "duration": {
+                            "type": "number"
+                        },
+                        "thumbnailImage": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "duration",
+                        "height",
+                        "type",
+                        "videoId",
+                        "width"
+                    ]
+                }
+            ]
+        },
         "Audio": {
             "allOf": [
                 {
@@ -5242,6 +5298,7 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
+                                "LoopVideo",
                                 "Video"
                             ],
                             "type": "string"
@@ -5289,6 +5346,7 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
+                                "LoopVideo",
                                 "Video"
                             ],
                             "type": "string"
