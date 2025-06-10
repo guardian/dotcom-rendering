@@ -75,12 +75,10 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					/>
 					<ArticleTitle
 						format={format}
-						tags={props.gallery.frontendData.tags}
-						sectionLabel={props.gallery.frontendData.sectionLabel}
-						sectionUrl={props.gallery.frontendData.sectionUrl}
-						guardianBaseURL={
-							props.gallery.frontendData.guardianBaseURL
-						}
+						tags={frontendData.tags}
+						sectionLabel={frontendData.sectionLabel}
+						sectionUrl={frontendData.sectionUrl}
+						guardianBaseURL={frontendData.guardianBaseURL}
 					/>
 					<ArticleHeadline
 						format={format}
@@ -93,7 +91,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					/>
 					<Standfirst
 						format={format}
-						standfirst={props.gallery.frontendData.standfirst}
+						standfirst={frontendData.standfirst}
 					/>
 					<div
 						css={[
