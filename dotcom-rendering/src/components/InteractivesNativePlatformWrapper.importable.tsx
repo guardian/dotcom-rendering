@@ -8,7 +8,10 @@ export const InteractivesNativePlatformWrapper = () => {
 		void getInteractivesClient()
 			.getNativePlatform()
 			.then((platform) =>
-				document.body.classList.add(NativePlatform[platform]),
+				document.documentElement.setAttribute(
+					'data-app-os',
+					NativePlatform[platform],
+				),
 			)
 			.catch((error) => {
 				log('dotcom', 'getNativePlatform check failed:', error);
