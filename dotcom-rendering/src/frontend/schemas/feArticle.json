@@ -5279,7 +5279,6 @@
                     "required": [
                         "duration",
                         "height",
-                        "thumbnailImage",
                         "type",
                         "videoId",
                         "width"
