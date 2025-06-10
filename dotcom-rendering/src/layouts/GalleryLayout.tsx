@@ -62,11 +62,9 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				/>
 			)}
 			<main
-				css={[
-					css`
-						background-color: ${palette('--article-background')};
-					`,
-				]}
+				css={{
+					backgroundColor: palette('--article-background'),
+				}}
 			>
 				<div css={border}>Labs header</div>
 				<header css={[grid.container]}>
