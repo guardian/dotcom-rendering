@@ -318,12 +318,16 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					`;
 				case ArticleDesign.Gallery:
 					return css`
-						${grid.between('centre-column-start', 'grid-end')}
+						${grid.span('centre-column-start', 3)}
 						color: ${palette('--standfirst-text')};
 						background-color: ${palette('--standfirst-background')};
-						max-width: 280px;
+
 						${from.tablet} {
-							max-width: 460px;
+							${grid.span('centre-column-start', 7)}
+						}
+
+						${from.desktop} {
+							${grid.span('centre-column-start', 6)}
 						}
 						margin-bottom: ${space[3]}px;
 						margin-left: ${space[3]}px;
