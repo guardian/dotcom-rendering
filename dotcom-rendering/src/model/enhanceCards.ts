@@ -162,13 +162,16 @@ const decideSlideshowImages = (
  * @see https://github.com/guardian/frontend/pull/26247 for inspiration
  */
 
-const getActiveMediaAtom = (mediaAtom?: FEMediaAtom): MainMedia | undefined => {
+const getActiveMediaAtom = (
+	isLoopingVideoTest: boolean,
+	mediaAtom?: FEMediaAtom,
+): MainMedia | undefined => {
 	if (mediaAtom) {
 		const asset = mediaAtom.assets.find(
 			({ version }) => version === mediaAtom.activeVersion,
 		);
 
-		if (asset?.platform === 'Url') {
+		if (asset?.platform === 'Url' && isLoopingVideoTest) {
 			return {
 				type: 'LoopVideo',
 				videoId: asset.id,
@@ -215,6 +218,7 @@ const getActiveMediaAtom = (mediaAtom?: FEMediaAtom): MainMedia | undefined => {
 
 const decideMedia = (
 	format: ArticleFormat,
+	isLoopingVideoTest: boolean,
 	showMainVideo?: boolean,
 	mediaAtom?: FEMediaAtom,
 	galleryCount: number = 0,
@@ -226,7 +230,7 @@ const decideMedia = (
 	// If the showVideo toggle is enabled in the fronts tool,
 	// we should return the active mediaAtom regardless of the design
 	if (!!showMainVideo || !!videoReplace) {
-		return getActiveMediaAtom(mediaAtom);
+		return getActiveMediaAtom(isLoopingVideoTest, mediaAtom);
 	}
 
 	switch (format.design) {
@@ -241,7 +245,7 @@ const decideMedia = (
 			};
 
 		case ArticleDesign.Video: {
-			return getActiveMediaAtom(mediaAtom);
+			return getActiveMediaAtom(isLoopingVideoTest, mediaAtom);
 		}
 
 		default:
@@ -257,6 +261,7 @@ export const enhanceCards = (
 		editionId,
 		pageId,
 		discussionApiUrl,
+		isLoopingVideoTest = false,
 	}: {
 		cardInTagPage: boolean;
 		/** Used for the data link name to indicate card position in container */
@@ -264,6 +269,7 @@ export const enhanceCards = (
 		editionId: EditionId;
 		pageId?: string;
 		discussionApiUrl: string;
+		isLoopingVideoTest?: boolean;
 	},
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
@@ -308,6 +314,7 @@ export const enhanceCards = (
 
 		const mainMedia = decideMedia(
 			format,
+			isLoopingVideoTest,
 			faciaCard.properties.showMainVideo ??
 				faciaCard.properties.mediaSelect?.showMainVideo,
 			faciaCard.mediaAtom ??
