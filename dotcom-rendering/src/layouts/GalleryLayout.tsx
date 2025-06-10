@@ -3,9 +3,11 @@ import { from } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
+import { Standfirst } from '../components/Standfirst';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { NavType } from '../model/extract-nav';
+import { palette } from '../palette';
 import type { Gallery } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 
@@ -26,6 +28,7 @@ interface AppProps extends Props {
 const border = css({
 	borderWidth: 1,
 	borderStyle: 'solid',
+	color: '#ccc',
 });
 
 export const GalleryLayout = (props: WebProps | AppProps) => {
@@ -58,7 +61,11 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					pageId={frontendData.pageId}
 				/>
 			)}
-			<main>
+			<main
+				css={{
+					backgroundColor: palette('--article-background'),
+				}}
+			>
 				<div css={border}>Labs header</div>
 				<header css={[grid.container]}>
 					<MainMediaGallery
@@ -74,14 +81,10 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 							frontendData.webPublicationDateDeprecated
 						}
 					/>
-					<div
-						css={[
-							border,
-							grid.between('centre-column-start', 'grid-end'),
-						]}
-					>
-						Standfirst
-					</div>
+					<Standfirst
+						format={format}
+						standfirst={props.gallery.frontendData.standfirst}
+					/>
 					<div
 						css={[
 							border,
