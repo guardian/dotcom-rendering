@@ -359,6 +359,8 @@ const headlineBylineDark: PaletteFunction = ({ design, display, theme }) => {
 
 const bylineLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
@@ -507,6 +509,8 @@ const bylineBackgroundDark: PaletteFunction = ({ design, theme }) => {
 
 const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 	switch (design) {
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
 		case ArticleDesign.Analysis:
 			switch (theme) {
 				case Pillar.News:
@@ -974,6 +978,8 @@ export const tabs = {
 
 const datelineLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
@@ -3231,6 +3237,8 @@ const articleBorderLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
 					return transparentColour(sourcePalette.neutral[60], 0.5);
+				case ArticleDesign.Gallery:
+					return sourcePalette.neutral[20];
 				default:
 					return sourcePalette.neutral[86];
 			}
