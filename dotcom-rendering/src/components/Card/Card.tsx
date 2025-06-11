@@ -15,6 +15,7 @@ import { isMediaCard } from '../../lib/cardHelpers';
 import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
+import { BETA_CONTAINERS } from '../../model/enhanceCollections';
 import { palette } from '../../palette';
 import type { Branding } from '../../types/branding';
 import type { StarRating as Rating } from '../../types/content';
@@ -36,6 +37,7 @@ import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
+import { LoopVideo } from '../LoopVideo.importable';
 import { MediaMeta } from '../MediaMeta';
 import { Pill } from '../Pill';
 import { Slideshow } from '../Slideshow';
@@ -70,16 +72,6 @@ import { SvgWaveform } from './components/SvgWaveform';
 import { TrailText, type TrailTextSize } from './components/TrailText';
 
 export type Position = 'inner' | 'outer' | 'none';
-export const BETA_CONTAINERS = [
-	'scrollable/highlights',
-	'flexible/special',
-	'flexible/general',
-	'scrollable/small',
-	'scrollable/medium',
-	'scrollable/feature',
-	'static/feature/2',
-	'static/medium/4',
-];
 
 export type Props = {
 	linkTo: string;
@@ -100,7 +92,6 @@ export type Props = {
 	isCrossword?: boolean;
 	isNewsletter?: boolean;
 	isOnwardContent?: boolean;
-	isCartoon?: boolean;
 	trailText?: string;
 	avatarUrl?: string;
 	showClock?: boolean;
@@ -138,7 +129,7 @@ export type Props = {
 	liveUpdatesPosition?: Position;
 	onwardsSource?: OnwardsSource;
 	pauseOffscreenVideo?: boolean;
-	showMainVideo?: boolean;
+	showVideo?: boolean;
 	isTagPage?: boolean;
 	/** Allows the consumer to set an aspect ratio on the image of 5:3, 5:4, 4:5 or 1:1 */
 	aspectRatio?: AspectRatio;
@@ -263,6 +254,13 @@ const getMedia = ({
 	canPlayInline?: boolean;
 	isBetaContainer: boolean;
 }) => {
+	if (mainMedia?.type === 'LoopVideo') {
+		return {
+			type: 'loop-video',
+			mainMedia,
+			...(imageUrl && { imageUrl }),
+		} as const;
+	}
 	if (mainMedia?.type === 'Video' && canPlayInline) {
 		return {
 			type: 'video',
@@ -392,7 +390,6 @@ export const Card = ({
 	isCrossword,
 	isNewsletter = false,
 	isOnwardContent = false,
-	isCartoon = false,
 	isExternalLink,
 	slideshowImages,
 	showLivePlayable = false,
@@ -400,7 +397,7 @@ export const Card = ({
 	liveUpdatesPosition = 'inner',
 	onwardsSource,
 	pauseOffscreenVideo = false,
-	showMainVideo = true,
+	showVideo = true,
 	absoluteServerTimes,
 	isTagPage = false,
 	aspectRatio,
@@ -789,7 +786,6 @@ export const Card = ({
 						byline={byline}
 						showByline={showByline}
 						isExternalLink={isExternalLink}
-						isBetaContainer={isBetaContainer}
 					/>
 					{!isUndefined(starRating) ? (
 						<StarRatingComponent
@@ -797,12 +793,15 @@ export const Card = ({
 							cardHasImage={!!image}
 						/>
 					) : null}
-					{!showPill && !!mainMedia && mainMedia.type !== 'Video' && (
-						<MediaMeta
-							mediaType={mainMedia.type}
-							hasKicker={!!kickerText}
-						/>
-					)}
+					{!showPill &&
+						!!mainMedia &&
+						mainMedia.type !== 'Video' &&
+						mainMedia.type !== 'LoopVideo' && (
+							<MediaMeta
+								mediaType={mainMedia.type}
+								hasKicker={!!kickerText}
+							/>
+						)}
 				</div>
 			)}
 
@@ -888,9 +887,34 @@ export const Card = ({
 								/>
 							</AvatarContainer>
 						)}
+						{mainMedia?.type === 'LoopVideo' && (
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<LoopVideo
+									src={mainMedia.videoId}
+									height={mainMedia.height}
+									width={mainMedia.width}
+									videoId={mainMedia.videoId}
+									thumbnailImage={
+										mainMedia.thumbnailImage ?? ''
+									}
+									fallbackImageComponent={
+										<CardPicture
+											mainImage={media.imageUrl ?? ''}
+											imageSize={imageSize}
+											loading={imageLoading}
+											alt={media.imageAltText}
+											aspectRatio={aspectRatio}
+										/>
+									}
+								/>
+							</Island>
+						)}
 						{media.type === 'video' && (
 							<>
-								{showMainVideo ? (
+								{showVideo ? (
 									<div
 										data-chromatic="ignore"
 										data-component="youtube-atom"
@@ -1038,18 +1062,17 @@ export const Card = ({
 						{media.type === 'crossword' && (
 							<img src={media.imageUrl} alt="" />
 						)}
-
 						{media.type === 'podcast' && (
 							<>
 								{media.podcastImage?.src && !showKickerImage ? (
-									<div css={[podcastImageStyles(imageSize)]}>
+									<div css={podcastImageStyles(imageSize)}>
 										<CardPicture
 											mainImage={media.podcastImage.src}
-											imageSize={'small'}
+											imageSize="small"
 											alt={media.imageAltText}
 											loading={imageLoading}
 											roundedCorners={isOnwardContent}
-											aspectRatio={'1:1'}
+											aspectRatio="1:1"
 										/>
 									</div>
 								) : (
@@ -1120,8 +1143,6 @@ export const Card = ({
 										byline={byline}
 										showByline={showByline}
 										isExternalLink={isExternalLink}
-										isBetaContainer={isBetaContainer}
-										isCartoon={isCartoon}
 										kickerImage={
 											showKickerImage &&
 											media?.type === 'podcast'

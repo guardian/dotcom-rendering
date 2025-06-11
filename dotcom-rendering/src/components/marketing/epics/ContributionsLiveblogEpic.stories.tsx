@@ -7,6 +7,7 @@ import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
 import React from 'react';
+import { choiceCardsSettings } from '../lib/storybook';
 import { ContributionsLiveblogEpic } from './ContributionsLiveblogEpic';
 import { props } from './utils/storybook';
 
@@ -83,20 +84,7 @@ export const WithThreeTierChoiceCards: Story = {
 			name: 'THREE_TIER_CHOICE_CARDS',
 			secondaryCta: undefined,
 			showChoiceCards: true,
-		},
-	},
-};
-
-export const WithThreeTierChoiceCardsForUS: Story = {
-	name: 'Contributions Liveblog Epic with Three Tier Choice Cards for US',
-	args: {
-		...meta.args,
-		countryCode: 'US',
-		variant: {
-			...props.variant,
-			name: 'US_CHECKOUT_PAGE',
-			secondaryCta: undefined,
-			showChoiceCards: true,
+			choiceCardsSettings,
 		},
 	},
 };
@@ -109,6 +97,7 @@ export const WithTicker: Story = {
 			...props.variant,
 			secondaryCta: undefined,
 			showChoiceCards: true,
+			choiceCardsSettings,
 			tickerSettings: {
 				currencySymbol: '£',
 				copy: {

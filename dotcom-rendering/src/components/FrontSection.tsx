@@ -91,7 +91,6 @@ type Props = {
 	collectionBranding?: CollectionBranding;
 	isTagPage?: boolean;
 	hasNavigationButtons?: boolean;
-	isBetaContainer?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -310,7 +309,7 @@ const sectionContentRow = (toggleable: boolean) => css`
 	grid-row: ${toggleable ? 'content-toggleable' : 'content'};
 `;
 
-const sectionContentPadded = css`
+const sectionContentHorizontalMargins = css`
 	${from.tablet} {
 		margin-left: -10px;
 		margin-right: -10px;
@@ -528,7 +527,6 @@ export const FrontSection = ({
 	collectionBranding,
 	isTagPage = false,
 	hasNavigationButtons = false,
-	isBetaContainer,
 }: Props) => {
 	const isToggleable = toggleable && !!sectionId;
 	const showMore =
@@ -540,6 +538,7 @@ export const FrontSection = ({
 		!!ajaxUrl &&
 		!containerLevel;
 	const showVerticalRule = !hasPageSkin;
+
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
 	 * this id pre-existed showMore so is probably also being used for something else.
@@ -632,10 +631,7 @@ export const FrontSection = ({
 				{(isToggleable || hasNavigationButtons) && (
 					<div css={sectionControls}>
 						{isToggleable && (
-							<ShowHideButton
-								sectionId={sectionId}
-								isBetaContainer={!!isBetaContainer}
-							/>
+							<ShowHideButton sectionId={sectionId} />
 						)}
 						{hasNavigationButtons && (
 							<div
@@ -650,7 +646,7 @@ export const FrontSection = ({
 				<div
 					css={[
 						sectionContent,
-						sectionContentPadded,
+						sectionContentHorizontalMargins,
 						sectionContentRow(toggleable),
 						topPadding,
 						showVerticalRule &&
@@ -664,7 +660,7 @@ export const FrontSection = ({
 
 				<div
 					css={[
-						sectionContentPadded,
+						sectionContentHorizontalMargins,
 						sectionBottomContent,
 						!containerLevel && bottomPadding,
 						containerSpacing === 'small' && smallBottomPadding,

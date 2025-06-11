@@ -5,13 +5,11 @@
  */
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { OphanComponentEvent } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { space } from '@guardian/source/foundations';
-import {
-	countryCodeToCountryGroupId,
-	SecondaryCtaType,
-} from '@guardian/support-dotcom-components';
+import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { EpicVariant } from '@guardian/support-dotcom-components/dist/shared/types/abTests/epic';
+import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type {
 	Cta,
 	Tracking,
@@ -30,10 +28,6 @@ import {
 	OPHAN_COMPONENT_EVENT_CTAS_VIEW,
 	OPHAN_COMPONENT_EVENT_REMINDER_OPEN,
 } from '../utils/ophan';
-import {
-	type SupportTier,
-	threeTierChoiceCardAmounts,
-} from '../utils/threeTierChoiceCardAmounts';
 import { EpicButton } from './EpicButton';
 
 const paymentImageStyles = css`
@@ -73,7 +67,7 @@ const PrimaryCtaButton = ({
 	amountsTestName?: string;
 	amountsVariantName?: string;
 	numArticles: number;
-	submitComponentEvent?: (event: OphanComponentEvent) => void;
+	submitComponentEvent?: (event: ComponentEvent) => void;
 }): JSX.Element | null => {
 	if (!cta) {
 		return null;
@@ -115,7 +109,7 @@ const SecondaryCtaButton = ({
 	tracking: Tracking;
 	countryCode?: string;
 	numArticles: number;
-	submitComponentEvent?: (event: OphanComponentEvent) => void;
+	submitComponentEvent?: (event: ComponentEvent) => void;
 }): JSX.Element | null => {
 	const url = addRegionIdAndTrackingParamsToSupportUrl(
 		cta.baseUrl,
@@ -142,15 +136,13 @@ interface ContributionsEpicButtonsProps {
 	tracking: Tracking;
 	countryCode?: string;
 	onOpenReminderClick: () => void;
-	submitComponentEvent?: (event: OphanComponentEvent) => void;
+	submitComponentEvent?: (event: ComponentEvent) => void;
 	isReminderActive: boolean;
 	isSignedIn: boolean;
-	threeTierChoiceCardSelectedProduct: SupportTier;
-	showChoiceCards?: boolean;
+	threeTierChoiceCardSelectedProduct?: ChoiceCard['product'];
 	amountsTestName?: string;
 	amountsVariantName?: string;
 	numArticles: number;
-	isDiscountActive?: boolean;
 }
 
 export const ContributionsEpicButtons = ({
@@ -161,12 +153,10 @@ export const ContributionsEpicButtons = ({
 	submitComponentEvent,
 	isReminderActive,
 	isSignedIn,
-	showChoiceCards,
 	threeTierChoiceCardSelectedProduct,
 	amountsTestName,
 	amountsVariantName,
 	numArticles,
-	isDiscountActive,
 }: ContributionsEpicButtonsProps): JSX.Element | null => {
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
@@ -188,56 +178,27 @@ export const ContributionsEpicButtons = ({
 		return null;
 	}
 
-	const getChoiceCardCta = (cta: Cta): Cta => {
-		const countryGroupId = countryCodeToCountryGroupId(countryCode);
-		if (showChoiceCards) {
-			if (threeTierChoiceCardSelectedProduct === 'OneOff') {
+	const getCta = (cta: Cta): Cta => {
+		if (threeTierChoiceCardSelectedProduct) {
+			if (threeTierChoiceCardSelectedProduct.supportTier === 'OneOff') {
 				return {
 					text: cta.text,
 					baseUrl: addChoiceCardsOneTimeParams(cta.baseUrl),
 				};
 			}
-			if (isDiscountActive) {
-				const contributionAmount =
-					threeTierChoiceCardSelectedProduct === 'SupporterPlus'
-						? threeTierChoiceCardAmounts['Annual'][countryGroupId]
-								.SupporterPlus
-						: undefined;
-
-				return {
-					text: cta.text,
-					baseUrl: addChoiceCardsProductParams(
-						cta.baseUrl,
-						threeTierChoiceCardSelectedProduct,
-						'Annual',
-						contributionAmount,
-					),
-				};
-			}
-
-			/** Contribution amount is variable, unlike the SupporterPlus amount which is fixed */
-			const contributionAmount =
-				threeTierChoiceCardSelectedProduct === 'Contribution'
-					? threeTierChoiceCardAmounts['Monthly'][countryGroupId]
-							.Contribution
-					: undefined;
 
 			return {
 				text: cta.text,
 				baseUrl: addChoiceCardsProductParams(
 					cta.baseUrl,
-					threeTierChoiceCardSelectedProduct,
-					'Monthly',
-					contributionAmount,
+					threeTierChoiceCardSelectedProduct.supportTier,
+					threeTierChoiceCardSelectedProduct.ratePlan,
 				),
 			};
 		}
 
 		return cta;
 	};
-
-	const getCta = (cta: Cta): Cta =>
-		showChoiceCards ? getChoiceCardCta(cta) : cta;
 
 	const openReminder = () => {
 		if (submitComponentEvent) {

@@ -7,13 +7,14 @@ import { palette } from '../palette';
 import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
 import { LoopVideoProgressBar } from './LoopVideoProgressBar';
 
-const videoStyles = css`
+const videoStyles = (width: number, height: number) => css`
 	position: relative;
 	width: 100%;
-	height: auto;
 	/* Find out why this is needed to align the video with its container. */
 	margin-bottom: -3px;
 	cursor: pointer;
+	/* Prevents CLS by letting the browser know the space the video will take up. */
+	aspect-ratio: ${width} / ${height};
 `;
 
 const playIconStyles = css`
@@ -31,9 +32,21 @@ const audioButtonStyles = css`
 	background: none;
 	padding: 0;
 	position: absolute;
-	bottom: ${space[8]}px;
-	right: ${space[8]}px;
+	/* Take into account the progress bar height */
+	bottom: ${space[3]}px;
+	right: ${space[2]}px;
 	cursor: pointer;
+`;
+
+const audioIconContainerStyles = css`
+	width: ${space[8]}px;
+	height: ${space[8]}px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: ${palette('--loop-video-audio-icon-background')};
+	border-radius: 50%;
+	border: 1px solid ${palette('--loop-video-audio-icon-border')};
 `;
 
 type Props = {
@@ -92,6 +105,7 @@ export const LoopVideoPlayer = forwardRef(
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
+		// Assumes that the video is unique on the page.
 		const loopVideoId = `loop-video-${videoId}`;
 
 		return (
@@ -128,7 +142,7 @@ export const LoopVideoPlayer = forwardRef(
 					role="button"
 					tabIndex={0}
 					onError={onError}
-					css={videoStyles}
+					css={videoStyles(width, height)}
 				>
 					{/* Ensure webm source is provided. Encoding the video to a webm file will improve
 					performance on supported browsers. https://web.dev/articles/video-and-source-tags */}
@@ -136,9 +150,9 @@ export const LoopVideoPlayer = forwardRef(
 					<source src={src} type="video/mp4" />
 					{fallbackImageComponent}
 				</video>
-				{ref && 'current' in ref && ref.current && (
+				{ref && 'current' in ref && ref.current && isPlayable && (
 					<>
-						{isPlayable && !isPlaying && (
+						{!isPlaying && (
 							<button
 								type="button"
 								onClick={handleClick}
@@ -161,14 +175,16 @@ export const LoopVideoPlayer = forwardRef(
 								}}
 								css={audioButtonStyles}
 							>
-								<AudioIcon
-									size="small"
-									theme={{
-										fill: palette(
-											'--loop-video-audio-icon',
-										),
-									}}
-								/>
+								<div css={audioIconContainerStyles}>
+									<AudioIcon
+										size="xsmall"
+										theme={{
+											fill: palette(
+												'--loop-video-audio-icon',
+											),
+										}}
+									/>
+								</div>
 							</button>
 						)}
 					</>

@@ -5,10 +5,10 @@ import {
 	SvgVideo,
 } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
-import type { MediaType } from '../types/layout';
+import type { MainMedia } from '../types/mainMedia';
 
 type Props = {
-	mediaType: MediaType;
+	mediaType: MainMedia['type'];
 	hasKicker: boolean;
 };
 
@@ -39,24 +39,19 @@ const wrapperStyles = css`
 	margin-top: 4px;
 `;
 
-export const Icon = ({ mediaType }: { mediaType: MediaType }) => {
+export const Icon = ({ mediaType }: { mediaType: Props['mediaType'] }) => {
 	switch (mediaType) {
 		case 'Gallery':
 			return <SvgCamera />;
 		case 'Video':
+		case 'LoopVideo':
 			return <SvgVideo />;
 		case 'Audio':
 			return <SvgAudio />;
 	}
 };
 
-const MediaIcon = ({
-	mediaType,
-	hasKicker,
-}: {
-	mediaType: MediaType;
-	hasKicker: boolean;
-}) => {
+const MediaIcon = ({ mediaType, hasKicker }: Props) => {
 	return (
 		<span css={iconWrapperStyles(hasKicker)}>
 			<Icon mediaType={mediaType} />

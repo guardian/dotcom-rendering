@@ -1,4 +1,5 @@
 import { palette } from '@guardian/source/foundations';
+import { AdSlot } from '../components/AdSlot.web';
 import { CricketScorecardPage } from '../components/CricketScorecardPage';
 import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.importable';
 import { FootballMatchSummary } from '../components/FootballMatchSummary';
@@ -40,6 +41,7 @@ const SportsPage = ({
 						kind={sportData.kind}
 						initialDays={sportData.matchesList}
 						secondPage={sportData.nextPage}
+						nextPageNoJsUrl={sportData.nextPageNoJsUrl}
 						edition={sportData.editionId}
 						renderAds={renderAds}
 						pageId={sportData.config.pageId}
@@ -70,7 +72,10 @@ const SportsPage = ({
 };
 
 export const SportDataPageLayout = ({ sportData }: Props) => {
-	const { nav } = sportData;
+	const {
+		nav,
+		config: { hasSurveyAd },
+	} = sportData;
 	const pageFooter = sportData.pageFooter;
 	const renderAds = canRenderAds(sportData);
 
@@ -110,6 +115,8 @@ export const SportDataPageLayout = ({ sportData }: Props) => {
 					pageId={sportData.config.pageId}
 				/>
 			</div>
+
+			{renderAds && hasSurveyAd && <AdSlot position="survey" />}
 
 			<SportsPage sportData={sportData} renderAds={renderAds} />
 

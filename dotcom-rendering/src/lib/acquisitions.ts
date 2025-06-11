@@ -1,9 +1,9 @@
-import type { OphanComponentType } from '@guardian/libs';
+import type { TComponentType } from '@guardian/ophan-tracker-js';
 import { constructQuery } from '../lib/querystring';
 
 type AcquisitionLinkParams = {
 	base: string;
-	componentType: OphanComponentType;
+	componentType: TComponentType;
 	componentId: string;
 	campaignCode?: string;
 	abTest?: { name: string; variant: string };

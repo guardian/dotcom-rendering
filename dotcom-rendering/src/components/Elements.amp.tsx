@@ -94,6 +94,10 @@ export const isAmpSupported = ({
 	switches: Switches;
 	main: string;
 }): boolean => {
+	// Disable AMP if either of the switches are off
+	if (!switches.ampArticleSwitch || !switches.ampLiveblogSwitch) {
+		return false;
+	}
 	if (format.design === ArticleDesign.Interactive) {
 		const hasAmpInteractiveTag = tags.some(
 			(tag) => tag.id === 'tracking/platformfunctional/ampinteractive',
@@ -110,7 +114,17 @@ export const isAmpSupported = ({
 		return false;
 	}
 
-	if (tags.some((tag) => tag.id === 'type/article')) {
+	if (
+		tags.some((tag) =>
+			[
+				'type/article',
+				'type/picture',
+				'type/crossword',
+				'type/audio',
+				'type/podcast',
+			].includes(tag.id),
+		)
+	) {
 		const isSwitchedOn = switches.ampArticleSwitch;
 		const hasQuizTag = tags.some((tag) => tag.id === 'tone/quizzes');
 		// Some Labs pages have quiz atoms but are not tagged as quizzes

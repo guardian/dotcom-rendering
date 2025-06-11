@@ -119,7 +119,29 @@ export interface AuxiaProxyGetTreatmentsPayload {
 	tagIds: string[];
 	gateDismissCount: number;
 	countryCode: string;
+	mvtId: number;
+	should_show_legacy_gate_tmp: boolean; // [1]
+	hasConsented: boolean;
 }
+
+// [1]
+
+// date: 13th May 2025
+// comment id: 5395f64b
+
+// This is a temporary attribute that is being introduced to smooth (and reduce risk) the
+// transfer of gate management from the client side to SDC for the non Auxia part of the Audience
+
+// We are going to start rerouting gate requests to the SDC endpoint, but without having yet
+// implemented the old gate display logic into SDC. This attribute is then going to carry over
+// the local decision, there by allowing SDC to copy the local decision and know whether to
+// return a (gu-default gate) gate.
+
+// Once the correct logic has been implemented in SDC, this attribute will be decommissioned as no longer
+// necessary.
+
+// Obviously, the value it carries for standard Auxia audience requests in irrelevant.
+// We will be setting it to false.
 
 export interface AuxiaProxyGetTreatmentsResponse {
 	status: boolean;
@@ -164,7 +186,11 @@ export interface AuxiaGateReaderPersonalData {
 	dailyArticleCount: number;
 	isSupporter: boolean;
 	countryCode: string;
+	mvtId: number; // [1]
+	hasConsented: boolean;
 }
+// [1] value of the GU_mvt_id cookie (as number), to be able to maintain
+// existing (auxia and non auxia) cohorts in the SDC logic.
 
 export interface AuxiaGateDisplayData {
 	browserId: string | undefined;

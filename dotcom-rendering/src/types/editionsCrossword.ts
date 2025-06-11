@@ -1,6 +1,8 @@
-import type { CAPICrossword } from '@guardian/react-crossword/dist/@types/CAPI';
+import type { CrosswordProps } from '@guardian/react-crossword';
 
-export type CAPICrosswords = {
+type CAPICrossword = CrosswordProps['data'];
+
+export type FEEditionsCrosswords = {
 	newCrosswords: CAPICrossword[];
 };
 

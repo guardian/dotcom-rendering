@@ -19,12 +19,6 @@
 
 -   https://webpack.js.org/concepts/
 
-## Babel
-
--   https://babeljs.io/docs/en/
--   https://babeljs.io/docs/en/plugins
--   https://babeljs.io/docs/en/config-files
-
 ## ExpressJS
 
 -   https://expressjs.com/en/guide/routing.html

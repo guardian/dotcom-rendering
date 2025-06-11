@@ -1,5 +1,11 @@
+import { isUndefined } from '@guardian/libs';
 import type { FEArticle } from '../frontend/feArticle';
-import { type ArticleFormat, decideFormat } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	type ArticleDisplay,
+	type ArticleTheme,
+	decideFormat,
+} from '../lib/articleFormat';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import { appsLightboxImages } from '../model/appsLightboxImages';
 import { buildCrosswordBlock } from '../model/buildCrosswordBlock';
@@ -12,7 +18,7 @@ import {
 	type TableOfContentsItem,
 } from '../model/enhanceTableOfContents';
 import { enhancePinnedPost } from '../model/pinnedPost';
-import type { ImageForLightbox } from './content';
+import type { FEElement, ImageBlockElement, ImageForLightbox } from './content';
 import { type RenderingTarget } from './renderingTarget';
 
 /**
@@ -26,9 +32,45 @@ export type ArticleDeprecated = FEArticle & {
 	tableOfContents?: TableOfContentsItem[];
 };
 
-export type Article = {
-	format: ArticleFormat;
+export type ArticleFields = {
 	frontendData: ArticleDeprecated;
+	display: ArticleDisplay;
+	theme: ArticleTheme;
+};
+
+export type Gallery = ArticleFields & {
+	design: ArticleDesign.Gallery;
+	images: ImageBlockElement[];
+	mainMedia: ImageBlockElement;
+};
+
+export type OtherArticles = ArticleFields & {
+	design: Exclude<ArticleDesign, ArticleDesign.Gallery>;
+};
+
+export type Article = Gallery | OtherArticles;
+
+export const getGalleryMainMedia = (
+	mainMediaElements: FEElement[],
+	trailImage?: ImageBlockElement,
+): ImageBlockElement => {
+	const mainMedia = mainMediaElements[0];
+
+	if (isUndefined(mainMedia)) {
+		if (isUndefined(trailImage)) {
+			throw new Error('No main media or trail picture found');
+		}
+		return trailImage;
+	}
+
+	if (
+		mainMedia._type !==
+		'model.dotcomrendering.pageElements.ImageBlockElement'
+	) {
+		throw new Error('Main media is not an image');
+	}
+
+	return mainMedia;
 };
 
 export const enhanceArticleType = (
@@ -62,8 +104,49 @@ export const enhanceArticleType = (
 		data.main,
 	)(data.mainMediaElements);
 
+	if (format.design === ArticleDesign.Gallery) {
+		const design = ArticleDesign.Gallery;
+
+		return {
+			frontendData: {
+				...data,
+				mainMediaElements,
+				blocks,
+				standfirst: enhanceStandfirst(data.standfirst),
+				commercialProperties: enhanceCommercialProperties(
+					data.commercialProperties,
+				),
+				tableOfContents: data.showTableOfContents
+					? enhanceTableOfContents(enhancedBlocks)
+					: undefined,
+				/**
+				 * This function needs to run at a higher level to most other enhancers
+				 * because it needs both mainMediaElements and blocks in scope
+				 */
+				imagesForLightbox,
+				imagesForAppsLightbox: appsLightboxImages(imagesForLightbox),
+			},
+			design,
+			display: format.display,
+			theme: format.theme,
+			images: blocks.flatMap((block) =>
+				block.elements.filter(
+					(element) =>
+						element._type ===
+						'model.dotcomrendering.pageElements.ImageBlockElement',
+				),
+			),
+			mainMedia: getGalleryMainMedia(
+				mainMediaElements,
+				data.trailPicture,
+			),
+		};
+	}
+
 	return {
-		format,
+		design: format.design,
+		display: format.display,
+		theme: format.theme,
 		frontendData: {
 			...data,
 			mainMediaElements,

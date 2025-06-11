@@ -11,7 +11,7 @@
 		"noFallthroughCasesInSwitch": true,
 		"noUncheckedIndexedAccess": true,
 		"paths": {
-			/* Aliases should also be added to the webpack, babel and jest configurations */
+			/* Aliases should also be added to the webpack and jest configurations */
 			"*": ["node_modules/@types/*", "*"] // Make sure that package linking doesn't confuse things https://github.com/microsoft/TypeScript/issues/11916#issuecomment-257130001
 		},
 		"preserveConstEnums": true

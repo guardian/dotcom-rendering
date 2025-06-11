@@ -21,6 +21,7 @@ type Props = {
 	kind: FootballMatchListPageKind;
 	initialDays: FootballMatches;
 	edition: EditionId;
+	nextPageNoJsUrl?: string;
 	goToCompetitionSpecificPage: (tag: string) => void;
 	getMoreDays?: () => Promise<Result<'failed', FootballMatches>>;
 	renderAds: boolean;
@@ -50,6 +51,7 @@ export const FootballMatchesPage = ({
 	kind,
 	initialDays,
 	edition,
+	nextPageNoJsUrl,
 	goToCompetitionSpecificPage,
 	getMoreDays,
 	renderAds,
@@ -125,6 +127,7 @@ export const FootballMatchesPage = ({
 				edition={edition}
 				getMoreDays={getMoreDays}
 				guardianBaseUrl={guardianBaseUrl}
+				nextPageNoJsUrl={nextPageNoJsUrl}
 			/>
 		</div>
 

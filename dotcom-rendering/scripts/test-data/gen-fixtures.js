@@ -36,7 +36,7 @@ const articles = [
 	},
 	{
 		name: 'Gallery',
-		url: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+		url: 'https://www.theguardian.com/australia-news/gallery/2025/jun/02/mullewa-muster-and-rodeo-2025-in-pictures',
 	},
 	{
 		name: 'Audio',

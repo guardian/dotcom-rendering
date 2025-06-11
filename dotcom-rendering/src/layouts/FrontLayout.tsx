@@ -6,7 +6,6 @@ import {
 } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
-import { BETA_CONTAINERS } from '../components/Card/Card';
 import { Carousel } from '../components/Carousel.importable';
 import { useConfig } from '../components/ConfigContext';
 import { ContainerOverrides } from '../components/ContainerOverrides';
@@ -106,7 +105,12 @@ const decideLeftContent = (front: Front, collection: DCRCollectionType) => {
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
-		config: { isPaidContent, hasPageSkin: hasPageSkinConfig, pageId },
+		config: {
+			abTests,
+			isPaidContent,
+			hasPageSkin: hasPageSkinConfig,
+			pageId,
+		},
 		editionId,
 	} = front;
 
@@ -445,9 +449,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									discussionApiUrl={
 										front.config.discussionApiUrl
 									}
-									isBetaContainer={BETA_CONTAINERS.includes(
-										collection.collectionType,
-									)}
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
@@ -718,9 +719,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collection.collectionType ===
 										'scrollable/medium'
 								}
-								isBetaContainer={BETA_CONTAINERS.includes(
-									collection.collectionType,
-								)}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
@@ -745,6 +743,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
+									shouldShowCarouselsAsStacked={
+										pageId === 'uk' &&
+										abTests.stackedCarouselsVariant ===
+											'variant'
+									}
 								/>
 							</FrontSection>
 

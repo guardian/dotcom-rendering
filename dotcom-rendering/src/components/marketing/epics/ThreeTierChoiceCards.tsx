@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
 import {
 	palette,
 	space,
@@ -16,17 +15,11 @@ import {
 	type ThemeRadio,
 	themeRadio,
 } from '@guardian/source/react-components';
-import type { CountryGroupId } from '@guardian/support-dotcom-components';
-import {
-	countryCodeToCountryGroupId,
-	getLocalCurrencySymbol,
-} from '@guardian/support-dotcom-components';
+import { hexColourToString } from '@guardian/support-dotcom-components';
+import type { HexColour } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type { Dispatch, SetStateAction } from 'react';
-import type {
-	SupportRatePlan,
-	SupportTier,
-} from './utils/threeTierChoiceCardAmounts';
-import { threeTierChoiceCardAmounts } from './utils/threeTierChoiceCardAmounts';
+import sanitise from 'sanitize-html';
 
 const supportTierChoiceCardStyles = (selected: boolean) => css`
 	display: block;
@@ -86,26 +79,16 @@ const supportingTextStyles = css`
 	margin-top: ${space[4]}px;
 `;
 
-const recommendedPillStyles = css`
+const pillStyles = (pill: NonNullable<ChoiceCard['pill']>) => css`
 	border-radius: 4px;
 	padding: ${space[1]}px ${space[2]}px;
-	background-color: ${palette.brandAlt[400]};
+	background-color: ${pill.backgroundColour
+		? hexColourToString(pill.backgroundColour as HexColour)
+		: palette.brandAlt[400]};
 	${textSansBold14};
-	color: ${palette.neutral[7]};
-	position: absolute;
-	top: -${space[2]}px;
-	${until.phablet} {
-		right: ${space[3]}px;
-	}
-	right: ${space[5]}px;
-`;
-
-const discountedPillStyles = css`
-	border-radius: 4px;
-	padding: ${space[1]}px ${space[2]}px;
-	background-color: ${palette.error[400]};
-	${textSansBold14};
-	color: ${palette.neutral[100]};
+	color: ${pill.textColour
+		? hexColourToString(pill.textColour as HexColour)
+		: palette.neutral[7]};
 	position: absolute;
 	top: -${space[2]}px;
 	${until.phablet} {
@@ -122,47 +105,33 @@ const customRadioTheme: ThemeRadio = {
 	fillSelected: palette.brand[400],
 };
 
-export type ChoiceInfo = {
-	supportTier: SupportTier;
-	label: (
-		amount: number,
-		currencySymbol: string,
-		discount?: number,
-	) => JSX.Element | string;
-	benefitsLabel?: string;
-	benefits: (currencySymbol: string) => string[];
-	recommended: boolean;
-};
-
-function getChoiceAmount(
-	supportTier: SupportTier,
-	ratePlan: SupportRatePlan,
-	countryGroupId: CountryGroupId,
-): number {
-	return threeTierChoiceCardAmounts[ratePlan][countryGroupId][supportTier];
-}
-
 const SupportingBenefits = ({
 	benefitsLabel,
 	benefits,
-	showTicks,
 }: {
-	benefitsLabel: string | undefined;
-	benefits: string[];
-	showTicks: boolean;
+	benefitsLabel?: string;
+	benefits: ChoiceCard['benefits'];
 }) => {
+	const showTicks = benefits.length > 1;
 	return (
 		<div css={supportingTextStyles}>
 			{!!benefitsLabel && (
-				<span css={benefitsLabelStyles}>
-					Unlock <strong>{benefitsLabel}</strong> benefits:
-				</span>
+				<span
+					css={benefitsLabelStyles}
+					dangerouslySetInnerHTML={{
+						__html: sanitise(benefitsLabel),
+					}}
+				/>
 			)}
 			<ul css={benefitsStyles}>
 				{benefits.map((benefit) => (
-					<li key={benefit}>
+					<li key={benefit.copy}>
 						{showTicks && <SvgTickRound size="xsmall" />}
-						{benefit}
+						<span
+							dangerouslySetInnerHTML={{
+								__html: sanitise(benefit.copy),
+							}}
+						/>
 					</li>
 				))}
 			</ul>
@@ -170,36 +139,29 @@ const SupportingBenefits = ({
 	);
 };
 
-const RecommendedPill = () => {
-	return <div css={recommendedPillStyles}>Recommended</div>;
-};
-
-const DiscountedPill = ({ discount }: { discount: number }) => {
-	return <div css={discountedPillStyles}>{discount}% off</div>;
+const ChoiceCardPill = ({
+	pill,
+}: {
+	pill: NonNullable<ChoiceCard['pill']>;
+}) => {
+	return <div css={pillStyles(pill)}>{pill.copy}</div>;
 };
 
 type ThreeTierChoiceCardsProps = {
-	selectedProduct: SupportTier;
-	setSelectedProduct: Dispatch<SetStateAction<SupportTier>>;
-	countryCode?: string;
-	choices: ChoiceInfo[];
-	supporterPlusDiscount?: number;
+	selectedProduct: ChoiceCard['product'];
+	setSelectedProduct: Dispatch<
+		SetStateAction<ChoiceCard['product'] | undefined>
+	>;
+	choices: ChoiceCard[];
 	id: string; // uniquely identify this choice cards component to avoid conflicting with others
-	isDiscountActive: boolean;
 };
 
 export const ThreeTierChoiceCards = ({
-	countryCode,
 	selectedProduct,
 	setSelectedProduct,
 	choices,
-	supporterPlusDiscount,
 	id,
-	isDiscountActive = false,
 }: ThreeTierChoiceCardsProps) => {
-	const currencySymbol = getLocalCurrencySymbol(countryCode);
-	const countryGroupId = countryCodeToCountryGroupId(countryCode);
-
 	return (
 		<RadioGroup
 			cssOverrides={css`
@@ -208,61 +170,35 @@ export const ThreeTierChoiceCards = ({
 		>
 			<Stack space={3}>
 				{choices.map(
-					({
-						supportTier,
-						label,
-						benefitsLabel,
-						benefits,
-						recommended,
-					}) => {
-						const choiceAmount = getChoiceAmount(
-							supportTier,
-							'Monthly',
-							countryGroupId,
-						);
-						const choiceAmountYearly = getChoiceAmount(
-							supportTier,
-							'Annual',
-							countryGroupId,
-						);
+					({ product, label, benefitsLabel, benefits, pill }) => {
+						const { supportTier } = product;
 
-						const selected = selectedProduct === supportTier;
-
-						const hasDiscount =
-							!isUndefined(supporterPlusDiscount) &&
-							supportTier === 'SupporterPlus';
+						const selected =
+							selectedProduct.supportTier === supportTier;
 
 						const radioId = `choicecard-${id}-${supportTier}`;
-
-						const finalChoiceAmount = isDiscountActive
-							? choiceAmountYearly
-							: choiceAmount;
 
 						return (
 							<div
 								key={supportTier}
 								css={css`
 									position: relative;
+									background-color: inherit;
 								`}
 							>
-								{hasDiscount && (
-									<DiscountedPill
-										discount={supporterPlusDiscount * 100}
-									/>
-								)}
-								{recommended && !hasDiscount && (
-									<RecommendedPill />
-								)}
+								{pill && <ChoiceCardPill pill={pill} />}
 								<label
 									css={supportTierChoiceCardStyles(selected)}
 									htmlFor={radioId}
 								>
 									<Radio
-										label={label(
-											finalChoiceAmount,
-											currencySymbol,
-											supporterPlusDiscount,
-										)}
+										label={
+											<span
+												dangerouslySetInnerHTML={{
+													__html: sanitise(label),
+												}}
+											/>
+										}
 										id={radioId}
 										value={supportTier}
 										cssOverrides={labelOverrideStyles(
@@ -272,20 +208,17 @@ export const ThreeTierChoiceCards = ({
 											selected ? (
 												<SupportingBenefits
 													benefitsLabel={
-														benefitsLabel
+														benefitsLabel as
+															| string
+															| undefined
 													}
-													benefits={benefits(
-														currencySymbol,
-													)}
-													showTicks={
-														supportTier !== 'OneOff'
-													}
+													benefits={benefits}
 												/>
 											) : undefined
 										}
 										checked={selected}
 										onChange={() => {
-											setSelectedProduct(supportTier);
+											setSelectedProduct(product);
 										}}
 										theme={customRadioTheme}
 									/>

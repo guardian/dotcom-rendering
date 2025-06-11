@@ -16,8 +16,8 @@ const videoContainerStyles = css`
 type Props = {
 	src: string;
 	videoId: string;
-	width?: number;
-	height?: number;
+	width: number;
+	height: number;
 	thumbnailImage: string;
 	fallbackImageComponent: JSX.Element;
 	hasAudio?: boolean;
@@ -146,6 +146,7 @@ export const LoopVideo = ({
 		switch (event.key) {
 			case 'Enter':
 			case ' ':
+				event.preventDefault();
 				playPauseVideo();
 				break;
 			case 'Escape':
@@ -166,7 +167,11 @@ export const LoopVideo = ({
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
 	return (
-		<div ref={setNode} css={videoContainerStyles}>
+		<div
+			ref={setNode}
+			css={videoContainerStyles}
+			className="loop-video-container"
+		>
 			<LoopVideoPlayer
 				src={src}
 				videoId={videoId}

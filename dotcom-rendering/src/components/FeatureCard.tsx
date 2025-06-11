@@ -109,7 +109,12 @@ const immersiveOverlayContainerStyles = css`
 	${from.tablet} {
 		top: 0;
 		height: 100%;
-		width: 220px;
+		/**
+		* Why 268px?
+		* 220 is the width of 4 columns on tablet and 3 columns on desktop.
+		* 48px is to ensure the gradient does not render the content inaccessible.
+		*/
+		width: 268px;
 		z-index: 1;
 	}
 `;
@@ -155,7 +160,11 @@ const overlayStyles = css`
 const immersiveOverlayStyles = css`
 	${from.tablet} {
 		height: 100%;
-		padding: ${space[2]}px 64px ${space[2]}px ${space[2]}px;
+		/**
+		* Why 48px right padding?
+		* 48px is to point at which the gradient can go behind the content whilst maintaining accessibility.
+		*/
+		padding: ${space[2]}px ${space[12]}px ${space[2]}px ${space[2]}px;
 		backdrop-filter: blur(12px) brightness(0.5);
 		${overlayMaskGradientStyles('270deg')}
 	}
@@ -279,7 +288,7 @@ export type Props = {
 	imagePositionOnDesktop?: ImagePositionType /** TODO Remove this prop  */;
 	imagePositionOnMobile?: ImagePositionType /** TODO Remove this prop  */;
 	/** Size is ignored when position = 'top' because in that case the image flows based on width */
-	imageSize?: ImageSizeType;
+	imageSize: ImageSizeType;
 	imageLoading: Loading;
 	showClock?: boolean;
 	mainMedia?: MainMedia;
@@ -290,7 +299,6 @@ export type Props = {
 	 * Youtube requires a minimum width 200px.
 	 */
 	canPlayInline?: boolean;
-	isCartoon?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	starRating?: Rating;
@@ -321,7 +329,7 @@ export type Props = {
 	 *
 	 */
 	isImmersive?: boolean;
-	showMainVideo?: boolean;
+	showVideo?: boolean;
 };
 
 export const FeatureCard = ({
@@ -335,13 +343,12 @@ export const FeatureCard = ({
 	image,
 	imagePositionOnDesktop = 'top',
 	imagePositionOnMobile = 'left',
-	imageSize = 'small',
+	imageSize,
 	trailText,
 	imageLoading,
 	showClock,
 	mainMedia,
 	canPlayInline,
-	isCartoon,
 	kickerText,
 	showPulsingDot,
 	dataLinkName,
@@ -359,7 +366,7 @@ export const FeatureCard = ({
 	collectionId,
 	isNewsletter = false,
 	isImmersive = false,
-	showMainVideo = false,
+	showVideo = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -377,7 +384,7 @@ export const FeatureCard = ({
 	});
 
 	const showYoutubeVideo =
-		canPlayInline && showMainVideo && mainMedia?.type === 'Video';
+		canPlayInline && showVideo && mainMedia?.type === 'Video';
 
 	const showCardAge =
 		webPublicationDate !== undefined && showClock !== undefined;
@@ -608,8 +615,6 @@ export const FeatureCard = ({
 												kickerColour={palette(
 													'--feature-card-kicker-text',
 												)}
-												isBetaContainer={true}
-												isCartoon={isCartoon}
 											/>
 										</div>
 
