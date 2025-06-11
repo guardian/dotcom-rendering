@@ -324,7 +324,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 			addTrackingParamsToBodyLinks(
 				paragraph,
 				tracking,
-				articleCounts.for52Weeks,
+				variant.promoCodes ?? [],
 				countryCode,
 			),
 		);
