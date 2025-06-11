@@ -160,26 +160,16 @@ const addPromoCodesToUrl = (url: string, promoCodes: string[]): string => {
 export const isSupportUrl = (baseUrl: string): boolean =>
 	/\bsupport\./.test(baseUrl);
 
+// Enriches the path and querystring of a link to the Support site
 interface SupportUrlData {
-	baseUrl: string;
-	tracking: Tracking;
-	promoCodes: string[];
-	numArticles?: number;
-	countryCode?: string;
-	amountsAbTestName?: string;
-	amountsAbTestVariant?: string;
+	baseUrl: string; // the base url, which may already contain a querystring. Typically defined in the RRCP tool
+	tracking: Tracking; // tracking data to be added to the querystring
+	promoCodes: string[]; // any promo codes, to be added in the promoCodes parameter
+	countryCode?: string; // browser's country code
+	amountsAbTestName?: string; // amounts test name if applicable
+	amountsAbTestVariant?: string; // amounts test variant name if applicable
 }
 
-/**
- * Enriches the path and querystring of a link to the Support site.
- *
- * @param baseUrl	the base url, which may already contain a querystring. Typically defined in the RRCP tool
- * @param tracking	tracking data to be added to the querystring
- * @param promoCodes	any promo codes, to be added in the promoCodes parameter
- * @param countryCode	browser's country code
- * @param amountsAbTestName	amounts test name if applicable
- * @param amountsAbTestVariant	amounts test variant name if applicable
- */
 export const enrichSupportUrl = ({
 	baseUrl,
 	tracking,
