@@ -171,6 +171,7 @@ interface SupportUrlData {
 }
 
 /**
+ * Enriches the path and querystring of a link to the Support site.
  *
  * @param baseUrl	the base url, which may already contain a querystring. Typically defined in the RRCP tool
  * @param tracking	tracking data to be added to the querystring
