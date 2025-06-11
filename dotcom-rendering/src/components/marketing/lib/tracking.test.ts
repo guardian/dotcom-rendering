@@ -45,7 +45,7 @@ describe('enrichSupportUrl', () => {
 		expect(result).toEqual('https://theguardian.com');
 	});
 
-	it('adds tracking to a support URL without existing querystring', () => {
+	it('adds tracking and region to a support URL without existing querystring', () => {
 		const result = enrichSupportUrl({
 			baseUrl: 'https://support.theguardian.com/contribute',
 			tracking,
@@ -57,7 +57,7 @@ describe('enrichSupportUrl', () => {
 		);
 	});
 
-	it('adds tracking and promo codes to a support URL with existing querystring', () => {
+	it('adds tracking and region to a support URL with existing querystring', () => {
 		const result = enrichSupportUrl({
 			baseUrl: 'https://support.theguardian.com/contribute?test=test',
 			tracking,
@@ -69,7 +69,7 @@ describe('enrichSupportUrl', () => {
 		);
 	});
 
-	it('adds tracking and promo codes to a support URL', () => {
+	it('adds tracking, region and promo codes to a support URL', () => {
 		const result = enrichSupportUrl({
 			baseUrl: 'https://support.theguardian.com/contribute',
 			tracking,
