@@ -344,8 +344,8 @@ importers:
         specifier: 18.1.1
         version: 18.1.1(@emotion/react@11.14.0)(@guardian/libs@22.5.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/support-dotcom-components':
-        specifier: 7.2.0
-        version: 7.2.0(@guardian/libs@22.5.0)(zod@3.22.4)
+        specifier: 7.4.0
+        version: 7.4.0(@guardian/libs@22.5.0)(zod@3.22.4)
       '@guardian/tsconfig':
         specifier: 0.2.0
         version: 0.2.0
@@ -4456,8 +4456,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/support-dotcom-components@7.2.0(@guardian/libs@22.5.0)(zod@3.22.4):
-    resolution: {integrity: sha512-/BridQv4d3v2TuklBz6cwsr+7DUmycA/gNSEe14a5f8Bie0JxpyP0dw1vHbgYAZOuXpDVbaj6YBNag1mOtgY/A==}
+  /@guardian/support-dotcom-components@7.4.0(@guardian/libs@22.5.0)(zod@3.22.4):
+    resolution: {integrity: sha512-xrTpc4vibP8ypunWFAUvvwpuDIE5Lj7uKODSEI4E4TZh4CHOpqEHuFZoS50aZuP+zdpeD3VGdCN8Fa+GiNHMSA==}
     peerDependencies:
       '@guardian/libs': ^22.0.0
       zod: ^3.22.4

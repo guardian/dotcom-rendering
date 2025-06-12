@@ -4,8 +4,8 @@ import { useCallback, useEffect } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import type { ReactComponent } from '../lib/ReactComponent';
 import {
-	addRegionIdAndTrackingParamsToSupportUrl,
 	createClickEventFromTracking,
+	enrichSupportUrl,
 } from '../lib/tracking';
 import { GutterAsk } from './GutterAsk';
 
@@ -18,12 +18,12 @@ export const GutterAskWrapper: ReactComponent<GutterProps> = (
 		? content.cta.baseUrl
 		: 'https://support.theguardian.com/contribute';
 
-	const enrichedUrl = addRegionIdAndTrackingParamsToSupportUrl(
+	const enrichedUrl = enrichSupportUrl({
 		baseUrl,
-		props.tracking,
-		undefined,
-		props.countryCode,
-	);
+		tracking: props.tracking,
+		promoCodes: props.promoCodes ?? [],
+		countryCode: props.countryCode,
+	});
 
 	const onCtaClick = (componentId: string) => {
 		return (): void => {
