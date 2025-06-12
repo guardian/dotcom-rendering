@@ -21,7 +21,7 @@ import {
 } from '../../../lib/articleCountOptOut';
 import type { ReactComponent } from '../../../lib/ReactComponent';
 import type { BannerTemplateSettings } from '../settings';
-import { buttonStyles, buttonThemes } from '../styles/buttonStyles';
+import { buttonThemes } from '../styles/buttonStyles';
 
 // ---- Component ---- //
 
@@ -110,7 +110,7 @@ const Overlay: ReactComponent<OverlayProps> = ({
 					hideLabel={true}
 					size="xsmall"
 					priority="tertiary"
-					cssOverrides={buttonStyles(settings.closeButtonSettings)}
+					theme={buttonThemes(settings.closeButtonSettings)}
 				>
 					Close
 				</Button>
