@@ -44,7 +44,7 @@ const enhanceFront = (body: unknown): Front => {
 					data.editionId,
 				),
 				isLoopingVideoTest:
-					data.config.abTests.LoopVideoVariant === 'variant',
+					data.config.abTests.LoopingVideoVariant === 'variant',
 			}),
 		},
 		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),
@@ -88,7 +88,8 @@ const enhanceTagPage = (body: unknown): TagPage => {
 		pageId: data.pageId,
 		discussionApiUrl: data.config.discussionApiUrl,
 		editionId: data.editionId,
-		isLoopingVideoTest: data.config.abTests.LoopVideoVariant === 'variant',
+		isLoopingVideoTest:
+			data.config.abTests.LoopingVideoVariant === 'variant',
 	});
 	const speed = getSpeedFromTrails(data.contents);
 
