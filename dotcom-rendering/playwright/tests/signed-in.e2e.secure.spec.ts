@@ -1,4 +1,6 @@
 import { test } from '@playwright/test';
+import { cmpAcceptAll } from '../lib/cmp';
+import { loadPage } from '../lib/load-page';
 import { isSecureServerAvailable } from '../lib/secure';
 import { expectToBeSignedIn, signIn } from '../lib/sign-in';
 
@@ -11,6 +13,24 @@ test.describe('Signed in readers', () => {
 			'/Article/https://www.theguardian.com/commentisfree/2025/jan/14/bradford-radical-culture-city-of-culture-bronte';
 		const secureServerAvailable = await isSecureServerAvailable();
 		if (secureServerAvailable) {
+			await loadPage({
+				page,
+				path,
+				useSecure: true,
+				overrides: {
+					configOverrides: {
+						stage: 'CODE',
+						isDev: true,
+						idApiUrl: 'https://idapi.code.dev-theguardian.com',
+						idUrl: 'https://profile.code.dev-theguardian.com',
+						mmaUrl: 'https://manage.code.dev-theguardian.com',
+						userBenefitsApiUrl:
+							'https://user-benefits.code.dev-guardianapis.com/benefits/me',
+					},
+				},
+			});
+			await cmpAcceptAll(page);
+
 			await signIn(page, context, path);
 			await expectToBeSignedIn(page);
 		} else {
