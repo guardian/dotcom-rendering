@@ -115,11 +115,11 @@ const loadPage = async ({
 		overrides.article;
 
 	if (hasOverrides) {
+		// If we have overrides, but no article JSON we fetch it
 		const article = await (overrides.article
 			? Promise.resolve(overrides.article)
 			: getArticleJson(path));
 
-		// If we have overrides, the overrides.article property is expected to be present.
 		// We apply the overrides to the article config and switches and then send the
 		// modified JSON payload to DCR
 		const postData = {
@@ -135,8 +135,7 @@ const loadPage = async ({
 		};
 
 		void page.route(url, async (route) => {
-			// To override config or switches we need to make a POST request to DCR so
-			// we can apply the overrides
+			// To override config or switches we make a POST request with the modified article JSON
 			const modifiedResponse = await route.fetch({
 				url: `${getOrigin(useSecure)}/Article`,
 				method: 'POST',
@@ -147,8 +146,8 @@ const loadPage = async ({
 			});
 			const body = await modifiedResponse.body();
 			// Remove Link prefetch headers from the response headers to prevent Playwright from throwing errors.
-			// For some unknown reason when prefetch links are incorrect (e.g. when run from the secure domain r.thegulocal.com)
-			// they cause the corresponding requests initiated by the script elements to error and fail to load.
+			// For some unknown reason prefetch links fail when they don't match the host (e.g. when run from the secure domain r.thegulocal.com)
+			// They then cause the corresponding regular requests initiated by the script elements to error and fail to load.
 			await route.fulfill({
 				body,
 				headers: {

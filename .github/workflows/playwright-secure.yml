@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       DCR:
-        image: ghcr.io/guardian/dotcom-rendering:1e8c5fddc4df5f6e4d9a4d94970e74e3a01c16f8
+        image: ghcr.io/guardian/dotcom-rendering:39e7ef28f115a38446a770b0b17a1ea580399849
         ports:
           - 9000:9000
     steps:
@@ -19,14 +19,9 @@ jobs:
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
 
-      # This needs to run before creating the secure server so the local CA is added to the Chromium trust store
-      - name: Install Playwright Browsers
-        run: pnpm playwright install --with-deps chromium
-        working-directory: ./dotcom-rendering
-
       - name: Set up nginx secure server
         run: |
-          # Turn off mandb updates to speed up setup
+          # Turn off mandb updates
           sudo mv /usr/bin/mandb /usr/bin/mandb-OFF
           sudo cp -p /bin/true /usr/bin/mandb
           # Update dependencies
@@ -42,7 +37,7 @@ jobs:
           sudo mkdir -p /usr/local/bin/dev-nginx
           sudo tar -xzf dev-nginx.tar.gz -C /usr/local
           sudo chmod +x /usr/local/bin/dev-nginx
-          # Create https://r.thegulocal.com
+          # Create https://r.thegulocal.com to proxy to locahost:9000
           sudo ./dotcom-rendering/scripts/nginx/setup-ci.sh
           # Move the dotcom-rendering nginx config to the right place for GitHub runners and restart nginx
           sudo cp /etc/nginx/servers/dotcom-rendering.conf /etc/nginx/conf.d/dotcom-rendering.conf
@@ -70,16 +65,19 @@ jobs:
             exit 1
           fi
 
-      - name: Is secret set?
+      - name: Is IDAPI_CLIENT_ACCESS_TOKEN set?
         run: |
           if [ -z "$IDAPI_CLIENT_ACCESS_TOKEN" ]; then
-            echo "Secret is empty or undefined ❌"
+            echo "IDAPI_CLIENT_ACCESS_TOKEN is empty or undefined"
           else
-            echo "Secret is defined ✅"
-            echo "Length: ${#IDAPI_CLIENT_ACCESS_TOKEN}"
+            echo "IDAPI_CLIENT_ACCESS_TOKEN is defined"
           fi
         env:
           IDAPI_CLIENT_ACCESS_TOKEN: ${{ secrets.IDAPI_CLIENT_ACCESS_TOKEN }}
+
+      - name: Install Playwright Browsers
+        run: pnpm playwright install --with-deps chromium
+        working-directory: ./dotcom-rendering
 
       - name: Run Playwright
         run: pnpm playwright test e2e.secure.spec.ts
