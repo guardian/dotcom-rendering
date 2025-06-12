@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       DCR:
-        image: ghcr.io/guardian/dotcom-rendering:1e8c5fddc4df5f6e4d9a4d94970e74e3a01c16f8
+        image: ghcr.io/guardian/dotcom-rendering:39e7ef28f115a38446a770b0b17a1ea580399849
         ports:
           - 9000:9000
     steps:
