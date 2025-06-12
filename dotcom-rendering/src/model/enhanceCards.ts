@@ -358,6 +358,7 @@ export const enhanceCards = (
 			isCrossword: faciaCard.properties.isCrossword,
 			isNewsletter,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
+			// show latest 3 updates from a live blog
 			showLivePlayable: faciaCard.display.showLivePlayable,
 			avatarUrl:
 				!isContributorTagPage &&
