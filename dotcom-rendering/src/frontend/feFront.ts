@@ -59,7 +59,6 @@ export type FEContainer =
 	| 'fixed/small/slow-V-third'
 	| 'fixed/thrasher'
 	| 'fixed/video'
-	| 'fixed/video/vertical'
 	| 'nav/list'
 	| 'nav/media-list'
 	| 'news/most-popular'
@@ -133,10 +132,19 @@ export interface FEMediaAtom {
 export type FEFrontCard = {
 	properties: {
 		isBreaking: boolean;
-		showMainVideo: boolean;
+		/** Legacy fields retained for backward compatibility:
+		 * `showMainVideo` and `imageSlideshowReplace` have been moved into `mediaSelect`,
+		 * but must remain at the top level to support unrepressed or older front data.
+		 */
+		showMainVideo?: boolean;
+		imageSlideshowReplace?: boolean;
+		mediaSelect?: {
+			showMainVideo: boolean;
+			imageSlideshowReplace: boolean;
+			videoReplace: boolean;
+		};
 		showKickerTag: boolean;
 		showByline: boolean;
-		imageSlideshowReplace: boolean;
 		maybeContent?: {
 			trail: {
 				trailPicture?: {
@@ -259,6 +267,7 @@ export type FEFrontCard = {
 	};
 	format?: FEFormat;
 	enriched?: FESnap;
+	mediaAtom?: FEMediaAtom;
 	supportingContent?: FESupportingContent[];
 	cardStyle?: {
 		type: FEFrontCardStyle;

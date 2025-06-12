@@ -24,6 +24,7 @@ import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { InteractivesNativePlatformWrapper } from '../components/InteractivesNativePlatformWrapper.importable';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
@@ -238,6 +239,19 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	const renderAds = isWeb && canRenderAds(article);
 	return (
 		<>
+			<Global
+				styles={css`
+					.content__main-column--interactive p {
+						/* stylelint-disable-next-line declaration-no-important */
+						color: ${themePalette('--article-text')} !important;
+					}
+				`}
+			/>
+			{isApps && (
+				<Island priority="critical">
+					<InteractivesNativePlatformWrapper />
+				</Island>
+			)}
 			{article.isLegacyInteractive && (
 				<Global styles={interactiveGlobalStyles} />
 			)}

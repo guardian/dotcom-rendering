@@ -221,7 +221,6 @@ export const YoutubeAtomFeatureCardOverlay = ({
 							fontSizes={headlineSizes}
 							headlineColour={palette('--feature-card-headline')}
 							kickerColour={palette('--feature-card-kicker-text')}
-							isBetaContainer={true}
 							byline={byline}
 							showByline={showByline}
 						/>

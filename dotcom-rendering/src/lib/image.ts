@@ -78,3 +78,20 @@ export const generateImageURL = ({
 		url.pathname
 	}?${params.toString()}`;
 };
+
+export const isSupported = (imageUrl: string): boolean => {
+	const supportedImages = ['jpg', 'jpeg', 'png', 'gif'];
+	return supportedImages.some((extension) =>
+		imageUrl.endsWith(`.${extension}`),
+	);
+};
+
+export const getImage = (images: Image[]): Image | undefined => {
+	const image = getMaster(images) ?? getLargest(images);
+
+	if (image?.url === undefined || !isSupported(image.url)) {
+		return undefined;
+	}
+
+	return image;
+};

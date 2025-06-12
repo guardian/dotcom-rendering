@@ -123,6 +123,9 @@ window.twttr = (function(d, s, id) {
 				: undefined,
 		config,
 		onlyLightColourScheme: false,
+		isInteractive:
+			design === ArticleDesign.FullPageInteractive ||
+			design === ArticleDesign.Interactive,
 	});
 
 	return {

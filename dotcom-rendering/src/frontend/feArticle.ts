@@ -94,6 +94,7 @@ export interface FEArticle {
 	commercialProperties: CommercialProperties;
 	starRating?: StarRating;
 	audioArticleImage?: ImageBlockElement;
+	trailPicture?: ImageBlockElement;
 	trailText: string;
 	badge?: FEArticleBadgeType;
 

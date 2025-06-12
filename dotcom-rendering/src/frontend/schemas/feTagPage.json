@@ -13,15 +13,35 @@
                                 "type": "boolean"
                             },
                             "showMainVideo": {
+                                "description": "Legacy fields retained for backward compatibility:\n`showMainVideo` and `imageSlideshowReplace` have been moved into `mediaSelect`,\nbut must remain at the top level to support unrepressed or older front data.",
                                 "type": "boolean"
+                            },
+                            "imageSlideshowReplace": {
+                                "type": "boolean"
+                            },
+                            "mediaSelect": {
+                                "type": "object",
+                                "properties": {
+                                    "showMainVideo": {
+                                        "type": "boolean"
+                                    },
+                                    "imageSlideshowReplace": {
+                                        "type": "boolean"
+                                    },
+                                    "videoReplace": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "required": [
+                                    "imageSlideshowReplace",
+                                    "showMainVideo",
+                                    "videoReplace"
+                                ]
                             },
                             "showKickerTag": {
                                 "type": "boolean"
                             },
                             "showByline": {
-                                "type": "boolean"
-                            },
-                            "imageSlideshowReplace": {
                                 "type": "boolean"
                             },
                             "maybeContent": {
@@ -407,13 +427,11 @@
                         },
                         "required": [
                             "editionBrandings",
-                            "imageSlideshowReplace",
                             "isBreaking",
                             "isCrossword",
                             "isLiveBlog",
                             "showByline",
                             "showKickerTag",
-                            "showMainVideo",
                             "webTitle"
                         ]
                     },
@@ -653,6 +671,9 @@
                                 "type": "string"
                             }
                         }
+                    },
+                    "mediaAtom": {
+                        "$ref": "#/definitions/FEMediaAtom"
                     },
                     "supportingContent": {
                         "type": "array",

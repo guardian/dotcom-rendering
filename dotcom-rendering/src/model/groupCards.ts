@@ -31,6 +31,7 @@ export const groupCards = (
 	backfill: FEFrontCard[],
 	editionId: EditionId,
 	discussionApiUrl: string,
+	isLoopingVideoTest: boolean,
 ): DCRGroupedTrails => {
 	switch (container) {
 		case 'dynamic/slow-mpu': {
@@ -119,6 +120,7 @@ export const groupCards = (
 				editionId,
 				discussionApiUrl,
 				offset,
+				isLoopingVideoTest,
 			});
 
 			return {
@@ -144,6 +146,7 @@ export const groupCards = (
 				editionId,
 				discussionApiUrl,
 				offset,
+				isLoopingVideoTest,
 			});
 
 			return {

@@ -36,7 +36,7 @@ const articles = [
 	},
 	{
 		name: 'Gallery',
-		url: 'https://www.theguardian.com/news/gallery/2025/may/18/cannes-pope-leos-inauguration-mass-and-eurovision-photos-of-the-weekend',
+		url: 'https://www.theguardian.com/australia-news/gallery/2025/jun/02/mullewa-muster-and-rodeo-2025-in-pictures',
 	},
 	{
 		name: 'Audio',

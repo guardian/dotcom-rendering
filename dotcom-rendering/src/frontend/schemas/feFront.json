@@ -484,15 +484,35 @@
                                                     "type": "boolean"
                                                 },
                                                 "showMainVideo": {
+                                                    "description": "Legacy fields retained for backward compatibility:\n`showMainVideo` and `imageSlideshowReplace` have been moved into `mediaSelect`,\nbut must remain at the top level to support unrepressed or older front data.",
                                                     "type": "boolean"
+                                                },
+                                                "imageSlideshowReplace": {
+                                                    "type": "boolean"
+                                                },
+                                                "mediaSelect": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "showMainVideo": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "imageSlideshowReplace": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "videoReplace": {
+                                                            "type": "boolean"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "imageSlideshowReplace",
+                                                        "showMainVideo",
+                                                        "videoReplace"
+                                                    ]
                                                 },
                                                 "showKickerTag": {
                                                     "type": "boolean"
                                                 },
                                                 "showByline": {
-                                                    "type": "boolean"
-                                                },
-                                                "imageSlideshowReplace": {
                                                     "type": "boolean"
                                                 },
                                                 "maybeContent": {
@@ -878,13 +898,11 @@
                                             },
                                             "required": [
                                                 "editionBrandings",
-                                                "imageSlideshowReplace",
                                                 "isBreaking",
                                                 "isCrossword",
                                                 "isLiveBlog",
                                                 "showByline",
                                                 "showKickerTag",
-                                                "showMainVideo",
                                                 "webTitle"
                                             ]
                                         },
@@ -1124,6 +1142,9 @@
                                                     "type": "string"
                                                 }
                                             }
+                                        },
+                                        "mediaAtom": {
+                                            "$ref": "#/definitions/FEMediaAtom"
                                         },
                                         "supportingContent": {
                                             "type": "array",
@@ -1244,15 +1265,35 @@
                                                     "type": "boolean"
                                                 },
                                                 "showMainVideo": {
+                                                    "description": "Legacy fields retained for backward compatibility:\n`showMainVideo` and `imageSlideshowReplace` have been moved into `mediaSelect`,\nbut must remain at the top level to support unrepressed or older front data.",
                                                     "type": "boolean"
+                                                },
+                                                "imageSlideshowReplace": {
+                                                    "type": "boolean"
+                                                },
+                                                "mediaSelect": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "showMainVideo": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "imageSlideshowReplace": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "videoReplace": {
+                                                            "type": "boolean"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "imageSlideshowReplace",
+                                                        "showMainVideo",
+                                                        "videoReplace"
+                                                    ]
                                                 },
                                                 "showKickerTag": {
                                                     "type": "boolean"
                                                 },
                                                 "showByline": {
-                                                    "type": "boolean"
-                                                },
-                                                "imageSlideshowReplace": {
                                                     "type": "boolean"
                                                 },
                                                 "maybeContent": {
@@ -1638,13 +1679,11 @@
                                             },
                                             "required": [
                                                 "editionBrandings",
-                                                "imageSlideshowReplace",
                                                 "isBreaking",
                                                 "isCrossword",
                                                 "isLiveBlog",
                                                 "showByline",
                                                 "showKickerTag",
-                                                "showMainVideo",
                                                 "webTitle"
                                             ]
                                         },
@@ -1884,6 +1923,9 @@
                                                     "type": "string"
                                                 }
                                             }
+                                        },
+                                        "mediaAtom": {
+                                            "$ref": "#/definitions/FEMediaAtom"
                                         },
                                         "supportingContent": {
                                             "type": "array",
@@ -2004,15 +2046,35 @@
                                                     "type": "boolean"
                                                 },
                                                 "showMainVideo": {
+                                                    "description": "Legacy fields retained for backward compatibility:\n`showMainVideo` and `imageSlideshowReplace` have been moved into `mediaSelect`,\nbut must remain at the top level to support unrepressed or older front data.",
                                                     "type": "boolean"
+                                                },
+                                                "imageSlideshowReplace": {
+                                                    "type": "boolean"
+                                                },
+                                                "mediaSelect": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "showMainVideo": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "imageSlideshowReplace": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "videoReplace": {
+                                                            "type": "boolean"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "imageSlideshowReplace",
+                                                        "showMainVideo",
+                                                        "videoReplace"
+                                                    ]
                                                 },
                                                 "showKickerTag": {
                                                     "type": "boolean"
                                                 },
                                                 "showByline": {
-                                                    "type": "boolean"
-                                                },
-                                                "imageSlideshowReplace": {
                                                     "type": "boolean"
                                                 },
                                                 "maybeContent": {
@@ -2398,13 +2460,11 @@
                                             },
                                             "required": [
                                                 "editionBrandings",
-                                                "imageSlideshowReplace",
                                                 "isBreaking",
                                                 "isCrossword",
                                                 "isLiveBlog",
                                                 "showByline",
                                                 "showKickerTag",
-                                                "showMainVideo",
                                                 "webTitle"
                                             ]
                                         },
@@ -2644,6 +2704,9 @@
                                                     "type": "string"
                                                 }
                                             }
+                                        },
+                                        "mediaAtom": {
+                                            "$ref": "#/definitions/FEMediaAtom"
                                         },
                                         "supportingContent": {
                                             "type": "array",
@@ -3297,7 +3360,6 @@
                 "fixed/small/slow-V-third",
                 "fixed/thrasher",
                 "fixed/video",
-                "fixed/video/vertical",
                 "flexible/general",
                 "flexible/special",
                 "nav/list",
@@ -3733,6 +3795,9 @@
                     "description": "For displaying embedded, playable videos directly in cards"
                 },
                 {
+                    "$ref": "#/definitions/LoopVideo"
+                },
+                {
                     "$ref": "#/definitions/Audio"
                 },
                 {
@@ -3750,6 +3815,7 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
+                                "LoopVideo",
                                 "Video"
                             ],
                             "type": "string"
@@ -3824,6 +3890,58 @@
                 }
             ]
         },
+        "LoopVideo": {
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Audio",
+                                "Gallery",
+                                "LoopVideo",
+                                "Video"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "LoopVideo"
+                        },
+                        "videoId": {
+                            "type": "string"
+                        },
+                        "height": {
+                            "type": "number"
+                        },
+                        "width": {
+                            "type": "number"
+                        },
+                        "duration": {
+                            "type": "number"
+                        },
+                        "thumbnailImage": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "duration",
+                        "height",
+                        "type",
+                        "videoId",
+                        "width"
+                    ]
+                }
+            ]
+        },
         "Audio": {
             "allOf": [
                 {
@@ -3833,6 +3951,7 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
+                                "LoopVideo",
                                 "Video"
                             ],
                             "type": "string"
@@ -3880,6 +3999,7 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
+                                "LoopVideo",
                                 "Video"
                             ],
                             "type": "string"

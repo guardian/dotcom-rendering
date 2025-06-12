@@ -88,30 +88,24 @@ export const ShowHideContainers = () => {
 	const containerStates = getContainerStates();
 
 	useEffect(() => {
+		/**
+		 * We need to know if a user is signed in before we can make any further decisions about show/hide buttons.
+		 * If the state is still pending, return early to prevent any flickering of the buttons.
+		 */
+		if (isSignedIn === 'Pending') return;
+
 		const showHideButtons = document.querySelectorAll<HTMLElement>(
 			'[data-show-hide-button]',
 		);
 
 		for (const button of showHideButtons) {
-			/**
-			 * We need to know if a user is signed in before we can make any further decisions about show/hide buttons.
-			 * If the state is still pending, return early to prevent any flickering of the buttons.
-			 */
-			if (isSignedIn === 'Pending') return;
-
 			const sectionId = button.getAttribute('data-show-hide-button');
-			const isBetaContainer = button.getAttribute('data-beta-container');
-
 			if (!sectionId) continue;
 
 			/**
-			 * We have disabled show hide for beta containers when the user is not signed in.
-			 * It is currently still available for legacy containers regardless of sign in state.
-			 *
-			 * Once beta containers are in production, show hide will be behind a sign in flag for all containers.
-			 * At this point, the isBetaContainer check can be removed from the below code.
+			 * Show/hide is only enabled for signed in users.
 			 */
-			if (isBetaContainer === 'true' && !isSignedIn) {
+			if (!isSignedIn) {
 				button.classList.add('hidden');
 			} else {
 				initialiseShowHide(sectionId, button, containerStates);

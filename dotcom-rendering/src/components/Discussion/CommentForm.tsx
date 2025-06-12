@@ -304,11 +304,18 @@ export const CommentForm = ({
 		const body = textValue;
 		if (!body) return;
 
+		// Reset the error and preview body before fetching the preview
+		// This ensures that if the preview fails, we don't show stale data
+		// and we can display the new error message if applicable
+		setError('');
+		setPreviewBody('');
+
 		const preview = onPreview ?? defaultPreview;
 		const response = await preview(body);
 
 		if (response.kind === 'error') {
-			setError('Preview request failed, please try again');
+			// If the preview fails, we handle the error and reset the preview body
+			handleError(response.error, false);
 			setPreviewBody('');
 			return;
 		}
@@ -316,7 +323,10 @@ export const CommentForm = ({
 		setPreviewBody(response.value);
 	};
 
-	const handleError = (commentError: string) => {
+	const handleError = (
+		commentError: string,
+		isSubmittingForm: boolean = true,
+	) => {
 		switch (commentError) {
 			// Reader has never posted before and needs to choose a username
 			case 'USERNAME_MISSING':
@@ -326,6 +336,10 @@ export const CommentForm = ({
 			case 'COMMENT_TOO_LONG':
 				return setError(
 					'Your comment must be fewer than 5000 characters long.',
+				);
+			case 'INVALID_CHARS':
+				return setError(
+					'Your comment contains invalid characters or emojis. Please remove them and try again.',
 				);
 			case 'USER_BANNED':
 				return setError(
@@ -375,7 +389,9 @@ export const CommentForm = ({
 					address.`);
 			default:
 				return setError(
-					'Sorry, there was a problem posting your comment.',
+					isSubmittingForm
+						? 'Sorry, there was a problem posting your comment.'
+						: 'Sorry, there was a problem loading the comment preview.',
 				);
 		}
 	};
@@ -496,6 +512,7 @@ export const CommentForm = ({
 							? 'Join the discussion'
 							: ''
 					}
+					maxLength={5000}
 					cssOverrides={css([
 						commentTextArea,
 						commentBeingRepliedTo && isActive && greyPlaceholder,
