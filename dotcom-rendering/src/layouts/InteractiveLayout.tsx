@@ -200,6 +200,13 @@ const starWrapper = css`
 	margin-left: -10px;
 `;
 
+export const temporaryBodyCopyColourOverride = css`
+	.content__main-column--interactive p {
+		/* stylelint-disable-next-line declaration-no-important */
+		color: ${themePalette('--article-text')} !important;
+	}
+`;
+
 interface CommonProps {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
@@ -239,21 +246,16 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	const renderAds = isWeb && canRenderAds(article);
 	return (
 		<>
-			<Global
-				styles={css`
-					.content__main-column--interactive p {
-						/* stylelint-disable-next-line declaration-no-important */
-						color: ${themePalette('--article-text')} !important;
-					}
-				`}
-			/>
 			{isApps && (
 				<Island priority="critical">
 					<InteractivesNativePlatformWrapper />
 				</Island>
 			)}
 			{article.isLegacyInteractive && (
-				<Global styles={interactiveGlobalStyles} />
+				<>
+					<Global styles={interactiveGlobalStyles} />
+					<Global styles={temporaryBodyCopyColourOverride} />
+				</>
 			)}
 			{isWeb && (
 				<>
