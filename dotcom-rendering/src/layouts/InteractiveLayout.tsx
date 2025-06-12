@@ -247,15 +247,15 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	return (
 		<>
 			{isApps && (
-				<Island priority="critical">
-					<InteractivesNativePlatformWrapper />
-				</Island>
-			)}
-			{article.isLegacyInteractive && (
 				<>
-					<Global styles={interactiveGlobalStyles} />
+					<Island priority="critical">
+						<InteractivesNativePlatformWrapper />
+					</Island>
 					<Global styles={temporaryBodyCopyColourOverride} />
 				</>
+			)}
+			{article.isLegacyInteractive && (
+				<Global styles={interactiveGlobalStyles} />
 			)}
 			{isWeb && (
 				<>
