@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import type { BrowserContext, Page } from '@playwright/test';
 import { expect } from '@playwright/test';
+import { cmpAcceptAll } from './cmp';
 import { loadPage } from './load-page';
 import { expectToExist } from './locators';
 
@@ -93,6 +94,26 @@ const signIn = async (
 	context: BrowserContext,
 	path: string,
 ): Promise<void> => {
+	const configOverrides = {
+		stage: 'CODE',
+		isDev: true,
+		idApiUrl: 'https://idapi.code.dev-theguardian.com',
+		idUrl: 'https://profile.code.dev-theguardian.com',
+		mmaUrl: 'https://manage.code.dev-theguardian.com',
+		userBenefitsApiUrl:
+			'https://user-benefits.code.dev-guardianapis.com/benefits/me',
+	};
+
+	// load the page and CMP accept all
+	await loadPage({
+		page,
+		path,
+		useSecure: true,
+		overrides: { configOverrides },
+		waitUntil: 'load',
+	});
+	await cmpAcceptAll(page);
+
 	// create a test user in the CODE environment
 	await page.goto('https://profile.code.dev-theguardian.com', {
 		waitUntil: 'load',
@@ -133,17 +154,7 @@ const signIn = async (
 		page,
 		path,
 		useSecure: true,
-		overrides: {
-			configOverrides: {
-				stage: 'CODE',
-				isDev: true,
-				idApiUrl: 'https://idapi.code.dev-theguardian.com',
-				idUrl: 'https://profile.code.dev-theguardian.com',
-				mmaUrl: 'https://manage.code.dev-theguardian.com',
-				userBenefitsApiUrl:
-					'https://user-benefits.code.dev-guardianapis.com/benefits/me',
-			},
-		},
+		overrides: { configOverrides },
 		waitUntil: 'load',
 	});
 
