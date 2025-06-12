@@ -101,7 +101,7 @@ const decideImageWidths = (
 		case 'feature-large':
 			return [
 				{ breakpoint: breakpoints.mobile, width: 465, aspectRatio },
-				{ breakpoint: breakpoints.tablet, width: 337, aspectRatio },
+				{ breakpoint: breakpoints.tablet, width: 340, aspectRatio },
 				{ breakpoint: breakpoints.desktop, width: 460, aspectRatio },
 			];
 		case 'feature-immersive':
