@@ -4,7 +4,7 @@ import { WithBranding } from '../components/ArticleMeta.web.stories';
 import { ArticleDesign } from '../lib/articleFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { extractNAV } from '../model/extract-nav';
-import { enhanceArticleType } from '../types/article';
+import { enhanceArticleType, type Gallery } from '../types/article';
 import { GalleryLayout } from './GalleryLayout';
 
 const meta = {
@@ -16,6 +16,20 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const addBranding = (gallery: Gallery): Gallery => ({
+	...gallery,
+	frontendData: {
+		...gallery.frontendData,
+		commercialProperties: {
+			...gallery.frontendData.commercialProperties,
+			UK: {
+				...gallery.frontendData.commercialProperties.UK,
+				branding: WithBranding.args.branding,
+			},
+		},
+	},
+});
+
 const appsArticle = enhanceArticleType(GalleryFixture, 'Apps');
 
 if (appsArticle.design !== ArticleDesign.Gallery) {
@@ -25,7 +39,7 @@ if (appsArticle.design !== ArticleDesign.Gallery) {
 export const Apps = {
 	args: {
 		renderingTarget: 'Apps',
-		gallery: appsArticle,
+		gallery: addBranding(appsArticle),
 	},
 	parameters: {
 		formats: [
@@ -35,6 +49,9 @@ export const Apps = {
 				theme: appsArticle.theme,
 			},
 		],
+		config: {
+			renderingTarget: 'Apps',
+		},
 	},
 } satisfies Story;
 
@@ -51,19 +68,7 @@ export const Web = {
 			...extractNAV(webArticle.frontendData.nav),
 			selectedPillar: getCurrentPillar(webArticle.frontendData),
 		},
-		gallery: {
-			...webArticle,
-			frontendData: {
-				...webArticle.frontendData,
-				commercialProperties: {
-					...webArticle.frontendData.commercialProperties,
-					UK: {
-						...webArticle.frontendData.commercialProperties.UK,
-						branding: WithBranding.args.branding,
-					},
-				},
-			},
-		},
+		gallery: addBranding(webArticle),
 	},
 	parameters: {
 		formats: [
