@@ -59,6 +59,7 @@ type RendererProps = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
+	mmaUrl?: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	abTests: ServerSideTests;
@@ -72,6 +73,7 @@ const Renderer = ({
 	host,
 	pageId,
 	webTitle,
+	mmaUrl,
 	ajaxUrl,
 	isAdFreeUser,
 	isSensitive,
@@ -94,6 +96,7 @@ const Renderer = ({
 			pageId,
 			webTitle,
 			ajaxUrl,
+			mmaUrl,
 			isAdFreeUser,
 			isSensitive,
 			abTests,
@@ -296,6 +299,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 						pageId={article.pageId}
 						webTitle={article.webTitle}
 						ajaxUrl={article.config.ajaxUrl}
+						mmaUrl={article.config.mmaUrl}
 						abTests={article.config.abTests}
 						switches={article.config.switches}
 						isAdFreeUser={article.isAdFreeUser}
