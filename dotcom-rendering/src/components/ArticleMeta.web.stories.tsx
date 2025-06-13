@@ -328,3 +328,36 @@ export const VideoDesignWithSource = {
 		}),
 	},
 } satisfies Story;
+
+export const GalleryDesign = {
+	args: {
+		...Default.args,
+		isCommentable: true,
+		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
+		shortUrlId: '/p/d8ex5',
+	},
+
+	parameters: {
+		...Default.parameters,
+		formats: getAllThemes({
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Gallery,
+		}),
+	},
+	decorators: [
+		leftColumnDecorator,
+		(Story) => (
+			<div
+				css={css`
+					background-color: ${sourcePalette.neutral[7]}};
+
+					${from.desktop} {
+						background-color: inherit;
+					}
+				`}
+			>
+				<Story />
+			</div>
+		),
+	],
+} satisfies Story;
