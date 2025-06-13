@@ -185,9 +185,8 @@ export const MainImage: Story = {
 		},
 		tracking: {
 			...tracking,
-			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
+			abTestVariant: 'MAIN_IMAGE',
 		},
-		choiceCardAmounts: regularChoiceCardAmounts,
 	},
 };
 
