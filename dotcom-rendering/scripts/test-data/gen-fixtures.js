@@ -36,7 +36,7 @@ const articles = [
 	},
 	{
 		name: 'Gallery',
-		url: 'https://www.theguardian.com/australia-news/gallery/2025/jun/02/mullewa-muster-and-rodeo-2025-in-pictures',
+		url: 'https://www.theguardian.com/artanddesign/gallery/2025/jun/06/the-week-around-the-world-in-20-pictures',
 	},
 	{
 		name: 'Audio',
