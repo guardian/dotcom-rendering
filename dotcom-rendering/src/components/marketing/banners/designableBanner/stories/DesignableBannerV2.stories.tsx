@@ -40,6 +40,9 @@ const meta: Meta<Props> = {
 export default meta;
 
 type Story = StoryObj<Props>;
+export const Default: Story = {
+	name: 'Basic DesignableBannerV2',
+};
 
 const regularChoiceCardAmounts: SelectedAmountsVariant = {
 	testName: 'Storybook_test',
