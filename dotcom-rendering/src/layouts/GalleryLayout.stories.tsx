@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Gallery as GalleryFixture } from '../../fixtures/generated/fe-articles/Gallery';
+import { WithBranding } from '../components/ArticleMeta.web.stories';
 import { ArticleDesign } from '../lib/articleFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { extractNAV } from '../model/extract-nav';
@@ -50,7 +51,19 @@ export const Web = {
 			...extractNAV(webArticle.frontendData.nav),
 			selectedPillar: getCurrentPillar(webArticle.frontendData),
 		},
-		gallery: webArticle,
+		gallery: {
+			...webArticle,
+			frontendData: {
+				...webArticle.frontendData,
+				commercialProperties: {
+					...webArticle.frontendData.commercialProperties,
+					UK: {
+						...webArticle.frontendData.commercialProperties.UK,
+						branding: WithBranding.args.branding,
+					},
+				},
+			},
+		},
 	},
 	parameters: {
 		formats: [
