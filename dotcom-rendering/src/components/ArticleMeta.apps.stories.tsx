@@ -9,6 +9,7 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import { ArticleMetaApps } from './ArticleMeta.apps';
+import { palette } from '../palette';
 
 const meta = {
 	component: ArticleMetaApps,
@@ -183,6 +184,26 @@ export const WithBrandingStoryForAdvertisingPartner = {
 		...WithBrandingStory.parameters,
 		config: {
 			...WithBrandingStory.parameters.config,
+		},
+	},
+} satisfies Story;
+
+export const GalleryDesign = {
+	args: {
+		...WithFollowStory.args,
+		isCommentable: true,
+	},
+	parameters: {
+		formats: getAllThemes({
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Gallery,
+		}),
+		config: {
+			renderingTarget: 'Apps',
+		},
+		colourSchemeBackground: {
+			light: palette('--article-background'),
+			dark: palette('--article-background'),
 		},
 	},
 } satisfies Story;
