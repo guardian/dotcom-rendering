@@ -343,21 +343,10 @@ export const GalleryDesign = {
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Gallery,
 		}),
+		colourSchemeBackground: {
+			light: palette('--article-background'),
+			dark: palette('--article-background'),
+		},
 	},
-	decorators: [
-		leftColumnDecorator,
-		(Story) => (
-			<div
-				css={css`
-					background-color: ${sourcePalette.neutral[7]}};
-
-					${from.desktop} {
-						background-color: inherit;
-					}
-				`}
-			>
-				<Story />
-			</div>
-		),
-	],
+	decorators: [leftColumnDecorator],
 } satisfies Story;
