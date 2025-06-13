@@ -22,6 +22,7 @@ import { Dateline } from './Dateline';
 import { FollowWrapper } from './FollowWrapper.importable';
 import { Island } from './Island';
 import { LiveblogNotifications } from './LiveblogNotifications.importable';
+import { grid } from '../grid';
 
 type Props = {
 	format: ArticleFormat;
@@ -224,6 +225,7 @@ export const ArticleMetaApps = ({
 	const isImmersive = format.display === ArticleDisplay.Immersive;
 	const isAnalysis = format.design === ArticleDesign.Analysis;
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
+	const isGallery = format.design === ArticleDesign.Gallery;
 
 	const shouldShowFollowButtons = (layoutOrDesignType: boolean) =>
 		layoutOrDesignType && !!byline && !isUndefined(soleContributor);
@@ -239,7 +241,16 @@ export const ArticleMetaApps = ({
 			className={
 				isInteractive ? interactiveLegacyClasses.metaContainer : ''
 			}
-			css={metaContainerMargins}
+			css={[
+				metaContainerMargins,
+				isGallery ? grid.column.centre : undefined,
+				isGallery
+					? {
+							marginLeft: space[3],
+							paddingBottom: space[2],
+					  }
+					: undefined,
+			]}
 		>
 			<div
 				css={[

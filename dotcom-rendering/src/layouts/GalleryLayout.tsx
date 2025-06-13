@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
+import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
@@ -11,6 +12,7 @@ import type { NavType } from '../model/extract-nav';
 import { palette } from '../palette';
 import type { Gallery } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 
 interface Props {
 	gallery: Gallery;
@@ -93,6 +95,55 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						format={format}
 						standfirst={frontendData.standfirst}
 					/>
+					{props.renderingTarget === 'Web' ? (
+						<ArticleMeta
+							branding={
+								frontendData.commercialProperties[
+									frontendData.editionId
+								].branding
+							}
+							format={format}
+							pageId={frontendData.pageId}
+							webTitle={frontendData.webTitle}
+							byline={frontendData.byline}
+							tags={frontendData.tags}
+							primaryDateline={
+								frontendData.webPublicationDateDisplay
+							}
+							secondaryDateline={
+								frontendData.webPublicationSecondaryDateDisplay
+							}
+							isCommentable={frontendData.isCommentable}
+							discussionApiUrl={
+								frontendData.config.discussionApiUrl
+							}
+							shortUrlId={frontendData.config.shortUrlId}
+						/>
+					) : null}
+					{props.renderingTarget === 'Apps' ? (
+						<ArticleMetaApps
+							branding={
+								frontendData.commercialProperties[
+									frontendData.editionId
+								].branding
+							}
+							format={format}
+							pageId={frontendData.pageId}
+							byline={frontendData.byline}
+							tags={frontendData.tags}
+							primaryDateline={
+								frontendData.webPublicationDateDisplay
+							}
+							secondaryDateline={
+								frontendData.webPublicationSecondaryDateDisplay
+							}
+							isCommentable={frontendData.isCommentable}
+							discussionApiUrl={
+								frontendData.config.discussionApiUrl
+							}
+							shortUrlId={frontendData.config.shortUrlId}
+						/>
+					) : null}
 					<div
 						css={[
 							border,
