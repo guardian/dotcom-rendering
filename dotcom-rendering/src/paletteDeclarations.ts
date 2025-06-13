@@ -4899,21 +4899,9 @@ const commentCountFill: PaletteFunction = ({ design, theme }) => {
 	}
 
 	if (design === ArticleDesign.Gallery) {
-		switch (theme) {
-			case Pillar.Opinion:
-			case Pillar.News:
-			case Pillar.Sport:
-			case Pillar.Culture:
-			case Pillar.Lifestyle:
-				return pillarPalette(theme, 400);
-			case ArticleSpecial.Labs:
-				return sourcePalette.labs[400];
-			case ArticleSpecial.SpecialReportAlt:
-				return sourcePalette.brandAlt[300];
-			case ArticleSpecial.SpecialReport:
-				return sourcePalette.brandAlt[400];
-		}
+		return sourcePalette.neutral[46];
 	}
+
 	if (theme === ArticleSpecial.Labs) return sourcePalette.neutral[7];
 	if (theme === ArticleSpecial.SpecialReport) {
 		return sourcePalette.specialReport[300];
