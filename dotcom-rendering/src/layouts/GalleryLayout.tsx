@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
+import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { MainMediaGallery } from '../components/MainMediaGallery';
@@ -12,7 +13,6 @@ import type { NavType } from '../model/extract-nav';
 import { palette } from '../palette';
 import type { Gallery } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 
 interface Props {
 	gallery: Gallery;

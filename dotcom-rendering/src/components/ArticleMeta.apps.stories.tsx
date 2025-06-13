@@ -8,8 +8,8 @@ import {
 	getAllThemes,
 	Pillar,
 } from '../lib/articleFormat';
-import { ArticleMetaApps } from './ArticleMeta.apps';
 import { palette } from '../palette';
+import { ArticleMetaApps } from './ArticleMeta.apps';
 
 const meta = {
 	component: ArticleMetaApps,

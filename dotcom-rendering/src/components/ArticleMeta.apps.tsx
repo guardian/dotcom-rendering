@@ -3,6 +3,7 @@ import { isUndefined } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { ReactNode } from 'react';
+import { grid } from '../grid';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -22,7 +23,6 @@ import { Dateline } from './Dateline';
 import { FollowWrapper } from './FollowWrapper.importable';
 import { Island } from './Island';
 import { LiveblogNotifications } from './LiveblogNotifications.importable';
-import { grid } from '../grid';
 
 type Props = {
 	format: ArticleFormat;
