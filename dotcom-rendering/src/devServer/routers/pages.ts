@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { Pages } from '../docs/pages';
 import { Front } from '../docs/front';
+import { Pages } from '../docs/pages';
 import { sendReact } from '../send';
 
 const pages = Router();
