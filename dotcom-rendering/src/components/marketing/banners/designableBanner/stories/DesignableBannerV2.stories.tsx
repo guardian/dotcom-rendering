@@ -193,6 +193,40 @@ export const MainImage: Story = {
 	},
 };
 
+export const DesignThreeAnimatedHeaderImage: Story = {
+	name: 'DesignableBanner with animated header image',
+	args: {
+		...meta.args,
+		content: contentNoHeading,
+		mobileContent: mobileContentNoHeading,
+		design: {
+			...design,
+			headerImage: {
+				mobileUrl:
+					'https://uploads.guim.co.uk/2024/05/13/GuardianLogo.svg',
+				tabletUrl:
+					'https://uploads.guim.co.uk/2024/05/13/GuardianLogo.svg',
+				desktopUrl:
+					'https://uploads.guim.co.uk/2024/05/13/GuardianLogo.svg',
+				altText: 'Guardian: News provider of the year',
+			},
+			visual: {
+				kind: 'ChoiceCards',
+				buttonColour: stringToHexColour('E5E5E5'),
+			},
+			colours: {
+				...design.colours,
+				basic: {
+					...design.colours.basic,
+					background: stringToHexColour('FFFFFF'),
+				},
+			},
+		},
+		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
+	},
+};
+
 export const WithTickerAndThreeTierChoiceCards: Story = {
 	name: 'With ticker + three tier choice cards',
 	args: {
