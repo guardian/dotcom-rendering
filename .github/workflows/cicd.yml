@@ -6,10 +6,10 @@ on:
       - 'apps-rendering/**'
 
 jobs:
-  # container:
-  #   permissions:
-  #     packages: write
-  #   uses: ./.github/workflows/container.yml
+  container:
+    permissions:
+      packages: write
+    uses: ./.github/workflows/container.yml
 
   # prettier:
   #   uses: ./.github/workflows/prettier.yml
@@ -27,7 +27,10 @@ jobs:
   #     container-image: ${{ needs.container.outputs.container-image }}
 
   playwright-secure:
+    needs: [container]
     uses: ./.github/workflows/playwright-secure.yml
+    with:
+      container-image: ${{ needs.container.outputs.container-image }}
     secrets:
       IDAPI_CLIENT_ACCESS_TOKEN: ${{ secrets.IDAPI_CLIENT_ACCESS_TOKEN }}
 

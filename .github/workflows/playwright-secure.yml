@@ -3,13 +3,18 @@ on:
     secrets:
       IDAPI_CLIENT_ACCESS_TOKEN:
         required: true
+    inputs:
+      container-image:
+        description: 'Image used by DCR service'
+        required: true
+        type: string
 
 jobs:
   playwright-secure:
     runs-on: ubuntu-latest
     services:
       DCR:
-        image: ghcr.io/guardian/dotcom-rendering:39e7ef28f115a38446a770b0b17a1ea580399849
+        image: ${{ inputs.container-image }}
         ports:
           - 9000:9000
     steps:
