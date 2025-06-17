@@ -244,7 +244,7 @@ export const MultipleFormatsWithBlogTag = {
 	name: 'Multiple Formats, with blog tag',
 } satisfies Story;
 
-export const GalleryDesign = {
+export const GalleryDesignWithSeries = {
 	args: {
 		...StandardDesign.args,
 		tags: [
@@ -261,10 +261,9 @@ export const GalleryDesign = {
 			display: ArticleDisplay.Standard,
 		}),
 	},
-	name: 'Gallery Design',
 } satisfies Story;
 
-export const GalleryDesignWithLabThemeAndNoTag = {
+export const GalleryDesignLabThemeWithoutSeries = {
 	args: {
 		...StandardDesign.args,
 		format: {
@@ -273,5 +272,4 @@ export const GalleryDesignWithLabThemeAndNoTag = {
 			design: ArticleDesign.Gallery,
 		},
 	},
-	name: 'Gallery Design with Lab theme and no series tag',
 } satisfies Story;

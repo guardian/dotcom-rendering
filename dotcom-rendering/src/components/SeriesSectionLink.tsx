@@ -83,10 +83,7 @@ const marginRight = css`
 
 const invertedStyle = (design: ArticleDesign) => {
 	if (design === ArticleDesign.Gallery) {
-		return css`
-			white-space: pre-wrap;
-			box-decoration-break: clone;
-		`;
+		return '';
 	}
 	return css`
 		/* Handle text wrapping onto a new line */
