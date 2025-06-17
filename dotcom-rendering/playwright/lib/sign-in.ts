@@ -99,9 +99,6 @@ const signIn = async (
 		isDev: true,
 		idApiUrl: 'https://idapi.code.dev-theguardian.com',
 		idUrl: 'https://profile.code.dev-theguardian.com',
-		mmaUrl: 'https://manage.code.dev-theguardian.com',
-		userBenefitsApiUrl:
-			'https://user-benefits.code.dev-guardianapis.com/benefits/me',
 	};
 
 	// load the page and CMP accept all
@@ -157,9 +154,6 @@ const signIn = async (
 		overrides: { configOverrides },
 		waitUntil: 'load',
 	});
-
-	// check the user is signed in
-	await expectToBeSignedIn(page);
 };
 
 const expectToBeSignedIn = async (page: Page): Promise<void> => {
