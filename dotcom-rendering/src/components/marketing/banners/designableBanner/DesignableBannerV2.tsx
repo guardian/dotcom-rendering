@@ -28,10 +28,10 @@ import {
 	removeMediaRulePrefix,
 	useMatchMedia,
 } from '../../../../lib/useMatchMedia';
-import { ThreeTierChoiceCards } from '../../epics/ThreeTierChoiceCards';
 import { getChoiceCards } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import { addChoiceCardsProductParams } from '../../lib/tracking';
+import { ThreeTierChoiceCards } from '../../shared/ThreeTierChoiceCards';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
 import type { ChoiceCardSettings } from './components/choiceCards/ChoiceCards';
