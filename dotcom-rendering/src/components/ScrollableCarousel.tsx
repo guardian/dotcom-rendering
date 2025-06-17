@@ -11,8 +11,8 @@ type GapSizes = { row: GapSize; column: GapSize };
 type Props = {
 	children: React.ReactNode;
 	carouselLength: number;
-	visibleCardsOnMobile: number;
-	visibleCardsOnTablet: number;
+	visibleCarouselSlidesOnMobile: number;
+	visibleCarouselSlidesOnTablet: number;
 	sectionId?: string;
 	shouldStackCards?: { desktop: boolean; mobile: boolean };
 	gapSizes?: GapSizes;
@@ -134,6 +134,9 @@ const stackedRowLeftBorderStyles = css`
 	}
 `;
 
+/**
+ * When cards are "stacked", each slide in the carousel will have two cards instead of one
+ */
 const stackedCardRowsStyles = ({
 	mobile,
 	desktop,
@@ -152,21 +155,22 @@ const stackedCardRowsStyles = ({
  * Generates CSS styles for a grid layout used in a carousel.
  *
  * @param {number} totalCards - The total number of cards in the carousel.
- * @param {number} visibleCardsOnMobile - Number of cards to show at once on mobile.
- * @param {number} visibleCardsOnTablet - Number of cards to show at once on tablet.
+ * @param {number} visibleCarouselSlidesOnMobile - Number of cards to show at once on mobile.
+ * @param {number} visibleCarouselSlidesOnTablet - Number of cards to show at once on tablet.
  * @returns {string} - The CSS styles for the grid layout.
  */
 const generateCarouselColumnStyles = (
 	totalCards: number,
-	visibleCardsOnMobile: number,
-	visibleCardsOnTablet: number,
+	visibleCarouselSlidesOnMobile: number,
+	visibleCarouselSlidesOnTablet: number,
 ) => {
 	const peepingCardWidth = space[8];
 	const cardGap = 20;
 	const offsetPeepingCardWidth =
-		peepingCardWidth / visibleCardsOnMobile + cardGap;
+		peepingCardWidth / visibleCarouselSlidesOnMobile + cardGap;
 	const offsetCardGap =
-		(cardGap * (visibleCardsOnTablet - 1)) / visibleCardsOnTablet;
+		(cardGap * (visibleCarouselSlidesOnTablet - 1)) /
+		visibleCarouselSlidesOnTablet;
 
 	return css`
 		/**
@@ -181,24 +185,28 @@ const generateCarouselColumnStyles = (
 		grid-template-columns: repeat(
 			${totalCards},
 			calc(
-				(100% / ${visibleCardsOnMobile}) - ${offsetPeepingCardWidth}px +
-					${gridGapMobile / visibleCardsOnMobile}px
+				(100% / ${visibleCarouselSlidesOnMobile}) -
+					${offsetPeepingCardWidth}px +
+					${gridGapMobile / visibleCarouselSlidesOnMobile}px
 			)
 		);
 		${from.mobileLandscape} {
 			grid-template-columns: repeat(
 				${totalCards},
 				calc(
-					(100% / ${visibleCardsOnMobile}) -
+					(100% / ${visibleCarouselSlidesOnMobile}) -
 						${offsetPeepingCardWidth}px +
-						${gridGap / visibleCardsOnMobile}px
+						${gridGap / visibleCarouselSlidesOnMobile}px
 				)
 			);
 		}
 		${from.tablet} {
 			grid-template-columns: repeat(
 				${totalCards},
-				calc(${100 / visibleCardsOnTablet}% - ${offsetCardGap}px)
+				calc(
+					(${100 / visibleCarouselSlidesOnTablet}%) -
+						${offsetCardGap}px
+				)
 			);
 		}
 	`;
@@ -221,8 +229,8 @@ const getGapSize = (gap: GapSize) => {
 export const ScrollableCarousel = ({
 	children,
 	carouselLength,
-	visibleCardsOnMobile,
-	visibleCardsOnTablet,
+	visibleCarouselSlidesOnMobile,
+	visibleCarouselSlidesOnTablet,
 	sectionId,
 	shouldStackCards = { desktop: false, mobile: false },
 	gapSizes = { column: 'large', row: 'large' },
@@ -231,7 +239,7 @@ export const ScrollableCarousel = ({
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
 	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
 
-	const showNavigation = carouselLength > visibleCardsOnTablet;
+	const showNavigation = carouselLength > visibleCarouselSlidesOnTablet;
 
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
@@ -312,8 +320,8 @@ export const ScrollableCarousel = ({
 					carouselGapStyles(columnGap, rowGap),
 					generateCarouselColumnStyles(
 						carouselLength,
-						visibleCardsOnMobile,
-						visibleCardsOnTablet,
+						visibleCarouselSlidesOnMobile,
+						visibleCarouselSlidesOnTablet,
 					),
 					stackedCardRowsStyles(shouldStackCards),
 				]}

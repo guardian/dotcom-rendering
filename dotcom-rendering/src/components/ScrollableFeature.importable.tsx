@@ -34,8 +34,8 @@ export const ScrollableFeature = ({
 	return (
 		<ScrollableCarousel
 			carouselLength={trails.length}
-			visibleCardsOnMobile={1}
-			visibleCardsOnTablet={3}
+			visibleCarouselSlidesOnMobile={1}
+			visibleCarouselSlidesOnTablet={3}
 		>
 			{trails.map((card) => {
 				return (
