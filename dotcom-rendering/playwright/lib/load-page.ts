@@ -115,6 +115,8 @@ const loadPage = async ({
 		overrides.article;
 
 	if (hasOverrides) {
+		console.log('!!! Overrides provided, loading page normally');
+
 		// If we have overrides, but no article JSON we fetch it
 		const article = await (overrides.article
 			? Promise.resolve(overrides.article)
@@ -159,17 +161,18 @@ const loadPage = async ({
 
 		await page.goto(url, { waitUntil });
 	} else {
-		void page.route(url, async (route) => {
-			const modifiedResponse = await route.fetch({ url });
-			const body = await modifiedResponse.body();
-			await route.fulfill({
-				body,
-				headers: {
-					...modifiedResponse.headers(),
-					Link: '',
-				},
-			});
-		});
+		console.log('!!! No overrides provided, loading page normally');
+		// void page.route(url, async (route) => {
+		// 	const modifiedResponse = await route.fetch({ url });
+		// 	const body = await modifiedResponse.body();
+		// 	await route.fulfill({
+		// 		body,
+		// 		headers: {
+		// 			...modifiedResponse.headers(),
+		// 			Link: '',
+		// 		},
+		// 	});
+		// });
 
 		// The default Playwright waitUntil: 'load' ensures all requests have completed
 		// Use 'domcontentloaded' to speed up tests and prevent hanging requests from timing out tests

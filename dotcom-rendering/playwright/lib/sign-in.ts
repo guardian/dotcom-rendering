@@ -94,19 +94,19 @@ const signIn = async (
 	context: BrowserContext,
 	path: string,
 ): Promise<void> => {
-	const configOverrides = {
-		stage: 'CODE',
-		isDev: true,
-		idApiUrl: 'https://idapi.code.dev-theguardian.com',
-		idUrl: 'https://profile.code.dev-theguardian.com',
-	};
+	// const configOverrides = {
+	// stage: 'CODE',
+	// isDev: true,
+	// idApiUrl: 'https://idapi.code.dev-theguardian.com',
+	// idUrl: 'https://profile.code.dev-theguardian.com',
+	// };
 
 	// load the page and CMP accept all
 	await loadPage({
 		page,
 		path,
 		useSecure: true,
-		overrides: { configOverrides },
+		// overrides: { configOverrides },
 		waitUntil: 'load',
 	});
 	await cmpAcceptAll(page);
@@ -151,7 +151,7 @@ const signIn = async (
 		page,
 		path,
 		useSecure: true,
-		overrides: { configOverrides },
+		// overrides: { configOverrides },
 		waitUntil: 'load',
 	});
 };
