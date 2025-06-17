@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { leftColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { defaultFormats } from '../../.storybook/decorators/splitThemeDecorator';
 import { allModes } from '../../.storybook/modes';
+import type { ArticleFormat } from '../lib/articleFormat';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -59,7 +60,9 @@ export const WithFollowStory = {
 		config: {
 			renderingTarget: 'Apps',
 		},
-		formats: defaultFormats,
+		formats: defaultFormats.filter(
+			(format: ArticleFormat) => format.design !== ArticleDesign.Gallery,
+		),
 	},
 } satisfies Story;
 

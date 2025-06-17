@@ -12,6 +12,7 @@ import { allModes } from '../../.storybook/modes';
 import {
 	ArticleDesign,
 	ArticleDisplay,
+	type ArticleFormat,
 	getAllThemes,
 	Pillar,
 } from '../lib/articleFormat';
@@ -64,7 +65,9 @@ export const Default = {
 		shortUrlId: '',
 	},
 	parameters: {
-		formats: defaultFormats,
+		formats: defaultFormats.filter(
+			(format: ArticleFormat) => format.design !== ArticleDesign.Gallery,
+		),
 	},
 	decorators: [leftColumnDecorator],
 } satisfies Story;
