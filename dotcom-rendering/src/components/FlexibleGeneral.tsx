@@ -539,11 +539,7 @@ const HalfWidthCardLayout = ({
 							)}
 							supportingContentAlignment="vertical"
 							supportingContentPosition="outer"
-							imageSize={
-								card.format.design === ArticleDesign.Audio
-									? 'small'
-									: 'medium'
-							}
+							imageSize="medium"
 							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}
@@ -555,15 +551,7 @@ const HalfWidthCardLayout = ({
 								(containerLevel !== 'Primary' && cardIndex > 0)
 							}
 							trailText={undefined}
-							headlineSizes={
-								!card.image &&
-								card.format.design !== ArticleDesign.Comment
-									? {
-											desktop: 'small',
-											tablet: 'xsmall',
-									  }
-									: undefined
-							}
+							headlineSizes={undefined}
 							canPlayInline={false}
 						/>
 					</LI>

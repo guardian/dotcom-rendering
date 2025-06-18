@@ -369,10 +369,7 @@ export const Section = ({
 							/>
 						</MaybeHideAboveLeftCol>
 						{toggleable && !!sectionId && (
-							<ShowHideButton
-								sectionId={sectionId}
-								isBetaContainer={false}
-							/>
+							<ShowHideButton sectionId={sectionId} />
 						)}
 					</div>
 					{toggleable && sectionId ? (

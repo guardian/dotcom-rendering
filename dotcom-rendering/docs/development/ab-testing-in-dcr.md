@@ -1,9 +1,11 @@
 # AB Testing in DCR
 
+## Client-side A/B tests
+
 > [!NOTE]
 > Setting up a client-side A/B test using the [A/B Testing Library](https://github.com/guardian/csnx/tree/main/libs/%40guardian/ab-core). The library docs explain the integration and the API.
 
-## Quick Start
+### Quick Start
 
 1. [Create a switch in Frontend](https://github.com/guardian/frontend/blob/main/common/app/conf/switches/ABTestSwitches.scala)
 1. Ensure that you [create an A/B test](https://github.com/guardian/frontend/tree/main/static/src/javascripts/projects/common/modules/experiments/tests) on _Frontend_ using the [A/B test API](https://github.com/guardian/csnx/tree/main/libs/%40guardian/ab-core#the-api).
@@ -14,13 +16,13 @@
 1. Set a GU_mvt_id or GU_mvt_id_local cookie with the MVT ID that matches the test Audience and Audience Offset ([Use this calculator](https://ab-tests.netlify.app/))
 1. Check the network tab for the Ophan request _abTestRegister_ has your test and variant
 
-## Gotchas
+### Gotchas
 
 -   The ABTest Switch name must be hyphenated, lower case and must starts with `ab-`; for instance `ab-my-cool-ab-test`. The JavaScript/TypeScript ab-test ID must be in PascalCase; for instance `MyCoolAbTest`.
 -   Assuming that your test has a variant whose id is `variant-1`, The url fragment for opt-in is, then, `#ab-MyCoolAbTest=variant-1`.
 -   Your ABTest Switch has a sell by date and your abTest has an expiry date. Matching them up avoids confusion.
 
-## Use in Components
+### Use in Components
 
 ```ts
 // Within the components

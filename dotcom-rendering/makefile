@@ -183,9 +183,6 @@ gen-fixtures:
 	$(call log, "Generating new fixture data")
 	@pnpm tsx scripts/test-data/gen-fixtures.js
 
-perf-test:
-	@node scripts/perf/perf-test.js
-
 audit: clean-dist install
 	$(call log, "auditing dependencies")
 	@pnpm audit

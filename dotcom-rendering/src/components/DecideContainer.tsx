@@ -1,5 +1,4 @@
 import type { ImgHTMLAttributes } from 'react';
-import type { ServerSideTests } from '../types/config';
 import type {
 	AspectRatio,
 	DCRContainerLevel,
@@ -49,7 +48,6 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
-	abTests?: ServerSideTests;
 };
 
 export const DecideContainer = ({
@@ -65,7 +63,6 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
-	abTests,
 }: Props) => {
 	// If you add a new container type which contains an MPU, you must also add it to
 	switch (containerType) {
@@ -246,13 +243,7 @@ export const DecideContainer = ({
 		case 'scrollable/highlights':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<ScrollableHighlights
-						trails={trails}
-						frontId={frontId}
-						isInHighlightsAbTestVariant={
-							abTests?.hideMobileHighlightsVariant === 'variant'
-						}
-					/>
+					<ScrollableHighlights trails={trails} frontId={frontId} />
 				</Island>
 			);
 		case 'flexible/special':

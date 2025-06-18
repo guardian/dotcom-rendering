@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import {
-	palette,
+	palette as sourcePalette,
 	space,
 	textSans12,
 	textSansBold12,
 } from '@guardian/source/foundations';
 import { SvgPinned } from '@guardian/source/react-components';
-import { palette as themePalette } from '../palette';
+import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
 import { DateTime } from './DateTime';
@@ -64,16 +64,16 @@ const FirstPublished = ({
 					width: fit-content;
 					flex-direction: row;
 					text-decoration: none;
+					color: ${palette('--live-block-datetime-text')};
 
 					:hover {
-						filter: brightness(30%);
+						color: ${palette('--live-block-datetime-text-hover')};
 					}
 				`}
 			>
 				{!isPinnedPost && (
 					<span
 						css={css`
-							color: ${palette.neutral[46]};
 							font-weight: bold;
 							margin-right: ${space[2]}px;
 						`}
@@ -91,7 +91,6 @@ const FirstPublished = ({
 				<span
 					css={css`
 						${textSans12};
-						color: ${palette.neutral[46]};
 					`}
 				>
 					{firstPublishedDisplay ?? fallbackDate(publishedDate)}
@@ -119,13 +118,13 @@ const FirstPublished = ({
 							width: 14px;
 							height: 14px;
 							border-radius: 50%;
-							background-color: ${themePalette(
+							background-color: ${palette(
 								'--live-block-border-top',
 							)};
 							align-self: center;
 							margin-left: ${space[2]}px;
 							svg {
-								fill: ${palette.neutral[100]};
+								fill: ${sourcePalette.neutral[100]};
 							}
 						`}
 					>

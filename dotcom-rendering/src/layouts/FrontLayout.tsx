@@ -44,7 +44,6 @@ import {
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
 import { ophanComponentId } from '../lib/ophan-helpers';
-import { BETA_CONTAINERS } from '../model/enhanceCollections';
 import type { NavType } from '../model/extract-nav';
 import { palette as schemePalette } from '../palette';
 import type {
@@ -137,8 +136,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const { absoluteServerTimes = false } = front.config.switches;
 
-	const { abTests } = front.config;
-
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
 			case 'scrollable/feature':
@@ -182,7 +179,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 					frontId={front.pressedPage.id}
 					collectionId={0}
-					abTests={abTests}
 				/>
 			)
 		);
@@ -448,9 +444,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									discussionApiUrl={
 										front.config.discussionApiUrl
 									}
-									isBetaContainer={BETA_CONTAINERS.includes(
-										collection.collectionType,
-									)}
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
@@ -714,15 +707,20 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collection.collectionBranding
 								}
 								containerLevel={collection.containerLevel}
-								containerSpacing={collection.containerSpacing}
+								isNextCollectionPrimary={
+									collection.isNextCollectionPrimary
+								}
 								hasNavigationButtons={
 									collection.collectionType ===
 										'scrollable/small' ||
 									collection.collectionType ===
 										'scrollable/medium'
 								}
-								isBetaContainer={BETA_CONTAINERS.includes(
-									collection.collectionType,
+								isAboveDesktopAd={desktopAdPositions.includes(
+									index + 1,
+								)}
+								isAboveMobileAd={mobileAdPositions.includes(
+									index,
 								)}
 							>
 								<DecideContainer

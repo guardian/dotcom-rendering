@@ -200,6 +200,13 @@ const starWrapper = css`
 	margin-left: -10px;
 `;
 
+export const temporaryBodyCopyColourOverride = css`
+	.content__main-column--interactive p {
+		/* stylelint-disable-next-line declaration-no-important */
+		color: ${themePalette('--article-text')} !important;
+	}
+`;
+
 interface CommonProps {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
@@ -240,9 +247,12 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	return (
 		<>
 			{isApps && (
-				<Island priority="critical">
-					<InteractivesNativePlatformWrapper />
-				</Island>
+				<>
+					<Island priority="critical">
+						<InteractivesNativePlatformWrapper />
+					</Island>
+					<Global styles={temporaryBodyCopyColourOverride} />
+				</>
 			)}
 			{article.isLegacyInteractive && (
 				<Global styles={interactiveGlobalStyles} />

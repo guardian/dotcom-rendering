@@ -54,13 +54,6 @@ const findCollectionSuitableForFrontBranding = (
 	return index;
 };
 
-/** Depending on the next sibling of the container, we assign either large or small spacing rules during render */
-const getContainerSpacing = (nextSiblingCollection?: FECollection) => {
-	const nextCollectionIsPrimary =
-		nextSiblingCollection?.config.collectionLevel === 'Primary';
-	return nextCollectionIsPrimary ? 'large' : 'small';
-};
-
 export const enhanceCollections = ({
 	collections,
 	editionId,
@@ -69,6 +62,7 @@ export const enhanceCollections = ({
 	frontBranding,
 	onPageDescription,
 	isOnPaidContentFront,
+	isLoopingVideoTest = false,
 }: {
 	collections: FECollection[];
 	editionId: EditionId;
@@ -77,9 +71,11 @@ export const enhanceCollections = ({
 	frontBranding: Branding | undefined;
 	onPageDescription?: string;
 	isOnPaidContentFront?: boolean;
+	isLoopingVideoTest?: boolean;
 }): DCRCollectionType[] => {
 	const indexToShowFrontBranding =
 		findCollectionSuitableForFrontBranding(collections);
+
 	return collections.filter(isSupported).map((collection, index) => {
 		const { id, displayName, collectionType, hasMore, href, description } =
 			collection;
@@ -108,10 +104,12 @@ export const enhanceCollections = ({
 			},
 		);
 
-		const containerSpacing = getContainerSpacing(collections[index + 1]);
+		const isNextCollectionPrimary =
+			collections[index + 1]?.config.collectionLevel === 'Primary';
 		const isBetaContainer = BETA_CONTAINERS.includes(
 			collection.collectionType,
 		);
+
 		return {
 			id,
 			displayName,
@@ -123,7 +121,7 @@ export const enhanceCollections = ({
 			href,
 			containerPalette,
 			containerLevel: collection.config.collectionLevel,
-			containerSpacing,
+			isNextCollectionPrimary,
 			collectionBranding,
 			grouped: groupCards(
 				collectionType,
@@ -131,16 +129,19 @@ export const enhanceCollections = ({
 				collection.backfill,
 				editionId,
 				discussionApiUrl,
+				isLoopingVideoTest,
 			),
 			curated: enhanceCards(collection.curated, {
 				cardInTagPage: false,
 				editionId,
 				discussionApiUrl,
+				isLoopingVideoTest,
 			}),
 			backfill: enhanceCards(collection.backfill, {
 				cardInTagPage: false,
 				editionId,
 				discussionApiUrl,
+				isLoopingVideoTest,
 			}),
 			treats: enhanceTreats(
 				collection.treats,
