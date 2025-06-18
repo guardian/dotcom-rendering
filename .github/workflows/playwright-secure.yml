@@ -70,7 +70,7 @@ jobs:
             exit 1
           fi
 
-      - name: Is IDAPI_CLIENT_ACCESS_TOKEN set?
+      - name: Check IDAPI_CLIENT_ACCESS_TOKEN is set
         run: |
           if [ -z "$IDAPI_CLIENT_ACCESS_TOKEN" ]; then
             echo "IDAPI_CLIENT_ACCESS_TOKEN is empty or undefined"

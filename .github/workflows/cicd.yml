@@ -11,20 +11,20 @@ jobs:
       packages: write
     uses: ./.github/workflows/container.yml
 
-  # prettier:
-  #   uses: ./.github/workflows/prettier.yml
+  prettier:
+    uses: ./.github/workflows/prettier.yml
 
-  # jest:
-  #   uses: ./.github/workflows/jest.yml
+  jest:
+    uses: ./.github/workflows/jest.yml
 
-  # lint:
-  #   uses: ./.github/workflows/lint.yml
+  lint:
+    uses: ./.github/workflows/lint.yml
 
-  # playwright:
-  #   needs: [container]
-  #   uses: ./.github/workflows/playwright.yml
-  #   with:
-  #     container-image: ${{ needs.container.outputs.container-image }}
+  playwright:
+    needs: [container]
+    uses: ./.github/workflows/playwright.yml
+    with:
+      container-image: ${{ needs.container.outputs.container-image }}
 
   playwright-secure:
     needs: [container]
@@ -34,14 +34,14 @@ jobs:
     secrets:
       IDAPI_CLIENT_ACCESS_TOKEN: ${{ secrets.IDAPI_CLIENT_ACCESS_TOKEN }}
 
-  # publish:
-  #   permissions:
-  #     id-token: write
-  #     contents: read
-  #     pull-requests: write # required by riff-raff action
-  #   needs: [container, prettier, jest, lint, playwright, playwright-secure]
-  #   uses: ./.github/workflows/publish.yml
-  #   with:
-  #     container-image: ${{ needs.container.outputs.container-image }}
-  #   secrets:
-  #     GU_RIFF_RAFF_ROLE_ARN: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+  publish:
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write # required by riff-raff action
+    needs: [container, prettier, jest, lint, playwright, playwright-secure]
+    uses: ./.github/workflows/publish.yml
+    with:
+      container-image: ${{ needs.container.outputs.container-image }}
+    secrets:
+      GU_RIFF_RAFF_ROLE_ARN: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
