@@ -3002,6 +3002,8 @@ const articleBackgroundDark: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.neutral[7];
 		case ArticleDesign.LiveBlog:
 			return sourcePalette.neutral[0];
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[10];
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
 		case ArticleDesign.Explainer:
@@ -4266,6 +4268,7 @@ const linkKickerTextDark: PaletteFunction = ({ theme }) => {
 const ageWarningWrapperBackground: PaletteFunction = (format) => {
 	switch (format.design) {
 		case ArticleDesign.Interview:
+		case ArticleDesign.Gallery:
 			return 'transparent';
 		default:
 			return headlineBackgroundLight(format);
