@@ -254,7 +254,7 @@ const getMedia = ({
 	canPlayInline?: boolean;
 	isBetaContainer: boolean;
 }) => {
-	if (mainMedia?.type === 'LoopVideo') {
+	if (mainMedia?.type === 'LoopVideo' && canPlayInline) {
 		return {
 			type: 'loop-video',
 			mainMedia,
@@ -887,18 +887,18 @@ export const Card = ({
 								/>
 							</AvatarContainer>
 						)}
-						{mainMedia?.type === 'LoopVideo' && (
+						{media.type === 'loop-video' && (
 							<Island
 								priority="feature"
 								defer={{ until: 'visible' }}
 							>
 								<LoopVideo
-									src={mainMedia.videoId}
-									height={mainMedia.height}
-									width={mainMedia.width}
-									videoId={mainMedia.videoId}
+									src={media.mainMedia.videoId}
+									height={media.mainMedia.height}
+									width={media.mainMedia.width}
+									videoId={media.mainMedia.videoId}
 									thumbnailImage={
-										mainMedia.thumbnailImage ?? ''
+										media.mainMedia.thumbnailImage ?? ''
 									}
 									fallbackImageComponent={
 										<CardPicture
