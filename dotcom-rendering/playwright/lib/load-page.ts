@@ -11,59 +11,10 @@ type LoadPageOptions = {
 	region?: 'GB' | 'US' | 'AU' | 'INT';
 	preventSupportBanner?: boolean;
 	useSecure?: boolean;
-	overrides?: {
-		configOverrides?: Record<string, unknown>;
-		switchOverrides?: Record<string, unknown>;
-		article?: FEArticle;
-	};
 };
-
-type LoadPageParams = {
-	page: Page;
-	path: string;
-} & LoadPageOptions;
 
 const getOrigin = (useSecure?: boolean): string =>
 	useSecure ? ORIGIN_SECURE : ORIGIN;
-
-const getUrl = ({
-	path,
-	useSecure,
-	queryParamsOn,
-	queryParams,
-	fragment,
-}: Required<
-	Pick<LoadPageParams, 'path' | 'useSecure' | 'queryParamsOn' | 'queryParams'>
-> &
-	Pick<LoadPageParams, 'fragment'>): string => {
-	const paramsString = queryParamsOn
-		? `?${new URLSearchParams({
-				adtest: 'fixed-puppies-ci',
-				...queryParams,
-		  }).toString()}`
-		: '';
-
-	return `${getOrigin(useSecure)}${path}${paramsString}${fragment ?? ''}`;
-};
-
-const getArticleJson = async (url: string): Promise<FEArticle> => {
-	const cleanedUrl = url.replace(/\/Article\//, ''); // Remove /Article/ prefix if present
-	try {
-		const response = await fetch(`${cleanedUrl}.json?dcr`);
-		if (!response.ok) {
-			throw new Error(
-				`Failed to fetch article JSON from ${cleanedUrl}: ${response.statusText}`,
-			);
-		}
-		return validateAsFEArticle(await response.json());
-	} catch (error) {
-		throw new Error(
-			`Error fetching or validating article JSON from ${cleanedUrl}: ${
-				error instanceof Error ? error.message : String(error)
-			}`,
-		);
-	}
-};
 
 /**
  * Loads a page in Playwright and centralises setup
@@ -78,8 +29,10 @@ const loadPage = async ({
 	region = 'GB',
 	preventSupportBanner = true,
 	useSecure = false,
-	overrides = {},
-}: LoadPageParams): Promise<void> => {
+}: {
+	page: Page;
+	path: string;
+} & LoadPageOptions): Promise<void> => {
 	await page.addInitScript(
 		(args) => {
 			// Set the geo region, defaults to GB
@@ -100,84 +53,38 @@ const loadPage = async ({
 			preventSupportBanner,
 		},
 	);
+	// Add an adtest query param to ensure we get a fixed test ad
+	const paramsString = queryParamsOn
+		? `?${new URLSearchParams({
+				adtest: 'fixed-puppies-ci',
+				...queryParams,
+		  }).toString()}`
+		: '';
 
-	const url = getUrl({
-		path,
-		useSecure,
-		queryParamsOn,
-		queryParams,
-		fragment,
-	});
+	// Remove Link prefetch headers from the response headers to prevent Playwright from throwing errors.
+	// For some unknown reason when prefetch links are incorrect (e.g. when run from the secure domain r.thegulocal.com)
+	// they cause the regular requests initiated by the script elements to error and fail to load.
+	// void page.route(`**${path}**`, async (route) => {
+	// 	const response = await route.fetch();
+	// 	const body = await response.body();
+	// 	await route.fulfill({
+	// 		response,
+	// 		body,
+	// 		headers: {
+	// 			...response.headers(),
+	// 			Link: '',
+	// 		},
+	// 	});
+	// });
 
-	const hasOverrides =
-		overrides.configOverrides ??
-		overrides.switchOverrides ??
-		overrides.article;
-
-	if (hasOverrides) {
-		console.log('!!! Overrides provided, loading page normally');
-
-		// If we have overrides, but no article JSON we fetch it
-		const article = await (overrides.article
-			? Promise.resolve(overrides.article)
-			: getArticleJson(path));
-
-		// We apply the overrides to the article config and switches and then send the
-		// modified JSON payload to DCR
-		const postData = {
-			...article,
-			config: {
-				...article.config,
-				...overrides.configOverrides,
-				switches: {
-					...article.config.switches,
-					...overrides.switchOverrides,
-				},
-			},
-		};
-
-		void page.route(url, async (route) => {
-			// To override config or switches we make a POST request with the modified article JSON
-			const modifiedResponse = await route.fetch({
-				url: `${getOrigin(useSecure)}/Article`,
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				postData,
-			});
-			const body = await modifiedResponse.body();
-			// Remove Link prefetch headers from the response headers to prevent Playwright from throwing errors.
-			// For some unknown reason prefetch links fail when they don't match the host (e.g. when run from the secure domain r.thegulocal.com)
-			// They then cause the corresponding regular requests initiated by the script elements to error and fail to load.
-			await route.fulfill({
-				body,
-				headers: {
-					...modifiedResponse.headers(),
-					Link: '',
-				},
-			});
-		});
-
-		await page.goto(url, { waitUntil });
-	} else {
-		console.log('!!! No overrides provided, loading page normally');
-		// void page.route(url, async (route) => {
-		// 	const modifiedResponse = await route.fetch({ url });
-		// 	const body = await modifiedResponse.body();
-		// 	await route.fulfill({
-		// 		body,
-		// 		headers: {
-		// 			...modifiedResponse.headers(),
-		// 			Link: '',
-		// 		},
-		// 	});
-		// });
-
-		// The default Playwright waitUntil: 'load' ensures all requests have completed
-		// Use 'domcontentloaded' to speed up tests and prevent hanging requests from timing out tests
-		await page.goto(url, { waitUntil });
-	}
+	// The default Playwright waitUntil: 'load' ensures all requests have completed
+	// Use 'domcontentloaded' to speed up tests and prevent hanging requests from timing out tests
+	await page.goto(
+		`${getOrigin(useSecure)}${path}${paramsString}${fragment ?? ''}`,
+		{
+			waitUntil,
+		},
+	);
 };
 
 /**
@@ -193,13 +100,31 @@ const loadPageWithOverrides = async (
 	},
 	options?: LoadPageOptions,
 ): Promise<void> => {
-	await loadPage({
-		page,
-		path: '/Article',
-		queryParamsOn: false,
-		...options,
-		overrides: { ...overrides, article },
-	});
+	const path = `/Article`;
+	await page.route(
+		`${getOrigin(options?.useSecure)}${path}`,
+		async (route) => {
+			const postData = {
+				...article,
+				config: {
+					...article.config,
+					...overrides?.configOverrides,
+					switches: {
+						...article.config.switches,
+						...overrides?.switchOverrides,
+					},
+				},
+			};
+			await route.continue({
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				postData,
+			});
+		},
+	);
+	await loadPage({ page, path, queryParamsOn: false, ...options });
 };
 
 /**
