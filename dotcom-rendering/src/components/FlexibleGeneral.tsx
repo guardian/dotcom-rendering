@@ -99,6 +99,8 @@ const ImmersiveCardLayout = ({
 	imageLoading: Loading;
 	collectionId: number;
 }) => {
+	const isLoopingVideo = card.mainMedia?.type === 'LoopVideo';
+
 	return (
 		<UL padBottom={true}>
 			<LI key={card.url} padSides={true}>
@@ -113,7 +115,7 @@ const ImmersiveCardLayout = ({
 					kickerText={card.kickerText}
 					showClock={false}
 					image={card.image}
-					canPlayInline={true}
+					canPlayInline={isLoopingVideo ? false : true}
 					starRating={card.starRating}
 					dataLinkName={card.dataLinkName}
 					discussionApiUrl={card.discussionApiUrl}

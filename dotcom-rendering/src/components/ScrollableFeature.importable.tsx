@@ -38,6 +38,7 @@ export const ScrollableFeature = ({
 			visibleCardsOnTablet={3}
 		>
 			{trails.map((card) => {
+				const isLoopingVideo = card.mainMedia?.type === 'LoopVideo';
 				return (
 					<ScrollableCarousel.Item key={card.url}>
 						<FeatureCard
@@ -54,7 +55,7 @@ export const ScrollableFeature = ({
 							}
 							showClock={false}
 							image={card.image}
-							canPlayInline={true}
+							canPlayInline={isLoopingVideo ? false : true}
 							starRating={card.starRating}
 							dataLinkName={card.dataLinkName}
 							discussionApiUrl={card.discussionApiUrl}
