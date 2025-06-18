@@ -9,6 +9,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { leftColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { defaultFormats } from '../../.storybook/decorators/splitThemeDecorator';
 import { allModes } from '../../.storybook/modes';
+import { GalleryLabs as GalleryLabsFixture } from '../../fixtures/generated/fe-articles/GalleryLabs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -17,6 +18,7 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import { palette } from '../palette';
+import { enhanceArticleType } from '../types/article';
 import { ArticleMeta } from './ArticleMeta.web';
 
 const meta = {
@@ -346,6 +348,40 @@ export const GalleryDesign = {
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Gallery,
 		}),
+		colourSchemeBackground: {
+			light: palette('--article-background'),
+			dark: palette('--article-background'),
+		},
+	},
+	decorators: [leftColumnDecorator],
+} satisfies Story;
+
+const webArticle = enhanceArticleType(GalleryLabsFixture, 'Web');
+
+export const GalleryLabsWithBranding = {
+	args: {
+		branding:
+			webArticle.frontendData.commercialProperties[
+				webArticle.frontendData.editionId
+			].branding,
+		format: {
+			design: webArticle.design,
+			display: webArticle.display,
+			theme: webArticle.theme,
+		},
+		pageId: webArticle.frontendData.pageId,
+		webTitle: webArticle.frontendData.webTitle,
+		byline: webArticle.frontendData.byline,
+		tags: webArticle.frontendData.tags,
+		primaryDateline: webArticle.frontendData.webPublicationDateDisplay,
+		secondaryDateline:
+			webArticle.frontendData.webPublicationSecondaryDateDisplay,
+		isCommentable: webArticle.frontendData.isCommentable,
+		discussionApiUrl: webArticle.frontendData.config.discussionApiUrl,
+		shortUrlId: webArticle.frontendData.config.shortUrlId,
+	},
+
+	parameters: {
 		colourSchemeBackground: {
 			light: palette('--article-background'),
 			dark: palette('--article-background'),
