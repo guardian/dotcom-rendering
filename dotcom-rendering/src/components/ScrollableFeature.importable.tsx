@@ -14,6 +14,7 @@ type Props = {
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
 	collectionId: number;
+	isInHideTrailsAbTest?: boolean;
 };
 
 /**
@@ -30,6 +31,7 @@ export const ScrollableFeature = ({
 	imageLoading,
 	aspectRatio,
 	collectionId,
+	isInHideTrailsAbTest,
 }: Props) => {
 	return (
 		<ScrollableCarousel
@@ -78,6 +80,7 @@ export const ScrollableFeature = ({
 							isNewsletter={card.isNewsletter}
 							showQuotes={card.showQuotedHeadline}
 							showVideo={card.showVideo}
+							isInHideTrailsAbTest={isInHideTrailsAbTest}
 						/>
 					</ScrollableCarousel.Item>
 				);

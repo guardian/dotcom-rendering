@@ -29,6 +29,7 @@ type Props = {
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
+	isInHideTrailsAbTest?: boolean;
 };
 
 type BoostProperties = {
@@ -134,6 +135,7 @@ export const OneCardLayout = ({
 	isLastRow,
 	isFirstRow,
 	containerLevel,
+	isInHideTrailsAbTest,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -144,6 +146,7 @@ export const OneCardLayout = ({
 	isLastRow: boolean;
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
+	isInHideTrailsAbTest?: boolean;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -163,6 +166,7 @@ export const OneCardLayout = ({
 		!card.image,
 		card.showLivePlayable,
 	);
+
 	return (
 		<UL padBottom={!isLastRow} hasLargeSpacing={!isLastRow}>
 			<LI padSides={true}>
@@ -194,6 +198,7 @@ export const OneCardLayout = ({
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
+					isInHideTrailsAbTest={isInHideTrailsAbTest}
 				/>
 			</LI>
 		</UL>
@@ -221,6 +226,7 @@ const TwoCardOrFourCardLayout = ({
 	aspectRatio,
 	isFirstRow,
 	containerLevel,
+	isInHideTrailsAbTest,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -231,6 +237,7 @@ const TwoCardOrFourCardLayout = ({
 	aspectRatio: AspectRatio;
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
+	isInHideTrailsAbTest?: boolean;
 }) => {
 	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
@@ -271,6 +278,7 @@ const TwoCardOrFourCardLayout = ({
 									!isMediaCard(card.format))
 							}
 							canPlayInline={false}
+							isInHideTrailsAbTest={isInHideTrailsAbTest}
 						/>
 					</LI>
 				);
@@ -287,6 +295,7 @@ export const FlexibleSpecial = ({
 	imageLoading,
 	aspectRatio,
 	containerLevel = 'Primary',
+	isInHideTrailsAbTest,
 }: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1);
 	const splash = [...groupedTrails.standard].slice(0, 1);
@@ -304,6 +313,7 @@ export const FlexibleSpecial = ({
 				isFirstRow={true}
 				isLastRow={splash.length === 0 && cards.length === 0}
 				containerLevel={containerLevel}
+				isInHideTrailsAbTest={isInHideTrailsAbTest}
 			/>
 			<OneCardLayout
 				cards={splash}
@@ -315,6 +325,7 @@ export const FlexibleSpecial = ({
 				isLastRow={cards.length === 0}
 				isFirstRow={!isNonEmptyArray(snaps)}
 				containerLevel={containerLevel}
+				isInHideTrailsAbTest={isInHideTrailsAbTest}
 			/>
 			<TwoCardOrFourCardLayout
 				cards={cards}
@@ -325,6 +336,7 @@ export const FlexibleSpecial = ({
 				aspectRatio={aspectRatio}
 				isFirstRow={!isNonEmptyArray(snaps) && !isNonEmptyArray(splash)}
 				containerLevel={containerLevel}
+				isInHideTrailsAbTest={isInHideTrailsAbTest}
 			/>
 		</>
 	);

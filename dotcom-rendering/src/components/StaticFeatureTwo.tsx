@@ -16,6 +16,7 @@ type Props = {
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
 	collectionId: number;
+	isInHideTrailsAbTest?: boolean;
 };
 
 /**
@@ -31,6 +32,7 @@ export const StaticFeatureTwo = ({
 	imageLoading,
 	aspectRatio,
 	collectionId,
+	isInHideTrailsAbTest,
 }: Props) => {
 	const cards = trails.slice(0, 2);
 	return (
@@ -79,6 +81,7 @@ export const StaticFeatureTwo = ({
 							isNewsletter={card.isNewsletter}
 							showQuotes={card.showQuotedHeadline}
 							showVideo={card.showVideo}
+							isInHideTrailsAbTest={isInHideTrailsAbTest}
 						/>
 					</LI>
 				);

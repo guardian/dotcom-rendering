@@ -141,6 +141,7 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
+	isInHideTrailsAbTest?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -407,6 +408,7 @@ export const Card = ({
 	showTopBarMobile = true,
 	trailTextSize,
 	showKickerImage = false,
+	isInHideTrailsAbTest = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -1173,6 +1175,7 @@ export const Card = ({
 									trailTextSize={trailTextSize}
 									padTop={headlinePosition === 'inner'}
 									hideUntil={hideTrailTextUntil()}
+									isInHideTrailsAbTest={isInHideTrailsAbTest}
 								/>
 							)}
 
