@@ -1,9 +1,20 @@
 import type { Page } from '@playwright/test';
-import { PORT } from 'playwright.config';
+import { ORIGIN, ORIGIN_SECURE } from '../../playwright.config';
 import type { FEArticle } from '../../src/frontend/feArticle';
 import { validateAsFEArticle } from '../../src/model/validate';
 
-const BASE_URL = `http://localhost:${PORT}`;
+type LoadPageOptions = {
+	queryParams?: Record<string, string>;
+	queryParamsOn?: boolean;
+	fragment?: `#${string}`;
+	waitUntil?: 'domcontentloaded' | 'load';
+	region?: 'GB' | 'US' | 'AU' | 'INT';
+	preventSupportBanner?: boolean;
+	useSecure?: boolean;
+};
+
+const getOrigin = (useSecure?: boolean): string =>
+	useSecure ? ORIGIN_SECURE : ORIGIN;
 
 /**
  * Loads a page in Playwright and centralises setup
@@ -17,16 +28,11 @@ const loadPage = async ({
 	waitUntil = 'domcontentloaded',
 	region = 'GB',
 	preventSupportBanner = true,
+	useSecure = false,
 }: {
 	page: Page;
 	path: string;
-	queryParams?: Record<string, string>;
-	queryParamsOn?: boolean;
-	fragment?: `#${string}`;
-	waitUntil?: 'domcontentloaded' | 'load';
-	region?: 'GB' | 'US' | 'AU' | 'INT';
-	preventSupportBanner?: boolean;
-}): Promise<void> => {
+} & LoadPageOptions): Promise<void> => {
 	await page.addInitScript(
 		(args) => {
 			// Set the geo region, defaults to GB
@@ -57,9 +63,12 @@ const loadPage = async ({
 
 	// The default Playwright waitUntil: 'load' ensures all requests have completed
 	// Use 'domcontentloaded' to speed up tests and prevent hanging requests from timing out tests
-	await page.goto(`${BASE_URL}${path}${paramsString}${fragment ?? ''}`, {
-		waitUntil,
-	});
+	await page.goto(
+		`${getOrigin(useSecure)}${path}${paramsString}${fragment ?? ''}`,
+		{
+			waitUntil,
+		},
+	);
 };
 
 /**
@@ -73,33 +82,37 @@ const loadPageWithOverrides = async (
 		configOverrides?: Record<string, unknown>;
 		switchOverrides?: Record<string, unknown>;
 	},
+	options?: LoadPageOptions,
 ): Promise<void> => {
 	const path = `/Article`;
-	await page.route(`${BASE_URL}${path}`, async (route) => {
-		const postData = {
-			...article,
-			config: {
-				...article.config,
-				...overrides?.configOverrides,
-				switches: {
-					...article.config.switches,
-					...overrides?.switchOverrides,
+	await page.route(
+		`${getOrigin(options?.useSecure)}${path}`,
+		async (route) => {
+			const postData = {
+				...article,
+				config: {
+					...article.config,
+					...overrides?.configOverrides,
+					switches: {
+						...article.config.switches,
+						...overrides?.switchOverrides,
+					},
 				},
-			},
-		};
-		await route.continue({
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			postData,
-		});
-	});
-	await loadPage({ page, path, queryParamsOn: false });
+			};
+			await route.continue({
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				postData,
+			});
+		},
+	);
+	await loadPage({ page, path, queryParamsOn: false, ...options });
 };
 
 /**
- * Fetch the page json from PROD then load it as a POST with overrides
+ * Fetch the page json from the provided URL then load it locally as a POST with overrides
  */
 const fetchAndloadPageWithOverrides = async (
 	page: Page,
@@ -108,21 +121,22 @@ const fetchAndloadPageWithOverrides = async (
 		configOverrides?: Record<string, unknown>;
 		switchOverrides?: Record<string, unknown>;
 	},
+	options?: LoadPageOptions,
 ): Promise<void> => {
 	const article = validateAsFEArticle(
 		await fetch(`${url}.json?dcr`).then((res) => res.json()),
 	);
-	await loadPageWithOverrides(page, article, {
-		configOverrides: overrides?.configOverrides,
-		switchOverrides: {
-			...overrides?.switchOverrides,
+	await loadPageWithOverrides(
+		page,
+		article,
+		{
+			configOverrides: overrides?.configOverrides,
+			switchOverrides: {
+				...overrides?.switchOverrides,
+			},
 		},
-	});
+		options,
+	);
 };
 
-export {
-	BASE_URL,
-	fetchAndloadPageWithOverrides,
-	loadPage,
-	loadPageWithOverrides,
-};
+export { fetchAndloadPageWithOverrides, loadPage, loadPageWithOverrides };
