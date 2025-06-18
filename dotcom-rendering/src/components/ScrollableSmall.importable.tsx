@@ -66,8 +66,8 @@ export const ScrollableSmall = ({
 	return (
 		<ScrollableCarousel
 			carouselLength={Math.ceil(trails.length / 2)}
-			visibleCardsOnMobile={1}
-			visibleCardsOnTablet={2}
+			visibleCarouselSlidesOnMobile={1}
+			visibleCarouselSlidesOnTablet={2}
 			sectionId={sectionId}
 			shouldStackCards={{ desktop: trails.length > 2, mobile: true }}
 			gapSizes={{ column: 'large', row: 'medium' }}
