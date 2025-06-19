@@ -8,6 +8,7 @@ import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
+import { FEContainer } from '../frontend/feFront';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -17,7 +18,7 @@ type Props = {
 	absoluteServerTimes: boolean;
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
-	containerLevel?: DCRContainerLevel;
+	containerType?: FEContainer;
 };
 
 export const FallbackContainer = ({
@@ -28,7 +29,7 @@ export const FallbackContainer = ({
 	imageLoading,
 	showImage = true,
 	aspectRatio,
-	containerLevel = 'Primary',
+	containerType,
 }: Props) => {
 	const groupedCards: DCRFrontCard[][] = [];
 	const totalCardsInARow = 4;
@@ -36,6 +37,9 @@ export const FallbackContainer = ({
 		const row = trails.slice(i, i + totalCardsInARow);
 		groupedCards.push(row);
 	}
+	console.warn(
+		`${containerType} container type is deprecated. Please update this container type in the Fronts Config tool.`,
+	);
 
 	return (
 		<>
@@ -52,7 +56,7 @@ export const FallbackContainer = ({
 							<FrontCard
 								trail={card}
 								containerPalette={containerPalette}
-								containerType="fallback/container"
+								containerType={containerType}
 								showAge={showAge}
 								absoluteServerTimes={absoluteServerTimes}
 								image={showImage ? card.image : undefined}

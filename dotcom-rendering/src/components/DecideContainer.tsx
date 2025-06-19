@@ -11,6 +11,7 @@ import { DynamicFast } from './DynamicFast';
 import { DynamicPackage } from './DynamicPackage';
 import { DynamicSlow } from './DynamicSlow';
 import { DynamicSlowMPU } from './DynamicSlowMPU';
+import { FallbackContainer } from './FallbackContainer';
 import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
 import { FixedMediumFastXI } from './FixedMediumFastXI';
 import { FixedMediumFastXII } from './FixedMediumFastXII';
@@ -79,16 +80,6 @@ export const DecideContainer = ({
 		case 'dynamic/slow':
 			return (
 				<DynamicSlow
-					groupedTrails={groupedTrails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'dynamic/slow-mpu':
-			return (
-				<DynamicSlowMPU
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
@@ -166,16 +157,6 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 				/>
 			);
-		case 'fixed/small/slow-V-half':
-			return (
-				<FixedSmallSlowVHalf
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
-					imageLoading={imageLoading}
-				/>
-			);
 		case 'fixed/medium/slow-VI':
 			return (
 				<FixedMediumSlowVI
@@ -236,8 +217,6 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 				/>
 			);
-		case 'nav/list':
-			return <NavList trails={trails} showImage={false} />;
 		case 'nav/media-list':
 			return <NavList trails={trails} showImage={true} />;
 		case 'scrollable/highlights':
@@ -335,6 +314,21 @@ export const DecideContainer = ({
 					collectionId={collectionId}
 				/>
 			);
+		case 'fixed/small/slow-V-half':
+		case 'fixed/video':
+		case 'dynamic/slow-mpu':
+		case 'nav/list':
+			return (
+				<FallbackContainer
+					trails={trails}
+					containerPalette={containerPalette}
+					absoluteServerTimes={absoluteServerTimes}
+					imageLoading={imageLoading}
+					aspectRatio={'5:4'}
+					containerType={containerType}
+				/>
+			);
+
 		default:
 			return <p>{containerType} is not yet supported</p>;
 	}
