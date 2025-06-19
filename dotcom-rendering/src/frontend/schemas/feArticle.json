@@ -698,6 +698,9 @@
                     "$ref": "#/definitions/NewsletterSignupBlockElement"
                 },
                 {
+                    "$ref": "#/definitions/MarketingEmailSignupBlockElement"
+                },
+                {
                     "$ref": "#/definitions/ProfileAtomBlockElement"
                 },
                 {
@@ -2880,6 +2883,44 @@
             "required": [
                 "_type",
                 "newsletter"
+            ]
+        },
+        "MarketingEmailSignupBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.MarketingEmailSignupBlockElement"
+                },
+                "marketingEmail": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "promotionTagId": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "description",
+                        "id",
+                        "name"
+                    ]
+                },
+                "elementId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "marketingEmail"
             ]
         },
         "ProfileAtomBlockElement": {

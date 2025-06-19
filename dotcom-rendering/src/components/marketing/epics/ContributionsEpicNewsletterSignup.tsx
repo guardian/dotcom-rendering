@@ -29,7 +29,7 @@ export const ContributionsEpicNewsletterSignup = ({
 					variant: tracking.abTestVariant,
 				}}
 			/>
-			<NewsletterPrivacyMessage />
+			<NewsletterPrivacyMessage emailType="newsletter" />
 		</div>
 	);
 };

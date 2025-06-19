@@ -385,7 +385,7 @@ export const NewsletterSignupLayout = ({
 											}
 										/>
 									</Island>
-									<NewsletterPrivacyMessage />
+									<NewsletterPrivacyMessage emailType="newsletter" />
 								</>
 							)}
 						</Column>
