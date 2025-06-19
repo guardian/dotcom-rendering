@@ -32,6 +32,7 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
+	isInHideTrailsAbTest?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -92,12 +93,14 @@ const ImmersiveCardLayout = ({
 	absoluteServerTimes,
 	imageLoading,
 	collectionId,
+	isInHideTrailsAbTest,
 }: {
 	card: DCRFrontCard;
 	containerPalette?: DCRContainerPalette;
 	absoluteServerTimes: boolean;
 	imageLoading: Loading;
 	collectionId: number;
+	isInHideTrailsAbTest?: boolean;
 }) => {
 	const isLoopingVideo = card.mainMedia?.type === 'LoopVideo';
 
@@ -134,6 +137,7 @@ const ImmersiveCardLayout = ({
 					supportingContent={card.supportingContent}
 					isImmersive={true}
 					showVideo={card.showVideo}
+					isInHideTrailsAbTest={isInHideTrailsAbTest}
 				/>
 			</LI>
 		</UL>
@@ -229,7 +233,7 @@ const decideSplashCardProperties = (
 	}
 };
 
-export const SplashCardLayout = ({
+const SplashCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
@@ -239,6 +243,7 @@ export const SplashCardLayout = ({
 	isLastRow,
 	containerLevel,
 	collectionId,
+	isInHideTrailsAbTest,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -249,6 +254,7 @@ export const SplashCardLayout = ({
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
+	isInHideTrailsAbTest?: boolean;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -262,6 +268,7 @@ export const SplashCardLayout = ({
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
+				isInHideTrailsAbTest={isInHideTrailsAbTest}
 			/>
 		);
 	}
@@ -329,6 +336,7 @@ export const SplashCardLayout = ({
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
+					isInHideTrailsAbTest={isInHideTrailsAbTest}
 				/>
 			</LI>
 		</UL>
@@ -391,6 +399,7 @@ const FullWidthCardLayout = ({
 	isLastRow,
 	containerLevel,
 	collectionId,
+	isInHideTrailsAbTest,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -402,6 +411,7 @@ const FullWidthCardLayout = ({
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
+	isInHideTrailsAbTest?: boolean;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -427,6 +437,7 @@ const FullWidthCardLayout = ({
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
+				isInHideTrailsAbTest={isInHideTrailsAbTest}
 			/>
 		);
 	}
@@ -474,6 +485,7 @@ const FullWidthCardLayout = ({
 					liveUpdatesPosition={liveUpdatesPosition}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
+					isInHideTrailsAbTest={isInHideTrailsAbTest}
 				/>
 			</LI>
 		</UL>
@@ -491,6 +503,7 @@ const HalfWidthCardLayout = ({
 	aspectRatio,
 	isLastRow,
 	containerLevel,
+	isInHideTrailsAbTest,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -502,6 +515,7 @@ const HalfWidthCardLayout = ({
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
+	isInHideTrailsAbTest?: boolean;
 }) => {
 	if (cards.length === 0) return null;
 
@@ -555,6 +569,7 @@ const HalfWidthCardLayout = ({
 							trailText={undefined}
 							headlineSizes={undefined}
 							canPlayInline={false}
+							isInHideTrailsAbTest={isInHideTrailsAbTest}
 						/>
 					</LI>
 				);
@@ -572,6 +587,7 @@ export const FlexibleGeneral = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
+	isInHideTrailsAbTest,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1);
 	const cards = [...groupedTrails.standard].slice(0, 19);
@@ -590,6 +606,7 @@ export const FlexibleGeneral = ({
 					isLastRow={cards.length === 0}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
+					isInHideTrailsAbTest={isInHideTrailsAbTest}
 				/>
 			)}
 
@@ -608,6 +625,7 @@ export const FlexibleGeneral = ({
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								collectionId={collectionId}
+								isInHideTrailsAbTest={isInHideTrailsAbTest}
 							/>
 						);
 
@@ -626,6 +644,7 @@ export const FlexibleGeneral = ({
 								aspectRatio={aspectRatio}
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
+								isInHideTrailsAbTest={isInHideTrailsAbTest}
 							/>
 						);
 				}
