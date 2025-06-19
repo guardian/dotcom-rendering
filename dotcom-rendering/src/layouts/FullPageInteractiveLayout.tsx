@@ -7,7 +7,7 @@ import {
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe';
+import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe.importable';
 import { InteractivesNativePlatformWrapper } from '../components/InteractivesNativePlatformWrapper.importable';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
