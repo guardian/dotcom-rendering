@@ -24,6 +24,7 @@ import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe';
 import { InteractivesNativePlatformWrapper } from '../components/InteractivesNativePlatformWrapper.importable';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
@@ -250,6 +251,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				<>
 					<Island priority="critical">
 						<InteractivesNativePlatformWrapper />
+					</Island>
+					<Island priority="critical">
+						<InteractivesDisableArticleSwipe />
 					</Island>
 					<Global styles={temporaryBodyCopyColourOverride} />
 				</>
