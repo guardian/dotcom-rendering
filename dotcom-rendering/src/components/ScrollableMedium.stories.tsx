@@ -93,7 +93,7 @@ const containerPalettes = [
 	'SombreAltPalette',
 	'SpecialReportAltPalette',
 	'Branded',
-] as const satisfies readonly Omit<DCRContainerPalette, 'PodcastPalette'>[];
+] as const satisfies readonly DCRContainerPalette[];
 
 export const WithSpecialPaletteVariations = {
 	parameters: {

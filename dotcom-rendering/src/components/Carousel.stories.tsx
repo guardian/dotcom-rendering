@@ -653,26 +653,3 @@ AllCards.storyName = 'Carousel with all card types';
 AllCards.decorators = [
 	splitTheme([defaultFormat], { orientation: 'vertical' }),
 ];
-
-export const FrontCarousel = () => (
-	<>
-		The front carousel was not included in an onwards content redesign, so
-		looks a bit different to the others.
-		<Section fullWidth={true}>
-			<Carousel
-				isOnwardContent={false}
-				heading="More on this story"
-				trails={trails}
-				onwardsSource="more-on-this-story"
-				leftColSize="compact"
-				url={'https://www.theguardian.com'}
-				discussionApiUrl={discussionApiUrl}
-				palette="PodcastPalette"
-				absoluteServerTimes={true}
-				renderingTarget="Web"
-			/>
-		</Section>
-	</>
-);
-
-FrontCarousel.storyName = 'Front carousel';
