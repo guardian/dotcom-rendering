@@ -7,26 +7,16 @@ export const InteractivesDisableArticleSwipe = () => {
 		getInteractionClient()
 			.disableArticleSwipe(true)
 			.catch((error) => {
-				log('dotcom', 'disableArticleSwipe(true) failed', error);
-			});
-	};
-
-	const onTouchEnd = () => {
-		getInteractionClient()
-			.disableArticleSwipe(false)
-			.catch((error) => {
-				log('dotcom', 'disableArticleSwipe(false) failed', error);
+				log('dotcom', 'disableArticleSwipe failed', error);
 			});
 	};
 	useEffect(() => {
 		document.addEventListener('touchstart', onTouchStart, {
 			passive: true,
 		});
-		document.addEventListener('touchend', onTouchEnd, { passive: true });
 
 		return () => {
 			document.removeEventListener('touchstart', onTouchStart);
-			document.removeEventListener('touchend', onTouchEnd);
 		};
 	}, []);
 	return null;
