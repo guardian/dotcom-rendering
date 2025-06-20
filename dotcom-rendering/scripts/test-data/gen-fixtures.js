@@ -39,6 +39,10 @@ const articles = [
 		url: 'https://www.theguardian.com/artanddesign/gallery/2025/jun/06/the-week-around-the-world-in-20-pictures',
 	},
 	{
+		name: 'GalleryLabs',
+		url: 'https://www.theguardian.com/uncommon-holidays/gallery/2025/apr/28/mysterious-islands-medieval-castles-monets-gardens-must-see-places-normandy-in-pictures',
+	},
+	{
 		name: 'Audio',
 		url: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 	},
