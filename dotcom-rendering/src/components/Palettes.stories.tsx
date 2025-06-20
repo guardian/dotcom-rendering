@@ -241,26 +241,6 @@ export const BrandedPalette = {
 	),
 } satisfies Story;
 
-export const MediaPalette = {
-	render: () => (
-		<FrontSection
-			title="Media Palette"
-			containerPalette="MediaPalette"
-			showDateHeader={true}
-			editionId={'UK'}
-			discussionApiUrl={discussionApiUrl}
-		>
-			<DynamicFast
-				groupedTrails={groupedTrails}
-				containerPalette="MediaPalette"
-				showAge={true}
-				absoluteServerTimes={true}
-				imageLoading="eager"
-			/>
-		</FrontSection>
-	),
-} satisfies Story;
-
 export const PodcastPalette = {
 	render: () => (
 		<FrontSection

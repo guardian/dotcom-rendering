@@ -59,10 +59,7 @@ const containerPalettes = [
 	'SombreAltPalette',
 	'SpecialReportAltPalette',
 	'Branded',
-] as const satisfies readonly Omit<
-	DCRContainerPalette,
-	'MediaPalette' | 'PodcastPalette'
->[];
+] as const satisfies readonly Omit<DCRContainerPalette, 'PodcastPalette'>[];
 
 const audioCards = audioTrails.slice(0, 2);
 export const Audio = {
