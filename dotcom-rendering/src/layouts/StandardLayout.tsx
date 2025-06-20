@@ -12,6 +12,7 @@ import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsEpic } from '../components/AppsEpic.importable';
 import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppSyncEvent } from '../components/AppSyncEvent.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -397,6 +398,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		<>
 			{isWeb && (
 				<div data-print-layout="hide" id="bannerandheader">
+					<Island priority="critical">
+						<AppSyncEvent />
+					</Island>
 					{renderAds && (
 						<Stuck>
 							<Section
