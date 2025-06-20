@@ -857,7 +857,6 @@ export const renderElement = ({
 						enableAds={true}
 						iconSizeOnDesktop="large"
 						iconSizeOnMobile="large"
-						showTextOverlay={false}
 						hidePillOnMobile={false}
 					/>
 				</Island>

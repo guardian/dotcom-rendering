@@ -17,11 +17,7 @@ import { useIsHorizontalScrollingSupported } from '../lib/useIsHorizontalScrolli
 import { palette as themePalette } from '../palette';
 import type { Branding } from '../types/branding';
 import type { StarRating } from '../types/content';
-import type {
-	DCRContainerPalette,
-	DCRContainerType,
-	DCRFrontImage,
-} from '../types/front';
+import type { DCRContainerPalette, DCRFrontImage } from '../types/front';
 import type { LeftColSize } from '../types/layout';
 import type { MainMedia } from '../types/mainMedia';
 import type { OnwardsSource } from '../types/onwards';
@@ -54,7 +50,6 @@ type ArticleProps = Props & {
 
 type FrontProps = Props & {
 	palette: DCRContainerPalette;
-	containerType?: DCRContainerType;
 	hasPageSkin?: boolean;
 	isOnwardContent?: false;
 };
@@ -149,11 +144,6 @@ const containerMargins = css`
 	}
 `;
 
-const videoContainerMargins = css`
-	margin-bottom: 0;
-	min-height: 0;
-`;
-
 const containerMarginsFromLeftCol = css`
 	${from.leftCol} {
 		margin-left: -1px;
@@ -167,10 +157,6 @@ const containerStyles = css`
 	flex-direction: column;
 	position: relative;
 	overflow: hidden; /* Needed for scrolling to work */
-`;
-
-const videoContainerHeight = css`
-	min-height: 0;
 `;
 
 const carouselStyle = css`
@@ -225,32 +211,19 @@ const activeDotStyles = css`
 	}
 `;
 
-const adjustNumberOfDotsStyle = (
-	index: number,
-	totalStories: number,
-	containerType?: DCRContainerType,
-) => {
-	switch (containerType) {
-		case 'fixed/video':
-			return css`
-				display: ${index >= totalStories ? 'none' : 'auto'};
-			`;
-		default:
-			return css`
-				${from.phablet} {
-					display: ${index >= totalStories - 1 ? 'none' : 'auto'};
-				}
-
-				${from.tablet} {
-					display: ${index >= totalStories - 2 ? 'none' : 'auto'};
-				}
-
-				${from.desktop} {
-					display: ${index >= totalStories - 3 ? 'none' : 'auto'};
-				}
-			`;
+const adjustNumberOfDotsStyle = (index: number, totalStories: number) => css`
+	${from.phablet} {
+		display: ${index >= totalStories - 1 ? 'none' : 'auto'};
 	}
-};
+
+	${from.tablet} {
+		display: ${index >= totalStories - 2 ? 'none' : 'auto'};
+	}
+
+	${from.desktop} {
+		display: ${index >= totalStories - 3 ? 'none' : 'auto'};
+	}
+`;
 
 // Not used for buttons above carousel
 const buttonContainerStyle = css`
@@ -420,9 +393,8 @@ const titleStyle = (isCuratedContent?: boolean) => css`
 const getDataLinkNameCarouselButton = (
 	direction: string,
 	arrowName: string,
-	isVideoContainer: boolean,
 ): string => {
-	return `${isVideoContainer ? 'video-container' : arrowName}-${direction}`;
+	return `${arrowName}-${direction}`;
 };
 
 const Title = ({
@@ -477,7 +449,6 @@ type CarouselCardProps = {
 	branding?: Branding;
 	mainMedia?: MainMedia;
 	onwardsSource?: OnwardsSource;
-	containerType?: DCRContainerType;
 	starRating?: StarRating;
 };
 
@@ -494,7 +465,6 @@ const CarouselCard = ({
 	branding,
 	mainMedia,
 	onwardsSource,
-	containerType,
 	imageLoading,
 	discussionApiUrl,
 	isOnwardContent,
@@ -502,13 +472,12 @@ const CarouselCard = ({
 	starRating,
 	index,
 }: CarouselCardProps) => {
-	const isVideoContainer = containerType === 'fixed/video';
 	const cardImagePosition = isOnwardContent ? 'bottom' : 'top';
 
 	return (
 		<LI
 			percentage="25%"
-			showDivider={!isFirst && !isVideoContainer && !isOnwardContent}
+			showDivider={!isFirst && !isOnwardContent}
 			padSides={true}
 			padSidesOnMobile={true}
 			snapAlignStart={true}
@@ -528,7 +497,6 @@ const CarouselCard = ({
 				imageSize={'carousel'}
 				showClock={!isOnwardContent && true}
 				showAge={true}
-				pauseOffscreenVideo={isVideoContainer}
 				showQuotedHeadline={format.design === ArticleDesign.Comment}
 				dataLinkName={dataLinkName}
 				discussionId={discussionId}
@@ -536,9 +504,7 @@ const CarouselCard = ({
 				isExternalLink={false}
 				mainMedia={mainMedia}
 				minWidthInPixels={220}
-				canPlayInline={isVideoContainer}
 				onwardsSource={onwardsSource}
-				containerType={containerType}
 				imageLoading={imageLoading}
 				discussionApiUrl={discussionApiUrl}
 				isOnwardContent={isOnwardContent}
@@ -560,7 +526,6 @@ type HeaderAndNavProps = {
 	index: number;
 	goToIndex: (newIndex: number) => void;
 	isCuratedContent?: boolean;
-	containerType?: DCRContainerType;
 	url?: string;
 	isOnwardContent?: boolean;
 };
@@ -571,7 +536,6 @@ const HeaderAndNav = ({
 	index,
 	goToIndex,
 	isCuratedContent,
-	containerType,
 	url,
 	isOnwardContent,
 }: HeaderAndNavProps) => {
@@ -598,11 +562,7 @@ const HeaderAndNav = ({
 						css={[
 							dotStyle,
 							i === index && activeDotStyles,
-							adjustNumberOfDotsStyle(
-								i,
-								trails.length,
-								containerType,
-							),
+							adjustNumberOfDotsStyle(i, trails.length),
 						]}
 						data-link-name={`carousel-small-nav-dot-${i}`}
 					/>
@@ -621,7 +581,6 @@ const Header = ({
 	next,
 	arrowName,
 	isCuratedContent,
-	containerType,
 	hasPageSkin,
 	url,
 	isOnwardContent,
@@ -634,12 +593,10 @@ const Header = ({
 	next: () => void;
 	arrowName: string;
 	isCuratedContent: boolean;
-	containerType?: DCRContainerType;
 	hasPageSkin: boolean;
 	url?: string;
 	isOnwardContent?: boolean;
 }) => {
-	const isVideoContainer = containerType === 'fixed/video';
 	const header = (
 		<div css={headerRowStyles}>
 			<HeaderAndNav
@@ -648,7 +605,6 @@ const Header = ({
 				index={index}
 				isCuratedContent={isCuratedContent}
 				goToIndex={goToIndex}
-				containerType={containerType}
 				url={url}
 				isOnwardContent={isOnwardContent}
 			/>
@@ -661,7 +617,6 @@ const Header = ({
 					data-link-name={getDataLinkNameCarouselButton(
 						'prev',
 						arrowName,
-						isVideoContainer,
 					)}
 				>
 					<SvgChevronLeftSingle />
@@ -672,16 +627,11 @@ const Header = ({
 					aria-label="Move carousel forwards"
 					css={[
 						buttonStyle,
-						nextButtonStyle(
-							index,
-							trails.length,
-							isVideoContainer ? 1 : 4,
-						),
+						nextButtonStyle(index, trails.length, 4),
 					]}
 					data-link-name={getDataLinkNameCarouselButton(
 						'next',
 						arrowName,
-						isVideoContainer,
 					)}
 				>
 					<SvgChevronRightSingle />
@@ -709,7 +659,6 @@ const InlineChevrons = ({
 	prev,
 	next,
 	arrowName,
-	isVideoContainer,
 	leftColSize,
 	hasPageSkin,
 }: {
@@ -718,7 +667,6 @@ const InlineChevrons = ({
 	prev: () => void;
 	next: () => void;
 	arrowName: string;
-	isVideoContainer: boolean;
 	leftColSize: LeftColSize;
 	hasPageSkin: boolean;
 }) => (
@@ -738,7 +686,6 @@ const InlineChevrons = ({
 				data-link-name={getDataLinkNameCarouselButton(
 					'prev',
 					arrowName,
-					isVideoContainer,
 				)}
 			>
 				<SvgChevronLeftSingle />
@@ -755,18 +702,10 @@ const InlineChevrons = ({
 				type="button"
 				onClick={next}
 				aria-label="Move carousel forwards"
-				css={[
-					buttonStyle,
-					nextButtonStyle(
-						index,
-						trails.length,
-						isVideoContainer ? 1 : 4,
-					),
-				]}
+				css={[buttonStyle, nextButtonStyle(index, trails.length, 4)]}
 				data-link-name={getDataLinkNameCarouselButton(
 					'next',
 					arrowName,
-					isVideoContainer,
 				)}
 			>
 				<SvgChevronRightSingle />
@@ -809,10 +748,6 @@ export const Carousel = ({
 	const arrowName = 'carousel-small-arrow';
 
 	const isCuratedContent = onwardsSource === 'curated-content';
-	const containerType =
-		'containerType' in props ? props.containerType : undefined;
-
-	const isVideoContainer = containerType === 'fixed/video';
 
 	const hasPageSkin = 'hasPageSkin' in props && (props.hasPageSkin ?? false);
 
@@ -930,7 +865,6 @@ export const Carousel = ({
 			<div
 				css={wrapperStyle(trails.length)}
 				data-link-name={formatAttrString(heading)}
-				data-component={isVideoContainer ? 'video-playlist' : undefined}
 			>
 				<LeftColumn
 					size={leftColSize}
@@ -952,7 +886,6 @@ export const Carousel = ({
 					prev={prev}
 					next={next}
 					arrowName={arrowName}
-					isVideoContainer={isVideoContainer}
 					leftColSize={leftColSize}
 					hasPageSkin={hasPageSkin}
 				/>
@@ -961,7 +894,6 @@ export const Carousel = ({
 						containerStyles,
 						containerMargins,
 						!hasPageSkin && containerMarginsFromLeftCol,
-						isVideoContainer && videoContainerMargins,
 					]}
 					data-component={onwardsSource}
 					data-link={formatAttrString(heading)}
@@ -975,16 +907,12 @@ export const Carousel = ({
 						next={next}
 						arrowName={arrowName}
 						isCuratedContent={isCuratedContent}
-						containerType={containerType}
 						hasPageSkin={hasPageSkin}
 						url={props.url}
 						isOnwardContent={isOnwardContent}
 					/>
 					<ul
-						css={[
-							carouselStyle,
-							isVideoContainer && videoContainerHeight,
-						]}
+						css={carouselStyle}
 						ref={carouselRef}
 						data-component={`carousel-small | maxIndex-${maxIndex}`}
 						data-heatphan-type="carousel"
@@ -1037,7 +965,6 @@ export const Carousel = ({
 									branding={branding}
 									mainMedia={mainMedia}
 									onwardsSource={onwardsSource}
-									containerType={containerType}
 									imageLoading={imageLoading}
 									discussionApiUrl={discussionApiUrl}
 									isOnwardContent={isOnwardContent}

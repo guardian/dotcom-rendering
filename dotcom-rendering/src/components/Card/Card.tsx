@@ -962,10 +962,6 @@ export const Card = ({
 												pauseOffscreenVideo={
 													pauseOffscreenVideo
 												}
-												showTextOverlay={
-													containerType ===
-													'fixed/video'
-												}
 												//** TODO: IMPROVE THIS MAPPING */
 												// image size defaults to small if not provided. However, if the headline size is large or greater, we want to assume the image is also large so that the play icon is correctly sized.
 												iconSizeOnDesktop={
@@ -1089,178 +1085,173 @@ export const Card = ({
 					</ImageWrapper>
 				)}
 
-				{containerType !== 'fixed/video' && (
-					<ContentWrapper
-						imageType={media?.type}
-						imageSize={imageSize}
-						isBetaContainer={isBetaContainer}
-						imagePositionOnDesktop={
-							image ? imagePositionOnDesktop : 'none'
-						}
-						imagePositionOnMobile={
-							image ? imagePositionOnMobile : 'none'
-						}
-						padContent={determinePadContent(
-							isMediaCardOrNewsletter,
-							isBetaContainer,
-							isOnwardContent,
-						)}
-						padRight={
-							!!isFlexSplash &&
-							image &&
-							imagePositionOnDesktop === 'right'
-						}
+				<ContentWrapper
+					imageType={media?.type}
+					imageSize={imageSize}
+					isBetaContainer={isBetaContainer}
+					imagePositionOnDesktop={
+						image ? imagePositionOnDesktop : 'none'
+					}
+					imagePositionOnMobile={
+						image ? imagePositionOnMobile : 'none'
+					}
+					padContent={determinePadContent(
+						isMediaCardOrNewsletter,
+						isBetaContainer,
+						isOnwardContent,
+					)}
+					padRight={
+						!!isFlexSplash &&
+						image &&
+						imagePositionOnDesktop === 'right'
+					}
+				>
+					{/* This div is needed to keep the headline and trail text justified at the start */}
+					<div
+						css={css`
+							position: relative;
+							display: flex;
+							flex-direction: column;
+							justify-content: flex-start;
+							flex-grow: 1;
+						`}
 					>
-						{/* This div is needed to keep the headline and trail text justified at the start */}
-						<div
-							css={css`
-								position: relative;
-								display: flex;
-								flex-direction: column;
-								justify-content: flex-start;
-								flex-grow: 1;
-							`}
-						>
-							{headlinePosition === 'inner' && (
-								<HeadlineWrapper>
-									<CardHeadline
-										headlineText={headlineText}
-										format={format}
-										fontSizes={headlineSizes}
-										showQuotes={showQuotes}
-										kickerText={
-											format.design ===
-												ArticleDesign.LiveBlog &&
-											!kickerText
-												? 'Live'
-												: kickerText
-										}
-										showPulsingDot={
-											format.design ===
-												ArticleDesign.LiveBlog ||
-											showPulsingDot
-										}
-										byline={byline}
-										showByline={showByline}
-										isExternalLink={isExternalLink}
-										kickerImage={
-											showKickerImage &&
-											media?.type === 'podcast'
-												? media.podcastImage
-												: undefined
-										}
-									/>
-									{!isUndefined(starRating) ? (
-										<StarRatingComponent
-											rating={starRating}
-											cardHasImage={!!image}
-										/>
-									) : null}
-									{!showPill &&
-										!!mainMedia &&
-										mainMedia.type !== 'Video' && (
-											<MediaMeta
-												mediaType={mainMedia.type}
-												hasKicker={!!kickerText}
-											/>
-										)}
-								</HeadlineWrapper>
-							)}
-
-							{!!trailText && media?.type !== 'podcast' && (
-								<TrailText
-									trailText={trailText}
-									trailTextSize={trailTextSize}
-									padTop={headlinePosition === 'inner'}
-									hideUntil={hideTrailTextUntil()}
+						{headlinePosition === 'inner' && (
+							<HeadlineWrapper>
+								<CardHeadline
+									headlineText={headlineText}
+									format={format}
+									fontSizes={headlineSizes}
+									showQuotes={showQuotes}
+									kickerText={
+										format.design ===
+											ArticleDesign.LiveBlog &&
+										!kickerText
+											? 'Live'
+											: kickerText
+									}
+									showPulsingDot={
+										format.design ===
+											ArticleDesign.LiveBlog ||
+										showPulsingDot
+									}
+									byline={byline}
+									showByline={showByline}
+									isExternalLink={isExternalLink}
+									kickerImage={
+										showKickerImage &&
+										media?.type === 'podcast'
+											? media.podcastImage
+											: undefined
+									}
 								/>
-							)}
-
-							{!isOpinionCardWithAvatar && (
-								<>
-									{showPill ? (
-										<>
-											<MediaOrNewsletterPill />
-											{format.theme ===
-												ArticleSpecial.Labs &&
-												branding && (
-													<CardBranding
-														branding={branding}
-														onwardsSource={
-															onwardsSource
-														}
-														containerPalette={
-															containerPalette
-														}
-													/>
-												)}
-										</>
-									) : (
-										<CardFooter
-											format={format}
-											age={decideAge()}
-											commentCount={<CommentCount />}
-											cardBranding={
-												branding ? (
-													<CardBranding
-														branding={branding}
-														onwardsSource={
-															onwardsSource
-														}
-														containerPalette={
-															containerPalette
-														}
-													/>
-												) : undefined
-											}
-											showLivePlayable={showLivePlayable}
+								{!isUndefined(starRating) ? (
+									<StarRatingComponent
+										rating={starRating}
+										cardHasImage={!!image}
+									/>
+								) : null}
+								{!showPill &&
+									!!mainMedia &&
+									mainMedia.type !== 'Video' && (
+										<MediaMeta
+											mediaType={mainMedia.type}
+											hasKicker={!!kickerText}
 										/>
 									)}
-								</>
-							)}
-							{showLivePlayable &&
-								liveUpdatesPosition === 'inner' && (
-									<Island
-										priority="feature"
-										defer={{ until: 'visible' }}
-									>
-										<LatestLinks
-											id={linkTo}
-											isDynamo={isDynamo}
-											direction={
-												isFlexibleContainer
-													? liveUpdatesAlignment
-													: supportingContentAlignment
-											}
-											containerPalette={containerPalette}
-											absoluteServerTimes={
-												absoluteServerTimes
-											}
-											displayHeader={isFlexibleContainer}
-											directionOnMobile={
-												isFlexibleContainer
-													? 'horizontal'
-													: undefined
-											}
-										></LatestLinks>
-									</Island>
+							</HeadlineWrapper>
+						)}
+
+						{!!trailText && media?.type !== 'podcast' && (
+							<TrailText
+								trailText={trailText}
+								trailTextSize={trailTextSize}
+								padTop={headlinePosition === 'inner'}
+								hideUntil={hideTrailTextUntil()}
+							/>
+						)}
+
+						{!isOpinionCardWithAvatar && (
+							<>
+								{showPill ? (
+									<>
+										<MediaOrNewsletterPill />
+										{format.theme === ArticleSpecial.Labs &&
+											branding && (
+												<CardBranding
+													branding={branding}
+													onwardsSource={
+														onwardsSource
+													}
+													containerPalette={
+														containerPalette
+													}
+												/>
+											)}
+									</>
+								) : (
+									<CardFooter
+										format={format}
+										age={decideAge()}
+										commentCount={<CommentCount />}
+										cardBranding={
+											branding ? (
+												<CardBranding
+													branding={branding}
+													onwardsSource={
+														onwardsSource
+													}
+													containerPalette={
+														containerPalette
+													}
+												/>
+											) : undefined
+										}
+										showLivePlayable={showLivePlayable}
+									/>
 								)}
-						</div>
-
-						{/* This div is needed to push this content to the bottom of the card */}
-						<div
-							style={isOnwardContent ? { marginTop: 'auto' } : {}}
-						>
-							{decideInnerSublinks()}
-						</div>
-
-						{sublinkPosition === 'outer' &&
-							supportingContentAlignment === 'horizontal' &&
-							imagePositionOnDesktop === 'right' && (
-								<HorizontalDivider />
+							</>
+						)}
+						{showLivePlayable &&
+							liveUpdatesPosition === 'inner' && (
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<LatestLinks
+										id={linkTo}
+										isDynamo={isDynamo}
+										direction={
+											isFlexibleContainer
+												? liveUpdatesAlignment
+												: supportingContentAlignment
+										}
+										containerPalette={containerPalette}
+										absoluteServerTimes={
+											absoluteServerTimes
+										}
+										displayHeader={isFlexibleContainer}
+										directionOnMobile={
+											isFlexibleContainer
+												? 'horizontal'
+												: undefined
+										}
+									></LatestLinks>
+								</Island>
 							)}
-					</ContentWrapper>
-				)}
+					</div>
+
+					{/* This div is needed to push this content to the bottom of the card */}
+					<div style={isOnwardContent ? { marginTop: 'auto' } : {}}>
+						{decideInnerSublinks()}
+					</div>
+
+					{sublinkPosition === 'outer' &&
+						supportingContentAlignment === 'horizontal' &&
+						imagePositionOnDesktop === 'right' && (
+							<HorizontalDivider />
+						)}
+				</ContentWrapper>
 			</CardLayout>
 
 			<div

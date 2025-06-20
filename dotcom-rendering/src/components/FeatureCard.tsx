@@ -442,7 +442,6 @@ export const FeatureCard = ({
 										kickerText={kickerText}
 										trailText={trailText}
 										isVideoArticle={isVideoArticle}
-										showTextOverlay={false}
 										hidePillOnMobile={false}
 										iconSizeOnDesktop="large"
 										iconSizeOnMobile="large"

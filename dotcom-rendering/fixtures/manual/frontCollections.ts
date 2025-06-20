@@ -109,11 +109,6 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/video',
-		displayName: 'Videos',
-	},
-	{
-		...defaultValues,
 		collectionType: 'fixed/medium/slow-VI',
 		displayName: 'Multimedia',
 	},
@@ -254,11 +249,6 @@ export const testCollectionsUs = [
 		...defaultValues,
 		collectionType: 'fixed/medium/slow-VI',
 		displayName: 'Explore',
-	},
-	{
-		...defaultValues,
-		collectionType: 'fixed/video',
-		displayName: 'Video',
 	},
 	{
 		...defaultValues,

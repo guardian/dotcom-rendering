@@ -546,13 +546,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
-					if (
-						collection.collectionType === 'fixed/video' ||
-						collection.containerPalette === 'PodcastPalette'
-					) {
-						const containerPalette =
-							collection.containerPalette ?? 'MediaPalette';
-
+					if (collection.containerPalette === 'PodcastPalette') {
 						return (
 							<Fragment key={ophanName}>
 								{desktopAdPositions.includes(index) && (
@@ -566,7 +560,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								)}
 
 								<ContainerOverrides
-									containerPalette={containerPalette}
+									containerPalette={
+										collection.containerPalette
+									}
 								>
 									<Section
 										title={collection.displayName}
@@ -578,10 +574,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										}
 										fullWidth={true}
 										padBottom={true}
-										showSideBorders={
-											collection.collectionType !==
-											'fixed/video'
-										}
 										showTopBorder={index > 0}
 										padContent={false}
 										url={collection.href}
@@ -592,11 +584,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										backgroundColour={schemePalette(
 											'--front-container-background',
 										)}
-										innerBackgroundColour={
-											containerPalette === 'MediaPalette'
-												? sourcePalette.neutral[0]
-												: undefined
-										}
+										innerBackgroundColour={undefined}
 										hasPageSkin={hasPageSkin}
 									>
 										<Island
@@ -608,7 +596,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 												heading={collection.displayName}
 												trails={trails}
 												onwardsSource={'unknown-source'}
-												palette={containerPalette}
+												palette={
+													collection.containerPalette
+												}
 												leftColSize={'compact'}
 												containerType={
 													collection.collectionType

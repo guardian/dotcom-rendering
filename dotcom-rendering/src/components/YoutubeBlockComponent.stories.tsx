@@ -54,7 +54,6 @@ export const Default = () => {
 				expired={false}
 				stickyVideos={false}
 				enableAds={false}
-				showTextOverlay={false}
 				iconSizeOnDesktop="large"
 				iconSizeOnMobile="large"
 				hidePillOnMobile={false}
@@ -94,7 +93,6 @@ export const Vertical = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
-				showTextOverlay={false}
 				iconSizeOnDesktop="large"
 				iconSizeOnMobile="large"
 				hidePillOnMobile={false}
@@ -135,7 +133,6 @@ export const Expired = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
-				showTextOverlay={false}
 				iconSizeOnDesktop="large"
 				iconSizeOnMobile="large"
 				hidePillOnMobile={false}
@@ -177,7 +174,6 @@ export const WithOverlayImage = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
-				showTextOverlay={false}
 				iconSizeOnDesktop="large"
 				iconSizeOnMobile="large"
 				hidePillOnMobile={false}
@@ -240,7 +236,6 @@ export const Withimage = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
-				showTextOverlay={false}
 				iconSizeOnDesktop="large"
 				iconSizeOnMobile="large"
 				hidePillOnMobile={false}
@@ -306,7 +301,6 @@ export const WithPosterAndOverlayImage = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
-				showTextOverlay={false}
 				iconSizeOnDesktop="large"
 				iconSizeOnMobile="large"
 				hidePillOnMobile={false}
@@ -373,7 +367,6 @@ export const WithShowMainVideoFlagOff = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
-				showTextOverlay={false}
 				iconSizeOnDesktop="large"
 				iconSizeOnMobile="large"
 				hidePillOnMobile={false}

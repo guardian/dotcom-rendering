@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { from, space, until } from '@guardian/source/foundations';
-import type { DCRContainerType } from '../../../types/front';
+import { from, space } from '@guardian/source/foundations';
 import type { CardImageType } from '../../../types/layout';
 import type { ImagePositionType } from './ImageWrapper';
 
@@ -16,7 +15,6 @@ type Props = {
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	minWidthInPixels?: number;
-	containerType?: DCRContainerType;
 	gapSizes: GapSizes;
 	isBetaContainer: boolean;
 };
@@ -24,20 +22,6 @@ type Props = {
 const containerStyles = css`
 	display: flex;
 	flex-basis: 100%;
-`;
-
-// Until mobile landscape, show 1 card on small screens
-// Above mobile landscape, show 1 full card and min 20vw of second card
-const padding = 20;
-const videoWidth = css`
-	min-width: 300px;
-	max-width: 600px;
-	width: calc(80vw - ${padding}px);
-	overflow: hidden;
-
-	${until.mobileLandscape} {
-		width: calc(100vw - ${padding}px);
-	}
 `;
 
 const minWidth = (minWidthInPixels?: number) => {
@@ -186,7 +170,6 @@ export const CardLayout = ({
 	imagePositionOnMobile,
 	minWidthInPixels,
 	imageType,
-	containerType,
 	gapSizes,
 	isBetaContainer,
 }: Props) => {
@@ -194,9 +177,7 @@ export const CardLayout = ({
 		<div
 			css={[
 				containerStyles,
-				containerType === 'fixed/video'
-					? videoWidth
-					: minWidth(minWidthInPixels),
+				minWidth(minWidthInPixels),
 				decidePosition(
 					imagePositionOnMobile,
 					imagePositionOnDesktop,
