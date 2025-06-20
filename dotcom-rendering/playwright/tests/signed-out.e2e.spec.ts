@@ -4,13 +4,21 @@ import { disableCMP } from '../lib/cmp';
 import { waitForIsland } from '../lib/islands';
 import { loadPageWithOverrides } from '../lib/load-page';
 
-test.describe('Signed in readers', () => {
-	test('should not display signed in texts when users are not signed in', async ({
+test.describe('Signed out readers', () => {
+	test('should not display signed in text when users are not signed in', async ({
 		context,
 		page,
 	}) => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, standardArticle);
+
+		await waitForIsland(page, 'TopBar');
+		// Check that the top bar is showing the reader as signed out
+		const signInText = await page
+			.locator('[data-testid="topbar-signin"]')
+			.textContent();
+
+		expect(signInText).toContain('Sign in');
 
 		await waitForIsland(page, 'DiscussionWeb');
 
