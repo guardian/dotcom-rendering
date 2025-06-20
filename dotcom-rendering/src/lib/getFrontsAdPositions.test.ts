@@ -227,7 +227,6 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'fixed/medium/fast-XI' }, // Ad position (7)
 			{ ...testCollection, collectionType: 'fixed/small/slow-III' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (9)
-			{ ...testCollection, collectionType: 'fixed/small/slow-V-half' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-V-third' }, // Ignored - is before merch high position
 			{ ...testCollection, collectionType: 'fixed/small/fast-VIII' }, // Ignored - is merch high position
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
