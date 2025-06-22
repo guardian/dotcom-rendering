@@ -46,11 +46,6 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-XII-mpu',
-		displayName: 'Explore',
-	},
-	{
-		...defaultValues,
 		collectionType: 'fixed/small/slow-I',
 		displayName: 'The big picture',
 	},

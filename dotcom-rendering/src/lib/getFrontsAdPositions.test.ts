@@ -126,7 +126,6 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (6)
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
-			{ ...testCollection, collectionType: 'fixed/medium/slow-XII-mpu' },
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (12)
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
@@ -140,9 +139,7 @@ describe('Mobile Ads', () => {
 	it('Recipes front, with more than 4 collections, with thrasher at the first position', () => {
 		const testCollections: AdCandidate[] = [
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ignored - is first container and thrasher
-			{ ...testCollection, collectionType: 'fixed/medium/slow-XII-mpu' }, // Ad position (3)
 			{ ...testCollection, collectionType: 'fixed/small/fast-VIII' },
-			{ ...testCollection, collectionType: 'fixed/medium/fast-XI' }, // Ad position (7)
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 

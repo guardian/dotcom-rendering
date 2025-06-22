@@ -45,11 +45,11 @@ export type FEContainer =
 	| 'dynamic/slow' // to remove once 0 dynamic/slow remain
 	| 'dynamic/slow-mpu' // to remove once 0 dynamic/slow-mpu
 	| 'fixed/large/slow-XIV' // to remove once 0 fixed/large/slow-XIV remain
-	| 'fixed/medium/fast-XI'
+	| 'fixed/medium/fast-XI' // to remove one 0 fixed/medium/fast-XI remain
 	| 'fixed/medium/fast-XII' // to remove once 0 fixed/medium/fast-XII
 	| 'fixed/medium/slow-VI' // to remove one 0 fixed/medium/slow-VI remain
 	| 'fixed/medium/slow-VII' // to remove once 0 fixed/medium/slow-VII remain
-	| 'fixed/medium/slow-XII-mpu'
+	| 'fixed/medium/slow-XII-mpu' // to remove once 0 fixed/medium/slow-XII-mpu remain
 	| 'fixed/small/fast-VIII' // to remove once 0 fixed/small/fast-VIII remain.
 	| 'fixed/small/slow-I' // to remove once 0 fixed/small/slow-I remain.
 	| 'fixed/small/slow-III' // to remove once 0 fixed/small/slow-III remain

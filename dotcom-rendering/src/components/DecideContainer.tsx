@@ -8,8 +8,6 @@ import type {
 	DCRGroupedTrails,
 } from '../types/front';
 import { FallbackContainer } from './FallbackContainer';
-import { FixedMediumFastXI } from './FixedMediumFastXI';
-import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
@@ -67,6 +65,8 @@ export const DecideContainer = ({
 		case 'fixed/large/slow-XIV':
 		case 'fixed/medium/slow-VI':
 		case 'fixed/medium/slow-VII':
+		case 'fixed/medium/fast-XI':
+		case 'fixed/medium/slow-XII-mpu':
 			return (
 				<FallbackContainer
 					trails={trails}
@@ -75,26 +75,6 @@ export const DecideContainer = ({
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 					aspectRatio={'5:4'}
-				/>
-			);
-		case 'fixed/medium/slow-XII-mpu':
-			return (
-				<FixedMediumSlowXIIMPU
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/medium/fast-XI':
-			return (
-				<FixedMediumFastXI
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
-					imageLoading={imageLoading}
 				/>
 			);
 		case 'nav/list':
