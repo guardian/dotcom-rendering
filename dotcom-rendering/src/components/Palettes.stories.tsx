@@ -3,7 +3,7 @@ import { allModes } from '../../.storybook/modes';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import type { DCRGroupedTrails } from '../types/front';
-import { DynamicFast } from './DynamicFast';
+import { FlexibleGeneral } from './FlexibleGeneral';
 import { FrontSection } from './FrontSection';
 import { LabsSection } from './LabsSection';
 
@@ -23,11 +23,14 @@ export default meta;
 
 const groupedTrails = {
 	snap: [],
-	splash: [],
+	splash: [trails[0]],
 	huge: [],
-	veryBig: [{ isBoosted: true, ...trails[0] }, trails[1]],
-	big: [trails[2], trails[3]],
+	veryBig: [],
+	big: [],
 	standard: [
+		trails[1],
+		trails[2],
+		trails[3],
 		trails[4],
 		trails[5],
 		trails[6],
@@ -46,12 +49,14 @@ export const EventPalette = {
 			editionId={'UK'}
 			discussionApiUrl={discussionApiUrl}
 		>
-			<DynamicFast
+			<FlexibleGeneral
 				groupedTrails={groupedTrails}
 				containerPalette="EventPalette"
 				showAge={true}
 				absoluteServerTimes={true}
 				imageLoading="eager"
+				aspectRatio={'5:4'}
+				collectionId={12345}
 			/>
 		</FrontSection>
 	),
@@ -66,12 +71,14 @@ export const EventAltPalette = {
 			editionId={'UK'}
 			discussionApiUrl={discussionApiUrl}
 		>
-			<DynamicFast
+			<FlexibleGeneral
 				groupedTrails={groupedTrails}
-				containerPalette="EventAltPalette"
+				containerPalette="EventPalette"
 				showAge={true}
 				absoluteServerTimes={true}
 				imageLoading="eager"
+				aspectRatio={'5:4'}
+				collectionId={12345}
 			/>
 		</FrontSection>
 	),
@@ -86,12 +93,14 @@ export const SombrePalette = {
 			editionId={'UK'}
 			discussionApiUrl={discussionApiUrl}
 		>
-			<DynamicFast
+			<FlexibleGeneral
 				groupedTrails={groupedTrails}
-				containerPalette="SombrePalette"
+				containerPalette="EventPalette"
 				showAge={true}
 				absoluteServerTimes={true}
 				imageLoading="eager"
+				aspectRatio={'5:4'}
+				collectionId={12345}
 			/>
 		</FrontSection>
 	),
@@ -106,12 +115,14 @@ export const SombreAltPalette = {
 			editionId={'UK'}
 			discussionApiUrl={discussionApiUrl}
 		>
-			<DynamicFast
+			<FlexibleGeneral
 				groupedTrails={groupedTrails}
-				containerPalette="SombreAltPalette"
+				containerPalette="EventPalette"
 				showAge={true}
 				absoluteServerTimes={true}
 				imageLoading="eager"
+				aspectRatio={'5:4'}
+				collectionId={12345}
 			/>
 		</FrontSection>
 	),
@@ -126,12 +137,14 @@ export const BreakingPalette = {
 			editionId={'UK'}
 			discussionApiUrl={discussionApiUrl}
 		>
-			<DynamicFast
+			<FlexibleGeneral
 				groupedTrails={groupedTrails}
-				containerPalette="BreakingPalette"
+				containerPalette="EventPalette"
 				showAge={true}
 				absoluteServerTimes={true}
 				imageLoading="eager"
+				aspectRatio={'5:4'}
+				collectionId={12345}
 			/>
 		</FrontSection>
 	),
@@ -146,12 +159,14 @@ export const LongRunningPalette = {
 			editionId={'UK'}
 			discussionApiUrl={discussionApiUrl}
 		>
-			<DynamicFast
+			<FlexibleGeneral
 				groupedTrails={groupedTrails}
-				containerPalette="LongRunningPalette"
+				containerPalette="EventPalette"
 				showAge={true}
 				absoluteServerTimes={true}
 				imageLoading="eager"
+				aspectRatio={'5:4'}
+				collectionId={12345}
 			/>
 		</FrontSection>
 	),
@@ -166,12 +181,14 @@ export const LongRunningAltPalette = {
 			editionId={'UK'}
 			discussionApiUrl={discussionApiUrl}
 		>
-			<DynamicFast
+			<FlexibleGeneral
 				groupedTrails={groupedTrails}
-				containerPalette="LongRunningAltPalette"
+				containerPalette="EventPalette"
 				showAge={true}
 				absoluteServerTimes={true}
 				imageLoading="eager"
+				aspectRatio={'5:4'}
+				collectionId={12345}
 			/>
 		</FrontSection>
 	),
@@ -186,12 +203,14 @@ export const InvestigationPalette = {
 			editionId={'UK'}
 			discussionApiUrl={discussionApiUrl}
 		>
-			<DynamicFast
+			<FlexibleGeneral
 				groupedTrails={groupedTrails}
-				containerPalette="InvestigationPalette"
+				containerPalette="EventPalette"
 				showAge={true}
 				absoluteServerTimes={true}
 				imageLoading="eager"
+				aspectRatio={'5:4'}
+				collectionId={12345}
 			/>
 		</FrontSection>
 	),
@@ -206,12 +225,14 @@ export const SpecialReportAltPalette = {
 			editionId={'UK'}
 			discussionApiUrl={discussionApiUrl}
 		>
-			<DynamicFast
+			<FlexibleGeneral
 				groupedTrails={groupedTrails}
-				containerPalette="SpecialReportAltPalette"
+				containerPalette="EventPalette"
 				showAge={true}
 				absoluteServerTimes={true}
 				imageLoading="eager"
+				aspectRatio={'5:4'}
+				collectionId={12345}
 			/>
 		</FrontSection>
 	),
@@ -230,12 +251,14 @@ export const BrandedPalette = {
 			discussionApiUrl={discussionApiUrl}
 			editionId={'UK'}
 		>
-			<DynamicFast
+			<FlexibleGeneral
 				groupedTrails={groupedTrails}
-				containerPalette="Branded"
+				containerPalette="EventPalette"
 				showAge={true}
 				absoluteServerTimes={true}
 				imageLoading="eager"
+				aspectRatio={'5:4'}
+				collectionId={12345}
 			/>
 		</LabsSection>
 	),

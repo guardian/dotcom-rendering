@@ -7,15 +7,6 @@ import {
 } from './commercial-constants';
 import { frontsBannerExcludedCollections } from './frontsBannerAdExclusions';
 
-type GroupedCounts = {
-	snap: number;
-	huge: number;
-	veryBig: number;
-	big: number;
-	standard: number;
-	splash: number;
-};
-
 type FlexibleSpecialGroupedCounts = {
 	snap: number;
 	splash: number;
@@ -271,16 +262,6 @@ const getFlexibleSpecialHeight = (grouped: DCRGroupedTrails) => {
 const getCollectionHeight = (collection: AdCandidate): number => {
 	const { collectionType, grouped } = collection;
 
-	// The height of some dynamic layouts depends on the sizes of the cards that are passed to them.
-	const groupedCounts = {
-		snap: grouped.snap.length,
-		huge: grouped.huge.length,
-		veryBig: grouped.veryBig.length,
-		big: grouped.big.length,
-		standard: grouped.standard.length,
-		splash: grouped.splash.length,
-	} satisfies GroupedCounts;
-
 	switch (collectionType) {
 		// Some thrashers are very small. Since we'd prefer to have ads above content rather than thrashers,
 		// err on the side of inserting fewer ads, by setting the number on the small side for thrashers
@@ -311,12 +292,6 @@ const getCollectionHeight = (collection: AdCandidate): number => {
 
 		case 'fixed/large/slow-XIV':
 			return 3;
-
-		case 'dynamic/fast':
-			if (groupedCounts.huge > 0 || groupedCounts.veryBig > 0) {
-				return 2.5;
-			}
-			return 1.5;
 
 		/**
 		 * - - - BETA collections below this line - - -

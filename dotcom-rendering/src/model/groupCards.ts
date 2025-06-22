@@ -6,7 +6,7 @@ import { enhanceCards } from './enhanceCards';
 /**
  * Groups cards based on their group specified in fronts tool
  *
- * NB: Dynamic/package and dynamic slow are now deprecated
+ * NB: Dynamic containers are now deprecated
  * For 'dynamic' container types in fronts tool, cards can be grouped by sizes:
  *  - Snap (dynamic/package only)
  *  - Huge
@@ -35,46 +35,6 @@ export const groupCards = (
 	isLoopingVideoTest: boolean,
 ): DCRGroupedTrails => {
 	switch (container) {
-		case 'dynamic/fast': {
-			const huge = curated.filter(({ card }) => card.group === '3');
-			const veryBig = curated.filter(({ card }) => card.group === '2');
-			const big = curated.filter(({ card }) => card.group === '1');
-			return {
-				// Snap is not supported on these container types
-				snap: [],
-				// Splash is not supported on these container types
-				splash: [],
-				huge: enhanceCards(huge, {
-					cardInTagPage: false,
-					editionId,
-					discussionApiUrl,
-				}),
-				veryBig: enhanceCards(veryBig, {
-					cardInTagPage: false,
-					offset: huge.length,
-					editionId,
-					discussionApiUrl,
-				}),
-				big: enhanceCards(big, {
-					cardInTagPage: false,
-					offset: huge.length + veryBig.length,
-					editionId,
-					discussionApiUrl,
-				}),
-				standard: enhanceCards(
-					// Backfilled cards will always be treated as 'standard' cards
-					curated
-						.filter(({ card }) => card.group === '0')
-						.concat(backfill),
-					{
-						cardInTagPage: false,
-						offset: huge.length + veryBig.length + big.length,
-						editionId,
-						discussionApiUrl,
-					},
-				),
-			};
-		}
 		case 'flexible/general': {
 			const splash = [
 				...curated.filter(({ card }) => card.group === '3'),

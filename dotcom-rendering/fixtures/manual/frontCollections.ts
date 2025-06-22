@@ -26,12 +26,6 @@ const defaultValues = {
 export const testCollectionsUk = [
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
-		displayName: 'Headlines',
-		grouped: defaultGrouped,
-	},
-	{
-		...defaultValues,
 		collectionType: 'fixed/small/slow-IV',
 		containerPalette: 'LongRunningAltPalette',
 		displayName: 'Ukraine invasion',
@@ -63,18 +57,8 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
-		displayName: 'Across the country',
-	},
-	{
-		...defaultValues,
 		collectionType: 'fixed/small/slow-IV',
 		displayName: 'The rural network',
-	},
-	{
-		...defaultValues,
-		collectionType: 'dynamic/fast',
-		displayName: 'Around the world',
 	},
 	{
 		...defaultValues,
@@ -117,11 +101,6 @@ export const testCollectionsWithSecondaryLevel = [
 export const testCollectionsUs = [
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
-		displayName: 'Headlines',
-	},
-	{
-		...defaultValues,
 		collectionType: 'fixed/small/slow-IV',
 		displayName: 'In depth',
 	},
@@ -145,20 +124,6 @@ export const testCollectionsUs = [
 		...defaultValues,
 		collectionType: 'fixed/small/slow-IV',
 		displayName: 'Climate crisis',
-	},
-	{
-		...defaultValues,
-		collectionType: 'dynamic/fast',
-		displayName: 'Across the country',
-	},
-	{
-		...defaultValues,
-		collectionType: 'dynamic/fast',
-		displayName: 'Around the world',
-		grouped: {
-			...defaultGrouped,
-			veryBig: [trails[0]],
-		},
 	},
 	{
 		...defaultValues,
@@ -216,8 +181,9 @@ export const testCollectionsUs = [
 export const brandedTestCollections = [
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
-		displayName: 'Headlines',
+		collectionType: 'fixed/small/slow-IV',
+		containerPalette: 'Branded',
+		displayName: 'Guardian Labs',
 	},
 	{
 		...defaultValues,
@@ -227,30 +193,9 @@ export const brandedTestCollections = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
-		displayName: 'Headlines',
-	},
-	{
-		...defaultValues,
 		collectionType: 'fixed/small/slow-IV',
 		containerPalette: 'Branded',
 		displayName: 'Guardian Labs',
-	},
-	{
-		...defaultValues,
-		collectionType: 'dynamic/fast',
-		displayName: 'Headlines',
-	},
-	{
-		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
-		containerPalette: 'Branded',
-		displayName: 'Guardian Labs',
-	},
-	{
-		...defaultValues,
-		collectionType: 'dynamic/fast',
-		displayName: 'Headlines',
 	},
 ] satisfies DCRCollectionType[];
 

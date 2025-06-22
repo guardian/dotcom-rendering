@@ -40,7 +40,7 @@ interface FEPressedPage {
 /* This list of containers supported in DCR must be kept up to date with frontend **manually**.
  * @see https://github.com/guardian/frontend/blob/167dce23a8453ed13a97fbd23c7fc45ecb06e3fe/facia/app/services/dotcomrendering/FaciaPicker.scala#L21-L45 */
 export type FEContainer =
-	| 'dynamic/fast'
+	| 'dynamic/fast' // to remove once 0 dynamic/fast remain
 	| 'dynamic/package' // to remove once 0 dynamic/package remain
 	| 'dynamic/slow' // to remove once 0 dynamic/slow remain
 	| 'dynamic/slow-mpu' // to remove once 0 dynamic/slow-mpu
