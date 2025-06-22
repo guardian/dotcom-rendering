@@ -276,7 +276,6 @@ const getCollectionHeight = (collection: AdCandidate): number => {
 		case 'static/medium/4':
 			return 1;
 
-		case 'fixed/small/slow-III':
 		case 'fixed/small/fast-VIII':
 		case 'scrollable/feature':
 			return 1.5;

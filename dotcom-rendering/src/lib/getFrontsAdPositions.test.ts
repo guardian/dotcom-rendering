@@ -82,7 +82,6 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (4)
 			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (8)
-			{ ...testCollection, collectionType: 'fixed/small/slow-III' },
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
@@ -142,12 +141,10 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (2)
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-III' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (9)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (12)
 			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-III' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ignored - is merch high position
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
@@ -170,7 +167,6 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ad position (9)
 			{ ...testCollection, collectionType: 'fixed/medium/slow-XII-mpu' },
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (12)
-			{ ...testCollection, collectionType: 'fixed/small/slow-III' },
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
@@ -187,7 +183,6 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'fixed/medium/slow-XII-mpu' }, // Ad position (3)
 			{ ...testCollection, collectionType: 'fixed/small/fast-VIII' },
 			{ ...testCollection, collectionType: 'fixed/medium/fast-XI' }, // Ad position (7)
-			{ ...testCollection, collectionType: 'fixed/small/slow-III' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (9)
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
