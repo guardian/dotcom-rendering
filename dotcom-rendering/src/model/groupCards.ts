@@ -6,7 +6,9 @@ import { enhanceCards } from './enhanceCards';
 /**
  * Groups cards based on their group specified in fronts tool
  *
+ *
  * For 'dynamic' container types in fronts tool, cards can be grouped by sizes:
+ * NB: Dynamic/package is now deprecated
  *  - Snap (dynamic/package only)
  *  - Huge
  *  - Very big
@@ -104,8 +106,7 @@ export const groupCards = (
 				standard: enhanceCards(standard, enhanceOptions(splash.length)),
 			};
 		}
-		case 'flexible/special':
-		case 'dynamic/package': {
+		case 'flexible/special': {
 			const snap = curated.filter(({ card }) => card.group === '1');
 
 			// Backfilled cards will always be treated as 'standard' cards

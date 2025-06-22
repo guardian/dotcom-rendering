@@ -26,12 +26,6 @@ const defaultValues = {
 export const testCollectionsUk = [
 	{
 		...defaultValues,
-		collectionType: 'dynamic/package',
-		containerPalette: 'EventPalette',
-		displayName: 'Israel-Hamas war',
-	},
-	{
-		...defaultValues,
 		collectionType: 'dynamic/fast',
 		displayName: 'Headlines',
 		grouped: defaultGrouped,
@@ -141,18 +135,6 @@ export const testCollectionsWithSecondaryLevel = [
 ] satisfies DCRCollectionType[];
 
 export const testCollectionsUs = [
-	{
-		...defaultValues,
-		collectionType: 'dynamic/package',
-		containerPalette: 'EventPalette',
-		displayName: 'Israel-Hamas war',
-	},
-	{
-		...defaultValues,
-		collectionType: 'dynamic/package',
-		containerPalette: 'EventPalette',
-		displayName: 'Israel-Hamas war',
-	},
 	{
 		...defaultValues,
 		collectionType: 'dynamic/fast',

@@ -41,7 +41,7 @@ interface FEPressedPage {
  * @see https://github.com/guardian/frontend/blob/167dce23a8453ed13a97fbd23c7fc45ecb06e3fe/facia/app/services/dotcomrendering/FaciaPicker.scala#L21-L45 */
 export type FEContainer =
 	| 'dynamic/fast'
-	| 'dynamic/package'
+	| 'dynamic/package' // to remove once 0 dynamic/package remain
 	| 'dynamic/slow'
 	| 'dynamic/slow-mpu' // to remove once 0 dynamic/slow-mpu
 	| 'fixed/large/slow-XIV'

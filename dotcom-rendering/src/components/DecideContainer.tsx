@@ -8,7 +8,6 @@ import type {
 	DCRGroupedTrails,
 } from '../types/front';
 import { DynamicFast } from './DynamicFast';
-import { DynamicPackage } from './DynamicPackage';
 import { DynamicSlow } from './DynamicSlow';
 import { FallbackContainer } from './FallbackContainer';
 import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
@@ -84,16 +83,6 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 				/>
 			);
-		case 'dynamic/package':
-			return (
-				<DynamicPackage
-					groupedTrails={groupedTrails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
-					imageLoading={imageLoading}
-				/>
-			);
 		case 'fixed/large/slow-XIV':
 			return (
 				<FixedLargeSlowXIV
@@ -157,6 +146,7 @@ export const DecideContainer = ({
 		case 'fixed/small/slow-V-half':
 		case 'dynamic/slow-mpu':
 		case 'fixed/medium/fast-XII':
+		case 'dynamic/package':
 			return (
 				<FallbackContainer
 					trails={trails}

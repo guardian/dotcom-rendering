@@ -1408,7 +1408,7 @@ export const DynamoWithSpecialPaletteVariations = () => {
 						: basicCardProps.format
 				}
 				containerPalette={containerPalette}
-				containerType="dynamic/package"
+				containerType="dynamic/fast"
 				isDynamo={true}
 				kickerText="Main kicker"
 				headlineSizes={{ desktop: 'medium', tablet: 'small' }}

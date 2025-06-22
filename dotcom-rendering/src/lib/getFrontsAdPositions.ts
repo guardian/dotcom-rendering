@@ -320,27 +320,6 @@ const getCollectionHeight = (collection: AdCandidate): number => {
 			}
 			return 1.5;
 
-		case 'dynamic/package':
-			if (groupedCounts.standard === 9) {
-				return 3;
-			} else if (
-				groupedCounts.standard === 5 ||
-				groupedCounts.standard === 6 ||
-				groupedCounts.standard === 7 ||
-				groupedCounts.standard === 8
-			) {
-				return 2.5;
-			} else if (
-				groupedCounts.standard === 1 ||
-				groupedCounts.standard === 3 ||
-				groupedCounts.standard === 4
-			) {
-				return 1.5;
-			} else if (groupedCounts.standard === 2) {
-				return 1;
-			}
-			return 1;
-
 		/**
 		 * - - - BETA collections below this line - - -
 		 */
