@@ -8,7 +8,6 @@ import type {
 	DCRGroupedTrails,
 } from '../types/front';
 import { FallbackContainer } from './FallbackContainer';
-import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
 import { FixedMediumFastXI } from './FixedMediumFastXI';
 import { FixedMediumSlowVI } from './FixedMediumSlowVI';
 import { FixedMediumSlowVII } from './FixedMediumSlowVII';
@@ -59,16 +58,6 @@ export const DecideContainer = ({
 }: Props) => {
 	// If you add a new container type which contains an MPU, you must also add it to
 	switch (containerType) {
-		case 'fixed/large/slow-XIV':
-			return (
-				<FixedLargeSlowXIV
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
-					imageLoading={imageLoading}
-				/>
-			);
 		case 'fixed/small/slow-IV':
 			return (
 				<FixedSmallSlowIV
@@ -117,6 +106,7 @@ export const DecideContainer = ({
 		case 'dynamic/package':
 		case 'dynamic/slow':
 		case 'dynamic/fast':
+		case 'fixed/large/slow-XIV':
 			return (
 				<FallbackContainer
 					trails={trails}

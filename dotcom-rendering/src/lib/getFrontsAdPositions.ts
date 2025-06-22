@@ -290,9 +290,6 @@ const getCollectionHeight = (collection: AdCandidate): number => {
 		case 'static/feature/2':
 			return 2;
 
-		case 'fixed/large/slow-XIV':
-			return 3;
-
 		/**
 		 * - - - BETA collections below this line - - -
 		 */

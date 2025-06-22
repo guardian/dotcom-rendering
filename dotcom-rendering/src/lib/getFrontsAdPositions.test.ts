@@ -17,7 +17,7 @@ import {
 } from './getFrontsAdPositions';
 
 const testCollection: AdCandidate = {
-	collectionType: 'fixed/large/slow-XIV',
+	collectionType: 'flexible/general',
 	displayName: 'Test Collection',
 	containerLevel: 'Primary',
 	containerPalette: 'EventPalette',
@@ -76,7 +76,6 @@ describe('Mobile Ads', () => {
 	// We used https://www.theguardian.com/uk/commentisfree as a blueprint
 	it('Non-network front, with more than 4 collections, without thrashers', () => {
 		const testCollections: AdCandidate[] = [
-			{ ...testCollection, collectionType: 'fixed/large/slow-XIV' }, // Ad position (0)
 			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (2)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
