@@ -50,7 +50,7 @@ export type FEContainer =
 	| 'fixed/medium/slow-VI'
 	| 'fixed/medium/slow-VII'
 	| 'fixed/medium/slow-XII-mpu'
-	| 'fixed/small/fast-VIII'
+	| 'fixed/small/fast-VIII' // to remove once 0 fixed/small/fast-VIII remain.
 	| 'fixed/small/slow-I'
 	| 'fixed/small/slow-III'
 	| 'fixed/small/slow-IV'
