@@ -34,11 +34,7 @@ export const testCollectionsUk = [
 		collectionType: 'fixed/thrasher',
 		displayName: 'Wordiply Thrasher',
 	},
-	{
-		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
-		displayName: 'Lifestyle',
-	},
+
 	{
 		...defaultValues,
 		collectionType: 'fixed/medium/slow-VII',
@@ -53,11 +49,6 @@ export const testCollectionsUk = [
 		...defaultValues,
 		collectionType: 'fixed/thrasher',
 		displayName: 'Contact the Guardian',
-	},
-	{
-		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
-		displayName: 'Multimedia',
 	},
 	{
 		...defaultValues,
@@ -84,11 +75,6 @@ export const testCollectionsWithSecondaryLevel = [
 export const testCollectionsUs = [
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
-		displayName: 'Opinion',
-	},
-	{
-		...defaultValues,
 		collectionType: 'fixed/thrasher',
 		displayName: 'Wordiply thrasher',
 	},
@@ -101,26 +87,6 @@ export const testCollectionsUs = [
 		...defaultValues,
 		collectionType: 'fixed/thrasher',
 		displayName: 'Documentaries',
-	},
-	{
-		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
-		displayName: 'Culture',
-	},
-	{
-		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
-		displayName: 'Lifestyle',
-	},
-	{
-		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
-		displayName: 'Explore',
-	},
-	{
-		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
-		displayName: 'In pictures',
 	},
 	{
 		...defaultValues,

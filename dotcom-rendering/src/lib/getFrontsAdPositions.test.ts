@@ -73,19 +73,6 @@ describe('Mobile Ads', () => {
 		expect(mobileAdPositions).not.toContain(8);
 	});
 
-	// We used https://www.theguardian.com/uk/commentisfree as a blueprint
-	it('Non-network front, with more than 4 collections, without thrashers', () => {
-		const testCollections: AdCandidate[] = [
-			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' },
-			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' },
-			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
-		];
-
-		const mobileAdPositions = getMobileAdPositions(testCollections);
-
-		expect(mobileAdPositions).toEqual([0, 2, 4, 6, 8]);
-	});
-
 	// We used https://www.theguardian.com/uk as a blueprint
 	it('UK Network Front, with more than 4 collections, with thrashers at various places', () => {
 		const testCollections: AdCandidate[] = [
@@ -94,7 +81,6 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (11)
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (14)
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
-			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ignored - is merch high position
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
@@ -110,7 +96,6 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (11)
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
-			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ignored - is merch high position
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
@@ -126,7 +111,6 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (9)
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (12)
-			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' },
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ignored - is merch high position
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
@@ -139,12 +123,9 @@ describe('Mobile Ads', () => {
 	// We used https://www.theguardian.com/uk/lifeandstyle as a blueprint
 	it('Lifeandstyle front, with more than 4 collections, with thrashers at various places', () => {
 		const testCollections: AdCandidate[] = [
-			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
-			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ad position (3)
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (6)
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
-			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ad position (9)
 			{ ...testCollection, collectionType: 'fixed/medium/slow-XII-mpu' },
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (12)
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
@@ -159,7 +140,6 @@ describe('Mobile Ads', () => {
 	it('Recipes front, with more than 4 collections, with thrasher at the first position', () => {
 		const testCollections: AdCandidate[] = [
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ignored - is first container and thrasher
-			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ad position (1)
 			{ ...testCollection, collectionType: 'fixed/medium/slow-XII-mpu' }, // Ad position (3)
 			{ ...testCollection, collectionType: 'fixed/small/fast-VIII' },
 			{ ...testCollection, collectionType: 'fixed/medium/fast-XI' }, // Ad position (7)

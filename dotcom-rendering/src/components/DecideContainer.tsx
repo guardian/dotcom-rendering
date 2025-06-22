@@ -9,7 +9,6 @@ import type {
 } from '../types/front';
 import { FallbackContainer } from './FallbackContainer';
 import { FixedMediumFastXI } from './FixedMediumFastXI';
-import { FixedMediumSlowVI } from './FixedMediumSlowVI';
 import { FixedMediumSlowVII } from './FixedMediumSlowVII';
 import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU';
 import { FlexibleGeneral } from './FlexibleGeneral';
@@ -67,6 +66,7 @@ export const DecideContainer = ({
 		case 'dynamic/slow':
 		case 'dynamic/fast':
 		case 'fixed/large/slow-XIV':
+		case 'fixed/medium/slow-VI':
 			return (
 				<FallbackContainer
 					trails={trails}
@@ -77,16 +77,7 @@ export const DecideContainer = ({
 					aspectRatio={'5:4'}
 				/>
 			);
-		case 'fixed/medium/slow-VI':
-			return (
-				<FixedMediumSlowVI
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
-					imageLoading={imageLoading}
-				/>
-			);
+
 		case 'fixed/medium/slow-VII':
 			return (
 				<FixedMediumSlowVII
