@@ -12,7 +12,7 @@ const defaultGrouped = {
 
 const defaultValues = {
 	backfill: [],
-	collectionType: 'fixed/small/slow-IV',
+	collectionType: 'flexible/general',
 	config: {
 		showDateHeader: false,
 	},
@@ -24,12 +24,6 @@ const defaultValues = {
 } satisfies DCRCollectionType;
 
 export const testCollectionsUk = [
-	{
-		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
-		containerPalette: 'LongRunningAltPalette',
-		displayName: 'Ukraine invasion',
-	},
 	{
 		...defaultValues,
 		collectionType: 'fixed/thrasher',
@@ -57,11 +51,6 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
-		displayName: 'The rural network',
-	},
-	{
-		...defaultValues,
 		collectionType: 'fixed/thrasher',
 		displayName: 'Contact the Guardian',
 	},
@@ -69,12 +58,6 @@ export const testCollectionsUk = [
 		...defaultValues,
 		collectionType: 'fixed/medium/slow-VI',
 		displayName: 'Multimedia',
-	},
-	{
-		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
-		containerPalette: 'Branded',
-		displayName: 'Guardian Labs',
 	},
 	{
 		...defaultValues,
@@ -101,17 +84,6 @@ export const testCollectionsWithSecondaryLevel = [
 export const testCollectionsUs = [
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
-		displayName: 'In depth',
-	},
-	{
-		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
-		containerPalette: 'LongRunningAltPalette',
-		displayName: 'Ukraine invasion',
-	},
-	{
-		...defaultValues,
 		collectionType: 'fixed/medium/slow-VI',
 		displayName: 'Opinion',
 	},
@@ -119,11 +91,6 @@ export const testCollectionsUs = [
 		...defaultValues,
 		collectionType: 'fixed/thrasher',
 		displayName: 'Wordiply thrasher',
-	},
-	{
-		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
-		displayName: 'Climate crisis',
 	},
 	{
 		...defaultValues,
@@ -142,19 +109,8 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
-		containerPalette: 'Branded',
-		displayName: 'Business briefs',
-	},
-	{
-		...defaultValues,
 		collectionType: 'fixed/medium/slow-VI',
 		displayName: 'Lifestyle',
-	},
-	{
-		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
-		displayName: 'Take part',
 	},
 	{
 		...defaultValues,
@@ -181,19 +137,19 @@ export const testCollectionsUs = [
 export const brandedTestCollections = [
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		containerPalette: 'Branded',
 		displayName: 'Guardian Labs',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		containerPalette: 'Branded',
 		displayName: 'Guardian Labs',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		containerPalette: 'Branded',
 		displayName: 'Guardian Labs',
 	},

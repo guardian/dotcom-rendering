@@ -12,7 +12,6 @@ import { FixedMediumFastXI } from './FixedMediumFastXI';
 import { FixedMediumSlowVI } from './FixedMediumSlowVI';
 import { FixedMediumSlowVII } from './FixedMediumSlowVII';
 import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU';
-import { FixedSmallSlowIV } from './FixedSmallSlowIV';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
@@ -56,15 +55,6 @@ export const DecideContainer = ({
 	// If you add a new container type which contains an MPU, you must also add it to
 	switch (containerType) {
 		case 'fixed/small/slow-IV':
-			return (
-				<FixedSmallSlowIV
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
-					imageLoading={imageLoading}
-				/>
-			);
 		case 'fixed/small/slow-III':
 		case 'fixed/small/slow-I':
 		case 'fixed/small/slow-V-third':
