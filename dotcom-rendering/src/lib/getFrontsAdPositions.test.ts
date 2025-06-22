@@ -80,7 +80,6 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (2)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (4)
-			{ ...testCollection, collectionType: 'fixed/small/slow-I' }, // Ad position (6)
 			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (8)
 			{ ...testCollection, collectionType: 'fixed/small/slow-III' },
@@ -172,7 +171,6 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'fixed/medium/slow-XII-mpu' },
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (12)
 			{ ...testCollection, collectionType: 'fixed/small/slow-III' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-I' }, // Ignored - is merch high position
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
