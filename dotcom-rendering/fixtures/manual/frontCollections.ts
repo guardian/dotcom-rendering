@@ -38,11 +38,6 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-V-mpu',
-		displayName: 'News extra',
-	},
-	{
-		...defaultValues,
 		collectionType: 'dynamic/slow',
 		displayName: 'Spotlight',
 	},

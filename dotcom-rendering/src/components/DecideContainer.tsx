@@ -18,7 +18,6 @@ import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU';
 import { FixedSmallSlowI } from './FixedSmallSlowI';
 import { FixedSmallSlowIII } from './FixedSmallSlowIII';
 import { FixedSmallSlowIV } from './FixedSmallSlowIV';
-import { FixedSmallSlowVMPU } from './FixedSmallSlowVMPU';
 import { FixedSmallSlowVThird } from './FixedSmallSlowVThird';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
@@ -102,16 +101,6 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 				/>
 			);
-		case 'fixed/small/slow-V-mpu':
-			return (
-				<FixedSmallSlowVMPU
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
-					imageLoading={imageLoading}
-				/>
-			);
 		case 'fixed/small/slow-III':
 			return (
 				<FixedSmallSlowIII
@@ -147,6 +136,7 @@ export const DecideContainer = ({
 		case 'fixed/medium/fast-XII':
 		case 'dynamic/package':
 		case 'fixed/small/fast-VIII':
+		case 'fixed/small/slow-V-mpu':
 			return (
 				<FallbackContainer
 					trails={trails}
