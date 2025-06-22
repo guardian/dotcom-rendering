@@ -315,7 +315,6 @@ const getCollectionHeight = (collection: AdCandidate): number => {
 			return 3;
 
 		case 'dynamic/slow':
-		case 'dynamic/slow-mpu':
 		case 'dynamic/fast':
 			if (groupedCounts.huge > 0 || groupedCounts.veryBig > 0) {
 				return 2.5;

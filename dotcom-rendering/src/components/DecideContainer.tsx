@@ -10,7 +10,6 @@ import type {
 import { DynamicFast } from './DynamicFast';
 import { DynamicPackage } from './DynamicPackage';
 import { DynamicSlow } from './DynamicSlow';
-import { DynamicSlowMPU } from './DynamicSlowMPU';
 import { FallbackContainer } from './FallbackContainer';
 import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
 import { FixedMediumFastXI } from './FixedMediumFastXI';
@@ -79,16 +78,6 @@ export const DecideContainer = ({
 		case 'dynamic/slow':
 			return (
 				<DynamicSlow
-					groupedTrails={groupedTrails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'dynamic/slow-mpu':
-			return (
-				<DynamicSlowMPU
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
@@ -167,6 +156,7 @@ export const DecideContainer = ({
 				/>
 			);
 		case 'fixed/small/slow-V-half':
+		case 'dynamic/slow-mpu':
 			return (
 				<FallbackContainer
 					trails={trails}
