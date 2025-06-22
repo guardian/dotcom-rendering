@@ -34,12 +34,6 @@ export const testCollectionsUk = [
 		collectionType: 'fixed/thrasher',
 		displayName: 'Wordiply Thrasher',
 	},
-
-	{
-		...defaultValues,
-		collectionType: 'fixed/medium/slow-VII',
-		displayName: 'Culture',
-	},
 	{
 		...defaultValues,
 		collectionType: 'fixed/thrasher',
