@@ -46,7 +46,7 @@ export type FEContainer =
 	| 'dynamic/slow-mpu' // to remove once 0 dynamic/slow-mpu
 	| 'fixed/large/slow-XIV'
 	| 'fixed/medium/fast-XI'
-	| 'fixed/medium/fast-XII'
+	| 'fixed/medium/fast-XII' // to remove once 0 fixed/medium/fast-XII
 	| 'fixed/medium/slow-VI'
 	| 'fixed/medium/slow-VII'
 	| 'fixed/medium/slow-XII-mpu'

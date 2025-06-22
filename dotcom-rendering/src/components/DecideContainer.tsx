@@ -13,7 +13,6 @@ import { DynamicSlow } from './DynamicSlow';
 import { FallbackContainer } from './FallbackContainer';
 import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
 import { FixedMediumFastXI } from './FixedMediumFastXI';
-import { FixedMediumFastXII } from './FixedMediumFastXII';
 import { FixedMediumSlowVI } from './FixedMediumSlowVI';
 import { FixedMediumSlowVII } from './FixedMediumSlowVII';
 import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU';
@@ -157,6 +156,7 @@ export const DecideContainer = ({
 			);
 		case 'fixed/small/slow-V-half':
 		case 'dynamic/slow-mpu':
+		case 'fixed/medium/fast-XII':
 			return (
 				<FallbackContainer
 					trails={trails}
@@ -190,16 +190,6 @@ export const DecideContainer = ({
 		case 'fixed/medium/slow-XII-mpu':
 			return (
 				<FixedMediumSlowXIIMPU
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/medium/fast-XII':
-			return (
-				<FixedMediumFastXII
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
