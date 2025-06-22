@@ -164,7 +164,6 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ad position (3)
-			{ ...testCollection, collectionType: 'fixed/small/slow-V-third' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (6)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
@@ -187,14 +186,11 @@ describe('Mobile Ads', () => {
 		const testCollections: AdCandidate[] = [
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ignored - is first container and thrasher
 			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ad position (1)
-			{ ...testCollection, collectionType: 'fixed/small/slow-V-third' },
 			{ ...testCollection, collectionType: 'fixed/medium/slow-XII-mpu' }, // Ad position (3)
-			{ ...testCollection, collectionType: 'fixed/small/slow-V-third' }, // Ad position (5)
 			{ ...testCollection, collectionType: 'fixed/small/fast-VIII' },
 			{ ...testCollection, collectionType: 'fixed/medium/fast-XI' }, // Ad position (7)
 			{ ...testCollection, collectionType: 'fixed/small/slow-III' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (9)
-			{ ...testCollection, collectionType: 'fixed/small/slow-V-third' }, // Ignored - is before merch high position
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 

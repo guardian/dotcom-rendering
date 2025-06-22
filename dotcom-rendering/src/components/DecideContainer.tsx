@@ -15,7 +15,6 @@ import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU';
 import { FixedSmallSlowI } from './FixedSmallSlowI';
 import { FixedSmallSlowIII } from './FixedSmallSlowIII';
 import { FixedSmallSlowIV } from './FixedSmallSlowIV';
-import { FixedSmallSlowVThird } from './FixedSmallSlowVThird';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
@@ -89,15 +88,6 @@ export const DecideContainer = ({
 				/>
 			);
 		case 'fixed/small/slow-V-third':
-			return (
-				<FixedSmallSlowVThird
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
-					imageLoading={imageLoading}
-				/>
-			);
 		case 'fixed/small/slow-V-half':
 		case 'fixed/medium/fast-XII':
 		case 'fixed/small/fast-VIII':
