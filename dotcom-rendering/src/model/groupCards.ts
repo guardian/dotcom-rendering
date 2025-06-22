@@ -6,9 +6,8 @@ import { enhanceCards } from './enhanceCards';
 /**
  * Groups cards based on their group specified in fronts tool
  *
- *
+ * NB: Dynamic/package and dynamic slow are now deprecated
  * For 'dynamic' container types in fronts tool, cards can be grouped by sizes:
- * NB: Dynamic/package is now deprecated
  *  - Snap (dynamic/package only)
  *  - Huge
  *  - Very big
@@ -36,8 +35,7 @@ export const groupCards = (
 	isLoopingVideoTest: boolean,
 ): DCRGroupedTrails => {
 	switch (container) {
-		case 'dynamic/fast':
-		case 'dynamic/slow': {
+		case 'dynamic/fast': {
 			const huge = curated.filter(({ card }) => card.group === '3');
 			const veryBig = curated.filter(({ card }) => card.group === '2');
 			const big = curated.filter(({ card }) => card.group === '1');

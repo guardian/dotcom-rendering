@@ -38,23 +38,8 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/slow',
-		displayName: 'Spotlight',
-	},
-	{
-		...defaultValues,
 		collectionType: 'fixed/thrasher',
 		displayName: 'Morning Mail newsletter (web only)',
-	},
-	{
-		...defaultValues,
-		collectionType: 'dynamic/slow',
-		displayName: 'Sport',
-	},
-	{
-		...defaultValues,
-		collectionType: 'dynamic/slow',
-		displayName: 'Opinion',
 	},
 	{
 		...defaultValues,
@@ -142,11 +127,6 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/slow',
-		displayName: 'Spotlight',
-	},
-	{
-		...defaultValues,
 		collectionType: 'fixed/small/slow-IV',
 		containerPalette: 'LongRunningAltPalette',
 		displayName: 'Ukraine invasion',
@@ -155,11 +135,6 @@ export const testCollectionsUs = [
 		...defaultValues,
 		collectionType: 'fixed/medium/slow-VI',
 		displayName: 'Opinion',
-	},
-	{
-		...defaultValues,
-		collectionType: 'dynamic/slow',
-		displayName: 'Sports',
 	},
 	{
 		...defaultValues,

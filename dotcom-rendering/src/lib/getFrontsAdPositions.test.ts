@@ -98,9 +98,6 @@ describe('Mobile Ads', () => {
 		const testCollections: AdCandidate[] = [
 			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ad position (0)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
-			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ad position (2)
-			{ ...testCollection, collectionType: 'dynamic/slow' },
-			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (8)
@@ -127,8 +124,6 @@ describe('Mobile Ads', () => {
 		const testCollections: AdCandidate[] = [
 			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ad position (0)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
-			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ad position (2)
-			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (5)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
 			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ad position (7)
@@ -154,8 +149,6 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (2)
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
-			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ad position (5)
-			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-III' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (9)
@@ -178,7 +171,6 @@ describe('Mobile Ads', () => {
 	// We used https://www.theguardian.com/uk/lifeandstyle as a blueprint
 	it('Lifeandstyle front, with more than 4 collections, with thrashers at various places', () => {
 		const testCollections: AdCandidate[] = [
-			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ad position (0)
 			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ad position (3)

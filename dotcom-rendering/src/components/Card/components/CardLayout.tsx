@@ -40,9 +40,6 @@ const minWidth = (minWidthInPixels?: number) => {
  * on mobile and vertically on desktop by default, with the avatar on the right
  * or bottom of the card respectively.
  *
- * A boosted card in a `dynamic/slow` container is an exception to this as it is
- * rendered horizontally on desktop by overriding `imagePositionOnDesktop`
- *
  * `scrollable/medium` is another exception as the medium cards require a
  * vertical layout at all breakpoints so we explicitly check that the image
  * position for desktop and mobile are both set to `bottom` to avoid affecting

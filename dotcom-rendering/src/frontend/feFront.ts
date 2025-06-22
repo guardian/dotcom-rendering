@@ -42,7 +42,7 @@ interface FEPressedPage {
 export type FEContainer =
 	| 'dynamic/fast'
 	| 'dynamic/package' // to remove once 0 dynamic/package remain
-	| 'dynamic/slow'
+	| 'dynamic/slow' // to remove once 0 dynamic/slow remain
 	| 'dynamic/slow-mpu' // to remove once 0 dynamic/slow-mpu
 	| 'fixed/large/slow-XIV'
 	| 'fixed/medium/fast-XI'
