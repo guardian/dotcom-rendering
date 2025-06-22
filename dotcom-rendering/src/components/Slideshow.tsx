@@ -1,7 +1,6 @@
 import type { Keyframes } from '@emotion/react';
 import { css, keyframes } from '@emotion/react';
 import {
-	from,
 	palette,
 	space,
 	textSansBold12,
@@ -79,7 +78,7 @@ const animationStyles = (animation: Keyframes) => css`
 `;
 
 const captionStyles = css`
-	${textSansBold12}
+	${textSansBold12};
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -91,19 +90,6 @@ const captionStyles = css`
 	);
 	color: ${palette.neutral[100]};
 	padding: 60px ${space[2]}px ${space[2]}px;
-`;
-
-const additionalDynamoCaptionStyles = css`
-	${from.tablet} {
-		top: 0;
-		bottom: initial;
-		padding-top: ${space[2]}px;
-		background: linear-gradient(
-			to top,
-			rgba(0, 0, 0, 0) 0%,
-			rgba(0, 0, 0, 0.8) 100%
-		);
-	}
 `;
 
 /**
@@ -139,7 +125,6 @@ const additionalDynamoCaptionStyles = css`
 export const Slideshow = ({
 	images,
 	imageSize,
-	isDynamo = false,
 	fade = 1,
 	display = 5,
 }: {
@@ -147,7 +132,6 @@ export const Slideshow = ({
 	imageSize: ImageSizeType;
 	fade?: number;
 	display?: number;
-	isDynamo?: boolean;
 }) => (
 	<>
 		{takeFirst(images, 10).map((slideshowImage, index, { length }) => {
@@ -188,7 +172,6 @@ export const Slideshow = ({
 						<figcaption
 							css={[
 								captionStyles,
-								isDynamo && additionalDynamoCaptionStyles,
 								// Don't show captions on mobile for small images
 								imageSize === 'small' && hideOnMobile,
 							]}

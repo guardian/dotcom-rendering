@@ -101,12 +101,6 @@ export const WithOneImage = () => (
 	</Wrapper>
 );
 
-export const WithTwoDynamo = () => (
-	<Wrapper maxWidth={640}>
-		<Slideshow images={two} imageSize="jumbo" isDynamo={true} />
-	</Wrapper>
-);
-
 export const WithTwoImages = () => (
 	<Wrapper maxWidth={320}>
 		<Slideshow images={two} imageSize="small" />
