@@ -15,7 +15,7 @@ import {
 } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import type { FEFrontCard } from '../frontend/feFront';
-import { shouldPadWrappableRows } from '../lib/dynamicSlices';
+import { shouldPadWrappableRows } from '../lib/cardWrappers';
 import type { EditionId } from '../lib/edition';
 import { useApi } from '../lib/useApi';
 import { enhanceCards } from '../model/enhanceCards';
