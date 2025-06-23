@@ -16,7 +16,7 @@ import { useEffect, useRef, useState } from 'react';
 import { takeFirst } from '../lib/tuple';
 import { palette } from '../palette';
 import type { DCRSlideshowImage } from '../types/front';
-import type { ImageSizeType } from './Card/components/ImageWrapper';
+import type { ImageSizeType } from './Card/components/MediaWrapper';
 import { CardPicture } from './CardPicture';
 import { SlideshowCarouselScrollingDots } from './SlideshowCarouselScrollingDots';
 

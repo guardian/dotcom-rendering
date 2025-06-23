@@ -1,8 +1,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
-import type { CardImageType } from '../../../types/layout';
-import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
+import type { CardMediaType } from '../../../types/layout';
+import type { ImageSizeType, MediaPositionType } from './MediaWrapper';
 
 const sizingStyles = css`
 	display: flex;
@@ -21,7 +21,7 @@ const flexBasisStyles = ({
 	isBetaContainer,
 }: {
 	imageSize: ImageSizeType;
-	imageType?: CardImageType;
+	imageType?: CardMediaType;
 	isBetaContainer: boolean;
 }): SerializedStyles => {
 	if (imageType === 'avatar') {
@@ -75,8 +75,8 @@ type ImageDirection = 'vertical' | 'horizontal' | 'none';
  * There is no padding on the side of the image where the text is.
  */
 const paddingBetaContainerStyles = (
-	imagePositionMobile: ImagePositionType,
-	imagePositionDesktop: ImagePositionType,
+	imagePositionMobile: MediaPositionType,
+	imagePositionDesktop: MediaPositionType,
 	padding: 1 | 2,
 ) => css`
 	${until.tablet} {
@@ -100,7 +100,7 @@ const paddingBetaContainerStyles = (
 `;
 
 const getImageDirection = (
-	imagePosition: ImagePositionType,
+	imagePosition: MediaPositionType,
 ): ImageDirection => {
 	if (imagePosition === 'top' || imagePosition === 'bottom') {
 		return 'vertical';
@@ -115,11 +115,11 @@ const getImageDirection = (
 
 type Props = {
 	children: React.ReactNode;
-	imageType?: CardImageType;
+	imageType?: CardMediaType;
 	imageSize: ImageSizeType;
 	isBetaContainer: boolean;
-	imagePositionOnDesktop: ImagePositionType;
-	imagePositionOnMobile: ImagePositionType;
+	imagePositionOnDesktop: MediaPositionType;
+	imagePositionOnMobile: MediaPositionType;
 	padContent?: 'small' | 'large';
 };
 

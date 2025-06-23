@@ -40,7 +40,7 @@ const basicCardProps: CardProps = {
 		src: 'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
 		altText: 'alt text',
 	},
-	imagePositionOnDesktop: 'top',
+	mediaPositionOnDesktop: 'top',
 	showAge: true,
 	isExternalLink: false,
 	canPlayInline: true,
@@ -285,7 +285,7 @@ export const WithExternalLink = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePositionOnDesktop="right"
+					mediaPositionOnDesktop="right"
 					kickerText="Instagram"
 					headlineSizes={{ desktop: 'medium', tablet: 'small' }}
 					headlineText="Follow The Guardian now"
@@ -459,7 +459,7 @@ export const WithDifferentImagePositions = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePositionOnDesktop="left"
+					mediaPositionOnDesktop="left"
 					imageSize="large"
 					headlineText="left"
 				/>
@@ -467,7 +467,7 @@ export const WithDifferentImagePositions = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePositionOnDesktop="right"
+					mediaPositionOnDesktop="right"
 					imageSize="large"
 					headlineText="right"
 				/>
@@ -475,7 +475,7 @@ export const WithDifferentImagePositions = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePositionOnDesktop="top"
+					mediaPositionOnDesktop="top"
 					headlineText="top"
 				/>
 			</CardWrapper>
@@ -489,7 +489,7 @@ export const WithDifferentImageSizes = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePositionOnDesktop="left"
+					mediaPositionOnDesktop="left"
 					headlineText="small"
 					imageSize="small"
 				/>
@@ -497,7 +497,7 @@ export const WithDifferentImageSizes = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePositionOnDesktop="left"
+					mediaPositionOnDesktop="left"
 					headlineText="medium"
 					imageSize="medium"
 				/>
@@ -505,7 +505,7 @@ export const WithDifferentImageSizes = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePositionOnDesktop="left"
+					mediaPositionOnDesktop="left"
 					headlineText="large"
 					imageSize="large"
 				/>
@@ -513,7 +513,7 @@ export const WithDifferentImageSizes = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePositionOnDesktop="left"
+					mediaPositionOnDesktop="left"
 					headlineText="jumbo"
 					imageSize="jumbo"
 				/>
@@ -630,7 +630,7 @@ export const WhenVerticalAndThemeOpinion = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="top"
+					mediaPositionOnDesktop="top"
 					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
@@ -649,7 +649,7 @@ export const WithSublinksWhenVerticalAndSpecialReport = () => {
 						design: ArticleDesign.Comment,
 						theme: ArticleSpecial.SpecialReport,
 					}}
-					imagePositionOnDesktop="top"
+					mediaPositionOnDesktop="top"
 					supportingContent={[
 						{
 							...aBasicLink,
@@ -690,7 +690,7 @@ export const WhenHorizontalAndOpinion = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="right"
+					mediaPositionOnDesktop="right"
 					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
@@ -702,7 +702,7 @@ export const WhenHorizontalAndOpinion = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="right"
+					mediaPositionOnDesktop="right"
 					supportingContentAlignment="horizontal"
 					supportingContent={[
 						{
@@ -735,7 +735,7 @@ export const WhenHorizontalAndOpinion = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="right"
+					mediaPositionOnDesktop="right"
 					supportingContent={[
 						{
 							...aBasicLink,
@@ -756,7 +756,7 @@ export const WhenNewsWithMoreThanTwoSublinks = () => {
 		<CardWrapper>
 			<Card
 				{...basicCardProps}
-				imagePositionOnDesktop="right"
+				mediaPositionOnDesktop="right"
 				imageSize="large"
 				supportingContentAlignment="horizontal"
 				supportingContent={[
@@ -792,7 +792,7 @@ export const WhenHorizontalOpinionWithSmallImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="left"
+					mediaPositionOnDesktop="left"
 					imageSize="small"
 					showQuotedHeadline={true}
 				/>
@@ -805,7 +805,7 @@ export const WhenHorizontalOpinionWithSmallImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="left"
+					mediaPositionOnDesktop="left"
 					imageSize="small"
 					supportingContentAlignment="horizontal"
 					supportingContent={[
@@ -846,7 +846,7 @@ export const WhenHorizontalOpinionWithMediumImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="left"
+					mediaPositionOnDesktop="left"
 					imageSize="medium"
 					showQuotedHeadline={true}
 				/>
@@ -859,7 +859,7 @@ export const WhenHorizontalOpinionWithMediumImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="left"
+					mediaPositionOnDesktop="left"
 					imageSize="medium"
 					supportingContentAlignment="horizontal"
 					supportingContent={[
@@ -900,7 +900,7 @@ export const WhenHorizontalOpinionWithLargeImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="left"
+					mediaPositionOnDesktop="left"
 					imageSize="large"
 					showQuotedHeadline={true}
 				/>
@@ -913,7 +913,7 @@ export const WhenHorizontalOpinionWithLargeImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="left"
+					mediaPositionOnDesktop="left"
 					imageSize="large"
 					supportingContentAlignment="horizontal"
 					supportingContent={[
@@ -954,7 +954,7 @@ export const WhenHorizontalOpinionWithJumboImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="left"
+					mediaPositionOnDesktop="left"
 					imageSize="jumbo"
 					showQuotedHeadline={true}
 				/>
@@ -967,7 +967,7 @@ export const WhenHorizontalOpinionWithJumboImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="left"
+					mediaPositionOnDesktop="left"
 					imageSize="jumbo"
 					supportingContentAlignment="horizontal"
 					supportingContent={[
@@ -1008,7 +1008,7 @@ export const WhenOpinionWithImageAtBottom = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="bottom"
+					mediaPositionOnDesktop="bottom"
 					supportingContent={[
 						{
 							...aBasicLink,
@@ -1048,9 +1048,9 @@ export const WhenVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						imagePositionOnDesktop="top"
+						mediaPositionOnDesktop="top"
 						imageSize="jumbo"
-						imagePositionOnMobile="top"
+						mediaPositionOnMobile="top"
 						mainMedia={mainVideo}
 					/>
 				</LI>
@@ -1064,9 +1064,9 @@ export const WhenVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						imagePositionOnDesktop="right"
+						mediaPositionOnDesktop="right"
 						imageSize="large"
-						imagePositionOnMobile="top"
+						mediaPositionOnMobile="top"
 						mainMedia={mainVideo}
 					/>
 				</LI>
@@ -1078,7 +1078,7 @@ export const WhenVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						imagePositionOnDesktop="top"
+						mediaPositionOnDesktop="top"
 						mainMedia={mainVideo}
 						canPlayInline={false}
 					/>
@@ -1093,9 +1093,9 @@ export const WhenVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						imagePositionOnDesktop="top"
+						mediaPositionOnDesktop="top"
 						imageSize="medium"
-						imagePositionOnMobile="bottom"
+						mediaPositionOnMobile="bottom"
 						mainMedia={mainVideo}
 					/>
 				</LI>
@@ -1109,7 +1109,7 @@ export const WhenVideoWithPlayButton = () => {
 									design: ArticleDesign.Video,
 									theme: Pillar.News,
 								}}
-								imagePositionOnDesktop="left"
+								mediaPositionOnDesktop="left"
 								mainMedia={mainVideo}
 								canPlayInline={false}
 							/>
@@ -1122,7 +1122,7 @@ export const WhenVideoWithPlayButton = () => {
 									design: ArticleDesign.Video,
 									theme: Pillar.News,
 								}}
-								imagePositionOnDesktop="right"
+								mediaPositionOnDesktop="right"
 								mainMedia={mainVideo}
 								canPlayInline={false}
 							/>
@@ -1136,7 +1136,7 @@ export const WhenVideoWithPlayButton = () => {
 									design: ArticleDesign.Video,
 									theme: Pillar.News,
 								}}
-								imagePositionOnDesktop="right"
+								mediaPositionOnDesktop="right"
 								mainMedia={mainVideo}
 								canPlayInline={false}
 							/>
@@ -1154,9 +1154,9 @@ export const WhenVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						imagePositionOnDesktop="right"
+						mediaPositionOnDesktop="right"
 						imageSize="large"
-						imagePositionOnMobile="top"
+						mediaPositionOnMobile="top"
 						mainMedia={mainVideo}
 					/>
 				</LI>
@@ -1168,8 +1168,8 @@ export const WhenVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						imagePositionOnDesktop="top"
-						imagePositionOnMobile="left"
+						mediaPositionOnDesktop="top"
+						mediaPositionOnMobile="left"
 						imageSize="medium"
 						mainMedia={mainVideo}
 					/>
@@ -1277,8 +1277,8 @@ export const WithBranding = () => {
 							headlineText="guardian.org branding on a Standard card"
 							kickerText="Kicker"
 							trailText=""
-							imagePositionOnDesktop="top"
-							imagePositionOnMobile="left"
+							mediaPositionOnDesktop="top"
+							mediaPositionOnMobile="left"
 							imageSize="small"
 							containerPalette={containerPalette}
 							branding={branding}
@@ -1295,8 +1295,8 @@ export const WithBranding = () => {
 							kickerText="Kicker"
 							headlineText="guardian.org branding on a Gallery card"
 							trailText=""
-							imagePositionOnDesktop="top"
-							imagePositionOnMobile="left"
+							mediaPositionOnDesktop="top"
+							mediaPositionOnMobile="left"
 							imageSize="small"
 							mainMedia={mainGallery}
 							containerPalette={containerPalette}
@@ -1314,8 +1314,8 @@ export const WithBranding = () => {
 							headlineText="guardian.org branding does not appear on non Labs articles"
 							kickerText="Kicker"
 							trailText=""
-							imagePositionOnDesktop="top"
-							imagePositionOnMobile="left"
+							mediaPositionOnDesktop="top"
+							mediaPositionOnMobile="left"
 							imageSize="small"
 							containerPalette={containerPalette}
 							branding={branding}
@@ -1349,9 +1349,9 @@ export const WithSpecialPaletteVariations = () => {
 					}
 					kickerText="Live kicker"
 					showPulsingDot={true}
-					imagePositionOnDesktop="right"
+					mediaPositionOnDesktop="right"
 					imageSize="large"
-					imagePositionOnMobile="top"
+					mediaPositionOnMobile="top"
 					containerPalette={containerPalette}
 					discussionId="/p/d8ex5"
 					discussionApiUrl="https://discussion.theguardian.com/discussion-api"
@@ -1376,8 +1376,8 @@ export const WithSpecialPaletteVariations = () => {
 					headlineText="Audio"
 					kickerText="Kicker"
 					trailText=""
-					imagePositionOnDesktop="top"
-					imagePositionOnMobile="left"
+					mediaPositionOnDesktop="top"
+					mediaPositionOnMobile="left"
 					imageSize="medium"
 					mainMedia={mainAudio}
 					containerPalette={containerPalette}
@@ -1451,8 +1451,8 @@ export const DynamoWithSpecialPaletteVariations = () => {
 				isDynamo={true}
 				kickerText="Main kicker"
 				headlineSizes={{ desktop: 'medium', tablet: 'small' }}
-				imagePositionOnDesktop="bottom"
-				imagePositionOnMobile="bottom"
+				mediaPositionOnDesktop="bottom"
+				mediaPositionOnMobile="bottom"
 				imageSize="large"
 				supportingContent={[
 					{
@@ -1574,7 +1574,7 @@ export const WithNoGap = () => {
 				>
 					<Card
 						{...basicCardProps}
-						imagePositionOnDesktop="left"
+						mediaPositionOnDesktop="left"
 						isOnwardContent={true}
 						showTopBarDesktop={false}
 						showTopBarMobile={false}
@@ -1601,7 +1601,7 @@ export const WithATinyGap = () => {
 				>
 					<Card
 						{...basicCardProps}
-						imagePositionOnDesktop="left"
+						mediaPositionOnDesktop="left"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -1625,7 +1625,7 @@ export const WithASmallGap = () => {
 				>
 					<Card
 						{...basicCardProps}
-						imagePositionOnDesktop="left"
+						mediaPositionOnDesktop="left"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -1650,7 +1650,7 @@ export const WithAMediumGap = () => {
 					<Card
 						{...basicCardProps}
 						containerType={'scrollable/small'}
-						imagePositionOnDesktop="left"
+						mediaPositionOnDesktop="left"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -1675,7 +1675,7 @@ export const WithALargeGap = () => {
 					<Card
 						{...basicCardProps}
 						containerType={'flexible/special'}
-						imagePositionOnDesktop="left"
+						mediaPositionOnDesktop="left"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -1704,7 +1704,7 @@ export const WithNoVerticalGap = () => {
 						isOnwardContent={true}
 						showTopBarDesktop={false}
 						showTopBarMobile={false}
-						imagePositionOnDesktop="bottom"
+						mediaPositionOnDesktop="bottom"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -1729,7 +1729,7 @@ export const WithAVerticalGapWhenLegacyContainer = () => {
 					<Card
 						{...basicCardProps}
 						containerType={'dynamic/fast'}
-						imagePositionOnDesktop="bottom"
+						mediaPositionOnDesktop="bottom"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -1755,7 +1755,7 @@ export const WithAVerticalGapWhenBetaContainer = () => {
 					<Card
 						{...basicCardProps}
 						containerType={'flexible/special'}
-						imagePositionOnDesktop="bottom"
+						mediaPositionOnDesktop="bottom"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -1781,7 +1781,7 @@ export const WithAVerticalGapWhenScrollableSmallContainer = () => {
 					<Card
 						{...basicCardProps}
 						containerType={'scrollable/small'}
-						imagePositionOnDesktop="bottom"
+						mediaPositionOnDesktop="bottom"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -1802,7 +1802,7 @@ export const WithBetaContainerAndSublinks = () => {
 				<Card
 					{...basicCardProps}
 					containerType="flexible/general"
-					imagePositionOnMobile="bottom"
+					mediaPositionOnMobile="bottom"
 					supportingContent={twoSublinks}
 				/>
 			</CardWrapper>
@@ -1818,7 +1818,7 @@ export const WithBetaContainerAndSublinksNoImage = () => {
 					{...basicCardProps}
 					image={undefined}
 					containerType="flexible/general"
-					imagePositionOnMobile="bottom"
+					mediaPositionOnMobile="bottom"
 					supportingContent={twoSublinks}
 				/>
 			</CardWrapper>

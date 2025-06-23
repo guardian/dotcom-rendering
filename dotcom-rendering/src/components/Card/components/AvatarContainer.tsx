@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
-import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
+import type { ImageSizeType, MediaPositionType } from './MediaWrapper';
 
 type Props = {
 	children: React.ReactNode;
 	imageSize: ImageSizeType;
-	imagePositionOnDesktop: ImagePositionType;
-	imagePositionOnMobile: ImagePositionType;
+	imagePositionOnDesktop: MediaPositionType;
+	imagePositionOnMobile: MediaPositionType;
 	isBetaContainer: boolean;
 	isFlexibleContainer: boolean;
 };

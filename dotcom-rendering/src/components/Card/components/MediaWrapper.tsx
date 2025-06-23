@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
-import type { CardImageType } from '../../../types/layout';
+import type { CardMediaType } from '../../../types/layout';
 
 const imageFixedSize = {
 	tiny: 86,
@@ -17,7 +17,7 @@ export type ImageFixedSizeOptions = {
 	desktop?: ImageFixedSize;
 };
 
-export type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
+export type MediaPositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
 export type ImageSizeType =
 	| 'small'
 	| 'medium'
@@ -32,19 +32,19 @@ export type ImageSizeType =
 
 type Props = {
 	children: React.ReactNode;
+	cardMediaType?: CardMediaType;
 	imageSize: ImageSizeType;
 	imageFixedSizes?: ImageFixedSizeOptions;
-	imageType?: CardImageType;
-	imagePositionOnDesktop: ImagePositionType;
-	imagePositionOnMobile: ImagePositionType;
+	mediaPositionOnDesktop: MediaPositionType;
+	mediaPositionOnMobile: MediaPositionType;
 	/**
 	 * Forces hiding the image overlay added to pictures & slideshows on hover.
 	 * This is to allow hiding the overlay on slideshow carousels where we don't
 	 * want it to be shown whilst retaining it for existing slideshows.
 	 */
 	hideImageOverlay?: boolean;
-	padImage?: boolean;
 	isBetaContainer?: boolean;
+	padMedia?: boolean;
 };
 
 const imageOverlayContainerStyles = css`
@@ -56,23 +56,23 @@ const imageOverlayContainerStyles = css`
 `;
 
 /**
- * There is no padding on the side of the image where the text is.
+ * There is no padding on the side of the media where the text is.
  */
-const imagePaddingStyles = (
-	imagePositionOnDesktop: ImagePositionType,
-	imagePositionOnMobile: ImagePositionType,
+const mediaPaddingStyles = (
+	mediaPositionOnDesktop: MediaPositionType,
+	mediaPositionOnMobile: MediaPositionType,
 ) => css`
 	${until.tablet} {
-		padding-left: ${imagePositionOnMobile !== 'right' && `${space[2]}px`};
-		padding-right: ${imagePositionOnMobile !== 'left' && `${space[2]}px`};
-		padding-top: ${imagePositionOnMobile !== 'bottom' && `${space[2]}px`};
-		padding-bottom: ${imagePositionOnMobile !== 'top' && `${space[2]}px`};
+		padding-left: ${mediaPositionOnMobile !== 'right' && `${space[2]}px`};
+		padding-right: ${mediaPositionOnMobile !== 'left' && `${space[2]}px`};
+		padding-top: ${mediaPositionOnMobile !== 'bottom' && `${space[2]}px`};
+		padding-bottom: ${mediaPositionOnMobile !== 'top' && `${space[2]}px`};
 	}
 	${from.tablet} {
-		padding-left: ${imagePositionOnDesktop !== 'right' && `${space[2]}px`};
-		padding-right: ${imagePositionOnDesktop !== 'left' && `${space[2]}px`};
-		padding-top: ${imagePositionOnDesktop !== 'bottom' && `${space[2]}px`};
-		padding-bottom: ${imagePositionOnDesktop !== 'top' && `${space[2]}px`};
+		padding-left: ${mediaPositionOnDesktop !== 'right' && `${space[2]}px`};
+		padding-right: ${mediaPositionOnDesktop !== 'left' && `${space[2]}px`};
+		padding-top: ${mediaPositionOnDesktop !== 'bottom' && `${space[2]}px`};
+		padding-bottom: ${mediaPositionOnDesktop !== 'top' && `${space[2]}px`};
 	}
 `;
 
@@ -152,41 +152,41 @@ const fixImageWidth = ({
 	`}
 `;
 
-export const ImageWrapper = ({
+export const MediaWrapper = ({
 	children,
 	imageSize,
 	imageFixedSizes = { mobile: 'medium' },
-	imageType,
-	imagePositionOnDesktop,
-	imagePositionOnMobile,
+	cardMediaType,
+	mediaPositionOnDesktop,
+	mediaPositionOnMobile,
 	hideImageOverlay,
-	padImage,
 	isBetaContainer,
+	padMedia,
 }: Props) => {
 	const isHorizontalOnDesktop =
-		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
+		mediaPositionOnDesktop === 'left' || mediaPositionOnDesktop === 'right';
 	const isHorizontalOnMobile =
-		imagePositionOnMobile === 'left' || imagePositionOnMobile === 'right';
+		mediaPositionOnMobile === 'left' || mediaPositionOnMobile === 'right';
 
 	return (
 		<div
 			css={[
-				(imageType === 'slideshow' ||
-					imageType === 'picture' ||
-					imageType === 'video' ||
-					imageType === 'loop-video') &&
+				(cardMediaType === 'slideshow' ||
+					cardMediaType === 'picture' ||
+					cardMediaType === 'video' ||
+					cardMediaType === 'loop-video') &&
 					isHorizontalOnDesktop &&
 					flexBasisStyles({
 						imageSize,
 						isBetaContainer: !!isBetaContainer,
 					}),
-				imageType === 'avatar' &&
+				cardMediaType === 'avatar' &&
 					css`
 						display: flex;
 						justify-content: flex-end;
 					`,
-				/* If no image position for mobile is provided then hide the image */
-				imagePositionOnMobile === 'none' &&
+				/* If no media position for mobile is provided then hide the media */
+				mediaPositionOnMobile === 'none' &&
 					css`
 						${until.tablet} {
 							display: none;
@@ -207,25 +207,26 @@ export const ImageWrapper = ({
 						display: block;
 					}
 				`,
-				padImage &&
-					imagePaddingStyles(
-						imagePositionOnDesktop,
-						imagePositionOnMobile,
+				padMedia &&
+					mediaPaddingStyles(
+						mediaPositionOnDesktop,
+						mediaPositionOnMobile,
 					),
 			]}
 		>
 			<>
 				{children}
 				{/* This image overlay is styled when the CardLink is hovered */}
-				{(imageType === 'picture' || imageType === 'slideshow') &&
+				{(cardMediaType === 'picture' ||
+					cardMediaType === 'slideshow') &&
 					!hideImageOverlay && (
 						<div
 							css={[
 								imageOverlayContainerStyles,
-								padImage &&
-									imagePaddingStyles(
-										imagePositionOnDesktop,
-										imagePositionOnMobile,
+								padMedia &&
+									mediaPaddingStyles(
+										mediaPositionOnDesktop,
+										mediaPositionOnMobile,
 									),
 							]}
 						>

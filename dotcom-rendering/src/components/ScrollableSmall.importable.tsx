@@ -90,8 +90,8 @@ export const ScrollableSmall = ({
 								desktop: 'xxsmall',
 								mobile: 'xxxsmall',
 							}}
-							imagePositionOnDesktop="left"
-							imagePositionOnMobile="left"
+							mediaPositionOnDesktop="left"
+							mediaPositionOnMobile="left"
 							imageSize="small"
 							trailText={undefined} // unsupported
 							supportingContent={undefined} // unsupported

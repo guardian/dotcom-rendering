@@ -16,9 +16,9 @@ import type { MainMedia } from '../types/mainMedia';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
 import type {
-	ImagePositionType,
 	ImageSizeType,
-} from './Card/components/ImageWrapper';
+	MediaPositionType,
+} from './Card/components/MediaWrapper';
 import { TrailText } from './Card/components/TrailText';
 import { CardHeadline, type ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
@@ -287,8 +287,8 @@ export type Props = {
 	showByline?: boolean;
 	webPublicationDate?: string;
 	image?: DCRFrontImage;
-	imagePositionOnDesktop?: ImagePositionType /** TODO Remove this prop  */;
-	imagePositionOnMobile?: ImagePositionType /** TODO Remove this prop  */;
+	imagePositionOnDesktop?: MediaPositionType /** TODO Remove this prop  */;
+	imagePositionOnMobile?: MediaPositionType /** TODO Remove this prop  */;
 	/** Size is ignored when position = 'top' because in that case the image flows based on width */
 	imageSize: ImageSizeType;
 	imageLoading: Loading;
@@ -507,10 +507,10 @@ export const FeatureCard = ({
 													mediaDuration={
 														mainMedia.duration
 													}
-													imagePositionOnDesktop={
+													mediaPositionOnDesktop={
 														imagePositionOnDesktop
 													}
-													imagePositionOnMobile={
+													mediaPositionOnMobile={
 														imagePositionOnMobile
 													}
 												/>

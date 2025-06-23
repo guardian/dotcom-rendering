@@ -9,8 +9,8 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import type { ImagePositionType } from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
+import type { MediaPositionType } from './Card/components/MediaWrapper';
 import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
 import type { ResponsiveFontSize } from './CardHeadline';
@@ -33,8 +33,8 @@ type Props = {
 
 type BoostProperties = {
 	headlineSizes: ResponsiveFontSize;
-	imagePositionOnDesktop: ImagePositionType;
-	imagePositionOnMobile: ImagePositionType;
+	mediaPositionOnDesktop: MediaPositionType;
+	mediaPositionOnMobile: MediaPositionType;
 	supportingContentAlignment: Alignment;
 	liveUpdatesAlignment: Alignment;
 	trailTextSize: TrailTextSize;
@@ -59,8 +59,8 @@ const determineCardProperties = (
 					tablet: 'large',
 					mobile: 'medium',
 				},
-				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
+				mediaPositionOnDesktop: 'right',
+				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
@@ -73,8 +73,8 @@ const determineCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'large',
 				},
-				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
+				mediaPositionOnDesktop: 'right',
+				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
@@ -87,8 +87,8 @@ const determineCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'xlarge',
 				},
-				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
-				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
+				mediaPositionOnDesktop: mediaCard ? 'top' : 'bottom',
+				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
@@ -100,8 +100,8 @@ const determineCardProperties = (
 					tablet: 'xxlarge',
 					mobile: 'xxlarge',
 				},
-				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
-				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
+				mediaPositionOnDesktop: mediaCard ? 'top' : 'bottom',
+				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
@@ -143,8 +143,8 @@ export const OneCardLayout = ({
 
 	const {
 		headlineSizes,
-		imagePositionOnDesktop,
-		imagePositionOnMobile,
+		mediaPositionOnDesktop,
+		mediaPositionOnMobile,
 		supportingContentAlignment,
 		liveUpdatesAlignment,
 		trailTextSize,
@@ -164,9 +164,9 @@ export const OneCardLayout = ({
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
 					headlineSizes={headlineSizes}
-					imagePositionOnDesktop={imagePositionOnDesktop}
-					imagePositionOnMobile={imagePositionOnMobile}
-					imageSize={'jumbo'}
+					mediaPositionOnDesktop={mediaPositionOnDesktop}
+					mediaPositionOnMobile={mediaPositionOnMobile}
+					imageSize="jumbo"
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
 					supportingContentAlignment={supportingContentAlignment}
@@ -250,7 +250,7 @@ const TwoOrFourCardLayout = ({
 							absoluteServerTimes={absoluteServerTimes}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
-							imagePositionOnDesktop={getImagePosition(
+							mediaPositionOnDesktop={getImagePosition(
 								hasTwoOrFewerCards,
 								isMediaCard(card.format) || !!card.isNewsletter,
 							)}

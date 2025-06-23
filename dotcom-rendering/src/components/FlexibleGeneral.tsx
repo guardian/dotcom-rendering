@@ -10,11 +10,11 @@ import type {
 	DCRGroupedTrails,
 } from '../types/front';
 import type { Position } from './Card/Card';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
+import type {
+	ImageSizeType,
+	MediaPositionType,
+} from './Card/components/MediaWrapper';
 import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
 import type { ResponsiveFontSize } from './CardHeadline';
@@ -146,8 +146,8 @@ const ImmersiveCardLayout = ({
 
 type BoostedSplashProperties = {
 	headlineSizes: ResponsiveFontSize;
-	imagePositionOnDesktop: ImagePositionType;
-	imagePositionOnMobile: ImagePositionType;
+	imagePositionOnDesktop: MediaPositionType;
+	imagePositionOnMobile: MediaPositionType;
 	imageSize: ImageSizeType;
 	supportingContentAlignment: Alignment;
 	liveUpdatesAlignment: Alignment;
@@ -315,8 +315,8 @@ const SplashCardLayout = ({
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
 					headlineSizes={headlineSizes}
-					imagePositionOnDesktop={imagePositionOnDesktop}
-					imagePositionOnMobile={imagePositionOnMobile}
+					mediaPositionOnDesktop={imagePositionOnDesktop}
+					mediaPositionOnMobile={imagePositionOnMobile}
 					imageSize={imageSize}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
@@ -467,8 +467,8 @@ const FullWidthCardLayout = ({
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
 					headlineSizes={headlineSizes}
-					imagePositionOnDesktop="right"
-					imagePositionOnMobile={
+					mediaPositionOnDesktop="right"
+					mediaPositionOnMobile={
 						isMediaCard(card.format) ? 'top' : 'bottom'
 					}
 					imageSize={imageSize}
@@ -557,7 +557,7 @@ const HalfWidthCardLayout = ({
 							absoluteServerTimes={absoluteServerTimes}
 							image={card.image}
 							imageLoading={imageLoading}
-							imagePositionOnDesktop="left"
+							mediaPositionOnDesktop="left"
 							supportingContent={card.supportingContent?.slice(
 								0,
 								2,

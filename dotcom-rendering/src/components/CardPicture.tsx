@@ -3,7 +3,7 @@ import { breakpoints, space, until } from '@guardian/source/foundations';
 import type { ImgHTMLAttributes } from 'react';
 import React from 'react';
 import type { AspectRatio } from '../types/front';
-import type { ImageSizeType } from './Card/components/ImageWrapper';
+import type { ImageSizeType } from './Card/components/MediaWrapper';
 import type { ImageWidthType } from './Picture';
 import { generateSources, getFallbackSource } from './Picture';
 

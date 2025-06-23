@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import { from, space } from '@guardian/source/foundations';
-import type { CardImageType } from '../../../types/layout';
-import type { ImagePositionType } from './ImageWrapper';
+import type { CardMediaType } from '../../../types/layout';
+import type { MediaPositionType } from './MediaWrapper';
 
 export type GapSize = 'none' | 'tiny' | 'small' | 'medium' | 'large';
 
@@ -11,9 +11,9 @@ export type GapSizes = { row: GapSize; column: GapSize };
 type Props = {
 	children: React.ReactNode;
 	cardBackgroundColour: string;
-	imageType: CardImageType | undefined;
-	imagePositionOnDesktop: ImagePositionType;
-	imagePositionOnMobile: ImagePositionType;
+	imageType: CardMediaType | undefined;
+	imagePositionOnDesktop: MediaPositionType;
+	imagePositionOnMobile: MediaPositionType;
 	minWidthInPixels?: number;
 	gapSizes: GapSizes;
 	isBetaContainer: boolean;
@@ -50,10 +50,10 @@ const minWidth = (minWidthInPixels?: number) => {
  * existing layouts where the default position values are relied upon.
  */
 export const decideAvatarPosition = (
-	imagePositionOnMobile: ImagePositionType,
-	imagePositionOnDesktop: ImagePositionType,
+	imagePositionOnMobile: MediaPositionType,
+	imagePositionOnDesktop: MediaPositionType,
 	isBetaContainer: boolean,
-): { mobile: ImagePositionType; desktop: ImagePositionType } => {
+): { mobile: MediaPositionType; desktop: MediaPositionType } => {
 	if (
 		imagePositionOnMobile === 'bottom' &&
 		imagePositionOnDesktop === 'bottom'
@@ -95,8 +95,8 @@ const imagePositionMap = {
 };
 
 const decideFlexDirection = (
-	imagePositionOnMobile: ImagePositionType,
-	imagePositionOnDesktop: ImagePositionType,
+	imagePositionOnMobile: MediaPositionType,
+	imagePositionOnDesktop: MediaPositionType,
 	isBetaContainer: boolean,
 	hasAvatar?: boolean,
 ) => {
@@ -120,8 +120,8 @@ const decideFlexDirection = (
 };
 
 const decidePosition = (
-	imagePositionOnMobile: ImagePositionType,
-	imagePositionOnDesktop: ImagePositionType,
+	imagePositionOnMobile: MediaPositionType,
+	imagePositionOnDesktop: MediaPositionType,
 	isBetaContainer: boolean,
 	hasAvatar?: boolean,
 ) => {

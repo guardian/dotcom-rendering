@@ -54,8 +54,8 @@ export const FixedSmallSlowVThird = ({
 									showAge={showAge}
 									absoluteServerTimes={absoluteServerTimes}
 									headlineSizes={{ desktop: 'xxsmall' }}
-									imagePositionOnDesktop="left"
-									imagePositionOnMobile="none"
+									mediaPositionOnDesktop="left"
+									mediaPositionOnMobile="none"
 									imageSize="small"
 									imageLoading={imageLoading}
 								/>

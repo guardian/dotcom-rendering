@@ -6,16 +6,16 @@ import type {
 	DCRContainerPalette,
 	DCRFrontCard,
 } from '../types/front';
-import type { ImagePositionType } from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
+import type { MediaPositionType } from './Card/components/MediaWrapper';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
 
-const getImagePositionOnDesktop = (
+const getMediaPositionOnDesktop = (
 	format: ArticleFormat,
 	isNewsletter: boolean,
-): ImagePositionType => {
+): MediaPositionType => {
 	if (isMediaCard(format) || isNewsletter) {
 		return 'top';
 	}
@@ -65,7 +65,7 @@ export const StaticMediumFour = ({
 							absoluteServerTimes={absoluteServerTimes}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
-							imagePositionOnDesktop={getImagePositionOnDesktop(
+							mediaPositionOnDesktop={getMediaPositionOnDesktop(
 								card.format,
 								!!card.isNewsletter,
 							)}

@@ -61,8 +61,8 @@ export const ScrollableMedium = ({
 								desktop: 'xsmall',
 								tablet: 'xxsmall',
 							}}
-							imagePositionOnDesktop={imagePosition}
-							imagePositionOnMobile={imagePosition}
+							mediaPositionOnDesktop={imagePosition}
+							mediaPositionOnMobile={imagePosition}
 							imageSize="medium"
 							trailText={undefined} // unsupported
 							supportingContent={undefined} // unsupported

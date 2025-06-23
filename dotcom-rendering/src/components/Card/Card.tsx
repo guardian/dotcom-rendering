@@ -63,10 +63,10 @@ import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import type {
 	ImageFixedSizeOptions,
-	ImagePositionType,
 	ImageSizeType,
-} from './components/ImageWrapper';
-import { ImageWrapper } from './components/ImageWrapper';
+	MediaPositionType,
+} from './components/MediaWrapper';
+import { MediaWrapper } from './components/MediaWrapper';
 import { SvgWaveform } from './components/SvgWaveform';
 import { TrailText, type TrailTextSize } from './components/TrailText';
 
@@ -83,8 +83,8 @@ export type Props = {
 	showByline?: boolean;
 	webPublicationDate?: string;
 	image?: DCRFrontImage;
-	imagePositionOnDesktop?: ImagePositionType;
-	imagePositionOnMobile?: ImagePositionType;
+	mediaPositionOnDesktop?: MediaPositionType;
+	mediaPositionOnMobile?: MediaPositionType;
 	/** Size is ignored when position = 'top' because in that case the image flows based on width */
 	imageSize?: ImageSizeType;
 	imageLoading: Loading;
@@ -177,8 +177,8 @@ const StarRatingComponent = ({
 );
 
 const waveformWrapper = (
-	imagePositionOnMobile?: ImagePositionType,
-	imagePositionOnDesktop?: ImagePositionType,
+	imagePositionOnMobile?: MediaPositionType,
+	imagePositionOnDesktop?: MediaPositionType,
 ) => css`
 	position: absolute;
 	left: 0;
@@ -304,7 +304,7 @@ const getMedia = ({
 
 const decideSublinkPosition = (
 	supportingContent?: DCRSupportingContent[],
-	imagePositionOnDesktop?: ImagePositionType,
+	imagePositionOnDesktop?: MediaPositionType,
 	alignment?: Alignment,
 	supportingContentPosition?: Position,
 	showLivePlayable?: boolean,
@@ -346,8 +346,8 @@ export const Card = ({
 	showByline,
 	webPublicationDate,
 	image,
-	imagePositionOnDesktop = 'top',
-	imagePositionOnMobile = 'left',
+	mediaPositionOnDesktop = 'top',
+	mediaPositionOnMobile = 'left',
 	imageSize = 'small',
 	imageLoading,
 	trailText,
@@ -399,7 +399,7 @@ export const Card = ({
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
 		supportingContent,
-		imagePositionOnDesktop,
+		mediaPositionOnDesktop,
 		supportingContentAlignment,
 		supportingContentPosition,
 		showLivePlayable,
@@ -561,8 +561,8 @@ export const Card = ({
 	 * The avatar position is not always the same as the image position.
 	 */
 	const avatarPosition = decideAvatarPosition(
-		imagePositionOnMobile,
-		imagePositionOnDesktop,
+		mediaPositionOnMobile,
+		mediaPositionOnDesktop,
 		isBetaContainer,
 	);
 
@@ -594,7 +594,7 @@ export const Card = ({
 			return undefined;
 		} else if (
 			imageSize === 'large' &&
-			imagePositionOnDesktop === 'right' &&
+			mediaPositionOnDesktop === 'right' &&
 			media?.type !== 'avatar'
 		) {
 			return 'desktop';
@@ -639,8 +639,8 @@ export const Card = ({
 		}
 
 		if (
-			imagePositionOnDesktop === 'bottom' ||
-			imagePositionOnMobile === 'bottom'
+			mediaPositionOnDesktop === 'bottom' ||
+			mediaPositionOnMobile === 'bottom'
 		) {
 			return {
 				row: showLivePlayable ? 'small' : 'tiny',
@@ -675,7 +675,7 @@ export const Card = ({
 					!!isFlexSplash ||
 					(isBetaContainer &&
 						!!image &&
-						(imagePositionOnMobile === 'bottom' ||
+						(mediaPositionOnMobile === 'bottom' ||
 							isMediaCard(format)))
 				}
 				fillBackgroundOnDesktop={
@@ -774,8 +774,8 @@ export const Card = ({
 
 			<CardLayout
 				cardBackgroundColour={backgroundColour}
-				imagePositionOnDesktop={imagePositionOnDesktop}
-				imagePositionOnMobile={imagePositionOnMobile}
+				imagePositionOnDesktop={mediaPositionOnDesktop}
+				imagePositionOnMobile={mediaPositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
 				imageType={media?.type}
 				gapSizes={getGapSizes()}
@@ -788,24 +788,24 @@ export const Card = ({
 				{mainMedia?.type === 'Audio' && (
 					<div
 						css={waveformWrapper(
-							imagePositionOnMobile,
-							imagePositionOnDesktop,
+							mediaPositionOnMobile,
+							mediaPositionOnDesktop,
 						)}
 					>
 						<SvgWaveform />
 					</div>
 				)}
 				{media && (
-					<ImageWrapper
+					<MediaWrapper
 						imageSize={imageSize}
 						imageFixedSizes={imageFixedSizeOptions()}
-						imageType={media.type}
-						imagePositionOnDesktop={imagePositionOnDesktop}
-						imagePositionOnMobile={imagePositionOnMobile}
+						cardMediaType={media.type}
+						mediaPositionOnDesktop={mediaPositionOnDesktop}
+						mediaPositionOnMobile={mediaPositionOnMobile}
 						hideImageOverlay={
 							media.type === 'slideshow' && isFlexibleContainer
 						}
-						padImage={isMediaCardOrNewsletter && isBetaContainer}
+						padMedia={isMediaCardOrNewsletter && isBetaContainer}
 						isBetaContainer={isBetaContainer}
 					>
 						{media.type === 'slideshow' &&
@@ -841,8 +841,8 @@ export const Card = ({
 						{media.type === 'avatar' && (
 							<AvatarContainer
 								imageSize={imageSize}
-								imagePositionOnDesktop={imagePositionOnDesktop}
-								imagePositionOnMobile={imagePositionOnMobile}
+								imagePositionOnDesktop={mediaPositionOnDesktop}
+								imagePositionOnMobile={mediaPositionOnMobile}
 								isBetaContainer={isBetaContainer}
 								isFlexibleContainer={isFlexibleContainer}
 							>
@@ -949,17 +949,17 @@ export const Card = ({
 														: 'small'
 												}
 												iconSizeOnMobile={
-													imagePositionOnMobile ===
+													mediaPositionOnMobile ===
 														'left' ||
-													imagePositionOnMobile ===
+													mediaPositionOnMobile ===
 														'right'
 														? 'small'
 														: 'large'
 												}
 												hidePillOnMobile={
-													imagePositionOnMobile ===
+													mediaPositionOnMobile ===
 														'left' ||
-													imagePositionOnMobile ===
+													mediaPositionOnMobile ===
 														'right'
 												}
 												enableAds={false}
@@ -1045,17 +1045,17 @@ export const Card = ({
 								)}
 							</>
 						)}
-					</ImageWrapper>
+					</MediaWrapper>
 				)}
 				<ContentWrapper
 					imageType={media?.type}
 					imageSize={imageSize}
 					isBetaContainer={isBetaContainer}
 					imagePositionOnDesktop={
-						image ? imagePositionOnDesktop : 'none'
+						image ? mediaPositionOnDesktop : 'none'
 					}
 					imagePositionOnMobile={
-						image ? imagePositionOnMobile : 'none'
+						image ? mediaPositionOnMobile : 'none'
 					}
 					padContent={determinePadContent(
 						isMediaCardOrNewsletter,
@@ -1197,7 +1197,7 @@ export const Card = ({
 
 					{sublinkPosition === 'outer' &&
 						supportingContentAlignment === 'horizontal' &&
-						imagePositionOnDesktop === 'right' && (
+						mediaPositionOnDesktop === 'right' && (
 							<HorizontalDivider />
 						)}
 				</ContentWrapper>
@@ -1208,8 +1208,8 @@ export const Card = ({
 					/** We allow this area to take up more space so that cards without
 					 * sublinks next to cards with sublinks have the same meta alignment */
 					isBetaContainer &&
-					(imagePositionOnDesktop === 'left' ||
-						imagePositionOnDesktop === 'right') &&
+					(mediaPositionOnDesktop === 'left' ||
+						mediaPositionOnDesktop === 'right') &&
 					css`
 						${from.tablet} {
 							flex-basis: 100%;

@@ -55,8 +55,8 @@ const Snap100 = ({
 						desktop: 'small',
 						tablet: 'xxsmall',
 					}}
-					imagePositionOnDesktop="right"
-					imagePositionOnMobile="left"
+					mediaPositionOnDesktop="right"
+					mediaPositionOnMobile="left"
 					imageSize="medium"
 					trailText={snaps[0].trailText}
 					supportingContentAlignment="horizontal"
@@ -100,8 +100,8 @@ const Card100 = ({
 							  }
 							: { desktop: 'medium', tablet: 'small' }
 					}
-					imagePositionOnDesktop="bottom"
-					imagePositionOnMobile="bottom"
+					mediaPositionOnDesktop="bottom"
+					mediaPositionOnMobile="bottom"
 					imageSize="large"
 					isDynamo={containerPalette && true}
 					supportingContent={limitSupportingContent(cards[0])}
@@ -141,8 +141,8 @@ const Card75_Card25 = ({
 						showAge={showAge}
 						absoluteServerTimes={absoluteServerTimes}
 						headlineSizes={{ desktop: 'small' }}
-						imagePositionOnDesktop="right"
-						imagePositionOnMobile="bottom"
+						mediaPositionOnDesktop="right"
+						mediaPositionOnMobile="bottom"
 						imageSize="medium"
 						trailText={card.trailText}
 						imageLoading={imageLoading}
@@ -451,8 +451,8 @@ const Card75_ColumnOfCards25 = ({
 						showAge={showAge}
 						absoluteServerTimes={absoluteServerTimes}
 						headlineSizes={{ desktop: 'medium', tablet: 'small' }}
-						imagePositionOnDesktop="bottom"
-						imagePositionOnMobile="bottom"
+						mediaPositionOnDesktop="bottom"
+						mediaPositionOnMobile="bottom"
 						imageSize="large"
 						supportingContent={limitSupportingContent(card)}
 						isDynamo={true}
