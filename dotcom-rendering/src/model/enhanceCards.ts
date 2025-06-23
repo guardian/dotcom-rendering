@@ -317,8 +317,8 @@ export const enhanceCards = (
 			isLoopingVideoTest,
 			faciaCard.properties.showMainVideo ??
 				faciaCard.properties.mediaSelect?.showMainVideo,
-			faciaCard.mediaAtom ??
-				faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
+			faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
+				faciaCard.mediaAtom ??
 				faciaCard.properties.maybeContent?.elements.mediaAtoms[0],
 			faciaCard.card.galleryCount,
 			faciaCard.card.audioDuration,
