@@ -9,9 +9,9 @@ import { LoopVideoProgressBar } from './LoopVideoProgressBar';
 
 const videoStyles = (width: number, height: number) => css`
 	position: relative;
+	display: flex;
+	height: auto;
 	width: 100%;
-	/* Find out why this is needed to align the video with its container. */
-	margin-bottom: -3px;
 	cursor: pointer;
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${width} / ${height};
