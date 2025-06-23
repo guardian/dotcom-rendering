@@ -23,9 +23,7 @@ import type { DCRBadgeType } from '../types/badge';
 import { Badge } from './Badge';
 import { ContainerOverrides } from './ContainerOverrides';
 import { Details } from './Details';
-import { Island } from './Island';
 import { Section } from './Section';
-import { ShowMore } from './ShowMore.importable';
 
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */
@@ -427,24 +425,6 @@ export const LabsSection = ({
 					</LeftColumn>
 					<Content hasPageSkin={hasPageSkin}>
 						{children}
-						{canShowMore && (
-							<Island
-								priority="feature"
-								defer={{ until: 'interaction' }}
-							>
-								<ShowMore
-									title={title}
-									sectionId={sectionId}
-									collectionId={collectionId}
-									pageId={pageId}
-									ajaxUrl={ajaxUrl}
-									containerPalette={'Branded'}
-									showAge={true}
-									discussionApiUrl={discussionApiUrl}
-									editionId={editionId}
-								/>
-							</Island>
-						)}
 						{badge && (
 							<div css={badgeStyles}>
 								<div css={paidForByStyles}>Paid for by</div>

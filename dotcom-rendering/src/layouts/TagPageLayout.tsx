@@ -162,7 +162,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								toggleable={false}
 								pageId={tagPage.pageId}
 								editionId={tagPage.editionId}
-								canShowMore={false}
 								ajaxUrl={tagPage.config.ajaxUrl}
 								pagination={
 									index === tagPage.groupedTrails.length - 1

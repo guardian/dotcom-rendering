@@ -3,7 +3,6 @@ import { isString } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import type { EditionId } from '../lib/edition';
-import { hideAge } from '../lib/hideAge';
 import { palette, palette as schemePalette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
 import type {
@@ -20,7 +19,6 @@ import { FrontPagination } from './FrontPagination';
 import { FrontSectionTitle } from './FrontSectionTitle';
 import { Island } from './Island';
 import { ShowHideButton } from './ShowHideButton';
-import { ShowMore } from './ShowMore.importable';
 import { Treats } from './Treats';
 
 type Props = {
@@ -69,8 +67,6 @@ type Props = {
 	editionId: EditionId;
 	/** A list of related links that appear in the bottom of the left column on fronts */
 	treats?: TreatType[];
-	/** Enable the "Show More" button on this container to allow readers to load more cards */
-	canShowMore?: boolean;
 	ajaxUrl?: string;
 	/** Puts pagination at the bottom of the container allowing the user to navigate to other pages,
 	 * usually used on the last container on a page */
@@ -527,7 +523,6 @@ export const FrontSection = ({
 	toggleable = false,
 	treats,
 	url,
-	canShowMore,
 	ajaxUrl,
 	pagination,
 	isOnPaidContentFront,
@@ -543,14 +538,6 @@ export const FrontSection = ({
 	const isToggleable = toggleable && !!sectionId;
 	const showVerticalRule = !hasPageSkin;
 	const isBetaContainer = !!containerLevel;
-	const showMore =
-		canShowMore &&
-		!!title &&
-		!!sectionId &&
-		!!collectionId &&
-		!!pageId &&
-		!!ajaxUrl &&
-		!isBetaContainer;
 
 	// These are for beta containers only
 	const useLargeSpacingMobile = !!isNextCollectionPrimary || isAboveMobileAd;
@@ -693,23 +680,6 @@ export const FrontSection = ({
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<AustralianTerritorySwitcher
 								targetedTerritory={targetedTerritory}
-							/>
-						</Island>
-					) : showMore ? (
-						<Island
-							priority="feature"
-							defer={{ until: 'interaction' }}
-						>
-							<ShowMore
-								title={title}
-								sectionId={sectionId}
-								collectionId={collectionId}
-								pageId={pageId}
-								ajaxUrl={ajaxUrl}
-								editionId={editionId}
-								containerPalette={containerPalette}
-								showAge={!hideAge.includes(title)}
-								discussionApiUrl={discussionApiUrl}
 							/>
 						</Island>
 					) : null}

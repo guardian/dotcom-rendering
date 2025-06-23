@@ -583,7 +583,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								}
 								editionId={front.editionId}
 								treats={collection.treats}
-								canShowMore={collection.canShowMore}
 								ajaxUrl={front.config.ajaxUrl}
 								isOnPaidContentFront={isPaidContent}
 								targetedTerritory={collection.targetedTerritory}

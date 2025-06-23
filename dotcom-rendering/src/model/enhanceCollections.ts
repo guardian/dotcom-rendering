@@ -77,7 +77,7 @@ export const enhanceCollections = ({
 		findCollectionSuitableForFrontBranding(collections);
 
 	return collections.filter(isSupported).map((collection, index) => {
-		const { id, displayName, collectionType, hasMore, href, description } =
+		const { id, displayName, collectionType, href, description } =
 			collection;
 		const allCards = [...collection.curated, ...collection.backfill];
 		const collectionBranding = decideCollectionBranding({
@@ -106,9 +106,6 @@ export const enhanceCollections = ({
 
 		const isNextCollectionPrimary =
 			collections[index + 1]?.config.collectionLevel === 'Primary';
-		const isBetaContainer = BETA_CONTAINERS.includes(
-			collection.collectionType,
-		);
 
 		return {
 			id,
@@ -152,8 +149,6 @@ export const enhanceCollections = ({
 			config: {
 				showDateHeader: collection.config.showDateHeader,
 			},
-			canShowMore:
-				hasMore && !collection.config.hideShowMore && !isBetaContainer,
 			targetedTerritory: collection.targetedTerritory,
 			aspectRatio: collection.config.aspectRatio,
 		};
