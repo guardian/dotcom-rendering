@@ -14,6 +14,7 @@ type Props = {
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
 	collectionId: number;
+	isInHideTrailsAbTest?: boolean;
 };
 
 /**
@@ -30,14 +31,16 @@ export const ScrollableFeature = ({
 	imageLoading,
 	aspectRatio,
 	collectionId,
+	isInHideTrailsAbTest,
 }: Props) => {
 	return (
 		<ScrollableCarousel
 			carouselLength={trails.length}
-			visibleCardsOnMobile={1}
-			visibleCardsOnTablet={3}
+			visibleCarouselSlidesOnMobile={1}
+			visibleCarouselSlidesOnTablet={3}
 		>
 			{trails.map((card) => {
+				const isLoopingVideo = card.mainMedia?.type === 'LoopVideo';
 				return (
 					<ScrollableCarousel.Item key={card.url}>
 						<FeatureCard
@@ -54,7 +57,7 @@ export const ScrollableFeature = ({
 							}
 							showClock={false}
 							image={card.image}
-							canPlayInline={true}
+							canPlayInline={isLoopingVideo ? false : true}
 							starRating={card.starRating}
 							dataLinkName={card.dataLinkName}
 							discussionApiUrl={card.discussionApiUrl}
@@ -77,6 +80,7 @@ export const ScrollableFeature = ({
 							isNewsletter={card.isNewsletter}
 							showQuotes={card.showQuotedHeadline}
 							showVideo={card.showVideo}
+							isInHideTrailsAbTest={isInHideTrailsAbTest}
 						/>
 					</ScrollableCarousel.Item>
 				);
