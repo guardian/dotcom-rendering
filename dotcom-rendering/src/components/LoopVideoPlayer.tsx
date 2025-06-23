@@ -9,7 +9,7 @@ import { LoopVideoProgressBar } from './LoopVideoProgressBar';
 
 const videoStyles = (width: number, height: number) => css`
 	position: relative;
-	display: flex;
+	display: block;
 	height: auto;
 	width: 100%;
 	cursor: pointer;
