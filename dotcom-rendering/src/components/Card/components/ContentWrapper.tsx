@@ -7,7 +7,7 @@ import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 const sizingStyles = css`
 	display: flex;
 	flex-direction: column;
-	flex-grow: 1;
+	flex: 1 0;
 	justify-content: space-between;
 `;
 
