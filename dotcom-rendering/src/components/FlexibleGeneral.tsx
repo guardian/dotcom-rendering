@@ -32,6 +32,7 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
+	isInHideTrailsAbTest?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -92,16 +93,20 @@ const ImmersiveCardLayout = ({
 	absoluteServerTimes,
 	imageLoading,
 	collectionId,
+	isInHideTrailsAbTest,
 }: {
 	card: DCRFrontCard;
 	containerPalette?: DCRContainerPalette;
 	absoluteServerTimes: boolean;
 	imageLoading: Loading;
 	collectionId: number;
+	isInHideTrailsAbTest?: boolean;
 }) => {
+	const isLoopingVideo = card.mainMedia?.type === 'LoopVideo';
+
 	return (
-		<UL padBottom={true}>
-			<LI key={card.url} padSides={true}>
+		<UL padBottom={true} key={card.url}>
+			<LI padSides={true}>
 				<FeatureCard
 					collectionId={collectionId}
 					linkTo={card.url}
@@ -113,7 +118,7 @@ const ImmersiveCardLayout = ({
 					kickerText={card.kickerText}
 					showClock={false}
 					image={card.image}
-					canPlayInline={true}
+					canPlayInline={isLoopingVideo ? false : true}
 					starRating={card.starRating}
 					dataLinkName={card.dataLinkName}
 					discussionApiUrl={card.discussionApiUrl}
@@ -132,6 +137,7 @@ const ImmersiveCardLayout = ({
 					supportingContent={card.supportingContent}
 					isImmersive={true}
 					showVideo={card.showVideo}
+					isInHideTrailsAbTest={isInHideTrailsAbTest}
 				/>
 			</LI>
 		</UL>
@@ -227,7 +233,7 @@ const decideSplashCardProperties = (
 	}
 };
 
-export const SplashCardLayout = ({
+const SplashCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
@@ -237,6 +243,7 @@ export const SplashCardLayout = ({
 	isLastRow,
 	containerLevel,
 	collectionId,
+	isInHideTrailsAbTest,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -247,6 +254,7 @@ export const SplashCardLayout = ({
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
+	isInHideTrailsAbTest?: boolean;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -260,6 +268,7 @@ export const SplashCardLayout = ({
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
+				isInHideTrailsAbTest={isInHideTrailsAbTest}
 			/>
 		);
 	}
@@ -327,6 +336,7 @@ export const SplashCardLayout = ({
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
+					isInHideTrailsAbTest={isInHideTrailsAbTest}
 				/>
 			</LI>
 		</UL>
@@ -389,6 +399,7 @@ const FullWidthCardLayout = ({
 	isLastRow,
 	containerLevel,
 	collectionId,
+	isInHideTrailsAbTest,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -400,6 +411,7 @@ const FullWidthCardLayout = ({
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
+	isInHideTrailsAbTest?: boolean;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -425,6 +437,7 @@ const FullWidthCardLayout = ({
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
+				isInHideTrailsAbTest={isInHideTrailsAbTest}
 			/>
 		);
 	}
@@ -434,6 +447,7 @@ const FullWidthCardLayout = ({
 			showTopBar={!isFirstRow}
 			padBottom={!isLastRow}
 			hasLargeSpacing={!isLastRow}
+			key={card.url}
 		>
 			<LI
 				padSides={true}
@@ -472,6 +486,7 @@ const FullWidthCardLayout = ({
 					liveUpdatesPosition={liveUpdatesPosition}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
+					isInHideTrailsAbTest={isInHideTrailsAbTest}
 				/>
 			</LI>
 		</UL>
@@ -487,8 +502,10 @@ const HalfWidthCardLayout = ({
 	isFirstRow,
 	isFirstStandardRow,
 	aspectRatio,
+	row,
 	isLastRow,
 	containerLevel,
+	isInHideTrailsAbTest,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -498,8 +515,10 @@ const HalfWidthCardLayout = ({
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
+	row: number;
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
+	isInHideTrailsAbTest?: boolean;
 }) => {
 	if (cards.length === 0) return null;
 
@@ -511,6 +530,7 @@ const HalfWidthCardLayout = ({
 			showTopBar={!isFirstRow}
 			/** We use one full top bar for the first row and use a split one for subsequent rows */
 			splitTopBar={!isFirstStandardRow}
+			key={row}
 		>
 			{cards.map((card, cardIndex) => {
 				return (
@@ -553,6 +573,7 @@ const HalfWidthCardLayout = ({
 							trailText={undefined}
 							headlineSizes={undefined}
 							canPlayInline={false}
+							isInHideTrailsAbTest={isInHideTrailsAbTest}
 						/>
 					</LI>
 				);
@@ -570,6 +591,7 @@ export const FlexibleGeneral = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
+	isInHideTrailsAbTest,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1);
 	const cards = [...groupedTrails.standard].slice(0, 19);
@@ -588,6 +610,7 @@ export const FlexibleGeneral = ({
 					isLastRow={cards.length === 0}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
+					isInHideTrailsAbTest={isInHideTrailsAbTest}
 				/>
 			)}
 
@@ -606,6 +629,7 @@ export const FlexibleGeneral = ({
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								collectionId={collectionId}
+								isInHideTrailsAbTest={isInHideTrailsAbTest}
 							/>
 						);
 
@@ -622,8 +646,10 @@ export const FlexibleGeneral = ({
 								isFirstRow={!splash.length && i === 0}
 								isFirstStandardRow={i === 0}
 								aspectRatio={aspectRatio}
+								row={i + 1}
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
+								isInHideTrailsAbTest={isInHideTrailsAbTest}
 							/>
 						);
 				}
