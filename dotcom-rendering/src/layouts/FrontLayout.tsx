@@ -712,13 +712,21 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collection.collectionBranding
 								}
 								containerLevel={collection.containerLevel}
-								containerSpacing={collection.containerSpacing}
+								isNextCollectionPrimary={
+									collection.isNextCollectionPrimary
+								}
 								hasNavigationButtons={
 									collection.collectionType ===
 										'scrollable/small' ||
 									collection.collectionType ===
 										'scrollable/medium'
 								}
+								isAboveDesktopAd={desktopAdPositions.includes(
+									index + 1,
+								)}
+								isAboveMobileAd={mobileAdPositions.includes(
+									index,
+								)}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
@@ -743,10 +751,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
-									shouldShowCarouselsAsStacked={
+									isInHideTrailsAbTest={
 										pageId === 'uk' &&
-										abTests.stackedCarouselsVariant ===
-											'variant'
+										abTests.hideTrailsVariant === 'variant'
 									}
 								/>
 							</FrontSection>
