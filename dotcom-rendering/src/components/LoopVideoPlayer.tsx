@@ -15,6 +15,7 @@ const videoStyles = (width: number, height: number) => css`
 	cursor: pointer;
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${width} / ${height};
+	object-fit: cover;
 `;
 
 const playIconStyles = css`
