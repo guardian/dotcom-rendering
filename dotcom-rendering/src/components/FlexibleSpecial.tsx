@@ -9,10 +9,7 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from './Card/components/ImageWrapper';
+import type { ImagePositionType } from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
 import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
