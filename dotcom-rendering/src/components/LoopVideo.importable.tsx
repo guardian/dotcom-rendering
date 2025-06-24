@@ -58,9 +58,6 @@ export const LoopVideo = ({
 		if (!vidRef.current) return;
 
 		if (isInView) {
-			// We only autoplay the first time the video comes into view.
-			if (hasBeenInView) return;
-
 			if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 				setPrefersReducedMotion(true);
 				return;
