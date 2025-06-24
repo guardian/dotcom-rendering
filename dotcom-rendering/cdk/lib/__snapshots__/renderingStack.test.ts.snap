@@ -1061,7 +1061,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "access_logs.s3.prefix",
-            "Value": "ELBLogs/frontend/article-rendering/PROD",
+            "Value": "application-load-balancer/PROD/frontend/article-rendering",
           },
           {
             "Key": "idle_timeout.timeout_seconds",
