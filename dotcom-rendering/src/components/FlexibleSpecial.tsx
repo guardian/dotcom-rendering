@@ -51,17 +51,13 @@ const determineCardProperties = (
 	supportingContentLength: number,
 	mediaCard: boolean,
 	imageSuppressed: boolean,
-	hasLivePlayable: boolean,
 ): BoostProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
 			return {
 				headlineSizes: {
-					desktop:
-						imageSuppressed || hasLivePlayable
-							? 'xxlarge'
-							: 'xlarge',
+					desktop: imageSuppressed ? 'xxlarge' : 'xlarge',
 					tablet: 'large',
 					mobile: 'medium',
 				},
@@ -76,10 +72,7 @@ const determineCardProperties = (
 		case 'boost':
 			return {
 				headlineSizes: {
-					desktop:
-						imageSuppressed || hasLivePlayable
-							? 'xxxlarge'
-							: 'xxlarge',
+					desktop: imageSuppressed ? 'xxxlarge' : 'xxlarge',
 					tablet: 'xlarge',
 					mobile: 'large',
 				},
@@ -94,10 +87,7 @@ const determineCardProperties = (
 		case 'megaboost':
 			return {
 				headlineSizes: {
-					desktop:
-						imageSuppressed || hasLivePlayable
-							? 'xxxlarge'
-							: 'xxlarge',
+					desktop: imageSuppressed ? 'xxxlarge' : 'xxlarge',
 					tablet: 'xlarge',
 					mobile: 'xlarge',
 				},
@@ -164,7 +154,6 @@ export const OneCardLayout = ({
 		card.supportingContent?.length ?? 0,
 		isMediaCard(card.format),
 		!card.image,
-		card.showLivePlayable,
 	);
 
 	return (
