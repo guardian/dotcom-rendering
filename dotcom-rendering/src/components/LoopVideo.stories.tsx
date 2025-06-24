@@ -21,8 +21,8 @@ export const Default = {
 	args: {
 		src: 'https://uploads.guim.co.uk/2024/10/01/241001HeleneLoop_2.mp4',
 		videoId: 'test-video-1',
-		height: 337.5,
-		width: 600,
+		height: 1080,
+		width: 1920,
 		thumbnailImage:
 			'https://media.guim.co.uk/9bdb802e6da5d3fd249b5060f367b3a817965f0c/0_0_1800_1080/master/1800.jpg',
 		fallbackImageComponent: (
@@ -39,6 +39,8 @@ export const WithWebmFile = {
 	name: 'With Webm File',
 	args: {
 		...Default.args,
+		height: 496,
+		width: 620,
 		src: 'https://interactive.guim.co.uk/atoms/2023/01/2025-trump-100-days/assets/v/1746020259/videos/header-video.webm',
 	},
 } satisfies StoryObj<typeof LoopVideo>;
