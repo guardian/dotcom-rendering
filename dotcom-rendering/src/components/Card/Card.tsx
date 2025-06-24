@@ -38,7 +38,6 @@ import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
 import { LoopVideo } from '../LoopVideo.importable';
-import { MediaMeta } from '../MediaMeta';
 import { Pill } from '../Pill';
 import { Slideshow } from '../Slideshow';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
@@ -554,8 +553,7 @@ export const Card = ({
 -	 */
 	const isMediaCardOrNewsletter = isMediaCard(format) || isNewsletter;
 
-	// Currently pills are only shown within beta containers.
-	const showPill = isBetaContainer && isMediaCardOrNewsletter;
+	const showPill = isMediaCardOrNewsletter;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -799,15 +797,6 @@ export const Card = ({
 							cardHasImage={!!image}
 						/>
 					) : null}
-					{!showPill &&
-						!!mainMedia &&
-						mainMedia.type !== 'Video' &&
-						mainMedia.type !== 'LoopVideo' && (
-							<MediaMeta
-								mediaType={mainMedia.type}
-								hasKicker={!!kickerText}
-							/>
-						)}
 				</div>
 			)}
 
@@ -1154,14 +1143,6 @@ export const Card = ({
 											cardHasImage={!!image}
 										/>
 									) : null}
-									{!showPill &&
-										!!mainMedia &&
-										mainMedia.type !== 'Video' && (
-											<MediaMeta
-												mediaType={mainMedia.type}
-												hasKicker={!!kickerText}
-											/>
-										)}
 								</HeadlineWrapper>
 							)}
 
