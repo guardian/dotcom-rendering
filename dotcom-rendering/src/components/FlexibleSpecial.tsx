@@ -36,7 +36,6 @@ type BoostProperties = {
 	headlineSizes: ResponsiveFontSize;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
-	imageSize: ImageSizeType;
 	supportingContentAlignment: Alignment;
 	liveUpdatesAlignment: Alignment;
 	trailTextSize: TrailTextSize;
@@ -63,7 +62,6 @@ const determineCardProperties = (
 				},
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
-				imageSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
@@ -78,7 +76,6 @@ const determineCardProperties = (
 				},
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
-				imageSize: 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
@@ -93,7 +90,6 @@ const determineCardProperties = (
 				},
 				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
-				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
@@ -107,7 +103,6 @@ const determineCardProperties = (
 				},
 				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
-				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
@@ -145,7 +140,6 @@ export const OneCardLayout = ({
 		headlineSizes,
 		imagePositionOnDesktop,
 		imagePositionOnMobile,
-		imageSize,
 		supportingContentAlignment,
 		liveUpdatesAlignment,
 		trailTextSize,
@@ -168,7 +162,7 @@ export const OneCardLayout = ({
 					headlineSizes={headlineSizes}
 					imagePositionOnDesktop={imagePositionOnDesktop}
 					imagePositionOnMobile={imagePositionOnMobile}
-					imageSize={imageSize}
+					imageSize={'jumbo'}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
 					supportingContentAlignment={supportingContentAlignment}
