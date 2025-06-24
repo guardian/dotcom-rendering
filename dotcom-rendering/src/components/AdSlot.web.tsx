@@ -729,22 +729,24 @@ export const AdSlot = ({
 		}
 		case 'survey': {
 			return (
-				<div
-					id="dfp-ad--survey"
-					className={[
-						'js-ad-slot',
-						'ad-slot',
-						'ad-slot--survey',
-					].join(' ')}
-					css={[outOfPageStyles, hideBelowDesktop]}
-					data-link-name="ad slot survey"
-					data-name="survey"
-					data-label="false"
-					data-refresh="false"
-					data-out-of-page="true"
-					data-testid="slot"
-					aria-hidden="true"
-				/>
+				<AdSlotWrapper>
+					<div
+						id="dfp-ad--survey"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--survey',
+						].join(' ')}
+						css={[outOfPageStyles, hideBelowDesktop]}
+						data-link-name="ad slot survey"
+						data-name="survey"
+						data-label="false"
+						data-refresh="false"
+						data-out-of-page="true"
+						data-testid="slot"
+						aria-hidden="true"
+					/>
+				</AdSlotWrapper>
 			);
 		}
 		case 'liveblog-inline': {
