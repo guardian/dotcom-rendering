@@ -354,9 +354,7 @@ export const InteractiveBlockComponent = ({
 
 	const onTouchStart = () => getInteractionClient().disableArticleSwipe(true);
 
-	const onTouchEnd = async () => {
-		await getInteractionClient().disableArticleSwipe(false);
-	};
+	const onTouchEnd = () => getInteractionClient().disableArticleSwipe(false);
 
 	useOnce(() => {
 		// We've brought the behavior from boot.js into this file to avoid loading 2 extra scripts
