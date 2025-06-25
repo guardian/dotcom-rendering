@@ -6,6 +6,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { useIsInView } from '../lib/useIsInView';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useConfig } from './ConfigContext';
+import type { PLAYER_STATES } from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
 
 const videoContainerStyles = css`
@@ -20,7 +21,6 @@ type Props = {
 	height: number;
 	thumbnailImage: string;
 	fallbackImageComponent: JSX.Element;
-	hasAudio?: boolean;
 };
 
 export const LoopVideo = ({
@@ -30,16 +30,21 @@ export const LoopVideo = ({
 	height,
 	thumbnailImage,
 	fallbackImageComponent,
-	hasAudio = true,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
 	const vidRef = useRef<HTMLVideoElement>(null);
 	const [isPlayable, setIsPlayable] = useState(false);
-	const [isPlaying, setIsPlaying] = useState(false);
 	const [isMuted, setIsMuted] = useState(true);
 	const [currentTime, setCurrentTime] = useState(0);
-	const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+	const [playerState, setPlayerState] =
+		useState<(typeof PLAYER_STATES)[number]>('NOT_STARTED');
+
+	// The user indicates a preference for reduced motion: https://web.dev/articles/prefers-reduced-motion
+	const [prefersReducedMotion, setPrefersReducedMotion] = useState<
+		boolean | null
+	>(null);
+
 	/**
 	 * Keep a track of whether the video has been in view. We only want to
 	 * pause the video if it has been in view.
@@ -52,28 +57,56 @@ export const LoopVideo = ({
 	});
 
 	/**
-	 * Pause the video when the user scrolls past it.
+	 * Register the users motion preferences.
 	 */
 	useEffect(() => {
-		if (!vidRef.current) return;
+		const userPrefersReducedMotion = window.matchMedia(
+			'(prefers-reduced-motion: reduce)',
+		).matches;
+		setPrefersReducedMotion(userPrefersReducedMotion);
+	}, []);
 
-		if (isInView) {
-			if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-				setPrefersReducedMotion(true);
+	/**
+	 * Autoplays the video when it comes into view.
+	 */
+	useEffect(() => {
+		if (!vidRef.current || playerState === 'PAUSED_BY_USER') return;
+
+		if (isInView && isPlayable && playerState !== 'PLAYING') {
+			if (prefersReducedMotion !== false) {
 				return;
 			}
 
-			setIsPlaying(true);
-			void vidRef.current.play();
-
+			setPlayerState('PLAYING');
 			setHasBeenInView(true);
-		}
 
-		if (!isInView && hasBeenInView && isPlayable && isPlaying) {
-			setIsPlaying(false);
+			void vidRef.current.play();
+		}
+	}, [isInView, isPlayable, playerState, prefersReducedMotion]);
+
+	/**
+	 * Stops playback when the video is scrolled out of view, resumes playbacks
+	 * when the video is back in the viewport.
+	 */
+	useEffect(() => {
+		if (!vidRef.current || !hasBeenInView) return;
+
+		const isNoLongerInView = playerState === 'PLAYING' && !isInView;
+		if (isNoLongerInView) {
+			setPlayerState('PAUSED_BY_INTERSECTION_OBSERVER');
 			void vidRef.current.pause();
 		}
-	}, [isInView, hasBeenInView, isPlayable, isPlaying]);
+
+		// If a user action paused the video, they have indicated
+		// that they don't want to watch the video. Therefore, don't
+		// resume the video when it comes back in view
+		const isBackInView =
+			playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' && isInView;
+		if (isBackInView) {
+			setPlayerState('PLAYING');
+			void vidRef.current.play();
+		}
+	}, [isInView, hasBeenInView, playerState]);
 
 	if (renderingTarget !== 'Web') return null;
 
@@ -81,19 +114,24 @@ export const LoopVideo = ({
 
 	const playVideo = () => {
 		if (!vidRef.current) return;
-		setIsPlaying(true);
+
+		setPlayerState('PLAYING');
+		setHasBeenInView(true);
 		void vidRef.current.play();
 	};
 
 	const pauseVideo = () => {
 		if (!vidRef.current) return;
-		setIsPlaying(false);
+
+		setPlayerState('PAUSED_BY_USER');
 		void vidRef.current.pause();
 	};
 
 	const playPauseVideo = () => {
-		if (isPlaying) {
-			pauseVideo();
+		if (playerState === 'PLAYING') {
+			if (isInView) {
+				pauseVideo();
+			}
 		} else {
 			playVideo();
 		}
@@ -163,6 +201,20 @@ export const LoopVideo = ({
 
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
+	// We only show a poster image when the user has indicated that they do
+	// not want videos to play automatically, e.g. prefers reduced motion. Otherwise,
+	// we do not need to download the image as the video will be autoplayed.
+	const posterImage =
+		!!prefersReducedMotion || isInView === false
+			? thumbnailImage
+			: undefined;
+
+	const showPlayIcon =
+		playerState === 'PAUSED_BY_USER' ||
+		(!!prefersReducedMotion && playerState === 'NOT_STARTED');
+
+	const shouldPreloadData = !!isInView || prefersReducedMotion === false;
+
 	return (
 		<div
 			ref={setNode}
@@ -174,24 +226,23 @@ export const LoopVideo = ({
 				videoId={videoId}
 				width={width}
 				height={height}
-				hasAudio={hasAudio}
+				posterImage={posterImage}
 				fallbackImageComponent={fallbackImageComponent}
 				currentTime={currentTime}
 				setCurrentTime={setCurrentTime}
 				ref={vidRef}
 				isPlayable={isPlayable}
 				setIsPlayable={setIsPlayable}
-				isPlaying={isPlaying}
-				setIsPlaying={setIsPlaying}
+				playerState={playerState}
+				setPlayerState={setPlayerState}
 				isMuted={isMuted}
 				setIsMuted={setIsMuted}
 				handleClick={handleClick}
 				handleKeyDown={handleKeyDown}
 				onError={onError}
 				AudioIcon={AudioIcon}
-				thumbnailImage={
-					prefersReducedMotion ? thumbnailImage : undefined
-				}
+				shouldPreload={shouldPreloadData}
+				showPlayIcon={showPlayIcon}
 			/>
 		</div>
 	);
