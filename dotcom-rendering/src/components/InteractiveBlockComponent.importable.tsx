@@ -352,9 +352,7 @@ export const InteractiveBlockComponent = ({
 
 	const isApps = renderingTarget === 'Apps';
 
-	const onTouchStart = async () => {
-		await getInteractionClient().disableArticleSwipe(true);
-	};
+	const onTouchStart = () => getInteractionClient().disableArticleSwipe(true);
 
 	const onTouchEnd = async () => {
 		await getInteractionClient().disableArticleSwipe(false);
