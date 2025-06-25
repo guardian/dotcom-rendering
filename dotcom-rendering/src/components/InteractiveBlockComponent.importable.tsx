@@ -462,7 +462,7 @@ export const InteractiveBlockComponent = ({
 				data-alt={alt} // for compatibility with custom boot scripts
 				data-testid={`interactive-element-${encodeURI(alt ?? '')}`}
 				data-spacefinder-role={role}
-				onTouchStart={!isApps ? onTouchStart : undefined}
+				onTouchStart={isApps ? onTouchStart : undefined}
 				onTouchEnd={isApps ? onTouchEnd : undefined}
 			>
 				{!loaded && (
