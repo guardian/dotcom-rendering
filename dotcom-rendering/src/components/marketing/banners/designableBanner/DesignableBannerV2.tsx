@@ -747,14 +747,14 @@ const styles = {
 		}
 		${from.desktop} {
 			justify-self: end;
-			width: minmax(299px, 380px);
+			width: 299px;
 		}
 		${between.desktop.and.wide} {
-			width: minmax(380px, 495px);
+			width: 380px;
 		}
 		${from.wide} {
-			max-width: 485px;
 			align-self: start;
+			width: 380px;
 		}
 	`,
 	guardianLogoContainer: css`
