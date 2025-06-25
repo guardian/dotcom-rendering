@@ -1,7 +1,16 @@
 import { css } from '@emotion/react';
+import { from } from '@guardian/source/foundations';
+import { ArticleHeadline } from '../components/ArticleHeadline';
+import { ArticleMetaApps } from '../components/ArticleMeta.apps';
+import { ArticleMeta } from '../components/ArticleMeta.web';
+import { ArticleTitle } from '../components/ArticleTitle';
+import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
+import { Standfirst } from '../components/Standfirst';
 import { grid } from '../grid';
+import type { ArticleFormat } from '../lib/articleFormat';
 import type { NavType } from '../model/extract-nav';
+import { palette } from '../palette';
 import type { Gallery } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 
@@ -22,10 +31,19 @@ interface AppProps extends Props {
 const border = css({
 	borderWidth: 1,
 	borderStyle: 'solid',
+	color: '#ccc',
 });
 
 export const GalleryLayout = (props: WebProps | AppProps) => {
-	const frontendData = props.gallery.frontendData;
+	const gallery = props.gallery;
+	const frontendData = gallery.frontendData;
+
+	const format: ArticleFormat = {
+		design: gallery.design,
+		display: gallery.display,
+		theme: gallery.theme,
+	};
+
 	return (
 		<>
 			{props.renderingTarget === 'Web' && (
@@ -46,27 +64,97 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					pageId={frontendData.pageId}
 				/>
 			)}
-			<main>
+			<main
+				css={{
+					backgroundColor: palette('--article-background'),
+				}}
+			>
 				<div css={border}>Labs header</div>
 				<header css={[grid.container]}>
-					<div css={[grid.column.all, border]}>Main media</div>
+					<MainMediaGallery
+						mainMedia={gallery.mainMedia}
+						format={format}
+					/>
+					<ArticleTitle
+						format={format}
+						tags={frontendData.tags}
+						sectionLabel={frontendData.sectionLabel}
+						sectionUrl={frontendData.sectionUrl}
+						guardianBaseURL={frontendData.guardianBaseURL}
+					/>
+					<ArticleHeadline
+						format={format}
+						headlineString={frontendData.headline}
+						tags={frontendData.tags}
+						byline={frontendData.byline}
+						webPublicationDateDeprecated={
+							frontendData.webPublicationDateDeprecated
+						}
+					/>
+					<Standfirst
+						format={format}
+						standfirst={frontendData.standfirst}
+					/>
+					{props.renderingTarget === 'Web' ? (
+						<ArticleMeta
+							branding={
+								frontendData.commercialProperties[
+									frontendData.editionId
+								].branding
+							}
+							format={format}
+							pageId={frontendData.pageId}
+							webTitle={frontendData.webTitle}
+							byline={frontendData.byline}
+							tags={frontendData.tags}
+							primaryDateline={
+								frontendData.webPublicationDateDisplay
+							}
+							secondaryDateline={
+								frontendData.webPublicationSecondaryDateDisplay
+							}
+							isCommentable={frontendData.isCommentable}
+							discussionApiUrl={
+								frontendData.config.discussionApiUrl
+							}
+							shortUrlId={frontendData.config.shortUrlId}
+						/>
+					) : null}
+					{props.renderingTarget === 'Apps' ? (
+						<ArticleMetaApps
+							branding={
+								frontendData.commercialProperties[
+									frontendData.editionId
+								].branding
+							}
+							format={format}
+							pageId={frontendData.pageId}
+							byline={frontendData.byline}
+							tags={frontendData.tags}
+							primaryDateline={
+								frontendData.webPublicationDateDisplay
+							}
+							secondaryDateline={
+								frontendData.webPublicationSecondaryDateDisplay
+							}
+							isCommentable={frontendData.isCommentable}
+							discussionApiUrl={
+								frontendData.config.discussionApiUrl
+							}
+							shortUrlId={frontendData.config.shortUrlId}
+						/>
+					) : null}
 					<div
 						css={[
 							border,
-							grid.between('centre-column-start', 'grid-end'),
+							css`
+								${grid.column.centre}
+								${from.leftCol} {
+									${grid.column.left}
+								}
+							`,
 						]}
 					>
-						Headline
-					</div>
-					<div
-						css={[
-							border,
-							grid.between('centre-column-start', 'grid-end'),
-						]}
-					>
-						Standfirst
-					</div>
-					<div css={[border, grid.column.left]}>
 						Main media caption
 					</div>
 					<div

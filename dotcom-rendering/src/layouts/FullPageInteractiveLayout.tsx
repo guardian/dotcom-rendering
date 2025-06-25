@@ -7,6 +7,7 @@ import {
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe.importable';
 import { InteractivesNativePlatformWrapper } from '../components/InteractivesNativePlatformWrapper.importable';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
@@ -26,6 +27,7 @@ import type { ArticleDeprecated } from '../types/article';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { temporaryBodyCopyColourOverride } from './InteractiveLayout';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -210,9 +212,15 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 				<Global styles={interactiveGlobalStyles} />
 			)}
 			{isApps && (
-				<Island priority="critical">
-					<InteractivesNativePlatformWrapper />
-				</Island>
+				<>
+					<Island priority="critical">
+						<InteractivesNativePlatformWrapper />
+					</Island>
+					<Island priority="critical">
+						<InteractivesDisableArticleSwipe />
+					</Island>
+					<Global styles={temporaryBodyCopyColourOverride} />
+				</>
 			)}
 			{isWeb && (
 				<>

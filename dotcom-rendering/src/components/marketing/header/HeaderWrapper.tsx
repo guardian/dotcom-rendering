@@ -13,9 +13,9 @@ import { useCallback, useEffect } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import type { ReactComponent } from '../lib/ReactComponent';
 import {
-	addRegionIdAndTrackingParamsToSupportUrl,
 	addTrackingParamsToProfileUrl,
 	createClickEventFromTracking,
+	enrichSupportUrl,
 	isProfileUrl,
 } from '../lib/tracking';
 
@@ -46,7 +46,7 @@ export const headerWrapper = (
 		tracking,
 		countryCode,
 		submitComponentEvent,
-		numArticles,
+		promoCodes,
 	}) => {
 		const buildEnrichedCta = (cta: Cta): HeaderEnrichedCta => {
 			if (isProfileUrl(cta.baseUrl)) {
@@ -59,12 +59,12 @@ export const headerWrapper = (
 				};
 			}
 			return {
-				ctaUrl: addRegionIdAndTrackingParamsToSupportUrl(
-					cta.baseUrl,
+				ctaUrl: enrichSupportUrl({
+					baseUrl: cta.baseUrl,
 					tracking,
-					numArticles,
+					promoCodes: promoCodes ?? [],
 					countryCode,
-				),
+				}),
 				ctaText: cta.text,
 			};
 		};

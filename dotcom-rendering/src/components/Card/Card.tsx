@@ -37,6 +37,7 @@ import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
+import { LoopVideo } from '../LoopVideo.importable';
 import { MediaMeta } from '../MediaMeta';
 import { Pill } from '../Pill';
 import { Slideshow } from '../Slideshow';
@@ -140,6 +141,7 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
+	isInHideTrailsAbTest?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -253,6 +255,13 @@ const getMedia = ({
 	canPlayInline?: boolean;
 	isBetaContainer: boolean;
 }) => {
+	if (mainMedia?.type === 'LoopVideo' && canPlayInline) {
+		return {
+			type: 'loop-video',
+			mainMedia,
+			...(imageUrl && { imageUrl }),
+		} as const;
+	}
 	if (mainMedia?.type === 'Video' && canPlayInline) {
 		return {
 			type: 'video',
@@ -399,6 +408,7 @@ export const Card = ({
 	showTopBarMobile = true,
 	trailTextSize,
 	showKickerImage = false,
+	isInHideTrailsAbTest = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -785,12 +795,15 @@ export const Card = ({
 							cardHasImage={!!image}
 						/>
 					) : null}
-					{!showPill && !!mainMedia && mainMedia.type !== 'Video' && (
-						<MediaMeta
-							mediaType={mainMedia.type}
-							hasKicker={!!kickerText}
-						/>
-					)}
+					{!showPill &&
+						!!mainMedia &&
+						mainMedia.type !== 'Video' &&
+						mainMedia.type !== 'LoopVideo' && (
+							<MediaMeta
+								mediaType={mainMedia.type}
+								hasKicker={!!kickerText}
+							/>
+						)}
 				</div>
 			)}
 
@@ -875,6 +888,31 @@ export const Card = ({
 									}
 								/>
 							</AvatarContainer>
+						)}
+						{media.type === 'loop-video' && (
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<LoopVideo
+									src={media.mainMedia.videoId}
+									height={media.mainMedia.height}
+									width={media.mainMedia.width}
+									videoId={media.mainMedia.videoId}
+									thumbnailImage={
+										media.mainMedia.thumbnailImage ?? ''
+									}
+									fallbackImageComponent={
+										<CardPicture
+											mainImage={media.imageUrl ?? ''}
+											imageSize={imageSize}
+											loading={imageLoading}
+											alt={media.imageAltText}
+											aspectRatio={aspectRatio}
+										/>
+									}
+								/>
+							</Island>
 						)}
 						{media.type === 'video' && (
 							<>
@@ -1026,7 +1064,6 @@ export const Card = ({
 						{media.type === 'crossword' && (
 							<img src={media.imageUrl} alt="" />
 						)}
-
 						{media.type === 'podcast' && (
 							<>
 								{media.podcastImage?.src && !showKickerImage ? (
@@ -1138,6 +1175,7 @@ export const Card = ({
 									trailTextSize={trailTextSize}
 									padTop={headlinePosition === 'inner'}
 									hideUntil={hideTrailTextUntil()}
+									isInHideTrailsAbTest={isInHideTrailsAbTest}
 								/>
 							)}
 

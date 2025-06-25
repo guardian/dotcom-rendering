@@ -3,8 +3,9 @@ import type { GutterAskRenderProps } from '../GutterAsk';
 
 const variant: GutterContent = {
 	image: {
-		mainUrl: 'https://uploads.guim.co.uk/2025/01/22/not_for_sale.svg',
-		altText: 'Not for Sale',
+		mainUrl:
+			'https://uploads.guim.co.uk/2025/06/12/not_for_sale_bg_scaled.svg',
+		altText: 'Not for sale',
 	},
 	bodyCopy: [
 		'The Guardian’s expert news coverage is funded by people like you, not a billionaire owner. Will you help us keep our independent journalism free and open to all today?',
