@@ -95,6 +95,7 @@ export const LoopVideo = ({
 		if (isNoLongerInView) {
 			setPlayerState('PAUSED_BY_INTERSECTION_OBSERVER');
 			void vidRef.current.pause();
+			setIsMuted(true);
 		}
 
 		// If a user action paused the video, they have indicated
@@ -104,6 +105,7 @@ export const LoopVideo = ({
 			playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' && isInView;
 		if (isBackInView) {
 			setPlayerState('PLAYING');
+
 			void vidRef.current.play();
 		}
 	}, [isInView, hasBeenInView, playerState]);
