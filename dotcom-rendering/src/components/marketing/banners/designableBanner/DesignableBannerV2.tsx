@@ -824,15 +824,6 @@ const styles = {
 				width: auto;
 			}
 		}
-		/*
-		${from.leftCol} {
-			width: 299px;
-		}
-
-		${from.wide} {
-			width: 381px;
-		}
-*/
 	`,
 	linkButtonStyles: css`
 		background-color: ${palette.brandAlt[400]};
