@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { isSkimlink } from '../lib/affiliateLinksUtils';
+import { getSkimlinksAccountId, isSkimlink } from '../lib/affiliateLinksUtils';
 
 /**
  * Add custom parameters to skimlink URLs:
@@ -20,30 +20,24 @@ export const EnhanceAffiliateLinks = () => {
 
 		for (const link of allLinksOnPage) {
 			if (isSkimlink(link.href)) {
-				let skimlinksAccountId: string | null = null;
-				try {
-					const url = new URL(link.href, window.location.origin);
-					skimlinksAccountId = url.searchParams.get('id');
-				} catch {
-					// Invalid URL, skip id extraction
-				}
-
 				const referrerDomain =
 					document.referrer === ''
 						? 'none'
 						: new URL(document.referrer).hostname;
 
-				if (skimlinksAccountId) {
-					link.href += `&xcust=${encodeURIComponent(
-						'referrer|' +
-							referrerDomain +
-							'|accountID|' +
-							skimlinksAccountId,
-					)}`;
-				}
+				const skimlinksAccountId = getSkimlinksAccountId(link.href);
+
+				// Skimlinks treats xcust as one long string, so we use | to separate values
+				link.href += `&xcust=${encodeURIComponent(
+					'referrer|' +
+						referrerDomain +
+						'|accountId|' +
+						skimlinksAccountId,
+				)}`;
 			}
 		}
 	});
 
+	// We don’t render anything
 	return null;
 };
