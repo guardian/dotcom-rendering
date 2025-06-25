@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
-import { breakpoints } from '@guardian/source/foundations';
+import { breakpoints, from, space } from '@guardian/source/foundations';
 import { Fragment, useCallback, useEffect, useState } from 'react';
+import { grid } from '../grid';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -465,15 +466,38 @@ export const Sources = ({ sources }: { sources: ImageSource[] }) => {
 	);
 };
 
-const styles = ({ design }: ArticleFormat, isLightbox: boolean) => {
+const galleryBodyImageStyles = css`
+	${grid.column.all}
+
+	${from.tablet} {
+		${grid.column.centre}
+	}
+
+	${from.desktop} {
+		padding-bottom: ${space[10]}px;
+	}
+
+	${from.leftCol} {
+		${grid.between('centre-column-start', 'right-column-end')}
+	}
+`;
+
+const styles = (
+	{ design }: ArticleFormat,
+	isLightbox: boolean,
+	isMainMedia: boolean,
+) => {
 	if (design === ArticleDesign.Gallery) {
-		return css`
-			img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-			}
-		`;
+		return css(
+			css`
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+			`,
+			isMainMedia ? undefined : galleryBodyImageStyles,
+		);
 	}
 	return isLightbox ? flex : block;
 };
@@ -539,7 +563,7 @@ export const Picture = ({
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
-		<picture css={styles(format, isLightbox)}>
+		<picture css={styles(format, isLightbox, isMainMedia)}>
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
 			{format.display === ArticleDisplay.Immersive && isMainMedia && (
 				<>
