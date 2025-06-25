@@ -1,6 +1,12 @@
 import { css } from '@emotion/react';
 import { breakpoints, from, space } from '@guardian/source/foundations';
-import { Fragment, useCallback, useEffect, useState } from 'react';
+import {
+	type CSSProperties,
+	Fragment,
+	useCallback,
+	useEffect,
+	useState,
+} from 'react';
 import { grid } from '../grid';
 import {
 	ArticleDesign,
@@ -482,6 +488,14 @@ const galleryBodyImageStyles = css`
 	}
 `;
 
+const imageMaxWidth = (
+	design: ArticleDesign,
+	ratio: number,
+): CSSProperties | undefined =>
+	design === ArticleDesign.Gallery
+		? { maxWidth: `calc(${ratio} * 96vh)` }
+		: undefined;
+
 const styles = (
 	{ design }: ArticleFormat,
 	isLightbox: boolean,
@@ -563,7 +577,10 @@ export const Picture = ({
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
-		<picture css={styles(format, isLightbox, isMainMedia)}>
+		<picture
+			css={styles(format, isLightbox, isMainMedia)}
+			style={imageMaxWidth(format.design, 1 / ratio)}
+		>
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
 			{format.display === ArticleDisplay.Immersive && isMainMedia && (
 				<>
