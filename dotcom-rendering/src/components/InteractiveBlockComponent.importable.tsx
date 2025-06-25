@@ -11,6 +11,7 @@ import libDebounce from 'lodash.debounce';
 import { useRef, useState } from 'react';
 import { interactiveLegacyFigureClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
+import { getInteractionClient } from '../lib/bridgetApi';
 import { useOnce } from '../lib/useOnce';
 import { palette as themePalette } from '../palette';
 import type { RoleType } from '../types/content';
@@ -325,7 +326,7 @@ export const InteractiveBlockComponent = ({
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const placeholderLinkRef = useRef<HTMLAnchorElement>(null);
 	const [loaded, setLoaded] = useState(false);
-	const { darkModeAvailable } = useConfig();
+	const { darkModeAvailable, renderingTarget } = useConfig();
 
 	// Define some one-time flags
 	const isDatawrapperGraphic =
@@ -349,13 +350,24 @@ export const InteractiveBlockComponent = ({
 			? true
 			: false;
 
+	const isApps = renderingTarget === 'Apps';
+
+	const onTouchStart = async () => {
+		await getInteractionClient().disableArticleSwipe(true);
+	};
+
+	const onTouchEnd = async () => {
+		await getInteractionClient().disableArticleSwipe(false);
+	};
+
 	useOnce(() => {
 		// We've brought the behavior from boot.js into this file to avoid loading 2 extra scripts
 
 		// Define additional one-time flags - these depend on window/document objects
 		const isRunningInWebEnvironment =
 			!document.querySelector('.ios') &&
-			!document.querySelector('.android')
+			!document.querySelector('.android') &&
+			!document.querySelector('[data-rendering-target="apps"]')
 				? true
 				: false;
 
@@ -462,6 +474,8 @@ export const InteractiveBlockComponent = ({
 				data-alt={alt} // for compatibility with custom boot scripts
 				data-testid={`interactive-element-${encodeURI(alt ?? '')}`}
 				data-spacefinder-role={role}
+				onTouchStart={!isApps ? onTouchStart : undefined}
+				onTouchEnd={isApps ? onTouchEnd : undefined}
 			>
 				{!loaded && (
 					<>
