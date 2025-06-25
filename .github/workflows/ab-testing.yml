@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ab-testing/fronteend
+        working-directory: ab-testing/frontend
     steps:
       - uses: actions/checkout@v4
 
