@@ -746,11 +746,11 @@ const styles = {
 			max-width: ${phabletContentMaxWidth};
 		}
 		${from.desktop} {
-			margin: 0 ${space[3]}px;
 			justify-self: end;
+			width: minmax(299px, 380px);
 		}
 		${between.desktop.and.wide} {
-			max-width: 380px;
+			width: minmax(380px, 495px);
 		}
 		${from.wide} {
 			max-width: 485px;
@@ -813,6 +813,8 @@ const styles = {
 			margin-bottom: ${space[6]}px;
 			gap: 0;
 			margin-top: ${space[3]}px;
+			margin-right: 0;
+			margin-left: 0;
 
 			a {
 				width: 100%;
@@ -822,6 +824,15 @@ const styles = {
 				width: auto;
 			}
 		}
+		/*
+		${from.leftCol} {
+			width: 299px;
+		}
+
+		${from.wide} {
+			width: 381px;
+		}
+*/
 	`,
 	linkButtonStyles: css`
 		background-color: ${palette.brandAlt[400]};
