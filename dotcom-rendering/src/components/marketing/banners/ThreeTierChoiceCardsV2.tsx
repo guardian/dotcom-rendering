@@ -87,6 +87,7 @@ const styles = {
 	container: css`
 		display: flex;
 		gap: ${space[5]}px;
+		background-color: inherit;
 	`,
 
 	choiceCardStyles: css`

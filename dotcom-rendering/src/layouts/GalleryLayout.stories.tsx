@@ -20,6 +20,7 @@ const addBranding = (gallery: Gallery): Gallery => ({
 	...gallery,
 	frontendData: {
 		...gallery.frontendData,
+		webPublicationDateDeprecated: '2020-03-28T07:27:19.000Z',
 		commercialProperties: {
 			...gallery.frontendData.commercialProperties,
 			UK: {
