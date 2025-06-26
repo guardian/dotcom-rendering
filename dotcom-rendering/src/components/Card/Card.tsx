@@ -906,7 +906,6 @@ export const Card = ({
 									src={media.mainMedia.videoId}
 									height={media.mainMedia.height}
 									width={media.mainMedia.width}
-									videoId={media.mainMedia.videoId}
 									thumbnailImage={
 										media.mainMedia.thumbnailImage ?? ''
 									}
@@ -919,6 +918,7 @@ export const Card = ({
 											aspectRatio={aspectRatio}
 										/>
 									}
+									uniqueId={uniqueId}
 								/>
 							</Island>
 						)}
