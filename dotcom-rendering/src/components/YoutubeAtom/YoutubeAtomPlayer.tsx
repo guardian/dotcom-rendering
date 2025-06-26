@@ -40,7 +40,7 @@ type Props = {
 };
 
 type CustomPlayEventDetail = { uniqueId: string };
-const customPlayEventName = 'video:play';
+const customPlayEventName = 'youtube-video:play';
 
 type ProgressEvents = {
 	hasSentPlayEvent: boolean;
