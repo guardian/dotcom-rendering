@@ -869,4 +869,7 @@ const validated = validatedBannerWrapper(
 export {
 	validated as DesignableBannerV2,
 	unvalidated as DesignableBannerUnvalidatedV2,
+	// temporarily until we can rename banner coming in through SDC
+	validated as DesignableBanner,
+	unvalidated as DesignableBannerUnvalidated,
 };
