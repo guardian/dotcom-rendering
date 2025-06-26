@@ -11,15 +11,8 @@ type ButtonProps = {
 };
 export const ListenToAudioButton = ({ onClickHandler }: ButtonProps) => {
 	return (
-		<>
-			<h1>hello</h1>
-			<Button
-				onClick={onClickHandler}
-				size={'small'}
-				cssOverrides={[button]}
-			>
-				Listen to article
-			</Button>
-		</>
+		<Button onClick={onClickHandler} size={'small'} cssOverrides={[button]}>
+			Listen to article
+		</Button>
 	);
 };
