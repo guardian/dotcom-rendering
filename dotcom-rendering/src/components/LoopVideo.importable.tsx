@@ -18,8 +18,8 @@ type CustomPlayEventDetail = { uniqueId: string };
 const customPlayAudioEventName = 'looping-video:play-with-audio';
 
 /**
- * Dispatches a custom play event so that other players listening
- * for this event will stop playing
+ * Dispatches a custom play audio event so that other videos listening
+ * for this event will be muted.
  */
 export const dispatchCustomPlayAudioEvent = (uniqueId: string) => {
 	document.dispatchEvent(
@@ -75,7 +75,7 @@ export const LoopVideo = ({
 	 * Setup.
 	 *
 	 * Register the users motion preferences.
-	 * Create event listeners to ensure we don't play audio from multiple loops
+	 * Creates an event listener to ensure we don't play audio from multiple loops
 	 */
 	useEffect(() => {
 		const userPrefersReducedMotion = window.matchMedia(
