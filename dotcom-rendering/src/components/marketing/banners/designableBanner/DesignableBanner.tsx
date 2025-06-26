@@ -32,7 +32,7 @@ import {
 	removeMediaRulePrefix,
 	useMatchMedia,
 } from '../../../../lib/useMatchMedia';
-import { useChoiceCards } from '../../hooks/useChoiceCards';
+import { useChoiceCards_unused } from '../../hooks/useChoiceCards';
 import { useReminder_unused as useReminder } from '../../hooks/useReminder';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
@@ -166,7 +166,7 @@ const DesignableBanner_unused: ReactComponent<BannerRenderProps> = ({
 		getCtaText,
 		getCtaUrl,
 		currencySymbol,
-	} = useChoiceCards(
+	} = useChoiceCards_unused(
 		choiceCardAmounts,
 		countryCode,
 		content.mainContent.primaryCta,

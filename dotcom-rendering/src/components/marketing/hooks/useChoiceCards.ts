@@ -45,7 +45,7 @@ function transformChoiceCardsAmountsToProduct(
 	};
 }
 
-const useChoiceCards = (
+const useChoiceCards_unused = (
 	choiceCardAmounts: SelectedAmountsVariant | undefined,
 	countryCode: string | undefined,
 	primaryCtaMain: BannerEnrichedCta | null,
@@ -118,4 +118,4 @@ const useChoiceCards = (
 	};
 };
 
-export { useChoiceCards };
+export { useChoiceCards_unused };
