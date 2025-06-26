@@ -325,7 +325,7 @@ export const InteractiveBlockComponent = ({
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const placeholderLinkRef = useRef<HTMLAnchorElement>(null);
 	const [loaded, setLoaded] = useState(false);
-	const { darkModeAvailable } = useConfig();
+	const { darkModeAvailable, renderingTarget } = useConfig();
 
 	// Define some one-time flags
 	const isDatawrapperGraphic =
@@ -352,13 +352,6 @@ export const InteractiveBlockComponent = ({
 	useOnce(() => {
 		// We've brought the behavior from boot.js into this file to avoid loading 2 extra scripts
 
-		// Define additional one-time flags - these depend on window/document objects
-		const isRunningInWebEnvironment =
-			!document.querySelector('.ios') &&
-			!document.querySelector('.android')
-				? true
-				: false;
-
 		const prefersDarkScheme = window.matchMedia(
 			'(prefers-color-scheme: dark)',
 		).matches;
@@ -382,7 +375,7 @@ export const InteractiveBlockComponent = ({
 			}
 
 			// Fix darkmode for web environment
-			if (isRunningInWebEnvironment && !requiresDarkMode) {
+			if (renderingTarget === 'Web' && !requiresDarkMode) {
 				if (isDatawrapperGraphic || isUploaderEmbedPath) {
 					// Add the 'dark=false' search param
 					if (graphicUrl.search.length) {
