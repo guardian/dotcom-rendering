@@ -2,12 +2,16 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { leftColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { defaultFormats } from '../../.storybook/decorators/splitThemeDecorator';
 import { allModes } from '../../.storybook/modes';
+import { GalleryLabs as GalleryLabsFixture } from '../../fixtures/generated/fe-articles/GalleryLabs';
+import type { ArticleFormat } from '../lib/articleFormat';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	getAllThemes,
 	Pillar,
 } from '../lib/articleFormat';
+import { palette } from '../palette';
+import { enhanceArticleType } from '../types/article';
 import { ArticleMetaApps } from './ArticleMeta.apps';
 
 const meta = {
@@ -58,7 +62,9 @@ export const WithFollowStory = {
 		config: {
 			renderingTarget: 'Apps',
 		},
-		formats: defaultFormats,
+		formats: defaultFormats.filter(
+			(format: ArticleFormat) => format.design !== ArticleDesign.Gallery,
+		),
 	},
 } satisfies Story;
 
@@ -183,6 +189,59 @@ export const WithBrandingStoryForAdvertisingPartner = {
 		...WithBrandingStory.parameters,
 		config: {
 			...WithBrandingStory.parameters.config,
+		},
+	},
+} satisfies Story;
+
+export const GalleryDesign = {
+	args: {
+		...WithFollowStory.args,
+		isCommentable: true,
+	},
+	parameters: {
+		formats: getAllThemes({
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Gallery,
+		}),
+		config: {
+			renderingTarget: 'Apps',
+		},
+		colourSchemeBackground: {
+			light: palette('--article-background'),
+			dark: palette('--article-background'),
+		},
+	},
+} satisfies Story;
+
+const appArticle = enhanceArticleType(GalleryLabsFixture, 'Web');
+export const GalleryLabsWithBranding = {
+	args: {
+		branding:
+			appArticle.frontendData.commercialProperties[
+				appArticle.frontendData.editionId
+			].branding,
+		format: {
+			design: appArticle.design,
+			display: appArticle.display,
+			theme: appArticle.theme,
+		},
+		pageId: appArticle.frontendData.pageId,
+		byline: appArticle.frontendData.byline,
+		tags: appArticle.frontendData.tags,
+		primaryDateline: appArticle.frontendData.webPublicationDateDisplay,
+		secondaryDateline:
+			appArticle.frontendData.webPublicationSecondaryDateDisplay,
+		isCommentable: appArticle.frontendData.isCommentable,
+		discussionApiUrl: appArticle.frontendData.config.discussionApiUrl,
+		shortUrlId: appArticle.frontendData.config.shortUrlId,
+	},
+	parameters: {
+		config: {
+			renderingTarget: 'Apps',
+		},
+		colourSchemeBackground: {
+			light: palette('--article-background'),
+			dark: palette('--article-background'),
 		},
 	},
 } satisfies Story;

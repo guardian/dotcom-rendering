@@ -101,7 +101,7 @@ const meta = {
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
-		frontSectionTitle: 'Flexible general',
+		frontSectionTitle: 'Flexible special',
 	},
 	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
