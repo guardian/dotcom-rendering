@@ -21,7 +21,7 @@ interface DesignableBannerCtasProps {
 	secondaryCtaSettings: CtaSettings;
 }
 
-export function DesignableBannerCtas({
+export function DesignableBannerCtas_unused({
 	mainOrMobileContent,
 	onPrimaryCtaClick,
 	onSecondaryCtaClick,

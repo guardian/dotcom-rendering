@@ -45,7 +45,7 @@ import { ChoiceCards_unused as ChoiceCards } from './components/choiceCards/Choi
 import { DesignableBannerArticleCount } from './components/DesignableBannerArticleCount';
 import { DesignableBannerBody } from './components/DesignableBannerBody';
 import { DesignableBannerCloseButton } from './components/DesignableBannerCloseButton';
-import { DesignableBannerCtas } from './components/DesignableBannerCtas';
+import { DesignableBannerCtas_unused } from './components/DesignableBannerCtas';
 import { DesignableBannerHeader } from './components/DesignableBannerHeader';
 import { DesignableBannerReminder } from './components/DesignableBannerReminder';
 import { DesignableBannerVisual } from './components/DesignableBannerVisual';
@@ -368,7 +368,7 @@ const DesignableBanner_unused: ReactComponent<BannerRenderProps> = ({
 					</div>
 
 					{!showChoiceCards && (
-						<DesignableBannerCtas
+						<DesignableBannerCtas_unused
 							mainOrMobileContent={mainOrMobileContent}
 							onPrimaryCtaClick={onCtaClick}
 							onSecondaryCtaClick={onSecondaryCtaClick}
