@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { Button } from '@guardian/source/react-components';
+import {
+	Button,
+	SvgMediaControlsPause,
+	SvgMediaControlsPlay,
+} from '@guardian/source/react-components';
 import { palette } from '../palette';
 
 const button = css`
@@ -9,9 +13,19 @@ type ButtonProps = {
 	isPlaying: boolean;
 	onClickHandler: () => void;
 };
-export const ListenToAudioButton = ({ onClickHandler }: ButtonProps) => {
+export const ListenToAudioButton = ({
+	isPlaying,
+	onClickHandler,
+}: ButtonProps) => {
 	return (
-		<Button onClick={onClickHandler} size={'small'} cssOverrides={[button]}>
+		<Button
+			onClick={onClickHandler}
+			size={'small'}
+			cssOverrides={[button]}
+			icon={
+				isPlaying ? <SvgMediaControlsPause /> : <SvgMediaControlsPlay />
+			}
+		>
 			Listen to article
 		</Button>
 	);
