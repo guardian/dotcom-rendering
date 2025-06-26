@@ -9,10 +9,7 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from './Card/components/ImageWrapper';
+import type { ImagePositionType } from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
 import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
@@ -29,13 +26,13 @@ type Props = {
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
+	isInHideTrailsAbTest?: boolean;
 };
 
 type BoostProperties = {
 	headlineSizes: ResponsiveFontSize;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
-	imageSize: ImageSizeType;
 	supportingContentAlignment: Alignment;
 	liveUpdatesAlignment: Alignment;
 	trailTextSize: TrailTextSize;
@@ -50,23 +47,18 @@ const determineCardProperties = (
 	supportingContentLength: number,
 	mediaCard: boolean,
 	imageSuppressed: boolean,
-	hasLivePlayable: boolean,
 ): BoostProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
 			return {
 				headlineSizes: {
-					desktop:
-						imageSuppressed || hasLivePlayable
-							? 'xxlarge'
-							: 'xlarge',
+					desktop: imageSuppressed ? 'xxlarge' : 'xlarge',
 					tablet: 'large',
 					mobile: 'medium',
 				},
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
-				imageSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
@@ -75,16 +67,12 @@ const determineCardProperties = (
 		case 'boost':
 			return {
 				headlineSizes: {
-					desktop:
-						imageSuppressed || hasLivePlayable
-							? 'xxxlarge'
-							: 'xxlarge',
+					desktop: imageSuppressed ? 'xxxlarge' : 'xxlarge',
 					tablet: 'xlarge',
 					mobile: 'large',
 				},
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
-				imageSize: 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
@@ -93,16 +81,12 @@ const determineCardProperties = (
 		case 'megaboost':
 			return {
 				headlineSizes: {
-					desktop:
-						imageSuppressed || hasLivePlayable
-							? 'xxxlarge'
-							: 'xxlarge',
+					desktop: imageSuppressed ? 'xxxlarge' : 'xxlarge',
 					tablet: 'xlarge',
 					mobile: 'xlarge',
 				},
 				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
-				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
@@ -116,7 +100,6 @@ const determineCardProperties = (
 				},
 				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
-				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
@@ -134,6 +117,7 @@ export const OneCardLayout = ({
 	isLastRow,
 	isFirstRow,
 	containerLevel,
+	isInHideTrailsAbTest,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -144,6 +128,7 @@ export const OneCardLayout = ({
 	isLastRow: boolean;
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
+	isInHideTrailsAbTest?: boolean;
 }) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -152,7 +137,6 @@ export const OneCardLayout = ({
 		headlineSizes,
 		imagePositionOnDesktop,
 		imagePositionOnMobile,
-		imageSize,
 		supportingContentAlignment,
 		liveUpdatesAlignment,
 		trailTextSize,
@@ -161,8 +145,8 @@ export const OneCardLayout = ({
 		card.supportingContent?.length ?? 0,
 		isMediaCard(card.format),
 		!card.image,
-		card.showLivePlayable,
 	);
+
 	return (
 		<UL padBottom={!isLastRow} hasLargeSpacing={!isLastRow}>
 			<LI padSides={true}>
@@ -175,7 +159,7 @@ export const OneCardLayout = ({
 					headlineSizes={headlineSizes}
 					imagePositionOnDesktop={imagePositionOnDesktop}
 					imagePositionOnMobile={imagePositionOnMobile}
-					imageSize={imageSize}
+					imageSize={'jumbo'}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
 					supportingContentAlignment={supportingContentAlignment}
@@ -194,6 +178,7 @@ export const OneCardLayout = ({
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
+					isInHideTrailsAbTest={isInHideTrailsAbTest}
 				/>
 			</LI>
 		</UL>
@@ -221,6 +206,7 @@ const TwoCardOrFourCardLayout = ({
 	aspectRatio,
 	isFirstRow,
 	containerLevel,
+	isInHideTrailsAbTest,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
@@ -231,6 +217,7 @@ const TwoCardOrFourCardLayout = ({
 	aspectRatio: AspectRatio;
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
+	isInHideTrailsAbTest?: boolean;
 }) => {
 	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
@@ -271,6 +258,7 @@ const TwoCardOrFourCardLayout = ({
 									!isMediaCard(card.format))
 							}
 							canPlayInline={false}
+							isInHideTrailsAbTest={isInHideTrailsAbTest}
 						/>
 					</LI>
 				);
@@ -287,6 +275,7 @@ export const FlexibleSpecial = ({
 	imageLoading,
 	aspectRatio,
 	containerLevel = 'Primary',
+	isInHideTrailsAbTest,
 }: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1);
 	const splash = [...groupedTrails.standard].slice(0, 1);
@@ -304,6 +293,7 @@ export const FlexibleSpecial = ({
 				isFirstRow={true}
 				isLastRow={splash.length === 0 && cards.length === 0}
 				containerLevel={containerLevel}
+				isInHideTrailsAbTest={isInHideTrailsAbTest}
 			/>
 			<OneCardLayout
 				cards={splash}
@@ -315,6 +305,7 @@ export const FlexibleSpecial = ({
 				isLastRow={cards.length === 0}
 				isFirstRow={!isNonEmptyArray(snaps)}
 				containerLevel={containerLevel}
+				isInHideTrailsAbTest={isInHideTrailsAbTest}
 			/>
 			<TwoCardOrFourCardLayout
 				cards={cards}
@@ -325,6 +316,7 @@ export const FlexibleSpecial = ({
 				aspectRatio={aspectRatio}
 				isFirstRow={!isNonEmptyArray(snaps) && !isNonEmptyArray(splash)}
 				containerLevel={containerLevel}
+				isInHideTrailsAbTest={isInHideTrailsAbTest}
 			/>
 		</>
 	);

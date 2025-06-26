@@ -48,6 +48,7 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
+	isInHideTrailsAbTest?: boolean;
 };
 
 export const DecideContainer = ({
@@ -63,6 +64,7 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
+	isInHideTrailsAbTest,
 }: Props) => {
 	// If you add a new container type which contains an MPU, you must also add it to
 	switch (containerType) {
@@ -255,6 +257,7 @@ export const DecideContainer = ({
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
+					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 				/>
 			);
 		case 'flexible/general':
@@ -268,6 +271,7 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
+					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 				/>
 			);
 		case 'scrollable/small':
@@ -282,6 +286,7 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
+						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 					/>
 				</Island>
 			);
@@ -297,6 +302,7 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
+						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 					/>
 				</Island>
 			);
@@ -309,6 +315,7 @@ export const DecideContainer = ({
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
+					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 				/>
 			);
 		case 'scrollable/feature':
@@ -321,6 +328,7 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						collectionId={collectionId}
+						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 					/>
 				</Island>
 			);
@@ -333,6 +341,7 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
+					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 				/>
 			);
 		default:

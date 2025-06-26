@@ -26,8 +26,8 @@ type Props = {
 export const LoopVideo = ({
 	src,
 	videoId,
-	width = 600,
-	height = 360,
+	width,
+	height,
 	thumbnailImage,
 	fallbackImageComponent,
 	hasAudio = true,
