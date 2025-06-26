@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	headlineMedium17,
+	palette as sourcePalette,
 	textSansItalic17,
 	until,
 } from '@guardian/source/foundations';
@@ -29,24 +30,44 @@ const standfirstColourBelowDesktop = css`
 	}
 `;
 
-const bylineStyles = css`
-	${headlineMedium17}
+const bylineStyles = (format: ArticleFormat) => {
+	const defaultStyles = css`
+		${headlineMedium17}
 
-	padding-bottom: 8px;
-	font-style: italic;
+		padding-bottom: 8px;
+		font-style: italic;
 
-	color: ${schemedPalette('--byline')};
+		color: ${schemedPalette('--byline')};
 
-	a {
-		color: ${schemedPalette('--byline-anchor')};
-		font-weight: 700;
-		text-decoration: none;
-		font-style: normal;
-		:hover {
-			text-decoration: underline;
+		a {
+			color: ${schemedPalette('--byline-anchor')};
+			font-weight: 700;
+			text-decoration: none;
+			font-style: normal;
+			:hover {
+				text-decoration: underline;
+			}
 		}
+	`;
+
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return css`
+				${defaultStyles}
+				a {
+					font-style: italic;
+					border-bottom: 0.5px solid ${sourcePalette.neutral[46]};
+					:hover {
+						text-decoration: none;
+						border-color: ${schemedPalette('--byline-anchor')};
+					}
+				}
+			`;
+
+		default:
+			return defaultStyles;
 	}
-`;
+};
 
 const labsBylineStyles = css`
 	${textSansItalic17};
@@ -74,7 +95,7 @@ export const Contributor = ({ byline, tags, format, source }: Props) => (
 						: ''
 				}
 				css={[
-					bylineStyles,
+					bylineStyles(format),
 					format.theme === ArticleSpecial.Labs && labsBylineStyles,
 					format.design === ArticleDesign.LiveBlog &&
 						standfirstColourBelowDesktop,
