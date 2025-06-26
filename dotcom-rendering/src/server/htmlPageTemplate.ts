@@ -27,6 +27,7 @@ type BaseProps = {
 	weAreHiring: boolean;
 	onlyLightColourScheme?: boolean;
 	isInteractive?: boolean;
+	rssFeedUrl?: string;
 };
 
 interface WebProps extends BaseProps {
@@ -76,6 +77,7 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		weAreHiring,
 		config,
 		isInteractive = false,
+		rssFeedUrl,
 	} = props;
 
 	const doNotIndex = (): boolean => {
@@ -406,6 +408,12 @@ https://workforus.theguardian.com/careers/product-engineering/
 					renderingTarget === 'Apps'
 						? `<link rel="stylesheet" type="text/css" href="/fontSize.css">`
 						: ``
+				}
+
+				${
+					!isUndefined(rssFeedUrl)
+						? `<link rel="alternate" type="application/rss+xml" href="${rssFeedUrl}">`
+						: ''
 				}
 
 			</head>

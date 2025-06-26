@@ -746,15 +746,15 @@ const styles = {
 			max-width: ${phabletContentMaxWidth};
 		}
 		${from.desktop} {
-			margin: 0 ${space[3]}px;
 			justify-self: end;
+			width: 299px;
 		}
 		${between.desktop.and.wide} {
-			max-width: 380px;
+			width: 380px;
 		}
 		${from.wide} {
-			max-width: 485px;
 			align-self: start;
+			width: 380px;
 		}
 	`,
 	guardianLogoContainer: css`
@@ -813,6 +813,8 @@ const styles = {
 			margin-bottom: ${space[6]}px;
 			gap: 0;
 			margin-top: ${space[3]}px;
+			margin-right: 0;
+			margin-left: 0;
 
 			a {
 				width: 100%;

@@ -54,13 +54,6 @@ const findCollectionSuitableForFrontBranding = (
 	return index;
 };
 
-/** Depending on the next sibling of the container, we assign either large or small spacing rules during render */
-const getContainerSpacing = (nextSiblingCollection?: FECollection) => {
-	const nextCollectionIsPrimary =
-		nextSiblingCollection?.config.collectionLevel === 'Primary';
-	return nextCollectionIsPrimary ? 'large' : 'small';
-};
-
 export const enhanceCollections = ({
 	collections,
 	editionId,
@@ -82,6 +75,7 @@ export const enhanceCollections = ({
 }): DCRCollectionType[] => {
 	const indexToShowFrontBranding =
 		findCollectionSuitableForFrontBranding(collections);
+
 	return collections.filter(isSupported).map((collection, index) => {
 		const { id, displayName, collectionType, hasMore, href, description } =
 			collection;
@@ -110,10 +104,12 @@ export const enhanceCollections = ({
 			},
 		);
 
-		const containerSpacing = getContainerSpacing(collections[index + 1]);
+		const isNextCollectionPrimary =
+			collections[index + 1]?.config.collectionLevel === 'Primary';
 		const isBetaContainer = BETA_CONTAINERS.includes(
 			collection.collectionType,
 		);
+
 		return {
 			id,
 			displayName,
@@ -125,7 +121,7 @@ export const enhanceCollections = ({
 			href,
 			containerPalette,
 			containerLevel: collection.config.collectionLevel,
-			containerSpacing,
+			isNextCollectionPrimary,
 			collectionBranding,
 			grouped: groupCards(
 				collectionType,

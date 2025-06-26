@@ -1,4 +1,3 @@
-import { Hide } from '@guardian/source/react-components';
 import type { ImgHTMLAttributes } from 'react';
 import type {
 	AspectRatio,
@@ -49,7 +48,7 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
-	shouldShowCarouselsAsStacked?: boolean;
+	isInHideTrailsAbTest?: boolean;
 };
 
 export const DecideContainer = ({
@@ -65,7 +64,7 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
-	shouldShowCarouselsAsStacked,
+	isInHideTrailsAbTest,
 }: Props) => {
 	// If you add a new container type which contains an MPU, you must also add it to
 	switch (containerType) {
@@ -258,6 +257,7 @@ export const DecideContainer = ({
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
+					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 				/>
 			);
 		case 'flexible/general':
@@ -271,44 +271,10 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
+					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 				/>
 			);
 		case 'scrollable/small':
-			if (shouldShowCarouselsAsStacked) {
-				return (
-					<>
-						<Hide from="tablet">
-							<StaticMediumFour
-								trails={trails}
-								containerPalette={containerPalette}
-								showAge={showAge}
-								absoluteServerTimes={absoluteServerTimes}
-								imageLoading={imageLoading}
-								aspectRatio={aspectRatio}
-							/>
-						</Hide>
-						{/* scrollable/small is not a carousel above the tablet breakpoint */}
-						<Hide until="tablet">
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<ScrollableSmall
-									trails={trails}
-									imageLoading={imageLoading}
-									containerType={'scrollable/small'}
-									containerPalette={containerPalette}
-									showAge={showAge}
-									absoluteServerTimes={absoluteServerTimes}
-									aspectRatio={aspectRatio}
-									sectionId={sectionId}
-								/>
-							</Island>
-						</Hide>
-					</>
-				);
-			}
-
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<ScrollableSmall
@@ -320,23 +286,11 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
+						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 					/>
 				</Island>
 			);
 		case 'scrollable/medium':
-			if (shouldShowCarouselsAsStacked) {
-				return (
-					<StaticMediumFour
-						trails={trails}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						absoluteServerTimes={absoluteServerTimes}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				);
-			}
-
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<ScrollableMedium
@@ -348,6 +302,7 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
+						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 					/>
 				</Island>
 			);
@@ -360,6 +315,7 @@ export const DecideContainer = ({
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
+					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 				/>
 			);
 		case 'scrollable/feature':
@@ -372,6 +328,7 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						collectionId={collectionId}
+						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 					/>
 				</Island>
 			);
@@ -384,6 +341,7 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
+					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 				/>
 			);
 		default:

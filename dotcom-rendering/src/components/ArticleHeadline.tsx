@@ -247,8 +247,11 @@ const zIndex = css`
 	z-index: 1;
 `;
 
-const ageWarningMargins = (format: ArticleFormat) =>
-	format.display === ArticleDisplay.Immersive
+const ageWarningMargins = (format: ArticleFormat) => {
+	if (format.design === ArticleDesign.Gallery) {
+		return '';
+	}
+	return format.display === ArticleDisplay.Immersive
 		? css`
 				margin-left: 0px;
 				margin-bottom: 0px;
@@ -275,6 +278,7 @@ const ageWarningMargins = (format: ArticleFormat) =>
 					margin-top: 0;
 				}
 		  `;
+};
 
 const backgroundStyles = css`
 	background-color: ${themePalette('--age-warning-wrapper-background')};
