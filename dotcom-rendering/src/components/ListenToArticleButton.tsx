@@ -8,6 +8,15 @@ import { palette } from '../palette';
 
 const button = css`
 	background-color: ${palette('--follow-icon-fill')};
+	&:active {
+		background-color: ${palette('--follow-icon-fill')};
+	}
+	&:focus {
+		background-color: ${palette('--follow-icon-fill')};
+	}
+	&:hover {
+		background-color: ${palette('--follow-icon-fill')};
+	}
 `;
 type ButtonProps = {
 	isPlaying: boolean;
