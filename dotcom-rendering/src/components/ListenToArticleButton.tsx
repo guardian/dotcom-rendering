@@ -1,16 +1,9 @@
 import { css } from '@emotion/react';
+import { Button } from '@guardian/source/react-components';
 import { palette } from '../palette';
 
 const button = css`
 	background-color: ${palette('--follow-icon-fill')};
-	border: none;
-	color: white;
-	padding: 8px 12px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	border-radius: 40px;
-	font-weight: bold;
 `;
 type ButtonProps = {
 	isPlaying: boolean;
@@ -18,8 +11,15 @@ type ButtonProps = {
 };
 export const ListenToAudioButton = ({ onClickHandler }: ButtonProps) => {
 	return (
-		<button onClick={onClickHandler} type="button" css={[button]}>
-			Listen to article
-		</button>
+		<>
+			<h1>hello</h1>
+			<Button
+				onClick={onClickHandler}
+				size={'small'}
+				cssOverrides={[button]}
+			>
+				Listen to article
+			</Button>
+		</>
 	);
 };

@@ -60,11 +60,9 @@ export const ListenToArticleWrapper = ({ articleId }: Props) => {
 					});
 	};
 	return (
-		showListenToArticleButton && (
-			<ListenToAudioButton
-				isPlaying={isPlaying}
-				onClickHandler={listenToArticleHander}
-			/>
-		)
+		<ListenToAudioButton
+			isPlaying={isPlaying}
+			onClickHandler={listenToArticleHander}
+		/>
 	);
 };
