@@ -29,7 +29,10 @@ export const EnhanceAffiliateLinks = () => {
 
 				// Skimlinks treats xcust as one long string, so we use | to separate values
 				link.href += `&xcust=${encodeURIComponent(
-					'referrer|' + referrerDomain + '|accountId|' + skimlinksAccountId,
+					'referrer|' +
+						referrerDomain +
+						'|accountId|' +
+						skimlinksAccountId,
 				)}`;
 			}
 		}
