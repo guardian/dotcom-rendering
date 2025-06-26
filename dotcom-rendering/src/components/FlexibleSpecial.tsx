@@ -26,6 +26,7 @@ type Props = {
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
+	collectionId: number;
 	isInHideTrailsAbTest?: boolean;
 };
 
@@ -107,6 +108,19 @@ const determineCardProperties = (
 	}
 };
 
+type OneCardLayoutProps = {
+	cards: DCRFrontCard[];
+	imageLoading: Loading;
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+	absoluteServerTimes: boolean;
+	aspectRatio: AspectRatio;
+	isLastRow: boolean;
+	isFirstRow: boolean;
+	containerLevel: DCRContainerLevel;
+	isInHideTrailsAbTest?: boolean;
+};
+
 export const OneCardLayout = ({
 	cards,
 	containerPalette,
@@ -118,18 +132,7 @@ export const OneCardLayout = ({
 	isFirstRow,
 	containerLevel,
 	isInHideTrailsAbTest,
-}: {
-	cards: DCRFrontCard[];
-	imageLoading: Loading;
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-	absoluteServerTimes: boolean;
-	aspectRatio: AspectRatio;
-	isLastRow: boolean;
-	isFirstRow: boolean;
-	containerLevel: DCRContainerLevel;
-	isInHideTrailsAbTest?: boolean;
-}) => {
+}: OneCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
 
@@ -196,18 +199,7 @@ const getImagePosition = (
 	return 'bottom';
 };
 
-const TwoCardOrFourCardLayout = ({
-	cards,
-	containerPalette,
-	showAge,
-	absoluteServerTimes,
-	showImage = true,
-	imageLoading,
-	aspectRatio,
-	isFirstRow,
-	containerLevel,
-	isInHideTrailsAbTest,
-}: {
+type TwoOrFourCardLayoutProps = {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
@@ -218,7 +210,20 @@ const TwoCardOrFourCardLayout = ({
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
 	isInHideTrailsAbTest?: boolean;
-}) => {
+};
+
+const TwoOrFourCardLayout = ({
+	cards,
+	containerPalette,
+	showAge,
+	absoluteServerTimes,
+	showImage = true,
+	imageLoading,
+	aspectRatio,
+	isFirstRow,
+	containerLevel,
+	isInHideTrailsAbTest,
+}: TwoOrFourCardLayoutProps) => {
 	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
 
@@ -275,11 +280,21 @@ export const FlexibleSpecial = ({
 	imageLoading,
 	aspectRatio,
 	containerLevel = 'Primary',
+	collectionId,
 	isInHideTrailsAbTest,
 }: Props) => {
-	const snaps = [...groupedTrails.snap].slice(0, 1);
-	const splash = [...groupedTrails.standard].slice(0, 1);
-	const cards = [...groupedTrails.standard].slice(1, 5);
+	const snaps = [...groupedTrails.snap].slice(0, 1).map((snap) => ({
+		...snap,
+		uniqueId: `collection-${collectionId}-snap-0`,
+	}));
+	const splash = [...groupedTrails.standard].slice(0, 1).map((snap) => ({
+		...snap,
+		uniqueId: `collection-${collectionId}-splash-0`,
+	}));
+	const cards = [...groupedTrails.standard].slice(1, 5).map((snap, i) => ({
+		...snap,
+		uniqueId: `collection-${collectionId}-standard-${i}`,
+	}));
 
 	return (
 		<>
@@ -307,7 +322,7 @@ export const FlexibleSpecial = ({
 				containerLevel={containerLevel}
 				isInHideTrailsAbTest={isInHideTrailsAbTest}
 			/>
-			<TwoCardOrFourCardLayout
+			<TwoOrFourCardLayout
 				cards={cards}
 				containerPalette={containerPalette}
 				showAge={showAge}

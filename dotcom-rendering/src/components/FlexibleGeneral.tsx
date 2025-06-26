@@ -81,6 +81,15 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 	}, []);
 };
 
+type ImmersiveCardLayoutProps = {
+	card: DCRFrontCard;
+	containerPalette?: DCRContainerPalette;
+	absoluteServerTimes: boolean;
+	imageLoading: Loading;
+	collectionId: number;
+	isInHideTrailsAbTest?: boolean;
+};
+
 /**
  * ImmersiveCardLayout is a special case of the card layout that is used for cards with the isImmersive property.
  * It is a single feature card that takes up the full width of the container on all breakpoints.
@@ -94,14 +103,7 @@ const ImmersiveCardLayout = ({
 	imageLoading,
 	collectionId,
 	isInHideTrailsAbTest,
-}: {
-	card: DCRFrontCard;
-	containerPalette?: DCRContainerPalette;
-	absoluteServerTimes: boolean;
-	imageLoading: Loading;
-	collectionId: number;
-	isInHideTrailsAbTest?: boolean;
-}) => {
+}: ImmersiveCardLayoutProps) => {
 	const isLoopingVideo = card.mainMedia?.type === 'LoopVideo';
 
 	return (
@@ -233,6 +235,19 @@ const decideSplashCardProperties = (
 	}
 };
 
+type SplashCardLayoutProps = {
+	cards: DCRFrontCard[];
+	imageLoading: Loading;
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+	absoluteServerTimes: boolean;
+	aspectRatio: AspectRatio;
+	isLastRow: boolean;
+	containerLevel: DCRContainerLevel;
+	collectionId: number;
+	isInHideTrailsAbTest?: boolean;
+};
+
 const SplashCardLayout = ({
 	cards,
 	containerPalette,
@@ -244,18 +259,7 @@ const SplashCardLayout = ({
 	containerLevel,
 	collectionId,
 	isInHideTrailsAbTest,
-}: {
-	cards: DCRFrontCard[];
-	imageLoading: Loading;
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-	absoluteServerTimes: boolean;
-	aspectRatio: AspectRatio;
-	isLastRow: boolean;
-	containerLevel: DCRContainerLevel;
-	collectionId: number;
-	isInHideTrailsAbTest?: boolean;
-}) => {
+}: SplashCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
 
@@ -388,6 +392,20 @@ const decideCardProperties = (
 	}
 };
 
+type FullWidthCardLayoutProps = {
+	cards: DCRFrontCard[];
+	imageLoading: Loading;
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+	absoluteServerTimes: boolean;
+	aspectRatio: AspectRatio;
+	isFirstRow: boolean;
+	isLastRow: boolean;
+	containerLevel: DCRContainerLevel;
+	collectionId: number;
+	isInHideTrailsAbTest?: boolean;
+};
+
 const FullWidthCardLayout = ({
 	cards,
 	containerPalette,
@@ -400,19 +418,7 @@ const FullWidthCardLayout = ({
 	containerLevel,
 	collectionId,
 	isInHideTrailsAbTest,
-}: {
-	cards: DCRFrontCard[];
-	imageLoading: Loading;
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-	absoluteServerTimes: boolean;
-	aspectRatio: AspectRatio;
-	isFirstRow: boolean;
-	isLastRow: boolean;
-	containerLevel: DCRContainerLevel;
-	collectionId: number;
-	isInHideTrailsAbTest?: boolean;
-}) => {
+}: FullWidthCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
 
@@ -493,6 +499,21 @@ const FullWidthCardLayout = ({
 	);
 };
 
+type HalfWidthCardLayoutProps = {
+	cards: DCRFrontCard[];
+	imageLoading: Loading;
+	isFirstRow?: boolean;
+	isFirstStandardRow?: boolean;
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+	absoluteServerTimes: boolean;
+	aspectRatio: AspectRatio;
+	row: number;
+	isLastRow: boolean;
+	containerLevel: DCRContainerLevel;
+	isInHideTrailsAbTest?: boolean;
+};
+
 const HalfWidthCardLayout = ({
 	cards,
 	containerPalette,
@@ -506,20 +527,7 @@ const HalfWidthCardLayout = ({
 	isLastRow,
 	containerLevel,
 	isInHideTrailsAbTest,
-}: {
-	cards: DCRFrontCard[];
-	imageLoading: Loading;
-	isFirstRow?: boolean;
-	isFirstStandardRow?: boolean;
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-	absoluteServerTimes: boolean;
-	aspectRatio: AspectRatio;
-	row: number;
-	isLastRow: boolean;
-	containerLevel: DCRContainerLevel;
-	isInHideTrailsAbTest?: boolean;
-}) => {
+}: HalfWidthCardLayoutProps) => {
 	if (cards.length === 0) return null;
 
 	return (
@@ -593,8 +601,16 @@ export const FlexibleGeneral = ({
 	collectionId,
 	isInHideTrailsAbTest,
 }: Props) => {
-	const splash = [...groupedTrails.splash].slice(0, 1);
-	const cards = [...groupedTrails.standard].slice(0, 19);
+	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
+		...snap,
+		uniqueId: `collection-${collectionId}-splash-0`,
+	}));
+	const cards = [...groupedTrails.standard]
+		.slice(0, 19)
+		.map((standard, i) => ({
+			...standard,
+			uniqueId: `collection-${collectionId}-standard-${i}`,
+		}));
 	const groupedCards = decideCardPositions(cards);
 
 	return (
