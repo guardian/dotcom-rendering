@@ -342,12 +342,12 @@ export const ArticleMetaApps = ({
 						</Island>
 					</MetaGridBranding>
 				)}
-				{pageId && (
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<ListenToArticleWrapper articleId={pageId} />
-					</Island>
-				)}
 			</div>
+			{pageId && (
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<ListenToArticleWrapper articleId={pageId} />
+				</Island>
+			)}
 		</div>
 	);
 };
