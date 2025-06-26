@@ -107,7 +107,7 @@ const ImmersiveCardLayout = ({
 	const isLoopingVideo = card.mainMedia?.type === 'LoopVideo';
 
 	return (
-		<UL padBottom={true} key={card.url}>
+		<UL padBottom={true}>
 			<LI padSides={true}>
 				<FeatureCard
 					collectionId={collectionId}
@@ -453,7 +453,6 @@ const FullWidthCardLayout = ({
 			showTopBar={!isFirstRow}
 			padBottom={!isLastRow}
 			hasLargeSpacing={!isLastRow}
-			key={card.url}
 		>
 			<LI
 				padSides={true}
@@ -508,7 +507,6 @@ type HalfWidthCardLayoutProps = {
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
-	row: number;
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	isInHideTrailsAbTest?: boolean;
@@ -523,7 +521,6 @@ const HalfWidthCardLayout = ({
 	isFirstRow,
 	isFirstStandardRow,
 	aspectRatio,
-	row,
 	isLastRow,
 	containerLevel,
 	isInHideTrailsAbTest,
@@ -538,7 +535,6 @@ const HalfWidthCardLayout = ({
 			showTopBar={!isFirstRow}
 			/** We use one full top bar for the first row and use a split one for subsequent rows */
 			splitTopBar={!isFirstStandardRow}
-			key={row}
 		>
 			{cards.map((card, cardIndex) => {
 				return (
@@ -646,6 +642,7 @@ export const FlexibleGeneral = ({
 								containerLevel={containerLevel}
 								collectionId={collectionId}
 								isInHideTrailsAbTest={isInHideTrailsAbTest}
+								key={row.cards[0]?.uniqueId}
 							/>
 						);
 
@@ -662,10 +659,10 @@ export const FlexibleGeneral = ({
 								isFirstRow={!splash.length && i === 0}
 								isFirstStandardRow={i === 0}
 								aspectRatio={aspectRatio}
-								row={i + 1}
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								isInHideTrailsAbTest={isInHideTrailsAbTest}
+								key={row.cards[0]?.uniqueId}
 							/>
 						);
 				}
