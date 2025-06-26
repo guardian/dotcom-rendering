@@ -13,7 +13,7 @@ const RecommendedPill = () => {
 	return <div css={styles.recommendedPillStyles}>Recommended</div>;
 };
 
-export const ThreeTierChoiceCardsV2 = () => {
+export const ThreeTierChoiceCardsV2_unused = () => {
 	return (
 		<div css={styles.container}>
 			<div css={styles.choiceCardStyles}>

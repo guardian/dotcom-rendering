@@ -33,7 +33,7 @@ import {
 	useMatchMedia,
 } from '../../../../lib/useMatchMedia';
 import { useChoiceCards } from '../../hooks/useChoiceCards';
-import { useReminder } from '../../hooks/useReminder';
+import { useReminder_unused as useReminder } from '../../hooks/useReminder';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
 import type {
@@ -41,7 +41,7 @@ import type {
 	BannerRenderProps,
 } from '../common/types';
 import type { ChoiceCardSettings } from './components/choiceCards/ChoiceCards';
-import { ChoiceCards } from './components/choiceCards/ChoiceCards';
+import { ChoiceCards_unused as ChoiceCards } from './components/choiceCards/ChoiceCards';
 import { DesignableBannerArticleCount } from './components/DesignableBannerArticleCount';
 import { DesignableBannerBody } from './components/DesignableBannerBody';
 import { DesignableBannerCloseButton } from './components/DesignableBannerCloseButton';
@@ -118,7 +118,7 @@ const buildChoiceCardSettings = (
 	return undefined;
 };
 
-const DesignableBanner: ReactComponent<BannerRenderProps> = ({
+const DesignableBanner_unused: ReactComponent<BannerRenderProps> = ({
 	content,
 	onCloseClick,
 	articleCounts,
@@ -648,10 +648,13 @@ const styles = {
 	`,
 };
 
-const unvalidated = bannerWrapper(DesignableBanner, 'designable-banner');
-const validated = validatedBannerWrapper(DesignableBanner, 'designable-banner');
+const unvalidated = bannerWrapper(DesignableBanner_unused, 'designable-banner');
+const validated = validatedBannerWrapper(
+	DesignableBanner_unused,
+	'designable-banner',
+);
 
 export {
-	validated as DesignableBanner,
-	unvalidated as DesignableBannerUnvalidated,
+	validated as DesignableBanner_unused,
+	unvalidated as DesignableBannerUnvalidated_unused,
 };
