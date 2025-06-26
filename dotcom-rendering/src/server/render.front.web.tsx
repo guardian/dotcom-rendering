@@ -162,6 +162,7 @@ export const renderFront = ({
 		weAreHiring: !!front.config.switches.weAreHiring,
 		canonicalUrl,
 		config,
+		rssFeedUrl: front.webURL + '/rss',
 	});
 
 	return {
@@ -250,6 +251,7 @@ export const renderTagPage = ({
 		weAreHiring: !!tagPage.config.switches.weAreHiring,
 		canonicalUrl: tagPage.canonicalUrl,
 		config,
+		rssFeedUrl: tagPage.webURL + '/rss',
 	});
 	return {
 		html: pageHtml,

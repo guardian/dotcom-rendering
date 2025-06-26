@@ -1,6 +1,9 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
+import { ArticleMetaApps } from '../components/ArticleMeta.apps';
+import { ArticleMeta } from '../components/ArticleMeta.web';
+import { ArticleTitle } from '../components/ArticleTitle';
 import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Standfirst } from '../components/Standfirst';
@@ -72,6 +75,13 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						mainMedia={gallery.mainMedia}
 						format={format}
 					/>
+					<ArticleTitle
+						format={format}
+						tags={frontendData.tags}
+						sectionLabel={frontendData.sectionLabel}
+						sectionUrl={frontendData.sectionUrl}
+						guardianBaseURL={frontendData.guardianBaseURL}
+					/>
 					<ArticleHeadline
 						format={format}
 						headlineString={frontendData.headline}
@@ -83,8 +93,57 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					/>
 					<Standfirst
 						format={format}
-						standfirst={props.gallery.frontendData.standfirst}
+						standfirst={frontendData.standfirst}
 					/>
+					{props.renderingTarget === 'Web' ? (
+						<ArticleMeta
+							branding={
+								frontendData.commercialProperties[
+									frontendData.editionId
+								].branding
+							}
+							format={format}
+							pageId={frontendData.pageId}
+							webTitle={frontendData.webTitle}
+							byline={frontendData.byline}
+							tags={frontendData.tags}
+							primaryDateline={
+								frontendData.webPublicationDateDisplay
+							}
+							secondaryDateline={
+								frontendData.webPublicationSecondaryDateDisplay
+							}
+							isCommentable={frontendData.isCommentable}
+							discussionApiUrl={
+								frontendData.config.discussionApiUrl
+							}
+							shortUrlId={frontendData.config.shortUrlId}
+						/>
+					) : null}
+					{props.renderingTarget === 'Apps' ? (
+						<ArticleMetaApps
+							branding={
+								frontendData.commercialProperties[
+									frontendData.editionId
+								].branding
+							}
+							format={format}
+							pageId={frontendData.pageId}
+							byline={frontendData.byline}
+							tags={frontendData.tags}
+							primaryDateline={
+								frontendData.webPublicationDateDisplay
+							}
+							secondaryDateline={
+								frontendData.webPublicationSecondaryDateDisplay
+							}
+							isCommentable={frontendData.isCommentable}
+							discussionApiUrl={
+								frontendData.config.discussionApiUrl
+							}
+							shortUrlId={frontendData.config.shortUrlId}
+						/>
+					) : null}
 					<div
 						css={[
 							border,
