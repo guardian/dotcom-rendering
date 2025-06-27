@@ -87,7 +87,7 @@ jobs:
         with:
           roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          projectName: dotcom::ab-tests
+          projectName: dotcom:rendering-all
           configPath: ab-testing/riff-raff.yaml
           contentDirectories: |
             frontend-store/commercial:
