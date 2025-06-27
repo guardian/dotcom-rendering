@@ -349,8 +349,8 @@ export const GalleryDesign = {
 			design: ArticleDesign.Gallery,
 		}),
 		colourSchemeBackground: {
-			light: palette('--article-background'),
-			dark: palette('--article-background'),
+			light: palette('--article-inner-background'),
+			dark: palette('--article-inner-background'),
 		},
 	},
 	decorators: [leftColumnDecorator],
@@ -383,8 +383,8 @@ export const GalleryLabsWithBranding = {
 
 	parameters: {
 		colourSchemeBackground: {
-			light: palette('--article-background'),
-			dark: palette('--article-background'),
+			light: palette('--article-inner-background'),
+			dark: palette('--article-inner-background'),
 		},
 	},
 	decorators: [leftColumnDecorator],

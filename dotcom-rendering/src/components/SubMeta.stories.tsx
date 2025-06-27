@@ -115,8 +115,8 @@ GalleryStory.decorators = [
 ];
 GalleryStory.parameters = {
 	colourSchemeBackground: {
-		light: palette('--article-background'),
-		dark: palette('--article-background'),
+		light: palette('--article-inner-background'),
+		dark: palette('--article-inner-background'),
 	},
 };
 
