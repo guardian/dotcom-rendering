@@ -4,24 +4,12 @@ import {
 	space,
 	textSans14,
 	textSans17,
+	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { palette } from '../../../palette';
 
 export type TrailTextSize = 'regular' | 'large';
-
-type Props = {
-	trailText: string;
-	trailTextSize?: TrailTextSize;
-	/** Optionally overrides the trail text colour */
-	trailTextColour?: string;
-	/** Controls visibility of trail text on various breakpoints */
-	hideUntil?: 'tablet' | 'desktop';
-	/** Defaults to `true`. Adds padding to the bottom of the trail text */
-	padBottom?: boolean;
-	/** Adds padding to the top of the trail text */
-	padTop?: boolean;
-};
 
 const trailTextStyles = css`
 	display: flex;
@@ -46,6 +34,26 @@ const fontStyles = (trailTextSize: TrailTextSize) => css`
 	}
 `;
 
+const isInHideTrailsAbTestStyles = css`
+	${until.tablet} {
+		display: none;
+	}
+`;
+
+type Props = {
+	trailText: string;
+	trailTextSize?: TrailTextSize;
+	/** Optionally overrides the trail text colour */
+	trailTextColour?: string;
+	/** Controls visibility of trail text on various breakpoints */
+	hideUntil?: 'tablet' | 'desktop';
+	/** Defaults to `true`. Adds padding to the bottom of the trail text */
+	padBottom?: boolean;
+	/** Adds padding to the top of the trail text */
+	padTop?: boolean;
+	isInHideTrailsAbTest?: boolean;
+};
+
 export const TrailText = ({
 	trailText: text,
 	trailTextSize = 'regular',
@@ -53,6 +61,7 @@ export const TrailText = ({
 	hideUntil,
 	padBottom = true,
 	padTop = false,
+	isInHideTrailsAbTest = false,
 }: Props) => {
 	const trailText = (
 		<div
@@ -64,6 +73,7 @@ export const TrailText = ({
 				fontStyles(trailTextSize),
 				padBottom && bottomPadding,
 				padTop && topPadding,
+				isInHideTrailsAbTest && isInHideTrailsAbTestStyles,
 			]}
 		>
 			<div

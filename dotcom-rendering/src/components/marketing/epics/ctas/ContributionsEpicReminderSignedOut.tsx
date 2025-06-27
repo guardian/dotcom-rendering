@@ -175,6 +175,8 @@ export const ContributionsEpicReminderSignedOut: ReactComponent<
 							<div css={formWrapper}>
 								<div css={inputWrapper}>
 									<TextInput
+										type="email"
+										name="email"
 										label="Email address"
 										error={inputError}
 										value={email}

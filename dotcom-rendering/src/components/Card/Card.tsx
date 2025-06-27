@@ -141,6 +141,7 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
+	isInHideTrailsAbTest?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -254,7 +255,7 @@ const getMedia = ({
 	canPlayInline?: boolean;
 	isBetaContainer: boolean;
 }) => {
-	if (mainMedia?.type === 'LoopVideo') {
+	if (mainMedia?.type === 'LoopVideo' && canPlayInline) {
 		return {
 			type: 'loop-video',
 			mainMedia,
@@ -407,6 +408,7 @@ export const Card = ({
 	showTopBarMobile = true,
 	trailTextSize,
 	showKickerImage = false,
+	isInHideTrailsAbTest = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -887,18 +889,18 @@ export const Card = ({
 								/>
 							</AvatarContainer>
 						)}
-						{mainMedia?.type === 'LoopVideo' && (
+						{media.type === 'loop-video' && (
 							<Island
 								priority="feature"
 								defer={{ until: 'visible' }}
 							>
 								<LoopVideo
-									src={mainMedia.videoId}
-									height={mainMedia.height}
-									width={mainMedia.width}
-									videoId={mainMedia.videoId}
+									src={media.mainMedia.videoId}
+									height={media.mainMedia.height}
+									width={media.mainMedia.width}
+									videoId={media.mainMedia.videoId}
 									thumbnailImage={
-										mainMedia.thumbnailImage ?? ''
+										media.mainMedia.thumbnailImage ?? ''
 									}
 									fallbackImageComponent={
 										<CardPicture
@@ -1173,6 +1175,7 @@ export const Card = ({
 									trailTextSize={trailTextSize}
 									padTop={headlinePosition === 'inner'}
 									hideUntil={hideTrailTextUntil()}
+									isInHideTrailsAbTest={isInHideTrailsAbTest}
 								/>
 							)}
 
