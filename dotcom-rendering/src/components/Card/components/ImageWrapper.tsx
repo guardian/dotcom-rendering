@@ -159,12 +159,14 @@ export const ImageWrapper = ({
 		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
 	const isHorizontalOnMobile =
 		imagePositionOnMobile === 'left' || imagePositionOnMobile === 'right';
+
 	return (
 		<div
 			css={[
 				(imageType === 'slideshow' ||
 					imageType === 'picture' ||
-					imageType === 'video') &&
+					imageType === 'video' ||
+					imageType === 'loop-video') &&
 					isHorizontalOnDesktop &&
 					flexBasisStyles({
 						imageSize,
@@ -182,7 +184,6 @@ export const ImageWrapper = ({
 						}
 					`,
 				isHorizontalOnMobile && fixImageWidth(imageFixedSizes),
-
 				isHorizontalOnDesktop &&
 					css`
 						${from.tablet} {
