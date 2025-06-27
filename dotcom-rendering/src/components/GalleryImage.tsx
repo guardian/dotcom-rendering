@@ -16,9 +16,8 @@ type Props = {
 };
 
 const styles = css`
-	${grid.container}
+	${grid.paddedContainer}
 	grid-auto-flow: row dense;
-	column-gap: ${space[5]}px;
 
 	${until.tablet} {
 		border-top: 1px solid ${palette('--article-border')};
@@ -26,33 +25,8 @@ const styles = css`
 	}
 
 	${from.tablet} {
-		&::before {
-			${grid.between('grid-start', 'centre-column-start')}
-			grid-row: span 2;
-			content: '';
-			background-color: ${palette('--article-background')};
-			border-right: 1px solid ${palette('--article-border')};
-		}
-
-		&::after {
-			${grid.between('centre-column-end', 'grid-end')}
-			grid-row: span 2;
-			content: '';
-			background-color: ${palette('--article-background')};
-			border-left: 1px solid ${palette('--article-border')};
-		}
-	}
-
-	${from.desktop} {
-		&::after {
-			${grid.between('right-column-end', 'grid-end')}
-		}
-	}
-
-	${from.leftCol} {
-		&::before {
-			${grid.between('grid-start', 'left-column-start')}
-		}
+		border-left: 1px solid ${palette('--article-border')};
+		border-right: 1px solid ${palette('--article-border')};
 	}
 `;
 

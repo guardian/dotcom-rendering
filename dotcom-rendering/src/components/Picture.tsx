@@ -488,6 +488,10 @@ const galleryBodyImageStyles = css`
 	}
 `;
 
+/**
+ * This ensures that the image height never goes above 96vh.
+ * The ratio parameter should be width:height.
+ */
 const imageMaxWidth = (
 	design: ArticleDesign,
 	ratio: number,
