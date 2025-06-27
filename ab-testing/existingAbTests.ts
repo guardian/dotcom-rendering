@@ -1,6 +1,18 @@
 import { ABTest } from './types.ts';
 
-export const serverSide: ABTest[] = [
+export const existingTests: ABTest[] = [
+	{
+		name: 'webex-user-benefits',
+		description:
+			'This test is being used to roll out the user benefits API in a gradual manner',
+		owners: ['rupert.bates@guardian.co.uk'],
+		expirationDate: new Date('2025-12-01'),
+		type: 'client',
+		highImpact: false,
+		status: 'ON',
+		audienceSize: 2 / 100,
+		groups: ['control', 'variant'],
+	},
 	{
 		name: 'webex-sign-in-gate-main-control',
 		description:
