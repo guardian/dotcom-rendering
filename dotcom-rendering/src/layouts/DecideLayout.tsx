@@ -10,7 +10,6 @@ import { AudioLayout } from './AudioLayout';
 import { CommentLayout } from './CommentLayout';
 import { CrosswordLayout } from './CrosswordLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
-import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
@@ -51,7 +50,7 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 				}
 				default: {
 					return (
-						<ImmersiveLayout
+						<InteractiveLayout
 							article={article}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -177,7 +176,7 @@ const DecideLayoutWeb = ({
 				}
 				default: {
 					return (
-						<ImmersiveLayout
+						<InteractiveLayout
 							article={article}
 							format={format}
 							NAV={NAV}
