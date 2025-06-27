@@ -1,3 +1,5 @@
+import { space, textEgyptianBold17Object } from '@guardian/source/foundations';
+
 type Target = 'dotcom' | 'live apps' | 'editions app' | 'amp';
 
 const href = (target: Target): string => {
@@ -27,9 +29,22 @@ function* links(targets: Target[]) {
 
 export const Available = ({ targets }: { targets: Target[] }) => (
 	<dl>
-		<dt>Available targets</dt>
-		<dd>
-			<ul>{Array.from(links(targets))}</ul>
+		<dt css={textEgyptianBold17Object}>Available targets:</dt>
+		<dd
+			css={{
+				margin: 0,
+			}}
+		>
+			<ul
+				css={{
+					listStyle: 'none',
+					padding: 0,
+					display: 'flex',
+					gap: space[3],
+				}}
+			>
+				{Array.from(links(targets))}
+			</ul>
 		</dd>
 	</dl>
 );
