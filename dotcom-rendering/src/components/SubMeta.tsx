@@ -146,6 +146,11 @@ export const SubMeta = ({
 		};
 	};
 	const { links, hasLinks } = createLinks();
+
+	const showSindicationButton =
+		format.design !== ArticleDesign.Interactive &&
+		format.design !== ArticleDesign.Gallery;
+
 	return (
 		<div
 			data-print-layout="hide"
@@ -193,8 +198,7 @@ export const SubMeta = ({
 						/>
 					</Island>
 					<div css={syndicationButtonOverrides}>
-						{format.design === ArticleDesign.Interactive ||
-						format.design === ArticleDesign.Gallery ? null : (
+						{showSindicationButton ? (
 							<LinkButton
 								priority="tertiary"
 								size="xsmall"
@@ -219,7 +223,7 @@ export const SubMeta = ({
 							>
 								Reuse this content
 							</LinkButton>
-						)}
+						) : null}
 					</div>
 				</div>
 			)}
