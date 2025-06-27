@@ -210,7 +210,8 @@ export class RenderingCDKStack extends CDKStack {
 			},
 			accessLogging: {
 				enabled: true,
-				prefix: `ELBLogs/${guStack}/${guApp}/${stage}`,
+				// This is the prefix pattern DevX assume so that the logs can be shown on the Availability dashboard.
+				prefix: `application-load-balancer/${stage}/${guStack}/${guApp}`,
 			},
 			applicationLogging: {
 				enabled: true,

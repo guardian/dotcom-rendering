@@ -9,16 +9,18 @@ import { LoopVideoProgressBar } from './LoopVideoProgressBar';
 
 const videoStyles = (width: number, height: number) => css`
 	position: relative;
+	display: block;
+	height: auto;
 	width: 100%;
-	/* Find out why this is needed to align the video with its container. */
-	margin-bottom: -3px;
 	cursor: pointer;
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${width} / ${height};
+	object-fit: cover;
 `;
 
 const playIconStyles = css`
 	position: absolute;
+	/* Center the icon */
 	top: calc(50% - ${narrowPlayIconWidth / 2}px);
 	left: calc(50% - ${narrowPlayIconWidth / 2}px);
 	cursor: pointer;
@@ -49,17 +51,23 @@ const audioIconContainerStyles = css`
 	border: 1px solid ${palette('--loop-video-audio-icon-border')};
 `;
 
+export const PLAYER_STATES = [
+	'NOT_STARTED',
+	'PLAYING',
+	'PAUSED_BY_USER',
+	'PAUSED_BY_INTERSECTION_OBSERVER',
+] as const;
+
 type Props = {
 	src: string;
 	videoId: string;
 	width: number;
 	height: number;
-	hasAudio: boolean;
 	fallbackImageComponent: JSX.Element;
 	isPlayable: boolean;
 	setIsPlayable: Dispatch<SetStateAction<boolean>>;
-	isPlaying: boolean;
-	setIsPlaying: Dispatch<SetStateAction<boolean>>;
+	playerState: (typeof PLAYER_STATES)[number];
+	setPlayerState: Dispatch<SetStateAction<(typeof PLAYER_STATES)[number]>>;
 	currentTime: number;
 	setCurrentTime: Dispatch<SetStateAction<number>>;
 	isMuted: boolean;
@@ -68,12 +76,9 @@ type Props = {
 	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	AudioIcon: (iconProps: IconProps) => JSX.Element;
-	/**
-	 * We ONLY show a thumbnail image when the user has indicated that they do
-	 * not want videos to play automatically, e.g. prefers reduced motion. Otherwise,
-	 * we do not bother downloading the image, as the video will be autoplayed.
-	 */
-	thumbnailImage?: string;
+	posterImage?: string;
+	shouldPreload: boolean;
+	showPlayIcon: boolean;
 };
 
 /**
@@ -87,13 +92,12 @@ export const LoopVideoPlayer = forwardRef(
 			videoId,
 			width,
 			height,
-			hasAudio,
 			fallbackImageComponent,
-			thumbnailImage,
+			posterImage,
 			isPlayable,
 			setIsPlayable,
-			isPlaying,
-			setIsPlaying,
+			playerState,
+			setPlayerState,
 			currentTime,
 			setCurrentTime,
 			isMuted,
@@ -102,6 +106,8 @@ export const LoopVideoPlayer = forwardRef(
 			handleKeyDown,
 			onError,
 			AudioIcon,
+			shouldPreload,
+			showPlayIcon,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -114,15 +120,15 @@ export const LoopVideoPlayer = forwardRef(
 				<video
 					id={loopVideoId}
 					ref={ref}
-					preload={thumbnailImage ? 'metadata' : 'none'}
+					preload={shouldPreload ? 'metadata' : 'none'}
 					loop={true}
 					muted={isMuted}
 					playsInline={true}
 					height={height}
 					width={width}
-					poster={thumbnailImage ?? undefined}
+					poster={posterImage}
 					onPlaying={() => {
-						setIsPlaying(true);
+						setPlayerState('PLAYING');
 					}}
 					onCanPlay={() => {
 						setIsPlayable(true);
@@ -132,7 +138,7 @@ export const LoopVideoPlayer = forwardRef(
 							ref &&
 							'current' in ref &&
 							ref.current &&
-							isPlaying
+							playerState === 'PLAYING'
 						) {
 							setCurrentTime(ref.current.currentTime);
 						}
@@ -144,15 +150,14 @@ export const LoopVideoPlayer = forwardRef(
 					onError={onError}
 					css={videoStyles(width, height)}
 				>
-					{/* Ensure webm source is provided. Encoding the video to a webm file will improve
-					performance on supported browsers. https://web.dev/articles/video-and-source-tags */}
-					{/* <source src={webmSrc} type="video/webm"> */}
+					{/* Only mp4 is currently supported. Assumes the video file type is mp4. */}
 					<source src={src} type="video/mp4" />
 					{fallbackImageComponent}
 				</video>
 				{ref && 'current' in ref && ref.current && isPlayable && (
 					<>
-						{!isPlaying && (
+						{/* Play icon */}
+						{showPlayIcon && (
 							<button
 								type="button"
 								onClick={handleClick}
@@ -161,32 +166,32 @@ export const LoopVideoPlayer = forwardRef(
 								<PlayIcon iconWidth="narrow" />
 							</button>
 						)}
+						{/* Progress bar */}
 						<LoopVideoProgressBar
 							videoId={loopVideoId}
 							currentTime={currentTime}
 							duration={ref.current.duration}
 						/>
-						{hasAudio && (
-							<button
-								type="button"
-								onClick={(event) => {
-									event.stopPropagation(); // Don't pause the video
-									setIsMuted(!isMuted);
-								}}
-								css={audioButtonStyles}
-							>
-								<div css={audioIconContainerStyles}>
-									<AudioIcon
-										size="xsmall"
-										theme={{
-											fill: palette(
-												'--loop-video-audio-icon',
-											),
-										}}
-									/>
-								</div>
-							</button>
-						)}
+						{/* Audio icon */}
+						<button
+							type="button"
+							onClick={(event) => {
+								event.stopPropagation(); // Don't pause the video
+								setIsMuted(!isMuted);
+							}}
+							css={audioButtonStyles}
+						>
+							<div css={audioIconContainerStyles}>
+								<AudioIcon
+									size="xsmall"
+									theme={{
+										fill: palette(
+											'--loop-video-audio-icon',
+										),
+									}}
+								/>
+							</div>
+						</button>
 					</>
 				)}
 			</>
