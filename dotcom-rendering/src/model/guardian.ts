@@ -116,11 +116,14 @@ export const createGuardian = ({
 	 */
 	unknownConfig?: ConfigType | object;
 }): Guardian => {
+	const isProd =
+		process.env.NODE_ENV === 'production' &&
+		process.env.GU_STAGE === 'PROD';
 	return {
 		config: {
 			// This indicates to the client side code that we are running a dotcom-rendering rendered page.
 			isDotcomRendering: true,
-			isDev: process.env.NODE_ENV !== 'production',
+			isDev: !isProd,
 			stage,
 			frontendAssetsFullURL,
 			page: Object.assign(unknownConfig, {
