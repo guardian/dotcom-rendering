@@ -11,9 +11,9 @@ export const PORT = isDev ? 3030 : 9000;
  */
 export default defineConfig({
 	testDir: './playwright/tests',
-	// Don't run tests _within_ files in parallel as this causes flakiness locally - investigating
+	// Don't run tests _within_ files in parallel locally as this causes flakiness
 	// Test files still run in parallel as per the number of workers set below
-	fullyParallel: false,
+	fullyParallel: !!process.env.CI,
 	// Fail the build on CI if you accidentally left test.only in the source code
 	forbidOnly: !!process.env.CI,
 	// Retry on CI only
