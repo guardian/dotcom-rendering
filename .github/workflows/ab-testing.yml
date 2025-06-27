@@ -50,12 +50,14 @@ jobs:
         run: deno install
       - name: Build
         run: deno run build
+      - run: ls output
 
       - name: Save build
         uses: actions/upload-artifact@v4.6.2
         with:
           name: ui-build
-          path: output/ab-tests.html
+          path: ${{ github.workspace }}/ab-testing/frontend/output/ab-tests.html
+          if-no-files-found: error
 
   riff-raff:
     name: Upload Riff Raff Artifacts
