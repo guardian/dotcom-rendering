@@ -26,13 +26,13 @@ table active_ab_test_groups {
 
 The `mvt_ab_test_groups` table will be used to determine which test a user is in, and the `active_ab_test_groups` table will be used to determine if a test is active and what type it is.
 
-Having both client and server side tests managed here will allow us to use the same logic (within fastly) to determine which test a user is in regardless of if it is client or server side. [See the fiddle for more details](https://fiddle.fastly.dev/fiddle/47149485).
+Having both client and server side tests managed here will allow us to use the same logic (within Fastly) to determine which test a user is in, regardless of if it is client or server side. [See the fiddle for more details](https://fiddle.Fastly.dev/fiddle/47149485).
 
-Our fastly vcl code will set a cookie that can be used by client or server code to determine which test a user is in. For server side tests it will additionally add to a header that the cache will be split on.
+Our Fastly VCL code will set a cookie that can be used by client or server code to determine which test a user is in. For server side tests it will additionally add to a header that the cache will be split on.
 
 Opting in to a test will be done similarly to how we do it for server side tests now, by setting a cookie.
 
-Test expirations are stored in the dictionary, and checked by fastly to determine if a test is still active, if a test is expired it won't be served to users.
+Test expirations are stored in the dictionary, and checked by Fastly to determine if a test is still active, if a test is expired it won't be served to users.
 
 0% tests are in the `active_ab_test_groups` table so we can still force ourselves into them, but they are not in the `mvt_ab_test_groups` table as they don't take up any mvt id space.
 
@@ -59,8 +59,8 @@ Test expirations are stored in the dictionary, and checked by fastly to determin
 -   Import and validate
 -   Build/serialize the tests
     -   Build the keys and values for the dictionary
--   Uploads the key-values to the fastly dictionary
-    -   Requries some work to interact with the [fastly dictionary API](https://www.fastly.com/documentation/reference/api/dictionaries/dictionary-item/)
+-   Uploads the key-values to the Fastly dictionary
+    -   Requries some work to interact with the [Fastly dictionary API](https://www.Fastly.com/documentation/reference/api/dictionaries/dictionary-item/)
 
 ### Build output example
 
@@ -74,13 +74,13 @@ The steps can all be run locally using the `deno run` command, see the [deno.jso
 
 The steps have unit tests that can be run using the `deno test` command.
 
-The `deploy` step requires some environment variables to be set [see env.ts](./scripts/deploy/env.ts), and will upload the dictionary to fastly, and can be run on a test fastly service.
+The `deploy` step requires some environment variables to be set [see env.ts](./scripts/deploy/env.ts), and will upload the dictionary to Fastly, and can be run on a test Fastly service.
 
 ### VCL
 
-The vcl is just here as a reference example. It will live with the rest of our fastly vcl.
+The VCL is just here as a reference example. It will live with the rest of our Fastly vcl.
 
-It can be tested using the DEV/CODE environment for our fastly service.
+It can be tested using the DEV/CODE environment for our Fastly service.
 
 ## How running AB tests will work
 
@@ -96,15 +96,15 @@ If the test state is `ON` and it is not expired it will be served to users as ex
 
 Page responses in a client side test will have a cookie set that can be used by the client side code to determine which test the user is in.
 
-Page responses in a server side test will get a cookie set that can be used by client or server side code to determine which test the user is in, and a header that will be used by fastly/frontend to split the cache.
+Page responses in a server side test will get a cookie set that can be used by client or server side code to determine which test the user is in, and a header that will be used by Fastly/frontend to split the cache.
 
 ### Opting in/out of a test
 
-Using the relevant URL to opt in or out of a test, this will set or remove a cookie that will be used by fastly to force subsequent responses to the correct test. This is the same for both server and client side tests.
+Using the relevant URL to opt in or out of a test, this will set or remove a cookie that will be used by Fastly to force subsequent responses to the correct test. This is the same for both server and client side tests.
 
 e.g. `/ab-tests/opt-in?group=commercial-ad-block-ask:variant` will set the cookie to force the user into the `commercial-ad-block-ask:variant` test variant.
 
-Locally this can be done by setting the relavent cookie in the browser
+Locally this can be done by setting the relevant cookie in the browser
 
 For server side tests this might look like:
 
