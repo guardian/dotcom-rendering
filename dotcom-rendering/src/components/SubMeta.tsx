@@ -147,7 +147,7 @@ export const SubMeta = ({
 	};
 	const { links, hasLinks } = createLinks();
 
-	const showSindicationButton =
+	const showSyndicationButton =
 		format.design !== ArticleDesign.Interactive &&
 		format.design !== ArticleDesign.Gallery;
 
@@ -198,7 +198,7 @@ export const SubMeta = ({
 						/>
 					</Island>
 					<div css={syndicationButtonOverrides}>
-						{showSindicationButton ? (
+						{showSyndicationButton ? (
 							<LinkButton
 								priority="tertiary"
 								size="xsmall"
