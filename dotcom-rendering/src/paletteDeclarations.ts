@@ -3753,6 +3753,8 @@ const subMetaLabelTextLight: PaletteFunction = ({ theme, design }) => {
 				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
 					return sourcePalette.neutral[60];
+				case ArticleDesign.Gallery:
+					return sourcePalette.neutral[73];
 				default:
 					return sourcePalette.neutral[46];
 			}
@@ -3797,6 +3799,7 @@ const subMetaBackgroundLight: PaletteFunction = ({
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
+		case ArticleDesign.Gallery:
 			switch (theme) {
 				case ArticleSpecial.Labs:
 					return sourcePalette.neutral[86];
@@ -3862,6 +3865,7 @@ const subMetaTextLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleDesign.Picture:
 				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
+				case ArticleDesign.Gallery:
 					return sourcePalette.neutral[86];
 				case ArticleDesign.DeadBlog:
 				case ArticleDesign.LiveBlog:
@@ -3911,10 +3915,12 @@ const subMetaTextDark: PaletteFunction = ({ design, theme }) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[300];
 		default:
-			if (design === ArticleDesign.Picture) {
-				return sourcePalette.neutral[86];
-			} else {
-				return pillarPalette(theme, 500);
+			switch (design) {
+				case ArticleDesign.Picture:
+				case ArticleDesign.Gallery:
+					return sourcePalette.neutral[86];
+				default:
+					return pillarPalette(theme, 500);
 			}
 	}
 };
@@ -4290,6 +4296,7 @@ const linkKickerTextDark: PaletteFunction = ({ theme }) => {
 const ageWarningWrapperBackground: PaletteFunction = (format) => {
 	switch (format.design) {
 		case ArticleDesign.Interview:
+		case ArticleDesign.Gallery:
 			return 'transparent';
 		default:
 			return headlineBackgroundLight(format);
