@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { Article } from '../docs/article';
 import { CricketScorecard } from '../docs/cricketScorecard';
+import { EditionsCrosswords } from '../docs/editionsCrosswords';
 import { FootballFixtures } from '../docs/footballFixtures';
 import { FootballLive } from '../docs/footballLive';
 import { FootballMatchSummary } from '../docs/footballMatchSummary';
@@ -21,6 +22,10 @@ pages.get('/front', sendReact('Front', Front));
 pages.get('/tag-page', sendReact('Tag Page', TagPage));
 pages.get('/interactive', sendReact('Interactive', Interactive));
 pages.get('/newsletters', sendReact('All Newsletters', Newsletters));
+pages.get(
+	'/editions-crosswords',
+	sendReact('Editions Crosswords', EditionsCrosswords),
+);
 pages.get('/football-live', sendReact('Football Live', FootballLive));
 pages.get(
 	'/football-fixtures',
