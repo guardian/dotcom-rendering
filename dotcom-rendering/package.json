@@ -4,6 +4,7 @@
 	"version": "0.1.0-alpha",
 	"license": "Apache-2.0",
 	"private": true,
+	"type": "module",
 	"scripts": {
 		"lint:fix": "eslint --quiet --cache --fix .",
 		"lint:check": "eslint --quiet --cache .",
