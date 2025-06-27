@@ -6,7 +6,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ContributionsReminderTracking } from '../banners/common/types';
 
-const useReminder = (
+const useReminder_unused = (
 	reminderTracking: ContributionsReminderTracking,
 ): {
 	isReminderActive: boolean;
@@ -31,4 +31,4 @@ const useReminder = (
 	return { isReminderActive, onReminderCtaClick, mobileReminderRef };
 };
 
-export { useReminder };
+export { useReminder_unused };

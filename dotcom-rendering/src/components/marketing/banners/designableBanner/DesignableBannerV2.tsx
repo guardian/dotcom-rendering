@@ -28,10 +28,10 @@ import {
 	removeMediaRulePrefix,
 	useMatchMedia,
 } from '../../../../lib/useMatchMedia';
-import { ThreeTierChoiceCards } from '../../epics/ThreeTierChoiceCards';
 import { getChoiceCards } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import { addChoiceCardsProductParams } from '../../lib/tracking';
+import { ThreeTierChoiceCards } from '../../shared/ThreeTierChoiceCards';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
 import type { ChoiceCardSettings } from './components/choiceCards/ChoiceCards';
@@ -869,4 +869,7 @@ const validated = validatedBannerWrapper(
 export {
 	validated as DesignableBannerV2,
 	unvalidated as DesignableBannerUnvalidatedV2,
+	// temporarily until we can rename banner coming in through SDC
+	validated as DesignableBanner,
+	unvalidated as DesignableBannerUnvalidated,
 };

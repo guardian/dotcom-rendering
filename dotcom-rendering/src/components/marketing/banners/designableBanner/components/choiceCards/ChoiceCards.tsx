@@ -91,7 +91,7 @@ const styles = {
 	`,
 };
 
-export const ChoiceCards: ReactComponent<ChoiceCardProps> = ({
+export const ChoiceCards_unused: ReactComponent<ChoiceCardProps> = ({
 	selection,
 	setSelectionsCallback,
 	submitComponentEvent,

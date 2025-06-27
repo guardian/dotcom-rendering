@@ -11,7 +11,7 @@ import type {
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
-import { DesignableBannerUnvalidated as DesignableBanner } from '../../../banners/designableBanner/DesignableBanner';
+import { DesignableBannerUnvalidated_unused as DesignableBanner } from '../../../banners/designableBanner/DesignableBanner';
 import {
 	contentNoHeading,
 	contentWithHeading,
@@ -47,7 +47,7 @@ export default meta;
 
 type Story = StoryObj<Props>;
 export const Default: Story = {
-	name: 'Basic DesignableBanner',
+	name: 'Basic DesignableBanner unused',
 };
 
 const tickerSettings: TickerSettings = {
