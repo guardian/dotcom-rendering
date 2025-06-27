@@ -18,7 +18,7 @@ const foregroundStyles = (progressPercentage: number) => css`
 	width: ${progressPercentage}%;
 	z-index: ${getZIndex('loop-video-progress-bar-foreground')};
 	background-color: ${palette('--loop-video-progress-bar-value')};
-	transition: width 0.3s linear;
+	transition: width 0.25s linear;
 `;
 
 type Props = {

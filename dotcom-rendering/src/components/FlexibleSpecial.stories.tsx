@@ -127,6 +127,7 @@ export const One: Story = {
 			snap: [],
 			standard: trails.slice(0, 1),
 		},
+		collectionId: 1,
 	},
 };
 export const Two: Story = {
@@ -137,6 +138,7 @@ export const Two: Story = {
 			snap: [],
 			standard: trails.slice(0, 2),
 		},
+		collectionId: 1,
 	},
 };
 export const Three: Story = {
@@ -147,6 +149,7 @@ export const Three: Story = {
 			snap: [],
 			standard: trails.slice(0, 3),
 		},
+		collectionId: 1,
 	},
 };
 export const Four: Story = {
@@ -157,6 +160,7 @@ export const Four: Story = {
 			snap: [],
 			standard: trails.slice(0, 4),
 		},
+		collectionId: 1,
 	},
 };
 export const Five: Story = {
@@ -167,6 +171,7 @@ export const Five: Story = {
 			snap: [],
 			standard: trails.slice(0, 5),
 		},
+		collectionId: 1,
 	},
 };
 export const DefaultSplashWithImageSupression: Story = {
@@ -178,6 +183,7 @@ export const DefaultSplashWithImageSupression: Story = {
 			snap: [],
 			standard: [{ ...trails[0], image: undefined }],
 		},
+		collectionId: 1,
 	},
 };
 
@@ -190,6 +196,7 @@ export const BoostedSplashWithImageSupression: Story = {
 			snap: [],
 			standard: [{ ...trails[0], boostLevel: 'boost', image: undefined }],
 		},
+		collectionId: 1,
 	},
 };
 
@@ -204,6 +211,7 @@ export const MegaBoostedSplashWithImageSupression: Story = {
 				{ ...trails[0], boostLevel: 'megaboost', image: undefined },
 			],
 		},
+		collectionId: 1,
 	},
 };
 
@@ -218,6 +226,7 @@ export const GigaBoostedSplashWithImageSupression: Story = {
 				{ ...trails[0], boostLevel: 'gigaboost', image: undefined },
 			],
 		},
+		collectionId: 1,
 	},
 };
 
@@ -230,6 +239,7 @@ export const DefaultSplashWithLiveUpdates: Story = {
 			snap: [],
 			standard: [{ ...liveUpdatesCard }],
 		},
+		collectionId: 1,
 	},
 };
 
@@ -242,6 +252,7 @@ export const BoostedSplashWithLiveUpdates: Story = {
 			snap: [],
 			standard: [{ ...liveUpdatesCard, boostLevel: 'boost' }],
 		},
+		collectionId: 1,
 	},
 };
 
@@ -254,6 +265,7 @@ export const MegaBoostedSplashWithLiveUpdates: Story = {
 			snap: [],
 			standard: [{ ...liveUpdatesCard, boostLevel: 'megaboost' }],
 		},
+		collectionId: 1,
 	},
 };
 
@@ -266,6 +278,7 @@ export const GigaBoostedSplashWithLiveUpdates: Story = {
 			snap: [],
 			standard: [{ ...liveUpdatesCard, boostLevel: 'gigaboost' }],
 		},
+		collectionId: 1,
 	},
 };
 
@@ -293,6 +306,7 @@ export const WithSpecialPaletteVariations = {
 			snap: [],
 			standard: trails.slice(0, 5),
 		},
+		collectionId: 1,
 	},
 	render: (args) => (
 		<>

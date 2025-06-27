@@ -60,19 +60,18 @@ export const PLAYER_STATES = [
 
 type Props = {
 	src: string;
-	videoId: string;
+	uniqueId: string;
 	width: number;
 	height: number;
 	fallbackImageComponent: JSX.Element;
 	isPlayable: boolean;
 	setIsPlayable: Dispatch<SetStateAction<boolean>>;
 	playerState: (typeof PLAYER_STATES)[number];
-	setPlayerState: Dispatch<SetStateAction<(typeof PLAYER_STATES)[number]>>;
 	currentTime: number;
 	setCurrentTime: Dispatch<SetStateAction<number>>;
 	isMuted: boolean;
-	setIsMuted: Dispatch<SetStateAction<boolean>>;
-	handleClick: (event: SyntheticEvent) => void;
+	handlePlayPauseClick: (event: SyntheticEvent) => void;
+	handleAudioClick: (event: SyntheticEvent) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	AudioIcon: (iconProps: IconProps) => JSX.Element;
@@ -89,7 +88,7 @@ export const LoopVideoPlayer = forwardRef(
 	(
 		{
 			src,
-			videoId,
+			uniqueId,
 			width,
 			height,
 			fallbackImageComponent,
@@ -97,12 +96,11 @@ export const LoopVideoPlayer = forwardRef(
 			isPlayable,
 			setIsPlayable,
 			playerState,
-			setPlayerState,
 			currentTime,
 			setCurrentTime,
 			isMuted,
-			setIsMuted,
-			handleClick,
+			handlePlayPauseClick,
+			handleAudioClick,
 			handleKeyDown,
 			onError,
 			AudioIcon,
@@ -111,8 +109,7 @@ export const LoopVideoPlayer = forwardRef(
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
-		// Assumes that the video is unique on the page.
-		const loopVideoId = `loop-video-${videoId}`;
+		const loopVideoId = `loop-video-${uniqueId}`;
 
 		return (
 			<>
@@ -127,9 +124,6 @@ export const LoopVideoPlayer = forwardRef(
 					height={height}
 					width={width}
 					poster={posterImage}
-					onPlaying={() => {
-						setPlayerState('PLAYING');
-					}}
 					onCanPlay={() => {
 						setIsPlayable(true);
 					}}
@@ -143,7 +137,7 @@ export const LoopVideoPlayer = forwardRef(
 							setCurrentTime(ref.current.currentTime);
 						}
 					}}
-					onClick={handleClick}
+					onClick={handlePlayPauseClick}
 					onKeyDown={handleKeyDown}
 					role="button"
 					tabIndex={0}
@@ -160,7 +154,7 @@ export const LoopVideoPlayer = forwardRef(
 						{showPlayIcon && (
 							<button
 								type="button"
-								onClick={handleClick}
+								onClick={handlePlayPauseClick}
 								css={playIconStyles}
 							>
 								<PlayIcon iconWidth="narrow" />
@@ -175,10 +169,7 @@ export const LoopVideoPlayer = forwardRef(
 						{/* Audio icon */}
 						<button
 							type="button"
-							onClick={(event) => {
-								event.stopPropagation(); // Don't pause the video
-								setIsMuted(!isMuted);
-							}}
+							onClick={handleAudioClick}
 							css={audioButtonStyles}
 						>
 							<div css={audioIconContainerStyles}>
