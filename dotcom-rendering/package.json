@@ -16,7 +16,10 @@
 		"playwright:run": "playwright test",
 		"unused-exports": "pnpm ts-unused-exports ./tsconfig.json --ignoreFiles='(/(fixtures|__mocks__)/|.+\\.(stories|mocks))' --exitWithCount",
 		"storybook": "storybook dev -p 4002",
-		"build-storybook": "storybook build"
+		"build-storybook": "storybook build",
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview"
 	},
 	"dependencies": {
 		"@aws-sdk/client-cloudwatch": "3.621.0",
@@ -173,6 +176,7 @@
 		"typescript-json-schema": "0.64.0",
 		"unified": "11.0.5",
 		"valibot": "0.28.1",
+		"vite": "7.0.0",
 		"web-vitals": "4.2.3",
 		"webpack": "5.101.0",
 		"webpack-assets-manifest": "6.0.2",
