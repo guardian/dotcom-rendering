@@ -4,7 +4,6 @@
 	"version": "0.1.0-alpha",
 	"license": "Apache-2.0",
 	"private": true,
-	"type": "module",
 	"scripts": {
 		"lint:fix": "eslint --quiet --cache --fix .",
 		"lint:check": "eslint --quiet --cache .",
@@ -50,6 +49,7 @@
 		"@guardian/support-dotcom-components": "7.7.0",
 		"@guardian/tsconfig": "0.2.0",
 		"@playwright/test": "1.52.0",
+		"@rollup/plugin-commonjs": "28.0.6",
 		"@sentry/browser": "7.75.1",
 		"@sentry/integrations": "7.75.1",
 		"@storybook/addon-essentials": "8.6.14",
@@ -103,6 +103,7 @@
 		"@types/webpack-env": "1.18.8",
 		"@types/webpack-node-externals": "3.0.4",
 		"@types/youtube": "0.0.50",
+		"@vitejs/plugin-react-swc": "3.10.2",
 		"ajv": "8.17.1",
 		"ajv-formats": "2.1.1",
 		"amphtml-validator": "1.0.35",
