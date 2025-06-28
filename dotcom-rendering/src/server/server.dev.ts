@@ -1,4 +1,5 @@
-import { type Handler, Router } from 'express';
+import express, { type Handler, Router } from 'express';
+import { createServer } from 'vite';
 import { pages } from '../devServer/routers/pages';
 import { targets } from '../devServer/routers/targets';
 import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
@@ -127,4 +128,19 @@ router.use(redirects);
 
 // see https://www.npmjs.com/package/webpack-hot-server-middleware
 // for more info
-export const devServer = (): Handler => router;
+export const devServer = async (): Promise<Handler> => {
+	const vite = await createServer({
+		server: { middlewareMode: true },
+		appType: 'custom',
+		base: '',
+	});
+
+	router.use(vite.middlewares);
+
+	const port = 3030;
+	const app = express();
+	app.listen(port, () => {
+		console.log(`Server started at http://localhost:${port}`);
+	});
+	return router;
+};

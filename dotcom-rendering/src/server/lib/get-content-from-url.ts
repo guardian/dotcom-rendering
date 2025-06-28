@@ -30,6 +30,8 @@ async function getContentFromURL(
 			.filter(isStringTuple),
 	);
 
+	console.log('Getting content from: ', jsonUrl);
+
 	// pick all the keys from the JSON except `html`
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- we don't want `html` in the config
 	const { html, ...config } = await fetch(jsonUrl, { headers })
