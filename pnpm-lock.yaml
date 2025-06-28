@@ -352,6 +352,9 @@ importers:
       '@playwright/test':
         specifier: 1.52.0
         version: 1.52.0
+      '@rollup/plugin-commonjs':
+        specifier: 28.0.6
+        version: 28.0.6
       '@sentry/browser':
         specifier: 7.75.1
         version: 7.75.1
@@ -511,6 +514,9 @@ importers:
       '@types/youtube':
         specifier: 0.0.50
         version: 0.0.50
+      '@vitejs/plugin-react-swc':
+        specifier: 3.10.2
+        version: 3.10.2(vite@7.0.0)
       ajv:
         specifier: 8.17.1
         version: 8.17.1
@@ -648,7 +654,7 @@ importers:
         version: 3.3.2
       postcss-styled-syntax:
         specifier: 0.6.3
-        version: 0.6.3(postcss@8.5.4)
+        version: 0.6.3(postcss@8.5.6)
       preact:
         specifier: 10.15.1
         version: 10.15.1
@@ -4874,6 +4880,42 @@ packages:
     resolution: {integrity: sha512-2LuNTFBIO0m7kKIQvvPHN6UE63VjpmL9rnEEaOOaiSPbZK+zUOYIzBAWcED+3XYzhYsd/0mD57VdxAEqqV52CQ==}
     dev: false
 
+  /@rolldown/pluginutils@1.0.0-beta.11:
+    resolution: {integrity: sha512-L/gAA/hyCSuzTF1ftlzUSI/IKr2POHsv1Dd78GfqkR83KMNuswWD61JxGV2L7nRwBBBSDr6R1gCkdTmoN7W4ag==}
+    dev: false
+
+  /@rollup/plugin-commonjs@28.0.6:
+    resolution: {integrity: sha512-XSQB1K7FUU5QP+3lOQmVCE3I0FcbbNvmNT4VJSj93iUjayaARrTQeoRdiYQoftAJBLrR9t2agwAd3ekaTgHNlw==}
+    engines: {node: '>=16.0.0 || 14 >= 14.17'}
+    peerDependencies:
+      rollup: ^2.68.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      '@rollup/pluginutils': 5.2.0
+      commondir: 1.0.1
+      estree-walker: 2.0.2
+      fdir: 6.4.6(picomatch@4.0.2)
+      is-reference: 1.2.1
+      magic-string: 0.30.17
+      picomatch: 4.0.2
+    dev: false
+
+  /@rollup/pluginutils@5.2.0:
+    resolution: {integrity: sha512-qWJ2ZTbmumwiLFomfzTyt5Kng4hwPi9rwCYN4SHb6eaRU1KNO4ccxINHr/VhH4GgPlt1XfSTLX2LBTme8ne4Zw==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      '@types/estree': 1.0.8
+      estree-walker: 2.0.2
+      picomatch: 4.0.2
+    dev: false
+
   /@rollup/rollup-android-arm-eabi@4.44.1:
     resolution: {integrity: sha512-JAcBr1+fgqx20m7Fwe1DxPUl/hPkee6jA6Pl7n1v2EFiktAHenTaXl5aIFjUIEsfn9w3HE4gK1lEgNGMzBDs1w==}
     cpu: [arm]
@@ -7043,7 +7085,7 @@ packages:
   /@types/eslint@9.6.1:
     resolution: {integrity: sha512-FXx2pKgId/WyYo2jXw63kk7/+TY7u7AziEJxJAnSFzHlqTAS3Ync6SvgYAN/k4/PQpnnVuzoMuVnByKK2qp0ag==}
     dependencies:
-      '@types/estree': 1.0.7
+      '@types/estree': 1.0.8
       '@types/json-schema': 7.0.15
     dev: false
 
@@ -7801,6 +7843,18 @@ packages:
 
   /@ungap/structured-clone@1.3.0:
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
+    dev: false
+
+  /@vitejs/plugin-react-swc@3.10.2(vite@7.0.0):
+    resolution: {integrity: sha512-xD3Rdvrt5LgANug7WekBn1KhcvLn1H3jNBfJRL3reeOIua/WnZOEV5qi5qIBq5T8R0jUDmRtxuvk4bPhzGHDWw==}
+    peerDependencies:
+      vite: ^4 || ^5 || ^6 || ^7.0.0-beta.0
+    dependencies:
+      '@rolldown/pluginutils': 1.0.0-beta.11
+      '@swc/core': 1.11.31
+      vite: 7.0.0(@types/node@22.14.1)(tsx@4.6.2)
+    transitivePeerDependencies:
+      - '@swc/helpers'
     dev: false
 
   /@vitest/expect@2.0.5:
@@ -11406,10 +11460,14 @@ packages:
     engines: {node: '>=4.0'}
     dev: false
 
+  /estree-walker@2.0.2:
+    resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
+    dev: false
+
   /estree-walker@3.0.3:
     resolution: {integrity: sha512-7RUKfXgSMMkzt6ZuXmqapOurLGPPfgj6l9uRZ7lRGolvk0y2yocc35LdcxKC5PQZdn2DMqioAQ2NoWcrTKmm6g==}
     dependencies:
-      '@types/estree': 1.0.7
+      '@types/estree': 1.0.8
     dev: false
 
   /esutils@2.0.3:
@@ -13194,6 +13252,12 @@ packages:
 
   /is-potential-custom-element-name@1.0.1:
     resolution: {integrity: sha512-bCYeRA2rVibKZd+s2625gGnGF/t7DSqDs4dP7CrLA1m7jKWz6pps0LpYLJN8Q64HtmPKJ1hrN3nzPNKFEKOUiQ==}
+    dev: false
+
+  /is-reference@1.2.1:
+    resolution: {integrity: sha512-U82MsXXiFIrjCK4otLT+o2NA2Cd2g5MLoOVXUZjIOhLurrRxpEXzI8O0KZHr3IjLvlAH1kTPYSuqer5T9ZVBKQ==}
+    dependencies:
+      '@types/estree': 1.0.8
     dev: false
 
   /is-regex@1.1.4:
@@ -15779,13 +15843,13 @@ packages:
       util-deprecate: 1.0.2
     dev: false
 
-  /postcss-styled-syntax@0.6.3(postcss@8.5.4):
+  /postcss-styled-syntax@0.6.3(postcss@8.5.6):
     resolution: {integrity: sha512-woEkwRaHWnVOVjToQKeQkRYasTwa3WY+0A7hcY0HmiBw458nxmWFbt7+XMvuGWwB4VYjNqeWYNr04Hx9/GVTpA==}
     engines: {node: '>=14.17'}
     peerDependencies:
       postcss: ^8.4.21
     dependencies:
-      postcss: 8.5.4
+      postcss: 8.5.6
       typescript: 5.5.3
     dev: false
 

@@ -28,6 +28,8 @@ import {
 	handleFootballTablesPage,
 } from './handler.sportDataPage.web';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
+import { createServer } from 'vite';
+import express from 'express';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
 const ARTICLE_URL = /(\/\d{4}\/[a-z]{3}\/\d{2}\/)/;
@@ -144,4 +146,19 @@ router.use(redirects);
 
 // see https://www.npmjs.com/package/webpack-hot-server-middleware
 // for more info
-export const devServer = (): Handler => router;
+export const devServer = async (): Promise<Handler> => {
+	const vite = await createServer({
+		server: { middlewareMode: true },
+		appType: 'custom',
+		base: '',
+	});
+
+	router.use(vite.middlewares);
+
+	const port = 3030;
+	const app = express();
+	app.listen(port, () => {
+		console.log(`Server started at http://localhost:${port}`);
+	});
+	return router;
+};
