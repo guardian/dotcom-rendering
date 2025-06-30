@@ -36,6 +36,11 @@ const border = css({
 	color: '#ccc',
 });
 
+const headerStyles = css`
+	${grid.container}
+	background-color: ${palette('--article-inner-background')};
+`;
+
 export const GalleryLayout = (props: WebProps | AppProps) => {
 	const gallery = props.gallery;
 	const frontendData = gallery.frontendData;
@@ -68,11 +73,11 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 			)}
 			<main
 				css={{
-					backgroundColor: palette('--article-inner-background'),
+					backgroundColor: palette('--article-background'),
 				}}
 			>
 				<div css={border}>Labs header</div>
-				<header css={[grid.container]}>
+				<header css={headerStyles}>
 					<MainMediaGallery
 						mainMedia={gallery.mainMedia}
 						format={format}

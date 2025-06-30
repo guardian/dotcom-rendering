@@ -18,6 +18,7 @@ type Props = {
 const styles = css`
 	${grid.paddedContainer}
 	grid-auto-flow: row dense;
+	background-color: ${palette('--article-inner-background')};
 
 	${until.tablet} {
 		border-top: 1px solid ${palette('--article-border')};

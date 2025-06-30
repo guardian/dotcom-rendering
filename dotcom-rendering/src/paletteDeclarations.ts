@@ -2989,7 +2989,7 @@ const articleBackgroundLight: PaletteFunction = ({
 		case ArticleDesign.FullPageInteractive:
 			return 'transparent';
 		case ArticleDesign.Gallery:
-			return transparentColour(sourcePalette.neutral[0], 0.25);
+			return '#0d0d0d';
 		default:
 			switch (theme) {
 				case ArticleSpecial.SpecialReport:
@@ -3034,7 +3034,7 @@ const articleBackgroundDark: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.neutral[10];
 			}
 		case ArticleDesign.Gallery:
-			return transparentColour(sourcePalette.neutral[0], 0.25);
+			return '#131313';
 		default:
 			return sourcePalette.neutral[10];
 	}
