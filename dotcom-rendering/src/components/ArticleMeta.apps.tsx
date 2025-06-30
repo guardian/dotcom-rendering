@@ -21,8 +21,8 @@ import { Contributor } from './Contributor';
 import { Dateline } from './Dateline';
 import { FollowWrapper } from './FollowWrapper.importable';
 import { Island } from './Island';
-import { LiveblogNotifications } from './LiveblogNotifications.importable';
 import { ListenToArticleWrapper } from './ListenToArticleWrapper.importable';
+import { LiveblogNotifications } from './LiveblogNotifications.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -343,7 +343,7 @@ export const ArticleMetaApps = ({
 					</MetaGridBranding>
 				)}
 			</div>
-			{pageId && (
+			{pageId !== undefined && (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<ListenToArticleWrapper articleId={pageId} />
 				</Island>

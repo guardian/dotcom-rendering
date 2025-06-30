@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
+import { space } from '@guardian/source/foundations';
 import {
 	Button,
 	SvgMediaControlsPause,
 	SvgMediaControlsPlay,
 } from '@guardian/source/react-components';
 import { palette } from '../palette';
-import { space } from '@guardian/source/foundations';
 
 const button = css`
 	background-color: ${palette('--follow-icon-fill')};

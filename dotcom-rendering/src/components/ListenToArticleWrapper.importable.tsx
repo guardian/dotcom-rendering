@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { ListenToAudioButton } from './ListenToArticleButton';
-import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
-import { getListenToArticleClient } from '../lib/bridgetApi';
 import { log } from '@guardian/libs';
+import { useEffect, useState } from 'react';
+import { getListenToArticleClient } from '../lib/bridgetApi';
+import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
+import { ListenToAudioButton } from './ListenToArticleButton';
 
 type Props = {
 	articleId: string;
@@ -21,7 +21,7 @@ export const ListenToArticleWrapper = ({ articleId }: Props) => {
 				.then(setShowListenToArticleButton);
 
 		void getListenToArticleClient().isPlaying(articleId).then(setIsPlaying);
-	});
+	}, [articleId, isBridgetCompatible]);
 
 	const listenToArticleHander = () => {
 		isPlaying
