@@ -26,6 +26,7 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 	amountsTestName,
 	amountsVariantName,
 }: Props): JSX.Element => {
+	console.log('Variant', variant);
 	// reminders
 	const [fetchedEmail, setFetchedEmail] = useState<string | undefined>(
 		undefined,
