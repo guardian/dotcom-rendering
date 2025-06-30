@@ -77,11 +77,16 @@ const textOverlayStyles = css`
 	backdrop-filter: blur(12px) brightness(0.5);
 `;
 
+/**
+ * Why 268px?
+ * 220 is the width of 4 columns on tablet and 3 columns on desktop.
+ * 48px is to ensure the gradient does not render the content inaccessible.
+ */
 const immersiveOverlayStyles = css`
 	${from.tablet} {
 		height: 100%;
-		width: 25%;
-		padding: ${space[2]}px 64px ${space[2]}px ${space[2]}px;
+		width: 268px;
+		padding: ${space[2]}px ${space[12]}px ${space[2]}px ${space[2]}px;
 		backdrop-filter: blur(12px) brightness(0.5);
 		${overlayMaskGradientStyles('270deg')}
 	}
@@ -128,6 +133,7 @@ type Props = {
 	isImmersive?: boolean;
 	byline?: string;
 	showByline?: boolean;
+	isInHideTrailsAbTest?: boolean;
 };
 
 export const YoutubeAtomFeatureCardOverlay = ({
@@ -155,6 +161,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	isImmersive,
 	byline,
 	showByline,
+	isInHideTrailsAbTest,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
@@ -239,6 +246,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 								)}
 								trailTextSize="regular"
 								padBottom={false}
+								isInHideTrailsAbTest={isInHideTrailsAbTest}
 							/>
 						</div>
 					)}

@@ -86,9 +86,9 @@ export const getDiscussionClient: BridgetApi<'getDiscussionClient'> = () => ({
 	recommend: async () => discussionErrorResponse,
 });
 
-export const getInteractionClient: BridgetApi<
-	'getInteractionClient'
-> = () => ({});
+export const getInteractionClient: BridgetApi<'getInteractionClient'> = () => ({
+	disableArticleSwipe: async () => void 0,
+});
 
 export const getInteractivesClient: BridgetApi<
 	'getInteractivesClient'

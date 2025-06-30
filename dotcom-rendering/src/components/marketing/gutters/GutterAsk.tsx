@@ -23,10 +23,8 @@ const container = css`
 	gap: ${space[1]}px;
 `;
 
-const imageHeader = css`
-	background-color: ${palette.brand[400]};
-	text-align: center;
-	padding: 15px 0;
+const imageHeader = (mainUrl: string) => css`
+	background: ${palette.brand[400]} no-repeat center/100% url('${mainUrl}');
 	width: 220px;
 	height: 132px;
 `;
@@ -97,14 +95,11 @@ export const GutterAsk: ReactComponent<GutterAskRenderProps> = ({
 		<>
 			{variant && (
 				<div css={container}>
-					<div css={imageHeader}>
-						<img
-							src={variant.image.mainUrl}
-							alt={variant.image.altText}
-							width="150"
-							height="100"
-						/>
-					</div>
+					<div
+						css={imageHeader(variant.image.mainUrl)}
+						role="img"
+						aria-label={variant.image.altText}
+					></div>
 					<div css={textBlock}>
 						<div css={bodySection}>
 							<Copy paragraphs={variant.bodyCopy} />

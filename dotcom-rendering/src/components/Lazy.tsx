@@ -30,7 +30,7 @@ export const Lazy = ({ children, margin, disableFlexStyles }: Props) => {
 	// being loaded as part of a Chromatic story or not so that
 	// we can prevent lazy loading our storybook snapshots that we
 	// use for visual regression
-	const renderChildren = hasBeenSeen || Lazy.disabled;
+	const renderChildren = !!hasBeenSeen || Lazy.disabled;
 	return (
 		<div ref={setRef} css={!disableFlexStyles && flexGrowStyles}>
 			{renderChildren && <>{children}</>}

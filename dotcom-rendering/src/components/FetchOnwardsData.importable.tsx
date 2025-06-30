@@ -19,6 +19,7 @@ type Props = {
 	discussionApiUrl: string;
 	absoluteServerTimes: boolean;
 	renderingTarget: RenderingTarget;
+	isAdFreeUser: boolean;
 };
 
 type OnwardsResponse = {
@@ -32,6 +33,20 @@ const minHeight = css`
 	min-height: 300px;
 `;
 
+const isTrailPaidContent = (trailType: FETrailType) =>
+	trailType.branding?.brandingType?.name === 'paid-content';
+
+const buildTrails = (
+	trails: FETrailType[],
+	trailLimit: number,
+	isAdFreeUser: boolean,
+): TrailType[] => {
+	return trails
+		.filter((trailType) => !(isTrailPaidContent(trailType) && isAdFreeUser))
+		.slice(0, trailLimit)
+		.map(decideTrail);
+};
+
 export const FetchOnwardsData = ({
 	url,
 	limit,
@@ -40,15 +55,9 @@ export const FetchOnwardsData = ({
 	discussionApiUrl,
 	absoluteServerTimes,
 	renderingTarget,
+	isAdFreeUser,
 }: Props) => {
 	const { data, error } = useApi<OnwardsResponse>(url);
-
-	const buildTrails = (
-		trails: FETrailType[],
-		trailLimit: number,
-	): TrailType[] => {
-		return trails.slice(0, trailLimit).map(decideTrail);
-	};
 
 	if (error) {
 		// Send the error to Sentry and then prevent the element from rendering
@@ -76,7 +85,7 @@ export const FetchOnwardsData = ({
 		<div css={minHeight}>
 			<Carousel
 				heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
-				trails={buildTrails(data.trails, limit)}
+				trails={buildTrails(data.trails, limit, isAdFreeUser)}
 				description={data.description}
 				onwardsSource={onwardsSource}
 				format={format}

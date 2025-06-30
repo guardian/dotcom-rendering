@@ -318,6 +318,7 @@ export const OnwardsUpper = ({
 						discussionApiUrl={discussionApiUrl}
 						absoluteServerTimes={absoluteServerTimes}
 						renderingTarget={renderingTarget}
+						isAdFreeUser={isAdFreeUser}
 					/>
 				</Section>
 			)}
@@ -334,6 +335,7 @@ export const OnwardsUpper = ({
 						discussionApiUrl={discussionApiUrl}
 						absoluteServerTimes={absoluteServerTimes}
 						renderingTarget={renderingTarget}
+						isAdFreeUser={isAdFreeUser}
 					/>
 				</Section>
 			)}

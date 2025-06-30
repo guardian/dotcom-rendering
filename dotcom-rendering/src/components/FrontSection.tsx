@@ -56,7 +56,7 @@ type Props = {
 	 * If used, this can be either "Primary" or "Secondary", both of which have different styles */
 	containerLevel?: DCRContainerLevel;
 	/** Fronts containers spacing rules vary depending on the size of their container spacing which is derived from if the next container is a primary or secondary. */
-	containerSpacing?: 'large' | 'small';
+	isNextCollectionPrimary?: boolean;
 	/** Defaults to `false`. If true a Hide button is show top right allowing this section
 	 * to be collapsed
 	 */
@@ -91,6 +91,8 @@ type Props = {
 	collectionBranding?: CollectionBranding;
 	isTagPage?: boolean;
 	hasNavigationButtons?: boolean;
+	isAboveDesktopAd?: boolean;
+	isAboveMobileAd?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -383,12 +385,20 @@ const bottomPadding = css`
 	padding-bottom: ${space[9]}px;
 `;
 
-const smallBottomPadding = css`
-	padding-bottom: ${space[6]}px;
-`;
-
-const largeBottomPadding = css`
-	padding-bottom: ${space[10]}px;
+const bottomPaddingBetaContainer = (
+	useLargeSpacingMobile: boolean,
+	useLargeSpacingDesktop: boolean,
+) => css`
+	${until.tablet} {
+		padding-bottom: ${useLargeSpacingMobile
+			? `${space[10]}px`
+			: `${space[6]}px`};
+	}
+	${from.tablet} {
+		padding-bottom: ${useLargeSpacingDesktop
+			? `${space[10]}px`
+			: `${space[6]}px`};
+	}
 `;
 
 const primaryLevelTopBorder = css`
@@ -503,7 +513,7 @@ export const FrontSection = ({
 	containerName,
 	containerPalette,
 	containerLevel,
-	containerSpacing,
+	isNextCollectionPrimary,
 	description,
 	editionId,
 	leftContent,
@@ -527,8 +537,12 @@ export const FrontSection = ({
 	collectionBranding,
 	isTagPage = false,
 	hasNavigationButtons = false,
+	isAboveDesktopAd = false,
+	isAboveMobileAd = false,
 }: Props) => {
 	const isToggleable = toggleable && !!sectionId;
+	const showVerticalRule = !hasPageSkin;
+	const isBetaContainer = !!containerLevel;
 	const showMore =
 		canShowMore &&
 		!!title &&
@@ -536,8 +550,12 @@ export const FrontSection = ({
 		!!collectionId &&
 		!!pageId &&
 		!!ajaxUrl &&
-		!containerLevel;
-	const showVerticalRule = !hasPageSkin;
+		!isBetaContainer;
+
+	// These are for beta containers only
+	const useLargeSpacingMobile = !!isNextCollectionPrimary || isAboveMobileAd;
+	const useLargeSpacingDesktop =
+		!!isNextCollectionPrimary || isAboveDesktopAd;
 
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
@@ -567,7 +585,7 @@ export const FrontSection = ({
 					),
 				}}
 			>
-				{!!containerLevel && showTopBorder && (
+				{isBetaContainer && showTopBorder && (
 					<div
 						css={[
 							containerLevel === 'Secondary'
@@ -581,7 +599,7 @@ export const FrontSection = ({
 					css={[
 						decoration,
 						sideBorders,
-						showTopBorder && !containerLevel && topBorder,
+						showTopBorder && !isBetaContainer && topBorder,
 					]}
 				/>
 
@@ -594,7 +612,7 @@ export const FrontSection = ({
 							title?.toLowerCase() === 'opinion',
 						),
 						showVerticalRule &&
-							!containerLevel &&
+							!isBetaContainer &&
 							sectionHeadlineFromLeftCol(
 								schemePalette('--section-border'),
 							),
@@ -650,7 +668,7 @@ export const FrontSection = ({
 						sectionContentRow(toggleable),
 						topPadding,
 						showVerticalRule &&
-							!!containerLevel &&
+							isBetaContainer &&
 							sectionContentBorderFromLeftCol,
 					]}
 					id={`container-${sectionId}`}
@@ -662,9 +680,12 @@ export const FrontSection = ({
 					css={[
 						sectionContentHorizontalMargins,
 						sectionBottomContent,
-						!containerLevel && bottomPadding,
-						containerSpacing === 'small' && smallBottomPadding,
-						containerSpacing === 'large' && largeBottomPadding,
+						isBetaContainer
+							? bottomPaddingBetaContainer(
+									useLargeSpacingMobile,
+									useLargeSpacingDesktop,
+							  )
+							: bottomPadding,
 					]}
 				>
 					{isString(targetedTerritory) &&

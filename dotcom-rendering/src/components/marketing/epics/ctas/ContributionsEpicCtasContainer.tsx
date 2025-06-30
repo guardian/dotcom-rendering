@@ -20,7 +20,6 @@ type Props = EpicProps & {
 export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 	variant,
 	countryCode,
-	articleCounts,
 	tracking,
 	submitComponentEvent,
 	fetchEmail,
@@ -82,7 +81,7 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 				}
 				amountsTestName={amountsTestName}
 				amountsVariantName={amountsVariantName}
-				numArticles={articleCounts.for52Weeks}
+				promoCodes={variant.promoCodes ?? []}
 			/>
 			{isReminderActive && showReminderFields && (
 				<ContributionsEpicReminder
