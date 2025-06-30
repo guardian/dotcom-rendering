@@ -10,13 +10,17 @@ import { Standfirst } from '../components/Standfirst';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { NavType } from '../model/extract-nav';
-import { palette } from '../palette';
+import {palette as themePalette, palette} from '../palette';
 import type { Gallery } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
+import {Section} from "../components/Section";
+import {FlexibleGeneral} from "../components/FlexibleGeneral";
+import {galleryTrails} from "../../fixtures/manual/trails";
 
 interface Props {
 	gallery: Gallery;
 	renderingTarget: RenderingTarget;
+	format: ArticleFormat
 }
 
 interface WebProps extends Props {
@@ -43,6 +47,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 		display: gallery.display,
 		theme: gallery.theme,
 	};
+
 
 	return (
 		<>
@@ -168,6 +173,20 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				</header>
 				<div css={border}>Body</div>
 				<div css={border}>Submeta</div>
+
+				{/*<Section*/}
+				{/*	fullWidth={true}*/}
+				{/*	sectionId="comments"*/}
+				{/*	data-print-layout="hide"*/}
+				{/*	element="section"*/}
+				{/*	backgroundColour={themePalette(*/}
+				{/*		'--discussion-section-background',*/}
+				{/*	)}*/}
+				{/*	borderColour={themePalette('--article-border')}*/}
+				{/*	fontColour={themePalette('--discussion-text')}*/}
+				{/*>*/}
+				{/*	<FlexibleGeneral groupedTrails={galleryTrails} imageLoading={} absoluteServerTimes={} aspectRatio={} collectionId={} />*/}
+				{/*</Section>*/}
 			</main>
 		</>
 	);

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { isNonNullable } from '@guardian/libs';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
-import { decideTrail } from '../lib/decideTrail';
+import {decideOnwardsTrail, decideTrail} from '../lib/decideTrail';
 import { useApi } from '../lib/useApi';
 import { addDiscussionIds } from '../lib/useCommentCount';
 import { palette } from '../palette';
@@ -10,6 +10,20 @@ import type { RenderingTarget } from '../types/renderingTarget';
 import type { FETrailType, TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
 import { Placeholder } from './Placeholder';
+import {FlexibleGeneral} from "./FlexibleGeneral";
+import {
+	DCRFrontCard,
+	DCRFrontImage,
+	DCRGroupedTrails,
+	DCRSlideshowImage,
+	DCRSnapType,
+	DCRSupportingContent
+} from "../types/front";
+import type {BoostLevel, StarRating} from "../types/content";
+import type {MainMedia} from "../types/mainMedia";
+import type {Branding} from "../types/branding";
+import {ScrollableMedium} from "./ScrollableMedium.importable";
+import {GroupedTrails} from "../types/tagPage";
 
 type Props = {
 	url: string;
@@ -81,24 +95,56 @@ export const FetchOnwardsData = ({
 			.filter(isNonNullable),
 	);
 
+
+
+
+
+	const trails = makeTrails(data.trails, limit, isAdFreeUser);
 	return (
 		<div css={minHeight}>
-			<Carousel
-				heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
-				trails={buildTrails(data.trails, limit, isAdFreeUser)}
-				description={data.description}
-				onwardsSource={onwardsSource}
-				format={format}
-				leftColSize={
-					format.design === ArticleDesign.LiveBlog ||
-					format.design === ArticleDesign.DeadBlog
-						? 'wide'
-						: 'compact'
-				}
-				discussionApiUrl={discussionApiUrl}
-				absoluteServerTimes={absoluteServerTimes}
-				renderingTarget={renderingTarget}
-			/>
+			<FlexibleGeneral groupedTrails={trails} absoluteServerTimes={absoluteServerTimes} imageLoading={"lazy"} containerType={"scrollable/medium"} aspectRatio={"5:4"} sectionId={"111"}></FlexibleGeneral>
 		</div>
 	);
 };
+
+const makeTrails = (
+	trails: FETrailType[],
+	trailLimit: number,
+	isAdFreeUser: boolean,
+): DCRGroupedTrails => {
+	const t =  trails
+		.filter((trailType) => !(isTrailPaidContent(trailType) && isAdFreeUser))
+		.slice(0, trailLimit)
+		.map(decideOnwardsTrail);
+
+	return {
+		snap:[],
+		huge:[],
+		veryBig:[
+		],
+		big:[
+		],
+		standard: t.slice(1,4),
+		splash: t.slice(0,1)
+
+}
+
+
+};
+
+// <Carousel
+// 	heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
+// 	trails={buildTrails(data.trails, limit, isAdFreeUser)}
+// 	description={data.description}
+// 	onwardsSource={onwardsSource}
+// 	format={format}
+// 	leftColSize={
+// 		format.design === ArticleDesign.LiveBlog ||
+// 		format.design === ArticleDesign.DeadBlog
+// 			? 'wide'
+// 			: 'compact'
+// 	}
+// 	discussionApiUrl={discussionApiUrl}
+// 	absoluteServerTimes={absoluteServerTimes}
+// 	renderingTarget={renderingTarget}
+// />

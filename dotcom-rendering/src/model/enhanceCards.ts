@@ -180,7 +180,7 @@ const getActiveMediaAtom = (
 				width: 500,
 				height: 400,
 				thumbnailImage: getLargestImageSize(
-					mediaAtom.posterImage?.allImages.map(
+					mediaAtom.?.allImages.map(
 						({ url, fields: { width } }) => ({
 							url,
 							width: Number(width),

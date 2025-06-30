@@ -551,7 +551,7 @@ export const Card = ({
 	const isMediaCardOrNewsletter = isMediaCard(format) || isNewsletter;
 
 	// Currently pills are only shown within beta containers.
-	const showPill = isBetaContainer && isMediaCardOrNewsletter;
+	const showPill = canPlayInline && isMediaCardOrNewsletter;
 
 	const media = getMedia({
 		imageUrl: image?.src,
