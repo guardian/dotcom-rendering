@@ -19,7 +19,7 @@ const buttonOverrides = css`
 	border: none;
 `;
 
-export const ChoiceCardsSupportCta = ({
+export const ChoiceCardsSupportCta_unused = ({
 	getCtaText,
 	getCtaUrl,
 	cssOverrides,

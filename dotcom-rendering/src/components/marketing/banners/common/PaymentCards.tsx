@@ -32,7 +32,7 @@ type PaymentCardProps = {
 	cssOverrides?: SerializedStyles;
 };
 
-export const PaymentCards = ({
+export const PaymentCards_unused = ({
 	cssOverrides,
 }: PaymentCardProps): JSX.Element => {
 	return (

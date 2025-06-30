@@ -13,9 +13,9 @@ import { useIsInView } from '../../../../../../lib/useIsInView';
 import type { ContentType } from '../../../../hooks/useChoiceCards';
 import type { ChoiceCardSelection } from '../../../../lib/choiceCards';
 import type { ReactComponent } from '../../../../lib/ReactComponent';
-import { PaymentCards } from '../../../common/PaymentCards';
-import { ChoiceCardInteractive } from './ChoiceCardInteractive';
-import { ChoiceCardsSupportCta } from './ChoiceCardsSupportCta';
+import { PaymentCards_unused } from '../../../common/PaymentCards';
+import { ChoiceCardInteractive_unused } from './ChoiceCardInteractive';
+import { ChoiceCardsSupportCta_unused } from './ChoiceCardsSupportCta';
 
 export interface ChoiceCardSettings {
 	buttonColour?: string;
@@ -136,7 +136,7 @@ export const ChoiceCards_unused: ReactComponent<ChoiceCardProps> = ({
 
 	return (
 		<div ref={setNode} css={styles.container}>
-			<ChoiceCardInteractive
+			<ChoiceCardInteractive_unused
 				design={design}
 				selection={selection}
 				setSelectionsCallback={setSelectionsCallback}
@@ -147,7 +147,7 @@ export const ChoiceCards_unused: ReactComponent<ChoiceCardProps> = ({
 			/>
 
 			<div css={styles.ctaAndPaymentCardsContainer}>
-				<ChoiceCardsSupportCta
+				<ChoiceCardsSupportCta_unused
 					getCtaText={getCtaText}
 					getCtaUrl={getCtaUrl}
 					cssOverrides={css`
@@ -156,7 +156,9 @@ export const ChoiceCards_unused: ReactComponent<ChoiceCardProps> = ({
 					`}
 					onCtaClick={onCtaClick}
 				/>
-				<PaymentCards cssOverrides={styles.paymentCardsSvgOverrides} />
+				<PaymentCards_unused
+					cssOverrides={styles.paymentCardsSvgOverrides}
+				/>
 			</div>
 		</div>
 	);

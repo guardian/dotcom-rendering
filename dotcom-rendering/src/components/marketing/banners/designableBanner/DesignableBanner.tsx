@@ -41,7 +41,7 @@ import type {
 	BannerRenderProps,
 } from '../common/types';
 import type { ChoiceCardSettings } from './components/choiceCards/ChoiceCards';
-import { ChoiceCards_unused as ChoiceCards } from './components/choiceCards/ChoiceCards';
+import { ChoiceCards_unused } from './components/choiceCards/ChoiceCards';
 import { DesignableBannerArticleCount } from './components/DesignableBannerArticleCount';
 import { DesignableBannerBody } from './components/DesignableBannerBody';
 import { DesignableBannerCloseButton } from './components/DesignableBannerCloseButton';
@@ -415,7 +415,7 @@ const DesignableBanner_unused: ReactComponent<BannerRenderProps> = ({
 							templateSettings.containerSettings.backgroundColour,
 						)}
 					>
-						<ChoiceCards
+						<ChoiceCards_unused
 							setSelectionsCallback={setChoiceCardSelection}
 							selection={choiceCardSelection}
 							submitComponentEvent={submitComponentEvent}
@@ -437,7 +437,7 @@ const DesignableBanner_unused: ReactComponent<BannerRenderProps> = ({
 						textColor={hexColourToString(basic.logo)}
 					/>
 				</div>
-
+				{/* REMOVE OR MOVE */}
 				{showReminder && (
 					<div css={styles.reminderContainer}>
 						<span css={styles.reminderText}>
@@ -454,8 +454,10 @@ const DesignableBanner_unused: ReactComponent<BannerRenderProps> = ({
 						</Button>
 					</div>
 				)}
+				{/* REMOVE OR MOVE END */}
 			</div>
 
+			{/* REMOVE OR MOVE */}
 			{isReminderActive && (
 				<div css={styles.reminderFormContainer}>
 					<div css={styles.containerOverrides}>
@@ -476,6 +478,7 @@ const DesignableBanner_unused: ReactComponent<BannerRenderProps> = ({
 					</div>
 				</div>
 			)}
+			{/* REMOVE OR MOVE END */}
 		</div>
 	);
 };
@@ -614,6 +617,7 @@ const styles = {
 		justify-self: end;
 		padding-top: ${space[3]}px;
 	`,
+	/* REMOVE OR MOVE */
 	reminderContainer: css`
 		${textEgyptian15};
 		grid-column: 1;
@@ -646,6 +650,7 @@ const styles = {
 		border-top: 2px solid ${neutral[0]};
 		margin-top: ${space[3]}px;
 	`,
+	/* REMOVE OR MOVE END */
 };
 
 const unvalidated = bannerWrapper(DesignableBanner_unused, 'designable-banner');

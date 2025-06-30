@@ -104,7 +104,7 @@ const buildStyles = (
 	};
 };
 
-export const ChoiceCardInteractive: ReactComponent<
+export const ChoiceCardInteractive_unused: ReactComponent<
 	ChoiceCardInteractiveProps
 > = ({
 	selection,

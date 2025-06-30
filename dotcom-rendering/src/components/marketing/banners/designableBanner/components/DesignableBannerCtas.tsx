@@ -8,7 +8,7 @@ import { from, space } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import { isSupportUrl } from '../../../lib/tracking';
-import { PaymentCards } from '../../common/PaymentCards';
+import { PaymentCards_unused } from '../../common/PaymentCards';
 import type { BannerRenderedContent } from '../../common/types';
 import type { CtaSettings } from '../settings';
 import { buttonStyles } from '../styles/buttonStyles';
@@ -56,7 +56,7 @@ export function DesignableBannerCtas_unused({
 				</LinkButton>
 			)}
 
-			{primaryCta && hasSupportCta && <PaymentCards />}
+			{primaryCta && hasSupportCta && <PaymentCards_unused />}
 		</div>
 	);
 }
