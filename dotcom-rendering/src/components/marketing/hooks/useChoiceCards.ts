@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react';
 import type { BannerEnrichedCta } from '../banners/common/types';
 import type { SupportTier } from '../epics/utils/threeTierChoiceCardAmounts';
 import { threeTierChoiceCardAmounts } from '../epics/utils/threeTierChoiceCardAmounts';
-import type { ChoiceCardSelection } from '../lib/choiceCards';
+import type { ChoiceCardSelection_unused } from '../lib/choiceCards';
 import {
 	addChoiceCardsOneTimeParams,
 	addChoiceCardsProductParams,
@@ -51,14 +51,16 @@ const useChoiceCards_unused = (
 	primaryCtaMain: BannerEnrichedCta | null,
 	primaryCtaMobile: BannerEnrichedCta | null,
 ): {
-	choiceCardSelection: ChoiceCardSelection | undefined;
-	setChoiceCardSelection: (choiceCardSelection: ChoiceCardSelection) => void;
+	choiceCardSelection: ChoiceCardSelection_unused | undefined;
+	setChoiceCardSelection: (
+		choiceCardSelection: ChoiceCardSelection_unused,
+	) => void;
 	getCtaText: (contentType: ContentType) => string;
 	getCtaUrl: (contentType: ContentType) => string;
 	currencySymbol: string;
 } => {
 	const [choiceCardSelection, setChoiceCardSelection] = useState<
-		ChoiceCardSelection | undefined
+		ChoiceCardSelection_unused | undefined
 	>();
 
 	useEffect(() => {

@@ -12,12 +12,12 @@ import type {
 	ChoiceCardsSettings,
 } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 
-export interface ChoiceCardSelection {
+export interface ChoiceCardSelection_unused {
 	frequency: ContributionFrequency;
 	amount: number | 'other';
 }
 
-export const contributionType: ContributionType = {
+export const contributionType_unused: ContributionType = {
 	ONE_OFF: {
 		label: 'One-time',
 		suffix: '',

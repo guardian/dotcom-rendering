@@ -12,14 +12,16 @@ import type {
 	ContributionFrequency,
 	SelectedAmountsVariant,
 } from '@guardian/support-dotcom-components/dist/shared/types';
-import type { ChoiceCardSelection } from '../../../../lib/choiceCards';
-import { contributionType } from '../../../../lib/choiceCards';
+import type { ChoiceCardSelection_unused } from '../../../../lib/choiceCards';
+import { contributionType_unused } from '../../../../lib/choiceCards';
 import type { ReactComponent } from '../../../../lib/ReactComponent';
 import type { ChoiceCardSettings } from './ChoiceCards';
 
 interface ChoiceCardInteractiveProps {
-	selection?: ChoiceCardSelection;
-	setSelectionsCallback: (choiceCardSelection: ChoiceCardSelection) => void;
+	selection?: ChoiceCardSelection_unused;
+	setSelectionsCallback: (
+		choiceCardSelection: ChoiceCardSelection_unused,
+	) => void;
 	submitComponentEvent?: (event: ComponentEvent) => void;
 	currencySymbol: string;
 	amountsTest?: SelectedAmountsVariant;
@@ -168,7 +170,7 @@ export const ChoiceCardInteractive_unused: ReactComponent<
 					key={amount}
 					value={`${amount}`}
 					label={`${currencySymbol}${amount} ${
-						contributionType[selection.frequency].suffix
+						contributionType_unused[selection.frequency].suffix
 					}`}
 					id={`${componentId}-${amount}`}
 					checked={selection.amount === amount}
@@ -220,7 +222,7 @@ export const ChoiceCardInteractive_unused: ReactComponent<
 	const generateChoiceCardFrequencyTab = (
 		frequency: ContributionFrequency,
 	) => {
-		const label = contributionType[frequency].label;
+		const label = contributionType_unused[frequency].label;
 		return (
 			<ChoiceCard
 				key={label}

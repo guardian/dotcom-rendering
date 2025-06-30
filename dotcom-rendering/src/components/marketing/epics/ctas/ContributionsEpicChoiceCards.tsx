@@ -15,8 +15,8 @@ import type {
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect } from 'react';
 import { useIsInView } from '../../../../lib/useIsInView';
-import { contributionType } from '../../lib/choiceCards';
-import type { ChoiceCardSelection } from '../../lib/choiceCards';
+import { contributionType_unused } from '../../lib/choiceCards';
+import type { ChoiceCardSelection_unused } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
 
 // CSS Styling
@@ -47,23 +47,25 @@ const container = css`
 
 // ContributionsEpicChoiceCards - exported component
 // -------------------------------------------
-interface EpicChoiceCardProps {
-	selection?: ChoiceCardSelection;
-	setSelectionsCallback: (choiceCardSelection: ChoiceCardSelection) => void;
+interface EpicChoiceCardProps_unused {
+	selection?: ChoiceCardSelection_unused;
+	setSelectionsCallback: (
+		choiceCardSelection: ChoiceCardSelection_unused,
+	) => void;
 	submitComponentEvent?: (event: ComponentEvent) => void;
 	currencySymbol: string;
 	amountsTest: SelectedAmountsVariant;
 }
 
 export const ContributionsEpicChoiceCards_unused: ReactComponent<
-	EpicChoiceCardProps
+	EpicChoiceCardProps_unused
 > = ({
 	selection,
 	setSelectionsCallback,
 	submitComponentEvent,
 	currencySymbol,
 	amountsTest,
-}: EpicChoiceCardProps) => {
+}: EpicChoiceCardProps_unused) => {
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
 		threshold: 0,
@@ -133,7 +135,7 @@ export const ContributionsEpicChoiceCards_unused: ReactComponent<
 				<ChoiceCard
 					value={`${amount}`}
 					label={`${currencySymbol}${amount} ${
-						contributionType[selection.frequency].suffix
+						contributionType_unused[selection.frequency].suffix
 					}`}
 					id={`contributions-epic-${amount}`}
 					checked={selection.amount === amount}
@@ -185,7 +187,7 @@ export const ContributionsEpicChoiceCards_unused: ReactComponent<
 	) => {
 		return (
 			<ChoiceCard
-				label={contributionType[frequency].label}
+				label={contributionType_unused[frequency].label}
 				value={frequency}
 				id={`contributions-epic-${frequency}`}
 				checked={selection.frequency === frequency}

@@ -11,7 +11,7 @@ import type { SelectedAmountsVariant } from '@guardian/support-dotcom-components
 import { useEffect } from 'react';
 import { useIsInView } from '../../../../../../lib/useIsInView';
 import type { ContentType } from '../../../../hooks/useChoiceCards';
-import type { ChoiceCardSelection } from '../../../../lib/choiceCards';
+import type { ChoiceCardSelection_unused } from '../../../../lib/choiceCards';
 import type { ReactComponent } from '../../../../lib/ReactComponent';
 import { PaymentCards_unused } from '../../../common/PaymentCards';
 import { ChoiceCardInteractive_unused } from './ChoiceCardInteractive';
@@ -26,9 +26,11 @@ export interface ChoiceCardSettings {
 	buttonSelectBorderColour?: string;
 }
 
-interface ChoiceCardProps {
-	selection?: ChoiceCardSelection;
-	setSelectionsCallback: (choiceCardSelection: ChoiceCardSelection) => void;
+interface ChoiceCardProps_unused {
+	selection?: ChoiceCardSelection_unused;
+	setSelectionsCallback: (
+		choiceCardSelection: ChoiceCardSelection_unused,
+	) => void;
 	submitComponentEvent?: (event: ComponentEvent) => void;
 	currencySymbol: string;
 	componentId: string;
@@ -91,7 +93,7 @@ const styles = {
 	`,
 };
 
-export const ChoiceCards_unused: ReactComponent<ChoiceCardProps> = ({
+export const ChoiceCards_unused: ReactComponent<ChoiceCardProps_unused> = ({
 	selection,
 	setSelectionsCallback,
 	submitComponentEvent,
@@ -103,7 +105,7 @@ export const ChoiceCards_unused: ReactComponent<ChoiceCardProps> = ({
 	getCtaUrl,
 	cssCtaOverides,
 	onCtaClick,
-}: ChoiceCardProps) => {
+}: ChoiceCardProps_unused) => {
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
 		threshold: 0,
