@@ -55,7 +55,7 @@ interface EpicChoiceCardProps {
 	amountsTest: SelectedAmountsVariant;
 }
 
-export const ContributionsEpicChoiceCards: ReactComponent<
+export const ContributionsEpicChoiceCards_unused: ReactComponent<
 	EpicChoiceCardProps
 > = ({
 	selection,
