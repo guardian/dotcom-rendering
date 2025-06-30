@@ -482,6 +482,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
+												pageId={article.config.pageId}
 											></ArticleMetaApps>
 										</Hide>
 										<Hide until="leftCol">

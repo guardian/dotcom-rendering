@@ -443,6 +443,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 														article.config
 															.shortUrlId
 													}
+													pageId={
+														article.config.pageId
+													}
 												></ArticleMetaApps>
 											</Hide>
 											<Hide until="leftCol">
