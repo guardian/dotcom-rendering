@@ -5,11 +5,13 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
+import type { FootballNavAtom as FootballNavAtomModel } from '../footballNavAtom';
 import type { FootballTableCompetition } from '../footballTables';
 import { grid } from '../grid';
 import { palette } from '../palette';
 import type { Region } from '../sportDataPage';
 import { AdSlot } from './AdSlot.web';
+import { FootballNavAtom } from './FootballNavAtom';
 import { FootballTableList } from './FootballTableList';
 import { FootballTablesCompetitionSelect } from './FootballTablesCompetitionSelect.importable';
 import { Island } from './Island';
@@ -20,6 +22,7 @@ type Props = {
 	tableCompetitions: FootballTableCompetition[];
 	renderAds: boolean;
 	guardianBaseUrl: string;
+	navAtom?: FootballNavAtomModel;
 };
 
 export const FootballTablesPage = ({
@@ -28,6 +31,7 @@ export const FootballTablesPage = ({
 	tableCompetitions: competitions,
 	renderAds,
 	guardianBaseUrl,
+	navAtom,
 }: Props) => (
 	<main
 		id="maincontent"
@@ -53,12 +57,13 @@ export const FootballTablesPage = ({
 			padding-bottom: ${space[9]}px;
 		`}
 	>
+		<FootballNavAtom navAtom={navAtom} />
 		<h1
 			css={css`
 				${headlineBold20}
 				padding: ${space[2]}px 0 ${space[3]}px;
 				${grid.column.centre}
-				grid-row: 1;
+				grid-row: ${navAtom !== undefined ? 2 : 1};
 				${from.leftCol} {
 					${grid.between('left-column-start', 'centre-column-end')}
 				}
@@ -71,7 +76,7 @@ export const FootballTablesPage = ({
 				margin-top: ${space[3]}px;
 				margin-bottom: ${space[6]}px;
 				${grid.column.centre}
-				grid-row: 2;
+				grid-row: ${navAtom !== undefined ? 3 : 2};
 			`}
 		>
 			<Island priority="feature" defer={{ until: 'visible' }}>
@@ -85,7 +90,7 @@ export const FootballTablesPage = ({
 		<div
 			css={css`
 				${grid.column.centre}
-				grid-row: 3;
+				grid-row: ${navAtom !== undefined ? 4 : 3};
 				${from.leftCol} {
 					${grid.between('left-column-start', 'centre-column-end')}
 				}
@@ -102,7 +107,7 @@ export const FootballTablesPage = ({
 				css={css`
 					${grid.column.right}
 					/** This allows the ad to grow beyond the third row content (up to line 5) */
-					grid-row: 1 / 4;
+					grid-row: ${navAtom !== undefined ? '2 / 5' : '1 / 4'};
 					${until.desktop} {
 						display: none;
 					}

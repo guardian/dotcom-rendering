@@ -118,6 +118,7 @@ const parseFEFootballMatchList = (
 		isAdFreeUser: data.isAdFreeUser,
 		canonicalUrl: data.canonicalUrl,
 		contributionsServiceUrl: data.contributionsServiceUrl,
+		navAtom: data.atom,
 	};
 };
 
@@ -157,6 +158,7 @@ const parseFEFootballTables = (
 		isAdFreeUser: data.isAdFreeUser,
 		canonicalUrl: data.canonicalUrl,
 		contributionsServiceUrl: data.contributionsServiceUrl,
+		navAtom: data.atom,
 	};
 };
 
