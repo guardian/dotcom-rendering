@@ -17,7 +17,9 @@ export const FootballNavAtom = ({
 				gridRow: 1,
 			}}
 			srcDoc={unifyPageContent({
-				elementCss: navAtom.css,
+				elementCss:
+					navAtom.css +
+					'body { margin: 0; } .Sports-header { margin-left: 0 !important; border: none !important; }',
 				elementJs: navAtom.mainJS,
 				elementHtml: navAtom.html,
 				renderingTarget: 'Web',
