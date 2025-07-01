@@ -28,12 +28,10 @@ export const EnhanceAffiliateLinks = () => {
 				const skimlinksAccountId = getSkimlinksAccountId(link.href);
 
 				// Skimlinks treats xcust as one long string, so we use | to separate values
-				link.href += `&xcust=${encodeURIComponent(
-					'referrer|' +
-						referrerDomain +
-						'|accountId|' +
-						skimlinksAccountId,
-				)}`;
+				const xcustValue = `referrer|${referrerDomain}|accountId|${skimlinksAccountId}`;
+
+				link.href = `${link.href}&xcust=${encodeURIComponent(xcustValue)}`;
+
 			}
 		}
 	});
