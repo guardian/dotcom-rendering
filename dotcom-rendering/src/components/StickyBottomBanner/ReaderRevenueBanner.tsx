@@ -314,7 +314,7 @@ export const ReaderRevenueBanner = ({
 			? /* webpackChunkName: "designable-banner-v2" */
 			  import(`../marketing/banners/designableBanner/DesignableBannerV2`)
 			: /* webpackChunkName: "designable-banner" */
-			  import(`../marketing/banners/designableBanner/DesignableBanner`)
+			  import(`../marketing/banners/designableBanner/DesignableBannerV2`)
 		)
 			.then((bannerModule: { [key: string]: React.ElementType }) => {
 				setBanner(() => bannerModule[name] ?? null);
