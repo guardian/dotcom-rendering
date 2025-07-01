@@ -34,14 +34,13 @@ import { addChoiceCardsProductParams } from '../../lib/tracking';
 import { ThreeTierChoiceCards } from '../../shared/ThreeTierChoiceCards';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
-import type { ChoiceCardSettings } from './components/choiceCards/ChoiceCards';
 import { DesignableBannerArticleCount } from './components/DesignableBannerArticleCount';
 import { DesignableBannerBody } from './components/DesignableBannerBody';
 import { DesignableBannerCloseButton } from './components/DesignableBannerCloseButton';
 import { DesignableBannerCtas } from './components/DesignableBannerCtasV2';
 import { DesignableBannerHeader } from './components/DesignableBannerHeader';
 import { DesignableBannerVisual } from './components/DesignableBannerVisual';
-import type { BannerTemplateSettings } from './settings';
+import type { BannerTemplateSettings, ChoiceCardSettings } from './settings';
 import { templateSpacing } from './styles/templateStyles';
 
 const buildImageSettings = (
