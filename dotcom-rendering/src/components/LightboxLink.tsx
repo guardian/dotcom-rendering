@@ -110,6 +110,9 @@ export const LightboxLink = ({
 	isMainMedia,
 	position,
 }: Props) => {
+	console.log(
+		`role: ${role}, position: ${position}, isMainMedia: ${isMainMedia}`,
+	);
 	return (
 		<ClickOverlay position={position}>
 			<button
