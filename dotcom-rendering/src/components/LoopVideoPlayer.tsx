@@ -162,6 +162,7 @@ export const LoopVideoPlayer = forwardRef(
 								type="button"
 								onClick={handleClick}
 								css={playIconStyles}
+								data-link-name="video-play-pause"
 							>
 								<PlayIcon iconWidth="narrow" />
 							</button>
@@ -180,6 +181,7 @@ export const LoopVideoPlayer = forwardRef(
 								setIsMuted(!isMuted);
 							}}
 							css={audioButtonStyles}
+							data-link-name="video-mute-toggle"
 						>
 							<div css={audioIconContainerStyles}>
 								<AudioIcon
