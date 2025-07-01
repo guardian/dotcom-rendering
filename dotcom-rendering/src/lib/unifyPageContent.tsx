@@ -13,7 +13,7 @@ export const unifyPageContent = ({
 	renderingTarget: RenderingTarget;
 }): string =>
 	renderToString(
-		<html lang="en">
+		<html lang="en" style={{ overflow: 'hidden' }}>
 			<head>
 				<meta charSet="utf-8" />
 				<meta
