@@ -7,6 +7,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Standfirst } from '../components/Standfirst';
+import { SubMeta } from '../components/SubMeta';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { NavType } from '../model/extract-nav';
@@ -167,7 +168,18 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					</div>
 				</header>
 				<div css={border}>Body</div>
-				<div css={border}>Submeta</div>
+				<SubMeta
+					format={format}
+					subMetaKeywordLinks={frontendData.subMetaKeywordLinks}
+					subMetaSectionLinks={frontendData.subMetaSectionLinks}
+					pageId={frontendData.pageId}
+					webUrl={frontendData.webURL}
+					webTitle={frontendData.webTitle}
+					showBottomSocialButtons={
+						frontendData.showBottomSocialButtons &&
+						props.renderingTarget === 'Web'
+					}
+				/>
 			</main>
 		</>
 	);
