@@ -9,8 +9,7 @@ type Props = {
 };
 export const ListenToArticleWrapper = ({ articleId }: Props) => {
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
-	const [showListenToArticleButton, setShowListenToArticleButton] =
-		useState<boolean>(false);
+	const [showButton, setShowButton] = useState<boolean>(false);
 
 	const isBridgetCompatible = useIsBridgetCompatible('8.5.1');
 
@@ -18,52 +17,33 @@ export const ListenToArticleWrapper = ({ articleId }: Props) => {
 		isBridgetCompatible &&
 			void getListenToArticleClient()
 				.isAvailable(articleId)
-				.then(setShowListenToArticleButton);
+				.then(setShowButton);
 
 		void getListenToArticleClient().isPlaying(articleId).then(setIsPlaying);
 	}, [articleId, isBridgetCompatible]);
 
 	const listenToArticleHander = () => {
-		isPlaying
-			? void getListenToArticleClient()
-					.pause(articleId)
-					.then((success: boolean) => {
-						success && setIsPlaying(false);
-					})
-					.catch((error: any) => {
-						window.guardian.modules.sentry.reportError(
-							error,
-							'bridget-getListenToArticleClient-pause-error',
-						),
-							log(
-								'dotcom',
-								'Bridget getListenToArticleClient.pause Error:',
-								error,
-							);
-					})
-			: void getListenToArticleClient()
-					.play(articleId)
-					.then((success: boolean) => {
-						success && setIsPlaying(true);
-					})
-					.catch((error: any) => {
-						window.guardian.modules.sentry.reportError(
-							error,
-							'bridget-getListenToArticleClient-play-error',
-						),
-							log(
-								'dotcom',
-								'Bridget getListenToArticleClient.play Error:',
-								error,
-							);
-					});
+		void getListenToArticleClient()
+			.play(articleId)
+			.then((success: boolean) => {
+				success && setIsPlaying(true);
+			})
+			.catch((error: any) => {
+				window.guardian.modules.sentry.reportError(
+					error,
+					'bridget-getListenToArticleClient-play-error',
+				),
+					log(
+						'dotcom',
+						'Bridget getListenToArticleClient.play Error:',
+						error,
+					);
+			});
 	};
 	return (
-		showListenToArticleButton && (
-			<ListenToAudioButton
-				isPlaying={isPlaying}
-				onClickHandler={listenToArticleHander}
-			/>
+		showButton &&
+		!isPlaying && (
+			<ListenToAudioButton onClickHandler={listenToArticleHander} />
 		)
 	);
 };

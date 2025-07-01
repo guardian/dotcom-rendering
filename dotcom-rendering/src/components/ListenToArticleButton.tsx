@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
 import {
 	Button,
-	SvgMediaControlsPause,
 	SvgMediaControlsPlay,
 } from '@guardian/source/react-components';
 import { palette } from '../palette';
@@ -22,21 +21,15 @@ const button = css`
 	margin-left: ${space[2]}px;
 `;
 type ButtonProps = {
-	isPlaying: boolean;
 	onClickHandler: () => void;
 };
-export const ListenToAudioButton = ({
-	isPlaying,
-	onClickHandler,
-}: ButtonProps) => {
+export const ListenToAudioButton = ({ onClickHandler }: ButtonProps) => {
 	return (
 		<Button
 			onClick={onClickHandler}
 			size={'small'}
 			cssOverrides={[button]}
-			icon={
-				isPlaying ? <SvgMediaControlsPause /> : <SvgMediaControlsPlay />
-			}
+			icon={<SvgMediaControlsPlay />}
 		>
 			Listen to article
 		</Button>

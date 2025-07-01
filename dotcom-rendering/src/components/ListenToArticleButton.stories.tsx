@@ -3,18 +3,12 @@ import { ListenToAudioButton } from './ListenToArticleButton';
 export default {
 	component: [ListenToAudioButton],
 	title: 'Components/ListenToAudio',
-	args: {
-		isPlaying: false,
-	},
 };
 
-export const Default = ({ isPlaying }: { isPlaying: boolean }) => {
+export const Default = () => {
 	return (
 		<>
-			<ListenToAudioButton
-				isPlaying={isPlaying}
-				onClickHandler={() => undefined}
-			/>
+			<ListenToAudioButton onClickHandler={() => undefined} />
 		</>
 	);
 };
