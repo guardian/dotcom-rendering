@@ -66,6 +66,10 @@ const getStyles = (
 	const color = headerSettings?.textColour ?? neutral[0];
 	const copyTopMargin = headerSettings?.headerImage ? space[6] : space[1];
 	const containerMargin = headerSettings?.headerImage ? `${space[6]}px` : '0';
+	const mobileHeadlineSize =
+		headlineSize === 'small'
+			? `${headlineMedium17}`
+			: `${headlineMedium28}`;
 
 	return {
 		container: css`
@@ -77,17 +81,15 @@ const getStyles = (
 				color: ${color};
 				margin: ${copyTopMargin}px 0 ${space[2]}px 0;
 
+				${until.phablet} {
+					${mobileHeadlineSize};
+				}
+
 				${from.tablet} {
 					margin-bottom: ${space[6]}px;
 				}
 
-				${until.phablet} {
-					${headlineSize === 'small'
-						? headlineMedium17
-						: headlineMedium28}
-				}
-
-				${until.leftCol} {
+				${from.phablet} {
 					${headlineMedium34}
 				}
 
