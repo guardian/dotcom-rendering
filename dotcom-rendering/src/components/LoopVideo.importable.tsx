@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { useIsInView } from '../lib/useIsInView';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
@@ -67,7 +68,25 @@ export const LoopVideo = ({
 	}, []);
 
 	/**
-	 * Autoplays the video when it comes into view.
+	 * Tracks the first time the video has been in view in Ophan
+	 */
+	useEffect(() => {
+		if (isInView && !hasBeenInView) {
+			void submitComponentEvent(
+				{
+					component: {
+						componentType: 'LOOP_VIDEO',
+						id: videoId,
+					},
+					action: 'VIEW',
+				},
+				'Web',
+			);
+		}
+	}, [isInView, hasBeenInView, videoId]);
+
+	/**
+	 * Autoplay the video when it comes into view.
 	 */
 	useEffect(() => {
 		if (!vidRef.current || playerState === 'PAUSED_BY_USER') return;
