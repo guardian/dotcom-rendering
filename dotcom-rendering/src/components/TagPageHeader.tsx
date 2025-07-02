@@ -14,11 +14,14 @@ import { isElement, parseHtml } from '../lib/domUtils';
 import { palette as schemedPalette } from '../palette';
 import { logger } from '../server/lib/logging';
 import { generateSources, Sources } from './Picture';
+import { Island } from './Island';
+import { TagPageAI } from './TagPageAI.importable';
 
 type Props = {
 	title: string;
 	description?: string;
 	image?: string;
+	isTestTagPage?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -274,7 +277,12 @@ const Picture = ({ image }: { image: string }) => {
 const isFootballCrest = (image: string) =>
 	image.startsWith('https://sport.guim.co.uk/football/crests/');
 
-export const TagPageHeader = ({ title, description, image }: Props) => {
+export const TagPageHeader = ({
+	title,
+	description,
+	image,
+	isTestTagPage,
+}: Props) => {
 	const descriptionFragment = description
 		? parseHtml(description)
 		: undefined;
@@ -298,6 +306,14 @@ export const TagPageHeader = ({ title, description, image }: Props) => {
 					) : (
 						<Picture image={image} />
 					)}
+				</div>
+			)}
+
+			{isTestTagPage && (
+				<div css={[sectionContent, paragraphStyle, paddings]}>
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<TagPageAI />
+					</Island>
 				</div>
 			)}
 

@@ -1,6 +1,6 @@
 import { isUndefined, joinUrl } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Accessibility } from '../components/Accessibility.importable';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import { Footer } from '../components/Footer';
@@ -65,6 +65,13 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const isAccessibilityPage =
 		tagPage.config.pageId === 'help/accessibility-help';
 
+	console.log('tagPage', tagPage.webURL);
+
+	const isTestTagPage =
+		tagPage.webURL === 'https://www.theguardian.com/tone/minutebyminute' &&
+		tagPage.config.isDev;
+	console.log('isTestTagePage', isTestTagPage);
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -110,7 +117,9 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					title={tagPage.header.title}
 					description={tagPage.header.description}
 					image={tagPage.header.image}
+					isTestTagPage={isTestTagPage}
 				/>
+
 				{tagPage.groupedTrails.map((groupedTrails, index) => {
 					const imageLoading = index > 0 ? 'lazy' : 'eager';
 
