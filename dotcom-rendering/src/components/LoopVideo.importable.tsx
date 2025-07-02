@@ -17,6 +17,7 @@ const videoContainerStyles = css`
 
 type Props = {
 	src: string;
+	atomId: string;
 	videoId: string;
 	width: number;
 	height: number;
@@ -26,6 +27,7 @@ type Props = {
 
 export const LoopVideo = ({
 	src,
+	atomId,
 	videoId,
 	width,
 	height,
@@ -76,14 +78,14 @@ export const LoopVideo = ({
 				{
 					component: {
 						componentType: 'LOOP_VIDEO',
-						id: videoId,
+						id: atomId,
 					},
 					action: 'VIEW',
 				},
 				'Web',
 			);
 		}
-	}, [isInView, hasBeenInView, videoId]);
+	}, [isInView, hasBeenInView, atomId]);
 
 	/**
 	 * Autoplay the video when it comes into view.

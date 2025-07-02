@@ -911,6 +911,7 @@ export const Card = ({
 											aspectRatio={aspectRatio}
 										/>
 									}
+									atomId={media.mainMedia.id}
 								/>
 							</Island>
 						)}
