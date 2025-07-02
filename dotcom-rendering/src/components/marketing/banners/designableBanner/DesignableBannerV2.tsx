@@ -37,7 +37,7 @@ import type { BannerRenderProps } from '../common/types';
 import { DesignableBannerArticleCount } from './components/DesignableBannerArticleCount';
 import { DesignableBannerBody } from './components/DesignableBannerBody';
 import { DesignableBannerCloseButton } from './components/DesignableBannerCloseButton';
-import { DesignableBannerCtas } from './components/DesignableBannerCtasV2';
+import { DesignableBannerCtas } from './components/DesignableBannerCtas';
 import { DesignableBannerHeader } from './components/DesignableBannerHeader';
 import { DesignableBannerVisual } from './components/DesignableBannerVisual';
 import type { BannerTemplateSettings, ChoiceCardSettings } from './settings';
