@@ -324,9 +324,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				</>
 			)}
 			<main data-layout="InteractiveLayout">
-				{renderAds && isApps && (
+				{isApps && (
 					<Island priority="critical">
-						<AdPortals />
+						<AdPortals renderAds={renderAds} />
 					</Island>
 				)}
 				<Section
