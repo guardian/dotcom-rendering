@@ -6,6 +6,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import type { FootballMatches } from '../footballMatches';
+import type { FootballNavAtom as FootballNavAtomModel } from '../footballNavAtom';
 import { grid } from '../grid';
 import type { EditionId } from '../lib/edition';
 import type { Result } from '../lib/result';
@@ -14,6 +15,7 @@ import type { FootballMatchListPageKind, Region } from '../sportDataPage';
 import { AdSlot } from './AdSlot.web';
 import { FootballCompetitionSelect } from './FootballCompetitionSelect';
 import { FootballMatchList } from './FootballMatchList';
+import { FootballNavAtom } from './FootballNavAtom';
 
 type Props = {
 	regions: Region[];
@@ -27,6 +29,7 @@ type Props = {
 	renderAds: boolean;
 	pageId: string;
 	now: string;
+	navAtom?: FootballNavAtomModel;
 };
 
 const createTitle = (kind: FootballMatchListPageKind, edition: EditionId) => {
@@ -56,6 +59,7 @@ export const FootballMatchesPage = ({
 	getMoreDays,
 	renderAds,
 	pageId,
+	navAtom,
 }: Props) => (
 	<main
 		id="maincontent"
@@ -81,12 +85,13 @@ export const FootballMatchesPage = ({
 			padding-bottom: ${space[9]}px;
 		`}
 	>
+		<FootballNavAtom navAtom={navAtom} />
 		<h1
 			css={css`
 				${headlineBold20}
 				padding: ${space[2]}px 0 ${space[3]}px;
 				${grid.column.centre}
-				grid-row: 1;
+				grid-row: ${navAtom !== undefined ? 2 : 1};
 				${from.leftCol} {
 					${grid.between('left-column-start', 'centre-column-end')}
 				}
@@ -100,7 +105,7 @@ export const FootballMatchesPage = ({
 				margin-top: ${space[3]}px;
 				margin-bottom: ${space[6]}px;
 				${grid.column.centre}
-				grid-row: 2;
+				grid-row: ${navAtom !== undefined ? 3 : 2};
 			`}
 		>
 			<FootballCompetitionSelect
@@ -114,7 +119,7 @@ export const FootballMatchesPage = ({
 		<div
 			css={css`
 				${grid.column.centre}
-				grid-row: 3;
+				grid-row: ${navAtom !== undefined ? 4 : 3};
 				${from.leftCol} {
 					${grid.between('left-column-start', 'centre-column-end')}
 				}
@@ -137,6 +142,7 @@ export const FootballMatchesPage = ({
 					${grid.column.right}
 					/** This allows the ad to grow beyond the third row content (up to line 5) */
 					grid-row: 1 / 5;
+					grid-row: ${navAtom !== undefined ? '2 / 6' : '1 / 5'};
 					${until.desktop} {
 						display: none;
 					}
