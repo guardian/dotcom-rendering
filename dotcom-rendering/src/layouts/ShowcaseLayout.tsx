@@ -373,7 +373,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 			>
 				{isApps && (
 					<Island priority="critical">
-						<AdPortals renderAds={renderAds} />
+						<AdPortals shouldHideAds={article.shouldHideAds} />
 					</Island>
 				)}
 				<Section

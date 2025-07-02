@@ -332,7 +332,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 			>
 				{isApps && (
 					<Island priority="critical">
-						<AdPortals renderAds={renderAds} />
+						<AdPortals shouldHideAds={article.shouldHideAds} />
 					</Island>
 				)}
 				<Section

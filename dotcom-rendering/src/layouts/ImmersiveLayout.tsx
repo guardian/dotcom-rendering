@@ -439,7 +439,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 			<main data-layout="ImmersiveLayout">
 				{isApps && (
 					<Island priority="critical">
-						<AdPortals renderAds={renderAds} />
+						<AdPortals shouldHideAds={article.shouldHideAds} />
 					</Island>
 				)}
 				<Section
