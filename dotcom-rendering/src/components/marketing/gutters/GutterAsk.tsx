@@ -24,11 +24,7 @@ const container = css`
 `;
 
 const imageHeader = (mainUrl: string) => css`
-	background-color: ${palette.brand[400]};
-	background-image: url(${mainUrl});
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
+	background: ${palette.brand[400]} no-repeat center/100% url('${mainUrl}');
 	width: 220px;
 	height: 132px;
 `;

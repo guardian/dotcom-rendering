@@ -1,6 +1,7 @@
 import type { CricketMatch } from './cricketMatch';
 import type { FootballMatch } from './footballMatch';
 import type { FootballMatches } from './footballMatches';
+import type { FootballNavAtom } from './footballNavAtom';
 import type { FootballTableCompetitions } from './footballTables';
 import type { FESportPageConfig } from './frontend/feFootballDataPage';
 import type { EditionId } from './lib/edition';
@@ -14,6 +15,7 @@ export type Region = {
 
 export type FootballData = SportPageConfig & {
 	regions: Region[];
+	navAtom?: FootballNavAtom;
 };
 
 export type SportPageConfig = {

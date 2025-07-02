@@ -9,10 +9,7 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from './Card/components/ImageWrapper';
+import type { ImagePositionType } from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
 import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
@@ -36,7 +33,6 @@ type BoostProperties = {
 	headlineSizes: ResponsiveFontSize;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
-	imageSize: ImageSizeType;
 	supportingContentAlignment: Alignment;
 	liveUpdatesAlignment: Alignment;
 	trailTextSize: TrailTextSize;
@@ -51,23 +47,18 @@ const determineCardProperties = (
 	supportingContentLength: number,
 	mediaCard: boolean,
 	imageSuppressed: boolean,
-	hasLivePlayable: boolean,
 ): BoostProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
 			return {
 				headlineSizes: {
-					desktop:
-						imageSuppressed || hasLivePlayable
-							? 'xxlarge'
-							: 'xlarge',
+					desktop: imageSuppressed ? 'xxlarge' : 'xlarge',
 					tablet: 'large',
 					mobile: 'medium',
 				},
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
-				imageSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
@@ -76,16 +67,12 @@ const determineCardProperties = (
 		case 'boost':
 			return {
 				headlineSizes: {
-					desktop:
-						imageSuppressed || hasLivePlayable
-							? 'xxxlarge'
-							: 'xxlarge',
+					desktop: imageSuppressed ? 'xxxlarge' : 'xxlarge',
 					tablet: 'xlarge',
 					mobile: 'large',
 				},
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
-				imageSize: 'jumbo',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
@@ -94,16 +81,12 @@ const determineCardProperties = (
 		case 'megaboost':
 			return {
 				headlineSizes: {
-					desktop:
-						imageSuppressed || hasLivePlayable
-							? 'xxxlarge'
-							: 'xxlarge',
+					desktop: imageSuppressed ? 'xxxlarge' : 'xxlarge',
 					tablet: 'xlarge',
 					mobile: 'xlarge',
 				},
 				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
-				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
@@ -117,7 +100,6 @@ const determineCardProperties = (
 				},
 				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
-				imageSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
@@ -155,7 +137,6 @@ export const OneCardLayout = ({
 		headlineSizes,
 		imagePositionOnDesktop,
 		imagePositionOnMobile,
-		imageSize,
 		supportingContentAlignment,
 		liveUpdatesAlignment,
 		trailTextSize,
@@ -164,7 +145,6 @@ export const OneCardLayout = ({
 		card.supportingContent?.length ?? 0,
 		isMediaCard(card.format),
 		!card.image,
-		card.showLivePlayable,
 	);
 
 	return (
@@ -179,7 +159,7 @@ export const OneCardLayout = ({
 					headlineSizes={headlineSizes}
 					imagePositionOnDesktop={imagePositionOnDesktop}
 					imagePositionOnMobile={imagePositionOnMobile}
-					imageSize={imageSize}
+					imageSize={'jumbo'}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
 					supportingContentAlignment={supportingContentAlignment}
