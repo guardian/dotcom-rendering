@@ -23,6 +23,7 @@ type Props = {
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	isLiveUpdate?: boolean;
+	shouldHideAds?: boolean;
 };
 /**
  * On liveblogs we insert two sets of ad slots into the page: one set for small
@@ -46,6 +47,7 @@ export const LiveBlogBlocksAndAdverts = ({
 	isSensitive,
 	isLiveUpdate,
 	editionId,
+	shouldHideAds,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
@@ -72,7 +74,7 @@ export const LiveBlogBlocksAndAdverts = ({
 		);
 	};
 
-	if (isAdFreeUser) {
+	if (isAdFreeUser || shouldHideAds) {
 		return (
 			<>
 				{blocks.map((block) => (
