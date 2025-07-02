@@ -22,7 +22,7 @@ import { Contributor } from './Contributor';
 import { Dateline } from './Dateline';
 import { FollowWrapper } from './FollowWrapper.importable';
 import { Island } from './Island';
-import { ListenToArticleWrapper } from './ListenToArticleWrapper.importable';
+import { ListenToArticle } from './ListenToArticle.importable';
 import { LiveblogNotifications } from './LiveblogNotifications.importable';
 
 type Props = {
@@ -356,7 +356,7 @@ export const ArticleMetaApps = ({
 			</div>
 			{pageId !== undefined && (
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<ListenToArticleWrapper articleId={pageId} />
+					<ListenToArticle articleId={pageId} />
 				</Island>
 			)}
 		</div>

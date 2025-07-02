@@ -1,14 +1,17 @@
-import { ListenToAudioButton } from './ListenToArticleButton';
+import type { Meta, StoryObj } from '@storybook/react';
+import { ListenToArticleButton as ListenToArticleButtonComponent } from './ListenToArticleButton';
 
-export default {
-	component: [ListenToAudioButton],
-	title: 'Components/ListenToAudio',
-};
+const meta = {
+	component: ListenToArticleButtonComponent,
+	title: 'Components/Listen To Article Button',
+} satisfies Meta<typeof ListenToArticleButtonComponent>;
 
-export const Default = () => {
-	return (
-		<>
-			<ListenToAudioButton onClickHandler={() => undefined} />
-		</>
-	);
-};
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const ListenToArticleButton = {
+	args: {
+		onClickHandler: () => undefined,
+	},
+} satisfies Story;

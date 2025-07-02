@@ -2,14 +2,14 @@ import { log } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { getListenToArticleClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
-import { ListenToAudioButton } from './ListenToArticleButton';
+import { ListenToArticleButton } from './ListenToArticleButton';
 
 type Props = {
 	articleId: string;
 };
-export const ListenToArticleWrapper = ({ articleId }: Props) => {
+export const ListenToArticle = ({ articleId }: Props) => {
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
-	const [showButton, setShowButton] = useState<boolean>(false);
+	const [showButton, setShowButton] = useState<boolean>(true);
 
 	const isBridgetCompatible = useIsBridgetCompatible('8.5.1');
 
@@ -22,7 +22,7 @@ export const ListenToArticleWrapper = ({ articleId }: Props) => {
 		void getListenToArticleClient().isPlaying(articleId).then(setIsPlaying);
 	}, [articleId, isBridgetCompatible]);
 
-	const listenToArticleHander = () => {
+	const listenToArticleHandler = () => {
 		void getListenToArticleClient()
 			.play(articleId)
 			.then((success: boolean) => {
@@ -43,7 +43,7 @@ export const ListenToArticleWrapper = ({ articleId }: Props) => {
 	return (
 		showButton &&
 		!isPlaying && (
-			<ListenToAudioButton onClickHandler={listenToArticleHander} />
+			<ListenToArticleButton onClickHandler={listenToArticleHandler} />
 		)
 	);
 };

@@ -8,12 +8,8 @@ import { palette } from '../palette';
 
 const button = css`
 	background-color: ${palette('--follow-icon-fill')};
-	&:active {
-		background-color: ${palette('--follow-icon-fill')};
-	}
-	&:focus {
-		background-color: ${palette('--follow-icon-fill')};
-	}
+	&:active,
+	&:focus,
 	&:hover {
 		background-color: ${palette('--follow-icon-fill')};
 	}
@@ -23,15 +19,13 @@ const button = css`
 type ButtonProps = {
 	onClickHandler: () => void;
 };
-export const ListenToAudioButton = ({ onClickHandler }: ButtonProps) => {
-	return (
-		<Button
-			onClick={onClickHandler}
-			size={'small'}
-			cssOverrides={[button]}
-			icon={<SvgMediaControlsPlay />}
-		>
-			Listen to article
-		</Button>
-	);
-};
+export const ListenToArticleButton = ({ onClickHandler }: ButtonProps) => (
+	<Button
+		onClick={onClickHandler}
+		size="small"
+		cssOverrides={button}
+		icon={<SvgMediaControlsPlay />}
+	>
+		Listen to article
+	</Button>
+);
