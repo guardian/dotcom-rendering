@@ -25,6 +25,7 @@ type Props = {
 	isPinnedPost: boolean;
 	pinnedPostId?: string;
 	editionId: EditionId;
+	shouldHideAds?: boolean;
 };
 
 export const LiveBlock = ({
@@ -42,6 +43,7 @@ export const LiveBlock = ({
 	isPinnedPost,
 	pinnedPostId,
 	editionId,
+	shouldHideAds,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 
@@ -86,6 +88,7 @@ export const LiveBlock = ({
 					switches={switches}
 					isPinnedPost={isPinnedPost}
 					editionId={editionId}
+					shouldHideAds={shouldHideAds}
 				/>
 			))}
 			<footer

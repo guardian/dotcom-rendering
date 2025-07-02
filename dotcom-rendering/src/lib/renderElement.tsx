@@ -93,6 +93,7 @@ type Props = {
 	totalElements?: number;
 	isListElement?: boolean;
 	isSectionedMiniProfilesArticle?: boolean;
+	shouldHideAds?: boolean;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -153,6 +154,7 @@ export const renderElement = ({
 	totalElements = 0,
 	isListElement = false,
 	isSectionedMiniProfilesArticle = false,
+	shouldHideAds,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -531,7 +533,7 @@ export const renderElement = ({
 			if (isListElement || isTimeline) return null;
 			return <EmailSignUpWrapper {...emailSignUpProps} />;
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
-			return <AdPlaceholder />;
+			return !shouldHideAds && <AdPlaceholder />;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (
 				<NumberedTitleBlockComponent
@@ -713,6 +715,7 @@ export const renderElement = ({
 						host,
 						isPinnedPost,
 						starRating,
+						shouldHideAds,
 					})}
 					format={format}
 				/>
@@ -925,6 +928,7 @@ export const RenderArticleElement = ({
 	totalElements,
 	isListElement,
 	isSectionedMiniProfilesArticle,
+	shouldHideAds,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -950,6 +954,7 @@ export const RenderArticleElement = ({
 		totalElements,
 		isListElement,
 		isSectionedMiniProfilesArticle,
+		shouldHideAds,
 	});
 
 	const needsFigure = !bareElements.has(element._type);

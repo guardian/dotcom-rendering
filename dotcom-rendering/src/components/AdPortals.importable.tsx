@@ -105,9 +105,8 @@ const debounceUpdateAds = libDebounce(updateAds, 100, { leading: true });
 export const AdPortals = ({
 	rightAlignFrom = 'desktop',
 }: {
-	/** In most cases, we want to try to display ads in the right column from desktop upwards.
-	 * For blogs, we want right aligned from wide upwards.
-	 */
+	// In most cases, we want to try to display ads in the right column from desktop upwards.
+	// For blogs, we want right aligned from wide upwards.
 	rightAlignFrom?: Breakpoint;
 }) => {
 	// Server-rendered placeholder elements for inline ad slots to be inserted into (below desktop breakpoint)
