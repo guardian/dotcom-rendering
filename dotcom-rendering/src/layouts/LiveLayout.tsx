@@ -361,12 +361,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						</Section>
 					</Hide>
 				)}
-				{isApps && (
-					<>
-						<Island priority="critical">
-							<AdPortals rightAlignFrom="wide" />
-						</Island>
-					</>
+				{renderAds && isApps && (
+					<Island priority="critical">
+						<AdPortals rightAlignFrom="wide" />
+					</Island>
 				)}
 				{footballMatchUrl ? (
 					<Section

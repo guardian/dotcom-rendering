@@ -453,12 +453,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			)}
 
 			<main data-layout="StandardLayout">
-				{isApps && (
-					<>
-						<Island priority="critical">
-							<AdPortals />
-						</Island>
-					</>
+				{renderAds && isApps && (
+					<Island priority="critical">
+						<AdPortals />
+					</Island>
 				)}
 				<Section
 					fullWidth={true}

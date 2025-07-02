@@ -437,12 +437,10 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 			)}
 
 			<main data-layout="ImmersiveLayout">
-				{isApps && (
-					<>
-						<Island priority="critical">
-							<AdPortals />
-						</Island>
-					</>
+				{renderAds && isApps && (
+					<Island priority="critical">
+						<AdPortals />
+					</Island>
 				)}
 				<Section
 					fullWidth={true}
