@@ -371,9 +371,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				lang={decideLanguage(article.lang)}
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
 			>
-				{isApps && (
+				{isApps && !article.shouldHideAds && (
 					<Island priority="critical">
-						<AdPortals shouldHideAds={article.shouldHideAds} />
+						<AdPortals />
 					</Island>
 				)}
 				<Section
