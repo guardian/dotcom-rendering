@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	headlineBold20,
@@ -32,89 +33,98 @@ export const FootballTablesPage = ({
 	renderAds,
 	guardianBaseUrl,
 	navAtom,
-}: Props) => (
-	<main
-		id="maincontent"
-		data-layout="FootballDataPageLayout"
-		css={css`
-			${grid.paddedContainer}
-			position: relative;
-			${from.tablet} {
-				&::before,
-				&::after {
-					content: '';
-					position: absolute;
-					border-left: 1px solid ${palette('--article-border')};
-					top: 0;
-					bottom: 0;
-				}
-
-				&::after {
-					right: 0;
-				}
-			}
-
-			padding-bottom: ${space[9]}px;
-		`}
-	>
-		<FootballNavAtom navAtom={navAtom} />
-		<h1
+}: Props) => {
+	const navAtomIsDefined = !isUndefined(navAtom);
+	return (
+		<main
+			id="maincontent"
+			data-layout="FootballDataPageLayout"
 			css={css`
-				${headlineBold20}
-				padding: ${space[2]}px 0 ${space[3]}px;
-				${grid.column.centre}
-				grid-row: ${navAtom !== undefined ? 2 : 1};
-				${from.leftCol} {
-					${grid.between('left-column-start', 'centre-column-end')}
-				}
-			`}
-		>
-			Football tables
-		</h1>
-		<div
-			css={css`
-				margin-top: ${space[3]}px;
-				margin-bottom: ${space[6]}px;
-				${grid.column.centre}
-				grid-row: ${navAtom !== undefined ? 3 : 2};
-			`}
-		>
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<FootballTablesCompetitionSelect
-					regions={regions}
-					pageId={pageId}
-					guardianBaseUrl={guardianBaseUrl}
-				/>
-			</Island>
-		</div>
-		<div
-			css={css`
-				${grid.column.centre}
-				grid-row: ${navAtom !== undefined ? 4 : 3};
-				${from.leftCol} {
-					${grid.between('left-column-start', 'centre-column-end')}
-				}
+				${grid.paddedContainer}
 				position: relative;
+				${from.tablet} {
+					&::before,
+					&::after {
+						content: '';
+						position: absolute;
+						border-left: 1px solid ${palette('--article-border')};
+						top: 0;
+						bottom: 0;
+					}
+
+					&::after {
+						right: 0;
+					}
+				}
+
+				padding-bottom: ${space[9]}px;
 			`}
 		>
-			<FootballTableList
-				competitions={competitions}
-				guardianBaseUrl={guardianBaseUrl}
-			/>
-		</div>
-		{renderAds && (
-			<div
+			<FootballNavAtom navAtom={navAtom} />
+			<h1
 				css={css`
-					${grid.column.right}
-					/** This allows the ad to grow beyond the third row content (up to line 5) */
-					grid-row: ${navAtom !== undefined ? '2 / 5' : '1 / 4'};
-					${until.desktop} {
-						display: none;
+					${headlineBold20}
+					padding: ${space[2]}px 0 ${space[3]}px;
+					${grid.column.centre}
+					grid-row: ${navAtomIsDefined ? 2 : 1};
+					${from.leftCol} {
+						${grid.between(
+							'left-column-start',
+							'centre-column-end',
+						)}
 					}
 				`}
 			>
-				<AdSlot position="football-right" />
+				Football tables
+			</h1>
+			<div
+				css={css`
+					margin-top: ${space[3]}px;
+					margin-bottom: ${space[6]}px;
+					${grid.column.centre}
+					grid-row: ${navAtomIsDefined ? 3 : 2};
+				`}
+			>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<FootballTablesCompetitionSelect
+						regions={regions}
+						pageId={pageId}
+						guardianBaseUrl={guardianBaseUrl}
+					/>
+				</Island>
 			</div>
-		)}
-	</main>
-);
+			<div
+				css={css`
+					${grid.column.centre}
+					grid-row: ${navAtomIsDefined ? 4 : 3};
+					${from.leftCol} {
+						${grid.between(
+							'left-column-start',
+							'centre-column-end',
+						)}
+					}
+					position: relative;
+				`}
+			>
+				<FootballTableList
+					competitions={competitions}
+					guardianBaseUrl={guardianBaseUrl}
+				/>
+			</div>
+			{renderAds && (
+				<div
+					css={css`
+						${grid.column.right}
+						/** This allows the ad to grow beyond the third row content (up to line 5) */
+					grid-row: ${navAtomIsDefined ? '2 / 5' : '1 / 4'};
+						${until.desktop} {
+							display: none;
+						}
+					`}
+				>
+					<AdSlot position="football-right" />
+				</div>
+			)}
+		</main>
+	);
+};

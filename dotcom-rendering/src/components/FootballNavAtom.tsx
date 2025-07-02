@@ -13,6 +13,8 @@ export const FootballNavAtom = ({
 			title="Navigation for the current football competition"
 			css={{
 				width: '100%',
+				// ['&'] part refers to the current element being styled.
+				// It allows to mix stringified styles (like CSS selectors) with object styles
 				['&']: css(grid.column.all),
 				gridRow: 1,
 			}}
