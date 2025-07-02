@@ -104,16 +104,11 @@ const debounceUpdateAds = libDebounce(updateAds, 100, { leading: true });
 
 export const AdPortals = ({
 	rightAlignFrom = 'desktop',
-	shouldHideAds,
 }: {
 	/** In most cases, we want to try to display ads in the right column from desktop upwards.
 	 * For blogs, we want right aligned from wide upwards.
 	 */
 	rightAlignFrom?: Breakpoint;
-	/**
-	 * If the page data has been set to hide ads, we should respect that in not rendering placeholders
-	 */
-	shouldHideAds?: boolean;
 }) => {
 	// Server-rendered placeholder elements for inline ad slots to be inserted into (below desktop breakpoint)
 	const [adPlaceholders, setAdPlaceholders] = useState<Element[]>([]);
@@ -143,7 +138,7 @@ export const AdPortals = ({
 		void getUserClient()
 			.isPremium()
 			.then((isPremium) => {
-				if (!isPremium && !shouldHideAds) {
+				if (!isPremium) {
 					setAdPlaceholders(
 						Array.from(
 							document.getElementsByClassName(adPlaceholderClass),
@@ -157,7 +152,7 @@ export const AdPortals = ({
 				}
 			})
 			.catch(() => console.error('Error setting up ads'));
-	}, [shouldHideAds]);
+	}, []);
 
 	/**
 	 * Insert Ads

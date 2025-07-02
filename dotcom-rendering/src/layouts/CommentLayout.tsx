@@ -347,9 +347,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 			)}
 
 			<main data-layout="CommentLayout">
-				{isApps && (
+				{isApps && !article.shouldHideAds && (
 					<Island priority="critical">
-						<AdPortals shouldHideAds={article.shouldHideAds} />
+						<AdPortals />
 					</Island>
 				)}
 				<Section
