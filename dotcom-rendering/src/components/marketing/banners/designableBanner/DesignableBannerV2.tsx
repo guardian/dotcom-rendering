@@ -318,16 +318,14 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 
 				<div css={styles.contentContainer}>
 					<div css={getHeaderContainerCss()}>
-						<div css={styles.headerOverrides}>
-							<DesignableBannerHeader
-								heading={content.mainContent.heading}
-								mobileHeading={content.mobileContent.heading}
-								headerSettings={templateSettings.headerSettings}
-								headlineSize={
-									design.fonts?.heading.size ?? 'medium'
-								}
-							/>
-						</div>
+						<DesignableBannerHeader
+							heading={content.mainContent.heading}
+							mobileHeading={content.mobileContent.heading}
+							headerSettings={templateSettings.headerSettings}
+							headlineSize={
+								design.fonts?.heading.size ?? 'medium'
+							}
+						/>
 					</div>
 					{showAboveArticleCount && (
 						<div css={styles.articleCountContainer}>
@@ -831,31 +829,6 @@ const styles = {
 	`,
 	articleCountContainer: css`
 		margin-bottom: ${space[3]}px;
-	`,
-	/* hacky change until we can rework the designable banner header with the correct styles */
-	headerOverrides: css`
-		/* stylelint-disable declaration-no-important */
-		h2 {
-			margin-top: ${space[1]}px !important;
-			margin-bottom: ${space[2]}px !important;
-			${until.phablet} {
-				font-size: 28px !important;
-				font-style: normal !important;
-				font-weight: 500 !important;
-			}
-
-			${until.leftCol} {
-				font-size: 34px !important;
-				font-style: normal !important;
-				font-weight: 500 !important;
-			}
-
-			${from.leftCol} {
-				font-size: 42px !important;
-				font-style: normal !important;
-				font-weight: 500 !important;
-			}
-		}
 	`,
 };
 

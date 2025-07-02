@@ -6,12 +6,13 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headlineBold24,
-	headlineBold28,
-	headlineBold34,
 	headlineMedium17,
+	headlineMedium28,
+	headlineMedium34,
+	headlineMedium42,
 	neutral,
 	space,
+	until,
 } from '@guardian/source/foundations';
 import type { Image } from '@guardian/support-dotcom-components/dist/shared/types';
 import {
@@ -73,16 +74,28 @@ const getStyles = (
 		`,
 		header: css`
 			h2 {
-				margin: ${copyTopMargin}px 0 ${space[3]}px;
+				margin: ${copyTopMargin}px 0 ${space[3]}px 0;
 				color: ${color};
 
-				${headlineSize === 'small' ? headlineMedium17 : headlineBold24}
+				margin-top: ${space[1]}px !important;
+				margin-bottom: ${space[2]}px !important;
+
 				${from.tablet} {
-					${headlineBold28}
 					margin-bottom: ${space[6]}px;
 				}
+
+				${until.phablet} {
+					${headlineSize === 'small'
+						? headlineMedium17
+						: headlineMedium28}
+				}
+
+				${until.leftCol} {
+					${headlineMedium34}
+				}
+
 				${from.leftCol} {
-					${headlineBold34}
+					${headlineMedium42}
 				}
 			}
 		`,
