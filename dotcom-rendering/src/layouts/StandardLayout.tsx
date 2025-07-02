@@ -455,7 +455,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			<main data-layout="StandardLayout">
 				{isApps && (
 					<Island priority="critical">
-						<AdPortals renderAds={renderAds} />
+						<AdPortals shouldHideAds={article.shouldHideAds} />
 					</Island>
 				)}
 				<Section

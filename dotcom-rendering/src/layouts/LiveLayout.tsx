@@ -365,7 +365,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					<Island priority="critical">
 						<AdPortals
 							rightAlignFrom="wide"
-							renderAds={renderAds}
+							shouldHideAds={article.shouldHideAds}
 						/>
 					</Island>
 				)}
