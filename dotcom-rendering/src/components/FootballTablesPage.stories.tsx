@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react/*';
-import { euro2025Atom, regions } from '../../fixtures/manual/footballData';
+import { regions } from '../../fixtures/manual/footballData';
 import { FootballTableList as TableListDefault } from './FootballTableList.stories';
 import { FootballTablesPage as FootballTablesPageComponent } from './FootballTablesPage';
 
@@ -19,12 +19,5 @@ export const FootballTablesPage = {
 		tableCompetitions: TableListDefault.args.competitions,
 		renderAds: true,
 		guardianBaseUrl: 'https://www.theguardian.com',
-	},
-} satisfies Story;
-
-export const FootballTablesPageWithAtom = {
-	args: {
-		...FootballTablesPage.args,
-		navAtom: euro2025Atom,
 	},
 } satisfies Story;
