@@ -347,12 +347,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 			)}
 
 			<main data-layout="CommentLayout">
-				{isApps && (
-					<>
-						<Island priority="critical">
-							<AdPortals />
-						</Island>
-					</>
+				{renderAds && isApps && (
+					<Island priority="critical">
+						<AdPortals />
+					</Island>
 				)}
 				<Section
 					fullWidth={true}
