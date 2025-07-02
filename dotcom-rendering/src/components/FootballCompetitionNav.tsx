@@ -61,7 +61,7 @@ export const FootballCompetitionNav = ({ selected, pageId }: Props) =>
 						href="https://www.theguardian.com/p/x27nz8"
 						css={smallLink}
 					>
-						Player's guide
+						Players guide
 					</a>
 				</li>
 				<li css={listItem}>
