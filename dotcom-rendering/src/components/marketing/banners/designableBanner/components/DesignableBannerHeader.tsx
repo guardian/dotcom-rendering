@@ -64,7 +64,7 @@ const getStyles = (
 	headlineSize: 'small' | 'medium' | 'large',
 ) => {
 	const color = headerSettings?.textColour ?? neutral[0];
-	const copyTopMargin = headerSettings?.headerImage ? space[6] : space[3];
+	const copyTopMargin = headerSettings?.headerImage ? space[6] : space[1];
 	const containerMargin = headerSettings?.headerImage ? `${space[6]}px` : '0';
 
 	return {
@@ -74,11 +74,8 @@ const getStyles = (
 		`,
 		header: css`
 			h2 {
-				margin: ${copyTopMargin}px 0 ${space[3]}px 0;
 				color: ${color};
-
-				margin-top: ${space[1]}px !important;
-				margin-bottom: ${space[2]}px !important;
+				margin: ${copyTopMargin}px 0 ${space[2]}px 0;
 
 				${from.tablet} {
 					margin-bottom: ${space[6]}px;
