@@ -10,7 +10,6 @@ import { AudioLayout } from './AudioLayout';
 import { CommentLayout } from './CommentLayout';
 import { CrosswordLayout } from './CrosswordLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
-import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
@@ -39,26 +38,13 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 	const notSupported = <pre>Not supported</pre>;
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
-			switch (format.design) {
-				case ArticleDesign.Interactive: {
-					return (
-						<FullPageInteractiveLayout
-							article={article}
-							format={format}
-							renderingTarget={renderingTarget}
-						/>
-					);
-				}
-				default: {
-					return (
-						<ImmersiveLayout
-							article={article}
-							format={format}
-							renderingTarget={renderingTarget}
-						/>
-					);
-				}
-			}
+			return (
+				<FullPageInteractiveLayout
+					article={article}
+					format={format}
+					renderingTarget={renderingTarget}
+				/>
+			);
 		}
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Showcase: {
@@ -164,28 +150,14 @@ const DecideLayoutWeb = ({
 }: WebProps) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
-			switch (format.design) {
-				case ArticleDesign.Interactive: {
-					return (
-						<FullPageInteractiveLayout
-							article={article}
-							NAV={NAV}
-							format={format}
-							renderingTarget={renderingTarget}
-						/>
-					);
-				}
-				default: {
-					return (
-						<ImmersiveLayout
-							article={article}
-							format={format}
-							NAV={NAV}
-							renderingTarget={renderingTarget}
-						/>
-					);
-				}
-			}
+			return (
+				<FullPageInteractiveLayout
+					article={article}
+					NAV={NAV}
+					format={format}
+					renderingTarget={renderingTarget}
+				/>
+			);
 		}
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Showcase: {
