@@ -4,7 +4,6 @@ import type {
 	FEFootballDataPage,
 	FERound,
 } from './feFootballDataPage';
-import type { FEFootballNavAtom } from './feFootballNavAtom';
 
 type FEStage = {
 	stageNumber: string;
@@ -96,5 +95,4 @@ export type FEFootballMatchListPage = FEFootballDataPage & {
 	nextPage?: string;
 	nextPageNoJs?: string;
 	previousPage?: string;
-	atom?: FEFootballNavAtom;
 };

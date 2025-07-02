@@ -119,25 +119,6 @@
                 },
                 "previousPage": {
                     "type": "string"
-                },
-                "atom": {
-                    "type": "object",
-                    "properties": {
-                        "html": {
-                            "type": "string"
-                        },
-                        "css": {
-                            "type": "string"
-                        },
-                        "mainJS": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "css",
-                        "html",
-                        "mainJS"
-                    ]
                 }
             },
             "required": [

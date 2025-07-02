@@ -4,7 +4,6 @@ import type {
 	FEFootballDataPage,
 	FERound,
 } from './feFootballDataPage';
-import type { FEFootballNavAtom } from './feFootballNavAtom';
 
 type FELeagueStats = {
 	played: number;
@@ -65,5 +64,4 @@ export type FEFootballTable = {
 export type FEFootballTablesPage = FEFootballDataPage & {
 	filters: Record<string, FEFootballCompetition[]>;
 	tables: FEFootballTable[];
-	atom?: FEFootballNavAtom;
 };
