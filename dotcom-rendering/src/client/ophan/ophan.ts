@@ -53,8 +53,14 @@ export const getOphan = async (
 		name,
 		el,
 		visibilityThreshold,
+		isTrackingVideo = false,
 	) => {
-		ophan.trackComponentAttention(name, el, visibilityThreshold);
+		ophan.trackComponentAttention(
+			name,
+			el,
+			visibilityThreshold,
+			isTrackingVideo,
+		);
 		log('dotcom', '🧿 Ophan tracking component attention:', name, {
 			el,
 			visibilityThreshold,
