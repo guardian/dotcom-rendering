@@ -5263,6 +5263,9 @@
                             "type": "string",
                             "const": "LoopVideo"
                         },
+                        "id": {
+                            "type": "string"
+                        },
                         "videoId": {
                             "type": "string"
                         },
@@ -5282,6 +5285,7 @@
                     "required": [
                         "duration",
                         "height",
+                        "id",
                         "type",
                         "videoId",
                         "width"

@@ -2,12 +2,14 @@ import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { useIsInView } from '../lib/useIsInView';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useConfig } from './ConfigContext';
 import type { PLAYER_STATES } from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
+import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
 const videoContainerStyles = css`
 	z-index: ${getZIndex('loop-video-container')};
@@ -16,6 +18,7 @@ const videoContainerStyles = css`
 
 type Props = {
 	src: string;
+	atomId: string;
 	videoId: string;
 	width: number;
 	height: number;
@@ -25,6 +28,7 @@ type Props = {
 
 export const LoopVideo = ({
 	src,
+	atomId,
 	videoId,
 	width,
 	height,
@@ -67,7 +71,25 @@ export const LoopVideo = ({
 	}, []);
 
 	/**
-	 * Autoplays the video when it comes into view.
+	 * Tracks the first time the video has been in view in Ophan
+	 */
+	useEffect(() => {
+		if (isInView && !hasBeenInView) {
+			void submitComponentEvent(
+				{
+					component: {
+						componentType: 'LOOP_VIDEO',
+						id: `gu-video-loop-${atomId}`,
+					},
+					action: 'VIEW',
+				},
+				'Web',
+			);
+		}
+	}, [isInView, hasBeenInView, atomId]);
+
+	/**
+	 * Autoplay the video when it comes into view.
 	 */
 	useEffect(() => {
 		if (!vidRef.current || playerState === 'PAUSED_BY_USER') return;
@@ -78,11 +100,23 @@ export const LoopVideo = ({
 			}
 
 			setPlayerState('PLAYING');
+
+			// check if the video has not been in view before tracking the play - this is so we only track the first play.
+			if (!hasBeenInView) {
+				ophanTrackerWeb(atomId, 'loop')('play');
+			}
 			setHasBeenInView(true);
 
 			void vidRef.current.play();
 		}
-	}, [isInView, isPlayable, playerState, prefersReducedMotion]);
+	}, [
+		isInView,
+		isPlayable,
+		playerState,
+		prefersReducedMotion,
+		hasBeenInView,
+		atomId,
+	]);
 
 	/**
 	 * Stops playback when the video is scrolled out of view, resumes playbacks
