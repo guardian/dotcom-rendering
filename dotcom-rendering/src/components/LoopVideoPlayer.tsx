@@ -3,8 +3,10 @@ import { space } from '@guardian/source/foundations';
 import type { IconProps } from '@guardian/source/react-components';
 import type { Dispatch, SetStateAction, SyntheticEvent } from 'react';
 import { forwardRef } from 'react';
+import { submitClickComponentEvent } from '../client/ophan/ophan';
 import { palette } from '../palette';
 import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
+import { useConfig } from './ConfigContext';
 import { LoopVideoProgressBar } from './LoopVideoProgressBar';
 
 const videoStyles = (width: number, height: number) => css`
@@ -113,6 +115,7 @@ export const LoopVideoPlayer = forwardRef(
 	) => {
 		// Assumes that the video is unique on the page.
 		const loopVideoId = `loop-video-${videoId}`;
+		const { renderingTarget } = useConfig();
 
 		return (
 			<>
@@ -161,14 +164,10 @@ export const LoopVideoPlayer = forwardRef(
 							<button
 								type="button"
 								onClick={(event) => {
-									if (
-										window.guardian?.ophan
-											?.trackClickComponentEvent
-									) {
-										window.guardian.ophan.trackClickComponentEvent(
-											event.currentTarget,
-										);
-									}
+									void submitClickComponentEvent(
+										event.currentTarget,
+										renderingTarget,
+									);
 									handleClick(event);
 								}}
 								css={playIconStyles}
@@ -187,14 +186,10 @@ export const LoopVideoPlayer = forwardRef(
 						<button
 							type="button"
 							onClick={(event) => {
-								if (
-									window.guardian?.ophan
-										?.trackClickComponentEvent
-								) {
-									window.guardian.ophan.trackClickComponentEvent(
-										event.currentTarget,
-									);
-								}
+								void submitClickComponentEvent(
+									event.currentTarget,
+									renderingTarget,
+								);
 								event.stopPropagation(); // Don't pause the video
 								setIsMuted(!isMuted);
 							}}
