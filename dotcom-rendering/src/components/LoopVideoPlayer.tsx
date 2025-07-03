@@ -160,7 +160,17 @@ export const LoopVideoPlayer = forwardRef(
 						{showPlayIcon && (
 							<button
 								type="button"
-								onClick={handleClick}
+								onClick={(event) => {
+									if (
+										window.guardian?.ophan
+											?.trackClickComponentEvent
+									) {
+										window.guardian.ophan.trackClickComponentEvent(
+											event.currentTarget,
+										);
+									}
+									handleClick(event);
+								}}
 								css={playIconStyles}
 								data-link-name="video-play-pause"
 							>
@@ -177,6 +187,14 @@ export const LoopVideoPlayer = forwardRef(
 						<button
 							type="button"
 							onClick={(event) => {
+								if (
+									window.guardian?.ophan
+										?.trackClickComponentEvent
+								) {
+									window.guardian.ophan.trackClickComponentEvent(
+										event.currentTarget,
+									);
+								}
 								event.stopPropagation(); // Don't pause the video
 								setIsMuted(!isMuted);
 							}}
