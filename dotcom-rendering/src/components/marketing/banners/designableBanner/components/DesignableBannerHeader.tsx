@@ -64,7 +64,7 @@ const getStyles = (
 	headlineSize: 'small' | 'medium' | 'large',
 ) => {
 	const color = headerSettings?.textColour ?? neutral[0];
-	const copyTopMargin = headerSettings?.headerImage ? space[2] : space[1];
+	const copyTopMargin = headerSettings?.headerImage ? space[1] : space[1];
 	const containerMargin = headerSettings?.headerImage ? `${space[6]}px` : '0';
 	const mobileHeadlineSize =
 		headlineSize === 'small'
