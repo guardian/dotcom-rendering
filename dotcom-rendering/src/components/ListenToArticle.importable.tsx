@@ -14,12 +14,20 @@ export const ListenToArticle = ({ articleId }: Props) => {
 
 	useEffect(() => {
 		if (isBridgetCompatible) {
-			void getListenToArticleClient()
-				.isAvailable(articleId)
-				.then(() => setShowButton(false));
-			void getListenToArticleClient()
-				.isPlaying(articleId)
-				.then(() => setShowButton(false));
+			Promise.all([
+				getListenToArticleClient().isAvailable(articleId),
+				getListenToArticleClient().isPlaying(articleId),
+			])
+				.then(([isAvailable, isPlaying]) =>
+					setShowButton(isAvailable && !isPlaying),
+				)
+				.catch((error) => {
+					console.error(
+						'Error fetching article audio status: ',
+						error,
+					);
+					setShowButton(false);
+				});
 		}
 	}, [articleId, isBridgetCompatible]);
 
