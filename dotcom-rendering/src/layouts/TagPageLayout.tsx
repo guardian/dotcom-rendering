@@ -1,6 +1,6 @@
 import { isUndefined, joinUrl } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment } from 'react';
 import { Accessibility } from '../components/Accessibility.importable';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import { Footer } from '../components/Footer';

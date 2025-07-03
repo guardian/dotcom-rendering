@@ -29,10 +29,8 @@ export const TagPageAI = ({ tag }: { tag?: string }) => {
 
 	return (
 		<div>
-			<h1>Tag Page AI Component</h1>
-			<p>This component fetches data from a local server.</p>
+			<h1>What's been going on in the past week?</h1>
 			<div style={paddingStyles}>
-				<h2>Fetched Data:</h2>
 				<pre
 					css={css`
 						white-space: pre-wrap;
