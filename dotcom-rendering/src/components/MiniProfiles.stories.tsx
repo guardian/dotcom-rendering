@@ -76,6 +76,7 @@ export const ThemeVariations = {
 		switches: {},
 		RenderArticleElement,
 		sectioned: false,
+		shouldHideAds: false,
 	},
 	decorators: [centreColumnDecorator],
 	parameters: {

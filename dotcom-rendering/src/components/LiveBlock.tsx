@@ -25,7 +25,7 @@ type Props = {
 	isPinnedPost: boolean;
 	pinnedPostId?: string;
 	editionId: EditionId;
-	shouldHideAds?: boolean;
+	shouldHideAds: boolean;
 };
 
 export const LiveBlock = ({

@@ -210,17 +210,15 @@ export const NewsletterSignupLayout = ({
 		.find((caption) => !!caption && isValidUrl(caption));
 	const showNewsletterPreview = Boolean(newsletterPreviewUrl);
 
-	/**
-	 * This property currently only applies to the header and merchandising slots
-	 */
 	const renderAds = canRenderAds(article);
+	const isWeb = renderingTarget === 'Web';
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
-				{renderAds && (
+				{isWeb && renderAds && (
 					<Stuck>
 						<Section
 							fullWidth={true}
@@ -255,7 +253,7 @@ export const NewsletterSignupLayout = ({
 				/>
 			</div>
 
-			{renderAds && hasSurveyAd && (
+			{isWeb && renderAds && hasSurveyAd && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 
@@ -421,6 +419,7 @@ export const NewsletterSignupLayout = ({
 									isSensitive={article.config.isSensitive}
 									hideCaption={true}
 									editionId={article.editionId}
+									shouldHideAds={article.shouldHideAds}
 								/>
 							</div>
 						</Column>

@@ -23,7 +23,7 @@ type Props = {
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	isLiveUpdate?: boolean;
-	shouldHideAds?: boolean;
+	shouldHideAds: boolean;
 };
 /**
  * On liveblogs we insert two sets of ad slots into the page: one set for small
@@ -65,16 +65,17 @@ export const LiveBlogBlocksAndAdverts = ({
 				isLiveUpdate={isLiveUpdate}
 				abTests={abTests}
 				switches={switches}
-				isAdFreeUser={!isAdFreeUser}
+				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
 				isPinnedPost={false}
 				pinnedPostId={pinnedPost?.id}
 				editionId={editionId}
+				shouldHideAds={shouldHideAds}
 			/>
 		);
 	};
 
-	if (isAdFreeUser || shouldHideAds) {
+	if (isAdFreeUser || isSensitive || shouldHideAds) {
 		return (
 			<>
 				{blocks.map((block) => (

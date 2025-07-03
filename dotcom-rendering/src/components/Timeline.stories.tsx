@@ -89,6 +89,7 @@ const ArticleElementComponent = getNestedArticleElement({
 	pageId: 'testID',
 	switches: {},
 	webTitle: 'Storybook page',
+	shouldHideAds: false,
 });
 
 export const FlatWithNoTitles = {

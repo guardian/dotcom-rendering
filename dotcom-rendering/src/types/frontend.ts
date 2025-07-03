@@ -24,6 +24,7 @@ export interface FEBlocksRequest {
 	switches: { [key: string]: boolean };
 	abTests?: ServerSideTests;
 	keywordIds: string;
+	shouldHideAds: boolean;
 }
 
 /**
