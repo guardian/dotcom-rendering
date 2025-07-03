@@ -48,6 +48,7 @@ export const handleAppsBlocks: RequestHandler = ({ body }, res) => {
 		abTests,
 		switches,
 		keywordIds,
+		shouldHideAds,
 	} =
 		// The content if body is not checked
 		body as FEBlocksRequest;
@@ -76,6 +77,7 @@ export const handleAppsBlocks: RequestHandler = ({ body }, res) => {
 		switches,
 		abTests,
 		keywordIds,
+		shouldHideAds,
 	});
 
 	res.status(200).send(html);

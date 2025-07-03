@@ -25,6 +25,7 @@ interface Props {
 	hideCaption?: boolean;
 	starRating?: StarRating;
 	RenderArticleElement: ArticleElementRenderer;
+	shouldHideAds: boolean;
 }
 
 const headingLineStyles = css`
@@ -49,6 +50,7 @@ export const QAndAExplainer = ({
 	hideCaption,
 	starRating,
 	RenderArticleElement,
+	shouldHideAds,
 }: Props) => {
 	return (
 		<div data-spacefinder-role="nested">
@@ -81,6 +83,7 @@ export const QAndAExplainer = ({
 					starRating={starRating}
 					forceDropCap="off"
 					isListElement={true}
+					shouldHideAds={shouldHideAds}
 				/>
 			))}
 		</div>

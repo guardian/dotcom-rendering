@@ -26,6 +26,7 @@ interface MiniProfilesProps {
 	 */
 	isLastElement: boolean;
 	sectioned: boolean;
+	shouldHideAds: boolean;
 }
 
 const separatorStyles = css`
@@ -51,6 +52,7 @@ export const MiniProfiles = ({
 	RenderArticleElement,
 	isLastElement,
 	sectioned,
+	shouldHideAds,
 }: MiniProfilesProps) => {
 	const displaySeparator = !isLastElement && !sectioned;
 
@@ -84,6 +86,7 @@ export const MiniProfiles = ({
 							starRating={starRating}
 							forceDropCap="off"
 							isListElement={true}
+							shouldHideAds={shouldHideAds}
 						/>
 					))}
 				</MiniProfileComponent>

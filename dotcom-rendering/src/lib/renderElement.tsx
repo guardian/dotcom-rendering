@@ -93,7 +93,7 @@ type Props = {
 	totalElements?: number;
 	isListElement?: boolean;
 	isSectionedMiniProfilesArticle?: boolean;
-	shouldHideAds?: boolean;
+	shouldHideAds: boolean;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -160,6 +160,8 @@ export const renderElement = ({
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
 
+	const renderAds = !isAdFreeUser && !isSensitive && !shouldHideAds;
+
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return (
@@ -172,7 +174,7 @@ export const renderElement = ({
 						duration={element.duration}
 						contentIsNotSensitive={!isSensitive}
 						aCastisEnabled={!!switches.acast}
-						readerCanBeShownAds={!isAdFreeUser}
+						readerCanBeShownAds={renderAds}
 					/>
 				</Island>
 			);
@@ -450,6 +452,7 @@ export const renderElement = ({
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
 					isLastElement={index === totalElements - 1}
+					shouldHideAds={shouldHideAds}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
@@ -493,6 +496,7 @@ export const renderElement = ({
 					RenderArticleElement={RenderArticleElement}
 					isLastElement={index === totalElements - 1}
 					sectioned={!!isSectionedMiniProfilesArticle}
+					shouldHideAds={shouldHideAds}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MultiBylinesBlockElement':
@@ -509,6 +513,7 @@ export const renderElement = ({
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
 					isLastElement={index === totalElements - 1}
+					shouldHideAds={shouldHideAds}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
@@ -533,7 +538,7 @@ export const renderElement = ({
 			if (isListElement || isTimeline) return null;
 			return <EmailSignUpWrapper {...emailSignUpProps} />;
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
-			return !shouldHideAds && <AdPlaceholder />;
+			return renderAds && <AdPlaceholder />;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (
 				<NumberedTitleBlockComponent
@@ -589,6 +594,7 @@ export const renderElement = ({
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
 					isLastElement={index === totalElements - 1}
+					shouldHideAds={shouldHideAds}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
@@ -873,7 +879,7 @@ export const renderElement = ({
 				<Island priority="critical" defer={{ until: 'visible' }}>
 					<CrosswordComponent
 						data={element.crossword}
-						canRenderAds={!isAdFreeUser && !isSensitive}
+						canRenderAds={renderAds}
 					/>
 				</Island>
 			);
