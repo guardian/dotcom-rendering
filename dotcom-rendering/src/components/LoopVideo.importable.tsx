@@ -104,6 +104,12 @@ export const LoopVideo = ({
 			customPlayAudioEventName,
 			handleCustomPlayAudioEvent,
 		);
+
+		return () =>
+			document.removeEventListener(
+				customPlayAudioEventName,
+				handleCustomPlayAudioEvent,
+			);
 	}, [uniqueId]);
 
 	/**
