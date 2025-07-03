@@ -290,6 +290,7 @@ const fetchProxyGetTreatments = async (
 	mvtId: number,
 	should_show_legacy_gate_tmp: boolean,
 	hasConsented: boolean,
+	shouldNotServeNonDismissible: boolean,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const articleIdentifier = `www.theguardian.com/${pageId}`;
@@ -312,6 +313,7 @@ const fetchProxyGetTreatments = async (
 		mvtId,
 		should_show_legacy_gate_tmp,
 		hasConsented,
+		shouldNotServeNonDismissible,
 	};
 	const params = {
 		method: 'POST',
@@ -363,6 +365,8 @@ const buildAuxiaGateDisplayData = async (
 		);
 	}
 
+	const shouldNotServeNonDismissible = false; // todo get the value.
+
 	const response = await fetchProxyGetTreatments(
 		contributionsServiceUrl,
 		pageId,
@@ -378,6 +382,7 @@ const buildAuxiaGateDisplayData = async (
 		readerPersonalData.mvtId,
 		should_show_legacy_gate_tmp,
 		readerPersonalData.hasConsented,
+		shouldNotServeNonDismissible,
 	);
 
 	if (response.status && response.data) {
