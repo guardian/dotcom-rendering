@@ -67,10 +67,15 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 
 	console.log('tagPage', tagPage.webURL);
 
-	const isTestTagPage =
-		tagPage.webURL === 'https://www.theguardian.com/tone/minutebyminute' &&
-		tagPage.config.isDev;
-	console.log('isTestTagePage', isTestTagPage);
+	// const isTestTagPage =
+	// 	tagPage.webURL === 'https://www.theguardian.com/sport/tennis' &&
+	// 	tagPage.config.isDev;
+	// console.log('isTestTagePage', isTestTagPage);
+	const isTestTagPage = true;
+
+	console.log('tagpage', tagPage);
+
+	const tag = tagPage.pageId;
 
 	return (
 		<>
@@ -118,6 +123,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					description={tagPage.header.description}
 					image={tagPage.header.image}
 					isTestTagPage={isTestTagPage}
+					tag={tag}
 				/>
 
 				{tagPage.groupedTrails.map((groupedTrails, index) => {

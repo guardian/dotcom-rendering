@@ -22,6 +22,7 @@ type Props = {
 	description?: string;
 	image?: string;
 	isTestTagPage?: boolean;
+	tag?: string;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -282,6 +283,7 @@ export const TagPageHeader = ({
 	description,
 	image,
 	isTestTagPage,
+	tag,
 }: Props) => {
 	const descriptionFragment = description
 		? parseHtml(description)
@@ -312,7 +314,7 @@ export const TagPageHeader = ({
 			{isTestTagPage && (
 				<div css={[sectionContent, paragraphStyle, paddings]}>
 					<Island priority="feature" defer={{ until: 'visible' }}>
-						<TagPageAI />
+						<TagPageAI tag={tag} />
 					</Island>
 				</div>
 			)}

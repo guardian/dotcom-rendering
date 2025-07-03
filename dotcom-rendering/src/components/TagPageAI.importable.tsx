@@ -5,13 +5,14 @@ import { css } from '@emotion/react';
 const paddingStyles = css`
 	padding-bottom: 20px;
 	padding-top: 10px;
+	margin-right: -400px;
 `;
 
-export const TagPageAI = () => {
+export const TagPageAI = ({ tag }: { tag?: string }) => {
 	const [localData, setLocalData] = useState('Loading data...');
 
 	useEffect(() => {
-		fetch('http://localhost:9000/test')
+		fetch(`http://localhost:9000/test?tag=${tag}`)
 			.then((response) => response.text())
 			.then((data) => {
 				console.log('Response from localhost:9000:', data);
@@ -32,7 +33,15 @@ export const TagPageAI = () => {
 			<p>This component fetches data from a local server.</p>
 			<div style={paddingStyles}>
 				<h2>Fetched Data:</h2>
-				<pre>{localData}</pre>
+				<pre
+					css={css`
+						white-space: pre-wrap;
+						word-break: break-word;
+						padding-bottom: 20px;
+					`}
+				>
+					{localData}
+				</pre>
 			</div>
 		</div>
 	);
