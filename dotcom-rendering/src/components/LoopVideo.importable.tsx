@@ -222,6 +222,7 @@ export const LoopVideo = ({
 			ref={setNode}
 			css={videoContainerStyles}
 			className="loop-video-container"
+			data-component="looping-video"
 		>
 			<LoopVideoPlayer
 				src={src}
