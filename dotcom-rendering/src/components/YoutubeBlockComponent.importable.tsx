@@ -184,7 +184,7 @@ export const YoutubeBlockComponent = ({
 				duration={duration}
 				eventEmitters={
 					renderingTarget === 'Web'
-						? [ophanTrackerWeb(id)]
+						? [ophanTrackerWeb(id, 'youtube')]
 						: [ophanTrackerApps(id)]
 				}
 				format={format}
