@@ -328,6 +328,22 @@ const fetchProxyGetTreatments = async (
 	return Promise.resolve(response);
 };
 
+const decideShouldNotServeNonDismissible = (): boolean => {
+	// Return a boolean indicating whether or not we accept non dismissible gates for this call.
+	// If the answer is `false` this doesn't decide whether the gate should be displayed or not,
+	// it only means that if a gate is returned, then it must be non dismissible.
+
+	// Now the question is how do we decide the answer ?
+	// We return false if the following query parameter is present in the url:
+	// utm_source=newsshowcase
+
+	// This may be extended in the future.
+
+	const value = new URLSearchParams(window.location.search).get('utm_source'); // type: string | null
+
+	return value === 'newsshowcase';
+};
+
 const buildAuxiaGateDisplayData = async (
 	contributionsServiceUrl: string,
 	pageId: string,
@@ -365,7 +381,7 @@ const buildAuxiaGateDisplayData = async (
 		);
 	}
 
-	const shouldNotServeNonDismissible = false; // todo get the value.
+	const shouldNotServeNonDismissible = decideShouldNotServeNonDismissible();
 
 	const response = await fetchProxyGetTreatments(
 		contributionsServiceUrl,
