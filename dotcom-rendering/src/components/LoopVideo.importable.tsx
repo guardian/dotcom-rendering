@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
+import { getOphan } from '../client/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { useIsInView } from '../lib/useIsInView';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
@@ -9,6 +10,7 @@ import { useConfig } from './ConfigContext';
 import type { PLAYER_STATES } from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
 
+const VISIBILITY_THRESHOLD = 0.5;
 const videoContainerStyles = css`
 	z-index: ${getZIndex('loop-video-container')};
 	position: relative;
@@ -68,8 +70,22 @@ export const LoopVideo = ({
 
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
-		threshold: 0.5,
+		threshold: VISIBILITY_THRESHOLD,
 	});
+
+	useEffect(() => {
+		const video = vidRef.current;
+		if (!video) return;
+
+		void getOphan('Web').then((ophan) => {
+			ophan.trackComponentAttention(
+				'looping-video',
+				video,
+				VISIBILITY_THRESHOLD,
+				true,
+			);
+		});
+	}, []);
 
 	/**
 	 * Setup.
@@ -170,6 +186,11 @@ export const LoopVideo = ({
 
 		setPlayerState('PLAYING');
 		setHasBeenInView(true);
+
+		document.dispatchEvent(
+			new CustomEvent('videoPlaying', { bubbles: true }),
+		);
+
 		void vidRef.current.play();
 	};
 
@@ -177,6 +198,10 @@ export const LoopVideo = ({
 		if (!vidRef.current) return;
 
 		setPlayerState('PAUSED_BY_USER');
+		document.dispatchEvent(
+			new CustomEvent('videoPause', { bubbles: true }),
+		);
+
 		void vidRef.current.pause();
 	};
 
