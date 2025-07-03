@@ -80,6 +80,14 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 	}, []);
 };
 
+type ImmersiveCardLayoutProps = {
+	card: DCRFrontCard;
+	containerPalette?: DCRContainerPalette;
+	absoluteServerTimes: boolean;
+	imageLoading: Loading;
+	collectionId: number;
+};
+
 /**
  * ImmersiveCardLayout is a special case of the card layout that is used for cards with the isImmersive property.
  * It is a single feature card that takes up the full width of the container on all breakpoints.
@@ -92,17 +100,11 @@ const ImmersiveCardLayout = ({
 	absoluteServerTimes,
 	imageLoading,
 	collectionId,
-}: {
-	card: DCRFrontCard;
-	containerPalette?: DCRContainerPalette;
-	absoluteServerTimes: boolean;
-	imageLoading: Loading;
-	collectionId: number;
-}) => {
+}: ImmersiveCardLayoutProps) => {
 	const isLoopingVideo = card.mainMedia?.type === 'LoopVideo';
 
 	return (
-		<UL padBottom={true} key={card.url}>
+		<UL padBottom={true}>
 			<LI padSides={true}>
 				<FeatureCard
 					collectionId={collectionId}
@@ -229,6 +231,18 @@ const decideSplashCardProperties = (
 	}
 };
 
+type SplashCardLayoutProps = {
+	cards: DCRFrontCard[];
+	imageLoading: Loading;
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+	absoluteServerTimes: boolean;
+	aspectRatio: AspectRatio;
+	isLastRow: boolean;
+	containerLevel: DCRContainerLevel;
+	collectionId: number;
+};
+
 const SplashCardLayout = ({
 	cards,
 	containerPalette,
@@ -239,17 +253,7 @@ const SplashCardLayout = ({
 	isLastRow,
 	containerLevel,
 	collectionId,
-}: {
-	cards: DCRFrontCard[];
-	imageLoading: Loading;
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-	absoluteServerTimes: boolean;
-	aspectRatio: AspectRatio;
-	isLastRow: boolean;
-	containerLevel: DCRContainerLevel;
-	collectionId: number;
-}) => {
+}: SplashCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
 
@@ -380,6 +384,19 @@ const decideCardProperties = (
 	}
 };
 
+type FullWidthCardLayoutProps = {
+	cards: DCRFrontCard[];
+	imageLoading: Loading;
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+	absoluteServerTimes: boolean;
+	aspectRatio: AspectRatio;
+	isFirstRow: boolean;
+	isLastRow: boolean;
+	containerLevel: DCRContainerLevel;
+	collectionId: number;
+};
+
 const FullWidthCardLayout = ({
 	cards,
 	containerPalette,
@@ -391,18 +408,7 @@ const FullWidthCardLayout = ({
 	isLastRow,
 	containerLevel,
 	collectionId,
-}: {
-	cards: DCRFrontCard[];
-	imageLoading: Loading;
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-	absoluteServerTimes: boolean;
-	aspectRatio: AspectRatio;
-	isFirstRow: boolean;
-	isLastRow: boolean;
-	containerLevel: DCRContainerLevel;
-	collectionId: number;
-}) => {
+}: FullWidthCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
 
@@ -436,7 +442,6 @@ const FullWidthCardLayout = ({
 			showTopBar={!isFirstRow}
 			padBottom={!isLastRow}
 			hasLargeSpacing={!isLastRow}
-			key={card.url}
 		>
 			<LI
 				padSides={true}
@@ -481,6 +486,19 @@ const FullWidthCardLayout = ({
 	);
 };
 
+type HalfWidthCardLayoutProps = {
+	cards: DCRFrontCard[];
+	imageLoading: Loading;
+	isFirstRow?: boolean;
+	isFirstStandardRow?: boolean;
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+	absoluteServerTimes: boolean;
+	aspectRatio: AspectRatio;
+	isLastRow: boolean;
+	containerLevel: DCRContainerLevel;
+};
+
 const HalfWidthCardLayout = ({
 	cards,
 	containerPalette,
@@ -490,22 +508,9 @@ const HalfWidthCardLayout = ({
 	isFirstRow,
 	isFirstStandardRow,
 	aspectRatio,
-	row,
 	isLastRow,
 	containerLevel,
-}: {
-	cards: DCRFrontCard[];
-	imageLoading: Loading;
-	isFirstRow?: boolean;
-	isFirstStandardRow?: boolean;
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-	absoluteServerTimes: boolean;
-	aspectRatio: AspectRatio;
-	row: number;
-	isLastRow: boolean;
-	containerLevel: DCRContainerLevel;
-}) => {
+}: HalfWidthCardLayoutProps) => {
 	if (cards.length === 0) return null;
 
 	return (
@@ -516,7 +521,6 @@ const HalfWidthCardLayout = ({
 			showTopBar={!isFirstRow}
 			/** We use one full top bar for the first row and use a split one for subsequent rows */
 			splitTopBar={!isFirstStandardRow}
-			key={row}
 		>
 			{cards.map((card, cardIndex) => {
 				return (
@@ -577,8 +581,16 @@ export const FlexibleGeneral = ({
 	containerLevel = 'Primary',
 	collectionId,
 }: Props) => {
-	const splash = [...groupedTrails.splash].slice(0, 1);
-	const cards = [...groupedTrails.standard].slice(0, 19);
+	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
+		...snap,
+		uniqueId: `collection-${collectionId}-splash-0`,
+	}));
+	const cards = [...groupedTrails.standard]
+		.slice(0, 19)
+		.map((standard, i) => ({
+			...standard,
+			uniqueId: `collection-${collectionId}-standard-${i}`,
+		}));
 	const groupedCards = decideCardPositions(cards);
 
 	return (
@@ -612,6 +624,7 @@ export const FlexibleGeneral = ({
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								collectionId={collectionId}
+								key={row.cards[0]?.uniqueId}
 							/>
 						);
 
@@ -628,9 +641,9 @@ export const FlexibleGeneral = ({
 								isFirstRow={!splash.length && i === 0}
 								isFirstStandardRow={i === 0}
 								aspectRatio={aspectRatio}
-								row={i + 1}
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
+								key={row.cards[0]?.uniqueId}
 							/>
 						);
 				}

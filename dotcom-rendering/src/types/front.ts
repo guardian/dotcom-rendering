@@ -102,6 +102,7 @@ export type DCRFrontCard = {
 	branding?: Branding;
 	slideshowImages?: DCRSlideshowImage[];
 	showVideo?: boolean;
+	uniqueId?: string;
 };
 
 export type DCRSlideshowImage = {

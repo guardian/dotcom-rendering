@@ -64,7 +64,6 @@ export const DecideContainer = ({
 	collectionId,
 	containerLevel,
 }: Props) => {
-	// If you add a new container type which contains an MPU, you must also add it to
 	switch (containerType) {
 		case 'dynamic/fast':
 			return (
@@ -255,6 +254,7 @@ export const DecideContainer = ({
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
+					collectionId={collectionId}
 				/>
 			);
 		case 'flexible/general':
