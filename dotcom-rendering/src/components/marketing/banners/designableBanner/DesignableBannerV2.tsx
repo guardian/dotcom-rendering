@@ -401,7 +401,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					<DesignableBannerCloseButton
 						onCloseClick={onCloseClick}
 						settings={templateSettings.closeButtonSettings}
-						styleOverides={styles.closeButtonOverrides}
 					/>
 				</div>
 
@@ -545,10 +544,6 @@ const styles = {
 			opacity: 0.2;
 			margin: ${space[6]}px ${space[2]}px 0 ${space[2]}px;
 		}
-	`,
-	closeButtonOverrides: css`
-		/* Layout changes go in closeButtonContainer below. 
-		changes for styles go in here. */
 	`,
 	closeButtonContainer: css`
 		/* Layout changes only here */
