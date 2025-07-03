@@ -26,17 +26,19 @@ const getAppsMediaEvent = (
 	}
 };
 
-const ophanTrackerWeb = (id: string) => {
+type VideoType = 'youtube' | 'loop';
+
+const ophanTrackerWeb = (id: string, videoType: VideoType) => {
 	return (trackingEvent: VideoEventKey): void => {
 		void getOphan('Web').then((ophan) => {
 			const event = {
 				video: {
-					id: `gu-video-youtube-${id}`,
+					id: `gu-video-${videoType}-${id}`,
 					eventType: `video:content:${trackingEvent}`,
 				} satisfies VideoEvent,
 			} satisfies EventPayload;
 			log('dotcom', {
-				from: 'YoutubeAtom event emitter web',
+				from: `${videoType}Atom event emitter web`,
 				id,
 				event,
 			});
