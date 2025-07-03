@@ -42,7 +42,7 @@ export const FootballCompetitionNav = ({ selected, pageId }: Props) =>
 					style={selected === 'tables' ? selectedStyles : undefined}
 				>
 					<a
-						href="https://www.theguardian.com/football/women-s-euro-2025/table"
+						href="https://www.theguardian.com/football/women-s-euro-2025/overview"
 						css={smallLink}
 					>
 						Tables
