@@ -9,6 +9,7 @@ import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useConfig } from './ConfigContext';
 import type { PLAYER_STATES } from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
+import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
 const videoContainerStyles = css`
 	z-index: ${getZIndex('loop-video-container')};
@@ -78,7 +79,7 @@ export const LoopVideo = ({
 				{
 					component: {
 						componentType: 'LOOP_VIDEO',
-						id: atomId,
+						id: `gu-video-loop-${atomId}`,
 					},
 					action: 'VIEW',
 				},
@@ -99,6 +100,9 @@ export const LoopVideo = ({
 			}
 
 			setPlayerState('PLAYING');
+			if (!hasBeenInView) {
+				ophanTrackerWeb(atomId, 'loop')('play');
+			}
 			setHasBeenInView(true);
 
 			void vidRef.current.play();
