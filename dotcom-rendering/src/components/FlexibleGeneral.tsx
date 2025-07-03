@@ -525,9 +525,9 @@ const HalfWidthCardLayout = ({
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI
+						key={card.url}
 						stretch={false}
 						percentage="50%"
-						key={card.url}
 						padSides={true}
 						showDivider={cardIndex > 0}
 						verticalDividerColour={palette(
@@ -614,6 +614,7 @@ export const FlexibleGeneral = ({
 					case 'oneCardFullWidth':
 						return (
 							<FullWidthCardLayout
+								key={row.cards[0]?.uniqueId}
 								cards={row.cards}
 								containerPalette={containerPalette}
 								showAge={showAge}
@@ -624,7 +625,6 @@ export const FlexibleGeneral = ({
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								collectionId={collectionId}
-								key={row.cards[0]?.uniqueId}
 							/>
 						);
 
@@ -633,6 +633,7 @@ export const FlexibleGeneral = ({
 					default:
 						return (
 							<HalfWidthCardLayout
+								key={row.cards[0]?.uniqueId}
 								cards={row.cards}
 								containerPalette={containerPalette}
 								showAge={showAge}
@@ -643,7 +644,6 @@ export const FlexibleGeneral = ({
 								aspectRatio={aspectRatio}
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
-								key={row.cards[0]?.uniqueId}
 							/>
 						);
 				}
