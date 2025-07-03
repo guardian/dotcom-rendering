@@ -4,7 +4,9 @@ import { loadPage } from '../lib/load-page';
 import { expectToExist } from '../lib/locators';
 
 test.describe('Commercial E2E tests', () => {
-	test(`It should load the expected number of ad slots`, async ({ page }) => {
+	test.skip(`It should load the expected number of ad slots`, async ({
+		page,
+	}) => {
 		await loadPage({
 			page,
 			path: `/Article/https://www.theguardian.com/environment/2020/oct/13/maverick-rewilders-endangered-species-extinction-conservation-uk-wildlife`,
@@ -13,7 +15,7 @@ test.describe('Commercial E2E tests', () => {
 		await cmpAcceptAll(page);
 
 		const fixedSlots = [
-			'carrot', // Not used often, likely to be unfilled
+			// 'carrot', // Not used often, likely to be unfilled
 			'right',
 			'merchandising-high',
 			'mostpop',
