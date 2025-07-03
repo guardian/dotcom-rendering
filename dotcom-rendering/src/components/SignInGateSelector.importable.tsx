@@ -290,7 +290,7 @@ const fetchProxyGetTreatments = async (
 	mvtId: number,
 	should_show_legacy_gate_tmp: boolean,
 	hasConsented: boolean,
-	shouldNotServeNonDismissible: boolean,
+	shouldNotServeMandatory: boolean,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const articleIdentifier = `www.theguardian.com/${pageId}`;
@@ -313,7 +313,7 @@ const fetchProxyGetTreatments = async (
 		mvtId,
 		should_show_legacy_gate_tmp,
 		hasConsented,
-		shouldNotServeNonDismissible,
+		shouldNotServeMandatory,
 	};
 	const params = {
 		method: 'POST',
@@ -326,6 +326,23 @@ const fetchProxyGetTreatments = async (
 		(await response_raw.json()) as AuxiaProxyGetTreatmentsResponse;
 
 	return Promise.resolve(response);
+};
+
+const decideShouldNotServeMandatory = (): boolean => {
+	// Return a boolean indicating whether or not we accept mandatory gates for this call.
+	// If the answer is `false` this doesn't decide whether the gate should be displayed or not,
+	// it only means that if a gate is returned, then it must be mandatory.
+
+	// Now the question is how do we decide the answer ?
+	// We return false if the following query parameter is present in the url:
+	// utm_source=newsshowcase
+
+	// This may be extended in the future.
+
+	const params = new URLSearchParams(window.location.search);
+	const value: string | null = params.get('utm_source');
+
+	return value === 'newsshowcase';
 };
 
 const buildAuxiaGateDisplayData = async (
@@ -365,7 +382,7 @@ const buildAuxiaGateDisplayData = async (
 		);
 	}
 
-	const shouldNotServeNonDismissible = false; // todo get the value.
+	const shouldNotServeMandatory = decideShouldNotServeMandatory();
 
 	const response = await fetchProxyGetTreatments(
 		contributionsServiceUrl,
@@ -382,7 +399,7 @@ const buildAuxiaGateDisplayData = async (
 		readerPersonalData.mvtId,
 		should_show_legacy_gate_tmp,
 		readerPersonalData.hasConsented,
-		shouldNotServeNonDismissible,
+		shouldNotServeMandatory,
 	);
 
 	if (response.status && response.data) {
