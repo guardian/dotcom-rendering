@@ -8,27 +8,28 @@ type Props = {
 	articleId: string;
 };
 export const ListenToArticle = ({ articleId }: Props) => {
-	const [isPlaying, setIsPlaying] = useState<boolean>(false);
-	const [showButton, setShowButton] = useState<boolean>(true);
+	const [showButton, setShowButton] = useState<boolean>(false);
 
 	const isBridgetCompatible = useIsBridgetCompatible('8.5.1');
 
 	useEffect(() => {
-		isBridgetCompatible &&
+		if (isBridgetCompatible) {
 			void getListenToArticleClient()
 				.isAvailable(articleId)
-				.then(setShowButton);
-
-		void getListenToArticleClient().isPlaying(articleId).then(setIsPlaying);
+				.then(() => setShowButton(false));
+			void getListenToArticleClient()
+				.isPlaying(articleId)
+				.then(() => setShowButton(false));
+		}
 	}, [articleId, isBridgetCompatible]);
 
 	const listenToArticleHandler = () => {
 		void getListenToArticleClient()
 			.play(articleId)
 			.then((success: boolean) => {
-				success && setIsPlaying(true);
+				success && setShowButton(false);
 			})
-			.catch((error: any) => {
+			.catch((error: Error) => {
 				window.guardian.modules.sentry.reportError(
 					error,
 					'bridget-getListenToArticleClient-play-error',
@@ -41,8 +42,7 @@ export const ListenToArticle = ({ articleId }: Props) => {
 			});
 	};
 	return (
-		showButton &&
-		!isPlaying && (
+		showButton && (
 			<ListenToArticleButton onClickHandler={listenToArticleHandler} />
 		)
 	);
