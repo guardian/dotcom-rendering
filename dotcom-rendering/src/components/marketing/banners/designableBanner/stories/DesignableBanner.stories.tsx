@@ -5,7 +5,6 @@ import type {
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
-import { DesignableBannerUnvalidatedV2 as DesignableBannerV2 } from '../../../banners/designableBanner/DesignableBannerV2';
 import { choiceCardsSettings } from '../../../lib/storybook';
 import {
 	contentNoHeading,
@@ -15,12 +14,13 @@ import {
 	stringToHexColour,
 	tracking,
 } from '../../utils/storybook';
+import { DesignableBannerUnvalidated as DesignableBanner } from '../DesignableBanner';
 
 type WithJsonProps<T> = T & { json?: string };
-type Props = WithJsonProps<React.ComponentProps<typeof DesignableBannerV2>>;
+type Props = WithJsonProps<React.ComponentProps<typeof DesignableBanner>>;
 const meta: Meta<Props> = {
-	component: DesignableBannerV2,
-	title: 'Components/marketing/DesignableBannerV2',
+	component: DesignableBanner,
+	title: 'Components/marketing/DesignableBanner',
 	args: {
 		...props,
 		json: '',
@@ -32,7 +32,7 @@ const meta: Meta<Props> = {
 
 		return (
 			<div>
-				<DesignableBannerV2 {...args} {...jsonProps} />
+				<DesignableBanner {...args} {...jsonProps} />
 			</div>
 		);
 	},
@@ -41,7 +41,7 @@ export default meta;
 
 type Story = StoryObj<Props>;
 export const Default: Story = {
-	name: 'Basic DesignableBannerV2',
+	name: 'Basic DesignableBanner',
 };
 
 const regularChoiceCardAmounts: SelectedAmountsVariant = {
@@ -194,7 +194,7 @@ export const MainImage: Story = {
 };
 
 export const DesignThreeAnimatedHeaderImage: Story = {
-	name: 'DesignableBanner with animated header image',
+	name: 'With animated header image',
 	args: {
 		...meta.args,
 		content: contentNoHeading,
