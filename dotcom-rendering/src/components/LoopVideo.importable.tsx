@@ -100,6 +100,8 @@ export const LoopVideo = ({
 			}
 
 			setPlayerState('PLAYING');
+
+			// check if the video has not been in view before tracking the play - this is so we only track the first play.
 			if (!hasBeenInView) {
 				ophanTrackerWeb(atomId, 'loop')('play');
 			}
@@ -107,7 +109,14 @@ export const LoopVideo = ({
 
 			void vidRef.current.play();
 		}
-	}, [isInView, isPlayable, playerState, prefersReducedMotion]);
+	}, [
+		isInView,
+		isPlayable,
+		playerState,
+		prefersReducedMotion,
+		hasBeenInView,
+		atomId,
+	]);
 
 	/**
 	 * Stops playback when the video is scrolled out of view, resumes playbacks
