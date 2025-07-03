@@ -18,8 +18,9 @@ export const ListenToArticle = ({ articleId }: Props) => {
 				getListenToArticleClient().isAvailable(articleId),
 				getListenToArticleClient().isPlaying(articleId),
 			])
-				.then(([isAvailable, isPlaying]) =>
-					setShowButton(isAvailable && !isPlaying),
+				.then(() =>
+					// setShowButton(isAvailable && !isPlaying),
+					setShowButton(false),
 				)
 				.catch((error) => {
 					console.error(
@@ -35,6 +36,8 @@ export const ListenToArticle = ({ articleId }: Props) => {
 		void getListenToArticleClient()
 			.play(articleId)
 			.then((success: boolean) => {
+				// hide the audio button once audio is playing until we can
+				// manage play state syncronisation across the native miniplayer and web layer
 				success && setShowButton(false);
 			})
 			.catch((error: Error) => {
