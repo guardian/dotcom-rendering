@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, space, until } from '@guardian/source/foundations';
+import { from, space } from '@guardian/source/foundations';
 import { Hide, SvgMediaControlsPlay } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
@@ -203,12 +203,6 @@ const trailTextWrapper = css`
 	margin-top: ${space[3]}px;
 `;
 
-const isInHideTrailsAbTestStyles = css`
-	${until.tablet} {
-		display: none;
-	}
-`;
-
 const videoPillStyles = css`
 	position: absolute;
 	top: ${space[2]}px;
@@ -336,7 +330,6 @@ export type Props = {
 	 */
 	isImmersive?: boolean;
 	showVideo?: boolean;
-	isInHideTrailsAbTest?: boolean;
 };
 
 export const FeatureCard = ({
@@ -374,7 +367,6 @@ export const FeatureCard = ({
 	isNewsletter = false,
 	isImmersive = false,
 	showVideo = false,
-	isInHideTrailsAbTest = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -467,9 +459,6 @@ export const FeatureCard = ({
 										isImmersive={isImmersive}
 										byline={byline}
 										showByline={showByline}
-										isInHideTrailsAbTest={
-											isInHideTrailsAbTest
-										}
 									/>
 								</Island>
 							</div>
@@ -639,13 +628,7 @@ export const FeatureCard = ({
 										) : null}
 
 										{!!trailText && (
-											<div
-												css={[
-													trailTextWrapper,
-													isInHideTrailsAbTest &&
-														isInHideTrailsAbTestStyles,
-												]}
-											>
+											<div css={trailTextWrapper}>
 												<TrailText
 													trailText={trailText}
 													trailTextColour={palette(
