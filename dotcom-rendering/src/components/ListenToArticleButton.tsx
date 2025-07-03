@@ -13,6 +13,7 @@ const button = css`
 	&:hover {
 		background-color: ${palette('--follow-icon-fill')};
 	}
+	color: ${palette('--follow-icon-background')};
 	margin-bottom: ${space[4]}px;
 	margin-left: ${space[2]}px;
 `;
