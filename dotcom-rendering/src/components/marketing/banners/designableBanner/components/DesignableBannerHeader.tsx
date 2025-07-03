@@ -85,10 +85,6 @@ const getStyles = (
 					${mobileHeadlineSize};
 				}
 
-				${from.tablet} {
-					margin-bottom: ${space[6]}px;
-				}
-
 				${from.phablet} {
 					${headlineMedium34}
 				}
