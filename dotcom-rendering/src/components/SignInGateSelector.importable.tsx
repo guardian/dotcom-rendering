@@ -339,10 +339,11 @@ const decideShouldNotServeMandatory = (): boolean => {
 
 	// This may be extended in the future.
 
-	const params = new URLSearchParams(window.location.search);
-	const value: string | null = params.get('utm_source');
+	// const params = new URLSearchParams(window.location.search);
+	// const value: string | null = params.get('utm_source');
+	// return value === 'newsshowcase';
 
-	return value === 'newsshowcase';
+	return false;
 };
 
 const buildAuxiaGateDisplayData = async (
