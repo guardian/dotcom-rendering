@@ -160,7 +160,7 @@ export const renderElement = ({
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
 
-	const renderAds = !isAdFreeUser && !isSensitive && !shouldHideAds;
+	const renderAds = !isAdFreeUser && !shouldHideAds;
 
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':

@@ -19,10 +19,5 @@ export const canRenderAds = (
 		return false;
 	}
 
-	// DCRFrontType doesn't have a isSensitive property
-	if ('isSensitive' in pageData && pageData.isSensitive) {
-		return false;
-	}
-
 	return true;
 };

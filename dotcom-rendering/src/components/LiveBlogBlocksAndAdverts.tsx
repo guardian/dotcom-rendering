@@ -75,7 +75,7 @@ export const LiveBlogBlocksAndAdverts = ({
 		);
 	};
 
-	if (isAdFreeUser || isSensitive || shouldHideAds) {
+	if (isAdFreeUser || shouldHideAds) {
 		return (
 			<>
 				{blocks.map((block) => (
