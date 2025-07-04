@@ -352,6 +352,7 @@ export const AudioLayout = (props: WebProps) => {
 										article.isRightToLeftLang
 									}
 									editionId={article.editionId}
+									shouldHideAds={article.shouldHideAds}
 								/>
 								{showBodyEndSlot && (
 									<Island

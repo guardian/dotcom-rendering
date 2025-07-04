@@ -28,6 +28,7 @@ interface MultiBylineProps {
 	 * Whether this is the last element in the article. If true, no separator will be rendered.
 	 */
 	isLastElement: boolean;
+	shouldHideAds: boolean;
 }
 
 const separatorStyles = css`
@@ -52,6 +53,7 @@ export const MultiBylines = ({
 	starRating,
 	RenderArticleElement,
 	isLastElement,
+	shouldHideAds,
 }: MultiBylineProps) => {
 	return (
 		<>
@@ -81,6 +83,7 @@ export const MultiBylines = ({
 							starRating={starRating}
 							forceDropCap="off"
 							isListElement={true}
+							shouldHideAds={shouldHideAds}
 						/>
 					))}
 				</MultiByline>

@@ -53,6 +53,7 @@ type Props = {
 	tableOfContents?: TableOfContentsItem[];
 	lang?: string;
 	isRightToLeftLang?: boolean;
+	shouldHideAds: boolean;
 };
 
 const globalOlStyles = () => css`
@@ -135,6 +136,7 @@ export const ArticleBody = ({
 	lang,
 	isRightToLeftLang = false,
 	editionId,
+	shouldHideAds,
 }: Props) => {
 	const isInteractiveContent =
 		format.design === ArticleDesign.Interactive ||
@@ -202,6 +204,7 @@ export const ArticleBody = ({
 					filterKeyEvents={filterKeyEvents}
 					keywordIds={keywordIds}
 					editionId={editionId}
+					shouldHideAds={shouldHideAds}
 				/>
 			</div>
 		);
@@ -249,6 +252,7 @@ export const ArticleBody = ({
 					abTests={abTests}
 					editionId={editionId}
 					contributionsServiceUrl={contributionsServiceUrl}
+					shouldHideAds={shouldHideAds}
 				/>
 			</div>
 			{hasObserverPublicationTag && <ObserverFooter />}

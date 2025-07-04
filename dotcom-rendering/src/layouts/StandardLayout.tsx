@@ -391,7 +391,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
-	const renderAds = isWeb && canRenderAds(article);
+	const renderAds = canRenderAds(article);
 
 	return (
 		<>
@@ -448,17 +448,15 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				</Stuck>
 			)}
 
-			{renderAds && hasSurveyAd && (
+			{isWeb && renderAds && hasSurveyAd && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 
 			<main data-layout="StandardLayout">
-				{isApps && (
-					<>
-						<Island priority="critical">
-							<AdPortals />
-						</Island>
-					</>
+				{isApps && renderAds && (
+					<Island priority="critical">
+						<AdPortals />
+					</Island>
 				)}
 				<Section
 					fullWidth={true}
@@ -525,6 +523,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									isSensitive={article.config.isSensitive}
 									editionId={article.editionId}
 									hideCaption={isMedia}
+									shouldHideAds={article.shouldHideAds}
 								/>
 							</div>
 						</GridItem>
@@ -719,6 +718,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										article.isRightToLeftLang
 									}
 									editionId={article.editionId}
+									shouldHideAds={article.shouldHideAds}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (
@@ -831,7 +831,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											isPaidContent={
 												article.pageType.isPaidContent
 											}
-											renderAds={renderAds}
+											renderAds={isWeb && renderAds}
 											shouldHideReaderRevenue={
 												!!article.config
 													.shouldHideReaderRevenue
@@ -844,7 +844,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					</StandardGrid>
 				</Section>
 
-				{renderAds && !isLabs && (
+				{isWeb && renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
 						data-print-layout="hide"
@@ -954,7 +954,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						)}
 						borderColour={themePalette('--article-border')}
 					>
-						<MostViewedFooterLayout renderAds={renderAds}>
+						<MostViewedFooterLayout renderAds={isWeb && renderAds}>
 							<Island
 								priority="feature"
 								defer={{ until: 'visible' }}
@@ -969,7 +969,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					</Section>
 				)}
 
-				{renderAds && !isLabs && (
+				{isWeb && renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
 						data-print-layout="hide"

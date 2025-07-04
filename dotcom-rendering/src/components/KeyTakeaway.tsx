@@ -41,6 +41,7 @@ interface KeyTakeawayProps {
 	keyTakeaway: KeyTakeawayModel;
 	titleIndex: number;
 	RenderArticleElement: ArticleElementRenderer;
+	shouldHideAds: boolean;
 }
 
 export const KeyTakeaway = ({
@@ -58,6 +59,7 @@ export const KeyTakeaway = ({
 	hideCaption,
 	starRating,
 	RenderArticleElement,
+	shouldHideAds,
 }: KeyTakeawayProps) => {
 	return (
 		<>
@@ -92,6 +94,7 @@ export const KeyTakeaway = ({
 						starRating={starRating}
 						forceDropCap="off"
 						isListElement={true}
+						shouldHideAds={shouldHideAds}
 					/>
 				))}
 			</li>

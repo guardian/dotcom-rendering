@@ -17,5 +17,6 @@ export const enhancePinnedPost = (
 		imagesForLightbox: [],
 		promotedNewsletter: undefined,
 		hasAffiliateLinksDisclaimer: false,
+		shouldHideAds: false,
 	})[0];
 };

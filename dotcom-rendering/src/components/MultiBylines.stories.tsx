@@ -85,6 +85,7 @@ export const ThemeVariations = {
 		pageId: 'testID',
 		switches: {},
 		RenderArticleElement,
+		shouldHideAds: false,
 	},
 	parameters: {
 		formats: getAllThemes({

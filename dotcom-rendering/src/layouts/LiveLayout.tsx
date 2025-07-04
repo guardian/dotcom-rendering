@@ -286,7 +286,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const hasKeyEvents = !!article.keyEvents.length;
 
-	const renderAds = canRenderAds(article, renderingTarget);
+	const renderAds = canRenderAds(article);
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -338,12 +338,12 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				</div>
 			)}
 
-			{renderAds && hasSurveyAd && (
+			{isWeb && renderAds && hasSurveyAd && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 
 			<main data-layout="LiveLayout">
-				{renderAds && hasLiveBlogTopAd && (
+				{isWeb && renderAds && hasLiveBlogTopAd && (
 					<Hide from="tablet">
 						<Section
 							fullWidth={true}
@@ -361,12 +361,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						</Section>
 					</Hide>
 				)}
-				{isApps && (
-					<>
-						<Island priority="critical">
-							<AdPortals rightAlignFrom="wide" />
-						</Island>
-					</>
+				{isApps && renderAds && (
+					<Island priority="critical">
+						<AdPortals rightAlignFrom="wide" />
+					</Island>
 				)}
 				{footballMatchUrl ? (
 					<Section
@@ -680,6 +678,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										isSensitive={article.config.isSensitive}
 										isAdFreeUser={article.isAdFreeUser}
 										editionId={article.editionId}
+										shouldHideAds={article.shouldHideAds}
 									/>
 								</div>
 							</GridItem>
@@ -852,6 +851,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													article.isRightToLeftLang
 												}
 												editionId={article.editionId}
+												shouldHideAds={
+													article.shouldHideAds
+												}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination
@@ -922,7 +924,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									`}
 								>
 									<RightColumn showFrom="wide">
-										{renderAds && (
+										{isWeb && renderAds && (
 											<AdSlot
 												position="right"
 												display={format.display}
@@ -941,7 +943,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						</LiveGrid>
 					</Section>
 
-					{renderAds && (
+					{isWeb && renderAds && (
 						<Section
 							fullWidth={true}
 							data-print-layout="hide"
@@ -1064,7 +1066,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							borderColour={themePalette('--article-border')}
 							fontColour={themePalette('--article-section-title')}
 						>
-							<MostViewedFooterLayout renderAds={renderAds}>
+							<MostViewedFooterLayout
+								renderAds={isWeb && renderAds}
+							>
 								<Island
 									priority="feature"
 									defer={{ until: 'visible' }}
@@ -1079,7 +1083,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						</Section>
 					)}
 
-					{renderAds && (
+					{isWeb && renderAds && (
 						<Section
 							fullWidth={true}
 							data-print-layout="hide"

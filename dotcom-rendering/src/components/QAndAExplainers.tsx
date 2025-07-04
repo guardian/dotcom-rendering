@@ -25,6 +25,7 @@ interface Props {
 	 * Whether this is the last element in the article. If true, no separator will be rendered.
 	 */
 	isLastElement: boolean;
+	shouldHideAds: boolean;
 }
 
 const separatorStyles = css`
@@ -49,6 +50,7 @@ export const QAndAExplainers = ({
 	starRating,
 	RenderArticleElement,
 	isLastElement,
+	shouldHideAds,
 }: Props) => (
 	<>
 		{qAndAExplainers.map((qAndAExplainer, index) => (
@@ -67,6 +69,7 @@ export const QAndAExplainers = ({
 				starRating={starRating}
 				key={index}
 				RenderArticleElement={RenderArticleElement}
+				shouldHideAds={shouldHideAds}
 			/>
 		))}
 		{!isLastElement && <hr css={separatorStyles} />}
