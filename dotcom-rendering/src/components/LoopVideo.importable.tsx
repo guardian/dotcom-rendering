@@ -14,9 +14,24 @@ const videoContainerStyles = css`
 	position: relative;
 `;
 
+type CustomPlayEventDetail = { uniqueId: string };
+const customPlayAudioEventName = 'looping-video:play-with-audio';
+
+/**
+ * Dispatches a custom play audio event so that other videos listening
+ * for this event will be muted.
+ */
+export const dispatchCustomPlayAudioEvent = (uniqueId: string) => {
+	document.dispatchEvent(
+		new CustomEvent(customPlayAudioEventName, {
+			detail: { uniqueId },
+		}),
+	);
+};
+
 type Props = {
 	src: string;
-	videoId: string;
+	uniqueId: string;
 	width: number;
 	height: number;
 	thumbnailImage: string;
@@ -25,7 +40,7 @@ type Props = {
 
 export const LoopVideo = ({
 	src,
-	videoId,
+	uniqueId,
 	width,
 	height,
 	thumbnailImage,
@@ -57,26 +72,60 @@ export const LoopVideo = ({
 	});
 
 	/**
+	 * Setup.
+	 *
 	 * Register the users motion preferences.
+	 * Creates an event listener to ensure we don't play audio from multiple loops
 	 */
 	useEffect(() => {
 		const userPrefersReducedMotion = window.matchMedia(
 			'(prefers-reduced-motion: reduce)',
 		).matches;
 		setPrefersReducedMotion(userPrefersReducedMotion);
-	}, []);
+
+		/**
+		 * Pause the current video when another video is played
+		 * Triggered by the CustomEvent sent by each player on play
+		 */
+		const handleCustomPlayAudioEvent = (
+			event: CustomEventInit<CustomPlayEventDetail>,
+		) => {
+			if (event.detail) {
+				const playedVideoId = event.detail.uniqueId;
+				const thisVideoId = uniqueId;
+
+				if (playedVideoId !== thisVideoId) {
+					setIsMuted(true);
+				}
+			}
+		};
+
+		document.addEventListener(
+			customPlayAudioEventName,
+			handleCustomPlayAudioEvent,
+		);
+
+		return () =>
+			document.removeEventListener(
+				customPlayAudioEventName,
+				handleCustomPlayAudioEvent,
+			);
+	}, [uniqueId]);
 
 	/**
-	 * Autoplays the video when it comes into view.
+	 * Autoplay the video when it comes into view.
 	 */
 	useEffect(() => {
-		if (!vidRef.current || playerState === 'PAUSED_BY_USER') return;
+		if (!vidRef.current || prefersReducedMotion !== false) {
+			return;
+		}
 
-		if (isInView && isPlayable && playerState !== 'PLAYING') {
-			if (prefersReducedMotion !== false) {
-				return;
-			}
-
+		if (
+			isInView &&
+			isPlayable &&
+			(playerState === 'NOT_STARTED' ||
+				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER')
+		) {
 			setPlayerState('PLAYING');
 			setHasBeenInView(true);
 
@@ -98,9 +147,11 @@ export const LoopVideo = ({
 			setIsMuted(true);
 		}
 
-		// If a user action paused the video, they have indicated
-		// that they don't want to watch the video. Therefore, don't
-		// resume the video when it comes back in view
+		/**
+		 * If a user action paused the video, they have indicated
+		 * that they don't want to watch the video. Therefore, don't
+		 * resume the video when it comes back in view
+		 */
 		const isBackInView =
 			playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' && isInView;
 		if (isBackInView) {
@@ -139,9 +190,21 @@ export const LoopVideo = ({
 		}
 	};
 
-	const handleClick = (event: React.SyntheticEvent) => {
+	const handlePlayPauseClick = (event: React.SyntheticEvent) => {
 		event.preventDefault();
 		playPauseVideo();
+	};
+
+	const handleAudioClick = (event: React.SyntheticEvent) => {
+		event.stopPropagation(); // Don't pause the video
+
+		if (isMuted) {
+			// Emit video play audio event so other components are aware when a video is played with sound
+			dispatchCustomPlayAudioEvent(uniqueId);
+			setIsMuted(false);
+		} else {
+			setIsMuted(true);
+		}
 	};
 
 	const onError = () => {
@@ -225,7 +288,7 @@ export const LoopVideo = ({
 		>
 			<LoopVideoPlayer
 				src={src}
-				videoId={videoId}
+				uniqueId={uniqueId}
 				width={width}
 				height={height}
 				posterImage={posterImage}
@@ -236,10 +299,9 @@ export const LoopVideo = ({
 				isPlayable={isPlayable}
 				setIsPlayable={setIsPlayable}
 				playerState={playerState}
-				setPlayerState={setPlayerState}
 				isMuted={isMuted}
-				setIsMuted={setIsMuted}
-				handleClick={handleClick}
+				handlePlayPauseClick={handlePlayPauseClick}
+				handleAudioClick={handleAudioClick}
 				handleKeyDown={handleKeyDown}
 				onError={onError}
 				AudioIcon={AudioIcon}

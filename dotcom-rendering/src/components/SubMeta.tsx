@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, type SerializedStyles } from '@emotion/react';
 import {
 	from,
 	space,
@@ -7,13 +7,15 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
+import { grid } from '../grid';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import type { BaseLinkType } from '../model/extract-nav';
 import { palette } from '../palette';
 import { Island } from './Island';
 import { ShareButton } from './ShareButton.importable';
 
-const labelStyles = css`
+const labelStyles = (design: ArticleDesign): SerializedStyles => css`
+	${design === ArticleDesign.Gallery ? grid.column.centre : undefined};
 	${textSans12};
 	display: block;
 	color: ${palette('--sub-meta-label-text')};
@@ -46,7 +48,7 @@ const setMetaWidth = css`
 	}
 `;
 
-const listStyleNone = css`
+const listStyles = css`
 	list-style: none;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
 	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
@@ -79,7 +81,8 @@ const listStyleNone = css`
 	background-repeat: no-repeat;
 `;
 
-const listWrapper = css`
+const listWrapper = (design: ArticleDesign): SerializedStyles => css`
+	${design === ArticleDesign.Gallery ? grid.column.centre : undefined};
 	padding-bottom: 0.75rem;
 	margin-bottom: 6px;
 	border-bottom: 1px solid ${palette('--article-border')};
@@ -143,20 +146,31 @@ export const SubMeta = ({
 		};
 	};
 	const { links, hasLinks } = createLinks();
+
+	const showSyndicationButton =
+		format.design !== ArticleDesign.Interactive &&
+		format.design !== ArticleDesign.Gallery;
+
 	return (
 		<div
 			data-print-layout="hide"
-			css={
+			css={[
+				bottomPadding,
 				format.design === ArticleDesign.Interactive
-					? [bottomPadding, setMetaWidth]
-					: bottomPadding
-			}
+					? setMetaWidth
+					: undefined,
+				format.design === ArticleDesign.Gallery
+					? grid.container
+					: undefined,
+			]}
 		>
 			{hasLinks && (
 				<>
-					<span css={labelStyles}>Explore more on these topics</span>
-					<div css={listWrapper}>
-						<ul css={listStyleNone}>
+					<span css={labelStyles(format.design)}>
+						Explore more on these topics
+					</span>
+					<div css={listWrapper(format.design)}>
+						<ul css={listStyles}>
 							{links.map((link) => (
 								<li css={listItemStyles} key={link.url}>
 									<a css={linkStyles} href={link.url}>
@@ -184,7 +198,7 @@ export const SubMeta = ({
 						/>
 					</Island>
 					<div css={syndicationButtonOverrides}>
-						{format.design === ArticleDesign.Interactive ? null : (
+						{showSyndicationButton ? (
 							<LinkButton
 								priority="tertiary"
 								size="xsmall"
@@ -209,7 +223,7 @@ export const SubMeta = ({
 							>
 								Reuse this content
 							</LinkButton>
-						)}
+						) : null}
 					</div>
 				</div>
 			)}
