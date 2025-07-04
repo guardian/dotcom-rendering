@@ -312,7 +312,7 @@ export const ReaderRevenueBanner = ({
 			  import(`../marketing/banners/signInPrompt/SignInPromptBanner`)
 			: name === 'DesignableBannerV2'
 			? /* webpackChunkName: "designable-banner-v2" */
-			  import(`../marketing/banners/designableBanner/DesignableBannerV2`)
+			  import(`../marketing/banners/designableBanner/DesignableBanner`)
 			: /* webpackChunkName: "designable-banner" */
 			  import(`../marketing/banners/designableBanner/DesignableBanner`)
 		)

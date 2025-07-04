@@ -6,12 +6,13 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headlineBold24,
-	headlineBold28,
-	headlineBold34,
 	headlineMedium17,
+	headlineMedium28,
+	headlineMedium34,
+	headlineMedium42,
 	neutral,
 	space,
+	until,
 } from '@guardian/source/foundations';
 import type { Image } from '@guardian/support-dotcom-components/dist/shared/types';
 import {
@@ -63,8 +64,12 @@ const getStyles = (
 	headlineSize: 'small' | 'medium' | 'large',
 ) => {
 	const color = headerSettings?.textColour ?? neutral[0];
-	const copyTopMargin = headerSettings?.headerImage ? space[6] : space[3];
+	const copyTopMargin = headerSettings?.headerImage ? space[1] : space[1];
 	const containerMargin = headerSettings?.headerImage ? `${space[6]}px` : '0';
+	const mobileHeadlineSize =
+		headlineSize === 'small'
+			? `${headlineMedium17}`
+			: `${headlineMedium28}`;
 
 	return {
 		container: css`
@@ -73,16 +78,19 @@ const getStyles = (
 		`,
 		header: css`
 			h2 {
-				margin: ${copyTopMargin}px 0 ${space[3]}px;
 				color: ${color};
+				margin: ${copyTopMargin}px 0 ${space[2]}px 0;
 
-				${headlineSize === 'small' ? headlineMedium17 : headlineBold24}
-				${from.tablet} {
-					${headlineBold28}
-					margin-bottom: ${space[6]}px;
+				${until.phablet} {
+					${mobileHeadlineSize};
 				}
+
+				${from.phablet} {
+					${headlineMedium34}
+				}
+
 				${from.leftCol} {
-					${headlineBold34}
+					${headlineMedium42}
 				}
 			}
 		`,
