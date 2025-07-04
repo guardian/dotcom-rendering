@@ -6,6 +6,7 @@ import * as Environment from '@guardian/bridget/Environment';
 import * as Gallery from '@guardian/bridget/Gallery';
 import * as Interaction from '@guardian/bridget/Interaction';
 import * as Interactives from '@guardian/bridget/Interactives';
+import * as ListenToArticle from '@guardian/bridget/ListenToArticle';
 import * as Metrics from '@guardian/bridget/Metrics';
 import * as Navigation from '@guardian/bridget/Navigation';
 import * as Newsletters from '@guardian/bridget/Newsletters';
@@ -190,4 +191,16 @@ export const getInteractivesClient = (): Interactives.Client<void> => {
 		);
 	}
 	return interactivesClient;
+};
+
+let listenToArticleClient: ListenToArticle.Client<void> | undefined = undefined;
+export const getListenToArticleClient = (): ListenToArticle.Client<void> => {
+	if (!listenToArticleClient) {
+		listenToArticleClient = createAppClient<ListenToArticle.Client<void>>(
+			ListenToArticle.Client,
+			'buffered',
+			'compact',
+		);
+	}
+	return listenToArticleClient;
 };
