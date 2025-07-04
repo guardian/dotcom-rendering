@@ -135,9 +135,14 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 };
 
 export const enhanceAdPlaceholders =
-	(format: ArticleFormat, renderingTarget: RenderingTarget) =>
+	(
+		format: ArticleFormat,
+		renderingTarget: RenderingTarget,
+		shouldHideAds: boolean,
+	) =>
 	(elements: FEElement[]): FEElement[] =>
 		renderingTarget === 'Apps' &&
+		!shouldHideAds &&
 		format.design !== ArticleDesign.LiveBlog &&
 		format.design !== ArticleDesign.DeadBlog
 			? insertAdPlaceholders(elements)

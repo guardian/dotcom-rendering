@@ -78,6 +78,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		promotedNewsletter: undefined,
 		imagesForLightbox: [],
 		hasAffiliateLinksDisclaimer: false,
+		shouldHideAds,
 	});
 	const html = renderBlocks({
 		blocks: enhancedBlocks,
