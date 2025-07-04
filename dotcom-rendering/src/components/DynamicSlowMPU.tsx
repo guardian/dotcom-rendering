@@ -68,6 +68,8 @@ const Card33_Card33_Card33 = ({
  * If you pass no bigs at all the top slice will not render and a special
  * 3 column layout is used for the remaining slice.
  *
+ * @deprecated Adverts are no longer shown within containers. We no
+ * longer use containers that reserve a space for an MPU advert.
  */
 export const DynamicSlowMPU = ({
 	groupedTrails,

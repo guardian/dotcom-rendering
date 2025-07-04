@@ -172,6 +172,7 @@ export const Treats = ({
 	borderColour?: string;
 }) => {
 	if (treats.length === 0) return null;
+
 	return (
 		<ul
 			css={css`
@@ -181,6 +182,7 @@ export const Treats = ({
 		>
 			{treats.map((treat, index) => {
 				const [link] = treat.links;
+
 				if (link?.linkTo === '/crosswords' && link.text) {
 					// Treats that link to /crosswords are special. If any
 					// treat has this exact url then an svg of a crossword
@@ -229,7 +231,7 @@ export const Treats = ({
 				}
 
 				return (
-					<>
+					<Fragment key={index}>
 						{treat.links.map(({ text, linkTo }) => (
 							<TextTreat
 								key={linkTo}
@@ -239,7 +241,7 @@ export const Treats = ({
 								borderColour={borderColour}
 							/>
 						))}
-					</>
+					</Fragment>
 				);
 			})}
 		</ul>

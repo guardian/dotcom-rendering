@@ -5,6 +5,11 @@ import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { useIsInView } from '../lib/useIsInView';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
+import type { CustomPlayEventDetail } from '../lib/video';
+import {
+	customLoopPlayAudioEventName,
+	customYoutubePlayEventName,
+} from '../lib/video';
 import { useConfig } from './ConfigContext';
 import type { PLAYER_STATES } from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
@@ -14,16 +19,13 @@ const videoContainerStyles = css`
 	position: relative;
 `;
 
-type CustomPlayEventDetail = { uniqueId: string };
-const customPlayAudioEventName = 'looping-video:play-with-audio';
-
 /**
  * Dispatches a custom play audio event so that other videos listening
  * for this event will be muted.
  */
 export const dispatchCustomPlayAudioEvent = (uniqueId: string) => {
 	document.dispatchEvent(
-		new CustomEvent(customPlayAudioEventName, {
+		new CustomEvent(customLoopPlayAudioEventName, {
 			detail: { uniqueId },
 		}),
 	);
@@ -84,8 +86,8 @@ export const LoopVideo = ({
 		setPrefersReducedMotion(userPrefersReducedMotion);
 
 		/**
-		 * Pause the current video when another video is played
-		 * Triggered by the CustomEvent sent by each player on play
+		 * Mutes the current video when another video is unmuted
+		 * Triggered by the CustomEvent sent by each player on unmuting
 		 */
 		const handleCustomPlayAudioEvent = (
 			event: CustomEventInit<CustomPlayEventDetail>,
@@ -100,16 +102,33 @@ export const LoopVideo = ({
 			}
 		};
 
+		/**
+		 * Mute the current video when a Youtube video is played
+		 * Triggered by the CustomEvent in YoutubeAtomPlayer.
+		 */
+		const handleCustomPlayYoutubeEvent = () => {
+			setIsMuted(true);
+		};
+
 		document.addEventListener(
-			customPlayAudioEventName,
+			customLoopPlayAudioEventName,
 			handleCustomPlayAudioEvent,
 		);
+		document.addEventListener(
+			customYoutubePlayEventName,
+			handleCustomPlayYoutubeEvent,
+		);
 
-		return () =>
+		return () => {
 			document.removeEventListener(
-				customPlayAudioEventName,
+				customLoopPlayAudioEventName,
 				handleCustomPlayAudioEvent,
 			);
+			document.removeEventListener(
+				customYoutubePlayEventName,
+				handleCustomPlayYoutubeEvent,
+			);
+		};
 	}, [uniqueId]);
 
 	/**
