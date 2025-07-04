@@ -94,7 +94,7 @@ export const GalleryCaption = ({
 					format={format}
 					pageId={pageId}
 					webTitle={webTitle}
-					context="ArticleMeta"
+					context="ImageCaption"
 				/>
 			</Island>
 		</figcaption>
