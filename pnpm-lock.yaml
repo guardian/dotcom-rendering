@@ -329,8 +329,8 @@ importers:
         specifier: 23.0.0
         version: 23.0.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/ophan-tracker-js':
-        specifier: 2.2.10
-        version: 2.2.10
+        specifier: 2.3.0
+        version: 2.3.0
       '@guardian/react-crossword':
         specifier: 6.3.0
         version: 6.3.0(@emotion/react@11.14.0)(@guardian/libs@23.0.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
@@ -4306,6 +4306,13 @@ packages:
 
   /@guardian/ophan-tracker-js@2.2.10:
     resolution: {integrity: sha512-WqE5bPagZ7AYUc2Fb0xDgNfhmdS9wK1IJcUjTD6CrlPim67SiRragw4fy+CP2OwShkfiWFmb9l/TgQLbuvUlIQ==}
+    engines: {node: '>=16'}
+    dependencies:
+      '@guardian/tsconfig': 1.0.0
+    dev: false
+
+  /@guardian/ophan-tracker-js@2.3.0:
+    resolution: {integrity: sha512-idlbowKfM2hj/fdR07OkbSfxuSvOjjiKxpIEItrGjS5gTrpDgPyjC+2QHItz4HrMKsP71F8pF9zQtkEuUGspDg==}
     engines: {node: '>=16'}
     dependencies:
       '@guardian/tsconfig': 1.0.0
