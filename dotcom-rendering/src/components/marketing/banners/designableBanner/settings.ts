@@ -7,7 +7,6 @@ import type { TickerSettings } from '@guardian/source-development-kitchen/react-
 import type { Image } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ReactNode } from 'react';
 import type { BannerId } from '../common/types';
-import type { ChoiceCardSettings } from './components/choiceCards/ChoiceCards';
 
 export type ContainerSettings = {
 	backgroundColour: string;
@@ -36,6 +35,15 @@ export interface HighlightedTextSettings {
 export interface HeaderSettings {
 	textColour?: string;
 	headerImage?: Image;
+}
+
+export interface ChoiceCardSettings {
+	buttonColour?: string;
+	buttonTextColour?: string;
+	buttonBorderColour?: string;
+	buttonSelectColour?: string;
+	buttonSelectTextColour?: string;
+	buttonSelectBorderColour?: string;
 }
 
 export interface BannerTemplateSettings {
