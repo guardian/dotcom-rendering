@@ -1,7 +1,6 @@
 import type { ConsentState } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
-import { getLargestImageSize } from '../lib/image';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import type { AdTargeting } from '../types/commercial';
@@ -26,10 +25,7 @@ type Props = {
 	format: ArticleFormat;
 	hideCaption?: boolean;
 	overrideImage?: string;
-	posterImage?: {
-		url: string;
-		width: number;
-	}[];
+	posterImage?: string;
 	isMainMedia?: boolean;
 	height?: number;
 	width?: number;
@@ -69,7 +65,7 @@ export const YoutubeBlockComponent = ({
 	format,
 	hideCaption,
 	overrideImage,
-	posterImage = [],
+	posterImage = '',
 	expired,
 	isMainMedia,
 	height = 259,
@@ -117,12 +113,6 @@ export const YoutubeBlockComponent = ({
 	 */
 	const uniqueId = `${assetId}-${index}`;
 
-	/**
-	 * We do our own image optimization in DCR and only need 1 image.
-	 * Pick the largest image available to us to avoid up-scaling later.
-	 */
-	const largestPosterImage = getLargestImageSize(posterImage)?.url;
-
 	useEffect(() => {
 		if (renderingTarget === 'Web') {
 			const defineConsentState = async () => {
@@ -168,7 +158,7 @@ export const YoutubeBlockComponent = ({
 				atomId={id}
 				videoId={assetId}
 				uniqueId={uniqueId}
-				image={overrideImage ?? largestPosterImage}
+				image={overrideImage ?? posterImage}
 				alt={altText ?? mediaTitle ?? ''}
 				adTargeting={
 					enableAds && renderingTarget === 'Web'
