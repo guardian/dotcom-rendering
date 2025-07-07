@@ -139,10 +139,10 @@ export const LoopVideo = ({
 	}, [uniqueId]);
 
 	useEffect(() => {
-		if (isInView) {
+		if (isInView && !hasBeenInView) {
 			setHasBeenInView(true);
 		}
-	}, [isInView]);
+	}, [isInView, hasBeenInView]);
 
 	/**
 	 * Autoplay the video when it comes into view.
