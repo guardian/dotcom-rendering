@@ -32,6 +32,7 @@ type Options = {
 	hasAffiliateLinksDisclaimer: boolean;
 	audioArticleImage?: ImageBlockElement;
 	tags?: TagType[];
+	shouldHideAds: boolean;
 };
 
 const enhanceNewsletterSignup =
@@ -76,7 +77,11 @@ export const enhanceElements =
 				options.promotedNewsletter,
 				blockId,
 			),
-			enhanceAdPlaceholders(format, options.renderingTarget),
+			enhanceAdPlaceholders(
+				format,
+				options.renderingTarget,
+				options.shouldHideAds,
+			),
 			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer),
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),

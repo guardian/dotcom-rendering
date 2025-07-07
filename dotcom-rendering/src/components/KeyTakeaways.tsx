@@ -25,6 +25,7 @@ interface KeyTakeawaysProps {
 	 * Whether this is the last element in the article. If true, no separator will be rendered.
 	 */
 	isLastElement: boolean;
+	shouldHideAds: boolean;
 }
 
 const separatorStyles = css`
@@ -49,6 +50,7 @@ export const KeyTakeaways = ({
 	starRating,
 	RenderArticleElement,
 	isLastElement,
+	shouldHideAds,
 }: KeyTakeawaysProps) => {
 	return (
 		<ol data-ignore="global-ol-styling">
@@ -69,6 +71,7 @@ export const KeyTakeaways = ({
 					starRating={starRating}
 					key={index}
 					RenderArticleElement={RenderArticleElement}
+					shouldHideAds={shouldHideAds}
 				/>
 			))}
 			{!isLastElement && <hr css={separatorStyles} />}

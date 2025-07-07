@@ -331,6 +331,9 @@ export const CrosswordLayout = (props: Props) => {
 													article.isRightToLeftLang
 												}
 												editionId={article.editionId}
+												shouldHideAds={
+													article.shouldHideAds
+												}
 											/>
 										</ArticleContainer>
 									</GridItem>
