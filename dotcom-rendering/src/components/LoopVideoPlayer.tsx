@@ -76,7 +76,7 @@ type Props = {
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	AudioIcon: (iconProps: IconProps) => JSX.Element;
 	posterImage?: string;
-	shouldPreload: boolean;
+	preloadPartialData: boolean;
 	showPlayIcon: boolean;
 };
 
@@ -104,7 +104,7 @@ export const LoopVideoPlayer = forwardRef(
 			handleKeyDown,
 			onError,
 			AudioIcon,
-			shouldPreload,
+			preloadPartialData,
 			showPlayIcon,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
@@ -117,7 +117,7 @@ export const LoopVideoPlayer = forwardRef(
 				<video
 					id={loopVideoId}
 					ref={ref}
-					preload={shouldPreload ? 'metadata' : 'none'}
+					preload={preloadPartialData ? 'metadata' : 'none'}
 					loop={true}
 					muted={isMuted}
 					playsInline={true}

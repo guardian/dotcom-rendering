@@ -53,18 +53,22 @@ export const LoopVideo = ({
 	const vidRef = useRef<HTMLVideoElement>(null);
 	const [isPlayable, setIsPlayable] = useState(false);
 	const [isMuted, setIsMuted] = useState(true);
+	const [showPlayIcon, setShowPlayIcon] = useState(false);
+	const [preloadPartialData, setPreloadPartialData] = useState(false);
+	const [posterImage, setPosterImage] = useState<string | undefined>(
+		undefined,
+	);
 	const [currentTime, setCurrentTime] = useState(0);
 	const [playerState, setPlayerState] =
 		useState<(typeof PLAYER_STATES)[number]>('NOT_STARTED');
 
-	// The user indicates a preference for reduced motion: https://web.dev/articles/prefers-reduced-motion
-	const [prefersReducedMotion, setPrefersReducedMotion] = useState<
-		boolean | null
-	>(null);
+	const [isAutoplayAllowed, setIsAutoplayAllowed] = useState<boolean | null>(
+		null,
+	);
 
 	/**
-	 * Keep a track of whether the video has been in view. We only want to
-	 * pause the video if it has been in view.
+	 * Keep a track of whether the video has been in view. We only
+	 * want to pause the video if it has been in view.
 	 */
 	const [hasBeenInView, setHasBeenInView] = useState(false);
 
@@ -77,13 +81,16 @@ export const LoopVideo = ({
 	 * Setup.
 	 *
 	 * Register the users motion preferences.
-	 * Creates an event listener to ensure we don't play audio from multiple loops
+	 * Creates event listeners to control playback when there are multiple videos.
 	 */
 	useEffect(() => {
+		/**
+		 * The user indicates a preference for reduced motion: https://web.dev/articles/prefers-reduced-motion
+		 */
 		const userPrefersReducedMotion = window.matchMedia(
 			'(prefers-reduced-motion: reduce)',
 		).matches;
-		setPrefersReducedMotion(userPrefersReducedMotion);
+		setIsAutoplayAllowed(!userPrefersReducedMotion);
 
 		/**
 		 * Mutes the current video when another video is unmuted
@@ -131,11 +138,17 @@ export const LoopVideo = ({
 		};
 	}, [uniqueId]);
 
+	useEffect(() => {
+		if (isInView) {
+			setHasBeenInView(true);
+		}
+	}, [isInView]);
+
 	/**
 	 * Autoplay the video when it comes into view.
 	 */
 	useEffect(() => {
-		if (!vidRef.current || prefersReducedMotion !== false) {
+		if (!vidRef.current || isAutoplayAllowed === false) {
 			return;
 		}
 
@@ -146,11 +159,9 @@ export const LoopVideo = ({
 				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER')
 		) {
 			setPlayerState('PLAYING');
-			setHasBeenInView(true);
-
 			void vidRef.current.play();
 		}
-	}, [isInView, isPlayable, playerState, prefersReducedMotion]);
+	}, [isInView, isPlayable, playerState, isAutoplayAllowed]);
 
 	/**
 	 * Stops playback when the video is scrolled out of view, resumes playbacks
@@ -159,7 +170,8 @@ export const LoopVideo = ({
 	useEffect(() => {
 		if (!vidRef.current || !hasBeenInView) return;
 
-		const isNoLongerInView = playerState === 'PLAYING' && !isInView;
+		const isNoLongerInView =
+			playerState === 'PLAYING' && isInView === false;
 		if (isNoLongerInView) {
 			setPlayerState('PAUSED_BY_INTERSECTION_OBSERVER');
 			void vidRef.current.pause();
@@ -180,6 +192,44 @@ export const LoopVideo = ({
 		}
 	}, [isInView, hasBeenInView, playerState]);
 
+	/**
+	 * Show the play icon when the video is not playing, except for when it is scrolled
+	 * out of view. In this case, the intersection observer will resume playback and
+	 * having a play icon would falsely indicate a user action is required to resume playback.
+	 */
+	useEffect(() => {
+		const shouldShowPlayIcon =
+			playerState === 'PAUSED_BY_USER' ||
+			(!isAutoplayAllowed && playerState === 'NOT_STARTED');
+
+		setShowPlayIcon(shouldShowPlayIcon);
+	}, [playerState, isAutoplayAllowed]);
+
+	/**
+	 * Show a poster image if a video does NOT play automatically. Otherwise, we do not need
+	 * to download the image as the video will be autoplayed and the image will not be seen.
+	 *
+	 * If the video is partially in view (not enough to trigger autoplay) and hasn't yet been
+	 * seen, we want to show the poster image to avoid showing a blank space.
+	 */
+	useEffect(() => {
+		if (
+			isAutoplayAllowed === false ||
+			(isInView === false && !hasBeenInView)
+		) {
+			setPosterImage(thumbnailImage);
+		}
+	}, [isAutoplayAllowed, isInView, hasBeenInView, thumbnailImage]);
+
+	/**
+	 * We almost always want to preload some of the video data. If a user has prefers-reduced-motion
+	 * enabled, then the video will only be partially preloaded (metadata + small amount of video)
+	 * when it comes into view.
+	 */
+	useEffect(() => {
+		setPreloadPartialData(isAutoplayAllowed === false || !!isInView);
+	}, [isAutoplayAllowed, isInView]);
+
 	if (renderingTarget !== 'Web') return null;
 
 	if (adapted) return fallbackImageComponent;
@@ -188,7 +238,6 @@ export const LoopVideo = ({
 		if (!vidRef.current) return;
 
 		setPlayerState('PLAYING');
-		setHasBeenInView(true);
 		void vidRef.current.play();
 	};
 
@@ -285,20 +334,6 @@ export const LoopVideo = ({
 
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
-	// We only show a poster image when the user has indicated that they do
-	// not want videos to play automatically, e.g. prefers reduced motion. Otherwise,
-	// we do not need to download the image as the video will be autoplayed.
-	const posterImage =
-		!!prefersReducedMotion || isInView === false
-			? thumbnailImage
-			: undefined;
-
-	const showPlayIcon =
-		playerState === 'PAUSED_BY_USER' ||
-		(!!prefersReducedMotion && playerState === 'NOT_STARTED');
-
-	const shouldPreloadData = !!isInView || prefersReducedMotion === false;
-
 	return (
 		<div
 			ref={setNode}
@@ -324,7 +359,7 @@ export const LoopVideo = ({
 				handleKeyDown={handleKeyDown}
 				onError={onError}
 				AudioIcon={AudioIcon}
-				shouldPreload={shouldPreloadData}
+				preloadPartialData={preloadPartialData}
 				showPlayIcon={showPlayIcon}
 			/>
 		</div>
