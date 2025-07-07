@@ -235,7 +235,6 @@ const getMedia = ({
 		return {
 			type: 'video',
 			mainMedia,
-			...(imageUrl && { imageUrl }),
 		} as const;
 	}
 
@@ -427,8 +426,7 @@ export const FeatureCard = ({
 										stickyVideos={false}
 										enableAds={false}
 										duration={mainMedia.duration}
-										posterImage={mainMedia.images}
-										overrideImage={media?.imageUrl}
+										posterImage={mainMedia.image}
 										width={300}
 										height={375}
 										origin="The Guardian"
@@ -476,15 +474,7 @@ export const FeatureCard = ({
 									<div>
 										<CardPicture
 											mainImage={
-												media.imageUrl
-													? media.imageUrl
-													: media.mainMedia.images.reduce(
-															(prev, current) =>
-																prev.width >
-																current.width
-																	? prev
-																	: current,
-													  ).url
+												media.mainMedia.image ?? ''
 											}
 											imageSize={imageSize}
 											alt={headlineText}
