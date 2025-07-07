@@ -1013,15 +1013,7 @@ export const Card = ({
 									<div>
 										<CardPicture
 											mainImage={
-												media.imageUrl
-													? media.imageUrl
-													: media.mainMedia.images.reduce(
-															(prev, current) =>
-																prev.width >
-																current.width
-																	? prev
-																	: current,
-													  ).url
+												media.mainMedia.image ?? ''
 											}
 											imageSize={imageSize}
 											alt={headlineText}
