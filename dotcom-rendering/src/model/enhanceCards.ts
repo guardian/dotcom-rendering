@@ -167,6 +167,22 @@ const getLargestImageUrl = (images?: Image[]) => {
 };
 
 /**
+ * If we have a replacement video, we should use the largest available trail image from the media atom.
+ * For all other videos, we should use the card's trail image where it is available and fall back to the media trail image.
+ * */
+const decideMediaAtomImage = (
+	videoReplace: boolean,
+	mediaAtom: FEMediaAtom,
+	cardTrailImage?: string,
+) => {
+	if (videoReplace)
+		return getLargestImageUrl(mediaAtom.trailImage?.allImages);
+	return (
+		cardTrailImage ?? getLargestImageUrl(mediaAtom.trailImage?.allImages)
+	);
+};
+
+/**
  * While the first Media Atom is *not* guaranteed to be the main media,
  * it *happens to be* correct in the majority of cases.
  * @see https://github.com/guardian/frontend/pull/26247 for inspiration
@@ -174,11 +190,19 @@ const getLargestImageUrl = (images?: Image[]) => {
 
 const getActiveMediaAtom = (
 	isLoopingVideoTest: boolean,
+	videoReplace: boolean,
 	mediaAtom?: FEMediaAtom,
+	cardTrailImage?: string,
 ): MainMedia | undefined => {
 	if (mediaAtom) {
 		const asset = mediaAtom.assets.find(
 			({ version }) => version === mediaAtom.activeVersion,
+		);
+
+		const image = decideMediaAtomImage(
+			videoReplace,
+			mediaAtom,
+			cardTrailImage,
 		);
 
 		if (asset?.platform === 'Url' && isLoopingVideoTest) {
@@ -189,7 +213,7 @@ const getActiveMediaAtom = (
 				// Size fixed to a 5:4 ratio
 				width: 500,
 				height: 400,
-				image: getLargestImageUrl(mediaAtom.posterImage?.allImages),
+				image,
 			};
 		}
 
@@ -205,7 +229,7 @@ const getActiveMediaAtom = (
 				height: 300,
 				origin: mediaAtom.source ?? 'Unknown origin',
 				expired: !!mediaAtom.expired,
-				image: getLargestImageUrl(mediaAtom.posterImage?.allImages),
+				image,
 			};
 		}
 	}
@@ -223,11 +247,17 @@ const decideMedia = (
 	podcastImage?: PodcastSeriesImage,
 	imageHide?: boolean,
 	videoReplace?: boolean,
+	cardImage?: string,
 ): MainMedia | undefined => {
 	// If the showVideo toggle is enabled in the fronts tool,
 	// we should return the active mediaAtom regardless of the design
 	if (!!showMainVideo || !!videoReplace) {
-		return getActiveMediaAtom(isLoopingVideoTest, mediaAtom);
+		return getActiveMediaAtom(
+			isLoopingVideoTest,
+			!!videoReplace,
+			mediaAtom,
+			cardImage,
+		);
 	}
 
 	switch (format.design) {
@@ -242,7 +272,12 @@ const decideMedia = (
 			};
 
 		case ArticleDesign.Video: {
-			return getActiveMediaAtom(isLoopingVideoTest, mediaAtom);
+			return getActiveMediaAtom(
+				isLoopingVideoTest,
+				false,
+				mediaAtom,
+				cardImage,
+			);
 		}
 
 		default:
@@ -322,6 +357,7 @@ export const enhanceCards = (
 			podcastImage,
 			faciaCard.display.imageHide,
 			faciaCard.properties.mediaSelect?.videoReplace,
+			imageSrc,
 		);
 
 		return {
