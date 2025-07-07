@@ -175,8 +175,9 @@ const decideMediaAtomImage = (
 	mediaAtom: FEMediaAtom,
 	cardTrailImage?: string,
 ) => {
-	if (videoReplace)
+	if (videoReplace) {
 		return getLargestImageUrl(mediaAtom.trailImage?.allImages);
+	}
 	return (
 		cardTrailImage ?? getLargestImageUrl(mediaAtom.trailImage?.allImages)
 	);

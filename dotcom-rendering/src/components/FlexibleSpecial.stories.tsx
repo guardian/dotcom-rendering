@@ -54,28 +54,7 @@ const liveUpdatesCard = {
 		title: 'Spain fans celebrate at final whistle as England fans left heartbroken – video',
 		duration: 0,
 		expired: false,
-		images: [
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/2000.jpg',
-				width: 2000,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/1000.jpg',
-				width: 1000,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/500.jpg',
-				width: 500,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/140.jpg',
-				width: 140,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/4791.jpg',
-				width: 4791,
-			},
-		],
+		image: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/4791.jpg',
 	},
 	isExternalLink: false,
 	discussionApiUrl,
