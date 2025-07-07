@@ -105,12 +105,7 @@ const decideLeftContent = (front: Front, collection: DCRCollectionType) => {
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
-		config: {
-			abTests,
-			isPaidContent,
-			hasPageSkin: hasPageSkinConfig,
-			pageId,
-		},
+		config: { isPaidContent, hasPageSkin: hasPageSkinConfig, pageId },
 		editionId,
 	} = front;
 
@@ -712,13 +707,21 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collection.collectionBranding
 								}
 								containerLevel={collection.containerLevel}
-								containerSpacing={collection.containerSpacing}
+								isNextCollectionPrimary={
+									collection.isNextCollectionPrimary
+								}
 								hasNavigationButtons={
 									collection.collectionType ===
 										'scrollable/small' ||
 									collection.collectionType ===
 										'scrollable/medium'
 								}
+								isAboveDesktopAd={desktopAdPositions.includes(
+									index + 1,
+								)}
+								isAboveMobileAd={mobileAdPositions.includes(
+									index,
+								)}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
@@ -743,11 +746,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
-									shouldShowCarouselsAsStacked={
-										pageId === 'uk' &&
-										abTests.stackedCarouselsVariant ===
-											'variant'
-									}
 								/>
 							</FrontSection>
 

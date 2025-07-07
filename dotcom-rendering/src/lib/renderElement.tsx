@@ -94,6 +94,7 @@ type Props = {
 	totalElements?: number;
 	isListElement?: boolean;
 	isSectionedMiniProfilesArticle?: boolean;
+	shouldHideAds: boolean;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -154,10 +155,13 @@ export const renderElement = ({
 	totalElements = 0,
 	isListElement = false,
 	isSectionedMiniProfilesArticle = false,
+	shouldHideAds,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
+
+	const renderAds = !isAdFreeUser && !shouldHideAds;
 
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
@@ -171,7 +175,7 @@ export const renderElement = ({
 						duration={element.duration}
 						contentIsNotSensitive={!isSensitive}
 						aCastisEnabled={!!switches.acast}
-						readerCanBeShownAds={!isAdFreeUser}
+						readerCanBeShownAds={renderAds}
 					/>
 				</Island>
 			);
@@ -449,6 +453,7 @@ export const renderElement = ({
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
 					isLastElement={index === totalElements - 1}
+					shouldHideAds={shouldHideAds}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
@@ -492,6 +497,7 @@ export const renderElement = ({
 					RenderArticleElement={RenderArticleElement}
 					isLastElement={index === totalElements - 1}
 					sectioned={!!isSectionedMiniProfilesArticle}
+					shouldHideAds={shouldHideAds}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MultiBylinesBlockElement':
@@ -508,6 +514,7 @@ export const renderElement = ({
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
 					isLastElement={index === totalElements - 1}
+					shouldHideAds={shouldHideAds}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
@@ -532,7 +539,7 @@ export const renderElement = ({
 			if (isListElement || isTimeline) return null;
 			return <EmailSignUpWrapper {...emailSignUpProps} />;
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
-			return <AdPlaceholder />;
+			return renderAds && <AdPlaceholder />;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (
 				<NumberedTitleBlockComponent
@@ -599,6 +606,7 @@ export const renderElement = ({
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
 					isLastElement={index === totalElements - 1}
+					shouldHideAds={shouldHideAds}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
@@ -725,6 +733,7 @@ export const renderElement = ({
 						host,
 						isPinnedPost,
 						starRating,
+						shouldHideAds,
 					})}
 					format={format}
 				/>
@@ -882,7 +891,7 @@ export const renderElement = ({
 				<Island priority="critical" defer={{ until: 'visible' }}>
 					<CrosswordComponent
 						data={element.crossword}
-						canRenderAds={!isAdFreeUser && !isSensitive}
+						canRenderAds={renderAds}
 					/>
 				</Island>
 			);
@@ -937,6 +946,7 @@ export const RenderArticleElement = ({
 	totalElements,
 	isListElement,
 	isSectionedMiniProfilesArticle,
+	shouldHideAds,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -962,6 +972,7 @@ export const RenderArticleElement = ({
 		totalElements,
 		isListElement,
 		isSectionedMiniProfilesArticle,
+		shouldHideAds,
 	});
 
 	const needsFigure = !bareElements.has(element._type);

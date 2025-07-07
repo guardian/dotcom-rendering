@@ -81,6 +81,7 @@ export const VideoAsSecond = () => {
 				switches={{}}
 				isPinnedPost={false}
 				editionId={'UK'}
+				shouldHideAds={false}
 			/>
 		</Wrapper>
 	);
@@ -128,6 +129,7 @@ export const Title = () => {
 				switches={{}}
 				isPinnedPost={false}
 				editionId={'UK'}
+				shouldHideAds={false}
 			/>
 		</Wrapper>
 	);
@@ -196,6 +198,7 @@ export const Video = () => {
 				switches={{}}
 				isPinnedPost={false}
 				editionId={'UK'}
+				shouldHideAds={false}
 			/>
 		</Wrapper>
 	);
@@ -239,6 +242,7 @@ export const RichLink = () => {
 				switches={{}}
 				isPinnedPost={false}
 				editionId={'UK'}
+				shouldHideAds={false}
 			/>
 		</Wrapper>
 	);
@@ -273,6 +277,7 @@ export const FirstImage = () => {
 				switches={{}}
 				isPinnedPost={false}
 				editionId={'UK'}
+				shouldHideAds={false}
 			/>
 		</Wrapper>
 	);
@@ -333,6 +338,7 @@ export const ImageRoles = () => {
 				isAdFreeUser={false}
 				isSensitive={false}
 				editionId={'UK'}
+				shouldHideAds={false}
 			/>
 		</Wrapper>
 	);
@@ -382,6 +388,7 @@ export const Thumbnail = () => {
 				isAdFreeUser={false}
 				isSensitive={false}
 				editionId={'UK'}
+				shouldHideAds={false}
 			/>
 		</Wrapper>
 	);
@@ -417,6 +424,7 @@ export const ImageAndTitle = () => {
 				switches={{}}
 				isPinnedPost={false}
 				editionId={'UK'}
+				shouldHideAds={false}
 			/>
 		</Wrapper>
 	);
@@ -448,6 +456,7 @@ export const Updated = () => {
 				switches={{}}
 				isPinnedPost={false}
 				editionId={'UK'}
+				shouldHideAds={false}
 			/>
 		</Wrapper>
 	);
@@ -483,6 +492,7 @@ export const Contributor = () => {
 				isAdFreeUser={false}
 				isSensitive={false}
 				editionId={'UK'}
+				shouldHideAds={false}
 			/>
 		</Wrapper>
 	);
@@ -516,6 +526,7 @@ export const NoAvatar = () => {
 				isAdFreeUser={false}
 				isSensitive={false}
 				editionId={'UK'}
+				shouldHideAds={false}
 			/>
 		</Wrapper>
 	);
@@ -552,6 +563,7 @@ export const TitleAndContributor = () => {
 				isAdFreeUser={false}
 				isSensitive={false}
 				editionId={'UK'}
+				shouldHideAds={false}
 			/>
 		</Wrapper>
 	);

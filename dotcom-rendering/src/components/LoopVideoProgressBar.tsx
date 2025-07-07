@@ -18,7 +18,7 @@ const foregroundStyles = (progressPercentage: number) => css`
 	width: ${progressPercentage}%;
 	z-index: ${getZIndex('loop-video-progress-bar-foreground')};
 	background-color: ${palette('--loop-video-progress-bar-value')};
-	transition: width 0.3s linear;
+	transition: width 0.25s linear;
 `;
 
 type Props = {
@@ -30,8 +30,8 @@ type Props = {
 /**
  * A progress bar for the loop video component.
  *
- * Why don't we use the <progress /> element?
- * It was not possible to properly style the native progress element in safari.
+ * Q. Why don't we use the <progress /> element?
+ * A. It was not possible to properly style the native progress element in safari.
  */
 export const LoopVideoProgressBar = ({
 	videoId,
@@ -44,17 +44,18 @@ export const LoopVideoProgressBar = ({
 	if (Number.isNaN(progressPercentage)) {
 		return null;
 	}
+	const roundedProgressPercentage = Number(progressPercentage.toFixed(2));
 
 	return (
 		<div
 			role="progressbar"
 			aria-labelledby={videoId}
-			aria-valuenow={progressPercentage}
+			aria-valuenow={roundedProgressPercentage}
 			aria-valuemin={0}
 			aria-valuemax={100}
 			css={styles}
 		>
-			<span css={foregroundStyles(progressPercentage)} />
+			<span css={foregroundStyles(roundedProgressPercentage)} />
 		</div>
 	);
 };

@@ -96,7 +96,8 @@ export type Props = {
 	avatarUrl?: string;
 	showClock?: boolean;
 	mainMedia?: MainMedia;
-	/** Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size
+	/**
+	 * Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size
 	 * At 300px or below, the player will begin to lose functionality e.g. volume controls being omitted.
 	 * Youtube requires a minimum width 200px.
 	 */
@@ -133,8 +134,14 @@ export type Props = {
 	isTagPage?: boolean;
 	/** Allows the consumer to set an aspect ratio on the image of 5:3, 5:4, 4:5 or 1:1 */
 	aspectRatio?: AspectRatio;
+	/** The index of the card in a carousel */
 	index?: number;
-	/** The Splash card in a flexible container gets a different visual treatment to other cards*/
+	/**
+	 * Useful for videos. Has the form: collection-{collection ID}-{card grouping type}-{card index}
+	 * For example, the first splash card in the second collection would be: "collection-1-splash-0"
+	 */
+	uniqueId?: string;
+	/** The Splash card in a flexible container gets a different visual treatment to other cards */
 	isFlexSplash?: boolean;
 	showTopBarDesktop?: boolean;
 	showTopBarMobile?: boolean;
@@ -254,7 +261,7 @@ const getMedia = ({
 	canPlayInline?: boolean;
 	isBetaContainer: boolean;
 }) => {
-	if (mainMedia?.type === 'LoopVideo') {
+	if (mainMedia?.type === 'LoopVideo' && canPlayInline) {
 		return {
 			type: 'loop-video',
 			mainMedia,
@@ -402,6 +409,7 @@ export const Card = ({
 	isTagPage = false,
 	aspectRatio,
 	index = 0,
+	uniqueId = '',
 	isFlexSplash,
 	showTopBarDesktop = true,
 	showTopBarMobile = true,
@@ -887,18 +895,17 @@ export const Card = ({
 								/>
 							</AvatarContainer>
 						)}
-						{mainMedia?.type === 'LoopVideo' && (
+						{media.type === 'loop-video' && (
 							<Island
 								priority="feature"
 								defer={{ until: 'visible' }}
 							>
 								<LoopVideo
-									src={mainMedia.videoId}
-									height={mainMedia.height}
-									width={mainMedia.width}
-									videoId={mainMedia.videoId}
+									src={media.mainMedia.videoId}
+									height={media.mainMedia.height}
+									width={media.mainMedia.width}
 									thumbnailImage={
-										mainMedia.thumbnailImage ?? ''
+										media.mainMedia.thumbnailImage ?? ''
 									}
 									fallbackImageComponent={
 										<CardPicture
@@ -909,6 +916,7 @@ export const Card = ({
 											aspectRatio={aspectRatio}
 										/>
 									}
+									uniqueId={uniqueId}
 								/>
 							</Island>
 						)}

@@ -102,6 +102,7 @@ export type DCRFrontCard = {
 	branding?: Branding;
 	slideshowImages?: DCRSlideshowImage[];
 	showVideo?: boolean;
+	uniqueId?: string;
 };
 
 export type DCRSlideshowImage = {
@@ -124,7 +125,7 @@ export type DCRCollectionType = {
 	collectionType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
 	containerLevel?: DCRContainerLevel;
-	containerSpacing?: 'large' | 'small';
+	isNextCollectionPrimary?: boolean;
 	grouped: DCRGroupedTrails;
 	curated: DCRFrontCard[];
 	backfill: DCRFrontCard[];

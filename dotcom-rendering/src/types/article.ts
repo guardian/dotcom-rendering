@@ -90,6 +90,7 @@ export const enhanceArticleType = (
 		hasAffiliateLinksDisclaimer: !!data.affiliateLinksDisclaimer,
 		audioArticleImage: data.audioArticleImage,
 		tags: data.tags,
+		shouldHideAds: data.shouldHideAds,
 	});
 
 	const crosswordBlock = buildCrosswordBlock(data);

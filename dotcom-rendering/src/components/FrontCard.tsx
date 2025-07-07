@@ -56,6 +56,7 @@ export const FrontCard = (props: Props) => {
 		slideshowImages: trail.slideshowImages,
 		showLivePlayable: trail.showLivePlayable,
 		showVideo: trail.showVideo,
+		uniqueId: trail.uniqueId,
 	};
 
 	return Card({ ...defaultProps, ...cardProps });

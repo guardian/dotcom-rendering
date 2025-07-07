@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import { grid } from '../../src/grid';
 import type { FEArticle } from '../frontend/feArticle';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
@@ -55,6 +56,10 @@ const meta = (format: ArticleFormat) => {
 
 			padding-top: 2px;
 		`;
+	}
+
+	if (format.design === ArticleDesign.Gallery) {
+		return '';
 	}
 
 	return css`
@@ -182,6 +187,13 @@ export const metaContainer = (format: ArticleFormat) => {
 				case ArticleDesign.DeadBlog: {
 					return '';
 				}
+				case ArticleDesign.Gallery:
+					return css`
+						${grid.column.centre}
+						margin-bottom: ${space[3]}px;
+						margin-left: ${space[3]}px;
+						margin-right: ${space[3]}px;
+					`;
 				default:
 					return defaultMargins;
 			}

@@ -39,8 +39,8 @@ export const ScrollableMedium = ({
 	return (
 		<ScrollableCarousel
 			carouselLength={trails.length}
-			visibleCardsOnMobile={2}
-			visibleCardsOnTablet={4}
+			visibleCarouselSlidesOnMobile={2}
+			visibleCarouselSlidesOnTablet={4}
 			sectionId={sectionId}
 		>
 			{trails.map((trail) => {
@@ -71,6 +71,7 @@ export const ScrollableMedium = ({
 							showLivePlayable={trail.showLivePlayable}
 							showTopBarDesktop={false}
 							showTopBarMobile={false}
+							canPlayInline={false}
 						/>
 					</ScrollableCarousel.Item>
 				);
