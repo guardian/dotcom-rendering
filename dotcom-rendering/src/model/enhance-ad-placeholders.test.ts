@@ -96,7 +96,11 @@ describe('Enhancing ad placeholders', () => {
 			const expectedPlaceholders = expectedPositions.length;
 			const input: FEElement[] = elements;
 
-			const output = enhanceAdPlaceholders(exampleFormat, 'Apps')(input);
+			const output = enhanceAdPlaceholders(
+				exampleFormat,
+				'Apps',
+				false,
+			)(input);
 			const placeholderIndices = output.flatMap((el, idx) =>
 				elementIsAdPlaceholder(el) ? [idx] : [],
 			);
@@ -115,7 +119,7 @@ describe('Enhancing ad placeholders', () => {
 		},
 	);
 
-	describe('should not insert an ad placeholder before an inline image element, but can insert it after the image', () => {
+	it('should not insert an ad placeholder before an inline image element, but can insert it after the image', () => {
 		const threeParagraphs = getTestParagraphElements(3);
 
 		const elements = [
@@ -126,7 +130,11 @@ describe('Enhancing ad placeholders', () => {
 
 		const input: FEElement[] = elements;
 
-		const output = enhanceAdPlaceholders(exampleFormat, 'Apps')(input);
+		const output = enhanceAdPlaceholders(
+			exampleFormat,
+			'Apps',
+			false,
+		)(input);
 		const outputPlaceholders = output.filter(elementIsAdPlaceholder);
 
 		expect(outputPlaceholders.length).toEqual(1);
@@ -139,7 +147,7 @@ describe('Enhancing ad placeholders', () => {
 		expect(placeholderIndices).toEqual([4]);
 	});
 
-	describe('should not insert an ad placeholder after a thumbnail image element', () => {
+	it('should not insert an ad placeholder after a thumbnail image element', () => {
 		const threeParagraphs = getTestParagraphElements(3);
 
 		const elements = [
@@ -150,7 +158,11 @@ describe('Enhancing ad placeholders', () => {
 
 		const input: FEElement[] = elements;
 
-		const output = enhanceAdPlaceholders(exampleFormat, 'Apps')(input);
+		const output = enhanceAdPlaceholders(
+			exampleFormat,
+			'Apps',
+			false,
+		)(input);
 		const outputPlaceholders = output.filter(elementIsAdPlaceholder);
 
 		expect(outputPlaceholders.length).toEqual(1);
@@ -163,7 +175,7 @@ describe('Enhancing ad placeholders', () => {
 		expect(placeholderIndices).toEqual([5]);
 	});
 
-	describe('should not insert an ad placeholder after an element which is not an image or text', () => {
+	it('should not insert an ad placeholder after an element which is not an image or text', () => {
 		const threeParagraphs = getTestParagraphElements(3);
 
 		const elements = [
@@ -174,7 +186,11 @@ describe('Enhancing ad placeholders', () => {
 
 		const input: FEElement[] = elements;
 
-		const output = enhanceAdPlaceholders(exampleFormat, 'Apps')(input);
+		const output = enhanceAdPlaceholders(
+			exampleFormat,
+			'Apps',
+			false,
+		)(input);
 		const outputPlaceholders = output.filter(elementIsAdPlaceholder);
 
 		expect(outputPlaceholders.length).toEqual(1);
@@ -185,5 +201,18 @@ describe('Enhancing ad placeholders', () => {
 
 		// Expect one placeholder to be present after the fifth element only
 		expect(placeholderIndices).toEqual([5]);
+	});
+
+	it('should not insert ad placeholders if shouldHideAds is true', () => {
+		const input: FEElement[] = getTestParagraphElements(6);
+
+		const output = enhanceAdPlaceholders(
+			exampleFormat,
+			'Apps',
+			true,
+		)(input);
+		const outputPlaceholders = output.filter(elementIsAdPlaceholder);
+
+		expect(outputPlaceholders.length).toEqual(0);
 	});
 });
