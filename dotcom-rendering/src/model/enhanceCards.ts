@@ -14,6 +14,7 @@ import type { EditionId } from '../lib/edition';
 import type { Group } from '../lib/getDataLinkName';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
 import { getLargestImageSize } from '../lib/image';
+import type { Image } from '../types/content';
 import type {
 	DCRFrontCard,
 	DCRSlideshowImage,
@@ -156,6 +157,15 @@ const decideSlideshowImages = (
 	return undefined;
 };
 
+const getLargestImageUrl = (images?: Image[]) => {
+	return getLargestImageSize(
+		images?.map(({ url, fields: { width } }) => ({
+			url,
+			width: Number(width),
+		})) ?? [],
+	)?.url;
+};
+
 /**
  * While the first Media Atom is *not* guaranteed to be the main media,
  * it *happens to be* correct in the majority of cases.
@@ -179,14 +189,7 @@ const getActiveMediaAtom = (
 				// Size fixed to a 5:4 ratio
 				width: 500,
 				height: 400,
-				thumbnailImage: getLargestImageSize(
-					mediaAtom.posterImage?.allImages.map(
-						({ url, fields: { width } }) => ({
-							url,
-							width: Number(width),
-						}),
-					) ?? [],
-				)?.url,
+				image: getLargestImageUrl(mediaAtom.posterImage?.allImages),
 			};
 		}
 
@@ -202,13 +205,7 @@ const getActiveMediaAtom = (
 				height: 300,
 				origin: mediaAtom.source ?? 'Unknown origin',
 				expired: !!mediaAtom.expired,
-				images:
-					mediaAtom.posterImage?.allImages.map(
-						({ url, fields: { width } }) => ({
-							url,
-							width: Number(width),
-						}),
-					) ?? [],
+				image: getLargestImageUrl(mediaAtom.posterImage?.allImages),
 			};
 		}
 	}
