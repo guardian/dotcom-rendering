@@ -555,7 +555,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.LinkElement':
 			return (
 				<>
-					{element.linkElementType === 'ProductButton' && (
+					{element.linkType === 'ProductButton' && (
 						<ProductLinkButton
 							label={element.label}
 							url={element.url}

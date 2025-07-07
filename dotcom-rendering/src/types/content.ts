@@ -397,7 +397,7 @@ export interface LinkElement {
 	_type: 'model.dotcomrendering.pageElements.LinkElement';
 	url: string;
 	label: string;
-	linkElementType: 'ProductButton';
+	linkType: 'ProductButton';
 }
 
 export interface ListBlockElement {

@@ -2513,7 +2513,7 @@
                 "label": {
                     "type": "string"
                 },
-                "linkElementType": {
+                "linkType": {
                     "type": "string",
                     "const": "ProductButton"
                 }
@@ -2521,7 +2521,7 @@
             "required": [
                 "_type",
                 "label",
-                "linkElementType",
+                "linkType",
                 "url"
             ]
         },
