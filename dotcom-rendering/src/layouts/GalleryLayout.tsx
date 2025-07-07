@@ -183,6 +183,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						pageId={frontendData.pageId}
 						webTitle={frontendData.webTitle}
 						key={idx}
+						renderingTarget={props.renderingTarget}
 					/>
 				))}
 				<SubMeta
