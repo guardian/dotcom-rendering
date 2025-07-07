@@ -145,7 +145,8 @@ export const LoopVideoPlayer = forwardRef(
 					css={videoStyles(width, height)}
 				>
 					{/* Only mp4 is currently supported. Assumes the video file type is mp4. */}
-					<source src={src} type="video/mp4" />
+					{/* The start time is set to 1ms so that Safari will autoplay the video */}
+					<source src={`${src}#t=0.001`} type="video/mp4" />
 					{fallbackImageComponent}
 				</video>
 				{ref && 'current' in ref && ref.current && isPlayable && (
