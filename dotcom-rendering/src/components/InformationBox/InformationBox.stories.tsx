@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { ButtonLink } from '@guardian/source/react-components';
 import type { Meta } from '@storybook/react';
-import React from 'react';
 import { ExternalLink } from '../ExternalLink/ExternalLink';
 import { ThemedLink } from '../ThemedLink/ThemedLink';
 import { InformationBox, InformationBoxText } from './InformationBox';
