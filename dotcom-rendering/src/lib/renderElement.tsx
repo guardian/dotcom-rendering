@@ -559,7 +559,7 @@ export const renderElement = ({
 					/>
 				</Island>
 			);
-		case 'model.dotcomrendering.pageElements.LinkElement':
+		case 'model.dotcomrendering.pageElements.LinkBlockElement':
 			return (
 				<>
 					{element.linkType === 'ProductButton' && (

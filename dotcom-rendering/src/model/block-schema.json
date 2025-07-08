@@ -163,7 +163,7 @@
                     "$ref": "#/definitions/KeyTakeawaysBlockElement"
                 },
                 {
-                    "$ref": "#/definitions/LinkElement"
+                    "$ref": "#/definitions/LinkBlockElement"
                 },
                 {
                     "$ref": "#/definitions/ListBlockElement"
@@ -1989,12 +1989,12 @@
                 "title"
             ]
         },
-        "LinkElement": {
+        "LinkBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
                     "type": "string",
-                    "const": "model.dotcomrendering.pageElements.LinkElement"
+                    "const": "model.dotcomrendering.pageElements.LinkBlockElement"
                 },
                 "url": {
                     "type": "string"
