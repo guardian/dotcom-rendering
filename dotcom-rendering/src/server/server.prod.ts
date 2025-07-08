@@ -99,41 +99,41 @@ export const prodServer = (): void => {
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get(
-		'/Article/*',
+		'/Article/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleArticle,
 	);
-	app.use('/ArticleJson/*', handleArticleJson);
+	app.use('/ArticleJson/*url', handleArticleJson);
 
 	app.get(
-		'/AMPArticle/*',
+		'/AMPArticle/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleAMPArticle,
 	);
 
 	app.get(
-		'/Front/*',
+		'/Front/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleFront,
 	);
 	app.get(
-		'/FrontJSON/*',
+		'/FrontJSON/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleFrontJson,
 	);
 
 	app.get(
-		'/TagPage/*',
+		'/TagPage/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleTagPage,
 	);
 	app.get(
-		'/TagPageJSON/*',
+		'/TagPageJSON/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleTagPageJson,
@@ -147,14 +147,14 @@ export const prodServer = (): void => {
 	);
 
 	app.get(
-		'/AppsArticle/*',
+		'/AppsArticle/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleAppsArticle,
 	);
 
 	app.get(
-		'/AppsInteractive/*',
+		'/AppsInteractive/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleAppsInteractive,
