@@ -22,11 +22,11 @@ import type { ReactComponent } from '../../lib/ReactComponent';
 import { replaceArticleCount } from '../../lib/replaceArticleCount';
 import {
 	addAbandonedBasketAndTrackingParamsToUrl,
-	addRegionIdAndTrackingParamsToSupportUrl,
 	addTrackingParamsToProfileUrl,
 	createClickEventFromTracking,
 	createInsertEventFromTracking,
 	createViewEventFromTracking,
+	enrichSupportUrl,
 	isProfileUrl,
 } from '../../lib/tracking';
 import type { CloseableBannerProps } from '../utils/withCloseable';
@@ -87,9 +87,11 @@ const withBannerData =
 			separateArticleCount,
 			separateArticleCountSettings,
 			choiceCardAmounts,
+			choiceCardsSettings,
 			design,
 			bannerChannel,
 			abandonedBasket,
+			promoCodes,
 		} = bannerProps;
 
 		const [hasBeenSeen, setNode] = useIsInView({
@@ -99,7 +101,7 @@ const withBannerData =
 
 		useEffect(() => {
 			if (hasBeenSeen && submitComponentEvent) {
-				submitComponentEvent(
+				void submitComponentEvent(
 					createViewEventFromTracking(
 						tracking,
 						tracking.campaignCode,
@@ -110,7 +112,7 @@ const withBannerData =
 
 		useEffect(() => {
 			if (submitComponentEvent) {
-				submitComponentEvent(
+				void submitComponentEvent(
 					createInsertEventFromTracking(
 						tracking,
 						tracking.campaignCode,
@@ -177,12 +179,12 @@ const withBannerData =
 				}
 
 				return {
-					ctaUrl: addRegionIdAndTrackingParamsToSupportUrl(
-						cta.baseUrl,
+					ctaUrl: enrichSupportUrl({
+						baseUrl: cta.baseUrl,
 						tracking,
-						numArticles,
+						promoCodes: promoCodes ?? [],
 						countryCode,
-					),
+					}),
 					ctaText: cta.text,
 				};
 			};
@@ -268,7 +270,7 @@ const withBannerData =
 					componentId,
 				);
 				if (submitComponentEvent) {
-					submitComponentEvent(componentClickEvent);
+					void submitComponentEvent(componentClickEvent);
 				}
 				if (close) {
 					onClose();
@@ -326,6 +328,7 @@ const withBannerData =
 					separateArticleCount,
 					separateArticleCountSettings,
 					choiceCardAmounts,
+					choiceCardsSettings,
 					tracking,
 					submitComponentEvent,
 					design,

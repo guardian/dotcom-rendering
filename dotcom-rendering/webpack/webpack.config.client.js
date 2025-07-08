@@ -52,34 +52,6 @@ const getEntryIndex = (build) => {
  */
 const getLoaders = (build) => {
 	switch (build) {
-		case 'client.web.legacy':
-			return [
-				{
-					loader: 'babel-loader',
-					options: {
-						presets: [
-							'@babel/preset-react',
-							[
-								'@babel/preset-env',
-								{
-									targets: {
-										ie: '11',
-									},
-									modules: false,
-								},
-							],
-						],
-						compact: true,
-					},
-				},
-				{
-					loader: 'ts-loader',
-					options: {
-						configFile: 'tsconfig.build.json',
-						transpileOnly: true,
-					},
-				},
-			];
 		case 'client.editionsCrossword':
 		case 'client.apps':
 			return swcLoader(['android >= 5', 'ios >= 12']);
@@ -157,7 +129,7 @@ module.exports = ({ build }) => ({
 		rules: [
 			{
 				test: /\.[jt]sx?|mjs$/,
-				exclude: module.exports.babelExclude,
+				exclude: module.exports.transpileExclude,
 				use: getLoaders(build),
 			},
 			{
@@ -167,9 +139,23 @@ module.exports = ({ build }) => ({
 			svgr,
 		],
 	},
+	/**
+	 * Do not alias React modules in the web build variant so React is bundled
+	 * instead of Preact
+	 */
+	resolve:
+		build === 'client.web.variant'
+			? undefined
+			: {
+					alias: {
+						react: 'preact/compat',
+						'react-dom/test-utils': 'preact/test-utils',
+						'react-dom': 'preact/compat',
+					},
+			  },
 });
 
-module.exports.babelExclude = {
+module.exports.transpileExclude = {
 	and: [/node_modules/],
 	not: [
 		// Include all @guardian modules, except automat-modules

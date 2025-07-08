@@ -32,8 +32,8 @@ interface Props {
 	article: Article;
 }
 
-const decideTitle = ({ format, frontendData }: Article): string => {
-	if (format.theme === Pillar.Opinion && frontendData.byline) {
+const decideTitle = ({ theme, frontendData }: Article): string => {
+	if (theme === Pillar.Opinion && frontendData.byline) {
 		return `${frontendData.headline} | ${frontendData.byline} | The Guardian`;
 	}
 	return `${frontendData.headline} | ${frontendData.sectionLabel} | The Guardian`;
@@ -42,7 +42,7 @@ const decideTitle = ({ format, frontendData }: Article): string => {
 export const renderHtml = ({
 	article,
 }: Props): { html: string; prefetchScripts: string[] } => {
-	const { format, frontendData } = article;
+	const { design, display, theme, frontendData } = article;
 	const NAV = {
 		...extractNAV(frontendData.nav),
 		selectedPillar: getCurrentPillar(frontendData),
@@ -111,15 +111,8 @@ export const renderHtml = ({
 		pageHasNonBootInteractiveElements &&
 			`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 	].filter(isString);
-	const legacyScripts = [
-		getPathFromManifest('client.web.legacy', 'frameworks.js'),
-		getPathFromManifest('client.web.legacy', 'index.js'),
-	];
 
-	const scriptTags = generateScriptTags([
-		...prefetchScripts,
-		...legacyScripts,
-	]);
+	const scriptTags = generateScriptTags(prefetchScripts);
 
 	/**
 	 * We escape windowGuardian here to prevent errors when the data
@@ -149,10 +142,16 @@ export const renderHtml = ({
 		unknownConfig: frontendData.config,
 	});
 
+	const format = {
+		design,
+		display,
+		theme,
+	};
+
 	const getAmpLink = (tags: TagType[]) => {
 		if (
-			format.design === ArticleDesign.Interactive ||
-			format.design === ArticleDesign.FullPageInteractive
+			design === ArticleDesign.Interactive ||
+			design === ArticleDesign.FullPageInteractive
 		) {
 			return undefined;
 		}
@@ -178,12 +177,7 @@ export const renderHtml = ({
 	const ampLink = getAmpLink(frontendData.tags);
 
 	const { openGraphData, twitterData } = frontendData;
-	const keywords =
-		typeof frontendData.config.keywords === 'undefined' ||
-		frontendData.config.keywords === 'Network Front'
-			? ''
-			: frontendData.config.keywords;
-
+	const section = frontendData.config.section;
 	const initTwitter = `
 <script>
 // https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/set-up-twitter-for-websites
@@ -218,9 +212,9 @@ window.twttr = (function(d, s, id) {
 		ampLink,
 		openGraphData,
 		twitterData,
-		keywords,
+		section,
 		initTwitter:
-			pageHasTweetElements || format.design === ArticleDesign.LiveBlog
+			pageHasTweetElements || design === ArticleDesign.LiveBlog
 				? initTwitter
 				: undefined,
 		canonicalUrl,
@@ -230,8 +224,8 @@ window.twttr = (function(d, s, id) {
 		hasLiveBlogTopAd: !!frontendData.config.hasLiveBlogTopAd,
 		hasSurveyAd: !!frontendData.config.hasSurveyAd,
 		onlyLightColourScheme:
-			format.design === ArticleDesign.FullPageInteractive ||
-			format.design === ArticleDesign.Interactive,
+			design === ArticleDesign.FullPageInteractive ||
+			design === ArticleDesign.Interactive,
 	});
 
 	return { html: pageHtml, prefetchScripts };
@@ -257,6 +251,7 @@ export const renderBlocks = ({
 	keywordIds,
 	abTests = {},
 	edition,
+	shouldHideAds,
 }: FEBlocksRequest): string => {
 	const format: ArticleFormat = decideFormat(FEFormat);
 
@@ -294,6 +289,7 @@ export const renderBlocks = ({
 				onFirstPage={false}
 				keyEvents={[]}
 				filterKeyEvents={false}
+				shouldHideAds={shouldHideAds}
 			/>
 		</ConfigProvider>,
 	);

@@ -16,6 +16,7 @@ type Props = {
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
 	isDynamo?: boolean;
+	isMedia?: boolean;
 	/** Allows sublinks container to have a background colour on mobile screen sizes */
 	fillBackgroundOnMobile?: boolean;
 	/** Allows sublinks container to have a background colour on desktop screen sizes */
@@ -56,7 +57,7 @@ const horizontalGrid = css`
 
 const horizontalLineStyle = css`
 	margin-top: ${space[3]}px;
-	:before {
+	::before {
 		position: absolute;
 		top: -${space[2]}px;
 		left: 0;
@@ -75,7 +76,7 @@ const horizontalLineStyle = css`
 
 const verticalLineStyle = css`
 	/* The last child doesn't need a dividing right line */
-	:not(:last-child):after {
+	:not(:last-child)::after {
 		content: '';
 		position: absolute;
 		top: 0;
@@ -92,9 +93,7 @@ const sublinkBaseStyles = css`
 `;
 
 const verticalSublinkStyles = css`
-	:not(:first-child) {
-		${horizontalLineStyle}
-	}
+	${horizontalLineStyle}
 
 	${from.tablet} {
 		:first-child {
@@ -106,9 +105,7 @@ const verticalSublinkStyles = css`
 const horizontalSublinkStyles = (totalColumns: number) => css`
 	grid-column: span ${totalColumns};
 	${until.tablet} {
-		:not(:first-child) {
-			${horizontalLineStyle}
-		}
+		${horizontalLineStyle}
 	}
 
 	${from.tablet} {
@@ -124,19 +121,23 @@ const wrapperStyles = css`
 	}
 `;
 
-const backgroundFillMobile = css`
+const backgroundFillMobile = (isMedia: boolean) => css`
 	${until.tablet} {
 		padding: ${space[2]}px;
 		padding-bottom: ${space[3]}px;
-		background-color: ${palette('--card-sublinks-background')};
+		background-color: ${isMedia
+			? palette('--card-media-sublinks-background')
+			: palette('--card-sublinks-background')};
 	}
 `;
 
-const backgroundFillDesktop = css`
+const backgroundFillDesktop = (isMedia: boolean) => css`
 	${from.tablet} {
 		padding: ${space[2]}px;
 		padding-bottom: ${space[3]}px;
-		background-color: ${palette('--card-sublinks-background')};
+		background-color: ${isMedia
+			? palette('--card-media-sublinks-background')
+			: palette('--card-sublinks-background')};
 	}
 `;
 
@@ -145,10 +146,12 @@ export const SupportingContent = ({
 	alignment,
 	containerPalette,
 	isDynamo,
+	isMedia = false,
 	fillBackgroundOnMobile = false,
 	fillBackgroundOnDesktop = false,
 }: Props) => {
 	const columnSpan = getColumnSpan(supportingContent.length);
+
 	return (
 		<ul
 			className="sublinks"
@@ -156,13 +159,12 @@ export const SupportingContent = ({
 				wrapperStyles,
 				baseGrid,
 				(isDynamo ?? alignment === 'horizontal') && horizontalGrid,
-				fillBackgroundOnMobile && backgroundFillMobile,
-				fillBackgroundOnDesktop && backgroundFillDesktop,
+				fillBackgroundOnMobile && backgroundFillMobile(isMedia),
+				fillBackgroundOnDesktop && backgroundFillDesktop(isMedia),
 			]}
 		>
 			{supportingContent.map((subLink, index) => {
-				// The model has this property as optional but it is very likely
-				// to exist
+				// The model has this property as optional but it is very likely to exist
 				if (!subLink.headline) return null;
 
 				/** Force the format design to be Standard if sublink format

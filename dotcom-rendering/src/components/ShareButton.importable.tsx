@@ -24,7 +24,7 @@ type Props = {
 
 type ButtonKind = 'native' | 'copy' | 'email';
 
-type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta';
+type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta' | 'ImageCaption';
 
 const sharedButtonStyles = (sizeXSmall: boolean) => css`
 	transition: none;
@@ -210,6 +210,7 @@ export const ShareButton = ({
 		if (
 			!isLiveBlogBlockDesktop &&
 			'share' in navigator &&
+			'canShare' in navigator &&
 			navigator.canShare(shareData)
 		) {
 			setButtonKind('native');

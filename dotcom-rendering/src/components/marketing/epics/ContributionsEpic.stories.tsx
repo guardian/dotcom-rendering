@@ -4,14 +4,11 @@
  * https://github.com/guardian/support-dotcom-components/blob/a482b35a25ca59f66501c4de02de817046206298/packages/modules/src/modules/epics/ContributionsEpic.stories.tsx
  */
 import { css } from '@emotion/react';
-import {
-	SecondaryCtaType,
-	TickerCountType,
-	TickerEndType,
-} from '@guardian/support-dotcom-components';
+import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
 import React from 'react';
+import { choiceCardsSettings } from '../lib/storybook';
 import { ContributionsEpicUnvalidated as ContributionsEpic } from './ContributionsEpic';
 import { props } from './utils/storybook';
 
@@ -198,13 +195,10 @@ export const WithTicker: Story = {
 		variant: {
 			...props.variant,
 			tickerSettings: {
-				endType: TickerEndType.unlimited,
-				countType: TickerCountType.money,
 				currencySymbol: '£',
 				copy: {
 					countLabel: 'Help us reach our end-of-year goal',
-					goalReachedPrimary: '',
-					goalReachedSecondary: '',
+					goalCopy: 'goal',
 				},
 				tickerData: {
 					total: 10000,
@@ -226,13 +220,10 @@ export const WithTickerAndWithAboveTopReaderArticleCount: Story = {
 				type: 'above',
 			},
 			tickerSettings: {
-				endType: TickerEndType.unlimited,
-				countType: TickerCountType.money,
 				currencySymbol: '£',
 				copy: {
 					countLabel: 'Help us reach our end-of-year goal',
-					goalReachedPrimary: '',
-					goalReachedSecondary: '',
+					goalCopy: 'goal',
 				},
 				tickerData: {
 					total: 10000,
@@ -312,53 +303,7 @@ export const WithThreeTierChoiceCards: Story = {
 			name: 'THREE_TIER_CHOICE_CARDS',
 			secondaryCta: undefined,
 			showChoiceCards: true,
-		},
-	},
-};
-
-export const WithThreeTierChoiceCardsForUS: Story = {
-	name: 'ContributionsEpic with three tier choice cards for US',
-	args: {
-		...meta.args,
-		countryCode: 'US',
-		variant: {
-			...props.variant,
-			name: 'THREE_TIER_CHOICE_CARDS',
-			secondaryCta: undefined,
-			showChoiceCards: true,
-		},
-	},
-};
-
-export const WithThreeTierChoiceCardsSimplifiedForUS: Story = {
-	name: 'ContributionsEpic with three tier choice cards for US (Simplified third choice)',
-	args: {
-		...meta.args,
-		countryCode: 'US',
-		variant: {
-			...props.variant,
-			name: 'TEST_EPIC_SIMPLIFIED_THIRD_CHOICE_CARD',
-			secondaryCta: undefined,
-			showChoiceCards: true,
-		},
-	},
-};
-
-export const WithThreeTierDiscountChoiceCards: Story = {
-	name: 'ContributionsEpic with discounted three tier choice cards',
-	args: {
-		...meta.args,
-		countryCode: 'GB',
-		variant: {
-			...props.variant,
-			name: 'THREE_TIER_CHOICE_CARDS',
-			secondaryCta: undefined,
-			showChoiceCards: true,
-			cta: {
-				text: 'Support the Guardian',
-				baseUrl:
-					'https://support.theguardian.com/uk/contribute?promoCode=BLACK_FRIDAY_DISCOUNT_2024',
-			},
+			choiceCardsSettings,
 		},
 	},
 };
@@ -372,29 +317,7 @@ export const WithChoiceCardsAndSignInLink: Story = {
 			name: 'V1_SIGN_IN',
 			showSignInLink: true,
 			showChoiceCards: true,
-			choiceCardAmounts: {
-				testName: 'Storybook_test',
-				variantName: 'Control',
-				defaultContributionType: 'MONTHLY',
-				displayContributionType: ['ONE_OFF', 'MONTHLY', 'ANNUAL'],
-				amountsCardData: {
-					ONE_OFF: {
-						amounts: [5, 10, 15, 20],
-						defaultAmount: 5,
-						hideChooseYourAmount: false,
-					},
-					MONTHLY: {
-						amounts: [6, 12],
-						defaultAmount: 12,
-						hideChooseYourAmount: true,
-					},
-					ANNUAL: {
-						amounts: [50, 100, 150, 200],
-						defaultAmount: 100,
-						hideChooseYourAmount: true,
-					},
-				},
-			},
+			choiceCardsSettings,
 		},
 	},
 };

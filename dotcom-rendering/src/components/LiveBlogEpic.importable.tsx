@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import type { OphanComponentEvent } from '@guardian/libs';
 import { getCookie, isUndefined, log, storage } from '@guardian/libs';
+import { type ComponentEvent } from '@guardian/ophan-tracker-js';
 import { space } from '@guardian/source/foundations';
 import { getEpicViewLog } from '@guardian/support-dotcom-components';
 import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/types';
@@ -128,6 +128,7 @@ const usePayload = ({
 			hasOptedOutOfArticleCount,
 			url: window.location.origin + window.location.pathname,
 			isSignedIn,
+			pageId,
 		},
 	};
 };
@@ -198,7 +199,7 @@ const Fetch = ({
 	const enrichedProps: EpicProps = {
 		...props,
 		tracking,
-		submitComponentEvent: (componentEvent: OphanComponentEvent) =>
+		submitComponentEvent: (componentEvent: ComponentEvent) =>
 			submitComponentEvent(componentEvent, renderingTarget),
 	};
 

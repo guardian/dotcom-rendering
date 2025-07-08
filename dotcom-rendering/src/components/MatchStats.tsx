@@ -8,9 +8,10 @@ import {
 	textSans15,
 	until,
 } from '@guardian/source/foundations';
+import type { FootballTeam } from '../footballMatch';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { palette as themePalette } from '../palette';
-import type { TeamType } from '../types/sport';
+import type { ColourName } from '../paletteDeclarations';
 import { Distribution } from './Distribution';
 import { Doughnut } from './Doughnut';
 import { GoalAttempts } from './GoalAttempts';
@@ -18,29 +19,32 @@ import { GridItem } from './GridItem';
 import { Hide } from './Hide';
 import { Lineup } from './Lineup';
 
-type Props = {
-	home: TeamType;
-	away: TeamType;
-	competition: string;
+type MatchStatsData = {
+	home: FootballTeam;
+	away: FootballTeam;
+};
+
+type MatchSummaryProps = MatchStatsData & {
+	usage: 'MatchSummary';
+};
+
+type ArticleProps = MatchStatsData & {
+	usage: 'Article';
 	format: ArticleFormat;
 };
 
-//For these three tournaments, we only get data for live goals, bookings and substitutions, and no other type of match stats
-const omitStatsTeams = [
-	"Women's Nations League",
-	'Europa Conference League',
-	"Women's FA Cup",
-	'Copa America',
-];
+type Props = ArticleProps | MatchSummaryProps;
 
 const StatsGrid = ({
 	children,
 	format,
+	backgroundColour,
 }: {
 	children: React.ReactNode;
-	format: ArticleFormat;
+	format?: ArticleFormat;
+	backgroundColour: ColourName;
 }) => {
-	switch (format.design) {
+	switch (format?.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog: {
 			return (
@@ -50,9 +54,7 @@ const StatsGrid = ({
 						display: flex;
 						flex-direction: column;
 
-						background-color: ${themePalette(
-							'--match-stats-background',
-						)};
+						background-color: ${themePalette(backgroundColour)};
 						@supports (display: grid) {
 							display: grid;
 
@@ -108,9 +110,7 @@ const StatsGrid = ({
 						display: flex;
 						flex-direction: column;
 
-						background-color: ${themePalette(
-							'--match-stats-background',
-						)};
+						background-color: ${themePalette(backgroundColour)};
 						@supports (display: grid) {
 							display: grid;
 
@@ -163,9 +163,11 @@ const StatsGrid = ({
 const StretchBackground = ({
 	showStats,
 	children,
+	backgroundColour,
 }: {
 	showStats: boolean;
 	children: React.ReactNode;
+	backgroundColour: ColourName;
 }) => (
 	<div
 		css={css`
@@ -178,10 +180,10 @@ const StretchBackground = ({
 			}
 			/* We use min-height to help reduce our CLS value */
 			min-height: ${showStats ? '800px' : '570px'};
-			background-color: ${themePalette('--match-stats-background')};
+			background-color: ${themePalette(backgroundColour)};
 
 			${from.leftCol} {
-				:before {
+				::before {
 					content: '';
 					position: absolute;
 					top: 0;
@@ -189,9 +191,7 @@ const StretchBackground = ({
 					/* stretch left */
 					left: -100vw;
 					right: 0;
-					background-color: ${themePalette(
-						'--match-stats-background',
-					)};
+					background-color: ${themePalette(backgroundColour)};
 					z-index: -1;
 				}
 			}
@@ -206,9 +206,9 @@ const ShiftLeft = ({
 	format,
 }: {
 	children: React.ReactNode;
-	format: ArticleFormat;
+	format?: ArticleFormat;
 }) => {
-	switch (format.design) {
+	switch (format?.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog: {
 			return <div>{children}</div>;
@@ -289,9 +289,9 @@ const DecideDoughnut = ({
 	away,
 	format,
 }: {
-	home: TeamType;
-	away: TeamType;
-	format: ArticleFormat;
+	home: FootballTeam;
+	away: FootballTeam;
+	format?: ArticleFormat;
 }) => {
 	const sections = [
 		{
@@ -305,7 +305,7 @@ const DecideDoughnut = ({
 			color: away.colours,
 		},
 	].reverse();
-	switch (format.design) {
+	switch (format?.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog: {
 			return (
@@ -348,11 +348,31 @@ const DecideDoughnut = ({
 	}
 };
 
-export const MatchStats = ({ home, away, competition, format }: Props) => {
-	const showStats = !omitStatsTeams.includes(competition);
+/*
+	Some leagues do not return match stats - see
+	https://github.com/guardian/frontend/blob/e046d4144d0001059156f402fd5cf1af29ee9f0c/sport/app/football/controllers/MatchController.scala#L23
+*/
+function teamHasStats({ shotsOff, shotsOn, fouls, corners }: FootballTeam) {
+	return !(shotsOff === 0 && shotsOn === 0 && fouls === 0 && corners === 0);
+}
+
+export const MatchStats = (props: Props) => {
+	const { home, away, usage } = props;
+	const showStats = teamHasStats(home) && teamHasStats(away);
+	const showLineups = home.players.length > 0 && away.players.length > 0;
+
+	const format = usage === 'Article' ? props.format : undefined;
+	const backgroundColour =
+		usage === 'Article'
+			? '--match-stats-background'
+			: '--article-background';
+
 	return (
-		<StretchBackground showStats={showStats}>
-			<StatsGrid format={format}>
+		<StretchBackground
+			showStats={showStats}
+			backgroundColour={backgroundColour}
+		>
+			<StatsGrid format={format} backgroundColour={backgroundColour}>
 				{showStats && (
 					<>
 						<GridItem area="title" element="aside">
@@ -396,6 +416,7 @@ export const MatchStats = ({ home, away, competition, format }: Props) => {
 									offTarget: away.shotsOff,
 									color: away.colours,
 								}}
+								backgroundColour={backgroundColour}
 							/>
 						</GridItem>
 						<GridItem area="corners">
@@ -427,54 +448,58 @@ export const MatchStats = ({ home, away, competition, format }: Props) => {
 						</GridItem>
 					</>
 				)}
-				<GridItem area="subtitle">
-					<ShiftLeft format={format}>
-						{/* Don't show the right border if this text was
+				{showLineups && (
+					<>
+						<GridItem area="subtitle">
+							<ShiftLeft format={format}>
+								{/* Don't show the right border if this text was
                         shifted into the left column */}
-						<Hide when="above" breakpoint="desktop">
+								<Hide when="above" breakpoint="desktop">
+									<RightBorder>
+										<H3>Lineups</H3>
+									</RightBorder>
+								</Hide>
+								<Hide when="below" breakpoint="desktop">
+									<H3>Lineups</H3>
+								</Hide>
+							</ShiftLeft>
+						</GridItem>
+						<GridItem area="home">
 							<RightBorder>
-								<H3>Lineups</H3>
+								<H4>{home.name}</H4>
+								<Lineup
+									players={home.players.filter(
+										(player) => !player.substitute,
+									)}
+								/>
+								<br />
+								<H4>Substitutes</H4>
+								<Lineup
+									players={home.players.filter(
+										(player) => player.substitute,
+									)}
+								/>
+								<br />
 							</RightBorder>
-						</Hide>
-						<Hide when="below" breakpoint="desktop">
-							<H3>Lineups</H3>
-						</Hide>
-					</ShiftLeft>
-				</GridItem>
-				<GridItem area="home">
-					<RightBorder>
-						<H4>{home.name}</H4>
-						<Lineup
-							players={home.players.filter(
-								(player) => !player.substitute,
-							)}
-						/>
-						<br />
-						<H4>Substitutes</H4>
-						<Lineup
-							players={home.players.filter(
-								(player) => player.substitute,
-							)}
-						/>
-						<br />
-					</RightBorder>
-				</GridItem>
-				<GridItem area="away">
-					<H4>{away.name}</H4>
-					<Lineup
-						players={away.players.filter(
-							(player) => !player.substitute,
-						)}
-					/>
-					<br />
-					<H4>Substitutes</H4>
-					<Lineup
-						players={away.players.filter(
-							(player) => player.substitute,
-						)}
-					/>
-					<br />
-				</GridItem>
+						</GridItem>
+						<GridItem area="away">
+							<H4>{away.name}</H4>
+							<Lineup
+								players={away.players.filter(
+									(player) => !player.substitute,
+								)}
+							/>
+							<br />
+							<H4>Substitutes</H4>
+							<Lineup
+								players={away.players.filter(
+									(player) => player.substitute,
+								)}
+							/>
+							<br />
+						</GridItem>
+					</>
+				)}
 			</StatsGrid>
 		</StretchBackground>
 	);

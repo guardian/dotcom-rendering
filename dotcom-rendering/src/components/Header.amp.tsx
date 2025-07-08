@@ -66,7 +66,7 @@ const pillarListItemStyle = css`
 		a {
 			padding-left: 20px;
 
-			:before {
+			::before {
 				display: none;
 			}
 		}
@@ -102,7 +102,7 @@ const pillarLinkStyle = (pillar: ArticleTheme) => css`
 		text-decoration: underline;
 	}
 
-	:before {
+	::before {
 		border-left: 1px solid rgba(255, 255, 255, 0.3);
 		top: 0;
 		z-index: 1;
@@ -113,7 +113,7 @@ const pillarLinkStyle = (pillar: ArticleTheme) => css`
 		bottom: 0;
 	}
 
-	:after {
+	::after {
 		content: '';
 		display: block;
 		top: 0;
@@ -159,14 +159,14 @@ const pattyStyles = css`
 
 	${lineStyles};
 
-	:before {
+	::before {
 		content: '';
 		top: -6px;
 		left: 0;
 		${lineStyles};
 	}
 
-	:after {
+	::after {
 		content: '';
 		top: 6px;
 		left: 0;

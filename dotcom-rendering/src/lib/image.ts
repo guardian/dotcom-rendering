@@ -37,6 +37,8 @@ const getServiceFromUrl = (url: URL): string => {
 	}
 };
 
+const isCodeGridUrl = (url: URL) => url.hostname === 'media.guimcode.co.uk';
+
 /**
  * Generates a URL for calling the Fastly Image Optimiser.
  *
@@ -49,25 +51,47 @@ export const generateImageURL = ({
 	imageWidth,
 	resolution,
 	aspectRatio = 'none',
+	cropOffset,
 }: {
 	mainImage: string;
 	imageWidth: number;
 	resolution: 'low' | 'high';
 	aspectRatio?: string;
+	cropOffset?: { x: number; y: number };
 }): string => {
 	const url = new URL(mainImage);
-
-	// In CODE, we do not generate optimised replacement images
-	if (url.hostname === 's3-eu-west-1.amazonaws.com') return url.href;
+	const offset = cropOffset
+		? `,offset-x${cropOffset.x},offset-y${cropOffset.y}`
+		: ``;
+	const crop = `${aspectRatio}${offset}`;
 
 	const params = new URLSearchParams({
 		width: imageWidth.toString(),
 		dpr: String(resolution === 'high' ? 2 : 1),
 		s: 'none',
-		crop: aspectRatio,
+		crop,
 	});
 
-	return `https://i.guim.co.uk/img/${getServiceFromUrl(url)}${
+	const domain = isCodeGridUrl(url) ? 'i.guimcode.co.uk' : 'i.guim.co.uk';
+
+	return `https://${domain}/img/${getServiceFromUrl(url)}${
 		url.pathname
 	}?${params.toString()}`;
+};
+
+export const isSupported = (imageUrl: string): boolean => {
+	const supportedImages = ['jpg', 'jpeg', 'png', 'gif'];
+	return supportedImages.some((extension) =>
+		imageUrl.endsWith(`.${extension}`),
+	);
+};
+
+export const getImage = (images: Image[]): Image | undefined => {
+	const image = getMaster(images) ?? getLargest(images);
+
+	if (image?.url === undefined || !isSupported(image.url)) {
+		return undefined;
+	}
+
+	return image;
 };

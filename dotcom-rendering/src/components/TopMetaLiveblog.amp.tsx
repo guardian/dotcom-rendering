@@ -23,7 +23,7 @@ const ListStyle = (iconColour: string) => css`
 		}
 	}
 
-	li:before {
+	li::before {
 		display: inline-block;
 		content: '';
 		border-radius: 6px;

@@ -37,7 +37,7 @@ const bioStyles = css`
 		display: inline-block;
 		margin-bottom: 0;
 	}
-	ul li:before {
+	ul li::before {
 		display: inline-block;
 		content: '';
 		border-radius: 0.375rem;

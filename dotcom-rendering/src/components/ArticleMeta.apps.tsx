@@ -3,6 +3,7 @@ import { isUndefined } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { ReactNode } from 'react';
+import { grid } from '../grid';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -21,6 +22,7 @@ import { Contributor } from './Contributor';
 import { Dateline } from './Dateline';
 import { FollowWrapper } from './FollowWrapper.importable';
 import { Island } from './Island';
+import { ListenToArticle } from './ListenToArticle.importable';
 import { LiveblogNotifications } from './LiveblogNotifications.importable';
 
 type Props = {
@@ -224,6 +226,7 @@ export const ArticleMetaApps = ({
 	const isImmersive = format.display === ArticleDisplay.Immersive;
 	const isAnalysis = format.design === ArticleDesign.Analysis;
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
+	const isGallery = format.design === ArticleDesign.Gallery;
 
 	const shouldShowFollowButtons = (layoutOrDesignType: boolean) =>
 		layoutOrDesignType && !!byline && !isUndefined(soleContributor);
@@ -239,7 +242,16 @@ export const ArticleMetaApps = ({
 			className={
 				isInteractive ? interactiveLegacyClasses.metaContainer : ''
 			}
-			css={metaContainerMargins}
+			css={[
+				metaContainerMargins,
+				isGallery ? grid.column.centre : undefined,
+				isGallery
+					? {
+							marginLeft: space[3],
+							paddingBottom: space[2],
+					  }
+					: undefined,
+			]}
 		>
 			<div
 				css={[
@@ -342,6 +354,11 @@ export const ArticleMetaApps = ({
 					</MetaGridBranding>
 				)}
 			</div>
+			{pageId !== undefined && (
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<ListenToArticle articleId={pageId} />
+				</Island>
+			)}
 		</div>
 	);
 };

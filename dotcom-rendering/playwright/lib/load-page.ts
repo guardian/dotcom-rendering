@@ -1,7 +1,7 @@
 import type { Page } from '@playwright/test';
 import { PORT } from 'playwright.config';
-import { validateAsArticleType } from '../../src/model/validate';
-import type { FEArticleType } from '../../src/types/frontend';
+import type { FEArticle } from '../../src/frontend/feArticle';
+import { validateAsFEArticle } from '../../src/model/validate';
 
 const BASE_URL = `http://localhost:${PORT}`;
 
@@ -68,7 +68,7 @@ const loadPage = async ({
  */
 const loadPageWithOverrides = async (
 	page: Page,
-	article: FEArticleType,
+	article: FEArticle,
 	overrides?: {
 		configOverrides?: Record<string, unknown>;
 		switchOverrides?: Record<string, unknown>;
@@ -99,30 +99,6 @@ const loadPageWithOverrides = async (
 };
 
 /**
- * Allows us to continue using cookies for signed in features
- * until we figure out how to use Okta in e2e testing.
- * See https://github.com/guardian/dotcom-rendering/issues/8758
- */
-const loadPageNoOkta = async (
-	page: Page,
-	article: FEArticleType,
-	overrides?: {
-		configOverrides?: Record<string, unknown>;
-		switchOverrides?: Record<string, unknown>;
-	},
-): Promise<void> => {
-	await loadPageWithOverrides(page, article, {
-		configOverrides: overrides?.configOverrides,
-		switchOverrides: {
-			...overrides?.switchOverrides,
-			okta: false,
-			idCookieRefresh: false,
-			userFeaturesDcr: true,
-		},
-	});
-};
-
-/**
  * Fetch the page json from PROD then load it as a POST with overrides
  */
 const fetchAndloadPageWithOverrides = async (
@@ -133,7 +109,7 @@ const fetchAndloadPageWithOverrides = async (
 		switchOverrides?: Record<string, unknown>;
 	},
 ): Promise<void> => {
-	const article = validateAsArticleType(
+	const article = validateAsFEArticle(
 		await fetch(`${url}.json?dcr`).then((res) => res.json()),
 	);
 	await loadPageWithOverrides(page, article, {
@@ -148,6 +124,5 @@ export {
 	BASE_URL,
 	fetchAndloadPageWithOverrides,
 	loadPage,
-	loadPageNoOkta,
 	loadPageWithOverrides,
 };

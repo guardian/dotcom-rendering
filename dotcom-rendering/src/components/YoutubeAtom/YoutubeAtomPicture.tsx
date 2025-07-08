@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
 import { getSourceImageUrl } from '../../lib/getSourceImageUrl_temp_fix';
+import type { AspectRatio } from '../../types/front';
 import { generateSources, getFallbackSource, Sources } from '../Picture';
 
 type Props = {
@@ -8,7 +9,9 @@ type Props = {
 	alt: string;
 	height: number;
 	width: number;
-	aspectRatio?: string;
+	aspectRatio?: AspectRatio;
+	mobileAspectRatio?: AspectRatio;
+	isImmersive?: boolean;
 };
 
 export const YoutubeAtomPicture = ({
@@ -17,18 +20,39 @@ export const YoutubeAtomPicture = ({
 	height,
 	width,
 	aspectRatio,
+	mobileAspectRatio,
+	isImmersive = false,
 }: Props) => {
-	const sources = generateSources(
-		getSourceImageUrl(image),
-		[
-			{ breakpoint: breakpoints.mobile, width: 465 },
-			{ breakpoint: breakpoints.mobileLandscape, width: 645 },
-			{ breakpoint: breakpoints.phablet, width: 620 },
-			{ breakpoint: breakpoints.tablet, width: 700 },
-			{ breakpoint: breakpoints.desktop, width: 620 },
-		],
-		aspectRatio,
-	);
+	const mobileAspect = mobileAspectRatio ?? aspectRatio;
+	const sources = generateSources(getSourceImageUrl(image), [
+		{
+			breakpoint: breakpoints.mobile,
+			width: 465,
+			aspectRatio: mobileAspect,
+		},
+		{
+			breakpoint: breakpoints.mobileLandscape,
+			width: 645,
+			aspectRatio: mobileAspect,
+		},
+		{
+			breakpoint: breakpoints.phablet,
+			width: 620,
+			aspectRatio: mobileAspect,
+		},
+		{
+			breakpoint: breakpoints.tablet,
+			width: 700,
+			aspectRatio,
+			cropOffset: isImmersive ? { x: 50, y: 0 } : undefined,
+		},
+		{
+			breakpoint: breakpoints.desktop,
+			width: 620,
+			aspectRatio,
+			cropOffset: isImmersive ? { x: 50, y: 0 } : undefined,
+		},
+	]);
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
@@ -43,6 +67,7 @@ export const YoutubeAtomPicture = ({
 				// https://stackoverflow.com/questions/10844205/html-5-strange-img-always-adds-3px-margin-at-bottom
 				// why did we add the css `vertical-align: middle;` to the img tag
 				css={css`
+					object-fit: cover;
 					vertical-align: middle;
 				`}
 			/>

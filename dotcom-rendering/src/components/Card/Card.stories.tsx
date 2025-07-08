@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/source/foundations';
+import { breakpoints, from } from '@guardian/source/foundations';
 import React from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import {
@@ -43,7 +43,7 @@ const basicCardProps: CardProps = {
 	canPlayInline: true,
 	imageLoading: 'eager',
 	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api/',
-	showMainVideo: true,
+	showVideo: true,
 	absoluteServerTimes: true,
 };
 
@@ -208,6 +208,11 @@ export default {
 	decorators: [
 		splitTheme([basicCardProps.format], { orientation: 'vertical' }),
 	],
+	parameters: {
+		chromatic: {
+			viewports: [breakpoints.mobile, breakpoints.wide],
+		},
+	},
 };
 
 /** TODO : Update stories once initial chromatic check has passed on new font size scale */
@@ -326,6 +331,40 @@ export const WithMediaType = () => {
 					}}
 					mainMedia={mainGallery}
 					headlineText="Gallery"
+				/>
+			</CardWrapper>
+		</CardGroup>
+	);
+};
+
+export const WithMediaTypeAndSublinks = () => {
+	return (
+		<CardGroup>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Video,
+						theme: Pillar.Sport,
+					}}
+					containerType="flexible/general"
+					mainMedia={{ ...mainVideo, duration: 30 }}
+					headlineText="Video"
+					imagePositionOnDesktop="top"
+					imagePositionOnMobile="left"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline: 'Headline 1',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline: 'Headline 2',
+							kickerText: 'Kicker',
+						},
+					]}
 				/>
 			</CardWrapper>
 		</CardGroup>
@@ -1487,6 +1526,7 @@ export const WithAFiveFourAspectRatio = () => {
 		</>
 	);
 };
+
 export const WithNoGap = () => {
 	return (
 		<>
@@ -1500,6 +1540,8 @@ export const WithNoGap = () => {
 						{...basicCardProps}
 						imagePositionOnDesktop="left"
 						isOnwardContent={true}
+						showTopBarDesktop={false}
+						showTopBarMobile={false}
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -1624,6 +1666,8 @@ export const WithNoVerticalGap = () => {
 					<Card
 						{...basicCardProps}
 						isOnwardContent={true}
+						showTopBarDesktop={false}
+						showTopBarMobile={false}
 						imagePositionOnDesktop="bottom"
 						format={{
 							display: ArticleDisplay.Standard,
@@ -1712,5 +1756,58 @@ export const WithAVerticalGapWhenScrollableSmallContainer = () => {
 				</div>
 			</CardWrapper>
 		</>
+	);
+};
+
+export const WithBetaContainerAndSublinks = () => {
+	return (
+		<CardGroup>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					containerType="flexible/general"
+					imagePositionOnMobile="bottom"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline: 'Headline 1',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline: 'Headline 2',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
+		</CardGroup>
+	);
+};
+
+export const WithBetaContainerAndSublinksNoImage = () => {
+	return (
+		<CardGroup>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					image={undefined}
+					containerType="flexible/general"
+					imagePositionOnMobile="bottom"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline: 'Headline 1',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline: 'Headline 2',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
+		</CardGroup>
 	);
 };

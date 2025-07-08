@@ -8,8 +8,9 @@ const { config } = require('../../fixtures/config');
 const { configOverrides } = require('../../fixtures/config-overrides');
 const { switchOverrides } = require('../../fixtures/switch-overrides');
 const {
-	validateAsArticleType,
-	validateAsFootballDataPageType,
+	validateAsCricketMatchPageType,
+	validateAsFEArticle,
+	validateAsFootballMatchListPage,
 } = require('../../src/model/validate');
 
 const root = resolve(__dirname, '..', '..');
@@ -35,7 +36,11 @@ const articles = [
 	},
 	{
 		name: 'Gallery',
-		url: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+		url: 'https://www.theguardian.com/artanddesign/gallery/2025/jun/06/the-week-around-the-world-in-20-pictures',
+	},
+	{
+		name: 'GalleryLabs',
+		url: 'https://www.theguardian.com/uncommon-holidays/gallery/2025/apr/28/mysterious-islands-medieval-castles-monets-gardens-must-see-places-normandy-in-pictures',
 	},
 	{
 		name: 'Audio',
@@ -175,13 +180,13 @@ const requests = articles.map((article) => {
 				frontendJson.format.design = 'LiveBlogDesign';
 			}
 
-			const frontendData = validateAsArticleType(frontendJson);
+			const frontendData = validateAsFEArticle(frontendJson);
 
 			// Write the new frontend fixture data
 			const frontendContents = `${HEADER}
-				import type { FEArticleType } from '../../../src/types/frontend';
+				import type { FEArticle } from '../../../src/frontend/feArticle';
 
-				export const ${article.name}: FEArticleType = ${JSON.stringify(
+				export const ${article.name}: FEArticle = ${JSON.stringify(
 					frontendData,
 					null,
 					4,
@@ -238,8 +243,12 @@ requests.push(
 
 // MatchReport fixtures
 requests.push(
+	// this URL may expire in the future; you can get a fresh one by finding a recent match
+	// from https://www.theguardian.com/tone/matchreports, then opening your network tab in
+	// your browser's devtools, and find a similar looking `api.nextgen` request, and copy
+	// that URL in here.
 	fetch(
-		'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2022/07/11/8184/7514.json?dcr=true&page=football%2F2022%2Fjul%2F11%2Fengland-norway-womens-euro-2022-group-a-match-report',
+		'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2025/04/07/29/31.json?dcr=true&page=football%2F2025%2Fapr%2F07%2Fjacob-murphys-lightning-double-helps-newcastle-blow-away-flimsy-leicester',
 	)
 		.then((res) => res.json())
 		.then((json) => {
@@ -323,15 +332,16 @@ requests.push(
 			delete json.config.weatherapiurl;
 			delete json.config.isAdFree;
 			delete json.config.userBenefitsApiUrl;
+			delete json.config.frontendSentryDsn;
 
-			const footballDataPageData = validateAsFootballDataPageType(json);
+			const footballMatchListPage = validateAsFootballMatchListPage(json);
 
 			// Write the new frontend fixture data
 			const contents = `${HEADER}
-			import type { FEFootballDataPage } from '../../src/feFootballDataPage';
+			import type { FEFootballMatchListPage } from '../../src/frontend/feFootballMatchListPage';
 
-			export const footballData: FEFootballDataPage = ${JSON.stringify(
-				footballDataPageData,
+			export const footballData: FEFootballMatchListPage = ${JSON.stringify(
+				footballMatchListPage,
 				null,
 				4,
 			)}
@@ -346,6 +356,49 @@ requests.push(
 		.then(() => 'football-live.ts')
 		.catch((err) => {
 			throw new Error('Failed to create football-live.ts', {
+				cause: err,
+			});
+		}),
+);
+
+requests.push(
+	// This match data will expire after two months, find a new match if this needs updating
+	fetch(
+		'https://www.theguardian.com/sport/cricket/match/2025-03-26/australia-women-s-cricket-team.json?dcr',
+	)
+		.then((res) => res.json())
+		.then((json) => {
+			// These configs are returning from frontend
+			// but are not necessary for cricket pages
+			delete json.config.hasLiveBlogTopAd;
+			delete json.config.userAttributesApiUrl;
+			delete json.config.weatherapiurl;
+			delete json.config.isAdFree;
+			delete json.config.userBenefitsApiUrl;
+			delete json.config.frontendSentryDsn;
+
+			const cricketMatchData = validateAsCricketMatchPageType(json);
+
+			// Write the new frontend fixture data
+			const contents = `${HEADER}
+			import type { FECricketMatchPage } from '../../src/frontend/feCricketMatchPage';
+
+			export const cricketMatchData: FECricketMatchPage = ${JSON.stringify(
+				cricketMatchData,
+				null,
+				4,
+			)}
+		`;
+
+			return fs.writeFile(
+				`${root}/fixtures/generated/cricket-match.ts`,
+				contents,
+				'utf8',
+			);
+		})
+		.then(() => 'cricket-match.ts')
+		.catch((err) => {
+			throw new Error('Failed to create cricket-match.ts', {
 				cause: err,
 			});
 		}),

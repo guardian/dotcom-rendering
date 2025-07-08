@@ -76,7 +76,7 @@ const pillarBlockWithoutPageSkin = css`
 const pillarUnderlineHeight = space[1] + 1;
 
 const pillarUnderline = css`
-	:after {
+	::after {
 		height: ${pillarUnderlineHeight}px;
 		/* This CSS var is dynamically set via the style attribute*/
 		background-color: var(--pillar-underline);
@@ -104,16 +104,16 @@ const pillarUnderline = css`
 `;
 
 const forceUnderline = css`
-	:after {
+	::after {
 		transform: translateY(-${pillarUnderlineHeight}px);
 	}
-	:focus:after {
+	:focus::after {
 		transform: translateY(-${pillarUnderlineHeight}px);
 	}
 	:hover {
 		text-decoration: none;
 	}
-	:hover:after {
+	:hover::after {
 		transform: translateY(-${pillarUnderlineHeight}px);
 	}
 `;
@@ -145,13 +145,13 @@ const pillarLink = css`
 		${headlineBold20}
 	}
 
-	:focus:after {
+	:focus::after {
 		transform: translateY(-${pillarUnderlineHeight}px);
 	}
 	:hover {
 		text-decoration: none;
 	}
-	:hover:after {
+	:hover::after {
 		transform: translateY(-${pillarUnderlineHeight}px);
 	}
 `;
@@ -166,7 +166,7 @@ const firstPillarLinkOverrides = css`
 	a {
 		padding-left: 0;
 
-		:after {
+		::after {
 			width: calc(100% - 1px);
 			margin-left: 0;
 		}
@@ -174,7 +174,7 @@ const firstPillarLinkOverrides = css`
 `;
 
 export const verticalDivider = css`
-	:after {
+	::after {
 		content: '';
 		border-left: 1px solid ${themePalette('--masthead-nav-lines')};
 		display: flex;

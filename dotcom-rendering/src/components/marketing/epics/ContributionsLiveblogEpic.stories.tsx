@@ -3,14 +3,11 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/9c3eae7cb0b159db4a1c40679d6b37710b0bb937/packages/modules/src/modules/epics/ContributionsLiveblogEpic.stories.tsx
  */
-import {
-	SecondaryCtaType,
-	TickerCountType,
-	TickerEndType,
-} from '@guardian/support-dotcom-components';
+import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
 import React from 'react';
+import { choiceCardsSettings } from '../lib/storybook';
 import { ContributionsLiveblogEpic } from './ContributionsLiveblogEpic';
 import { props } from './utils/storybook';
 
@@ -87,20 +84,7 @@ export const WithThreeTierChoiceCards: Story = {
 			name: 'THREE_TIER_CHOICE_CARDS',
 			secondaryCta: undefined,
 			showChoiceCards: true,
-		},
-	},
-};
-
-export const WithThreeTierChoiceCardsForUS: Story = {
-	name: 'Contributions Liveblog Epic with Three Tier Choice Cards for US',
-	args: {
-		...meta.args,
-		countryCode: 'US',
-		variant: {
-			...props.variant,
-			name: 'US_CHECKOUT_PAGE',
-			secondaryCta: undefined,
-			showChoiceCards: true,
+			choiceCardsSettings,
 		},
 	},
 };
@@ -113,14 +97,12 @@ export const WithTicker: Story = {
 			...props.variant,
 			secondaryCta: undefined,
 			showChoiceCards: true,
+			choiceCardsSettings,
 			tickerSettings: {
-				endType: TickerEndType.unlimited,
-				countType: TickerCountType.money,
 				currencySymbol: '£',
 				copy: {
 					countLabel: 'Help us reach our end-of-year goal',
-					goalReachedPrimary: '',
-					goalReachedSecondary: '',
+					goalCopy: 'goal',
 				},
 				tickerData: {
 					total: 10000,

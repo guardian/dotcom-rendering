@@ -10,7 +10,7 @@ import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
 import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import { getZIndex } from '../../lib/getZIndex';
-import { getOptionsHeadersWithOkta } from '../../lib/identity';
+import { getOptionsHeaders } from '../../lib/identity';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { useAuthStatus } from '../../lib/useAuthStatus';
 import type { TagType } from '../../types/tag';
@@ -41,7 +41,7 @@ const containerStyles = css`
 // - We're not on a Glabs paid content page
 // - We've got a Braze UUID from the API, given a user's ID Creds
 // - The user has given Consent via CCPA or TCFV2
-// - The Braze websdk appboy initialisation does not throw an error
+// - The Braze websdk initialisation does not throw an error
 // - The Braze app Boy subscription to in app message returns meta info
 // OR
 // - The force-braze-message query string arg is passed
@@ -134,11 +134,8 @@ const BrazeBannerWithSatisfiedDependencies = ({
 	if (!componentName) return null;
 
 	const subscribeToNewsletter = async (newsletterId: string) => {
-		if (
-			authStatus.kind == 'SignedInWithCookies' ||
-			authStatus.kind == 'SignedInWithOkta'
-		) {
-			const options = getOptionsHeadersWithOkta(authStatus);
+		if (authStatus.kind == 'SignedIn') {
+			const options = getOptionsHeaders(authStatus);
 
 			await fetch(`${idApiUrl}/users/me/newsletters`, {
 				method: 'PATCH',
@@ -152,7 +149,7 @@ const BrazeBannerWithSatisfiedDependencies = ({
 	};
 
 	const fetchEmail: () => Promise<string | null> =
-		lazyFetchEmailWithTimeout(idApiUrl);
+		lazyFetchEmailWithTimeout();
 
 	return (
 		<div css={containerStyles}>

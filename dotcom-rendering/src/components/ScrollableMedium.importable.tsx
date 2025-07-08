@@ -12,7 +12,7 @@ type Props = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes?: boolean;
+	absoluteServerTimes: boolean;
 	imageLoading: 'lazy' | 'eager';
 	containerType: DCRContainerType;
 	aspectRatio: AspectRatio;
@@ -39,14 +39,15 @@ export const ScrollableMedium = ({
 	return (
 		<ScrollableCarousel
 			carouselLength={trails.length}
-			visibleCardsOnMobile={2}
-			visibleCardsOnTablet={4}
+			visibleCarouselSlidesOnMobile={2}
+			visibleCarouselSlidesOnTablet={4}
 			sectionId={sectionId}
 		>
 			{trails.map((trail) => {
 				const imagePosition = isMediaCard(trail.format)
 					? 'top'
 					: 'bottom';
+
 				return (
 					<ScrollableCarousel.Item key={trail.url}>
 						<FrontCard
@@ -70,6 +71,7 @@ export const ScrollableMedium = ({
 							showLivePlayable={trail.showLivePlayable}
 							showTopBarDesktop={false}
 							showTopBarMobile={false}
+							canPlayInline={false}
 						/>
 					</ScrollableCarousel.Item>
 				);

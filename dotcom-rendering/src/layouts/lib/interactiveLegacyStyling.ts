@@ -50,8 +50,8 @@ export const interactiveGlobalStyles = css`
 	/* Scope this as tightly as possible. Otherwise, e.g. box-model will break
 	footer. */
 	body article {
-		*:before,
-		*:after {
+		*::before,
+		*::after {
 			box-sizing: content-box;
 		}
 

@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import {
 	background,
 	headlineBold20,
@@ -6,13 +7,17 @@ import {
 	textSans15,
 	until,
 } from '@guardian/source/foundations';
-import type { TeamType } from '../types/sport';
+import type { FootballTeam } from '../footballMatch';
+import { palette } from '../palette';
 import { Score } from './Score';
 
+type Team = Pick<FootballTeam, 'name' | 'score' | 'scorers' | 'crest'>;
+
 type Props = {
-	homeTeam: Pick<TeamType, 'name' | 'score' | 'scorers' | 'crest'>;
-	awayTeam: Pick<TeamType, 'name' | 'score' | 'scorers' | 'crest'>;
+	homeTeam: Team;
+	awayTeam: Team;
 	comments?: string;
+	usage: 'MatchSummary' | 'Article';
 };
 
 const Row = ({ children }: { children: React.ReactNode }) => (
@@ -32,36 +37,6 @@ const CrestRow = ({ children }: { children: React.ReactNode }) => (
 			display: flex;
 			flex-direction: row;
 			align-items: flex-end;
-		`}
-	>
-		{children}
-	</div>
-);
-
-const StretchBackground = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			position: relative;
-			padding: ${space[2]}px;
-			background-color: var(--match-nav-background);
-			margin-bottom: 10px;
-			${until.tablet} {
-				margin: 0 -10px 10px;
-			}
-
-			:before {
-				content: '';
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				width: 100vw;
-				left: -100vw;
-				background-color: var(--match-nav-background);
-				z-index: -1;
-			}
 		`}
 	>
 		{children}
@@ -160,7 +135,7 @@ const TeamNav = ({
 	scorers,
 }: {
 	name: string;
-	score: number;
+	score?: number;
 	crest: string;
 	scorers: string[];
 }) => (
@@ -169,7 +144,7 @@ const TeamNav = ({
 			display: flex;
 			flex-grow: 1;
 			flex-basis: 50%;
-			color: var(--match-nav-text);
+			color: ${palette('--match-nav-text')};
 		`}
 	>
 		<Column>
@@ -181,25 +156,19 @@ const TeamNav = ({
 				`}
 			>
 				<TeamName name={name} />
-				<Scorers
-					scorers={[
-						...scorers,
-						// this ensures we reserve space for at least three scorers per team
-						'placeholder-1',
-						'placeholder-2',
-						'placeholder-3',
-					].slice(0, Math.max(3, scorers.length))}
-				/>
+				<Scorers scorers={scorers} />
 			</div>
 			<CrestRow>
 				<Crest crest={crest} />
-				<div
-					css={css`
-						margin-left: -${space[2]}px;
-					`}
-				>
-					<Score score={score} />
-				</div>
+				{!isUndefined(score) && (
+					<div
+						css={css`
+							margin-left: -${space[2]}px;
+						`}
+					>
+						<Score score={score} />
+					</div>
+				)}
 			</CrestRow>
 		</Column>
 	</div>
@@ -231,25 +200,53 @@ const YellowBorder = () => (
 	/>
 );
 
-export const MatchNav = ({ homeTeam, awayTeam, comments }: Props) => (
-	<div>
-		<StretchBackground>
-			<Row>
-				<TeamNav
-					name={homeTeam.name}
-					score={homeTeam.score}
-					crest={homeTeam.crest}
-					scorers={homeTeam.scorers}
-				/>
-				<YellowBorder />
-				<TeamNav
-					name={awayTeam.name}
-					score={awayTeam.score}
-					crest={awayTeam.crest}
-					scorers={awayTeam.scorers}
-				/>
-			</Row>
-			{!!comments && <Comments comments={comments} />}
-		</StretchBackground>
+const addScorerPlaceholders = (scorers: string[]): string[] =>
+	[
+		...scorers,
+		// this ensures we reserve space for at least three scorers per team
+		'placeholder-1',
+		'placeholder-2',
+		'placeholder-3',
+	].slice(0, Math.max(3, scorers.length));
+
+export const MatchNav = ({ homeTeam, awayTeam, comments, usage }: Props) => (
+	<div
+		css={css`
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			position: relative;
+			padding: ${space[2]}px;
+			background-color: ${palette('--match-nav-background')};
+			margin-bottom: 10px;
+			${until.tablet} {
+				margin: 0 -10px 10px;
+			}
+		`}
+	>
+		<Row>
+			<TeamNav
+				name={homeTeam.name}
+				score={homeTeam.score}
+				crest={homeTeam.crest}
+				scorers={
+					usage === 'Article'
+						? addScorerPlaceholders(homeTeam.scorers)
+						: homeTeam.scorers
+				}
+			/>
+			<YellowBorder />
+			<TeamNav
+				name={awayTeam.name}
+				score={awayTeam.score}
+				crest={awayTeam.crest}
+				scorers={
+					usage === 'Article'
+						? addScorerPlaceholders(awayTeam.scorers)
+						: awayTeam.scorers
+				}
+			/>
+		</Row>
+		{!!comments && <Comments comments={comments} />}
 	</div>
 );

@@ -54,6 +54,7 @@ const labStyles = css`
 
 type MainMedia =
 	| { type: 'Video'; duration: number }
+	| { type: 'LoopVideo'; duration: number }
 	| { type: 'Audio'; duration: string }
 	| { type: 'Gallery'; count: string };
 
@@ -64,6 +65,7 @@ type Props = {
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
 	mainMedia?: MainMedia;
+	isNewsletter?: boolean;
 	shouldReserveSpace?: { mobile: boolean; desktop: boolean };
 };
 
@@ -74,6 +76,7 @@ export const CardFooter = ({
 	commentCount,
 	cardBranding,
 	mainMedia,
+	isNewsletter,
 	shouldReserveSpace,
 }: Props) => {
 	if (showLivePlayable) return null;
@@ -89,7 +92,8 @@ export const CardFooter = ({
 					content={
 						<time>{secondsToDuration(mainMedia.duration)}</time>
 					}
-					icon={<SvgMediaControlsPlay />}
+					prefix="Video"
+					icon={<SvgMediaControlsPlay width={18} />}
 				/>
 			</footer>
 		);
@@ -100,7 +104,8 @@ export const CardFooter = ({
 			<footer css={contentStyles}>
 				<Pill
 					content={<time>{mainMedia.duration}</time>}
-					icon={<SvgMediaControlsPlay />}
+					prefix="Podcast"
+					icon={<SvgMediaControlsPlay width={18} />}
 				/>
 			</footer>
 		);
@@ -113,8 +118,15 @@ export const CardFooter = ({
 					content={mainMedia.count}
 					prefix="Gallery"
 					icon={<SvgCamera />}
-					iconSide="right"
 				/>
+			</footer>
+		);
+	}
+
+	if (isNewsletter) {
+		return (
+			<footer css={contentStyles}>
+				<Pill content="Newsletter" />
 			</footer>
 		);
 	}

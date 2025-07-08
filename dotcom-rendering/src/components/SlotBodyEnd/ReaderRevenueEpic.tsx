@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import type { OphanComponentEvent } from '@guardian/libs';
 import {
 	cmp,
 	getCookie,
 	startPerformanceMeasure,
 	storage,
 } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
 import type {
 	EpicPayload,
@@ -20,7 +20,6 @@ import type {
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import {
-	hasCmpConsentForBrowserId,
 	hasCmpConsentForWeeklyArticleCount,
 	hasOptedOutOfArticleCount,
 	shouldHideSupportMessaging,
@@ -48,9 +47,9 @@ export type CanShowData = {
 	contributionsServiceUrl: string;
 	idApiUrl: string;
 	asyncArticleCount: Promise<WeeklyArticleHistory | undefined>;
-	browserId?: string;
 	renderingTarget: RenderingTarget;
 	ophanPageViewId: string;
+	pageId?: string;
 };
 
 const buildPayload = async (
@@ -71,10 +70,8 @@ const buildPayload = async (
 		mvtId: Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })),
 		countryCode: data.countryCode,
 		url: window.location.origin + window.location.pathname,
-		browserId: (await hasCmpConsentForBrowserId())
-			? data.browserId
-			: undefined,
 		isSignedIn: data.isSignedIn,
+		pageId: data.pageId,
 	},
 });
 
@@ -86,7 +83,6 @@ export const canShowReaderRevenueEpic = async (
 		shouldHideReaderRevenue,
 		isPaidContent,
 		contributionsServiceUrl,
-		idApiUrl,
 		renderingTarget,
 		ophanPageViewId,
 	} = data;
@@ -125,7 +121,7 @@ export const canShowReaderRevenueEpic = async (
 	}
 
 	const fetchEmail: (() => Promise<string | null>) | undefined = isSignedIn
-		? lazyFetchEmailWithTimeout(idApiUrl)
+		? lazyFetchEmailWithTimeout()
 		: undefined;
 
 	const hasConsentForArticleCount =
@@ -147,8 +143,8 @@ export const canShowReaderRevenueEpic = async (
 		tracking,
 		hasConsentForArticleCount,
 		fetchEmail,
-		submitComponentEvent: (componentEvent: OphanComponentEvent) =>
-			void submitComponentEvent(componentEvent, renderingTarget),
+		submitComponentEvent: (componentEvent: ComponentEvent) =>
+			submitComponentEvent(componentEvent, renderingTarget),
 		openCmp,
 	};
 

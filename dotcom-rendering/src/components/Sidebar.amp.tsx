@@ -22,7 +22,7 @@ export const Sidebar = () => {
 							margin-top: 0px;
 						}
 
-						i:before {
+						i::before {
 							transform: rotate(-135deg);
 						}
 					}
@@ -38,7 +38,7 @@ export const Sidebar = () => {
 						left: 25px;
 						position: absolute;
 
-						:before {
+						::before {
 							border: 2px solid ${palette.neutral[100]};
 							border-top: 0;
 							border-left: 0;
@@ -115,7 +115,7 @@ export const Sidebar = () => {
 				const pillarStyles = css`
 					position: relative;
 
-					:not(:last-child):after {
+					:not(:last-child)::after {
 						background-color: rgba(255, 255, 255, 0.3);
 						bottom: 0;
 						content: '';

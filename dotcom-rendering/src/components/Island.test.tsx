@@ -14,6 +14,7 @@ import { CommentCount } from './CommentCount.importable';
 import { ConfigProvider } from './ConfigContext';
 import { DiscussionLayout } from './DiscussionLayout';
 import { DiscussionMeta } from './DiscussionMeta.importable';
+import { EnhanceAffiliateLinks } from './EnhanceAffiliateLinks.importable';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { FooterReaderRevenueLinks } from './FooterReaderRevenueLinks.importable';
@@ -161,6 +162,16 @@ describe('Island: server-side rendering', () => {
 						isAdFreeUser={false}
 						shouldHideAds={false}
 					/>
+				</WithConfig>,
+			),
+		).not.toThrow();
+	});
+
+	test('EnhanceAffiliateLinks', () => {
+		expect(() =>
+			renderToString(
+				<WithConfig>
+					<EnhanceAffiliateLinks />
 				</WithConfig>,
 			),
 		).not.toThrow();
@@ -380,7 +391,6 @@ describe('Island: server-side rendering', () => {
 						isPaidContent={false}
 						isPreview={false}
 						pageId={''}
-						switches={{}}
 						contributionsServiceUrl={''}
 						editionId="UK"
 					/>

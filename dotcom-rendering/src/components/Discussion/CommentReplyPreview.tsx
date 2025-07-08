@@ -54,7 +54,7 @@ const previewStyle = css`
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	:before {
+	::before {
 		content: '';
 		position: absolute;
 		border-left: ${arrowSize}px solid

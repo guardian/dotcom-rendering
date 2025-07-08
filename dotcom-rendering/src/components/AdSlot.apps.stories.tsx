@@ -24,14 +24,4 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const FirstSlot = {
-	args: {
-		isFirstAdSlot: true,
-	},
-} satisfies Story;
-
-export const OtherSlots = {
-	args: {
-		isFirstAdSlot: false,
-	},
-} satisfies Story;
+export const Slots = {} satisfies Story;

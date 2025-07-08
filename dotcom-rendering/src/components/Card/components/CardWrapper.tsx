@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, until } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../../../lib/articleFormat';
 import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
@@ -9,10 +9,10 @@ import { FormatBoundary } from '../../FormatBoundary';
 type Props = {
 	children: React.ReactNode;
 	format: ArticleFormat;
+	showTopBarDesktop: boolean;
+	showTopBarMobile: boolean;
+	isOnwardContent: boolean;
 	containerPalette?: DCRContainerPalette;
-	showTopBarDesktop?: boolean;
-	showTopBarMobile?: boolean;
-	isOnwardContent?: boolean;
 };
 
 const baseCardStyles = css`
@@ -42,11 +42,8 @@ const baseCardStyles = css`
 
 const hoverStyles = css`
 	:hover .image-overlay {
-		position: absolute;
-		top: 0;
 		width: 100%;
 		height: 100%;
-		left: 0;
 		background-color: ${palette('--card-background-hover')};
 	}
 
@@ -54,19 +51,21 @@ const hoverStyles = css`
 	:hover .card-headline .show-underline {
 		text-decoration: underline;
 	}
-`;
 
-/** When we hover on sublinks, we want to prevent the general hover styles applying */
-const sublinkHoverStyles = css`
-	:has(ul.sublinks:hover) {
+	/** We want to prevent the general hover styles applying when
+	    a click won't result in navigating to the main article */
+	:has(ul.sublinks:hover, .loop-video-container:hover) {
 		.card-headline .show-underline {
 			text-decoration: none;
+		}
+		.image-overlay {
+			background-color: transparent;
 		}
 	}
 `;
 
-const desktopTopBarStyles = css`
-	:before {
+const topBarStyles = css`
+	::before {
 		border-top: 1px solid ${palette('--card-border-top')};
 		content: '';
 		z-index: 2;
@@ -75,10 +74,14 @@ const desktopTopBarStyles = css`
 		background-color: unset;
 	}
 `;
-
 const mobileTopBarStyles = css`
 	${until.tablet} {
-		${desktopTopBarStyles}
+		${topBarStyles}
+	}
+`;
+const desktopTopBarStyles = css`
+	${from.tablet} {
+		${topBarStyles}
 	}
 `;
 
@@ -94,10 +97,10 @@ const onwardContentStyles = css`
 export const CardWrapper = ({
 	children,
 	format,
+	showTopBarDesktop,
+	showTopBarMobile,
+	isOnwardContent,
 	containerPalette,
-	showTopBarDesktop = true,
-	showTopBarMobile = false,
-	isOnwardContent = false,
 }: Props) => {
 	return (
 		<FormatBoundary format={format}>
@@ -106,7 +109,6 @@ export const CardWrapper = ({
 					css={[
 						baseCardStyles,
 						hoverStyles,
-						sublinkHoverStyles,
 						showTopBarDesktop && desktopTopBarStyles,
 						showTopBarMobile && mobileTopBarStyles,
 						isOnwardContent && onwardContentStyles,

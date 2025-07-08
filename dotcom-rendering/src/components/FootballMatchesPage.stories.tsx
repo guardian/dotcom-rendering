@@ -1,6 +1,7 @@
 import type { StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import { initialDays, nations } from '../../fixtures/manual/footballData';
+import { initialDays, regions } from '../../fixtures/manual/footballData';
+import { WomensEuro2025 } from './FootballCompetitionNav.stories';
 import { FootballMatchesPage } from './FootballMatchesPage';
 
 const meta = {
@@ -13,25 +14,35 @@ type Story = StoryObj<typeof meta>;
 
 export const Results = {
 	args: {
-		nations,
+		now: '2025-03-24T15:53:12.604Z',
+		regions,
 		guardianBaseUrl: 'https://www.theguardian.com',
-		kind: 'Result',
+		kind: 'FootballResults',
 		initialDays,
 		edition: 'UK',
 		goToCompetitionSpecificPage: fn(),
+		renderAds: true,
+		pageId: 'football/results',
 	},
 } satisfies Story;
 
 export const LiveScores = {
 	args: {
 		...Results.args,
-		kind: 'Live',
+		kind: 'FootballLiveScores',
 	},
 } satisfies Story;
 
 export const Fixtures = {
 	args: {
 		...Results.args,
-		kind: 'Fixture',
+		kind: 'FootballFixtures',
+	},
+} satisfies Story;
+
+export const WithCompetitionNav = {
+	args: {
+		...Fixtures.args,
+		pageId: WomensEuro2025.args.pageId,
 	},
 } satisfies Story;

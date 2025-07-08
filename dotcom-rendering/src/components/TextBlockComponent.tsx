@@ -11,6 +11,7 @@ import type { ReactNode } from 'react';
 import { Fragment } from 'react';
 import type { IOptions } from 'sanitize-html';
 import sanitise from 'sanitize-html';
+import { isSkimlink } from '../lib/affiliateLinksUtils';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -162,7 +163,7 @@ const sanitiserOptions: IOptions = {
 	},
 };
 
-const styles = (format: ArticleFormat) => css`
+export const textBlockStyles = (format: ArticleFormat) => css`
 	margin-bottom: ${remSpace[3]};
 	word-break: break-word;
 	${format.theme === ArticleSpecial.Labs ? textSans17 : article17};
@@ -193,7 +194,7 @@ const styles = (format: ArticleFormat) => css`
 		}
 	}
 
-	&:is(ul) > li:before {
+	&:is(ul) > li::before {
 		display: inline-block;
 		content: '';
 		border-radius: 50%;
@@ -238,16 +239,6 @@ const styles = (format: ArticleFormat) => css`
 	}
 `;
 
-/** A function to check if a URL represents an affiliate link */
-const isSkimlink = (url?: string): boolean => {
-	try {
-		return !!url && new URL(url).host === 'go.skimresources.com';
-	} catch (err: unknown) {
-		// If not a valid URL, it won't be an affiliate link
-		return false;
-	}
-};
-
 const buildElementTree =
 	(format: ArticleFormat, showDropCaps: boolean) =>
 	(node: Node, key: number): ReactNode => {
@@ -257,7 +248,7 @@ const buildElementTree =
 
 		switch (node.nodeName) {
 			case 'P': {
-				return jsx('p', { css: styles(format), children });
+				return jsx('p', { css: textBlockStyles(format), children });
 			}
 			case 'BLOCKQUOTE':
 				return jsx('blockquote', {
@@ -312,7 +303,7 @@ const buildElementTree =
 
 					return node.textContent;
 				}
-				return jsx('p', { css: styles(format), children });
+				return jsx('p', { css: textBlockStyles(format), children });
 			}
 			case 'SPAN':
 				if (
@@ -325,14 +316,14 @@ const buildElementTree =
 						children,
 					});
 				}
-				return jsx('p', { css: styles(format), children });
+				return jsx('p', { css: textBlockStyles(format), children });
 			case 'BR':
 				return jsx('br', {
 					key,
 				});
 			case 'STRIKE':
 				return jsx('s', {
-					css: styles(format),
+					css: textBlockStyles(format),
 					key,
 					children,
 				});
@@ -359,7 +350,7 @@ const buildElementTree =
 			case 'U':
 			case 'DEL':
 				return jsx(node.nodeName.toLowerCase(), {
-					css: styles(format),
+					css: textBlockStyles(format),
 					key,
 					children,
 				});

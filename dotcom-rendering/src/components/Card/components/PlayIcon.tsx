@@ -43,22 +43,17 @@ const wideIconStyles = (
 	}
 `;
 
-const narrowPlayIconWidth = 56;
+export const narrowPlayIconWidth = 56;
 const narrowStyles = css`
-	position: absolute;
-	/**
-	 * Subject to change. We will wait to see how fronts editors use the
-	 * headlines and standfirsts before we decide on a final position.
-	 */
-	top: 35%;
-	left: calc(50% - ${narrowPlayIconWidth / 2}px);
 	width: ${narrowPlayIconWidth}px;
 	height: ${narrowPlayIconWidth}px;
-	background-color: ${palette('--feature-card-play-icon-background')};
-	opacity: 0.7;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: ${palette('--narrow-play-icon-background')};
 	border-radius: 50%;
-	border: 1px solid ${palette('--feature-card-play-icon-border')};
-	fill: ${palette('--feature-card-play-icon-fill')};
+	border: 1px solid ${palette('--narrow-play-icon-border')};
+	fill: ${palette('--narrow-play-icon-fill')};
 `;
 
 const theme = {
@@ -92,7 +87,7 @@ export const PlayIcon = ({
 			]}
 		>
 			{iconWidth === 'narrow' ? (
-				<NarrowPlayIcon theme={theme} />
+				<NarrowPlayIcon width={40} theme={theme} />
 			) : (
 				<WidePlayIcon theme={theme} />
 			)}

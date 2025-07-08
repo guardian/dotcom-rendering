@@ -106,7 +106,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: 'd07e61f4-e4f9-4f90-809e-5ea11bd5774e',
+		elementId: 'a2c60e76-3bd1-409e-9e98-488f9b57d92a',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -421,7 +421,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: '2d41cfde-e742-465e-91fd-4257bd690a7b',
+		elementId: 'dd9dd16f-3f08-4874-a33f-6cf028cd6012',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -736,7 +736,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: 'fe3670ab-6d7a-4a04-bb3a-75fdf859f3f3',
+		elementId: '018b8b36-b191-4013-809a-e3ebdcbf8575',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -1051,7 +1051,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: '24d3bc95-b645-4f6b-b193-1cfb66dd3c30',
+		elementId: 'c616c185-4162-429e-882b-51af5f089d4d',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -1366,7 +1366,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: '9295b29a-393d-4791-a5a5-d830afcb3a64',
+		elementId: '6b3ef8cc-05b7-4fda-a118-4fdff1d7a671',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -1681,7 +1681,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: '6712a642-9ebb-4b58-91fc-9f343b417a10',
+		elementId: '9de9317b-ee8b-459e-b026-400930dfecc3',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -1996,7 +1996,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: '95054ece-9515-4ee9-95fd-522cb8996ddb',
+		elementId: '8d4700b1-8ee6-48da-ba1b-2ee4ad328da3',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -2251,6 +2251,7 @@ export const images: [
 				{
 					index: 0,
 					fields: {
+						aspectRatio: '4:5',
 						height: '2592',
 						width: '2074',
 					},
@@ -2261,6 +2262,7 @@ export const images: [
 				{
 					index: 1,
 					fields: {
+						aspectRatio: '4:5',
 						isMaster: 'true',
 						height: '2592',
 						width: '2074',
@@ -2272,6 +2274,7 @@ export const images: [
 				{
 					index: 2,
 					fields: {
+						aspectRatio: '4:5',
 						height: '2000',
 						width: '1600',
 					},
@@ -2282,6 +2285,7 @@ export const images: [
 				{
 					index: 3,
 					fields: {
+						aspectRatio: '4:5',
 						height: '1000',
 						width: '800',
 					},
@@ -2292,6 +2296,7 @@ export const images: [
 				{
 					index: 4,
 					fields: {
+						aspectRatio: '4:5',
 						height: '500',
 						width: '400',
 					},
@@ -2301,7 +2306,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: 'd4264913-deb7-4886-b92e-9cb4ce48678f',
+		elementId: '30aab418-b967-46de-a95d-30e72b8f3a26',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -2616,7 +2621,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: '2ebb11f4-651a-4cd5-b928-d27467a75792',
+		elementId: '81175695-6afc-44a2-a6fa-07eb0201b74a',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -2931,7 +2936,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: '66662db4-0e2e-4bfd-a2c6-e37176875005',
+		elementId: '5cbe4cac-6afe-48dd-a23d-5f30d199024b',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -3246,7 +3251,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: '283a9794-ac49-4eab-8548-8b3f24c71e13',
+		elementId: 'f534b20a-e6aa-43dd-8d27-4a09e79267a8',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -3561,7 +3566,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: 'ff814c61-68e7-45e3-8a93-1ee7ac55de7d',
+		elementId: '9e5be35e-47c3-4b7f-9ad7-21f194904b51',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -3876,7 +3881,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: '9de32ab5-1207-4da4-81c9-31e02ee5a8a2',
+		elementId: '5e8a8fd4-a0d1-4863-a027-13c0540f05ed',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -4191,7 +4196,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: 'd52fd2bf-8b86-47af-85eb-844917d2f7ff',
+		elementId: '7eab38ea-7aae-4db1-8a56-7b1368061eba',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -4506,7 +4511,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: '0509b144-a1f4-46d4-956f-dcc53033ae55',
+		elementId: 'cd417834-57df-40ff-8d77-63e25ade924b',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -4821,7 +4826,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: '0bc51d67-ab83-4621-b570-283df657053f',
+		elementId: '5f9af588-b67b-4138-8246-95a0629856e2',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -5137,7 +5142,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: 'eff3839d-c0be-4d72-9e18-ea4a75bd4ad6',
+		elementId: '3170bfa5-6a01-4363-bd3e-de584ca5aa70',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -5452,7 +5457,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: '8e715bfc-45e6-429b-94a5-6985d4767486',
+		elementId: '0594de76-a640-41de-a9cd-7e1e93beeb1b',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -5767,7 +5772,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: 'ebb473c1-493d-46c0-ad26-64f8dc4e7898',
+		elementId: 'c50c300a-a825-44d6-b4bb-534315cc890c',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -6082,7 +6087,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: '65289632-0118-40ce-ac6a-e465b61d1a10',
+		elementId: '4984463f-6b49-4b75-ab69-e10a68729a03',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -6397,7 +6402,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: 'a5232db1-bb01-4768-88c6-b82d67780cde',
+		elementId: 'fd425416-18ce-4636-a5c2-b92607a84532',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -6712,7 +6717,7 @@ export const images: [
 				},
 			],
 		},
-		elementId: '33f6fc91-11ae-4e59-a65a-489bfe4d4a3b',
+		elementId: 'c261ec00-1a4c-4646-bfda-679266f98b24',
 		imageSources: [
 			{
 				weighting: 'inline',

@@ -26,11 +26,13 @@ type BaseProps = {
 	hasSurveyAd?: boolean;
 	weAreHiring: boolean;
 	onlyLightColourScheme?: boolean;
+	isInteractive?: boolean;
+	rssFeedUrl?: string;
 };
 
 interface WebProps extends BaseProps {
 	renderingTarget: 'Web';
-	keywords: string;
+	section: string;
 	config: Config & { renderingTarget: 'Web' };
 }
 
@@ -74,9 +76,19 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		onlyLightColourScheme = false,
 		weAreHiring,
 		config,
+		isInteractive = false,
+		rssFeedUrl,
 	} = props;
 
-	const doNotIndex = canonicalUrl?.includes('tracking/commissioningdesk');
+	const doNotIndex = (): boolean => {
+		const isDevelopment = process.env.GU_STAGE !== 'PROD';
+
+		const hasNoIndexPattern = Boolean(
+			canonicalUrl?.includes('tracking/commissioningdesk'),
+		);
+
+		return isDevelopment || hasNoIndexPattern;
+	};
 
 	/**
 	 * We escape windowGuardian here to prevent errors when the data
@@ -198,6 +210,10 @@ https://workforus.theguardian.com/careers/product-engineering/
 	return `<!doctype html>
         <html lang="en" ${
 			onlyLightColourScheme ? 'data-color-scheme="light"' : ''
+		} ${
+			renderingTarget === 'Apps' && isInteractive
+				? 'data-rendering-target="apps"'
+				: ''
 		}>
             <head>
 			    ${
@@ -265,7 +281,7 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <!--  This tag enables pages to be featured in Google Discover as large previews
                     See: https://developers.google.com/search/docs/advanced/mobile/google-discover?hl=en&visit_id=637424198370039526-3805703503&rd=1 -->
                 <meta name="robots" content="max-image-preview:large">
-				${doNotIndex ? '<meta name="robots" content="noindex">' : ''}
+				${doNotIndex() ? '<meta name="robots" content="noindex">' : ''}
 
                 <script>
                     window.guardian = ${windowGuardian};
@@ -363,6 +379,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 					renderingTarget === 'Web'
 						? `
                 <noscript>
+					<!-- Comscore Identifier: comscorekw=${props.section} -->
                     <img src="https://sb.scorecardresearch.com/p?${new URLSearchParams(
 						{
 							c1: '2',
@@ -370,7 +387,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 							cv: '2.0',
 							cj: '1',
 							cs_ucfr: '0',
-							comscorekw: props.keywords,
+							comscorekw: props.section,
 						},
 					).toString()}" />
                 </noscript>
@@ -391,6 +408,12 @@ https://workforus.theguardian.com/careers/product-engineering/
 					renderingTarget === 'Apps'
 						? `<link rel="stylesheet" type="text/css" href="/fontSize.css">`
 						: ``
+				}
+
+				${
+					!isUndefined(rssFeedUrl)
+						? `<link rel="alternate" type="application/rss+xml" href="${rssFeedUrl}">`
+						: ''
 				}
 
 			</head>

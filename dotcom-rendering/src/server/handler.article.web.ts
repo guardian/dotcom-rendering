@@ -1,8 +1,7 @@
 import type { RequestHandler } from 'express';
-import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
 import { decideFormat } from '../lib/articleFormat';
 import { enhanceBlocks } from '../model/enhanceBlocks';
-import { validateAsArticleType, validateAsBlock } from '../model/validate';
+import { validateAsBlock, validateAsFEArticle } from '../model/validate';
 import { enhanceArticleType } from '../types/article';
 import type { FEBlocksRequest } from '../types/frontend';
 import { makePrefetchHeader } from './lib/header';
@@ -12,7 +11,7 @@ import { renderBlocks, renderHtml } from './render.article.web';
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'web');
 
-	const frontendData = validateAsArticleType(body);
+	const frontendData = validateAsFEArticle(body);
 	const article = enhanceArticleType(frontendData, 'Web');
 	const { html, prefetchScripts } = renderHtml({
 		article,
@@ -24,7 +23,7 @@ export const handleArticle: RequestHandler = ({ body }, res) => {
 export const handleArticleJson: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'json');
 
-	const frontendData = validateAsArticleType(body);
+	const frontendData = validateAsFEArticle(body);
 	const article = enhanceArticleType(frontendData, 'Web');
 	const resp = {
 		data: {
@@ -37,15 +36,10 @@ export const handleArticleJson: RequestHandler = ({ body }, res) => {
 	res.status(200).send(resp);
 };
 
-export const handleArticlePerfTest: RequestHandler = (req, res, next) => {
-	req.body = ExampleArticle;
-	handleArticle(req, res, next);
-};
-
 export const handleInteractive: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('interactive', 'web');
 
-	const frontendData = validateAsArticleType(body);
+	const frontendData = validateAsFEArticle(body);
 	const article = enhanceArticleType(frontendData, 'Web');
 	const { html, prefetchScripts } = renderHtml({
 		article,
@@ -73,6 +67,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		abTests,
 		switches,
 		keywordIds,
+		shouldHideAds,
 	} =
 		// The content if body is not checked
 		body as FEBlocksRequest;
@@ -83,6 +78,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		promotedNewsletter: undefined,
 		imagesForLightbox: [],
 		hasAffiliateLinksDisclaimer: false,
+		shouldHideAds,
 	});
 	const html = renderBlocks({
 		blocks: enhancedBlocks,
@@ -101,6 +97,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		switches,
 		abTests,
 		keywordIds,
+		shouldHideAds,
 	});
 
 	res.status(200).send(html);

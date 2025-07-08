@@ -184,6 +184,7 @@ const errorCodes = [
 	'API_CORS_BLOCKED',
 	'API_ERROR',
 	'EMAIL_NOT_VALIDATED',
+	'INVALID_CHARS',
 ] as const;
 
 const commentResponseSchema = variant('status', [
@@ -195,6 +196,17 @@ const commentResponseSchema = variant('status', [
 		status: literal('ok'),
 		// response.message is the id of the comment that was created on the server
 		message: string(),
+	}),
+]);
+
+const previewResponseSchema = variant('status', [
+	object({
+		status: literal('error'),
+		errorCode: picklist(errorCodes),
+	}),
+	object({
+		status: literal('ok'),
+		commentBody: string(),
 	}),
 ]);
 
@@ -211,6 +223,27 @@ export const parseCommentResponse = (
 	}
 
 	return ok(output.message);
+};
+
+/**
+ * @summary This function parses the response from the preview endpoint.
+ *
+ * @param {unknown} data
+ * @return {*}  {(Result<'ParsingError' | CommentResponseErrorCodes, string>)}
+ */
+export const parsePreviewResponse = (
+	data: unknown,
+): Result<'ParsingError' | CommentResponseErrorCodes, string> => {
+	const { success, output } = safeParse(previewResponseSchema, data);
+	if (!success) {
+		return error('ParsingError');
+	}
+
+	if (output.status === 'error') {
+		return error(output.errorCode);
+	}
+
+	return ok(output.commentBody);
 };
 
 const abuseResponseSchema = variant('status', [

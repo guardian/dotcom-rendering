@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { space, textSans15 } from '@guardian/source/foundations';
 import {
 	SvgCheckmark,
@@ -7,12 +6,13 @@ import {
 	SvgNotificationsOn,
 	SvgPlus,
 } from '@guardian/source/react-components';
+import type { ReactNode } from 'react';
 import { palette } from '../palette';
 
 type IconProps = {
 	isFollowing?: boolean;
-	iconIsFollowing: EmotionJSX.Element;
-	iconIsNotFollowing: EmotionJSX.Element;
+	iconIsFollowing: ReactNode;
+	iconIsNotFollowing: ReactNode;
 };
 
 const FollowIcon = ({
@@ -79,7 +79,8 @@ const tagTextSpan = ({
 	displayName?: string;
 }) => (
 	<span>
-		{isFollowing ? 'Following' : 'Follow'} {displayName}
+		{isFollowing ? 'Following' : 'Follow'} {displayName}{' '}
+		{displayName && displayName.length < 21 ? 'in My Guardian' : ''}
 	</span>
 );
 

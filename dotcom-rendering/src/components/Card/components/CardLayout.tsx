@@ -5,8 +5,6 @@ import type { DCRContainerType } from '../../../types/front';
 import type { CardImageType } from '../../../types/layout';
 import type { ImagePositionType } from './ImageWrapper';
 
-const padding = 20;
-
 export type GapSize = 'none' | 'tiny' | 'small' | 'medium' | 'large';
 
 export type GapSizes = { row: GapSize; column: GapSize };
@@ -30,6 +28,7 @@ const containerStyles = css`
 
 // Until mobile landscape, show 1 card on small screens
 // Above mobile landscape, show 1 full card and min 20vw of second card
+const padding = 20;
 const videoWidth = css`
 	min-width: 300px;
 	max-width: 600px;
@@ -156,7 +155,7 @@ const decidePosition = (
 	`;
 };
 
-/** Detemines the gap size between components in card layout */
+/** Determines the gap size between components in card layout */
 const decideGap = (gapSize: GapSize) => {
 	switch (gapSize) {
 		case 'none':
@@ -171,6 +170,14 @@ const decideGap = (gapSize: GapSize) => {
 			return `${space[5]}px`;
 	}
 };
+
+const decideColumnGap = (gapSize: GapSize) => css`
+	column-gap: ${gapSize === 'large' ? '10px' : decideGap(gapSize)};
+
+	${from.tablet} {
+		column-gap: ${decideGap(gapSize)};
+	}
+`;
 
 export const CardLayout = ({
 	children,
@@ -196,11 +203,11 @@ export const CardLayout = ({
 					isBetaContainer,
 					imageType === 'avatar',
 				),
+				decideColumnGap(gapSizes.column),
 			]}
 			style={{
 				backgroundColor: cardBackgroundColour,
 				rowGap: decideGap(gapSizes.row),
-				columnGap: decideGap(gapSizes.column),
 			}}
 		>
 			{children}

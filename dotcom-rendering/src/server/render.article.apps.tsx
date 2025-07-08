@@ -27,7 +27,7 @@ export const renderArticle = (
 	prefetchScripts: string[];
 	html: string;
 } => {
-	const { format, frontendData } = article;
+	const { design, frontendData } = article;
 	const renderingTarget = 'Apps';
 	const config: Config = {
 		renderingTarget,
@@ -118,13 +118,14 @@ window.twttr = (function(d, s, id) {
 		weAreHiring: !!frontendData.config.switches.weAreHiring,
 		canonicalUrl: frontendData.canonicalUrl,
 		initTwitter:
-			pageHasTweetElements || format.design === ArticleDesign.LiveBlog
+			pageHasTweetElements || design === ArticleDesign.LiveBlog
 				? initTwitter
 				: undefined,
 		config,
-		onlyLightColourScheme:
-			format.design === ArticleDesign.FullPageInteractive ||
-			format.design === ArticleDesign.Interactive,
+		onlyLightColourScheme: false,
+		isInteractive:
+			design === ArticleDesign.FullPageInteractive ||
+			design === ArticleDesign.Interactive,
 	});
 
 	return {
@@ -153,6 +154,7 @@ export const renderAppsBlocks = ({
 	keywordIds,
 	abTests = {},
 	edition,
+	shouldHideAds,
 }: FEBlocksRequest): string => {
 	const format: ArticleFormat = decideFormat(FEFormat);
 
@@ -190,6 +192,7 @@ export const renderAppsBlocks = ({
 				onFirstPage={false}
 				keyEvents={[]}
 				filterKeyEvents={false}
+				shouldHideAds={shouldHideAds}
 			/>
 		</ConfigProvider>,
 	);

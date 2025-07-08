@@ -13,6 +13,7 @@ import { mostReadGeo } from '../../fixtures/manual/most-read-geo';
 import { noTopPicks } from '../../fixtures/manual/noTopPicks';
 import { related } from '../../fixtures/manual/related';
 import { shortDiscussion } from '../../fixtures/manual/short-discussion';
+import { getAuxiaMock } from '../../fixtures/manual/sign-in-gate';
 import { topPicks } from '../../fixtures/manual/topPicks';
 
 const createMockResponse = (status: number, body?: any): Promise<Response> => {
@@ -214,6 +215,35 @@ export const mockFetch: typeof global.fetch = (
 		case /.*ophan\.theguardian\.com\/img\/.*/.test(url):
 			return createMockResponse(200);
 
+		// LatestLinks mock (for e.g., /live-blog/test.json?rendered=false)
+		case /.*api\.nextgen\.guardianapps\.co\.uk\/.*\.json\?rendered=false/.test(
+			url,
+		):
+			return createMockResponse(200, {
+				blocks: [
+					{
+						id: 'block-1',
+						title: '',
+						publishedDateTime: Date.now(),
+						lastUpdatedDateTime: Date.now(),
+						body: 'This is the first mocked live update.',
+					},
+					{
+						id: 'block-2',
+						title: '',
+						publishedDateTime: Date.now(),
+						lastUpdatedDateTime: Date.now(),
+						body: 'Another mocked update just in.',
+					},
+					{
+						id: 'block-3',
+						title: '',
+						publishedDateTime: Date.now(),
+						lastUpdatedDateTime: Date.now(),
+						body: 'A third update to test spacing.',
+					},
+				],
+			});
 		// Return an error response if the request body includes the
 		// phrase 'example.com', otherwise, return a success response.
 		// For use on stories and tests involving posts to the '/email/many'
@@ -228,8 +258,19 @@ export const mockFetch: typeof global.fetch = (
 			return exampleDomainRegex.test(decodedBody)
 				? createMockResponse(500)
 				: createMockResponse(200);
+		case /.*contributions\.(code\.dev-)?guardianapis\.com\/auxia\/get-treatments/.test(
+			url,
+		) && requestInit?.method === 'POST':
+			return createMockResponse(
+				200,
+				getAuxiaMock(requestInit.body?.toString() ?? ''),
+			);
+		case /.*contributions\.(code\.dev-)?guardianapis\.com\/auxia\/log-treatment-interaction/.test(
+			url,
+		) && requestInit?.method === 'POST':
+			return createMockResponse(200);
 		default:
-			console.log('could not find url');
+			console.log(`could not find url ${requestInit?.method} ${url}`);
 			return Promise.resolve(
 				new Response(JSON.stringify({ error: 'Not Found' }), {
 					status: 404,

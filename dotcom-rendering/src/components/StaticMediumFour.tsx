@@ -1,13 +1,27 @@
+import type { ArticleFormat } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
 import type {
 	AspectRatio,
+	DCRContainerLevel,
 	DCRContainerPalette,
 	DCRFrontCard,
 } from '../types/front';
+import type { ImagePositionType } from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
+
+const getImagePositionOnDesktop = (
+	format: ArticleFormat,
+	isNewsletter: boolean,
+): ImagePositionType => {
+	if (isMediaCard(format) || isNewsletter) {
+		return 'top';
+	}
+
+	return 'bottom';
+};
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -17,6 +31,7 @@ type Props = {
 	absoluteServerTimes: boolean;
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
+	containerLevel?: DCRContainerLevel;
 };
 
 export const StaticMediumFour = ({
@@ -27,6 +42,7 @@ export const StaticMediumFour = ({
 	imageLoading,
 	showImage = true,
 	aspectRatio,
+	containerLevel = 'Primary',
 }: Props) => {
 	const cards = trails.slice(0, 4);
 
@@ -49,17 +65,22 @@ export const StaticMediumFour = ({
 							absoluteServerTimes={absoluteServerTimes}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
-							imagePositionOnDesktop={
-								isMediaCard(card.format) ? 'top' : 'bottom'
-							}
+							imagePositionOnDesktop={getImagePositionOnDesktop(
+								card.format,
+								!!card.isNewsletter,
+							)}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
-							imageSize={'medium'}
+							imageSize="medium"
 							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}
 							showTopBarDesktop={false}
-							showTopBarMobile={true}
+							showTopBarMobile={
+								cardIndex !== 0 ||
+								(containerLevel === 'Primary' &&
+									!isMediaCard(card.format))
+							}
 							canPlayInline={false}
 						/>
 					</LI>

@@ -10,7 +10,6 @@ const dist = path.resolve(__dirname, '..', 'dist');
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
 
-const BUILD_LEGACY = process.env.BUILD_LEGACY === 'true';
 const BUILD_VARIANT = process.env.BUILD_VARIANT === 'true';
 
 /** @typedef {import('../src/lib/assets').Build} Build */
@@ -31,11 +30,6 @@ const commonConfigs = ({ platform }) => ({
 			? 'source-map'
 			: 'eval-cheap-module-source-map',
 	resolve: {
-		alias: {
-			react: 'preact/compat',
-			'react-dom/test-utils': 'preact/test-utils',
-			'react-dom': 'preact/compat',
-		},
 		extensions: ['.js', '.ts', '.tsx', '.jsx'],
 	},
 	ignoreWarnings: [
@@ -110,10 +104,6 @@ const clientBuilds = [
 	'client.web',
 	...((PROD && BUILD_VARIANT_SWITCH) || BUILD_VARIANT
 		? /** @type {const} */ (['client.web.variant'])
-		: []),
-	// TODO: ignore static files for legacy compilation
-	...(PROD || BUILD_LEGACY
-		? /** @type {const} */ (['client.web.legacy'])
 		: []),
 	'client.apps',
 	'client.editionsCrossword',

@@ -1,7 +1,8 @@
+import type { FECollection } from '../frontend/feFront';
 import { decideCollectionBranding } from '../lib/branding';
 import type { EditionId } from '../lib/edition';
 import type { Branding } from '../types/branding';
-import type { DCRCollectionType, FECollectionType } from '../types/front';
+import type { DCRCollectionType } from '../types/front';
 import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';
 import { enhanceTreats } from './enhanceTreats';
@@ -13,10 +14,21 @@ const FORBIDDEN_CONTAINERS = [
 	'qatar treat',
 ];
 
+export const BETA_CONTAINERS = [
+	'scrollable/highlights',
+	'flexible/special',
+	'flexible/general',
+	'scrollable/small',
+	'scrollable/medium',
+	'scrollable/feature',
+	'static/feature/2',
+	'static/medium/4',
+];
+
 const PALETTE_STYLES_URI =
 	'https://content.guardianapis.com/atom/interactive/interactives/2022/03/29/fronts-container-colours/default';
 
-const isSupported = (collection: FECollectionType): boolean =>
+const isSupported = (collection: FECollection): boolean =>
 	!(
 		FORBIDDEN_CONTAINERS.includes(collection.displayName) ||
 		collection.curated.some(
@@ -25,7 +37,7 @@ const isSupported = (collection: FECollectionType): boolean =>
 	);
 
 const findCollectionSuitableForFrontBranding = (
-	collections: FECollectionType[],
+	collections: FECollection[],
 ) => {
 	// Find the lowest indexed collection that COULD display branding
 	const index = collections.findIndex(
@@ -42,13 +54,6 @@ const findCollectionSuitableForFrontBranding = (
 	return index;
 };
 
-/** Depending on the next sibling of the container, we assign either large or small spacing rules during render */
-const getContainerSpacing = (nextSiblingCollection?: FECollectionType) => {
-	const nextCollectionIsPrimary =
-		nextSiblingCollection?.config.collectionLevel === 'Primary';
-	return nextCollectionIsPrimary ? 'large' : 'small';
-};
-
 export const enhanceCollections = ({
 	collections,
 	editionId,
@@ -57,17 +62,20 @@ export const enhanceCollections = ({
 	frontBranding,
 	onPageDescription,
 	isOnPaidContentFront,
+	isLoopingVideoTest = false,
 }: {
-	collections: FECollectionType[];
+	collections: FECollection[];
 	editionId: EditionId;
 	pageId: string;
 	discussionApiUrl: string;
 	frontBranding: Branding | undefined;
 	onPageDescription?: string;
 	isOnPaidContentFront?: boolean;
+	isLoopingVideoTest?: boolean;
 }): DCRCollectionType[] => {
 	const indexToShowFrontBranding =
 		findCollectionSuitableForFrontBranding(collections);
+
 	return collections.filter(isSupported).map((collection, index) => {
 		const { id, displayName, collectionType, hasMore, href, description } =
 			collection;
@@ -96,7 +104,11 @@ export const enhanceCollections = ({
 			},
 		);
 
-		const containerSpacing = getContainerSpacing(collections[index + 1]);
+		const isNextCollectionPrimary =
+			collections[index + 1]?.config.collectionLevel === 'Primary';
+		const isBetaContainer = BETA_CONTAINERS.includes(
+			collection.collectionType,
+		);
 
 		return {
 			id,
@@ -109,7 +121,7 @@ export const enhanceCollections = ({
 			href,
 			containerPalette,
 			containerLevel: collection.config.collectionLevel,
-			containerSpacing,
+			isNextCollectionPrimary,
 			collectionBranding,
 			grouped: groupCards(
 				collectionType,
@@ -117,16 +129,19 @@ export const enhanceCollections = ({
 				collection.backfill,
 				editionId,
 				discussionApiUrl,
+				isLoopingVideoTest,
 			),
 			curated: enhanceCards(collection.curated, {
 				cardInTagPage: false,
 				editionId,
 				discussionApiUrl,
+				isLoopingVideoTest,
 			}),
 			backfill: enhanceCards(collection.backfill, {
 				cardInTagPage: false,
 				editionId,
 				discussionApiUrl,
+				isLoopingVideoTest,
 			}),
 			treats: enhanceTreats(
 				collection.treats,
@@ -137,7 +152,8 @@ export const enhanceCollections = ({
 			config: {
 				showDateHeader: collection.config.showDateHeader,
 			},
-			canShowMore: hasMore && !collection.config.hideShowMore,
+			canShowMore:
+				hasMore && !collection.config.hideShowMore && !isBetaContainer,
 			targetedTerritory: collection.targetedTerritory,
 			aspectRatio: collection.config.aspectRatio,
 		};

@@ -1,8 +1,8 @@
 // @ts-check
-import path from 'node:path';
 import fs from 'node:fs';
-import TJS from 'typescript-json-schema';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import TJS from 'typescript-json-schema';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..', '..');
@@ -10,11 +10,15 @@ const root = path.resolve(__dirname, '..', '..');
 const program = TJS.getProgramFromFiles(
 	[
 		path.resolve(`${root}/index.d.ts`),
-		path.resolve(`${root}/src/types/frontend.ts`),
+		path.resolve(`${root}/src/frontend/feArticle.ts`),
+		path.resolve(`${root}/src/frontend/feFront.ts`),
 		path.resolve(`${root}/src/frontend/feTagPage.ts`),
 		path.resolve(`${root}/src/types/newslettersPage.ts`),
 		path.resolve(`${root}/src/types/editionsCrossword.ts`),
-		path.resolve(`${root}/src/feFootballDataPage.ts`),
+		path.resolve(`${root}/src/frontend/feCricketMatchPage.ts`),
+		path.resolve(`${root}/src/frontend/feFootballMatchListPage.ts`),
+		path.resolve(`${root}/src/frontend/feFootballTablesPage.ts`),
+		path.resolve(`${root}/src/frontend/feFootballMatchPage.ts`),
 	],
 	{
 		skipLibCheck: true,
@@ -34,12 +38,12 @@ const settings = { rejectDateType: true, required: true };
  */
 const schemas = [
 	{
-		typeName: 'FEArticleType',
-		file: `${root}/src/model/article-schema.json`,
+		typeName: 'FEArticle',
+		file: `${root}/src/frontend/schemas/feArticle.json`,
 	},
 	{
-		typeName: 'FEFrontType',
-		file: `${root}/src/model/front-schema.json`,
+		typeName: 'FEFront',
+		file: `${root}/src/frontend/schemas/feFront.json`,
 	},
 	{
 		typeName: 'FETagPage',
@@ -58,8 +62,20 @@ const schemas = [
 		file: `${root}/src/model/editions-crossword-schema.json`,
 	},
 	{
-		typeName: 'FEFootballDataPage',
-		file: `${root}/src/model/fe-football-data-page-schema.json`,
+		typeName: 'FEFootballMatchListPage',
+		file: `${root}/src/frontend/schemas/feFootballMatchListPage.json`,
+	},
+	{
+		typeName: 'FEFootballTablesPage',
+		file: `${root}/src/frontend/schemas/feFootballTablesPage.json`,
+	},
+	{
+		typeName: 'FECricketMatchPage',
+		file: `${root}/src/frontend/schemas/feCricketMatchPage.json`,
+	},
+	{
+		typeName: 'FEFootballMatchPage',
+		file: `${root}/src/frontend/schemas/feFootballMatchPage.json`,
 	},
 ];
 

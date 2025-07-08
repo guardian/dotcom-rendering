@@ -1,11 +1,10 @@
 import { hasUserDismissedGate } from '../dismissGate';
 import {
-	isIOS9,
 	isNPageOrHigherPageView,
 	isValidContentType,
 	isValidSection,
 	isValidTag,
-} from '../displayRule';
+} from '../displayRules';
 import type { CanShowGateProps, SignInGateComponent } from '../types';
 
 const canShow = ({
@@ -27,8 +26,7 @@ const canShow = ({
 			// hide the sign in gate on isPaidContent
 			!isPaidContent &&
 			// hide the sign in gate on internal tools preview
-			!isPreview &&
-			!isIOS9(),
+			!isPreview,
 	);
 
 export const signInGateComponent: SignInGateComponent = {

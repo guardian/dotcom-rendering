@@ -13,7 +13,10 @@ import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
 
-type Props = { trails: DCRFrontCard[]; frontId?: string };
+type Props = {
+	trails: DCRFrontCard[];
+	frontId?: string;
+};
 
 const containerStyles = css`
 	${from.tablet} {
@@ -76,7 +79,6 @@ const itemStyles = css`
 		* child so that the first card in the carousel aligns
 		* with the start of the pages content in the grid.
 		*/
-
 		${from.leftCol} {
 			padding-left: 160px; /** 160 === 2 columns and 2 column gaps  */
 		}
@@ -134,6 +136,7 @@ const nextButtonFadeStyles = css`
 		${palette('--highlights-container-end-fade')} 100%
 	);
 `;
+
 /**
  * Generates CSS styles for a grid layout used in a carousel.
  *

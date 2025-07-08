@@ -3,8 +3,8 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/9c3eae7cb0b159db4a1c40679d6b37710b0bb937/packages/shared/src/lib/tracking.ts
  */
-import type { OphanAction, OphanComponentEvent } from '@guardian/libs';
 import { isUndefined } from '@guardian/libs';
+import type { ComponentEvent, TAction } from '@guardian/ophan-tracker-js';
 import { addRegionIdToSupportUrl } from '@guardian/support-dotcom-components';
 import type {
 	AbandonedBasket,
@@ -22,7 +22,6 @@ type LinkParams = {
 	REFPVID: string;
 	INTCMP: string;
 	acquisitionData: string;
-	numArticles: number;
 };
 
 type AbTestObject = {
@@ -82,13 +81,11 @@ const encodeAcquisitionsData = (
 const generateQueryString = (
 	params: Tracking,
 	acquisitionData: string,
-	numArticles: number,
 ): string => {
 	const trackingLinkParams: LinkParams = {
 		REFPVID: params.ophanPageId || 'not_found',
 		INTCMP: params.campaignCode || '',
 		acquisitionData,
-		numArticles: numArticles || 0,
 	};
 
 	const queryString = Object.entries(trackingLinkParams)
@@ -98,10 +95,9 @@ const generateQueryString = (
 	return queryString.join('&');
 };
 
-export const addTrackingParams = (
+const addTrackingParams = (
 	baseUrl: string,
 	params: Tracking,
-	numArticles?: number,
 	amountsAbTestName?: string,
 	amountsAbTestVariant?: string,
 ): string => {
@@ -113,11 +109,7 @@ export const addTrackingParams = (
 		amountsAbTestVariant,
 	);
 	const acquisitionData = encodeAcquisitionsData(params, abTests);
-	const queryString = generateQueryString(
-		params,
-		acquisitionData,
-		numArticles ?? 0,
-	);
+	const queryString = generateQueryString(params, acquisitionData);
 	const alreadyHasQueryString = baseUrl.includes('?');
 	return `${baseUrl}${alreadyHasQueryString ? '&' : '?'}${queryString}`;
 };
@@ -156,47 +148,67 @@ export const addAbandonedBasketAndTrackingParamsToUrl = (
 	);
 };
 
+const addPromoCodesToUrl = (url: string, promoCodes: string[]): string => {
+	if (!promoCodes.length) return url;
+	const separator = url.includes('?') ? '&' : '?';
+	const promoParams = promoCodes
+		.map((code) => `promoCode=${encodeURIComponent(code)}`)
+		.join('&');
+	return `${url}${separator}${promoParams}`;
+};
+
 export const isSupportUrl = (baseUrl: string): boolean =>
 	/\bsupport\./.test(baseUrl);
 
-export const addRegionIdAndTrackingParamsToSupportUrl = (
-	baseUrl: string,
-	tracking: Tracking,
-	numArticles?: number,
-	countryCode?: string,
-	amountsAbTestName?: string,
-	amountsAbTestVariant?: string,
-): string => {
+// Enriches the path and querystring of a link to the Support site
+interface SupportUrlData {
+	baseUrl: string; // the base url, which may already contain a querystring. Typically defined in the RRCP tool
+	tracking: Tracking; // tracking data to be added to the querystring
+	promoCodes: string[]; // any promo codes, to be added in the promoCodes parameter
+	countryCode?: string; // browser's country code
+	amountsAbTestName?: string; // amounts test name if applicable
+	amountsAbTestVariant?: string; // amounts test variant name if applicable
+}
+
+export const enrichSupportUrl = ({
+	baseUrl,
+	tracking,
+	promoCodes,
+	countryCode,
+	amountsAbTestName,
+	amountsAbTestVariant,
+}: SupportUrlData): string => {
 	if (!isSupportUrl(baseUrl)) {
 		return baseUrl;
 	}
 	const urlWithRegion = addRegionIdToSupportUrl(baseUrl, countryCode);
 
-	return addTrackingParams(
+	const withTracking = addTrackingParams(
 		urlWithRegion,
 		tracking,
-		numArticles,
 		amountsAbTestName,
 		amountsAbTestVariant,
 	);
+
+	return addPromoCodesToUrl(withTracking, promoCodes);
 };
 
 const hrefRegex = /href="(.*?)"/g;
 export const addTrackingParamsToBodyLinks = (
 	text: string,
 	tracking: Tracking,
-	numArticles?: number,
+	promoCodes: string[],
 	countryCode?: string,
 ): string => {
 	const trackingWithLabel = addLabelToTracking(tracking, 'body-link');
 
-	const replaceHref = (wholeMatch: string, url: string) =>
-		`href="${addRegionIdAndTrackingParamsToSupportUrl(
-			url,
-			trackingWithLabel,
-			numArticles,
+	const replaceHref = (wholeMatch: string, baseUrl: string) =>
+		`href="${enrichSupportUrl({
+			baseUrl,
+			tracking: trackingWithLabel,
+			promoCodes,
 			countryCode,
-		)}"`;
+		})}"`;
 
 	return text.replace(hrefRegex, replaceHref);
 };
@@ -312,8 +324,8 @@ export const buildAmpEpicCampaignCode = (
 	variantName: string,
 ): string => `AMP__${testName}__${variantName}`;
 
-const createEventFromTracking = (action: OphanAction) => {
-	return (tracking: Tracking, componentId: string): OphanComponentEvent => {
+const createEventFromTracking = (action: TAction) => {
+	return (tracking: Tracking, componentId: string): ComponentEvent => {
 		const {
 			abTestName,
 			abTestVariant,

@@ -52,7 +52,7 @@ const aboutButtonStyle = css`
 `;
 
 const aboutButtonIcon = css`
-	:after {
+	::after {
 		content: ' ';
 		display: inline-block;
 		width: 5px;

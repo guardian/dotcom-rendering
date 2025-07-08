@@ -3,7 +3,7 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/4925ef1e0ced5d221f1122afe79f93bd7448e0e5/packages/modules/src/modules/headers/HeaderWrapper.tsx
  */
-import type { OphanAction } from '@guardian/libs';
+import type { TAction } from '@guardian/ophan-tracker-js';
 import { headerPropsSchema } from '@guardian/support-dotcom-components';
 import type {
 	Cta,
@@ -13,9 +13,9 @@ import { useCallback, useEffect } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import type { ReactComponent } from '../lib/ReactComponent';
 import {
-	addRegionIdAndTrackingParamsToSupportUrl,
 	addTrackingParamsToProfileUrl,
 	createClickEventFromTracking,
+	enrichSupportUrl,
 	isProfileUrl,
 } from '../lib/tracking';
 
@@ -46,7 +46,7 @@ export const headerWrapper = (
 		tracking,
 		countryCode,
 		submitComponentEvent,
-		numArticles,
+		promoCodes,
 	}) => {
 		const buildEnrichedCta = (cta: Cta): HeaderEnrichedCta => {
 			if (isProfileUrl(cta.baseUrl)) {
@@ -59,12 +59,12 @@ export const headerWrapper = (
 				};
 			}
 			return {
-				ctaUrl: addRegionIdAndTrackingParamsToSupportUrl(
-					cta.baseUrl,
+				ctaUrl: enrichSupportUrl({
+					baseUrl: cta.baseUrl,
 					tracking,
-					numArticles,
+					promoCodes: promoCodes ?? [],
 					countryCode,
-				),
+				}),
 				ctaText: cta.text,
 			};
 		};
@@ -110,15 +110,15 @@ export const headerWrapper = (
 					`${componentId} : cta`,
 				);
 				if (submitComponentEvent) {
-					submitComponentEvent(componentClickEvent);
+					void submitComponentEvent(componentClickEvent);
 				}
 			};
 		};
 
 		const sendOphanEvent = useCallback(
-			(action: OphanAction): void => {
+			(action: TAction): void => {
 				if (submitComponentEvent) {
-					submitComponentEvent({
+					void submitComponentEvent({
 						component: {
 							componentType,
 							id: campaignCode,

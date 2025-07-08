@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { space } from '@guardian/source/foundations';
-import { SvgMediaControlsPlay } from '@guardian/source/react-components';
+import { from, space } from '@guardian/source/foundations';
+import { Hide, SvgMediaControlsPlay } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
 import { getZIndex } from '../lib/getZIndex';
@@ -32,6 +32,7 @@ import { MediaDuration } from './MediaDuration';
 import { Pill } from './Pill';
 import { StarRating } from './StarRating/StarRating';
 import { SupportingContent } from './SupportingContent';
+import { WaveForm } from './WaveForm';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
 
 export type Position = 'inner' | 'outer' | 'none';
@@ -65,15 +66,27 @@ const hoverStyles = css`
 	:hover .image-overlay {
 		position: absolute;
 		top: 0;
+		left: 0;
 		width: 100%;
 		height: 100%;
-		left: 0;
 		background-color: ${palette('--card-background-hover')};
 	}
 
 	/* Only underline the headline element we want to target (not kickers/sublink headlines) */
 	:hover .card-headline .show-underline {
 		text-decoration: underline;
+	}
+`;
+
+/** When we hover on sublinks, we want to prevent the general hover styles applying */
+const sublinkHoverStyles = css`
+	:has(ul.sublinks:hover) {
+		.card-headline .show-underline {
+			text-decoration: none;
+		}
+		.image-overlay {
+			background-color: transparent;
+		}
 	}
 `;
 
@@ -85,6 +98,27 @@ const contentStyles = css`
 	flex-direction: column;
 `;
 
+const overlayContainerStyles = css`
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+`;
+
+const immersiveOverlayContainerStyles = css`
+	${from.tablet} {
+		top: 0;
+		height: 100%;
+		/**
+		* Why 268px?
+		* 220 is the width of 4 columns on tablet and 3 columns on desktop.
+		* 48px is to ensure the gradient does not render the content inaccessible.
+		*/
+		width: 268px;
+		z-index: 1;
+	}
+`;
+
 /**
  * Image mask gradient has additional colour stops to emulate a non-linear
  * ease in / ease out curve to make the transition smoother. Values were
@@ -93,14 +127,10 @@ const contentStyles = css`
  * reduced.) The following article has more detail on non-linear gradients:
  * https://css-tricks.com/easing-linear-gradients/
  */
-const overlayStyles = css`
-	display: flex;
-	flex-direction: column;
-	text-align: start;
-	gap: ${space[1]}px;
-	padding: 64px ${space[2]}px ${space[2]}px;
+
+const overlayMaskGradientStyles = (angle: string) => css`
 	mask-image: linear-gradient(
-		180deg,
+		${angle},
 		transparent 0px,
 		rgba(0, 0, 0, 0.0381) 8px,
 		rgba(0, 0, 0, 0.1464) 16px,
@@ -111,7 +141,33 @@ const overlayStyles = css`
 		rgba(0, 0, 0, 0.9619) 56px,
 		rgb(0, 0, 0) 64px
 	);
+`;
+const overlayStyles = css`
+	display: flex;
+	flex-direction: column;
+	text-align: start;
+	gap: ${space[1]}px;
+	padding: 64px ${space[2]}px ${space[2]}px;
 	backdrop-filter: blur(12px) brightness(0.5);
+	${overlayMaskGradientStyles('180deg')};
+
+	/* Ensure the waveform is behind the other elements, e.g. headline, pill */
+	> :not(.waveform) {
+		z-index: 1;
+	}
+`;
+
+const immersiveOverlayStyles = css`
+	${from.tablet} {
+		height: 100%;
+		/**
+		* Why 48px right padding?
+		* 48px is to point at which the gradient can go behind the content whilst maintaining accessibility.
+		*/
+		padding: ${space[2]}px ${space[12]}px ${space[2]}px ${space[2]}px;
+		backdrop-filter: blur(12px) brightness(0.5);
+		${overlayMaskGradientStyles('270deg')}
+	}
 `;
 
 const podcastImageContainerStyles = css`
@@ -123,11 +179,14 @@ const podcastImageContainerStyles = css`
 const podcastImageStyles = css`
 	height: 80px;
 	width: 80px;
+`;
+
+const nonImmersivePodcastImageStyles = css`
 	position: absolute;
 	/**
-	 * Displays 8px above the text.
-	 * desired space above text (8px) - padding-top of text container (64px) = -56px
-	 */
+	* Displays 8px above the text.
+	* desired space above text (8px) - padding-top of text container (64px) = -56px
+	*/
 	bottom: -${space[14]}px;
 	left: ${space[2]}px;
 `;
@@ -150,6 +209,17 @@ const videoPillStyles = css`
 	right: ${space[2]}px;
 `;
 
+const waveformStyles = css`
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: 0;
+	height: 64px;
+	max-width: 100%;
+	overflow: hidden;
+	opacity: 0.3;
+`;
+
 const getMedia = ({
 	imageUrl,
 	imageAltText,
@@ -168,11 +238,42 @@ const getMedia = ({
 			...(imageUrl && { imageUrl }),
 		} as const;
 	}
+
 	if (imageUrl) {
 		return { type: 'picture', imageUrl, imageAltText } as const;
 	}
+
 	return undefined;
 };
+
+const renderWaveform = (duration: string, bars: number) => (
+	<div css={waveformStyles} className="waveform">
+		<WaveForm seed={duration} height={64} bars={bars} barWidth={2} />
+	</div>
+);
+
+const renderPodcastImage = (
+	image: string,
+	alt: string,
+	isImmersive: boolean,
+) => (
+	<div css={podcastImageContainerStyles}>
+		<div
+			css={[
+				podcastImageStyles,
+				!isImmersive && nonImmersivePodcastImageStyles,
+			]}
+		>
+			<CardPicture
+				mainImage={image}
+				imageSize="podcast"
+				alt={alt}
+				loading="lazy"
+				aspectRatio="1:1"
+			/>
+		</div>
+	</div>
+);
 
 export type Props = {
 	linkTo: string;
@@ -187,7 +288,7 @@ export type Props = {
 	imagePositionOnDesktop?: ImagePositionType /** TODO Remove this prop  */;
 	imagePositionOnMobile?: ImagePositionType /** TODO Remove this prop  */;
 	/** Size is ignored when position = 'top' because in that case the image flows based on width */
-	imageSize?: ImageSizeType;
+	imageSize: ImageSizeType;
 	imageLoading: Loading;
 	showClock?: boolean;
 	mainMedia?: MainMedia;
@@ -211,8 +312,10 @@ export type Props = {
 	discussionApiUrl: string;
 	discussionId?: string;
 	isExternalLink: boolean;
-	/** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
+	/** Alows the consumer to set an aspect ratio on the image */
 	aspectRatio?: AspectRatio;
+	/** Alows the consumer to set an aspect ratio on the image specifically on mobile breakpoints */
+	mobileAspectRatio?: AspectRatio;
 	showQuotes?: boolean;
 	/**
 	 * Youtube video requires a unique ID. We append the collectionId to the youtube asset ID, to allow
@@ -220,6 +323,13 @@ export type Props = {
 	 * The highlights container above the header is 0, the first container below the header is 1, etc.
 	 */
 	collectionId: number;
+	isNewsletter?: boolean;
+	/**
+	 * An immersive feature card variant. It dictates that the card has a full width background image on all breakpoints. It also dictates the the card change aspect ratio to 5:3 on desktop and 4:5 on mobile.
+	 *
+	 */
+	isImmersive?: boolean;
+	showVideo?: boolean;
 };
 
 export const FeatureCard = ({
@@ -233,7 +343,7 @@ export const FeatureCard = ({
 	image,
 	imagePositionOnDesktop = 'top',
 	imagePositionOnMobile = 'left',
-	imageSize = 'small',
+	imageSize,
 	trailText,
 	imageLoading,
 	showClock,
@@ -250,9 +360,13 @@ export const FeatureCard = ({
 	isExternalLink,
 	absoluteServerTimes,
 	aspectRatio,
+	mobileAspectRatio,
 	starRating,
 	showQuotes,
 	collectionId,
+	isNewsletter = false,
+	isImmersive = false,
+	showVideo = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -269,7 +383,8 @@ export const FeatureCard = ({
 		canPlayInline,
 	});
 
-	const showYoutubeVideo = canPlayInline && mainMedia?.type === 'Video';
+	const showYoutubeVideo =
+		canPlayInline && showVideo && mainMedia?.type === 'Video';
 
 	const showCardAge =
 		webPublicationDate !== undefined && showClock !== undefined;
@@ -279,7 +394,7 @@ export const FeatureCard = ({
 	return (
 		<FormatBoundary format={format}>
 			<ContainerOverrides containerPalette={containerPalette}>
-				<div css={[baseCardStyles, hoverStyles]}>
+				<div css={[baseCardStyles, hoverStyles, sublinkHoverStyles]}>
 					{!showYoutubeVideo && (
 						<CardLink
 							linkTo={linkTo}
@@ -322,11 +437,10 @@ export const FeatureCard = ({
 										hideCaption={true}
 										pauseOffscreenVideo={true}
 										aspectRatio={aspectRatio}
+										mobileAspectRatio={mobileAspectRatio}
 										altText={headlineText}
 										kickerText={kickerText}
-										trailText={
-											showByline ? trailText : undefined
-										}
+										trailText={trailText}
 										isVideoArticle={isVideoArticle}
 										showTextOverlay={false}
 										hidePillOnMobile={false}
@@ -342,6 +456,9 @@ export const FeatureCard = ({
 										discussionId={discussionId}
 										discussionApiUrl={discussionApiUrl}
 										isFeatureCard={true}
+										isImmersive={isImmersive}
+										byline={byline}
+										showByline={showByline}
 									/>
 								</Island>
 							</div>
@@ -372,8 +489,10 @@ export const FeatureCard = ({
 											imageSize={imageSize}
 											alt={headlineText}
 											loading={imageLoading}
-											roundedCorners={false}
 											aspectRatio={aspectRatio}
+											mobileAspectRatio={
+												mobileAspectRatio
+											}
 										/>
 									</div>
 								)}
@@ -385,8 +504,10 @@ export const FeatureCard = ({
 											imageSize={imageSize}
 											alt={media.imageAltText}
 											loading={imageLoading}
-											roundedCorners={false}
 											aspectRatio={aspectRatio}
+											mobileAspectRatio={
+												mobileAspectRatio
+											}
 										/>
 										{isVideoMainMedia &&
 											mainMedia.duration > 0 && (
@@ -409,41 +530,60 @@ export const FeatureCard = ({
 								<div className="image-overlay" />
 
 								<div
-									css={css`
-										position: absolute;
-										bottom: 0;
-										left: 0;
-										width: 100%;
-									`}
+									css={[
+										overlayContainerStyles,
+										isImmersive &&
+											immersiveOverlayContainerStyles,
+									]}
 								>
 									{mainMedia?.type === 'Audio' &&
-										!!mainMedia.podcastImage?.src && (
-											<div
-												css={
-													podcastImageContainerStyles
-												}
-											>
-												<div css={podcastImageStyles}>
-													<CardPicture
-														mainImage={
+										!!mainMedia.podcastImage?.src &&
+										(isImmersive ? (
+											<Hide from="tablet">
+												{renderPodcastImage(
+													mainMedia.podcastImage.src,
+													mainMedia.podcastImage
+														.altText ?? '',
+													false, // Immersive cards are styled as feature cards below the tablet viewport
+												)}
+											</Hide>
+										) : (
+											renderPodcastImage(
+												mainMedia.podcastImage.src,
+												mainMedia.podcastImage
+													.altText ?? '',
+												false,
+											)
+										))}
+									<div
+										css={[
+											overlayStyles,
+											isImmersive &&
+												immersiveOverlayStyles,
+										]}
+									>
+										{isImmersive &&
+											mainMedia?.type === 'Audio' &&
+											!!mainMedia.podcastImage?.src && (
+												<div
+													css={
+														podcastImageContainerStyles
+													}
+												>
+													<Hide until="tablet">
+														{renderPodcastImage(
 															mainMedia
 																.podcastImage
-																.src
-														}
-														imageSize="podcast"
-														alt={
+																.src,
 															mainMedia
 																.podcastImage
-																.altText ?? ''
-														}
-														loading="lazy"
-														roundedCorners={false}
-														aspectRatio="1:1"
-													/>
+																.altText ?? '',
+															true,
+														)}
+													</Hide>
 												</div>
-											</div>
-										)}
-									<div css={overlayStyles}>
+											)}
+
 										{/**
 										 * Without the wrapping div the headline and byline would have space
 										 * inserted between them due to being direct children of the flex container
@@ -475,7 +615,6 @@ export const FeatureCard = ({
 												kickerColour={palette(
 													'--feature-card-kicker-text',
 												)}
-												isBetaContainer={true}
 											/>
 										</div>
 
@@ -546,7 +685,15 @@ export const FeatureCard = ({
 											// }
 											showLivePlayable={false}
 											mainMedia={mainMedia}
+											isNewsletter={isNewsletter}
 										/>
+
+										{!isImmersive &&
+											mainMedia?.type === 'Audio' &&
+											renderWaveform(
+												mainMedia.duration,
+												233,
+											)}
 									</div>
 									{/* On video article cards, the duration is displayed in the footer */}
 									{!isVideoArticle &&
@@ -566,6 +713,10 @@ export const FeatureCard = ({
 										</div>
 									) : null}
 								</div>
+
+								{isImmersive &&
+									mainMedia?.type === 'Audio' &&
+									renderWaveform(mainMedia.duration, 313)}
 							</div>
 						)}
 					</div>

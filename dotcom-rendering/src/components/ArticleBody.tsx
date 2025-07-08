@@ -22,6 +22,7 @@ import type { TagType } from '../types/tag';
 import { Island } from './Island';
 import { LiveBlogRenderer } from './LiveBlogRenderer';
 import { TableOfContents } from './TableOfContents.importable';
+import { textBlockStyles } from './TextBlockComponent';
 
 type Props = {
 	format: ArticleFormat;
@@ -52,13 +53,14 @@ type Props = {
 	tableOfContents?: TableOfContentsItem[];
 	lang?: string;
 	isRightToLeftLang?: boolean;
+	shouldHideAds: boolean;
 };
 
 const globalOlStyles = () => css`
 	ol:not([data-ignore='global-ol-styling']) {
 		counter-reset: li;
 
-		> li:before {
+		> li::before {
 			${textEgyptian17};
 			line-height: 1.15;
 			content: counter(li);
@@ -134,10 +136,30 @@ export const ArticleBody = ({
 	lang,
 	isRightToLeftLang = false,
 	editionId,
+	shouldHideAds,
 }: Props) => {
-	const isInteractive = format.design === ArticleDesign.Interactive;
+	const isInteractiveContent =
+		format.design === ArticleDesign.Interactive ||
+		format.design === ArticleDesign.Crossword;
 	const language = decideLanguage(lang);
 	const languageDirection = decideLanguageDirection(isRightToLeftLang);
+	const hasObserverPublicationTag = tags.find(
+		(tag) =>
+			tag.type === 'Publication' && tag.id === 'publication/theobserver',
+	);
+	const ObserverFooter = () => {
+		return (
+			<ul css={textBlockStyles(format)}>
+				<li>
+					<p>
+						This is the archive of The Observer up until 21/04/2025.
+						The Observer is now owned and operated by Tortoise
+						Media.
+					</p>
+				</li>
+			</ul>
+		);
+	};
 
 	if (
 		format.design === ArticleDesign.LiveBlog ||
@@ -182,6 +204,7 @@ export const ArticleBody = ({
 					filterKeyEvents={filterKeyEvents}
 					keywordIds={keywordIds}
 					editionId={editionId}
+					shouldHideAds={shouldHideAds}
 				/>
 			</div>
 		);
@@ -200,7 +223,7 @@ export const ArticleBody = ({
 				id="maincontent"
 				css={[
 					`margin-top: ${remSpace[3]}`,
-					isInteractive ? null : bodyPadding,
+					isInteractiveContent ? null : bodyPadding,
 					globalH3Styles(format.display),
 					globalOlStyles(),
 					globalStrongStyles,
@@ -229,8 +252,10 @@ export const ArticleBody = ({
 					abTests={abTests}
 					editionId={editionId}
 					contributionsServiceUrl={contributionsServiceUrl}
+					shouldHideAds={shouldHideAds}
 				/>
 			</div>
+			{hasObserverPublicationTag && <ObserverFooter />}
 		</>
 	);
 };

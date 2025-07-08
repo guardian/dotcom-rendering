@@ -69,7 +69,8 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
 	},
 	{
 		url: 'https://www.theguardian.com/environment/2019/dec/02/migration-v-climate-europes-new-political-divide',
@@ -108,7 +109,8 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/28/eu-parliament-declares-climate-emergency',
@@ -132,7 +134,8 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
 	},
 	{
 		url: 'https://www.theguardian.com/environment/2019/nov/27/climate-emergency-world-may-have-crossed-tipping-points',
@@ -155,7 +158,8 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/26/european-parliament-split-on-declaring-climate-emergency',
@@ -179,7 +183,8 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/23/north-pole-explorers-on-thin-ice-as-climate-change-hits-expedition',
@@ -203,7 +208,8 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
 	},
 	{
 		url: 'https://www.theguardian.com/environment/2019/oct/25/scientists-glacial-rivers-absorb-carbon-faster-rainforests',
@@ -228,7 +234,8 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
 	},
 	{
 		url: 'https://www.theguardian.com/business/2019/oct/20/uk-urges-world-bank-to-channel-more-money-into-tackling-climate-crisis',
@@ -252,7 +259,8 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
 	},
 
 	{
@@ -277,7 +285,8 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/17/uk-to-begin-worlds-first-covid-human-challenge-study-within-weeks',
@@ -301,7 +310,8 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/17/scottish-government-inadequately-prepared-for-covid-audit-scotland-report',
@@ -325,7 +335,8 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
 	},
 	{
 		url: 'https://www.theguardian.com/society/2021/feb/16/encouraging-signs-covid-vaccine-over-80s-deaths-fall-england',
@@ -349,7 +360,8 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/16/contact-tracing-alone-has-little-impact-on-curbing-covid-spread-report-finds',
@@ -373,7 +385,8 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/16/covid-almost-2m-more-people-asked-shield-england',
@@ -397,7 +410,8 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
 	},
 	{
 		url: 'https://www.theguardian.com/politics/live/2021/feb/16/uk-covid-live-coronavirus-sturgeon-return-scottish-schools-latest-updates',
@@ -421,31 +435,75 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
 	},
 	{
-		url: 'https://www.theguardian.com/uk-news/2021/feb/16/qcovid-how-improved-algorithm-can-identify-more-higher-risk-adults',
+		url: 'https://www.theguardian.com/world/video/2025/mar/06/how-nanoplastics-are-invading-our-bodies-video-report',
 		showByline: false,
-		byline: 'Sarah Boseley Health editor',
+		byline: ' Neelam Tailor, Alex Healey, Ali Assaf, Steve Glew, Ryan Baxter',
 		image: {
-			src: 'https://media.guim.co.uk/6d152e60fdb37dbbc063a68e2cffccf97cdab183/0_40_5458_3275/master/5458.jpg',
-			altText: 'A covid vaccine',
+			src: 'https://media.guim.co.uk/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/91_0_1800_1080/master/1800.jpg',
+			altText:
+				'Plastics are everywhere, but their smallest fragments – nanoplastics – are making their way into the deepest parts of our bodies, including our brains and breast milk',
 		},
 		format: {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.News,
-			design: ArticleDesign.Analysis,
+			design: ArticleDesign.Video,
 		},
-		webPublicationDate: '2021-02-16T18:42:44.000Z',
-		headline:
-			'QCovid: how improved algorithm can identify more higher-risk adults',
-		dataLinkName: 'news | group-0 | card-@1',
+		webPublicationDate: '2025-03-06T10:14:00.000Z',
+		headline: 'How plastics are invading our brain cells – video',
+		dataLinkName: 'media | group-0 | card-@11',
 		showQuotedHeadline: false,
-		mainMedia: undefined,
+		mainMedia: {
+			type: 'Video',
+			id: '966acc06-a238-4d5f-b477-816eec0476f3',
+			videoId: '4JUvvbpx2So',
+			duration: 322,
+			title: 'How plastics are invading our brain cells – video',
+			width: 500,
+			height: 300,
+			origin: 'The Guardian',
+			images: [
+				{
+					url: 'https://media.guim.co.uk/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/0_0_1920_1080/1000.jpg',
+					width: 1000,
+				},
+				{
+					url: 'https://media.guim.co.uk/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/0_0_1920_1080/500.jpg',
+					width: 500,
+				},
+				{
+					url: 'https://media.guim.co.uk/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/0_0_1920_1080/140.jpg',
+					width: 140,
+				},
+				{
+					url: 'https://media.guim.co.uk/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/0_0_1920_1080/1920.jpg',
+					width: 1920,
+				},
+			],
+			expired: false,
+		},
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
+		trailText:
+			'Plastics are everywhere, but their smallest fragments – nanoplastics – are making their way into the deepest parts of our bodies, including our brains and breast milk',
+		supportingContent: [
+			{
+				format: {
+					display: ArticleDisplay.Standard,
+					theme: Pillar.News,
+					design: ArticleDesign.Standard,
+				},
+				headline:
+					'Edwyn Collins: ‘Could an Orange Juice reunion ever be on the cards? No!’',
+				url: '/culture/2025/mar/06/edwyn-collins-could-an-orange-juice-reunion-ever-be-on-the-cards-no',
+			},
+		],
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/28/eu-parliament-declares-climate-emergency',
@@ -468,7 +526,8 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
 	},
 	{
 		url: 'https://www.theguardian.com/society/2023/may/30/trans-activists-disrupt-kathleen-stock-speech-at-oxford-union',
@@ -492,7 +551,8 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
 	},
 	{
 		url: 'https://www.theguardian.com/commentisfree/2023/may/31/price-controls-rishi-sunak-thatcher-prime-minister',
@@ -516,7 +576,8 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
 	},
 	{
 		url: 'https://www.theguardian.com/tv-and-radio/2023/may/30/a-revelation-succession-matthew-macfadyen-has-been-a-consummate-shapeshifter',
@@ -557,7 +618,8 @@ export const trails: [
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
-		showMainVideo: true,
+		showVideo: true,
+		isImmersive: false,
 	},
 ];
 
@@ -589,6 +651,7 @@ export const audioTrails: [DCRFrontCard, DCRFrontCard] = [
 			altText:
 				'A military facility destroyed by shelling near Kyiv, 1 March 2022. Photograph: Genya Savilov/AFP/Getty Images',
 		},
+		isImmersive: false,
 	},
 	{
 		format: { design: 3, display: 0, theme: 2 },
@@ -616,6 +679,50 @@ export const audioTrails: [DCRFrontCard, DCRFrontCard] = [
 			altText:
 				"TOPSHOT-FBL-EUR-C1-MILAN-FEYENOORD<br>TOPSHOT - Polish referee Szymon Marciniak gives a red card to AC Milan's French defender #19 Theo Hernandez (R) during the UEFA Champions League knockout round play-off second leg football match between AC Milan and Feyenoord at San Siro stadium in Milan, on February 18, 2025. (Photo by Piero CRUCIATTI / AFP) (Photo by PIERO CRUCIATTI/AFP via Getty Images)",
 		},
+		isImmersive: false,
+	},
+];
+
+export const opinionTrails: [DCRFrontCard, DCRFrontCard] = [
+	{
+		format: { design: 8, display: 0, theme: 1 },
+		dataLinkName: 'comment | group-0 | card-@6',
+		url: '/commentisfree/2025/apr/28/populists-nigel-farage-reform-chaos-brexit',
+		headline:
+			'Populists like Farage promise voters a simpler life. In fact, they produce ever more hassle and chaos',
+		trailText:
+			'Centrists won’t beat Reform UK by echoing its messages. They should emphasise the true unworkability of policies like Brexit, says Guardian columnist Andy Beckett',
+		webPublicationDate: '2025-04-28T05:00:53.000Z',
+		discussionApiUrl:
+			'https://discussion.code.dev-theguardian.com/discussion-api',
+		discussionId: '/p/x253na',
+		isImmersive: false,
+		showQuotedHeadline: true,
+		isExternalLink: false,
+		showLivePlayable: false,
+		avatarUrl: 'https://uploads.guim.co.uk/2022/09/20/Andy_Beckett_v2.png',
+		image: {
+			src: 'https://media.guim.co.uk/f55906c2b9116946c778cd1fca808a6dae764d01/0_0_9528_5715/master/9528.jpg',
+			altText:
+				'Nigel Farage on the campaign trail in Ramsgate, Kent, on 24 April.',
+		},
+	},
+	{
+		format: { design: 8, display: 0, theme: 1 },
+		dataLinkName: 'comment | group-0 | card-@5',
+		url: '/commentisfree/2025/apr/28/duttons-comments-show-we-are-back-to-punching-down-on-indigenous-australians-for-attention-and-votes',
+		headline:
+			'Dutton’s comments show we are back to punching down on Indigenous Australians for attention – and votes',
+		trailText:
+			'It is disingenuous for politicians to be shocked when people decide to turn words into action, even in the predawn hush of Anzac Day',
+		webPublicationDate: '2025-04-28T05:19:42.000Z',
+		discussionApiUrl:
+			'https://discussion.code.dev-theguardian.com/discussion-api',
+		byline: 'Lorena Allam',
+		isImmersive: false,
+		showQuotedHeadline: true,
+		showLivePlayable: false,
+		isExternalLink: false,
 	},
 ];
 
@@ -640,6 +747,7 @@ export const galleryTrails: [DCRFrontCard, DCRFrontCard] = [
 		showQuotedHeadline: false,
 		isExternalLink: false,
 		showLivePlayable: false,
+		isImmersive: false,
 	},
 	{
 		format: { design: 2, display: 1, theme: 0 },
@@ -652,7 +760,7 @@ export const galleryTrails: [DCRFrontCard, DCRFrontCard] = [
 		kickerText: 'Democratic Republic of the Congo',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		mainMedia: { type: 'Gallery', count: '27' },
-		showMainVideo: false,
+		showVideo: false,
 		image: {
 			src: 'https://media.guim.co.uk/69ac2383ea611126b54373865dac3e7e77981d7e/0_39_5500_3302/master/5500.jpg',
 			altText: 'A group of people in the street, some looking worried',
@@ -660,6 +768,7 @@ export const galleryTrails: [DCRFrontCard, DCRFrontCard] = [
 		showQuotedHeadline: false,
 		isExternalLink: false,
 		showLivePlayable: false,
+		isImmersive: false,
 	},
 ];
 
@@ -708,7 +817,7 @@ export const videoTrails: [DCRFrontCard, DCRFrontCard] = [
 				},
 			],
 		},
-		showMainVideo: true,
+		showVideo: true,
 		image: {
 			src: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_47_3000_1800/master/3000.jpg',
 			altText:
@@ -717,6 +826,7 @@ export const videoTrails: [DCRFrontCard, DCRFrontCard] = [
 		showQuotedHeadline: false,
 		isExternalLink: false,
 		showLivePlayable: false,
+		isImmersive: false,
 	},
 	{
 		format: { design: 0, display: 0, theme: 0 },
@@ -762,7 +872,7 @@ export const videoTrails: [DCRFrontCard, DCRFrontCard] = [
 				},
 			],
 		},
-		showMainVideo: true,
+		showVideo: true,
 		image: {
 			src: 'https://media.guim.co.uk/4612af5f4667888fa697139cf570b6373d93a710/2446_345_3218_1931/master/3218.jpg',
 			altText: 'Prince Harry leaves the high court in June 2023',
@@ -770,5 +880,6 @@ export const videoTrails: [DCRFrontCard, DCRFrontCard] = [
 		showQuotedHeadline: false,
 		isExternalLink: false,
 		showLivePlayable: false,
+		isImmersive: false,
 	},
 ];

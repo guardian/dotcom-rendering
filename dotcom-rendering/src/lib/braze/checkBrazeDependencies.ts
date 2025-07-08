@@ -32,10 +32,7 @@ const buildFailureResponse = (name: string, value: any, data: ResultData) => ({
 	data,
 });
 
-const buildDependencies = (
-	isSignedIn: boolean,
-	idApiUrl: string,
-): DependencyResult[] => {
+const buildDependencies = (isSignedIn: boolean): DependencyResult[] => {
 	return [
 		{
 			name: 'apiKey',
@@ -47,7 +44,7 @@ const buildDependencies = (
 		},
 		{
 			name: 'brazeUuid',
-			value: isSignedIn ? getBrazeUuid(idApiUrl) : Promise.resolve(null),
+			value: isSignedIn ? getBrazeUuid() : Promise.resolve(null),
 		},
 		{
 			name: 'consent',
@@ -62,9 +59,8 @@ const buildDependencies = (
 
 const checkBrazeDependencies = async (
 	isSignedIn: boolean,
-	idApiUrl: string,
 ): Promise<DependenciesResult> => {
-	const dependencies = buildDependencies(isSignedIn, idApiUrl);
+	const dependencies = buildDependencies(isSignedIn);
 
 	const data: ResultData = {};
 

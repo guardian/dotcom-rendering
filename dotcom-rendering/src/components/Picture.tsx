@@ -1,6 +1,13 @@
 import { css } from '@emotion/react';
-import { breakpoints } from '@guardian/source/foundations';
-import { Fragment, useCallback, useEffect, useState } from 'react';
+import { breakpoints, from, space } from '@guardian/source/foundations';
+import {
+	type CSSProperties,
+	Fragment,
+	useCallback,
+	useEffect,
+	useState,
+} from 'react';
+import { grid } from '../grid';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -8,6 +15,7 @@ import {
 } from '../lib/articleFormat';
 import { generateImageURL } from '../lib/image';
 import type { RoleType } from '../types/content';
+import type { AspectRatio } from '../types/front';
 import type { Loading } from './CardPicture';
 
 /**
@@ -33,10 +41,14 @@ type Props = {
 	isLightbox?: boolean;
 	orientation?: Orientation;
 	onLoad?: () => void;
-	aspectRatio?: string;
 };
 
-export type ImageWidthType = { breakpoint: number; width: number };
+export type ImageWidthType = {
+	breakpoint: number;
+	width: number;
+	aspectRatio?: AspectRatio;
+	cropOffset?: { x: number; y: number };
+};
 
 /**
  * All business logic for image sizing is contained in this one function. This
@@ -70,11 +82,23 @@ const decideImageWidths = ({
 			case 'portrait':
 				return [
 					{ breakpoint: breakpoints.mobile, width: 480 },
-					{ breakpoint: breakpoints.mobileLandscape, width: 480 },
-					{ breakpoint: breakpoints.phablet, width: 480 },
+					{
+						breakpoint: breakpoints.mobileLandscape,
+						width: 480,
+					},
+					{
+						breakpoint: breakpoints.phablet,
+						width: 480,
+					},
 					{ breakpoint: breakpoints.tablet, width: 660 },
-					{ breakpoint: breakpoints.desktop, width: 740 },
-					{ breakpoint: breakpoints.leftCol, width: 980 },
+					{
+						breakpoint: breakpoints.desktop,
+						width: 740,
+					},
+					{
+						breakpoint: breakpoints.leftCol,
+						width: 980,
+					},
 					{ breakpoint: breakpoints.wide, width: 1140 },
 				];
 
@@ -82,11 +106,23 @@ const decideImageWidths = ({
 			default:
 				return [
 					{ breakpoint: breakpoints.mobile, width: 480 },
-					{ breakpoint: breakpoints.mobileLandscape, width: 660 },
-					{ breakpoint: breakpoints.phablet, width: 740 },
+					{
+						breakpoint: breakpoints.mobileLandscape,
+						width: 660,
+					},
+					{
+						breakpoint: breakpoints.phablet,
+						width: 740,
+					},
 					{ breakpoint: breakpoints.tablet, width: 980 },
-					{ breakpoint: breakpoints.desktop, width: 1140 },
-					{ breakpoint: breakpoints.leftCol, width: 1300 },
+					{
+						breakpoint: breakpoints.desktop,
+						width: 1140,
+					},
+					{
+						breakpoint: breakpoints.leftCol,
+						width: 1300,
+					},
 					{ breakpoint: breakpoints.wide, width: 1900 },
 				];
 		}
@@ -96,7 +132,10 @@ const decideImageWidths = ({
 		// above `isMainMedia`, so the images do not appear low quality.
 		return [
 			{ breakpoint: breakpoints.mobile, width: 480 },
-			{ breakpoint: breakpoints.mobileLandscape, width: 660 },
+			{
+				breakpoint: breakpoints.mobileLandscape,
+				width: 660,
+			},
 			{ breakpoint: breakpoints.phablet, width: 740 },
 			{ breakpoint: breakpoints.tablet, width: 980 },
 			{ breakpoint: breakpoints.desktop, width: 1140 },
@@ -105,52 +144,115 @@ const decideImageWidths = ({
 		];
 	}
 	if (isMainMedia) {
+		if (
+			format.display === ArticleDisplay.Immersive ||
+			format.design === ArticleDesign.Gallery
+		) {
+			// If display is Immersive then main media should *always*
+			// use these larger image sources
+			return [
+				{ breakpoint: breakpoints.mobile, width: 480 },
+				{
+					breakpoint: breakpoints.mobileLandscape,
+					width: 660,
+				},
+				{
+					breakpoint: breakpoints.phablet,
+					width: 740,
+				},
+				{ breakpoint: breakpoints.tablet, width: 980 },
+				{
+					breakpoint: breakpoints.desktop,
+					width: 1140,
+				},
+				{
+					breakpoint: breakpoints.leftCol,
+					width: 1300,
+				},
+				{ breakpoint: breakpoints.wide, width: 1900 },
+			];
+		}
 		switch (format.display) {
-			case ArticleDisplay.Immersive: {
-				// If display is Immersive then main media should *always*
-				// use these larger image sources
-				return [
-					{ breakpoint: breakpoints.mobile, width: 480 },
-					{ breakpoint: breakpoints.mobileLandscape, width: 660 },
-					{ breakpoint: breakpoints.phablet, width: 740 },
-					{ breakpoint: breakpoints.tablet, width: 980 },
-					{ breakpoint: breakpoints.desktop, width: 1140 },
-					{ breakpoint: breakpoints.leftCol, width: 1300 },
-					{ breakpoint: breakpoints.wide, width: 1900 },
-				];
-			}
 			case ArticleDisplay.Showcase:
 			case ArticleDisplay.NumberedList: {
 				if (format.design === ArticleDesign.Feature) {
 					// The main image on feature articles gets larger sources when showcase
 					// e.g.: http://www.theguardian.com/politics/2015/may/02/nicola-sturgeon-im-the-boss-now
 					return [
-						{ breakpoint: breakpoints.mobile, width: 465 },
-						{ breakpoint: breakpoints.mobileLandscape, width: 645 },
-						{ breakpoint: breakpoints.phablet, width: 725 },
-						{ breakpoint: breakpoints.tablet, width: 965 },
-						{ breakpoint: breakpoints.desktop, width: 1125 },
-						{ breakpoint: breakpoints.leftCol, width: 1140 },
-						{ breakpoint: breakpoints.wide, width: 1300 },
+						{
+							breakpoint: breakpoints.mobile,
+							width: 465,
+						},
+						{
+							breakpoint: breakpoints.mobileLandscape,
+							width: 645,
+						},
+						{
+							breakpoint: breakpoints.phablet,
+							width: 725,
+						},
+						{
+							breakpoint: breakpoints.tablet,
+							width: 965,
+						},
+						{
+							breakpoint: breakpoints.desktop,
+							width: 1125,
+						},
+						{
+							breakpoint: breakpoints.leftCol,
+							width: 1140,
+						},
+						{
+							breakpoint: breakpoints.wide,
+							width: 1300,
+						},
 					];
 				} else {
 					return [
-						{ breakpoint: breakpoints.mobile, width: 465 },
-						{ breakpoint: breakpoints.mobileLandscape, width: 645 },
-						{ breakpoint: breakpoints.phablet, width: 660 },
-						{ breakpoint: breakpoints.tablet, width: 700 }, // desktop is also 700px
-						{ breakpoint: breakpoints.leftCol, width: 940 },
-						{ breakpoint: breakpoints.wide, width: 1020 },
+						{
+							breakpoint: breakpoints.mobile,
+							width: 465,
+						},
+						{
+							breakpoint: breakpoints.mobileLandscape,
+							width: 645,
+						},
+						{
+							breakpoint: breakpoints.phablet,
+							width: 660,
+						},
+						{
+							breakpoint: breakpoints.tablet,
+							width: 700,
+						}, // desktop is also 700px
+						{
+							breakpoint: breakpoints.leftCol,
+							width: 940,
+						},
+						{
+							breakpoint: breakpoints.wide,
+							width: 1020,
+						},
 					];
 				}
 			}
 			default:
 				return [
 					{ breakpoint: breakpoints.mobile, width: 465 },
-					{ breakpoint: breakpoints.mobileLandscape, width: 645 },
-					{ breakpoint: breakpoints.phablet, width: 620 },
+					{
+						breakpoint: breakpoints.mobileLandscape,
+						width: 645,
+					},
+					{
+						breakpoint: breakpoints.phablet,
+						width: 620,
+					},
 					{ breakpoint: breakpoints.tablet, width: 700 },
-					{ breakpoint: breakpoints.desktop, width: 620 },
+					{
+						breakpoint: breakpoints.desktop,
+						width: 620,
+					},
 				];
 		}
 	} else if (
@@ -177,7 +279,10 @@ const decideImageWidths = ({
 			default:
 				return [
 					{ breakpoint: breakpoints.mobile, width: 465 },
-					{ breakpoint: breakpoints.phablet, width: 700 },
+					{
+						breakpoint: breakpoints.phablet,
+						width: 700,
+					},
 				];
 		}
 	} else {
@@ -185,18 +290,39 @@ const decideImageWidths = ({
 			case 'showcase':
 				return [
 					{ breakpoint: breakpoints.mobile, width: 445 },
-					{ breakpoint: breakpoints.mobileLandscape, width: 605 },
-					{ breakpoint: breakpoints.phablet, width: 620 }, // tablet is also 620px
-					{ breakpoint: breakpoints.desktop, width: 640 },
-					{ breakpoint: breakpoints.leftCol, width: 800 },
+					{
+						breakpoint: breakpoints.mobileLandscape,
+						width: 605,
+					},
+					{
+						breakpoint: breakpoints.phablet,
+						width: 620,
+					}, // tablet is also 620px
+					{
+						breakpoint: breakpoints.desktop,
+						width: 640,
+					},
+					{
+						breakpoint: breakpoints.leftCol,
+						width: 800,
+					},
 					{ breakpoint: breakpoints.wide, width: 880 },
 				];
 			case 'supporting':
 				return [
 					{ breakpoint: breakpoints.mobile, width: 445 },
-					{ breakpoint: breakpoints.mobileLandscape, width: 605 },
-					{ breakpoint: breakpoints.phablet, width: 620 }, // tablet is also 620px
-					{ breakpoint: breakpoints.desktop, width: 300 }, // leftCol is also 300px
+					{
+						breakpoint: breakpoints.mobileLandscape,
+						width: 605,
+					},
+					{
+						breakpoint: breakpoints.phablet,
+						width: 620,
+					}, // tablet is also 620px
+					{
+						breakpoint: breakpoints.desktop,
+						width: 300,
+					}, // leftCol is also 300px
 					{ breakpoint: breakpoints.wide, width: 380 },
 				];
 			case 'thumbnail':
@@ -207,11 +333,23 @@ const decideImageWidths = ({
 			case 'immersive':
 				return [
 					{ breakpoint: breakpoints.mobile, width: 465 },
-					{ breakpoint: breakpoints.mobileLandscape, width: 645 },
-					{ breakpoint: breakpoints.phablet, width: 725 },
+					{
+						breakpoint: breakpoints.mobileLandscape,
+						width: 645,
+					},
+					{
+						breakpoint: breakpoints.phablet,
+						width: 725,
+					},
 					{ breakpoint: breakpoints.tablet, width: 965 },
-					{ breakpoint: breakpoints.desktop, width: 1125 },
-					{ breakpoint: breakpoints.leftCol, width: 1140 },
+					{
+						breakpoint: breakpoints.desktop,
+						width: 1125,
+					},
+					{
+						breakpoint: breakpoints.leftCol,
+						width: 1140,
+					},
 					{ breakpoint: breakpoints.wide, width: 1300 },
 				];
 			case 'halfWidth':
@@ -220,8 +358,14 @@ const decideImageWidths = ({
 			default:
 				return [
 					{ breakpoint: breakpoints.mobile, width: 445 },
-					{ breakpoint: breakpoints.mobileLandscape, width: 605 },
-					{ breakpoint: breakpoints.phablet, width: 620 },
+					{
+						breakpoint: breakpoints.mobileLandscape,
+						width: 605,
+					},
+					{
+						breakpoint: breakpoints.phablet,
+						width: 620,
+					},
 				];
 		}
 	}
@@ -261,18 +405,16 @@ type ImageSource = {
  * Generate image sources for an image.
  *
  * @param mainImage source image URL
- * @param imageWidths list of image widths
- * @param aspectRatio - Aspect ratio that the image should be cropped to (e.g., 5:4). Optional.
+ * @param imageWidths list of image widths and the aspect ratio the image should be cropped to (e.g., 5:4). Optional
  */
 export const generateSources = (
 	mainImage: string,
 	imageWidths: readonly [ImageWidthType, ...ImageWidthType[]],
-	aspectRatio?: string,
 ): ImageSource[] =>
 	imageWidths
 		.slice()
 		.sort(descendingByBreakpoint)
-		.map(({ width: imageWidth, breakpoint }) => {
+		.map(({ width: imageWidth, breakpoint, aspectRatio, cropOffset }) => {
 			return {
 				breakpoint,
 				width: imageWidth,
@@ -281,12 +423,14 @@ export const generateSources = (
 					imageWidth,
 					resolution: 'high',
 					aspectRatio,
+					cropOffset,
 				}),
 				lowResUrl: generateImageURL({
 					mainImage,
 					imageWidth,
 					resolution: 'low',
 					aspectRatio,
+					cropOffset,
 				}),
 			};
 		});
@@ -328,6 +472,54 @@ export const Sources = ({ sources }: { sources: ImageSource[] }) => {
 	);
 };
 
+const galleryBodyImageStyles = css`
+	${grid.column.all}
+
+	${from.tablet} {
+		${grid.column.centre}
+	}
+
+	${from.desktop} {
+		padding-bottom: ${space[10]}px;
+	}
+
+	${from.leftCol} {
+		${grid.between('centre-column-start', 'right-column-end')}
+	}
+`;
+
+/**
+ * This ensures that the image height never goes above 96vh.
+ * The ratio parameter should be width:height.
+ */
+const imageMaxWidth = (
+	design: ArticleDesign,
+	ratio: number,
+): CSSProperties | undefined =>
+	design === ArticleDesign.Gallery
+		? { maxWidth: `calc(${ratio} * 96vh)` }
+		: undefined;
+
+const styles = (
+	{ design }: ArticleFormat,
+	isLightbox: boolean,
+	isMainMedia: boolean,
+) => {
+	if (design === ArticleDesign.Gallery) {
+		return css(
+			css`
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+			`,
+			isMainMedia ? undefined : galleryBodyImageStyles,
+		);
+	}
+	return isLightbox ? flex : block;
+};
+
 export const Picture = ({
 	role,
 	format,
@@ -340,7 +532,6 @@ export const Picture = ({
 	isLightbox = false,
 	orientation = 'landscape',
 	onLoad,
-	aspectRatio,
 }: Props) => {
 	const [loaded, setLoaded] = useState(false);
 	const ref = useCallback((node: HTMLImageElement | null) => {
@@ -365,7 +556,6 @@ export const Picture = ({
 			isLightbox,
 			orientation,
 		}),
-		aspectRatio,
 	);
 
 	/** portrait if higher than 1 or landscape if lower than 1 */
@@ -391,7 +581,10 @@ export const Picture = ({
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
-		<picture css={isLightbox ? flex : block}>
+		<picture
+			css={styles(format, isLightbox, isMainMedia)}
+			style={imageMaxWidth(format.design, 1 / ratio)}
+		>
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
 			{format.display === ArticleDisplay.Immersive && isMainMedia && (
 				<>

@@ -106,11 +106,13 @@ const imageStyles = css`
 	object-fit: cover;
 `;
 
+const { brand } = palette;
+
 const defaultTickerStylingSettings: TickerSettings['tickerStylingSettings'] = {
-	filledProgressColour: '#5056F5',
-	progressBarBackgroundColour: 'rgba(80, 86, 245, 0.35)',
+	filledProgressColour: brand[400],
+	progressBarBackgroundColour: 'rgba(5, 41, 98, 0.1)',
 	headlineColour: '#000000',
-	totalColour: '#5056F5',
+	totalColour: brand[400],
 	goalColour: '#000000',
 };
 
@@ -263,24 +265,13 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	tracking,
 	countryCode,
 	articleCounts,
-	onReminderOpen,
 	fetchEmail,
 	submitComponentEvent,
 	openCmp,
 	hasConsentForArticleCount,
 }: EpicProps) => {
-	const {
-		image,
-		showChoiceCards,
-		tickerSettings,
-		choiceCardAmounts,
-		newsletterSignup,
-	} = variant;
-
-	const isSimpleThirdChoiceCardInTestVariant: boolean =
-		(showChoiceCards &&
-			variant.name.includes('EPIC_SIMPLIFIED_THIRD_CHOICE_CARD')) ??
-		false;
+	const { image, tickerSettings, choiceCardAmounts, newsletterSignup } =
+		variant;
 
 	const { hasOptedOut, onArticleCountOptIn, onArticleCountOptOut } =
 		useArticleCountOptOut();
@@ -297,7 +288,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 
 			// For ophan
 			if (submitComponentEvent) {
-				submitComponentEvent(
+				void submitComponentEvent(
 					createViewEventFromTracking(
 						tracking,
 						tracking.campaignCode,
@@ -309,7 +300,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 
 	useEffect(() => {
 		if (submitComponentEvent) {
-			submitComponentEvent(
+			void submitComponentEvent(
 				createInsertEventFromTracking(tracking, tracking.campaignCode),
 			);
 		}
@@ -333,7 +324,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 			addTrackingParamsToBodyLinks(
 				paragraph,
 				tracking,
-				articleCounts.for52Weeks,
+				variant.promoCodes ?? [],
 				countryCode,
 			),
 		);
@@ -378,6 +369,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 						currencySymbol={tickerSettings.currencySymbol}
 						copy={{
 							headline: tickerSettings.copy.countLabel,
+							goalCopy: tickerSettings.copy.goalCopy,
 						}}
 						tickerData={tickerSettings.tickerData}
 						tickerStylingSettings={defaultTickerStylingSettings}
@@ -429,14 +421,10 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					tracking={tracking}
 					countryCode={countryCode}
 					articleCounts={articleCounts}
-					onReminderOpen={onReminderOpen}
 					fetchEmail={fetchEmail}
 					submitComponentEvent={submitComponentEvent}
 					amountsTestName={choiceCardAmounts?.testName}
 					amountsVariantName={choiceCardAmounts?.variantName}
-					isSimpleThirdChoiceCardInTestVariant={
-						isSimpleThirdChoiceCardInTestVariant
-					}
 				/>
 			)}
 

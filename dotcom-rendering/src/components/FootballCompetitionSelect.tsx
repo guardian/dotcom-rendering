@@ -1,46 +1,61 @@
 import { Option, Select } from '@guardian/source/react-components';
-import type { FootballMatchKind } from '../footballMatches';
 import { palette } from '../palette';
-
-export type Nations = Array<{
-	name: string;
-	competitions: Array<{ tag: string; name: string }>;
-}>;
+import type { FootballPageWithRegionsKind, Region } from '../sportDataPage';
 
 type Props = {
-	nations: Nations;
-	kind: Exclude<FootballMatchKind, 'Live'>;
+	regions: Region[];
+	kind: FootballPageWithRegionsKind;
+	pageId: string;
 	onChange: (competitionTag: string) => void;
 };
 
-const allLabel = (kind: Exclude<FootballMatchKind, 'Live'>): string => {
+const allLabel = (kind: FootballPageWithRegionsKind): string => {
 	switch (kind) {
-		case 'Fixture':
+		case 'FootballFixtures':
 			return 'All fixtures';
-		case 'Result':
+		case 'FootballResults':
 			return 'All results';
+		case 'FootballLiveScores':
+			return 'All live';
+		case 'FootballTables':
+			return 'All tables';
+	}
+};
+
+const getPagePath = (kind: FootballPageWithRegionsKind) => {
+	switch (kind) {
+		case 'FootballFixtures':
+			return '/football/fixtures';
+		case 'FootballLiveScores':
+			return '/football/live';
+		case 'FootballResults':
+			return '/football/results';
+		case 'FootballTables':
+			return '/football/tables';
 	}
 };
 
 export const FootballCompetitionSelect = ({
-	nations,
+	regions,
 	kind,
+	pageId,
 	onChange,
 }: Props) => (
 	<Select
 		label="Choose league:"
 		onChange={(e) => onChange(e.target.value)}
+		value={pageId.startsWith('/') ? pageId : `/${pageId}`}
 		theme={{
 			textLabel: palette('--football-competition-select-text'),
 			textUserInput: palette('--football-competition-select-text'),
 			backgroundInput: palette('--article-background'),
 		}}
 	>
-		<Option value="All">{allLabel(kind)}</Option>
-		{nations.map((nation) => (
-			<optgroup label={nation.name} key={nation.name}>
-				{nation.competitions.map((competition) => (
-					<Option key={competition.tag} value={competition.tag}>
+		<Option value={getPagePath(kind)}>{allLabel(kind)}</Option>
+		{regions.map((region) => (
+			<optgroup label={region.name} key={region.name}>
+				{region.competitions.map((competition) => (
+					<Option key={competition.name} value={competition.url}>
 						{competition.name}
 					</Option>
 				))}

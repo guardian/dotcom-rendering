@@ -1,16 +1,6 @@
 import { css } from '@emotion/react';
 import {
 	between,
-	headlineLight14,
-	headlineLight15,
-	headlineLight17,
-	headlineLight20,
-	headlineLight24,
-	headlineLight28,
-	headlineLight34,
-	headlineLight42,
-	headlineLight50,
-	headlineLight64,
 	headlineMedium14,
 	headlineMedium15,
 	headlineMedium17,
@@ -30,11 +20,7 @@ import {
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
 import React from 'react';
-import {
-	ArticleDesign,
-	type ArticleFormat,
-	ArticleSpecial,
-} from '../lib/articleFormat';
+import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
 import type { PodcastSeriesImage } from '../types/tag';
@@ -62,7 +48,6 @@ type Props = {
 	headlineColour?: string;
 	/** Optional override of the standard card kicker colour */
 	kickerColour?: string;
-	isBetaContainer?: boolean;
 	kickerImage?: PodcastSeriesImage;
 };
 
@@ -105,18 +90,6 @@ const fontFamilies = {
 		xxxsmall: headlineMedium15,
 		tiny: headlineMedium14,
 	},
-	headlineLight: {
-		xxxlarge: headlineLight64,
-		xxlarge: headlineLight50,
-		xlarge: headlineLight42,
-		large: headlineLight34,
-		medium: headlineLight28,
-		small: headlineLight24,
-		xsmall: headlineLight20,
-		xxsmall: headlineLight17,
-		xxxsmall: headlineLight15,
-		tiny: headlineLight14,
-	},
 	/** Line height for sans style headlines for labs is overridden to match that of other headlines (1.15) */
 	textSans: {
 		xxxlarge: `${textSans20}\n\tline-height: 1.15;\n`,
@@ -134,7 +107,6 @@ const fontFamilies = {
 
 export enum FontFamily {
 	HeadlineMedium = 'headlineMedium',
-	HeadlineLight = 'headlineLight',
 	TextSans = 'textSans',
 }
 
@@ -178,23 +150,9 @@ const getFontSize = (sizes: ResponsiveFontSize, family: FontFamily) => {
 	`;
 };
 
-const getFonts = (
-	format: ArticleFormat,
-	fontSizes: ResponsiveFontSize,
-	isBetaContainer: boolean,
-) => {
+const getFonts = (format: ArticleFormat, fontSizes: ResponsiveFontSize) => {
 	if (format.theme === ArticleSpecial.Labs) {
 		return getFontSize(fontSizes, FontFamily.TextSans);
-	}
-
-	if (
-		isBetaContainer &&
-		/** Any of these designs are considered an "opinion" */
-		(format.design === ArticleDesign.Comment ||
-			format.design === ArticleDesign.Editorial ||
-			format.design === ArticleDesign.Letter)
-	) {
-		return getFontSize(fontSizes, FontFamily.HeadlineLight);
 	}
 
 	return getFontSize(fontSizes, FontFamily.HeadlineMedium);
@@ -232,13 +190,12 @@ export const CardHeadline = ({
 	isExternalLink,
 	headlineColour = palette('--card-headline'),
 	kickerColour = palette('--card-kicker-text'),
-	isBetaContainer = false,
 	kickerImage,
 }: Props) => {
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
 
-	const fontStyles = getFonts(format, fontSizes, isBetaContainer);
+	const fontStyles = getFonts(format, fontSizes);
 
 	return (
 		<WithLink linkTo={linkTo}>

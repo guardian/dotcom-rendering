@@ -33,10 +33,10 @@ export const StaticFeatureTwo = ({
 	collectionId,
 }: Props) => {
 	const cards = trails.slice(0, 2);
-
 	return (
 		<UL direction="row">
 			{cards.map((card) => {
+				const isLoopingVideo = card.mainMedia?.type === 'LoopVideo';
 				return (
 					<LI
 						stretch={false}
@@ -59,7 +59,7 @@ export const StaticFeatureTwo = ({
 							}
 							showClock={false}
 							image={card.image}
-							canPlayInline={true}
+							canPlayInline={isLoopingVideo ? false : true}
 							starRating={card.starRating}
 							dataLinkName={card.dataLinkName}
 							discussionApiUrl={card.discussionApiUrl}
@@ -76,6 +76,9 @@ export const StaticFeatureTwo = ({
 							headlineSizes={{ desktop: 'small' }}
 							supportingContent={card.supportingContent}
 							collectionId={collectionId}
+							isNewsletter={card.isNewsletter}
+							showQuotes={card.showQuotedHeadline}
+							showVideo={card.showVideo}
 						/>
 					</LI>
 				);

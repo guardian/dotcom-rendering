@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	headlineBold17,
 	headlineLight17,
 	headlineLight20,
 	headlineLight24,
@@ -13,6 +14,7 @@ import {
 	textSans24,
 } from '@guardian/source/foundations';
 import sanitise from 'sanitize-html';
+import { grid } from '../../src/grid';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -39,7 +41,7 @@ const nestedStyles = (format: ArticleFormat) => {
 			}
 		}
 
-		li:before {
+		li::before {
 			display: inline-block;
 			content: '';
 			border-radius: 50%;
@@ -80,6 +82,10 @@ const nestedStyles = (format: ArticleFormat) => {
 const decideFont = ({ display, design, theme }: ArticleFormat) => {
 	const isLabs = theme === ArticleSpecial.Labs;
 	switch (design) {
+		case ArticleDesign.Gallery:
+			return css`
+				${headlineBold17}
+			`;
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Comment:
 		case ArticleDesign.Letter:
@@ -258,7 +264,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 							max-width: 460px;
 						}
 						color: ${palette('--standfirst-text')};
-						li:before {
+						li::before {
 							height: 17px;
 							width: 17px;
 						}
@@ -288,7 +294,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					return css`
 						max-width: 540px;
 						color: ${palette('--standfirst-text')};
-						li:before {
+						li::before {
 							height: 15px;
 							width: 15px;
 						}
@@ -309,6 +315,23 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				case ArticleDesign.Audio:
 					return css`
 						color: ${palette('--standfirst-text')};
+					`;
+				case ArticleDesign.Gallery:
+					return css`
+						${grid.span('centre-column-start', 3)}
+						color: ${palette('--standfirst-text')};
+						background-color: ${palette('--standfirst-background')};
+
+						${from.tablet} {
+							${grid.span('centre-column-start', 7)}
+						}
+
+						${from.desktop} {
+							${grid.span('centre-column-start', 6)}
+						}
+						margin-bottom: ${space[3]}px;
+						margin-left: ${space[3]}px;
+						margin-right: ${space[3]}px;
 					`;
 				default:
 					switch (theme) {

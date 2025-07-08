@@ -1,4 +1,5 @@
 import { isUndefined } from '@guardian/libs';
+import type { FEFormat } from '../frontend/feArticle';
 import { getLargest, getMaster } from '../lib/image';
 import type { Block } from '../types/blocks';
 import type {
@@ -7,7 +8,6 @@ import type {
 	ImageBlockElement,
 	ImageForLightbox,
 } from '../types/content';
-import type { FEFormat } from '../types/frontend';
 import {
 	getCartoonImageForLightbox,
 	isCartoon,
@@ -27,34 +27,6 @@ const THRESHOLD = 620;
  */
 const isLightboxable = (width: number, height: number): boolean =>
 	Math.max(width, height) > THRESHOLD;
-
-/**
- * Older legacy images use a different url format so we need to use a different
- * approach when extracting the id of the image
- */
-const decideImageId = ({
-	masterUrl,
-}: Pick<ImageForLightbox, 'masterUrl'>): string | undefined => {
-	const url = new URL(masterUrl);
-	switch (url.hostname) {
-		case 'media.guim.co.uk': {
-			// E.g.
-			// https://media.guim.co.uk/be634f340e477a975c7352f289c4353105ba9e67/288_121_3702_2221/140.jpg
-			// This bit                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-			return url.pathname.split('/').at(1);
-		}
-		case 'i.guim.co.uk':
-		case 'uploads.guim.co.uk':
-		case 'static-secure.guim.co.uk':
-		case 'static.guim.co.uk':
-			// E.g.
-			// https://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2015/5/26/1432666797165/59de49e2-553f-4b52-b7ac-09bda7f63e4b-220x132.jpeg
-			// This bit                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-			return url.pathname.split('/').at(-1);
-		default:
-			return undefined;
-	}
-};
 
 const buildLightboxImage = (
 	element: ImageBlockElement | CartoonBlockElement,
@@ -144,8 +116,8 @@ export const buildLightboxImages = (
 	format: FEFormat,
 	blocks: Block[],
 	mainMediaElements: FEElement[],
-): ImageForLightbox[] => {
-	const lightboxImages = mainMediaElements
+): ImageForLightbox[] =>
+	mainMediaElements
 		.flatMap<Omit<ImageForLightbox, 'position'>>((element) => {
 			if (!isImage(element) && !isCartoon(element)) return [];
 			const lightboxImage = buildLightboxImage(element);
@@ -171,17 +143,3 @@ export const buildLightboxImages = (
 			),
 		)
 		.map((image, index) => ({ ...image, position: index + 1 }));
-
-	// On gallery articles the main media is often repeated as an element in the article body so
-	// we deduplicate the array here
-	return [
-		...new Map(
-			lightboxImages.map<[string, ImageForLightbox]>((image, index) => [
-				decideImageId(image) ?? `lightbox-image-id-${index}`,
-				image,
-			]),
-		).values(),
-	]
-		.sort((a, b) => a.position - b.position)
-		.map((image, index) => ({ ...image, position: index + 1 }));
-};

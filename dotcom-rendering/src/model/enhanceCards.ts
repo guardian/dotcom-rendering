@@ -1,4 +1,9 @@
 import { isUndefined } from '@guardian/libs';
+import type {
+	FEFrontCard,
+	FEMediaAtom,
+	FESupportingContent,
+} from '../frontend/feFront';
 import {
 	ArticleDesign,
 	type ArticleFormat,
@@ -8,13 +13,11 @@ import { getSoleContributor } from '../lib/byline';
 import type { EditionId } from '../lib/edition';
 import type { Group } from '../lib/getDataLinkName';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
+import { getLargestImageSize } from '../lib/image';
 import type {
 	DCRFrontCard,
 	DCRSlideshowImage,
 	DCRSupportingContent,
-	FEFrontCard,
-	FEMediaAtom,
-	FESupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
 import type { PodcastSeriesImage, TagType } from '../types/tag';
@@ -145,7 +148,8 @@ const decideSlideshowImages = (
 	const assets = trail.properties.image?.item.assets;
 	const shouldShowSlideshow =
 		trail.properties.image?.type === 'ImageSlideshow' &&
-		trail.properties.imageSlideshowReplace;
+		(trail.properties.mediaSelect?.imageSlideshowReplace ??
+			trail.properties.imageSlideshowReplace);
 	if (shouldShowSlideshow && assets && assets.length > 0) {
 		return assets;
 	}
@@ -158,11 +162,34 @@ const decideSlideshowImages = (
  * @see https://github.com/guardian/frontend/pull/26247 for inspiration
  */
 
-const getActiveMediaAtom = (mediaAtom?: FEMediaAtom): MainMedia | undefined => {
+const getActiveMediaAtom = (
+	isLoopingVideoTest: boolean,
+	mediaAtom?: FEMediaAtom,
+): MainMedia | undefined => {
 	if (mediaAtom) {
 		const asset = mediaAtom.assets.find(
 			({ version }) => version === mediaAtom.activeVersion,
 		);
+
+		if (asset?.platform === 'Url' && isLoopingVideoTest) {
+			return {
+				type: 'LoopVideo',
+				videoId: asset.id,
+				duration: mediaAtom.duration ?? 0,
+				// Size fixed to a 5:4 ratio
+				width: 500,
+				height: 400,
+				thumbnailImage: getLargestImageSize(
+					mediaAtom.posterImage?.allImages.map(
+						({ url, fields: { width } }) => ({
+							url,
+							width: Number(width),
+						}),
+					) ?? [],
+				)?.url,
+			};
+		}
+
 		if (asset?.platform === 'Youtube') {
 			return {
 				type: 'Video',
@@ -185,21 +212,25 @@ const getActiveMediaAtom = (mediaAtom?: FEMediaAtom): MainMedia | undefined => {
 			};
 		}
 	}
+
 	return undefined;
 };
 
 const decideMedia = (
 	format: ArticleFormat,
+	isLoopingVideoTest: boolean,
 	showMainVideo?: boolean,
 	mediaAtom?: FEMediaAtom,
 	galleryCount: number = 0,
 	audioDuration: string = '',
 	podcastImage?: PodcastSeriesImage,
+	imageHide?: boolean,
+	videoReplace?: boolean,
 ): MainMedia | undefined => {
 	// If the showVideo toggle is enabled in the fronts tool,
 	// we should return the active mediaAtom regardless of the design
-	if (showMainVideo) {
-		return getActiveMediaAtom(mediaAtom);
+	if (!!showMainVideo || !!videoReplace) {
+		return getActiveMediaAtom(isLoopingVideoTest, mediaAtom);
 	}
 
 	switch (format.design) {
@@ -209,12 +240,12 @@ const decideMedia = (
 		case ArticleDesign.Audio:
 			return {
 				type: 'Audio',
-				podcastImage,
+				podcastImage: !imageHide ? podcastImage : undefined,
 				duration: audioDuration,
 			};
 
 		case ArticleDesign.Video: {
-			return getActiveMediaAtom(mediaAtom);
+			return getActiveMediaAtom(isLoopingVideoTest, mediaAtom);
 		}
 
 		default:
@@ -230,6 +261,7 @@ export const enhanceCards = (
 		editionId,
 		pageId,
 		discussionApiUrl,
+		isLoopingVideoTest = false,
 	}: {
 		cardInTagPage: boolean;
 		/** Used for the data link name to indicate card position in container */
@@ -237,6 +269,7 @@ export const enhanceCards = (
 		editionId: EditionId;
 		pageId?: string;
 		discussionApiUrl: string;
+		isLoopingVideoTest?: boolean;
 	},
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
@@ -263,6 +296,12 @@ export const enhanceCards = (
 			? enhanceTags(faciaCard.properties.maybeContent.tags.tags)
 			: [];
 
+		const isNewsletter = tags.some(
+			({ id, type }) =>
+				(type === 'Keyword' && id === 'info/newsletter-sign-up') ||
+				(type === 'Tone' && id === 'tone/newsletter-tone'),
+		);
+
 		const branding = faciaCard.properties.editionBrandings.find(
 			(editionBranding) => editionBranding.edition.id === editionId,
 		)?.branding;
@@ -275,12 +314,17 @@ export const enhanceCards = (
 
 		const mainMedia = decideMedia(
 			format,
-			faciaCard.properties.showMainVideo,
-			faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
+			isLoopingVideoTest,
+			faciaCard.properties.showMainVideo ??
+				faciaCard.properties.mediaSelect?.showMainVideo,
+			faciaCard.mediaAtom ??
+				faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
 				faciaCard.properties.maybeContent?.elements.mediaAtoms[0],
 			faciaCard.card.galleryCount,
 			faciaCard.card.audioDuration,
 			podcastImage,
+			faciaCard.display.imageHide,
+			faciaCard.properties.mediaSelect?.videoReplace,
 		);
 
 		return {
@@ -310,8 +354,11 @@ export const enhanceCards = (
 			snapData: enhanceSnaps(faciaCard.enriched),
 			isBoosted: faciaCard.display.isBoosted,
 			boostLevel: faciaCard.display.boostLevel,
+			isImmersive: !!faciaCard.display.isImmersive,
 			isCrossword: faciaCard.properties.isCrossword,
+			isNewsletter,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
+			// show latest 3 updates from a live blog
 			showLivePlayable: faciaCard.display.showLivePlayable,
 			avatarUrl:
 				!isContributorTagPage &&
@@ -327,7 +374,11 @@ export const enhanceCards = (
 			embedUri: faciaCard.properties.embedUri ?? undefined,
 			branding,
 			slideshowImages: decideSlideshowImages(faciaCard),
-			showMainVideo: faciaCard.properties.showMainVideo,
+			showVideo:
+				!!(
+					faciaCard.properties.showMainVideo ??
+					faciaCard.properties.mediaSelect?.showMainVideo
+				) || !!faciaCard.properties.mediaSelect?.videoReplace,
 			...(!!imageSrc && {
 				image: {
 					src: imageSrc,

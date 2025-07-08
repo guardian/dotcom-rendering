@@ -5,13 +5,11 @@
  */
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { OphanComponentEvent } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { space } from '@guardian/source/foundations';
-import {
-	countryCodeToCountryGroupId,
-	SecondaryCtaType,
-} from '@guardian/support-dotcom-components';
+import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { EpicVariant } from '@guardian/support-dotcom-components/dist/shared/types/abTests/epic';
+import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type {
 	Cta,
 	Tracking,
@@ -21,9 +19,8 @@ import { useIsInView } from '../../../../lib/useIsInView';
 import { hasSetReminder } from '../../lib/reminders';
 import {
 	addChoiceCardsOneTimeParams,
-	addChoiceCardsParams,
 	addChoiceCardsProductParams,
-	addRegionIdAndTrackingParamsToSupportUrl,
+	enrichSupportUrl,
 	isSupportUrl,
 } from '../../lib/tracking';
 import {
@@ -31,10 +28,6 @@ import {
 	OPHAN_COMPONENT_EVENT_CTAS_VIEW,
 	OPHAN_COMPONENT_EVENT_REMINDER_OPEN,
 } from '../utils/ophan';
-import {
-	type SupportTier,
-	threeTierChoiceCardAmounts,
-} from '../utils/threeTierChoiceCardAmounts';
 import { EpicButton } from './EpicButton';
 
 const paymentImageStyles = css`
@@ -65,7 +58,7 @@ const PrimaryCtaButton = ({
 	countryCode,
 	amountsTestName,
 	amountsVariantName,
-	numArticles,
+	promoCodes,
 	submitComponentEvent,
 }: {
 	cta?: Cta;
@@ -73,8 +66,8 @@ const PrimaryCtaButton = ({
 	countryCode?: string;
 	amountsTestName?: string;
 	amountsVariantName?: string;
-	numArticles: number;
-	submitComponentEvent?: (event: OphanComponentEvent) => void;
+	promoCodes: string[];
+	submitComponentEvent?: (event: ComponentEvent) => void;
 }): JSX.Element | null => {
 	if (!cta) {
 		return null;
@@ -82,14 +75,14 @@ const PrimaryCtaButton = ({
 
 	const buttonText = cta.text || 'Support The Guardian';
 	const baseUrl = cta.baseUrl || 'https://support.theguardian.com/contribute';
-	const urlWithRegionAndTracking = addRegionIdAndTrackingParamsToSupportUrl(
+	const urlWithRegionAndTracking = enrichSupportUrl({
 		baseUrl,
 		tracking,
-		numArticles,
+		promoCodes: promoCodes ?? [],
 		countryCode,
-		amountsTestName,
-		amountsVariantName,
-	);
+		amountsAbTestName: amountsTestName,
+		amountsAbTestVariant: amountsVariantName,
+	});
 
 	return (
 		<div css={buttonMarginStyles}>
@@ -108,22 +101,22 @@ const PrimaryCtaButton = ({
 const SecondaryCtaButton = ({
 	cta,
 	tracking,
-	numArticles,
 	countryCode,
 	submitComponentEvent,
+	promoCodes,
 }: {
 	cta: Cta;
 	tracking: Tracking;
 	countryCode?: string;
-	numArticles: number;
-	submitComponentEvent?: (event: OphanComponentEvent) => void;
+	submitComponentEvent?: (event: ComponentEvent) => void;
+	promoCodes: string[];
 }): JSX.Element | null => {
-	const url = addRegionIdAndTrackingParamsToSupportUrl(
-		cta.baseUrl,
+	const url = enrichSupportUrl({
+		baseUrl: cta.baseUrl,
 		tracking,
-		numArticles,
+		promoCodes,
 		countryCode,
-	);
+	});
 	return (
 		<div css={buttonMarginStyles}>
 			<EpicButton
@@ -143,15 +136,13 @@ interface ContributionsEpicButtonsProps {
 	tracking: Tracking;
 	countryCode?: string;
 	onOpenReminderClick: () => void;
-	submitComponentEvent?: (event: OphanComponentEvent) => void;
+	submitComponentEvent?: (event: ComponentEvent) => void;
 	isReminderActive: boolean;
 	isSignedIn: boolean;
-	threeTierChoiceCardSelectedProduct: SupportTier;
-	showChoiceCards?: boolean;
+	threeTierChoiceCardSelectedProduct?: ChoiceCard['product'];
 	amountsTestName?: string;
 	amountsVariantName?: string;
-	numArticles: number;
-	variantOfChoiceCard?: string;
+	promoCodes: string[];
 }
 
 export const ContributionsEpicButtons = ({
@@ -162,12 +153,10 @@ export const ContributionsEpicButtons = ({
 	submitComponentEvent,
 	isReminderActive,
 	isSignedIn,
-	showChoiceCards,
 	threeTierChoiceCardSelectedProduct,
 	amountsTestName,
 	amountsVariantName,
-	numArticles,
-	variantOfChoiceCard,
+	promoCodes,
 }: ContributionsEpicButtonsProps): JSX.Element | null => {
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
@@ -189,66 +178,12 @@ export const ContributionsEpicButtons = ({
 		return null;
 	}
 
-	const getChoiceCardCta = (cta: Cta): Cta => {
-		/** In the US - direct 50 % traffic to the checkout page and 50 % traffic to the landing page for the AB test  */
-
-		if (showChoiceCards && countryCode === 'US') {
-			if (threeTierChoiceCardSelectedProduct === 'OneOff') {
-				if (
-					variantOfChoiceCard ===
-					'US_CHECKOUT_THREE_TIER_CHOICE_CARDS'
-				) {
-					return {
-						text: cta.text,
-						baseUrl: addChoiceCardsParams(
-							'https://support.theguardian.com/contribute/checkout',
-							'ONE_OFF',
-						),
-					};
-				}
+	const getCta = (cta: Cta): Cta => {
+		if (threeTierChoiceCardSelectedProduct) {
+			if (threeTierChoiceCardSelectedProduct.supportTier === 'OneOff') {
 				return {
 					text: cta.text,
 					baseUrl: addChoiceCardsOneTimeParams(cta.baseUrl),
-				};
-			}
-
-			/** Contribution amount is variable, unlike the SupporterPlus amount which is fixed */
-			const countryGroupId = countryCodeToCountryGroupId(countryCode);
-			const contributionAmount =
-				threeTierChoiceCardSelectedProduct === 'Contribution'
-					? threeTierChoiceCardAmounts['Monthly'][countryGroupId]
-							.Contribution
-					: undefined;
-			const url =
-				variantOfChoiceCard === 'US_CHECKOUT_THREE_TIER_CHOICE_CARDS'
-					? 'https://support.theguardian.com/checkout'
-					: cta.baseUrl;
-
-			return {
-				text: cta.text,
-				baseUrl: addChoiceCardsProductParams(
-					url,
-					threeTierChoiceCardSelectedProduct,
-					'Monthly',
-					contributionAmount,
-				),
-			};
-		}
-
-		/** Not in the US - direct taffic to the landing page */
-		if (
-			showChoiceCards &&
-			variantOfChoiceCard === 'THREE_TIER_CHOICE_CARDS'
-		) {
-			if (threeTierChoiceCardSelectedProduct === 'OneOff') {
-				/**
-				 * OneOff payments are not supported by the generic checkout yet.
-				 * We also have no way of highlighting to a contributor that "OneOff"
-				 * was selected, so we just send them to the homepage.
-				 */
-				return {
-					text: cta.text,
-					baseUrl: 'https://support.theguardian.com/contribute',
 				};
 			}
 
@@ -256,17 +191,14 @@ export const ContributionsEpicButtons = ({
 				text: cta.text,
 				baseUrl: addChoiceCardsProductParams(
 					cta.baseUrl,
-					threeTierChoiceCardSelectedProduct,
-					'Monthly',
+					threeTierChoiceCardSelectedProduct.supportTier,
+					threeTierChoiceCardSelectedProduct.ratePlan,
 				),
 			};
 		}
 
 		return cta;
 	};
-
-	const getCta = (cta: Cta): Cta =>
-		showChoiceCards ? getChoiceCardCta(cta) : cta;
 
 	const openReminder = () => {
 		if (submitComponentEvent) {
@@ -288,7 +220,7 @@ export const ContributionsEpicButtons = ({
 						<PrimaryCtaButton
 							cta={getCta(variant.cta)}
 							tracking={tracking}
-							numArticles={numArticles}
+							promoCodes={promoCodes}
 							amountsTestName={amountsTestName}
 							amountsVariantName={amountsVariantName}
 							countryCode={countryCode}
@@ -301,7 +233,7 @@ export const ContributionsEpicButtons = ({
 									cta={secondaryCta.cta}
 									tracking={tracking}
 									countryCode={countryCode}
-									numArticles={numArticles}
+									promoCodes={promoCodes}
 									submitComponentEvent={submitComponentEvent}
 								/>
 							)}

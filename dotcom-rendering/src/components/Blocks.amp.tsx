@@ -20,7 +20,7 @@ const adStyle = css`
 	text-align: center;
 	margin: 0 auto 12px;
 
-	:before {
+	::before {
 		content: 'Advertisement';
 		display: block;
 		${textSans12};

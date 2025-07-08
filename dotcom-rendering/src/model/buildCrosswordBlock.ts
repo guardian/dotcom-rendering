@@ -1,7 +1,7 @@
+import type { FEArticle } from '../frontend/feArticle';
 import type { Block } from '../types/blocks';
-import type { FEArticleType } from '../types/frontend';
 
-export const buildCrosswordBlock = (data: FEArticleType): Block | undefined => {
+export const buildCrosswordBlock = (data: FEArticle): Block | undefined => {
 	return data.crossword
 		? {
 				id: data.crossword.id,

@@ -61,15 +61,7 @@ export const renderEditorialNewslettersPage = ({
 			newslettersPage.config.commercialBundleUrl,
 	];
 
-	const legacyScripts = [
-		getPathFromManifest('client.web.legacy', 'frameworks.js'),
-		getPathFromManifest('client.web.legacy', 'index.js'),
-	];
-
-	const scriptTags = generateScriptTags([
-		...prefetchScripts,
-		...legacyScripts,
-	]);
+	const scriptTags = generateScriptTags(prefetchScripts);
 
 	const guardian = createGuardian({
 		editionId: newslettersPage.editionId,
@@ -78,7 +70,6 @@ export const renderEditorialNewslettersPage = ({
 		revisionNumber: newslettersPage.config.revisionNumber,
 		sentryPublicApiKey: newslettersPage.config.sentryPublicApiKey,
 		sentryHost: newslettersPage.config.sentryHost,
-		keywordIds: '',
 		dfpAccountId: newslettersPage.config.dfpAccountId,
 		adUnit: newslettersPage.config.adUnit,
 		ajaxUrl: newslettersPage.config.ajaxUrl,
@@ -96,7 +87,7 @@ export const renderEditorialNewslettersPage = ({
 		title,
 		description: newslettersPage.description,
 		guardian,
-		keywords: '',
+		section: '',
 		renderingTarget: 'Web',
 		weAreHiring: !!newslettersPage.config.switches.weAreHiring,
 		config,

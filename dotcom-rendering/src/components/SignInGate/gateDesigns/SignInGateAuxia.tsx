@@ -50,6 +50,16 @@ export const SignInGateAuxia = ({
 		return input !== '';
 	};
 
+	/*
+	Whether the gate is dismissible is carried by `secondCtaName` which if it's truthy
+	makes the gate dismissible and otherwise is non dismissible.
+	*/
+
+	const isDismissible = !!secondCtaName;
+	const dismissStatusLabel = isDismissible
+		? 'dismissible'
+		: 'non-dismissible';
+
 	return (
 		<div css={signInGateContainer} data-testid="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
@@ -68,7 +78,7 @@ export const SignInGateAuxia = ({
 					onClick={async () => {
 						trackLink(
 							ophanComponentId,
-							'register-link',
+							`register-link-${dismissStatusLabel}`,
 							renderingTarget,
 							abTest,
 						);
@@ -80,25 +90,27 @@ export const SignInGateAuxia = ({
 				>
 					{firstCtaName}
 				</LinkButton>
-				<Button
-					data-testid="sign-in-gate-main_dismiss"
-					data-ignore="global-link-styling"
-					cssOverrides={laterButton}
-					priority="subdued"
-					size="small"
-					onClick={async () => {
-						dismissGate();
-						trackLink(
-							ophanComponentId,
-							'not-now',
-							renderingTarget,
-							abTest,
-						);
-						await logTreatmentInteractionCall('DISMISSED', '');
-					}}
-				>
-					{secondCtaName}
-				</Button>
+				{isDismissible && (
+					<Button
+						data-testid="sign-in-gate-main_dismiss"
+						data-ignore="global-link-styling"
+						cssOverrides={laterButton}
+						priority="subdued"
+						size="small"
+						onClick={async () => {
+							dismissGate();
+							trackLink(
+								ophanComponentId,
+								'not-now',
+								renderingTarget,
+								abTest,
+							);
+							await logTreatmentInteractionCall('DISMISSED', '');
+						}}
+					>
+						{secondCtaName}
+					</Button>
+				)}
 			</div>
 
 			<p css={[bodySeparator, bodyBold, signInHeader]}>

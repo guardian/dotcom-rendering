@@ -41,20 +41,22 @@ const frontCard = {
 	byline: 'Byline text',
 	showByline: true,
 	dataLinkName: 'data-link-name',
+	isImmersive: false,
 } satisfies DCRFrontCard;
 
 const trails = new Array(6)
 	.fill(frontCard)
-	.map((trail: DCRFrontCard, idx: number) => ({
+	.map((trail: DCRFrontCard, index: number) => ({
 		...trail,
 		image: {
-			src: imageUrls[idx] as string,
+			src: imageUrls[index] as string,
 			altText: '',
 		},
 		format: {
 			...frontCard.format,
-			theme: idx, // Uses index to cycle through each theme enum value
+			theme: index, // Uses index to cycle through each theme enum value
 		},
+		isNewsletter: index === 2, // Check that we see the Newsletter pill on a card.
 	}));
 
 const meta = {

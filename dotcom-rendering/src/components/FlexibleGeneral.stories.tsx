@@ -1,13 +1,19 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
-import { getSublinks, trails } from '../../fixtures/manual/trails';
+import {
+	getSublinks,
+	opinionTrails,
+	trails,
+} from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { customMockFetch } from '../lib/mockRESTCalls';
+import type { BoostLevel } from '../types/content';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
+	DCRSupportingContent,
 } from '../types/front';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FrontSection } from './FrontSection';
@@ -46,22 +52,18 @@ const standardCards = standards.map((card, index) => {
 		}) satisfies DCRFrontCard;
 
 	switch (index + 1) {
-		// The second card has two sublinks
 		case 2:
 			return enhanceCardFields({ supportingContent: getSublinks(2) });
-		// The third card is boosted and has one sublink
 		case 3:
 			return enhanceCardFields({
 				boostLevel: 'boost',
 				supportingContent: getSublinks(1),
 			});
-		// The fifth card is megaboosted and has two sublinks
 		case 5:
 			return enhanceCardFields({
 				boostLevel: 'megaboost',
 				supportingContent: getSublinks(2),
 			});
-
 		default:
 			return enhanceCardFields({});
 	}
@@ -146,12 +148,13 @@ const meta = {
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
+		collectionId: 1,
 	},
 	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
 			title={frontSectionTitle}
 			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
+			editionId="UK"
 			showTopBorder={true}
 		>
 			<FlexibleGeneral {...args} />
@@ -163,10 +166,10 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const NoSublinkSplash: Story = {
-	name: 'Standard splash with no sublinks',
+export const SplashWithStandards: Story = {
+	name: 'Splash with standard cards',
 	args: {
-		frontSectionTitle: 'Standard splash with no sublinks',
+		frontSectionTitle: 'Splash with stardards',
 		groupedTrails: {
 			...defaultGroupedTrails,
 			splash: [{ ...splashCard, supportingContent: [] }],
@@ -175,31 +178,54 @@ export const NoSublinkSplash: Story = {
 	},
 };
 
-export const TwoSublinkSplash: Story = {
-	name: 'Standard splash with two sublinks',
+export const SplashWithSublinks: Story = {
+	name: 'Standard splash with sublinks',
 	args: {
-		frontSectionTitle: 'Standard splash with two sublinks',
 		groupedTrails: {
 			...defaultGroupedTrails,
-			splash: [{ ...splashCard, supportingContent: getSublinks(2) }],
-			standard: standardCards,
+			splash: [{ ...splashCard, image: undefined }],
 		},
 	},
-};
+	render: (args) => {
+		const Section = ({
+			title,
+			supportingContent,
+		}: {
+			title: string;
+			supportingContent?: DCRSupportingContent[];
+		}) => (
+			<FrontSection
+				title={title}
+				discussionApiUrl={discussionApiUrl}
+				editionId="UK"
+				showTopBorder={true}
+			>
+				<FlexibleGeneral
+					{...args}
+					groupedTrails={{
+						...defaultGroupedTrails,
+						splash: [{ ...splashCard, supportingContent }],
+					}}
+				/>
+			</FrontSection>
+		);
 
-const splashWithFourSublinks = {
-	...splashCard,
-	supportingContent: getSublinks(4),
-};
-export const FourSublinkSplash: Story = {
-	name: 'Standard splash with four sublinks',
-	args: {
-		frontSectionTitle: 'Standard splash with four sublinks',
-		groupedTrails: {
-			...defaultGroupedTrails,
-			splash: [splashWithFourSublinks],
-			standard: standardCards,
-		},
+		return (
+			<>
+				<Section
+					title="One sublink"
+					supportingContent={getSublinks(1)}
+				/>
+				<Section
+					title="Two sublinks"
+					supportingContent={getSublinks(2)}
+				/>
+				<Section
+					title="Four sublinks"
+					supportingContent={getSublinks(4)}
+				/>
+			</>
+		);
 	},
 };
 
@@ -264,200 +290,203 @@ const liveUpdatesCard = {
 		design: ArticleDesign.Standard,
 		display: ArticleDisplay.Standard,
 	}),
+	isImmersive: false,
 } satisfies DCRFrontCard;
 
-export const FourSublinkSplashWithLiveUpdates: Story = {
-	name: 'Standard splash with sublinks and live updates',
+export const SplashBoostLevels: Story = {
+	name: 'Splash boost levels',
 	args: {
-		frontSectionTitle: 'Standard splash with sublinks and live updates',
-		groupedTrails: {
-			...defaultGroupedTrails,
-			splash: [liveUpdatesCard],
-			standard: standardCards,
-		},
-	},
-	render: ({ frontSectionTitle, ...args }) => {
-		global.fetch = mockLatestLinksReqFetch;
-		return (
-			<FrontSection
-				title={frontSectionTitle}
-				discussionApiUrl={discussionApiUrl}
-				editionId={'UK'}
-				showTopBorder={true}
-			>
-				<FlexibleGeneral {...args} />
-			</FrontSection>
-		);
-	},
-};
-
-export const BoostedSplash: Story = {
-	name: 'Boosted splash',
-	args: {
-		frontSectionTitle: 'Boosted splash',
-		groupedTrails: {
-			...defaultGroupedTrails,
-			splash: [
-				{
-					...splashWithFourSublinks,
-					boostLevel: 'boost',
-				},
-			],
-			standard: standardCards,
-		},
-	},
-};
-
-export const MegaBoostedSplash: Story = {
-	name: 'Mega boosted splash',
-	args: {
-		frontSectionTitle: 'Mega boosted splash',
-		groupedTrails: {
-			...defaultGroupedTrails,
-			splash: [
-				{
-					...splashWithFourSublinks,
-					boostLevel: 'megaboost',
-				},
-			],
-			standard: standardCards,
-		},
-	},
-};
-
-export const GigaBoostedSplash: Story = {
-	name: 'Giga boosted splash',
-	args: {
-		frontSectionTitle: 'Giga boosted splash',
-		groupedTrails: {
-			...defaultGroupedTrails,
-			splash: [
-				{
-					...splashWithFourSublinks,
-					boostLevel: 'gigaboost',
-				},
-			],
-			standard: standardCards,
-		},
-	},
-};
-export const DefaultSplashWithImageSupression: Story = {
-	name: 'Standard splash with image supression',
-	args: {
-		frontSectionTitle: 'Standard splash with image supression',
 		groupedTrails: {
 			...defaultGroupedTrails,
 			splash: [{ ...splashCard, image: undefined }],
 		},
 	},
+	render: (args) => {
+		const Section = ({
+			title,
+			boostLevel,
+		}: {
+			title: string;
+			boostLevel?: BoostLevel;
+		}) => (
+			<FrontSection
+				title={title}
+				discussionApiUrl={discussionApiUrl}
+				editionId="UK"
+				showTopBorder={true}
+			>
+				<FlexibleGeneral
+					{...args}
+					groupedTrails={{
+						...defaultGroupedTrails,
+						splash: [
+							{
+								...splashCard,
+								boostLevel,
+								supportingContent: getSublinks(4),
+							},
+						],
+					}}
+				/>
+			</FrontSection>
+		);
+
+		return (
+			<>
+				<Section title="Boosted" boostLevel="boost" />
+				<Section title="Mega boosted" boostLevel="megaboost" />
+				<Section title="Giga boosted" boostLevel="gigaboost" />
+			</>
+		);
+	},
 };
 
-export const BoostedSplashWithImageSupression: Story = {
-	name: 'Boosted splash with image supression',
+export const SplashWithImageSupression: Story = {
+	name: 'Splash with image supression',
 	args: {
-		frontSectionTitle: 'Boosted splash',
 		groupedTrails: {
 			...defaultGroupedTrails,
-			splash: [
-				{
-					...splashCard,
-					boostLevel: 'boost',
-					image: undefined,
-				},
-			],
+			splash: [{ ...splashCard, image: undefined }],
+		},
+	},
+	render: (args) => {
+		const Section = ({
+			title,
+			boostLevel,
+		}: {
+			title: string;
+			boostLevel?: BoostLevel;
+		}) => (
+			<FrontSection
+				title={title}
+				discussionApiUrl={discussionApiUrl}
+				editionId="UK"
+				showTopBorder={true}
+			>
+				<FlexibleGeneral
+					{...args}
+					groupedTrails={{
+						...defaultGroupedTrails,
+						splash: [
+							{ ...splashCard, boostLevel, image: undefined },
+						],
+					}}
+				/>
+			</FrontSection>
+		);
+
+		return (
+			<>
+				<Section title="Default" boostLevel={undefined} />
+				<Section title="Boosted" boostLevel="boost" />
+				<Section title="Mega boosted" boostLevel="megaboost" />
+				<Section title="Giga boosted" boostLevel="gigaboost" />
+			</>
+		);
+	},
+};
+
+export const SplashWithLiveUpdates: Story = {
+	name: 'Splash with live updates',
+	args: {
+		groupedTrails: {
+			...defaultGroupedTrails,
+			splash: [{ ...splashCard, image: undefined }],
+		},
+	},
+	render: (args) => {
+		global.fetch = mockLatestLinksReqFetch;
+		const Section = ({
+			title,
+			boostLevel,
+		}: {
+			title: string;
+			boostLevel?: BoostLevel;
+		}) => (
+			<FrontSection
+				title={title}
+				discussionApiUrl={discussionApiUrl}
+				editionId="UK"
+				showTopBorder={true}
+			>
+				<FlexibleGeneral
+					{...args}
+					groupedTrails={{
+						...defaultGroupedTrails,
+						splash: [{ ...liveUpdatesCard, boostLevel }],
+					}}
+				/>
+			</FrontSection>
+		);
+
+		return (
+			<>
+				<Section title="Default" boostLevel={undefined} />
+				<Section title="Boosted" boostLevel="boost" />
+				<Section title="Mega boosted" boostLevel="megaboost" />
+				<Section title="Giga boosted" boostLevel="gigaboost" />
+			</>
+		);
+	},
+};
+
+const slideshowCard = {
+	...liveUpdatesCard,
+	mainMedia: undefined,
+	slideshowImages: [
+		{
+			imageSrc:
+				'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/1000.jpg',
+		},
+		{
+			imageSrc:
+				'https://media.guim.co.uk/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg',
+		},
+		{
+			imageSrc:
+				'https://media.guim.co.uk/df5aea6391e21b5a5d2d25fd9aad81d497f99d42/0_45_3062_1837/master/3062.jpg',
+		},
+		{
+			imageSrc:
+				'https://media.guim.co.uk/5ebec1a8d662f0da39887dae16e4b2720379246e/0_0_5000_3000/master/5000.jpg',
+		},
+		{
+			imageSrc:
+				'https://media.guim.co.uk/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg',
+		},
+	],
+} satisfies DCRFrontCard;
+
+export const DefaultSplashWithLiveUpdatesAndSlideshow: Story = {
+	name: 'Standard splash with live updates and slideshow',
+	args: {
+		frontSectionTitle: 'Standard splash with live updates and slideshow',
+		groupedTrails: {
+			...defaultGroupedTrails,
+
+			splash: [{ ...slideshowCard }],
 		},
 	},
 };
 
-export const MegaBoostedSplashWithImageSupression: Story = {
-	name: 'Mega boosted splash with image supression',
+export const StandardCards: Story = {
+	name: 'Standard cards',
 	args: {
-		frontSectionTitle: 'Mega boosted splash',
+		frontSectionTitle: 'Standard cards',
 		groupedTrails: {
 			...defaultGroupedTrails,
-			splash: [
-				{
-					...splashCard,
-					boostLevel: 'megaboost',
-					image: undefined,
-				},
-			],
+			standard: trails.slice(0, 4),
 		},
 	},
 };
 
-export const GigaBoostedSplashWithImageSupression: Story = {
-	name: 'Giga boosted splash with image supression',
+export const OpinionStandardCards: Story = {
+	name: 'Opinion standard cards',
 	args: {
-		frontSectionTitle: 'Giga boosted splash',
+		frontSectionTitle: 'Opinion standard cards',
 		groupedTrails: {
 			...defaultGroupedTrails,
-			splash: [
-				{
-					...splashCard,
-					boostLevel: 'gigaboost',
-					image: undefined,
-				},
-			],
-		},
-	},
-};
-
-export const DefaultSplashWithLiveUpdates: Story = {
-	name: 'Standard splash with live updates',
-	args: {
-		frontSectionTitle: 'Standard splash with live updates',
-		groupedTrails: {
-			...defaultGroupedTrails,
-			splash: [{ ...liveUpdatesCard }],
-		},
-	},
-};
-
-export const BoostedSplashWithLiveUpdates: Story = {
-	name: 'Boosted splash with live updates',
-	args: {
-		frontSectionTitle: 'Boosted splash',
-		groupedTrails: {
-			...defaultGroupedTrails,
-			splash: [
-				{
-					...liveUpdatesCard,
-					boostLevel: 'boost',
-				},
-			],
-		},
-	},
-};
-
-export const MegaBoostedSplashWithLiveUpdates: Story = {
-	name: 'Mega boosted splash with live updates',
-	args: {
-		frontSectionTitle: 'Mega boosted splash',
-		groupedTrails: {
-			...defaultGroupedTrails,
-			splash: [
-				{
-					...liveUpdatesCard,
-					boostLevel: 'megaboost',
-				},
-			],
-		},
-	},
-};
-
-export const GigaBoostedSplashWithLiveUpdates: Story = {
-	name: 'Giga boosted splash with live updates',
-	args: {
-		frontSectionTitle: 'Giga boosted splash',
-		groupedTrails: {
-			...defaultGroupedTrails,
-			splash: [
-				{
-					...liveUpdatesCard,
-					boostLevel: 'gigaboost',
-				},
-			],
+			standard: opinionTrails.slice(0, 2),
 		},
 	},
 };
@@ -483,7 +512,12 @@ export const WithSpecialPaletteVariations = {
 	args: {
 		groupedTrails: {
 			...defaultGroupedTrails,
-			splash: [splashWithFourSublinks],
+			splash: [
+				{
+					...splashCard,
+					supportingContent: getSublinks(4),
+				},
+			],
 			standard: standardCards.slice(0, 2),
 		},
 	},
@@ -507,3 +541,29 @@ export const WithSpecialPaletteVariations = {
 		</>
 	),
 } satisfies Story;
+
+export const SecondaryContainerStandardCards: Story = {
+	name: 'Secondary container with standard cards',
+	args: {
+		frontSectionTitle: 'Secondary container with standard cards',
+		containerLevel: 'Secondary',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			standard: standardCards.slice(0, 4),
+		},
+	},
+};
+
+export const ImmersiveCardsSplashAndStandard: Story = {
+	name: 'Immersive cards splash and standard',
+	args: {
+		frontSectionTitle: 'Immersive cards',
+		groupedTrails: {
+			...defaultGroupedTrails,
+			splash: [
+				{ ...splashCard, isImmersive: true, supportingContent: [] },
+			],
+			standard: [{ ...trails[0], isImmersive: true }],
+		},
+	},
+};

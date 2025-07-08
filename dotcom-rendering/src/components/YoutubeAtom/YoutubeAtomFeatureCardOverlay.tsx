@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { space } from '@guardian/source/foundations';
+import { from, space } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import { secondsToDuration } from '../../lib/formatTime';
 import { palette } from '../../palette';
 import type { AspectRatio } from '../../types/front';
 import { CardFooter } from '../Card/components/CardFooter';
-import { PlayIcon } from '../Card/components/PlayIcon';
+import { narrowPlayIconWidth, PlayIcon } from '../Card/components/PlayIcon';
 import { TrailText } from '../Card/components/TrailText';
 import type { ResponsiveFontSize } from '../CardHeadline';
 import { CardHeadline } from '../CardHeadline';
@@ -49,17 +49,9 @@ const hoverStyles = css`
 	}
 `;
 
-const textOverlayStyles = css`
-	width: 100%;
-	position: absolute;
-	bottom: 0;
-	display: flex;
-	flex-direction: column;
-	text-align: start;
-	gap: ${space[1]}px;
-	padding: 64px ${space[2]}px ${space[2]}px;
+const overlayMaskGradientStyles = (angle: string) => css`
 	mask-image: linear-gradient(
-		180deg,
+		${angle},
 		transparent 0px,
 		rgba(0, 0, 0, 0.0381) 8px,
 		rgba(0, 0, 0, 0.1464) 16px,
@@ -70,7 +62,44 @@ const textOverlayStyles = css`
 		rgba(0, 0, 0, 0.9619) 56px,
 		rgb(0, 0, 0) 64px
 	);
+`;
+const textOverlayStyles = css`
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	text-align: start;
+	gap: ${space[1]}px;
+	padding: 64px ${space[2]}px ${space[2]}px;
+	${overlayMaskGradientStyles('180deg')};
+
 	backdrop-filter: blur(12px) brightness(0.5);
+`;
+
+/**
+ * Why 268px?
+ * 220 is the width of 4 columns on tablet and 3 columns on desktop.
+ * 48px is to ensure the gradient does not render the content inaccessible.
+ */
+const immersiveOverlayStyles = css`
+	${from.tablet} {
+		height: 100%;
+		width: 268px;
+		padding: ${space[2]}px ${space[12]}px ${space[2]}px ${space[2]}px;
+		backdrop-filter: blur(12px) brightness(0.5);
+		${overlayMaskGradientStyles('270deg')}
+	}
+`;
+
+const playIconStyles = css`
+	position: absolute;
+	/**
+      * Subject to change. We will wait to see how fronts editors use the
+	  * headlines and standfirsts before we decide on a final position.
+	  */
+	top: 35%;
+	left: calc(50% - ${narrowPlayIconWidth / 2}px);
 `;
 
 const videoPillStyles = css`
@@ -92,6 +121,7 @@ type Props = {
 	duration?: number; // in seconds
 	kicker?: string;
 	aspectRatio?: AspectRatio;
+	mobileAspectRatio?: AspectRatio;
 	trailText?: string;
 	isVideoArticle?: boolean;
 	webPublicationDate?: string;
@@ -100,6 +130,9 @@ type Props = {
 	linkTo?: string;
 	discussionApiUrl?: string;
 	discussionId?: string;
+	isImmersive?: boolean;
+	byline?: string;
+	showByline?: boolean;
 };
 
 export const YoutubeAtomFeatureCardOverlay = ({
@@ -115,6 +148,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	kicker,
 	format,
 	aspectRatio,
+	mobileAspectRatio,
 	trailText,
 	isVideoArticle,
 	webPublicationDate,
@@ -123,6 +157,9 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	linkTo,
 	discussionId,
 	discussionApiUrl,
+	isImmersive,
+	byline,
+	showByline,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
@@ -153,19 +190,28 @@ export const YoutubeAtomFeatureCardOverlay = ({
 						height={height}
 						width={width}
 						aspectRatio={aspectRatio}
+						mobileAspectRatio={mobileAspectRatio}
+						isImmersive={isImmersive}
 					/>
 				)}
 				{hasDuration && !isVideoArticle ? (
 					<div css={videoPillStyles}>
 						<Pill
 							content={secondsToDuration(duration)}
-							icon={<SvgMediaControlsPlay />}
+							icon={<SvgMediaControlsPlay width={18} />}
 						/>
 					</div>
 				) : null}
 				<div className="image-overlay" />
-				<PlayIcon iconWidth="narrow" />
-				<div css={[textOverlayStyles]}>
+				<div css={playIconStyles}>
+					<PlayIcon iconWidth="narrow" />
+				</div>
+				<div
+					css={[
+						textOverlayStyles,
+						isImmersive && immersiveOverlayStyles,
+					]}
+				>
 					{!!kicker && (
 						<Kicker
 							text={kicker}
@@ -180,7 +226,8 @@ export const YoutubeAtomFeatureCardOverlay = ({
 							fontSizes={headlineSizes}
 							headlineColour={palette('--feature-card-headline')}
 							kickerColour={palette('--feature-card-kicker-text')}
-							isBetaContainer={true}
+							byline={byline}
+							showByline={showByline}
 						/>
 					)}
 					{!!trailText && (

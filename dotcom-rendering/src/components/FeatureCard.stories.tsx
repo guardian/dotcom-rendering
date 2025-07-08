@@ -44,11 +44,40 @@ const aBasicLink = {
 	},
 };
 
-const CardWrapper = ({ children }: { children: React.ReactNode }) => {
+const supportingContent = [
+	{
+		...aBasicLink,
+		headline: 'Headline 1',
+		kickerText: 'Kicker',
+	},
+	{
+		...aBasicLink,
+		headline: 'Headline 2',
+		kickerText: 'Kicker',
+		format: {
+			theme: Pillar.Sport,
+			design: ArticleDesign.Gallery,
+			display: ArticleDisplay.Standard,
+		},
+	},
+	{
+		...aBasicLink,
+		headline: 'Headline 3',
+		kickerText: 'Kicker',
+	},
+];
+
+const CardWrapper = ({
+	maxWidth,
+	children,
+}: {
+	maxWidth: string;
+	children: React.ReactNode;
+}) => {
 	return (
 		<div
 			css={css`
-				max-width: 460px;
+				max-width: ${maxWidth}px;
 				flex-basis: 100%;
 				${from.tablet} {
 					flex-basis: 1;
@@ -61,22 +90,38 @@ const CardWrapper = ({ children }: { children: React.ReactNode }) => {
 	);
 };
 
+type FeatureCardArgsAndCustomArgs = React.ComponentProps<typeof FeatureCard> & {
+	maxWidth: string;
+};
+
 const meta = {
 	component: FeatureCard,
 	title: 'Components/FeatureCard',
-	args: cardProps,
-	render: (args) => (
-		<CardWrapper>
+	args: { ...cardProps, maxWidth: '460' },
+	render: ({ maxWidth, ...args }) => (
+		<CardWrapper maxWidth={maxWidth}>
 			<FeatureCard {...args} />
 		</CardWrapper>
 	),
-} satisfies Meta<typeof FeatureCard>;
+} satisfies Meta<FeatureCardArgsAndCustomArgs>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const Standard: Story = {};
+
+export const Immersive: Story = {
+	args: {
+		aspectRatio: '5:3',
+		mobileAspectRatio: '4:5',
+		imageSize: 'feature-immersive',
+		maxWidth: '940',
+		isImmersive: true,
+		trailText:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+	},
+};
 
 export const Review: Story = {
 	args: {
@@ -89,6 +134,13 @@ export const Review: Story = {
 		trailText:
 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
 		starRating: 3,
+	},
+};
+
+export const ReviewImmersive: Story = {
+	args: {
+		...Review.args,
+		...Immersive.args,
 	},
 };
 
@@ -108,6 +160,13 @@ export const SportLiveBlog: Story = {
 	},
 };
 
+export const SportLiveBlogImmersive: Story = {
+	args: {
+		...SportLiveBlog.args,
+		...Immersive.args,
+	},
+};
+
 export const Opinion: Story = {
 	args: {
 		image: {
@@ -116,6 +175,13 @@ export const Opinion: Story = {
 		},
 		showQuotes: true,
 		format: { ...cardProps.format, theme: Pillar.Opinion },
+	},
+};
+
+export const OpinionImmersive: Story = {
+	args: {
+		...Opinion.args,
+		...Immersive.args,
 	},
 };
 
@@ -140,6 +206,13 @@ export const Podcast: Story = {
 	},
 };
 
+export const PodcastImmersive: Story = {
+	args: {
+		...Podcast.args,
+		...Immersive.args,
+	},
+};
+
 export const Gallery: Story = {
 	args: {
 		format: {
@@ -154,6 +227,13 @@ export const Gallery: Story = {
 			type: 'Gallery',
 			count: '12',
 		},
+	},
+};
+
+export const GalleryImmersive: Story = {
+	args: {
+		...Gallery.args,
+		...Immersive.args,
 	},
 };
 
@@ -188,6 +268,13 @@ export const Video: Story = {
 	},
 };
 
+export const VideoImmersive: Story = {
+	args: {
+		...Video.args,
+		...Immersive.args,
+	},
+};
+
 // A standard (non-video) article with a video main media
 export const VideoMainMedia: Story = {
 	args: {
@@ -200,6 +287,13 @@ export const VideoMainMedia: Story = {
 			...cardProps.format,
 			design: ArticleDesign.Standard,
 		},
+	},
+};
+
+export const VideoMainMediaImmersive: Story = {
+	args: {
+		...VideoMainMedia.args,
+		...Immersive.args,
 	},
 };
 
@@ -218,29 +312,22 @@ export const WithTrailText: Story = {
 	},
 };
 
+export const WithTrailTextImmersive: Story = {
+	args: {
+		...WithTrailText.args,
+		...Immersive.args,
+	},
+};
+
 export const WithSublinks: Story = {
 	args: {
-		supportingContent: [
-			{
-				...aBasicLink,
-				headline: 'Headline 1',
-				kickerText: 'Kicker',
-			},
-			{
-				...aBasicLink,
-				headline: 'Headline 2',
-				kickerText: 'Kicker',
-				format: {
-					theme: Pillar.Sport,
-					design: ArticleDesign.Gallery,
-					display: ArticleDisplay.Standard,
-				},
-			},
-			{
-				...aBasicLink,
-				headline: 'Headline 3',
-				kickerText: 'Kicker',
-			},
-		],
+		supportingContent,
+	},
+};
+
+export const WithSublinksImmersive: Story = {
+	args: {
+		...WithSublinks.args,
+		...Immersive.args,
 	},
 };

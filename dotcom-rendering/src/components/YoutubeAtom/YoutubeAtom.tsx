@@ -51,6 +51,7 @@ export type Props = {
 	hidePillOnMobile: boolean;
 	renderingTarget: RenderingTarget;
 	aspectRatio?: AspectRatio;
+	mobileAspectRatio?: AspectRatio;
 	trailText?: string;
 	headlineSizes?: ResponsiveFontSize;
 	isVideoArticle?: boolean;
@@ -61,6 +62,9 @@ export type Props = {
 	discussionApiUrl?: string;
 	discussionId?: string;
 	isFeatureCard?: boolean;
+	isImmersive?: boolean;
+	byline?: string;
+	showByline?: boolean;
 };
 
 /**
@@ -103,6 +107,7 @@ export const YoutubeAtom = ({
 	hidePillOnMobile,
 	renderingTarget,
 	aspectRatio,
+	mobileAspectRatio,
 	trailText,
 	headlineSizes,
 	isVideoArticle,
@@ -113,6 +118,9 @@ export const YoutubeAtom = ({
 	discussionApiUrl,
 	discussionId,
 	isFeatureCard,
+	isImmersive,
+	byline,
+	showByline,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -200,6 +208,7 @@ export const YoutubeAtom = ({
 					height={height}
 					width={width}
 					aspectRatio={aspectRatio}
+					mobileAspectRatio={mobileAspectRatio}
 				>
 					{
 						/**
@@ -248,6 +257,7 @@ export const YoutubeAtom = ({
 								duration={duration}
 								kicker={kicker}
 								aspectRatio={aspectRatio}
+								mobileAspectRatio={mobileAspectRatio}
 								trailText={trailText}
 								isVideoArticle={isVideoArticle}
 								webPublicationDate={webPublicationDate}
@@ -256,6 +266,9 @@ export const YoutubeAtom = ({
 								linkTo={linkTo}
 								discussionId={discussionId}
 								discussionApiUrl={discussionApiUrl}
+								isImmersive={isImmersive}
+								byline={byline}
+								showByline={showByline}
 							/>
 						) : (
 							<YoutubeAtomOverlay

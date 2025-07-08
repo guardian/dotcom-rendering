@@ -29,7 +29,7 @@ const columnStyle = css`
 	position: relative;
 
 	/* Remove the border from the top item on mobile */
-	:first-of-type:after {
+	:first-of-type::after {
 		content: none;
 	}
 
@@ -38,7 +38,7 @@ const columnStyle = css`
 		float: left;
 		position: relative;
 
-		:after {
+		::after {
 			content: none;
 		}
 	}
@@ -55,7 +55,7 @@ const columnStyleFromLeftCol = css`
 
 const pillarDivider = css`
 	${from.desktop} {
-		:before {
+		::before {
 			content: '';
 			display: block;
 			position: absolute;
@@ -71,7 +71,7 @@ const pillarDivider = css`
 
 const pillarDividerExtended = css`
 	${from.desktop} {
-		:after {
+		::after {
 			content: '';
 			display: block;
 			position: absolute;

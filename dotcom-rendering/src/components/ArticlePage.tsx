@@ -12,6 +12,7 @@ import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
 import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
+import { EnhanceAffiliateLinks } from './EnhanceAffiliateLinks.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { Lightbox } from './Lightbox';
@@ -42,7 +43,7 @@ interface AppProps extends BaseProps {
  */
 export const ArticlePage = (props: WebProps | AppProps) => {
 	const {
-		article: { format, frontendData },
+		article: { design, display, theme, frontendData },
 		renderingTarget,
 	} = props;
 
@@ -57,6 +58,12 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 
 	const isWeb = renderingTarget === 'Web';
 	const { darkModeAvailable } = useConfig();
+
+	const format = {
+		design,
+		display,
+		theme,
+	};
 
 	return (
 		<StrictMode>
@@ -124,6 +131,11 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							serverSideTests={frontendData.config.abTests}
 						/>
 					</Island>
+					{!!frontendData.affiliateLinksDisclaimer && (
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<EnhanceAffiliateLinks />
+						</Island>
+					)}
 				</>
 			)}
 			{renderingTarget === 'Web' ? (

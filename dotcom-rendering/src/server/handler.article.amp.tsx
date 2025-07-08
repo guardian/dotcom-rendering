@@ -1,5 +1,4 @@
 import type { RequestHandler } from 'express';
-import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
 import type { AnalyticsModel } from '../components/Analytics.amp';
 import { AmpArticlePage } from '../components/ArticlePage.amp';
 import { isAmpSupported } from '../components/Elements.amp';
@@ -11,7 +10,7 @@ import { generatePermutivePayload } from '../lib/permutive.amp';
 import { extractScripts } from '../lib/scripts.amp';
 import { findBySubsection } from '../model/article-sections';
 import { extractNAV } from '../model/extract-nav';
-import { validateAsArticleType } from '../model/validate';
+import { validateAsFEArticle } from '../model/validate';
 import { getAmpExperimentCache } from './AMPExperimentCache.amp';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderArticle } from './render.article.amp';
@@ -19,7 +18,7 @@ import { renderArticle } from './render.article.amp';
 export const handleAMPArticle: RequestHandler = ({ body }, res, next) => {
 	(async () => {
 		recordTypeAndPlatform('article', 'amp');
-		const article = validateAsArticleType(body);
+		const article = validateAsFEArticle(body);
 		const format = decideFormat(article.format);
 
 		if (
@@ -91,9 +90,4 @@ export const handleAMPArticle: RequestHandler = ({ body }, res, next) => {
 
 		res.status(200).send(resp);
 	})().catch(next);
-};
-
-export const handlePerfTest: RequestHandler = (req, res, next) => {
-	req.body = ExampleArticle;
-	handleAMPArticle(req, res, next);
 };

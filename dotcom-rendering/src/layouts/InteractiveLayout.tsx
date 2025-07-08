@@ -24,6 +24,8 @@ import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe.importable';
+import { InteractivesNativePlatformWrapper } from '../components/InteractivesNativePlatformWrapper.importable';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
@@ -199,6 +201,13 @@ const starWrapper = css`
 	margin-left: -10px;
 `;
 
+export const temporaryBodyCopyColourOverride = css`
+	.content__main-column--interactive p {
+		/* stylelint-disable-next-line declaration-no-important */
+		color: ${themePalette('--article-text')} !important;
+	}
+`;
+
 interface CommonProps {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
@@ -232,18 +241,26 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
-	/**
-	 * This property currently only applies to the header and merchandising slots
-	 */
-	const renderAds = isWeb && canRenderAds(article);
+	const renderAds = canRenderAds(article);
+
 	return (
 		<>
+			{isApps && (
+				<>
+					<Island priority="critical">
+						<InteractivesNativePlatformWrapper />
+					</Island>
+					<Island priority="critical">
+						<InteractivesDisableArticleSwipe />
+					</Island>
+					<Global styles={temporaryBodyCopyColourOverride} />
+				</>
+			)}
+			{article.isLegacyInteractive && (
+				<Global styles={interactiveGlobalStyles} />
+			)}
 			{isWeb && (
 				<>
-					{article.isLegacyInteractive && (
-						<Global styles={interactiveGlobalStyles} />
-					)}
-
 					<div>
 						{renderAds && (
 							<Stuck>
@@ -305,12 +322,10 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				</>
 			)}
 			<main data-layout="InteractiveLayout">
-				{isApps && (
-					<>
-						<Island priority="critical">
-							<AdPortals />
-						</Island>
-					</>
+				{isApps && renderAds && (
+					<Island priority="critical">
+						<AdPortals />
+					</Island>
 				)}
 				<Section
 					fullWidth={true}
@@ -339,6 +354,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										isAdFreeUser={article.isAdFreeUser}
 										isSensitive={article.config.isSensitive}
 										editionId={article.editionId}
+										shouldHideAds={article.shouldHideAds}
 									/>
 								</div>
 							</GridItem>
@@ -429,6 +445,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 													shortUrlId={
 														article.config
 															.shortUrlId
+													}
+													pageId={
+														article.config.pageId
 													}
 												></ArticleMetaApps>
 											</Hide>
@@ -524,6 +543,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 											article.isRightToLeftLang
 										}
 										editionId={article.editionId}
+										shouldHideAds={article.shouldHideAds}
 									/>
 								</ArticleContainer>
 							</GridItem>
@@ -562,7 +582,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									article.shouldHideReaderRevenue
 								}
 								tags={article.tags}
-								renderAds={renderAds}
+								renderAds={isWeb && renderAds}
 								isLabs={false}
 								articleEndSlot={
 									!!article.config.switches.articleEndSlot
@@ -606,7 +626,8 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						}
 					/>
 				</Section>
-				{renderAds && (
+
+				{isWeb && renderAds && (
 					<Section
 						fullWidth={true}
 						data-print-layout="hide"
@@ -719,7 +740,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						borderColour={themePalette('--article-border')}
 						fontColour={themePalette('--article-section-title')}
 					>
-						<MostViewedFooterLayout renderAds={renderAds}>
+						<MostViewedFooterLayout renderAds={isWeb && renderAds}>
 							<Island
 								priority="feature"
 								defer={{ until: 'visible' }}
@@ -734,7 +755,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 
-				{renderAds && (
+				{isWeb && renderAds && (
 					<Section
 						fullWidth={true}
 						data-print-layout="hide"

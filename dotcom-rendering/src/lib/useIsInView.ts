@@ -29,7 +29,9 @@ type Options = {
 	 * If `true`, trigger the hook on all intersections.
 	 */
 	repeat?: true;
-	/** Set the initial HTML Element, if known. */
+	/**
+	 * Set the initial HTML Element, if known.
+	 */
 	node?: HTMLElement;
 };
 
@@ -40,8 +42,11 @@ type Options = {
  */
 const useIsInView = (
 	options: IntersectionObserverInit & Options,
-): [boolean, React.Dispatch<React.SetStateAction<HTMLElement | null>>] => {
-	const [isInView, setIsInView] = useState<boolean>(false);
+): [
+	boolean | null,
+	React.Dispatch<React.SetStateAction<HTMLElement | null>>,
+] => {
+	const [isInView, setIsInView] = useState<boolean | null>(null);
 	const [node, setNode] = useState<HTMLElement | null>(options.node ?? null);
 
 	const observer = useRef<IntersectionObserver | null>(null);
@@ -70,6 +75,7 @@ const useIsInView = (
 
 	useEffect(() => {
 		if (!node) return;
+
 		// Check for browser support https://caniuse.com/intersectionobserver
 		if (!('IntersectionObserver' in window)) return;
 

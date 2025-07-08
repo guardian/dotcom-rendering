@@ -55,7 +55,7 @@ const bodyStyling = css`
 		padding-left: 1.25rem;
 	}
 
-	ul li:before {
+	ul li::before {
 		display: inline-block;
 		content: '';
 		border-radius: 0.375rem;

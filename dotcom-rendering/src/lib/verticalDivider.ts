@@ -7,7 +7,7 @@ export const verticalDivider = (
 ): SerializedStyles => {
 	return css`
 		${from.tablet} {
-			:before {
+			::before {
 				content: '';
 				display: block;
 				position: absolute;

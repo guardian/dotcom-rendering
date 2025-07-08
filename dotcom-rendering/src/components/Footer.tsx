@@ -55,7 +55,7 @@ const pillarWrap = css`
 	> ul {
 		clear: none;
 
-		:after {
+		::after {
 			display: none;
 		}
 	}

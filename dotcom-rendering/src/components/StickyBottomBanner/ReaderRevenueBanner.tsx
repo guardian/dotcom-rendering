@@ -1,10 +1,7 @@
 import { css } from '@emotion/react';
-import type {
-	ConsentState,
-	CountryCode,
-	OphanComponentEvent,
-} from '@guardian/libs';
+import type { ConsentState, CountryCode } from '@guardian/libs';
 import { getCookie, onConsent } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import {
 	abandonedBasketSchema,
 	getBanner,
@@ -24,7 +21,6 @@ import { submitComponentEvent } from '../../client/ophan/ophan';
 import type { ArticleCounts } from '../../lib/articleCount';
 import {
 	getPurchaseInfo,
-	hasCmpConsentForBrowserId,
 	hasOptedOutOfArticleCount,
 	recentlyClosedBanner,
 	setLocalNoBannerCachePeriod,
@@ -53,6 +49,7 @@ type BaseProps = {
 	subscriptionBannerLastClosedAt?: string;
 	signInBannerLastClosedAt?: string;
 	abandonedBasketBannerLastClosedAt?: string;
+	pageId?: string;
 };
 
 type BuildPayloadProps = BaseProps & {
@@ -132,12 +129,11 @@ const buildPayload = async ({
 	contentType,
 	userConsent,
 	hideSupportMessagingForUser,
+	pageId,
 }: BuildPayloadProps): Promise<BannerPayload> => {
 	const articleCounts = await asyncArticleCounts;
 	const weeklyArticleHistory = articleCounts?.weeklyArticleHistory;
 	const articleCountToday = getArticleCountToday(articleCounts);
-
-	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 
 	return {
 		targeting: {
@@ -158,15 +154,13 @@ const buildPayload = async ({
 			sectionId,
 			tagIds: tags.map((tag) => tag.id),
 			contentType,
-			browserId: (await hasCmpConsentForBrowserId())
-				? browserId ?? undefined
-				: undefined,
 			purchaseInfo: getPurchaseInfo(),
 			isSignedIn,
 			hasConsented: userConsent,
 			abandonedBasket: parseAbandonedBasket(
 				getCookie({ name: 'GU_CO_INCOMPLETE', shouldMemoize: true }),
 			),
+			pageId,
 		},
 	};
 };
@@ -190,11 +184,11 @@ export const canShowRRBanner: CanShowFunctionType<
 	signInBannerLastClosedAt,
 	abandonedBasketBannerLastClosedAt,
 	isPreview,
-	idApiUrl,
 	renderingTarget,
 	signInGateWillShow,
 	asyncArticleCounts,
 	ophanPageViewId,
+	pageId,
 }) => {
 	if (!remoteBannerConfig) return { show: false };
 
@@ -261,6 +255,7 @@ export const canShowRRBanner: CanShowFunctionType<
 		asyncArticleCounts,
 		userConsent,
 		hideSupportMessagingForUser,
+		pageId,
 	});
 
 	const response: ModuleDataResponse<BannerProps> = await getBanner(
@@ -278,9 +273,7 @@ export const canShowRRBanner: CanShowFunctionType<
 
 	const { props, name } = module;
 
-	const fetchEmail = isSignedIn
-		? lazyFetchEmailWithTimeout(idApiUrl)
-		: undefined;
+	const fetchEmail = isSignedIn ? lazyFetchEmailWithTimeout() : undefined;
 
 	const tracking: Tracking = {
 		...props.tracking,
@@ -292,8 +285,8 @@ export const canShowRRBanner: CanShowFunctionType<
 		...props,
 		tracking,
 		fetchEmail,
-		submitComponentEvent: (componentEvent: OphanComponentEvent) =>
-			void submitComponentEvent(componentEvent, renderingTarget),
+		submitComponentEvent: (componentEvent: ComponentEvent) =>
+			submitComponentEvent(componentEvent, renderingTarget),
 	};
 
 	return {
@@ -317,6 +310,9 @@ export const ReaderRevenueBanner = ({
 		(name === 'SignInPromptBanner'
 			? /* webpackChunkName: "sign-in-prompt-banner" */
 			  import(`../marketing/banners/signInPrompt/SignInPromptBanner`)
+			: name === 'DesignableBannerV2'
+			? /* webpackChunkName: "designable-banner-v2" */
+			  import(`../marketing/banners/designableBanner/DesignableBanner`)
 			: /* webpackChunkName: "designable-banner" */
 			  import(`../marketing/banners/designableBanner/DesignableBanner`)
 		)

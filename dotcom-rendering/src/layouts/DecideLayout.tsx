@@ -39,13 +39,26 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 	const notSupported = <pre>Not supported</pre>;
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
-			return (
-				<ImmersiveLayout
-					article={article}
-					format={format}
-					renderingTarget={renderingTarget}
-				/>
-			);
+			switch (format.design) {
+				case ArticleDesign.Interactive: {
+					return (
+						<FullPageInteractiveLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
+				}
+				default: {
+					return (
+						<ImmersiveLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
+				}
+			}
 		}
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Showcase: {
@@ -100,8 +113,13 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 					);
 
 				case ArticleDesign.FullPageInteractive: {
-					// Should be FullPageInteractiveLayout once implemented for apps
-					return notSupported;
+					return (
+						<FullPageInteractiveLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
 				}
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
@@ -148,15 +166,12 @@ const DecideLayoutWeb = ({
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
 				case ArticleDesign.Interactive: {
-					// Render all 'immersive interactives' until switchover date as 'FullPageInteractive'
-					// TBD: After 'immersive interactive' changes to CAPI are merged, add logic here to either use
-					// 'InteractiveImmersiveLayout' if published after switchover date, or 'FullPageInteractiveLayout'
-					// if published before.
 					return (
 						<FullPageInteractiveLayout
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				}
@@ -234,6 +249,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				}

@@ -15,6 +15,7 @@ import { useOnce } from '../lib/useOnce';
 import { palette as themePalette } from '../palette';
 import type { RoleType } from '../types/content';
 import { Caption } from './Caption';
+import { useConfig } from './ConfigContext';
 import { defaultRoleStyles } from './Figure';
 import { Placeholder } from './Placeholder';
 
@@ -324,24 +325,80 @@ export const InteractiveBlockComponent = ({
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const placeholderLinkRef = useRef<HTMLAnchorElement>(null);
 	const [loaded, setLoaded] = useState(false);
+	const { darkModeAvailable, renderingTarget } = useConfig();
+
+	// Define some one-time flags
+	const isDatawrapperGraphic =
+		url && url.includes('interactive.guim.co.uk/datawrapper')
+			? true
+			: false;
+
+	const isUploaderEmbedPath =
+		url &&
+		(url.includes('interactive.guim.co.uk/uploader/embed/') ||
+			url.includes('superyacht') ||
+			url.includes('choropleth_map_maker'))
+			? true
+			: false;
+
+	const scriptUrlIsBoot =
+		scriptUrl &&
+		scriptUrl.includes(
+			'interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js',
+		)
+			? true
+			: false;
+
 	useOnce(() => {
 		// We've brought the behavior from boot.js into this file to avoid loading 2 extra scripts
-		if (
-			scriptUrl ===
-				'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js' &&
-			url &&
-			placeholderLinkRef.current
-		) {
+
+		const prefersDarkScheme = window.matchMedia(
+			'(prefers-color-scheme: dark)',
+		).matches;
+		const requiresDarkMode =
+			darkModeAvailable && prefersDarkScheme ? true : false;
+
+		if (url && scriptUrlIsBoot && placeholderLinkRef.current) {
+			// Prepare for graphic url dynamic updates
+			const graphicUrl = new URL(url);
+
+			// Begin creating new iframe element
 			const iframe = document.createElement('iframe');
 			iframe.style.width = '100%';
 			iframe.style.border = 'none';
 			iframe.height = decideHeight(role).toString();
 			iframe.title = caption ?? alt ?? 'Interactive Content';
-			if (url.startsWith('http:')) {
-				iframe.src = url.replace('http:', 'https:');
-			} else {
-				iframe.src = url;
+
+			// Fix for Datawrapper graphic
+			if (isDatawrapperGraphic) {
+				iframe.scrolling = 'no';
 			}
+
+			// Fix darkmode for web environment
+			if (renderingTarget === 'Web' && !requiresDarkMode) {
+				if (isDatawrapperGraphic || isUploaderEmbedPath) {
+					// Add the 'dark=false' search param
+					if (graphicUrl.search.length) {
+						graphicUrl.search += '&dark=false';
+					} else {
+						// Embed URLs without a trailing slash are redirected and the
+						// search param is lost so we need to add it to the pathname
+						const hasTrailingSlash = graphicUrl.pathname.endsWith(
+							'/',
+						)
+							? true
+							: false;
+						graphicUrl.pathname += hasTrailingSlash ? '' : '/';
+						graphicUrl.search += '?dark=false';
+					}
+				}
+			}
+
+			// Always serve graphic over https, not http
+			graphicUrl.protocol = 'https:';
+
+			// Finalise new iframe element
+			iframe.src = graphicUrl.href;
 
 			setupWindowListeners(iframe);
 
@@ -373,13 +430,6 @@ export const InteractiveBlockComponent = ({
 			setLoaded(true);
 		}
 	}, [loaded]);
-
-	const isDatawrapperGraphic =
-		url == undefined
-			? false
-			: /^https?:\/\/interactive\.guim\.co\.uk\/datawrapper(-test)?\/embed/.test(
-					url,
-			  );
 
 	return (
 		<>
@@ -427,6 +477,7 @@ export const InteractiveBlockComponent = ({
 						captionText={caption}
 						format={format}
 						isMainMedia={isMainMedia}
+						isImmersive={role === 'immersive'}
 					/>
 				)}
 			</figure>

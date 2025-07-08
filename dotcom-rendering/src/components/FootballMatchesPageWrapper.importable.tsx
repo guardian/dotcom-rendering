@@ -1,52 +1,113 @@
-import type { FootballMatches, FootballMatchKind } from '../footballMatches';
+import { isObject, isUndefined } from '@guardian/libs';
+import type { Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
+import {
+	type FootballMatches,
+	getParserErrorMessage,
+	parse,
+} from '../footballMatches';
+import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
 import type { EditionId } from '../lib/edition';
-import type { Nations } from './FootballCompetitionSelect';
+import type { Result } from '../lib/result';
+import { error, ok } from '../lib/result';
+import type { FootballMatchListPageKind, Region } from '../sportDataPage';
 import { FootballMatchesPage } from './FootballMatchesPage';
 
-const getPagePath = (kind: FootballMatchKind) => {
-	switch (kind) {
-		case 'Fixture':
-			return 'fixtures';
-		case 'Live':
-			return 'live';
-		case 'Result':
-			return 'results';
-	}
-};
+export const getMoreDays =
+	(
+		ajaxUrl: string,
+		nextPage: string,
+		setNextPage: Dispatch<SetStateAction<string | undefined>>,
+	) =>
+	async (): Promise<Result<'failed', FootballMatches>> => {
+		try {
+			const fetchResponse = await fetch(`${ajaxUrl}${nextPage}.json?dcr`);
+
+			const responseJson: unknown = await fetchResponse.json();
+
+			if (isObject(responseJson)) {
+				const feFootballData = responseJson as FEFootballMatchListPage;
+				const parsedFootballMatches = parse(feFootballData.matchesList);
+
+				if (parsedFootballMatches.kind === 'error') {
+					throw new Error(
+						`Failed to parse matches: ${getParserErrorMessage(
+							parsedFootballMatches.error,
+						)}`,
+					);
+				}
+
+				setNextPage(feFootballData.nextPage);
+
+				return ok(parsedFootballMatches.value);
+			}
+			throw new Error('Failed to parse response JSON as an object');
+		} catch (e) {
+			if (e instanceof Error) {
+				window.guardian.modules.sentry.reportError(
+					e,
+					'get-more-football-matches-button',
+				);
+			}
+
+			return error('failed');
+		}
+	};
 
 const goToCompetitionSpecificPage =
-	(guardianBaseUrl: string, kind: FootballMatchKind) => (tag: string) => {
-		const url =
-			tag === 'All'
-				? `${guardianBaseUrl}/football/${getPagePath(kind)}`
-				: `${guardianBaseUrl}/${tag}/${getPagePath(kind)}`;
+	(guardianBaseUrl: string) => (path: string) => {
+		const url = `${guardianBaseUrl}${path}`;
 		window.location.assign(url);
 	};
 
 type Props = {
-	nations: Nations;
+	regions: Region[];
+	now: string;
 	guardianBaseUrl: string;
-	kind: FootballMatchKind;
+	ajaxUrl: string;
+	kind: FootballMatchListPageKind;
 	initialDays: FootballMatches;
+	secondPage?: string;
+	nextPageNoJsUrl?: string;
 	edition: EditionId;
+	renderAds: boolean;
+	pageId: string;
 };
 
 export const FootballMatchesPageWrapper = ({
-	nations,
+	regions,
+	now,
 	guardianBaseUrl,
+	ajaxUrl,
 	kind,
 	initialDays,
+	secondPage,
+	nextPageNoJsUrl,
 	edition,
-}: Props) => (
-	<FootballMatchesPage
-		nations={nations}
-		guardianBaseUrl={guardianBaseUrl}
-		kind={kind}
-		initialDays={initialDays}
-		edition={edition}
-		goToCompetitionSpecificPage={goToCompetitionSpecificPage(
-			guardianBaseUrl,
-			kind,
-		)}
-	/>
-);
+	renderAds,
+	pageId,
+}: Props) => {
+	const [nextPage, setNextPage] = useState(secondPage);
+
+	return (
+		<FootballMatchesPage
+			regions={regions}
+			guardianBaseUrl={guardianBaseUrl}
+			kind={kind}
+			initialDays={initialDays}
+			now={now}
+			edition={edition}
+			nextPageNoJsUrl={nextPageNoJsUrl}
+			goToCompetitionSpecificPage={goToCompetitionSpecificPage(
+				guardianBaseUrl,
+			)}
+			getMoreDays={
+				isUndefined(nextPage)
+					? undefined
+					: getMoreDays(ajaxUrl, nextPage, setNextPage)
+			}
+			renderAds={renderAds}
+			pageId={pageId}
+		/>
+	);
+};

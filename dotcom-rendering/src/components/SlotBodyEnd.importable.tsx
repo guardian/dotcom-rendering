@@ -5,7 +5,7 @@ import type {
 } from '@guardian/braze-components/logic';
 import { adSizes, type SizeMapping } from '@guardian/commercial';
 import type { CountryCode } from '@guardian/libs';
-import { getCookie, isString, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import type { ModuleData } from '@guardian/support-dotcom-components/dist/dotcom/types';
@@ -99,20 +99,6 @@ const buildBrazeEpicConfig = (
 	};
 };
 
-const useBrowserId = () => {
-	const [browserId, setBrowserId] = useState<string>();
-
-	useEffect(() => {
-		const cookie = getCookie({ name: 'bwid', shouldMemoize: true });
-
-		const id = isString(cookie) ? cookie : 'no-browser-id-available';
-
-		setBrowserId(id);
-	}, []);
-
-	return browserId;
-};
-
 export const SlotBodyEnd = ({
 	contentType,
 	sectionId,
@@ -131,7 +117,6 @@ export const SlotBodyEnd = ({
 	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
 	const countryCode = useCountryCode('slot-body-end');
 	const isSignedIn = useIsSignedIn();
-	const browserId = useBrowserId();
 	const ophanPageViewId = usePageViewId(renderingTarget);
 	const [SelectedEpic, setSelectedEpic] = useState<
 		React.ElementType | null | undefined
@@ -168,7 +153,6 @@ export const SlotBodyEnd = ({
 			isUndefined(countryCode) ||
 			isUndefined(brazeMessages) ||
 			isUndefined(asyncArticleCount) ||
-			isUndefined(browserId) ||
 			isUndefined(ophanPageViewId) ||
 			isSignedIn === 'Pending'
 		) {
@@ -187,9 +171,9 @@ export const SlotBodyEnd = ({
 			contributionsServiceUrl,
 			idApiUrl,
 			asyncArticleCount,
-			browserId,
 			renderingTarget,
 			ophanPageViewId,
+			pageId,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
@@ -217,7 +201,6 @@ export const SlotBodyEnd = ({
 		countryCode,
 		brazeMessages,
 		asyncArticleCount,
-		browserId,
 		contentType,
 		contributionsServiceUrl,
 		idApiUrl,
@@ -228,6 +211,7 @@ export const SlotBodyEnd = ({
 		shouldHideReaderRevenue,
 		tags,
 		ophanPageViewId,
+		pageId,
 	]);
 
 	useEffect(() => {

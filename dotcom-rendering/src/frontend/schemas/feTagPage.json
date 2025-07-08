@@ -13,15 +13,35 @@
                                 "type": "boolean"
                             },
                             "showMainVideo": {
+                                "description": "Legacy fields retained for backward compatibility:\n`showMainVideo` and `imageSlideshowReplace` have been moved into `mediaSelect`,\nbut must remain at the top level to support unrepressed or older front data.",
                                 "type": "boolean"
+                            },
+                            "imageSlideshowReplace": {
+                                "type": "boolean"
+                            },
+                            "mediaSelect": {
+                                "type": "object",
+                                "properties": {
+                                    "showMainVideo": {
+                                        "type": "boolean"
+                                    },
+                                    "imageSlideshowReplace": {
+                                        "type": "boolean"
+                                    },
+                                    "videoReplace": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "required": [
+                                    "imageSlideshowReplace",
+                                    "showMainVideo",
+                                    "videoReplace"
+                                ]
                             },
                             "showKickerTag": {
                                 "type": "boolean"
                             },
                             "showByline": {
-                                "type": "boolean"
-                            },
-                            "imageSlideshowReplace": {
                                 "type": "boolean"
                             },
                             "maybeContent": {
@@ -407,13 +427,11 @@
                         },
                         "required": [
                             "editionBrandings",
-                            "imageSlideshowReplace",
                             "isBreaking",
                             "isCrossword",
                             "isLiveBlog",
                             "showByline",
                             "showKickerTag",
-                            "showMainVideo",
                             "webTitle"
                         ]
                     },
@@ -596,6 +614,9 @@
                             "boostLevel": {
                                 "$ref": "#/definitions/BoostLevel"
                             },
+                            "isImmersive": {
+                                "type": "boolean"
+                            },
                             "showBoostedHeadline": {
                                 "type": "boolean"
                             },
@@ -650,6 +671,9 @@
                                 "type": "string"
                             }
                         }
+                    },
+                    "mediaAtom": {
+                        "$ref": "#/definitions/FEMediaAtom"
                     },
                     "supportingContent": {
                         "type": "array",
@@ -1339,7 +1363,7 @@
                 "assets": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/MediaAsset"
+                        "$ref": "#/definitions/FEMediaAsset"
                     }
                 },
                 "title": {
@@ -1352,6 +1376,20 @@
                     "type": "string"
                 },
                 "posterImage": {
+                    "type": "object",
+                    "properties": {
+                        "allImages": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Image"
+                            }
+                        }
+                    },
+                    "required": [
+                        "allImages"
+                    ]
+                },
+                "trailImage": {
                     "type": "object",
                     "properties": {
                         "allImages": {
@@ -1378,7 +1416,7 @@
                 "title"
             ]
         },
-        "MediaAsset": {
+        "FEMediaAsset": {
             "type": "object",
             "properties": {
                 "id": {
