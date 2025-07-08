@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, space } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import { Hide, SvgMediaControlsPlay } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
@@ -127,7 +127,6 @@ const immersiveOverlayContainerStyles = css`
  * reduced.) The following article has more detail on non-linear gradients:
  * https://css-tricks.com/easing-linear-gradients/
  */
-
 const overlayMaskGradientStyles = (angle: string) => css`
 	mask-image: linear-gradient(
 		${angle},
@@ -201,6 +200,10 @@ const starRatingWrapper = css`
 
 const trailTextWrapper = css`
 	margin-top: ${space[3]}px;
+
+	${until.tablet} {
+		display: none;
+	}
 `;
 
 const videoPillStyles = css`
