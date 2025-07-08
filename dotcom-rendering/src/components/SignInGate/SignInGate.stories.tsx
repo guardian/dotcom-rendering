@@ -2,6 +2,7 @@ import { type EditionId } from '../../lib/edition';
 import type { TagType } from '../../types/tag';
 import { Section } from '../Section';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
+import { SignInGateAuxiaV1 } from './gateDesigns/SignInGateAuxiaV1';
 import { SignInGateCustomizableText } from './gateDesigns/SignInGateCustomizableText';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
@@ -263,3 +264,13 @@ export const signInGateSelectorStoryNoTreatment = () => {
 
 signInGateSelectorStoryNoTreatment.storyName =
 	'sign_in_gate_selector_no_treatment';
+
+export const signInGateAuxiaV1 = () => {
+	return (
+		<Section fullWidth={true}>
+			<SignInGateAuxiaV1 />
+		</Section>
+	);
+};
+
+signInGateAuxiaV1.storyName = 'sign_in_gate_auxia_v1';

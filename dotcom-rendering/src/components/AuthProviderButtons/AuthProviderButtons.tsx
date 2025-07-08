@@ -32,6 +32,10 @@ export const mainSectionStyles = css`
 	display: flex;
 	flex-direction: column;
 	gap: ${SECTION_GAP};
+
+	${from.phablet} {
+		flex-direction: row;
+	}
 `;
 
 type ButtonWidth = 'full' | 'half';
@@ -77,7 +81,7 @@ const SocialButton = ({
 				cssOverrides={secondaryButtonStyles()}
 				icon={icon}
 				href={buildUrlWithQueryParams(
-					'/signin/:social',
+					'https://profile.theguardian.com/signin/:social',
 					{
 						social: socialProvider,
 					},
@@ -99,7 +103,7 @@ const authProviderButtonLabel = (label: string) => {
 			? label
 			: label.charAt(0).toUpperCase() + label.slice(1);
 
-	return `Continue with ${capitalisedLabel}`;
+	return `Sign in with ${capitalisedLabel}`;
 };
 
 const socialButtonIcon = (socialProvider: string): React.ReactElement => {
@@ -155,7 +159,7 @@ export const AuthProviderButtons = ({
 					cssOverrides={secondaryButtonStyles()}
 					priority="tertiary"
 					href={buildUrlWithQueryParams(
-						'/register/email',
+						'https://profile.theguardian.com/register/email',
 						{},
 						queryParams,
 					)}
