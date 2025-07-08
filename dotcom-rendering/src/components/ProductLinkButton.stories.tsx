@@ -1,24 +1,20 @@
-import { space } from '@guardian/source/foundations';
-import type { StoryFn } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { ProductLinkButton } from './ProductLinkButton';
 
-export default {
+const meta = {
 	component: ProductLinkButton,
 	title: 'Components/ProductLinkButton',
-	decorators: [
-		(Story: StoryFn) => (
-			<div style={{ padding: `${space[3]}px` }}>
-				<Story />
-			</div>
-		),
-	],
-};
+	parameters: {
+		layout: 'padded',
+	},
+	args: {
+		label: '£6.50 for 350g at Ollie’s Kimchi',
+		url: 'https://ollieskimchi.co.uk/shop/ols/products/ollies-kimchi',
+	},
+} satisfies Meta<typeof ProductLinkButton>;
 
-export const ProductLinkButtonStory = () => {
-	return (
-		<ProductLinkButton
-			label="£6.50 for 350g at Ollie’s Kimchi"
-			url="https://ollieskimchi.co.uk/shop/ols/products/ollies-kimchi"
-		/>
-	);
-};
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default = {} satisfies Story;
