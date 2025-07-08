@@ -1,11 +1,16 @@
 import { css } from '@emotion/react';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import {
+	defaultFormats,
+	splitTheme,
+} from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	getAllThemes,
+	Pillar,
 } from '../lib/articleFormat';
+import { palette } from '../palette';
 import { SubMeta } from './SubMeta';
 
 export default {
@@ -74,7 +79,46 @@ export const StandardStory = ({ format }: StoryProps) => {
 	);
 };
 StandardStory.storyName = 'Standard - All pillars';
-StandardStory.decorators = [splitTheme()];
+StandardStory.decorators = [
+	splitTheme(
+		[...defaultFormats].filter(
+			(format) => format.design !== ArticleDesign.Gallery,
+		),
+	),
+];
+
+export const GalleryStory = ({ format }: StoryProps) => {
+	return (
+		<SubMeta
+			format={format}
+			subMetaKeywordLinks={subMetaKeywordLinks}
+			subMetaSectionLinks={subMetaSectionLinks}
+			pageId=""
+			webUrl=""
+			webTitle=""
+			showBottomSocialButtons={false} // Galelries do not have bottom social buttons
+		/>
+	);
+};
+GalleryStory.storyName = 'Gallery - All pillars';
+GalleryStory.decorators = [
+	splitTheme(
+		[
+			{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Gallery,
+				theme: Pillar.News,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
+GalleryStory.parameters = {
+	colourSchemeBackground: {
+		light: palette('--article-inner-background'),
+		dark: palette('--article-inner-background'),
+	},
+};
 
 const allDeadBlogThemes = getAllThemes({
 	display: ArticleDisplay.Standard,

@@ -11,6 +11,7 @@ import type { ReactNode } from 'react';
 import { Fragment } from 'react';
 import type { IOptions } from 'sanitize-html';
 import sanitise from 'sanitize-html';
+import { isSkimlink } from '../lib/affiliateLinksUtils';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -237,16 +238,6 @@ export const textBlockStyles = (format: ArticleFormat) => css`
 		word-wrap: break-word;
 	}
 `;
-
-/** A function to check if a URL represents an affiliate link */
-const isSkimlink = (url?: string): boolean => {
-	try {
-		return !!url && new URL(url).host === 'go.skimresources.com';
-	} catch (err: unknown) {
-		// If not a valid URL, it won't be an affiliate link
-		return false;
-	}
-};
 
 const buildElementTree =
 	(format: ArticleFormat, showDropCaps: boolean) =>

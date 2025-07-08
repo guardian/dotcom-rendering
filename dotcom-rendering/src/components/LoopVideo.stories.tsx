@@ -20,7 +20,7 @@ export const Default = {
 	name: 'Default',
 	args: {
 		src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
-		videoId: 'test-video-1',
+		uniqueId: 'test-video-1',
 		height: 720,
 		width: 900,
 		thumbnailImage:

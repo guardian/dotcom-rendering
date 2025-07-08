@@ -15,10 +15,12 @@ const videoStyles = (width: number, height: number) => css`
 	cursor: pointer;
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${width} / ${height};
+	object-fit: cover;
 `;
 
 const playIconStyles = css`
 	position: absolute;
+	/* Center the icon */
 	top: calc(50% - ${narrowPlayIconWidth / 2}px);
 	left: calc(50% - ${narrowPlayIconWidth / 2}px);
 	cursor: pointer;
@@ -49,31 +51,33 @@ const audioIconContainerStyles = css`
 	border: 1px solid ${palette('--loop-video-audio-icon-border')};
 `;
 
+export const PLAYER_STATES = [
+	'NOT_STARTED',
+	'PLAYING',
+	'PAUSED_BY_USER',
+	'PAUSED_BY_INTERSECTION_OBSERVER',
+] as const;
+
 type Props = {
 	src: string;
-	videoId: string;
+	uniqueId: string;
 	width: number;
 	height: number;
-	hasAudio: boolean;
 	fallbackImageComponent: JSX.Element;
 	isPlayable: boolean;
 	setIsPlayable: Dispatch<SetStateAction<boolean>>;
-	isPlaying: boolean;
-	setIsPlaying: Dispatch<SetStateAction<boolean>>;
+	playerState: (typeof PLAYER_STATES)[number];
 	currentTime: number;
 	setCurrentTime: Dispatch<SetStateAction<number>>;
 	isMuted: boolean;
-	setIsMuted: Dispatch<SetStateAction<boolean>>;
-	handleClick: (event: SyntheticEvent) => void;
+	handlePlayPauseClick: (event: SyntheticEvent) => void;
+	handleAudioClick: (event: SyntheticEvent) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	AudioIcon: (iconProps: IconProps) => JSX.Element;
-	/**
-	 * We ONLY show a thumbnail image when the user has indicated that they do
-	 * not want videos to play automatically, e.g. prefers reduced motion. Otherwise,
-	 * we do not bother downloading the image, as the video will be autoplayed.
-	 */
-	thumbnailImage?: string;
+	posterImage?: string;
+	preloadPartialData: boolean;
+	showPlayIcon: boolean;
 };
 
 /**
@@ -84,29 +88,28 @@ export const LoopVideoPlayer = forwardRef(
 	(
 		{
 			src,
-			videoId,
+			uniqueId,
 			width,
 			height,
-			hasAudio,
 			fallbackImageComponent,
-			thumbnailImage,
+			posterImage,
 			isPlayable,
 			setIsPlayable,
-			isPlaying,
-			setIsPlaying,
+			playerState,
 			currentTime,
 			setCurrentTime,
 			isMuted,
-			setIsMuted,
-			handleClick,
+			handlePlayPauseClick,
+			handleAudioClick,
 			handleKeyDown,
 			onError,
 			AudioIcon,
+			preloadPartialData,
+			showPlayIcon,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
-		// Assumes that the video is unique on the page.
-		const loopVideoId = `loop-video-${videoId}`;
+		const loopVideoId = `loop-video-${uniqueId}`;
 
 		return (
 			<>
@@ -114,16 +117,13 @@ export const LoopVideoPlayer = forwardRef(
 				<video
 					id={loopVideoId}
 					ref={ref}
-					preload={thumbnailImage ? 'metadata' : 'none'}
+					preload={preloadPartialData ? 'metadata' : 'none'}
 					loop={true}
 					muted={isMuted}
 					playsInline={true}
 					height={height}
 					width={width}
-					poster={thumbnailImage ?? undefined}
-					onPlaying={() => {
-						setIsPlaying(true);
-					}}
+					poster={posterImage}
 					onCanPlay={() => {
 						setIsPlayable(true);
 					}}
@@ -132,61 +132,58 @@ export const LoopVideoPlayer = forwardRef(
 							ref &&
 							'current' in ref &&
 							ref.current &&
-							isPlaying
+							playerState === 'PLAYING'
 						) {
 							setCurrentTime(ref.current.currentTime);
 						}
 					}}
-					onClick={handleClick}
+					onClick={handlePlayPauseClick}
 					onKeyDown={handleKeyDown}
 					role="button"
 					tabIndex={0}
 					onError={onError}
 					css={videoStyles(width, height)}
 				>
-					{/* Ensure webm source is provided. Encoding the video to a webm file will improve
-					performance on supported browsers. https://web.dev/articles/video-and-source-tags */}
-					{/* <source src={webmSrc} type="video/webm"> */}
-					<source src={src} type="video/mp4" />
+					{/* Only mp4 is currently supported. Assumes the video file type is mp4. */}
+					{/* The start time is set to 1ms so that Safari will autoplay the video */}
+					<source src={`${src}#t=0.001`} type="video/mp4" />
 					{fallbackImageComponent}
 				</video>
 				{ref && 'current' in ref && ref.current && isPlayable && (
 					<>
-						{!isPlaying && (
+						{/* Play icon */}
+						{showPlayIcon && (
 							<button
 								type="button"
-								onClick={handleClick}
+								onClick={handlePlayPauseClick}
 								css={playIconStyles}
 							>
 								<PlayIcon iconWidth="narrow" />
 							</button>
 						)}
+						{/* Progress bar */}
 						<LoopVideoProgressBar
 							videoId={loopVideoId}
 							currentTime={currentTime}
 							duration={ref.current.duration}
 						/>
-						{hasAudio && (
-							<button
-								type="button"
-								onClick={(event) => {
-									event.stopPropagation(); // Don't pause the video
-									setIsMuted(!isMuted);
-								}}
-								css={audioButtonStyles}
-							>
-								<div css={audioIconContainerStyles}>
-									<AudioIcon
-										size="xsmall"
-										theme={{
-											fill: palette(
-												'--loop-video-audio-icon',
-											),
-										}}
-									/>
-								</div>
-							</button>
-						)}
+						{/* Audio icon */}
+						<button
+							type="button"
+							onClick={handleAudioClick}
+							css={audioButtonStyles}
+						>
+							<div css={audioIconContainerStyles}>
+								<AudioIcon
+									size="xsmall"
+									theme={{
+										fill: palette(
+											'--loop-video-audio-icon',
+										),
+									}}
+								/>
+							</div>
+						</button>
 					</>
 				)}
 			</>

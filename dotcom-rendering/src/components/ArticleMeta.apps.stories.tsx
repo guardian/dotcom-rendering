@@ -207,8 +207,8 @@ export const GalleryDesign = {
 			renderingTarget: 'Apps',
 		},
 		colourSchemeBackground: {
-			light: palette('--article-background'),
-			dark: palette('--article-background'),
+			light: palette('--article-inner-background'),
+			dark: palette('--article-inner-background'),
 		},
 	},
 } satisfies Story;
@@ -240,8 +240,8 @@ export const GalleryLabsWithBranding = {
 			renderingTarget: 'Apps',
 		},
 		colourSchemeBackground: {
-			light: palette('--article-background'),
-			dark: palette('--article-background'),
+			light: palette('--article-inner-background'),
+			dark: palette('--article-inner-background'),
 		},
 	},
 } satisfies Story;
