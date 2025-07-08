@@ -121,7 +121,7 @@ const buildUrlForThreeTierChoiceCards = (
 		  );
 };
 
-const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
+const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	content,
 	onCloseClick,
 	articleCounts,
@@ -827,16 +827,10 @@ const styles = {
 	`,
 };
 
-const unvalidated = bannerWrapper(DesignableBannerV2, 'designable-banner');
-const validated = validatedBannerWrapper(
-	DesignableBannerV2,
-	'designable-banner',
-);
+const unvalidated = bannerWrapper(DesignableBanner, 'designable-banner');
+const validated = validatedBannerWrapper(DesignableBanner, 'designable-banner');
 
 export {
-	validated as DesignableBannerV2,
-	unvalidated as DesignableBannerUnvalidatedV2,
-	// temporarily until we can rename banner coming in through SDC
 	validated as DesignableBanner,
 	unvalidated as DesignableBannerUnvalidated,
 };

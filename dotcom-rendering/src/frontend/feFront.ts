@@ -124,6 +124,7 @@ export interface FEMediaAtom {
 	duration?: number;
 	source?: string;
 	posterImage?: { allImages: Image[] };
+	trailImage?: { allImages: Image[] };
 	expired?: boolean;
 	activeVersion?: number;
 	// channelId?: string; // currently unused
