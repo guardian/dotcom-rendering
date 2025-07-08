@@ -1,5 +1,5 @@
 import {
-	Button,
+	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
 
@@ -10,15 +10,15 @@ type ProductLinkButtonProps = {
 
 export const ProductLinkButton = ({ label, url }: ProductLinkButtonProps) => {
 	return (
-		<Button
-			onClick={() => {
-				window.open(url, '_blank');
-			}}
+		<LinkButton
+			href={url}
+			target="_blank"
+			rel="noopener noreferrer"
 			iconSide="right"
 			aria-label={`Open ${label} in a new tab`}
 			icon={<SvgArrowRightStraight />}
 		>
 			{label}
-		</Button>
+		</LinkButton>
 	);
 };
