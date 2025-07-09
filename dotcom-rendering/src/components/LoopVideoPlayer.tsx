@@ -166,7 +166,7 @@ export const LoopVideoPlayer = forwardRef(
 								type="button"
 								onClick={handlePlayPauseClick}
 								css={playIconStyles}
-								data-link-name="video-play-pause"
+								data-link-name={`gu-video-loop-play-${atomId}`}
 							>
 								<PlayIcon iconWidth="narrow" />
 							</button>
