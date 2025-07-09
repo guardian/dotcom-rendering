@@ -209,6 +209,7 @@ const getActiveMediaAtom = (
 		if (asset?.platform === 'Url' && isLoopingVideoTest) {
 			return {
 				type: 'LoopVideo',
+				atomId: mediaAtom.id,
 				videoId: asset.id,
 				duration: mediaAtom.duration ?? 0,
 				// Size fixed to a 5:4 ratio

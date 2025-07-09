@@ -60,6 +60,7 @@ export const PLAYER_STATES = [
 
 type Props = {
 	src: string;
+	atomId: string;
 	uniqueId: string;
 	width: number;
 	height: number;
@@ -88,6 +89,7 @@ export const LoopVideoPlayer = forwardRef(
 	(
 		{
 			src,
+			atomId,
 			uniqueId,
 			width,
 			height,
@@ -143,6 +145,9 @@ export const LoopVideoPlayer = forwardRef(
 					tabIndex={0}
 					onError={onError}
 					css={videoStyles(width, height)}
+					data-link-name={`gu-video-loop-${
+						showPlayIcon ? 'play' : 'pause'
+					}-${atomId}`}
 				>
 					{/* Only mp4 is currently supported. Assumes the video file type is mp4. */}
 					{/* The start time is set to 1ms so that Safari will autoplay the video */}
@@ -157,6 +162,7 @@ export const LoopVideoPlayer = forwardRef(
 								type="button"
 								onClick={handlePlayPauseClick}
 								css={playIconStyles}
+								data-link-name={`gu-video-loop-play-${atomId}`}
 							>
 								<PlayIcon iconWidth="narrow" />
 							</button>
@@ -172,6 +178,9 @@ export const LoopVideoPlayer = forwardRef(
 							type="button"
 							onClick={handleAudioClick}
 							css={audioButtonStyles}
+							data-link-name={`gu-video-loop-${
+								isMuted ? 'unmute' : 'mute'
+							}-${atomId}`}
 						>
 							<div css={audioIconContainerStyles}>
 								<AudioIcon

@@ -3914,6 +3914,9 @@
                             "type": "string",
                             "const": "LoopVideo"
                         },
+                        "atomId": {
+                            "type": "string"
+                        },
                         "videoId": {
                             "type": "string"
                         },
@@ -3931,6 +3934,7 @@
                         }
                     },
                     "required": [
+                        "atomId",
                         "duration",
                         "height",
                         "type",

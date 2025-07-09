@@ -915,6 +915,7 @@ export const Card = ({
 										/>
 									}
 									uniqueId={uniqueId}
+									atomId={media.mainMedia.atomId}
 								/>
 							</Island>
 						)}

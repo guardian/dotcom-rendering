@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
+import { submitClickComponentEvent } from '../client/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { useIsInView } from '../lib/useIsInView';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
@@ -33,6 +34,7 @@ export const dispatchCustomPlayAudioEvent = (uniqueId: string) => {
 
 type Props = {
 	src: string;
+	atomId: string;
 	uniqueId: string;
 	width: number;
 	height: number;
@@ -42,6 +44,7 @@ type Props = {
 
 export const LoopVideo = ({
 	src,
+	atomId,
 	uniqueId,
 	width,
 	height,
@@ -264,6 +267,8 @@ export const LoopVideo = ({
 	};
 
 	const handleAudioClick = (event: React.SyntheticEvent) => {
+		void submitClickComponentEvent(event.currentTarget, renderingTarget);
+
 		event.stopPropagation(); // Don't pause the video
 
 		if (isMuted) {
@@ -339,9 +344,11 @@ export const LoopVideo = ({
 			ref={setNode}
 			css={videoContainerStyles}
 			className="loop-video-container"
+			data-component="gu-video-loop"
 		>
 			<LoopVideoPlayer
 				src={src}
+				atomId={atomId}
 				uniqueId={uniqueId}
 				width={width}
 				height={height}
