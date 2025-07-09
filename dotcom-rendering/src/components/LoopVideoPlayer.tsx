@@ -149,6 +149,9 @@ export const LoopVideoPlayer = forwardRef(
 					tabIndex={0}
 					onError={onError}
 					css={videoStyles(width, height)}
+					data-link-name={`gu-video-loop-${
+						showPlayIcon ? 'play' : 'pause'
+					}-${atomId}`}
 				>
 					{/* Only mp4 is currently supported. Assumes the video file type is mp4. */}
 					{/* The start time is set to 1ms so that Safari will autoplay the video */}
