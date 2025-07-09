@@ -232,6 +232,7 @@ export const NewsletterSignupLayout = ({
 								shouldHideReaderRevenue={
 									!!article.config.shouldHideReaderRevenue
 								}
+								abTests={article.config.abTests}
 							/>
 						</Section>
 					</Stuck>
