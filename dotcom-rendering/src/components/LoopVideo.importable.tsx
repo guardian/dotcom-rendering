@@ -33,6 +33,7 @@ export const dispatchCustomPlayAudioEvent = (uniqueId: string) => {
 
 type Props = {
 	src: string;
+	atomId: string;
 	uniqueId: string;
 	width: number;
 	height: number;
@@ -42,6 +43,7 @@ type Props = {
 
 export const LoopVideo = ({
 	src,
+	atomId,
 	uniqueId,
 	width,
 	height,
@@ -343,6 +345,7 @@ export const LoopVideo = ({
 		>
 			<LoopVideoPlayer
 				src={src}
+				atomId={atomId}
 				uniqueId={uniqueId}
 				width={width}
 				height={height}

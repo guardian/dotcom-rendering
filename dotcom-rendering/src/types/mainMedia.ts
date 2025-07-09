@@ -21,6 +21,7 @@ type Video = Media & {
 
 type LoopVideo = Media & {
 	type: 'LoopVideo';
+	atomId: string;
 	videoId: string;
 	height: number;
 	width: number;

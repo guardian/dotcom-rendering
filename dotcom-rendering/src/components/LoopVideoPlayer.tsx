@@ -62,6 +62,7 @@ export const PLAYER_STATES = [
 
 type Props = {
 	src: string;
+	atomId: string;
 	uniqueId: string;
 	width: number;
 	height: number;
@@ -90,6 +91,7 @@ export const LoopVideoPlayer = forwardRef(
 	(
 		{
 			src,
+			atomId,
 			uniqueId,
 			width,
 			height,
