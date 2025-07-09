@@ -65,15 +65,11 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const isAccessibilityPage =
 		tagPage.config.pageId === 'help/accessibility-help';
 
-	console.log('tagPage', tagPage.webURL);
-
 	// const isTestTagPage =
 	// 	tagPage.webURL === 'https://www.theguardian.com/sport/tennis' &&
 	// 	tagPage.config.isDev;
 	// console.log('isTestTagePage', isTestTagPage);
 	const isTestTagPage = true;
-
-	console.log('tagpage', tagPage);
 
 	const tag = tagPage.pageId;
 
