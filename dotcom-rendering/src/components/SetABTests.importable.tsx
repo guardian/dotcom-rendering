@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { getOphan } from '../client/ophan/ophan';
 import { tests } from '../experiments/ab-tests';
 import { runnableTestsToParticipations } from '../experiments/lib/ab-participations';
+import { BetaABTests } from '../experiments/lib/beta-ab-tests';
 import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
 import { setABTests } from '../lib/useAB';
 import type { ABTestSwitches } from '../model/enhance-switches';
@@ -97,6 +98,15 @@ export const SetABTests = ({
 			...getForcedParticipationsFromUrl(window.location.hash),
 		};
 
+		const betaAb = new BetaABTests({
+			ophanRecord: ophan.record,
+			errorReporter: (e) =>
+				window.guardian.modules.sentry.reportError(
+					e instanceof Error ? e : Error(String(e)),
+					'ab-tests',
+				),
+		});
+
 		const ab = new AB({
 			mvtId: mvtId ?? -1,
 			mvtMaxValue,
@@ -123,6 +133,7 @@ export const SetABTests = ({
 		ab.trackABTests(allRunnableTests);
 		ab.registerImpressionEvents(allRunnableTests);
 		ab.registerCompleteEvents(allRunnableTests);
+		betaAb.trackABTests();
 		log('dotcom', 'AB tests initialised');
 	}, [
 		abTestSwitches,

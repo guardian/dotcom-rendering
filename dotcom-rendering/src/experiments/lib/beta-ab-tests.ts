@@ -4,6 +4,7 @@ const AB_COOKIE_NAME = 'Client_AB_Tests';
 
 type ABTestAPI = {
 	isUserInTest: (testId: string, variantId: string) => boolean;
+	trackABTests: () => void;
 };
 
 type ABParticipations = {
@@ -40,23 +41,26 @@ const makeABEvent = (variantName: string, complete: boolean): OphanABEvent => {
 
 export class BetaABTests implements ABTestAPI {
 	private participations: ABParticipations;
+	private ophanRecord: OphanRecordFunction;
+	private errorReporter: ErrorReporter;
 
 	constructor({ ophanRecord, errorReporter }: BetaABTestsConfig) {
 		this.participations = this.getParticipations();
-		this.trackABTests({ ophanRecord, errorReporter });
+		this.ophanRecord = ophanRecord;
+		this.errorReporter = errorReporter;
 	}
 
 	isUserInTest(testId: string, variantId: string): boolean {
 		return this.participations[testId] === variantId;
 	}
 
-	private trackABTests({ ophanRecord, errorReporter }: BetaABTestsConfig) {
-		ophanRecord({
-			abTestRegister: this.buildOphanPayload(errorReporter),
+	trackABTests(): void {
+		this.ophanRecord({
+			abTestRegister: this.buildOphanPayload(),
 		});
 	}
 
-	private buildOphanPayload(errorReporter: ErrorReporter) {
+	private buildOphanPayload() {
 		try {
 			const log: OphanABPayload = {};
 
@@ -69,7 +73,7 @@ export class BetaABTests implements ABTestAPI {
 			return log;
 		} catch (error: unknown) {
 			// Encountering an error should invalidate the logging process.
-			errorReporter(error);
+			this.errorReporter(error);
 			return {};
 		}
 	}
