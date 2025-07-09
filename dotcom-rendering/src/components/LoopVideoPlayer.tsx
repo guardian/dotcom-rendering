@@ -161,13 +161,7 @@ export const LoopVideoPlayer = forwardRef(
 						{showPlayIcon && (
 							<button
 								type="button"
-								onClick={(event) => {
-									void submitClickComponentEvent(
-										event.currentTarget,
-										renderingTarget,
-									);
-									handlePlayPauseClick(event);
-								}}
+								onClick={handlePlayPauseClick}
 								css={playIconStyles}
 								data-link-name="video-play-pause"
 							>
