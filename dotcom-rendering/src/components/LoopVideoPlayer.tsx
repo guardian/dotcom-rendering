@@ -3,10 +3,8 @@ import { space } from '@guardian/source/foundations';
 import type { IconProps } from '@guardian/source/react-components';
 import type { Dispatch, SetStateAction, SyntheticEvent } from 'react';
 import { forwardRef } from 'react';
-import { submitClickComponentEvent } from '../client/ophan/ophan';
 import { palette } from '../palette';
 import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
-import { useConfig } from './ConfigContext';
 import { LoopVideoProgressBar } from './LoopVideoProgressBar';
 
 const videoStyles = (width: number, height: number) => css`
@@ -114,7 +112,6 @@ export const LoopVideoPlayer = forwardRef(
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
 		const loopVideoId = `loop-video-${uniqueId}`;
-		const { renderingTarget } = useConfig();
 
 		return (
 			<>
@@ -179,14 +176,7 @@ export const LoopVideoPlayer = forwardRef(
 						{/* Audio icon */}
 						<button
 							type="button"
-							onClick={(event) => {
-								void submitClickComponentEvent(
-									event.currentTarget,
-									renderingTarget,
-								);
-								event.stopPropagation(); // Don't pause the video
-								handleAudioClick(event);
-							}}
+							onClick={handleAudioClick}
 							css={audioButtonStyles}
 							data-link-name={`gu-video-loop-${
 								isMuted ? 'unmute' : 'mute'
