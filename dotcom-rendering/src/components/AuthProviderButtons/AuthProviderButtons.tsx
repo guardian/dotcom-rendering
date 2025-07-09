@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, remSpace } from '@guardian/source/foundations';
+import { from, palette, remSpace } from '@guardian/source/foundations';
 import {
 	LinkButton,
 	SvgAppleBrand,
@@ -16,6 +16,7 @@ type AuthProviderButtonsProps = {
 	queryParams: QueryParams;
 	isNativeApp?: IsNativeApp;
 	providers: AuthButtonProvider[];
+	onClick?: (provider: AuthButtonProvider) => void;
 };
 
 type AuthProviderButtonProps = {
@@ -23,6 +24,7 @@ type AuthProviderButtonProps = {
 	icon: React.ReactElement;
 	socialProvider: string;
 	queryParams: QueryParams;
+	onClick?: (provider: AuthButtonProvider) => void;
 };
 
 // The gap between elements in the main section of MinimalLayout.
@@ -54,17 +56,18 @@ const sharedButtonStyles = (width: ButtonWidth = 'full') => css`
 
 export const secondaryButtonStyles = (width: ButtonWidth = 'full') => css`
 	${sharedButtonStyles(width)}
-	background-color: var(--color-button-secondary-background);
-	border-color: var(--color-button-secondary-border);
-	color: var(--color-button-secondary-text);
+	background-color: ${palette.neutral[100]};
+	border-color: ${palette.brand[400]};
+	color: ${palette.brand[400]};
 	&:hover {
-		background-color: var(--color-button-secondary-background-hover);
+		background-color: ${palette.neutral[93]};
 	}
 `;
 
 const appleIconOverrides = css`
 	svg path {
-		fill: var(--color-button-secondary-text) !important;
+		/* stylelint-disable-next-line declaration-no-important */
+		fill: ${palette.brand[400]} !important;
 	}
 `;
 
@@ -73,6 +76,7 @@ const SocialButton = ({
 	icon,
 	socialProvider,
 	queryParams,
+	onClick,
 }: AuthProviderButtonProps) => {
 	return (
 		<>
@@ -87,6 +91,7 @@ const SocialButton = ({
 					},
 					queryParams,
 				)}
+				onClick={() => onClick?.(socialProvider as AuthButtonProvider)}
 				data-cy={`${socialProvider}-sign-in-button`}
 				data-link-name={`${socialProvider}-social-button`}
 			>
@@ -139,6 +144,7 @@ export const AuthProviderButtons = ({
 	queryParams,
 	isNativeApp,
 	providers,
+	onClick,
 }: AuthProviderButtonsProps) => {
 	const buttonOrder = getButtonOrder(isNativeApp);
 	return (
@@ -151,6 +157,7 @@ export const AuthProviderButtons = ({
 						icon={socialButtonIcon(socialProvider)}
 						socialProvider={socialProvider}
 						queryParams={queryParams}
+						onClick={onClick}
 					/>
 				))}
 			{providers.includes('email') && (
@@ -163,6 +170,7 @@ export const AuthProviderButtons = ({
 						{},
 						queryParams,
 					)}
+					onClick={() => onClick?.('email')}
 				>
 					{authProviderButtonLabel('email')}
 				</LinkButton>

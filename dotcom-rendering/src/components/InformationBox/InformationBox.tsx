@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	palette,
 	remSpace,
 	textSans14,
 	textSansBold14,
@@ -8,8 +9,8 @@ import type { PropsWithChildren } from 'react';
 import React from 'react';
 
 const informationBoxStyles = css`
-	background-color: #ededed;
-	color: #121212;
+	background-color: ${palette.neutral[93]};
+	color: ${palette.neutral[7]};
 	border-radius: 4px;
 	padding: ${remSpace[2]} ${remSpace[3]} ${remSpace[4]} ${remSpace[3]};
 `;

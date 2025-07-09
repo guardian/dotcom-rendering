@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { palette } from '@guardian/source/foundations';
 import { ButtonLink } from '@guardian/source/react-components';
 import type { Meta } from '@storybook/react';
 import { ExternalLink } from '../ExternalLink/ExternalLink';
@@ -14,9 +15,9 @@ export default {
 } as Meta;
 
 const buttonLinkStyles = css`
-	color: #0077b6;
+	color: ${palette.brand[500]};
 	:hover {
-		color: #0077b6;
+		color: ${palette.brand[500]};
 	}
 `;
 

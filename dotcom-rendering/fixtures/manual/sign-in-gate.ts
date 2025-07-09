@@ -6,10 +6,11 @@ export const mockAuxiaResponseDismissible = {
 			treatmentTrackingId: 'tracking-001',
 			surface: 'signin-gate',
 			treatmentContent: JSON.stringify({
-				title: 'Register for free and continue reading',
-				subtitle: "It's still free to read – this is not a paywall",
-				body: "We're committed to keeping our quality reporting open. By registering and providing us with insight into your preferences, you're helping us to engage with you more deeply.",
-				first_cta_name: 'Register for free',
+				title: 'Like uninterrupted reading?\nSo do we. Sign in.',
+				subtitle:
+					"Sign in to keep reading. It's free, and we'll bring you right back here in under a minute.",
+				body: '',
+				first_cta_name: 'Create a free account',
 				first_cta_link: 'https://profile.theguardian.com/register',
 				second_cta_name: "I'll do it later",
 			}),
@@ -25,10 +26,11 @@ export const mockAuxiaResponseNonDismissible = {
 			treatmentTrackingId: 'tracking-002',
 			surface: 'signin-gate',
 			treatmentContent: JSON.stringify({
-				title: 'Complete registration to continue reading',
-				subtitle: 'Registration is required to access this content',
-				body: 'To continue reading this article and access our quality journalism, please complete your registration.',
-				first_cta_name: 'Complete registration',
+				title: 'Like uninterrupted reading?\nSo do we. Sign in.',
+				subtitle:
+					"Sign in to keep reading. It's free, and we'll bring you right back here in under a minute.",
+				body: '',
+				first_cta_name: 'Create a free account',
 				first_cta_link: 'https://profile.theguardian.com/register',
 				second_cta_name: '', // Empty makes it non-dismissible
 			}),
@@ -44,10 +46,10 @@ export const mockAuxiaResponseLegacy = {
 			treatmentTrackingId: 'legacy-tracking',
 			surface: 'signin-gate',
 			treatmentContent: JSON.stringify({
-				title: 'Register to continue reading',
+				title: 'Like uninterrupted reading?\nSo do we. Sign in.',
 				subtitle: '',
 				body: '',
-				first_cta_name: 'Register',
+				first_cta_name: 'Create a free account',
 				first_cta_link: 'https://profile.theguardian.com/register',
 				second_cta_name: 'Not now',
 			}),

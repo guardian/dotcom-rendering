@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
+import { palette } from '@guardian/source/foundations';
 import type { LinkProps } from '@guardian/source/react-components';
 import { Link as SourceLink } from '@guardian/source/react-components';
 
 const linkThemeStyles = css`
-	color: #0077b6;
+	color: ${palette.brand[500]};
 	&:hover {
-		color: #0077b6;
+		color: ${palette.brand[500]};
 	}
 `;
 

@@ -19,7 +19,7 @@ import type { ComponentEventParams } from './SignInGate/componentEventTracking';
 import { submitComponentEventTracking } from './SignInGate/componentEventTracking';
 import { retrieveDismissedCount } from './SignInGate/dismissGate';
 import { pageIdIsAllowedForGating } from './SignInGate/displayRules';
-import { SignInGateAuxia } from './SignInGate/gateDesigns/SignInGateAuxia';
+import { SignInGateAuxiaV1 } from './SignInGate/gateDesigns/SignInGateAuxiaV1';
 import { signInGateComponent as gateLegacyComponent } from './SignInGate/gates/main-control';
 import type {
 	AuxiaAPIResponseDataUserTreatment,
@@ -641,20 +641,22 @@ const ShowSignInGateAuxia = ({
 	}, [componentId]);
 
 	return (
-		<SignInGateAuxia
-			guUrl={host}
-			signInUrl={signInUrl}
-			dismissGate={() => {
-				setShowGate(false);
-			}}
-			abTest={abTest}
-			ophanComponentId={componentId}
-			checkoutCompleteCookieData={checkoutCompleteCookieData}
-			personaliseSignInGateAfterCheckoutSwitch={
-				personaliseSignInGateAfterCheckoutSwitch
-			}
-			userTreatment={userTreatment}
-			logTreatmentInteractionCall={logTreatmentInteractionCall}
-		/>
+		<>
+			<SignInGateAuxiaV1
+				guUrl={host}
+				signInUrl={signInUrl}
+				dismissGate={() => {
+					setShowGate(false);
+				}}
+				abTest={abTest}
+				ophanComponentId={componentId}
+				checkoutCompleteCookieData={checkoutCompleteCookieData}
+				personaliseSignInGateAfterCheckoutSwitch={
+					personaliseSignInGateAfterCheckoutSwitch
+				}
+				userTreatment={userTreatment}
+				logTreatmentInteractionCall={logTreatmentInteractionCall}
+			/>
+		</>
 	);
 };
