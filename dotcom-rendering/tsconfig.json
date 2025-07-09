@@ -14,7 +14,8 @@
 			/* Aliases should also be added to the webpack and jest configurations */
 			"*": ["node_modules/@types/*", "*"] // Make sure that package linking doesn't confuse things https://github.com/microsoft/TypeScript/issues/11916#issuecomment-257130001
 		},
-		"preserveConstEnums": true
+		"preserveConstEnums": true,
+		"skipLibCheck": true // Temporary fix for canary version testing - skip type checking of dependency .d.ts files
 	},
 	"include": ["**/*", ".storybook/mocks/bridgetApi.ts"],
 	"exclude": [
