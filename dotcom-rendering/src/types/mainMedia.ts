@@ -16,7 +16,7 @@ type Video = Media & {
 	title: string;
 	duration: number;
 	expired: boolean;
-	images: Array<{ url: string; width: number }>;
+	image?: string;
 };
 
 type LoopVideo = Media & {
@@ -25,7 +25,7 @@ type LoopVideo = Media & {
 	height: number;
 	width: number;
 	duration: number;
-	thumbnailImage?: string;
+	image?: string;
 };
 
 type Audio = Media & {

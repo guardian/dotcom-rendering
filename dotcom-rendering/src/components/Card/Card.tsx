@@ -265,14 +265,12 @@ const getMedia = ({
 		return {
 			type: 'loop-video',
 			mainMedia,
-			...(imageUrl && { imageUrl }),
 		} as const;
 	}
 	if (mainMedia?.type === 'Video' && canPlayInline) {
 		return {
 			type: 'video',
 			mainMedia,
-			...(imageUrl && { imageUrl }),
 		} as const;
 	}
 	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
@@ -904,12 +902,12 @@ export const Card = ({
 									src={media.mainMedia.videoId}
 									height={media.mainMedia.height}
 									width={media.mainMedia.width}
-									thumbnailImage={
-										media.mainMedia.thumbnailImage ?? ''
-									}
+									image={media.mainMedia.image ?? ''}
 									fallbackImageComponent={
 										<CardPicture
-											mainImage={media.imageUrl ?? ''}
+											mainImage={
+												media.mainMedia.image ?? ''
+											}
 											imageSize={imageSize}
 											loading={imageLoading}
 											alt={media.imageAltText}
@@ -952,9 +950,8 @@ export const Card = ({
 																.duration
 												}
 												posterImage={
-													media.mainMedia.images
+													media.mainMedia.image
 												}
-												overrideImage={media.imageUrl}
 												width={media.mainMedia.width}
 												height={media.mainMedia.height}
 												origin={media.mainMedia.origin}
@@ -1013,15 +1010,7 @@ export const Card = ({
 									<div>
 										<CardPicture
 											mainImage={
-												media.imageUrl
-													? media.imageUrl
-													: media.mainMedia.images.reduce(
-															(prev, current) =>
-																prev.width >
-																current.width
-																	? prev
-																	: current,
-													  ).url
+												media.mainMedia.image ?? ''
 											}
 											imageSize={imageSize}
 											alt={headlineText}
