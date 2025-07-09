@@ -45,16 +45,28 @@ const adSlotContainerStyles = css`
 
 const adSlotStyles = css`
 	.ad-slot {
-		/* this is centring the ad iframe as they are display: inline; elements by default */
-		text-align: center;
+		/* used by native ads that set a background using messenger e.g. fabric that set a background outside of the ad using an absolutely positioned element */
+		position: relative;
+
+		width: fit-content;
+		margin-left: auto;
+		margin-right: auto;
 
 		/*
 			Ensure that the ad slot is centred,
 			the element with this class name is inserted by GAM into the ad slot
 		*/
 		.ad-slot__content {
-			margin-left: auto;
-			margin-right: auto;
+			/* When a native ad is served, GAM sets this to inline-block as an inline style, but we want it to be block as inline-block can cause whitespace to render newlines as white space, see https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Whitespace#:~:text=If%20there%20is%20formatting%20whitespace%20between%20adjacent%20inline%20elements%2C%20this%20will%20result%20in%20space%20in%20the%20layout%2C%20just%20like%20the%20spaces%20between%20words%20in%20text. */
+			/* stylelint-disable-next-line declaration-no-important */
+			display: block !important;
+
+			/* iframes are inline by default, so we need to set them to block to avoid the same whitespace quirk mentioned in the above comment */
+			iframe {
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+			}
 		}
 
 		@media print {

@@ -70,6 +70,7 @@ import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType, StarRating } from '../types/content';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
 import type { EditionId } from './edition';
+import { getLargestImageSize } from './image';
 
 type Props = {
 	format: ArticleFormat;
@@ -857,7 +858,9 @@ export const renderElement = ({
 						isMainMedia={isMainMedia}
 						expired={element.expired}
 						overrideImage={element.overrideImage}
-						posterImage={element.posterImage}
+						posterImage={
+							getLargestImageSize(element.posterImage ?? [])?.url
+						}
 						duration={element.duration}
 						mediaTitle={element.mediaTitle}
 						altText={element.altText}

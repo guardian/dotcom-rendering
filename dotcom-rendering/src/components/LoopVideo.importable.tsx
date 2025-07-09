@@ -38,7 +38,7 @@ type Props = {
 	uniqueId: string;
 	width: number;
 	height: number;
-	thumbnailImage: string;
+	image: string;
 	fallbackImageComponent: JSX.Element;
 };
 
@@ -48,7 +48,7 @@ export const LoopVideo = ({
 	uniqueId,
 	width,
 	height,
-	thumbnailImage,
+	image,
 	fallbackImageComponent,
 }: Props) => {
 	const adapted = useShouldAdapt();
@@ -220,9 +220,9 @@ export const LoopVideo = ({
 			isAutoplayAllowed === false ||
 			(isInView === false && !hasBeenInView)
 		) {
-			setPosterImage(thumbnailImage);
+			setPosterImage(image);
 		}
-	}, [isAutoplayAllowed, isInView, hasBeenInView, thumbnailImage]);
+	}, [isAutoplayAllowed, isInView, hasBeenInView, image]);
 
 	/**
 	 * We almost always want to preload some of the video data. If a user has prefers-reduced-motion
