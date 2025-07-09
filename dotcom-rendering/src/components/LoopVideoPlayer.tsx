@@ -113,7 +113,6 @@ export const LoopVideoPlayer = forwardRef(
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
-		// Assumes that the video is unique on the page.
 		const loopVideoId = `loop-video-${uniqueId}`;
 		const { renderingTarget } = useConfig();
 
