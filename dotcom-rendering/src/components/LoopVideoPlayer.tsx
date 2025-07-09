@@ -189,7 +189,9 @@ export const LoopVideoPlayer = forwardRef(
 								handleAudioClick(event);
 							}}
 							css={audioButtonStyles}
-							data-link-name="video-mute-toggle"
+							data-link-name={`gu-video-loop-${
+								isMuted ? 'unmute' : 'mute'
+							}-${atomId}`}
 						>
 							<div css={audioIconContainerStyles}>
 								<AudioIcon
