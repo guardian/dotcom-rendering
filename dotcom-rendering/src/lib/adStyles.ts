@@ -45,11 +45,9 @@ const adSlotContainerStyles = css`
 
 const adSlotStyles = css`
 	.ad-slot {
-		/* this is centring the ad iframe as they are display: inline; elements by default */
-		text-align: center;
-
 		/* used by native ads that set a background using messenger e.g. fabric that set a background outside of the ad using an absolutely positioned element */
 		position: relative;
+
 		width: fit-content;
 		margin-left: auto;
 		margin-right: auto;
