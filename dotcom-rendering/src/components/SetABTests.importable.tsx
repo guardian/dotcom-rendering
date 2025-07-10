@@ -7,7 +7,7 @@ import { tests } from '../experiments/ab-tests';
 import { runnableTestsToParticipations } from '../experiments/lib/ab-participations';
 import { BetaABTests } from '../experiments/lib/beta-ab-tests';
 import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
-import { setABTests } from '../lib/useAB';
+import { setABTests, setBetaABTests } from '../lib/useAB';
 import type { ABTestSwitches } from '../model/enhance-switches';
 import type { ServerSideTests } from '../types/config';
 import { useConfig } from './ConfigContext';
@@ -127,6 +127,8 @@ export const SetABTests = ({
 			api: ab,
 			participations,
 		});
+
+		setBetaABTests(betaAb);
 
 		ab.trackABTests(allRunnableTests);
 		ab.registerImpressionEvents(allRunnableTests);

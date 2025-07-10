@@ -2,7 +2,7 @@ import { getCookie } from '@guardian/libs';
 
 const AB_COOKIE_NAME = 'Client_AB_Tests';
 
-interface ABTestAPI {
+export interface BetaABTestAPI {
 	isUserInTest: (testId: string, variantId: string) => boolean;
 	trackABTests: () => void;
 }
@@ -63,7 +63,7 @@ const getParticipations = (): ABParticipations => {
 	return {};
 };
 
-export class BetaABTests implements ABTestAPI {
+export class BetaABTests implements BetaABTestAPI {
 	private participations: ABParticipations;
 	private ophanRecord: OphanRecordFunction;
 	private errorReporter: ErrorReporter;
