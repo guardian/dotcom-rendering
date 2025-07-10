@@ -1,16 +1,10 @@
-# Dotcom & Apps Rendering
+# Dotcom Rendering & Apps Rendering
 
-This repository contains the rendering code for theguardian.com.
+This repository contains the rendering logic for theguardian.com.
 
 It is a monorepo with 2 projects, `apps-rendering` and `dotcom-rendering`.
 
-## Install
-
-Run `pnpm install` in the root directory of this project to install all packages.
-
 ## Run
-
-You should always `cd` into the correct subdirectory before running commands
 
 ### `apps rendering`
 
