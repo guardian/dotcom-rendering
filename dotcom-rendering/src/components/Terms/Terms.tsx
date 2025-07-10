@@ -4,11 +4,17 @@ import { InformationBoxText } from '../InformationBox/InformationBox';
 export const GuardianTerms = () => (
 	<InformationBoxText>
 		By proceeding, you agree to our{' '}
-		<ExternalLink href="https://www.theguardian.com/help/terms-of-service">
+		<ExternalLink
+			href="https://www.theguardian.com/help/terms-of-service"
+			data-ignore="global-link-styling"
+		>
 			terms and conditions
 		</ExternalLink>
 		. For information about how we use your data, see our{' '}
-		<ExternalLink href="https://www.theguardian.com/help/privacy-policy">
+		<ExternalLink
+			href="https://www.theguardian.com/help/privacy-policy"
+			data-ignore="global-link-styling"
+		>
 			privacy policy
 		</ExternalLink>
 		.

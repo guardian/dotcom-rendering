@@ -94,6 +94,8 @@ const SocialButton = ({
 				onClick={() => onClick?.(socialProvider as AuthButtonProvider)}
 				data-cy={`${socialProvider}-sign-in-button`}
 				data-link-name={`${socialProvider}-social-button`}
+				data-testid="sign-in-gate-main_signin"
+				data-ignore="global-link-styling"
 			>
 				{authProviderButtonLabel(label)}
 			</LinkButton>
@@ -171,6 +173,8 @@ export const AuthProviderButtons = ({
 						queryParams,
 					)}
 					onClick={() => onClick?.('email')}
+					data-testid="sign-in-gate-main_signin"
+					data-ignore="global-link-styling"
 				>
 					{authProviderButtonLabel('email')}
 				</LinkButton>

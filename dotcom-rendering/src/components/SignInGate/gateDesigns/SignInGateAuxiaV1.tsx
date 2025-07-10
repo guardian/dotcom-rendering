@@ -17,7 +17,7 @@ import { InformationBox } from '../../InformationBox/InformationBox';
 import { GuardianTerms } from '../../Terms/Terms';
 import { trackLink } from '../componentEventTracking';
 import type { SignInGatePropsAuxia, TreatmentContentDecoded } from '../types';
-import { signInGateContainer } from './shared';
+import { hideElementsCss, signInGateContainer } from './shared';
 
 const DividerWithOr = () => {
 	return (
@@ -56,12 +56,15 @@ export const SignInGateAuxiaV1 = ({
 
 	return (
 		<div css={signInGateContainer} data-testid="sign-in-gate-main">
+			<style>{hideElementsCss}</style>
 			<div css={topBar}>
 				<SvgGuardianLogo textColor="#041F4A" width={96} />
 
 				{isDismissible && (
 					<button
 						type="button"
+						data-testid="sign-in-gate-main_dismiss"
+						data-ignore="global-link-styling"
 						css={dismissButtonStyles}
 						onClick={() => {
 							dismissGate();
@@ -147,6 +150,8 @@ export const SignInGateAuxiaV1 = ({
 								'REGISTER-LINK',
 							);
 						}}
+						data-testid="sign-in-gate-main_register"
+						data-ignore="global-link-styling"
 					>
 						{firstCtaName}
 					</ExternalLink>
