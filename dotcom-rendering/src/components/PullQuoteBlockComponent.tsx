@@ -171,6 +171,10 @@ const supportingQuoteCss = css`
 	clear: left;
 	float: left;
 
+	${until.phablet} {
+		float: none;
+	}
+
 	${from.phablet} {
 		width: 40%;
 	}
