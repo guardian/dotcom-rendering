@@ -64,9 +64,6 @@ export const Island = ({ priority, defer, children, role }: IslandProps) => {
 
 	return (
 		<IslandProvider value={{ child: true }}>
-			<code style={{ fontFamily: 'monospace', color: 'hotpink' }}>
-				{name} = {island.child ? 'child' : 'parent'}
-			</code>
 			{/* Child islands defer to nearest parent island for hydration */}
 			{island.child ? (
 				children
