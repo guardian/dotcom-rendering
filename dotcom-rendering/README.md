@@ -1,25 +1,48 @@
 # Dotcom Rendering
 
-Frontend rendering framework for theguardian.com. It uses [React](https://reactjs.org/), with [Emotion](https://emotion.sh) for styling.
+The rendering framework for theguardian.com.
+
+It primarily uses [TypeScript](https://www.typescriptlang.org/), [Node.js](https://nodejs.org/en), [Express](https://expressjs.com/), [React](https://reactjs.org/) and [Emotion](https://emotion.sh).
 
 ## Getting started
 
 This guide will help you get the `dotcom-rendering` application running on your development machine.
 
-To download the repository
+Start in your `~/code` directory:
+
+```
+$ cd ~/code
+```
+
+Clone the repository from GitHub:
 
 ```
 $ git clone git@github.com:guardian/dotcom-rendering.git
+```
+
+Change directory to the repository root:
+
+```
 $ cd dotcom-rendering
 ```
 
 ### Install Node.js
 
-Make sure you have [Node.js](https://nodejs.org) installed.
+To install and manage Node versions we recommend using a Node version manager such as [fnm](https://github.com/Schniz/fnm), [nvm](https://github.com/nvm-sh/nvm) or [asdf](https://asdf-vm.com/guide/getting-started.html).
 
-We recommend using [fnm](https://github.com/Schniz/fnm) to help manage multiple versions of Node.js on one machine.
+To install Node, follow the instructions for the version manager of your choice.
 
-Once Node is installed, make sure you're using the correct package manager by [enabling corepack](https://github.com/nodejs/corepack?tab=readme-ov-file#utility-commands):
+Our preferred Node version manager is [fnm](https://github.com/Schniz/fnm).
+
+Once installed, check the running Node version, ignoring any 'v' prefix, matches the version in [.nvmrc](../.nvmrc)
+
+```
+$ node --version
+```
+
+#### corepack
+
+Enable [corepack](https://github.com/nodejs/corepack) to install the correct package manager:
 
 ```sh
 $ corepack enable
@@ -29,33 +52,41 @@ If you're using `asdf`, you'll need to run `asdf reshim nodejs` after running `c
 
 ### Install Dependencies
 
-run
+Change from the project root directory to the inner `dotcom-rendering` directory:
+
+```
+$ cd dotcom-rendering
+```
+
+Run
 
 ```
 $ make install
 ```
 
-If it complains that you do not have the right version of node, then run (or replace with the correct version manager or the correct version):
+If you get an Node version error then check the setup for your version manager.
+
+With `fnm` you can force it to use the version in .nvmrc with:
 
 ```
-$ fnm install 22.14.0
+$ fnm use
 ```
 
-### Running on local
+### Running locally
 
 ```sh
 $ make dev
 ```
 
-`make dev` will start the development server on port 3030: [http://localhost:3030](http://localhost:3030).
+This will start the development server on [http://localhost:3030](http://localhost:3030).
 
-Visit the [root path of the dev server](http://localhost:3030) for some example URLs to visit.
+A list of content types with example URLs is available on the [root path](http://localhost:3030).
 
-You can render a specific article by [specifying the production URL in the query string](http://localhost:3030/Article/https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey).
+You can render a specific article by appending the the production URL to the `Article` endpoint, for example:
+http://localhost:3030/Article/https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey
 
-You can view the JSON representation of an article, as per the model sent to the renderer on the server, by going to
-
-http://localhost:3030/ArticleJson?url=https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey
+You can view the JSON representation of an article as sent by [Frontend](https://github.com/guardian/frontend) to DCR, by appending `.json?dcr=true` to the production URL, for example:
+https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey.json?dcr=true
 
 ### Detailed Setup
 
@@ -72,15 +103,15 @@ If you're new to TypeScript projects, if you're trying to integrate with other a
 | <img alt="Storybook" src="./docs/images/logo-storybook.jpg" width="350" />                                                 | We use [storybook to generate component variations and 'layouts'](https://main--63e251470cfbe61776b0ef19.chromatic.com) that are then visual regression tested in Chromatic. You'll notice `.stories.` files in the repo for components that define the variations of components as defined by the component props.                               |
 | <img alt="Chromatic" src="./docs/images/logo-chromatic.jpg" width="350" />                                                 | Chromatic is a visual regression testing tool that reviews our Storybook components at PR time.                                                                                                                                                                                                                                                   |
 | <img alt="Jest" src="./docs/images/logo-jest.jpg" width="350" />                                                           | Jest is a unit testing tool. You will find Jest tests in the repo with `.test.` filenames.                                                                                                                                                                                                                                                        |
-| <img alt="Playwright" src="./docs/images/logo-playwright.svg" width="350" />                                               | Playwright is an integration testing tool that runs tests in the browser. You will find the Playwright tests in the [playwright folder](./playwright).                                                                                                                                                                                            |
-| <img alt="AB Testing" src="./docs/images/logo-ab-testing.png" width="350" />                                               | The [A/B Testing library](https://github.com/guardian/csnx/tree/main/libs/@guardian/ab-core) is an internal NPM Module. There are a [some docs here](./docs/development/ab-testing-in-dcr.md).                                                                                                                                                    |
+| <img alt="Playwright" src="./docs/images/logo-playwright.svg" width="350" />                                               | Playwright is an integration testing tool that runs tests in the browser. You will find the Playwright tests in the [playwright directory](./playwright).                                                                                                                                                                                         |
+| <img alt="AB Testing" src="./docs/images/logo-ab-testing.png" width="350" />                                               | The [A/B Testing library](https://github.com/guardian/csnx/tree/main/libs/@guardian/ab-core) is an internal NPM Module. There are [docs here](./docs/development/ab-testing-in-dcr.md).                                                                                                                                                           |
 | <img alt="Deno" title="Deno logo, MIT License: https://deno.land/artwork" src="./docs/images/logo-deno.svg" width="350" /> | [Deno](https://deno.land/) is a JavaScript runtime that we've started incorporating into some of our Github Actions workflows. You will only need to install it if you are planning to run the workflow scripts locally. Some installation and troubleshooting instructions can be found in the [Deno scripts folder](../scripts/deno/README.md). |
 
-### UI Design System
+## Design System
 
 [Source](https://theguardian.design) is the Guardian's design system. For detailed and up-to-date information on how to use it, see the [Source guide](https://github.com/guardian/csnx/blob/main/docs/source/README.md).
 
-### Concepts
+## Concepts
 
 There are some concepts to learn, that will make working with Dotcom Rendering clearer:
 
@@ -90,17 +121,6 @@ There are some concepts to learn, that will make working with Dotcom Rendering c
 -   Dynamic imports
 -   [Enhancers](docs/patterns/enhancers.md)
 -   Data generated in Frontend
-
-### Visual Debugging
-
-DCR provides a visual debugging tool through a bookmarklet which you can find out more about in the [debug tool docs](./src/client/debug/README.md).
-
-## Dotcom Rendering now renders most articles and fronts in Production
-
-You can force DCR on or off explicitly with
-[`?dcr=true` or `?dcr=false`](https://github.com/guardian/frontend/pull/21753).
-
-One way to verify whether the article you're looking at is being rendered by DCR or not is to look for `(dcr)` in the footer after the copyright notice.
 
 ## Code Quality
 
@@ -131,13 +151,17 @@ See [the makefile](./makefile) for the full list.
 
 [Read about testing tools and testing strategy](docs/testing.md).
 
-### Vulnerabilities
+## Debugging
 
-#### Dependabot
+DCR provides a visual debugging tool through a bookmarklet which you can find out more about in the [debug tool docs](./src/client/debug/README.md).
+
+## Vulnerabilities
+
+### Dependabot
 
 To monitor vulnerabilities from GitHub, you can use [Dependabot alerts in the security tab](https://github.com/guardian/dotcom-rendering/security/dependabot).
 
-#### Manual audit
+### Manual audit
 
 To check for vulnerabilities in development, you can run:
 
@@ -145,7 +169,7 @@ To check for vulnerabilities in development, you can run:
 $ make audit
 ```
 
-## IDE setup
+## IDE
 
 We recommend using [VSCode](https://code.visualstudio.com/).
 
