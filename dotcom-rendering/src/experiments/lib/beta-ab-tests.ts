@@ -10,6 +10,7 @@ export interface BetaABTestAPI {
 type ABParticipations = {
 	[testId: string]: string;
 };
+
 interface OphanABEvent {
 	variantName: string;
 	complete: string | boolean;

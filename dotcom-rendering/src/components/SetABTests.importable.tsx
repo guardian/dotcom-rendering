@@ -130,6 +130,11 @@ export const SetABTests = ({
 
 		setBetaABTests(betaAb);
 
+		window.guardian.modules.abTests.isUserInTest = (
+			testId: string,
+			variantId: string,
+		) => betaAb.isUserInTest(testId, variantId);
+
 		ab.trackABTests(allRunnableTests);
 		ab.registerImpressionEvents(allRunnableTests);
 		ab.registerCompleteEvents(allRunnableTests);
