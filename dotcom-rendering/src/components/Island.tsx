@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import type { ScheduleOptions, SchedulePriority } from '../lib/scheduler';
-import { IslandDepthContext } from './IslandDepthContext';
+import { IslandContext, IslandProvider } from './IslandContext';
 
 type DeferredProps = {
 	visible: {
@@ -58,16 +58,17 @@ export const Island = ({ priority, defer, children, role }: IslandProps) => {
 	const name = String(children.type.name);
 
 	/**
-	 * Current depth of island if nested within another island. This is used so
-	 * that we only hydrate top-level islands which are then responsible for
-	 * hydrating the entire subtree and any child islands.
+	 * Context tracks whether current island is a child of another
 	 */
-	const islandDepth = useContext(IslandDepthContext);
+	const island = useContext(IslandContext);
 
 	return (
-		<IslandDepthContext.Provider value={islandDepth + 1}>
+		<IslandProvider value={{ child: true }}>
+			<code style={{ fontFamily: 'monospace', color: 'hotpink' }}>
+				{name} = {island.child ? 'child' : 'parent'}
+			</code>
 			{/* Child islands defer to nearest parent island for hydration */}
-			{islandDepth > 0 ? (
+			{island.child ? (
 				children
 			) : (
 				<gu-island
@@ -81,7 +82,7 @@ export const Island = ({ priority, defer, children, role }: IslandProps) => {
 					{children}
 				</gu-island>
 			)}
-		</IslandDepthContext.Provider>
+		</IslandProvider>
 	);
 };
 
