@@ -171,7 +171,7 @@ const supportingQuoteCss = css`
 	clear: left;
 
 	${from.phablet} {
-	    float: left;
+		float: left;
 		width: 40%;
 	}
 
