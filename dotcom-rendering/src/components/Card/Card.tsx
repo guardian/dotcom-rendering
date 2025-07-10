@@ -933,7 +933,6 @@ export const Card = ({
 												}
 												index={index}
 												duration={
-													isBetaContainer &&
 													isVideoArticle
 														? undefined
 														: media.mainMedia
@@ -1022,28 +1021,26 @@ export const Card = ({
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
 								/>
-								{(isVideoMainMedia ||
-									(isVideoArticle && !isBetaContainer)) &&
-									mainMedia.duration > 0 && (
-										<div
-											css={css`
-												position: absolute;
-												top: ${space[2]}px;
-												right: ${space[2]}px;
-											`}
-										>
-											<Pill
-												content={secondsToDuration(
-													mainMedia.duration,
-												)}
-												icon={
-													<SvgMediaControlsPlay
-														width={18}
-													/>
-												}
-											/>
-										</div>
-									)}
+								{isVideoMainMedia && mainMedia.duration > 0 && (
+									<div
+										css={css`
+											position: absolute;
+											top: ${space[2]}px;
+											right: ${space[2]}px;
+										`}
+									>
+										<Pill
+											content={secondsToDuration(
+												mainMedia.duration,
+											)}
+											icon={
+												<SvgMediaControlsPlay
+													width={18}
+												/>
+											}
+										/>
+									</div>
+								)}
 							</>
 						)}
 						{media.type === 'crossword' && (
