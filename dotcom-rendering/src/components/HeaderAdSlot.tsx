@@ -19,47 +19,42 @@ const borderBottomHeight = 1;
 const headerMinHeight =
 	TOP_ABOVE_NAV_HEIGHT + padding + AD_LABEL_HEIGHT + borderBottomHeight;
 
-const headerAdWrapper = (isIn250ReservationVariant: boolean) =>
-	isIn250ReservationVariant
-		? css`
-				z-index: 1080;
-				width: 100%;
-				background-color: ${palette('--ad-background')};
-				border-bottom: 1px solid ${palette('--ad-border')};
+const headerAdWrapperStylesVariant = css`
+	z-index: 1080;
+	width: 100%;
+	background-color: ${palette('--ad-background')};
+	border-bottom: 1px solid ${palette('--ad-border')};
 
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 
-				position: sticky;
-				top: 0;
-		  `
-		: css`
-				z-index: 1080;
-				width: 100%;
-				background-color: ${palette('--ad-background')};
-				min-height: ${headerMinHeight}px;
-				border-bottom: ${borderBottomHeight}px solid
-					${palette('--ad-border')};
+	position: sticky;
+	top: 0;
+`;
 
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
+const headerAdWrapperStylesControl = css`
+	z-index: 1080;
+	width: 100%;
+	background-color: ${palette('--ad-background')};
+	min-height: ${headerMinHeight}px;
+	border-bottom: 1px solid ${palette('--ad-border')};
 
-				position: sticky;
-				top: 0;
-		  `;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	position: sticky;
+	top: 0;
+`;
 
 /**
  * Ensure the top-above-nav/ad-block-ask containing div is always of a certain minimum height
  */
-const headerMinSizeStyles = (isIn250ReservationVariant: boolean) =>
-	isIn250ReservationVariant
-		? undefined
-		: css`
-				min-height: ${adSizes.leaderboard.height}px;
-				min-width: ${adSizes.leaderboard.width}px;
-		  `;
+const headerMinSizeStyles = css`
+	min-height: ${adSizes.leaderboard.height}px;
+	min-width: ${adSizes.leaderboard.width}px;
+`;
 
 export const HeaderAdSlot = ({
 	shouldHideReaderRevenue,
@@ -89,10 +84,16 @@ export const HeaderAdSlot = ({
 			/>
 			<Hide when="below" breakpoint="tablet">
 				<div
-					css={[headerAdWrapper(isIn250ReservationVariant)]}
+					css={[
+						isIn250ReservationVariant
+							? headerAdWrapperStylesVariant
+							: headerAdWrapperStylesControl,
+					]}
 					className="top-banner-ad-container"
 				>
-					<div css={headerMinSizeStyles(isIn250ReservationVariant)}>
+					<div
+						css={!isIn250ReservationVariant && headerMinSizeStyles}
+					>
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<AdBlockAsk
 								size="leaderboard"
