@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { log } from '@guardian/libs';
+import { log, storage } from '@guardian/libs';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { submitClickComponentEvent } from '../client/ophan/ophan';
@@ -140,8 +140,8 @@ export const LoopVideo = ({
 	/**
 	 * Setup.
 	 *
-	 * Register the users motion preferences.
-	 * Creates event listeners to control playback when there are multiple videos.
+	 * 1. Register the user's motion preferences.
+	 * 2. Creates event listeners to control playback when there are multiple videos.
 	 */
 	useEffect(() => {
 		/**
@@ -150,7 +150,19 @@ export const LoopVideo = ({
 		const userPrefersReducedMotion = window.matchMedia(
 			'(prefers-reduced-motion: reduce)',
 		).matches;
-		setIsAutoplayAllowed(!userPrefersReducedMotion);
+
+		/**
+		 * The user indicates a preference for no flashing elements.
+		 * `flashingPreference` is `null` if no preference exists and
+		 * explicitly `false` when the reader has said they don't want flashing.
+		 */
+		const flashingPreferences = storage.local.get(
+			'gu.prefs.accessibility.flashing-elements',
+		);
+
+		setIsAutoplayAllowed(
+			!userPrefersReducedMotion && flashingPreferences !== false,
+		);
 
 		/**
 		 * Mutes the current video when another video is unmuted
@@ -170,7 +182,7 @@ export const LoopVideo = ({
 		};
 
 		/**
-		 * Mute the current video when a Youtube video is played
+		 * Mute the current video when a YouTube video is played
 		 * Triggered by the CustomEvent in YoutubeAtomPlayer.
 		 */
 		const handleCustomPlayYoutubeEvent = () => {
