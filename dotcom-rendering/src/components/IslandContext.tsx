@@ -1,14 +1,14 @@
 import { createContext } from 'react';
 
 type Config = {
-	child: boolean;
+	isChild: boolean;
 };
 
 /**
  * Context to track whether the current island is a child of another island.
  * Child islands defer to the nearest parent island for hydration.
  */
-export const IslandContext = createContext<Config>({ child: false });
+export const IslandContext = createContext<Config>({ isChild: false });
 
 export const IslandProvider = ({
 	value,
