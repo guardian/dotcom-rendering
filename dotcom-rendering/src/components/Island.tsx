@@ -63,9 +63,9 @@ export const Island = ({ priority, defer, children, role }: IslandProps) => {
 	const island = useContext(IslandContext);
 
 	return (
-		<IslandProvider value={{ child: true }}>
+		<IslandProvider value={{ isChild: true }}>
 			{/* Child islands defer to nearest parent island for hydration */}
-			{island.child ? (
+			{island.isChild ? (
 				children
 			) : (
 				<gu-island

@@ -63,7 +63,7 @@ export const doHydration = async (
 				<ConfigProvider value={config}>
 					<CacheProvider value={emotionCache}>
 						{/* Child islands should not be hydrated separately */}
-						<IslandProvider value={{ child: true }}>
+						<IslandProvider value={{ isChild: true }}>
 							{/* The component to hydrate must be a single JSX Element */}
 							{createElement(module[name], data)}
 						</IslandProvider>
