@@ -5,6 +5,7 @@ import { isUndefined, log, startPerformanceMeasure } from '@guardian/libs';
 import { createElement } from 'react';
 import { hydrateRoot } from 'react-dom/client';
 import { ConfigProvider } from '../../components/ConfigContext';
+import { IslandProvider } from '../../components/IslandContext';
 import type { Config } from '../../types/configContext';
 
 declare global {
@@ -61,7 +62,11 @@ export const doHydration = async (
 				element,
 				<ConfigProvider value={config}>
 					<CacheProvider value={emotionCache}>
-						{createElement(module[name], data)}
+						{/* Child islands should not be hydrated separately */}
+						<IslandProvider value={{ child: true }}>
+							{/* The component to hydrate must be a single JSX Element */}
+							{createElement(module[name], data)}
+						</IslandProvider>
 					</CacheProvider>
 				</ConfigProvider>,
 			);
