@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { submitClickComponentEvent } from '../client/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { useIsInView } from '../lib/useIsInView';
@@ -12,7 +12,7 @@ import {
 	customYoutubePlayEventName,
 } from '../lib/video';
 import { useConfig } from './ConfigContext';
-import type { PLAYER_STATES } from './LoopVideoPlayer';
+import type { PLAYER_STATES, PlayerStates } from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
 
 const videoContainerStyles = css`
@@ -79,6 +79,63 @@ export const LoopVideo = ({
 		repeat: true,
 		threshold: 0.5,
 	});
+
+	const playVideo = useCallback(async () => {
+		if (!vidRef.current) return;
+
+		/** https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay#example_handling_play_failures */
+		const startPlayPromise = vidRef.current.play();
+
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- In earlier versions of the HTML specification, play() didn't return a value
+		if (startPlayPromise !== undefined) {
+			await startPlayPromise
+				.catch((error) => {
+					// Autoplay failed
+					const message = `Autoplay failure for loop video. Source: ${src} could not be played. Error: ${error}`;
+					if (error instanceof Error) {
+						window.guardian.modules.sentry.reportError(
+							new Error(message),
+							'loop-video',
+						);
+					}
+
+					log('dotcom', message);
+
+					setPosterImage(image);
+					setShowPlayIcon(true);
+				})
+				.then(() => {
+					// Autoplay succeeded
+					setPlayerState('PLAYING');
+				});
+		}
+	}, [src, image]);
+
+	const pauseVideo = (
+		reason: Extract<
+			PlayerStates,
+			'PAUSED_BY_USER' | 'PAUSED_BY_INTERSECTION_OBSERVER'
+		>,
+	) => {
+		if (!vidRef.current) return;
+
+		if (reason === 'PAUSED_BY_INTERSECTION_OBSERVER') {
+			setIsMuted(true);
+		}
+
+		setPlayerState(reason);
+		void vidRef.current.pause();
+	};
+
+	const playPauseVideo = () => {
+		if (playerState === 'PLAYING') {
+			if (isInView) {
+				pauseVideo('PAUSED_BY_USER');
+			}
+		} else {
+			void playVideo();
+		}
+	};
 
 	/**
 	 * Setup.
@@ -161,10 +218,9 @@ export const LoopVideo = ({
 			(playerState === 'NOT_STARTED' ||
 				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER')
 		) {
-			setPlayerState('PLAYING');
-			void vidRef.current.play();
+			void playVideo();
 		}
-	}, [isInView, isPlayable, playerState, isAutoplayAllowed]);
+	}, [isAutoplayAllowed, isInView, isPlayable, playerState, playVideo]);
 
 	/**
 	 * Stops playback when the video is scrolled out of view, resumes playbacks
@@ -176,9 +232,7 @@ export const LoopVideo = ({
 		const isNoLongerInView =
 			playerState === 'PLAYING' && isInView === false;
 		if (isNoLongerInView) {
-			setPlayerState('PAUSED_BY_INTERSECTION_OBSERVER');
-			void vidRef.current.pause();
-			setIsMuted(true);
+			pauseVideo('PAUSED_BY_INTERSECTION_OBSERVER');
 		}
 
 		/**
@@ -189,11 +243,9 @@ export const LoopVideo = ({
 		const isBackInView =
 			playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' && isInView;
 		if (isBackInView) {
-			setPlayerState('PLAYING');
-
-			void vidRef.current.play();
+			void playVideo();
 		}
-	}, [isInView, hasBeenInView, playerState]);
+	}, [isInView, hasBeenInView, playerState, playVideo]);
 
 	/**
 	 * Show the play icon when the video is not playing, except for when it is scrolled
@@ -237,30 +289,6 @@ export const LoopVideo = ({
 
 	if (adapted) return fallbackImageComponent;
 
-	const playVideo = () => {
-		if (!vidRef.current) return;
-
-		setPlayerState('PLAYING');
-		void vidRef.current.play();
-	};
-
-	const pauseVideo = () => {
-		if (!vidRef.current) return;
-
-		setPlayerState('PAUSED_BY_USER');
-		void vidRef.current.pause();
-	};
-
-	const playPauseVideo = () => {
-		if (playerState === 'PLAYING') {
-			if (isInView) {
-				pauseVideo();
-			}
-		} else {
-			playVideo();
-		}
-	};
-
 	const handlePlayPauseClick = (event: React.SyntheticEvent) => {
 		event.preventDefault();
 		playPauseVideo();
@@ -280,12 +308,18 @@ export const LoopVideo = ({
 		}
 	};
 
+	/**
+	 * If the video could not be loaded due to an error, report to
+	 * Sentry and log in the console.
+	 */
 	const onError = () => {
+		const message = `Loop video could not be played. source: ${src}`;
+
 		window.guardian.modules.sentry.reportError(
-			new Error(`Loop video could not be played. source: ${src}`),
+			new Error(message),
 			'loop-video',
 		);
-		log('dotcom', `Loop video could not be played. source: ${src}`);
+		log('dotcom', message);
 	};
 
 	const seekForward = () => {
@@ -323,7 +357,7 @@ export const LoopVideo = ({
 				playPauseVideo();
 				break;
 			case 'Escape':
-				pauseVideo();
+				pauseVideo('PAUSED_BY_USER');
 				break;
 			case 'ArrowRight':
 				seekForward();
