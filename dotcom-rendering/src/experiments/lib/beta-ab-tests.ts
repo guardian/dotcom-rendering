@@ -2,10 +2,10 @@ import { getCookie } from '@guardian/libs';
 
 const AB_COOKIE_NAME = 'Client_AB_Tests';
 
-type ABTestAPI = {
+interface ABTestAPI {
 	isUserInTest: (testId: string, variantId: string) => boolean;
 	trackABTests: () => void;
-};
+}
 
 type ABParticipations = {
 	[testId: string]: string;
@@ -39,13 +39,37 @@ const makeABEvent = (variantName: string, complete: boolean): OphanABEvent => {
 	return event;
 };
 
+/**
+ * get client-side AB test state from the cookie
+ */
+const getParticipations = (): ABParticipations => {
+	const userTestBuckets = getCookie({
+		name: AB_COOKIE_NAME,
+		shouldMemoize: true,
+	});
+
+	if (userTestBuckets) {
+		return userTestBuckets
+			.split(',')
+			.reduce<ABParticipations>((participations, abTestStatus) => {
+				const [testId, variantId] = abTestStatus.split(':');
+				if (testId && variantId) {
+					participations[testId] = variantId;
+				}
+				return participations;
+			}, {});
+	}
+
+	return {};
+};
+
 export class BetaABTests implements ABTestAPI {
 	private participations: ABParticipations;
 	private ophanRecord: OphanRecordFunction;
 	private errorReporter: ErrorReporter;
 
 	constructor({ ophanRecord, errorReporter }: BetaABTestsConfig) {
-		this.participations = this.getParticipations();
+		this.participations = getParticipations();
 		this.ophanRecord = ophanRecord;
 		this.errorReporter = errorReporter;
 	}
@@ -62,40 +86,19 @@ export class BetaABTests implements ABTestAPI {
 
 	private buildOphanPayload() {
 		try {
-			const log: OphanABPayload = {};
+			const testAndVariantIds = Object.entries(this.participations);
 
-			for (const [testId, variantId] of Object.entries(
-				this.participations,
-			)) {
-				log[testId] = makeABEvent(variantId, false);
-			}
-
-			return log;
+			return testAndVariantIds.reduce<OphanABPayload>(
+				(eventLog, [testId, variantId]) => {
+					eventLog[testId] = makeABEvent(variantId, false);
+					return eventLog;
+				},
+				{},
+			);
 		} catch (error: unknown) {
 			// Encountering an error should invalidate the logging process.
 			this.errorReporter(error);
 			return {};
 		}
-	}
-
-	private getParticipations(): ABParticipations {
-		const userTestBuckets = getCookie({
-			name: AB_COOKIE_NAME,
-			shouldMemoize: true,
-		});
-
-		if (userTestBuckets) {
-			return userTestBuckets
-				.split(',')
-				.reduce<ABParticipations>((participations, abParticipation) => {
-					const [testId, variantId] = abParticipation.split(':');
-					if (testId && variantId) {
-						participations[testId] = variantId;
-					}
-					return participations;
-				}, {});
-		}
-
-		return {};
 	}
 }

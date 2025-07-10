@@ -71,6 +71,12 @@ export const SetABTests = ({
 	const { renderingTarget } = useConfig();
 	const [ophan, setOphan] = useState<Awaited<ReturnType<typeof getOphan>>>();
 
+	const errorReporter = (e: unknown) =>
+		window.guardian.modules.sentry.reportError(
+			e instanceof Error ? e : Error(String(e)),
+			'ab-tests',
+		);
+
 	useEffect(() => {
 		getOphan(renderingTarget)
 			.then(setOphan)
@@ -100,11 +106,7 @@ export const SetABTests = ({
 
 		const betaAb = new BetaABTests({
 			ophanRecord: ophan.record,
-			errorReporter: (e) =>
-				window.guardian.modules.sentry.reportError(
-					e instanceof Error ? e : Error(String(e)),
-					'ab-tests',
-				),
+			errorReporter,
 		});
 
 		const ab = new AB({
@@ -116,11 +118,7 @@ export const SetABTests = ({
 			forcedTestVariants: allForcedTestVariants,
 			ophanRecord: ophan.record,
 			serverSideTests,
-			errorReporter: (e) =>
-				window.guardian.modules.sentry.reportError(
-					e instanceof Error ? e : Error(String(e)),
-					'ab-tests',
-				),
+			errorReporter,
 		});
 		const allRunnableTests = ab.allRunnableTests(tests);
 		const participations = runnableTestsToParticipations(allRunnableTests);
