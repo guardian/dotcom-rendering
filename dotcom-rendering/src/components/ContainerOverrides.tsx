@@ -585,11 +585,6 @@ const cardMediaBackgroundLight: ContainerFunction = (containerPalette) =>
 const cardMediaBackgroundDark: ContainerFunction = (containerPalette) =>
 	transparentColour(cardHeadlineDark(containerPalette), 0.1);
 
-const cardMediaIconLight: ContainerFunction = (containerPalette) =>
-	cardBackgroundLight(containerPalette);
-const cardMediaIconDark: ContainerFunction = (containerPalette) =>
-	cardBackgroundDark(containerPalette);
-
 const cardMediaWaveformLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'InvestigationPalette':
@@ -1126,10 +1121,6 @@ const containerColours = {
 	'--card-media-background': {
 		light: cardMediaBackgroundLight,
 		dark: cardMediaBackgroundDark,
-	},
-	'--card-media-icon': {
-		light: cardMediaIconLight,
-		dark: cardMediaIconDark,
 	},
 	'--card-media-waveform': {
 		light: cardMediaWaveformLight,

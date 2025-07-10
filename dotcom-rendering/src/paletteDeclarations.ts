@@ -2517,11 +2517,6 @@ const cardMediaBackgroundLight: PaletteFunction = () =>
 const cardMediaBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
 
-const cardMediaIconLight: PaletteFunction = (format) =>
-	cardMediaBackgroundLight(format);
-const cardMediaIconDark: PaletteFunction = (format) =>
-	cardMediaBackgroundDark(format);
-
 const cardMediaWaveformLight: PaletteFunction = () => sourcePalette.neutral[86];
 const cardMediaWaveformDark: PaletteFunction = () => sourcePalette.neutral[38];
 
@@ -6279,10 +6274,6 @@ const paletteColours = {
 	'--card-media-background': {
 		light: cardMediaBackgroundLight,
 		dark: cardMediaBackgroundDark,
-	},
-	'--card-media-icon': {
-		light: cardMediaIconLight,
-		dark: cardMediaIconDark,
 	},
 	'--card-media-sublinks-background': {
 		light: cardMediaSublinksBackgroundLight,
