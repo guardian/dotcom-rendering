@@ -8,6 +8,8 @@ It primarily uses [TypeScript](https://www.typescriptlang.org/), [Node.js](https
 
 This guide will help you get the `dotcom-rendering` application running on your development machine.
 
+### Clone the repository
+
 Start in your `~/code` directory:
 
 ```
@@ -66,9 +68,9 @@ This configuration allows the Node version detection to scan all parent director
 
 https://github.com/Schniz/fnm/blob/master/docs/configuration.md#--version-file-strategyrecursive
 
-### Corepack
+### Enable corepack
 
-Enable [corepack](https://github.com/nodejs/corepack) to install the correct package manager:
+Enable [corepack](https://github.com/nodejs/corepack) to install the correct package manager and version:
 
 ```sh
 $ corepack enable
@@ -98,14 +100,16 @@ If you get an Node version error then check the setup for your version manager.
 $ make dev
 ```
 
-Will start the development server on [http://localhost:3030](http://localhost:3030).
+The development server will start on [http://localhost:3030](http://localhost:3030).
 
-A list of content types with example URLs is available on the [root path](http://localhost:3030).
+A list of content types with example URLs are available on the [root path](http://localhost:3030).
 
-You can render a specific article by appending the the production URL to the `Article` endpoint, for example:
+You can render a specific article by appending the production URL to the `Article` endpoint, for example:
+
 http://localhost:3030/Article/https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey
 
-You can view the JSON representation of an article as sent by [Frontend](https://github.com/guardian/frontend) to DCR, by appending `.json?dcr=true` to the production URL, for example:
+You can view the JSON representation of an article as sent to DCR by [Frontend](https://github.com/guardian/frontend), by appending `.json?dcr=true` to the production URL, for example:
+
 https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey.json?dcr=true
 
 ### Detailed setup
@@ -157,7 +161,7 @@ We recommend you update your workspace settings to automatically fix formatting 
 | <img alt="Preact" src="./docs/images/logo-preact.jpg" width="350" />                                                       | DCR is rendered on the server with Preact and uses Preact as the Client-side framework. We use preact-compat to ensure compatability with React modules.                                                                                                                                                                                          |
 | <img alt="Emotion CSS-in-JS" src="./docs/images/logo-emotion.png" width="350" />                                           | [Emotion](https://emotion.sh) is css-in-js library, DCR uses the `css` tagged template literal style to allow CSS copy-pasting.                                                                                                                                                                                                                   |
 | <img alt="Express" src="./docs/images/logo-express.png" width="350" />                                                     | We use [Express](https://expressjs.com/) as a very thin server to communicate with the Frontend endpoint.                                                                                                                                                                                                                                         |
-| <img alt="Webpack" src="./docs/images/logo-webpack.png" width="350" />                                                     | [Webpack](https://webpack.js.org/) is used for its dev server and as a bundler our production code.                                                                                                                                                                                                                                               |
+| <img alt="Webpack" src="./docs/images/logo-webpack.png" width="350" />                                                     | [Webpack](https://webpack.js.org/) is used for its dev server and as a bundler for our production code.                                                                                                                                                                                                                                           |
 | <img alt="SWC" src="./docs/images/logo-swc.png" width="350" />                                                             | [SWC](https://swc.rs/) is used as a Webpack loader that allows for very fast compilation.                                                                                                                                                                                                                                                         |
 | <img alt="Storybook" src="./docs/images/logo-storybook.jpg" width="350" />                                                 | We use [Storybook](https://storybook.js.org/) to generate [component variations](https://main--63e251470cfbe61776b0ef19.chromatic.com) that are then visual regression tested in [Chromatic](https://www.chromatic.com/). You'll notice `.stories.` files in the repository that define the component variations.                                 |
 | <img alt="Chromatic" src="./docs/images/logo-chromatic.jpg" width="350" />                                                 | [Chromatic](https://www.chromatic.com/) is a visual regression testing tool that tests our Storybook components at PR time.                                                                                                                                                                                                                       |
