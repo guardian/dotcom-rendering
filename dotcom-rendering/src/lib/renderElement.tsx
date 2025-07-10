@@ -71,6 +71,7 @@ import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType, StarRating } from '../types/content';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
 import type { EditionId } from './edition';
+import { getLargestImageSize } from './image';
 
 type Props = {
 	format: ArticleFormat;
@@ -478,8 +479,11 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
 			return (
 				<VideoAtom
+					format={format}
 					assets={element.assets}
 					poster={element.posterImage?.[0]?.url}
+					caption={element.title}
+					isMainMedia={isMainMedia}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MiniProfilesBlockElement':
@@ -869,7 +873,9 @@ export const renderElement = ({
 						isMainMedia={isMainMedia}
 						expired={element.expired}
 						overrideImage={element.overrideImage}
-						posterImage={element.posterImage}
+						posterImage={
+							getLargestImageSize(element.posterImage ?? [])?.url
+						}
 						duration={element.duration}
 						mediaTitle={element.mediaTitle}
 						altText={element.altText}
