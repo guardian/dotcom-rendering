@@ -17,6 +17,7 @@ export const ProductLinkButton = ({ label, url }: ProductLinkButtonProps) => {
 			aria-label={`Open ${label} in a new tab`}
 			icon={<SvgArrowRightStraight />}
 			data-ignore="global-link-styling"
+			data-link-name="in body link"
 			data-spacefinder-role="inline"
 		>
 			{label}
