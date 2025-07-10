@@ -127,7 +127,6 @@ const immersiveOverlayContainerStyles = css`
  * reduced.) The following article has more detail on non-linear gradients:
  * https://css-tricks.com/easing-linear-gradients/
  */
-
 const overlayMaskGradientStyles = (angle: string) => css`
 	mask-image: linear-gradient(
 		${angle},
@@ -201,9 +200,7 @@ const starRatingWrapper = css`
 
 const trailTextWrapper = css`
 	margin-top: ${space[3]}px;
-`;
 
-const isInHideTrailsAbTestStyles = css`
 	${until.tablet} {
 		display: none;
 	}
@@ -241,7 +238,6 @@ const getMedia = ({
 		return {
 			type: 'video',
 			mainMedia,
-			...(imageUrl && { imageUrl }),
 		} as const;
 	}
 
@@ -336,7 +332,6 @@ export type Props = {
 	 */
 	isImmersive?: boolean;
 	showVideo?: boolean;
-	isInHideTrailsAbTest?: boolean;
 };
 
 export const FeatureCard = ({
@@ -374,7 +369,6 @@ export const FeatureCard = ({
 	isNewsletter = false,
 	isImmersive = false,
 	showVideo = false,
-	isInHideTrailsAbTest = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -435,8 +429,7 @@ export const FeatureCard = ({
 										stickyVideos={false}
 										enableAds={false}
 										duration={mainMedia.duration}
-										posterImage={mainMedia.images}
-										overrideImage={media?.imageUrl}
+										posterImage={mainMedia.image}
 										width={300}
 										height={375}
 										origin="The Guardian"
@@ -467,9 +460,6 @@ export const FeatureCard = ({
 										isImmersive={isImmersive}
 										byline={byline}
 										showByline={showByline}
-										isInHideTrailsAbTest={
-											isInHideTrailsAbTest
-										}
 									/>
 								</Island>
 							</div>
@@ -487,15 +477,7 @@ export const FeatureCard = ({
 									<div>
 										<CardPicture
 											mainImage={
-												media.imageUrl
-													? media.imageUrl
-													: media.mainMedia.images.reduce(
-															(prev, current) =>
-																prev.width >
-																current.width
-																	? prev
-																	: current,
-													  ).url
+												media.mainMedia.image ?? ''
 											}
 											imageSize={imageSize}
 											alt={headlineText}
@@ -639,13 +621,7 @@ export const FeatureCard = ({
 										) : null}
 
 										{!!trailText && (
-											<div
-												css={[
-													trailTextWrapper,
-													isInHideTrailsAbTest &&
-														isInHideTrailsAbTestStyles,
-												]}
-											>
+											<div css={trailTextWrapper}>
 												<TrailText
 													trailText={trailText}
 													trailTextColour={palette(

@@ -60,24 +60,24 @@ export const PLAYER_STATES = [
 
 type Props = {
 	src: string;
-	videoId: string;
+	atomId: string;
+	uniqueId: string;
 	width: number;
 	height: number;
 	fallbackImageComponent: JSX.Element;
 	isPlayable: boolean;
 	setIsPlayable: Dispatch<SetStateAction<boolean>>;
 	playerState: (typeof PLAYER_STATES)[number];
-	setPlayerState: Dispatch<SetStateAction<(typeof PLAYER_STATES)[number]>>;
 	currentTime: number;
 	setCurrentTime: Dispatch<SetStateAction<number>>;
 	isMuted: boolean;
-	setIsMuted: Dispatch<SetStateAction<boolean>>;
-	handleClick: (event: SyntheticEvent) => void;
+	handlePlayPauseClick: (event: SyntheticEvent) => void;
+	handleAudioClick: (event: SyntheticEvent) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	AudioIcon: (iconProps: IconProps) => JSX.Element;
 	posterImage?: string;
-	shouldPreload: boolean;
+	preloadPartialData: boolean;
 	showPlayIcon: boolean;
 };
 
@@ -89,7 +89,8 @@ export const LoopVideoPlayer = forwardRef(
 	(
 		{
 			src,
-			videoId,
+			atomId,
+			uniqueId,
 			width,
 			height,
 			fallbackImageComponent,
@@ -97,22 +98,20 @@ export const LoopVideoPlayer = forwardRef(
 			isPlayable,
 			setIsPlayable,
 			playerState,
-			setPlayerState,
 			currentTime,
 			setCurrentTime,
 			isMuted,
-			setIsMuted,
-			handleClick,
+			handlePlayPauseClick,
+			handleAudioClick,
 			handleKeyDown,
 			onError,
 			AudioIcon,
-			shouldPreload,
+			preloadPartialData,
 			showPlayIcon,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
-		// Assumes that the video is unique on the page.
-		const loopVideoId = `loop-video-${videoId}`;
+		const loopVideoId = `loop-video-${uniqueId}`;
 
 		return (
 			<>
@@ -120,16 +119,13 @@ export const LoopVideoPlayer = forwardRef(
 				<video
 					id={loopVideoId}
 					ref={ref}
-					preload={shouldPreload ? 'metadata' : 'none'}
+					preload={preloadPartialData ? 'metadata' : 'none'}
 					loop={true}
 					muted={isMuted}
 					playsInline={true}
 					height={height}
 					width={width}
 					poster={posterImage}
-					onPlaying={() => {
-						setPlayerState('PLAYING');
-					}}
 					onCanPlay={() => {
 						setIsPlayable(true);
 					}}
@@ -143,15 +139,19 @@ export const LoopVideoPlayer = forwardRef(
 							setCurrentTime(ref.current.currentTime);
 						}
 					}}
-					onClick={handleClick}
+					onClick={handlePlayPauseClick}
 					onKeyDown={handleKeyDown}
 					role="button"
 					tabIndex={0}
 					onError={onError}
 					css={videoStyles(width, height)}
+					data-link-name={`gu-video-loop-${
+						showPlayIcon ? 'play' : 'pause'
+					}-${atomId}`}
 				>
 					{/* Only mp4 is currently supported. Assumes the video file type is mp4. */}
-					<source src={src} type="video/mp4" />
+					{/* The start time is set to 1ms so that Safari will autoplay the video */}
+					<source src={`${src}#t=0.001`} type="video/mp4" />
 					{fallbackImageComponent}
 				</video>
 				{ref && 'current' in ref && ref.current && isPlayable && (
@@ -160,8 +160,9 @@ export const LoopVideoPlayer = forwardRef(
 						{showPlayIcon && (
 							<button
 								type="button"
-								onClick={handleClick}
+								onClick={handlePlayPauseClick}
 								css={playIconStyles}
+								data-link-name={`gu-video-loop-play-${atomId}`}
 							>
 								<PlayIcon iconWidth="narrow" />
 							</button>
@@ -175,11 +176,11 @@ export const LoopVideoPlayer = forwardRef(
 						{/* Audio icon */}
 						<button
 							type="button"
-							onClick={(event) => {
-								event.stopPropagation(); // Don't pause the video
-								setIsMuted(!isMuted);
-							}}
+							onClick={handleAudioClick}
 							css={audioButtonStyles}
+							data-link-name={`gu-video-loop-${
+								isMuted ? 'unmute' : 'mute'
+							}-${atomId}`}
 						>
 							<div css={audioIconContainerStyles}>
 								<AudioIcon

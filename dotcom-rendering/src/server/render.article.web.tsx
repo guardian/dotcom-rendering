@@ -251,6 +251,7 @@ export const renderBlocks = ({
 	keywordIds,
 	abTests = {},
 	edition,
+	shouldHideAds,
 }: FEBlocksRequest): string => {
 	const format: ArticleFormat = decideFormat(FEFormat);
 
@@ -288,6 +289,7 @@ export const renderBlocks = ({
 				onFirstPage={false}
 				keyEvents={[]}
 				filterKeyEvents={false}
+				shouldHideAds={shouldHideAds}
 			/>
 		</ConfigProvider>,
 	);

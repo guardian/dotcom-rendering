@@ -14,6 +14,10 @@ export type TrailTextSize = 'regular' | 'large';
 const trailTextStyles = css`
 	display: flex;
 	flex-direction: column;
+
+	${until.tablet} {
+		display: none;
+	}
 `;
 
 const bottomPadding = css`
@@ -34,12 +38,6 @@ const fontStyles = (trailTextSize: TrailTextSize) => css`
 	}
 `;
 
-const isInHideTrailsAbTestStyles = css`
-	${until.tablet} {
-		display: none;
-	}
-`;
-
 type Props = {
 	trailText: string;
 	trailTextSize?: TrailTextSize;
@@ -51,7 +49,6 @@ type Props = {
 	padBottom?: boolean;
 	/** Adds padding to the top of the trail text */
 	padTop?: boolean;
-	isInHideTrailsAbTest?: boolean;
 };
 
 export const TrailText = ({
@@ -61,7 +58,6 @@ export const TrailText = ({
 	hideUntil,
 	padBottom = true,
 	padTop = false,
-	isInHideTrailsAbTest = false,
 }: Props) => {
 	const trailText = (
 		<div
@@ -73,7 +69,6 @@ export const TrailText = ({
 				fontStyles(trailTextSize),
 				padBottom && bottomPadding,
 				padTop && topPadding,
-				isInHideTrailsAbTest && isInHideTrailsAbTestStyles,
 			]}
 		>
 			<div

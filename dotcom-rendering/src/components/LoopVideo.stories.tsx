@@ -20,11 +20,10 @@ export const Default = {
 	name: 'Default',
 	args: {
 		src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
-		videoId: 'test-video-1',
+		uniqueId: 'test-video-1',
 		height: 720,
 		width: 900,
-		thumbnailImage:
-			'https://media.guim.co.uk/9bdb802e6da5d3fd249b5060f367b3a817965f0c/0_0_1800_1080/master/1800.jpg',
+		image: 'https://media.guim.co.uk/9bdb802e6da5d3fd249b5060f367b3a817965f0c/0_0_1800_1080/master/1800.jpg',
 		fallbackImageComponent: (
 			<CardPicture
 				mainImage="https://media.guim.co.uk/9bdb802e6da5d3fd249b5060f367b3a817965f0c/0_0_1800_1080/master/1800.jpg"

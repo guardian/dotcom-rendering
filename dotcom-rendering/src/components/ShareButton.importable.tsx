@@ -24,7 +24,7 @@ type Props = {
 
 type ButtonKind = 'native' | 'copy' | 'email';
 
-type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta';
+type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta' | 'ImageCaption';
 
 const sharedButtonStyles = (sizeXSmall: boolean) => css`
 	transition: none;
