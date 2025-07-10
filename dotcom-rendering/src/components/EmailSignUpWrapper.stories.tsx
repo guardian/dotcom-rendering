@@ -15,6 +15,7 @@ const defaultArgs = {
 	frequency: 'Weekly',
 	successDescription: "We'll send you The Recap every week",
 	theme: 'sport',
+	emailType: 'newsletter',
 } satisfies Story['args'];
 type Story = StoryObj<typeof EmailSignUpWrapper>;
 

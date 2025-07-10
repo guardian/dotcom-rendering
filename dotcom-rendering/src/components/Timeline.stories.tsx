@@ -83,6 +83,7 @@ const ArticleElementComponent = getNestedArticleElement({
 	 * but there are no rich links in this example.
 	 */
 	ajaxUrl: '',
+	mmaUrl: '',
 	editionId: 'UK',
 	isAdFreeUser: false,
 	isSensitive: false,

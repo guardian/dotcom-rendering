@@ -30,7 +30,9 @@ export const EmailSignUpWrapper = ({
 					/>
 				</Island>
 				{!emailSignUpProps.hidePrivacyMessage && (
-					<NewsletterPrivacyMessage />
+					<NewsletterPrivacyMessage
+						emailType={emailSignUpProps.emailType}
+					/>
 				)}
 			</EmailSignup>
 		</InlineSkipToWrapper>

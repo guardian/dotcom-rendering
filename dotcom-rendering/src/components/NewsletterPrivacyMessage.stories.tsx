@@ -6,7 +6,11 @@ export default {
 };
 
 export const Default = () => {
-	return <NewsletterPrivacyMessage />;
+	return <NewsletterPrivacyMessage emailType="newsletter" />;
+};
+
+export const ForMarketting = () => {
+	return <NewsletterPrivacyMessage emailType="marketingConsent" />;
 };
 
 Default.storyName = 'Default';
