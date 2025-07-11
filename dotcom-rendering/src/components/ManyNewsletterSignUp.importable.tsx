@@ -120,12 +120,16 @@ const attributeToNumber = (
 
 type Props = {
 	useReCaptcha: boolean;
-	captchaSiteKey?: string;
+	visibleRecaptcha: boolean;
+	invisibleCaptchaSiteKey?: string;
+	visibleCaptchaSiteKey?: string;
 };
 
 export const ManyNewsletterSignUp = ({
 	useReCaptcha,
-	captchaSiteKey,
+	visibleRecaptcha,
+	invisibleCaptchaSiteKey,
+	visibleCaptchaSiteKey,
 }: Props) => {
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		{
@@ -311,9 +315,11 @@ export const ManyNewsletterSignUp = ({
 			'captcha-execute',
 			renderingTarget,
 		);
-		const result = await reCaptchaRef.current.executeAsync();
+		const result = visibleRecaptcha
+			? reCaptchaRef.current.getValue()
+			: await reCaptchaRef.current.executeAsync();
 
-		if (typeof result !== 'string') {
+		if (!result) {
 			void reportTrackingEvent(
 				'ManyNewsletterSignUp',
 				'captcha-failure',
@@ -354,6 +360,9 @@ export const ManyNewsletterSignUp = ({
 		setEmail(ev.target.value);
 	};
 
+	console.log('VISIBLE RECAPTCHA SITE KEY', visibleCaptchaSiteKey);
+	console.log('INVISIBLE RECAPTCHA SITE KEY', invisibleCaptchaSiteKey);
+
 	return (
 		<div css={sectionWrapperStyle(newslettersToSignUpFor.length === 0)}>
 			<Section
@@ -385,35 +394,45 @@ export const ManyNewsletterSignUp = ({
 							}}
 							newsletterCount={newslettersToSignUpFor.length}
 						/>
+
+						{useReCaptcha &&
+							!!visibleCaptchaSiteKey &&
+							!!invisibleCaptchaSiteKey && (
+								<div
+									// The Google documentation specifies that if the 'recaptcha-badge' is hidden,
+									// their T+C's must be displayed instead. While this component hides the
+									// badge, the T+C's are inluded in the ManyNewslettersForm component.
+									// https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
+									css={css`
+										.grecaptcha-badge {
+											visibility: hidden;
+										}
+									`}
+								>
+									<ReactGoogleRecaptcha
+										sitekey={
+											visibleRecaptcha
+												? visibleCaptchaSiteKey
+												: invisibleCaptchaSiteKey
+										}
+										ref={reCaptchaRef}
+										onError={handleCaptchaError}
+										size={
+											visibleRecaptcha
+												? 'normal'
+												: 'invisible'
+										}
+										// Note - the component supports an onExpired callback
+										// (for when the user completed a challenge, but did
+										// not submit the form before the token expired.
+										// We don't need that here as setting the token
+										// triggers the submission (onChange callback)
+									/>
+								</div>
+							)}
 						<div css={desktopClearButtonWrapperStyle}>
 							<ClearButton removeAll={removeAll} />
 						</div>
-
-						{useReCaptcha && !!captchaSiteKey && (
-							<div
-								// The Google documentation specifies that if the 'recaptcha-badge' is hidden,
-								// their T+C's must be displayed instead. While this component hides the
-								// badge, the T+C's are inluded in the ManyNewslettersForm component.
-								// https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
-								css={css`
-									.grecaptcha-badge {
-										visibility: hidden;
-									}
-								`}
-							>
-								<ReactGoogleRecaptcha
-									sitekey={captchaSiteKey}
-									ref={reCaptchaRef}
-									onError={handleCaptchaError}
-									size="invisible"
-									// Note - the component supports an onExpired callback
-									// (for when the user completed a challenge, but did
-									// not submit the form before the token expired.
-									// We don't need that here as setting the token
-									// triggers the submission (onChange callback)
-								/>
-							</div>
-						)}
 					</Flex>
 				</div>
 			</Section>
