@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	getSublinks,
+	loopVideoCard,
 	opinionTrails,
 	trails,
 } from '../../fixtures/manual/trails';
@@ -543,6 +544,18 @@ export const ImmersiveCardsSplashAndStandard: Story = {
 				{ ...splashCard, isImmersive: true, supportingContent: [] },
 			],
 			standard: [{ ...trails[0], isImmersive: true }],
+		},
+	},
+};
+
+export const LoopVideoCards: Story = {
+	name: 'Looping video cards',
+	args: {
+		frontSectionTitle: 'Loop video cards',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			splash: [loopVideoCard],
+			standard: [loopVideoCard], // Loop video is disabled at standard card size
 		},
 	},
 };

@@ -600,3 +600,24 @@ export const videoTrails: [DCRFrontCard, DCRFrontCard] = [
 		},
 	},
 ];
+
+export const loopVideoCard: DCRFrontCard = {
+	...defaultCardProps,
+	dataLinkName: 'news | group-0 | card-@2',
+	url: '/uk-news/2025/jan/22/prince-harry-says-sun-publisher-made-historic-admission-as-he-settles-case',
+	headline: 'Headline for looping video card',
+	trailText: 'Trail text for looping video card',
+	mainMedia: {
+		type: 'LoopVideo',
+		atomId: '3cb22b60-2c3f-48d6-8bce-38c956907cce',
+		videoId:
+			'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
+		duration: 0,
+		width: 500,
+		height: 400,
+	},
+	image: {
+		src: 'https://media.guim.co.uk/966bf085fb982b1103aaba42a812b09726cc0a3c/1417_104_1378_1104/master/1378.jpg',
+		altText: 'Wyatt Russell and Florence Pugh in Thunderbolts*.',
+	},
+};
