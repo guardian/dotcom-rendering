@@ -10,6 +10,7 @@ import {
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
+	getModulesBuild,
 	getPathFromManifest,
 } from '../lib/assets';
 import { isEditionId } from '../lib/edition';
@@ -60,8 +61,14 @@ export const renderArticle = (
 				'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js', // We have rewritten this standard behaviour into Dotcom Rendering
 	);
 
+	const build = getModulesBuild({
+		tests: frontendData.config.abTests,
+		switches: frontendData.config.switches,
+	});
+
 	const clientScripts = [
-		getPathFromManifest('client.apps', 'index.js'),
+		getPathFromManifest(build, 'frameworks.js'),
+		getPathFromManifest(build, 'index.js'),
 		pageHasNonBootInteractiveElements &&
 			`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 	].filter(isString);
