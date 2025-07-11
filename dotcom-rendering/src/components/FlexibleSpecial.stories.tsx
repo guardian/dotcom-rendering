@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
-import { trails } from '../../fixtures/manual/trails';
+import { loopVideoCard, trails } from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type {
 	DCRContainerPalette,
@@ -256,6 +256,19 @@ export const GigaBoostedSplashWithLiveUpdates: Story = {
 			...emptyGroupedTrails,
 			snap: [],
 			standard: [{ ...liveUpdatesCard, boostLevel: 'gigaboost' }],
+		},
+		collectionId: 1,
+	},
+};
+
+export const LoopVideoCards: Story = {
+	name: 'Looping video cards',
+	args: {
+		frontSectionTitle: 'Looping video',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			snap: [loopVideoCard],
+			standard: [loopVideoCard],
 		},
 		collectionId: 1,
 	},
