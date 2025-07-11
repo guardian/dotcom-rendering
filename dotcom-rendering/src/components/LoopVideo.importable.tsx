@@ -37,6 +37,21 @@ export const dispatchCustomPlayAudioEvent = (uniqueId: string) => {
 	);
 };
 
+const logAndReportError = (src: string, error: Error) => {
+	const message = `Autoplay failure for loop video. Source: ${src} could not be played. Error: ${String(
+		error,
+	)}`;
+
+	if (error instanceof Error) {
+		window.guardian.modules.sentry.reportError(
+			new Error(message),
+			'loop-video',
+		);
+	}
+
+	log('dotcom', message);
+};
+
 type Props = {
 	src: string;
 	atomId: string;
@@ -102,18 +117,9 @@ export const LoopVideo = ({
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- In earlier versions of the HTML specification, play() didn't return a value
 		if (startPlayPromise !== undefined) {
 			await startPlayPromise
-				.catch((error) => {
+				.catch((error: Error) => {
 					// Autoplay failed
-					const message = `Autoplay failure for loop video. Source: ${src} could not be played. Error: ${error}`;
-					if (error instanceof Error) {
-						window.guardian.modules.sentry.reportError(
-							new Error(message),
-							'loop-video',
-						);
-					}
-
-					log('dotcom', message);
-
+					logAndReportError(src, error);
 					setPosterImage(image);
 					setShowPlayIcon(true);
 				})
