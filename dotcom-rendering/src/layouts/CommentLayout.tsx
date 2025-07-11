@@ -325,6 +325,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 									shouldHideReaderRevenue={
 										!!article.config.shouldHideReaderRevenue
 									}
+									abTests={article.config.abTests}
 								/>
 							</Section>
 						</Stuck>

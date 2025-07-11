@@ -99,6 +99,10 @@ const adSlotStyles = css`
 			margin: 0;
 			overflow: visible;
 			width: 100%;
+
+			&[data-label-show='true'] {
+				min-height: calc(250px + ${labelHeight}px);
+			}
 		}
 	}
 `;

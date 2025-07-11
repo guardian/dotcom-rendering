@@ -272,6 +272,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 												!!article.config
 													.shouldHideReaderRevenue
 											}
+											abTests={article.config.abTests}
 										/>
 									</Section>
 								</Stuck>
@@ -317,6 +318,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 													!!article.config
 														.shouldHideReaderRevenue
 												}
+												abTests={article.config.abTests}
 											/>
 										</Section>
 									</Stuck>
