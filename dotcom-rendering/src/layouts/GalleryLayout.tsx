@@ -1,18 +1,22 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/source/foundations';
+import { from, palette as sourcePalette } from '@guardian/source/foundations';
+import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
+import { Footer } from '../components/Footer';
 import { GalleryImage } from '../components/GalleryImage';
+import { Island } from '../components/Island';
 import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
+import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { SubMeta } from '../components/SubMeta';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { NavType } from '../model/extract-nav';
-import { palette } from '../palette';
+import { palette, palette as themePalette } from '../palette';
 import type { Gallery } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 
@@ -45,6 +49,9 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 	const gallery = props.gallery;
 	const frontendData = gallery.frontendData;
 
+	const isWeb = props.renderingTarget === 'Web';
+	const isApps = props.renderingTarget === 'Apps';
+
 	const format: ArticleFormat = {
 		design: gallery.design,
 		display: gallery.display,
@@ -53,7 +60,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 
 	return (
 		<>
-			{props.renderingTarget === 'Web' && (
+			{isWeb && (
 				<Masthead
 					nav={props.NAV}
 					editionId={frontendData.editionId}
@@ -102,7 +109,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						format={format}
 						standfirst={frontendData.standfirst}
 					/>
-					{props.renderingTarget === 'Web' ? (
+					{isWeb ? (
 						<ArticleMeta
 							branding={
 								frontendData.commercialProperties[
@@ -127,7 +134,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 							shortUrlId={frontendData.config.shortUrlId}
 						/>
 					) : null}
-					{props.renderingTarget === 'Apps' ? (
+					{isApps ? (
 						<ArticleMetaApps
 							branding={
 								frontendData.commercialProperties[
@@ -186,11 +193,43 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					webUrl={frontendData.webURL}
 					webTitle={frontendData.webTitle}
 					showBottomSocialButtons={
-						frontendData.showBottomSocialButtons &&
-						props.renderingTarget === 'Web'
+						frontendData.showBottomSocialButtons && isWeb
 					}
 				/>
 			</main>
+			{isWeb && (
+				<Section
+					fullWidth={true}
+					padSides={false}
+					backgroundColour={sourcePalette.brand[400]}
+					borderColour={sourcePalette.brand[600]}
+					showSideBorders={false}
+					element="footer"
+				>
+					<Footer
+						pageFooter={frontendData.pageFooter}
+						selectedPillar={props.NAV.selectedPillar}
+						pillars={props.NAV.pillars}
+						urls={frontendData.nav.readerRevenueLinks.footer}
+						editionId={frontendData.editionId}
+					/>
+				</Section>
+			)}
+			{isApps && (
+				<Section
+					fullWidth={true}
+					data-print-layout="hide"
+					backgroundColour={'red'}
+					borderColour={themePalette('--article-border')}
+					padSides={false}
+					showSideBorders={false}
+					element="footer"
+				>
+					<Island priority="critical">
+						<AppsFooter />
+					</Island>
+				</Section>
+			)}
 		</>
 	);
 };
