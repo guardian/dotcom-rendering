@@ -895,7 +895,7 @@ export const Card = ({
 						)}
 						{media.type === 'loop-video' && (
 							<Island
-								priority="feature"
+								priority="critical"
 								defer={{ until: 'visible' }}
 							>
 								<LoopVideo
@@ -903,19 +903,13 @@ export const Card = ({
 									height={media.mainMedia.height}
 									width={media.mainMedia.width}
 									image={media.mainMedia.image ?? ''}
-									fallbackImageComponent={
-										<CardPicture
-											mainImage={
-												media.mainMedia.image ?? ''
-											}
-											imageSize={imageSize}
-											loading={imageLoading}
-											alt={media.imageAltText}
-											aspectRatio={aspectRatio}
-										/>
-									}
 									uniqueId={uniqueId}
 									atomId={media.mainMedia.atomId}
+									fallbackImage={media.mainMedia.image ?? ''}
+									fallbackImageSize={imageSize}
+									fallbackImageLoading={imageLoading}
+									fallbackImageAlt={media.imageAltText}
+									fallbackImageAspectRatio="5:4"
 								/>
 							</Island>
 						)}

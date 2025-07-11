@@ -14,6 +14,7 @@ import {
 	customLoopPlayAudioEventName,
 	customYoutubePlayEventName,
 } from '../lib/video';
+import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
 import type { PLAYER_STATES, PlayerStates } from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
@@ -36,6 +37,21 @@ export const dispatchCustomPlayAudioEvent = (uniqueId: string) => {
 	);
 };
 
+const logAndReportError = (src: string, error: Error) => {
+	const message = `Autoplay failure for loop video. Source: ${src} could not be played. Error: ${String(
+		error,
+	)}`;
+
+	if (error instanceof Error) {
+		window.guardian.modules.sentry.reportError(
+			new Error(message),
+			'loop-video',
+		);
+	}
+
+	log('dotcom', message);
+};
+
 type Props = {
 	src: string;
 	atomId: string;
@@ -43,7 +59,11 @@ type Props = {
 	width: number;
 	height: number;
 	image: string;
-	fallbackImageComponent: JSX.Element;
+	fallbackImage: CardPictureProps['mainImage'];
+	fallbackImageSize: CardPictureProps['imageSize'];
+	fallbackImageLoading: CardPictureProps['loading'];
+	fallbackImageAlt: CardPictureProps['alt'];
+	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
 };
 
 export const LoopVideo = ({
@@ -53,7 +73,11 @@ export const LoopVideo = ({
 	width,
 	height,
 	image,
-	fallbackImageComponent,
+	fallbackImage,
+	fallbackImageSize,
+	fallbackImageLoading,
+	fallbackImageAlt,
+	fallbackImageAspectRatio,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -93,18 +117,9 @@ export const LoopVideo = ({
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- In earlier versions of the HTML specification, play() didn't return a value
 		if (startPlayPromise !== undefined) {
 			await startPlayPromise
-				.catch((error) => {
+				.catch((error: Error) => {
 					// Autoplay failed
-					const message = `Autoplay failure for loop video. Source: ${src} could not be played. Error: ${error}`;
-					if (error instanceof Error) {
-						window.guardian.modules.sentry.reportError(
-							new Error(message),
-							'loop-video',
-						);
-					}
-
-					log('dotcom', message);
-
+					logAndReportError(src, error);
 					setPosterImage(image);
 					setShowPlayIcon(true);
 				})
@@ -140,6 +155,16 @@ export const LoopVideo = ({
 			void playVideo();
 		}
 	};
+
+	const FallbackImageComponent = (
+		<CardPicture
+			mainImage={fallbackImage}
+			imageSize={fallbackImageSize}
+			loading={fallbackImageLoading}
+			aspectRatio={fallbackImageAspectRatio}
+			alt={fallbackImageAlt}
+		/>
+	);
 
 	/**
 	 * Setup.
@@ -333,7 +358,9 @@ export const LoopVideo = ({
 
 	if (renderingTarget !== 'Web') return null;
 
-	if (adapted) return fallbackImageComponent;
+	if (adapted) {
+		return FallbackImageComponent;
+	}
 
 	const handlePlayPauseClick = (event: React.SyntheticEvent) => {
 		event.preventDefault();
@@ -433,7 +460,7 @@ export const LoopVideo = ({
 				width={width}
 				height={height}
 				posterImage={posterImage}
-				fallbackImageComponent={fallbackImageComponent}
+				FallbackImageComponent={FallbackImageComponent}
 				currentTime={currentTime}
 				setCurrentTime={setCurrentTime}
 				ref={vidRef}
