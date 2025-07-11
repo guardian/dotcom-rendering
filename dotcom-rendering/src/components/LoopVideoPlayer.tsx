@@ -1,7 +1,12 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
 import type { IconProps } from '@guardian/source/react-components';
-import type { Dispatch, SetStateAction, SyntheticEvent } from 'react';
+import type {
+	Dispatch,
+	ReactElement,
+	SetStateAction,
+	SyntheticEvent,
+} from 'react';
 import { forwardRef } from 'react';
 import { palette } from '../palette';
 import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
@@ -66,7 +71,7 @@ type Props = {
 	uniqueId: string;
 	width: number;
 	height: number;
-	fallbackImageComponent: JSX.Element;
+	FallbackImageComponent: ReactElement;
 	isPlayable: boolean;
 	setIsPlayable: Dispatch<SetStateAction<boolean>>;
 	playerState: PlayerStates;
@@ -95,7 +100,7 @@ export const LoopVideoPlayer = forwardRef(
 			uniqueId,
 			width,
 			height,
-			fallbackImageComponent,
+			FallbackImageComponent,
 			posterImage,
 			isPlayable,
 			setIsPlayable,
@@ -154,7 +159,7 @@ export const LoopVideoPlayer = forwardRef(
 					{/* Only mp4 is currently supported. Assumes the video file type is mp4. */}
 					{/* The start time is set to 1ms so that Safari will autoplay the video */}
 					<source src={`${src}#t=0.001`} type="video/mp4" />
-					{fallbackImageComponent}
+					{FallbackImageComponent}
 				</video>
 				{ref && 'current' in ref && ref.current && isPlayable && (
 					<>
