@@ -2,7 +2,10 @@ import { css } from '@emotion/react';
 import { log, storage } from '@guardian/libs';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { submitClickComponentEvent } from '../client/ophan/ophan';
+import {
+	submitClickComponentEvent,
+	submitComponentEvent,
+} from '../client/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { useIsInView } from '../lib/useIsInView';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
@@ -14,6 +17,7 @@ import {
 import { useConfig } from './ConfigContext';
 import type { PLAYER_STATES, PlayerStates } from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
+import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
 const videoContainerStyles = css`
 	z-index: ${getZIndex('loop-video-container')};
@@ -212,9 +216,23 @@ export const LoopVideo = ({
 
 	useEffect(() => {
 		if (isInView && !hasBeenInView) {
+			/**
+			 * Track the first time the video comes into view.
+			 */
+			void submitComponentEvent(
+				{
+					component: {
+						componentType: 'LOOP_VIDEO',
+						id: `gu-video-loop-${atomId}`,
+					},
+					action: 'VIEW',
+				},
+				'Web',
+			);
+
 			setHasBeenInView(true);
 		}
-	}, [isInView, hasBeenInView]);
+	}, [isInView, hasBeenInView, atomId]);
 
 	/**
 	 * Autoplay the video when it comes into view.
@@ -230,9 +248,25 @@ export const LoopVideo = ({
 			(playerState === 'NOT_STARTED' ||
 				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER')
 		) {
+			/**
+			 * check if the video has not been in view before tracking the play.
+			 * This is so we only track the first play.
+			 */
+			if (!hasBeenInView) {
+				ophanTrackerWeb(atomId, 'loop')('play');
+			}
+
 			void playVideo();
 		}
-	}, [isAutoplayAllowed, isInView, isPlayable, playerState, playVideo]);
+	}, [
+		isAutoplayAllowed,
+		isInView,
+		isPlayable,
+		playerState,
+		playVideo,
+		hasBeenInView,
+		atomId,
+	]);
 
 	/**
 	 * Stops playback when the video is scrolled out of view, resumes playbacks
