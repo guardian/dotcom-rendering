@@ -43,7 +43,9 @@ export const Default = () => {
 			/>
 			<ManyNewsletterSignUp
 				useReCaptcha={false}
-				captchaSiteKey="TEST_RECAPTCHA_SITE_KEY"
+				visibleRecaptcha={false}
+				invisibleCaptchaSiteKey="TEST_RECAPTCHA_SITE_KEY_INVISIBLE"
+				visibleCaptchaSiteKey="TEST_RECAPTCHA_SITE_KEY_VISIBLE"
 			/>
 		</>
 	);
