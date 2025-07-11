@@ -15,7 +15,7 @@ type FlexibleSpecialArgsAndCustomArgs = React.ComponentProps<
 	typeof FlexibleSpecial
 > & { frontSectionTitle: string };
 
-const defaultGroupedTrails: DCRGroupedTrails = {
+const emptyGroupedTrails: DCRGroupedTrails = {
 	huge: [],
 	veryBig: [],
 	big: [],
@@ -75,7 +75,7 @@ const meta = {
 		},
 	},
 	args: {
-		groupedTrails: defaultGroupedTrails,
+		groupedTrails: emptyGroupedTrails,
 		showAge: true,
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
@@ -102,7 +102,7 @@ export const One: Story = {
 	name: 'With one splash card',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: trails.slice(0, 1),
 		},
@@ -113,7 +113,7 @@ export const Two: Story = {
 	name: 'With one splash card and one standard card',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: trails.slice(0, 2),
 		},
@@ -124,7 +124,7 @@ export const Three: Story = {
 	name: 'With one splash card and two standard cards',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: trails.slice(0, 3),
 		},
@@ -135,7 +135,7 @@ export const Four: Story = {
 	name: 'With one splash card and three standard cards',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: trails.slice(0, 4),
 		},
@@ -146,7 +146,7 @@ export const Five: Story = {
 	name: 'With one splash card and four standard cards',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: trails.slice(0, 5),
 		},
@@ -158,7 +158,7 @@ export const DefaultSplashWithImageSupression: Story = {
 	args: {
 		frontSectionTitle: 'Standard splash with image supression',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: [{ ...trails[0], image: undefined }],
 		},
@@ -171,7 +171,7 @@ export const BoostedSplashWithImageSupression: Story = {
 	args: {
 		frontSectionTitle: 'Boosted splash',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: [{ ...trails[0], boostLevel: 'boost', image: undefined }],
 		},
@@ -184,7 +184,7 @@ export const MegaBoostedSplashWithImageSupression: Story = {
 	args: {
 		frontSectionTitle: 'Mega boosted splash',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: [
 				{ ...trails[0], boostLevel: 'megaboost', image: undefined },
@@ -199,7 +199,7 @@ export const GigaBoostedSplashWithImageSupression: Story = {
 	args: {
 		frontSectionTitle: 'Giga boosted splash',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: [
 				{ ...trails[0], boostLevel: 'gigaboost', image: undefined },
@@ -214,7 +214,7 @@ export const DefaultSplashWithLiveUpdates: Story = {
 	args: {
 		frontSectionTitle: 'Standard splash',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: [{ ...liveUpdatesCard }],
 		},
@@ -227,7 +227,7 @@ export const BoostedSplashWithLiveUpdates: Story = {
 	args: {
 		frontSectionTitle: 'Boosted splash',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: [{ ...liveUpdatesCard, boostLevel: 'boost' }],
 		},
@@ -240,7 +240,7 @@ export const MegaBoostedSplashWithLiveUpdates: Story = {
 	args: {
 		frontSectionTitle: 'Mega boosted splash',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: [{ ...liveUpdatesCard, boostLevel: 'megaboost' }],
 		},
@@ -253,7 +253,7 @@ export const GigaBoostedSplashWithLiveUpdates: Story = {
 	args: {
 		frontSectionTitle: 'Giga boosted splash',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: [{ ...liveUpdatesCard, boostLevel: 'gigaboost' }],
 		},
@@ -281,7 +281,7 @@ export const WithSpecialPaletteVariations = {
 	name: 'With special palette variations',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: trails.slice(0, 5),
 		},

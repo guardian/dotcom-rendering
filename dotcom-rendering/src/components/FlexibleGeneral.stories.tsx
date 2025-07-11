@@ -18,7 +18,7 @@ import type {
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FrontSection } from './FrontSection';
 
-const defaultGroupedTrails: DCRGroupedTrails = {
+const emptyGroupedTrails: DCRGroupedTrails = {
 	huge: [],
 	veryBig: [],
 	big: [],
@@ -143,7 +143,7 @@ const meta = {
 	},
 	args: {
 		frontSectionTitle: 'Flexible general',
-		groupedTrails: defaultGroupedTrails,
+		groupedTrails: emptyGroupedTrails,
 		showAge: true,
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
@@ -171,7 +171,7 @@ export const SplashWithStandards: Story = {
 	args: {
 		frontSectionTitle: 'Splash with stardards',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			splash: [{ ...splashCard, supportingContent: [] }],
 			standard: standardCards,
 		},
@@ -182,7 +182,7 @@ export const SplashWithSublinks: Story = {
 	name: 'Standard splash with sublinks',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			splash: [{ ...splashCard, image: undefined }],
 		},
 	},
@@ -203,7 +203,7 @@ export const SplashWithSublinks: Story = {
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
-						...defaultGroupedTrails,
+						...emptyGroupedTrails,
 						splash: [{ ...splashCard, supportingContent }],
 					}}
 				/>
@@ -276,7 +276,7 @@ export const SplashBoostLevels: Story = {
 	name: 'Splash boost levels',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			splash: [{ ...splashCard, image: undefined }],
 		},
 	},
@@ -297,7 +297,7 @@ export const SplashBoostLevels: Story = {
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
-						...defaultGroupedTrails,
+						...emptyGroupedTrails,
 						splash: [
 							{
 								...splashCard,
@@ -324,7 +324,7 @@ export const SplashWithImageSupression: Story = {
 	name: 'Splash with image supression',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			splash: [{ ...splashCard, image: undefined }],
 		},
 	},
@@ -345,7 +345,7 @@ export const SplashWithImageSupression: Story = {
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
-						...defaultGroupedTrails,
+						...emptyGroupedTrails,
 						splash: [
 							{ ...splashCard, boostLevel, image: undefined },
 						],
@@ -369,7 +369,7 @@ export const SplashWithLiveUpdates: Story = {
 	name: 'Splash with live updates',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			splash: [{ ...splashCard, image: undefined }],
 		},
 	},
@@ -391,7 +391,7 @@ export const SplashWithLiveUpdates: Story = {
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
-						...defaultGroupedTrails,
+						...emptyGroupedTrails,
 						splash: [{ ...liveUpdatesCard, boostLevel }],
 					}}
 				/>
@@ -441,7 +441,7 @@ export const DefaultSplashWithLiveUpdatesAndSlideshow: Story = {
 	args: {
 		frontSectionTitle: 'Standard splash with live updates and slideshow',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 
 			splash: [{ ...slideshowCard }],
 		},
@@ -453,7 +453,7 @@ export const StandardCards: Story = {
 	args: {
 		frontSectionTitle: 'Standard cards',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			standard: trails.slice(0, 4),
 		},
 	},
@@ -464,7 +464,7 @@ export const OpinionStandardCards: Story = {
 	args: {
 		frontSectionTitle: 'Opinion standard cards',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			standard: opinionTrails.slice(0, 2),
 		},
 	},
@@ -490,7 +490,7 @@ export const WithSpecialPaletteVariations = {
 	name: 'With special palette variations',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			splash: [
 				{
 					...splashCard,
@@ -527,7 +527,7 @@ export const SecondaryContainerStandardCards: Story = {
 		frontSectionTitle: 'Secondary container with standard cards',
 		containerLevel: 'Secondary',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			standard: standardCards.slice(0, 4),
 		},
 	},
@@ -538,7 +538,7 @@ export const ImmersiveCardsSplashAndStandard: Story = {
 	args: {
 		frontSectionTitle: 'Immersive cards',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			splash: [
 				{ ...splashCard, isImmersive: true, supportingContent: [] },
 			],
