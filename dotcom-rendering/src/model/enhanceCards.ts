@@ -13,6 +13,8 @@ import { getSoleContributor } from '../lib/byline';
 import type { EditionId } from '../lib/edition';
 import type { Group } from '../lib/getDataLinkName';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
+import { getLargestImageSize } from '../lib/image';
+import type { Image } from '../types/content';
 import type {
 	DCRFrontCard,
 	DCRSlideshowImage,
@@ -155,17 +157,68 @@ const decideSlideshowImages = (
 	return undefined;
 };
 
+const getLargestImageUrl = (images?: Image[]) => {
+	return getLargestImageSize(
+		images?.map(({ url, fields: { width } }) => ({
+			url,
+			width: Number(width),
+		})) ?? [],
+	)?.url;
+};
+
+/**
+ * If we have a replacement video, we should use the largest available trail image from the media atom.
+ * For all other videos, we should use the card's trail image where it is available and fall back to the media trail image.
+ * */
+const decideMediaAtomImage = (
+	videoReplace: boolean,
+	mediaAtom: FEMediaAtom,
+	cardTrailImage?: string,
+) => {
+	if (videoReplace) {
+		return getLargestImageUrl(mediaAtom.trailImage?.allImages);
+	}
+	return (
+		cardTrailImage ?? getLargestImageUrl(mediaAtom.trailImage?.allImages)
+	);
+};
+
 /**
  * While the first Media Atom is *not* guaranteed to be the main media,
  * it *happens to be* correct in the majority of cases.
  * @see https://github.com/guardian/frontend/pull/26247 for inspiration
  */
 
-const getActiveMediaAtom = (mediaAtom?: FEMediaAtom): MainMedia | undefined => {
+const getActiveMediaAtom = (
+	isLoopingVideoTest: boolean,
+	videoReplace: boolean,
+	mediaAtom?: FEMediaAtom,
+	cardTrailImage?: string,
+): MainMedia | undefined => {
 	if (mediaAtom) {
 		const asset = mediaAtom.assets.find(
 			({ version }) => version === mediaAtom.activeVersion,
 		);
+
+		const image = decideMediaAtomImage(
+			videoReplace,
+			mediaAtom,
+			cardTrailImage,
+		);
+
+		if (asset?.platform === 'Url' && isLoopingVideoTest) {
+			return {
+				type: 'LoopVideo',
+				atomId: mediaAtom.id,
+				videoId: asset.id,
+				duration: mediaAtom.duration ?? 0,
+				// Size fixed to a 5:4 ratio
+				width: 500,
+				height: 400,
+				image,
+			};
+		}
+
 		if (asset?.platform === 'Youtube') {
 			return {
 				type: 'Video',
@@ -178,21 +231,17 @@ const getActiveMediaAtom = (mediaAtom?: FEMediaAtom): MainMedia | undefined => {
 				height: 300,
 				origin: mediaAtom.source ?? 'Unknown origin',
 				expired: !!mediaAtom.expired,
-				images:
-					mediaAtom.posterImage?.allImages.map(
-						({ url, fields: { width } }) => ({
-							url,
-							width: Number(width),
-						}),
-					) ?? [],
+				image,
 			};
 		}
 	}
+
 	return undefined;
 };
 
 const decideMedia = (
 	format: ArticleFormat,
+	isLoopingVideoTest: boolean,
 	showMainVideo?: boolean,
 	mediaAtom?: FEMediaAtom,
 	galleryCount: number = 0,
@@ -200,11 +249,17 @@ const decideMedia = (
 	podcastImage?: PodcastSeriesImage,
 	imageHide?: boolean,
 	videoReplace?: boolean,
+	cardImage?: string,
 ): MainMedia | undefined => {
 	// If the showVideo toggle is enabled in the fronts tool,
 	// we should return the active mediaAtom regardless of the design
 	if (!!showMainVideo || !!videoReplace) {
-		return getActiveMediaAtom(mediaAtom);
+		return getActiveMediaAtom(
+			isLoopingVideoTest,
+			!!videoReplace,
+			mediaAtom,
+			cardImage,
+		);
 	}
 
 	switch (format.design) {
@@ -219,7 +274,12 @@ const decideMedia = (
 			};
 
 		case ArticleDesign.Video: {
-			return getActiveMediaAtom(mediaAtom);
+			return getActiveMediaAtom(
+				isLoopingVideoTest,
+				false,
+				mediaAtom,
+				cardImage,
+			);
 		}
 
 		default:
@@ -235,6 +295,7 @@ export const enhanceCards = (
 		editionId,
 		pageId,
 		discussionApiUrl,
+		isLoopingVideoTest = false,
 	}: {
 		cardInTagPage: boolean;
 		/** Used for the data link name to indicate card position in container */
@@ -242,6 +303,7 @@ export const enhanceCards = (
 		editionId: EditionId;
 		pageId?: string;
 		discussionApiUrl: string;
+		isLoopingVideoTest?: boolean;
 	},
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
@@ -286,6 +348,7 @@ export const enhanceCards = (
 
 		const mainMedia = decideMedia(
 			format,
+			isLoopingVideoTest,
 			faciaCard.properties.showMainVideo ??
 				faciaCard.properties.mediaSelect?.showMainVideo,
 			faciaCard.mediaAtom ??
@@ -296,6 +359,7 @@ export const enhanceCards = (
 			podcastImage,
 			faciaCard.display.imageHide,
 			faciaCard.properties.mediaSelect?.videoReplace,
+			imageSrc,
 		);
 
 		return {
@@ -329,6 +393,7 @@ export const enhanceCards = (
 			isCrossword: faciaCard.properties.isCrossword,
 			isNewsletter,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
+			// show latest 3 updates from a live blog
 			showLivePlayable: faciaCard.display.showLivePlayable,
 			avatarUrl:
 				!isContributorTagPage &&

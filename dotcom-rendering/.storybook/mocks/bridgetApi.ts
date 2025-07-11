@@ -86,9 +86,9 @@ export const getDiscussionClient: BridgetApi<'getDiscussionClient'> = () => ({
 	recommend: async () => discussionErrorResponse,
 });
 
-export const getInteractionClient: BridgetApi<
-	'getInteractionClient'
-> = () => ({});
+export const getInteractionClient: BridgetApi<'getInteractionClient'> = () => ({
+	disableArticleSwipe: async () => void 0,
+});
 
 export const getInteractivesClient: BridgetApi<
 	'getInteractivesClient'
@@ -96,6 +96,12 @@ export const getInteractivesClient: BridgetApi<
 	getNativePlatform: async () => 0,
 });
 
+export const getListenToArticleClient: BridgetApi<
+	'getListenToArticleClient'
+> = () => ({
+	isAvailable: async () => true,
+	isPlaying: async () => false,
+});
 export const ensure_all_exports_are_present = {
 	getUserClient,
 	getAcquisitionsClient,
@@ -112,6 +118,7 @@ export const ensure_all_exports_are_present = {
 	getTagClient,
 	getInteractionClient,
 	getInteractivesClient,
+	getListenToArticleClient,
 } satisfies {
 	[Method in keyof BridgeModule]: BridgetApi<Method>;
 };

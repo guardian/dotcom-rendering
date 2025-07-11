@@ -1,6 +1,7 @@
 import type { StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import { initialDays, regions } from '../../fixtures/manual/footballData';
+import { WomensEuro2025 } from './FootballCompetitionNav.stories';
 import { FootballMatchesPage } from './FootballMatchesPage';
 
 const meta = {
@@ -36,5 +37,12 @@ export const Fixtures = {
 	args: {
 		...Results.args,
 		kind: 'FootballFixtures',
+	},
+} satisfies Story;
+
+export const WithCompetitionNav = {
+	args: {
+		...Fixtures.args,
+		pageId: WomensEuro2025.args.pageId,
 	},
 } satisfies Story;

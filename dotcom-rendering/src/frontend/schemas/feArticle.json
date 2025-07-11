@@ -309,6 +309,9 @@
         "audioArticleImage": {
             "$ref": "#/definitions/ImageBlockElement"
         },
+        "trailPicture": {
+            "$ref": "#/definitions/ImageBlockElement"
+        },
         "trailText": {
             "type": "string"
         },
@@ -669,6 +672,9 @@
                 },
                 {
                     "$ref": "#/definitions/KeyTakeawaysBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/LinkBlockElement"
                 },
                 {
                     "$ref": "#/definitions/ListBlockElement"
@@ -2492,6 +2498,31 @@
             "required": [
                 "body",
                 "title"
+            ]
+        },
+        "LinkBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.LinkBlockElement"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "linkType": {
+                    "type": "string",
+                    "const": "ProductButton"
+                }
+            },
+            "required": [
+                "_type",
+                "label",
+                "linkType",
+                "url"
             ]
         },
         "ListBlockElement": {
@@ -5139,6 +5170,9 @@
                     "description": "For displaying embedded, playable videos directly in cards"
                 },
                 {
+                    "$ref": "#/definitions/LoopVideo"
+                },
+                {
                     "$ref": "#/definitions/Audio"
                 },
                 {
@@ -5156,6 +5190,7 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
+                                "LoopVideo",
                                 "Video"
                             ],
                             "type": "string"
@@ -5196,23 +5231,8 @@
                         "expired": {
                             "type": "boolean"
                         },
-                        "images": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "url": {
-                                        "type": "string"
-                                    },
-                                    "width": {
-                                        "type": "number"
-                                    }
-                                },
-                                "required": [
-                                    "url",
-                                    "width"
-                                ]
-                            }
+                        "image": {
+                            "type": "string"
                         }
                     },
                     "required": [
@@ -5220,9 +5240,64 @@
                         "expired",
                         "height",
                         "id",
-                        "images",
                         "origin",
                         "title",
+                        "type",
+                        "videoId",
+                        "width"
+                    ]
+                }
+            ]
+        },
+        "LoopVideo": {
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Audio",
+                                "Gallery",
+                                "LoopVideo",
+                                "Video"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "LoopVideo"
+                        },
+                        "atomId": {
+                            "type": "string"
+                        },
+                        "videoId": {
+                            "type": "string"
+                        },
+                        "height": {
+                            "type": "number"
+                        },
+                        "width": {
+                            "type": "number"
+                        },
+                        "duration": {
+                            "type": "number"
+                        },
+                        "image": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "atomId",
+                        "duration",
+                        "height",
                         "type",
                         "videoId",
                         "width"
@@ -5239,6 +5314,7 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
+                                "LoopVideo",
                                 "Video"
                             ],
                             "type": "string"
@@ -5286,6 +5362,7 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
+                                "LoopVideo",
                                 "Video"
                             ],
                             "type": "string"

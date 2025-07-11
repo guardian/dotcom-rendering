@@ -3216,6 +3216,20 @@
                         "allImages"
                     ]
                 },
+                "trailImage": {
+                    "type": "object",
+                    "properties": {
+                        "allImages": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Image"
+                            }
+                        }
+                    },
+                    "required": [
+                        "allImages"
+                    ]
+                },
                 "expired": {
                     "type": "boolean"
                 },
@@ -3795,6 +3809,9 @@
                     "description": "For displaying embedded, playable videos directly in cards"
                 },
                 {
+                    "$ref": "#/definitions/LoopVideo"
+                },
+                {
                     "$ref": "#/definitions/Audio"
                 },
                 {
@@ -3812,6 +3829,7 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
+                                "LoopVideo",
                                 "Video"
                             ],
                             "type": "string"
@@ -3852,23 +3870,8 @@
                         "expired": {
                             "type": "boolean"
                         },
-                        "images": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "url": {
-                                        "type": "string"
-                                    },
-                                    "width": {
-                                        "type": "number"
-                                    }
-                                },
-                                "required": [
-                                    "url",
-                                    "width"
-                                ]
-                            }
+                        "image": {
+                            "type": "string"
                         }
                     },
                     "required": [
@@ -3876,9 +3879,64 @@
                         "expired",
                         "height",
                         "id",
-                        "images",
                         "origin",
                         "title",
+                        "type",
+                        "videoId",
+                        "width"
+                    ]
+                }
+            ]
+        },
+        "LoopVideo": {
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Audio",
+                                "Gallery",
+                                "LoopVideo",
+                                "Video"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "LoopVideo"
+                        },
+                        "atomId": {
+                            "type": "string"
+                        },
+                        "videoId": {
+                            "type": "string"
+                        },
+                        "height": {
+                            "type": "number"
+                        },
+                        "width": {
+                            "type": "number"
+                        },
+                        "duration": {
+                            "type": "number"
+                        },
+                        "image": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "atomId",
+                        "duration",
+                        "height",
                         "type",
                         "videoId",
                         "width"
@@ -3895,6 +3953,7 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
+                                "LoopVideo",
                                 "Video"
                             ],
                             "type": "string"
@@ -3942,6 +4001,7 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
+                                "LoopVideo",
                                 "Video"
                             ],
                             "type": "string"

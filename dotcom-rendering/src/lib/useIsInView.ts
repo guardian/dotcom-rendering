@@ -42,8 +42,11 @@ type Options = {
  */
 const useIsInView = (
 	options: IntersectionObserverInit & Options,
-): [boolean, React.Dispatch<React.SetStateAction<HTMLElement | null>>] => {
-	const [isInView, setIsInView] = useState<boolean>(false);
+): [
+	boolean | null,
+	React.Dispatch<React.SetStateAction<HTMLElement | null>>,
+] => {
+	const [isInView, setIsInView] = useState<boolean | null>(null);
 	const [node, setNode] = useState<HTMLElement | null>(options.node ?? null);
 
 	const observer = useRef<IntersectionObserver | null>(null);

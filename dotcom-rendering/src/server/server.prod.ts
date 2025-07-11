@@ -4,10 +4,7 @@ import express from 'express';
 import responseTime from 'response-time';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
-import {
-	handleAMPArticle,
-	handlePerfTest as handleAMPArticlePerfTest,
-} from './handler.article.amp';
+import { handleAMPArticle } from './handler.article.amp';
 import {
 	handleAppsArticle,
 	handleAppsBlocks,
@@ -16,7 +13,6 @@ import {
 import {
 	handleArticle,
 	handleArticleJson,
-	handleArticlePerfTest,
 	handleBlocks,
 	handleInteractive,
 } from './handler.article.web';
@@ -103,41 +99,41 @@ export const prodServer = (): void => {
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get(
-		'/Article/*',
+		'/Article/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleArticle,
 	);
-	app.use('/ArticleJson/*', handleArticleJson);
+	app.use('/ArticleJson/*url', handleArticleJson);
 
 	app.get(
-		'/AMPArticle/*',
+		'/AMPArticle/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleAMPArticle,
 	);
 
 	app.get(
-		'/Front/*',
+		'/Front/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleFront,
 	);
 	app.get(
-		'/FrontJSON/*',
+		'/FrontJSON/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleFrontJson,
 	);
 
 	app.get(
-		'/TagPage/*',
+		'/TagPage/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleTagPage,
 	);
 	app.get(
-		'/TagPageJSON/*',
+		'/TagPageJSON/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleTagPageJson,
@@ -151,37 +147,25 @@ export const prodServer = (): void => {
 	);
 
 	app.get(
-		'/AppsArticle/*',
+		'/AppsArticle/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleAppsArticle,
 	);
 
 	app.get(
-		'/AppsInteractive/*',
+		'/AppsInteractive/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleAppsInteractive,
 	);
-
-	app.use('/ArticlePerfTest/*', handleArticlePerfTest);
-	app.use('/AMPArticlePerfTest/*', handleAMPArticlePerfTest);
 
 	app.get('/', (req, res) => {
 		res.send(`
 			<!DOCTYPE html>
 			<html>
 			<body>
-				<ul>
-					<li><a href="/Article">Article</a></li>
-					<li><a href="/AMPArticle">⚡️Article</a></li>
-					<li><a href="/ArticlePerfTest">⚡Article (perf test example)</a></li>
-					<li><a href="/AMPArticlePerfTest">⚡️Article (perf test example)</a></li>
-				</ul>
-				<ul>
-					<li><a href="/ArticlePerfTest">⚡Article (perf test example)</a></li>
-					<li><a href="/AMPArticlePerfTest">⚡️Article (perf test example)</a></li>
-				</ul>
+				<h1>👋</h1>
 			</body>
 			</html>
 		`);

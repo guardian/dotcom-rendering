@@ -99,12 +99,7 @@ export const trails: [
 			height: 288,
 			origin: 'The Guardian',
 			expired: false,
-			images: [
-				{
-					url: 'https://i.guim.co.uk/img/media/e060e9b7c92433b3dfeccc98b9206778cda8b8e8/0_180_6680_4009/master/6680.jpg?width=600&quality=45&dpr=2&s=none',
-					width: 600,
-				},
-			],
+			image: 'https://i.guim.co.uk/img/media/e060e9b7c92433b3dfeccc98b9206778cda8b8e8/0_180_6680_4009/master/6680.jpg?width=600&quality=45&dpr=2&s=none',
 		},
 		isExternalLink: false,
 		showLivePlayable: false,
@@ -465,24 +460,7 @@ export const trails: [
 			width: 500,
 			height: 300,
 			origin: 'The Guardian',
-			images: [
-				{
-					url: 'https://media.guim.co.uk/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/0_0_1920_1080/1000.jpg',
-					width: 1000,
-				},
-				{
-					url: 'https://media.guim.co.uk/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/0_0_1920_1080/500.jpg',
-					width: 500,
-				},
-				{
-					url: 'https://media.guim.co.uk/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/0_0_1920_1080/140.jpg',
-					width: 140,
-				},
-				{
-					url: 'https://media.guim.co.uk/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/0_0_1920_1080/1920.jpg',
-					width: 1920,
-				},
-			],
+			image: 'https://media.guim.co.uk/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/0_0_1920_1080/1920.jpg',
 			expired: false,
 		},
 		isExternalLink: false,
@@ -608,12 +586,7 @@ export const trails: [
 			height: 288,
 			origin: 'The Guardian',
 			expired: false,
-			images: [
-				{
-					url: 'https://i.guim.co.uk/img/media/e060e9b7c92433b3dfeccc98b9206778cda8b8e8/0_180_6680_4009/master/6680.jpg?width=600&quality=45&dpr=2&s=none',
-					width: 600,
-				},
-			],
+			image: 'https://i.guim.co.uk/img/media/e060e9b7c92433b3dfeccc98b9206778cda8b8e8/0_180_6680_4009/master/6680.jpg?width=600&quality=45&dpr=2&s=none',
 		},
 		isExternalLink: false,
 		showLivePlayable: false,
@@ -794,28 +767,7 @@ export const videoTrails: [DCRFrontCard, DCRFrontCard] = [
 			height: 300,
 			origin: 'SNTV',
 			expired: false,
-			images: [
-				{
-					url: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_56_3000_1688/2000.jpg',
-					width: 2000,
-				},
-				{
-					url: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_56_3000_1688/1000.jpg',
-					width: 1000,
-				},
-				{
-					url: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_56_3000_1688/500.jpg',
-					width: 500,
-				},
-				{
-					url: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_56_3000_1688/140.jpg',
-					width: 140,
-				},
-				{
-					url: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_56_3000_1688/3000.jpg',
-					width: 3000,
-				},
-			],
+			image: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_56_3000_1688/3000.jpg',
 		},
 		showVideo: true,
 		image: {
@@ -849,28 +801,7 @@ export const videoTrails: [DCRFrontCard, DCRFrontCard] = [
 			height: 300,
 			origin: 'Reuters',
 			expired: false,
-			images: [
-				{
-					url: 'https://media.guim.co.uk/908aa315f66a09bc6ea607b6049cd72decd2dfa6/0_0_5358_3014/2000.jpg',
-					width: 2000,
-				},
-				{
-					url: 'https://media.guim.co.uk/908aa315f66a09bc6ea607b6049cd72decd2dfa6/0_0_5358_3014/1000.jpg',
-					width: 1000,
-				},
-				{
-					url: 'https://media.guim.co.uk/908aa315f66a09bc6ea607b6049cd72decd2dfa6/0_0_5358_3014/500.jpg',
-					width: 500,
-				},
-				{
-					url: 'https://media.guim.co.uk/908aa315f66a09bc6ea607b6049cd72decd2dfa6/0_0_5358_3014/140.jpg',
-					width: 140,
-				},
-				{
-					url: 'https://media.guim.co.uk/908aa315f66a09bc6ea607b6049cd72decd2dfa6/0_0_5358_3014/5358.jpg',
-					width: 5358,
-				},
-			],
+			image: 'https://media.guim.co.uk/908aa315f66a09bc6ea607b6049cd72decd2dfa6/0_0_5358_3014/5358.jpg',
 		},
 		showVideo: true,
 		image: {

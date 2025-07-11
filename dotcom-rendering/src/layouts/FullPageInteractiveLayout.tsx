@@ -7,6 +7,7 @@ import {
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe.importable';
 import { InteractivesNativePlatformWrapper } from '../components/InteractivesNativePlatformWrapper.importable';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
@@ -26,6 +27,7 @@ import type { ArticleDeprecated } from '../types/article';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { temporaryBodyCopyColourOverride } from './InteractiveLayout';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -63,6 +65,7 @@ type RendererProps = {
 	abTests: ServerSideTests;
 	switches: Switches;
 	editionId: EditionId;
+	shouldHideAds: boolean;
 };
 
 const Renderer = ({
@@ -77,6 +80,7 @@ const Renderer = ({
 	abTests,
 	switches,
 	editionId,
+	shouldHideAds,
 }: RendererProps) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
@@ -98,6 +102,7 @@ const Renderer = ({
 			abTests,
 			switches,
 			editionId,
+			shouldHideAds,
 		});
 
 		switch (element._type) {
@@ -210,9 +215,15 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 				<Global styles={interactiveGlobalStyles} />
 			)}
 			{isApps && (
-				<Island priority="critical">
-					<InteractivesNativePlatformWrapper />
-				</Island>
+				<>
+					<Island priority="critical">
+						<InteractivesNativePlatformWrapper />
+					</Island>
+					<Island priority="critical">
+						<InteractivesDisableArticleSwipe />
+					</Island>
+					<Global styles={temporaryBodyCopyColourOverride} />
+				</>
 			)}
 			{isWeb && (
 				<>
@@ -297,6 +308,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}
 						editionId={article.editionId}
+						shouldHideAds={article.shouldHideAds}
 					/>
 				</article>
 			</Section>

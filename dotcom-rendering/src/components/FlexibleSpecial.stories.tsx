@@ -54,28 +54,7 @@ const liveUpdatesCard = {
 		title: 'Spain fans celebrate at final whistle as England fans left heartbroken – video',
 		duration: 0,
 		expired: false,
-		images: [
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/2000.jpg',
-				width: 2000,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/1000.jpg',
-				width: 1000,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/500.jpg',
-				width: 500,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/140.jpg',
-				width: 140,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/4791.jpg',
-				width: 4791,
-			},
-		],
+		image: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/4791.jpg',
 	},
 	isExternalLink: false,
 	discussionApiUrl,
@@ -101,7 +80,7 @@ const meta = {
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
-		frontSectionTitle: 'Flexible general',
+		frontSectionTitle: 'Flexible special',
 	},
 	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
@@ -127,6 +106,7 @@ export const One: Story = {
 			snap: [],
 			standard: trails.slice(0, 1),
 		},
+		collectionId: 1,
 	},
 };
 export const Two: Story = {
@@ -137,6 +117,7 @@ export const Two: Story = {
 			snap: [],
 			standard: trails.slice(0, 2),
 		},
+		collectionId: 1,
 	},
 };
 export const Three: Story = {
@@ -147,6 +128,7 @@ export const Three: Story = {
 			snap: [],
 			standard: trails.slice(0, 3),
 		},
+		collectionId: 1,
 	},
 };
 export const Four: Story = {
@@ -157,6 +139,7 @@ export const Four: Story = {
 			snap: [],
 			standard: trails.slice(0, 4),
 		},
+		collectionId: 1,
 	},
 };
 export const Five: Story = {
@@ -167,6 +150,7 @@ export const Five: Story = {
 			snap: [],
 			standard: trails.slice(0, 5),
 		},
+		collectionId: 1,
 	},
 };
 export const DefaultSplashWithImageSupression: Story = {
@@ -178,6 +162,7 @@ export const DefaultSplashWithImageSupression: Story = {
 			snap: [],
 			standard: [{ ...trails[0], image: undefined }],
 		},
+		collectionId: 1,
 	},
 };
 
@@ -190,6 +175,7 @@ export const BoostedSplashWithImageSupression: Story = {
 			snap: [],
 			standard: [{ ...trails[0], boostLevel: 'boost', image: undefined }],
 		},
+		collectionId: 1,
 	},
 };
 
@@ -204,6 +190,7 @@ export const MegaBoostedSplashWithImageSupression: Story = {
 				{ ...trails[0], boostLevel: 'megaboost', image: undefined },
 			],
 		},
+		collectionId: 1,
 	},
 };
 
@@ -218,6 +205,7 @@ export const GigaBoostedSplashWithImageSupression: Story = {
 				{ ...trails[0], boostLevel: 'gigaboost', image: undefined },
 			],
 		},
+		collectionId: 1,
 	},
 };
 
@@ -230,6 +218,7 @@ export const DefaultSplashWithLiveUpdates: Story = {
 			snap: [],
 			standard: [{ ...liveUpdatesCard }],
 		},
+		collectionId: 1,
 	},
 };
 
@@ -242,6 +231,7 @@ export const BoostedSplashWithLiveUpdates: Story = {
 			snap: [],
 			standard: [{ ...liveUpdatesCard, boostLevel: 'boost' }],
 		},
+		collectionId: 1,
 	},
 };
 
@@ -254,6 +244,7 @@ export const MegaBoostedSplashWithLiveUpdates: Story = {
 			snap: [],
 			standard: [{ ...liveUpdatesCard, boostLevel: 'megaboost' }],
 		},
+		collectionId: 1,
 	},
 };
 
@@ -266,6 +257,7 @@ export const GigaBoostedSplashWithLiveUpdates: Story = {
 			snap: [],
 			standard: [{ ...liveUpdatesCard, boostLevel: 'gigaboost' }],
 		},
+		collectionId: 1,
 	},
 };
 
@@ -293,6 +285,7 @@ export const WithSpecialPaletteVariations = {
 			snap: [],
 			standard: trails.slice(0, 5),
 		},
+		collectionId: 1,
 	},
 	render: (args) => (
 		<>

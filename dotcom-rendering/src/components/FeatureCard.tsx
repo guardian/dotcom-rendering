@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, space } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import { Hide, SvgMediaControlsPlay } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
@@ -109,7 +109,12 @@ const immersiveOverlayContainerStyles = css`
 	${from.tablet} {
 		top: 0;
 		height: 100%;
-		width: 220px;
+		/**
+		* Why 268px?
+		* 220 is the width of 4 columns on tablet and 3 columns on desktop.
+		* 48px is to ensure the gradient does not render the content inaccessible.
+		*/
+		width: 268px;
 		z-index: 1;
 	}
 `;
@@ -122,7 +127,6 @@ const immersiveOverlayContainerStyles = css`
  * reduced.) The following article has more detail on non-linear gradients:
  * https://css-tricks.com/easing-linear-gradients/
  */
-
 const overlayMaskGradientStyles = (angle: string) => css`
 	mask-image: linear-gradient(
 		${angle},
@@ -155,7 +159,11 @@ const overlayStyles = css`
 const immersiveOverlayStyles = css`
 	${from.tablet} {
 		height: 100%;
-		padding: ${space[2]}px 64px ${space[2]}px ${space[2]}px;
+		/**
+		* Why 48px right padding?
+		* 48px is to point at which the gradient can go behind the content whilst maintaining accessibility.
+		*/
+		padding: ${space[2]}px ${space[12]}px ${space[2]}px ${space[2]}px;
 		backdrop-filter: blur(12px) brightness(0.5);
 		${overlayMaskGradientStyles('270deg')}
 	}
@@ -192,6 +200,10 @@ const starRatingWrapper = css`
 
 const trailTextWrapper = css`
 	margin-top: ${space[3]}px;
+
+	${until.tablet} {
+		display: none;
+	}
 `;
 
 const videoPillStyles = css`
@@ -226,7 +238,6 @@ const getMedia = ({
 		return {
 			type: 'video',
 			mainMedia,
-			...(imageUrl && { imageUrl }),
 		} as const;
 	}
 
@@ -316,8 +327,8 @@ export type Props = {
 	collectionId: number;
 	isNewsletter?: boolean;
 	/**
-	 * An immersive feature card variant. It dictates that the card has a full width background image on all breakpoints. It also dictates the the card change aspect ratio to 5:3 on desktop and 4:5 on mobile.
-	 *
+	 * An immersive feature card variant. It dictates that the card has a full width background image on
+	 * all breakpoints. It also dictates the the card change aspect ratio to 5:3 on desktop and 4:5 on mobile.
 	 */
 	isImmersive?: boolean;
 	showVideo?: boolean;
@@ -418,8 +429,7 @@ export const FeatureCard = ({
 										stickyVideos={false}
 										enableAds={false}
 										duration={mainMedia.duration}
-										posterImage={mainMedia.images}
-										overrideImage={media?.imageUrl}
+										posterImage={mainMedia.image}
 										width={300}
 										height={375}
 										origin="The Guardian"
@@ -467,15 +477,7 @@ export const FeatureCard = ({
 									<div>
 										<CardPicture
 											mainImage={
-												media.imageUrl
-													? media.imageUrl
-													: media.mainMedia.images.reduce(
-															(prev, current) =>
-																prev.width >
-																current.width
-																	? prev
-																	: current,
-													  ).url
+												media.mainMedia.image ?? ''
 											}
 											imageSize={imageSize}
 											alt={headlineText}

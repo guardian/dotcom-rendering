@@ -1,5 +1,4 @@
 import type { RequestHandler } from 'express';
-import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
 import { decideFormat } from '../lib/articleFormat';
 import { enhanceBlocks } from '../model/enhanceBlocks';
 import { validateAsBlock, validateAsFEArticle } from '../model/validate';
@@ -37,11 +36,6 @@ export const handleArticleJson: RequestHandler = ({ body }, res) => {
 	res.status(200).send(resp);
 };
 
-export const handleArticlePerfTest: RequestHandler = (req, res, next) => {
-	req.body = ExampleArticle;
-	handleArticle(req, res, next);
-};
-
 export const handleInteractive: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('interactive', 'web');
 
@@ -73,6 +67,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		abTests,
 		switches,
 		keywordIds,
+		shouldHideAds,
 	} =
 		// The content if body is not checked
 		body as FEBlocksRequest;
@@ -83,6 +78,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		promotedNewsletter: undefined,
 		imagesForLightbox: [],
 		hasAffiliateLinksDisclaimer: false,
+		shouldHideAds,
 	});
 	const html = renderBlocks({
 		blocks: enhancedBlocks,
@@ -101,6 +97,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		switches,
 		abTests,
 		keywordIds,
+		shouldHideAds,
 	});
 
 	res.status(200).send(html);

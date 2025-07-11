@@ -1,7 +1,7 @@
 import type { PodcastSeriesImage } from './tag';
 
 type Media = {
-	type: 'Video' | 'Audio' | 'Gallery';
+	type: 'Video' | 'LoopVideo' | 'Audio' | 'Gallery';
 };
 
 /** For displaying embedded, playable videos directly in cards */
@@ -16,7 +16,17 @@ type Video = Media & {
 	title: string;
 	duration: number;
 	expired: boolean;
-	images: Array<{ url: string; width: number }>;
+	image?: string;
+};
+
+type LoopVideo = Media & {
+	type: 'LoopVideo';
+	atomId: string;
+	videoId: string;
+	height: number;
+	width: number;
+	duration: number;
+	image?: string;
 };
 
 type Audio = Media & {
@@ -30,4 +40,4 @@ type Gallery = Media & {
 	count: string;
 };
 
-export type MainMedia = Video | Audio | Gallery;
+export type MainMedia = Video | LoopVideo | Audio | Gallery;

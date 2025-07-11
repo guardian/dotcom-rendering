@@ -8,7 +8,7 @@ import {
 } from '../../../../lib/useMatchMedia';
 import { getChoiceCards } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
-import { ThreeTierChoiceCards } from '../ThreeTierChoiceCards';
+import { ThreeTierChoiceCards } from '../../shared/ThreeTierChoiceCards';
 import { ContributionsEpicButtons } from './ContributionsEpicButtons';
 import { ContributionsEpicReminder } from './ContributionsEpicReminder';
 
@@ -20,7 +20,6 @@ type Props = EpicProps & {
 export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 	variant,
 	countryCode,
-	articleCounts,
 	tracking,
 	submitComponentEvent,
 	fetchEmail,
@@ -82,7 +81,7 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 				}
 				amountsTestName={amountsTestName}
 				amountsVariantName={amountsVariantName}
-				numArticles={articleCounts.for52Weeks}
+				promoCodes={variant.promoCodes ?? []}
 			/>
 			{isReminderActive && showReminderFields && (
 				<ContributionsEpicReminder
