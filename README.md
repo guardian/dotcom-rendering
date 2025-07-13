@@ -1,6 +1,6 @@
 # Dotcom Rendering & Apps Rendering
 
-This repository contains the rendering logic for theguardian.com.
+This repository contains the rendering logic for theguardian.com and for a subset of articles in the live apps.
 
 It is a monorepo with 2 projects, `apps-rendering` and `dotcom-rendering`.
 

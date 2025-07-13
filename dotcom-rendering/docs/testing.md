@@ -38,7 +38,7 @@ For example:
 
 ## Component tests
 
-To test components we use [react-testing-library](https://github.com/kentcdodds/react-testing-library). It allows you to tests agains the rendered DOM output of your component. The library makes you write tests from a "user-perspective", asserting against user-facing properties.
+To test components we use [react-testing-library](https://github.com/testing-library/react-testing-library). It allows you to tests agains the rendered DOM output of your component. The library makes you write tests from a "user-perspective", asserting against user-facing properties.
 
 ### Location
 
@@ -110,13 +110,13 @@ https://circleci.com/blog/testing-pyramid/
 
 When we write tests for Components, we should test the render logic and not the internal implementation details.
 
-Test the expected behavior of a component: what it renders, how the props it receives alter what's rendered and how user interactions and events that trigger changes of state alter what's rendred.
+Test the expected behaviour of a component: what it renders, how the props it receives alter what's rendered and how user interactions and events that trigger changes of state alter what's rendered.
 
 Look for conditional statements (ternaries, if statements, and switch statements) in the render method for clues about what to test. You should always test your public interface (the props your component takes). For example, if the Component under test takes a prop which is a function that is executed onClick we can test it’s executed by simulating a click on the Component under test.
 
 ### Don't test
 
-Tests that require you to duplicate the application code exactly. These tests will be brittle. For example if a component renders with a height 10px, if you test that the component has a height 10px and you then update the Component so it’s height is 11px then you’ll have to update your test, even though the component’s behavior has not changed. Don’t test inline styles, unless the value can change based on props/state.
+Tests that require you to duplicate the application code exactly. These tests will be brittle. For example if a component renders with a height 10px, if you test that the component has a height 10px and you then update the Component so its height is 11px then you’ll have to update your test, even though the component’s behaviour has not changed. Don’t test inline styles, unless the value can change based on props/state.
 
 Don't assert against behaviours covered by the library code. EG. Testing types of properties passed to the component, this is unnecessary.
 
@@ -124,9 +124,9 @@ Don't assert against behaviours covered by the library code. EG. Testing types o
 
 Jest [Snapshot](https://jestjs.io/docs/en/snapshot-testing) tests make sure the rendered output of a UI Component does not change unexpectedly.
 
-We will **not** be writing snaphot test Components for the following reasons:
+We will **not** be writing snapshot test Components for the following reasons:
 
--   Snapshots immortalize a Component’s current markup as the true markup, regardless of whether or not the component is correct.
--   Too easy to fix tests without fixing underlying bugs simplu by running `jest --u` override command.
+-   Snapshots immortalise a Component’s current markup as the true markup, regardless of whether or not the component is correct.
+-   Too easy to fix tests without fixing underlying bugs simply by running `jest --u` override command.
 -   Increased risk of false negatives and false positives - If the tests fail when there are no bugs, that is a false negative. If the tests pass when there are bugs present, that is a false positive.
 -   Developer time required to check snapshot test failures when simple non-breaking changes introduced, plus developer time required to review snapshot output in Pull Requests.

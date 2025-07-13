@@ -1,6 +1,6 @@
 # Dotcom Rendering
 
-The rendering framework for theguardian.com.
+This repository contains the rendering logic for theguardian.com and for a subset of articles in the live apps.
 
 It primarily uses [TypeScript](https://www.typescriptlang.org/), [Node.js](https://nodejs.org/en), [Express](https://expressjs.com/), [React](https://reactjs.org/) and [Emotion](https://emotion.sh).
 
