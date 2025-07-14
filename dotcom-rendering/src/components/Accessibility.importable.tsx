@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { isUndefined, removeCookie, setCookie, storage } from '@guardian/libs';
 import { article17, palette } from '@guardian/source/foundations';
-import { useEffect, useState } from 'react';
+import { type SetStateAction, useEffect, useState } from 'react';
 import { useConfig } from './ConfigContext';
 import { FrontSection } from './FrontSection';
 
@@ -46,10 +46,30 @@ const PreferenceToggle = ({
 			/>
 			<span css={bold}>{label}</span>
 			{checked
-				? `Untick this to disable ${description}`
-				: `Tick this to enable ${description}`}
+				? ` Untick this to disable ${description}`
+				: ` Tick this to enable ${description}`}
 		</label>
 	);
+};
+
+export const useStoredBooleanPreference = (
+	key: string,
+	defaultValue: boolean,
+): [boolean, React.Dispatch<React.SetStateAction<boolean>>] => {
+	const [value, setValue] = useState<boolean>(defaultValue);
+
+	useEffect(() => {
+		const storedValue = storage.local.get(key);
+		if (typeof storedValue === 'boolean') {
+			setValue(storedValue);
+		}
+	}, [key]);
+
+	useEffect(() => {
+		storage.local.set(key, value);
+	}, [key, value]);
+
+	return [value, setValue];
 };
 
 /**
@@ -61,26 +81,17 @@ const PreferenceToggle = ({
  */
 export const Accessibility = () => {
 	const { darkModeAvailable } = useConfig();
-	const [shouldFlash, setShouldFlash] = useState<boolean>(true);
+	const [shouldFlash, setShouldFlash] = useStoredBooleanPreference(
+		'gu.prefs.accessibility.flashing-elements',
+		true,
+	);
+	const [shouldAutoplay, setShouldAutoplay] = useStoredBooleanPreference(
+		'gu.prefs.accessibility.autoplay-video',
+		true,
+	);
+
 	const [shouldParticipate, setParticipate] =
 		useState<boolean>(darkModeAvailable);
-
-	useEffect(() => {
-		const flashingPreference = storage.local.get(
-			'gu.prefs.accessibility.flashing-elements',
-		);
-		if (typeof flashingPreference === 'boolean') {
-			setShouldFlash(flashingPreference);
-		}
-	}, []);
-
-	useEffect(() => {
-		if (isUndefined(shouldFlash)) return;
-		storage.local.set(
-			'gu.prefs.accessibility.flashing-elements',
-			shouldFlash,
-		);
-	}, [shouldFlash]);
 
 	useEffect(() => {
 		if (shouldParticipate) {
@@ -103,8 +114,10 @@ export const Accessibility = () => {
 		return () => clearTimeout(timeout);
 	}, [shouldParticipate, darkModeAvailable]);
 
-	const toggleFlash = (): void => {
-		setShouldFlash((prev) => (isUndefined(prev) ? false : !prev));
+	const togglePreference = (
+		preferenceCallback: (value: SetStateAction<boolean>) => void,
+	): void => {
+		preferenceCallback((prev) => (isUndefined(prev) ? false : !prev));
 	};
 
 	return (
@@ -126,9 +139,16 @@ export const Accessibility = () => {
 					<PreferenceToggle
 						label="Allow flashing elements"
 						checked={shouldFlash}
-						onChange={toggleFlash}
+						onChange={() => togglePreference(setShouldFlash)}
 						dataLinkName="flashing-elements"
 						description="flashing and moving elements"
+					/>
+					<PreferenceToggle
+						label="Allow autoplay video"
+						checked={shouldAutoplay}
+						onChange={() => togglePreference(setShouldAutoplay)}
+						dataLinkName="autoplay-video"
+						description="autoplaying video"
 					/>
 				</fieldset>
 			</div>
@@ -154,8 +174,8 @@ export const Accessibility = () => {
 						Participate in the dark colour scheme beta{' '}
 					</span>
 					{shouldParticipate
-						? 'Untick this to opt out (browser will refresh)'
-						: 'Tick this to opt in (browser will refresh)'}
+						? ' Untick this to opt out (browser will refresh)'
+						: ' Tick this to opt in (browser will refresh)'}
 				</label>
 			</fieldset>
 		</FrontSection>
