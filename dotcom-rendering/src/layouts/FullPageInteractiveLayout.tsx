@@ -174,6 +174,7 @@ const NavHeader = ({ article, NAV, format, renderAds }: HeaderProps) => {
 								shouldHideReaderRevenue={
 									!!article.config.shouldHideReaderRevenue
 								}
+								abTests={article.config.abTests}
 							/>
 						</Section>
 					</div>

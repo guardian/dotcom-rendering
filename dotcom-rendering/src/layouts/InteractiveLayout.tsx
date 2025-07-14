@@ -280,6 +280,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 												!!article.config
 													.shouldHideReaderRevenue
 											}
+											abTests={article.config.abTests}
 										/>
 									</Section>
 								</div>
