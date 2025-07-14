@@ -38,7 +38,6 @@ import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
 import { LoopVideo } from '../LoopVideo.importable';
-import { MediaMeta } from '../MediaMeta';
 import { Pill } from '../Pill';
 import { Slideshow } from '../Slideshow';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
@@ -554,8 +553,7 @@ export const Card = ({
 -	 */
 	const isMediaCardOrNewsletter = isMediaCard(format) || isNewsletter;
 
-	// Currently pills are only shown within beta containers.
-	const showPill = isBetaContainer && isMediaCardOrNewsletter;
+	const showPill = isMediaCardOrNewsletter;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -799,15 +797,6 @@ export const Card = ({
 							cardHasImage={!!image}
 						/>
 					) : null}
-					{!showPill &&
-						!!mainMedia &&
-						mainMedia.type !== 'Video' &&
-						mainMedia.type !== 'LoopVideo' && (
-							<MediaMeta
-								mediaType={mainMedia.type}
-								hasKicker={!!kickerText}
-							/>
-						)}
 				</div>
 			)}
 
@@ -825,7 +814,7 @@ export const Card = ({
 				 * Waveform for podcasts is absolutely positioned at bottom of
 				 * card, behind everything else
 				 */}
-				{isBetaContainer && mainMedia?.type === 'Audio' && (
+				{mainMedia?.type === 'Audio' && (
 					<div
 						css={waveformWrapper(
 							imagePositionOnMobile,
@@ -895,7 +884,7 @@ export const Card = ({
 						)}
 						{media.type === 'loop-video' && (
 							<Island
-								priority="feature"
+								priority="critical"
 								defer={{ until: 'visible' }}
 							>
 								<LoopVideo
@@ -903,19 +892,13 @@ export const Card = ({
 									height={media.mainMedia.height}
 									width={media.mainMedia.width}
 									image={media.mainMedia.image ?? ''}
-									fallbackImageComponent={
-										<CardPicture
-											mainImage={
-												media.mainMedia.image ?? ''
-											}
-											imageSize={imageSize}
-											loading={imageLoading}
-											alt={media.imageAltText}
-											aspectRatio={aspectRatio}
-										/>
-									}
 									uniqueId={uniqueId}
 									atomId={media.mainMedia.atomId}
+									fallbackImage={media.mainMedia.image ?? ''}
+									fallbackImageSize={imageSize}
+									fallbackImageLoading={imageLoading}
+									fallbackImageAlt={media.imageAltText}
+									fallbackImageAspectRatio="5:4"
 								/>
 							</Island>
 						)}
@@ -944,7 +927,6 @@ export const Card = ({
 												}
 												index={index}
 												duration={
-													isBetaContainer &&
 													isVideoArticle
 														? undefined
 														: media.mainMedia
@@ -1033,28 +1015,26 @@ export const Card = ({
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
 								/>
-								{(isVideoMainMedia ||
-									(isVideoArticle && !isBetaContainer)) &&
-									mainMedia.duration > 0 && (
-										<div
-											css={css`
-												position: absolute;
-												top: ${space[2]}px;
-												right: ${space[2]}px;
-											`}
-										>
-											<Pill
-												content={secondsToDuration(
-													mainMedia.duration,
-												)}
-												icon={
-													<SvgMediaControlsPlay
-														width={18}
-													/>
-												}
-											/>
-										</div>
-									)}
+								{isVideoMainMedia && mainMedia.duration > 0 && (
+									<div
+										css={css`
+											position: absolute;
+											top: ${space[2]}px;
+											right: ${space[2]}px;
+										`}
+									>
+										<Pill
+											content={secondsToDuration(
+												mainMedia.duration,
+											)}
+											icon={
+												<SvgMediaControlsPlay
+													width={18}
+												/>
+											}
+										/>
+									</div>
+								)}
 							</>
 						)}
 						{media.type === 'crossword' && (
@@ -1154,14 +1134,6 @@ export const Card = ({
 											cardHasImage={!!image}
 										/>
 									) : null}
-									{!showPill &&
-										!!mainMedia &&
-										mainMedia.type !== 'Video' && (
-											<MediaMeta
-												mediaType={mainMedia.type}
-												hasKicker={!!kickerText}
-											/>
-										)}
 								</HeadlineWrapper>
 							)}
 

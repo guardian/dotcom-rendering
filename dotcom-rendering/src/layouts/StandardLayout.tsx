@@ -413,6 +413,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									shouldHideReaderRevenue={
 										!!article.config.shouldHideReaderRevenue
 									}
+									abTests={article.config.abTests}
 								/>
 							</Section>
 						</Stuck>
