@@ -274,7 +274,7 @@ export const LoopVideo = ({
 			try {
 				const ophan = await getOphan('Web');
 				ophan.trackComponentAttention(
-					'looping-video',
+					`gu-video-loop-${atomId}`,
 					video,
 					VISIBILITY_THRESHOLD,
 					true,
