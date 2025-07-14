@@ -10,40 +10,7 @@ This high level diagram shows the difference between the data flow when DCR is u
 
 ## Getting started
 
-To download the repository
-
-```
-$ git clone git@github.com:guardian/dotcom-rendering.git
-$ cd dotcom-rendering
-```
-
-### Node.js
-
-Make sure you have [Node.js](https://nodejs.org) installed.
-
-We recommend using [fnm](https://github.com/Schniz/fnm) to help manage multiple versions of Node.js on on machine.
-
-### Install Dependencies
-
-run
-
-```
-$ make install
-```
-
-If it complains that you do not have the right version of node, then run (or replace with the correct version manager or the correct version):
-
-```
-$ fnm install 22.14.0
-```
-
-### Running on local
-
-```sh
-$ make dev
-```
-
-This will start the development server on port 3030: [http://localhost:3030](http://localhost:3030).
+See [Getting Started](../../README.md#getting-started)
 
 ### Previewing article on local
 
@@ -54,16 +21,6 @@ http://localhost:3030/Article/https://www.theguardian.com/world/2013/jun/09/edwa
 You can use this technique to integrate with a locally running instance of `frontend`. This is especially useful for testing changes to the data model:
 
 http://localhost:3030/Article/http://localhost:9000/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
-
-### Previewing AMP on local
-
-You can preview an AMP page similarly to an article, as follows
-
-http://localhost:3030/AMPArticle/https://amp.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
-
-or, connecting to a locally running instance of frontend,
-
-http://localhost:3030/AMPArticle/http://localhost:9000/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
 
 ### Note on rebasing vs merging
 
