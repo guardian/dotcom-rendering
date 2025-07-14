@@ -1,3 +1,8 @@
+/**
+ * @file AuthProviderButtons.tsx
+ * This file was migrated from:
+ * https://github.com/guardian/gateway/blob/b980d008f91bd1abb108e50de9cdd1c364f37f4d/src/shared/model/QueryParams.ts
+ */
 export type Stringifiable = string | boolean | number | null | undefined;
 export type StringifiableRecord = Record<
 	string,

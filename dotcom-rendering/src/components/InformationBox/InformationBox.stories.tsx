@@ -1,3 +1,8 @@
+/**
+ * @file InformationBox.stories.tsx
+ * This file was migrated from:
+ * https://github.com/guardian/gateway/blob/b980d008f91bd1abb108e50de9cdd1c364f37f4d/src/client/components/InformationBox.stories.tsx
+ */
 import { css } from '@emotion/react';
 import { palette } from '@guardian/source/foundations';
 import { ButtonLink } from '@guardian/source/react-components';

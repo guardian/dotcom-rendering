@@ -1,3 +1,8 @@
+/**
+ * @file Terms.stories.tsx
+ * This file was migrated from:
+ * https://github.com/guardian/gateway/blob/b980d008f91bd1abb108e50de9cdd1c364f37f4d/src/client/components/Terms.stories.tsx
+ */
 import type { Meta } from '@storybook/react';
 import { InformationBox } from '../InformationBox/InformationBox';
 import { GuardianTerms, JobsTerms, RecaptchaTerms } from './Terms';

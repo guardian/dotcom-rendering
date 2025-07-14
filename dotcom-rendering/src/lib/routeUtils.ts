@@ -4,8 +4,10 @@
  * given the string type '/a/:first/:last'
  * would create a type definition
  * type { first: string, last: string }
+ * @file
+ * This file was migrated from:
+ * https://github.com/guardian/gateway/blob/b980d008f91bd1abb108e50de9cdd1c364f37f4d/src/shared/lib/routeUtils.ts
  */
-
 import type {
 	PersistableQueryParams,
 	QueryParams,
