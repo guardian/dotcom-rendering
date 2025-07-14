@@ -127,7 +127,9 @@ export const LoopVideo = ({
 	const pauseVideo = (
 		reason: Extract<
 			PlayerStates,
-			'PAUSED_BY_USER' | 'PAUSED_BY_INTERSECTION_OBSERVER'
+			| 'PAUSED_BY_USER'
+			| 'PAUSED_BY_INTERSECTION_OBSERVER'
+			| 'PAUSED_BY_BROWSER'
 		>,
 	) => {
 		if (!vidRef.current) return;
@@ -233,6 +235,9 @@ export const LoopVideo = ({
 		};
 	}, [uniqueId]);
 
+	/**
+	 * Keeps track of whether the video has been in view or not.
+	 */
 	useEffect(() => {
 		if (isInView && !hasBeenInView) {
 			/**
@@ -268,7 +273,7 @@ export const LoopVideo = ({
 				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER')
 		) {
 			/**
-			 * check if the video has not been in view before tracking the play.
+			 * Check if the video has not been in view before tracking the play.
 			 * This is so we only track the first play.
 			 */
 			if (!hasBeenInView) {
@@ -288,8 +293,8 @@ export const LoopVideo = ({
 	]);
 
 	/**
-	 * Stops playback when the video is scrolled out of view, resumes playbacks
-	 * when the video is back in the viewport.
+	 * Stops playback when the video is scrolled out of view.
+	 * Resumes playback when the video is back in the viewport.
 	 */
 	useEffect(() => {
 		if (!vidRef.current || !hasBeenInView) return;
@@ -303,7 +308,7 @@ export const LoopVideo = ({
 		/**
 		 * If a user action paused the video, they have indicated
 		 * that they don't want to watch the video. Therefore, don't
-		 * resume the video when it comes back in view
+		 * resume the video when it comes back in view.
 		 */
 		const isBackInView =
 			playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' && isInView;
@@ -320,8 +325,8 @@ export const LoopVideo = ({
 	useEffect(() => {
 		const shouldShowPlayIcon =
 			playerState === 'PAUSED_BY_USER' ||
-			(!isAutoplayAllowed && playerState === 'NOT_STARTED');
-
+			playerState === 'PAUSED_BY_BROWSER' ||
+			(playerState === 'NOT_STARTED' && !isAutoplayAllowed);
 		setShowPlayIcon(shouldShowPlayIcon);
 	}, [playerState, isAutoplayAllowed]);
 
@@ -373,6 +378,22 @@ export const LoopVideo = ({
 		} else {
 			setIsMuted(true);
 		}
+	};
+
+	/**
+	 * If the video was paused and we know that it wasn't paused by the user
+	 * or the intersection observer, we can deduce that it was paused by the
+	 * browser. Therefore we need to apply the pause state to the video.
+	 */
+	const handlePause = () => {
+		if (
+			playerState === 'PAUSED_BY_USER' ||
+			playerState === 'PAUSED_BY_INTERSECTION_OBSERVER'
+		) {
+			return;
+		}
+
+		pauseVideo('PAUSED_BY_BROWSER');
 	};
 
 	/**
@@ -465,6 +486,7 @@ export const LoopVideo = ({
 				handlePlayPauseClick={handlePlayPauseClick}
 				handleAudioClick={handleAudioClick}
 				handleKeyDown={handleKeyDown}
+				handlePause={handlePause}
 				onError={onError}
 				AudioIcon={AudioIcon}
 				preloadPartialData={preloadPartialData}
