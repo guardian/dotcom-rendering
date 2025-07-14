@@ -242,7 +242,12 @@ const line = css`
 
 const orText = css`
 	${textSansBold15};
-	color: ${palette.neutral[38]};
+	color: ${palette.neutral[46]};
 	padding: 0 8px;
 	white-space: nowrap;
+	line-height: 20px;
+
+	${from.phablet} {
+		line-height: 24px;
+	}
 `;
