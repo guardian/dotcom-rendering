@@ -32,10 +32,9 @@ const darkModeCookieName = 'X-GU-Experiment-0perc-D';
  */
 export const Accessibility = () => {
 	const { darkModeAvailable } = useConfig();
-	const [shouldFlash, setShouldFlash] = useState<boolean | undefined>();
-	const [participate, setParticipate] = useState<boolean>(darkModeAvailable);
-
-	const checked = shouldFlash ?? true;
+	const [shouldFlash, setShouldFlash] = useState<boolean>(true);
+	const [shouldParticipate, setParticipate] =
+		useState<boolean>(darkModeAvailable);
 
 	useEffect(() => {
 		const flashingPreference = storage.local.get(
@@ -55,7 +54,7 @@ export const Accessibility = () => {
 	}, [shouldFlash]);
 
 	useEffect(() => {
-		if (participate) {
+		if (shouldParticipate) {
 			setCookie({
 				name: darkModeCookieName,
 				value: 'true',
@@ -67,11 +66,12 @@ export const Accessibility = () => {
 		const timeout = setTimeout(() => {
 			// we must reload the page for the preference to take effect,
 			// as this relies on a server-side test & cookie combination
-			if (participate !== darkModeAvailable) window.location.reload();
+			if (shouldParticipate !== darkModeAvailable)
+				window.location.reload();
 		}, 1200);
 
 		return () => clearTimeout(timeout);
-	}, [participate, darkModeAvailable]);
+	}, [shouldParticipate, darkModeAvailable]);
 
 	const toggleFlash = (): void => {
 		setShouldFlash((prev) => (isUndefined(prev) ? false : !prev));
@@ -96,12 +96,12 @@ export const Accessibility = () => {
 					<label>
 						<input
 							type="checkbox"
-							checked={checked}
+							checked={shouldFlash}
 							onChange={toggleFlash}
 							data-link-name="flashing-elements"
 						/>
 						<span css={bold}>Allow flashing elements </span>
-						{checked
+						{shouldFlash
 							? 'Untick this to disable flashing and moving elements'
 							: 'Tick this to enable flashing or moving elements'}
 					</label>
@@ -118,7 +118,7 @@ export const Accessibility = () => {
 					<label>
 						<input
 							type="checkbox"
-							checked={participate}
+							checked={shouldParticipate}
 							onChange={(e) => {
 								setParticipate(e.target.checked);
 							}}
@@ -127,7 +127,7 @@ export const Accessibility = () => {
 						<span css={bold}>
 							Participate in the dark colour scheme beta{' '}
 						</span>
-						{participate
+						{shouldParticipate
 							? 'Untick this to opt out (browser will refresh)'
 							: 'Tick this to opt in (browser will refresh)'}
 					</label>
