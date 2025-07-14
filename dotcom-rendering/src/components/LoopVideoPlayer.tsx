@@ -119,17 +119,17 @@ export const LoopVideoPlayer = forwardRef(
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
 		const loopVideoId = `loop-video-${uniqueId}`;
-
+		console.log({ preloadPartialData });
 		return (
 			<>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Captions will be considered later. */}
 				<video
+					muted={true}
+					loop={true}
+					playsInline={true}
 					id={loopVideoId}
 					ref={ref}
-					preload={preloadPartialData ? 'metadata' : 'none'}
-					loop={true}
-					muted={isMuted}
-					playsInline={true}
+					preload={'auto'}
 					height={height}
 					width={width}
 					poster={posterImage}
