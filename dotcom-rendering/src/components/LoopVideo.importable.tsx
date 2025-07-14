@@ -14,6 +14,7 @@ import {
 	customLoopPlayAudioEventName,
 	customYoutubePlayEventName,
 } from '../lib/video';
+import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
 import type { PLAYER_STATES, PlayerStates } from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
@@ -43,7 +44,11 @@ type Props = {
 	width: number;
 	height: number;
 	image: string;
-	fallbackImageComponent: JSX.Element;
+	fallbackImage: CardPictureProps['mainImage'];
+	fallbackImageSize: CardPictureProps['imageSize'];
+	fallbackImageLoading: CardPictureProps['loading'];
+	fallbackImageAlt: CardPictureProps['alt'];
+	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
 };
 
 export const LoopVideo = ({
@@ -53,7 +58,11 @@ export const LoopVideo = ({
 	width,
 	height,
 	image,
-	fallbackImageComponent,
+	fallbackImage,
+	fallbackImageSize,
+	fallbackImageLoading,
+	fallbackImageAlt,
+	fallbackImageAspectRatio,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -140,6 +149,16 @@ export const LoopVideo = ({
 			void playVideo();
 		}
 	};
+
+	const FallbackImageComponent = (
+		<CardPicture
+			mainImage={fallbackImage}
+			imageSize={fallbackImageSize}
+			loading={fallbackImageLoading}
+			aspectRatio={fallbackImageAspectRatio}
+			alt={fallbackImageAlt}
+		/>
+	);
 
 	/**
 	 * Setup.
@@ -333,7 +352,9 @@ export const LoopVideo = ({
 
 	if (renderingTarget !== 'Web') return null;
 
-	if (adapted) return fallbackImageComponent;
+	if (adapted) {
+		return FallbackImageComponent;
+	}
 
 	const handlePlayPauseClick = (event: React.SyntheticEvent) => {
 		event.preventDefault();
@@ -433,7 +454,7 @@ export const LoopVideo = ({
 				width={width}
 				height={height}
 				posterImage={posterImage}
-				fallbackImageComponent={fallbackImageComponent}
+				FallbackImageComponent={FallbackImageComponent}
 				currentTime={currentTime}
 				setCurrentTime={setCurrentTime}
 				ref={vidRef}

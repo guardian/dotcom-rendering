@@ -9,7 +9,7 @@ import { generateSources, getFallbackSource } from './Picture';
 
 export type Loading = NonNullable<ImgHTMLAttributes<unknown>['loading']>;
 
-type Props = {
+export type Props = {
 	imageSize: ImageSizeType;
 	mainImage: string;
 	loading: Loading;
