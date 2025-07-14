@@ -19,7 +19,7 @@ const bold = css`
 	font-weight: bold;
 `;
 
-// This is hardcoded, and must be changed if the experiment bucket changes
+// This is hard coded, and must be changed if the experiment bucket changes
 // https://github.com/guardian/frontend/blob/09f49b80/common/app/experiments/Experiments.scala#L57
 const darkModeCookieName = 'X-GU-Experiment-0perc-D';
 
