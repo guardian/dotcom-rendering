@@ -1565,7 +1565,7 @@ export const WithATinyGap = () => {
 						imagePositionOnDesktop="left"
 						format={{
 							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Gallery,
+							design: ArticleDesign.Standard,
 							theme: Pillar.Sport,
 						}}
 					/>
