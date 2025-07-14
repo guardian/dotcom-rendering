@@ -8,7 +8,7 @@ import {
 } from '../../../../lib/useMatchMedia';
 import { getChoiceCards } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
-import { ThreeTierChoiceCards } from '../ThreeTierChoiceCards';
+import { ThreeTierChoiceCards } from '../../shared/ThreeTierChoiceCards';
 import { ContributionsEpicButtons } from './ContributionsEpicButtons';
 import { ContributionsEpicReminder } from './ContributionsEpicReminder';
 

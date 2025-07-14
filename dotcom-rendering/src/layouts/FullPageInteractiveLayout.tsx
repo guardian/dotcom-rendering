@@ -65,6 +65,7 @@ type RendererProps = {
 	abTests: ServerSideTests;
 	switches: Switches;
 	editionId: EditionId;
+	shouldHideAds: boolean;
 };
 
 const Renderer = ({
@@ -79,6 +80,7 @@ const Renderer = ({
 	abTests,
 	switches,
 	editionId,
+	shouldHideAds,
 }: RendererProps) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
@@ -100,6 +102,7 @@ const Renderer = ({
 			abTests,
 			switches,
 			editionId,
+			shouldHideAds,
 		});
 
 		switch (element._type) {
@@ -171,6 +174,7 @@ const NavHeader = ({ article, NAV, format, renderAds }: HeaderProps) => {
 								shouldHideReaderRevenue={
 									!!article.config.shouldHideReaderRevenue
 								}
+								abTests={article.config.abTests}
 							/>
 						</Section>
 					</div>
@@ -305,6 +309,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}
 						editionId={article.editionId}
+						shouldHideAds={article.shouldHideAds}
 					/>
 				</article>
 			</Section>

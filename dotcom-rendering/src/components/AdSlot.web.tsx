@@ -47,6 +47,7 @@ type DefaultProps = {
 	display?: ArticleDisplay;
 	isPaidContent?: boolean;
 	hasPageskin?: boolean;
+	isIn250ReservationVariant?: boolean;
 };
 
 // for dark ad labels
@@ -106,12 +107,29 @@ const hideBelowDesktop = css`
 	}
 `;
 
+const containerMinHeight = getMinHeight(250, space[5]);
+
 const topAboveNavContainerStyles = css`
-	padding-bottom: 18px;
+	padding-bottom: ${space[5]}px;
 	position: relative;
 	margin: 0 auto;
 	text-align: left;
 	display: block;
+`;
+
+const topAboveNavContainerVaraintStyles = css`
+	padding-bottom: ${space[5]}px;
+	position: relative;
+	margin: 0 auto;
+	text-align: left;
+	display: block;
+	width: 100%;
+	min-height: ${containerMinHeight}px;
+
+	/* Remove the min-height when the ad has rendered, so that the container can shrink if the ad is smaller */
+	&[top-above-nav-ad-rendered='true'] {
+		min-height: auto;
+	}
 `;
 
 /**
@@ -261,7 +279,7 @@ const frontsBannerAdStyles = css`
 
 const articleEndAdStyles = css`
 	position: relative;
-	min-height: ${getMinHeight(adSizes.outstreamDesktop.height)}px;
+	min-height: 450px;
 
 	&.ad-slot--fluid {
 		min-height: 450px;
@@ -412,6 +430,7 @@ export const AdSlot = ({
 	index,
 	hasPageskin = false,
 	shouldHideReaderRevenue = false,
+	isIn250ReservationVariant,
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -590,7 +609,13 @@ export const AdSlot = ({
 		}
 		case 'top-above-nav': {
 			return (
-				<AdSlotWrapper css={topAboveNavContainerStyles}>
+				<AdSlotWrapper
+					css={
+						isIn250ReservationVariant
+							? topAboveNavContainerVaraintStyles
+							: topAboveNavContainerStyles
+					}
+				>
 					<div
 						id="dfp-ad--top-above-nav"
 						className={[

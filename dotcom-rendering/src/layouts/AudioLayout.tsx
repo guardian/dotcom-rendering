@@ -173,6 +173,7 @@ export const AudioLayout = (props: WebProps) => {
 								shouldHideReaderRevenue={
 									!!article.config.shouldHideReaderRevenue
 								}
+								abTests={article.config.abTests}
 							/>
 						</Section>
 					</Stuck>
@@ -352,6 +353,7 @@ export const AudioLayout = (props: WebProps) => {
 										article.isRightToLeftLang
 									}
 									editionId={article.editionId}
+									shouldHideAds={article.shouldHideAds}
 								/>
 								{showBodyEndSlot && (
 									<Island

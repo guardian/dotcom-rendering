@@ -306,7 +306,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 		</div>
 	);
 
-	const renderAds = isWeb && canRenderAds(article);
+	const renderAds = canRenderAds(article);
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
@@ -376,6 +376,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}
 						editionId={article.editionId}
+						shouldHideAds={article.shouldHideAds}
 					/>
 				</div>
 				{mainMedia && (
@@ -432,17 +433,15 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 				)}
 			</header>
 
-			{renderAds && hasSurveyAd && (
+			{isWeb && renderAds && hasSurveyAd && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 
 			<main data-layout="ImmersiveLayout">
-				{isApps && (
-					<>
-						<Island priority="critical">
-							<AdPortals />
-						</Island>
-					</>
+				{isApps && renderAds && (
+					<Island priority="critical">
+						<AdPortals />
+					</Island>
 				)}
 				<Section
 					fullWidth={true}
@@ -574,6 +573,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
+												pageId={article.config.pageId}
 											></ArticleMetaApps>
 										</Hide>
 										<Hide when="below" breakpoint="leftCol">
@@ -670,6 +670,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										article.isRightToLeftLang
 									}
 									editionId={article.editionId}
+									shouldHideAds={article.shouldHideAds}
 								/>
 								{showBodyEndSlot && (
 									<Island
@@ -743,7 +744,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							>
 								<RightColumn>
 									<>
-										{mainMedia && renderAds && (
+										{mainMedia && isWeb && renderAds && (
 											<div
 												css={css`
 													margin-top: ${space[4]}px;
@@ -771,7 +772,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						</GridItem>
 					</ImmersiveGrid>
 				</Section>
-				{!isLabs && renderAds && (
+				{!isLabs && isWeb && renderAds && (
 					<Section
 						fullWidth={true}
 						padSides={false}
@@ -880,7 +881,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						borderColour={themePalette('--article-border')}
 						fontColour={themePalette('--article-section-title')}
 					>
-						<MostViewedFooterLayout renderAds={renderAds}>
+						<MostViewedFooterLayout renderAds={isWeb && renderAds}>
 							<Island
 								priority="feature"
 								defer={{ until: 'visible' }}
@@ -894,7 +895,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						</MostViewedFooterLayout>
 					</Section>
 				)}
-				{!isLabs && renderAds && (
+				{!isLabs && isWeb && renderAds && (
 					<Section
 						fullWidth={true}
 						padSides={false}

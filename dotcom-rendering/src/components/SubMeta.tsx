@@ -127,6 +127,11 @@ const syndicationButtonOverrides = css`
 	}
 `;
 
+const galleryStyles = css`
+	${grid.paddedContainer};
+	background-color: ${palette('--article-inner-background')};
+`;
+
 export const SubMeta = ({
 	format,
 	subMetaKeywordLinks,
@@ -160,7 +165,7 @@ export const SubMeta = ({
 					? setMetaWidth
 					: undefined,
 				format.design === ArticleDesign.Gallery
-					? grid.container
+					? galleryStyles
 					: undefined,
 			]}
 		>

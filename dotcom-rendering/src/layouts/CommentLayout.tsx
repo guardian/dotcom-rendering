@@ -301,7 +301,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const renderAds = isWeb && canRenderAds(article);
+	const renderAds = canRenderAds(article);
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
@@ -325,6 +325,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 									shouldHideReaderRevenue={
 										!!article.config.shouldHideReaderRevenue
 									}
+									abTests={article.config.abTests}
 								/>
 							</Section>
 						</Stuck>
@@ -347,12 +348,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 			)}
 
 			<main data-layout="CommentLayout">
-				{isApps && (
-					<>
-						<Island priority="critical">
-							<AdPortals />
-						</Island>
-					</>
+				{isApps && renderAds && (
+					<Island priority="critical">
+						<AdPortals />
+					</Island>
 				)}
 				<Section
 					fullWidth={true}
@@ -388,6 +387,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
 									editionId={article.editionId}
+									shouldHideAds={article.shouldHideAds}
 								/>
 							</div>
 						</GridItem>
@@ -492,6 +492,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
+												pageId={article.config.pageId}
 											></ArticleMetaApps>
 										</Hide>
 										<Hide when="below" breakpoint="leftCol">
@@ -588,6 +589,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 											article.isRightToLeftLang
 										}
 										editionId={article.editionId}
+										shouldHideAds={article.shouldHideAds}
 									/>
 									{showBodyEndSlot && (
 										<Island
@@ -688,7 +690,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 											isPaidContent={
 												article.pageType.isPaidContent
 											}
-											renderAds={renderAds}
+											renderAds={isWeb && renderAds}
 											shouldHideReaderRevenue={
 												!!article.config
 													.shouldHideReaderRevenue
@@ -701,7 +703,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 					</StandardGrid>
 				</Section>
 
-				{renderAds && (
+				{isWeb && renderAds && (
 					<Section
 						fullWidth={true}
 						padSides={false}
@@ -808,7 +810,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						borderColour={themePalette('--article-border')}
 						fontColour={themePalette('--article-section-title')}
 					>
-						<MostViewedFooterLayout renderAds={renderAds}>
+						<MostViewedFooterLayout renderAds={isWeb && renderAds}>
 							<Island
 								priority="feature"
 								defer={{ until: 'visible' }}
@@ -823,7 +825,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 
-				{renderAds && (
+				{isWeb && renderAds && (
 					<Section
 						fullWidth={true}
 						padSides={false}

@@ -4,6 +4,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
+import { GalleryImage } from '../components/GalleryImage';
 import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Standfirst } from '../components/Standfirst';
@@ -34,6 +35,11 @@ const border = css({
 	borderStyle: 'solid',
 	color: '#ccc',
 });
+
+const headerStyles = css`
+	${grid.container}
+	background-color: ${palette('--article-inner-background')};
+`;
 
 export const GalleryLayout = (props: WebProps | AppProps) => {
 	const gallery = props.gallery;
@@ -71,7 +77,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				}}
 			>
 				<div css={border}>Labs header</div>
-				<header css={[grid.container]}>
+				<header css={headerStyles}>
 					<MainMediaGallery
 						mainMedia={gallery.mainMedia}
 						format={format}
@@ -147,7 +153,6 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					) : null}
 					<div
 						css={[
-							border,
 							css`
 								${grid.column.centre}
 								${from.leftCol} {
@@ -159,15 +164,20 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						Main media caption
 					</div>
 					<div
-						css={[
-							border,
-							grid.between('centre-column-start', 'grid-end'),
-						]}
+						css={[grid.between('centre-column-start', 'grid-end')]}
 					>
 						Meta
 					</div>
 				</header>
-				<div css={border}>Body</div>
+				{gallery.images.map((element, idx) => (
+					<GalleryImage
+						image={element}
+						format={format}
+						pageId={frontendData.pageId}
+						webTitle={frontendData.webTitle}
+						key={idx}
+					/>
+				))}
 				<SubMeta
 					format={format}
 					subMetaKeywordLinks={frontendData.subMetaKeywordLinks}

@@ -13,6 +13,7 @@ import { mostReadGeo } from '../../fixtures/manual/most-read-geo';
 import { noTopPicks } from '../../fixtures/manual/noTopPicks';
 import { related } from '../../fixtures/manual/related';
 import { shortDiscussion } from '../../fixtures/manual/short-discussion';
+import { getAuxiaMock } from '../../fixtures/manual/sign-in-gate';
 import { topPicks } from '../../fixtures/manual/topPicks';
 
 const createMockResponse = (status: number, body?: any): Promise<Response> => {
@@ -257,8 +258,19 @@ export const mockFetch: typeof global.fetch = (
 			return exampleDomainRegex.test(decodedBody)
 				? createMockResponse(500)
 				: createMockResponse(200);
+		case /.*contributions\.(code\.dev-)?guardianapis\.com\/auxia\/get-treatments/.test(
+			url,
+		) && requestInit?.method === 'POST':
+			return createMockResponse(
+				200,
+				getAuxiaMock(requestInit.body?.toString() ?? ''),
+			);
+		case /.*contributions\.(code\.dev-)?guardianapis\.com\/auxia\/log-treatment-interaction/.test(
+			url,
+		) && requestInit?.method === 'POST':
+			return createMockResponse(200);
 		default:
-			console.log('could not find url');
+			console.log(`could not find url ${requestInit?.method} ${url}`);
 			return Promise.resolve(
 				new Response(JSON.stringify({ error: 'Not Found' }), {
 					status: 404,

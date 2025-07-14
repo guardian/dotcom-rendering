@@ -1,18 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react/*';
-import { euro2025Atom, regions } from '../../fixtures/manual/footballData';
+import { regions } from '../../fixtures/manual/footballData';
+import { WomensEuro2025 } from './FootballCompetitionNav.stories';
 import { FootballTableList as TableListDefault } from './FootballTableList.stories';
-import { FootballTablesPage as FootballTablesPageComponent } from './FootballTablesPage';
+import { FootballTablesPage } from './FootballTablesPage';
 
 const meta = {
 	title: 'Components/Football Tables Page',
-	component: FootballTablesPageComponent,
-} satisfies Meta<typeof FootballTablesPageComponent>;
+	component: FootballTablesPage,
+} satisfies Meta<typeof FootballTablesPage>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const FootballTablesPage = {
+export const Default = {
 	args: {
 		regions,
 		pageId: 'football/tables',
@@ -22,9 +23,9 @@ export const FootballTablesPage = {
 	},
 } satisfies Story;
 
-export const FootballTablesPageWithAtom = {
+export const WithCompetitionNav = {
 	args: {
-		...FootballTablesPage.args,
-		navAtom: euro2025Atom,
+		...Default.args,
+		pageId: WomensEuro2025.args.pageId,
 	},
 } satisfies Story;

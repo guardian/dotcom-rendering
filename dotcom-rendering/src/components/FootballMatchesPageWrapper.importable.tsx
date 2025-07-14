@@ -6,7 +6,6 @@ import {
 	getParserErrorMessage,
 	parse,
 } from '../footballMatches';
-import type { FootballNavAtom as FootballNavAtomModel } from '../footballNavAtom';
 import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
 import type { EditionId } from '../lib/edition';
 import type { Result } from '../lib/result';
@@ -73,7 +72,6 @@ type Props = {
 	edition: EditionId;
 	renderAds: boolean;
 	pageId: string;
-	navAtom?: FootballNavAtomModel;
 };
 
 export const FootballMatchesPageWrapper = ({
@@ -88,7 +86,6 @@ export const FootballMatchesPageWrapper = ({
 	edition,
 	renderAds,
 	pageId,
-	navAtom,
 }: Props) => {
 	const [nextPage, setNextPage] = useState(secondPage);
 
@@ -111,7 +108,6 @@ export const FootballMatchesPageWrapper = ({
 			}
 			renderAds={renderAds}
 			pageId={pageId}
-			navAtom={navAtom}
 		/>
 	);
 };

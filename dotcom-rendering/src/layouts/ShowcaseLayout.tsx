@@ -243,7 +243,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const renderAds = isWeb && canRenderAds(article);
+	const renderAds = canRenderAds(article);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
@@ -254,51 +254,49 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 			{isWeb && (
 				<>
 					{!isLabs ? (
-						<>
-							<div>
-								{renderAds && (
-									<Stuck>
-										<Section
-											fullWidth={true}
-											showTopBorder={false}
-											showSideBorders={false}
-											padSides={false}
-											shouldCenter={false}
-										>
-											<HeaderAdSlot
-												isPaidContent={
-													!!article.config
-														.isPaidContent
-												}
-												shouldHideReaderRevenue={
-													!!article.config
-														.shouldHideReaderRevenue
-												}
-											/>
-										</Section>
-									</Stuck>
-								)}
+						<div>
+							{renderAds && (
+								<Stuck>
+									<Section
+										fullWidth={true}
+										showTopBorder={false}
+										showSideBorders={false}
+										padSides={false}
+										shouldCenter={false}
+									>
+										<HeaderAdSlot
+											isPaidContent={
+												!!article.config.isPaidContent
+											}
+											shouldHideReaderRevenue={
+												!!article.config
+													.shouldHideReaderRevenue
+											}
+											abTests={article.config.abTests}
+										/>
+									</Section>
+								</Stuck>
+							)}
 
-								<Masthead
-									nav={props.NAV}
-									editionId={article.editionId}
-									idUrl={article.config.idUrl}
-									mmaUrl={article.config.mmaUrl}
-									discussionApiUrl={
-										article.config.discussionApiUrl
-									}
-									idApiUrl={article.config.idApiUrl}
-									contributionsServiceUrl={
-										contributionsServiceUrl
-									}
-									showSubNav={true}
-									showSlimNav={false}
-									hasPageSkin={false}
-									hasPageSkinContentSelfConstrain={false}
-									pageId={article.pageId}
-								/>
-							</div>
-						</>
+							<Masthead
+								nav={props.NAV}
+								editionId={article.editionId}
+								idUrl={article.config.idUrl}
+								mmaUrl={article.config.mmaUrl}
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
+								idApiUrl={article.config.idApiUrl}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
+								showSubNav={true}
+								showSlimNav={false}
+								hasPageSkin={false}
+								hasPageSkinContentSelfConstrain={false}
+								pageId={article.pageId}
+							/>
+						</div>
 					) : (
 						// Else, this is a labs article so just show Nav and the Labs header
 						<>
@@ -320,6 +318,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 													!!article.config
 														.shouldHideReaderRevenue
 												}
+												abTests={article.config.abTests}
 											/>
 										</Section>
 									</Stuck>
@@ -361,7 +360,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				</>
 			)}
 
-			{renderAds && hasSurveyAd && (
+			{isWeb && renderAds && hasSurveyAd && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 
@@ -371,12 +370,10 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				lang={decideLanguage(article.lang)}
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
 			>
-				{isApps && (
-					<>
-						<Island priority="critical">
-							<AdPortals />
-						</Island>
-					</>
+				{isApps && renderAds && (
+					<Island priority="critical">
+						<AdPortals />
+					</Island>
 				)}
 				<Section
 					fullWidth={true}
@@ -407,6 +404,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
 									editionId={article.editionId}
+									shouldHideAds={article.shouldHideAds}
 								/>
 							</div>
 						</GridItem>
@@ -475,6 +473,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
+												pageId={article.config.pageId}
 											></ArticleMetaApps>
 										</Hide>
 										<Hide until="leftCol">
@@ -571,6 +570,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 										article.isRightToLeftLang
 									}
 									editionId={article.editionId}
+									shouldHideAds={article.shouldHideAds}
 								/>
 								{showBodyEndSlot && (
 									<Island
@@ -674,7 +674,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					</ShowcaseGrid>
 				</Section>
 
-				{renderAds && !isLabs && (
+				{isWeb && renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
 						padSides={false}
@@ -781,7 +781,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						borderColour={themePalette('--article-border')}
 						fontColour={themePalette('--article-section-title')}
 					>
-						<MostViewedFooterLayout renderAds={renderAds}>
+						<MostViewedFooterLayout renderAds={isWeb && renderAds}>
 							<Island
 								priority="feature"
 								defer={{ until: 'visible' }}
@@ -796,7 +796,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 
-				{renderAds && !isLabs && (
+				{isWeb && renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
 						padSides={false}

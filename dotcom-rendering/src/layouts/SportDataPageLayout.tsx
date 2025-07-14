@@ -45,7 +45,6 @@ const SportsPage = ({
 						edition={sportData.editionId}
 						renderAds={renderAds}
 						pageId={sportData.config.pageId}
-						navAtom={sportData.navAtom}
 					/>
 				</Island>
 			);
@@ -58,7 +57,6 @@ const SportsPage = ({
 					tableCompetitions={sportData.tables}
 					renderAds={renderAds}
 					guardianBaseUrl={sportData.guardianBaseURL}
-					navAtom={sportData.navAtom}
 				/>
 			);
 		case 'CricketMatch':
@@ -98,6 +96,7 @@ export const SportDataPageLayout = ({ sportData }: Props) => {
 							<HeaderAdSlot
 								isPaidContent={!!sportData.config.isPaidContent}
 								shouldHideReaderRevenue={false}
+								abTests={sportData.config.abTests}
 							/>
 						</Section>
 					</Stuck>

@@ -9,7 +9,7 @@ import { generateSources, getFallbackSource } from './Picture';
 
 export type Loading = NonNullable<ImgHTMLAttributes<unknown>['loading']>;
 
-type Props = {
+export type Props = {
 	imageSize: ImageSizeType;
 	mainImage: string;
 	loading: Loading;
@@ -203,6 +203,9 @@ export const CardPicture = ({
 	aspectRatio = '5:3',
 	mobileAspectRatio,
 }: Props) => {
+	if (mainImage === '') {
+		return null;
+	}
 	const sources = generateSources(
 		mainImage,
 		decideImageWidths(imageSize, aspectRatio),

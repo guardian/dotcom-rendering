@@ -37,6 +37,7 @@ type Props = {
 	onFirstPage: boolean;
 	keyEvents: Block[];
 	filterKeyEvents: boolean;
+	shouldHideAds: boolean;
 };
 
 export const LiveBlogRenderer = ({
@@ -62,6 +63,7 @@ export const LiveBlogRenderer = ({
 	keyEvents,
 	filterKeyEvents = false,
 	editionId,
+	shouldHideAds,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
@@ -92,6 +94,7 @@ export const LiveBlogRenderer = ({
 							isSensitive={isSensitive}
 							isPinnedPost={true}
 							editionId={editionId}
+							shouldHideAds={shouldHideAds}
 						/>
 					</PinnedPost>
 				</>
@@ -133,6 +136,7 @@ export const LiveBlogRenderer = ({
 				isSensitive={isSensitive}
 				pinnedPost={pinnedPost}
 				editionId={editionId}
+				shouldHideAds={shouldHideAds}
 			/>
 			{isWeb && blocks.length > 4 && (
 				<Island

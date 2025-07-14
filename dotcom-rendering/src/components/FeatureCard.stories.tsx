@@ -258,12 +258,7 @@ export const Video: Story = {
 			title: 'Video Title',
 			duration: 120,
 			expired: false,
-			images: [
-				{
-					url: 'https://media.guim.co.uk/video-thumbnail.jpg',
-					width: 1920,
-				},
-			],
+			image: 'https://media.guim.co.uk/video-thumbnail.jpg',
 		},
 	},
 };

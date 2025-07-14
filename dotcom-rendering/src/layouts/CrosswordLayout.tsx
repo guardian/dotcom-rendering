@@ -145,6 +145,7 @@ export const CrosswordLayout = (props: Props) => {
 									shouldHideReaderRevenue={
 										!!article.config.shouldHideReaderRevenue
 									}
+									abTests={article.config.abTests}
 								/>
 							</Section>
 						</div>
@@ -331,6 +332,9 @@ export const CrosswordLayout = (props: Props) => {
 													article.isRightToLeftLang
 												}
 												editionId={article.editionId}
+												shouldHideAds={
+													article.shouldHideAds
+												}
 											/>
 										</ArticleContainer>
 									</GridItem>

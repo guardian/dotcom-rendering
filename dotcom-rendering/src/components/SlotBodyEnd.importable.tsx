@@ -18,7 +18,6 @@ import type {
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
-import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -126,18 +125,8 @@ export const SlotBodyEnd = ({
 
 	const showPublicGood = countryCode === 'US';
 
-	const abTests = useAB();
-	const abTestsApi = abTests?.api;
-	const mpuWhenNoEpicEnabled =
-		(abTestsApi?.isUserInVariant('MpuWhenNoEpic', 'variant') &&
-			countryCode === 'GB') ??
-		false;
-
 	const showArticleEndSlot =
-		renderAds &&
-		!isLabs &&
-		(showPublicGood || mpuWhenNoEpicEnabled) &&
-		articleEndSlot;
+		renderAds && !isLabs && showPublicGood && articleEndSlot;
 
 	useEffect(() => {
 		setAsyncArticleCount(
@@ -217,17 +206,7 @@ export const SlotBodyEnd = ({
 	useEffect(() => {
 		if (SelectedEpic === null && showArticleEndSlot) {
 			const additionalSizes = (): SizeMapping => {
-				if (mpuWhenNoEpicEnabled) {
-					return {
-						desktop: [
-							adSizes.outstreamDesktop,
-							adSizes.outstreamGoogleDesktop,
-						],
-					};
-				} else if (showPublicGood) {
-					return { mobile: [adSizes.fluid] };
-				}
-				return {};
+				return { mobile: [adSizes.fluid] }; // Public Good additional ad slot sizes
 			};
 			document.dispatchEvent(
 				new CustomEvent('gu.commercial.slot.fill', {
@@ -238,12 +217,7 @@ export const SlotBodyEnd = ({
 				}),
 			);
 		}
-	}, [
-		SelectedEpic,
-		showArticleEndSlot,
-		mpuWhenNoEpicEnabled,
-		showPublicGood,
-	]);
+	}, [SelectedEpic, showArticleEndSlot]);
 
 	if (SelectedEpic !== null && !isUndefined(SelectedEpic)) {
 		return (

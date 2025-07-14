@@ -241,10 +241,8 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
-	/**
-	 * This property currently only applies to the header and merchandising slots
-	 */
-	const renderAds = isWeb && canRenderAds(article);
+	const renderAds = canRenderAds(article);
+
 	return (
 		<>
 			{isApps && (
@@ -282,6 +280,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 												!!article.config
 													.shouldHideReaderRevenue
 											}
+											abTests={article.config.abTests}
 										/>
 									</Section>
 								</div>
@@ -324,12 +323,10 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				</>
 			)}
 			<main data-layout="InteractiveLayout">
-				{isApps && (
-					<>
-						<Island priority="critical">
-							<AdPortals />
-						</Island>
-					</>
+				{isApps && renderAds && (
+					<Island priority="critical">
+						<AdPortals />
+					</Island>
 				)}
 				<Section
 					fullWidth={true}
@@ -358,6 +355,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										isAdFreeUser={article.isAdFreeUser}
 										isSensitive={article.config.isSensitive}
 										editionId={article.editionId}
+										shouldHideAds={article.shouldHideAds}
 									/>
 								</div>
 							</GridItem>
@@ -448,6 +446,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 													shortUrlId={
 														article.config
 															.shortUrlId
+													}
+													pageId={
+														article.config.pageId
 													}
 												></ArticleMetaApps>
 											</Hide>
@@ -543,6 +544,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 											article.isRightToLeftLang
 										}
 										editionId={article.editionId}
+										shouldHideAds={article.shouldHideAds}
 									/>
 								</ArticleContainer>
 							</GridItem>
@@ -581,7 +583,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									article.shouldHideReaderRevenue
 								}
 								tags={article.tags}
-								renderAds={renderAds}
+								renderAds={isWeb && renderAds}
 								isLabs={false}
 								articleEndSlot={
 									!!article.config.switches.articleEndSlot
@@ -625,7 +627,8 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						}
 					/>
 				</Section>
-				{renderAds && (
+
+				{isWeb && renderAds && (
 					<Section
 						fullWidth={true}
 						data-print-layout="hide"
@@ -738,7 +741,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						borderColour={themePalette('--article-border')}
 						fontColour={themePalette('--article-section-title')}
 					>
-						<MostViewedFooterLayout renderAds={renderAds}>
+						<MostViewedFooterLayout renderAds={isWeb && renderAds}>
 							<Island
 								priority="feature"
 								defer={{ until: 'visible' }}
@@ -753,7 +756,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 
-				{renderAds && (
+				{isWeb && renderAds && (
 					<Section
 						fullWidth={true}
 						data-print-layout="hide"

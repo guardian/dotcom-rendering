@@ -12,6 +12,10 @@ type Props = {
 	absoluteServerTimes: boolean;
 };
 
+/**
+ * @deprecated Adverts are no longer shown within containers. We no
+ * longer use containers that reserve a space for an MPU advert.
+ */
 export const FixedSmallSlowVMPU = ({
 	trails,
 	containerPalette,

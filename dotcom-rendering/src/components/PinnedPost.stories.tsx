@@ -111,6 +111,7 @@ export const Sport = {
 						switches={{}}
 						isPinnedPost={true}
 						editionId={'UK'}
+						shouldHideAds={false}
 					/>
 				</PinnedPost>
 			</Wrapper>
@@ -148,6 +149,7 @@ export const News = {
 						switches={{}}
 						isPinnedPost={true}
 						editionId={'UK'}
+						shouldHideAds={false}
 					/>
 				</PinnedPost>
 			</Wrapper>
@@ -185,6 +187,7 @@ export const Culture = {
 						switches={{}}
 						isPinnedPost={true}
 						editionId={'UK'}
+						shouldHideAds={false}
 					/>
 				</PinnedPost>
 			</Wrapper>
@@ -222,6 +225,7 @@ export const Lifestyle = {
 						switches={{}}
 						isPinnedPost={true}
 						editionId={'UK'}
+						shouldHideAds={false}
 					/>
 				</PinnedPost>
 			</Wrapper>
@@ -259,6 +263,7 @@ export const Opinion = {
 						switches={{}}
 						isPinnedPost={true}
 						editionId={'UK'}
+						shouldHideAds={false}
 					/>
 				</PinnedPost>
 			</Wrapper>
@@ -296,6 +301,7 @@ export const SpecialReport = {
 						switches={{}}
 						isPinnedPost={true}
 						editionId={'UK'}
+						shouldHideAds={false}
 					/>
 				</PinnedPost>
 			</Wrapper>
@@ -333,6 +339,7 @@ export const Labs = {
 						switches={{}}
 						isPinnedPost={true}
 						editionId={'UK'}
+						shouldHideAds={false}
 					/>
 				</PinnedPost>
 			</Wrapper>
