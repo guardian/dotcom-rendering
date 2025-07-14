@@ -52,7 +52,7 @@ const PreferenceToggle = ({
 	);
 };
 
-export const useStoredBooleanPreference = (
+const useStoredBooleanPreference = (
 	key: string,
 	defaultValue: boolean,
 ): [boolean, React.Dispatch<React.SetStateAction<boolean>>] => {
