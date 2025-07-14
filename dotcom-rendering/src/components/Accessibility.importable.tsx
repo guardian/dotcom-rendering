@@ -23,6 +23,35 @@ const bold = css`
 // https://github.com/guardian/frontend/blob/09f49b80/common/app/experiments/Experiments.scala#L57
 const darkModeCookieName = 'X-GU-Experiment-0perc-D';
 
+const PreferenceToggle = ({
+	label,
+	checked,
+	onChange,
+	dataLinkName,
+	description,
+}: {
+	label: string;
+	checked: boolean;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	dataLinkName: string;
+	description: string;
+}) => {
+	return (
+		<label>
+			<input
+				type="checkbox"
+				checked={checked}
+				onChange={onChange}
+				data-link-name={dataLinkName}
+			/>
+			<span css={bold}>{label}</span>
+			{checked
+				? `Untick this to disable ${description}`
+				: `Tick this to enable ${description}`}
+		</label>
+	);
+};
+
 /**
  * Updates the user's accessibility preferences
  *
@@ -66,8 +95,9 @@ export const Accessibility = () => {
 		const timeout = setTimeout(() => {
 			// we must reload the page for the preference to take effect,
 			// as this relies on a server-side test & cookie combination
-			if (shouldParticipate !== darkModeAvailable)
+			if (shouldParticipate !== darkModeAvailable) {
 				window.location.reload();
+			}
 		}, 1200);
 
 		return () => clearTimeout(timeout);
@@ -93,46 +123,41 @@ export const Accessibility = () => {
 						functionalities.
 					</p>
 
-					<label>
-						<input
-							type="checkbox"
-							checked={shouldFlash}
-							onChange={toggleFlash}
-							data-link-name="flashing-elements"
-						/>
-						<span css={bold}>Allow flashing elements </span>
-						{shouldFlash
-							? 'Untick this to disable flashing and moving elements'
-							: 'Tick this to enable flashing or moving elements'}
-					</label>
-				</fieldset>
-
-				<br />
-
-				<fieldset css={formStyle}>
-					<p>
-						We offer beta support for a dark colour scheme on the
-						web. The colour scheme preference will follow your
-						system settings.
-					</p>
-					<label>
-						<input
-							type="checkbox"
-							checked={shouldParticipate}
-							onChange={(e) => {
-								setParticipate(e.target.checked);
-							}}
-							data-link-name="prefers-colour-scheme"
-						/>
-						<span css={bold}>
-							Participate in the dark colour scheme beta{' '}
-						</span>
-						{shouldParticipate
-							? 'Untick this to opt out (browser will refresh)'
-							: 'Tick this to opt in (browser will refresh)'}
-					</label>
+					<PreferenceToggle
+						label="Allow flashing elements"
+						checked={shouldFlash}
+						onChange={toggleFlash}
+						dataLinkName="flashing-elements"
+						description="flashing and moving elements"
+					/>
 				</fieldset>
 			</div>
+
+			<br />
+
+			<fieldset css={formStyle}>
+				<p>
+					We offer beta support for a dark colour scheme on the web.
+					The colour scheme preference will follow your system
+					settings.
+				</p>
+				<label>
+					<input
+						type="checkbox"
+						checked={shouldParticipate}
+						onChange={(e) => {
+							setParticipate(e.target.checked);
+						}}
+						data-link-name="prefers-colour-scheme"
+					/>
+					<span css={bold}>
+						Participate in the dark colour scheme beta{' '}
+					</span>
+					{shouldParticipate
+						? 'Untick this to opt out (browser will refresh)'
+						: 'Tick this to opt in (browser will refresh)'}
+				</label>
+			</fieldset>
 		</FrontSection>
 	);
 };
