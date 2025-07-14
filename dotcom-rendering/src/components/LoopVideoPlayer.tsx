@@ -58,6 +58,8 @@ export const PLAYER_STATES = [
 	'PAUSED_BY_INTERSECTION_OBSERVER',
 ] as const;
 
+export type PlayerStates = (typeof PLAYER_STATES)[number];
+
 type Props = {
 	src: string;
 	atomId: string;
@@ -67,7 +69,7 @@ type Props = {
 	fallbackImageComponent: JSX.Element;
 	isPlayable: boolean;
 	setIsPlayable: Dispatch<SetStateAction<boolean>>;
-	playerState: (typeof PLAYER_STATES)[number];
+	playerState: PlayerStates;
 	currentTime: number;
 	setCurrentTime: Dispatch<SetStateAction<number>>;
 	isMuted: boolean;

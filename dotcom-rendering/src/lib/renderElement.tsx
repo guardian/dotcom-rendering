@@ -478,8 +478,11 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
 			return (
 				<VideoAtom
+					format={format}
 					assets={element.assets}
 					poster={element.posterImage?.[0]?.url}
+					caption={element.title}
+					isMainMedia={isMainMedia}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MiniProfilesBlockElement':

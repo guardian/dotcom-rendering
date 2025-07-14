@@ -327,8 +327,8 @@ export type Props = {
 	collectionId: number;
 	isNewsletter?: boolean;
 	/**
-	 * An immersive feature card variant. It dictates that the card has a full width background image on all breakpoints. It also dictates the the card change aspect ratio to 5:3 on desktop and 4:5 on mobile.
-	 *
+	 * An immersive feature card variant. It dictates that the card has a full width background image on
+	 * all breakpoints. It also dictates the the card change aspect ratio to 5:3 on desktop and 4:5 on mobile.
 	 */
 	isImmersive?: boolean;
 	showVideo?: boolean;
