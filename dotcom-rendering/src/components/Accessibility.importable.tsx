@@ -79,7 +79,7 @@ export const Accessibility = () => {
 
 	return (
 		<FrontSection title="Preferences" editionId="UK" discussionApiUrl="">
-			<form>
+			<div>
 				<fieldset css={formStyle}>
 					<p>
 						We aim to make this site accessible to a wide audience
@@ -132,7 +132,7 @@ export const Accessibility = () => {
 							: 'Tick this to opt in (browser will refresh)'}
 					</label>
 				</fieldset>
-			</form>
+			</div>
 		</FrontSection>
 	);
 };
