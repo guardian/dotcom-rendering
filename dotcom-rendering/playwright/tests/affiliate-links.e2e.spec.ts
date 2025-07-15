@@ -14,10 +14,10 @@ test.describe('Affiliate links', () => {
 			});
 			await cmpAcceptAll(page);
 
-			const selector = '[data-testid="affiliate-disclaimer"]';
-			const disclaimerLocator = page.locator(selector);
+			const disclaimerSelector = '[data-testid="affiliate-disclaimer"]';
+			const disclaimerLocator = page.locator(disclaimerSelector);
 			await disclaimerLocator.scrollIntoViewIfNeeded();
-			await expectToBeVisible(page, selector);
+			await expectToBeVisible(page, disclaimerSelector);
 			await expect(disclaimerLocator).toContainText('affiliate link');
 		});
 
@@ -30,8 +30,8 @@ test.describe('Affiliate links', () => {
 			});
 			await cmpAcceptAll(page);
 
-			const selector = '[href*="go.skimresources"]';
-			const skimlinkLocator = page.locator(selector).first();
+			const skimlinkSelector = '[href*="go.skimresources"]';
+			const skimlinkLocator = page.locator(skimlinkSelector).first();
 			const skimlinkRelAttribute =
 				await skimlinkLocator.getAttribute('rel');
 			expect(skimlinkRelAttribute).toBe('sponsored');
