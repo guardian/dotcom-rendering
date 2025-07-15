@@ -615,6 +615,7 @@ export const loopVideoCard: DCRFrontCard = {
 		duration: 0,
 		width: 500,
 		height: 400,
+		image: 'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
 	},
 	image: {
 		src: 'https://media.guim.co.uk/966bf085fb982b1103aaba42a812b09726cc0a3c/1417_104_1378_1104/master/1378.jpg',
