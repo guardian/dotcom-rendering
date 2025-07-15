@@ -53,6 +53,13 @@ const logAndReportError = (src: string, error: Error) => {
 	log('dotcom', message);
 };
 
+const dispatchOphanAttentionEvent = (
+	eventType: 'videoPlaying' | 'videoPause',
+) => {
+	const event = new Event(eventType, { bubbles: true });
+	document.dispatchEvent(event);
+};
+
 type Props = {
 	src: string;
 	atomId: string;
@@ -128,6 +135,7 @@ export const LoopVideo = ({
 				})
 				.then(() => {
 					// Autoplay succeeded
+					dispatchOphanAttentionEvent('videoPlaying');
 					setPlayerState('PLAYING');
 				});
 		}
@@ -148,6 +156,7 @@ export const LoopVideo = ({
 		}
 
 		setPlayerState(reason);
+		dispatchOphanAttentionEvent('videoPause');
 		void vidRef.current.pause();
 	};
 
