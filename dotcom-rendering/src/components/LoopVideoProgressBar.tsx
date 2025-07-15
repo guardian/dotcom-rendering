@@ -53,7 +53,10 @@ export const LoopVideoProgressBar = ({
 	 */
 	const adjustedDuration = Math.max(duration - 0.25, 0.1);
 
-	const progressPercentage = (currentTime * 100) / adjustedDuration;
+	const progressPercentage = Math.min(
+		(currentTime * 100) / adjustedDuration,
+		100,
+	);
 	if (Number.isNaN(progressPercentage)) {
 		return null;
 	}
