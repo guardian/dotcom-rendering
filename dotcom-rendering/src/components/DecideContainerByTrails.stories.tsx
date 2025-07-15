@@ -18,6 +18,8 @@ export default {
 	},
 };
 
+const ASPECT_RATIO = '5:4';
+
 export const OneCardFast = () => {
 	return (
 		<FrontSection
@@ -29,6 +31,7 @@ export const OneCardFast = () => {
 				trails={trails.slice(0, 1)}
 				speed="fast"
 				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
@@ -46,6 +49,7 @@ export const TwoCardFast = () => {
 				trails={trails.slice(0, 2)}
 				speed="fast"
 				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
@@ -63,6 +67,7 @@ export const ThreeCardFast = () => {
 				trails={trails.slice(0, 3)}
 				speed="fast"
 				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
@@ -80,6 +85,7 @@ export const FourCardFast = () => {
 				trails={trails.slice(0, 4)}
 				speed="fast"
 				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
@@ -97,6 +103,7 @@ export const FiveCardFast = () => {
 				trails={trails.slice(0, 5)}
 				speed="fast"
 				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
@@ -114,6 +121,7 @@ export const SixCardFast = () => {
 				trails={trails.slice(0, 6)}
 				speed="fast"
 				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
@@ -131,6 +139,7 @@ export const SevenCardFast = () => {
 				trails={trails.slice(0, 7)}
 				speed="fast"
 				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
@@ -148,6 +157,7 @@ export const EightCardFast = () => {
 				trails={trails.slice(0, 8)}
 				speed="fast"
 				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
@@ -166,6 +176,7 @@ export const TwelveCardFast = () => {
 				trails={trails.slice(0, 12)}
 				speed="fast"
 				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
@@ -183,6 +194,7 @@ export const OneCardSlow = () => {
 				trails={trails.slice(0, 1)}
 				speed="slow"
 				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
@@ -200,6 +212,7 @@ export const TwoCardSlow = () => {
 				trails={trails.slice(0, 2)}
 				speed="slow"
 				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
@@ -217,6 +230,7 @@ export const ThreeCardSlow = () => {
 				trails={trails.slice(0, 3)}
 				speed="slow"
 				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
@@ -234,6 +248,7 @@ export const FourCardSlow = () => {
 				trails={trails.slice(0, 4)}
 				speed="slow"
 				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
@@ -251,6 +266,7 @@ export const FiveCardSlow = () => {
 				trails={trails.slice(0, 5)}
 				speed="slow"
 				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
@@ -268,6 +284,7 @@ export const SixCardSlow = () => {
 				trails={trails.slice(0, 6)}
 				speed="slow"
 				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
@@ -285,6 +302,7 @@ export const SevenCardSlow = () => {
 				trails={trails.slice(0, 7)}
 				speed="slow"
 				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
@@ -302,6 +320,7 @@ export const EightCardSlow = () => {
 				trails={trails.slice(0, 8)}
 				speed="slow"
 				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
@@ -320,6 +339,7 @@ export const TwelveCardSlow = () => {
 				trails={trails.slice(0, 12)}
 				speed="slow"
 				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
