@@ -181,16 +181,16 @@ export const LoopVideo = ({
 		).matches;
 
 		/**
-		 * The user indicates a preference for no flashing elements.
-		 * `flashingPreference` is `null` if no preference exists and
-		 * explicitly `false` when the reader has said they don't want flashing.
+		 * The user indicates a preference for no autoplaying videos.
+		 * `autoplayPreference` is explicitly `false` when the reader
+		 *  has said they don't want flashing.
 		 */
-		const flashingPreferences = storage.local.get(
-			'gu.prefs.accessibility.flashing-elements',
+		const autoplayPreferences = storage.local.get(
+			'gu.prefs.accessibility.autoplay-video',
 		);
 
 		setIsAutoplayAllowed(
-			!userPrefersReducedMotion && flashingPreferences !== false,
+			!userPrefersReducedMotion && autoplayPreferences !== false,
 		);
 
 		/**
