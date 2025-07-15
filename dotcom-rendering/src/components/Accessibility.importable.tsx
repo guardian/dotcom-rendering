@@ -122,7 +122,7 @@ export const Accessibility = () => {
 
 	return (
 		<FrontSection title="Preferences" editionId="UK" discussionApiUrl="">
-			<div>
+			<form>
 				<fieldset css={formStyle}>
 					<p>
 						We aim to make this site accessible to a wide audience
@@ -151,33 +151,33 @@ export const Accessibility = () => {
 						description="autoplaying video"
 					/>
 				</fieldset>
-			</div>
 
-			<br />
+				<br />
 
-			<fieldset css={formStyle}>
-				<p>
-					We offer beta support for a dark colour scheme on the web.
-					The colour scheme preference will follow your system
-					settings.
-				</p>
-				<label>
-					<input
-						type="checkbox"
-						checked={shouldParticipate}
-						onChange={(e) => {
-							setParticipate(e.target.checked);
-						}}
-						data-link-name="prefers-colour-scheme"
-					/>
-					<span css={bold}>
-						Participate in the dark colour scheme beta{' '}
-					</span>
-					{shouldParticipate
-						? ' Untick this to opt out (browser will refresh)'
-						: ' Tick this to opt in (browser will refresh)'}
-				</label>
-			</fieldset>
+				<fieldset css={formStyle}>
+					<p>
+						We offer beta support for a dark colour scheme on the
+						web. The colour scheme preference will follow your
+						system settings.
+					</p>
+					<label>
+						<input
+							type="checkbox"
+							checked={shouldParticipate}
+							onChange={(e) => {
+								setParticipate(e.target.checked);
+							}}
+							data-link-name="prefers-colour-scheme"
+						/>
+						<span css={bold}>
+							Participate in the dark colour scheme beta{' '}
+						</span>
+						{shouldParticipate
+							? ' Untick this to opt out (browser will refresh)'
+							: ' Tick this to opt in (browser will refresh)'}
+					</label>
+				</fieldset>
+			</form>
 		</FrontSection>
 	);
 };
