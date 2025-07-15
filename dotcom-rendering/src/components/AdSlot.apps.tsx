@@ -46,7 +46,7 @@ const adSlotStyles = css`
  * the native layer, for it to "paint" an advert over the top of it.
  */
 export const AdSlot = forwardRef<HTMLDivElement>((_, ref) => (
-	<aside className="ad-slot-container" css={styles}>
+	<aside data-ad-slot={true} css={styles}>
 		<div css={adLabelsStyles}>
 			<p>Advertisement</p>
 		</div>
