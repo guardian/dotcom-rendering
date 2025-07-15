@@ -60,7 +60,15 @@ export const PLAYER_STATES = [
 	'NOT_STARTED',
 	'PLAYING',
 	'PAUSED_BY_USER',
+	/**
+	 * The video is paused when the user scrolls away.
+	 */
 	'PAUSED_BY_INTERSECTION_OBSERVER',
+	/**
+	 * The browser may elect to suspend playback under certain circumstances.
+	 * For example, iOS devices in low power mode will suspend playback on autoplaying videos.
+	 */
+	'PAUSED_BY_BROWSER',
 ] as const;
 
 export type PlayerStates = (typeof PLAYER_STATES)[number];
@@ -81,6 +89,7 @@ type Props = {
 	handlePlayPauseClick: (event: SyntheticEvent) => void;
 	handleAudioClick: (event: SyntheticEvent) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
+	handlePause: (event: SyntheticEvent) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	AudioIcon: (iconProps: IconProps) => JSX.Element;
 	posterImage?: string;
@@ -111,6 +120,7 @@ export const LoopVideoPlayer = forwardRef(
 			handlePlayPauseClick,
 			handleAudioClick,
 			handleKeyDown,
+			handlePause,
 			onError,
 			AudioIcon,
 			preloadPartialData,
@@ -125,13 +135,19 @@ export const LoopVideoPlayer = forwardRef(
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Captions will be considered later. */}
 				<video
 					id={loopVideoId}
+					css={videoStyles(width, height)}
 					ref={ref}
+					role="button"
+					tabIndex={0}
+					height={height}
+					width={width}
+					data-link-name={`gu-video-loop-${
+						showPlayIcon ? 'play' : 'pause'
+					}-${atomId}`}
 					preload={preloadPartialData ? 'metadata' : 'none'}
 					loop={true}
 					muted={isMuted}
 					playsInline={true}
-					height={height}
-					width={width}
 					poster={posterImage}
 					onCanPlay={() => {
 						setIsPlayable(true);
@@ -146,15 +162,10 @@ export const LoopVideoPlayer = forwardRef(
 							setCurrentTime(ref.current.currentTime);
 						}
 					}}
+					onPause={handlePause}
 					onClick={handlePlayPauseClick}
 					onKeyDown={handleKeyDown}
-					role="button"
-					tabIndex={0}
 					onError={onError}
-					css={videoStyles(width, height)}
-					data-link-name={`gu-video-loop-${
-						showPlayIcon ? 'play' : 'pause'
-					}-${atomId}`}
 				>
 					{/* Only mp4 is currently supported. Assumes the video file type is mp4. */}
 					{/* The start time is set to 1ms so that Safari will autoplay the video */}

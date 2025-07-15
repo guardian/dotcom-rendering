@@ -175,6 +175,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									speed={tagPage.speed}
 									imageLoading={imageLoading}
 									isTagPage={true}
+									aspectRatio={'5:4'}
 								/>
 							</FrontSection>
 							{mobileAdPositions.includes(index) && (
