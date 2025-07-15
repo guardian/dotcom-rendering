@@ -284,8 +284,8 @@ export const LoopVideo = ({
 			}
 		};
 
-		void trackAttention(); // Avoids unhandled promise
-	}, []);
+		void trackAttention();
+	}, [atomId]);
 
 	/**
 	 * Autoplay the video when it comes into view.
