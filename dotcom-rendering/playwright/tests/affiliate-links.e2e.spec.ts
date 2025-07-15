@@ -20,9 +20,7 @@ test.describe('Affiliate links', () => {
 			await expectToBeVisible(page, selector);
 			await expect(disclaimerLocator).toContainText('affiliate link');
 		});
-	});
 
-	test.describe('WEB', function () {
 		test('skimlinks should have the attribute rel="sponsored"', async ({
 			page,
 		}) => {
