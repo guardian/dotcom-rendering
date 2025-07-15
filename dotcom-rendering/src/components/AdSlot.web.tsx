@@ -417,7 +417,11 @@ const AdSlotWrapper = ({
 	className?: string;
 }) => {
 	return (
-		<aside className={`ad-slot-container ${className}`} css={additionalCss}>
+		<aside
+			data-ad-slot={true}
+			className={`ad-slot-container ${className}`}
+			css={additionalCss}
+		>
 			{children}
 		</aside>
 	);
