@@ -44,14 +44,14 @@ export const LoopVideoProgressBar = ({
 	if (duration <= 0) return null;
 
 	/**
-	 * We achieve a smooth progress bar by using CSS transitions. However, this means that
-	 * the time on the progress bar is roughly always about 0.25 seconds behind - the interval in
-	 * which the onTimeUpdate event on video is fired. Therefore, to the user it looks like the
-	 * progress bar ranges from 0s to duration - 0.25s. To make allowance for this, when calculating
-	 * the progress percentage, we take 0.25s off the duration, so that the progress bar reaches
-	 * closer to the end.
+	 * We achieve a smooth progress bar by using CSS transitions. Given that
+	 * onTimeUpdate firesevery 250ms or so, this means that the time on the
+	 * progress bar is always about 0.25s behind and begins 0.25s late.
+	 * Therefore, when calculating the progress percentage, we take 0.25s off the duration.
+	 *
+	 * Videos less than a second in duration will have no adjustment.
 	 */
-	const adjustedDuration = Math.max(duration - 0.25, 0.1);
+	const adjustedDuration = duration > 1 ? duration - 0.25 : duration;
 
 	const progressPercentage = Math.min(
 		(currentTime * 100) / adjustedDuration,
