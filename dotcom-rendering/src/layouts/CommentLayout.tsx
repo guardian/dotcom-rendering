@@ -319,12 +319,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								shouldCenter={false}
 							>
 								<HeaderAdSlot
-									isPaidContent={
-										!!article.config.isPaidContent
-									}
-									shouldHideReaderRevenue={
-										!!article.config.shouldHideReaderRevenue
-									}
 									abTests={article.config.abTests}
 								/>
 							</Section>

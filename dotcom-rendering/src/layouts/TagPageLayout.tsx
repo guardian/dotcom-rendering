@@ -77,11 +77,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot
-								isPaidContent={!!tagPage.config.isPaidContent}
-								shouldHideReaderRevenue={false}
-								abTests={tagPage.config.abTests}
-							/>
+							<HeaderAdSlot abTests={tagPage.config.abTests} />
 						</Section>
 					</Stuck>
 				)}
@@ -179,6 +175,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									speed={tagPage.speed}
 									imageLoading={imageLoading}
 									isTagPage={true}
+									aspectRatio={'5:4'}
 								/>
 							</FrontSection>
 							{mobileAdPositions.includes(index) && (

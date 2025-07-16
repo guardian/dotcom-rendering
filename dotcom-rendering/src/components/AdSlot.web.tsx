@@ -16,8 +16,6 @@ import { ArticleDisplay } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { palette as schemedPalette } from '../palette';
-import { AdBlockAsk } from './AdBlockAsk.importable';
-import { Island } from './Island';
 
 // There are multiple of these ad slots on the page
 type IndexedSlot =
@@ -433,7 +431,6 @@ export const AdSlot = ({
 	isPaidContent = false,
 	index,
 	hasPageskin = false,
-	shouldHideReaderRevenue = false,
 	isIn250ReservationVariant,
 }: Props) => {
 	switch (position) {
@@ -488,19 +485,6 @@ export const AdSlot = ({
 					const slotId = 'dfp-ad--right';
 					return (
 						<>
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<AdBlockAsk
-									size="mpu"
-									slotId={slotId}
-									isPaidContent={isPaidContent}
-									shouldHideReaderRevenue={
-										shouldHideReaderRevenue
-									}
-								/>
-							</Island>
 							<AdSlotWrapper
 								css={[
 									css`
