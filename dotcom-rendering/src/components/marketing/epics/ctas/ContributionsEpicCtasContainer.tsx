@@ -41,18 +41,18 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 		isTabletOrAbove,
 		variant.choiceCardsSettings,
 	);
-	const defaultProduct = choiceCards?.find((cc) => cc.isDefault)?.product;
-	const [
-		threeTierChoiceCardSelectedProduct,
-		setThreeTierChoiceCardSelectedProduct,
-	] = useState<ChoiceCard['product'] | undefined>(defaultProduct);
+
+	const defaultChoiceCard = choiceCards?.find((cc) => cc.isDefault);
+	const [selectedChoiceCard, setSelectedChoiceCard] = useState<
+		ChoiceCard | undefined
+	>(defaultChoiceCard);
 
 	return (
 		<>
-			{choiceCards && threeTierChoiceCardSelectedProduct && (
+			{choiceCards && selectedChoiceCard && (
 				<ThreeTierChoiceCards
-					selectedProduct={threeTierChoiceCardSelectedProduct}
-					setSelectedProduct={setThreeTierChoiceCardSelectedProduct}
+					selectedChoiceCard={selectedChoiceCard}
+					setSelectedChoiceCard={setSelectedChoiceCard}
 					choices={choiceCards}
 					id={'epic'}
 				/>
@@ -76,9 +76,7 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 				submitComponentEvent={submitComponentEvent}
 				isReminderActive={isReminderActive}
 				isSignedIn={Boolean(fetchedEmail)}
-				threeTierChoiceCardSelectedProduct={
-					threeTierChoiceCardSelectedProduct
-				}
+				threeTierChoiceCardSelectedProduct={selectedChoiceCard?.product}
 				amountsTestName={amountsTestName}
 				amountsVariantName={amountsVariantName}
 				promoCodes={variant.promoCodes ?? []}
