@@ -47,7 +47,7 @@ describe('IslandContext tracks nesting of islands', () => {
 		expect(islands.length).toBe(1);
 	});
 
-	test('Child island props are included in parent island props', () => {
+	test('Parent island includes props for child islands', () => {
 		const { container } = render(
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<div>
