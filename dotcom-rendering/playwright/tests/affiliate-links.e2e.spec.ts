@@ -36,5 +36,21 @@ test.describe('Affiliate links', () => {
 				await skimlinkLocator.getAttribute('rel');
 			expect(skimlinkRelAttribute).toBe('sponsored');
 		});
+
+		test('skimlinks should contain the xcust URL parameter', async ({
+			page,
+		}) => {
+			await loadPage({
+				page,
+				path: '/Article/https://www.theguardian.com/thefilter/2025/jun/17/best-fans-uk',
+			});
+			await cmpAcceptAll(page);
+
+			const skimlinkSelector = '[href*="go.skimresources"]';
+			const skimlinkLocator = page.locator(skimlinkSelector).first();
+			const skimlinkHrefAttribute =
+				await skimlinkLocator.getAttribute('href');
+			expect(skimlinkHrefAttribute).toContain('xcust');
+		});
 	});
 });
