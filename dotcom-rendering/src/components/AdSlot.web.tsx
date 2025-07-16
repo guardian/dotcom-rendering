@@ -1,6 +1,6 @@
 import { css, type Interpolation } from '@emotion/react';
-import type { SlotName } from '@guardian/commercial';
-import { adSizes } from '@guardian/commercial';
+import type { SlotName } from '@guardian/commercial-core';
+import { adSizes } from '@guardian/commercial-core';
 import {
 	between,
 	breakpoints,
