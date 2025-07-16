@@ -3,7 +3,7 @@ import {
 	bypassCommercialMetricsSampling,
 	EventTimer,
 	initCommercialMetrics,
-} from '@guardian/commercial';
+} from '@guardian/commercial-core';
 import {
 	bypassCoreWebVitalsSampling,
 	initCoreWebVitals,

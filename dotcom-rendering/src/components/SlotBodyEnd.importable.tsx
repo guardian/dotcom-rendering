@@ -3,12 +3,14 @@ import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
-import { adSizes, type SizeMapping } from '@guardian/commercial';
+import { adSizes, type SizeMapping } from '@guardian/commercial-core';
 import type { CountryCode } from '@guardian/libs';
 import { isUndefined } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
-import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/types';
-import type { ModuleData } from '@guardian/support-dotcom-components/dist/dotcom/types';
+import type {
+	ModuleData,
+	WeeklyArticleHistory,
+} from '@guardian/support-dotcom-components/dist/dotcom/types';
 import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
