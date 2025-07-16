@@ -15,14 +15,16 @@ import { Recipe as RecipeStandardLifestyleFixture } from '../../fixtures/generat
 import { Standard as StandardStandardNewsFixture } from '../../fixtures/generated/fe-articles/Standard';
 import { Video as VideoStandardNewsFixture } from '../../fixtures/generated/fe-articles/Video';
 import { embedIframe } from '../client/embedIframe';
-import { type ArticleFormat, decideFormat } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	ArticleSpecial,
+	Pillar,
+} from '../lib/articleFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { extractNAV } from '../model/extract-nav';
-import {
-	type Article,
-	type ArticleDeprecated,
-	enhanceArticleType,
-} from '../types/article';
+import { type Article, enhanceArticleType } from '../types/article';
 import { DecideLayout, type Props as DecideLayoutProps } from './DecideLayout';
 
 export type HydratedLayoutDecoratorArgs = {
@@ -41,7 +43,11 @@ const HydratedLayout: Decorator<
 	DecideLayoutProps & HydratedLayoutDecoratorArgs
 > = (Story, context) => {
 	const { article } = context.args;
-	const format: ArticleFormat = decideFormat(article.format);
+	const format: ArticleFormat = {
+		design: article.design,
+		display: article.display,
+		theme: article.theme,
+	};
 	const colourScheme =
 		(isObject(context.parameters.config) &&
 		context.parameters.config.renderingTarget === 'Apps'
@@ -56,15 +62,13 @@ const HydratedLayout: Decorator<
 			? {
 					...context.args,
 					renderingTarget: 'Apps',
-					format,
 			  }
 			: {
 					...context.args,
 					renderingTarget: 'Web',
-					format,
 					NAV: {
-						...extractNAV(article.nav),
-						selectedPillar: getCurrentPillar(article),
+						...extractNAV(article.frontendData.nav),
+						selectedPillar: getCurrentPillar(article.frontendData),
 					},
 			  };
 
@@ -114,16 +118,14 @@ const webParameters = {
 
 export const WebStandardStandardNewsLight = {
 	args: {
-		article: enhanceArticleType(StandardStandardNewsFixture, 'Web')
-			.frontendData,
+		article: enhanceArticleType(StandardStandardNewsFixture, 'Web'),
 	},
 	parameters: webParameters,
 } satisfies Story;
 
 export const AppsStandardStandardNewsLight = {
 	args: {
-		article: enhanceArticleType(StandardStandardNewsFixture, 'Apps')
-			.frontendData,
+		article: enhanceArticleType(StandardStandardNewsFixture, 'Apps'),
 		colourScheme: 'light',
 	},
 	parameters: appsParameters,
@@ -137,12 +139,9 @@ export const AppsStandardStandardNewsDark: Story = {
 	parameters: appsParameters,
 };
 
-const standardImmersiveNewsAppsFixture: ArticleDeprecated = {
+const standardImmersiveNewsAppsFixture: Article = {
 	...AppsStandardStandardNewsLight.args.article,
-	format: {
-		...AppsStandardStandardNewsLight.args.article.format,
-		display: 'ImmersiveDisplay',
-	},
+	display: ArticleDisplay.Immersive,
 };
 
 export const AppsStandardImmersiveNewsLight: Story = {
@@ -163,16 +162,17 @@ export const AppsStandardImmersiveNewsDark: Story = {
 
 export const WebNewsletterSignupStandardSportLight: Story = {
 	args: {
-		article: enhanceArticleType(NewsletterSignupStandardSportFixture, 'Web')
-			.frontendData,
+		article: enhanceArticleType(
+			NewsletterSignupStandardSportFixture,
+			'Web',
+		),
 	},
 	parameters: webParameters,
 };
 
 export const WebPictureShowcaseOpinionLight: Story = {
 	args: {
-		article: enhanceArticleType(PictureShowcaseOpinionFixture, 'Web')
-			.frontendData,
+		article: enhanceArticleType(PictureShowcaseOpinionFixture, 'Web'),
 	},
 	parameters: webParameters,
 };
@@ -180,13 +180,13 @@ export const WebPictureShowcaseOpinionLight: Story = {
 export const WebStandardLifestyleReviewLight: Story = {
 	args: {
 		article: {
-			...WebStandardStandardNewsLight.args.article,
-			format: {
-				...WebStandardStandardNewsLight.args.article.format,
-				theme: 'LifestylePillar',
-				design: 'ReviewDesign',
+			frontendData: {
+				...WebStandardStandardNewsLight.args.article.frontendData,
+				starRating: 4,
 			},
-			starRating: 4,
+			display: WebStandardStandardNewsLight.args.article.display,
+			theme: Pillar.Lifestyle,
+			design: ArticleDesign.Review,
 		},
 	},
 	parameters: webParameters,
@@ -196,10 +196,7 @@ export const WebStandardNewsInterviewLight: Story = {
 	args: {
 		article: {
 			...WebStandardStandardNewsLight.args.article,
-			format: {
-				...WebStandardStandardNewsLight.args.article.format,
-				design: 'InterviewDesign',
-			},
+			design: ArticleDesign.Interview,
 		},
 	},
 	parameters: webParameters,
@@ -207,8 +204,7 @@ export const WebStandardNewsInterviewLight: Story = {
 
 export const AppsPictureShowcaseOpinionLight = {
 	args: {
-		article: enhanceArticleType(PictureShowcaseOpinionFixture, 'Apps')
-			.frontendData,
+		article: enhanceArticleType(PictureShowcaseOpinionFixture, 'Apps'),
 		colourScheme: 'light',
 	},
 	parameters: appsParameters,
@@ -232,8 +228,7 @@ export const AppsPictureShowcaseOpinionDark: Story = {
  */
 export const WebPhotoEssayImmersiveLabsLight: Story = {
 	args: {
-		article: enhanceArticleType(PhotoEssayImmersiveLabsFixture, 'Web')
-			.frontendData,
+		article: enhanceArticleType(PhotoEssayImmersiveLabsFixture, 'Web'),
 	},
 	parameters: {
 		...webParameters,
@@ -241,25 +236,21 @@ export const WebPhotoEssayImmersiveLabsLight: Story = {
 	},
 };
 
-const standardStandardLabsWebFixture: ArticleDeprecated = {
+const standardStandardLabsWebFixture: Article = {
 	...WebStandardStandardNewsLight.args.article,
-	format: {
-		...WebStandardStandardNewsLight.args.article.format,
-		theme: 'Labs',
-	},
+	theme: ArticleSpecial.Labs,
 };
 
-const standardStandardLabsAppsFixture: ArticleDeprecated = {
+const standardStandardLabsAppsFixture: Article = {
 	...AppsStandardStandardNewsLight.args.article,
-	format: {
-		...AppsStandardStandardNewsLight.args.article.format,
-		theme: 'Labs',
-	},
+	theme: ArticleSpecial.Labs,
 };
 
 export const WebStandardStandardLabsLight: Story = {
 	args: {
-		article: standardStandardLabsWebFixture,
+		article: {
+			...standardStandardLabsWebFixture,
+		},
 	},
 	parameters: webParameters,
 };
@@ -288,11 +279,8 @@ const featureStandardCultureWebFixture: Article = enhanceArticleType(
 export const WebFeatureStandardLabsLight: Story = {
 	args: {
 		article: {
-			...featureStandardCultureWebFixture.frontendData,
-			format: {
-				...featureStandardCultureWebFixture.frontendData.format,
-				theme: 'Labs',
-			},
+			...featureStandardCultureWebFixture,
+			theme: ArticleSpecial.Labs,
 		},
 	},
 	parameters: webParameters,
@@ -306,11 +294,8 @@ const recipeStandardLifestyleWebFixture: Article = enhanceArticleType(
 export const WebRecipeStandardLabsLight: Story = {
 	args: {
 		article: {
-			...recipeStandardLifestyleWebFixture.frontendData,
-			format: {
-				...recipeStandardLifestyleWebFixture.frontendData.format,
-				theme: 'Labs',
-			},
+			...recipeStandardLifestyleWebFixture,
+			theme: ArticleSpecial.Labs,
 		},
 	},
 	parameters: webParameters,
@@ -318,8 +303,7 @@ export const WebRecipeStandardLabsLight: Story = {
 
 export const AppsRecipeStandardLifestyleLight = {
 	args: {
-		article: enhanceArticleType(RecipeStandardLifestyleFixture, 'Apps')
-			.frontendData,
+		article: enhanceArticleType(RecipeStandardLifestyleFixture, 'Apps'),
 		colourScheme: 'light',
 	},
 	parameters: appsParameters,
@@ -335,8 +319,7 @@ export const AppsRecipeStandardLifestyleDark: Story = {
 
 export const WebLiveBlogStandardNewsLight = {
 	args: {
-		article: enhanceArticleType(LiveBlogStandardNewsFixture, 'Web')
-			.frontendData,
+		article: enhanceArticleType(LiveBlogStandardNewsFixture, 'Web'),
 	},
 	parameters: webParameters,
 } satisfies Story;
@@ -345,10 +328,7 @@ export const WebLiveBlogStandardLabsLight: Story = {
 	args: {
 		article: {
 			...WebLiveBlogStandardNewsLight.args.article,
-			format: {
-				...WebLiveBlogStandardNewsLight.args.article.format,
-				theme: 'Labs',
-			},
+			theme: ArticleSpecial.Labs,
 		},
 	},
 	parameters: webParameters,
@@ -356,8 +336,7 @@ export const WebLiveBlogStandardLabsLight: Story = {
 
 export const AppsLiveBlogStandardNewsLight = {
 	args: {
-		article: enhanceArticleType(LiveBlogStandardNewsFixture, 'Apps')
-			.frontendData,
+		article: enhanceArticleType(LiveBlogStandardNewsFixture, 'Apps'),
 		colourScheme: 'light',
 	},
 	parameters: appsParameters,
@@ -371,12 +350,9 @@ export const AppsLiveBlogStandardNewsDark: Story = {
 	parameters: appsParameters,
 };
 
-const liveBlogStandardSportAppsFixture: ArticleDeprecated = {
+const liveBlogStandardSportAppsFixture: Article = {
 	...AppsLiveBlogStandardNewsLight.args.article,
-	format: {
-		...AppsLiveBlogStandardNewsLight.args.article.format,
-		theme: 'SportPillar',
-	},
+	theme: Pillar.Sport,
 };
 
 export const AppsLiveBlogStandardSportLight: Story = {
@@ -395,12 +371,9 @@ export const AppsLiveBlogStandardSportDark: Story = {
 	parameters: appsParameters,
 };
 
-const liveBlogStandardSpecialReportAppsFixture: ArticleDeprecated = {
+const liveBlogStandardSpecialReportAppsFixture: Article = {
 	...AppsLiveBlogStandardNewsLight.args.article,
-	format: {
-		...AppsLiveBlogStandardNewsLight.args.article.format,
-		theme: 'SpecialReportTheme',
-	},
+	theme: ArticleSpecial.SpecialReport,
 };
 
 export const AppsLiveBlogStandardSpecialReportLight: Story = {
@@ -419,12 +392,9 @@ export const AppsLiveBlogStandardSpecialReportDark: Story = {
 	parameters: appsParameters,
 };
 
-const liveBlogStandardSpecialReportAltAppsFixture: ArticleDeprecated = {
+const liveBlogStandardSpecialReportAltAppsFixture: Article = {
 	...AppsLiveBlogStandardNewsLight.args.article,
-	format: {
-		...AppsLiveBlogStandardNewsLight.args.article.format,
-		theme: 'SpecialReportAltTheme',
-	},
+	theme: ArticleSpecial.SpecialReportAlt,
 };
 
 export const AppsLiveBlogStandardSpecialReportAltLight: Story = {
@@ -447,7 +417,10 @@ export const WebLiveblogWithNoKeyEvents: Story = {
 	args: {
 		article: {
 			...WebLiveBlogStandardNewsLight.args.article,
-			keyEvents: [],
+			frontendData: {
+				...WebLiveBlogStandardNewsLight.args.article.frontendData,
+				keyEvents: [],
+			},
 		},
 	},
 	parameters: webParameters,
@@ -455,8 +428,7 @@ export const WebLiveblogWithNoKeyEvents: Story = {
 
 export const AppsLiveblogSingleContributorLight = {
 	args: {
-		article: enhanceArticleType(LiveBlogSingleContributorFixture, 'Apps')
-			.frontendData,
+		article: enhanceArticleType(LiveBlogSingleContributorFixture, 'Apps'),
 		colourScheme: 'light',
 	},
 	parameters: appsParameters,
@@ -475,12 +447,9 @@ const commentStandardOpinionAppsFixture: Article = enhanceArticleType(
 	'Apps',
 );
 
-const commentStandardNewsAppsFixture: ArticleDeprecated = {
-	...commentStandardOpinionAppsFixture.frontendData,
-	format: {
-		...commentStandardOpinionAppsFixture.frontendData.format,
-		theme: 'NewsPillar',
-	},
+const commentStandardNewsAppsFixture: Article = {
+	...commentStandardOpinionAppsFixture,
+	theme: Pillar.News,
 };
 
 export const AppsCommentStandardNewsLight: Story = {
@@ -499,12 +468,9 @@ export const AppsCommentStandardNewsDark: Story = {
 	parameters: appsParameters,
 };
 
-const interactiveStandardNewsAppsFixture: ArticleDeprecated = {
+const interactiveStandardNewsAppsFixture: Article = {
 	...AppsStandardStandardNewsLight.args.article,
-	format: {
-		...AppsStandardStandardNewsLight.args.article.format,
-		design: 'InteractiveDesign',
-	},
+	design: ArticleDesign.Interactive,
 };
 
 export const AppsInteractiveStandardNewsLight: Story = {
@@ -525,8 +491,7 @@ export const AppsInteractiveStandardNewsDark: Story = {
 
 export const AppsAnalysisStandardNewsLight = {
 	args: {
-		article: enhanceArticleType(AnalysisStandardNewsFixture, 'Apps')
-			.frontendData,
+		article: enhanceArticleType(AnalysisStandardNewsFixture, 'Apps'),
 		colourScheme: 'light',
 	},
 	parameters: appsParameters,
@@ -540,12 +505,9 @@ export const AppsAnalysisStandardNewsDark: Story = {
 	parameters: appsParameters,
 };
 
-const analysisStandardCultureAppsFixture: ArticleDeprecated = {
+const analysisStandardCultureAppsFixture: Article = {
 	...AppsAnalysisStandardNewsLight.args.article,
-	format: {
-		...AppsAnalysisStandardNewsLight.args.article.format,
-		theme: 'CulturePillar',
-	},
+	theme: Pillar.Culture,
 };
 
 export const AppsAnalysisStandardCultureLight: Story = {
@@ -566,8 +528,7 @@ export const AppsAnalysisStandardCultureDark: Story = {
 
 export const WebVideoStandardNewsLight = {
 	args: {
-		article: enhanceArticleType(VideoStandardNewsFixture, 'Web')
-			.frontendData,
+		article: enhanceArticleType(VideoStandardNewsFixture, 'Web'),
 	},
 	parameters: webParameters,
 } satisfies Story;
@@ -576,10 +537,7 @@ export const WebVideoStandardLabsLight: Story = {
 	args: {
 		article: {
 			...WebVideoStandardNewsLight.args.article,
-			format: {
-				...WebVideoStandardNewsLight.args.article.format,
-				theme: 'Labs',
-			},
+			theme: ArticleSpecial.Labs,
 		},
 	},
 	parameters: webParameters,
@@ -587,8 +545,7 @@ export const WebVideoStandardLabsLight: Story = {
 
 export const AppsVideoStandardNewsLight = {
 	args: {
-		article: enhanceArticleType(VideoStandardNewsFixture, 'Apps')
-			.frontendData,
+		article: enhanceArticleType(VideoStandardNewsFixture, 'Apps'),
 		colourScheme: 'light',
 	},
 	parameters: appsParameters,
