@@ -23,7 +23,6 @@ import type {
 	Image,
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
-import type { Dispatch, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import {
 	removeMediaRulePrefix,
@@ -111,16 +110,16 @@ const buildChoiceCardSettings = (
 
 const buildUrlForThreeTierChoiceCards = (
 	baseUrl: string,
-	selectedProduct: ChoiceCard['product'],
-	destinationUrl?: string | null,
+	selectedChoiceCard: ChoiceCard,
 ) => {
+	const { destinationUrl, product } = selectedChoiceCard;
 	const url = destinationUrl?.trim() ?? baseUrl;
-	return selectedProduct.supportTier === 'OneOff'
+	return product.supportTier === 'OneOff'
 		? url
 		: addChoiceCardsProductParams(
 				url,
-				selectedProduct.supportTier,
-				selectedProduct.ratePlan,
+				product.supportTier,
+				product.ratePlan,
 		  );
 };
 
@@ -164,27 +163,10 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 
 	const choiceCards = getChoiceCards(isTabletOrAbove, choiceCardsSettings);
 	const defaultChoiceCard = choiceCards?.find((cc) => cc.isDefault);
-	const defaultProduct = defaultChoiceCard?.product;
-	const [destinationUrl, setDestinationUrl] = useState<string | null>(
-		defaultChoiceCard?.destinationUrl ?? null,
-	);
-	const [
-		threeTierChoiceCardSelectedProduct,
-		setThreeTierChoiceCardSelectedProduct,
-	] = useState<ChoiceCard['product'] | undefined>(defaultProduct);
 
-	const setSelectedProduct: Dispatch<
-		SetStateAction<ChoiceCard['product'] | undefined>
-	> = (product) => {
-		setThreeTierChoiceCardSelectedProduct(product);
-		const choiceCard = choiceCards?.find(
-			(choiceCardItem) =>
-				typeof product === 'object' &&
-				'supportTier' in product &&
-				choiceCardItem.product.supportTier === product.supportTier,
-		);
-		setDestinationUrl(choiceCard?.destinationUrl ?? null);
-	};
+	const [selectedChoiceCard, setSelectedChoiceCard] = useState<
+		ChoiceCard | undefined
+	>(defaultChoiceCard);
 
 	// We can't render anything without a design
 	if (!design) {
@@ -399,7 +381,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 					</div>
 				)}
 
-				{!threeTierChoiceCardSelectedProduct && (
+				{!selectedChoiceCard && (
 					<div css={styles.outerImageCtaContainer}>
 						<div css={styles.innerImageCtaContainer}>
 							<DesignableBannerCtas
@@ -425,14 +407,12 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 				</div>
 
 				{choiceCards &&
-					threeTierChoiceCardSelectedProduct &&
+					selectedChoiceCard &&
 					mainOrMobileContent.primaryCta && (
 						<div css={styles.threeTierChoiceCardsContainer}>
 							<ThreeTierChoiceCards
-								selectedProduct={
-									threeTierChoiceCardSelectedProduct
-								}
-								setSelectedProduct={setSelectedProduct}
+								selectedChoiceCard={selectedChoiceCard}
+								setSelectedChoiceCard={setSelectedChoiceCard}
 								choices={choiceCards}
 								id={'banner'}
 							/>
@@ -441,8 +421,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								<LinkButton
 									href={buildUrlForThreeTierChoiceCards(
 										mainOrMobileContent.primaryCta.ctaUrl,
-										threeTierChoiceCardSelectedProduct,
-										destinationUrl,
+										selectedChoiceCard,
 									)}
 									onClick={onCtaClick}
 									priority="tertiary"
