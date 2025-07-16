@@ -5,8 +5,9 @@ import { useEffect, useState } from 'react';
 import { getOphan } from '../client/ophan/ophan';
 import { tests } from '../experiments/ab-tests';
 import { runnableTestsToParticipations } from '../experiments/lib/ab-participations';
+import { BetaABTests } from '../experiments/lib/beta-ab-tests';
 import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
-import { setABTests } from '../lib/useAB';
+import { setABTests, setBetaABTests } from '../lib/useAB';
 import type { ABTestSwitches } from '../model/enhance-switches';
 import type { ServerSideTests } from '../types/config';
 import { useConfig } from './ConfigContext';
@@ -70,6 +71,12 @@ export const SetABTests = ({
 	const { renderingTarget } = useConfig();
 	const [ophan, setOphan] = useState<Awaited<ReturnType<typeof getOphan>>>();
 
+	const errorReporter = (e: unknown) =>
+		window.guardian.modules.sentry.reportError(
+			e instanceof Error ? e : Error(String(e)),
+			'ab-tests',
+		);
+
 	useEffect(() => {
 		getOphan(renderingTarget)
 			.then(setOphan)
@@ -97,6 +104,11 @@ export const SetABTests = ({
 			...getForcedParticipationsFromUrl(window.location.hash),
 		};
 
+		const betaAb = new BetaABTests({
+			ophanRecord: ophan.record,
+			errorReporter,
+		});
+
 		const ab = new AB({
 			mvtId: mvtId ?? -1,
 			mvtMaxValue,
@@ -106,11 +118,7 @@ export const SetABTests = ({
 			forcedTestVariants: allForcedTestVariants,
 			ophanRecord: ophan.record,
 			serverSideTests,
-			errorReporter: (e) =>
-				window.guardian.modules.sentry.reportError(
-					e instanceof Error ? e : Error(String(e)),
-					'ab-tests',
-				),
+			errorReporter,
 		});
 		const allRunnableTests = ab.allRunnableTests(tests);
 		const participations = runnableTestsToParticipations(allRunnableTests);
@@ -120,9 +128,17 @@ export const SetABTests = ({
 			participations,
 		});
 
+		setBetaABTests(betaAb);
+
+		window.guardian.modules.abTests.isUserInTest = (
+			testId: string,
+			variantId: string,
+		) => betaAb.isUserInTest(testId, variantId);
+
 		ab.trackABTests(allRunnableTests);
 		ab.registerImpressionEvents(allRunnableTests);
 		ab.registerCompleteEvents(allRunnableTests);
+		betaAb.trackABTests();
 		log('dotcom', 'AB tests initialised');
 	}, [
 		abTestSwitches,

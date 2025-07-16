@@ -56,6 +56,9 @@ export interface Guardian {
 		sentry: {
 			reportError: ReportError;
 		};
+		abTests: {
+			isUserInTest?: (testId: string, variantId: string) => boolean;
+		};
 	};
 	adBlockers: unknown;
 }
@@ -161,6 +164,7 @@ export const createGuardian = ({
 			sentry: {
 				reportError: () => null,
 			},
+			abTests: {},
 		},
 	};
 };
