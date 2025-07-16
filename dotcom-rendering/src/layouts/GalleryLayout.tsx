@@ -216,19 +216,17 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				</Section>
 			)}
 			{isApps && (
-				<Section
-					fullWidth={true}
-					data-print-layout="hide"
-					backgroundColour={'red'}
-					borderColour={themePalette('--article-border')}
-					padSides={false}
-					showSideBorders={false}
-					element="footer"
+				<div
+					css={{
+						backgroundColor: themePalette(
+							'--apps-footer-background',
+						),
+					}}
 				>
 					<Island priority="critical">
-						<AppsFooter />
+						<AppsFooter design={format.design} />
 					</Island>
-				</Section>
+				</div>
 			)}
 		</>
 	);
