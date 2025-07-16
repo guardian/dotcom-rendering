@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import type { ScheduleOptions, SchedulePriority } from '../lib/scheduler';
+import { IslandContext, IslandProvider } from './IslandContext';
 
 type DeferredProps = {
 	visible: {
@@ -55,17 +57,29 @@ export const Island = ({ priority, defer, children, role }: IslandProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Type definitions on children are limited
 	const name = String(children.type.name);
 
+	/**
+	 * Context tracks whether current island is a child of another
+	 */
+	const island = useContext(IslandContext);
+
 	return (
-		<gu-island
-			name={name}
-			priority={priority}
-			deferUntil={defer?.until}
-			props={JSON.stringify(children.props)}
-			rootMargin={rootMargin}
-			data-spacefinder-role={role}
-		>
-			{children}
-		</gu-island>
+		<IslandProvider value={{ isChild: true }}>
+			{/* Child islands defer to nearest parent island for hydration */}
+			{island.isChild ? (
+				children
+			) : (
+				<gu-island
+					name={name}
+					priority={priority}
+					deferUntil={defer?.until}
+					props={JSON.stringify(children.props)}
+					rootMargin={rootMargin}
+					data-spacefinder-role={role}
+				>
+					{children}
+				</gu-island>
+			)}
+		</IslandProvider>
 	);
 };
 
