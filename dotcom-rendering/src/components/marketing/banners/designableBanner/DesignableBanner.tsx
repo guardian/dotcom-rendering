@@ -23,6 +23,7 @@ import type {
 	Image,
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
+import type { Dispatch, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import {
 	removeMediaRulePrefix,
@@ -111,11 +112,13 @@ const buildChoiceCardSettings = (
 const buildUrlForThreeTierChoiceCards = (
 	baseUrl: string,
 	selectedProduct: ChoiceCard['product'],
+	destinationUrl?: string | null,
 ) => {
+	const url = destinationUrl?.trim() ?? baseUrl;
 	return selectedProduct.supportTier === 'OneOff'
-		? baseUrl
+		? url
 		: addChoiceCardsProductParams(
-				baseUrl,
+				url,
 				selectedProduct.supportTier,
 				selectedProduct.ratePlan,
 		  );
@@ -160,11 +163,28 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	}, [iosAppBannerPresent, submitComponentEvent]);
 
 	const choiceCards = getChoiceCards(isTabletOrAbove, choiceCardsSettings);
-	const defaultProduct = choiceCards?.find((cc) => cc.isDefault)?.product;
+	const defaultChoiceCard = choiceCards?.find((cc) => cc.isDefault);
+	const defaultProduct = defaultChoiceCard?.product;
+	const [destinationUrl, setDestinationUrl] = useState<string | null>(
+		defaultChoiceCard?.destinationUrl ?? null,
+	);
 	const [
 		threeTierChoiceCardSelectedProduct,
 		setThreeTierChoiceCardSelectedProduct,
 	] = useState<ChoiceCard['product'] | undefined>(defaultProduct);
+
+	const setSelectedProduct: Dispatch<
+		SetStateAction<ChoiceCard['product'] | undefined>
+	> = (product) => {
+		setThreeTierChoiceCardSelectedProduct(product);
+		const choiceCard = choiceCards?.find(
+			(choiceCardItem) =>
+				typeof product === 'object' &&
+				'supportTier' in product &&
+				choiceCardItem.product.supportTier === product.supportTier,
+		);
+		setDestinationUrl(choiceCard?.destinationUrl ?? null);
+	};
 
 	// We can't render anything without a design
 	if (!design) {
@@ -412,9 +432,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								selectedProduct={
 									threeTierChoiceCardSelectedProduct
 								}
-								setSelectedProduct={
-									setThreeTierChoiceCardSelectedProduct
-								}
+								setSelectedProduct={setSelectedProduct}
 								choices={choiceCards}
 								id={'banner'}
 							/>
@@ -424,6 +442,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									href={buildUrlForThreeTierChoiceCards(
 										mainOrMobileContent.primaryCta.ctaUrl,
 										threeTierChoiceCardSelectedProduct,
+										destinationUrl,
 									)}
 									onClick={onCtaClick}
 									priority="tertiary"

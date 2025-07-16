@@ -43,7 +43,7 @@
 		"@guardian/shimport": "1.0.2",
 		"@guardian/source": "9.0.0",
 		"@guardian/source-development-kitchen": "18.1.1",
-		"@guardian/support-dotcom-components": "7.5.0",
+		"@guardian/support-dotcom-components": "7.6.0",
 		"@guardian/tsconfig": "0.2.0",
 		"@playwright/test": "1.52.0",
 		"@sentry/browser": "7.75.1",
