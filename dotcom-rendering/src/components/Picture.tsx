@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { breakpoints, from, space } from '@guardian/source/foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import {
 	type CSSProperties,
 	Fragment,
@@ -7,7 +7,6 @@ import {
 	useEffect,
 	useState,
 } from 'react';
-import { grid } from '../grid';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -472,22 +471,6 @@ export const Sources = ({ sources }: { sources: ImageSource[] }) => {
 	);
 };
 
-const galleryBodyImageStyles = css`
-	${grid.column.all}
-
-	${from.tablet} {
-		${grid.column.centre}
-	}
-
-	${from.desktop} {
-		padding-bottom: ${space[10]}px;
-	}
-
-	${from.leftCol} {
-		${grid.between('centre-column-start', 'right-column-end')}
-	}
-`;
-
 /**
  * This ensures that the image height never goes above 96vh.
  * The ratio parameter should be width:height.
@@ -495,27 +478,21 @@ const galleryBodyImageStyles = css`
 const imageMaxWidth = (
 	design: ArticleDesign,
 	ratio: number,
+	isMainMedia: boolean,
 ): CSSProperties | undefined =>
-	design === ArticleDesign.Gallery
+	design === ArticleDesign.Gallery && !isMainMedia
 		? { maxWidth: `calc(${ratio} * 96vh)` }
 		: undefined;
 
-const styles = (
-	{ design }: ArticleFormat,
-	isLightbox: boolean,
-	isMainMedia: boolean,
-) => {
+const styles = ({ design }: ArticleFormat, isLightbox: boolean) => {
 	if (design === ArticleDesign.Gallery) {
-		return css(
-			css`
-				img {
-					width: 100%;
-					height: 100%;
-					object-fit: cover;
-				}
-			`,
-			isMainMedia ? undefined : galleryBodyImageStyles,
-		);
+		return css(css`
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		`);
 	}
 	return isLightbox ? flex : block;
 };
@@ -581,10 +558,7 @@ export const Picture = ({
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
-		<picture
-			css={styles(format, isLightbox, isMainMedia)}
-			style={imageMaxWidth(format.design, 1 / ratio)}
-		>
+		<picture css={styles(format, isLightbox)}>
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
 			{format.display === ArticleDisplay.Immersive && isMainMedia && (
 				<>
@@ -621,6 +595,7 @@ export const Picture = ({
 				height={fallbackSource.width * ratio}
 				loading={Picture.disableLazyLoading ? undefined : loading}
 				css={isLightbox ? flex : block}
+				style={imageMaxWidth(format.design, 1 / ratio, isMainMedia)}
 			/>
 		</picture>
 	);
