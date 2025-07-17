@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { from, palette as sourcePalette } from '@guardian/source/foundations';
+import { AdSlot } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
@@ -8,6 +9,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
 import { Footer } from '../components/Footer';
 import { GalleryImage } from '../components/GalleryImage';
+import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
@@ -16,11 +18,13 @@ import { Standfirst } from '../components/Standfirst';
 import { SubMeta } from '../components/SubMeta';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
+import { canRenderAds } from '../lib/canRenderAds';
 import { decideMainMediaCaption } from '../lib/decide-caption';
 import type { NavType } from '../model/extract-nav';
-import { palette } from '../palette';
+import { palette as themePalette } from '../palette';
 import type { Gallery } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { Stuck } from './lib/stickiness';
 
 interface Props {
 	gallery: Gallery;
@@ -44,21 +48,21 @@ const border = css({
 
 const headerStyles = css`
 	${grid.container}
-	background-color: ${palette('--article-inner-background')};
+	background-color: ${themePalette('--article-inner-background')};
 
 	${from.tablet} {
-		border-bottom: 1px solid ${palette('--article-border')};
+		border-bottom: 1px solid ${themePalette('--article-border')};
 	}
 `;
 
 export const GalleryLayout = (props: WebProps | AppProps) => {
-	const gallery = props.gallery;
+	const { gallery, renderingTarget } = props;
 	const frontendData = gallery.frontendData;
 
-	const isWeb = props.renderingTarget === 'Web';
-	const isApps = props.renderingTarget === 'Apps';
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
 
-	const captionText = decideMainMediaCaption(props.gallery.mainMedia);
+	const captionText = decideMainMediaCaption(gallery.mainMedia);
 
 	const format: ArticleFormat = {
 		design: gallery.design,
@@ -66,29 +70,48 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 		theme: gallery.theme,
 	};
 
+	const renderAds = canRenderAds(frontendData);
+
 	return (
 		<>
 			{isWeb && (
-				<Masthead
-					nav={props.NAV}
-					editionId={frontendData.editionId}
-					idUrl={frontendData.config.idUrl}
-					mmaUrl={frontendData.config.mmaUrl}
-					discussionApiUrl={frontendData.config.discussionApiUrl}
-					idApiUrl={frontendData.config.idApiUrl}
-					contributionsServiceUrl={
-						frontendData.contributionsServiceUrl
-					}
-					showSubNav={false}
-					showSlimNav={true}
-					hasPageSkin={false}
-					hasPageSkinContentSelfConstrain={false}
-					pageId={frontendData.pageId}
-				/>
+				<div data-print-layout="hide" id="bannerandheader">
+					{renderAds && (
+						<Stuck>
+							<Section
+								fullWidth={true}
+								showTopBorder={false}
+								showSideBorders={false}
+								padSides={false}
+								shouldCenter={false}
+							>
+								<HeaderAdSlot
+									abTests={frontendData.config.abTests}
+								/>
+							</Section>
+						</Stuck>
+					)}
+					<Masthead
+						nav={props.NAV}
+						editionId={frontendData.editionId}
+						idUrl={frontendData.config.idUrl}
+						mmaUrl={frontendData.config.mmaUrl}
+						discussionApiUrl={frontendData.config.discussionApiUrl}
+						idApiUrl={frontendData.config.idApiUrl}
+						contributionsServiceUrl={
+							frontendData.contributionsServiceUrl
+						}
+						showSubNav={false}
+						showSlimNav={true}
+						hasPageSkin={false}
+						hasPageSkinContentSelfConstrain={false}
+						pageId={frontendData.pageId}
+					/>
+				</div>
 			)}
 			<main
 				css={{
-					backgroundColor: palette('--article-background'),
+					backgroundColor: themePalette('--article-background'),
 				}}
 			>
 				<div css={border}>Labs header</div>
@@ -193,6 +216,23 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					}
 				/>
 			</main>
+			{isWeb && renderAds && (
+				<Section
+					fullWidth={true}
+					data-print-layout="hide"
+					padSides={false}
+					showTopBorder={false}
+					showSideBorders={false}
+					backgroundColour={themePalette('--ad-background')}
+					element="aside"
+				>
+					<AdSlot
+						data-print-layout="hide"
+						position="merchandising-high"
+						display={format.display}
+					/>
+				</Section>
+			)}
 			{isWeb && (
 				<Section
 					fullWidth={true}
@@ -214,7 +254,9 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 			{isApps && (
 				<div
 					css={{
-						backgroundColor: palette('--apps-footer-background'),
+						backgroundColor: themePalette(
+							'--apps-footer-background',
+						),
 					}}
 				>
 					<Island priority="critical">
