@@ -99,7 +99,7 @@ const buildMVTDict = (tests: ABTest[]) => {
 	const mvtKVs = abTestsToMVTs(tests);
 	return Object.entries(mvtKVs).map(([key, value]) => ({
 		item_key: key,
-		item_value: stringify(value),
+		item_value: value.join(','),
 	}));
 };
 
