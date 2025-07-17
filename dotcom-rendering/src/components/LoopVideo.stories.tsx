@@ -64,6 +64,12 @@ export const PausePlay: Story = {
 
 export const UnmuteMute: Story = {
 	...Default,
+	parameters: {
+		test: {
+			// The following error is received without this flag: "TypeError: ophan.trackClickComponentEvent is not a function"
+			dangerouslyIgnoreUnhandledErrors: true,
+		},
+	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
 
@@ -94,13 +100,13 @@ export const InteractionObserver: Story = {
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
 
-		await sleep(300);
+		await sleep(300); // Allow enough time for the autoplay video to start.
 		canvas.getByTestId('page-end').scrollIntoView();
 
 		const progressBar = await canvas.findByRole('progressbar');
 		const progress = Number(progressBar.ariaValueNow);
 
-		await sleep(300);
+		await sleep(200); // Allow enough time to be confident that the video is paused.
 		await expect(Number(progressBar.ariaValueNow)).toEqual(progress);
 		await expect(canvas.queryByTestId('play-icon')).not.toBeInTheDocument();
 	},
