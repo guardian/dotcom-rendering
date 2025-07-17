@@ -1,32 +1,46 @@
 {
-	"version": "5",
-	"specifiers": {
-		"jsr:@std/assert@^1.0.13": "1.0.13",
-		"jsr:@std/cli@*": "1.0.17",
-		"jsr:@std/internal@^1.0.6": "1.0.6",
-		"jsr:@superstruct/core@2.0.2": "2.0.2"
-	},
-	"jsr": {
-		"@std/assert@1.0.13": {
-			"integrity": "ae0d31e41919b12c656c742b22522c32fb26ed0cba32975cb0de2a273cb68b29",
-			"dependencies": [
-				"jsr:@std/internal"
-			]
-		},
-		"@std/cli@1.0.17": {
-			"integrity": "e15b9abe629e17be90cc6216327f03a29eae613365f1353837fa749aad29ce7b"
-		},
-		"@std/internal@1.0.6": {
-			"integrity": "9533b128f230f73bd209408bb07a4b12f8d4255ab2a4d22a1fd6d87304aca9a4"
-		},
-		"@superstruct/core@2.0.2": {
-			"integrity": "b018ea1e2c89d03280a53c1b3344e98b7cad4625522dc754b4ef2d246154ea8f"
-		}
-	},
-	"workspace": {
-		"dependencies": [
-			"jsr:@std/assert@^1.0.13",
-			"jsr:@superstruct/core@2.0.2"
-		]
-	}
+  "version": "5",
+  "specifiers": {
+    "jsr:@std/assert@*": "1.0.13",
+    "jsr:@std/assert@^1.0.12": "1.0.13",
+    "jsr:@std/assert@^1.0.13": "1.0.13",
+    "jsr:@std/cli@*": "1.0.17",
+    "jsr:@std/fs@*": "1.0.17",
+    "jsr:@std/internal@^1.0.6": "1.0.6",
+    "jsr:@std/testing@*": "1.0.11",
+    "jsr:@superstruct/core@*": "2.0.2",
+    "jsr:@superstruct/core@2.0.2": "2.0.2"
+  },
+  "jsr": {
+    "@std/assert@1.0.13": {
+      "integrity": "ae0d31e41919b12c656c742b22522c32fb26ed0cba32975cb0de2a273cb68b29",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
+    },
+    "@std/cli@1.0.17": {
+      "integrity": "e15b9abe629e17be90cc6216327f03a29eae613365f1353837fa749aad29ce7b"
+    },
+    "@std/fs@1.0.17": {
+      "integrity": "1c00c632677c1158988ef7a004cb16137f870aafdb8163b9dce86ec652f3952b"
+    },
+    "@std/internal@1.0.6": {
+      "integrity": "9533b128f230f73bd209408bb07a4b12f8d4255ab2a4d22a1fd6d87304aca9a4"
+    },
+    "@std/testing@1.0.11": {
+      "integrity": "12b3db12d34f0f385a26248933bde766c0f8c5ad8b6ab34d4d38f528ab852f48",
+      "dependencies": [
+        "jsr:@std/assert@^1.0.12"
+      ]
+    },
+    "@superstruct/core@2.0.2": {
+      "integrity": "b018ea1e2c89d03280a53c1b3344e98b7cad4625522dc754b4ef2d246154ea8f"
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@std/assert@^1.0.13",
+      "jsr:@superstruct/core@2.0.2"
+    ]
+  }
 }
