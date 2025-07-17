@@ -365,6 +365,12 @@ export const LoopVideo = ({
 		return FallbackImageComponent;
 	}
 
+	const handleCanPlay = () => {
+		if (!isPlayable) {
+			setIsPlayable(true);
+		}
+	};
+
 	const handlePlayPauseClick = (event: React.SyntheticEvent) => {
 		event.preventDefault();
 		playPauseVideo();
@@ -466,7 +472,7 @@ export const LoopVideo = ({
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
 	return (
-		<div
+		<figure
 			ref={setNode}
 			css={videoContainerStyles}
 			className="loop-video-container"
@@ -484,9 +490,9 @@ export const LoopVideo = ({
 				setCurrentTime={setCurrentTime}
 				ref={vidRef}
 				isPlayable={isPlayable}
-				setIsPlayable={setIsPlayable}
 				playerState={playerState}
 				isMuted={isMuted}
+				handleCanPlay={handleCanPlay}
 				handlePlayPauseClick={handlePlayPauseClick}
 				handleAudioClick={handleAudioClick}
 				handleKeyDown={handleKeyDown}
@@ -496,6 +502,6 @@ export const LoopVideo = ({
 				preloadPartialData={preloadPartialData}
 				showPlayIcon={showPlayIcon}
 			/>
-		</div>
+		</figure>
 	);
 };
