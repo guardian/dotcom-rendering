@@ -93,7 +93,7 @@ export const InteractionObserver: Story = {
 	render: (args) => (
 		<div data-testid="test-container">
 			<LoopVideo {...args} />
-			<div style={{ height: '500px' }}></div>
+			<div style={{ height: '100vh' }}></div>
 			<p data-testid="page-end">End of page</p>
 		</div>
 	),
