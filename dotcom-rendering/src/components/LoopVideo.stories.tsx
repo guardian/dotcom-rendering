@@ -100,13 +100,13 @@ export const InteractionObserver: Story = {
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
 
-		await sleep(300); // Allow enough time for the autoplay video to start.
+		await sleep(500); // Allow enough time for the autoplay video to start.
 		canvas.getByTestId('page-end').scrollIntoView();
 
 		const progressBar = await canvas.findByRole('progressbar');
 		const progress = Number(progressBar.ariaValueNow);
 
-		await sleep(200); // Allow enough time to be confident that the video is paused.
+		await sleep(500); // Allow enough time to be confident that the video is paused.
 		await expect(Number(progressBar.ariaValueNow)).toEqual(progress);
 		await expect(canvas.queryByTestId('play-icon')).not.toBeInTheDocument();
 	},
