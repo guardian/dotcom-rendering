@@ -5,14 +5,38 @@
  */
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ThemeButton } from '@guardian/source/dist/react-components';
 import { from, until } from '@guardian/source/foundations';
 import type { CtaSettings } from '../settings';
+
+export function buttonThemes(
+	settings: CtaSettings,
+	ctaSettingsType?: string,
+): Partial<ThemeButton> {
+	if (ctaSettingsType === 'secondary') {
+		return {
+			textSecondary: settings.default.textColour,
+			backgroundSecondary: settings.default.backgroundColour,
+		};
+	}
+	if (ctaSettingsType === 'tertiary') {
+		return {
+			textTertiary: settings.default.textColour,
+			backgroundTertiary: settings.default.backgroundColour,
+		};
+	}
+
+	return {
+		textPrimary: settings.default.textColour,
+		backgroundPrimary: settings.default.backgroundColour,
+	};
+}
 
 export function buttonStyles(
 	settings: CtaSettings,
 	cssOverrides?: SerializedStyles,
 ): SerializedStyles {
-	const { default: defaultSettings, mobile, desktop, hover } = settings;
+	const { default: defaultSettings, mobile, desktop } = settings;
 
 	return css`
 		${toCssString(defaultSettings)};
@@ -23,10 +47,6 @@ export function buttonStyles(
 
 		${from.tablet} {
 			${desktop ? toCssString(desktop) : ''};
-		}
-
-		&:hover {
-			${toCssString(hover)}
 		}
 
 		${cssOverrides};
