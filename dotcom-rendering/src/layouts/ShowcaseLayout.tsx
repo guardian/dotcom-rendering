@@ -265,13 +265,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 										shouldCenter={false}
 									>
 										<HeaderAdSlot
-											isPaidContent={
-												!!article.config.isPaidContent
-											}
-											shouldHideReaderRevenue={
-												!!article.config
-													.shouldHideReaderRevenue
-											}
 											abTests={article.config.abTests}
 										/>
 									</Section>
@@ -310,14 +303,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											padSides={false}
 										>
 											<HeaderAdSlot
-												isPaidContent={
-													!!article.config
-														.isPaidContent
-												}
-												shouldHideReaderRevenue={
-													!!article.config
-														.shouldHideReaderRevenue
-												}
 												abTests={article.config.abTests}
 											/>
 										</Section>

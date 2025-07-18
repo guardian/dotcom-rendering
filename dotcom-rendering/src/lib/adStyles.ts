@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { adSizes, constants } from '@guardian/commercial';
+import { adSizes, constants } from '@guardian/commercial-core';
 import { from, space, textSans12, until } from '@guardian/source/foundations';
 import { palette } from '../palette';
 

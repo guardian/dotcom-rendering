@@ -310,12 +310,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								element="aside"
 							>
 								<HeaderAdSlot
-									isPaidContent={
-										!!article.config.isPaidContent
-									}
-									shouldHideReaderRevenue={
-										!!article.config.shouldHideReaderRevenue
-									}
 									abTests={article.config.abTests}
 								/>
 							</Section>

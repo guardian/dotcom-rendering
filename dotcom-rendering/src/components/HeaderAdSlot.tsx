@@ -1,12 +1,10 @@
 import { css, Global } from '@emotion/react';
-import { adSizes, constants } from '@guardian/commercial';
+import { adSizes, constants } from '@guardian/commercial-core';
 import { space } from '@guardian/source/foundations';
 import { palette } from '../palette';
 import type { ServerSideTests } from '../types/config';
-import { AdBlockAsk } from './AdBlockAsk.importable';
 import { AdSlot } from './AdSlot.web';
 import { Hide } from './Hide';
-import { Island } from './Island';
 
 const headerWrapper = css`
 	position: static;
@@ -56,15 +54,7 @@ const headerMinSizeStyles = css`
 	min-width: ${adSizes.leaderboard.width}px;
 `;
 
-export const HeaderAdSlot = ({
-	shouldHideReaderRevenue,
-	isPaidContent,
-	abTests,
-}: {
-	shouldHideReaderRevenue: boolean;
-	isPaidContent: boolean;
-	abTests: ServerSideTests;
-}) => {
+export const HeaderAdSlot = ({ abTests }: { abTests: ServerSideTests }) => {
 	const isIn250ReservationVariant =
 		abTests.topAboveNav250ReservationVariant === 'variant';
 	return (
@@ -94,16 +84,6 @@ export const HeaderAdSlot = ({
 					<div
 						css={!isIn250ReservationVariant && headerMinSizeStyles}
 					>
-						<Island priority="feature" defer={{ until: 'visible' }}>
-							<AdBlockAsk
-								size="leaderboard"
-								slotId="dfp-ad--top-above-nav"
-								shouldHideReaderRevenue={
-									shouldHideReaderRevenue
-								}
-								isPaidContent={isPaidContent}
-							/>
-						</Island>
 						<AdSlot
 							position="top-above-nav"
 							isIn250ReservationVariant={

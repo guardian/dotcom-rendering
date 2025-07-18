@@ -81,11 +81,11 @@ type Props = {
 	height: number;
 	FallbackImageComponent: ReactElement;
 	isPlayable: boolean;
-	setIsPlayable: Dispatch<SetStateAction<boolean>>;
 	playerState: PlayerStates;
 	currentTime: number;
 	setCurrentTime: Dispatch<SetStateAction<number>>;
 	isMuted: boolean;
+	handleCanPlay: (event: SyntheticEvent) => void;
 	handlePlayPauseClick: (event: SyntheticEvent) => void;
 	handleAudioClick: (event: SyntheticEvent) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
@@ -112,11 +112,11 @@ export const LoopVideoPlayer = forwardRef(
 			FallbackImageComponent,
 			posterImage,
 			isPlayable,
-			setIsPlayable,
 			playerState,
 			currentTime,
 			setCurrentTime,
 			isMuted,
+			handleCanPlay,
 			handlePlayPauseClick,
 			handleAudioClick,
 			handleKeyDown,
@@ -149,9 +149,8 @@ export const LoopVideoPlayer = forwardRef(
 					muted={isMuted}
 					playsInline={true}
 					poster={posterImage}
-					onCanPlay={() => {
-						setIsPlayable(true);
-					}}
+					onCanPlay={handleCanPlay}
+					onCanPlayThrough={handleCanPlay}
 					onTimeUpdate={() => {
 						if (
 							ref &&
