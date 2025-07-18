@@ -219,12 +219,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 				),
 				textColour: hexColourToString(primaryCta.default.text),
 			},
-			// hover: {
-			// 	backgroundColour: hexColourToString(
-			// 		primaryCta.hover.background,
-			// 	),
-			// 	textColour: hexColourToString(primaryCta.hover.text),
-			// },
 		},
 		secondaryCtaSettings: {
 			default: {
@@ -238,17 +232,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						: undefined
 				}`,
 			},
-			// hover: {
-			// 	backgroundColour: hexColourToString(
-			// 		secondaryCta.hover.background,
-			// 	),
-			// 	textColour: hexColourToString(secondaryCta.hover.text),
-			// 	border: `1px solid ${
-			// 		secondaryCta.hover.border
-			// 			? hexColourToString(secondaryCta.hover.border)
-			// 			: undefined
-			// 	}`,
-			// },
 		},
 		closeButtonSettings: {
 			default: {
@@ -262,17 +245,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						: specialReport[100]
 				}`,
 			},
-			// hover: {
-			// 	backgroundColour: hexColourToString(
-			// 		closeButton.hover.background,
-			// 	),
-			// 	textColour: hexColourToString(closeButton.hover.text),
-			// 	border: `1px solid ${
-			// 		closeButton.hover.border
-			// 			? hexColourToString(closeButton.hover.border)
-			// 			: neutral[100]
-			// 	}`,
-			// },
 		},
 		highlightedTextSettings: {
 			textColour: hexColourToString(highlightedText.text),
