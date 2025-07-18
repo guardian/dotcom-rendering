@@ -452,7 +452,20 @@ const auxiaLogTreatmentInteraction = async (
 		body: JSON.stringify(payload),
 	};
 
-	await fetch(url, params);
+	try {
+		const response = await fetch(url, params);
+		if (!response.ok) {
+			const error = new Error(
+				`Failed to log treatment interaction: ${response.status}`,
+			);
+			window.guardian.modules.sentry.reportError(error, 'sign-in-gate');
+		}
+	} catch (error) {
+		const errorReport = new Error(`Error logging treatment interaction`, {
+			cause: error,
+		});
+		window.guardian.modules.sentry.reportError(errorReport, 'sign-in-gate');
+	}
 };
 
 const buildAbTestTrackingAuxiaVariant = (
@@ -615,7 +628,18 @@ const SignInGateSelectorAuxia = ({
 								interactionType,
 								actionName,
 								auxiaGateDisplayData.browserId,
-							);
+							).catch((error) => {
+								const errorReport = new Error(
+									`Failed to log treatment interaction`,
+									{
+										cause: error,
+									},
+								);
+								window.guardian.modules.sentry.reportError(
+									errorReport,
+									'sign-in-gate',
+								);
+							});
 						}}
 					/>
 				)}
@@ -647,7 +671,16 @@ const ShowSignInGateAuxia = ({
 			'',
 			browserId,
 		).catch((error) => {
-			console.error('Failed to log treatment interaction:', error);
+			const errorReport = new Error(
+				`Failed to log treatment interaction`,
+				{
+					cause: error,
+				},
+			);
+			window.guardian.modules.sentry.reportError(
+				errorReport,
+				'sign-in-gate',
+			);
 		});
 
 		void submitComponentEventTracking(
