@@ -1,10 +1,12 @@
 import { css } from '@emotion/react';
 import { between, from } from '@guardian/source/foundations';
+import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
+import { GalleryInlineAdSlot } from '../components/GalleryAdSlots';
 import { GalleryImage } from '../components/GalleryImage';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { MainMediaGallery } from '../components/MainMediaGallery';
@@ -15,6 +17,7 @@ import { SubMeta } from '../components/SubMeta';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
+import { getDesktopAdPositions } from '../lib/getGalleryAdPositions';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { Gallery } from '../types/article';
@@ -50,6 +53,8 @@ const headerStyles = css`
 	}
 `;
 
+const galleryItemAdvertStyles = css``;
+
 export const GalleryLayout = (props: WebProps | AppProps) => {
 	const { gallery, renderingTarget } = props;
 	const frontendData = gallery.frontendData;
@@ -63,6 +68,17 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 	const isWeb = renderingTarget === 'Web';
 
 	const renderAds = canRenderAds(frontendData);
+
+	const adPositions =
+		isWeb && renderAds ? getDesktopAdPositions(gallery.images) : [];
+
+	// Debug logging
+	console.log('Gallery debug:', {
+		isWeb,
+		renderAds,
+		imageCount: gallery.images.length,
+		adPositions,
+	});
 
 	return (
 		<>
@@ -208,15 +224,39 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						Main media caption
 					</div>
 				</header>
-				{gallery.images.map((element, idx) => (
-					<GalleryImage
-						image={element}
-						format={format}
-						pageId={frontendData.pageId}
-						webTitle={frontendData.webTitle}
-						key={idx}
-					/>
-				))}
+				{gallery.images.map((element, idx) => {
+					const position = idx + 1;
+					const shouldShowAd = adPositions.includes(position);
+
+					return (
+						<Fragment
+							key={element.elementId || `gallery-item-${idx}`}
+						>
+							<GalleryImage
+								image={element}
+								format={format}
+								pageId={frontendData.pageId}
+								webTitle={frontendData.webTitle}
+							/>
+							{shouldShowAd && (
+								<li
+									className={[
+										'gallery__item',
+										'gallery__item--advert',
+									].join(' ')}
+									css={galleryItemAdvertStyles}
+								>
+									<GalleryInlineAdSlot
+										renderAds={renderAds}
+										hasPageSkin={false}
+										adSlotIndex={position}
+									/>
+								</li>
+							)}
+						</Fragment>
+					);
+				})}
+				;
 				<SubMeta
 					format={format}
 					subMetaKeywordLinks={frontendData.subMetaKeywordLinks}
