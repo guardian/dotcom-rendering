@@ -64,10 +64,7 @@ const mainVideo: MainMedia = {
 	title: '’I care, but I don’t care’: Life after the Queen’s death | Anywhere but Westminster',
 	expired: false,
 	duration: 200,
-	images: [480, 640, 960, 1024, 1200].map((width) => ({
-		url: `https://i.guim.co.uk/img/media/2eb01d138eb8fba6e59ce7589a60e3ff984f6a7a/0_0_1920_1080/1920.jpg?width=${width}&quality=45&dpr=2&s=none`,
-		width,
-	})),
+	image: `https://i.guim.co.uk/img/media/2eb01d138eb8fba6e59ce7589a60e3ff984f6a7a/0_0_1920_1080/1920.jpg?width=1200&quality=45&dpr=2&s=none`,
 	width: 480,
 	height: 288,
 	origin: 'The Guardian',
@@ -1568,7 +1565,7 @@ export const WithATinyGap = () => {
 						imagePositionOnDesktop="left"
 						format={{
 							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Gallery,
+							design: ArticleDesign.Standard,
 							theme: Pillar.Sport,
 						}}
 					/>

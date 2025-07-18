@@ -199,10 +199,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								'--article-section-background',
 							)}
 						>
-							<HeaderAdSlot
-								isPaidContent={!!front.config.isPaidContent}
-								shouldHideReaderRevenue={false}
-							/>
+							<HeaderAdSlot abTests={front.config.abTests} />
 						</Section>
 					</Stuck>
 				)}

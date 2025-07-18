@@ -1,6 +1,6 @@
 import { css, type Interpolation } from '@emotion/react';
-import type { SlotName } from '@guardian/commercial';
-import { adSizes } from '@guardian/commercial';
+import type { SlotName } from '@guardian/commercial-core';
+import { adSizes } from '@guardian/commercial-core';
 import {
 	between,
 	breakpoints,
@@ -16,8 +16,6 @@ import { ArticleDisplay } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { palette as schemedPalette } from '../palette';
-import { AdBlockAsk } from './AdBlockAsk.importable';
-import { Island } from './Island';
 
 // There are multiple of these ad slots on the page
 type IndexedSlot =
@@ -47,6 +45,7 @@ type DefaultProps = {
 	display?: ArticleDisplay;
 	isPaidContent?: boolean;
 	hasPageskin?: boolean;
+	isIn250ReservationVariant?: boolean;
 };
 
 // for dark ad labels
@@ -106,12 +105,29 @@ const hideBelowDesktop = css`
 	}
 `;
 
+const containerMinHeight = getMinHeight(250, space[5]);
+
 const topAboveNavContainerStyles = css`
-	padding-bottom: 18px;
+	padding-bottom: ${space[5]}px;
 	position: relative;
 	margin: 0 auto;
 	text-align: left;
 	display: block;
+`;
+
+const topAboveNavContainerVaraintStyles = css`
+	padding-bottom: ${space[5]}px;
+	position: relative;
+	margin: 0 auto;
+	text-align: left;
+	display: block;
+	width: 100%;
+	min-height: ${containerMinHeight}px;
+
+	/* Remove the min-height when the ad has rendered, so that the container can shrink if the ad is smaller */
+	&[top-above-nav-ad-rendered='true'] {
+		min-height: auto;
+	}
 `;
 
 /**
@@ -261,7 +277,7 @@ const frontsBannerAdStyles = css`
 
 const articleEndAdStyles = css`
 	position: relative;
-	min-height: ${getMinHeight(adSizes.outstreamDesktop.height)}px;
+	min-height: 450px;
 
 	&.ad-slot--fluid {
 		min-height: 450px;
@@ -399,7 +415,11 @@ const AdSlotWrapper = ({
 	className?: string;
 }) => {
 	return (
-		<aside className={`ad-slot-container ${className}`} css={additionalCss}>
+		<aside
+			data-ad-slot={true}
+			className={`ad-slot-container ${className}`}
+			css={additionalCss}
+		>
 			{children}
 		</aside>
 	);
@@ -411,7 +431,7 @@ export const AdSlot = ({
 	isPaidContent = false,
 	index,
 	hasPageskin = false,
-	shouldHideReaderRevenue = false,
+	isIn250ReservationVariant,
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -465,19 +485,6 @@ export const AdSlot = ({
 					const slotId = 'dfp-ad--right';
 					return (
 						<>
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<AdBlockAsk
-									size="mpu"
-									slotId={slotId}
-									isPaidContent={isPaidContent}
-									shouldHideReaderRevenue={
-										shouldHideReaderRevenue
-									}
-								/>
-							</Island>
 							<AdSlotWrapper
 								css={[
 									css`
@@ -590,7 +597,13 @@ export const AdSlot = ({
 		}
 		case 'top-above-nav': {
 			return (
-				<AdSlotWrapper css={topAboveNavContainerStyles}>
+				<AdSlotWrapper
+					css={
+						isIn250ReservationVariant
+							? topAboveNavContainerVaraintStyles
+							: topAboveNavContainerStyles
+					}
+				>
 					<div
 						id="dfp-ad--top-above-nav"
 						className={[
@@ -704,22 +717,24 @@ export const AdSlot = ({
 		}
 		case 'survey': {
 			return (
-				<div
-					id="dfp-ad--survey"
-					className={[
-						'js-ad-slot',
-						'ad-slot',
-						'ad-slot--survey',
-					].join(' ')}
-					css={[outOfPageStyles, hideBelowDesktop]}
-					data-link-name="ad slot survey"
-					data-name="survey"
-					data-label="false"
-					data-refresh="false"
-					data-out-of-page="true"
-					data-testid="slot"
-					aria-hidden="true"
-				/>
+				<AdSlotWrapper>
+					<div
+						id="dfp-ad--survey"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--survey',
+						].join(' ')}
+						css={[outOfPageStyles, hideBelowDesktop]}
+						data-link-name="ad slot survey"
+						data-name="survey"
+						data-label="false"
+						data-refresh="false"
+						data-out-of-page="true"
+						data-testid="slot"
+						aria-hidden="true"
+					/>
+				</AdSlotWrapper>
 			);
 		}
 		case 'liveblog-inline': {

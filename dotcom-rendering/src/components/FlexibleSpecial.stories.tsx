@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
-import { trails } from '../../fixtures/manual/trails';
+import { loopVideoCard, trails } from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type {
 	DCRContainerPalette,
@@ -15,7 +15,7 @@ type FlexibleSpecialArgsAndCustomArgs = React.ComponentProps<
 	typeof FlexibleSpecial
 > & { frontSectionTitle: string };
 
-const defaultGroupedTrails: DCRGroupedTrails = {
+const emptyGroupedTrails: DCRGroupedTrails = {
 	huge: [],
 	veryBig: [],
 	big: [],
@@ -54,28 +54,7 @@ const liveUpdatesCard = {
 		title: 'Spain fans celebrate at final whistle as England fans left heartbroken – video',
 		duration: 0,
 		expired: false,
-		images: [
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/2000.jpg',
-				width: 2000,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/1000.jpg',
-				width: 1000,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/500.jpg',
-				width: 500,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/140.jpg',
-				width: 140,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/4791.jpg',
-				width: 4791,
-			},
-		],
+		image: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/4791.jpg',
 	},
 	isExternalLink: false,
 	discussionApiUrl,
@@ -96,7 +75,7 @@ const meta = {
 		},
 	},
 	args: {
-		groupedTrails: defaultGroupedTrails,
+		groupedTrails: emptyGroupedTrails,
 		showAge: true,
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
@@ -123,7 +102,7 @@ export const One: Story = {
 	name: 'With one splash card',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: trails.slice(0, 1),
 		},
@@ -134,7 +113,7 @@ export const Two: Story = {
 	name: 'With one splash card and one standard card',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: trails.slice(0, 2),
 		},
@@ -145,7 +124,7 @@ export const Three: Story = {
 	name: 'With one splash card and two standard cards',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: trails.slice(0, 3),
 		},
@@ -156,7 +135,7 @@ export const Four: Story = {
 	name: 'With one splash card and three standard cards',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: trails.slice(0, 4),
 		},
@@ -167,7 +146,7 @@ export const Five: Story = {
 	name: 'With one splash card and four standard cards',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: trails.slice(0, 5),
 		},
@@ -179,7 +158,7 @@ export const DefaultSplashWithImageSupression: Story = {
 	args: {
 		frontSectionTitle: 'Standard splash with image supression',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: [{ ...trails[0], image: undefined }],
 		},
@@ -192,7 +171,7 @@ export const BoostedSplashWithImageSupression: Story = {
 	args: {
 		frontSectionTitle: 'Boosted splash',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: [{ ...trails[0], boostLevel: 'boost', image: undefined }],
 		},
@@ -205,7 +184,7 @@ export const MegaBoostedSplashWithImageSupression: Story = {
 	args: {
 		frontSectionTitle: 'Mega boosted splash',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: [
 				{ ...trails[0], boostLevel: 'megaboost', image: undefined },
@@ -220,7 +199,7 @@ export const GigaBoostedSplashWithImageSupression: Story = {
 	args: {
 		frontSectionTitle: 'Giga boosted splash',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: [
 				{ ...trails[0], boostLevel: 'gigaboost', image: undefined },
@@ -235,7 +214,7 @@ export const DefaultSplashWithLiveUpdates: Story = {
 	args: {
 		frontSectionTitle: 'Standard splash',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: [{ ...liveUpdatesCard }],
 		},
@@ -248,7 +227,7 @@ export const BoostedSplashWithLiveUpdates: Story = {
 	args: {
 		frontSectionTitle: 'Boosted splash',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: [{ ...liveUpdatesCard, boostLevel: 'boost' }],
 		},
@@ -261,7 +240,7 @@ export const MegaBoostedSplashWithLiveUpdates: Story = {
 	args: {
 		frontSectionTitle: 'Mega boosted splash',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: [{ ...liveUpdatesCard, boostLevel: 'megaboost' }],
 		},
@@ -274,9 +253,22 @@ export const GigaBoostedSplashWithLiveUpdates: Story = {
 	args: {
 		frontSectionTitle: 'Giga boosted splash',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: [{ ...liveUpdatesCard, boostLevel: 'gigaboost' }],
+		},
+		collectionId: 1,
+	},
+};
+
+export const LoopVideoCards: Story = {
+	name: 'Looping video cards',
+	args: {
+		frontSectionTitle: 'Looping video',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			snap: [loopVideoCard],
+			standard: [loopVideoCard],
 		},
 		collectionId: 1,
 	},
@@ -302,7 +294,7 @@ export const WithSpecialPaletteVariations = {
 	name: 'With special palette variations',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			snap: [],
 			standard: trails.slice(0, 5),
 		},

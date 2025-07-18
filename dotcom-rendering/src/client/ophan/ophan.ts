@@ -32,6 +32,14 @@ export const getOphan = async (
 					);
 				}
 			},
+			trackClickComponentEvent: (e) => {
+				if (e instanceof Error) {
+					window.guardian.modules.sentry.reportError(
+						e,
+						"We are in DCAR but Ophan trackClickComponentEvent method got called. This shouldn't have happened. Please investigate why",
+					);
+				}
+			},
 			viewId: 'Apps',
 			pageViewId: 'Apps',
 		};
@@ -71,6 +79,14 @@ export const submitComponentEvent = async (
 ): Promise<void> => {
 	const ophan = await getOphan(renderingTarget);
 	ophan.record({ componentEvent });
+};
+
+export const submitClickComponentEvent = async (
+	element: Element,
+	renderingTarget: RenderingTarget,
+): Promise<void> => {
+	const ophan = await getOphan(renderingTarget);
+	ophan.trackClickComponentEvent(element);
 };
 
 interface SdcTestMeta {

@@ -1,4 +1,4 @@
-import { isAdBlockInUse } from '@guardian/commercial';
+import { isAdBlockInUse } from '@guardian/commercial-core';
 import { log, startPerformanceMeasure } from '@guardian/libs';
 import '../webpackPublicPath';
 import type { ReportError } from '../../types/sentry';

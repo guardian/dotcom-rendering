@@ -36,6 +36,7 @@ import { MultiBylines } from '../components/MultiBylines';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
 import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
+import { ProductLinkButton } from '../components/ProductLinkButton';
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { QandaAtom } from '../components/QandaAtom.importable';
@@ -70,6 +71,7 @@ import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType, StarRating } from '../types/content';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
 import type { EditionId } from './edition';
+import { getLargestImageSize } from './image';
 
 type Props = {
 	format: ArticleFormat;
@@ -477,8 +479,11 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
 			return (
 				<VideoAtom
+					format={format}
 					assets={element.assets}
 					poster={element.posterImage?.[0]?.url}
+					caption={element.title}
+					isMainMedia={isMainMedia}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MiniProfilesBlockElement':
@@ -557,6 +562,17 @@ export const renderElement = ({
 						credit={element.credit}
 					/>
 				</Island>
+			);
+		case 'model.dotcomrendering.pageElements.LinkBlockElement':
+			return (
+				<>
+					{element.linkType === 'ProductButton' && (
+						<ProductLinkButton
+							label={element.label}
+							url={element.url}
+						/>
+					)}
+				</>
 			);
 		case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
 			return (
@@ -857,7 +873,9 @@ export const renderElement = ({
 						isMainMedia={isMainMedia}
 						expired={element.expired}
 						overrideImage={element.overrideImage}
-						posterImage={element.posterImage}
+						posterImage={
+							getLargestImageSize(element.posterImage ?? [])?.url
+						}
 						duration={element.duration}
 						mediaTitle={element.mediaTitle}
 						altText={element.altText}

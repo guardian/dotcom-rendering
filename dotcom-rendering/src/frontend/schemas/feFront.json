@@ -3870,23 +3870,8 @@
                         "expired": {
                             "type": "boolean"
                         },
-                        "images": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "url": {
-                                        "type": "string"
-                                    },
-                                    "width": {
-                                        "type": "number"
-                                    }
-                                },
-                                "required": [
-                                    "url",
-                                    "width"
-                                ]
-                            }
+                        "image": {
+                            "type": "string"
                         }
                     },
                     "required": [
@@ -3894,7 +3879,6 @@
                         "expired",
                         "height",
                         "id",
-                        "images",
                         "origin",
                         "title",
                         "type",
@@ -3930,6 +3914,9 @@
                             "type": "string",
                             "const": "LoopVideo"
                         },
+                        "atomId": {
+                            "type": "string"
+                        },
                         "videoId": {
                             "type": "string"
                         },
@@ -3942,11 +3929,12 @@
                         "duration": {
                             "type": "number"
                         },
-                        "thumbnailImage": {
+                        "image": {
                             "type": "string"
                         }
                     },
                     "required": [
+                        "atomId",
                         "duration",
                         "height",
                         "type",

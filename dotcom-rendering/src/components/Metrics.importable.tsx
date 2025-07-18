@@ -3,15 +3,13 @@ import {
 	bypassCommercialMetricsSampling,
 	EventTimer,
 	initCommercialMetrics,
-} from '@guardian/commercial';
+} from '@guardian/commercial-core';
 import {
 	bypassCoreWebVitalsSampling,
 	initCoreWebVitals,
 } from '@guardian/core-web-vitals';
 import { getCookie, isString, isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
-import { adBlockAsk } from '../experiments/tests/ad-block-ask';
-import { integrateIma } from '../experiments/tests/integrate-ima';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useDetectAdBlock } from '../lib/useDetectAdBlock';
@@ -31,8 +29,6 @@ const willRecordCoreWebVitals = Math.random() < sampling;
 // For these tests switch off sampling and collect metrics for 100% of views
 const clientSideTestsToForceMetrics: ABTest[] = [
 	/* keep array multi-line */
-	integrateIma,
-	adBlockAsk,
 ];
 
 const useBrowserId = () => {

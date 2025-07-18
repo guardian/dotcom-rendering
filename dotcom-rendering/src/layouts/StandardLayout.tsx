@@ -407,12 +407,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								shouldCenter={false}
 							>
 								<HeaderAdSlot
-									isPaidContent={
-										!!article.config.isPaidContent
-									}
-									shouldHideReaderRevenue={
-										!!article.config.shouldHideReaderRevenue
-									}
+									abTests={article.config.abTests}
 								/>
 							</Section>
 						</Stuck>

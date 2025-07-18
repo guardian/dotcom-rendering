@@ -169,12 +169,7 @@ const NavHeader = ({ article, NAV, format, renderAds }: HeaderProps) => {
 							shouldCenter={false}
 							element="aside"
 						>
-							<HeaderAdSlot
-								isPaidContent={!!article.config.isPaidContent}
-								shouldHideReaderRevenue={
-									!!article.config.shouldHideReaderRevenue
-								}
-							/>
+							<HeaderAdSlot abTests={article.config.abTests} />
 						</Section>
 					</div>
 				</Stuck>
