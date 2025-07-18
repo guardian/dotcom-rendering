@@ -22,7 +22,8 @@ type IndexedSlot =
 	| 'fronts-banner'
 	| 'liveblog-inline'
 	| 'liveblog-inline-mobile'
-	| 'mobile-front';
+	| 'mobile-front'
+	| 'gallery-inline';
 
 // TODO move to commercial
 type SlotNamesWithPageSkin = SlotName | 'pageskin';
@@ -418,6 +419,10 @@ const mobileStickyAdStylesFullWidth = css`
 const crosswordBannerMobileAdStyles = css`
 	min-height: ${getMinHeight(adSizes.mobilesticky.height)}px;
 `;
+
+const galleryImgContainerStyles = css``;
+
+const galleryInlineAdStyles = css``;
 
 const AdSlotWrapper = ({
 	children,
@@ -904,6 +909,36 @@ export const AdSlot = ({
 						aria-hidden="true"
 					/>
 				</AdSlotWrapper>
+			);
+		}
+		case 'gallery-inline': {
+			const advertId = `inline${index + 1}`;
+			return (
+				<div
+					className="gallery__img-container"
+					css={galleryImgContainerStyles}
+				>
+					<AdSlotWrapper>
+						<div
+							id={`dfp-ad--${advertId}`}
+							className={[
+								'js-ad-slot',
+								'ad-slot',
+								`ad-slot--${advertId}`,
+								'ad-slot--gallery-inline',
+								'ad-slot--dark',
+								'hide-until-tablet',
+								'ad-slot--rendered',
+							].join(' ')}
+							css={galleryInlineAdStyles}
+							data-link-name={`ad slot ${advertId}`}
+							data-name={advertId}
+							aria-hidden="true"
+							data-label-show="true"
+							data-testid="slot" //doesn't exist in Frontend so do we need it in DCR?
+						/>
+					</AdSlotWrapper>
+				</div>
 			);
 		}
 	}
