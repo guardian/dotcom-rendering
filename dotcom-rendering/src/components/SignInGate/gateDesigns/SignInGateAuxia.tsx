@@ -75,14 +75,14 @@ export const SignInGateAuxia = ({
 					priority="primary"
 					size="small"
 					href={firstCtaLink}
-					onClick={async () => {
+					onClick={() => {
 						trackLink(
 							ophanComponentId,
 							`register-link-${dismissStatusLabel}`,
 							renderingTarget,
 							abTest,
 						);
-						await logTreatmentInteractionCall(
+						void logTreatmentInteractionCall(
 							'CLICKED',
 							'REGISTER-LINK',
 						);
@@ -97,7 +97,7 @@ export const SignInGateAuxia = ({
 						cssOverrides={laterButton}
 						priority="subdued"
 						size="small"
-						onClick={async () => {
+						onClick={() => {
 							dismissGate();
 							trackLink(
 								ophanComponentId,
@@ -105,7 +105,7 @@ export const SignInGateAuxia = ({
 								renderingTarget,
 								abTest,
 							);
-							await logTreatmentInteractionCall('DISMISSED', '');
+							void logTreatmentInteractionCall('DISMISSED', '');
 						}}
 					>
 						{secondCtaName}
@@ -122,17 +122,14 @@ export const SignInGateAuxia = ({
 				data-ignore="global-link-styling"
 				cssOverrides={signInLink}
 				href={signInUrl}
-				onClick={async () => {
+				onClick={() => {
 					trackLink(
 						ophanComponentId,
 						'sign-in-link',
 						renderingTarget,
 						abTest,
 					);
-					await logTreatmentInteractionCall(
-						'CLICKED',
-						'SIGN-IN-LINK',
-					);
+					void logTreatmentInteractionCall('CLICKED', 'SIGN-IN-LINK');
 				}}
 			>
 				Sign In
@@ -142,14 +139,14 @@ export const SignInGateAuxia = ({
 				<Link
 					data-ignore="global-link-styling"
 					href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}
-					onClick={async () => {
+					onClick={() => {
 						trackLink(
 							ophanComponentId,
 							'how-link',
 							renderingTarget,
 							abTest,
 						);
-						await logTreatmentInteractionCall(
+						void logTreatmentInteractionCall(
 							'CLICKED',
 							'HOW-TO-LINK',
 						);
@@ -161,17 +158,14 @@ export const SignInGateAuxia = ({
 				<Link
 					data-ignore="global-link-styling"
 					href={`${guUrl}/info/2014/nov/03/why-your-data-matters-to-us-full-text`}
-					onClick={async () => {
+					onClick={() => {
 						trackLink(
 							ophanComponentId,
 							'why-link',
 							renderingTarget,
 							abTest,
 						);
-						await logTreatmentInteractionCall(
-							'CLICKED',
-							'WHY-LINK',
-						);
+						void logTreatmentInteractionCall('CLICKED', 'WHY-LINK');
 					}}
 				>
 					How will my information & data be used?
@@ -180,14 +174,14 @@ export const SignInGateAuxia = ({
 				<Link
 					data-ignore="global-link-styling"
 					href={`${guUrl}/help/identity-faq`}
-					onClick={async () => {
+					onClick={() => {
 						trackLink(
 							ophanComponentId,
 							'help-link',
 							renderingTarget,
 							abTest,
 						);
-						await logTreatmentInteractionCall(
+						void logTreatmentInteractionCall(
 							'CLICKED',
 							'HELP-LINK',
 						);
