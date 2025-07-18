@@ -177,15 +177,13 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			)}
 			{renderingTarget === 'Apps' ? (
 				<DecideLayout
-					article={frontendData}
-					format={format}
+					article={props.article}
 					renderingTarget={renderingTarget}
 				/>
 			) : (
 				<DecideLayout
-					article={frontendData}
+					article={props.article}
 					NAV={props.NAV}
-					format={format}
 					renderingTarget={renderingTarget}
 				/>
 			)}

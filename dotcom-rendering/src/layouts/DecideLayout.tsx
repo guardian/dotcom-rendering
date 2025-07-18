@@ -1,15 +1,12 @@
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	type ArticleFormat,
-} from '../lib/articleFormat';
+import { ArticleDesign, ArticleDisplay } from '../lib/articleFormat';
 import type { NavType } from '../model/extract-nav';
-import type { ArticleDeprecated } from '../types/article';
+import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { AudioLayout } from './AudioLayout';
 import { CommentLayout } from './CommentLayout';
 import { CrosswordLayout } from './CrosswordLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
+import { GalleryLayout } from './GalleryLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
@@ -19,8 +16,7 @@ import { ShowcaseLayout } from './ShowcaseLayout';
 import { StandardLayout } from './StandardLayout';
 
 interface BaseProps {
-	article: ArticleDeprecated;
-	format: ArticleFormat;
+	article: Article;
 	renderingTarget: RenderingTarget;
 }
 
@@ -35,15 +31,20 @@ interface WebProps extends BaseProps {
 
 export type Props = WebProps | AppProps;
 
-const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
+const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 	const notSupported = <pre>Not supported</pre>;
-	switch (format.display) {
+	const format = {
+		design: article.design,
+		display: article.display,
+		theme: article.theme,
+	};
+	switch (article.display) {
 		case ArticleDisplay.Immersive: {
-			switch (format.design) {
+			switch (article.design) {
 				case ArticleDesign.Interactive: {
 					return (
 						<FullPageInteractiveLayout
-							article={article}
+							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
 						/>
@@ -52,7 +53,7 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 				default: {
 					return (
 						<ImmersiveLayout
-							article={article}
+							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
 						/>
@@ -62,12 +63,12 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 		}
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Showcase: {
-			switch (format.design) {
+			switch (article.design) {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 					return (
 						<LiveLayout
-							article={article}
+							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
 						/>
@@ -77,7 +78,7 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 				case ArticleDesign.Letter:
 					return (
 						<CommentLayout
-							article={article}
+							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
 						/>
@@ -85,7 +86,7 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 				case ArticleDesign.Picture:
 					return (
 						<PictureLayout
-							article={article}
+							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
 						/>
@@ -93,7 +94,7 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 				default:
 					return (
 						<ShowcaseLayout
-							article={article}
+							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
 						/>
@@ -102,11 +103,11 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 		}
 		case ArticleDisplay.Standard:
 		default: {
-			switch (format.design) {
+			switch (article.design) {
 				case ArticleDesign.Interactive:
 					return (
 						<InteractiveLayout
-							article={article}
+							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
 						/>
@@ -115,7 +116,7 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 				case ArticleDesign.FullPageInteractive: {
 					return (
 						<FullPageInteractiveLayout
-							article={article}
+							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
 						/>
@@ -125,7 +126,7 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 				case ArticleDesign.DeadBlog:
 					return (
 						<LiveLayout
-							article={article}
+							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
 						/>
@@ -135,7 +136,7 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 				case ArticleDesign.Letter:
 					return (
 						<CommentLayout
-							article={article}
+							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
 						/>
@@ -143,10 +144,17 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 				case ArticleDesign.NewsletterSignup:
 					// Should be NewsletterSignup once implemented for apps
 					return notSupported;
+				case ArticleDesign.Gallery:
+					return (
+						<GalleryLayout
+							gallery={article}
+							renderingTarget={renderingTarget}
+						/>
+					);
 				default:
 					return (
 						<StandardLayout
-							article={article}
+							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
 						/>
@@ -156,19 +164,19 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 	}
 };
 
-const DecideLayoutWeb = ({
-	article,
-	format,
-	NAV,
-	renderingTarget,
-}: WebProps) => {
-	switch (format.display) {
+const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
+	const format = {
+		design: article.design,
+		display: article.display,
+		theme: article.theme,
+	};
+	switch (article.display) {
 		case ArticleDisplay.Immersive: {
-			switch (format.design) {
+			switch (article.design) {
 				case ArticleDesign.Interactive: {
 					return (
 						<FullPageInteractiveLayout
-							article={article}
+							article={article.frontendData}
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -178,7 +186,7 @@ const DecideLayoutWeb = ({
 				default: {
 					return (
 						<ImmersiveLayout
-							article={article}
+							article={article.frontendData}
 							format={format}
 							NAV={NAV}
 							renderingTarget={renderingTarget}
@@ -189,12 +197,12 @@ const DecideLayoutWeb = ({
 		}
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Showcase: {
-			switch (format.design) {
+			switch (article.design) {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 					return (
 						<LiveLayout
-							article={article}
+							article={article.frontendData}
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -205,7 +213,7 @@ const DecideLayoutWeb = ({
 				case ArticleDesign.Letter:
 					return (
 						<CommentLayout
-							article={article}
+							article={article.frontendData}
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -214,7 +222,7 @@ const DecideLayoutWeb = ({
 				case ArticleDesign.Picture:
 					return (
 						<PictureLayout
-							article={article}
+							article={article.frontendData}
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -223,7 +231,7 @@ const DecideLayoutWeb = ({
 				default:
 					return (
 						<ShowcaseLayout
-							article={article}
+							article={article.frontendData}
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -233,11 +241,11 @@ const DecideLayoutWeb = ({
 		}
 		case ArticleDisplay.Standard:
 		default: {
-			switch (format.design) {
+			switch (article.design) {
 				case ArticleDesign.Interactive:
 					return (
 						<InteractiveLayout
-							article={article}
+							article={article.frontendData}
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -246,7 +254,7 @@ const DecideLayoutWeb = ({
 				case ArticleDesign.FullPageInteractive: {
 					return (
 						<FullPageInteractiveLayout
-							article={article}
+							article={article.frontendData}
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -257,7 +265,7 @@ const DecideLayoutWeb = ({
 				case ArticleDesign.DeadBlog:
 					return (
 						<LiveLayout
-							article={article}
+							article={article.frontendData}
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -268,7 +276,7 @@ const DecideLayoutWeb = ({
 				case ArticleDesign.Letter:
 					return (
 						<CommentLayout
-							article={article}
+							article={article.frontendData}
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -277,7 +285,7 @@ const DecideLayoutWeb = ({
 				case ArticleDesign.NewsletterSignup:
 					return (
 						<NewsletterSignupLayout
-							article={article}
+							article={article.frontendData}
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -286,7 +294,7 @@ const DecideLayoutWeb = ({
 				case ArticleDesign.Audio:
 					return (
 						<AudioLayout
-							article={article}
+							article={article.frontendData}
 							format={format}
 							NAV={NAV}
 							renderingTarget={renderingTarget}
@@ -295,15 +303,23 @@ const DecideLayoutWeb = ({
 				case ArticleDesign.Crossword:
 					return (
 						<CrosswordLayout
-							article={article}
+							article={article.frontendData}
 							NAV={NAV}
 							format={format}
+						/>
+					);
+				case ArticleDesign.Gallery:
+					return (
+						<GalleryLayout
+							gallery={article}
+							NAV={NAV}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				default:
 					return (
 						<StandardLayout
-							article={article}
+							article={article.frontendData}
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -315,14 +331,13 @@ const DecideLayoutWeb = ({
 };
 
 export const DecideLayout = (props: Props) => {
-	const { article, format, renderingTarget } = props;
+	const { article, renderingTarget } = props;
 
 	switch (renderingTarget) {
 		case 'Apps':
 			return (
 				<DecideLayoutApps
 					article={article}
-					format={format}
 					renderingTarget={renderingTarget}
 				/>
 			);
@@ -331,7 +346,6 @@ export const DecideLayout = (props: Props) => {
 				<DecideLayoutWeb
 					NAV={props.NAV}
 					article={article}
-					format={format}
 					renderingTarget={renderingTarget}
 				/>
 			);
