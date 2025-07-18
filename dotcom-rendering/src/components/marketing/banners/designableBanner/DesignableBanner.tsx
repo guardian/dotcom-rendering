@@ -40,7 +40,13 @@ import { DesignableBannerCloseButton } from './components/DesignableBannerCloseB
 import { DesignableBannerCtas } from './components/DesignableBannerCtas';
 import { DesignableBannerHeader } from './components/DesignableBannerHeader';
 import { DesignableBannerVisual } from './components/DesignableBannerVisual';
-import type { BannerTemplateSettings, ChoiceCardSettings } from './settings';
+import type {
+	BannerTemplateSettings,
+	ChoiceCardSettings,
+	CtaSettings,
+	CtaStateSettings,
+} from './settings';
+import { buttonThemes } from './styles/buttonStyles';
 import { templateSpacing } from './styles/templateStyles';
 
 const buildImageSettings = (
@@ -187,6 +193,15 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		: imageSettings
 		? 'main-image'
 		: '.';
+
+	// TODO: I assume we're planning on making this adjustable in RRCP in future.
+	const choiceCardButtonCtaStateSettings: CtaStateSettings = {
+		backgroundColour: '#FFE500', // ${palette.brandAlt[400]},
+		textColour: 'inherit',
+	};
+	const choiceCardButtonSettings: CtaSettings = {
+		default: choiceCardButtonCtaStateSettings,
+	};
 
 	const templateSettings: BannerTemplateSettings = {
 		containerSettings: {
@@ -428,6 +443,9 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									onClick={onCtaClick}
 									priority="tertiary"
 									cssOverrides={styles.linkButtonStyles}
+									theme={buttonThemes(
+										choiceCardButtonSettings,
+									)}
 									icon={<SvgArrowRightStraight />}
 									iconSide="right"
 									target="_blank"
