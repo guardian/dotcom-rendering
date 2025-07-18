@@ -110,14 +110,19 @@ const buildChoiceCardSettings = (
 
 const buildUrlForThreeTierChoiceCards = (
 	baseUrl: string,
-	selectedProduct: ChoiceCard['product'],
+	selectedChoiceCard: ChoiceCard,
 ) => {
-	return selectedProduct.supportTier === 'OneOff'
-		? baseUrl
+	const { destinationUrl, product } = selectedChoiceCard;
+	const url =
+		destinationUrl && destinationUrl.trim() !== ''
+			? destinationUrl.trim()
+			: baseUrl;
+	return product.supportTier === 'OneOff'
+		? url
 		: addChoiceCardsProductParams(
-				baseUrl,
-				selectedProduct.supportTier,
-				selectedProduct.ratePlan,
+				url,
+				product.supportTier,
+				product.ratePlan,
 		  );
 };
 
@@ -160,11 +165,11 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	}, [iosAppBannerPresent, submitComponentEvent]);
 
 	const choiceCards = getChoiceCards(isTabletOrAbove, choiceCardsSettings);
-	const defaultProduct = choiceCards?.find((cc) => cc.isDefault)?.product;
-	const [
-		threeTierChoiceCardSelectedProduct,
-		setThreeTierChoiceCardSelectedProduct,
-	] = useState<ChoiceCard['product'] | undefined>(defaultProduct);
+	const defaultChoiceCard = choiceCards?.find((cc) => cc.isDefault);
+
+	const [selectedChoiceCard, setSelectedChoiceCard] = useState<
+		ChoiceCard | undefined
+	>(defaultChoiceCard);
 
 	// We can't render anything without a design
 	if (!design) {
@@ -379,7 +384,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 					</div>
 				)}
 
-				{!threeTierChoiceCardSelectedProduct && (
+				{!selectedChoiceCard && (
 					<div css={styles.outerImageCtaContainer}>
 						<div css={styles.innerImageCtaContainer}>
 							<DesignableBannerCtas
@@ -405,16 +410,12 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 				</div>
 
 				{choiceCards &&
-					threeTierChoiceCardSelectedProduct &&
+					selectedChoiceCard &&
 					mainOrMobileContent.primaryCta && (
 						<div css={styles.threeTierChoiceCardsContainer}>
 							<ThreeTierChoiceCards
-								selectedProduct={
-									threeTierChoiceCardSelectedProduct
-								}
-								setSelectedProduct={
-									setThreeTierChoiceCardSelectedProduct
-								}
+								selectedChoiceCard={selectedChoiceCard}
+								setSelectedChoiceCard={setSelectedChoiceCard}
 								choices={choiceCards}
 								id={'banner'}
 							/>
@@ -423,7 +424,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								<LinkButton
 									href={buildUrlForThreeTierChoiceCards(
 										mainOrMobileContent.primaryCta.ctaUrl,
-										threeTierChoiceCardSelectedProduct,
+										selectedChoiceCard,
 									)}
 									onClick={onCtaClick}
 									priority="tertiary"
