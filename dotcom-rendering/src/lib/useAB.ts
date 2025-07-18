@@ -1,6 +1,7 @@
 import type { ABTestAPI, Participations } from '@guardian/ab-core';
 import { mutate } from 'swr';
 import useSWRImmutable from 'swr/immutable';
+import type { BetaABTestAPI } from '../experiments/lib/beta-ab-tests';
 
 type ABTests = {
 	api: ABTestAPI;
@@ -25,4 +26,16 @@ export const useAB = (): ABTests | undefined => {
 
 export const setABTests = ({ api, participations }: ABTests): void => {
 	void mutate(key, { api, participations }, false);
+};
+
+export const useBetaAB = (): BetaABTestAPI | undefined => {
+	const { data } = useSWRImmutable(
+		'beta-ab-tests',
+		() => new Promise<BetaABTestAPI>(() => {}),
+	);
+	return data;
+};
+
+export const setBetaABTests = (api: BetaABTestAPI): void => {
+	void mutate('beta-ab-tests', api, false);
 };
