@@ -467,7 +467,6 @@ export const NewsletterSignupLayout = ({
 
 			<Section
 				fullWidth={true}
-				data-print-layout="hide"
 				padSides={false}
 				showTopBorder={false}
 				backgroundColour={sourcePalette.brand[400]}

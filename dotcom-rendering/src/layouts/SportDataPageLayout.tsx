@@ -121,7 +121,6 @@ export const SportDataPageLayout = ({ sportData }: Props) => {
 				<Section
 					fullWidth={true}
 					showTopBorder={true}
-					data-print-layout="hide"
 					padSides={false}
 					element="aside"
 				>
@@ -137,7 +136,6 @@ export const SportDataPageLayout = ({ sportData }: Props) => {
 
 			<Section
 				fullWidth={true}
-				data-print-layout="hide"
 				padSides={false}
 				backgroundColour={palette.brand[400]}
 				borderColour={palette.brand[600]}

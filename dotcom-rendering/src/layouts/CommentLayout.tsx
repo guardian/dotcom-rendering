@@ -795,7 +795,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						padContent={false}
 						verticalMargins={false}
 						element="aside"
-						data-print-layout="hide"
 						data-link-name="most-popular"
 						data-component="most-popular"
 						backgroundColour={themePalette(
@@ -901,7 +900,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 			{isApps && (
 				<Section
 					fullWidth={true}
-					data-print-layout="hide"
 					backgroundColour={themePalette('--apps-footer-background')}
 					borderColour={themePalette('--article-border')}
 					padSides={false}
