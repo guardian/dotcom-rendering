@@ -113,7 +113,10 @@ const buildUrlForThreeTierChoiceCards = (
 	selectedChoiceCard: ChoiceCard,
 ) => {
 	const { destinationUrl, product } = selectedChoiceCard;
-	const url = destinationUrl?.trim() ?? baseUrl;
+	const url =
+		destinationUrl && destinationUrl.trim() !== ''
+			? destinationUrl.trim()
+			: baseUrl;
 	return product.supportTier === 'OneOff'
 		? url
 		: addChoiceCardsProductParams(
