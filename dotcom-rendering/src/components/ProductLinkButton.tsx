@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import {
 	LinkButton,
 	SvgArrowRightStraight,
@@ -7,6 +8,13 @@ type ProductLinkButtonProps = {
 	label: string;
 	url: string;
 };
+
+const linkButtonStyles = css`
+	max-width: 100%;
+	height: fit-content;
+	white-space: normal;
+	overflow-wrap: break-word;
+`;
 
 export const ProductLinkButton = ({ label, url }: ProductLinkButtonProps) => {
 	return (
@@ -20,6 +28,7 @@ export const ProductLinkButton = ({ label, url }: ProductLinkButtonProps) => {
 			data-ignore="global-link-styling"
 			data-link-name="in body link"
 			data-spacefinder-role="inline"
+			cssOverrides={[linkButtonStyles]}
 		>
 			{label}
 		</LinkButton>
