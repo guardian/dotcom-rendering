@@ -12,7 +12,8 @@ export const ProductLinkButton = ({ label, url }: ProductLinkButtonProps) => {
 	return (
 		<LinkButton
 			href={url}
-			rel="sponsored"
+			rel="sponsored noreferrer noopener"
+			target="_blank"
 			iconSide="right"
 			aria-label={`Open ${label} in a new tab`}
 			icon={<SvgArrowRightStraight />}
