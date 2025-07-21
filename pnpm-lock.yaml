@@ -297,7 +297,7 @@ importers:
         version: 8.0.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/braze-components':
         specifier: 22.2.0
-        version: 22.2.0(@emotion/react@11.14.0)(@guardian/libs@23.0.0)(@guardian/source@9.0.0)(react@18.3.1)
+        version: 22.2.0(@emotion/react@11.14.0)(@guardian/libs@25.2.0)(@guardian/source@9.0.0)(react@18.3.1)
       '@guardian/bridget':
         specifier: 8.5.1
         version: 8.5.1
@@ -309,10 +309,10 @@ importers:
         version: 61.4.0(aws-cdk-lib@2.189.0)(aws-cdk@2.1007.0)(constructs@10.4.2)
       '@guardian/commercial-core':
         specifier: 27.1.0
-        version: 27.1.0(@guardian/ab-core@8.0.0)(@guardian/libs@23.0.0)
+        version: 27.1.0(@guardian/ab-core@8.0.0)(@guardian/libs@25.2.0)
       '@guardian/core-web-vitals':
         specifier: 7.0.0
-        version: 7.0.0(@guardian/libs@23.0.0)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3)
+        version: 7.0.0(@guardian/libs@25.2.0)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3)
       '@guardian/eslint-config':
         specifier: 7.0.1
         version: 7.0.1(@typescript-eslint/parser@5.62.0)(eslint@8.56.0)(tslib@2.6.2)
@@ -321,19 +321,19 @@ importers:
         version: 9.0.1(eslint@8.56.0)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/identity-auth':
         specifier: 6.0.1
-        version: 6.0.1(@guardian/libs@23.0.0)(tslib@2.6.2)(typescript@5.5.3)
+        version: 6.0.1(@guardian/libs@25.2.0)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/identity-auth-frontend':
         specifier: 8.1.0
-        version: 8.1.0(@guardian/identity-auth@6.0.1)(@guardian/libs@23.0.0)(tslib@2.6.2)(typescript@5.5.3)
+        version: 8.1.0(@guardian/identity-auth@6.0.1)(@guardian/libs@25.2.0)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/libs':
-        specifier: 23.0.0
-        version: 23.0.0(tslib@2.6.2)(typescript@5.5.3)
+        specifier: 25.2.0
+        version: 25.2.0(@guardian/ophan-tracker-js@2.3.0)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/ophan-tracker-js':
         specifier: 2.3.0
         version: 2.3.0
       '@guardian/react-crossword':
         specifier: 6.3.0
-        version: 6.3.0(@emotion/react@11.14.0)(@guardian/libs@23.0.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+        version: 6.3.0(@emotion/react@11.14.0)(@guardian/libs@25.2.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -342,10 +342,10 @@ importers:
         version: 9.0.0(@emotion/react@11.14.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source-development-kitchen':
         specifier: 18.1.1
-        version: 18.1.1(@emotion/react@11.14.0)(@guardian/libs@23.0.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
+        version: 18.1.1(@emotion/react@11.14.0)(@guardian/libs@25.2.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/support-dotcom-components':
         specifier: 7.6.2
-        version: 7.6.2(@guardian/libs@23.0.0)(zod@3.22.4)
+        version: 7.6.2(@guardian/libs@25.2.0)(zod@3.22.4)
       '@guardian/tsconfig':
         specifier: 0.2.0
         version: 0.2.0
@@ -4746,7 +4746,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/braze-components@22.2.0(@emotion/react@11.14.0)(@guardian/libs@23.0.0)(@guardian/source@9.0.0)(react@18.3.1):
+  /@guardian/braze-components@22.2.0(@emotion/react@11.14.0)(@guardian/libs@25.2.0)(@guardian/source@9.0.0)(react@18.3.1):
     resolution: {integrity: sha512-uSkHd6mBVTAD+BrvJZNt+oSipYHQXBdVt9Pu/VTvkliXHzT8OUsep7ObIWM1lkf3znWbqLDhoXtwS5apX2AEWQ==}
     engines: {node: ^18.15 || ^20.8}
     peerDependencies:
@@ -4756,7 +4756,7 @@ packages:
       react: 17.0.2 || 18.2.0
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/libs': 23.0.0(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 25.2.0(@guardian/ophan-tracker-js@2.3.0)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source': 9.0.0(@emotion/react@11.14.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       react: 18.3.1
     dev: false
@@ -4803,14 +4803,14 @@ packages:
       yargs: 17.7.2
     dev: false
 
-  /@guardian/commercial-core@27.1.0(@guardian/ab-core@8.0.0)(@guardian/libs@23.0.0):
+  /@guardian/commercial-core@27.1.0(@guardian/ab-core@8.0.0)(@guardian/libs@25.2.0):
     resolution: {integrity: sha512-uA7bA1YzvjgbyO5qkwKzuxgYZqw0PjqCz4YYsOeDj7Zq2Xeehrjwz30m8sJurA6pQmap7C4ZJIY62pJP+W7KEw==}
     peerDependencies:
       '@guardian/ab-core': 8.0.1
       '@guardian/libs': 22.5.0
     dependencies:
       '@guardian/ab-core': 8.0.0(tslib@2.6.2)(typescript@5.5.3)
-      '@guardian/libs': 23.0.0(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 25.2.0(@guardian/ophan-tracker-js@2.3.0)(tslib@2.6.2)(typescript@5.5.3)
       '@types/googletag': 3.3.0
     dev: false
 
@@ -4879,7 +4879,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/core-web-vitals@7.0.0(@guardian/libs@23.0.0)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3):
+  /@guardian/core-web-vitals@7.0.0(@guardian/libs@25.2.0)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3):
     resolution: {integrity: sha512-1JLUQjkLY8SXYJqcy0TiE9/9hCcmyIlmMpRoW8Ygn/qGtyNxG+zzwkwsgtJIP+B0ZjtDqfukra2IV9l7wX5A0g==}
     peerDependencies:
       '@guardian/libs': ^18.0.0
@@ -4890,7 +4890,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@guardian/libs': 23.0.0(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 25.2.0(@guardian/ophan-tracker-js@2.3.0)(tslib@2.6.2)(typescript@5.5.3)
       tslib: 2.6.2
       typescript: 5.5.3
       web-vitals: 4.2.3
@@ -4971,7 +4971,7 @@ packages:
       - supports-color
     dev: false
 
-  /@guardian/identity-auth-frontend@8.1.0(@guardian/identity-auth@6.0.1)(@guardian/libs@23.0.0)(tslib@2.6.2)(typescript@5.5.3):
+  /@guardian/identity-auth-frontend@8.1.0(@guardian/identity-auth@6.0.1)(@guardian/libs@25.2.0)(tslib@2.6.2)(typescript@5.5.3):
     resolution: {integrity: sha512-2GzIsUBp8uiP+fRsKUpMrqJYSqokUCDo4q9WByi143CN0LRRWj2tVt23Y/+cZxWUuwDfRBxp1qbRnsy4QSMVLQ==}
     peerDependencies:
       '@guardian/identity-auth': ^6.0.0
@@ -4982,13 +4982,13 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@guardian/identity-auth': 6.0.1(@guardian/libs@23.0.0)(tslib@2.6.2)(typescript@5.5.3)
-      '@guardian/libs': 23.0.0(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/identity-auth': 6.0.1(@guardian/libs@25.2.0)(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 25.2.0(@guardian/ophan-tracker-js@2.3.0)(tslib@2.6.2)(typescript@5.5.3)
       tslib: 2.6.2
       typescript: 5.5.3
     dev: false
 
-  /@guardian/identity-auth@6.0.1(@guardian/libs@23.0.0)(tslib@2.6.2)(typescript@5.5.3):
+  /@guardian/identity-auth@6.0.1(@guardian/libs@25.2.0)(tslib@2.6.2)(typescript@5.5.3):
     resolution: {integrity: sha512-x6X7/+0w2ZLYZERUbkO69AjHJ7Jq2IDA5UJP8SrQPhJoTlSxKAl+13w77TcVX75IK7L8KldZscHMfOW1tSnq9g==}
     peerDependencies:
       '@guardian/libs': ^21.0.0
@@ -4998,7 +4998,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@guardian/libs': 23.0.0(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 25.2.0(@guardian/ophan-tracker-js@2.3.0)(tslib@2.6.2)(typescript@5.5.3)
       tslib: 2.6.2
       typescript: 5.5.3
     dev: false
@@ -5016,15 +5016,17 @@ packages:
       typescript: 5.5.3
     dev: false
 
-  /@guardian/libs@23.0.0(tslib@2.6.2)(typescript@5.5.3):
-    resolution: {integrity: sha512-kT7hux7PCy/ev9anIGfWalikqJN1TAFHT62rrkJhKUsPROUzH7IUSLzIPLpmLpTXkd0339WiBaNkqyn6uBQ/Eg==}
+  /@guardian/libs@25.2.0(@guardian/ophan-tracker-js@2.3.0)(tslib@2.6.2)(typescript@5.5.3):
+    resolution: {integrity: sha512-1zwsHKRB/DjwnRyKZK6TY/r9GfZf/qK1VzUwb6EFe4CG0r94Qnz3zdEHIfF4nC8eMaua2RoCmF27b/tTEHbi5A==}
     peerDependencies:
+      '@guardian/ophan-tracker-js': ^2.2.10
       tslib: ^2.6.2
       typescript: ~5.5.2
     peerDependenciesMeta:
       typescript:
         optional: true
     dependencies:
+      '@guardian/ophan-tracker-js': 2.3.0
       tslib: 2.6.2
       typescript: 5.5.3
     dev: false
@@ -5053,7 +5055,7 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@guardian/react-crossword@6.3.0(@emotion/react@11.14.0)(@guardian/libs@23.0.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
+  /@guardian/react-crossword@6.3.0(@emotion/react@11.14.0)(@guardian/libs@25.2.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
     resolution: {integrity: sha512-6CVNzY+yZrrUYOLpaAu7KSlyU23LBiZTFNJACI935iyjYuWEtyROoOwza82h1XconuqyEd9S8iG8CjtLb+j9Ig==}
     peerDependencies:
       '@emotion/react': ^11.11.3
@@ -5069,7 +5071,7 @@ packages:
         optional: true
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/libs': 23.0.0(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 25.2.0(@guardian/ophan-tracker-js@2.3.0)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source': 9.0.0(@emotion/react@11.14.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@types/react': 18.3.1
       react: 18.3.1
@@ -5121,7 +5123,7 @@ packages:
       typescript: 5.5.3
     dev: false
 
-  /@guardian/source-development-kitchen@18.1.1(@emotion/react@11.14.0)(@guardian/libs@23.0.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3):
+  /@guardian/source-development-kitchen@18.1.1(@emotion/react@11.14.0)(@guardian/libs@25.2.0)(@guardian/source@9.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3):
     resolution: {integrity: sha512-wuMULnVjValyEz6YjrOPt054tXJkutkAbPdeV/KQHoSCSjAJnd0Cp3SZeoVog77HE/iZ0mnKaiVkK+QXpRVtCQ==}
     peerDependencies:
       '@emotion/react': ^11.11.4
@@ -5142,7 +5144,7 @@ packages:
         optional: true
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/libs': 23.0.0(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 25.2.0(@guardian/ophan-tracker-js@2.3.0)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source': 9.0.0(@emotion/react@11.14.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@types/react': 18.3.1
       react: 18.3.1
@@ -5188,7 +5190,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/support-dotcom-components@7.6.2(@guardian/libs@23.0.0)(zod@3.22.4):
+  /@guardian/support-dotcom-components@7.6.2(@guardian/libs@25.2.0)(zod@3.22.4):
     resolution: {integrity: sha512-3bOv+n1+TV2XJQjOFGsM8A+sEU3D0KGlQIW/Z67A1QA4YwvFy57UMgiEtnxgYOkMEPq3iPN3YW2wYqs/a46OHw==}
     peerDependencies:
       '@guardian/libs': ^22.0.0
@@ -5200,7 +5202,7 @@ packages:
       '@aws-sdk/client-ssm': 3.840.0
       '@aws-sdk/credential-providers': 3.840.0
       '@aws-sdk/lib-dynamodb': 3.840.0(@aws-sdk/client-dynamodb@3.840.0)
-      '@guardian/libs': 23.0.0(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 25.2.0(@guardian/ophan-tracker-js@2.3.0)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/ophan-tracker-js': 2.3.1
       compression: 1.7.4
       cors: 2.8.5
