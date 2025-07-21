@@ -139,7 +139,7 @@ interface ContributionsEpicButtonsProps {
 	submitComponentEvent?: (event: ComponentEvent) => void;
 	isReminderActive: boolean;
 	isSignedIn: boolean;
-	threeTierChoiceCardSelectedProduct?: ChoiceCard['product'];
+	threeTierSelectedChoiceCard?: ChoiceCard;
 	amountsTestName?: string;
 	amountsVariantName?: string;
 	promoCodes: string[];
@@ -153,7 +153,7 @@ export const ContributionsEpicButtons = ({
 	submitComponentEvent,
 	isReminderActive,
 	isSignedIn,
-	threeTierChoiceCardSelectedProduct,
+	threeTierSelectedChoiceCard,
 	amountsTestName,
 	amountsVariantName,
 	promoCodes,
@@ -179,25 +179,32 @@ export const ContributionsEpicButtons = ({
 	}
 
 	const getCta = (cta: Cta): Cta => {
-		if (threeTierChoiceCardSelectedProduct) {
-			if (threeTierChoiceCardSelectedProduct.supportTier === 'OneOff') {
-				return {
-					text: cta.text,
-					baseUrl: addChoiceCardsOneTimeParams(cta.baseUrl),
-				};
-			}
+		if (!threeTierSelectedChoiceCard?.product) {
+			return cta;
+		}
 
+		const { destinationUrl, product } = threeTierSelectedChoiceCard;
+
+		const url: string =
+			destinationUrl && destinationUrl.trim() !== ''
+				? destinationUrl.trim()
+				: cta.baseUrl;
+
+		if (product.supportTier === 'OneOff') {
 			return {
 				text: cta.text,
-				baseUrl: addChoiceCardsProductParams(
-					cta.baseUrl,
-					threeTierChoiceCardSelectedProduct.supportTier,
-					threeTierChoiceCardSelectedProduct.ratePlan,
-				),
+				baseUrl: addChoiceCardsOneTimeParams(url),
 			};
 		}
 
-		return cta;
+		return {
+			text: cta.text,
+			baseUrl: addChoiceCardsProductParams(
+				url,
+				product.supportTier,
+				product.ratePlan,
+			),
+		};
 	};
 
 	const openReminder = () => {
