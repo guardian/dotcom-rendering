@@ -1052,6 +1052,7 @@ export const footballData: FEFootballMatchListPage = {
 		abTests: {
 			europeBetaFrontTest2Variant: 'variant',
 		},
+		serverSideABTests: {},
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		stage: 'PROD',
 		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
