@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { space } from '@guardian/source/foundations';
 import {
 	LinkButton,
 	SvgArrowRightStraight,
@@ -12,6 +13,8 @@ type ProductLinkButtonProps = {
 const linkButtonStyles = css`
 	max-width: 100%;
 	height: fit-content;
+	padding-top: ${space[1]}px;
+	padding-bottom: ${space[1]}px;
 	white-space: normal;
 	overflow-wrap: break-word;
 `;
