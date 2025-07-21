@@ -1,5 +1,8 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/source/foundations';
+import {
+	between,
+	from,
+} from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
@@ -39,6 +42,10 @@ const border = css({
 const headerStyles = css`
 	${grid.container}
 	background-color: ${palette('--article-inner-background')};
+
+	${from.tablet} {
+		border-bottom: 1px solid ${palette('--article-border')};
+	}
 `;
 
 export const GalleryLayout = (props: WebProps | AppProps) => {
@@ -158,15 +165,28 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 								${from.leftCol} {
 									${grid.column.left}
 								}
+								${between.tablet.and.leftCol} {
+									border-left: 1px solid
+										${palette('--article-border')};
+								}
+								${from.leftCol} {
+									position: relative; /* allows the ::after to be positioned relative to this */
+									&::after {
+										content: '';
+										position: absolute;
+										right: -21px;
+										top: 0;
+										bottom: 0;
+										width: 1px;
+										background-color: ${palette(
+											'--article-border',
+										)};
+									}
+								}
 							`,
 						]}
 					>
 						Main media caption
-					</div>
-					<div
-						css={[grid.between('centre-column-start', 'grid-end')]}
-					>
-						Meta
 					</div>
 				</header>
 				{gallery.images.map((element, idx) => (

@@ -322,16 +322,19 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 						color: ${palette('--standfirst-text')};
 						background-color: ${palette('--standfirst-background')};
 
+						padding-left: ${space[0]}px;
+						margin-right: ${space[3]}px;
+
 						${from.tablet} {
 							${grid.span('centre-column-start', 7)}
+							padding-left: 12px;
+							border-left: 1px solid
+								${palette('--article-border')};
 						}
 
 						${from.desktop} {
 							${grid.span('centre-column-start', 6)}
 						}
-						margin-bottom: ${space[3]}px;
-						margin-left: ${space[3]}px;
-						margin-right: ${space[3]}px;
 					`;
 				default:
 					switch (theme) {

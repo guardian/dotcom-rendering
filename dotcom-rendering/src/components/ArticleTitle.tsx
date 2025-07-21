@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/source/foundations';
+import { from, until } from '@guardian/source/foundations';
 import { grid } from '../../src/grid';
 import {
 	ArticleDesign,
@@ -47,6 +47,10 @@ const galleryStyles = css`
 	grid-row: 6/7;
 	max-width: 400px;
 	min-width: 200px;
+
+	${until.tablet} {
+		${grid.column.all}
+	}
 `;
 
 export const ArticleTitle = ({

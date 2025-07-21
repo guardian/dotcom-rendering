@@ -190,9 +190,13 @@ export const metaContainer = (format: ArticleFormat) => {
 				case ArticleDesign.Gallery:
 					return css`
 						${grid.column.centre}
-						margin-bottom: ${space[3]}px;
-						margin-left: ${space[3]}px;
+						padding-bottom: ${space[3]}px;
+						padding-left: ${space[3]}px;
 						margin-right: ${space[3]}px;
+						${from.tablet} {
+							border-left: 1px solid
+								${themePalette('--article-border')};
+						}
 					`;
 				default:
 					return defaultMargins;
