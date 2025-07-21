@@ -13,6 +13,7 @@ import {
 
 export const signInGateContainer = css`
 	max-width: 617px;
+	padding: ${space[4]}px 0 ${space[10]}px;
 
 	${from.desktop} {
 		min-height: 600px;
