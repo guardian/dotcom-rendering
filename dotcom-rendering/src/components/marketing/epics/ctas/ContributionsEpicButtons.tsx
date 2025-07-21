@@ -18,9 +18,8 @@ import { useEffect } from 'react';
 import { useIsInView } from '../../../../lib/useIsInView';
 import { hasSetReminder } from '../../lib/reminders';
 import {
-	addChoiceCardsOneTimeParams,
-	addChoiceCardsProductParams,
 	enrichSupportUrl,
+	getChoiceCardUrl,
 	isSupportUrl,
 } from '../../lib/tracking';
 import {
@@ -183,27 +182,9 @@ export const ContributionsEpicButtons = ({
 			return cta;
 		}
 
-		const { destinationUrl, product } = threeTierSelectedChoiceCard;
-
-		const url: string =
-			destinationUrl && destinationUrl.trim() !== ''
-				? destinationUrl.trim()
-				: cta.baseUrl;
-
-		if (product.supportTier === 'OneOff') {
-			return {
-				text: cta.text,
-				baseUrl: addChoiceCardsOneTimeParams(url),
-			};
-		}
-
 		return {
 			text: cta.text,
-			baseUrl: addChoiceCardsProductParams(
-				url,
-				product.supportTier,
-				product.ratePlan,
-			),
+			baseUrl: getChoiceCardUrl(threeTierSelectedChoiceCard, cta.baseUrl),
 		};
 	};
 

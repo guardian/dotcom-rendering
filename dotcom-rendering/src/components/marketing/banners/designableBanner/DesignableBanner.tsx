@@ -30,7 +30,7 @@ import {
 } from '../../../../lib/useMatchMedia';
 import { getChoiceCards } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
-import { addChoiceCardsProductParams } from '../../lib/tracking';
+import { getChoiceCardUrl } from '../../lib/tracking';
 import { ThreeTierChoiceCards } from '../../shared/ThreeTierChoiceCards';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
@@ -106,24 +106,6 @@ const buildChoiceCardSettings = (
 		};
 	}
 	return undefined;
-};
-
-const buildUrlForThreeTierChoiceCards = (
-	baseUrl: string,
-	selectedChoiceCard: ChoiceCard,
-) => {
-	const { destinationUrl, product } = selectedChoiceCard;
-	const url =
-		destinationUrl && destinationUrl.trim() !== ''
-			? destinationUrl.trim()
-			: baseUrl;
-	return product.supportTier === 'OneOff'
-		? url
-		: addChoiceCardsProductParams(
-				url,
-				product.supportTier,
-				product.ratePlan,
-		  );
 };
 
 const DesignableBanner: ReactComponent<BannerRenderProps> = ({
@@ -422,9 +404,9 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 
 							<div css={styles.ctaContainer}>
 								<LinkButton
-									href={buildUrlForThreeTierChoiceCards(
-										mainOrMobileContent.primaryCta.ctaUrl,
+									href={getChoiceCardUrl(
 										selectedChoiceCard,
+										mainOrMobileContent.primaryCta.ctaUrl,
 									)}
 									onClick={onCtaClick}
 									priority="tertiary"
