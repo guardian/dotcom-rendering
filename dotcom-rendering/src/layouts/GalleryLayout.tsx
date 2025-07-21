@@ -16,7 +16,7 @@ import { SubMeta } from '../components/SubMeta';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { NavType } from '../model/extract-nav';
-import { palette, palette as themePalette } from '../palette';
+import { palette } from '../palette';
 import type { Gallery } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 
@@ -218,9 +218,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 			{isApps && (
 				<div
 					css={{
-						backgroundColor: themePalette(
-							'--apps-footer-background',
-						),
+						backgroundColor: palette('--apps-footer-background'),
 					}}
 				>
 					<Island priority="critical">

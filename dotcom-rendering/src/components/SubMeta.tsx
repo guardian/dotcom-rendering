@@ -142,7 +142,6 @@ const galleryStyles = css`
 	background-color: ${palette('--article-inner-background')};
 	border-bottom: 1px solid var(--article-border);
 	padding: 0;
-	position: relative;
 
 	${from.tablet} {
 		border-left: 1px solid ${palette('--article-border')};
@@ -150,18 +149,12 @@ const galleryStyles = css`
 	}
 `;
 
-const galleryLeftCollumn = css`
-	${grid.column.centre}
+const galleryBorder = css`
 	grid-row: 1 / 3;
-	${between.tablet.and.desktop} {
-		padding-left: ${space[5]}px;
-		padding-right: ${space[5]}px;
-	}
+	position: relative; /* allows the ::before & ::after to be positioned relative to this */
 
 	${between.desktop.and.leftCol} {
 		${grid.column.right}
-
-		position: relative; /* allows the ::before to be positioned relative to this */
 
 		&::before {
 			content: '';
@@ -176,8 +169,6 @@ const galleryLeftCollumn = css`
 
 	${from.leftCol} {
 		${grid.column.left}
-
-		position: relative; /* allows the ::before to be positioned relative to this */
 
 		&::after {
 			content: '';
@@ -228,7 +219,7 @@ export const SubMeta = ({
 			]}
 		>
 			{format.design === ArticleDesign.Gallery && (
-				<div css={galleryLeftCollumn}></div>
+				<div css={galleryBorder}></div>
 			)}
 			{hasLinks && (
 				<>
