@@ -129,6 +129,9 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							pageIsSensitive={frontendData.config.isSensitive}
 							isDev={!!frontendData.config.isDev}
 							serverSideTests={frontendData.config.abTests}
+							serverSideABTests={
+								frontendData.config.serverSideABTests
+							}
 						/>
 					</Island>
 					{!!frontendData.affiliateLinksDisclaimer && (

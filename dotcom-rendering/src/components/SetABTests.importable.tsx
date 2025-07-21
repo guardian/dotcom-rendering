@@ -7,6 +7,7 @@ import { tests } from '../experiments/ab-tests';
 import { runnableTestsToParticipations } from '../experiments/lib/ab-participations';
 import { BetaABTests } from '../experiments/lib/beta-ab-tests';
 import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
+import { isServer } from '../lib/isServer';
 import { setABTests, setBetaABTests } from '../lib/useAB';
 import type { ABTestSwitches } from '../model/enhance-switches';
 import type { ServerSideTests } from '../types/config';
@@ -18,6 +19,7 @@ type Props = {
 	isDev: boolean;
 	pageIsSensitive: CoreAPIConfig['pageIsSensitive'];
 	serverSideTests: ServerSideTests;
+	serverSideABTests: Record<string, string>;
 };
 
 const mvtMinValue = 1;
@@ -66,7 +68,8 @@ export const SetABTests = ({
 	pageIsSensitive,
 	abTestSwitches,
 	forcedTestVariants,
-	serverSideTests,
+	serverSideTests: oldServerSideTests,
+	serverSideABTests,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const [ophan, setOphan] = useState<Awaited<ReturnType<typeof getOphan>>>();
@@ -107,6 +110,7 @@ export const SetABTests = ({
 		const betaAb = new BetaABTests({
 			ophanRecord: ophan.record,
 			errorReporter,
+			serverSideABTests,
 		});
 
 		const ab = new AB({
@@ -117,7 +121,7 @@ export const SetABTests = ({
 			arrayOfTestObjects: tests,
 			forcedTestVariants: allForcedTestVariants,
 			ophanRecord: ophan.record,
-			serverSideTests,
+			serverSideTests: oldServerSideTests,
 			errorReporter,
 		});
 		const allRunnableTests = ab.allRunnableTests(tests);
@@ -146,8 +150,18 @@ export const SetABTests = ({
 		isDev,
 		pageIsSensitive,
 		ophan,
-		serverSideTests,
+		oldServerSideTests,
+		serverSideABTests,
 	]);
+
+	if (isServer) {
+		const betaAb = new BetaABTests({
+			ssr: true,
+			serverSideABTests,
+		});
+
+		setBetaABTests(betaAb);
+	}
 
 	// we don’t render anything
 	return null;

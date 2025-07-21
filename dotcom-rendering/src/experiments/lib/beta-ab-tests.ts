@@ -1,10 +1,11 @@
 import { getCookie } from '@guardian/libs';
 
-const AB_COOKIE_NAME = 'Client_AB_Tests';
+const AB_COOKIE_NAME = 'gu_client_ab_tests';
 
 export interface BetaABTestAPI {
 	isUserInTest: (testId: string, variantId: string) => boolean;
 	trackABTests: () => void;
+	getParticipations: () => ABParticipations;
 }
 
 type ABParticipations = {
@@ -23,10 +24,17 @@ type OphanRecordFunction = (send: Record<string, OphanABPayload>) => void;
 
 type ErrorReporter = (e: unknown) => void;
 
-type BetaABTestsConfig = {
-	ophanRecord: OphanRecordFunction;
-	errorReporter: ErrorReporter;
-};
+type BetaABTestsConfig =
+	| {
+			ssr?: false;
+			ophanRecord: OphanRecordFunction;
+			errorReporter: ErrorReporter;
+			serverSideABTests: Record<string, string>;
+	  }
+	| {
+			ssr: true;
+			serverSideABTests: Record<string, string>;
+	  };
 
 /**
  * generate an A/B event for Ophan
@@ -43,7 +51,14 @@ const makeABEvent = (variantName: string, complete: boolean): OphanABEvent => {
 /**
  * get client-side AB test state from the cookie
  */
-const getParticipations = (): ABParticipations => {
+const getParticipations = (
+	serverSideABTests: Record<string, string>,
+	ssr: boolean,
+): ABParticipations => {
+	if (ssr) {
+		return serverSideABTests;
+	}
+
 	const userTestBuckets = getCookie({
 		name: AB_COOKIE_NAME,
 		shouldMemoize: true,
@@ -58,31 +73,43 @@ const getParticipations = (): ABParticipations => {
 					participations[testId] = variantId;
 				}
 				return participations;
-			}, {});
+			}, serverSideABTests);
 	}
 
-	return {};
+	return serverSideABTests;
 };
 
 export class BetaABTests implements BetaABTestAPI {
 	private participations: ABParticipations;
-	private ophanRecord: OphanRecordFunction;
-	private errorReporter: ErrorReporter;
+	private ophanRecord?: OphanRecordFunction;
+	private errorReporter?: ErrorReporter;
 
-	constructor({ ophanRecord, errorReporter }: BetaABTestsConfig) {
-		this.participations = getParticipations();
-		this.ophanRecord = ophanRecord;
-		this.errorReporter = errorReporter;
+	constructor(config: BetaABTestsConfig) {
+		const { ssr, serverSideABTests } = config;
+
+		this.participations = getParticipations(
+			serverSideABTests,
+			Boolean(config.ssr),
+		);
+		if (!ssr) {
+			this.ophanRecord = config.ophanRecord;
+			this.errorReporter = config.errorReporter;
+		}
 	}
 
 	isUserInTest(testId: string, variantId: string): boolean {
 		return this.participations[testId] === variantId;
 	}
 
+	getParticipations(): ABParticipations {
+		return this.participations;
+	}
+
 	trackABTests(): void {
-		this.ophanRecord({
-			abTestRegister: this.buildOphanPayload(),
-		});
+		this.ophanRecord &&
+			this.ophanRecord({
+				abTestRegister: this.buildOphanPayload(),
+			});
 	}
 
 	private buildOphanPayload() {
@@ -98,7 +125,7 @@ export class BetaABTests implements BetaABTestAPI {
 			);
 		} catch (error: unknown) {
 			// Encountering an error should invalidate the logging process.
-			this.errorReporter(error);
+			this.errorReporter && this.errorReporter(error);
 			return {};
 		}
 	}

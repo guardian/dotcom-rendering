@@ -1,8 +1,10 @@
+import { useEffect } from 'react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 } from '../lib/articleFormat';
+import { useBetaAB } from '../lib/useAB';
 import type { NavType } from '../model/extract-nav';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -162,6 +164,12 @@ const DecideLayoutWeb = ({
 	NAV,
 	renderingTarget,
 }: WebProps) => {
+	const ab = useBetaAB();
+
+	console.log('participations: ', ab?.getParticipations());
+	useEffect(() => {
+		console.log('participations: ', ab?.getParticipations());
+	}, [ab]);
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {

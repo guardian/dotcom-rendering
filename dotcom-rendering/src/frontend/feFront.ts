@@ -340,6 +340,7 @@ export type FEFrontConfig = {
 	sharedAdTargeting: SharedAdTargeting;
 	buildNumber: string;
 	abTests: ServerSideTests;
+	serverSideABTests: Record<string, string>;
 	pbIndexSites: { [key: string]: unknown }[];
 	ampIframeUrl: string;
 	beaconUrl: string;

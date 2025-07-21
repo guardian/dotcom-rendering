@@ -76,6 +76,7 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 					pageIsSensitive={tagPage.config.isSensitive}
 					isDev={!!tagPage.config.isDev}
 					serverSideTests={tagPage.config.abTests}
+					serverSideABTests={tagPage.config.serverSideABTests}
 				/>
 			</Island>
 			<Island priority="critical">
