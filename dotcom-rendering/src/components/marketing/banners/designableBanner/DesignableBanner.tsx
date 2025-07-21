@@ -417,6 +417,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									cssOverrides={styles.linkButtonStyles}
 									theme={buttonThemes(
 										choiceCardButtonSettings,
+										'tertiary',
 									)}
 									icon={<SvgArrowRightStraight />}
 									iconSide="right"
@@ -808,7 +809,7 @@ const styles = {
 		}
 	`,
 	linkButtonStyles: css`
-		background-color: ${palette.brandAlt[400]};
+		/* background-color: ${palette.brandAlt[400]}; */
 		border-color: ${palette.brandAlt[400]};
 		width: 100%;
 	`,
