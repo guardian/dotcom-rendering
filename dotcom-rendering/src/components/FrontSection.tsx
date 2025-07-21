@@ -401,13 +401,24 @@ const bottomPaddingBetaContainer = (
 	}
 `;
 
-const primaryLevelTopBorder = css`
+const primaryLevelTopBorder = (title?: string) => css`
 	grid-row: 1;
 	grid-column: 1 / -1;
-	border-top: 2px solid ${schemePalette('--section-border-primary')};
 	/** Ensures the top border sits above the side borders */
 	z-index: 1;
 	height: fit-content;
+
+	border-top: 2px solid ${schemePalette('--section-border-primary')};
+	${title === 'News' &&
+	`border-top: 2px solid ${schemePalette('--section-border-news')};`}
+	${title === 'Opinion' &&
+	`border-top: 2px solid ${schemePalette('--section-border-opinion')};`}
+	${title === 'Sport' &&
+	`border-top: 2px solid ${schemePalette('--section-border-sport')};`}
+	${title === 'Lifestyle' &&
+	`border-top: 2px solid ${schemePalette('--section-border-lifestyle')};`}
+	${title === 'Culture' &&
+	`border-top: 2px solid ${schemePalette('--section-border-culture')};`}
 `;
 
 const secondaryLevelTopBorder = css`
@@ -424,6 +435,23 @@ const carouselNavigationPlaceholder = css`
 		display: none;
 	}
 `;
+
+const articleSectionTitleStyles = (title?: string): string => {
+	switch (title) {
+		case 'News':
+			return schemePalette('--article-section-title-news');
+		case 'Opinion':
+			return schemePalette('--article-section-title-opinion');
+		case 'Sport':
+			return schemePalette('--article-section-title-sport');
+		case 'Lifestyle':
+			return schemePalette('--article-section-title-lifestyle');
+		case 'Culture':
+			return schemePalette('--article-section-title-culture');
+		default:
+			return schemePalette('--article-section-title');
+	}
+};
 
 /**
  * # Front Container
@@ -590,7 +618,7 @@ export const FrontSection = ({
 						css={[
 							containerLevel === 'Secondary'
 								? secondaryLevelTopBorder
-								: primaryLevelTopBorder,
+								: primaryLevelTopBorder(title),
 						]}
 					/>
 				)}
@@ -629,9 +657,7 @@ export const FrontSection = ({
 										? schemePalette(
 												'--article-section-secondary-title',
 										  )
-										: schemePalette(
-												'--article-section-title',
-										  )
+										: articleSectionTitleStyles(title)
 								}
 								// On paid fronts the title is not treated as a link
 								url={!isOnPaidContentFront ? url : undefined}
