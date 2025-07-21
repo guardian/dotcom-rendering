@@ -54,6 +54,7 @@ type Props = {
 	isImmersive?: boolean;
 	byline?: string;
 	showByline?: boolean;
+	contentType?: string;
 };
 
 export const YoutubeBlockComponent = ({
@@ -95,6 +96,7 @@ export const YoutubeBlockComponent = ({
 	isImmersive,
 	byline,
 	showByline,
+	contentType,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -112,6 +114,16 @@ export const YoutubeBlockComponent = ({
 	 * We need to ensure a unique id for each YouTube player on the page.
 	 */
 	const uniqueId = `${assetId}-${index}`;
+
+	// We need Video articles generated directly from Media Atom Maker
+	// to always show their poster (16:9) image, but in other cases
+	// use the override image (often supplied as 5:4 then cropped to 16:9)
+	const getPosterImage = () => {
+		if (contentType && contentType.toLowerCase() === 'video') {
+			return posterImage;
+		}
+		return overrideImage ?? posterImage;
+	};
 
 	useEffect(() => {
 		if (renderingTarget === 'Web') {
@@ -158,7 +170,7 @@ export const YoutubeBlockComponent = ({
 				atomId={id}
 				videoId={assetId}
 				uniqueId={uniqueId}
-				image={overrideImage ?? posterImage}
+				image={getPosterImage()}
 				alt={altText ?? mediaTitle ?? ''}
 				adTargeting={
 					enableAds && renderingTarget === 'Web'

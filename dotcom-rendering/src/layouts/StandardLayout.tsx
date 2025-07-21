@@ -519,6 +519,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									editionId={article.editionId}
 									hideCaption={isMedia}
 									shouldHideAds={article.shouldHideAds}
+									contentType={article.contentType}
 								/>
 							</div>
 						</GridItem>

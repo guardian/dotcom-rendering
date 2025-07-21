@@ -88,6 +88,7 @@ type Props = {
 	switches: Switches;
 	editionId: EditionId;
 	shouldHideAds: boolean;
+	contentType?: string;
 };
 
 export const MainMedia = ({
@@ -105,6 +106,7 @@ export const MainMedia = ({
 	switches,
 	editionId,
 	shouldHideAds,
+	contentType,
 }: Props) => {
 	return (
 		<div css={[mainMedia, chooseWrapper(format)]}>
@@ -128,6 +130,7 @@ export const MainMedia = ({
 					starRating={starRating}
 					editionId={editionId}
 					shouldHideAds={shouldHideAds}
+					contentType={contentType}
 				/>
 			))}
 		</div>
