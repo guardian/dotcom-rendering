@@ -1,8 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	between,
-	from,
-} from '@guardian/source/foundations';
+import { between, from } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
@@ -165,16 +162,12 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 								${from.leftCol} {
 									${grid.column.left}
 								}
+								position: relative;
 								${between.tablet.and.leftCol} {
-									border-left: 1px solid
-										${palette('--article-border')};
-								}
-								${from.leftCol} {
-									position: relative; /* allows the ::after to be positioned relative to this */
-									&::after {
+									&::before {
 										content: '';
 										position: absolute;
-										right: -21px;
+										left: -10px;
 										top: 0;
 										bottom: 0;
 										width: 1px;

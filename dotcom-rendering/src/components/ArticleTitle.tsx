@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, until } from '@guardian/source/foundations';
+import { from } from '@guardian/source/foundations';
 import { grid } from '../../src/grid';
 import {
 	ArticleDesign,
@@ -43,13 +43,15 @@ const immersiveMargins = css`
 `;
 
 const galleryStyles = css`
-	${grid.between('centre-column-start', 'grid-end')};
+	${grid.column.all}
+
 	grid-row: 6/7;
 	max-width: 400px;
 	min-width: 200px;
 
-	${until.tablet} {
-		${grid.column.all}
+	${from.tablet} {
+		${grid.between('centre-column-start', 'grid-end')};
+		margin-left: -10px;
 	}
 `;
 

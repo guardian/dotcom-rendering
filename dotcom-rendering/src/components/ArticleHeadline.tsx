@@ -384,12 +384,13 @@ const decideBottomPadding = ({
 };
 
 const galleryStyles = css`
-	${grid.between('centre-column-start', 'grid-end')};
+	${grid.between('grid-start', 'centre-column-end')}
+
 	grid-row: 7/9;
 
-	${until.tablet} {
-		${grid.column.all}
-		max-width: 620px;
+	${from.tablet} {
+		${grid.between('centre-column-start', 'grid-end')};
+		margin-left: -10px;
 	}
 `;
 

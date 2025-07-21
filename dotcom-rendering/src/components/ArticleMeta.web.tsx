@@ -191,11 +191,19 @@ export const metaContainer = (format: ArticleFormat) => {
 					return css`
 						${grid.column.centre}
 						padding-bottom: ${space[3]}px;
-						padding-left: ${space[3]}px;
-						margin-right: ${space[3]}px;
 						${from.tablet} {
-							border-left: 1px solid
-								${themePalette('--article-border')};
+							position: relative;
+							&::before {
+								content: '';
+								position: absolute;
+								left: -10px;
+								top: 0;
+								bottom: 0;
+								width: 1px;
+								background-color: ${themePalette(
+									'--article-border',
+								)};
+							}
 						}
 					`;
 				default:
