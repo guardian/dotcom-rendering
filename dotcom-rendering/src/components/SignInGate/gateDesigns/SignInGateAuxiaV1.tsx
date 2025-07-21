@@ -17,7 +17,7 @@ import { InformationBox } from '../../InformationBox/InformationBox';
 import { GuardianTerms } from '../../Terms/Terms';
 import { trackLink } from '../componentEventTracking';
 import type { SignInGatePropsAuxia, TreatmentContentDecoded } from '../types';
-import { hideElementsCss, signInGateContainer } from './shared';
+import { hideElementsCss } from './shared';
 
 const DividerWithOr = () => {
 	return (
@@ -162,10 +162,19 @@ export const SignInGateAuxiaV1 = ({
 };
 
 // --- Styling ---
+export const signInGateContainer = css`
+	max-width: 617px;
+	padding: ${space[4]}px 0 ${space[10]}px;
+
+	${from.desktop} {
+		min-height: 600px;
+	}
+`;
+
 const topBar = css`
 	display: flex;
 	justify-content: space-between;
-	padding: ${space[4]}px 0;
+	padding: 0 0 ${space[4]}px;
 	border-bottom: 1px solid ${palette.neutral[86]};
 `;
 
@@ -219,7 +228,7 @@ const termsBox = css`
 `;
 
 const createAccountText = css`
-	${textSansBold15};
+	${textSans15};
 	color: ${palette.neutral[10]};
 
 	a {
