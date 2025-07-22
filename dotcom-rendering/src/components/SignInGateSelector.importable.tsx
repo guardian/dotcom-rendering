@@ -450,6 +450,7 @@ const auxiaLogTreatmentInteraction = async (
 		method: 'POST',
 		headers,
 		body: JSON.stringify(payload),
+		keepalive: true,
 	};
 
 	try {
