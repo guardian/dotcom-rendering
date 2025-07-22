@@ -80,7 +80,7 @@ const getParticipations = (
 };
 
 export class BetaABTests implements BetaABTestAPI {
-	private participations: ABParticipations;
+	private participations: ABParticipations = {};
 	private ophanRecord?: OphanRecordFunction;
 	private errorReporter?: ErrorReporter;
 
@@ -88,7 +88,8 @@ export class BetaABTests implements BetaABTestAPI {
 		const { ssr, serverSideABTests } = config;
 
 		this.participations = getParticipations(
-			serverSideABTests,
+			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, @typescript-eslint/strict-boolean-expressions -- test
+			serverSideABTests || {},
 			Boolean(config.ssr),
 		);
 		if (!ssr) {
