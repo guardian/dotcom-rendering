@@ -137,8 +137,8 @@ export const LoopVideoPlayer = forwardRef(
 					id={loopVideoId}
 					css={videoStyles(width, height)}
 					ref={ref}
-					role="button"
 					tabIndex={0}
+					data-testid="loop-video"
 					height={height}
 					width={width}
 					data-link-name={`gu-video-loop-${
@@ -180,6 +180,7 @@ export const LoopVideoPlayer = forwardRef(
 								onClick={handlePlayPauseClick}
 								css={playIconStyles}
 								data-link-name={`gu-video-loop-play-${atomId}`}
+								data-testid="play-icon"
 							>
 								<PlayIcon iconWidth="narrow" />
 							</button>
@@ -199,7 +200,12 @@ export const LoopVideoPlayer = forwardRef(
 								isMuted ? 'unmute' : 'mute'
 							}-${atomId}`}
 						>
-							<div css={audioIconContainerStyles}>
+							<div
+								css={audioIconContainerStyles}
+								data-testId={`${
+									isMuted ? 'unmute' : 'mute'
+								}-icon`}
+							>
 								<AudioIcon
 									size="xsmall"
 									theme={{
