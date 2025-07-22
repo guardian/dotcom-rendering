@@ -167,20 +167,23 @@ const getLargestImageUrl = (images?: Image[]) => {
 };
 
 /**
- * If we have a replacement video, we should use the largest available trail image from the media atom.
- * For all other videos, we should use the card's trail image where it is available and fall back to the media trail image.
- * */
+ * If we have a replacement video, we should prioritise the largest available trail image from the media atom.
+ * For all other videos, we should prioritise the card's trail image.
+ */
 const decideMediaAtomImage = (
 	videoReplace: boolean,
 	mediaAtom: FEMediaAtom,
 	cardTrailImage?: string,
 ) => {
-	if (videoReplace) {
-		return getLargestImageUrl(mediaAtom.trailImage?.allImages);
-	}
-	return (
-		cardTrailImage ?? getLargestImageUrl(mediaAtom.trailImage?.allImages)
+	const largestMediaAtomImage = getLargestImageUrl(
+		mediaAtom.trailImage?.allImages,
 	);
+
+	if (videoReplace) {
+		return largestMediaAtomImage ?? cardTrailImage;
+	}
+
+	return cardTrailImage ?? largestMediaAtomImage;
 };
 
 /**
