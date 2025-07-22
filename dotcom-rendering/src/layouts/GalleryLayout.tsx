@@ -1,9 +1,10 @@
 import { css } from '@emotion/react';
-import { between, from } from '@guardian/source/foundations';
+import { from } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
+import { Caption } from '../components/Caption';
 import { GalleryImage } from '../components/GalleryImage';
 import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
@@ -11,6 +12,7 @@ import { Standfirst } from '../components/Standfirst';
 import { SubMeta } from '../components/SubMeta';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
+import { decideMainMediaCaption } from '../lib/decide-caption';
 import type { NavType } from '../model/extract-nav';
 import { palette } from '../palette';
 import type { Gallery } from '../types/article';
@@ -48,6 +50,8 @@ const headerStyles = css`
 export const GalleryLayout = (props: WebProps | AppProps) => {
 	const gallery = props.gallery;
 	const frontendData = gallery.frontendData;
+
+	const captionText = decideMainMediaCaption(props.gallery.mainMedia);
 
 	const format: ArticleFormat = {
 		design: gallery.design,
@@ -106,6 +110,11 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						format={format}
 						standfirst={frontendData.standfirst}
 					/>
+					<Caption
+						captionText={captionText}
+						format={format}
+						isMainMedia={true}
+					/>
 					{props.renderingTarget === 'Web' ? (
 						<ArticleMeta
 							branding={
@@ -156,30 +165,9 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						/>
 					) : null}
 					<div
-						css={[
-							css`
-								${grid.column.centre}
-								${from.leftCol} {
-									${grid.column.left}
-								}
-								position: relative;
-								${between.tablet.and.leftCol} {
-									&::before {
-										content: '';
-										position: absolute;
-										left: -10px;
-										top: 0;
-										bottom: 0;
-										width: 1px;
-										background-color: ${palette(
-											'--article-border',
-										)};
-									}
-								}
-							`,
-						]}
+						css={[grid.between('centre-column-start', 'grid-end')]}
 					>
-						Main media caption
+						Meta
 					</div>
 				</header>
 				{gallery.images.map((element, idx) => (
