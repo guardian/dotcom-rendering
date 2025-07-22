@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
+import { palette } from '@guardian/source/foundations';
 import { type ArticleFormat } from '../lib/articleFormat';
+import { useBetaAB } from '../lib/useAB';
 import { RightAdsPlaceholder } from './AdPlaceholder.apps';
 import { AdSlot } from './AdSlot.web';
 import { useConfig } from './ConfigContext';
@@ -43,6 +45,46 @@ export const MostViewedRightWithAd = ({
 	const componentDataAttribute = 'most-viewed-right-container';
 	const { renderingTarget } = useConfig();
 	const isApps = renderingTarget === 'Apps';
+
+	const ab = useBetaAB();
+
+	const isInClientSideTestVariant = ab?.isUserInTest(
+		'client-side-test',
+		'variant',
+	);
+
+	const isInClientSideTestControl = ab?.isUserInTest(
+		'client-side-test',
+		'control',
+	);
+
+	if (isInClientSideTestVariant) {
+		return (
+			<div
+				css={css`
+					color: ${palette.error[400]};
+					font-size: 20px;
+					background-color: ${palette.neutral[97]};
+				`}
+			>
+				Client Side Test Variant
+			</div>
+		);
+	}
+
+	if (isInClientSideTestControl) {
+		return (
+			<div
+				css={css`
+					color: ${palette.error[400]};
+					font-size: 20px;
+					background-color: ${palette.neutral[97]};
+				`}
+			>
+				Client Side Test Control
+			</div>
+		);
+	}
 
 	return (
 		<div
