@@ -29,7 +29,8 @@ export function DesignableBannerCloseButton({
 					settings,
 					styles.closeButtonOverrides,
 				)}
-				theme={buttonThemes(settings)}
+				priority="tertiary"
+				theme={buttonThemes(settings, 'tertiary')}
 				icon={<SvgCross />}
 				size="small"
 				hideLabel={true}

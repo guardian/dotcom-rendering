@@ -45,7 +45,7 @@ export function DesignableBannerCtas({
 					href={secondaryCta?.cta.ctaUrl}
 					onClick={onSecondaryCtaClick}
 					size="small"
-					priority="tertiary"
+					priority="secondary"
 					cssOverrides={buttonStyles(secondaryCtaSettings)}
 					theme={buttonThemes(secondaryCtaSettings, 'secondary')}
 				>

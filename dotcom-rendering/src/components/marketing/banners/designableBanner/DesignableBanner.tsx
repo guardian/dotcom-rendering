@@ -413,11 +413,11 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 										threeTierChoiceCardSelectedProduct,
 									)}
 									onClick={onCtaClick}
-									priority="tertiary"
+									priority="primary"
 									cssOverrides={styles.linkButtonStyles}
 									theme={buttonThemes(
 										choiceCardButtonSettings,
-										'tertiary',
+										'primary',
 									)}
 									icon={<SvgArrowRightStraight />}
 									iconSide="right"
