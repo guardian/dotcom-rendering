@@ -117,15 +117,15 @@ export const LoopVideo = ({
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- In earlier versions of the HTML specification, play() didn't return a value
 		if (startPlayPromise !== undefined) {
 			await startPlayPromise
+				.then(() => {
+					// Autoplay succeeded
+					setPlayerState('PLAYING');
+				})
 				.catch((error: Error) => {
 					// Autoplay failed
 					logAndReportError(src, error);
 					setPosterImage(image);
-					setShowPlayIcon(true);
-				})
-				.then(() => {
-					// Autoplay succeeded
-					setPlayerState('PLAYING');
+					setPlayerState('PAUSED_BY_BROWSER');
 				});
 		}
 	}, [src, image]);
