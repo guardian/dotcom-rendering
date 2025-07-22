@@ -790,7 +790,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				<Section
 					fullWidth={true}
 					showTopBorder={hasPageSkin}
-					data-print-layout="hide"
 					padSides={false}
 					element="aside"
 					backgroundColour={schemePalette(
@@ -810,7 +809,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 			<Section
 				fullWidth={true}
-				data-print-layout="hide"
 				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
