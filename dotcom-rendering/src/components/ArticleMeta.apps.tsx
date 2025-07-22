@@ -201,6 +201,23 @@ const stretchLines = css`
 	grid-column: 1 / -1;
 `;
 
+const galleryMetaContainer = css`
+	${grid.column.centre}
+	padding-bottom: ${space[2]}px;
+	${from.tablet} {
+		position: relative;
+		&::before {
+			content: '';
+			position: absolute;
+			left: -10px;
+			top: 0;
+			bottom: 0;
+			width: 1px;
+			background-color: ${themePalette('--article-border')};
+		}
+	}
+`;
+
 export const ArticleMetaApps = ({
 	branding,
 	format,
@@ -244,13 +261,7 @@ export const ArticleMetaApps = ({
 			}
 			css={[
 				metaContainerMargins,
-				isGallery ? grid.column.centre : undefined,
-				isGallery
-					? {
-							marginLeft: space[3],
-							paddingBottom: space[2],
-					  }
-					: undefined,
+				isGallery ? galleryMetaContainer : undefined,
 			]}
 		>
 			<div
