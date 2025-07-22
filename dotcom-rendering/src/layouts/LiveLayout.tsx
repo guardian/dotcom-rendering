@@ -342,7 +342,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					<Hide from="tablet">
 						<Section
 							fullWidth={true}
-							data-print-layout="hide"
 							padSides={false}
 							showTopBorder={false}
 							showSideBorders={false}
@@ -941,7 +940,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					{isWeb && renderAds && (
 						<Section
 							fullWidth={true}
-							data-print-layout="hide"
 							padSides={false}
 							showTopBorder={true}
 							showSideBorders={false}
@@ -1016,7 +1014,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							fullWidth={true}
 							showTopBorder={false}
 							sectionId="comments"
-							data-print-layout="hide"
 							element="section"
 							backgroundColour={themePalette(
 								'--discussion-section-background',
@@ -1051,7 +1048,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							padContent={false}
 							verticalMargins={false}
 							element="aside"
-							data-print-layout="hide"
 							data-link-name="most-popular"
 							data-component="most-popular"
 							leftColSize="wide"
@@ -1081,7 +1077,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					{isWeb && renderAds && (
 						<Section
 							fullWidth={true}
-							data-print-layout="hide"
 							padSides={false}
 							showTopBorder={false}
 							showSideBorders={false}
@@ -1102,7 +1097,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					{props.NAV.subNavSections && (
 						<Section
 							fullWidth={true}
-							data-print-layout="hide"
 							padSides={false}
 							element="aside"
 						>
@@ -1121,7 +1115,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 					<Section
 						fullWidth={true}
-						data-print-layout="hide"
 						padSides={false}
 						backgroundColour={sourcePalette.brand[400]}
 						borderColour={sourcePalette.brand[600]}
@@ -1174,7 +1167,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			{isApps && (
 				<Section
 					fullWidth={true}
-					data-print-layout="hide"
 					backgroundColour={themePalette('--apps-footer-background')}
 					borderColour={themePalette('--article-border')}
 					padSides={false}
