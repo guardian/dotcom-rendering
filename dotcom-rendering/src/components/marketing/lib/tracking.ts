@@ -16,6 +16,7 @@ import type {
 	TargetingAbTest,
 	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 
 // TRACKING VIA support.theguardian.com
 type LinkParams = {
@@ -303,6 +304,28 @@ export const addTrackingParamsToProfileUrl = (
 	return isProfileUrl(baseUrl)
 		? addProfileTrackingParams(baseUrl, tracking)
 		: baseUrl;
+};
+
+export const getChoiceCardUrl = (
+	choiceCard: ChoiceCard,
+	baseUrl: string,
+): string => {
+	const { destinationUrl, product } = choiceCard;
+
+	const url: string =
+		destinationUrl && destinationUrl.trim() !== ''
+			? destinationUrl.trim()
+			: baseUrl;
+
+	if (product.supportTier === 'OneOff') {
+		return addChoiceCardsOneTimeParams(url);
+	}
+
+	return addChoiceCardsProductParams(
+		url,
+		product.supportTier,
+		product.ratePlan,
+	);
 };
 
 // SHARED TRACKING
