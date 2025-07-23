@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/react';
 import type { Participations } from '@guardian/ab-core';
-import { buildImaAdTagUrl } from '@guardian/commercial';
+import { buildImaAdTagUrl } from '@guardian/commercial-core';
 import type { ConsentState } from '@guardian/libs';
 import { log } from '@guardian/libs';
 import {
@@ -13,6 +13,11 @@ import {
 import { getVideoClient } from '../../lib/bridgetApi';
 import { getZIndex } from '../../lib/getZIndex';
 import { getAuthStatus } from '../../lib/identity';
+import type { CustomPlayEventDetail } from '../../lib/video';
+import {
+	customLoopPlayAudioEventName,
+	customYoutubePlayEventName,
+} from '../../lib/video';
 import type { AdTargeting } from '../../types/commercial';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { google } from './ima';
@@ -38,9 +43,6 @@ type Props = {
 	abTestParticipations: Participations;
 	renderingTarget: RenderingTarget;
 };
-
-type CustomPlayEventDetail = { uniqueId: string };
-const customPlayEventName = 'youtube-video:play';
 
 type ProgressEvents = {
 	hasSentPlayEvent: boolean;
@@ -129,7 +131,7 @@ const setAppsConfiguration = async (
  */
 const dispatchCustomPlayEvent = (uniqueId: string) => {
 	document.dispatchEvent(
-		new CustomEvent(customPlayEventName, {
+		new CustomEvent(customYoutubePlayEventName, {
 			detail: { uniqueId },
 		}),
 	);
@@ -592,12 +594,37 @@ export const YoutubeAtomPlayer = ({
 				 * add listener for custom play event
 				 */
 				document.addEventListener(
-					customPlayEventName,
+					customYoutubePlayEventName,
 					handleCustomPlayEvent,
 				);
 
-				customListeners.current[customPlayEventName] =
+				customListeners.current[customYoutubePlayEventName] =
 					handleCustomPlayEvent;
+
+				/**
+				 * Pauses all playing videos when a looping video is unmuted. If a user is
+				 * watching a looping video with sound, any playing Youtube video is paused.
+				 */
+				const handleCustomPlayLoopAudioEvent = (
+					event: CustomEventInit<CustomPlayEventDetail>,
+				) => {
+					if (event.detail) {
+						const playerStatePromise =
+							player.current?.getPlayerState();
+						void playerStatePromise?.then((playerState) => {
+							if (playerState === YT.PlayerState.PLAYING) {
+								void player.current?.pauseVideo();
+							}
+						});
+					}
+				};
+
+				document.addEventListener(
+					customLoopPlayAudioEventName,
+					handleCustomPlayLoopAudioEvent,
+				);
+				customListeners.current[customLoopPlayAudioEventName] =
+					handleCustomPlayLoopAudioEvent;
 
 				playerListeners.current.push(
 					{ name: 'onReady', listener: onReadyListener },

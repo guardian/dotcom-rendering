@@ -168,12 +168,7 @@ export const AudioLayout = (props: WebProps) => {
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot
-								isPaidContent={!!article.config.isPaidContent}
-								shouldHideReaderRevenue={
-									!!article.config.shouldHideReaderRevenue
-								}
-							/>
+							<HeaderAdSlot abTests={article.config.abTests} />
 						</Section>
 					</Stuck>
 				)}
@@ -214,7 +209,6 @@ export const AudioLayout = (props: WebProps) => {
 			<main data-layout="AudioLayout">
 				<Section
 					fullWidth={true}
-					data-print-layout="hide"
 					showTopBorder={false}
 					backgroundColour={themePalette('--article-background')}
 					borderColour={themePalette('--article-border')}
@@ -352,6 +346,7 @@ export const AudioLayout = (props: WebProps) => {
 										article.isRightToLeftLang
 									}
 									editionId={article.editionId}
+									shouldHideAds={article.shouldHideAds}
 								/>
 								{showBodyEndSlot && (
 									<Island
@@ -461,7 +456,6 @@ export const AudioLayout = (props: WebProps) => {
 				{renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
-						data-print-layout="hide"
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
@@ -528,7 +522,6 @@ export const AudioLayout = (props: WebProps) => {
 					<Section
 						fullWidth={true}
 						sectionId="comments"
-						data-print-layout="hide"
 						element="section"
 						backgroundColour={themePalette(
 							'--discussion-section-background',
@@ -560,7 +553,6 @@ export const AudioLayout = (props: WebProps) => {
 						padContent={false}
 						verticalMargins={false}
 						element="aside"
-						data-print-layout="hide"
 						data-link-name="most-popular"
 						data-component="most-popular"
 						backgroundColour={themePalette(
@@ -586,7 +578,6 @@ export const AudioLayout = (props: WebProps) => {
 				{renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
-						data-print-layout="hide"
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
@@ -603,12 +594,7 @@ export const AudioLayout = (props: WebProps) => {
 
 			<>
 				{props.NAV.subNavSections && (
-					<Section
-						fullWidth={true}
-						data-print-layout="hide"
-						padSides={false}
-						element="aside"
-					>
+					<Section fullWidth={true} padSides={false} element="aside">
 						<Island
 							priority="enhancement"
 							defer={{ until: 'visible' }}
@@ -623,7 +609,6 @@ export const AudioLayout = (props: WebProps) => {
 				)}
 				<Section
 					fullWidth={true}
-					data-print-layout="hide"
 					padSides={false}
 					backgroundColour={sourcePalette.brand[400]}
 					borderColour={sourcePalette.brand[600]}

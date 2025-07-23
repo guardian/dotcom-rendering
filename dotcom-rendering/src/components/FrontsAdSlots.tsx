@@ -64,7 +64,6 @@ export const MerchandisingSlot = ({
 		renderAds && (
 			<Section
 				fullWidth={true}
-				data-print-layout="hide"
 				padSides={false}
 				showTopBorder={false}
 				showSideBorders={false}

@@ -391,7 +391,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
-	const renderAds = isWeb && canRenderAds(article);
+	const renderAds = canRenderAds(article);
 
 	return (
 		<>
@@ -407,12 +407,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								shouldCenter={false}
 							>
 								<HeaderAdSlot
-									isPaidContent={
-										!!article.config.isPaidContent
-									}
-									shouldHideReaderRevenue={
-										!!article.config.shouldHideReaderRevenue
-									}
+									abTests={article.config.abTests}
 								/>
 							</Section>
 						</Stuck>
@@ -448,21 +443,18 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				</Stuck>
 			)}
 
-			{renderAds && hasSurveyAd && (
+			{isWeb && renderAds && hasSurveyAd && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 
 			<main data-layout="StandardLayout">
-				{isApps && (
-					<>
-						<Island priority="critical">
-							<AdPortals />
-						</Island>
-					</>
+				{isApps && renderAds && (
+					<Island priority="critical">
+						<AdPortals />
+					</Island>
 				)}
 				<Section
 					fullWidth={true}
-					data-print-layout="hide"
 					showTopBorder={false}
 					backgroundColour={themePalette('--article-background')}
 					borderColour={themePalette('--article-border')}
@@ -525,6 +517,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									isSensitive={article.config.isSensitive}
 									editionId={article.editionId}
 									hideCaption={isMedia}
+									shouldHideAds={article.shouldHideAds}
 								/>
 							</div>
 						</GridItem>
@@ -616,6 +609,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
+												pageId={article.config.pageId}
 											></ArticleMetaApps>
 										</div>
 									</Hide>
@@ -719,6 +713,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										article.isRightToLeftLang
 									}
 									editionId={article.editionId}
+									shouldHideAds={article.shouldHideAds}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (
@@ -831,7 +826,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											isPaidContent={
 												article.pageType.isPaidContent
 											}
-											renderAds={renderAds}
+											renderAds={isWeb && renderAds}
 											shouldHideReaderRevenue={
 												!!article.config
 													.shouldHideReaderRevenue
@@ -844,10 +839,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					</StandardGrid>
 				</Section>
 
-				{renderAds && !isLabs && (
+				{isWeb && renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
-						data-print-layout="hide"
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
@@ -914,7 +908,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<Section
 						fullWidth={true}
 						sectionId="comments"
-						data-print-layout="hide"
 						element="section"
 						backgroundColour={themePalette(
 							'--discussion-section-background',
@@ -946,7 +939,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						padContent={false}
 						verticalMargins={false}
 						element="aside"
-						data-print-layout="hide"
 						data-link-name="most-popular"
 						data-component="most-popular"
 						backgroundColour={themePalette(
@@ -954,7 +946,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						)}
 						borderColour={themePalette('--article-border')}
 					>
-						<MostViewedFooterLayout renderAds={renderAds}>
+						<MostViewedFooterLayout renderAds={isWeb && renderAds}>
 							<Island
 								priority="feature"
 								defer={{ until: 'visible' }}
@@ -969,10 +961,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					</Section>
 				)}
 
-				{renderAds && !isLabs && (
+				{isWeb && renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
-						data-print-layout="hide"
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
@@ -991,7 +982,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					{props.NAV.subNavSections && (
 						<Section
 							fullWidth={true}
-							data-print-layout="hide"
 							padSides={false}
 							element="aside"
 						>
@@ -1009,7 +999,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					)}
 					<Section
 						fullWidth={true}
-						data-print-layout="hide"
 						padSides={false}
 						backgroundColour={sourcePalette.brand[400]}
 						borderColour={sourcePalette.brand[600]}
@@ -1062,7 +1051,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				<>
 					<Section
 						fullWidth={true}
-						data-print-layout="hide"
 						backgroundColour={themePalette('--ad-background')}
 						borderColour={themePalette('--article-border')}
 						padSides={false}

@@ -1,56 +1,46 @@
-/**
- * @file
- * This file was migrated from:
- * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/designableBanner/DesignableBanner.tsx
- */
 import { css } from '@emotion/react';
 import {
 	between,
 	from,
 	neutral,
+	palette,
 	space,
 	specialReport,
-	textEgyptian15,
-	textSans17,
-	textSansBold17,
+	textSans15,
 	until,
 } from '@guardian/source/foundations';
-import { Button, SvgGuardianLogo } from '@guardian/source/react-components';
-import { Ticker } from '@guardian/source-development-kitchen/react-components';
 import {
-	hexColourToString,
-	SecondaryCtaType,
-} from '@guardian/support-dotcom-components';
+	LinkButton,
+	SvgArrowRightStraight,
+	SvgGuardianLogo,
+} from '@guardian/source/react-components';
+import { Ticker } from '@guardian/source-development-kitchen/react-components';
+import { hexColourToString } from '@guardian/support-dotcom-components';
 import type {
 	BannerDesignHeaderImage,
 	BannerDesignImage,
 	ConfigurableDesign,
 	Image,
 } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import { useEffect, useState } from 'react';
 import {
 	removeMediaRulePrefix,
 	useMatchMedia,
 } from '../../../../lib/useMatchMedia';
-import { useChoiceCards } from '../../hooks/useChoiceCards';
-import { useReminder } from '../../hooks/useReminder';
+import { getChoiceCards } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
+import { getChoiceCardUrl } from '../../lib/tracking';
+import { ThreeTierChoiceCards } from '../../shared/ThreeTierChoiceCards';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
-import type {
-	BannerEnrichedReminderCta,
-	BannerRenderProps,
-} from '../common/types';
-import type { ChoiceCardSettings } from './components/choiceCards/ChoiceCards';
-import { ChoiceCards } from './components/choiceCards/ChoiceCards';
+import type { BannerRenderProps } from '../common/types';
 import { DesignableBannerArticleCount } from './components/DesignableBannerArticleCount';
 import { DesignableBannerBody } from './components/DesignableBannerBody';
 import { DesignableBannerCloseButton } from './components/DesignableBannerCloseButton';
 import { DesignableBannerCtas } from './components/DesignableBannerCtas';
 import { DesignableBannerHeader } from './components/DesignableBannerHeader';
-import { DesignableBannerReminder } from './components/DesignableBannerReminder';
 import { DesignableBannerVisual } from './components/DesignableBannerVisual';
-import type { BannerTemplateSettings, CtaSettings } from './settings';
-import { buttonStyles } from './styles/buttonStyles';
+import type { BannerTemplateSettings, ChoiceCardSettings } from './settings';
 import { templateSpacing } from './styles/templateStyles';
 
 const buildImageSettings = (
@@ -124,18 +114,14 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	articleCounts,
 	onCtaClick,
 	onSecondaryCtaClick,
-	reminderTracking,
 	separateArticleCount, // legacy field
 	separateArticleCountSettings,
 	tickerSettings,
-	choiceCardAmounts,
-	countryCode,
+	choiceCardsSettings,
 	submitComponentEvent,
 	design,
 }: BannerRenderProps): JSX.Element => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
-	const { isReminderActive, onReminderCtaClick, mobileReminderRef } =
-		useReminder(reminderTracking);
 
 	// We can use this to shorten the banner if the "open in app" banner is present
 	const [iosAppBannerPresent, setIosAppBannerPresent] = useState(false);
@@ -160,18 +146,12 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		}
 	}, [iosAppBannerPresent, submitComponentEvent]);
 
-	const {
-		choiceCardSelection,
-		setChoiceCardSelection,
-		getCtaText,
-		getCtaUrl,
-		currencySymbol,
-	} = useChoiceCards(
-		choiceCardAmounts,
-		countryCode,
-		content.mainContent.primaryCta,
-		content.mobileContent.primaryCta,
-	);
+	const choiceCards = getChoiceCards(isTabletOrAbove, choiceCardsSettings);
+	const defaultChoiceCard = choiceCards?.find((cc) => cc.isDefault);
+
+	const [selectedChoiceCard, setSelectedChoiceCard] = useState<
+		ChoiceCard | undefined
+	>(defaultChoiceCard);
 
 	// We can't render anything without a design
 	if (!design) {
@@ -189,6 +169,11 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 
 	const imageSettings = buildMainImageSettings(design);
 	const choiceCardSettings = buildChoiceCardSettings(design);
+	const cardsImageOrSpaceTemplateString = choiceCardSettings
+		? 'choice-cards-container'
+		: imageSettings
+		? 'main-image'
+		: '.';
 
 	const templateSettings: BannerTemplateSettings = {
 		containerSettings: {
@@ -280,18 +265,12 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		},
 	};
 
-	// const isTabletOrAbove = useMediaQuery(from.tablet);
 	const mainOrMobileContent = isTabletOrAbove
 		? content.mainContent
 		: content.mobileContent;
 
-	const showChoiceCards = !!(
-		templateSettings.choiceCardSettings &&
-		choiceCardAmounts?.amountsCardData
-	);
-
 	const getHeaderContainerCss = () => {
-		if (templateSettings?.headerSettings?.headerImage) {
+		if (templateSettings.headerSettings?.headerImage) {
 			return styles.headerWithImageContainer(
 				templateSettings.containerSettings.backgroundColour,
 			);
@@ -301,10 +280,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 			!!templateSettings.imageSettings,
 		);
 	};
-
-	const showReminder =
-		mainOrMobileContent.secondaryCta?.type ===
-		SecondaryCtaType.ContributionsReminder;
 
 	const showAboveArticleCount =
 		(separateArticleCountSettings?.type === 'above' ||
@@ -319,24 +294,35 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 				templateSettings.containerSettings.textColor,
 			)}
 		>
-			<div css={styles.containerOverrides}>
-				<div css={getHeaderContainerCss()}>
-					<DesignableBannerHeader
-						heading={content.mainContent.heading}
-						mobileHeading={content.mobileContent.heading}
-						headerSettings={templateSettings.headerSettings}
-						headlineSize={design.fonts?.heading.size ?? 'medium'}
+			<div css={styles.layoutOverrides(cardsImageOrSpaceTemplateString)}>
+				<div css={styles.guardianLogoContainer}>
+					<SvgGuardianLogo
+						textColor={hexColourToString(basic.logo)}
 					/>
 				</div>
-				<div css={styles.contentContainer(showReminder)}>
-					{showAboveArticleCount && (
-						<DesignableBannerArticleCount
-							numArticles={articleCounts.forTargetedWeeks}
-							settings={templateSettings}
-							copy={separateArticleCountSettings?.copy}
-						/>
-					)}
 
+				<div css={styles.verticalLine} />
+
+				<div css={styles.contentContainer}>
+					<div css={getHeaderContainerCss()}>
+						<DesignableBannerHeader
+							heading={content.mainContent.heading}
+							mobileHeading={content.mobileContent.heading}
+							headerSettings={templateSettings.headerSettings}
+							headlineSize={
+								design.fonts?.heading.size ?? 'medium'
+							}
+						/>
+					</div>
+					{showAboveArticleCount && (
+						<div css={styles.articleCountContainer}>
+							<DesignableBannerArticleCount
+								numArticles={articleCounts.forTargetedWeeks}
+								settings={templateSettings}
+								copy={separateArticleCountSettings?.copy}
+							/>
+						</div>
+					)}
 					{tickerSettings?.tickerData &&
 						templateSettings.tickerStylingSettings && (
 							<div css={templateSpacing.bannerTicker}>
@@ -358,127 +344,89 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 							</div>
 						)}
 					<div css={templateSpacing.bannerBodyCopy}>
-						<DesignableBannerBody
-							mainContent={content.mainContent}
-							mobileContent={content.mobileContent}
-							highlightedTextSettings={
-								templateSettings.highlightedTextSettings
-							}
-						/>
+						<div css={styles.bodyCopyOverrides}>
+							<DesignableBannerBody
+								mainContent={content.mainContent}
+								mobileContent={content.mobileContent}
+								highlightedTextSettings={
+									templateSettings.highlightedTextSettings
+								}
+							/>
+						</div>
 					</div>
-
-					{!showChoiceCards && (
-						<DesignableBannerCtas
-							mainOrMobileContent={mainOrMobileContent}
-							onPrimaryCtaClick={onCtaClick}
-							onSecondaryCtaClick={onSecondaryCtaClick}
-							primaryCtaSettings={
-								templateSettings.primaryCtaSettings
-							}
-							secondaryCtaSettings={
-								templateSettings.secondaryCtaSettings
-							}
-						/>
-					)}
 				</div>
-				{templateSettings.imageSettings ? (
-					<div
-						css={styles.bannerVisualContainer(
-							templateSettings.containerSettings.backgroundColour,
-						)}
-					>
-						<DesignableBannerCloseButton
-							onCloseClick={onCloseClick}
-							settings={templateSettings.closeButtonSettings}
-							styleOverides={styles.closeButtonOverrides(false)}
-						/>
+
+				{templateSettings.imageSettings && (
+					<div css={styles.bannerVisualContainer}>
 						<DesignableBannerVisual
 							settings={templateSettings.imageSettings}
 							bannerId={templateSettings.bannerId}
 						/>
-
-						{/*
-                        I think `alternativeVisual` was for using SVG as the image, which is currently beyond the scope of the design tool. Suggest we remove?
-                    */}
 						{templateSettings.alternativeVisual}
 					</div>
-				) : (
+				)}
+
+				{!selectedChoiceCard && (
+					<div css={styles.outerImageCtaContainer}>
+						<div css={styles.innerImageCtaContainer}>
+							<DesignableBannerCtas
+								mainOrMobileContent={mainOrMobileContent}
+								onPrimaryCtaClick={onCtaClick}
+								onSecondaryCtaClick={onSecondaryCtaClick}
+								primaryCtaSettings={
+									templateSettings.primaryCtaSettings
+								}
+								secondaryCtaSettings={
+									templateSettings.secondaryCtaSettings
+								}
+							/>
+						</div>
+					</div>
+				)}
+
+				<div css={styles.closeButtonContainer}>
 					<DesignableBannerCloseButton
 						onCloseClick={onCloseClick}
 						settings={templateSettings.closeButtonSettings}
-						styleOverides={styles.closeButtonOverrides(true)}
-					/>
-				)}
-				{showChoiceCards && (
-					<div
-						css={styles.choiceCardsContainer(
-							templateSettings.containerSettings.backgroundColour,
-						)}
-					>
-						<ChoiceCards
-							setSelectionsCallback={setChoiceCardSelection}
-							selection={choiceCardSelection}
-							submitComponentEvent={submitComponentEvent}
-							currencySymbol={currencySymbol}
-							componentId={'contributions-banner-choice-cards'}
-							amountsTest={choiceCardAmounts}
-							design={templateSettings.choiceCardSettings}
-							getCtaText={getCtaText}
-							getCtaUrl={getCtaUrl}
-							cssCtaOverides={buttonStyles(
-								templateSettings.primaryCtaSettings,
-							)}
-							onCtaClick={onCtaClick}
-						/>
-					</div>
-				)}
-				<div css={styles.guardianLogoContainer}>
-					<SvgGuardianLogo
-						textColor={hexColourToString(basic.logo)}
 					/>
 				</div>
 
-				{showReminder && (
-					<div css={styles.reminderContainer}>
-						<span css={styles.reminderText}>
-							Not ready to support today?{' '}
-						</span>
-						<Button
-							priority="subdued"
-							onClick={onReminderCtaClick}
-							cssOverrides={styles.reminderCta(
-								templateSettings.secondaryCtaSettings,
-							)}
-						>
-							Remind me later
-						</Button>
-					</div>
-				)}
+				{choiceCards &&
+					selectedChoiceCard &&
+					mainOrMobileContent.primaryCta && (
+						<div css={styles.threeTierChoiceCardsContainer}>
+							<ThreeTierChoiceCards
+								selectedChoiceCard={selectedChoiceCard}
+								setSelectedChoiceCard={setSelectedChoiceCard}
+								choices={choiceCards}
+								id={'banner'}
+							/>
+
+							<div css={styles.ctaContainer}>
+								<LinkButton
+									href={getChoiceCardUrl(
+										selectedChoiceCard,
+										mainOrMobileContent.primaryCta.ctaUrl,
+									)}
+									onClick={onCtaClick}
+									priority="tertiary"
+									cssOverrides={styles.linkButtonStyles}
+									icon={<SvgArrowRightStraight />}
+									iconSide="right"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									Continue
+								</LinkButton>
+							</div>
+						</div>
+					)}
 			</div>
-
-			{isReminderActive && (
-				<div css={styles.reminderFormContainer}>
-					<div css={styles.containerOverrides}>
-						<DesignableBannerReminder
-							reminderCta={
-								mainOrMobileContent.secondaryCta as BannerEnrichedReminderCta
-							}
-							trackReminderSetClick={
-								reminderTracking.onReminderSetClick
-							}
-							setReminderCtaSettings={
-								templateSettings.secondaryCtaSettings
-							}
-							mobileReminderRef={
-								isTabletOrAbove ? null : mobileReminderRef
-							}
-						/>
-					</div>
-				</div>
-			)}
 		</div>
 	);
 };
+
+const phabletContentMaxWidth = '492px';
 
 const styles = {
 	outerContainer: (
@@ -488,163 +436,377 @@ const styles = {
 	) => css`
 		background: ${background};
 		color: ${textColor};
-		${limitHeight ? 'max-height: 70vh;' : ''}
-		overflow: auto;
+		bottom: 0px;
+		${limitHeight ? 'max-height: 60vh;' : ''}
+
 		* {
 			box-sizing: border-box;
 		}
-		${from.tablet} {
+		${from.phablet} {
 			border-top: 1px solid ${neutral[0]};
 		}
 		b,
 		strong {
 			font-weight: bold;
 		}
+		padding: 0 auto;
 	`,
-	containerOverrides: css`
-		display: flex;
-		flex-direction: column;
+	layoutOverrides: (cardsImageOrSpaceTemplateString: string) => css`
+		display: grid;
+		background: inherit;
 		position: relative;
-		padding: 0 10px;
-		${from.tablet} {
-			display: grid;
-			grid-template-columns: 1fr 280px;
-			grid-template-rows: auto 1fr auto;
-			column-gap: ${space[5]}px;
-			width: 100%;
-			max-width: 1300px;
+		bottom: 0px;
+
+		/* mobile first */
+		${until.phablet} {
+			max-width: 660px;
 			margin: 0 auto;
-			padding: 0 ${space[5]}px;
+			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
+			grid-template-columns: auto max(${phabletContentMaxWidth} auto);
+			grid-template-areas:
+				'. close-button .'
+				'. copy-container .'
+				'. ${cardsImageOrSpaceTemplateString} .'
+				'. cta-container .';
+		}
+		${from.phablet} {
+			max-width: 740px;
+			margin: 0 auto;
+			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
+			grid-template-columns: minmax(0, 0.5fr) ${phabletContentMaxWidth} minmax(
+					0,
+					0.5fr
+				);
+			grid-template-rows: auto auto auto;
+			grid-template-areas:
+				'. 	copy-container 						close-button'
+				'. 	${cardsImageOrSpaceTemplateString} 	.'
+				'. 	cta-container 						.';
 		}
 		${from.desktop} {
-			column-gap: 60px;
-			grid-template-columns: 1fr 460px;
+			max-width: 980px;
+			align-self: stretch;
+			padding: ${space[3]}px ${space[1]}px 0 ${space[3]}px;
+			grid-template-columns: auto 380px auto;
+			grid-template-rows: auto auto;
+
+			grid-template-areas:
+				'copy-container 	${cardsImageOrSpaceTemplateString} 	close-button'
+				'cta-container 		${cardsImageOrSpaceTemplateString} 	.			';
+		}
+		${from.leftCol} {
+			max-width: 1140px;
+			bottom: 0px;
+			/* the vertical line aligns with that of standard article */
+			grid-column-gap: 10px;
+			grid-template-columns: 140px 1px min(460px) min(380px) auto;
+			grid-template-rows: auto auto;
+			grid-template-areas:
+				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button'
+				'.		vert-line	cta-container	${cardsImageOrSpaceTemplateString}	.';
 		}
 		${from.wide} {
-			column-gap: 100px;
+			max-width: 1300px;
+			/* the vertical line aligns with that of standard article */
+			grid-template-columns: 219px 1px min(460px) min(380px) auto;
+			grid-template-rows: auto auto;
+			grid-template-areas:
+				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button'
+				'.		vert-line	cta-container	${cardsImageOrSpaceTemplateString}	.';
 		}
-		${templateSpacing.bannerContainer};
 	`,
-	closeButtonOverrides: (isGridCell: boolean) => css`
-		${until.tablet} {
-			position: fixed;
-			margin-top: ${space[3]}px;
-			padding-right: 10px;
-			right: 0;
-		}
-		${from.tablet} {
-			margin-top: ${space[3]}px;
+	verticalLine: css`
+		grid-area: vert-line;
 
-			${isGridCell
-				? css`
-						grid-column: 2;
-						grid-row: 1;
-				  `
-				: css`
-						margin-bottom: ${space[3]}px;
-						display: flex;
-						justify-content: flex-end;
-				  `}
+		${until.leftCol} {
+			display: none;
+		}
+		${from.leftCol} {
+			background-color: ${neutral[0]};
+			width: 1px;
+			opacity: 0.2;
+			margin: ${space[6]}px ${space[2]}px 0 ${space[2]}px;
+		}
+	`,
+	closeButtonContainer: css`
+		/* Layout changes only here */
+		grid-area: close-button;
+		${until.phablet} {
+			padding-right: ${space[2]}px;
+			justify-self: end;
+			position: sticky;
+			top: 10px;
+		}
+		${from.phablet} {
+			margin-top: ${space[2]}px;
+			padding-right: ${space[2]}px;
+			position: sticky;
+		}
+		${from.desktop} {
+			margin-top: ${space[6]}px;
+			justify-self: end;
+		}
+		${from.leftCol} {
+			justify-self: start;
+			padding-left: ${space[8]}px;
 		}
 	`,
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
-		order: ${bannerHasImage ? '2' : '1'};
-		${until.tablet} {
+		align-self: stretch;
+		justify-self: stretch;
+
+		${until.phablet} {
 			${bannerHasImage
 				? ''
 				: `max-width: calc(100% - 40px - ${space[3]}px);`}
 		}
 
-		${from.tablet} {
-			grid-column: 1;
-			grid-row: 1;
+		${from.phablet} {
 			background: ${background};
+			max-width: ${phabletContentMaxWidth};
 		}
 
-		${templateSpacing.bannerHeader}
+		${from.desktop} {
+			padding-top: ${space[3]}px;
+			padding-right: ${space[5]}px;
+		}
 	`,
 	headerWithImageContainer: (background: string) => css`
-		order: 1;
-		max-width: '100%';
-		${between.mobileMedium.and.tablet} {
-			order: '2';
-		}
+		max-width: 100%;
+		text-wrap: balance;
+
 		${from.tablet} {
-			grid-column: 1;
-			grid-row: 1;
+			max-width: ${phabletContentMaxWidth};
+		}
+
+		${from.desktop} {
 			background: ${background};
-		}
-		${templateSpacing.bannerHeader}
-	`,
-	contentContainer: (showRemindMeLater: boolean) => css`
-		order: 2;
-		${from.tablet} {
-			grid-column: 1;
-			grid-row: ${showRemindMeLater ? '2' : '2 / span 2'};
+			padding-top: ${space[3]}px;
 		}
 	`,
-	bannerVisualContainer: (background: string) => css`
-		order: 1;
-		background: ${background};
-		${from.tablet} {
-			grid-column: 2;
-			grid-row: 1 / span 2;
-			align-self: flex-start;
+	contentContainer: css`
+		grid-area: copy-container;
+
+		max-width: 100%;
+		align-self: start;
+
+		${from.phablet} {
+			max-width: ${phabletContentMaxWidth};
+		}
+		${from.desktop} {
+			padding-right: ${space[5]}px;
+			margin-bottom: ${space[2]}px;
+		}
+		${from.leftCol} {
+			padding-left: ${space[3]}px;
 		}
 	`,
-	choiceCardsContainer: (background: string) => css`
-		order: 3;
-		background: ${background};
+	/* ctas for use with main images */
+	outerImageCtaContainer: css`
+		grid-area: cta-container;
+
+		display: flex;
+		background-color: inherit;
+		align-items: center;
+		justify-content: stretch;
+		flex-direction: column;
+		gap: ${space[4]}px;
+
+		${until.phablet} {
+			width: 100vw;
+			position: sticky;
+			bottom: 0;
+			padding-top: ${space[2]}px;
+			padding-bottom: ${space[2]}px;
+			box-shadow: 0 -${space[1]}px ${space[3]}px 0 rgba(0, 0, 0, 0.25);
+			margin-right: -${space[3]}px;
+			margin-left: -${space[3]}px;
+
+			a {
+				width: calc(100% - 24px);
+			}
+		}
+		${from.phablet} {
+			justify-self: stretch;
+			align-items: start;
+			width: 100%;
+			margin-bottom: ${space[2]}px;
+			margin-left: 0px;
+			margin-right: 0px;
+		}
+		${from.desktop} {
+			width: 100%;
+			flex-wrap: nowrap;
+			margin-bottom: ${space[2]}px;
+		}
+		${from.leftCol} {
+			align-items: center;
+		}
+	`,
+	innerImageCtaContainer: css`
+		display: flex;
+		width: calc(100% - 24px);
+		flex-wrap: wrap;
+		flex-direction: row;
+		gap: ${space[2]}px;
+		justify-content: stretch;
+		margin-left: ${space[2]}px;
+		margin-right: ${space[2]}px;
+
+		> a {
+			flex: 1 0 100%;
+			justify-content: center;
+		}
+
 		${from.tablet} {
-			grid-column: 2;
-			grid-row: 2;
-			align-self: flex-start;
-			display: flex;
-			justify-content: flex-end;
+			justify-content: center;
+			margin-left: 0px;
+			margin-right: 0px;
+			max-width: 100%;
+		}
+
+		${from.desktop} {
+			> a {
+				flex-direction: column;
+				flex: 1 0 50%;
+				justify-self: stretch;
+			}
+			margin-left: 0px;
+			flex-direction: row;
+			flex-wrap: nowrap;
+		}
+	`,
+	bodyCopyOverrides: css`
+		p {
+			${textSans15}
+		}
+		span {
+			${textSans15}
+		}
+		.rr_banner_highlight > span {
+			font-weight: 700;
+		}
+	`,
+	bannerVisualContainer: css`
+		grid-area: main-image;
+
+		margin-left: ${space[2]}px;
+		margin-right: ${space[2]}px;
+
+		${from.phablet} {
+			max-width: ${phabletContentMaxWidth};
+			justify-self: center;
+		}
+		${from.desktop} {
+			margin-top: ${space[6]}px;
+			padding-left: ${space[2]}px;
+			justify-self: end;
+		}
+		${between.desktop.and.wide} {
+			max-width: 380px;
+		}
+		${from.wide} {
+			max-width: 485px;
+			align-self: start;
+		}
+	`,
+	threeTierChoiceCardsContainer: css`
+		grid-area: choice-cards-container;
+		max-width: 100%;
+
+		${until.desktop} {
+			margin-top: -${space[6]}px;
+		}
+		${from.phablet} {
+			max-width: ${phabletContentMaxWidth};
+		}
+		${from.desktop} {
+			justify-self: end;
+			width: 299px;
+		}
+		${between.desktop.and.wide} {
+			width: 380px;
+		}
+		${from.wide} {
+			align-self: start;
+			width: 380px;
 		}
 	`,
 	guardianLogoContainer: css`
-		display: none;
-		${from.tablet} {
-			display: block;
-			width: 100px;
-		}
-		grid-column: 2;
-		grid-row: 3;
-		justify-self: end;
-		padding-top: ${space[3]}px;
-	`,
-	reminderContainer: css`
-		${textEgyptian15};
-		grid-column: 1;
-		grid-row: 3;
-		order: 4;
-		align-self: center;
-		margin-top: ${space[2]}px;
+		grid-area: logo;
 
-		${from.tablet} {
-			align-self: end;
+		${until.leftCol} {
+			display: none;
+		}
+		${from.leftCol} {
+			justify-self: end;
+			width: 128px;
+			height: 41px;
+			justify-content: end;
+			margin-top: ${space[5]}px;
 		}
 	`,
-	reminderText: css`
-		${textSans17};
-		display: none;
-
-		${from.tablet} {
-			display: inline;
-		}
-	`,
-	reminderCta: ({ default: defaultSettings }: CtaSettings) => css`
-		${textSansBold17};
-		color: ${defaultSettings.backgroundColour};
-		display: inline;
-		height: auto;
-		min-height: auto;
-	`,
-
-	reminderFormContainer: css`
-		border-top: 2px solid ${neutral[0]};
+	/* choice card CTA container */
+	ctaContainer: css`
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		gap: ${space[4]}px;
 		margin-top: ${space[3]}px;
+
+		${until.phablet} {
+			width: 100vw;
+			position: sticky;
+			bottom: 0;
+			padding-top: ${space[3]}px;
+			padding-bottom: ${space[3]}px;
+			background-color: ${neutral[100]};
+			box-shadow: 0 -${space[1]}px ${space[3]}px 0 rgba(0, 0, 0, 0.25);
+			margin-right: -${space[3]}px;
+			margin-left: -${space[3]}px;
+
+			a {
+				width: calc(100% - 24px);
+			}
+		}
+
+		${between.phablet.and.desktop} {
+			bottom: 0;
+			margin-top: ${space[3]}px;
+			margin-bottom: ${space[6]}px;
+			border-radius: 50px;
+			a {
+				width: 100%;
+			}
+			> span {
+				width: auto;
+			}
+		}
+
+		${from.desktop} {
+			flex-direction: row;
+			margin-bottom: ${space[6]}px;
+			gap: 0;
+			margin-top: ${space[3]}px;
+			margin-right: 0;
+			margin-left: 0;
+
+			a {
+				width: 100%;
+			}
+
+			> span {
+				width: auto;
+			}
+		}
+	`,
+	linkButtonStyles: css`
+		background-color: ${palette.brandAlt[400]};
+		border-color: ${palette.brandAlt[400]};
+		width: 100%;
+	`,
+	articleCountContainer: css`
+		margin-bottom: ${space[3]}px;
 	`,
 };
 

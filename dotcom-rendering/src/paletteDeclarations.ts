@@ -2517,11 +2517,6 @@ const cardMediaBackgroundLight: PaletteFunction = () =>
 const cardMediaBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
 
-const cardMediaIconLight: PaletteFunction = (format) =>
-	cardMediaBackgroundLight(format);
-const cardMediaIconDark: PaletteFunction = (format) =>
-	cardMediaBackgroundDark(format);
-
 const cardMediaWaveformLight: PaletteFunction = () => sourcePalette.neutral[86];
 const cardMediaWaveformDark: PaletteFunction = () => sourcePalette.neutral[38];
 
@@ -3083,9 +3078,64 @@ const articleSectionBackgroundDark: PaletteFunction = () =>
 
 const articleSectionTitleLight: PaletteFunction = () =>
 	sourcePalette.neutral[0];
-
 const articleSectionTitleDark: PaletteFunction = () =>
 	sourcePalette.neutral[86];
+
+const articleSectionTitleNewsLight: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+const articleSectionTitleNewsDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
+const articleSectionTitleOpinionLight: PaletteFunction = () =>
+	sourcePalette.opinion[400];
+const articleSectionTitleOpinionDark: PaletteFunction = () =>
+	sourcePalette.opinion[500];
+
+const articleSectionTitleSportLight: PaletteFunction = () =>
+	sourcePalette.sport[400];
+const articleSectionTitleSportDark: PaletteFunction = () =>
+	sourcePalette.sport[500];
+
+const articleSectionTitleLifestyleLight: PaletteFunction = () =>
+	sourcePalette.lifestyle[400];
+const articleSectionTitleLifestyleDark: PaletteFunction = () =>
+	sourcePalette.lifestyle[450];
+
+const articleSectionTitleCultureLight: PaletteFunction = () =>
+	sourcePalette.culture[400];
+const articleSectionTitleCultureDark: PaletteFunction = () =>
+	sourcePalette.culture[450];
+
+const sectionBorderPrimaryLight: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+const sectionBorderPrimaryDark: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+
+const sectionBorderSecondaryLight: PaletteFunction = () =>
+	sourcePalette.neutral[73];
+const sectionBorderSecondaryDark: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+
+const sectionBorderNewsLight: PaletteFunction = () => sourcePalette.neutral[20];
+const sectionBorderNewsDark: PaletteFunction = () => sourcePalette.neutral[38];
+
+const sectionBorderOpinionLight: PaletteFunction = () =>
+	sourcePalette.opinion[450];
+const sectionBorderOpinionDark: PaletteFunction = () =>
+	sourcePalette.opinion[450];
+
+const sectionBorderSportLight: PaletteFunction = () => sourcePalette.sport[400];
+const sectionBorderSportDark: PaletteFunction = () => sourcePalette.sport[400];
+
+const sectionBorderLifestyleLight: PaletteFunction = () =>
+	sourcePalette.lifestyle[400];
+const sectionBorderLifestyleDark: PaletteFunction = () =>
+	sourcePalette.lifestyle[400];
+
+const sectionBorderCultureLight: PaletteFunction = () =>
+	sourcePalette.culture[400];
+const sectionBorderCultureDark: PaletteFunction = () =>
+	sourcePalette.culture[400];
 
 const articleSectionSecondaryTitleLight: PaletteFunction = () =>
 	sourcePalette.neutral[20];
@@ -6134,6 +6184,26 @@ const paletteColours = {
 		light: articleSectionTitleLight,
 		dark: articleSectionTitleDark,
 	},
+	'--article-section-title-culture': {
+		light: articleSectionTitleCultureLight,
+		dark: articleSectionTitleCultureDark,
+	},
+	'--article-section-title-lifestyle': {
+		light: articleSectionTitleLifestyleLight,
+		dark: articleSectionTitleLifestyleDark,
+	},
+	'--article-section-title-news': {
+		light: articleSectionTitleNewsLight,
+		dark: articleSectionTitleNewsDark,
+	},
+	'--article-section-title-opinion': {
+		light: articleSectionTitleOpinionLight,
+		dark: articleSectionTitleOpinionDark,
+	},
+	'--article-section-title-sport': {
+		light: articleSectionTitleSportLight,
+		dark: articleSectionTitleSportDark,
+	},
 	'--article-text': {
 		light: articleTextLight,
 		dark: articleTextDark,
@@ -6301,10 +6371,6 @@ const paletteColours = {
 	'--card-media-background': {
 		light: cardMediaBackgroundLight,
 		dark: cardMediaBackgroundDark,
-	},
-	'--card-media-icon': {
-		light: cardMediaIconLight,
-		dark: cardMediaIconDark,
 	},
 	'--card-media-sublinks-background': {
 		light: cardMediaSublinksBackgroundLight,
@@ -7303,13 +7369,33 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
 	},
+	'--section-border-culture': {
+		light: sectionBorderCultureLight,
+		dark: sectionBorderCultureDark,
+	},
+	'--section-border-lifestyle': {
+		light: sectionBorderLifestyleLight,
+		dark: sectionBorderLifestyleDark,
+	},
+	'--section-border-news': {
+		light: sectionBorderNewsLight,
+		dark: sectionBorderNewsDark,
+	},
+	'--section-border-opinion': {
+		light: sectionBorderOpinionLight,
+		dark: sectionBorderOpinionDark,
+	},
 	'--section-border-primary': {
-		light: () => sourcePalette.neutral[20],
-		dark: () => sourcePalette.neutral[86],
+		light: sectionBorderPrimaryLight,
+		dark: sectionBorderPrimaryDark,
 	},
 	'--section-border-secondary': {
-		light: () => sourcePalette.neutral[73],
-		dark: () => sourcePalette.neutral[38],
+		light: sectionBorderSecondaryLight,
+		dark: sectionBorderSecondaryDark,
+	},
+	'--section-border-sport': {
+		light: sectionBorderSportLight,
+		dark: sectionBorderSportDark,
 	},
 	'--section-date': {
 		light: () => sourcePalette.news[400],

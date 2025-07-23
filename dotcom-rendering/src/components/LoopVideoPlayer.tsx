@@ -1,7 +1,12 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
 import type { IconProps } from '@guardian/source/react-components';
-import type { Dispatch, SetStateAction, SyntheticEvent } from 'react';
+import type {
+	Dispatch,
+	ReactElement,
+	SetStateAction,
+	SyntheticEvent,
+} from 'react';
 import { forwardRef } from 'react';
 import { palette } from '../palette';
 import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
@@ -55,28 +60,40 @@ export const PLAYER_STATES = [
 	'NOT_STARTED',
 	'PLAYING',
 	'PAUSED_BY_USER',
+	/**
+	 * The video is paused when the user scrolls away.
+	 */
 	'PAUSED_BY_INTERSECTION_OBSERVER',
+	/**
+	 * The browser may elect to suspend playback under certain circumstances.
+	 * For example, iOS devices in low power mode will suspend playback on autoplaying videos.
+	 */
+	'PAUSED_BY_BROWSER',
 ] as const;
+
+export type PlayerStates = (typeof PLAYER_STATES)[number];
 
 type Props = {
 	src: string;
+	atomId: string;
 	uniqueId: string;
 	width: number;
 	height: number;
-	fallbackImageComponent: JSX.Element;
+	FallbackImageComponent: ReactElement;
 	isPlayable: boolean;
-	setIsPlayable: Dispatch<SetStateAction<boolean>>;
-	playerState: (typeof PLAYER_STATES)[number];
+	playerState: PlayerStates;
 	currentTime: number;
 	setCurrentTime: Dispatch<SetStateAction<number>>;
 	isMuted: boolean;
+	handleCanPlay: (event: SyntheticEvent) => void;
 	handlePlayPauseClick: (event: SyntheticEvent) => void;
 	handleAudioClick: (event: SyntheticEvent) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
+	handlePause: (event: SyntheticEvent) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	AudioIcon: (iconProps: IconProps) => JSX.Element;
 	posterImage?: string;
-	shouldPreload: boolean;
+	preloadPartialData: boolean;
 	showPlayIcon: boolean;
 };
 
@@ -88,23 +105,25 @@ export const LoopVideoPlayer = forwardRef(
 	(
 		{
 			src,
+			atomId,
 			uniqueId,
 			width,
 			height,
-			fallbackImageComponent,
+			FallbackImageComponent,
 			posterImage,
 			isPlayable,
-			setIsPlayable,
 			playerState,
 			currentTime,
 			setCurrentTime,
 			isMuted,
+			handleCanPlay,
 			handlePlayPauseClick,
 			handleAudioClick,
 			handleKeyDown,
+			handlePause,
 			onError,
 			AudioIcon,
-			shouldPreload,
+			preloadPartialData,
 			showPlayIcon,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
@@ -116,17 +135,22 @@ export const LoopVideoPlayer = forwardRef(
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Captions will be considered later. */}
 				<video
 					id={loopVideoId}
+					css={videoStyles(width, height)}
 					ref={ref}
-					preload={shouldPreload ? 'metadata' : 'none'}
+					tabIndex={0}
+					data-testid="loop-video"
+					height={height}
+					width={width}
+					data-link-name={`gu-video-loop-${
+						showPlayIcon ? 'play' : 'pause'
+					}-${atomId}`}
+					preload={preloadPartialData ? 'metadata' : 'none'}
 					loop={true}
 					muted={isMuted}
 					playsInline={true}
-					height={height}
-					width={width}
 					poster={posterImage}
-					onCanPlay={() => {
-						setIsPlayable(true);
-					}}
+					onCanPlay={handleCanPlay}
+					onCanPlayThrough={handleCanPlay}
 					onTimeUpdate={() => {
 						if (
 							ref &&
@@ -137,16 +161,15 @@ export const LoopVideoPlayer = forwardRef(
 							setCurrentTime(ref.current.currentTime);
 						}
 					}}
+					onPause={handlePause}
 					onClick={handlePlayPauseClick}
 					onKeyDown={handleKeyDown}
-					role="button"
-					tabIndex={0}
 					onError={onError}
-					css={videoStyles(width, height)}
 				>
 					{/* Only mp4 is currently supported. Assumes the video file type is mp4. */}
-					<source src={src} type="video/mp4" />
-					{fallbackImageComponent}
+					{/* The start time is set to 1ms so that Safari will autoplay the video */}
+					<source src={`${src}#t=0.001`} type="video/mp4" />
+					{FallbackImageComponent}
 				</video>
 				{ref && 'current' in ref && ref.current && isPlayable && (
 					<>
@@ -156,6 +179,8 @@ export const LoopVideoPlayer = forwardRef(
 								type="button"
 								onClick={handlePlayPauseClick}
 								css={playIconStyles}
+								data-link-name={`gu-video-loop-play-${atomId}`}
+								data-testid="play-icon"
 							>
 								<PlayIcon iconWidth="narrow" />
 							</button>
@@ -171,8 +196,16 @@ export const LoopVideoPlayer = forwardRef(
 							type="button"
 							onClick={handleAudioClick}
 							css={audioButtonStyles}
+							data-link-name={`gu-video-loop-${
+								isMuted ? 'unmute' : 'mute'
+							}-${atomId}`}
 						>
-							<div css={audioIconContainerStyles}>
+							<div
+								css={audioIconContainerStyles}
+								data-testId={`${
+									isMuted ? 'unmute' : 'mute'
+								}-icon`}
+							>
 								<AudioIcon
 									size="xsmall"
 									theme={{

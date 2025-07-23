@@ -65,6 +65,7 @@ export const ThemeVariations = {
 		pageId: 'testID',
 		switches: {},
 		RenderArticleElement,
+		shouldHideAds: false,
 	},
 	decorators: [centreColumnDecorator],
 	parameters: {

@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	getSublinks,
+	loopVideoCard,
 	opinionTrails,
 	trails,
 } from '../../fixtures/manual/trails';
@@ -18,7 +19,7 @@ import type {
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FrontSection } from './FrontSection';
 
-const defaultGroupedTrails: DCRGroupedTrails = {
+const emptyGroupedTrails: DCRGroupedTrails = {
 	huge: [],
 	veryBig: [],
 	big: [],
@@ -143,7 +144,7 @@ const meta = {
 	},
 	args: {
 		frontSectionTitle: 'Flexible general',
-		groupedTrails: defaultGroupedTrails,
+		groupedTrails: emptyGroupedTrails,
 		showAge: true,
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
@@ -171,7 +172,7 @@ export const SplashWithStandards: Story = {
 	args: {
 		frontSectionTitle: 'Splash with stardards',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			splash: [{ ...splashCard, supportingContent: [] }],
 			standard: standardCards,
 		},
@@ -182,7 +183,7 @@ export const SplashWithSublinks: Story = {
 	name: 'Standard splash with sublinks',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			splash: [{ ...splashCard, image: undefined }],
 		},
 	},
@@ -203,7 +204,7 @@ export const SplashWithSublinks: Story = {
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
-						...defaultGroupedTrails,
+						...emptyGroupedTrails,
 						splash: [{ ...splashCard, supportingContent }],
 					}}
 				/>
@@ -259,28 +260,7 @@ const liveUpdatesCard = {
 		title: 'Spain fans celebrate at final whistle as England fans left heartbroken – video',
 		duration: 0,
 		expired: false,
-		images: [
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/2000.jpg',
-				width: 2000,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/1000.jpg',
-				width: 1000,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/500.jpg',
-				width: 500,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/140.jpg',
-				width: 140,
-			},
-			{
-				url: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/4791.jpg',
-				width: 4791,
-			},
-		],
+		image: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/4791.jpg',
 	},
 	isExternalLink: false,
 	discussionApiUrl,
@@ -297,7 +277,7 @@ export const SplashBoostLevels: Story = {
 	name: 'Splash boost levels',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			splash: [{ ...splashCard, image: undefined }],
 		},
 	},
@@ -318,7 +298,7 @@ export const SplashBoostLevels: Story = {
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
-						...defaultGroupedTrails,
+						...emptyGroupedTrails,
 						splash: [
 							{
 								...splashCard,
@@ -345,7 +325,7 @@ export const SplashWithImageSupression: Story = {
 	name: 'Splash with image supression',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			splash: [{ ...splashCard, image: undefined }],
 		},
 	},
@@ -366,7 +346,7 @@ export const SplashWithImageSupression: Story = {
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
-						...defaultGroupedTrails,
+						...emptyGroupedTrails,
 						splash: [
 							{ ...splashCard, boostLevel, image: undefined },
 						],
@@ -390,7 +370,7 @@ export const SplashWithLiveUpdates: Story = {
 	name: 'Splash with live updates',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			splash: [{ ...splashCard, image: undefined }],
 		},
 	},
@@ -412,7 +392,7 @@ export const SplashWithLiveUpdates: Story = {
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
-						...defaultGroupedTrails,
+						...emptyGroupedTrails,
 						splash: [{ ...liveUpdatesCard, boostLevel }],
 					}}
 				/>
@@ -462,7 +442,7 @@ export const DefaultSplashWithLiveUpdatesAndSlideshow: Story = {
 	args: {
 		frontSectionTitle: 'Standard splash with live updates and slideshow',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 
 			splash: [{ ...slideshowCard }],
 		},
@@ -474,7 +454,7 @@ export const StandardCards: Story = {
 	args: {
 		frontSectionTitle: 'Standard cards',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			standard: trails.slice(0, 4),
 		},
 	},
@@ -485,7 +465,7 @@ export const OpinionStandardCards: Story = {
 	args: {
 		frontSectionTitle: 'Opinion standard cards',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			standard: opinionTrails.slice(0, 2),
 		},
 	},
@@ -511,7 +491,7 @@ export const WithSpecialPaletteVariations = {
 	name: 'With special palette variations',
 	args: {
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			splash: [
 				{
 					...splashCard,
@@ -548,7 +528,7 @@ export const SecondaryContainerStandardCards: Story = {
 		frontSectionTitle: 'Secondary container with standard cards',
 		containerLevel: 'Secondary',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			standard: standardCards.slice(0, 4),
 		},
 	},
@@ -559,11 +539,23 @@ export const ImmersiveCardsSplashAndStandard: Story = {
 	args: {
 		frontSectionTitle: 'Immersive cards',
 		groupedTrails: {
-			...defaultGroupedTrails,
+			...emptyGroupedTrails,
 			splash: [
 				{ ...splashCard, isImmersive: true, supportingContent: [] },
 			],
 			standard: [{ ...trails[0], isImmersive: true }],
+		},
+	},
+};
+
+export const LoopVideoCards: Story = {
+	name: 'Looping video cards',
+	args: {
+		frontSectionTitle: 'Loop video cards',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			splash: [loopVideoCard],
+			standard: [loopVideoCard], // Loop video is disabled at standard card size
 		},
 	},
 };

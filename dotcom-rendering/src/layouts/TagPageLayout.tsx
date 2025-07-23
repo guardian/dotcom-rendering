@@ -77,10 +77,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot
-								isPaidContent={!!tagPage.config.isPaidContent}
-								shouldHideReaderRevenue={false}
-							/>
+							<HeaderAdSlot abTests={tagPage.config.abTests} />
 						</Section>
 					</Stuck>
 				)}
@@ -178,6 +175,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									speed={tagPage.speed}
 									imageLoading={imageLoading}
 									isTagPage={true}
+									aspectRatio={'5:4'}
 								/>
 							</FrontSection>
 							{mobileAdPositions.includes(index) && (
@@ -210,7 +208,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 				<Section
 					fullWidth={true}
 					showTopBorder={true}
-					data-print-layout="hide"
 					padSides={false}
 					element="aside"
 				>
@@ -226,7 +223,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 
 			<Section
 				fullWidth={true}
-				data-print-layout="hide"
 				padSides={false}
 				backgroundColour={palette.brand[400]}
 				borderColour={palette.brand[600]}

@@ -8,7 +8,7 @@
 4. Install dependencies:
 
 ```sh
-pnpm
+pnpm install
 ```
 
 ### Run (Development)

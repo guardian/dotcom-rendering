@@ -65,6 +65,7 @@ type RendererProps = {
 	abTests: ServerSideTests;
 	switches: Switches;
 	editionId: EditionId;
+	shouldHideAds: boolean;
 };
 
 const Renderer = ({
@@ -79,6 +80,7 @@ const Renderer = ({
 	abTests,
 	switches,
 	editionId,
+	shouldHideAds,
 }: RendererProps) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
@@ -100,6 +102,7 @@ const Renderer = ({
 			abTests,
 			switches,
 			editionId,
+			shouldHideAds,
 		});
 
 		switch (element._type) {
@@ -166,12 +169,7 @@ const NavHeader = ({ article, NAV, format, renderAds }: HeaderProps) => {
 							shouldCenter={false}
 							element="aside"
 						>
-							<HeaderAdSlot
-								isPaidContent={!!article.config.isPaidContent}
-								shouldHideReaderRevenue={
-									!!article.config.shouldHideReaderRevenue
-								}
-							/>
+							<HeaderAdSlot abTests={article.config.abTests} />
 						</Section>
 					</div>
 				</Stuck>
@@ -305,6 +303,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}
 						editionId={article.editionId}
+						shouldHideAds={article.shouldHideAds}
 					/>
 				</article>
 			</Section>

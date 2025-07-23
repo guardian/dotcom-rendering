@@ -63,6 +63,7 @@ export const AllThemes = {
 		pageId: 'testID',
 		switches: {},
 		RenderArticleElement,
+		shouldHideAds: false,
 	},
 	decorators: [centreColumnDecorator],
 	parameters: {

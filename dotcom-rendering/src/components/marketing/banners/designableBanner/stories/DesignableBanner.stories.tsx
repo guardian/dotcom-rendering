@@ -1,9 +1,3 @@
-/**
- * @file
- * This file was migrated from:
- * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/designableBanner/stories/DesignableBanner.stories.tsx
- */
-import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type {
 	BannerDesignImage,
 	SelectedAmountsVariant,
@@ -11,16 +5,20 @@ import type {
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
-import { DesignableBannerUnvalidated as DesignableBanner } from '../../../banners/designableBanner/DesignableBanner';
+import {
+	choiceCardsSettings,
+	choiceCardsWithDestinationUrl,
+	choiceCardsWithDestinationUrlTwoCards,
+} from '../../../lib/storybook';
 import {
 	contentNoHeading,
-	contentWithHeading,
 	design,
 	mobileContentNoHeading,
-	mobileContentWithHeading,
 	props,
 	stringToHexColour,
+	tracking,
 } from '../../utils/storybook';
+import { DesignableBannerUnvalidated as DesignableBanner } from '../DesignableBanner';
 
 type WithJsonProps<T> = T & { json?: string };
 type Props = WithJsonProps<React.ComponentProps<typeof DesignableBanner>>;
@@ -50,19 +48,6 @@ export const Default: Story = {
 	name: 'Basic DesignableBanner',
 };
 
-const tickerSettings: TickerSettings = {
-	currencySymbol: '£',
-	copy: {
-		countLabel: '',
-		goalCopy: 'goal',
-	},
-	tickerData: {
-		total: 500000,
-		goal: 1000000,
-	},
-	name: 'US',
-};
-
 const regularChoiceCardAmounts: SelectedAmountsVariant = {
 	testName: 'Storybook_test',
 	variantName: 'CONTROL',
@@ -90,35 +75,6 @@ const regularChoiceCardAmounts: SelectedAmountsVariant = {
 		},
 	},
 };
-
-const edgeCaseChoiceCardAmounts: SelectedAmountsVariant = {
-	testName: 'Storybook_test',
-	variantName: 'CONTROL',
-	defaultContributionType: 'ANNUAL',
-	displayContributionType: ['ONE_OFF', 'ANNUAL'],
-	amountsCardData: {
-		// Card should show only the "other" button (overrides hidden requirement)
-		ONE_OFF: {
-			amounts: [],
-			defaultAmount: 1,
-			hideChooseYourAmount: true,
-		},
-		// Card should not include a monthly tab or monthly amounts
-		MONTHLY: {
-			amounts: [3, 6, 10],
-			defaultAmount: 10,
-			hideChooseYourAmount: true,
-		},
-		// Card should initially display showing Annual amounts
-		// Card should show £100 (default), £200 and £300 buttons
-		ANNUAL: {
-			amounts: [100, 200, 300],
-			defaultAmount: 100,
-			hideChooseYourAmount: true,
-		},
-	},
-};
-
 const headerImage: BannerDesignImage = {
 	kind: 'Image',
 	mobileUrl:
@@ -141,32 +97,21 @@ const regularImage: BannerDesignImage = {
 	altText: 'Example alt text',
 };
 
-export const DesignOneImageOnly: Story = {
-	name: 'DesignableBanner with image only',
-	args: {
-		...meta.args,
-		design: {
-			...design,
-			visual: regularImage,
-			colours: {
-				...design.colours,
-				secondaryCta: {
-					default: {
-						background: stringToHexColour('052962'),
-						text: stringToHexColour('FFFFFF'),
-					},
-					hover: {
-						background: stringToHexColour('234B8A'),
-						text: stringToHexColour('FFFFFF'),
-					},
-				},
-			},
-		},
+const tickerSettings: TickerSettings = {
+	currencySymbol: '£',
+	copy: {
+		countLabel: '',
+		goalCopy: 'Goal',
 	},
+	tickerData: {
+		total: 500000,
+		goal: 1000000,
+	},
+	name: 'US',
 };
 
-export const DesignTwoRegularAmounts: Story = {
-	name: 'DesignableBanner with regular amounts',
+export const WithThreeTierChoiceCards: Story = {
+	name: 'With three tier choice cards',
 	args: {
 		...meta.args,
 		design: {
@@ -176,32 +121,39 @@ export const DesignTwoRegularAmounts: Story = {
 				buttonColour: stringToHexColour('E5E5E5'),
 			},
 		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
+		},
 		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
 	},
 };
 
-export const DesignTwoEdgeCaseAmounts: Story = {
-	name: 'DesignableBanner with edge case amounts',
+export const ThreeTierChoiceCardsWithHeaderImageAndCopy: Story = {
+	name: 'With three tier choice cards + header image + header copy',
 	args: {
 		...meta.args,
 		design: {
 			...design,
+			headerImage,
 			visual: {
 				kind: 'ChoiceCards',
-				buttonColour: stringToHexColour('883333'),
-				buttonTextColour: stringToHexColour('FFFFFF'),
-				buttonBorderColour: stringToHexColour('8888FF'),
-				buttonSelectColour: stringToHexColour('338833'),
-				buttonSelectTextColour: stringToHexColour('FFFF88'),
-				buttonSelectBorderColour: stringToHexColour('88FF88'),
+				buttonColour: stringToHexColour('E5E5E5'),
 			},
 		},
-		choiceCardAmounts: edgeCaseChoiceCardAmounts,
+
+		tracking: {
+			...tracking,
+			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
+		},
+		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
 	},
 };
 
-export const DesignThreeHeaderImageOnly: Story = {
-	name: 'DesignableBanner with header image and no header copy',
+export const HeaderImageOnly: Story = {
+	name: 'With header image and no header copy',
 	args: {
 		...meta.args,
 		content: contentNoHeading,
@@ -221,35 +173,32 @@ export const DesignThreeHeaderImageOnly: Story = {
 				},
 			},
 		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
+		},
 		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
 	},
 };
 
-export const DesignFourHeaderImageAndCopy: Story = {
-	name: 'DesignableBanner with header image and header copy',
+export const MainImage: Story = {
+	name: 'With main image',
 	args: {
 		...meta.args,
 		design: {
 			...design,
-			headerImage,
-			visual: {
-				kind: 'ChoiceCards',
-				buttonColour: stringToHexColour('E5E5E5'),
-			},
-			colours: {
-				...design.colours,
-				basic: {
-					...design.colours.basic,
-					background: stringToHexColour('FFFFFF'),
-				},
-			},
+			visual: regularImage,
 		},
-		choiceCardAmounts: regularChoiceCardAmounts,
+		tracking: {
+			...tracking,
+			abTestVariant: 'MAIN_IMAGE',
+		},
 	},
 };
 
 export const DesignThreeAnimatedHeaderImage: Story = {
-	name: 'DesignableBanner with animated header image',
+	name: 'With animated header image',
 	args: {
 		...meta.args,
 		content: contentNoHeading,
@@ -278,55 +227,37 @@ export const DesignThreeAnimatedHeaderImage: Story = {
 			},
 		},
 		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
 	},
 };
 
-export const NoChoiceCardOrImage: Story = {
-	name: 'DesignableBanner with no choice cards or image',
+export const WithTickerAndThreeTierChoiceCards: Story = {
+	name: 'With ticker + three tier choice cards',
 	args: {
 		...meta.args,
+		tickerSettings,
 		design: {
 			...design,
-			visual: undefined,
+			visual: {
+				kind: 'ChoiceCards',
+				buttonColour: stringToHexColour('E5E5E5'),
+			},
 		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
+		},
+		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
 	},
 };
 
-export const WithNonSupportUrl: Story = {
-	name: 'DesignableBanner with non-support site url',
+export const WithThreeTierChoiceCardsAndArticleCount: Story = {
+	name: 'With article count + three tier choice cards',
 	args: {
 		...meta.args,
-		content: {
-			...contentWithHeading,
-			cta: {
-				baseUrl: 'theguardian.com',
-				text: 'Continue to the Guardian',
-			},
-		},
-		design: {
-			...design,
-			visual: undefined,
-		},
-	},
-};
-
-export const WithRemindMeLater: Story = {
-	name: 'DesignableBanner with reminder CTA',
-	args: {
-		...meta.args,
-		content: {
-			...contentWithHeading,
-			secondaryCta: {
-				...contentWithHeading.secondaryCta,
-				type: SecondaryCtaType.ContributionsReminder,
-			},
-		},
-		mobileContent: {
-			...mobileContentWithHeading,
-			secondaryCta: {
-				...mobileContentWithHeading.secondaryCta,
-				type: SecondaryCtaType.ContributionsReminder,
-			},
+		separateArticleCountSettings: {
+			type: 'above',
 		},
 		design: {
 			...design,
@@ -334,67 +265,77 @@ export const WithRemindMeLater: Story = {
 				kind: 'ChoiceCards',
 				buttonColour: stringToHexColour('E5E5E5'),
 			},
-			colours: {
-				...design.colours,
-				secondaryCta: {
-					default: {
-						background: stringToHexColour('052962'),
-						text: stringToHexColour('FFFFFF'),
-					},
-					hover: {
-						background: stringToHexColour('234B8A'),
-						text: stringToHexColour('FFFFFF'),
-					},
-				},
-			},
+		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
 		},
 		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
 	},
 };
 
-export const ArticleCountSubheadingDefaultCopy: Story = {
-	name: 'DesignableBanner with article count subheading, default copy',
+export const NoChoiceCardOrImage: Story = {
+	name: 'With no choice cards or image',
 	args: {
 		...meta.args,
-		separateArticleCountSettings: {
-			type: 'above',
-		},
-	},
-};
-
-export const ArticleCountSubheadingCustomCopy: Story = {
-	name: 'DesignableBanner with article count subheading, custom copy',
-	args: {
-		...meta.args,
-		separateArticleCountSettings: {
-			type: 'above',
-			copy: 'You’ve read %%ARTICLE_COUNT%% articles in the last year.',
-		},
-		articleCounts: {
-			for52Weeks: 12,
-			forTargetedWeeks: 12,
+		design: {
+			...design,
+			visual: undefined,
 		},
 	},
 };
 
-export const ArticleCountSubheadingTopReader: Story = {
-	name: 'DesignableBanner with article count subheading, top reader',
+export const WithDestinationUrlAllCards: Story = {
+	name: 'With destinationUrl on all choice cards',
 	args: {
 		...meta.args,
-		separateArticleCountSettings: {
-			type: 'above',
+		design: {
+			...design,
+			visual: {
+				kind: 'ChoiceCards',
+				buttonColour: stringToHexColour('E5E5E5'),
+			},
 		},
-		articleCounts: {
-			for52Weeks: 51,
-			forTargetedWeeks: 51,
+		tracking: {
+			...tracking,
+			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
+		},
+		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings: choiceCardsWithDestinationUrl,
+	},
+	parameters: {
+		docs: {
+			description: {
+				story: 'All choice cards have a destinationUrl configured. The banner should use these custom URLs instead of constructing URLs with product parameters.',
+			},
 		},
 	},
 };
 
-export const WithTicker: Story = {
-	name: 'DesignableBanner with ticker',
+export const WithDestinationUrlTwoCards: Story = {
+	name: 'With destinationUrl in two choice cards',
 	args: {
 		...meta.args,
-		tickerSettings,
+		design: {
+			...design,
+			visual: {
+				kind: 'ChoiceCards',
+				buttonColour: stringToHexColour('E5E5E5'),
+			},
+		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
+		},
+		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings: choiceCardsWithDestinationUrlTwoCards,
+	},
+	parameters: {
+		docs: {
+			description: {
+				story: 'All choice cards have a destinationUrl configured. The banner should use these custom URLs instead of constructing URLs with product parameters.',
+			},
+		},
 	},
 };
