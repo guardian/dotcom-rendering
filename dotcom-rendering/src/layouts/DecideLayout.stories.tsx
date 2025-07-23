@@ -248,9 +248,7 @@ const standardStandardLabsAppsFixture: Article = {
 
 export const WebStandardStandardLabsLight: Story = {
 	args: {
-		article: {
-			...standardStandardLabsWebFixture,
-		},
+		article: standardStandardLabsWebFixture,
 	},
 	parameters: webParameters,
 };
