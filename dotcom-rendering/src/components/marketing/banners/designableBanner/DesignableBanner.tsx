@@ -40,7 +40,13 @@ import { DesignableBannerCloseButton } from './components/DesignableBannerCloseB
 import { DesignableBannerCtas } from './components/DesignableBannerCtas';
 import { DesignableBannerHeader } from './components/DesignableBannerHeader';
 import { DesignableBannerVisual } from './components/DesignableBannerVisual';
-import type { BannerTemplateSettings, ChoiceCardSettings } from './settings';
+import type {
+	BannerTemplateSettings,
+	ChoiceCardSettings,
+	CtaSettings,
+	CtaStateSettings,
+} from './settings';
+import { buttonThemes } from './styles/buttonStyles';
 import { templateSpacing } from './styles/templateStyles';
 
 const buildImageSettings = (
@@ -175,6 +181,15 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		? 'main-image'
 		: '.';
 
+	// TODO: I assume we're planning on making this adjustable in RRCP in future.
+	const choiceCardButtonCtaStateSettings: CtaStateSettings = {
+		backgroundColour: palette.brandAlt[400],
+		textColour: 'inherit',
+	};
+	const choiceCardButtonSettings: CtaSettings = {
+		default: choiceCardButtonCtaStateSettings,
+	};
+
 	const templateSettings: BannerTemplateSettings = {
 		containerSettings: {
 			backgroundColour: hexColourToString(basic.background),
@@ -191,12 +206,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 				),
 				textColour: hexColourToString(primaryCta.default.text),
 			},
-			hover: {
-				backgroundColour: hexColourToString(
-					primaryCta.hover.background,
-				),
-				textColour: hexColourToString(primaryCta.hover.text),
-			},
 		},
 		secondaryCtaSettings: {
 			default: {
@@ -207,17 +216,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 				border: `1px solid ${
 					secondaryCta.default.border
 						? hexColourToString(secondaryCta.default.border)
-						: undefined
-				}`,
-			},
-			hover: {
-				backgroundColour: hexColourToString(
-					secondaryCta.hover.background,
-				),
-				textColour: hexColourToString(secondaryCta.hover.text),
-				border: `1px solid ${
-					secondaryCta.hover.border
-						? hexColourToString(secondaryCta.hover.border)
 						: undefined
 				}`,
 			},
@@ -232,17 +230,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 					closeButton.default.border
 						? hexColourToString(closeButton.default.border)
 						: specialReport[100]
-				}`,
-			},
-			hover: {
-				backgroundColour: hexColourToString(
-					closeButton.hover.background,
-				),
-				textColour: hexColourToString(closeButton.hover.text),
-				border: `1px solid ${
-					closeButton.hover.border
-						? hexColourToString(closeButton.hover.border)
-						: neutral[100]
 				}`,
 			},
 		},
@@ -409,8 +396,12 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 										mainOrMobileContent.primaryCta.ctaUrl,
 									)}
 									onClick={onCtaClick}
-									priority="tertiary"
+									priority="primary"
 									cssOverrides={styles.linkButtonStyles}
+									theme={buttonThemes(
+										choiceCardButtonSettings,
+										'primary',
+									)}
 									icon={<SvgArrowRightStraight />}
 									iconSide="right"
 									target="_blank"
@@ -801,7 +792,6 @@ const styles = {
 		}
 	`,
 	linkButtonStyles: css`
-		background-color: ${palette.brandAlt[400]};
 		border-color: ${palette.brandAlt[400]};
 		width: 100%;
 	`,
