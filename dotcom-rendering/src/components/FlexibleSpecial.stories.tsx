@@ -1,7 +1,11 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
-import { loopVideoCard, trails } from '../../fixtures/manual/trails';
+import {
+	loopVideoCard,
+	opinionTrails,
+	trails,
+} from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type {
 	DCRContainerPalette,
@@ -153,6 +157,20 @@ export const Five: Story = {
 		collectionId: 1,
 	},
 };
+
+export const OpinionStandardCards: Story = {
+	name: 'With one splash card and two standard opinion cards',
+	args: {
+		frontSectionTitle: 'Opinion standard cards',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			snap: [],
+			standard: [...trails.slice(0, 1), ...opinionTrails.slice(0, 2)],
+		},
+		collectionId: 1,
+	},
+};
+
 export const DefaultSplashWithImageSupression: Story = {
 	name: 'Standard splash with image supression',
 	args: {
