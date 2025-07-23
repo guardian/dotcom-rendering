@@ -16,6 +16,8 @@ const createTest = (
 		groups,
 		audienceOffset,
 		audienceSpace,
+		type: 'client',
+		expirationDate: new Date('2050-12-30'),
 	}) as unknown as ABTest;
 
 Deno.test('testSpaceToMVTs - empty array', () => {
@@ -29,8 +31,16 @@ Deno.test('testSpaceToMVTs - single test with one group', () => {
 
 	// Size 0.1 should create 100 entries (0.1 * 1000)
 	assertEquals(Object.keys(result).length, 100);
-	assertEquals(result[`mvt:0`], 'Test1:variant');
-	assertEquals(result[`mvt:99`], 'Test1:variant');
+	assertEquals(result[`mvt:0`], {
+		name: 'Test1:variant',
+		exp: 2555971200,
+		type: 'client',
+	});
+	assertEquals(result[`mvt:99`], {
+		name: 'Test1:variant',
+		exp: 2555971200,
+		type: 'client',
+	});
 });
 
 Deno.test('testSpaceToMVTs - single test with multiple groups', () => {
@@ -39,10 +49,26 @@ Deno.test('testSpaceToMVTs - single test with multiple groups', () => {
 
 	// Should have 500 entries
 	assertEquals(Object.keys(result).length, 500);
-	assertEquals(result['mvt:0'], 'Test1:control');
-	assertEquals(result['mvt:249'], 'Test1:control');
-	assertEquals(result['mvt:250'], 'Test1:variant');
-	assertEquals(result['mvt:499'], 'Test1:variant');
+	assertEquals(result['mvt:0'], {
+		name: 'Test1:control',
+		exp: 2555971200,
+		type: 'client',
+	});
+	assertEquals(result['mvt:249'], {
+		name: 'Test1:control',
+		exp: 2555971200,
+		type: 'client',
+	});
+	assertEquals(result['mvt:250'], {
+		name: 'Test1:variant',
+		exp: 2555971200,
+		type: 'client',
+	});
+	assertEquals(result['mvt:499'], {
+		name: 'Test1:variant',
+		exp: 2555971200,
+		type: 'client',
+	});
 });
 
 Deno.test('testSpaceToMVTs - multiple tests', () => {
@@ -53,14 +79,46 @@ Deno.test('testSpaceToMVTs - multiple tests', () => {
 
 	// Should have 200 + 200 = 400 entries
 	assertEquals(Object.keys(result).length, 400);
-	assertEquals(result['mvt:0'], 'Test1:control');
-	assertEquals(result['mvt:99'], 'Test1:control');
-	assertEquals(result['mvt:100'], 'Test1:variant');
-	assertEquals(result['mvt:199'], 'Test1:variant');
-	assertEquals(result['mvt:200'], 'Test2:control');
-	assertEquals(result['mvt:299'], 'Test2:control');
-	assertEquals(result['mvt:300'], 'Test2:variant');
-	assertEquals(result['mvt:399'], 'Test2:variant');
+	assertEquals(result['mvt:0'], {
+		name: 'Test1:control',
+		exp: 2555971200,
+		type: 'client',
+	});
+	assertEquals(result['mvt:99'], {
+		name: 'Test1:control',
+		exp: 2555971200,
+		type: 'client',
+	});
+	assertEquals(result['mvt:100'], {
+		name: 'Test1:variant',
+		exp: 2555971200,
+		type: 'client',
+	});
+	assertEquals(result['mvt:199'], {
+		name: 'Test1:variant',
+		exp: 2555971200,
+		type: 'client',
+	});
+	assertEquals(result['mvt:200'], {
+		name: 'Test2:control',
+		exp: 2555971200,
+		type: 'client',
+	});
+	assertEquals(result['mvt:299'], {
+		name: 'Test2:control',
+		exp: 2555971200,
+		type: 'client',
+	});
+	assertEquals(result['mvt:300'], {
+		name: 'Test2:variant',
+		exp: 2555971200,
+		type: 'client',
+	});
+	assertEquals(result['mvt:399'], {
+		name: 'Test2:variant',
+		exp: 2555971200,
+		type: 'client',
+	});
 });
 
 Deno.test('abTestsToMVTs - empty array', () => {
@@ -74,7 +132,11 @@ Deno.test('abTestsToMVTs - only normal tests', () => {
 	const result = abTestsToMVTs([test]);
 
 	assertEquals(Object.keys(result).length, 1);
-	assertEquals(result['mvt:0'][0], 'Test1:control');
+	assertEquals(result['mvt:0'][0], {
+		name: 'Test1:control',
+		exp: 2555971200,
+		type: 'client',
+	});
 });
 
 Deno.test('abTestsToMVTs - overlapping tests added to existing slots', () => {
@@ -88,17 +150,41 @@ Deno.test('abTestsToMVTs - overlapping tests added to existing slots', () => {
 
 	// First slot should now have 2 entries
 	assertEquals(result['mvt:0'].length, 2);
-	assertEquals(result['mvt:0'][0], 'Normal:control');
-	assertEquals(result['mvt:0'][1], 'Overlap:variant');
+	assertEquals(result['mvt:0'][0], {
+		name: 'Normal:control',
+		exp: 2555971200,
+		type: 'client',
+	});
+	assertEquals(result['mvt:0'][1], {
+		name: 'Overlap:variant',
+		exp: 2555971200,
+		type: 'client',
+	});
 
 	// Second slot should also have 2 entries
 	assertEquals(result['mvt:1'].length, 2);
-	assertEquals(result['mvt:1'][0], 'Normal:control');
-	assertEquals(result['mvt:1'][1], 'Overlap:variant');
+	assertEquals(result['mvt:1'][0], {
+		name: 'Normal:control',
+		exp: 2555971200,
+		type: 'client',
+	});
+	assertEquals(result['mvt:1'][1], {
+		name: 'Overlap:variant',
+		exp: 2555971200,
+		type: 'client',
+	});
 
 	assertEquals(result['mvt:999'].length, 2);
-	assertEquals(result['mvt:999'][0], 'Normal:control');
-	assertEquals(result['mvt:999'][1], 'Overlap:variant');
+	assertEquals(result['mvt:999'][0], {
+		name: 'Normal:control',
+		exp: 2555971200,
+		type: 'client',
+	});
+	assertEquals(result['mvt:999'][1], {
+		name: 'Overlap:variant',
+		exp: 2555971200,
+		type: 'client',
+	});
 });
 
 Deno.test('abTestsToMVTs - throw error when exceeding capacity', () => {

@@ -1,5 +1,14 @@
 import * as env from './env.ts';
-import { object, string, assert, array, nullable } from 'jsr:@superstruct/core';
+import {
+	object,
+	string,
+	assert,
+	array,
+	nullable,
+	boolean,
+	number,
+	type,
+} from 'jsr:@superstruct/core';
 
 const dictionaryItemStruct = object({
 	service_id: string(),
@@ -53,6 +62,45 @@ const fetchFromFastly = async <T>(
 		throw new Error(`Failed to parse response from Fastly`);
 	}
 	return data;
+};
+
+const getService = async (serviceId: string) => {
+	const service = await fetchFromFastly(
+		`https://api.fastly.com/service/${serviceId}`,
+	);
+
+	assert(
+		service,
+		type({
+			id: string(),
+			name: string(),
+			versions: array(
+				type({
+					active: boolean(),
+					number: number(),
+				}),
+			),
+		}),
+	);
+
+	return service;
+};
+
+const getDictionary = async ({
+	serviceId,
+	activeVersion,
+	dictionaryName,
+}: {
+	serviceId: string;
+	activeVersion: number;
+	dictionaryName: string;
+}) => {
+	const dictionary = await fetchFromFastly(
+		`https://api.fastly.com/service/${serviceId}/version/${activeVersion}/dictionary/${dictionaryName}`,
+	);
+	assert(dictionary, type({ id: string(), name: string() }));
+
+	return dictionary;
 };
 
 const getDictionaryItems = async ({
@@ -124,66 +172,119 @@ const calculateUpdates = (
 		currentDictionary.map((group) => group.item_key),
 	);
 
-	const updateDeleteOps = currentDictionary
-		.map((group): UpdateDictionaryItemRequest | null => {
+	const updateDeleteOps = currentDictionary.reduce<{
+		updates: UpdateDictionaryItemRequest[];
+		deletes: UpdateDictionaryItemRequest[];
+	}>(
+		(ops, group) => {
 			const updatedGroup = updatedDictionary.find(
 				(newGroup) => newGroup.item_key === group.item_key,
 			);
 
 			if (!updatedGroup) {
 				return {
-					item_key: group.item_key,
-					op: 'delete',
+					...ops,
+					deletes: [
+						...(ops.deletes ?? []),
+						{
+							item_key: group.item_key,
+							op: 'delete',
+						},
+					],
 				};
 			}
 
 			if (group.item_value !== updatedGroup.item_value) {
 				return {
-					item_key: group.item_key,
-					item_value: updatedGroup.item_value,
-					op: 'update',
+					...ops,
+					updates: [
+						...(ops.updates ?? []),
+						{
+							item_key: group.item_key,
+							item_value: updatedGroup.item_value,
+							op: 'update',
+						},
+					],
 				};
 			}
 
-			return null;
-		})
-		.filter((update) => update !== null);
+			return ops;
+		},
+		{
+			updates: [],
+			deletes: [],
+		},
+	);
 
 	const createOpts: UpdateDictionaryItemRequest[] = updatedDictionary
-		.filter(({ item_key }) => !currentDictionaryKeys.has(item_key))
+		.filter((group) => !currentDictionaryKeys.has(group.item_key))
 		.map(({ item_key, item_value }) => ({
 			item_key,
 			item_value,
 			op: 'create',
 		}));
 
-	const bulkUpdates = [...updateDeleteOps, ...createOpts];
+	const bulkUpdates = [
+		...updateDeleteOps.deletes,
+		...updateDeleteOps.updates,
+		...createOpts,
+	];
 
 	return bulkUpdates;
+};
+
+/**
+ * Verify that the service and dictionary names match the expected IDs
+ *
+ */
+const verifyDictionaryName = async ({
+	serviceId,
+	activeVersion,
+	dictionaryName,
+	dictionaryId,
+}: {
+	serviceId: string;
+	activeVersion: number;
+	dictionaryName: string;
+	dictionaryId: string;
+}) => {
+	const dictionary = await getDictionary({
+		serviceId: env.SERVICE_ID,
+		activeVersion: activeVersion,
+		dictionaryName,
+	});
+
+	if (dictionary.id !== dictionaryId) {
+		throw new Error(
+			`Dictionary ID ${dictionaryId} does not match the expected dictionary ${dictionaryName}`,
+		);
+	}
+
+	return;
 };
 
 const getMVTGroupsFromDictionary = () =>
 	getDictionaryItems({
 		serviceId: env.SERVICE_ID,
-		dictionaryId: env.MVT_DICTIONARY_ID,
+		dictionaryId: env.MVTS_DICTIONARY_ID,
 	});
 
 const getABTestGroupsFromDictionary = () =>
 	getDictionaryItems({
 		serviceId: env.SERVICE_ID,
-		dictionaryId: env.AB_TESTS_DICTIONARY_ID,
+		dictionaryId: env.TEST_GROUPS_DICTIONARY_ID,
 	});
 
 const updateMVTGroups = (items: UpdateDictionaryItemRequest[]) =>
 	updateDictionaryItems({
 		serviceId: env.SERVICE_ID,
-		dictionaryId: env.MVT_DICTIONARY_ID,
+		dictionaryId: env.MVTS_DICTIONARY_ID,
 		items,
 	});
 const updateABTestGroups = (items: UpdateDictionaryItemRequest[]) =>
 	updateDictionaryItems({
 		serviceId: env.SERVICE_ID,
-		dictionaryId: env.AB_TESTS_DICTIONARY_ID,
+		dictionaryId: env.TEST_GROUPS_DICTIONARY_ID,
 		items,
 	});
 
@@ -195,9 +296,11 @@ const encodeObject = (obj: Record<string, unknown> | Array<string>) =>
 export {
 	getMVTGroupsFromDictionary,
 	getABTestGroupsFromDictionary,
+	getService,
 	getDictionaryItems,
 	updateMVTGroups,
 	updateABTestGroups,
 	calculateUpdates,
 	encodeObject,
+	verifyDictionaryName,
 };

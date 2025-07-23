@@ -9,7 +9,6 @@ const baseTest: ABTest = {
 	status: 'ON',
 	expirationDate: new Date(),
 	type: 'client',
-	highImpact: false,
 	audienceSize: 10 / 100,
 	groups: ['control', 'variant'],
 };
