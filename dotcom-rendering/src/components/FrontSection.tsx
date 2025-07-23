@@ -98,6 +98,40 @@ type Props = {
 const width = (columns: number, columnWidth: number, columnGap: number) =>
 	`width: ${columns * columnWidth + (columns - 1) * columnGap}px;`;
 
+const borderColourStyles = (title?: string): string => {
+	switch (title) {
+		case 'News':
+			return schemePalette('--section-border-news');
+		case 'Opinion':
+			return schemePalette('--section-border-opinion');
+		case 'Sport':
+			return schemePalette('--section-border-sport');
+		case 'Lifestyle':
+			return schemePalette('--section-border-lifestyle');
+		case 'Culture':
+			return schemePalette('--section-border-culture');
+		default:
+			return schemePalette('--section-border-primary');
+	}
+};
+
+const articleSectionTitleStyles = (title?: string): string => {
+	switch (title) {
+		case 'News':
+			return schemePalette('--article-section-title-news');
+		case 'Opinion':
+			return schemePalette('--article-section-title-opinion');
+		case 'Sport':
+			return schemePalette('--article-section-title-sport');
+		case 'Lifestyle':
+			return schemePalette('--article-section-title-lifestyle');
+		case 'Culture':
+			return schemePalette('--article-section-title-culture');
+		default:
+			return schemePalette('--article-section-title');
+	}
+};
+
 /** Not all browsers support CSS grid, so we set explicit width as a fallback */
 const fallbackStyles = css`
 	@supports not (display: grid) {
@@ -401,10 +435,10 @@ const bottomPaddingBetaContainer = (
 	}
 `;
 
-const primaryLevelTopBorder = css`
+const primaryLevelTopBorder = (title?: string) => css`
 	grid-row: 1;
 	grid-column: 1 / -1;
-	border-top: 2px solid ${schemePalette('--section-border-primary')};
+	border-top: 2px solid ${borderColourStyles(title)};
 	/** Ensures the top border sits above the side borders */
 	z-index: 1;
 	height: fit-content;
@@ -590,7 +624,7 @@ export const FrontSection = ({
 						css={[
 							containerLevel === 'Secondary'
 								? secondaryLevelTopBorder
-								: primaryLevelTopBorder,
+								: primaryLevelTopBorder(title),
 						]}
 					/>
 				)}
@@ -629,9 +663,7 @@ export const FrontSection = ({
 										? schemePalette(
 												'--article-section-secondary-title',
 										  )
-										: schemePalette(
-												'--article-section-title',
-										  )
+										: articleSectionTitleStyles(title)
 								}
 								// On paid fronts the title is not treated as a link
 								url={!isOnPaidContentFront ? url : undefined}

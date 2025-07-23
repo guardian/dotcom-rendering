@@ -324,14 +324,24 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 
 						${from.tablet} {
 							${grid.span('centre-column-start', 7)}
+
+							position: relative;
+							&::before {
+								content: '';
+								position: absolute;
+								left: -10px;
+								top: 0;
+								bottom: 0;
+								width: 1px;
+								background-color: ${palette(
+									'--article-border',
+								)};
+							}
 						}
 
 						${from.desktop} {
 							${grid.span('centre-column-start', 6)}
 						}
-						margin-bottom: ${space[3]}px;
-						margin-left: ${space[3]}px;
-						margin-right: ${space[3]}px;
 					`;
 				default:
 					switch (theme) {

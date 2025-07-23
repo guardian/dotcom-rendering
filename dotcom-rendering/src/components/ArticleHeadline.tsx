@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	between,
 	from,
 	headlineBold28,
 	headlineBold34,
@@ -116,13 +117,24 @@ const decideMobileHeadlineFont = (format: ArticleFormat) => {
 	}
 };
 
-const headlineFont = (format: ArticleFormat) => css`
-	${decideMobileHeadlineFont(format)}
+const headlineFont = (format: ArticleFormat) => {
+	if (format.design === ArticleDesign.Gallery) {
+		return css`
+			${decideMobileHeadlineFont(format)}
 
-	${from.tablet} {
-		${decideHeadlineFont(format)}
+			${from.desktop} {
+				${decideHeadlineFont(format)}
+			}
+		`;
 	}
-`;
+	return css`
+		${decideMobileHeadlineFont(format)}
+
+		${from.tablet} {
+			${decideHeadlineFont(format)}
+		}
+	`;
+};
 
 const invertedFontLineHeight = css`
 	line-height: 2.1875rem;
@@ -370,6 +382,17 @@ const decideBottomPadding = ({
 		}
 	}
 };
+
+const galleryStyles = css`
+	${grid.between('grid-start', 'centre-column-end')}
+
+	grid-row: 7/9;
+
+	${from.tablet} {
+		${grid.between('centre-column-start', 'grid-end')};
+		margin-left: -10px;
+	}
+`;
 
 export const ArticleHeadline = ({
 	headlineString,
@@ -825,15 +848,7 @@ export const ArticleHeadline = ({
 					);
 				case ArticleDesign.Gallery: {
 					return (
-						<div
-							css={[
-								darkBackground,
-								grid.between('centre-column-start', 'grid-end'),
-								css`
-									grid-row: 7/9;
-								`,
-							]}
-						>
+						<div css={galleryStyles}>
 							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
@@ -850,9 +865,16 @@ export const ArticleHeadline = ({
 											color: ${themePalette(
 												'--headline-colour',
 											)};
+											${darkBackground};
+											min-height: 84px;
 											padding-bottom: ${space[6]}px;
 											padding-left: ${space[3]}px;
 											padding-right: ${space[3]}px;
+
+											${between.mobileLandscape.and
+												.tablet} {
+												padding-left: ${space[5]}px;
+											}
 										`,
 									]}
 								>
