@@ -49,7 +49,6 @@ interface AppsProps extends CommonProps {
 type HeaderProps = {
 	article: ArticleDeprecated;
 	NAV: NavType;
-	format: ArticleFormat;
 	renderAds?: boolean;
 };
 
@@ -143,7 +142,7 @@ const Renderer = ({
 	return <div css={adStyles}>{output}</div>;
 };
 
-const NavHeader = ({ article, NAV, format, renderAds }: HeaderProps) => {
+const NavHeader = ({ article, NAV, renderAds }: HeaderProps) => {
 	return (
 		<section
 			/* Note, some interactives require this - e.g. https://www.theguardian.com/environment/ng-interactive/2015/jun/05/carbon-bomb-the-coal-boom-choking-china. */
@@ -177,7 +176,7 @@ const NavHeader = ({ article, NAV, format, renderAds }: HeaderProps) => {
 				discussionApiUrl={article.config.discussionApiUrl}
 				idApiUrl={article.config.idApiUrl}
 				contributionsServiceUrl={article.contributionsServiceUrl}
-				showSubNav={format.theme !== ArticleSpecial.Labs}
+				showSubNav={false}
 				showSlimNav={true}
 				hasPageSkin={false}
 				hasPageSkinContentSelfConstrain={false}
@@ -226,7 +225,6 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 						<NavHeader
 							article={article}
 							NAV={props.NAV}
-							format={format}
 							renderAds={renderAds}
 						/>
 

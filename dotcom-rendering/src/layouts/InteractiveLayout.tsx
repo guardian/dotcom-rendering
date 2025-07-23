@@ -288,8 +288,8 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							discussionApiUrl={article.config.discussionApiUrl}
 							idApiUrl={article.config.idApiUrl}
 							contributionsServiceUrl={contributionsServiceUrl}
-							showSubNav={format.theme !== ArticleSpecial.Labs}
 							showSlimNav={true}
+							showSubNav={false}
 							hasPageSkin={false}
 							hasPageSkinContentSelfConstrain={false}
 							pageId={article.pageId}
