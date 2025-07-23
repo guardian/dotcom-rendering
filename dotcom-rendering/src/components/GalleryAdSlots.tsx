@@ -1,4 +1,3 @@
-import { Hide } from '@guardian/source/react-components';
 import { AdSlot } from './AdSlot.web';
 
 export const MobileAdSlot = ({
@@ -10,13 +9,11 @@ export const MobileAdSlot = ({
 }) => {
 	return (
 		renderAds && (
-			<Hide from="tablet">
-				<AdSlot
-					data-print-layout="hide"
-					position="gallery-inline-mobile"
-					index={adSlotIndex}
-				/>
-			</Hide>
+			<AdSlot
+				data-print-layout="hide"
+				position="gallery-inline-mobile"
+				index={adSlotIndex}
+			/>
 		)
 	);
 };
