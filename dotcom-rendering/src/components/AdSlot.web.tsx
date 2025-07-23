@@ -23,7 +23,8 @@ type IndexedSlot =
 	| 'liveblog-inline'
 	| 'liveblog-inline-mobile'
 	| 'mobile-front'
-	| 'gallery-inline';
+	| 'gallery-inline'
+	| 'gallery-inline-mobile';
 
 // TODO move to commercial
 type SlotNamesWithPageSkin = SlotName | 'pageskin';
@@ -420,7 +421,9 @@ const crosswordBannerMobileAdStyles = css`
 	min-height: ${getMinHeight(adSizes.mobilesticky.height)}px;
 `;
 
-const galleryImgContainerStyles = css``;
+const galleryInlineAdContainerStyles = css``;
+
+const galleryInlineAdWrapperStyles = css``;
 
 const galleryInlineAdStyles = css``;
 
@@ -916,7 +919,7 @@ export const AdSlot = ({
 			return (
 				<div
 					className="gallery__img-container"
-					css={galleryImgContainerStyles}
+					css={galleryInlineAdContainerStyles}
 				>
 					<AdSlotWrapper>
 						<div
@@ -928,6 +931,37 @@ export const AdSlot = ({
 								'ad-slot--gallery-inline',
 								'ad-slot--dark',
 								'hide-until-tablet',
+								'ad-slot--rendered',
+							].join(' ')}
+							css={galleryInlineAdStyles}
+							data-link-name={`ad slot ${advertId}`}
+							data-name={advertId}
+							aria-hidden="true"
+							data-label-show="true"
+							data-testid="slot" //doesn't exist in Frontend so do we need it in DCR?
+						/>
+					</AdSlotWrapper>
+				</div>
+			);
+		}
+		case 'gallery-inline-mobile': {
+			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
+			return (
+				<div
+					className="gallery__img-container"
+					css={galleryInlineAdContainerStyles}
+				>
+					<AdSlotWrapper css={galleryInlineAdWrapperStyles}>
+						<div
+							id={`dfp-ad--${advertId}--mobile`}
+							className={[
+								'js-ad-slot',
+								'ad-slot',
+								`ad-slot--${advertId}`,
+								'ad-slot--gallery-inline',
+								'ad-slot--dark',
+								'ad-slot--mobile',
+								'mobile-only',
 								'ad-slot--rendered',
 							].join(' ')}
 							css={galleryInlineAdStyles}
