@@ -332,8 +332,8 @@ const fetchProxyGetTreatments = async (
 
 const decideShouldNotServeMandatory = (): boolean => {
 	// Return a boolean indicating whether or not we accept mandatory gates for this call.
-	// If the answer is `false` this doesn't decide whether the gate should be displayed or not,
-	// it only means that if a gate is returned, then it must be mandatory.
+	// If the answer is `true` this doesn't decide whether the gate should be displayed or not,
+	// it only means that if a gate is returned, then it must not be mandatory.
 
 	// Now the question is how do we decide the answer ?
 	// We return false if the following query parameter is present in the url:
@@ -341,11 +341,9 @@ const decideShouldNotServeMandatory = (): boolean => {
 
 	// This may be extended in the future.
 
-	// const params = new URLSearchParams(window.location.search);
-	// const value: string | null = params.get('utm_source');
-	// return value === 'newsshowcase';
-
-	return false;
+	const params = new URLSearchParams(window.location.search);
+	const value: string | null = params.get('utm_source');
+	return value === 'newsshowcase';
 };
 
 const decideMustShowDefaultGate = (): boolean => {
