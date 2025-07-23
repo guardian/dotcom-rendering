@@ -144,6 +144,7 @@ export const LoopVideoPlayer = forwardRef(
 					data-link-name={`gu-video-loop-${
 						showPlayIcon ? 'play' : 'pause'
 					}-${atomId}`}
+					data-chromatic="ignore"
 					preload={preloadPartialData ? 'metadata' : 'none'}
 					loop={true}
 					muted={isMuted}
