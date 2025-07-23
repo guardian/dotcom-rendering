@@ -23,21 +23,17 @@ export const MobileAdSlot = ({
 
 export const GalleryInlineAdSlot = ({
 	renderAds,
-	hasPageSkin,
 	adSlotIndex,
 }: {
 	renderAds: boolean;
-	hasPageSkin: boolean;
 	adSlotIndex: number;
 }) => {
 	return (
-		renderAds &&
-		!hasPageSkin && (
+		renderAds && (
 			<AdSlot
 				data-print-layout="hide"
 				position="gallery-inline"
 				index={adSlotIndex + 1}
-				hasPageskin={hasPageSkin}
 			/>
 		)
 	);

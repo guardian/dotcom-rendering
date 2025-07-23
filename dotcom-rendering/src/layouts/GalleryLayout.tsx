@@ -279,9 +279,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					const index = idx + 1;
 
 					return (
-						<Fragment
-							key={element.elementId || `gallery-item-${index}`}
-						>
+						<Fragment key={element.elementId}>
 							<GalleryImage
 								image={element}
 								format={format}
@@ -297,7 +295,6 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 								>
 									<GalleryInlineAdSlot
 										renderAds={renderAds}
-										hasPageSkin={false}
 										adSlotIndex={desktopAdPositions.indexOf(
 											index,
 										)}
