@@ -22,7 +22,6 @@ export type CtaStateSettings = {
 
 export interface CtaSettings {
 	default: CtaStateSettings;
-	// hover: CtaStateSettings;
 	mobile?: CtaStateSettings;
 	desktop?: CtaStateSettings;
 }

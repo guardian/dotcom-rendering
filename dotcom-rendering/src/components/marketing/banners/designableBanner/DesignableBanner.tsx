@@ -196,7 +196,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 
 	// TODO: I assume we're planning on making this adjustable in RRCP in future.
 	const choiceCardButtonCtaStateSettings: CtaStateSettings = {
-		backgroundColour: '#FFE500', // ${palette.brandAlt[400]},
+		backgroundColour: palette.brandAlt[400],
 		textColour: 'inherit',
 	};
 	const choiceCardButtonSettings: CtaSettings = {
@@ -809,7 +809,6 @@ const styles = {
 		}
 	`,
 	linkButtonStyles: css`
-		/* background-color: ${palette.brandAlt[400]}; */
 		border-color: ${palette.brandAlt[400]};
 		width: 100%;
 	`,
