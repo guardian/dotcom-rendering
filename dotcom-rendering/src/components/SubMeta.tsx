@@ -1,5 +1,6 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import {
+	between,
 	from,
 	space,
 	textSans12,
@@ -81,12 +82,21 @@ const listStyles = css`
 	background-repeat: no-repeat;
 `;
 
-const listWrapper = (design: ArticleDesign): SerializedStyles => css`
-	${design === ArticleDesign.Gallery ? grid.column.centre : undefined};
-	padding-bottom: 0.75rem;
-	margin-bottom: 6px;
-	border-bottom: 1px solid ${palette('--article-border')};
-`;
+const listWrapper = (design: ArticleDesign): SerializedStyles => {
+	if (design === ArticleDesign.Gallery) {
+		return css`
+			${grid.column.centre}
+			padding-bottom: 0.75rem;
+			margin-bottom: 6px;
+		`;
+	}
+
+	return css`
+		padding-bottom: 0.75rem;
+		margin-bottom: 6px;
+		border-bottom: 1px solid ${palette('--article-border')};
+	`;
+};
 
 const listItemStyles = css`
 	${textSans14};
@@ -130,6 +140,46 @@ const syndicationButtonOverrides = css`
 const galleryStyles = css`
 	${grid.paddedContainer};
 	background-color: ${palette('--article-inner-background')};
+	border-bottom: 1px solid var(--article-border);
+	padding: 0;
+
+	${from.tablet} {
+		border-left: 1px solid ${palette('--article-border')};
+		border-right: 1px solid ${palette('--article-border')};
+	}
+`;
+
+const galleryBorder = css`
+	grid-row: 1 / 3;
+	position: relative; /* allows the ::before & ::after to be positioned relative to this */
+
+	${between.desktop.and.leftCol} {
+		${grid.column.right}
+
+		&::before {
+			content: '';
+			position: absolute;
+			left: -10px; /* 10px to the left of this element */
+			top: 0;
+			bottom: 0;
+			width: 1px;
+			background-color: ${palette('--article-border')};
+		}
+	}
+
+	${from.leftCol} {
+		${grid.column.left}
+
+		&::after {
+			content: '';
+			position: absolute;
+			right: -10px;
+			top: 0;
+			bottom: 0;
+			width: 1px;
+			background-color: ${palette('--article-border')};
+		}
+	}
 `;
 
 export const SubMeta = ({
@@ -160,15 +210,17 @@ export const SubMeta = ({
 		<div
 			data-print-layout="hide"
 			css={[
-				bottomPadding,
 				format.design === ArticleDesign.Interactive
 					? setMetaWidth
 					: undefined,
 				format.design === ArticleDesign.Gallery
 					? galleryStyles
-					: undefined,
+					: bottomPadding,
 			]}
 		>
+			{format.design === ArticleDesign.Gallery && (
+				<div css={galleryBorder}></div>
+			)}
 			{hasLinks && (
 				<>
 					<span css={labelStyles(format.design)}>

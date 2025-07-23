@@ -3029,7 +3029,6 @@ const articleBackgroundDark: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.neutral[10];
 			}
 		case ArticleDesign.Gallery:
-			return '#131313';
 		default:
 			return sourcePalette.neutral[10];
 	}
@@ -3053,8 +3052,23 @@ const articleInnerBackgroundLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const articleInnerBackgroundDark: PaletteFunction = (palette) =>
-	articleInnerBackgroundLight(palette);
+const articleInnerBackgroundDark: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[86];
+				default:
+					return sourcePalette.neutral[0];
+			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[10];
+
+		default:
+			return 'transparent';
+	}
+};
 
 const articleSectionBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
@@ -3339,6 +3353,14 @@ const articleBorderLight: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.neutral[86];
 			}
 	}
+};
+
+const footerBorderLight: PaletteFunction = () => {
+	return sourcePalette.neutral[86];
+};
+
+const footerBorderDark: PaletteFunction = () => {
+	return sourcePalette.neutral[20];
 };
 
 const articleBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
@@ -6825,6 +6847,10 @@ const paletteColours = {
 	'--football-table-divider': {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],
+	},
+	'--footer-border': {
+		light: footerBorderLight,
+		dark: footerBorderDark,
 	},
 	'--front-container-background': {
 		light: () => sourcePalette.neutral[100],
