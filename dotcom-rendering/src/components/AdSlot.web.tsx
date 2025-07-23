@@ -423,23 +423,29 @@ const crosswordBannerMobileAdStyles = css`
 `;
 
 const galleryInlineAdContainerStyles = css`
+	${grid.column.centre}
+	width: 100%;
+	margin: ${space[3]}px auto;
+
 	${until.tablet} {
+		margin: 0 auto;
 		display: none;
 	}
 `;
-
-const galleryInlineAdWrapperStyles = css`
-	${grid.column.centre}
-`;
-
-const galleryInlineAdStyles = css``;
 
 const galleryInlineAdMobileContainerStyles = css`
-	${grid.container}
+	${grid.column.centre}
+	width: 100%;
+	margin: ${space[3]}px auto;
 
 	${from.tablet} {
+		margin: 0 auto;
 		display: none;
 	}
+`;
+
+const galleryInlineAdStyles = css`
+	min-height: ${getMinHeight(adSizes.mpu.height)}px;
 `;
 
 const AdSlotWrapper = ({
@@ -966,7 +972,7 @@ export const AdSlot = ({
 					className="gallery__img-container"
 					css={galleryInlineAdMobileContainerStyles}
 				>
-					<AdSlotWrapper css={galleryInlineAdWrapperStyles}>
+					<AdSlotWrapper>
 						<div
 							id={`dfp-ad--${advertId}--mobile`}
 							className={[
