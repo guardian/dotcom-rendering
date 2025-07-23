@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, palette as sourcePalette, space, until } from '@guardian/source/foundations';
+import { from, palette as sourcePalette } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
@@ -30,7 +30,7 @@ import {
 	getMobileAdPositions,
 } from '../lib/getGalleryAdPositions';
 import type { NavType } from '../model/extract-nav';
-import { palette, palette as themePalette } from '../palette';
+import { palette as themePalette } from '../palette';
 import type { Gallery } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { Stuck } from './lib/stickiness';
@@ -64,54 +64,8 @@ const headerStyles = css`
 	}
 `;
 
-// const galleryItemAdvertStyles = css`
-// 	figure {
-//         display: flex;
-//         flex-direction: column-reverse;
-//     }
-
-//     // On mobile/tablet the images should be 100% of the width of the screen
-//     ${until.tablet} {
-//         margin-left: -20px;
-//         margin-right: -20px;
-//         padding-top: 12px;
-//         border-top: 1px solid #ccc;
-
-//         &:first-of-type {
-//             border-top: 0;
-//         }
-//     }
-
-//     ${until.mobileLandscape} {
-//         margin-left: ${-20 * 0.5}px;
-//         margin-right: ${-20 * 0.5}px;
-//     }
-
-//     ${from.desktop} {
-//         position: relative;
-//         border-top: 0;
-//         padding: 0;
-
-//         figure {
-//             flex-direction: row;
-//         }
-//     }
-// }`;
-
 const galleryItemAdvertStyles = css`
-	${grid.paddedContainer}
-	grid-auto-flow: row dense;
-	background-color: ${palette('--article-inner-background')};
-
-	${until.tablet} {
-		border-top: 1px solid ${palette('--article-border')};
-		padding-top: ${space[1]}px;
-	}
-
-	${from.tablet} {
-		border-left: 1px solid ${palette('--article-border')};
-		border-right: 1px solid ${palette('--article-border')};
-	}
+	${grid.container}
 `;
 
 export const GalleryLayout = (props: WebProps | AppProps) => {
@@ -273,29 +227,31 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 								pageId={frontendData.pageId}
 								webTitle={frontendData.webTitle}
 							/>
-							{isWeb && desktopAdPositions.includes(index) && (
+							{isWeb && (
 								<div
 									className={[
 										'gallery__item gallery__item--advert',
 									].join(' ')}
 									css={galleryItemAdvertStyles}
 								>
-									<GalleryInlineAdSlot
-										renderAds={renderAds}
-										adSlotIndex={desktopAdPositions.indexOf(
-											index,
-										)}
-									/>
-								</div>
-							)}
-
-							{isWeb && mobileAdPositions.includes(index) && (
-								<MobileAdSlot
-									renderAds={renderAds}
-									adSlotIndex={mobileAdPositions.indexOf(
-										index,
+									{desktopAdPositions.includes(index) && (
+										<GalleryInlineAdSlot
+											renderAds={renderAds}
+											adSlotIndex={desktopAdPositions.indexOf(
+												index,
+											)}
+										/>
 									)}
-								/>
+
+									{mobileAdPositions.includes(index) && (
+										<MobileAdSlot
+											renderAds={renderAds}
+											adSlotIndex={mobileAdPositions.indexOf(
+												index,
+											)}
+										/>
+									)}
+								</div>
 							)}
 						</Fragment>
 					);
