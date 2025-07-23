@@ -209,7 +209,7 @@ const linkStyles = css`
 `;
 
 const pStyles = css`
-	padding-bottom: ${space[1]}px;
+	margin-bottom: ${space[1]}px;
 	b,
 	strong em,
 	strong u {
