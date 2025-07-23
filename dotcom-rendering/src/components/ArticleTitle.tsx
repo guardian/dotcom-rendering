@@ -43,10 +43,16 @@ const immersiveMargins = css`
 `;
 
 const galleryStyles = css`
-	${grid.between('centre-column-start', 'grid-end')};
+	${grid.column.all}
+
 	grid-row: 6/7;
 	max-width: 400px;
 	min-width: 200px;
+
+	${from.tablet} {
+		${grid.between('centre-column-start', 'grid-end')};
+		margin-left: -10px;
+	}
 `;
 
 export const ArticleTitle = ({
