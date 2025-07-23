@@ -9,7 +9,9 @@ export const ReaderRevenueDev = ({ shouldHideReaderRevenue }: Props) => {
 	useEffect(() => {
 		// Used internally only, so only import each function on demand
 		const loadAndRun =
-			<K extends keyof ReaderRevenueDevUtils>(key: K) =>
+			<K extends keyof Omit<ReaderRevenueDevUtils, 'bannerToShow'>>(
+				key: K,
+			) =>
 			(asExistingSupporter: boolean) =>
 				import(
 					/* webpackChunkName: "readerRevenueDevUtils" */ '../lib/readerRevenueDevUtils'
@@ -36,6 +38,7 @@ export const ReaderRevenueDev = ({ shouldHideReaderRevenue }: Props) => {
 				showMeTheBanner: loadAndRun('showMeTheBanner'),
 				showNextVariant: loadAndRun('showNextVariant'),
 				showPreviousVariant: loadAndRun('showPreviousVariant'),
+				bannerToShow: undefined,
 			};
 		}
 	}, [shouldHideReaderRevenue]);

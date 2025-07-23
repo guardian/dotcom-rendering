@@ -1,4 +1,4 @@
-import { isUndefined, startPerformanceMeasure } from '@guardian/libs';
+import { isUndefined, log, startPerformanceMeasure } from '@guardian/libs';
 import { getOphan } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
 
@@ -165,9 +165,17 @@ export const pickMessage = (
 				clearAllTimeouts(candidateConfigsWithTimeout);
 
 				if (winner === null) {
+					log(
+						'supporterRevenue',
+						`pickMessage for ${name}: no winner, returning default value`,
+					);
 					resolve(defaultShow);
 				} else {
 					const { candidate, meta } = winner;
+					log(
+						'supporterRevenue',
+						`pickMessage for ${name}: winner is ${candidate.id}`,
+					);
 					resolve(() => candidate.show(meta));
 				}
 			})

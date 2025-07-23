@@ -3,7 +3,7 @@ import type {
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
 import type { CountryCode } from '@guardian/libs';
-import { cmp, isString, isUndefined, storage } from '@guardian/libs';
+import { cmp, isString, isUndefined, log, storage } from '@guardian/libs';
 import type { ModuleData } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import type { BannerProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
@@ -72,6 +72,8 @@ const buildCmpBannerConfig = (): CandidateConfig<void> => ({
 					result ? { show: true, meta: undefined } : { show: false },
 				),
 		show: () => {
+			log('supporterRevenue', `Showing CMP UI`);
+			window.guardian.readerRevenue.bannerToShow = 'cmpUi';
 			// New CMP is not a react component and is shown outside of react's world
 			// so render nothing if it will show
 			return null;
@@ -160,9 +162,11 @@ const buildRRBannerConfigWith = ({
 						ophanPageViewId,
 						pageId,
 					}),
-				show:
-					({ name, props }: ModuleData<BannerProps>) =>
-					() => <BannerComponent name={name} props={props} />,
+				show: ({ name, props }: ModuleData<BannerProps>) => {
+					log('supporterRevenue', `Showing banner: ${name}`);
+					window.guardian.readerRevenue.bannerToShow = name;
+					return () => <BannerComponent name={name} props={props} />;
+				},
 			},
 			timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 		};
@@ -193,9 +197,11 @@ const buildBrazeBanner = (
 				tags,
 				shouldHideReaderRevenue,
 			),
-		show: (meta: any) => () => (
-			<BrazeBanner meta={meta} idApiUrl={idApiUrl} />
-		),
+		show: (meta: any) => () => {
+			log('supporterRevenue', `Showing banner: braze-banner`);
+			window.guardian.readerRevenue.bannerToShow = 'braze-banner';
+			return <BrazeBanner meta={meta} idApiUrl={idApiUrl} />;
+		},
 	},
 	timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 });
