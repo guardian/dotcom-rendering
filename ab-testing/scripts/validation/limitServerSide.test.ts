@@ -15,7 +15,6 @@ Deno.test(
 			status: 'ON',
 			expirationDate: new Date(),
 			type: 'server',
-			highImpact: false,
 			audienceSize: 10 / 100,
 			groups: ['control', 'variant'],
 		};
@@ -39,7 +38,6 @@ Deno.test(
 			status: 'ON',
 			expirationDate: new Date(),
 			type: 'server',
-			highImpact: false,
 			audienceSize: 10 / 100,
 			groups: ['control', 'variant'],
 		};

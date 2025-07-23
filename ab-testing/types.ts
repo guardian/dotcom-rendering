@@ -13,8 +13,6 @@ export type ABTest = {
 	expirationDate: Date;
 	/** Test type: should this run on the server or client */
 	type: 'server' | 'client';
-	/** Indicates whether changing the test state is 'dangerous' */
-	highImpact: boolean;
 	/** Whether the AB test is currently running or not
 	 * Would be nice to know who changed the status last and when
 	 */
@@ -28,7 +26,7 @@ export type ABTest = {
 	 * Having multiple test spaces allows deliberate overlapping of test audiences
 	 * Defaults to A
 	 */
-	audienceSpace?: 'A' | 'B';
+	audienceSpace?: 'A' | 'B' | 'C';
 	/** Test group definition */
 	groups: string[];
 };

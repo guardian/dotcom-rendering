@@ -3,23 +3,22 @@ import { stringify } from '../lib.ts';
 
 const MAX_MVT_GROUPS = 1000;
 
-type MVTGroups = Record<string, string[]>;
+type MVTValue = {
+	name: string;
+	type: string;
+	exp: number;
+};
+type MVTGroups = Record<string, MVTValue[]>;
 
 /**
  * Convert an ab test space to mvt key values
- *
- * example output:
- * mvt:0 - Test1:control
- * mvt:1 - Test1:control
- * mvt:2 - Test1:variant
- * mvt:3 - Test1:variant
  */
-const testSpaceToMVTs = (tests: ABTest[]): Record<string, string> =>
+const testSpaceToMVTs = (tests: ABTest[]): Record<string, MVTValue> =>
 	tests
 		.sort((a, b) => a.audienceOffset ?? 0 - (b.audienceOffset ?? 0))
-		.reduce<Record<string, string>>((acc, test) => {
+		.reduce<Record<string, MVTValue>>((acc, test) => {
 			const testOffset = (test.audienceOffset ?? 0) * MAX_MVT_GROUPS;
-			const groups = test.groups.reduce<Record<string, string>>(
+			const groups = test.groups.reduce<Record<string, MVTValue>>(
 				(groupAcc, group, groupIndex) => {
 					const groupSize = Math.floor(
 						(test.audienceSize / test.groups.length) *
@@ -33,7 +32,13 @@ const testSpaceToMVTs = (tests: ABTest[]): Record<string, string> =>
 						},
 						(_, i) => [
 							`mvt:${i + groupOffset}`,
-							`${test.name}:${group}`,
+							{
+								name: `${test.name}:${group}`,
+								type: test.type,
+								exp: Math.floor(
+									test.expirationDate.getTime() / 1000,
+								),
+							},
 						],
 					);
 
@@ -62,9 +67,11 @@ const abTestsToMVTs = (abTests: ABTest[]): MVTGroups => {
 			test.audienceSpace === undefined || test.audienceSpace === 'A',
 	);
 	const secondaryTests = abTests.filter((test) => test.audienceSpace === 'B');
+	const tertiaryTests = abTests.filter((test) => test.audienceSpace === 'C');
 
 	const primaryMVTGroups = testSpaceToMVTs(primaryTests);
 	const secondaryMVTGroups = testSpaceToMVTs(secondaryTests);
+	const tertiaryMVTGroups = testSpaceToMVTs(tertiaryTests);
 
 	if (Object.keys(primaryMVTGroups).length > MAX_MVT_GROUPS) {
 		throw new Error(
@@ -92,15 +99,36 @@ const abTestsToMVTs = (abTests: ABTest[]): MVTGroups => {
 		}
 	});
 
+	// Add tertiary tests to existing slots
+	Object.entries(tertiaryMVTGroups).forEach(([mvtKey, testValue]) => {
+		if (result[mvtKey]) {
+			result[mvtKey].push(testValue);
+		} else {
+			result[mvtKey] = [testValue];
+		}
+	});
+
 	return result;
 };
 
 const buildMVTDict = (tests: ABTest[]) => {
 	const mvtKVs = abTestsToMVTs(tests);
-	return Object.entries(mvtKVs).map(([key, value]) => ({
-		item_key: key,
-		item_value: value.join(','),
-	}));
+
+	return Object.entries(mvtKVs).map(([key, value]) => {
+		const encodedValue = value
+			.map((v, i) =>
+				stringify({
+					[`group:${i}`]: v.name,
+					[`group:${i}:type`]: v.type,
+					[`group:${i}:exp`]: v.exp,
+				}),
+			)
+			.join(',');
+		return {
+			item_key: key,
+			item_value: encodedValue,
+		};
+	});
 };
 
 export { buildMVTDict, testSpaceToMVTs, abTestsToMVTs };

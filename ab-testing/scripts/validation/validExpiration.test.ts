@@ -45,7 +45,6 @@ Deno.test(
 			status: 'ON',
 			expirationDate: futureWeekday(),
 			type: 'client',
-			highImpact: false,
 			audienceSize: 10 / 100,
 			groups: ['control', 'variant'],
 		};
@@ -64,7 +63,6 @@ Deno.test(
 			status: 'ON',
 			expirationDate: futureWeekend(),
 			type: 'client',
-			highImpact: false,
 			audienceSize: 10 / 100,
 			groups: ['control', 'variant'],
 		};
@@ -83,7 +81,6 @@ Deno.test(
 			status: 'ON',
 			expirationDate: pastDay(),
 			type: 'client',
-			highImpact: false,
 			audienceSize: 10 / 100,
 			groups: ['control', 'variant'],
 		};

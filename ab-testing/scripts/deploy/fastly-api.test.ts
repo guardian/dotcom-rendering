@@ -9,10 +9,13 @@ import { stub, Stub } from 'jsr:@std/testing/mock';
 stub(Deno.env, 'get', (key: string) => {
 	if (
 		[
-			'FASTLY_API_TOKEN',
-			'FASTLY_SERVICE_ID',
-			'FASTLY_MVT_DICTIONARY_ID',
+			'FASTLY_AB_TESTING_SERVICE_ID',
+			'FASTLY_AB_TESTING_API_TOKEN',
+			'FASTLY_AB_TESTING_SERVICE_NAME',
+			'FASTLY_MVTS_DICTIONARY_ID',
+			'FASTLY_MVTS_DICTIONARY_NAME',
 			'FASTLY_AB_TESTS_DICTIONARY_ID',
+			'FASTLY_AB_TESTS_DICTIONARY_NAME',
 		].includes(key)
 	) {
 		return 'test';

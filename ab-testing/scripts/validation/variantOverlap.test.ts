@@ -10,7 +10,6 @@ Deno.test('noVariantOverlap - disallows variant overlap', () => {
 		status: 'ON',
 		expirationDate: new Date(),
 		type: 'client',
-		highImpact: false,
 		audienceSize: 100 / 100,
 		groups: ['control', 'variant'],
 	};
@@ -26,7 +25,6 @@ Deno.test('noVariantOverlap - disallows partial overlap', () => {
 		status: 'ON',
 		expirationDate: new Date(),
 		type: 'client',
-		highImpact: false,
 		audienceSize: 50 / 100,
 		groups: ['control', 'variant'],
 	};
@@ -38,7 +36,6 @@ Deno.test('noVariantOverlap - disallows partial overlap', () => {
 		status: 'ON',
 		expirationDate: new Date(),
 		type: 'client',
-		highImpact: false,
 		audienceSize: 50 / 100,
 		audienceOffset: 0.25,
 		groups: ['control', 'variant'],
@@ -56,7 +53,6 @@ Deno.test(
 			status: 'ON',
 			expirationDate: new Date(),
 			type: 'client',
-			highImpact: false,
 			audienceSize: 100 / 100,
 			groups: ['control', 'variant'],
 			audienceSpace: 'B',
@@ -69,7 +65,6 @@ Deno.test(
 			status: 'ON',
 			expirationDate: new Date(),
 			type: 'client',
-			highImpact: false,
 			audienceSize: 100 / 100,
 			groups: ['control', 'variant'],
 		};
