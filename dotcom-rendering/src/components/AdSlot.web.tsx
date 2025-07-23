@@ -11,6 +11,7 @@ import {
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import type { FEArticle } from '../frontend/feArticle';
+import { grid } from '../grid';
 import { labelBoxStyles, labelHeight, labelStyles } from '../lib/adStyles';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
@@ -421,11 +422,25 @@ const crosswordBannerMobileAdStyles = css`
 	min-height: ${getMinHeight(adSizes.mobilesticky.height)}px;
 `;
 
-const galleryInlineAdContainerStyles = css``;
+const galleryInlineAdContainerStyles = css`
+	${until.tablet} {
+		display: none;
+	}
+`;
 
-const galleryInlineAdWrapperStyles = css``;
+const galleryInlineAdWrapperStyles = css`
+	${grid.column.centre}
+`;
 
 const galleryInlineAdStyles = css``;
+
+const galleryInlineAdMobileContainerStyles = css`
+	${grid.container}
+
+	${from.tablet} {
+		display: none;
+	}
+`;
 
 const AdSlotWrapper = ({
 	children,
@@ -949,7 +964,7 @@ export const AdSlot = ({
 			return (
 				<div
 					className="gallery__img-container"
-					css={galleryInlineAdContainerStyles}
+					css={galleryInlineAdMobileContainerStyles}
 				>
 					<AdSlotWrapper css={galleryInlineAdWrapperStyles}>
 						<div
