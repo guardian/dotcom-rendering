@@ -1,16 +1,12 @@
 import { css } from '@emotion/react';
-import {
-	between,
-	from,
-	palette as sourcePalette,
-} from '@guardian/source/foundations';
+import { from, palette as sourcePalette } from '@guardian/source/foundations';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { Footer } from '../components/Footer';
 import { Caption } from '../components/Caption';
+import { Footer } from '../components/Footer';
 import { GalleryImage } from '../components/GalleryImage';
 import { Island } from '../components/Island';
 import { MainMediaGallery } from '../components/MainMediaGallery';
@@ -175,11 +171,6 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 							shortUrlId={frontendData.config.shortUrlId}
 						/>
 					) : null}
-					<div
-						css={[grid.between('centre-column-start', 'grid-end')]}
-					>
-						Meta
-					</div>
 				</header>
 				{gallery.images.map((element, idx) => (
 					<GalleryImage
