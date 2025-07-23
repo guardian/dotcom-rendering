@@ -44,7 +44,6 @@ const footerContainerStyles = (design?: ArticleDesign) => {
 const galleryFooterStyles = css`
 	${grid.column.centre}
 	padding: ${remSpace[4]} 0;
-	position: relative;
 
 	${from.leftCol} {
 		${grid.between('centre-column-start', 'right-column-end')}
@@ -100,17 +99,12 @@ const PrivacySettings = ({
 	}
 };
 
-const galleryLeftCollumn = css`
-	${grid.column.centre}
-	${between.tablet.and.desktop} {
-		padding-left: ${space[5]}px;
-		padding-right: ${space[5]}px;
-	}
+const galleryBorder = css`
+	grid-row: 1 / 3;
+	position: relative;
 
 	${between.desktop.and.leftCol} {
 		${grid.column.right}
-
-		position: relative; /* allows the ::before to be positioned relative to this */
 
 		&::before {
 			content: '';
@@ -125,8 +119,6 @@ const galleryLeftCollumn = css`
 
 	${from.leftCol} {
 		${grid.column.left}
-
-		position: relative; /* allows the ::before to be positioned relative to this */
 
 		&::after {
 			content: '';
@@ -168,9 +160,9 @@ export const AppsFooter = ({ design }: { design?: ArticleDesign }) => {
 	};
 
 	return (
-		<div css={[footerContainerStyles(design)]}>
+		<div css={footerContainerStyles(design)}>
 			{design === ArticleDesign.Gallery && (
-				<div css={galleryLeftCollumn}></div>
+				<div css={galleryBorder}></div>
 			)}
 			<div
 				css={
