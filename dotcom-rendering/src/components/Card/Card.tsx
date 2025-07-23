@@ -835,6 +835,7 @@ export const Card = ({
 							media.type === 'slideshow' && isFlexibleContainer
 						}
 						padImage={isMediaCardOrNewsletter && isBetaContainer}
+						isBetaContainer={isBetaContainer}
 					>
 						{media.type === 'slideshow' &&
 							(isFlexibleContainer ? (

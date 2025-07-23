@@ -18,27 +18,36 @@ const sizingStyles = css`
 const flexBasisStyles = ({
 	imageSize,
 	imageType,
+	isBetaContainer,
 }: {
 	imageSize: ImageSizeType;
 	imageType?: CardImageType;
+	isBetaContainer: boolean;
 }): SerializedStyles => {
 	if (imageType === 'avatar') {
 		return css`
 			flex-basis: 100%;
 		`;
 	}
+
 	switch (imageSize) {
 		default:
 		case 'small':
-			return css`
-				flex-basis: 75%;
-				${between.tablet.and.desktop} {
-					flex-basis: 60%;
-				}
-				${from.desktop} {
-					flex-basis: 70%;
-				}
-			`;
+			return isBetaContainer
+				? css`
+						${from.tablet} {
+							flex-basis: 50%;
+						}
+				  `
+				: css`
+						flex-basis: 75%;
+						${between.tablet.and.desktop} {
+							flex-basis: 60%;
+						}
+						${from.desktop} {
+							flex-basis: 70%;
+						}
+				  `;
 		case 'medium':
 			return css`
 				${from.tablet} {
@@ -139,7 +148,7 @@ export const ContentWrapper = ({
 			css={[
 				sizingStyles,
 				imageDirectionDesktop === 'horizontal' &&
-					flexBasisStyles({ imageSize, imageType }),
+					flexBasisStyles({ imageSize, imageType, isBetaContainer }),
 				padContent &&
 					!isBetaContainer &&
 					css`

@@ -206,6 +206,7 @@ export const CardPicture = ({
 	if (mainImage === '') {
 		return null;
 	}
+
 	const sources = generateSources(
 		mainImage,
 		decideImageWidths(imageSize, aspectRatio),
