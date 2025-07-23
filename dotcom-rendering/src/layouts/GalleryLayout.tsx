@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { between, from } from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -60,7 +60,19 @@ const headerStyles = css`
 `;
 
 const galleryItemAdvertStyles = css`
-	${grid.container}
+	${grid.paddedContainer}
+	grid-auto-flow: row dense;
+	background-color: ${themePalette('--article-inner-background')};
+
+	${until.tablet} {
+		border-top: 1px solid ${themePalette('--article-border')};
+		padding-top: ${space[1]}px;
+	}
+
+	${from.tablet} {
+		border-left: 1px solid ${themePalette('--article-border')};
+		border-right: 1px solid ${themePalette('--article-border')};
+	}
 `;
 
 export const GalleryLayout = (props: WebProps | AppProps) => {
@@ -84,6 +96,9 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 	const mobileAdPositions = renderAds
 		? getMobileAdPositions(gallery.images)
 		: [];
+
+	const shouldShowAnyAd =
+		desktopAdPositions.length > 0 || mobileAdPositions.length > 0;
 
 	return (
 		<>
@@ -240,7 +255,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 								pageId={frontendData.pageId}
 								webTitle={frontendData.webTitle}
 							/>
-							{isWeb && (
+							{isWeb && shouldShowAnyAd && (
 								<div
 									className={[
 										'gallery__item gallery__item--advert',
