@@ -30,7 +30,7 @@ export const GalleryInlineAdSlot = ({
 			<AdSlot
 				data-print-layout="hide"
 				position="gallery-inline"
-				index={adSlotIndex + 1}
+				index={adSlotIndex}
 			/>
 		)
 	);
