@@ -3063,7 +3063,7 @@ const articleSectionBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
 
 const articleSectionTitleLight: PaletteFunction = () =>
-	sourcePalette.neutral[0];
+	sourcePalette.neutral[7];
 const articleSectionTitleDark: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 
