@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, palette as sourcePalette } from '@guardian/source/foundations';
+import { from, palette as sourcePalette, space, until } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
@@ -9,7 +9,10 @@ import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
 import { Footer } from '../components/Footer';
-import { GalleryInlineAdSlot } from '../components/GalleryAdSlots';
+import {
+	GalleryInlineAdSlot,
+	MobileAdSlot,
+} from '../components/GalleryAdSlots';
 import { GalleryImage } from '../components/GalleryImage';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -22,9 +25,12 @@ import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { decideMainMediaCaption } from '../lib/decide-caption';
-import { getDesktopAdPositions } from '../lib/getGalleryAdPositions';
+import {
+	getDesktopAdPositions,
+	getMobileAdPositions,
+} from '../lib/getGalleryAdPositions';
 import type { NavType } from '../model/extract-nav';
-import { palette as themePalette } from '../palette';
+import { palette, palette as themePalette } from '../palette';
 import type { Gallery } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { Stuck } from './lib/stickiness';
@@ -58,7 +64,55 @@ const headerStyles = css`
 	}
 `;
 
-const galleryItemAdvertStyles = css``;
+// const galleryItemAdvertStyles = css`
+// 	figure {
+//         display: flex;
+//         flex-direction: column-reverse;
+//     }
+
+//     // On mobile/tablet the images should be 100% of the width of the screen
+//     ${until.tablet} {
+//         margin-left: -20px;
+//         margin-right: -20px;
+//         padding-top: 12px;
+//         border-top: 1px solid #ccc;
+
+//         &:first-of-type {
+//             border-top: 0;
+//         }
+//     }
+
+//     ${until.mobileLandscape} {
+//         margin-left: ${-20 * 0.5}px;
+//         margin-right: ${-20 * 0.5}px;
+//     }
+
+//     ${from.desktop} {
+//         position: relative;
+//         border-top: 0;
+//         padding: 0;
+
+//         figure {
+//             flex-direction: row;
+//         }
+//     }
+// }`;
+
+const galleryItemAdvertStyles = css`
+	${grid.paddedContainer}
+	grid-auto-flow: row dense;
+	background-color: ${palette('--article-inner-background')};
+
+	${until.tablet} {
+		border-top: 1px solid ${palette('--article-border')};
+		padding-top: ${space[1]}px;
+	}
+
+	${from.tablet} {
+		border-left: 1px solid ${palette('--article-border')};
+		border-right: 1px solid ${palette('--article-border')};
+	}
+`;
 
 export const GalleryLayout = (props: WebProps | AppProps) => {
 	const { gallery, renderingTarget } = props;
@@ -77,16 +131,13 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(frontendData);
 
-	const adPositions =
-		isWeb && renderAds ? getDesktopAdPositions(gallery.images) : [];
+	const desktopAdPositions = renderAds
+		? getDesktopAdPositions(gallery.images)
+		: [];
 
-	// Debug logging
-	console.log('Gallery debug:', {
-		isWeb,
-		renderAds,
-		imageCount: gallery.images.length,
-		adPositions,
-	});
+	const mobileAdPositions = renderAds
+		? getMobileAdPositions(gallery.images)
+		: [];
 
 	return (
 		<>
@@ -212,12 +263,11 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					) : null}
 				</header>
 				{gallery.images.map((element, idx) => {
-					const position = idx + 1;
-					const shouldShowAd = adPositions.includes(position);
+					const index = idx + 1;
 
 					return (
 						<Fragment
-							key={element.elementId || `gallery-item-${idx}`}
+							key={element.elementId || `gallery-item-${index}`}
 						>
 							<GalleryImage
 								image={element}
@@ -225,20 +275,30 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 								pageId={frontendData.pageId}
 								webTitle={frontendData.webTitle}
 							/>
-							{shouldShowAd && (
-								<li
+							{isWeb && desktopAdPositions.includes(index) && (
+								<div
 									className={[
-										'gallery__item',
-										'gallery__item--advert',
+										'gallery__item gallery__item--advert',
 									].join(' ')}
 									css={galleryItemAdvertStyles}
 								>
 									<GalleryInlineAdSlot
 										renderAds={renderAds}
 										hasPageSkin={false}
-										adSlotIndex={position}
+										adSlotIndex={desktopAdPositions.indexOf(
+											index,
+										)}
 									/>
-								</li>
+								</div>
+							)}
+
+							{isWeb && mobileAdPositions.includes(index) && (
+								<MobileAdSlot
+									renderAds={renderAds}
+									adSlotIndex={mobileAdPositions.indexOf(
+										index,
+									)}
+								/>
 							)}
 						</Fragment>
 					);
