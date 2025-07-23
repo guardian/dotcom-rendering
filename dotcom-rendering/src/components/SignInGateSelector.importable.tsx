@@ -381,6 +381,17 @@ const buildAuxiaGateDisplayData = async (
 			false,
 			false,
 		);
+
+		// Date: 32rd July 2025
+		// Here we implement another rule:
+		// If readerPersonalData.dailyArticleCount is 3, then we should show
+		// the gate, regardless of the previous value. Note that we implement
+		// this rule, here because the main logic for deciding gate showing in the
+		// case of a non Auxia audience page view is still client side.
+		// (This is going to change soon)
+		if (readerPersonalData.dailyArticleCount === 3) {
+			should_show_legacy_gate_tmp = true;
+		}
 	}
 
 	const shouldNotServeMandatory = decideShouldNotServeMandatory();
