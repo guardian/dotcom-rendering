@@ -210,6 +210,15 @@ const linkStyles = css`
 
 const pStyles = css`
 	padding-bottom: ${space[1]}px;
+	b,
+	strong em,
+	strong u {
+		font-weight: bold;
+	}
+
+	i {
+		font-style: italic;
+	}
 `;
 
 const buildElementTree = (node: Node): ReactNode => {
