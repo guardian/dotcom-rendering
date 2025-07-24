@@ -6,7 +6,7 @@
 import { css } from '@emotion/react';
 import { Button, SvgCross } from '@guardian/source/react-components';
 import type { CtaSettings } from '../settings';
-import { buttonStyles } from '../styles/buttonStyles';
+import { buttonStyles, buttonThemes } from '../styles/buttonStyles';
 
 interface DesignableBannerCloseButtonProps {
 	onCloseClick: () => void;
@@ -29,6 +29,8 @@ export function DesignableBannerCloseButton({
 					settings,
 					styles.closeButtonOverrides,
 				)}
+				priority="tertiary"
+				theme={buttonThemes(settings, 'tertiary')}
 				icon={<SvgCross />}
 				size="small"
 				hideLabel={true}

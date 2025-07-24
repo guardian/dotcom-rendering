@@ -291,6 +291,7 @@ const fetchProxyGetTreatments = async (
 	should_show_legacy_gate_tmp: boolean,
 	hasConsented: boolean,
 	shouldNotServeMandatory: boolean,
+	mustShowDefaultGate: boolean,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const articleIdentifier = `www.theguardian.com/${pageId}`;
@@ -314,6 +315,7 @@ const fetchProxyGetTreatments = async (
 		should_show_legacy_gate_tmp,
 		hasConsented,
 		shouldNotServeMandatory,
+		mustShowDefaultGate,
 	};
 	const params = {
 		method: 'POST',
@@ -344,6 +346,21 @@ const decideShouldNotServeMandatory = (): boolean => {
 	// return value === 'newsshowcase';
 
 	return false;
+};
+
+const decideMustShowDefaultGate = (): boolean => {
+	// In order to facilitate internal testing, this function observes a query parameter which forces
+	// the display of a sign-in gate, namely the default gu gate. If this returns true then
+	// the default gate is going to be displayed. Note that this applies to both auxia and
+	// non auxia audiences. In particular because it also applies to auxia audiences, for which
+	// the value of should_show_legacy_gate_tmp is ignored, then the information will come to
+	// the SDC server as a new parameter in the GetTreatments payload.
+
+	// to trigger gate display, the url should have query parameter `showgate=true`
+
+	const params = new URLSearchParams(window.location.search);
+	const value: string | null = params.get('showgate');
+	return value === 'true';
 };
 
 const buildAuxiaGateDisplayData = async (
@@ -385,6 +402,8 @@ const buildAuxiaGateDisplayData = async (
 
 	const shouldNotServeMandatory = decideShouldNotServeMandatory();
 
+	const mustShowDefaultGate = decideMustShowDefaultGate();
+
 	const response = await fetchProxyGetTreatments(
 		contributionsServiceUrl,
 		pageId,
@@ -401,6 +420,7 @@ const buildAuxiaGateDisplayData = async (
 		should_show_legacy_gate_tmp,
 		readerPersonalData.hasConsented,
 		shouldNotServeMandatory,
+		mustShowDefaultGate,
 	);
 
 	if (response.status && response.data) {
@@ -450,9 +470,23 @@ const auxiaLogTreatmentInteraction = async (
 		method: 'POST',
 		headers,
 		body: JSON.stringify(payload),
+		keepalive: true,
 	};
 
-	await fetch(url, params);
+	try {
+		const response = await fetch(url, params);
+		if (!response.ok) {
+			const error = new Error(
+				`Failed to log treatment interaction: ${response.status}`,
+			);
+			window.guardian.modules.sentry.reportError(error, 'sign-in-gate');
+		}
+	} catch (error) {
+		const errorReport = new Error(`Error logging treatment interaction`, {
+			cause: error,
+		});
+		window.guardian.modules.sentry.reportError(errorReport, 'sign-in-gate');
+	}
 };
 
 const buildAbTestTrackingAuxiaVariant = (
@@ -615,7 +649,18 @@ const SignInGateSelectorAuxia = ({
 								interactionType,
 								actionName,
 								auxiaGateDisplayData.browserId,
-							);
+							).catch((error) => {
+								const errorReport = new Error(
+									`Failed to log treatment interaction`,
+									{
+										cause: error,
+									},
+								);
+								window.guardian.modules.sentry.reportError(
+									errorReport,
+									'sign-in-gate',
+								);
+							});
 						}}
 					/>
 				)}
@@ -647,7 +692,16 @@ const ShowSignInGateAuxia = ({
 			'',
 			browserId,
 		).catch((error) => {
-			console.error('Failed to log treatment interaction:', error);
+			const errorReport = new Error(
+				`Failed to log treatment interaction`,
+				{
+					cause: error,
+				},
+			);
+			window.guardian.modules.sentry.reportError(
+				errorReport,
+				'sign-in-gate',
+			);
 		});
 
 		void submitComponentEventTracking(

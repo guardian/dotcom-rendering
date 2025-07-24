@@ -1,16 +1,22 @@
 import { css } from '@emotion/react';
-import { between, from } from '@guardian/source/foundations';
+import { from, palette as sourcePalette } from '@guardian/source/foundations';
+import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
+import { Caption } from '../components/Caption';
+import { Footer } from '../components/Footer';
 import { GalleryImage } from '../components/GalleryImage';
+import { Island } from '../components/Island';
 import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
+import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { SubMeta } from '../components/SubMeta';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
+import { decideMainMediaCaption } from '../lib/decide-caption';
 import type { NavType } from '../model/extract-nav';
 import { palette } from '../palette';
 import type { Gallery } from '../types/article';
@@ -49,6 +55,11 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 	const gallery = props.gallery;
 	const frontendData = gallery.frontendData;
 
+	const isWeb = props.renderingTarget === 'Web';
+	const isApps = props.renderingTarget === 'Apps';
+
+	const captionText = decideMainMediaCaption(props.gallery.mainMedia);
+
 	const format: ArticleFormat = {
 		design: gallery.design,
 		display: gallery.display,
@@ -57,7 +68,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 
 	return (
 		<>
-			{props.renderingTarget === 'Web' && (
+			{isWeb && (
 				<Masthead
 					nav={props.NAV}
 					editionId={frontendData.editionId}
@@ -106,7 +117,12 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						format={format}
 						standfirst={frontendData.standfirst}
 					/>
-					{props.renderingTarget === 'Web' ? (
+					<Caption
+						captionText={captionText}
+						format={format}
+						isMainMedia={true}
+					/>
+					{isWeb ? (
 						<ArticleMeta
 							branding={
 								frontendData.commercialProperties[
@@ -131,7 +147,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 							shortUrlId={frontendData.config.shortUrlId}
 						/>
 					) : null}
-					{props.renderingTarget === 'Apps' ? (
+					{isApps ? (
 						<ArticleMetaApps
 							branding={
 								frontendData.commercialProperties[
@@ -155,32 +171,6 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 							shortUrlId={frontendData.config.shortUrlId}
 						/>
 					) : null}
-					<div
-						css={[
-							css`
-								${grid.column.centre}
-								${from.leftCol} {
-									${grid.column.left}
-								}
-								position: relative;
-								${between.tablet.and.leftCol} {
-									&::before {
-										content: '';
-										position: absolute;
-										left: -10px;
-										top: 0;
-										bottom: 0;
-										width: 1px;
-										background-color: ${palette(
-											'--article-border',
-										)};
-									}
-								}
-							`,
-						]}
-					>
-						Main media caption
-					</div>
 				</header>
 				{gallery.images.map((element, idx) => (
 					<GalleryImage
@@ -199,11 +189,39 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					webUrl={frontendData.webURL}
 					webTitle={frontendData.webTitle}
 					showBottomSocialButtons={
-						frontendData.showBottomSocialButtons &&
-						props.renderingTarget === 'Web'
+						frontendData.showBottomSocialButtons && isWeb
 					}
 				/>
 			</main>
+			{isWeb && (
+				<Section
+					fullWidth={true}
+					padSides={false}
+					backgroundColour={sourcePalette.brand[400]}
+					borderColour={sourcePalette.brand[600]}
+					showSideBorders={false}
+					element="footer"
+				>
+					<Footer
+						pageFooter={frontendData.pageFooter}
+						selectedPillar={props.NAV.selectedPillar}
+						pillars={props.NAV.pillars}
+						urls={frontendData.nav.readerRevenueLinks.footer}
+						editionId={frontendData.editionId}
+					/>
+				</Section>
+			)}
+			{isApps && (
+				<div
+					css={{
+						backgroundColor: palette('--apps-footer-background'),
+					}}
+				>
+					<Island priority="critical">
+						<AppsFooter design={format.design} />
+					</Island>
+				</div>
+			)}
 		</>
 	);
 };

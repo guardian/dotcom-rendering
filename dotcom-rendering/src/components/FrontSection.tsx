@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
-import type { EditionId } from '../lib/edition';
+import { type EditionId, isNetworkFront } from '../lib/edition';
 import { hideAge } from '../lib/hideAge';
 import { palette, palette as schemePalette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
@@ -98,13 +98,21 @@ type Props = {
 const width = (columns: number, columnWidth: number, columnGap: number) =>
 	`width: ${columns * columnWidth + (columns - 1) * columnGap}px;`;
 
-const borderColourStyles = (title?: string): string => {
+const borderColourStyles = (
+	title?: string,
+	showSectionColours?: boolean,
+): string => {
+	if (!showSectionColours) {
+		return schemePalette('--section-border-primary');
+	}
+
 	switch (title) {
 		case 'News':
 			return schemePalette('--section-border-news');
 		case 'Opinion':
 			return schemePalette('--section-border-opinion');
 		case 'Sport':
+		case 'Sports':
 			return schemePalette('--section-border-sport');
 		case 'Lifestyle':
 			return schemePalette('--section-border-lifestyle');
@@ -115,13 +123,21 @@ const borderColourStyles = (title?: string): string => {
 	}
 };
 
-const articleSectionTitleStyles = (title?: string): string => {
+const articleSectionTitleStyles = (
+	title?: string,
+	showSectionColours?: boolean,
+): string => {
+	if (!showSectionColours) {
+		return schemePalette('--article-section-title');
+	}
+
 	switch (title) {
 		case 'News':
 			return schemePalette('--article-section-title-news');
 		case 'Opinion':
 			return schemePalette('--article-section-title-opinion');
 		case 'Sport':
+		case 'Sports':
 			return schemePalette('--article-section-title-sport');
 		case 'Lifestyle':
 			return schemePalette('--article-section-title-lifestyle');
@@ -435,10 +451,13 @@ const bottomPaddingBetaContainer = (
 	}
 `;
 
-const primaryLevelTopBorder = (title?: string) => css`
+const primaryLevelTopBorder = (
+	title?: string,
+	showSectionColours?: boolean,
+) => css`
 	grid-row: 1;
 	grid-column: 1 / -1;
-	border-top: 2px solid ${borderColourStyles(title)};
+	border-top: 2px solid ${borderColourStyles(title, showSectionColours)};
 	/** Ensures the top border sits above the side borders */
 	z-index: 1;
 	height: fit-content;
@@ -591,6 +610,8 @@ export const FrontSection = ({
 	const useLargeSpacingDesktop =
 		!!isNextCollectionPrimary || isAboveDesktopAd;
 
+	const showSectionColours = isNetworkFront(pageId ?? '');
+
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
 	 * this id pre-existed showMore so is probably also being used for something else.
@@ -624,7 +645,10 @@ export const FrontSection = ({
 						css={[
 							containerLevel === 'Secondary'
 								? secondaryLevelTopBorder
-								: primaryLevelTopBorder(title),
+								: primaryLevelTopBorder(
+										title,
+										showSectionColours,
+								  ),
 						]}
 					/>
 				)}
@@ -663,7 +687,10 @@ export const FrontSection = ({
 										? schemePalette(
 												'--article-section-secondary-title',
 										  )
-										: articleSectionTitleStyles(title)
+										: articleSectionTitleStyles(
+												title,
+												showSectionColours,
+										  )
 								}
 								// On paid fronts the title is not treated as a link
 								url={!isOnPaidContentFront ? url : undefined}
