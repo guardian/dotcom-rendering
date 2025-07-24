@@ -191,7 +191,7 @@ const titleContainerStyle = css`
 `;
 
 const paragraphStyle = css`
-	${headlineMedium17}
+	${headlineMedium17};
 	color: ${palette.neutral[46]};
 `;
 
@@ -208,6 +208,19 @@ const linkStyles = css`
 	border-bottom: 1px solid ${palette.brand[500]};
 `;
 
+const pStyles = css`
+	margin-bottom: ${space[1]}px;
+	b,
+	strong em,
+	strong u {
+		font-weight: bold;
+	}
+
+	i {
+		font-style: italic;
+	}
+`;
+
 const buildElementTree = (node: Node): ReactNode => {
 	if (isElement(node)) {
 		switch (node.nodeName) {
@@ -220,6 +233,11 @@ const buildElementTree = (node: Node): ReactNode => {
 				});
 			case 'BR':
 				return jsx('br');
+			case 'P':
+				return jsx('p', {
+					css: pStyles,
+					children: Array.from(node.childNodes).map(buildElementTree),
+				});
 			default:
 				return jsx(node.tagName.toLowerCase(), {
 					children: Array.from(node.childNodes).map(buildElementTree),
@@ -278,7 +296,6 @@ export const TagPageHeader = ({ title, description, image }: Props) => {
 	const descriptionFragment = description
 		? parseHtml(description)
 		: undefined;
-
 	return (
 		<section css={[fallbackStyles, containerStyles]}>
 			<div css={[decoration, sideBorders]} />
