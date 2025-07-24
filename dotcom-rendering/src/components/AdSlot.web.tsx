@@ -421,10 +421,6 @@ const crosswordBannerMobileAdStyles = css`
 	min-height: ${getMinHeight(adSizes.mobilesticky.height)}px;
 `;
 
-const galleryInlineAdStyles = css`
-	min-height: ${getMinHeight(adSizes.mpu.height)}px;
-`;
-
 const galleryInlineAdContainerStyles = css`
 	${until.tablet} {
 		margin: 0 auto;
@@ -437,6 +433,13 @@ const galleryInlineAdMobileContainerStyles = css`
 		margin: 0 auto;
 		display: none;
 	}
+`;
+
+const galleryInlineAdStyles = css`
+	.ad-slot--dark {
+		background-color: ${schemedPalette('--ad-background-article-inner')};
+	}
+	min-height: ${getMinHeight(adSizes.mpu.height)}px;
 `;
 
 /*** The top-above-nav-mobile and inline slots label should be dark even in light mode.
