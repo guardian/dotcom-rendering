@@ -21,33 +21,33 @@ Note that some of these layout columns only exist at certain breakpoints. All br
 The following code provides an example of the API in use, while later sections on this page will give more details about the features demonstrated here. Note that a mixture of different Emotion patterns, such as [object styles](https://emotion.sh/docs/css-prop#object-styles) and [string styles](https://emotion.sh/docs/css-prop#string-styles), are included for demonstration purposes.
 
 <Source language="tsx" code={`
-    import { css } from '@emotion/react';
-    import { from } from '@guardian/source/foundations';
-    import { grid } from '../grid';
+import { css } from '@emotion/react';
+import { from } from '@guardian/source/foundations';
+import { grid } from '../grid';
 
-    const MyComponent = () => (
-        <article css={css(grid.container)}>
-            <h1 css={css(grid.column.centre)}>
-                Headline
-            </h1>
-            <p css={{
-                '&': css(grid.column.centre),
-                [from.leftCol]: css(grid.column.left),
-            }}>
-                Byline
-            </p>
-            <ol css={css\`
-                \${grid.column.right}
-                display: none;
+const MyComponent = () => (
+    <article css={css(grid.container)}>
+        <h1 css={css(grid.column.centre)}>
+            Headline
+        </h1>
+        <p css={{
+            '&': css(grid.column.centre),
+            [from.leftCol]: css(grid.column.left),
+        }}>
+            Byline
+        </p>
+        <ol css={css\`
+            \${grid.column.right}
+            display: none;
 
-                \${from.desktop} {
-                    display: block;
-                }
-            \`}>
-                Most viewed
-            </ol>
-        </article>
-    );
+            \${from.desktop} {
+                display: block;
+            }
+        \`}>
+            Most viewed
+        </ol>
+    </article>
+);
 `} />
 
 ## Grid Container
@@ -67,24 +67,24 @@ The column API is used to interact with the three layout columns. `grid.column.l
 There's also `grid.column.all`, which will position an item such that it spans all the way from the start of the grid to the end. As discussed in [Grid Container](#grid-container), if you're within a `grid.container` then this item will always span the entire width of the viewport, whereas with `grid.paddedContainer` it will only span the area inside the margins.
 
 <Source language="tsx" code={`
-    import { css } from '@emotion/react';
-    import { grid } from '../grid';
+import { css } from '@emotion/react';
+import { grid } from '../grid';
 
-    const ImmersiveHeader = () => (
-        <header css={css(grid.container)}>
-            <figure css={css(grid.column.all)}>
-                Main media
-            </figure>
-        </header>
-    );
+const ImmersiveHeader = () => (
+    <header css={css(grid.container)}>
+        <figure css={css(grid.column.all)}>
+            Main media
+        </figure>
+    </header>
+);
 
-    const FrontContainer = () => (
-        <section css={css(grid.paddedContainer)}>
-            <article css={css(grid.column.all)}>
-                First card
-            </article>
-        </section>
-    );
+const FrontContainer = () => (
+    <section css={css(grid.paddedContainer)}>
+        <article css={css(grid.column.all)}>
+            First card
+        </article>
+    </section>
+);
 `} />
 
 ## Line API
@@ -122,26 +122,26 @@ Note that, as mentioned above, not all of the layout columns exist at all breakp
 To position an element between two grid lines, the `grid.between` function is available. It takes the line name or number at which the element should start, and the line name or number at which it should end. Alternatively, to have an element start at a particular line and span a certain number of <CSSGridColumn />s, the `grid.span` function is available. It takes the line name or number at which the element should start, and a number of columns to span.
 
 <Source language="tsx" code={`
-    import { css } from '@emotion/react';
-    import { grid } from '../grid';
+import { css } from '@emotion/react';
+import { grid } from '../grid';
 
-    const ShowcaseHeader = () => (
-        <header css={css(grid.paddedContainer)}>
-            <figure css={css(
-                grid.between('centre-column-start', 'right-column-end')
-            )}>
-                Main media
-            </figure>
-        </header>
-    );
+const ShowcaseHeader = () => (
+    <header css={css(grid.paddedContainer)}>
+        <figure css={css(
+            grid.between('centre-column-start', 'right-column-end')
+        )}>
+            Main media
+        </figure>
+    </header>
+);
 
-    const GalleryHeader = () => (
-        <header css={css(grid.container)}>
-            <p css={css(grid.span('centre-column-start', 6))}>
-                Standfirst
-            </p>
-        </header>
-    );
+const GalleryHeader = () => (
+    <header css={css(grid.container)}>
+        <p css={css(grid.span('centre-column-start', 6))}>
+            Standfirst
+        </p>
+    </header>
+);
 `} />
 
 The functions in this part of the API correspond to features of the [`grid-column` CSS property](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column). While that property could be used directly, these functions allow for type-safety and auto-completion of the named grid lines. 
