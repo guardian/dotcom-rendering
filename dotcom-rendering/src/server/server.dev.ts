@@ -10,17 +10,11 @@ import {
 } from './handler.article.apps';
 import {
 	handleArticle,
-	handleArticleJson,
 	handleBlocks,
 	handleInteractive,
 } from './handler.article.web';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
-import {
-	handleFront,
-	handleFrontJson,
-	handleTagPage,
-	handleTagPageJson,
-} from './handler.front.web';
+import { handleFront, handleTagPage } from './handler.front.web';
 import {
 	handleCricketMatchPage,
 	handleFootballMatchListPage,
@@ -97,15 +91,12 @@ const renderer = Router();
 // URL if req.params.url is present
 renderer.use(getContentFromURLMiddleware);
 renderer.get('/Article/*url', handleArticle);
-renderer.get('/ArticleJson/*url', handleArticleJson);
 renderer.get('/AMPArticle/*url', handleAMPArticle);
 renderer.get('/Interactive/*url', handleInteractive);
 renderer.get('/AMPInteractive/*url', handleAMPArticle);
 renderer.get('/Blocks/*url', handleBlocks);
 renderer.get('/Front/*url', handleFront);
-renderer.get('/FrontJSON/*url', handleFrontJson);
 renderer.get('/TagPage/*url', handleTagPage);
-renderer.get('/TagPageJSON/*url', handleTagPageJson);
 renderer.get('/EmailNewsletters/*url', handleAllEditorialNewslettersPage);
 renderer.get('/AppsArticle/*url', handleAppsArticle);
 renderer.get('/AppsInteractive/*url', handleAppsInteractive);
@@ -117,15 +108,12 @@ renderer.get('/CricketMatchPage/*url', handleCricketMatchPage);
 renderer.get('/FootballMatchSummaryPage/*url', handleFootballMatchPage);
 // POST routes for running frontend locally
 renderer.post('/Article', handleArticle);
-renderer.post('/ArticleJson', handleArticleJson);
 renderer.post('/AMPArticle', handleAMPArticle);
 renderer.post('/Interactive', handleInteractive);
 renderer.post('/AMPInteractive', handleAMPArticle);
 renderer.post('/Blocks', handleBlocks);
 renderer.post('/Front', handleFront);
-renderer.post('/FrontJSON', handleFrontJson);
 renderer.post('/TagPage', handleTagPage);
-renderer.post('/TagPageJSON', handleTagPageJson);
 renderer.post('/EmailNewsletters', handleAllEditorialNewslettersPage);
 renderer.post('/AppsArticle', handleAppsArticle);
 renderer.post('/AppsInteractive', handleAppsInteractive);
