@@ -11,7 +11,6 @@ import {
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import type { FEArticle } from '../frontend/feArticle';
-import { grid } from '../grid';
 import { labelBoxStyles, labelHeight, labelStyles } from '../lib/adStyles';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
@@ -422,11 +421,11 @@ const crosswordBannerMobileAdStyles = css`
 	min-height: ${getMinHeight(adSizes.mobilesticky.height)}px;
 `;
 
-const galleryInlineAdContainerStyles = css`
-	${grid.column.centre}
-	width: 100%;
-	margin: ${space[3]}px auto;
+const galleryInlineAdStyles = css`
+	min-height: ${getMinHeight(adSizes.mpu.height)}px;
+`;
 
+const galleryInlineAdContainerStyles = css`
 	${until.tablet} {
 		margin: 0 auto;
 		display: none;
@@ -434,18 +433,24 @@ const galleryInlineAdContainerStyles = css`
 `;
 
 const galleryInlineAdMobileContainerStyles = css`
-	${grid.column.centre}
-	width: 100%;
-	margin: ${space[3]}px auto;
-
 	${from.tablet} {
 		margin: 0 auto;
 		display: none;
 	}
 `;
 
-const galleryInlineAdStyles = css`
-	min-height: ${getMinHeight(adSizes.mpu.height)}px;
+/*** The top-above-nav-mobile and inline slots label should be dark even in light mode.
+ * Other slots will stay the same as the mentioned ad slots are
+ * the only ones to overlay the dark section of Gallery pages.
+ */
+const galleryInlineAdLabelStyles = css`
+	.ad-slot--dark[data-label-show='true']:not(
+			.ad-slot--interscroller
+		)::before {
+		background-color: ${schemedPalette('--ad-background-article-inner')};
+		border-top-color: ${schemedPalette('--ad-border-article-inner')};
+		color: ${schemedPalette('--ad-labels-text-article-inner')};
+	}
 `;
 
 const AdSlotWrapper = ({
@@ -938,62 +943,64 @@ export const AdSlot = ({
 		case 'gallery-inline': {
 			const advertId = `inline${index + 1}`;
 			return (
-				<div
-					className="gallery__img-container"
-					css={galleryInlineAdContainerStyles}
+				<AdSlotWrapper
+					css={[
+						galleryInlineAdContainerStyles,
+						labelStyles,
+						galleryInlineAdLabelStyles,
+					]}
 				>
-					<AdSlotWrapper>
-						<div
-							id={`dfp-ad--${advertId}`}
-							className={[
-								'js-ad-slot',
-								'ad-slot',
-								`ad-slot--${advertId}`,
-								'ad-slot--gallery-inline',
-								'ad-slot--dark',
-								'hide-until-tablet',
-								'ad-slot--rendered',
-							].join(' ')}
-							css={galleryInlineAdStyles}
-							data-link-name={`ad slot ${advertId}`}
-							data-name={advertId}
-							aria-hidden="true"
-							data-label-show="true"
-							data-testid="slot" //doesn't exist in Frontend so do we need it in DCR?
-						/>
-					</AdSlotWrapper>
-				</div>
+					<div
+						id={`dfp-ad--${advertId}`}
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							`ad-slot--${advertId}`,
+							'ad-slot--gallery-inline',
+							'ad-slot--dark',
+							'hide-until-tablet',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={galleryInlineAdStyles}
+						data-link-name={`ad slot ${advertId}`}
+						data-name={advertId}
+						aria-hidden="true"
+						data-label-show="true"
+						data-testid="slot" //doesn't exist in Frontend so do we need it in DCR?
+					/>
+				</AdSlotWrapper>
 			);
 		}
 		case 'gallery-inline-mobile': {
 			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
-				<div
-					className="gallery__img-container"
-					css={galleryInlineAdMobileContainerStyles}
+				<AdSlotWrapper
+					css={[
+						galleryInlineAdMobileContainerStyles,
+						labelStyles,
+						galleryInlineAdLabelStyles,
+					]}
 				>
-					<AdSlotWrapper>
-						<div
-							id={`dfp-ad--${advertId}--mobile`}
-							className={[
-								'js-ad-slot',
-								'ad-slot',
-								`ad-slot--${advertId}`,
-								'ad-slot--gallery-inline',
-								'ad-slot--dark',
-								'ad-slot--mobile',
-								'mobile-only',
-								'ad-slot--rendered',
-							].join(' ')}
-							css={galleryInlineAdStyles}
-							data-link-name={`ad slot ${advertId}`}
-							data-name={advertId}
-							aria-hidden="true"
-							data-label-show="true"
-							data-testid="slot" //doesn't exist in Frontend so do we need it in DCR?
-						/>
-					</AdSlotWrapper>
-				</div>
+					<div
+						id={`dfp-ad--${advertId}--mobile`}
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							`ad-slot--${advertId}`,
+							'ad-slot--gallery-inline',
+							'ad-slot--dark',
+							'ad-slot--mobile',
+							'mobile-only',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={galleryInlineAdStyles}
+						data-link-name={`ad slot ${advertId}`}
+						data-name={advertId}
+						aria-hidden="true"
+						data-label-show="true"
+						data-testid="slot" //doesn't exist in Frontend so do we need it in DCR?
+					/>
+				</AdSlotWrapper>
 			);
 		}
 	}
