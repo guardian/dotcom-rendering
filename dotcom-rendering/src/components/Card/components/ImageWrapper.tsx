@@ -44,6 +44,7 @@ type Props = {
 	 */
 	hideImageOverlay?: boolean;
 	padImage?: boolean;
+	isBetaContainer?: boolean;
 };
 
 const imageOverlayContainerStyles = css`
@@ -81,21 +82,27 @@ const imagePaddingStyles = (
  */
 const flexBasisStyles = ({
 	imageSize,
+	isBetaContainer,
 }: {
 	imageSize: ImageSizeType;
+	isBetaContainer: boolean;
 }): SerializedStyles => {
 	switch (imageSize) {
 		default:
 		case 'small':
-			return css`
-				flex-basis: 25%;
-				${between.tablet.and.desktop} {
-					flex-basis: 40%;
-				}
-				${from.desktop} {
-					flex-basis: 30%;
-				}
-			`;
+			return isBetaContainer
+				? css`
+						flex-basis: 50%;
+				  `
+				: css`
+						flex-basis: 25%;
+						${between.tablet.and.desktop} {
+							flex-basis: 40%;
+						}
+						${from.desktop} {
+							flex-basis: 30%;
+						}
+				  `;
 		case 'medium':
 			return css`
 				flex-basis: 50%;
@@ -154,6 +161,7 @@ export const ImageWrapper = ({
 	imagePositionOnMobile,
 	hideImageOverlay,
 	padImage,
+	isBetaContainer,
 }: Props) => {
 	const isHorizontalOnDesktop =
 		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
@@ -170,6 +178,7 @@ export const ImageWrapper = ({
 					isHorizontalOnDesktop &&
 					flexBasisStyles({
 						imageSize,
+						isBetaContainer: !!isBetaContainer,
 					}),
 				imageType === 'avatar' &&
 					css`

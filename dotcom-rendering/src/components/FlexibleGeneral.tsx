@@ -549,7 +549,7 @@ const HalfWidthCardLayout = ({
 							)}
 							supportingContentAlignment="vertical"
 							supportingContentPosition="outer"
-							imageSize="medium"
+							imageSize="small"
 							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}
