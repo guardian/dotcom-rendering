@@ -75,7 +75,6 @@ const galleryItemAdvertStyles = css`
 	background-color: ${themePalette('--article-inner-background')};
 
 	${until.tablet} {
-		border-top: 1px solid ${themePalette('--article-border')};
 		padding-top: ${space[1]}px;
 	}
 
@@ -83,6 +82,12 @@ const galleryItemAdvertStyles = css`
 		border-left: 1px solid ${themePalette('--article-border')};
 		border-right: 1px solid ${themePalette('--article-border')};
 	}
+`;
+
+const galleryInlineAdContainerStyles = css`
+	${grid.column.centre}
+	width: 100%;
+	margin: ${space[3]}px auto;
 `;
 
 export const GalleryLayout = (props: WebProps | AppProps) => {
@@ -109,9 +114,6 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 	const mobileAdPositions = renderAds
 		? getMobileAdPositions(gallery.images)
 		: [];
-
-	const shouldShowAnyAd =
-		desktopAdPositions.length > 0 || mobileAdPositions.length > 0;
 
 	return (
 		<>
@@ -238,6 +240,12 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				</header>
 				{gallery.images.map((element, idx) => {
 					const index = idx + 1;
+					const shouldShowDesktopAd =
+						desktopAdPositions.includes(index);
+					const shouldShowMobileAd =
+						mobileAdPositions.includes(index);
+					const shouldShowAnyAd =
+						shouldShowDesktopAd || shouldShowMobileAd;
 
 					return (
 						<Fragment key={element.elementId}>
@@ -254,23 +262,28 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 									].join(' ')}
 									css={galleryItemAdvertStyles}
 								>
-									{desktopAdPositions.includes(index) && (
-										<GalleryInlineAdSlot
-											renderAds={renderAds}
-											adSlotIndex={desktopAdPositions.indexOf(
-												index,
-											)}
-										/>
-									)}
+									<div
+										className="gallery__img-container"
+										css={galleryInlineAdContainerStyles}
+									>
+										{shouldShowDesktopAd && (
+											<GalleryInlineAdSlot
+												renderAds={renderAds}
+												adSlotIndex={desktopAdPositions.indexOf(
+													index,
+												)}
+											/>
+										)}
 
-									{mobileAdPositions.includes(index) && (
-										<MobileAdSlot
-											renderAds={renderAds}
-											adSlotIndex={mobileAdPositions.indexOf(
-												index,
-											)}
-										/>
-									)}
+										{shouldShowMobileAd && (
+											<MobileAdSlot
+												renderAds={renderAds}
+												adSlotIndex={mobileAdPositions.indexOf(
+													index,
+												)}
+											/>
+										)}
+									</div>
 								</div>
 							)}
 						</Fragment>
