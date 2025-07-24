@@ -1,6 +1,7 @@
 import { css, Global } from '@emotion/react';
 import { adSizes, constants } from '@guardian/commercial-core';
-import { space } from '@guardian/source/foundations';
+import { palette as sourcePalette, space } from '@guardian/source/foundations';
+import { useBetaAB } from '../lib/useAB';
 import { palette } from '../palette';
 import type { ServerSideTests } from '../types/config';
 import { AdSlot } from './AdSlot.web';
@@ -55,6 +56,46 @@ const headerMinSizeStyles = css`
 `;
 
 export const HeaderAdSlot = ({ abTests }: { abTests: ServerSideTests }) => {
+	const ab = useBetaAB();
+
+	const isInServerSideTestVariant = ab?.isUserInTest(
+		'server-side-test',
+		'variant',
+	);
+
+	const isInServerSideTestControl = ab?.isUserInTest(
+		'server-side-test',
+		'control',
+	);
+
+	if (isInServerSideTestVariant) {
+		return (
+			<div
+				css={css`
+					color: ${sourcePalette.error[400]};
+					font-size: 20px;
+					background-color: ${sourcePalette.neutral[97]};
+				`}
+			>
+				<strong>Server Side Test Varaint</strong>
+			</div>
+		);
+	}
+
+	if (isInServerSideTestControl) {
+		return (
+			<div
+				css={css`
+					color: ${sourcePalette.error[400]};
+					font-size: 20px;
+					background-color: ${sourcePalette.neutral[97]};
+				`}
+			>
+				<strong>Server Side Test Control</strong>
+			</div>
+		);
+	}
+
 	const isIn250ReservationVariant =
 		abTests.topAboveNav250ReservationVariant === 'variant';
 	return (

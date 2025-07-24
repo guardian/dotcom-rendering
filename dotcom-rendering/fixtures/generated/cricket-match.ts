@@ -1365,6 +1365,7 @@ export const cricketMatchData: FECricketMatchPage = {
 		abTests: {
 			europeBetaFrontTest2Control: 'control',
 		},
+		serverSideABTests: {},
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		stage: 'PROD',
 		frontendAssetsFullURL: 'https://assets.guim.co.uk/',

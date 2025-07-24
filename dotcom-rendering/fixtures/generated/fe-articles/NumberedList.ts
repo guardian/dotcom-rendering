@@ -5917,6 +5917,7 @@ export const NumberedList: FEArticle = {
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
 		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		serverSideABTests: {},
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},
