@@ -51,6 +51,7 @@ import type {
 } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { SectionTracker } from '../components/SectionTracker.importable';
 
 interface Props {
 	front: Front;
@@ -190,6 +191,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	return (
 		<>
+			<Island priority={'critical'}>
+				<SectionTracker />
+			</Island>
 			<div data-print-layout="hide" id="bannerandheader">
 				{renderAds && (
 					<Stuck>
