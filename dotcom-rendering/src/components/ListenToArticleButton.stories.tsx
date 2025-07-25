@@ -13,5 +13,6 @@ type Story = StoryObj<typeof meta>;
 export const ListenToArticleButton = {
 	args: {
 		onClickHandler: () => undefined,
+		audioDuration: '03:02',
 	},
 } satisfies Story;

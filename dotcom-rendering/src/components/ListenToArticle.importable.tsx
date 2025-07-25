@@ -7,26 +7,55 @@ import { ListenToArticleButton } from './ListenToArticleButton';
 type Props = {
 	articleId: string;
 };
+
+export const formatAudioDuration = (durationInSeconds: number): string => {
+	const hours = Math.floor(durationInSeconds / 3600);
+	const minutes = Math.floor((durationInSeconds % 3600) / 60);
+	const seconds = durationInSeconds % 60;
+
+	if (hours > 3) {
+		return '';
+	}
+
+	const formattedDuration = `${
+		hours > 0 ? `${hours.toString().padStart(2, '0')}:` : ''
+	}${minutes > 0 ? minutes.toString().padStart(2, '0') : '00'}:${
+		seconds > 0 ? seconds.toString().padStart(2, '0') : '00'
+	}`;
+
+	return formattedDuration;
+};
+
 export const ListenToArticle = ({ articleId }: Props) => {
 	const [showButton, setShowButton] = useState<boolean>(false);
+	const [audioDuration, setAudioDuration] = useState<number | undefined>(
+		undefined,
+	);
 
-	const isBridgetCompatible = useIsBridgetCompatible('8.5.1');
+	const isBridgetCompatible = useIsBridgetCompatible('8.5.1'); // todo update for bridget version
 
 	useEffect(() => {
 		if (isBridgetCompatible) {
 			Promise.all([
 				getListenToArticleClient().isAvailable(articleId),
 				getListenToArticleClient().isPlaying(articleId),
+				getListenToArticleClient().getAudioDuration(articleId),
 			])
-				.then(() =>
-					// setShowButton(isAvailable && !isPlaying),
-					setShowButton(false),
-				)
+				.then(() => {
+					// .then(({ isAvailable, isPlaying, audioDurationSeconds }) => {
+					// setAudioDuration(
+					// 	audioDurationSeconds ? audioDurationSeconds : undefined,
+					// );
+					// setShowButton(isAvailable && !isPlaying);
+					setAudioDuration(0);
+					setShowButton(false);
+				})
 				.catch((error) => {
 					console.error(
 						'Error fetching article audio status: ',
 						error,
 					);
+
 					setShowButton(false);
 				});
 		}
@@ -54,7 +83,14 @@ export const ListenToArticle = ({ articleId }: Props) => {
 	};
 	return (
 		showButton && (
-			<ListenToArticleButton onClickHandler={listenToArticleHandler} />
+			<ListenToArticleButton
+				onClickHandler={listenToArticleHandler}
+				audioDuration={
+					audioDuration !== undefined
+						? formatAudioDuration(audioDuration)
+						: undefined
+				}
+			/>
 		)
 	);
 };

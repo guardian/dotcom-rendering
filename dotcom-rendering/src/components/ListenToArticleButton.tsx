@@ -17,16 +17,27 @@ const button = css`
 	margin-bottom: ${space[4]}px;
 	margin-left: ${space[2]}px;
 `;
+
+const durationPadding = css`
+	padding-left: ${space[2]}px;
+`;
 type ButtonProps = {
 	onClickHandler: () => void;
+	audioDuration?: string;
 };
-export const ListenToArticleButton = ({ onClickHandler }: ButtonProps) => (
+export const ListenToArticleButton = ({
+	onClickHandler,
+	audioDuration,
+}: ButtonProps) => (
 	<Button
 		onClick={onClickHandler}
 		size="small"
 		cssOverrides={button}
 		icon={<SvgMediaControlsPlay />}
 	>
-		Listen to article
+		<span css={durationPadding}>
+			{!!audioDuration && `${audioDuration}`}
+		</span>
+		<span>Listen to article</span>
 	</Button>
 );
