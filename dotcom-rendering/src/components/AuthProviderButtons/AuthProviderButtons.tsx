@@ -173,7 +173,7 @@ export const AuthProviderButtons = ({
 					cssOverrides={secondaryButtonStyles()}
 					priority="tertiary"
 					href={buildUrlWithQueryParams(
-						'https://profile.theguardian.com/register/email',
+						'https://profile.theguardian.com/signin',
 						{},
 						queryParams,
 					)}
