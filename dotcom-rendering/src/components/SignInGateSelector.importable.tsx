@@ -290,7 +290,7 @@ const fetchProxyGetTreatments = async (
 	mvtId: number,
 	should_show_legacy_gate_tmp: boolean,
 	hasConsented: boolean,
-	shouldNotServeMandatory: boolean,
+	shouldServeDismissible: boolean,
 	mustShowDefaultGate: boolean,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
@@ -314,7 +314,7 @@ const fetchProxyGetTreatments = async (
 		mvtId,
 		should_show_legacy_gate_tmp,
 		hasConsented,
-		shouldNotServeMandatory,
+		shouldServeDismissible,
 		mustShowDefaultGate,
 	};
 	const params = {
@@ -330,7 +330,7 @@ const fetchProxyGetTreatments = async (
 	return Promise.resolve(response);
 };
 
-const decideShouldNotServeMandatory = (): boolean => {
+const decideShouldServeDismissible = (): boolean => {
 	// Return a boolean indicating whether or not we accept mandatory gates for this call.
 	// If the answer is `false` this doesn't decide whether the gate should be displayed or not,
 	// it only means that if a gate is returned, then it must be mandatory.
@@ -400,7 +400,7 @@ const buildAuxiaGateDisplayData = async (
 		);
 	}
 
-	const shouldNotServeMandatory = decideShouldNotServeMandatory();
+	const shouldServeDismissible = decideShouldServeDismissible();
 
 	const mustShowDefaultGate = decideMustShowDefaultGate();
 
@@ -419,7 +419,7 @@ const buildAuxiaGateDisplayData = async (
 		readerPersonalData.mvtId,
 		should_show_legacy_gate_tmp,
 		readerPersonalData.hasConsented,
-		shouldNotServeMandatory,
+		shouldServeDismissible,
 		mustShowDefaultGate,
 	);
 
