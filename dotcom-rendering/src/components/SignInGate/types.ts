@@ -122,7 +122,7 @@ export interface AuxiaProxyGetTreatmentsPayload {
 	mvtId: number;
 	should_show_legacy_gate_tmp: boolean; // [1]
 	hasConsented: boolean;
-	shouldNotServeMandatory: boolean; // [2]
+	shouldServeDismissible: boolean; // [2]
 	mustShowDefaultGate: boolean; // [3]
 }
 
@@ -147,7 +147,7 @@ export interface AuxiaProxyGetTreatmentsPayload {
 
 // [2]
 // date: 03rd July 2025
-// If shouldNotServeMandatory, we should not show a mandatory gate.
+// If shouldServeDismissible is true, we should show a dismissible gate.
 
 // [3]
 // date: 23rd July 2025
