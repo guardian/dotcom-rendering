@@ -3,6 +3,7 @@ import { log, storage } from '@guardian/libs';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
+	getOphan,
 	submitClickComponentEvent,
 	submitComponentEvent,
 } from '../client/ophan/ophan';
@@ -50,6 +51,13 @@ const logAndReportError = (src: string, error: Error) => {
 	}
 
 	log('dotcom', message);
+};
+
+const dispatchOphanAttentionEvent = (
+	eventType: 'videoPlaying' | 'videoPause',
+) => {
+	const event = new Event(eventType, { bubbles: true });
+	document.dispatchEvent(event);
 };
 
 type Props = {
@@ -103,9 +111,11 @@ export const LoopVideo = ({
 	 */
 	const [hasBeenInView, setHasBeenInView] = useState(false);
 
+	const VISIBILITY_THRESHOLD = 0.5;
+
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
-		threshold: 0.5,
+		threshold: VISIBILITY_THRESHOLD,
 	});
 
 	const playVideo = useCallback(async () => {
@@ -119,6 +129,7 @@ export const LoopVideo = ({
 			await startPlayPromise
 				.then(() => {
 					// Autoplay succeeded
+					dispatchOphanAttentionEvent('videoPlaying');
 					setPlayerState('PLAYING');
 				})
 				.catch((error: Error) => {
@@ -145,6 +156,7 @@ export const LoopVideo = ({
 		}
 
 		setPlayerState(reason);
+		dispatchOphanAttentionEvent('videoPause');
 		void vidRef.current.pause();
 	};
 
@@ -238,6 +250,29 @@ export const LoopVideo = ({
 			);
 		};
 	}, [uniqueId]);
+
+	/**
+	 * Initiates attention tracking for ophan
+	 */
+	useEffect(() => {
+		const video = vidRef.current;
+		if (!video) return;
+		const trackAttention = async () => {
+			try {
+				const ophan = await getOphan('Web');
+				ophan.trackComponentAttention(
+					`gu-video-loop-${atomId}`,
+					video,
+					VISIBILITY_THRESHOLD,
+					true,
+				);
+			} catch (error) {
+				console.error('Failed to track video attention:', error);
+			}
+		};
+
+		void trackAttention();
+	}, [atomId]);
 
 	/**
 	 * Keeps track of whether the video has been in view or not.

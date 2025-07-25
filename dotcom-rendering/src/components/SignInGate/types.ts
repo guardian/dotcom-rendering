@@ -148,8 +148,7 @@ export interface AuxiaProxyGetTreatmentsPayload {
 // We will be setting it to false.
 
 // [2]
-// date: 03rd July 2025
-// If true, we should show a dismissible gate.
+// date: 03rd July 2025// If shouldServeDismissible is true, we should show a dismissible gate.
 
 // [3]
 

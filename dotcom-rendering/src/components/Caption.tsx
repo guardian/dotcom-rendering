@@ -6,6 +6,7 @@ import {
 	textSans14,
 	until,
 } from '@guardian/source/foundations';
+import { grid } from '../grid';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -208,12 +209,21 @@ const captionLink = css`
 	}
 `;
 
+const galleryStyles = css`
+	${grid.column.centre}
+	${from.leftCol} {
+		${grid.column.left}
+		grid-row-start: 8;
+	}
+`;
+
 const CameraIcon = ({ format }: IconProps) => {
 	return (
 		<span
 			css={[
 				iconStyle,
-				format.display === ArticleDisplay.Immersive &&
+				(format.display === ArticleDisplay.Immersive ||
+					format.design === ArticleDesign.Gallery) &&
 					hideIconBelowLeftCol,
 			]}
 		>
@@ -256,6 +266,8 @@ export const Caption = ({
 	const hideCredit = !displayCredit;
 	if (noCaption && (noCredit || hideCredit)) return null;
 
+	const isGallery = format.design === ArticleDesign.Gallery;
+
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
@@ -271,6 +283,7 @@ export const Caption = ({
 					tabletCaptionPadding,
 				padCaption && captionPadding,
 				isImmersive && immersivePadding,
+				isGallery && galleryStyles,
 			]}
 			data-spacefinder-role="inline"
 		>

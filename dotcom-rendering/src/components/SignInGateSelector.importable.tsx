@@ -409,7 +409,7 @@ const buildAuxiaGateDisplayData = async (
 		);
 	}
 
-	const shouldNotServeMandatory = decideShouldServeDismissible();
+	const shouldServeDismissible = decideShouldServeDismissible();
 
 	const showDefaultGate = decideShowDefaultGate();
 
@@ -428,7 +428,7 @@ const buildAuxiaGateDisplayData = async (
 		readerPersonalData.mvtId,
 		should_show_legacy_gate_tmp,
 		readerPersonalData.hasConsented,
-		shouldNotServeMandatory,
+		shouldServeDismissible,
 		showDefaultGate,
 	);
 

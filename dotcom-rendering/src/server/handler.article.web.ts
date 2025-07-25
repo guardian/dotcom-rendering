@@ -20,22 +20,6 @@ export const handleArticle: RequestHandler = ({ body }, res) => {
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
-export const handleArticleJson: RequestHandler = ({ body }, res) => {
-	recordTypeAndPlatform('article', 'json');
-
-	const frontendData = validateAsFEArticle(body);
-	const article = enhanceArticleType(frontendData, 'Web');
-	const resp = {
-		data: {
-			// TODO: We should rename this to 'article' or 'FEArticle', but first we need to investigate
-			// where/if this is used.
-			CAPIArticle: article,
-		},
-	};
-
-	res.status(200).send(resp);
-};
-
 export const handleInteractive: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('interactive', 'web');
 
