@@ -62,8 +62,15 @@ export const AllEditorialNewslettersPageLayout = ({
 							!!newslettersPage.config.switches
 								.emailSignupRecaptcha
 						}
-						captchaSiteKey={
+						visibleRecaptcha={
+							!!newslettersPage.config.switches
+								.manyNewsletterVisibleRecaptcha
+						}
+						invisibleCaptchaSiteKey={
 							newslettersPage.config.googleRecaptchaSiteKey
+						}
+						visibleCaptchaSiteKey={
+							newslettersPage.config.googleRecaptchaSiteKeyVisible
 						}
 					/>
 				</Island>
