@@ -1,9 +1,10 @@
 import { Available } from './available';
+import { descriptionLinks } from './styles';
 
 const OtherExamples = () => (
 	<>
 		<h3>Other Examples</h3>
-		<dl>
+		<dl css={descriptionLinks}>
 			<dt>
 				<a href="https://www.theguardian.com/tone/minutebyminute">
 					Minute-by-minute tag page
