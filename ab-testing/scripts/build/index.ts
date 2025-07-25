@@ -1,7 +1,9 @@
 import { ABTests } from '../../abTest.ts';
+import { getMVTGroupsFromDictionary } from '../lib/fastly-api.ts';
 import { buildABTestDict } from './build-ab-tests-dict.ts';
-import { buildMVTDict } from './build-mvt-dict.ts';
 import { parseArgs } from 'jsr:@std/cli/parse-args';
+import { calculateAllSpaceUpdates } from './calculate-mvt-updates.ts';
+import { parseMVTValue, stringifyMVTValue } from '../lib/stringify.ts';
 
 const flags = parseArgs(Deno.args, {
 	string: ['mvts', 'ab-tests'],
@@ -14,10 +16,27 @@ if (!flags['mvts'] || !flags['ab-tests']) {
 	Deno.exit(1);
 }
 
+const mvtGroupsDictionary = await getMVTGroupsFromDictionary();
+
+const mvtGroups = new Map(
+	mvtGroupsDictionary.map(({ item_key, item_value }) => {
+		const testGroups = parseMVTValue(item_value);
+		return [item_key, testGroups];
+	}),
+);
+
 const abTestDict = buildABTestDict(ABTests);
 
-const mvtDict = buildMVTDict(ABTests);
+const mvtDict = calculateAllSpaceUpdates(mvtGroups, ABTests);
 
+const mvtDictArray = Array.from(
+	mvtDict.entries().map(([key, value]) => ({
+		item_key: key,
+		item_value: stringifyMVTValue(value),
+	})),
+);
+
+console.log(`Writing ${mvtDictArray.length} MVT groups to ${flags['mvts']}`);
 // write the abTestDictArray to a file
 await Deno.writeTextFile(
 	flags['ab-tests'],
@@ -25,4 +44,4 @@ await Deno.writeTextFile(
 );
 
 // write the mvtKVsArray to a file
-await Deno.writeTextFile(flags['mvts'], JSON.stringify(mvtDict, null, 2));
+await Deno.writeTextFile(flags['mvts'], JSON.stringify(mvtDictArray, null, 2));

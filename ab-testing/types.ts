@@ -19,8 +19,6 @@ export type ABTest = {
 	status: 'ON' | 'OFF';
 	/** The size of the test, all variants will be divided equally to fit */
 	audienceSize: number;
-	/** The offset of the test, adjust to ensure that tests do not overlap */
-	audienceOffset?: number;
 	/**
 	 * Each test space represents 100% of the audience
 	 * Having multiple test spaces allows deliberate overlapping of test audiences

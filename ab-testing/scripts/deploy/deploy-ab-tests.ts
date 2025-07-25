@@ -2,7 +2,7 @@ import {
 	calculateUpdates,
 	getABTestGroupsFromDictionary,
 	updateABTestGroups,
-} from './fastly-api.ts';
+} from '../lib/fastly-api.ts';
 import { getUpdatedABTestGroups } from './read-built-dictionaries.ts';
 
 const deployABTests = async (filePath: string) => {
