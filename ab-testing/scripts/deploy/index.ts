@@ -1,7 +1,7 @@
-import { verifyDictionaryName, getService } from './fastly-api.ts';
+import { verifyDictionaryName, getService } from '../lib/fastly-api.ts';
 
 import { parseArgs } from 'jsr:@std/cli/parse-args';
-import * as env from './env.ts';
+import * as env from '../lib/env.ts';
 import { deployABTests } from './deploy-ab-tests.ts';
 import { deployMVTs } from './deploy-mvts.ts';
 
