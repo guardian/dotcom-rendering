@@ -18,9 +18,8 @@ export const ListenToArticle = ({ articleId }: Props) => {
 				getListenToArticleClient().isAvailable(articleId),
 				getListenToArticleClient().isPlaying(articleId),
 			])
-				.then(() =>
-					// setShowButton(isAvailable && !isPlaying),
-					setShowButton(false),
+				.then(([isAvailable, isPlaying]) =>
+					setShowButton(isAvailable && !isPlaying),
 				)
 				.catch((error) => {
 					console.error(
