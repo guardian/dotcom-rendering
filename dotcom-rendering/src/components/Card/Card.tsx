@@ -891,11 +891,11 @@ export const Card = ({
 							>
 								<LoopVideo
 									src={media.mainMedia.videoId}
+									atomId={media.mainMedia.atomId}
+									uniqueId={uniqueId}
 									height={media.mainMedia.height}
 									width={media.mainMedia.width}
-									image={media.mainMedia.image ?? ''}
-									uniqueId={uniqueId}
-									atomId={media.mainMedia.atomId}
+									posterImage={media.mainMedia.image ?? ''}
 									fallbackImage={media.mainMedia.image ?? ''}
 									fallbackImageSize={imageSize}
 									fallbackImageLoading={imageLoading}
