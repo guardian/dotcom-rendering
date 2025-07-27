@@ -436,6 +436,9 @@ importers:
       '@types/dompurify':
         specifier: 3.0.2
         version: 3.0.2
+      '@types/eslint':
+        specifier: 8.56.0
+        version: 8.56.0
       '@types/express':
         specifier: 5.0.1
         version: 5.0.1
@@ -484,6 +487,9 @@ importers:
       '@types/response-time':
         specifier: 2.3.8
         version: 2.3.8
+      '@types/rollup':
+        specifier: 0.54.0
+        version: 0.54.0
       '@types/sanitize-html':
         specifier: 2.11.0
         version: 2.11.0
@@ -7925,7 +7931,14 @@ packages:
     resolution: {integrity: sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==}
     dependencies:
       '@types/eslint': 9.6.1
-      '@types/estree': 1.0.7
+      '@types/estree': 1.0.8
+    dev: false
+
+  /@types/eslint@8.56.0:
+    resolution: {integrity: sha512-FlsN0p4FhuYRjIxpbdXovvHQhtlG05O1GG/RNWvdAxTboR438IOTwmrY/vLA+Xfgg06BTkP045M3vpFwTMv1dg==}
+    dependencies:
+      '@types/estree': 1.0.8
+      '@types/json-schema': 7.0.15
     dev: false
 
   /@types/eslint@9.6.1:
@@ -8243,6 +8256,13 @@ packages:
 
   /@types/retry@0.12.2:
     resolution: {integrity: sha512-XISRgDJ2Tc5q4TRqvgJtzsRkFYNJzZrhTdtMoGVBttwzzQJkPnS3WWTFc7kuDRoPtPakl+T+OfdEUjYJj7Jbow==}
+    dev: false
+
+  /@types/rollup@0.54.0:
+    resolution: {integrity: sha512-oeYztLHhQ98jnr+u2cs1c3tHOGtpzrm9DJlIdEjznwoXWidUbrI+X6ib7zCkPIbB7eJ7VbbKNQ5n/bPnSg6Naw==}
+    deprecated: This is a stub types definition for rollup (https://github.com/rollup/rollup). rollup provides its own type definitions, so you don't need @types/rollup installed!
+    dependencies:
+      rollup: 4.44.1
     dev: false
 
   /@types/sanitize-html@2.11.0:
