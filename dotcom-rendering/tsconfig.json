@@ -7,6 +7,8 @@
 		"jsx": "react-jsx",
 		"jsxImportSource": "@emotion/react",
 		"lib": ["esnext", "es2015", "dom"],
+		"module": "esnext",
+		"moduleResolution": "bundler",
 		"noEmit": true,
 		"noFallthroughCasesInSwitch": true,
 		"noUncheckedIndexedAccess": true,
