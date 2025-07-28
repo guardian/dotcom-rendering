@@ -32,20 +32,13 @@ export const ListenToArticle = ({ articleId }: Props) => {
 		number | undefined
 	>(undefined);
 
-	const isBridgetCompatible = useIsBridgetCompatible('8.6.0'); // todo update for bridget version
-
+	const isBridgetCompatible = useIsBridgetCompatible('8.6.0');
 	useEffect(() => {
 		if (isBridgetCompatible) {
 			Promise.all([
 				getListenToArticleClient().isAvailable(articleId),
 				getListenToArticleClient().isPlaying(articleId),
-				(
-					getListenToArticleClient() as {
-						getAudioDurationSeconds: (
-							id: string,
-						) => Promise<number>;
-					}
-				).getAudioDurationSeconds(articleId),
+				getListenToArticleClient().getAudioDurationSeconds(articleId),
 			])
 				.then(() => {
 					// TODO pending design implementation and AB test set up.
