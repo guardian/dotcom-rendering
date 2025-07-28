@@ -106,7 +106,13 @@ const Examples = () => (
  *
  * https://www.typescriptlang.org/docs/handbook/enums.html#reverse-mappings
  */
-const formatValues = (a: object): string =>
+const formatValues = (
+	a:
+		| typeof ArticleDesign
+		| typeof ArticleDisplay
+		| typeof Pillar
+		| typeof ArticleSpecial,
+): string =>
 	Object.values(a)
 		.filter((v) => typeof v !== 'number')
 		.join(', ');
