@@ -1879,13 +1879,14 @@ const articleInnerAdLabelsTextLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
-		case ArticleDesign.Gallery:
 			switch (theme) {
 				case ArticleSpecial.Labs:
 					return sourcePalette.neutral[46];
 				default:
 					return sourcePalette.neutral[86];
 			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
 		default:
 			return sourcePalette.neutral[46];
 	}
@@ -1901,7 +1902,6 @@ const articleInnerAdBackgroundLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
-		case ArticleDesign.Gallery:
 			switch (theme) {
 				case ArticleSpecial.Labs:
 					return sourcePalette.neutral[97];
@@ -1910,6 +1910,8 @@ const articleInnerAdBackgroundLight: PaletteFunction = ({ design, theme }) => {
 			}
 		case ArticleDesign.LiveBlog:
 			return sourcePalette.neutral[93];
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[7];
 		default:
 			return sourcePalette.neutral[97];
 	}
@@ -1929,13 +1931,14 @@ const articleInnerAdBorderLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
-		case ArticleDesign.Gallery:
 			switch (theme) {
 				case ArticleSpecial.Labs:
 					return sourcePalette.neutral[86];
 				default:
 					return sourcePalette.neutral[20];
 			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[20];
 		default:
 			return sourcePalette.neutral[86];
 	}
