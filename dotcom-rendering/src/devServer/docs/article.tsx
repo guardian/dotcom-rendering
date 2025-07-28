@@ -1,3 +1,9 @@
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '../../lib/articleFormat';
 import { Available } from './available';
 import { descriptionLinks } from './styles';
 
@@ -89,6 +95,11 @@ const Examples = () => (
 	</>
 );
 
+const formatValues = (a: object): string =>
+	Object.values(a)
+		.filter((v) => typeof v !== 'number')
+		.join(', ');
+
 const Format = () => (
 	<>
 		<h2>Format</h2>
@@ -103,23 +114,21 @@ const Format = () => (
 			<dd>
 				Primarily influences the content, structure and features of an
 				article. It's the most important of the three, and is often used
-				as a shorthand to describe the "kind" of article. Examples
-				include <code>Liveblog</code>, <code>Feature</code> and{' '}
-				<code>Gallery</code>.
+				as a shorthand to describe the "kind" of article. The values
+				are: {formatValues(ArticleDesign)}.
 			</dd>
 			<dt>Display</dt>
 			<dd>
-				Primarily influences the layout of an article. Examples include{' '}
-				<code>Immersive</code>, <code>Showcase</code> and{' '}
-				<code>NumberedList</code>.
+				Primarily influences the layout of an article. The values are:{' '}
+				{formatValues(ArticleDisplay)}.
 			</dd>
 			<dt>Theme</dt>
 			<dd>
 				Primarily influences the fonts and colours of an article. It can
 				can be thought of as a superset of "pillar", i.e. all the
 				pillars are considered themes, but there are some additional
-				themes that are not pillars. Examples include <code>News</code>,{' '}
-				<code>Sport</code> and <code>Labs</code>.
+				themes that are not pillars. The values are:{' '}
+				{formatValues(Pillar)}, {formatValues(ArticleSpecial)}.
 			</dd>
 		</dl>
 		<p>
