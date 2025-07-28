@@ -27,27 +27,34 @@ export const formatAudioDuration = (durationInSeconds: number): string => {
 };
 
 export const ListenToArticle = ({ articleId }: Props) => {
-	const [showButton, setShowButton] = useState<boolean>(false);
-	const [audioDuration, setAudioDuration] = useState<number | undefined>(
-		undefined,
-	);
+	const [showButton, setShowButton] = useState<boolean>(true);
+	const [audioDurationSeconds, setAudioDurationSeconds] = useState<
+		number | undefined
+	>(undefined);
 
-	const isBridgetCompatible = useIsBridgetCompatible('8.5.1'); // todo update for bridget version
+	const isBridgetCompatible = useIsBridgetCompatible('8.6.0'); // todo update for bridget version
 
 	useEffect(() => {
 		if (isBridgetCompatible) {
 			Promise.all([
 				getListenToArticleClient().isAvailable(articleId),
 				getListenToArticleClient().isPlaying(articleId),
-				getListenToArticleClient().getAudioDuration(articleId),
+				(
+					getListenToArticleClient() as {
+						getAudioDurationSeconds: (
+							id: string,
+						) => Promise<number>;
+					}
+				).getAudioDurationSeconds(articleId),
 			])
 				.then(() => {
+					// TODO pending design implementation and AB test set up.
 					// .then(({ isAvailable, isPlaying, audioDurationSeconds }) => {
 					// setAudioDuration(
 					// 	audioDurationSeconds ? audioDurationSeconds : undefined,
 					// );
 					// setShowButton(isAvailable && !isPlaying);
-					setAudioDuration(0);
+					setAudioDurationSeconds(undefined);
 					setShowButton(false);
 				})
 				.catch((error) => {
@@ -86,8 +93,8 @@ export const ListenToArticle = ({ articleId }: Props) => {
 			<ListenToArticleButton
 				onClickHandler={listenToArticleHandler}
 				audioDuration={
-					audioDuration !== undefined
-						? formatAudioDuration(audioDuration)
+					audioDurationSeconds !== undefined
+						? formatAudioDuration(audioDurationSeconds)
 						: undefined
 				}
 			/>
