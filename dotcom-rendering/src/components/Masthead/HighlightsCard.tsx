@@ -35,28 +35,28 @@ export type HighlightsCardProps = {
 };
 
 const container = css`
-	display: grid;
-	background-color: ${palette('--highlights-container-background')};
-	/** Relative positioning is required to absolutely
-	position the card link overlay */
-	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 	column-gap: ${space[2]}px;
-	grid-template-areas:
-		'headline headline'
-		'media-icon media-icon'
-		'. image';
+	/** Relative positioning is required to absolutely position the card link overlay */
+	position: relative;
+	padding: 10px 10px 0 10px;
+	background-color: ${palette('--highlights-card-background')};
 
-	/* Applied word-break: break-word to prevent text overflow
-	and ensure long words break onto the next line.
-	This is important since the highlights card can only take up a set portion
-	of the screen to allow for the peeping card on mobile and grid layout
-	on larger breakpoints, and the image has a fixed width on all breakpoints. */
+	/**
+	 * Applied word-break: break-word to prevent text overflow and ensure long words break
+	 * onto the next line. This is important since the highlights card can only take up a
+	 * set portion of the screen to allow for the peeping card on mobile and layout
+	 * on larger breakpoints, and the image has a fixed width on all breakpoints.
+	 */
 	word-break: break-word;
+
 	${until.mobileMedium} {
 		min-height: 174px;
 	}
 
-	${between.mobileMedium.and.desktop} {
+	${between.mobileMedium.and.tablet} {
 		min-height: 194px;
 		height: 100%;
 	}
@@ -66,42 +66,14 @@ const container = css`
 		width: 160px;
 	}
 
+	${from.tablet} {
+		width: 280px;
+		flex-direction: row;
+	}
+
 	${from.desktop} {
 		width: 300px;
-		grid-template-areas:
-			'headline 	image'
-			'media-icon image';
 	}
-`;
-
-const headline = css`
-	grid-area: headline;
-	margin-bottom: ${space[1]}px;
-`;
-
-const mediaIcon = css`
-	grid-area: media-icon;
-	display: flex;
-	align-items: flex-end;
-`;
-
-const imageArea = css`
-	grid-area: image;
-	height: 98px;
-	width: 98px;
-	align-self: end;
-	position: relative;
-	${until.desktop} {
-		margin-top: ${space[2]}px;
-	}
-	${from.desktop} {
-		align-self: start;
-	}
-`;
-
-/** Avatar alignment is an exception and should align with the bottom of the card *if* there is a gap.*/
-const avatarAlignmentStyles = css`
-	align-self: end;
 `;
 
 const hoverStyles = css`
@@ -123,12 +95,38 @@ const hoverStyles = css`
 	}
 `;
 
-const starWrapper = css`
-	background-color: ${palette('--star-rating-background')};
-	color: ${palette('--star-rating-fill')};
-	width: fit-content;
-	grid-area: media-icon;
+const content = css`
+	display: flex;
+	flex-direction: column;
+	gap: ${space[1]}px;
+
+	${from.tablet} {
+		padding-bottom: 10px;
+	}
+`;
+
+const imageStyles = css`
+	position: relative;
 	align-self: flex-end;
+	flex-shrink: 0;
+	height: 98px;
+	width: 98px;
+
+	${until.tablet} {
+		margin-top: ${space[2]}px;
+	}
+`;
+
+/** An avatar should align with the bottom of the card */
+const nonAvatarImageStyles = css`
+	margin-bottom: 10px;
+`;
+
+const starWrapper = css`
+	width: fit-content;
+	margin-top: ${space[1]}px;
+	color: ${palette('--star-rating-fill')};
+	background-color: ${palette('--star-rating-background')};
 `;
 
 export const HighlightsCard = ({
@@ -158,12 +156,12 @@ export const HighlightsCard = ({
 					isExternalLink={isExternalLink}
 				/>
 
-				<div css={headline}>
+				<div css={content}>
 					<CardHeadline
 						headlineText={headlineText}
 						format={format}
 						fontSizes={{
-							desktop: 'xsmall',
+							desktop: 'xxsmall',
 							tablet: 'xxsmall',
 							mobileMedium: 'xxsmall',
 							mobile: 'tiny',
@@ -177,41 +175,43 @@ export const HighlightsCard = ({
 						headlineColour={palette('--highlights-card-headline')}
 						kickerColour={palette('--highlights-card-kicker-text')}
 					/>
+
+					{!isUndefined(starRating) && (
+						<div css={starWrapper}>
+							<StarRating rating={starRating} size="small" />
+						</div>
+					)}
+
+					{!!mainMedia && isMediaCard && (
+						<div>
+							{mainMedia.type === 'Video' && (
+								<Pill
+									content={secondsToDuration(
+										mainMedia.duration,
+									)}
+									prefix="Video"
+									icon={<SvgMediaControlsPlay width={18} />}
+								/>
+							)}
+							{mainMedia.type === 'Audio' && (
+								<Pill
+									content={mainMedia.duration}
+									prefix="Podcast"
+									icon={<SvgMediaControlsPlay width={18} />}
+								/>
+							)}
+							{mainMedia.type === 'Gallery' && (
+								<Pill
+									content={mainMedia.count}
+									prefix="Gallery"
+									icon={<SvgCamera />}
+								/>
+							)}
+						</div>
+					)}
 				</div>
 
-				{!isUndefined(starRating) && (
-					<div css={starWrapper}>
-						<StarRating rating={starRating} size="small" />
-					</div>
-				)}
-
-				{!!mainMedia && isMediaCard && (
-					<div css={mediaIcon}>
-						{mainMedia.type === 'Video' && (
-							<Pill
-								content={secondsToDuration(mainMedia.duration)}
-								prefix="Video"
-								icon={<SvgMediaControlsPlay width={18} />}
-							/>
-						)}
-						{mainMedia.type === 'Audio' && (
-							<Pill
-								content={mainMedia.duration}
-								prefix="Podcast"
-								icon={<SvgMediaControlsPlay width={18} />}
-							/>
-						)}
-						{mainMedia.type === 'Gallery' && (
-							<Pill
-								content={mainMedia.count}
-								prefix="Gallery"
-								icon={<SvgCamera />}
-							/>
-						)}
-					</div>
-				)}
-
-				<div css={[imageArea, avatarUrl && avatarAlignmentStyles]}>
+				<div css={[imageStyles, !avatarUrl && nonAvatarImageStyles]}>
 					<HighlightsCardImage
 						imageLoading={imageLoading}
 						image={image}

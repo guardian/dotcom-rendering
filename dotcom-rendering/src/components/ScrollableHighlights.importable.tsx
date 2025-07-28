@@ -71,7 +71,7 @@ const itemStyles = css`
 	scroll-snap-align: start;
 	grid-area: span 1;
 	position: relative;
-	margin: ${space[3]}px 10px;
+	margin: ${space[2]}px 10px ${space[3]}px;
 	:first-child {
 		${from.tablet} {
 			margin-left: 0;
