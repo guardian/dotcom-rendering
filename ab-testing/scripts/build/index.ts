@@ -3,7 +3,7 @@ import { getMVTGroupsFromDictionary } from '../lib/fastly-api.ts';
 import { buildABTestDict } from './build-ab-tests-dict.ts';
 import { parseArgs } from 'jsr:@std/cli/parse-args';
 import { calculateAllSpaceUpdates } from './calculate-mvt-updates.ts';
-import { parseMVTValue, stringifyMVTValue } from '../lib/stringify.ts';
+import { parseMVTValue, stringifyMVTValue } from '../lib/fastly-subfield.ts';
 
 const flags = parseArgs(Deno.args, {
 	string: ['mvts', 'ab-tests'],

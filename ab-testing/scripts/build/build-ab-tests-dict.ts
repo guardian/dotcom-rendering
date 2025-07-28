@@ -1,5 +1,5 @@
 import { ABTest } from '../../types.ts';
-import { stringifyFastlySubfield } from '../lib/stringify.ts';
+import { stringifyFastlySubfield } from '../lib/fastly-subfield.ts';
 
 const buildABTestDict = (tests: ABTest[]) =>
 	tests
