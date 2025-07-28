@@ -32,7 +32,7 @@ export const Default = {
 export const withEightCards = {
 	name: 'With Eight Cards',
 	args: {
-		trails,
+		trails: trails.slice(0, 8),
 	},
 };
 
