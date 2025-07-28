@@ -1,26 +1,47 @@
 import { css } from '@emotion/react';
-import { space } from '@guardian/source/foundations';
+import { height, space } from '@guardian/source/foundations';
 import {
 	Button,
 	SvgMediaControlsPlay,
 } from '@guardian/source/react-components';
 import { palette } from '../palette';
 
-const button = css`
+const buttonCss = css`
+	display: flex;
+	align-items: center;
 	background-color: ${palette('--follow-icon-fill')};
+	color: ${palette('--follow-icon-background')};
 	&:active,
 	&:focus,
 	&:hover {
 		background-color: ${palette('--follow-icon-fill')};
 	}
-	color: ${palette('--follow-icon-background')};
 	margin-bottom: ${space[4]}px;
 	margin-left: ${space[2]}px;
+	padding-left: ${space[2]}px;
+	padding-right: ${space[4]}px;
+	padding-bottom: 0px;
+	font-size: 15px;
+	height: ${height.ctaSmall}px;
+	min-height: ${height.ctaSmall}px;
+
+	.src-button-space {
+		width: 3px;
+	}
 `;
 
-const durationPadding = css`
-	padding-left: ${space[2]}px;
+const dividerCss = css`
+	width: 1px;
+	height: 100%;
+	border-left: 1px solid ${palette('--follow-icon-background')};
+	margin-left: ${space[2]}px;
+	margin-right: ${space[2]}px;
 `;
+
+const durationCss = css`
+	font-weight: 300;
+`;
+
 type ButtonProps = {
 	onClickHandler: () => void;
 	audioDuration?: string;
@@ -31,13 +52,17 @@ export const ListenToArticleButton = ({
 }: ButtonProps) => (
 	<Button
 		onClick={onClickHandler}
-		size="small"
-		cssOverrides={button}
+		size="default"
+		iconSide="left"
+		cssOverrides={buttonCss}
 		icon={<SvgMediaControlsPlay />}
 	>
-		<span css={durationPadding}>
-			{!!audioDuration && `${audioDuration}`}
-		</span>
-		<span>Listen to article</span>
+		{audioDuration === undefined || audioDuration === '' ? null : (
+			<>
+				<span css={durationCss}>{audioDuration}</span>
+				<span css={dividerCss}></span>
+			</>
+		)}
+		Listen to this article
 	</Button>
 );
