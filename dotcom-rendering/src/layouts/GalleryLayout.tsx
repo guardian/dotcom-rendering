@@ -81,12 +81,18 @@ const galleryItemAdvertStyles = css`
 `;
 
 const galleryInlineAdContainerStyles = css`
-	${grid.column.centre}
-	width: 100%;
-	margin: 0 auto;
+	${grid.column.all}
+
+	${from.tablet} {
+		${grid.column.centre}
+	}
 
 	${from.desktop} {
 		padding-bottom: ${space[10]}px;
+	}
+
+	${from.leftCol} {
+		${grid.between('centre-column-start', 'right-column-end')}
 	}
 `;
 
