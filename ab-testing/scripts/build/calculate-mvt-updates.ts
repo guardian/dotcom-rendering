@@ -3,12 +3,6 @@ import { AUDIENCE_SPACES, MVT_COUNT } from '../lib/constants.ts';
 import { AllSpace, AudienceSpace, FastlyTestParams } from '../lib/types.ts';
 import { TestGroupMVTManager } from './test-group-mvt-manager.ts';
 
-/**
- * The multiplier for audience size to actual MVT IDs.
- * The audience size is a percentage of the total audience, so we multiply by total MVTs.
- **/
-const AUDIENCE_MULTIPLIER = MVT_COUNT;
-
 export const calculateSpaceUpdates = (
 	audienceSpace: AudienceSpace,
 	tests: ABTest[],
@@ -45,16 +39,15 @@ export const calculateSpaceUpdates = (
 		);
 		if (!currentTest) {
 			console.log(`Adding new test group: ${test.name}:${test.group}`);
-			// Add new test group
 			testGroupMVTs.addTestGroup(
 				`${test.name}:${test.group}`,
-				test.audienceSize * AUDIENCE_MULTIPLIER,
+				test.audienceSize * MVT_COUNT,
 			);
 		} else {
 			console.log(`Resizing test group: ${test.name}:${test.group}`);
 			testGroupMVTs.resizeTestGroup(
 				`${test.name}:${test.group}`,
-				test.audienceSize * AUDIENCE_MULTIPLIER,
+				test.audienceSize * MVT_COUNT,
 			);
 		}
 	});
