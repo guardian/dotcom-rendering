@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	between,
 	from,
 	palette as sourcePalette,
 	space,
@@ -86,6 +87,37 @@ const galleryInlineAdContainerStyles = css`
 
 	${from.desktop} {
 		padding-bottom: ${space[10]}px;
+	}
+`;
+
+const galleryBorder = css`
+	position: relative;
+	${between.desktop.and.leftCol} {
+		${grid.column.right}
+
+		&::before {
+			content: '';
+			position: absolute;
+			left: -10px; /* 10px to the left of this element */
+			top: 0;
+			bottom: 0;
+			width: 1px;
+			background-color: ${themePalette('--article-border')};
+		}
+	}
+
+	${from.leftCol} {
+		${grid.column.left}
+
+		&::after {
+			content: '';
+			position: absolute;
+			right: -10px;
+			top: 0;
+			bottom: 0;
+			width: 1px;
+			background-color: ${themePalette('--article-border')};
+		}
 	}
 `;
 
@@ -283,6 +315,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 											/>
 										)}
 									</div>
+									<div css={galleryBorder}></div>
 								</div>
 							)}
 						</Fragment>
