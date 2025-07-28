@@ -291,23 +291,28 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	return (
 		<>
 			{isInABTest && (
-				<Button
-					onClick={() => setIsCollapsed(!isCollapsed)}
-					cssOverrides={styles.iconOverrides}
-					priority="tertiary"
-					icon={
-						isCollapsed ? (
-							<SvgChevronUpSingle />
-						) : (
-							<SvgChevronDownSingle />
-						)
-					}
-					size="small"
-					theme={buttonThemes(collapsableButtonSettings, 'tertiary')}
-					hideLabel={true}
-				>
-					isCollapsed ? ( Open ) : ( Close )
-				</Button>
+				<div css={styles.collapsableButtonContainer}>
+					<Button
+						onClick={() => setIsCollapsed(!isCollapsed)}
+						cssOverrides={styles.iconOverrides}
+						priority="tertiary"
+						icon={
+							isCollapsed ? (
+								<SvgChevronUpSingle />
+							) : (
+								<SvgChevronDownSingle />
+							)
+						}
+						size="small"
+						theme={buttonThemes(
+							collapsableButtonSettings,
+							'tertiary',
+						)}
+						hideLabel={true}
+					>
+						isCollapsed ? ( Open ) : ( Close )
+					</Button>
+				</div>
 			)}
 			<div
 				css={styles.outerContainer(
@@ -625,6 +630,9 @@ const styles = {
 				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button'
 				'.		vert-line	cta-container	${cardsImageOrSpaceTemplateString}	.';
 		}
+	`,
+	collapsableButtonContainer: css`
+		grid-area: collapse-button;
 	`,
 	verticalLine: css`
 		grid-area: vert-line;
