@@ -9,25 +9,21 @@ type Props = {
 };
 
 export const formatAudioDuration = (durationInSeconds: number): string => {
-	const hours = Math.floor(durationInSeconds / 3600);
+	if (durationInSeconds >= 3600 || durationInSeconds <= 0) {
+		return '';
+	}
 	const minutes = Math.floor((durationInSeconds % 3600) / 60);
 	const seconds = durationInSeconds % 60;
 
-	if (hours > 3) {
-		return '';
-	}
-
 	const formattedDuration = `${
-		hours > 0 ? `${hours.toString().padStart(2, '0')}:` : ''
-	}${minutes > 0 ? minutes.toString().padStart(2, '0') : '00'}:${
-		seconds > 0 ? seconds.toString().padStart(2, '0') : '00'
-	}`;
+		minutes > 0 ? minutes.toString().padStart(1, '0') : '0'
+	}:${seconds > 0 ? seconds.toString().padStart(2, '0') : '00'}`;
 
 	return formattedDuration;
 };
 
 export const ListenToArticle = ({ articleId }: Props) => {
-	const [showButton, setShowButton] = useState<boolean>(true);
+	const [showButton, setShowButton] = useState<boolean>(false);
 	const [audioDurationSeconds, setAudioDurationSeconds] = useState<
 		number | undefined
 	>(undefined);

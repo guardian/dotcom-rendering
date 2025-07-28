@@ -19,7 +19,7 @@ const buttonCss = css`
 	margin-bottom: ${space[4]}px;
 	margin-left: ${space[2]}px;
 	padding-left: ${space[2]}px;
-	padding-right: ${space[4]}px;
+	padding-right: ${space[3]}px;
 	padding-bottom: 0px;
 	font-size: 15px;
 	height: ${height.ctaSmall}px;
