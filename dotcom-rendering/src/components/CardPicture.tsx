@@ -45,9 +45,7 @@ const decideImageWidths = (
 			return [{ breakpoint: breakpoints.mobile, width: 80, aspectRatio }];
 
 		case 'highlights-card':
-			return [
-				{ breakpoint: breakpoints.mobile, width: 112, aspectRatio },
-			];
+			return [{ breakpoint: breakpoints.mobile, width: 98, aspectRatio }];
 
 		case 'carousel':
 			return [

@@ -87,8 +87,8 @@ const mediaIcon = css`
 
 const imageArea = css`
 	grid-area: image;
-	height: 112px;
-	width: 112px;
+	height: 98px;
+	width: 98px;
 	align-self: end;
 	position: relative;
 	${until.desktop} {
