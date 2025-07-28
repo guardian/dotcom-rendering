@@ -128,19 +128,18 @@ router.use(redirects);
 
 // see https://www.npmjs.com/package/webpack-hot-server-middleware
 // for more info
-export const devServer = async (): Promise<Handler> => {
+export const devServer = async (): Promise<void> => {
+	const port = 3030;
+	const app = express();
+
 	const vite = await createServer({
 		server: { middlewareMode: true },
 		appType: 'custom',
-		base: '',
 	});
+	console.log('!!! Vite httpServer:', vite.httpServer);
 
-	router.use(vite.middlewares);
-
-	const port = 3030;
-	const app = express();
+	app.use(vite.middlewares);
 	app.listen(port, () => {
 		console.log(`Server started at http://localhost:${port}`);
 	});
-	return router;
 };
