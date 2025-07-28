@@ -10,8 +10,11 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import {
+	Button,
 	LinkButton,
 	SvgArrowRightStraight,
+	SvgChevronDownSingle,
+	SvgChevronUpSingle,
 	SvgGuardianLogo,
 } from '@guardian/source/react-components';
 import { Ticker } from '@guardian/source-development-kitchen/react-components';
@@ -159,6 +162,10 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		ChoiceCard | undefined
 	>(defaultChoiceCard);
 
+	// const isInABTest = true;
+
+	const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+
 	// We can't render anything without a design
 	if (!design) {
 		return <></>;
@@ -274,146 +281,168 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		articleCounts.forTargetedWeeks >= 5;
 
 	return (
-		<div
-			css={styles.outerContainer(
-				templateSettings.containerSettings.backgroundColour,
-				iosAppBannerPresent,
-				templateSettings.containerSettings.textColor,
+		<>
+			{isCollapsed ? (
+				<Button
+					onClick={() => setIsCollapsed(!isCollapsed)}
+					cssOverrides={styles.iconOverrides}
+				>
+					<SvgChevronDownSingle size="small" />
+				</Button>
+			) : (
+				<Button>
+					<SvgChevronUpSingle size="small" />
+				</Button>
 			)}
-		>
-			<div css={styles.layoutOverrides(cardsImageOrSpaceTemplateString)}>
-				<div css={styles.guardianLogoContainer}>
-					<SvgGuardianLogo
-						textColor={hexColourToString(basic.logo)}
-					/>
-				</div>
-
-				<div css={styles.verticalLine} />
-
-				<div css={styles.contentContainer}>
-					<div css={getHeaderContainerCss()}>
-						<DesignableBannerHeader
-							heading={content.mainContent.heading}
-							mobileHeading={content.mobileContent.heading}
-							headerSettings={templateSettings.headerSettings}
-							headlineSize={
-								design.fonts?.heading.size ?? 'medium'
-							}
+			<div
+				css={styles.outerContainer(
+					templateSettings.containerSettings.backgroundColour,
+					iosAppBannerPresent,
+					templateSettings.containerSettings.textColor,
+				)}
+			>
+				<div
+					css={styles.layoutOverrides(
+						cardsImageOrSpaceTemplateString,
+					)}
+				>
+					<div css={styles.guardianLogoContainer}>
+						<SvgGuardianLogo
+							textColor={hexColourToString(basic.logo)}
 						/>
 					</div>
-					{showAboveArticleCount && (
-						<div css={styles.articleCountContainer}>
-							<DesignableBannerArticleCount
-								numArticles={articleCounts.forTargetedWeeks}
-								settings={templateSettings}
-								copy={separateArticleCountSettings?.copy}
+
+					<div css={styles.verticalLine} />
+
+					<div css={styles.contentContainer}>
+						<div css={getHeaderContainerCss()}>
+							<DesignableBannerHeader
+								heading={content.mainContent.heading}
+								mobileHeading={content.mobileContent.heading}
+								headerSettings={templateSettings.headerSettings}
+								headlineSize={
+									design.fonts?.heading.size ?? 'medium'
+								}
 							/>
 						</div>
-					)}
-					{tickerSettings?.tickerData &&
-						templateSettings.tickerStylingSettings && (
-							<div css={templateSpacing.bannerTicker}>
-								<Ticker
-									currencySymbol={
-										tickerSettings.currencySymbol
-									}
-									copy={{
-										headline:
-											tickerSettings.copy.countLabel,
-										goalCopy: tickerSettings.copy.goalCopy,
-									}}
-									tickerData={tickerSettings.tickerData}
-									tickerStylingSettings={
-										templateSettings.tickerStylingSettings
-									}
-									size={'medium'}
+						{showAboveArticleCount && (
+							<div css={styles.articleCountContainer}>
+								<DesignableBannerArticleCount
+									numArticles={articleCounts.forTargetedWeeks}
+									settings={templateSettings}
+									copy={separateArticleCountSettings?.copy}
 								/>
 							</div>
 						)}
-					<div css={templateSpacing.bannerBodyCopy}>
-						<div css={styles.bodyCopyOverrides}>
-							<DesignableBannerBody
-								mainContent={content.mainContent}
-								mobileContent={content.mobileContent}
-								highlightedTextSettings={
-									templateSettings.highlightedTextSettings
-								}
-							/>
+						{tickerSettings?.tickerData &&
+							templateSettings.tickerStylingSettings && (
+								<div css={templateSpacing.bannerTicker}>
+									<Ticker
+										currencySymbol={
+											tickerSettings.currencySymbol
+										}
+										copy={{
+											headline:
+												tickerSettings.copy.countLabel,
+											goalCopy:
+												tickerSettings.copy.goalCopy,
+										}}
+										tickerData={tickerSettings.tickerData}
+										tickerStylingSettings={
+											templateSettings.tickerStylingSettings
+										}
+										size={'medium'}
+									/>
+								</div>
+							)}
+						<div css={templateSpacing.bannerBodyCopy}>
+							<div css={styles.bodyCopyOverrides}>
+								<DesignableBannerBody
+									mainContent={content.mainContent}
+									mobileContent={content.mobileContent}
+									highlightedTextSettings={
+										templateSettings.highlightedTextSettings
+									}
+								/>
+							</div>
 						</div>
 					</div>
-				</div>
 
-				{templateSettings.imageSettings && (
-					<div css={styles.bannerVisualContainer}>
-						<DesignableBannerVisual
-							settings={templateSettings.imageSettings}
-							bannerId={templateSettings.bannerId}
-						/>
-						{templateSettings.alternativeVisual}
-					</div>
-				)}
-
-				{!selectedChoiceCard && (
-					<div css={styles.outerImageCtaContainer}>
-						<div css={styles.innerImageCtaContainer}>
-							<DesignableBannerCtas
-								mainOrMobileContent={mainOrMobileContent}
-								onPrimaryCtaClick={onCtaClick}
-								onSecondaryCtaClick={onSecondaryCtaClick}
-								primaryCtaSettings={
-									templateSettings.primaryCtaSettings
-								}
-								secondaryCtaSettings={
-									templateSettings.secondaryCtaSettings
-								}
+					{templateSettings.imageSettings && (
+						<div css={styles.bannerVisualContainer}>
+							<DesignableBannerVisual
+								settings={templateSettings.imageSettings}
+								bannerId={templateSettings.bannerId}
 							/>
+							{templateSettings.alternativeVisual}
 						</div>
-					</div>
-				)}
+					)}
 
-				<div css={styles.closeButtonContainer}>
-					<DesignableBannerCloseButton
-						onCloseClick={onCloseClick}
-						settings={templateSettings.closeButtonSettings}
-					/>
-				</div>
-
-				{choiceCards &&
-					selectedChoiceCard &&
-					mainOrMobileContent.primaryCta && (
-						<div css={styles.threeTierChoiceCardsContainer}>
-							<ThreeTierChoiceCards
-								selectedChoiceCard={selectedChoiceCard}
-								setSelectedChoiceCard={setSelectedChoiceCard}
-								choices={choiceCards}
-								id={'banner'}
-							/>
-
-							<div css={styles.ctaContainer}>
-								<LinkButton
-									href={getChoiceCardUrl(
-										selectedChoiceCard,
-										mainOrMobileContent.primaryCta.ctaUrl,
-									)}
-									onClick={onCtaClick}
-									priority="primary"
-									cssOverrides={styles.linkButtonStyles}
-									theme={buttonThemes(
-										choiceCardButtonSettings,
-										'primary',
-									)}
-									icon={<SvgArrowRightStraight />}
-									iconSide="right"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									Continue
-								</LinkButton>
+					{!selectedChoiceCard && (
+						<div css={styles.outerImageCtaContainer}>
+							<div css={styles.innerImageCtaContainer}>
+								<DesignableBannerCtas
+									mainOrMobileContent={mainOrMobileContent}
+									onPrimaryCtaClick={onCtaClick}
+									onSecondaryCtaClick={onSecondaryCtaClick}
+									primaryCtaSettings={
+										templateSettings.primaryCtaSettings
+									}
+									secondaryCtaSettings={
+										templateSettings.secondaryCtaSettings
+									}
+								/>
 							</div>
 						</div>
 					)}
+
+					<div css={styles.closeButtonContainer}>
+						<DesignableBannerCloseButton
+							onCloseClick={onCloseClick}
+							settings={templateSettings.closeButtonSettings}
+						/>
+					</div>
+
+					{choiceCards &&
+						selectedChoiceCard &&
+						mainOrMobileContent.primaryCta && (
+							<div css={styles.threeTierChoiceCardsContainer}>
+								<ThreeTierChoiceCards
+									selectedChoiceCard={selectedChoiceCard}
+									setSelectedChoiceCard={
+										setSelectedChoiceCard
+									}
+									choices={choiceCards}
+									id={'banner'}
+								/>
+
+								<div css={styles.ctaContainer}>
+									<LinkButton
+										href={getChoiceCardUrl(
+											selectedChoiceCard,
+											mainOrMobileContent.primaryCta
+												.ctaUrl,
+										)}
+										onClick={onCtaClick}
+										priority="primary"
+										cssOverrides={styles.linkButtonStyles}
+										theme={buttonThemes(
+											choiceCardButtonSettings,
+											'primary',
+										)}
+										icon={<SvgArrowRightStraight />}
+										iconSide="right"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										Continue
+									</LinkButton>
+								</div>
+							</div>
+						)}
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 
@@ -797,6 +826,12 @@ const styles = {
 	`,
 	articleCountContainer: css`
 		margin-bottom: ${space[3]}px;
+	`,
+
+	iconOverrides: css`
+		svg {
+			fill: white;
+		}
 	`,
 };
 
