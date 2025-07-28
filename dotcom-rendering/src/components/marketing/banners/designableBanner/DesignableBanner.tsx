@@ -162,7 +162,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		ChoiceCard | undefined
 	>(defaultChoiceCard);
 
-	// const isInABTest = true;
+	const isInABTest = true;
 
 	const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
@@ -195,6 +195,14 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	};
 	const choiceCardButtonSettings: CtaSettings = {
 		default: choiceCardButtonCtaStateSettings,
+	};
+
+	const collapsableButtonCtaStateSettings: CtaStateSettings = {
+		backgroundColour: palette.brand[400],
+		textColour: 'inherit',
+	};
+	const collapsableButtonSettings: CtaSettings = {
+		default: collapsableButtonCtaStateSettings,
 	};
 
 	const templateSettings: BannerTemplateSettings = {
@@ -282,16 +290,23 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 
 	return (
 		<>
-			{isCollapsed ? (
+			{isInABTest && (
 				<Button
 					onClick={() => setIsCollapsed(!isCollapsed)}
 					cssOverrides={styles.iconOverrides}
+					priority="tertiary"
+					icon={
+						isCollapsed ? (
+							<SvgChevronUpSingle />
+						) : (
+							<SvgChevronDownSingle />
+						)
+					}
+					size="small"
+					theme={buttonThemes(collapsableButtonSettings, 'tertiary')}
+					hideLabel={true}
 				>
-					<SvgChevronDownSingle size="small" />
-				</Button>
-			) : (
-				<Button>
-					<SvgChevronUpSingle size="small" />
+					isCollapsed ? ( Open ) : ( Close )
 				</Button>
 			)}
 			<div
@@ -302,9 +317,15 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 				)}
 			>
 				<div
-					css={styles.layoutOverrides(
-						cardsImageOrSpaceTemplateString,
-					)}
+					css={
+						isInABTest && isCollapsed
+							? styles.collapsedLayoutOverrides(
+									cardsImageOrSpaceTemplateString,
+							  )
+							: styles.layoutOverrides(
+									cardsImageOrSpaceTemplateString,
+							  )
+					}
 				>
 					<div css={styles.guardianLogoContainer}>
 						<SvgGuardianLogo
@@ -397,10 +418,15 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 					)}
 
 					<div css={styles.closeButtonContainer}>
-						<DesignableBannerCloseButton
-							onCloseClick={onCloseClick}
-							settings={templateSettings.closeButtonSettings}
-						/>
+						{!isInABTest ||
+							(isCollapsed && (
+								<DesignableBannerCloseButton
+									onCloseClick={onCloseClick}
+									settings={
+										templateSettings.closeButtonSettings
+									}
+								/>
+							))}
 					</div>
 
 					{choiceCards &&
@@ -491,6 +517,71 @@ const styles = {
 		}
 		${from.phablet} {
 			max-width: 740px;
+			margin: 0 auto;
+			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
+			grid-template-columns: minmax(0, 0.5fr) ${phabletContentMaxWidth} minmax(
+					0,
+					0.5fr
+				);
+			grid-template-rows: auto auto auto;
+			grid-template-areas:
+				'. 	copy-container 						close-button'
+				'. 	${cardsImageOrSpaceTemplateString} 	.'
+				'. 	cta-container 						.';
+		}
+		${from.desktop} {
+			max-width: 980px;
+			align-self: stretch;
+			padding: ${space[3]}px ${space[1]}px 0 ${space[3]}px;
+			grid-template-columns: auto 380px auto;
+			grid-template-rows: auto auto;
+
+			grid-template-areas:
+				'copy-container 	${cardsImageOrSpaceTemplateString} 	close-button'
+				'cta-container 		${cardsImageOrSpaceTemplateString} 	.			';
+		}
+		${from.leftCol} {
+			max-width: 1140px;
+			bottom: 0px;
+			/* the vertical line aligns with that of standard article */
+			grid-column-gap: 10px;
+			grid-template-columns: 140px 1px min(460px) min(380px) auto;
+			grid-template-rows: auto auto;
+			grid-template-areas:
+				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button'
+				'.		vert-line	cta-container	${cardsImageOrSpaceTemplateString}	.';
+		}
+		${from.wide} {
+			max-width: 1300px;
+			/* the vertical line aligns with that of standard article */
+			grid-template-columns: 219px 1px min(460px) min(380px) auto;
+			grid-template-rows: auto auto;
+			grid-template-areas:
+				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button'
+				'.		vert-line	cta-container	${cardsImageOrSpaceTemplateString}	.';
+		}
+	`,
+	collapsedLayoutOverrides: (cardsImageOrSpaceTemplateString: string) => css`
+		display: grid;
+		background: inherit;
+		position: relative;
+		bottom: 0px;
+
+		/* mobile first */
+		${until.phablet} {
+			max-width: 660px;
+			margin: 0 auto;
+			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
+			grid-template-columns: auto max(${phabletContentMaxWidth} auto);
+			grid-template-areas:
+				'. close-button .'
+				'. copy-container .'
+				'. ${cardsImageOrSpaceTemplateString} .'
+				'. cta-container .';
+		}
+		${from.phablet} {
+			max-width: 740px;
+			background-color: red;
 			margin: 0 auto;
 			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
 			grid-template-columns: minmax(0, 0.5fr) ${phabletContentMaxWidth} minmax(
@@ -829,9 +920,12 @@ const styles = {
 	`,
 
 	iconOverrides: css`
-		svg {
+		background-color: ${palette.brand[400]};
+		path {
 			fill: white;
 		}
+		float: right;
+		margin-right: 15px;
 	`,
 };
 
