@@ -95,6 +95,17 @@ const Examples = () => (
 	</>
 );
 
+/**
+ * Joins all the `string` values of an enum into a single, comma-separated
+ * `string`.
+ *
+ * `ArticleDesign`, `ArticleDisplay` and the two variants of `ArticleTheme` are
+ * TypeScript enums. Their values contain both the `string` and `number`
+ * representations of the enum, but here we just want the `string`s, so we
+ * filter out the `number`s.
+ *
+ * https://www.typescriptlang.org/docs/handbook/enums.html#reverse-mappings
+ */
 const formatValues = (a: object): string =>
 	Object.values(a)
 		.filter((v) => typeof v !== 'number')
