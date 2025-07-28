@@ -436,10 +436,12 @@ const galleryInlineAdMobileContainerStyles = css`
 `;
 
 const galleryInlineAdStyles = css`
-	.ad-slot--dark {
-		background-color: ${schemedPalette('--ad-background-article-inner')};
-	}
+	margin: ${space[3]}px auto;
 	min-height: ${getMinHeight(adSizes.mpu.height)}px;
+
+	&.ad-slot--fluid {
+		margin: ${space[3]}px auto;
+	}
 `;
 
 /*** The top-above-nav-mobile and inline slots label should be dark even in light mode.

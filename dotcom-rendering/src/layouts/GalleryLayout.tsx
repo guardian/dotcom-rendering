@@ -3,7 +3,6 @@ import {
 	from,
 	palette as sourcePalette,
 	space,
-	until,
 } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
@@ -74,10 +73,6 @@ const galleryItemAdvertStyles = css`
 	grid-auto-flow: row dense;
 	background-color: ${themePalette('--article-inner-background')};
 
-	${until.tablet} {
-		padding-top: ${space[1]}px;
-	}
-
 	${from.tablet} {
 		border-left: 1px solid ${themePalette('--article-border')};
 		border-right: 1px solid ${themePalette('--article-border')};
@@ -87,7 +82,11 @@ const galleryItemAdvertStyles = css`
 const galleryInlineAdContainerStyles = css`
 	${grid.column.centre}
 	width: 100%;
-	margin: ${space[3]}px auto;
+	margin: 0 auto;
+
+	${from.desktop} {
+		padding-bottom: ${space[10]}px;
+	}
 `;
 
 export const GalleryLayout = (props: WebProps | AppProps) => {
