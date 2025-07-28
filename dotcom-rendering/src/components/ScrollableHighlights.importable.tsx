@@ -71,7 +71,7 @@ const itemStyles = css`
 	margin: ${space[3]}px 10px;
 	:first-child {
 		${from.tablet} {
-			margin-left: 0px;
+			margin-left: 0;
 		}
 
 		/**
@@ -86,6 +86,9 @@ const itemStyles = css`
 			padding-left: 0;
 			margin-left: 240px; /** 240 === 3 columns and 3 column gaps  */
 		}
+	}
+	:last-child {
+		margin-right: 0;
 	}
 `;
 
@@ -172,6 +175,7 @@ const getOphanInfo = (frontId?: string) => {
 	const ophanComponentName = ophanComponentId('highlights');
 	const ophanComponentLink = `container-${0} | ${ophanComponentName}`;
 	const ophanFrontName = `Front | /${frontId}`;
+
 	return {
 		ophanComponentName,
 		ophanComponentLink,
