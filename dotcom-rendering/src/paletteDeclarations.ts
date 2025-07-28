@@ -1879,6 +1879,7 @@ const articleInnerAdLabelsTextLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
+		case ArticleDesign.Gallery:
 			switch (theme) {
 				case ArticleSpecial.Labs:
 					return sourcePalette.neutral[46];
@@ -1900,6 +1901,7 @@ const articleInnerAdBackgroundLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
+		case ArticleDesign.Gallery:
 			switch (theme) {
 				case ArticleSpecial.Labs:
 					return sourcePalette.neutral[97];
@@ -1927,6 +1929,7 @@ const articleInnerAdBorderLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
+		case ArticleDesign.Gallery:
 			switch (theme) {
 				case ArticleSpecial.Labs:
 					return sourcePalette.neutral[86];
