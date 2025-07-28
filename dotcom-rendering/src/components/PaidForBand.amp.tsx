@@ -1,9 +1,10 @@
+/// <reference types="vite-plugin-svgr/client" />
 import { css } from '@emotion/react';
 import { from, palette, textSans15 } from '@guardian/source/foundations';
 import { ArticleSpecial } from '../lib/articleFormat';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
-import ArrowRightIcon from '../static/icons/arrow-right.svg';
-import LabsLogo from '../static/logos/the-guardian-labs.svg';
+import ArrowRightIcon from '../static/icons/arrow-right.svg?react';
+import LabsLogo from '../static/logos/the-guardian-labs.svg?react';
 
 const headerStyle = css`
 	display: flex;

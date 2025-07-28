@@ -1,3 +1,4 @@
+/// <reference types="vite-plugin-svgr/client" />
 import { css } from '@emotion/react';
 import {
 	palette,
@@ -6,7 +7,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import type { NavType } from '../model/extract-nav';
-import ArrowRight from '../static/icons/arrow-right.svg';
+import ArrowRight from '../static/icons/arrow-right.svg?react';
 import type { ReaderRevenuePosition } from '../types/commercial';
 
 const supportStyles = css`
