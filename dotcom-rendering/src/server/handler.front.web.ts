@@ -145,10 +145,6 @@ export const handleFront: RequestHandler = ({ body }, res) => {
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
-export const handleFrontJson: RequestHandler = ({ body }, res) => {
-	res.json(enhanceFront(body));
-};
-
 export const handleTagPage: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('tagPage');
 	const tagPage = enhanceTagPage(body);
@@ -156,8 +152,4 @@ export const handleTagPage: RequestHandler = ({ body }, res) => {
 		tagPage,
 	});
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
-};
-
-export const handleTagPageJson: RequestHandler = ({ body }, res) => {
-	res.json(enhanceTagPage(body));
 };

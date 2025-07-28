@@ -108,6 +108,8 @@ export interface AuxiaAPIResponseDataUserTreatment {
 	surface: string;
 }
 
+export type ShowGateValues = 'true' | 'mandatory' | 'dismissible' | undefined;
+
 export interface AuxiaProxyGetTreatmentsPayload {
 	browserId: string | undefined;
 	isSupporter: boolean;
@@ -122,8 +124,8 @@ export interface AuxiaProxyGetTreatmentsPayload {
 	mvtId: number;
 	should_show_legacy_gate_tmp: boolean; // [1]
 	hasConsented: boolean;
-	shouldNotServeMandatory: boolean; // [2]
-	mustShowDefaultGate: boolean; // [3]
+	shouldServeDismissible: boolean; // [2]
+	showDefaultGate: ShowGateValues; // [3]
 }
 
 // [1]
@@ -146,19 +148,19 @@ export interface AuxiaProxyGetTreatmentsPayload {
 // We will be setting it to false.
 
 // [2]
-// date: 03rd July 2025
-// If shouldNotServeMandatory, we should not show a mandatory gate.
+// date: 03rd July 2025// If shouldServeDismissible is true, we should show a dismissible gate.
 
 // [3]
-// date: 23rd July 2025
+
+// date: 25rd July 2025
 // author: Pascal
-// In order to facilitate internal testing, this attribute forces
-// the display of a sign-in gate, namely the default gu gate. If it is true then
-// the default gate is going to be displayed. Note that this applies to both auxia and
-// non auxia audiences. In particular because it also applies to auxia audiences, for which
-// the value of should_show_legacy_gate_tmp is ignored, then the information needs to come to
-// the SDC server as a new parameter in the GetTreatments payload. To trigger
-// gate display, the url should have query parameter `showgate=true`
+
+// In order to facilitate internal testing, this attribute, when defined, forces
+// the display of a sign-in gate. The values 'true' and 'dismissible' displays the
+// dismissible variant of the gu default gate, and the value 'mandatory' displays
+// the mandatory variant of the gu default gate.
+
+// Note that this attributes override the value of should_show_legacy_gate_tmp.
 
 export interface AuxiaProxyGetTreatmentsResponse {
 	status: boolean;

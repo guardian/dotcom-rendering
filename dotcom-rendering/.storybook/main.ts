@@ -15,6 +15,7 @@ const config: StorybookConfig = {
 		'../src/**/*.stories.@(tsx)',
 		'../stories/**/*.stories.@(tsx)',
 		'../stories/**/*.stories.@(jsx)',
+		'../src/**/*.mdx',
 	],
 
 	staticDirs: [
@@ -29,7 +30,7 @@ const config: StorybookConfig = {
 				actions: true,
 				backgrounds: true,
 				controls: true,
-				docs: false,
+				docs: true,
 				viewport: true,
 				toolbars: true,
 			},
@@ -142,6 +143,8 @@ const webpackConfig = (config: Configuration) => {
 	config.resolve.alias = {
 		...config.resolve.alias,
 		Buffer: 'buffer',
+		react: 'react',
+		'react-dom': 'react-dom',
 	};
 	return config;
 };

@@ -27,7 +27,8 @@ export const Default: Story = {
 		atomId: 'test-atom-1',
 		height: 720,
 		width: 900,
-		image: 'https://media.guim.co.uk/9bdb802e6da5d3fd249b5060f367b3a817965f0c/0_0_1800_1080/master/1800.jpg',
+		posterImage:
+			'https://media.guim.co.uk/9bdb802e6da5d3fd249b5060f367b3a817965f0c/0_0_1800_1080/master/1800.jpg',
 		fallbackImage: '',
 	},
 };

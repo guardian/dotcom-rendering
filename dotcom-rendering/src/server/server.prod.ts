@@ -12,17 +12,11 @@ import {
 } from './handler.article.apps';
 import {
 	handleArticle,
-	handleArticleJson,
 	handleBlocks,
 	handleInteractive,
 } from './handler.article.web';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
-import {
-	handleFront,
-	handleFrontJson,
-	handleTagPage,
-	handleTagPageJson,
-} from './handler.front.web';
+import { handleFront, handleTagPage } from './handler.front.web';
 import {
 	handleCricketMatchPage,
 	handleFootballMatchListPage,
@@ -71,9 +65,7 @@ export const prodServer = (): void => {
 	app.post('/AMPInteractive', logRenderTime, handleAMPArticle);
 	app.post('/Blocks', logRenderTime, handleBlocks);
 	app.post('/Front', logRenderTime, handleFront);
-	app.post('/FrontJSON', logRenderTime, handleFrontJson);
 	app.post('/TagPage', logRenderTime, handleTagPage);
-	app.post('/TagPageJSON', logRenderTime, handleTagPageJson);
 	app.post(
 		'/FootballMatchListPage',
 		logRenderTime,
@@ -104,7 +96,6 @@ export const prodServer = (): void => {
 		getContentFromURLMiddleware,
 		handleArticle,
 	);
-	app.use('/ArticleJson/*url', handleArticleJson);
 
 	app.get(
 		'/AMPArticle/*url',
@@ -119,24 +110,12 @@ export const prodServer = (): void => {
 		getContentFromURLMiddleware,
 		handleFront,
 	);
-	app.get(
-		'/FrontJSON/*url',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleFrontJson,
-	);
 
 	app.get(
 		'/TagPage/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleTagPage,
-	);
-	app.get(
-		'/TagPageJSON/*url',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleTagPageJson,
 	);
 
 	app.get(

@@ -10,3 +10,6 @@ dotcom-rendering/stories/generated
 
 # specific files
 /**/*/curl-with-js-and-domReady.js
+
+# MDX - prettier breaks SVGs
+*.mdx
