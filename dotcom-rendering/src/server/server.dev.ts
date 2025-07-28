@@ -1,5 +1,6 @@
 import express, { type Handler, Router } from 'express';
 import { createServer } from 'vite';
+import svgr from 'vite-plugin-svgr';
 import { pages } from '../devServer/routers/pages';
 import { targets } from '../devServer/routers/targets';
 import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
@@ -135,6 +136,7 @@ export const devServer = async (): Promise<void> => {
 	const vite = await createServer({
 		server: { middlewareMode: true },
 		appType: 'custom',
+		plugins: [svgr()],
 	});
 	console.log('!!! Vite httpServer:', vite.httpServer);
 

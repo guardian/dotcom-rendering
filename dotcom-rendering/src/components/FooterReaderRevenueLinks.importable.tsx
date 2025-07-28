@@ -1,3 +1,4 @@
+/// <reference types="vite-plugin-svgr/client" />
 import { css } from '@emotion/react';
 import {
 	brandText,
@@ -14,7 +15,7 @@ import {
 import { shouldHideSupportMessaging } from '../lib/contributions';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
-import ArrowRightIcon from '../static/icons/arrow-right.svg';
+import ArrowRightIcon from '../static/icons/arrow-right.svg?react';
 
 type Props = {
 	dataLinkNamePrefix: string;

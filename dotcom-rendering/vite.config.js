@@ -1,7 +1,7 @@
 import path from 'node:path';
-import commonjs from '@rollup/plugin-commonjs';
 import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
+import svgr from 'vite-plugin-svgr';
 
 // eslint-disable-next-line import/no-default-export -- vite expects a default export
 export default defineConfig({
@@ -40,6 +40,7 @@ export default defineConfig({
 			jsxImportSource: '@emotion/react',
 			parserConfig: { tsx: true },
 		}),
+		svgr(),
 	],
 	resolve: {
 		alias: {
