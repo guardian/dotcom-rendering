@@ -5,8 +5,8 @@
  */
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ThemeButton } from '@guardian/source/dist/react-components';
 import { from, until } from '@guardian/source/foundations';
+import type { ThemeButton } from '@guardian/source/react-components';
 import type { CtaSettings } from '../settings';
 
 export function buttonThemes(
