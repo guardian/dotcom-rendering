@@ -20,6 +20,6 @@ export const ListenToArticleWithDurationButton = {
 export const ListenToArticleNoDurationButton = {
 	args: {
 		onClickHandler: () => undefined,
-		audioDuration: '',
+		audioDuration: undefined,
 	},
 } satisfies Story;

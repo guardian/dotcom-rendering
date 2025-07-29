@@ -8,9 +8,11 @@ type Props = {
 	articleId: string;
 };
 
-export const formatAudioDuration = (durationInSeconds: number): string => {
+export const formatAudioDuration = (
+	durationInSeconds: number,
+): string | undefined => {
 	if (durationInSeconds >= 3600 || durationInSeconds <= 0) {
-		return '';
+		return undefined;
 	}
 	const minutes = Math.floor((durationInSeconds % 3600) / 60);
 	const seconds = durationInSeconds % 60;
