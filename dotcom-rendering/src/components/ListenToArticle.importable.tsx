@@ -17,9 +17,9 @@ export const formatAudioDuration = (
 	const minutes = Math.floor((durationInSeconds % 3600) / 60);
 	const seconds = durationInSeconds % 60;
 
-	const formattedDuration = `${
-		minutes > 0 ? minutes.toString().padStart(1, '0') : '0'
-	}:${seconds > 0 ? seconds.toString().padStart(2, '0') : '00'}`;
+	const formattedDuration = `${minutes.toString()}:${seconds
+		.toString()
+		.padStart(2, '0')}`;
 
 	return formattedDuration;
 };
