@@ -15,7 +15,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
 import { Footer } from '../components/Footer';
 import {
-	GalleryInlineAdSlot,
+	GalleryDesktopAdSlot,
 	MobileAdSlot,
 } from '../components/GalleryAdSlots';
 import { GalleryImage } from '../components/GalleryImage';
@@ -27,13 +27,10 @@ import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { SubMeta } from '../components/SubMeta';
 import { grid } from '../grid';
-import type { ArticleFormat } from '../lib/articleFormat';
+import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { decideMainMediaCaption } from '../lib/decide-caption';
-import {
-	getDesktopAdPositions,
-	getMobileAdPositions,
-} from '../lib/getGalleryAdPositions';
+import { getAdPositions } from '../lib/getGalleryAdPositions';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { Gallery } from '../types/article';
@@ -81,11 +78,8 @@ const galleryItemAdvertStyles = css`
 `;
 
 const galleryInlineAdContainerStyles = css`
-	${grid.column.all}
-
-	${from.tablet} {
-		${grid.column.centre}
-	}
+	${grid.column.centre}
+	z-index: 1;
 
 	${from.desktop} {
 		padding-bottom: ${space[10]}px;
@@ -142,15 +136,11 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 		theme: gallery.theme,
 	};
 
+	const isLabs = format.theme === ArticleSpecial.Labs;
+
 	const renderAds = canRenderAds(frontendData);
 
-	const desktopAdPositions = renderAds
-		? getDesktopAdPositions(gallery.images)
-		: [];
-
-	const mobileAdPositions = renderAds
-		? getMobileAdPositions(gallery.images)
-		: [];
+	const adPositions = renderAds ? getAdPositions(gallery.images) : [];
 
 	return (
 		<>
@@ -277,12 +267,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				</header>
 				{gallery.images.map((element, idx) => {
 					const index = idx + 1;
-					const shouldShowDesktopAd =
-						desktopAdPositions.includes(index);
-					const shouldShowMobileAd =
-						mobileAdPositions.includes(index);
-					const shouldShowAnyAd =
-						shouldShowDesktopAd || shouldShowMobileAd;
+					const shouldShowAds = adPositions.includes(index);
 
 					return (
 						<Fragment key={element.elementId}>
@@ -292,7 +277,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 								pageId={frontendData.pageId}
 								webTitle={frontendData.webTitle}
 							/>
-							{isWeb && shouldShowAnyAd && (
+							{isWeb && shouldShowAds && (
 								<div
 									className={[
 										'gallery__item gallery__item--advert',
@@ -303,23 +288,19 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 										className="gallery__img-container"
 										css={galleryInlineAdContainerStyles}
 									>
-										{shouldShowDesktopAd && (
-											<GalleryInlineAdSlot
-												renderAds={renderAds}
-												adSlotIndex={desktopAdPositions.indexOf(
-													index,
-												)}
-											/>
-										)}
+										<GalleryDesktopAdSlot
+											renderAds={renderAds}
+											adSlotIndex={adPositions.indexOf(
+												index,
+											)}
+										/>
 
-										{shouldShowMobileAd && (
-											<MobileAdSlot
-												renderAds={renderAds}
-												adSlotIndex={mobileAdPositions.indexOf(
-													index,
-												)}
-											/>
-										)}
+										<MobileAdSlot
+											renderAds={renderAds}
+											adSlotIndex={adPositions.indexOf(
+												index,
+											)}
+										/>
 									</div>
 									<div css={galleryBorder}></div>
 								</div>
@@ -355,6 +336,18 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						position="merchandising-high"
 						display={format.display}
 					/>
+				</Section>
+			)}
+			{isWeb && renderAds && !isLabs && (
+				<Section
+					fullWidth={true}
+					padSides={false}
+					showTopBorder={false}
+					showSideBorders={false}
+					backgroundColour={themePalette('--ad-background')}
+					element="aside"
+				>
+					<AdSlot position="merchandising" display={format.display} />
 				</Section>
 			)}
 			{isWeb && (
