@@ -104,24 +104,6 @@ const content = css`
 		padding-bottom: 10px;
 	}
 `;
-
-const imageStyles = css`
-	position: relative;
-	align-self: flex-end;
-	flex-shrink: 0;
-	height: 98px;
-	width: 98px;
-
-	${until.tablet} {
-		margin-top: ${space[2]}px;
-	}
-`;
-
-/** An avatar should align with the bottom of the card */
-const nonAvatarImageStyles = css`
-	margin-bottom: 10px;
-`;
-
 const starWrapper = css`
 	width: fit-content;
 	margin-top: ${space[1]}px;
@@ -211,7 +193,7 @@ export const HighlightsCard = ({
 					)}
 				</div>
 
-				<div css={[imageStyles, !avatarUrl && nonAvatarImageStyles]}>
+				{(!!avatarUrl || !!image) && (
 					<HighlightsCardImage
 						imageLoading={imageLoading}
 						image={image}
@@ -219,7 +201,7 @@ export const HighlightsCard = ({
 						byline={byline}
 						mainMedia={mainMedia}
 					/>
-				</div>
+				)}
 			</div>
 		</FormatBoundary>
 	);
