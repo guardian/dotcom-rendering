@@ -1,11 +1,14 @@
 import { css } from '@emotion/react';
 import {
+	from,
 	palette,
 	space,
+	textSans12,
 	textSans14,
 	textSans15,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
+import { grid } from '../grid';
 import { palette as themePalette } from '../palette';
 
 const disclaimerLeftColStyles = css`
@@ -18,6 +21,37 @@ const disclaimerLeftColStyles = css`
 	line-height: 1.15;
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[1]}px;
+`;
+
+const galleryDisclaimerStyles = css`
+	${textSans12};
+	line-height: 1.5;
+	${grid.column.centre}
+	padding-bottom: ${space[6]}px;
+	color: ${themePalette('--affiliate-disclaimer-text')};
+	${from.tablet} {
+		position: relative;
+		&::before {
+			content: '';
+			position: absolute;
+			left: -10px;
+			top: 0;
+			bottom: 0;
+			width: 1px;
+			background-color: ${themePalette('--article-border')};
+		}
+	}
+	a {
+		color: ${themePalette('--affiliate-disclaimer-text')};
+		transition: border-color 0.15s ease-out;
+		border-bottom: 1px solid #707070;
+		text-decoration: none;
+	}
+	a:hover {
+		border-bottom: 1px solid
+			${themePalette('--affiliate-disclaimer-text-hover')};
+		text-decoration: none;
+	}
 `;
 
 const disclaimerInlineStyles = css`
@@ -64,8 +98,9 @@ const DisclaimerText = () => (
 		The Guardian’s journalism is independent. We will earn a commission if
 		you buy something through an affiliate link.&nbsp;
 		<a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">
-			Learn more.
+			Learn more
 		</a>
+		.
 	</p>
 );
 
@@ -99,4 +134,17 @@ const AffiliateDisclaimerInline = ({ isAmp = false }) =>
 		</Hide>
 	);
 
-export { AffiliateDisclaimer, AffiliateDisclaimerInline };
+const GalleryAffiliateDisclaimer = () => (
+	<aside
+		css={[disclaimerLeftColStyles, galleryDisclaimerStyles]}
+		data-testid="affiliate-disclaimer"
+	>
+		<DisclaimerText />
+	</aside>
+);
+
+export {
+	AffiliateDisclaimer,
+	AffiliateDisclaimerInline,
+	GalleryAffiliateDisclaimer,
+};
