@@ -20,42 +20,27 @@
 			}
 			.test-articles-list span {
 				display: inline-block;
-				width: 8em;
 				line-height: 2em;
+				margin-right: 2em;
 			}
-			.test-article-header span {
-				font-weight: bold;
-			}
-			.test-article > span:nth-child(1),
-			.test-article-header > span:nth-child(1) {
+			.test-article > span:nth-child(1) {
 				width: 14em !important;
 			}
 		</style>
 	</head>
 	<body>
-		<h2>Default Endpoints</h2>
-
-		<form name="url-form">
-			<input
-				type="url"
-				name="url-input"
-				size="100"
-				required
-				placeholder="https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
-			/>
-			<input type="submit" value="Add" />
-		</form>
+		<h2>Pages</h2>
 
 		<ul id="default-endpoints">
 			<li>
 				<a
-					href="/Article/https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
+					href="/Article/https://www.theguardian.com/travel/2024/apr/03/walking-londons-unsung-river-nature-culture-and-moments-of-wonder-along-the-river-lea"
 					>Article</a
 				>
 			</li>
 			<li>
 				<a
-					href="/AppsArticle/https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
+					href="/AppsArticle/https://www.theguardian.com/travel/2024/apr/03/walking-londons-unsung-river-nature-culture-and-moments-of-wonder-along-the-river-lea"
 					>Apps Article</a
 				>
 			</li>
@@ -85,10 +70,21 @@
 			<li>
 				<a
 					href="/EmailNewsletters/https://api.nextgen.guardianapps.co.uk/email-newsletters"
-					>Email Newsletters page</a
+					>Email Newsletters</a
 				>
 			</li>
 		</ul>
+
+		<form name="url-form">
+			<input
+				type="url"
+				name="url-input"
+				size="100"
+				required
+				placeholder="https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
+			/>
+			<input type="submit" value="Add" />
+		</form>
 
 		<section>
 			<h2>Article Examples</h2>
@@ -288,12 +284,9 @@
 				<table>
 					<thead>
 						<tr>
-							<th rowspan="2">Headline</th>
-							<th rowspan="2">Description</th>
-							<th rowspan="2">Format</th>
-							<th colspan="3">Links</th>
-						</tr>
-						<tr>
+							<th>Headline</th>
+							<th>Description</th>
+							<th>Format</th>
 							<th>DEV</th>
 							<th>CODE</th>
 							<th>PROD</th>
@@ -379,23 +372,11 @@
 
 		<h2>Test Articles By Element</h2>
 
-		<div id="test-articles-by-element" class="test-articles-list">
-			<div class="test-article-header">
-				<span>type</span>
-				<span>local</span>
-				<span>production</span>
-			</div>
-		</div>
+		<div id="test-articles-by-element" class="test-articles-list"></div>
 
 		<h2>Test Articles By Atom Type</h2>
 
-		<div id="test-articles-by-atom-type" class="test-articles-list">
-			<div class="test-article-header">
-				<span>type</span>
-				<span>local</span>
-				<span>production</span>
-			</div>
-		</div>
+		<div id="test-articles-by-atom-type" class="test-articles-list"></div>
 
 		<h2>Test Articles By Element (Missing)</h2>
 		<ul>
@@ -707,8 +688,9 @@
 			const makeTestArticle = (a) => `
 			             <div class="test-article">
 			                 <span>${a.name}</span>
-			                 <span><a href="/Article/https://www.theguardian.com${a.article}">🔗</a> <a href="/Article/http://localhost:9000${a.article}">🔗(local FE)</a></span>
-			                 <span><a href="https://www.theguardian.com${a.article}">example</a></span>
+			                 <span><a href="/Article/https://www.theguardian.com${a.article}">local</a></span>
+							 <span><a href="/Article/http://localhost:9000${a.article}">local FE</a></span>
+			                 <span><a href="https://www.theguardian.com${a.article}">prod</a></span>
 			             </div>
 			         `;
 
