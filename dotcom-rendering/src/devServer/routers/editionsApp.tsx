@@ -5,10 +5,10 @@ import { sendReact } from '../send';
 
 const editionsApp = express.Router();
 
-editionsApp.get('/', sendReact('Editions App', EditionsApp));
+editionsApp.get('/', sendReact('Editions App', <EditionsApp />));
 editionsApp.get(
 	'/crosswords',
-	sendReact('Editions Crosswords', EditionsCrosswords),
+	sendReact('Editions Crosswords', <EditionsCrosswords />),
 );
 
 export { editionsApp };

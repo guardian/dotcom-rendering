@@ -8,7 +8,7 @@ import { liveApps } from './liveApps';
 
 const targets = Router();
 
-targets.get('/', sendReact('Targets', Targets));
+targets.get('/', sendReact('Targets', <Targets />));
 targets.use('/dotcom', dotcom);
 targets.use('/live-apps', liveApps);
 targets.use('/editions-app', editionsApp);
