@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	from,
 	palette,
 	space,
 	textSans12,
@@ -8,7 +7,6 @@ import {
 	textSans15,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import { grid } from '../grid';
 import { palette as themePalette } from '../palette';
 
 const disclaimerLeftColStyles = css`
@@ -26,25 +24,11 @@ const disclaimerLeftColStyles = css`
 const galleryDisclaimerStyles = css`
 	${textSans12};
 	line-height: 1.5;
-	${grid.column.centre}
-	padding-bottom: ${space[6]}px;
 	color: ${themePalette('--affiliate-disclaimer-text')};
-	${from.tablet} {
-		position: relative;
-		&::before {
-			content: '';
-			position: absolute;
-			left: -10px;
-			top: 0;
-			bottom: 0;
-			width: 1px;
-			background-color: ${themePalette('--article-border')};
-		}
-	}
 	a {
 		color: ${themePalette('--affiliate-disclaimer-text')};
 		transition: border-color 0.15s ease-out;
-		border-bottom: 1px solid #707070;
+		border-bottom: 1px solid ${palette.neutral[46]};
 		text-decoration: none;
 	}
 	a:hover {
