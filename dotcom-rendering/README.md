@@ -115,7 +115,7 @@ The development server home page lists examples of the various page and content 
 You can render a specific article by appending the production URL to the `Article` endpoint, for example:
 http://localhost:3030/Article/https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey
 
-You can view the JSON data model of a page as sent by [Frontend](https://github.com/guardian/frontend) to DCR, by appending `.json?dcr=true` to the production URL, for example:
+You can view the JSON data model of a page as sent by [Frontend](https://github.com/guardian/frontend) to DCR by appending `.json?dcr=true` to the production URL, for example:
 https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey.json?dcr=true
 
 ### Detailed setup
