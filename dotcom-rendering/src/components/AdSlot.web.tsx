@@ -426,20 +426,6 @@ const crosswordBannerMobileAdStyles = css`
 	min-height: ${getMinHeight(adSizes.mobilesticky.height)}px;
 `;
 
-const galleryInlineAdContainerStyles = css`
-	${until.tablet} {
-		margin: 0 auto;
-		display: none;
-	}
-`;
-
-const galleryInlineAdMobileContainerStyles = css`
-	${from.tablet} {
-		margin: 0 auto;
-		display: none;
-	}
-`;
-
 const galleryInlineAdStyles = css`
 	margin: ${space[3]}px auto;
 	min-height: ${getMinHeight(adSizes.mpu.height)}px;
@@ -953,13 +939,7 @@ export const AdSlot = ({
 		case 'gallery-inline': {
 			const advertId = `inline${index + 1}`;
 			return (
-				<AdSlotWrapper
-					css={[
-						galleryInlineAdContainerStyles,
-						labelStyles,
-						galleryInlineAdLabelStyles,
-					]}
-				>
+				<AdSlotWrapper css={[labelStyles, galleryInlineAdLabelStyles]}>
 					<div
 						id={`dfp-ad--${advertId}`}
 						className={[
@@ -984,13 +964,7 @@ export const AdSlot = ({
 		case 'gallery-inline-mobile': {
 			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
-				<AdSlotWrapper
-					css={[
-						galleryInlineAdMobileContainerStyles,
-						labelStyles,
-						galleryInlineAdLabelStyles,
-					]}
-				>
+				<AdSlotWrapper css={[labelStyles, galleryInlineAdLabelStyles]}>
 					<div
 						id={`dfp-ad--${advertId}--mobile`}
 						className={[
@@ -1008,7 +982,7 @@ export const AdSlot = ({
 						data-name={advertId}
 						aria-hidden="true"
 						data-label-show="true"
-						data-testid="slot" //doesn't exist in Frontend so do we need it in DCR?
+						data-testid="slot"
 					/>
 				</AdSlotWrapper>
 			);

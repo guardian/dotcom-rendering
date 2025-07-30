@@ -14,12 +14,10 @@ import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
 import { Footer } from '../components/Footer';
-import {
-	GalleryDesktopAdSlot,
-	MobileAdSlot,
-} from '../components/GalleryAdSlots';
+import { DesktopAdSlot, MobileAdSlot } from '../components/GalleryAdSlots';
 import { GalleryImage } from '../components/GalleryImage';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
 import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
@@ -278,29 +276,24 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 								webTitle={frontendData.webTitle}
 							/>
 							{isWeb && shouldShowAds && (
-								<div
-									className={[
-										'gallery__item gallery__item--advert',
-									].join(' ')}
-									css={galleryItemAdvertStyles}
-								>
-									<div
-										className="gallery__img-container"
-										css={galleryInlineAdContainerStyles}
-									>
-										<GalleryDesktopAdSlot
-											renderAds={renderAds}
-											adSlotIndex={adPositions.indexOf(
-												index,
-											)}
-										/>
-
-										<MobileAdSlot
-											renderAds={renderAds}
-											adSlotIndex={adPositions.indexOf(
-												index,
-											)}
-										/>
+								<div css={galleryItemAdvertStyles}>
+									<div css={galleryInlineAdContainerStyles}>
+										<Hide when="below" breakpoint="tablet">
+											<DesktopAdSlot
+												renderAds={renderAds}
+												adSlotIndex={adPositions.indexOf(
+													index,
+												)}
+											/>
+										</Hide>
+										<Hide when="above" breakpoint="tablet">
+											<MobileAdSlot
+												renderAds={renderAds}
+												adSlotIndex={adPositions.indexOf(
+													index,
+												)}
+											/>
+										</Hide>
 									</div>
 									<div css={galleryBorder}></div>
 								</div>
