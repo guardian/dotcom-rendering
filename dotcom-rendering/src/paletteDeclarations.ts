@@ -1920,6 +1920,8 @@ const articleInnerAdBackgroundDark: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 			return sourcePalette.neutral[7];
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[10];
 		default:
 			return sourcePalette.neutral[20];
 	}
