@@ -6,8 +6,8 @@ import { sendReact } from '../send';
 
 const amp = express.Router();
 
-amp.get('/', sendReact('AMP', Amp));
-amp.get('/article', sendReact('Article', Article));
-amp.get('/interactive', sendReact('Interactive', Interactive));
+amp.get('/', sendReact('AMP', <Amp />));
+amp.get('/article', sendReact('Article', <Article />));
+amp.get('/interactive', sendReact('Interactive', <Interactive />));
 
 export { amp };

@@ -26,7 +26,7 @@ import type {
 	Image,
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
 	removeMediaRulePrefix,
 	useMatchMedia,
@@ -138,6 +138,14 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		setIosAppBannerPresent(
 			window.innerHeight != window.document.documentElement.clientHeight,
 		);
+	}, []);
+
+	const bannerRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (bannerRef.current) {
+			bannerRef.current.focus();
+		}
 	}, []);
 
 	useEffect(() => {
@@ -289,8 +297,12 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		articleCounts.forTargetedWeeks >= 5;
 
 	return (
+
 		<>
 			<div
+        ref={bannerRef}
+			  role="alert"
+			  tabIndex={-1}
 				css={styles.outerContainer(
 					templateSettings.containerSettings.backgroundColour,
 					iosAppBannerPresent,
