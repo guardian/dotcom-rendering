@@ -170,7 +170,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		ChoiceCard | undefined
 	>(defaultChoiceCard);
 
-	const isInABTest = true;
+	const isInABTest = true; // TODO: useEffect to work out the returned test and variant before settings this
 
 	const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
