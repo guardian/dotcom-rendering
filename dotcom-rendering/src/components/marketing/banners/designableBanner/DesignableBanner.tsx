@@ -290,30 +290,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 
 	return (
 		<>
-			{isInABTest && (
-				<div css={styles.collapsableButtonContainer}>
-					<Button
-						onClick={() => setIsCollapsed(!isCollapsed)}
-						cssOverrides={styles.iconOverrides}
-						priority="tertiary"
-						icon={
-							isCollapsed ? (
-								<SvgChevronUpSingle />
-							) : (
-								<SvgChevronDownSingle />
-							)
-						}
-						size="small"
-						theme={buttonThemes(
-							collapsableButtonSettings,
-							'tertiary',
-						)}
-						hideLabel={true}
-					>
-						isCollapsed ? ( Open ) : ( Close )
-					</Button>
-				</div>
-			)}
 			<div
 				css={styles.outerContainer(
 					templateSettings.containerSettings.backgroundColour,
@@ -321,6 +297,31 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 					templateSettings.containerSettings.textColor,
 				)}
 			>
+				{isInABTest && (
+					<div css={styles.collapsableButtonContainer}>
+						<Button
+							onClick={() => setIsCollapsed(!isCollapsed)}
+							cssOverrides={styles.iconOverrides}
+							priority="tertiary"
+							icon={
+								isCollapsed ? (
+									<SvgChevronUpSingle />
+								) : (
+									<SvgChevronDownSingle />
+								)
+							}
+							size="small"
+							theme={buttonThemes(
+								collapsableButtonSettings,
+								'tertiary',
+							)}
+							hideLabel={true}
+						>
+							isCollapsed ? ( Open ) : ( Close )
+						</Button>
+					</div>
+				)}
+
 				<div
 					css={
 						isInABTest && isCollapsed
@@ -349,6 +350,8 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								headlineSize={
 									design.fonts?.heading.size ?? 'medium'
 								}
+								isInABTestVariant={isInABTest}
+								isCollapsed={isCollapsed}
 							/>
 						</div>
 						{showAboveArticleCount && (
@@ -445,8 +448,8 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									}
 									choices={choiceCards}
 									id={'banner'}
+									isInTest={isInABTest && isCollapsed}
 								/>
-
 								<div css={styles.ctaContainer}>
 									<LinkButton
 										href={getChoiceCardUrl(
@@ -550,7 +553,7 @@ const styles = {
 			bottom: 0px;
 			/* the vertical line aligns with that of standard article */
 			grid-column-gap: 10px;
-			grid-template-columns: 140px 1px min(460px) min(380px) auto;
+			grid-template-columns: 170px 1px min(460px) min(380px) auto;
 			grid-template-rows: auto auto;
 			grid-template-areas:
 				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button'
@@ -559,7 +562,7 @@ const styles = {
 		${from.wide} {
 			max-width: 1300px;
 			/* the vertical line aligns with that of standard article */
-			grid-template-columns: 219px 1px min(460px) min(380px) auto;
+			grid-template-columns: 245px 1px min(460px) min(380px) auto;
 			grid-template-rows: auto auto;
 			grid-template-areas:
 				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button'
@@ -602,7 +605,7 @@ const styles = {
 		${from.desktop} {
 			max-width: 980px;
 			align-self: stretch;
-			padding: ${space[3]}px ${space[1]}px 0 ${space[3]}px;
+			padding: ${space[1]}px ${space[1]}px 0 ${space[3]}px;
 			grid-template-columns: auto 380px auto;
 			grid-template-rows: auto auto;
 
@@ -615,24 +618,24 @@ const styles = {
 			bottom: 0px;
 			/* the vertical line aligns with that of standard article */
 			grid-column-gap: 10px;
-			grid-template-columns: 140px 1px min(460px) min(380px) auto;
+			grid-template-columns: 140px 1px min(460px) min(380px) auto auto;
 			grid-template-rows: auto auto;
 			grid-template-areas:
-				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button'
+				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button '
 				'.		vert-line	cta-container	${cardsImageOrSpaceTemplateString}	.';
 		}
 		${from.wide} {
 			max-width: 1300px;
 			/* the vertical line aligns with that of standard article */
-			grid-template-columns: 219px 1px min(460px) min(380px) auto;
+			grid-template-columns: 219px 1px min(500px) min(380px) auto auto;
 			grid-template-rows: auto auto;
 			grid-template-areas:
-				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button'
+				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button '
 				'.		vert-line	cta-container	${cardsImageOrSpaceTemplateString}	.';
 		}
 	`,
 	collapsableButtonContainer: css`
-		grid-area: collapse-button;
+		grid-area: collapseable;
 	`,
 	verticalLine: css`
 		grid-area: vert-line;
@@ -867,6 +870,7 @@ const styles = {
 	`,
 	/* choice card CTA container */
 	ctaContainer: css`
+		grid-area: cc_cta;
 		display: flex;
 		align-items: center;
 		flex-direction: column;
@@ -933,7 +937,8 @@ const styles = {
 			fill: white;
 		}
 		float: right;
-		margin-right: 15px;
+		margin-top: ${space[1]}px;
+		margin-right: ${space[1]}px;
 	`,
 };
 
