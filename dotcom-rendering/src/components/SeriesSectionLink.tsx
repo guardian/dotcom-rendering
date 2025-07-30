@@ -8,6 +8,7 @@ import {
 	space,
 	textSans17,
 	textSans20,
+	textSansBold17,
 	textSansBold20,
 	until,
 } from '@guardian/source/foundations';
@@ -101,43 +102,60 @@ const invertedStyle = (design: ArticleDesign) => {
 };
 
 const fontStyles = (format: ArticleFormat) => {
-	if (format.design === ArticleDesign.Gallery) {
-		return css`
-			${headlineBold17}
-			${from.desktop} {
-				${headlineBold20}
-				line-height: 36px;
-			}
-			line-height: 36px;
-		`;
-	}
-	switch (format.theme) {
-		case ArticleSpecial.Labs:
-			switch (format.display) {
-				case ArticleDisplay.Immersive:
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			switch (format.theme) {
+				case ArticleSpecial.Labs:
 					return css`
-						${textSansBold20};
-						line-height: 23px;
-						${from.leftCol} {
-							line-height: 20px;
+						${textSansBold17};
+						line-height: 36px;
+						${from.desktop} {
+							${textSansBold20};
+							// This is added again because there is a line-height in textSansBold20 so we are overriding it
+							line-height: 36px;
 						}
 					`;
 				default:
 					return css`
-						${textSans20};
-						line-height: 23px;
-						${from.leftCol} {
-							line-height: 20px;
+						${headlineBold17}
+						line-height: 36px;
+
+						${from.desktop} {
+							${headlineBold20}
+							// This is added again because there is a line-height in textSansBold20 so we are overriding it
+							line-height: 36px;
 						}
 					`;
 			}
 		default:
-			return css`
-				${headlineBold17}
-				${from.wide} {
-					${headlineBold20}
-				}
-			`;
+			switch (format.theme) {
+				case ArticleSpecial.Labs:
+					switch (format.display) {
+						case ArticleDisplay.Immersive:
+							return css`
+								${textSansBold20};
+								line-height: 23px;
+								${from.leftCol} {
+									line-height: 20px;
+								}
+							`;
+						default:
+							return css`
+								${textSans20};
+								line-height: 23px;
+								${from.leftCol} {
+									line-height: 20px;
+								}
+							`;
+					}
+				default:
+					return css`
+						${headlineBold17}
+						${from.wide} {
+							${headlineBold20}
+						}
+					`;
+			}
 	}
 };
 
