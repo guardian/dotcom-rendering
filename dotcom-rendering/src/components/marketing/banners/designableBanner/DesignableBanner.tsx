@@ -459,7 +459,8 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									}
 									choices={choiceCards}
 									id={'banner'}
-									isInTest={isInABTest && isCollapsed}
+									isInTest={isInABTest}
+									isCollapsed={isCollapsed}
 								/>
 								<div css={styles.ctaContainer}>
 									<LinkButton

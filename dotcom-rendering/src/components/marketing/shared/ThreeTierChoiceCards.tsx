@@ -153,6 +153,7 @@ type ThreeTierChoiceCardsProps = {
 	choices: ChoiceCard[];
 	id: string; // uniquely identify this choice cards component to avoid conflicting with others
 	isInTest?: boolean;
+	isCollapsed?: boolean;
 };
 
 export const ThreeTierChoiceCards = ({
@@ -161,6 +162,7 @@ export const ThreeTierChoiceCards = ({
 	choices,
 	id,
 	isInTest = false,
+	isCollapsed = false,
 }: ThreeTierChoiceCardsProps) => {
 	return (
 		<RadioGroup
@@ -210,7 +212,9 @@ export const ThreeTierChoiceCards = ({
 								background-color: inherit;
 							`}
 						>
-							{pill && <ChoiceCardPill pill={pill} />}
+							{pill && (!isInTest || !isCollapsed) && (
+								<ChoiceCardPill pill={pill} />
+							)}
 							<label
 								css={supportTierChoiceCardStyles(selected)}
 								htmlFor={radioId}
@@ -227,7 +231,8 @@ export const ThreeTierChoiceCards = ({
 									value={radioId}
 									cssOverrides={labelOverrideStyles(selected)}
 									supporting={
-										!isInTest && selected ? (
+										!isInTest ||
+										(!isCollapsed && selected) ? (
 											<SupportingBenefits
 												benefitsLabel={
 													benefitsLabel as
