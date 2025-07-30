@@ -21,8 +21,12 @@ import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared
 import type { Dispatch, SetStateAction } from 'react';
 import sanitise from 'sanitize-html';
 
-const supportTierChoiceCardStyles = (selected: boolean) => css`
-	display: block;
+const supportTierChoiceCardStyles = (
+	selected: boolean,
+	isInABTest: boolean,
+	isCollapsed: boolean,
+) => css`
+	display: ${isInABTest && isCollapsed && !selected ? `none` : `block`};
 	border: ${selected
 		? `2px solid ${palette.brand['500']}`
 		: `1px solid ${palette.neutral[46]}`};
@@ -216,7 +220,11 @@ export const ThreeTierChoiceCards = ({
 								<ChoiceCardPill pill={pill} />
 							)}
 							<label
-								css={supportTierChoiceCardStyles(selected)}
+								css={supportTierChoiceCardStyles(
+									selected,
+									isInTest,
+									isCollapsed,
+								)}
 								htmlFor={radioId}
 							>
 								<Radio
