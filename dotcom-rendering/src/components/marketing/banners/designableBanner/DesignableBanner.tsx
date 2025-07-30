@@ -140,11 +140,8 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	const bannerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		const firstInteractiveChoiceCard = bannerRef.current?.querySelector(
-			'input',
-		) as HTMLElement | null;
-		if (firstInteractiveChoiceCard) {
-			firstInteractiveChoiceCard.focus();
+		if (bannerRef.current) {
+			bannerRef.current.focus();
 		}
 	}, []);
 
