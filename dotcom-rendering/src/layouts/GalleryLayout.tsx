@@ -19,6 +19,7 @@ import { DesktopAdSlot, MobileAdSlot } from '../components/GalleryAdSlots';
 import { GalleryImage } from '../components/GalleryImage';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { LabsHeader } from '../components/LabsHeader';
 import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
@@ -50,12 +51,6 @@ interface WebProps extends Props {
 interface AppProps extends Props {
 	renderingTarget: 'Apps';
 }
-
-const border = css({
-	borderWidth: 1,
-	borderStyle: 'solid',
-	color: '#ccc',
-});
 
 const headerStyles = css`
 	${grid.container}
@@ -200,12 +195,27 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					/>
 				</div>
 			)}
+
+			{format.theme === ArticleSpecial.Labs && (
+				<Stuck>
+					<Section
+						fullWidth={true}
+						showTopBorder={false}
+						backgroundColour={sourcePalette.labs[400]}
+						borderColour={sourcePalette.neutral[60]}
+						sectionId="labs-header"
+						element="aside"
+					>
+						<LabsHeader editionId={frontendData.editionId} />
+					</Section>
+				</Stuck>
+			)}
+
 			<main
 				css={{
 					backgroundColor: themePalette('--article-background'),
 				}}
 			>
-				<div css={border}>Labs header</div>
 				<header css={headerStyles}>
 					<MainMediaGallery
 						mainMedia={gallery.mainMedia}
