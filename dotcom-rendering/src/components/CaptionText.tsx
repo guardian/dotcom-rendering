@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { headlineMedium17, space } from '@guardian/source/foundations';
 import { type ReactNode } from 'react';
 import sanitise, { type IOptions } from 'sanitize-html';
+import { isSkimlink } from '../lib/affiliateLinksUtils';
 import { getAttrs, parseHtml } from '../lib/domUtils';
 import { palette } from '../palette';
 
@@ -38,6 +39,7 @@ const renderTextElement = (node: Node, key: number): ReactNode => {
 			return text === '' ? null : <em key={key}>{children}</em>;
 		case 'A': {
 			const attrs = getAttrs(node);
+			const href = attrs?.getNamedItem('href')?.value;
 
 			return (
 				<a
@@ -51,7 +53,7 @@ const renderTextElement = (node: Node, key: number): ReactNode => {
 								${palette('--article-link-border-hover')};
 						}
 					`}
-					href={attrs?.getNamedItem('href')?.value}
+					href={href}
 					target={attrs?.getNamedItem('target')?.value}
 					data-link-name={
 						attrs?.getNamedItem('data-link-name')?.value
@@ -60,6 +62,15 @@ const renderTextElement = (node: Node, key: number): ReactNode => {
 						attrs?.getNamedItem('data-component')?.value
 					}
 					key={key}
+					/**
+					 * Affiliate links must have the rel attribute set to "sponsored"
+					 * @see https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links
+					 */
+					rel={
+						isSkimlink(href)
+							? 'sponsored'
+							: getAttrs(node)?.getNamedItem('rel')?.value
+					}
 				>
 					{children}
 				</a>
