@@ -152,7 +152,7 @@ type ThreeTierChoiceCardsProps = {
 	setSelectedChoiceCard: Dispatch<SetStateAction<ChoiceCard | undefined>>;
 	choices: ChoiceCard[];
 	id: string; // uniquely identify this choice cards component to avoid conflicting with others
-	isInTest: boolean;
+	isInTest?: boolean;
 };
 
 export const ThreeTierChoiceCards = ({
