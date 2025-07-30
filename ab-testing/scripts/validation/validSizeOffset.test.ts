@@ -52,3 +52,33 @@ Deno.test(
 		);
 	},
 );
+
+Deno.test(
+	'validSizeOffset - passes when audienceOffset is between 0 and 1',
+	() => {
+		const test: ABTest = {
+			...baseTest,
+			audienceSize: 0.5,
+			audienceOffset: 0.1,
+		};
+
+		assertEquals(validSizeOffset([test]), true);
+	},
+);
+
+Deno.test(
+	'validSizeOffset - throws when audienceOffset is greater than 1',
+	() => {
+		const test: ABTest = {
+			...baseTest,
+			audienceSize: 0.5,
+			audienceOffset: 11,
+		};
+
+		assertThrows(
+			() => validSizeOffset([test]),
+			Error,
+			`Invalid audienceOffset for test ${test.name}`,
+		);
+	},
+);

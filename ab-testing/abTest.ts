@@ -40,8 +40,8 @@ export const ABTests: ABTest[] = [
 		status: 'ON',
 		expirationDate: new Date('2025-09-02'),
 		type: 'client',
-		audienceSize: 20 / 100,
-		audienceOffset: 10,
+		audienceSize: 10 / 100,
+		audienceOffset: 15 / 100,
 		groups: ['control', 'variant'],
 	},
 	// Example server side AB test definition
@@ -72,7 +72,7 @@ export const ABTests: ABTest[] = [
 		expirationDate: new Date('2025-08-04'),
 		type: 'server',
 		audienceSize: 10 / 100,
-		audienceOffset: 30,
+		audienceOffset: 30 / 100,
 		groups: ['control', 'variant'],
 	},
 	{
@@ -87,7 +87,7 @@ export const ABTests: ABTest[] = [
 		expirationDate: new Date('2025-08-04'),
 		type: 'server',
 		audienceSize: 10 / 100,
-		audienceOffset: 40,
+		audienceOffset: 45 / 100,
 		groups: ['control', 'variant'],
 	},
 ];
