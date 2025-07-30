@@ -6,5 +6,14 @@ then
 	exit 1
 fi
 
+# if git diff-tree --no-commit-id --name-only -r HEAD..origin/$currentBranch | grep -q 'ab-testing/'; then
+#   cd ab-testing
+#   deno test && deno run validate
+#   cd ..
+# fi
+
 cd ./$(dirname "$0")/../dotcom-rendering
 make tsc
+
+cd ./$(dirname "$0")/../ab-testing
+deno test && deno run validate
