@@ -40,7 +40,12 @@ export function DesignableBannerHeader({
 	isCollapsed = false,
 }: DesignableBannerHeaderProps): JSX.Element {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
-	const styles = getStyles(headerSettings, headlineSize);
+	const styles = getStyles(
+		headerSettings,
+		headlineSize,
+		isInABTestVariant,
+		isCollapsed,
+	);
 
 	const resolveImage = (settings: Image) => {
 		return (
@@ -60,7 +65,7 @@ export function DesignableBannerHeader({
 
 	return (
 		<div css={styles.container}>
-			<header css={styles.header(isInABTestVariant, isCollapsed)}>
+			<header css={styles.header}>
 				{headerSettings?.headerImage &&
 					resolveImage(headerSettings.headerImage)}
 				{(heading ?? mobileHeading) && resolveCopy()}
@@ -72,21 +77,34 @@ export function DesignableBannerHeader({
 const getStyles = (
 	headerSettings: HeaderSettings | undefined,
 	headlineSize: 'small' | 'medium' | 'large',
+	isInABTestVariant: boolean,
+	isCollapsed: boolean,
 ) => {
 	const color = headerSettings?.textColour ?? neutral[0];
 	const copyTopMargin = headerSettings?.headerImage ? space[1] : space[1];
 	const containerMargin = headerSettings?.headerImage ? `${space[6]}px` : '0';
+
 	const mobileHeadlineSize =
 		headlineSize === 'small'
 			? `${headlineMedium17}`
 			: `${headlineMedium28}`;
+
+	const phabletHeadline =
+		isInABTestVariant && isCollapsed
+			? `${mobileHeadlineSize}`
+			: `${headlineMedium34}`;
+
+	const leftColHeadline =
+		isInABTestVariant && isCollapsed
+			? `${mobileHeadlineSize}`
+			: `${headlineMedium42}`;
 
 	return {
 		container: css`
 			position: relative;
 			margin-bottom: ${containerMargin};
 		`,
-		header: (isInABTestVariant: boolean, isCollapsed: boolean) => css`
+		header: css`
 			h2 {
 				color: ${color};
 				margin: ${copyTopMargin}px 0 ${space[2]}px 0;
@@ -96,15 +114,11 @@ const getStyles = (
 				}
 
 				${from.phablet} {
-					{${
-						isInABTestVariant && isCollapsed
-					} ? ${mobileHeadlineSize} : ${headlineMedium34}}
+					${phabletHeadline};
 				}
 
 				${from.leftCol} {
-					{${
-						isInABTestVariant && isCollapsed
-					} ? ${mobileHeadlineSize} : ${headlineMedium42}}
+					${leftColHeadline};
 				}
 			}
 		`,
