@@ -403,6 +403,8 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									highlightedTextSettings={
 										templateSettings.highlightedTextSettings
 									}
+									isInAbTest={isInABTest}
+									isCollapsed={isCollapsed}
 								/>
 							</div>
 						</div>
@@ -601,7 +603,6 @@ const styles = {
 		}
 		${from.phablet} {
 			max-width: 740px;
-			background-color: red;
 			margin: 0 auto;
 			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
 			grid-template-columns: minmax(0, 0.5fr) ${phabletContentMaxWidth} minmax(

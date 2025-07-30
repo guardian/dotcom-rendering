@@ -23,12 +23,16 @@ interface DesignableBannerBodyProps {
 	mainContent: BannerRenderedContent;
 	mobileContent: BannerRenderedContent;
 	highlightedTextSettings: HighlightedTextSettings;
+	isInAbTest?: boolean;
+	isCollapsed?: boolean;
 }
 
 export function DesignableBannerBody({
 	mainContent,
 	mobileContent,
 	highlightedTextSettings,
+	isInAbTest = false,
+	isCollapsed = false,
 }: DesignableBannerBodyProps): JSX.Element {
 	const styles = getStyles(highlightedTextSettings);
 
@@ -36,7 +40,7 @@ export function DesignableBannerBody({
 
 	return (
 		<div css={styles.container}>
-			{isTabletOrAbove
+			{isTabletOrAbove && (!isInAbTest || !isCollapsed)
 				? createBannerBodyCopy(
 						mainContent.paragraphs,
 						mainContent.highlightedText,
