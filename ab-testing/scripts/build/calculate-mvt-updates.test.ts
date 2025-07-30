@@ -9,7 +9,7 @@ import { AudienceSpace, AllSpace, FastlyTestParams } from '../lib/types.ts';
 // Helper function to create mock ABTest
 function createMockABTest(name: string, options: Partial<ABTest> = {}): ABTest {
 	return {
-		name: name as `commercial-${string}` | `webex-${string}`, // Cast to satisfy TestName type
+		name: name as ABTest['name'], // Cast to satisfy TestName type
 		description: options.description || `Test ${name}`,
 		owners: options.owners || ['test@example.com'],
 		expirationDate:
