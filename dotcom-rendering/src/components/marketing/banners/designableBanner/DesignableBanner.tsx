@@ -297,12 +297,11 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		articleCounts.forTargetedWeeks >= 5;
 
 	return (
-
 		<>
 			<div
-        ref={bannerRef}
-			  role="alert"
-			  tabIndex={-1}
+				ref={bannerRef}
+				role="alert"
+				tabIndex={-1}
 				css={styles.outerContainer(
 					templateSettings.containerSettings.backgroundColour,
 					iosAppBannerPresent,
