@@ -231,8 +231,8 @@ export const ThreeTierChoiceCards = ({
 									value={radioId}
 									cssOverrides={labelOverrideStyles(selected)}
 									supporting={
-										!isInTest ||
-										(!isCollapsed && selected) ? (
+										selected &&
+										(!isInTest || !isCollapsed) ? (
 											<SupportingBenefits
 												benefitsLabel={
 													benefitsLabel as
