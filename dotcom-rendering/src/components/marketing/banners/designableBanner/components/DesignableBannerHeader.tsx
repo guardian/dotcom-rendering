@@ -27,6 +27,8 @@ interface DesignableBannerHeaderProps {
 	mobileHeading: JSX.Element | JSX.Element[] | null;
 	headerSettings: HeaderSettings | undefined;
 	headlineSize: 'small' | 'medium' | 'large';
+	isInABTestVariant: boolean;
+	isCollapsed: boolean;
 }
 
 export function DesignableBannerHeader({
@@ -34,6 +36,8 @@ export function DesignableBannerHeader({
 	mobileHeading,
 	headerSettings,
 	headlineSize,
+	isInABTestVariant = false,
+	isCollapsed = false,
 }: DesignableBannerHeaderProps): JSX.Element {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 	const styles = getStyles(headerSettings, headlineSize);
@@ -45,12 +49,18 @@ export function DesignableBannerHeader({
 	};
 
 	const resolveCopy = () => {
-		return <h2>{isTabletOrAbove ? heading : mobileHeading}</h2>;
+		return (
+			<h2>
+				{isTabletOrAbove && !isInABTestVariant && !isCollapsed
+					? heading
+					: mobileHeading}
+			</h2>
+		);
 	};
 
 	return (
 		<div css={styles.container}>
-			<header css={styles.header}>
+			<header css={styles.header(isInABTestVariant, isCollapsed)}>
 				{headerSettings?.headerImage &&
 					resolveImage(headerSettings.headerImage)}
 				{(heading ?? mobileHeading) && resolveCopy()}
@@ -76,7 +86,7 @@ const getStyles = (
 			position: relative;
 			margin-bottom: ${containerMargin};
 		`,
-		header: css`
+		header: (isInABTestVariant: boolean, isCollapsed: boolean) => css`
 			h2 {
 				color: ${color};
 				margin: ${copyTopMargin}px 0 ${space[2]}px 0;
@@ -86,11 +96,15 @@ const getStyles = (
 				}
 
 				${from.phablet} {
-					${headlineMedium34}
+					{${
+						isInABTestVariant && isCollapsed
+					} ? ${mobileHeadlineSize} : ${headlineMedium34}}
 				}
 
 				${from.leftCol} {
-					${headlineMedium42}
+					{${
+						isInABTestVariant && isCollapsed
+					} ? ${mobileHeadlineSize} : ${headlineMedium42}}
 				}
 			}
 		`,
