@@ -152,6 +152,7 @@ type ThreeTierChoiceCardsProps = {
 	setSelectedChoiceCard: Dispatch<SetStateAction<ChoiceCard | undefined>>;
 	choices: ChoiceCard[];
 	id: string; // uniquely identify this choice cards component to avoid conflicting with others
+	isInTest: boolean;
 };
 
 export const ThreeTierChoiceCards = ({
@@ -159,6 +160,7 @@ export const ThreeTierChoiceCards = ({
 	setSelectedChoiceCard,
 	choices,
 	id,
+	isInTest = false,
 }: ThreeTierChoiceCardsProps) => {
 	return (
 		<RadioGroup
@@ -225,7 +227,7 @@ export const ThreeTierChoiceCards = ({
 									value={radioId}
 									cssOverrides={labelOverrideStyles(selected)}
 									supporting={
-										selected ? (
+										!isInTest && selected ? (
 											<SupportingBenefits
 												benefitsLabel={
 													benefitsLabel as
