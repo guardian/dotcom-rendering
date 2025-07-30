@@ -8,9 +8,7 @@ const stringifyFastlySubfield = (
 		.map(([key, value]) => `${key}=${value}`)
 		.join(',');
 
-const parseFastlySubfield = <T = Record<string, string | number>>(
-	str: string,
-): T => {
+const parseFastlySubfield = (str: string): Record<string, string | number> => {
 	const result: Record<string, string | number> = {};
 	str.split(',').forEach((pair) => {
 		const [key, value] = pair.split('=');
@@ -18,7 +16,7 @@ const parseFastlySubfield = <T = Record<string, string | number>>(
 			result[key] = isNaN(Number(value)) ? value : Number(value);
 		}
 	});
-	return result as T;
+	return result;
 };
 
 const parseMVTValue = (subfield: string): FastlyTestParams[] => {
