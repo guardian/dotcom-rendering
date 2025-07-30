@@ -405,6 +405,15 @@ const crosswordBannerMobileAdStyles = css`
 	min-height: ${getMinHeight(adSizes.mobilesticky.height)}px;
 `;
 
+const topAboveNavBackground = css`
+	.ad-slot--top-above-nav:not([data-google-query-id]) {
+		margin: 0 auto;
+		height: ${getMinHeight(250)}px;
+		width: 970px;
+		background-color: ${palette.neutral[93]};
+	}
+`;
+
 const AdSlotWrapper = ({
 	children,
 	css: additionalCss,
@@ -598,11 +607,12 @@ export const AdSlot = ({
 		case 'top-above-nav': {
 			return (
 				<AdSlotWrapper
-					css={
+					css={[
 						isIn250ReservationVariant
 							? topAboveNavContainerVaraintStyles
-							: topAboveNavContainerStyles
-					}
+							: topAboveNavContainerStyles,
+						topAboveNavBackground,
+					]}
 				>
 					<div
 						id="dfp-ad--top-above-nav"
