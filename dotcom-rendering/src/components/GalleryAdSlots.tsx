@@ -18,7 +18,7 @@ export const MobileAdSlot = ({
 	);
 };
 
-export const GalleryDesktopAdSlot = ({
+export const DesktopAdSlot = ({
 	renderAds,
 	adSlotIndex,
 }: {
