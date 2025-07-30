@@ -220,7 +220,7 @@ Deno.test(
 		// Should be able to create a new group with the freed MVTs
 		manager.addTestGroup('test3:control', 3);
 		const newTestGroup = manager.getTestGroup('test3:control');
-		assertEquals(newTestGroup?.length, 3);
+		assertEquals(newTestGroup, [0, 1, 2]);
 	},
 );
 
