@@ -21,6 +21,7 @@ import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { FeatureCard } from './FeatureCard';
 import { FrontCard } from './FrontCard';
+import { Hide } from './Hide';
 import type { Alignment } from './SupportingContent';
 
 type Props = {
@@ -32,6 +33,7 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
+	isInNoBoostsAbTestVariant?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -580,18 +582,27 @@ export const FlexibleGeneral = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
+	isInNoBoostsAbTestVariant,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
 		...snap,
 		uniqueId: `collection-${collectionId}-splash-0`,
 	}));
+
 	const cards = [...groupedTrails.standard]
 		.slice(0, 19)
 		.map((standard, i) => ({
 			...standard,
 			uniqueId: `collection-${collectionId}-standard-${i}`,
 		}));
+
+	const cardsInAbTest = cards.map((card) => ({
+		...card,
+		boostLevel: isInNoBoostsAbTestVariant ? 'default' : card.boostLevel,
+	}));
+
 	const groupedCards = decideCardPositions(cards);
+	const groupedCardsInAbTest = decideCardPositions(cardsInAbTest);
 
 	return (
 		<>
@@ -609,45 +620,88 @@ export const FlexibleGeneral = ({
 				/>
 			)}
 
-			{groupedCards.map((row, i) => {
-				switch (row.layout) {
-					case 'oneCardFullWidth':
-						return (
-							<FullWidthCardLayout
-								key={row.cards[0]?.uniqueId}
-								cards={row.cards}
-								containerPalette={containerPalette}
-								showAge={showAge}
-								absoluteServerTimes={absoluteServerTimes}
-								imageLoading={imageLoading}
-								aspectRatio={aspectRatio}
-								isFirstRow={!splash.length && i === 0}
-								isLastRow={i === groupedCards.length - 1}
-								containerLevel={containerLevel}
-								collectionId={collectionId}
-							/>
-						);
+			<Hide when="above" breakpoint="tablet">
+				{groupedCardsInAbTest.map((row, i) => {
+					switch (row.layout) {
+						case 'oneCardFullWidth':
+							return (
+								<FullWidthCardLayout
+									key={row.cards[0]?.uniqueId}
+									cards={row.cards}
+									containerPalette={containerPalette}
+									showAge={showAge}
+									absoluteServerTimes={absoluteServerTimes}
+									imageLoading={imageLoading}
+									aspectRatio={aspectRatio}
+									isFirstRow={!splash.length && i === 0}
+									isLastRow={i === groupedCards.length - 1}
+									containerLevel={containerLevel}
+									collectionId={collectionId}
+								/>
+							);
 
-					case 'oneCardHalfWidth':
-					case 'twoCard':
-					default:
-						return (
-							<HalfWidthCardLayout
-								key={row.cards[0]?.uniqueId}
-								cards={row.cards}
-								containerPalette={containerPalette}
-								showAge={showAge}
-								absoluteServerTimes={absoluteServerTimes}
-								imageLoading={imageLoading}
-								isFirstRow={!splash.length && i === 0}
-								isFirstStandardRow={i === 0}
-								aspectRatio={aspectRatio}
-								isLastRow={i === groupedCards.length - 1}
-								containerLevel={containerLevel}
-							/>
-						);
-				}
-			})}
+						case 'oneCardHalfWidth':
+						case 'twoCard':
+						default:
+							return (
+								<HalfWidthCardLayout
+									key={row.cards[0]?.uniqueId}
+									cards={row.cards}
+									containerPalette={containerPalette}
+									showAge={showAge}
+									absoluteServerTimes={absoluteServerTimes}
+									imageLoading={imageLoading}
+									isFirstRow={!splash.length && i === 0}
+									isFirstStandardRow={i === 0}
+									aspectRatio={aspectRatio}
+									isLastRow={i === groupedCards.length - 1}
+									containerLevel={containerLevel}
+								/>
+							);
+					}
+				})}
+			</Hide>
+			<Hide when="below" breakpoint="tablet">
+				{groupedCards.map((row, i) => {
+					switch (row.layout) {
+						case 'oneCardFullWidth':
+							return (
+								<FullWidthCardLayout
+									key={row.cards[0]?.uniqueId}
+									cards={row.cards}
+									containerPalette={containerPalette}
+									showAge={showAge}
+									absoluteServerTimes={absoluteServerTimes}
+									imageLoading={imageLoading}
+									aspectRatio={aspectRatio}
+									isFirstRow={!splash.length && i === 0}
+									isLastRow={i === groupedCards.length - 1}
+									containerLevel={containerLevel}
+									collectionId={collectionId}
+								/>
+							);
+
+						case 'oneCardHalfWidth':
+						case 'twoCard':
+						default:
+							return (
+								<HalfWidthCardLayout
+									key={row.cards[0]?.uniqueId}
+									cards={row.cards}
+									containerPalette={containerPalette}
+									showAge={showAge}
+									absoluteServerTimes={absoluteServerTimes}
+									imageLoading={imageLoading}
+									isFirstRow={!splash.length && i === 0}
+									isFirstStandardRow={i === 0}
+									aspectRatio={aspectRatio}
+									isLastRow={i === groupedCards.length - 1}
+									containerLevel={containerLevel}
+								/>
+							);
+					}
+				})}
+			</Hide>
 		</>
 	);
 };
