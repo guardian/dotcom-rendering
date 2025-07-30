@@ -1,15 +1,14 @@
 import path from 'node:path';
 import type { RequestHandler } from 'express';
-import type { FunctionComponent } from 'react';
+import type { ReactNode } from 'react';
 import { renderToPipeableStream } from 'react-dom/server';
 import { Doc } from './docs/doc';
 
-export const sendReact =
-	(title: string, Component: FunctionComponent): RequestHandler =>
-	(req, res) => {
+export function sendReact(title: string, node: ReactNode): RequestHandler {
+	return (req, res) => {
 		const element = (
 			<Doc title={title} path={path.join(req.baseUrl, req.path, '/')}>
-				<Component />
+				{node}
 			</Doc>
 		);
 
@@ -20,3 +19,4 @@ export const sendReact =
 			},
 		});
 	};
+}
