@@ -51,6 +51,8 @@ const headerStyles = css`
 	}
 `;
 
+// Testing snapshot
+
 export const GalleryLayout = (props: WebProps | AppProps) => {
 	const gallery = props.gallery;
 	const frontendData = gallery.frontendData;
