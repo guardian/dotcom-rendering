@@ -111,7 +111,7 @@ const fontStyles = (format: ArticleFormat) => {
 						line-height: 36px;
 						${from.desktop} {
 							${textSansBold20};
-							// This is added again because there is a line-height in textSansBold20 so we are overriding it
+							/* This is added again because there is a line-height in textSansBold20 so we are overriding it */
 							line-height: 36px;
 						}
 					`;
@@ -122,7 +122,7 @@ const fontStyles = (format: ArticleFormat) => {
 
 						${from.desktop} {
 							${headlineBold20}
-							// This is added again because there is a line-height in textSansBold20 so we are overriding it
+							/* This is added again because there is a line-height in textSansBold20 so we are overriding it */
 							line-height: 36px;
 						}
 					`;
