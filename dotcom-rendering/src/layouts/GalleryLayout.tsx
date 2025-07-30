@@ -314,7 +314,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					}
 				/>
 			</main>
-			{isWeb && renderAds && (
+			{isWeb && renderAds && !isLabs && (
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
