@@ -7,26 +7,53 @@ import { ListenToArticleButton } from './ListenToArticleButton';
 type Props = {
 	articleId: string;
 };
+
+export const formatAudioDuration = (
+	durationInSeconds: number,
+): string | undefined => {
+	if (durationInSeconds >= 3600 || durationInSeconds <= 0) {
+		return undefined;
+	}
+	const minutes = Math.floor((durationInSeconds % 3600) / 60);
+	const seconds = durationInSeconds % 60;
+
+	const formattedDuration = `${minutes.toString()}:${seconds
+		.toString()
+		.padStart(2, '0')}`;
+
+	return formattedDuration;
+};
+
 export const ListenToArticle = ({ articleId }: Props) => {
 	const [showButton, setShowButton] = useState<boolean>(false);
+	const [audioDurationSeconds, setAudioDurationSeconds] = useState<
+		number | undefined
+	>(undefined);
 
-	const isBridgetCompatible = useIsBridgetCompatible('8.5.1');
-
+	const isBridgetCompatible = useIsBridgetCompatible('8.6.0');
 	useEffect(() => {
 		if (isBridgetCompatible) {
 			Promise.all([
 				getListenToArticleClient().isAvailable(articleId),
 				getListenToArticleClient().isPlaying(articleId),
+				getListenToArticleClient().getAudioDurationSeconds(articleId),
 			])
-				.then(() =>
-					// setShowButton(isAvailable && !isPlaying),
-					setShowButton(false),
-				)
+				.then(() => {
+					// TODO pending design implementation and AB test set up.
+					// .then(({ isAvailable, isPlaying, audioDurationSeconds }) => {
+					// setAudioDuration(
+					// 	audioDurationSeconds ? audioDurationSeconds : undefined,
+					// );
+					// setShowButton(isAvailable && !isPlaying);
+					setAudioDurationSeconds(undefined);
+					setShowButton(false);
+				})
 				.catch((error) => {
 					console.error(
 						'Error fetching article audio status: ',
 						error,
 					);
+
 					setShowButton(false);
 				});
 		}
@@ -54,7 +81,14 @@ export const ListenToArticle = ({ articleId }: Props) => {
 	};
 	return (
 		showButton && (
-			<ListenToArticleButton onClickHandler={listenToArticleHandler} />
+			<ListenToArticleButton
+				onClickHandler={listenToArticleHandler}
+				audioDuration={
+					audioDurationSeconds !== undefined
+						? formatAudioDuration(audioDurationSeconds)
+						: undefined
+				}
+			/>
 		)
 	);
 };

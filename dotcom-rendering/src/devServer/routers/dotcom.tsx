@@ -15,26 +15,32 @@ import { sendReact } from '../send';
 
 const dotcom = Router();
 
-dotcom.get('/', sendReact('Dotcom', Dotcom));
-dotcom.get('/article', sendReact('Article', Article));
-dotcom.get('/front', sendReact('Front', Front));
-dotcom.get('/tag-page', sendReact('Tag Page', TagPage));
-dotcom.get('/interactive', sendReact('Interactive', Interactive));
-dotcom.get('/newsletters', sendReact('All Newsletters', Newsletters));
-dotcom.get('/football-live', sendReact('Football Live', FootballLive));
+dotcom.get('/', sendReact('Dotcom', <Dotcom />));
+dotcom.get('/article', sendReact('Article', <Article />));
+dotcom.get('/front', sendReact('Front', <Front />));
+dotcom.get('/tag-page', sendReact('Tag Page', <TagPage />));
+dotcom.get('/interactive', sendReact('Interactive', <Interactive />));
+dotcom.get('/newsletters', sendReact('All Newsletters', <Newsletters />));
+dotcom.get('/football-live', sendReact('Football Live', <FootballLive />));
 dotcom.get(
 	'/football-fixtures',
-	sendReact('Football Fixtures', FootballFixtures),
+	sendReact('Football Fixtures', <FootballFixtures />),
 );
-dotcom.get('/football-results', sendReact('Football Results', FootballResults));
-dotcom.get('/football-tables', sendReact('Football Tables', FootballTables));
+dotcom.get(
+	'/football-results',
+	sendReact('Football Results', <FootballResults />),
+);
+dotcom.get(
+	'/football-tables',
+	sendReact('Football Tables', <FootballTables />),
+);
 dotcom.get(
 	'/football-match-summary',
-	sendReact('Football Match Summary', FootballMatchSummary),
+	sendReact('Football Match Summary', <FootballMatchSummary />),
 );
 dotcom.get(
 	'/cricket-scorecard',
-	sendReact('Cricket Scorecard', CricketScorecard),
+	sendReact('Cricket Scorecard', <CricketScorecard />),
 );
 
 export { dotcom };

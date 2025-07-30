@@ -1,0 +1,195 @@
+import { Source } from '@storybook/addon-docs/blocks';
+
+# Grid
+
+The `grid` module implements the [Guardian Grid](https://theguardian.design/2a1e5182b/p/41be19-grids) using [CSS grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Basic_concepts_of_grid_layout). The columns described in the Guardian grid definition are implemented as <CSSGridColumn />s. In some Guardian designs we also have a concept of three layout columns: <LeftColumn />, <CentreColumn />, and <RightColumn />. As these are often used in designs on dotcom and apps, this module provides an API for positioning content in these columns as well.
+
+<Diagram>
+    <text x="45" y="265" fill="red" style={textStyles}>Left column</text>
+    <text x="460" y="265" fill="green" style={textStyles}>Centre column</text>
+    <text x="1035" y="265" fill="blue" style={textStyles}>Right column</text>
+</Diagram>
+
+export const textStyles = {
+    fontSize: 30,
+    fontFamily: 'sans-serif',
+    fontWeight: 'bold',
+};
+
+Note that some of these layout columns only exist at certain breakpoints. All breakpoints have the <CentreColumn />, but the <RightColumn /> only appears from the "desktop" breakpoint (980px), and the <LeftColumn /> only appears from the "leftCol" breakpoint (1140px). You can use the [media queries API](https://guardian.github.io/storybooks/?path=/docs/source_foundations-media-queries--docs) from `@guardian/source` to specify which columns to use at different breakpoints.
+
+The following code provides an example of the API in use, while later sections on this page will give more details about the features demonstrated here. Note that a mixture of different Emotion patterns, such as [object styles](https://emotion.sh/docs/css-prop#object-styles) and [string styles](https://emotion.sh/docs/css-prop#string-styles), are included for demonstration purposes.
+
+<Source language="tsx" code={`
+import { css } from '@emotion/react';
+import { from } from '@guardian/source/foundations';
+import { grid } from '../grid';
+
+const MyComponent = () => (
+    <article css={css(grid.container)}>
+        <h1 css={css(grid.column.centre)}>
+            Headline
+        </h1>
+        <p css={{
+            '&': css(grid.column.centre),
+            [from.leftCol]: css(grid.column.left),
+        }}>
+            Byline
+        </p>
+        <ol css={css\`
+            \${grid.column.right}
+            display: none;
+
+            \${from.desktop} {
+                display: block;
+            }
+        \`}>
+            Most viewed
+        </ol>
+    </article>
+);
+`} />
+
+## Grid Container
+
+A CSS grid layout consists of an element that's designated as a grid container, and grid items, which are its direct children in the DOM. The `grid` module provides two variants of a grid container, both of which set up the Guardian grid layout.
+
+The first is `grid.container`, which defines a grid that covers the entire viewport, and allows you to position content all the way from the left edge to the right. This is useful for elements like the [immersive main media](https://www.theguardian.com/society/2025/jul/08/the-life-swap-dream-or-a-marketing-gimmick-the-italian-towns-selling-houses-for-1), which needs to span the entire viewport.
+
+The second is `grid.paddedContainer`, which works similarly to `grid.container`, except that it only allows you to position content within the main Guardian grid area, and automatically generates margins on either side. There are many designs where nothing appears in those margins, and it's therefore convenient to be able to position content without having to worry about them.
+
+In practice, which one of these two containers you choose will affect `grid.column.all` in the [Column API](#column-api), and usages of the `'grid-start'` and `'grid-end'` lines in the [Line API](#line-api).
+
+## Column API
+
+The column API is used to interact with the three layout columns. `grid.column.left` will position an element in the <LeftColumn />, `grid.column.centre` will position an element in the <CentreColumn />, and `grid.column.right` will position an element in the <RightColumn />.
+
+There's also `grid.column.all`, which will position an item such that it spans all the way from the start of the grid to the end. As discussed in [Grid Container](#grid-container), if you're within a `grid.container` then this item will always span the entire width of the viewport, whereas with `grid.paddedContainer` it will only span the area inside the margins.
+
+<Source language="tsx" code={`
+import { css } from '@emotion/react';
+import { grid } from '../grid';
+
+const ImmersiveHeader = () => (
+    <header css={css(grid.container)}>
+        <figure css={css(grid.column.all)}>
+            Main media
+        </figure>
+    </header>
+);
+
+const FrontContainer = () => (
+    <section css={css(grid.paddedContainer)}>
+        <article css={css(grid.column.all)}>
+            First card
+        </article>
+    </section>
+);
+`} />
+
+## Line API
+
+While the [Column API](#column-api) covers many use cases, it is intentionally limited. In cases where designs call for more flexibility, such as crossing multiple layout columns, or ignoring them completely, a lower-level API is available for positioning elements across an arbitrary number of <CSSGridColumn />s.
+
+A CSS grid layout automatically generates [lines](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Grid_layout_using_line-based_placement) with numerical indices between each grid column. The [grid containers](#grid-container) in this module also define a set of named grid lines based around the layout columns mentioned above. These are, from left to right: `grid-start`, `left-column-start`, `left-column-end`, `centre-column-start`, `centre-column-end`, `right-column-start`, `right-column-end`, and `grid-end`.
+
+<Diagram viewBox="0 -100 1300 700">
+    <text x="0" y="-70" fill="#d97700" style={lineTextStyles}>grid-start</text>
+    <line x1="2" y1="-50" x2="2" y2="550" stroke-width="4" stroke="#d97700" />
+    <text x="30" y="-20" fill="red" style={lineTextStyles}>left-column-start</text>
+    <line x1="20" y1="-50" x2="20" y2="550" stroke-width="4" stroke="red" />
+    <text x="65" y="535" fill="red" style={lineTextStyles}>left-column-end</text>
+    <line x1="240" y1="-50" x2="240" y2="550" stroke-width="4" stroke="red" />
+    <text x="270" y="-20" fill="green" style={lineTextStyles}>centre-column-start</text>
+    <line x1="260" y1="-50" x2="260" y2="550" stroke-width="4" stroke="green" />
+    <text x="670" y="535" fill="green" style={lineTextStyles}>centre-column-end</text>
+    <line x1="880" y1="-50" x2="880" y2="550" stroke-width="4" stroke="green" />
+    <text x="990" y="-20" fill="blue" style={lineTextStyles}>right-column-start</text>
+    <line x1="980" y1="-50" x2="980" y2="550" stroke-width="4" stroke="blue" />
+    <text x="1090" y="535" fill="blue" style={lineTextStyles}>right-column-end</text>
+    <line x1="1280" y1="-50" x2="1280" y2="550" stroke-width="4" stroke="blue" />
+    <line x1="1298" y1="-50" x2="1298" y2="550" stroke-width="4" stroke="#d97700" />
+    <text x="1210" y="580" fill="#d97700" style={lineTextStyles}>grid-end</text>
+</Diagram>
+
+export const lineTextStyles = {
+    fontSize: 24,
+    fontFamily: 'sans-serif',
+};
+
+Note that, as mentioned above, not all of the layout columns exist at all breakpoints, and therefore not all of these named lines do either. You can use the [media queries API](https://guardian.github.io/storybooks/?path=/docs/source_foundations-media-queries--docs) from `@guardian/source` to specify which lines to use at different breakpoints.
+
+To position an element between two grid lines, the `grid.between` function is available. It takes the line name or number at which the element should start, and the line name or number at which it should end. Alternatively, to have an element start at a particular line and span a certain number of <CSSGridColumn />s, the `grid.span` function is available. It takes the line name or number at which the element should start, and a number of columns to span.
+
+<Source language="tsx" code={`
+import { css } from '@emotion/react';
+import { grid } from '../grid';
+
+const ShowcaseHeader = () => (
+    <header css={css(grid.paddedContainer)}>
+        <figure css={css(
+            grid.between('centre-column-start', 'right-column-end')
+        )}>
+            Main media
+        </figure>
+    </header>
+);
+
+const GalleryHeader = () => (
+    <header css={css(grid.container)}>
+        <p css={css(grid.span('centre-column-start', 6))}>
+            Standfirst
+        </p>
+    </header>
+);
+`} />
+
+The functions in this part of the API correspond to features of the [`grid-column` CSS property](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column). While that property could be used directly, these functions allow for type-safety and auto-completion of the named grid lines. 
+
+{ /* Components used throughout this file */ }
+
+export const CSSGridColumn = () => (
+    <span style={{ backgroundColor: '#ddd', paddingLeft: 4, paddingRight: 4 }}>
+        CSS grid column
+    </span>
+);
+
+export const LeftColumn = () => (
+    <span style={{ color: 'red' }}>left column</span>
+);
+
+export const CentreColumn = () => (
+    <span style={{ color: 'green' }}>centre column</span>
+);
+
+export const RightColumn = () => (
+    <span style={{ color: 'blue' }}>right column</span>
+);
+
+export const Diagram = ({ children, viewBox }) => (
+    <svg viewBox={viewBox ?? "0 0 1300 500"} xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <rect id="grid-column" x="0" y="0" width="60" height="500" fill="#ddd" />
+        </defs>
+        <use href="#grid-column" x="20" />
+        <use href="#grid-column" x="100" />
+        <use href="#grid-column" x="180" />
+        <use href="#grid-column" x="260" />
+        <use href="#grid-column" x="340" />
+        <use href="#grid-column" x="420" />
+        <use href="#grid-column" x="500" />
+        <use href="#grid-column" x="580" />
+        <use href="#grid-column" x="660" />
+        <use href="#grid-column" x="740" />
+        <use href="#grid-column" x="820" />
+        <use href="#grid-column" x="900" />
+        <use href="#grid-column" x="980" />
+        <use href="#grid-column" x="1060" />
+        <use href="#grid-column" x="1140" />
+        <use href="#grid-column" x="1220" />
+        <rect x="20" y="2" width="220" height="496" stroke="red" stroke-width="4" fill="none" />
+        <rect x="260" y="2" width="620" height="496" stroke="green" stroke-width="4" fill="none" />
+        <rect x="980" y="2" width="300" height="496" stroke="blue" stroke-width="4" fill="none" />
+        {children}
+    </svg>
+);

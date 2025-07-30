@@ -244,6 +244,7 @@ export const ArticleMetaApps = ({
 	const isAnalysis = format.design === ArticleDesign.Analysis;
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 	const isGallery = format.design === ArticleDesign.Gallery;
+	const isVideo = format.design === ArticleDesign.Video;
 
 	const shouldShowFollowButtons = (layoutOrDesignType: boolean) =>
 		layoutOrDesignType && !!byline && !isUndefined(soleContributor);
@@ -253,6 +254,9 @@ export const ArticleMetaApps = ({
 
 	const isImmersiveOrAnalysisWithMultipleAuthors =
 		(isAnalysis || isImmersive) && !!byline && isUndefined(soleContributor);
+
+	const shouldShowListenToArticleButton =
+		!!pageId && !(isLiveBlog || isPicture || isGallery || isVideo);
 
 	return (
 		<div
@@ -365,7 +369,7 @@ export const ArticleMetaApps = ({
 					</MetaGridBranding>
 				)}
 			</div>
-			{pageId !== undefined && (
+			{shouldShowListenToArticleButton && (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<ListenToArticle articleId={pageId} />
 				</Island>
