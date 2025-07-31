@@ -110,10 +110,10 @@ export const LoopVideo = ({
 	const [currentTime, setCurrentTime] = useState(0);
 	const [playerState, setPlayerState] =
 		useState<(typeof PLAYER_STATES)[number]>('NOT_STARTED');
-
 	const [isAutoplayAllowed, setIsAutoplayAllowed] = useState<boolean | null>(
 		null,
 	);
+	const [isRestoredFromBFCache, setIsRestoredFromBFCache] = useState(false);
 
 	/**
 	 * Keep a track of whether the video has been in view. We only
@@ -259,7 +259,7 @@ export const LoopVideo = ({
 				handleCustomPlayYoutubeEvent,
 			);
 		};
-	}, [uniqueId]);
+	}, [uniqueId, isRestoredFromBFCache]);
 
 	/**
 	 * Initiates attention tracking for ophan
@@ -403,6 +403,15 @@ export const LoopVideo = ({
 	useEffect(() => {
 		setPreloadPartialData(isAutoplayAllowed === false || !!isInView);
 	}, [isAutoplayAllowed, isInView]);
+
+	useEffect(() => {
+		window.addEventListener('pageshow', function (event) {
+			if (event.persisted) {
+				// The page was restored from the bfcache. Rerender the component to ensure video can autoplay.
+				setIsRestoredFromBFCache(true);
+			}
+		});
+	}, []);
 
 	if (renderingTarget !== 'Web') return null;
 
