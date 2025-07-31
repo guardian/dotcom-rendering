@@ -128,6 +128,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	tickerSettings,
 	choiceCardsSettings,
 	submitComponentEvent,
+	tracking,
 	design,
 }: BannerRenderProps): JSX.Element => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
@@ -170,7 +171,10 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		ChoiceCard | undefined
 	>(defaultChoiceCard);
 
-	const isInABTest = true; // TODO: useEffect to work out the returned test and variant before settings this
+	// TODO: set to correct ab test and variant name
+	const isInABTest =
+		tracking.abTestName === 'THREE_TIER_CHOICE_CARDS' &&
+		tracking.abTestVariant == 'BANNER_V2';
 
 	const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
