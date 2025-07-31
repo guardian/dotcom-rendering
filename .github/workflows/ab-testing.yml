@@ -2,37 +2,9 @@ name: 🦕 AB testing
 on:
   pull_request:
     paths:
-      - 'ab-testing/scripts/**'
+      - 'ab-testing/**'
 
 jobs:
-  deno:
-    name: 🦕 AB testing
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    defaults:
-      run:
-        working-directory: ab-testing/scripts
-    steps:
-      - uses: actions/checkout@v4
-
-      # https://github.com/denoland/setup-deno#latest-stable-for-a-major
-      - uses: denoland/setup-deno@v1
-        with:
-          deno-version: v2.3
-
-      - name: Test
-        run: deno test
-
-      - name: Validate
-        run: deno run validate
-
-      # - name: Build
-      #   run: deno run build
-
-      # - name: Deploy
-      #   run: deno run deploy
-
   build-ui:
     name: AB testing UI build
     runs-on: ubuntu-latest
@@ -61,7 +33,6 @@ jobs:
 
   riff-raff:
     name: Upload Riff Raff Artifacts
-    needs: [deno]
     runs-on: ubuntu-latest
     permissions:
       id-token: write

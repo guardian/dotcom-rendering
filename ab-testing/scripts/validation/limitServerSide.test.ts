@@ -1,9 +1,8 @@
 import { assertEquals, assertThrows } from 'jsr:@std/assert';
 import { ABTest } from '../../types.ts';
-import {
-	limitServerSideTests,
-	MAX_SERVER_SIDE_TESTS,
-} from './limitServerSide.ts';
+import { limitServerSideTests } from './limitServerSide.ts';
+
+import { MAX_SERVER_SIDE_TESTS } from '../lib/constants.ts';
 
 Deno.test(
 	'limitServerSideTests - throws if the amount of tests exceeds the limit',
