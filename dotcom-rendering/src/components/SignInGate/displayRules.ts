@@ -14,6 +14,8 @@ export const isNPageOrHigherPageView = (n = 2): boolean => {
 
 	const { count = 0 } = dailyCount;
 
+	console.log(`counter inside isNPageOrHigherPageView: ${count}`);
+
 	return count >= n;
 };
 
