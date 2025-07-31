@@ -115,7 +115,7 @@ const topAboveNavContainerStyles = css`
 	display: block;
 `;
 
-const topAboveNavContainerVaraintStyles = css`
+const topAboveNavContainerVariantStyles = css`
 	padding-bottom: ${space[5]}px;
 	position: relative;
 	margin: 0 auto;
@@ -127,6 +127,13 @@ const topAboveNavContainerVaraintStyles = css`
 	/* Remove the min-height when the ad has rendered, so that the container can shrink if the ad is smaller */
 	&[top-above-nav-ad-rendered='true'] {
 		min-height: auto;
+	}
+
+	.ad-slot--top-above-nav:not([data-google-query-id]) {
+		margin: 24px auto 0;
+		height: 250px;
+		width: 970px;
+		background-color: ${palette.neutral[93]};
 	}
 `;
 
@@ -405,15 +412,6 @@ const crosswordBannerMobileAdStyles = css`
 	min-height: ${getMinHeight(adSizes.mobilesticky.height)}px;
 `;
 
-const topAboveNavBackground = css`
-	.ad-slot--top-above-nav:not([data-google-query-id]) {
-		margin: 0 auto;
-		height: ${getMinHeight(250)}px;
-		width: 970px;
-		background-color: ${palette.neutral[86]};
-	}
-`;
-
 const AdSlotWrapper = ({
 	children,
 	css: additionalCss,
@@ -607,12 +605,11 @@ export const AdSlot = ({
 		case 'top-above-nav': {
 			return (
 				<AdSlotWrapper
-					css={[
+					css={
 						isIn250ReservationVariant
-							? topAboveNavContainerVaraintStyles
-							: topAboveNavContainerStyles,
-						topAboveNavBackground,
-					]}
+							? topAboveNavContainerVariantStyles
+							: topAboveNavContainerStyles
+					}
 				>
 					<div
 						id="dfp-ad--top-above-nav"
