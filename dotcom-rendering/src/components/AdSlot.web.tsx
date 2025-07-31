@@ -128,14 +128,19 @@ const topAboveNavContainerVariantStyles = css`
 	&[top-above-nav-ad-rendered='true'] {
 		min-height: auto;
 	}
-`;
 
-const topAboveNavBackgroundVariantStyles = css`
-	.ad-slot--top-above-nav:not([data-google-query-id]) {
-		margin: 24px auto 0;
-		height: 250px;
-		width: 970px;
-		background-color: ${palette.neutral[93]};
+	/* Ad placeholder grey box rendered while loading the ad */
+	&:not([top-above-nav-ad-rendered='true']) {
+		::before {
+			content: '';
+			position: absolute;
+			height: 250px;
+			width: 970px;
+			top: ${labelHeight}px;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: ${palette.neutral[93]};
+		}
 	}
 `;
 
@@ -609,10 +614,7 @@ export const AdSlot = ({
 				<AdSlotWrapper
 					css={
 						isIn250ReservationVariant
-							? [
-									topAboveNavContainerVariantStyles,
-									topAboveNavBackgroundVariantStyles,
-							  ]
+							? topAboveNavContainerVariantStyles
 							: topAboveNavContainerStyles
 					}
 				>
