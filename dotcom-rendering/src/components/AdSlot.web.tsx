@@ -410,7 +410,7 @@ const topAboveNavBackground = css`
 		margin: 0 auto;
 		height: ${getMinHeight(250)}px;
 		width: 970px;
-		background-color: ${palette.neutral[93]};
+		background-color: ${palette.neutral[86]};
 	}
 `;
 
