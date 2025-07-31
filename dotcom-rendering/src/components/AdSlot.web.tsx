@@ -951,7 +951,7 @@ export const AdSlot = ({
 						data-name={advertId}
 						aria-hidden="true"
 						data-label-show="true"
-						data-testid="slot" //doesn't exist in Frontend so do we need it in DCR?
+						data-testid="slot"
 					/>
 				</AdSlotWrapper>
 			);

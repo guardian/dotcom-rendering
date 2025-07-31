@@ -5,6 +5,7 @@ import {
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
@@ -17,7 +18,6 @@ import { Footer } from '../components/Footer';
 import { DesktopAdSlot, MobileAdSlot } from '../components/GalleryAdSlots';
 import { GalleryImage } from '../components/GalleryImage';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
 import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
@@ -278,7 +278,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 							{isWeb && shouldShowAds && (
 								<div css={galleryItemAdvertStyles}>
 									<div css={galleryInlineAdContainerStyles}>
-										<Hide when="below" breakpoint="tablet">
+										<Hide until="tablet">
 											<DesktopAdSlot
 												renderAds={renderAds}
 												adSlotIndex={adPositions.indexOf(
@@ -286,7 +286,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 												)}
 											/>
 										</Hide>
-										<Hide when="above" breakpoint="tablet">
+										<Hide from="tablet">
 											<MobileAdSlot
 												renderAds={renderAds}
 												adSlotIndex={adPositions.indexOf(
@@ -331,6 +331,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					/>
 				</Section>
 			)}
+			{/** Most Popular container goes here */}
 			{isWeb && renderAds && !isLabs && (
 				<Section
 					fullWidth={true}
