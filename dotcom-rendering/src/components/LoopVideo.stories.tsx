@@ -27,7 +27,8 @@ export const Default: Story = {
 		atomId: 'test-atom-1',
 		height: 720,
 		width: 900,
-		image: 'https://media.guim.co.uk/9bdb802e6da5d3fd249b5060f367b3a817965f0c/0_0_1800_1080/master/1800.jpg',
+		posterImage:
+			'https://media.guim.co.uk/9bdb802e6da5d3fd249b5060f367b3a817965f0c/0_0_1800_1080/master/1800.jpg',
 		fallbackImage: '',
 	},
 };
@@ -44,6 +45,7 @@ export const Without5to4Ratio: Story = {
 
 export const PausePlay: Story = {
 	...Default,
+	name: 'Pause and play interaction',
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
 		const videoEl = canvas.getByTestId('loop-video');
@@ -64,6 +66,7 @@ export const PausePlay: Story = {
 
 export const UnmuteMute: Story = {
 	...Default,
+	name: 'Unmute and mute interaction',
 	parameters: {
 		test: {
 			// The following error is received without this flag: "TypeError: ophan.trackClickComponentEvent is not a function"
@@ -90,6 +93,7 @@ function sleep(ms: number) {
 
 export const InteractionObserver: Story = {
 	...Default,
+	name: 'Interaction observer',
 	render: (args) => (
 		<div data-testid="test-container">
 			<LoopVideo {...args} />

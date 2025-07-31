@@ -108,6 +108,8 @@ export interface AuxiaAPIResponseDataUserTreatment {
 	surface: string;
 }
 
+export type ShowGateValues = 'true' | 'mandatory' | 'dismissible' | undefined;
+
 export interface AuxiaProxyGetTreatmentsPayload {
 	browserId: string | undefined;
 	isSupporter: boolean;
@@ -122,7 +124,8 @@ export interface AuxiaProxyGetTreatmentsPayload {
 	mvtId: number;
 	should_show_legacy_gate_tmp: boolean; // [1]
 	hasConsented: boolean;
-	shouldNotServeMandatory: boolean; // [2]
+	shouldServeDismissible: boolean; // [2]
+	showDefaultGate: ShowGateValues; // [3]
 }
 
 // [1]
@@ -145,8 +148,19 @@ export interface AuxiaProxyGetTreatmentsPayload {
 // We will be setting it to false.
 
 // [2]
-// date: 03rd July 2025
-// If shouldNotServeMandatory, we should not show a mandatory gate.
+// date: 03rd July 2025// If shouldServeDismissible is true, we should show a dismissible gate.
+
+// [3]
+
+// date: 25rd July 2025
+// author: Pascal
+
+// In order to facilitate internal testing, this attribute, when defined, forces
+// the display of a sign-in gate. The values 'true' and 'dismissible' displays the
+// dismissible variant of the gu default gate, and the value 'mandatory' displays
+// the mandatory variant of the gu default gate.
+
+// Note that this attributes override the value of should_show_legacy_gate_tmp.
 
 export interface AuxiaProxyGetTreatmentsResponse {
 	status: boolean;

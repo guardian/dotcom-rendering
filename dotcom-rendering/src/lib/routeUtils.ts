@@ -94,6 +94,7 @@ export const ValidRoutePathsArray = [
 	'/signin/password',
 	'/signin/refresh',
 	'/signin/:social',
+	'https://profile.theguardian.com/signin',
 	'https://profile.theguardian.com/signin/:social',
 	'/signin/email-sent',
 	'/signin/email-sent/resend',

@@ -3,10 +3,12 @@ import { log, storage } from '@guardian/libs';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
+	getOphan,
 	submitClickComponentEvent,
 	submitComponentEvent,
 } from '../client/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
+import { generateImageURL } from '../lib/image';
 import { useIsInView } from '../lib/useIsInView';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
 import type { CustomPlayEventDetail } from '../lib/video';
@@ -52,13 +54,31 @@ const logAndReportError = (src: string, error: Error) => {
 	log('dotcom', message);
 };
 
+const dispatchOphanAttentionEvent = (
+	eventType: 'videoPlaying' | 'videoPause',
+) => {
+	const event = new Event(eventType, { bubbles: true });
+	document.dispatchEvent(event);
+};
+
+const getOptimisedPosterImage = (mainImage: string): string => {
+	const resolution = window.devicePixelRatio >= 2 ? 'high' : 'low';
+
+	return generateImageURL({
+		mainImage,
+		imageWidth: 940, // The widest a looping video can be: Flexible special, giga-boosted
+		resolution,
+		aspectRatio: '5:4',
+	});
+};
+
 type Props = {
 	src: string;
 	atomId: string;
 	uniqueId: string;
-	width: number;
 	height: number;
-	image: string;
+	width: number;
+	posterImage: string;
 	fallbackImage: CardPictureProps['mainImage'];
 	fallbackImageSize: CardPictureProps['imageSize'];
 	fallbackImageLoading: CardPictureProps['loading'];
@@ -70,9 +90,9 @@ export const LoopVideo = ({
 	src,
 	atomId,
 	uniqueId,
-	width,
 	height,
-	image,
+	width,
+	posterImage,
 	fallbackImage,
 	fallbackImageSize,
 	fallbackImageLoading,
@@ -86,9 +106,7 @@ export const LoopVideo = ({
 	const [isMuted, setIsMuted] = useState(true);
 	const [showPlayIcon, setShowPlayIcon] = useState(false);
 	const [preloadPartialData, setPreloadPartialData] = useState(false);
-	const [posterImage, setPosterImage] = useState<string | undefined>(
-		undefined,
-	);
+	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
 	const [currentTime, setCurrentTime] = useState(0);
 	const [playerState, setPlayerState] =
 		useState<(typeof PLAYER_STATES)[number]>('NOT_STARTED');
@@ -103,9 +121,11 @@ export const LoopVideo = ({
 	 */
 	const [hasBeenInView, setHasBeenInView] = useState(false);
 
+	const VISIBILITY_THRESHOLD = 0.5;
+
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
-		threshold: 0.5,
+		threshold: VISIBILITY_THRESHOLD,
 	});
 
 	const playVideo = useCallback(async () => {
@@ -119,16 +139,17 @@ export const LoopVideo = ({
 			await startPlayPromise
 				.then(() => {
 					// Autoplay succeeded
+					dispatchOphanAttentionEvent('videoPlaying');
 					setPlayerState('PLAYING');
 				})
 				.catch((error: Error) => {
 					// Autoplay failed
 					logAndReportError(src, error);
-					setPosterImage(image);
+					setShowPosterImage(true);
 					setPlayerState('PAUSED_BY_BROWSER');
 				});
 		}
-	}, [src, image]);
+	}, [src]);
 
 	const pauseVideo = (
 		reason: Extract<
@@ -145,6 +166,7 @@ export const LoopVideo = ({
 		}
 
 		setPlayerState(reason);
+		dispatchOphanAttentionEvent('videoPause');
 		void vidRef.current.pause();
 	};
 
@@ -238,6 +260,29 @@ export const LoopVideo = ({
 			);
 		};
 	}, [uniqueId]);
+
+	/**
+	 * Initiates attention tracking for ophan
+	 */
+	useEffect(() => {
+		const video = vidRef.current;
+		if (!video) return;
+		const trackAttention = async () => {
+			try {
+				const ophan = await getOphan('Web');
+				ophan.trackComponentAttention(
+					`gu-video-loop-${atomId}`,
+					video,
+					VISIBILITY_THRESHOLD,
+					true,
+				);
+			} catch (error) {
+				console.error('Failed to track video attention:', error);
+			}
+		};
+
+		void trackAttention();
+	}, [atomId]);
 
 	/**
 	 * Keeps track of whether the video has been in view or not.
@@ -346,9 +391,9 @@ export const LoopVideo = ({
 			isAutoplayAllowed === false ||
 			(isInView === false && !hasBeenInView)
 		) {
-			setPosterImage(image);
+			setShowPosterImage(true);
 		}
-	}, [isAutoplayAllowed, isInView, hasBeenInView, image]);
+	}, [isAutoplayAllowed, isInView, hasBeenInView]);
 
 	/**
 	 * We almost always want to preload some of the video data. If a user has prefers-reduced-motion
@@ -471,6 +516,10 @@ export const LoopVideo = ({
 
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
+	const optimisedPosterImage = showPosterImage
+		? getOptimisedPosterImage(posterImage)
+		: undefined;
+
 	return (
 		<figure
 			ref={setNode}
@@ -484,7 +533,7 @@ export const LoopVideo = ({
 				uniqueId={uniqueId}
 				width={width}
 				height={height}
-				posterImage={posterImage}
+				posterImage={optimisedPosterImage}
 				FallbackImageComponent={FallbackImageComponent}
 				currentTime={currentTime}
 				setCurrentTime={setCurrentTime}

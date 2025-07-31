@@ -245,7 +245,7 @@ const TwoOrFourCardLayout = ({
 							)}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
-							imageSize="medium"
+							imageSize="small"
 							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}

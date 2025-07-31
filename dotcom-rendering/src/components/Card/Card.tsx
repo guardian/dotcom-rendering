@@ -835,6 +835,7 @@ export const Card = ({
 							media.type === 'slideshow' && isFlexibleContainer
 						}
 						padImage={isMediaCardOrNewsletter && isBetaContainer}
+						isBetaContainer={isBetaContainer}
 					>
 						{media.type === 'slideshow' &&
 							(isFlexibleContainer ? (
@@ -872,6 +873,7 @@ export const Card = ({
 								imagePositionOnDesktop={imagePositionOnDesktop}
 								imagePositionOnMobile={imagePositionOnMobile}
 								isBetaContainer={isBetaContainer}
+								isFlexibleContainer={isFlexibleContainer}
 							>
 								<Avatar
 									src={media.avatarUrl}
@@ -889,11 +891,11 @@ export const Card = ({
 							>
 								<LoopVideo
 									src={media.mainMedia.videoId}
+									atomId={media.mainMedia.atomId}
+									uniqueId={uniqueId}
 									height={media.mainMedia.height}
 									width={media.mainMedia.width}
-									image={media.mainMedia.image ?? ''}
-									uniqueId={uniqueId}
-									atomId={media.mainMedia.atomId}
+									posterImage={media.mainMedia.image ?? ''}
 									fallbackImage={media.mainMedia.image ?? ''}
 									fallbackImageSize={imageSize}
 									fallbackImageLoading={imageLoading}

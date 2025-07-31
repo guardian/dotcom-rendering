@@ -96,6 +96,7 @@ type Props = {
 	isListElement?: boolean;
 	isSectionedMiniProfilesArticle?: boolean;
 	shouldHideAds: boolean;
+	contentType?: string;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -157,6 +158,7 @@ export const renderElement = ({
 	isListElement = false,
 	isSectionedMiniProfilesArticle = false,
 	shouldHideAds,
+	contentType,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -886,6 +888,7 @@ export const renderElement = ({
 						iconSizeOnMobile="large"
 						showTextOverlay={false}
 						hidePillOnMobile={false}
+						contentType={contentType}
 					/>
 				</Island>
 			);
@@ -953,6 +956,7 @@ export const RenderArticleElement = ({
 	isListElement,
 	isSectionedMiniProfilesArticle,
 	shouldHideAds,
+	contentType,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -979,6 +983,7 @@ export const RenderArticleElement = ({
 		isListElement,
 		isSectionedMiniProfilesArticle,
 		shouldHideAds,
+		contentType,
 	});
 
 	const needsFigure = !bareElements.has(element._type);

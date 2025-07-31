@@ -18,7 +18,7 @@ import { useContributionsReminderEmailForm } from '../../../hooks/useContributio
 import { ensureHasPreposition, ReminderStatus } from '../../../lib/reminders';
 import type { BannerEnrichedReminderCta } from '../../common/types';
 import type { CtaSettings } from '../settings';
-import { buttonStyles } from '../styles/buttonStyles';
+import { buttonStyles, buttonThemes } from '../styles/buttonStyles';
 
 // ---- Thank you component ---- //
 
@@ -189,6 +189,10 @@ function Signup({
 							${setReminderCtaSettings &&
 							buttonStyles(setReminderCtaSettings)}
 						`}
+						theme={
+							setReminderCtaSettings &&
+							buttonThemes(setReminderCtaSettings)
+						}
 					>
 						Set reminder
 					</Button>

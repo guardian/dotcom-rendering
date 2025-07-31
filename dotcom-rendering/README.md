@@ -30,9 +30,17 @@ $ cd dotcom-rendering
 
 ### Install Node.js
 
-To install and manage Node versions, we highly recommend installing a Node version manager such as [fnm](https://github.com/Schniz/fnm) (preferred), [nvm](https://github.com/nvm-sh/nvm) or [asdf](https://asdf-vm.com/guide/getting-started.html).
+We highly recommend installing a Node version manager such as [fnm](https://github.com/Schniz/fnm) (preferred), [nvm](https://github.com/nvm-sh/nvm) or [asdf](https://asdf-vm.com/guide/getting-started.html).
 
-Ensure you're at the root directory of this project, then follow the instructions for your version manager to install Node.
+Install the Node version manager of your choice.
+
+Ensure you're at the root directory of the project:
+
+```
+cd ~/code/dotcom-rendering
+```
+
+Run the command for your version manager to use the Node version as specified in [.nvmrc](../.nvmrc).
 
 For `fnm` this will be:
 
@@ -94,22 +102,20 @@ $ make install
 
 If you get an Node version error then check the setup for your version manager.
 
-### Running locally
+### Run
 
 ```sh
 $ make dev
 ```
 
-The development server will start on [http://localhost:3030](http://localhost:3030).
+The development server will start on [http://localhost:3030](http://localhost:3030)
 
-A list of content types with example URLs are available on the [root path](http://localhost:3030).
+The development server home page lists examples of the various page and content types.
 
 You can render a specific article by appending the production URL to the `Article` endpoint, for example:
-
 http://localhost:3030/Article/https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey
 
-You can view the JSON representation of an article as sent to DCR by [Frontend](https://github.com/guardian/frontend), by appending `.json?dcr=true` to the production URL, for example:
-
+You can view the JSON data model of a page as sent by [Frontend](https://github.com/guardian/frontend) to DCR by appending `.json?dcr=true` to the production URL, for example:
 https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey.json?dcr=true
 
 ### Detailed setup
