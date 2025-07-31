@@ -397,6 +397,11 @@ const buildAuxiaGateDisplayData = async (
 	const readerPersonalData = await decideAuxiaProxyReaderPersonalData();
 	const tagIds = tags.map((tag) => tag.id);
 
+	let mvtId = readerPersonalData.mvtId;
+	if (decideShouldEnforceLocalLogic()) {
+		mvtId = 350001; // to be outside the Auxia share of the Audience
+	}
+
 	let should_show_legacy_gate_tmp;
 
 	if (!decideShouldEnforceLocalLogic() && isAuxiaAudience) {
@@ -434,7 +439,7 @@ const buildAuxiaGateDisplayData = async (
 		tagIds,
 		gateDismissCount,
 		readerPersonalData.countryCode,
-		readerPersonalData.mvtId,
+		mvtId,
 		should_show_legacy_gate_tmp,
 		readerPersonalData.hasConsented,
 		shouldServeDismissible,
