@@ -312,31 +312,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 					templateSettings.containerSettings.textColor,
 				)}
 			>
-				{isInABTest && (
-					<div css={styles.collapsableButtonContainer}>
-						<Button
-							onClick={() => setIsCollapsed(!isCollapsed)}
-							cssOverrides={styles.iconOverrides}
-							priority="tertiary"
-							icon={
-								isCollapsed ? (
-									<SvgChevronUpSingle />
-								) : (
-									<SvgChevronDownSingle />
-								)
-							}
-							size="small"
-							theme={buttonThemes(
-								collapsableButtonSettings,
-								'tertiary',
-							)}
-							hideLabel={true}
-						>
-							isCollapsed ? ( Open ) : ( Close )
-						</Button>
-					</div>
-				)}
-
 				<div
 					css={
 						isInABTest && isCollapsed
@@ -442,7 +417,40 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						</div>
 					)}
 
-					<div css={styles.closeButtonContainer}>
+					<div
+						css={
+							isInABTest
+								? styles.closeAndCollapseButtonContainer
+								: styles.closeButtonContainer
+						}
+					>
+						{isInABTest && (
+							<div
+								id="collapseable-button"
+								css={styles.collapsableButtonContainer}
+							>
+								<Button
+									onClick={() => setIsCollapsed(!isCollapsed)}
+									cssOverrides={styles.iconOverrides}
+									priority="tertiary"
+									icon={
+										isCollapsed ? (
+											<SvgChevronUpSingle />
+										) : (
+											<SvgChevronDownSingle />
+										)
+									}
+									size="small"
+									theme={buttonThemes(
+										collapsableButtonSettings,
+										'tertiary',
+									)}
+									hideLabel={true}
+								>
+									isCollapsed ? ( Open ) : ( Close )
+								</Button>
+							</div>
+						)}
 						{!isInABTest ||
 							(isCollapsed && (
 								<DesignableBannerCloseButton
@@ -572,7 +580,7 @@ const styles = {
 			bottom: 0px;
 			/* the vertical line aligns with that of standard article */
 			grid-column-gap: 10px;
-			grid-template-columns: 170px 1px min(460px) min(380px) auto;
+			grid-template-columns: 140px 1px min(460px) min(380px) auto;
 			grid-template-rows: auto auto;
 			grid-template-areas:
 				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button'
@@ -581,7 +589,7 @@ const styles = {
 		${from.wide} {
 			max-width: 1300px;
 			/* the vertical line aligns with that of standard article */
-			grid-template-columns: 245px 1px min(460px) min(380px) auto;
+			grid-template-columns: 219px 1px min(460px) min(380px) auto;
 			grid-template-rows: auto auto;
 			grid-template-areas:
 				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button'
@@ -593,6 +601,7 @@ const styles = {
 		background: inherit;
 		position: relative;
 		bottom: 0px;
+		background-color: red;
 
 		/* mobile first */
 		${until.phablet} {
@@ -636,7 +645,7 @@ const styles = {
 			bottom: 0px;
 			/* the vertical line aligns with that of standard article */
 			grid-column-gap: 10px;
-			grid-template-columns: 140px 1px min(460px) min(380px) auto auto;
+			grid-template-columns: 140px 1px min(460px) min(380px) auto;
 			grid-template-rows: auto auto;
 			grid-template-areas:
 				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button '
@@ -645,15 +654,12 @@ const styles = {
 		${from.wide} {
 			max-width: 1300px;
 			/* the vertical line aligns with that of standard article */
-			grid-template-columns: 219px 1px min(500px) min(380px) auto auto;
+			grid-template-columns: 219px 1px min(500px) min(380px) auto;
 			grid-template-rows: auto auto;
 			grid-template-areas:
 				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button '
 				'.		vert-line	cta-container	${cardsImageOrSpaceTemplateString}	.';
 		}
-	`,
-	collapsableButtonContainer: css`
-		grid-area: collapseable;
 	`,
 	verticalLine: css`
 		grid-area: vert-line;
@@ -671,6 +677,32 @@ const styles = {
 	closeButtonContainer: css`
 		/* Layout changes only here */
 		grid-area: close-button;
+		${until.phablet} {
+			padding-right: ${space[2]}px;
+			justify-self: end;
+			position: sticky;
+			top: 10px;
+		}
+		${from.phablet} {
+			margin-top: ${space[2]}px;
+			padding-right: ${space[2]}px;
+			position: sticky;
+		}
+		${from.desktop} {
+			margin-top: ${space[6]}px;
+			justify-self: end;
+		}
+		${from.leftCol} {
+			justify-self: start;
+			padding-left: ${space[8]}px;
+		}
+	`,
+	closeAndCollapseButtonContainer: css`
+		/* Layout changes only here */
+		grid-area: close-button;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
 		${until.phablet} {
 			padding-right: ${space[2]}px;
 			justify-self: end;
@@ -948,13 +980,16 @@ const styles = {
 	articleCountContainer: css`
 		margin-bottom: ${space[3]}px;
 	`,
-
+	collapsableButtonContainer: css`
+		grid-area: collapseable;
+		padding-left: ${space[2]}px;
+		justify-self: end;
+	`,
 	iconOverrides: css`
 		background-color: ${palette.brand[400]};
 		path {
 			fill: white;
 		}
-		float: right;
 		margin-top: ${space[1]}px;
 		margin-right: ${space[1]}px;
 	`,
