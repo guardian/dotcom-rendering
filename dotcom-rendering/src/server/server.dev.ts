@@ -33,6 +33,8 @@ const FRONT_URL = /^\/[a-z-/]+(?<!\.css)$/;
 const TAG_PAGE_URL = /^\/(tone|series|profile)\/[a-z-]+/;
 /** assets are paths like /assets/index.xxx.js */
 const ASSETS_URL = /^assets\/.+\.js/;
+/** android app requests to /json/version and /json/list */
+const JSON_URL = /\/json\//;
 
 //editionalise front url to uk
 const editionalisefront = (url: string): string => {
@@ -64,6 +66,8 @@ const redirects: Handler = (req, res, next) => {
 
 	// Do not redirect assets urls
 	if (req.url.match(ASSETS_URL)) return next();
+	// Do not redirect android /json/ requests
+	if (req.url.match(JSON_URL)) return next();
 
 	if (req.url.match(ARTICLE_URL) ?? req.url.match(CROSSWORD_URL)) {
 		const url = new URL(req.url, 'https://www.theguardian.com/').toString();
