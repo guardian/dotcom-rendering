@@ -23,10 +23,9 @@ import sanitise from 'sanitize-html';
 
 const supportTierChoiceCardStyles = (
 	selected: boolean,
-	isInABTest: boolean,
-	isCollapsed: boolean,
+	isCollapsedForABTest: boolean,
 ) => css`
-	display: ${isInABTest && isCollapsed && !selected ? `none` : `block`};
+	display: ${isCollapsedForABTest && !selected ? `none` : `block`};
 	border: ${selected
 		? `2px solid ${palette.brand['500']}`
 		: `1px solid ${palette.neutral[46]}`};
@@ -156,8 +155,7 @@ type ThreeTierChoiceCardsProps = {
 	setSelectedChoiceCard: Dispatch<SetStateAction<ChoiceCard | undefined>>;
 	choices: ChoiceCard[];
 	id: string; // uniquely identify this choice cards component to avoid conflicting with others
-	isInTest?: boolean;
-	isCollapsed?: boolean;
+	isCollapsedForABTest?: boolean;
 };
 
 export const ThreeTierChoiceCards = ({
@@ -165,8 +163,7 @@ export const ThreeTierChoiceCards = ({
 	setSelectedChoiceCard,
 	choices,
 	id,
-	isInTest = false,
-	isCollapsed = false,
+	isCollapsedForABTest = false,
 }: ThreeTierChoiceCardsProps) => {
 	return (
 		<RadioGroup
@@ -216,14 +213,13 @@ export const ThreeTierChoiceCards = ({
 								background-color: inherit;
 							`}
 						>
-							{pill && (!isInTest || !isCollapsed) && (
+							{pill && !isCollapsedForABTest && (
 								<ChoiceCardPill pill={pill} />
 							)}
 							<label
 								css={supportTierChoiceCardStyles(
 									selected,
-									isInTest,
-									isCollapsed,
+									isCollapsedForABTest,
 								)}
 								htmlFor={radioId}
 							>
@@ -239,8 +235,7 @@ export const ThreeTierChoiceCards = ({
 									value={radioId}
 									cssOverrides={labelOverrideStyles(selected)}
 									supporting={
-										selected &&
-										(!isInTest || !isCollapsed) ? (
+										selected && !isCollapsedForABTest ? (
 											<SupportingBenefits
 												benefitsLabel={
 													benefitsLabel as
