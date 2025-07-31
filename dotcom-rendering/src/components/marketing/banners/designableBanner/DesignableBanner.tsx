@@ -403,8 +403,9 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									highlightedTextSettings={
 										templateSettings.highlightedTextSettings
 									}
-									isInAbTest={isInABTest}
-									isCollapsed={isCollapsed}
+									isCollapsedForABTest={
+										isInABTest && isCollapsed
+									}
 								/>
 							</div>
 						</div>
