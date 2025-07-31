@@ -128,7 +128,9 @@ const topAboveNavContainerVariantStyles = css`
 	&[top-above-nav-ad-rendered='true'] {
 		min-height: auto;
 	}
+`;
 
+const topAboveNavBackgroundVariantStyles = css`
 	.ad-slot--top-above-nav:not([data-google-query-id]) {
 		margin: 24px auto 0;
 		height: 250px;
@@ -607,7 +609,10 @@ export const AdSlot = ({
 				<AdSlotWrapper
 					css={
 						isIn250ReservationVariant
-							? topAboveNavContainerVariantStyles
+							? [
+									topAboveNavContainerVariantStyles,
+									topAboveNavBackgroundVariantStyles,
+							  ]
 							: topAboveNavContainerStyles
 					}
 				>
