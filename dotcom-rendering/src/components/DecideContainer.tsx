@@ -48,6 +48,7 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
+	isInNoBoostsAbTestVariant?: boolean;
 };
 
 export const DecideContainer = ({
@@ -63,6 +64,7 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
+	isInNoBoostsAbTestVariant,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -268,6 +270,7 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
+					isInNoBoostsAbTestVariant={isInNoBoostsAbTestVariant}
 				/>
 			);
 		case 'scrollable/small':
