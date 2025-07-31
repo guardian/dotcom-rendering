@@ -27,8 +27,7 @@ interface DesignableBannerHeaderProps {
 	mobileHeading: JSX.Element | JSX.Element[] | null;
 	headerSettings: HeaderSettings | undefined;
 	headlineSize: 'small' | 'medium' | 'large';
-	isInABTestVariant: boolean;
-	isCollapsed: boolean;
+	isCollapsedForABTest: boolean;
 }
 
 export function DesignableBannerHeader({
@@ -36,15 +35,13 @@ export function DesignableBannerHeader({
 	mobileHeading,
 	headerSettings,
 	headlineSize,
-	isInABTestVariant = false,
-	isCollapsed = false,
+	isCollapsedForABTest = false,
 }: DesignableBannerHeaderProps): JSX.Element {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 	const styles = getStyles(
 		headerSettings,
 		headlineSize,
-		isInABTestVariant,
-		isCollapsed,
+		isCollapsedForABTest,
 	);
 
 	const resolveImage = (settings: Image) => {
@@ -56,7 +53,7 @@ export function DesignableBannerHeader({
 	const resolveCopy = () => {
 		return (
 			<h2>
-				{isTabletOrAbove && !isInABTestVariant && !isCollapsed
+				{isTabletOrAbove && !isCollapsedForABTest
 					? heading
 					: mobileHeading}
 			</h2>
@@ -77,8 +74,7 @@ export function DesignableBannerHeader({
 const getStyles = (
 	headerSettings: HeaderSettings | undefined,
 	headlineSize: 'small' | 'medium' | 'large',
-	isInABTestVariant: boolean,
-	isCollapsed: boolean,
+	isCollapsedForABTest: boolean,
 ) => {
 	const color = headerSettings?.textColour ?? neutral[0];
 	const copyTopMargin = headerSettings?.headerImage ? space[1] : space[1];
@@ -89,15 +85,13 @@ const getStyles = (
 			? `${headlineMedium17}`
 			: `${headlineMedium28}`;
 
-	const phabletHeadline =
-		isInABTestVariant && isCollapsed
-			? `${mobileHeadlineSize}`
-			: `${headlineMedium34}`;
+	const phabletHeadline = isCollapsedForABTest
+		? `${mobileHeadlineSize}`
+		: `${headlineMedium34}`;
 
-	const leftColHeadline =
-		isInABTestVariant && isCollapsed
-			? `${mobileHeadlineSize}`
-			: `${headlineMedium42}`;
+	const leftColHeadline = isCollapsedForABTest
+		? `${mobileHeadlineSize}`
+		: `${headlineMedium42}`;
 
 	return {
 		container: css`

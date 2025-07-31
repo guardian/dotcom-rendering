@@ -361,8 +361,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								headlineSize={
 									design.fonts?.heading.size ?? 'medium'
 								}
-								isInABTestVariant={isInABTest}
-								isCollapsed={isCollapsed}
+								isCollapsedForABTest={isInABTest && isCollapsed}
 							/>
 						</div>
 						{showAboveArticleCount && (
