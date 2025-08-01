@@ -113,7 +113,7 @@ export const LoopVideo = ({
 	const [isAutoplayAllowed, setIsAutoplayAllowed] = useState<boolean | null>(
 		null,
 	);
-	const [isRestoredFromBFCache, setIsRestoredFromBFCache] = useState(0);
+	const [isRestoredFromBFCache, setIsRestoredFromBFCache] = useState(false);
 
 	/**
 	 * Keep a track of whether the video has been in view. We only
@@ -134,22 +134,20 @@ export const LoopVideo = ({
 		/** https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay#example_handling_play_failures */
 		const startPlayPromise = vidRef.current.play();
 
-		console.log('Inside playVideo function');
-
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- In earlier versions of the HTML specification, play() didn't return a value
 		if (startPlayPromise !== undefined) {
 			await startPlayPromise
 				.then(() => {
 					// Autoplay succeeded
 					console.log(
-						'Autoplay succeeded. Setting player state to PLAYING',
+						'playVideo function - Autoplay succeeded. Setting player state to PLAYING',
 					);
 					dispatchOphanAttentionEvent('videoPlaying');
 					setPlayerState('PLAYING');
 				})
 				.catch((error: Error) => {
 					// Autoplay failed
-					console.log('Autoplay Failed');
+					console.log('playVideo function - Autoplay Failed');
 					logAndReportError(src, error);
 					setShowPosterImage(true);
 					setPlayerState('PAUSED_BY_BROWSER');
@@ -204,7 +202,7 @@ export const LoopVideo = ({
 	 */
 	useEffect(() => {
 		console.log(
-			'Setup useeffect - isRestoredFromBFCache',
+			'Setup useeffect - isRestoredFromBFCache:',
 			isRestoredFromBFCache,
 		);
 		/**
@@ -221,14 +219,13 @@ export const LoopVideo = ({
 		 * `autoplayPreference` is explicitly `false`
 		 *  when the user has said they don't want autoplay video.
 		 */
-		console.log('Setup useeffect 1 - isAutoplayAllowed', isAutoplayAllowed);
+		console.log('Setup useeffect - isAutoplayAllowed', isAutoplayAllowed);
 		setIsAutoplayAllowed(
 			!userPrefersReducedMotion && autoplayPreference !== false,
 		);
-		console.log(
-			'Setup useeffect 2 - isAutoplayAllowed',
-			!userPrefersReducedMotion && autoplayPreference !== false,
-		);
+		if (!userPrefersReducedMotion && autoplayPreference !== false) {
+			console.log('Setup useeffect 2 - isAutoplayAllowed set to true');
+		}
 
 		/**
 		 * Mutes the current video when another video is unmuted
@@ -324,37 +321,31 @@ export const LoopVideo = ({
 	}, [isInView, hasBeenInView, atomId]);
 
 	/**
-	 * Autoplay the video when it comes into view.
+	 * Autoplay the video when appropriate.
 	 */
 	useEffect(() => {
 		console.log(
-			'autoplay useeffect - isRestoredFromBFCache',
-			isRestoredFromBFCache,
-		);
-		console.log(
-			'autoplay useeffect - isAutoplayAllowed',
-			isAutoplayAllowed,
-		);
-
-		if (!vidRef.current || isAutoplayAllowed === false) {
-			return;
-		}
-
-		console.log('autoplay useEffect - isInView', isInView);
-		console.log('autoplay useEffect - isPlayable', isPlayable);
-		console.log('autoplay useEffect - playerState', playerState);
-		console.log(
-			'autoplay useEffect - isRestoredFromBFCache',
-			isRestoredFromBFCache,
+			`autoplay useeffect - isRestoredFromBFCache: ${isRestoredFromBFCache}. isAutoplayAllowed: ${isAutoplayAllowed}. playerState: ${playerState}. isInView: ${isInView}`,
 		);
 
 		if (
-			isInView &&
-			isPlayable &&
-			(playerState === 'NOT_STARTED' ||
-				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
-				(isRestoredFromBFCache > 0 &&
-					playerState === 'PAUSED_BY_BROWSER'))
+			!vidRef.current ||
+			isAutoplayAllowed === false ||
+			!isPlayable ||
+			!isInView
+		) {
+			return;
+		}
+		if (
+			/**
+			 * Autoplay the video when it comes into view.
+			 */
+			playerState === 'NOT_STARTED' ||
+			playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
+			/**
+			 * Autoplay the video when the page has been restored by the BFCache.
+			 */
+			(isRestoredFromBFCache && playerState === 'PAUSED_BY_BROWSER')
 		) {
 			/**
 			 * Check if the video has not been in view before tracking the play.
@@ -365,6 +356,7 @@ export const LoopVideo = ({
 			}
 
 			console.log('autoplay useeffect - Playing video!');
+			setIsRestoredFromBFCache(false);
 			void playVideo();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps -- Logs
@@ -443,18 +435,14 @@ export const LoopVideo = ({
 
 	useEffect(() => {
 		window.addEventListener('pageshow', function (event) {
-			console.log('event', event);
 			if (event.persisted) {
 				// The page was restored from the bfcache. Rerender the component to ensure video can autoplay.
-				console.log(
-					'The page was restored from the bfcache. Forcing update.',
-				);
-				console.log('bfccache useEffect - playerState', playerState);
-				console.log('bfcache useEffect - isPlayable', isPlayable);
+				console.log('BFCache useEffect - playerState', playerState);
 
+				// Reset the state to allow the video to autoplay again.
 				setIsAutoplayAllowed(null);
 				setPlayerState('NOT_STARTED');
-				setIsRestoredFromBFCache((prev) => prev + 1);
+				setIsRestoredFromBFCache(true);
 			}
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps -- logs
@@ -468,8 +456,10 @@ export const LoopVideo = ({
 
 	const handleCanPlay = () => {
 		if (!isPlayable) {
-			console.log('Setting video as playable');
+			console.log('canPlay event fired - Setting video as playable');
 			setIsPlayable(true);
+		} else {
+			console.log('canPlay event fired - Video is already playable');
 		}
 	};
 
