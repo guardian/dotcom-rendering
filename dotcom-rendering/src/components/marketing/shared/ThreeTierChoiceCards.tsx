@@ -21,8 +21,11 @@ import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared
 import type { Dispatch, SetStateAction } from 'react';
 import sanitise from 'sanitize-html';
 
-const supportTierChoiceCardStyles = (selected: boolean) => css`
-	display: block;
+const supportTierChoiceCardStyles = (
+	selected: boolean,
+	isCollapsedForABTest: boolean,
+) => css`
+	display: ${isCollapsedForABTest && !selected ? `none` : `block`};
 	border: ${selected
 		? `2px solid ${palette.brand['500']}`
 		: `1px solid ${palette.neutral[46]}`};
@@ -152,6 +155,7 @@ type ThreeTierChoiceCardsProps = {
 	setSelectedChoiceCard: Dispatch<SetStateAction<ChoiceCard | undefined>>;
 	choices: ChoiceCard[];
 	id: string; // uniquely identify this choice cards component to avoid conflicting with others
+	isCollapsedForABTest?: boolean;
 };
 
 export const ThreeTierChoiceCards = ({
@@ -159,6 +163,7 @@ export const ThreeTierChoiceCards = ({
 	setSelectedChoiceCard,
 	choices,
 	id,
+	isCollapsedForABTest = false,
 }: ThreeTierChoiceCardsProps) => {
 	return (
 		<RadioGroup
@@ -208,9 +213,14 @@ export const ThreeTierChoiceCards = ({
 								background-color: inherit;
 							`}
 						>
-							{pill && <ChoiceCardPill pill={pill} />}
+							{pill && !isCollapsedForABTest && (
+								<ChoiceCardPill pill={pill} />
+							)}
 							<label
-								css={supportTierChoiceCardStyles(selected)}
+								css={supportTierChoiceCardStyles(
+									selected,
+									isCollapsedForABTest,
+								)}
 								htmlFor={radioId}
 							>
 								<Radio
@@ -225,7 +235,7 @@ export const ThreeTierChoiceCards = ({
 									value={radioId}
 									cssOverrides={labelOverrideStyles(selected)}
 									supporting={
-										selected ? (
+										selected && !isCollapsedForABTest ? (
 											<SupportingBenefits
 												benefitsLabel={
 													benefitsLabel as
