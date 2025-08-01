@@ -372,15 +372,6 @@ const decideShowDefaultGate = (): ShowGateValues => {
 	return undefined;
 };
 
-const decideShouldEnforceLocalLogic = (): boolean => {
-	// July 31st
-	// SignIn gate behavior investigation
-
-	const params = new URLSearchParams(window.location.search);
-	const value: string | null = params.get('localgatelogic');
-	return value === 'true';
-};
-
 const buildAuxiaGateDisplayData = async (
 	contributionsServiceUrl: string,
 	pageId: string,
@@ -397,14 +388,9 @@ const buildAuxiaGateDisplayData = async (
 	const readerPersonalData = await decideAuxiaProxyReaderPersonalData();
 	const tagIds = tags.map((tag) => tag.id);
 
-	let mvtId = readerPersonalData.mvtId;
-	if (decideShouldEnforceLocalLogic()) {
-		mvtId = 350001; // to be outside the Auxia share of the Audience
-	}
-
 	let should_show_legacy_gate_tmp;
 
-	if (!decideShouldEnforceLocalLogic() && isAuxiaAudience) {
+	if (isAuxiaAudience) {
 		should_show_legacy_gate_tmp = false;
 		// The actual value is irrelevant in this case, but we have the convention to set it to false here
 	} else {
@@ -439,7 +425,7 @@ const buildAuxiaGateDisplayData = async (
 		tagIds,
 		gateDismissCount,
 		readerPersonalData.countryCode,
-		mvtId,
+		readerPersonalData.mvtId,
 		should_show_legacy_gate_tmp,
 		readerPersonalData.hasConsented,
 		shouldServeDismissible,
