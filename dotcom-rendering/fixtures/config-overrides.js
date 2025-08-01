@@ -21,5 +21,8 @@
  * why, thanks!
  */
 module.exports = {
-	configOverrides: {},
+	configOverrides: {
+		// temporary until PR to add this to frontend is merged https://github.com/guardian/frontend/pull/28108
+		serverSideABTests: {},
+	},
 };
