@@ -187,7 +187,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						contributionsServiceUrl={
 							frontendData.contributionsServiceUrl
 						}
-						showSubNav={false}
+						showSubNav={!isLabs}
 						showSlimNav={true}
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}

@@ -2672,7 +2672,12 @@ const captionTextLight: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.neutral[7];
 			}
 		case ArticleSpecial.Labs:
-			return sourcePalette.neutral[20];
+			switch (design) {
+				case ArticleDesign.Gallery:
+					return sourcePalette.neutral[86];
+				default:
+					return sourcePalette.neutral[20];
+			}
 		default:
 			switch (design) {
 				case ArticleDesign.PhotoEssay:
