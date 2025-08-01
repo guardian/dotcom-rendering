@@ -451,15 +451,13 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								</Button>
 							</div>
 						)}
-						{!isInABTest ||
-							(isCollapsed && (
-								<DesignableBannerCloseButton
-									onCloseClick={onCloseClick}
-									settings={
-										templateSettings.closeButtonSettings
-									}
-								/>
-							))}
+						{(!isInABTest || isCollapsed) && (
+							<DesignableBannerCloseButton
+								onCloseClick={onCloseClick}
+								settings={templateSettings.closeButtonSettings}
+								isInABTest={isInABTest}
+							/>
+						)}
 					</div>
 
 					{choiceCards &&
@@ -601,13 +599,12 @@ const styles = {
 		background: inherit;
 		position: relative;
 		bottom: 0px;
-		background-color: red;
 
 		/* mobile first */
 		${until.phablet} {
 			max-width: 660px;
 			margin: 0 auto;
-			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
+			padding: ${space[2]}px ${space[3]}px 0 ${space[3]}px;
 			grid-template-columns: auto max(${phabletContentMaxWidth} auto);
 			grid-template-areas:
 				'. close-button .'
@@ -618,7 +615,7 @@ const styles = {
 		${from.phablet} {
 			max-width: 740px;
 			margin: 0 auto;
-			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
+			padding: ${space[2]}px ${space[3]}px 0 ${space[3]}px;
 			grid-template-columns: minmax(0, 0.5fr) ${phabletContentMaxWidth} minmax(
 					0,
 					0.5fr
@@ -631,7 +628,6 @@ const styles = {
 		}
 		${from.desktop} {
 			max-width: 980px;
-			align-self: stretch;
 			padding: ${space[1]}px ${space[1]}px 0 ${space[3]}px;
 			grid-template-columns: auto 380px auto;
 			grid-template-rows: auto auto;
@@ -702,25 +698,16 @@ const styles = {
 		grid-area: close-button;
 		display: flex;
 		flex-direction: row;
-		justify-content: space-evenly;
+		justify-content: space-around;
+		column-gap: ${space[0]}px;
 		${until.phablet} {
 			padding-right: ${space[2]}px;
 			justify-self: end;
 			position: sticky;
-			top: 10px;
+			top: ${space[2]}px;
 		}
 		${from.phablet} {
 			margin-top: ${space[2]}px;
-			padding-right: ${space[2]}px;
-			position: sticky;
-		}
-		${from.desktop} {
-			margin-top: ${space[6]}px;
-			justify-self: end;
-		}
-		${from.leftCol} {
-			justify-self: start;
-			padding-left: ${space[8]}px;
 		}
 	`,
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
@@ -947,7 +934,6 @@ const styles = {
 			bottom: 0;
 			margin-top: ${space[3]}px;
 			margin-bottom: ${space[6]}px;
-			border-radius: 50px;
 			a {
 				width: 100%;
 			}
