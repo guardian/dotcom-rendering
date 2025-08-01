@@ -232,8 +232,7 @@ export const textBlockStyles = (format: ArticleFormat) => css`
 	}
 
 	${until.tablet} {
-		/* 	To stop long words going outside of the view port.
-					For compatibility */
+		/* To stop long words going outside of the view port. For compatibility */
 		overflow-wrap: anywhere;
 		word-wrap: break-word;
 	}

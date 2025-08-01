@@ -224,6 +224,7 @@ export const CardHeadline = ({
 				<span
 					css={css`
 						color: ${headlineColour};
+						overflow-wrap: anywhere;
 					`}
 					className="show-underline"
 				>
