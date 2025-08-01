@@ -336,7 +336,6 @@
                 "section",
                 "sentryHost",
                 "sentryPublicApiKey",
-                "serverSideABTests",
                 "sharedAdTargeting",
                 "shouldHideAdverts",
                 "stage",
