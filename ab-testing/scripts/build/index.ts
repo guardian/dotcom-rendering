@@ -1,6 +1,6 @@
 import { ABTests } from '../../abTest.ts';
 import { getMVTGroupsFromDictionary } from '../lib/fastly-api.ts';
-import { buildABTestDict } from './build-ab-tests-dict.ts';
+import { buildABTestGroupKeyValues } from './build-ab-tests-dict.ts';
 import { parseArgs } from 'jsr:@std/cli/parse-args';
 import { calculateAllSpaceUpdates } from './calculate-mvt-updates.ts';
 import { parseMVTValue, stringifyMVTValue } from '../lib/fastly-subfield.ts';
@@ -25,12 +25,12 @@ const mvtGroups = new Map(
 	}),
 );
 
-const abTestDict = buildABTestDict(ABTests);
+const abTestGroupKeyValues = buildABTestGroupKeyValues(ABTests);
 
-const mvtDict = calculateAllSpaceUpdates(mvtGroups, ABTests);
+const mvtIdKeyValues = calculateAllSpaceUpdates(mvtGroups, ABTests);
 
 const mvtDictArray = Array.from(
-	mvtDict.entries().map(([key, value]) => ({
+	mvtIdKeyValues.entries().map(([key, value]) => ({
 		item_key: key,
 		item_value: stringifyMVTValue(value),
 	})),
@@ -40,7 +40,7 @@ console.log(`Writing ${mvtDictArray.length} MVT groups to ${flags['mvts']}`);
 // write the abTestDictArray to a file
 await Deno.writeTextFile(
 	flags['ab-tests'],
-	JSON.stringify(abTestDict, null, 2),
+	JSON.stringify(abTestGroupKeyValues, null, 2),
 );
 
 // write the mvtKVsArray to a file

@@ -1,7 +1,7 @@
 import { ABTest } from '../../types.ts';
 import { stringifyFastlySubfield } from '../lib/fastly-subfield.ts';
 
-const buildABTestDict = (tests: ABTest[]) =>
+const buildABTestGroupKeyValues = (tests: ABTest[]) =>
 	tests
 		.map((test) =>
 			test.groups.map((group) => ({
@@ -14,4 +14,4 @@ const buildABTestDict = (tests: ABTest[]) =>
 		)
 		.flat();
 
-export { buildABTestDict };
+export { buildABTestGroupKeyValues };
