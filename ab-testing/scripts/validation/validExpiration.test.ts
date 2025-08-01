@@ -3,30 +3,10 @@ import { allExpirationsValid } from './validExpiration.ts';
 import { ABTest } from '../../types.ts';
 import { assertThrows } from 'jsr:@std/assert/throws';
 
-function futureWeekday() {
+function futureDay() {
 	const today = new Date();
-	const dayOfWeek = today.getDay();
-
-	// If the test is run on a Friday or Saturday, add three days to get a future weekday
-	if (dayOfWeek >= 5) {
-		const futureDate = new Date();
-		futureDate.setDate(futureDate.getDate() + 3);
-		return futureDate;
-	}
-
-	const futureDate = new Date();
-	futureDate.setDate(futureDate.getDate() + 1);
-	return futureDate;
-}
-
-function futureWeekend() {
-	const today = new Date();
-	const dayOfWeek = today.getDay();
-	const daysToSaturday = 6 - dayOfWeek;
-
-	const futureDate = new Date();
-	futureDate.setDate(futureDate.getDate() + daysToSaturday);
-	return futureDate;
+	today.setDate(today.getDate() + 1);
+	return today;
 }
 
 function pastDay() {
@@ -36,38 +16,20 @@ function pastDay() {
 }
 
 Deno.test(
-	'allExpirationsValid - passes when the expiration is in the future and on a week day',
+	'allExpirationsValid - passes when the expiration is in the future',
 	() => {
-		const futureWeekdayTest: ABTest = {
+		const futureDayTest: ABTest = {
 			name: 'commercial-future',
 			description: 'End on a weekday',
 			owners: ['commercial.dev@guardian.co.uk'],
 			status: 'ON',
-			expirationDate: futureWeekday(),
+			expirationDate: futureDay(),
 			type: 'client',
 			audienceSize: 10 / 100,
 			groups: ['control', 'variant'],
 		};
 
-		assertEquals(allExpirationsValid([futureWeekdayTest]), true);
-	},
-);
-
-Deno.test(
-	'allExpirationsValid - throws when the expiration is in the future and on a weekend',
-	() => {
-		const futureWeekendTes: ABTest = {
-			name: 'commercial-future',
-			description: 'End on a weekend',
-			owners: ['commercial.dev@guardian.co.uk'],
-			status: 'ON',
-			expirationDate: futureWeekend(),
-			type: 'client',
-			audienceSize: 10 / 100,
-			groups: ['control', 'variant'],
-		};
-
-		assertThrows(() => allExpirationsValid([futureWeekendTes]));
+		assertEquals(allExpirationsValid([futureDayTest]), true);
 	},
 );
 
