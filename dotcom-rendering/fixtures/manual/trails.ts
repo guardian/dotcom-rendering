@@ -360,7 +360,7 @@ export const trails: [
 		...defaultCardProps,
 		url: 'https://www.theguardian.com/society/2023/may/30/trans-activists-disrupt-kathleen-stock-speech-at-oxford-union',
 		headline:
-			'Gender-critical feminist’s speech temporarily stopped after protester glues themself to floor',
+			'BBCSSO/Wigglesworth/Batsashvili review – detailed and monumental Bruckner',
 		byline: 'Matthew Weaver',
 		image: {
 			src: 'https://media.guim.co.uk/981abafa6ed4eaabdf7e743e6786aea3d9b7dbb2/0_417_901_540/500.jpg',
