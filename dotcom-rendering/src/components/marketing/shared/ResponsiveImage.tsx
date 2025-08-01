@@ -22,7 +22,13 @@ type ResponsiveImageProps = {
 };
 
 function createSource(image: ImageAttrs): ReactElement {
-	return <source media={image.media} srcSet={image.url} key={image.url} />;
+	return (
+		<source
+			media={image.media}
+			srcSet={image.url}
+			key={`media-${image.media}`}
+		/>
+	);
 }
 
 export const ResponsiveImage: ReactComponent<ResponsiveImageProps> = ({
