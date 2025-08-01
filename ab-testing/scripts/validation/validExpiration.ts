@@ -2,7 +2,7 @@ import { ABTest } from '../../types.ts';
 
 export function allExpirationsValid(tests: ABTest[]): boolean {
 	return tests.every((test) => {
-		const expires = test.expirationDate;
+		const expires = new Date(test.expirationDate);
 		const now = new Date();
 
 		if (expires > now) {

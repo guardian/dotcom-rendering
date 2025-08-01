@@ -12,7 +12,9 @@ Deno.test(
 			description: 'A server-side test',
 			owners: ['commercial.dev@guardian.co.uk'],
 			status: 'ON',
-			expirationDate: new Date(),
+			expirationDate: new Date()
+				.toISOString()
+				.split('T')[0] as ABTest['expirationDate'],
 			type: 'server',
 			audienceSize: 10 / 100,
 			groups: ['control', 'variant'],
@@ -35,7 +37,9 @@ Deno.test(
 			description: 'A server-side test',
 			owners: ['commercial.dev@guardian.co.uk'],
 			status: 'ON',
-			expirationDate: new Date(),
+			expirationDate: new Date()
+				.toISOString()
+				.split('T')[0] as ABTest['expirationDate'],
 			type: 'server',
 			audienceSize: 10 / 100,
 			groups: ['control', 'variant'],

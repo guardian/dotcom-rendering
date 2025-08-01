@@ -64,7 +64,9 @@ export const calculateSpaceUpdates = (
 					{
 						name: `${test.name}:${test.group}`,
 						type: test.type,
-						exp: Math.floor(test.expirationDate.getTime() / 1000),
+						exp: Math.floor(
+							new Date(test.expirationDate).getTime() / 1000,
+						),
 					},
 				];
 			}),

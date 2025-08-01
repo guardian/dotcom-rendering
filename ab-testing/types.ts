@@ -1,8 +1,18 @@
+type FastlyTestParams = { name: string; type: string; exp: number };
+
+type AudienceSpace = Map<string, FastlyTestParams>;
+
+type AllSpace = Map<string, FastlyTestParams[]>;
+
 type Team = 'commercial' | 'webex';
 
 type TestName = `${Team}-${string}`;
 
-export type ABTest = {
+type Year = `${number}${number}${number}${number}`;
+type Month = `${number}${number}`;
+type Day = `${number}${number}`;
+
+type ABTest = {
 	/** Name of the AB test */
 	name: TestName;
 	/** Description of the AB test */
@@ -10,7 +20,7 @@ export type ABTest = {
 	/** Email address of owner(s) of the test */
 	owners: string[];
 	/** The datetime the test expires on (expressed in UTC) - will turn OFF when expires */
-	expirationDate: Date;
+	expirationDate: `${Year}-${Month}-${Day}`;
 	/** Test type: should this run on the server or client */
 	type: 'server' | 'client';
 	/** Whether the AB test is currently running or not
@@ -28,3 +38,5 @@ export type ABTest = {
 	/** Test group definition */
 	groups: string[];
 };
+
+export type { ABTest, FastlyTestParams, AudienceSpace, AllSpace };

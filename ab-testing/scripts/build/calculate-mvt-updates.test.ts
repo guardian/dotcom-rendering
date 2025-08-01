@@ -13,7 +13,10 @@ function createMockABTest(name: string, options: Partial<ABTest> = {}): ABTest {
 		description: options.description || `Test ${name}`,
 		owners: options.owners || ['test@example.com'],
 		expirationDate:
-			options.expirationDate || new Date(Date.now() + 86400000), // 24 hours from now
+			options.expirationDate ||
+			(new Date(Date.now() + 86400000)
+				.toISOString()
+				.split('T')[0] as ABTest['expirationDate']), // 24 hours from now
 		type: options.type || 'server',
 		status: options.status || 'ON',
 		audienceSize: options.audienceSize || 0.1, // 10% of audience
@@ -196,7 +199,7 @@ Deno.test('calculateSpaceUpdates - handles multiple tests', () => {
 
 Deno.test('calculateSpaceUpdates - preserves expiration dates', () => {
 	const emptyAudienceSpace = new Map<string, FastlyTestParams>();
-	const expirationDate = new Date('2025-12-31T23:59:59Z');
+	const expirationDate = '2025-12-31';
 	const tests = [
 		createMockABTest('commercial-test1', {
 			audienceSize: 0.001,
@@ -208,7 +211,10 @@ Deno.test('calculateSpaceUpdates - preserves expiration dates', () => {
 	const result = calculateSpaceUpdates(emptyAudienceSpace, tests);
 
 	const entry = result.get('mvt:0');
-	assertEquals(entry?.exp, Math.floor(expirationDate.getTime() / 1000));
+	assertEquals(
+		entry?.exp,
+		Math.floor(new Date(expirationDate).getTime() / 1000),
+	);
 });
 
 Deno.test('calculateSpaceUpdates - handles client-side tests', () => {

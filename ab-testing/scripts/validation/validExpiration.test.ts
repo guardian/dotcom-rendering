@@ -6,13 +6,13 @@ import { assertThrows } from 'jsr:@std/assert/throws';
 function futureDay() {
 	const today = new Date();
 	today.setDate(today.getDate() + 1);
-	return today;
+	return today.toISOString().split('T')[0] as ABTest['expirationDate']; // Format as YYYY-MM-DD
 }
 
 function pastDay() {
 	const pastDate = new Date();
 	pastDate.setDate(pastDate.getDate() - 2);
-	return pastDate;
+	return pastDate.toISOString().split('T')[0] as ABTest['expirationDate']; // Format as YYYY-MM-DD
 }
 
 Deno.test(
