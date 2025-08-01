@@ -9,15 +9,14 @@ import { palette } from '../../palette';
 import type { StarRating as Rating } from '../../types/content';
 import type { DCRFrontImage } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
-import { Avatar } from '../Avatar';
 import { CardLink } from '../Card/components/CardLink';
 import { CardHeadline } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
-import { CardPicture } from '../CardPicture';
 import { FormatBoundary } from '../FormatBoundary';
 import { Pill } from '../Pill';
 import { StarRating } from '../StarRating/StarRating';
 import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
+import { HighlightsCardImage } from './HighlightsCardImage';
 
 export type HighlightsCardProps = {
 	linkTo: string;
@@ -35,7 +34,7 @@ export type HighlightsCardProps = {
 	starRating?: Rating;
 };
 
-const gridContainer = css`
+const container = css`
 	display: grid;
 	background-color: ${palette('--highlights-container-background')};
 	/** Relative positioning is required to absolutely
@@ -132,90 +131,6 @@ const starWrapper = css`
 	align-self: flex-end;
 `;
 
-const decideImage = (
-	imageLoading: Loading,
-	image?: DCRFrontImage,
-	avatarUrl?: string,
-	byline?: string,
-	mainMedia?: MainMedia,
-) => {
-	if (!image && !avatarUrl) {
-		return null;
-	}
-
-	if (avatarUrl) {
-		return (
-			<Avatar
-				src={avatarUrl}
-				alt={byline ?? ''}
-				shape="cutout"
-				imageSize="large"
-			/>
-		);
-	}
-
-	if (mainMedia?.type === 'Audio' && mainMedia.podcastImage?.src) {
-		return (
-			<>
-				<CardPicture
-					imageSize="medium"
-					mainImage={mainMedia.podcastImage.src}
-					alt={mainMedia.podcastImage.altText}
-					loading={imageLoading}
-					isCircular={false}
-					aspectRatio="1:1"
-				/>
-				<div className="image-overlay" />
-			</>
-		);
-	}
-
-	if (!image) {
-		return null;
-	}
-
-	return (
-		<>
-			<CardPicture
-				imageSize="highlights-card"
-				mainImage={image.src}
-				alt={image.altText}
-				loading={imageLoading}
-				isCircular={true}
-				aspectRatio="1:1"
-			/>
-			{/* This image overlay is styled when the CardLink is hovered */}
-			<div className="image-overlay circular" />
-		</>
-	);
-};
-
-const MediaPill = ({ mainMedia }: { mainMedia: MainMedia }) => (
-	<div css={mediaIcon}>
-		{mainMedia.type === 'Video' && (
-			<Pill
-				content={secondsToDuration(mainMedia.duration)}
-				prefix="Video"
-				icon={<SvgMediaControlsPlay width={18} />}
-			/>
-		)}
-		{mainMedia.type === 'Audio' && (
-			<Pill
-				content={mainMedia.duration}
-				prefix="Podcast"
-				icon={<SvgMediaControlsPlay width={18} />}
-			/>
-		)}
-		{mainMedia.type === 'Gallery' && (
-			<Pill
-				content={mainMedia.count}
-				prefix="Gallery"
-				icon={<SvgCamera />}
-			/>
-		)}
-	</div>
-);
-
 export const HighlightsCard = ({
 	linkTo,
 	format,
@@ -235,7 +150,7 @@ export const HighlightsCard = ({
 
 	return (
 		<FormatBoundary format={format}>
-			<div css={[gridContainer, hoverStyles]}>
+			<div css={[container, hoverStyles]}>
 				<CardLink
 					linkTo={linkTo}
 					headlineText={headlineText}
@@ -264,24 +179,46 @@ export const HighlightsCard = ({
 					/>
 				</div>
 
-				{!isUndefined(starRating) ? (
+				{!isUndefined(starRating) && (
 					<div css={starWrapper}>
 						<StarRating rating={starRating} size="small" />
 					</div>
-				) : null}
+				)}
 
 				{!!mainMedia && isMediaCard && (
-					<MediaPill mainMedia={mainMedia} />
+					<div css={mediaIcon}>
+						{mainMedia.type === 'Video' && (
+							<Pill
+								content={secondsToDuration(mainMedia.duration)}
+								prefix="Video"
+								icon={<SvgMediaControlsPlay width={18} />}
+							/>
+						)}
+						{mainMedia.type === 'Audio' && (
+							<Pill
+								content={mainMedia.duration}
+								prefix="Podcast"
+								icon={<SvgMediaControlsPlay width={18} />}
+							/>
+						)}
+						{mainMedia.type === 'Gallery' && (
+							<Pill
+								content={mainMedia.count}
+								prefix="Gallery"
+								icon={<SvgCamera />}
+							/>
+						)}
+					</div>
 				)}
 
 				<div css={[imageArea, avatarUrl && avatarAlignmentStyles]}>
-					{decideImage(
-						imageLoading,
-						image,
-						avatarUrl,
-						byline,
-						mainMedia,
-					)}
+					<HighlightsCardImage
+						imageLoading={imageLoading}
+						image={image}
+						avatarUrl={avatarUrl}
+						byline={byline}
+						mainMedia={mainMedia}
+					/>
 				</div>
 			</div>
 		</FormatBoundary>
