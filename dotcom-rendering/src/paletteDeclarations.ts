@@ -4347,15 +4347,11 @@ const linkKickerTextLight: PaletteFunction = ({ design, theme }) => {
 const linkKickerTextDark: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
-			return sourcePalette.news[500];
 		case Pillar.Opinion:
-			return sourcePalette.opinion[500];
 		case Pillar.Sport:
-			return sourcePalette.sport[500];
 		case Pillar.Culture:
-			return sourcePalette.culture[500];
 		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[500];
+			return pillarPalette(theme, 500);
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.news[500];
 		case ArticleSpecial.Labs:
@@ -5713,29 +5709,61 @@ const mastheadVeggieBurgerBackground: PaletteFunction = () =>
 const mastheadVeggieBurgerBackgroundHover: PaletteFunction = () =>
 	sourcePalette.brandAlt[300];
 
-const mastheadHighlightsBackgroundLight: PaletteFunction = () =>
-	sourcePalette.neutral[97];
-const mastheadHighlightsBackgroundDark: PaletteFunction = () =>
+const highlightsContainerBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const highlightsContainerBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
 
-const mastheadHighlightsBorderLight: PaletteFunction = () =>
+const hghlightsContainerBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[60];
-const mastheadHighlightsBorderDark: PaletteFunction = () =>
+const highlightsContainerBorderDark: PaletteFunction = () =>
 	sourcePalette.neutral[46];
 
-const highlightsCardHeadlineLight: PaletteFunction = () =>
+const highlightsCardKickerTextLight: PaletteFunction = () =>
 	sourcePalette.neutral[7];
-const highlightsCardHeadlineDark: PaletteFunction = () =>
-	sourcePalette.neutral[86];
-
-const highlightsCardKickerText: PaletteFunction = (format) => {
+const highlightsCardKickerTextDark: PaletteFunction = (format) => {
 	switch (format.theme) {
+		case Pillar.News:
 		case Pillar.Opinion:
-			return pillarPalette(format.theme, 300);
 		case Pillar.Sport:
 		case Pillar.Culture:
 		case Pillar.Lifestyle:
+			return pillarPalette(format.theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.news[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+
+const highlightsCardBackgroudLight: PaletteFunction = (format) => {
+	switch (format.theme) {
 		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(format.theme, 800);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.news[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+const highlightsCardBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+
+const highlightsCardHeadlineLight: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
 			return pillarPalette(format.theme, 400);
 		case ArticleSpecial.Labs:
 			return sourcePalette.labs[200];
@@ -5746,24 +5774,21 @@ const highlightsCardKickerText: PaletteFunction = (format) => {
 	}
 };
 
-const highlightContainerStartLight: PaletteFunction = () => {
-	return sourcePalette.neutral[97];
-};
-const highlightContainerStartDark: PaletteFunction = () => {
-	return sourcePalette.neutral[10];
-};
-const highlightContainerMidFadeLight: PaletteFunction = () => {
-	return transparentColour(sourcePalette.neutral[97], 0.6);
-};
-const highlightContainerMidFadeDark: PaletteFunction = () => {
-	return transparentColour(sourcePalette.neutral[10], 0.6);
-};
-const highlightContainerEndFadeLight: PaletteFunction = () => {
-	return 'transparent';
-};
-const highlightContainerEndFadeDark: PaletteFunction = () => {
-	return 'transparent';
-};
+const highlightsCardHeadlineDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
+const highlightContainerStartLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const highlightContainerStartDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+
+const highlightContainerMidFadeLight: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[100], 0.6);
+const highlightContainerMidFadeDark: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[10], 0.6);
+
+const highlightContainerEndFadeLight: PaletteFunction = () => 'transparent';
+const highlightContainerEndFadeDark: PaletteFunction = () => 'transparent';
 
 const pinnedPostBorderLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
@@ -6889,21 +6914,25 @@ const paletteColours = {
 		light: headlineMatchTextLight,
 		dark: headlineMatchTextDark,
 	},
+	'--highlights-card-background': {
+		light: highlightsCardBackgroudLight,
+		dark: highlightsCardBackgroundDark,
+	},
 	'--highlights-card-headline': {
 		light: highlightsCardHeadlineLight,
 		dark: highlightsCardHeadlineDark,
 	},
 	'--highlights-card-kicker-text': {
-		light: highlightsCardKickerText,
-		dark: highlightsCardKickerText,
+		light: highlightsCardKickerTextLight,
+		dark: highlightsCardKickerTextDark,
 	},
 	'--highlights-container-background': {
-		light: mastheadHighlightsBackgroundLight,
-		dark: mastheadHighlightsBackgroundDark,
+		light: highlightsContainerBackgroundLight,
+		dark: highlightsContainerBackgroundDark,
 	},
 	'--highlights-container-border': {
-		light: mastheadHighlightsBorderLight,
-		dark: mastheadHighlightsBorderDark,
+		light: hghlightsContainerBorderLight,
+		dark: highlightsContainerBorderDark,
 	},
 	'--highlights-container-end-fade': {
 		light: highlightContainerEndFadeLight,
