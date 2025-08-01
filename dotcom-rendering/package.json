@@ -91,6 +91,7 @@
 		"@types/youtube": "0.0.50",
 		"ajv": "8.17.1",
 		"ajv-formats": "2.1.1",
+		"aws-amplify": "6.15.4",
 		"aws-cdk": "2.1030.0",
 		"aws-cdk-lib": "2.220.0",
 		"body-parser": "1.20.3",
