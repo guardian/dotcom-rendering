@@ -7,6 +7,8 @@ import {
 	textSans15,
 	until,
 } from '@guardian/source/foundations';
+import { events } from 'aws-amplify/data';
+import { useEffect, useState } from 'react';
 import type { FootballTeam } from '../footballMatch';
 import { palette } from '../palette';
 import { Score } from './Score';
@@ -209,44 +211,64 @@ const addScorerPlaceholders = (scorers: string[]): string[] =>
 		'placeholder-3',
 	].slice(0, Math.max(3, scorers.length));
 
-export const MatchNav = ({ homeTeam, awayTeam, comments, usage }: Props) => (
-	<div
-		css={css`
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			position: relative;
-			padding: ${space[2]}px;
-			background-color: ${palette('--match-nav-background')};
-			margin-bottom: 10px;
-			${until.tablet} {
-				margin: 0 -10px 10px;
-			}
-		`}
-	>
-		<Row>
-			<TeamNav
-				name={homeTeam.name}
-				score={homeTeam.score}
-				crest={homeTeam.crest}
-				scorers={
-					usage === 'Article'
-						? addScorerPlaceholders(homeTeam.scorers)
-						: homeTeam.scorers
+export const MatchNav = ({ homeTeam, awayTeam, comments, usage }: Props) => {
+	const [homeTeamInternal, setHomeTeamInternal] = useState(homeTeam);
+	useEffect(() => {
+		const room = 'match-update';
+		const pr = events.connect(`/football/${room}`);
+		void pr.then((channel) => {
+			channel.subscribe({
+				next: (data) => {
+					const newHomeTeam = {
+						...homeTeamInternal,
+						score: Number(data?.event?.teams[0]?.score),
+					};
+					setHomeTeamInternal(newHomeTeam);
+					console.log('score data received from app sync', data);
+				},
+				error: (value) => console.error(value),
+			});
+		});
+	}, [homeTeamInternal]);
+	return (
+		<div
+			css={css`
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				position: relative;
+				padding: ${space[2]}px;
+				background-color: ${palette('--match-nav-background')};
+				margin-bottom: 10px;
+				${until.tablet} {
+					margin: 0 -10px 10px;
 				}
-			/>
-			<YellowBorder />
-			<TeamNav
-				name={awayTeam.name}
-				score={awayTeam.score}
-				crest={awayTeam.crest}
-				scorers={
-					usage === 'Article'
-						? addScorerPlaceholders(awayTeam.scorers)
-						: awayTeam.scorers
-				}
-			/>
-		</Row>
-		{!!comments && <Comments comments={comments} />}
-	</div>
-);
+			`}
+		>
+			<Row>
+				<TeamNav
+					name={homeTeamInternal.name}
+					score={homeTeamInternal.score}
+					crest={homeTeamInternal.crest}
+					scorers={
+						usage === 'Article'
+							? addScorerPlaceholders(homeTeamInternal.scorers)
+							: homeTeamInternal.scorers
+					}
+				/>
+				<YellowBorder />
+				<TeamNav
+					name={awayTeam.name}
+					score={awayTeam.score}
+					crest={awayTeam.crest}
+					scorers={
+						usage === 'Article'
+							? addScorerPlaceholders(awayTeam.scorers)
+							: awayTeam.scorers
+					}
+				/>
+			</Row>
+			{!!comments && <Comments comments={comments} />}
+		</div>
+	);
+};
