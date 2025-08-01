@@ -44,12 +44,27 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 	);
 
 	useEffect(() => {
-		const found = document.querySelector<HTMLIFrameElement>(
-			`iframe[id="${id}"]`,
-		);
-		if (!found) return;
+		let cancelled = false;
 
-		setIframe(found);
+		const check = () => {
+			if (cancelled) return;
+
+			const found = document.querySelector<HTMLIFrameElement>(
+				`iframe[id="${id}"]`,
+			);
+
+			if (found) {
+				setIframe(found);
+			} else {
+				requestAnimationFrame(check);
+			}
+		};
+
+		check();
+
+		return () => {
+			cancelled = true;
+		};
 	}, [id]);
 
 	useEffect(() => {
