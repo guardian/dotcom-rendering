@@ -19,7 +19,7 @@ type Props = {
 	isDev: boolean;
 	pageIsSensitive: CoreAPIConfig['pageIsSensitive'];
 	serverSideTests: ServerSideTests;
-	serverSideABTests: Record<string, string>;
+	serverSideABTests?: Record<string, string>;
 };
 
 const mvtMinValue = 1;
@@ -110,7 +110,7 @@ export const SetABTests = ({
 		const betaAb = new BetaABTests({
 			ophanRecord: ophan.record,
 			errorReporter,
-			serverSideABTests,
+			serverSideABTests: serverSideABTests ?? {},
 		});
 
 		const ab = new AB({
@@ -157,7 +157,7 @@ export const SetABTests = ({
 	if (isServer) {
 		const betaAb = new BetaABTests({
 			ssr: true,
-			serverSideABTests,
+			serverSideABTests: serverSideABTests ?? {},
 		});
 
 		setBetaABTests(betaAb);
