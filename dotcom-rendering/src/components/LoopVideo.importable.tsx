@@ -72,6 +72,38 @@ const getOptimisedPosterImage = (mainImage: string): string => {
 	});
 };
 
+/**
+ * Runs a series of browser-specific checks to determine if the video has audio.
+ */
+const doesVideoHaveAudio = (video: HTMLVideoElement): boolean => {
+	// If there exists a browser that does not support any of these properties, we are
+	// unable to detect whether the video has audio. Therefore, we assume it has audio,
+	// so that the unmute/mute icon is displayed.
+	if (
+		!('mozHasAudio' in video) &&
+		!('webkitAudioDecodedByteCount' in video) &&
+		!('audioTracks' in video)
+	) {
+		// Gather data on what browsers do not support these properties.
+		window.guardian.modules.sentry.reportError(
+			new Error(
+				'Could not determine if video has audio. This is likely due to the browser not supporting the necessary properties.',
+			),
+			'loop-video',
+		);
+
+		return true;
+	}
+
+	return (
+		('mozHasAudio' in video && Boolean(video.mozHasAudio)) ||
+		('webkitAudioDecodedByteCount' in video &&
+			Boolean(video.webkitAudioDecodedByteCount)) ||
+		('audioTracks' in video &&
+			Boolean((video.audioTracks as { length: number }).length))
+	);
+};
+
 type Props = {
 	src: string;
 	atomId: string;
@@ -104,6 +136,7 @@ export const LoopVideo = ({
 	const vidRef = useRef<HTMLVideoElement>(null);
 	const [isPlayable, setIsPlayable] = useState(false);
 	const [isMuted, setIsMuted] = useState(true);
+	const [hasAudio, setHasAudio] = useState(true);
 	const [showPlayIcon, setShowPlayIcon] = useState(false);
 	const [preloadPartialData, setPreloadPartialData] = useState(false);
 	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
@@ -277,7 +310,7 @@ export const LoopVideo = ({
 					true,
 				);
 			} catch (error) {
-				console.error('Failed to track video attention:', error);
+				log('dotcom', 'Failed to track video attention:', error);
 			}
 		};
 
@@ -410,6 +443,12 @@ export const LoopVideo = ({
 		return FallbackImageComponent;
 	}
 
+	const handleLoadedData = () => {
+		if (vidRef.current) {
+			setHasAudio(doesVideoHaveAudio(vidRef.current));
+		}
+	};
+
 	const handleCanPlay = () => {
 		if (!isPlayable) {
 			setIsPlayable(true);
@@ -541,13 +580,14 @@ export const LoopVideo = ({
 				isPlayable={isPlayable}
 				playerState={playerState}
 				isMuted={isMuted}
+				handleLoadedData={handleLoadedData}
 				handleCanPlay={handleCanPlay}
 				handlePlayPauseClick={handlePlayPauseClick}
 				handleAudioClick={handleAudioClick}
 				handleKeyDown={handleKeyDown}
 				handlePause={handlePause}
 				onError={onError}
-				AudioIcon={AudioIcon}
+				AudioIcon={hasAudio ? AudioIcon : null}
 				preloadPartialData={preloadPartialData}
 				showPlayIcon={showPlayIcon}
 			/>
