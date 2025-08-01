@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { from, palette as sourcePalette } from '@guardian/source/foundations';
+import {
+	from,
+	palette as sourcePalette,
+	space,
+} from '@guardian/source/foundations';
+import { GalleryAffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
@@ -48,6 +53,23 @@ const headerStyles = css`
 
 	${from.tablet} {
 		border-bottom: 1px solid ${palette('--article-border')};
+	}
+`;
+
+const webMetaAndDisclaimerContainer = css`
+	${grid.column.centre}
+	padding-bottom: ${space[6]}px;
+	${from.tablet} {
+		position: relative;
+		&::before {
+			content: '';
+			position: absolute;
+			left: -10px;
+			top: 0;
+			bottom: 0;
+			width: 1px;
+			background-color: ${palette('--article-border')};
+		}
 	}
 `;
 
@@ -123,30 +145,36 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						isMainMedia={true}
 					/>
 					{isWeb ? (
-						<ArticleMeta
-							branding={
-								frontendData.commercialProperties[
-									frontendData.editionId
-								].branding
-							}
-							format={format}
-							pageId={frontendData.pageId}
-							webTitle={frontendData.webTitle}
-							byline={frontendData.byline}
-							tags={frontendData.tags}
-							primaryDateline={
-								frontendData.webPublicationDateDisplay
-							}
-							secondaryDateline={
-								frontendData.webPublicationSecondaryDateDisplay
-							}
-							isCommentable={frontendData.isCommentable}
-							discussionApiUrl={
-								frontendData.config.discussionApiUrl
-							}
-							shortUrlId={frontendData.config.shortUrlId}
-						/>
+						<div css={webMetaAndDisclaimerContainer}>
+							<ArticleMeta
+								branding={
+									frontendData.commercialProperties[
+										frontendData.editionId
+									].branding
+								}
+								format={format}
+								pageId={frontendData.pageId}
+								webTitle={frontendData.webTitle}
+								byline={frontendData.byline}
+								tags={frontendData.tags}
+								primaryDateline={
+									frontendData.webPublicationDateDisplay
+								}
+								secondaryDateline={
+									frontendData.webPublicationSecondaryDateDisplay
+								}
+								isCommentable={frontendData.isCommentable}
+								discussionApiUrl={
+									frontendData.config.discussionApiUrl
+								}
+								shortUrlId={frontendData.config.shortUrlId}
+							/>
+							{!!frontendData.affiliateLinksDisclaimer && (
+								<GalleryAffiliateDisclaimer />
+							)}
+						</div>
 					) : null}
+
 					{isApps ? (
 						<ArticleMetaApps
 							branding={
