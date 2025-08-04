@@ -1,5 +1,6 @@
 import { log } from '@guardian/libs';
 import { useEffect } from 'react';
+import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import type { StageType } from '../types/config';
 
@@ -50,8 +51,18 @@ type CredentialsProvider = {
 
 export const GoogleOneTap = () => {
 	const isSignedIn = useIsSignedIn();
+	const abTests = useAB();
+	const isUserInTest = abTests?.api.isUserInVariant(
+		'GoogleOneTap',
+		'variant',
+	);
 
 	useEffect(() => {
+		// Only initialize Google One Tap if the user is in the AB test. Currently 0% of users are in the test.
+		if (!isUserInTest) return;
+
+		// FedCM has no knowledge of the user's auth state, so we need to check
+		// if the user is already signed in before initializing it.
 		if (isSignedIn === true) {
 			log(
 				'identity',
@@ -67,6 +78,13 @@ export const GoogleOneTap = () => {
 			return;
 		}
 
+		/**
+		 * Typescripts built-in DOM types do not include the full `CredentialsProvider`
+		 * interface, so we need to cast `window.navigator.credentials` to our own
+		 * `CredentialsProvider` type which includes the FedCM API.
+		 *
+		 * Related issue: https://github.com/microsoft/TypeScript/issues/60641
+		 */
 		const credentialsProvider = window.navigator
 			.credentials as unknown as CredentialsProvider;
 
@@ -94,6 +112,8 @@ export const GoogleOneTap = () => {
 						'identity',
 						'FedCM prompt failed, potentially due to user declining',
 					);
+				} else {
+					throw error;
 				}
 			})
 			.then((credentials) => {
@@ -105,7 +125,7 @@ export const GoogleOneTap = () => {
 					log('identity', 'No FedCM credentials received');
 				}
 			});
-	}, [isSignedIn]);
+	}, [isSignedIn, isUserInTest]);
 
 	return <></>;
 };
