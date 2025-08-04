@@ -98,6 +98,7 @@ const hoverStyles = css`
 const content = css`
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	gap: ${space[1]}px;
 
 	${from.tablet} {
