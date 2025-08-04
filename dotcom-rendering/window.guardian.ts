@@ -7,6 +7,7 @@ import type {
 } from '@guardian/libs';
 import type ophan from '@guardian/ophan-tracker-js';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/types';
+import type { GoogleIdentityService } from './src/components/GoogleOneTap.importable';
 import type { google } from './src/components/YoutubeAtom/ima';
 import type { DailyArticleHistory } from './src/lib/dailyArticleCount';
 import type { ReaderRevenueDevUtils } from './src/lib/readerRevenueDevUtils';
@@ -67,7 +68,11 @@ declare global {
 			) => boolean;
 		};
 		mockLiveUpdate: (data: LiveUpdateType) => void;
-		google?: typeof google;
+		google?: typeof google & {
+			accounts?: {
+				id?: GoogleIdentityService;
+			};
+		};
 		YT?: typeof YT;
 		onYouTubeIframeAPIReady?: () => void;
 	}
