@@ -464,17 +464,16 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						selectedChoiceCard &&
 						mainOrMobileContent.primaryCta && (
 							<div css={styles.threeTierChoiceCardsContainer}>
-								<ThreeTierChoiceCards
-									selectedChoiceCard={selectedChoiceCard}
-									setSelectedChoiceCard={
-										setSelectedChoiceCard
-									}
-									choices={choiceCards}
-									id={'banner'}
-									isCollapsedForABTest={
-										isInABTest && isCollapsed
-									}
-								/>
+								{(!isInABTest || !isCollapsed) && (
+									<ThreeTierChoiceCards
+										selectedChoiceCard={selectedChoiceCard}
+										setSelectedChoiceCard={
+											setSelectedChoiceCard
+										}
+										choices={choiceCards}
+										id={'banner'}
+									/>
+								)}
 								<div css={styles.ctaContainer}>
 									<LinkButton
 										href={getChoiceCardUrl(
