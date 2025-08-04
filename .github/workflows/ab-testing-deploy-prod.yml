@@ -1,4 +1,8 @@
 name: 🧪 Deploy PROD AB Testing Config
+
+permissions:
+  contents: read
+
 on:
   workflow_dispatch:
   # push:

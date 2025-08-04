@@ -1,4 +1,8 @@
 name: 🧪 Deploy AB Testing Config
+
+permissions:
+  contents: read
+
 on:
   workflow_call:
     inputs:

@@ -1,4 +1,8 @@
 name: 🧪 AB testing Checks
+
+permissions:
+  contents: read
+
 on:
   workflow_call:
     secrets:
