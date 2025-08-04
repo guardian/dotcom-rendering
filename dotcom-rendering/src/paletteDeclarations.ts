@@ -4347,15 +4347,11 @@ const linkKickerTextLight: PaletteFunction = ({ design, theme }) => {
 const linkKickerTextDark: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
-			return sourcePalette.news[500];
 		case Pillar.Opinion:
-			return sourcePalette.opinion[500];
 		case Pillar.Sport:
-			return sourcePalette.sport[500];
 		case Pillar.Culture:
-			return sourcePalette.culture[500];
 		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[500];
+			return pillarPalette(theme, 500);
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.news[500];
 		case ArticleSpecial.Labs:

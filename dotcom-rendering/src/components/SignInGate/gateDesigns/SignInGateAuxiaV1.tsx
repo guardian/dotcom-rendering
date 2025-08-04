@@ -200,6 +200,7 @@ const subHeadingStyles = css`
 const descriptionText = css`
 	${textSans15};
 	padding-bottom: ${space[6]}px;
+	white-space: pre-line;
 
 	${from.phablet} {
 		${textSans17};
