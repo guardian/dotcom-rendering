@@ -7,7 +7,10 @@ import { SignInGateCustomizableText } from './gateDesigns/SignInGateCustomizable
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
 import { SignInGateMainCheckoutComplete } from './gateDesigns/SignInGateMainCheckoutComplete';
-import type { CheckoutCompleteCookieData } from './types';
+import type {
+	AuxiaAPIResponseDataUserTreatment,
+	CheckoutCompleteCookieData,
+} from './types';
 import { ALL_PRODUCTS, ALL_USER_TYPES } from './types';
 
 export default {
@@ -266,7 +269,7 @@ signInGateSelectorStoryNoTreatment.storyName =
 	'sign_in_gate_selector_no_treatment';
 
 export const auxiaV2Modal = () => {
-	const mockUserTreatment = {
+	const mockUserTreatment: AuxiaAPIResponseDataUserTreatment = {
 		treatmentId: 'test-treatment-id',
 		treatmentTrackingId: 'test-tracking-id',
 		surface: 'test-surface',
@@ -278,7 +281,7 @@ export const auxiaV2Modal = () => {
 			first_cta_link: 'https://profile.theguardian.com/register',
 			second_cta_name: 'Not now',
 		}),
-		rank: 1,
+		rank: '1',
 		contentLanguageCode: 'en',
 		treatmentType: 'test-type',
 	};
@@ -305,6 +308,7 @@ export const auxiaV2Modal = () => {
 						actionName,
 					);
 				}}
+				guUrl="https://www.theguardian.com/"
 			/>
 		</Section>
 	);
