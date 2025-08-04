@@ -19,6 +19,7 @@ import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
 import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SkipTo } from './SkipTo';
+import { GoogleOneTap } from './GoogleOneTap.importable';
 
 type Props = {
 	front: Front;
@@ -82,7 +83,6 @@ export const FrontPage = ({ front, NAV }: Props) => {
 					serverSideTests={front.config.abTests}
 				/>
 			</Island>
-
 			<Island priority="critical">
 				<SetAdTargeting adTargeting={adTargeting} />
 			</Island>
@@ -91,6 +91,9 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			</Island>
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<ReaderRevenueDev shouldHideReaderRevenue={false} />
+			</Island>
+			<Island priority="enhancement" defer={{ until: 'idle' }}>
+				<GoogleOneTap />
 			</Island>
 			{darkModeAvailable && (
 				<DarkModeMessage>

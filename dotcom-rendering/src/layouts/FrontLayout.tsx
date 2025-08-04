@@ -18,7 +18,6 @@ import {
 	MobileAdSlot,
 } from '../components/FrontsAdSlots';
 import { FrontSection } from '../components/FrontSection';
-import { GoogleOneTap } from '../components/GoogleOneTap.importable';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
@@ -189,9 +188,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	return (
 		<>
-			<Island priority="enhancement" defer={{ until: 'idle' }}>
-				<GoogleOneTap />
-			</Island>
 			<div data-print-layout="hide" id="bannerandheader">
 				{renderAds && (
 					<Stuck>
