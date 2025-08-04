@@ -1,115 +1,66 @@
 # AB Testing
 
-## Technical Overview
+This directory contains the code and configuration for the AB testing framework used on theguardian.com.
 
-This will be a central location for all AB tests running on the theguardian.com. The goal is to have a single source of truth for both client and server side tests.
+The [`abTest.ts`](./abTest.ts) module is where you should define your AB tests.
 
-The build and release CI steps will ensure that the tests are validated and serialized correctly before being uploaded to the Fastly dictionary API.
+Add your AB tests to the `abTests` array in the `abTest.ts` file. Each test should have a unique name.
 
-Example dictionary setup:
-
-```
-# our mvt space and which test groups are occupying it
-table mvt_ab_test_groups {
-  "mvt0": "0=commercial-ad-block-ask:control,1=commercial-some-100-perc-test:control",
-  "mvt1": "0=commercial-ad-block-ask:variant,1=commercial-some-100-perc-test:variant",
-}
-
-# This table contains the active A/B test groups and their parameters
-table active_ab_test_groups {
-  "commercial-ad-block-ask:control": "exp=1745971200,type=client",
-  "commercial-ad-block-ask:variant": "exp=1745971200,type=client",
-  "commercial-some-100-perc-test:control": "exp=1745971200,type=server",
-  "commercial-some-100-perc-test:variant": "exp=1745971200,type=server"
+```ts
+{
+	name: 'webex-example-test',
+	description:
+		'Test something interesting on the site',
+	owners: ['webex@guardian.co.uk'],
+	status: 'ON',
+	expirationDate: '2050-12-30',
+	type: 'client',
+	audienceSize: 10 / 100,
+	audienceSpace: 'A',
+	groups: ['control', 'variant'],
 }
 ```
 
-The `mvt_ab_test_groups` table will be used to determine which test a user is in, and the `active_ab_test_groups` table will be used to determine if a test is active and what type it is.
+When you create a PR that modifies the `abTest.ts` file, a git hook and CI will run checks to ensure that your AB test is valid (not expired, enough space for the test etc.).
 
-Having both client and server side tests managed here will allow us to use the same logic (within Fastly) to determine which test a user is in, regardless of if it is client or server side. [See the fiddle for more details](https://fiddle.Fastly.dev/fiddle/47149485).
+When your PR is merged, the AB test will be automatically deployed to Fastly and be available at the same time as your changes.
 
-Our Fastly VCL code will set a cookie that can be used by client or server code to determine which test a user is in. For server side tests it will additionally add to a header that the cache will be split on.
+### Naming Conventions
 
-Opting in to a test will be done similarly to how we do it for server side tests now, by setting a cookie.
+AB tests should be prefixed with the team associated with the test, for example `webex-example-test`. This helps to identify the team responsible for the test and is enforce by typescript validation.
 
-Test expirations are stored in the dictionary, and checked by Fastly to determine if a test is still active, if a test is expired it won't be served to users.
+### Client vs Server Side Tests
 
-0% tests are in the `active_ab_test_groups` table so we can still force ourselves into them, but they are not in the `mvt_ab_test_groups` table as they don't take up any mvt id space.
+All requests are processed by Fastly at the edge, however, ab testing of server-side logic in Frontend or DCR will need to be cached separately. Client side tests do not need to be cached separately, as they are applied in the browser after the response is delivered.
 
-## Limitations
+Ensure that the `type` field is set to either `client` or `server` to indicate the type of test so that server side tests can be cached correctly, and client side tests are not splitting the cache unnecessarily.
 
--   The dictionary API has a limit of 1000 items per dictionary, we won't get anywhere near this limit, but it's worth noting.
--   This setups reduces our mvt id space from 0-999999 to 0-999, this should be fine as we have rarely used decimal precision test sizes. This would only came up for example with a multi-variant test that doesn't divide evenly into the total test size, with the current config we sent the variant/group size explicitly so this won't be an issue.
+There's a limit of the number of concurrent server-side tests that can be run, enforce by the validation script, so it's important to use client-side tests where possible.
 
-## How build/CI step will work
+### Test Expiration
 
-### PR
+AB tests should have an expiration date set in the future. This is to ensure that tests do not run indefinitely.
 
--   Import the ab tests
--   Validate the ab tests
-    -   Check if there's enough space, all test variant percentages need to add up to <=100%
-    -   Check there aren't too many server side tests (to avoid splitting the cache too much, acceptable number TBD)
-    -   Validate the test expiration date is in the future and on a weekday
--   Generate a visual representation of the tests and add it to the PR as a comment, with before/after?
--   Also update visual in a markdown file in the repo
--   Build/serialize the tests (to check it works)
+Expired tests will cause the ab testing validation to fail, and will not be deployed.
 
-### Release
+Tests that expire while they are are in-flight will not be served by fastly, and should be removed from the `abTest.ts` file as soon as possible.
 
--   Import and validate
--   Build/serialize the tests
-    -   Build the keys and values for the dictionary
--   Uploads the key-values to the Fastly dictionary
-    -   Requries some work to interact with the [Fastly dictionary API](https://www.Fastly.com/documentation/reference/api/dictionaries/dictionary-item/)
+### Audience Spaces
 
-### Build output example
+Ideally AB tests would never overlap (users being in multiple tests), but sometimes this is unavoidable, for example when running a very large 50+% test without interrupting existing tests.
 
-See the [config-build-example.md](./docs/config-build-example.md) for a full example of the build output.
+To add a test where there is not enough space in the default audience space (`A`), you can specify a different `audienceSpace` in the test definition.
 
-## Testing the new AB testing framework
+For example if there are already 3 25% tests in space `A` totalling 75%, and you want to run a 50% test, you can set the `audienceSpace` to `B` to allow this test to overlap with the existing tests.
 
-### CI Validation/Build/Deploy Steps
+## How it works
 
-The steps can all be run locally using the `deno run` command, see the [deno.json](./deno.json) file for the commands.
+The AB testing framework uses Deno to run scripts that validate and deploy the tests. The `deno.json` file contains the tasks that can be run, such as `validate`, `deploy`, and `build`.
 
-The steps have unit tests that can be run using the `deno test` command.
+Which tests using which mvt ids is computed by the `build` task, which generates the `dist/mvts.json` file. This file contains the mapping of AB tests to MVT IDs.
 
-The `deploy` step requires some environment variables to be set [see env.ts](./scripts/deploy/env.ts), and will upload the dictionary to Fastly, and can be run on a test Fastly service.
+The algorithm allocates tests available MVT IDs based on the audience size and space. Allocation is deterministic, so the same test (with the same name) will always be assigned the same MVT ID as long as the test hasn't been removed, allowing for consistent user experience when tests are added/updated/removed. This also means that new/update tests will not use contiguous MVT IDs, but will instead use whichever MVT IDs are available.
 
-### VCL
+However, the allocation is completely separate for each audience space, so if you have a test in space `A` and move it to space `B`, it will be allocated different MVT IDs.
 
-The VCL is just here as a reference example. It will live with the rest of our Fastly vcl.
-
-It can be tested using the DEV/CODE environment for our Fastly service.
-
-## How running AB tests will work
-
-### Creating a test
-
-Open a PR and add a test to the `abTest.ts` file in the `ab-testing/src` directory.
-
-Github actions will run the build and validate the test on the PR.
-
-Once the test is validated and PR merged, the release process will upload the test to Fastly.
-
-If the test state is `ON` and it is not expired it will be served to users as expected.
-
-Page responses in a client side test will have a cookie set that can be used by the client side code to determine which test the user is in.
-
-Page responses in a server side test will get a cookie set that can be used by client or server side code to determine which test the user is in, and a header that will be used by Fastly/frontend to split the cache.
-
-### Opting in/out of a test
-
-Using the relevant URL to opt in or out of a test, this will set or remove a cookie that will be used by Fastly to force subsequent responses to the correct test. This is the same for both server and client side tests.
-
-e.g. `/ab-tests/opt-in?group=commercial-ad-block-ask:variant` will set the cookie to force the user into the `commercial-ad-block-ask:variant` test variant.
-
-Locally this can be done by setting the relevant cookie in the browser
-
-For server side tests this might look like:
-
-`Set-Cookie Server_AB_Tests=commercial-ad-block-ask:variant; Path=/; Domain=theguardian.com; Secure; SameSite=None`
-
-For client side tests:
-
-`Set-Cookie Client_AB_Tests=commercial-ad-block-ask:variant; Path=/; Domain=theguardian.com; Secure; SameSite=None`
+The state of the AB tests is stored in Fastly dictionaries, which are updated when the `deploy` task is run. Logic in fastly VCL will then use these dictionaries to determine which users are in which test groups and set appropriate headers and/or cookies.
