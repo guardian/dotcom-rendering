@@ -2,6 +2,7 @@ import { type EditionId } from '../../lib/edition';
 import type { TagType } from '../../types/tag';
 import { Section } from '../Section';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
+import { SignInGateAuxiaV2 } from './gateDesigns/SignInGateAuxiaV2';
 import { SignInGateCustomizableText } from './gateDesigns/SignInGateCustomizableText';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
@@ -263,3 +264,50 @@ export const signInGateSelectorStoryNoTreatment = () => {
 
 signInGateSelectorStoryNoTreatment.storyName =
 	'sign_in_gate_selector_no_treatment';
+
+export const auxiaV2Modal = () => {
+	const mockUserTreatment = {
+		treatmentId: 'test-treatment-id',
+		treatmentTrackingId: 'test-tracking-id',
+		surface: 'test-surface',
+		treatmentContent: JSON.stringify({
+			title: 'Sign in to continue reading',
+			subtitle: 'Register for free and continue reading',
+			body: 'Create your free Guardian account to access exclusive content and features.',
+			first_cta_name: 'Create account',
+			first_cta_link: 'https://profile.theguardian.com/register',
+			second_cta_name: 'Not now',
+		}),
+		rank: 1,
+		contentLanguageCode: 'en',
+		treatmentType: 'test-type',
+	};
+
+	return (
+		<Section fullWidth={true}>
+			<SignInGateAuxiaV2
+				signInUrl="https://profile.theguardian.com/signin"
+				dismissGate={() => console.log('Gate dismissed')}
+				abTest={{
+					name: 'AuxiaSignInGate',
+					variant: 'test-variant',
+					id: 'test-id',
+				}}
+				ophanComponentId="test-component-id"
+				userTreatment={mockUserTreatment}
+				logTreatmentInteractionCall={async (
+					interactionType,
+					actionName,
+				) => {
+					console.log(
+						'Treatment interaction:',
+						interactionType,
+						actionName,
+					);
+				}}
+			/>
+		</Section>
+	);
+};
+
+auxiaV2Modal.storyName = 'auxia_v2_modal';

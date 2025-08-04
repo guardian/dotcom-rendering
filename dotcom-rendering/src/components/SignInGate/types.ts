@@ -230,3 +230,9 @@ export type SignInGatePropsAuxia = {
 		actionName: AuxiaInteractionActionName,
 	) => Promise<void>;
 };
+
+export type AuxiaGateVersion = 'v1' | 'v2';
+
+export interface AuxiaGateVersionConfig {
+	version: AuxiaGateVersion;
+}
