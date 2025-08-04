@@ -54,7 +54,9 @@ const standardCards = standards.map((card, index) => {
 
 	switch (index + 1) {
 		case 2:
-			return enhanceCardFields({ supportingContent: getSublinks(2) });
+			return enhanceCardFields({
+				supportingContent: getSublinks(2),
+			});
 		case 3:
 			return enhanceCardFields({
 				boostLevel: 'boost',
@@ -437,13 +439,13 @@ const slideshowCard = {
 	],
 } satisfies DCRFrontCard;
 
-export const DefaultSplashWithLiveUpdatesAndSlideshow: Story = {
-	name: 'Standard splash with live updates and slideshow',
+// Boost level is ignored for slideshows
+export const SplashWithLiveUpdatesAndSlideshow: Story = {
+	name: 'Splash with live updates and slideshow',
 	args: {
-		frontSectionTitle: 'Standard splash with live updates and slideshow',
+		frontSectionTitle: 'Splash with live updates and slideshow',
 		groupedTrails: {
 			...emptyGroupedTrails,
-
 			splash: [{ ...slideshowCard }],
 		},
 	},
@@ -456,6 +458,21 @@ export const StandardCards: Story = {
 		groupedTrails: {
 			...emptyGroupedTrails,
 			standard: trails.slice(0, 4),
+		},
+	},
+};
+
+export const StandardBoostedMediaCardWithSublinks: Story = {
+	name: 'Standard boosted media card with sublinks',
+	args: {
+		frontSectionTitle: 'Standard boosted media card with sublinks',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			standard: [trails[1]].map((card) => ({
+				...card,
+				boostLevel: 'boost',
+				supportingContent: getSublinks(2),
+			})),
 		},
 	},
 };
