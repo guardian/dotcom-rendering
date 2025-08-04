@@ -78,7 +78,10 @@ const getStyles = (
 ) => {
 	const color = headerSettings?.textColour ?? neutral[0];
 	const copyTopMargin = headerSettings?.headerImage ? space[1] : space[1];
-	const containerMargin = headerSettings?.headerImage ? `${space[6]}px` : '0';
+	const containerMargin =
+		isCollapsedForABTest || headerSettings?.headerImage
+			? `${space[6]}px`
+			: '0';
 
 	const mobileHeadlineSize =
 		headlineSize === 'small'
