@@ -621,9 +621,9 @@ const styles = {
 				minmax(0, 0.5fr);
 			grid-template-rows: auto auto;
 			grid-template-areas:
-				'. 	copy-container 						close-button 						.'
-				'. 	${cardsImageOrSpaceTemplateString} 	${cardsImageOrSpaceTemplateString} 	.'
-				'. 	cta-container 						cta-container 					 	.';
+				'. copy-container close-button .'
+				'. ${cardsImageOrSpaceTemplateString} ${cardsImageOrSpaceTemplateString} .'
+				'. cta-container cta-container .';
 		}
 		${from.desktop} {
 			max-width: 980px;
