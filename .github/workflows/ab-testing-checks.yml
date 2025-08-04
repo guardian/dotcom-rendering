@@ -1,0 +1,30 @@
+name: 🧪 AB testing Checks
+on:
+  workflow_call:
+    secrets:
+      FASTLY_AB_TESTING_CONFIG:
+        required: true
+
+jobs:
+  checks:
+    name: AB testing Checks
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ab-testing
+    steps:
+      - uses: actions/checkout@v4
+
+      # https://github.com/denoland/setup-deno#latest-stable-for-a-major
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v2.2
+
+      - name: Test
+        run: deno test
+
+      - name: Validate
+        run: deno run validate
+
+      - name: Build
+        run: deno run build

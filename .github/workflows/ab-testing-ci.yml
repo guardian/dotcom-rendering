@@ -1,0 +1,11 @@
+name: 🧪 AB testing CI
+on:
+  pull_request:
+    paths:
+      - 'ab-testing/**'
+
+jobs:
+  checks:
+    uses: ./.github/workflows/ab-testing-checks.yml
+    secrets:
+      FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_PROD_AB_TESTING_CONFIG }}

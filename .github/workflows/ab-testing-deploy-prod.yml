@@ -1,0 +1,27 @@
+name: 🧪 Deploy PROD AB Testing Config
+on:
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'ab-testing/**'
+
+jobs:
+  ci:
+    uses: ./.github/workflows/ab-testing-checks.yml
+
+  deploy:
+    name: Deploy PROD
+    needs: ci
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ab-testing
+    steps:
+      - name: Deploy
+        uses: ./.github/workflows/ab-testing-deploy.yml
+        with:
+          stage: prod
+        env:
+          FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_PROD_AB_TESTING_CONFIG }}

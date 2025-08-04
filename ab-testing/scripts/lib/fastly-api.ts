@@ -31,6 +31,8 @@ type UpdateDictionaryItemRequest =
 			op: 'delete';
 	  };
 
+const FASTLY_API_BASE_URL = 'https://api.fastly.com/service';
+
 /**
  * Fetch data from Fastly API
  * We're using fetch instead of the Fastly API client as it doesn't play nicely with Deno, nor is it typed
@@ -66,7 +68,7 @@ const fetchFromFastly = async <T>(
 
 const getService = async (serviceId: string) => {
 	const service = await fetchFromFastly(
-		`https://api.fastly.com/service/${serviceId}`,
+		`${FASTLY_API_BASE_URL}/${serviceId}`,
 	);
 
 	assert(
@@ -96,7 +98,7 @@ const getDictionary = async ({
 	dictionaryName: string;
 }) => {
 	const dictionary = await fetchFromFastly(
-		`https://api.fastly.com/service/${serviceId}/version/${activeVersion}/dictionary/${dictionaryName}`,
+		`${FASTLY_API_BASE_URL}/${serviceId}/version/${activeVersion}/dictionary/${dictionaryName}`,
 	);
 	assert(dictionary, type({ id: string(), name: string() }));
 
@@ -111,7 +113,7 @@ const getDictionaryItems = async ({
 	dictionaryId: string;
 }) => {
 	const dictionary = await fetchFromFastly(
-		`https://api.fastly.com/service/${serviceId}/dictionary/${dictionaryId}/items?per_page=1000`,
+		`${FASTLY_API_BASE_URL}/${serviceId}/dictionary/${dictionaryId}/items?per_page=1000`,
 	);
 
 	assert(dictionary, array(dictionaryItemStruct));
@@ -129,7 +131,7 @@ const updateDictionaryItems = async ({
 	items: UpdateDictionaryItemRequest[];
 }) => {
 	const dictionary = await fetchFromFastly(
-		`https://api.fastly.com/service/${serviceId}/dictionary/${dictionaryId}/items`,
+		`${FASTLY_API_BASE_URL}/${serviceId}/dictionary/${dictionaryId}/items`,
 		{
 			method: 'PATCH',
 			headers: {
@@ -238,12 +240,10 @@ const calculateUpdates = (
  *
  */
 const verifyDictionaryName = async ({
-	serviceId,
 	activeVersion,
 	dictionaryName,
 	dictionaryId,
 }: {
-	serviceId: string;
 	activeVersion: number;
 	dictionaryName: string;
 	dictionaryId: string;

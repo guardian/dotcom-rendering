@@ -1,3 +1,5 @@
+import { assert, object, string } from 'jsr:@superstruct/core';
+
 const getEnv = (key: string): string => {
 	const value = Deno.env.get(key);
 	if (!value) {
@@ -6,13 +8,29 @@ const getEnv = (key: string): string => {
 	return value;
 };
 
-const FASTLY_API_TOKEN = getEnv('FASTLY_AB_TESTING_API_TOKEN');
-const SERVICE_ID = getEnv('FASTLY_AB_TESTING_SERVICE_ID');
-const SERVICE_NAME = getEnv('FASTLY_AB_TESTING_SERVICE_NAME');
-const MVTS_DICTIONARY_ID = getEnv('FASTLY_MVTS_DICTIONARY_ID');
-const MVTS_DICTIONARY_NAME = getEnv('FASTLY_MVTS_DICTIONARY_NAME');
-const TEST_GROUPS_DICTIONARY_ID = getEnv('FASTLY_AB_TESTS_DICTIONARY_ID');
-const TEST_GROUPS_DICTIONARY_NAME = getEnv('FASTLY_AB_TESTS_DICTIONARY_NAME');
+const configStruct = object({
+	FASTLY_API_TOKEN: string(),
+	SERVICE_ID: string(),
+	MVTS_DICTIONARY_ID: string(),
+	MVTS_DICTIONARY_NAME: string(),
+	TEST_GROUPS_DICTIONARY_ID: string(),
+	TEST_GROUPS_DICTIONARY_NAME: string(),
+	SERVICE_NAME: string(),
+});
+
+const config = JSON.parse(getEnv('FASTLY_AB_TESTING_CONFIG'));
+
+assert(config, configStruct);
+
+const {
+	FASTLY_API_TOKEN,
+	SERVICE_ID,
+	MVTS_DICTIONARY_ID,
+	MVTS_DICTIONARY_NAME,
+	TEST_GROUPS_DICTIONARY_ID,
+	TEST_GROUPS_DICTIONARY_NAME,
+	SERVICE_NAME,
+} = config;
 
 export {
 	FASTLY_API_TOKEN,
