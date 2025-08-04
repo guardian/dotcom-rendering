@@ -57,6 +57,8 @@ export const GoogleOneTap = () => {
 		'variant',
 	);
 
+	// TODO: Wait till CMP dismissed
+
 	useEffect(() => {
 		// Only initialize Google One Tap if the user is in the AB test. Currently 0% of users are in the test.
 		if (!isUserInTest) return;
@@ -77,6 +79,26 @@ export const GoogleOneTap = () => {
 			);
 			return;
 		}
+
+		/**
+		 * Firefox does not support the FedCM API at the time of writting,
+		 * and it seems like it will not support it in the near future.
+		 *
+		 * Instead they're focusing on an alternative API called "Lightweight FedCM"
+		 * which may not support Google One Tap.
+		 *
+		 * See: https://bugzilla.mozilla.org/show_bug.cgi?id=1803629
+		 *
+		 * Check if the `IdentityCredential` interface is available in the window object
+		 * as an indicator of FedCM support.
+		 */
+		if (!('IdentityCredential' in window)) {
+			// TODO:
+			log('identity', 'FedCM API not supported in this browser');
+			return;
+		}
+
+		// TODO: Check if browser supports FedCM before initializing and track in Ophan if not.
 
 		/**
 		 * Typescripts built-in DOM types do not include the full `CredentialsProvider`
@@ -118,10 +140,13 @@ export const GoogleOneTap = () => {
 			})
 			.then((credentials) => {
 				if (credentials) {
+					// TODO: Track Ophan "FedCM" success event here.
+					// TODO: Redirect to Gateway with credentials token.
 					log('identity', 'FedCM credentials received', {
 						credentials,
 					});
 				} else {
+					// TODO: Track Ophan "FedCM" skip event here.
 					log('identity', 'No FedCM credentials received');
 				}
 			});
