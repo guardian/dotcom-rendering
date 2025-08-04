@@ -171,7 +171,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		ChoiceCard | undefined
 	>(defaultChoiceCard);
 
-	// TODO: set to correct ab test and variant name
+	// TODO: set to correct ab test and variant names
 	const isInABTest =
 		tracking.abTestName === 'THREE_TIER_CHOICE_CARDS' &&
 		tracking.abTestVariant == 'BANNER_V2';
@@ -373,20 +373,19 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									/>
 								</div>
 							)}
-						<div css={templateSpacing.bannerBodyCopy}>
-							<div css={styles.bodyCopyOverrides}>
-								<DesignableBannerBody
-									mainContent={content.mainContent}
-									mobileContent={content.mobileContent}
-									highlightedTextSettings={
-										templateSettings.highlightedTextSettings
-									}
-									isCollapsedForABTest={
-										isInABTest && isCollapsed
-									}
-								/>
+						{(!isInABTest || !isCollapsed) && (
+							<div css={templateSpacing.bannerBodyCopy}>
+								<div css={styles.bodyCopyOverrides}>
+									<DesignableBannerBody
+										mainContent={content.mainContent}
+										mobileContent={content.mobileContent}
+										highlightedTextSettings={
+											templateSettings.highlightedTextSettings
+										}
+									/>
+								</div>
 							</div>
-						</div>
+						)}
 					</div>
 
 					{templateSettings.imageSettings && (
