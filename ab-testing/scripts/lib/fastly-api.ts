@@ -1,4 +1,10 @@
-import * as env from './env.ts';
+import {
+	abTestsDictionaryId,
+	apiToken,
+	mvtDictionaryId,
+	serviceId,
+	serviceName,
+} from './config.ts';
 import {
 	object,
 	string,
@@ -50,7 +56,7 @@ const fetchFromFastly = async <T>(
 		...options,
 		headers: {
 			...options.headers,
-			'Fastly-Key': env.FASTLY_API_TOKEN,
+			'Fastly-Key': apiToken,
 		},
 	});
 	if (!response.ok) {
@@ -89,11 +95,9 @@ const getService = async (serviceId: string) => {
 };
 
 const getDictionary = async ({
-	serviceId,
 	activeVersion,
 	dictionaryName,
 }: {
-	serviceId: string;
 	activeVersion: number;
 	dictionaryName: string;
 }) => {
@@ -106,10 +110,8 @@ const getDictionary = async ({
 };
 
 const getDictionaryItems = async ({
-	serviceId,
 	dictionaryId,
 }: {
-	serviceId: string;
 	dictionaryId: string;
 }) => {
 	const dictionary = await fetchFromFastly(
@@ -122,11 +124,9 @@ const getDictionaryItems = async ({
 };
 
 const updateDictionaryItems = async ({
-	serviceId,
 	dictionaryId,
 	items,
 }: {
-	serviceId: string;
 	dictionaryId: string;
 	items: UpdateDictionaryItemRequest[];
 }) => {
@@ -249,7 +249,6 @@ const verifyDictionaryName = async ({
 	dictionaryId: string;
 }) => {
 	const dictionary = await getDictionary({
-		serviceId: env.SERVICE_ID,
 		activeVersion: activeVersion,
 		dictionaryName,
 	});
@@ -265,26 +264,22 @@ const verifyDictionaryName = async ({
 
 const getMVTGroupsFromDictionary = () =>
 	getDictionaryItems({
-		serviceId: env.SERVICE_ID,
-		dictionaryId: env.MVTS_DICTIONARY_ID,
+		dictionaryId: mvtDictionaryId,
 	});
 
 const getABTestGroupsFromDictionary = () =>
 	getDictionaryItems({
-		serviceId: env.SERVICE_ID,
-		dictionaryId: env.TEST_GROUPS_DICTIONARY_ID,
+		dictionaryId: abTestsDictionaryId,
 	});
 
 const updateMVTGroups = (items: UpdateDictionaryItemRequest[]) =>
 	updateDictionaryItems({
-		serviceId: env.SERVICE_ID,
-		dictionaryId: env.MVTS_DICTIONARY_ID,
+		dictionaryId: mvtDictionaryId,
 		items,
 	});
 const updateABTestGroups = (items: UpdateDictionaryItemRequest[]) =>
 	updateDictionaryItems({
-		serviceId: env.SERVICE_ID,
-		dictionaryId: env.TEST_GROUPS_DICTIONARY_ID,
+		dictionaryId: abTestsDictionaryId,
 		items,
 	});
 

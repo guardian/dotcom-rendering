@@ -1,7 +1,14 @@
 import { verifyDictionaryName, getService } from '../lib/fastly-api.ts';
 
 import { parseArgs } from 'jsr:@std/cli/parse-args';
-import * as env from '../lib/env.ts';
+import {
+	abTestsDictionaryId,
+	abTestsDictionaryName,
+	mvtDictionaryId,
+	mvtDictionaryName,
+	serviceId,
+	serviceName,
+} from '../lib/config.ts';
 import { deployABTests } from './deploy-ab-tests.ts';
 import { deployMVTs } from './deploy-mvts.ts';
 
@@ -16,10 +23,10 @@ if (!flags['mvts'] || !flags['ab-tests']) {
 	Deno.exit(1);
 }
 
-const service = await getService(env.SERVICE_ID);
-if (service.name !== env.SERVICE_NAME) {
+const service = await getService(serviceId);
+if (service.name !== serviceName) {
 	throw new Error(
-		`Service ID ${env.SERVICE_ID} does not match the expected service name ${env.SERVICE_NAME}`,
+		`Service ID ${serviceId} does not match the expected service name ${serviceName}`,
 	);
 }
 
@@ -28,22 +35,20 @@ const activeVersion = service.versions?.find(
 );
 
 if (!activeVersion) {
-	throw new Error(`No active version found for service ${env.SERVICE_NAME}`);
+	throw new Error(`No active version found for service ${service.name}`);
 }
 
 // Verify that the service ID and dictionary names match the expected values
 verifyDictionaryName({
-	serviceId: env.SERVICE_ID,
 	activeVersion: activeVersion.number,
-	dictionaryName: env.MVTS_DICTIONARY_NAME,
-	dictionaryId: env.MVTS_DICTIONARY_ID,
+	dictionaryName: mvtDictionaryName,
+	dictionaryId: mvtDictionaryId,
 });
 
 verifyDictionaryName({
-	serviceId: env.SERVICE_ID,
 	activeVersion: activeVersion.number,
-	dictionaryName: env.TEST_GROUPS_DICTIONARY_NAME,
-	dictionaryId: env.TEST_GROUPS_DICTIONARY_ID,
+	dictionaryName: abTestsDictionaryName,
+	dictionaryId: abTestsDictionaryId,
 });
 
 deployABTests(flags['ab-tests']);

@@ -5,20 +5,20 @@ import {
 } from 'jsr:@std/assert';
 import { stub, Stub } from 'jsr:@std/testing/mock';
 
+const mockConfig = {
+	apiToken: 'test-token',
+	serviceName: 'test-service',
+	serviceId: 'test-service-id',
+	mvtDictionaryId: 'test-mvt-dictionary-id',
+	mvtDictionaryName: 'test-mvt-dictionary',
+	abTestsDictionaryId: 'test-ab-tests-dictionary-id',
+	abTestsDictionaryName: 'test-ab-tests-dictionary',
+};
+
 // Mock environment variables
 stub(Deno.env, 'get', (key: string) => {
-	if (
-		[
-			'FASTLY_AB_TESTING_SERVICE_ID',
-			'FASTLY_AB_TESTING_API_TOKEN',
-			'FASTLY_AB_TESTING_SERVICE_NAME',
-			'FASTLY_MVTS_DICTIONARY_ID',
-			'FASTLY_MVTS_DICTIONARY_NAME',
-			'FASTLY_AB_TESTS_DICTIONARY_ID',
-			'FASTLY_AB_TESTS_DICTIONARY_NAME',
-		].includes(key)
-	) {
-		return 'test';
+	if (key === 'FASTLY_AB_TESTING_CONFIG') {
+		return JSON.stringify(mockConfig);
 	}
 });
 
@@ -187,7 +187,6 @@ Deno.test(
 		mockFetch(mockResponse);
 
 		const result = await getDictionaryItems({
-			serviceId: 'test-service',
 			dictionaryId: 'test-dict',
 		});
 
@@ -195,7 +194,7 @@ Deno.test(
 		assertEquals(fetchStub.calls.length, 1);
 		assertEquals(
 			fetchStub.calls[0].args[0],
-			'https://api.fastly.com/service/test-service/dictionary/test-dict/items?per_page=1000',
+			`https://api.fastly.com/service/${mockConfig.serviceId}/dictionary/test-dict/items?per_page=1000`,
 		);
 	},
 );
@@ -207,7 +206,6 @@ Deno.test('getDictionaryItems - throws error on invalid response', async () => {
 	await assertRejects(
 		async () => {
 			await getDictionaryItems({
-				serviceId: 'test-service',
 				dictionaryId: 'test-dict',
 			});
 		},
@@ -222,7 +220,6 @@ Deno.test('getDictionaryItems - throws error on fetch failure', async () => {
 	await assertRejects(
 		async () => {
 			await getDictionaryItems({
-				serviceId: 'test-service',
 				dictionaryId: 'test-dict',
 			});
 		},
@@ -238,7 +235,10 @@ Deno.test('getMVTGroupsFromDictionary - calls the right endpoint', async () => {
 	await getMVTGroupsFromDictionary();
 
 	assertEquals(fetchStub.calls.length, 1);
-	assertStringIncludes(fetchStub.calls[0].args[0], '/dictionary/test/items');
+	assertStringIncludes(
+		fetchStub.calls[0].args[0],
+		`/dictionary/${mockConfig.mvtDictionaryId}/items`,
+	);
 });
 
 Deno.test(
@@ -252,7 +252,7 @@ Deno.test(
 		assertEquals(fetchStub.calls.length, 1);
 		assertStringIncludes(
 			fetchStub.calls[0].args[0],
-			'/dictionary/test/items',
+			`/dictionary/${mockConfig.abTestsDictionaryId}/items`,
 		);
 	},
 );
