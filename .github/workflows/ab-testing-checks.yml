@@ -1,4 +1,4 @@
-name: 🧪 AB testing Checks
+name: Checks
 
 permissions:
   contents: read
@@ -11,7 +11,6 @@ on:
 
 jobs:
   checks:
-    name: AB testing Checks
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -22,7 +21,7 @@ jobs:
       # https://github.com/denoland/setup-deno#latest-stable-for-a-major
       - uses: denoland/setup-deno@v1
         with:
-          deno-version: v2.2
+          deno-version: v2.3
 
       - name: Test
         run: deno test
