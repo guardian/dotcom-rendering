@@ -8,11 +8,12 @@ const isStringTuple = (_: [string, unknown]): _ is [string, string] =>
 /**
  * Get DCR content from a `theguardian.com` URL.
  * Takes in optional `X-Gu-*` headers to send.
+ * Returns the parsed JSON config and any cookies set by the request.
  */
 async function getContentFromURL(
 	url: URL,
 	_headers: IncomingHttpHeaders,
-): Promise<unknown> {
+): Promise<{ config: unknown; cookies: string[] }> {
 	// searchParams will only work for the first set of query params because 'url' is already a query param itself
 	const searchparams = url.searchParams.toString();
 
@@ -30,10 +31,13 @@ async function getContentFromURL(
 			.filter(isStringTuple),
 	);
 
-	// pick all the keys from the JSON except `html`
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- we don't want `html` in the config
-	const { html, ...config } = await fetch(jsonUrl, { headers })
-		.then((response) => response.json())
+	const { cookies, json } = await fetch(jsonUrl, { headers })
+		.then(async (response) => {
+			return {
+				json: (await response.json()) as unknown,
+				cookies: response.headers.getSetCookie(),
+			};
+		})
 		.catch((error) => {
 			if (isObject(error) && error.type === 'invalid-json') {
 				throw new Error(
@@ -43,7 +47,11 @@ async function getContentFromURL(
 			throw error;
 		});
 
-	return config;
+	// pick all the keys from the JSON except `html`
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- we don't want `html` in the config
+	const { html, ...config } = json as Record<string, unknown>;
+
+	return { config, cookies };
 }
 
 /**
@@ -65,8 +73,14 @@ export const getContentFromURLMiddleware: Handler = async (req, res, next) => {
 			const url = new URL(
 				'https://www.theguardian.com/crosswords/digital-edition',
 			);
-			const content = await getContentFromURL(url, req.headers);
-			req.body = content;
+			const { config, cookies } = await getContentFromURL(
+				url,
+				req.headers,
+			);
+			req.body = config;
+			for (const cookie of cookies) {
+				res.append('Set-Cookie', cookie);
+			}
 			next();
 		} catch (error) {
 			console.error(error);
@@ -88,7 +102,14 @@ export const getContentFromURLMiddleware: Handler = async (req, res, next) => {
 			}
 
 			try {
-				req.body = await getContentFromURL(sourceURL, req.headers);
+				const { config, cookies } = await getContentFromURL(
+					sourceURL,
+					req.headers,
+				);
+				req.body = config;
+				for (const cookie of cookies) {
+					res.append('Set-Cookie', cookie);
+				}
 			} catch (error) {
 				console.error(error);
 				next(error);
