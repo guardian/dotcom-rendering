@@ -14,7 +14,6 @@ import type { StageType } from '../types/config';
  *
  * For example, running DCR locally and loading `https://r.thegulocal.com/Front/https://www.theguardian.com/international` will
  * give a stage of `PROD` as the article is in PROD, but DCR is running in `DEV`.
- * @returns
  */
 const getStage = (): StageType => {
 	if (window.location.hostname === 'm.code.dev-theguardian.com') {
@@ -36,9 +35,9 @@ const getRedirectUrl = ({
 	token: string;
 }): string => {
 	const profileDomain = {
-		PROD: 'https://www.theguardian.com',
-		CODE: 'https://m.code.dev-theguardian.com',
-		DEV: 'https://r.thegulocal.com',
+		PROD: 'https://profile.theguardian.com',
+		CODE: 'https://profile.code.dev-theguardian.com',
+		DEV: 'https://profile.thegulocal.com',
 	}[stage];
 	const queryParams = new URLSearchParams({
 		token,
@@ -58,18 +57,11 @@ const getProviders = (stage: StageType): IdentityProviderConfig[] => {
 				},
 			];
 		case 'CODE':
+		case 'DEV':
 			return [
 				{
 					configURL: 'https://accounts.google.com/gsi/fedcm.json',
 					// TODO: m.code.dev-theguardian.com is not a supported origin for this Client ID
-					clientId:
-						'774465807556-pkevncqpfs9486ms0bo5q1f2g9vhpior.apps.googleusercontent.com',
-				},
-			];
-		default:
-			return [
-				{
-					configURL: 'https://accounts.google.com/gsi/fedcm.json',
 					clientId:
 						'774465807556-pkevncqpfs9486ms0bo5q1f2g9vhpior.apps.googleusercontent.com',
 				},
@@ -99,15 +91,12 @@ type CredentialsProvider = {
 export const GoogleOneTap = () => {
 	const consent = useConsent();
 	const isSignedIn = useIsSignedIn() === true;
-	const abTests = useAB();
-	const isUserInTest = abTests?.api.isUserInVariant(
-		'GoogleOneTap',
-		'variant',
-	);
+	const isInTest = useAB()?.api.isUserInVariant('GoogleOneTap', 'variant');
 
 	useOnce(() => {
 		// Only initialize Google One Tap if the user is in the AB test. Currently 0% of users are in the test.
-		if (!isUserInTest) return;
+		if (!isInTest) return;
+		if (!isSignedIn) return;
 
 		/**
 		 * Firefox does not support the FedCM API at the time of writting,
@@ -195,7 +184,7 @@ export const GoogleOneTap = () => {
 					log('identity', 'No FedCM credentials received');
 				}
 			});
-	}, [isSignedIn, isUserInTest, consent]);
+	}, [isSignedIn, isInTest, consent]);
 
 	return <></>;
 };
