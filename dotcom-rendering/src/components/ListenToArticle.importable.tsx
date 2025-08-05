@@ -38,15 +38,12 @@ export const ListenToArticle = ({ articleId }: Props) => {
 				getListenToArticleClient().isPlaying(articleId),
 				getListenToArticleClient().getAudioDurationSeconds(articleId),
 			])
-				.then(() => {
-					// TODO pending design implementation and AB test set up.
-					// .then(({ isAvailable, isPlaying, audioDurationSeconds }) => {
-					// setAudioDuration(
-					// 	audioDurationSeconds ? audioDurationSeconds : undefined,
-					// );
-					// setShowButton(isAvailable && !isPlaying);
-					setAudioDurationSeconds(undefined);
-					setShowButton(false);
+				.then(([isAvailable, isPlaying, durationSeconds]) => {
+					setAudioDurationSeconds(
+						durationSeconds ? durationSeconds : undefined,
+					);
+
+					setShowButton(isAvailable && !isPlaying);
 				})
 				.catch((error) => {
 					console.error(
