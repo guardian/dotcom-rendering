@@ -486,6 +486,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 													article.config.shortUrlId
 												}
 											/>
+											{!!article.affiliateLinksDisclaimer && (
+												<AffiliateDisclaimer />
+											)}
 										</Hide>
 									</>
 								) : (
