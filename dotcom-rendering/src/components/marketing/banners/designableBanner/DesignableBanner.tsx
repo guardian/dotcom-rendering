@@ -451,11 +451,15 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 							</div>
 						)}
 						{(!isInABTest || isCollapsed) && (
-							<DesignableBannerCloseButton
-								onCloseClick={onCloseClick}
-								settings={templateSettings.closeButtonSettings}
-								isInABTest={isInABTest}
-							/>
+							<div css={styles.closeButtonABOverrides}>
+								<DesignableBannerCloseButton
+									onCloseClick={onCloseClick}
+									settings={
+										templateSettings.closeButtonSettings
+									}
+									isInABTest={isInABTest}
+								/>
+							</div>
 						)}
 					</div>
 
@@ -696,22 +700,28 @@ const styles = {
 		/* Layout changes only here */
 		grid-area: close-button;
 		display: flex;
-		flex-direction: row;
-		justify-content: space-around;
-		column-gap: ${space[0]}px;
-		padding-right: ${space[2]}px;
-		justify-self: end;
 
 		${until.phablet} {
+			flex-direction: row-reverse;
+			justify-content: space-between;
 			position: sticky;
 			top: ${space[2]}px;
 		}
 		${from.phablet} {
-			margin-top: ${space[3]}px;
+			flex-direction: row;
+			justify-content: space-around;
+			column-gap: ${space[0]}px;
+			padding-right: ${space[2]}px;
+			justify-self: end;
+			margin-top: ${space[2]}px;
 		}
 		${from.desktop} {
-			margin-top: ${space[4]}px;
+			margin-top: ${space[5]}px;
 		}
+	`,
+	closeButtonABOverrides: css`
+		justify-self: start;
+		align-self: start;
 	`,
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
 		align-self: stretch;
