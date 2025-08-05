@@ -1,6 +1,9 @@
 import { log } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import { getListenToArticleClient } from '../lib/bridgetApi';
+import {
+	getListenToArticleClient,
+	getNativeABTestingClient,
+} from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
 import { ListenToArticleButton } from './ListenToArticleButton';
 
@@ -30,24 +33,40 @@ export const ListenToArticle = ({ articleId }: Props) => {
 		number | undefined
 	>(undefined);
 
-	const isBridgetCompatible = useIsBridgetCompatible('8.6.0');
+	const isBridgetCompatible = useIsBridgetCompatible('8.6.0'); // TODO ab test bump
 	useEffect(() => {
 		if (isBridgetCompatible) {
 			Promise.all([
+				// AB TESTING native
+				getNativeABTestingClient().getParticipations(),
 				getListenToArticleClient().isAvailable(articleId),
 				getListenToArticleClient().isPlaying(articleId),
 				getListenToArticleClient().getAudioDurationSeconds(articleId),
 			])
-				.then(() => {
-					// TODO pending design implementation and AB test set up.
-					// .then(({ isAvailable, isPlaying, audioDurationSeconds }) => {
-					// setAudioDuration(
-					// 	audioDurationSeconds ? audioDurationSeconds : undefined,
-					// );
-					// setShowButton(isAvailable && !isPlaying);
-					setAudioDurationSeconds(undefined);
-					setShowButton(false);
-				})
+				.then(
+					([
+						AbParticipations,
+						isAvailable,
+						isPlaying,
+						durationSeconds,
+					]) => {
+						// AB TESTING native
+						const variant = AbParticipations.get('l2a-ab-test');
+						if (!!variant && variant === 'with-duration') {
+							setAudioDurationSeconds(
+								typeof durationSeconds === 'number' &&
+									durationSeconds > 0
+									? durationSeconds
+									: undefined,
+							);
+							setShowButton(isAvailable && !isPlaying);
+						}
+						// AB TESTING native
+						if (!!variant && variant === 'without-duration') {
+							setShowButton(isAvailable && !isPlaying);
+						}
+					},
+				)
 				.catch((error) => {
 					console.error(
 						'Error fetching article audio status: ',

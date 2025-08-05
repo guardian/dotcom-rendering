@@ -1,3 +1,4 @@
+import * as AbTesting from '@guardian/bridget/AbTesting';
 import * as Acquisitions from '@guardian/bridget/Acquisitions';
 import * as Analytics from '@guardian/bridget/Analytics';
 import * as Commercial from '@guardian/bridget/Commercial';
@@ -203,4 +204,16 @@ export const getListenToArticleClient = (): ListenToArticle.Client<void> => {
 		);
 	}
 	return listenToArticleClient;
+};
+
+let nativeAbTestingClient: AbTesting.Client<void> | undefined = undefined;
+export const getNativeABTestingClient = (): AbTesting.Client<void> => {
+	if (!nativeAbTestingClient) {
+		nativeAbTestingClient = createAppClient<AbTesting.Client<void>>(
+			AbTesting.Client,
+			'buffered',
+			'compact',
+		);
+	}
+	return nativeAbTestingClient;
 };
