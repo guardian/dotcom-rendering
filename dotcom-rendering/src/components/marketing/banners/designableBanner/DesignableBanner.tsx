@@ -550,15 +550,15 @@ const styles = {
 			max-width: 740px;
 			margin: 0 auto;
 			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
-			grid-template-columns: minmax(0, 0.5fr) ${phabletContentMaxWidth} minmax(
+			grid-template-columns: minmax(0, 0.5fr) ${phabletContentMaxWidth} max-content minmax(
 					0,
 					0.5fr
 				);
 			grid-template-rows: auto auto auto;
 			grid-template-areas:
-				'.	copy-container						close-button'
-				'.	${cardsImageOrSpaceTemplateString}	.'
-				'.	cta-container						.';
+				'.	copy-container						close-button						.'
+				'.	${cardsImageOrSpaceTemplateString}	${cardsImageOrSpaceTemplateString}	.'
+				'.	cta-container						cta-container						.';
 		}
 		${from.desktop} {
 			max-width: 980px;
