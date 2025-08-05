@@ -1004,7 +1004,6 @@ export const footballData: FEFootballMatchListPage = {
 			prebidOzone: true,
 			ampLiveblogSwitch: false,
 			ampAmazon: false,
-			prebidAdYouLike: true,
 			mostViewedFronts: true,
 			abA9BidResponseWinner: true,
 			optOutAdvertising: true,
