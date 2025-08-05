@@ -9,7 +9,6 @@ const getEnv = (key: string): string => {
 };
 
 const configStruct = object({
-	apiToken: string(),
 	serviceName: string(),
 	serviceId: string(),
 	mvtDictionaryId: string(),
@@ -20,10 +19,11 @@ const configStruct = object({
 
 const config = JSON.parse(getEnv('FASTLY_AB_TESTING_CONFIG'));
 
+const apiToken = getEnv('FASTLY_API_TOKEN');
+
 assert(config, configStruct);
 
 const {
-	apiToken,
 	serviceName,
 	serviceId,
 	mvtDictionaryId,

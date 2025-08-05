@@ -8,6 +8,8 @@ on:
     secrets:
       FASTLY_AB_TESTING_CONFIG:
         required: true
+      FASTLY_API_TOKEN:
+        required: true
 
 jobs:
   checks:

@@ -24,3 +24,4 @@ jobs:
           stage: code
         env:
           FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_CODE_AB_TESTING_CONFIG }}
+          FASTLY_API_TOKEN: ${{ secrets.FASTLY_CODE_API_TOKEN }}
