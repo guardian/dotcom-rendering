@@ -110,10 +110,10 @@ export const LoopVideo = ({
 	const [currentTime, setCurrentTime] = useState(0);
 	const [playerState, setPlayerState] =
 		useState<(typeof PLAYER_STATES)[number]>('NOT_STARTED');
-
 	const [isAutoplayAllowed, setIsAutoplayAllowed] = useState<boolean | null>(
 		null,
 	);
+	const [isRestoredFromBFCache, setIsRestoredFromBFCache] = useState(false);
 
 	/**
 	 * Keep a track of whether the video has been in view. We only
@@ -190,13 +190,7 @@ export const LoopVideo = ({
 		/>
 	);
 
-	/**
-	 * Setup.
-	 *
-	 * 1. Register the user's motion preferences.
-	 * 2. Creates event listeners to control playback when there are multiple videos.
-	 */
-	useEffect(() => {
+	const doesUserPermitAutoplay = (): boolean => {
 		/**
 		 * The user indicates a preference for reduced motion: https://web.dev/articles/prefers-reduced-motion
 		 */
@@ -204,16 +198,25 @@ export const LoopVideo = ({
 			'(prefers-reduced-motion: reduce)',
 		).matches;
 
+		/**
+		 * The user can set this on their Accessibility Settings page.
+		 * Explicitly `false` when the user has said they don't want autoplay video.
+		 */
 		const autoplayPreference = storage.local.get(
 			'gu.prefs.accessibility.autoplay-video',
 		);
-		/**
-		 * `autoplayPreference` is explicitly `false`
-		 *  when the user has said they don't want autoplay video.
-		 */
-		setIsAutoplayAllowed(
-			!userPrefersReducedMotion && autoplayPreference !== false,
-		);
+
+		return !userPrefersReducedMotion && autoplayPreference !== false;
+	};
+
+	/**
+	 * Setup.
+	 *
+	 * 1. Determine whether we can autoplay video.
+	 * 2. Creates event listeners to control playback when there are multiple videos.
+	 */
+	useEffect(() => {
+		setIsAutoplayAllowed(doesUserPermitAutoplay());
 
 		/**
 		 * Mutes the current video when another video is unmuted
@@ -308,18 +311,33 @@ export const LoopVideo = ({
 	}, [isInView, hasBeenInView, atomId]);
 
 	/**
-	 * Autoplay the video when it comes into view.
+	 * Handle play/pause, when instigated by the browser.
 	 */
 	useEffect(() => {
-		if (!vidRef.current || isAutoplayAllowed === false) {
+		if (!vidRef.current || !isPlayable) {
 			return;
 		}
 
+		/**
+		 * Stops playback when the video is scrolled out of view.
+		 */
+		const isNoLongerInView =
+			playerState === 'PLAYING' && hasBeenInView && isInView === false;
+		if (isNoLongerInView) {
+			pauseVideo('PAUSED_BY_INTERSECTION_OBSERVER');
+			return;
+		}
+
+		/**
+		 * Autoplay/resume playback when the player comes into view or when
+		 * the page has been restored from the BFCache.
+		 */
 		if (
+			isAutoplayAllowed &&
 			isInView &&
-			isPlayable &&
 			(playerState === 'NOT_STARTED' ||
-				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER')
+				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
+				(isRestoredFromBFCache && playerState === 'PAUSED_BY_BROWSER'))
 		) {
 			/**
 			 * Check if the video has not been in view before tracking the play.
@@ -329,6 +347,7 @@ export const LoopVideo = ({
 				ophanTrackerWeb(atomId, 'loop')('play');
 			}
 
+			setIsRestoredFromBFCache(false);
 			void playVideo();
 		}
 	}, [
@@ -338,33 +357,9 @@ export const LoopVideo = ({
 		playerState,
 		playVideo,
 		hasBeenInView,
+		isRestoredFromBFCache,
 		atomId,
 	]);
-
-	/**
-	 * Stops playback when the video is scrolled out of view.
-	 * Resumes playback when the video is back in the viewport.
-	 */
-	useEffect(() => {
-		if (!vidRef.current || !hasBeenInView) return;
-
-		const isNoLongerInView =
-			playerState === 'PLAYING' && isInView === false;
-		if (isNoLongerInView) {
-			pauseVideo('PAUSED_BY_INTERSECTION_OBSERVER');
-		}
-
-		/**
-		 * If a user action paused the video, they have indicated
-		 * that they don't want to watch the video. Therefore, don't
-		 * resume the video when it comes back in view.
-		 */
-		const isBackInView =
-			playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' && isInView;
-		if (isBackInView) {
-			void playVideo();
-		}
-	}, [isInView, hasBeenInView, playerState, playVideo]);
 
 	/**
 	 * Show the play icon when the video is not playing, except for when it is scrolled
@@ -403,6 +398,20 @@ export const LoopVideo = ({
 	useEffect(() => {
 		setPreloadPartialData(isAutoplayAllowed === false || !!isInView);
 	}, [isAutoplayAllowed, isInView]);
+
+	/**
+	 * Handle the case where the user navigates back to the page.
+	 */
+	useEffect(() => {
+		window.addEventListener('pageshow', function (event) {
+			if (event.persisted) {
+				setIsAutoplayAllowed(doesUserPermitAutoplay());
+				setIsRestoredFromBFCache(true);
+			} else {
+				setIsRestoredFromBFCache(false);
+			}
+		});
+	}, []);
 
 	if (renderingTarget !== 'Web') return null;
 
