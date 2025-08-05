@@ -44,12 +44,14 @@ const border = css({
 
 const headerStyles = css`
 	${grid.container}
-	background-color: ${palette('--article-inner-background')};
+	background-color: ${palette('--article-background')};
 
 	${from.tablet} {
 		border-bottom: 1px solid ${palette('--article-border')};
 	}
 `;
+
+// Testing snapshot
 
 export const GalleryLayout = (props: WebProps | AppProps) => {
 	const gallery = props.gallery;
