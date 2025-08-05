@@ -8,8 +8,9 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { events } from 'aws-amplify/data';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { FootballTeam } from '../footballMatch';
+import { createFootballConfetti } from '../lib/confetti';
 import { palette } from '../palette';
 import { Score } from './Score';
 
@@ -140,6 +141,58 @@ const TeamNav = ({
 	score?: number;
 	crest: string;
 	scorers: string[];
+}) => {
+	const scoreRef = useRef<HTMLDivElement>(null);
+
+	return (
+		<div
+			css={css`
+				display: flex;
+				flex-grow: 1;
+				flex-basis: 50%;
+				color: ${palette('--match-nav-text')};
+			`}
+		>
+			<Column>
+				<div
+					css={css`
+						display: flex;
+						flex-direction: column;
+						flex-grow: 1;
+					`}
+				>
+					<TeamName name={name} />
+					<Scorers scorers={scorers} />
+				</div>
+				<CrestRow>
+					<Crest crest={crest} />
+					{!isUndefined(score) && (
+						<div
+							css={css`
+								margin-left: -${space[2]}px;
+							`}
+						>
+							<Score ref={scoreRef} score={score} />
+						</div>
+					)}
+				</CrestRow>
+			</Column>
+		</div>
+	);
+};
+
+const HomeTeamNav = ({
+	name,
+	score,
+	crest,
+	scorers,
+	scoreRef,
+}: {
+	name: string;
+	score?: number;
+	crest: string;
+	scorers: string[];
+	scoreRef: React.RefObject<HTMLDivElement>;
 }) => (
 	<div
 		css={css`
@@ -168,7 +221,7 @@ const TeamNav = ({
 							margin-left: -${space[2]}px;
 						`}
 					>
-						<Score score={score} />
+						<Score ref={scoreRef} score={score} />
 					</div>
 				)}
 			</CrestRow>
@@ -213,20 +266,53 @@ const addScorerPlaceholders = (scorers: string[]): string[] =>
 
 export const MatchNav = ({ homeTeam, awayTeam, comments, usage }: Props) => {
 	const [homeTeamInternal, setHomeTeamInternal] = useState(homeTeam);
+	const homeScoreRef = useRef<HTMLDivElement>(null);
+	const prevHomeScore = useRef(homeTeam.score);
+
+	// Trigger confetti when home team score increases
+	useEffect(() => {
+		const currentScore = homeTeamInternal.score;
+		const previousScore = prevHomeScore.current;
+
+		if (
+			currentScore !== undefined &&
+			previousScore !== undefined &&
+			currentScore > previousScore &&
+			homeScoreRef.current
+		) {
+			createFootballConfetti(homeScoreRef.current, {
+				particleCount: 80,
+				duration: 3000,
+			});
+		}
+		prevHomeScore.current = currentScore;
+	}, [homeTeamInternal.score]);
+
 	useEffect(() => {
 		const room = 'match-update';
 		const pr = events.connect(`/football/${room}`);
 		void pr.then((channel) => {
 			channel.subscribe({
-				next: (data) => {
-					const newHomeTeam = {
-						...homeTeamInternal,
-						score: Number(data?.event?.teams[0]?.score),
+				next: (data: unknown) => {
+					const eventData = data as {
+						event?: { teams?: Array<{ score?: string }> };
 					};
-					setHomeTeamInternal(newHomeTeam);
-					console.log('score data received from app sync', data);
+					const newScore = eventData.event?.teams?.[0]?.score;
+
+					if (newScore !== undefined) {
+						const newHomeTeam = {
+							...homeTeamInternal,
+							score: Number(newScore),
+						};
+						setHomeTeamInternal(newHomeTeam);
+						// eslint-disable-next-line no-console -- Debug information for development
+						console.log('score data received from app sync', data);
+					}
 				},
-				error: (value) => console.error(value),
+				error: (value: unknown) => {
+					// eslint-disable-next-line no-console -- Error logging for debugging
+					console.error(value);
+				},
 			});
 		});
 	}, [homeTeamInternal]);
@@ -246,7 +332,7 @@ export const MatchNav = ({ homeTeam, awayTeam, comments, usage }: Props) => {
 			`}
 		>
 			<Row>
-				<TeamNav
+				<HomeTeamNav
 					name={homeTeamInternal.name}
 					score={homeTeamInternal.score}
 					crest={homeTeamInternal.crest}
@@ -255,6 +341,7 @@ export const MatchNav = ({ homeTeam, awayTeam, comments, usage }: Props) => {
 							? addScorerPlaceholders(homeTeamInternal.scorers)
 							: homeTeamInternal.scorers
 					}
+					scoreRef={homeScoreRef}
 				/>
 				<YellowBorder />
 				<TeamNav
