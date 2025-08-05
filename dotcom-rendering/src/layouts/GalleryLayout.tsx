@@ -144,8 +144,8 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						format={format}
 						isMainMedia={true}
 					/>
-					{isWeb ? (
-						<div css={webMetaAndDisclaimerContainer}>
+					<div css={webMetaAndDisclaimerContainer}>
+						{isWeb ? (
 							<ArticleMeta
 								branding={
 									frontendData.commercialProperties[
@@ -169,36 +169,36 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 								}
 								shortUrlId={frontendData.config.shortUrlId}
 							/>
-							{!!frontendData.affiliateLinksDisclaimer && (
-								<GalleryAffiliateDisclaimer />
-							)}
-						</div>
-					) : null}
+						) : null}
 
-					{isApps ? (
-						<ArticleMetaApps
-							branding={
-								frontendData.commercialProperties[
-									frontendData.editionId
-								].branding
-							}
-							format={format}
-							pageId={frontendData.pageId}
-							byline={frontendData.byline}
-							tags={frontendData.tags}
-							primaryDateline={
-								frontendData.webPublicationDateDisplay
-							}
-							secondaryDateline={
-								frontendData.webPublicationSecondaryDateDisplay
-							}
-							isCommentable={frontendData.isCommentable}
-							discussionApiUrl={
-								frontendData.config.discussionApiUrl
-							}
-							shortUrlId={frontendData.config.shortUrlId}
-						/>
-					) : null}
+						{isApps ? (
+							<ArticleMetaApps
+								branding={
+									frontendData.commercialProperties[
+										frontendData.editionId
+									].branding
+								}
+								format={format}
+								pageId={frontendData.pageId}
+								byline={frontendData.byline}
+								tags={frontendData.tags}
+								primaryDateline={
+									frontendData.webPublicationDateDisplay
+								}
+								secondaryDateline={
+									frontendData.webPublicationSecondaryDateDisplay
+								}
+								isCommentable={frontendData.isCommentable}
+								discussionApiUrl={
+									frontendData.config.discussionApiUrl
+								}
+								shortUrlId={frontendData.config.shortUrlId}
+							/>
+						) : null}
+						{!!frontendData.affiliateLinksDisclaimer && (
+							<GalleryAffiliateDisclaimer />
+						)}
+					</div>
 				</header>
 				{gallery.images.map((element, idx) => (
 					<GalleryImage
