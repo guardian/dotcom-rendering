@@ -56,7 +56,7 @@ const headerStyles = css`
 	}
 `;
 
-const webMetaAndDisclaimerContainer = css`
+const metaAndDisclaimerContainer = css`
 	${grid.column.centre}
 	padding-bottom: ${space[6]}px;
 	${from.tablet} {
@@ -144,7 +144,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						format={format}
 						isMainMedia={true}
 					/>
-					<div css={webMetaAndDisclaimerContainer}>
+					<div css={metaAndDisclaimerContainer}>
 						{isWeb ? (
 							<ArticleMeta
 								branding={
