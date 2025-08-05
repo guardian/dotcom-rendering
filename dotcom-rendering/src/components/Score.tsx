@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { forwardRef } from 'react';
 import { palette } from '../palette';
 import { Eight } from './numbers/Eight';
 import { Five } from './numbers/Five';
@@ -12,21 +13,24 @@ import { Three } from './numbers/Three';
 import { Two } from './numbers/Two';
 import { Zero } from './numbers/Zero';
 
-const ScoreStyles = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			position: relative;
-			width: 3.75rem;
-			height: 3.75rem;
-			border-radius: 1.875rem;
-			border: 0.0625rem solid ${palette('--football-score-border')};
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		`}
-	>
-		{children}
-	</div>
+const ScoreStyles = forwardRef<HTMLDivElement, { children: React.ReactNode }>(
+	({ children }, ref) => (
+		<div
+			ref={ref}
+			css={css`
+				position: relative;
+				width: 3.75rem;
+				height: 3.75rem;
+				border-radius: 1.875rem;
+				border: 0.0625rem solid ${palette('--football-score-border')};
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			`}
+		>
+			{children}
+		</div>
+	),
 );
 
 type Props = {
@@ -71,10 +75,10 @@ const ScoreNumber = ({ score }: Props) => {
 	}
 };
 
-export const Score = ({ score }: Props) => {
+export const Score = forwardRef<HTMLDivElement, Props>(({ score }, ref) => {
 	return (
-		<ScoreStyles>
+		<ScoreStyles ref={ref}>
 			<ScoreNumber score={score} />
 		</ScoreStyles>
 	);
-};
+});
