@@ -64,6 +64,23 @@ const headerStyles = css`
 	}
 `;
 
+const metaAndDisclaimerContainer = css`
+	${grid.column.centre}
+	padding-bottom: ${space[6]}px;
+	${from.tablet} {
+		position: relative;
+		&::before {
+			content: '';
+			position: absolute;
+			left: -10px;
+			top: 0;
+			bottom: 0;
+			width: 1px;
+			background-color: ${themePalette('--article-border')};
+		}
+	}
+`;
+
 const galleryItemAdvertStyles = css`
 	${grid.paddedContainer}
 	grid-auto-flow: row dense;
@@ -138,7 +155,9 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(frontendData);
 
-	const adPositions = renderAds ? getAdPositions(gallery.images) : [];
+	const adPositions: number[] = renderAds
+		? getAdPositions(gallery.images)
+		: [];
 
 	return (
 		<>
@@ -213,55 +232,57 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						format={format}
 						isMainMedia={true}
 					/>
-					{isWeb ? (
-						<ArticleMeta
-							branding={
-								frontendData.commercialProperties[
-									frontendData.editionId
-								].branding
-							}
-							format={format}
-							pageId={frontendData.pageId}
-							webTitle={frontendData.webTitle}
-							byline={frontendData.byline}
-							tags={frontendData.tags}
-							primaryDateline={
-								frontendData.webPublicationDateDisplay
-							}
-							secondaryDateline={
-								frontendData.webPublicationSecondaryDateDisplay
-							}
-							isCommentable={frontendData.isCommentable}
-							discussionApiUrl={
-								frontendData.config.discussionApiUrl
-							}
-							shortUrlId={frontendData.config.shortUrlId}
-						/>
-					) : null}
-					{isApps ? (
-						<ArticleMetaApps
-							branding={
-								frontendData.commercialProperties[
-									frontendData.editionId
-								].branding
-							}
-							format={format}
-							pageId={frontendData.pageId}
-							byline={frontendData.byline}
-							tags={frontendData.tags}
-							primaryDateline={
-								frontendData.webPublicationDateDisplay
-							}
-							secondaryDateline={
-								frontendData.webPublicationSecondaryDateDisplay
-							}
-							isCommentable={frontendData.isCommentable}
-							discussionApiUrl={
-								frontendData.config.discussionApiUrl
-							}
-							shortUrlId={frontendData.config.shortUrlId}
-						/>
-					) : null}
+					<div css={metaAndDisclaimerContainer}>
+						{isWeb ? (
+							<ArticleMeta
+								branding={
+									frontendData.commercialProperties[
+										frontendData.editionId
+									].branding
+								}
+								format={format}
+								pageId={frontendData.pageId}
+								webTitle={frontendData.webTitle}
+								byline={frontendData.byline}
+								tags={frontendData.tags}
+								primaryDateline={
+									frontendData.webPublicationDateDisplay
+								}
+								secondaryDateline={
+									frontendData.webPublicationSecondaryDateDisplay
+								}
+								isCommentable={frontendData.isCommentable}
+								discussionApiUrl={
+									frontendData.config.discussionApiUrl
+								}
+								shortUrlId={frontendData.config.shortUrlId}
+							/>
+						) : null}
+						{isApps ? (
+							<ArticleMetaApps
+								branding={
+									frontendData.commercialProperties[
+										frontendData.editionId
+									].branding
+								}
+								format={format}
+								pageId={frontendData.pageId}
+								byline={frontendData.byline}
+								tags={frontendData.tags}
+								primaryDateline={
+									frontendData.webPublicationDateDisplay
+								}
+								secondaryDateline={
+									frontendData.webPublicationSecondaryDateDisplay
+								}
+								isCommentable={frontendData.isCommentable}
+								discussionApiUrl={
+									frontendData.config.discussionApiUrl
+								}
+								shortUrlId={frontendData.config.shortUrlId}
+							/>
+						) : null}
+					</div>
 				</header>
 				{gallery.images.map((element, idx) => {
 					const index = idx + 1;
